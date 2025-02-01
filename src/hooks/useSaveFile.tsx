@@ -9,7 +9,7 @@ import { SaveFile } from '../interfaces/SaveFile';
 
 const ownerId = 'Bear';
 export const testState: SaveFile = {
-	inventory: generateInventory({ 'master-ball': 10 }),
+	inventory: generateInventory({ 'master-ball': 10, 'ultra-ball': 20 }),
 	playerId: ownerId,
 	money: 5000,
 	pokemon: [
@@ -39,6 +39,11 @@ export const useSaveFile = (
 	putSaveFileReducer: (update: SaveFile) => void;
 	patchSaveFileReducer: (update: Partial<SaveFile>) => void;
 	setActiveTabReducer: (update: RoutesType) => void;
+	sellItemReducer: (
+		item: ItemType,
+		number: number,
+		pricePerItem: number
+	) => void;
 } => {
 	const local = window.localStorage.getItem(localStorageId);
 	const loaded =
@@ -59,6 +64,24 @@ export const useSaveFile = (
 			saveFile.inventory
 		);
 		setSaveFile((gm) => ({ ...gm, inventory: updatedInventory }));
+	};
+	const sellItemReducer = (
+		item: ItemType,
+		number: number,
+		pricePerItem: number
+	) => {
+		const updatedInventory = updateItemFunction(
+			item,
+			-number,
+			saveFile.inventory
+		);
+		const updatedMoney = saveFile.money + number * pricePerItem;
+
+		setSaveFile((gm) => ({
+			...gm,
+			inventory: updatedInventory,
+			money: updatedMoney,
+		}));
 	};
 	const addItemReducer = (item: ItemType, number: number) => {
 		const updatedInventory = updateItemFunction(
@@ -91,5 +114,6 @@ export const useSaveFile = (
 		putSaveFileReducer,
 		patchSaveFileReducer,
 		setActiveTabReducer,
+		sellItemReducer,
 	};
 };

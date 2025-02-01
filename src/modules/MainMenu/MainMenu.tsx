@@ -1,4 +1,4 @@
-import { BsBackpack4 } from 'react-icons/bs';
+import { BsBackpack4, BsCashCoin } from 'react-icons/bs';
 import { FaFistRaised } from 'react-icons/fa';
 import { MdCatchingPokemon } from 'react-icons/md';
 import { Card } from '../../uiComponents/Card/Card';
@@ -10,13 +10,20 @@ import { RoutesType } from '../../App';
 export const MainMenu = ({
 	navigate,
 	goBack,
+	money,
 }: {
 	navigate: (x: RoutesType) => void;
 	goBack: () => void;
+	money: number;
 }): JSX.Element => {
 	return (
 		<Page headline="Main Menu:" goBack={goBack}>
 			<Stack mode="column">
+				<Card
+					content={<h4>Money: {money}$</h4>}
+					icon={<BsCashCoin size={30} />}
+					actionElements={[]}
+				/>
 				<Card
 					onClick={() => navigate('BAG')}
 					content={<h4>Bag</h4>}

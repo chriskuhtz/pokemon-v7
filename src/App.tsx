@@ -27,13 +27,20 @@ export const App = (): JSX.Element => {
 		discardItemReducer,
 		putSaveFileReducer,
 		setActiveTabReducer,
+		sellItemReducer,
 	} = useSaveFile(testState, true);
 
-	const { activeTab } = saveFile.meta;
+	const {
+		meta: { activeTab },
+		inventory,
+		pokemon,
+		money,
+	} = saveFile;
 
 	if (activeTab === 'MAIN') {
 		return (
 			<MainMenu
+				money={money}
 				goBack={() => setActiveTabReducer('OVERWORLD')}
 				navigate={setActiveTabReducer}
 			/>
@@ -51,7 +58,7 @@ export const App = (): JSX.Element => {
 	if (activeTab === 'TEAM') {
 		return (
 			<Team
-				team={saveFile.pokemon.filter((p) => p.onTeam)}
+				team={pokemon.filter((p) => p.onTeam)}
 				goBack={() => setActiveTabReducer('MAIN')}
 			/>
 		);
@@ -70,7 +77,13 @@ export const App = (): JSX.Element => {
 		return <BuyMarket goBack={() => setActiveTabReducer('MARKET')} />;
 	}
 	if (activeTab === 'SELL_MARKET') {
-		return <SellMarket goBack={() => setActiveTabReducer('MARKET')} />;
+		return (
+			<SellMarket
+				goBack={() => setActiveTabReducer('MARKET')}
+				inventory={inventory}
+				sellItem={sellItemReducer}
+			/>
+		);
 	}
 	if (activeTab === 'MARKET') {
 		return (

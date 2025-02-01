@@ -12,7 +12,7 @@ export const Page = ({
 	children: ReactNode;
 }) => {
 	return (
-		<div>
+		<div className="page">
 			<h2 className="headline">
 				{goBack ? (
 					<IoIosArrowBack onClick={goBack} />
