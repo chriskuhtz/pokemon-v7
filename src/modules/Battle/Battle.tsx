@@ -1,5 +1,5 @@
+import { useEffect } from 'react';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
-import { useSaveFile } from '../../hooks/useSaveFile';
 import { SaveFile } from '../../interfaces/SaveFile';
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 import './Battle.css';
@@ -9,7 +9,8 @@ import { EnemyLane } from './components/EnemyLane';
 import { PlayerLane } from './components/PlayerLane';
 import { useBattleSteps } from './hooks/useBattleSteps';
 
-const battleSteps = [
+export const battleSteps = [
+	'UNITIALIZED',
 	'OPPONENT_INTRO',
 	'PLAYER_INTRO',
 	'OPPONENT_EMERGE',
@@ -21,9 +22,10 @@ const battleSteps = [
 	'CATCHING_PROCESS_4',
 	'CATCHING_FAILURE',
 	'CATCHING_SUCCESS',
+	'BATTLE_WON',
 ] as const;
 
-export const animationTimer = 1500;
+export const animationTimer = 500;
 export const battleSpriteSize = 156;
 
 export type BattleStep = (typeof battleSteps)[number];
@@ -42,18 +44,30 @@ export const Battle = ({
 	syncAfterBattleEnd: (update: SaveFile) => void;
 	goBack: () => void;
 }): JSX.Element => {
-	const { battleStep, startCatchProcess, catchProcessBall } = useBattleSteps();
-	const { saveFile } = useSaveFile(initSaveFile);
+	const {
+		saveFile,
+		battleStep,
+		startCatchProcess,
+		initBattle,
+		inCatchProcess,
+	} = useBattleSteps(initSaveFile, syncAfterBattleEnd, goBack);
 
 	const team = saveFile.pokemon.filter((p) => p.onTeam);
 	const { dexId: activePlayerPokemonId, ball } = team[0];
-	const { res: opponentData } = useGetPokemonData(opponent.dexId);
-	const { res: activePlayerData } = useGetPokemonData(activePlayerPokemonId);
+	const { res: opponentData, status } = useGetPokemonData(opponent.dexId);
+	const { res: activePlayerData, status: oppoStatus } = useGetPokemonData(
+		activePlayerPokemonId
+	);
 
-	const leaveBattle = () => {
-		syncAfterBattleEnd(saveFile);
-		goBack();
-	};
+	useEffect(() => {
+		if (
+			battleStep === 'UNITIALIZED' &&
+			status === 'success' &&
+			oppoStatus === 'success'
+		) {
+			initBattle();
+		}
+	}, [battleStep, initBattle, oppoStatus, status]);
 
 	if (!opponentData || !activePlayerData) {
 		return <LoadingScreen />;
@@ -62,7 +76,7 @@ export const Battle = ({
 	return (
 		<>
 			<BattleBanner
-				catchProcessBall={catchProcessBall}
+				catchProcessBall={inCatchProcess?.ball}
 				battleStep={battleStep}
 				opponent={{ dexId: opponent.dexId, name: opponentData.name }}
 				player={{ dexId: activePlayerPokemonId, name: activePlayerData.name }}
@@ -73,8 +87,8 @@ export const Battle = ({
 				<EnemyLane
 					battleStep={battleStep}
 					opponent={opponent}
-					voidSteps={['OPPONENT_INTRO', 'PLAYER_INTRO']}
-					catchProcessBall={catchProcessBall}
+					voidSteps={['OPPONENT_INTRO', 'PLAYER_INTRO', 'BATTLE_WON']}
+					catchProcessBall={inCatchProcess?.ball}
 				/>
 				<PlayerLane
 					battleStep={battleStep}
@@ -99,6 +113,7 @@ export const Battle = ({
 						'CATCHING_PROCESS_2',
 						'CATCHING_PROCESS_3',
 						'CATCHING_PROCESS_4',
+						'BATTLE_WON',
 					]}
 				/>
 			</div>

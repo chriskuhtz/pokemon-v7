@@ -8,8 +8,6 @@ export const itemsCheckList: {
 		name: 'master-ball',
 		url: 'https://pokeapi.co/api/v2/item/1/',
 		todos: [
-			'receive a pokemon',
-			'catch a pokemon',
 			'receive an item',
 			'find an item in overworld',
 			'have money',

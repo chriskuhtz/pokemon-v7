@@ -74,6 +74,13 @@ export const BattleBanner = ({
 			</Banner>
 		);
 	}
+	if (battleStep === 'BATTLE_WON') {
+		return (
+			<Banner>
+				<h2>You won the Battle</h2>
+			</Banner>
+		);
+	}
 
 	return <></>;
 };

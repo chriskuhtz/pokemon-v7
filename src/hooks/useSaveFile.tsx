@@ -54,7 +54,9 @@ export const useSaveFile = (
 
 		setSaveFile((gm) => ({ ...gm, pokemon: updatedPokemon }));
 	};
-	const putSaveFileReducer = (update: SaveFile) => setSaveFile(update);
+	const putSaveFileReducer = (update: SaveFile) => {
+		setSaveFile(update);
+	};
 	const patchSaveFileReducer = (update: Partial<SaveFile>) =>
 		setSaveFile((s) => ({ ...s, ...update }));
 
