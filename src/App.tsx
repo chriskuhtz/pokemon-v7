@@ -52,7 +52,7 @@ export const App = (): JSX.Element => {
 			<Card
 				onClick={() => setActiveTab('BAG')}
 				content={<h4>Bag</h4>}
-				icon={<BsBackpack4 />}
+				icon={<BsBackpack4 size={30} />}
 				actionElements={[]}
 			/>
 		</Page>
