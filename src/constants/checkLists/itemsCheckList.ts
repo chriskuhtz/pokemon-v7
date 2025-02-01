@@ -10,7 +10,6 @@ export const itemsCheckList: {
 		todos: [
 			'receive an item',
 			'find an item in overworld',
-			'have money',
 			'buy an item',
 			'sell an item',
 		],

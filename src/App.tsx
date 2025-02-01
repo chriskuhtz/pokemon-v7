@@ -3,6 +3,9 @@ import { testState, useSaveFile } from './hooks/useSaveFile';
 import { Bag } from './modules/Bag/Bag';
 import { Battle } from './modules/Battle/Battle';
 import { MainMenu } from './modules/MainMenu/MainMenu';
+import { BuyMarket } from './modules/Market/BuyMarket';
+import { Market } from './modules/Market/Market';
+import { SellMarket } from './modules/Market/SellMarket';
 import { Overworld } from './modules/Overworld/Overworld';
 import { Team } from './modules/Team/Team';
 
@@ -13,6 +16,8 @@ const routes = [
 	'TEAM',
 	'BATTLE',
 	'MARKET',
+	'BUY_MARKET',
+	'SELL_MARKET',
 ] as const;
 export type RoutesType = (typeof routes)[number];
 
@@ -26,10 +31,14 @@ export const App = (): JSX.Element => {
 
 	const { activeTab } = saveFile.meta;
 
-	if (activeTab === 'OVERWORLD') {
-		return <Overworld openMenu={() => setActiveTabReducer('MAIN')} />;
+	if (activeTab === 'MAIN') {
+		return (
+			<MainMenu
+				goBack={() => setActiveTabReducer('OVERWORLD')}
+				navigate={setActiveTabReducer}
+			/>
+		);
 	}
-
 	if (activeTab === 'BAG') {
 		return (
 			<Bag
@@ -57,16 +66,20 @@ export const App = (): JSX.Element => {
 			/>
 		);
 	}
+	if (activeTab === 'BUY_MARKET') {
+		return <BuyMarket goBack={() => setActiveTabReducer('MARKET')} />;
+	}
+	if (activeTab === 'SELL_MARKET') {
+		return <SellMarket goBack={() => setActiveTabReducer('MARKET')} />;
+	}
+	if (activeTab === 'MARKET') {
+		return (
+			<Market
+				goBack={() => setActiveTabReducer('MAIN')}
+				navigate={setActiveTabReducer}
+			/>
+		);
+	}
 
-	return (
-		<MainMenu
-			goBack={() => setActiveTabReducer('OVERWORLD')}
-			navigate={(x) => {
-				if (!routes.some((r) => r === x)) {
-					return;
-				}
-				setActiveTabReducer(x as RoutesType);
-			}}
-		/>
-	);
+	return <Overworld openMenu={() => setActiveTabReducer('MAIN')} />;
 };
