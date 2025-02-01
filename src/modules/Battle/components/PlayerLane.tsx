@@ -1,7 +1,7 @@
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { PokeballType } from '../../../interfaces/Item';
-import { BattleStep } from '../Battle';
+import { battleSpriteSize, BattleStep } from '../Battle';
 
 export const PlayerLane = ({
 	activePlayerPokemonId,
@@ -21,9 +21,12 @@ export const PlayerLane = ({
 		return (
 			<div className="playerLane">
 				<img
-					style={{ paddingTop: 78, paddingLeft: 39 }}
-					width={78}
-					height={78}
+					style={{
+						paddingTop: battleSpriteSize / 2,
+						paddingLeft: battleSpriteSize / 4,
+					}}
+					width={battleSpriteSize / 2}
+					height={battleSpriteSize / 2}
 					src={getItemUrl(ballType)}
 				/>
 			</div>
@@ -32,8 +35,8 @@ export const PlayerLane = ({
 	return (
 		<div className="playerLane">
 			<img
-				width={156}
-				height={156}
+				width={battleSpriteSize}
+				height={battleSpriteSize}
 				src={getPokemonSprite(activePlayerPokemonId, 'back')}
 			/>
 		</div>

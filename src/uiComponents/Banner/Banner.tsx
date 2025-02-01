@@ -12,7 +12,7 @@ export const Banner = ({ children }: { children: ReactNode }) => {
 				top: 0,
 			}}
 		>
-			<h1
+			<div
 				style={{
 					backgroundColor: 'black',
 					color: 'white',
@@ -24,7 +24,7 @@ export const Banner = ({ children }: { children: ReactNode }) => {
 				}}
 			>
 				{children}
-			</h1>
+			</div>
 		</div>
 	);
 };
