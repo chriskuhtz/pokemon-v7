@@ -13,6 +13,10 @@ export const BuyAction = ({
 }) => {
 	const [numberToBuy, setNumberToBuy] = useState<number>(max);
 	useEffect(() => setNumberToBuy(max), [max]);
+
+	if (max === 0) {
+		return <></>;
+	}
 	return (
 		<div className="buyAction">
 			<strong>{price}$</strong>
