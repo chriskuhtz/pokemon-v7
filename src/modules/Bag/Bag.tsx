@@ -4,6 +4,7 @@ import { ItemCard } from '../../components/ItemCard/ItemCard';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
 import { Page } from '../../uiComponents/Page/Page';
+import { Stack } from '../../uiComponents/Stack/Stack';
 
 export const Bag = ({
 	inventory,
@@ -16,7 +17,7 @@ export const Bag = ({
 }): JSX.Element => {
 	return (
 		<Page goBack={goBack} headline="Inventory:">
-			<React.Fragment>
+			<Stack>
 				{Object.entries(inventory).map(([item, amount]) => {
 					if (amount === 0) {
 						return <React.Fragment key={item}></React.Fragment>;
@@ -36,7 +37,7 @@ export const Bag = ({
 						/>
 					);
 				})}
-			</React.Fragment>
+			</Stack>
 		</Page>
 	);
 };

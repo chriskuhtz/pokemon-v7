@@ -1,4 +1,5 @@
 import React from 'react';
+import { getItemUrl } from '../../functions/getItemUrl';
 import { ItemType } from '../../interfaces/Item';
 import { Card } from '../../uiComponents/Card/Card';
 
@@ -13,11 +14,7 @@ export const ItemCard = ({
 }): JSX.Element => {
 	return (
 		<Card
-			icon={
-				<img
-					src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${item}.png`}
-				/>
-			}
+			icon={<img src={getItemUrl(item)} />}
 			content={
 				<h4>
 					{item} : {amount}
