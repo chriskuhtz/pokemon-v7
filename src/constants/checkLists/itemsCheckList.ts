@@ -8,15 +8,10 @@ export const itemsCheckList: {
 		name: 'master-ball',
 		url: 'https://pokeapi.co/api/v2/item/1/',
 		todos: [
-			'have an item',
-
-			'throw away an item',
 			'have a pokemon',
 			'encounter a pokemon',
 			'catch a pokemon',
 			'register what ball the pokemon was caught in',
-			'choose font',
-			'design ItemCard',
 		],
 	},
 	{
