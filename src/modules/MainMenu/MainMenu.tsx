@@ -7,11 +7,13 @@ import { Stack } from '../../uiComponents/Stack/Stack';
 
 export const MainMenu = ({
 	navigate,
+	goBack,
 }: {
 	navigate: (x: string) => void;
+	goBack: () => void;
 }): JSX.Element => {
 	return (
-		<Page headline="Main Menu:">
+		<Page headline="Main Menu:" goBack={goBack}>
 			<Stack mode="column">
 				<Card
 					onClick={() => navigate('BAG')}

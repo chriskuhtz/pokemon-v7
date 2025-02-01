@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { RoutesType } from '../App';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { updateItemFunction } from '../functions/updateItemFunction';
 import { generateInventory } from '../interfaces/Inventory';
@@ -10,6 +11,7 @@ const ownerId = 'Bear';
 export const testState: SaveFile = {
 	inventory: generateInventory({ 'master-ball': 10 }),
 	playerId: ownerId,
+	money: 5000,
 	pokemon: [
 		{
 			dexId: 25,
@@ -19,6 +21,9 @@ export const testState: SaveFile = {
 			onTeam: true,
 		},
 	],
+	meta: {
+		activeTab: 'MAIN',
+	},
 };
 
 const localStorageId = 'pokemonv7SaveFile';
@@ -33,6 +38,7 @@ export const useSaveFile = (
 	receiveNewPokemonReducer: (newMon: Omit<OwnedPokemon, 'onTeam'>) => void;
 	putSaveFileReducer: (update: SaveFile) => void;
 	patchSaveFileReducer: (update: Partial<SaveFile>) => void;
+	setActiveTabReducer: (update: RoutesType) => void;
 } => {
 	const local = window.localStorage.getItem(localStorageId);
 	const loaded =
@@ -73,6 +79,10 @@ export const useSaveFile = (
 	const patchSaveFileReducer = (update: Partial<SaveFile>) =>
 		setSaveFile((s) => ({ ...s, ...update }));
 
+	const setActiveTabReducer = (update: RoutesType) => {
+		setSaveFile((s) => ({ ...s, meta: { ...s.meta, activeTab: update } }));
+	};
+
 	return {
 		saveFile,
 		discardItemReducer,
@@ -80,5 +90,6 @@ export const useSaveFile = (
 		receiveNewPokemonReducer,
 		putSaveFileReducer,
 		patchSaveFileReducer,
+		setActiveTabReducer,
 	};
 };

@@ -1,27 +1,41 @@
-import { useState } from 'react';
 import { getRandomPokemonId } from './functions/getRandomPokemonId';
 import { testState, useSaveFile } from './hooks/useSaveFile';
 import { Bag } from './modules/Bag/Bag';
 import { Battle } from './modules/Battle/Battle';
 import { MainMenu } from './modules/MainMenu/MainMenu';
+import { Overworld } from './modules/Overworld/Overworld';
 import { Team } from './modules/Team/Team';
 
-const routes = ['MAIN', 'BAG', 'TEAM', 'BATTLE'] as const;
-type RoutesType = (typeof routes)[number];
+const routes = [
+	'OVERWORLD',
+	'MAIN',
+	'BAG',
+	'TEAM',
+	'BATTLE',
+	'MARKET',
+] as const;
+export type RoutesType = (typeof routes)[number];
 
 export const App = (): JSX.Element => {
-	const [activeTab, setActiveTab] = useState<RoutesType>(routes[0]);
-	const { saveFile, discardItemReducer, putSaveFileReducer } = useSaveFile(
-		testState,
-		true
-	);
+	const {
+		saveFile,
+		discardItemReducer,
+		putSaveFileReducer,
+		setActiveTabReducer,
+	} = useSaveFile(testState, true);
+
+	const { activeTab } = saveFile.meta;
+
+	if (activeTab === 'OVERWORLD') {
+		return <Overworld openMenu={() => setActiveTabReducer('MAIN')} />;
+	}
 
 	if (activeTab === 'BAG') {
 		return (
 			<Bag
 				inventory={saveFile.inventory}
 				discardItem={discardItemReducer}
-				goBack={() => setActiveTab('MAIN')}
+				goBack={() => setActiveTabReducer('MAIN')}
 			/>
 		);
 	}
@@ -29,7 +43,7 @@ export const App = (): JSX.Element => {
 		return (
 			<Team
 				team={saveFile.pokemon.filter((p) => p.onTeam)}
-				goBack={() => setActiveTab('MAIN')}
+				goBack={() => setActiveTabReducer('MAIN')}
 			/>
 		);
 	}
@@ -39,18 +53,19 @@ export const App = (): JSX.Element => {
 				initSaveFile={saveFile}
 				syncAfterBattleEnd={putSaveFileReducer}
 				opponent={{ dexId: getRandomPokemonId() }}
-				goBack={() => setActiveTab('MAIN')}
+				goBack={() => setActiveTabReducer('MAIN')}
 			/>
 		);
 	}
 
 	return (
 		<MainMenu
+			goBack={() => setActiveTabReducer('OVERWORLD')}
 			navigate={(x) => {
 				if (!routes.some((r) => r === x)) {
 					return;
 				}
-				setActiveTab(x as RoutesType);
+				setActiveTabReducer(x as RoutesType);
 			}}
 		/>
 	);

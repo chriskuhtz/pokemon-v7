@@ -25,7 +25,7 @@ export const battleSteps = [
 	'BATTLE_WON',
 ] as const;
 
-export const animationTimer = 500;
+export const animationTimer = 1500;
 export const battleSpriteSize = 156;
 
 export type BattleStep = (typeof battleSteps)[number];
