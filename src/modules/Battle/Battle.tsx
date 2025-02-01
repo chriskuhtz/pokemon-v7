@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
 import { IntroBanner } from '../../components/IntroBanner/IntroBanner';
-import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
 import { SaveFile } from '../../hooks/useSaveFile';
 import { Inventory } from '../../interfaces/Inventory';
@@ -19,20 +17,8 @@ export const Battle = ({
 	opponent: Opponent;
 	goBack: () => void;
 }): JSX.Element => {
-	const [introHandled, setIntroHandled] = useState(false);
 	const { res: opponentData } = useGetPokemonData(opponent.dexId);
 	const { res: playerData } = useGetPokemonData(team[0].dexId);
-
-	useEffect(() => console.log(introHandled), [introHandled]);
-
-	useEffect(() => {
-		if (!opponentData || !playerData || introHandled) {
-			return;
-		}
-		const t = setTimeout(() => setIntroHandled(true), 1500);
-
-		return () => clearTimeout(t);
-	}, [introHandled, opponentData, playerData]);
 
 	if (!opponentData || !playerData) {
 		return <LoadingScreen />;
@@ -40,12 +26,10 @@ export const Battle = ({
 
 	return (
 		<div>
-			{!introHandled && (
-				<IntroBanner
-					name={opponentData.name}
-					sprite={<img src={getPokemonSprite(opponent.dexId)} />}
-				/>
-			)}
+			<IntroBanner
+				opponent={{ dexId: opponent.dexId, name: opponentData.name }}
+				player={{ dexId: team[0].dexId, name: playerData.name }}
+			/>
 		</div>
 	);
 };
