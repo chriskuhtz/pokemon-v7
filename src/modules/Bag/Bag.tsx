@@ -17,9 +17,9 @@ export const Bag = ({
 }): JSX.Element => {
 	return (
 		<Page goBack={goBack} headline="Inventory:">
-			<Stack>
+			<Stack mode="column">
 				{Object.entries(inventory).map(([item, amount]) => {
-					if (amount === 0) {
+					if (amount <= 0) {
 						return <React.Fragment key={item}></React.Fragment>;
 					}
 

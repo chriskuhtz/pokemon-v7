@@ -12,7 +12,7 @@ export const MainMenu = ({
 }): JSX.Element => {
 	return (
 		<Page headline="Main Menu:">
-			<Stack>
+			<Stack mode="column">
 				<Card
 					onClick={() => navigate('BAG')}
 					content={<h4>Bag</h4>}

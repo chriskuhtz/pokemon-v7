@@ -7,10 +7,12 @@ export const ItemCard = ({
 	item,
 	amount,
 	actionElements,
+	onClick,
 }: {
 	item: ItemType;
 	amount: number;
 	actionElements: React.JSX.Element[];
+	onClick?: () => void;
 }): JSX.Element => {
 	return (
 		<Card
@@ -20,6 +22,7 @@ export const ItemCard = ({
 					{item} : {amount}
 				</h4>
 			}
+			onClick={onClick}
 			actionElements={actionElements}
 		/>
 	);

@@ -12,7 +12,7 @@ export const Team = ({
 }): JSX.Element => {
 	return (
 		<Page goBack={goBack} headline="Team:">
-			<Stack>
+			<Stack mode="column">
 				{team.map((pokemon) => (
 					<PokemonCard key={pokemon.id} pokemon={pokemon} />
 				))}
