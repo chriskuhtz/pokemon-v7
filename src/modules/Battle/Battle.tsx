@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
-import { SaveFile } from '../../hooks/useSaveFile';
-import { Inventory } from '../../interfaces/Inventory';
+import { SaveFile, useSaveFile } from '../../hooks/useSaveFile';
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 import './Battle.css';
 import { BattleActions } from './components/BattleActions';
@@ -15,6 +14,12 @@ const battleSteps = [
 	'OPPONENT_EMERGE',
 	'PLAYER_EMERGE',
 	'MOVE_SELECTION',
+	'CATCHING_PROCESS_1',
+	'CATCHING_PROCESS_2',
+	'CATCHING_PROCESS_3',
+	'CATCHING_PROCESS_4',
+	'CATCHING_FAILURE',
+	'CATCHING_SUCCESS',
 ] as const;
 
 export const animationTimer = 1500;
@@ -25,17 +30,19 @@ export interface Opponent {
 }
 
 export const Battle = ({
-	team,
 	opponent,
-	inventory,
+	initSaveFile,
+	syncAfterBattleEnd,
 	goBack,
 }: {
-	team: SaveFile['pokemon'];
-	inventory: Inventory;
+	initSaveFile: SaveFile;
 	opponent: Opponent;
+	syncAfterBattleEnd: (update: SaveFile) => void;
 	goBack: () => void;
 }): JSX.Element => {
+	const { saveFile } = useSaveFile(initSaveFile);
 	const [battleStep, setBattleStep] = useState<BattleStep>('OPPONENT_INTRO');
+	const team = saveFile.pokemon.filter((p) => p.onTeam);
 	const { dexId: activePlayerPokemonId, ball } = team[0];
 	const { res: opponentData } = useGetPokemonData(opponent.dexId);
 	const { res: activePlayerData } = useGetPokemonData(activePlayerPokemonId);
@@ -106,7 +113,7 @@ export const Battle = ({
 					battleStep={battleStep}
 					setBattleStep={setBattleStep}
 					team={team}
-					inventory={inventory}
+					inventory={saveFile.inventory}
 					opponent={opponent}
 					goBack={goBack}
 				/>

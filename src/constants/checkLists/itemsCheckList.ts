@@ -7,12 +7,20 @@ export const itemsCheckList: {
 	{
 		name: 'master-ball',
 		url: 'https://pokeapi.co/api/v2/item/1/',
-		todos: ['encounter a pokemon', 'catch a pokemon'],
+		todos: [
+			'receive a pokemon',
+			'catch a pokemon',
+			'receive an item',
+			'find an item in overworld',
+			'have money',
+			'buy an item',
+			'sell an item',
+		],
 	},
 	{
 		name: 'ultra-ball',
 		url: 'https://pokeapi.co/api/v2/item/2/',
-		todos: ['have money', 'buy an item', 'sell an item', 'catch rates'],
+		todos: ['catch rates'],
 	},
 	{
 		name: 'great-ball',

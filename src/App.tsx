@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { getRandomPokemonId } from './functions/getRandomPokemonId';
-import { useSaveFile } from './hooks/useSaveFile';
+import { testState, useSaveFile } from './hooks/useSaveFile';
 import { Bag } from './modules/Bag/Bag';
 import { Battle } from './modules/Battle/Battle';
 import { MainMenu } from './modules/MainMenu/MainMenu';
@@ -11,7 +11,8 @@ type RoutesType = (typeof routes)[number];
 
 export const App = (): JSX.Element => {
 	const [activeTab, setActiveTab] = useState<RoutesType>(routes[0]);
-	const { saveFile, discardItemReducer } = useSaveFile();
+	const { saveFile, discardItemReducer, putSaveFileReducer } =
+		useSaveFile(testState);
 
 	if (activeTab === 'BAG') {
 		return (
@@ -33,8 +34,8 @@ export const App = (): JSX.Element => {
 	if (activeTab === 'BATTLE') {
 		return (
 			<Battle
-				team={saveFile.pokemon.filter((p) => p.onTeam)}
-				inventory={saveFile.inventory}
+				initSaveFile={saveFile}
+				syncAfterBattleEnd={putSaveFileReducer}
 				opponent={{ dexId: getRandomPokemonId() }}
 				goBack={() => setActiveTab('MAIN')}
 			/>
