@@ -1,13 +1,10 @@
 import { useState } from 'react';
-import { BsBackpack4 } from 'react-icons/bs';
-import { MdCatchingPokemon } from 'react-icons/md';
 import { useSaveFile } from './hooks/useSaveFile';
 import { Bag } from './modules/Bag/Bag';
+import { MainMenu } from './modules/MainMenu/MainMenu';
 import { Team } from './modules/Team/Team';
-import { Card } from './uiComponents/Card/Card';
-import { Page } from './uiComponents/Page/Page';
-import { Stack } from './uiComponents/Stack/Stack';
-const routes = ['MAIN', 'BAG', 'TEAM'] as const;
+
+const routes = ['MAIN', 'BAG', 'TEAM', 'BATTLE'] as const;
 type RoutesType = (typeof routes)[number];
 
 export const App = (): JSX.Element => {
@@ -33,21 +30,13 @@ export const App = (): JSX.Element => {
 	}
 
 	return (
-		<Page headline="Main Menu:">
-			<Stack>
-				<Card
-					onClick={() => setActiveTab('BAG')}
-					content={<h4>Bag</h4>}
-					icon={<BsBackpack4 size={30} />}
-					actionElements={[]}
-				/>
-				<Card
-					onClick={() => setActiveTab('TEAM')}
-					content={<h4>Team</h4>}
-					icon={<MdCatchingPokemon size={30} />}
-					actionElements={[]}
-				/>
-			</Stack>
-		</Page>
+		<MainMenu
+			navigate={(x) => {
+				if (!routes.some((r) => r === x)) {
+					return;
+				}
+				setActiveTab(x as RoutesType);
+			}}
+		/>
 	);
 };
