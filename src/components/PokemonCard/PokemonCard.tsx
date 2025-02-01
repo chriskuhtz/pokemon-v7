@@ -1,13 +1,15 @@
 import { getItemUrl } from '../../functions/getItemUrl';
+import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { Card } from '../../uiComponents/Card/Card';
+import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 
 export const PokemonCard = ({ pokemon }: { pokemon: OwnedPokemon }) => {
 	const { res } = useGetPokemonData(pokemon.dexId);
 
 	if (!res) {
-		return <></>;
+		return <LoadingScreen />;
 	}
 
 	return (
@@ -22,7 +24,7 @@ export const PokemonCard = ({ pokemon }: { pokemon: OwnedPokemon }) => {
 				>
 					<img
 						style={{ border: '2px solid black', borderRadius: '9000px' }}
-						src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.dexId}.png`}
+						src={getPokemonSprite(pokemon.dexId)}
 					/>
 					<img
 						style={{ position: 'relative', top: '-32px', right: '-64px' }}

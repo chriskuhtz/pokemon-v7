@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { getRandomPokemonId } from './functions/getRandomPokemonId';
 import { useSaveFile } from './hooks/useSaveFile';
 import { Bag } from './modules/Bag/Bag';
+import { Battle } from './modules/Battle/Battle';
 import { MainMenu } from './modules/MainMenu/MainMenu';
 import { Team } from './modules/Team/Team';
 
@@ -24,6 +26,16 @@ export const App = (): JSX.Element => {
 		return (
 			<Team
 				team={saveFile.pokemon.filter((p) => p.onTeam)}
+				goBack={() => setActiveTab('MAIN')}
+			/>
+		);
+	}
+	if (activeTab === 'BATTLE') {
+		return (
+			<Battle
+				team={saveFile.pokemon.filter((p) => p.onTeam)}
+				inventory={saveFile.inventory}
+				opponent={{ dexId: getRandomPokemonId() }}
 				goBack={() => setActiveTab('MAIN')}
 			/>
 		);
