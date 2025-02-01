@@ -13,7 +13,11 @@ export const ItemCard = ({
 }): JSX.Element => {
 	return (
 		<Card
-			spriteUrl={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${item}.png`}
+			icon={
+				<img
+					src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${item}.png`}
+				/>
+			}
 			content={
 				<h4>
 					{item} : {amount}

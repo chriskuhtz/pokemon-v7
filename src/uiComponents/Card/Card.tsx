@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import './Card.css';
 
 export const Card = ({
-	spriteUrl,
+	icon,
 	content,
 	actionElements,
+	onClick,
 }: {
-	spriteUrl: string;
-	content: React.JSX.Element;
+	icon: ReactNode;
+	content: ReactNode;
 	actionElements: React.JSX.Element[];
+	onClick?: () => void;
 }) => {
 	return (
-		<div className="card">
-			<img src={spriteUrl} />
+		<div onClick={onClick} className="card">
+			{icon}
 			{content}
 			<div className="actionElements">
 				{actionElements.map((a, i) => (
