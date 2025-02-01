@@ -9,19 +9,20 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/1/',
 		todos: [
 			'have an item',
-			'have money',
-			'buy an item',
-			'sell an item',
+
 			'throw away an item',
 			'have a pokemon',
 			'encounter a pokemon',
 			'catch a pokemon',
 			'register what ball the pokemon was caught in',
+			'choose font',
+			'design ItemCard',
 		],
 	},
 	{
 		name: 'ultra-ball',
 		url: 'https://pokeapi.co/api/v2/item/2/',
+		todos: ['have money', 'buy an item', 'sell an item', 'catch rates'],
 	},
 	{
 		name: 'great-ball',

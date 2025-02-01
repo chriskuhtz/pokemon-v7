@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { discardItemFunction } from './functions/discardItemFunction';
-import { EmptyInventory, Inventory } from './interfaces/Inventory';
+import {
+	EmptyInventory,
+	generateInventory,
+	Inventory,
+} from './interfaces/Inventory';
 import { ItemType } from './interfaces/Item';
 import { Bag } from './modules/Bag/Bag';
 
@@ -12,8 +16,12 @@ const initialGameState: GameState = {
 	inventory: EmptyInventory,
 };
 
+const testState: GameState = {
+	inventory: generateInventory({ 'master-ball': 10 }),
+};
+
 export const App = (): JSX.Element => {
-	const [gameState, setGameState] = useState<GameState>(initialGameState);
+	const [gameState, setGameState] = useState<GameState>(testState);
 
 	const discardItemReducer = (item: ItemType, number: number) => {
 		const updatedInventory = discardItemFunction(

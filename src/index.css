@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap');
+
+body {
+	font-family: 'Doto';
+}
+h4 {
+	margin: 0;
+}
+
+input {
+	border: 2px solid black;
+	border-radius: 9000px;
+	padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+}
