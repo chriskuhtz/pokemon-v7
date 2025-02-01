@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { updateItemFunction } from '../functions/updateItemFunction';
 import { generateInventory } from '../interfaces/Inventory';
@@ -21,8 +21,11 @@ export const testState: SaveFile = {
 	],
 };
 
+const localStorageId = 'pokemonv7SaveFile';
+
 export const useSaveFile = (
-	init: SaveFile
+	init: SaveFile,
+	useLocalStorage?: boolean
 ): {
 	saveFile: SaveFile;
 	discardItemReducer: (item: ItemType, number: number) => void;
@@ -31,7 +34,17 @@ export const useSaveFile = (
 	putSaveFileReducer: (update: SaveFile) => void;
 	patchSaveFileReducer: (update: Partial<SaveFile>) => void;
 } => {
-	const [saveFile, setSaveFile] = useState<SaveFile>(init);
+	const local = window.localStorage.getItem(localStorageId);
+	const loaded =
+		useLocalStorage && local ? (JSON.parse(local) as SaveFile) : init;
+
+	const [saveFile, setSaveFile] = useState<SaveFile>(loaded);
+
+	useEffect(() => {
+		if (useLocalStorage) {
+			window.localStorage.setItem(localStorageId, JSON.stringify(saveFile));
+		}
+	}, [saveFile, useLocalStorage]);
 
 	const discardItemReducer = (item: ItemType, number: number) => {
 		const updatedInventory = updateItemFunction(

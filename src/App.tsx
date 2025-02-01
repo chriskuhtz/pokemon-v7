@@ -11,8 +11,10 @@ type RoutesType = (typeof routes)[number];
 
 export const App = (): JSX.Element => {
 	const [activeTab, setActiveTab] = useState<RoutesType>(routes[0]);
-	const { saveFile, discardItemReducer, putSaveFileReducer } =
-		useSaveFile(testState);
+	const { saveFile, discardItemReducer, putSaveFileReducer } = useSaveFile(
+		testState,
+		true
+	);
 
 	if (activeTab === 'BAG') {
 		return (

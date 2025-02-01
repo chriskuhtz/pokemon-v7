@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { v6 } from 'uuid';
 import { receiveNewPokemonFunction } from '../../../functions/receiveNewPokemonFunction';
-import { useSaveFile } from '../../../hooks/useSaveFile';
 import {
 	EmptyInventory,
 	Inventory,
@@ -20,10 +19,8 @@ export const useBattleSteps = (
 	initBattle: () => void;
 	startCatchProcess: (ball: PokeballType, opponentDexId: number) => void;
 	inCatchProcess: { dexId: number; ball: PokeballType } | undefined;
-
 	saveFile: SaveFile;
 } => {
-	const { saveFile } = useSaveFile(initSaveFile);
 	const [battleStep, setBattleStep] = useState<BattleStep>('UNITIALIZED');
 	const [inCatchProcess, setInCatchProcess] = useState<
 		{ dexId: number; ball: PokeballType } | undefined
@@ -128,7 +125,7 @@ export const useBattleSteps = (
 			return;
 		}
 		const t = setTimeout(() => {
-			let updatedPokemon = [...saveFile.pokemon];
+			let updatedPokemon = [...initSaveFile.pokemon];
 
 			caughtPokemon.forEach((c) => {
 				updatedPokemon = receiveNewPokemonFunction(
@@ -136,14 +133,14 @@ export const useBattleSteps = (
 						id: v6(),
 						dexId: c.dexId,
 						ball: c.ball,
-						ownerId: saveFile.playerId,
+						ownerId: initSaveFile.playerId,
 					},
 					updatedPokemon
 				);
 			});
 			const newSaveFile: SaveFile = {
-				...saveFile,
-				inventory: joinInventories(saveFile.inventory, usedItems, true),
+				...initSaveFile,
+				inventory: joinInventories(initSaveFile.inventory, usedItems, true),
 				pokemon: updatedPokemon,
 			};
 			syncAfterBattleEnd(newSaveFile);
@@ -155,7 +152,7 @@ export const useBattleSteps = (
 		battleStep,
 		caughtPokemon,
 		goBack,
-		saveFile,
+		initSaveFile,
 		setBattleStep,
 		syncAfterBattleEnd,
 		usedItems,
@@ -170,7 +167,7 @@ export const useBattleSteps = (
 	};
 
 	return {
-		saveFile,
+		saveFile: initSaveFile,
 		battleStep,
 		initBattle,
 		startCatchProcess,
