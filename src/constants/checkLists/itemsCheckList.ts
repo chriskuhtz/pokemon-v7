@@ -7,12 +7,7 @@ export const itemsCheckList: {
 	{
 		name: 'master-ball',
 		url: 'https://pokeapi.co/api/v2/item/1/',
-		todos: [
-			'receive an item',
-			'find an item in overworld',
-			'buy an item',
-			'sell an item',
-		],
+		todos: ['find an item in overworld'],
 	},
 	{
 		name: 'ultra-ball',

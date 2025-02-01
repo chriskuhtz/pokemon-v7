@@ -44,6 +44,11 @@ export const useSaveFile = (
 		number: number,
 		pricePerItem: number
 	) => void;
+	buyItemReducer: (
+		item: ItemType,
+		number: number,
+		pricePerItem: number
+	) => void;
 } => {
 	const local = window.localStorage.getItem(localStorageId);
 	const loaded =
@@ -83,6 +88,24 @@ export const useSaveFile = (
 			money: updatedMoney,
 		}));
 	};
+	const buyItemReducer = (
+		item: ItemType,
+		number: number,
+		pricePerItem: number
+	) => {
+		const updatedInventory = updateItemFunction(
+			item,
+			number,
+			saveFile.inventory
+		);
+		const updatedMoney = saveFile.money - number * pricePerItem;
+
+		setSaveFile((gm) => ({
+			...gm,
+			inventory: updatedInventory,
+			money: updatedMoney,
+		}));
+	};
 	const addItemReducer = (item: ItemType, number: number) => {
 		const updatedInventory = updateItemFunction(
 			item,
@@ -115,5 +138,6 @@ export const useSaveFile = (
 		patchSaveFileReducer,
 		setActiveTabReducer,
 		sellItemReducer,
+		buyItemReducer,
 	};
 };

@@ -1,5 +1,6 @@
 import { getRandomPokemonId } from './functions/getRandomPokemonId';
 import { testState, useSaveFile } from './hooks/useSaveFile';
+import { generateInventory } from './interfaces/Inventory';
 import { Bag } from './modules/Bag/Bag';
 import { Battle } from './modules/Battle/Battle';
 import { MainMenu } from './modules/MainMenu/MainMenu';
@@ -28,6 +29,7 @@ export const App = (): JSX.Element => {
 		putSaveFileReducer,
 		setActiveTabReducer,
 		sellItemReducer,
+		buyItemReducer,
 	} = useSaveFile(testState, true);
 
 	const {
@@ -74,7 +76,18 @@ export const App = (): JSX.Element => {
 		);
 	}
 	if (activeTab === 'BUY_MARKET') {
-		return <BuyMarket goBack={() => setActiveTabReducer('MARKET')} />;
+		return (
+			<BuyMarket
+				buyItem={buyItemReducer}
+				money={money}
+				goBack={() => setActiveTabReducer('MARKET')}
+				inventory={generateInventory({
+					antidote: 10000,
+					potion: 10000,
+					'poke-ball': 10000,
+				})}
+			/>
+		);
 	}
 	if (activeTab === 'SELL_MARKET') {
 		return (

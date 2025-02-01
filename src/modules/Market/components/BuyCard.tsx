@@ -1,16 +1,18 @@
-import { SellAction } from '../../../components/ItemCard/components/SellAction';
+import { BuyAction } from '../../../components/ItemCard/components/BuyAction';
 import { ItemCard } from '../../../components/ItemCard/ItemCard';
 import { useGetItemData } from '../../../hooks/useGetItemData';
 import { ItemType } from '../../../interfaces/Item';
 
-export const SellCard = ({
+export const BuyCard = ({
 	item,
-	sellItem,
+	buyItem,
 	amount,
+	money,
 }: {
 	item: ItemType;
 	amount: number;
-	sellItem: (x: number, price: number) => void;
+	buyItem: (x: number, price: number) => void;
+	money: number;
 }) => {
 	const { res } = useGetItemData(item);
 
@@ -19,6 +21,8 @@ export const SellCard = ({
 	}
 
 	const { cost } = res;
+
+	const max = Math.floor(money / cost);
 
 	if (cost === 0) {
 		return <></>;
@@ -29,10 +33,10 @@ export const SellCard = ({
 			item={item as ItemType}
 			amount={amount}
 			actionElements={[
-				<SellAction
-					amount={amount}
-					price={cost / 2}
-					sellItem={(x: number) => sellItem(x, cost / 2)}
+				<BuyAction
+					price={cost}
+					buyItem={(x: number) => buyItem(x, cost)}
+					max={max}
 				/>,
 			]}
 		/>
