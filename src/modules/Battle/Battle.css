@@ -1,0 +1,10 @@
+.battle {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 2fr 2fr 1fr;
+	height: 100vh;
+}
+.enemyLane {
+	display: flex;
+	justify-content: flex-end;
+}

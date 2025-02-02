@@ -1,0 +1,14 @@
+.card {
+	display: grid;
+	grid-template-columns: 1fr 7fr 1fr;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.5rem;
+	border: 2px solid black;
+	border-radius: 9000px;
+}
+.actionElements {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+}

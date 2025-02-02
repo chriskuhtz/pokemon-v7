@@ -1,31 +1,35 @@
-import { UniqueOccupantId } from '../constants/UniqueOccupantRecord';
-import { CharacterPosition } from '../store/slices/saveFileSlice';
-import { DexEntry } from './DexEntry';
+import { RoutesType } from '../App';
 import { Inventory } from './Inventory';
-import { EncounterChanceItem } from './Item';
 import { OwnedPokemon } from './OwnedPokemon';
-import { QuestName, QuestStatus } from './Quest';
 
-export type GymBadge = 'boulderBadge';
-export type GymBadgeRecord = Record<GymBadge, boolean>;
+export type CharacterOrientation = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
+export type ForwardFoot = 'CENTER1' | 'RIGHT' | 'CENTER2' | 'LEFT';
 
-export interface PlayerConfigObject {
-	randomStarters: boolean;
+export const OrientationKeyMap: Record<string, CharacterOrientation> = {
+	ArrowUp: 'UP',
+	ArrowLeft: 'LEFT',
+	ArrowDown: 'DOWN',
+	ArrowRight: 'RIGHT',
+	w: 'UP',
+	a: 'LEFT',
+	s: 'DOWN',
+	d: 'RIGHT',
+};
+export interface CharacterLocationData {
+	orientation: CharacterOrientation;
+	forwardFoot: ForwardFoot;
+	x: number;
+	y: number;
 }
 
 export interface SaveFile {
-	username: string;
-	position: CharacterPosition;
-	sprite: string;
-	handledOccupants: Record<UniqueOccupantId, boolean>;
-	lastHealPosition: CharacterPosition;
-	inventory: Inventory;
-	money: number;
-	pokemon: OwnedPokemon[];
-	pokedex: DexEntry[];
-	quests: Record<QuestName, QuestStatus>;
 	playerId: string;
-	gymBadges: GymBadgeRecord;
-	activeFlute?: EncounterChanceItem;
-	config: PlayerConfigObject;
+	inventory: Inventory;
+	pokemon: OwnedPokemon[];
+	money: number;
+	meta: {
+		activeTab: RoutesType;
+	};
+	location: CharacterLocationData;
+	collectedItems: number[];
 }

@@ -1,25 +1,22 @@
-import { Ability } from '../constants/abilityCheckList';
-import { PrimaryAilment } from './Ailment';
-import { ItemType, PokeballType } from './Item';
-import { StatObject } from './StatObject';
+import { PokeballType } from './Item';
 
 export interface OwnedPokemon {
 	dexId: number;
 	id: string;
 	onTeam?: boolean;
-	xp: number;
-	damage: number;
+	//xp: number;
+	//damage: number;
 	ownerId: string;
-	moveNames: string[];
-	ability: Ability;
-	primaryAilment?: PrimaryAilment;
+	//moveNames: string[];
+	//ability: Ability;
+	//primaryAilment?: PrimaryAilment;
 	ball: PokeballType;
-	shiny?: boolean;
-	friendship: number;
-	usedPowerPoints: UsedPowerPoints;
-	heldItemName?: ItemType;
-	effortValues: StatObject;
-	ppBoostedMoves: PPBoostedMove[];
+	//shiny?: boolean;
+	//friendship: number;
+	//usedPowerPoints: UsedPowerPoints;
+	//heldItemName?: ItemType;
+	//effortValues: StatObject;
+	//ppBoostedMoves: PPBoostedMove[];
 }
 export interface PPBoostedMove {
 	name: string;

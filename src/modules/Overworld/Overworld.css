@@ -1,0 +1,17 @@
+.overworldPage {
+	display: flex;
+	width: 100dvw;
+	height: 100dvh;
+	max-height: 100dvh;
+	max-width: 100dvw;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+}
+
+.backgroundLayer {
+	height: 64px;
+	width: 64px;
+	z-index: -1;
+	position: relative;
+}
