@@ -122,7 +122,7 @@ export const useSaveFile = (
 		const id = Number.parseInt(item[0]);
 		const updatedInventory = updateItemFunction(
 			item[1].item,
-			1,
+			item[1].amount,
 			saveFile.inventory
 		);
 		setSaveFile((gm) => ({

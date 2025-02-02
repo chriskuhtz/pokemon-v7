@@ -1,4 +1,5 @@
-import { testMap, testState } from './constants/gameData';
+import { testState } from './constants/gameData';
+import { testMap } from './constants/maps/testmap';
 import { getRandomPokemonId } from './functions/getRandomPokemonId';
 import { useSaveFile } from './hooks/useSaveFile';
 import { generateInventory } from './interfaces/Inventory';

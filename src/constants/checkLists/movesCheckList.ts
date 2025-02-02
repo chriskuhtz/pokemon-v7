@@ -4,7 +4,18 @@ export const movesCheckList: {
 	todos?: string[];
 	handled?: boolean;
 }[] = [
-	{ name: 'pound', url: 'https://pokeapi.co/api/v2/move/1/' },
+	{
+		name: 'pound',
+		url: 'https://pokeapi.co/api/v2/move/1/',
+		todos: [
+			'fetch move data',
+			'enemy moves / turn based system',
+			'stats',
+			'K.O.ing',
+			'pp',
+			'type effectiveness',
+		],
+	},
 	{
 		name: 'karate-chop',
 		url: 'https://pokeapi.co/api/v2/move/2/',

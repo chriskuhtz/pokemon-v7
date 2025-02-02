@@ -59,7 +59,7 @@ export const Overworld = ({
 			if (!occ) {
 				return;
 			}
-			setBannerContent(`Found 1 ${occ[1].item}`);
+			setBannerContent(`Found ${occ[1].amount} ${occ[1].item}`);
 			collectItem(occ);
 		},
 		[collectItem]

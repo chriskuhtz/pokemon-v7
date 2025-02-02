@@ -13,6 +13,7 @@ export interface Occupant {
 	x: number;
 	y: number;
 	item: ItemType;
+	amount: number;
 }
 
 export interface OverworldMap {

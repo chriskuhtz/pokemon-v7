@@ -5,10 +5,10 @@ export const itemsCheckList: {
 	handled?: boolean;
 }[] = [
 	{
-		//DONE
 		name: 'master-ball',
 		url: 'https://pokeapi.co/api/v2/item/1/',
 		todos: [],
+		handled: true,
 	},
 	{
 		name: 'ultra-ball',
