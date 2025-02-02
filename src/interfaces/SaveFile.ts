@@ -18,6 +18,8 @@ export const OrientationKeyMap: Record<string, CharacterOrientation> = {
 export interface CharacterLocationData {
 	orientation: CharacterOrientation;
 	forwardFoot: ForwardFoot;
+	x: number;
+	y: number;
 }
 
 export interface SaveFile {

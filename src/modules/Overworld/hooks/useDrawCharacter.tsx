@@ -1,32 +1,33 @@
 import { useEffect, useMemo } from 'react';
+import { baseSize } from '../../../constants/gameData';
 import { CharacterLocationData } from '../../../interfaces/SaveFile';
 
-export const useCharacter = (
+export const useDrawCharacter = (
 	canvasId: string,
 	playerLocation: CharacterLocationData
 ) => {
 	const yOffset = useMemo(() => {
 		if (playerLocation.orientation === 'UP') {
-			return -192;
+			return -3 * baseSize;
 		}
 		if (playerLocation.orientation === 'RIGHT') {
-			return -128;
+			return -2 * baseSize;
 		}
 		if (playerLocation.orientation === 'LEFT') {
-			return -64;
+			return -baseSize;
 		}
 		return 0;
 	}, [playerLocation.orientation]);
 
 	const xOffset = useMemo(() => {
 		if (playerLocation.forwardFoot === 'LEFT') {
-			return -192;
+			return -3 * baseSize;
 		}
 		if (playerLocation.forwardFoot === 'CENTER2') {
-			return -128;
+			return -2 * baseSize;
 		}
 		if (playerLocation.forwardFoot === 'RIGHT') {
-			return -64;
+			return -baseSize;
 		}
 		return 0;
 	}, [playerLocation.forwardFoot]);
@@ -40,7 +41,7 @@ export const useCharacter = (
 		const img = new Image();
 
 		img.addEventListener('load', () => {
-			ctx?.clearRect(0, 0, 64, 64);
+			ctx?.clearRect(0, 0, baseSize, baseSize);
 			ctx?.drawImage(img, xOffset, yOffset);
 		});
 

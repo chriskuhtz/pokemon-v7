@@ -1,43 +1,74 @@
+import { useMemo } from 'react';
 import { IoMdMenu } from 'react-icons/io';
-import {
-	CharacterLocationData,
-	CharacterOrientation,
-} from '../../interfaces/SaveFile';
+import { baseSize } from '../../constants/gameData';
+import { isValidOverWorldMap } from '../../functions/isValidOverworldMap';
+import { OverworldMap } from '../../interfaces/OverworldMap';
+import { CharacterLocationData } from '../../interfaces/SaveFile';
 import './Overworld.css';
-import { useCharacter } from './hooks/useCharacter';
-import { useOverworld } from './hooks/useOverworld';
+import { useDrawBackground } from './hooks/useDrawBackground';
+import { useDrawCharacter } from './hooks/useDrawCharacter';
+import { useOverworldMovement } from './hooks/useOverworldMovement';
 import { usePlayerControl } from './hooks/usePlayerControl';
 
 const playerCanvasId = 'playerCanvas';
+const backgroundCanvasId = 'bg';
 
 export const Overworld = ({
 	openMenu,
 	playerLocation,
-	setOrientation,
-	setNextForwardFoot,
+	setCharacterLocation,
+	map,
 }: {
 	openMenu: () => void;
 	playerLocation: CharacterLocationData;
-	setOrientation: (update: CharacterOrientation) => void;
-	setNextForwardFoot: () => void;
+	setCharacterLocation: (update: CharacterLocationData) => void;
+	map: OverworldMap;
 }) => {
-	const setNextInput = useOverworld(
+	const valid = useMemo(() => isValidOverWorldMap(map), [map]);
+	const setNextInput = useOverworldMovement(
 		playerLocation,
-		setOrientation,
-		setNextForwardFoot
+		setCharacterLocation,
+		map
 	);
 	//PLAYER
-	useCharacter(playerCanvasId, playerLocation);
+	useDrawCharacter(playerCanvasId, playerLocation);
 	usePlayerControl(setNextInput);
 
+	useDrawBackground(backgroundCanvasId, map);
+
+	if (!valid) {
+		return (
+			<h2>
+				<IoMdMenu onClick={openMenu} size={30} />
+				Invalid Map received
+			</h2>
+		);
+	}
+
 	return (
-		<div className="overworld">
+		<div className="overworldPage">
 			<IoMdMenu
 				style={{ position: 'absolute', top: '1.5rem', left: '1rem' }}
 				onClick={openMenu}
 				size={30}
 			/>
-			<canvas id={playerCanvasId} height={64} width={64} />
+			<div>
+				<canvas id={playerCanvasId} height={baseSize} width={baseSize} />
+				<div
+					className="backgroundLayer"
+					style={{
+						top: -baseSize - playerLocation.y * baseSize,
+						left: -playerLocation.x * baseSize,
+					}}
+				>
+					<canvas
+						style={{ border: '1px solid red' }}
+						id={backgroundCanvasId}
+						height={map.height * baseSize}
+						width={map.width * baseSize}
+					/>
+				</div>
+			</div>
 		</div>
 	);
 };

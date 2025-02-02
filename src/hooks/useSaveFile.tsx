@@ -1,37 +1,11 @@
 import { useEffect, useState } from 'react';
 import { RoutesType } from '../App';
-import { getNextForwardFoot } from '../functions/getNextForwardFoot';
+import { localStorageId } from '../constants/gameData';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { updateItemFunction } from '../functions/updateItemFunction';
-import { generateInventory } from '../interfaces/Inventory';
 import { ItemType } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
-import { CharacterOrientation, SaveFile } from '../interfaces/SaveFile';
-
-const ownerId = 'Bear';
-export const testState: SaveFile = {
-	inventory: generateInventory({ 'master-ball': 10, 'ultra-ball': 20 }),
-	playerId: ownerId,
-	money: 5000,
-	pokemon: [
-		{
-			dexId: 25,
-			ownerId,
-			id: 'bubu',
-			ball: 'master-ball',
-			onTeam: true,
-		},
-	],
-	meta: {
-		activeTab: 'MAIN',
-	},
-	location: {
-		orientation: 'RIGHT',
-		forwardFoot: 'CENTER1',
-	},
-};
-
-const localStorageId = 'pokemonv7SaveFile';
+import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
 
 export const useSaveFile = (
 	init: SaveFile,
@@ -54,8 +28,7 @@ export const useSaveFile = (
 		number: number,
 		pricePerItem: number
 	) => void;
-	setOrientationReducer: (newOrientation: CharacterOrientation) => void;
-	setNextForwardFootReducer: () => void;
+	setCharacterLocationReducer: (update: CharacterLocationData) => void;
 } => {
 	const local = window.localStorage.getItem(localStorageId);
 	const loaded =
@@ -135,18 +108,11 @@ export const useSaveFile = (
 	const setActiveTabReducer = (update: RoutesType) => {
 		setSaveFile((s) => ({ ...s, meta: { ...s.meta, activeTab: update } }));
 	};
-	const setOrientationReducer = (update: CharacterOrientation) => {
-		setSaveFile((s) => ({
-			...s,
-			location: { ...s.location, orientation: update },
-		}));
-	};
 
-	const setNextForwardFootReducer = () => {
-		const nextFoot = getNextForwardFoot(saveFile.location.forwardFoot);
+	const setCharacterLocationReducer = (update: CharacterLocationData) => {
 		setSaveFile((s) => ({
 			...s,
-			location: { ...s.location, forwardFoot: nextFoot },
+			location: update,
 		}));
 	};
 
@@ -160,7 +126,6 @@ export const useSaveFile = (
 		setActiveTabReducer,
 		sellItemReducer,
 		buyItemReducer,
-		setOrientationReducer,
-		setNextForwardFootReducer,
+		setCharacterLocationReducer,
 	};
 };

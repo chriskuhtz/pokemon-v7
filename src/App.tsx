@@ -1,5 +1,6 @@
+import { testMap, testState } from './constants/gameData';
 import { getRandomPokemonId } from './functions/getRandomPokemonId';
-import { testState, useSaveFile } from './hooks/useSaveFile';
+import { useSaveFile } from './hooks/useSaveFile';
 import { generateInventory } from './interfaces/Inventory';
 import { Bag } from './modules/Bag/Bag';
 import { Battle } from './modules/Battle/Battle';
@@ -30,8 +31,7 @@ export const App = (): JSX.Element => {
 		setActiveTabReducer,
 		sellItemReducer,
 		buyItemReducer,
-		setOrientationReducer,
-		setNextForwardFootReducer,
+		setCharacterLocationReducer,
 	} = useSaveFile(testState, true);
 
 	const {
@@ -113,9 +113,9 @@ export const App = (): JSX.Element => {
 	return (
 		<Overworld
 			openMenu={() => setActiveTabReducer('MAIN')}
-			setOrientation={setOrientationReducer}
+			setCharacterLocation={setCharacterLocationReducer}
 			playerLocation={location}
-			setNextForwardFoot={setNextForwardFootReducer}
+			map={testMap}
 		/>
 	);
 };
