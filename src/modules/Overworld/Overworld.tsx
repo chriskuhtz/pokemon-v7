@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { IoMdMenu } from 'react-icons/io';
 import {
 	CharacterLocationData,
@@ -9,7 +8,6 @@ import { useCharacter } from './hooks/useCharacter';
 import { usePlayerControl } from './hooks/usePlayerControl';
 
 const playerCanvasId = 'playerCanvas';
-const fps = 16;
 
 export const Overworld = ({
 	openMenu,
@@ -22,35 +20,11 @@ export const Overworld = ({
 	setOrientation: (update: CharacterOrientation) => void;
 	setNextForwardFoot: () => void;
 }) => {
-	const [nextInput, setNextInput] = useState<
-		CharacterOrientation | undefined
-	>();
-
-	useEffect(() => {
-		const int = setInterval(() => {
-			if (
-				!nextInput &&
-				!['CENTER1', 'CENTER2'].includes(playerLocation.forwardFoot)
-			) {
-				setNextForwardFoot();
-			}
-			if (nextInput === playerLocation.orientation) {
-				setNextForwardFoot();
-			}
-			if (nextInput && nextInput !== playerLocation.orientation) {
-				setOrientation(nextInput);
-			}
-			setNextInput(undefined);
-		}, 1000 / fps);
-
-		return () => clearInterval(int);
-	}, [
-		nextInput,
-		playerLocation.forwardFoot,
-		playerLocation.orientation,
-		setNextForwardFoot,
+	const setNextInput = useOverworld(
+		playerLocation,
 		setOrientation,
-	]);
+		setNextForwardFoot
+	);
 	//PLAYER
 	useCharacter(playerCanvasId, playerLocation);
 	usePlayerControl(setNextInput);
