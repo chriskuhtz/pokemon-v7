@@ -5,9 +5,10 @@ export const itemsCheckList: {
 	handled?: boolean;
 }[] = [
 	{
+		//DONE
 		name: 'master-ball',
 		url: 'https://pokeapi.co/api/v2/item/1/',
-		todos: ['find an item in overworld'],
+		todos: [],
 	},
 	{
 		name: 'ultra-ball',

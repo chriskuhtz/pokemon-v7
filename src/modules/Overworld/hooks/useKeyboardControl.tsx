@@ -4,15 +4,23 @@ import {
 	OrientationKeyMap,
 } from '../../../interfaces/SaveFile';
 
-export const usePlayerControl = (
-	registerNextInput: (x: CharacterOrientation) => void
+export const useKeyboardControl = (
+	registerNextInput: (x: CharacterOrientation) => void,
+	handleEnterPress: () => void,
+	disabled: boolean
 ) => {
 	useEffect(() => {
+		if (disabled) {
+			return;
+		}
 		function keyDownHandler(e: globalThis.KeyboardEvent) {
 			const newOrientation = OrientationKeyMap[e.key];
 
 			if (newOrientation) {
 				registerNextInput(newOrientation);
+			}
+			if (e.key === 'Enter') {
+				handleEnterPress();
 			}
 		}
 
@@ -21,5 +29,5 @@ export const usePlayerControl = (
 		return () => {
 			document.removeEventListener('keydown', keyDownHandler);
 		};
-	}, [registerNextInput]);
+	}, [disabled, handleEnterPress, registerNextInput]);
 };

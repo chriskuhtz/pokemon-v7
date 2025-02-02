@@ -31,4 +31,5 @@ export interface SaveFile {
 		activeTab: RoutesType;
 	};
 	location: CharacterLocationData;
+	collectedItems: number[];
 }

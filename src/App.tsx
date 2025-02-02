@@ -32,6 +32,7 @@ export const App = (): JSX.Element => {
 		sellItemReducer,
 		buyItemReducer,
 		setCharacterLocationReducer,
+		collectItemReducer,
 	} = useSaveFile(testState, true);
 
 	const {
@@ -40,6 +41,7 @@ export const App = (): JSX.Element => {
 		pokemon,
 		money,
 		location,
+		collectedItems,
 	} = saveFile;
 
 	if (activeTab === 'MAIN') {
@@ -114,8 +116,10 @@ export const App = (): JSX.Element => {
 		<Overworld
 			openMenu={() => setActiveTabReducer('MAIN')}
 			setCharacterLocation={setCharacterLocationReducer}
+			collectItem={collectItemReducer}
 			playerLocation={location}
 			map={testMap}
+			collectedItems={collectedItems}
 		/>
 	);
 };

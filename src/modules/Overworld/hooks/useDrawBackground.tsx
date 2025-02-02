@@ -13,7 +13,7 @@ export const useDrawBackground = (canvasId: string, map: OverworldMap) => {
 		const img = new Image();
 
 		img.addEventListener('load', () => {
-			ctx?.clearRect(0, 0, length * baseSize, height * baseSize);
+			ctx?.clearRect(0, 0, width * baseSize, height * baseSize);
 
 			Array.from({ length: height }).forEach((_, h) => {
 				Array.from({ length: width }).forEach((_, w) => {
