@@ -1,3 +1,5 @@
+import { baseSize } from '../../constants/gameData';
+
 export const IconSolarSystem = ({
 	sunUrl,
 	firstPlanetUrl,
@@ -8,8 +10,8 @@ export const IconSolarSystem = ({
 	return (
 		<div
 			style={{
-				marginBottom: '-36px',
-				width: '96px',
+				marginBottom: `${-baseSize / 2}px`,
+				width: `${baseSize * 1.5}px`,
 			}}
 		>
 			<img
@@ -17,7 +19,11 @@ export const IconSolarSystem = ({
 				src={sunUrl}
 			/>
 			<img
-				style={{ position: 'relative', top: '-32px', right: '-64px' }}
+				style={{
+					position: 'relative',
+					top: `${-baseSize / 2}px`,
+					right: `${-baseSize}px`,
+				}}
 				src={firstPlanetUrl}
 			/>
 		</div>

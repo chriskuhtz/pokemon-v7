@@ -25,9 +25,6 @@ export const battleSteps = [
 	'BATTLE_WON',
 ] as const;
 
-export const animationTimer = 1500;
-export const battleSpriteSize = 156;
-
 export type BattleStep = (typeof battleSteps)[number];
 export interface Opponent {
 	dexId: number;

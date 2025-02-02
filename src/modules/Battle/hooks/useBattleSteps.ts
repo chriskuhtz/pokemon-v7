@@ -8,7 +8,8 @@ import {
 } from '../../../interfaces/Inventory';
 import { PokeballType } from '../../../interfaces/Item';
 import { SaveFile } from '../../../interfaces/SaveFile';
-import { BattleStep, animationTimer } from '../Battle';
+import { BattleStep } from '../Battle';
+import { animationTimer } from '../../../constants/gameData';
 
 export const useBattleSteps = (
 	initSaveFile: SaveFile,

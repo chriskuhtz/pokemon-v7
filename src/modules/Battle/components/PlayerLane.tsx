@@ -1,7 +1,8 @@
+import { battleSpriteSize } from '../../../constants/gameData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { PokeballType } from '../../../interfaces/Item';
-import { battleSpriteSize, BattleStep } from '../Battle';
+import { BattleStep } from '../Battle';
 
 export const PlayerLane = ({
 	activePlayerPokemonId,

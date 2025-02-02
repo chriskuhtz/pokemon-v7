@@ -3,7 +3,8 @@ import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { PokeballType } from '../../../interfaces/Item';
 import { Banner } from '../../../uiComponents/Banner/Banner';
-import { battleSpriteSize, BattleStep } from '../Battle';
+import { BattleStep } from '../Battle';
+import { battleSpriteSize } from '../../../constants/gameData';
 export const BattleBanner = ({
 	opponent,
 	player,

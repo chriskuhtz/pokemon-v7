@@ -5,6 +5,7 @@ import {
 } from '../../interfaces/SaveFile';
 import './Overworld.css';
 import { useCharacter } from './hooks/useCharacter';
+import { useOverworld } from './hooks/useOverworld';
 import { usePlayerControl } from './hooks/usePlayerControl';
 
 const playerCanvasId = 'playerCanvas';
