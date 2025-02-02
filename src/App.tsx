@@ -10,7 +10,7 @@ import { SellMarket } from './modules/Market/SellMarket';
 import { Overworld } from './modules/Overworld/Overworld';
 import { Team } from './modules/Team/Team';
 
-const routes = [
+export const routes = [
 	'OVERWORLD',
 	'MAIN',
 	'BAG',
@@ -30,6 +30,8 @@ export const App = (): JSX.Element => {
 		setActiveTabReducer,
 		sellItemReducer,
 		buyItemReducer,
+		setOrientationReducer,
+		setNextForwardFootReducer,
 	} = useSaveFile(testState, true);
 
 	const {
@@ -37,6 +39,7 @@ export const App = (): JSX.Element => {
 		inventory,
 		pokemon,
 		money,
+		location,
 	} = saveFile;
 
 	if (activeTab === 'MAIN') {
@@ -107,5 +110,12 @@ export const App = (): JSX.Element => {
 		);
 	}
 
-	return <Overworld openMenu={() => setActiveTabReducer('MAIN')} />;
+	return (
+		<Overworld
+			openMenu={() => setActiveTabReducer('MAIN')}
+			setOrientation={setOrientationReducer}
+			playerLocation={location}
+			setNextForwardFoot={setNextForwardFootReducer}
+		/>
+	);
 };

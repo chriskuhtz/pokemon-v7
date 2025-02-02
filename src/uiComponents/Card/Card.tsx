@@ -13,7 +13,12 @@ export const Card = ({
 	onClick?: () => void;
 }) => {
 	return (
-		<div onClick={onClick} className="card">
+		<div
+			tabIndex={0}
+			role={onClick ? 'button' : 'none'}
+			onClick={onClick}
+			className="card"
+		>
 			{icon}
 			{content}
 			<div className="actionElements">

@@ -2,6 +2,24 @@ import { RoutesType } from '../App';
 import { Inventory } from './Inventory';
 import { OwnedPokemon } from './OwnedPokemon';
 
+export type CharacterOrientation = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
+export type ForwardFoot = 'CENTER1' | 'RIGHT' | 'CENTER2' | 'LEFT';
+
+export const OrientationKeyMap: Record<string, CharacterOrientation> = {
+	ArrowUp: 'UP',
+	ArrowLeft: 'LEFT',
+	ArrowDown: 'DOWN',
+	ArrowRight: 'RIGHT',
+	w: 'UP',
+	a: 'LEFT',
+	s: 'DOWN',
+	d: 'RIGHT',
+};
+export interface CharacterLocationData {
+	orientation: CharacterOrientation;
+	forwardFoot: ForwardFoot;
+}
+
 export interface SaveFile {
 	playerId: string;
 	inventory: Inventory;
@@ -10,4 +28,5 @@ export interface SaveFile {
 	meta: {
 		activeTab: RoutesType;
 	};
+	location: CharacterLocationData;
 }

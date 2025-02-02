@@ -15,7 +15,7 @@ export const Page = ({
 		<div className="page">
 			<h2 className="headline">
 				{goBack ? (
-					<IoIosArrowBack onClick={goBack} />
+					<IoIosArrowBack role="button" tabIndex={0} onClick={goBack} />
 				) : (
 					<div className="placeholder"></div>
 				)}{' '}

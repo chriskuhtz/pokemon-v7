@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { RoutesType } from '../App';
+import { getNextForwardFoot } from '../functions/getNextForwardFoot';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { updateItemFunction } from '../functions/updateItemFunction';
 import { generateInventory } from '../interfaces/Inventory';
 import { ItemType } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
-import { SaveFile } from '../interfaces/SaveFile';
+import { CharacterOrientation, SaveFile } from '../interfaces/SaveFile';
 
 const ownerId = 'Bear';
 export const testState: SaveFile = {
@@ -23,6 +24,10 @@ export const testState: SaveFile = {
 	],
 	meta: {
 		activeTab: 'MAIN',
+	},
+	location: {
+		orientation: 'RIGHT',
+		forwardFoot: 'CENTER1',
 	},
 };
 
@@ -49,6 +54,8 @@ export const useSaveFile = (
 		number: number,
 		pricePerItem: number
 	) => void;
+	setOrientationReducer: (newOrientation: CharacterOrientation) => void;
+	setNextForwardFootReducer: () => void;
 } => {
 	const local = window.localStorage.getItem(localStorageId);
 	const loaded =
@@ -128,6 +135,20 @@ export const useSaveFile = (
 	const setActiveTabReducer = (update: RoutesType) => {
 		setSaveFile((s) => ({ ...s, meta: { ...s.meta, activeTab: update } }));
 	};
+	const setOrientationReducer = (update: CharacterOrientation) => {
+		setSaveFile((s) => ({
+			...s,
+			location: { ...s.location, orientation: update },
+		}));
+	};
+
+	const setNextForwardFootReducer = () => {
+		const nextFoot = getNextForwardFoot(saveFile.location.forwardFoot);
+		setSaveFile((s) => ({
+			...s,
+			location: { ...s.location, forwardFoot: nextFoot },
+		}));
+	};
 
 	return {
 		saveFile,
@@ -139,5 +160,7 @@ export const useSaveFile = (
 		setActiveTabReducer,
 		sellItemReducer,
 		buyItemReducer,
+		setOrientationReducer,
+		setNextForwardFootReducer,
 	};
 };
