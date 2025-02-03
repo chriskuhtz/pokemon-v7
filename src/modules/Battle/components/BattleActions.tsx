@@ -3,7 +3,8 @@ import { Inventory } from '../../../interfaces/Inventory';
 import { isPokeball, PokeballType } from '../../../interfaces/Item';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { Stack } from '../../../uiComponents/Stack/Stack';
-import { BattleStep, Opponent } from '../Battle';
+import { BattleStep } from '../Battle';
+import { BattlePokemon } from '../hooks/useBattlePokemon';
 
 export const BattleActions = ({
 	inventory,
@@ -13,7 +14,7 @@ export const BattleActions = ({
 }: {
 	team: SaveFile['pokemon'];
 	inventory: Inventory;
-	opponent: Opponent;
+	opponent: BattlePokemon;
 	goBack: () => void;
 	startCatchProcess: (ball: PokeballType) => void;
 	battleStep: BattleStep;

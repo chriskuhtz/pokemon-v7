@@ -1,4 +1,5 @@
 import { PokeballType } from './Item';
+import { Nature } from './Natures';
 
 export interface OwnedPokemon {
 	dexId: number;
@@ -11,6 +12,7 @@ export interface OwnedPokemon {
 	//ability: Ability;
 	//primaryAilment?: PrimaryAilment;
 	ball: PokeballType;
+	nature: Nature;
 	//shiny?: boolean;
 	//friendship: number;
 	//usedPowerPoints: UsedPowerPoints;

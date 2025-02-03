@@ -1,4 +1,5 @@
 import { generateInventory } from '../interfaces/Inventory';
+import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { SaveFile } from '../interfaces/SaveFile';
 
 export const fps = 16;
@@ -20,6 +21,7 @@ export const testState: SaveFile = {
 			onTeam: true,
 			firstMove: { name: 'pound', usedPP: 0 },
 			damage: 0,
+			nature: 'adamant',
 		},
 	],
 	meta: {
@@ -33,6 +35,16 @@ export const testState: SaveFile = {
 		y: 0,
 	},
 	collectedItems: [],
+};
+
+export const testOpponent: OwnedPokemon = {
+	dexId: 52,
+	nature: 'adamant',
+	ownerId: 'oppo',
+	ball: 'cherish-ball',
+	damage: 0,
+	firstMove: { name: 'pound', usedPP: 0 },
+	id: 'oppoMon',
 };
 
 export const localStorageId = 'pokemonv7SaveFile';

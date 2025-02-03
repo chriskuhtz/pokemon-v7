@@ -5,12 +5,12 @@ import { PokeballType } from '../../../interfaces/Item';
 import { BattleStep } from '../Battle';
 
 export const PlayerLane = ({
-	activePlayerPokemonId,
+	dexId,
 	ballType,
 	battleStep,
 	voidSteps,
 }: {
-	activePlayerPokemonId: number;
+	dexId: number;
 	ballType: PokeballType;
 	battleStep: BattleStep;
 	voidSteps: BattleStep[];
@@ -38,7 +38,7 @@ export const PlayerLane = ({
 			<img
 				width={battleSpriteSize}
 				height={battleSpriteSize}
-				src={getPokemonSprite(activePlayerPokemonId, 'back')}
+				src={getPokemonSprite(dexId, 'back')}
 			/>
 		</div>
 	);

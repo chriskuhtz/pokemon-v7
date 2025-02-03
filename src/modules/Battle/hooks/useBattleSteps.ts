@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { v6 } from 'uuid';
+import { animationTimer } from '../../../constants/gameData';
 import { receiveNewPokemonFunction } from '../../../functions/receiveNewPokemonFunction';
+import { reduceBattlePokemonToOwnedPokemon } from '../../../functions/reduceBattlePokemonToOwnedPokemon';
 import {
 	EmptyInventory,
 	Inventory,
@@ -9,8 +10,12 @@ import {
 import { PokeballType } from '../../../interfaces/Item';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { BattleStep } from '../Battle';
-import { animationTimer } from '../../../constants/gameData';
+import { BattlePokemon } from './useBattlePokemon';
 
+export interface CatchProcessInfo {
+	pokemon: BattlePokemon;
+	ball: PokeballType;
+}
 export const useBattleSteps = (
 	initSaveFile: SaveFile,
 	syncAfterBattleEnd: (update: SaveFile) => void,
@@ -18,18 +23,16 @@ export const useBattleSteps = (
 ): {
 	battleStep: BattleStep;
 	initBattle: () => void;
-	startCatchProcess: (ball: PokeballType, opponentDexId: number) => void;
-	inCatchProcess: { dexId: number; ball: PokeballType } | undefined;
+	startCatchProcess: (x: CatchProcessInfo) => void;
+	inCatchProcess: CatchProcessInfo | undefined;
 	saveFile: SaveFile;
 } => {
 	const [battleStep, setBattleStep] = useState<BattleStep>('UNITIALIZED');
 	const [inCatchProcess, setInCatchProcess] = useState<
-		{ dexId: number; ball: PokeballType } | undefined
+		CatchProcessInfo | undefined
 	>();
 	const [usedItems, setUsedItems] = useState<Inventory>(EmptyInventory);
-	const [caughtPokemon, setCaughtPokemon] = useState<
-		{ dexId: number; ball: PokeballType }[]
-	>([]);
+	const [caughtPokemon, setCaughtPokemon] = useState<CatchProcessInfo[]>([]);
 
 	useEffect(() => {
 		if (battleStep !== 'OPPONENT_INTRO') {
@@ -128,14 +131,13 @@ export const useBattleSteps = (
 		const t = setTimeout(() => {
 			let updatedPokemon = [...initSaveFile.pokemon];
 
-			caughtPokemon.forEach((c) => {
+			caughtPokemon.forEach(({ pokemon, ball }) => {
 				updatedPokemon = receiveNewPokemonFunction(
-					{
-						id: v6(),
-						dexId: c.dexId,
-						ball: c.ball,
+					reduceBattlePokemonToOwnedPokemon({
+						...pokemon,
 						ownerId: initSaveFile.playerId,
-					},
+						ball,
+					}),
 					updatedPokemon
 				);
 			});
@@ -162,9 +164,9 @@ export const useBattleSteps = (
 	const initBattle = () => {
 		setBattleStep('OPPONENT_INTRO');
 	};
-	const startCatchProcess = (ball: PokeballType, pokemonToCatch: number) => {
+	const startCatchProcess = ({ ball, pokemon }: CatchProcessInfo) => {
 		setBattleStep('CATCHING_PROCESS_1');
-		setInCatchProcess({ dexId: pokemonToCatch, ball });
+		setInCatchProcess({ pokemon, ball });
 	};
 
 	return {

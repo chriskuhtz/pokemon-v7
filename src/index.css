@@ -3,6 +3,7 @@
 body {
 	font-family: 'Doto';
 	margin: 0;
+	text-transform: uppercase;
 }
 h4,
 h5,
