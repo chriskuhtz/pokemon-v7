@@ -5,9 +5,9 @@ export interface OwnedPokemon {
 	id: string;
 	onTeam?: boolean;
 	//xp: number;
-	//damage: number;
+	damage: number;
 	ownerId: string;
-	//moveNames: string[];
+	firstMove: { name: string; usedPP: number };
 	//ability: Ability;
 	//primaryAilment?: PrimaryAilment;
 	ball: PokeballType;
@@ -17,14 +17,4 @@ export interface OwnedPokemon {
 	//heldItemName?: ItemType;
 	//effortValues: StatObject;
 	//ppBoostedMoves: PPBoostedMove[];
-}
-export interface PPBoostedMove {
-	name: string;
-	boost: number;
-}
-export interface UsedPowerPoints {
-	firstMove: number;
-	secondMove: number;
-	thirdMove: number;
-	fourthMove: number;
 }

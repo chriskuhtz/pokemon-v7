@@ -1,4 +1,4 @@
-import { PokemonCard } from '../../components/PokemonCard/PokemonCard';
+import { OwnedPokemonCard } from '../../components/OwnedPokemonCard/OwnedPokemonCard';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
@@ -14,7 +14,7 @@ export const Team = ({
 		<Page goBack={goBack} headline="Team:">
 			<Stack mode="column">
 				{team.map((pokemon) => (
-					<PokemonCard key={pokemon.id} pokemon={pokemon} />
+					<OwnedPokemonCard key={pokemon.id} pokemon={pokemon} />
 				))}
 			</Stack>
 		</Page>

@@ -3,15 +3,19 @@ import { baseSize } from '../../constants/gameData';
 export const IconSolarSystem = ({
 	sunUrl,
 	firstPlanetUrl,
+	secondPlanetUrl,
+	thirdPlanetUrl,
 }: {
 	sunUrl: string;
 	firstPlanetUrl: string;
+	secondPlanetUrl?: string;
+	thirdPlanetUrl?: string;
 }) => {
 	return (
 		<div
 			style={{
-				marginBottom: `${-baseSize / 2}px`,
 				width: `${baseSize * 1.5}px`,
+				position: 'relative',
 			}}
 		>
 			<img
@@ -20,12 +24,40 @@ export const IconSolarSystem = ({
 			/>
 			<img
 				style={{
-					position: 'relative',
-					top: `${-baseSize / 2}px`,
-					right: `${-baseSize}px`,
+					position: 'absolute',
+					top: `${-baseSize / 6}px`,
+					left: `${baseSize / 2}px`,
 				}}
+				height={baseSize / 2}
+				width={baseSize / 2}
 				src={firstPlanetUrl}
 			/>
+
+			{secondPlanetUrl && (
+				<img
+					style={{
+						position: 'absolute',
+						top: `${baseSize / 16}px`,
+						right: `${-baseSize / 16}px`,
+					}}
+					height={baseSize / 2}
+					width={baseSize / 2}
+					src={secondPlanetUrl}
+				/>
+			)}
+
+			{thirdPlanetUrl && (
+				<img
+					style={{
+						position: 'absolute',
+						top: `${baseSize / 2}px`,
+						right: `${-baseSize / 4}px`,
+					}}
+					height={baseSize / 2}
+					width={baseSize / 2}
+					src={thirdPlanetUrl}
+				/>
+			)}
 		</div>
 	);
 };

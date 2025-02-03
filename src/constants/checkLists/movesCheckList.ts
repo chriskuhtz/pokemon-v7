@@ -8,13 +8,14 @@ export const movesCheckList: {
 		name: 'pound',
 		url: 'https://pokeapi.co/api/v2/move/1/',
 		todos: [
-			'having moves',
 			'fetch move data',
 			'enemy moves / turn based system',
 			'stats',
 			'K.O.ing',
+			'winning/losing battle',
 			'pp',
 			'type effectiveness',
+			'stab bonus',
 		],
 	},
 	{

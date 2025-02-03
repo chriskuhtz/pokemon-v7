@@ -18,6 +18,8 @@ export const testState: SaveFile = {
 			id: 'bubu',
 			ball: 'master-ball',
 			onTeam: true,
+			firstMove: { name: 'pound', usedPP: 0 },
+			damage: 0,
 		},
 	],
 	meta: {
