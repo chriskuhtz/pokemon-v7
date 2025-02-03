@@ -24,6 +24,7 @@ export const testState: SaveFile = {
 		activeTab: 'MAIN',
 	},
 	location: {
+		mapId: 'testMap',
 		orientation: 'RIGHT',
 		forwardFoot: 'CENTER1',
 		x: 0,

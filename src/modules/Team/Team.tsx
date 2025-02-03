@@ -1,5 +1,5 @@
 import { PokemonCard } from '../../components/PokemonCard/PokemonCard';
-import { SaveFile } from '../../hooks/useSaveFile';
+import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
@@ -7,7 +7,7 @@ export const Team = ({
 	team,
 	goBack,
 }: {
-	team: SaveFile['pokemon'];
+	team: OwnedPokemon[];
 	goBack: () => void;
 }): JSX.Element => {
 	return (

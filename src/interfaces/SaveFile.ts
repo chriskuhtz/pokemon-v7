@@ -4,6 +4,7 @@ import { OwnedPokemon } from './OwnedPokemon';
 
 export type CharacterOrientation = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
 export type ForwardFoot = 'CENTER1' | 'RIGHT' | 'CENTER2' | 'LEFT';
+export type MapId = 'testMap';
 
 export const OrientationKeyMap: Record<string, CharacterOrientation> = {
 	ArrowUp: 'UP',
@@ -16,6 +17,7 @@ export const OrientationKeyMap: Record<string, CharacterOrientation> = {
 	d: 'RIGHT',
 };
 export interface CharacterLocationData {
+	mapId: MapId;
 	orientation: CharacterOrientation;
 	forwardFoot: ForwardFoot;
 	x: number;
