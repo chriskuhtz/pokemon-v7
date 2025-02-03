@@ -62,6 +62,8 @@ export const Battle = ({
 		return <LoadingScreen />;
 	}
 
+	console.log(slot1);
+
 	return (
 		<>
 			<BattleBanner
@@ -90,10 +92,8 @@ export const Battle = ({
 					startCatchProcess={(ball) =>
 						startCatchProcess({ ball, pokemon: slot3 })
 					}
-					team={team}
 					inventory={saveFile.inventory}
-					opponent={slot3}
-					goBack={goBack}
+					firstMove={slot1.firstMove}
 					voidSteps={[
 						'OPPONENT_INTRO',
 						'PLAYER_INTRO',

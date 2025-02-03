@@ -1,4 +1,5 @@
 import React from 'react';
+import { baseSize } from '../../constants/gameData';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { ItemType } from '../../interfaces/Item';
 import { Card } from '../../uiComponents/Card/Card';
@@ -16,7 +17,7 @@ export const ItemCard = ({
 }): JSX.Element => {
 	return (
 		<Card
-			icon={<img src={getItemUrl(item)} />}
+			icon={<img height={baseSize / 2} src={getItemUrl(item)} />}
 			content={
 				<h4>
 					{item} : {amount}
