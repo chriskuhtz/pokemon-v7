@@ -4,6 +4,8 @@ import { applyAttackToPokemon } from '../../../functions/applyAttackToPokemon';
 import { isKO } from '../../../functions/isKo';
 import { receiveNewPokemonFunction } from '../../../functions/receiveNewPokemonFunction';
 import { reduceBattlePokemonToOwnedPokemon } from '../../../functions/reduceBattlePokemonToOwnedPokemon';
+import { BattleAttack } from '../../../interfaces/BattleAttack';
+import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import {
 	EmptyInventory,
 	Inventory,
@@ -12,8 +14,7 @@ import {
 import { PokeballType } from '../../../interfaces/Item';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { BattleStep } from '../types/BattleStep';
-import { BattleAttack } from '../../../interfaces/BattleAttack';
-import { BattlePokemon } from '../../../interfaces/BattlePokemon';
+import { targetFlinched } from '../../../functions/targetFlinched';
 
 export interface CatchProcessInfo {
 	pokemon: BattlePokemon;
@@ -154,6 +155,10 @@ export const useBattleSteps = ({
 					setBattleStep('OPPONENT_FAINTING');
 					return;
 				}
+				if (targetFlinched(player, opponent, nextPlayerMove)) {
+					setBattleStep('OPPONENT_FLINCHED');
+					return;
+				}
 
 				setBattleStep('EXECUTE_OPPONENT_MOVE');
 			}
@@ -186,6 +191,10 @@ export const useBattleSteps = ({
 					setBattleStep('PLAYER_FAINTING');
 					return;
 				}
+				if (targetFlinched(opponent, player, nextOpponentMove)) {
+					setBattleStep('PLAYER_FLINCHED');
+					return;
+				}
 				setBattleStep('MOVE_SELECTION');
 			}
 		}, animationTimer);
@@ -200,6 +209,31 @@ export const useBattleSteps = ({
 		setOpponent,
 		setPlayer,
 	]);
+	//"OPPONENT_FLINCHED"
+	useEffect(() => {
+		if (battleStep !== 'OPPONENT_FLINCHED') {
+			return;
+		}
+		const t = setTimeout(() => {
+			setBattleStep('MOVE_SELECTION');
+			setNextOpponentMove(undefined);
+		}, animationTimer);
+
+		return () => clearTimeout(t);
+	}, [battleStep, setBattleStep]);
+	//"PLAYER_FLINCHED"
+	useEffect(() => {
+		if (battleStep !== 'PLAYER_FLINCHED') {
+			return;
+		}
+		const t = setTimeout(() => {
+			setBattleStep('MOVE_SELECTION');
+			setNextOpponentMove(undefined);
+			setNextPlayerMove(undefined);
+		}, animationTimer);
+
+		return () => clearTimeout(t);
+	}, [battleStep, setBattleStep]);
 	//'CATCHING_PROCESS_1' to 'CATCHING_PROCESS_2'
 	useEffect(() => {
 		if (battleStep !== 'CATCHING_PROCESS_1') {

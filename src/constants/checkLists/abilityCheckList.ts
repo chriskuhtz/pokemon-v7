@@ -132,7 +132,11 @@ export const abilityCheckList: {
 	{ name: 'trace', url: 'https://pokeapi.co/api/v2/ability/36/' },
 	{ name: 'huge-power', url: 'https://pokeapi.co/api/v2/ability/37/' },
 	{ name: 'poison-point', url: 'https://pokeapi.co/api/v2/ability/38/' },
-	{ name: 'inner-focus', url: 'https://pokeapi.co/api/v2/ability/39/' },
+	{
+		name: 'inner-focus',
+		url: 'https://pokeapi.co/api/v2/ability/39/',
+		handled: true,
+	},
 	{ name: 'magma-armor', url: 'https://pokeapi.co/api/v2/ability/40/' },
 	{ name: 'water-veil', url: 'https://pokeapi.co/api/v2/ability/41/' },
 	{ name: 'magnet-pull', url: 'https://pokeapi.co/api/v2/ability/42/' },
