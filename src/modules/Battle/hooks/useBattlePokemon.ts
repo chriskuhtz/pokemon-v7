@@ -7,9 +7,14 @@ import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { PokemonData } from '../../../interfaces/PokemonData';
 import { StatObject } from '../../../interfaces/StatObject';
 
+export type BattleAttack = OwnedPokemon['firstMove'] & {
+	data: MoveDto;
+	type: 'BattleAttack';
+};
+
 export interface BattlePokemon extends OwnedPokemon {
 	stats: StatObject;
-	firstMove: OwnedPokemon['firstMove'] & { data: MoveDto };
+	firstMove: BattleAttack;
 	data: PokemonData;
 }
 
@@ -28,7 +33,11 @@ export const useBattlePokemon = (
 		if (!current && res && firstMoveData) {
 			setCurrent({
 				...pokemon,
-				firstMove: { ...pokemon.firstMove, data: firstMoveData },
+				firstMove: {
+					...pokemon.firstMove,
+					data: firstMoveData,
+					type: 'BattleAttack',
+				},
 				data: res,
 				stats: getStats(res.stats, 5, pokemon.nature),
 			});

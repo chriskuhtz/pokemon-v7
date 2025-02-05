@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { animationTimer } from '../../../constants/gameData';
+import { applyAttackToPokemon } from '../../../functions/applyAttackToPokemon';
 import { receiveNewPokemonFunction } from '../../../functions/receiveNewPokemonFunction';
 import { reduceBattlePokemonToOwnedPokemon } from '../../../functions/reduceBattlePokemonToOwnedPokemon';
 import {
@@ -10,17 +11,12 @@ import {
 import { PokeballType } from '../../../interfaces/Item';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { BattleStep } from '../Battle';
-import { BattlePokemon } from './useBattlePokemon';
+import { BattleAttack, BattlePokemon } from './useBattlePokemon';
 
 export interface CatchProcessInfo {
 	pokemon: BattlePokemon;
 	ball: PokeballType;
 	type: 'CatchProcessInfo';
-}
-
-export interface BattleAttack {
-	name: string;
-	type: 'BattleAttack';
 }
 
 export type BattleMove = CatchProcessInfo | BattleAttack;
@@ -109,11 +105,15 @@ export const useBattleSteps = ({
 	}, [battleStep, nextOpponentMove, nextPlayerMove]);
 	//"OPPONENT_MOVE_SELECTION" to "MOVE_HANDLING"
 	useEffect(() => {
-		if (battleStep === 'OPPONENT_MOVE_SELECTION' && !nextOpponentMove) {
-			setNextOpponentMove({ type: 'BattleAttack', name: 'pound' });
+		if (
+			battleStep === 'OPPONENT_MOVE_SELECTION' &&
+			!nextOpponentMove &&
+			opponent
+		) {
+			setNextOpponentMove(opponent?.firstMove);
 			setBattleStep('MOVE_HANDLING');
 		}
-	}, [battleStep, nextOpponentMove]);
+	}, [battleStep, nextOpponentMove, opponent]);
 	//"MOVE_HANDLING" to "EXECUTE_PLAYER_MOVE"
 	useEffect(() => {
 		if (battleStep === 'MOVE_HANDLING') {
@@ -301,28 +301,6 @@ export const useBattleSteps = ({
 	const startCatchProcess = (x: CatchProcessInfo) => {
 		setBattleStep('CATCHING_PROCESS_1');
 		setInCatchProcess(x);
-	};
-
-	const applyAttackToPokemon = ({
-		attacker,
-		setAttacker,
-		target,
-		setTarget,
-	}: {
-		attacker: BattlePokemon;
-		setAttacker: (x: BattlePokemon) => void;
-		target: BattlePokemon;
-		setTarget: (x: BattlePokemon) => void;
-		attack: BattleAttack;
-	}) => {
-		setAttacker({
-			...attacker,
-			firstMove: {
-				...attacker.firstMove,
-				usedPP: attacker.firstMove.usedPP + 1,
-			},
-		});
-		setTarget({ ...target, damage: target.damage + 5 });
 	};
 
 	const nextMove = useMemo(() => {

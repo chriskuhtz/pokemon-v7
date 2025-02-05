@@ -91,12 +91,7 @@ export const BattleActions = ({
 					size={baseSize / 2}
 					onClick={() => setMenu('MAIN')}
 				/>
-				<MoveCard
-					move={firstMove}
-					onClick={() =>
-						chooseMove({ type: 'BattleAttack', name: firstMove.name })
-					}
-				/>
+				<MoveCard move={firstMove} onClick={() => chooseMove(firstMove)} />
 			</div>
 		);
 	}
