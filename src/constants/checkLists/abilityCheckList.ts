@@ -7,7 +7,7 @@ export const abilityCheckList: {
 	{
 		name: 'stench',
 		url: 'https://pokeapi.co/api/v2/ability/1/',
-		todos: ['flinching'],
+		handled: true,
 	},
 	{
 		name: 'drizzle',

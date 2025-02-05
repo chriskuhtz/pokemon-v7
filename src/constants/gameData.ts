@@ -23,7 +23,7 @@ export const testState: SaveFile = {
 			firstMove: { name: 'pound', usedPP: 0 },
 			damage: 0,
 			nature: 'adamant',
-			level: 5,
+			xp: 100000,
 			ability: 'stench',
 		},
 	],
@@ -48,7 +48,7 @@ export const testOpponent: OwnedPokemon = {
 	damage: 0,
 	firstMove: { name: 'pound', usedPP: 0 },
 	id: v4(),
-	level: 1,
+	xp: 1000000,
 	ability: 'stench',
 };
 

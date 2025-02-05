@@ -1,9 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import { animationTimer } from '../../../constants/gameData';
 import { applyAttackToPokemon } from '../../../functions/applyAttackToPokemon';
+import { determineCatchRate } from '../../../functions/determineCatchRate';
 import { isKO } from '../../../functions/isKo';
 import { receiveNewPokemonFunction } from '../../../functions/receiveNewPokemonFunction';
 import { reduceBattlePokemonToOwnedPokemon } from '../../../functions/reduceBattlePokemonToOwnedPokemon';
+import { targetFlinched } from '../../../functions/targetFlinched';
 import { BattleAttack } from '../../../interfaces/BattleAttack';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import {
@@ -14,7 +16,6 @@ import {
 import { PokeballType } from '../../../interfaces/Item';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { BattleStep } from '../types/BattleStep';
-import { targetFlinched } from '../../../functions/targetFlinched';
 
 export interface CatchProcessInfo {
 	pokemon: BattlePokemon;
@@ -49,9 +50,7 @@ export const useBattleSteps = ({
 	nextMove: BattleMove | undefined;
 } => {
 	const [battleStep, setBattleStep] = useState<BattleStep>('UNITIALIZED');
-	const [inCatchProcess, setInCatchProcess] = useState<
-		CatchProcessInfo | undefined
-	>();
+
 	const [usedItems, setUsedItems] = useState<Inventory>(EmptyInventory);
 	const [caughtPokemon, setCaughtPokemon] = useState<CatchProcessInfo[]>([]);
 	const [nextPlayerMove, setNextPlayerMove] = useState<
@@ -60,6 +59,25 @@ export const useBattleSteps = ({
 	const [nextOpponentMove, setNextOpponentMove] = useState<
 		BattleAttack | undefined
 	>();
+
+	const nextMove = useMemo(() => {
+		if (battleStep === 'EXECUTE_OPPONENT_MOVE') {
+			return nextOpponentMove;
+		}
+		if (
+			battleStep === 'EXECUTE_PLAYER_MOVE' ||
+			battleStep === 'CATCHING_PROCESS_1' ||
+			battleStep === 'CATCHING_PROCESS_2' ||
+			battleStep === 'CATCHING_PROCESS_3' ||
+			battleStep === 'CATCHING_PROCESS_4' ||
+			battleStep === 'CATCHING_SUCCESS' ||
+			battleStep === 'CATCHING_FAILURE'
+		) {
+			return nextPlayerMove;
+		}
+
+		return undefined;
+	}, [battleStep, nextOpponentMove, nextPlayerMove]);
 
 	//'OPPONENT_INTRO' to 'PLAYER_INTRO'
 	useEffect(() => {
@@ -139,7 +157,7 @@ export const useBattleSteps = ({
 				return;
 			}
 			if (nextPlayerMove?.type === 'CatchProcessInfo') {
-				startCatchProcess(nextPlayerMove);
+				setBattleStep('CATCHING_PROCESS_1');
 				return;
 			}
 			if (nextPlayerMove?.type === 'BattleAttack') {
@@ -239,62 +257,124 @@ export const useBattleSteps = ({
 		if (battleStep !== 'CATCHING_PROCESS_1') {
 			return;
 		}
-		const t = setTimeout(
-			() => setBattleStep('CATCHING_PROCESS_2'),
-			animationTimer
-		);
+		const t = setTimeout(() => {
+			setBattleStep('CATCHING_PROCESS_2');
+		}, animationTimer);
 
 		return () => clearTimeout(t);
 	}, [battleStep, setBattleStep]);
 	//'CATCHING_PROCESS_2' to 'CATCHING_PROCESS_3'
 	useEffect(() => {
-		if (battleStep !== 'CATCHING_PROCESS_2') {
-			return;
-		}
-		const t = setTimeout(
-			() => setBattleStep('CATCHING_PROCESS_3'),
-			animationTimer
-		);
-
-		return () => clearTimeout(t);
-	}, [battleStep, setBattleStep]);
-	//'CATCHING_PROCESS_3' to 'CATCHING_PROCESS_4'
-	useEffect(() => {
-		if (battleStep !== 'CATCHING_PROCESS_3') {
-			return;
-		}
-		const t = setTimeout(
-			() => setBattleStep('CATCHING_PROCESS_4'),
-			animationTimer
-		);
-
-		return () => clearTimeout(t);
-	}, [battleStep, setBattleStep]);
-	//'CATCHING_PROCESS_4' to 'CATCHING_SUCCESS'
-	useEffect(() => {
-		if (battleStep !== 'CATCHING_PROCESS_4') {
+		if (
+			battleStep !== 'CATCHING_PROCESS_2' ||
+			nextMove?.type !== 'CatchProcessInfo' ||
+			!opponent
+		) {
 			return;
 		}
 		const t = setTimeout(() => {
-			if (inCatchProcess) {
-				setUsedItems((i) => joinInventories(i, { [inCatchProcess.ball]: 1 }));
-				setCaughtPokemon((x) => [...x, inCatchProcess]);
-			}
-			setBattleStep('CATCHING_SUCCESS');
+			const catchRate = determineCatchRate(
+				nextMove.ball,
+				opponent,
+				1,
+				'STANDARD',
+				false
+			);
+			if (catchRate < Math.random()) {
+				setBattleStep('CATCHING_FAILURE');
+			} else setBattleStep('CATCHING_PROCESS_3');
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, inCatchProcess, setBattleStep]);
+	}, [battleStep, nextMove, opponent, setBattleStep]);
+	//'CATCHING_PROCESS_3' to 'CATCHING_PROCESS_4'
+	useEffect(() => {
+		if (
+			battleStep !== 'CATCHING_PROCESS_3' ||
+			nextMove?.type !== 'CatchProcessInfo' ||
+			!opponent
+		) {
+			return;
+		}
+		const t = setTimeout(() => {
+			const catchRate = determineCatchRate(
+				nextMove.ball,
+				opponent,
+				1,
+				'STANDARD',
+				false
+			);
+			if (catchRate < Math.random()) {
+				setBattleStep('CATCHING_FAILURE');
+			} else setBattleStep('CATCHING_PROCESS_4');
+		}, animationTimer);
+
+		return () => clearTimeout(t);
+	}, [battleStep, nextMove, opponent, setBattleStep]);
+	//'CATCHING_PROCESS_4' to 'CATCHING_SUCCESS' or 'CATCHING_FAILURE'
+	useEffect(() => {
+		if (
+			battleStep !== 'CATCHING_PROCESS_4' ||
+			nextMove?.type !== 'CatchProcessInfo' ||
+			!opponent
+		) {
+			return;
+		}
+		const t = setTimeout(() => {
+			const catchRate = determineCatchRate(
+				nextMove.ball,
+				opponent,
+				1,
+				'STANDARD',
+				false
+			);
+
+			if (catchRate < Math.random()) {
+				setBattleStep('CATCHING_FAILURE');
+			} else {
+				setCaughtPokemon((x) => [
+					...x,
+					{
+						pokemon: opponent,
+						ball: nextMove.ball,
+						type: 'CatchProcessInfo',
+					},
+				]);
+				setBattleStep('CATCHING_SUCCESS');
+			}
+		}, animationTimer);
+
+		return () => clearTimeout(t);
+	}, [battleStep, nextMove, opponent, setBattleStep]);
+	// 'CATCHING_FAILURE' to 'EXECUTE_OPPONENT_MOVE'
+	useEffect(() => {
+		if (battleStep !== 'CATCHING_FAILURE') {
+			return;
+		}
+		const t = setTimeout(() => {
+			setNextPlayerMove(undefined);
+			if (nextMove?.type === 'CatchProcessInfo') {
+				setUsedItems((i) => joinInventories(i, { [nextMove.ball]: 1 }));
+			}
+			setBattleStep('EXECUTE_OPPONENT_MOVE');
+		}, animationTimer);
+
+		return () => clearTimeout(t);
+	}, [battleStep, nextMove, setBattleStep]);
 	// 'CATCHING_SUCCESS' to 'BATTLE_WON'
 	useEffect(() => {
 		if (battleStep !== 'CATCHING_SUCCESS') {
 			return;
 		}
-		const t = setTimeout(() => setBattleStep('BATTLE_WON'), animationTimer);
+		const t = setTimeout(() => {
+			if (nextMove?.type === 'CatchProcessInfo') {
+				setUsedItems((i) => joinInventories(i, { [nextMove.ball]: 1 }));
+			}
+			setBattleStep('BATTLE_WON');
+		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, setBattleStep]);
-
+	}, [battleStep, nextMove, setBattleStep]);
 	// 'OPPONENT_FAINTING' to 'BATTLE_WON'
 	useEffect(() => {
 		if (battleStep !== 'OPPONENT_FAINTING') {
@@ -304,7 +384,6 @@ export const useBattleSteps = ({
 
 		return () => clearTimeout(t);
 	}, [battleStep, setBattleStep]);
-
 	// 'PLAYER_FAINTING' to 'BATTLE_LOST'
 	useEffect(() => {
 		if (battleStep !== 'PLAYER_FAINTING') {
@@ -314,7 +393,6 @@ export const useBattleSteps = ({
 
 		return () => clearTimeout(t);
 	}, [battleStep, setBattleStep]);
-
 	// handle 'BATTLE_WON'
 	useEffect(() => {
 		if (battleStep !== 'BATTLE_WON') {
@@ -370,6 +448,7 @@ export const useBattleSteps = ({
 					updatedPokemon
 				);
 			});
+
 			const newSaveFile: SaveFile = {
 				...initSaveFile,
 				inventory: joinInventories(initSaveFile.inventory, usedItems, true),
@@ -393,28 +472,6 @@ export const useBattleSteps = ({
 	const initBattle = () => {
 		setBattleStep('OPPONENT_INTRO');
 	};
-	const startCatchProcess = (x: CatchProcessInfo) => {
-		setBattleStep('CATCHING_PROCESS_1');
-		setInCatchProcess(x);
-	};
-
-	const nextMove = useMemo(() => {
-		if (battleStep === 'EXECUTE_OPPONENT_MOVE') {
-			return nextOpponentMove;
-		}
-		if (
-			battleStep === 'EXECUTE_PLAYER_MOVE' ||
-			battleStep === 'CATCHING_PROCESS_1' ||
-			battleStep === 'CATCHING_PROCESS_2' ||
-			battleStep === 'CATCHING_PROCESS_3' ||
-			battleStep === 'CATCHING_PROCESS_4' ||
-			battleStep === 'CATCHING_SUCCESS'
-		) {
-			return nextPlayerMove;
-		}
-
-		return undefined;
-	}, [battleStep, nextOpponentMove, nextPlayerMove]);
 
 	return {
 		nextMove,

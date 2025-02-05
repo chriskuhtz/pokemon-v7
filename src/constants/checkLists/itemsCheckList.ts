@@ -12,7 +12,7 @@ export const itemsCheckList: {
 	{
 		name: 'ultra-ball',
 		url: 'https://pokeapi.co/api/v2/item/2/',
-		todos: ['catch rates'],
+		todos: [],
 	},
 	{
 		name: 'great-ball',
