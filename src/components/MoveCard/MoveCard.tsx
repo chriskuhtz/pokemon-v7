@@ -1,5 +1,5 @@
 import { baseSize } from '../../constants/gameData';
-import { BattlePokemon } from '../../modules/Battle/hooks/useBattlePokemon';
+import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Card } from '../../uiComponents/Card/Card';
 
 export const MoveCard = ({

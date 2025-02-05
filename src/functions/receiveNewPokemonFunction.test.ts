@@ -12,6 +12,8 @@ describe('should handle receiving new pokemon', () => {
 			firstMove: { name: 'pound', usedPP: 0 },
 			nature: 'adamant',
 			damage: 0,
+			level: 5,
+			ability: 'stench',
 		};
 
 		const existingPokemon: OwnedPokemon[] = [];
@@ -30,6 +32,8 @@ describe('should handle receiving new pokemon', () => {
 			firstMove: { name: 'pound', usedPP: 0 },
 			nature: 'adamant',
 			damage: 0,
+			level: 5,
+			ability: 'stench',
 		};
 
 		const existingPokemon: OwnedPokemon[] = [

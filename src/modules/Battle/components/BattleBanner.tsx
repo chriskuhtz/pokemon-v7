@@ -3,10 +3,10 @@ import { battleSpriteSize } from '../../../constants/gameData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { Banner } from '../../../uiComponents/Banner/Banner';
-import { BattlePokemon } from '../hooks/useBattlePokemon';
 import { BattleMove } from '../hooks/useBattleSteps';
 import { BattleStep } from '../types/BattleStep';
 import { MoveExecutionBanner } from './MoveExecutionBanner';
+import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 export const BattleBanner = ({
 	opponent,
 	player,

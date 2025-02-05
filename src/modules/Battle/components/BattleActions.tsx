@@ -8,9 +8,9 @@ import { baseSize } from '../../../constants/gameData';
 import { Inventory } from '../../../interfaces/Inventory';
 import { isPokeball, PokeballType } from '../../../interfaces/Item';
 import { Card } from '../../../uiComponents/Card/Card';
-import { BattlePokemon } from '../hooks/useBattlePokemon';
 import { BattleMove } from '../hooks/useBattleSteps';
 import { BattleStep } from '../types/BattleStep';
+import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 export const BattleActions = ({
 	inventory,
 	chooseMove,

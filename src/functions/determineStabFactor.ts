@@ -1,7 +1,5 @@
-import {
-	BattleAttack,
-	BattlePokemon,
-} from '../modules/Battle/hooks/useBattlePokemon';
+import { BattleAttack } from '../interfaces/BattleAttack';
+import { BattlePokemon } from '../interfaces/BattlePokemon';
 
 export const determineStabFactor = (
 	attacker: BattlePokemon,

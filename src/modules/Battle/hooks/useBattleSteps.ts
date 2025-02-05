@@ -12,7 +12,8 @@ import {
 import { PokeballType } from '../../../interfaces/Item';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { BattleStep } from '../types/BattleStep';
-import { BattleAttack, BattlePokemon } from './useBattlePokemon';
+import { BattleAttack } from '../../../interfaces/BattleAttack';
+import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
 export interface CatchProcessInfo {
 	pokemon: BattlePokemon;

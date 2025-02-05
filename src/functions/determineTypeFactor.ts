@@ -1,8 +1,6 @@
+import { BattleAttack } from '../interfaces/BattleAttack';
+import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { typeEffectivenessChart } from '../interfaces/PokemonType';
-import {
-	BattleAttack,
-	BattlePokemon,
-} from '../modules/Battle/hooks/useBattlePokemon';
 
 export const determineTypeFactor = (
 	target: BattlePokemon,
