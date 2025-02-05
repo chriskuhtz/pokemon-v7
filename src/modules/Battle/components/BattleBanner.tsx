@@ -1,12 +1,12 @@
 import React from 'react';
 import { battleSpriteSize } from '../../../constants/gameData';
-import { determineTypeFactor } from '../../../functions/determineTypeFactor';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { Banner } from '../../../uiComponents/Banner/Banner';
 import { BattlePokemon } from '../hooks/useBattlePokemon';
 import { BattleMove } from '../hooks/useBattleSteps';
 import { BattleStep } from '../types/BattleStep';
+import { MoveExecutionBanner } from './MoveExecutionBanner';
 export const BattleBanner = ({
 	opponent,
 	player,
@@ -57,29 +57,11 @@ export const BattleBanner = ({
 		opponent
 	) {
 		return (
-			<Banner>
-				{' '}
-				<img
-					height={battleSpriteSize}
-					width={battleSpriteSize}
-					src={getPokemonSprite(player.dexId)}
-				/>
-				<div>
-					<h3>
-						{player.data.name} used {nextMove.name} against {opponent.data.name}
-					</h3>
-					{determineTypeFactor(opponent, nextMove) > 1 && (
-						<h5>It is very effective</h5>
-					)}
-					{determineTypeFactor(opponent, nextMove) < 1 &&
-						determineTypeFactor(opponent, nextMove) !== 0 && (
-							<h5>It is not very effective</h5>
-						)}
-					{determineTypeFactor(opponent, nextMove) === 0 && (
-						<h5>It has no effect</h5>
-					)}
-				</div>
-			</Banner>
+			<MoveExecutionBanner
+				target={opponent}
+				attacker={player}
+				attack={nextMove}
+			/>
 		);
 	}
 	if (
@@ -87,29 +69,11 @@ export const BattleBanner = ({
 		nextMove?.type === 'BattleAttack'
 	) {
 		return (
-			<Banner>
-				<div>
-					<h3>
-						{opponent.data.name} used {nextMove.name} against {player.data.name}
-					</h3>
-					{determineTypeFactor(player, nextMove) > 1 && (
-						<h5>It is very effective</h5>
-					)}
-					{determineTypeFactor(player, nextMove) < 1 &&
-						determineTypeFactor(player, nextMove) !== 0 && (
-							<h5>It is not very effective</h5>
-						)}
-					{determineTypeFactor(player, nextMove) === 0 && (
-						<h5>It has no effect</h5>
-					)}
-				</div>
-
-				<img
-					height={battleSpriteSize}
-					width={battleSpriteSize}
-					src={getPokemonSprite(opponent.dexId)}
-				/>
-			</Banner>
+			<MoveExecutionBanner
+				attacker={opponent}
+				target={player}
+				attack={nextMove}
+			/>
 		);
 	}
 	if (
