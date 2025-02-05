@@ -12,7 +12,7 @@ describe('should handle receiving new pokemon', () => {
 			firstMove: { name: 'pound', usedPP: 0 },
 			nature: 'adamant',
 			damage: 0,
-			level: 5,
+			xp: 100,
 			ability: 'stench',
 		};
 
@@ -32,7 +32,7 @@ describe('should handle receiving new pokemon', () => {
 			firstMove: { name: 'pound', usedPP: 0 },
 			nature: 'adamant',
 			damage: 0,
-			level: 5,
+			xp: 100,
 			ability: 'stench',
 		};
 

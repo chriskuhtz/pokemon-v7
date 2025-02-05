@@ -125,6 +125,13 @@ export const BattleBanner = ({
 			</Banner>
 		);
 	}
+	if (battleStep === 'CATCHING_FAILURE') {
+		return (
+			<Banner>
+				<h2> {opponent.data.name} broke free!</h2>
+			</Banner>
+		);
+	}
 	if (battleStep === 'PLAYER_FAINTING') {
 		return (
 			<Banner>

@@ -1,5 +1,6 @@
 import { HpBar } from '../../../components/HpBar/HpBar';
 import { battleSpriteSize } from '../../../constants/gameData';
+import { calculateLevelData } from '../../../functions/calculateLevelData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
@@ -39,7 +40,10 @@ export const PlayerLane = ({
 				height={battleSpriteSize}
 				src={getPokemonSprite(pokemon.dexId, 'back')}
 			/>
-			<HpBar max={pokemon.stats.hp} damage={pokemon.damage} />
+			<div>
+				Lvl: {calculateLevelData(pokemon.xp).level}
+				<HpBar max={pokemon.stats.hp} damage={pokemon.damage} />
+			</div>
 		</div>
 	);
 };

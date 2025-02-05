@@ -13,7 +13,7 @@ export const reduceBattlePokemonToOwnedPokemon = (
 		ownerId: newMon.ownerId,
 		nature: newMon.nature,
 		onTeam: newMon.onTeam,
-		level: newMon.level,
+		xp: newMon.xp,
 		ability: newMon.ability,
 	};
 };

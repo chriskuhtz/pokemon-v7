@@ -1,11 +1,12 @@
 import { Nature } from '../interfaces/Natures';
 import { StatInfo } from '../interfaces/PokemonData';
 import { StatObject } from '../interfaces/StatObject';
+import { calculateLevelData } from './calculateLevelData';
 import { calculateStat } from './calculateStat';
 
 export const getStats = (
 	stats: StatInfo[],
-	level: number,
+	xp: number,
 	nature: Nature,
 	evs?: StatObject
 ): StatObject => {
@@ -19,6 +20,8 @@ export const getStats = (
 	const baseDef = stats.find((s) => s.stat.name === 'spdef')?.base_stat ?? 100;
 	const baseSpeed =
 		stats.find((s) => s.stat.name === 'speed')?.base_stat ?? 100;
+
+	const { level } = calculateLevelData(xp);
 
 	return {
 		hp: calculateStat(baseHp, 0, evs?.['hp'] ?? 0, nature, level, 'hp'),

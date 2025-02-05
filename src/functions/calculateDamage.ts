@@ -1,5 +1,6 @@
 import { BattleAttack } from '../interfaces/BattleAttack';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { calculateLevelData } from './calculateLevelData';
 import { determineStabFactor } from './determineStabFactor';
 import { determineTypeFactor } from './determineTypeFactor';
 
@@ -13,7 +14,9 @@ export const calculateDamage = (
 		return 0;
 	}
 
-	const levelFactor = (2 * attacker.level) / 5 + 2;
+	const { level } = calculateLevelData(attacker.xp);
+
+	const levelFactor = (2 * level) / 5 + 2;
 	const power = attack.data.power ?? 0;
 	const atk = attacker.stats.attack;
 	const def = target.stats.defense;
