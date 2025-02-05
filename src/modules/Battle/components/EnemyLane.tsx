@@ -3,8 +3,8 @@ import { battleSpriteSize } from '../../../constants/gameData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { PokeballType } from '../../../interfaces/Item';
-import { BattleStep } from '../Battle';
 import { BattlePokemon } from '../hooks/useBattlePokemon';
+import { BattleStep } from '../types/BattleStep';
 
 export const EnemyLane = ({
 	opponentPokemon,

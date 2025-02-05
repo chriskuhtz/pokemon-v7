@@ -43,7 +43,6 @@ export const useBattleSteps = ({
 }: UseBattleStepsProps): {
 	battleStep: BattleStep;
 	initBattle: () => void;
-	inCatchProcess: CatchProcessInfo | undefined;
 	setNextPlayerMove: (x: BattleMove | undefined) => void;
 	nextMove: BattleMove | undefined;
 } => {
@@ -139,6 +138,7 @@ export const useBattleSteps = ({
 			}
 			if (nextPlayerMove?.type === 'CatchProcessInfo') {
 				startCatchProcess(nextPlayerMove);
+				return;
 			}
 			if (nextPlayerMove?.type === 'BattleAttack') {
 				const { updatedTarget } = applyAttackToPokemon({
@@ -367,7 +367,14 @@ export const useBattleSteps = ({
 		if (battleStep === 'EXECUTE_OPPONENT_MOVE') {
 			return nextOpponentMove;
 		}
-		if (battleStep === 'EXECUTE_PLAYER_MOVE') {
+		if (
+			battleStep === 'EXECUTE_PLAYER_MOVE' ||
+			battleStep === 'CATCHING_PROCESS_1' ||
+			battleStep === 'CATCHING_PROCESS_2' ||
+			battleStep === 'CATCHING_PROCESS_3' ||
+			battleStep === 'CATCHING_PROCESS_4' ||
+			battleStep === 'CATCHING_SUCCESS'
+		) {
 			return nextPlayerMove;
 		}
 
@@ -378,7 +385,6 @@ export const useBattleSteps = ({
 		nextMove,
 		battleStep,
 		initBattle,
-		inCatchProcess,
 		setNextPlayerMove,
 	};
 };
