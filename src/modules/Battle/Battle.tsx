@@ -52,8 +52,8 @@ export const Battle = ({
 			<BattleBanner
 				nextMove={nextMove}
 				battleStep={battleStep}
-				opponent={{ ...slot3, name: slot3.data.name }}
-				player={{ ...slot1, name: slot1.data.name }}
+				opponent={slot3}
+				player={slot1}
 				voidSteps={['MOVE_SELECTION', 'OPPONENT_EMERGE', 'PLAYER_EMERGE']}
 			/>
 			<strong style={{ position: 'absolute' }}>BattleStep: {battleStep}</strong>

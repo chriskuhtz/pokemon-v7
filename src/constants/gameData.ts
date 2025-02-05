@@ -1,4 +1,3 @@
-import { getRandomPokemonId } from '../functions/getRandomPokemonId';
 import { generateInventory } from '../interfaces/Inventory';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { SaveFile } from '../interfaces/SaveFile';
@@ -23,6 +22,7 @@ export const testState: SaveFile = {
 			firstMove: { name: 'pound', usedPP: 0 },
 			damage: 0,
 			nature: 'adamant',
+			level: 5,
 		},
 	],
 	meta: {
@@ -39,13 +39,14 @@ export const testState: SaveFile = {
 };
 
 export const testOpponent: OwnedPokemon = {
-	dexId: getRandomPokemonId(),
+	dexId: 92, //getRandomPokemonId(),
 	nature: 'adamant',
 	ownerId: 'oppo',
 	ball: 'cherish-ball',
 	damage: 0,
 	firstMove: { name: 'pound', usedPP: 0 },
 	id: 'oppoMon',
+	level: 1,
 };
 
 export const localStorageId = 'pokemonv7SaveFile';

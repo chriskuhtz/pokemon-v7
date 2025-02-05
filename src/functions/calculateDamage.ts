@@ -10,8 +10,6 @@ export const calculateDamage = (
 	target: BattlePokemon,
 	attack: BattleAttack
 ): number => {
-	console.log(attack);
-
 	if (attack.data.damage_class.name !== 'physical') {
 		console.error('what is this', attack);
 		return 0;
@@ -35,6 +33,10 @@ export const calculateDamage = (
 	const typeFactor = determineTypeFactor(target, attack);
 	const burnFactor = 1;
 	const otherFactor = 1;
+
+	if (typeFactor === 0) {
+		return 0;
+	}
 
 	return Math.max(
 		Math.floor(

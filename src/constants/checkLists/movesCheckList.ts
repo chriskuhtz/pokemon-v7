@@ -7,13 +7,8 @@ export const movesCheckList: {
 	{
 		name: 'pound',
 		url: 'https://pokeapi.co/api/v2/move/1/',
-		todos: [
-			'actually calc damage',
-			'K.O.ing',
-			'winning/losing battle',
-			'type effectiveness',
-			'stab bonus',
-		],
+		todos: [],
+		handled: true,
 	},
 	{
 		name: 'karate-chop',

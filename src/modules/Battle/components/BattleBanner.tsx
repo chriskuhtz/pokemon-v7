@@ -1,8 +1,10 @@
 import React from 'react';
 import { battleSpriteSize } from '../../../constants/gameData';
+import { determineTypeFactor } from '../../../functions/determineTypeFactor';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { Banner } from '../../../uiComponents/Banner/Banner';
+import { BattlePokemon } from '../hooks/useBattlePokemon';
 import { BattleMove } from '../hooks/useBattleSteps';
 import { BattleStep } from '../types/BattleStep';
 export const BattleBanner = ({
@@ -12,14 +14,8 @@ export const BattleBanner = ({
 	voidSteps,
 	nextMove,
 }: {
-	opponent: {
-		name: string;
-		dexId: number;
-	};
-	player: {
-		name: string;
-		dexId: number;
-	};
+	opponent: BattlePokemon;
+	player: BattlePokemon;
 	battleStep: BattleStep;
 	voidSteps: BattleStep[];
 	nextMove: BattleMove | undefined;
@@ -31,7 +27,7 @@ export const BattleBanner = ({
 		return (
 			<Banner>
 				<React.Fragment>
-					Encountered a wild {opponent.name}{' '}
+					Encountered a wild {opponent.data.name}{' '}
 					<img
 						height={battleSpriteSize}
 						width={battleSpriteSize}
@@ -50,14 +46,15 @@ export const BattleBanner = ({
 						width={battleSpriteSize}
 						src={getPokemonSprite(player.dexId)}
 					/>{' '}
-					Let's Go {player.name}
+					Let's Go {player.data.name}
 				</React.Fragment>
 			</Banner>
 		);
 	}
 	if (
 		battleStep === 'EXECUTE_PLAYER_MOVE' &&
-		nextMove?.type === 'BattleAttack'
+		nextMove?.type === 'BattleAttack' &&
+		opponent
 	) {
 		return (
 			<Banner>
@@ -67,7 +64,21 @@ export const BattleBanner = ({
 					width={battleSpriteSize}
 					src={getPokemonSprite(player.dexId)}
 				/>
-				{player.name} used {nextMove.name} against {opponent.name}
+				<div>
+					<h3>
+						{player.data.name} used {nextMove.name} against {opponent.data.name}
+					</h3>
+					{determineTypeFactor(opponent, nextMove) > 1 && (
+						<h5>It is very effective</h5>
+					)}
+					{determineTypeFactor(opponent, nextMove) < 1 &&
+						determineTypeFactor(opponent, nextMove) !== 0 && (
+							<h5>It is not very effective</h5>
+						)}
+					{determineTypeFactor(opponent, nextMove) === 0 && (
+						<h5>It has no effect</h5>
+					)}
+				</div>
 			</Banner>
 		);
 	}
@@ -77,7 +88,22 @@ export const BattleBanner = ({
 	) {
 		return (
 			<Banner>
-				{opponent.name} used {nextMove.name} against {player.name}
+				<div>
+					<h3>
+						{opponent.data.name} used {nextMove.name} against {player.data.name}
+					</h3>
+					{determineTypeFactor(player, nextMove) > 1 && (
+						<h5>It is very effective</h5>
+					)}
+					{determineTypeFactor(player, nextMove) < 1 &&
+						determineTypeFactor(player, nextMove) !== 0 && (
+							<h5>It is not very effective</h5>
+						)}
+					{determineTypeFactor(player, nextMove) === 0 && (
+						<h5>It has no effect</h5>
+					)}
+				</div>
+
 				<img
 					height={battleSpriteSize}
 					width={battleSpriteSize}
@@ -92,7 +118,7 @@ export const BattleBanner = ({
 	) {
 		return (
 			<Banner>
-				You throw a {nextMove.ball} at the wild {opponent.name}
+				You throw a {nextMove.ball} at the wild {opponent.data.name}
 				<img
 					style={{ padding: '1rem 0' }}
 					width={battleSpriteSize / 2}
@@ -106,7 +132,7 @@ export const BattleBanner = ({
 	if (battleStep === 'CATCHING_SUCCESS') {
 		return (
 			<Banner>
-				<h2>The wild {opponent.name} was caught!</h2>
+				<h2>The wild {opponent.data.name} was caught!</h2>
 			</Banner>
 		);
 	}
@@ -120,14 +146,14 @@ export const BattleBanner = ({
 					src={getPokemonSprite(player.dexId)}
 					style={{ filter: 'grayScale(1)' }}
 				/>
-				{player.name} fainted
+				{player.data.name} fainted
 			</Banner>
 		);
 	}
 	if (battleStep === 'OPPONENT_FAINTING') {
 		return (
 			<Banner>
-				{opponent.name} fainted
+				{opponent.data.name} fainted
 				<img
 					height={battleSpriteSize}
 					width={battleSpriteSize}
