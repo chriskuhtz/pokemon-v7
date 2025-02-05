@@ -13,6 +13,7 @@ export interface OwnedPokemon {
 	//primaryAilment?: PrimaryAilment;
 	ball: PokeballType;
 	nature: Nature;
+	level: number;
 	//shiny?: boolean;
 	//friendship: number;
 	//usedPowerPoints: UsedPowerPoints;

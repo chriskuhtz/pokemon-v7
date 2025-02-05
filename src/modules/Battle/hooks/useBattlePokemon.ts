@@ -39,7 +39,7 @@ export const useBattlePokemon = (
 					type: 'BattleAttack',
 				},
 				data: res,
-				stats: getStats(res.stats, 5, pokemon.nature),
+				stats: getStats(res.stats, pokemon.level, pokemon.nature),
 			});
 		}
 	}, [current, firstMoveData, pokemon, res]);

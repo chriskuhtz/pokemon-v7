@@ -16,14 +16,19 @@ export const applyAttackToPokemon = ({
 	target: BattlePokemon;
 	setTarget: (x: BattlePokemon) => void;
 	attack: BattleAttack;
-}) => {
+}): { updatedAttacker: BattlePokemon; updatedTarget: BattlePokemon } => {
 	const damage = calculateDamage(attacker, target, attack);
-	setAttacker({
+
+	const updatedAttacker = {
 		...attacker,
 		firstMove: {
 			...attacker.firstMove,
 			usedPP: attacker.firstMove.usedPP + 1,
 		},
-	});
-	setTarget({ ...target, damage: target.damage + damage });
+	};
+	const updatedTarget = { ...target, damage: target.damage + damage };
+	setAttacker(updatedAttacker);
+	setTarget(updatedTarget);
+
+	return { updatedAttacker, updatedTarget };
 };

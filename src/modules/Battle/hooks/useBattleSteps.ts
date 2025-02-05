@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { animationTimer } from '../../../constants/gameData';
 import { applyAttackToPokemon } from '../../../functions/applyAttackToPokemon';
+import { isKO } from '../../../functions/isKo';
 import { receiveNewPokemonFunction } from '../../../functions/receiveNewPokemonFunction';
 import { reduceBattlePokemonToOwnedPokemon } from '../../../functions/reduceBattlePokemonToOwnedPokemon';
 import {
@@ -10,7 +11,7 @@ import {
 } from '../../../interfaces/Inventory';
 import { PokeballType } from '../../../interfaces/Item';
 import { SaveFile } from '../../../interfaces/SaveFile';
-import { BattleStep } from '../Battle';
+import { BattleStep } from '../types/BattleStep';
 import { BattleAttack, BattlePokemon } from './useBattlePokemon';
 
 export interface CatchProcessInfo {
@@ -30,6 +31,7 @@ interface UseBattleStepsProps {
 	setOpponent: (x: BattlePokemon) => void;
 	setPlayer: (x: BattlePokemon) => void;
 }
+
 export const useBattleSteps = ({
 	initSaveFile,
 	syncAfterBattleEnd,
@@ -139,7 +141,7 @@ export const useBattleSteps = ({
 				startCatchProcess(nextPlayerMove);
 			}
 			if (nextPlayerMove?.type === 'BattleAttack') {
-				applyAttackToPokemon({
+				const { updatedTarget } = applyAttackToPokemon({
 					attack: nextPlayerMove,
 					attacker: player,
 					target: opponent,
@@ -147,6 +149,11 @@ export const useBattleSteps = ({
 					setTarget: setOpponent,
 				});
 				setNextPlayerMove(undefined);
+				if (isKO(updatedTarget)) {
+					setBattleStep('OPPONENT_FAINTING');
+					return;
+				}
+
 				setBattleStep('EXECUTE_OPPONENT_MOVE');
 			}
 		}, animationTimer);
@@ -166,7 +173,7 @@ export const useBattleSteps = ({
 			}
 
 			if (nextOpponentMove?.type === 'BattleAttack') {
-				applyAttackToPokemon({
+				const { updatedTarget } = applyAttackToPokemon({
 					attack: nextOpponentMove,
 					target: player,
 					attacker: opponent,
@@ -174,6 +181,10 @@ export const useBattleSteps = ({
 					setTarget: setPlayer,
 				});
 				setNextOpponentMove(undefined);
+				if (isKO(updatedTarget)) {
+					setBattleStep('PLAYER_FAINTING');
+					return;
+				}
 				setBattleStep('MOVE_SELECTION');
 			}
 		}, animationTimer);
@@ -248,18 +259,67 @@ export const useBattleSteps = ({
 
 		return () => clearTimeout(t);
 	}, [battleStep, setBattleStep]);
-	// Knockout to 'BATTLE_WON'/"BATTLE_LOST"
+
+	// 'OPPONENT_FAINTING' to 'BATTLE_WON'
 	useEffect(() => {
-		if (battleStep !== 'CATCHING_SUCCESS') {
+		if (battleStep !== 'OPPONENT_FAINTING') {
 			return;
 		}
 		const t = setTimeout(() => setBattleStep('BATTLE_WON'), animationTimer);
 
 		return () => clearTimeout(t);
 	}, [battleStep, setBattleStep]);
+
+	// 'PLAYER_FAINTING' to 'BATTLE_LOST'
+	useEffect(() => {
+		if (battleStep !== 'PLAYER_FAINTING') {
+			return;
+		}
+		const t = setTimeout(() => setBattleStep('BATTLE_LOST'), animationTimer);
+
+		return () => clearTimeout(t);
+	}, [battleStep, setBattleStep]);
+
 	// handle 'BATTLE_WON'
 	useEffect(() => {
-		if (battleStep !== 'BATTLE_WON' && battleStep !== 'BATTLE_LOST') {
+		if (battleStep !== 'BATTLE_WON') {
+			return;
+		}
+		const t = setTimeout(() => {
+			let updatedPokemon = [...initSaveFile.pokemon];
+
+			caughtPokemon.forEach(({ pokemon, ball }) => {
+				updatedPokemon = receiveNewPokemonFunction(
+					reduceBattlePokemonToOwnedPokemon({
+						...pokemon,
+						ownerId: initSaveFile.playerId,
+						ball,
+					}),
+					updatedPokemon
+				);
+			});
+			const newSaveFile: SaveFile = {
+				...initSaveFile,
+				inventory: joinInventories(initSaveFile.inventory, usedItems, true),
+				pokemon: updatedPokemon,
+			};
+			syncAfterBattleEnd(newSaveFile);
+			goBack();
+		}, animationTimer);
+
+		return () => clearTimeout(t);
+	}, [
+		battleStep,
+		caughtPokemon,
+		goBack,
+		initSaveFile,
+		setBattleStep,
+		syncAfterBattleEnd,
+		usedItems,
+	]);
+	// handle "BATTLE_LOST"
+	useEffect(() => {
+		if (battleStep !== 'BATTLE_LOST') {
 			return;
 		}
 		const t = setTimeout(() => {

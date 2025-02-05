@@ -17,9 +17,7 @@ export const calculateDamage = (
 		return 0;
 	}
 
-	const level = 5;
-
-	const levelFactor = (2 * level) / 5 + 2;
+	const levelFactor = (2 * attacker.level) / 5 + 2;
 	const power = attack.data.power ?? 0;
 	const atk = attacker.stats.attack;
 	const def = target.stats.defense;

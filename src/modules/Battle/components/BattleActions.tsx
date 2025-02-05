@@ -8,14 +8,13 @@ import { baseSize } from '../../../constants/gameData';
 import { Inventory } from '../../../interfaces/Inventory';
 import { isPokeball, PokeballType } from '../../../interfaces/Item';
 import { Card } from '../../../uiComponents/Card/Card';
-import { BattleStep } from '../Battle';
 import { BattlePokemon } from '../hooks/useBattlePokemon';
 import { BattleMove } from '../hooks/useBattleSteps';
+import { BattleStep } from '../types/BattleStep';
 
 export const BattleActions = ({
 	inventory,
 	chooseMove,
-	voidSteps,
 	battleStep,
 	firstMove,
 	opponent,
@@ -24,7 +23,6 @@ export const BattleActions = ({
 	chooseMove: (x: BattleMove) => void;
 	battleStep: BattleStep;
 	firstMove: BattlePokemon['firstMove'];
-	voidSteps: BattleStep[];
 	opponent: BattlePokemon;
 }) => {
 	const [menu, setMenu] = useState<'MAIN' | 'BALLS' | 'MOVES'>('MAIN');
@@ -32,7 +30,7 @@ export const BattleActions = ({
 		([item]) => isPokeball(item)
 	) as [PokeballType, number][];
 
-	if (voidSteps.includes(battleStep)) {
+	if (battleStep !== 'MOVE_SELECTION') {
 		return <></>;
 	}
 

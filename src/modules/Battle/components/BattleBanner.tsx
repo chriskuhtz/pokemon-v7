@@ -3,8 +3,8 @@ import { battleSpriteSize } from '../../../constants/gameData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { Banner } from '../../../uiComponents/Banner/Banner';
-import { BattleStep } from '../Battle';
 import { BattleMove } from '../hooks/useBattleSteps';
+import { BattleStep } from '../types/BattleStep';
 export const BattleBanner = ({
 	opponent,
 	player,
@@ -107,6 +107,33 @@ export const BattleBanner = ({
 		return (
 			<Banner>
 				<h2>The wild {opponent.name} was caught!</h2>
+			</Banner>
+		);
+	}
+	if (battleStep === 'PLAYER_FAINTING') {
+		return (
+			<Banner>
+				{' '}
+				<img
+					height={battleSpriteSize}
+					width={battleSpriteSize}
+					src={getPokemonSprite(player.dexId)}
+					style={{ filter: 'grayScale(1)' }}
+				/>
+				{player.name} fainted
+			</Banner>
+		);
+	}
+	if (battleStep === 'OPPONENT_FAINTING') {
+		return (
+			<Banner>
+				{opponent.name} fainted
+				<img
+					height={battleSpriteSize}
+					width={battleSpriteSize}
+					src={getPokemonSprite(opponent.dexId)}
+					style={{ filter: 'grayScale(1)' }}
+				/>
 			</Banner>
 		);
 	}
