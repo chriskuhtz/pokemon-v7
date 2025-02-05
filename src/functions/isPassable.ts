@@ -6,7 +6,7 @@ export const isPassable = (
 ): boolean => {
 	const nextField = map.tileMap[field.y][field.x];
 
-	if (nextField !== 0) {
+	if (nextField >= 2) {
 		return false;
 	}
 

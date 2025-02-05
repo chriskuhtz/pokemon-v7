@@ -2,8 +2,8 @@ import React from 'react';
 import { battleSpriteSize } from '../../../constants/gameData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
+import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Banner } from '../../../uiComponents/Banner/Banner';
-import { BattlePokemon } from '../hooks/useBattlePokemon';
 import { BattleMove } from '../hooks/useBattleSteps';
 import { BattleStep } from '../types/BattleStep';
 import { MoveExecutionBanner } from './MoveExecutionBanner';
@@ -76,6 +76,32 @@ export const BattleBanner = ({
 			/>
 		);
 	}
+	if (battleStep === 'OPPONENT_FLINCHED') {
+		return (
+			<Banner>
+				{opponent.data.name} flinched
+				<img
+					style={{ padding: '1rem 0' }}
+					width={battleSpriteSize / 2}
+					height={battleSpriteSize / 2}
+					src={getPokemonSprite(opponent.dexId)}
+				/>
+			</Banner>
+		);
+	}
+	if (battleStep === 'PLAYER_FLINCHED') {
+		return (
+			<Banner>
+				<img
+					style={{ padding: '1rem 0' }}
+					width={battleSpriteSize / 2}
+					height={battleSpriteSize / 2}
+					src={getPokemonSprite(player.dexId)}
+				/>{' '}
+				{player.data.name} flinched
+			</Banner>
+		);
+	}
 	if (
 		battleStep === 'CATCHING_PROCESS_1' &&
 		nextMove?.type === 'CatchProcessInfo'
@@ -92,7 +118,6 @@ export const BattleBanner = ({
 			</Banner>
 		);
 	}
-
 	if (battleStep === 'CATCHING_SUCCESS') {
 		return (
 			<Banner>

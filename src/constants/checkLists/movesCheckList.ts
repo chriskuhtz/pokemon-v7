@@ -7,7 +7,6 @@ export const movesCheckList: {
 	{
 		name: 'pound',
 		url: 'https://pokeapi.co/api/v2/move/1/',
-		todos: [],
 		handled: true,
 	},
 	{

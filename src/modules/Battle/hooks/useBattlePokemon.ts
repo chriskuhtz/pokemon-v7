@@ -2,21 +2,8 @@ import { useEffect, useState } from 'react';
 import { getStats } from '../../../functions/getStats';
 import { useGetMoveData } from '../../../hooks/useGetMoveData';
 import { useGetPokemonData } from '../../../hooks/useGetPokemonData';
-import { MoveDto } from '../../../interfaces/Move';
+import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
-import { PokemonData } from '../../../interfaces/PokemonData';
-import { StatObject } from '../../../interfaces/StatObject';
-
-export type BattleAttack = OwnedPokemon['firstMove'] & {
-	data: MoveDto;
-	type: 'BattleAttack';
-};
-
-export interface BattlePokemon extends OwnedPokemon {
-	stats: StatObject;
-	firstMove: BattleAttack;
-	data: PokemonData;
-}
 
 export const useBattlePokemon = (
 	pokemon: OwnedPokemon

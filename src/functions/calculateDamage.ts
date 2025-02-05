@@ -1,7 +1,5 @@
-import {
-	BattleAttack,
-	BattlePokemon,
-} from '../modules/Battle/hooks/useBattlePokemon';
+import { BattleAttack } from '../interfaces/BattleAttack';
+import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { determineStabFactor } from './determineStabFactor';
 import { determineTypeFactor } from './determineTypeFactor';
 

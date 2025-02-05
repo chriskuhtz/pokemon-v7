@@ -1,8 +1,6 @@
+import { BattleAttack } from '../interfaces/BattleAttack';
+import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { typeEffectivenessChart } from '../interfaces/PokemonType';
-import {
-	BattleAttack,
-	BattlePokemon,
-} from '../modules/Battle/hooks/useBattlePokemon';
 
 export const determineTypeFactor = (
 	target: BattlePokemon,
@@ -11,14 +9,14 @@ export const determineTypeFactor = (
 	let res = 1;
 	const targetTypes = target.data.types.map((t) => t.type.name);
 
-	targetTypes.forEach((t) => {
-		const effectiveness = typeEffectivenessChart[t];
+	const effectiveness = typeEffectivenessChart[attack.data.type.name];
 
-		if (effectiveness.notvery.includes(attack.data.type.name)) {
+	targetTypes.forEach((t) => {
+		if (effectiveness.isNotVeryEffectiveAgainst.includes(t)) {
 			res /= 2;
-		} else if (effectiveness.superEffective.includes(attack.data.type.name)) {
+		} else if (effectiveness.isSuperEffectiveAgainst.includes(t)) {
 			res *= 2;
-		} else if (effectiveness.none.includes(attack.data.type.name)) {
+		} else if (effectiveness.doesntEffect.includes(t)) {
 			res = 0;
 		}
 	});

@@ -1,3 +1,4 @@
+import { v4 } from 'uuid';
 import { generateInventory } from '../interfaces/Inventory';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { SaveFile } from '../interfaces/SaveFile';
@@ -23,6 +24,7 @@ export const testState: SaveFile = {
 			damage: 0,
 			nature: 'adamant',
 			level: 5,
+			ability: 'stench',
 		},
 	],
 	meta: {
@@ -39,14 +41,15 @@ export const testState: SaveFile = {
 };
 
 export const testOpponent: OwnedPokemon = {
-	dexId: 92, //getRandomPokemonId(),
+	dexId: 1,
 	nature: 'adamant',
 	ownerId: 'oppo',
 	ball: 'cherish-ball',
 	damage: 0,
 	firstMove: { name: 'pound', usedPP: 0 },
-	id: 'oppoMon',
+	id: v4(),
 	level: 1,
+	ability: 'stench',
 };
 
 export const localStorageId = 'pokemonv7SaveFile';

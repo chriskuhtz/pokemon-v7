@@ -4,6 +4,8 @@ import { applyAttackToPokemon } from '../../../functions/applyAttackToPokemon';
 import { isKO } from '../../../functions/isKo';
 import { receiveNewPokemonFunction } from '../../../functions/receiveNewPokemonFunction';
 import { reduceBattlePokemonToOwnedPokemon } from '../../../functions/reduceBattlePokemonToOwnedPokemon';
+import { BattleAttack } from '../../../interfaces/BattleAttack';
+import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import {
 	EmptyInventory,
 	Inventory,
@@ -12,7 +14,7 @@ import {
 import { PokeballType } from '../../../interfaces/Item';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { BattleStep } from '../types/BattleStep';
-import { BattleAttack, BattlePokemon } from './useBattlePokemon';
+import { targetFlinched } from '../../../functions/targetFlinched';
 
 export interface CatchProcessInfo {
 	pokemon: BattlePokemon;
@@ -43,7 +45,6 @@ export const useBattleSteps = ({
 }: UseBattleStepsProps): {
 	battleStep: BattleStep;
 	initBattle: () => void;
-	inCatchProcess: CatchProcessInfo | undefined;
 	setNextPlayerMove: (x: BattleMove | undefined) => void;
 	nextMove: BattleMove | undefined;
 } => {
@@ -139,6 +140,7 @@ export const useBattleSteps = ({
 			}
 			if (nextPlayerMove?.type === 'CatchProcessInfo') {
 				startCatchProcess(nextPlayerMove);
+				return;
 			}
 			if (nextPlayerMove?.type === 'BattleAttack') {
 				const { updatedTarget } = applyAttackToPokemon({
@@ -151,6 +153,10 @@ export const useBattleSteps = ({
 				setNextPlayerMove(undefined);
 				if (isKO(updatedTarget)) {
 					setBattleStep('OPPONENT_FAINTING');
+					return;
+				}
+				if (targetFlinched(player, opponent, nextPlayerMove)) {
+					setBattleStep('OPPONENT_FLINCHED');
 					return;
 				}
 
@@ -185,6 +191,10 @@ export const useBattleSteps = ({
 					setBattleStep('PLAYER_FAINTING');
 					return;
 				}
+				if (targetFlinched(opponent, player, nextOpponentMove)) {
+					setBattleStep('PLAYER_FLINCHED');
+					return;
+				}
 				setBattleStep('MOVE_SELECTION');
 			}
 		}, animationTimer);
@@ -199,6 +209,31 @@ export const useBattleSteps = ({
 		setOpponent,
 		setPlayer,
 	]);
+	//"OPPONENT_FLINCHED"
+	useEffect(() => {
+		if (battleStep !== 'OPPONENT_FLINCHED') {
+			return;
+		}
+		const t = setTimeout(() => {
+			setBattleStep('MOVE_SELECTION');
+			setNextOpponentMove(undefined);
+		}, animationTimer);
+
+		return () => clearTimeout(t);
+	}, [battleStep, setBattleStep]);
+	//"PLAYER_FLINCHED"
+	useEffect(() => {
+		if (battleStep !== 'PLAYER_FLINCHED') {
+			return;
+		}
+		const t = setTimeout(() => {
+			setBattleStep('MOVE_SELECTION');
+			setNextOpponentMove(undefined);
+			setNextPlayerMove(undefined);
+		}, animationTimer);
+
+		return () => clearTimeout(t);
+	}, [battleStep, setBattleStep]);
 	//'CATCHING_PROCESS_1' to 'CATCHING_PROCESS_2'
 	useEffect(() => {
 		if (battleStep !== 'CATCHING_PROCESS_1') {
@@ -367,7 +402,14 @@ export const useBattleSteps = ({
 		if (battleStep === 'EXECUTE_OPPONENT_MOVE') {
 			return nextOpponentMove;
 		}
-		if (battleStep === 'EXECUTE_PLAYER_MOVE') {
+		if (
+			battleStep === 'EXECUTE_PLAYER_MOVE' ||
+			battleStep === 'CATCHING_PROCESS_1' ||
+			battleStep === 'CATCHING_PROCESS_2' ||
+			battleStep === 'CATCHING_PROCESS_3' ||
+			battleStep === 'CATCHING_PROCESS_4' ||
+			battleStep === 'CATCHING_SUCCESS'
+		) {
 			return nextPlayerMove;
 		}
 
@@ -378,7 +420,6 @@ export const useBattleSteps = ({
 		nextMove,
 		battleStep,
 		initBattle,
-		inCatchProcess,
 		setNextPlayerMove,
 	};
 };

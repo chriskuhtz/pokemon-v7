@@ -16,7 +16,7 @@ export const assembleMap = (
 
 				return o.x === columnIndex && o.y === rowIndex;
 			})
-				? 1
+				? 2
 				: c
 		);
 	});

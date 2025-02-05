@@ -77,6 +77,7 @@ export const Battle = ({
 					inventory={initSaveFile.inventory}
 					firstMove={slot1.firstMove}
 					opponent={slot3}
+					runAway={goBack}
 				/>
 			</div>
 		</>

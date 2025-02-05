@@ -2,9 +2,9 @@ import { HpBar } from '../../../components/HpBar/HpBar';
 import { battleSpriteSize } from '../../../constants/gameData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
+import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { PokeballType } from '../../../interfaces/Item';
-import { BattleStep } from '../Battle';
-import { BattlePokemon } from '../hooks/useBattlePokemon';
+import { BattleStep } from '../types/BattleStep';
 
 export const EnemyLane = ({
 	opponentPokemon,

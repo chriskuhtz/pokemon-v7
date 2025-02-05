@@ -1,5 +1,5 @@
+import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
-import { BattlePokemon } from '../modules/Battle/hooks/useBattlePokemon';
 
 export const reduceBattlePokemonToOwnedPokemon = (
 	newMon: BattlePokemon
@@ -13,5 +13,7 @@ export const reduceBattlePokemonToOwnedPokemon = (
 		ownerId: newMon.ownerId,
 		nature: newMon.nature,
 		onTeam: newMon.onTeam,
+		level: newMon.level,
+		ability: newMon.ability,
 	};
 };

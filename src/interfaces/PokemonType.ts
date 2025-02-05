@@ -21,62 +21,77 @@ export type PokemonType =
 //key : MoveType, values: Target Types
 export const typeEffectivenessChart: Record<
 	PokemonType,
-	{ superEffective: PokemonType[]; notvery: PokemonType[]; none: PokemonType[] }
+	{
+		isSuperEffectiveAgainst: PokemonType[];
+		isNotVeryEffectiveAgainst: PokemonType[];
+		doesntEffect: PokemonType[];
+	}
 > = {
-	normal: { superEffective: [], notvery: ['rock', 'steel'], none: ['ghost'] },
+	normal: {
+		isSuperEffectiveAgainst: [],
+		isNotVeryEffectiveAgainst: ['rock', 'steel'],
+		doesntEffect: ['ghost'],
+	},
 	fire: {
-		superEffective: ['grass', 'ice', 'bug', 'steel'],
-		notvery: ['fire', 'water', 'rock', 'dragon'],
-		none: [],
+		isSuperEffectiveAgainst: ['grass', 'ice', 'bug', 'steel'],
+		isNotVeryEffectiveAgainst: ['fire', 'water', 'rock', 'dragon'],
+		doesntEffect: [],
 	},
 	water: {
-		superEffective: ['fire', 'rock'],
-		notvery: ['grass', 'water', 'dragon'],
-		none: [],
+		isSuperEffectiveAgainst: ['fire', 'rock'],
+		isNotVeryEffectiveAgainst: ['grass', 'water', 'dragon'],
+		doesntEffect: [],
 	},
 	electric: {
-		superEffective: ['flying', 'water'],
-		notvery: ['steel', 'dragon', 'grass'],
-		none: ['ground'],
+		isSuperEffectiveAgainst: ['flying', 'water'],
+		isNotVeryEffectiveAgainst: ['steel', 'dragon', 'grass'],
+		doesntEffect: ['ground'],
 	},
 	grass: {
-		superEffective: ['rock', 'water', 'ground'],
-		notvery: ['poison', 'fire', 'grass', 'flying', 'bug', 'dragon'],
-		none: [],
+		isSuperEffectiveAgainst: ['rock', 'water', 'ground'],
+		isNotVeryEffectiveAgainst: [
+			'poison',
+			'fire',
+			'grass',
+			'flying',
+			'bug',
+			'dragon',
+		],
+		doesntEffect: [],
 	},
 	ice: {
-		superEffective: ['flying', 'ground', 'dragon', 'grass'],
-		notvery: ['water', 'fire', 'ice', 'steel'],
-		none: [],
+		isSuperEffectiveAgainst: ['flying', 'ground', 'dragon', 'grass'],
+		isNotVeryEffectiveAgainst: ['water', 'fire', 'ice', 'steel'],
+		doesntEffect: [],
 	},
 	fighting: {
-		superEffective: ['normal', 'rock', 'dark', 'steel', 'ice'],
-		notvery: ['poison', 'psychic', 'fairy', 'flying', 'bug'],
-		none: ['ghost'],
+		isSuperEffectiveAgainst: ['normal', 'rock', 'dark', 'steel', 'ice'],
+		isNotVeryEffectiveAgainst: ['poison', 'psychic', 'fairy', 'flying', 'bug'],
+		doesntEffect: ['ghost'],
 	},
 	poison: {
-		superEffective: ['grass', 'fairy'],
-		notvery: ['poison', 'ground', 'rock', 'ghost'],
-		none: ['steel'],
+		isSuperEffectiveAgainst: ['grass', 'fairy'],
+		isNotVeryEffectiveAgainst: ['poison', 'ground', 'rock', 'ghost'],
+		doesntEffect: ['steel'],
 	},
 	ground: {
-		superEffective: ['electric', 'poison', 'rock', 'steel', 'fire'],
-		notvery: ['grass', 'bug'],
-		none: ['flying'],
+		isSuperEffectiveAgainst: ['electric', 'poison', 'rock', 'steel', 'fire'],
+		isNotVeryEffectiveAgainst: ['grass', 'bug'],
+		doesntEffect: ['flying'],
 	},
 	flying: {
-		superEffective: ['fighting', 'grass', 'bug'],
-		notvery: ['steel', 'rock', 'electric'],
-		none: [],
+		isSuperEffectiveAgainst: ['fighting', 'grass', 'bug'],
+		isNotVeryEffectiveAgainst: ['steel', 'rock', 'electric'],
+		doesntEffect: [],
 	},
 	psychic: {
-		superEffective: ['poison', 'fighting'],
-		notvery: ['steel', 'psychic'],
-		none: ['dark'],
+		isSuperEffectiveAgainst: ['poison', 'fighting'],
+		isNotVeryEffectiveAgainst: ['steel', 'psychic'],
+		doesntEffect: ['dark'],
 	},
 	bug: {
-		superEffective: ['grass', 'psychic', 'dark'],
-		notvery: [
+		isSuperEffectiveAgainst: ['grass', 'psychic', 'dark'],
+		isNotVeryEffectiveAgainst: [
 			'fire',
 			'fighting',
 			'poison',
@@ -85,36 +100,36 @@ export const typeEffectivenessChart: Record<
 			'steel',
 			'fairy',
 		],
-		none: [],
+		doesntEffect: [],
 	},
 	rock: {
-		superEffective: ['flying', 'fire', 'bug', 'ice'],
-		notvery: ['steel', 'fighting', 'steel'],
-		none: [],
+		isSuperEffectiveAgainst: ['flying', 'fire', 'bug', 'ice'],
+		isNotVeryEffectiveAgainst: ['steel', 'fighting', 'steel'],
+		doesntEffect: [],
 	},
 	ghost: {
-		superEffective: ['psychic', 'ghost'],
-		notvery: ['dark'],
-		none: ['normal'],
+		isSuperEffectiveAgainst: ['psychic', 'ghost'],
+		isNotVeryEffectiveAgainst: ['dark'],
+		doesntEffect: ['normal'],
 	},
 	dragon: {
-		superEffective: ['dragon'],
-		notvery: ['steel'],
-		none: ['fairy'],
+		isSuperEffectiveAgainst: ['dragon'],
+		isNotVeryEffectiveAgainst: ['steel'],
+		doesntEffect: ['fairy'],
 	},
 	dark: {
-		superEffective: ['psychic', 'ghost'],
-		notvery: ['fighting', 'dark', 'fairy'],
-		none: [],
+		isSuperEffectiveAgainst: ['psychic', 'ghost'],
+		isNotVeryEffectiveAgainst: ['fighting', 'dark', 'fairy'],
+		doesntEffect: [],
 	},
 	steel: {
-		superEffective: ['ice', 'rock', 'fairy'],
-		notvery: ['fire', 'water', 'electric', 'steel'],
-		none: [],
+		isSuperEffectiveAgainst: ['ice', 'rock', 'fairy'],
+		isNotVeryEffectiveAgainst: ['fire', 'water', 'electric', 'steel'],
+		doesntEffect: [],
 	},
 	fairy: {
-		superEffective: ['fighting', 'dragon', 'dark'],
-		notvery: ['steel', 'fire', 'poison'],
-		none: [],
+		isSuperEffectiveAgainst: ['fighting', 'dragon', 'dark'],
+		isNotVeryEffectiveAgainst: ['steel', 'fire', 'poison'],
+		doesntEffect: [],
 	},
 };

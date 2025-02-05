@@ -3,7 +3,8 @@ import { battleSpriteSize } from '../../../constants/gameData';
 import { determineTypeFactor } from '../../../functions/determineTypeFactor';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { Banner } from '../../../uiComponents/Banner/Banner';
-import { BattleAttack, BattlePokemon } from '../hooks/useBattlePokemon';
+import { BattleAttack } from '../../../interfaces/BattleAttack';
+import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
 export const MoveExecutionBanner = ({
 	attack,

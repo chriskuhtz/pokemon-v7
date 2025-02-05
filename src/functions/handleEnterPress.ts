@@ -5,6 +5,7 @@ import { getNextLocation } from './getNextLocation';
 
 export const handleEnterPress = (
 	playerLocation: CharacterLocationData,
+	collectedItems: number[],
 	interactWith: (x: [string, Occupant] | undefined) => void
 ) => {
 	const focusedField = getNextLocation(
@@ -12,7 +13,10 @@ export const handleEnterPress = (
 		playerLocation.orientation
 	);
 	const nextFieldOccupant = Object.entries(itemsRecord).find(
-		([, occ]) => occ.x === focusedField.x && occ.y === focusedField.y
+		([id, occ]) =>
+			occ.x === focusedField.x &&
+			occ.y === focusedField.y &&
+			!collectedItems.find((c) => c === parseInt(id))
 	);
 
 	interactWith(nextFieldOccupant);
