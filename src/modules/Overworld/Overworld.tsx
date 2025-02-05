@@ -25,6 +25,8 @@ export const Overworld = ({
 	collectItem,
 	map,
 	collectedItems,
+	startEncounter,
+	encounterRateModifier,
 }: {
 	openMenu: () => void;
 	playerLocation: CharacterLocationData;
@@ -32,6 +34,8 @@ export const Overworld = ({
 	collectItem: (item: [string, Occupant]) => void;
 	map: OverworldMap;
 	collectedItems: number[];
+	startEncounter: () => void;
+	encounterRateModifier?: number;
 }) => {
 	const [bannerContent, setBannerContent] = useState<string | undefined>();
 	useEffect(() => {
@@ -51,7 +55,9 @@ export const Overworld = ({
 	const setNextInput = useOverworldMovement(
 		playerLocation,
 		setCharacterLocation,
-		assembledMap
+		assembledMap,
+		startEncounter,
+		encounterRateModifier
 	);
 
 	const interactWith = useCallback(

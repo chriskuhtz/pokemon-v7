@@ -3,8 +3,8 @@
  *
  * TILEMAP:
  * 0 = empty field
- * 1 = blocked field
- * 2 = encounter possible
+ * 1 = encounter possible
+ * 2 = blocked field
  */
 
 import { ItemType } from './Item';

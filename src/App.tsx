@@ -44,6 +44,10 @@ export const App = (): JSX.Element => {
 		collectedItems,
 	} = saveFile;
 
+	const team = pokemon.filter((p) => p.onTeam);
+
+	const firstTeamMember = team[0];
+
 	if (activeTab === 'MAIN') {
 		return (
 			<MainMenu
@@ -63,12 +67,7 @@ export const App = (): JSX.Element => {
 		);
 	}
 	if (activeTab === 'TEAM') {
-		return (
-			<Team
-				team={pokemon.filter((p) => p.onTeam)}
-				goBack={() => setActiveTabReducer('MAIN')}
-			/>
-		);
+		return <Team team={team} goBack={() => setActiveTabReducer('MAIN')} />;
 	}
 	if (activeTab === 'BATTLE') {
 		return (
@@ -120,6 +119,8 @@ export const App = (): JSX.Element => {
 			playerLocation={location}
 			map={testMap}
 			collectedItems={collectedItems}
+			startEncounter={() => setActiveTabReducer('BATTLE')}
+			encounterRateModifier={firstTeamMember.ability === 'stench' ? 0.5 : 1}
 		/>
 	);
 };

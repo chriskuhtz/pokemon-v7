@@ -14,6 +14,7 @@ export interface OwnedPokemon {
 	ball: PokeballType;
 	nature: Nature;
 	level: number;
+	ability: string;
 	//shiny?: boolean;
 	//friendship: number;
 	//usedPowerPoints: UsedPowerPoints;

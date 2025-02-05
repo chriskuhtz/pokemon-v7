@@ -7,6 +7,7 @@ export const abilityCheckList: {
 	{
 		name: 'stench',
 		url: 'https://pokeapi.co/api/v2/ability/1/',
+		todos: ['flinching'],
 	},
 	{
 		name: 'drizzle',
@@ -461,6 +462,8 @@ export const abilityCheckList: {
 	{ name: 'decoy', url: 'https://pokeapi.co/api/v2/ability/10059/' },
 	{ name: 'shield', url: 'https://pokeapi.co/api/v2/ability/10060/' },
 ];
-const abilityNames = abilityCheckList.map((a) => a.name);
+const abilityNames = abilityCheckList
+	.filter((a) => a.handled)
+	.map((a) => a.name);
 
-export type Ability = (typeof abilityNames)[number];
+export type AbilityName = (typeof abilityNames)[number];
