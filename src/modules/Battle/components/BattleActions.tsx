@@ -3,26 +3,29 @@ import { FaFistRaised } from 'react-icons/fa';
 import { IoIosArrowBack } from 'react-icons/io';
 import { MdCatchingPokemon } from 'react-icons/md';
 import { ItemCard } from '../../../components/ItemCard/ItemCard';
+import { MoveCard } from '../../../components/MoveCard/MoveCard';
 import { baseSize } from '../../../constants/gameData';
 import { Inventory } from '../../../interfaces/Inventory';
 import { isPokeball, PokeballType } from '../../../interfaces/Item';
 import { Card } from '../../../uiComponents/Card/Card';
 import { BattleStep } from '../Battle';
 import { BattlePokemon } from '../hooks/useBattlePokemon';
-import { MoveCard } from '../../../components/MoveCard/MoveCard';
+import { BattleMove } from '../hooks/useBattleSteps';
 
 export const BattleActions = ({
 	inventory,
-	startCatchProcess,
+	chooseMove,
 	voidSteps,
 	battleStep,
 	firstMove,
+	opponent,
 }: {
 	inventory: Inventory;
-	startCatchProcess: (ball: PokeballType) => void;
+	chooseMove: (x: BattleMove) => void;
 	battleStep: BattleStep;
 	firstMove: BattlePokemon['firstMove'];
 	voidSteps: BattleStep[];
+	opponent: BattlePokemon;
 }) => {
 	const [menu, setMenu] = useState<'MAIN' | 'BALLS' | 'MOVES'>('MAIN');
 	const balls: [PokeballType, number][] = Object.entries(inventory).filter(
@@ -59,7 +62,13 @@ export const BattleActions = ({
 							item={item}
 							amount={amount}
 							actionElements={[]}
-							onClick={() => startCatchProcess(item)}
+							onClick={() =>
+								chooseMove({
+									ball: item,
+									type: 'CatchProcessInfo',
+									pokemon: opponent,
+								})
+							}
 						/>
 					);
 				})}
@@ -82,7 +91,12 @@ export const BattleActions = ({
 					size={baseSize / 2}
 					onClick={() => setMenu('MAIN')}
 				/>
-				<MoveCard move={firstMove} />
+				<MoveCard
+					move={firstMove}
+					onClick={() =>
+						chooseMove({ type: 'BattleAttack', name: firstMove.name })
+					}
+				/>
 			</div>
 		);
 	}

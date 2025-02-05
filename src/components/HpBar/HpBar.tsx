@@ -6,8 +6,12 @@ export const HpBar = ({ max, damage }: { max: number; damage: number }) => {
 
 	useEffect(() => {
 		const t = setTimeout(() => {
-			if (current !== max - damage) {
+			const actual = max - damage;
+			if (current < actual) {
 				setCurrent(current + 1);
+			}
+			if (current > actual) {
+				setCurrent(current - 1);
 			}
 		}, 100);
 
@@ -17,7 +21,9 @@ export const HpBar = ({ max, damage }: { max: number; damage: number }) => {
 	const percentage = current / max;
 
 	return (
-		<div style={{ margin: '1rem 0', position: 'relative', width: 100 }}>
+		<div
+			style={{ zIndex: -1, margin: '1rem 0', position: 'relative', width: 100 }}
+		>
 			<div
 				style={{
 					textAlign: 'center',

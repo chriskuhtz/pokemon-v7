@@ -1,16 +1,16 @@
 import React from 'react';
+import { battleSpriteSize } from '../../../constants/gameData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
-import { PokeballType } from '../../../interfaces/Item';
 import { Banner } from '../../../uiComponents/Banner/Banner';
 import { BattleStep } from '../Battle';
-import { battleSpriteSize } from '../../../constants/gameData';
+import { BattleMove } from '../hooks/useBattleSteps';
 export const BattleBanner = ({
 	opponent,
 	player,
 	battleStep,
 	voidSteps,
-	catchProcessBall,
+	nextMove,
 }: {
 	opponent: {
 		name: string;
@@ -22,7 +22,7 @@ export const BattleBanner = ({
 	};
 	battleStep: BattleStep;
 	voidSteps: BattleStep[];
-	catchProcessBall?: PokeballType;
+	nextMove: BattleMove | undefined;
 }) => {
 	if (voidSteps.includes(battleStep)) {
 		return <div></div>;
@@ -55,20 +55,55 @@ export const BattleBanner = ({
 			</Banner>
 		);
 	}
-	if (battleStep === 'CATCHING_PROCESS_1' && catchProcessBall) {
+	if (
+		battleStep === 'EXECUTE_PLAYER_MOVE' &&
+		nextMove?.type === 'BattleAttack'
+	) {
 		return (
 			<Banner>
-				You throw a {catchProcessBall} at the wild {opponent.name}
+				{' '}
 				<img
-					style={{ padding: '1rem 0' }}
-					width={battleSpriteSize / 2}
-					height={battleSpriteSize / 2}
-					src={getItemUrl(catchProcessBall)}
+					height={battleSpriteSize}
+					width={battleSpriteSize}
+					src={getPokemonSprite(player.dexId)}
+				/>
+				{player.name} used {nextMove.name} against {opponent.name}
+			</Banner>
+		);
+	}
+	if (
+		battleStep === 'EXECUTE_OPPONENT_MOVE' &&
+		nextMove?.type === 'BattleAttack'
+	) {
+		return (
+			<Banner>
+				{opponent.name} used {nextMove.name} against {player.name}
+				<img
+					height={battleSpriteSize}
+					width={battleSpriteSize}
+					src={getPokemonSprite(opponent.dexId)}
 				/>
 			</Banner>
 		);
 	}
-	if (battleStep === 'CATCHING_SUCCESS' && catchProcessBall) {
+	if (
+		battleStep === 'CATCHING_PROCESS_1' &&
+		nextMove?.type === 'CatchProcessInfo'
+	) {
+		return (
+			<Banner>
+				You throw a {nextMove.ball} at the wild {opponent.name}
+				<img
+					style={{ padding: '1rem 0' }}
+					width={battleSpriteSize / 2}
+					height={battleSpriteSize / 2}
+					src={getItemUrl(nextMove.ball)}
+				/>
+			</Banner>
+		);
+	}
+
+	if (battleStep === 'CATCHING_SUCCESS') {
 		return (
 			<Banner>
 				<h2>The wild {opponent.name} was caught!</h2>
@@ -79,6 +114,20 @@ export const BattleBanner = ({
 		return (
 			<Banner>
 				<h2>You won the Battle</h2>
+			</Banner>
+		);
+	}
+	if (battleStep === 'BATTLE_LOST') {
+		return (
+			<Banner>
+				<h2>You lost the Battle</h2>
+			</Banner>
+		);
+	}
+	if (battleStep === 'ERROR') {
+		return (
+			<Banner>
+				<h2>An Error occured :/</h2>
 			</Banner>
 		);
 	}

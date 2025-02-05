@@ -5,7 +5,6 @@ import { OverworldMap } from '../../../interfaces/OverworldMap';
 
 export const useDrawOccupants = (canvasId: string, map: OverworldMap) => {
 	useEffect(() => {
-		console.log('draw occupants');
 		const { occupants, width, height } = map;
 
 		const el: HTMLCanvasElement | null = document.getElementById(
