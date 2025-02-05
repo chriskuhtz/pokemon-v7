@@ -82,9 +82,8 @@ export const Battle = ({
 					catchProcessBall={inCatchProcess?.ball}
 				/>
 				<PlayerLane
+					pokemon={slot1}
 					battleStep={battleStep}
-					ballType={slot1.ball}
-					dexId={slot1.dexId}
 					voidSteps={['OPPONENT_INTRO', 'PLAYER_INTRO']}
 				/>
 				<BattleActions

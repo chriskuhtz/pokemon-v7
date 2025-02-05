@@ -1,3 +1,4 @@
+import { HpBar } from '../../../components/HpBar/HpBar';
 import { battleSpriteSize } from '../../../constants/gameData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
@@ -78,6 +79,7 @@ export const EnemyLane = ({
 	}
 	return (
 		<div className="enemyLane">
+			<HpBar max={opponentPokemon.stats.hp} damage={opponentPokemon.damage} />
 			<img
 				width={battleSpriteSize}
 				height={battleSpriteSize}

@@ -1,17 +1,17 @@
+import { HpBar } from '../../../components/HpBar/HpBar';
 import { battleSpriteSize } from '../../../constants/gameData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
-import { PokeballType } from '../../../interfaces/Item';
 import { BattleStep } from '../Battle';
+import { BattlePokemon } from '../hooks/useBattlePokemon';
 
 export const PlayerLane = ({
-	dexId,
-	ballType,
+	pokemon,
+
 	battleStep,
 	voidSteps,
 }: {
-	dexId: number;
-	ballType: PokeballType;
+	pokemon: BattlePokemon;
 	battleStep: BattleStep;
 	voidSteps: BattleStep[];
 }) => {
@@ -28,7 +28,7 @@ export const PlayerLane = ({
 					}}
 					width={battleSpriteSize / 2}
 					height={battleSpriteSize / 2}
-					src={getItemUrl(ballType)}
+					src={getItemUrl(pokemon.ball)}
 				/>
 			</div>
 		);
@@ -38,8 +38,9 @@ export const PlayerLane = ({
 			<img
 				width={battleSpriteSize}
 				height={battleSpriteSize}
-				src={getPokemonSprite(dexId, 'back')}
+				src={getPokemonSprite(pokemon.dexId, 'back')}
 			/>
+			<HpBar max={pokemon.stats.hp} damage={pokemon.damage} />
 		</div>
 	);
 };
