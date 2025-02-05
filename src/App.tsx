@@ -1,5 +1,6 @@
 import { testOpponent, testState } from './constants/gameData';
 import { testMap } from './constants/maps/testmap';
+import { getRandomPokemonId } from './functions/getRandomPokemonId';
 import { useSaveFile } from './hooks/useSaveFile';
 import { generateInventory } from './interfaces/Inventory';
 import { Bag } from './modules/Bag/Bag';
@@ -74,7 +75,7 @@ export const App = (): JSX.Element => {
 			<Battle
 				initSaveFile={saveFile}
 				syncAfterBattleEnd={putSaveFileReducer}
-				opponent={testOpponent}
+				opponent={{ ...testOpponent, dexId: getRandomPokemonId() }}
 				goBack={() => setActiveTabReducer('MAIN')}
 			/>
 		);

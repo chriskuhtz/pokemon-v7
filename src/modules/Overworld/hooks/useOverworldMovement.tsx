@@ -8,6 +8,7 @@ import {
 	CharacterOrientation,
 } from '../../../interfaces/SaveFile';
 
+const baseEncounterRate = 0.2;
 export const useOverworldMovement = (
 	playerLocation: CharacterLocationData,
 	setCharacterLocation: (update: CharacterLocationData) => void,
@@ -15,7 +16,14 @@ export const useOverworldMovement = (
 	startEncounter: () => void,
 	encounterRateModifier?: number
 ) => {
-	const [encounterChance, setEncounterChance] = useState<number>(0.2);
+	const [encounterChance, setEncounterChance] =
+		useState<number>(baseEncounterRate);
+	const resetEncounterRate = () => {
+		if (encounterChance === baseEncounterRate) {
+			return;
+		}
+		setEncounterChance(baseEncounterRate);
+	};
 	const [nextInput, setNextInput] = useState<
 		CharacterOrientation | undefined
 	>();
@@ -31,11 +39,15 @@ export const useOverworldMovement = (
 					forwardFoot: getNextForwardFoot(playerLocation.forwardFoot),
 				});
 			}
-			if (nextInput && map.tileMap[playerLocation.y][playerLocation.x] === 1) {
-				if (Math.random() < encounterChance * (encounterRateModifier ?? 1)) {
-					startEncounter();
-					return;
-				} else setEncounterChance(encounterChance + 0.05);
+			if (nextInput) {
+				if (map.tileMap[playerLocation.y][playerLocation.x] === 1) {
+					const modifiedEncounterRate =
+						encounterChance * (encounterRateModifier ?? 1);
+					if (Math.random() < modifiedEncounterRate) {
+						startEncounter();
+						return;
+					} else setEncounterChance(encounterChance + 0.02);
+				} else resetEncounterRate();
 			}
 			if (nextInput === playerLocation.orientation) {
 				setCharacterLocation({

@@ -24,14 +24,16 @@ export const Overworld = ({
 	setCharacterLocation,
 	collectItem,
 	map,
-	collectedItems,
+
 	startEncounter,
 	encounterRateModifier,
+	collectedItems,
 }: {
 	openMenu: () => void;
 	playerLocation: CharacterLocationData;
 	setCharacterLocation: (update: CharacterLocationData) => void;
 	collectItem: (item: [string, Occupant]) => void;
+
 	map: OverworldMap;
 	collectedItems: number[];
 	startEncounter: () => void;
@@ -48,7 +50,7 @@ export const Overworld = ({
 
 	const assembledMap = useMemo(
 		() => assembleMap(map, collectedItems),
-		[collectedItems, map]
+		[map, collectedItems]
 	);
 	const valid = useMemo(() => isValidOverWorldMap(map), [map]);
 
@@ -75,7 +77,7 @@ export const Overworld = ({
 	useDrawCharacter(playerCanvasId, playerLocation);
 	useKeyboardControl(
 		setNextInput,
-		() => handleEnterPress(playerLocation, interactWith),
+		() => handleEnterPress(playerLocation, collectedItems, interactWith),
 		!!bannerContent
 	);
 

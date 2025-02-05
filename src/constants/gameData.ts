@@ -1,5 +1,4 @@
 import { v4 } from 'uuid';
-import { getRandomPokemonId } from '../functions/getRandomPokemonId';
 import { generateInventory } from '../interfaces/Inventory';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { SaveFile } from '../interfaces/SaveFile';
@@ -42,7 +41,7 @@ export const testState: SaveFile = {
 };
 
 export const testOpponent: OwnedPokemon = {
-	dexId: getRandomPokemonId(),
+	dexId: 1,
 	nature: 'adamant',
 	ownerId: 'oppo',
 	ball: 'cherish-ball',
