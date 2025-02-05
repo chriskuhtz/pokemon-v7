@@ -4,7 +4,12 @@ export const movesCheckList: {
 	todos?: string[];
 	handled?: boolean;
 }[] = [
-	{ name: 'pound', url: 'https://pokeapi.co/api/v2/move/1/' },
+	{
+		name: 'pound',
+		url: 'https://pokeapi.co/api/v2/move/1/',
+		todos: [],
+		handled: true,
+	},
 	{
 		name: 'karate-chop',
 		url: 'https://pokeapi.co/api/v2/move/2/',

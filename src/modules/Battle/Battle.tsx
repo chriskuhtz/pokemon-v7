@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useGetPokemonData } from '../../hooks/useGetPokemonData';
+import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../interfaces/SaveFile';
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 import './Battle.css';
@@ -7,28 +7,8 @@ import { BattleActions } from './components/BattleActions';
 import { BattleBanner } from './components/BattleBanner';
 import { EnemyLane } from './components/EnemyLane';
 import { PlayerLane } from './components/PlayerLane';
+import { useBattlePokemon } from './hooks/useBattlePokemon';
 import { useBattleSteps } from './hooks/useBattleSteps';
-
-export const battleSteps = [
-	'UNITIALIZED',
-	'OPPONENT_INTRO',
-	'PLAYER_INTRO',
-	'OPPONENT_EMERGE',
-	'PLAYER_EMERGE',
-	'MOVE_SELECTION',
-	'CATCHING_PROCESS_1',
-	'CATCHING_PROCESS_2',
-	'CATCHING_PROCESS_3',
-	'CATCHING_PROCESS_4',
-	'CATCHING_FAILURE',
-	'CATCHING_SUCCESS',
-	'BATTLE_WON',
-] as const;
-
-export type BattleStep = (typeof battleSteps)[number];
-export interface Opponent {
-	dexId: number;
-}
 
 export const Battle = ({
 	opponent,
@@ -37,81 +17,66 @@ export const Battle = ({
 	goBack,
 }: {
 	initSaveFile: SaveFile;
-	opponent: Opponent;
+	opponent: OwnedPokemon;
 	syncAfterBattleEnd: (update: SaveFile) => void;
 	goBack: () => void;
 }): JSX.Element => {
-	const {
-		saveFile,
-		battleStep,
-		startCatchProcess,
-		initBattle,
-		inCatchProcess,
-	} = useBattleSteps(initSaveFile, syncAfterBattleEnd, goBack);
+	const team = initSaveFile.pokemon.filter((p) => p.onTeam);
 
-	const team = saveFile.pokemon.filter((p) => p.onTeam);
-	const { dexId: activePlayerPokemonId, ball } = team[0];
-	const { res: opponentData, status } = useGetPokemonData(opponent.dexId);
-	const { res: activePlayerData, status: oppoStatus } = useGetPokemonData(
-		activePlayerPokemonId
-	);
+	const [slot1, setSlot1] = useBattlePokemon(team[0]);
+	const [slot3, setSlot3] = useBattlePokemon(opponent);
+
+	const { battleStep, initBattle, nextMove, setNextPlayerMove } =
+		useBattleSteps({
+			initSaveFile,
+			syncAfterBattleEnd,
+			goBack,
+			opponent: slot3,
+			player: slot1,
+			setOpponent: setSlot3,
+			setPlayer: setSlot1,
+		});
 
 	useEffect(() => {
-		if (
-			battleStep === 'UNITIALIZED' &&
-			status === 'success' &&
-			oppoStatus === 'success'
-		) {
+		if (battleStep === 'UNITIALIZED' && slot1 && slot3) {
 			initBattle();
 		}
-	}, [battleStep, initBattle, oppoStatus, status]);
+	}, [battleStep, initBattle, slot1, slot3]);
 
-	if (!opponentData || !activePlayerData) {
+	if (!slot1 || !slot3) {
 		return <LoadingScreen />;
 	}
 
 	return (
 		<>
 			<BattleBanner
-				catchProcessBall={inCatchProcess?.ball}
+				nextMove={nextMove}
 				battleStep={battleStep}
-				opponent={{ dexId: opponent.dexId, name: opponentData.name }}
-				player={{ dexId: activePlayerPokemonId, name: activePlayerData.name }}
+				opponent={slot3}
+				player={slot1}
 				voidSteps={['MOVE_SELECTION', 'OPPONENT_EMERGE', 'PLAYER_EMERGE']}
 			/>
 			<strong style={{ position: 'absolute' }}>BattleStep: {battleStep}</strong>
 			<div className="battle">
 				<EnemyLane
 					battleStep={battleStep}
-					opponent={opponent}
+					opponentPokemon={slot3}
 					voidSteps={['OPPONENT_INTRO', 'PLAYER_INTRO', 'BATTLE_WON']}
-					catchProcessBall={inCatchProcess?.ball}
+					catchProcessBall={
+						nextMove?.type === 'CatchProcessInfo' ? nextMove.ball : undefined
+					}
 				/>
 				<PlayerLane
+					pokemon={slot1}
 					battleStep={battleStep}
-					ballType={ball}
-					activePlayerPokemonId={activePlayerPokemonId}
 					voidSteps={['OPPONENT_INTRO', 'PLAYER_INTRO']}
 				/>
 				<BattleActions
 					battleStep={battleStep}
-					startCatchProcess={(ball) => startCatchProcess(ball, opponent.dexId)}
-					team={team}
-					inventory={saveFile.inventory}
-					opponent={opponent}
-					goBack={goBack}
-					voidSteps={[
-						'OPPONENT_INTRO',
-						'PLAYER_INTRO',
-						'OPPONENT_EMERGE',
-						'PLAYER_EMERGE',
-						'CATCHING_SUCCESS',
-						'CATCHING_PROCESS_1',
-						'CATCHING_PROCESS_2',
-						'CATCHING_PROCESS_3',
-						'CATCHING_PROCESS_4',
-						'BATTLE_WON',
-					]}
+					chooseMove={setNextPlayerMove}
+					inventory={initSaveFile.inventory}
+					firstMove={slot1.firstMove}
+					opponent={slot3}
 				/>
 			</div>
 		</>

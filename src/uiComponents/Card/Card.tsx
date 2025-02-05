@@ -6,17 +6,19 @@ export const Card = ({
 	content,
 	actionElements,
 	onClick,
+	disabled,
 }: {
 	icon: ReactNode;
 	content: ReactNode;
 	actionElements: React.JSX.Element[];
 	onClick?: () => void;
+	disabled?: boolean;
 }) => {
 	return (
 		<div
 			tabIndex={0}
-			role={onClick ? 'button' : 'none'}
-			onClick={onClick}
+			role={onClick && !disabled ? 'button' : 'none'}
+			onClick={disabled ? undefined : onClick}
 			className="card"
 		>
 			{icon}

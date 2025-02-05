@@ -9,6 +9,9 @@ describe('should handle receiving new pokemon', () => {
 			dexId: 30,
 			ball: 'cherish-ball',
 			ownerId: '',
+			firstMove: { name: 'pound', usedPP: 0 },
+			nature: 'adamant',
+			damage: 0,
 		};
 
 		const existingPokemon: OwnedPokemon[] = [];
@@ -24,6 +27,9 @@ describe('should handle receiving new pokemon', () => {
 			dexId: 30,
 			ball: 'cherish-ball',
 			ownerId: '',
+			firstMove: { name: 'pound', usedPP: 0 },
+			nature: 'adamant',
+			damage: 0,
 		};
 
 		const existingPokemon: OwnedPokemon[] = [

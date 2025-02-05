@@ -59,7 +59,7 @@ export const Overworld = ({
 			if (!occ) {
 				return;
 			}
-			setBannerContent(`Found 1 ${occ[1].item}`);
+			setBannerContent(`Found ${occ[1].amount} ${occ[1].item}`);
 			collectItem(occ);
 		},
 		[collectItem]
@@ -79,7 +79,7 @@ export const Overworld = ({
 	if (!valid) {
 		return (
 			<h2>
-				<IoMdMenu onClick={openMenu} size={30} />
+				<IoMdMenu onClick={openMenu} size={baseSize / 2} />
 				Invalid Map received
 			</h2>
 		);
@@ -95,7 +95,7 @@ export const Overworld = ({
 			<IoMdMenu
 				style={{ position: 'absolute', top: '1.5rem', left: '1rem' }}
 				onClick={openMenu}
-				size={30}
+				size={baseSize / 2}
 			/>
 			<div>
 				<canvas id={playerCanvasId} height={baseSize} width={baseSize} />

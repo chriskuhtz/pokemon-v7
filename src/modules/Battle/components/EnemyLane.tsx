@@ -1,16 +1,18 @@
+import { HpBar } from '../../../components/HpBar/HpBar';
 import { battleSpriteSize } from '../../../constants/gameData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { PokeballType } from '../../../interfaces/Item';
-import { BattleStep, Opponent } from '../Battle';
+import { BattleStep } from '../Battle';
+import { BattlePokemon } from '../hooks/useBattlePokemon';
 
 export const EnemyLane = ({
-	opponent,
+	opponentPokemon,
 	battleStep,
 	voidSteps,
 	catchProcessBall,
 }: {
-	opponent: Opponent;
+	opponentPokemon: BattlePokemon;
 	battleStep: BattleStep;
 	voidSteps: BattleStep[];
 	catchProcessBall?: PokeballType;
@@ -63,7 +65,7 @@ export const EnemyLane = ({
 				<img
 					width={battleSpriteSize}
 					height={battleSpriteSize}
-					src={getPokemonSprite(opponent.dexId)}
+					src={getPokemonSprite(opponentPokemon.dexId)}
 					style={{ marginRight: -battleSpriteSize }}
 				/>
 				<img
@@ -77,10 +79,11 @@ export const EnemyLane = ({
 	}
 	return (
 		<div className="enemyLane">
+			<HpBar max={opponentPokemon.stats.hp} damage={opponentPokemon.damage} />
 			<img
 				width={battleSpriteSize}
 				height={battleSpriteSize}
-				src={getPokemonSprite(opponent.dexId)}
+				src={getPokemonSprite(opponentPokemon.dexId)}
 			/>
 		</div>
 	);
