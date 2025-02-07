@@ -16,7 +16,7 @@ export const useToasts = (): {
 	useEffect(() => {
 		const t = setTimeout(() => {
 			setToasts(toasts.slice(1));
-		}, animationTimer);
+		}, animationTimer * 1.5);
 
 		return () => clearTimeout(t);
 	}, [toasts]);

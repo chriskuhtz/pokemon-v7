@@ -23,6 +23,9 @@ import {
 import { PokeballType } from '../../../../interfaces/Item';
 import { SaveFile } from '../../../../interfaces/SaveFile';
 import { BattleStep } from '../../types/BattleStep';
+import { useHandleOpponentAbility } from './StepHandlers/useHandleOpponentAbility';
+import { useHandlePlayerAbility } from './StepHandlers/useHandlePlayerAbility';
+import { useMoveSelection } from './StepHandlers/useMoveSelection';
 import { useOpponentEmerge } from './StepHandlers/useOpponentEmerge';
 import { useOpponentIntro } from './StepHandlers/useOpponentIntro';
 import { usePlayerEmerge } from './StepHandlers/usePlayerEmerge';
@@ -54,8 +57,12 @@ export interface BattleStepHandler {
 export interface ExtendedBattleStepHandler extends BattleStepHandler {
 	player?: BattlePokemon;
 	opponent?: BattlePokemon;
+	setPlayer: (x: BattlePokemon) => void;
+	setOpponent: (x: BattlePokemon) => void;
 	setBattleWeather: (x: WeatherType | undefined) => void;
 	dispatchToast: AddToastFunction;
+	nextPlayerMove: BattleAction | undefined;
+	nextOpponentMove: BattleAction | undefined;
 }
 
 export const useBattleSteps = ({
@@ -107,31 +114,38 @@ export const useBattleSteps = ({
 		return undefined;
 	}, [battleStep, nextOpponentMove, nextPlayerMove]);
 
+	const extendedPayload: ExtendedBattleStepHandler = useMemo(
+		() => ({
+			battleStep,
+			setBattleStep,
+			player,
+			opponent,
+			dispatchToast,
+			setBattleWeather,
+			nextOpponentMove,
+			nextPlayerMove,
+			setOpponent,
+			setPlayer,
+		}),
+		[
+			battleStep,
+			player,
+			opponent,
+			dispatchToast,
+			nextOpponentMove,
+			nextPlayerMove,
+			setOpponent,
+			setPlayer,
+		]
+	);
+
 	useOpponentIntro({ battleStep, setBattleStep });
 	usePlayerIntro({ battleStep, setBattleStep });
-	useOpponentEmerge({
-		battleStep,
-		setBattleStep,
-		player,
-		opponent,
-		dispatchToast,
-		setBattleWeather,
-	});
-	usePlayerEmerge({
-		battleStep,
-		setBattleStep,
-		player,
-		opponent,
-		dispatchToast,
-		setBattleWeather,
-	});
-	//
-	//MOVE_SELECTION to "OPPONENT_MOVE_SELECTION"
-	useEffect(() => {
-		if (battleStep === 'MOVE_SELECTION' && nextPlayerMove) {
-			setBattleStep('OPPONENT_MOVE_SELECTION');
-		}
-	}, [battleStep, nextOpponentMove, nextPlayerMove]);
+	useOpponentEmerge(extendedPayload);
+	usePlayerEmerge(extendedPayload);
+	useHandlePlayerAbility(extendedPayload);
+	useMoveSelection(extendedPayload);
+	useHandleOpponentAbility(extendedPayload);
 	//"OPPONENT_MOVE_SELECTION" to "MOVE_HANDLING"
 	useEffect(() => {
 		if (
