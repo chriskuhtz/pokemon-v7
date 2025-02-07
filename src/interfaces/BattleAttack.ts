@@ -1,7 +1,7 @@
 import { MoveDto } from './Move';
-import { OwnedPokemon } from './OwnedPokemon';
+import { OwnedPokemonMove } from './OwnedPokemon';
 
-export type BattleAttack = OwnedPokemon['firstMove'] & {
+export type BattleAttack = OwnedPokemonMove & {
 	data: MoveDto;
 	type: 'BattleAttack';
 };

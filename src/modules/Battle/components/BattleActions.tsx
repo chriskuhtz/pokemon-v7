@@ -5,24 +5,31 @@ import { MdCatchingPokemon } from 'react-icons/md';
 import { ItemCard } from '../../../components/ItemCard/ItemCard';
 import { MoveCard } from '../../../components/MoveCard/MoveCard';
 import { baseSize } from '../../../constants/gameData';
+import { BattleAttack } from '../../../interfaces/BattleAttack';
+import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import { isPokeball, PokeballType } from '../../../interfaces/Item';
 import { Card } from '../../../uiComponents/Card/Card';
 import { BattleMove } from '../hooks/useBattleSteps';
 import { BattleStep } from '../types/BattleStep';
-import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 export const BattleActions = ({
 	inventory,
 	chooseMove,
 	battleStep,
 	firstMove,
 	opponent,
+	secondMove,
+	fourthMove,
+	thirdMove,
 	runAway,
 }: {
 	inventory: Inventory;
 	chooseMove: (x: BattleMove) => void;
 	battleStep: BattleStep;
-	firstMove: BattlePokemon['firstMove'];
+	firstMove: BattleAttack;
+	secondMove?: BattleAttack;
+	thirdMove?: BattleAttack;
+	fourthMove?: BattleAttack;
 	opponent: BattlePokemon;
 	runAway: () => void;
 }) => {
@@ -91,6 +98,15 @@ export const BattleActions = ({
 					onClick={() => setMenu('MAIN')}
 				/>
 				<MoveCard move={firstMove} onClick={() => chooseMove(firstMove)} />
+				{secondMove && (
+					<MoveCard move={secondMove} onClick={() => chooseMove(secondMove)} />
+				)}
+				{thirdMove && (
+					<MoveCard move={thirdMove} onClick={() => chooseMove(thirdMove)} />
+				)}
+				{fourthMove && (
+					<MoveCard move={fourthMove} onClick={() => chooseMove(fourthMove)} />
+				)}
 			</div>
 		);
 	}

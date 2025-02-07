@@ -1,12 +1,12 @@
 import { baseSize } from '../../constants/gameData';
-import { BattlePokemon } from '../../interfaces/BattlePokemon';
+import { BattleAttack } from '../../interfaces/BattleAttack';
 import { Card } from '../../uiComponents/Card/Card';
 
 export const MoveCard = ({
 	move,
 	onClick,
 }: {
-	move: BattlePokemon['firstMove'];
+	move: BattleAttack;
 	onClick: () => void;
 }) => {
 	const currentPP = move.data.pp - move.usedPP;

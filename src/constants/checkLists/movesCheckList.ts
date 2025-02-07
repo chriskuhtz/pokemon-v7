@@ -12,6 +12,7 @@ export const movesCheckList: {
 	{
 		name: 'karate-chop',
 		url: 'https://pokeapi.co/api/v2/move/2/',
+		todos: ['determine crits', 'inform about crits', 'opponent chooses move'],
 	},
 	{
 		name: 'double-slap',

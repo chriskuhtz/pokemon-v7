@@ -131,6 +131,7 @@ export const useBattleSteps = ({
 			!nextOpponentMove &&
 			opponent
 		) {
+			//TODO: make opponent choose move
 			setNextOpponentMove(opponent?.firstMove);
 			setBattleStep('MOVE_HANDLING');
 		}

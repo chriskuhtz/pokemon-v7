@@ -7,6 +7,16 @@ export const reduceBattlePokemonToOwnedPokemon = (
 	return {
 		dexId: newMon.dexId,
 		firstMove: { name: newMon.firstMove.name, usedPP: newMon.firstMove.usedPP },
+		secondMove: newMon.secondMove
+			? { name: newMon.secondMove.name, usedPP: newMon.secondMove.usedPP }
+			: undefined,
+		thirdMove: newMon.thirdMove
+			? { name: newMon.thirdMove.name, usedPP: newMon.thirdMove.usedPP }
+			: undefined,
+		fourthMove: newMon.fourthMove
+			? { name: newMon.fourthMove.name, usedPP: newMon.fourthMove.usedPP }
+			: undefined,
+
 		id: newMon.id,
 		damage: newMon.damage,
 		ball: newMon.ball,

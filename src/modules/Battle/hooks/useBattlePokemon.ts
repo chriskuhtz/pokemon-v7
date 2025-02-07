@@ -15,9 +15,19 @@ export const useBattlePokemon = (
 	const { res } = useGetPokemonData(pokemon.dexId);
 
 	const { res: firstMoveData } = useGetMoveData(pokemon.firstMove.name);
+	const { res: secondMoveData } = useGetMoveData(pokemon.secondMove?.name);
+	const { res: thirdMoveData } = useGetMoveData(pokemon.thirdMove?.name);
+	const { res: fourthMoveData } = useGetMoveData(pokemon.fourthMove?.name);
 
 	useEffect(() => {
-		if (!current && res && firstMoveData) {
+		if (
+			!current &&
+			res &&
+			firstMoveData &&
+			((secondMoveData && pokemon.secondMove) || !pokemon.secondMove) &&
+			((thirdMoveData && pokemon.thirdMove) || !pokemon.thirdMove) &&
+			((fourthMoveData && pokemon.fourthMove) || !pokemon.fourthMove)
+		) {
 			setCurrent({
 				...pokemon,
 				firstMove: {
@@ -25,11 +35,43 @@ export const useBattlePokemon = (
 					data: firstMoveData,
 					type: 'BattleAttack',
 				},
+				secondMove:
+					pokemon.secondMove && secondMoveData
+						? {
+								...pokemon.secondMove,
+								data: secondMoveData,
+								type: 'BattleAttack',
+						  }
+						: undefined,
+				thirdMove:
+					pokemon.thirdMove && thirdMoveData
+						? {
+								...pokemon.thirdMove,
+								data: thirdMoveData,
+								type: 'BattleAttack',
+						  }
+						: undefined,
+				fourthMove:
+					pokemon.fourthMove && fourthMoveData
+						? {
+								...pokemon.fourthMove,
+								data: fourthMoveData,
+								type: 'BattleAttack',
+						  }
+						: undefined,
 				data: res,
 				stats: getStats(res.stats, pokemon.xp, pokemon.nature),
 			});
 		}
-	}, [current, firstMoveData, pokemon, res]);
+	}, [
+		current,
+		firstMoveData,
+		fourthMoveData,
+		pokemon,
+		res,
+		secondMoveData,
+		thirdMoveData,
+	]);
 
 	return [current, setCurrent];
 };

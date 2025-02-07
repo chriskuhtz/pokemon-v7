@@ -21,6 +21,7 @@ export const testState: SaveFile = {
 			ball: 'master-ball',
 			onTeam: true,
 			firstMove: { name: 'pound', usedPP: 0 },
+			secondMove: { name: 'karate-chop', usedPP: 0 },
 			damage: 0,
 			nature: 'adamant',
 			xp: 100000,
@@ -47,8 +48,9 @@ export const testOpponent: OwnedPokemon = {
 	ball: 'cherish-ball',
 	damage: 0,
 	firstMove: { name: 'pound', usedPP: 0 },
+	secondMove: { name: 'karate-chop', usedPP: 0 },
 	id: v4(),
-	xp: 1000000,
+	xp: 100000,
 	ability: 'stench',
 };
 

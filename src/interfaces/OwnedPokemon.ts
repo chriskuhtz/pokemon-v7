@@ -1,15 +1,20 @@
 import { PokeballType } from './Item';
 import { Nature } from './Natures';
 
+export interface OwnedPokemonMove {
+	name: string;
+	usedPP: number;
+}
 export interface OwnedPokemon {
 	dexId: number;
 	id: string;
 	onTeam?: boolean;
-	//xp: number;
 	damage: number;
 	ownerId: string;
-	firstMove: { name: string; usedPP: number };
-	//ability: Ability;
+	firstMove: OwnedPokemonMove;
+	secondMove?: OwnedPokemonMove;
+	thirdMove?: OwnedPokemonMove;
+	fourthMove?: OwnedPokemonMove;
 	//primaryAilment?: PrimaryAilment;
 	ball: PokeballType;
 	nature: Nature;
@@ -17,8 +22,8 @@ export interface OwnedPokemon {
 	ability: string;
 	//shiny?: boolean;
 	//friendship: number;
-	//usedPowerPoints: UsedPowerPoints;
 	//heldItemName?: ItemType;
 	//effortValues: StatObject;
+	//intrinsicValues: StatObject;
 	//ppBoostedMoves: PPBoostedMove[];
 }
