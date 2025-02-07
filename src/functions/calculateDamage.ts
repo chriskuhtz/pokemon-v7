@@ -4,10 +4,27 @@ import { calculateLevelData } from './calculateLevelData';
 import { determineStabFactor } from './determineStabFactor';
 import { determineTypeFactor } from './determineTypeFactor';
 
+export const weather = ['rain'] as const;
+export type WeatherType = (typeof weather)[number];
+
+export const determineWeatherFactor = (
+	attack: BattleAttack,
+	weather: WeatherType | undefined
+): number => {
+	if (weather === 'rain' && attack.data.type.name === 'water') {
+		return 1.5;
+	}
+	if (weather === 'rain' && attack.data.type.name === 'fire') {
+		return 0.5;
+	}
+	return 1;
+};
+
 export const calculateDamage = (
 	attacker: BattlePokemon,
 	target: BattlePokemon,
-	attack: BattleAttack
+	attack: BattleAttack,
+	weather: WeatherType | undefined
 ): number => {
 	if (attack.data.damage_class.name !== 'physical') {
 		console.error('what is this', attack);
@@ -26,7 +43,7 @@ export const calculateDamage = (
 
 	const targetsFactor = 1;
 	const parentalBondFactor = 1;
-	const weatherFactor = 1;
+	const weatherFactor = determineWeatherFactor(attack, weather);
 	const glaiveRushFactor = 1;
 	const critFactor = attack.crit ? 2 : 1;
 	const randomFactor = 0.85 + Math.random() * 0.15;

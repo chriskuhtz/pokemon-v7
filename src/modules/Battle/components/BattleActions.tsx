@@ -5,6 +5,7 @@ import { MdCatchingPokemon } from 'react-icons/md';
 import { ItemCard } from '../../../components/ItemCard/ItemCard';
 import { MoveCard } from '../../../components/MoveCard/MoveCard';
 import { baseSize } from '../../../constants/gameData';
+import { WeatherType } from '../../../functions/calculateDamage';
 import { determineBestMove } from '../../../functions/determineBestMove';
 import { determineCritFactor } from '../../../functions/determineCritFactor';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
@@ -20,6 +21,7 @@ export const BattleActions = ({
 	player,
 	opponent,
 	runAway,
+	battleWeather,
 }: {
 	inventory: Inventory;
 	chooseMove: (x: BattleAction) => void;
@@ -27,6 +29,7 @@ export const BattleActions = ({
 	opponent: BattlePokemon;
 	player: BattlePokemon;
 	runAway: () => void;
+	battleWeather: WeatherType | undefined;
 }) => {
 	const { firstMove, secondMove, thirdMove, fourthMove } = player;
 	const [menu, setMenu] = useState<'MAIN' | 'BALLS' | 'MOVES'>('MAIN');
@@ -35,8 +38,8 @@ export const BattleActions = ({
 	) as [PokeballType, number][];
 
 	const recommendedMove = useMemo(() => {
-		return determineBestMove(player, opponent);
-	}, [opponent, player]);
+		return determineBestMove(player, opponent, battleWeather);
+	}, [battleWeather, opponent, player]);
 
 	if (battleStep !== 'MOVE_SELECTION') {
 		return <></>;

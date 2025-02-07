@@ -9,6 +9,7 @@ import { EnemyLane } from './components/EnemyLane';
 import { PlayerLane } from './components/PlayerLane';
 import { useBattlePokemon } from './hooks/useBattlePokemon';
 import { useBattleSteps } from './hooks/useBattleSteps';
+import { BattleInfo } from './components/BattleInfo';
 
 export const Battle = ({
 	opponent,
@@ -26,7 +27,7 @@ export const Battle = ({
 	const [slot1, setSlot1] = useBattlePokemon(team[0]);
 	const [slot3, setSlot3] = useBattlePokemon(opponent);
 
-	const { battleStep, initBattle, nextMove, setNextPlayerMove } =
+	const { battleStep, initBattle, nextMove, setNextPlayerMove, battleWeather } =
 		useBattleSteps({
 			initSaveFile,
 			syncAfterBattleEnd,
@@ -54,9 +55,10 @@ export const Battle = ({
 				battleStep={battleStep}
 				opponent={slot3}
 				player={slot1}
-				voidSteps={['MOVE_SELECTION', 'OPPONENT_EMERGE', 'PLAYER_EMERGE']}
+				voidSteps={['MOVE_SELECTION']}
 			/>
-			<strong style={{ position: 'absolute' }}>BattleStep: {battleStep}</strong>
+			<BattleInfo battleStep={battleStep} battleWeather={battleWeather} />
+
 			<div className="battle">
 				<EnemyLane
 					battleStep={battleStep}
@@ -72,6 +74,7 @@ export const Battle = ({
 					voidSteps={['OPPONENT_INTRO', 'PLAYER_INTRO']}
 				/>
 				<BattleActions
+					battleWeather={battleWeather}
 					battleStep={battleStep}
 					chooseMove={setNextPlayerMove}
 					inventory={initSaveFile.inventory}

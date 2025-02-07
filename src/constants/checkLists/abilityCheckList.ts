@@ -12,6 +12,7 @@ export const abilityCheckList: {
 	{
 		name: 'drizzle',
 		url: 'https://pokeapi.co/api/v2/ability/2/',
+		handled: true,
 	},
 	{
 		name: 'speed-boost',

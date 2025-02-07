@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { animationTimer } from '../../../constants/gameData';
 import { applyAttackToPokemon } from '../../../functions/applyAttackToPokemon';
+import { WeatherType } from '../../../functions/calculateDamage';
 import { determineBestMove } from '../../../functions/determineBestMove';
 import { determineCatchRate } from '../../../functions/determineCatchRate';
 import { isKO } from '../../../functions/isKo';
@@ -17,6 +18,7 @@ import {
 import { PokeballType } from '../../../interfaces/Item';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { BattleStep } from '../types/BattleStep';
+import { determineWeather } from '../../../functions/determineWeather';
 
 export interface CatchProcessInfo {
 	pokemon: BattlePokemon;
@@ -49,9 +51,12 @@ export const useBattleSteps = ({
 	initBattle: () => void;
 	setNextPlayerMove: (x: BattleAction | undefined) => void;
 	nextMove: BattleAction | undefined;
+	battleWeather: WeatherType | undefined;
 } => {
 	const [battleStep, setBattleStep] = useState<BattleStep>('UNITIALIZED');
-
+	const [battleWeather, setBattleWeather] = useState<WeatherType | undefined>(
+		undefined
+	);
 	const [usedItems, setUsedItems] = useState<Inventory>(EmptyInventory);
 	const [caughtPokemon, setCaughtPokemon] = useState<CatchProcessInfo[]>([]);
 	const [nextPlayerMove, setNextPlayerMove] = useState<
@@ -85,6 +90,7 @@ export const useBattleSteps = ({
 		if (battleStep !== 'OPPONENT_INTRO') {
 			return;
 		}
+
 		const t = setTimeout(() => setBattleStep('PLAYER_INTRO'), animationTimer);
 
 		return () => clearTimeout(t);
@@ -94,31 +100,36 @@ export const useBattleSteps = ({
 		if (battleStep !== 'PLAYER_INTRO') {
 			return;
 		}
-		const t = setTimeout(
-			() => setBattleStep('OPPONENT_EMERGE'),
-			animationTimer
-		);
+		const t = setTimeout(() => {
+			setBattleStep('OPPONENT_EMERGE');
+		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, setBattleStep]);
+	}, [battleStep, player, setBattleStep]);
 	//'OPPONENT_EMERGE' to 'PLAYER_EMERGE'
 	useEffect(() => {
-		if (battleStep !== 'OPPONENT_EMERGE') {
+		if (battleStep !== 'OPPONENT_EMERGE' || !opponent) {
 			return;
 		}
-		const t = setTimeout(() => setBattleStep('PLAYER_EMERGE'), animationTimer);
+		const t = setTimeout(() => {
+			setBattleWeather(determineWeather(opponent));
+			setBattleStep('PLAYER_EMERGE');
+		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, setBattleStep]);
+	}, [battleStep, opponent, setBattleStep]);
 	//'PLAYER_EMERGE' to 'MOVE_SELECTION'
 	useEffect(() => {
-		if (battleStep !== 'PLAYER_EMERGE') {
+		if (battleStep !== 'PLAYER_EMERGE' || !player) {
 			return;
 		}
-		const t = setTimeout(() => setBattleStep('MOVE_SELECTION'), animationTimer);
+		const t = setTimeout(() => {
+			setBattleWeather(determineWeather(player));
+			setBattleStep('MOVE_SELECTION');
+		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, setBattleStep]);
+	}, [battleStep, player, setBattleStep]);
 	//MOVE_SELECTION to "OPPONENT_MOVE_SELECTION"
 	useEffect(() => {
 		if (battleStep === 'MOVE_SELECTION' && nextPlayerMove) {
@@ -133,10 +144,10 @@ export const useBattleSteps = ({
 			opponent &&
 			player
 		) {
-			setNextOpponentMove(determineBestMove(opponent, player));
+			setNextOpponentMove(determineBestMove(opponent, player, battleWeather));
 			setBattleStep('MOVE_HANDLING');
 		}
-	}, [battleStep, nextOpponentMove, opponent, player]);
+	}, [battleStep, battleWeather, nextOpponentMove, opponent, player]);
 	//"MOVE_HANDLING" to "EXECUTE_PLAYER_MOVE"
 	useEffect(() => {
 		if (battleStep === 'MOVE_HANDLING') {
@@ -169,6 +180,7 @@ export const useBattleSteps = ({
 					target: opponent,
 					setAttacker: setPlayer,
 					setTarget: setOpponent,
+					weather: battleWeather,
 				});
 				setNextPlayerMove(undefined);
 				if (isKO(updatedTarget)) {
@@ -185,7 +197,15 @@ export const useBattleSteps = ({
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, nextPlayerMove, opponent, player, setOpponent, setPlayer]);
+	}, [
+		battleStep,
+		battleWeather,
+		nextPlayerMove,
+		opponent,
+		player,
+		setOpponent,
+		setPlayer,
+	]);
 	//"EXECUTE_OPPONENT_MOVE"
 	useEffect(() => {
 		if (battleStep !== 'EXECUTE_OPPONENT_MOVE') {
@@ -205,6 +225,7 @@ export const useBattleSteps = ({
 					attacker: opponent,
 					setAttacker: setOpponent,
 					setTarget: setPlayer,
+					weather: battleWeather,
 				});
 				setNextOpponentMove(undefined);
 				if (isKO(updatedTarget)) {
@@ -222,6 +243,7 @@ export const useBattleSteps = ({
 		return () => clearTimeout(t);
 	}, [
 		battleStep,
+		battleWeather,
 		nextOpponentMove,
 		nextPlayerMove,
 		opponent,
@@ -480,5 +502,6 @@ export const useBattleSteps = ({
 		battleStep,
 		initBattle,
 		setNextPlayerMove,
+		battleWeather,
 	};
 };

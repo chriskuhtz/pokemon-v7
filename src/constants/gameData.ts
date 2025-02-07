@@ -15,6 +15,19 @@ export const testState: SaveFile = {
 	money: 5000,
 	pokemon: [
 		{
+			dexId: 7,
+			ownerId,
+			id: 'bubu',
+			ball: 'master-ball',
+			onTeam: true,
+			firstMove: { name: 'pound', usedPP: 0 },
+			secondMove: { name: 'karate-chop', usedPP: 0 },
+			damage: 0,
+			nature: 'adamant',
+			xp: 100000,
+			ability: 'drizzle',
+		},
+		{
 			dexId: 25,
 			ownerId,
 			id: 'bubu',
