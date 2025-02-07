@@ -8,6 +8,7 @@ import { Banner } from '../../../uiComponents/Banner/Banner';
 import { BattleAction } from '../hooks/useBattleSteps';
 import { BattleStep } from '../types/BattleStep';
 import { MoveExecutionBanner } from './MoveExecutionBanner';
+import { MoveMissedBanner } from './MoveMissedBanner';
 
 export const BattleBanner = ({
 	opponent,
@@ -133,6 +134,12 @@ export const BattleBanner = ({
 				{player.data.name} flinched
 			</Banner>
 		);
+	}
+	if (battleStep === 'OPPONENT_MISSED') {
+		return <MoveMissedBanner attacker={opponent} />;
+	}
+	if (battleStep === 'PLAYER_MISSED') {
+		return <MoveMissedBanner attacker={player} />;
 	}
 	if (
 		battleStep === 'CATCHING_PROCESS_1' &&

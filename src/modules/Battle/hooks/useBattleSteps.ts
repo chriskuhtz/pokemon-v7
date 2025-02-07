@@ -11,6 +11,7 @@ import { determineWeather } from '../../../functions/determineWeather';
 import { isKO } from '../../../functions/isKo';
 import { receiveNewPokemonFunction } from '../../../functions/receiveNewPokemonFunction';
 import { reduceBattlePokemonToOwnedPokemon } from '../../../functions/reduceBattlePokemonToOwnedPokemon';
+import { reduceMovePP } from '../../../functions/reduceMovePP';
 import { targetFlinched } from '../../../functions/targetFlinched';
 import { BattleAttack } from '../../../interfaces/BattleAttack';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
@@ -184,6 +185,12 @@ export const useBattleSteps = ({
 				return;
 			}
 			if (nextPlayerMove?.type === 'BattleAttack') {
+				if (nextPlayerMove.miss) {
+					setPlayer(reduceMovePP(player, nextPlayerMove.name));
+					setNextPlayerMove(undefined);
+					setBattleStep('PLAYER_MISSED');
+					return;
+				}
 				const { updatedTarget } = applyAttackToPokemon({
 					attack: nextPlayerMove,
 					attacker: player,
@@ -246,6 +253,12 @@ export const useBattleSteps = ({
 			}
 
 			if (nextOpponentMove?.type === 'BattleAttack') {
+				if (nextOpponentMove.miss) {
+					setOpponent(reduceMovePP(opponent, nextOpponentMove.name));
+					setNextPlayerMove(undefined);
+					setBattleStep('OPPONENT_MISSED');
+					return;
+				}
 				const { updatedTarget } = applyAttackToPokemon({
 					attack: nextOpponentMove,
 					target: player,
@@ -315,6 +328,30 @@ export const useBattleSteps = ({
 		const t = setTimeout(() => {
 			setBattleStep('MOVE_SELECTION');
 			setNextOpponentMove(undefined);
+			setNextPlayerMove(undefined);
+		}, animationTimer);
+
+		return () => clearTimeout(t);
+	}, [battleStep, setBattleStep]);
+	//"OPPONENT_MISSED"
+	useEffect(() => {
+		if (battleStep !== 'OPPONENT_MISSED') {
+			return;
+		}
+		const t = setTimeout(() => {
+			setBattleStep('MOVE_SELECTION');
+			setNextOpponentMove(undefined);
+		}, animationTimer);
+
+		return () => clearTimeout(t);
+	}, [battleStep, setBattleStep]);
+	//"PLAYER_MISSED"
+	useEffect(() => {
+		if (battleStep !== 'PLAYER_MISSED') {
+			return;
+		}
+		const t = setTimeout(() => {
+			setBattleStep('EXECUTE_OPPONENT_MOVE');
 			setNextPlayerMove(undefined);
 		}, animationTimer);
 
