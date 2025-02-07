@@ -75,7 +75,7 @@ export const Battle = ({
 					battleStep={battleStep}
 					chooseMove={setNextPlayerMove}
 					inventory={initSaveFile.inventory}
-					firstMove={slot1.firstMove}
+					player={slot1}
 					opponent={slot3}
 					runAway={goBack}
 				/>

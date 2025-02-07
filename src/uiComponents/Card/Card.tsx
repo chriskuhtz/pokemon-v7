@@ -7,19 +7,21 @@ export const Card = ({
 	actionElements,
 	onClick,
 	disabled,
+	highlighted,
 }: {
 	icon: ReactNode;
 	content: ReactNode;
 	actionElements: React.JSX.Element[];
 	onClick?: () => void;
 	disabled?: boolean;
+	highlighted?: boolean;
 }) => {
 	return (
 		<div
 			tabIndex={0}
 			role={onClick && !disabled ? 'button' : 'none'}
 			onClick={disabled ? undefined : onClick}
-			className="card"
+			className={`card ${highlighted ? 'highlightedCard' : ''}`}
 		>
 			{icon}
 			{content}

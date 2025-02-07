@@ -28,6 +28,9 @@ export const OwnedPokemonCardContent = ({
 			<div>
 				<h4>Moves:</h4>
 				<h5>{ownedPokemon.firstMove.name}</h5>
+				<h5>{ownedPokemon.secondMove?.name}</h5>
+				<h5>{ownedPokemon.thirdMove?.name}</h5>
+				<h5>{ownedPokemon.fourthMove?.name}</h5>
 			</div>
 		</div>
 	);

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { animationTimer } from '../../../constants/gameData';
 import { applyAttackToPokemon } from '../../../functions/applyAttackToPokemon';
+import { determineBestMove } from '../../../functions/determineBestMove';
 import { determineCatchRate } from '../../../functions/determineCatchRate';
 import { isKO } from '../../../functions/isKo';
 import { receiveNewPokemonFunction } from '../../../functions/receiveNewPokemonFunction';
@@ -23,7 +24,7 @@ export interface CatchProcessInfo {
 	type: 'CatchProcessInfo';
 }
 
-export type BattleMove = CatchProcessInfo | BattleAttack;
+export type BattleAction = CatchProcessInfo | BattleAttack;
 
 interface UseBattleStepsProps {
 	initSaveFile: SaveFile;
@@ -46,15 +47,15 @@ export const useBattleSteps = ({
 }: UseBattleStepsProps): {
 	battleStep: BattleStep;
 	initBattle: () => void;
-	setNextPlayerMove: (x: BattleMove | undefined) => void;
-	nextMove: BattleMove | undefined;
+	setNextPlayerMove: (x: BattleAction | undefined) => void;
+	nextMove: BattleAction | undefined;
 } => {
 	const [battleStep, setBattleStep] = useState<BattleStep>('UNITIALIZED');
 
 	const [usedItems, setUsedItems] = useState<Inventory>(EmptyInventory);
 	const [caughtPokemon, setCaughtPokemon] = useState<CatchProcessInfo[]>([]);
 	const [nextPlayerMove, setNextPlayerMove] = useState<
-		BattleMove | undefined
+		BattleAction | undefined
 	>();
 	const [nextOpponentMove, setNextOpponentMove] = useState<
 		BattleAttack | undefined
@@ -129,12 +130,13 @@ export const useBattleSteps = ({
 		if (
 			battleStep === 'OPPONENT_MOVE_SELECTION' &&
 			!nextOpponentMove &&
-			opponent
+			opponent &&
+			player
 		) {
-			setNextOpponentMove(opponent?.firstMove);
+			setNextOpponentMove(determineBestMove(opponent, player));
 			setBattleStep('MOVE_HANDLING');
 		}
-	}, [battleStep, nextOpponentMove, opponent]);
+	}, [battleStep, nextOpponentMove, opponent, player]);
 	//"MOVE_HANDLING" to "EXECUTE_PLAYER_MOVE"
 	useEffect(() => {
 		if (battleStep === 'MOVE_HANDLING') {

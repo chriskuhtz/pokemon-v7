@@ -1,6 +1,7 @@
 import { BattleAttack } from '../interfaces/BattleAttack';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { calculateDamage } from './calculateDamage';
+import { reduceMovePP } from './reduceMovePP';
 
 export const applyAttackToPokemon = ({
 	attacker,
@@ -17,13 +18,7 @@ export const applyAttackToPokemon = ({
 }): { updatedAttacker: BattlePokemon; updatedTarget: BattlePokemon } => {
 	const damage = calculateDamage(attacker, target, attack);
 
-	const updatedAttacker = {
-		...attacker,
-		firstMove: {
-			...attacker.firstMove,
-			usedPP: attacker.firstMove.usedPP + 1,
-		},
-	};
+	const updatedAttacker = reduceMovePP(attacker, attack.name);
 	const updatedTarget = { ...target, damage: target.damage + damage };
 	setAttacker(updatedAttacker);
 	setTarget(updatedTarget);

@@ -4,7 +4,7 @@ import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Banner } from '../../../uiComponents/Banner/Banner';
-import { BattleMove } from '../hooks/useBattleSteps';
+import { BattleAction } from '../hooks/useBattleSteps';
 import { BattleStep } from '../types/BattleStep';
 import { MoveExecutionBanner } from './MoveExecutionBanner';
 export const BattleBanner = ({
@@ -18,7 +18,7 @@ export const BattleBanner = ({
 	player: BattlePokemon;
 	battleStep: BattleStep;
 	voidSteps: BattleStep[];
-	nextMove: BattleMove | undefined;
+	nextMove: BattleAction | undefined;
 }) => {
 	if (voidSteps.includes(battleStep)) {
 		return <div></div>;

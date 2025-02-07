@@ -1,35 +1,42 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { FaFistRaised, FaRunning } from 'react-icons/fa';
 import { IoIosArrowBack } from 'react-icons/io';
 import { MdCatchingPokemon } from 'react-icons/md';
 import { ItemCard } from '../../../components/ItemCard/ItemCard';
 import { MoveCard } from '../../../components/MoveCard/MoveCard';
 import { baseSize } from '../../../constants/gameData';
+import { determineBestMove } from '../../../functions/determineBestMove';
+import { determineCritFactor } from '../../../functions/determineCritFactor';
+import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import { isPokeball, PokeballType } from '../../../interfaces/Item';
 import { Card } from '../../../uiComponents/Card/Card';
-import { BattleMove } from '../hooks/useBattleSteps';
+import { BattleAction } from '../hooks/useBattleSteps';
 import { BattleStep } from '../types/BattleStep';
-import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 export const BattleActions = ({
 	inventory,
 	chooseMove,
 	battleStep,
-	firstMove,
+	player,
 	opponent,
 	runAway,
 }: {
 	inventory: Inventory;
-	chooseMove: (x: BattleMove) => void;
+	chooseMove: (x: BattleAction) => void;
 	battleStep: BattleStep;
-	firstMove: BattlePokemon['firstMove'];
 	opponent: BattlePokemon;
+	player: BattlePokemon;
 	runAway: () => void;
 }) => {
+	const { firstMove, secondMove, thirdMove, fourthMove } = player;
 	const [menu, setMenu] = useState<'MAIN' | 'BALLS' | 'MOVES'>('MAIN');
 	const balls: [PokeballType, number][] = Object.entries(inventory).filter(
 		([item]) => isPokeball(item)
 	) as [PokeballType, number][];
+
+	const recommendedMove = useMemo(() => {
+		return determineBestMove(player, opponent);
+	}, [opponent, player]);
 
 	if (battleStep !== 'MOVE_SELECTION') {
 		return <></>;
@@ -90,7 +97,25 @@ export const BattleActions = ({
 					size={baseSize / 2}
 					onClick={() => setMenu('MAIN')}
 				/>
-				<MoveCard move={firstMove} onClick={() => chooseMove(firstMove)} />
+				{[firstMove, secondMove, thirdMove, fourthMove].map((m) => {
+					if (m) {
+						return (
+							<MoveCard
+								move={m}
+								highlighted={recommendedMove.name === m.name}
+								note={
+									recommendedMove.name === m.name ? 'Recommended' : undefined
+								}
+								onClick={() =>
+									chooseMove({
+										...m,
+										crit: determineCritFactor(m.data.meta.crit_rate),
+									})
+								}
+							/>
+						);
+					}
+				})}
 			</div>
 		);
 	}
