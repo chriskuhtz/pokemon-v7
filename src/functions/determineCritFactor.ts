@@ -1,3 +1,3 @@
-export const determineCritFactor = (critRate: number) => {
-	return (3 * critRate) / 24;
+export const determineCritFactor = (critRate: number): boolean => {
+	return (3 * critRate) / 24 > Math.random();
 };

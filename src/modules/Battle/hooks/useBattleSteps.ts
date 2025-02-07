@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { animationTimer } from '../../../constants/gameData';
 import { applyAttackToPokemon } from '../../../functions/applyAttackToPokemon';
+import { determineBestMove } from '../../../functions/determineBestMove';
 import { determineCatchRate } from '../../../functions/determineCatchRate';
 import { isKO } from '../../../functions/isKo';
 import { receiveNewPokemonFunction } from '../../../functions/receiveNewPokemonFunction';
@@ -129,13 +130,13 @@ export const useBattleSteps = ({
 		if (
 			battleStep === 'OPPONENT_MOVE_SELECTION' &&
 			!nextOpponentMove &&
-			opponent
+			opponent &&
+			player
 		) {
-			//TODO: make opponent choose move
-			setNextOpponentMove(opponent?.firstMove);
+			setNextOpponentMove(determineBestMove(opponent, player));
 			setBattleStep('MOVE_HANDLING');
 		}
-	}, [battleStep, nextOpponentMove, opponent]);
+	}, [battleStep, nextOpponentMove, opponent, player]);
 	//"MOVE_HANDLING" to "EXECUTE_PLAYER_MOVE"
 	useEffect(() => {
 		if (battleStep === 'MOVE_HANDLING') {

@@ -1,7 +1,6 @@
 import { BattleAttack } from '../interfaces/BattleAttack';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { calculateLevelData } from './calculateLevelData';
-import { determineCritFactor } from './determineCritFactor';
 import { determineStabFactor } from './determineStabFactor';
 import { determineTypeFactor } from './determineTypeFactor';
 
@@ -29,7 +28,7 @@ export const calculateDamage = (
 	const parentalBondFactor = 1;
 	const weatherFactor = 1;
 	const glaiveRushFactor = 1;
-	const critFactor = determineCritFactor(attack.data.meta.crit_rate);
+	const critFactor = attack.crit ? 2 : 1;
 	const randomFactor = 0.85 + Math.random() * 0.15;
 	const stabFactor = determineStabFactor(attacker, attack);
 	const typeFactor = determineTypeFactor(target, attack);
