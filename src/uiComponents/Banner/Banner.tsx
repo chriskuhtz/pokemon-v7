@@ -14,7 +14,7 @@ export const Banner = ({ children }: { children: ReactNode }) => {
 		>
 			<div
 				style={{
-					backgroundColor: 'black',
+					backgroundColor: 'rgba(0,0,0,.8)',
 					color: 'white',
 					display: 'flex',
 					alignItems: 'center',

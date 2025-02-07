@@ -8,31 +8,31 @@ export const reduceMovePP = (
 		...user,
 		firstMove: {
 			...user.firstMove,
-			usedPP: user.firstMove.usedPP + moveName === user.firstMove.name ? 1 : 0,
+			usedPP:
+				user.firstMove.usedPP + (moveName === user.firstMove.name ? 1 : 0),
 		},
 		secondMove: user.secondMove
 			? {
 					...user.secondMove,
 					usedPP:
-						user.secondMove?.usedPP + moveName === user.secondMove?.name
-							? 1
-							: 0,
+						user.secondMove?.usedPP +
+						(moveName === user.secondMove?.name ? 1 : 0),
 			  }
 			: undefined,
 		thirdMove: user.thirdMove
 			? {
 					...user.thirdMove,
 					usedPP:
-						user.thirdMove?.usedPP + moveName === user.thirdMove?.name ? 1 : 0,
+						user.thirdMove?.usedPP +
+						(moveName === user.thirdMove?.name ? 1 : 0),
 			  }
 			: undefined,
 		fourthMove: user.fourthMove
 			? {
 					...user.fourthMove,
 					usedPP:
-						user.fourthMove?.usedPP + moveName === user.fourthMove?.name
-							? 1
-							: 0,
+						user.fourthMove?.usedPP +
+						(moveName === user.fourthMove?.name ? 1 : 0),
 			  }
 			: undefined,
 	};

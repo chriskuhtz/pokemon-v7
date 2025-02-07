@@ -12,12 +12,12 @@ export const movesCheckList: {
 	{
 		name: 'karate-chop',
 		url: 'https://pokeapi.co/api/v2/move/2/',
-		todos: [],
 		handled: true,
 	},
 	{
 		name: 'double-slap',
 		url: 'https://pokeapi.co/api/v2/move/3/',
+		handled: true,
 	},
 	{
 		name: 'comet-punch',
