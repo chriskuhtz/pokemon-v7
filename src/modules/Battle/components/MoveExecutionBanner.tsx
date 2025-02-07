@@ -11,10 +11,12 @@ export const MoveExecutionBanner = ({
 	attack,
 	attacker,
 	target,
+	spriteFirst,
 }: {
 	attacker: BattlePokemon;
 	target: BattlePokemon;
 	attack: BattleAttack;
+	spriteFirst?: boolean;
 }) => {
 	const typeFactorMessage = useMemo(() => {
 		const typeFactor = determineTypeFactor(target, attack);
@@ -35,7 +37,7 @@ export const MoveExecutionBanner = ({
 	}, [attack]);
 
 	return (
-		<Banner>
+		<Banner flexDirection={spriteFirst ? 'row-reverse' : 'row'}>
 			<div>
 				<h3>
 					{attacker.data.name} used {attack.name} against {target.data.name}

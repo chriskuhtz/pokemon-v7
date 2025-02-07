@@ -64,6 +64,7 @@ export const BattleBanner = ({
 				target={opponent}
 				attacker={player}
 				attack={nextMove}
+				spriteFirst={true}
 			/>
 		);
 	}

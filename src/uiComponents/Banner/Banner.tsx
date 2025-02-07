@@ -1,6 +1,12 @@
-import { ReactNode } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 
-export const Banner = ({ children }: { children: ReactNode }) => {
+export const Banner = ({
+	children,
+	flexDirection,
+}: {
+	children: ReactNode;
+	flexDirection?: CSSProperties['flexDirection'];
+}) => {
 	return (
 		<div
 			style={{
@@ -17,6 +23,7 @@ export const Banner = ({ children }: { children: ReactNode }) => {
 					backgroundColor: 'rgba(0,0,0,.8)',
 					color: 'white',
 					display: 'flex',
+					flexDirection: flexDirection ?? 'row',
 					alignItems: 'center',
 					width: '100vw',
 					padding: '0 2rem',
