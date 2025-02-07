@@ -1,6 +1,5 @@
 import React from 'react';
 import { battleSpriteSize } from '../../../constants/gameData';
-import { determineWeatherMessage } from '../../../functions/determineWeatherMessage';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
@@ -54,36 +53,7 @@ export const BattleBanner = ({
 			</Banner>
 		);
 	}
-	const oppoWeatherMessage = determineWeatherMessage(opponent);
-	if (battleStep === 'OPPONENT_EMERGE' && oppoWeatherMessage) {
-		return (
-			<Banner>
-				<React.Fragment>
-					{oppoWeatherMessage}
-					<img
-						height={battleSpriteSize}
-						width={battleSpriteSize}
-						src={getPokemonSprite(opponent.dexId)}
-					/>
-				</React.Fragment>
-			</Banner>
-		);
-	}
-	const playerWeatherMessage = determineWeatherMessage(player);
-	if (battleStep === 'PLAYER_EMERGE' && playerWeatherMessage) {
-		return (
-			<Banner>
-				<React.Fragment>
-					<img
-						height={battleSpriteSize}
-						width={battleSpriteSize}
-						src={getPokemonSprite(player.dexId)}
-					/>
-					{playerWeatherMessage}
-				</React.Fragment>
-			</Banner>
-		);
-	}
+
 	if (
 		battleStep === 'EXECUTE_PLAYER_MOVE' &&
 		nextMove?.type === 'BattleAttack' &&

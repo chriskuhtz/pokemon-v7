@@ -6,7 +6,6 @@ import { determineCatchRate } from '../../../functions/determineCatchRate';
 import { determineCrit } from '../../../functions/determineCrit';
 import { determineMiss } from '../../../functions/determineHitOrMiss';
 import { determineMultiHits } from '../../../functions/determineMultiHits';
-import { determineWeather } from '../../../functions/determineWeather';
 import { isKO } from '../../../functions/isKo';
 import { receiveNewPokemonFunction } from '../../../functions/receiveNewPokemonFunction';
 import { recommendMove } from '../../../functions/recommendMove';
@@ -23,6 +22,7 @@ import {
 import { PokeballType } from '../../../interfaces/Item';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { BattleStep } from '../types/BattleStep';
+import { applyOnBattleEnterAbility } from '../../../functions/applyOnBattleEnterAbility';
 
 export interface CatchProcessInfo {
 	pokemon: BattlePokemon;
@@ -40,6 +40,7 @@ interface UseBattleStepsProps {
 	player: BattlePokemon | undefined;
 	setOpponent: (x: BattlePokemon) => void;
 	setPlayer: (x: BattlePokemon) => void;
+	dispatchToast: (x: string) => void;
 }
 
 export const useBattleSteps = ({
@@ -50,6 +51,7 @@ export const useBattleSteps = ({
 	player,
 	setOpponent,
 	setPlayer,
+	dispatchToast,
 }: UseBattleStepsProps): {
 	battleStep: BattleStep;
 	initBattle: () => void;
@@ -117,24 +119,35 @@ export const useBattleSteps = ({
 			return;
 		}
 		const t = setTimeout(() => {
-			setBattleWeather(determineWeather(opponent));
+			applyOnBattleEnterAbility({
+				pokemon: opponent,
+				setWeather: setBattleWeather,
+				dispatchToast: dispatchToast,
+			});
+
 			setBattleStep('PLAYER_EMERGE');
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, opponent, setBattleStep]);
+	}, [battleStep, dispatchToast, opponent, setBattleStep]);
 	//'PLAYER_EMERGE' to 'MOVE_SELECTION'
 	useEffect(() => {
 		if (battleStep !== 'PLAYER_EMERGE' || !player) {
 			return;
 		}
 		const t = setTimeout(() => {
-			setBattleWeather(determineWeather(player));
+			applyOnBattleEnterAbility({
+				pokemon: player,
+				setWeather: setBattleWeather,
+				dispatchToast: dispatchToast,
+			});
+
 			setBattleStep('MOVE_SELECTION');
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, player, setBattleStep]);
+	}, [battleStep, dispatchToast, player, setBattleStep]);
+	//
 	//MOVE_SELECTION to "OPPONENT_MOVE_SELECTION"
 	useEffect(() => {
 		if (battleStep === 'MOVE_SELECTION' && nextPlayerMove) {

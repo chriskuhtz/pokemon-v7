@@ -1,15 +1,17 @@
 import { useEffect } from 'react';
+import { useToasts } from '../../hooks/useToasts';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../interfaces/SaveFile';
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
+import { Toast } from '../../uiComponents/Toast/Toast';
 import './Battle.css';
 import { BattleActions } from './components/BattleActions';
 import { BattleBanner } from './components/BattleBanner';
+import { BattleInfo } from './components/BattleInfo';
 import { EnemyLane } from './components/EnemyLane';
 import { PlayerLane } from './components/PlayerLane';
 import { useBattlePokemon } from './hooks/useBattlePokemon';
 import { useBattleSteps } from './hooks/useBattleSteps';
-import { BattleInfo } from './components/BattleInfo';
 
 export const Battle = ({
 	opponent,
@@ -22,6 +24,7 @@ export const Battle = ({
 	syncAfterBattleEnd: (update: SaveFile) => void;
 	goBack: () => void;
 }): JSX.Element => {
+	const { latestToast, addToast } = useToasts();
 	const team = initSaveFile.pokemon.filter((p) => p.onTeam);
 
 	const [slot1, setSlot1] = useBattlePokemon(team[0]);
@@ -36,6 +39,7 @@ export const Battle = ({
 			player: slot1,
 			setOpponent: setSlot3,
 			setPlayer: setSlot1,
+			dispatchToast: addToast,
 		});
 
 	useEffect(() => {
@@ -58,6 +62,7 @@ export const Battle = ({
 				voidSteps={['MOVE_SELECTION']}
 			/>
 			<BattleInfo battleStep={battleStep} battleWeather={battleWeather} />
+			{latestToast && <Toast message={latestToast} />}
 
 			<div className="battle">
 				<EnemyLane
