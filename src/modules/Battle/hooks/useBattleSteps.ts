@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { animationTimer } from '../../../constants/gameData';
 import { applyAttackToPokemon } from '../../../functions/applyAttackToPokemon';
+import { applyOnBattleEnterAbility } from '../../../functions/applyOnBattleEnterAbility';
 import { WeatherType } from '../../../functions/calculateDamage';
 import { determineCatchRate } from '../../../functions/determineCatchRate';
 import { determineCrit } from '../../../functions/determineCrit';
@@ -12,6 +13,7 @@ import { recommendMove } from '../../../functions/recommendMove';
 import { reduceBattlePokemonToOwnedPokemon } from '../../../functions/reduceBattlePokemonToOwnedPokemon';
 import { reduceMovePP } from '../../../functions/reduceMovePP';
 import { targetFlinched } from '../../../functions/targetFlinched';
+import { AddToastFunction } from '../../../hooks/useToasts';
 import { BattleAttack } from '../../../interfaces/BattleAttack';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import {
@@ -22,7 +24,6 @@ import {
 import { PokeballType } from '../../../interfaces/Item';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { BattleStep } from '../types/BattleStep';
-import { applyOnBattleEnterAbility } from '../../../functions/applyOnBattleEnterAbility';
 
 export interface CatchProcessInfo {
 	pokemon: BattlePokemon;
@@ -40,7 +41,7 @@ interface UseBattleStepsProps {
 	player: BattlePokemon | undefined;
 	setOpponent: (x: BattlePokemon) => void;
 	setPlayer: (x: BattlePokemon) => void;
-	dispatchToast: (x: string) => void;
+	dispatchToast: AddToastFunction;
 }
 
 export const useBattleSteps = ({

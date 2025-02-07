@@ -17,6 +17,7 @@ export const abilityCheckList: {
 	{
 		name: 'speed-boost',
 		url: 'https://pokeapi.co/api/v2/ability/3/',
+		todos: ['speed', 'stat changes', 'use ability before every turn'],
 	},
 	{
 		name: 'battle-armor',
