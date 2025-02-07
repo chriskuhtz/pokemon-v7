@@ -1,5 +1,4 @@
 import { BsBackpack4, BsCashCoin } from 'react-icons/bs';
-import { FaFistRaised } from 'react-icons/fa';
 import { MdCatchingPokemon } from 'react-icons/md';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
@@ -37,12 +36,7 @@ export const MainMenu = ({
 					icon={<MdCatchingPokemon size={baseSize / 2} />}
 					actionElements={[]}
 				/>
-				<Card
-					onClick={() => navigate('BATTLE')}
-					content={<h4>Random Encounter</h4>}
-					icon={<FaFistRaised size={baseSize / 2} />}
-					actionElements={[]}
-				/>
+
 				<Card
 					onClick={() => navigate('MARKET')}
 					content={<h4>Market</h4>}

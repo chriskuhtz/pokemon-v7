@@ -15,7 +15,8 @@ export const BattleInfo = ({
 			<strong>BattleStep: {battleStep}</strong>
 			<br></br>
 			<strong>
-				Weather: {battleWeather} <FaCloudRain size={baseSize / 2} />
+				Weather: {battleWeather}{' '}
+				{battleWeather === 'rain' && <FaCloudRain size={baseSize / 2} />}
 			</strong>
 		</div>
 	);

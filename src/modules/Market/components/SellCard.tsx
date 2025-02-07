@@ -27,7 +27,7 @@ export const SellCard = ({
 		<ItemCard
 			key={item}
 			item={item as ItemType}
-			amount={amount}
+			amount={`${amount} in Bag`}
 			actionElements={[
 				<SellAction
 					amount={amount}
