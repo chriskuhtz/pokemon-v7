@@ -298,7 +298,7 @@ export const useBattleSteps = ({
 					return;
 				}
 				setNextOpponentMove(undefined);
-				setBattleStep('MOVE_SELECTION');
+				setBattleStep('HANDLE_PLAYER_ABILITY');
 			}
 		}, animationTimer);
 
@@ -319,7 +319,7 @@ export const useBattleSteps = ({
 			return;
 		}
 		const t = setTimeout(() => {
-			setBattleStep('MOVE_SELECTION');
+			setBattleStep('HANDLE_PLAYER_ABILITY');
 			setNextOpponentMove(undefined);
 		}, animationTimer);
 
@@ -331,7 +331,7 @@ export const useBattleSteps = ({
 			return;
 		}
 		const t = setTimeout(() => {
-			setBattleStep('MOVE_SELECTION');
+			setBattleStep('HANDLE_PLAYER_ABILITY');
 			setNextOpponentMove(undefined);
 			setNextPlayerMove(undefined);
 		}, animationTimer);
@@ -344,7 +344,7 @@ export const useBattleSteps = ({
 			return;
 		}
 		const t = setTimeout(() => {
-			setBattleStep('MOVE_SELECTION');
+			setBattleStep('HANDLE_PLAYER_ABILITY');
 			setNextOpponentMove(undefined);
 		}, animationTimer);
 
