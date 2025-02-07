@@ -10,7 +10,7 @@ import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import { isPokeball, PokeballType } from '../../../interfaces/Item';
 import { Card } from '../../../uiComponents/Card/Card';
-import { BattleMove } from '../hooks/useBattleSteps';
+import { BattleAction } from '../hooks/useBattleSteps';
 import { BattleStep } from '../types/BattleStep';
 export const BattleActions = ({
 	inventory,
@@ -24,7 +24,7 @@ export const BattleActions = ({
 	runAway,
 }: {
 	inventory: Inventory;
-	chooseMove: (x: BattleMove) => void;
+	chooseMove: (x: BattleAction) => void;
 	battleStep: BattleStep;
 	firstMove: BattleAttack;
 	secondMove?: BattleAttack;

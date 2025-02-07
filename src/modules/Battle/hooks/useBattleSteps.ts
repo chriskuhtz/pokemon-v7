@@ -23,7 +23,7 @@ export interface CatchProcessInfo {
 	type: 'CatchProcessInfo';
 }
 
-export type BattleMove = CatchProcessInfo | BattleAttack;
+export type BattleAction = CatchProcessInfo | BattleAttack;
 
 interface UseBattleStepsProps {
 	initSaveFile: SaveFile;
@@ -46,15 +46,15 @@ export const useBattleSteps = ({
 }: UseBattleStepsProps): {
 	battleStep: BattleStep;
 	initBattle: () => void;
-	setNextPlayerMove: (x: BattleMove | undefined) => void;
-	nextMove: BattleMove | undefined;
+	setNextPlayerMove: (x: BattleAction | undefined) => void;
+	nextMove: BattleAction | undefined;
 } => {
 	const [battleStep, setBattleStep] = useState<BattleStep>('UNITIALIZED');
 
 	const [usedItems, setUsedItems] = useState<Inventory>(EmptyInventory);
 	const [caughtPokemon, setCaughtPokemon] = useState<CatchProcessInfo[]>([]);
 	const [nextPlayerMove, setNextPlayerMove] = useState<
-		BattleMove | undefined
+		BattleAction | undefined
 	>();
 	const [nextOpponentMove, setNextOpponentMove] = useState<
 		BattleAttack | undefined
