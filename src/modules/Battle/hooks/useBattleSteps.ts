@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react';
 import { animationTimer } from '../../../constants/gameData';
 import { applyAttackToPokemon } from '../../../functions/applyAttackToPokemon';
 import { WeatherType } from '../../../functions/calculateDamage';
-import { determineBestMove } from '../../../functions/determineBestMove';
 import { determineCatchRate } from '../../../functions/determineCatchRate';
 import { determineCrit } from '../../../functions/determineCrit';
 import { determineMiss } from '../../../functions/determineHitOrMiss';
@@ -10,6 +9,7 @@ import { determineMultiHits } from '../../../functions/determineMultiHits';
 import { determineWeather } from '../../../functions/determineWeather';
 import { isKO } from '../../../functions/isKo';
 import { receiveNewPokemonFunction } from '../../../functions/receiveNewPokemonFunction';
+import { recommendMove } from '../../../functions/recommendMove';
 import { reduceBattlePokemonToOwnedPokemon } from '../../../functions/reduceBattlePokemonToOwnedPokemon';
 import { reduceMovePP } from '../../../functions/reduceMovePP';
 import { targetFlinched } from '../../../functions/targetFlinched';
@@ -149,7 +149,7 @@ export const useBattleSteps = ({
 			opponent &&
 			player
 		) {
-			const chosenMove = determineBestMove(opponent, player, battleWeather);
+			const chosenMove = recommendMove(opponent, player, battleWeather);
 			setNextOpponentMove({
 				...chosenMove,
 				crit: determineCrit(chosenMove.data.meta.crit_rate),

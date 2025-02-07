@@ -6,10 +6,10 @@ import { ItemCard } from '../../../components/ItemCard/ItemCard';
 import { MoveCard } from '../../../components/MoveCard/MoveCard';
 import { baseSize } from '../../../constants/gameData';
 import { WeatherType } from '../../../functions/calculateDamage';
-import { determineBestMove } from '../../../functions/determineBestMove';
 import { determineCrit } from '../../../functions/determineCrit';
 import { determineMiss } from '../../../functions/determineHitOrMiss';
 import { determineMultiHits } from '../../../functions/determineMultiHits';
+import { recommendMove } from '../../../functions/recommendMove';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import { isPokeball, PokeballType } from '../../../interfaces/Item';
@@ -40,7 +40,7 @@ export const BattleActions = ({
 	) as [PokeballType, number][];
 
 	const recommendedMove = useMemo(() => {
-		return determineBestMove(player, opponent, battleWeather);
+		return recommendMove(player, opponent, battleWeather);
 	}, [battleWeather, opponent, player]);
 
 	if (battleStep !== 'MOVE_SELECTION') {
