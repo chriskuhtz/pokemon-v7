@@ -4,7 +4,7 @@ import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Banner } from '../../../uiComponents/Banner/Banner';
-import { BattleAction } from '../hooks/useBattleSteps';
+import { BattleAction } from '../hooks/UseBattleSteps/useBattleSteps';
 import { BattleStep } from '../types/BattleStep';
 import { MoveExecutionBanner } from './MoveExecutionBanner';
 import { MoveMissedBanner } from './MoveMissedBanner';

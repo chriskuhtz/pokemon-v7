@@ -11,7 +11,7 @@ import { BattleInfo } from './components/BattleInfo';
 import { EnemyLane } from './components/EnemyLane';
 import { PlayerLane } from './components/PlayerLane';
 import { useBattlePokemon } from './hooks/useBattlePokemon';
-import { useBattleSteps } from './hooks/useBattleSteps';
+import { useBattleSteps } from './hooks/UseBattleSteps/useBattleSteps';
 
 export const Battle = ({
 	opponent,

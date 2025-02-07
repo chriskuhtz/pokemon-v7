@@ -1,29 +1,32 @@
 import { useEffect, useMemo, useState } from 'react';
-import { animationTimer } from '../../../constants/gameData';
-import { applyAttackToPokemon } from '../../../functions/applyAttackToPokemon';
-import { applyOnBattleEnterAbility } from '../../../functions/applyOnBattleEnterAbility';
-import { WeatherType } from '../../../functions/calculateDamage';
-import { determineCatchRate } from '../../../functions/determineCatchRate';
-import { determineCrit } from '../../../functions/determineCrit';
-import { determineMiss } from '../../../functions/determineHitOrMiss';
-import { determineMultiHits } from '../../../functions/determineMultiHits';
-import { isKO } from '../../../functions/isKo';
-import { receiveNewPokemonFunction } from '../../../functions/receiveNewPokemonFunction';
-import { recommendMove } from '../../../functions/recommendMove';
-import { reduceBattlePokemonToOwnedPokemon } from '../../../functions/reduceBattlePokemonToOwnedPokemon';
-import { reduceMovePP } from '../../../functions/reduceMovePP';
-import { targetFlinched } from '../../../functions/targetFlinched';
-import { AddToastFunction } from '../../../hooks/useToasts';
-import { BattleAttack } from '../../../interfaces/BattleAttack';
-import { BattlePokemon } from '../../../interfaces/BattlePokemon';
+import { animationTimer } from '../../../../constants/gameData';
+import { applyAttackToPokemon } from '../../../../functions/applyAttackToPokemon';
+import { WeatherType } from '../../../../functions/calculateDamage';
+import { determineCatchRate } from '../../../../functions/determineCatchRate';
+import { determineCrit } from '../../../../functions/determineCrit';
+import { determineMiss } from '../../../../functions/determineHitOrMiss';
+import { determineMultiHits } from '../../../../functions/determineMultiHits';
+import { isKO } from '../../../../functions/isKo';
+import { receiveNewPokemonFunction } from '../../../../functions/receiveNewPokemonFunction';
+import { recommendMove } from '../../../../functions/recommendMove';
+import { reduceBattlePokemonToOwnedPokemon } from '../../../../functions/reduceBattlePokemonToOwnedPokemon';
+import { reduceMovePP } from '../../../../functions/reduceMovePP';
+import { targetFlinched } from '../../../../functions/targetFlinched';
+import { AddToastFunction } from '../../../../hooks/useToasts';
+import { BattleAttack } from '../../../../interfaces/BattleAttack';
+import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
 import {
 	EmptyInventory,
 	Inventory,
 	joinInventories,
-} from '../../../interfaces/Inventory';
-import { PokeballType } from '../../../interfaces/Item';
-import { SaveFile } from '../../../interfaces/SaveFile';
-import { BattleStep } from '../types/BattleStep';
+} from '../../../../interfaces/Inventory';
+import { PokeballType } from '../../../../interfaces/Item';
+import { SaveFile } from '../../../../interfaces/SaveFile';
+import { BattleStep } from '../../types/BattleStep';
+import { useOpponentEmerge } from './StepHandlers/useOpponentEmerge';
+import { useOpponentIntro } from './StepHandlers/useOpponentIntro';
+import { usePlayerEmerge } from './StepHandlers/usePlayerEmerge';
+import { usePlayerIntro } from './StepHandlers/usePlayerIntro';
 
 export interface CatchProcessInfo {
 	pokemon: BattlePokemon;
@@ -41,6 +44,17 @@ interface UseBattleStepsProps {
 	player: BattlePokemon | undefined;
 	setOpponent: (x: BattlePokemon) => void;
 	setPlayer: (x: BattlePokemon) => void;
+	dispatchToast: AddToastFunction;
+}
+
+export interface BattleStepHandler {
+	battleStep: BattleStep;
+	setBattleStep: (x: BattleStep) => void;
+}
+export interface ExtendedBattleStepHandler extends BattleStepHandler {
+	player?: BattlePokemon;
+	opponent?: BattlePokemon;
+	setBattleWeather: (x: WeatherType | undefined) => void;
 	dispatchToast: AddToastFunction;
 }
 
@@ -93,61 +107,24 @@ export const useBattleSteps = ({
 		return undefined;
 	}, [battleStep, nextOpponentMove, nextPlayerMove]);
 
-	//'OPPONENT_INTRO' to 'PLAYER_INTRO'
-	useEffect(() => {
-		if (battleStep !== 'OPPONENT_INTRO') {
-			return;
-		}
-
-		const t = setTimeout(() => setBattleStep('PLAYER_INTRO'), animationTimer);
-
-		return () => clearTimeout(t);
-	}, [battleStep, setBattleStep]);
-	//'PLAYER_INTRO' to 'OPPONENT_EMERGE'
-	useEffect(() => {
-		if (battleStep !== 'PLAYER_INTRO') {
-			return;
-		}
-		const t = setTimeout(() => {
-			setBattleStep('OPPONENT_EMERGE');
-		}, animationTimer);
-
-		return () => clearTimeout(t);
-	}, [battleStep, player, setBattleStep]);
-	//'OPPONENT_EMERGE' to 'PLAYER_EMERGE'
-	useEffect(() => {
-		if (battleStep !== 'OPPONENT_EMERGE' || !opponent) {
-			return;
-		}
-		const t = setTimeout(() => {
-			applyOnBattleEnterAbility({
-				pokemon: opponent,
-				setWeather: setBattleWeather,
-				dispatchToast: dispatchToast,
-			});
-
-			setBattleStep('PLAYER_EMERGE');
-		}, animationTimer);
-
-		return () => clearTimeout(t);
-	}, [battleStep, dispatchToast, opponent, setBattleStep]);
-	//'PLAYER_EMERGE' to 'MOVE_SELECTION'
-	useEffect(() => {
-		if (battleStep !== 'PLAYER_EMERGE' || !player) {
-			return;
-		}
-		const t = setTimeout(() => {
-			applyOnBattleEnterAbility({
-				pokemon: player,
-				setWeather: setBattleWeather,
-				dispatchToast: dispatchToast,
-			});
-
-			setBattleStep('MOVE_SELECTION');
-		}, animationTimer);
-
-		return () => clearTimeout(t);
-	}, [battleStep, dispatchToast, player, setBattleStep]);
+	useOpponentIntro({ battleStep, setBattleStep });
+	usePlayerIntro({ battleStep, setBattleStep });
+	useOpponentEmerge({
+		battleStep,
+		setBattleStep,
+		player,
+		opponent,
+		dispatchToast,
+		setBattleWeather,
+	});
+	usePlayerEmerge({
+		battleStep,
+		setBattleStep,
+		player,
+		opponent,
+		dispatchToast,
+		setBattleWeather,
+	});
 	//
 	//MOVE_SELECTION to "OPPONENT_MOVE_SELECTION"
 	useEffect(() => {
