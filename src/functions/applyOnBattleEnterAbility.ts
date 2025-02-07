@@ -1,3 +1,4 @@
+import { AddToastFunction } from '../hooks/useToasts';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from './calculateDamage';
 
@@ -8,7 +9,7 @@ export const applyOnBattleEnterAbility = ({
 }: {
 	pokemon: BattlePokemon;
 	setWeather: (x: WeatherType) => void;
-	dispatchToast: (x: string) => void;
+	dispatchToast: AddToastFunction;
 }) => {
 	if (pokemon.ability === 'drizzle') {
 		setWeather('rain');

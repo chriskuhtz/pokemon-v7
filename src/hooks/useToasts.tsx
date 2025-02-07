@@ -1,13 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { animationTimer } from '../constants/gameData';
+
+export type AddToastFunction = (x: string) => void;
 
 export const useToasts = (): {
 	latestToast: string | undefined;
-	addToast: (x: string) => void;
+	addToast: AddToastFunction;
 } => {
 	const [toasts, setToasts] = useState<string[]>([]);
 
-	const addToast = (x: string) => {
+	const addToast: AddToastFunction = (x: string) => {
 		setToasts((toasts) => [...toasts, x]);
 	};
 
