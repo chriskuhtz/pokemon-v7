@@ -1,10 +1,11 @@
 import { BattleAttack } from '../interfaces/BattleAttack';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { calculateDamage } from './calculateDamage';
+import { calculateDamage, WeatherType } from './calculateDamage';
 
 export const determineBestMove = (
 	attacker: BattlePokemon,
-	target: BattlePokemon
+	target: BattlePokemon,
+	weather: WeatherType | undefined
 ): BattleAttack => {
 	const weightedMoves = [
 		attacker.firstMove,
@@ -15,8 +16,8 @@ export const determineBestMove = (
 		.filter((a) => a !== undefined)
 		.sort(
 			(a, b) =>
-				calculateDamage(attacker, target, b) -
-				calculateDamage(attacker, target, a)
+				calculateDamage(attacker, target, b, weather) -
+				calculateDamage(attacker, target, a, weather)
 		);
 	return weightedMoves[0];
 };

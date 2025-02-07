@@ -23,6 +23,7 @@ export const OwnedPokemonCardContent = ({
 				<h4>{data.name.toUpperCase()}</h4>
 				<h5>{typeNames.join('/')} type</h5>
 				<h5>{ownedPokemon.nature} nature</h5>
+				<h5>ability: {ownedPokemon.ability}</h5>
 			</div>
 
 			<div>
