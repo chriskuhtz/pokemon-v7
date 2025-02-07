@@ -7,7 +7,9 @@ import { MoveCard } from '../../../components/MoveCard/MoveCard';
 import { baseSize } from '../../../constants/gameData';
 import { WeatherType } from '../../../functions/calculateDamage';
 import { determineBestMove } from '../../../functions/determineBestMove';
-import { determineCritFactor } from '../../../functions/determineCritFactor';
+import { determineCrit } from '../../../functions/determineCrit';
+import { determineMiss } from '../../../functions/determineHitOrMiss';
+import { determineMultiHits } from '../../../functions/determineMultiHits';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import { isPokeball, PokeballType } from '../../../interfaces/Item';
@@ -104,6 +106,7 @@ export const BattleActions = ({
 					if (m) {
 						return (
 							<MoveCard
+								key={m.name}
 								move={m}
 								highlighted={recommendedMove.name === m.name}
 								note={
@@ -112,7 +115,9 @@ export const BattleActions = ({
 								onClick={() =>
 									chooseMove({
 										...m,
-										crit: determineCritFactor(m.data.meta.crit_rate),
+										crit: determineCrit(m.data.meta.crit_rate),
+										miss: determineMiss(m),
+										multiHits: determineMultiHits(m),
 									})
 								}
 							/>

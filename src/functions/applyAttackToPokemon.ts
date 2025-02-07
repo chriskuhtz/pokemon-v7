@@ -20,7 +20,10 @@ export const applyAttackToPokemon = ({
 }): { updatedAttacker: BattlePokemon; updatedTarget: BattlePokemon } => {
 	const damage = calculateDamage(attacker, target, attack, weather);
 
-	const updatedAttacker = reduceMovePP(attacker, attack.name);
+	const updatedAttacker =
+		(attack.multiHits ?? 0) > 1
+			? attacker
+			: reduceMovePP(attacker, attack.name);
 	const updatedTarget = { ...target, damage: target.damage + damage };
 	setAttacker(updatedAttacker);
 	setTarget(updatedTarget);

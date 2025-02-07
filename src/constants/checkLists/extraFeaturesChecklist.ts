@@ -9,4 +9,5 @@ export const extraFeatureCheckList: {
 	{ name: 'settings' },
 	{ name: 'badges' },
 	{ name: 'quests' },
+	{ name: 'hidden items' },
 ];

@@ -18,6 +18,12 @@ export const movesCheckList: {
 	{
 		name: 'double-slap',
 		url: 'https://pokeapi.co/api/v2/move/3/',
+		todos: [
+			'implement multi hits',
+			'accuracy/Missing',
+			'crits need to reevaluate',
+			'miss is predetermined',
+		],
 	},
 	{
 		name: 'comet-punch',

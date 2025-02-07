@@ -4,6 +4,10 @@ import { applyAttackToPokemon } from '../../../functions/applyAttackToPokemon';
 import { WeatherType } from '../../../functions/calculateDamage';
 import { determineBestMove } from '../../../functions/determineBestMove';
 import { determineCatchRate } from '../../../functions/determineCatchRate';
+import { determineCrit } from '../../../functions/determineCrit';
+import { determineMiss } from '../../../functions/determineHitOrMiss';
+import { determineMultiHits } from '../../../functions/determineMultiHits';
+import { determineWeather } from '../../../functions/determineWeather';
 import { isKO } from '../../../functions/isKo';
 import { receiveNewPokemonFunction } from '../../../functions/receiveNewPokemonFunction';
 import { reduceBattlePokemonToOwnedPokemon } from '../../../functions/reduceBattlePokemonToOwnedPokemon';
@@ -18,7 +22,6 @@ import {
 import { PokeballType } from '../../../interfaces/Item';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { BattleStep } from '../types/BattleStep';
-import { determineWeather } from '../../../functions/determineWeather';
 
 export interface CatchProcessInfo {
 	pokemon: BattlePokemon;
@@ -54,6 +57,7 @@ export const useBattleSteps = ({
 	battleWeather: WeatherType | undefined;
 } => {
 	const [battleStep, setBattleStep] = useState<BattleStep>('UNITIALIZED');
+	//useEffect(() => console.log(battleStep), [battleStep]);
 	const [battleWeather, setBattleWeather] = useState<WeatherType | undefined>(
 		undefined
 	);
@@ -144,7 +148,13 @@ export const useBattleSteps = ({
 			opponent &&
 			player
 		) {
-			setNextOpponentMove(determineBestMove(opponent, player, battleWeather));
+			const chosenMove = determineBestMove(opponent, player, battleWeather);
+			setNextOpponentMove({
+				...chosenMove,
+				crit: determineCrit(chosenMove.data.meta.crit_rate),
+				multiHits: determineMultiHits(chosenMove),
+				miss: determineMiss(chosenMove),
+			});
 			setBattleStep('MOVE_HANDLING');
 		}
 	}, [battleStep, battleWeather, nextOpponentMove, opponent, player]);
@@ -182,16 +192,33 @@ export const useBattleSteps = ({
 					setTarget: setOpponent,
 					weather: battleWeather,
 				});
-				setNextPlayerMove(undefined);
+
+				const updatedMove: BattleAttack | undefined =
+					(nextPlayerMove?.multiHits ?? 0) > 1
+						? {
+								...nextPlayerMove,
+								crit: determineCrit(nextPlayerMove.data.meta.crit_rate),
+								multiHits: (nextPlayerMove?.multiHits ?? 0) - 1,
+						  }
+						: undefined;
+
 				if (isKO(updatedTarget)) {
 					setBattleStep('OPPONENT_FAINTING');
+					setNextPlayerMove(undefined);
+					return;
+				}
+				if (updatedMove) {
+					setNextPlayerMove(updatedMove);
+					console.log('multi hit');
+					setBattleStep('EXECUTE_PLAYER_MOVE');
 					return;
 				}
 				if (targetFlinched(player, opponent, nextPlayerMove)) {
+					setNextPlayerMove(undefined);
 					setBattleStep('OPPONENT_FLINCHED');
 					return;
 				}
-
+				setNextPlayerMove(undefined);
 				setBattleStep('EXECUTE_OPPONENT_MOVE');
 			}
 		}, animationTimer);
@@ -227,15 +254,32 @@ export const useBattleSteps = ({
 					setTarget: setPlayer,
 					weather: battleWeather,
 				});
-				setNextOpponentMove(undefined);
+				const updatedMove: BattleAttack | undefined =
+					(nextOpponentMove?.multiHits ?? 0) > 1
+						? {
+								...nextOpponentMove,
+								crit: determineCrit(nextOpponentMove.data.meta.crit_rate),
+								multiHits: (nextOpponentMove.multiHits ?? 0) - 1,
+						  }
+						: undefined;
+
 				if (isKO(updatedTarget)) {
 					setBattleStep('PLAYER_FAINTING');
+					setNextOpponentMove(undefined);
+					return;
+				}
+				if (updatedMove) {
+					setNextOpponentMove(updatedMove);
+					console.log('multi hit');
+					setBattleStep('EXECUTE_OPPONENT_MOVE');
 					return;
 				}
 				if (targetFlinched(opponent, player, nextOpponentMove)) {
+					setNextOpponentMove(undefined);
 					setBattleStep('PLAYER_FLINCHED');
 					return;
 				}
+				setNextOpponentMove(undefined);
 				setBattleStep('MOVE_SELECTION');
 			}
 		}, animationTimer);

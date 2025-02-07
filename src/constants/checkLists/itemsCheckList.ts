@@ -17,7 +17,7 @@ export const itemsCheckList: {
 	{
 		name: 'great-ball',
 		url: 'https://pokeapi.co/api/v2/item/3/',
-		todos: [],
+		handled: true,
 	},
 	{
 		name: 'poke-ball',

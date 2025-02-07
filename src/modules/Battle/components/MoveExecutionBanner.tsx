@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { battleSpriteSize } from '../../../constants/gameData';
+import { typeColors } from '../../../constants/typeColors';
 import { determineTypeFactor } from '../../../functions/determineTypeFactor';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { BattleAttack } from '../../../interfaces/BattleAttack';
@@ -32,15 +33,25 @@ export const MoveExecutionBanner = ({
 	const critMessage = useMemo(() => {
 		return attack.crit ? 'Critical Hit!' : undefined;
 	}, [attack]);
+
 	return (
 		<Banner>
 			<div>
 				<h3>
 					{attacker.data.name} used {attack.name} against {target.data.name}
 				</h3>
-
-				<h5>{typeFactorMessage}</h5>
-				<h5>{critMessage}</h5>
+				{attack.multiHits && (
+					<h5
+						style={{
+							paddingLeft: (attack.multiHits - 1) * 32,
+							color: Object.values(typeColors)[attack.multiHits],
+						}}
+					>
+						Multihit!
+					</h5>
+				)}
+				{typeFactorMessage && <h5>{typeFactorMessage}</h5>}
+				{critMessage && <h5>{critMessage}</h5>}
 			</div>
 
 			<img
