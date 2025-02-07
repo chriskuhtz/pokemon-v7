@@ -10,11 +10,13 @@ export const BuyMarket = ({
 	inventory,
 	buyItem,
 	money,
+	owned,
 }: {
 	goBack: () => void;
 	inventory: Inventory;
 	buyItem: (item: ItemType, number: number, pricePerItem: number) => void;
 	money: number;
+	owned: Inventory;
 }): JSX.Element => {
 	return (
 		<Page goBack={goBack} headline="What do you want to buy:">
@@ -31,7 +33,7 @@ export const BuyMarket = ({
 								buyItem(item as ItemType, x, pricePerItem)
 							}
 							item={item as ItemType}
-							amount={amount}
+							amount={owned[item as ItemType]}
 						/>
 					);
 				})}

@@ -76,7 +76,7 @@ export const App = (): JSX.Element => {
 				initSaveFile={saveFile}
 				syncAfterBattleEnd={putSaveFileReducer}
 				opponent={{ ...testOpponent, dexId: getRandomPokemonId() }}
-				goBack={() => setActiveTabReducer('MAIN')}
+				goBack={() => setActiveTabReducer('OVERWORLD')}
 			/>
 		);
 	}
@@ -87,10 +87,10 @@ export const App = (): JSX.Element => {
 				money={money}
 				goBack={() => setActiveTabReducer('MARKET')}
 				inventory={generateInventory({
-					antidote: 10000,
-					potion: 10000,
-					'poke-ball': 10000,
+					'ultra-ball': 1000000,
+					'great-ball': 1000000,
 				})}
+				owned={inventory}
 			/>
 		);
 	}

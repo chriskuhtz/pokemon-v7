@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { baseSize } from '../../constants/gameData';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { ItemType } from '../../interfaces/Item';
@@ -11,7 +11,7 @@ export const ItemCard = ({
 	onClick,
 }: {
 	item: ItemType;
-	amount: number;
+	amount: ReactNode;
 	actionElements: React.JSX.Element[];
 	onClick?: () => void;
 }): JSX.Element => {
