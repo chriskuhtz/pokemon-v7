@@ -1,6 +1,7 @@
 import { v4 } from 'uuid';
 import { testOpponent, testState } from './constants/gameData';
 import { testMap } from './constants/maps/testmap';
+import { STANDARD_BUY_MARKET } from './constants/standardBuyMarket';
 import { getRandomPokemonId } from './functions/getRandomPokemonId';
 import { useSaveFile } from './hooks/useSaveFile';
 import { generateInventory } from './interfaces/Inventory';
@@ -99,10 +100,7 @@ export const App = (): JSX.Element => {
 				buyItem={buyItemReducer}
 				money={money}
 				goBack={() => setActiveTabReducer('MARKET')}
-				inventory={generateInventory({
-					'ultra-ball': 1000000,
-					'great-ball': 1000000,
-				})}
+				inventory={generateInventory(STANDARD_BUY_MARKET)}
 				owned={inventory}
 			/>
 		);

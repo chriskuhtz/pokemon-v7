@@ -11,4 +11,5 @@ export interface BattlePokemon extends OwnedPokemon {
 	fourthMove?: BattleAttack;
 	data: PokemonData;
 	statBoosts: StatObject;
+	capture_rate: number;
 }

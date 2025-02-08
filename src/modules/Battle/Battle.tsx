@@ -78,15 +78,17 @@ export const Battle = ({
 					battleStep={battleStep}
 					voidSteps={['OPPONENT_INTRO', 'PLAYER_INTRO']}
 				/>
-				<BattleActions
-					battleWeather={battleWeather}
-					battleStep={battleStep}
-					chooseMove={setNextPlayerMove}
-					inventory={initSaveFile.inventory}
-					player={slot1}
-					opponent={slot3}
-					runAway={goBack}
-				/>
+				{!latestToast && (
+					<BattleActions
+						battleWeather={battleWeather}
+						battleStep={battleStep}
+						chooseMove={setNextPlayerMove}
+						inventory={initSaveFile.inventory}
+						player={slot1}
+						opponent={slot3}
+						runAway={goBack}
+					/>
+				)}
 			</div>
 		</>
 	);

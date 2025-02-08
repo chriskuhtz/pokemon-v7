@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { animationTimer } from '../../../../../constants/gameData';
-import { determineCatchRate } from '../../../../../functions/determineCatchRate';
+import { determineCaptureSuccess } from '../../../../../functions/determineCaptureSuccess';
 import { joinInventories } from '../../../../../interfaces/Inventory';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
@@ -34,14 +34,15 @@ export const useCatchingSteps = ({
 			return;
 		}
 		const t = setTimeout(() => {
-			const catchRate = determineCatchRate(
+			const catchSuccess = determineCaptureSuccess(
 				nextPlayerMove.ball,
 				opponent,
 				1,
+
 				'STANDARD',
 				false
 			);
-			if (catchRate < Math.random()) {
+			if (!catchSuccess) {
 				setBattleStep('CATCHING_FAILURE');
 			} else setBattleStep('CATCHING_PROCESS_3');
 		}, animationTimer);
@@ -58,14 +59,14 @@ export const useCatchingSteps = ({
 			return;
 		}
 		const t = setTimeout(() => {
-			const catchRate = determineCatchRate(
+			const catchSuccess = determineCaptureSuccess(
 				nextPlayerMove.ball,
 				opponent,
 				1,
 				'STANDARD',
 				false
 			);
-			if (catchRate < Math.random()) {
+			if (!catchSuccess) {
 				setBattleStep('CATCHING_FAILURE');
 			} else setBattleStep('CATCHING_PROCESS_4');
 		}, animationTimer);
@@ -82,7 +83,7 @@ export const useCatchingSteps = ({
 			return;
 		}
 		const t = setTimeout(() => {
-			const catchRate = determineCatchRate(
+			const catchSuccess = determineCaptureSuccess(
 				nextPlayerMove.ball,
 				opponent,
 				1,
@@ -90,7 +91,7 @@ export const useCatchingSteps = ({
 				false
 			);
 
-			if (catchRate < Math.random()) {
+			if (!catchSuccess) {
 				setBattleStep('CATCHING_FAILURE');
 			} else {
 				setCaughtPokemon((x) => [

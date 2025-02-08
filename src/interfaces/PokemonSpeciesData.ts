@@ -15,4 +15,6 @@ export interface PokemonSpeciesData {
 	evolution_chain: {
 		url: string;
 	};
+	base_happiness: number;
+	capture_rate: number;
 }
