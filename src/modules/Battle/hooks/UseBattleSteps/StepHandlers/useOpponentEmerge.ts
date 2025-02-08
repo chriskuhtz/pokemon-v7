@@ -10,7 +10,6 @@ export const useOpponentEmerge = ({
 	setBattleWeather,
 	dispatchToast,
 }: ExtendedBattleStepHandler) => {
-	//'OPPONENT_EMERGE' to 'PLAYER_EMERGE'
 	useEffect(() => {
 		if (battleStep !== 'OPPONENT_EMERGE' || !opponent) {
 			return;
@@ -26,5 +25,5 @@ export const useOpponentEmerge = ({
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, dispatchToast, opponent, setBattleStep]);
+	}, [battleStep, dispatchToast, opponent, setBattleStep, setBattleWeather]);
 };
