@@ -1,5 +1,6 @@
 import { Inventory } from './Inventory';
 import { OwnedPokemon } from './OwnedPokemon';
+import { RoutesType } from './Routing';
 
 export type CharacterOrientation = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
 export type ForwardFoot = 'CENTER1' | 'RIGHT' | 'CENTER2' | 'LEFT';
