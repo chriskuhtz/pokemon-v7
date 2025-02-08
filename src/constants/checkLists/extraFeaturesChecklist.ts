@@ -8,7 +8,15 @@ export const extraFeatureCheckList: {
 		name: 'PC access only from overworld',
 		handled: true,
 	},
-	{ name: 'Market access only from overworld' },
+	{
+		name: 'Market access only from overworld',
+		todos: [
+			'people in overworld',
+			'each mart has its own inventory',
+			'turn person towards player',
+			'say something before opening mart',
+		],
+	},
 	{ name: 'defined encounters per route' },
 	{ name: 'extract battleStep hooks' },
 	{ name: 'extract banners' },

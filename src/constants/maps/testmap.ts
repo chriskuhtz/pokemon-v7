@@ -11,5 +11,5 @@ export const testMap: OverworldMap = {
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 	],
-	occupants: [0, 1, 100001],
+	occupants: [0, 1, 100001, 300001],
 };

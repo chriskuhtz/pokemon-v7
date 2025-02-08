@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { baseSize } from '../../../constants/gameData';
 import { occupantsRecord } from '../../../constants/occupantsRecord';
+import { getYOffsetFromOrientation } from '../../../functions/getYOffsetFromOrientation';
 import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
 
 export const useDrawOccupants = (canvasId: string, map: OverworldMap) => {
@@ -23,13 +24,38 @@ export const useDrawOccupants = (canvasId: string, map: OverworldMap) => {
 			const img = new Image();
 
 			img.addEventListener('load', () => {
-				ctx?.drawImage(
-					img,
-					baseSize * occ.x + baseSize * 0.125,
-					baseSize * occ.y + baseSize * 0.125,
-					baseSize * 0.75,
-					baseSize * 0.75
-				);
+				switch (occ.type) {
+					case 'MERCHANT':
+						ctx?.clearRect(
+							baseSize * occ.x,
+							baseSize * occ.y,
+							baseSize,
+							baseSize
+						);
+
+						ctx?.drawImage(
+							img,
+							0,
+							-getYOffsetFromOrientation(occ.orientation),
+							baseSize,
+							baseSize,
+							baseSize * occ.x,
+							baseSize * occ.y,
+							baseSize,
+							baseSize
+						);
+						break;
+					case 'ITEM':
+					case 'PC':
+					default:
+						ctx?.drawImage(
+							img,
+							baseSize * occ.x + baseSize * 0.125,
+							baseSize * occ.y + baseSize * 0.125,
+							baseSize * 0.75,
+							baseSize * 0.75
+						);
+				}
 			});
 
 			img.src = getSource(occ.type);
@@ -38,9 +64,13 @@ export const useDrawOccupants = (canvasId: string, map: OverworldMap) => {
 };
 
 const getSource = (type: Occupant['type']) => {
-	if (type === 'PC') {
-		return '/mapObjects/pc.png';
+	switch (type) {
+		case 'MERCHANT':
+			return '/npcs/NPC_113.png';
+		case 'PC':
+			return '/mapObjects/pc.png';
+		case 'ITEM':
+		default:
+			return '/mapObjects/pokeball.png';
 	}
-
-	return '/mapObjects/pokeball.png';
 };

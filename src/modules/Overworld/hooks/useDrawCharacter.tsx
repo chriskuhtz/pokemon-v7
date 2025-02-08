@@ -1,23 +1,16 @@
 import { useEffect, useMemo } from 'react';
 import { baseSize } from '../../../constants/gameData';
+import { getYOffsetFromOrientation } from '../../../functions/getYOffsetFromOrientation';
 import { CharacterLocationData } from '../../../interfaces/SaveFile';
 
 export const useDrawCharacter = (
 	canvasId: string,
 	playerLocation: CharacterLocationData
 ) => {
-	const yOffset = useMemo(() => {
-		if (playerLocation.orientation === 'UP') {
-			return -3 * baseSize;
-		}
-		if (playerLocation.orientation === 'RIGHT') {
-			return -2 * baseSize;
-		}
-		if (playerLocation.orientation === 'LEFT') {
-			return -baseSize;
-		}
-		return 0;
-	}, [playerLocation.orientation]);
+	const yOffset = useMemo(
+		() => getYOffsetFromOrientation(playerLocation.orientation),
+		[playerLocation.orientation]
+	);
 
 	const xOffset = useMemo(() => {
 		if (playerLocation.forwardFoot === 'LEFT') {
