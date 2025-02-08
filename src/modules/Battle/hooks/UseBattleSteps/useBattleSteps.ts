@@ -1,19 +1,13 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { animationTimer } from '../../../../constants/gameData';
+import { useEffect, useMemo, useState } from 'react';
 import { WeatherType } from '../../../../functions/determineWeatherFactor';
-import { receiveNewPokemonFunction } from '../../../../functions/receiveNewPokemonFunction';
-import { reduceBattlePokemonToOwnedPokemon } from '../../../../functions/reduceBattlePokemonToOwnedPokemon';
 import { AddToastFunction } from '../../../../hooks/useToasts';
 import { BattleAttack } from '../../../../interfaces/BattleAttack';
 import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
-import {
-	EmptyInventory,
-	Inventory,
-	joinInventories,
-} from '../../../../interfaces/Inventory';
+import { EmptyInventory, Inventory } from '../../../../interfaces/Inventory';
 import { PokeballType } from '../../../../interfaces/Item';
 import { SaveFile } from '../../../../interfaces/SaveFile';
 import { BattleStep } from '../../types/BattleStep';
+import { useBattleEnd } from './StepHandlers/useBattleEnd';
 import { useCatchingSteps } from './StepHandlers/useCatchingSteps';
 import { useExecuteOpponentMove } from './StepHandlers/useExecuteOpponentMove';
 import { useExecutePlayerMove } from './StepHandlers/useExecutePlayerMove';
@@ -24,11 +18,13 @@ import { useHandlePlayerPrimaryAilment } from './StepHandlers/useHandlePlayerPri
 import { useMoveHandling } from './StepHandlers/useMoveHandling';
 import { useMoveSelection } from './StepHandlers/useMoveSelection';
 import { useOpponentEmerge } from './StepHandlers/useOpponentEmerge';
+import { useOpponentFainting } from './StepHandlers/useOpponentFainting';
 import { useOpponentFlinched } from './StepHandlers/useOpponentFlinched';
 import { useOpponentIntro } from './StepHandlers/useOpponentIntro';
 import { useOpponentMissed } from './StepHandlers/useOpponentMissed';
 import { useOpponentMoveSelection } from './StepHandlers/useOpponentMoveSelection';
 import { usePlayerEmerge } from './StepHandlers/usePlayerEmerge';
+import { usePlayerFainting } from './StepHandlers/usePlayerFainting';
 import { usePlayerFlinched } from './StepHandlers/usePlayerFlinched';
 import { usePlayerIntro } from './StepHandlers/usePlayerIntro';
 import { usePlayerMissed } from './StepHandlers/usePlayerMissed';
@@ -176,72 +172,17 @@ export const useBattleSteps = ({
 	useCatchingSteps(extendedPayload);
 	useHandleOpponentPrimaryAilment(extendedPayload);
 	useHandlePlayerPrimaryAilment(extendedPayload);
-	// 'OPPONENT_FAINTING' to 'BATTLE_WON'
-	useEffect(() => {
-		if (battleStep !== 'OPPONENT_FAINTING') {
-			return;
-		}
-		const t = setTimeout(() => setBattleStep('BATTLE_WON'), animationTimer);
-
-		return () => clearTimeout(t);
-	}, [battleStep, setBattleStep]);
-	// 'PLAYER_FAINTING' to 'BATTLE_LOST'
-	useEffect(() => {
-		if (battleStep !== 'PLAYER_FAINTING') {
-			return;
-		}
-		const t = setTimeout(() => setBattleStep('BATTLE_LOST'), animationTimer);
-
-		return () => clearTimeout(t);
-	}, [battleStep, setBattleStep]);
-	// handle 'BATTLE_WON'
-
-	const endBattle = useCallback(() => {
-		let updatedPokemon = [...initSaveFile.pokemon];
-
-		caughtPokemon.forEach(({ pokemon, ball }) => {
-			updatedPokemon = receiveNewPokemonFunction(
-				reduceBattlePokemonToOwnedPokemon({
-					...pokemon,
-					ownerId: initSaveFile.playerId,
-					ball,
-				}),
-				updatedPokemon
-			);
-		});
-		const newSaveFile: SaveFile = {
-			...initSaveFile,
-			money: initSaveFile.money + coins,
-			inventory: joinInventories(initSaveFile.inventory, usedItems, true),
-			pokemon: updatedPokemon,
-		};
-		syncAfterBattleEnd(newSaveFile);
-		goBack();
-	}, [
+	useOpponentFainting({ battleStep, setBattleStep });
+	usePlayerFainting({ battleStep, setBattleStep });
+	useBattleEnd({
+		battleStep,
 		caughtPokemon,
 		coins,
-		goBack,
+		usedItems,
 		initSaveFile,
 		syncAfterBattleEnd,
-		usedItems,
-	]);
-	useEffect(() => {
-		if (battleStep !== 'BATTLE_WON') {
-			return;
-		}
-		const t = setTimeout(() => endBattle(), animationTimer);
-
-		return () => clearTimeout(t);
-	}, [battleStep, endBattle]);
-	// handle "BATTLE_LOST"
-	useEffect(() => {
-		if (battleStep !== 'BATTLE_LOST') {
-			return;
-		}
-		const t = setTimeout(() => endBattle(), animationTimer);
-
-		return () => clearTimeout(t);
-	}, [battleStep, endBattle]);
+		goBack,
+	});
 
 	const initBattle = () => {
 		setBattleStep('OPPONENT_INTRO');

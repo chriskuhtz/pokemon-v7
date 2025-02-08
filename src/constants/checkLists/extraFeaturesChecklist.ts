@@ -16,7 +16,7 @@ export const extraFeatureCheckList: {
 		name: 'defined encounters per route',
 		handled: true,
 	},
-	{ name: 'extract battleStep hooks' },
+	{ name: 'extract battleStep hooks', handled: true },
 	{ name: 'extract banners' },
 	{ name: 'extract battleAction Sections' },
 	{ name: 'Poke Center' },
