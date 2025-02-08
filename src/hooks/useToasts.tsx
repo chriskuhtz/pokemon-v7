@@ -3,7 +3,9 @@ import { animationTimer } from '../constants/gameData';
 
 export type AddToastFunction = (x: string) => void;
 
-export const useToasts = (): {
+export const useToasts = (
+	timer?: number
+): {
 	latestToast: string | undefined;
 	addToast: AddToastFunction;
 } => {
@@ -16,10 +18,10 @@ export const useToasts = (): {
 	useEffect(() => {
 		const t = setTimeout(() => {
 			setToasts(toasts.slice(1));
-		}, animationTimer * 1.5);
+		}, timer ?? animationTimer * 1.5);
 
 		return () => clearTimeout(t);
-	}, [toasts]);
+	}, [timer, toasts]);
 
 	return { latestToast: toasts[0], addToast };
 };

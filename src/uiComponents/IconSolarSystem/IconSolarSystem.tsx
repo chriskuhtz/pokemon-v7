@@ -5,14 +5,18 @@ export const IconSolarSystem = ({
 	firstPlanetUrl,
 	secondPlanetUrl,
 	thirdPlanetUrl,
+	onClick,
 }: {
 	sunUrl: string;
 	firstPlanetUrl: string;
 	secondPlanetUrl?: string;
 	thirdPlanetUrl?: string;
+	onClick?: () => void;
 }) => {
 	return (
 		<div
+			role={onClick ? 'button' : undefined}
+			onClick={onClick}
 			style={{
 				width: `${baseSize * 1.5}px`,
 				position: 'relative',

@@ -18,7 +18,8 @@ export const reduceBattlePokemonToOwnedPokemon = (
 			: undefined,
 
 		id: newMon.id,
-		damage: newMon.damage,
+		//TODO: persist damage?
+		damage: 0,
 		ball: newMon.ball,
 		ownerId: newMon.ownerId,
 		nature: newMon.nature,

@@ -5,6 +5,7 @@ import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
 import { FaCartPlus } from 'react-icons/fa';
+import { SlOrganization } from 'react-icons/sl';
 import { RoutesType } from '../../App';
 import { baseSize } from '../../constants/gameData';
 export const MainMenu = ({
@@ -34,6 +35,12 @@ export const MainMenu = ({
 					onClick={() => navigate('TEAM')}
 					content={<h4>Team</h4>}
 					icon={<MdCatchingPokemon size={baseSize / 2} />}
+					actionElements={[]}
+				/>
+				<Card
+					onClick={() => navigate('STORAGE')}
+					content={<h4>Storage</h4>}
+					icon={<SlOrganization size={baseSize / 2} />}
 					actionElements={[]}
 				/>
 

@@ -1,4 +1,3 @@
-import { v4 } from 'uuid';
 import { generateInventory } from '../interfaces/Inventory';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { SaveFile } from '../interfaces/SaveFile';
@@ -31,7 +30,7 @@ export const testState: SaveFile = {
 		{
 			dexId: 7,
 			ownerId,
-			id: 'bubu',
+			id: 'ballu',
 			ball: 'master-ball',
 			onTeam: true,
 			firstMove: { name: 'pound', usedPP: 0 },
@@ -45,7 +44,7 @@ export const testState: SaveFile = {
 		{
 			dexId: 25,
 			ownerId,
-			id: 'bubu',
+			id: 'bingo',
 			ball: 'master-ball',
 			onTeam: true,
 			firstMove: { name: 'pound', usedPP: 0 },
@@ -77,7 +76,7 @@ export const testOpponent: OwnedPokemon = {
 	ball: 'cherish-ball',
 	damage: 0,
 	firstMove: { name: 'double-slap', usedPP: 0 },
-	id: v4(),
+	id: '1',
 	xp: 100000,
 	ability: 'stench',
 };

@@ -16,6 +16,7 @@ export const Stack = ({
 			style={{
 				display: 'flex',
 				flexDirection: mode,
+				flexWrap: 'wrap',
 				gap: `${gap ?? 0.5}rem`,
 				justifyContent,
 			}}

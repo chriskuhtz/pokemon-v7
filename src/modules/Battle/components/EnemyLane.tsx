@@ -1,6 +1,7 @@
 import { battleSpriteSize } from '../../../constants/gameData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
+import { getStats } from '../../../functions/getStats';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { PokeballType } from '../../../interfaces/Item';
 import { BattleStep } from '../types/BattleStep';
@@ -79,7 +80,17 @@ export const EnemyLane = ({
 	}
 	return (
 		<div className="enemyLane">
-			<BattlePokemonInfoBox pokemon={opponentPokemon} />
+			<BattlePokemonInfoBox
+				statBoosts={opponentPokemon.statBoosts}
+				stats={getStats(
+					opponentPokemon.data.stats,
+					opponentPokemon.xp,
+					opponentPokemon.nature
+				)}
+				damage={opponentPokemon.damage}
+				dexId={opponentPokemon.dexId}
+				xp={opponentPokemon.xp}
+			/>
 		</div>
 	);
 };
