@@ -32,7 +32,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		type: 'MERCHANT',
 		x: 8,
 		y: 0,
-		orientation: 'UP',
+		orientation: 'DOWN',
 		map: 'testMap',
 		inventory: STANDARD_BUY_MARKET,
 		dialogue: ['Get your supplies here'],
