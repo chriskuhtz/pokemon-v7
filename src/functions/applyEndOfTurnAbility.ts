@@ -22,5 +22,12 @@ export const applyEndOfTurnAbility = ({
 			)
 		);
 	}
+	if (
+		pokemon.ability === 'limber' &&
+		pokemon.primaryAilment?.type === 'paralysis'
+	) {
+		dispatchToast(`${pokemon.data.name} was cured of paralysis by limber`);
+		setPokemon({ ...pokemon, primaryAilment: undefined });
+	}
 	return;
 };
