@@ -36,7 +36,7 @@ export const calculateDamage = (
 	const randomFactor = 0.85 + Math.random() * 0.15;
 	const stabFactor = determineStabFactor(attacker, attack);
 	const typeFactor = determineTypeFactor(target, attack);
-	const burnFactor = 1;
+	const burnFactor = attacker.primaryAilment?.type === 'burn' ? 0.5 : 1;
 	const otherFactor = 1;
 	const zMoveFactor = 1;
 	const teraShieldFactor = 1;

@@ -41,6 +41,7 @@ export const PlayerLane = ({
 				dexId={pokemon.dexId}
 				xp={pokemon.xp}
 				playerSide
+				primaryAilment={pokemon.primaryAilment}
 			/>
 		</div>
 	);

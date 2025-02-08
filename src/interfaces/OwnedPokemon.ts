@@ -1,5 +1,6 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
 import { MoveName } from '../constants/checkLists/movesCheckList';
+import { PrimaryAilment } from './Ailment';
 import { PokeballType } from './Item';
 import { Nature } from './Natures';
 
@@ -17,7 +18,7 @@ export interface OwnedPokemon {
 	secondMove?: OwnedPokemonMove;
 	thirdMove?: OwnedPokemonMove;
 	fourthMove?: OwnedPokemonMove;
-	//primaryAilment?: PrimaryAilment;
+	primaryAilment?: PrimaryAilment;
 	ball: PokeballType;
 	nature: Nature;
 	xp: number;
