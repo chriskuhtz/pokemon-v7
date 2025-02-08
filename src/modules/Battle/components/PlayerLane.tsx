@@ -1,10 +1,8 @@
-import { HpBar } from '../../../components/HpBar/HpBar';
 import { battleSpriteSize } from '../../../constants/gameData';
-import { calculateLevelData } from '../../../functions/calculateLevelData';
 import { getItemUrl } from '../../../functions/getItemUrl';
-import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { BattleStep } from '../types/BattleStep';
+import { BattlePokemonInfoBox } from './BattlePokemonInfoBox';
 export const PlayerLane = ({
 	pokemon,
 
@@ -35,15 +33,7 @@ export const PlayerLane = ({
 	}
 	return (
 		<div className="playerLane">
-			<img
-				width={battleSpriteSize}
-				height={battleSpriteSize}
-				src={getPokemonSprite(pokemon.dexId, 'back')}
-			/>
-			<div>
-				Lvl: {calculateLevelData(pokemon.xp).level}
-				<HpBar max={pokemon.stats.hp} damage={pokemon.damage} />
-			</div>
+			<BattlePokemonInfoBox pokemon={pokemon} playerSide />
 		</div>
 	);
 };
