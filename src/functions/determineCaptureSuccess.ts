@@ -68,20 +68,20 @@ export const determineCaptureSuccess = (
 	//between 1 and 3
 	const random = 1 + Math.random() * 2;
 
-	console.log(
-		'ballFactor',
-		ballfactor,
-		'healtFactor',
-		healthfactor,
-		'levelFactor',
-		levelFactor,
-		'capture_rate_factor',
-		capture_rateFactor,
-		'final',
-		catchRate,
-		'random',
-		random
-	);
+	// console.log(
+	// 	'ballFactor',
+	// 	ballfactor,
+	// 	'healtFactor',
+	// 	healthfactor,
+	// 	'levelFactor',
+	// 	levelFactor,
+	// 	'capture_rate_factor',
+	// 	capture_rateFactor,
+	// 	'final',
+	// 	catchRate,
+	// 	'random',
+	// 	random
+	// );
 
 	return catchRate > random;
 };
