@@ -13,7 +13,6 @@ export const useDrawOccupants = (
 	>({});
 
 	useEffect(() => {
-		console.log('effect');
 		setStatefulOccupants(
 			Object.fromEntries(
 				Object.entries(occupantsRecord).filter(
@@ -36,6 +35,7 @@ export const useDrawOccupants = (
 	);
 
 	useEffect(() => {
+		console.log('draw occupants');
 		const { occupants, width, height } = map;
 
 		const el: HTMLCanvasElement | null = document.getElementById(

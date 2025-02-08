@@ -2,12 +2,12 @@ import { useMemo, useState } from 'react';
 import { FaFistRaised, FaRunning } from 'react-icons/fa';
 import { IoIosArrowBack } from 'react-icons/io';
 import { MdCatchingPokemon } from 'react-icons/md';
-import { ItemCard } from '../../../components/ItemCard/ItemCard';
 import { MoveCard } from '../../../components/MoveCard/MoveCard';
 import { baseSize } from '../../../constants/gameData';
 import { determineCrit } from '../../../functions/determineCrit';
 import { determineMiss } from '../../../functions/determineHitOrMiss';
 import { determineMultiHits } from '../../../functions/determineMultiHits';
+import { WeatherType } from '../../../functions/determineWeatherFactor';
 import { recommendMove } from '../../../functions/recommendMove';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
@@ -15,7 +15,9 @@ import { isPokeball, PokeballType } from '../../../interfaces/Item';
 import { Card } from '../../../uiComponents/Card/Card';
 import { BattleAction } from '../hooks/UseBattleSteps/useBattleSteps';
 import { BattleStep } from '../types/BattleStep';
-import { WeatherType } from '../../../functions/determineWeatherFactor';
+import { BallSelectionMenu } from './BallSelectionMenu';
+
+export type BattleMenu = 'MAIN' | 'BALLS' | 'MOVES';
 export const BattleActions = ({
 	inventory,
 	chooseMove,
@@ -34,7 +36,7 @@ export const BattleActions = ({
 	battleWeather: WeatherType | undefined;
 }) => {
 	const { firstMove, secondMove, thirdMove, fourthMove } = player;
-	const [menu, setMenu] = useState<'MAIN' | 'BALLS' | 'MOVES'>('MAIN');
+	const [menu, setMenu] = useState<BattleMenu>('MAIN');
 	const balls: [PokeballType, number][] = Object.entries(inventory).filter(
 		([item]) => isPokeball(item)
 	) as [PokeballType, number][];
@@ -49,42 +51,12 @@ export const BattleActions = ({
 
 	if (menu === 'BALLS') {
 		return (
-			<div
-				style={{
-					display: 'grid',
-					gap: '.5rem',
-					alignItems: 'center',
-					gridTemplateColumns: '1fr 3fr 3fr 3fr 3fr 3fr',
-					padding: '0 .5rem',
-				}}
-			>
-				<IoIosArrowBack
-					role="button"
-					tabIndex={0}
-					size={baseSize / 2}
-					onClick={() => setMenu('MAIN')}
-				/>
-				{balls.map(([item, amount]) => {
-					if (amount <= 0) {
-						return;
-					}
-					return (
-						<ItemCard
-							key={item}
-							item={item}
-							amount={amount}
-							actionElements={[]}
-							onClick={() =>
-								chooseMove({
-									ball: item,
-									type: 'CatchProcessInfo',
-									pokemon: opponent,
-								})
-							}
-						/>
-					);
-				})}
-			</div>
+			<BallSelectionMenu
+				inventory={inventory}
+				chooseMove={chooseMove}
+				opponent={opponent}
+				goBack={() => setMenu('MAIN')}
+			/>
 		);
 	}
 	if (menu === 'MOVES') {

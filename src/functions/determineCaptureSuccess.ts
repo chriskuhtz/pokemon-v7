@@ -75,7 +75,7 @@ export const determineCaptureSuccess = (
 	// 	'levelFactor',
 	// 	levelFactor,
 	// 	'capture_rate_factor',
-	// 	capture_rateFactor,
+	// 	captureRateFactor,
 	// 	'final',
 	// 	catchRate,
 	// 	'random',
