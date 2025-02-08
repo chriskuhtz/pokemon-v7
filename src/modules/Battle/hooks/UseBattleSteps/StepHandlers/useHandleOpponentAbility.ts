@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { animationTimer } from '../../../../../constants/gameData';
 import { applyEndOfTurnAbility } from '../../../../../functions/applyEndOfTurnAbility';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
@@ -13,12 +14,15 @@ export const useHandleOpponentAbility = ({
 		if (battleStep !== 'HANDLE_OPPONENT_ABILITY' || !opponent) {
 			return;
 		}
+		const t = setTimeout(() => {
+			applyEndOfTurnAbility({
+				pokemon: opponent,
+				setPokemon: setOpponent,
+				dispatchToast,
+			});
+			setBattleStep('HANDLE_PLAYER_PRIMARY_AILMENT');
+		}, animationTimer);
 
-		applyEndOfTurnAbility({
-			pokemon: opponent,
-			setPokemon: setOpponent,
-			dispatchToast,
-		});
-		setBattleStep('MOVE_SELECTION');
+		return () => clearTimeout(t);
 	}, [battleStep, dispatchToast, opponent, setBattleStep, setOpponent]);
 };

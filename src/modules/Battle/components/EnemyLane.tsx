@@ -90,6 +90,7 @@ export const EnemyLane = ({
 				damage={opponentPokemon.damage}
 				dexId={opponentPokemon.dexId}
 				xp={opponentPokemon.xp}
+				primaryAilment={opponentPokemon.primaryAilment}
 			/>
 		</div>
 	);

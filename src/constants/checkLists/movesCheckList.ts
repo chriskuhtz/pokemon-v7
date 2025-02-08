@@ -37,6 +37,7 @@ export const movesCheckList: {
 	{
 		name: 'fire-punch',
 		url: 'https://pokeapi.co/api/v2/move/7/',
+		handled: true,
 	},
 	{
 		name: 'ice-punch',
@@ -1239,6 +1240,7 @@ export const handledMoves = [
 	'karate-chop',
 	'mega-punch',
 	'pay-day',
+	'fire-punch',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

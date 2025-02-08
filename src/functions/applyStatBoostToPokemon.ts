@@ -6,7 +6,8 @@ export const applyStatBoostToPokemon = (
 	pokemon: BattlePokemon,
 	stat: Stat,
 	modifier: number,
-	dispatchToast: AddToastFunction
+	dispatchToast: AddToastFunction,
+	toastSuffix?: string
 ) => {
 	if (modifier > 6 || modifier < -6 || stat === 'hp' || modifier === 0) {
 		console.error('invalid modifier', stat, modifier);
@@ -28,7 +29,9 @@ export const applyStatBoostToPokemon = (
 	dispatchToast(
 		`${pokemon.data.name}'s ${stat} was ${
 			modifier > 0 ? 'raised' : 'lowered'
-		} by ${modifier} ${[1, -1].includes(modifier) ? 'stage' : 'stages'}`
+		} by ${modifier} ${[1, -1].includes(modifier) ? 'stage' : 'stages'} ${
+			toastSuffix ? 'by ' + toastSuffix : ''
+		}`
 	);
 	return {
 		...pokemon,

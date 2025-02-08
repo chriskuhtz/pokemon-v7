@@ -41,4 +41,5 @@ export const extraFeatureCheckList: {
 	{ name: 'prettier weather display' },
 	{ name: 'Battle Attack animation' },
 	{ name: 'battle backgrounds' },
+	{ name: 'hpbar colors' },
 ];

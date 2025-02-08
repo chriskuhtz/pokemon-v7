@@ -1,6 +1,7 @@
 import { AddToastFunction } from '../hooks/useToasts';
 import { BattleAttack } from '../interfaces/BattleAttack';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { applyAttackAilmentsToPokemon } from './applyAttackAilmentsToPokemon';
 import { calculateDamage } from './calculateDamage';
 import { WeatherType } from './determineWeatherFactor';
 import { reduceMovePP } from './reduceMovePP';
@@ -20,7 +21,7 @@ export const applyAttackToPokemon = ({
 	setTarget: (x: BattlePokemon) => void;
 	attack: BattleAttack;
 	weather: WeatherType | undefined;
-	dispatchToast?: AddToastFunction;
+	dispatchToast: AddToastFunction;
 }): { updatedAttacker: BattlePokemon; updatedTarget: BattlePokemon } => {
 	const damage = calculateDamage(
 		attacker,
@@ -34,9 +35,16 @@ export const applyAttackToPokemon = ({
 		(attack.multiHits ?? 0) > 1
 			? attacker
 			: reduceMovePP(attacker, attack.name);
-	const updatedTarget = { ...target, damage: target.damage + damage };
+	const damagedTarget = { ...target, damage: target.damage + damage };
+
+	const updatedTarget = applyAttackAilmentsToPokemon(
+		damagedTarget,
+		attack,
+		dispatchToast
+	);
+
 	setAttacker(updatedAttacker);
 	setTarget(updatedTarget);
 
-	return { updatedAttacker, updatedTarget };
+	return { updatedAttacker, updatedTarget: damagedTarget };
 };
