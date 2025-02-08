@@ -36,7 +36,7 @@ export const determineCaptureSuccess = (
 		ballfactor = 1;
 	}
 	if (ball === 'nest-ball') {
-		ballfactor = 0.125 + 0.025 * Math.max(0, 60 - level);
+		ballfactor = 0.5 + 0.03 * Math.max(0, 30 - level);
 	}
 	if (ball === 'repeat-ball' && caughtBefore) {
 		ballfactor = 1;

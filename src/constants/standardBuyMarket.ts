@@ -6,4 +6,5 @@ export const STANDARD_BUY_MARKET: Partial<Inventory> = {
 	'poke-ball': 1,
 	'net-ball': 1,
 	'dive-ball': 1,
+	'nest-ball': 1,
 };
