@@ -6,7 +6,7 @@ export const extraFeatureCheckList: {
 	{ name: 'PC storage system', handled: true },
 	{
 		name: 'PC access only from overworld',
-		todos: ['interact with pc', 'remove storage from main menu'],
+		handled: true,
 	},
 	{ name: 'Market access only from overworld' },
 	{ name: 'defined encounters per route' },
@@ -23,4 +23,8 @@ export const extraFeatureCheckList: {
 	{ name: 'grass on encounter tiles' },
 	{ name: 'toast types' },
 	{ name: 'pc storage filters' },
+	{ name: 'full keyboard control' },
+	{ name: 'movement by tile click' },
+	{ name: 'movement buttons' },
+	{ name: 'approach directions (PC only from front' },
 ];
