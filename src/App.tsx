@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { v4 } from 'uuid';
+import { abilityNames } from './constants/checkLists/abilityCheckList';
 import { testOpponent, testState } from './constants/gameData';
 import { testMap } from './constants/maps/testmap';
 import { STANDARD_BUY_MARKET } from './constants/standardBuyMarket';
@@ -79,7 +80,13 @@ export const App = (): JSX.Element => {
 			<Battle
 				initSaveFile={saveFile}
 				syncAfterBattleEnd={putSaveFileReducer}
-				opponent={{ ...testOpponent, dexId: getRandomPokemonId(), id: v4() }}
+				opponent={{
+					...testOpponent,
+					dexId: getRandomPokemonId(),
+					id: v4(),
+					ability:
+						abilityNames[Math.floor(Math.random() * abilityNames.length)],
+				}}
 				goBack={() => setActiveTabReducer('OVERWORLD')}
 			/>
 		);
