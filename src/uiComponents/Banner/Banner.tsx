@@ -17,6 +17,8 @@ export const Banner = ({
 				alignItems: 'center',
 				justifyContent: 'stretch',
 				position: 'absolute',
+				maxWidth: '100dvw',
+				overflow: 'hidden',
 				top: 0,
 			}}
 		>
@@ -27,7 +29,8 @@ export const Banner = ({
 					display: 'flex',
 					flexDirection: flexDirection ?? 'row',
 					alignItems: 'center',
-					width: '100vw',
+					width: '100dvw',
+
 					padding: '0 2rem',
 					justifyContent: 'space-evenly',
 				}}

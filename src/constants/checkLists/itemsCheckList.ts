@@ -29,7 +29,12 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/5/',
 		handled: true,
 	},
-	{ name: 'net-ball', url: 'https://pokeapi.co/api/v2/item/6/' },
+	{
+		name: 'net-ball',
+		url: 'https://pokeapi.co/api/v2/item/6/',
+
+		handled: true,
+	},
 	{
 		name: 'dive-ball',
 		url: 'https://pokeapi.co/api/v2/item/7/',

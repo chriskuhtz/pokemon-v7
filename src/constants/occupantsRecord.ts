@@ -1,4 +1,5 @@
 import { Occupant } from '../interfaces/OverworldMap';
+import { STANDARD_BUY_MARKET } from './standardBuyMarket';
 
 export const occupantsRecord: Record<number, Occupant> = {
 	//items start at 0
@@ -33,7 +34,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		y: 0,
 		orientation: 'UP',
 		map: 'testMap',
-		inventory: { 'great-ball': 1 },
+		inventory: STANDARD_BUY_MARKET,
 		dialogue: ['Get your supplies here'],
 	},
 };
