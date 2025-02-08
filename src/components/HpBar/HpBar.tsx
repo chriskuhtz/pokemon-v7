@@ -55,7 +55,15 @@ export const HpBar = ({ max, damage }: { max: number; damage: number }) => {
 
 	return (
 		<div
-			style={{ zIndex: -1, margin: '1rem 0', position: 'relative', width: 100 }}
+			style={{
+				zIndex: -1,
+				margin: '1rem 0',
+				position: 'relative',
+				width: 100,
+				height: '1rem',
+				border: '1px solid black',
+				borderRadius: 9000,
+			}}
 		>
 			<div
 				style={{
@@ -64,6 +72,7 @@ export const HpBar = ({ max, damage }: { max: number; damage: number }) => {
 					position: 'absolute',
 					height: '1rem',
 					width: 100 * percentage,
+					borderRadius: 9000,
 				}}
 			>
 				{current}/{max}
