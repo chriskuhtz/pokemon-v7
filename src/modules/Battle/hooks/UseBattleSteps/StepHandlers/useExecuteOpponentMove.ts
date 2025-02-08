@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { animationTimer } from '../../../../../constants/gameData';
+import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/selfDestructingMoves';
 import { applyAttackToPokemon } from '../../../../../functions/applyAttackToPokemon';
 import { determineCrit } from '../../../../../functions/determineCrit';
 import { isKO } from '../../../../../functions/isKo';
@@ -40,6 +41,24 @@ export const useExecuteOpponentMove = ({
 					const scatteredCoins = Math.floor(Math.random() * 100);
 					setCoins((coins) => coins + scatteredCoins);
 					dispatchToast('coins scattered everywhere');
+				}
+				if (
+					(SELF_DESTRUCTING_MOVES.includes(nextOpponentMove.name) &&
+						opponent.ability === 'damp') ||
+					player.ability === 'damp'
+				) {
+					dispatchToast(
+						`${
+							opponent.ability === 'damp'
+								? opponent.data.name
+								: player.data.name
+						} prevents self destruct moves with damp`
+					);
+					setNextPlayerMove(undefined);
+					if (nextPlayerMove) {
+						setBattleStep('EXECUTE_PLAYER_MOVE');
+					} else setBattleStep('HANDLE_PLAYER_ABILITY');
+					return;
 				}
 				if (nextOpponentMove.miss) {
 					setOpponent(reduceMovePP(opponent, nextOpponentMove.name));
