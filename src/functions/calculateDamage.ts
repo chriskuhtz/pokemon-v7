@@ -1,30 +1,17 @@
+import { AddToastFunction } from '../hooks/useToasts';
 import { BattleAttack } from '../interfaces/BattleAttack';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { calculateLevelData } from './calculateLevelData';
 import { determineStabFactor } from './determineStabFactor';
 import { determineTypeFactor } from './determineTypeFactor';
-
-export const weather = ['rain'] as const;
-export type WeatherType = (typeof weather)[number];
-
-export const determineWeatherFactor = (
-	attack: BattleAttack,
-	weather: WeatherType | undefined
-): number => {
-	if (weather === 'rain' && attack.data.type.name === 'water') {
-		return 1.5;
-	}
-	if (weather === 'rain' && attack.data.type.name === 'fire') {
-		return 0.5;
-	}
-	return 1;
-};
+import { WeatherType, determineWeatherFactor } from './determineWeatherFactor';
 
 export const calculateDamage = (
 	attacker: BattlePokemon,
 	target: BattlePokemon,
 	attack: BattleAttack,
-	weather: WeatherType | undefined
+	weather: WeatherType | undefined,
+	dispatchToast?: AddToastFunction
 ): number => {
 	if (attack.data.damage_class.name !== 'physical') {
 		console.error('what is this', attack);
@@ -76,6 +63,18 @@ export const calculateDamage = (
 		),
 		1
 	);
+
+	//hanging on
+	if (
+		target.ability === 'sturdy' &&
+		target.damage === 0 &&
+		res > target.stats['hp']
+	) {
+		if (dispatchToast) {
+			dispatchToast(`${target.data.name} hung on with sturdy`);
+		}
+		return target.stats['hp'] - 1;
+	}
 
 	return res;
 };
