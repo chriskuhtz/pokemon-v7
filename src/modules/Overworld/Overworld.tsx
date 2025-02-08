@@ -8,6 +8,7 @@ import { isValidOverWorldMap } from '../../functions/isValidOverworldMap';
 import { Inventory } from '../../interfaces/Inventory';
 import {
 	Occupant,
+	OverworldEncounter,
 	OverworldItem,
 	OverworldMap,
 } from '../../interfaces/OverworldMap';
@@ -48,11 +49,17 @@ export const Overworld = ({
 	collectItem: (item: [string, OverworldItem]) => void;
 	map: OverworldMap;
 	collectedItems: number[];
-	startEncounter: () => void;
+	startEncounter: (x: OverworldEncounter) => void;
 	encounterRateModifier?: number;
 	navigate: (x: RoutesType) => void;
 	goToMarket: (marketInventory: Partial<Inventory>) => void;
 }) => {
+	const assembledMap = useMemo(
+		() => assembleMap(map, collectedItems),
+		[map, collectedItems]
+	);
+	const valid = useMemo(() => isValidOverWorldMap(map), [map]);
+
 	const [dialogues, setDialogues] = useState<Dialogue[]>([]);
 	useEffect(() => {
 		if (dialogues.length === 0) {
@@ -72,17 +79,16 @@ export const Overworld = ({
 	};
 
 	const addEncounterDialogue = () => {
+		const randomEncounter =
+			assembledMap.possibleEncounters[
+				Math.floor(Math.random() * assembledMap.possibleEncounters.length)
+			];
+
 		addDialogue({
 			message: 'A wild Pokemon appeared!',
-			onRemoval: () => startEncounter(),
+			onRemoval: () => startEncounter(randomEncounter),
 		});
 	};
-
-	const assembledMap = useMemo(
-		() => assembleMap(map, collectedItems),
-		[map, collectedItems]
-	);
-	const valid = useMemo(() => isValidOverWorldMap(map), [map]);
 
 	const setNextInput = useOverworldMovement(
 		playerLocation,

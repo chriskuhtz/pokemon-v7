@@ -12,7 +12,10 @@ export const extraFeatureCheckList: {
 		name: 'Market access only from overworld',
 		handled: true,
 	},
-	{ name: 'defined encounters per route' },
+	{
+		name: 'defined encounters per route',
+		handled: true,
+	},
 	{ name: 'extract battleStep hooks' },
 	{ name: 'extract banners' },
 	{ name: 'extract battleAction Sections' },

@@ -36,9 +36,14 @@ export interface OverworldMerchant {
 }
 export type Occupant = OverworldItem | OverworldPC | OverworldMerchant;
 
+export interface OverworldEncounter {
+	dexId: number;
+	xp: number;
+}
 export interface OverworldMap {
 	id: string;
 	backgroundTile: { x: number; y: number };
+	possibleEncounters: OverworldEncounter[];
 	width: number;
 	height: number;
 	tileMap: (0 | 1 | 2)[][];

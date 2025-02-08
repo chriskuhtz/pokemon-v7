@@ -4,9 +4,9 @@ import { abilityNames } from './constants/checkLists/abilityCheckList';
 import { testOpponent, testState } from './constants/gameData';
 import { testMap } from './constants/maps/testmap';
 import { STANDARD_BUY_MARKET } from './constants/standardBuyMarket';
-import { getRandomPokemonId } from './functions/getRandomPokemonId';
 import { useSaveFile } from './hooks/useSaveFile';
 import { generateInventory, Inventory } from './interfaces/Inventory';
+import { OwnedPokemon } from './interfaces/OwnedPokemon';
 import { Bag } from './modules/Bag/Bag';
 import { Battle } from './modules/Battle/Battle';
 import { MainMenu } from './modules/MainMenu/MainMenu';
@@ -18,6 +18,8 @@ import { PokemonStorage } from './modules/PokemonStorage/PokemonStorage';
 import { Team } from './modules/Team/Team';
 
 export const App = (): JSX.Element => {
+	const [currentOpponent, setCurrentOpponent] =
+		useState<OwnedPokemon>(testOpponent);
 	const [currentMarketInventory, setCurrentMarketInventory] =
 		useState<Partial<Inventory>>(STANDARD_BUY_MARKET);
 	const {
@@ -80,13 +82,7 @@ export const App = (): JSX.Element => {
 			<Battle
 				initSaveFile={saveFile}
 				syncAfterBattleEnd={putSaveFileReducer}
-				opponent={{
-					...testOpponent,
-					dexId: getRandomPokemonId(),
-					id: v4(),
-					ability:
-						abilityNames[Math.floor(Math.random() * abilityNames.length)],
-				}}
+				opponent={currentOpponent}
 				goBack={() => setActiveTabReducer('OVERWORLD')}
 			/>
 		);
@@ -128,7 +124,18 @@ export const App = (): JSX.Element => {
 			playerLocation={location}
 			map={testMap}
 			collectedItems={collectedItems}
-			startEncounter={() => setActiveTabReducer('BATTLE')}
+			startEncounter={({ dexId, xp }) => {
+				setCurrentOpponent((current) => ({
+					...current,
+					dexId,
+					xp,
+					id: v4(),
+					ability:
+						abilityNames[Math.floor(Math.random() * abilityNames.length)],
+				}));
+
+				setActiveTabReducer('BATTLE');
+			}}
 			encounterRateModifier={firstTeamMember.ability === 'stench' ? 0.5 : 1}
 			navigate={setActiveTabReducer}
 			goToMarket={(i) => {
