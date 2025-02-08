@@ -34,4 +34,8 @@ export const extraFeatureCheckList: {
 	{ name: 'disable weird scroll' },
 	{ name: 'rotating npcs' },
 	{ name: 'walking npcs' },
+	{ name: 'pretty stat display' },
+	{ name: 'prettier weather display' },
+	{ name: 'Battle Attack animation' },
+	{ name: 'battle backgrounds' },
 ];
