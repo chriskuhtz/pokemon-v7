@@ -37,6 +37,7 @@ export interface OverworldMerchant {
 export type Occupant = OverworldItem | OverworldPC | OverworldMerchant;
 
 export interface OverworldMap {
+	id: string;
 	backgroundTile: { x: number; y: number };
 	width: number;
 	height: number;

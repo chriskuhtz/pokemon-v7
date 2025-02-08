@@ -5,7 +5,6 @@ export const assembleMap = (
 	map: OverworldMap,
 	collectedItems: number[]
 ): OverworldMap => {
-	console.log(map.occupants);
 	const filteredOccupants = [...map.occupants].filter(
 		(o) => !collectedItems.some((c) => c === o)
 	);

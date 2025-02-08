@@ -62,7 +62,7 @@ export const Overworld = ({
 				dialogues[0].onRemoval();
 			}
 			setDialogues(dialogues.slice(1));
-		}, animationTimer);
+		}, animationTimer * 1.5);
 
 		return () => clearTimeout(t);
 	}, [dialogues]);
@@ -84,12 +84,17 @@ export const Overworld = ({
 		encounterRateModifier
 	);
 
+	//DRAWING
+	useDrawCharacter(playerCanvasId, playerLocation);
+	useDrawBackground(backgroundCanvasId, map);
+	const changeOccupant = useDrawOccupants(occupantsCanvasId, assembledMap);
+
 	const interactWith = useCallback(
 		(occ: [string, Occupant] | undefined) => {
 			if (!occ) {
 				return;
 			}
-			const [, data] = occ;
+			const [id, data] = occ;
 
 			if (data.type === 'ITEM') {
 				addDialogue({
@@ -104,6 +109,7 @@ export const Overworld = ({
 			}
 
 			if (data.type === 'MERCHANT') {
+				changeOccupant(Number.parseInt(id), { ...data, orientation: 'LEFT' });
 				data.dialogue.forEach((d, i) =>
 					addDialogue({
 						message: d,
@@ -118,19 +124,14 @@ export const Overworld = ({
 
 			console.error('what is this occupant', occ);
 		},
-		[collectItem, goToMarket, navigate]
+		[changeOccupant, collectItem, goToMarket, navigate]
 	);
 
-	//PLAYER
-	useDrawCharacter(playerCanvasId, playerLocation);
 	useKeyboardControl(
 		setNextInput,
 		() => handleEnterPress(playerLocation, collectedItems, interactWith),
 		dialogues.length > 0
 	);
-
-	useDrawBackground(backgroundCanvasId, map);
-	useDrawOccupants(occupantsCanvasId, assembledMap);
 
 	if (!valid) {
 		return (
