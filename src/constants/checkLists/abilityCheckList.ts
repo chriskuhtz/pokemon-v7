@@ -29,7 +29,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/5/',
 		handled: true,
 	},
-	{ name: 'damp', url: 'https://pokeapi.co/api/v2/ability/6/' },
+	{
+		name: 'damp',
+		url: 'https://pokeapi.co/api/v2/ability/6/',
+		handled: true,
+	},
 	{
 		name: 'limber',
 		url: 'https://pokeapi.co/api/v2/ability/7/',
@@ -483,6 +487,7 @@ export const abilityNames = [
 	'speed-boost',
 	'inner-focus',
 	'sturdy',
+	'damp',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
