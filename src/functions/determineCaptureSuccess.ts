@@ -52,8 +52,9 @@ export const determineCaptureSuccess = (
 		ballfactor = 1;
 	}
 
-	//between 1 and 0, lower health, better chance
-	const healthfactor = 1 - (target.stats.hp - target.damage) / target.stats.hp;
+	//between .5 and 0, lower health, better chance
+	const healthfactor =
+		(1 - (target.stats.hp - target.damage) / target.stats.hp) / 2;
 
 	//between 1 and 0, lower level, better chance
 	const levelFactor = (100 - level) / 100;
@@ -64,8 +65,8 @@ export const determineCaptureSuccess = (
 	//between 0 and 4
 	const catchRate = ballfactor + healthfactor + levelFactor + captureRateFactor;
 
-	//between 1 and 3
-	const random = 1 + Math.random() * 2;
+	//between 1 and 2.5
+	const random = 1 + Math.random() * 1.5;
 
 	// console.log(
 	// 	'ballFactor',

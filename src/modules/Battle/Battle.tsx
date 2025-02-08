@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useToasts } from '../../hooks/useToasts';
+import { joinInventories } from '../../interfaces/Inventory';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../interfaces/SaveFile';
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
@@ -30,17 +31,23 @@ export const Battle = ({
 	const [slot1, setSlot1] = useBattlePokemon(team[0]);
 	const [slot3, setSlot3] = useBattlePokemon(opponent);
 
-	const { battleStep, initBattle, nextMove, setNextPlayerMove, battleWeather } =
-		useBattleSteps({
-			initSaveFile,
-			syncAfterBattleEnd,
-			goBack,
-			opponent: slot3,
-			player: slot1,
-			setOpponent: setSlot3,
-			setPlayer: setSlot1,
-			dispatchToast: addToast,
-		});
+	const {
+		battleStep,
+		initBattle,
+		nextMove,
+		setNextPlayerMove,
+		battleWeather,
+		usedItems,
+	} = useBattleSteps({
+		initSaveFile,
+		syncAfterBattleEnd,
+		goBack,
+		opponent: slot3,
+		player: slot1,
+		setOpponent: setSlot3,
+		setPlayer: setSlot1,
+		dispatchToast: addToast,
+	});
 
 	useEffect(() => {
 		if (battleStep === 'UNITIALIZED' && slot1 && slot3) {
@@ -83,7 +90,7 @@ export const Battle = ({
 						battleWeather={battleWeather}
 						battleStep={battleStep}
 						chooseMove={setNextPlayerMove}
-						inventory={initSaveFile.inventory}
+						inventory={joinInventories(initSaveFile.inventory, usedItems, true)}
 						player={slot1}
 						opponent={slot3}
 						runAway={goBack}

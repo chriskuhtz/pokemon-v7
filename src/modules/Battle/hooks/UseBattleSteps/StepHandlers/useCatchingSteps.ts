@@ -114,10 +114,10 @@ export const useCatchingSteps = ({
 			return;
 		}
 		const t = setTimeout(() => {
-			setNextPlayerMove(undefined);
 			if (nextPlayerMove?.type === 'CatchProcessInfo') {
 				setUsedItems((i) => joinInventories(i, { [nextPlayerMove.ball]: 1 }));
 			}
+			setNextPlayerMove(undefined);
 			setBattleStep('EXECUTE_OPPONENT_MOVE');
 		}, animationTimer);
 
