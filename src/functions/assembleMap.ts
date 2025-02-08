@@ -1,10 +1,11 @@
-import { itemsRecord } from '../constants/itemsRecord';
+import { occupantsRecord } from '../constants/occupantsRecord';
 import { OverworldMap } from '../interfaces/OverworldMap';
 
 export const assembleMap = (
 	map: OverworldMap,
 	collectedItems: number[]
 ): OverworldMap => {
+	console.log(map.occupants);
 	const filteredOccupants = [...map.occupants].filter(
 		(o) => !collectedItems.some((c) => c === o)
 	);
@@ -12,7 +13,7 @@ export const assembleMap = (
 	const updatedTileMap = map.tileMap.map((row, rowIndex) => {
 		return row.map((c, columnIndex) =>
 			filteredOccupants.some((occupantId) => {
-				const o = itemsRecord[occupantId];
+				const o = occupantsRecord[occupantId];
 
 				return o.x === columnIndex && o.y === rowIndex;
 			})

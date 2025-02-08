@@ -1,4 +1,4 @@
-import { itemsRecord } from '../constants/itemsRecord';
+import { occupantsRecord } from '../constants/occupantsRecord';
 import { Occupant } from '../interfaces/OverworldMap';
 import { CharacterLocationData } from '../interfaces/SaveFile';
 import { getNextLocation } from './getNextLocation';
@@ -12,7 +12,7 @@ export const handleEnterPress = (
 		playerLocation,
 		playerLocation.orientation
 	);
-	const nextFieldOccupant = Object.entries(itemsRecord).find(
+	const nextFieldOccupant = Object.entries(occupantsRecord).find(
 		([id, occ]) =>
 			occ.x === focusedField.x &&
 			occ.y === focusedField.y &&

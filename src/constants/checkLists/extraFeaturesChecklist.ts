@@ -4,7 +4,10 @@ export const extraFeatureCheckList: {
 	handled?: boolean;
 }[] = [
 	{ name: 'PC storage system', handled: true },
-	{ name: 'PC access only from overworld' },
+	{
+		name: 'PC access only from overworld',
+		todos: ['interact with pc', 'remove storage from main menu'],
+	},
 	{ name: 'Market access only from overworld' },
 	{ name: 'defined encounters per route' },
 	{ name: 'extract battleStep hooks' },

@@ -1,0 +1,29 @@
+import { Occupant } from '../interfaces/OverworldMap';
+
+export const occupantsRecord: Record<number, Occupant> = {
+	//items start at 0
+	0: {
+		type: 'ITEM',
+		item: 'master-ball',
+		x: 4,
+		y: 0,
+		amount: 3,
+		map: 'testMap',
+	},
+	1: {
+		type: 'ITEM',
+		item: 'master-ball',
+		x: 9,
+		y: 1,
+		amount: 7,
+		map: 'testMap',
+	},
+	//PCS start at 10000
+	100001: {
+		type: 'PC',
+		x: 9,
+		y: 0,
+		map: 'testMap',
+	},
+	//Trainers start at 20000
+};
