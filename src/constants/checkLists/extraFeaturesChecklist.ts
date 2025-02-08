@@ -10,12 +10,7 @@ export const extraFeatureCheckList: {
 	},
 	{
 		name: 'Market access only from overworld',
-		todos: [
-			'people in overworld',
-			'each mart has its own inventory',
-			'turn person towards player',
-			'say something before opening mart',
-		],
+		handled: true,
 	},
 	{ name: 'defined encounters per route' },
 	{ name: 'extract battleStep hooks' },
