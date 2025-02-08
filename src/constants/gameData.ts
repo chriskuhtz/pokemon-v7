@@ -9,7 +9,13 @@ export const animationTimer = 16000 / fps;
 
 const ownerId = 'Bear';
 export const testState: SaveFile = {
-	inventory: generateInventory({ 'master-ball': 10, 'ultra-ball': 20 }),
+	inventory: generateInventory({
+		'master-ball': 10,
+		'ultra-ball': 20,
+		'safari-ball': 10,
+		'poke-ball': 10,
+		'great-ball': 10,
+	}),
 	playerId: ownerId,
 	money: 5000,
 	pokemon: [

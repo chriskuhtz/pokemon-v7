@@ -27,4 +27,6 @@ export const extraFeatureCheckList: {
 	{ name: 'movement by tile click' },
 	{ name: 'movement buttons' },
 	{ name: 'approach directions (PC only from front' },
+	{ name: 'overworld background/border of map' },
+	{ name: 'disable weird scroll' },
 ];

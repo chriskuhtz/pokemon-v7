@@ -480,6 +480,7 @@ const abilityNames = [
 	'battle-armor',
 	'shell-armor',
 	'speed-boost',
+	'inner-focus',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
