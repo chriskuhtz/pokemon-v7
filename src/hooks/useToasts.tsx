@@ -14,9 +14,12 @@ export const useToasts = (): {
 	};
 
 	useEffect(() => {
+		if (toasts.length === 0) {
+			return;
+		}
 		const t = setTimeout(() => {
 			setToasts(toasts.slice(1));
-		}, animationTimer * 1.5);
+		}, animationTimer * 0.75);
 
 		return () => clearTimeout(t);
 	}, [toasts]);
