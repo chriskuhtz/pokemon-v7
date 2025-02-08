@@ -22,6 +22,7 @@ export const movesCheckList: {
 	{
 		name: 'comet-punch',
 		url: 'https://pokeapi.co/api/v2/move/4/',
+		handled: true,
 	},
 	{
 		name: 'mega-punch',

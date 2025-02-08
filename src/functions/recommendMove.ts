@@ -2,35 +2,35 @@ import { BattleAttack } from '../interfaces/BattleAttack';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { calculateDamage, WeatherType } from './calculateDamage';
 
-//TODO: factor in accuracy
+//TODO: Different Strategies
+//factor in crit rate
+
 export const recommendMove = (
 	attacker: BattlePokemon,
 	target: BattlePokemon,
 	weather: WeatherType | undefined
 ): BattleAttack => {
-	const weightedMoves = [
+	const weightedMoves: { move: BattleAttack; weight: number }[] = [
 		attacker.firstMove,
 		attacker.secondMove,
 		attacker.thirdMove,
 		attacker.fourthMove,
 	]
 		.filter((a) => a !== undefined)
-		.sort((a, b) => {
-			const averageHitsA = Math.max(
+		.map((a) => {
+			const averageHits = Math.max(
 				(a.data.meta.max_hits ?? 0) - (a.data.meta.min_hits ?? 0),
 				1
 			);
-			const averageHitsB = Math.max(
-				(b.data.meta.max_hits ?? 0) - (b.data.meta.min_hits ?? 0),
-				1
-			);
-			const baseDamageA =
-				calculateDamage(attacker, target, b, weather) * averageHitsA;
 
-			const baseDamageB =
-				calculateDamage(attacker, target, a, weather) * averageHitsB;
+			const baseDamage =
+				calculateDamage(attacker, target, a, weather) * averageHits;
 
-			return baseDamageB - baseDamageA;
-		});
-	return weightedMoves[0];
+			const accuracyWeighted = baseDamage * (a.data.accuracy / 100);
+
+			return { move: a, weight: accuracyWeighted };
+		})
+		.sort((a, b) => b.weight - a.weight);
+
+	return weightedMoves[0].move;
 };
