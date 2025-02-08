@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { animationTimer } from '../../../../constants/gameData';
-import { WeatherType } from '../../../../functions/calculateDamage';
+import { WeatherType } from '../../../../functions/determineWeatherFactor';
 import { receiveNewPokemonFunction } from '../../../../functions/receiveNewPokemonFunction';
 import { reduceBattlePokemonToOwnedPokemon } from '../../../../functions/reduceBattlePokemonToOwnedPokemon';
 import { AddToastFunction } from '../../../../hooks/useToasts';

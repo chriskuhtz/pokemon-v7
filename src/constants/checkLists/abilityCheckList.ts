@@ -27,6 +27,7 @@ export const abilityCheckList: {
 	{
 		name: 'sturdy',
 		url: 'https://pokeapi.co/api/v2/ability/5/',
+		handled: true,
 	},
 	{ name: 'damp', url: 'https://pokeapi.co/api/v2/ability/6/' },
 	{
@@ -481,6 +482,7 @@ export const abilityNames = [
 	'shell-armor',
 	'speed-boost',
 	'inner-focus',
+	'sturdy',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

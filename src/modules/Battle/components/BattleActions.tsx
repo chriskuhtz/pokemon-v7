@@ -5,7 +5,6 @@ import { MdCatchingPokemon } from 'react-icons/md';
 import { ItemCard } from '../../../components/ItemCard/ItemCard';
 import { MoveCard } from '../../../components/MoveCard/MoveCard';
 import { baseSize } from '../../../constants/gameData';
-import { WeatherType } from '../../../functions/calculateDamage';
 import { determineCrit } from '../../../functions/determineCrit';
 import { determineMiss } from '../../../functions/determineHitOrMiss';
 import { determineMultiHits } from '../../../functions/determineMultiHits';
@@ -16,6 +15,7 @@ import { isPokeball, PokeballType } from '../../../interfaces/Item';
 import { Card } from '../../../uiComponents/Card/Card';
 import { BattleAction } from '../hooks/UseBattleSteps/useBattleSteps';
 import { BattleStep } from '../types/BattleStep';
+import { WeatherType } from '../../../functions/determineWeatherFactor';
 export const BattleActions = ({
 	inventory,
 	chooseMove,

@@ -19,6 +19,7 @@ export const useExecutePlayerMove = ({
 	nextOpponentMove,
 	setOpponent,
 	battleWeather,
+	dispatchToast,
 }: ExtendedBattleStepHandler) => {
 	//"EXECUTE_PLAYER_MOVE"
 	useEffect(() => {
@@ -49,6 +50,7 @@ export const useExecutePlayerMove = ({
 					setAttacker: setPlayer,
 					setTarget: setOpponent,
 					weather: battleWeather,
+					dispatchToast,
 				});
 
 				const updatedMove: BattleAttack | undefined =
@@ -89,6 +91,7 @@ export const useExecutePlayerMove = ({
 	}, [
 		battleStep,
 		battleWeather,
+		dispatchToast,
 		nextOpponentMove,
 		nextPlayerMove,
 		opponent,

@@ -59,8 +59,8 @@ export const testOpponent: OwnedPokemon = {
 	thirdMove: { name: 'double-slap', usedPP: 0 },
 	fourthMove: { name: 'comet-punch', usedPP: 0 },
 	id: '1',
-	xp: 100000,
-	ability: 'stench',
+	xp: 100,
+	ability: 'sturdy',
 };
 
 export const localStorageId = 'pokemonv7SaveFile';

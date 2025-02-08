@@ -3,9 +3,11 @@ import { CSSProperties, ReactNode } from 'react';
 export const Banner = ({
 	children,
 	flexDirection,
+	backgroundColor,
 }: {
 	children: ReactNode;
 	flexDirection?: CSSProperties['flexDirection'];
+	backgroundColor?: string;
 }) => {
 	return (
 		<div
@@ -20,7 +22,7 @@ export const Banner = ({
 		>
 			<div
 				style={{
-					backgroundColor: 'rgba(0,0,0,.8)',
+					backgroundColor: backgroundColor ?? 'rgba(0,0,0,.8)',
 					color: 'white',
 					display: 'flex',
 					flexDirection: flexDirection ?? 'row',

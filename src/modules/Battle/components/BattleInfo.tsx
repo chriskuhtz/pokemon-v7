@@ -1,7 +1,7 @@
 import { FaCloudRain } from 'react-icons/fa';
 import { baseSize } from '../../../constants/gameData';
-import { WeatherType } from '../../../functions/calculateDamage';
 import { BattleStep } from '../types/BattleStep';
+import { WeatherType } from '../../../functions/determineWeatherFactor';
 
 export const BattleInfo = ({
 	battleStep,
