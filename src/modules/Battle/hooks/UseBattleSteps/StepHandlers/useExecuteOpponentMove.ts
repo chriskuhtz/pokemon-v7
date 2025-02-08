@@ -64,7 +64,6 @@ export const useExecuteOpponentMove = ({
 				}
 				if (updatedMove) {
 					setNextOpponentMove(updatedMove);
-					console.log('multi hit');
 					setBattleStep('EXECUTE_OPPONENT_MOVE');
 					return;
 				}
@@ -74,7 +73,10 @@ export const useExecuteOpponentMove = ({
 					return;
 				}
 				setNextOpponentMove(undefined);
-				setBattleStep('HANDLE_PLAYER_ABILITY');
+
+				if (nextPlayerMove) {
+					setBattleStep('EXECUTE_PLAYER_MOVE');
+				} else setBattleStep('HANDLE_PLAYER_ABILITY');
 			}
 		}, animationTimer);
 

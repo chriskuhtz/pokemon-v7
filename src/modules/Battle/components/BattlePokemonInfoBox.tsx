@@ -1,3 +1,4 @@
+import React from 'react';
 import { HpBar } from '../../../components/HpBar/HpBar';
 import { battleSpriteSize } from '../../../constants/gameData';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
@@ -25,10 +26,11 @@ export const BattlePokemonInfoBox = ({
 				<div style={{ display: 'flex', gap: '.5rem' }}>
 					{Object.entries(pokemon.statBoosts).map(([stat, modifier]) => {
 						if (modifier === 0) {
-							return <></>;
+							return <React.Fragment key={stat + modifier}></React.Fragment>;
 						}
 						return (
 							<div
+								key={stat + modifier}
 								style={{
 									backgroundColor: 'black',
 									color: 'white',

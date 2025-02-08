@@ -24,14 +24,12 @@ import { useMoveSelection } from './StepHandlers/useMoveSelection';
 import { useOpponentEmerge } from './StepHandlers/useOpponentEmerge';
 import { useOpponentFlinched } from './StepHandlers/useOpponentFlinched';
 import { useOpponentIntro } from './StepHandlers/useOpponentIntro';
+import { useOpponentMissed } from './StepHandlers/useOpponentMissed';
 import { useOpponentMoveSelection } from './StepHandlers/useOpponentMoveSelection';
 import { usePlayerEmerge } from './StepHandlers/usePlayerEmerge';
 import { usePlayerFlinched } from './StepHandlers/usePlayerFlinched';
 import { usePlayerIntro } from './StepHandlers/usePlayerIntro';
-import {
-	useOpponentMissed,
-	usePlayerMissed,
-} from './StepHandlers/usePlayerMissed';
+import { usePlayerMissed } from './StepHandlers/usePlayerMissed';
 
 export interface CatchProcessInfo {
 	pokemon: BattlePokemon;
@@ -89,7 +87,7 @@ export const useBattleSteps = ({
 	battleWeather: WeatherType | undefined;
 } => {
 	const [battleStep, setBattleStep] = useState<BattleStep>('UNITIALIZED');
-	//useEffect(() => console.log(battleStep), [battleStep]);
+	useEffect(() => console.log(battleStep), [battleStep]);
 	const [battleWeather, setBattleWeather] = useState<WeatherType | undefined>(
 		undefined
 	);

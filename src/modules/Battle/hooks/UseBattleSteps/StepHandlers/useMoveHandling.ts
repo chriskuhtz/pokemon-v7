@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { determineMoveOrder } from '../../../../../functions/determineMoveOrder';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
 export const useMoveHandling = ({
@@ -15,8 +16,12 @@ export const useMoveHandling = ({
 				setBattleStep('ERROR');
 				return;
 			}
-			//TODO: DECIDE SPEED HERE
-			setBattleStep('EXECUTE_PLAYER_MOVE');
+
+			const first = determineMoveOrder(player, opponent);
+
+			if (first === player.id) {
+				setBattleStep('EXECUTE_PLAYER_MOVE');
+			} else setBattleStep('EXECUTE_OPPONENT_MOVE');
 		}
 	}, [
 		battleStep,

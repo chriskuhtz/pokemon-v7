@@ -16,7 +16,7 @@ export const useHandleOpponentAbility = ({
 				setPokemon: setOpponent,
 				dispatchToast,
 			});
-			setBattleStep('OPPONENT_MOVE_SELECTION');
+			setBattleStep('MOVE_SELECTION');
 		}
 	}, [battleStep, dispatchToast, opponent, setBattleStep, setOpponent]);
 };

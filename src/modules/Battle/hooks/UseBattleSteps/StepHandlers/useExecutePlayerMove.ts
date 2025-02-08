@@ -16,6 +16,7 @@ export const useExecutePlayerMove = ({
 	setPlayer,
 	setNextPlayerMove,
 	setBattleStep,
+	nextOpponentMove,
 	setOpponent,
 	battleWeather,
 }: ExtendedBattleStepHandler) => {
@@ -66,7 +67,6 @@ export const useExecutePlayerMove = ({
 				}
 				if (updatedMove) {
 					setNextPlayerMove(updatedMove);
-					console.log('multi hit');
 					setBattleStep('EXECUTE_PLAYER_MOVE');
 					return;
 				}
@@ -76,7 +76,9 @@ export const useExecutePlayerMove = ({
 					return;
 				}
 				setNextPlayerMove(undefined);
-				setBattleStep('EXECUTE_OPPONENT_MOVE');
+				if (nextOpponentMove) {
+					setBattleStep('EXECUTE_OPPONENT_MOVE');
+				} else setBattleStep('HANDLE_PLAYER_ABILITY');
 			}
 		}, animationTimer);
 
@@ -84,6 +86,7 @@ export const useExecutePlayerMove = ({
 	}, [
 		battleStep,
 		battleWeather,
+		nextOpponentMove,
 		nextPlayerMove,
 		opponent,
 		player,

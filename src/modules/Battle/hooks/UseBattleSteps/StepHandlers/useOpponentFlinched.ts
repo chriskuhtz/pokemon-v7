@@ -5,6 +5,7 @@ import { ExtendedBattleStepHandler } from '../useBattleSteps';
 export const useOpponentFlinched = ({
 	battleStep,
 	setBattleStep,
+	setNextPlayerMove,
 	setNextOpponentMove,
 }: ExtendedBattleStepHandler) => {
 	useEffect(() => {
@@ -13,9 +14,10 @@ export const useOpponentFlinched = ({
 		}
 		const t = setTimeout(() => {
 			setBattleStep('HANDLE_PLAYER_ABILITY');
+			setNextPlayerMove(undefined);
 			setNextOpponentMove(undefined);
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, setBattleStep, setNextOpponentMove]);
+	}, [battleStep, setBattleStep, setNextOpponentMove, setNextPlayerMove]);
 };

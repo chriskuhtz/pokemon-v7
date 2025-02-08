@@ -8,7 +8,7 @@ export const useMoveSelection = ({
 }: ExtendedBattleStepHandler) => {
 	useEffect(() => {
 		if (battleStep === 'MOVE_SELECTION' && nextPlayerMove) {
-			setBattleStep('HANDLE_OPPONENT_ABILITY');
+			setBattleStep('OPPONENT_MOVE_SELECTION');
 		}
 	}, [battleStep, nextPlayerMove, setBattleStep]);
 };

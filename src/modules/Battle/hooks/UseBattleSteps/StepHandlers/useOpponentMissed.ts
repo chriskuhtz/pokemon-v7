@@ -2,24 +2,24 @@ import { useEffect } from 'react';
 import { animationTimer } from '../../../../../constants/gameData';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
-export const usePlayerMissed = ({
+export const useOpponentMissed = ({
 	battleStep,
 	setBattleStep,
-	setNextPlayerMove,
-	nextOpponentMove,
+	setNextOpponentMove,
+	nextPlayerMove,
 }: ExtendedBattleStepHandler) => {
-	//"PLAYER_MISSED"
+	//"OPPONENT_MISSED"
 	useEffect(() => {
-		if (battleStep !== 'PLAYER_MISSED') {
+		if (battleStep !== 'OPPONENT_MISSED') {
 			return;
 		}
 		const t = setTimeout(() => {
-			setNextPlayerMove(undefined);
-			if (nextOpponentMove) {
-				setBattleStep('EXECUTE_OPPONENT_MOVE');
+			setNextOpponentMove(undefined);
+			if (nextPlayerMove) {
+				setBattleStep('EXECUTE_PLAYER_MOVE');
 			} else setBattleStep('HANDLE_PLAYER_ABILITY');
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, nextOpponentMove, setBattleStep, setNextPlayerMove]);
+	}, [battleStep, nextPlayerMove, setBattleStep, setNextOpponentMove]);
 };
