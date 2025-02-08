@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { IoMdMenu } from 'react-icons/io';
 import { animationTimer, baseSize } from '../../constants/gameData';
 import { assembleMap } from '../../functions/assembleMap';
+import { getOppositeDirection } from '../../functions/getOppositeDirection';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { isValidOverWorldMap } from '../../functions/isValidOverworldMap';
 import { Inventory } from '../../interfaces/Inventory';
@@ -10,6 +11,7 @@ import {
 	OverworldItem,
 	OverworldMap,
 } from '../../interfaces/OverworldMap';
+import { RoutesType } from '../../interfaces/Routing';
 import { CharacterLocationData } from '../../interfaces/SaveFile';
 import { Banner } from '../../uiComponents/Banner/Banner';
 import './Overworld.css';
@@ -18,7 +20,6 @@ import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
-import { RoutesType } from '../../interfaces/Routing';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -62,12 +63,19 @@ export const Overworld = ({
 				dialogues[0].onRemoval();
 			}
 			setDialogues(dialogues.slice(1));
-		}, animationTimer * 1.5);
+		}, animationTimer);
 
 		return () => clearTimeout(t);
 	}, [dialogues]);
 	const addDialogue = (x: Dialogue) => {
 		setDialogues((dialogues) => [...dialogues, x]);
+	};
+
+	const addEncounterDialogue = () => {
+		addDialogue({
+			message: 'A wild Pokemon appeared!',
+			onRemoval: () => startEncounter(),
+		});
 	};
 
 	const assembledMap = useMemo(
@@ -80,7 +88,7 @@ export const Overworld = ({
 		playerLocation,
 		setCharacterLocation,
 		assembledMap,
-		startEncounter,
+		addEncounterDialogue,
 		encounterRateModifier
 	);
 
@@ -104,12 +112,18 @@ export const Overworld = ({
 				return;
 			}
 			if (data.type === 'PC') {
-				navigate('STORAGE');
+				addDialogue({
+					message: 'Accessing Pokemon Storage',
+					onRemoval: () => navigate('STORAGE'),
+				});
 				return;
 			}
 
 			if (data.type === 'MERCHANT') {
-				changeOccupant(Number.parseInt(id), { ...data, orientation: 'LEFT' });
+				changeOccupant(Number.parseInt(id), {
+					...data,
+					orientation: getOppositeDirection(playerLocation.orientation),
+				});
 				data.dialogue.forEach((d, i) =>
 					addDialogue({
 						message: d,
@@ -124,7 +138,7 @@ export const Overworld = ({
 
 			console.error('what is this occupant', occ);
 		},
-		[changeOccupant, collectItem, goToMarket, navigate]
+		[changeOccupant, collectItem, goToMarket, navigate, playerLocation]
 	);
 
 	useKeyboardControl(
