@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { applyEndOfTurnAbility } from '../../../../../functions/applyEndOfTurnAbility';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
+import { animationTimer } from '../../../../../constants/gameData';
 
 export const useHandlePlayerAbility = ({
 	battleStep,
@@ -12,14 +13,19 @@ export const useHandlePlayerAbility = ({
 	setPlayer,
 }: ExtendedBattleStepHandler) => {
 	useEffect(() => {
-		if (battleStep === 'HANDLE_PLAYER_ABILITY' && player) {
+		if (battleStep !== 'HANDLE_PLAYER_ABILITY' || !player) {
+			return;
+		}
+		const t = setTimeout(() => {
 			applyEndOfTurnAbility({
 				pokemon: player,
 				setPokemon: setPlayer,
 				dispatchToast,
 			});
 			setBattleStep('HANDLE_OPPONENT_ABILITY');
-		}
+		}, animationTimer);
+
+		return () => clearTimeout(t);
 	}, [
 		battleStep,
 		dispatchToast,

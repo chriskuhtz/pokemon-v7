@@ -18,7 +18,9 @@ import { useCatchingSteps } from './StepHandlers/useCatchingSteps';
 import { useExecuteOpponentMove } from './StepHandlers/useExecuteOpponentMove';
 import { useExecutePlayerMove } from './StepHandlers/useExecutePlayerMove';
 import { useHandleOpponentAbility } from './StepHandlers/useHandleOpponentAbility';
+import { useHandleOpponentPrimaryAilment } from './StepHandlers/useHandleOpponentPrimaryAilment';
 import { useHandlePlayerAbility } from './StepHandlers/useHandlePlayerAbility';
+import { useHandlePlayerPrimaryAilment } from './StepHandlers/useHandlePlayerPrimaryAilment';
 import { useMoveHandling } from './StepHandlers/useMoveHandling';
 import { useMoveSelection } from './StepHandlers/useMoveSelection';
 import { useOpponentEmerge } from './StepHandlers/useOpponentEmerge';
@@ -172,6 +174,8 @@ export const useBattleSteps = ({
 	useOpponentMissed(extendedPayload);
 	usePlayerMissed(extendedPayload);
 	useCatchingSteps(extendedPayload);
+	useHandleOpponentPrimaryAilment(extendedPayload);
+	useHandlePlayerPrimaryAilment(extendedPayload);
 	// 'OPPONENT_FAINTING' to 'BATTLE_WON'
 	useEffect(() => {
 		if (battleStep !== 'OPPONENT_FAINTING') {
