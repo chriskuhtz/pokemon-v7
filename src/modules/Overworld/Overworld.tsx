@@ -1,15 +1,17 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { IoMdMenu } from 'react-icons/io';
-import { RoutesType } from '../../App';
 import { animationTimer, baseSize } from '../../constants/gameData';
 import { assembleMap } from '../../functions/assembleMap';
+import { getOppositeDirection } from '../../functions/getOppositeDirection';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { isValidOverWorldMap } from '../../functions/isValidOverworldMap';
+import { Inventory } from '../../interfaces/Inventory';
 import {
 	Occupant,
 	OverworldItem,
 	OverworldMap,
 } from '../../interfaces/OverworldMap';
+import { RoutesType } from '../../interfaces/Routing';
 import { CharacterLocationData } from '../../interfaces/SaveFile';
 import { Banner } from '../../uiComponents/Banner/Banner';
 import './Overworld.css';
@@ -23,6 +25,11 @@ const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
 const occupantsCanvasId = 'occs';
 
+export interface Dialogue {
+	message: string;
+	onRemoval?: () => void;
+}
+
 export const Overworld = ({
 	openMenu,
 	playerLocation,
@@ -33,6 +40,7 @@ export const Overworld = ({
 	encounterRateModifier,
 	collectedItems,
 	navigate,
+	goToMarket,
 }: {
 	openMenu: () => void;
 	playerLocation: CharacterLocationData;
@@ -43,15 +51,32 @@ export const Overworld = ({
 	startEncounter: () => void;
 	encounterRateModifier?: number;
 	navigate: (x: RoutesType) => void;
+	goToMarket: (marketInventory: Partial<Inventory>) => void;
 }) => {
-	const [bannerContent, setBannerContent] = useState<string | undefined>();
+	const [dialogues, setDialogues] = useState<Dialogue[]>([]);
 	useEffect(() => {
+		if (dialogues.length === 0) {
+			return;
+		}
 		const t = setTimeout(() => {
-			if (bannerContent) setBannerContent(undefined);
+			if (dialogues[0].onRemoval) {
+				dialogues[0].onRemoval();
+			}
+			setDialogues(dialogues.slice(1));
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [bannerContent]);
+	}, [dialogues]);
+	const addDialogue = (x: Dialogue) => {
+		setDialogues((dialogues) => [...dialogues, x]);
+	};
+
+	const addEncounterDialogue = () => {
+		addDialogue({
+			message: 'A wild Pokemon appeared!',
+			onRemoval: () => startEncounter(),
+		});
+	};
 
 	const assembledMap = useMemo(
 		() => assembleMap(map, collectedItems),
@@ -63,42 +88,64 @@ export const Overworld = ({
 		playerLocation,
 		setCharacterLocation,
 		assembledMap,
-		startEncounter,
+		addEncounterDialogue,
 		encounterRateModifier
 	);
+
+	//DRAWING
+	useDrawCharacter(playerCanvasId, playerLocation);
+	useDrawBackground(backgroundCanvasId, map);
+	const changeOccupant = useDrawOccupants(occupantsCanvasId, assembledMap);
 
 	const interactWith = useCallback(
 		(occ: [string, Occupant] | undefined) => {
 			if (!occ) {
 				return;
 			}
-			const [, data] = occ;
+			const [id, data] = occ;
 
 			if (data.type === 'ITEM') {
-				setBannerContent(`Found ${data.amount} ${data.item}`);
-				collectItem(occ as [string, OverworldItem]);
+				addDialogue({
+					message: `Found ${data.amount} ${data.item}`,
+					onRemoval: () => collectItem(occ as [string, OverworldItem]),
+				});
 				return;
 			}
 			if (data.type === 'PC') {
-				navigate('STORAGE');
+				addDialogue({
+					message: 'Accessing Pokemon Storage',
+					onRemoval: () => navigate('STORAGE'),
+				});
+				return;
+			}
+
+			if (data.type === 'MERCHANT') {
+				changeOccupant(Number.parseInt(id), {
+					...data,
+					orientation: getOppositeDirection(playerLocation.orientation),
+				});
+				data.dialogue.forEach((d, i) =>
+					addDialogue({
+						message: d,
+						onRemoval:
+							i === data.dialogue.length - 1
+								? () => goToMarket(data.inventory)
+								: undefined,
+					})
+				);
 				return;
 			}
 
 			console.error('what is this occupant', occ);
 		},
-		[collectItem, navigate]
+		[changeOccupant, collectItem, goToMarket, navigate, playerLocation]
 	);
 
-	//PLAYER
-	useDrawCharacter(playerCanvasId, playerLocation);
 	useKeyboardControl(
 		setNextInput,
 		() => handleEnterPress(playerLocation, collectedItems, interactWith),
-		!!bannerContent
+		dialogues.length > 0
 	);
-
-	useDrawBackground(backgroundCanvasId, map);
-	useDrawOccupants(occupantsCanvasId, assembledMap);
 
 	if (!valid) {
 		return (
@@ -111,9 +158,9 @@ export const Overworld = ({
 
 	return (
 		<div className="overworldPage">
-			{bannerContent && (
+			{dialogues.length > 0 && (
 				<Banner>
-					<h2>{bannerContent}</h2>
+					<h2>{dialogues[0].message}</h2>
 				</Banner>
 			)}
 			<IoMdMenu

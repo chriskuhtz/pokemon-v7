@@ -25,6 +25,7 @@ export const BuyCard = ({
 	const max = Math.floor(money / cost);
 
 	if (cost === 0) {
+		console.error('cant buy this item', item);
 		return <></>;
 	}
 	return (

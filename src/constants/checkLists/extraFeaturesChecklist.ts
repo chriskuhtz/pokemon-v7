@@ -8,7 +8,10 @@ export const extraFeatureCheckList: {
 		name: 'PC access only from overworld',
 		handled: true,
 	},
-	{ name: 'Market access only from overworld' },
+	{
+		name: 'Market access only from overworld',
+		handled: true,
+	},
 	{ name: 'defined encounters per route' },
 	{ name: 'extract battleStep hooks' },
 	{ name: 'extract banners' },
@@ -29,4 +32,10 @@ export const extraFeatureCheckList: {
 	{ name: 'approach directions (PC only from front' },
 	{ name: 'overworld background/border of map' },
 	{ name: 'disable weird scroll' },
+	{ name: 'rotating npcs' },
+	{ name: 'walking npcs' },
+	{ name: 'pretty stat display' },
+	{ name: 'prettier weather display' },
+	{ name: 'Battle Attack animation' },
+	{ name: 'battle backgrounds' },
 ];

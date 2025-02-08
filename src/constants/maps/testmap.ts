@@ -1,6 +1,7 @@
 import { OverworldMap } from '../../interfaces/OverworldMap';
 
 export const testMap: OverworldMap = {
+	id: 'testMap',
 	backgroundTile: { x: 103, y: 1 },
 	width: 10,
 	height: 5,
@@ -11,5 +12,5 @@ export const testMap: OverworldMap = {
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 	],
-	occupants: [0, 1, 100001],
+	occupants: [0, 1, 100001, 300001],
 };

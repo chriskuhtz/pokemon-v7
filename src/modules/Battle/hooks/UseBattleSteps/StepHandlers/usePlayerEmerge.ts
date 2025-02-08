@@ -19,7 +19,7 @@ export const usePlayerEmerge = ({
 			applyOnBattleEnterAbility({
 				pokemon: player,
 				setWeather: setBattleWeather,
-				dispatchToast: dispatchToast,
+				dispatchToast,
 			});
 
 			setBattleStep('MOVE_SELECTION');

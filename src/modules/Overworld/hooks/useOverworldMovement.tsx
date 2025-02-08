@@ -18,17 +18,18 @@ export const useOverworldMovement = (
 ) => {
 	const [encounterChance, setEncounterChance] =
 		useState<number>(baseEncounterRate);
-	const resetEncounterRate = () => {
-		if (encounterChance === baseEncounterRate) {
-			return;
-		}
-		setEncounterChance(baseEncounterRate);
-	};
+
 	const [nextInput, setNextInput] = useState<
 		CharacterOrientation | undefined
 	>();
 
 	useEffect(() => {
+		const resetEncounterRate = () => {
+			if (encounterChance === baseEncounterRate) {
+				return;
+			}
+			setEncounterChance(baseEncounterRate);
+		};
 		const int = setInterval(() => {
 			if (
 				!nextInput &&

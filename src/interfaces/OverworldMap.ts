@@ -7,8 +7,9 @@
  * 2 = blocked field
  */
 
+import { Inventory } from './Inventory';
 import { ItemType } from './Item';
-import { MapId } from './SaveFile';
+import { CharacterOrientation, MapId } from './SaveFile';
 
 export interface OverworldItem {
 	type: 'ITEM';
@@ -24,9 +25,19 @@ export interface OverworldPC {
 	y: number;
 	map: MapId;
 }
-export type Occupant = OverworldItem | OverworldPC;
+export interface OverworldMerchant {
+	type: 'MERCHANT';
+	x: number;
+	y: number;
+	orientation: CharacterOrientation;
+	map: MapId;
+	inventory: Partial<Inventory>;
+	dialogue: string[];
+}
+export type Occupant = OverworldItem | OverworldPC | OverworldMerchant;
 
 export interface OverworldMap {
+	id: string;
 	backgroundTile: { x: number; y: number };
 	width: number;
 	height: number;

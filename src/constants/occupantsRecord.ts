@@ -26,4 +26,14 @@ export const occupantsRecord: Record<number, Occupant> = {
 		map: 'testMap',
 	},
 	//Trainers start at 20000
+	//Merchants start at 30000, they have sprite 113
+	300001: {
+		type: 'MERCHANT',
+		x: 8,
+		y: 0,
+		orientation: 'UP',
+		map: 'testMap',
+		inventory: { 'great-ball': 1 },
+		dialogue: ['Get your supplies here'],
+	},
 };

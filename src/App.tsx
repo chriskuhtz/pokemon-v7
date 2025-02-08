@@ -1,10 +1,11 @@
+import { useState } from 'react';
 import { v4 } from 'uuid';
 import { testOpponent, testState } from './constants/gameData';
 import { testMap } from './constants/maps/testmap';
 import { STANDARD_BUY_MARKET } from './constants/standardBuyMarket';
 import { getRandomPokemonId } from './functions/getRandomPokemonId';
 import { useSaveFile } from './hooks/useSaveFile';
-import { generateInventory } from './interfaces/Inventory';
+import { generateInventory, Inventory } from './interfaces/Inventory';
 import { Bag } from './modules/Bag/Bag';
 import { Battle } from './modules/Battle/Battle';
 import { MainMenu } from './modules/MainMenu/MainMenu';
@@ -15,20 +16,9 @@ import { Overworld } from './modules/Overworld/Overworld';
 import { PokemonStorage } from './modules/PokemonStorage/PokemonStorage';
 import { Team } from './modules/Team/Team';
 
-export const routes = [
-	'OVERWORLD',
-	'MAIN',
-	'BAG',
-	'TEAM',
-	'BATTLE',
-	'MARKET',
-	'BUY_MARKET',
-	'SELL_MARKET',
-	'STORAGE',
-] as const;
-export type RoutesType = (typeof routes)[number];
-
 export const App = (): JSX.Element => {
+	const [currentMarketInventory, setCurrentMarketInventory] =
+		useState<Partial<Inventory>>(STANDARD_BUY_MARKET);
 	const {
 		saveFile,
 		discardItemReducer,
@@ -100,7 +90,7 @@ export const App = (): JSX.Element => {
 				buyItem={buyItemReducer}
 				money={money}
 				goBack={() => setActiveTabReducer('MARKET')}
-				inventory={generateInventory(STANDARD_BUY_MARKET)}
+				inventory={generateInventory(currentMarketInventory)}
 				owned={inventory}
 			/>
 		);
@@ -117,7 +107,7 @@ export const App = (): JSX.Element => {
 	if (activeTab === 'MARKET') {
 		return (
 			<Market
-				goBack={() => setActiveTabReducer('MAIN')}
+				goBack={() => setActiveTabReducer('OVERWORLD')}
 				navigate={setActiveTabReducer}
 			/>
 		);
@@ -134,6 +124,10 @@ export const App = (): JSX.Element => {
 			startEncounter={() => setActiveTabReducer('BATTLE')}
 			encounterRateModifier={firstTeamMember.ability === 'stench' ? 0.5 : 1}
 			navigate={setActiveTabReducer}
+			goToMarket={(i) => {
+				setActiveTabReducer('MARKET');
+				setCurrentMarketInventory(i);
+			}}
 		/>
 	);
 };

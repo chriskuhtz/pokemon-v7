@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { RoutesType } from '../App';
 import { localStorageId } from '../constants/gameData';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { updateItemFunction } from '../functions/updateItemFunction';
@@ -7,6 +6,7 @@ import { ItemType } from '../interfaces/Item';
 import { OverworldItem } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
+import { RoutesType } from '../interfaces/Routing';
 
 export const useSaveFile = (
 	init: SaveFile,
