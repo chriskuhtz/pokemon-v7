@@ -2,11 +2,13 @@
 	"name": "pokemon-v7",
 	"private": true,
 	"version": "0.0.0",
+	"type": "module",
 	"scripts": {
 		"dev": "vite",
 		"build": "tsc -b && vite build",
 		"preview": "vite preview",
-		"test": "jest"
+		"test": "jest",
+		"lint": "eslint"
 	},
 	"dependencies": {
 		"@potfisch-industries-npm/usefetch": "^1.0.1",

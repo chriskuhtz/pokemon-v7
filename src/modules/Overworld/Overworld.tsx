@@ -24,6 +24,11 @@ const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
 const occupantsCanvasId = 'occs';
 
+export interface Dialogue {
+	message: string;
+	onRemoval?: () => void;
+}
+
 export const Overworld = ({
 	openMenu,
 	playerLocation,
@@ -47,14 +52,23 @@ export const Overworld = ({
 	navigate: (x: RoutesType) => void;
 	goToMarket: (marketInventory: Partial<Inventory>) => void;
 }) => {
-	const [bannerContent, setBannerContent] = useState<string | undefined>();
+	const [dialogues, setDialogues] = useState<Dialogue[]>([]);
 	useEffect(() => {
+		if (dialogues.length === 0) {
+			return;
+		}
 		const t = setTimeout(() => {
-			if (bannerContent) setBannerContent(undefined);
+			if (dialogues[0].onRemoval) {
+				dialogues[0].onRemoval();
+			}
+			setDialogues(dialogues.slice(1));
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [bannerContent]);
+	}, [dialogues]);
+	const addDialogue = (x: Dialogue) => {
+		setDialogues((dialogues) => [...dialogues, x]);
+	};
 
 	const assembledMap = useMemo(
 		() => assembleMap(map, collectedItems),
@@ -78,8 +92,10 @@ export const Overworld = ({
 			const [, data] = occ;
 
 			if (data.type === 'ITEM') {
-				setBannerContent(`Found ${data.amount} ${data.item}`);
-				collectItem(occ as [string, OverworldItem]);
+				addDialogue({
+					message: `Found ${data.amount} ${data.item}`,
+					onRemoval: () => collectItem(occ as [string, OverworldItem]),
+				});
 				return;
 			}
 			if (data.type === 'PC') {
@@ -88,7 +104,15 @@ export const Overworld = ({
 			}
 
 			if (data.type === 'MERCHANT') {
-				goToMarket(data.inventory);
+				data.dialogue.forEach((d, i) =>
+					addDialogue({
+						message: d,
+						onRemoval:
+							i === data.dialogue.length - 1
+								? () => goToMarket(data.inventory)
+								: undefined,
+					})
+				);
 				return;
 			}
 
@@ -102,7 +126,7 @@ export const Overworld = ({
 	useKeyboardControl(
 		setNextInput,
 		() => handleEnterPress(playerLocation, collectedItems, interactWith),
-		!!bannerContent
+		dialogues.length > 0
 	);
 
 	useDrawBackground(backgroundCanvasId, map);
@@ -119,9 +143,9 @@ export const Overworld = ({
 
 	return (
 		<div className="overworldPage">
-			{bannerContent && (
+			{dialogues.length > 0 && (
 				<Banner>
-					<h2>{bannerContent}</h2>
+					<h2>{dialogues[0].message}</h2>
 				</Banner>
 			)}
 			<IoMdMenu

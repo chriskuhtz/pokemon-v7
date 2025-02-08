@@ -34,6 +34,6 @@ export const occupantsRecord: Record<number, Occupant> = {
 		orientation: 'UP',
 		map: 'testMap',
 		inventory: { 'great-ball': 1 },
-		dialogue: ['These aint legal', "I'm the only one who got them"],
+		dialogue: ['Get your supplies here'],
 	},
 };
