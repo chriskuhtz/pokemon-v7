@@ -2,6 +2,7 @@ import { BattleAttack } from '../interfaces/BattleAttack';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { calculateDamage, WeatherType } from './calculateDamage';
 
+//TODO: factor in accuracy
 export const recommendMove = (
 	attacker: BattlePokemon,
 	target: BattlePokemon,
@@ -28,8 +29,6 @@ export const recommendMove = (
 
 			const baseDamageB =
 				calculateDamage(attacker, target, a, weather) * averageHitsB;
-
-			console.log(a.name, baseDamageA, b.name, baseDamageB);
 
 			return baseDamageB - baseDamageA;
 		});

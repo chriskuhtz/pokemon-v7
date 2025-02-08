@@ -17,6 +17,7 @@ export const abilityCheckList: {
 	{
 		name: 'speed-boost',
 		url: 'https://pokeapi.co/api/v2/ability/3/',
+		handled: true,
 	},
 	{
 		name: 'battle-armor',

@@ -4,6 +4,7 @@ import { useGetMoveData } from '../../../hooks/useGetMoveData';
 import { useGetPokemonData } from '../../../hooks/useGetPokemonData';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
+import { EmptyStatObject } from '../../../interfaces/StatObject';
 
 export const useBattlePokemon = (
 	pokemon: OwnedPokemon
@@ -61,6 +62,7 @@ export const useBattlePokemon = (
 						: undefined,
 				data: res,
 				stats: getStats(res.stats, pokemon.xp, pokemon.nature),
+				statBoosts: EmptyStatObject,
 			});
 		}
 	}, [
