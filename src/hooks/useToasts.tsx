@@ -21,9 +21,7 @@ export const useToasts = (
 		}
 		const t = setTimeout(() => {
 			setToasts(toasts.slice(1));
-
-		}, timer ?? animationTimer * 1.5);
-
+		}, timer ?? animationTimer);
 
 		return () => clearTimeout(t);
 	}, [timer, toasts]);

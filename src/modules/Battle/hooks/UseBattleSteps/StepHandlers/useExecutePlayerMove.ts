@@ -20,6 +20,7 @@ export const useExecutePlayerMove = ({
 	setOpponent,
 	battleWeather,
 	dispatchToast,
+	setCoins,
 }: ExtendedBattleStepHandler) => {
 	//"EXECUTE_PLAYER_MOVE"
 	useEffect(() => {
@@ -37,6 +38,11 @@ export const useExecutePlayerMove = ({
 				return;
 			}
 			if (nextPlayerMove?.type === 'BattleAttack') {
+				if (nextPlayerMove.name === 'pay-day') {
+					const scatteredCoins = Math.floor(Math.random() * 100);
+					setCoins((coins) => coins + scatteredCoins);
+					dispatchToast('coins scattered everywhere');
+				}
 				if (nextPlayerMove.miss) {
 					setPlayer(reduceMovePP(player, nextPlayerMove.name));
 					setNextPlayerMove(undefined);
@@ -97,6 +103,7 @@ export const useExecutePlayerMove = ({
 		opponent,
 		player,
 		setBattleStep,
+		setCoins,
 		setNextPlayerMove,
 		setOpponent,
 		setPlayer,
