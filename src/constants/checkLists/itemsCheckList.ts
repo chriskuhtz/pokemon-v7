@@ -38,6 +38,7 @@ export const itemsCheckList: {
 	{
 		name: 'dive-ball',
 		url: 'https://pokeapi.co/api/v2/item/7/',
+		handled: true,
 	},
 	{
 		name: 'nest-ball',

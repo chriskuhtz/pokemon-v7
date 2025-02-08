@@ -86,6 +86,7 @@ export const useBattleSteps = ({
 	setNextPlayerMove: (x: BattleAction | undefined) => void;
 	nextMove: BattleAction | undefined;
 	battleWeather: WeatherType | undefined;
+	usedItems: Inventory;
 } => {
 	const [battleStep, setBattleStep] = useState<BattleStep>('UNITIALIZED');
 	useEffect(() => console.log(battleStep), [battleStep]);
@@ -248,5 +249,6 @@ export const useBattleSteps = ({
 		initBattle,
 		setNextPlayerMove,
 		battleWeather,
+		usedItems,
 	};
 };
