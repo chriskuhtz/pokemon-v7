@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { animationTimer } from '../../../../constants/gameData';
 import { WeatherType } from '../../../../functions/determineWeatherFactor';
 import { receiveNewPokemonFunction } from '../../../../functions/receiveNewPokemonFunction';
@@ -68,6 +68,7 @@ export interface ExtendedBattleStepHandler extends BattleStepHandler {
 	setNextPlayerMove: (x: BattleAction | undefined) => void;
 	setCaughtPokemon: React.Dispatch<React.SetStateAction<CatchProcessInfo[]>>;
 	setUsedItems: React.Dispatch<React.SetStateAction<Inventory>>;
+	setCoins: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const useBattleSteps = ({
@@ -92,6 +93,7 @@ export const useBattleSteps = ({
 		undefined
 	);
 	const [usedItems, setUsedItems] = useState<Inventory>(EmptyInventory);
+	const [coins, setCoins] = useState<number>(0);
 	const [caughtPokemon, setCaughtPokemon] = useState<CatchProcessInfo[]>([]);
 	const [nextPlayerMove, setNextPlayerMove] = useState<
 		BattleAction | undefined
@@ -137,6 +139,7 @@ export const useBattleSteps = ({
 			setCaughtPokemon,
 			caughtPokemon,
 			setUsedItems,
+			setCoins,
 		}),
 		[
 			battleStep,
@@ -187,80 +190,53 @@ export const useBattleSteps = ({
 		return () => clearTimeout(t);
 	}, [battleStep, setBattleStep]);
 	// handle 'BATTLE_WON'
+
+	const endBattle = useCallback(() => {
+		let updatedPokemon = [...initSaveFile.pokemon];
+
+		caughtPokemon.forEach(({ pokemon, ball }) => {
+			updatedPokemon = receiveNewPokemonFunction(
+				reduceBattlePokemonToOwnedPokemon({
+					...pokemon,
+					ownerId: initSaveFile.playerId,
+					ball,
+				}),
+				updatedPokemon
+			);
+		});
+		const newSaveFile: SaveFile = {
+			...initSaveFile,
+			money: initSaveFile.money + coins,
+			inventory: joinInventories(initSaveFile.inventory, usedItems, true),
+			pokemon: updatedPokemon,
+		};
+		syncAfterBattleEnd(newSaveFile);
+		goBack();
+	}, [
+		caughtPokemon,
+		coins,
+		goBack,
+		initSaveFile,
+		syncAfterBattleEnd,
+		usedItems,
+	]);
 	useEffect(() => {
 		if (battleStep !== 'BATTLE_WON') {
 			return;
 		}
-		const t = setTimeout(() => {
-			let updatedPokemon = [...initSaveFile.pokemon];
-
-			caughtPokemon.forEach(({ pokemon, ball }) => {
-				updatedPokemon = receiveNewPokemonFunction(
-					reduceBattlePokemonToOwnedPokemon({
-						...pokemon,
-						ownerId: initSaveFile.playerId,
-						ball,
-					}),
-					updatedPokemon
-				);
-			});
-			const newSaveFile: SaveFile = {
-				...initSaveFile,
-				inventory: joinInventories(initSaveFile.inventory, usedItems, true),
-				pokemon: updatedPokemon,
-			};
-			syncAfterBattleEnd(newSaveFile);
-			goBack();
-		}, animationTimer);
+		const t = setTimeout(() => endBattle(), animationTimer);
 
 		return () => clearTimeout(t);
-	}, [
-		battleStep,
-		caughtPokemon,
-		goBack,
-		initSaveFile,
-		setBattleStep,
-		syncAfterBattleEnd,
-		usedItems,
-	]);
+	}, [battleStep, endBattle]);
 	// handle "BATTLE_LOST"
 	useEffect(() => {
 		if (battleStep !== 'BATTLE_LOST') {
 			return;
 		}
-		const t = setTimeout(() => {
-			let updatedPokemon = [...initSaveFile.pokemon];
-
-			caughtPokemon.forEach(({ pokemon, ball }) => {
-				updatedPokemon = receiveNewPokemonFunction(
-					reduceBattlePokemonToOwnedPokemon({
-						...pokemon,
-						ownerId: initSaveFile.playerId,
-						ball,
-					}),
-					updatedPokemon
-				);
-			});
-
-			const newSaveFile: SaveFile = {
-				...initSaveFile,
-				inventory: joinInventories(initSaveFile.inventory, usedItems, true),
-				pokemon: updatedPokemon,
-			};
-			syncAfterBattleEnd(newSaveFile);
-			goBack();
-		}, animationTimer);
+		const t = setTimeout(() => endBattle(), animationTimer);
 
 		return () => clearTimeout(t);
-	}, [
-		battleStep,
-		caughtPokemon,
-		goBack,
-		initSaveFile,
-		setBattleStep,
-		syncAfterBattleEnd,
-		usedItems,
-	]);
+	}, [battleStep, endBattle]);
 
 	const initBattle = () => {
 		setBattleStep('OPPONENT_INTRO');

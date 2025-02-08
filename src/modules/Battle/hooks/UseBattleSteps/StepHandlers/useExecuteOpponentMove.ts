@@ -21,6 +21,7 @@ export const useExecuteOpponentMove = ({
 	nextOpponentMove,
 	setNextOpponentMove,
 	dispatchToast,
+	setCoins,
 }: ExtendedBattleStepHandler) => {
 	//"EXECUTE_OPPONENT_MOVE"
 	useEffect(() => {
@@ -35,6 +36,11 @@ export const useExecuteOpponentMove = ({
 			}
 
 			if (nextOpponentMove?.type === 'BattleAttack') {
+				if (nextOpponentMove.name === 'pay-day') {
+					const scatteredCoins = Math.floor(Math.random() * 100);
+					setCoins((coins) => coins + scatteredCoins);
+					dispatchToast('coins scattered everywhere');
+				}
 				if (nextOpponentMove.miss) {
 					setOpponent(reduceMovePP(opponent, nextOpponentMove.name));
 					setNextPlayerMove(undefined);
@@ -95,6 +101,7 @@ export const useExecuteOpponentMove = ({
 		opponent,
 		player,
 		setBattleStep,
+		setCoins,
 		setNextOpponentMove,
 		setNextPlayerMove,
 		setOpponent,
