@@ -16,19 +16,6 @@ import { Overworld } from './modules/Overworld/Overworld';
 import { PokemonStorage } from './modules/PokemonStorage/PokemonStorage';
 import { Team } from './modules/Team/Team';
 
-export const routes = [
-	'OVERWORLD',
-	'MAIN',
-	'BAG',
-	'TEAM',
-	'BATTLE',
-	'MARKET',
-	'BUY_MARKET',
-	'SELL_MARKET',
-	'STORAGE',
-] as const;
-export type RoutesType = (typeof routes)[number];
-
 export const App = (): JSX.Element => {
 	const [currentMarketInventory, setCurrentMarketInventory] =
 		useState<Partial<Inventory>>(STANDARD_BUY_MARKET);

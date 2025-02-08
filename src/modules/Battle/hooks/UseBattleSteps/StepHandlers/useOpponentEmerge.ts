@@ -18,7 +18,7 @@ export const useOpponentEmerge = ({
 			applyOnBattleEnterAbility({
 				pokemon: opponent,
 				setWeather: setBattleWeather,
-				dispatchToast: dispatchToast,
+				dispatchToast,
 			});
 
 			setBattleStep('PLAYER_EMERGE');

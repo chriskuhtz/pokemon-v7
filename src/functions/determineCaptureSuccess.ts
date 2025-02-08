@@ -59,11 +59,10 @@ export const determineCaptureSuccess = (
 	const levelFactor = (100 - level) / 100;
 
 	//between 1 and 0
-	const capture_rateFactor = target.capture_rate / 255;
+	const captureRateFactor = target.capture_rate / 255;
 
 	//between 0 and 4
-	const catchRate =
-		ballfactor + healthfactor + levelFactor + capture_rateFactor;
+	const catchRate = ballfactor + healthfactor + levelFactor + captureRateFactor;
 
 	//between 1 and 3
 	const random = 1 + Math.random() * 2;

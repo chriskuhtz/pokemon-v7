@@ -4,8 +4,8 @@ import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
-import { RoutesType } from '../../App';
 import { baseSize } from '../../constants/gameData';
+import { RoutesType } from '../../interfaces/Routing';
 export const MainMenu = ({
 	navigate,
 	goBack,

@@ -1,7 +1,7 @@
 import { BattleAttack } from '../interfaces/BattleAttack';
 
-export const weather = ['rain'] as const;
-export type WeatherType = (typeof weather)[number];
+export const weatherTypes = ['rain'] as const;
+export type WeatherType = (typeof weatherTypes)[number];
 
 export const determineWeatherFactor = (
 	attack: BattleAttack,

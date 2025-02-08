@@ -1,4 +1,3 @@
-import { RoutesType } from '../App';
 import { Inventory } from './Inventory';
 import { OwnedPokemon } from './OwnedPokemon';
 

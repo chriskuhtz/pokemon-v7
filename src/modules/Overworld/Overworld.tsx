@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { IoMdMenu } from 'react-icons/io';
-import { RoutesType } from '../../App';
 import { animationTimer, baseSize } from '../../constants/gameData';
 import { assembleMap } from '../../functions/assembleMap';
 import { handleEnterPress } from '../../functions/handleEnterPress';
@@ -19,6 +18,7 @@ import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
+import { RoutesType } from '../../interfaces/Routing';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';

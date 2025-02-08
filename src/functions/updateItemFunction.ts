@@ -3,10 +3,10 @@ import { ItemType } from '../interfaces/Item';
 
 export const updateItemFunction = (
 	item: ItemType,
-	number: number,
+	amount: number,
 	inventory: Inventory
 ): Inventory => {
 	return joinInventories(inventory, {
-		[item]: number,
+		[item]: amount,
 	});
 };

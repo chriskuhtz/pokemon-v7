@@ -1,10 +1,10 @@
 import { BsCashCoin } from 'react-icons/bs';
 import { FaCartPlus } from 'react-icons/fa';
-import { RoutesType } from '../../App';
+import { baseSize } from '../../constants/gameData';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { baseSize } from '../../constants/gameData';
+import { RoutesType } from '../../interfaces/Routing';
 export const Market = ({
 	goBack,
 	navigate,
