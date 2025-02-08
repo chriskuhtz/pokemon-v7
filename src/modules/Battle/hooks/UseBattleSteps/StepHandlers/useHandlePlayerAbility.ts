@@ -18,7 +18,7 @@ export const useHandlePlayerAbility = ({
 				setPokemon: setPlayer,
 				dispatchToast,
 			});
-			setBattleStep('MOVE_SELECTION');
+			setBattleStep('HANDLE_OPPONENT_ABILITY');
 		}
 	}, [
 		battleStep,

@@ -12,6 +12,7 @@ export const applyEndOfTurnAbility = ({
 	dispatchToast: AddToastFunction;
 }) => {
 	if (pokemon.ability === 'speed-boost') {
+		dispatchToast(`${pokemon.data.name}´s speed boost`);
 		setPokemon(applyStatBoostToPokemon(pokemon, 'speed', 1, dispatchToast));
 	}
 	return;
