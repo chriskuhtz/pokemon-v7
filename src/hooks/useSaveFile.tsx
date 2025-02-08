@@ -31,6 +31,7 @@ export const useSaveFile = (
 	) => void;
 	setCharacterLocationReducer: (update: CharacterLocationData) => void;
 	collectItemReducer: (item: [string, Occupant]) => void;
+	setPokemonReducer: (update: OwnedPokemon[]) => void;
 } => {
 	const local = window.localStorage.getItem(localStorageId);
 	const loaded =
@@ -131,6 +132,12 @@ export const useSaveFile = (
 			collectedItems: [...saveFile.collectedItems.filter((c) => c !== id), id],
 		}));
 	};
+	const setPokemonReducer = (update: OwnedPokemon[]) => {
+		setSaveFile((gm) => ({
+			...gm,
+			pokemon: update,
+		}));
+	};
 
 	return {
 		saveFile,
@@ -144,5 +151,6 @@ export const useSaveFile = (
 		buyItemReducer,
 		setCharacterLocationReducer,
 		collectItemReducer,
+		setPokemonReducer,
 	};
 };

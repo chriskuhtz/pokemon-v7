@@ -3,7 +3,10 @@ export const extraFeatureCheckList: {
 	todos?: string[];
 	handled?: boolean;
 }[] = [
-	{ name: 'PC' },
+	{ name: 'PC storage system', handled: true },
+	{ name: 'PC access only from overworld' },
+	{ name: 'Market access only from overworld' },
+	{ name: 'defined encounters per route' },
 	{ name: 'extract battleStep hooks' },
 	{ name: 'extract banners' },
 	{ name: 'extract battleAction Sections' },
@@ -13,4 +16,8 @@ export const extraFeatureCheckList: {
 	{ name: 'badges' },
 	{ name: 'quests' },
 	{ name: 'hidden items' },
+	{ name: 'team reordering' },
+	{ name: 'grass on encounter tiles' },
+	{ name: 'toast types' },
+	{ name: 'pc storage filters' },
 ];

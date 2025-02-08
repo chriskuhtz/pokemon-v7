@@ -1,6 +1,9 @@
+import { getStats } from '../../../functions/getStats';
 import { getTypeNames } from '../../../functions/getTypeNames';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { PokemonData } from '../../../interfaces/PokemonData';
+import { HpBar } from '../../HpBar/HpBar';
+import { LevelBar } from '../../LevelBar/LevelBar';
 
 export const OwnedPokemonCardContent = ({
 	ownedPokemon,
@@ -19,6 +22,13 @@ export const OwnedPokemonCardContent = ({
 				alignItems: 'center',
 			}}
 		>
+			<div>
+				<LevelBar xp={ownedPokemon.xp} />
+				<HpBar
+					max={getStats(data.stats, ownedPokemon.xp, ownedPokemon.nature)['hp']}
+					damage={ownedPokemon.damage}
+				/>
+			</div>
 			<div>
 				<h4>{data.name.toUpperCase()}</h4>
 				<h5>{typeNames.join('/')} type</h5>

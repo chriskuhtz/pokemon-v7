@@ -8,7 +8,7 @@ import {
 	CharacterOrientation,
 } from '../../../interfaces/SaveFile';
 
-const baseEncounterRate = 0.2;
+const baseEncounterRate = 0;
 export const useOverworldMovement = (
 	playerLocation: CharacterLocationData,
 	setCharacterLocation: (update: CharacterLocationData) => void,

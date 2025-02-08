@@ -1,3 +1,4 @@
+import { v4 } from 'uuid';
 import { testOpponent, testState } from './constants/gameData';
 import { testMap } from './constants/maps/testmap';
 import { getRandomPokemonId } from './functions/getRandomPokemonId';
@@ -10,6 +11,7 @@ import { BuyMarket } from './modules/Market/BuyMarket';
 import { Market } from './modules/Market/Market';
 import { SellMarket } from './modules/Market/SellMarket';
 import { Overworld } from './modules/Overworld/Overworld';
+import { PokemonStorage } from './modules/PokemonStorage/PokemonStorage';
 import { Team } from './modules/Team/Team';
 
 export const routes = [
@@ -21,6 +23,7 @@ export const routes = [
 	'MARKET',
 	'BUY_MARKET',
 	'SELL_MARKET',
+	'STORAGE',
 ] as const;
 export type RoutesType = (typeof routes)[number];
 
@@ -34,6 +37,7 @@ export const App = (): JSX.Element => {
 		buyItemReducer,
 		setCharacterLocationReducer,
 		collectItemReducer,
+		setPokemonReducer,
 	} = useSaveFile(testState, true);
 
 	const {
@@ -70,12 +74,21 @@ export const App = (): JSX.Element => {
 	if (activeTab === 'TEAM') {
 		return <Team team={team} goBack={() => setActiveTabReducer('MAIN')} />;
 	}
+	if (activeTab === 'STORAGE') {
+		return (
+			<PokemonStorage
+				allPokemon={pokemon}
+				goBack={() => setActiveTabReducer('MAIN')}
+				setPokemon={setPokemonReducer}
+			/>
+		);
+	}
 	if (activeTab === 'BATTLE') {
 		return (
 			<Battle
 				initSaveFile={saveFile}
 				syncAfterBattleEnd={putSaveFileReducer}
-				opponent={{ ...testOpponent, dexId: getRandomPokemonId() }}
+				opponent={{ ...testOpponent, dexId: getRandomPokemonId(), id: v4() }}
 				goBack={() => setActiveTabReducer('OVERWORLD')}
 			/>
 		);

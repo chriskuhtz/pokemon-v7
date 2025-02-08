@@ -1,10 +1,16 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { BattleAction } from '../modules/Battle/hooks/UseBattleSteps/useBattleSteps';
 import { calculateModifiedStat } from './calculateModifiedStat';
 
 export const determineMoveOrder = (
 	player: BattlePokemon,
-	opponent: BattlePokemon
+	opponent: BattlePokemon,
+	playerMove: BattleAction
 ): string => {
+	//catching always goes first
+	if (playerMove.type === 'CatchProcessInfo') {
+		return player.id;
+	}
 	const playerSpeed = calculateModifiedStat(
 		player.stats.speed,
 		player.statBoosts.speed

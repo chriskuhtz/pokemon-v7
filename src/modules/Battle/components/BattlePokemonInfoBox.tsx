@@ -1,15 +1,23 @@
 import React from 'react';
 import { HpBar } from '../../../components/HpBar/HpBar';
+import { LevelBar } from '../../../components/LevelBar/LevelBar';
 import { battleSpriteSize } from '../../../constants/gameData';
-import { calculateLevelData } from '../../../functions/calculateLevelData';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
-import { BattlePokemon } from '../../../interfaces/BattlePokemon';
+import { StatObject } from '../../../interfaces/StatObject';
 
 export const BattlePokemonInfoBox = ({
-	pokemon,
+	dexId,
+	stats,
+	statBoosts,
+	xp,
+	damage,
 	playerSide,
 }: {
-	pokemon: BattlePokemon;
+	dexId: number;
+	stats: StatObject;
+	statBoosts: StatObject;
+	xp: number;
+	damage: number;
 	playerSide?: boolean;
 }) => {
 	return (
@@ -22,9 +30,9 @@ export const BattlePokemonInfoBox = ({
 			}}
 		>
 			<div>
-				<strong>Lvl: {calculateLevelData(pokemon.xp).level}</strong>
+				<LevelBar xp={xp} />
 				<div style={{ display: 'flex', gap: '.5rem' }}>
-					{Object.entries(pokemon.statBoosts).map(([stat, modifier]) => {
+					{Object.entries(statBoosts).map(([stat, modifier]) => {
 						if (modifier === 0) {
 							return <React.Fragment key={stat + modifier}></React.Fragment>;
 						}
@@ -44,12 +52,12 @@ export const BattlePokemonInfoBox = ({
 						);
 					})}
 				</div>
-				<HpBar max={pokemon.stats.hp} damage={pokemon.damage} />
+				<HpBar max={stats.hp} damage={damage} />
 			</div>
 			<img
 				width={battleSpriteSize}
 				height={battleSpriteSize}
-				src={getPokemonSprite(pokemon.dexId, playerSide ? 'back' : undefined)}
+				src={getPokemonSprite(dexId, playerSide ? 'back' : undefined)}
 			/>
 		</div>
 	);

@@ -17,7 +17,7 @@ export const useMoveHandling = ({
 				return;
 			}
 
-			const first = determineMoveOrder(player, opponent);
+			const first = determineMoveOrder(player, opponent, nextPlayerMove);
 
 			if (first === player.id) {
 				setBattleStep('EXECUTE_PLAYER_MOVE');
