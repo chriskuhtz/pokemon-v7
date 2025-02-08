@@ -1,4 +1,12 @@
-export const determineCrit = (critRate: number): boolean => {
+import { AbilityName } from '../constants/checkLists/abilityCheckList';
+
+export const determineCrit = (
+	critRate: number,
+	targetAbility: AbilityName
+): boolean => {
+	if (targetAbility === 'battle-armor' || targetAbility === 'shell-armor') {
+		return false;
+	}
 	if (critRate > 2) {
 		return true;
 	}

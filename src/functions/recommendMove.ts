@@ -3,7 +3,6 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { calculateDamage, WeatherType } from './calculateDamage';
 
 //TODO: Different Strategies
-//factor in crit rate
 
 export const recommendMove = (
 	attacker: BattlePokemon,
@@ -28,9 +27,14 @@ export const recommendMove = (
 
 			const accuracyWeighted = baseDamage * (a.data.accuracy / 100);
 
-			return { move: a, weight: accuracyWeighted };
+			//higher weight for higher crit chance, does not consider target ability
+			const critWeighted =
+				accuracyWeighted + accuracyWeighted * (a.data.meta.crit_rate / 2);
+
+			return { move: a, weight: critWeighted };
 		})
 		.sort((a, b) => b.weight - a.weight);
 
+	//console.log(weightedMoves);
 	return weightedMoves[0].move;
 };

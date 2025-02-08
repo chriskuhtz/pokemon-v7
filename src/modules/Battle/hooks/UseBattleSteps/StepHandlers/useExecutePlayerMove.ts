@@ -55,7 +55,10 @@ export const useExecutePlayerMove = ({
 					(nextPlayerMove?.multiHits ?? 0) > 1
 						? {
 								...nextPlayerMove,
-								crit: determineCrit(nextPlayerMove.data.meta.crit_rate),
+								crit: determineCrit(
+									nextPlayerMove.data.meta.crit_rate,
+									opponent.ability
+								),
 								multiHits: (nextPlayerMove?.multiHits ?? 0) - 1,
 						  }
 						: undefined;
