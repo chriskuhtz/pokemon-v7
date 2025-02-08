@@ -22,6 +22,7 @@ export const abilityCheckList: {
 	{
 		name: 'battle-armor',
 		url: 'https://pokeapi.co/api/v2/ability/4/',
+		handled: true,
 	},
 	{
 		name: 'sturdy',
@@ -174,7 +175,11 @@ export const abilityCheckList: {
 	{ name: 'vital-spirit', url: 'https://pokeapi.co/api/v2/ability/72/' },
 	{ name: 'white-smoke', url: 'https://pokeapi.co/api/v2/ability/73/' },
 	{ name: 'pure-power', url: 'https://pokeapi.co/api/v2/ability/74/' },
-	{ name: 'shell-armor', url: 'https://pokeapi.co/api/v2/ability/75/' },
+	{
+		name: 'shell-armor',
+		url: 'https://pokeapi.co/api/v2/ability/75/',
+		handled: true,
+	},
 	{ name: 'air-lock', url: 'https://pokeapi.co/api/v2/ability/76/' },
 	{ name: 'tangled-feet', url: 'https://pokeapi.co/api/v2/ability/77/' },
 	{ name: 'motor-drive', url: 'https://pokeapi.co/api/v2/ability/78/' },
@@ -468,8 +473,13 @@ export const abilityCheckList: {
 	{ name: 'decoy', url: 'https://pokeapi.co/api/v2/ability/10059/' },
 	{ name: 'shield', url: 'https://pokeapi.co/api/v2/ability/10060/' },
 ];
-const abilityNames = abilityCheckList
-	.filter((a) => a.handled)
-	.map((a) => a.name);
+
+const abilityNames = [
+	'stench',
+	'drizzle',
+	'battle-armor',
+	'shell-armor',
+	'speed-boost',
+] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

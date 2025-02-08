@@ -26,7 +26,7 @@ export const testState: SaveFile = {
 			damage: 0,
 			nature: 'adamant',
 			xp: 100000,
-			ability: 'stench',
+			ability: 'battle-armor',
 		},
 	],
 	meta: {

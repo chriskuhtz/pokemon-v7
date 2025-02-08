@@ -1,3 +1,4 @@
+import { AbilityName } from '../constants/checkLists/abilityCheckList';
 import { PokeballType } from './Item';
 import { Nature } from './Natures';
 
@@ -19,7 +20,7 @@ export interface OwnedPokemon {
 	ball: PokeballType;
 	nature: Nature;
 	xp: number;
-	ability: string;
+	ability: AbilityName;
 	//shiny?: boolean;
 	//friendship: number;
 	//heldItemName?: ItemType;

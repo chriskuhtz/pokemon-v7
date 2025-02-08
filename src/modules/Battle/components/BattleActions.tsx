@@ -117,7 +117,10 @@ export const BattleActions = ({
 								onClick={() =>
 									chooseMove({
 										...m,
-										crit: determineCrit(m.data.meta.crit_rate),
+										crit: determineCrit(
+											m.data.meta.crit_rate,
+											opponent.ability
+										),
 										miss: determineMiss(m),
 										multiHits: determineMultiHits(m),
 									})
