@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { IoMdMenu } from 'react-icons/io';
+import { RoutesType } from '../../App';
 import { animationTimer, baseSize } from '../../constants/gameData';
 import { assembleMap } from '../../functions/assembleMap';
 import { handleEnterPress } from '../../functions/handleEnterPress';
@@ -24,20 +25,20 @@ export const Overworld = ({
 	setCharacterLocation,
 	collectItem,
 	map,
-
 	startEncounter,
 	encounterRateModifier,
 	collectedItems,
+	navigate,
 }: {
 	openMenu: () => void;
 	playerLocation: CharacterLocationData;
 	setCharacterLocation: (update: CharacterLocationData) => void;
 	collectItem: (item: [string, Occupant]) => void;
-
 	map: OverworldMap;
 	collectedItems: number[];
 	startEncounter: () => void;
 	encounterRateModifier?: number;
+	navigate: (x: RoutesType) => void;
 }) => {
 	const [bannerContent, setBannerContent] = useState<string | undefined>();
 	useEffect(() => {
@@ -67,10 +68,21 @@ export const Overworld = ({
 			if (!occ) {
 				return;
 			}
-			setBannerContent(`Found ${occ[1].amount} ${occ[1].item}`);
-			collectItem(occ);
+			const [, data] = occ;
+
+			if (data.type === 'ITEM') {
+				setBannerContent(`Found ${data.amount} ${data.item}`);
+				collectItem(occ);
+				return;
+			}
+			if (data.type === 'PC') {
+				navigate('STORAGE');
+				return;
+			}
+
+			console.error('what is this occupant', occ);
 		},
-		[collectItem]
+		[collectItem, navigate]
 	);
 
 	//PLAYER
@@ -115,7 +127,6 @@ export const Overworld = ({
 					}}
 				>
 					<canvas
-						style={{ border: '1px solid red' }}
 						id={backgroundCanvasId}
 						height={map.height * baseSize}
 						width={map.width * baseSize}
@@ -129,7 +140,6 @@ export const Overworld = ({
 					}}
 				>
 					<canvas
-						style={{ border: '1px solid blue' }}
 						id={occupantsCanvasId}
 						height={map.height * baseSize}
 						width={map.width * baseSize}

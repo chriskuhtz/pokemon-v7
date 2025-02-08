@@ -79,7 +79,7 @@ export const App = (): JSX.Element => {
 		return (
 			<PokemonStorage
 				allPokemon={pokemon}
-				goBack={() => setActiveTabReducer('MAIN')}
+				goBack={() => setActiveTabReducer('OVERWORLD')}
 				setPokemon={setPokemonReducer}
 			/>
 		);
@@ -133,6 +133,7 @@ export const App = (): JSX.Element => {
 			collectedItems={collectedItems}
 			startEncounter={() => setActiveTabReducer('BATTLE')}
 			encounterRateModifier={firstTeamMember.ability === 'stench' ? 0.5 : 1}
+			navigate={setActiveTabReducer}
 		/>
 	);
 };

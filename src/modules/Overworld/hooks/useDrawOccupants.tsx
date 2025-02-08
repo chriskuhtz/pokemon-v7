@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { baseSize } from '../../../constants/gameData';
-import { itemsRecord } from '../../../constants/itemsRecord';
-import { OverworldMap } from '../../../interfaces/OverworldMap';
+import { occupantsRecord } from '../../../constants/occupantsRecord';
+import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
 
 export const useDrawOccupants = (canvasId: string, map: OverworldMap) => {
 	useEffect(() => {
@@ -15,7 +15,7 @@ export const useDrawOccupants = (canvasId: string, map: OverworldMap) => {
 		ctx?.clearRect(0, 0, width * baseSize, height * baseSize);
 
 		occupants.forEach((occupantId) => {
-			const occ = itemsRecord[occupantId];
+			const occ = occupantsRecord[occupantId];
 			if (!occ) {
 				return;
 			}
@@ -32,7 +32,15 @@ export const useDrawOccupants = (canvasId: string, map: OverworldMap) => {
 				);
 			});
 
-			img.src = '/mapObjects/pokeball.png';
+			img.src = getSource(occ.type);
 		}, []);
 	}, [canvasId, map]);
+};
+
+const getSource = (type: Occupant['type']) => {
+	if (type === 'PC') {
+		return '/mapObjects/pc.png';
+	}
+
+	return '/mapObjects/pokeball.png';
 };

@@ -4,7 +4,10 @@ export const extraFeatureCheckList: {
 	handled?: boolean;
 }[] = [
 	{ name: 'PC storage system', handled: true },
-	{ name: 'PC access only from overworld' },
+	{
+		name: 'PC access only from overworld',
+		handled: true,
+	},
 	{ name: 'Market access only from overworld' },
 	{ name: 'defined encounters per route' },
 	{ name: 'extract battleStep hooks' },
@@ -20,4 +23,8 @@ export const extraFeatureCheckList: {
 	{ name: 'grass on encounter tiles' },
 	{ name: 'toast types' },
 	{ name: 'pc storage filters' },
+	{ name: 'full keyboard control' },
+	{ name: 'movement by tile click' },
+	{ name: 'movement buttons' },
+	{ name: 'approach directions (PC only from front' },
 ];
