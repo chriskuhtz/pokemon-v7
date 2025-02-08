@@ -22,6 +22,7 @@ export const itemsCheckList: {
 	{
 		name: 'poke-ball',
 		url: 'https://pokeapi.co/api/v2/item/4/',
+		handled: true,
 	},
 	{
 		name: 'safari-ball',

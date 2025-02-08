@@ -5,6 +5,7 @@ import { useGetPokemonData } from '../../../hooks/useGetPokemonData';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
+import { useGetPokemonSpeciesData } from '../../../hooks/useGetPokemonSpeciesData';
 
 export const useBattlePokemon = (
 	pokemon: OwnedPokemon
@@ -14,6 +15,7 @@ export const useBattlePokemon = (
 ] => {
 	const [current, setCurrent] = useState<BattlePokemon | undefined>();
 	const { res } = useGetPokemonData(pokemon.dexId);
+	const { res: speciesdata } = useGetPokemonSpeciesData(pokemon.dexId);
 
 	const { res: firstMoveData } = useGetMoveData(pokemon.firstMove.name);
 	const { res: secondMoveData } = useGetMoveData(pokemon.secondMove?.name);
@@ -24,6 +26,7 @@ export const useBattlePokemon = (
 		if (
 			!current &&
 			res &&
+			speciesdata &&
 			firstMoveData &&
 			((secondMoveData && pokemon.secondMove) || !pokemon.secondMove) &&
 			((thirdMoveData && pokemon.thirdMove) || !pokemon.thirdMove) &&
@@ -63,6 +66,7 @@ export const useBattlePokemon = (
 				data: res,
 				stats: getStats(res.stats, pokemon.xp, pokemon.nature),
 				statBoosts: EmptyStatObject,
+				capture_rate: speciesdata?.capture_rate,
 			});
 		}
 	}, [
@@ -72,6 +76,7 @@ export const useBattlePokemon = (
 		pokemon,
 		res,
 		secondMoveData,
+		speciesdata,
 		thirdMoveData,
 	]);
 
