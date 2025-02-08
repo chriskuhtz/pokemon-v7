@@ -25,7 +25,7 @@ export const testState: SaveFile = {
 			id: 'bingo',
 			ball: 'master-ball',
 			onTeam: true,
-			firstMove: { name: 'pound', usedPP: 0 },
+			firstMove: { name: 'mega-punch', usedPP: 0 },
 			secondMove: { name: 'karate-chop', usedPP: 0 },
 			thirdMove: { name: 'double-slap', usedPP: 0 },
 			fourthMove: { name: 'comet-punch', usedPP: 0 },

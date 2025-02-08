@@ -474,7 +474,7 @@ export const abilityCheckList: {
 	{ name: 'shield', url: 'https://pokeapi.co/api/v2/ability/10060/' },
 ];
 
-const abilityNames = [
+export const abilityNames = [
 	'stench',
 	'drizzle',
 	'battle-armor',

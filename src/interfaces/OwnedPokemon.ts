@@ -1,9 +1,10 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
+import { MoveName } from '../constants/checkLists/movesCheckList';
 import { PokeballType } from './Item';
 import { Nature } from './Natures';
 
 export interface OwnedPokemonMove {
-	name: string;
+	name: MoveName;
 	usedPP: number;
 }
 export interface OwnedPokemon {
