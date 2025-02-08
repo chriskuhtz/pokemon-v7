@@ -5,7 +5,11 @@ import { animationTimer, baseSize } from '../../constants/gameData';
 import { assembleMap } from '../../functions/assembleMap';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { isValidOverWorldMap } from '../../functions/isValidOverworldMap';
-import { Occupant, OverworldMap } from '../../interfaces/OverworldMap';
+import {
+	Occupant,
+	OverworldItem,
+	OverworldMap,
+} from '../../interfaces/OverworldMap';
 import { CharacterLocationData } from '../../interfaces/SaveFile';
 import { Banner } from '../../uiComponents/Banner/Banner';
 import './Overworld.css';
@@ -33,7 +37,7 @@ export const Overworld = ({
 	openMenu: () => void;
 	playerLocation: CharacterLocationData;
 	setCharacterLocation: (update: CharacterLocationData) => void;
-	collectItem: (item: [string, Occupant]) => void;
+	collectItem: (item: [string, OverworldItem]) => void;
 	map: OverworldMap;
 	collectedItems: number[];
 	startEncounter: () => void;
@@ -72,7 +76,7 @@ export const Overworld = ({
 
 			if (data.type === 'ITEM') {
 				setBannerContent(`Found ${data.amount} ${data.item}`);
-				collectItem(occ);
+				collectItem(occ as [string, OverworldItem]);
 				return;
 			}
 			if (data.type === 'PC') {

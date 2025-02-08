@@ -27,6 +27,7 @@ export const itemsCheckList: {
 	{
 		name: 'safari-ball',
 		url: 'https://pokeapi.co/api/v2/item/5/',
+		handled: true,
 	},
 	{ name: 'net-ball', url: 'https://pokeapi.co/api/v2/item/6/' },
 	{

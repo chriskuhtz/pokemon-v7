@@ -54,7 +54,7 @@ export const BattleActions = ({
 					display: 'grid',
 					gap: '.5rem',
 					alignItems: 'center',
-					gridTemplateColumns: '1fr 3fr 3fr 3fr 3fr',
+					gridTemplateColumns: '1fr 3fr 3fr 3fr 3fr 3fr',
 					padding: '0 .5rem',
 				}}
 			>

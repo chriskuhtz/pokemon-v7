@@ -4,7 +4,7 @@ import { localStorageId } from '../constants/gameData';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { updateItemFunction } from '../functions/updateItemFunction';
 import { ItemType } from '../interfaces/Item';
-import { Occupant } from '../interfaces/OverworldMap';
+import { OverworldItem } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
 
@@ -30,7 +30,7 @@ export const useSaveFile = (
 		pricePerItem: number
 	) => void;
 	setCharacterLocationReducer: (update: CharacterLocationData) => void;
-	collectItemReducer: (item: [string, Occupant]) => void;
+	collectItemReducer: (item: [string, OverworldItem]) => void;
 	setPokemonReducer: (update: OwnedPokemon[]) => void;
 } => {
 	const local = window.localStorage.getItem(localStorageId);
@@ -119,7 +119,7 @@ export const useSaveFile = (
 		}));
 	};
 
-	const collectItemReducer = (item: [string, Occupant]) => {
+	const collectItemReducer = (item: [string, OverworldItem]) => {
 		const id = Number.parseInt(item[0]);
 		const updatedInventory = updateItemFunction(
 			item[1].item,
