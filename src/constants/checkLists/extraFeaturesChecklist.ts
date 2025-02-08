@@ -37,4 +37,6 @@ export const extraFeatureCheckList: {
 	{ name: 'approach directions (PC only from front' },
 	{ name: 'overworld background/border of map' },
 	{ name: 'disable weird scroll' },
+	{ name: 'rotating npcs' },
+	{ name: 'walking npcs' },
 ];

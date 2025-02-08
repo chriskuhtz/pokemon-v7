@@ -5,6 +5,7 @@ import { animationTimer, baseSize } from '../../constants/gameData';
 import { assembleMap } from '../../functions/assembleMap';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { isValidOverWorldMap } from '../../functions/isValidOverworldMap';
+import { Inventory } from '../../interfaces/Inventory';
 import {
 	Occupant,
 	OverworldItem,
@@ -33,6 +34,7 @@ export const Overworld = ({
 	encounterRateModifier,
 	collectedItems,
 	navigate,
+	goToMarket,
 }: {
 	openMenu: () => void;
 	playerLocation: CharacterLocationData;
@@ -43,6 +45,7 @@ export const Overworld = ({
 	startEncounter: () => void;
 	encounterRateModifier?: number;
 	navigate: (x: RoutesType) => void;
+	goToMarket: (marketInventory: Partial<Inventory>) => void;
 }) => {
 	const [bannerContent, setBannerContent] = useState<string | undefined>();
 	useEffect(() => {
@@ -84,9 +87,14 @@ export const Overworld = ({
 				return;
 			}
 
+			if (data.type === 'MERCHANT') {
+				goToMarket(data.inventory);
+				return;
+			}
+
 			console.error('what is this occupant', occ);
 		},
-		[collectItem, navigate]
+		[collectItem, goToMarket, navigate]
 	);
 
 	//PLAYER

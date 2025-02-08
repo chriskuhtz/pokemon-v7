@@ -33,7 +33,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		y: 0,
 		orientation: 'UP',
 		map: 'testMap',
-		inventory: { 'safari-ball': 1 },
+		inventory: { 'great-ball': 1 },
 		dialogue: ['These aint legal', "I'm the only one who got them"],
 	},
 };
