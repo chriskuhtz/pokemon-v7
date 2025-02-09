@@ -106,6 +106,44 @@ export const BattleBanner = ({
 			</Banner>
 		);
 	}
+	if (battleStep === 'OPPONENT_UNABLE_TO_ATTACK') {
+		const ailmentMessage = () => {
+			if (opponent.primaryAilment?.type === 'freeze') {
+				return 'is frozen solid';
+			}
+			return 'why did you show this';
+		};
+		return (
+			<Banner>
+				{opponent.data.name} {ailmentMessage()}
+				<img
+					style={{ padding: '1rem 0' }}
+					width={battleSpriteSize / 2}
+					height={battleSpriteSize / 2}
+					src={getPokemonSprite(opponent.dexId)}
+				/>
+			</Banner>
+		);
+	}
+	if (battleStep === 'PLAYER_UNABLE_TO_ATTACK') {
+		const ailmentMessage = () => {
+			if (player.primaryAilment?.type === 'freeze') {
+				return 'is frozen solid';
+			}
+			return 'why did you show this';
+		};
+		return (
+			<Banner>
+				<img
+					style={{ padding: '1rem 0' }}
+					width={battleSpriteSize / 2}
+					height={battleSpriteSize / 2}
+					src={getPokemonSprite(player.dexId)}
+				/>{' '}
+				{player.data.name} {ailmentMessage()}
+			</Banner>
+		);
+	}
 	if (battleStep === 'OPPONENT_MISSED') {
 		return <MoveMissedBanner attacker={opponent} />;
 	}

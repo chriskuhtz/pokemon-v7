@@ -26,7 +26,16 @@ export const useExecuteOpponentMove = ({
 }: ExtendedBattleStepHandler) => {
 	//"EXECUTE_OPPONENT_MOVE"
 	useEffect(() => {
-		if (battleStep !== 'EXECUTE_OPPONENT_MOVE') {
+		if (battleStep !== 'EXECUTE_OPPONENT_MOVE' || !opponent) {
+			return;
+		}
+		if (
+			['freeze', 'paralysis', 'sleep'].includes(
+				opponent.primaryAilment?.type ?? ''
+			)
+		) {
+			setBattleStep('OPPONENT_UNABLE_TO_ATTACK');
+			setNextOpponentMove(undefined);
 			return;
 		}
 

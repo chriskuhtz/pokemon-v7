@@ -42,6 +42,7 @@ export const movesCheckList: {
 	{
 		name: 'ice-punch',
 		url: 'https://pokeapi.co/api/v2/move/8/',
+		todos: ['randomly defrost'],
 	},
 	{
 		name: 'thunder-punch',

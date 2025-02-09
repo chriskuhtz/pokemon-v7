@@ -21,7 +21,9 @@ export const useMoveHandling = ({
 
 			if (first === player.id) {
 				setBattleStep('EXECUTE_PLAYER_MOVE');
-			} else setBattleStep('EXECUTE_OPPONENT_MOVE');
+			} else {
+				setBattleStep('EXECUTE_OPPONENT_MOVE');
+			}
 		}
 	}, [
 		battleStep,

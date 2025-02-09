@@ -21,13 +21,19 @@ import { useOpponentEmerge } from './StepHandlers/useOpponentEmerge';
 import { useOpponentFainting } from './StepHandlers/useOpponentFainting';
 import { useOpponentFlinched } from './StepHandlers/useOpponentFlinched';
 import { useOpponentIntro } from './StepHandlers/useOpponentIntro';
-import { useOpponentMissed } from './StepHandlers/useOpponentMissed';
+import {
+	useOpponentMissed,
+	useOpponentUnableToAttack,
+} from './StepHandlers/useOpponentMissed';
 import { useOpponentMoveSelection } from './StepHandlers/useOpponentMoveSelection';
 import { usePlayerEmerge } from './StepHandlers/usePlayerEmerge';
 import { usePlayerFainting } from './StepHandlers/usePlayerFainting';
 import { usePlayerFlinched } from './StepHandlers/usePlayerFlinched';
 import { usePlayerIntro } from './StepHandlers/usePlayerIntro';
-import { usePlayerMissed } from './StepHandlers/usePlayerMissed';
+import {
+	usePlayerMissed,
+	usePlayerUnableToAttack,
+} from './StepHandlers/usePlayerMissed';
 
 export interface CatchProcessInfo {
 	pokemon: BattlePokemon;
@@ -169,6 +175,8 @@ export const useBattleSteps = ({
 	usePlayerFlinched(extendedPayload);
 	useOpponentMissed(extendedPayload);
 	usePlayerMissed(extendedPayload);
+	useOpponentUnableToAttack(extendedPayload);
+	usePlayerUnableToAttack(extendedPayload);
 	useCatchingSteps(extendedPayload);
 	useHandleOpponentPrimaryAilment(extendedPayload);
 	useHandlePlayerPrimaryAilment(extendedPayload);
