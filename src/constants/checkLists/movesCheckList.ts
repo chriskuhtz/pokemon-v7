@@ -49,14 +49,16 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/9/',
 		handled: true,
 	},
-	{ name: 'scratch', url: 'https://pokeapi.co/api/v2/move/10/' },
+	{ name: 'scratch', url: 'https://pokeapi.co/api/v2/move/10/', handled: true },
 	{
 		name: 'vice-grip',
 		url: 'https://pokeapi.co/api/v2/move/11/',
+		handled: true,
 	},
 	{
 		name: 'guillotine',
 		url: 'https://pokeapi.co/api/v2/move/12/',
+		handled: true,
 	},
 	{
 		name: 'razor-wind',
@@ -120,6 +122,7 @@ export const movesCheckList: {
 	{
 		name: 'horn-drill',
 		url: 'https://pokeapi.co/api/v2/move/32/',
+		handled: true,
 	},
 	{ name: 'tackle', url: 'https://pokeapi.co/api/v2/move/33/' },
 	{
@@ -271,7 +274,7 @@ export const movesCheckList: {
 	{ name: 'thunder', url: 'https://pokeapi.co/api/v2/move/87/' },
 	{ name: 'rock-throw', url: 'https://pokeapi.co/api/v2/move/88/' },
 	{ name: 'earthquake', url: 'https://pokeapi.co/api/v2/move/89/' },
-	{ name: 'fissure', url: 'https://pokeapi.co/api/v2/move/90/' },
+	{ name: 'fissure', url: 'https://pokeapi.co/api/v2/move/90/', handled: true },
 	{ name: 'dig', url: 'https://pokeapi.co/api/v2/move/91/' },
 	{ name: 'toxic', url: 'https://pokeapi.co/api/v2/move/92/' },
 	{ name: 'confusion', url: 'https://pokeapi.co/api/v2/move/93/' },
@@ -510,7 +513,11 @@ export const movesCheckList: {
 	{ name: 'extrasensory', url: 'https://pokeapi.co/api/v2/move/326/' },
 	{ name: 'sky-uppercut', url: 'https://pokeapi.co/api/v2/move/327/' },
 	{ name: 'sand-tomb', url: 'https://pokeapi.co/api/v2/move/328/' },
-	{ name: 'sheer-cold', url: 'https://pokeapi.co/api/v2/move/329/' },
+	{
+		name: 'sheer-cold',
+		url: 'https://pokeapi.co/api/v2/move/329/',
+		handled: true,
+	},
 	{ name: 'muddy-water', url: 'https://pokeapi.co/api/v2/move/330/' },
 	{ name: 'bullet-seed', url: 'https://pokeapi.co/api/v2/move/331/' },
 	{ name: 'aerial-ace', url: 'https://pokeapi.co/api/v2/move/332/' },
@@ -1245,6 +1252,12 @@ export const handledMoves = [
 	'fire-punch',
 	'ice-punch',
 	'thunder-punch',
+	'scratch',
+	'vice-grip',
+	'guillotine',
+	'sheer-cold',
+	'fissure',
+	'horn-drill',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

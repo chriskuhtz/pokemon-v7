@@ -4,6 +4,7 @@ import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/selfDestructing
 import { applyAttackToPokemon } from '../../../../../functions/applyAttackToPokemon';
 import { determineCrit } from '../../../../../functions/determineCrit';
 import { isKO } from '../../../../../functions/isKo';
+import { pokemonCantMove } from '../../../../../functions/pokemonCantMove';
 import { reduceMovePP } from '../../../../../functions/reduceMovePP';
 import { targetFlinched } from '../../../../../functions/targetFlinched';
 import { BattleAttack } from '../../../../../interfaces/BattleAttack';
@@ -13,7 +14,6 @@ import {
 	opponentFaintingPath,
 } from '../../../types/BattleStep';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
-import { pokemonCantMove } from '../../../../../functions/pokemonCantMove';
 
 export const useExecutePlayerMove = ({
 	battleStep,
@@ -96,6 +96,7 @@ export const useExecutePlayerMove = ({
 						? {
 								...nextPlayerMove,
 								crit: determineCrit(
+									nextPlayerMove.name,
 									nextPlayerMove.data.meta.crit_rate,
 									opponent.ability
 								),

@@ -88,6 +88,7 @@ export const useExecuteOpponentMove = ({
 						? {
 								...nextOpponentMove,
 								crit: determineCrit(
+									nextOpponentMove.name,
 									nextOpponentMove.data.meta.crit_rate,
 									player.ability
 								),

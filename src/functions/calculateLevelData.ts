@@ -16,7 +16,8 @@ export const calculateLevelData = (
 	xpAtNextLevel: number;
 	progressToNextLevel: number;
 } => {
-	const level = Math.max(1, Math.floor(Math.cbrt(xp)));
+	//level must be between 1 and 100
+	const level = [1, Math.floor(Math.cbrt(xp)), 100].sort((a, b) => a - b)[1];
 
 	const xpAtNextLevel = Math.pow(level + 1, 3);
 	const xpForThisLevel = Math.pow(level, 3);

@@ -1,3 +1,4 @@
+import { ohkoMoves } from '../constants/ohkoMoves';
 import { AddToastFunction } from '../hooks/useToasts';
 import { BattleAttack } from '../interfaces/BattleAttack';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -14,6 +15,20 @@ export const calculateDamage = (
 	weather: WeatherType | undefined,
 	dispatchToast?: AddToastFunction
 ): number => {
+	const typeFactor = determineTypeFactor(target, attack);
+	if (typeFactor === 0) {
+		return 0;
+	}
+	if (ohkoMoves.includes(attack.name)) {
+		if (target.ability === 'sturdy') {
+			if (dispatchToast) {
+				dispatchToast('sturdy prevents One Hit K.O moves');
+			}
+			return 0;
+		}
+		return target.stats.hp;
+	}
+
 	if (attack.data.damage_class.name !== 'physical') {
 		console.error('what is this', attack);
 		return 0;
@@ -36,15 +51,10 @@ export const calculateDamage = (
 	const critFactor = attack.crit ? 2 : 1;
 	const randomFactor = 0.85 + Math.random() * 0.15;
 	const stabFactor = determineStabFactor(attacker, attack);
-	const typeFactor = determineTypeFactor(target, attack);
 	const burnFactor = attacker.primaryAilment?.type === 'burn' ? 0.5 : 1;
 	const otherFactor = 1;
 	const zMoveFactor = 1;
 	const teraShieldFactor = 1;
-
-	if (typeFactor === 0) {
-		return 0;
-	}
 
 	const res = Math.max(
 		Math.floor(
@@ -69,12 +79,12 @@ export const calculateDamage = (
 	if (
 		target.ability === 'sturdy' &&
 		target.damage === 0 &&
-		res > target.stats['hp']
+		res > target.stats.hp
 	) {
 		if (dispatchToast) {
 			dispatchToast(`${target.data.name} hung on with sturdy`);
 		}
-		return target.stats['hp'] - 1;
+		return target.stats.hp - 1;
 	}
 
 	return res;
