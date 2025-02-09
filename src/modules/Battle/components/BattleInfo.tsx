@@ -1,5 +1,5 @@
 import { WeatherIcon } from '../../../components/WeatherIcon/WeatherIcon';
-import { WeatherType } from '../../../functions/determineWeatherFactor';
+import { WeatherType } from '../../../interfaces/Weather';
 import { BattleStep } from '../types/BattleStep';
 
 export const BattleInfo = ({

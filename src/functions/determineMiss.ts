@@ -1,6 +1,6 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
 import { BattleAttack } from '../interfaces/BattleAttack';
-import { WeatherType } from './determineWeatherFactor';
+import { WeatherType } from '../interfaces/Weather';
 
 /**
  *

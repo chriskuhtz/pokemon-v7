@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react';
-import { WeatherType } from '../../../../functions/determineWeatherFactor';
 import { AddToastFunction } from '../../../../hooks/useToasts';
 import { BattleAttack } from '../../../../interfaces/BattleAttack';
 import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
@@ -17,6 +16,7 @@ import { useHandlePlayerAbility } from './StepHandlers/useHandlePlayerAbility';
 import { useHandlePlayerEndOfTurnDamage } from './StepHandlers/useHandlePlayerEndOfTurnDamage';
 import { useMoveHandling } from './StepHandlers/useMoveHandling';
 import { useMoveSelection } from './StepHandlers/useMoveSelection';
+import { useOpponentCureAilments } from './StepHandlers/useOpponentCureAilments';
 import { useOpponentEmerge } from './StepHandlers/useOpponentEmerge';
 import { useOpponentFainting } from './StepHandlers/useOpponentFainting';
 import { useOpponentFlinched } from './StepHandlers/useOpponentFlinched';
@@ -24,14 +24,14 @@ import { useOpponentIntro } from './StepHandlers/useOpponentIntro';
 import { useOpponentMissed } from './StepHandlers/useOpponentMissed';
 import { useOpponentMoveSelection } from './StepHandlers/useOpponentMoveSelection';
 import { useOpponentUnableToAttack } from './StepHandlers/useOpponentUnableToAttack';
+import { usePlayerCureAilments } from './StepHandlers/usePlayerCureAilments';
 import { usePlayerEmerge } from './StepHandlers/usePlayerEmerge';
 import { usePlayerFainting } from './StepHandlers/usePlayerFainting';
 import { usePlayerFlinched } from './StepHandlers/usePlayerFlinched';
 import { usePlayerIntro } from './StepHandlers/usePlayerIntro';
 import { usePlayerMissed } from './StepHandlers/usePlayerMissed';
 import { usePlayerUnableToAttack } from './StepHandlers/usePlayerUnableToAttack';
-import { useOpponentCureAilments } from './StepHandlers/useOpponentCureAilments';
-import { usePlayerCureAilments } from './StepHandlers/usePlayerCureAilments';
+import { WeatherType } from '../../../../interfaces/Weather';
 
 export interface CatchProcessInfo {
 	pokemon: BattlePokemon;

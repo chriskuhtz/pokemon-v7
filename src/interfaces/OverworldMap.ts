@@ -7,10 +7,10 @@
  * 2 = blocked field
  */
 
-import { WeatherType } from '../functions/determineWeatherFactor';
 import { Inventory } from './Inventory';
 import { ItemType } from './Item';
 import { CharacterOrientation, MapId } from './SaveFile';
+import { WeatherType } from './Weather';
 
 export interface OverworldItem {
 	type: 'ITEM';

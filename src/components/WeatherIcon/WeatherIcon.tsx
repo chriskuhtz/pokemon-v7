@@ -1,7 +1,7 @@
 import { FaCloudRain } from 'react-icons/fa';
 import { WiSandstorm } from 'react-icons/wi';
 import { baseSize } from '../../constants/gameData';
-import { WeatherType } from '../../functions/determineWeatherFactor';
+import { WeatherType } from '../../interfaces/Weather';
 
 export const WeatherIcon = ({ weather }: { weather?: WeatherType }) => {
 	return (

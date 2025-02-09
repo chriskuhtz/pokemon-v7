@@ -1,7 +1,7 @@
 import { BattleAttack } from '../interfaces/BattleAttack';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { WeatherType } from '../interfaces/Weather';
 import { calculateDamage } from './calculateDamage';
-import { WeatherType } from './determineWeatherFactor';
 
 //TODO: Different Strategies
 

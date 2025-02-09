@@ -1,10 +1,11 @@
 import { AddToastFunction } from '../hooks/useToasts';
 import { BattleAttack } from '../interfaces/BattleAttack';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { WeatherType } from '../interfaces/Weather';
 import { calculateLevelData } from './calculateLevelData';
 import { determineStabFactor } from './determineStabFactor';
 import { determineTypeFactor } from './determineTypeFactor';
-import { WeatherType, determineWeatherFactor } from './determineWeatherFactor';
+import { determineWeatherFactor } from './determineWeatherFactor';
 
 export const calculateDamage = (
 	attacker: BattlePokemon,
