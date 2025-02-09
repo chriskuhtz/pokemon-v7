@@ -108,7 +108,6 @@ export const useCatchingSteps = ({
 
 		return () => clearTimeout(t);
 	}, [battleStep, nextPlayerMove, opponent, setBattleStep, setCaughtPokemon]);
-	// 'CATCHING_FAILURE' to 'EXECUTE_OPPONENT_MOVE'
 	useEffect(() => {
 		if (battleStep !== 'CATCHING_FAILURE') {
 			return;
@@ -118,7 +117,7 @@ export const useCatchingSteps = ({
 				setUsedItems((i) => joinInventories(i, { [nextPlayerMove.ball]: 1 }));
 			}
 			setNextPlayerMove(undefined);
-			setBattleStep('EXECUTE_OPPONENT_MOVE');
+			setBattleStep('OPPONENT_CURE_AILMENTS');
 		}, animationTimer);
 
 		return () => clearTimeout(t);

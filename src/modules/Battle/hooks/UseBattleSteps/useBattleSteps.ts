@@ -21,19 +21,17 @@ import { useOpponentEmerge } from './StepHandlers/useOpponentEmerge';
 import { useOpponentFainting } from './StepHandlers/useOpponentFainting';
 import { useOpponentFlinched } from './StepHandlers/useOpponentFlinched';
 import { useOpponentIntro } from './StepHandlers/useOpponentIntro';
-import {
-	useOpponentMissed,
-	useOpponentUnableToAttack,
-} from './StepHandlers/useOpponentMissed';
+import { useOpponentMissed } from './StepHandlers/useOpponentMissed';
 import { useOpponentMoveSelection } from './StepHandlers/useOpponentMoveSelection';
+import { useOpponentUnableToAttack } from './StepHandlers/useOpponentUnableToAttack';
 import { usePlayerEmerge } from './StepHandlers/usePlayerEmerge';
 import { usePlayerFainting } from './StepHandlers/usePlayerFainting';
 import { usePlayerFlinched } from './StepHandlers/usePlayerFlinched';
 import { usePlayerIntro } from './StepHandlers/usePlayerIntro';
-import {
-	usePlayerMissed,
-	usePlayerUnableToAttack,
-} from './StepHandlers/usePlayerMissed';
+import { usePlayerMissed } from './StepHandlers/usePlayerMissed';
+import { usePlayerUnableToAttack } from './StepHandlers/usePlayerUnableToAttack';
+import { useOpponentCureAilments } from './StepHandlers/useOpponentCureAilments';
+import { usePlayerCureAilments } from './StepHandlers/usePlayerCureAilments';
 
 export interface CatchProcessInfo {
 	pokemon: BattlePokemon;
@@ -169,6 +167,8 @@ export const useBattleSteps = ({
 	useHandleOpponentAbility(extendedPayload);
 	useOpponentMoveSelection(extendedPayload);
 	useMoveHandling(extendedPayload);
+	usePlayerCureAilments(extendedPayload);
+	useOpponentCureAilments(extendedPayload);
 	useExecutePlayerMove(extendedPayload);
 	useExecuteOpponentMove(extendedPayload);
 	useOpponentFlinched(extendedPayload);

@@ -10,7 +10,6 @@ export const useToasts = (
 	addToast: AddToastFunction;
 } => {
 	const [toasts, setToasts] = useState<string[]>([]);
-	useEffect(() => console.log(toasts), [toasts]);
 
 	const addToast: AddToastFunction = (x: string) => {
 		setToasts((toasts) => [...toasts, x]);

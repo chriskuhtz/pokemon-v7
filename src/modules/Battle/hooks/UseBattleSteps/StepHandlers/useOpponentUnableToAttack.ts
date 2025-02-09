@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { animationTimer } from '../../../../../constants/gameData';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
-export const useOpponentMissed = ({
+export const useOpponentUnableToAttack = ({
 	battleStep,
 	setBattleStep,
 	setNextOpponentMove,
@@ -10,7 +10,7 @@ export const useOpponentMissed = ({
 }: ExtendedBattleStepHandler) => {
 	//"OPPONENT_MISSED"
 	useEffect(() => {
-		if (battleStep !== 'OPPONENT_MISSED') {
+		if (battleStep !== 'OPPONENT_UNABLE_TO_ATTACK') {
 			return;
 		}
 		const t = setTimeout(() => {
