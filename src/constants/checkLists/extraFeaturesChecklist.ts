@@ -18,7 +18,7 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'extract battleStep hooks', handled: true },
 	{ name: 'define nextSteps in battleStep type', handled: true },
-	{ name: 'extract banners' },
+	{ name: 'extract banners', handled: true },
 	{ name: 'extract battleAction Sections' },
 	{ name: 'Poke Center' },
 	{ name: 'starter selection' },
@@ -44,7 +44,6 @@ export const extraFeatureCheckList: {
 	{ name: 'battle backgrounds' },
 	{ name: 'hpbar colors' },
 	{ name: 'remove duplications in battleStep functions' },
-
 	{ name: 'Banner slant either left or right' },
 	{ name: 'choose random moves for opponent' },
 ];
