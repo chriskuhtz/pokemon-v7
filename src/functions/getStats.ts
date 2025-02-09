@@ -24,7 +24,7 @@ export const getStats = (
 	const { level } = calculateLevelData(xp);
 
 	return {
-		hp: calculateStat(baseHp, 0, evs?.['hp'] ?? 0, nature, level, 'hp'),
+		hp: calculateStat(baseHp, 0, evs?.hp ?? 0, nature, level, 'hp'),
 		attack: calculateStat(
 			baseAttack,
 			0,

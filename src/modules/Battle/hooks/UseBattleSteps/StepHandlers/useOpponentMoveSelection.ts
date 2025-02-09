@@ -25,9 +25,13 @@ export const useOpponentMoveSelection = ({
 			const chosenMove = recommendMove(opponent, player, battleWeather);
 			setNextOpponentMove({
 				...chosenMove,
-				crit: determineCrit(chosenMove.data.meta.crit_rate, player.ability),
+				crit: determineCrit(
+					chosenMove.name,
+					chosenMove.data.meta.crit_rate,
+					player.ability
+				),
 				multiHits: determineMultiHits(chosenMove),
-				miss: determineMiss(chosenMove, player.ability, battleWeather),
+				miss: determineMiss(chosenMove, opponent, player, battleWeather),
 			});
 			followBattleStepPath(beginTurnPath);
 		}

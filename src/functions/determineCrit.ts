@@ -1,9 +1,14 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
+import { ohkoMoves } from '../constants/ohkoMoves';
 
 export const determineCrit = (
+	moveName: string,
 	critRate: number,
 	targetAbility: AbilityName
 ): boolean => {
+	if (ohkoMoves.includes(moveName)) {
+		return false;
+	}
 	if (targetAbility === 'battle-armor' || targetAbility === 'shell-armor') {
 		return false;
 	}

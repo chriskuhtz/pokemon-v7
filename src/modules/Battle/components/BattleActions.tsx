@@ -11,11 +11,11 @@ import { recommendMove } from '../../../functions/recommendMove';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import { isPokeball, PokeballType } from '../../../interfaces/Item';
+import { WeatherType } from '../../../interfaces/Weather';
 import { Card } from '../../../uiComponents/Card/Card';
 import { BattleAction } from '../hooks/UseBattleSteps/useBattleSteps';
 import { BattleStep } from '../types/BattleStep';
 import { BallSelectionMenu } from './BallSelectionMenu';
-import { WeatherType } from '../../../interfaces/Weather';
 
 export type BattleMenu = 'MAIN' | 'BALLS' | 'MOVES';
 export const BattleActions = ({
@@ -90,10 +90,11 @@ export const BattleActions = ({
 									chooseMove({
 										...m,
 										crit: determineCrit(
+											m.name,
 											m.data.meta.crit_rate,
 											opponent.ability
 										),
-										miss: determineMiss(m, opponent.ability, battleWeather),
+										miss: determineMiss(m, player, opponent, battleWeather),
 										multiHits: determineMultiHits(m),
 									})
 								}
