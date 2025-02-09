@@ -9,7 +9,6 @@ export const useOpponentUnableToAttack = ({
 	nextPlayerMove,
 	startPath,
 }: ExtendedBattleStepHandler) => {
-	//"OPPONENT_MISSED"
 	useEffect(() => {
 		if (battleStep !== 'OPPONENT_UNABLE_TO_ATTACK') {
 			return;
