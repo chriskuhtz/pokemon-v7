@@ -48,6 +48,7 @@ export const itemsCheckList: {
 	{
 		name: 'repeat-ball',
 		url: 'https://pokeapi.co/api/v2/item/9/',
+		handled: true,
 	},
 	{
 		name: 'timer-ball',

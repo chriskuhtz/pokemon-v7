@@ -155,7 +155,7 @@ export const useBattleSteps = ({
 			if (index === path.length - 1) {
 				throw new Error(`${battleStep} is the end of path ${path.join()}`);
 			}
-			console.log('moving to path index', index + 1, 'of', path);
+			//console.log('moving to path index', index + 1, 'of', path);
 			setBattleStep(path[index + 1]);
 		},
 		[battleStep]
@@ -171,6 +171,10 @@ export const useBattleSteps = ({
 		} else followBattleStepPath(playerIsFasterPath);
 	}, [beginsThisTurn, followBattleStepPath, opponent]);
 
+	const opponentHasBeenCaughtBefore = useMemo(() => {
+		//TODO: ignores evo stages right now, fix when implementing pokedex
+		return initSaveFile.pokemon.some((p) => p.dexId === opponent?.dexId);
+	}, [initSaveFile.pokemon, opponent?.dexId]);
 	const extendedPayload: ExtendedBattleStepHandler = useMemo(
 		() => ({
 			startPath,
@@ -236,7 +240,7 @@ export const useBattleSteps = ({
 	usePlayerMissed(extendedPayload);
 	useOpponentUnableToAttack(extendedPayload);
 	usePlayerUnableToAttack(extendedPayload);
-	useCatchingSteps(extendedPayload);
+	useCatchingSteps({ ...extendedPayload, opponentHasBeenCaughtBefore });
 	useHandleOpponentEndOfTurnDamage(extendedPayload);
 	useHandlePlayerEndOfTurnDamage(extendedPayload);
 	useOpponentFainting({ battleStep, followBattleStepPath });

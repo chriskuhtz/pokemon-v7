@@ -14,7 +14,8 @@ export const useCatchingSteps = ({
 	setNextPlayerMove,
 	followBattleStepPath,
 	startPath,
-}: ExtendedBattleStepHandler) => {
+	opponentHasBeenCaughtBefore,
+}: ExtendedBattleStepHandler & { opponentHasBeenCaughtBefore: boolean }) => {
 	useEffect(() => {
 		if (battleStep !== 'CATCHING_PROCESS_1') {
 			return;
@@ -39,9 +40,8 @@ export const useCatchingSteps = ({
 				nextPlayerMove.ball,
 				opponent,
 				1,
-
 				'STANDARD',
-				false
+				opponentHasBeenCaughtBefore
 			);
 			if (!catchSuccess) {
 				startPath(catchingFailurePath);
@@ -49,7 +49,14 @@ export const useCatchingSteps = ({
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, followBattleStepPath, nextPlayerMove, opponent, startPath]);
+	}, [
+		battleStep,
+		followBattleStepPath,
+		nextPlayerMove,
+		opponent,
+		opponentHasBeenCaughtBefore,
+		startPath,
+	]);
 
 	useEffect(() => {
 		if (
@@ -65,7 +72,7 @@ export const useCatchingSteps = ({
 				opponent,
 				1,
 				'STANDARD',
-				false
+				opponentHasBeenCaughtBefore
 			);
 			if (!catchSuccess) {
 				startPath(catchingFailurePath);
@@ -73,7 +80,14 @@ export const useCatchingSteps = ({
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, followBattleStepPath, nextPlayerMove, opponent, startPath]);
+	}, [
+		battleStep,
+		followBattleStepPath,
+		nextPlayerMove,
+		opponent,
+		opponentHasBeenCaughtBefore,
+		startPath,
+	]);
 
 	useEffect(() => {
 		if (
@@ -89,7 +103,7 @@ export const useCatchingSteps = ({
 				opponent,
 				1,
 				'STANDARD',
-				false
+				opponentHasBeenCaughtBefore
 			);
 
 			if (!catchSuccess) {
@@ -115,6 +129,7 @@ export const useCatchingSteps = ({
 		opponent,
 		startPath,
 		setCaughtPokemon,
+		opponentHasBeenCaughtBefore,
 	]);
 
 	useEffect(() => {

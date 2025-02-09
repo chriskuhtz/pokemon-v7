@@ -10,7 +10,6 @@ export const useOpponentMissed = ({
 	nextPlayerMove,
 	startPath,
 }: ExtendedBattleStepHandler) => {
-	//"OPPONENT_MISSED"
 	useEffect(() => {
 		if (battleStep !== 'OPPONENT_MISSED') {
 			return;

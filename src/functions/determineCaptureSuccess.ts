@@ -30,26 +30,26 @@ export const determineCaptureSuccess = (
 		ball === 'net-ball' &&
 		(targetTypes.includes('bug') || targetTypes.includes('water'))
 	) {
-		ballfactor = 1;
+		ballfactor = 1.5;
 	}
 	if (ball === 'dive-ball' && location === 'UNDERWATER') {
-		ballfactor = 1;
+		ballfactor = 1.5;
 	}
 	if (ball === 'nest-ball') {
-		ballfactor = 0.5 + 0.03 * Math.max(0, 30 - level);
+		ballfactor = 0.5 + 0.033 * Math.max(0, 30 - level);
 	}
 	if (ball === 'repeat-ball' && caughtBefore) {
-		ballfactor = 1;
+		ballfactor = 1.5;
 	}
 	//max after 10 rounds
 	if (ball === 'timer-ball') {
-		ballfactor = Math.max(1, 0.5 + 0.005 * battleRounds);
+		ballfactor = Math.max(1.5, 0.5 + 0.01 * battleRounds);
 	}
 	if (ball === 'quick-ball' && battleRounds === 1) {
-		ballfactor = 1;
+		ballfactor = 1.5;
 	}
 	if (ball === 'dusk-ball' && (location === 'CAVE' || isNight())) {
-		ballfactor = 1;
+		ballfactor = 1.5;
 	}
 
 	//between .5 and 0, lower health, better chance
