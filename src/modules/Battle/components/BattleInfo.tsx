@@ -5,9 +5,11 @@ import { BattleStep } from '../types/BattleStep';
 export const BattleInfo = ({
 	battleStep,
 	battleWeather,
+	battleRound,
 }: {
 	battleStep: BattleStep;
 	battleWeather?: WeatherType;
+	battleRound: number;
 }) => {
 	return (
 		<div style={{ position: 'absolute' }}>
@@ -16,6 +18,8 @@ export const BattleInfo = ({
 			<strong>
 				Weather: {battleWeather} <WeatherIcon weather={battleWeather} />
 			</strong>
+			<br></br>
+			<strong>Round: {battleRound}</strong>
 		</div>
 	);
 };
