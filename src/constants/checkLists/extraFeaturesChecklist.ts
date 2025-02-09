@@ -17,7 +17,7 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'extract battleStep hooks', handled: true },
-	{ name: 'define nextSteps in battleStep type' },
+	{ name: 'define nextSteps in battleStep type', handled: true },
 	{ name: 'extract banners' },
 	{ name: 'extract battleAction Sections' },
 	{ name: 'Poke Center' },
