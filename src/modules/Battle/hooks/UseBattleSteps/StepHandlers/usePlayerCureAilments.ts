@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
 import { animationTimer } from '../../../../../constants/gameData';
+import { playerTurnPath } from '../../../types/BattleStep';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
 export const usePlayerCureAilments = ({
 	battleStep,
-	setBattleStep,
 	dispatchToast,
 	player,
 	setPlayer,
+	followBattleStepPath,
 }: ExtendedBattleStepHandler) => {
 	useEffect(() => {
 		if (battleStep !== 'PLAYER_CURE_AILMENTS' || !player) {
@@ -17,16 +18,16 @@ export const usePlayerCureAilments = ({
 			player.primaryAilment?.type === 'freeze' && Math.random() < 0.1;
 
 		if (!player.primaryAilment || !defrosted) {
-			setBattleStep('EXECUTE_PLAYER_MOVE');
+			followBattleStepPath(playerTurnPath);
 			return;
 		}
 
 		const t = setTimeout(() => {
 			dispatchToast(`${player.data.name} was defrosted`);
 			setPlayer({ ...player, primaryAilment: undefined });
-			setBattleStep('EXECUTE_PLAYER_MOVE');
+			followBattleStepPath(playerTurnPath);
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, dispatchToast, player, setBattleStep, setPlayer]);
+	}, [battleStep, dispatchToast, followBattleStepPath, player, setPlayer]);
 };

@@ -3,6 +3,7 @@ import { determineCrit } from '../../../../../functions/determineCrit';
 import { determineMiss } from '../../../../../functions/determineMiss';
 import { determineMultiHits } from '../../../../../functions/determineMultiHits';
 import { recommendMove } from '../../../../../functions/recommendMove';
+import { beginTurnPath } from '../../../types/BattleStep';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
 export const useOpponentMoveSelection = ({
@@ -10,9 +11,9 @@ export const useOpponentMoveSelection = ({
 	nextOpponentMove,
 	opponent,
 	player,
-	setBattleStep,
 	setNextOpponentMove,
 	battleWeather,
+	followBattleStepPath,
 }: ExtendedBattleStepHandler) => {
 	useEffect(() => {
 		if (
@@ -28,15 +29,15 @@ export const useOpponentMoveSelection = ({
 				multiHits: determineMultiHits(chosenMove),
 				miss: determineMiss(chosenMove, player.ability, battleWeather),
 			});
-			setBattleStep('MOVE_HANDLING');
+			followBattleStepPath(beginTurnPath);
 		}
 	}, [
 		battleStep,
 		battleWeather,
+		followBattleStepPath,
 		nextOpponentMove,
 		opponent,
 		player,
-		setBattleStep,
 		setNextOpponentMove,
 	]);
 };

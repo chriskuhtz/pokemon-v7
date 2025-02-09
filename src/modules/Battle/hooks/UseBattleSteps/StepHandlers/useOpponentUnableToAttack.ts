@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { animationTimer } from '../../../../../constants/gameData';
+import { endTurnPath, playerTurnPath } from '../../../types/BattleStep';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
 export const useOpponentUnableToAttack = ({
 	battleStep,
-	setBattleStep,
 	setNextOpponentMove,
 	nextPlayerMove,
+	startPath,
 }: ExtendedBattleStepHandler) => {
 	//"OPPONENT_MISSED"
 	useEffect(() => {
@@ -16,10 +17,10 @@ export const useOpponentUnableToAttack = ({
 		const t = setTimeout(() => {
 			setNextOpponentMove(undefined);
 			if (nextPlayerMove) {
-				setBattleStep('PLAYER_CURE_AILMENTS');
-			} else setBattleStep('HANDLE_PLAYER_ABILITY');
+				startPath(playerTurnPath);
+			} else startPath(endTurnPath);
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, nextPlayerMove, setBattleStep, setNextOpponentMove]);
+	}, [battleStep, nextPlayerMove, setNextOpponentMove, startPath]);
 };

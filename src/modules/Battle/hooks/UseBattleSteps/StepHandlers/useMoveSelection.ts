@@ -1,14 +1,16 @@
 import { useEffect } from 'react';
+import { beginTurnPath } from '../../../types/BattleStep';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
 export const useMoveSelection = ({
 	battleStep,
-	setBattleStep,
+
 	nextPlayerMove,
+	followBattleStepPath,
 }: ExtendedBattleStepHandler) => {
 	useEffect(() => {
 		if (battleStep === 'MOVE_SELECTION' && nextPlayerMove) {
-			setBattleStep('OPPONENT_MOVE_SELECTION');
+			followBattleStepPath(beginTurnPath);
 		}
-	}, [battleStep, nextPlayerMove, setBattleStep]);
+	}, [battleStep, followBattleStepPath, nextPlayerMove]);
 };

@@ -1,18 +1,22 @@
 import { useEffect } from 'react';
-import { BattleStepHandler } from '../useBattleSteps';
 import { animationTimer } from '../../../../../constants/gameData';
+import { opponentFaintingPath } from '../../../types/BattleStep';
+import { BattleStepHandler } from '../useBattleSteps';
 
 export const useOpponentFainting = ({
 	battleStep,
-	setBattleStep,
+	followBattleStepPath,
 }: BattleStepHandler) => {
 	// 'OPPONENT_FAINTING' to 'BATTLE_WON'
 	useEffect(() => {
 		if (battleStep !== 'OPPONENT_FAINTING') {
 			return;
 		}
-		const t = setTimeout(() => setBattleStep('BATTLE_WON'), animationTimer);
+		const t = setTimeout(
+			() => followBattleStepPath(opponentFaintingPath),
+			animationTimer
+		);
 
 		return () => clearTimeout(t);
-	}, [battleStep, setBattleStep]);
+	}, [battleStep, followBattleStepPath]);
 };

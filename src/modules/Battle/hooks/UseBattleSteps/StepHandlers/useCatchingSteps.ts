@@ -2,29 +2,30 @@ import { useEffect } from 'react';
 import { animationTimer } from '../../../../../constants/gameData';
 import { determineCaptureSuccess } from '../../../../../functions/determineCaptureSuccess';
 import { joinInventories } from '../../../../../interfaces/Inventory';
+import { catchingFailurePath, catchingPath } from '../../../types/BattleStep';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
 export const useCatchingSteps = ({
 	battleStep,
-	setBattleStep,
 	nextPlayerMove,
 	opponent,
 	setCaughtPokemon,
 	setUsedItems,
 	setNextPlayerMove,
+	followBattleStepPath,
+	startPath,
 }: ExtendedBattleStepHandler) => {
-	//'CATCHING_PROCESS_1' to 'CATCHING_PROCESS_2'
 	useEffect(() => {
 		if (battleStep !== 'CATCHING_PROCESS_1') {
 			return;
 		}
 		const t = setTimeout(() => {
-			setBattleStep('CATCHING_PROCESS_2');
+			followBattleStepPath(catchingPath);
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, setBattleStep]);
-	//'CATCHING_PROCESS_2' to 'CATCHING_PROCESS_3'
+	}, [battleStep, followBattleStepPath]);
+
 	useEffect(() => {
 		if (
 			battleStep !== 'CATCHING_PROCESS_2' ||
@@ -43,13 +44,13 @@ export const useCatchingSteps = ({
 				false
 			);
 			if (!catchSuccess) {
-				setBattleStep('CATCHING_FAILURE');
-			} else setBattleStep('CATCHING_PROCESS_3');
+				startPath(catchingFailurePath);
+			} else followBattleStepPath(catchingPath);
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, nextPlayerMove, opponent, setBattleStep]);
-	//'CATCHING_PROCESS_3' to 'CATCHING_PROCESS_4'
+	}, [battleStep, followBattleStepPath, nextPlayerMove, opponent, startPath]);
+
 	useEffect(() => {
 		if (
 			battleStep !== 'CATCHING_PROCESS_3' ||
@@ -67,13 +68,13 @@ export const useCatchingSteps = ({
 				false
 			);
 			if (!catchSuccess) {
-				setBattleStep('CATCHING_FAILURE');
-			} else setBattleStep('CATCHING_PROCESS_4');
+				startPath(catchingFailurePath);
+			} else followBattleStepPath(catchingPath);
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, nextPlayerMove, opponent, setBattleStep]);
-	//'CATCHING_PROCESS_4' to 'CATCHING_SUCCESS' or 'CATCHING_FAILURE'
+	}, [battleStep, followBattleStepPath, nextPlayerMove, opponent, startPath]);
+
 	useEffect(() => {
 		if (
 			battleStep !== 'CATCHING_PROCESS_4' ||
@@ -92,7 +93,7 @@ export const useCatchingSteps = ({
 			);
 
 			if (!catchSuccess) {
-				setBattleStep('CATCHING_FAILURE');
+				startPath(catchingFailurePath);
 			} else {
 				setCaughtPokemon((x) => [
 					...x,
@@ -102,12 +103,20 @@ export const useCatchingSteps = ({
 						type: 'CatchProcessInfo',
 					},
 				]);
-				setBattleStep('CATCHING_SUCCESS');
+				followBattleStepPath(catchingPath);
 			}
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, nextPlayerMove, opponent, setBattleStep, setCaughtPokemon]);
+	}, [
+		battleStep,
+		followBattleStepPath,
+		nextPlayerMove,
+		opponent,
+		startPath,
+		setCaughtPokemon,
+	]);
+
 	useEffect(() => {
 		if (battleStep !== 'CATCHING_FAILURE') {
 			return;
@@ -117,18 +126,18 @@ export const useCatchingSteps = ({
 				setUsedItems((i) => joinInventories(i, { [nextPlayerMove.ball]: 1 }));
 			}
 			setNextPlayerMove(undefined);
-			setBattleStep('OPPONENT_CURE_AILMENTS');
+			followBattleStepPath(catchingFailurePath);
 		}, animationTimer);
 
 		return () => clearTimeout(t);
 	}, [
 		battleStep,
 		nextPlayerMove,
-		setBattleStep,
+		followBattleStepPath,
 		setNextPlayerMove,
 		setUsedItems,
 	]);
-	// 'CATCHING_SUCCESS' to 'BATTLE_WON'
+
 	useEffect(() => {
 		if (battleStep !== 'CATCHING_SUCCESS') {
 			return;
@@ -137,9 +146,9 @@ export const useCatchingSteps = ({
 			if (nextPlayerMove?.type === 'CatchProcessInfo') {
 				setUsedItems((i) => joinInventories(i, { [nextPlayerMove.ball]: 1 }));
 			}
-			setBattleStep('BATTLE_WON');
+			followBattleStepPath(catchingPath);
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, nextPlayerMove, setBattleStep, setUsedItems]);
+	}, [battleStep, followBattleStepPath, nextPlayerMove, setUsedItems]);
 };

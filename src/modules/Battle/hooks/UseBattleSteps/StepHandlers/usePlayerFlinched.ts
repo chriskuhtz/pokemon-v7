@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { animationTimer } from '../../../../../constants/gameData';
+import { endTurnPath } from '../../../types/BattleStep';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
 export const usePlayerFlinched = ({
 	battleStep,
-	setBattleStep,
 	setNextOpponentMove,
 	setNextPlayerMove,
+	startPath,
 }: ExtendedBattleStepHandler) => {
 	//"PLAYER_FLINCHED"
 	useEffect(() => {
@@ -14,11 +15,11 @@ export const usePlayerFlinched = ({
 			return;
 		}
 		const t = setTimeout(() => {
-			setBattleStep('HANDLE_PLAYER_ABILITY');
+			startPath(endTurnPath);
 			setNextOpponentMove(undefined);
 			setNextPlayerMove(undefined);
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, setBattleStep, setNextOpponentMove, setNextPlayerMove]);
+	}, [battleStep, setNextOpponentMove, setNextPlayerMove, startPath]);
 };

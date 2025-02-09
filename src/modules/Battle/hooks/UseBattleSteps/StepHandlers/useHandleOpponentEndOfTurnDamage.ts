@@ -2,42 +2,45 @@ import { useEffect } from 'react';
 import { animationTimer } from '../../../../../constants/gameData';
 import { applyPrimaryAilmentDamage } from '../../../../../functions/applyPrimaryAilmentDamage';
 import { isKO } from '../../../../../functions/isKo';
+import { endTurnPath, opponentFaintingPath } from '../../../types/BattleStep';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
 export const useHandleOpponentEndOfTurnDamage = ({
 	battleStep,
-	setBattleStep,
 	player,
 	opponent,
 	setOpponent,
 	dispatchToast,
 	setPlayer,
+	followBattleStepPath,
+	startPath,
 }: ExtendedBattleStepHandler) => {
 	useEffect(() => {
 		if (battleStep !== 'HANDLE_OPPONENT_END_OF_TURN_DAMAGE' || !opponent) {
 			return;
 		}
 		if (!['burn', 'poison'].includes(opponent?.primaryAilment?.type ?? '')) {
-			setBattleStep('MOVE_SELECTION');
+			followBattleStepPath(endTurnPath);
 			return;
 		}
 		const t = setTimeout(() => {
 			setOpponent(applyPrimaryAilmentDamage(opponent, dispatchToast));
 
 			if (isKO(opponent)) {
-				setBattleStep('BATTLE_WON');
+				startPath(opponentFaintingPath);
 				return;
 			}
-			setBattleStep('MOVE_SELECTION');
+			followBattleStepPath(endTurnPath);
 		}, animationTimer);
 
 		return () => clearTimeout(t);
 	}, [
 		battleStep,
 		dispatchToast,
+		followBattleStepPath,
 		opponent,
 		player,
-		setBattleStep,
+		startPath,
 		setOpponent,
 		setPlayer,
 	]);

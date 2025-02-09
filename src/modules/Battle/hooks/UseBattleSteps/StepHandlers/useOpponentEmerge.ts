@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { animationTimer } from '../../../../../constants/gameData';
 import { applyOnBattleEnterAbility } from '../../../../../functions/applyOnBattleEnterAbility';
+import { introPath } from '../../../types/BattleStep';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
 export const useOpponentEmerge = ({
 	battleStep,
-	setBattleStep,
 	opponent,
 	setBattleWeather,
 	dispatchToast,
+	followBattleStepPath,
 }: ExtendedBattleStepHandler) => {
 	useEffect(() => {
 		if (battleStep !== 'OPPONENT_EMERGE' || !opponent) {
@@ -21,9 +22,15 @@ export const useOpponentEmerge = ({
 				dispatchToast,
 			});
 
-			setBattleStep('PLAYER_EMERGE');
+			followBattleStepPath(introPath);
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, dispatchToast, opponent, setBattleStep, setBattleWeather]);
+	}, [
+		battleStep,
+		dispatchToast,
+		followBattleStepPath,
+		opponent,
+		setBattleWeather,
+	]);
 };
