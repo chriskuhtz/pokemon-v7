@@ -27,3 +27,6 @@ export const CONFUSION_HURT_CHANCE = 0.33;
 export const CONFUSION_POWER = 40;
 export const TRAP_DAMAGE_FACTOR = 1 / 8;
 export const LEECH_DAMAGE_FACTOR = 1 / 8;
+
+//contact ability factors
+export const STATIC_CHANCE = 0.3;

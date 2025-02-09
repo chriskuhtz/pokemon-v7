@@ -1,3 +1,4 @@
+import { PARA_SPEED_FACTOR } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { BattleAction } from '../modules/Battle/hooks/UseBattleSteps/useBattleSteps';
 import { calculateModifiedStat } from './calculateModifiedStat';
@@ -11,14 +12,12 @@ export const determineMoveOrder = (
 	if (playerMove.type === 'CatchProcessInfo') {
 		return player.id;
 	}
-	const playerSpeed = calculateModifiedStat(
-		player.stats.speed,
-		player.statBoosts.speed
-	);
-	const opponentSpeed = calculateModifiedStat(
-		opponent.stats.speed,
-		opponent.statBoosts.speed
-	);
+	const playerSpeed =
+		calculateModifiedStat(player.stats.speed, player.statBoosts.speed) *
+		(player.primaryAilment?.type === 'paralysis' ? PARA_SPEED_FACTOR : 1);
+	const opponentSpeed =
+		calculateModifiedStat(opponent.stats.speed, opponent.statBoosts.speed) *
+		(opponent.primaryAilment?.type === 'paralysis' ? PARA_SPEED_FACTOR : 1);
 
 	if (opponentSpeed > playerSpeed) {
 		return opponent.id;
