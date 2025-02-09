@@ -4,7 +4,7 @@ import { applyPrimaryAilmentDamage } from '../../../../../functions/applyPrimary
 import { isKO } from '../../../../../functions/isKo';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
-export const useHandlePlayerPrimaryAilment = ({
+export const useHandlePlayerEndOfTurnDamage = ({
 	battleStep,
 	setBattleStep,
 	player,
@@ -14,7 +14,11 @@ export const useHandlePlayerPrimaryAilment = ({
 	setPlayer,
 }: ExtendedBattleStepHandler) => {
 	useEffect(() => {
-		if (battleStep !== 'HANDLE_PLAYER_PRIMARY_AILMENT' || !player) {
+		if (battleStep !== 'HANDLE_PLAYER_END_OF_TURN_DAMAGE' || !player) {
+			return;
+		}
+		if (!['burn', 'poison'].includes(player?.primaryAilment?.type ?? '')) {
+			setBattleStep('HANDLE_OPPONENT_END_OF_TURN_DAMAGE');
 			return;
 		}
 		const t = setTimeout(() => {
@@ -24,7 +28,7 @@ export const useHandlePlayerPrimaryAilment = ({
 				setBattleStep('BATTLE_LOST');
 				return;
 			}
-			setBattleStep('HANDLE_OPPONENT_PRIMARY_AILMENT');
+			setBattleStep('HANDLE_OPPONENT_END_OF_TURN_DAMAGE');
 		}, animationTimer);
 
 		return () => clearTimeout(t);

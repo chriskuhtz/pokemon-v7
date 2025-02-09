@@ -20,7 +20,7 @@ export const useHandleOpponentAbility = ({
 				setPokemon: setOpponent,
 				dispatchToast,
 			});
-			setBattleStep('HANDLE_PLAYER_PRIMARY_AILMENT');
+			setBattleStep('HANDLE_PLAYER_END_OF_TURN_DAMAGE');
 		}, animationTimer);
 
 		return () => clearTimeout(t);

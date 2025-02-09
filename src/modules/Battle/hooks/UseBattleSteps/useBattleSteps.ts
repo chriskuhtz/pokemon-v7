@@ -12,9 +12,9 @@ import { useCatchingSteps } from './StepHandlers/useCatchingSteps';
 import { useExecuteOpponentMove } from './StepHandlers/useExecuteOpponentMove';
 import { useExecutePlayerMove } from './StepHandlers/useExecutePlayerMove';
 import { useHandleOpponentAbility } from './StepHandlers/useHandleOpponentAbility';
-import { useHandleOpponentPrimaryAilment } from './StepHandlers/useHandleOpponentPrimaryAilment';
+import { useHandleOpponentEndOfTurnDamage } from './StepHandlers/useHandleOpponentEndOfTurnDamage';
 import { useHandlePlayerAbility } from './StepHandlers/useHandlePlayerAbility';
-import { useHandlePlayerPrimaryAilment } from './StepHandlers/useHandlePlayerPrimaryAilment';
+import { useHandlePlayerEndOfTurnDamage } from './StepHandlers/useHandlePlayerEndOfTurnDamage';
 import { useMoveHandling } from './StepHandlers/useMoveHandling';
 import { useMoveSelection } from './StepHandlers/useMoveSelection';
 import { useOpponentEmerge } from './StepHandlers/useOpponentEmerge';
@@ -178,8 +178,8 @@ export const useBattleSteps = ({
 	useOpponentUnableToAttack(extendedPayload);
 	usePlayerUnableToAttack(extendedPayload);
 	useCatchingSteps(extendedPayload);
-	useHandleOpponentPrimaryAilment(extendedPayload);
-	useHandlePlayerPrimaryAilment(extendedPayload);
+	useHandleOpponentEndOfTurnDamage(extendedPayload);
+	useHandlePlayerEndOfTurnDamage(extendedPayload);
 	useOpponentFainting({ battleStep, setBattleStep });
 	usePlayerFainting({ battleStep, setBattleStep });
 	useBattleEnd({
