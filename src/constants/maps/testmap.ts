@@ -19,4 +19,5 @@ export const testMap: OverworldMap = {
 		{ dexId: 7, xp: 10000 },
 		{ dexId: 25, xp: 10000 },
 	],
+	weather: 'sandstorm',
 };

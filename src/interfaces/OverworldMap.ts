@@ -10,6 +10,7 @@
 import { Inventory } from './Inventory';
 import { ItemType } from './Item';
 import { CharacterOrientation, MapId } from './SaveFile';
+import { WeatherType } from './Weather';
 
 export interface OverworldItem {
 	type: 'ITEM';
@@ -48,4 +49,5 @@ export interface OverworldMap {
 	height: number;
 	tileMap: (0 | 1 | 2)[][];
 	occupants: number[];
+	weather?: WeatherType;
 }

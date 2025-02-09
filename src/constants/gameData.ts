@@ -32,8 +32,7 @@ export const testState: SaveFile = {
 			damage: 0,
 			nature: 'adamant',
 			xp: 100000,
-			ability: 'limber',
-			primaryAilment: { type: 'freeze' },
+			ability: 'sand-veil',
 		},
 	],
 	meta: {
@@ -57,7 +56,7 @@ export const testOpponent: OwnedPokemon = {
 	damage: 0,
 	firstMove: { name: 'pay-day', usedPP: 0 },
 	secondMove: { name: 'karate-chop', usedPP: 0 },
-	thirdMove: { name: 'double-slap', usedPP: 0 },
+	thirdMove: { name: 'ice-punch', usedPP: 0 },
 	fourthMove: { name: 'comet-punch', usedPP: 0 },
 	id: '1',
 	xp: 200000,

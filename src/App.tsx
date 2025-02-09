@@ -136,7 +136,7 @@ export const App = (): JSX.Element => {
 
 				setActiveTabReducer('BATTLE');
 			}}
-			encounterRateModifier={firstTeamMember.ability === 'stench' ? 0.5 : 1}
+			firstTeamMember={firstTeamMember}
 			navigate={setActiveTabReducer}
 			goToMarket={(i) => {
 				setActiveTabReducer('MARKET');

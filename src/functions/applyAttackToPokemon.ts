@@ -1,9 +1,9 @@
 import { AddToastFunction } from '../hooks/useToasts';
 import { BattleAttack } from '../interfaces/BattleAttack';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { WeatherType } from '../interfaces/Weather';
 import { applyAttackAilmentsToPokemon } from './applyAttackAilmentsToPokemon';
 import { calculateDamage } from './calculateDamage';
-import { WeatherType } from './determineWeatherFactor';
 import { reduceMovePP } from './reduceMovePP';
 
 export const applyAttackToPokemon = ({

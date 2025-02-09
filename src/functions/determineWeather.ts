@@ -1,5 +1,5 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { WeatherType } from './determineWeatherFactor';
+import { WeatherType } from '../interfaces/Weather';
 
 export const determineWeather = (
 	pokemon: BattlePokemon

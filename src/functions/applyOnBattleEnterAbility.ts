@@ -1,6 +1,6 @@
 import { AddToastFunction } from '../hooks/useToasts';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { WeatherType } from './determineWeatherFactor';
+import { WeatherType } from '../interfaces/Weather';
 
 export const applyOnBattleEnterAbility = ({
 	pokemon,

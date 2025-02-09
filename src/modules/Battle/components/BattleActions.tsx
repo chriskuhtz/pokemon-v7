@@ -5,9 +5,8 @@ import { MdCatchingPokemon } from 'react-icons/md';
 import { MoveCard } from '../../../components/MoveCard/MoveCard';
 import { baseSize } from '../../../constants/gameData';
 import { determineCrit } from '../../../functions/determineCrit';
-import { determineMiss } from '../../../functions/determineHitOrMiss';
+import { determineMiss } from '../../../functions/determineMiss';
 import { determineMultiHits } from '../../../functions/determineMultiHits';
-import { WeatherType } from '../../../functions/determineWeatherFactor';
 import { recommendMove } from '../../../functions/recommendMove';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
@@ -16,6 +15,7 @@ import { Card } from '../../../uiComponents/Card/Card';
 import { BattleAction } from '../hooks/UseBattleSteps/useBattleSteps';
 import { BattleStep } from '../types/BattleStep';
 import { BallSelectionMenu } from './BallSelectionMenu';
+import { WeatherType } from '../../../interfaces/Weather';
 
 export type BattleMenu = 'MAIN' | 'BALLS' | 'MOVES';
 export const BattleActions = ({
@@ -93,7 +93,7 @@ export const BattleActions = ({
 											m.data.meta.crit_rate,
 											opponent.ability
 										),
-										miss: determineMiss(m),
+										miss: determineMiss(m, opponent.ability, battleWeather),
 										multiHits: determineMultiHits(m),
 									})
 								}

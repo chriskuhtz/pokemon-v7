@@ -12,6 +12,7 @@ import {
 	OverworldItem,
 	OverworldMap,
 } from '../../interfaces/OverworldMap';
+import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { RoutesType } from '../../interfaces/Routing';
 import { CharacterLocationData } from '../../interfaces/SaveFile';
 import { Banner } from '../../uiComponents/Banner/Banner';
@@ -21,6 +22,7 @@ import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
+import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -38,7 +40,7 @@ export const Overworld = ({
 	collectItem,
 	map,
 	startEncounter,
-	encounterRateModifier,
+	firstTeamMember,
 	collectedItems,
 	navigate,
 	goToMarket,
@@ -53,6 +55,7 @@ export const Overworld = ({
 	encounterRateModifier?: number;
 	navigate: (x: RoutesType) => void;
 	goToMarket: (marketInventory: Partial<Inventory>) => void;
+	firstTeamMember: OwnedPokemon;
 }) => {
 	const assembledMap = useMemo(
 		() => assembleMap(map, collectedItems),
@@ -90,6 +93,21 @@ export const Overworld = ({
 		});
 	};
 
+	const encounterRateModifier = useMemo(() => {
+		if (firstTeamMember.ability === 'stench') {
+			return 0.5;
+		}
+		if (
+			firstTeamMember.ability === 'sand-veil' &&
+			assembledMap.weather === 'sandstorm'
+		) {
+			return 0.5;
+		}
+
+		return 1;
+	}, [assembledMap.weather, firstTeamMember.ability]);
+
+	console.log(encounterRateModifier);
 	const setNextInput = useOverworldMovement(
 		playerLocation,
 		setCharacterLocation,
@@ -174,6 +192,10 @@ export const Overworld = ({
 				onClick={openMenu}
 				size={baseSize / 2}
 			/>
+			<div style={{ position: 'absolute', top: '1.5rem', right: '1rem' }}>
+				{' '}
+				<WeatherIcon weather={assembledMap.weather} />
+			</div>
 			<div>
 				<canvas id={playerCanvasId} height={baseSize} width={baseSize} />
 				<div
