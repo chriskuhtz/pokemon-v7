@@ -33,6 +33,8 @@ export const testState: SaveFile = {
 			nature: 'adamant',
 			xp: 100000,
 			ability: 'sand-veil',
+			happiness: 70,
+			stepsWalked: 0,
 		},
 	],
 	meta: {
@@ -61,6 +63,8 @@ export const testOpponent: OwnedPokemon = {
 	id: '1',
 	xp: 200000,
 	ability: 'volt-absorb',
+	happiness: -1,
+	stepsWalked: 0,
 };
 
 export const localStorageId = 'pokemonv7SaveFile';

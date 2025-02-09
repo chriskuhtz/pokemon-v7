@@ -56,7 +56,7 @@ export const HpBar = ({ max, damage }: { max: number; damage: number }) => {
 	return (
 		<div
 			style={{
-				zIndex: -1,
+				zIndex: 0,
 				margin: '1rem 0',
 				position: 'relative',
 				width: 100,

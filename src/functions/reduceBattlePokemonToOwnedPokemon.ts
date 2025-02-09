@@ -26,5 +26,7 @@ export const reduceBattlePokemonToOwnedPokemon = (
 		onTeam: newMon.onTeam,
 		xp: newMon.xp,
 		ability: newMon.ability,
+		happiness: newMon.happiness,
+		stepsWalked: newMon.stepsWalked,
 	};
 };

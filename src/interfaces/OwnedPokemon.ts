@@ -24,7 +24,9 @@ export interface OwnedPokemon {
 	xp: number;
 	ability: AbilityName;
 	//shiny?: boolean;
-	//friendship: number;
+	happiness: number;
+	//Overflows between 0 and 255, adds happiness at 255
+	stepsWalked: number;
 	//heldItemName?: ItemType;
 	//effortValues: StatObject;
 	//intrinsicValues: StatObject;

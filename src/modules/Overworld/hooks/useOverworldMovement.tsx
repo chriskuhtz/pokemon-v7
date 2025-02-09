@@ -14,6 +14,7 @@ export const useOverworldMovement = (
 	setCharacterLocation: (update: CharacterLocationData) => void,
 	map: OverworldMap,
 	startEncounter: () => void,
+	addStep: () => void,
 	encounterRateModifier?: number
 ) => {
 	const [encounterChance, setEncounterChance] =
@@ -53,7 +54,7 @@ export const useOverworldMovement = (
 			if (nextInput === playerLocation.orientation) {
 				setCharacterLocation({
 					...playerLocation,
-					...updatePosition(playerLocation, nextInput, map),
+					...updatePosition(playerLocation, nextInput, map, addStep),
 					forwardFoot: getNextForwardFoot(playerLocation.forwardFoot),
 				});
 			}
@@ -69,6 +70,7 @@ export const useOverworldMovement = (
 
 		return () => clearInterval(int);
 	}, [
+		addStep,
 		encounterChance,
 		encounterRateModifier,
 		map,
