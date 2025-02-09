@@ -1,19 +1,19 @@
 import { useEffect } from 'react';
 import { animationTimer } from '../../../../../constants/gameData';
-import { BattleStepHandler } from '../useBattleSteps';
+import { BattleStep } from '../../../types/BattleStep';
 
-export const usePlayerIntro = ({
-	battleStep,
-	setBattleStep,
-}: BattleStepHandler) => {
+export const usePlayerIntro = (
+	battleStep: BattleStep,
+	followBattleStepPath: () => void
+) => {
 	useEffect(() => {
 		if (battleStep !== 'PLAYER_INTRO') {
 			return;
 		}
 		const t = setTimeout(() => {
-			setBattleStep('OPPONENT_EMERGE');
+			followBattleStepPath();
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, setBattleStep]);
+	}, [battleStep, followBattleStepPath]);
 };

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { IoMdMenu } from 'react-icons/io';
+import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 import { animationTimer, baseSize } from '../../constants/gameData';
 import { assembleMap } from '../../functions/assembleMap';
 import { getOppositeDirection } from '../../functions/getOppositeDirection';
@@ -22,7 +23,6 @@ import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
-import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -107,7 +107,6 @@ export const Overworld = ({
 		return 1;
 	}, [assembledMap.weather, firstTeamMember.ability]);
 
-	console.log(encounterRateModifier);
 	const setNextInput = useOverworldMovement(
 		playerLocation,
 		setCharacterLocation,

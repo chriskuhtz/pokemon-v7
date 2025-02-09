@@ -1,5 +1,9 @@
 import { useEffect } from 'react';
 import { determineMoveOrder } from '../../../../../functions/determineMoveOrder';
+import {
+	opponentIsFasterPath,
+	playerIsFasterPath,
+} from '../../../types/BattleStep';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
 export const useMoveHandling = ({
@@ -7,30 +11,32 @@ export const useMoveHandling = ({
 	nextOpponentMove,
 	opponent,
 	player,
-	setBattleStep,
 	nextPlayerMove,
+	setBeginsThisTurn,
+	followBattleStepPath,
 }: ExtendedBattleStepHandler) => {
 	useEffect(() => {
 		if (battleStep === 'MOVE_HANDLING') {
 			if (!opponent || !player || !nextOpponentMove || !nextPlayerMove) {
-				setBattleStep('ERROR');
-				return;
+				throw new Error('invalid state');
 			}
 
 			const first = determineMoveOrder(player, opponent, nextPlayerMove);
 
+			setBeginsThisTurn(first);
 			if (first === player.id) {
-				setBattleStep('PLAYER_CURE_AILMENTS');
+				followBattleStepPath(playerIsFasterPath);
 			} else {
-				setBattleStep('OPPONENT_CURE_AILMENTS');
+				followBattleStepPath(opponentIsFasterPath);
 			}
 		}
 	}, [
 		battleStep,
+		followBattleStepPath,
 		nextOpponentMove,
 		nextPlayerMove,
 		opponent,
 		player,
-		setBattleStep,
+		setBeginsThisTurn,
 	]);
 };

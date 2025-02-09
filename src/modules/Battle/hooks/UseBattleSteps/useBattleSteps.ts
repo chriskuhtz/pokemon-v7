@@ -1,18 +1,25 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { AddToastFunction } from '../../../../hooks/useToasts';
 import { BattleAttack } from '../../../../interfaces/BattleAttack';
 import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
 import { EmptyInventory, Inventory } from '../../../../interfaces/Inventory';
 import { PokeballType } from '../../../../interfaces/Item';
 import { SaveFile } from '../../../../interfaces/SaveFile';
-import { BattleStep } from '../../types/BattleStep';
+import { WeatherType } from '../../../../interfaces/Weather';
+import {
+	BattleStep,
+	introPath,
+	opponentIsFasterPath,
+	playerIsFasterPath,
+	possibleNextSteps,
+} from '../../types/BattleStep';
 import { useBattleEnd } from './StepHandlers/useBattleEnd';
 import { useCatchingSteps } from './StepHandlers/useCatchingSteps';
 import { useExecuteOpponentMove } from './StepHandlers/useExecuteOpponentMove';
 import { useExecutePlayerMove } from './StepHandlers/useExecutePlayerMove';
-import { useHandleOpponentAbility } from './StepHandlers/useHandleOpponentAbility';
+import { useHandleOpponentEndOfTurnAbility } from './StepHandlers/useHandleOpponentEndOfTurnAbility';
 import { useHandleOpponentEndOfTurnDamage } from './StepHandlers/useHandleOpponentEndOfTurnDamage';
-import { useHandlePlayerAbility } from './StepHandlers/useHandlePlayerAbility';
+import { useHandlePlayerEndOfTurnAbility } from './StepHandlers/useHandlePlayerEndOfTurnAbility';
 import { useHandlePlayerEndOfTurnDamage } from './StepHandlers/useHandlePlayerEndOfTurnDamage';
 import { useMoveHandling } from './StepHandlers/useMoveHandling';
 import { useMoveSelection } from './StepHandlers/useMoveSelection';
@@ -31,7 +38,6 @@ import { usePlayerFlinched } from './StepHandlers/usePlayerFlinched';
 import { usePlayerIntro } from './StepHandlers/usePlayerIntro';
 import { usePlayerMissed } from './StepHandlers/usePlayerMissed';
 import { usePlayerUnableToAttack } from './StepHandlers/usePlayerUnableToAttack';
-import { WeatherType } from '../../../../interfaces/Weather';
 
 export interface CatchProcessInfo {
 	pokemon: BattlePokemon;
@@ -54,7 +60,7 @@ interface UseBattleStepsProps {
 
 export interface BattleStepHandler {
 	battleStep: BattleStep;
-	setBattleStep: (x: BattleStep) => void;
+	followBattleStepPath: (path: BattleStep[]) => void;
 }
 export interface ExtendedBattleStepHandler extends BattleStepHandler {
 	player?: BattlePokemon;
@@ -71,6 +77,10 @@ export interface ExtendedBattleStepHandler extends BattleStepHandler {
 	setCaughtPokemon: React.Dispatch<React.SetStateAction<CatchProcessInfo[]>>;
 	setUsedItems: React.Dispatch<React.SetStateAction<Inventory>>;
 	setCoins: React.Dispatch<React.SetStateAction<number>>;
+	followBattleStepPath: (path: BattleStep[]) => void;
+	setBeginsThisTurn: React.Dispatch<React.SetStateAction<string | undefined>>;
+	followTurnPath: () => void;
+	startPath: (path: BattleStep[]) => void;
 }
 
 export const useBattleSteps = ({
@@ -104,6 +114,7 @@ export const useBattleSteps = ({
 	const [nextOpponentMove, setNextOpponentMove] = useState<
 		BattleAttack | undefined
 	>();
+	const [beginsThisTurn, setBeginsThisTurn] = useState<string | undefined>();
 
 	const nextMove = useMemo(() => {
 		if (battleStep === 'EXECUTE_OPPONENT_MOVE') {
@@ -124,10 +135,49 @@ export const useBattleSteps = ({
 		return undefined;
 	}, [battleStep, nextOpponentMove, nextPlayerMove]);
 
+	const protectedSetBattleStep = useCallback(
+		(nextStep: BattleStep) => {
+			const availableNextSteps = possibleNextSteps[battleStep];
+
+			if (!availableNextSteps.some((a) => a === nextStep)) {
+				throw new Error(`invalid path', ${battleStep} to ${nextStep}`);
+			}
+			setBattleStep(nextStep);
+		},
+		[battleStep]
+	);
+	const followBattleStepPath = useCallback(
+		(path: BattleStep[]) => {
+			const index = path.findIndex((p) => p === battleStep);
+			if (index === -1) {
+				throw new Error(`${battleStep} is not in path ${path.join()}`);
+			}
+			if (index === path.length - 1) {
+				throw new Error(`${battleStep} is the end of path ${path.join()}`);
+			}
+			console.log('moving to path index', index + 1, 'of', path);
+			setBattleStep(path[index + 1]);
+		},
+		[battleStep]
+	);
+	const startPath = useCallback((path: BattleStep[]) => {
+		//paths can have different starting points that are not included in the path
+		setBattleStep(path[0]);
+	}, []);
+
+	const followTurnPath = useCallback(() => {
+		if (beginsThisTurn === opponent?.id) {
+			followBattleStepPath(opponentIsFasterPath);
+		} else followBattleStepPath(playerIsFasterPath);
+	}, [beginsThisTurn, followBattleStepPath, opponent]);
+
 	const extendedPayload: ExtendedBattleStepHandler = useMemo(
 		() => ({
+			startPath,
+			followTurnPath,
+			setBeginsThisTurn,
+			followBattleStepPath,
 			battleStep,
-			setBattleStep,
 			player,
 			opponent,
 			dispatchToast,
@@ -145,6 +195,9 @@ export const useBattleSteps = ({
 			setCoins,
 		}),
 		[
+			startPath,
+			followTurnPath,
+			followBattleStepPath,
 			battleStep,
 			player,
 			opponent,
@@ -158,19 +211,25 @@ export const useBattleSteps = ({
 		]
 	);
 
-	useOpponentIntro({ battleStep, setBattleStep });
-	usePlayerIntro({ battleStep, setBattleStep });
+	useOpponentIntro(battleStep, () => followBattleStepPath(introPath));
+	usePlayerIntro(battleStep, () => followBattleStepPath(introPath));
 	useOpponentEmerge(extendedPayload);
 	usePlayerEmerge(extendedPayload);
-	useHandlePlayerAbility(extendedPayload);
+	useHandlePlayerEndOfTurnAbility(extendedPayload);
 	useMoveSelection(extendedPayload);
-	useHandleOpponentAbility(extendedPayload);
+	useHandleOpponentEndOfTurnAbility(extendedPayload);
 	useOpponentMoveSelection(extendedPayload);
 	useMoveHandling(extendedPayload);
 	usePlayerCureAilments(extendedPayload);
 	useOpponentCureAilments(extendedPayload);
-	useExecutePlayerMove(extendedPayload);
-	useExecuteOpponentMove(extendedPayload);
+	useExecutePlayerMove({
+		...extendedPayload,
+		setBattleStep: protectedSetBattleStep,
+	});
+	useExecuteOpponentMove({
+		...extendedPayload,
+		setBattleStep: protectedSetBattleStep,
+	});
 	useOpponentFlinched(extendedPayload);
 	usePlayerFlinched(extendedPayload);
 	useOpponentMissed(extendedPayload);
@@ -180,8 +239,8 @@ export const useBattleSteps = ({
 	useCatchingSteps(extendedPayload);
 	useHandleOpponentEndOfTurnDamage(extendedPayload);
 	useHandlePlayerEndOfTurnDamage(extendedPayload);
-	useOpponentFainting({ battleStep, setBattleStep });
-	usePlayerFainting({ battleStep, setBattleStep });
+	useOpponentFainting({ battleStep, followBattleStepPath });
+	usePlayerFainting({ battleStep, followBattleStepPath });
 	useBattleEnd({
 		battleStep,
 		caughtPokemon,
@@ -193,7 +252,7 @@ export const useBattleSteps = ({
 	});
 
 	const initBattle = () => {
-		setBattleStep('OPPONENT_INTRO');
+		followBattleStepPath(introPath);
 	};
 
 	return {

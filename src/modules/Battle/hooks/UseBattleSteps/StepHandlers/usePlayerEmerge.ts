@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import { animationTimer } from '../../../../../constants/gameData';
 import { applyOnBattleEnterAbility } from '../../../../../functions/applyOnBattleEnterAbility';
+import { introPath } from '../../../types/BattleStep';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
 export const usePlayerEmerge = ({
 	battleStep,
-	setBattleStep,
 	player,
 	setBattleWeather,
 	dispatchToast,
+	followBattleStepPath,
 }: ExtendedBattleStepHandler) => {
-	//'PLAYER_EMERGE' to 'MOVE_SELECTION'
 	useEffect(() => {
 		if (battleStep !== 'PLAYER_EMERGE' || !player) {
 			return;
@@ -22,9 +22,15 @@ export const usePlayerEmerge = ({
 				dispatchToast,
 			});
 
-			setBattleStep('MOVE_SELECTION');
+			followBattleStepPath(introPath);
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, dispatchToast, player, setBattleStep, setBattleWeather]);
+	}, [
+		battleStep,
+		dispatchToast,
+		followBattleStepPath,
+		player,
+		setBattleWeather,
+	]);
 };

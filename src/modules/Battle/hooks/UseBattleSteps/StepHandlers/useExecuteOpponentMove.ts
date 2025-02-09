@@ -7,6 +7,7 @@ import { isKO } from '../../../../../functions/isKo';
 import { reduceMovePP } from '../../../../../functions/reduceMovePP';
 import { targetFlinched } from '../../../../../functions/targetFlinched';
 import { BattleAttack } from '../../../../../interfaces/BattleAttack';
+import { BattleStep, playerFaintingPath } from '../../../types/BattleStep';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
 export const useExecuteOpponentMove = ({
@@ -23,7 +24,11 @@ export const useExecuteOpponentMove = ({
 	setNextOpponentMove,
 	dispatchToast,
 	setCoins,
-}: ExtendedBattleStepHandler) => {
+	followTurnPath,
+	startPath,
+}: ExtendedBattleStepHandler & {
+	setBattleStep: (x: BattleStep) => void;
+}) => {
 	useEffect(() => {
 		if (battleStep !== 'EXECUTE_OPPONENT_MOVE' || !opponent) {
 			return;
@@ -40,7 +45,7 @@ export const useExecuteOpponentMove = ({
 
 		const t = setTimeout(() => {
 			if (!player || !opponent) {
-				setBattleStep('ERROR');
+				throw new Error('no player or opponent');
 				return;
 			}
 
@@ -63,9 +68,7 @@ export const useExecuteOpponentMove = ({
 						} prevents self destruct moves with damp`
 					);
 					setNextPlayerMove(undefined);
-					if (nextPlayerMove) {
-						setBattleStep('PLAYER_CURE_AILMENTS');
-					} else setBattleStep('HANDLE_PLAYER_ABILITY');
+					followTurnPath();
 					return;
 				}
 				if (nextOpponentMove.miss) {
@@ -96,7 +99,7 @@ export const useExecuteOpponentMove = ({
 						: undefined;
 
 				if (isKO(updatedTarget)) {
-					setBattleStep('PLAYER_FAINTING');
+					startPath(playerFaintingPath);
 					setNextOpponentMove(undefined);
 					return;
 				}
@@ -112,9 +115,7 @@ export const useExecuteOpponentMove = ({
 				}
 				setNextOpponentMove(undefined);
 
-				if (nextPlayerMove) {
-					setBattleStep('PLAYER_CURE_AILMENTS');
-				} else setBattleStep('HANDLE_PLAYER_ABILITY');
+				followTurnPath();
 			}
 		}, animationTimer);
 
@@ -123,6 +124,7 @@ export const useExecuteOpponentMove = ({
 		battleStep,
 		battleWeather,
 		dispatchToast,
+		followTurnPath,
 		nextOpponentMove,
 		nextPlayerMove,
 		opponent,
@@ -133,5 +135,6 @@ export const useExecuteOpponentMove = ({
 		setNextPlayerMove,
 		setOpponent,
 		setPlayer,
+		startPath,
 	]);
 };

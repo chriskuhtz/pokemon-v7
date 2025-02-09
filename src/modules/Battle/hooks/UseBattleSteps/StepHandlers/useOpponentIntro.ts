@@ -1,18 +1,18 @@
 import { useEffect } from 'react';
 import { animationTimer } from '../../../../../constants/gameData';
-import { BattleStepHandler } from '../useBattleSteps';
+import { BattleStep } from '../../../types/BattleStep';
 
-export const useOpponentIntro = ({
-	battleStep,
-	setBattleStep,
-}: BattleStepHandler) => {
+export const useOpponentIntro = (
+	battleStep: BattleStep,
+	followBattleStepPath: () => void
+) => {
 	useEffect(() => {
 		if (battleStep !== 'OPPONENT_INTRO') {
 			return;
 		}
 
-		const t = setTimeout(() => setBattleStep('PLAYER_INTRO'), animationTimer);
+		const t = setTimeout(() => followBattleStepPath(), animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, setBattleStep]);
+	}, [battleStep, followBattleStepPath]);
 };

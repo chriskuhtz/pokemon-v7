@@ -42,7 +42,7 @@ export const abilityCheckList: {
 	{
 		name: 'sand-veil',
 		url: 'https://pokeapi.co/api/v2/ability/8/',
-		todos: ['evasion', 'sandstorm as weather type'],
+		handled: true,
 	},
 	{
 		name: 'static',

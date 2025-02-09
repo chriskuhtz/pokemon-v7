@@ -221,13 +221,6 @@ export const BattleBanner = ({
 			</Banner>
 		);
 	}
-	if (battleStep === 'ERROR') {
-		return (
-			<Banner>
-				<h2>An Error occured :/</h2>
-			</Banner>
-		);
-	}
 
 	return <></>;
 };

@@ -7,6 +7,11 @@ import { isKO } from '../../../../../functions/isKo';
 import { reduceMovePP } from '../../../../../functions/reduceMovePP';
 import { targetFlinched } from '../../../../../functions/targetFlinched';
 import { BattleAttack } from '../../../../../interfaces/BattleAttack';
+import {
+	BattleStep,
+	catchingPath,
+	opponentFaintingPath,
+} from '../../../types/BattleStep';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
 export const useExecutePlayerMove = ({
@@ -17,12 +22,16 @@ export const useExecutePlayerMove = ({
 	setPlayer,
 	setNextPlayerMove,
 	setBattleStep,
-	nextOpponentMove,
 	setOpponent,
 	battleWeather,
 	dispatchToast,
 	setCoins,
-}: ExtendedBattleStepHandler) => {
+	followBattleStepPath,
+	startPath,
+	followTurnPath,
+}: ExtendedBattleStepHandler & {
+	setBattleStep: (x: BattleStep) => void;
+}) => {
 	useEffect(() => {
 		if (battleStep !== 'EXECUTE_PLAYER_MOVE' || !player) {
 			return;
@@ -39,11 +48,11 @@ export const useExecutePlayerMove = ({
 
 		const t = setTimeout(() => {
 			if (!player || !opponent) {
-				setBattleStep('ERROR');
+				throw new Error('no player or opponent');
 				return;
 			}
 			if (nextPlayerMove?.type === 'CatchProcessInfo') {
-				setBattleStep('CATCHING_PROCESS_1');
+				followBattleStepPath(catchingPath);
 				return;
 			}
 			if (nextPlayerMove?.type === 'BattleAttack') {
@@ -65,9 +74,8 @@ export const useExecutePlayerMove = ({
 						} prevents self destruct moves with damp`
 					);
 					setNextPlayerMove(undefined);
-					if (nextOpponentMove) {
-						setBattleStep('OPPONENT_CURE_AILMENTS');
-					} else setBattleStep('HANDLE_PLAYER_ABILITY');
+
+					followTurnPath();
 					return;
 				}
 				if (nextPlayerMove.miss) {
@@ -99,7 +107,7 @@ export const useExecutePlayerMove = ({
 						: undefined;
 
 				if (isKO(updatedTarget)) {
-					setBattleStep('OPPONENT_FAINTING');
+					startPath(opponentFaintingPath);
 					setNextPlayerMove(undefined);
 					return;
 				}
@@ -114,9 +122,7 @@ export const useExecutePlayerMove = ({
 					return;
 				}
 				setNextPlayerMove(undefined);
-				if (nextOpponentMove) {
-					setBattleStep('OPPONENT_CURE_AILMENTS');
-				} else setBattleStep('HANDLE_PLAYER_ABILITY');
+				followTurnPath();
 			}
 		}, animationTimer);
 
@@ -125,7 +131,8 @@ export const useExecutePlayerMove = ({
 		battleStep,
 		battleWeather,
 		dispatchToast,
-		nextOpponentMove,
+		followBattleStepPath,
+		followTurnPath,
 		nextPlayerMove,
 		opponent,
 		player,
@@ -134,5 +141,6 @@ export const useExecutePlayerMove = ({
 		setNextPlayerMove,
 		setOpponent,
 		setPlayer,
+		startPath,
 	]);
 };
