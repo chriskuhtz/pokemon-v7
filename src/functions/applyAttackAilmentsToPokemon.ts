@@ -38,6 +38,15 @@ export const applyAttackAilmentsToPokemon = (
 		dispatchToast(`${pokemon.data.name} was paralyzed`);
 		return { ...pokemon, primaryAilment: { type: 'paralysis' } };
 	}
+	if (
+		attack.data.meta.ailment.name === 'freeze' &&
+		random < attack.data.meta.ailment_chance &&
+		//ice pokemon cant get frozen
+		!getTypeNames(pokemon.data.types).includes('ice')
+	) {
+		dispatchToast(`${pokemon.data.name} was frozen solid`);
+		return { ...pokemon, primaryAilment: { type: 'freeze' } };
+	}
 
 	return pokemon;
 };

@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import { animationTimer } from '../../../../../constants/gameData';
-import { applyEndOfTurnAbility } from '../../../../../functions/applyEndOfTurnAbility';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
-export const useHandleOpponentAbility = ({
+export const useOpponentCureAilments = ({
 	battleStep,
 	setBattleStep,
 	opponent,
@@ -11,16 +10,20 @@ export const useHandleOpponentAbility = ({
 	dispatchToast,
 }: ExtendedBattleStepHandler) => {
 	useEffect(() => {
-		if (battleStep !== 'HANDLE_OPPONENT_ABILITY' || !opponent) {
+		if (battleStep !== 'OPPONENT_CURE_AILMENTS' || !opponent) {
 			return;
 		}
+		const defrosted =
+			opponent.primaryAilment?.type === 'freeze' && Math.random() < 0.1;
+		if (!opponent.primaryAilment || !defrosted) {
+			setBattleStep('EXECUTE_OPPONENT_MOVE');
+			return;
+		}
+
 		const t = setTimeout(() => {
-			applyEndOfTurnAbility({
-				pokemon: opponent,
-				setPokemon: setOpponent,
-				dispatchToast,
-			});
-			setBattleStep('HANDLE_PLAYER_END_OF_TURN_DAMAGE');
+			dispatchToast(`${opponent.data.name} was defrosted`);
+			setOpponent({ ...opponent, primaryAilment: undefined });
+			setBattleStep('EXECUTE_OPPONENT_MOVE');
 		}, animationTimer);
 
 		return () => clearTimeout(t);

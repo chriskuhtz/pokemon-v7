@@ -20,8 +20,10 @@ export const useMoveHandling = ({
 			const first = determineMoveOrder(player, opponent, nextPlayerMove);
 
 			if (first === player.id) {
-				setBattleStep('EXECUTE_PLAYER_MOVE');
-			} else setBattleStep('EXECUTE_OPPONENT_MOVE');
+				setBattleStep('PLAYER_CURE_AILMENTS');
+			} else {
+				setBattleStep('OPPONENT_CURE_AILMENTS');
+			}
 		}
 	}, [
 		battleStep,

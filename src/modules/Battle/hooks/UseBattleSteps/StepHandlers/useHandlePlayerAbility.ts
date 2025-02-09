@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
+import { animationTimer } from '../../../../../constants/gameData';
 import { applyEndOfTurnAbility } from '../../../../../functions/applyEndOfTurnAbility';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
-import { animationTimer } from '../../../../../constants/gameData';
 
 export const useHandlePlayerAbility = ({
 	battleStep,

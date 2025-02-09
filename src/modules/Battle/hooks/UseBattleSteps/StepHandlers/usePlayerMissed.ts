@@ -16,7 +16,7 @@ export const usePlayerMissed = ({
 		const t = setTimeout(() => {
 			setNextPlayerMove(undefined);
 			if (nextOpponentMove) {
-				setBattleStep('EXECUTE_OPPONENT_MOVE');
+				setBattleStep('OPPONENT_CURE_AILMENTS');
 			} else setBattleStep('HANDLE_PLAYER_ABILITY');
 		}, animationTimer);
 

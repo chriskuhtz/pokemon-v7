@@ -24,9 +24,17 @@ export const useExecuteOpponentMove = ({
 	dispatchToast,
 	setCoins,
 }: ExtendedBattleStepHandler) => {
-	//"EXECUTE_OPPONENT_MOVE"
 	useEffect(() => {
-		if (battleStep !== 'EXECUTE_OPPONENT_MOVE') {
+		if (battleStep !== 'EXECUTE_OPPONENT_MOVE' || !opponent) {
+			return;
+		}
+		if (
+			['freeze', 'paralysis', 'sleep'].includes(
+				opponent.primaryAilment?.type ?? ''
+			)
+		) {
+			setBattleStep('OPPONENT_UNABLE_TO_ATTACK');
+			setNextOpponentMove(undefined);
 			return;
 		}
 
@@ -56,7 +64,7 @@ export const useExecuteOpponentMove = ({
 					);
 					setNextPlayerMove(undefined);
 					if (nextPlayerMove) {
-						setBattleStep('EXECUTE_PLAYER_MOVE');
+						setBattleStep('PLAYER_CURE_AILMENTS');
 					} else setBattleStep('HANDLE_PLAYER_ABILITY');
 					return;
 				}
@@ -105,7 +113,7 @@ export const useExecuteOpponentMove = ({
 				setNextOpponentMove(undefined);
 
 				if (nextPlayerMove) {
-					setBattleStep('EXECUTE_PLAYER_MOVE');
+					setBattleStep('PLAYER_CURE_AILMENTS');
 				} else setBattleStep('HANDLE_PLAYER_ABILITY');
 			}
 		}, animationTimer);

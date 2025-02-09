@@ -33,6 +33,7 @@ export const testState: SaveFile = {
 			nature: 'adamant',
 			xp: 100000,
 			ability: 'limber',
+			primaryAilment: { type: 'freeze' },
 		},
 	],
 	meta: {
@@ -61,6 +62,7 @@ export const testOpponent: OwnedPokemon = {
 	id: '1',
 	xp: 200000,
 	ability: 'speed-boost',
+	primaryAilment: { type: 'freeze' },
 };
 
 export const localStorageId = 'pokemonv7SaveFile';
