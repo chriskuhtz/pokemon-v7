@@ -7,6 +7,7 @@
  * 2 = blocked field
  */
 
+import { WeatherType } from '../functions/determineWeatherFactor';
 import { Inventory } from './Inventory';
 import { ItemType } from './Item';
 import { CharacterOrientation, MapId } from './SaveFile';
@@ -48,4 +49,5 @@ export interface OverworldMap {
 	height: number;
 	tileMap: (0 | 1 | 2)[][];
 	occupants: number[];
+	weather?: WeatherType;
 }

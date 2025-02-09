@@ -1,7 +1,6 @@
-import { FaCloudRain } from 'react-icons/fa';
-import { baseSize } from '../../../constants/gameData';
-import { BattleStep } from '../types/BattleStep';
+import { WeatherIcon } from '../../../components/WeatherIcon/WeatherIcon';
 import { WeatherType } from '../../../functions/determineWeatherFactor';
+import { BattleStep } from '../types/BattleStep';
 
 export const BattleInfo = ({
 	battleStep,
@@ -15,8 +14,7 @@ export const BattleInfo = ({
 			<strong>BattleStep: {battleStep}</strong>
 			<br></br>
 			<strong>
-				Weather: {battleWeather}{' '}
-				{battleWeather === 'rain' && <FaCloudRain size={baseSize / 2} />}
+				Weather: {battleWeather} <WeatherIcon weather={battleWeather} />
 			</strong>
 		</div>
 	);
