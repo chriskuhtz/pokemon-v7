@@ -4,6 +4,7 @@ import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/selfDestructing
 import { applyAttackToPokemon } from '../../../../../functions/applyAttackToPokemon';
 import { determineCrit } from '../../../../../functions/determineCrit';
 import { isKO } from '../../../../../functions/isKo';
+import { pokemonCantMove } from '../../../../../functions/pokemonCantMove';
 import { reduceMovePP } from '../../../../../functions/reduceMovePP';
 import { targetFlinched } from '../../../../../functions/targetFlinched';
 import { BattleAttack } from '../../../../../interfaces/BattleAttack';
@@ -33,11 +34,7 @@ export const useExecuteOpponentMove = ({
 		if (battleStep !== 'EXECUTE_OPPONENT_MOVE' || !opponent) {
 			return;
 		}
-		if (
-			['freeze', 'paralysis', 'sleep'].includes(
-				opponent.primaryAilment?.type ?? ''
-			)
-		) {
+		if (pokemonCantMove(opponent)) {
 			setBattleStep('OPPONENT_UNABLE_TO_ATTACK');
 			setNextOpponentMove(undefined);
 			return;
