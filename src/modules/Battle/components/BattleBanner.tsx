@@ -1,4 +1,4 @@
-import React from 'react';
+import { PokemonIconBanner } from '../../../components/PokemonIconBanner/PokemonIconBanner';
 import { battleSpriteSize } from '../../../constants/gameData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
@@ -27,30 +27,19 @@ export const BattleBanner = ({
 	}
 	if (battleStep === 'OPPONENT_INTRO') {
 		return (
-			<Banner>
-				<React.Fragment>
-					Encountered a wild {opponent.data.name}{' '}
-					<img
-						height={battleSpriteSize}
-						width={battleSpriteSize}
-						src={getPokemonSprite(opponent.dexId)}
-					/>
-				</React.Fragment>
-			</Banner>
+			<PokemonIconBanner
+				message={`Encountered a wild ${opponent.data.name}`}
+				pokemon={opponent}
+			/>
 		);
 	}
 	if (battleStep === 'PLAYER_INTRO') {
 		return (
-			<Banner>
-				<React.Fragment>
-					<img
-						height={battleSpriteSize}
-						width={battleSpriteSize}
-						src={getPokemonSprite(player.dexId)}
-					/>{' '}
-					Let's Go {player.data.name}
-				</React.Fragment>
-			</Banner>
+			<PokemonIconBanner
+				flexDirection="row-reverse"
+				message={`Let's Go ${player.data.name}`}
+				pokemon={player}
+			/>
 		);
 	}
 
@@ -82,28 +71,19 @@ export const BattleBanner = ({
 	}
 	if (battleStep === 'OPPONENT_FLINCHED') {
 		return (
-			<Banner>
-				{opponent.data.name} flinched
-				<img
-					style={{ padding: '1rem 0' }}
-					width={battleSpriteSize / 2}
-					height={battleSpriteSize / 2}
-					src={getPokemonSprite(opponent.dexId)}
-				/>
-			</Banner>
+			<PokemonIconBanner
+				message={`${opponent.data.name} flinched`}
+				pokemon={opponent}
+			/>
 		);
 	}
 	if (battleStep === 'PLAYER_FLINCHED') {
 		return (
-			<Banner>
-				<img
-					style={{ padding: '1rem 0' }}
-					width={battleSpriteSize / 2}
-					height={battleSpriteSize / 2}
-					src={getPokemonSprite(player.dexId)}
-				/>{' '}
-				{player.data.name} flinched
-			</Banner>
+			<PokemonIconBanner
+				message={`${player.data.name} flinched`}
+				pokemon={player}
+				flexDirection="row-reverse"
+			/>
 		);
 	}
 	if (battleStep === 'OPPONENT_UNABLE_TO_ATTACK') {
@@ -117,15 +97,10 @@ export const BattleBanner = ({
 			return 'why did you show this';
 		};
 		return (
-			<Banner>
-				{opponent.data.name} {ailmentMessage()}
-				<img
-					style={{ padding: '1rem 0' }}
-					width={battleSpriteSize / 2}
-					height={battleSpriteSize / 2}
-					src={getPokemonSprite(opponent.dexId)}
-				/>
-			</Banner>
+			<PokemonIconBanner
+				message={`${opponent.data.name} ${ailmentMessage()}`}
+				pokemon={opponent}
+			/>
 		);
 	}
 	if (battleStep === 'PLAYER_UNABLE_TO_ATTACK') {
@@ -139,15 +114,11 @@ export const BattleBanner = ({
 			return 'why did you show this';
 		};
 		return (
-			<Banner>
-				<img
-					style={{ padding: '1rem 0' }}
-					width={battleSpriteSize / 2}
-					height={battleSpriteSize / 2}
-					src={getPokemonSprite(player.dexId)}
-				/>{' '}
-				{player.data.name} {ailmentMessage()}
-			</Banner>
+			<PokemonIconBanner
+				message={`${player.data.name} ${ailmentMessage()}`}
+				pokemon={player}
+				flexDirection="row-reverse"
+			/>
 		);
 	}
 	if (battleStep === 'OPPONENT_MISSED') {
