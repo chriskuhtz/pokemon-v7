@@ -46,4 +46,7 @@ export const extraFeatureCheckList: {
 	{ name: 'remove duplications in battleStep functions' },
 	{ name: 'Banner slant either left or right' },
 	{ name: 'choose random moves for opponent' },
+	{
+		name: 'only factor volt-absorb etc into recommendation after it has been revealed',
+	},
 ];

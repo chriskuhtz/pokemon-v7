@@ -33,6 +33,15 @@ export const calculateDamage = (
 		console.error('what is this', attack);
 		return 0;
 	}
+	if (
+		attack.data.type.name === 'electric' &&
+		target.ability === 'volt-absorb'
+	) {
+		if (dispatchToast) {
+			dispatchToast(`${target.data.name} was healed by volt absorb`);
+		}
+		return Math.max(-Math.floor(target.stats.hp / 4), -target.damage);
+	}
 
 	const { level } = calculateLevelData(attacker.xp);
 
