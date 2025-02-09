@@ -9,11 +9,13 @@ import { isPassable } from './isPassable';
 export const updatePosition = (
 	playerLocation: CharacterLocationData,
 	nextInput: CharacterOrientation,
-	map: OverworldMap
+	map: OverworldMap,
+	addStep: () => void
 ): { x: number; y: number } => {
 	const nextLocation = getNextLocation(playerLocation, nextInput);
 
 	if (isPassable(nextLocation, map)) {
+		addStep();
 		return nextLocation;
 	}
 	return playerLocation;

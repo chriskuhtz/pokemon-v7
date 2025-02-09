@@ -106,5 +106,5 @@ export interface PokemonData {
 	};
 	stats: StatInfo[];
 	types: TypeInfo[];
-	weight: 60;
+	weight: number;
 }

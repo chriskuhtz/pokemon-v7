@@ -58,6 +58,7 @@ export const itemsCheckList: {
 	{
 		name: 'luxury-ball',
 		url: 'https://pokeapi.co/api/v2/item/11/',
+		handled: true,
 	},
 	{
 		name: 'premier-ball',

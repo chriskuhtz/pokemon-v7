@@ -7,6 +7,7 @@ import { STANDARD_BUY_MARKET } from './constants/standardBuyMarket';
 import { useSaveFile } from './hooks/useSaveFile';
 import { generateInventory, Inventory } from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
+import { RoutesType } from './interfaces/Routing';
 import { Bag } from './modules/Bag/Bag';
 import { Battle } from './modules/Battle/Battle';
 import { MainMenu } from './modules/MainMenu/MainMenu';
@@ -32,6 +33,7 @@ export const App = (): JSX.Element => {
 		setCharacterLocationReducer,
 		collectItemReducer,
 		setPokemonReducer,
+		applyStepsWalkedToTeamReducer,
 	} = useSaveFile(testState, true);
 
 	const {
@@ -116,15 +118,20 @@ export const App = (): JSX.Element => {
 		);
 	}
 
+	const navigateAwayFromOverworld = (route: RoutesType, stepsTaken: number) => {
+		applyStepsWalkedToTeamReducer(stepsTaken);
+		setActiveTabReducer(route);
+	};
+
 	return (
 		<Overworld
-			openMenu={() => setActiveTabReducer('MAIN')}
+			openMenu={(steps) => navigateAwayFromOverworld('MAIN', steps)}
 			setCharacterLocation={setCharacterLocationReducer}
 			collectItem={collectItemReducer}
 			playerLocation={location}
 			map={testMap}
 			collectedItems={collectedItems}
-			startEncounter={({ dexId, xp }) => {
+			startEncounter={({ dexId, xp }, steps) => {
 				setCurrentOpponent((current) => ({
 					...current,
 					dexId,
@@ -134,12 +141,12 @@ export const App = (): JSX.Element => {
 						abilityNames[Math.floor(Math.random() * abilityNames.length)],
 				}));
 
-				setActiveTabReducer('BATTLE');
+				navigateAwayFromOverworld('BATTLE', steps);
 			}}
 			firstTeamMember={firstTeamMember}
-			navigate={setActiveTabReducer}
-			goToMarket={(i) => {
-				setActiveTabReducer('MARKET');
+			navigate={navigateAwayFromOverworld}
+			goToMarket={(i, steps) => {
+				navigateAwayFromOverworld('MARKET', steps);
 				setCurrentMarketInventory(i);
 			}}
 		/>

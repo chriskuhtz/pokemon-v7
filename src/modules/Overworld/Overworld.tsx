@@ -45,16 +45,16 @@ export const Overworld = ({
 	navigate,
 	goToMarket,
 }: {
-	openMenu: () => void;
+	openMenu: (stepsTaken: number) => void;
 	playerLocation: CharacterLocationData;
 	setCharacterLocation: (update: CharacterLocationData) => void;
 	collectItem: (item: [string, OverworldItem]) => void;
 	map: OverworldMap;
 	collectedItems: number[];
-	startEncounter: (x: OverworldEncounter) => void;
+	startEncounter: (x: OverworldEncounter, stepsTaken: number) => void;
 	encounterRateModifier?: number;
-	navigate: (x: RoutesType) => void;
-	goToMarket: (marketInventory: Partial<Inventory>) => void;
+	navigate: (x: RoutesType, stepsTaken: number) => void;
+	goToMarket: (marketInventory: Partial<Inventory>, stepsTaken: number) => void;
 	firstTeamMember: OwnedPokemon;
 }) => {
 	const assembledMap = useMemo(
@@ -63,6 +63,7 @@ export const Overworld = ({
 	);
 	const valid = useMemo(() => isValidOverWorldMap(map), [map]);
 
+	const [stepsTaken, setStepsTaken] = useState<number>(0);
 	const [dialogues, setDialogues] = useState<Dialogue[]>([]);
 	useEffect(() => {
 		if (dialogues.length === 0) {
@@ -89,7 +90,7 @@ export const Overworld = ({
 
 		addDialogue({
 			message: 'A wild Pokemon appeared!',
-			onRemoval: () => startEncounter(randomEncounter),
+			onRemoval: () => startEncounter(randomEncounter, stepsTaken),
 		});
 	};
 
@@ -112,6 +113,7 @@ export const Overworld = ({
 		setCharacterLocation,
 		assembledMap,
 		addEncounterDialogue,
+		() => setStepsTaken((s) => s + 1),
 		encounterRateModifier
 	);
 
@@ -137,7 +139,7 @@ export const Overworld = ({
 			if (data.type === 'PC') {
 				addDialogue({
 					message: 'Accessing Pokemon Storage',
-					onRemoval: () => navigate('STORAGE'),
+					onRemoval: () => navigate('STORAGE', stepsTaken),
 				});
 				return;
 			}
@@ -152,7 +154,7 @@ export const Overworld = ({
 						message: d,
 						onRemoval:
 							i === data.dialogue.length - 1
-								? () => goToMarket(data.inventory)
+								? () => goToMarket(data.inventory, stepsTaken)
 								: undefined,
 					})
 				);
@@ -161,7 +163,14 @@ export const Overworld = ({
 
 			console.error('what is this occupant', occ);
 		},
-		[changeOccupant, collectItem, goToMarket, navigate, playerLocation]
+		[
+			changeOccupant,
+			collectItem,
+			goToMarket,
+			navigate,
+			playerLocation.orientation,
+			stepsTaken,
+		]
 	);
 
 	useKeyboardControl(
@@ -173,7 +182,7 @@ export const Overworld = ({
 	if (!valid) {
 		return (
 			<h2>
-				<IoMdMenu onClick={openMenu} size={baseSize / 2} />
+				<IoMdMenu onClick={() => openMenu(stepsTaken)} size={baseSize / 2} />
 				Invalid Map received
 			</h2>
 		);
@@ -188,7 +197,7 @@ export const Overworld = ({
 			)}
 			<IoMdMenu
 				style={{ position: 'absolute', top: '1.5rem', left: '1rem' }}
-				onClick={openMenu}
+				onClick={() => openMenu(stepsTaken)}
 				size={baseSize / 2}
 			/>
 			<div style={{ position: 'absolute', top: '1.5rem', right: '1rem' }}>

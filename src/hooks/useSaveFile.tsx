@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { localStorageId } from '../constants/gameData';
+import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { updateItemFunction } from '../functions/updateItemFunction';
 import { ItemType } from '../interfaces/Item';
 import { OverworldItem } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
-import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
 import { RoutesType } from '../interfaces/Routing';
+import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
 
 export const useSaveFile = (
 	init: SaveFile,
@@ -32,6 +33,7 @@ export const useSaveFile = (
 	setCharacterLocationReducer: (update: CharacterLocationData) => void;
 	collectItemReducer: (item: [string, OverworldItem]) => void;
 	setPokemonReducer: (update: OwnedPokemon[]) => void;
+	applyStepsWalkedToTeamReducer: (steps: number) => void;
 } => {
 	const local = window.localStorage.getItem(localStorageId);
 	const loaded =
@@ -138,6 +140,17 @@ export const useSaveFile = (
 			pokemon: update,
 		}));
 	};
+	const applyStepsWalkedToTeamReducer = (steps: number) => {
+		setPokemonReducer(
+			saveFile.pokemon.map((p) => {
+				if (!p.onTeam) {
+					return p;
+				}
+
+				return applyHappinessFromWalking(p, steps);
+			})
+		);
+	};
 
 	return {
 		saveFile,
@@ -152,5 +165,6 @@ export const useSaveFile = (
 		setCharacterLocationReducer,
 		collectItemReducer,
 		setPokemonReducer,
+		applyStepsWalkedToTeamReducer,
 	};
 };

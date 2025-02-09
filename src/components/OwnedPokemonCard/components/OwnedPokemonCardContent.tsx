@@ -2,6 +2,7 @@ import { getStats } from '../../../functions/getStats';
 import { getTypeNames } from '../../../functions/getTypeNames';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { PokemonData } from '../../../interfaces/PokemonData';
+import { HappinessIcon } from '../../HappinessIcon/HappinessIcon';
 import { HpBar } from '../../HpBar/HpBar';
 import { LevelBar } from '../../LevelBar/LevelBar';
 
@@ -17,17 +18,23 @@ export const OwnedPokemonCardContent = ({
 		<div
 			style={{
 				paddingLeft: '.5rem',
-				display: 'flex',
+				display: 'grid',
 				gap: '1.5rem',
+				gridTemplateColumns: '1fr 1fr 1fr',
 				alignItems: 'center',
 			}}
 		>
 			<div>
-				<LevelBar xp={ownedPokemon.xp} />
+				<div style={{ display: 'flex', gap: '2.5rem' }}>
+					<HappinessIcon value={ownedPokemon.happiness} />
+					<LevelBar xp={ownedPokemon.xp} />
+				</div>
+
 				<HpBar
-					max={getStats(data.stats, ownedPokemon.xp, ownedPokemon.nature)['hp']}
+					max={getStats(data.stats, ownedPokemon.xp, ownedPokemon.nature).hp}
 					damage={ownedPokemon.damage}
 				/>
+				<strong>{ownedPokemon.stepsWalked}/255</strong>
 			</div>
 			<div>
 				<h4>{data.name.toUpperCase()}</h4>
