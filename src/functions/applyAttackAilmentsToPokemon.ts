@@ -12,7 +12,6 @@ export const applyAttackAilmentsToPokemon = (
 	const random = Math.random() * 100;
 	const ailment = attack.data.meta.ailment.name;
 
-	console.log(random, attack.data.meta.ailment_chance);
 	if (random < attack.data.meta.ailment_chance) {
 		if (!isPrimaryAilment({ type: ailment })) {
 			return pokemon;

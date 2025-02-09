@@ -43,7 +43,7 @@ export const determineCaptureSuccess = (
 	}
 	//max after 10 rounds
 	if (ball === 'timer-ball') {
-		ballfactor = Math.max(1.5, 0.5 + 0.01 * battleRounds);
+		ballfactor = Math.max(1.5, 0.5 + 0.1 * battleRounds);
 	}
 	if (ball === 'quick-ball' && battleRounds === 1) {
 		ballfactor = 1.5;

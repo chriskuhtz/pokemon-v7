@@ -38,6 +38,7 @@ export const Battle = ({
 		setNextPlayerMove,
 		battleWeather,
 		usedItems,
+		battleRound,
 	} = useBattleSteps({
 		initSaveFile,
 		syncAfterBattleEnd,
@@ -68,7 +69,11 @@ export const Battle = ({
 				player={slot1}
 				voidSteps={['MOVE_SELECTION']}
 			/>
-			<BattleInfo battleStep={battleStep} battleWeather={battleWeather} />
+			<BattleInfo
+				battleStep={battleStep}
+				battleWeather={battleWeather}
+				battleRound={battleRound}
+			/>
 			{latestToast && <Toast message={latestToast} />}
 
 			<div className="battle">

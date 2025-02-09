@@ -81,6 +81,7 @@ export interface ExtendedBattleStepHandler extends BattleStepHandler {
 	setBeginsThisTurn: React.Dispatch<React.SetStateAction<string | undefined>>;
 	followTurnPath: () => void;
 	startPath: (path: BattleStep[]) => void;
+	battleRound: number;
 }
 
 export const useBattleSteps = ({
@@ -99,12 +100,11 @@ export const useBattleSteps = ({
 	nextMove: BattleAction | undefined;
 	battleWeather: WeatherType | undefined;
 	usedItems: Inventory;
+	battleRound: number;
 } => {
 	const [battleStep, setBattleStep] = useState<BattleStep>('UNITIALIZED');
-	useEffect(() => console.log(battleStep), [battleStep]);
-	const [battleWeather, setBattleWeather] = useState<WeatherType | undefined>(
-		undefined
-	);
+	const [battleWeather, setBattleWeather] = useState<WeatherType | undefined>();
+	const [battleRound, setBattleRound] = useState<number>(0);
 	const [usedItems, setUsedItems] = useState<Inventory>(EmptyInventory);
 	const [coins, setCoins] = useState<number>(0);
 	const [caughtPokemon, setCaughtPokemon] = useState<CatchProcessInfo[]>([]);
@@ -115,6 +115,13 @@ export const useBattleSteps = ({
 		BattleAttack | undefined
 	>();
 	const [beginsThisTurn, setBeginsThisTurn] = useState<string | undefined>();
+
+	useEffect(() => {
+		console.log(battleStep);
+		if (battleStep === 'MOVE_HANDLING') {
+			setBattleRound((battleRound) => battleRound + 1);
+		}
+	}, [battleStep]);
 
 	const nextMove = useMemo(() => {
 		if (battleStep === 'EXECUTE_OPPONENT_MOVE') {
@@ -164,19 +171,18 @@ export const useBattleSteps = ({
 		//paths can have different starting points that are not included in the path
 		setBattleStep(path[0]);
 	}, []);
-
 	const followTurnPath = useCallback(() => {
 		if (beginsThisTurn === opponent?.id) {
 			followBattleStepPath(opponentIsFasterPath);
 		} else followBattleStepPath(playerIsFasterPath);
 	}, [beginsThisTurn, followBattleStepPath, opponent]);
-
 	const opponentHasBeenCaughtBefore = useMemo(() => {
 		//TODO: ignores evo stages right now, fix when implementing pokedex
 		return initSaveFile.pokemon.some((p) => p.dexId === opponent?.dexId);
 	}, [initSaveFile.pokemon, opponent?.dexId]);
 	const extendedPayload: ExtendedBattleStepHandler = useMemo(
 		() => ({
+			battleRound,
 			startPath,
 			followTurnPath,
 			setBeginsThisTurn,
@@ -199,6 +205,7 @@ export const useBattleSteps = ({
 			setCoins,
 		}),
 		[
+			battleRound,
 			startPath,
 			followTurnPath,
 			followBattleStepPath,
@@ -266,5 +273,6 @@ export const useBattleSteps = ({
 		setNextPlayerMove,
 		battleWeather,
 		usedItems,
+		battleRound,
 	};
 };
