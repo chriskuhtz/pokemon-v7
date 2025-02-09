@@ -42,6 +42,7 @@ export const abilityCheckList: {
 	{
 		name: 'sand-veil',
 		url: 'https://pokeapi.co/api/v2/ability/8/',
+		todos: ['evasion', 'sandstorm as weather type'],
 	},
 	{
 		name: 'static',
@@ -490,6 +491,7 @@ export const abilityNames = [
 	'sturdy',
 	'damp',
 	'limber',
+	'sand-veil',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

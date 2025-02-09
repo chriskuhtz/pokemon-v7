@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { determineCrit } from '../../../../../functions/determineCrit';
-import { determineMiss } from '../../../../../functions/determineHitOrMiss';
+import { determineMiss } from '../../../../../functions/determineMiss';
 import { determineMultiHits } from '../../../../../functions/determineMultiHits';
 import { recommendMove } from '../../../../../functions/recommendMove';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
@@ -26,7 +26,7 @@ export const useOpponentMoveSelection = ({
 				...chosenMove,
 				crit: determineCrit(chosenMove.data.meta.crit_rate, player.ability),
 				multiHits: determineMultiHits(chosenMove),
-				miss: determineMiss(chosenMove),
+				miss: determineMiss(chosenMove, player.ability, battleWeather),
 			});
 			setBattleStep('MOVE_HANDLING');
 		}
