@@ -111,6 +111,9 @@ export const BattleBanner = ({
 			if (opponent.primaryAilment?.type === 'freeze') {
 				return 'is frozen solid';
 			}
+			if (opponent.primaryAilment?.type === 'paralysis') {
+				return 'is fully paralyzed';
+			}
 			return 'why did you show this';
 		};
 		return (
@@ -129,6 +132,9 @@ export const BattleBanner = ({
 		const ailmentMessage = () => {
 			if (player.primaryAilment?.type === 'freeze') {
 				return 'is frozen solid';
+			}
+			if (player.primaryAilment?.type === 'paralysis') {
+				return 'is fully paralyzed';
 			}
 			return 'why did you show this';
 		};

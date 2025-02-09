@@ -13,6 +13,7 @@ import {
 	opponentFaintingPath,
 } from '../../../types/BattleStep';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
+import { pokemonCantMove } from '../../../../../functions/pokemonCantMove';
 
 export const useExecutePlayerMove = ({
 	battleStep,
@@ -36,11 +37,7 @@ export const useExecutePlayerMove = ({
 		if (battleStep !== 'EXECUTE_PLAYER_MOVE' || !player) {
 			return;
 		}
-		if (
-			['freeze', 'paralysis', 'sleep'].includes(
-				player.primaryAilment?.type ?? ''
-			)
-		) {
+		if (pokemonCantMove(player)) {
 			setBattleStep('PLAYER_UNABLE_TO_ATTACK');
 			setNextPlayerMove(undefined);
 			return;

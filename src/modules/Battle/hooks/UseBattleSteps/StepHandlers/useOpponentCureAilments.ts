@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { animationTimer } from '../../../../../constants/gameData';
+import { UNFREEZE_CHANCE } from '../../../../../interfaces/Ailment';
 import { opponentTurnPath } from '../../../types/BattleStep';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
@@ -15,7 +16,8 @@ export const useOpponentCureAilments = ({
 			return;
 		}
 		const defrosted =
-			opponent.primaryAilment?.type === 'freeze' && Math.random() < 0.1;
+			opponent.primaryAilment?.type === 'freeze' &&
+			Math.random() < UNFREEZE_CHANCE;
 		if (!opponent.primaryAilment || !defrosted) {
 			followBattleStepPath(opponentTurnPath);
 			return;
