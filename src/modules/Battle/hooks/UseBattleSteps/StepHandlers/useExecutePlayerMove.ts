@@ -39,7 +39,7 @@ export const useExecutePlayerMove = ({
 
 		const t = setTimeout(() => {
 			if (!player || !opponent) {
-				setBattleStep('ERROR');
+				throw new Error('no player or opponent');
 				return;
 			}
 			if (nextPlayerMove?.type === 'CatchProcessInfo') {

@@ -13,7 +13,7 @@ export const useMoveHandling = ({
 	useEffect(() => {
 		if (battleStep === 'MOVE_HANDLING') {
 			if (!opponent || !player || !nextOpponentMove || !nextPlayerMove) {
-				setBattleStep('ERROR');
+				throw new Error('invalid state');
 				return;
 			}
 

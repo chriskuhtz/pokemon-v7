@@ -40,7 +40,7 @@ export const useExecuteOpponentMove = ({
 
 		const t = setTimeout(() => {
 			if (!player || !opponent) {
-				setBattleStep('ERROR');
+				throw new Error('no player or opponent');
 				return;
 			}
 

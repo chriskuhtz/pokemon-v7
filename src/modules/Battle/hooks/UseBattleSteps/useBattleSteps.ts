@@ -1,11 +1,12 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { AddToastFunction } from '../../../../hooks/useToasts';
 import { BattleAttack } from '../../../../interfaces/BattleAttack';
 import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
 import { EmptyInventory, Inventory } from '../../../../interfaces/Inventory';
 import { PokeballType } from '../../../../interfaces/Item';
 import { SaveFile } from '../../../../interfaces/SaveFile';
-import { BattleStep } from '../../types/BattleStep';
+import { WeatherType } from '../../../../interfaces/Weather';
+import { BattleStep, battleStepPaths } from '../../types/BattleStep';
 import { useBattleEnd } from './StepHandlers/useBattleEnd';
 import { useCatchingSteps } from './StepHandlers/useCatchingSteps';
 import { useExecuteOpponentMove } from './StepHandlers/useExecuteOpponentMove';
@@ -31,7 +32,6 @@ import { usePlayerFlinched } from './StepHandlers/usePlayerFlinched';
 import { usePlayerIntro } from './StepHandlers/usePlayerIntro';
 import { usePlayerMissed } from './StepHandlers/usePlayerMissed';
 import { usePlayerUnableToAttack } from './StepHandlers/usePlayerUnableToAttack';
-import { WeatherType } from '../../../../interfaces/Weather';
 
 export interface CatchProcessInfo {
 	pokemon: BattlePokemon;
@@ -124,10 +124,22 @@ export const useBattleSteps = ({
 		return undefined;
 	}, [battleStep, nextOpponentMove, nextPlayerMove]);
 
+	const protectedSetBattleStep = useCallback(
+		(nextStep: BattleStep) => {
+			const availableNextSteps = battleStepPaths[battleStep];
+
+			if (!availableNextSteps.some((a) => a === nextStep)) {
+				throw new Error(`invalid path', ${battleStep} to ${nextStep}`);
+			}
+			setBattleStep(nextStep);
+		},
+		[battleStep]
+	);
+
 	const extendedPayload: ExtendedBattleStepHandler = useMemo(
 		() => ({
 			battleStep,
-			setBattleStep,
+			setBattleStep: protectedSetBattleStep,
 			player,
 			opponent,
 			dispatchToast,
@@ -146,6 +158,7 @@ export const useBattleSteps = ({
 		}),
 		[
 			battleStep,
+			protectedSetBattleStep,
 			player,
 			opponent,
 			dispatchToast,
@@ -158,8 +171,8 @@ export const useBattleSteps = ({
 		]
 	);
 
-	useOpponentIntro({ battleStep, setBattleStep });
-	usePlayerIntro({ battleStep, setBattleStep });
+	useOpponentIntro({ battleStep, setBattleStep: protectedSetBattleStep });
+	usePlayerIntro({ battleStep, setBattleStep: protectedSetBattleStep });
 	useOpponentEmerge(extendedPayload);
 	usePlayerEmerge(extendedPayload);
 	useHandlePlayerAbility(extendedPayload);
