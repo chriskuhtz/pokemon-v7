@@ -52,8 +52,6 @@ export type ChargeUp = OwnedPokemonMove & {
 	type: 'ChargeUp';
 	data: MoveDto;
 	crit?: boolean;
-	miss?: boolean;
-	multiHits?: number;
 };
 
 export type BattleAction = CatchProcessInfo | BattleAttack | ChargeUp;

@@ -3,6 +3,7 @@ import { animationTimer } from '../../../../../constants/gameData';
 import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/selfDestructingMoves';
 import { applyAttackToPokemon } from '../../../../../functions/applyAttackToPokemon';
 import { determineCrit } from '../../../../../functions/determineCrit';
+import { determineMiss } from '../../../../../functions/determineMiss';
 import { isKO } from '../../../../../functions/isKo';
 import { pokemonCantMove } from '../../../../../functions/pokemonCantMove';
 import { reduceMovePP } from '../../../../../functions/reduceMovePP';
@@ -79,7 +80,13 @@ export const useExecutePlayerMove = ({
 					followTurnPath();
 					return;
 				}
-				if (nextPlayerMove.miss) {
+				const miss = determineMiss(
+					nextPlayerMove,
+					player,
+					opponent,
+					battleWeather
+				);
+				if (miss) {
 					setPlayer(reduceMovePP(player, nextPlayerMove.name));
 					setNextPlayerMove(undefined);
 					setBattleStep('PLAYER_MISSED');

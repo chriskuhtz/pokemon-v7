@@ -10,21 +10,32 @@ export const useMoveSelection = ({
 	chargedUpPlayerMove,
 	setChargedUpPlayerMove,
 	setNextPlayerMove,
+	player,
+	opponent,
+	battleWeather,
 }: ExtendedBattleStepHandler) => {
 	useEffect(() => {
+		if (!player || !opponent) {
+			return;
+		}
 		if (battleStep === 'MOVE_SELECTION' && nextPlayerMove) {
 			followBattleStepPath(beginTurnPath);
 		}
 		if (battleStep === 'MOVE_SELECTION' && chargedUpPlayerMove) {
-			setNextPlayerMove(chargedUpPlayerMove);
+			setNextPlayerMove({
+				...chargedUpPlayerMove,
+			});
 			setChargedUpPlayerMove(undefined);
 			followBattleStepPath(beginTurnPath);
 		}
 	}, [
 		battleStep,
+		battleWeather,
 		chargedUpPlayerMove,
 		followBattleStepPath,
 		nextPlayerMove,
+		opponent,
+		player,
 		setChargedUpPlayerMove,
 		setNextPlayerMove,
 	]);

@@ -3,7 +3,6 @@ import { IoIosArrowBack } from 'react-icons/io';
 import { MoveCard } from '../../../components/MoveCard/MoveCard';
 import { baseSize } from '../../../constants/gameData';
 import { determineCrit } from '../../../functions/determineCrit';
-import { determineMiss } from '../../../functions/determineMiss';
 import { determineMultiHits } from '../../../functions/determineMultiHits';
 import { recommendMove } from '../../../functions/recommendMove';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
@@ -60,7 +59,7 @@ export const MoveSelectionMenu = ({
 										m.data.meta.crit_rate,
 										opponent.ability
 									),
-									miss: determineMiss(m, player, opponent, battleWeather),
+
 									multiHits: determineMultiHits(m),
 								})
 							}
