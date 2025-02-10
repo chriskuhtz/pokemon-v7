@@ -1,6 +1,6 @@
 import { AddToastFunction } from '../hooks/useToasts';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { applyStatBoostToPokemon } from './applyStatBoostToPokemon';
+import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 
 export const applyEndOfTurnAbility = ({
 	pokemon,
@@ -13,7 +13,7 @@ export const applyEndOfTurnAbility = ({
 }) => {
 	if (pokemon.ability === 'speed-boost') {
 		setPokemon(
-			applyStatBoostToPokemon(
+			applyStatChangeToPokemon(
 				pokemon,
 				'speed',
 				1,

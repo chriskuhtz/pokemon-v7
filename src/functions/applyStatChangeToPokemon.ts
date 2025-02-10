@@ -2,7 +2,7 @@ import { AddToastFunction } from '../hooks/useToasts';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { Stat } from '../interfaces/StatObject';
 
-export const applyStatBoostToPokemon = (
+export const applyStatChangeToPokemon = (
 	pokemon: BattlePokemon,
 	stat: Stat,
 	modifier: number,
