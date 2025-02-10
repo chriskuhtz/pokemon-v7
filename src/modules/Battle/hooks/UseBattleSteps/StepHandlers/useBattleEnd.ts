@@ -3,6 +3,7 @@ import { animationTimer } from '../../../../../constants/gameData';
 import { occupantsRecord } from '../../../../../constants/occupantsRecord';
 import { receiveNewPokemonFunction } from '../../../../../functions/receiveNewPokemonFunction';
 import { reduceBattlePokemonToOwnedPokemon } from '../../../../../functions/reduceBattlePokemonToOwnedPokemon';
+import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
 import {
 	Inventory,
 	joinInventories,
@@ -22,6 +23,7 @@ export const useBattleEnd = ({
 	battleStep,
 	syncAfterBattleEnd,
 	goBack,
+	player,
 }: {
 	initSaveFile: SaveFile;
 	caughtPokemon: CatchProcessInfo[];
@@ -30,6 +32,7 @@ export const useBattleEnd = ({
 	battleStep: BattleStep;
 	syncAfterBattleEnd: (update: SaveFile) => void;
 	goBack: () => void;
+	player: BattlePokemon | undefined;
 }) => {
 	// handle 'BATTLE_WON'
 	const endBattle = useCallback(
@@ -48,6 +51,13 @@ export const useBattleEnd = ({
 					}),
 					updatedPokemon
 				);
+			});
+
+			updatedPokemon = updatedPokemon.map((u) => {
+				if (u.id !== player?.id) {
+					return u;
+				}
+				return reduceBattlePokemonToOwnedPokemon(player);
 			});
 
 			const newLocation: CharacterLocationData = won
@@ -69,7 +79,15 @@ export const useBattleEnd = ({
 			syncAfterBattleEnd(newSaveFile);
 			goBack();
 		},
-		[caughtPokemon, coins, goBack, initSaveFile, syncAfterBattleEnd, usedItems]
+		[
+			caughtPokemon,
+			coins,
+			goBack,
+			initSaveFile,
+			player,
+			syncAfterBattleEnd,
+			usedItems,
+		]
 	);
 	useEffect(() => {
 		if (battleStep !== 'BATTLE_WON') {
