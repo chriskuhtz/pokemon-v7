@@ -18,8 +18,9 @@ export const reduceBattlePokemonToOwnedPokemon = (
 			: undefined,
 
 		id: newMon.id,
-		//TODO: persist damage? Only when healing/revive exists
-		damage: 0,
+
+		damage: newMon.damage,
+		primaryAilment: newMon.primaryAilment,
 		ball: newMon.ball,
 		ownerId: newMon.ownerId,
 		nature: newMon.nature,

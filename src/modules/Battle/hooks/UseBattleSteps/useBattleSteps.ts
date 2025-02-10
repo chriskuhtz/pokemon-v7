@@ -291,6 +291,7 @@ export const useBattleSteps = ({
 		initSaveFile,
 		syncAfterBattleEnd,
 		goBack,
+		player,
 	});
 
 	const initBattle = () => {

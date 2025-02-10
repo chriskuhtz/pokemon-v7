@@ -3,10 +3,10 @@ import { baseSize, battleSpriteSize } from '../../../constants/gameData';
 import { typeColors } from '../../../constants/typeColors';
 import { determineTypeFactor } from '../../../functions/determineTypeFactor';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
+import { hexToRgb } from '../../../functions/hexToRGB';
 import { BattleAttack } from '../../../interfaces/BattleAttack';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Banner } from '../../../uiComponents/Banner/Banner';
-import { hexToRgb } from '../../../functions/hexToRGB';
 
 export const MoveExecutionBanner = ({
 	attack,
@@ -37,6 +37,13 @@ export const MoveExecutionBanner = ({
 		return attack.crit ? 'Critical Hit!' : undefined;
 	}, [attack]);
 
+	const againstMessage = useMemo(() => {
+		if (attack.data.target.name === 'user') {
+			return '';
+		}
+		return `against ${target.data.name}`;
+	}, [attack, target]);
+
 	return (
 		<Banner
 			flexDirection={spriteFirst ? 'row-reverse' : 'row'}
@@ -45,7 +52,7 @@ export const MoveExecutionBanner = ({
 			<img height={baseSize} src={`/typeIcons/${attack.data.type.name}.png`} />
 			<div>
 				<h3>
-					{attacker.data.name} used {attack.name} against {target.data.name}
+					{attacker.data.name} used {attack.name} {againstMessage}
 				</h3>
 				{attack.multiHits && (
 					<h5

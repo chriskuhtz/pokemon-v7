@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { IoMdMenu } from 'react-icons/io';
+import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 import { animationTimer, baseSize } from '../../constants/gameData';
 import { assembleMap } from '../../functions/assembleMap';
@@ -23,7 +24,6 @@ import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
-import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -220,7 +220,7 @@ export const Overworld = ({
 	return (
 		<>
 			<IoMdMenu
-				style={{ position: 'absolute', top: '1.5rem', left: '1rem' }}
+				style={{ position: 'absolute', top: '1.5rem', left: '1rem', zIndex: 1 }}
 				onClick={() => openMenu(stepsTaken)}
 				size={baseSize / 2}
 			/>

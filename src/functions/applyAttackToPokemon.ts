@@ -6,6 +6,7 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { applyAilmentToPokemon } from './applyAilmentToPokemon';
 import { applyAttackAilmentsToPokemon } from './applyAttackAilmentsToPokemon';
+import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { calculateDamage } from './calculateDamage';
 import { reduceMovePP } from './reduceMovePP';
 
@@ -26,6 +27,21 @@ export const applyAttackToPokemon = ({
 	weather: WeatherType | undefined;
 	dispatchToast: AddToastFunction;
 }): { updatedAttacker: BattlePokemon; updatedTarget: BattlePokemon } => {
+	if (attack.data.target.name === 'user') {
+		let updatedMon = { ...attacker };
+
+		attack.data.stat_changes.forEach((s) => {
+			updatedMon = applyStatChangeToPokemon(
+				updatedMon,
+				s.stat.name,
+				s.change,
+				dispatchToast
+			);
+		});
+		const res = reduceMovePP(updatedMon, attack.name);
+		setAttacker(res);
+		return { updatedAttacker: res, updatedTarget: target };
+	}
 	const damage = calculateDamage(
 		attacker,
 		target,

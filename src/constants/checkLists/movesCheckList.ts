@@ -70,6 +70,7 @@ export const movesCheckList: {
 	{
 		name: 'swords-dance',
 		url: 'https://pokeapi.co/api/v2/move/14/',
+		todos: ['stat boost moves'],
 	},
 	{ name: 'cut', url: 'https://pokeapi.co/api/v2/move/15/' },
 	{ name: 'gust', url: 'https://pokeapi.co/api/v2/move/16/' },
@@ -1264,6 +1265,7 @@ export const handledMoves = [
 	...ohkoMoves,
 	'razor-wind',
 	'water-gun',
+	'swords-dance',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
