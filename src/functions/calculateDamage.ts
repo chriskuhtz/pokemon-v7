@@ -29,7 +29,8 @@ export const calculateDamage = (
 		return target.stats.hp;
 	}
 
-	if (attack.data.damage_class.name !== 'physical') {
+	const damageClass = attack.data.damage_class.name;
+	if (damageClass == 'status') {
 		console.error('what is this', attack);
 		return 0;
 	}
@@ -47,8 +48,10 @@ export const calculateDamage = (
 
 	const levelFactor = (2 * level) / 5 + 2;
 	const power = attack.data.power ?? 0;
-	const atk = attacker.stats.attack;
-	const def = target.stats.defense;
+	const atk =
+		damageClass === 'physical' ? attacker.stats.attack : attacker.stats.spatk;
+	const def =
+		damageClass === 'physical' ? target.stats.defense : target.stats.spdef;
 	const statFactor = atk / def;
 
 	const pureDamage = (levelFactor * power * statFactor) / 50 + 2;

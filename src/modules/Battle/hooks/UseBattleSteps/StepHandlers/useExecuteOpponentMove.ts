@@ -3,6 +3,7 @@ import { animationTimer } from '../../../../../constants/gameData';
 import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/selfDestructingMoves';
 import { applyAttackToPokemon } from '../../../../../functions/applyAttackToPokemon';
 import { determineCrit } from '../../../../../functions/determineCrit';
+import { determineMiss } from '../../../../../functions/determineMiss';
 import { isKO } from '../../../../../functions/isKo';
 import { pokemonCantMove } from '../../../../../functions/pokemonCantMove';
 import { reduceMovePP } from '../../../../../functions/reduceMovePP';
@@ -15,7 +16,6 @@ export const useExecuteOpponentMove = ({
 	battleStep,
 	player,
 	opponent,
-	nextPlayerMove,
 	setPlayer,
 	setNextPlayerMove,
 	setBattleStep,
@@ -27,12 +27,16 @@ export const useExecuteOpponentMove = ({
 	setCoins,
 	followTurnPath,
 	startPath,
+	chargedUpOpponentMove,
 }: ExtendedBattleStepHandler & {
 	setBattleStep: (x: BattleStep) => void;
 }) => {
 	useEffect(() => {
 		if (battleStep !== 'EXECUTE_OPPONENT_MOVE' || !opponent) {
 			return;
+		}
+		if (chargedUpOpponentMove) {
+			followTurnPath();
 		}
 		if (pokemonCantMove(opponent)) {
 			setBattleStep('OPPONENT_UNABLE_TO_ATTACK');
@@ -68,7 +72,13 @@ export const useExecuteOpponentMove = ({
 					followTurnPath();
 					return;
 				}
-				if (nextOpponentMove.miss) {
+				const miss = determineMiss(
+					nextOpponentMove,
+					opponent,
+					player,
+					battleWeather
+				);
+				if (miss) {
 					setOpponent(reduceMovePP(opponent, nextOpponentMove.name));
 					setNextPlayerMove(undefined);
 					setBattleStep('OPPONENT_MISSED');
@@ -121,10 +131,10 @@ export const useExecuteOpponentMove = ({
 	}, [
 		battleStep,
 		battleWeather,
+		chargedUpOpponentMove,
 		dispatchToast,
 		followTurnPath,
 		nextOpponentMove,
-		nextPlayerMove,
 		opponent,
 		player,
 		setBattleStep,

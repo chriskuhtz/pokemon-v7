@@ -1,3 +1,5 @@
+import { ohkoMoves } from '../ohkoMoves';
+
 export const movesCheckList: {
 	name: string;
 	url: string;
@@ -63,6 +65,7 @@ export const movesCheckList: {
 	{
 		name: 'razor-wind',
 		url: 'https://pokeapi.co/api/v2/move/13/',
+		handled: true,
 	},
 	{
 		name: 'swords-dance',
@@ -124,10 +127,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/32/',
 		handled: true,
 	},
-	{ name: 'tackle', url: 'https://pokeapi.co/api/v2/move/33/' },
+	{ name: 'tackle', url: 'https://pokeapi.co/api/v2/move/33/', handled: true },
 	{
 		name: 'body-slam',
 		url: 'https://pokeapi.co/api/v2/move/34/',
+		handled: true,
 	},
 	{ name: 'wrap', url: 'https://pokeapi.co/api/v2/move/35/' },
 	{
@@ -1254,10 +1258,10 @@ export const handledMoves = [
 	'thunder-punch',
 	'scratch',
 	'vice-grip',
-	'guillotine',
-	'sheer-cold',
-	'fissure',
-	'horn-drill',
+	'tackle',
+	'body-slam',
+	...ohkoMoves,
+	'razor-wind',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

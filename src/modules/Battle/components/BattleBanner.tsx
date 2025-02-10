@@ -1,5 +1,6 @@
 import { PokemonIconBanner } from '../../../components/PokemonIconBanner/PokemonIconBanner';
 import { battleSpriteSize } from '../../../constants/gameData';
+import { secondTurnMoves } from '../../../constants/secondTurnMoves';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
@@ -85,6 +86,46 @@ export const BattleBanner = ({
 				flexDirection="row-reverse"
 			/>
 		);
+	}
+	if (battleStep === 'PLAYER_CHARGE_UP') {
+		if (
+			nextMove &&
+			nextMove.type !== 'CatchProcessInfo' &&
+			secondTurnMoves.includes(nextMove.name)
+		) {
+			return (
+				<Banner flexDirection={'row'}>
+					<img
+						height={battleSpriteSize}
+						width={battleSpriteSize}
+						src={getPokemonSprite(player.dexId)}
+					/>
+					<h3>
+						{player.data.name} is charging up {nextMove.name}
+					</h3>
+				</Banner>
+			);
+		}
+	}
+	if (battleStep === 'OPPONENT_CHARGE_UP') {
+		if (
+			nextMove &&
+			nextMove.type !== 'CatchProcessInfo' &&
+			secondTurnMoves.includes(nextMove.name)
+		) {
+			return (
+				<Banner flexDirection={'row-reverse'}>
+					<img
+						height={battleSpriteSize}
+						width={battleSpriteSize}
+						src={getPokemonSprite(opponent.dexId)}
+					/>
+					<h3>
+						{opponent.data.name} is charging up {nextMove.name}
+					</h3>
+				</Banner>
+			);
+		}
 	}
 	if (battleStep === 'OPPONENT_UNABLE_TO_ATTACK') {
 		const ailmentMessage = () => {
