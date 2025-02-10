@@ -1,3 +1,4 @@
+import { secondTurnMoves } from '../constants/secondTurnMoves';
 import { BattleAttack } from '../interfaces/BattleAttack';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
@@ -31,8 +32,12 @@ export const recommendMove = (
 			//higher weight for higher crit chance, does not consider target ability
 			const critWeighted =
 				accuracyWeighted + accuracyWeighted * (a.data.meta.crit_rate / 2);
+			//two turn moves get lower weight
+			const twoTurnFactor = secondTurnMoves.includes(a.name) ? 0.5 : 1;
 
-			return { move: a, weight: critWeighted };
+			const weighted = critWeighted * twoTurnFactor;
+
+			return { move: a, weight: weighted };
 		})
 		.sort((a, b) => b.weight - a.weight);
 
