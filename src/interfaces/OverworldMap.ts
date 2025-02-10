@@ -10,6 +10,7 @@
 import { Inventory } from './Inventory';
 import { ItemType } from './Item';
 import { CharacterOrientation, MapId } from './SaveFile';
+import { SpriteEnum } from './SpriteEnum';
 import { WeatherType } from './Weather';
 
 export interface OverworldItem {
@@ -34,6 +35,7 @@ export interface OverworldMerchant {
 	map: MapId;
 	inventory: Partial<Inventory>;
 	dialogue: string[];
+	sprite: SpriteEnum;
 }
 export type Occupant = OverworldItem | OverworldPC | OverworldMerchant;
 

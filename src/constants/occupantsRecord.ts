@@ -1,4 +1,5 @@
 import { Occupant } from '../interfaces/OverworldMap';
+import { SpriteEnum } from '../interfaces/SpriteEnum';
 import { STANDARD_BUY_MARKET } from './standardBuyMarket';
 
 export const occupantsRecord: Record<number, Occupant> = {
@@ -27,7 +28,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		map: 'testMap',
 	},
 	//Trainers start at 20000
-	//Merchants start at 30000, they have sprite 113
+	//Merchants start at 30000,
 	300001: {
 		type: 'MERCHANT',
 		x: 8,
@@ -36,5 +37,6 @@ export const occupantsRecord: Record<number, Occupant> = {
 		map: 'testMap',
 		inventory: STANDARD_BUY_MARKET,
 		dialogue: ['Get your supplies here'],
+		sprite: SpriteEnum['clerkMale'],
 	},
 };

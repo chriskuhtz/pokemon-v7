@@ -88,17 +88,17 @@ export const useDrawOccupants = (
 				}
 			});
 
-			img.src = getSource(occ.type);
+			img.src = getSource(occ);
 		}, []);
 	}, [canvasId, map, statefulOccupants]);
 
 	return changeOccupant;
 };
 
-const getSource = (type: Occupant['type']) => {
-	switch (type) {
+const getSource = (occ: Occupant) => {
+	switch (occ.type) {
 		case 'MERCHANT':
-			return '/npcs/NPC_113.png';
+			return `/npcs/NPC_${occ.sprite}.png`;
 		case 'PC':
 			return '/mapObjects/pc.png';
 		case 'ITEM':
