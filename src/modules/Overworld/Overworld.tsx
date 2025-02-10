@@ -14,7 +14,6 @@ import {
 	OverworldMap,
 } from '../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
-import { RoutesType } from '../../interfaces/Routing';
 import { CharacterLocationData } from '../../interfaces/SaveFile';
 import { Banner } from '../../uiComponents/Banner/Banner';
 import './Overworld.css';
@@ -42,8 +41,9 @@ export const Overworld = ({
 	startEncounter,
 	firstTeamMember,
 	collectedItems,
-	navigate,
 	goToMarket,
+	talkToNurse,
+	openStorage,
 }: {
 	openMenu: (stepsTaken: number) => void;
 	playerLocation: CharacterLocationData;
@@ -53,9 +53,10 @@ export const Overworld = ({
 	collectedItems: number[];
 	startEncounter: (x: OverworldEncounter, stepsTaken: number) => void;
 	encounterRateModifier?: number;
-	navigate: (x: RoutesType, stepsTaken: number) => void;
+	openStorage: (stepsTaken: number) => void;
 	goToMarket: (marketInventory: Partial<Inventory>, stepsTaken: number) => void;
 	firstTeamMember: OwnedPokemon;
+	talkToNurse: (id: number) => void;
 }) => {
 	const assembledMap = useMemo(
 		() => assembleMap(map, collectedItems),
@@ -139,11 +140,10 @@ export const Overworld = ({
 			if (data.type === 'PC') {
 				addDialogue({
 					message: 'Accessing Pokemon Storage',
-					onRemoval: () => navigate('STORAGE', stepsTaken),
+					onRemoval: () => openStorage(stepsTaken),
 				});
 				return;
 			}
-
 			if (data.type === 'MERCHANT') {
 				changeOccupant(Number.parseInt(id), {
 					...data,
@@ -160,6 +160,23 @@ export const Overworld = ({
 				);
 				return;
 			}
+			if (data.type === 'NURSE') {
+				changeOccupant(Number.parseInt(id), {
+					...data,
+					orientation: getOppositeDirection(playerLocation.orientation),
+				});
+
+				data.dialogue.forEach((d, i) =>
+					addDialogue({
+						message: d,
+						onRemoval:
+							i === data.dialogue.length - 1
+								? () => talkToNurse(Number.parseInt(id))
+								: undefined,
+					})
+				);
+				return;
+			}
 
 			console.error('what is this occupant', occ);
 		},
@@ -167,9 +184,10 @@ export const Overworld = ({
 			changeOccupant,
 			collectItem,
 			goToMarket,
-			navigate,
+			openStorage,
 			playerLocation.orientation,
 			stepsTaken,
+			talkToNurse,
 		]
 	);
 

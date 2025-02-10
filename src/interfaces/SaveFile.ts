@@ -34,4 +34,5 @@ export interface SaveFile {
 	};
 	location: CharacterLocationData;
 	collectedItems: number[];
+	lastNurse: number;
 }

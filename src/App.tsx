@@ -34,6 +34,7 @@ export const App = (): JSX.Element => {
 		collectItemReducer,
 		setPokemonReducer,
 		applyStepsWalkedToTeamReducer,
+		talkToNurseReducer,
 	} = useSaveFile(testState, true);
 
 	const {
@@ -144,11 +145,12 @@ export const App = (): JSX.Element => {
 				navigateAwayFromOverworld('BATTLE', steps);
 			}}
 			firstTeamMember={firstTeamMember}
-			navigate={navigateAwayFromOverworld}
 			goToMarket={(i, steps) => {
 				navigateAwayFromOverworld('MARKET', steps);
 				setCurrentMarketInventory(i);
 			}}
+			openStorage={(steps) => navigateAwayFromOverworld('STORAGE', steps)}
+			talkToNurse={talkToNurseReducer}
 		/>
 	);
 };

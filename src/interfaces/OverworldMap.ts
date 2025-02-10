@@ -34,8 +34,22 @@ export interface OverworldMerchant {
 	map: MapId;
 	inventory: Partial<Inventory>;
 	dialogue: string[];
+	sprite: '113';
 }
-export type Occupant = OverworldItem | OverworldPC | OverworldMerchant;
+export interface OverworldNurse {
+	type: 'NURSE';
+	x: number;
+	y: number;
+	orientation: CharacterOrientation;
+	map: MapId;
+	dialogue: string[];
+	sprite: '115';
+}
+export type Occupant =
+	| OverworldItem
+	| OverworldPC
+	| OverworldMerchant
+	| OverworldNurse;
 
 export interface OverworldEncounter {
 	dexId: number;

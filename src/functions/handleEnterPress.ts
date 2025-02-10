@@ -16,6 +16,7 @@ export const handleEnterPress = (
 		([id, occ]) =>
 			occ.x === focusedField.x &&
 			occ.y === focusedField.y &&
+			occ.map === playerLocation.mapId &&
 			!collectedItems.find((c) => c === parseInt(id))
 	);
 
