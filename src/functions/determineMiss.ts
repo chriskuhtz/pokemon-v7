@@ -15,6 +15,9 @@ export const determineMiss = (
 	target: BattlePokemon,
 	weather?: WeatherType
 ): boolean => {
+	if (attack.data.accuracy === null) {
+		return false;
+	}
 	const weatherFactor =
 		weather === 'sandstorm' && target.ability === 'sand-veil' ? 0.8 : 1;
 
