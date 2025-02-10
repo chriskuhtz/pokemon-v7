@@ -7,10 +7,25 @@ export const useMoveSelection = ({
 
 	nextPlayerMove,
 	followBattleStepPath,
+	chargedUpPlayerMove,
+	setChargedUpPlayerMove,
+	setNextPlayerMove,
 }: ExtendedBattleStepHandler) => {
 	useEffect(() => {
 		if (battleStep === 'MOVE_SELECTION' && nextPlayerMove) {
 			followBattleStepPath(beginTurnPath);
 		}
-	}, [battleStep, followBattleStepPath, nextPlayerMove]);
+		if (battleStep === 'MOVE_SELECTION' && chargedUpPlayerMove) {
+			setNextPlayerMove(chargedUpPlayerMove);
+			setChargedUpPlayerMove(undefined);
+			followBattleStepPath(beginTurnPath);
+		}
+	}, [
+		battleStep,
+		chargedUpPlayerMove,
+		followBattleStepPath,
+		nextPlayerMove,
+		setChargedUpPlayerMove,
+		setNextPlayerMove,
+	]);
 };

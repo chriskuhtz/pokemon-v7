@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { secondTurnMoves } from '../../../../../constants/secondTurnMoves';
 import { determineCrit } from '../../../../../functions/determineCrit';
 import { determineMiss } from '../../../../../functions/determineMiss';
 import { determineMultiHits } from '../../../../../functions/determineMultiHits';
@@ -14,6 +15,8 @@ export const useOpponentMoveSelection = ({
 	setNextOpponentMove,
 	battleWeather,
 	followBattleStepPath,
+	chargedUpOpponentMove,
+	setChargedUpOpponentMove,
 }: ExtendedBattleStepHandler) => {
 	useEffect(() => {
 		if (
@@ -22,7 +25,14 @@ export const useOpponentMoveSelection = ({
 			opponent &&
 			player
 		) {
+			if (chargedUpOpponentMove) {
+				setNextOpponentMove(chargedUpOpponentMove);
+				setChargedUpOpponentMove(undefined);
+				followBattleStepPath(beginTurnPath);
+				return;
+			}
 			const chosenMove = recommendMove(opponent, player, battleWeather);
+
 			setNextOpponentMove({
 				...chosenMove,
 				crit: determineCrit(
@@ -32,16 +42,21 @@ export const useOpponentMoveSelection = ({
 				),
 				multiHits: determineMultiHits(chosenMove),
 				miss: determineMiss(chosenMove, opponent, player, battleWeather),
+				type: secondTurnMoves.includes(chosenMove.name)
+					? 'ChargeUp'
+					: 'BattleAttack',
 			});
 			followBattleStepPath(beginTurnPath);
 		}
 	}, [
 		battleStep,
 		battleWeather,
+		chargedUpOpponentMove,
 		followBattleStepPath,
 		nextOpponentMove,
 		opponent,
 		player,
+		setChargedUpOpponentMove,
 		setNextOpponentMove,
 	]);
 };

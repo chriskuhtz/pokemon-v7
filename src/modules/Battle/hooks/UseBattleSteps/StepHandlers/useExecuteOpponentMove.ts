@@ -15,7 +15,6 @@ export const useExecuteOpponentMove = ({
 	battleStep,
 	player,
 	opponent,
-	nextPlayerMove,
 	setPlayer,
 	setNextPlayerMove,
 	setBattleStep,
@@ -27,12 +26,16 @@ export const useExecuteOpponentMove = ({
 	setCoins,
 	followTurnPath,
 	startPath,
+	chargedUpOpponentMove,
 }: ExtendedBattleStepHandler & {
 	setBattleStep: (x: BattleStep) => void;
 }) => {
 	useEffect(() => {
 		if (battleStep !== 'EXECUTE_OPPONENT_MOVE' || !opponent) {
 			return;
+		}
+		if (chargedUpOpponentMove) {
+			followTurnPath();
 		}
 		if (pokemonCantMove(opponent)) {
 			setBattleStep('OPPONENT_UNABLE_TO_ATTACK');
@@ -121,10 +124,10 @@ export const useExecuteOpponentMove = ({
 	}, [
 		battleStep,
 		battleWeather,
+		chargedUpOpponentMove,
 		dispatchToast,
 		followTurnPath,
 		nextOpponentMove,
-		nextPlayerMove,
 		opponent,
 		player,
 		setBattleStep,

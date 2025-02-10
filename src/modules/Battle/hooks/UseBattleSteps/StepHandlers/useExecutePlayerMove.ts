@@ -30,12 +30,16 @@ export const useExecutePlayerMove = ({
 	followBattleStepPath,
 	startPath,
 	followTurnPath,
+	chargedUpPlayerMove,
 }: ExtendedBattleStepHandler & {
 	setBattleStep: (x: BattleStep) => void;
 }) => {
 	useEffect(() => {
 		if (battleStep !== 'EXECUTE_PLAYER_MOVE' || !player) {
 			return;
+		}
+		if (chargedUpPlayerMove) {
+			followTurnPath();
 		}
 		if (pokemonCantMove(player)) {
 			setBattleStep('PLAYER_UNABLE_TO_ATTACK');
@@ -128,6 +132,7 @@ export const useExecutePlayerMove = ({
 	}, [
 		battleStep,
 		battleWeather,
+		chargedUpPlayerMove,
 		dispatchToast,
 		followBattleStepPath,
 		followTurnPath,

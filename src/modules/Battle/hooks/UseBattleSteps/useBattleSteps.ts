@@ -4,6 +4,8 @@ import { BattleAttack } from '../../../../interfaces/BattleAttack';
 import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
 import { EmptyInventory, Inventory } from '../../../../interfaces/Inventory';
 import { PokeballType } from '../../../../interfaces/Item';
+import { MoveDto } from '../../../../interfaces/Move';
+import { OwnedPokemonMove } from '../../../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../../../interfaces/SaveFile';
 import { WeatherType } from '../../../../interfaces/Weather';
 import {
@@ -23,6 +25,7 @@ import { useHandlePlayerEndOfTurnAbility } from './StepHandlers/useHandlePlayerE
 import { useHandlePlayerEndOfTurnDamage } from './StepHandlers/useHandlePlayerEndOfTurnDamage';
 import { useMoveHandling } from './StepHandlers/useMoveHandling';
 import { useMoveSelection } from './StepHandlers/useMoveSelection';
+import { useOpponentChargeUp } from './StepHandlers/useOpponentChargeUp';
 import { useOpponentCureAilments } from './StepHandlers/useOpponentCureAilments';
 import { useOpponentEmerge } from './StepHandlers/useOpponentEmerge';
 import { useOpponentFainting } from './StepHandlers/useOpponentFainting';
@@ -31,6 +34,7 @@ import { useOpponentIntro } from './StepHandlers/useOpponentIntro';
 import { useOpponentMissed } from './StepHandlers/useOpponentMissed';
 import { useOpponentMoveSelection } from './StepHandlers/useOpponentMoveSelection';
 import { useOpponentUnableToAttack } from './StepHandlers/useOpponentUnableToAttack';
+import { usePlayerChargeUp } from './StepHandlers/usePlayerChargeUp';
 import { usePlayerCureAilments } from './StepHandlers/usePlayerCureAilments';
 import { usePlayerEmerge } from './StepHandlers/usePlayerEmerge';
 import { usePlayerFainting } from './StepHandlers/usePlayerFainting';
@@ -44,8 +48,15 @@ export interface CatchProcessInfo {
 	ball: PokeballType;
 	type: 'CatchProcessInfo';
 }
+export type ChargeUp = OwnedPokemonMove & {
+	type: 'ChargeUp';
+	data: MoveDto;
+	crit?: boolean;
+	miss?: boolean;
+	multiHits?: number;
+};
 
-export type BattleAction = CatchProcessInfo | BattleAttack;
+export type BattleAction = CatchProcessInfo | BattleAttack | ChargeUp;
 
 interface UseBattleStepsProps {
 	initSaveFile: SaveFile;
@@ -72,8 +83,12 @@ export interface ExtendedBattleStepHandler extends BattleStepHandler {
 	dispatchToast: AddToastFunction;
 	nextPlayerMove: BattleAction | undefined;
 	nextOpponentMove: BattleAction | undefined;
-	setNextOpponentMove: (x: BattleAttack | undefined) => void;
+	setNextOpponentMove: (x: BattleAction | undefined) => void;
 	setNextPlayerMove: (x: BattleAction | undefined) => void;
+	chargedUpPlayerMove: BattleAttack | undefined;
+	chargedUpOpponentMove: BattleAttack | undefined;
+	setChargedUpOpponentMove: (x: BattleAttack | undefined) => void;
+	setChargedUpPlayerMove: (x: BattleAttack | undefined) => void;
 	setCaughtPokemon: React.Dispatch<React.SetStateAction<CatchProcessInfo[]>>;
 	setUsedItems: React.Dispatch<React.SetStateAction<Inventory>>;
 	setCoins: React.Dispatch<React.SetStateAction<number>>;
@@ -112,6 +127,12 @@ export const useBattleSteps = ({
 		BattleAction | undefined
 	>();
 	const [nextOpponentMove, setNextOpponentMove] = useState<
+		BattleAction | undefined
+	>();
+	const [chargedUpPlayerMove, setChargedUpPlayerMove] = useState<
+		BattleAttack | undefined
+	>();
+	const [chargedUpOpponentMove, setChargedUpOpponentMove] = useState<
 		BattleAttack | undefined
 	>();
 	const [beginsThisTurn, setBeginsThisTurn] = useState<string | undefined>();
@@ -124,7 +145,10 @@ export const useBattleSteps = ({
 	}, [battleStep]);
 
 	const nextMove = useMemo(() => {
-		if (battleStep === 'EXECUTE_OPPONENT_MOVE') {
+		if (
+			battleStep === 'EXECUTE_OPPONENT_MOVE' ||
+			battleStep === 'OPPONENT_CHARGE_UP'
+		) {
 			return nextOpponentMove;
 		}
 		if (
@@ -134,7 +158,8 @@ export const useBattleSteps = ({
 			battleStep === 'CATCHING_PROCESS_3' ||
 			battleStep === 'CATCHING_PROCESS_4' ||
 			battleStep === 'CATCHING_SUCCESS' ||
-			battleStep === 'CATCHING_FAILURE'
+			battleStep === 'CATCHING_FAILURE' ||
+			battleStep === 'PLAYER_CHARGE_UP'
 		) {
 			return nextPlayerMove;
 		}
@@ -182,6 +207,10 @@ export const useBattleSteps = ({
 	}, [initSaveFile.pokemon, opponent?.dexId]);
 	const extendedPayload: ExtendedBattleStepHandler = useMemo(
 		() => ({
+			chargedUpOpponentMove,
+			chargedUpPlayerMove,
+			setChargedUpOpponentMove,
+			setChargedUpPlayerMove,
 			battleRound,
 			startPath,
 			followTurnPath,
@@ -205,6 +234,8 @@ export const useBattleSteps = ({
 			setCoins,
 		}),
 		[
+			chargedUpOpponentMove,
+			chargedUpPlayerMove,
 			battleRound,
 			startPath,
 			followTurnPath,
@@ -233,6 +264,8 @@ export const useBattleSteps = ({
 	useMoveHandling(extendedPayload);
 	usePlayerCureAilments(extendedPayload);
 	useOpponentCureAilments(extendedPayload);
+	usePlayerChargeUp(extendedPayload);
+	useOpponentChargeUp(extendedPayload);
 	useExecutePlayerMove({
 		...extendedPayload,
 		setBattleStep: protectedSetBattleStep,

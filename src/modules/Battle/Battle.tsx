@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { secondTurnMoves } from '../../constants/secondTurnMoves';
 import { useToasts } from '../../hooks/useToasts';
 import { joinInventories } from '../../interfaces/Inventory';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
@@ -94,7 +95,17 @@ export const Battle = ({
 					<BattleActions
 						battleWeather={battleWeather}
 						battleStep={battleStep}
-						chooseMove={setNextPlayerMove}
+						chooseMove={(x) => {
+							if (x.type === 'CatchProcessInfo') {
+								setNextPlayerMove(x);
+								return;
+							}
+							if (secondTurnMoves.includes(x.name)) {
+								setNextPlayerMove({ ...x, type: 'ChargeUp' });
+								return;
+							}
+							setNextPlayerMove(x);
+						}}
 						inventory={joinInventories(initSaveFile.inventory, usedItems, true)}
 						player={slot1}
 						opponent={slot3}
