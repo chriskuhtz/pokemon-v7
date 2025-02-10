@@ -20,6 +20,7 @@ export const Banner = ({
 				maxWidth: '100dvw',
 				overflow: 'hidden',
 				top: 0,
+				zIndex: 1,
 			}}
 		>
 			<div

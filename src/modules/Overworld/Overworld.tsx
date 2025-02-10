@@ -4,6 +4,7 @@ import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 import { animationTimer, baseSize } from '../../constants/gameData';
 import { assembleMap } from '../../functions/assembleMap';
 import { getOppositeDirection } from '../../functions/getOppositeDirection';
+import { isEvening, isMorning, isNight } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { isValidOverWorldMap } from '../../functions/isValidOverworldMap';
 import { Inventory } from '../../interfaces/Inventory';
@@ -22,11 +23,21 @@ import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
+import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
 const occupantsCanvasId = 'occs';
 
+const getOverworldShaderColor = (): string => {
+	if (isNight()) {
+		return 'rgba(23, 44, 79,.4)';
+	}
+	if (isEvening() || isMorning()) {
+		return 'rgba(156, 98, 0,.2)';
+	}
+	return 'rgba(255,255,255,0)';
+};
 export interface Dialogue {
 	message: string;
 	onRemoval?: () => void;
@@ -207,50 +218,80 @@ export const Overworld = ({
 	}
 
 	return (
-		<div className="overworldPage">
-			{dialogues.length > 0 && (
-				<Banner>
-					<h2>{dialogues[0].message}</h2>
-				</Banner>
-			)}
+		<>
 			<IoMdMenu
 				style={{ position: 'absolute', top: '1.5rem', left: '1rem' }}
 				onClick={() => openMenu(stepsTaken)}
 				size={baseSize / 2}
 			/>
-			<div style={{ position: 'absolute', top: '1.5rem', right: '1rem' }}>
-				{' '}
+			<div
+				style={{
+					position: 'absolute',
+					top: '1.5rem',
+					right: '1rem',
+					display: 'flex',
+					gap: '1rem',
+				}}
+			>
 				<WeatherIcon weather={assembledMap.weather} />
+				<TimeOfDayIcon />
 			</div>
-			<div>
-				<canvas id={playerCanvasId} height={baseSize} width={baseSize} />
-				<div
-					className="backgroundLayer"
-					style={{
-						top: -baseSize - playerLocation.y * baseSize,
-						left: -playerLocation.x * baseSize,
-					}}
-				>
+			{dialogues.length > 0 && (
+				<Banner>
+					<h2>{dialogues[0].message}</h2>
+				</Banner>
+			)}
+			<div className="overworldPage">
+				<div id="canvasses" style={{ position: 'relative' }}>
+					<div
+						id="shader"
+						style={{
+							width: map.width * baseSize,
+							height: map.height * baseSize,
+							top: -playerLocation.y * baseSize,
+							left: -playerLocation.x * baseSize,
+							position: 'absolute',
+							backgroundColor: getOverworldShaderColor(),
+							zIndex: 0,
+						}}
+					/>
+					<canvas id={playerCanvasId} height={baseSize} width={baseSize} />
 					<canvas
+						style={{
+							top: -playerLocation.y * baseSize,
+							left: -playerLocation.x * baseSize,
+							zIndex: -1,
+							position: 'absolute',
+						}}
+						id={occupantsCanvasId}
+						height={map.height * baseSize}
+						width={map.width * baseSize}
+					/>
+					<div
+						id="shader"
+						style={{
+							width: map.width * baseSize,
+							height: map.height * baseSize,
+							top: -playerLocation.y * baseSize,
+							left: -playerLocation.x * baseSize,
+							position: 'absolute',
+							backgroundColor: getOverworldShaderColor(),
+							zIndex: -2,
+						}}
+					/>
+					<canvas
+						style={{
+							top: -playerLocation.y * baseSize,
+							left: -playerLocation.x * baseSize,
+							zIndex: -3,
+							position: 'absolute',
+						}}
 						id={backgroundCanvasId}
 						height={map.height * baseSize}
 						width={map.width * baseSize}
 					/>
 				</div>
-				<div
-					className="backgroundLayer"
-					style={{
-						top: 2 * -baseSize - playerLocation.y * baseSize,
-						left: -playerLocation.x * baseSize,
-					}}
-				>
-					<canvas
-						id={occupantsCanvasId}
-						height={map.height * baseSize}
-						width={map.width * baseSize}
-					/>
-				</div>
 			</div>
-		</div>
+		</>
 	);
 };

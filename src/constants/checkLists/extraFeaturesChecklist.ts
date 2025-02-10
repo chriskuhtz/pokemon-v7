@@ -22,7 +22,7 @@ export const extraFeatureCheckList: {
 	{ name: 'extract battleAction Sections', handled: true },
 	{
 		name: 'nurse',
-		todos: ['heals team', 'you get teleported back to nurse on loss'],
+		handled: true,
 	},
 	{ name: 'starter selection' },
 	{ name: 'settings' },
@@ -52,4 +52,5 @@ export const extraFeatureCheckList: {
 	{
 		name: 'only factor volt-absorb etc into recommendation after it has been revealed',
 	},
+	{ name: 'different encounters for time of day' },
 ];

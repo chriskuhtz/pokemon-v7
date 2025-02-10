@@ -9,4 +9,6 @@ export const STANDARD_BUY_MARKET: Partial<Inventory> = {
 	'nest-ball': 1,
 	'repeat-ball': 1,
 	'timer-ball': 1,
+	'dusk-ball': 1,
+	'premier-ball': 1,
 };

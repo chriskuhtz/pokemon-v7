@@ -1,7 +1,7 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { PokeballType } from '../interfaces/Item';
 import { calculateLevelData } from './calculateLevelData';
-import { isNight } from './isNight';
+import { isEvening, isNight } from './getTimeOfDay';
 
 export const determineCaptureSuccess = (
 	ball: PokeballType,
@@ -48,7 +48,10 @@ export const determineCaptureSuccess = (
 	if (ball === 'quick-ball' && battleRounds === 1) {
 		ballfactor = 1.5;
 	}
-	if (ball === 'dusk-ball' && (location === 'CAVE' || isNight())) {
+	if (
+		ball === 'dusk-ball' &&
+		(location === 'CAVE' || isNight() || isEvening())
+	) {
 		ballfactor = 1.5;
 	}
 

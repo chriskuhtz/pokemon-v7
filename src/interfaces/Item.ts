@@ -62,6 +62,7 @@ export const balltypes = [
 	'heal-ball',
 	'quick-ball',
 	'cherish-ball',
+	'premier-ball',
 ] as const;
 
 export const ppBoostItemTypes = ['pp-up', 'pp-max'] as const;

@@ -63,10 +63,12 @@ export const itemsCheckList: {
 	{
 		name: 'premier-ball',
 		url: 'https://pokeapi.co/api/v2/item/12/',
+		handled: true,
 	},
 	{
 		name: 'dusk-ball',
 		url: 'https://pokeapi.co/api/v2/item/13/',
+		handled: true,
 	},
 	{
 		name: 'heal-ball',
