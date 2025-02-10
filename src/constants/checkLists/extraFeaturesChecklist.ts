@@ -20,7 +20,10 @@ export const extraFeatureCheckList: {
 	{ name: 'define nextSteps in battleStep type', handled: true },
 	{ name: 'extract banners', handled: true },
 	{ name: 'extract battleAction Sections', handled: true },
-	{ name: 'Poke Center' },
+	{
+		name: 'nurse',
+		todos: ['heals team', 'you get teleported back to nurse on loss'],
+	},
 	{ name: 'starter selection' },
 	{ name: 'settings' },
 	{ name: 'badges' },

@@ -1,12 +1,16 @@
 import { useCallback, useEffect } from 'react';
 import { animationTimer } from '../../../../../constants/gameData';
+import { occupantsRecord } from '../../../../../constants/occupantsRecord';
 import { receiveNewPokemonFunction } from '../../../../../functions/receiveNewPokemonFunction';
 import { reduceBattlePokemonToOwnedPokemon } from '../../../../../functions/reduceBattlePokemonToOwnedPokemon';
 import {
 	Inventory,
 	joinInventories,
 } from '../../../../../interfaces/Inventory';
-import { SaveFile } from '../../../../../interfaces/SaveFile';
+import {
+	CharacterLocationData,
+	SaveFile,
+} from '../../../../../interfaces/SaveFile';
 import { BattleStep } from '../../../types/BattleStep';
 import { CatchProcessInfo } from '../useBattleSteps';
 
@@ -28,40 +32,50 @@ export const useBattleEnd = ({
 	goBack: () => void;
 }) => {
 	// handle 'BATTLE_WON'
-	const endBattle = useCallback(() => {
-		let updatedPokemon = [...initSaveFile.pokemon];
+	const endBattle = useCallback(
+		(won?: boolean) => {
+			let updatedPokemon = [...initSaveFile.pokemon];
 
-		caughtPokemon.forEach(({ pokemon, ball }) => {
-			updatedPokemon = receiveNewPokemonFunction(
-				reduceBattlePokemonToOwnedPokemon({
-					...pokemon,
-					ownerId: initSaveFile.playerId,
-					ball,
-				}),
-				updatedPokemon
-			);
-		});
-		const newSaveFile: SaveFile = {
-			...initSaveFile,
-			money: initSaveFile.money + coins,
-			inventory: joinInventories(initSaveFile.inventory, usedItems, true),
-			pokemon: updatedPokemon,
-		};
-		syncAfterBattleEnd(newSaveFile);
-		goBack();
-	}, [
-		caughtPokemon,
-		coins,
-		goBack,
-		initSaveFile,
-		syncAfterBattleEnd,
-		usedItems,
-	]);
+			const lastNurseLocation = occupantsRecord[initSaveFile.lastNurse];
+			const { x, y, map } = lastNurseLocation;
+
+			caughtPokemon.forEach(({ pokemon, ball }) => {
+				updatedPokemon = receiveNewPokemonFunction(
+					reduceBattlePokemonToOwnedPokemon({
+						...pokemon,
+						ownerId: initSaveFile.playerId,
+						ball,
+					}),
+					updatedPokemon
+				);
+			});
+
+			const newLocation: CharacterLocationData = won
+				? initSaveFile.location
+				: {
+						x,
+						y: y + 1,
+						mapId: map,
+						orientation: 'UP',
+						forwardFoot: 'CENTER1',
+				  };
+			const newSaveFile: SaveFile = {
+				...initSaveFile,
+				location: newLocation,
+				money: initSaveFile.money + coins,
+				inventory: joinInventories(initSaveFile.inventory, usedItems, true),
+				pokemon: updatedPokemon,
+			};
+			syncAfterBattleEnd(newSaveFile);
+			goBack();
+		},
+		[caughtPokemon, coins, goBack, initSaveFile, syncAfterBattleEnd, usedItems]
+	);
 	useEffect(() => {
 		if (battleStep !== 'BATTLE_WON') {
 			return;
 		}
-		const t = setTimeout(() => endBattle(), animationTimer);
+		const t = setTimeout(() => endBattle(true), animationTimer);
 
 		return () => clearTimeout(t);
 	}, [battleStep, endBattle]);
@@ -70,7 +84,7 @@ export const useBattleEnd = ({
 		if (battleStep !== 'BATTLE_LOST') {
 			return;
 		}
-		const t = setTimeout(() => endBattle(), animationTimer);
+		const t = setTimeout(() => endBattle(false), animationTimer);
 
 		return () => clearTimeout(t);
 	}, [battleStep, endBattle]);

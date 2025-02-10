@@ -48,6 +48,7 @@ export const testState: SaveFile = {
 		y: 0,
 	},
 	collectedItems: [],
+	lastNurse: 400001,
 };
 
 export const testOpponent: OwnedPokemon = {

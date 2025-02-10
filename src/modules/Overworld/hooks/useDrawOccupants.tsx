@@ -56,6 +56,7 @@ export const useDrawOccupants = (
 			img.addEventListener('load', () => {
 				switch (occ.type) {
 					case 'MERCHANT':
+					case 'NURSE':
 						ctx?.clearRect(
 							baseSize * occ.x,
 							baseSize * occ.y,
@@ -98,6 +99,7 @@ export const useDrawOccupants = (
 const getSource = (occ: Occupant) => {
 	switch (occ.type) {
 		case 'MERCHANT':
+		case 'NURSE':
 			return `/npcs/NPC_${occ.sprite}.png`;
 		case 'PC':
 			return '/mapObjects/pc.png';

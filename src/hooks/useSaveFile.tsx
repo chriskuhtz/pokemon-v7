@@ -34,6 +34,7 @@ export const useSaveFile = (
 	collectItemReducer: (item: [string, OverworldItem]) => void;
 	setPokemonReducer: (update: OwnedPokemon[]) => void;
 	applyStepsWalkedToTeamReducer: (steps: number) => void;
+	talkToNurseReducer: (id: number) => void;
 } => {
 	const local = window.localStorage.getItem(localStorageId);
 	const loaded =
@@ -151,6 +152,27 @@ export const useSaveFile = (
 			})
 		);
 	};
+	const talkToNurseReducer = (id: number) => {
+		setSaveFile((gm) => ({
+			...gm,
+			lastNurse: id,
+			pokemon: gm.pokemon.map((p) => {
+				if (!p.onTeam) {
+					return p;
+				}
+
+				return {
+					...p,
+					damage: 0,
+					primaryAilment: undefined,
+					firstMove: { ...p.firstMove, usedPP: 0 },
+					secondMove: p.secondMove ? { ...p.secondMove, usedPP: 0 } : undefined,
+					thirdMove: p.thirdMove ? { ...p.thirdMove, usedPP: 0 } : undefined,
+					fourthMove: p.fourthMove ? { ...p.fourthMove, usedPP: 0 } : undefined,
+				};
+			}),
+		}));
+	};
 
 	return {
 		saveFile,
@@ -166,5 +188,6 @@ export const useSaveFile = (
 		collectItemReducer,
 		setPokemonReducer,
 		applyStepsWalkedToTeamReducer,
+		talkToNurseReducer,
 	};
 };

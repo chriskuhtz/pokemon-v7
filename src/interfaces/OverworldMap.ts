@@ -10,7 +10,6 @@
 import { Inventory } from './Inventory';
 import { ItemType } from './Item';
 import { CharacterOrientation, MapId } from './SaveFile';
-import { SpriteEnum } from './SpriteEnum';
 import { WeatherType } from './Weather';
 
 export interface OverworldItem {
@@ -35,9 +34,22 @@ export interface OverworldMerchant {
 	map: MapId;
 	inventory: Partial<Inventory>;
 	dialogue: string[];
-	sprite: SpriteEnum;
+	sprite: '113';
 }
-export type Occupant = OverworldItem | OverworldPC | OverworldMerchant;
+export interface OverworldNurse {
+	type: 'NURSE';
+	x: number;
+	y: number;
+	orientation: CharacterOrientation;
+	map: MapId;
+	dialogue: string[];
+	sprite: '115';
+}
+export type Occupant =
+	| OverworldItem
+	| OverworldPC
+	| OverworldMerchant
+	| OverworldNurse;
 
 export interface OverworldEncounter {
 	dexId: number;
