@@ -183,6 +183,7 @@ export const movesCheckList: {
 	{
 		name: 'water-gun',
 		url: 'https://pokeapi.co/api/v2/move/55/',
+		handled: true,
 	},
 	{
 		name: 'hydro-pump',
@@ -1262,6 +1263,7 @@ export const handledMoves = [
 	'body-slam',
 	...ohkoMoves,
 	'razor-wind',
+	'water-gun',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

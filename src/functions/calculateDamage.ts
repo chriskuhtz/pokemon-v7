@@ -1,12 +1,19 @@
+import { AbilityName } from '../constants/checkLists/abilityCheckList';
 import { ohkoMoves } from '../constants/ohkoMoves';
 import { AddToastFunction } from '../hooks/useToasts';
 import { BattleAttack } from '../interfaces/BattleAttack';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { PokemonType } from '../interfaces/PokemonType';
 import { WeatherType } from '../interfaces/Weather';
 import { calculateLevelData } from './calculateLevelData';
 import { determineStabFactor } from './determineStabFactor';
 import { determineTypeFactor } from './determineTypeFactor';
 import { determineWeatherFactor } from './determineWeatherFactor';
+
+export const DamageAbsorb: Partial<Record<AbilityName, PokemonType>> = {
+	'volt-absorb': 'electric',
+	'water-absorb': 'water',
+};
 
 export const calculateDamage = (
 	attacker: BattlePokemon,
@@ -34,14 +41,15 @@ export const calculateDamage = (
 		console.error('what is this', attack);
 		return 0;
 	}
-	if (
-		attack.data.type.name === 'electric' &&
-		target.ability === 'volt-absorb'
-	) {
-		if (dispatchToast) {
-			dispatchToast(`${target.data.name} was healed by volt absorb`);
+
+	const absorbAbility = DamageAbsorb[target.ability];
+
+	if (absorbAbility === attack.data.type.name) {
+		const res = Math.max(-Math.floor(target.stats.hp / 4), -target.damage);
+		if (dispatchToast && res < 0) {
+			dispatchToast(`${target.data.name} was healed by ${target.ability}`);
 		}
-		return Math.max(-Math.floor(target.stats.hp / 4), -target.damage);
+		return res;
 	}
 
 	const { level } = calculateLevelData(attacker.xp);
