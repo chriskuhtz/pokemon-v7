@@ -6,6 +6,7 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { PokemonType } from '../interfaces/PokemonType';
 import { WeatherType } from '../interfaces/Weather';
 import { calculateLevelData } from './calculateLevelData';
+import { calculateModifiedStat } from './calculateModifiedStat';
 import { determineStabFactor } from './determineStabFactor';
 import { determineTypeFactor } from './determineTypeFactor';
 import { determineWeatherFactor } from './determineWeatherFactor';
@@ -57,9 +58,13 @@ export const calculateDamage = (
 	const levelFactor = (2 * level) / 5 + 2;
 	const power = attack.data.power ?? 0;
 	const atk =
-		damageClass === 'physical' ? attacker.stats.attack : attacker.stats.spatk;
+		damageClass === 'physical'
+			? calculateModifiedStat(attacker.stats.attack, attacker.statBoosts.attack)
+			: calculateModifiedStat(attacker.stats.spatk, attacker.statBoosts.spatk);
 	const def =
-		damageClass === 'physical' ? target.stats.defense : target.stats.spdef;
+		damageClass === 'physical'
+			? calculateModifiedStat(target.stats.defense, target.statBoosts.defense)
+			: calculateModifiedStat(target.stats.spdef, target.statBoosts.spdef);
 	const statFactor = atk / def;
 
 	const pureDamage = (levelFactor * power * statFactor) / 50 + 2;
@@ -68,6 +73,7 @@ export const calculateDamage = (
 	const parentalBondFactor = 1;
 	const weatherFactor = determineWeatherFactor(attack, weather);
 	const glaiveRushFactor = 1;
+	//TODO: Crits ignore boosted defense
 	const critFactor = attack.crit ? 2 : 1;
 	const randomFactor = 0.85 + Math.random() * 0.15;
 	const stabFactor = determineStabFactor(attacker, attack);
