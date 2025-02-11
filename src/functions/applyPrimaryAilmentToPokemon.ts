@@ -4,7 +4,7 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { getTypeNames } from './getTypeNames';
 import { isKO } from './isKo';
 
-export const applyAilmentToPokemon = (
+export const applyPrimaryAilmentToPokemon = (
 	pokemon: BattlePokemon,
 	ailment: PrimaryAilment['type'],
 	dispatchToast: AddToastFunction,

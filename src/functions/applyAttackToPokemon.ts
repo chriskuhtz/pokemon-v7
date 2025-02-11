@@ -4,8 +4,8 @@ import { STATIC_CHANCE } from '../interfaces/Ailment';
 import { BattleAttack } from '../interfaces/BattleAttack';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
-import { applyAilmentToPokemon } from './applyAilmentToPokemon';
 import { applyAttackAilmentsToPokemon } from './applyAttackAilmentsToPokemon';
+import { applyPrimaryAilmentToPokemon } from './applyPrimaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { calculateDamage } from './calculateDamage';
 import { reduceMovePP } from './reduceMovePP';
@@ -60,7 +60,7 @@ export const applyAttackToPokemon = ({
 		contactMoves.includes(attack.name) &&
 		Math.random() < STATIC_CHANCE
 	) {
-		updatedAttacker = applyAilmentToPokemon(
+		updatedAttacker = applyPrimaryAilmentToPokemon(
 			updatedAttacker,
 			'paralysis',
 			dispatchToast,

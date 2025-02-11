@@ -2,7 +2,7 @@ import { AddToastFunction } from '../hooks/useToasts';
 import { isPrimaryAilment, PrimaryAilment } from '../interfaces/Ailment';
 import { BattleAttack } from '../interfaces/BattleAttack';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { applyAilmentToPokemon } from './applyAilmentToPokemon';
+import { applyPrimaryAilmentToPokemon } from './applyPrimaryAilmentToPokemon';
 
 export const applyAttackAilmentsToPokemon = (
 	pokemon: BattlePokemon,
@@ -16,7 +16,7 @@ export const applyAttackAilmentsToPokemon = (
 		if (!isPrimaryAilment({ type: ailment })) {
 			return pokemon;
 		}
-		return applyAilmentToPokemon(
+		return applyPrimaryAilmentToPokemon(
 			pokemon,
 			ailment as PrimaryAilment['type'],
 			dispatchToast
