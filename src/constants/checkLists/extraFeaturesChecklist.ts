@@ -53,4 +53,6 @@ export const extraFeatureCheckList: {
 		name: 'only factor volt-absorb etc into recommendation after it has been revealed',
 	},
 	{ name: 'different encounters for time of day' },
+	{ name: 'smooth transition with dialogue after Starter Selection' },
+	{ name: 'player sprite selection' },
 ];
