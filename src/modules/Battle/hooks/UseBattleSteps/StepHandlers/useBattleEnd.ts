@@ -44,11 +44,14 @@ export const useBattleEnd = ({
 
 			caughtPokemon.forEach(({ pokemon, ball }) => {
 				updatedPokemon = receiveNewPokemonFunction(
-					reduceBattlePokemonToOwnedPokemon({
-						...pokemon,
-						ownerId: initSaveFile.playerId,
-						ball,
-					}),
+					reduceBattlePokemonToOwnedPokemon(
+						{
+							...pokemon,
+							ownerId: initSaveFile.playerId,
+							ball,
+						},
+						ball === 'heal-ball'
+					),
 					updatedPokemon
 				);
 			});

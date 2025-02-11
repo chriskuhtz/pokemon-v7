@@ -1,10 +1,12 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { fullyHealPokemon } from './fullyHealPokemon';
 
 export const reduceBattlePokemonToOwnedPokemon = (
-	newMon: BattlePokemon
+	newMon: BattlePokemon,
+	heal?: boolean
 ): OwnedPokemon => {
-	return {
+	const res = {
 		dexId: newMon.dexId,
 		firstMove: { name: newMon.firstMove.name, usedPP: newMon.firstMove.usedPP },
 		secondMove: newMon.secondMove
@@ -30,4 +32,10 @@ export const reduceBattlePokemonToOwnedPokemon = (
 		happiness: newMon.happiness,
 		stepsWalked: newMon.stepsWalked,
 	};
+
+	if (heal) {
+		return fullyHealPokemon(res);
+	}
+
+	return res;
 };
