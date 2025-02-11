@@ -73,6 +73,7 @@ export const itemsCheckList: {
 	{
 		name: 'heal-ball',
 		url: 'https://pokeapi.co/api/v2/item/14/',
+		handled: true,
 	},
 	{
 		name: 'quick-ball',

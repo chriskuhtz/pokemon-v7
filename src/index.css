@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap');
 
 body {
+	text-transform: uppercase;
 	font-family: 'Doto';
 	margin: 0;
-	text-transform: uppercase;
 }
 h4,
 h5,
@@ -16,6 +16,10 @@ input {
 	border-radius: 9000px;
 	padding: 0.25rem 0.25rem 0.25rem 0.5rem;
 	text-align: center;
+	text-transform: uppercase;
+	font-family: 'Doto';
+	font-size: large;
+	font-weight: 900;
 }
 button {
 	border: 2px solid black;
@@ -23,4 +27,7 @@ button {
 	padding: 1rem 2rem;
 	text-align: center;
 	background: none;
+	text-transform: uppercase;
+	font-family: 'Doto';
+	font-weight: 900;
 }

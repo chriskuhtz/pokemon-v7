@@ -34,7 +34,6 @@ export const OwnedPokemonCardContent = ({
 					max={getStats(data.stats, ownedPokemon.xp, ownedPokemon.nature).hp}
 					damage={ownedPokemon.damage}
 				/>
-				<strong>{ownedPokemon.stepsWalked}/255</strong>
 			</div>
 			<div>
 				<h4>{data.name.toUpperCase()}</h4>
