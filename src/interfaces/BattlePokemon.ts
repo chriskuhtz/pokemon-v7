@@ -1,3 +1,4 @@
+import { SecondaryAilment } from './Ailment';
 import { BattleAttack } from './BattleAttack';
 import { OwnedPokemon } from './OwnedPokemon';
 import { PokemonData } from './PokemonData';
@@ -12,4 +13,5 @@ export interface BattlePokemon extends OwnedPokemon {
 	data: PokemonData;
 	statBoosts: StatObject;
 	capture_rate: number;
+	secondaryAilments: SecondaryAilment[];
 }

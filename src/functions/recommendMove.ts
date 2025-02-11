@@ -5,6 +5,7 @@ import { WeatherType } from '../interfaces/Weather';
 import { calculateDamage } from './calculateDamage';
 
 //TODO: Different Strategies
+//TODO: setup moves?
 
 export const recommendMove = (
 	attacker: BattlePokemon,
