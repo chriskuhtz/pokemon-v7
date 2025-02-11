@@ -5,11 +5,13 @@ export const Stack = ({
 	gap,
 	mode,
 	justifyContent,
+	alignItems,
 }: {
 	children: ReactNode[];
 	gap?: number;
 	mode: 'row' | 'column';
 	justifyContent?: CSSProperties['justifyContent'];
+	alignItems?: CSSProperties['alignItems'];
 }): JSX.Element => {
 	return (
 		<div
@@ -19,6 +21,7 @@ export const Stack = ({
 				flexWrap: 'wrap',
 				gap: `${gap ?? 0.5}rem`,
 				justifyContent,
+				alignItems,
 			}}
 		>
 			{children}

@@ -15,4 +15,12 @@ input {
 	border: 2px solid black;
 	border-radius: 9000px;
 	padding: 0.25rem 0.25rem 0.25rem 0.5rem;
+	text-align: center;
+}
+button {
+	border: 2px solid black;
+	border-radius: 9000px;
+	padding: 1rem 2rem;
+	text-align: center;
+	background: none;
 }

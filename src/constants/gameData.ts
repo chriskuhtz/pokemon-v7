@@ -7,7 +7,23 @@ export const baseSize = 64;
 export const battleSpriteSize = baseSize * 2;
 export const animationTimer = 16000 / fps;
 
-const ownerId = 'Bear';
+export const testPokemon: OwnedPokemon = {
+	dexId: 217,
+	ownerId: 'test',
+	id: 'bingo',
+	ball: 'master-ball',
+	onTeam: true,
+	firstMove: { name: 'razor-wind', usedPP: 0 },
+	secondMove: { name: 'karate-chop', usedPP: 0 },
+	thirdMove: { name: 'pay-day', usedPP: 0 },
+	fourthMove: { name: 'swords-dance', usedPP: 0 },
+	damage: 0,
+	nature: 'adamant',
+	xp: 100000,
+	ability: 'sand-veil',
+	happiness: 70,
+	stepsWalked: 0,
+};
 export const testState: SaveFile = {
 	inventory: generateInventory({
 		'master-ball': 10,
@@ -16,27 +32,9 @@ export const testState: SaveFile = {
 		'poke-ball': 10,
 		'great-ball': 10,
 	}),
-	playerId: ownerId,
+	playerId: '',
 	money: 5000,
-	pokemon: [
-		{
-			dexId: 217,
-			ownerId,
-			id: 'bingo',
-			ball: 'master-ball',
-			onTeam: true,
-			firstMove: { name: 'razor-wind', usedPP: 0 },
-			secondMove: { name: 'karate-chop', usedPP: 0 },
-			thirdMove: { name: 'pay-day', usedPP: 0 },
-			fourthMove: { name: 'swords-dance', usedPP: 0 },
-			damage: 0,
-			nature: 'adamant',
-			xp: 100000,
-			ability: 'sand-veil',
-			happiness: 70,
-			stepsWalked: 0,
-		},
-	],
+	pokemon: [],
 	meta: {
 		activeTab: 'MAIN',
 	},

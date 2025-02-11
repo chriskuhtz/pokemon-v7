@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { v4 } from 'uuid';
 import { abilityNames } from './constants/checkLists/abilityCheckList';
-import { testOpponent, testState } from './constants/gameData';
+import { testOpponent, testPokemon, testState } from './constants/gameData';
 import { testMap } from './constants/maps/testmap';
 import { STANDARD_BUY_MARKET } from './constants/standardBuyMarket';
 import { useSaveFile } from './hooks/useSaveFile';
@@ -16,6 +16,7 @@ import { Market } from './modules/Market/Market';
 import { SellMarket } from './modules/Market/SellMarket';
 import { Overworld } from './modules/Overworld/Overworld';
 import { PokemonStorage } from './modules/PokemonStorage/PokemonStorage';
+import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { Team } from './modules/Team/Team';
 
 export const App = (): JSX.Element => {
@@ -35,6 +36,7 @@ export const App = (): JSX.Element => {
 		setPokemonReducer,
 		applyStepsWalkedToTeamReducer,
 		talkToNurseReducer,
+		patchSaveFileReducer,
 	} = useSaveFile(testState, true);
 
 	const {
@@ -50,6 +52,26 @@ export const App = (): JSX.Element => {
 
 	const firstTeamMember = team[0];
 
+	if (activeTab === 'STARTER_SELECTION') {
+		return (
+			<StarterSelection
+				proceed={(name: string, starterId: number) => {
+					patchSaveFileReducer({
+						playerId: name,
+						pokemon: [
+							{
+								...testPokemon,
+								dexId: starterId,
+								ownerId: name,
+								onTeam: true,
+							},
+						],
+						meta: { activeTab: 'OVERWORLD' },
+					});
+				}}
+			/>
+		);
+	}
 	if (activeTab === 'MAIN') {
 		return (
 			<MainMenu

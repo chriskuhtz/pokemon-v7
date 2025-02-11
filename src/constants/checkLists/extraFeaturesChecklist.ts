@@ -24,7 +24,7 @@ export const extraFeatureCheckList: {
 		name: 'nurse',
 		handled: true,
 	},
-	{ name: 'starter selection' },
+	{ name: 'starter selection and name', handled: true },
 	{ name: 'settings' },
 	{ name: 'badges' },
 	{ name: 'quests' },

@@ -114,6 +114,14 @@ export const useSaveFile = (
 	const setActiveTabReducer = (update: RoutesType) => {
 		setSaveFile((s) => ({ ...s, meta: { ...s.meta, activeTab: update } }));
 	};
+	useEffect(() => {
+		if (
+			saveFile.meta.activeTab !== 'STARTER_SELECTION' &&
+			(saveFile.playerId === '' || saveFile.pokemon.length === 0)
+		) {
+			setActiveTabReducer('STARTER_SELECTION');
+		}
+	}, [saveFile.meta.activeTab, saveFile.playerId, saveFile.pokemon.length]);
 
 	const setCharacterLocationReducer = (update: CharacterLocationData) => {
 		setSaveFile((s) => ({
