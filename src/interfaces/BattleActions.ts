@@ -1,5 +1,5 @@
 import { BattlePokemon } from './BattlePokemon';
-import { PokeballType } from './Item';
+import { HealingItemType, PokeballType } from './Item';
 import { MoveDto } from './Move';
 import { OwnedPokemonMove } from './OwnedPokemon';
 
@@ -19,5 +19,14 @@ export type ChargeUp = OwnedPokemonMove & {
 	data: MoveDto;
 	crit?: boolean;
 };
+export interface InBattleItem {
+	pokemon: BattlePokemon;
+	item: HealingItemType;
+	type: 'InBattleItem';
+}
 
-export type BattleAction = CatchProcessInfo | BattleAttack | ChargeUp;
+export type BattleAction =
+	| CatchProcessInfo
+	| BattleAttack
+	| ChargeUp
+	| InBattleItem;

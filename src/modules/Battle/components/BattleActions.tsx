@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { BattleAction } from '../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import { isPokeball, PokeballType } from '../../../interfaces/Item';
@@ -7,9 +8,9 @@ import { BattleStep } from '../types/BattleStep';
 import { BallSelectionMenu } from './BallSelectionMenu';
 import { BattleActionsMainMenu } from './BattleActionsMainMenu';
 import { MoveSelectionMenu } from './MoveSelectionMenu';
-import { BattleAction } from '../../../interfaces/BattleActions';
+import { HealingItemSelectionMenu } from './HealingItemSelectionMenu';
 
-export type BattleMenu = 'MAIN' | 'BALLS' | 'MOVES';
+export type BattleMenu = 'MAIN' | 'BALLS' | 'MOVES' | 'HEALING_ITEMS';
 
 export const BattleActions = ({
 	inventory,
@@ -40,6 +41,16 @@ export const BattleActions = ({
 	if (menu === 'BALLS') {
 		return (
 			<BallSelectionMenu
+				inventory={inventory}
+				chooseMove={chooseMove}
+				opponent={opponent}
+				goBack={() => setMenu('MAIN')}
+			/>
+		);
+	}
+	if (menu === 'HEALING_ITEMS') {
+		return (
+			<HealingItemSelectionMenu
 				inventory={inventory}
 				chooseMove={chooseMove}
 				opponent={opponent}

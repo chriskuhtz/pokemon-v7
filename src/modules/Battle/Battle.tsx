@@ -97,7 +97,7 @@ export const Battle = ({
 						battleWeather={battleWeather}
 						battleStep={battleStep}
 						chooseMove={(x) => {
-							if (x.type === 'CatchProcessInfo') {
+							if (x.type === 'CatchProcessInfo' || x.type === 'InBattleItem') {
 								setNextPlayerMove(x);
 								return;
 							}

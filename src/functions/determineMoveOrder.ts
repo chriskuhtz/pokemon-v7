@@ -10,9 +10,14 @@ export const determineMoveOrder = (
 	playerMove: BattleAction
 ): string => {
 	//catching always goes first
-	if (playerMove.type === 'CatchProcessInfo') {
+
+	if (
+		playerMove.type === 'CatchProcessInfo' ||
+		playerMove.type === 'InBattleItem'
+	) {
 		return player.id;
 	}
+
 	const playerSpeed =
 		calculateModifiedStat(player.stats.speed, player.statBoosts.speed) *
 		(player.primaryAilment?.type === 'paralysis' ? PARA_SPEED_FACTOR : 1);

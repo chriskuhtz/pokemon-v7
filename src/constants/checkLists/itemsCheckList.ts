@@ -88,11 +88,7 @@ export const itemsCheckList: {
 	{
 		name: 'potion',
 		url: 'https://pokeapi.co/api/v2/item/17/',
-		todos: [
-			'concept of partial heal',
-			'using potion onClick in Battle',
-			'using potion from bag',
-		],
+		handled: true,
 	},
 	{
 		name: 'antidote',

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { animationTimer } from '../../../../../constants/gameData';
 import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/selfDestructingMoves';
 import { applyAttackToPokemon } from '../../../../../functions/applyAttackToPokemon';
+import { applyItemToPokemon } from '../../../../../functions/applyItemToPokemon';
 import { determineCrit } from '../../../../../functions/determineCrit';
 import { determineMiss } from '../../../../../functions/determineMiss';
 import { isKO } from '../../../../../functions/isKo';
@@ -9,6 +10,7 @@ import { pokemonCantMove } from '../../../../../functions/pokemonCantMove';
 import { reduceMovePP } from '../../../../../functions/reduceMovePP';
 import { targetFlinched } from '../../../../../functions/targetFlinched';
 import { BattleAttack } from '../../../../../interfaces/BattleActions';
+import { joinInventories } from '../../../../../interfaces/Inventory';
 import {
 	BattleStep,
 	catchingPath,
@@ -32,6 +34,7 @@ export const useExecutePlayerMove = ({
 	startPath,
 	followTurnPath,
 	chargedUpPlayerMove,
+	setUsedItems,
 }: ExtendedBattleStepHandler & {
 	setBattleStep: (x: BattleStep) => void;
 }) => {
@@ -55,6 +58,15 @@ export const useExecutePlayerMove = ({
 			}
 			if (nextPlayerMove?.type === 'CatchProcessInfo') {
 				followBattleStepPath(catchingPath);
+				return;
+			}
+			if (nextPlayerMove?.type === 'InBattleItem') {
+				setNextPlayerMove(undefined);
+				setUsedItems((i) => joinInventories(i, { [nextPlayerMove.item]: 1 }));
+				setPlayer(
+					applyItemToPokemon(player, nextPlayerMove.item, dispatchToast)
+				);
+				followTurnPath();
 				return;
 			}
 			if (nextPlayerMove?.type === 'BattleAttack') {
@@ -151,6 +163,7 @@ export const useExecutePlayerMove = ({
 		setNextPlayerMove,
 		setOpponent,
 		setPlayer,
+		setUsedItems,
 		startPath,
 	]);
 };
