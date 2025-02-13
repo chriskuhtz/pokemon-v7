@@ -47,11 +47,11 @@ export const useSaveFile = (
 
 	const setSaveFile = (update: SaveFile) => {
 		const newTime = new Date().getTime();
+
 		s({
 			...update,
 			lastEdited: newTime,
-			cutBushes:
-				newTime - saveFile.lastEdited > 90000 ? [] : saveFile.cutBushes,
+			cutBushes: newTime - saveFile.lastEdited > 900000 ? [] : update.cutBushes,
 		});
 	};
 
