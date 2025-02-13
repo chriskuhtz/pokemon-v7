@@ -45,15 +45,19 @@ export const useSaveFile = (
 
 	const [saveFile, s] = useState<SaveFile>(loaded);
 
-	const setSaveFile = (update: SaveFile) => {
-		const newTime = new Date().getTime();
+	const setSaveFile = useCallback(
+		(update: SaveFile) => {
+			const newTime = new Date().getTime();
 
-		s({
-			...update,
-			lastEdited: newTime,
-			cutBushes: newTime - saveFile.lastEdited > 900000 ? [] : update.cutBushes,
-		});
-	};
+			s({
+				...update,
+				lastEdited: newTime,
+				cutBushes:
+					newTime - saveFile.lastEdited > 900000 ? [] : update.cutBushes,
+			});
+		},
+		[saveFile]
+	);
 
 	useEffect(() => {
 		if (useLocalStorage) {
@@ -131,7 +135,7 @@ export const useSaveFile = (
 				meta: { ...saveFile.meta, activeTab: update },
 			});
 		},
-		[saveFile]
+		[saveFile, setSaveFile]
 	);
 	useEffect(() => {
 		if (
