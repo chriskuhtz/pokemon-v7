@@ -8,6 +8,7 @@ export const usePlayerEmerge = ({
 	battleStep,
 	player,
 	setBattleWeather,
+	battleWeather,
 	dispatchToast,
 	followBattleStepPath,
 }: ExtendedBattleStepHandler) => {
@@ -19,6 +20,7 @@ export const usePlayerEmerge = ({
 			applyOnBattleEnterAbility({
 				pokemon: player,
 				setWeather: setBattleWeather,
+				currentWeather: battleWeather,
 				dispatchToast,
 			});
 
@@ -28,6 +30,7 @@ export const usePlayerEmerge = ({
 		return () => clearTimeout(t);
 	}, [
 		battleStep,
+		battleWeather,
 		dispatchToast,
 		followBattleStepPath,
 		player,

@@ -71,7 +71,12 @@ export const calculateDamage = (
 
 	const targetsFactor = 1;
 	const parentalBondFactor = 1;
-	const weatherFactor = determineWeatherFactor(attack, weather);
+	const weatherFactor = determineWeatherFactor(
+		attack,
+		weather,
+		attacker.ability,
+		target.ability
+	);
 	const glaiveRushFactor = 1;
 	//TODO: Crits ignore boosted defense
 	const critFactor = attack.crit ? 2 : 1;

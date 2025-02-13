@@ -68,6 +68,7 @@ export const abilityCheckList: {
 	{
 		name: 'cloud-nine',
 		url: 'https://pokeapi.co/api/v2/ability/13/',
+		handled: true,
 	},
 	{
 		name: 'compound-eyes',
@@ -191,7 +192,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/75/',
 		handled: true,
 	},
-	{ name: 'air-lock', url: 'https://pokeapi.co/api/v2/ability/76/' },
+	{
+		name: 'air-lock',
+		url: 'https://pokeapi.co/api/v2/ability/76/',
+		handled: true,
+	},
 	{ name: 'tangled-feet', url: 'https://pokeapi.co/api/v2/ability/77/' },
 	{ name: 'motor-drive', url: 'https://pokeapi.co/api/v2/ability/78/' },
 	{ name: 'rivalry', url: 'https://pokeapi.co/api/v2/ability/79/' },
@@ -500,6 +505,8 @@ export const abilityNames = [
 	'volt-absorb',
 	'water-absorb',
 	'oblivious',
+	'cloud-nine',
+	'air-lock',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
