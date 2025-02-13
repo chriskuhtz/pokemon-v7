@@ -15,6 +15,7 @@ import { Market } from './modules/Market/Market';
 import { SellMarket } from './modules/Market/SellMarket';
 import { Overworld } from './modules/Overworld/Overworld';
 import { PokemonStorage } from './modules/PokemonStorage/PokemonStorage';
+import { Settings } from './modules/Settings/Settings';
 import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { Team } from './modules/Team/Team';
 
@@ -52,9 +53,23 @@ export const App = (): JSX.Element => {
 
 	const firstTeamMember = team[0];
 
+	if (activeTab === 'SETTINGS') {
+		return (
+			<Settings
+				proceed={(randomStarters: boolean) => {
+					patchSaveFileReducer({
+						settings: {
+							randomStarters: randomStarters,
+						},
+					});
+				}}
+			/>
+		);
+	}
 	if (activeTab === 'STARTER_SELECTION') {
 		return (
 			<StarterSelection
+				randomStarters={!!saveFile.settings?.randomStarters}
 				proceed={(name: string, starterId: number) => {
 					patchSaveFileReducer({
 						playerId: name,

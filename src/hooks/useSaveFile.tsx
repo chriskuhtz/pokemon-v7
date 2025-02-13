@@ -138,18 +138,18 @@ export const useSaveFile = (
 		[saveFile, setSaveFile]
 	);
 	useEffect(() => {
+		if (saveFile.meta.activeTab !== 'SETTINGS' && !saveFile.settings) {
+			setActiveTabReducer('SETTINGS');
+			return;
+		}
 		if (
+			saveFile.settings &&
 			saveFile.meta.activeTab !== 'STARTER_SELECTION' &&
 			(saveFile.playerId === '' || saveFile.pokemon.length === 0)
 		) {
 			setActiveTabReducer('STARTER_SELECTION');
 		}
-	}, [
-		saveFile.meta.activeTab,
-		saveFile.playerId,
-		saveFile.pokemon.length,
-		setActiveTabReducer,
-	]);
+	}, [saveFile, setActiveTabReducer]);
 
 	const setCharacterLocationReducer = (update: CharacterLocationData) => {
 		setSaveFile({

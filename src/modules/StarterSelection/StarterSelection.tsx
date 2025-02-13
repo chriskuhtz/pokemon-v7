@@ -1,16 +1,25 @@
+import { useState } from 'react';
 import { battleSpriteSize } from '../../constants/gameData';
 import { typeColors } from '../../constants/typeColors';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
+import { getRandomPokemonId } from '../../functions/getRandomPokemonId';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
-import { useState } from 'react';
+const defaultStarters = [1, 4, 7];
+const randomStarterOptions = [
+	getRandomPokemonId(),
+	getRandomPokemonId(),
+	getRandomPokemonId(),
+];
 export const StarterSelection = ({
+	randomStarters,
 	proceed,
 }: {
+	randomStarters: boolean;
 	proceed: (name: string, starterDexId: number) => void;
 }): JSX.Element => {
-	const options = [1, 4, 7];
+	const options = randomStarters ? randomStarterOptions : defaultStarters;
 	const [chosenStarter, setChosenStarter] = useState<number>(options[0]);
 	const [name, setName] = useState<string | undefined>('');
 	return (
