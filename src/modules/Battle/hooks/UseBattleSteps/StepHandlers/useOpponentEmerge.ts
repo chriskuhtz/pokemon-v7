@@ -10,6 +10,7 @@ export const useOpponentEmerge = ({
 	setBattleWeather,
 	dispatchToast,
 	followBattleStepPath,
+	battleWeather,
 }: ExtendedBattleStepHandler) => {
 	useEffect(() => {
 		if (battleStep !== 'OPPONENT_EMERGE' || !opponent) {
@@ -19,6 +20,7 @@ export const useOpponentEmerge = ({
 			applyOnBattleEnterAbility({
 				pokemon: opponent,
 				setWeather: setBattleWeather,
+				currentWeather: battleWeather,
 				dispatchToast,
 			});
 
@@ -28,6 +30,7 @@ export const useOpponentEmerge = ({
 		return () => clearTimeout(t);
 	}, [
 		battleStep,
+		battleWeather,
 		dispatchToast,
 		followBattleStepPath,
 		opponent,
