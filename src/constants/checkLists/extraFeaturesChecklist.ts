@@ -25,7 +25,10 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'starter selection and name', handled: true },
-	{ name: 'settings' },
+	{
+		name: 'randomized starter setting',
+		handled: true,
+	},
 	{ name: 'badges' },
 	{ name: 'quests' },
 	{ name: 'hidden items' },

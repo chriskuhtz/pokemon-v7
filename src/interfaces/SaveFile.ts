@@ -37,4 +37,7 @@ export interface SaveFile {
 	cutBushes: number[];
 	lastEdited: number;
 	lastNurse: number;
+	settings?: {
+		randomStarters: boolean;
+	};
 }

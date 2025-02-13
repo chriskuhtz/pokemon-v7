@@ -9,5 +9,6 @@ export const routes = [
 	'SELL_MARKET',
 	'STORAGE',
 	'STARTER_SELECTION',
+	'SETTINGS',
 ] as const;
 export type RoutesType = (typeof routes)[number];
