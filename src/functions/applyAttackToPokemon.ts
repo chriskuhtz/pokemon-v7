@@ -1,7 +1,7 @@
 import { contactMoves } from '../constants/contactMoves';
 import { AddToastFunction } from '../hooks/useToasts';
 import { STATIC_CHANCE } from '../interfaces/Ailment';
-import { BattleAttack } from '../interfaces/BattleAttack';
+import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { applyAttackAilmentsToPokemon } from './applyAttackAilmentsToPokemon';

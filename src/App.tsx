@@ -5,6 +5,7 @@ import { testOpponent, testPokemon, testState } from './constants/gameData';
 import { testMap } from './constants/maps/testmap';
 import { STANDARD_BUY_MARKET } from './constants/standardBuyMarket';
 import { useSaveFile } from './hooks/useSaveFile';
+import { AddToastFunction } from './hooks/useToasts';
 import { generateInventory, Inventory } from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
 import { Bag } from './modules/Bag/Bag';
@@ -19,7 +20,13 @@ import { Settings } from './modules/Settings/Settings';
 import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { Team } from './modules/Team/Team';
 
-export const App = (): JSX.Element => {
+export const App = ({
+	latestToast,
+	addToast,
+}: {
+	latestToast: string | undefined;
+	addToast: AddToastFunction;
+}): JSX.Element => {
 	const [currentOpponent, setCurrentOpponent] =
 		useState<OwnedPokemon>(testOpponent);
 	const [currentMarketInventory, setCurrentMarketInventory] =
@@ -38,7 +45,8 @@ export const App = (): JSX.Element => {
 		patchSaveFileReducer,
 		navigateAwayFromOverworldReducer,
 		cutBushReducer,
-	} = useSaveFile(testState, true);
+		applyItemToPokemonReducer,
+	} = useSaveFile(testState, addToast, true);
 
 	const {
 		meta: { activeTab },
@@ -102,6 +110,8 @@ export const App = (): JSX.Element => {
 				inventory={saveFile.inventory}
 				discardItem={discardItemReducer}
 				goBack={() => setActiveTabReducer('MAIN')}
+				healablePokemon={team.filter((t) => !!t.damage)}
+				applyItem={applyItemToPokemonReducer}
 			/>
 		);
 	}
@@ -124,6 +134,8 @@ export const App = (): JSX.Element => {
 				syncAfterBattleEnd={putSaveFileReducer}
 				opponent={currentOpponent}
 				goBack={() => setActiveTabReducer('OVERWORLD')}
+				latestToast={latestToast}
+				addToast={addToast}
 			/>
 		);
 	}

@@ -1,3 +1,4 @@
+import { BsBackpack4 } from 'react-icons/bs';
 import { FaFistRaised, FaRunning } from 'react-icons/fa';
 import { MdCatchingPokemon } from 'react-icons/md';
 import { baseSize } from '../../../constants/gameData';
@@ -36,6 +37,12 @@ export const BattleActionsMainMenu = ({
 				actionElements={[]}
 				onClick={() => setMenu('BALLS')}
 				disabled={balls.length === 0}
+			/>
+			<Card
+				content={<h4>Items</h4>}
+				icon={<BsBackpack4 size={baseSize / 2} />}
+				actionElements={[]}
+				onClick={() => setMenu('HEALING_ITEMS')}
 			/>
 			<Card
 				content={<h4>Run Away</h4>}

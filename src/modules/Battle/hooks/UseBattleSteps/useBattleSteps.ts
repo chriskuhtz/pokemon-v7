@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { AddToastFunction } from '../../../../hooks/useToasts';
-import { BattleAttack } from '../../../../interfaces/BattleAttack';
+import {
+	BattleAction,
+	BattleAttack,
+	CatchProcessInfo,
+} from '../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
 import { EmptyInventory, Inventory } from '../../../../interfaces/Inventory';
-import { PokeballType } from '../../../../interfaces/Item';
-import { MoveDto } from '../../../../interfaces/Move';
-import { OwnedPokemonMove } from '../../../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../../../interfaces/SaveFile';
 import { WeatherType } from '../../../../interfaces/Weather';
 import {
@@ -42,19 +43,6 @@ import { usePlayerFlinched } from './StepHandlers/usePlayerFlinched';
 import { usePlayerIntro } from './StepHandlers/usePlayerIntro';
 import { usePlayerMissed } from './StepHandlers/usePlayerMissed';
 import { usePlayerUnableToAttack } from './StepHandlers/usePlayerUnableToAttack';
-
-export interface CatchProcessInfo {
-	pokemon: BattlePokemon;
-	ball: PokeballType;
-	type: 'CatchProcessInfo';
-}
-export type ChargeUp = OwnedPokemonMove & {
-	type: 'ChargeUp';
-	data: MoveDto;
-	crit?: boolean;
-};
-
-export type BattleAction = CatchProcessInfo | BattleAttack | ChargeUp;
 
 interface UseBattleStepsProps {
 	initSaveFile: SaveFile;

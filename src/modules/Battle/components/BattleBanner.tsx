@@ -3,9 +3,9 @@ import { battleSpriteSize } from '../../../constants/gameData';
 import { secondTurnMoves } from '../../../constants/secondTurnMoves';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
+import { BattleAction } from '../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Banner } from '../../../uiComponents/Banner/Banner';
-import { BattleAction } from '../hooks/UseBattleSteps/useBattleSteps';
 import { BattleStep } from '../types/BattleStep';
 import { MoveExecutionBanner } from './MoveExecutionBanner';
 import { MoveMissedBanner } from './MoveMissedBanner';
@@ -91,6 +91,7 @@ export const BattleBanner = ({
 		if (
 			nextMove &&
 			nextMove.type !== 'CatchProcessInfo' &&
+			nextMove.type !== 'InBattleItem' &&
 			secondTurnMoves.includes(nextMove.name)
 		) {
 			return (
@@ -111,6 +112,7 @@ export const BattleBanner = ({
 		if (
 			nextMove &&
 			nextMove.type !== 'CatchProcessInfo' &&
+			nextMove.type !== 'InBattleItem' &&
 			secondTurnMoves.includes(nextMove.name)
 		) {
 			return (
@@ -167,6 +169,22 @@ export const BattleBanner = ({
 	}
 	if (battleStep === 'PLAYER_MISSED') {
 		return <MoveMissedBanner attacker={player} />;
+	}
+	if (
+		battleStep === 'EXECUTE_PLAYER_MOVE' &&
+		nextMove?.type === 'InBattleItem'
+	) {
+		return (
+			<Banner>
+				You used a {nextMove.item} to heal {player.data.name}
+				<img
+					style={{ padding: '1rem 0' }}
+					width={battleSpriteSize / 2}
+					height={battleSpriteSize / 2}
+					src={getItemUrl(nextMove.item)}
+				/>
+			</Banner>
+		);
 	}
 	if (
 		battleStep === 'CATCHING_PROCESS_1' &&

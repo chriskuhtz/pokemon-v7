@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
 import { secondTurnMoves } from '../../constants/secondTurnMoves';
-import { useToasts } from '../../hooks/useToasts';
+import { AddToastFunction } from '../../hooks/useToasts';
 import { joinInventories } from '../../interfaces/Inventory';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../interfaces/SaveFile';
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
-import { Toast } from '../../uiComponents/Toast/Toast';
 import './Battle.css';
 import { BattleActions } from './components/BattleActions';
 import { BattleBanner } from './components/BattleBanner';
@@ -20,13 +19,16 @@ export const Battle = ({
 	initSaveFile,
 	syncAfterBattleEnd,
 	goBack,
+	latestToast,
+	addToast,
 }: {
 	initSaveFile: SaveFile;
 	opponent: OwnedPokemon;
 	syncAfterBattleEnd: (update: SaveFile) => void;
 	goBack: () => void;
+	latestToast: string | undefined;
+	addToast: AddToastFunction;
 }): JSX.Element => {
-	const { latestToast, addToast } = useToasts();
 	const team = initSaveFile.pokemon.filter((p) => p.onTeam);
 
 	const [slot1, setSlot1] = useBattlePokemon(team[0]);
@@ -75,7 +77,6 @@ export const Battle = ({
 				battleWeather={battleWeather}
 				battleRound={battleRound}
 			/>
-			{latestToast && <Toast message={latestToast} />}
 
 			<div className="battle">
 				<EnemyLane
@@ -96,7 +97,7 @@ export const Battle = ({
 						battleWeather={battleWeather}
 						battleStep={battleStep}
 						chooseMove={(x) => {
-							if (x.type === 'CatchProcessInfo') {
+							if (x.type === 'CatchProcessInfo' || x.type === 'InBattleItem') {
 								setNextPlayerMove(x);
 								return;
 							}

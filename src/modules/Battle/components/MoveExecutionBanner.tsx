@@ -4,7 +4,7 @@ import { typeColors } from '../../../constants/typeColors';
 import { determineTypeFactor } from '../../../functions/determineTypeFactor';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { hexToRgb } from '../../../functions/hexToRGB';
-import { BattleAttack } from '../../../interfaces/BattleAttack';
+import { BattleAttack } from '../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Banner } from '../../../uiComponents/Banner/Banner';
 

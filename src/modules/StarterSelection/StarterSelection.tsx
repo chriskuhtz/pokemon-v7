@@ -20,7 +20,7 @@ export const StarterSelection = ({
 	proceed: (name: string, starterDexId: number) => void;
 }): JSX.Element => {
 	const options = randomStarters ? randomStarterOptions : defaultStarters;
-	const [chosenStarter, setChosenStarter] = useState<number>(options[0]);
+	const [chosenStarter, setChosenStarter] = useState<number>(options[1]);
 	const [name, setName] = useState<string | undefined>('');
 	return (
 		<Page headline="Intro:">

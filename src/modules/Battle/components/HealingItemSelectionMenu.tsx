@@ -4,9 +4,10 @@ import { baseSize } from '../../../constants/gameData';
 import { BattleAction } from '../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
-import { PokeballType, isPokeball } from '../../../interfaces/Item';
+import { HealingItemType, isHealingItem } from '../../../interfaces/Item';
 import { Banner } from '../../../uiComponents/Banner/Banner';
-export const BallSelectionMenu = ({
+
+export const HealingItemSelectionMenu = ({
 	inventory,
 	chooseMove,
 	opponent,
@@ -17,9 +18,9 @@ export const BallSelectionMenu = ({
 	opponent: BattlePokemon;
 	goBack: () => void;
 }) => {
-	const balls: [PokeballType, number][] = Object.entries(inventory).filter(
-		([item]) => isPokeball(item)
-	) as [PokeballType, number][];
+	const healingItems: [HealingItemType, number][] = Object.entries(
+		inventory
+	).filter(([item]) => isHealingItem(item)) as [HealingItemType, number][];
 	return (
 		<Banner>
 			<>
@@ -38,7 +39,7 @@ export const BallSelectionMenu = ({
 						padding: '.5rem',
 					}}
 				>
-					{balls.map(([item, amount]) => {
+					{healingItems.map(([item, amount]) => {
 						if (amount <= 0) {
 							return;
 						}
@@ -50,8 +51,8 @@ export const BallSelectionMenu = ({
 								actionElements={[]}
 								onClick={() =>
 									chooseMove({
-										ball: item,
-										type: 'CatchProcessInfo',
+										item: item,
+										type: 'InBattleItem',
 										pokemon: opponent,
 									})
 								}

@@ -7,7 +7,7 @@ import { determineMultiHits } from '../../../functions/determineMultiHits';
 import { recommendMove } from '../../../functions/recommendMove';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../interfaces/Weather';
-import { BattleAction } from '../hooks/UseBattleSteps/useBattleSteps';
+import { BattleAction } from '../../../interfaces/BattleActions';
 
 export const MoveSelectionMenu = ({
 	chooseMove,

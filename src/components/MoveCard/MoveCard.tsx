@@ -1,5 +1,5 @@
 import { baseSize } from '../../constants/gameData';
-import { BattleAttack } from '../../interfaces/BattleAttack';
+import { BattleAttack } from '../../interfaces/BattleActions';
 import { Card } from '../../uiComponents/Card/Card';
 
 export const MoveCard = ({
