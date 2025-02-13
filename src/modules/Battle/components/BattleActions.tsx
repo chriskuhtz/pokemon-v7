@@ -3,11 +3,11 @@ import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import { isPokeball, PokeballType } from '../../../interfaces/Item';
 import { WeatherType } from '../../../interfaces/Weather';
-import { BattleAction } from '../hooks/UseBattleSteps/useBattleSteps';
 import { BattleStep } from '../types/BattleStep';
 import { BallSelectionMenu } from './BallSelectionMenu';
 import { BattleActionsMainMenu } from './BattleActionsMainMenu';
 import { MoveSelectionMenu } from './MoveSelectionMenu';
+import { BattleAction } from '../../../interfaces/BattleActions';
 
 export type BattleMenu = 'MAIN' | 'BALLS' | 'MOVES';
 

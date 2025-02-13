@@ -1,6 +1,6 @@
 import { AddToastFunction } from '../hooks/useToasts';
 import { isPrimaryAilment, PrimaryAilment } from '../interfaces/Ailment';
-import { BattleAttack } from '../interfaces/BattleAttack';
+import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { applyPrimaryAilmentToPokemon } from './applyPrimaryAilmentToPokemon';
 

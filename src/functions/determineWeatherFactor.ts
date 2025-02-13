@@ -1,5 +1,5 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
-import { BattleAttack } from '../interfaces/BattleAttack';
+import { BattleAttack } from '../interfaces/BattleActions';
 import { WeatherType } from '../interfaces/Weather';
 
 export const determineWeatherFactor = (

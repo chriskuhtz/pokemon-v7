@@ -1,5 +1,5 @@
 import { SecondaryAilment } from './Ailment';
-import { BattleAttack } from './BattleAttack';
+import { BattleAttack } from './BattleActions';
 import { OwnedPokemon } from './OwnedPokemon';
 import { PokemonData } from './PokemonData';
 import { StatObject } from './StatObject';

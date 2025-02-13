@@ -1,4 +1,4 @@
-import { BattleAttack } from '../interfaces/BattleAttack';
+import { BattleAttack } from '../interfaces/BattleActions';
 
 export const determineMultiHits = (
 	attack: BattleAttack

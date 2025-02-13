@@ -13,7 +13,7 @@ import {
 	SaveFile,
 } from '../../../../../interfaces/SaveFile';
 import { BattleStep } from '../../../types/BattleStep';
-import { CatchProcessInfo } from '../useBattleSteps';
+import { CatchProcessInfo } from '../../../../../interfaces/BattleActions';
 
 export const useBattleEnd = ({
 	initSaveFile,

@@ -1,5 +1,5 @@
 import { secondTurnMoves } from '../constants/secondTurnMoves';
-import { BattleAttack } from '../interfaces/BattleAttack';
+import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { calculateDamage } from './calculateDamage';

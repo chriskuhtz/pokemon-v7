@@ -1,7 +1,7 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
 import { ohkoMoves } from '../constants/ohkoMoves';
 import { AddToastFunction } from '../hooks/useToasts';
-import { BattleAttack } from '../interfaces/BattleAttack';
+import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { PokemonType } from '../interfaces/PokemonType';
 import { WeatherType } from '../interfaces/Weather';

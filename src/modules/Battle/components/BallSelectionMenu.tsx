@@ -5,8 +5,7 @@ import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import { PokeballType, isPokeball } from '../../../interfaces/Item';
 import { Banner } from '../../../uiComponents/Banner/Banner';
-import { BattleAction } from '../hooks/UseBattleSteps/useBattleSteps';
-
+import { BattleAction } from '../../../interfaces/BattleActions';
 export const BallSelectionMenu = ({
 	inventory,
 	chooseMove,

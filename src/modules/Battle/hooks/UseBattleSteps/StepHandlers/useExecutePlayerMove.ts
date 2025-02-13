@@ -8,7 +8,7 @@ import { isKO } from '../../../../../functions/isKo';
 import { pokemonCantMove } from '../../../../../functions/pokemonCantMove';
 import { reduceMovePP } from '../../../../../functions/reduceMovePP';
 import { targetFlinched } from '../../../../../functions/targetFlinched';
-import { BattleAttack } from '../../../../../interfaces/BattleAttack';
+import { BattleAttack } from '../../../../../interfaces/BattleActions';
 import {
 	BattleStep,
 	catchingPath,

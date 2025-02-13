@@ -1,4 +1,4 @@
-import { BattleAttack } from '../interfaces/BattleAttack';
+import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { typeEffectivenessChart } from '../interfaces/PokemonType';
 

@@ -1,6 +1,7 @@
 import { PARA_SPEED_FACTOR } from '../interfaces/Ailment';
+import { BattleAction } from '../interfaces/BattleActions';
+
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { BattleAction } from '../modules/Battle/hooks/UseBattleSteps/useBattleSteps';
 import { calculateModifiedStat } from './calculateModifiedStat';
 
 export const determineMoveOrder = (
