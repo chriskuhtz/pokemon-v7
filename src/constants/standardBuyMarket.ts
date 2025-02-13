@@ -11,4 +11,8 @@ export const STANDARD_BUY_MARKET: Partial<Inventory> = {
 	'timer-ball': 1,
 	'dusk-ball': 1,
 	'premier-ball': 1,
+	'heal-ball': 1,
+	'quick-ball': 1,
+	'cherish-ball': 1,
+	potion: 1,
 };

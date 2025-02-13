@@ -6,6 +6,8 @@ import { calculateDamage } from './calculateDamage';
 
 //TODO: Different Strategies
 //TODO: setup moves?
+//TODO: add some optional randomness to weighting
+//TODO: decide if recommendation knows about ability
 
 export const recommendMove = (
 	attacker: BattlePokemon,

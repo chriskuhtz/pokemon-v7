@@ -78,12 +78,22 @@ export const itemsCheckList: {
 	{
 		name: 'quick-ball',
 		url: 'https://pokeapi.co/api/v2/item/15/',
+		handled: true,
 	},
 	{
 		name: 'cherish-ball',
 		url: 'https://pokeapi.co/api/v2/item/16/',
+		handled: true,
 	},
-	{ name: 'potion', url: 'https://pokeapi.co/api/v2/item/17/' },
+	{
+		name: 'potion',
+		url: 'https://pokeapi.co/api/v2/item/17/',
+		todos: [
+			'concept of partial heal',
+			'using potion onClick in Battle',
+			'using potion from bag',
+		],
+	},
 	{
 		name: 'antidote',
 		url: 'https://pokeapi.co/api/v2/item/18/',
