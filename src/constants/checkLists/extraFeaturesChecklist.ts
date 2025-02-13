@@ -65,4 +65,6 @@ export const extraFeatureCheckList: {
 	{ name: 'inventory and market filters' },
 	{ name: "put randomized starters into localstorage to 'prevent' reloading" },
 	{ name: 'only show three pokeballs that open onClick for starter selection' },
+	{ name: 'play pokecenter sound on visit' },
+	{ name: 'fix toast and Banner position' },
 ];

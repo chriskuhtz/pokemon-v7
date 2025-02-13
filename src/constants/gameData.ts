@@ -17,7 +17,7 @@ export const testPokemon: OwnedPokemon = {
 	secondMove: { name: 'karate-chop', usedPP: 0 },
 	thirdMove: { name: 'pay-day', usedPP: 0 },
 	fourthMove: { name: 'swords-dance', usedPP: 0 },
-	damage: 10,
+	damage: 50,
 	nature: 'adamant',
 	xp: 100000,
 	ability: 'sand-veil',

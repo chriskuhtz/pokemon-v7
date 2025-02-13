@@ -4,14 +4,18 @@ import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalkin
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { updateItemFunction } from '../functions/updateItemFunction';
-import { ItemType } from '../interfaces/Item';
+import { joinInventories } from '../interfaces/Inventory';
+import { HealingItemType, ItemType } from '../interfaces/Item';
 import { OverworldItem } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { RoutesType } from '../interfaces/Routing';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
+import { AddToastFunction } from './useToasts';
+import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 
 export const useSaveFile = (
 	init: SaveFile,
+	addToast: AddToastFunction,
 	useLocalStorage?: boolean
 ): {
 	saveFile: SaveFile;
@@ -38,6 +42,10 @@ export const useSaveFile = (
 	talkToNurseReducer: (id: number) => void;
 	cutBushReducer: (id: number) => void;
 	navigateAwayFromOverworldReducer: (to: RoutesType, steps: number) => void;
+	applyItemToPokemonReducer: (
+		pokemon: OwnedPokemon,
+		item: HealingItemType
+	) => void;
 } => {
 	const local = window.localStorage.getItem(localStorageId);
 	const loaded =
@@ -58,13 +66,6 @@ export const useSaveFile = (
 		},
 		[saveFile]
 	);
-
-	useEffect(() => {
-		if (useLocalStorage) {
-			window.localStorage.setItem(localStorageId, JSON.stringify(saveFile));
-		}
-	}, [saveFile, useLocalStorage]);
-
 	const discardItemReducer = (item: ItemType, number: number) => {
 		const updatedInventory = updateItemFunction(
 			item,
@@ -127,7 +128,6 @@ export const useSaveFile = (
 	};
 	const patchSaveFileReducer = (update: Partial<SaveFile>) =>
 		setSaveFile({ ...saveFile, ...update });
-
 	const setActiveTabReducer = useCallback(
 		(update: RoutesType) => {
 			setSaveFile({
@@ -137,27 +137,12 @@ export const useSaveFile = (
 		},
 		[saveFile, setSaveFile]
 	);
-	useEffect(() => {
-		if (saveFile.meta.activeTab !== 'SETTINGS' && !saveFile.settings) {
-			setActiveTabReducer('SETTINGS');
-			return;
-		}
-		if (
-			saveFile.settings &&
-			saveFile.meta.activeTab !== 'STARTER_SELECTION' &&
-			(saveFile.playerId === '' || saveFile.pokemon.length === 0)
-		) {
-			setActiveTabReducer('STARTER_SELECTION');
-		}
-	}, [saveFile, setActiveTabReducer]);
-
 	const setCharacterLocationReducer = (update: CharacterLocationData) => {
 		setSaveFile({
 			...saveFile,
 			location: update,
 		});
 	};
-
 	const collectItemReducer = (item: [string, OverworldItem]) => {
 		const id = Number.parseInt(item[0]);
 		const updatedInventory = updateItemFunction(
@@ -177,7 +162,6 @@ export const useSaveFile = (
 			pokemon: update,
 		});
 	};
-
 	const navigateAwayFromOverworldReducer = (
 		route: RoutesType,
 		stepsTaken: number
@@ -208,6 +192,7 @@ export const useSaveFile = (
 				return fullyHealPokemon(p);
 			}),
 		});
+		addToast('Whole Team fully healed');
 	};
 	const cutBushReducer = (id: number) => {
 		setSaveFile({
@@ -215,6 +200,48 @@ export const useSaveFile = (
 			cutBushes: [...(saveFile.cutBushes ?? []), id],
 		});
 	};
+	const applyItemToPokemonReducer = (
+		pokemon: OwnedPokemon,
+		item: HealingItemType
+	) => {
+		const updatedPokemon = applyItemToPokemon(pokemon, item, addToast);
+		const updatedInventory = joinInventories(
+			saveFile.inventory,
+			{ [item]: 1 },
+			true
+		);
+		setSaveFile({
+			...saveFile,
+			pokemon: saveFile.pokemon.map((p) => {
+				if (p.id == updatedPokemon.id) {
+					return updatedPokemon;
+				}
+				return p;
+			}),
+			inventory: updatedInventory,
+		});
+	};
+
+	//SYNC WITH LOCAL STORAGE
+	useEffect(() => {
+		if (useLocalStorage) {
+			window.localStorage.setItem(localStorageId, JSON.stringify(saveFile));
+		}
+	}, [saveFile, useLocalStorage]);
+	//HANDLE START OF GAME
+	useEffect(() => {
+		if (saveFile.meta.activeTab !== 'SETTINGS' && !saveFile.settings) {
+			setActiveTabReducer('SETTINGS');
+			return;
+		}
+		if (
+			saveFile.settings &&
+			saveFile.meta.activeTab !== 'STARTER_SELECTION' &&
+			(saveFile.playerId === '' || saveFile.pokemon.length === 0)
+		) {
+			setActiveTabReducer('STARTER_SELECTION');
+		}
+	}, [saveFile, setActiveTabReducer]);
 
 	return {
 		saveFile,
@@ -232,5 +259,6 @@ export const useSaveFile = (
 		talkToNurseReducer,
 		navigateAwayFromOverworldReducer,
 		cutBushReducer,
+		applyItemToPokemonReducer,
 	};
 };
