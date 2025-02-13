@@ -3,10 +3,12 @@ import { OverworldMap } from '../interfaces/OverworldMap';
 
 export const assembleMap = (
 	map: OverworldMap,
-	collectedItems: number[]
+	collectedItems: number[],
+	cutBushes: number[]
 ): OverworldMap => {
 	const filteredOccupants = [...map.occupants].filter(
-		(o) => !collectedItems.some((c) => c === o)
+		(o) =>
+			!collectedItems.some((c) => c === o) && !cutBushes.some((c) => c === o)
 	);
 
 	const updatedTileMap = map.tileMap.map((row, rowIndex) => {

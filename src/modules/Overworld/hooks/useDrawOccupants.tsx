@@ -76,6 +76,15 @@ export const useDrawOccupants = (
 							baseSize
 						);
 						break;
+					case 'BUSH':
+						ctx?.drawImage(
+							img,
+							baseSize * occ.x,
+							baseSize * occ.y,
+							baseSize,
+							baseSize
+						);
+						break;
 					case 'ITEM':
 					case 'PC':
 					default:
@@ -103,6 +112,8 @@ const getSource = (occ: Occupant) => {
 			return `/npcs/NPC_${occ.sprite}.png`;
 		case 'PC':
 			return '/mapObjects/pc.png';
+		case 'BUSH':
+			return '/mapObjects/bush.png';
 		case 'ITEM':
 		default:
 			return '/mapObjects/pokeball.png';

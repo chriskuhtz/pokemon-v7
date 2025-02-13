@@ -34,5 +34,7 @@ export interface SaveFile {
 	};
 	location: CharacterLocationData;
 	collectedItems: number[];
+	cutBushes: number[];
+	lastEdited: number;
 	lastNurse: number;
 }

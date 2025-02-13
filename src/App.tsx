@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 import { abilityNames } from './constants/checkLists/abilityCheckList';
 import { testOpponent, testPokemon, testState } from './constants/gameData';
@@ -7,7 +7,6 @@ import { STANDARD_BUY_MARKET } from './constants/standardBuyMarket';
 import { useSaveFile } from './hooks/useSaveFile';
 import { generateInventory, Inventory } from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
-import { RoutesType } from './interfaces/Routing';
 import { Bag } from './modules/Bag/Bag';
 import { Battle } from './modules/Battle/Battle';
 import { MainMenu } from './modules/MainMenu/MainMenu';
@@ -34,9 +33,10 @@ export const App = (): JSX.Element => {
 		setCharacterLocationReducer,
 		collectItemReducer,
 		setPokemonReducer,
-		applyStepsWalkedToTeamReducer,
 		talkToNurseReducer,
 		patchSaveFileReducer,
+		navigateAwayFromOverworldReducer,
+		cutBushReducer,
 	} = useSaveFile(testState, true);
 
 	const {
@@ -48,7 +48,7 @@ export const App = (): JSX.Element => {
 		collectedItems,
 	} = saveFile;
 
-	const team = pokemon.filter((p) => p.onTeam);
+	const team = useMemo(() => pokemon.filter((p) => p.onTeam), [pokemon]);
 
 	const firstTeamMember = team[0];
 
@@ -141,14 +141,9 @@ export const App = (): JSX.Element => {
 		);
 	}
 
-	const navigateAwayFromOverworld = (route: RoutesType, stepsTaken: number) => {
-		applyStepsWalkedToTeamReducer(stepsTaken);
-		setActiveTabReducer(route);
-	};
-
 	return (
 		<Overworld
-			openMenu={(steps) => navigateAwayFromOverworld('MAIN', steps)}
+			openMenu={(steps) => navigateAwayFromOverworldReducer('MAIN', steps)}
 			setCharacterLocation={setCharacterLocationReducer}
 			collectItem={collectItemReducer}
 			playerLocation={location}
@@ -164,15 +159,22 @@ export const App = (): JSX.Element => {
 						abilityNames[Math.floor(Math.random() * abilityNames.length)],
 				}));
 
-				navigateAwayFromOverworld('BATTLE', steps);
+				navigateAwayFromOverworldReducer('BATTLE', steps);
 			}}
 			firstTeamMember={firstTeamMember}
 			goToMarket={(i, steps) => {
-				navigateAwayFromOverworld('MARKET', steps);
+				navigateAwayFromOverworldReducer('MARKET', steps);
 				setCurrentMarketInventory(i);
 			}}
-			openStorage={(steps) => navigateAwayFromOverworld('STORAGE', steps)}
+			openStorage={(steps) =>
+				navigateAwayFromOverworldReducer('STORAGE', steps)
+			}
 			talkToNurse={talkToNurseReducer}
+			bushCutting={{
+				cut: cutBushReducer,
+				cutterPokemon: { dexId: team[0].dexId },
+			}}
+			cutBushes={saveFile.cutBushes}
 		/>
 	);
 };

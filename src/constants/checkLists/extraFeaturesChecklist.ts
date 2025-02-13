@@ -55,4 +55,5 @@ export const extraFeatureCheckList: {
 	{ name: 'different encounters for time of day' },
 	{ name: 'smooth transition with dialogue after Starter Selection' },
 	{ name: 'player sprite selection' },
+	{ name: 'check if pokemon can actually cut' },
 ];

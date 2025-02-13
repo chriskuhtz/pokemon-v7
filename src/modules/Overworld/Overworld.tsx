@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 import { IoMdMenu } from 'react-icons/io';
 import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 import { animationTimer, baseSize } from '../../constants/gameData';
 import { assembleMap } from '../../functions/assembleMap';
 import { getOppositeDirection } from '../../functions/getOppositeDirection';
+import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { isEvening, isMorning, isNight } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { isValidOverWorldMap } from '../../functions/isValidOverworldMap';
@@ -41,6 +42,7 @@ const getOverworldShaderColor = (): string => {
 export interface Dialogue {
 	message: string;
 	onRemoval?: () => void;
+	icon?: ReactNode;
 }
 
 export const Overworld = ({
@@ -55,6 +57,8 @@ export const Overworld = ({
 	goToMarket,
 	talkToNurse,
 	openStorage,
+	bushCutting,
+	cutBushes,
 }: {
 	openMenu: (stepsTaken: number) => void;
 	playerLocation: CharacterLocationData;
@@ -68,10 +72,15 @@ export const Overworld = ({
 	goToMarket: (marketInventory: Partial<Inventory>, stepsTaken: number) => void;
 	firstTeamMember: OwnedPokemon;
 	talkToNurse: (id: number) => void;
+	bushCutting?: {
+		cut: (id: number) => void;
+		cutterPokemon: { dexId: number };
+	};
+	cutBushes: number[];
 }) => {
 	const assembledMap = useMemo(
-		() => assembleMap(map, collectedItems),
-		[map, collectedItems]
+		() => assembleMap(map, collectedItems, cutBushes),
+		[map, collectedItems, cutBushes]
 	);
 	const valid = useMemo(() => isValidOverWorldMap(map), [map]);
 
@@ -148,6 +157,18 @@ export const Overworld = ({
 				});
 				return;
 			}
+			if (data.type === 'BUSH') {
+				if (bushCutting) {
+					addDialogue({
+						message: `Your Pokemon used cut`,
+						icon: (
+							<img src={getPokemonSprite(bushCutting.cutterPokemon.dexId)} />
+						),
+						onRemoval: () => bushCutting.cut(Number.parseInt(id)),
+					});
+				} else addDialogue({ message: 'Maybe a Pokemon can cut this' });
+				return;
+			}
 			if (data.type === 'PC') {
 				addDialogue({
 					message: 'Accessing Pokemon Storage',
@@ -192,6 +213,7 @@ export const Overworld = ({
 			console.error('what is this occupant', occ);
 		},
 		[
+			bushCutting,
 			changeOccupant,
 			collectItem,
 			goToMarket,
@@ -239,6 +261,7 @@ export const Overworld = ({
 			{dialogues.length > 0 && (
 				<Banner>
 					<h2>{dialogues[0].message}</h2>
+					{dialogues[0].icon}
 				</Banner>
 			)}
 			<div className="overworldPage">

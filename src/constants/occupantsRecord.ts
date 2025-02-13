@@ -50,4 +50,11 @@ export const occupantsRecord: Record<number, Occupant> = {
 		dialogue: ['Let me heal your pokemon'],
 		sprite: SpriteEnum['nurse'],
 	},
+	//Bushes start at 500000,
+	500001: {
+		type: 'BUSH',
+		x: 6,
+		y: 1,
+		map: 'testMap',
+	},
 };

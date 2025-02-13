@@ -12,7 +12,7 @@ export const testMap: OverworldMap = {
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 	],
-	occupants: [0, 1, 100001, 300001, 400001],
+	occupants: [0, 1, 100001, 300001, 400001, 500001],
 	possibleEncounters: [
 		{ dexId: 1, xp: 10000 },
 		{ dexId: 4, xp: 10000 },
