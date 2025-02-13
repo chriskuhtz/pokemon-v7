@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { localStorageId } from '../constants/gameData';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
@@ -34,14 +34,26 @@ export const useSaveFile = (
 	setCharacterLocationReducer: (update: CharacterLocationData) => void;
 	collectItemReducer: (item: [string, OverworldItem]) => void;
 	setPokemonReducer: (update: OwnedPokemon[]) => void;
-	applyStepsWalkedToTeamReducer: (steps: number) => void;
+
 	talkToNurseReducer: (id: number) => void;
+	cutBushReducer: (id: number) => void;
+	navigateAwayFromOverworldReducer: (to: RoutesType, steps: number) => void;
 } => {
 	const local = window.localStorage.getItem(localStorageId);
 	const loaded =
 		useLocalStorage && local ? (JSON.parse(local) as SaveFile) : init;
 
-	const [saveFile, setSaveFile] = useState<SaveFile>(loaded);
+	const [saveFile, s] = useState<SaveFile>(loaded);
+
+	const setSaveFile = (update: SaveFile) => {
+		const newTime = new Date().getTime();
+		s({
+			...update,
+			lastEdited: newTime,
+			cutBushes:
+				newTime - saveFile.lastEdited > 90000 ? [] : saveFile.cutBushes,
+		});
+	};
 
 	useEffect(() => {
 		if (useLocalStorage) {
@@ -55,7 +67,7 @@ export const useSaveFile = (
 			-number,
 			saveFile.inventory
 		);
-		setSaveFile((gm) => ({ ...gm, inventory: updatedInventory }));
+		setSaveFile({ ...saveFile, inventory: updatedInventory });
 	};
 	const sellItemReducer = (
 		item: ItemType,
@@ -69,11 +81,11 @@ export const useSaveFile = (
 		);
 		const updatedMoney = saveFile.money + number * pricePerItem;
 
-		setSaveFile((gm) => ({
-			...gm,
+		setSaveFile({
+			...saveFile,
 			inventory: updatedInventory,
 			money: updatedMoney,
-		}));
+		});
 	};
 	const buyItemReducer = (
 		item: ItemType,
@@ -87,11 +99,11 @@ export const useSaveFile = (
 		);
 		const updatedMoney = saveFile.money - number * pricePerItem;
 
-		setSaveFile((gm) => ({
-			...gm,
+		setSaveFile({
+			...saveFile,
 			inventory: updatedInventory,
 			money: updatedMoney,
-		}));
+		});
 	};
 	const addItemReducer = (item: ItemType, number: number) => {
 		const updatedInventory = updateItemFunction(
@@ -99,22 +111,28 @@ export const useSaveFile = (
 			number,
 			saveFile.inventory
 		);
-		setSaveFile((gm) => ({ ...gm, inventory: updatedInventory }));
+		setSaveFile({ ...saveFile, inventory: updatedInventory });
 	};
 	const receiveNewPokemonReducer = (newMon: Omit<OwnedPokemon, 'onTeam'>) => {
 		const updatedPokemon = receiveNewPokemonFunction(newMon, saveFile.pokemon);
 
-		setSaveFile((gm) => ({ ...gm, pokemon: updatedPokemon }));
+		setSaveFile({ ...saveFile, pokemon: updatedPokemon });
 	};
 	const putSaveFileReducer = (update: SaveFile) => {
 		setSaveFile(update);
 	};
 	const patchSaveFileReducer = (update: Partial<SaveFile>) =>
-		setSaveFile((s) => ({ ...s, ...update }));
+		setSaveFile({ ...saveFile, ...update });
 
-	const setActiveTabReducer = (update: RoutesType) => {
-		setSaveFile((s) => ({ ...s, meta: { ...s.meta, activeTab: update } }));
-	};
+	const setActiveTabReducer = useCallback(
+		(update: RoutesType) => {
+			setSaveFile({
+				...saveFile,
+				meta: { ...saveFile.meta, activeTab: update },
+			});
+		},
+		[saveFile]
+	);
 	useEffect(() => {
 		if (
 			saveFile.meta.activeTab !== 'STARTER_SELECTION' &&
@@ -122,13 +140,18 @@ export const useSaveFile = (
 		) {
 			setActiveTabReducer('STARTER_SELECTION');
 		}
-	}, [saveFile.meta.activeTab, saveFile.playerId, saveFile.pokemon.length]);
+	}, [
+		saveFile.meta.activeTab,
+		saveFile.playerId,
+		saveFile.pokemon.length,
+		setActiveTabReducer,
+	]);
 
 	const setCharacterLocationReducer = (update: CharacterLocationData) => {
-		setSaveFile((s) => ({
-			...s,
+		setSaveFile({
+			...saveFile,
 			location: update,
-		}));
+		});
 	};
 
 	const collectItemReducer = (item: [string, OverworldItem]) => {
@@ -138,17 +161,25 @@ export const useSaveFile = (
 			item[1].amount,
 			saveFile.inventory
 		);
-		setSaveFile((gm) => ({
-			...gm,
+		setSaveFile({
+			...saveFile,
 			inventory: updatedInventory,
 			collectedItems: [...saveFile.collectedItems.filter((c) => c !== id), id],
-		}));
+		});
 	};
 	const setPokemonReducer = (update: OwnedPokemon[]) => {
-		setSaveFile((gm) => ({
-			...gm,
+		setSaveFile({
+			...saveFile,
 			pokemon: update,
-		}));
+		});
+	};
+
+	const navigateAwayFromOverworldReducer = (
+		route: RoutesType,
+		stepsTaken: number
+	) => {
+		applyStepsWalkedToTeamReducer(stepsTaken);
+		setActiveTabReducer(route);
 	};
 	const applyStepsWalkedToTeamReducer = (steps: number) => {
 		setPokemonReducer(
@@ -162,17 +193,23 @@ export const useSaveFile = (
 		);
 	};
 	const talkToNurseReducer = (id: number) => {
-		setSaveFile((gm) => ({
-			...gm,
+		setSaveFile({
+			...saveFile,
 			lastNurse: id,
-			pokemon: gm.pokemon.map((p) => {
+			pokemon: saveFile.pokemon.map((p) => {
 				if (!p.onTeam) {
 					return p;
 				}
 
 				return fullyHealPokemon(p);
 			}),
-		}));
+		});
+	};
+	const cutBushReducer = (id: number) => {
+		setSaveFile({
+			...saveFile,
+			cutBushes: [...(saveFile.cutBushes ?? []), id],
+		});
 	};
 
 	return {
@@ -188,7 +225,8 @@ export const useSaveFile = (
 		setCharacterLocationReducer,
 		collectItemReducer,
 		setPokemonReducer,
-		applyStepsWalkedToTeamReducer,
 		talkToNurseReducer,
+		navigateAwayFromOverworldReducer,
+		cutBushReducer,
 	};
 };

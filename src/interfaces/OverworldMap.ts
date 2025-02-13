@@ -45,11 +45,18 @@ export interface OverworldNurse {
 	dialogue: string[];
 	sprite: '115';
 }
+export interface OverworldBush {
+	type: 'BUSH';
+	x: number;
+	y: number;
+	map: MapId;
+}
 export type Occupant =
 	| OverworldItem
 	| OverworldPC
 	| OverworldMerchant
-	| OverworldNurse;
+	| OverworldNurse
+	| OverworldBush;
 
 export interface OverworldEncounter {
 	dexId: number;
