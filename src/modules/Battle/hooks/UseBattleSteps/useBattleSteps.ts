@@ -238,6 +238,17 @@ export const useBattleSteps = ({
 		]
 	);
 
+	const { runAway, getWhirlwinded } = useBattleEnd({
+		battleStep,
+		caughtPokemon,
+		coins,
+		usedItems,
+		initSaveFile,
+		goBack,
+		player,
+		dispatchToast,
+	});
+
 	useOpponentIntro(battleStep, () => followBattleStepPath(introPath));
 	usePlayerIntro(battleStep, () => followBattleStepPath(introPath));
 	useOpponentEmerge(extendedPayload);
@@ -254,10 +265,12 @@ export const useBattleSteps = ({
 	useExecutePlayerMove({
 		...extendedPayload,
 		setBattleStep: protectedSetBattleStep,
+		getWhirlwinded,
 	});
 	useExecuteOpponentMove({
 		...extendedPayload,
 		setBattleStep: protectedSetBattleStep,
+		getWhirlwinded,
 	});
 	useOpponentFlinched(extendedPayload);
 	usePlayerFlinched(extendedPayload);
@@ -270,16 +283,6 @@ export const useBattleSteps = ({
 	useHandlePlayerEndOfTurnDamage(extendedPayload);
 	useOpponentFainting({ battleStep, followBattleStepPath });
 	usePlayerFainting({ battleStep, followBattleStepPath });
-	const runAway = useBattleEnd({
-		battleStep,
-		caughtPokemon,
-		coins,
-		usedItems,
-		initSaveFile,
-		goBack,
-		player,
-		dispatchToast,
-	});
 
 	const initBattle = () => {
 		followBattleStepPath(introPath);

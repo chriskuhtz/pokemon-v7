@@ -28,8 +28,10 @@ export const useExecuteOpponentMove = ({
 	followTurnPath,
 	startPath,
 	chargedUpOpponentMove,
+	getWhirlwinded,
 }: ExtendedBattleStepHandler & {
 	setBattleStep: (x: BattleStep) => void;
+	getWhirlwinded: () => void;
 }) => {
 	useEffect(() => {
 		if (battleStep !== 'EXECUTE_OPPONENT_MOVE' || !opponent) {
@@ -48,6 +50,13 @@ export const useExecuteOpponentMove = ({
 			if (!player || !opponent) {
 				throw new Error('no player or opponent');
 				return;
+			}
+
+			if (
+				nextOpponentMove?.type === 'BattleAttack' &&
+				nextOpponentMove.name === 'whirlwind'
+			) {
+				getWhirlwinded();
 			}
 
 			if (nextOpponentMove?.type === 'BattleAttack') {
@@ -134,6 +143,7 @@ export const useExecuteOpponentMove = ({
 		chargedUpOpponentMove,
 		dispatchToast,
 		followTurnPath,
+		getWhirlwinded,
 		nextOpponentMove,
 		opponent,
 		player,
