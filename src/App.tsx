@@ -59,6 +59,8 @@ export const App = ({
 		money,
 		location,
 		collectedItems,
+		badges,
+		playerId,
 	} = saveFile;
 
 	const team = useMemo(() => pokemon.filter((p) => p.onTeam), [pokemon]);
@@ -105,6 +107,9 @@ export const App = ({
 				money={money}
 				goBack={() => setActiveTabReducer('OVERWORLD')}
 				navigate={setActiveTabReducer}
+				badges={badges}
+				spriteUrl="/npcs/NPC_001.png"
+				name={playerId}
 			/>
 		);
 	}

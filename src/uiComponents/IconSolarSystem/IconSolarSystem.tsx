@@ -1,15 +1,16 @@
+import { CSSProperties } from 'react';
 import { baseSize } from '../../constants/gameData';
 
 export const IconSolarSystem = ({
-	sunUrl,
+	sun,
 	firstPlanetUrl,
 	secondPlanetUrl,
 	thirdPlanetUrl,
 	fourthPlanetUrl,
 	onClick,
 }: {
-	sunUrl: string;
-	firstPlanetUrl: string;
+	sun: { url: string; styles?: CSSProperties };
+	firstPlanetUrl?: string;
 	secondPlanetUrl?: string;
 	thirdPlanetUrl?: string;
 	fourthPlanetUrl?: string;
@@ -25,19 +26,25 @@ export const IconSolarSystem = ({
 			}}
 		>
 			<img
-				style={{ border: '2px solid black', borderRadius: '9000px' }}
-				src={sunUrl}
-			/>
-			<img
 				style={{
-					position: 'absolute',
-					top: `${-baseSize / 6}px`,
-					left: `${baseSize / 2}px`,
+					...sun.styles,
+					border: '2px solid black',
+					borderRadius: '9000px',
 				}}
-				height={baseSize / 2}
-				width={baseSize / 2}
-				src={firstPlanetUrl}
+				src={sun.url}
 			/>
+			{firstPlanetUrl && (
+				<img
+					style={{
+						position: 'absolute',
+						top: `${-baseSize / 6}px`,
+						left: `${baseSize / 2}px`,
+					}}
+					height={baseSize / 2}
+					width={baseSize / 2}
+					src={firstPlanetUrl}
+				/>
+			)}
 
 			{secondPlanetUrl && (
 				<img
