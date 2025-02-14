@@ -58,7 +58,7 @@ export const testOpponent: OwnedPokemon = {
 	ownerId: 'oppo',
 	ball: 'poke-ball',
 	damage: 0,
-	firstMove: { name: 'swords-dance', usedPP: 0 },
+	firstMove: { name: 'wrap', usedPP: 0 },
 	// secondMove: { name: 'thunder-punch', usedPP: 0 },
 	// thirdMove: { name: 'ice-punch', usedPP: 0 },
 	// fourthMove: { name: 'comet-punch', usedPP: 0 },

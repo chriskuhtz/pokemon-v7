@@ -270,7 +270,7 @@ export const useBattleSteps = ({
 	useHandlePlayerEndOfTurnDamage(extendedPayload);
 	useOpponentFainting({ battleStep, followBattleStepPath });
 	usePlayerFainting({ battleStep, followBattleStepPath });
-	const endBattle = useBattleEnd({
+	const runAway = useBattleEnd({
 		battleStep,
 		caughtPokemon,
 		coins,
@@ -278,6 +278,7 @@ export const useBattleSteps = ({
 		initSaveFile,
 		goBack,
 		player,
+		dispatchToast,
 	});
 
 	const initBattle = () => {
@@ -292,6 +293,6 @@ export const useBattleSteps = ({
 		battleWeather,
 		usedItems,
 		battleRound,
-		runAway: () => endBattle(false),
+		runAway,
 	};
 };

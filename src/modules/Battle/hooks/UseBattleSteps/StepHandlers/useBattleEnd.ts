@@ -1,8 +1,10 @@
 import { useCallback, useEffect } from 'react';
 import { animationTimer } from '../../../../../constants/gameData';
 import { occupantsRecord } from '../../../../../constants/occupantsRecord';
+import { isTrapped } from '../../../../../functions/isTrapped';
 import { receiveNewPokemonFunction } from '../../../../../functions/receiveNewPokemonFunction';
 import { reduceBattlePokemonToOwnedPokemon } from '../../../../../functions/reduceBattlePokemonToOwnedPokemon';
+import { AddToastFunction } from '../../../../../hooks/useToasts';
 import { CatchProcessInfo } from '../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
 import {
@@ -22,6 +24,7 @@ export const useBattleEnd = ({
 	usedItems,
 	battleStep,
 	goBack,
+	dispatchToast,
 	player,
 }: {
 	initSaveFile: SaveFile;
@@ -31,6 +34,7 @@ export const useBattleEnd = ({
 	battleStep: BattleStep;
 	goBack: (update: SaveFile) => void;
 	player: BattlePokemon | undefined;
+	dispatchToast: AddToastFunction;
 }) => {
 	// handle 'BATTLE_WON'
 	const endBattle = useCallback(
@@ -99,5 +103,13 @@ export const useBattleEnd = ({
 		return () => clearTimeout(t);
 	}, [battleStep, endBattle]);
 
-	return endBattle;
+	const runAway = useCallback(() => {
+		if (player && isTrapped(player)) {
+			dispatchToast('trapped, cant run away');
+			return;
+		}
+		endBattle(false);
+	}, [dispatchToast, endBattle, player]);
+
+	return runAway;
 };

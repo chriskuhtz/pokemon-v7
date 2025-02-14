@@ -71,11 +71,13 @@ export const Battle = ({
 				player={slot1}
 				voidSteps={['MOVE_SELECTION']}
 			/>
-			<BattleInfo
-				battleStep={battleStep}
-				battleWeather={battleWeather}
-				battleRound={battleRound}
-			/>
+			{!latestToast && (
+				<BattleInfo
+					battleStep={battleStep}
+					battleWeather={battleWeather}
+					battleRound={battleRound}
+				/>
+			)}
 
 			<div className="battle">
 				<EnemyLane

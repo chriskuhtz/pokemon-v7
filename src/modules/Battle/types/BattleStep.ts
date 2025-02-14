@@ -106,7 +106,6 @@ export const possibleNextSteps: Record<BattleStep, BattleStep[]> = {
 	BATTLE_LOST: [],
 	BATTLE_WON: [],
 };
-
 export const introPath: BattleStep[] = [
 	'UNITIALIZED',
 	'OPPONENT_INTRO',
@@ -136,7 +135,6 @@ export const catchingPath: BattleStep[] = [
 	'CATCHING_SUCCESS',
 	'BATTLE_WON',
 ];
-
 export const playerTurnPath: BattleStep[] = [
 	'PLAYER_CURE_AILMENTS',
 	'PLAYER_CHARGE_UP',

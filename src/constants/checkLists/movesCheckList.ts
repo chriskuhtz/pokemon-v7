@@ -141,7 +141,7 @@ export const movesCheckList: {
 	{
 		name: 'wrap',
 		url: 'https://pokeapi.co/api/v2/move/35/',
-		todos: ['Damage from wrap each turn', 'cant run away if wrapped'],
+		handled: true,
 	},
 	{
 		name: 'take-down',
@@ -1275,6 +1275,7 @@ export const handledMoves = [
 	'water-gun',
 	'swords-dance',
 	'cut',
+	'wrap',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
