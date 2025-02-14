@@ -23,6 +23,7 @@ export const testPokemon: OwnedPokemon = {
 	ability: 'sand-veil',
 	happiness: 70,
 	stepsWalked: 0,
+	heldItemName: 'potion',
 };
 export const testState: SaveFile = {
 	inventory: generateInventory({

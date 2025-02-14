@@ -34,10 +34,14 @@ export const OwnedPokemonCardContent = ({
 					max={getStats(data.stats, ownedPokemon.xp, ownedPokemon.nature).hp}
 					damage={ownedPokemon.damage}
 				/>
+				<h5>{typeNames.join('/')} type</h5>
 			</div>
+
 			<div>
 				<h4>{data.name.toUpperCase()}</h4>
-				<h5>{typeNames.join('/')} type</h5>
+				{ownedPokemon.heldItemName && (
+					<h5>Held Item: {ownedPokemon.heldItemName}</h5>
+				)}
 				<h5>{ownedPokemon.nature} nature</h5>
 				<h5>ability: {ownedPokemon.ability}</h5>
 			</div>

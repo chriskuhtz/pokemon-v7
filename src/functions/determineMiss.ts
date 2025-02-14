@@ -3,6 +3,7 @@ import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { calculateLevelData } from './calculateLevelData';
+import { getCompoundEyesFactor } from './getCompoundEyesFactor';
 
 /**
  *
@@ -29,7 +30,11 @@ export const determineMiss = (
 			? attackerlevel - targetlevel
 			: 0;
 
-	const res = (attack.data.accuracy + levelDifferenceSummand) * weatherFactor;
+	const compoundEyesFactor = getCompoundEyesFactor(attacker, attack);
+
+	const res =
+		(attack.data.accuracy * compoundEyesFactor + levelDifferenceSummand) *
+		weatherFactor;
 
 	return Math.random() * 100 > res;
 };
