@@ -20,5 +20,16 @@ export const applySecondaryAilmentToPokemon = (
 		dispatchToast(`${pokemon.data.name} is oblivious`);
 		return pokemon;
 	}
+	if (ailment === 'trap') {
+		dispatchToast(`${pokemon.data.name} became trapped`);
+		const duration = 1 + Math.round(Math.random() * 4);
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{ type: 'trap', duration },
+			],
+		};
+	}
 	return pokemon;
 };
