@@ -1,6 +1,7 @@
 import { BsFire } from 'react-icons/bs';
 import { FaRegSnowflake } from 'react-icons/fa';
 import { FaBoltLightning } from 'react-icons/fa6';
+import { GiPoisonBottle } from 'react-icons/gi';
 import { baseSize } from '../../constants/gameData';
 import { typeColors } from '../../constants/typeColors';
 import { PrimaryAilment } from '../../interfaces/Ailment';
@@ -24,6 +25,14 @@ export const PrimaryAilmentIcon = ({
 		return (
 			<FaBoltLightning
 				color={typeColors['electric']}
+				size={size ?? baseSize / 3}
+			/>
+		);
+	}
+	if (primaryAilment?.type === 'poison' || primaryAilment?.type === 'toxic') {
+		return (
+			<GiPoisonBottle
+				color={typeColors['poison']}
 				size={size ?? baseSize / 3}
 			/>
 		);

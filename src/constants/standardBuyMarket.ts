@@ -15,4 +15,5 @@ export const STANDARD_BUY_MARKET: Partial<Inventory> = {
 	'quick-ball': 1,
 	'cherish-ball': 1,
 	potion: 1,
+	antidote: 1,
 };

@@ -42,7 +42,7 @@ export const PokemonStorage = ({
 			<Stack mode="row">
 				{team.map((pokemon) => (
 					<IconSolarSystem
-						sunUrl={getPokemonSprite(pokemon.dexId)}
+						sun={{ url: getPokemonSprite(pokemon.dexId) }}
 						firstPlanetUrl={getItemUrl(pokemon.ball)}
 						key={pokemon.id}
 						onClick={() => {
@@ -60,7 +60,7 @@ export const PokemonStorage = ({
 			<Stack mode="row">
 				{stored.map((pokemon) => (
 					<IconSolarSystem
-						sunUrl={getPokemonSprite(pokemon.dexId)}
+						sun={{ url: getPokemonSprite(pokemon.dexId) }}
 						firstPlanetUrl={getItemUrl(pokemon.ball)}
 						key={pokemon.id}
 						onClick={() => {
