@@ -73,7 +73,7 @@ export const abilityCheckList: {
 	{
 		name: 'compound-eyes',
 		url: 'https://pokeapi.co/api/v2/ability/14/',
-		todos: ['improve acc', 'hasHeldItem function'],
+		handled: true,
 	},
 	{
 		name: 'insomnia',
