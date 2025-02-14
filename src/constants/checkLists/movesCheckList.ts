@@ -77,14 +77,16 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/15/',
 		handled: true,
 	},
-	{ name: 'gust', url: 'https://pokeapi.co/api/v2/move/16/' },
+	{ name: 'gust', url: 'https://pokeapi.co/api/v2/move/16/', handled: true },
 	{
 		name: 'wing-attack',
 		url: 'https://pokeapi.co/api/v2/move/17/',
+		handled: true,
 	},
 	{
 		name: 'whirlwind',
 		url: 'https://pokeapi.co/api/v2/move/18/',
+		handled: true,
 	},
 	{ name: 'fly', url: 'https://pokeapi.co/api/v2/move/19/' },
 	{ name: 'bind', url: 'https://pokeapi.co/api/v2/move/20/' },
@@ -1276,6 +1278,9 @@ export const handledMoves = [
 	'swords-dance',
 	'cut',
 	'wrap',
+	'gust',
+	'wing-attack',
+	'whirlwind',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

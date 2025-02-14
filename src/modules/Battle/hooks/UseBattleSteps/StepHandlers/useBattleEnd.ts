@@ -38,7 +38,7 @@ export const useBattleEnd = ({
 }) => {
 	// handle 'BATTLE_WON'
 	const endBattle = useCallback(
-		(won?: boolean) => {
+		(mode: 'WIN' | 'LOOSE' | 'DRAW') => {
 			let updatedPokemon = [...initSaveFile.pokemon];
 
 			const lastNurseLocation = occupantsRecord[initSaveFile.lastNurse];
@@ -65,15 +65,16 @@ export const useBattleEnd = ({
 				return reduceBattlePokemonToOwnedPokemon(player);
 			});
 
-			const newLocation: CharacterLocationData = won
-				? initSaveFile.location
-				: {
-						x,
-						y: y + 1,
-						mapId: map,
-						orientation: 'UP',
-						forwardFoot: 'CENTER1',
-				  };
+			const newLocation: CharacterLocationData =
+				mode === 'LOOSE'
+					? {
+							x,
+							y: y + 1,
+							mapId: map,
+							orientation: 'UP',
+							forwardFoot: 'CENTER1',
+					  }
+					: initSaveFile.location;
 			const newSaveFile: SaveFile = {
 				...initSaveFile,
 				location: newLocation,
@@ -89,7 +90,7 @@ export const useBattleEnd = ({
 		if (battleStep !== 'BATTLE_WON') {
 			return;
 		}
-		const t = setTimeout(() => endBattle(true), animationTimer);
+		const t = setTimeout(() => endBattle('WIN'), animationTimer);
 
 		return () => clearTimeout(t);
 	}, [battleStep, endBattle]);
@@ -98,7 +99,7 @@ export const useBattleEnd = ({
 		if (battleStep !== 'BATTLE_LOST') {
 			return;
 		}
-		const t = setTimeout(() => endBattle(false), animationTimer);
+		const t = setTimeout(() => endBattle('LOOSE'), animationTimer);
 
 		return () => clearTimeout(t);
 	}, [battleStep, endBattle]);
@@ -108,8 +109,13 @@ export const useBattleEnd = ({
 			dispatchToast('trapped, cant run away');
 			return;
 		}
-		endBattle(false);
+		endBattle('DRAW');
 	}, [dispatchToast, endBattle, player]);
 
-	return runAway;
+	const getWhirlwinded = useCallback(() => {
+		dispatchToast('Whirlwind separated the fighters');
+		endBattle('DRAW');
+	}, [dispatchToast, endBattle]);
+
+	return { runAway, getWhirlwinded };
 };

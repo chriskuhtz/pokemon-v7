@@ -35,8 +35,10 @@ export const useExecutePlayerMove = ({
 	followTurnPath,
 	chargedUpPlayerMove,
 	setUsedItems,
+	getWhirlwinded,
 }: ExtendedBattleStepHandler & {
 	setBattleStep: (x: BattleStep) => void;
+	getWhirlwinded: () => void;
 }) => {
 	useEffect(() => {
 		if (battleStep !== 'EXECUTE_PLAYER_MOVE' || !player) {
@@ -69,6 +71,13 @@ export const useExecutePlayerMove = ({
 				followTurnPath();
 				return;
 			}
+			if (
+				nextPlayerMove?.type === 'BattleAttack' &&
+				nextPlayerMove.name === 'whirlwind'
+			) {
+				getWhirlwinded();
+			}
+
 			if (nextPlayerMove?.type === 'BattleAttack') {
 				if (nextPlayerMove.name === 'pay-day') {
 					const scatteredCoins = Math.floor(Math.random() * 100);
@@ -155,6 +164,7 @@ export const useExecutePlayerMove = ({
 		dispatchToast,
 		followBattleStepPath,
 		followTurnPath,
+		getWhirlwinded,
 		nextPlayerMove,
 		opponent,
 		player,
