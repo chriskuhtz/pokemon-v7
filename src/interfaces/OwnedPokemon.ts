@@ -1,7 +1,7 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
 import { MoveName } from '../constants/checkLists/movesCheckList';
 import { PrimaryAilment } from './Ailment';
-import { PokeballType } from './Item';
+import { ItemType, PokeballType } from './Item';
 import { Nature } from './Natures';
 
 export interface OwnedPokemonMove {
@@ -27,7 +27,7 @@ export interface OwnedPokemon {
 	happiness: number;
 	//Overflows between 0 and 255, adds happiness at 255
 	stepsWalked: number;
-	//heldItemName?: ItemType;
+	heldItemName?: ItemType;
 	//effortValues: StatObject;
 	//intrinsicValues: StatObject;
 	//ppBoostedMoves: PPBoostedMove[];

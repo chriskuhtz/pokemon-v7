@@ -4,6 +4,10 @@ import { abilityNames } from './constants/checkLists/abilityCheckList';
 import { testOpponent, testPokemon, testState } from './constants/gameData';
 import { testMap } from './constants/maps/testmap';
 import { STANDARD_BUY_MARKET } from './constants/standardBuyMarket';
+import {
+	determineHeldItem,
+	getHeldItemRateModifier,
+} from './functions/determineHeldItem';
 import { useSaveFile } from './hooks/useSaveFile';
 import { AddToastFunction } from './hooks/useToasts';
 import { generateInventory, Inventory } from './interfaces/Inventory';
@@ -188,6 +192,7 @@ export const App = ({
 					id: v4(),
 					ability:
 						abilityNames[Math.floor(Math.random() * abilityNames.length)],
+					heldItemName: determineHeldItem(getHeldItemRateModifier(team[0])),
 				}));
 
 				navigateAwayFromOverworldReducer('BATTLE', steps);

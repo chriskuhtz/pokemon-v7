@@ -73,6 +73,7 @@ export const abilityCheckList: {
 	{
 		name: 'compound-eyes',
 		url: 'https://pokeapi.co/api/v2/ability/14/',
+		todos: ['improve acc', 'hasHeldItem function'],
 	},
 	{
 		name: 'insomnia',
@@ -507,6 +508,7 @@ export const abilityNames = [
 	'oblivious',
 	'cloud-nine',
 	'air-lock',
+	'compound-eyes',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

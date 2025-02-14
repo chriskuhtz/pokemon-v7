@@ -33,7 +33,10 @@ export const recommendMove = (
 
 			const accuracyWeighted =
 				baseDamage *
-				((a.data.accuracy * getCompoundEyesFactor(attacker, a)) / 100);
+				Math.min(
+					(a.data.accuracy * getCompoundEyesFactor(attacker, a)) / 100,
+					1
+				);
 
 			//higher weight for higher crit chance, does not consider target ability
 			const critWeighted =

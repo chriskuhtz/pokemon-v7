@@ -72,4 +72,11 @@ export const extraFeatureCheckList: {
 	{
 		name: 'dont give Battle the whole saveFile (n pokemon) and only patch on return',
 	},
+	{ name: 'Properly determine held item from options' },
+	{
+		name: 'setting: randomize held items',
+	},
+	{
+		name: 'fallback for backSprites',
+	},
 ];

@@ -30,6 +30,9 @@ export const OwnedPokemonCard = ({ pokemon }: { pokemon: OwnedPokemon }) => {
 						typeNames.length > 1 ? `/typeIcons/${typeNames[1]}.png` : undefined
 					}
 					thirdPlanetUrl={getItemUrl(pokemon.ball)}
+					fourthPlanetUrl={
+						pokemon.heldItemName ? getItemUrl(pokemon.heldItemName) : undefined
+					}
 				/>
 			}
 			content={<OwnedPokemonCardContent ownedPokemon={pokemon} data={res} />}
