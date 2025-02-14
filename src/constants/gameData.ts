@@ -24,6 +24,7 @@ export const testPokemon: OwnedPokemon = {
 	happiness: 70,
 	stepsWalked: 0,
 	heldItemName: 'potion',
+	primaryAilment: { type: 'poison' },
 };
 export const testState: SaveFile = {
 	badges: ['boulder-badge'],
@@ -34,6 +35,7 @@ export const testState: SaveFile = {
 		'poke-ball': 10,
 		'great-ball': 10,
 		potion: 10,
+		antidote: 10,
 	}),
 	playerId: '',
 	money: 5000,

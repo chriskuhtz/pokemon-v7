@@ -5,6 +5,7 @@ import { PokemonData } from '../../../interfaces/PokemonData';
 import { HappinessIcon } from '../../HappinessIcon/HappinessIcon';
 import { HpBar } from '../../HpBar/HpBar';
 import { LevelBar } from '../../LevelBar/LevelBar';
+import { PrimaryAilmentIcon } from '../../PrimaryAilmentIcon/PrimaryAilmentIcon';
 
 export const OwnedPokemonCardContent = ({
 	ownedPokemon,
@@ -35,6 +36,7 @@ export const OwnedPokemonCardContent = ({
 					damage={ownedPokemon.damage}
 				/>
 				<h5>{typeNames.join('/')} type</h5>
+				<PrimaryAilmentIcon primaryAilment={ownedPokemon.primaryAilment} />
 			</div>
 
 			<div>

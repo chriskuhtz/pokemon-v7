@@ -7,6 +7,7 @@ export const IconSolarSystem = ({
 	secondPlanetUrl,
 	thirdPlanetUrl,
 	fourthPlanetUrl,
+	fifthPlanetUrl,
 	onClick,
 }: {
 	sun: { url: string; styles?: CSSProperties };
@@ -14,6 +15,7 @@ export const IconSolarSystem = ({
 	secondPlanetUrl?: string;
 	thirdPlanetUrl?: string;
 	fourthPlanetUrl?: string;
+	fifthPlanetUrl?: string;
 	onClick?: () => void;
 }) => {
 	return (
@@ -81,6 +83,18 @@ export const IconSolarSystem = ({
 					height={baseSize / 2}
 					width={baseSize / 2}
 					src={fourthPlanetUrl}
+				/>
+			)}
+			{fifthPlanetUrl && (
+				<img
+					style={{
+						position: 'absolute',
+						top: `${(baseSize * 7.5) / 6}px`,
+						left: `${baseSize / 2}px`,
+					}}
+					height={baseSize / 2}
+					width={baseSize / 2}
+					src={fifthPlanetUrl}
 				/>
 			)}
 		</div>

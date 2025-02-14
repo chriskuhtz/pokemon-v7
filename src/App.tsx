@@ -119,7 +119,7 @@ export const App = ({
 				inventory={saveFile.inventory}
 				discardItem={discardItemReducer}
 				goBack={() => setActiveTabReducer('MAIN')}
-				healablePokemon={team.filter((t) => !!t.damage)}
+				team={team}
 				applyItem={applyItemToPokemonReducer}
 			/>
 		);

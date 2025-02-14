@@ -6,12 +6,25 @@ import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	pokemon: T,
 	item: HealingItemType,
-	addToast: AddToastFunction
+	addToast?: AddToastFunction
 ): T {
-	const updatedDamage = Math.max(pokemon.damage - 20, 0);
 	if (item === 'potion') {
-		addToast(`healed ${pokemon.damage - updatedDamage} HP`);
+		const updatedDamage = Math.max(pokemon.damage - 20, 0);
+		if (addToast) {
+			addToast(`healed ${pokemon.damage - updatedDamage} HP`);
+		}
+
 		return { ...pokemon, damage: updatedDamage };
+	}
+	if (
+		item === 'antidote' &&
+		(pokemon.primaryAilment?.type === 'poison' ||
+			pokemon.primaryAilment?.type === 'toxic')
+	) {
+		if (addToast) {
+			addToast(`Poisoning cured`);
+		}
+		return { ...pokemon, primaryAilment: undefined };
 	}
 
 	return pokemon;

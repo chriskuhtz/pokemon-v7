@@ -1,5 +1,8 @@
 import { AddToastFunction } from '../hooks/useToasts';
-import { BURN_DAMAGE_FACTOR } from '../interfaces/Ailment';
+import {
+	BURN_DAMAGE_FACTOR,
+	POISON_DAMAGE_FACTOR,
+} from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 
 export const applyPrimaryAilmentDamage = (
@@ -10,6 +13,15 @@ export const applyPrimaryAilmentDamage = (
 		dispatchToast(`${pokemon.data.name} is hurt by burn`);
 
 		const burnDamage = Math.floor(BURN_DAMAGE_FACTOR * pokemon.stats.hp);
+		return {
+			...pokemon,
+			damage: pokemon.damage + burnDamage,
+		};
+	}
+	if (pokemon.primaryAilment?.type === 'poison') {
+		dispatchToast(`${pokemon.data.name} is hurt by poison`);
+
+		const burnDamage = Math.floor(POISON_DAMAGE_FACTOR * pokemon.stats.hp);
 		return {
 			...pokemon,
 			damage: pokemon.damage + burnDamage,

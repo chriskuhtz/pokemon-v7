@@ -24,7 +24,7 @@ export const OwnedPokemonCard = ({ pokemon }: { pokemon: OwnedPokemon }) => {
 			key={pokemon.id}
 			icon={
 				<IconSolarSystem
-					sunUrl={getPokemonSprite(pokemon.dexId)}
+					sun={{ url: getPokemonSprite(pokemon.dexId) }}
 					firstPlanetUrl={`/typeIcons/${typeNames[0]}.png`}
 					secondPlanetUrl={
 						typeNames.length > 1 ? `/typeIcons/${typeNames[1]}.png` : undefined

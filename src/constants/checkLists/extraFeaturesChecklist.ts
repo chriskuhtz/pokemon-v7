@@ -80,4 +80,6 @@ export const extraFeatureCheckList: {
 		name: 'fallback for backSprites',
 	},
 	{ name: 'Conditional npc if you dont have badge ' },
+	{ name: 'take/give heldItem' },
+	{ name: 'prettier team overview' },
 ];
