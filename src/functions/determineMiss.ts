@@ -29,7 +29,14 @@ export const determineMiss = (
 			? attackerlevel - targetlevel
 			: 0;
 
-	const res = (attack.data.accuracy + levelDifferenceSummand) * weatherFactor;
+	const compoundEyesFactor =
+		attacker.ability === 'compound-eyes' && !ohkoMoves.includes(attack.name)
+			? 1.3
+			: 1;
+
+	const res =
+		(attack.data.accuracy * compoundEyesFactor + levelDifferenceSummand) *
+		weatherFactor;
 
 	return Math.random() * 100 > res;
 };
