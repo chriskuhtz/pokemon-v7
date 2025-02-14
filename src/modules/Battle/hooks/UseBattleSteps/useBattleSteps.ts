@@ -46,8 +46,7 @@ import { usePlayerUnableToAttack } from './StepHandlers/usePlayerUnableToAttack'
 
 interface UseBattleStepsProps {
 	initSaveFile: SaveFile;
-	syncAfterBattleEnd: (update: SaveFile) => void;
-	goBack: () => void;
+	goBack: (update: SaveFile) => void;
 	opponent: BattlePokemon | undefined;
 	player: BattlePokemon | undefined;
 	setOpponent: (x: BattlePokemon) => void;
@@ -87,7 +86,6 @@ export interface ExtendedBattleStepHandler extends BattleStepHandler {
 
 export const useBattleSteps = ({
 	initSaveFile,
-	syncAfterBattleEnd,
 	goBack,
 	opponent,
 	player,
@@ -102,6 +100,7 @@ export const useBattleSteps = ({
 	battleWeather: WeatherType | undefined;
 	usedItems: Inventory;
 	battleRound: number;
+	runAway: () => void;
 } => {
 	const [battleStep, setBattleStep] = useState<BattleStep>('UNITIALIZED');
 	const [battleWeather, setBattleWeather] = useState<WeatherType | undefined>();
@@ -271,13 +270,12 @@ export const useBattleSteps = ({
 	useHandlePlayerEndOfTurnDamage(extendedPayload);
 	useOpponentFainting({ battleStep, followBattleStepPath });
 	usePlayerFainting({ battleStep, followBattleStepPath });
-	useBattleEnd({
+	const endBattle = useBattleEnd({
 		battleStep,
 		caughtPokemon,
 		coins,
 		usedItems,
 		initSaveFile,
-		syncAfterBattleEnd,
 		goBack,
 		player,
 	});
@@ -294,5 +292,6 @@ export const useBattleSteps = ({
 		battleWeather,
 		usedItems,
 		battleRound,
+		runAway: () => endBattle(false),
 	};
 };

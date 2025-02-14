@@ -17,15 +17,14 @@ import { useBattleSteps } from './hooks/UseBattleSteps/useBattleSteps';
 export const Battle = ({
 	opponent,
 	initSaveFile,
-	syncAfterBattleEnd,
+
 	goBack,
 	latestToast,
 	addToast,
 }: {
 	initSaveFile: SaveFile;
 	opponent: OwnedPokemon;
-	syncAfterBattleEnd: (update: SaveFile) => void;
-	goBack: () => void;
+	goBack: (update: SaveFile) => void;
 	latestToast: string | undefined;
 	addToast: AddToastFunction;
 }): JSX.Element => {
@@ -42,9 +41,9 @@ export const Battle = ({
 		battleWeather,
 		usedItems,
 		battleRound,
+		runAway,
 	} = useBattleSteps({
 		initSaveFile,
-		syncAfterBattleEnd,
 		goBack,
 		opponent: slot3,
 		player: slot1,
@@ -110,7 +109,7 @@ export const Battle = ({
 						inventory={joinInventories(initSaveFile.inventory, usedItems, true)}
 						player={slot1}
 						opponent={slot3}
-						runAway={goBack}
+						runAway={runAway}
 					/>
 				)}
 			</div>

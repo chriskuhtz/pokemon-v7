@@ -68,4 +68,8 @@ export const extraFeatureCheckList: {
 	{ name: 'play pokecenter sound on visit' },
 	{ name: 'fix toast and Banner position' },
 	{ name: 'Opponents can use items' },
+	{ name: "fix 'what is this' error for status moves" },
+	{
+		name: 'dont give Battle the whole saveFile (n pokemon) and only patch on return',
+	},
 ];

@@ -3,6 +3,7 @@ import { animationTimer } from '../../../../../constants/gameData';
 import { occupantsRecord } from '../../../../../constants/occupantsRecord';
 import { receiveNewPokemonFunction } from '../../../../../functions/receiveNewPokemonFunction';
 import { reduceBattlePokemonToOwnedPokemon } from '../../../../../functions/reduceBattlePokemonToOwnedPokemon';
+import { CatchProcessInfo } from '../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
 import {
 	Inventory,
@@ -13,7 +14,6 @@ import {
 	SaveFile,
 } from '../../../../../interfaces/SaveFile';
 import { BattleStep } from '../../../types/BattleStep';
-import { CatchProcessInfo } from '../../../../../interfaces/BattleActions';
 
 export const useBattleEnd = ({
 	initSaveFile,
@@ -21,7 +21,6 @@ export const useBattleEnd = ({
 	coins,
 	usedItems,
 	battleStep,
-	syncAfterBattleEnd,
 	goBack,
 	player,
 }: {
@@ -30,8 +29,7 @@ export const useBattleEnd = ({
 	coins: number;
 	usedItems: Inventory;
 	battleStep: BattleStep;
-	syncAfterBattleEnd: (update: SaveFile) => void;
-	goBack: () => void;
+	goBack: (update: SaveFile) => void;
 	player: BattlePokemon | undefined;
 }) => {
 	// handle 'BATTLE_WON'
@@ -79,18 +77,9 @@ export const useBattleEnd = ({
 				inventory: joinInventories(initSaveFile.inventory, usedItems, true),
 				pokemon: updatedPokemon,
 			};
-			syncAfterBattleEnd(newSaveFile);
-			goBack();
+			goBack(newSaveFile);
 		},
-		[
-			caughtPokemon,
-			coins,
-			goBack,
-			initSaveFile,
-			player,
-			syncAfterBattleEnd,
-			usedItems,
-		]
+		[caughtPokemon, coins, goBack, initSaveFile, player, usedItems]
 	);
 	useEffect(() => {
 		if (battleStep !== 'BATTLE_WON') {
@@ -109,4 +98,6 @@ export const useBattleEnd = ({
 
 		return () => clearTimeout(t);
 	}, [battleStep, endBattle]);
+
+	return endBattle;
 };

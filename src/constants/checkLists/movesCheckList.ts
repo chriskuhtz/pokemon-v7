@@ -138,7 +138,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/34/',
 		handled: true,
 	},
-	{ name: 'wrap', url: 'https://pokeapi.co/api/v2/move/35/' },
+	{
+		name: 'wrap',
+		url: 'https://pokeapi.co/api/v2/move/35/',
+		todos: ['Damage from wrap each turn', 'cant run away if wrapped'],
+	},
 	{
 		name: 'take-down',
 		url: 'https://pokeapi.co/api/v2/move/36/',
