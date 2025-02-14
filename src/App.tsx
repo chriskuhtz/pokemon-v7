@@ -131,9 +131,13 @@ export const App = ({
 		return (
 			<Battle
 				initSaveFile={saveFile}
-				syncAfterBattleEnd={putSaveFileReducer}
 				opponent={currentOpponent}
-				goBack={() => setActiveTabReducer('OVERWORLD')}
+				goBack={(update) =>
+					putSaveFileReducer({
+						...update,
+						meta: { ...update.meta, activeTab: 'OVERWORLD' },
+					})
+				}
 				latestToast={latestToast}
 				addToast={addToast}
 			/>
