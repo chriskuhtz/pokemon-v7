@@ -3,6 +3,7 @@ import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { calculateLevelData } from './calculateLevelData';
+import { getCompoundEyesFactor } from './getCompoundEyesFactor';
 
 /**
  *
@@ -29,10 +30,7 @@ export const determineMiss = (
 			? attackerlevel - targetlevel
 			: 0;
 
-	const compoundEyesFactor =
-		attacker.ability === 'compound-eyes' && !ohkoMoves.includes(attack.name)
-			? 1.3
-			: 1;
+	const compoundEyesFactor = getCompoundEyesFactor(attacker, attack);
 
 	const res =
 		(attack.data.accuracy * compoundEyesFactor + levelDifferenceSummand) *

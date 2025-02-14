@@ -3,11 +3,12 @@ import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { calculateDamage } from './calculateDamage';
+import { getCompoundEyesFactor } from './getCompoundEyesFactor';
 
 //TODO: Different Strategies
 //TODO: setup moves?
 //TODO: add some optional randomness to weighting
-//TODO: decide if recommendation knows about ability
+//TODO: decide if recommendation knows about opponent ability e.g. water-absorb
 
 export const recommendMove = (
 	attacker: BattlePokemon,
@@ -30,7 +31,9 @@ export const recommendMove = (
 			const baseDamage =
 				calculateDamage(attacker, target, a, weather) * averageHits;
 
-			const accuracyWeighted = baseDamage * (a.data.accuracy / 100);
+			const accuracyWeighted =
+				baseDamage *
+				((a.data.accuracy * getCompoundEyesFactor(attacker, a)) / 100);
 
 			//higher weight for higher crit chance, does not consider target ability
 			const critWeighted =
