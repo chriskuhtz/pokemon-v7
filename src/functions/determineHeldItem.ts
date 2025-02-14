@@ -2,7 +2,7 @@ import { ItemType, itemTypes } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 
 export const determineHeldItem = (modifier: number): ItemType | undefined => {
-	if (Math.random() > 1 * modifier) {
+	if (Math.random() > 0.5 * modifier) {
 		return;
 	}
 	const itemIndex = Math.floor(Math.random() * itemTypes.length);
