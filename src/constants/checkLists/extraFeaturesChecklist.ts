@@ -83,4 +83,5 @@ export const extraFeatureCheckList: {
 	{ name: 'take/give heldItem' },
 	{ name: 'prettier team overview' },
 	{ name: 'filter in battle items by if someone can benefit' },
+	{ name: 'only pokemon that havent moved can flinch' },
 ];
