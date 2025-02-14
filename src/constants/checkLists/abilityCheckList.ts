@@ -78,6 +78,7 @@ export const abilityCheckList: {
 	{
 		name: 'insomnia',
 		url: 'https://pokeapi.co/api/v2/ability/15/',
+		handled: true,
 	},
 	{
 		name: 'color-change',
@@ -185,7 +186,11 @@ export const abilityCheckList: {
 	{ name: 'rock-head', url: 'https://pokeapi.co/api/v2/ability/69/' },
 	{ name: 'drought', url: 'https://pokeapi.co/api/v2/ability/70/' },
 	{ name: 'arena-trap', url: 'https://pokeapi.co/api/v2/ability/71/' },
-	{ name: 'vital-spirit', url: 'https://pokeapi.co/api/v2/ability/72/' },
+	{
+		name: 'vital-spirit',
+		url: 'https://pokeapi.co/api/v2/ability/72/',
+		handled: true,
+	},
 	{ name: 'white-smoke', url: 'https://pokeapi.co/api/v2/ability/73/' },
 	{ name: 'pure-power', url: 'https://pokeapi.co/api/v2/ability/74/' },
 	{
@@ -509,6 +514,8 @@ export const abilityNames = [
 	'cloud-nine',
 	'air-lock',
 	'compound-eyes',
+	'insomnia',
+	'vital-spirit',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

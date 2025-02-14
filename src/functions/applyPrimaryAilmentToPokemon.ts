@@ -57,5 +57,16 @@ export const applyPrimaryAilmentToPokemon = (
 		);
 		return { ...pokemon, primaryAilment: { type: 'freeze' } };
 	}
+	if (
+		ailment === 'sleep' &&
+		['vital-spirit', 'insomnia'].includes(pokemon.ability)
+	) {
+		dispatchToast(
+			`${pokemon.data.name} was put to sleep ${
+				toastSuffix ? 'by ' + toastSuffix : ''
+			}`
+		);
+		return { ...pokemon, primaryAilment: { type: 'sleep' } };
+	}
 	return pokemon;
 };
