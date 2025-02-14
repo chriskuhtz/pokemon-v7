@@ -26,6 +26,7 @@ export const testPokemon: OwnedPokemon = {
 	heldItemName: 'potion',
 };
 export const testState: SaveFile = {
+	badges: ['boulder-badge'],
 	inventory: generateInventory({
 		'master-ball': 10,
 		'ultra-ball': 20,

@@ -29,7 +29,7 @@ export const extraFeatureCheckList: {
 		name: 'randomized starter setting',
 		handled: true,
 	},
-	{ name: 'badges' },
+	{ name: 'badges', handled: true },
 	{ name: 'quests' },
 	{ name: 'hidden items' },
 	{ name: 'team reordering' },
@@ -79,4 +79,5 @@ export const extraFeatureCheckList: {
 	{
 		name: 'fallback for backSprites',
 	},
+	{ name: 'Conditional npc if you dont have badge ' },
 ];

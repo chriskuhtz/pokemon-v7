@@ -24,7 +24,11 @@ export interface CharacterLocationData {
 	y: number;
 }
 
+export const badgeNames = ['boulder-badge'] as const;
+export type BadgeName = (typeof badgeNames)[number];
+
 export interface SaveFile {
+	badges: BadgeName[];
 	playerId: string;
 	inventory: Inventory;
 	pokemon: OwnedPokemon[];
