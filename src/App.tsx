@@ -27,10 +27,10 @@ import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { Team } from './modules/Team/Team';
 
 export const App = ({
-	latestToast,
+	activeToast,
 	addToast,
 }: {
-	latestToast: string | undefined;
+	activeToast: boolean;
 	addToast: AddToastFunction;
 }): JSX.Element => {
 	const [currentOpponent, setCurrentOpponent] =
@@ -169,7 +169,7 @@ export const App = ({
 						meta: { ...update.meta, activeTab: 'OVERWORLD' },
 					})
 				}
-				latestToast={latestToast}
+				activeToast={activeToast}
 				addToast={addToast}
 			/>
 		);

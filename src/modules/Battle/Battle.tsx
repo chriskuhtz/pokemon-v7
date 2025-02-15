@@ -19,13 +19,13 @@ export const Battle = ({
 	initSaveFile,
 
 	goBack,
-	latestToast,
+	activeToast,
 	addToast,
 }: {
 	initSaveFile: SaveFile;
 	opponent: OwnedPokemon;
 	goBack: (update: SaveFile) => void;
-	latestToast: string | undefined;
+	activeToast: boolean;
 	addToast: AddToastFunction;
 }): JSX.Element => {
 	const team = initSaveFile.pokemon.filter((p) => p.onTeam);
@@ -71,7 +71,7 @@ export const Battle = ({
 				player={slot1}
 				voidSteps={['MOVE_SELECTION']}
 			/>
-			{!latestToast && (
+			{!activeToast && (
 				<BattleInfo
 					battleStep={battleStep}
 					battleWeather={battleWeather}
@@ -93,7 +93,7 @@ export const Battle = ({
 					battleStep={battleStep}
 					voidSteps={['OPPONENT_INTRO', 'PLAYER_INTRO']}
 				/>
-				{!latestToast && (
+				{!activeToast && (
 					<BattleActions
 						battleWeather={battleWeather}
 						battleStep={battleStep}
