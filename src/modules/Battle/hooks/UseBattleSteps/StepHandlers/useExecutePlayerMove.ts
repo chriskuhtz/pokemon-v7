@@ -78,6 +78,12 @@ export const useExecutePlayerMove = ({
 				nextPlayerMove?.type === 'BattleAttack' &&
 				nextPlayerMove.name === 'whirlwind'
 			) {
+				if (opponent.ability === 'suction-cups') {
+					dispatchToast(`${opponent.data.name} holds on with suction-cups`);
+					setNextPlayerMove(undefined);
+					followTurnPath();
+					return;
+				}
 				getWhirlwinded();
 			}
 
