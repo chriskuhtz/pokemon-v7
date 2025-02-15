@@ -6,13 +6,22 @@ export function isPrimaryAilment(x: { type: string }): x is PrimaryAilment {
 	return ['paralysis', 'burn', 'freeze', 'poison', 'sleep'].includes(x.type);
 }
 
+const secondaryAilments = [
+	'confusion',
+	'trap',
+	'infatuation',
+	'leech-seed',
+	'locked-in',
+] as const;
+
+type SecondaryAilmentType = (typeof secondaryAilments)[number];
 export interface SecondaryAilment {
-	type: 'confusion' | 'trap' | 'infatuation' | 'dire-hit' | 'leech-seed';
+	type: SecondaryAilmentType;
 	duration: number;
 }
 
 export function isSecondaryAilment(x: { type: string }): x is SecondaryAilment {
-	return ['confusion', 'trap', 'infatuation', 'leech-seed'].includes(x.type);
+	return secondaryAilments.some((s) => s === x.type);
 }
 
 export const PARA_CHANCE = 0.25;
