@@ -31,3 +31,7 @@ button {
 	font-family: 'Doto';
 	font-weight: 900;
 }
+:focus {
+	background-color: black;
+	color: white;
+}

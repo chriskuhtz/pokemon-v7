@@ -20,7 +20,7 @@ export const StarterSelection = ({
 	proceed: (name: string, starterDexId: number) => void;
 }): JSX.Element => {
 	const options = randomStarters ? randomStarterOptions : defaultStarters;
-	const [chosenStarter, setChosenStarter] = useState<number>(options[1]);
+	const [chosenStarter, setChosenStarter] = useState<number | undefined>();
 	const [name, setName] = useState<string | undefined>('');
 	return (
 		<Page headline="Intro:">
@@ -34,7 +34,14 @@ export const StarterSelection = ({
 				<Stack mode="row" justifyContent="center">
 					{options.map((o) => (
 						<img
+							role="button"
+							tabIndex={0}
 							key={o}
+							onKeyDown={(e) => {
+								if (e.key === 'Enter') {
+									setChosenStarter(o);
+								}
+							}}
 							style={{
 								borderRadius: 9000,
 								border:
@@ -50,8 +57,8 @@ export const StarterSelection = ({
 					))}
 				</Stack>
 				<button
-					disabled={!name}
-					onClick={() => proceed(name ?? '', chosenStarter)}
+					disabled={!name || !chosenStarter}
+					onClick={() => proceed(name ?? '', chosenStarter ?? 0)}
 				>
 					Proceed
 				</button>
