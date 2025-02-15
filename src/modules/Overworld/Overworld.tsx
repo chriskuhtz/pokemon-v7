@@ -150,7 +150,7 @@ export const Overworld = ({
 			}
 			const [id, data] = occ;
 
-			if (data.type === 'ITEM') {
+			if (data.type === 'ITEM' || data.type === 'HIDDEN_ITEM') {
 				addDialogue({
 					message: `Found ${data.amount} ${data.item}`,
 					onRemoval: () => collectItem(occ as [string, OverworldItem]),

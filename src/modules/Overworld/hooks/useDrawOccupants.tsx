@@ -114,6 +114,8 @@ const getSource = (occ: Occupant) => {
 			return '/mapObjects/pc.png';
 		case 'BUSH':
 			return '/mapObjects/bush.png';
+		case 'HIDDEN_ITEM':
+			return '/mapObjects/hiddenItem.png';
 		case 'ITEM':
 		default:
 			return '/mapObjects/pokeball.png';
