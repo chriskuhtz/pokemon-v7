@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { AddToastFunction } from '../../hooks/useToasts';
@@ -18,6 +18,16 @@ export const PokemonStorage = ({
 	setPokemon: (x: OwnedPokemon[]) => void;
 	addToast: AddToastFunction;
 }): JSX.Element => {
+	const [sortBy, setSortBy] = useState<'DEX_ID' | 'HAPPINESS' | 'XP'>('DEX_ID');
+	const sortFunction = useMemo(() => {
+		if (sortBy === 'XP') {
+			return (a: OwnedPokemon, b: OwnedPokemon) => b.xp - a.xp;
+		}
+		if (sortBy === 'HAPPINESS') {
+			return (a: OwnedPokemon, b: OwnedPokemon) => b.happiness - a.happiness;
+		}
+		return (a: OwnedPokemon, b: OwnedPokemon) => a.dexId - b.dexId;
+	}, [sortBy]);
 	const team = useMemo(() => allPokemon.filter((p) => p.onTeam), [allPokemon]);
 	const stored = useMemo(
 		() => allPokemon.filter((p) => p.onTeam === false),
@@ -35,7 +45,7 @@ export const PokemonStorage = ({
 	};
 
 	return (
-		<Page goBack={goBack} headline="Storage:">
+		<Page goBack={goBack} headline="Your Pokemon:">
 			<h2>Team:</h2>
 			<Stack mode="row">
 				{team.map((pokemon) => (
@@ -53,10 +63,52 @@ export const PokemonStorage = ({
 					/>
 				))}
 			</Stack>
-			<h2>Storage:</h2>
+
+			<h2
+				style={{
+					display: 'flex',
+					alignItems: 'center',
+					justifyContent: 'space-between',
+				}}
+			>
+				Storage:
+				<div style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
+					Sort By
+					<button
+						style={
+							sortBy === 'DEX_ID'
+								? { backgroundColor: 'black', color: 'white' }
+								: undefined
+						}
+						onClick={() => setSortBy('DEX_ID')}
+					>
+						Dex Id
+					</button>
+					<button
+						style={
+							sortBy === 'HAPPINESS'
+								? { backgroundColor: 'black', color: 'white' }
+								: undefined
+						}
+						onClick={() => setSortBy('HAPPINESS')}
+					>
+						Happiness
+					</button>
+					<button
+						style={
+							sortBy === 'XP'
+								? { backgroundColor: 'black', color: 'white' }
+								: undefined
+						}
+						onClick={() => setSortBy('XP')}
+					>
+						Level
+					</button>
+				</div>
+			</h2>
 
 			<Stack mode="row">
-				{stored.map((pokemon) => (
+				{stored.sort(sortFunction).map((pokemon) => (
 					<IconSolarSystem
 						sun={{ url: getPokemonSprite(pokemon.dexId) }}
 						firstPlanetUrl={getItemUrl(pokemon.ball)}
