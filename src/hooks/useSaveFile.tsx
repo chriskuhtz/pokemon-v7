@@ -225,7 +225,7 @@ export const useSaveFile = (
 			},
 			'talkToNurse'
 		);
-		addToast('Whole Team fully healed');
+		addToast('Whole Team fully healed', 'SUCCESS');
 	};
 	const cutBushReducer = (id: number) => {
 		setSaveFile(

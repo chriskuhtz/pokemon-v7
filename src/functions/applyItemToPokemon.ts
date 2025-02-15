@@ -1,13 +1,29 @@
 import { AddToastFunction } from '../hooks/useToasts';
-import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { BattlePokemon, isBattlePokemon } from '../interfaces/BattlePokemon';
 import { HealingItemType } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { removeHealableAilments } from './removeHealableAilments';
 
 export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	pokemon: T,
 	item: HealingItemType,
 	addToast?: AddToastFunction
 ): T {
+	if (item === 'full-restore') {
+		if (addToast) {
+			addToast(`fully healed`);
+		}
+		if (isBattlePokemon(pokemon)) {
+			return {
+				...pokemon,
+				damage: 0,
+				primaryAilment: undefined,
+				secondaryAilments: removeHealableAilments(pokemon.secondaryAilments),
+			};
+		}
+
+		return { ...pokemon, damage: 0, primaryAilment: undefined };
+	}
 	if (item === 'potion') {
 		const updatedDamage = Math.max(pokemon.damage - 20, 0);
 		if (addToast) {
