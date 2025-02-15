@@ -44,6 +44,15 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		}
 		return { ...pokemon, primaryAilment: undefined };
 	}
+	if (
+		item === 'paralyze-heal' &&
+		pokemon.primaryAilment?.type === 'paralysis'
+	) {
+		if (addToast) {
+			addToast(`Paralysis healed`);
+		}
+		return { ...pokemon, primaryAilment: undefined };
+	}
 
 	return pokemon;
 }
