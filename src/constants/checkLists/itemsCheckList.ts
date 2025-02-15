@@ -138,6 +138,7 @@ export const itemsCheckList: {
 	{
 		name: 'full-heal',
 		url: 'https://pokeapi.co/api/v2/item/27/',
+		handled: true,
 	},
 	{ name: 'revive', url: 'https://pokeapi.co/api/v2/item/28/' },
 	{

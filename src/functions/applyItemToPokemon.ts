@@ -30,6 +30,20 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 
 		return { ...pokemon, damage: 0, primaryAilment: undefined };
 	}
+	if (item === 'full-heal') {
+		if (addToast) {
+			addToast(`all ailments healed`);
+		}
+		if (isBattlePokemon(pokemon)) {
+			return {
+				...pokemon,
+				primaryAilment: undefined,
+				secondaryAilments: removeHealableAilments(pokemon.secondaryAilments),
+			};
+		}
+
+		return { ...pokemon, primaryAilment: undefined };
+	}
 
 	if (HPHealTable[item]) {
 		const updatedDamage = Math.max(pokemon.damage - HPHealTable[item], 0);
