@@ -103,10 +103,12 @@ export const itemsCheckList: {
 	{
 		name: 'ice-heal',
 		url: 'https://pokeapi.co/api/v2/item/20/',
+		handled: true,
 	},
 	{
 		name: 'awakening',
 		url: 'https://pokeapi.co/api/v2/item/21/',
+		handled: true,
 	},
 	{
 		name: 'paralyze-heal',

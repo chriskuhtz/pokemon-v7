@@ -38,6 +38,12 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		}
 		return { ...pokemon, primaryAilment: undefined };
 	}
+	if (item === 'awakening' && pokemon.primaryAilment?.type === 'sleep') {
+		if (addToast) {
+			addToast(`Woken Up`);
+		}
+		return { ...pokemon, primaryAilment: undefined };
+	}
 
 	return pokemon;
 }
