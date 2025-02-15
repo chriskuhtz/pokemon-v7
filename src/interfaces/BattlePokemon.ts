@@ -14,4 +14,5 @@ export interface BattlePokemon extends OwnedPokemon {
 	statBoosts: StatObject;
 	capture_rate: number;
 	secondaryAilments: SecondaryAilment[];
+	flashFired?: boolean;
 }

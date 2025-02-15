@@ -22,7 +22,9 @@ export const applyPrimaryAilmentToPokemon = (
 	if (
 		ailment === 'burn' &&
 		//fire pokemon cant get burned
-		!getTypeNames(pokemon.data.types).includes('fire')
+		!getTypeNames(pokemon.data.types).includes('fire') &&
+		//flash fire pokemon cant get burned
+		pokemon.ability !== 'flash-fire'
 	) {
 		dispatchToast(
 			`${pokemon.data.name} was burned ${

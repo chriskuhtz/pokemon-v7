@@ -30,6 +30,7 @@ export const applyAttackToPokemon = ({
 	dispatchToast: AddToastFunction;
 	targetIsFlying?: boolean;
 }): { updatedAttacker: BattlePokemon; updatedTarget: BattlePokemon } => {
+	let updatedTarget = { ...target };
 	if (attack.data.target.name === 'user') {
 		let updatedMon = { ...attacker };
 
@@ -54,6 +55,13 @@ export const applyAttackToPokemon = ({
 		targetIsFlying
 	);
 
+	if (target.ability === 'flash-fire' && attack.data.type.name === 'fire') {
+		dispatchToast(
+			`${target.data.name} raised its power with ${target.ability}`
+		);
+		updatedTarget.flashFired = true;
+	}
+
 	let updatedAttacker =
 		(attack.multiHits ?? 0) > 1
 			? attacker
@@ -71,10 +79,10 @@ export const applyAttackToPokemon = ({
 			`by ${target.data.name}'s static`
 		);
 	}
-	const damagedTarget = { ...target, damage: target.damage + damage };
+	updatedTarget = { ...updatedTarget, damage: target.damage + damage };
 
-	let updatedTarget = applyAttackAilmentsToPokemon(
-		damagedTarget,
+	updatedTarget = applyAttackAilmentsToPokemon(
+		updatedTarget,
 		attack,
 		dispatchToast
 	);
@@ -89,5 +97,5 @@ export const applyAttackToPokemon = ({
 	setAttacker(updatedAttacker);
 	setTarget(updatedTarget);
 
-	return { updatedAttacker, updatedTarget: damagedTarget };
+	return { updatedAttacker, updatedTarget };
 };

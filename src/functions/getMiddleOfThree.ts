@@ -3,5 +3,7 @@ export const getMiddleOfThree = (array: number[]): number => {
 		throw new Error('need an array of length 3');
 	}
 
-	return array.sort()[1];
+	const sorted = array.sort((a, b) => a - b);
+
+	return sorted[1];
 };

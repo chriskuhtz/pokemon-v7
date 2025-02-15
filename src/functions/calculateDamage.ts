@@ -46,6 +46,10 @@ export const calculateDamage = (
 
 	const absorbAbility = DamageAbsorb[target.ability];
 
+	if (target.ability === 'flash-fire' && attack.data.type.name === 'fire') {
+		return 0;
+	}
+
 	if (absorbAbility === attack.data.type.name) {
 		const res = Math.max(-Math.floor(target.stats.hp / 4), -target.damage);
 		if (dispatchToast && res < 0) {
@@ -89,7 +93,8 @@ export const calculateDamage = (
 	const teraShieldFactor = 1;
 	const flyingFactor =
 		targetIsFlying && flyDoubleDamageMoves.includes(attack.name) ? 2 : 1;
-
+	const flashFireFactor =
+		attacker.flashFired && attack.data.type.name === 'fire' ? 1.5 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -105,7 +110,8 @@ export const calculateDamage = (
 				otherFactor *
 				zMoveFactor *
 				teraShieldFactor *
-				flyingFactor
+				flyingFactor *
+				flashFireFactor
 		),
 		1
 	);
