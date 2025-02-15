@@ -118,6 +118,7 @@ export const itemsCheckList: {
 	{
 		name: 'full-restore',
 		url: 'https://pokeapi.co/api/v2/item/23/',
+		handled: true,
 	},
 	{
 		name: 'max-potion',

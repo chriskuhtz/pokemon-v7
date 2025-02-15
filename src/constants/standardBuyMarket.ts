@@ -13,11 +13,11 @@ export const STANDARD_BUY_MARKET: Partial<Inventory> = {
 	'premier-ball': 1,
 	'heal-ball': 1,
 	'quick-ball': 1,
-	'cherish-ball': 1,
 	potion: 1,
 	antidote: 1,
 	'burn-heal': 1,
 	'ice-heal': 1,
 	awakening: 1,
 	'paralyze-heal': 1,
+	'full-restore': 1,
 };

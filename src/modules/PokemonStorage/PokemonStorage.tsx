@@ -1,24 +1,23 @@
 import { useMemo } from 'react';
-import { animationTimer } from '../../constants/gameData';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
-import { useToasts } from '../../hooks/useToasts';
+import { AddToastFunction } from '../../hooks/useToasts';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { Toast } from '../../uiComponents/Toast/Toast';
 
 export const PokemonStorage = ({
 	allPokemon,
 	goBack,
 	setPokemon,
+	addToast,
 }: {
 	allPokemon: OwnedPokemon[];
 	goBack: () => void;
 	setPokemon: (x: OwnedPokemon[]) => void;
+	addToast: AddToastFunction;
 }): JSX.Element => {
-	const { latestToast, addToast } = useToasts(animationTimer / 2);
 	const team = useMemo(() => allPokemon.filter((p) => p.onTeam), [allPokemon]);
 	const stored = useMemo(
 		() => allPokemon.filter((p) => p.onTeam === false),
@@ -37,7 +36,6 @@ export const PokemonStorage = ({
 
 	return (
 		<Page goBack={goBack} headline="Storage:">
-			{latestToast && <Toast message={latestToast} />}
 			<h2>Team:</h2>
 			<Stack mode="row">
 				{team.map((pokemon) => (
@@ -47,7 +45,7 @@ export const PokemonStorage = ({
 						key={pokemon.id}
 						onClick={() => {
 							if (team.length === 1) {
-								addToast('One Pokemon must remain on the team!');
+								addToast('One Pokemon must remain on the team!', 'ERROR');
 								return;
 							}
 							togglePokemonOnTeam(pokemon.id);
@@ -65,7 +63,7 @@ export const PokemonStorage = ({
 						key={pokemon.id}
 						onClick={() => {
 							if (team.length === 6) {
-								addToast('You can only take 6 Pokemon on the team!');
+								addToast('You can only take 6 Pokemon on the team!', 'ERROR');
 								return;
 							}
 							togglePokemonOnTeam(pokemon.id);

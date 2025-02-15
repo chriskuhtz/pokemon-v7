@@ -16,3 +16,10 @@ export interface BattlePokemon extends OwnedPokemon {
 	secondaryAilments: SecondaryAilment[];
 	flashFired?: boolean;
 }
+
+export function isBattlePokemon(
+	x: OwnedPokemon | BattlePokemon
+): x is BattlePokemon {
+	// eslint-disable-next-line no-prototype-builtins
+	return x.hasOwnProperty('data');
+}

@@ -39,7 +39,7 @@ export const calculateDamage = (
 	}
 
 	const damageClass = attack.data.damage_class.name;
-	if (damageClass == 'status') {
+	if (damageClass === 'status') {
 		console.error('what is this', attack);
 		return 0;
 	}

@@ -152,6 +152,7 @@ export const App = ({
 	if (activeTab === 'STORAGE') {
 		return (
 			<PokemonStorage
+				addToast={addToast}
 				allPokemon={pokemon}
 				goBack={() => setActiveTabReducer('OVERWORLD')}
 				setPokemon={setPokemonReducer}
