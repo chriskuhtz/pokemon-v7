@@ -22,15 +22,12 @@ import {
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleStep, catchingPath } from '../../../../types/BattleStep';
 
+//TODO: charge up
 export const executeMove = ({
-	chargedUpMove,
-	chargedUpTargetMove,
 	followTurnPath,
 	setBattleStepUnableToAttack,
 	attacker,
 	target,
-	setNextAttackerMove,
-	nextAttackerMove,
 	followBattleStepPath,
 	dispatchToast,
 	setAttacker,
@@ -45,9 +42,8 @@ export const executeMove = ({
 	repeatBattleStepForMultiHit,
 	attackerFaintingPath,
 	targetFaintingPath,
+	battleRound,
 }: {
-	chargedUpMove: BattleAttack | undefined;
-	chargedUpTargetMove: BattleAttack | undefined;
 	followTurnPath: () => void;
 	setBattleStepUnableToAttack: () => void;
 	setBattleStepMissed: () => void;
@@ -55,8 +51,6 @@ export const executeMove = ({
 	repeatBattleStepForMultiHit: () => void;
 	attacker: BattlePokemon;
 	target: BattlePokemon;
-	setNextAttackerMove: (x: BattleAction | undefined) => void;
-	nextAttackerMove: BattleAction | undefined;
 	followBattleStepPath: (path: BattleStep[]) => void;
 	dispatchToast: AddToastFunction;
 	setUsedItems: React.Dispatch<React.SetStateAction<Inventory>>;
@@ -68,17 +62,38 @@ export const executeMove = ({
 	battleWeather: WeatherType | undefined;
 	attackerFaintingPath: BattleStep[];
 	targetFaintingPath: BattleStep[];
+	battleRound: number;
 }) => {
-	if (chargedUpMove) {
-		followTurnPath();
+	if (attacker.moveQueue.length === 0) {
+		throw new Error('there is nothing to execute');
 	}
 	if (pokemonCantMove(attacker)) {
 		setBattleStepUnableToAttack();
-		setNextAttackerMove(undefined);
 		return;
 	}
 
 	const t = setTimeout(() => {
+		const nextAttackerMove = attacker.moveQueue[0];
+		const nextTargetMove = target.moveQueue[0];
+		const setNextAttackerMove = (newMove?: BattleAction) => {
+			if (!newMove) {
+				setAttacker({
+					...attacker,
+					moveQueue: [...attacker.moveQueue].filter(
+						(m) => m.round !== battleRound
+					),
+				});
+				return;
+			} else
+				setAttacker({
+					...attacker,
+					moveQueue: [
+						newMove,
+						...attacker.moveQueue.filter((m) => m.round !== battleRound),
+					],
+				});
+		};
+
 		if (nextAttackerMove?.type === 'CatchProcessInfo') {
 			followBattleStepPath(catchingPath);
 			return;
@@ -126,7 +141,10 @@ export const executeMove = ({
 				followTurnPath();
 				return;
 			}
-			const targetIsFlying = chargedUpTargetMove?.name === 'fly';
+			const targetIsFlying =
+				nextTargetMove.type === 'BattleAttack' &&
+				nextTargetMove?.data.name === 'fly';
+
 			const miss = determineMiss(
 				nextAttackerMove,
 				attacker,

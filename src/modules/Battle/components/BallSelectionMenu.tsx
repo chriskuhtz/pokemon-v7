@@ -1,7 +1,7 @@
 import { IoIosArrowBack } from 'react-icons/io';
 import { ItemCard } from '../../../components/ItemCard/ItemCard';
 import { baseSize } from '../../../constants/gameData';
-import { BattleAction } from '../../../interfaces/BattleActions';
+import { CatchProcessInfo } from '../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import { PokeballType, isPokeball } from '../../../interfaces/Item';
@@ -13,7 +13,7 @@ export const BallSelectionMenu = ({
 	goBack,
 }: {
 	inventory: Inventory;
-	chooseMove: (x: BattleAction) => void;
+	chooseMove: (x: Omit<CatchProcessInfo, 'round'>) => void;
 	opponent: BattlePokemon;
 	goBack: () => void;
 }) => {

@@ -15,29 +15,27 @@ import { useBattlePokemon } from './hooks/useBattlePokemon';
 import { useBattleSteps } from './hooks/UseBattleSteps/useBattleSteps';
 
 export const Battle = ({
-	opponent,
+	initOppo,
 	initSaveFile,
-
 	goBack,
 	activeToast,
 	addToast,
 }: {
 	initSaveFile: SaveFile;
-	opponent: OwnedPokemon;
+	initOppo: OwnedPokemon;
 	goBack: (update: SaveFile) => void;
 	activeToast: boolean;
 	addToast: AddToastFunction;
 }): JSX.Element => {
 	const team = initSaveFile.pokemon.filter((p) => p.onTeam);
 
-	const [slot1, setSlot1] = useBattlePokemon(team[0]);
-	const [slot3, setSlot3] = useBattlePokemon(opponent);
+	const [player, setPlayer] = useBattlePokemon(team[0]);
+	const [opponent, setOpponent] = useBattlePokemon(initOppo);
 
 	const {
 		battleStep,
 		initBattle,
 		nextMove,
-		setNextPlayerMove,
 		battleWeather,
 		usedItems,
 		battleRound,
@@ -45,20 +43,20 @@ export const Battle = ({
 	} = useBattleSteps({
 		initSaveFile,
 		goBack,
-		opponent: slot3,
-		player: slot1,
-		setOpponent: setSlot3,
-		setPlayer: setSlot1,
+		opponent: opponent,
+		player: player,
+		setOpponent: setOpponent,
+		setPlayer: setPlayer,
 		dispatchToast: addToast,
 	});
 
 	useEffect(() => {
-		if (battleStep === 'UNITIALIZED' && slot1 && slot3) {
+		if (battleStep === 'UNITIALIZED' && player && opponent) {
 			initBattle();
 		}
-	}, [battleStep, initBattle, slot1, slot3]);
+	}, [battleStep, initBattle, player, opponent]);
 
-	if (!slot1 || !slot3) {
+	if (!player || !opponent) {
 		return <LoadingScreen />;
 	}
 
@@ -67,8 +65,8 @@ export const Battle = ({
 			<BattleBanner
 				nextMove={nextMove}
 				battleStep={battleStep}
-				opponent={slot3}
-				player={slot1}
+				opponent={opponent}
+				player={player}
 				voidSteps={['MOVE_SELECTION']}
 			/>
 			{!activeToast && (
@@ -82,14 +80,14 @@ export const Battle = ({
 			<div className="battle">
 				<EnemyLane
 					battleStep={battleStep}
-					opponentPokemon={slot3}
+					opponentPokemon={opponent}
 					voidSteps={['OPPONENT_INTRO', 'PLAYER_INTRO', 'BATTLE_WON']}
 					catchProcessBall={
 						nextMove?.type === 'CatchProcessInfo' ? nextMove.ball : undefined
 					}
 				/>
 				<PlayerLane
-					pokemon={slot1}
+					pokemon={player}
 					battleStep={battleStep}
 					voidSteps={['OPPONENT_INTRO', 'PLAYER_INTRO']}
 				/>
@@ -97,20 +95,35 @@ export const Battle = ({
 					<BattleActions
 						battleWeather={battleWeather}
 						battleStep={battleStep}
+						battleRound={battleRound}
 						chooseMove={(x) => {
 							if (x.type === 'CatchProcessInfo' || x.type === 'InBattleItem') {
-								setNextPlayerMove(x);
+								setPlayer({
+									...player,
+									moveQueue: [...player.moveQueue, x],
+								});
+
 								return;
 							}
 							if (secondTurnMoves.includes(x.name)) {
-								setNextPlayerMove({ ...x, type: 'ChargeUp' });
+								setPlayer({
+									...player,
+									moveQueue: [
+										...player.moveQueue,
+										{ ...x, type: 'ChargeUp' },
+										{ ...x, round: x.round + 1 },
+									],
+								});
 								return;
 							}
-							setNextPlayerMove(x);
+							setPlayer({
+								...player,
+								moveQueue: [...player.moveQueue, { ...x, type: 'ChargeUp' }, x],
+							});
 						}}
 						inventory={joinInventories(initSaveFile.inventory, usedItems, true)}
-						player={slot1}
-						opponent={slot3}
+						player={player}
+						opponent={opponent}
 						runAway={runAway}
 					/>
 				)}

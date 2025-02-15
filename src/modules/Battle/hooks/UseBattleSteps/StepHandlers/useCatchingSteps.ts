@@ -7,15 +7,15 @@ import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
 export const useCatchingSteps = ({
 	battleStep,
-	nextPlayerMove,
+	player,
 	opponent,
 	setCaughtPokemon,
 	setUsedItems,
-	setNextPlayerMove,
 	followBattleStepPath,
 	startPath,
 	opponentHasBeenCaughtBefore,
 	battleRound,
+	setPlayer,
 }: ExtendedBattleStepHandler & { opponentHasBeenCaughtBefore: boolean }) => {
 	useEffect(() => {
 		if (battleStep !== 'CATCHING_PROCESS_1') {
@@ -31,14 +31,15 @@ export const useCatchingSteps = ({
 	useEffect(() => {
 		if (
 			battleStep !== 'CATCHING_PROCESS_2' ||
-			nextPlayerMove?.type !== 'CatchProcessInfo' ||
+			player?.moveQueue[0]?.type !== 'CatchProcessInfo' ||
 			!opponent
 		) {
 			return;
 		}
+		const { ball } = player.moveQueue[0];
 		const t = setTimeout(() => {
 			const catchSuccess = determineCaptureSuccess(
-				nextPlayerMove.ball,
+				ball,
 				opponent,
 				battleRound,
 				'STANDARD',
@@ -53,24 +54,25 @@ export const useCatchingSteps = ({
 	}, [
 		battleStep,
 		followBattleStepPath,
-		nextPlayerMove,
 		opponent,
 		opponentHasBeenCaughtBefore,
 		startPath,
 		battleRound,
+		player,
 	]);
 
 	useEffect(() => {
 		if (
 			battleStep !== 'CATCHING_PROCESS_3' ||
-			nextPlayerMove?.type !== 'CatchProcessInfo' ||
+			player?.moveQueue[0]?.type !== 'CatchProcessInfo' ||
 			!opponent
 		) {
 			return;
 		}
+		const { ball } = player.moveQueue[0];
 		const t = setTimeout(() => {
 			const catchSuccess = determineCaptureSuccess(
-				nextPlayerMove.ball,
+				ball,
 				opponent,
 				battleRound,
 				'STANDARD',
@@ -85,24 +87,25 @@ export const useCatchingSteps = ({
 	}, [
 		battleStep,
 		followBattleStepPath,
-		nextPlayerMove,
 		opponent,
 		opponentHasBeenCaughtBefore,
 		startPath,
 		battleRound,
+		player,
 	]);
 
 	useEffect(() => {
 		if (
 			battleStep !== 'CATCHING_PROCESS_4' ||
-			nextPlayerMove?.type !== 'CatchProcessInfo' ||
+			player?.moveQueue[0]?.type !== 'CatchProcessInfo' ||
 			!opponent
 		) {
 			return;
 		}
+		const { ball } = player.moveQueue[0];
 		const t = setTimeout(() => {
 			const catchSuccess = determineCaptureSuccess(
-				nextPlayerMove.ball,
+				ball,
 				opponent,
 				battleRound,
 				'STANDARD',
@@ -116,8 +119,9 @@ export const useCatchingSteps = ({
 					...x,
 					{
 						pokemon: opponent,
-						ball: nextPlayerMove.ball,
+						ball: ball,
 						type: 'CatchProcessInfo',
+						round: battleRound,
 					},
 				]);
 				followBattleStepPath(catchingPath);
@@ -128,33 +132,38 @@ export const useCatchingSteps = ({
 	}, [
 		battleStep,
 		followBattleStepPath,
-		nextPlayerMove,
 		opponent,
 		startPath,
 		setCaughtPokemon,
 		opponentHasBeenCaughtBefore,
 		battleRound,
+		player,
 	]);
 
 	useEffect(() => {
-		if (battleStep !== 'CATCHING_FAILURE') {
+		if (battleStep !== 'CATCHING_FAILURE' || !player) {
 			return;
 		}
 		const t = setTimeout(() => {
-			if (nextPlayerMove?.type === 'CatchProcessInfo') {
-				setUsedItems((i) => joinInventories(i, { [nextPlayerMove.ball]: 1 }));
+			if (player?.moveQueue[0]?.type === 'CatchProcessInfo') {
+				const { ball } = player.moveQueue[0];
+				setUsedItems((i) => joinInventories(i, { [ball]: 1 }));
 			}
-			setNextPlayerMove(undefined);
+			setPlayer({
+				...player,
+				moveQueue: [...player.moveQueue].filter((m) => m.round !== battleRound),
+			});
 			followBattleStepPath(catchingFailurePath);
 		}, animationTimer);
 
 		return () => clearTimeout(t);
 	}, [
 		battleStep,
-		nextPlayerMove,
 		followBattleStepPath,
-		setNextPlayerMove,
 		setUsedItems,
+		player,
+		setPlayer,
+		battleRound,
 	]);
 
 	useEffect(() => {
@@ -162,12 +171,13 @@ export const useCatchingSteps = ({
 			return;
 		}
 		const t = setTimeout(() => {
-			if (nextPlayerMove?.type === 'CatchProcessInfo') {
-				setUsedItems((i) => joinInventories(i, { [nextPlayerMove.ball]: 1 }));
+			if (player?.moveQueue[0]?.type === 'CatchProcessInfo') {
+				const { ball } = player.moveQueue[0];
+				setUsedItems((i) => joinInventories(i, { [ball]: 1 }));
 			}
 			followBattleStepPath(catchingPath);
 		}, animationTimer);
 
 		return () => clearTimeout(t);
-	}, [battleStep, followBattleStepPath, nextPlayerMove, setUsedItems]);
+	}, [battleStep, followBattleStepPath, player, setUsedItems]);
 };

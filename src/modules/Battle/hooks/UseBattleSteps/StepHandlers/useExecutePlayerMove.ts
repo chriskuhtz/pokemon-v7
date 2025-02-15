@@ -11,9 +11,8 @@ export const useExecutePlayerMove = ({
 	battleStep,
 	player,
 	opponent,
-	nextPlayerMove,
+
 	setPlayer,
-	setNextPlayerMove,
 	setBattleStep,
 	setOpponent,
 	battleWeather,
@@ -22,10 +21,9 @@ export const useExecutePlayerMove = ({
 	followBattleStepPath,
 	startPath,
 	followTurnPath,
-	chargedUpPlayerMove,
 	setUsedItems,
 	getWhirlwinded,
-	chargedUpOpponentMove,
+	battleRound,
 }: ExtendedBattleStepHandler & {
 	setBattleStep: (x: BattleStep) => void;
 	getWhirlwinded: () => void;
@@ -38,15 +36,11 @@ export const useExecutePlayerMove = ({
 			throw new Error('no player or opponent');
 		}
 		executeMove({
-			chargedUpMove: chargedUpPlayerMove,
-			chargedUpTargetMove: chargedUpOpponentMove,
 			followTurnPath: followTurnPath,
 			setBattleStepUnableToAttack: () =>
 				setBattleStep('PLAYER_UNABLE_TO_ATTACK'),
 			attacker: player,
 			target: opponent,
-			setNextAttackerMove: setNextPlayerMove,
-			nextAttackerMove: nextPlayerMove,
 			followBattleStepPath,
 			dispatchToast,
 			setUsedItems,
@@ -61,22 +55,20 @@ export const useExecutePlayerMove = ({
 			repeatBattleStepForMultiHit: () => setBattleStep('EXECUTE_PLAYER_MOVE'),
 			attackerFaintingPath: playerFaintingPath,
 			targetFaintingPath: opponentFaintingPath,
+			battleRound,
 		});
 	}, [
+		battleRound,
 		battleStep,
 		battleWeather,
-		chargedUpOpponentMove,
-		chargedUpPlayerMove,
 		dispatchToast,
 		followBattleStepPath,
 		followTurnPath,
 		getWhirlwinded,
-		nextPlayerMove,
 		opponent,
 		player,
 		setBattleStep,
 		setCoins,
-		setNextPlayerMove,
 		setOpponent,
 		setPlayer,
 		setUsedItems,

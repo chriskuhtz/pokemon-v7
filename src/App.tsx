@@ -163,7 +163,7 @@ export const App = ({
 		return (
 			<Battle
 				initSaveFile={saveFile}
-				opponent={currentOpponent}
+				initOppo={currentOpponent}
 				goBack={(update) =>
 					putSaveFileReducer({
 						...update,

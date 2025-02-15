@@ -26,7 +26,6 @@ export const calculateDamage = (
 ): number => {
 	const damageClass = attack.data.damage_class.name;
 	if (damageClass === 'status') {
-		console.warn('why even calculate damage for status move', attack);
 		return 0;
 	}
 	const typeFactor = determineTypeFactor(target, attack);

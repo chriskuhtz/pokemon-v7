@@ -7,8 +7,8 @@ import { WeatherType } from '../../../interfaces/Weather';
 import { BattleStep } from '../types/BattleStep';
 import { BallSelectionMenu } from './BallSelectionMenu';
 import { BattleActionsMainMenu } from './BattleActionsMainMenu';
-import { MoveSelectionMenu } from './MoveSelectionMenu';
 import { HealingItemSelectionMenu } from './HealingItemSelectionMenu';
+import { MoveSelectionMenu } from './MoveSelectionMenu';
 
 export type BattleMenu = 'MAIN' | 'BALLS' | 'MOVES' | 'HEALING_ITEMS';
 
@@ -20,6 +20,7 @@ export const BattleActions = ({
 	opponent,
 	runAway,
 	battleWeather,
+	battleRound,
 }: {
 	inventory: Inventory;
 	chooseMove: (x: BattleAction) => void;
@@ -28,6 +29,7 @@ export const BattleActions = ({
 	player: BattlePokemon;
 	runAway: () => void;
 	battleWeather: WeatherType | undefined;
+	battleRound: number;
 }) => {
 	const [menu, setMenu] = useState<BattleMenu>('MAIN');
 	const balls: [PokeballType, number][] = Object.entries(inventory).filter(
@@ -42,7 +44,7 @@ export const BattleActions = ({
 		return (
 			<BallSelectionMenu
 				inventory={inventory}
-				chooseMove={chooseMove}
+				chooseMove={(x) => chooseMove({ ...x, round: battleRound })}
 				opponent={opponent}
 				goBack={() => setMenu('MAIN')}
 			/>
@@ -52,7 +54,7 @@ export const BattleActions = ({
 		return (
 			<HealingItemSelectionMenu
 				inventory={inventory}
-				chooseMove={chooseMove}
+				chooseMove={(x) => chooseMove({ ...x, round: battleRound })}
 				opponent={opponent}
 				goBack={() => setMenu('MAIN')}
 			/>
@@ -65,7 +67,7 @@ export const BattleActions = ({
 				opponent={opponent}
 				goBack={() => setMenu('MAIN')}
 				battleWeather={battleWeather}
-				chooseMove={chooseMove}
+				chooseMove={(x) => chooseMove({ ...x, round: battleRound })}
 			/>
 		);
 	}

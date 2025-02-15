@@ -1,5 +1,5 @@
 import { SecondaryAilment } from './Ailment';
-import { BattleAttack } from './BattleActions';
+import { BattleAction, BattleAttack } from './BattleActions';
 import { OwnedPokemon } from './OwnedPokemon';
 import { PokemonData } from './PokemonData';
 import { StatObject } from './StatObject';
@@ -15,6 +15,7 @@ export interface BattlePokemon extends OwnedPokemon {
 	capture_rate: number;
 	secondaryAilments: SecondaryAilment[];
 	flashFired?: boolean;
+	moveQueue: BattleAction[];
 }
 
 export function isBattlePokemon(
