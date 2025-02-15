@@ -1,5 +1,4 @@
 import { AddToastFunction } from '../hooks/useToasts';
-import { SecondaryAilmentType } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 
 export const reduceSecondaryAilmentDurations = (
@@ -17,14 +16,7 @@ export const reduceSecondaryAilmentDurations = (
 				if (a.type === 'trap') {
 					dispatchToast(`${p.data.name} is no longer trapped`);
 				}
-				if (a.type === 'locked-in') {
-					//pokemon become confused after lock in ends
-					dispatchToast(`${p.data.name} became confused from exhaustion`);
-					return {
-						type: 'confusion' as SecondaryAilmentType,
-						duration: 2 + Math.round(Math.random() * 3),
-					};
-				}
+
 				return undefined;
 			} else {
 				return { ...a, duration: a.duration - 1 };

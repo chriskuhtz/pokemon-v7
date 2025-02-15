@@ -1,1 +1,1 @@
-export const lockInMoves = ['thrash', 'petal-dance', 'outrage'];
+export const thrashingMoves = ['thrash', 'petal-dance', 'outrage'];

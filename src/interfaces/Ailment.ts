@@ -11,7 +11,6 @@ const secondaryAilments = [
 	'trap',
 	'infatuation',
 	'leech-seed',
-	'locked-in',
 ] as const;
 
 export type SecondaryAilmentType = (typeof secondaryAilments)[number];
