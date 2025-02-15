@@ -23,6 +23,7 @@ export const determineMiss = (
 			attacker.stats.accuracy,
 			attacker.statBoosts.accuracy
 		) / calculateModifiedStat(target.stats.evasion, target.statBoosts.evasion);
+
 	if (targetIsFlying && !flyHitMoves.includes(attack.name)) {
 		return true;
 	}
