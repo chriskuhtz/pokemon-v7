@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { animationTimer } from '../../../../../constants/gameData';
 import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/selfDestructingMoves';
 import { applyAttackToPokemon } from '../../../../../functions/applyAttackToPokemon';
+import { applyCrashDamage } from '../../../../../functions/applyCrashDamage';
 import { applyItemToPokemon } from '../../../../../functions/applyItemToPokemon';
 import { determineCrit } from '../../../../../functions/determineCrit';
 import { determineMiss } from '../../../../../functions/determineMiss';
@@ -15,6 +16,7 @@ import {
 	BattleStep,
 	catchingPath,
 	opponentFaintingPath,
+	playerFaintingPath,
 } from '../../../types/BattleStep';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
@@ -111,7 +113,15 @@ export const useExecutePlayerMove = ({
 					targetIsFlying
 				);
 				if (miss) {
-					setPlayer(reduceMovePP(player, nextPlayerMove.name));
+					let pla = reduceMovePP(player, nextPlayerMove.name);
+					pla = applyCrashDamage(player, nextPlayerMove.name, dispatchToast);
+					if (isKO(pla)) {
+						startPath(playerFaintingPath);
+						setNextPlayerMove(undefined);
+						return;
+					}
+
+					setPlayer(pla);
 					setNextPlayerMove(undefined);
 					setBattleStep('PLAYER_MISSED');
 					return;

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { animationTimer } from '../../../../../constants/gameData';
 import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/selfDestructingMoves';
 import { applyAttackToPokemon } from '../../../../../functions/applyAttackToPokemon';
+import { applyCrashDamage } from '../../../../../functions/applyCrashDamage';
 import { determineCrit } from '../../../../../functions/determineCrit';
 import { determineMiss } from '../../../../../functions/determineMiss';
 import { isKO } from '../../../../../functions/isKo';
@@ -9,7 +10,11 @@ import { pokemonCantMove } from '../../../../../functions/pokemonCantMove';
 import { reduceMovePP } from '../../../../../functions/reduceMovePP';
 import { targetFlinched } from '../../../../../functions/targetFlinched';
 import { BattleAttack } from '../../../../../interfaces/BattleActions';
-import { BattleStep, playerFaintingPath } from '../../../types/BattleStep';
+import {
+	BattleStep,
+	opponentFaintingPath,
+	playerFaintingPath,
+} from '../../../types/BattleStep';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
 export const useExecuteOpponentMove = ({
@@ -92,8 +97,19 @@ export const useExecuteOpponentMove = ({
 					targetIsFlying
 				);
 				if (miss) {
-					setOpponent(reduceMovePP(opponent, nextOpponentMove.name));
-					setNextPlayerMove(undefined);
+					let opp = reduceMovePP(opponent, nextOpponentMove.name);
+					opp = applyCrashDamage(
+						opponent,
+						nextOpponentMove.name,
+						dispatchToast
+					);
+					if (isKO(opp)) {
+						startPath(opponentFaintingPath);
+						setNextOpponentMove(undefined);
+						return;
+					}
+					setOpponent(opp);
+					setNextOpponentMove(undefined);
 					setBattleStep('OPPONENT_MISSED');
 					return;
 				}
