@@ -91,4 +91,7 @@ export const extraFeatureCheckList: {
 		name: 'dont have toasts and banners',
 	},
 	{ name: 'devtools inspector' },
+	{ name: 'map maker' },
+	{ name: 'trainer builder' },
+	{ name: 'hidden items on obstacles' },
 ];

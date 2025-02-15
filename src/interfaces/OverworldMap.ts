@@ -20,6 +20,14 @@ export interface OverworldItem {
 	amount: number;
 	map: MapId;
 }
+export interface OverworldHiddenItem {
+	type: 'HIDDEN_ITEM';
+	x: number;
+	y: number;
+	item: ItemType;
+	amount: number;
+	map: MapId;
+}
 export interface OverworldPC {
 	type: 'PC';
 	x: number;
@@ -53,6 +61,7 @@ export interface OverworldBush {
 }
 export type Occupant =
 	| OverworldItem
+	| OverworldHiddenItem
 	| OverworldPC
 	| OverworldMerchant
 	| OverworldNurse

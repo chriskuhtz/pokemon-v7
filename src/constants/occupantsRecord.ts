@@ -20,6 +20,14 @@ export const occupantsRecord: Record<number, Occupant> = {
 		amount: 7,
 		map: 'testMap',
 	},
+	2: {
+		type: 'HIDDEN_ITEM',
+		item: 'antidote',
+		x: 1,
+		y: 1,
+		amount: 1,
+		map: 'testMap',
+	},
 	//PCS start at 100000
 	100001: {
 		type: 'PC',
