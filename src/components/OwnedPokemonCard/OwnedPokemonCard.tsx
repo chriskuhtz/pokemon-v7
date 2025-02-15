@@ -1,3 +1,5 @@
+import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
+import { baseSize } from '../../constants/gameData';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getTypeNames } from '../../functions/getTypeNames';
@@ -8,7 +10,13 @@ import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSys
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 import { OwnedPokemonCardContent } from './components/OwnedPokemonCardContent';
 
-export const OwnedPokemonCard = ({ pokemon }: { pokemon: OwnedPokemon }) => {
+export const OwnedPokemonCard = ({
+	pokemon,
+	reorder,
+}: {
+	pokemon: OwnedPokemon;
+	reorder: (x: 'UP' | 'DOWN') => void;
+}) => {
 	const { res } = useGetPokemonData(pokemon.dexId);
 
 	if (!res) {
@@ -36,7 +44,10 @@ export const OwnedPokemonCard = ({ pokemon }: { pokemon: OwnedPokemon }) => {
 				/>
 			}
 			content={<OwnedPokemonCardContent ownedPokemon={pokemon} data={res} />}
-			actionElements={[]}
+			actionElements={[
+				<FaArrowUp onClick={() => reorder('UP')} size={baseSize / 3} />,
+				<FaArrowDown onClick={() => reorder('DOWN')} size={baseSize / 3} />,
+			]}
 		/>
 	);
 };
