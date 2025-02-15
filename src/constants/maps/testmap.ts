@@ -15,10 +15,10 @@ export const testMap: OverworldMap = {
 	],
 	occupants: [0, 1, 2, 100001, 300001, 400001, 500001],
 	possibleEncounters: [
-		{ dexId: 1, xp: 10000 },
-		{ dexId: 4, xp: 10000 },
-		{ dexId: 7, xp: 10000 },
-		{ dexId: 25, xp: 10000 },
+		{ dexId: 1, xp: 200 },
+		{ dexId: 4, xp: 200 },
+		{ dexId: 7, xp: 200 },
+		{ dexId: 25, xp: 200 },
 	],
 	weather: 'sandstorm',
 };
