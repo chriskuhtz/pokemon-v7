@@ -15,10 +15,10 @@ export const assembleMap = (
 		return row.map((c, columnIndex) =>
 			filteredOccupants.some((occupantId) => {
 				const o = occupantsRecord[occupantId];
-				if (o.type === 'HIDDEN_ITEM') {
-					return c;
-				}
-				return o.x === columnIndex && o.y === rowIndex;
+
+				return (
+					o.x === columnIndex && o.y === rowIndex && o.type !== 'HIDDEN_ITEM'
+				);
 			})
 				? 2 //make the field impassable if there is an occupant, except hidden item
 				: c

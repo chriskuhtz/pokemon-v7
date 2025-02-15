@@ -138,7 +138,15 @@ export const App = ({
 		);
 	}
 	if (activeTab === 'TEAM') {
-		return <Team team={team} goBack={() => setActiveTabReducer('MAIN')} />;
+		return (
+			<Team
+				team={team}
+				goBack={() => setActiveTabReducer('MAIN')}
+				reorderTeam={(newTeam: OwnedPokemon[]) =>
+					setPokemonReducer([...newTeam, ...pokemon.filter((p) => !p.onTeam)])
+				}
+			/>
+		);
 	}
 	if (activeTab === 'STORAGE') {
 		return (
