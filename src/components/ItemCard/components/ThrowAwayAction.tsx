@@ -18,6 +18,12 @@ export const ThrowAwayAction = ({
 				onChange={(e) => setNumberToDiscard(e.target.valueAsNumber)}
 				min={1}
 				max={amount}
+				onKeyDown={(e) => {
+					e.stopPropagation();
+					if (e.key === 'Enter') {
+						discardItem(numberToDiscard);
+					}
+				}}
 			/>
 			<FaTrash onClick={() => discardItem(numberToDiscard)} />
 		</div>

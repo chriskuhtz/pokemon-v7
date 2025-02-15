@@ -20,14 +20,21 @@ export const IconSolarSystem = ({
 }) => {
 	return (
 		<div
-			role={onClick ? 'button' : undefined}
-			onClick={onClick}
 			style={{
 				width: `${baseSize * 1.5}px`,
 				position: 'relative',
 			}}
 		>
 			<img
+				role={onClick ? 'button' : undefined}
+				tabIndex={onClick ? 0 : undefined}
+				onKeyDown={(e) => {
+					e.stopPropagation();
+					if (onClick && e.key === 'Enter') {
+						onClick();
+					}
+				}}
+				onClick={onClick}
 				style={{
 					...sun.styles,
 					border: '2px solid black',

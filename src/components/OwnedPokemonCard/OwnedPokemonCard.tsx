@@ -45,8 +45,30 @@ export const OwnedPokemonCard = ({
 			}
 			content={<OwnedPokemonCardContent ownedPokemon={pokemon} data={res} />}
 			actionElements={[
-				<FaArrowUp onClick={() => reorder('UP')} size={baseSize / 3} />,
-				<FaArrowDown onClick={() => reorder('DOWN')} size={baseSize / 3} />,
+				<FaArrowUp
+					onClick={() => reorder('UP')}
+					size={baseSize / 3}
+					role="button"
+					tabIndex={0}
+					onKeyDown={(e) => {
+						e.stopPropagation();
+						if (e.key === 'Enter') {
+							reorder('UP');
+						}
+					}}
+				/>,
+				<FaArrowDown
+					onClick={() => reorder('DOWN')}
+					size={baseSize / 3}
+					role="button"
+					tabIndex={0}
+					onKeyDown={(e) => {
+						e.stopPropagation();
+						if (e.key === 'Enter') {
+							reorder('DOWN');
+						}
+					}}
+				/>,
 			]}
 		/>
 	);

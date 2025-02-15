@@ -22,6 +22,12 @@ export const SellAction = ({
 				onChange={(e) => setNumberToSell(e.target.valueAsNumber)}
 				min={1}
 				max={amount}
+				onKeyDown={(e) => {
+					e.stopPropagation();
+					if (e.key === 'Enter') {
+						sellItem(numberToSell);
+					}
+				}}
 			/>
 			<BsCashCoin onClick={() => sellItem(numberToSell)} />
 		</div>

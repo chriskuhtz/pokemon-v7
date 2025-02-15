@@ -18,10 +18,16 @@ export const Card = ({
 }) => {
 	return (
 		<div
-			tabIndex={0}
+			tabIndex={onClick && !disabled ? 0 : undefined}
 			role={onClick && !disabled ? 'button' : 'none'}
 			onClick={disabled ? undefined : onClick}
 			className={`card ${highlighted ? 'highlightedCard' : ''}`}
+			onKeyDown={(e) => {
+				e.stopPropagation();
+				if (!disabled && e.key === 'Enter' && onClick) {
+					onClick();
+				}
+			}}
 		>
 			{icon}
 			{content}

@@ -36,7 +36,7 @@ export const extraFeatureCheckList: {
 	{ name: 'grass on encounter tiles', handled: true },
 	{ name: 'toast types', handled: true },
 	{ name: 'pc storage filters', handled: true },
-	{ name: 'full keyboard control' },
+	{ name: 'full keyboard control', handled: true },
 	{ name: 'movement by tile click' },
 	{ name: 'movement buttons' },
 	{ name: 'approach directions (PC only from front' },
