@@ -1,3 +1,5 @@
+import { getMiddleOfThree } from './getMiddleOfThree';
+
 /**
  *
  * @param xp the current xp
@@ -17,7 +19,7 @@ export const calculateLevelData = (
 	progressToNextLevel: number;
 } => {
 	//level must be between 1 and 100
-	const level = [1, Math.floor(Math.cbrt(xp)), 100].sort((a, b) => a - b)[1];
+	const level = getMiddleOfThree([1, Math.floor(Math.cbrt(xp)), 100]);
 
 	const xpAtNextLevel = Math.pow(level + 1, 3);
 	const xpForThisLevel = Math.pow(level, 3);

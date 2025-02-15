@@ -1,6 +1,7 @@
 import { AddToastFunction } from '../hooks/useToasts';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { Stat } from '../interfaces/StatObject';
+import { getMiddleOfThree } from './getMiddleOfThree';
 
 export const applyStatChangeToPokemon = (
 	pokemon: BattlePokemon,
@@ -24,7 +25,7 @@ export const applyStatChangeToPokemon = (
 		return pokemon;
 	}
 	const modifiedStat = existingStat + modifier;
-	const limitedStat = [-6, modifiedStat, 6].sort((a, b) => a - b)[1];
+	const limitedStat = getMiddleOfThree([-6, modifiedStat, 6]);
 
 	dispatchToast(
 		`${pokemon.data.name}'s ${stat} was ${
