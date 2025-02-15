@@ -123,14 +123,17 @@ export const itemsCheckList: {
 	{
 		name: 'max-potion',
 		url: 'https://pokeapi.co/api/v2/item/24/',
+		handled: true,
 	},
 	{
 		name: 'hyper-potion',
 		url: 'https://pokeapi.co/api/v2/item/25/',
+		handled: true,
 	},
 	{
 		name: 'super-potion',
 		url: 'https://pokeapi.co/api/v2/item/26/',
+		handled: true,
 	},
 	{
 		name: 'full-heal',

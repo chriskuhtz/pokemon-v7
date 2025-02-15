@@ -1,9 +1,15 @@
 import { AddToastFunction } from '../hooks/useToasts';
 import { BattlePokemon, isBattlePokemon } from '../interfaces/BattlePokemon';
-import { HealingItemType } from '../interfaces/Item';
+import { HealingItemType, ItemType } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { removeHealableAilments } from './removeHealableAilments';
 
+const HPHealTable: Partial<Record<ItemType, number>> = {
+	potion: 20,
+	'max-potion': 10000,
+	'hyper-potion': 200,
+	'super-potion': 50,
+};
 export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	pokemon: T,
 	item: HealingItemType,
@@ -24,8 +30,9 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 
 		return { ...pokemon, damage: 0, primaryAilment: undefined };
 	}
-	if (item === 'potion') {
-		const updatedDamage = Math.max(pokemon.damage - 20, 0);
+
+	if (HPHealTable[item]) {
+		const updatedDamage = Math.max(pokemon.damage - HPHealTable[item], 0);
 		if (addToast) {
 			addToast(`healed ${pokemon.damage - updatedDamage} HP`);
 		}
