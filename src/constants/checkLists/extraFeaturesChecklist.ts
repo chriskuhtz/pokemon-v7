@@ -33,7 +33,7 @@ export const extraFeatureCheckList: {
 	{ name: '"catch these pokemon" quests', handled: true },
 	{ name: 'hidden items', handled: true },
 	{ name: 'team reordering', handled: true },
-	{ name: 'grass on encounter tiles' },
+	{ name: 'grass on encounter tiles', handled: true },
 	{ name: 'toast types' },
 	{ name: 'pc storage filters' },
 	{ name: 'full keyboard control' },
@@ -94,4 +94,7 @@ export const extraFeatureCheckList: {
 	{ name: 'map maker' },
 	{ name: 'trainer builder' },
 	{ name: 'hidden items on obstacles' },
+	{
+		name: 'walk through grass animation',
+	},
 ];

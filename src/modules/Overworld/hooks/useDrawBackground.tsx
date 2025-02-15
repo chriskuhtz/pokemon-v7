@@ -4,7 +4,7 @@ import { OverworldMap } from '../../../interfaces/OverworldMap';
 
 export const useDrawBackground = (canvasId: string, map: OverworldMap) => {
 	useEffect(() => {
-		const { backgroundTile, width, height } = map;
+		const { backgroundTile, encounterTile, width, height, tileMap } = map;
 		const el: HTMLCanvasElement | null = document.getElementById(
 			canvasId
 		) as HTMLCanvasElement | null;
@@ -15,12 +15,13 @@ export const useDrawBackground = (canvasId: string, map: OverworldMap) => {
 		img.addEventListener('load', () => {
 			ctx?.clearRect(0, 0, width * baseSize, height * baseSize);
 
-			Array.from({ length: height }).forEach((_, h) => {
-				Array.from({ length: width }).forEach((_, w) => {
+			tileMap.forEach((row, h) => {
+				row.forEach((value, w) => {
+					const isEncounterGrass = value === 1;
 					ctx?.drawImage(
 						img,
-						backgroundTile.x,
-						backgroundTile.y,
+						isEncounterGrass ? encounterTile.x : backgroundTile.x,
+						isEncounterGrass ? encounterTile.y : backgroundTile.y,
 						baseSize / 4,
 						baseSize / 4,
 						w * baseSize,
