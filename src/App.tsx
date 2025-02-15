@@ -20,6 +20,7 @@ import { Market } from './modules/Market/Market';
 import { SellMarket } from './modules/Market/SellMarket';
 import { Overworld } from './modules/Overworld/Overworld';
 import { PokemonStorage } from './modules/PokemonStorage/PokemonStorage';
+import { Quests } from './modules/Quests/Quests';
 import { Settings } from './modules/Settings/Settings';
 import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { Team } from './modules/Team/Team';
@@ -50,6 +51,7 @@ export const App = ({
 		navigateAwayFromOverworldReducer,
 		cutBushReducer,
 		applyItemToPokemonReducer,
+		fulfillQuestReducer,
 	} = useSaveFile(testState, addToast, true);
 
 	const {
@@ -61,6 +63,7 @@ export const App = ({
 		collectedItems,
 		badges,
 		playerId,
+		quests,
 	} = saveFile;
 
 	const team = useMemo(() => pokemon.filter((p) => p.onTeam), [pokemon]);
@@ -110,6 +113,16 @@ export const App = ({
 				badges={badges}
 				spriteUrl="/npcs/NPC_001.png"
 				name={playerId}
+			/>
+		);
+	}
+	if (activeTab === 'QUESTS') {
+		return (
+			<Quests
+				quests={quests}
+				goBack={() => setActiveTabReducer('MAIN')}
+				fulfillQuest={fulfillQuestReducer}
+				saveFile={saveFile}
 			/>
 		);
 	}

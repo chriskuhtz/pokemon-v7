@@ -4,10 +4,12 @@ import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
+import { GoTasklist } from 'react-icons/go';
 import { baseSize } from '../../constants/gameData';
+import { BadgeName } from '../../interfaces/Badge';
 import { RoutesType } from '../../interfaces/Routing';
-import { BadgeName } from '../../interfaces/SaveFile';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
+
 export const MainMenu = ({
 	navigate,
 	goBack,
@@ -70,6 +72,12 @@ export const MainMenu = ({
 					onClick={() => navigate('TEAM')}
 					content={<h4>Team</h4>}
 					icon={<MdCatchingPokemon size={baseSize / 2} />}
+					actionElements={[]}
+				/>
+				<Card
+					onClick={() => navigate('QUESTS')}
+					content={<h4>Quests</h4>}
+					icon={<GoTasklist size={baseSize / 2} />}
 					actionElements={[]}
 				/>
 			</Stack>

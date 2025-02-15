@@ -10,5 +10,6 @@ export const routes = [
 	'STORAGE',
 	'STARTER_SELECTION',
 	'SETTINGS',
+	'QUESTS',
 ] as const;
 export type RoutesType = (typeof routes)[number];

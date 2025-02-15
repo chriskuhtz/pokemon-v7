@@ -30,7 +30,7 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'badges', handled: true },
-	{ name: 'quests' },
+	{ name: '"catch these pokemon" quests' },
 	{ name: 'hidden items' },
 	{ name: 'team reordering' },
 	{ name: 'grass on encounter tiles' },
@@ -84,4 +84,6 @@ export const extraFeatureCheckList: {
 	{ name: 'prettier team overview' },
 	{ name: 'filter in battle items by if someone can benefit' },
 	{ name: 'only pokemon that havent moved can flinch' },
+	{ name: 'receive quests from npcs' },
+	{ name: 'poison step damage' },
 ];

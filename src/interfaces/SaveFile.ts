@@ -1,5 +1,7 @@
+import { BadgeName } from './Badge';
 import { Inventory } from './Inventory';
 import { OwnedPokemon } from './OwnedPokemon';
+import { QuestName, QuestStatus } from './Quest';
 import { RoutesType } from './Routing';
 
 export type CharacterOrientation = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
@@ -24,9 +26,6 @@ export interface CharacterLocationData {
 	y: number;
 }
 
-export const badgeNames = ['boulder-badge'] as const;
-export type BadgeName = (typeof badgeNames)[number];
-
 export interface SaveFile {
 	badges: BadgeName[];
 	playerId: string;
@@ -44,4 +43,5 @@ export interface SaveFile {
 	settings?: {
 		randomStarters: boolean;
 	};
+	quests: Record<QuestName, QuestStatus>;
 }

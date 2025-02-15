@@ -28,6 +28,7 @@ export const testPokemon: OwnedPokemon = {
 };
 export const testState: SaveFile = {
 	badges: ['boulder-badge'],
+	quests: { 'catch a pikachu': 'ACTIVE' },
 	inventory: generateInventory({
 		'master-ball': 10,
 		'ultra-ball': 20,
