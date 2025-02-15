@@ -20,10 +20,11 @@ export const testPokemon: OwnedPokemon = {
 	damage: 50,
 	nature: 'adamant',
 	xp: 100000,
-	ability: 'suction-cups',
+	ability: 'flash-fire',
 	happiness: 70,
 	stepsWalked: 0,
 	heldItemName: 'potion',
+	primaryAilment: { type: 'paralysis' },
 };
 export const testState: SaveFile = {
 	badges: ['boulder-badge'],
