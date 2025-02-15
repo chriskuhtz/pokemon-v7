@@ -20,4 +20,5 @@ export const STANDARD_BUY_MARKET: Partial<Inventory> = {
 	awakening: 1,
 	'paralyze-heal': 1,
 	'full-restore': 1,
+	'max-potion': 1,
 };

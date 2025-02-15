@@ -98,4 +98,5 @@ export const extraFeatureCheckList: {
 		name: 'walk through grass animation',
 	},
 	{ name: 'break step between move execution' },
+	{ name: 'nicknames for pokemon' },
 ];
