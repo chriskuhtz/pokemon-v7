@@ -34,7 +34,7 @@ export const extraFeatureCheckList: {
 	{ name: 'hidden items', handled: true },
 	{ name: 'team reordering', handled: true },
 	{ name: 'grass on encounter tiles', handled: true },
-	{ name: 'toast types' },
+	{ name: 'toast types', handled: true },
 	{ name: 'pc storage filters' },
 	{ name: 'full keyboard control' },
 	{ name: 'movement by tile click' },

@@ -6,8 +6,8 @@ export const ToastContainer = () => {
 	const { latestToast, addToast } = useToasts();
 	return (
 		<>
-			{latestToast && <Toast message={latestToast} />}
-			<App latestToast={latestToast} addToast={addToast} />
+			{latestToast && <Toast toast={latestToast} />}
+			<App activeToast={!!latestToast} addToast={addToast} />
 		</>
 	);
 };
