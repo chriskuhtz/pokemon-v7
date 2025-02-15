@@ -53,8 +53,17 @@ export const Quests = ({
 							fulfilled && !collected
 								? [
 										<FaPlus
+											style={{ borderRadius: 9000 }}
 											size={baseSize / 2}
 											onClick={() => fulfillQuest(name as QuestName)}
+											role="button"
+											tabIndex={0}
+											onKeyDown={(e) => {
+												e.stopPropagation();
+												if (e.key === 'Enter') {
+													fulfillQuest(name as QuestName);
+												}
+											}}
 										/>,
 								  ]
 								: []

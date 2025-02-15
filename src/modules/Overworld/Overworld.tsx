@@ -227,6 +227,7 @@ export const Overworld = ({
 	useKeyboardControl(
 		setNextInput,
 		() => handleEnterPress(playerLocation, collectedItems, interactWith),
+		() => openMenu(stepsTaken),
 		dialogues.length > 0
 	);
 

@@ -7,6 +7,7 @@ import {
 export const useKeyboardControl = (
 	registerNextInput: (x: CharacterOrientation) => void,
 	handleEnterPress: () => void,
+	openMenu: () => void,
 	disabled: boolean
 ) => {
 	useEffect(() => {
@@ -22,6 +23,9 @@ export const useKeyboardControl = (
 			if (e.key === 'Enter') {
 				handleEnterPress();
 			}
+			if (e.key === 'm') {
+				openMenu();
+			}
 		}
 
 		document.addEventListener('keydown', keyDownHandler);
@@ -29,5 +33,5 @@ export const useKeyboardControl = (
 		return () => {
 			document.removeEventListener('keydown', keyDownHandler);
 		};
-	}, [disabled, handleEnterPress, registerNextInput]);
+	}, [disabled, handleEnterPress, openMenu, registerNextInput]);
 };

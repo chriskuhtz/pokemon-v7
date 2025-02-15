@@ -26,6 +26,12 @@ export const BuyAction = ({
 				onChange={(e) => setNumberToBuy(e.target.valueAsNumber)}
 				min={1}
 				max={max}
+				onKeyDown={(e) => {
+					e.stopPropagation();
+					if (e.key === 'Enter') {
+						buyItem(numberToBuy);
+					}
+				}}
 			/>
 			<FaCartPlus onClick={() => buyItem(numberToBuy)} />
 		</div>

@@ -29,11 +29,30 @@ export const HealAction = ({
 							onClick={() => {
 								healPokemon(p, item);
 							}}
+							tabIndex={0}
+							role="button"
+							onKeyDown={(e) => {
+								e.stopPropagation();
+								if (e.key === 'Enter') {
+									healPokemon(p, item);
+								}
+							}}
 						/>
 					))}
 				</Banner>
 			)}
-			<MdHealing onClick={() => setOpen(true)} size={baseSize / 2} />
+			<MdHealing
+				tabIndex={0}
+				role="button"
+				onKeyDown={(e) => {
+					e.stopPropagation();
+					if (e.key === 'Enter') {
+						setOpen(true);
+					}
+				}}
+				onClick={() => setOpen(true)}
+				size={baseSize / 2}
+			/>
 		</>
 	);
 };
