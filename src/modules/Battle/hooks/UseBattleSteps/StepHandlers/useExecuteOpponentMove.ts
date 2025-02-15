@@ -55,13 +55,18 @@ export const useExecuteOpponentMove = ({
 		const t = setTimeout(() => {
 			if (!player || !opponent) {
 				throw new Error('no player or opponent');
-				return;
 			}
 
 			if (
 				nextOpponentMove?.type === 'BattleAttack' &&
 				nextOpponentMove.name === 'whirlwind'
 			) {
+				if (player.ability === 'suction-cups') {
+					dispatchToast(`${player.data.name} holds on with suction-cups`);
+					setNextOpponentMove(undefined);
+					followTurnPath();
+					return;
+				}
 				getWhirlwinded();
 			}
 
