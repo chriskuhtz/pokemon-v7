@@ -16,6 +16,10 @@ export const applySecondaryAilmentToPokemon = (
 		//already has this ailment
 		return pokemon;
 	}
+	if (pokemon.ability === 'own-tempo' && ailment === 'confusion') {
+		dispatchToast(`${pokemon.data.name} prevents confusion with own tempo`);
+		return pokemon;
+	}
 	if (pokemon.ability === 'oblivious' && ailment === 'infatuation') {
 		dispatchToast(`${pokemon.data.name} is oblivious`);
 		return pokemon;
