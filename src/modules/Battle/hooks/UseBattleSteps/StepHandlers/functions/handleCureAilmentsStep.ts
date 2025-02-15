@@ -17,7 +17,7 @@ export const handleCureAilmentsStep = (
 		pokemon.primaryAilment?.type === 'sleep' &&
 		['vital-spirit', 'insomnia'].includes(pokemon.ability);
 
-	if (!pokemon.primaryAilment || !defrosted || !wokeUp) {
+	if (!pokemon.primaryAilment) {
 		followPath();
 		return;
 	}
@@ -25,11 +25,12 @@ export const handleCureAilmentsStep = (
 	return setTimeout(() => {
 		if (defrosted) {
 			dispatchToast(`${pokemon.data.name} was defrosted`);
+			setPokemon({ ...pokemon, primaryAilment: undefined });
 		}
 		if (wokeUp) {
 			dispatchToast(`${pokemon.data.name} woke up`);
+			setPokemon({ ...pokemon, primaryAilment: undefined });
 		}
-		setPokemon({ ...pokemon, primaryAilment: undefined });
 		followPath();
 	}, animationTimer);
 };

@@ -14,7 +14,7 @@ const secondaryAilments = [
 	'locked-in',
 ] as const;
 
-type SecondaryAilmentType = (typeof secondaryAilments)[number];
+export type SecondaryAilmentType = (typeof secondaryAilments)[number];
 export interface SecondaryAilment {
 	type: SecondaryAilmentType;
 	duration: number;
