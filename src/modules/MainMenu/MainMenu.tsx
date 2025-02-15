@@ -5,9 +5,10 @@ import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
 import { baseSize } from '../../constants/gameData';
+import { BadgeName } from '../../interfaces/Badge';
 import { RoutesType } from '../../interfaces/Routing';
-import { BadgeName } from '../../interfaces/SaveFile';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
+
 export const MainMenu = ({
 	navigate,
 	goBack,
