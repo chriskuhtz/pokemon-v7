@@ -98,6 +98,7 @@ export const abilityCheckList: {
 	{
 		name: 'shield-dust',
 		url: 'https://pokeapi.co/api/v2/ability/19/',
+		handled: true,
 	},
 	{
 		name: 'own-tempo',
@@ -522,6 +523,7 @@ export const abilityNames = [
 	'color-change',
 	'immunity',
 	'flash-fire',
+	'shield-dust',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
