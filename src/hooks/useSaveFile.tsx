@@ -9,6 +9,7 @@ import { joinInventories } from '../interfaces/Inventory';
 import { HealingItemType, ItemType } from '../interfaces/Item';
 import { OverworldItem } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { QuestName, QuestsRecord } from '../interfaces/Quest';
 import { RoutesType } from '../interfaces/Routing';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
 import { AddToastFunction } from './useToasts';
@@ -46,6 +47,7 @@ export const useSaveFile = (
 		pokemon: OwnedPokemon,
 		item: HealingItemType
 	) => void;
+	fulfillQuestReducer: (q: QuestName) => void;
 } => {
 	const local = window.localStorage.getItem(localStorageId);
 	const loaded =
@@ -258,6 +260,21 @@ export const useSaveFile = (
 			'applyItem'
 		);
 	};
+	const fulfillQuestReducer = (q: QuestName) => {
+		const quest = QuestsRecord[q];
+		const updatedInventory = joinInventories(
+			saveFile.inventory,
+			quest.rewardItems
+		);
+		setSaveFile(
+			{
+				...saveFile,
+				inventory: updatedInventory,
+				quests: { ...saveFile.quests, [q]: 'COLLECTED' },
+			},
+			'applyItem'
+		);
+	};
 
 	//SYNC WITH LOCAL STORAGE
 	useEffect(() => {
@@ -297,5 +314,6 @@ export const useSaveFile = (
 		navigateAwayFromOverworldReducer,
 		cutBushReducer,
 		applyItemToPokemonReducer,
+		fulfillQuestReducer,
 	};
 };
