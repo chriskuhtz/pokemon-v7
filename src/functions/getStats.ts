@@ -65,5 +65,7 @@ export const getStats = (
 			level,
 			'defense'
 		),
+		evasion: 1,
+		accuracy: 1,
 	};
 };

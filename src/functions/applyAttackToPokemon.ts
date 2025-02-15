@@ -6,7 +6,7 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { applyAttackAilmentsToPokemon } from './applyAttackAilmentsToPokemon';
 import { applyPrimaryAilmentToPokemon } from './applyPrimaryAilmentToPokemon';
-import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
+import { applyStatusMove } from './applyStatusMove';
 import { calculateDamage } from './calculateDamage';
 import { changeBattlePokemonType } from './changeBattlePokemonType';
 import { reduceMovePP } from './reduceMovePP';
@@ -31,20 +31,24 @@ export const applyAttackToPokemon = ({
 	targetIsFlying?: boolean;
 }): { updatedAttacker: BattlePokemon; updatedTarget: BattlePokemon } => {
 	let updatedTarget = { ...target };
-	if (attack.data.target.name === 'user') {
-		let updatedMon = { ...attacker };
+	let updatedAttacker =
+		(attack.multiHits ?? 0) > 1
+			? attacker
+			: reduceMovePP(attacker, attack.name);
 
-		attack.data.stat_changes.forEach((s) => {
-			updatedMon = applyStatChangeToPokemon(
-				updatedMon,
-				s.stat.name,
-				s.change,
-				dispatchToast
-			);
-		});
-		const res = reduceMovePP(updatedMon, attack.name);
-		setAttacker(res);
-		return { updatedAttacker: res, updatedTarget: target };
+	if (attack.data.damage_class.name === 'status') {
+		if (attack.data.target.name === 'user') {
+			const res = applyStatusMove(attacker, attack, dispatchToast);
+			const pp = reduceMovePP(res, attack.name);
+			setAttacker(pp);
+			return { updatedAttacker: pp, updatedTarget: target };
+		}
+		if (attack.data.target.name === 'selected-pokemon') {
+			const res = applyStatusMove(target, attack, dispatchToast);
+			const pp = reduceMovePP(res, attack.name);
+			setTarget(pp);
+			return { updatedAttacker: attacker, updatedTarget: pp };
+		}
 	}
 	const damage = calculateDamage(
 		attacker,
@@ -61,11 +65,6 @@ export const applyAttackToPokemon = ({
 		);
 		updatedTarget.flashFired = true;
 	}
-
-	let updatedAttacker =
-		(attack.multiHits ?? 0) > 1
-			? attacker
-			: reduceMovePP(attacker, attack.name);
 
 	if (
 		target.ability === 'static' &&

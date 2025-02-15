@@ -5,6 +5,8 @@ export const stats = [
 	'spatk',
 	'spdef',
 	'speed',
+	'accuracy',
+	'evasion',
 ] as const;
 export type Stat = (typeof stats)[number];
 
@@ -17,4 +19,6 @@ export const EmptyStatObject: StatObject = {
 	spatk: 0,
 	spdef: 0,
 	speed: 0,
+	accuracy: 0,
+	evasion: 0,
 };

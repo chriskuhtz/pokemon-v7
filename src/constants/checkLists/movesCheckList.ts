@@ -115,15 +115,17 @@ export const movesCheckList: {
 	{
 		name: 'jump-kick',
 		url: 'https://pokeapi.co/api/v2/move/26/',
-		todos: ['crash-damage'],
+		handled: true,
 	},
 	{
 		name: 'rolling-kick',
 		url: 'https://pokeapi.co/api/v2/move/27/',
+		handled: true,
 	},
 	{
 		name: 'sand-attack',
 		url: 'https://pokeapi.co/api/v2/move/28/',
+		handled: true,
 	},
 	{
 		name: 'headbutt',
@@ -1310,6 +1312,7 @@ export const handledMoves = [
 	'double-kick',
 	'mega-kick',
 	...crashDamageMoves,
+	'sand-attack',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
