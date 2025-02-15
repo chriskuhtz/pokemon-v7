@@ -15,6 +15,13 @@ export const applyAttackAilmentsToPokemon = (
 	attack: BattleAttack,
 	dispatchToast: AddToastFunction
 ): BattlePokemon => {
+	if (
+		//shield dust prevents all side effects
+		pokemon.ability === 'shield-dust' &&
+		attack.data.damage_class.name !== 'status'
+	) {
+		return pokemon;
+	}
 	const random = Math.random() * 100;
 	const ailment = attack.data.meta.ailment.name;
 
