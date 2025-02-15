@@ -94,6 +94,16 @@ export const BattleBanner = ({
 			nextMove.type !== 'InBattleItem' &&
 			secondTurnMoves.includes(nextMove.name)
 		) {
+			const message = () => {
+				if (nextMove.name === 'fly') {
+					return <span>{player.data.name} flew up high</span>;
+				}
+				return (
+					<span>
+						{player.data.name} is charging up {nextMove.name}
+					</span>
+				);
+			};
 			return (
 				<Banner flexDirection={'row'}>
 					<img
@@ -101,9 +111,7 @@ export const BattleBanner = ({
 						width={battleSpriteSize}
 						src={getPokemonSprite(player.dexId)}
 					/>
-					<h3>
-						{player.data.name} is charging up {nextMove.name}
-					</h3>
+					<h3>{message()}</h3>
 				</Banner>
 			);
 		}
@@ -115,6 +123,16 @@ export const BattleBanner = ({
 			nextMove.type !== 'InBattleItem' &&
 			secondTurnMoves.includes(nextMove.name)
 		) {
+			const message = () => {
+				if (nextMove.name === 'fly') {
+					return <span>{opponent.data.name} flew up high</span>;
+				}
+				return (
+					<span>
+						{opponent.data.name} is charging up {nextMove.name}
+					</span>
+				);
+			};
 			return (
 				<Banner flexDirection={'row-reverse'}>
 					<img
@@ -122,9 +140,7 @@ export const BattleBanner = ({
 						width={battleSpriteSize}
 						src={getPokemonSprite(opponent.dexId)}
 					/>
-					<h3>
-						{opponent.data.name} is charging up {nextMove.name}
-					</h3>
+					<h3>{message()}</h3>
 				</Banner>
 			);
 		}

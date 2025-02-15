@@ -37,7 +37,10 @@ export const useHandleOpponentEndOfTurnDamage = ({
 				return;
 			}
 
-			updatedOpponent = applySecondaryAilmentDamage(opponent, dispatchToast);
+			updatedOpponent = applySecondaryAilmentDamage(
+				updatedOpponent,
+				dispatchToast
+			);
 			if (isKO(updatedOpponent)) {
 				setOpponent(updatedOpponent);
 				startPath(opponentFaintingPath);

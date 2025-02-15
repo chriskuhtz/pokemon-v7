@@ -1,5 +1,5 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
-import { ohkoMoves } from '../constants/ohkoMoves';
+import { flyDoubleDamageMoves, ohkoMoves } from '../constants/ohkoMoves';
 import { AddToastFunction } from '../hooks/useToasts';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -21,7 +21,8 @@ export const calculateDamage = (
 	target: BattlePokemon,
 	attack: BattleAttack,
 	weather: WeatherType | undefined,
-	dispatchToast?: AddToastFunction
+	dispatchToast?: AddToastFunction,
+	targetIsFlying?: boolean
 ): number => {
 	const typeFactor = determineTypeFactor(target, attack);
 	if (typeFactor === 0) {
@@ -86,6 +87,8 @@ export const calculateDamage = (
 	const otherFactor = 1;
 	const zMoveFactor = 1;
 	const teraShieldFactor = 1;
+	const flyingFactor =
+		targetIsFlying && flyDoubleDamageMoves.includes(attack.name) ? 2 : 1;
 
 	const res = Math.max(
 		Math.floor(
@@ -101,7 +104,8 @@ export const calculateDamage = (
 				burnFactor *
 				otherFactor *
 				zMoveFactor *
-				teraShieldFactor
+				teraShieldFactor *
+				flyingFactor
 		),
 		1
 	);

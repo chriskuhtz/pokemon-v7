@@ -21,10 +21,10 @@ export const applyPrimaryAilmentDamage = (
 	if (pokemon.primaryAilment?.type === 'poison') {
 		dispatchToast(`${pokemon.data.name} is hurt by poison`);
 
-		const burnDamage = Math.floor(POISON_DAMAGE_FACTOR * pokemon.stats.hp);
+		const poisonDamage = Math.floor(POISON_DAMAGE_FACTOR * pokemon.stats.hp);
 		return {
 			...pokemon,
-			damage: pokemon.damage + burnDamage,
+			damage: pokemon.damage + poisonDamage,
 		};
 	}
 	return pokemon;

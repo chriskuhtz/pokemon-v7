@@ -36,6 +36,7 @@ export const useExecutePlayerMove = ({
 	chargedUpPlayerMove,
 	setUsedItems,
 	getWhirlwinded,
+	chargedUpOpponentMove,
 }: ExtendedBattleStepHandler & {
 	setBattleStep: (x: BattleStep) => void;
 	getWhirlwinded: () => void;
@@ -101,11 +102,13 @@ export const useExecutePlayerMove = ({
 					followTurnPath();
 					return;
 				}
+				const targetIsFlying = chargedUpOpponentMove?.name === 'fly';
 				const miss = determineMiss(
 					nextPlayerMove,
 					player,
 					opponent,
-					battleWeather
+					battleWeather,
+					targetIsFlying
 				);
 				if (miss) {
 					setPlayer(reduceMovePP(player, nextPlayerMove.name));
@@ -121,6 +124,7 @@ export const useExecutePlayerMove = ({
 					setTarget: setOpponent,
 					weather: battleWeather,
 					dispatchToast,
+					targetIsFlying,
 				});
 
 				const updatedMove: BattleAttack | undefined =
@@ -160,6 +164,7 @@ export const useExecutePlayerMove = ({
 	}, [
 		battleStep,
 		battleWeather,
+		chargedUpOpponentMove?.name,
 		chargedUpPlayerMove,
 		dispatchToast,
 		followBattleStepPath,
