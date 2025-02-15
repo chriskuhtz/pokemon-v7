@@ -20,7 +20,7 @@ export const testPokemon: OwnedPokemon = {
 	damage: 50,
 	nature: 'adamant',
 	xp: 100000,
-	ability: 'damp',
+	ability: 'flash-fire',
 	happiness: 70,
 	stepsWalked: 0,
 	heldItemName: 'potion',
