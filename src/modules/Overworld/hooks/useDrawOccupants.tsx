@@ -77,6 +77,7 @@ export const useDrawOccupants = (
 						);
 						break;
 					case 'BUSH':
+					case 'HIDDEN_ITEM':
 						ctx?.drawImage(
 							img,
 							baseSize * occ.x,

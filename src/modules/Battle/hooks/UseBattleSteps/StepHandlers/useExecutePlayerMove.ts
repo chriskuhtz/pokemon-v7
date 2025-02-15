@@ -126,7 +126,7 @@ export const useExecutePlayerMove = ({
 					setBattleStep('PLAYER_MISSED');
 					return;
 				}
-				const { updatedTarget } = applyAttackToPokemon({
+				const { updatedTarget, updatedAttacker } = applyAttackToPokemon({
 					attack: nextPlayerMove,
 					attacker: player,
 					target: opponent,
@@ -149,12 +149,16 @@ export const useExecutePlayerMove = ({
 								multiHits: (nextPlayerMove?.multiHits ?? 0) - 1,
 						  }
 						: undefined;
-
+				if (isKO(updatedAttacker)) {
+					startPath(playerFaintingPath);
+					return;
+				}
 				if (isKO(updatedTarget)) {
 					startPath(opponentFaintingPath);
 					setNextPlayerMove(undefined);
 					return;
 				}
+
 				if (updatedMove) {
 					setNextPlayerMove(updatedMove);
 					setBattleStep('EXECUTE_PLAYER_MOVE');
