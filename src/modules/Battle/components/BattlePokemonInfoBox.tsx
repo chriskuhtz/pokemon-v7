@@ -1,11 +1,11 @@
 import React from 'react';
 import { HpBar } from '../../../components/HpBar/HpBar';
 import { LevelBar } from '../../../components/LevelBar/LevelBar';
+import { PrimaryAilmentIcon } from '../../../components/PrimaryAilmentIcon/PrimaryAilmentIcon';
 import { battleSpriteSize } from '../../../constants/gameData';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { PrimaryAilment } from '../../../interfaces/Ailment';
 import { StatObject } from '../../../interfaces/StatObject';
-import { PrimaryAilmentIcon } from '../../../components/PrimaryAilmentIcon/PrimaryAilmentIcon';
 
 export const BattlePokemonInfoBox = ({
 	dexId,
@@ -52,7 +52,7 @@ export const BattlePokemonInfoBox = ({
 									borderRadius: '9000px',
 								}}
 							>
-								{stat} {modifier > 0 ? '+' : '-'} {modifier}
+								{stat} {modifier > 0 ? '+' : ''} {modifier}
 							</div>
 						);
 					})}
