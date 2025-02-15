@@ -1,3 +1,4 @@
+import { crashDamageMoves } from '../crashDamageMoves';
 import { ohkoMoves } from '../ohkoMoves';
 
 export const movesCheckList: {
@@ -114,6 +115,7 @@ export const movesCheckList: {
 	{
 		name: 'jump-kick',
 		url: 'https://pokeapi.co/api/v2/move/26/',
+		todos: ['crash-damage'],
 	},
 	{
 		name: 'rolling-kick',
@@ -343,7 +345,11 @@ export const movesCheckList: {
 	{ name: 'amnesia', url: 'https://pokeapi.co/api/v2/move/133/' },
 	{ name: 'kinesis', url: 'https://pokeapi.co/api/v2/move/134/' },
 	{ name: 'soft-boiled', url: 'https://pokeapi.co/api/v2/move/135/' },
-	{ name: 'high-jump-kick', url: 'https://pokeapi.co/api/v2/move/136/' },
+	{
+		name: 'high-jump-kick',
+		url: 'https://pokeapi.co/api/v2/move/136/',
+		handled: true,
+	},
 	{ name: 'glare', url: 'https://pokeapi.co/api/v2/move/137/' },
 	{ name: 'dream-eater', url: 'https://pokeapi.co/api/v2/move/138/' },
 	{ name: 'poison-gas', url: 'https://pokeapi.co/api/v2/move/139/' },
@@ -1178,7 +1184,11 @@ export const movesCheckList: {
 	{ name: 'take-heart', url: 'https://pokeapi.co/api/v2/move/850/' },
 	{ name: 'tera-blast', url: 'https://pokeapi.co/api/v2/move/851/' },
 	{ name: 'silk-trap', url: 'https://pokeapi.co/api/v2/move/852/' },
-	{ name: 'axe-kick', url: 'https://pokeapi.co/api/v2/move/853/' },
+	{
+		name: 'axe-kick',
+		url: 'https://pokeapi.co/api/v2/move/853/',
+		handled: true,
+	},
 	{ name: 'last-respects', url: 'https://pokeapi.co/api/v2/move/854/' },
 	{ name: 'lumina-crash', url: 'https://pokeapi.co/api/v2/move/855/' },
 	{ name: 'order-up', url: 'https://pokeapi.co/api/v2/move/856/' },
@@ -1241,7 +1251,11 @@ export const movesCheckList: {
 	{ name: 'dragon-cheer', url: 'https://pokeapi.co/api/v2/move/913/' },
 	{ name: 'alluring-voice', url: 'https://pokeapi.co/api/v2/move/914/' },
 	{ name: 'temper-flare', url: 'https://pokeapi.co/api/v2/move/915/' },
-	{ name: 'supercell-slam', url: 'https://pokeapi.co/api/v2/move/916/' },
+	{
+		name: 'supercell-slam',
+		url: 'https://pokeapi.co/api/v2/move/916/',
+		handled: true,
+	},
 	{ name: 'psychic-noise', url: 'https://pokeapi.co/api/v2/move/917/' },
 	{ name: 'upper-hand', url: 'https://pokeapi.co/api/v2/move/918/' },
 	{ name: 'malignant-chain', url: 'https://pokeapi.co/api/v2/move/919/' },
@@ -1295,6 +1309,7 @@ export const handledMoves = [
 	'stomp',
 	'double-kick',
 	'mega-kick',
+	...crashDamageMoves,
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
