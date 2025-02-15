@@ -113,6 +113,7 @@ export const itemsCheckList: {
 	{
 		name: 'paralyze-heal',
 		url: 'https://pokeapi.co/api/v2/item/22/',
+		handled: true,
 	},
 	{
 		name: 'full-restore',
