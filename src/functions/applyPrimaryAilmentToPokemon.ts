@@ -59,7 +59,7 @@ export const applyPrimaryAilmentToPokemon = (
 	}
 	if (
 		ailment === 'sleep' &&
-		['vital-spirit', 'insomnia'].includes(pokemon.ability)
+		!['vital-spirit', 'insomnia'].includes(pokemon.ability)
 	) {
 		dispatchToast(
 			`${pokemon.data.name} was put to sleep ${
@@ -67,6 +67,20 @@ export const applyPrimaryAilmentToPokemon = (
 			}`
 		);
 		return { ...pokemon, primaryAilment: { type: 'sleep' } };
+	}
+	if (
+		(ailment === 'poison' || ailment === 'toxic') &&
+		!['immunity'].includes(pokemon.ability) &&
+		//poison and steel pokemon cant get poisoned
+		!getTypeNames(pokemon.data.types).includes('poison') &&
+		!getTypeNames(pokemon.data.types).includes('steel')
+	) {
+		dispatchToast(
+			`${pokemon.data.name} was ${
+				ailment === 'toxic' ? 'badly' : ''
+			} poisoned ${toastSuffix ? 'by ' + toastSuffix : ''}`
+		);
+		return { ...pokemon, primaryAilment: { type: ailment } };
 	}
 	return pokemon;
 };
