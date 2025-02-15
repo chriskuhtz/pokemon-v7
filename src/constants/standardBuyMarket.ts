@@ -18,4 +18,5 @@ export const STANDARD_BUY_MARKET: Partial<Inventory> = {
 	antidote: 1,
 	'burn-heal': 1,
 	'ice-heal': 1,
+	awakening: 1,
 };
