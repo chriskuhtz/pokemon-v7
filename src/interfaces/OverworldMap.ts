@@ -74,6 +74,7 @@ export interface OverworldEncounter {
 export interface OverworldMap {
 	id: string;
 	backgroundTile: { x: number; y: number };
+	encounterTile: { x: number; y: number };
 	possibleEncounters: OverworldEncounter[];
 	width: number;
 	height: number;
