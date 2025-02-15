@@ -1,4 +1,4 @@
-import { ohkoMoves } from '../constants/ohkoMoves';
+import { flyHitMoves, ohkoMoves } from '../constants/ohkoMoves';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
@@ -14,8 +14,12 @@ export const determineMiss = (
 	attack: BattleAttack,
 	attacker: BattlePokemon,
 	target: BattlePokemon,
-	weather?: WeatherType
+	weather?: WeatherType,
+	targetIsFlying?: boolean
 ): boolean => {
+	if (targetIsFlying && !flyHitMoves.includes(attack.name)) {
+		return true;
+	}
 	if (attack.data.accuracy === null) {
 		return false;
 	}

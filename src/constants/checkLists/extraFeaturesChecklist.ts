@@ -86,4 +86,5 @@ export const extraFeatureCheckList: {
 	{ name: 'only pokemon that havent moved can flinch' },
 	{ name: 'receive quests from npcs' },
 	{ name: 'poison step damage' },
+	{ name: 'fly outside of battle' },
 ];

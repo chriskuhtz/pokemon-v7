@@ -30,21 +30,20 @@ export const useHandlePlayerEndOfTurnDamage = ({
 		}
 		const t = setTimeout(() => {
 			let updatedPlayer = applyPrimaryAilmentDamage(player, dispatchToast);
-
 			if (isKO(updatedPlayer)) {
 				setPlayer(updatedPlayer);
 				startPath(playerFaintingPath);
 				return;
 			}
 
-			updatedPlayer = applySecondaryAilmentDamage(player, dispatchToast);
+			updatedPlayer = applySecondaryAilmentDamage(updatedPlayer, dispatchToast);
 			if (isKO(updatedPlayer)) {
 				setPlayer(updatedPlayer);
 				startPath(playerFaintingPath);
 				return;
 			}
 
-			setPlayer(updatedPlayer);
+			setPlayer({ ...updatedPlayer });
 			followBattleStepPath(endTurnPath);
 		}, animationTimer);
 

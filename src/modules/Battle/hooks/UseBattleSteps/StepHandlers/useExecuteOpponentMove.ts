@@ -29,6 +29,7 @@ export const useExecuteOpponentMove = ({
 	startPath,
 	chargedUpOpponentMove,
 	getWhirlwinded,
+	chargedUpPlayerMove,
 }: ExtendedBattleStepHandler & {
 	setBattleStep: (x: BattleStep) => void;
 	getWhirlwinded: () => void;
@@ -81,11 +82,14 @@ export const useExecuteOpponentMove = ({
 					followTurnPath();
 					return;
 				}
+
+				const targetIsFlying = chargedUpPlayerMove?.name === 'fly';
 				const miss = determineMiss(
 					nextOpponentMove,
 					opponent,
 					player,
-					battleWeather
+					battleWeather,
+					targetIsFlying
 				);
 				if (miss) {
 					setOpponent(reduceMovePP(opponent, nextOpponentMove.name));
@@ -101,6 +105,7 @@ export const useExecuteOpponentMove = ({
 					setTarget: setPlayer,
 					weather: battleWeather,
 					dispatchToast,
+					targetIsFlying,
 				});
 				const updatedMove: BattleAttack | undefined =
 					(nextOpponentMove?.multiHits ?? 0) > 1
@@ -141,6 +146,7 @@ export const useExecuteOpponentMove = ({
 		battleStep,
 		battleWeather,
 		chargedUpOpponentMove,
+		chargedUpPlayerMove?.name,
 		dispatchToast,
 		followTurnPath,
 		getWhirlwinded,

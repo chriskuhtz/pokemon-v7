@@ -18,6 +18,7 @@ export const applyAttackToPokemon = ({
 	attack,
 	weather,
 	dispatchToast,
+	targetIsFlying,
 }: {
 	attacker: BattlePokemon;
 	setAttacker: (x: BattlePokemon) => void;
@@ -26,6 +27,7 @@ export const applyAttackToPokemon = ({
 	attack: BattleAttack;
 	weather: WeatherType | undefined;
 	dispatchToast: AddToastFunction;
+	targetIsFlying?: boolean;
 }): { updatedAttacker: BattlePokemon; updatedTarget: BattlePokemon } => {
 	if (attack.data.target.name === 'user') {
 		let updatedMon = { ...attacker };
@@ -47,7 +49,8 @@ export const applyAttackToPokemon = ({
 		target,
 		attack,
 		weather,
-		dispatchToast
+		dispatchToast,
+		targetIsFlying
 	);
 
 	let updatedAttacker =
