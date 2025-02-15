@@ -98,6 +98,7 @@ export const itemsCheckList: {
 	{
 		name: 'burn-heal',
 		url: 'https://pokeapi.co/api/v2/item/19/',
+		handled: true,
 	},
 	{
 		name: 'ice-heal',
