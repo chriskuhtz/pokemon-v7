@@ -32,6 +32,12 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		}
 		return { ...pokemon, primaryAilment: undefined };
 	}
+	if (item === 'ice-heal' && pokemon.primaryAilment?.type === 'freeze') {
+		if (addToast) {
+			addToast(`Defrosted`);
+		}
+		return { ...pokemon, primaryAilment: undefined };
+	}
 
 	return pokemon;
 }
