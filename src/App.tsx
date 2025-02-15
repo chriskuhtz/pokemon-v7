@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 import { abilityNames } from './constants/checkLists/abilityCheckList';
+import { handledMoves } from './constants/checkLists/movesCheckList';
 import { testOpponent, testPokemon, testState } from './constants/gameData';
 import { testMap } from './constants/maps/testmap';
 import { STANDARD_BUY_MARKET } from './constants/standardBuyMarket';
@@ -216,6 +217,22 @@ export const App = ({
 					dexId,
 					xp,
 					id: v4(),
+					firstMove: {
+						name: handledMoves[Math.floor(Math.random() * handledMoves.length)],
+						usedPP: 0,
+					},
+					secondMove: {
+						name: handledMoves[Math.floor(Math.random() * handledMoves.length)],
+						usedPP: 0,
+					},
+					thirdMove: {
+						name: handledMoves[Math.floor(Math.random() * handledMoves.length)],
+						usedPP: 0,
+					},
+					fourthMove: {
+						name: handledMoves[Math.floor(Math.random() * handledMoves.length)],
+						usedPP: 0,
+					},
 					ability:
 						abilityNames[Math.floor(Math.random() * abilityNames.length)],
 					heldItemName: determineHeldItem(getHeldItemRateModifier(team[0])),
