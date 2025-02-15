@@ -157,7 +157,7 @@ export const Overworld = ({
 				});
 				return;
 			}
-			if (data.type === 'BUSH') {
+			if (data.type === 'BUSH' && !cutBushes.includes(Number.parseInt(id))) {
 				if (bushCutting) {
 					addDialogue({
 						message: `Your Pokemon used cut`,
@@ -216,6 +216,7 @@ export const Overworld = ({
 			bushCutting,
 			changeOccupant,
 			collectItem,
+			cutBushes,
 			goToMarket,
 			openStorage,
 			playerLocation.orientation,

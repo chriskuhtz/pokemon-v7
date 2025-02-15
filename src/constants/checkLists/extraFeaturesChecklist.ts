@@ -101,4 +101,5 @@ export const extraFeatureCheckList: {
 	{ name: 'nicknames for pokemon' },
 	{ name: 'fix hidden item shader at night' },
 	{ name: 'improved keyboard control, interpret direction buttons' },
+	{ name: 'display charge up and secondary ailments in info box' },
 ];
