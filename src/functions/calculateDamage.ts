@@ -24,6 +24,11 @@ export const calculateDamage = (
 	dispatchToast?: AddToastFunction,
 	targetIsFlying?: boolean
 ): number => {
+	const damageClass = attack.data.damage_class.name;
+	if (damageClass === 'status') {
+		console.warn('why even calculate damage for status move', attack);
+		return 0;
+	}
 	const typeFactor = determineTypeFactor(target, attack);
 	if (typeFactor === 0) {
 		return 0;
@@ -36,12 +41,6 @@ export const calculateDamage = (
 			return 0;
 		}
 		return target.stats.hp;
-	}
-
-	const damageClass = attack.data.damage_class.name;
-	if (damageClass === 'status') {
-		console.error('what is this', attack);
-		return 0;
 	}
 
 	const absorbAbility = DamageAbsorb[target.ability];
