@@ -24,7 +24,7 @@ export const recommendMove = (
 		.filter((a) => a !== undefined)
 		.map((a) => {
 			const averageHits = Math.max(
-				(a.data.meta.max_hits ?? 0) - (a.data.meta.min_hits ?? 0),
+				(a.data.meta?.max_hits ?? 0) - (a.data.meta?.min_hits ?? 0),
 				1
 			);
 

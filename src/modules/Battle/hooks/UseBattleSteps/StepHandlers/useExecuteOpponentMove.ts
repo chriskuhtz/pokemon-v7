@@ -113,7 +113,7 @@ export const useExecuteOpponentMove = ({
 					setBattleStep('OPPONENT_MISSED');
 					return;
 				}
-				const { updatedTarget } = applyAttackToPokemon({
+				const { updatedTarget, updatedAttacker } = applyAttackToPokemon({
 					attack: nextOpponentMove,
 					target: player,
 					attacker: opponent,
@@ -139,6 +139,10 @@ export const useExecuteOpponentMove = ({
 				if (isKO(updatedTarget)) {
 					startPath(playerFaintingPath);
 					setNextOpponentMove(undefined);
+					return;
+				}
+				if (isKO(updatedAttacker)) {
+					startPath(opponentFaintingPath);
 					return;
 				}
 				if (updatedMove) {

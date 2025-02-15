@@ -1,6 +1,3 @@
-import { crashDamageMoves } from '../crashDamageMoves';
-import { ohkoMoves } from '../ohkoMoves';
-
 export const movesCheckList: {
 	name: string;
 	url: string;
@@ -130,15 +127,18 @@ export const movesCheckList: {
 	{
 		name: 'headbutt',
 		url: 'https://pokeapi.co/api/v2/move/29/',
+		handled: true,
 	},
 	{
 		name: 'horn-attack',
 		url: 'https://pokeapi.co/api/v2/move/30/',
+		handled: true,
 	},
 
 	{
 		name: 'fury-attack',
 		url: 'https://pokeapi.co/api/v2/move/31/',
+		handled: true,
 	},
 	{
 		name: 'horn-drill',
@@ -159,6 +159,7 @@ export const movesCheckList: {
 	{
 		name: 'take-down',
 		url: 'https://pokeapi.co/api/v2/move/36/',
+		todos: ['recoil'],
 	},
 	{ name: 'thrash', url: 'https://pokeapi.co/api/v2/move/37/' },
 	{
@@ -1295,7 +1296,10 @@ export const handledMoves = [
 	'vice-grip',
 	'tackle',
 	'body-slam',
-	...ohkoMoves,
+	'guillotine',
+	'sheer-cold',
+	'fissure',
+	'horn-drill',
 	'razor-wind',
 	'water-gun',
 	'swords-dance',
@@ -1311,8 +1315,15 @@ export const handledMoves = [
 	'stomp',
 	'double-kick',
 	'mega-kick',
-	...crashDamageMoves,
+	'jump-kick',
+	'axe-kick',
+	'high-jump-kick',
+	'supercell-slam',
 	'sand-attack',
+	'headbutt',
+	'horn-attack',
+	'fury-attack',
+	'take-down',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
