@@ -90,4 +90,5 @@ export const extraFeatureCheckList: {
 	{
 		name: 'dont have toasts and banners',
 	},
+	{ name: 'devtools inspector' },
 ];
