@@ -30,7 +30,7 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'badges', handled: true },
-	{ name: '"catch these pokemon" quests' },
+	{ name: '"catch these pokemon" quests', handled: true },
 	{ name: 'hidden items' },
 	{ name: 'team reordering' },
 	{ name: 'grass on encounter tiles' },

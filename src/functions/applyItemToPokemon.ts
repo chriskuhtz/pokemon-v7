@@ -26,6 +26,12 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		}
 		return { ...pokemon, primaryAilment: undefined };
 	}
+	if (item === 'burn-heal' && pokemon.primaryAilment?.type === 'burn') {
+		if (addToast) {
+			addToast(`Burn cured`);
+		}
+		return { ...pokemon, primaryAilment: undefined };
+	}
 
 	return pokemon;
 }
