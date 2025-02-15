@@ -87,4 +87,7 @@ export const extraFeatureCheckList: {
 	{ name: 'receive quests from npcs' },
 	{ name: 'poison step damage' },
 	{ name: 'fly outside of battle' },
+	{
+		name: 'dont have toasts and banners',
+	},
 ];
