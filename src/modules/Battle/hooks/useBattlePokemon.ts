@@ -35,10 +35,12 @@ export const useBattlePokemon = (
 			setCurrent({
 				...pokemon,
 				secondaryAilments: [],
+				moveQueue: [],
 				firstMove: {
 					...pokemon.firstMove,
 					data: firstMoveData,
 					type: 'BattleAttack',
+					round: 0,
 				},
 				secondMove:
 					pokemon.secondMove && secondMoveData
@@ -46,6 +48,7 @@ export const useBattlePokemon = (
 								...pokemon.secondMove,
 								data: secondMoveData,
 								type: 'BattleAttack',
+								round: 0,
 						  }
 						: undefined,
 				thirdMove:
@@ -54,6 +57,7 @@ export const useBattlePokemon = (
 								...pokemon.thirdMove,
 								data: thirdMoveData,
 								type: 'BattleAttack',
+								round: 0,
 						  }
 						: undefined,
 				fourthMove:
@@ -62,6 +66,7 @@ export const useBattlePokemon = (
 								...pokemon.fourthMove,
 								data: fourthMoveData,
 								type: 'BattleAttack',
+								round: 0,
 						  }
 						: undefined,
 				data: res,

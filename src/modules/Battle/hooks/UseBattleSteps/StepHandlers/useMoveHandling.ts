@@ -8,35 +8,28 @@ import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
 export const useMoveHandling = ({
 	battleStep,
-	nextOpponentMove,
+
 	opponent,
 	player,
-	nextPlayerMove,
 	setBeginsThisTurn,
 	followBattleStepPath,
 }: ExtendedBattleStepHandler) => {
 	useEffect(() => {
-		if (battleStep === 'MOVE_HANDLING') {
-			if (!opponent || !player || !nextOpponentMove || !nextPlayerMove) {
-				throw new Error('invalid state');
-			}
-
-			const first = determineMoveOrder(player, opponent, nextPlayerMove);
-
-			setBeginsThisTurn(first);
-			if (first === player.id) {
-				followBattleStepPath(playerIsFasterPath);
-			} else {
-				followBattleStepPath(opponentIsFasterPath);
-			}
+		if (battleStep !== 'MOVE_HANDLING') {
+			return;
 		}
-	}, [
-		battleStep,
-		followBattleStepPath,
-		nextOpponentMove,
-		nextPlayerMove,
-		opponent,
-		player,
-		setBeginsThisTurn,
-	]);
+
+		if (!opponent || !player) {
+			throw new Error('invalid state');
+		}
+
+		const first = determineMoveOrder(player, opponent, player.moveQueue[0]);
+
+		setBeginsThisTurn(first);
+		if (first === player.id) {
+			followBattleStepPath(playerIsFasterPath);
+		} else {
+			followBattleStepPath(opponentIsFasterPath);
+		}
+	}, [battleStep, followBattleStepPath, opponent, player, setBeginsThisTurn]);
 };

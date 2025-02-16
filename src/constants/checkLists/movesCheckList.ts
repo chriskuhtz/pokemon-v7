@@ -159,9 +159,13 @@ export const movesCheckList: {
 	{
 		name: 'take-down',
 		url: 'https://pokeapi.co/api/v2/move/36/',
-		todos: ['recoil'],
+		handled: true,
 	},
-	{ name: 'thrash', url: 'https://pokeapi.co/api/v2/move/37/' },
+	{
+		name: 'thrash',
+		url: 'https://pokeapi.co/api/v2/move/37/',
+		handled: true,
+	},
 	{
 		name: 'double-edge',
 		url: 'https://pokeapi.co/api/v2/move/38/',
@@ -291,6 +295,7 @@ export const movesCheckList: {
 	{
 		name: 'petal-dance',
 		url: 'https://pokeapi.co/api/v2/move/80/',
+		handled: true,
 	},
 
 	{ name: 'string-shot', url: 'https://pokeapi.co/api/v2/move/81/' },
@@ -416,7 +421,11 @@ export const movesCheckList: {
 	{ name: 'detect', url: 'https://pokeapi.co/api/v2/move/197/' },
 	{ name: 'bone-rush', url: 'https://pokeapi.co/api/v2/move/198/' },
 	{ name: 'lock-on', url: 'https://pokeapi.co/api/v2/move/199/' },
-	{ name: 'outrage', url: 'https://pokeapi.co/api/v2/move/200/' },
+	{
+		name: 'outrage',
+		url: 'https://pokeapi.co/api/v2/move/200/',
+		handled: true,
+	},
 	{ name: 'sandstorm', url: 'https://pokeapi.co/api/v2/move/201/' },
 	{ name: 'giga-drain', url: 'https://pokeapi.co/api/v2/move/202/' },
 	{ name: 'endure', url: 'https://pokeapi.co/api/v2/move/203/' },
@@ -1324,6 +1333,9 @@ export const handledMoves = [
 	'horn-attack',
 	'fury-attack',
 	'take-down',
+	'thrash',
+	'petal-dance',
+	'outrage',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

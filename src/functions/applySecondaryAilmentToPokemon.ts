@@ -31,7 +31,18 @@ export const applySecondaryAilmentToPokemon = (
 			...pokemon,
 			secondaryAilments: [
 				...pokemon.secondaryAilments,
-				{ type: 'trap', duration },
+				{ type: ailment, duration },
+			],
+		};
+	}
+	if (ailment === 'confusion') {
+		dispatchToast(`${pokemon.data.name} became confused`);
+		const duration = 2 + Math.round(Math.random() * 3);
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{ type: ailment, duration },
 			],
 		};
 	}

@@ -1,40 +1,28 @@
 import { useEffect } from 'react';
-import { animationTimer } from '../../../../../constants/gameData';
-import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/selfDestructingMoves';
-import { applyAttackToPokemon } from '../../../../../functions/applyAttackToPokemon';
-import { applyCrashDamage } from '../../../../../functions/applyCrashDamage';
-import { determineCrit } from '../../../../../functions/determineCrit';
-import { determineMiss } from '../../../../../functions/determineMiss';
-import { isKO } from '../../../../../functions/isKo';
-import { pokemonCantMove } from '../../../../../functions/pokemonCantMove';
-import { reduceMovePP } from '../../../../../functions/reduceMovePP';
-import { targetFlinched } from '../../../../../functions/targetFlinched';
-import { BattleAttack } from '../../../../../interfaces/BattleActions';
 import {
 	BattleStep,
 	opponentFaintingPath,
 	playerFaintingPath,
 } from '../../../types/BattleStep';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
+import { executeMove } from './functions/executeMove';
 
 export const useExecuteOpponentMove = ({
 	battleStep,
 	player,
 	opponent,
 	setPlayer,
-	setNextPlayerMove,
 	setBattleStep,
 	setOpponent,
 	battleWeather,
-	nextOpponentMove,
-	setNextOpponentMove,
 	dispatchToast,
 	setCoins,
 	followTurnPath,
 	startPath,
-	chargedUpOpponentMove,
 	getWhirlwinded,
-	chargedUpPlayerMove,
+	setUsedItems,
+	followBattleStepPath,
+	battleRound,
 }: ExtendedBattleStepHandler & {
 	setBattleStep: (x: BattleStep) => void;
 	getWhirlwinded: () => void;
@@ -43,147 +31,46 @@ export const useExecuteOpponentMove = ({
 		if (battleStep !== 'EXECUTE_OPPONENT_MOVE' || !opponent) {
 			return;
 		}
-		if (chargedUpOpponentMove) {
-			followTurnPath();
+		if (!player || !opponent) {
+			throw new Error('no player or opponent');
 		}
-		if (pokemonCantMove(opponent)) {
-			setBattleStep('OPPONENT_UNABLE_TO_ATTACK');
-			setNextOpponentMove(undefined);
-			return;
-		}
-
-		const t = setTimeout(() => {
-			if (!player || !opponent) {
-				throw new Error('no player or opponent');
-			}
-
-			if (
-				nextOpponentMove?.type === 'BattleAttack' &&
-				nextOpponentMove.name === 'whirlwind'
-			) {
-				if (player.ability === 'suction-cups') {
-					dispatchToast(`${player.data.name} holds on with suction-cups`);
-					setNextOpponentMove(undefined);
-					followTurnPath();
-					return;
-				}
-				getWhirlwinded();
-			}
-
-			if (nextOpponentMove?.type === 'BattleAttack') {
-				if (nextOpponentMove.name === 'pay-day') {
-					const scatteredCoins = Math.floor(Math.random() * 100);
-					setCoins((coins) => coins + scatteredCoins);
-					dispatchToast('coins scattered everywhere');
-				}
-				if (
-					(SELF_DESTRUCTING_MOVES.includes(nextOpponentMove.name) &&
-						opponent.ability === 'damp') ||
-					player.ability === 'damp'
-				) {
-					dispatchToast(
-						`${
-							opponent.ability === 'damp'
-								? opponent.data.name
-								: player.data.name
-						} prevents self destruct moves with damp`
-					);
-					setNextPlayerMove(undefined);
-					followTurnPath();
-					return;
-				}
-
-				const targetIsFlying = chargedUpPlayerMove?.name === 'fly';
-				const miss = determineMiss(
-					nextOpponentMove,
-					opponent,
-					player,
-					battleWeather,
-					targetIsFlying
-				);
-				if (miss) {
-					let opp = reduceMovePP(opponent, nextOpponentMove.name);
-					opp = applyCrashDamage(
-						opponent,
-						nextOpponentMove.name,
-						dispatchToast
-					);
-					if (isKO(opp)) {
-						startPath(opponentFaintingPath);
-						setNextOpponentMove(undefined);
-						return;
-					}
-					setOpponent(opp);
-					setNextOpponentMove(undefined);
-					setBattleStep('OPPONENT_MISSED');
-					return;
-				}
-				const { updatedTarget, updatedAttacker } = applyAttackToPokemon({
-					attack: nextOpponentMove,
-					target: player,
-					attacker: opponent,
-					setAttacker: setOpponent,
-					setTarget: setPlayer,
-					weather: battleWeather,
-					dispatchToast,
-					targetIsFlying,
-				});
-				const updatedMove: BattleAttack | undefined =
-					(nextOpponentMove?.multiHits ?? 0) > 1
-						? {
-								...nextOpponentMove,
-								crit: determineCrit(
-									nextOpponentMove.name,
-									nextOpponentMove.data.meta.crit_rate,
-									player.ability
-								),
-								multiHits: (nextOpponentMove.multiHits ?? 0) - 1,
-						  }
-						: undefined;
-
-				if (isKO(updatedTarget)) {
-					startPath(playerFaintingPath);
-					setNextOpponentMove(undefined);
-					return;
-				}
-				if (isKO(updatedAttacker)) {
-					startPath(opponentFaintingPath);
-					return;
-				}
-				if (updatedMove) {
-					setNextOpponentMove(updatedMove);
-					setBattleStep('EXECUTE_OPPONENT_MOVE');
-					return;
-				}
-				if (targetFlinched(opponent, player, nextOpponentMove)) {
-					setNextOpponentMove(undefined);
-					setBattleStep('PLAYER_FLINCHED');
-					return;
-				}
-				setNextOpponentMove(undefined);
-
-				followTurnPath();
-			}
-		}, animationTimer);
-
-		return () => clearTimeout(t);
+		executeMove({
+			followTurnPath: followTurnPath,
+			setBattleStepUnableToAttack: () =>
+				setBattleStep('OPPONENT_UNABLE_TO_ATTACK'),
+			attacker: opponent,
+			target: player,
+			followBattleStepPath,
+			dispatchToast,
+			setUsedItems,
+			setAttacker: setOpponent,
+			setTarget: setPlayer,
+			getWhirlwinded,
+			setCoins,
+			startPath,
+			battleWeather,
+			setBattleStepFlinched: () => setBattleStep('PLAYER_FLINCHED'),
+			setBattleStepMissed: () => setBattleStep('OPPONENT_MISSED'),
+			repeatBattleStepForMultiHit: () => setBattleStep('EXECUTE_OPPONENT_MOVE'),
+			attackerFaintingPath: opponentFaintingPath,
+			targetFaintingPath: playerFaintingPath,
+			battleRound,
+		});
 	}, [
+		battleRound,
 		battleStep,
 		battleWeather,
-		chargedUpOpponentMove,
-		chargedUpPlayerMove?.name,
 		dispatchToast,
+		followBattleStepPath,
 		followTurnPath,
 		getWhirlwinded,
-		nextOpponentMove,
 		opponent,
 		player,
 		setBattleStep,
 		setCoins,
-		setNextOpponentMove,
-		setNextPlayerMove,
 		setOpponent,
 		setPlayer,
+		setUsedItems,
 		startPath,
 	]);
 };

@@ -8,21 +8,25 @@ export type BattleAttack = OwnedPokemonMove & {
 	type: 'BattleAttack';
 	crit?: boolean;
 	multiHits?: number;
+	round: number;
 };
 export interface CatchProcessInfo {
 	pokemon: BattlePokemon;
 	ball: PokeballType;
 	type: 'CatchProcessInfo';
+	round: number;
 }
 export type ChargeUp = OwnedPokemonMove & {
 	type: 'ChargeUp';
 	data: MoveDto;
 	crit?: boolean;
+	round: number;
 };
 export interface InBattleItem {
 	pokemon: BattlePokemon;
 	item: HealingItemType;
 	type: 'InBattleItem';
+	round: number;
 }
 
 export type BattleAction =

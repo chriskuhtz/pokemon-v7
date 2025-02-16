@@ -44,6 +44,55 @@ export const BattleBanner = ({
 		);
 	}
 
+	if (battleStep === 'EXECUTE_PLAYER_MOVE' && nextMove?.type === 'ChargeUp') {
+		if (secondTurnMoves.includes(nextMove.name)) {
+			const message = () => {
+				if (nextMove.name === 'fly') {
+					return <span>{player.data.name} flew up high</span>;
+				}
+				return (
+					<span>
+						{player.data.name} is charging up {nextMove.name}
+					</span>
+				);
+			};
+			return (
+				<Banner flexDirection={'row'}>
+					<img
+						height={battleSpriteSize}
+						width={battleSpriteSize}
+						src={getPokemonSprite(player.dexId)}
+					/>
+					<h3>{message()}</h3>
+				</Banner>
+			);
+		}
+	}
+	if (battleStep === 'EXECUTE_OPPONENT_MOVE' && nextMove?.type === 'ChargeUp') {
+		if (secondTurnMoves.includes(nextMove.name)) {
+			const message = () => {
+				if (nextMove.name === 'fly') {
+					return <span>{opponent.data.name} flew up high</span>;
+				}
+				return (
+					<span>
+						{opponent.data.name} is charging up {nextMove.name}
+					</span>
+				);
+			};
+			return (
+				<Banner flexDirection={'row-reverse'}>
+					<img
+						height={battleSpriteSize}
+						width={battleSpriteSize}
+						src={getPokemonSprite(opponent.dexId)}
+					/>
+					<h3>{message()}</h3>
+				</Banner>
+			);
+		}
+	}
+
 	if (
 		battleStep === 'EXECUTE_PLAYER_MOVE' &&
 		nextMove?.type === 'BattleAttack' &&
@@ -87,64 +136,7 @@ export const BattleBanner = ({
 			/>
 		);
 	}
-	if (battleStep === 'PLAYER_CHARGE_UP') {
-		if (
-			nextMove &&
-			nextMove.type !== 'CatchProcessInfo' &&
-			nextMove.type !== 'InBattleItem' &&
-			secondTurnMoves.includes(nextMove.name)
-		) {
-			const message = () => {
-				if (nextMove.name === 'fly') {
-					return <span>{player.data.name} flew up high</span>;
-				}
-				return (
-					<span>
-						{player.data.name} is charging up {nextMove.name}
-					</span>
-				);
-			};
-			return (
-				<Banner flexDirection={'row'}>
-					<img
-						height={battleSpriteSize}
-						width={battleSpriteSize}
-						src={getPokemonSprite(player.dexId)}
-					/>
-					<h3>{message()}</h3>
-				</Banner>
-			);
-		}
-	}
-	if (battleStep === 'OPPONENT_CHARGE_UP') {
-		if (
-			nextMove &&
-			nextMove.type !== 'CatchProcessInfo' &&
-			nextMove.type !== 'InBattleItem' &&
-			secondTurnMoves.includes(nextMove.name)
-		) {
-			const message = () => {
-				if (nextMove.name === 'fly') {
-					return <span>{opponent.data.name} flew up high</span>;
-				}
-				return (
-					<span>
-						{opponent.data.name} is charging up {nextMove.name}
-					</span>
-				);
-			};
-			return (
-				<Banner flexDirection={'row-reverse'}>
-					<img
-						height={battleSpriteSize}
-						width={battleSpriteSize}
-						src={getPokemonSprite(opponent.dexId)}
-					/>
-					<h3>{message()}</h3>
-				</Banner>
-			);
-		}
-	}
+
 	if (battleStep === 'OPPONENT_UNABLE_TO_ATTACK') {
 		const ailmentMessage = () => {
 			if (opponent.primaryAilment?.type === 'freeze') {

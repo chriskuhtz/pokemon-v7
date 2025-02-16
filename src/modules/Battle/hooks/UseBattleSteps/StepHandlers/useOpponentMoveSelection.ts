@@ -3,61 +3,66 @@ import { secondTurnMoves } from '../../../../../constants/secondTurnMoves';
 import { determineCrit } from '../../../../../functions/determineCrit';
 import { determineMultiHits } from '../../../../../functions/determineMultiHits';
 import { recommendMove } from '../../../../../functions/recommendMove';
+import { BattleAction } from '../../../../../interfaces/BattleActions';
 import { beginTurnPath } from '../../../types/BattleStep';
 import { ExtendedBattleStepHandler } from '../useBattleSteps';
 
 export const useOpponentMoveSelection = ({
 	battleStep,
-	nextOpponentMove,
+
 	opponent,
 	player,
-	setNextOpponentMove,
 	battleWeather,
 	followBattleStepPath,
-	chargedUpOpponentMove,
-	setChargedUpOpponentMove,
+	battleRound,
+	setOpponent,
 }: ExtendedBattleStepHandler) => {
 	useEffect(() => {
-		if (
-			battleStep === 'OPPONENT_MOVE_SELECTION' &&
-			!nextOpponentMove &&
-			opponent &&
-			player
-		) {
-			if (chargedUpOpponentMove) {
-				setNextOpponentMove({
-					...chargedUpOpponentMove,
-				});
-				setChargedUpOpponentMove(undefined);
+		if (battleStep === 'OPPONENT_MOVE_SELECTION' && opponent && player) {
+			if (opponent.moveQueue.length > 0) {
 				followBattleStepPath(beginTurnPath);
-				return;
-			}
-			const chosenMove = recommendMove(opponent, player, battleWeather);
+			} else {
+				const chosenMove = recommendMove(opponent, player, battleWeather);
 
-			setNextOpponentMove({
-				...chosenMove,
-				crit: determineCrit(
-					chosenMove.name,
-					chosenMove.data.meta.crit_rate,
-					player.ability
-				),
-				multiHits: determineMultiHits(chosenMove),
-
-				type: secondTurnMoves.includes(chosenMove.name)
+				const moveType = secondTurnMoves.includes(chosenMove.name)
 					? 'ChargeUp'
-					: 'BattleAttack',
-			});
-			followBattleStepPath(beginTurnPath);
+					: 'BattleAttack';
+				const fullyDeterminedMove: BattleAction = {
+					...chosenMove,
+					crit: determineCrit(
+						chosenMove.name,
+						chosenMove.data.meta.crit_rate,
+						player.ability
+					),
+					multiHits: determineMultiHits(chosenMove),
+					round: battleRound,
+					type: moveType,
+				};
+
+				if (moveType === 'BattleAttack') {
+					setOpponent({ ...opponent, moveQueue: [fullyDeterminedMove] });
+				} else {
+					const followUp: BattleAction = {
+						...fullyDeterminedMove,
+						round: battleRound + 1,
+						type: 'BattleAttack',
+					} as BattleAction;
+					setOpponent({
+						...opponent,
+						moveQueue: [fullyDeterminedMove, followUp],
+					});
+				}
+
+				followBattleStepPath(beginTurnPath);
+			}
 		}
 	}, [
+		battleRound,
 		battleStep,
 		battleWeather,
-		chargedUpOpponentMove,
 		followBattleStepPath,
-		nextOpponentMove,
 		opponent,
 		player,
-		setChargedUpOpponentMove,
-		setNextOpponentMove,
+		setOpponent,
 	]);
 };

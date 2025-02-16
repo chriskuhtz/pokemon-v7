@@ -8,20 +8,6 @@ export const applySecondaryAilmentDamage = (
 	dispatchToast: AddToastFunction
 ): BattlePokemon => {
 	let updated = { ...pokemon };
-	//reduce ailment duration
-	updated.secondaryAilments = updated.secondaryAilments
-		.map((a) => {
-			if (a.type === 'trap') {
-				if (a.duration === 0) {
-					dispatchToast(`${pokemon.data.name} is no longer trapped`);
-					return undefined;
-				} else {
-					return { ...a, duration: a.duration - 1 };
-				}
-			}
-			return a;
-		})
-		.filter((a) => a !== undefined);
 
 	//apply ailment damage
 	if (isTrapped(updated)) {
