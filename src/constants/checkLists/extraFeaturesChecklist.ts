@@ -105,4 +105,7 @@ export const extraFeatureCheckList: {
 	{
 		name: 'fix: recoil is too high if the move does more damage than target has hp left ',
 	},
+	{
+		name: 'auto heal on battle lost',
+	},
 ];
