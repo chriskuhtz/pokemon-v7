@@ -15,6 +15,26 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	item: HealingItemType,
 	addToast?: AddToastFunction
 ): T {
+	if (item === 'revive' && pokemon.damage >= pokemon.maxHp) {
+		if (addToast) {
+			addToast(`regained 50% HP`);
+		}
+		if (isBattlePokemon(pokemon)) {
+			return {
+				...pokemon,
+				damage: Math.round(pokemon.stats.hp / 2),
+				primaryAilment: undefined,
+				secondaryAilments: [],
+				flashFired: false,
+				moveQueue: [],
+			};
+		}
+		return {
+			...pokemon,
+			damage: Math.round(pokemon.maxHp / 2),
+			primaryAilment: undefined,
+		};
+	}
 	if (item === 'full-restore') {
 		if (addToast) {
 			addToast(`fully healed`);

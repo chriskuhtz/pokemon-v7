@@ -28,6 +28,7 @@ export const HealAction = ({
 							src={getPokemonSprite(p.dexId)}
 							onClick={() => {
 								healPokemon(p, item);
+								setOpen(false);
 							}}
 							tabIndex={0}
 							role="button"
@@ -35,6 +36,7 @@ export const HealAction = ({
 								e.stopPropagation();
 								if (e.key === 'Enter') {
 									healPokemon(p, item);
+									setOpen(false);
 								}
 							}}
 						/>

@@ -28,6 +28,7 @@ export interface OwnedPokemon {
 	//Overflows between 0 and 255, adds happiness at 255
 	stepsWalked: number;
 	heldItemName?: ItemType;
+	maxHp: number;
 	//effortValues: StatObject;
 	//intrinsicValues: StatObject;
 	//ppBoostedMoves: PPBoostedMove[];

@@ -1,3 +1,4 @@
+import { v4 } from 'uuid';
 import { generateInventory } from '../interfaces/Inventory';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { SaveFile } from '../interfaces/SaveFile';
@@ -17,13 +18,14 @@ export const testPokemon: OwnedPokemon = {
 	secondMove: { name: 'thrash', usedPP: 0 },
 	thirdMove: { name: 'double-kick', usedPP: 0 },
 	fourthMove: { name: 'swords-dance', usedPP: 0 },
-	damage: 0,
+	damage: 60,
 	nature: 'adamant',
 	xp: 200,
 	ability: 'intimidate',
 	happiness: 70,
 	stepsWalked: 0,
 	heldItemName: 'potion',
+	maxHp: 20,
 };
 export const testState: SaveFile = {
 	badges: ['boulder-badge'],
@@ -36,10 +38,14 @@ export const testState: SaveFile = {
 		'great-ball': 10,
 		potion: 10,
 		antidote: 10,
+		revive: 10,
 	}),
 	playerId: '',
 	money: 5000,
-	pokemon: [],
+	pokemon: [
+		{ ...testPokemon, dexId: 87, id: v4() },
+		{ ...testPokemon, dexId: 153, id: v4() },
+	],
 	meta: {
 		activeTab: 'MAIN',
 	},
@@ -68,6 +74,7 @@ export const testOpponent: OwnedPokemon = {
 	ability: 'volt-absorb',
 	happiness: -1,
 	stepsWalked: 0,
+	maxHp: 50,
 };
 
 export const localStorageId = 'pokemonv7SaveFile';
