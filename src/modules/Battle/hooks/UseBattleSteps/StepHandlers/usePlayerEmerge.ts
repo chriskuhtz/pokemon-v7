@@ -11,6 +11,8 @@ export const usePlayerEmerge = ({
 	battleWeather,
 	dispatchToast,
 	followBattleStepPath,
+	opponent,
+	setOpponent,
 }: ExtendedBattleStepHandler) => {
 	useEffect(() => {
 		if (battleStep !== 'PLAYER_EMERGE' || !player) {
@@ -22,6 +24,8 @@ export const usePlayerEmerge = ({
 				setWeather: setBattleWeather,
 				currentWeather: battleWeather,
 				dispatchToast,
+				opponent,
+				setOpponent,
 			});
 
 			followBattleStepPath(introPath);
@@ -33,7 +37,9 @@ export const usePlayerEmerge = ({
 		battleWeather,
 		dispatchToast,
 		followBattleStepPath,
+		opponent,
 		player,
 		setBattleWeather,
+		setOpponent,
 	]);
 };
