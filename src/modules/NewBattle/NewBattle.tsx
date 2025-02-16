@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import { animationTimer } from '../../constants/gameData';
 import { AddToastFunction } from '../../hooks/useToasts';
 import { Challenger } from '../../interfaces/Challenger';
 import { IntroBanner } from './components/IntroBanner';
@@ -12,12 +14,19 @@ export const NewBattle = ({
 	opponent: Challenger;
 	addToast: AddToastFunction;
 }): JSX.Element => {
-	const { challenger: battlePlayer, setChallenger: setBattlePlayer } =
-		useChallenger(player);
-	const { challenger: battleOpponent, setChallenger: setBattleOpponent } =
-		useChallenger(opponent);
+	const [showBanner, setShowBanner] = useState<boolean>(true);
+	const { challenger: battlePlayer } = useChallenger(player);
+	const { challenger: battleOpponent } = useChallenger(opponent);
 
-	if (!battlePlayer || !battleOpponent) {
+	useEffect(() => {
+		if (battlePlayer && battleOpponent && showBanner) {
+			const t = setTimeout(() => setShowBanner(false), animationTimer);
+
+			return () => clearTimeout(t);
+		}
+	}, [battleOpponent, battlePlayer, showBanner]);
+
+	if (showBanner) {
 		return <IntroBanner player={player} opponent={opponent} />;
 	}
 

@@ -16,6 +16,7 @@ export const IntroBanner = ({
 				<div>
 					{player.team.map((t) => (
 						<img
+							key={t.id}
 							height={baseSize}
 							width={baseSize}
 							src={getPokemonSprite(t.dexId)}
@@ -34,6 +35,7 @@ export const IntroBanner = ({
 				>
 					{opponent.team.map((t) => (
 						<img
+							key={t.id}
 							height={baseSize}
 							width={baseSize}
 							src={getPokemonSprite(t.dexId)}
