@@ -9,16 +9,21 @@ import {
 	determineHeldItem,
 	getHeldItemRateModifier,
 } from './functions/determineHeldItem';
+import { getRandomPokemonId } from './functions/getRandomPokemonId';
 import { useSaveFile } from './hooks/useSaveFile';
 import { AddToastFunction } from './hooks/useToasts';
-import { generateInventory, Inventory } from './interfaces/Inventory';
+import {
+	EmptyInventory,
+	generateInventory,
+	Inventory,
+} from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
 import { Bag } from './modules/Bag/Bag';
-import { Battle } from './modules/Battle/Battle';
 import { MainMenu } from './modules/MainMenu/MainMenu';
 import { BuyMarket } from './modules/Market/BuyMarket';
 import { Market } from './modules/Market/Market';
 import { SellMarket } from './modules/Market/SellMarket';
+import { NewBattle } from './modules/NewBattle/NewBattle';
 import { Overworld } from './modules/Overworld/Overworld';
 import { PokemonStorage } from './modules/PokemonStorage/PokemonStorage';
 import { Quests } from './modules/Quests/Quests';
@@ -27,7 +32,6 @@ import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { Team } from './modules/Team/Team';
 
 export const App = ({
-	activeToast,
 	addToast,
 }: {
 	activeToast: boolean;
@@ -40,7 +44,6 @@ export const App = ({
 	const {
 		saveFile,
 		discardItemReducer,
-		putSaveFileReducer,
 		setActiveTabReducer,
 		sellItemReducer,
 		buyItemReducer,
@@ -161,18 +164,36 @@ export const App = ({
 			/>
 		);
 	}
+	const oppId = v4();
 	if (activeTab === 'BATTLE') {
 		return (
-			<Battle
-				initSaveFile={saveFile}
-				initOppo={currentOpponent}
-				goBack={(update) =>
-					putSaveFileReducer({
-						...update,
-						meta: { ...update.meta, activeTab: 'OVERWORLD' },
-					})
-				}
-				activeToast={activeToast}
+			<NewBattle
+				fightersPerSide={2}
+				player={{
+					id: saveFile.playerId,
+					team: team,
+					inventory: inventory,
+					type: 'TRAINER',
+				}}
+				opponent={{
+					id: oppId,
+					type: 'WILD',
+					inventory: EmptyInventory,
+					team: [
+						{
+							...currentOpponent,
+							id: v4(),
+							dexId: getRandomPokemonId(),
+							ownerId: oppId,
+						},
+						{
+							...currentOpponent,
+							id: v4(),
+							dexId: getRandomPokemonId(),
+							ownerId: oppId,
+						},
+					],
+				}}
 				addToast={addToast}
 			/>
 		);

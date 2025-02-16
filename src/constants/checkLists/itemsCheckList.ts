@@ -7,138 +7,110 @@ export const itemsCheckList: {
 	{
 		name: 'master-ball',
 		url: 'https://pokeapi.co/api/v2/item/1/',
-		handled: true,
 	},
 	{
 		name: 'ultra-ball',
 		url: 'https://pokeapi.co/api/v2/item/2/',
-		handled: true,
 	},
 	{
 		name: 'great-ball',
 		url: 'https://pokeapi.co/api/v2/item/3/',
-		handled: true,
 	},
 	{
 		name: 'poke-ball',
 		url: 'https://pokeapi.co/api/v2/item/4/',
-		handled: true,
 	},
 	{
 		name: 'safari-ball',
 		url: 'https://pokeapi.co/api/v2/item/5/',
-		handled: true,
 	},
 	{
 		name: 'net-ball',
 		url: 'https://pokeapi.co/api/v2/item/6/',
-
-		handled: true,
 	},
 	{
 		name: 'dive-ball',
 		url: 'https://pokeapi.co/api/v2/item/7/',
-		handled: true,
 	},
 	{
 		name: 'nest-ball',
 		url: 'https://pokeapi.co/api/v2/item/8/',
-		handled: true,
 	},
 	{
 		name: 'repeat-ball',
 		url: 'https://pokeapi.co/api/v2/item/9/',
-		handled: true,
 	},
 	{
 		name: 'timer-ball',
 		url: 'https://pokeapi.co/api/v2/item/10/',
-		handled: true,
 	},
 	{
 		name: 'luxury-ball',
 		url: 'https://pokeapi.co/api/v2/item/11/',
-		handled: true,
 	},
 	{
 		name: 'premier-ball',
 		url: 'https://pokeapi.co/api/v2/item/12/',
-		handled: true,
 	},
 	{
 		name: 'dusk-ball',
 		url: 'https://pokeapi.co/api/v2/item/13/',
-		handled: true,
 	},
 	{
 		name: 'heal-ball',
 		url: 'https://pokeapi.co/api/v2/item/14/',
-		handled: true,
 	},
 	{
 		name: 'quick-ball',
 		url: 'https://pokeapi.co/api/v2/item/15/',
-		handled: true,
 	},
 	{
 		name: 'cherish-ball',
 		url: 'https://pokeapi.co/api/v2/item/16/',
-		handled: true,
 	},
 	{
 		name: 'potion',
 		url: 'https://pokeapi.co/api/v2/item/17/',
-		handled: true,
 	},
 	{
 		name: 'antidote',
 		url: 'https://pokeapi.co/api/v2/item/18/',
-		handled: true,
 	},
 	{
 		name: 'burn-heal',
 		url: 'https://pokeapi.co/api/v2/item/19/',
-		handled: true,
 	},
 	{
 		name: 'ice-heal',
 		url: 'https://pokeapi.co/api/v2/item/20/',
-		handled: true,
 	},
 	{
 		name: 'awakening',
 		url: 'https://pokeapi.co/api/v2/item/21/',
-		handled: true,
 	},
 	{
 		name: 'paralyze-heal',
 		url: 'https://pokeapi.co/api/v2/item/22/',
-		handled: true,
 	},
 	{
 		name: 'full-restore',
 		url: 'https://pokeapi.co/api/v2/item/23/',
-		handled: true,
 	},
 	{
 		name: 'max-potion',
 		url: 'https://pokeapi.co/api/v2/item/24/',
-		handled: true,
 	},
 	{
 		name: 'hyper-potion',
 		url: 'https://pokeapi.co/api/v2/item/25/',
-		handled: true,
 	},
 	{
 		name: 'super-potion',
 		url: 'https://pokeapi.co/api/v2/item/26/',
-		handled: true,
 	},
 	{
 		name: 'full-heal',
 		url: 'https://pokeapi.co/api/v2/item/27/',
-		handled: true,
 	},
 	{
 		name: 'revive',
