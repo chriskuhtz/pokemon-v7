@@ -39,7 +39,9 @@ export const StarterSelection = ({
 							key={o}
 							onKeyDown={(e) => {
 								if (e.key === 'Enter') {
-									setChosenStarter(o);
+									if (!name) {
+										setChosenStarter(o);
+									} else proceed(name, o);
 								}
 							}}
 							style={{
