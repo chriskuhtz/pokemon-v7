@@ -69,7 +69,7 @@ export const useCleanMoveQueue = ({
 				)
 			);
 		} else {
-			setPlayer({
+			setOpponent({
 				...opponent,
 				moveQueue: filteredOpponentQueue,
 			});
