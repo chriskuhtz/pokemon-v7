@@ -5,9 +5,9 @@ import { baseSize } from '../../../constants/gameData';
 import { determineCrit } from '../../../functions/determineCrit';
 import { determineMultiHits } from '../../../functions/determineMultiHits';
 import { recommendMove } from '../../../functions/recommendMove';
+import { BattleAction } from '../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../interfaces/Weather';
-import { BattleAction } from '../../../interfaces/BattleActions';
 
 export const MoveSelectionMenu = ({
 	chooseMove,
@@ -59,7 +59,6 @@ export const MoveSelectionMenu = ({
 										m.data.meta.crit_rate,
 										opponent.ability
 									),
-
 									multiHits: determineMultiHits(m),
 								})
 							}

@@ -61,7 +61,6 @@ export const executeMove = ({
 	targetFaintingPath: BattleStep[];
 	battleRound: number;
 }) => {
-	console.log(attacker);
 	if (attacker.moveQueue.length === 0) {
 		throw new Error('there is nothing to execute');
 	}

@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-import { thrashingMoves } from '../../constants/lockInMoves';
-import { secondTurnMoves } from '../../constants/secondTurnMoves';
+import { chooseMove } from '../../functions/chooseMove';
 import { AddToastFunction } from '../../hooks/useToasts';
 import { joinInventories } from '../../interfaces/Inventory';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
@@ -97,45 +96,7 @@ export const Battle = ({
 						battleWeather={battleWeather}
 						battleStep={battleStep}
 						battleRound={battleRound}
-						chooseMove={(x) => {
-							if (x.type === 'CatchProcessInfo' || x.type === 'InBattleItem') {
-								setPlayer({
-									...player,
-									moveQueue: [...player.moveQueue, x],
-								});
-
-								return;
-							}
-							if (secondTurnMoves.includes(x.name)) {
-								setPlayer({
-									...player,
-									moveQueue: [
-										...player.moveQueue,
-										{ ...x, type: 'ChargeUp' },
-										{ ...x, round: x.round + 1 },
-									],
-								});
-								return;
-							}
-							if (thrashingMoves.includes(x.name)) {
-								setPlayer({
-									...player,
-									moveQueue: [
-										...player.moveQueue,
-										x,
-										{ ...x, round: x.round + 1 },
-										Math.random() > 0.5
-											? { ...x, round: x.round + 2 }
-											: undefined,
-									].filter((mq) => mq !== undefined),
-								});
-								return;
-							}
-							setPlayer({
-								...player,
-								moveQueue: [...player.moveQueue, x],
-							});
-						}}
+						chooseMove={(x) => chooseMove(x, player, setPlayer)}
 						inventory={joinInventories(initSaveFile.inventory, usedItems, true)}
 						player={player}
 						opponent={opponent}
