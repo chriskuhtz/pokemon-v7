@@ -115,4 +115,10 @@ export const extraFeatureCheckList: {
 	{
 		name: 'stop strange spinning of npcs when click navigating',
 	},
+	{
+		name: 'get correct maxHp for pokemon not received from battle, e.g. starter selection',
+	},
+	{
+		name: 'show k/o pokemon as such in team overview',
+	},
 ];

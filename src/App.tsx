@@ -92,9 +92,11 @@ export const App = ({
 					patchSaveFileReducer({
 						playerId: name,
 						pokemon: [
+							...saveFile.pokemon,
 							{
 								...testPokemon,
 								dexId: starterId,
+								id: v4(),
 								ownerId: name,
 								onTeam: true,
 							},
