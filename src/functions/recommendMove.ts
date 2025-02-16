@@ -40,7 +40,7 @@ export const recommendMove = (
 
 			//higher weight for higher crit chance, does not consider target ability
 			const critWeighted =
-				accuracyWeighted + accuracyWeighted * (a.data.meta.crit_rate / 2);
+				accuracyWeighted + accuracyWeighted * (a.data.meta.crit_rate ?? 0 / 2);
 			//two turn moves get lower weight
 			const twoTurnFactor = secondTurnMoves.includes(a.name) ? 0.5 : 1;
 

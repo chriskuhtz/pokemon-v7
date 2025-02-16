@@ -118,7 +118,7 @@ export const Battle = ({
 							}
 							setPlayer({
 								...player,
-								moveQueue: [...player.moveQueue, { ...x, type: 'ChargeUp' }, x],
+								moveQueue: [...player.moveQueue, x],
 							});
 						}}
 						inventory={joinInventories(initSaveFile.inventory, usedItems, true)}

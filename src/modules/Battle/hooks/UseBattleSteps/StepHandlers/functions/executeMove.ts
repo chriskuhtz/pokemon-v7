@@ -10,10 +10,7 @@ import { pokemonCantMove } from '../../../../../../functions/pokemonCantMove';
 import { reduceMovePP } from '../../../../../../functions/reduceMovePP';
 import { targetFlinched } from '../../../../../../functions/targetFlinched';
 import { AddToastFunction } from '../../../../../../hooks/useToasts';
-import {
-	BattleAction,
-	BattleAttack,
-} from '../../../../../../interfaces/BattleActions';
+import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import {
 	Inventory,
@@ -64,6 +61,7 @@ export const executeMove = ({
 	targetFaintingPath: BattleStep[];
 	battleRound: number;
 }) => {
+	console.log(attacker);
 	if (attacker.moveQueue.length === 0) {
 		throw new Error('there is nothing to execute');
 	}
@@ -75,31 +73,16 @@ export const executeMove = ({
 	const t = setTimeout(() => {
 		const nextAttackerMove = attacker.moveQueue[0];
 		const nextTargetMove = target.moveQueue[0];
-		const setNextAttackerMove = (newMove?: BattleAction) => {
-			if (!newMove) {
-				setAttacker({
-					...attacker,
-					moveQueue: [...attacker.moveQueue].filter(
-						(m) => m.round !== battleRound
-					),
-				});
-				return;
-			} else
-				setAttacker({
-					...attacker,
-					moveQueue: [
-						newMove,
-						...attacker.moveQueue.filter((m) => m.round !== battleRound),
-					],
-				});
-		};
 
 		if (nextAttackerMove?.type === 'CatchProcessInfo') {
 			followBattleStepPath(catchingPath);
 			return;
 		}
+		if (nextAttackerMove?.type === 'ChargeUp') {
+			followTurnPath();
+			return;
+		}
 		if (nextAttackerMove?.type === 'InBattleItem') {
-			setNextAttackerMove(undefined);
 			setUsedItems((i) => joinInventories(i, { [nextAttackerMove.item]: 1 }));
 			setAttacker(
 				applyItemToPokemon(attacker, nextAttackerMove.item, dispatchToast)
@@ -113,7 +96,7 @@ export const executeMove = ({
 		) {
 			if (target.ability === 'suction-cups') {
 				dispatchToast(`${target.data.name} holds on with suction-cups`);
-				setNextAttackerMove(undefined);
+
 				followTurnPath();
 				return;
 			}
@@ -136,7 +119,6 @@ export const executeMove = ({
 						target.ability === 'damp' ? target.data.name : attacker.data.name
 					} prevents self destruct moves with damp`
 				);
-				setNextAttackerMove(undefined);
 
 				followTurnPath();
 				return;
@@ -157,13 +139,13 @@ export const executeMove = ({
 				pla = applyCrashDamage(attacker, nextAttackerMove.name, dispatchToast);
 
 				setAttacker(pla);
-				setNextAttackerMove(undefined);
+
 				if (isKO(pla)) {
 					startPath(attackerFaintingPath);
 					return;
 				}
+
 				setBattleStepMissed();
-				setNextAttackerMove(undefined);
 				return;
 			}
 			const { updatedTarget, updatedAttacker } = applyAttackToPokemon({
@@ -195,21 +177,24 @@ export const executeMove = ({
 			}
 			if (isKO(updatedTarget)) {
 				startPath(targetFaintingPath);
-				setNextAttackerMove(undefined);
 				return;
 			}
 
 			if (moveWithReducedMultihits) {
-				setNextAttackerMove(moveWithReducedMultihits);
+				setAttacker({
+					...attacker,
+					moveQueue: [
+						moveWithReducedMultihits,
+						...attacker.moveQueue.filter((m) => m.round !== battleRound),
+					],
+				});
 				repeatBattleStepForMultiHit();
 				return;
 			}
 			if (targetFlinched(attacker, target, nextAttackerMove)) {
-				setNextAttackerMove(undefined);
 				setBattleStepFlinched();
 				return;
 			}
-			setNextAttackerMove(undefined);
 			followTurnPath();
 		}
 	}, animationTimer);

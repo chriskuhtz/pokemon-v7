@@ -17,6 +17,7 @@ import {
 } from '../../types/BattleStep';
 import { useBattleEnd } from './StepHandlers/useBattleEnd';
 import { useCatchingSteps } from './StepHandlers/useCatchingSteps';
+import { useCleanMoveQueue } from './StepHandlers/useCleanMoveQueue';
 import { useExecuteOpponentMove } from './StepHandlers/useExecuteOpponentMove';
 import { useExecutePlayerMove } from './StepHandlers/useExecutePlayerMove';
 import { useFlinched } from './StepHandlers/useFlinched';
@@ -96,11 +97,11 @@ export const useBattleSteps = ({
 	const [beginsThisTurn, setBeginsThisTurn] = useState<string | undefined>();
 
 	useEffect(() => {
-		console.log(battleStep);
+		console.log(battleStep, battleRound);
 		if (battleStep === 'MOVE_HANDLING') {
 			setBattleRound((battleRound) => battleRound + 1);
 		}
-	}, [battleStep]);
+	}, [battleRound, battleStep, opponent, player, setPlayer]);
 
 	const nextMove = useMemo(() => {
 		if (
@@ -217,8 +218,9 @@ export const useBattleSteps = ({
 	useOpponentEmerge(extendedPayload);
 	usePlayerEmerge(extendedPayload);
 	useHandlePlayerEndOfTurnAbility(extendedPayload);
-	useMoveSelection(extendedPayload);
 	useHandleOpponentEndOfTurnAbility(extendedPayload);
+	useCleanMoveQueue(extendedPayload);
+	useMoveSelection(extendedPayload);
 	useOpponentMoveSelection(extendedPayload);
 	useMoveHandling(extendedPayload);
 	usePlayerCureAilments(extendedPayload);

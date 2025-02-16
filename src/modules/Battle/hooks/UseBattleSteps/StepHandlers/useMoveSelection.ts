@@ -10,10 +10,11 @@ export const useMoveSelection = ({
 	battleWeather,
 }: ExtendedBattleStepHandler) => {
 	useEffect(() => {
-		if (!player || !opponent) {
+		if (!player || !opponent || battleStep !== 'MOVE_SELECTION') {
 			return;
 		}
-		if (battleStep === 'MOVE_SELECTION' && player.moveQueue.length > 0) {
+
+		if (player.moveQueue.length > 0) {
 			followBattleStepPath(beginTurnPath);
 		}
 	}, [battleStep, battleWeather, followBattleStepPath, opponent, player]);
