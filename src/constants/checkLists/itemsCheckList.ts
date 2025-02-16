@@ -143,7 +143,7 @@ export const itemsCheckList: {
 	{
 		name: 'revive',
 		url: 'https://pokeapi.co/api/v2/item/28/',
-		todos: ['consider entire team in battle???'],
+		todos: ['revive in battle'],
 	},
 	{
 		name: 'max-revive',
