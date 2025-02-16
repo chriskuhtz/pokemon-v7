@@ -164,7 +164,7 @@ export const movesCheckList: {
 	{
 		name: 'thrash',
 		url: 'https://pokeapi.co/api/v2/move/37/',
-		todos: ['apply lock in', 'handle confusion'],
+		handled: true,
 	},
 	{
 		name: 'double-edge',

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { thrashingMoves } from '../../constants/lockInMoves';
 import { secondTurnMoves } from '../../constants/secondTurnMoves';
 import { AddToastFunction } from '../../hooks/useToasts';
 import { joinInventories } from '../../interfaces/Inventory';
@@ -113,6 +114,20 @@ export const Battle = ({
 										{ ...x, type: 'ChargeUp' },
 										{ ...x, round: x.round + 1 },
 									],
+								});
+								return;
+							}
+							if (thrashingMoves.includes(x.name)) {
+								setPlayer({
+									...player,
+									moveQueue: [
+										...player.moveQueue,
+										x,
+										{ ...x, round: x.round + 1 },
+										Math.random() > 0.5
+											? { ...x, round: x.round + 2 }
+											: undefined,
+									].filter((mq) => mq !== undefined),
 								});
 								return;
 							}

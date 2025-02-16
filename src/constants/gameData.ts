@@ -14,7 +14,7 @@ export const testPokemon: OwnedPokemon = {
 	ball: 'master-ball',
 	onTeam: true,
 	firstMove: { name: 'razor-wind', usedPP: 0 },
-	secondMove: { name: 'take-down', usedPP: 0 },
+	secondMove: { name: 'thrash', usedPP: 0 },
 	thirdMove: { name: 'double-kick', usedPP: 0 },
 	fourthMove: { name: 'swords-dance', usedPP: 0 },
 	damage: 0,
