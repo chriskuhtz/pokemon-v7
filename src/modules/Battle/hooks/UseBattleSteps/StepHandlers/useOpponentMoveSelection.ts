@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { secondTurnMoves } from '../../../../../constants/secondTurnMoves';
+import { chooseMove } from '../../../../../functions/chooseMove';
 import { determineCrit } from '../../../../../functions/determineCrit';
 import { determineMultiHits } from '../../../../../functions/determineMultiHits';
 import { recommendMove } from '../../../../../functions/recommendMove';
@@ -24,9 +24,6 @@ export const useOpponentMoveSelection = ({
 			} else {
 				const chosenMove = recommendMove(opponent, player, battleWeather);
 
-				const moveType = secondTurnMoves.includes(chosenMove.name)
-					? 'ChargeUp'
-					: 'BattleAttack';
 				const fullyDeterminedMove: BattleAction = {
 					...chosenMove,
 					crit: determineCrit(
@@ -36,22 +33,10 @@ export const useOpponentMoveSelection = ({
 					),
 					multiHits: determineMultiHits(chosenMove),
 					round: battleRound,
-					type: moveType,
+					type: 'BattleAttack',
 				};
 
-				if (moveType === 'BattleAttack') {
-					setOpponent({ ...opponent, moveQueue: [fullyDeterminedMove] });
-				} else {
-					const followUp: BattleAction = {
-						...fullyDeterminedMove,
-						round: battleRound + 1,
-						type: 'BattleAttack',
-					} as BattleAction;
-					setOpponent({
-						...opponent,
-						moveQueue: [fullyDeterminedMove, followUp],
-					});
-				}
+				chooseMove(fullyDeterminedMove, opponent, setOpponent);
 
 				followBattleStepPath(beginTurnPath);
 			}

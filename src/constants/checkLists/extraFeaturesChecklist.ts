@@ -108,4 +108,5 @@ export const extraFeatureCheckList: {
 	{
 		name: 'auto heal on battle lost',
 	},
+	{ name: 'fix: metapod missed swords dance' },
 ];
