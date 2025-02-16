@@ -1,6 +1,6 @@
-import { occupantsRecord } from '../constants/occupantsRecord';
 import { Occupant } from '../interfaces/OverworldMap';
 import { CharacterLocationData } from '../interfaces/SaveFile';
+import { getNextFieldOccupant } from './getNextFieldOccupant';
 import { getNextLocation } from './getNextLocation';
 
 export const handleEnterPress = (
@@ -12,13 +12,8 @@ export const handleEnterPress = (
 		playerLocation,
 		playerLocation.orientation
 	);
-	const nextFieldOccupant = Object.entries(occupantsRecord).find(
-		([id, occ]) =>
-			occ.x === focusedField.x &&
-			occ.y === focusedField.y &&
-			occ.map === playerLocation.mapId &&
-			!collectedItems.find((c) => c === parseInt(id))
-	);
 
-	interactWith(nextFieldOccupant);
+	interactWith(
+		getNextFieldOccupant(playerLocation.mapId, collectedItems, focusedField)
+	);
 };

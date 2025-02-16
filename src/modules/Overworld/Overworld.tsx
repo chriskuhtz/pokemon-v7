@@ -20,6 +20,8 @@ import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { CharacterLocationData } from '../../interfaces/SaveFile';
 import { Banner } from '../../uiComponents/Banner/Banner';
 import './Overworld.css';
+import { ClickerGrid } from './components/ClickerGrid';
+import { useClickTarget } from './hooks/useClickTarget';
 import { useDrawBackground } from './hooks/useDrawBackground';
 import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
@@ -129,20 +131,11 @@ export const Overworld = ({
 		return 1;
 	}, [assembledMap.weather, firstTeamMember.ability]);
 
-	const setNextInput = useOverworldMovement(
-		playerLocation,
-		setCharacterLocation,
-		assembledMap,
-		addEncounterDialogue,
-		() => setStepsTaken((s) => s + 1),
-		encounterRateModifier
-	);
-
 	//DRAWING
 	useDrawCharacter(playerCanvasId, playerLocation);
 	useDrawBackground(backgroundCanvasId, map);
 	const changeOccupant = useDrawOccupants(occupantsCanvasId, assembledMap);
-
+	//INTERACTION
 	const interactWith = useCallback(
 		(occ: [string, Occupant] | undefined) => {
 			if (!occ) {
@@ -224,7 +217,23 @@ export const Overworld = ({
 			talkToNurse,
 		]
 	);
-
+	//MOVEMENT
+	const setNextInput = useOverworldMovement(
+		playerLocation,
+		setCharacterLocation,
+		assembledMap,
+		addEncounterDialogue,
+		() => setStepsTaken((s) => s + 1),
+		encounterRateModifier
+	);
+	const setClickTarget = useClickTarget(
+		assembledMap,
+		playerLocation,
+		setNextInput,
+		interactWith,
+		collectedItems,
+		dialogues.length > 0
+	);
 	useKeyboardControl(
 		setNextInput,
 		() => handleEnterPress(playerLocation, collectedItems, interactWith),
@@ -269,6 +278,24 @@ export const Overworld = ({
 			<div className="overworldPage">
 				<div id="canvasses" style={{ position: 'relative' }}>
 					<div
+						id="clickerGridWrapper"
+						style={{
+							border: 'solid 2px blue',
+							width: map.width * baseSize,
+							height: map.height * baseSize,
+							top: -playerLocation.y * baseSize,
+							left: -playerLocation.x * baseSize,
+							position: 'absolute',
+							zIndex: 1,
+						}}
+					>
+						<ClickerGrid
+							width={map.width}
+							height={map.height}
+							onClick={setClickTarget}
+						/>
+					</div>
+					<div
 						id="shader"
 						style={{
 							width: map.width * baseSize,
@@ -280,7 +307,9 @@ export const Overworld = ({
 							zIndex: 0,
 						}}
 					/>
+
 					<canvas id={playerCanvasId} height={baseSize} width={baseSize} />
+
 					<canvas
 						style={{
 							top: -playerLocation.y * baseSize,
