@@ -16,6 +16,7 @@ export interface BattlePokemon extends OwnedPokemon {
 	secondaryAilments: SecondaryAilment[];
 	flashFired?: boolean;
 	moveQueue: BattleAction[];
+	onField: boolean;
 }
 
 export function isBattlePokemon(
