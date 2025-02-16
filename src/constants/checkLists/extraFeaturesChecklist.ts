@@ -37,8 +37,10 @@ export const extraFeatureCheckList: {
 	{ name: 'toast types', handled: true },
 	{ name: 'pc storage filters', handled: true },
 	{ name: 'full keyboard control', handled: true },
-	{ name: 'movement by tile click' },
-	{ name: 'movement buttons' },
+	{
+		name: 'movement by tile click',
+		handled: true,
+	},
 	{ name: 'approach directions (PC only from front' },
 	{ name: 'overworld background/border of map' },
 	{ name: 'disable weird scroll', handled: true },
@@ -109,4 +111,8 @@ export const extraFeatureCheckList: {
 		name: 'auto heal on battle lost',
 	},
 	{ name: 'fix: metapod missed swords dance' },
+	{ name: 'stop walking animations when encounter triggered' },
+	{
+		name: 'stop strange spinning of npcs when click navigating',
+	},
 ];
