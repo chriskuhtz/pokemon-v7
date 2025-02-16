@@ -34,6 +34,7 @@ export const useBattlePokemon = (
 		) {
 			setCurrent({
 				...pokemon,
+				onField: false,
 				secondaryAilments: [],
 				moveQueue: [],
 				firstMove: {

@@ -7,164 +7,133 @@ export const movesCheckList: {
 	{
 		name: 'pound',
 		url: 'https://pokeapi.co/api/v2/move/1/',
-		handled: true,
 	},
 	{
 		name: 'karate-chop',
 		url: 'https://pokeapi.co/api/v2/move/2/',
-		handled: true,
 	},
 	{
 		name: 'double-slap',
 		url: 'https://pokeapi.co/api/v2/move/3/',
-		handled: true,
 	},
 	{
 		name: 'comet-punch',
 		url: 'https://pokeapi.co/api/v2/move/4/',
-		handled: true,
 	},
 	{
 		name: 'mega-punch',
 		url: 'https://pokeapi.co/api/v2/move/5/',
-		handled: true,
 	},
 	{
 		name: 'pay-day',
 		url: 'https://pokeapi.co/api/v2/move/6/',
-		handled: true,
 	},
 	{
 		name: 'fire-punch',
 		url: 'https://pokeapi.co/api/v2/move/7/',
-		handled: true,
 	},
 	{
 		name: 'ice-punch',
 		url: 'https://pokeapi.co/api/v2/move/8/',
-		handled: true,
 	},
 	{
 		name: 'thunder-punch',
 		url: 'https://pokeapi.co/api/v2/move/9/',
-		handled: true,
 	},
 	{ name: 'scratch', url: 'https://pokeapi.co/api/v2/move/10/', handled: true },
 	{
 		name: 'vice-grip',
 		url: 'https://pokeapi.co/api/v2/move/11/',
-		handled: true,
 	},
 	{
 		name: 'guillotine',
 		url: 'https://pokeapi.co/api/v2/move/12/',
-		handled: true,
 	},
 	{
 		name: 'razor-wind',
 		url: 'https://pokeapi.co/api/v2/move/13/',
-		handled: true,
 	},
 	{
 		name: 'swords-dance',
 		url: 'https://pokeapi.co/api/v2/move/14/',
-		handled: true,
 	},
 	{
 		name: 'cut',
 		url: 'https://pokeapi.co/api/v2/move/15/',
-		handled: true,
 	},
 	{ name: 'gust', url: 'https://pokeapi.co/api/v2/move/16/', handled: true },
 	{
 		name: 'wing-attack',
 		url: 'https://pokeapi.co/api/v2/move/17/',
-		handled: true,
 	},
 	{
 		name: 'whirlwind',
 		url: 'https://pokeapi.co/api/v2/move/18/',
-		handled: true,
 	},
 	{
 		name: 'fly',
 		url: 'https://pokeapi.co/api/v2/move/19/',
-		handled: true,
 	},
 	{ name: 'bind', url: 'https://pokeapi.co/api/v2/move/20/', handled: true },
 	{ name: 'slam', url: 'https://pokeapi.co/api/v2/move/21/', handled: true },
 	{
 		name: 'vine-whip',
 		url: 'https://pokeapi.co/api/v2/move/22/',
-		handled: true,
 	},
 	{ name: 'stomp', url: 'https://pokeapi.co/api/v2/move/23/', handled: true },
 	{
 		name: 'double-kick',
 		url: 'https://pokeapi.co/api/v2/move/24/',
-		handled: true,
 	},
 	{
 		name: 'mega-kick',
 		url: 'https://pokeapi.co/api/v2/move/25/',
-		handled: true,
 	},
 	{
 		name: 'jump-kick',
 		url: 'https://pokeapi.co/api/v2/move/26/',
-		handled: true,
 	},
 	{
 		name: 'rolling-kick',
 		url: 'https://pokeapi.co/api/v2/move/27/',
-		handled: true,
 	},
 	{
 		name: 'sand-attack',
 		url: 'https://pokeapi.co/api/v2/move/28/',
-		handled: true,
 	},
 	{
 		name: 'headbutt',
 		url: 'https://pokeapi.co/api/v2/move/29/',
-		handled: true,
 	},
 	{
 		name: 'horn-attack',
 		url: 'https://pokeapi.co/api/v2/move/30/',
-		handled: true,
 	},
 
 	{
 		name: 'fury-attack',
 		url: 'https://pokeapi.co/api/v2/move/31/',
-		handled: true,
 	},
 	{
 		name: 'horn-drill',
 		url: 'https://pokeapi.co/api/v2/move/32/',
-		handled: true,
 	},
 	{ name: 'tackle', url: 'https://pokeapi.co/api/v2/move/33/', handled: true },
 	{
 		name: 'body-slam',
 		url: 'https://pokeapi.co/api/v2/move/34/',
-		handled: true,
 	},
 	{
 		name: 'wrap',
 		url: 'https://pokeapi.co/api/v2/move/35/',
-		handled: true,
 	},
 	{
 		name: 'take-down',
 		url: 'https://pokeapi.co/api/v2/move/36/',
-		handled: true,
 	},
 	{
 		name: 'thrash',
 		url: 'https://pokeapi.co/api/v2/move/37/',
-		handled: true,
 	},
 	{
 		name: 'double-edge',
@@ -210,7 +179,6 @@ export const movesCheckList: {
 	{
 		name: 'water-gun',
 		url: 'https://pokeapi.co/api/v2/move/55/',
-		handled: true,
 	},
 	{
 		name: 'hydro-pump',
@@ -295,7 +263,6 @@ export const movesCheckList: {
 	{
 		name: 'petal-dance',
 		url: 'https://pokeapi.co/api/v2/move/80/',
-		handled: true,
 	},
 
 	{ name: 'string-shot', url: 'https://pokeapi.co/api/v2/move/81/' },
@@ -356,7 +323,6 @@ export const movesCheckList: {
 	{
 		name: 'high-jump-kick',
 		url: 'https://pokeapi.co/api/v2/move/136/',
-		handled: true,
 	},
 	{ name: 'glare', url: 'https://pokeapi.co/api/v2/move/137/' },
 	{ name: 'dream-eater', url: 'https://pokeapi.co/api/v2/move/138/' },
@@ -424,7 +390,6 @@ export const movesCheckList: {
 	{
 		name: 'outrage',
 		url: 'https://pokeapi.co/api/v2/move/200/',
-		handled: true,
 	},
 	{ name: 'sandstorm', url: 'https://pokeapi.co/api/v2/move/201/' },
 	{ name: 'giga-drain', url: 'https://pokeapi.co/api/v2/move/202/' },
@@ -557,7 +522,6 @@ export const movesCheckList: {
 	{
 		name: 'sheer-cold',
 		url: 'https://pokeapi.co/api/v2/move/329/',
-		handled: true,
 	},
 	{ name: 'muddy-water', url: 'https://pokeapi.co/api/v2/move/330/' },
 	{ name: 'bullet-seed', url: 'https://pokeapi.co/api/v2/move/331/' },
@@ -1199,7 +1163,6 @@ export const movesCheckList: {
 	{
 		name: 'axe-kick',
 		url: 'https://pokeapi.co/api/v2/move/853/',
-		handled: true,
 	},
 	{ name: 'last-respects', url: 'https://pokeapi.co/api/v2/move/854/' },
 	{ name: 'lumina-crash', url: 'https://pokeapi.co/api/v2/move/855/' },
@@ -1266,7 +1229,6 @@ export const movesCheckList: {
 	{
 		name: 'supercell-slam',
 		url: 'https://pokeapi.co/api/v2/move/916/',
-		handled: true,
 	},
 	{ name: 'psychic-noise', url: 'https://pokeapi.co/api/v2/move/917/' },
 	{ name: 'upper-hand', url: 'https://pokeapi.co/api/v2/move/918/' },
@@ -1291,51 +1253,6 @@ export const movesCheckList: {
 	{ name: 'shadow-sky', url: 'https://pokeapi.co/api/v2/move/10018/' },
 ];
 
-export const handledMoves = [
-	'pound',
-	'comet-punch',
-	'double-slap',
-	'karate-chop',
-	'mega-punch',
-	'pay-day',
-	'fire-punch',
-	'ice-punch',
-	'thunder-punch',
-	'scratch',
-	'vice-grip',
-	'tackle',
-	'body-slam',
-	'guillotine',
-	'sheer-cold',
-	'fissure',
-	'horn-drill',
-	'razor-wind',
-	'water-gun',
-	'swords-dance',
-	'cut',
-	'wrap',
-	'gust',
-	'wing-attack',
-	'whirlwind',
-	'fly',
-	'bind',
-	'slam',
-	'vine-whip',
-	'stomp',
-	'double-kick',
-	'mega-kick',
-	'jump-kick',
-	'axe-kick',
-	'high-jump-kick',
-	'supercell-slam',
-	'sand-attack',
-	'headbutt',
-	'horn-attack',
-	'fury-attack',
-	'take-down',
-	'thrash',
-	'petal-dance',
-	'outrage',
-] as const;
+export const handledMoves = [] as const;
 
 export type MoveName = (typeof handledMoves)[number];

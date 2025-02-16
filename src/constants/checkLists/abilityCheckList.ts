@@ -7,114 +7,92 @@ export const abilityCheckList: {
 	{
 		name: 'stench',
 		url: 'https://pokeapi.co/api/v2/ability/1/',
-		handled: true,
 	},
 	{
 		name: 'drizzle',
 		url: 'https://pokeapi.co/api/v2/ability/2/',
-		handled: true,
 	},
 	{
 		name: 'speed-boost',
 		url: 'https://pokeapi.co/api/v2/ability/3/',
-		handled: true,
 	},
 	{
 		name: 'battle-armor',
 		url: 'https://pokeapi.co/api/v2/ability/4/',
-		handled: true,
 	},
 	{
 		name: 'sturdy',
 		url: 'https://pokeapi.co/api/v2/ability/5/',
-		handled: true,
 	},
 	{
 		name: 'damp',
 		url: 'https://pokeapi.co/api/v2/ability/6/',
-		handled: true,
 	},
 	{
 		name: 'limber',
 		url: 'https://pokeapi.co/api/v2/ability/7/',
-		handled: true,
 	},
 	{
 		name: 'sand-veil',
 		url: 'https://pokeapi.co/api/v2/ability/8/',
-		handled: true,
 	},
 	{
 		name: 'static',
 		url: 'https://pokeapi.co/api/v2/ability/9/',
-		handled: true,
 	},
 	{
 		name: 'volt-absorb',
 		url: 'https://pokeapi.co/api/v2/ability/10/',
-		handled: true,
 	},
 
 	{
 		name: 'water-absorb',
 		url: 'https://pokeapi.co/api/v2/ability/11/',
-		handled: true,
 	},
 	{
 		name: 'oblivious',
 		url: 'https://pokeapi.co/api/v2/ability/12/',
-		handled: true,
 	},
 	{
 		name: 'cloud-nine',
 		url: 'https://pokeapi.co/api/v2/ability/13/',
-		handled: true,
 	},
 	{
 		name: 'compound-eyes',
 		url: 'https://pokeapi.co/api/v2/ability/14/',
-		handled: true,
 	},
 	{
 		name: 'insomnia',
 		url: 'https://pokeapi.co/api/v2/ability/15/',
-		handled: true,
 	},
 	{
 		name: 'color-change',
 		url: 'https://pokeapi.co/api/v2/ability/16/',
-		handled: true,
 	},
 	{
 		name: 'immunity',
 		url: 'https://pokeapi.co/api/v2/ability/17/',
-		handled: true,
 	},
 	{
 		name: 'flash-fire',
 		url: 'https://pokeapi.co/api/v2/ability/18/',
-		handled: true,
 	},
 	{
 		name: 'shield-dust',
 		url: 'https://pokeapi.co/api/v2/ability/19/',
-		handled: true,
 	},
 	{
 		name: 'own-tempo',
 		url: 'https://pokeapi.co/api/v2/ability/20/',
-		handled: true,
 	},
 
 	{
 		name: 'suction-cups',
 		url: 'https://pokeapi.co/api/v2/ability/21/',
-		handled: true,
 	},
 	{
 		name: 'intimidate',
 		url: 'https://pokeapi.co/api/v2/ability/22/',
-		handled: true,
 	},
 	{
 		name: 'shadow-tag',
@@ -159,7 +137,6 @@ export const abilityCheckList: {
 	{
 		name: 'inner-focus',
 		url: 'https://pokeapi.co/api/v2/ability/39/',
-		handled: true,
 	},
 	{ name: 'magma-armor', url: 'https://pokeapi.co/api/v2/ability/40/' },
 	{ name: 'water-veil', url: 'https://pokeapi.co/api/v2/ability/41/' },
@@ -196,19 +173,16 @@ export const abilityCheckList: {
 	{
 		name: 'vital-spirit',
 		url: 'https://pokeapi.co/api/v2/ability/72/',
-		handled: true,
 	},
 	{ name: 'white-smoke', url: 'https://pokeapi.co/api/v2/ability/73/' },
 	{ name: 'pure-power', url: 'https://pokeapi.co/api/v2/ability/74/' },
 	{
 		name: 'shell-armor',
 		url: 'https://pokeapi.co/api/v2/ability/75/',
-		handled: true,
 	},
 	{
 		name: 'air-lock',
 		url: 'https://pokeapi.co/api/v2/ability/76/',
-		handled: true,
 	},
 	{ name: 'tangled-feet', url: 'https://pokeapi.co/api/v2/ability/77/' },
 	{ name: 'motor-drive', url: 'https://pokeapi.co/api/v2/ability/78/' },
@@ -503,33 +477,6 @@ export const abilityCheckList: {
 	{ name: 'shield', url: 'https://pokeapi.co/api/v2/ability/10060/' },
 ];
 
-export const abilityNames = [
-	'stench',
-	'drizzle',
-	'battle-armor',
-	'shell-armor',
-	'speed-boost',
-	'inner-focus',
-	'sturdy',
-	'damp',
-	'limber',
-	'sand-veil',
-	'static',
-	'volt-absorb',
-	'water-absorb',
-	'oblivious',
-	'cloud-nine',
-	'air-lock',
-	'compound-eyes',
-	'insomnia',
-	'vital-spirit',
-	'color-change',
-	'immunity',
-	'flash-fire',
-	'shield-dust',
-	'own-tempo',
-	'suction-cups',
-	'intimidate',
-] as const;
+export const abilityNames = [] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

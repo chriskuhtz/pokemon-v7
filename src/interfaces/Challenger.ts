@@ -7,7 +7,6 @@ export interface Challenger {
 	team: OwnedPokemon[];
 	id: string;
 	inventory: Inventory;
-	fighersPerSide?: number;
 }
 
 export interface BattleChallenger {
@@ -15,5 +14,4 @@ export interface BattleChallenger {
 	team: BattlePokemon[];
 	id: string;
 	inventory: Inventory;
-	fighersPerSide?: number;
 }

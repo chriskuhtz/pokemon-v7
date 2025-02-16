@@ -9,6 +9,7 @@ import {
 	determineHeldItem,
 	getHeldItemRateModifier,
 } from './functions/determineHeldItem';
+import { getRandomPokemonId } from './functions/getRandomPokemonId';
 import { useSaveFile } from './hooks/useSaveFile';
 import { AddToastFunction } from './hooks/useToasts';
 import {
@@ -31,7 +32,6 @@ import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { Team } from './modules/Team/Team';
 
 export const App = ({
-	activeToast,
 	addToast,
 }: {
 	activeToast: boolean;
@@ -44,7 +44,6 @@ export const App = ({
 	const {
 		saveFile,
 		discardItemReducer,
-		putSaveFileReducer,
 		setActiveTabReducer,
 		sellItemReducer,
 		buyItemReducer,
@@ -165,9 +164,11 @@ export const App = ({
 			/>
 		);
 	}
+	const oppId = v4();
 	if (activeTab === 'BATTLE') {
 		return (
 			<NewBattle
+				fightersPerSide={2}
 				player={{
 					id: saveFile.playerId,
 					team: team,
@@ -175,10 +176,23 @@ export const App = ({
 					type: 'TRAINER',
 				}}
 				opponent={{
-					id: v4(),
+					id: oppId,
 					type: 'WILD',
 					inventory: EmptyInventory,
-					team: [currentOpponent],
+					team: [
+						{
+							...currentOpponent,
+							id: v4(),
+							dexId: getRandomPokemonId(),
+							ownerId: oppId,
+						},
+						{
+							...currentOpponent,
+							id: v4(),
+							dexId: getRandomPokemonId(),
+							ownerId: oppId,
+						},
+					],
 				}}
 				addToast={addToast}
 			/>

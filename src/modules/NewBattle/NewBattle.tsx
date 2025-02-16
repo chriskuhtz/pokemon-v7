@@ -8,27 +8,28 @@ import { useChallenger } from './hooks/useChallenger';
 export const NewBattle = ({
 	player,
 	opponent,
-	addToast,
 }: {
 	player: Challenger;
 	opponent: Challenger;
 	addToast: AddToastFunction;
+	fightersPerSide: number;
 }): JSX.Element => {
 	const [showBanner, setShowBanner] = useState<boolean>(true);
+
 	const { challenger: battlePlayer } = useChallenger(player);
 	const { challenger: battleOpponent } = useChallenger(opponent);
 
 	useEffect(() => {
 		if (battlePlayer && battleOpponent && showBanner) {
-			const t = setTimeout(() => setShowBanner(false), animationTimer);
+			const t = setTimeout(() => setShowBanner(false), animationTimer * 2);
 
 			return () => clearTimeout(t);
 		}
 	}, [battleOpponent, battlePlayer, showBanner]);
 
-	if (showBanner) {
+	if (showBanner || !battleOpponent || !battlePlayer) {
 		return <IntroBanner player={player} opponent={opponent} />;
 	}
 
-	return <div></div>;
+	return <div>Hello</div>;
 };
