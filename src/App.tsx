@@ -52,7 +52,7 @@ export const App = ({
 		cutBushReducer,
 		applyItemToPokemonReducer,
 		fulfillQuestReducer,
-	} = useSaveFile(testState, addToast, true);
+	} = useSaveFile(testState, addToast);
 
 	const {
 		meta: { activeTab },

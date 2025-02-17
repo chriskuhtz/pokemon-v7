@@ -59,10 +59,12 @@ export const testState: SaveFile = {
 	lastNurse: 400001,
 };
 
+export const OPPO_ID = 'oppo';
+
 export const testOpponent: OwnedPokemon = {
 	dexId: 1,
 	nature: 'adamant',
-	ownerId: 'oppo',
+	ownerId: OPPO_ID,
 	ball: 'poke-ball',
 	damage: 0,
 	firstMove: { name: 'pound', usedPP: 0 },
