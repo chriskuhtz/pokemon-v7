@@ -77,6 +77,7 @@ export const App = ({
 					currentOpponent,
 					{ ...currentOpponent, dexId: getRandomPokemonId(), id: v4() },
 				]}
+				team={team}
 				leave={() => setActiveTabReducer('OVERWORLD')}
 			/>
 		);
