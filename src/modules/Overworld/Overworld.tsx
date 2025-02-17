@@ -280,7 +280,6 @@ export const Overworld = ({
 					<div
 						id="clickerGridWrapper"
 						style={{
-							border: 'solid 2px blue',
 							width: map.width * baseSize,
 							height: map.height * baseSize,
 							top: -playerLocation.y * baseSize,
