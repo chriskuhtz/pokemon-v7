@@ -15,7 +15,7 @@ import { AddToastFunction } from './hooks/useToasts';
 import { generateInventory, Inventory } from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
 import { Bag } from './modules/Bag/Bag';
-import { BattleWrapper } from './modules/Battle/Battle';
+import { BattleLoader } from './modules/Battle/components/BattleLoader';
 import { MainMenu } from './modules/MainMenu/MainMenu';
 import { BuyMarket } from './modules/Market/BuyMarket';
 import { Market } from './modules/Market/Market';
@@ -72,13 +72,14 @@ export const App = ({
 
 	if (activeTab === 'BATTLE') {
 		return (
-			<BattleWrapper
+			<BattleLoader
 				opponents={[
 					currentOpponent,
 					{ ...currentOpponent, dexId: getRandomPokemonId(), id: v4() },
 				]}
 				team={team}
 				leave={() => setActiveTabReducer('OVERWORLD')}
+				fightersPerSide={2}
 			/>
 		);
 	}
