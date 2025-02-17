@@ -1,8 +1,10 @@
 import { useMemo, useState } from 'react';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
-import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
+import { ControlBar } from './components/ControlBar';
+import { EnemyLane } from './components/EnemyLane';
+import { PlayerLane } from './components/PlayerLane';
 
 export const BattleField = ({
 	leave,
@@ -20,8 +22,14 @@ export const BattleField = ({
 		...initTeam,
 	]);
 
+	//SELECTORS
 	const opponents = useMemo(() => getOpponentPokemon(pokemon), [pokemon]);
 	const team = useMemo(() => getPlayerPokemon(pokemon), [pokemon]);
+	const onFieldOpponents = useMemo(
+		() => opponents.filter((p) => p.onField),
+		[opponents]
+	);
+	const onFieldTeam = useMemo(() => team.filter((p) => p.onField), [team]);
 
 	return (
 		<div
@@ -31,17 +39,9 @@ export const BattleField = ({
 				height: '100dvh',
 			}}
 		>
-			<div>
-				{opponents.map((t) => (
-					<img key={t.id} src={getPokemonSprite(t.dexId)} />
-				))}
-			</div>
-			<div>
-				{team.map((t) => (
-					<img key={t.id} src={getPokemonSprite(t.dexId)} />
-				))}
-			</div>
-			<div style={{ border: '1px solid black' }}>YAYAYA</div>
+			<EnemyLane onFieldOpponents={onFieldOpponents} />
+			<PlayerLane onFieldTeam={onFieldTeam} />
+			<ControlBar />
 		</div>
 	);
 };
