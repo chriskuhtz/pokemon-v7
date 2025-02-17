@@ -69,6 +69,14 @@ export const App = ({
 
 	const firstTeamMember = team[0];
 
+	if (activeTab === 'BATTLE') {
+		return (
+			<Battle
+				opponent={currentOpponent}
+				leave={() => setActiveTabReducer('OVERWORLD')}
+			/>
+		);
+	}
 	if (activeTab === 'SETTINGS') {
 		return (
 			<Settings
@@ -158,9 +166,6 @@ export const App = ({
 				setPokemon={setPokemonReducer}
 			/>
 		);
-	}
-	if (activeTab === 'BATTLE') {
-		return <Battle leave={() => setActiveTabReducer('OVERWORLD')} />;
 	}
 	if (activeTab === 'BUY_MARKET') {
 		return (
