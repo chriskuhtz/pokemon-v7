@@ -38,6 +38,15 @@ export const useClickTarget = (
 			return;
 		}
 
+		const occ = getNextFieldOccupant(
+			playerLocation.mapId,
+			collectedItems,
+			clickTarget
+		);
+		if (occ && getOverworldDistance(clickTarget, playerLocation) === 1) {
+			interactWith(occ);
+		}
+
 		if (
 			playerLocation.x < clickTarget.x &&
 			isPassable({ x: playerLocation.x + 1, y: playerLocation.y }, assembledMap)
@@ -87,14 +96,6 @@ export const useClickTarget = (
 			}
 
 			console.log('target reached');
-		}
-		const occ = getNextFieldOccupant(
-			playerLocation.mapId,
-			collectedItems,
-			clickTarget
-		);
-		if (occ && getOverworldDistance(clickTarget, playerLocation) === 1) {
-			interactWith(occ);
 		}
 
 		setClickTarget(undefined);
