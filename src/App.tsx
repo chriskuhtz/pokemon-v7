@@ -104,7 +104,7 @@ export const App = ({
 					patchSaveFileReducer({
 						playerId: name,
 						pokemon: [
-							...saveFile.pokemon,
+							...saveFile.pokemon.map((p) => ({ ...p, ownerId: name })),
 							{
 								...testPokemon,
 								dexId: starterId,

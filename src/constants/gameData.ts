@@ -15,7 +15,7 @@ export const testPokemon: OwnedPokemon = {
 	ball: 'master-ball',
 	onTeam: true,
 	firstMove: { name: 'pound', usedPP: 0 },
-	damage: 60,
+	damage: 0,
 	nature: 'adamant',
 	xp: 200,
 	ability: 'intimidate',

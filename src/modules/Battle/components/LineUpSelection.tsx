@@ -75,7 +75,7 @@ export const LineUpSelection = ({
 			</div>
 
 			<div style={{ display: 'flex', gap: '1rem' }}>
-				<button onClick={leave}>Leave</button>
+				<button onClick={leave}>Try to run</button>
 				<button
 					onClick={startBattle}
 					disabled={selectedTeam.length !== fightersPerSide}

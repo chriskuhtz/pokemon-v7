@@ -63,8 +63,11 @@ export const BattleOverview = ({
 		<BattleField
 			fightersPerSide={fightersPerSide}
 			leave={leave}
-			team={team.map((t) => ({ ...t, onField: selectedTeam.includes(t.id) }))}
-			opponents={opponents.map((o, i) => ({
+			initTeam={team.map((t) => ({
+				...t,
+				onField: selectedTeam.includes(t.id),
+			}))}
+			initOpponents={opponents.map((o, i) => ({
 				...o,
 				onField: i < fightersPerSide,
 			}))}
