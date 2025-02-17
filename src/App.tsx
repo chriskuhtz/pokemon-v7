@@ -9,6 +9,7 @@ import {
 	determineHeldItem,
 	getHeldItemRateModifier,
 } from './functions/determineHeldItem';
+import { getRandomPokemonId } from './functions/getRandomPokemonId';
 import { useSaveFile } from './hooks/useSaveFile';
 import { AddToastFunction } from './hooks/useToasts';
 import { generateInventory, Inventory } from './interfaces/Inventory';
@@ -72,7 +73,10 @@ export const App = ({
 	if (activeTab === 'BATTLE') {
 		return (
 			<BattleWrapper
-				opponent={currentOpponent}
+				opponents={[
+					currentOpponent,
+					{ ...currentOpponent, dexId: getRandomPokemonId(), id: v4() },
+				]}
 				leave={() => setActiveTabReducer('OVERWORLD')}
 			/>
 		);

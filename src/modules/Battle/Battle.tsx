@@ -1,3 +1,4 @@
+import React from 'react';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { useGetBattleTeam } from '../../hooks/useGetBattleTeam';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
@@ -6,31 +7,36 @@ import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 
 export const BattleWrapper = ({
 	leave,
-	opponent,
+	opponents,
 }: {
 	leave: () => void;
-	opponent: OwnedPokemon;
+	opponents: OwnedPokemon[];
 }): JSX.Element => {
-	const { res } = useGetBattleTeam([opponent]);
+	const { res } = useGetBattleTeam(opponents);
 
 	if (!res) {
 		return <LoadingScreen />;
 	}
-	return <Battle leave={leave} opponent={res[0]} />;
+	return <Battle leave={leave} opponents={res} />;
 };
 
 const Battle = ({
 	leave,
-	opponent,
+	opponents,
 }: {
 	leave: () => void;
-	opponent: BattlePokemon;
+	opponents: BattlePokemon[];
 }): JSX.Element => {
 	return (
 		<div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-			<div>
-				Encountered a <strong>{opponent.data.name}</strong>
-				<img src={getPokemonSprite(opponent.dexId)} />
+			<div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+				Encountered this crew:
+				{opponents.map((opponent) => (
+					<React.Fragment key={opponent.id}>
+						<strong>{opponent.data.name}</strong>
+						<img src={getPokemonSprite(opponent.dexId)} />
+					</React.Fragment>
+				))}
 			</div>
 			<div>What should we do:</div>
 			<button onClick={leave}>Leave</button>
