@@ -68,7 +68,7 @@ export const testOpponent: OwnedPokemon = {
 	ownerId: 'oppo',
 	ball: 'poke-ball',
 	damage: 0,
-	firstMove: { name: 'fly', usedPP: 0 },
+	firstMove: { name: 'pound', usedPP: 0 },
 	id: '1',
 	xp: 200,
 	ability: 'volt-absorb',

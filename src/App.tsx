@@ -14,7 +14,7 @@ import { AddToastFunction } from './hooks/useToasts';
 import { generateInventory, Inventory } from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
 import { Bag } from './modules/Bag/Bag';
-import { Battle } from './modules/Battle/Battle';
+import { BattleWrapper } from './modules/Battle/Battle';
 import { MainMenu } from './modules/MainMenu/MainMenu';
 import { BuyMarket } from './modules/Market/BuyMarket';
 import { Market } from './modules/Market/Market';
@@ -71,7 +71,7 @@ export const App = ({
 
 	if (activeTab === 'BATTLE') {
 		return (
-			<Battle
+			<BattleWrapper
 				opponent={currentOpponent}
 				leave={() => setActiveTabReducer('OVERWORLD')}
 			/>
