@@ -1,6 +1,8 @@
 import { useCallback, useState } from 'react';
+import { useScreenTransition } from '../../../hooks/useScreenTransition';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { BattleField } from '../BattleField';
+import { IntroBanner } from './IntroBanner';
 import { LineUpSelection } from './LineUpSelection';
 
 export const BattleOverview = ({
@@ -15,7 +17,12 @@ export const BattleOverview = ({
 	fightersPerSide: number;
 }): JSX.Element => {
 	const [battleStarted, setBattleStarted] = useState<boolean>(false);
+
 	const [selectedTeam, setSelectedTeam] = useState<string[]>([]);
+
+	const { startTransition, inTransition } = useScreenTransition(() =>
+		setBattleStarted(true)
+	);
 
 	const toggleSelected = useCallback(
 		(id: string) => {
@@ -28,6 +35,16 @@ export const BattleOverview = ({
 		[selectedTeam]
 	);
 
+	if (inTransition) {
+		return (
+			<IntroBanner
+				dexIds={team
+					.filter((t) => selectedTeam.includes(t.id))
+					.map((t) => t.dexId)}
+			/>
+		);
+	}
+
 	if (!battleStarted) {
 		return (
 			<LineUpSelection
@@ -35,10 +52,7 @@ export const BattleOverview = ({
 				opponents={opponents}
 				team={team}
 				fightersPerSide={fightersPerSide}
-				startBattle={() => {
-					console.log('clicked');
-					setBattleStarted(true);
-				}}
+				startBattle={startTransition}
 				selectedTeam={selectedTeam}
 				toggleSelected={toggleSelected}
 			/>
