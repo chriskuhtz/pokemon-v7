@@ -12,7 +12,7 @@ export function TargetSelection(props: {
 	return (
 		<div
 			style={{
-				border: '1px solid black',
+				borderTop: '1px solid black',
 				padding: '.5rem',
 			}}
 		>

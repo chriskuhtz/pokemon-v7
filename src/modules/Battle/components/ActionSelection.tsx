@@ -9,7 +9,7 @@ export function ActionSelection(props: {
 	return (
 		<div
 			style={{
-				border: '1px solid black',
+				borderTop: '1px solid black',
 				padding: '.5rem',
 			}}
 		>
