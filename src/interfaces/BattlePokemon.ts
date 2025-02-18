@@ -21,6 +21,7 @@ export interface BattlePokemon extends OwnedPokemon {
 	flashFired?: boolean;
 	moveQueue: BattleAction[];
 	status: 'ONFIELD' | 'BENCH' | 'CAUGHT' | 'FAINTED';
+	roundsInBattle: number;
 }
 
 export function isBattlePokemon(
