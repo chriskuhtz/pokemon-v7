@@ -1,6 +1,5 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
 import { flyDoubleDamageMoves, ohkoMoves } from '../constants/ohkoMoves';
-import { AddToastFunction } from '../hooks/useToasts';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { PokemonType } from '../interfaces/PokemonType';
@@ -24,7 +23,7 @@ export const calculateDamage = (
 	attack: BattleAttack,
 	weather: WeatherType | undefined,
 	calculateCrits: boolean,
-	dispatchToast?: AddToastFunction,
+	addMessage?: (x: string) => void,
 	targetIsFlying?: boolean
 ): number => {
 	const damageClass = attack.data.damage_class.name;
@@ -33,12 +32,21 @@ export const calculateDamage = (
 	}
 	const typeFactor = determineTypeFactor(target, attack);
 	if (typeFactor === 0) {
+		if (addMessage) {
+			addMessage('It has no effect');
+		}
 		return 0;
+	}
+	if (typeFactor > 0 && addMessage) {
+		addMessage('It is very effective');
+	}
+	if (typeFactor < 0 && addMessage) {
+		addMessage('It is not very effective');
 	}
 	if (ohkoMoves.includes(attack.name)) {
 		if (target.ability === 'sturdy') {
-			if (dispatchToast) {
-				dispatchToast('sturdy prevents One Hit K.O moves');
+			if (addMessage) {
+				addMessage('sturdy prevents One Hit K.O moves');
 			}
 			return 0;
 		}
@@ -53,8 +61,8 @@ export const calculateDamage = (
 
 	if (absorbAbility === attack.data.type.name) {
 		const res = Math.max(-Math.floor(target.stats.hp / 4), -target.damage);
-		if (dispatchToast && res < 0) {
-			dispatchToast(`${target.data.name} was healed by ${target.ability}`);
+		if (addMessage && res < 0) {
+			addMessage(`${target.data.name} was healed by ${target.ability}`);
 		}
 		return res;
 	}
@@ -69,6 +77,9 @@ export const calculateDamage = (
 		determineCrit(attack.name, attack.data.meta.crit_rate, target.ability)
 			? 2
 			: 1;
+	if (critFactor === 2 && addMessage) {
+		addMessage('critical hit!');
+	}
 
 	const atk =
 		damageClass === 'physical'
@@ -139,8 +150,8 @@ export const calculateDamage = (
 		target.damage === 0 &&
 		res > target.stats.hp
 	) {
-		if (dispatchToast) {
-			dispatchToast(`${target.data.name} hung on with sturdy`);
+		if (addMessage) {
+			addMessage(`${target.data.name} hung on with sturdy`);
 		}
 		return target.stats.hp - 1;
 	}
