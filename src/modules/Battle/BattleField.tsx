@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
+import { animationTimer } from '../../constants/gameData';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
@@ -92,7 +93,9 @@ export const BattleField = ({
 	useEffect(() => {
 		if (battleStep === 'EXECUTING' && nextMover) {
 			console.log('effect 3');
-			handleAction(nextMover);
+			const t = setTimeout(() => handleAction(nextMover), animationTimer);
+
+			return () => clearTimeout(t);
 		}
 	}, [battleStep, handleAction, nextMover]);
 	return (
