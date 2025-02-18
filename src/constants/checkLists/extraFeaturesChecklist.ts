@@ -124,4 +124,5 @@ export const extraFeatureCheckList: {
 	{ name: 'setting: instant mode' },
 	{ name: 'flex display on Line up Selection' },
 	{ name: 'auto choose opponent moves' },
+	{ name: 'go through functions, delete unused' },
 ];

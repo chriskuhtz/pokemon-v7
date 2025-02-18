@@ -4,6 +4,7 @@ import { isKO } from '../../../../../functions/isKo';
 import { reduceMovePP } from '../../../../../functions/reduceMovePP';
 import { BattleAttack } from '../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
+import { WeatherType } from '../../../../../interfaces/Weather';
 import { handleFainting } from '../../../functions/handleFainting';
 import { handleNoTarget } from '../../../functions/handleNoTarget';
 
@@ -13,12 +14,14 @@ export const handleAttack = ({
 	setPokemon,
 	addMessage,
 	move,
+	battleWeather,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>;
 	addMessage: (x: string) => void;
 	move: BattleAttack;
+	battleWeather: WeatherType | undefined;
 }): void => {
 	const target = pokemon.find(
 		(p) => p.id === move.targetId && p.status === 'ONFIELD'
@@ -57,7 +60,7 @@ export const handleAttack = ({
 				updatedAttacker,
 				target,
 				move,
-				undefined,
+				battleWeather,
 				true,
 				addMessage
 			),

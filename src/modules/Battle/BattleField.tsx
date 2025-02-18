@@ -1,10 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
+import { applyOnBattleEnterAbility } from '../../functions/applyOnBattleEnterAbility';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
+import { WeatherType } from '../../interfaces/Weather';
 import { ControlBar } from './components/ControlBar';
 import { EnemyLane } from './components/EnemyLane';
 import { PlayerLane } from './components/PlayerLane';
@@ -40,9 +43,10 @@ export const BattleField = ({
 }) => {
 	const { latestMessage, addMessage } = useBattleMessages();
 	const [battleRound, setBattleRound] = useState<number>(0);
+	const [battleWeather, setBattleWeather] = useState<WeatherType | undefined>();
 	const [battleStep, setBattleStep] = useState<
 		'BATTLE_ENTRY' | 'COLLECTING' | 'EXECUTING' | 'REFILLING'
-	>('COLLECTING');
+	>('BATTLE_ENTRY');
 	useEffect(() => {
 		console.log(battleStep);
 	}, [battleStep]);
@@ -85,6 +89,14 @@ export const BattleField = ({
 			p.moveQueue.some((m) => m.round === battleRound)
 		);
 	}, [battleRound, battleStep, onFieldOpponents, onFieldTeam]);
+	const newlyDeployedPokemon = useMemo(() => {
+		if (battleStep !== 'BATTLE_ENTRY') {
+			return;
+		}
+		return [...onFieldOpponents, ...onFieldTeam].find(
+			(p) => p.roundsInBattle === 0
+		);
+	}, [battleStep, onFieldOpponents, onFieldTeam]);
 	const battleWon = useMemo(
 		() =>
 			opponents.every((o) => o.status === 'CAUGHT' || o.status === 'FAINTED'),
@@ -114,7 +126,13 @@ export const BattleField = ({
 		setPokemon,
 		battleRound
 	);
-	const handleAction = useHandleAction(pokemon, setPokemon, addMessage, leave);
+	const handleAction = useHandleAction(
+		pokemon,
+		setPokemon,
+		addMessage,
+		leave,
+		battleWeather
+	);
 	const putPokemonOnField = useCallback(
 		(id: string) =>
 			setPokemon((pokemon) =>
@@ -132,40 +150,67 @@ export const BattleField = ({
 			),
 		[]
 	);
+	const handleDeploymentAbility = useCallback(
+		(p: BattlePokemon) => {
+			applyOnBattleEnterAbility({
+				user: p,
+				setPokemon,
+				addMessage,
+				currentWeather: battleWeather,
+				setWeather: setBattleWeather,
+			});
+		},
+		[addMessage, battleWeather]
+	);
 	//AUTOMATIONS
-
+	useEffect(() => {
+		if (battleStep === 'BATTLE_ENTRY') {
+			if (!newlyDeployedPokemon) {
+				setBattleStep('COLLECTING');
+				return;
+			}
+			if (newlyDeployedPokemon && !latestMessage) {
+				handleDeploymentAbility(newlyDeployedPokemon);
+			}
+		}
+	}, [
+		battleStep,
+		handleDeploymentAbility,
+		latestMessage,
+		newlyDeployedPokemon,
+		nextPokemonWithoutMove,
+	]);
 	useEffect(() => {
 		if (battleStep === 'COLLECTING' && !nextPokemonWithoutMove) {
 			setBattleStep('EXECUTING');
 		}
 	}, [battleStep, nextPokemonWithoutMove]);
 	useEffect(() => {
-		if (battleStep === 'EXECUTING' && !nextMover) {
-			setBattleStep('REFILLING');
-			setBattleRound((battleRound) => battleRound + 1);
-			setPokemon((pokemon) =>
-				pokemon.map((p) => {
-					if (p.status === 'ONFIELD') {
-						return { ...p, roundsInBattle: p.roundsInBattle + 1 };
-					}
-					return p;
-				})
-			);
+		if (battleStep === 'EXECUTING') {
+			if (!nextMover) {
+				setBattleStep('REFILLING');
+				setBattleRound((battleRound) => battleRound + 1);
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.status === 'ONFIELD') {
+							return { ...p, roundsInBattle: p.roundsInBattle + 1 };
+						}
+						return p;
+					})
+				);
+				return;
+			}
+			if (nextMover && !latestMessage) {
+				handleAction(nextMover);
+			}
 		}
-	}, [battleStep, nextMover]);
+	}, [battleStep, handleAction, latestMessage, nextMover]);
 	useEffect(() => {
 		if (battleStep === 'REFILLING' && !teamCanRefill && !opponentCanRefill) {
 			setBattleStep('COLLECTING');
 		}
 	}, [battleStep, nextPokemonWithoutMove, opponentCanRefill, teamCanRefill]);
 
-	useEffect(() => {
-		if (battleStep === 'EXECUTING' && nextMover && !latestMessage) {
-			console.log('effect handleAction');
-
-			handleAction(nextMover);
-		}
-	}, [battleStep, handleAction, latestMessage, nextMover]);
 	useEffect(() => {
 		if (battleLost && !latestMessage) {
 			console.log('effect battlelost');
@@ -205,6 +250,9 @@ export const BattleField = ({
 				height: '100dvh',
 			}}
 		>
+			<div style={{ position: 'absolute', top: 0, left: '48dvw' }}>
+				<WeatherIcon weather={battleWeather} />
+			</div>
 			<EnemyLane onFieldOpponents={onFieldOpponents} />
 			<PlayerLane onFieldTeam={onFieldTeam} />
 			<ControlBar
