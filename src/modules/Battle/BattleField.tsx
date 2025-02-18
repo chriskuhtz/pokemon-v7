@@ -19,9 +19,14 @@ export interface ChooseActionPayload {
 	targetId: string;
 }
 
+export interface BattleMessage {
+	message: string;
+	onRemoval?: () => void;
+}
+
 export const useMessages = () => {
-	const [messages, setMessages] = useState<string[]>([]);
-	const addMessage = useCallback((message: string) => {
+	const [messages, setMessages] = useState<BattleMessage[]>([]);
+	const addMessage = useCallback((message: BattleMessage) => {
 		setMessages((messages) => [...messages, message]);
 	}, []);
 	useEffect(() => {
@@ -29,6 +34,10 @@ export const useMessages = () => {
 			return;
 		}
 		const t = setTimeout(() => {
+			if (messages[0].onRemoval) {
+				messages[0].onRemoval();
+			}
+
 			setMessages(messages.slice(1));
 		}, animationTimer);
 
@@ -71,7 +80,7 @@ export const BattleField = ({
 	const opponents = useMemo(() => getOpponentPokemon(pokemon), [pokemon]);
 	const team = useMemo(() => getPlayerPokemon(pokemon), [pokemon]);
 	const onFieldOpponents = useMemo(
-		() => opponents.filter((p) => p.status === 'ONFIELD'),
+		() => opponents.filter((p) => !['BENCH', 'DEFEATED'].includes(p.status)),
 		[opponents]
 	);
 	const onFieldTeam = useMemo(
@@ -87,7 +96,9 @@ export const BattleField = ({
 			return;
 		}
 		return [...onFieldTeam, ...onFieldOpponents].find(
-			(p) => !p.moveQueue.some((m) => m.round === battleRound)
+			(p) =>
+				!p.moveQueue.some((m) => m.round === battleRound) &&
+				p.status === 'ONFIELD'
 		);
 	}, [battleRound, battleStep, onFieldOpponents, onFieldTeam]);
 	const nextMover = useMemo(() => {
@@ -139,19 +150,11 @@ export const BattleField = ({
 		}
 	}, [battleStep, handleAction, latestMessage, nextMover]);
 	useEffect(() => {
-		if (battleLost) {
-			console.log('battle lost');
-			addMessage('You lost the battle');
-			const t = setTimeout(() => leave(), animationTimer);
-
-			return () => clearTimeout(t);
+		if (battleLost && !latestMessage) {
+			addMessage({ message: 'You lost the battle', onRemoval: () => leave() });
 		}
-		if (battleWon) {
-			console.log('battle won');
-			addMessage('You won the battle');
-			const t = setTimeout(() => leave(), animationTimer);
-
-			return () => clearTimeout(t);
+		if (battleWon && !latestMessage) {
+			addMessage({ message: 'You won the battle', onRemoval: () => leave() });
 		}
 	}, [addMessage, battleLost, battleWon, latestMessage, leave]);
 
@@ -169,7 +172,7 @@ export const BattleField = ({
 				controlled={nextPokemonWithoutMove}
 				targets={allOnField.filter((p) => p.id !== nextPokemonWithoutMove?.id)}
 				chooseAction={chooseAction}
-				message={latestMessage}
+				message={latestMessage?.message}
 				playerInventory={inventory}
 			/>
 		</div>

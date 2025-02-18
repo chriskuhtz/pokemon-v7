@@ -1,11 +1,12 @@
 import { useCallback } from 'react';
 import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
+import { BattleMessage } from '../../BattleField';
 import { handleAttack } from './functions/handleAttack';
 
 export const useHandleAction = (
 	pokemon: BattlePokemon[],
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
-	addMessage: (x: string) => void
+	addMessage: (x: BattleMessage) => void
 ) => {
 	return useCallback(
 		(attacker: BattlePokemon) => {
@@ -22,14 +23,18 @@ export const useHandleAction = (
 				if (!target) {
 					throw new Error('ther is no target to catch');
 				}
-				addMessage(`You throw a ${move.ball} at ${target.data.name}`);
+				addMessage({
+					message: `You throw a ${move.ball} at ${target.data.name}`,
+				});
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
 						if (p.id === attacker.id) {
 							return { ...p, moveQueue: [] };
 						}
 						if (p.id === target.id) {
-							addMessage(`${target.data.name} was caught`);
+							addMessage({
+								message: `${target.data.name} was caught`,
+							});
 							return { ...p, moveQueue: [], status: 'CAUGHT' };
 						}
 
@@ -40,7 +45,13 @@ export const useHandleAction = (
 			}
 
 			if (move.type === 'BattleAttack') {
-				handleAttack({ attacker, pokemon, setPokemon, addMessage, move });
+				handleAttack({
+					attacker,
+					pokemon,
+					setPokemon,
+					addMessage: (x: string) => addMessage({ message: x }),
+					move,
+				});
 				return;
 			}
 		},
