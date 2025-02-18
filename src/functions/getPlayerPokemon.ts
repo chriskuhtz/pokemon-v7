@@ -9,3 +9,6 @@ export const getPlayerPokemon = (x: BattlePokemon[]): BattlePokemon[] => {
 	}
 	return filterPokemonByOwnerId(x, playerId);
 };
+
+export const isPlayerPokemon = (x: BattlePokemon): boolean =>
+	x.ownerId === getPlayerId();

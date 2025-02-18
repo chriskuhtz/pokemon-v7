@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { MoveName } from '../../../constants/checkLists/movesCheckList';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
+import { isPokeball } from '../../../interfaces/Item';
 import { ChooseActionPayload } from '../BattleField';
 
 export const useChooseAction = (
@@ -19,6 +20,32 @@ export const useChooseAction = (
 			if (!user) {
 				throw new Error('the user is not on the field');
 			}
+			const target = pokemon.find((p) => p.id === targetId);
+			if (!target) {
+				throw new Error('could not find target');
+			}
+			if (isPokeball(actionName)) {
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.id === user.id) {
+							return {
+								...user,
+								moveQueue: [
+									{
+										type: 'CatchProcessInfo',
+										ball: actionName,
+										round: battleRound,
+										targetId,
+									},
+								],
+							};
+						}
+						return p;
+					})
+				);
+				return;
+			}
+
 			const move = [
 				user.firstMove,
 				user.secondMove,
@@ -27,10 +54,6 @@ export const useChooseAction = (
 			].find((m) => m?.name === actionName);
 			if (!move) {
 				throw new Error('user does not know the selected move');
-			}
-			const target = pokemon.find((p) => p.id === targetId);
-			if (!target) {
-				throw new Error('could not find target');
 			}
 
 			setPokemon((pokemon) =>

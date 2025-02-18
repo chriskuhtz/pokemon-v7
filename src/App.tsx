@@ -80,6 +80,7 @@ export const App = ({
 				team={team}
 				leave={() => setActiveTabReducer('OVERWORLD')}
 				fightersPerSide={2}
+				inventory={inventory}
 			/>
 		);
 	}

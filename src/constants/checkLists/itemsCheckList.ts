@@ -7,6 +7,7 @@ export const itemsCheckList: {
 	{
 		name: 'master-ball',
 		url: 'https://pokeapi.co/api/v2/item/1/',
+		todos: ['pick action', 'handle catching logic', 'nice animation'],
 	},
 	{
 		name: 'ultra-ball',

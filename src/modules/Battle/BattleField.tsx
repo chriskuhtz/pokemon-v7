@@ -4,13 +4,15 @@ import { animationTimer } from '../../constants/gameData';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
+import { Inventory } from '../../interfaces/Inventory';
+import { ItemType } from '../../interfaces/Item';
 import { ControlBar } from './components/ControlBar';
 import { EnemyLane } from './components/EnemyLane';
 import { PlayerLane } from './components/PlayerLane';
 import { useChooseAction } from './hooks/useChooseAction';
 import { useHandleAction } from './hooks/useHandleAction/useHandleAction';
 
-export type ActionType = MoveName | 'RUN_AWAY';
+export type ActionType = MoveName | ItemType | 'RUN_AWAY';
 export interface ChooseActionPayload {
 	userId: string;
 	actionName: ActionType;
@@ -20,11 +22,13 @@ export const BattleField = ({
 	leave,
 	initOpponents,
 	initTeam,
+	inventory,
 }: {
 	leave: () => void;
 	initOpponents: BattlePokemon[];
 	initTeam: BattlePokemon[];
 	fightersPerSide: number;
+	inventory: Inventory;
 }) => {
 	const [messages, setMessages] = useState<string[]>([]);
 	const addMessage = useCallback((message: string) => {
@@ -133,6 +137,7 @@ export const BattleField = ({
 				targets={allOnField.filter((p) => p.id !== nextPokemonWithoutMove?.id)}
 				chooseAction={chooseAction}
 				message={latestMessage}
+				playerInventory={inventory}
 			/>
 		</div>
 	);
