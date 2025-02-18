@@ -1,4 +1,5 @@
 import { HpBar } from '../../../components/HpBar/HpBar';
+import { baseSize } from '../../../constants/gameData';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
@@ -13,7 +14,11 @@ export function PlayerLane(props: { onFieldTeam: BattlePokemon[] }) {
 		>
 			<div>
 				{props.onFieldTeam.map((t) => (
-					<img key={t.id} src={getPokemonSprite(t.dexId, 'back')} />
+					<img
+						height={baseSize * 2}
+						key={t.id}
+						src={getPokemonSprite(t.dexId, 'back')}
+					/>
 				))}
 			</div>
 			<div

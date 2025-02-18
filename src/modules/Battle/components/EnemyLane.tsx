@@ -1,4 +1,5 @@
 import { HpBar } from '../../../components/HpBar/HpBar';
+import { baseSize } from '../../../constants/gameData';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
@@ -38,7 +39,11 @@ export function EnemyLane({
 			</div>
 			<div>
 				{onFieldOpponents.map((t) => (
-					<img key={t.id} src={getPokemonSprite(t.dexId)} />
+					<img
+						height={baseSize * 2}
+						key={t.id}
+						src={getPokemonSprite(t.dexId)}
+					/>
 				))}
 			</div>
 		</div>
