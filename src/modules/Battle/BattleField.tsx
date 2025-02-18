@@ -18,23 +18,12 @@ export interface ChooseActionPayload {
 	actionName: ActionType;
 	targetId: string;
 }
-export const BattleField = ({
-	leave,
-	initOpponents,
-	initTeam,
-	inventory,
-}: {
-	leave: () => void;
-	initOpponents: BattlePokemon[];
-	initTeam: BattlePokemon[];
-	fightersPerSide: number;
-	inventory: Inventory;
-}) => {
+
+export const useMessages = () => {
 	const [messages, setMessages] = useState<string[]>([]);
 	const addMessage = useCallback((message: string) => {
 		setMessages((messages) => [...messages, message]);
 	}, []);
-
 	useEffect(() => {
 		if (messages.length === 0) {
 			return;
@@ -50,6 +39,21 @@ export const BattleField = ({
 		[messages]
 	);
 
+	return { latestMessage, addMessage };
+};
+export const BattleField = ({
+	leave,
+	initOpponents,
+	initTeam,
+	inventory,
+}: {
+	leave: () => void;
+	initOpponents: BattlePokemon[];
+	initTeam: BattlePokemon[];
+	fightersPerSide: number;
+	inventory: Inventory;
+}) => {
+	const { latestMessage, addMessage } = useMessages();
 	const [battleRound, setBattleRound] = useState<number>(0);
 	const [battleStep, setBattleStep] = useState<'COLLECTING' | 'EXECUTING'>(
 		'COLLECTING'
@@ -94,6 +98,15 @@ export const BattleField = ({
 			p.moveQueue.some((m) => m.round === battleRound)
 		);
 	}, [battleRound, battleStep, onFieldOpponents, onFieldTeam]);
+	const battleWon = useMemo(
+		() =>
+			opponents.every((o) => o.status === 'CAUGHT' || o.status === 'FAINTED'),
+		[opponents]
+	);
+	const battleLost = useMemo(
+		() => team.every((t) => t.status === 'FAINTED'),
+		[team]
+	);
 
 	//REDUCERS
 	const chooseAction = useChooseAction(
@@ -117,14 +130,31 @@ export const BattleField = ({
 			setBattleStep('COLLECTING');
 			setBattleRound((battleRound) => battleRound + 1);
 		}
-	}, [battleStep, nextMover, nextPokemonWithoutMove]);
+	}, [battleStep, nextMover]);
 	useEffect(() => {
 		if (battleStep === 'EXECUTING' && nextMover && !latestMessage) {
 			console.log('effect 3');
 
 			handleAction(nextMover);
 		}
-	}, [addMessage, battleStep, handleAction, latestMessage, nextMover, pokemon]);
+	}, [battleStep, handleAction, latestMessage, nextMover]);
+	useEffect(() => {
+		if (battleLost) {
+			console.log('battle lost');
+			addMessage('You lost the battle');
+			const t = setTimeout(() => leave(), animationTimer);
+
+			return () => clearTimeout(t);
+		}
+		if (battleWon) {
+			console.log('battle won');
+			addMessage('You won the battle');
+			const t = setTimeout(() => leave(), animationTimer);
+
+			return () => clearTimeout(t);
+		}
+	}, [addMessage, battleLost, battleWon, latestMessage, leave]);
+
 	return (
 		<div
 			style={{
