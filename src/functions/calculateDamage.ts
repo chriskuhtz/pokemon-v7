@@ -37,10 +37,10 @@ export const calculateDamage = (
 		}
 		return 0;
 	}
-	if (typeFactor > 0 && addMessage) {
+	if (typeFactor > 1 && addMessage) {
 		addMessage('It is very effective');
 	}
-	if (typeFactor < 0 && addMessage) {
+	if (typeFactor < 1 && addMessage) {
 		addMessage('It is not very effective');
 	}
 	if (ohkoMoves.includes(attack.name)) {

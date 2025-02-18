@@ -1,7 +1,10 @@
 import { useCallback } from 'react';
 import { calculateDamage } from '../../../functions/calculateDamage';
+import { isKO } from '../../../functions/isKo';
 import { reduceMovePP } from '../../../functions/reduceMovePP';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
+import { handleFainting } from '../functions/handleFainting';
+import { handleNoTarget } from '../functions/handleNoTarget';
 
 export const useHandleAction = (
 	pokemon: BattlePokemon[],
@@ -15,9 +18,10 @@ export const useHandleAction = (
 			if (attack.type !== 'BattleAttack') {
 				throw new Error('cant handle this yet');
 			}
-			const target = pokemon.find((p) => p.id === attack.targetId);
+			const target = pokemon.find((p) => p.id === attack.targetId && p.onField);
 			if (!target) {
-				throw new Error('could not find target');
+				handleNoTarget(attacker, attack, setPokemon, addMessage);
+				return;
 			}
 			//TODO: handle self targeting
 			if (target.id === attacker.id) {
@@ -45,8 +49,19 @@ export const useHandleAction = (
 				...updatedTarget,
 				damage:
 					updatedTarget.damage +
-					calculateDamage(updatedAttacker, target, attack, undefined, true),
+					calculateDamage(
+						updatedAttacker,
+						target,
+						attack,
+						undefined,
+						true,
+						addMessage
+					),
 			};
+			//2. check for fainting
+			if (isKO(updatedTarget)) {
+				updatedTarget = handleFainting(updatedTarget, addMessage);
+			}
 
 			setPokemon((pokemon) =>
 				pokemon.map((p) => {

@@ -130,7 +130,7 @@ export const BattleField = ({
 			<PlayerLane onFieldTeam={onFieldTeam} />
 			<ControlBar
 				controlled={nextPokemonWithoutMove}
-				targets={allOnField}
+				targets={allOnField.filter((p) => p.id !== nextPokemonWithoutMove?.id)}
 				chooseAction={chooseAction}
 				message={latestMessage}
 			/>
