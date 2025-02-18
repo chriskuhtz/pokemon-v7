@@ -10,6 +10,7 @@ import {
 	getHeldItemRateModifier,
 } from './functions/determineHeldItem';
 import { getRandomPokemonId } from './functions/getRandomPokemonId';
+import { reduceBattlePokemonToOwnedPokemon } from './functions/reduceBattlePokemonToOwnedPokemon';
 import { useSaveFile } from './hooks/useSaveFile';
 import { AddToastFunction } from './hooks/useToasts';
 import { generateInventory, Inventory } from './interfaces/Inventory';
@@ -52,6 +53,7 @@ export const App = ({
 		cutBushReducer,
 		applyItemToPokemonReducer,
 		fulfillQuestReducer,
+		putSaveFileReducer,
 	} = useSaveFile(testState, addToast);
 
 	const {
@@ -78,8 +80,23 @@ export const App = ({
 					{ ...currentOpponent, dexId: getRandomPokemonId(), id: v4() },
 				]}
 				team={team}
-				leave={() => setActiveTabReducer('OVERWORLD')}
+				leave={(caughtPokemon) => {
+					putSaveFileReducer({
+						...saveFile,
+						pokemon: [
+							...pokemon,
+							...caughtPokemon.map((c) => {
+								return {
+									...reduceBattlePokemonToOwnedPokemon(c),
+									ownerId: saveFile.playerId,
+								};
+							}),
+						],
+						meta: { activeTab: 'OVERWORLD' },
+					});
+				}}
 				fightersPerSide={2}
+				inventory={inventory}
 			/>
 		);
 	}

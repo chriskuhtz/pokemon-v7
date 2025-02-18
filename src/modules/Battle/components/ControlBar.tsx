@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
+import { Inventory } from '../../../interfaces/Inventory';
 import { ActionType, ChooseActionPayload } from '../BattleField';
 import { ActionSelection } from './ActionSelection';
 import { TargetSelection } from './TargetSelection';
@@ -9,11 +10,13 @@ export function ControlBar({
 	targets,
 	chooseAction,
 	message,
+	playerInventory,
 }: {
 	controlled: BattlePokemon | undefined;
 	targets: BattlePokemon[];
 	chooseAction: (x: ChooseActionPayload) => void;
 	message?: string;
+	playerInventory: Inventory;
 }) {
 	const [chosenAction, setChosenAction] = useState<ActionType | undefined>();
 
@@ -52,6 +55,7 @@ export function ControlBar({
 				controlled={controlled}
 				chooseAction={chooseAction}
 				setChosenAction={setChosenAction}
+				inventory={playerInventory}
 			/>
 		);
 	}

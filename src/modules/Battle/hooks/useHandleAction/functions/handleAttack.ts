@@ -20,7 +20,9 @@ export const handleAttack = ({
 	addMessage: (x: string) => void;
 	move: BattleAttack;
 }): void => {
-	const target = pokemon.find((p) => p.id === move.targetId && p.onField);
+	const target = pokemon.find(
+		(p) => p.id === move.targetId && p.status === 'ONFIELD'
+	);
 	if (!target) {
 		handleNoTarget(attacker, move, setPokemon, addMessage);
 		return;

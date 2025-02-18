@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useScreenTransition } from '../../../hooks/useScreenTransition';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
+import { Inventory } from '../../../interfaces/Inventory';
 import { BattleField } from '../BattleField';
 import { IntroBanner } from './IntroBanner';
 import { LineUpSelection } from './LineUpSelection';
@@ -10,11 +11,13 @@ export const BattleOverview = ({
 	opponents,
 	team,
 	fightersPerSide,
+	inventory,
 }: {
-	leave: () => void;
+	leave: (caughtPokemon: BattlePokemon[]) => void;
 	opponents: BattlePokemon[];
 	team: BattlePokemon[];
 	fightersPerSide: number;
+	inventory: Inventory;
 }): JSX.Element => {
 	const [battleStarted, setBattleStarted] = useState<boolean>(false);
 
@@ -48,7 +51,7 @@ export const BattleOverview = ({
 	if (!battleStarted) {
 		return (
 			<LineUpSelection
-				leave={leave}
+				leave={() => leave([])}
 				opponents={opponents}
 				team={team}
 				fightersPerSide={fightersPerSide}
@@ -61,15 +64,16 @@ export const BattleOverview = ({
 
 	return (
 		<BattleField
+			inventory={inventory}
 			fightersPerSide={fightersPerSide}
 			leave={leave}
 			initTeam={team.map((t) => ({
 				...t,
-				onField: selectedTeam.includes(t.id),
+				status: selectedTeam.includes(t.id) ? 'ONFIELD' : 'BENCH',
 			}))}
 			initOpponents={opponents.map((o, i) => ({
 				...o,
-				onField: i < fightersPerSide,
+				status: i < fightersPerSide ? 'ONFIELD' : 'BENCH',
 			}))}
 		/>
 	);

@@ -1,12 +1,16 @@
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
+import { Inventory } from '../../../interfaces/Inventory';
+import { isPokeball } from '../../../interfaces/Item';
 import { ActionType, ChooseActionPayload } from '../BattleField';
 
 export function ActionSelection({
 	controlled,
+	inventory,
 	setChosenAction,
 	chooseAction,
 }: {
 	controlled: BattlePokemon;
+	inventory: Inventory;
 	setChosenAction: (x: ActionType) => void;
 	chooseAction: (x: ChooseActionPayload) => void;
 }) {
@@ -20,9 +24,8 @@ export function ActionSelection({
 			<strong>What should {controlled.data.name} do?</strong>
 			<div
 				style={{
-					display: 'grid',
+					display: 'flex',
 					gap: '1rem',
-					gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr',
 				}}
 			>
 				<button onClick={() => setChosenAction(controlled.firstMove.name)}>
@@ -55,6 +58,15 @@ export function ActionSelection({
 						{controlled.fourthMove.name}
 					</button>
 				)}
+				{Object.entries(inventory).map(([item, amount]) => {
+					if (amount > 0 && isPokeball(item)) {
+						return (
+							<button onClick={() => setChosenAction(item)} key={item}>
+								{item}
+							</button>
+						);
+					}
+				})}
 				<button
 					onClick={() =>
 						chooseAction({

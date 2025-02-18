@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 import { MoveName } from '../../../constants/checkLists/movesCheckList';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
+import { isPokeball } from '../../../interfaces/Item';
 import { ChooseActionPayload } from '../BattleField';
 
 export const useChooseAction = (
-	leave: () => void,
 	allOnField: BattlePokemon[],
 	pokemon: BattlePokemon[],
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
@@ -12,13 +12,51 @@ export const useChooseAction = (
 ) => {
 	return useCallback(
 		({ userId, actionName, targetId }: ChooseActionPayload) => {
-			if (actionName === 'RUN_AWAY') {
-				leave();
-			}
 			const user = allOnField.find((u) => u.id === userId);
 			if (!user) {
 				throw new Error('the user is not on the field');
 			}
+			const target = pokemon.find((p) => p.id === targetId);
+			if (targetId && !target) {
+				throw new Error('could not find target');
+			}
+			if (actionName === 'RUN_AWAY') {
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.id === user.id) {
+							return {
+								...user,
+								moveQueue: [{ type: 'RunAway', round: battleRound }],
+							};
+						}
+						return p;
+					})
+				);
+				return;
+			}
+
+			if (isPokeball(actionName)) {
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.id === user.id) {
+							return {
+								...user,
+								moveQueue: [
+									{
+										type: 'CatchProcessInfo',
+										ball: actionName,
+										round: battleRound,
+										targetId,
+									},
+								],
+							};
+						}
+						return p;
+					})
+				);
+				return;
+			}
+
 			const move = [
 				user.firstMove,
 				user.secondMove,
@@ -27,10 +65,6 @@ export const useChooseAction = (
 			].find((m) => m?.name === actionName);
 			if (!move) {
 				throw new Error('user does not know the selected move');
-			}
-			const target = pokemon.find((p) => p.id === targetId);
-			if (!target) {
-				throw new Error('could not find target');
 			}
 
 			setPokemon((pokemon) =>
@@ -53,6 +87,6 @@ export const useChooseAction = (
 				})
 			);
 		},
-		[allOnField, battleRound, leave, pokemon, setPokemon]
+		[allOnField, battleRound, pokemon, setPokemon]
 	);
 };

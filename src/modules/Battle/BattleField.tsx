@@ -1,51 +1,42 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
-import { animationTimer } from '../../constants/gameData';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
+import { Inventory } from '../../interfaces/Inventory';
+import { ItemType } from '../../interfaces/Item';
 import { ControlBar } from './components/ControlBar';
 import { EnemyLane } from './components/EnemyLane';
 import { PlayerLane } from './components/PlayerLane';
+import { useBattleMessages } from './hooks/useBattleMessages';
 import { useChooseAction } from './hooks/useChooseAction';
 import { useHandleAction } from './hooks/useHandleAction/useHandleAction';
 
-export type ActionType = MoveName | 'RUN_AWAY';
+export type ActionType = MoveName | ItemType | 'RUN_AWAY';
 export interface ChooseActionPayload {
 	userId: string;
 	actionName: ActionType;
 	targetId: string;
 }
+
+export interface BattleMessage {
+	message: string;
+	onRemoval?: () => void;
+}
+
 export const BattleField = ({
 	leave,
 	initOpponents,
 	initTeam,
+	inventory,
 }: {
-	leave: () => void;
+	leave: (caughtPokemon: BattlePokemon[]) => void;
 	initOpponents: BattlePokemon[];
 	initTeam: BattlePokemon[];
 	fightersPerSide: number;
+	inventory: Inventory;
 }) => {
-	const [messages, setMessages] = useState<string[]>([]);
-	const addMessage = useCallback((message: string) => {
-		setMessages((messages) => [...messages, message]);
-	}, []);
-
-	useEffect(() => {
-		if (messages.length === 0) {
-			return;
-		}
-		const t = setTimeout(() => {
-			setMessages(messages.slice(1));
-		}, animationTimer);
-
-		return () => clearTimeout(t);
-	}, [messages]);
-	const latestMessage = useMemo(
-		() => (messages.length > 0 ? messages[0] : undefined),
-		[messages]
-	);
-
+	const { latestMessage, addMessage } = useBattleMessages();
 	const [battleRound, setBattleRound] = useState<number>(0);
 	const [battleStep, setBattleStep] = useState<'COLLECTING' | 'EXECUTING'>(
 		'COLLECTING'
@@ -63,10 +54,13 @@ export const BattleField = ({
 	const opponents = useMemo(() => getOpponentPokemon(pokemon), [pokemon]);
 	const team = useMemo(() => getPlayerPokemon(pokemon), [pokemon]);
 	const onFieldOpponents = useMemo(
-		() => opponents.filter((p) => p.onField),
+		() => opponents.filter((p) => !['BENCH', 'DEFEATED'].includes(p.status)),
 		[opponents]
 	);
-	const onFieldTeam = useMemo(() => team.filter((p) => p.onField), [team]);
+	const onFieldTeam = useMemo(
+		() => team.filter((p) => p.status === 'ONFIELD'),
+		[team]
+	);
 	const allOnField = useMemo(
 		() => [...onFieldTeam, ...onFieldOpponents],
 		[onFieldOpponents, onFieldTeam]
@@ -76,7 +70,9 @@ export const BattleField = ({
 			return;
 		}
 		return [...onFieldTeam, ...onFieldOpponents].find(
-			(p) => !p.moveQueue.some((m) => m.round === battleRound)
+			(p) =>
+				!p.moveQueue.some((m) => m.round === battleRound) &&
+				p.status === 'ONFIELD'
 		);
 	}, [battleRound, battleStep, onFieldOpponents, onFieldTeam]);
 	const nextMover = useMemo(() => {
@@ -87,16 +83,24 @@ export const BattleField = ({
 			p.moveQueue.some((m) => m.round === battleRound)
 		);
 	}, [battleRound, battleStep, onFieldOpponents, onFieldTeam]);
+	const battleWon = useMemo(
+		() =>
+			opponents.every((o) => o.status === 'CAUGHT' || o.status === 'FAINTED'),
+		[opponents]
+	);
+	const battleLost = useMemo(
+		() => team.every((t) => t.status === 'FAINTED'),
+		[team]
+	);
 
 	//REDUCERS
 	const chooseAction = useChooseAction(
-		leave,
 		allOnField,
 		pokemon,
 		setPokemon,
 		battleRound
 	);
-	const handleAction = useHandleAction(pokemon, setPokemon, addMessage);
+	const handleAction = useHandleAction(pokemon, setPokemon, addMessage, leave);
 	//AUTOMATIONS
 	useEffect(() => {
 		if (battleStep === 'COLLECTING' && !nextPokemonWithoutMove) {
@@ -110,14 +114,29 @@ export const BattleField = ({
 			setBattleStep('COLLECTING');
 			setBattleRound((battleRound) => battleRound + 1);
 		}
-	}, [battleStep, nextMover, nextPokemonWithoutMove]);
+	}, [battleStep, nextMover]);
 	useEffect(() => {
 		if (battleStep === 'EXECUTING' && nextMover && !latestMessage) {
 			console.log('effect 3');
 
 			handleAction(nextMover);
 		}
-	}, [addMessage, battleStep, handleAction, latestMessage, nextMover, pokemon]);
+	}, [battleStep, handleAction, latestMessage, nextMover]);
+	useEffect(() => {
+		if (battleLost && !latestMessage) {
+			addMessage({
+				message: 'You lost the battle',
+				onRemoval: () => leave(pokemon.filter((p) => p.status === 'CAUGHT')),
+			});
+		}
+		if (battleWon && !latestMessage) {
+			addMessage({
+				message: 'You won the battle',
+				onRemoval: () => leave(pokemon.filter((p) => p.status === 'CAUGHT')),
+			});
+		}
+	}, [addMessage, battleLost, battleWon, latestMessage, leave, pokemon]);
+
 	return (
 		<div
 			style={{
@@ -132,7 +151,8 @@ export const BattleField = ({
 				controlled={nextPokemonWithoutMove}
 				targets={allOnField.filter((p) => p.id !== nextPokemonWithoutMove?.id)}
 				chooseAction={chooseAction}
-				message={latestMessage}
+				message={latestMessage?.message}
+				playerInventory={inventory}
 			/>
 		</div>
 	);
