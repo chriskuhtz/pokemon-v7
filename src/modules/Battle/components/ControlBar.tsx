@@ -8,12 +8,29 @@ export function ControlBar({
 	controlled,
 	targets,
 	chooseAction,
+	message,
 }: {
 	controlled: BattlePokemon | undefined;
 	targets: BattlePokemon[];
 	chooseAction: (x: ChooseActionPayload) => void;
+	message?: string;
 }) {
 	const [chosenAction, setChosenAction] = useState<ActionType | undefined>();
+
+	if (message) {
+		return (
+			<div
+				style={{
+					borderTop: '1px solid black',
+					display: 'flex',
+					alignItems: 'center',
+					justifyContent: 'center',
+				}}
+			>
+				<h3>{message}</h3>
+			</div>
+		);
+	}
 	if (!controlled) {
 		return (
 			<div
@@ -24,7 +41,7 @@ export function ControlBar({
 					justifyContent: 'center',
 				}}
 			>
-				Whats going on here
+				<h3>Whats going on here</h3>
 			</div>
 		);
 	}
@@ -32,8 +49,7 @@ export function ControlBar({
 	if (!chosenAction) {
 		return (
 			<ActionSelection
-				name={controlled.data.name}
-				id={controlled.id}
+				controlled={controlled}
 				chooseAction={chooseAction}
 				setChosenAction={setChosenAction}
 			/>

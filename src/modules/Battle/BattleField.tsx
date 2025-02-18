@@ -26,7 +26,8 @@ export const BattleField = ({
 	initTeam: BattlePokemon[];
 	fightersPerSide: number;
 }) => {
-	const [battleRound] = useState<number>(0);
+	const [battleRound, setBattleRound] = useState<number>(0);
+	const [message, setMessage] = useState<string | undefined>();
 	const [battleStep, setBattleStep] = useState<'COLLECTING' | 'EXECUTING'>(
 		'COLLECTING'
 	);
@@ -88,12 +89,17 @@ export const BattleField = ({
 		if (battleStep === 'EXECUTING' && !nextMover) {
 			console.log('effect 2');
 			setBattleStep('COLLECTING');
+			setBattleRound((battleRound) => battleRound + 1);
 		}
 	}, [battleStep, nextMover, nextPokemonWithoutMove]);
 	useEffect(() => {
 		if (battleStep === 'EXECUTING' && nextMover) {
 			console.log('effect 3');
-			const t = setTimeout(() => handleAction(nextMover), animationTimer);
+			setMessage(`${nextMover.data.name} used ${nextMover.moveQueue[0].type}`);
+			const t = setTimeout(() => {
+				handleAction(nextMover);
+				setMessage(undefined);
+			}, animationTimer);
 
 			return () => clearTimeout(t);
 		}
@@ -112,6 +118,7 @@ export const BattleField = ({
 				controlled={nextPokemonWithoutMove}
 				targets={allOnField}
 				chooseAction={chooseAction}
+				message={message}
 			/>
 		</div>
 	);
