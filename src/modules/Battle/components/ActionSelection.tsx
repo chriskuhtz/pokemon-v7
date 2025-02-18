@@ -1,8 +1,12 @@
+import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { ActionType, ChooseActionPayload } from '../BattleField';
 
-export function ActionSelection(props: {
-	name: string;
-	id: string;
+export function ActionSelection({
+	controlled,
+	setChosenAction,
+	chooseAction,
+}: {
+	controlled: BattlePokemon;
 	setChosenAction: (x: ActionType) => void;
 	chooseAction: (x: ChooseActionPayload) => void;
 }) {
@@ -13,19 +17,48 @@ export function ActionSelection(props: {
 				padding: '.5rem',
 			}}
 		>
-			<strong>What should {props.name} do?</strong>
+			<strong>What should {controlled.data.name} do?</strong>
 			<div
 				style={{
 					display: 'grid',
 					gap: '1rem',
-					gridTemplateColumns: '1fr 1fr',
+					gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr',
 				}}
 			>
-				<button onClick={() => props.setChosenAction('pound')}>Pound</button>
+				<button onClick={() => setChosenAction(controlled.firstMove.name)}>
+					{controlled.firstMove.name}
+				</button>
+				{controlled.secondMove && (
+					<button
+						onClick={() =>
+							setChosenAction(controlled.secondMove?.name ?? 'pound')
+						}
+					>
+						{controlled.secondMove.name}
+					</button>
+				)}
+				{controlled.thirdMove && (
+					<button
+						onClick={() =>
+							setChosenAction(controlled.thirdMove?.name ?? 'pound')
+						}
+					>
+						{controlled.thirdMove.name}
+					</button>
+				)}
+				{controlled.fourthMove && (
+					<button
+						onClick={() =>
+							setChosenAction(controlled.fourthMove?.name ?? 'pound')
+						}
+					>
+						{controlled.fourthMove.name}
+					</button>
+				)}
 				<button
 					onClick={() =>
-						props.chooseAction({
-							userId: props.id,
+						chooseAction({
+							userId: controlled.id,
 							actionName: 'RUN_AWAY',
 							targetId: '',
 						})
