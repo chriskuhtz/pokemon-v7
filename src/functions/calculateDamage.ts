@@ -7,9 +7,11 @@ import { PokemonType } from '../interfaces/PokemonType';
 import { WeatherType } from '../interfaces/Weather';
 import { calculateLevelData } from './calculateLevelData';
 import { calculateModifiedStat } from './calculateModifiedStat';
+import { determineCrit } from './determineCrit';
 import { determineStabFactor } from './determineStabFactor';
 import { determineTypeFactor } from './determineTypeFactor';
 import { determineWeatherFactor } from './determineWeatherFactor';
+import { getMiddleOfThree } from './getMiddleOfThree';
 
 export const DamageAbsorb: Partial<Record<AbilityName, PokemonType>> = {
 	'volt-absorb': 'electric',
@@ -21,6 +23,7 @@ export const calculateDamage = (
 	target: BattlePokemon,
 	attack: BattleAttack,
 	weather: WeatherType | undefined,
+	calculateCrit: boolean,
 	dispatchToast?: AddToastFunction,
 	targetIsFlying?: boolean
 ): number => {
@@ -60,14 +63,31 @@ export const calculateDamage = (
 
 	const levelFactor = (2 * level) / 5 + 2;
 	const power = attack.data.power ?? 0;
+
+	const critFactor =
+		calculateCrit &&
+		determineCrit(attack.name, attack.data.meta.crit_rate, target.ability)
+			? 2
+			: 1;
+
 	const atk =
 		damageClass === 'physical'
 			? calculateModifiedStat(attacker.stats.attack, attacker.statBoosts.attack)
 			: calculateModifiedStat(attacker.stats.spatk, attacker.statBoosts.spatk);
+
+	//Crits ignore boosted defense
+	const defBoost =
+		critFactor === 2
+			? getMiddleOfThree([0, 0, target.statBoosts.defense])
+			: target.statBoosts.defense;
+	const spdefBoost =
+		critFactor === 2
+			? getMiddleOfThree([0, 0, target.statBoosts.spdef])
+			: target.statBoosts.spdef;
 	const def =
 		damageClass === 'physical'
-			? calculateModifiedStat(target.stats.defense, target.statBoosts.defense)
-			: calculateModifiedStat(target.stats.spdef, target.statBoosts.spdef);
+			? calculateModifiedStat(target.stats.defense, defBoost)
+			: calculateModifiedStat(target.stats.spdef, spdefBoost);
 	const statFactor = atk / def;
 
 	const pureDamage = (levelFactor * power * statFactor) / 50 + 2;
@@ -81,8 +101,7 @@ export const calculateDamage = (
 		target.ability
 	);
 	const glaiveRushFactor = 1;
-	//TODO: Crits ignore boosted defense
-	const critFactor = attack.crit ? 2 : 1;
+
 	const randomFactor = 0.85 + Math.random() * 0.15;
 	const stabFactor = determineStabFactor(attacker, attack);
 	const burnFactor = attacker.primaryAilment?.type === 'burn' ? 0.5 : 1;
