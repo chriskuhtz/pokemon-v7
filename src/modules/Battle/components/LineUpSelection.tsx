@@ -80,7 +80,11 @@ export const LineUpSelection = ({
 					onClick={startBattle}
 					disabled={selectedTeam.length !== fightersPerSide}
 				>
-					Battle
+					{selectedTeam.length == fightersPerSide && 'Battle'}
+					{selectedTeam.length < fightersPerSide &&
+						`select ${fightersPerSide - selectedTeam.length} more`}
+					{selectedTeam.length > fightersPerSide &&
+						`select ${fightersPerSide - selectedTeam.length} less`}
 				</button>
 			</div>
 		</div>
