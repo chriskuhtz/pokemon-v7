@@ -9,12 +9,13 @@ import {
 	determineHeldItem,
 	getHeldItemRateModifier,
 } from './functions/determineHeldItem';
+import { getRandomPokemonId } from './functions/getRandomPokemonId';
 import { useSaveFile } from './hooks/useSaveFile';
 import { AddToastFunction } from './hooks/useToasts';
 import { generateInventory, Inventory } from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
 import { Bag } from './modules/Bag/Bag';
-import { Battle } from './modules/Battle/Battle';
+import { BattleLoader } from './modules/Battle/components/BattleLoader';
 import { MainMenu } from './modules/MainMenu/MainMenu';
 import { BuyMarket } from './modules/Market/BuyMarket';
 import { Market } from './modules/Market/Market';
@@ -51,7 +52,7 @@ export const App = ({
 		cutBushReducer,
 		applyItemToPokemonReducer,
 		fulfillQuestReducer,
-	} = useSaveFile(testState, addToast, true);
+	} = useSaveFile(testState, addToast);
 
 	const {
 		meta: { activeTab },
@@ -69,6 +70,19 @@ export const App = ({
 
 	const firstTeamMember = team[0];
 
+	if (activeTab === 'BATTLE') {
+		return (
+			<BattleLoader
+				opponents={[
+					currentOpponent,
+					{ ...currentOpponent, dexId: getRandomPokemonId(), id: v4() },
+				]}
+				team={team}
+				leave={() => setActiveTabReducer('OVERWORLD')}
+				fightersPerSide={2}
+			/>
+		);
+	}
 	if (activeTab === 'SETTINGS') {
 		return (
 			<Settings
@@ -90,7 +104,7 @@ export const App = ({
 					patchSaveFileReducer({
 						playerId: name,
 						pokemon: [
-							...saveFile.pokemon,
+							...saveFile.pokemon.map((p) => ({ ...p, ownerId: name })),
 							{
 								...testPokemon,
 								dexId: starterId,
@@ -158,9 +172,6 @@ export const App = ({
 				setPokemon={setPokemonReducer}
 			/>
 		);
-	}
-	if (activeTab === 'BATTLE') {
-		return <Battle leave={() => setActiveTabReducer('OVERWORLD')} />;
 	}
 	if (activeTab === 'BUY_MARKET') {
 		return (

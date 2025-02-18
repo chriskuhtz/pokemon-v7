@@ -121,4 +121,5 @@ export const extraFeatureCheckList: {
 	{
 		name: 'show k/o pokemon as such in team overview',
 	},
+	{ name: 'setting: instant mode' },
 ];

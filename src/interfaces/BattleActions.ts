@@ -1,32 +1,35 @@
+import { MoveName } from '../constants/checkLists/movesCheckList';
 import { BattlePokemon } from './BattlePokemon';
 import { HealingItemType, PokeballType } from './Item';
 import { MoveDto } from './Move';
-import { OwnedPokemonMove } from './OwnedPokemon';
 
-export type BattleAttack = OwnedPokemonMove & {
+export type BattleAttack = {
 	data: MoveDto;
+	name: MoveName;
 	type: 'BattleAttack';
-	crit?: boolean;
-	multiHits?: number;
 	round: number;
+	targetId: string;
 };
 export interface CatchProcessInfo {
 	pokemon: BattlePokemon;
 	ball: PokeballType;
 	type: 'CatchProcessInfo';
 	round: number;
+	targetId: string;
 }
-export type ChargeUp = OwnedPokemonMove & {
+export type ChargeUp = {
 	type: 'ChargeUp';
 	data: MoveDto;
-	crit?: boolean;
+	name: MoveName;
 	round: number;
+	targetId: string;
 };
 export interface InBattleItem {
 	pokemon: BattlePokemon;
 	item: HealingItemType;
 	type: 'InBattleItem';
 	round: number;
+	targetId: string;
 }
 
 export type BattleAction =

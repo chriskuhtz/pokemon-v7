@@ -16,8 +16,7 @@ import { AddToastFunction } from './useToasts';
 
 export const useSaveFile = (
 	init: SaveFile,
-	addToast: AddToastFunction,
-	useLocalStorage?: boolean
+	addToast: AddToastFunction
 ): {
 	saveFile: SaveFile;
 	discardItemReducer: (item: ItemType, number: number) => void;
@@ -50,8 +49,7 @@ export const useSaveFile = (
 	fulfillQuestReducer: (q: QuestName) => void;
 } => {
 	const local = window.localStorage.getItem(localStorageId);
-	const loaded =
-		useLocalStorage && local ? (JSON.parse(local) as SaveFile) : init;
+	const loaded = local ? (JSON.parse(local) as SaveFile) : init;
 
 	const [saveFile, s] = useState<SaveFile>(loaded);
 
@@ -278,10 +276,8 @@ export const useSaveFile = (
 
 	//SYNC WITH LOCAL STORAGE
 	useEffect(() => {
-		if (useLocalStorage) {
-			window.localStorage.setItem(localStorageId, JSON.stringify(saveFile));
-		}
-	}, [saveFile, useLocalStorage]);
+		window.localStorage.setItem(localStorageId, JSON.stringify(saveFile));
+	}, [saveFile]);
 	//HANDLE START OF GAME
 	useEffect(() => {
 		if (saveFile.meta.activeTab !== 'SETTINGS' && !saveFile.settings) {

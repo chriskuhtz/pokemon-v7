@@ -1,16 +1,16 @@
 import { useFetch } from '@potfisch-industries-npm/usefetch';
 import { getStats } from '../functions/getStats';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { Challenger } from '../interfaces/Challenger';
 import { MoveDto } from '../interfaces/Move';
+import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { PokemonData } from '../interfaces/PokemonData';
 import { PokemonSpeciesData } from '../interfaces/PokemonSpeciesData';
 import { EmptyStatObject } from '../interfaces/StatObject';
 
-export const useGetBattleTeam = (init: Challenger) => {
+export const useGetBattleTeam = (initTeam: OwnedPokemon[]) => {
 	return useFetch(() =>
-		Promise.allSettled(
-			init.team.map(async (pokemon) => {
+		Promise.all(
+			initTeam.map(async (pokemon) => {
 				const { dexId, firstMove, secondMove, thirdMove, fourthMove } = pokemon;
 				const data: Promise<PokemonData> = (
 					await fetch(`https://pokeapi.co/api/v2/pokemon/${dexId}`)
@@ -49,16 +49,12 @@ export const useGetBattleTeam = (init: Challenger) => {
 					firstMove: {
 						...pokemon.firstMove,
 						data: await firstMoveData,
-						type: 'BattleAttack',
-						round: 0,
 					},
 					secondMove:
 						pokemon.secondMove && s
 							? {
 									...pokemon.secondMove,
 									data: s,
-									type: 'BattleAttack',
-									round: 0,
 							  }
 							: undefined,
 					thirdMove:
@@ -66,8 +62,6 @@ export const useGetBattleTeam = (init: Challenger) => {
 							? {
 									...pokemon.thirdMove,
 									data: t,
-									type: 'BattleAttack',
-									round: 0,
 							  }
 							: undefined,
 					fourthMove:
@@ -75,8 +69,6 @@ export const useGetBattleTeam = (init: Challenger) => {
 							? {
 									...pokemon.fourthMove,
 									data: f,
-									type: 'BattleAttack',
-									round: 0,
 							  }
 							: undefined,
 					data: d,

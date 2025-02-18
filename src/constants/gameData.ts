@@ -14,11 +14,8 @@ export const testPokemon: OwnedPokemon = {
 	id: 'bingo',
 	ball: 'master-ball',
 	onTeam: true,
-	firstMove: { name: 'razor-wind', usedPP: 0 },
-	secondMove: { name: 'thrash', usedPP: 0 },
-	thirdMove: { name: 'double-kick', usedPP: 0 },
-	fourthMove: { name: 'swords-dance', usedPP: 0 },
-	damage: 60,
+	firstMove: { name: 'pound', usedPP: 0 },
+	damage: 0,
 	nature: 'adamant',
 	xp: 200,
 	ability: 'intimidate',
@@ -62,13 +59,15 @@ export const testState: SaveFile = {
 	lastNurse: 400001,
 };
 
+export const OPPO_ID = 'oppo';
+
 export const testOpponent: OwnedPokemon = {
 	dexId: 1,
 	nature: 'adamant',
-	ownerId: 'oppo',
+	ownerId: OPPO_ID,
 	ball: 'poke-ball',
 	damage: 0,
-	firstMove: { name: 'fly', usedPP: 0 },
+	firstMove: { name: 'pound', usedPP: 0 },
 	id: '1',
 	xp: 200,
 	ability: 'volt-absorb',

@@ -1,15 +1,19 @@
 import { SecondaryAilment } from './Ailment';
-import { BattleAction, BattleAttack } from './BattleActions';
-import { OwnedPokemon } from './OwnedPokemon';
+import { BattleAction } from './BattleActions';
+import { MoveDto } from './Move';
+import { OwnedPokemon, OwnedPokemonMove } from './OwnedPokemon';
 import { PokemonData } from './PokemonData';
 import { StatObject } from './StatObject';
 
+export interface BattleMove extends OwnedPokemonMove {
+	data: MoveDto;
+}
 export interface BattlePokemon extends OwnedPokemon {
 	stats: StatObject;
-	firstMove: BattleAttack;
-	secondMove?: BattleAttack;
-	thirdMove?: BattleAttack;
-	fourthMove?: BattleAttack;
+	firstMove: BattleMove;
+	secondMove?: BattleMove;
+	thirdMove?: BattleMove;
+	fourthMove?: BattleMove;
 	data: PokemonData;
 	statBoosts: StatObject;
 	capture_rate: number;

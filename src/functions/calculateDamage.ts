@@ -1,15 +1,16 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
 import { flyDoubleDamageMoves, ohkoMoves } from '../constants/ohkoMoves';
-import { AddToastFunction } from '../hooks/useToasts';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { PokemonType } from '../interfaces/PokemonType';
 import { WeatherType } from '../interfaces/Weather';
 import { calculateLevelData } from './calculateLevelData';
 import { calculateModifiedStat } from './calculateModifiedStat';
+import { determineCrit } from './determineCrit';
 import { determineStabFactor } from './determineStabFactor';
 import { determineTypeFactor } from './determineTypeFactor';
 import { determineWeatherFactor } from './determineWeatherFactor';
+import { getMiddleOfThree } from './getMiddleOfThree';
 
 export const DamageAbsorb: Partial<Record<AbilityName, PokemonType>> = {
 	'volt-absorb': 'electric',
@@ -21,7 +22,8 @@ export const calculateDamage = (
 	target: BattlePokemon,
 	attack: BattleAttack,
 	weather: WeatherType | undefined,
-	dispatchToast?: AddToastFunction,
+	calculateCrits: boolean,
+	addMessage?: (x: string) => void,
 	targetIsFlying?: boolean
 ): number => {
 	const damageClass = attack.data.damage_class.name;
@@ -30,12 +32,21 @@ export const calculateDamage = (
 	}
 	const typeFactor = determineTypeFactor(target, attack);
 	if (typeFactor === 0) {
+		if (addMessage) {
+			addMessage('It has no effect');
+		}
 		return 0;
+	}
+	if (typeFactor > 1 && addMessage) {
+		addMessage('It is very effective');
+	}
+	if (typeFactor < 1 && addMessage) {
+		addMessage('It is not very effective');
 	}
 	if (ohkoMoves.includes(attack.name)) {
 		if (target.ability === 'sturdy') {
-			if (dispatchToast) {
-				dispatchToast('sturdy prevents One Hit K.O moves');
+			if (addMessage) {
+				addMessage('sturdy prevents One Hit K.O moves');
 			}
 			return 0;
 		}
@@ -50,8 +61,8 @@ export const calculateDamage = (
 
 	if (absorbAbility === attack.data.type.name) {
 		const res = Math.max(-Math.floor(target.stats.hp / 4), -target.damage);
-		if (dispatchToast && res < 0) {
-			dispatchToast(`${target.data.name} was healed by ${target.ability}`);
+		if (addMessage && res < 0) {
+			addMessage(`${target.data.name} was healed by ${target.ability}`);
 		}
 		return res;
 	}
@@ -60,14 +71,34 @@ export const calculateDamage = (
 
 	const levelFactor = (2 * level) / 5 + 2;
 	const power = attack.data.power ?? 0;
+
+	const critFactor =
+		calculateCrits &&
+		determineCrit(attack.name, attack.data.meta.crit_rate, target.ability)
+			? 2
+			: 1;
+	if (critFactor === 2 && addMessage) {
+		addMessage('critical hit!');
+	}
+
 	const atk =
 		damageClass === 'physical'
 			? calculateModifiedStat(attacker.stats.attack, attacker.statBoosts.attack)
 			: calculateModifiedStat(attacker.stats.spatk, attacker.statBoosts.spatk);
+
+	//Crits ignore boosted defense
+	const defBoost =
+		critFactor === 2
+			? getMiddleOfThree([0, 0, target.statBoosts.defense])
+			: target.statBoosts.defense;
+	const spdefBoost =
+		critFactor === 2
+			? getMiddleOfThree([0, 0, target.statBoosts.spdef])
+			: target.statBoosts.spdef;
 	const def =
 		damageClass === 'physical'
-			? calculateModifiedStat(target.stats.defense, target.statBoosts.defense)
-			: calculateModifiedStat(target.stats.spdef, target.statBoosts.spdef);
+			? calculateModifiedStat(target.stats.defense, defBoost)
+			: calculateModifiedStat(target.stats.spdef, spdefBoost);
 	const statFactor = atk / def;
 
 	const pureDamage = (levelFactor * power * statFactor) / 50 + 2;
@@ -81,8 +112,7 @@ export const calculateDamage = (
 		target.ability
 	);
 	const glaiveRushFactor = 1;
-	//TODO: Crits ignore boosted defense
-	const critFactor = attack.crit ? 2 : 1;
+
 	const randomFactor = 0.85 + Math.random() * 0.15;
 	const stabFactor = determineStabFactor(attacker, attack);
 	const burnFactor = attacker.primaryAilment?.type === 'burn' ? 0.5 : 1;
@@ -120,8 +150,8 @@ export const calculateDamage = (
 		target.damage === 0 &&
 		res > target.stats.hp
 	) {
-		if (dispatchToast) {
-			dispatchToast(`${target.data.name} hung on with sturdy`);
+		if (addMessage) {
+			addMessage(`${target.data.name} hung on with sturdy`);
 		}
 		return target.stats.hp - 1;
 	}
