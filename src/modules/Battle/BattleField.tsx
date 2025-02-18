@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
@@ -7,6 +7,7 @@ import { ControlBar } from './components/ControlBar';
 import { EnemyLane } from './components/EnemyLane';
 import { PlayerLane } from './components/PlayerLane';
 import { useChooseAction } from './hooks/useChooseAction';
+import { useHandleAction } from './hooks/useHandleAction';
 
 export type ActionType = MoveName | 'RUN_AWAY';
 export interface ChooseActionPayload {
@@ -74,18 +75,7 @@ export const BattleField = ({
 		setPokemon,
 		battleRound
 	);
-	const handleAction = useCallback((attacker: BattlePokemon) => {
-		console.log('handle Action for', attacker);
-
-		setPokemon((pokemon) =>
-			pokemon.map((p) => {
-				if (p.id === attacker.id) {
-					return { ...attacker, moveQueue: [] };
-				}
-				return p;
-			})
-		);
-	}, []);
+	const handleAction = useHandleAction(pokemon, setPokemon);
 	//AUTOMATIONS
 	useEffect(() => {
 		if (battleStep === 'COLLECTING' && !nextPokemonWithoutMove) {
