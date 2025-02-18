@@ -77,7 +77,7 @@ export const useGetBattleTeam = (initTeam: OwnedPokemon[]) => {
 					capture_rate: spd.capture_rate,
 					happiness:
 						pokemon.happiness < 0 ? spd.base_happiness : pokemon.happiness,
-					onField: false,
+					status: 'BENCH',
 				};
 
 				return battleMon;

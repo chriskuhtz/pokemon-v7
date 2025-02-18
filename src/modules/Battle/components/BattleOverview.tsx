@@ -69,11 +69,11 @@ export const BattleOverview = ({
 			leave={leave}
 			initTeam={team.map((t) => ({
 				...t,
-				onField: selectedTeam.includes(t.id),
+				status: selectedTeam.includes(t.id) ? 'ONFIELD' : 'BENCH',
 			}))}
 			initOpponents={opponents.map((o, i) => ({
 				...o,
-				onField: i < fightersPerSide,
+				status: i < fightersPerSide ? 'ONFIELD' : 'BENCH',
 			}))}
 		/>
 	);
