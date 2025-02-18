@@ -34,12 +34,13 @@ export const occupantsRecord: Record<number, Occupant> = {
 		x: 9,
 		y: 0,
 		map: 'testMap',
+		approachDirection: 'UP',
 	},
 	//Trainers start at 200000
 	//Merchants start at 300000,
 	300001: {
 		type: 'MERCHANT',
-		x: 8,
+		x: 6,
 		y: 0,
 		orientation: 'DOWN',
 		map: 'testMap',

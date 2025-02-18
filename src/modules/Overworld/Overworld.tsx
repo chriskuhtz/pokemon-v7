@@ -4,8 +4,6 @@ import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 import { animationTimer, baseSize } from '../../constants/gameData';
 import { assembleMap } from '../../functions/assembleMap';
-import { getOppositeDirection } from '../../functions/getOppositeDirection';
-import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { isEvening, isMorning, isNight } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { isValidOverWorldMap } from '../../functions/isValidOverworldMap';
@@ -21,6 +19,7 @@ import { CharacterLocationData } from '../../interfaces/SaveFile';
 import { Banner } from '../../uiComponents/Banner/Banner';
 import './Overworld.css';
 import { ClickerGrid } from './components/ClickerGrid';
+import { interactWithFunction } from './functions/interactWith';
 import { useClickTarget } from './hooks/useClickTarget';
 import { useDrawBackground } from './hooks/useDrawBackground';
 import { useDrawCharacter } from './hooks/useDrawCharacter';
@@ -137,74 +136,20 @@ export const Overworld = ({
 	const changeOccupant = useDrawOccupants(occupantsCanvasId, assembledMap);
 	//INTERACTION
 	const interactWith = useCallback(
-		(occ: [string, Occupant] | undefined) => {
-			if (!occ) {
-				return;
-			}
-			const [id, data] = occ;
-
-			if (data.type === 'ITEM' || data.type === 'HIDDEN_ITEM') {
-				addDialogue({
-					message: `Found ${data.amount} ${data.item}`,
-					onRemoval: () => collectItem(occ as [string, OverworldItem]),
-				});
-				return;
-			}
-			if (data.type === 'BUSH' && !cutBushes.includes(Number.parseInt(id))) {
-				if (bushCutting) {
-					addDialogue({
-						message: `Your Pokemon used cut`,
-						icon: (
-							<img src={getPokemonSprite(bushCutting.cutterPokemon.dexId)} />
-						),
-						onRemoval: () => bushCutting.cut(Number.parseInt(id)),
-					});
-				} else addDialogue({ message: 'Maybe a Pokemon can cut this' });
-				return;
-			}
-			if (data.type === 'PC') {
-				addDialogue({
-					message: 'Accessing Pokemon Storage',
-					onRemoval: () => openStorage(stepsTaken),
-				});
-				return;
-			}
-			if (data.type === 'MERCHANT') {
-				changeOccupant(Number.parseInt(id), {
-					...data,
-					orientation: getOppositeDirection(playerLocation.orientation),
-				});
-				data.dialogue.forEach((d, i) =>
-					addDialogue({
-						message: d,
-						onRemoval:
-							i === data.dialogue.length - 1
-								? () => goToMarket(data.inventory, stepsTaken)
-								: undefined,
-					})
-				);
-				return;
-			}
-			if (data.type === 'NURSE') {
-				changeOccupant(Number.parseInt(id), {
-					...data,
-					orientation: getOppositeDirection(playerLocation.orientation),
-				});
-
-				data.dialogue.forEach((d, i) =>
-					addDialogue({
-						message: d,
-						onRemoval:
-							i === data.dialogue.length - 1
-								? () => talkToNurse(Number.parseInt(id))
-								: undefined,
-					})
-				);
-				return;
-			}
-
-			console.error('what is this occupant', occ);
-		},
+		(occ: [string, Occupant] | undefined) =>
+			interactWithFunction({
+				occ,
+				addDialogue,
+				collectItem,
+				cutBushes,
+				bushCutting,
+				openStorage,
+				stepsTaken,
+				changeOccupant,
+				playerLocation,
+				goToMarket,
+				talkToNurse,
+			}),
 		[
 			bushCutting,
 			changeOccupant,
@@ -212,7 +157,7 @@ export const Overworld = ({
 			cutBushes,
 			goToMarket,
 			openStorage,
-			playerLocation.orientation,
+			playerLocation,
 			stepsTaken,
 			talkToNurse,
 		]
