@@ -41,7 +41,7 @@ export const extraFeatureCheckList: {
 		name: 'movement by tile click',
 		handled: true,
 	},
-	{ name: 'approach directions (PC only from front' },
+	{ name: 'approach directions (PC only from front', handled: true },
 	{ name: 'overworld background/border of map' },
 	{ name: 'disable weird scroll', handled: true },
 	{ name: 'rotating npcs' },
