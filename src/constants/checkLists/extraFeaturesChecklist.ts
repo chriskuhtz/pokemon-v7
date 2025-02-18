@@ -122,4 +122,6 @@ export const extraFeatureCheckList: {
 		name: 'show k/o pokemon as such in team overview',
 	},
 	{ name: 'setting: instant mode' },
+	{ name: 'flex display on Line up Selection' },
+	{ name: 'auto choose opponent moves' },
 ];
