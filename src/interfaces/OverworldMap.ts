@@ -33,6 +33,7 @@ export interface OverworldPC {
 	x: number;
 	y: number;
 	map: MapId;
+	approachDirection: CharacterOrientation;
 }
 export interface OverworldMerchant {
 	type: 'MERCHANT';
