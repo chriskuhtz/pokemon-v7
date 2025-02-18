@@ -35,7 +35,7 @@ export const useHandleAction = (
 							addMessage({
 								message: `${target.data.name} was caught`,
 							});
-							return { ...p, moveQueue: [], status: 'CAUGHT' };
+							return { ...p, moveQueue: [], status: 'CAUGHT', ball: move.ball };
 						}
 
 						return p;

@@ -38,11 +38,11 @@ export function EnemyLane({
 					</div>
 				))}
 			</div>
-			<div>
+			<div style={{ display: 'flex', alignItems: 'center' }}>
 				{onFieldOpponents.map((t) => {
 					if (t.status === 'CAUGHT') {
 						return (
-							<img height={baseSize} key={t.id} src={getItemUrl('poke-ball')} />
+							<img height={baseSize} key={t.id} src={getItemUrl(t.ball)} />
 						);
 					}
 					return (
