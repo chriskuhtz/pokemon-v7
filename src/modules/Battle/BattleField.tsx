@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
 import { animationTimer } from '../../constants/gameData';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
@@ -26,8 +26,27 @@ export const BattleField = ({
 	initTeam: BattlePokemon[];
 	fightersPerSide: number;
 }) => {
+	const [messages, setMessages] = useState<string[]>([]);
+	const addMessage = useCallback((message: string) => {
+		setMessages((messages) => [...messages, message]);
+	}, []);
+
+	useEffect(() => {
+		if (messages.length === 0) {
+			return;
+		}
+		const t = setTimeout(() => {
+			setMessages(messages.slice(1));
+		}, animationTimer);
+
+		return () => clearTimeout(t);
+	}, [messages]);
+	const latestMessage = useMemo(
+		() => (messages.length > 0 ? messages[0] : undefined),
+		[messages]
+	);
+
 	const [battleRound, setBattleRound] = useState<number>(0);
-	const [message, setMessage] = useState<string | undefined>();
 	const [battleStep, setBattleStep] = useState<'COLLECTING' | 'EXECUTING'>(
 		'COLLECTING'
 	);
@@ -77,7 +96,7 @@ export const BattleField = ({
 		setPokemon,
 		battleRound
 	);
-	const handleAction = useHandleAction(pokemon, setPokemon);
+	const handleAction = useHandleAction(pokemon, setPokemon, addMessage);
 	//AUTOMATIONS
 	useEffect(() => {
 		if (battleStep === 'COLLECTING' && !nextPokemonWithoutMove) {
@@ -93,17 +112,12 @@ export const BattleField = ({
 		}
 	}, [battleStep, nextMover, nextPokemonWithoutMove]);
 	useEffect(() => {
-		if (battleStep === 'EXECUTING' && nextMover) {
+		if (battleStep === 'EXECUTING' && nextMover && !latestMessage) {
 			console.log('effect 3');
-			setMessage(`${nextMover.data.name} used ${nextMover.moveQueue[0].type}`);
-			const t = setTimeout(() => {
-				handleAction(nextMover);
-				setMessage(undefined);
-			}, animationTimer);
 
-			return () => clearTimeout(t);
+			handleAction(nextMover);
 		}
-	}, [battleStep, handleAction, nextMover]);
+	}, [addMessage, battleStep, handleAction, latestMessage, nextMover, pokemon]);
 	return (
 		<div
 			style={{
@@ -118,7 +132,7 @@ export const BattleField = ({
 				controlled={nextPokemonWithoutMove}
 				targets={allOnField}
 				chooseAction={chooseAction}
-				message={message}
+				message={latestMessage}
 			/>
 		</div>
 	);

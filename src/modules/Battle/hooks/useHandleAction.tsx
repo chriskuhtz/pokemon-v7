@@ -5,7 +5,8 @@ import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
 export const useHandleAction = (
 	pokemon: BattlePokemon[],
-	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>
+	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
+	addMessage: (x: string) => void
 ) => {
 	return useCallback(
 		(attacker: BattlePokemon) => {
@@ -14,12 +15,14 @@ export const useHandleAction = (
 			if (attack.type !== 'BattleAttack') {
 				throw new Error('cant handle this yet');
 			}
+			addMessage('Check 1: is an attack');
 
 			const target = pokemon.find((p) => p.id === attack.targetId);
 
 			if (!target) {
 				throw new Error('could not find target');
 			}
+			addMessage('Check 2: target exists');
 			//TODO: handle self targeting
 			if (target.id === attacker.id) {
 				console.warn('attacking yourself much', attacker.data.name);
@@ -31,7 +34,7 @@ export const useHandleAction = (
 			updatedAttacker = { ...updatedAttacker, moveQueue: [] };
 			//2. reduce pp
 			updatedAttacker = reduceMovePP(updatedAttacker, attack.name);
-
+			addMessage('Check 3: updating attacker');
 			//updated Target
 			let updatedTarget = { ...target };
 			//1. apply damage
@@ -41,6 +44,7 @@ export const useHandleAction = (
 					updatedTarget.damage +
 					calculateDamage(updatedAttacker, target, attack, undefined, true),
 			};
+			addMessage('Check 4: applying damage');
 
 			setPokemon((pokemon) =>
 				pokemon.map((p) => {
@@ -54,6 +58,6 @@ export const useHandleAction = (
 				})
 			);
 		},
-		[pokemon, setPokemon]
+		[addMessage, pokemon, setPokemon]
 	);
 };
