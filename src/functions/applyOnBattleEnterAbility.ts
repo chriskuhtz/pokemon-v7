@@ -1,44 +1,50 @@
-import { AddToastFunction } from '../hooks/useToasts';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
-import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
+import { BattleMessage } from '../modules/Battle/BattleField';
 
 export const applyOnBattleEnterAbility = ({
-	pokemon,
+	user,
 	setWeather,
 	currentWeather,
-	dispatchToast,
-	setOpponent,
-	opponent,
+	setPokemon,
+	addMessage,
 }: {
-	pokemon: BattlePokemon;
+	user: BattlePokemon;
 	setWeather: (x: WeatherType) => void;
-	opponent: BattlePokemon | undefined;
-	setOpponent: (x: BattlePokemon) => void;
+	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>;
 	currentWeather: WeatherType | undefined;
-	dispatchToast: AddToastFunction;
+	addMessage: (x: BattleMessage) => void;
 }) => {
-	if (pokemon.ability === 'drizzle') {
+	if (user.ability === 'drizzle' && currentWeather !== 'rain') {
 		setWeather('rain');
-		dispatchToast(`${pokemon.data.name} made it rain with drizzle`);
+		addMessage({ message: `${user.data.name} made it rain with drizzle` });
 	}
 	if (
-		(currentWeather && pokemon.ability === 'air-lock') ||
-		pokemon.ability === 'cloud-nine'
+		(currentWeather && user.ability === 'air-lock') ||
+		user.ability === 'cloud-nine'
 	) {
-		dispatchToast(
-			`${pokemon.data.name} negates all weather effects with ${pokemon.ability}`
-		);
+		addMessage({
+			message: `${user.data.name} negates all weather effects with ${user.ability}`,
+		});
 	}
-	if (opponent && pokemon.ability === 'intimidate') {
-		setOpponent(
-			applyStatChangeToPokemon(
-				opponent,
-				'attack',
-				-1,
-				dispatchToast,
-				'intimidate'
-			)
-		);
-	}
+	// if (opponent && user.ability === 'intimidate') {
+	// 	setOpponent(
+	// 		applyStatChangeToPokemon(
+	// 			opponent,
+	// 			'attack',
+	// 			-1,
+	// 			dispatchToast,
+	// 			'intimidate'
+	// 		)
+	// 	);
+	// }
+
+	setPokemon((pokemon) =>
+		pokemon.map((p) => {
+			if (p.id === user.id) {
+				return { ...p, roundsInBattle: p.roundsInBattle + 1 };
+			}
+			return p;
+		})
+	);
 };

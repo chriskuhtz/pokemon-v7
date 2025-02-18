@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
+import { WeatherType } from '../../../../interfaces/Weather';
 import { BattleMessage } from '../../BattleField';
 import { handleAttack } from './functions/handleAttack';
 
@@ -7,7 +8,8 @@ export const useHandleAction = (
 	pokemon: BattlePokemon[],
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
 	addMessage: (x: BattleMessage) => void,
-	leave: (x: BattlePokemon[]) => void
+	leave: (x: BattlePokemon[]) => void,
+	battleWeather: WeatherType | undefined
 ) => {
 	return useCallback(
 		(attacker: BattlePokemon) => {
@@ -70,10 +72,11 @@ export const useHandleAction = (
 					setPokemon,
 					addMessage: (x: string) => addMessage({ message: x }),
 					move,
+					battleWeather,
 				});
 				return;
 			}
 		},
-		[addMessage, leave, pokemon, setPokemon]
+		[addMessage, battleWeather, leave, pokemon, setPokemon]
 	);
 };

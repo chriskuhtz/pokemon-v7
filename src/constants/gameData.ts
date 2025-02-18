@@ -71,7 +71,7 @@ export const testOpponent: OwnedPokemon = {
 	secondMove: { name: 'karate-chop', usedPP: 0 },
 	id: '1',
 	xp: 200,
-	ability: 'volt-absorb',
+	ability: 'drizzle',
 	happiness: -1,
 	stepsWalked: 0,
 	maxHp: 50,

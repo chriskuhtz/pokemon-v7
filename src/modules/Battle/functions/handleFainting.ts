@@ -6,5 +6,5 @@ export const handleFainting = (
 ): BattlePokemon => {
 	addMessage(`${p.data.name} fainted`);
 
-	return { ...p, status: 'FAINTED', moveQueue: [] };
+	return { ...p, status: 'FAINTED', moveQueue: [], roundsInBattle: 0 };
 };

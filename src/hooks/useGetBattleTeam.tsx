@@ -44,6 +44,7 @@ export const useGetBattleTeam = (initTeam: OwnedPokemon[]) => {
 				const f = await fourthMoveData;
 				const battleMon: BattlePokemon = {
 					...pokemon,
+					roundsInBattle: 0,
 					secondaryAilments: [],
 					moveQueue: [],
 					firstMove: {
