@@ -7,6 +7,7 @@ export const movesCheckList: {
 	{
 		name: 'pound',
 		url: 'https://pokeapi.co/api/v2/move/1/',
+		handled: true,
 	},
 	{
 		name: 'karate-chop',
@@ -40,7 +41,7 @@ export const movesCheckList: {
 		name: 'thunder-punch',
 		url: 'https://pokeapi.co/api/v2/move/9/',
 	},
-	{ name: 'scratch', url: 'https://pokeapi.co/api/v2/move/10/', handled: true },
+	{ name: 'scratch', url: 'https://pokeapi.co/api/v2/move/10/' },
 	{
 		name: 'vice-grip',
 		url: 'https://pokeapi.co/api/v2/move/11/',
@@ -61,7 +62,7 @@ export const movesCheckList: {
 		name: 'cut',
 		url: 'https://pokeapi.co/api/v2/move/15/',
 	},
-	{ name: 'gust', url: 'https://pokeapi.co/api/v2/move/16/', handled: true },
+	{ name: 'gust', url: 'https://pokeapi.co/api/v2/move/16/' },
 	{
 		name: 'wing-attack',
 		url: 'https://pokeapi.co/api/v2/move/17/',
@@ -74,13 +75,13 @@ export const movesCheckList: {
 		name: 'fly',
 		url: 'https://pokeapi.co/api/v2/move/19/',
 	},
-	{ name: 'bind', url: 'https://pokeapi.co/api/v2/move/20/', handled: true },
-	{ name: 'slam', url: 'https://pokeapi.co/api/v2/move/21/', handled: true },
+	{ name: 'bind', url: 'https://pokeapi.co/api/v2/move/20/' },
+	{ name: 'slam', url: 'https://pokeapi.co/api/v2/move/21/' },
 	{
 		name: 'vine-whip',
 		url: 'https://pokeapi.co/api/v2/move/22/',
 	},
-	{ name: 'stomp', url: 'https://pokeapi.co/api/v2/move/23/', handled: true },
+	{ name: 'stomp', url: 'https://pokeapi.co/api/v2/move/23/' },
 	{
 		name: 'double-kick',
 		url: 'https://pokeapi.co/api/v2/move/24/',
@@ -118,7 +119,7 @@ export const movesCheckList: {
 		name: 'horn-drill',
 		url: 'https://pokeapi.co/api/v2/move/32/',
 	},
-	{ name: 'tackle', url: 'https://pokeapi.co/api/v2/move/33/', handled: true },
+	{ name: 'tackle', url: 'https://pokeapi.co/api/v2/move/33/' },
 	{
 		name: 'body-slam',
 		url: 'https://pokeapi.co/api/v2/move/34/',
@@ -274,7 +275,7 @@ export const movesCheckList: {
 	{ name: 'thunder', url: 'https://pokeapi.co/api/v2/move/87/' },
 	{ name: 'rock-throw', url: 'https://pokeapi.co/api/v2/move/88/' },
 	{ name: 'earthquake', url: 'https://pokeapi.co/api/v2/move/89/' },
-	{ name: 'fissure', url: 'https://pokeapi.co/api/v2/move/90/', handled: true },
+	{ name: 'fissure', url: 'https://pokeapi.co/api/v2/move/90/' },
 	{ name: 'dig', url: 'https://pokeapi.co/api/v2/move/91/' },
 	{ name: 'toxic', url: 'https://pokeapi.co/api/v2/move/92/' },
 	{ name: 'confusion', url: 'https://pokeapi.co/api/v2/move/93/' },

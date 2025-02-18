@@ -8,7 +8,7 @@ import { ControlBar } from './components/ControlBar';
 import { EnemyLane } from './components/EnemyLane';
 import { PlayerLane } from './components/PlayerLane';
 import { useChooseAction } from './hooks/useChooseAction';
-import { useHandleAction } from './hooks/useHandleAction';
+import { useHandleAction } from './hooks/useHandleAction/useHandleAction';
 
 export type ActionType = MoveName | 'RUN_AWAY';
 export interface ChooseActionPayload {
