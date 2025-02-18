@@ -1,5 +1,4 @@
 import { MoveName } from '../constants/checkLists/movesCheckList';
-import { BattlePokemon } from './BattlePokemon';
 import { HealingItemType, PokeballType } from './Item';
 import { MoveDto } from './Move';
 
@@ -11,7 +10,6 @@ export type BattleAttack = {
 	targetId: string;
 };
 export interface CatchProcessInfo {
-	pokemon: BattlePokemon;
 	ball: PokeballType;
 	type: 'CatchProcessInfo';
 	round: number;
@@ -22,10 +20,8 @@ export type ChargeUp = {
 	data: MoveDto;
 	name: MoveName;
 	round: number;
-	targetId: string;
 };
 export interface InBattleItem {
-	pokemon: BattlePokemon;
 	item: HealingItemType;
 	type: 'InBattleItem';
 	round: number;
