@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
@@ -11,6 +11,7 @@ import { PlayerLane } from './components/PlayerLane';
 import { useBattleMessages } from './hooks/useBattleMessages';
 import { useChooseAction } from './hooks/useChooseAction';
 import { useHandleAction } from './hooks/useHandleAction/useHandleAction';
+import { RefillHandling } from './components/RefillHandling';
 
 export type ActionType = MoveName | ItemType | 'RUN_AWAY';
 export interface ChooseActionPayload {
@@ -29,6 +30,7 @@ export const BattleField = ({
 	initOpponents,
 	initTeam,
 	inventory,
+	fightersPerSide,
 }: {
 	leave: (caughtPokemon: BattlePokemon[]) => void;
 	initOpponents: BattlePokemon[];
@@ -38,9 +40,9 @@ export const BattleField = ({
 }) => {
 	const { latestMessage, addMessage } = useBattleMessages();
 	const [battleRound, setBattleRound] = useState<number>(0);
-	const [battleStep, setBattleStep] = useState<'COLLECTING' | 'EXECUTING'>(
-		'COLLECTING'
-	);
+	const [battleStep, setBattleStep] = useState<
+		'COLLECTING' | 'EXECUTING' | 'REFILLING'
+	>('REFILLING');
 	useEffect(() => {
 		console.log(battleStep);
 	}, [battleStep]);
@@ -92,6 +94,18 @@ export const BattleField = ({
 		() => team.every((t) => t.status === 'FAINTED'),
 		[team]
 	);
+	const teamCanRefill = useMemo(() => {
+		return (
+			onFieldTeam.length < fightersPerSide &&
+			team.some((t) => t.status === 'BENCH')
+		);
+	}, [fightersPerSide, onFieldTeam, team]);
+	const opponentCanRefill = useMemo(() => {
+		return (
+			onFieldOpponents.length < fightersPerSide &&
+			opponents.some((t) => t.status === 'BENCH')
+		);
+	}, [fightersPerSide, onFieldOpponents, opponents]);
 
 	//REDUCERS
 	const chooseAction = useChooseAction(
@@ -101,7 +115,25 @@ export const BattleField = ({
 		battleRound
 	);
 	const handleAction = useHandleAction(pokemon, setPokemon, addMessage, leave);
+	const putPokemonOnField = useCallback(
+		(id: string) =>
+			setPokemon((pokemon) =>
+				pokemon.map((p) => {
+					if (p.id === id) {
+						if (p.status !== 'BENCH') {
+							throw new Error(
+								'how on gods good earth do ya wanna put a fainted/caught pokemon on the field, lebowski?'
+							);
+						}
+						return { ...p, status: 'ONFIELD', roundsInBattle: 0 };
+					}
+					return p;
+				})
+			),
+		[]
+	);
 	//AUTOMATIONS
+
 	useEffect(() => {
 		if (battleStep === 'COLLECTING' && !nextPokemonWithoutMove) {
 			console.log('effect 1');
@@ -136,6 +168,24 @@ export const BattleField = ({
 			});
 		}
 	}, [addMessage, battleLost, battleWon, latestMessage, leave, pokemon]);
+	useEffect(() => {
+		if (battleStep === 'REFILLING' && !teamCanRefill && !opponentCanRefill) {
+			console.log('effect 4');
+			setBattleStep('COLLECTING');
+		}
+	}, [battleStep, nextPokemonWithoutMove, opponentCanRefill, teamCanRefill]);
+
+	if (battleStep === 'REFILLING') {
+		<RefillHandling
+			putPokemonOnField={putPokemonOnField}
+			team={team}
+			opponentCanRefill={opponentCanRefill}
+			teamCanRefill={teamCanRefill}
+			opponents={opponents}
+			latestMessage={latestMessage}
+			addMessage={addMessage}
+		/>;
+	}
 
 	return (
 		<div
