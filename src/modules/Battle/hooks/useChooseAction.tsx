@@ -5,7 +5,6 @@ import { isPokeball } from '../../../interfaces/Item';
 import { ChooseActionPayload } from '../BattleField';
 
 export const useChooseAction = (
-	leave: () => void,
 	allOnField: BattlePokemon[],
 	pokemon: BattlePokemon[],
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
@@ -13,17 +12,29 @@ export const useChooseAction = (
 ) => {
 	return useCallback(
 		({ userId, actionName, targetId }: ChooseActionPayload) => {
-			if (actionName === 'RUN_AWAY') {
-				leave();
-			}
 			const user = allOnField.find((u) => u.id === userId);
 			if (!user) {
 				throw new Error('the user is not on the field');
 			}
 			const target = pokemon.find((p) => p.id === targetId);
-			if (!target) {
+			if (targetId && !target) {
 				throw new Error('could not find target');
 			}
+			if (actionName === 'RUN_AWAY') {
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.id === user.id) {
+							return {
+								...user,
+								moveQueue: [{ type: 'RunAway', round: battleRound }],
+							};
+						}
+						return p;
+					})
+				);
+				return;
+			}
+
 			if (isPokeball(actionName)) {
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
@@ -76,6 +87,6 @@ export const useChooseAction = (
 				})
 			);
 		},
-		[allOnField, battleRound, leave, pokemon, setPokemon]
+		[allOnField, battleRound, pokemon, setPokemon]
 	);
 };

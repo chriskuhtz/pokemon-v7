@@ -1,4 +1,5 @@
 import { useGetBattleTeam } from '../../../hooks/useGetBattleTeam';
+import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { LoadingScreen } from '../../../uiComponents/LoadingScreen/LoadingScreen';
@@ -11,7 +12,7 @@ export const BattleLoader = ({
 	fightersPerSide,
 	inventory,
 }: {
-	leave: () => void;
+	leave: (caughtPokemon: BattlePokemon[]) => void;
 	opponents: OwnedPokemon[];
 	team: OwnedPokemon[];
 	fightersPerSide: number;

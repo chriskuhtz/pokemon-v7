@@ -6,14 +6,33 @@ import { handleAttack } from './functions/handleAttack';
 export const useHandleAction = (
 	pokemon: BattlePokemon[],
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
-	addMessage: (x: BattleMessage) => void
+	addMessage: (x: BattleMessage) => void,
+	leave: (x: BattlePokemon[]) => void
 ) => {
 	return useCallback(
 		(attacker: BattlePokemon) => {
 			//CHECKS
 			const move = attacker.moveQueue[0];
-			if (!['BattleAttack', 'CatchProcessInfo'].includes(move.type)) {
+			if (
+				!['BattleAttack', 'CatchProcessInfo', 'RunAway'].includes(move.type)
+			) {
 				throw new Error('cant handle this yet');
+			}
+			if (move.type === 'RunAway') {
+				addMessage({
+					message: `You ran away`,
+					onRemoval: () => leave(pokemon.filter((p) => p.status === 'CAUGHT')),
+				});
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.id === attacker.id) {
+							return { ...p, moveQueue: [] };
+						}
+
+						return p;
+					})
+				);
+				return;
 			}
 
 			if (move.type === 'CatchProcessInfo') {
@@ -55,6 +74,6 @@ export const useHandleAction = (
 				return;
 			}
 		},
-		[addMessage, pokemon, setPokemon]
+		[addMessage, leave, pokemon, setPokemon]
 	);
 };

@@ -28,8 +28,14 @@ export interface InBattleItem {
 	targetId: string;
 }
 
+export interface RunAway {
+	type: 'RunAway';
+	round: number;
+}
+
 export type BattleAction =
 	| CatchProcessInfo
 	| BattleAttack
 	| ChargeUp
-	| InBattleItem;
+	| InBattleItem
+	| RunAway;

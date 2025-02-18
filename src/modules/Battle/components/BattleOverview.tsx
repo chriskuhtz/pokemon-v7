@@ -13,7 +13,7 @@ export const BattleOverview = ({
 	fightersPerSide,
 	inventory,
 }: {
-	leave: () => void;
+	leave: (caughtPokemon: BattlePokemon[]) => void;
 	opponents: BattlePokemon[];
 	team: BattlePokemon[];
 	fightersPerSide: number;
@@ -51,7 +51,7 @@ export const BattleOverview = ({
 	if (!battleStarted) {
 		return (
 			<LineUpSelection
-				leave={leave}
+				leave={() => leave([])}
 				opponents={opponents}
 				team={team}
 				fightersPerSide={fightersPerSide}
