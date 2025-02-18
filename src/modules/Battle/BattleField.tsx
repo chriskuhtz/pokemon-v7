@@ -8,10 +8,10 @@ import { ItemType } from '../../interfaces/Item';
 import { ControlBar } from './components/ControlBar';
 import { EnemyLane } from './components/EnemyLane';
 import { PlayerLane } from './components/PlayerLane';
+import { RefillHandling } from './components/RefillHandling';
 import { useBattleMessages } from './hooks/useBattleMessages';
 import { useChooseAction } from './hooks/useChooseAction';
 import { useHandleAction } from './hooks/useHandleAction/useHandleAction';
-import { RefillHandling } from './components/RefillHandling';
 
 export type ActionType = MoveName | ItemType | 'RUN_AWAY';
 export interface ChooseActionPayload {
@@ -41,8 +41,8 @@ export const BattleField = ({
 	const { latestMessage, addMessage } = useBattleMessages();
 	const [battleRound, setBattleRound] = useState<number>(0);
 	const [battleStep, setBattleStep] = useState<
-		'COLLECTING' | 'EXECUTING' | 'REFILLING'
-	>('REFILLING');
+		'BATTLE_ENTRY' | 'COLLECTING' | 'EXECUTING' | 'REFILLING'
+	>('COLLECTING');
 	useEffect(() => {
 		console.log(battleStep);
 	}, [battleStep]);
@@ -136,55 +136,65 @@ export const BattleField = ({
 
 	useEffect(() => {
 		if (battleStep === 'COLLECTING' && !nextPokemonWithoutMove) {
-			console.log('effect 1');
 			setBattleStep('EXECUTING');
 		}
 	}, [battleStep, nextPokemonWithoutMove]);
 	useEffect(() => {
 		if (battleStep === 'EXECUTING' && !nextMover) {
-			console.log('effect 2');
-			setBattleStep('COLLECTING');
+			setBattleStep('REFILLING');
 			setBattleRound((battleRound) => battleRound + 1);
+			setPokemon((pokemon) =>
+				pokemon.map((p) => {
+					if (p.status === 'ONFIELD') {
+						return { ...p, roundsInBattle: p.roundsInBattle + 1 };
+					}
+					return p;
+				})
+			);
 		}
 	}, [battleStep, nextMover]);
 	useEffect(() => {
+		if (battleStep === 'REFILLING' && !teamCanRefill && !opponentCanRefill) {
+			setBattleStep('COLLECTING');
+		}
+	}, [battleStep, nextPokemonWithoutMove, opponentCanRefill, teamCanRefill]);
+
+	useEffect(() => {
 		if (battleStep === 'EXECUTING' && nextMover && !latestMessage) {
-			console.log('effect 3');
+			console.log('effect handleAction');
 
 			handleAction(nextMover);
 		}
 	}, [battleStep, handleAction, latestMessage, nextMover]);
 	useEffect(() => {
 		if (battleLost && !latestMessage) {
+			console.log('effect battlelost');
 			addMessage({
 				message: 'You lost the battle',
 				onRemoval: () => leave(pokemon.filter((p) => p.status === 'CAUGHT')),
 			});
 		}
 		if (battleWon && !latestMessage) {
+			console.log('effect battlewon');
 			addMessage({
 				message: 'You won the battle',
 				onRemoval: () => leave(pokemon.filter((p) => p.status === 'CAUGHT')),
 			});
 		}
 	}, [addMessage, battleLost, battleWon, latestMessage, leave, pokemon]);
-	useEffect(() => {
-		if (battleStep === 'REFILLING' && !teamCanRefill && !opponentCanRefill) {
-			console.log('effect 4');
-			setBattleStep('COLLECTING');
-		}
-	}, [battleStep, nextPokemonWithoutMove, opponentCanRefill, teamCanRefill]);
 
 	if (battleStep === 'REFILLING') {
-		<RefillHandling
-			putPokemonOnField={putPokemonOnField}
-			team={team}
-			opponentCanRefill={opponentCanRefill}
-			teamCanRefill={teamCanRefill}
-			opponents={opponents}
-			latestMessage={latestMessage}
-			addMessage={addMessage}
-		/>;
+		return (
+			<RefillHandling
+				putPokemonOnField={putPokemonOnField}
+				team={team}
+				opponentCanRefill={opponentCanRefill}
+				teamCanRefill={teamCanRefill}
+				opponents={opponents}
+				latestMessage={latestMessage}
+				addMessage={addMessage}
+			/>
+		);
 	}
 
 	return (
