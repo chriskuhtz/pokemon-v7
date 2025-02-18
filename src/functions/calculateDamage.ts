@@ -23,7 +23,7 @@ export const calculateDamage = (
 	target: BattlePokemon,
 	attack: BattleAttack,
 	weather: WeatherType | undefined,
-	calculateCrit: boolean,
+	calculateCrits: boolean,
 	dispatchToast?: AddToastFunction,
 	targetIsFlying?: boolean
 ): number => {
@@ -65,7 +65,7 @@ export const calculateDamage = (
 	const power = attack.data.power ?? 0;
 
 	const critFactor =
-		calculateCrit &&
+		calculateCrits &&
 		determineCrit(attack.name, attack.data.meta.crit_rate, target.ability)
 			? 2
 			: 1;

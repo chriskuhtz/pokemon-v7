@@ -1,4 +1,6 @@
 import { useCallback } from 'react';
+import { calculateDamage } from '../../../functions/calculateDamage';
+import { reduceMovePP } from '../../../functions/reduceMovePP';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
 export const useHandleAction = (
@@ -23,9 +25,22 @@ export const useHandleAction = (
 				console.warn('attacking yourself much', attacker.data.name);
 			}
 
-			//EMPTY THE MOVEQUEUE
-			const updatedAttacker = { ...attacker, moveQueue: [] };
-			const updatedTarget = { ...target, damage: target.damage + 5 };
+			//updated Attacker
+			let updatedAttacker = { ...attacker };
+			//1. update moveQueue
+			updatedAttacker = { ...updatedAttacker, moveQueue: [] };
+			//2. reduce pp
+			updatedAttacker = reduceMovePP(updatedAttacker, attack.name);
+
+			//updated Target
+			let updatedTarget = { ...target };
+			//1. apply damage
+			updatedTarget = {
+				...updatedTarget,
+				damage:
+					updatedTarget.damage +
+					calculateDamage(updatedAttacker, target, attack, undefined, true),
+			};
 
 			setPokemon((pokemon) =>
 				pokemon.map((p) => {
