@@ -142,7 +142,7 @@ export const itemsCheckList: {
 	{
 		name: 'revive',
 		url: 'https://pokeapi.co/api/v2/item/28/',
-		todos: ['revive in battle'],
+		handled: true,
 	},
 	{
 		name: 'max-revive',
