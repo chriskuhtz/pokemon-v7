@@ -350,15 +350,33 @@ export const BattleField = ({
 			<div style={{ position: 'absolute', top: 0, left: '48dvw' }}>
 				<WeatherIcon weather={battleWeather} />
 			</div>
-			<EnemyLane onFieldOpponents={onFieldOpponents} />
-			<PlayerLane onFieldTeam={onFieldTeam} />
-			<ControlBar
-				controlled={nextPokemonWithoutMove}
-				targets={pokemon}
-				chooseAction={chooseAction}
-				message={latestMessage?.message}
-				playerInventory={battleInventory}
-			/>
+			<div
+				style={{
+					display: 'grid',
+					gridTemplateRows: 'subgrid',
+					alignItems: 'stretch',
+					gridRowStart: 1,
+					gridRowEnd: 4,
+				}}
+			>
+				<EnemyLane onFieldOpponents={onFieldOpponents} />
+				<PlayerLane onFieldTeam={onFieldTeam} />
+			</div>
+			<div
+				style={{
+					maxWidth: '100dvw',
+					overflow: 'scroll',
+					borderTop: '1px solid black',
+				}}
+			>
+				<ControlBar
+					controlled={nextPokemonWithoutMove}
+					targets={pokemon}
+					chooseAction={chooseAction}
+					message={latestMessage?.message}
+					playerInventory={battleInventory}
+				/>
+			</div>
 		</div>
 	);
 };
