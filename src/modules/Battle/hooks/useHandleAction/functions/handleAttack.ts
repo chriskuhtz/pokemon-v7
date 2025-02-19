@@ -1,3 +1,4 @@
+import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/selfDestructingMoves';
 import { calculateDamage } from '../../../../../functions/calculateDamage';
 import { handleFlinching } from '../../../../../functions/handleFlinching';
 import { isKO } from '../../../../../functions/isKo';
@@ -5,6 +6,7 @@ import { reduceMovePP } from '../../../../../functions/reduceMovePP';
 import { BattleAttack } from '../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../../../interfaces/Weather';
+import { handleDampy } from '../../../functions/handleDampy';
 import { handleFainting } from '../../../functions/handleFainting';
 import { handleNoTarget } from '../../../functions/handleNoTarget';
 
@@ -16,6 +18,7 @@ export const handleAttack = ({
 	move,
 	battleWeather,
 	scatterCoins,
+	dampy,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
@@ -24,6 +27,7 @@ export const handleAttack = ({
 	move: BattleAttack;
 	battleWeather: WeatherType | undefined;
 	scatterCoins: () => void;
+	dampy?: { name: string };
 }): void => {
 	const target = pokemon.find(
 		(p) => p.id === move.targetId && p.status === 'ONFIELD'
@@ -32,9 +36,13 @@ export const handleAttack = ({
 		handleNoTarget(attacker, move, setPokemon, addMessage);
 		return;
 	}
+	if (dampy && SELF_DESTRUCTING_MOVES.includes(move.name)) {
+		handleDampy(attacker, move, setPokemon, addMessage, dampy);
+		return;
+	}
 	//TODO: handle self targeting
 	if (target.id === attacker.id) {
-		console.warn('attacking yourself much', attacker.data.name);
+		console.warn('attacking yourself much?', attacker.data.name);
 	}
 
 	//MESSAGES
