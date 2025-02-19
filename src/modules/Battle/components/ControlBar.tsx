@@ -2,6 +2,8 @@ import { useMemo, useState } from 'react';
 import { isMove } from '../../../constants/checkLists/movesCheckList';
 import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
 import { getOpponentPokemon } from '../../../functions/getOpponentPokemon';
+import { getPlayerId } from '../../../functions/getPlayerId';
+import { getPlayerPokemon } from '../../../functions/getPlayerPokemon';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import { isHealingItem, isPokeball } from '../../../interfaces/Item';
@@ -26,7 +28,14 @@ export function ControlBar({
 
 	const filteredTargets = useMemo(() => {
 		if (isHealingItem(chosenAction)) {
-			return targets.filter((t) => canBenefitFromItem(t, chosenAction));
+			if (controlled?.ownerId === getPlayerId()) {
+				return getPlayerPokemon(targets).filter((t) =>
+					canBenefitFromItem(t, chosenAction)
+				);
+			}
+			return getOpponentPokemon(targets).filter((t) =>
+				canBenefitFromItem(t, chosenAction)
+			);
 		}
 		if (isPokeball(chosenAction)) {
 			return getOpponentPokemon(targets).filter((t) => t.status === 'ONFIELD');
@@ -35,7 +44,7 @@ export function ControlBar({
 			return targets.filter((t) => t.status === 'ONFIELD');
 		}
 		return targets;
-	}, [chosenAction, targets]);
+	}, [chosenAction, controlled, targets]);
 
 	if (message) {
 		return (
@@ -73,6 +82,7 @@ export function ControlBar({
 				chooseAction={chooseAction}
 				setChosenAction={setChosenAction}
 				inventory={playerInventory}
+				allTargets={targets}
 			/>
 		);
 	}
