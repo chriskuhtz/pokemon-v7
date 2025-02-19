@@ -128,4 +128,5 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'prevent npcs from changing their path after player interaction' },
 	{ name: 'go to nurse after loss' },
+	{ name: 'group selectable actions in battle' },
 ];
