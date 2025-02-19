@@ -1,4 +1,12 @@
-export const Chip = ({ children }: { children: React.JSX.Element }) => {
+import { CSSProperties } from 'react';
+
+export const Chip = ({
+	children,
+	style,
+}: {
+	children: React.JSX.Element;
+	style?: CSSProperties;
+}) => {
 	return (
 		<div
 			style={{
@@ -9,6 +17,7 @@ export const Chip = ({ children }: { children: React.JSX.Element }) => {
 				padding: '0 .25rem',
 				whiteSpace: 'nowrap',
 				width: 'min-content',
+				...style,
 			}}
 		>
 			{children}
