@@ -119,4 +119,6 @@ export const extraFeatureCheckList: {
 	{ name: 'auto choose opponent moves' },
 	{ name: 'go through functions, delete unused' },
 	{ name: 'Uncollected Quests Badge on Menu Button' },
+	{ name: 'preselect pokemon on line up' },
+	{ name: 'level badges in storage' },
 ];

@@ -4,6 +4,7 @@ import {
 } from '../../../../../functions/determineCaptureSuccess';
 import { CatchProcessInfo } from '../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
+import { ItemType } from '../../../../../interfaces/Item';
 import { BattleMessage } from '../../../BattleField';
 
 export const handleCatch = (
@@ -14,11 +15,13 @@ export const handleCatch = (
 	addMultipleMessages: (x: BattleMessage[]) => void,
 	battleRound: number,
 	battleLocation: BattleLocation,
-	interjectMessage: (x: BattleMessage) => void
+	interjectMessage: (x: BattleMessage) => void,
+	addUsedItem: (x: ItemType) => void
 ) => {
 	const target = pokemon.find(
 		(p) => p.id === move.targetId && p.status === 'ONFIELD'
 	);
+	addUsedItem(move.ball);
 	if (!target) {
 		addMultipleMessages([
 			{

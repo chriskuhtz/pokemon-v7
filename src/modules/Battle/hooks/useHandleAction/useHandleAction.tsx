@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { BattleLocation } from '../../../../functions/determineCaptureSuccess';
 import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
+import { ItemType } from '../../../../interfaces/Item';
 import { WeatherType } from '../../../../interfaces/Weather';
 import { BattleMessage } from '../../BattleField';
 import { handleAttack } from './functions/handleAttack';
@@ -15,7 +16,8 @@ export const useHandleAction = (
 	addMultipleMessages: (x: BattleMessage[]) => void,
 	battleRound: number,
 	battleLocation: BattleLocation,
-	interjectMessage: (x: BattleMessage) => void
+	interjectMessage: (x: BattleMessage) => void,
+	addUsedItem: (x: ItemType) => void
 ) => {
 	return useCallback(
 		(attacker: BattlePokemon) => {
@@ -52,7 +54,8 @@ export const useHandleAction = (
 					addMultipleMessages,
 					battleRound,
 					battleLocation,
-					interjectMessage
+					interjectMessage,
+					addUsedItem
 				);
 			}
 
@@ -71,6 +74,7 @@ export const useHandleAction = (
 		[
 			addMessage,
 			addMultipleMessages,
+			addUsedItem,
 			battleLocation,
 			battleRound,
 			battleWeather,
