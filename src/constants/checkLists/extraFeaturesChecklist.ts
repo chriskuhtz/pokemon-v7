@@ -144,4 +144,8 @@ export const extraFeatureCheckList: {
 	{ name: 'filter action by controlled' },
 	{ name: 'extract battlefield state, selectors and reducers' },
 	{ name: 'battle backgrounds' },
+	{
+		name: 'setting: randomized items',
+	},
+	{ name: 'setting: random quest rewards' },
 ];
