@@ -45,7 +45,7 @@ export const extraFeatureCheckList: {
 	{ name: 'disable weird scroll', handled: true },
 	{ name: 'rotating npcs', handled: true },
 	{ name: 'walking npcs on set paths', handled: true },
-	{ name: 'pretty stat display' },
+	{ name: 'pretty stat display', handled: true },
 	{ name: 'prettier weather display' },
 	{ name: 'Battle Attack animation' },
 	{ name: 'battle backgrounds' },
@@ -135,4 +135,6 @@ export const extraFeatureCheckList: {
 	{ name: 'frozen shader' },
 	{ name: 'sleep shader' },
 	{ name: 'switch button position in line up' },
+	{ name: 'even prettier stat display' },
+	{ name: 'assign random nature to encounters' },
 ];
