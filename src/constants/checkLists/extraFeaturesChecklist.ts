@@ -116,4 +116,6 @@ export const extraFeatureCheckList: {
 	{ name: 'setting: instant mode' },
 	{ name: 'flex display on Line up Selection' },
 	{ name: 'Team overview on overworld' },
+	{ name: 'auto choose opponent moves' },
+	{ name: 'go through functions, delete unused' },
 ];
