@@ -15,14 +15,17 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	item: HealingItemType,
 	addToast?: AddToastFunction
 ): T {
-	if (item === 'revive' && pokemon.damage >= pokemon.maxHp) {
+	if (
+		(item === 'revive' || item === 'max-revive') &&
+		pokemon.damage >= pokemon.maxHp
+	) {
 		if (addToast) {
-			addToast(`regained 50% HP`);
+			addToast(`regained ${item === 'revive' ? '50%' : 'full'} HP`);
 		}
 		if (isBattlePokemon(pokemon)) {
 			return {
 				...pokemon,
-				damage: Math.round(pokemon.stats.hp / 2),
+				damage: item === 'revive' ? Math.round(pokemon.stats.hp / 2) : 0,
 				primaryAilment: undefined,
 				secondaryAilments: [],
 				flashFired: false,
