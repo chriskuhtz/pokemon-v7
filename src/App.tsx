@@ -87,7 +87,10 @@ export const App = ({
 							...pokemon,
 							...caughtPokemon.map((c) => {
 								return {
-									...reduceBattlePokemonToOwnedPokemon(c),
+									...reduceBattlePokemonToOwnedPokemon(
+										c,
+										c.ball === 'heal-ball'
+									),
 									ownerId: saveFile.playerId,
 								};
 							}),

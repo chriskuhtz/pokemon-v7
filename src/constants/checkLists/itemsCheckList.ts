@@ -12,63 +12,77 @@ export const itemsCheckList: {
 	{
 		name: 'ultra-ball',
 		url: 'https://pokeapi.co/api/v2/item/2/',
-		todos: ['catching steps'],
+		handled: true,
 	},
 	{
 		name: 'great-ball',
 		url: 'https://pokeapi.co/api/v2/item/3/',
+		handled: true,
 	},
 	{
 		name: 'poke-ball',
 		url: 'https://pokeapi.co/api/v2/item/4/',
+		handled: true,
 	},
 	{
 		name: 'safari-ball',
 		url: 'https://pokeapi.co/api/v2/item/5/',
+		handled: true,
 	},
 	{
 		name: 'net-ball',
 		url: 'https://pokeapi.co/api/v2/item/6/',
+		handled: true,
 	},
 	{
 		name: 'dive-ball',
 		url: 'https://pokeapi.co/api/v2/item/7/',
+		handled: true,
 	},
 	{
 		name: 'nest-ball',
 		url: 'https://pokeapi.co/api/v2/item/8/',
+		handled: true,
 	},
 	{
 		name: 'repeat-ball',
 		url: 'https://pokeapi.co/api/v2/item/9/',
+		todos: ['how to register caught pokemon'],
 	},
 	{
 		name: 'timer-ball',
 		url: 'https://pokeapi.co/api/v2/item/10/',
+		handled: true,
 	},
 	{
 		name: 'luxury-ball',
 		url: 'https://pokeapi.co/api/v2/item/11/',
+		handled: true,
 	},
 	{
 		name: 'premier-ball',
 		url: 'https://pokeapi.co/api/v2/item/12/',
+		handled: true,
 	},
 	{
 		name: 'dusk-ball',
 		url: 'https://pokeapi.co/api/v2/item/13/',
+		handled: true,
 	},
 	{
 		name: 'heal-ball',
 		url: 'https://pokeapi.co/api/v2/item/14/',
+		handled: true,
 	},
 	{
 		name: 'quick-ball',
 		url: 'https://pokeapi.co/api/v2/item/15/',
+		handled: true,
 	},
 	{
 		name: 'cherish-ball',
 		url: 'https://pokeapi.co/api/v2/item/16/',
+		handled: true,
 	},
 	{
 		name: 'potion',
