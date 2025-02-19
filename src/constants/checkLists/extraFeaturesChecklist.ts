@@ -46,9 +46,9 @@ export const extraFeatureCheckList: {
 	{ name: 'rotating npcs', handled: true },
 	{ name: 'walking npcs on set paths', handled: true },
 	{ name: 'pretty stat display', handled: true },
+	{ name: 'battle platforms', handled: true },
 	{ name: 'prettier weather display' },
 	{ name: 'Battle Attack animation' },
-	{ name: 'battle backgrounds' },
 	{ name: 'hpbar colors' },
 	{ name: 'choose random moves for opponent' },
 	{
@@ -144,4 +144,6 @@ export const extraFeatureCheckList: {
 	{ name: 'keyboard control on refill screen' },
 	{ name: 'prettier refill screen' },
 	{ name: 'filter action by controlled' },
+	{ name: 'extract battlefield state, selectors and reducers' },
+	{ name: 'battle backgrounds' },
 ];
