@@ -7,6 +7,9 @@ export const useBattleMessages = () => {
 	const addMessage = useCallback((message: BattleMessage) => {
 		setMessages((messages) => [...messages, message]);
 	}, []);
+	const addMultipleMessages = useCallback((newMessages: BattleMessage[]) => {
+		setMessages((messages) => [...messages, ...newMessages]);
+	}, []);
 	useEffect(() => {
 		if (messages.length === 0) {
 			return;
@@ -14,6 +17,10 @@ export const useBattleMessages = () => {
 		const t = setTimeout(() => {
 			if (messages[0].onRemoval) {
 				messages[0].onRemoval();
+			}
+			if (messages[0].clearStackOnRemoval) {
+				setMessages([]);
+				return;
 			}
 
 			setMessages(messages.slice(1));
@@ -26,5 +33,5 @@ export const useBattleMessages = () => {
 		[messages]
 	);
 
-	return { latestMessage, addMessage };
+	return { latestMessage, addMessage, addMultipleMessages };
 };

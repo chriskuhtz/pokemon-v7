@@ -26,6 +26,7 @@ export interface ChooseActionPayload {
 export interface BattleMessage {
 	message: string;
 	onRemoval?: () => void;
+	clearStackOnRemoval?: boolean;
 }
 
 export const BattleField = ({
@@ -41,7 +42,8 @@ export const BattleField = ({
 	fightersPerSide: number;
 	inventory: Inventory;
 }) => {
-	const { latestMessage, addMessage } = useBattleMessages();
+	const { latestMessage, addMessage, addMultipleMessages } =
+		useBattleMessages();
 	const [battleRound, setBattleRound] = useState<number>(0);
 	const [battleWeather, setBattleWeather] = useState<WeatherType | undefined>();
 	const [battleStep, setBattleStep] = useState<
@@ -131,7 +133,8 @@ export const BattleField = ({
 		setPokemon,
 		addMessage,
 		leave,
-		battleWeather
+		battleWeather,
+		addMultipleMessages
 	);
 	const putPokemonOnField = useCallback(
 		(id: string) =>
