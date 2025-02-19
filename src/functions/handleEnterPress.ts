@@ -6,7 +6,8 @@ import { getNextLocation } from './getNextLocation';
 export const handleEnterPress = (
 	playerLocation: CharacterLocationData,
 	collectedItems: number[],
-	interactWith: (x: [string, Occupant] | undefined) => void
+	interactWith: (x: [string, Occupant] | undefined) => void,
+	statefulOccupantsRecord: Record<number, Occupant>
 ) => {
 	const focusedField = getNextLocation(
 		playerLocation,
@@ -14,6 +15,11 @@ export const handleEnterPress = (
 	);
 
 	interactWith(
-		getNextFieldOccupant(playerLocation.mapId, collectedItems, focusedField)
+		getNextFieldOccupant(
+			playerLocation.mapId,
+			collectedItems,
+			focusedField,
+			statefulOccupantsRecord
+		)
 	);
 };
