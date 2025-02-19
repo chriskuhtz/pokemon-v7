@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { MoveName } from '../../../constants/checkLists/movesCheckList';
+import { secondTurnMoves } from '../../../constants/secondTurnMoves';
 import { determineMultiHits } from '../../../functions/determineMultiHits';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { isHealingItem, isPokeball } from '../../../interfaces/Item';
@@ -87,6 +88,36 @@ export const useChooseAction = (
 			].find((m) => m?.name === actionName);
 			if (!move) {
 				throw new Error('user does not know the selected move');
+			}
+
+			if (secondTurnMoves.includes(actionName)) {
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.id === user.id) {
+							return {
+								...user,
+								moveQueue: [
+									{
+										type: 'ChargeUp',
+										data: move.data,
+										name: actionName as MoveName,
+										round: battleRound,
+									},
+									{
+										type: 'BattleAttack',
+										data: move.data,
+										name: actionName as MoveName,
+										round: battleRound + 1,
+										targetId,
+										multiHits: determineMultiHits(move.data),
+									},
+								],
+							};
+						}
+						return p;
+					})
+				);
+				return;
 			}
 
 			setPokemon((pokemon) =>
