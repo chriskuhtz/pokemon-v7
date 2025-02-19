@@ -346,7 +346,7 @@ export const BattleField = ({
 			<PlayerLane onFieldTeam={onFieldTeam} />
 			<ControlBar
 				controlled={nextPokemonWithoutMove}
-				targets={allOnField.filter((p) => p.id !== nextPokemonWithoutMove?.id)}
+				targets={pokemon}
 				chooseAction={chooseAction}
 				message={latestMessage?.message}
 				playerInventory={battleInventory}
