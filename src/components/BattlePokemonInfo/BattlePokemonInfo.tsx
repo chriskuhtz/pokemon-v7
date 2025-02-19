@@ -1,6 +1,7 @@
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Chip } from '../../uiComponents/Chip/Chip';
 import { HpBar } from '../HpBar/HpBar';
+import { PrimaryAilmentIcon } from '../PrimaryAilmentIcon/PrimaryAilmentIcon';
 
 export const BattlePokemonInfo = ({ pokemon }: { pokemon: BattlePokemon }) => {
 	return (
@@ -12,7 +13,7 @@ export const BattlePokemonInfo = ({ pokemon }: { pokemon: BattlePokemon }) => {
 			}}
 			key={pokemon.id}
 		>
-			{pokemon.data.name}
+			<strong>{pokemon.data.name}</strong>
 			{Object.entries(pokemon.statBoosts).map(([stat, boost]) => {
 				if (boost !== 0) {
 					return (
@@ -25,6 +26,7 @@ export const BattlePokemonInfo = ({ pokemon }: { pokemon: BattlePokemon }) => {
 					);
 				}
 			})}
+			<PrimaryAilmentIcon primaryAilment={pokemon.primaryAilment} />
 			<HpBar max={pokemon.stats.hp} damage={pokemon.damage} />
 		</div>
 	);

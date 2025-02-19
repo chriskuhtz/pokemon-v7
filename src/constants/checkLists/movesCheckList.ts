@@ -37,7 +37,7 @@ export const movesCheckList: {
 	{
 		name: 'fire-punch',
 		url: 'https://pokeapi.co/api/v2/move/7/',
-		todos: ['apply burn', 'handle burn in battle', 'display burn'],
+		handled: true,
 	},
 	{
 		name: 'ice-punch',
