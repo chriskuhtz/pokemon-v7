@@ -27,6 +27,8 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 				secondaryAilments: [],
 				flashFired: false,
 				moveQueue: [],
+				roundsInBattle: 0,
+				status: 'BENCH',
 			};
 		}
 		return {
