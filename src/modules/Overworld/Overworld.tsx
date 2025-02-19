@@ -196,7 +196,7 @@ export const Overworld = ({
 	}
 
 	return (
-		<>
+		<div>
 			<IoMdMenu
 				style={{ position: 'absolute', top: '1.5rem', left: '1rem', zIndex: 1 }}
 				onClick={() => openMenu(stepsTaken)}
@@ -221,7 +221,7 @@ export const Overworld = ({
 				</Banner>
 			)}
 			<div className="overworldPage">
-				<div id="canvasses" style={{ position: 'relative' }}>
+				<div id="canvassesAndShaders" style={{ position: 'relative' }}>
 					<div
 						id="clickerGridWrapper"
 						style={{
@@ -240,7 +240,7 @@ export const Overworld = ({
 						/>
 					</div>
 					<div
-						id="shader"
+						id="shader1"
 						style={{
 							width: map.width * baseSize,
 							height: map.height * baseSize,
@@ -266,7 +266,7 @@ export const Overworld = ({
 						width={map.width * baseSize}
 					/>
 					<div
-						id="shader"
+						id="shader1"
 						style={{
 							width: map.width * baseSize,
 							height: map.height * baseSize,
@@ -289,7 +289,20 @@ export const Overworld = ({
 						width={map.width * baseSize}
 					/>
 				</div>
+				<div
+					id="background"
+					style={{
+						width: '100dvw',
+						height: '100dvh',
+						top: 0,
+						left: 0,
+						position: 'absolute',
+						backgroundColor: getOverworldShaderColor(),
+
+						zIndex: -4,
+					}}
+				/>
 			</div>
-		</>
+		</div>
 	);
 };
