@@ -1,6 +1,10 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import { isMove } from '../../../constants/checkLists/movesCheckList';
+import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
+import { getOpponentPokemon } from '../../../functions/getOpponentPokemon';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
+import { isHealingItem, isPokeball } from '../../../interfaces/Item';
 import { ActionType, ChooseActionPayload } from '../BattleField';
 import { ActionSelection } from './ActionSelection';
 import { TargetSelection } from './TargetSelection';
@@ -19,6 +23,19 @@ export function ControlBar({
 	playerInventory: Inventory;
 }) {
 	const [chosenAction, setChosenAction] = useState<ActionType | undefined>();
+
+	const filteredTargets = useMemo(() => {
+		if (isHealingItem(chosenAction)) {
+			return targets.filter((t) => canBenefitFromItem(t, chosenAction));
+		}
+		if (isPokeball(chosenAction)) {
+			return getOpponentPokemon(targets).filter((t) => t.status === 'ONFIELD');
+		}
+		if (isMove(chosenAction)) {
+			return targets.filter((t) => t.status === 'ONFIELD');
+		}
+		return targets;
+	}, [chosenAction, targets]);
 
 	if (message) {
 		return (
@@ -63,7 +80,7 @@ export function ControlBar({
 		<TargetSelection
 			name={controlled.data.name}
 			id={controlled.id}
-			targets={targets}
+			targets={filteredTargets}
 			chooseAction={chooseAction}
 			chosenAction={chosenAction}
 			setChosenAction={setChosenAction}
