@@ -139,4 +139,9 @@ export const extraFeatureCheckList: {
 	{ name: 'switch button position in line up' },
 	{ name: 'even prettier stat display' },
 	{ name: 'assign random nature to encounters' },
+	{ name: 'Collapsed/detailed Team View' },
+	{ name: 'cant select fainted pokemon in line up' },
+	{ name: 'keyboard control on refill screen' },
+	{ name: 'prettier refill screen' },
+	{ name: 'filter action by controlled' },
 ];
