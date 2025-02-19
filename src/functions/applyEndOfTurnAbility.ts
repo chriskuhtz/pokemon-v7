@@ -1,33 +1,28 @@
-import { AddToastFunction } from '../hooks/useToasts';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 
 export const applyEndOfTurnAbility = ({
 	pokemon,
-	setPokemon,
-	dispatchToast,
+	addMessage,
 }: {
 	pokemon: BattlePokemon;
-	setPokemon: (x: BattlePokemon) => void;
-	dispatchToast: AddToastFunction;
-}) => {
+	addMessage: (x: string) => void;
+}): BattlePokemon => {
 	if (pokemon.ability === 'speed-boost') {
-		setPokemon(
-			applyStatChangeToPokemon(
-				pokemon,
-				'speed',
-				1,
-				dispatchToast,
-				'by speed boost'
-			)
+		return applyStatChangeToPokemon(
+			pokemon,
+			'speed',
+			1,
+			addMessage,
+			'by speed boost'
 		);
 	}
 	if (
 		pokemon.ability === 'limber' &&
 		pokemon.primaryAilment?.type === 'paralysis'
 	) {
-		dispatchToast(`${pokemon.data.name} was cured of paralysis by limber`);
-		setPokemon({ ...pokemon, primaryAilment: undefined });
+		addMessage(`${pokemon.data.name} was cured of paralysis by limber`);
+		return { ...pokemon, primaryAilment: undefined };
 	}
-	return;
+	return pokemon;
 };
