@@ -32,6 +32,7 @@ export const useHandleAction = (
 					'CatchProcessInfo',
 					'RunAway',
 					'InBattleItem',
+					'ChargeUp',
 				].includes(move.type)
 			) {
 				throw new Error('cant handle this yet');
@@ -87,6 +88,19 @@ export const useHandleAction = (
 							return applyItemToPokemon(p, move.item);
 						}
 
+						return p;
+					})
+				);
+			}
+			if (move.type === 'ChargeUp') {
+				addMessage({
+					message: ` ${attacker.data.name} is charging up ${move.name}`,
+				});
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.id === attacker.id) {
+							return { ...attacker, moveQueue: attacker.moveQueue.slice(1) };
+						}
 						return p;
 					})
 				);

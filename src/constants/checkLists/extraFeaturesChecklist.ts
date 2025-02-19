@@ -148,4 +148,5 @@ export const extraFeatureCheckList: {
 		name: 'setting: randomized items',
 	},
 	{ name: 'setting: random quest rewards' },
+	{ name: 'shaders in battle' },
 ];
