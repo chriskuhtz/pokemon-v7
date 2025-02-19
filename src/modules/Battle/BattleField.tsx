@@ -6,6 +6,7 @@ import { applyOnBattleEnterAbility } from '../../functions/applyOnBattleEnterAbi
 import { BattleLocation } from '../../functions/determineCaptureSuccess';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
+import { sortByPriority } from '../../functions/sortByPriority';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Inventory, joinInventories } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
@@ -96,9 +97,10 @@ export const BattleField = ({
 		if (battleStep !== 'EXECUTING') {
 			return;
 		}
-		return [...onFieldTeam, ...onFieldOpponents].find((p) =>
-			p.moveQueue.some((m) => m.round === battleRound)
-		);
+
+		return [...onFieldOpponents, ...onFieldTeam]
+			.sort((a, b) => sortByPriority(a, b, battleRound))
+			.find((p) => p.moveQueue.some((m) => m.round === battleRound));
 	}, [battleRound, battleStep, onFieldOpponents, onFieldTeam]);
 	const newlyDeployedPokemon = useMemo(() => {
 		if (battleStep !== 'BATTLE_ENTRY') {
