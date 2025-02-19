@@ -15,6 +15,7 @@ export const handleAttack = ({
 	addMessage,
 	move,
 	battleWeather,
+	scatterCoins,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
@@ -22,6 +23,7 @@ export const handleAttack = ({
 	addMessage: (x: string) => void;
 	move: BattleAttack;
 	battleWeather: WeatherType | undefined;
+	scatterCoins: () => void;
 }): void => {
 	const target = pokemon.find(
 		(p) => p.id === move.targetId && p.status === 'ONFIELD'
@@ -39,6 +41,11 @@ export const handleAttack = ({
 	addMessage(
 		`${attacker.data.name} used ${move.name} against ${target.data.name}`
 	);
+
+	if (move.name === 'pay-day') {
+		addMessage(`Coins scattered everywhere`);
+		scatterCoins();
+	}
 
 	//UPDATES
 

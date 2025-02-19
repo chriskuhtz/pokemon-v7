@@ -17,7 +17,8 @@ export const useHandleAction = (
 	battleRound: number,
 	battleLocation: BattleLocation,
 	interjectMessage: (x: BattleMessage) => void,
-	addUsedItem: (x: ItemType) => void
+	addUsedItem: (x: ItemType) => void,
+	scatterCoins: () => void
 ) => {
 	return useCallback(
 		(attacker: BattlePokemon) => {
@@ -67,6 +68,7 @@ export const useHandleAction = (
 					addMessage: (x: string) => addMessage({ message: x }),
 					move,
 					battleWeather,
+					scatterCoins,
 				});
 				return;
 			}
@@ -81,6 +83,7 @@ export const useHandleAction = (
 			interjectMessage,
 			leave,
 			pokemon,
+			scatterCoins,
 			setPokemon,
 		]
 	);
