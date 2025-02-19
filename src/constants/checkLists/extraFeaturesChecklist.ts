@@ -43,7 +43,7 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'approach directions (PC only from front', handled: true },
 	{ name: 'disable weird scroll', handled: true },
-	{ name: 'rotating npcs' },
+	{ name: 'rotating npcs', handled: true },
 	{ name: 'walking npcs' },
 	{ name: 'pretty stat display' },
 	{ name: 'prettier weather display' },

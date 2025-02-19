@@ -56,14 +56,11 @@ export const handleCatch = (
 						return { ...p, moveQueue: [] };
 					}
 					if (p.id === target.id) {
-						//TODO: make this a BattlePokemon property
-						const caughtBefore = false;
 						const continueProcess = determineCaptureSuccess(
 							move.ball,
 							target,
 							battleRound,
-							battleLocation,
-							caughtBefore
+							battleLocation
 						);
 
 						if (continueProcess) {
