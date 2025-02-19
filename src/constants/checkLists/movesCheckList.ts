@@ -1269,3 +1269,7 @@ export const handledMoves = [
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
+
+export function isMove(x: string | undefined): x is MoveName {
+	return (handledMoves as unknown as string[]).includes(x ?? '');
+}
