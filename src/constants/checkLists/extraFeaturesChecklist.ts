@@ -140,4 +140,5 @@ export const extraFeatureCheckList: {
 	{ name: 'even prettier stat display' },
 	{ name: 'assign random nature to encounters' },
 	{ name: 'Collapsed/detailed Team View' },
+	{ name: 'cant select fainted pokemon in line up' },
 ];
