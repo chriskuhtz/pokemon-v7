@@ -123,4 +123,8 @@ export const extraFeatureCheckList: {
 	{ name: 'level badges in storage' },
 	{ name: 'only consider occupants in view (+2 or 3 fields) when redrawing' },
 	{ name: 'walking npcs randomly' },
+	{
+		name: 'stop npcs from walking through player',
+	},
+	{ name: 'prevent npcs from changing their path after player interaction' },
 ];
