@@ -62,7 +62,7 @@ export interface OverworldNpc {
 	map: MapId;
 	dialogue: string[];
 	sprite: string;
-	rotating?: boolean;
+	movememt?: { path: CharacterOrientation[]; currentStep: number };
 }
 export interface OverworldBush {
 	type: 'BUSH';
