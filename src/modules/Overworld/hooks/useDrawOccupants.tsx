@@ -1,3 +1,4 @@
+import { isEqual } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 import { baseSize } from '../../../constants/gameData';
 import { occupantsRecord } from '../../../constants/occupantsRecord';
@@ -8,6 +9,9 @@ export const useDrawOccupants = (
 	canvasId: string,
 	map: OverworldMap
 ): ((id: number, updatedOccupant: Occupant) => void) => {
+	const [lastDrawnOccupants, setLastDrawnOccupants] = useState<
+		Record<number, Occupant>
+	>({});
 	const [statefulOccupants, setStatefulOccupants] = useState<
 		Record<number, Occupant>
 	>({});
@@ -16,7 +20,8 @@ export const useDrawOccupants = (
 		setStatefulOccupants(
 			Object.fromEntries(
 				Object.entries(occupantsRecord).filter(
-					([, data]) => data.map === map.id
+					([id, data]) =>
+						data.map === map.id && map.occupants.includes(Number.parseInt(id))
 				)
 			)
 		);
@@ -36,80 +41,110 @@ export const useDrawOccupants = (
 
 	useEffect(() => {
 		console.log('draw occupants');
-		const { occupants, width, height } = map;
+		//const { width, height } = map;
 
 		const el: HTMLCanvasElement | null = document.getElementById(
 			canvasId
 		) as HTMLCanvasElement | null;
 		const ctx = el?.getContext('2d');
 
-		ctx?.clearRect(0, 0, width * baseSize, height * baseSize);
-
-		occupants.forEach((occupantId) => {
-			const occ = statefulOccupants[occupantId];
-			if (!occ) {
+		Object.keys(statefulOccupants).forEach((id) => {
+			const current = statefulOccupants[Number.parseInt(id)];
+			const lastDrawn = lastDrawnOccupants[Number.parseInt(id)];
+			if (isEqual(current, lastDrawn)) {
+				console.log('no need to redraw me', current);
 				return;
 			}
 
-			const img = new Image();
+			if (current && !lastDrawn) {
+				console.log('draw me for the first time', current);
+				drawOccupant(current, ctx);
+				return;
+			}
+			console.log('i have changed,redraw me', current, lastDrawn);
+			ctx?.clearRect(
+				baseSize * lastDrawn.x,
+				baseSize * lastDrawn.y,
+				baseSize,
+				baseSize
+			);
 
-			img.addEventListener('load', () => {
-				switch (occ.type) {
-					case 'MERCHANT':
-					case 'NURSE':
-						ctx?.clearRect(
-							baseSize * occ.x,
-							baseSize * occ.y,
-							baseSize,
-							baseSize
-						);
-
-						ctx?.drawImage(
-							img,
-							0,
-							-getYOffsetFromOrientation(occ.orientation),
-							baseSize,
-							baseSize,
-							baseSize * occ.x,
-							baseSize * occ.y,
-							baseSize,
-							baseSize
-						);
-						break;
-					case 'BUSH':
-					case 'HIDDEN_ITEM':
-						ctx?.drawImage(
-							img,
-							baseSize * occ.x,
-							baseSize * occ.y,
-							baseSize,
-							baseSize
-						);
-						break;
-					case 'ITEM':
-					case 'PC':
-					default:
-						ctx?.drawImage(
-							img,
-							baseSize * occ.x + baseSize * 0.125,
-							baseSize * occ.y + baseSize * 0.125,
-							baseSize * 0.75,
-							baseSize * 0.75
-						);
-				}
-			});
-
-			img.src = getSource(occ);
-		}, []);
-	}, [canvasId, map, statefulOccupants]);
+			drawOccupant(current, ctx);
+		});
+		Object.keys(lastDrawnOccupants).forEach((id) => {
+			const current = statefulOccupants[Number.parseInt(id)];
+			const lastDrawn = lastDrawnOccupants[Number.parseInt(id)];
+			if (!current && lastDrawn) {
+				console.log('i dont exist anymore, clear', lastDrawn);
+				ctx?.clearRect(
+					baseSize * lastDrawn.x,
+					baseSize * lastDrawn.y,
+					baseSize,
+					baseSize
+				);
+				return;
+			}
+		});
+		setLastDrawnOccupants(statefulOccupants);
+	}, [canvasId, lastDrawnOccupants, statefulOccupants]);
 
 	return changeOccupant;
+};
+
+const drawOccupant = (
+	occ: Occupant,
+	ctx: CanvasRenderingContext2D | null | undefined
+) => {
+	const img = new Image();
+
+	img.addEventListener('load', () => {
+		switch (occ.type) {
+			case 'MERCHANT':
+			case 'NURSE':
+			case 'NPC':
+				ctx?.drawImage(
+					img,
+					0,
+					-getYOffsetFromOrientation(occ.orientation),
+					baseSize,
+					baseSize,
+					baseSize * occ.x,
+					baseSize * occ.y,
+					baseSize,
+					baseSize
+				);
+				break;
+			case 'BUSH':
+			case 'HIDDEN_ITEM':
+				ctx?.drawImage(
+					img,
+					baseSize * occ.x,
+					baseSize * occ.y,
+					baseSize,
+					baseSize
+				);
+				break;
+			case 'ITEM':
+			case 'PC':
+			default:
+				ctx?.drawImage(
+					img,
+					baseSize * occ.x + baseSize * 0.125,
+					baseSize * occ.y + baseSize * 0.125,
+					baseSize * 0.75,
+					baseSize * 0.75
+				);
+		}
+	});
+
+	img.src = getSource(occ);
 };
 
 const getSource = (occ: Occupant) => {
 	switch (occ.type) {
 		case 'MERCHANT':
 		case 'NURSE':
+		case 'NPC':
 			return `/npcs/NPC_${occ.sprite}.png`;
 		case 'PC':
 			return '/mapObjects/pc.png';
