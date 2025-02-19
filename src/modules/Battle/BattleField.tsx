@@ -2,10 +2,11 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
 import { applyOnBattleEnterAbility } from '../../functions/applyOnBattleEnterAbility';
+import { BattleLocation } from '../../functions/determineCaptureSuccess';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
-import { Inventory } from '../../interfaces/Inventory';
+import { Inventory, joinInventories } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
 import { WeatherType } from '../../interfaces/Weather';
 import { ControlBar } from './components/ControlBar';
@@ -26,6 +27,7 @@ export interface ChooseActionPayload {
 export interface BattleMessage {
 	message: string;
 	onRemoval?: () => void;
+	clearStackOnRemoval?: boolean;
 }
 
 export const BattleField = ({
@@ -35,21 +37,28 @@ export const BattleField = ({
 	inventory,
 	fightersPerSide,
 }: {
-	leave: (caughtPokemon: BattlePokemon[]) => void;
+	leave: (caughtPokemon: BattlePokemon[], updatedInventory: Inventory) => void;
 	initOpponents: BattlePokemon[];
 	initTeam: BattlePokemon[];
 	fightersPerSide: number;
 	inventory: Inventory;
 }) => {
-	const { latestMessage, addMessage } = useBattleMessages();
+	const { latestMessage, addMessage, addMultipleMessages, interjectMessage } =
+		useBattleMessages();
 	const [battleRound, setBattleRound] = useState<number>(0);
 	const [battleWeather, setBattleWeather] = useState<WeatherType | undefined>();
+	const [battleLocation] = useState<BattleLocation>('STANDARD');
 	const [battleStep, setBattleStep] = useState<
 		'BATTLE_ENTRY' | 'COLLECTING' | 'EXECUTING' | 'REFILLING'
 	>('BATTLE_ENTRY');
 	useEffect(() => {
 		console.log(battleStep);
 	}, [battleStep]);
+
+	const [battleInventory, setBattleInventory] = useState<Inventory>(inventory);
+	const addUsedItem = useCallback((item: ItemType) => {
+		setBattleInventory((bI) => joinInventories(bI, { [item]: 1 }, true));
+	}, []);
 
 	const [pokemon, setPokemon] = useState<BattlePokemon[]>([
 		...initOpponents,
@@ -130,8 +139,13 @@ export const BattleField = ({
 		pokemon,
 		setPokemon,
 		addMessage,
-		leave,
-		battleWeather
+		(caught) => leave(caught, battleInventory),
+		battleWeather,
+		addMultipleMessages,
+		battleRound,
+		battleLocation,
+		interjectMessage,
+		addUsedItem
 	);
 	const putPokemonOnField = useCallback(
 		(id: string) =>
@@ -216,17 +230,33 @@ export const BattleField = ({
 			console.log('effect battlelost');
 			addMessage({
 				message: 'You lost the battle',
-				onRemoval: () => leave(pokemon.filter((p) => p.status === 'CAUGHT')),
+				onRemoval: () =>
+					leave(
+						pokemon.filter((p) => p.status === 'CAUGHT'),
+						battleInventory
+					),
 			});
 		}
 		if (battleWon && !latestMessage) {
 			console.log('effect battlewon');
 			addMessage({
 				message: 'You won the battle',
-				onRemoval: () => leave(pokemon.filter((p) => p.status === 'CAUGHT')),
+				onRemoval: () =>
+					leave(
+						pokemon.filter((p) => p.status === 'CAUGHT'),
+						battleInventory
+					),
 			});
 		}
-	}, [addMessage, battleLost, battleWon, latestMessage, leave, pokemon]);
+	}, [
+		addMessage,
+		battleInventory,
+		battleLost,
+		battleWon,
+		latestMessage,
+		leave,
+		pokemon,
+	]);
 
 	if (battleStep === 'REFILLING') {
 		return (
@@ -260,7 +290,7 @@ export const BattleField = ({
 				targets={allOnField.filter((p) => p.id !== nextPokemonWithoutMove?.id)}
 				chooseAction={chooseAction}
 				message={latestMessage?.message}
-				playerInventory={inventory}
+				playerInventory={battleInventory}
 			/>
 		</div>
 	);

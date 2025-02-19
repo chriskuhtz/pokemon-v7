@@ -3,11 +3,13 @@ import { PokeballType } from '../interfaces/Item';
 import { calculateLevelData } from './calculateLevelData';
 import { isEvening, isNight } from './getTimeOfDay';
 
+export type BattleLocation = 'UNDERWATER' | 'CAVE' | 'STANDARD';
+
 export const determineCaptureSuccess = (
 	ball: PokeballType,
 	target: BattlePokemon,
-	battleRounds: number,
-	location: 'UNDERWATER' | 'CAVE' | 'STANDARD',
+	battleRound: number,
+	location: BattleLocation,
 	caughtBefore?: boolean
 ): boolean => {
 	//master ball always catches
@@ -43,9 +45,9 @@ export const determineCaptureSuccess = (
 	}
 	//max after 10 rounds
 	if (ball === 'timer-ball') {
-		ballfactor = Math.max(1.5, 0.5 + 0.1 * battleRounds);
+		ballfactor = Math.max(1.5, 0.5 + 0.1 * battleRound);
 	}
-	if (ball === 'quick-ball' && battleRounds === 1) {
+	if (ball === 'quick-ball' && battleRound === 1) {
 		ballfactor = 1.5;
 	}
 	if (

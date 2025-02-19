@@ -12,7 +12,7 @@ export const BattleLoader = ({
 	fightersPerSide,
 	inventory,
 }: {
-	leave: (caughtPokemon: BattlePokemon[]) => void;
+	leave: (caughtPokemon: BattlePokemon[], updatedInventory: Inventory) => void;
 	opponents: OwnedPokemon[];
 	team: OwnedPokemon[];
 	fightersPerSide: number;
