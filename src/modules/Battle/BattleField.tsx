@@ -69,11 +69,12 @@ export const BattleField = ({
 	const opponents = useMemo(() => getOpponentPokemon(pokemon), [pokemon]);
 	const team = useMemo(() => getPlayerPokemon(pokemon), [pokemon]);
 	const onFieldOpponents = useMemo(
-		() => opponents.filter((p) => !['BENCH', 'DEFEATED'].includes(p.status)),
+		() =>
+			opponents.filter((p) => p.status !== 'BENCH' && p.status !== 'FAINTED'),
 		[opponents]
 	);
 	const onFieldTeam = useMemo(
-		() => team.filter((p) => p.status === 'ONFIELD'),
+		() => team.filter((p) => p.status !== 'BENCH' && p.status !== 'FAINTED'),
 		[team]
 	);
 	const allOnField = useMemo(

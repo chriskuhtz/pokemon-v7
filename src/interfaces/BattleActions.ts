@@ -8,6 +8,7 @@ export type BattleAttack = {
 	type: 'BattleAttack';
 	round: number;
 	targetId: string;
+	multiHits: number;
 };
 export interface CatchProcessInfo {
 	ball: PokeballType;
