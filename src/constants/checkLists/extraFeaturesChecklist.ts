@@ -143,4 +143,5 @@ export const extraFeatureCheckList: {
 	{ name: 'cant select fainted pokemon in line up' },
 	{ name: 'keyboard control on refill screen' },
 	{ name: 'prettier refill screen' },
+	{ name: 'filter action by controlled' },
 ];
