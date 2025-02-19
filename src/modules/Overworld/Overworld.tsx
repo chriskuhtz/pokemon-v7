@@ -240,8 +240,17 @@ export const Overworld = ({
 	return (
 		<div>
 			<IoMdMenu
-				style={{ position: 'absolute', top: '1.5rem', left: '1rem', zIndex: 1 }}
-				onClick={() => openMenu(stepsTaken)}
+				style={{
+					position: 'absolute',
+					top: '1.5rem',
+					left: '1rem',
+					zIndex: 9000,
+				}}
+				onClick={(e) => {
+					e.stopPropagation();
+					e.preventDefault();
+					openMenu(stepsTaken);
+				}}
 				size={baseSize / 2}
 			/>
 			<div
