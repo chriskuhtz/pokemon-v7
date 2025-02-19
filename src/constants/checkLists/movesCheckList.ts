@@ -17,14 +17,17 @@ export const movesCheckList: {
 	{
 		name: 'double-slap',
 		url: 'https://pokeapi.co/api/v2/move/3/',
+		handled: true,
 	},
 	{
 		name: 'comet-punch',
 		url: 'https://pokeapi.co/api/v2/move/4/',
+		handled: true,
 	},
 	{
 		name: 'mega-punch',
 		url: 'https://pokeapi.co/api/v2/move/5/',
+		handled: true,
 	},
 	{
 		name: 'pay-day',
@@ -1255,6 +1258,6 @@ export const movesCheckList: {
 	{ name: 'shadow-sky', url: 'https://pokeapi.co/api/v2/move/10018/' },
 ];
 
-export const handledMoves = ['pound', 'karate-chop'] as const;
+export const handledMoves = ['pound', 'karate-chop', 'double-slap'] as const;
 
 export type MoveName = (typeof handledMoves)[number];

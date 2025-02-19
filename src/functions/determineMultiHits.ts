@@ -1,15 +1,13 @@
-import { BattleAttack } from '../interfaces/BattleActions';
+import { MoveDto } from '../interfaces/Move';
 import { getMiddleOfThree } from './getMiddleOfThree';
 
-export const determineMultiHits = (
-	attack: BattleAttack
-): number | undefined => {
-	if (!attack.data.meta.min_hits || !attack.data.meta.max_hits) {
-		return;
+export const determineMultiHits = (attack: MoveDto): number => {
+	if (!attack.meta.min_hits || !attack.meta.max_hits) {
+		return 0;
 	}
 	const random = Math.random();
 
-	let res = attack.data.meta.min_hits;
+	let res = attack.meta.min_hits;
 
 	if (random > 7 / 8) {
 		res = 5;
@@ -21,9 +19,5 @@ export const determineMultiHits = (
 		res = 3;
 	}
 
-	return getMiddleOfThree([
-		attack.data.meta.min_hits,
-		res,
-		attack.data.meta.max_hits,
-	]);
+	return getMiddleOfThree([attack.meta.min_hits, res, attack.meta.max_hits]);
 };

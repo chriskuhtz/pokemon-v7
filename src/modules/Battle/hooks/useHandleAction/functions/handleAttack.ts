@@ -45,9 +45,18 @@ export const handleAttack = ({
 	//updated Attacker
 	let updatedAttacker = { ...attacker };
 	//1. update moveQueue
-	updatedAttacker = { ...updatedAttacker, moveQueue: [] };
-	//2. reduce pp
-	updatedAttacker = reduceMovePP(updatedAttacker, move.name);
+	if (move.multiHits > 0) {
+		addMessage('Multi hit!');
+		updatedAttacker = {
+			...updatedAttacker,
+			moveQueue: [{ ...move, multiHits: move.multiHits - 1 }],
+		};
+	} else updatedAttacker = { ...updatedAttacker, moveQueue: [] };
+
+	//2. reduce pp after all multihits are done
+	if (move.multiHits === 0) {
+		updatedAttacker = reduceMovePP(updatedAttacker, move.name);
+	}
 
 	//updated Target
 	let updatedTarget = { ...target };

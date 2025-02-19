@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { MoveName } from '../../../constants/checkLists/movesCheckList';
+import { determineMultiHits } from '../../../functions/determineMultiHits';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { isPokeball } from '../../../interfaces/Item';
 import { ChooseActionPayload } from '../BattleField';
@@ -79,6 +80,7 @@ export const useChooseAction = (
 									name: actionName as MoveName,
 									round: battleRound,
 									targetId,
+									multiHits: determineMultiHits(move.data),
 								},
 							],
 						};
