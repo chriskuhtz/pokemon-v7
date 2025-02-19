@@ -28,7 +28,15 @@ export function EnemyLane({
 					<BattlePokemonInfo pokemon={t} key={t.id} />
 				))}
 			</div>
-			<div style={{ display: 'flex', alignItems: 'center' }}>
+			<div
+				style={{
+					display: 'flex',
+					alignItems: 'center',
+					backgroundImage: "url('/battlePlatforms/grass.png')",
+					backgroundSize: '100% 100%',
+					backgroundRepeat: 'no-repeat',
+				}}
+			>
 				{onFieldOpponents.map((t) => {
 					if (t.status === 'CAUGHT') {
 						return (

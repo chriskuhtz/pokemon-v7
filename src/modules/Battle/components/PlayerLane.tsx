@@ -12,10 +12,19 @@ export function PlayerLane(props: { onFieldTeam: BattlePokemon[] }) {
 				alignItems: 'center',
 			}}
 		>
-			<div>
+			<div
+				style={{
+					display: 'flex',
+					alignItems: 'center',
+					backgroundImage: "url('/battlePlatforms/grass.png')",
+					backgroundSize: '100% 100%',
+					backgroundRepeat: 'no-repeat',
+				}}
+			>
 				{props.onFieldTeam.map((t) => (
 					<img
 						height={baseSize * 2}
+						style={{ marginBottom: '1rem' }}
 						key={t.id}
 						src={getPokemonSprite(t.dexId, 'back')}
 					/>
