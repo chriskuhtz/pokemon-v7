@@ -121,4 +121,5 @@ export const extraFeatureCheckList: {
 	{ name: 'Uncollected Quests Badge on Menu Button' },
 	{ name: 'preselect pokemon on line up' },
 	{ name: 'level badges in storage' },
+	{ name: 'only consider occupants in view (+2 or 3 fields) when redrawing' },
 ];

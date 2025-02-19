@@ -37,6 +37,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		approachDirection: 'UP',
 	},
 	//Trainers start at 200000
+
 	//Merchants start at 300000,
 	300001: {
 		type: 'MERCHANT',
@@ -65,5 +66,16 @@ export const occupantsRecord: Record<number, Occupant> = {
 		x: 6,
 		y: 1,
 		map: 'testMap',
+	},
+	//NPCs start at 600000
+	600001: {
+		type: 'NPC',
+		x: 5,
+		y: 7,
+		map: 'testMap',
+		orientation: 'UP',
+		dialogue: ["i'll try spinning", 'thats a good trick'],
+		sprite: '060',
+		rotating: true,
 	},
 };
