@@ -87,6 +87,7 @@ export const itemsCheckList: {
 	{
 		name: 'potion',
 		url: 'https://pokeapi.co/api/v2/item/17/',
+		todos: ['inbattle', 'persist damage after fight'],
 	},
 	{
 		name: 'antidote',

@@ -42,7 +42,8 @@ export const BattleField = ({
 	leave: (
 		caughtPokemon: BattlePokemon[],
 		updatedInventory: Inventory,
-		scatteredCoins: number
+		scatteredCoins: number,
+		team: BattlePokemon[]
 	) => void;
 	initOpponents: BattlePokemon[];
 	initTeam: BattlePokemon[];
@@ -157,7 +158,7 @@ export const BattleField = ({
 		pokemon,
 		setPokemon,
 		addMessage,
-		(caught) => leave(caught, battleInventory, scatteredCoins),
+		(caught) => leave(caught, battleInventory, scatteredCoins, team),
 		battleWeather,
 		addMultipleMessages,
 		battleRound,
@@ -286,7 +287,8 @@ export const BattleField = ({
 					leave(
 						pokemon.filter((p) => p.status === 'CAUGHT'),
 						battleInventory,
-						scatteredCoins
+						scatteredCoins,
+						team
 					),
 			});
 		}
@@ -298,7 +300,8 @@ export const BattleField = ({
 					leave(
 						pokemon.filter((p) => p.status === 'CAUGHT'),
 						battleInventory,
-						scatteredCoins
+						scatteredCoins,
+						team
 					),
 			});
 		}
@@ -311,6 +314,7 @@ export const BattleField = ({
 		leave,
 		pokemon,
 		scatteredCoins,
+		team,
 	]);
 
 	if (battleStep === 'REFILLING') {
