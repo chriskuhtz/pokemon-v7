@@ -6,8 +6,12 @@ import { WeatherType } from '../../interfaces/Weather';
 export const WeatherIcon = ({ weather }: { weather?: WeatherType }) => {
 	return (
 		<>
-			{weather === 'rain' && <FaCloudRain size={baseSize / 2} />}
-			{weather === 'sandstorm' && <WiSandstorm size={baseSize / 2} />}
+			{weather === 'rain' ||
+				(weather === 'rain_effectless' && <FaCloudRain size={baseSize / 2} />)}
+			{weather === 'sandstorm' ||
+				(weather === 'sandstorm_effectless' && (
+					<WiSandstorm size={baseSize / 2} />
+				))}
 		</>
 	);
 };

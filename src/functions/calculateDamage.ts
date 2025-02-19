@@ -12,10 +12,11 @@ import { determineTypeFactor } from './determineTypeFactor';
 import { determineWeatherFactor } from './determineWeatherFactor';
 import { getMiddleOfThree } from './getMiddleOfThree';
 
-export const DamageAbsorb: Partial<Record<AbilityName, PokemonType>> = {
-	'volt-absorb': 'electric',
-	'water-absorb': 'water',
-};
+export const DamageAbsorbAbilityMap: Partial<Record<AbilityName, PokemonType>> =
+	{
+		'volt-absorb': 'electric',
+		'water-absorb': 'water',
+	};
 
 export const calculateDamage = (
 	attacker: BattlePokemon,
@@ -53,12 +54,11 @@ export const calculateDamage = (
 		return target.stats.hp;
 	}
 
-	const absorbAbility = DamageAbsorb[target.ability];
-
 	if (target.ability === 'flash-fire' && attack.data.type.name === 'fire') {
 		return 0;
 	}
 
+	const absorbAbility = DamageAbsorbAbilityMap[target.ability];
 	if (absorbAbility === attack.data.type.name) {
 		const res = Math.max(-Math.floor(target.stats.hp / 4), -target.damage);
 		if (addMessage && res < 0) {
