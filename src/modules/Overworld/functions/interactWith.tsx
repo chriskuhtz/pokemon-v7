@@ -98,6 +98,20 @@ export const interactWithFunction = ({
 		);
 		return;
 	}
+	if (data.type === 'NPC') {
+		changeOccupant(Number.parseInt(id), {
+			...data,
+			orientation: getOppositeDirection(playerLocation.orientation),
+			rotating: false,
+		});
+
+		data.dialogue.forEach((d) =>
+			addDialogue({
+				message: d,
+			})
+		);
+		return;
+	}
 
 	console.error('what is this occupant', occ);
 };

@@ -54,6 +54,16 @@ export interface OverworldNurse {
 	dialogue: string[];
 	sprite: '115';
 }
+export interface OverworldNpc {
+	type: 'NPC';
+	x: number;
+	y: number;
+	orientation: CharacterOrientation;
+	map: MapId;
+	dialogue: string[];
+	sprite: string;
+	rotating?: boolean;
+}
 export interface OverworldBush {
 	type: 'BUSH';
 	x: number;
@@ -66,7 +76,8 @@ export type Occupant =
 	| OverworldPC
 	| OverworldMerchant
 	| OverworldNurse
-	| OverworldBush;
+	| OverworldBush
+	| OverworldNpc;
 
 export interface OverworldEncounter {
 	dexId: number;
