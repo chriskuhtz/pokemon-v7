@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
 import { applyOnBattleEnterAbility } from '../../functions/applyOnBattleEnterAbility';
+import { BattleLocation } from '../../functions/determineCaptureSuccess';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
@@ -42,10 +43,11 @@ export const BattleField = ({
 	fightersPerSide: number;
 	inventory: Inventory;
 }) => {
-	const { latestMessage, addMessage, addMultipleMessages } =
+	const { latestMessage, addMessage, addMultipleMessages, interjectMessage } =
 		useBattleMessages();
 	const [battleRound, setBattleRound] = useState<number>(0);
 	const [battleWeather, setBattleWeather] = useState<WeatherType | undefined>();
+	const [battleLocation] = useState<BattleLocation>('STANDARD');
 	const [battleStep, setBattleStep] = useState<
 		'BATTLE_ENTRY' | 'COLLECTING' | 'EXECUTING' | 'REFILLING'
 	>('BATTLE_ENTRY');
@@ -134,7 +136,10 @@ export const BattleField = ({
 		addMessage,
 		leave,
 		battleWeather,
-		addMultipleMessages
+		addMultipleMessages,
+		battleRound,
+		battleLocation,
+		interjectMessage
 	);
 	const putPokemonOnField = useCallback(
 		(id: string) =>

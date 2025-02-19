@@ -1,4 +1,5 @@
 import { useCallback } from 'react';
+import { BattleLocation } from '../../../../functions/determineCaptureSuccess';
 import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../../interfaces/Weather';
 import { BattleMessage } from '../../BattleField';
@@ -11,7 +12,10 @@ export const useHandleAction = (
 	addMessage: (x: BattleMessage) => void,
 	leave: (x: BattlePokemon[]) => void,
 	battleWeather: WeatherType | undefined,
-	addMultipleMessages: (x: BattleMessage[]) => void
+	addMultipleMessages: (x: BattleMessage[]) => void,
+	battleRound: number,
+	battleLocation: BattleLocation,
+	interjectMessage: (x: BattleMessage) => void
 ) => {
 	return useCallback(
 		(attacker: BattlePokemon) => {
@@ -40,7 +44,16 @@ export const useHandleAction = (
 			}
 
 			if (move.type === 'CatchProcessInfo') {
-				handleCatch(pokemon, attacker, setPokemon, move, addMultipleMessages);
+				handleCatch(
+					pokemon,
+					attacker,
+					setPokemon,
+					move,
+					addMultipleMessages,
+					battleRound,
+					battleLocation,
+					interjectMessage
+				);
 			}
 
 			if (move.type === 'BattleAttack') {
@@ -55,6 +68,16 @@ export const useHandleAction = (
 				return;
 			}
 		},
-		[addMessage, addMultipleMessages, battleWeather, leave, pokemon, setPokemon]
+		[
+			addMessage,
+			addMultipleMessages,
+			battleLocation,
+			battleRound,
+			battleWeather,
+			interjectMessage,
+			leave,
+			pokemon,
+			setPokemon,
+		]
 	);
 };

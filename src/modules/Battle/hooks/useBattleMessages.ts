@@ -10,6 +10,9 @@ export const useBattleMessages = () => {
 	const addMultipleMessages = useCallback((newMessages: BattleMessage[]) => {
 		setMessages((messages) => [...messages, ...newMessages]);
 	}, []);
+	const interjectMessage = useCallback((message: BattleMessage) => {
+		setMessages((messages) => [message, ...messages]);
+	}, []);
 	useEffect(() => {
 		if (messages.length === 0) {
 			return;
@@ -33,5 +36,5 @@ export const useBattleMessages = () => {
 		[messages]
 	);
 
-	return { latestMessage, addMessage, addMultipleMessages };
+	return { latestMessage, addMessage, addMultipleMessages, interjectMessage };
 };

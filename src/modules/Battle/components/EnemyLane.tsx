@@ -47,7 +47,12 @@ export function EnemyLane({
 					}
 					if (t.status === 'CATCHING_1') {
 						return (
-							<img height={baseSize} key={t.id} src={getItemUrl(t.ball)} />
+							<img
+								style={{ transform: 'translate(0, -2rem)' }}
+								height={baseSize}
+								key={t.id}
+								src={getItemUrl(t.ball)}
+							/>
 						);
 					}
 					if (t.status === 'CATCHING_2') {

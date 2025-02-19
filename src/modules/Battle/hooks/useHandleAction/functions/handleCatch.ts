@@ -1,3 +1,7 @@
+import {
+	BattleLocation,
+	determineCaptureSuccess,
+} from '../../../../../functions/determineCaptureSuccess';
 import { CatchProcessInfo } from '../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
 import { BattleMessage } from '../../../BattleField';
@@ -7,14 +11,81 @@ export const handleCatch = (
 	attacker: BattlePokemon,
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
 	move: CatchProcessInfo,
-	addMultipleMessages: (x: BattleMessage[]) => void
+	addMultipleMessages: (x: BattleMessage[]) => void,
+	battleRound: number,
+	battleLocation: BattleLocation,
+	interjectMessage: (x: BattleMessage) => void
 ) => {
 	const target = pokemon.find(
 		(p) => p.id === move.targetId && p.status === 'ONFIELD'
 	);
 	if (!target) {
-		throw new Error('ther is no target to catch');
+		addMultipleMessages([
+			{
+				message: `You throw a ${move.ball}`,
+			},
+			{
+				message: `but there is no target`,
+				onRemoval: () =>
+					setPokemon((pokemon) =>
+						pokemon.map((p) => {
+							if (p.id === attacker.id) {
+								return { ...p, moveQueue: [] };
+							}
+
+							return p;
+						})
+					),
+			},
+		]);
+
+		return;
 	}
+
+	const getCatchStepMessage = (step: 2 | 3): BattleMessage => ({
+		message: Array.from({ length: step })
+			.map(() => 'wiggle')
+			.join('...'),
+		onRemoval: () =>
+			setPokemon((pokemon) =>
+				pokemon.map((p) => {
+					if (p.id === attacker.id) {
+						return { ...p, moveQueue: [] };
+					}
+					if (p.id === target.id) {
+						//TODO: make this a BattlePokemon property
+						const caughtBefore = false;
+						const continueProcess = determineCaptureSuccess(
+							move.ball,
+							target,
+							battleRound,
+							battleLocation,
+							caughtBefore
+						);
+
+						if (continueProcess) {
+							return {
+								...p,
+
+								status: `CATCHING_${step}`,
+								ball: move.ball,
+							};
+						} else
+							interjectMessage({
+								message: `${target.data.name} broke free`,
+								clearStackOnRemoval: true,
+							});
+						return {
+							...p,
+							status: 'ONFIELD',
+						};
+					}
+
+					return p;
+				})
+			),
+	});
+
 	addMultipleMessages([
 		{
 			message: `You throw a ${move.ball} at ${target.data.name}`,
@@ -27,7 +98,6 @@ export const handleCatch = (
 						if (p.id === target.id) {
 							return {
 								...p,
-								moveQueue: [],
 								status: 'CATCHING_1',
 								ball: move.ball,
 							};
@@ -37,48 +107,8 @@ export const handleCatch = (
 					})
 				),
 		},
-		{
-			message: 'wiggle',
-			onRemoval: () =>
-				setPokemon((pokemon) =>
-					pokemon.map((p) => {
-						if (p.id === attacker.id) {
-							return { ...p, moveQueue: [] };
-						}
-						if (p.id === target.id) {
-							return {
-								...p,
-								moveQueue: [],
-								status: 'CATCHING_2',
-								ball: move.ball,
-							};
-						}
-
-						return p;
-					})
-				),
-		},
-		{
-			message: 'woggle',
-			onRemoval: () =>
-				setPokemon((pokemon) =>
-					pokemon.map((p) => {
-						if (p.id === attacker.id) {
-							return { ...p, moveQueue: [] };
-						}
-						if (p.id === target.id) {
-							return {
-								...p,
-								moveQueue: [],
-								status: 'CATCHING_3',
-								ball: move.ball,
-							};
-						}
-
-						return p;
-					})
-				),
-		},
+		getCatchStepMessage(2),
+		getCatchStepMessage(3),
 		{
 			message: `${target.data.name} was caught`,
 			onRemoval: () =>
