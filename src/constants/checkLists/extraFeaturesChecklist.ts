@@ -42,7 +42,6 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'approach directions (PC only from front', handled: true },
-	{ name: 'overworld background/border of map' },
 	{ name: 'disable weird scroll', handled: true },
 	{ name: 'rotating npcs' },
 	{ name: 'walking npcs' },
@@ -51,8 +50,6 @@ export const extraFeatureCheckList: {
 	{ name: 'Battle Attack animation' },
 	{ name: 'battle backgrounds' },
 	{ name: 'hpbar colors' },
-	{ name: 'remove duplications in battleStep functions' },
-	{ name: 'Banner slant either left or right' },
 	{ name: 'choose random moves for opponent' },
 	{
 		name: 'only factor volt-absorb etc into recommendation after it has been revealed',
@@ -70,10 +67,6 @@ export const extraFeatureCheckList: {
 	{ name: 'play pokecenter sound on visit' },
 	{ name: 'fix toast and Banner position' },
 	{ name: 'Opponents can use items' },
-	{ name: "fix 'what is this' error for status moves" },
-	{
-		name: 'dont give Battle the whole saveFile (n pokemon) and only patch on return',
-	},
 	{ name: 'Properly determine held item from options' },
 	{
 		name: 'setting: randomize held items',
@@ -85,7 +78,6 @@ export const extraFeatureCheckList: {
 	{ name: 'take/give heldItem' },
 	{ name: 'prettier team overview' },
 	{ name: 'filter in battle items by if someone can benefit' },
-	{ name: 'only pokemon that havent moved can flinch' },
 	{ name: 'receive quests from npcs' },
 	{ name: 'poison step damage' },
 	{ name: 'fly outside of battle' },
@@ -123,6 +115,7 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'setting: instant mode' },
 	{ name: 'flex display on Line up Selection' },
+	{ name: 'Team overview on overworld' },
 	{ name: 'auto choose opponent moves' },
 	{ name: 'go through functions, delete unused' },
 ];
