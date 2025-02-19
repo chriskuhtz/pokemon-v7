@@ -2,18 +2,15 @@ import { Occupant, OverworldMap } from '../interfaces/OverworldMap';
 
 export const assembleMap = (
 	map: OverworldMap,
-	collectedItems: number[],
-	cutBushes: number[],
+
 	statefulOccupantsRecord: Record<number, Occupant>
 ): OverworldMap => {
-	const filteredOccupants = [...map.occupants].filter(
-		(o) =>
-			!collectedItems.some((c) => c === o) && !cutBushes.some((c) => c === o)
+	const occupantKeys = Object.keys(statefulOccupantsRecord).map((key) =>
+		Number.parseInt(key)
 	);
-
 	const updatedTileMap = map.tileMap.map((row, rowIndex) => {
 		return row.map((c, columnIndex) =>
-			filteredOccupants.some((occupantId) => {
+			occupantKeys.some((occupantId) => {
 				const o = statefulOccupantsRecord[occupantId];
 
 				return (
@@ -28,5 +25,9 @@ export const assembleMap = (
 		);
 	});
 
-	return { ...map, tileMap: updatedTileMap, occupants: filteredOccupants };
+	return {
+		...map,
+		tileMap: updatedTileMap,
+		occupants: occupantKeys,
+	};
 };

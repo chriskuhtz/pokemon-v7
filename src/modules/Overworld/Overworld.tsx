@@ -84,15 +84,18 @@ export const Overworld = ({
 		Record<number, Occupant>
 	>({});
 	useEffect(() => {
+		const filteredOccupants = [...map.occupants].filter(
+			(o) =>
+				!collectedItems.some((c) => c === o) && !cutBushes.some((c) => c === o)
+		);
 		setStatefulOccupants(
 			Object.fromEntries(
-				Object.entries(occupantsRecord).filter(
-					([id, data]) =>
-						data.map === map.id && map.occupants.includes(Number.parseInt(id))
+				Object.entries(occupantsRecord).filter(([id]) =>
+					filteredOccupants.includes(Number.parseInt(id))
 				)
 			)
 		);
-	}, [map]);
+	}, [collectedItems, cutBushes, map]);
 	const changeOccupant = useCallback(
 		(id: number, updatedOccupant: Occupant) => {
 			setStatefulOccupants((statefulOccupants) => {
@@ -106,8 +109,8 @@ export const Overworld = ({
 	);
 
 	const assembledMap = useMemo(
-		() => assembleMap(map, collectedItems, cutBushes, statefulOccupants),
-		[map, collectedItems, cutBushes, statefulOccupants]
+		() => assembleMap(map, statefulOccupants),
+		[map, statefulOccupants]
 	);
 
 	const valid = useMemo(() => isValidOverWorldMap(map), [map]);
