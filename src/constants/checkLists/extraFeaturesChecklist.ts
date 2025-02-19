@@ -51,7 +51,6 @@ export const extraFeatureCheckList: {
 	{ name: 'Battle Attack animation' },
 	{ name: 'battle backgrounds' },
 	{ name: 'hpbar colors' },
-	{ name: 'remove duplications in battleStep functions' },
 	{ name: 'Banner slant either left or right' },
 	{ name: 'choose random moves for opponent' },
 	{
@@ -70,10 +69,6 @@ export const extraFeatureCheckList: {
 	{ name: 'play pokecenter sound on visit' },
 	{ name: 'fix toast and Banner position' },
 	{ name: 'Opponents can use items' },
-	{ name: "fix 'what is this' error for status moves" },
-	{
-		name: 'dont give Battle the whole saveFile (n pokemon) and only patch on return',
-	},
 	{ name: 'Properly determine held item from options' },
 	{
 		name: 'setting: randomize held items',
@@ -85,7 +80,6 @@ export const extraFeatureCheckList: {
 	{ name: 'take/give heldItem' },
 	{ name: 'prettier team overview' },
 	{ name: 'filter in battle items by if someone can benefit' },
-	{ name: 'only pokemon that havent moved can flinch' },
 	{ name: 'receive quests from npcs' },
 	{ name: 'poison step damage' },
 	{ name: 'fly outside of battle' },
