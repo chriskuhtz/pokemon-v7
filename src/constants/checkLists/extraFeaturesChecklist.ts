@@ -118,4 +118,5 @@ export const extraFeatureCheckList: {
 	{ name: 'Team overview on overworld' },
 	{ name: 'auto choose opponent moves' },
 	{ name: 'go through functions, delete unused' },
+	{ name: 'Uncollected Quests Badge on Menu Button' },
 ];
