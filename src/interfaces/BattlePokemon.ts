@@ -29,6 +29,7 @@ export interface BattlePokemon extends OwnedPokemon {
 		| 'CAUGHT'
 		| 'FAINTED';
 	roundsInBattle: number;
+	caughtBefore: boolean;
 }
 
 export function isBattlePokemon(

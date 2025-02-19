@@ -7,8 +7,10 @@ import { PokemonData } from '../interfaces/PokemonData';
 import { PokemonSpeciesData } from '../interfaces/PokemonSpeciesData';
 import { EmptyStatObject } from '../interfaces/StatObject';
 
-export const useGetBattleTeam = (initTeam: OwnedPokemon[]) => {
-	return useFetch(() =>
+export const useGetBattleTeam = (
+	initTeam: (OwnedPokemon & { caughtBefore: boolean })[]
+) => {
+	return useFetch<BattlePokemon[]>(() =>
 		Promise.all(
 			initTeam.map(async (pokemon) => {
 				const { dexId, firstMove, secondMove, thirdMove, fourthMove } = pokemon;

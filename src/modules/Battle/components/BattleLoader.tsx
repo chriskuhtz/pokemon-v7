@@ -11,15 +11,24 @@ export const BattleLoader = ({
 	team,
 	fightersPerSide,
 	inventory,
+	ownedPokemonDexIds,
 }: {
 	leave: (caughtPokemon: BattlePokemon[], updatedInventory: Inventory) => void;
 	opponents: OwnedPokemon[];
 	team: OwnedPokemon[];
 	fightersPerSide: number;
 	inventory: Inventory;
+	ownedPokemonDexIds: number[];
 }): JSX.Element => {
-	const { res: battleOpponents } = useGetBattleTeam(opponents);
-	const { res: battleTeam } = useGetBattleTeam(team);
+	const { res: battleOpponents } = useGetBattleTeam(
+		opponents.map((o) => ({
+			...o,
+			caughtBefore: ownedPokemonDexIds.includes(o.dexId),
+		}))
+	);
+	const { res: battleTeam } = useGetBattleTeam(
+		team.map((t) => ({ ...t, caughtBefore: true }))
+	);
 
 	if (!battleOpponents || !battleTeam) {
 		return <LoadingScreen />;
