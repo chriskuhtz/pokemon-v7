@@ -8,6 +8,7 @@ import { handleFlinching } from '../../../../../functions/handleFlinching';
 import { isKO } from '../../../../../functions/isKo';
 import { reduceMovePP } from '../../../../../functions/reduceMovePP';
 import {
+	PARA_CHANCE,
 	STATIC_CHANCE,
 	UNFREEZE_CHANCE,
 } from '../../../../../interfaces/Ailment';
@@ -19,6 +20,7 @@ import { handleFainting } from '../../../functions/handleFainting';
 import { handleFrozen } from '../../../functions/handleFrozen';
 import { handleMiss } from '../../../functions/handleMiss';
 import { handleNoTarget } from '../../../functions/handleNoTarget';
+import { handleParalyzed } from '../../../functions/handleParalyzed';
 
 export const handleAttack = ({
 	attacker,
@@ -53,6 +55,13 @@ export const handleAttack = ({
 			handleFrozen(attacker, setPokemon, addMessage);
 			return;
 		}
+	}
+	if (
+		updatedAttacker.primaryAilment?.type === 'paralysis' &&
+		Math.random() <= PARA_CHANCE
+	) {
+		handleParalyzed(attacker, setPokemon, addMessage);
+		return;
 	}
 
 	if (!target) {
