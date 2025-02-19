@@ -127,4 +127,5 @@ export const extraFeatureCheckList: {
 		name: 'stop npcs from walking through player',
 	},
 	{ name: 'prevent npcs from changing their path after player interaction' },
+	{ name: 'go to nurse after loss' },
 ];
