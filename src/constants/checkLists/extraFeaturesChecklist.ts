@@ -141,4 +141,6 @@ export const extraFeatureCheckList: {
 	{ name: 'assign random nature to encounters' },
 	{ name: 'Collapsed/detailed Team View' },
 	{ name: 'cant select fainted pokemon in line up' },
+	{ name: 'keyboard control on refill screen' },
+	{ name: 'prettier refill screen' },
 ];
