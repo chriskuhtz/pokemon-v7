@@ -17,6 +17,7 @@ export const abilityCheckList: {
 	{
 		name: 'speed-boost',
 		url: 'https://pokeapi.co/api/v2/ability/3/',
+		todos: ['make speed meaningful'],
 	},
 	{
 		name: 'battle-armor',
@@ -479,6 +480,11 @@ export const abilityCheckList: {
 	{ name: 'shield', url: 'https://pokeapi.co/api/v2/ability/10060/' },
 ];
 
-export const abilityNames = ['stench', 'drizzle'] as const;
+export const abilityNames = [
+	'stench',
+	'drizzle',
+	'speed-boost',
+	'limber',
+] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
