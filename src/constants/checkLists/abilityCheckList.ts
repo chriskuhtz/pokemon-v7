@@ -47,6 +47,7 @@ export const abilityCheckList: {
 	{
 		name: 'static',
 		url: 'https://pokeapi.co/api/v2/ability/9/',
+		handled: true,
 	},
 	{
 		name: 'volt-absorb',
@@ -496,6 +497,7 @@ export const abilityNames = [
 	'sturdy',
 	'damp',
 	'sand-veil',
+	'static',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

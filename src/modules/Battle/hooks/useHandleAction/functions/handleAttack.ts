@@ -1,11 +1,17 @@
+import { contactMoves } from '../../../../../constants/contactMoves';
 import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/selfDestructingMoves';
 import { applyAttackAilmentsToPokemon } from '../../../../../functions/applyAttackAilmentsToPokemon';
+import { applyPrimaryAilmentToPokemon } from '../../../../../functions/applyPrimaryAilmentToPokemon';
 import { calculateDamage } from '../../../../../functions/calculateDamage';
 import { determineMiss } from '../../../../../functions/determineMiss';
 import { handleFlinching } from '../../../../../functions/handleFlinching';
 import { isKO } from '../../../../../functions/isKo';
 import { reduceMovePP } from '../../../../../functions/reduceMovePP';
-import { UNFREEZE_CHANCE } from '../../../../../interfaces/Ailment';
+import {
+	PARA_CHANCE,
+	STATIC_CHANCE,
+	UNFREEZE_CHANCE,
+} from '../../../../../interfaces/Ailment';
 import { BattleAttack } from '../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../../../interfaces/Weather';
@@ -14,6 +20,7 @@ import { handleFainting } from '../../../functions/handleFainting';
 import { handleFrozen } from '../../../functions/handleFrozen';
 import { handleMiss } from '../../../functions/handleMiss';
 import { handleNoTarget } from '../../../functions/handleNoTarget';
+import { handleParalyzed } from '../../../functions/handleParalyzed';
 
 export const handleAttack = ({
 	attacker,
@@ -48,6 +55,13 @@ export const handleAttack = ({
 			handleFrozen(attacker, setPokemon, addMessage);
 			return;
 		}
+	}
+	if (
+		updatedAttacker.primaryAilment?.type === 'paralysis' &&
+		Math.random() <= PARA_CHANCE
+	) {
+		handleParalyzed(attacker, setPokemon, addMessage);
+		return;
 	}
 
 	if (!target) {
@@ -96,6 +110,19 @@ export const handleAttack = ({
 	//2. reduce pp after all multihits are done
 	if (move.multiHits === 0) {
 		updatedAttacker = reduceMovePP(updatedAttacker, move.name);
+	}
+	//3. check for static
+	if (
+		target.ability === 'static' &&
+		contactMoves.includes(move.name) &&
+		Math.random() < STATIC_CHANCE
+	) {
+		updatedAttacker = applyPrimaryAilmentToPokemon(
+			updatedAttacker,
+			'paralysis',
+			addMessage,
+			`by ${target.data.name}'s static`
+		);
 	}
 
 	//updated Target
