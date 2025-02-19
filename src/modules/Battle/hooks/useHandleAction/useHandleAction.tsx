@@ -3,13 +3,15 @@ import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../../interfaces/Weather';
 import { BattleMessage } from '../../BattleField';
 import { handleAttack } from './functions/handleAttack';
+import { handleCatch } from './functions/handleCatch';
 
 export const useHandleAction = (
 	pokemon: BattlePokemon[],
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
 	addMessage: (x: BattleMessage) => void,
 	leave: (x: BattlePokemon[]) => void,
-	battleWeather: WeatherType | undefined
+	battleWeather: WeatherType | undefined,
+	addMultipleMessages: (x: BattleMessage[]) => void
 ) => {
 	return useCallback(
 		(attacker: BattlePokemon) => {
@@ -38,31 +40,7 @@ export const useHandleAction = (
 			}
 
 			if (move.type === 'CatchProcessInfo') {
-				const target = pokemon.find(
-					(p) => p.id === move.targetId && p.status === 'ONFIELD'
-				);
-				if (!target) {
-					throw new Error('ther is no target to catch');
-				}
-				addMessage({
-					message: `You throw a ${move.ball} at ${target.data.name}`,
-				});
-				setPokemon((pokemon) =>
-					pokemon.map((p) => {
-						if (p.id === attacker.id) {
-							return { ...p, moveQueue: [] };
-						}
-						if (p.id === target.id) {
-							addMessage({
-								message: `${target.data.name} was caught`,
-							});
-							return { ...p, moveQueue: [], status: 'CAUGHT', ball: move.ball };
-						}
-
-						return p;
-					})
-				);
-				return;
+				handleCatch(pokemon, attacker, setPokemon, move, addMultipleMessages);
 			}
 
 			if (move.type === 'BattleAttack') {
@@ -77,6 +55,6 @@ export const useHandleAction = (
 				return;
 			}
 		},
-		[addMessage, battleWeather, leave, pokemon, setPokemon]
+		[addMessage, addMultipleMessages, battleWeather, leave, pokemon, setPokemon]
 	);
 };
