@@ -209,7 +209,8 @@ export const Overworld = ({
 		setNextInput,
 		interactWith,
 		collectedItems,
-		dialogues.length > 0
+		dialogues.length > 0,
+		statefulOccupants
 	);
 	useKeyboardControl(
 		setNextInput,

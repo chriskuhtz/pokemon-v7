@@ -16,7 +16,8 @@ export const useClickTarget = (
 	>,
 	interactWith: (occ: [string, Occupant] | undefined) => void,
 	collectedItems: number[],
-	activeDialogue: boolean
+	activeDialogue: boolean,
+	statefulOccupantsRecord: Record<number, Occupant>
 ): React.Dispatch<
 	React.SetStateAction<
 		| {
@@ -41,7 +42,8 @@ export const useClickTarget = (
 		const occ = getNextFieldOccupant(
 			playerLocation.mapId,
 			collectedItems,
-			clickTarget
+			clickTarget,
+			statefulOccupantsRecord
 		);
 		if (occ && getOverworldDistance(clickTarget, playerLocation) === 1) {
 			interactWith(occ);
@@ -107,6 +109,7 @@ export const useClickTarget = (
 		interactWith,
 		playerLocation,
 		setNextInput,
+		statefulOccupantsRecord,
 	]);
 
 	return setClickTarget;
