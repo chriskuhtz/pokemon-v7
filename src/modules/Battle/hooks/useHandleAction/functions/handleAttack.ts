@@ -5,11 +5,13 @@ import { determineMiss } from '../../../../../functions/determineMiss';
 import { handleFlinching } from '../../../../../functions/handleFlinching';
 import { isKO } from '../../../../../functions/isKo';
 import { reduceMovePP } from '../../../../../functions/reduceMovePP';
+import { UNFREEZE_CHANCE } from '../../../../../interfaces/Ailment';
 import { BattleAttack } from '../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../../../interfaces/Weather';
 import { handleDampy } from '../../../functions/handleDampy';
 import { handleFainting } from '../../../functions/handleFainting';
+import { handleFrozen } from '../../../functions/handleFrozen';
 import { handleMiss } from '../../../functions/handleMiss';
 import { handleNoTarget } from '../../../functions/handleNoTarget';
 
@@ -35,6 +37,19 @@ export const handleAttack = ({
 	const target = pokemon.find(
 		(p) => p.id === move.targetId && p.status === 'ONFIELD'
 	);
+
+	let updatedAttacker = { ...attacker };
+	if (updatedAttacker.primaryAilment?.type === 'freeze') {
+		const defrosted = Math.random() <= UNFREEZE_CHANCE;
+		if (defrosted) {
+			addMessage(`${attacker.data.name} was thawed out`);
+			updatedAttacker.primaryAilment = undefined;
+		} else {
+			handleFrozen(attacker, setPokemon, addMessage);
+			return;
+		}
+	}
+
 	if (!target) {
 		handleNoTarget(attacker, move, setPokemon, addMessage);
 		return;
@@ -50,7 +65,7 @@ export const handleAttack = ({
 		handleMiss(attacker, move, setPokemon, addMessage);
 		return;
 	}
-	//TODO: handle self targeting
+	//TODO: handle self targeting, this currently leads to bugs bc. of mapping over pokemon and not applying target updates
 	if (target.id === attacker.id) {
 		console.warn('attacking yourself much?', attacker.data.name);
 	}
@@ -68,7 +83,7 @@ export const handleAttack = ({
 	//UPDATES
 
 	//updated Attacker
-	let updatedAttacker = { ...attacker };
+
 	//1. update moveQueue
 	if (move.multiHits > 0) {
 		addMessage('Multi hit!');
