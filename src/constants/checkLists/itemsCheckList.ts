@@ -87,46 +87,57 @@ export const itemsCheckList: {
 	{
 		name: 'potion',
 		url: 'https://pokeapi.co/api/v2/item/17/',
+		handled: true,
 	},
 	{
 		name: 'antidote',
 		url: 'https://pokeapi.co/api/v2/item/18/',
+		handled: true,
 	},
 	{
 		name: 'burn-heal',
 		url: 'https://pokeapi.co/api/v2/item/19/',
+		handled: true,
 	},
 	{
 		name: 'ice-heal',
 		url: 'https://pokeapi.co/api/v2/item/20/',
+		handled: true,
 	},
 	{
 		name: 'awakening',
 		url: 'https://pokeapi.co/api/v2/item/21/',
+		handled: true,
 	},
 	{
 		name: 'paralyze-heal',
 		url: 'https://pokeapi.co/api/v2/item/22/',
+		handled: true,
 	},
 	{
 		name: 'full-restore',
 		url: 'https://pokeapi.co/api/v2/item/23/',
+		handled: true,
 	},
 	{
 		name: 'max-potion',
 		url: 'https://pokeapi.co/api/v2/item/24/',
+		handled: true,
 	},
 	{
 		name: 'hyper-potion',
 		url: 'https://pokeapi.co/api/v2/item/25/',
+		handled: true,
 	},
 	{
 		name: 'super-potion',
 		url: 'https://pokeapi.co/api/v2/item/26/',
+		handled: true,
 	},
 	{
 		name: 'full-heal',
 		url: 'https://pokeapi.co/api/v2/item/27/',
+		handled: true,
 	},
 	{
 		name: 'revive',

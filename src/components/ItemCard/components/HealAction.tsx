@@ -21,6 +21,7 @@ export const HealAction = ({
 		<>
 			{open && healablePokemon.length > 0 && (
 				<Banner>
+					<strong onClick={() => setOpen(false)}>X</strong>
 					<h3>Which Pokemon should receive the {item}:</h3>
 					{healablePokemon.map((p) => (
 						<img

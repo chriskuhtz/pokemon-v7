@@ -127,6 +127,8 @@ export const extraFeatureCheckList: {
 		name: 'stop npcs from walking through player',
 	},
 	{ name: 'prevent npcs from changing their path after player interaction' },
+	{ name: 'go to nurse after loss' },
+	{ name: 'group selectable actions in battle' },
 	{ name: 'extract battlesteps' },
 	{ name: 'back button from target selection' },
 	{ name: 'burn shader' },
