@@ -54,7 +54,8 @@ export const BattleField = ({
 	const { latestMessage, addMessage, addMultipleMessages, interjectMessage } =
 		useBattleMessages();
 	const [battleRound, setBattleRound] = useState<number>(0);
-	const [battleWeather, setBattleWeather] = useState<WeatherType | undefined>();
+	const [bW, setBattleWeather] = useState<WeatherType | undefined>();
+
 	const [battleLocation] = useState<BattleLocation>('STANDARD');
 	const [scatteredCoins, setScatteredCoins] = useState<number>(0);
 	const scatterCoins = () =>
@@ -77,6 +78,7 @@ export const BattleField = ({
 	]);
 
 	//SELECTORS
+
 	const opponents = useMemo(() => getOpponentPokemon(pokemon), [pokemon]);
 	const team = useMemo(() => getPlayerPokemon(pokemon), [pokemon]);
 	const onFieldOpponents = useMemo(
@@ -92,6 +94,17 @@ export const BattleField = ({
 		() => [...onFieldTeam, ...onFieldOpponents],
 		[onFieldOpponents, onFieldTeam]
 	);
+	const battleWeather: WeatherType | undefined = useMemo(() => {
+		if (
+			bW &&
+			allOnField.some(
+				(p) => p.ability === 'air-lock' || p.ability === 'cloud-nine'
+			)
+		) {
+			return `${bW}_effectless` as WeatherType;
+		}
+		return bW;
+	}, [allOnField, bW]);
 	const nextPokemonWithoutMove = useMemo(() => {
 		if (battleStep !== 'COLLECTING') {
 			return;
@@ -186,6 +199,7 @@ export const BattleField = ({
 			),
 		[]
 	);
+
 	const handleDeploymentAbility = useCallback(
 		(p: BattlePokemon) => {
 			applyOnBattleEnterAbility({

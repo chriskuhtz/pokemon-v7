@@ -20,8 +20,8 @@ export const applyOnBattleEnterAbility = ({
 		addMessage({ message: `${user.data.name} made it rain with drizzle` });
 	}
 	if (
-		(currentWeather && user.ability === 'air-lock') ||
-		user.ability === 'cloud-nine'
+		currentWeather &&
+		(user.ability === 'air-lock' || user.ability === 'cloud-nine')
 	) {
 		addMessage({
 			message: `${user.data.name} negates all weather effects with ${user.ability}`,
