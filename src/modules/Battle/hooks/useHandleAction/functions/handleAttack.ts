@@ -1,4 +1,5 @@
 import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/selfDestructingMoves';
+import { applyAttackAilmentsToPokemon } from '../../../../../functions/applyAttackAilmentsToPokemon';
 import { calculateDamage } from '../../../../../functions/calculateDamage';
 import { handleFlinching } from '../../../../../functions/handleFlinching';
 import { isKO } from '../../../../../functions/isKo';
@@ -89,11 +90,13 @@ export const handleAttack = ({
 				addMessage
 			),
 	};
-	//2. check for fainting
+	//2. apply ailments
+	updatedTarget = applyAttackAilmentsToPokemon(updatedTarget, move, addMessage);
+	//3. check for fainting
 	if (isKO(updatedTarget)) {
 		updatedTarget = handleFainting(updatedTarget, addMessage);
 	}
-	//3. check for flinch
+	//4. check for flinch
 	if (!isKO(updatedTarget)) {
 		updatedTarget = handleFlinching(
 			updatedAttacker,

@@ -1,4 +1,3 @@
-import { AddToastFunction } from '../hooks/useToasts';
 import {
 	isPrimaryAilment,
 	isSecondaryAilment,
@@ -13,7 +12,7 @@ import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon
 export const applyAttackAilmentsToPokemon = (
 	pokemon: BattlePokemon,
 	attack: BattleAttack,
-	dispatchToast: AddToastFunction
+	addMessage: (x: string) => void
 ): BattlePokemon => {
 	if (
 		//shield dust prevents all side effects
@@ -30,14 +29,14 @@ export const applyAttackAilmentsToPokemon = (
 			return applyPrimaryAilmentToPokemon(
 				pokemon,
 				ailment as PrimaryAilment['type'],
-				dispatchToast
+				addMessage
 			);
 		}
 		if (isSecondaryAilment({ type: ailment })) {
 			return applySecondaryAilmentToPokemon(
 				pokemon,
 				ailment as SecondaryAilment['type'],
-				dispatchToast
+				addMessage
 			);
 		}
 	}

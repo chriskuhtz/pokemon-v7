@@ -127,4 +127,11 @@ export const extraFeatureCheckList: {
 		name: 'stop npcs from walking through player',
 	},
 	{ name: 'prevent npcs from changing their path after player interaction' },
+	{ name: 'extract battlesteps' },
+	{ name: 'back button from target selection' },
+	{ name: 'burn shader' },
+	{ name: 'poison shader' },
+	{ name: 'para shader' },
+	{ name: 'frozen shader' },
+	{ name: 'sleep shader' },
 ];
