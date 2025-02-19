@@ -20,3 +20,24 @@ export const typeColors: Record<PokemonType, string> = {
 	steel: '#B7B7CE',
 	fairy: '#D685AD',
 };
+
+export const typeContrastColors: Record<PokemonType, string> = {
+	normal: 'black',
+	fire: 'black',
+	water: 'white',
+	electric: 'black',
+	grass: 'black',
+	ice: 'black',
+	fighting: 'white',
+	poison: 'white',
+	ground: 'black',
+	flying: 'black',
+	psychic: 'black',
+	bug: 'black',
+	rock: 'black',
+	ghost: 'white',
+	dragon: 'white',
+	dark: 'white',
+	steel: 'black',
+	fairy: 'black',
+};
