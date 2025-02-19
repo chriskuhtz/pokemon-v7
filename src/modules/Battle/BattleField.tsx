@@ -39,7 +39,11 @@ export const BattleField = ({
 	inventory,
 	fightersPerSide,
 }: {
-	leave: (caughtPokemon: BattlePokemon[], updatedInventory: Inventory) => void;
+	leave: (
+		caughtPokemon: BattlePokemon[],
+		updatedInventory: Inventory,
+		scatteredCoins: number
+	) => void;
 	initOpponents: BattlePokemon[];
 	initTeam: BattlePokemon[];
 	fightersPerSide: number;
@@ -50,6 +54,9 @@ export const BattleField = ({
 	const [battleRound, setBattleRound] = useState<number>(0);
 	const [battleWeather, setBattleWeather] = useState<WeatherType | undefined>();
 	const [battleLocation] = useState<BattleLocation>('STANDARD');
+	const [scatteredCoins, setScatteredCoins] = useState<number>(0);
+	const scatterCoins = () =>
+		setScatteredCoins((c) => c + Math.floor(Math.random() * 100));
 	const [battleStep, setBattleStep] = useState<
 		'BATTLE_ENTRY' | 'COLLECTING' | 'EXECUTING' | 'END_OF_TURN' | 'REFILLING'
 	>('BATTLE_ENTRY');
@@ -143,13 +150,14 @@ export const BattleField = ({
 		pokemon,
 		setPokemon,
 		addMessage,
-		(caught) => leave(caught, battleInventory),
+		(caught) => leave(caught, battleInventory, scatteredCoins),
 		battleWeather,
 		addMultipleMessages,
 		battleRound,
 		battleLocation,
 		interjectMessage,
-		addUsedItem
+		addUsedItem,
+		scatterCoins
 	);
 	const putPokemonOnField = useCallback(
 		(id: string) =>
@@ -269,7 +277,8 @@ export const BattleField = ({
 				onRemoval: () =>
 					leave(
 						pokemon.filter((p) => p.status === 'CAUGHT'),
-						battleInventory
+						battleInventory,
+						scatteredCoins
 					),
 			});
 		}
@@ -280,7 +289,8 @@ export const BattleField = ({
 				onRemoval: () =>
 					leave(
 						pokemon.filter((p) => p.status === 'CAUGHT'),
-						battleInventory
+						battleInventory,
+						scatteredCoins
 					),
 			});
 		}
@@ -292,6 +302,7 @@ export const BattleField = ({
 		latestMessage,
 		leave,
 		pokemon,
+		scatteredCoins,
 	]);
 
 	if (battleStep === 'REFILLING') {

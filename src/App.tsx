@@ -80,10 +80,11 @@ export const App = ({
 					{ ...currentOpponent, dexId: getRandomPokemonId(), id: v4() },
 				]}
 				team={team}
-				leave={(caughtPokemon, updatedInventory) => {
+				leave={(caughtPokemon, updatedInventory, scatteredCoins) => {
 					putSaveFileReducer({
 						...saveFile,
 						inventory: updatedInventory,
+						money: saveFile.money + scatteredCoins,
 						pokemon: [
 							...pokemon,
 							...caughtPokemon.map((c) => {
@@ -101,6 +102,7 @@ export const App = ({
 				}}
 				fightersPerSide={2}
 				inventory={inventory}
+				ownedPokemonDexIds={saveFile.pokemon.map((p) => p.dexId)}
 			/>
 		);
 	}
