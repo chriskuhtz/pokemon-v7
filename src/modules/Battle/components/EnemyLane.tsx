@@ -1,4 +1,4 @@
-import { HpBar } from '../../../components/HpBar/HpBar';
+import { BattlePokemonInfo } from '../../../components/BattlePokemonInfo/BattlePokemonInfo';
 import { baseSize } from '../../../constants/gameData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
@@ -25,17 +25,7 @@ export function EnemyLane({
 				}}
 			>
 				{onFieldOpponents.map((t) => (
-					<div
-						style={{
-							border: '1px solid black',
-							padding: '0 2rem',
-							borderRadius: 9000,
-						}}
-						key={t.id}
-					>
-						{t.data.name}
-						<HpBar max={t.stats.hp} damage={t.damage} />
-					</div>
+					<BattlePokemonInfo pokemon={t} key={t.id} />
 				))}
 			</div>
 			<div style={{ display: 'flex', alignItems: 'center' }}>
