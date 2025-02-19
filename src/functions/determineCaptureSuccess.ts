@@ -72,20 +72,5 @@ export const determineCaptureSuccess = (
 	//between 1 and 2.5
 	const random = 1 + Math.random() * 1.5;
 
-	// console.log(
-	// 	'ballFactor',
-	// 	ballfactor,
-	// 	'healtFactor',
-	// 	healthfactor,
-	// 	'levelFactor',
-	// 	levelFactor,
-	// 	'capture_rate_factor',
-	// 	captureRateFactor,
-	// 	'final',
-	// 	catchRate,
-	// 	'random',
-	// 	random
-	// );
-
 	return catchRate > random;
 };
