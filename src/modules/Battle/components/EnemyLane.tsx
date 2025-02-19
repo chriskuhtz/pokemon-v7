@@ -45,6 +45,32 @@ export function EnemyLane({
 							<img height={baseSize} key={t.id} src={getItemUrl(t.ball)} />
 						);
 					}
+					if (t.status === 'CATCHING_1') {
+						return (
+							<img height={baseSize} key={t.id} src={getItemUrl(t.ball)} />
+						);
+					}
+					if (t.status === 'CATCHING_2') {
+						return (
+							<img
+								style={{ transform: 'rotate(45deg)' }}
+								height={baseSize}
+								key={t.id}
+								src={getItemUrl(t.ball)}
+							/>
+						);
+					}
+					if (t.status === 'CATCHING_3') {
+						return (
+							<img
+								style={{ transform: 'rotate(315deg)' }}
+								height={baseSize}
+								key={t.id}
+								src={getItemUrl(t.ball)}
+							/>
+						);
+					}
+
 					return (
 						<img
 							height={baseSize * 2}
