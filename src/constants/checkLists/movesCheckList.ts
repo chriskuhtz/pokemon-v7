@@ -1264,6 +1264,8 @@ export const handledMoves = [
 	'karate-chop',
 	'double-slap',
 	'pay-day',
+	'comet-punch',
+	'mega-punch',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

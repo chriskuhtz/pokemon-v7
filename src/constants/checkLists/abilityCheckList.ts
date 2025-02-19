@@ -22,14 +22,17 @@ export const abilityCheckList: {
 	{
 		name: 'battle-armor',
 		url: 'https://pokeapi.co/api/v2/ability/4/',
+		handled: true,
 	},
 	{
 		name: 'sturdy',
 		url: 'https://pokeapi.co/api/v2/ability/5/',
+		handled: true,
 	},
 	{
 		name: 'damp',
 		url: 'https://pokeapi.co/api/v2/ability/6/',
+		handled: true,
 	},
 	{
 		name: 'limber',
@@ -182,6 +185,7 @@ export const abilityCheckList: {
 	{
 		name: 'shell-armor',
 		url: 'https://pokeapi.co/api/v2/ability/75/',
+		handled: true,
 	},
 	{
 		name: 'air-lock',
@@ -485,6 +489,10 @@ export const abilityNames = [
 	'drizzle',
 	'speed-boost',
 	'limber',
+	'battle-armor',
+	'shell-armor',
+	'sturdy',
+	'damp',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

@@ -138,6 +138,13 @@ export const BattleField = ({
 			opponents.some((t) => t.status === 'BENCH')
 		);
 	}, [fightersPerSide, onFieldOpponents, opponents]);
+	const dampy: { name: string } | undefined = useMemo(() => {
+		const mon = allOnField.find((p) => p.ability === 'damp');
+
+		if (mon) {
+			return { name: mon.data.name };
+		}
+	}, [allOnField]);
 
 	//REDUCERS
 	const chooseAction = useChooseAction(
@@ -157,7 +164,8 @@ export const BattleField = ({
 		battleLocation,
 		interjectMessage,
 		addUsedItem,
-		scatterCoins
+		scatterCoins,
+		dampy
 	);
 	const putPokemonOnField = useCallback(
 		(id: string) =>
