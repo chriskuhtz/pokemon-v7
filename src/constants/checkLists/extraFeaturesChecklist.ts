@@ -139,4 +139,5 @@ export const extraFeatureCheckList: {
 	{ name: 'switch button position in line up' },
 	{ name: 'even prettier stat display' },
 	{ name: 'assign random nature to encounters' },
+	{ name: 'Collapsed/detailed Team View' },
 ];
