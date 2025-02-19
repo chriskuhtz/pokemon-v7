@@ -102,7 +102,6 @@ export const interactWithFunction = ({
 		changeOccupant(Number.parseInt(id), {
 			...data,
 			orientation: getOppositeDirection(playerLocation.orientation),
-			rotating: false,
 		});
 
 		data.dialogue.forEach((d) =>

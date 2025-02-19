@@ -1,11 +1,12 @@
-import { occupantsRecord } from '../constants/occupantsRecord';
+import { Occupant } from '../interfaces/OverworldMap';
 
 export const getNextFieldOccupant = (
 	mapId: string,
 	collectedItems: number[],
-	focusedField: { x: number; y: number }
+	focusedField: { x: number; y: number },
+	statefulOccupantsRecord: Record<number, Occupant>
 ) => {
-	return Object.entries(occupantsRecord).find(
+	return Object.entries(statefulOccupantsRecord).find(
 		([id, occ]) =>
 			occ.x === focusedField.x &&
 			occ.y === focusedField.y &&

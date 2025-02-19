@@ -1,38 +1,70 @@
 import { isEqual } from 'lodash';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { animationTimer, baseSize } from '../../../constants/gameData';
-import { occupantsRecord } from '../../../constants/occupantsRecord';
-import { getNextClockWiseDirection } from '../../../functions/getNextClockwiseDirection';
+import { getNextLocation } from '../../../functions/getNextLocation';
 import { getYOffsetFromOrientation } from '../../../functions/getYOffsetFromOrientation';
-import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
+import { Occupant } from '../../../interfaces/OverworldMap';
+
+export const overflow = (current: number, excludedMax: number) => {
+	if (current < excludedMax - 1) {
+		return current + 1;
+	}
+	return 0;
+};
 
 export const useDrawOccupants = (
 	canvasId: string,
-	map: OverworldMap
-): ((id: number, updatedOccupant: Occupant) => void) => {
+	activeDialogue: boolean,
+	statefulOccupants: Record<number, Occupant>,
+	setStatefulOccupants: React.Dispatch<
+		React.SetStateAction<Record<number, Occupant>>
+	>
+) => {
 	const [lastDrawnOccupants, setLastDrawnOccupants] = useState<
-		Record<number, Occupant>
-	>({});
-	const [statefulOccupants, setStatefulOccupants] = useState<
 		Record<number, Occupant>
 	>({});
 
 	useEffect(() => {
+		if (activeDialogue) {
+			//stop movement during dialogue
+			return;
+		}
 		if (
 			Object.values(statefulOccupants).some(
-				(occ) => occ.type === 'NPC' && occ.rotating
+				(occ) => occ.type === 'NPC' && occ.movememt
 			)
 		) {
 			const t = setTimeout(() => {
 				setStatefulOccupants(
 					Object.fromEntries(
 						Object.entries(statefulOccupants).map(([id, occ]) => {
-							if (occ.type === 'NPC' && occ.rotating) {
+							if (occ.type === 'NPC' && occ.movememt && Math.random() > 0.5) {
+								const step = occ.movememt.path[occ.movememt.currentStep];
+								const update =
+									step === occ.orientation
+										? getNextLocation(
+												{
+													x: occ.x,
+													y: occ.y,
+													orientation: occ.orientation,
+													forwardFoot: 'CENTER1',
+													mapId: occ.map,
+												},
+												step
+										  )
+										: { orientation: step };
 								return [
 									id,
 									{
 										...occ,
-										orientation: getNextClockWiseDirection(occ.orientation),
+										...update,
+										movememt: {
+											...occ.movememt,
+											currentStep: overflow(
+												occ.movememt.currentStep,
+												occ.movememt.path.length
+											),
+										},
 									},
 								];
 							}
@@ -44,30 +76,7 @@ export const useDrawOccupants = (
 
 			return () => clearTimeout(t);
 		}
-	}, [statefulOccupants]);
-
-	useEffect(() => {
-		setStatefulOccupants(
-			Object.fromEntries(
-				Object.entries(occupantsRecord).filter(
-					([id, data]) =>
-						data.map === map.id && map.occupants.includes(Number.parseInt(id))
-				)
-			)
-		);
-	}, [map]);
-
-	const changeOccupant = useCallback(
-		(id: number, updatedOccupant: Occupant) => {
-			setStatefulOccupants((statefulOccupants) => {
-				const updated = { ...statefulOccupants };
-				updated[id] = updatedOccupant;
-
-				return updated;
-			});
-		},
-		[]
-	);
+	}, [activeDialogue, setStatefulOccupants, statefulOccupants]);
 
 	useEffect(() => {
 		console.log('draw occupants');
@@ -112,8 +121,6 @@ export const useDrawOccupants = (
 		});
 		setLastDrawnOccupants(statefulOccupants);
 	}, [canvasId, lastDrawnOccupants, statefulOccupants]);
-
-	return changeOccupant;
 };
 
 const drawOccupant = (
