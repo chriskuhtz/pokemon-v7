@@ -1,6 +1,7 @@
 import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/selfDestructingMoves';
 import { applyAttackAilmentsToPokemon } from '../../../../../functions/applyAttackAilmentsToPokemon';
 import { calculateDamage } from '../../../../../functions/calculateDamage';
+import { determineMiss } from '../../../../../functions/determineMiss';
 import { handleFlinching } from '../../../../../functions/handleFlinching';
 import { isKO } from '../../../../../functions/isKo';
 import { reduceMovePP } from '../../../../../functions/reduceMovePP';
@@ -9,6 +10,7 @@ import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../../../interfaces/Weather';
 import { handleDampy } from '../../../functions/handleDampy';
 import { handleFainting } from '../../../functions/handleFainting';
+import { handleMiss } from '../../../functions/handleMiss';
 import { handleNoTarget } from '../../../functions/handleNoTarget';
 
 export const handleAttack = ({
@@ -39,6 +41,13 @@ export const handleAttack = ({
 	}
 	if (dampy && SELF_DESTRUCTING_MOVES.includes(move.name)) {
 		handleDampy(attacker, move, setPokemon, addMessage, dampy);
+		return;
+	}
+
+	const miss = determineMiss(move, attacker, target, battleWeather, false);
+
+	if (miss) {
+		handleMiss(attacker, move, setPokemon, addMessage);
 		return;
 	}
 	//TODO: handle self targeting

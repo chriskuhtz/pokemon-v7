@@ -134,4 +134,5 @@ export const extraFeatureCheckList: {
 	{ name: 'para shader' },
 	{ name: 'frozen shader' },
 	{ name: 'sleep shader' },
+	{ name: 'switch button position in line up' },
 ];
