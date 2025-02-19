@@ -20,7 +20,6 @@ export function ActionSelection({
 	return (
 		<div
 			style={{
-				borderTop: '1px solid black',
 				padding: '.5rem',
 			}}
 		>
