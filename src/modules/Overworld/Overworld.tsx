@@ -3,6 +3,7 @@ import { IoMdMenu } from 'react-icons/io';
 import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 import { animationTimer, baseSize } from '../../constants/gameData';
+import { occupantsRecord } from '../../constants/occupantsRecord';
 import { assembleMap } from '../../functions/assembleMap';
 import { isEvening, isMorning, isNight } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
@@ -79,10 +80,36 @@ export const Overworld = ({
 	};
 	cutBushes: number[];
 }) => {
-	const assembledMap = useMemo(
-		() => assembleMap(map, collectedItems, cutBushes),
-		[map, collectedItems, cutBushes]
+	const [statefulOccupants, setStatefulOccupants] = useState<
+		Record<number, Occupant>
+	>({});
+	useEffect(() => {
+		setStatefulOccupants(
+			Object.fromEntries(
+				Object.entries(occupantsRecord).filter(
+					([id, data]) =>
+						data.map === map.id && map.occupants.includes(Number.parseInt(id))
+				)
+			)
+		);
+	}, [map]);
+	const changeOccupant = useCallback(
+		(id: number, updatedOccupant: Occupant) => {
+			setStatefulOccupants((statefulOccupants) => {
+				const updated = { ...statefulOccupants };
+				updated[id] = updatedOccupant;
+
+				return updated;
+			});
+		},
+		[]
 	);
+
+	const assembledMap = useMemo(
+		() => assembleMap(map, collectedItems, cutBushes, statefulOccupants),
+		[map, collectedItems, cutBushes, statefulOccupants]
+	);
+
 	const valid = useMemo(() => isValidOverWorldMap(map), [map]);
 
 	const [stepsTaken, setStepsTaken] = useState<number>(0);
@@ -133,7 +160,12 @@ export const Overworld = ({
 	//DRAWING
 	useDrawCharacter(playerCanvasId, playerLocation);
 	useDrawBackground(backgroundCanvasId, map);
-	const changeOccupant = useDrawOccupants(occupantsCanvasId, assembledMap);
+	useDrawOccupants(
+		occupantsCanvasId,
+		dialogues.length > 0,
+		statefulOccupants,
+		setStatefulOccupants
+	);
 	//INTERACTION
 	const interactWith = useCallback(
 		(occ: [string, Occupant] | undefined) =>
@@ -181,7 +213,13 @@ export const Overworld = ({
 	);
 	useKeyboardControl(
 		setNextInput,
-		() => handleEnterPress(playerLocation, collectedItems, interactWith),
+		() =>
+			handleEnterPress(
+				playerLocation,
+				collectedItems,
+				interactWith,
+				statefulOccupants
+			),
 		() => openMenu(stepsTaken),
 		dialogues.length > 0
 	);
