@@ -44,7 +44,7 @@ export const extraFeatureCheckList: {
 	{ name: 'approach directions (PC only from front', handled: true },
 	{ name: 'disable weird scroll', handled: true },
 	{ name: 'rotating npcs', handled: true },
-	{ name: 'walking npcs' },
+	{ name: 'walking npcs on set paths', handled: true },
 	{ name: 'pretty stat display' },
 	{ name: 'prettier weather display' },
 	{ name: 'Battle Attack animation' },
@@ -122,4 +122,5 @@ export const extraFeatureCheckList: {
 	{ name: 'preselect pokemon on line up' },
 	{ name: 'level badges in storage' },
 	{ name: 'only consider occupants in view (+2 or 3 fields) when redrawing' },
+	{ name: 'walking npcs randomly' },
 ];
