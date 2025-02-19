@@ -20,7 +20,14 @@ export interface BattlePokemon extends OwnedPokemon {
 	secondaryAilments: SecondaryAilment[];
 	flashFired?: boolean;
 	moveQueue: BattleAction[];
-	status: 'ONFIELD' | 'BENCH' | 'CAUGHT' | 'FAINTED';
+	status:
+		| 'ONFIELD'
+		| 'BENCH'
+		| 'CATCHING_1'
+		| 'CATCHING_2'
+		| 'CATCHING_3'
+		| 'CAUGHT'
+		| 'FAINTED';
 	roundsInBattle: number;
 }
 
