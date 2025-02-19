@@ -1,7 +1,8 @@
 import { isEqual } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
-import { baseSize } from '../../../constants/gameData';
+import { animationTimer, baseSize } from '../../../constants/gameData';
 import { occupantsRecord } from '../../../constants/occupantsRecord';
+import { getNextClockWiseDirection } from '../../../functions/getNextClockwiseDirection';
 import { getYOffsetFromOrientation } from '../../../functions/getYOffsetFromOrientation';
 import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
 
@@ -15,6 +16,35 @@ export const useDrawOccupants = (
 	const [statefulOccupants, setStatefulOccupants] = useState<
 		Record<number, Occupant>
 	>({});
+
+	useEffect(() => {
+		if (
+			Object.values(statefulOccupants).some(
+				(occ) => occ.type === 'NPC' && occ.rotating
+			)
+		) {
+			const t = setTimeout(() => {
+				setStatefulOccupants(
+					Object.fromEntries(
+						Object.entries(statefulOccupants).map(([id, occ]) => {
+							if (occ.type === 'NPC' && occ.rotating) {
+								return [
+									id,
+									{
+										...occ,
+										orientation: getNextClockWiseDirection(occ.orientation),
+									},
+								];
+							}
+							return [id, occ];
+						})
+					)
+				);
+			}, animationTimer);
+
+			return () => clearTimeout(t);
+		}
+	}, [statefulOccupants]);
 
 	useEffect(() => {
 		setStatefulOccupants(
@@ -41,7 +71,6 @@ export const useDrawOccupants = (
 
 	useEffect(() => {
 		console.log('draw occupants');
-		//const { width, height } = map;
 
 		const el: HTMLCanvasElement | null = document.getElementById(
 			canvasId
@@ -52,30 +81,26 @@ export const useDrawOccupants = (
 			const current = statefulOccupants[Number.parseInt(id)];
 			const lastDrawn = lastDrawnOccupants[Number.parseInt(id)];
 			if (isEqual(current, lastDrawn)) {
-				console.log('no need to redraw me', current);
 				return;
 			}
 
 			if (current && !lastDrawn) {
-				console.log('draw me for the first time', current);
 				drawOccupant(current, ctx);
 				return;
 			}
-			console.log('i have changed,redraw me', current, lastDrawn);
+
+			drawOccupant(current, ctx);
 			ctx?.clearRect(
 				baseSize * lastDrawn.x,
 				baseSize * lastDrawn.y,
 				baseSize,
 				baseSize
 			);
-
-			drawOccupant(current, ctx);
 		});
 		Object.keys(lastDrawnOccupants).forEach((id) => {
 			const current = statefulOccupants[Number.parseInt(id)];
 			const lastDrawn = lastDrawnOccupants[Number.parseInt(id)];
 			if (!current && lastDrawn) {
-				console.log('i dont exist anymore, clear', lastDrawn);
 				ctx?.clearRect(
 					baseSize * lastDrawn.x,
 					baseSize * lastDrawn.y,
