@@ -42,7 +42,6 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'approach directions (PC only from front', handled: true },
-	{ name: 'overworld background/border of map' },
 	{ name: 'disable weird scroll', handled: true },
 	{ name: 'rotating npcs' },
 	{ name: 'walking npcs' },
@@ -51,7 +50,6 @@ export const extraFeatureCheckList: {
 	{ name: 'Battle Attack animation' },
 	{ name: 'battle backgrounds' },
 	{ name: 'hpbar colors' },
-	{ name: 'Banner slant either left or right' },
 	{ name: 'choose random moves for opponent' },
 	{
 		name: 'only factor volt-absorb etc into recommendation after it has been revealed',
@@ -117,5 +115,5 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'setting: instant mode' },
 	{ name: 'flex display on Line up Selection' },
-	{ name: 'auto choose opponent moves' },
+	{ name: 'Team overview on overworld' },
 ];
