@@ -3,6 +3,7 @@ import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
 import { applyEndOfTurnAbility } from '../../functions/applyEndOfTurnAbility';
 import { applyOnBattleEnterAbility } from '../../functions/applyOnBattleEnterAbility';
+import { applyPrimaryAilmentDamage } from '../../functions/applyPrimaryAilmentDamage';
 import { BattleLocation } from '../../functions/determineCaptureSuccess';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
@@ -197,7 +198,8 @@ export const BattleField = ({
 		},
 		[addMessage, battleWeather]
 	);
-	//AUTOMATIONS
+	//Steps:
+	// Battle Entry
 	useEffect(() => {
 		if (battleStep === 'BATTLE_ENTRY') {
 			if (!newlyDeployedPokemon) {
@@ -215,11 +217,13 @@ export const BattleField = ({
 		newlyDeployedPokemon,
 		nextPokemonWithoutMove,
 	]);
+	// Collecting
 	useEffect(() => {
 		if (battleStep === 'COLLECTING' && !nextPokemonWithoutMove) {
 			setBattleStep('EXECUTING');
 		}
 	}, [battleStep, nextPokemonWithoutMove]);
+	// Executing
 	useEffect(() => {
 		if (battleStep === 'EXECUTING') {
 			if (!nextMover) {
@@ -240,15 +244,18 @@ export const BattleField = ({
 			}
 		}
 	}, [battleStep, handleAction, latestMessage, nextMover]);
+	// End Of Turn
 	useEffect(() => {
 		if (battleStep === 'END_OF_TURN') {
 			const collectedMessages: string[] = [];
 			const updatedPokemon = pokemon.map((p) => {
 				if (p.status === 'ONFIELD') {
-					return applyEndOfTurnAbility({
+					let up = applyEndOfTurnAbility({
 						pokemon: p,
 						addMessage: (x) => collectedMessages.push(x),
 					});
+					up = applyPrimaryAilmentDamage(up, (x) => collectedMessages.push(x));
+					return up;
 				}
 
 				return p;
@@ -272,12 +279,13 @@ export const BattleField = ({
 				);
 		}
 	}, [addMultipleMessages, battleStep, nextPokemonWithoutMove, pokemon]);
+	// Refilling
 	useEffect(() => {
 		if (battleStep === 'REFILLING' && !teamCanRefill && !opponentCanRefill) {
 			setBattleStep('COLLECTING');
 		}
 	}, [battleStep, nextPokemonWithoutMove, opponentCanRefill, teamCanRefill]);
-
+	// Battle Over
 	useEffect(() => {
 		if (battleLost && !latestMessage) {
 			console.log('effect battlelost');
