@@ -112,10 +112,12 @@ export const movesCheckList: {
 	{
 		name: 'jump-kick',
 		url: 'https://pokeapi.co/api/v2/move/26/',
+		handled: true,
 	},
 	{
 		name: 'rolling-kick',
 		url: 'https://pokeapi.co/api/v2/move/27/',
+		handled: true,
 	},
 	{
 		name: 'sand-attack',
@@ -344,6 +346,7 @@ export const movesCheckList: {
 	{
 		name: 'high-jump-kick',
 		url: 'https://pokeapi.co/api/v2/move/136/',
+		handled: true,
 	},
 	{ name: 'glare', url: 'https://pokeapi.co/api/v2/move/137/' },
 	{ name: 'dream-eater', url: 'https://pokeapi.co/api/v2/move/138/' },
@@ -1185,6 +1188,7 @@ export const movesCheckList: {
 	{
 		name: 'axe-kick',
 		url: 'https://pokeapi.co/api/v2/move/853/',
+		handled: true,
 	},
 	{ name: 'last-respects', url: 'https://pokeapi.co/api/v2/move/854/' },
 	{ name: 'lumina-crash', url: 'https://pokeapi.co/api/v2/move/855/' },
@@ -1251,6 +1255,7 @@ export const movesCheckList: {
 	{
 		name: 'supercell-slam',
 		url: 'https://pokeapi.co/api/v2/move/916/',
+		handled: true,
 	},
 	{ name: 'psychic-noise', url: 'https://pokeapi.co/api/v2/move/917/' },
 	{ name: 'upper-hand', url: 'https://pokeapi.co/api/v2/move/918/' },
@@ -1304,6 +1309,11 @@ export const handledMoves = [
 	'vine-whip',
 	'stomp',
 	'double-kick',
+	'jump-kick',
+	'high-jump-kick',
+	'axe-kick',
+	'supercell-slam',
+	'rolling-kick',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
