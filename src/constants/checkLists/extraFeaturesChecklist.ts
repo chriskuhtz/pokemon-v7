@@ -50,7 +50,7 @@ export const extraFeatureCheckList: {
 
 	{ name: 'hpbar colors', handled: true },
 	{ name: 'time of day icon in battle', handled: true },
-	{ name: 'choose random moves for opponent' },
+	{ name: 'choose random moves for opponent', handled: true },
 	{
 		name: 'only factor volt-absorb etc into recommendation after it has been revealed',
 	},
