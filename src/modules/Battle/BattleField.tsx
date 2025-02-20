@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
 import { applyEndOfTurnAbility } from '../../functions/applyEndOfTurnAbility';
@@ -384,6 +385,7 @@ export const BattleField = ({
 		>
 			<div style={{ position: 'absolute', top: 0, left: '48dvw' }}>
 				<WeatherIcon weather={battleWeather} />
+				<TimeOfDayIcon />
 			</div>
 			<div
 				style={{
