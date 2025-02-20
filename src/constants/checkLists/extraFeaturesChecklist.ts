@@ -165,4 +165,10 @@ export const extraFeatureCheckList: {
 	{
 		name: 'only factor volt-absorb etc into recommendation after it has been revealed',
 	},
+	{ name: 'quest: catch a day pokemon' },
+	{ name: 'quest: catch a night pokemon' },
+	{ name: 'quest: catch a evening pokemon' },
+	{ name: 'quest: catch a morning pokemon' },
+	{ name: 'alternate forms (galar, alola)' },
+	{ name: 'encounter rarity' },
 ];
