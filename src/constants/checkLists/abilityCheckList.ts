@@ -159,7 +159,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/39/',
 		handled: true,
 	},
-	{ name: 'magma-armor', url: 'https://pokeapi.co/api/v2/ability/40/' },
+	{
+		name: 'magma-armor',
+		url: 'https://pokeapi.co/api/v2/ability/40/',
+		handled: true,
+	},
 	{ name: 'water-veil', url: 'https://pokeapi.co/api/v2/ability/41/' },
 	{ name: 'magnet-pull', url: 'https://pokeapi.co/api/v2/ability/42/' },
 	{ name: 'soundproof', url: 'https://pokeapi.co/api/v2/ability/43/' },
@@ -525,6 +529,7 @@ export const abilityNames = [
 	'own-tempo',
 	'suction-cups',
 	'inner-focus',
+	'magma-armor',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
