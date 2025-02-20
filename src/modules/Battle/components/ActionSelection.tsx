@@ -1,5 +1,6 @@
 import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
 import { getMovesArray } from '../../../functions/getMovesArray';
+import { isTrapped } from '../../../functions/isTrapped';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import {
@@ -22,6 +23,7 @@ export function ActionSelection({
 	chooseAction: (x: ChooseActionPayload) => void;
 	allTargets: BattlePokemon[];
 }) {
+	const trapped = isTrapped(controlled);
 	return (
 		<div
 			style={{
@@ -57,6 +59,7 @@ export function ActionSelection({
 				})}
 
 				<button
+					disabled={trapped}
 					onClick={() =>
 						chooseAction({
 							userId: controlled.id,
@@ -65,7 +68,7 @@ export function ActionSelection({
 						})
 					}
 				>
-					Run Away
+					{trapped ? 'Trapped' : 'Run Away'}
 				</button>
 			</div>
 		</div>

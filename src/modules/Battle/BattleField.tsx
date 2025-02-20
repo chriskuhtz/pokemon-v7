@@ -6,6 +6,7 @@ import { applyEndOfTurnAbility } from '../../functions/applyEndOfTurnAbility';
 import { applyEndOfTurnHeldItem } from '../../functions/applyEndOfTurnHeldItem';
 import { applyOnBattleEnterAbility } from '../../functions/applyOnBattleEnterAbility';
 import { applyPrimaryAilmentDamage } from '../../functions/applyPrimaryAilmentDamage';
+import { applySecondaryAilmentDamage } from '../../functions/applySecondaryAilmentDamage';
 import { changeMovePP } from '../../functions/changeMovePP';
 import { BattleLocation } from '../../functions/determineCaptureSuccess';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
@@ -336,7 +337,7 @@ export const BattleField = ({
 	}, [battleStep, handleAction, latestMessage, nextMover]);
 	// End Of Turn
 	useEffect(() => {
-		if (battleStep === 'END_OF_TURN') {
+		if (!latestMessage && battleStep === 'END_OF_TURN') {
 			const collectedMessages: string[] = [];
 			const updatedPokemon = pokemon.map((p) => {
 				if (p.status === 'ONFIELD') {
@@ -346,6 +347,9 @@ export const BattleField = ({
 					});
 					up = applyEndOfTurnHeldItem(up, (x) => collectedMessages.push(x));
 					up = applyPrimaryAilmentDamage(up, (x) => collectedMessages.push(x));
+					up = applySecondaryAilmentDamage(up, (x) =>
+						collectedMessages.push(x)
+					);
 
 					return up;
 				}
@@ -356,7 +360,8 @@ export const BattleField = ({
 			if (!latestMessage && collectedMessages.length === 0) {
 				setBattleStep('REFILLING');
 				return;
-			} else
+			} else {
+				console.log(collectedMessages);
 				addMultipleMessages(
 					collectedMessages.map((m, i) => ({
 						message: m,
@@ -369,6 +374,7 @@ export const BattleField = ({
 								: undefined,
 					}))
 				);
+			}
 		}
 	}, [
 		addMultipleMessages,
