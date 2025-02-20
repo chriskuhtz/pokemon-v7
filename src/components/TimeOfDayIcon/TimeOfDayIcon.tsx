@@ -1,16 +1,17 @@
 import { FiSunrise, FiSunset } from 'react-icons/fi';
 import { MdNightlight, MdOutlineWbSunny } from 'react-icons/md';
 import { baseSize } from '../../constants/gameData';
-import { isMorning, isEvening, isNight } from '../../functions/getTimeOfDay';
+import { getTimeOfDay } from '../../functions/getTimeOfDay';
 
 export const TimeOfDayIcon = () => {
-	if (isMorning()) {
+	const time = getTimeOfDay();
+	if (time === 'MORNING') {
 		return <FiSunrise size={baseSize / 2} />;
 	}
-	if (isEvening()) {
+	if (time === 'EVENING') {
 		return <FiSunset size={baseSize / 2} />;
 	}
-	if (isNight()) {
+	if (time === 'NIGHT') {
 		return <MdNightlight size={baseSize / 2} />;
 	}
 

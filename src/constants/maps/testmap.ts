@@ -19,11 +19,27 @@ export const testMap: OverworldMap = {
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 	],
 	occupants: [0, 1, 2, 100001, 300001, 400001, 500001, 600001, 600002, 600003],
-	possibleEncounters: [
-		{ dexId: 1, xp: 200 },
-		{ dexId: 4, xp: 200 },
-		{ dexId: 7, xp: 200 },
-		{ dexId: 25, xp: 200 },
-	],
+	possibleEncounters: {
+		MORNING: [
+			{ dexId: 27, xp: 200 },
+			{ dexId: 16, xp: 200 },
+			{ dexId: 19, xp: 200 },
+		],
+		DAY: [
+			{ dexId: 25, xp: 200 },
+			{ dexId: 21, xp: 200 },
+			{ dexId: 396, xp: 200 },
+		],
+		EVENING: [
+			{ dexId: 216, xp: 200 },
+			{ dexId: 236, xp: 200 },
+			{ dexId: 43, xp: 200 },
+		],
+		NIGHT: [
+			{ dexId: 570, xp: 200 },
+			{ dexId: 163, xp: 200 },
+			{ dexId: 41, xp: 200 },
+		],
+	},
 	weather: 'sandstorm',
 };

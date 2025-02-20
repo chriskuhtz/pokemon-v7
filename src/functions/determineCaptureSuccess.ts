@@ -1,7 +1,7 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { PokeballType } from '../interfaces/Item';
 import { calculateLevelData } from './calculateLevelData';
-import { isEvening, isNight } from './getTimeOfDay';
+import { getTimeOfDay } from './getTimeOfDay';
 import { getTypeNames } from './getTypeNames';
 
 export type BattleLocation = 'UNDERWATER' | 'CAVE' | 'STANDARD';
@@ -52,7 +52,9 @@ export const determineCaptureSuccess = (
 	}
 	if (
 		ball === 'dusk-ball' &&
-		(location === 'CAVE' || isNight() || isEvening())
+		(location === 'CAVE' ||
+			getTimeOfDay() === 'EVENING' ||
+			getTimeOfDay() === 'NIGHT')
 	) {
 		ballfactor = 1.5;
 	}

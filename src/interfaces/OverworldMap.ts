@@ -7,6 +7,7 @@
  * 2 = blocked field
  */
 
+import { TimeOfDay } from '../functions/getTimeOfDay';
 import { Inventory } from './Inventory';
 import { ItemType } from './Item';
 import { CharacterOrientation, MapId } from './SaveFile';
@@ -87,7 +88,7 @@ export interface OverworldMap {
 	id: string;
 	backgroundTile: { x: number; y: number };
 	encounterTile: { x: number; y: number };
-	possibleEncounters: OverworldEncounter[];
+	possibleEncounters: Record<TimeOfDay, OverworldEncounter[]>;
 	width: number;
 	height: number;
 	tileMap: (0 | 1 | 2)[][];

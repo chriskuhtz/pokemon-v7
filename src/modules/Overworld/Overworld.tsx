@@ -5,13 +5,12 @@ import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 import { animationTimer, baseSize } from '../../constants/gameData';
 import { occupantsRecord } from '../../constants/occupantsRecord';
 import { assembleMap } from '../../functions/assembleMap';
-import { isEvening, isMorning, isNight } from '../../functions/getTimeOfDay';
+import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { isValidOverWorldMap } from '../../functions/isValidOverworldMap';
 import { Inventory } from '../../interfaces/Inventory';
 import {
 	Occupant,
-	OverworldEncounter,
 	OverworldItem,
 	OverworldMap,
 } from '../../interfaces/OverworldMap';
@@ -32,15 +31,6 @@ const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
 const occupantsCanvasId = 'occs';
 
-const getOverworldShaderColor = (): string => {
-	if (isNight()) {
-		return 'rgba(23, 44, 79,.4)';
-	}
-	if (isEvening() || isMorning()) {
-		return 'rgba(156, 98, 0,.2)';
-	}
-	return 'rgba(255,255,255,0)';
-};
 export interface Dialogue {
 	message: string;
 	onRemoval?: () => void;
@@ -68,7 +58,7 @@ export const Overworld = ({
 	collectItem: (item: [string, OverworldItem]) => void;
 	map: OverworldMap;
 	collectedItems: number[];
-	startEncounter: (x: OverworldEncounter, stepsTaken: number) => void;
+	startEncounter: (stepsTaken: number) => void;
 	encounterRateModifier?: number;
 	openStorage: (stepsTaken: number) => void;
 	goToMarket: (marketInventory: Partial<Inventory>, stepsTaken: number) => void;
@@ -135,14 +125,9 @@ export const Overworld = ({
 	};
 
 	const addEncounterDialogue = () => {
-		const randomEncounter =
-			assembledMap.possibleEncounters[
-				Math.floor(Math.random() * assembledMap.possibleEncounters.length)
-			];
-
 		addDialogue({
-			message: 'A wild Pokemon appeared!',
-			onRemoval: () => startEncounter(randomEncounter, stepsTaken),
+			message: 'Wild Pokemon appeared!',
+			onRemoval: () => startEncounter(stepsTaken),
 		});
 	};
 
@@ -307,7 +292,7 @@ export const Overworld = ({
 							top: -playerLocation.y * baseSize,
 							left: -playerLocation.x * baseSize,
 							position: 'absolute',
-							backgroundColor: getOverworldShaderColor(),
+							backgroundColor: OverworldShaderMap[getTimeOfDay()],
 							zIndex: 0,
 						}}
 					/>
@@ -333,7 +318,7 @@ export const Overworld = ({
 							top: -playerLocation.y * baseSize,
 							left: -playerLocation.x * baseSize,
 							position: 'absolute',
-							backgroundColor: getOverworldShaderColor(),
+							backgroundColor: OverworldShaderMap[getTimeOfDay()],
 							zIndex: -2,
 						}}
 					/>
@@ -357,8 +342,7 @@ export const Overworld = ({
 						top: 0,
 						left: 0,
 						position: 'absolute',
-						backgroundColor: getOverworldShaderColor(),
-
+						backgroundColor: OverworldShaderMap[getTimeOfDay()],
 						zIndex: -4,
 					}}
 				/>

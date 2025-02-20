@@ -84,7 +84,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		y: 4,
 		map: 'testMap',
 		orientation: 'LEFT',
-		dialogue: ['To the winodw', 'to the wall'],
+		dialogue: ['did you know', 'some pokemon only appear at night'],
 		sprite: '040',
 		movememt: { path: ['RIGHT', 'LEFT'], currentStep: 0 },
 	},
