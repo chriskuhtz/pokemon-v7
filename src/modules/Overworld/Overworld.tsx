@@ -11,7 +11,6 @@ import { isValidOverWorldMap } from '../../functions/isValidOverworldMap';
 import { Inventory } from '../../interfaces/Inventory';
 import {
 	Occupant,
-	OverworldEncounter,
 	OverworldItem,
 	OverworldMap,
 } from '../../interfaces/OverworldMap';
@@ -59,7 +58,7 @@ export const Overworld = ({
 	collectItem: (item: [string, OverworldItem]) => void;
 	map: OverworldMap;
 	collectedItems: number[];
-	startEncounter: (x: OverworldEncounter, stepsTaken: number) => void;
+	startEncounter: (stepsTaken: number) => void;
 	encounterRateModifier?: number;
 	openStorage: (stepsTaken: number) => void;
 	goToMarket: (marketInventory: Partial<Inventory>, stepsTaken: number) => void;
@@ -126,14 +125,9 @@ export const Overworld = ({
 	};
 
 	const addEncounterDialogue = () => {
-		const randomEncounter =
-			assembledMap.possibleEncounters[
-				Math.floor(Math.random() * assembledMap.possibleEncounters.length)
-			];
-
 		addDialogue({
-			message: 'A wild Pokemon appeared!',
-			onRemoval: () => startEncounter(randomEncounter, stepsTaken),
+			message: 'Wild Pokemon appeared!',
+			onRemoval: () => startEncounter(stepsTaken),
 		});
 	};
 

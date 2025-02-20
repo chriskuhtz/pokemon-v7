@@ -1,15 +1,9 @@
 import { useMemo, useState } from 'react';
 import { v4 } from 'uuid';
-import { abilityNames } from './constants/checkLists/abilityCheckList';
-import { handledMoves } from './constants/checkLists/movesCheckList';
 import { testOpponent, testPokemon, testState } from './constants/gameData';
 import { testMap } from './constants/maps/testmap';
 import { STANDARD_BUY_MARKET } from './constants/standardBuyMarket';
-import {
-	determineHeldItem,
-	getHeldItemRateModifier,
-} from './functions/determineHeldItem';
-import { getRandomPokemonId } from './functions/getRandomPokemonId';
+import { getRandomEncounter } from './functions/getRandomEncounter';
 import { reduceBattlePokemonToOwnedPokemon } from './functions/reduceBattlePokemonToOwnedPokemon';
 import { useSaveFile } from './hooks/useSaveFile';
 import { AddToastFunction } from './hooks/useToasts';
@@ -34,8 +28,6 @@ export const App = ({
 	activeToast: boolean;
 	addToast: AddToastFunction;
 }): JSX.Element => {
-	const [currentOpponent, setCurrentOpponent] =
-		useState<OwnedPokemon>(testOpponent);
 	const [currentMarketInventory, setCurrentMarketInventory] =
 		useState<Partial<Inventory>>(STANDARD_BUY_MARKET);
 	const {
@@ -76,8 +68,8 @@ export const App = ({
 		return (
 			<BattleLoader
 				opponents={[
-					currentOpponent,
-					{ ...currentOpponent, dexId: getRandomPokemonId(), id: v4() },
+					{ ...testOpponent, ...getRandomEncounter(testMap), id: v4() },
+					{ ...testOpponent, ...getRandomEncounter(testMap), id: v4() },
 				]}
 				team={team}
 				leave={(caughtPokemon, updatedInventory, scatteredCoins, team) => {
@@ -234,33 +226,7 @@ export const App = ({
 			playerLocation={location}
 			map={testMap}
 			collectedItems={collectedItems}
-			startEncounter={({ dexId, xp }, steps) => {
-				setCurrentOpponent((current) => ({
-					...current,
-					dexId,
-					xp,
-					id: v4(),
-					firstMove: {
-						name: handledMoves[Math.floor(Math.random() * handledMoves.length)],
-						usedPP: 0,
-					},
-					secondMove: {
-						name: handledMoves[Math.floor(Math.random() * handledMoves.length)],
-						usedPP: 0,
-					},
-					thirdMove: {
-						name: handledMoves[Math.floor(Math.random() * handledMoves.length)],
-						usedPP: 0,
-					},
-					fourthMove: {
-						name: handledMoves[Math.floor(Math.random() * handledMoves.length)],
-						usedPP: 0,
-					},
-					ability:
-						abilityNames[Math.floor(Math.random() * abilityNames.length)],
-					heldItemName: determineHeldItem(getHeldItemRateModifier(team[0])),
-				}));
-
+			startEncounter={(steps) => {
 				navigateAwayFromOverworldReducer('BATTLE', steps);
 			}}
 			firstTeamMember={firstTeamMember}
