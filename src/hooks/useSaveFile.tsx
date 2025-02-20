@@ -19,6 +19,10 @@ import { RoutesType } from '../interfaces/Routing';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
 import { AddToastFunction } from './useToasts';
 
+export const getHatchTimeModifier = (team: OwnedPokemon[]): number => {
+	return team.some((t) => t.ability === 'magma-armor') ? 2 : 1;
+};
+
 export const useSaveFile = (
 	init: SaveFile,
 	addToast: AddToastFunction
