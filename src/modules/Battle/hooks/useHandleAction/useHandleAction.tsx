@@ -53,7 +53,6 @@ export const useHandleAction = (
 				);
 				return;
 			}
-
 			if (move.type === 'CatchProcessInfo') {
 				handleCatch(
 					pokemon,
@@ -79,13 +78,26 @@ export const useHandleAction = (
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
 						if (target.id === attacker.id && p.id === attacker.id) {
-							return { ...applyItemToPokemon(p, move.item), moveQueue: [] };
+							return {
+								...applyItemToPokemon(
+									p,
+									move.item,
+									undefined,
+									move.moveToRestore
+								),
+								moveQueue: [],
+							};
 						}
 						if (p.id === attacker.id) {
 							return { ...attacker, moveQueue: [] };
 						}
 						if (p.id === target.id) {
-							return applyItemToPokemon(p, move.item);
+							return applyItemToPokemon(
+								p,
+								move.item,
+								undefined,
+								move.moveToRestore
+							);
 						}
 
 						return p;
