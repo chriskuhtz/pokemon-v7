@@ -159,4 +159,5 @@ export const extraFeatureCheckList: {
 	{ name: 'refactor primaryAilment healing table' },
 	{ name: 'item descriptions somewhere' },
 	{ name: 'move descriptions somewhere' },
+	{ name: 'xtract subcomponents from healaction' },
 ];
