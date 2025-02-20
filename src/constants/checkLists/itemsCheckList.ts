@@ -215,6 +215,7 @@ export const itemsCheckList: {
 	{
 		name: 'sacred-ash',
 		url: 'https://pokeapi.co/api/v2/item/44/',
+		handled: true,
 	},
 	{ name: 'hp-up', url: 'https://pokeapi.co/api/v2/item/45/' },
 	{ name: 'protein', url: 'https://pokeapi.co/api/v2/item/46/' },

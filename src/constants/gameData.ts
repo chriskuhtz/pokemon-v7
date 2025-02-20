@@ -41,6 +41,7 @@ export const testState: SaveFile = {
 		revive: 10,
 		elixir: 5,
 		ether: 5,
+		'sacred-ash': 5,
 	}),
 	playerId: '',
 	money: 5000,

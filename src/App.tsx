@@ -47,6 +47,7 @@ export const App = ({
 		fulfillQuestReducer,
 		putSaveFileReducer,
 		changeHeldItemReducer,
+		useSacredAshReducer,
 	} = useSaveFile(testState, addToast);
 
 	const {
@@ -166,6 +167,7 @@ export const App = ({
 				goBack={() => setActiveTabReducer('MAIN')}
 				team={team}
 				applyItem={applyItemToPokemonReducer}
+				applySacredAsh={useSacredAshReducer}
 			/>
 		);
 	}

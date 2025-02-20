@@ -58,6 +58,7 @@ export const useSaveFile = (
 	) => void;
 	fulfillQuestReducer: (q: QuestName) => void;
 	changeHeldItemReducer: (pokemonId: string, newItem?: ItemType) => void;
+	useSacredAshReducer: () => void;
 } => {
 	const local = window.localStorage.getItem(localStorageId);
 	const loaded = local ? (JSON.parse(local) as SaveFile) : init;
@@ -236,6 +237,27 @@ export const useSaveFile = (
 		);
 		addToast('Whole Team fully healed', 'SUCCESS');
 	};
+	const useSacredAshReducer = () => {
+		setSaveFile(
+			{
+				...saveFile,
+				inventory: joinInventories(
+					saveFile.inventory,
+					{ 'sacred-ash': 1 },
+					true
+				),
+				pokemon: saveFile.pokemon.map((p) => {
+					if (!p.onTeam) {
+						return p;
+					}
+
+					return fullyHealPokemon(p);
+				}),
+			},
+			'sacredAsh'
+		);
+		addToast('Whole Team fully healed', 'SUCCESS');
+	};
 	const cutBushReducer = (id: number) => {
 		setSaveFile(
 			{
@@ -348,5 +370,6 @@ export const useSaveFile = (
 		applyItemToPokemonReducer,
 		fulfillQuestReducer,
 		changeHeldItemReducer,
+		useSacredAshReducer,
 	};
 };
