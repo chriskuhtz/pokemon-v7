@@ -3,12 +3,15 @@ import { CSSProperties } from 'react';
 export const Chip = ({
 	children,
 	style,
+	onClick,
 }: {
 	children: React.JSX.Element;
 	style?: CSSProperties;
+	onClick?: () => void;
 }) => {
 	return (
 		<div
+			onClick={onClick}
 			style={{
 				color: 'white',
 				backgroundColor: 'black',

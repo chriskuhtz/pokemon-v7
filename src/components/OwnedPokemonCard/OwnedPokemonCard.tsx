@@ -50,12 +50,13 @@ export const OwnedPokemonCard = ({
 				/>
 			}
 			content={
-				<div>
-					{pokemon.heldItemName && (
-						<button onClick={takeHeldItem}>Take Item</button>
-					)}
-					<OwnedPokemonCardContent ownedPokemon={pokemon} data={res} />
-				</div>
+				<OwnedPokemonCardContent
+					ownedPokemon={pokemon}
+					data={res}
+					inventory={inventory}
+					takeHeldItem={takeHeldItem}
+					giveHeldItem={giveHeldItem}
+				/>
 			}
 			actionElements={[
 				<FaArrowUp
