@@ -1,4 +1,4 @@
-import { reduceMovePP } from '../../../functions/reduceMovePP';
+import { changeMovePP } from '../../../functions/changeMovePP';
 import { BattleAttack } from '../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
@@ -18,7 +18,7 @@ export const handleDampy = (
 	//1. update moveQueue
 	updatedAttacker = { ...updatedAttacker, moveQueue: [] };
 	//2. reduce pp
-	updatedAttacker = reduceMovePP(updatedAttacker, attack.name);
+	updatedAttacker = changeMovePP(updatedAttacker, attack.name, -1);
 
 	setPokemon((pokemon) =>
 		pokemon.map((p) => {
