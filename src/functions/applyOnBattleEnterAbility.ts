@@ -28,6 +28,11 @@ export const applyOnBattleEnterAbility = ({
 			message: `${user.data.name} negates all weather effects with ${user.ability}`,
 		});
 	}
+	if (user.ability === 'shadow-tag') {
+		addMessage({
+			message: `${user.data.name} prevents escape with shadow tag ${user.ability}`,
+		});
+	}
 	if (user.ability === 'intimidate') {
 		setPokemon((pokemon) =>
 			pokemon.map((p) => {

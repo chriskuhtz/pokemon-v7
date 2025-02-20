@@ -119,6 +119,7 @@ export const abilityCheckList: {
 	{
 		name: 'shadow-tag',
 		url: 'https://pokeapi.co/api/v2/ability/23/',
+		handled: true,
 	},
 	{
 		name: 'rough-skin',
@@ -533,6 +534,7 @@ export const abilityNames = [
 	'inner-focus',
 	'magma-armor',
 	'intimidate',
+	'shadow-tag',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
