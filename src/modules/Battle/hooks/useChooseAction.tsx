@@ -3,7 +3,11 @@ import { MoveName } from '../../../constants/checkLists/movesCheckList';
 import { secondTurnMoves } from '../../../constants/secondTurnMoves';
 import { determineMultiHits } from '../../../functions/determineMultiHits';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
-import { isHealingItem, isPokeball } from '../../../interfaces/Item';
+import {
+	isHealingItem,
+	isPokeball,
+	isPPRestorationItem,
+} from '../../../interfaces/Item';
 import { ChooseActionPayload } from '../BattleField';
 
 export const useChooseAction = (
@@ -13,7 +17,7 @@ export const useChooseAction = (
 	battleRound: number
 ) => {
 	return useCallback(
-		({ userId, actionName, targetId }: ChooseActionPayload) => {
+		({ userId, actionName, targetId, moveToRestore }: ChooseActionPayload) => {
 			const user = allOnField.find((u) => u.id === userId);
 			if (!user) {
 				throw new Error('the user is not on the field');
@@ -58,7 +62,7 @@ export const useChooseAction = (
 				);
 				return;
 			}
-			if (isHealingItem(actionName)) {
+			if (isHealingItem(actionName) || isPPRestorationItem(actionName)) {
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
 						if (p.id === user.id) {
@@ -70,6 +74,7 @@ export const useChooseAction = (
 										item: actionName,
 										round: battleRound,
 										targetId,
+										moveToRestore,
 									},
 								],
 							};
