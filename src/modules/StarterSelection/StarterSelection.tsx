@@ -3,10 +3,10 @@ import { battleSpriteSize } from '../../constants/gameData';
 import { typeColors } from '../../constants/typeColors';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getRandomPokemonId } from '../../functions/getRandomPokemonId';
+import { useMessageQueue } from '../../hooks/useMessageQueue';
 import { Banner } from '../../uiComponents/Banner/Banner';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { useBattleMessages } from '../Battle/hooks/useBattleMessages';
 
 const defaultStarters = [1, 4, 7];
 const randomStarterOptions = [
@@ -21,7 +21,7 @@ export const StarterSelection = ({
 	randomStarters: boolean;
 	proceed: (name: string, starterDexId: number) => void;
 }): JSX.Element => {
-	const { latestMessage, addMultipleMessages } = useBattleMessages();
+	const { latestMessage, addMultipleMessages } = useMessageQueue();
 	const options = randomStarters ? randomStarterOptions : defaultStarters;
 	const [chosenStarter, setChosenStarter] = useState<number | undefined>();
 	const [name, setName] = useState<string | undefined>('');

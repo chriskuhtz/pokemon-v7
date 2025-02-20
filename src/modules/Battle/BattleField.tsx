@@ -12,6 +12,7 @@ import { BattleLocation } from '../../functions/determineCaptureSuccess';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
 import { sortByPriority } from '../../functions/sortByPriority';
+import { useMessageQueue } from '../../hooks/useMessageQueue';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Inventory, joinInventories } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
@@ -21,7 +22,6 @@ import { ControlBar } from './components/ControlBar';
 import { EnemyLane } from './components/EnemyLane';
 import { PlayerLane } from './components/PlayerLane';
 import { RefillHandling } from './components/RefillHandling';
-import { useBattleMessages } from './hooks/useBattleMessages';
 import { useChooseAction } from './hooks/useChooseAction';
 import { useHandleAction } from './hooks/useHandleAction/useHandleAction';
 
@@ -58,7 +58,7 @@ export const BattleField = ({
 	inventory: Inventory;
 }) => {
 	const { latestMessage, addMessage, addMultipleMessages, interjectMessage } =
-		useBattleMessages();
+		useMessageQueue();
 	const [battleRound, setBattleRound] = useState<number>(0);
 	const [bW, setBattleWeather] = useState<WeatherType | undefined>();
 

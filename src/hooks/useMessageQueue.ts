@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { animationTimer } from '../../../constants/gameData';
-import { BattleMessage } from '../BattleField';
+import { animationTimer } from '../constants/gameData';
+import { BattleMessage } from '../modules/Battle/BattleField';
 
-export const useBattleMessages = () => {
+export const useMessageQueue = () => {
 	const [messages, setMessages] = useState<BattleMessage[]>([]);
 	const addMessage = useCallback((message: BattleMessage) => {
 		setMessages((messages) => [...messages, message]);
