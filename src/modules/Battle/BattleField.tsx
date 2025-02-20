@@ -27,6 +27,7 @@ export interface ChooseActionPayload {
 	userId: string;
 	actionName: ActionType;
 	targetId: string;
+	moveToRestore?: MoveName;
 }
 
 export interface BattleMessage {
