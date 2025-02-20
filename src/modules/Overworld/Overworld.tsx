@@ -51,6 +51,7 @@ export const Overworld = ({
 	openStorage,
 	bushCutting,
 	cutBushes,
+	playerSprite,
 }: {
 	openMenu: (stepsTaken: number) => void;
 	playerLocation: CharacterLocationData;
@@ -69,6 +70,7 @@ export const Overworld = ({
 		cutterPokemon: { dexId: number };
 	};
 	cutBushes: number[];
+	playerSprite: string;
 }) => {
 	const [statefulOccupants, setStatefulOccupants] = useState<
 		Record<number, Occupant>
@@ -155,7 +157,7 @@ export const Overworld = ({
 	}, [firstTeamMember.ability]);
 
 	//DRAWING
-	useDrawCharacter(playerCanvasId, playerLocation);
+	useDrawCharacter(playerCanvasId, playerLocation, playerSprite);
 	useDrawBackground(backgroundCanvasId, map);
 	useDrawOccupants(
 		occupantsCanvasId,

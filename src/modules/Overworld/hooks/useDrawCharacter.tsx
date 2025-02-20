@@ -5,7 +5,8 @@ import { CharacterLocationData } from '../../../interfaces/SaveFile';
 
 export const useDrawCharacter = (
 	canvasId: string,
-	playerLocation: CharacterLocationData
+	playerLocation: CharacterLocationData,
+	playerSprite: string
 ) => {
 	const yOffset = useMemo(
 		() => getYOffsetFromOrientation(playerLocation.orientation),
@@ -38,6 +39,6 @@ export const useDrawCharacter = (
 			ctx?.drawImage(img, xOffset, yOffset);
 		});
 
-		img.src = '/npcs/NPC_001.png';
-	}, [canvasId, xOffset, yOffset]);
+		img.src = `/npcs/${playerSprite}.png`;
+	}, [canvasId, playerSprite, xOffset, yOffset]);
 };

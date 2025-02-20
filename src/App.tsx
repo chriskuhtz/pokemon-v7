@@ -21,6 +21,7 @@ import { Quests } from './modules/Quests/Quests';
 import { Settings } from './modules/Settings/Settings';
 import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { Team } from './modules/Team/Team';
+import { SpriteSelection } from './modules/SpriteSelection/SpriteSelection';
 
 export const App = ({
 	addToast,
@@ -114,6 +115,17 @@ export const App = ({
 			/>
 		);
 	}
+	if (activeTab === 'SPRITE_SELECTION') {
+		return (
+			<SpriteSelection
+				proceed={(sprite: string) => {
+					patchSaveFileReducer({
+						sprite: sprite,
+					});
+				}}
+			/>
+		);
+	}
 	if (activeTab === 'STARTER_SELECTION') {
 		return (
 			<StarterSelection
@@ -144,7 +156,7 @@ export const App = ({
 				goBack={() => setActiveTabReducer('OVERWORLD')}
 				navigate={setActiveTabReducer}
 				badges={badges}
-				spriteUrl="/npcs/NPC_001.png"
+				spriteUrl={`/npcs/${saveFile.sprite}.png`}
 				name={playerId}
 			/>
 		);
@@ -248,6 +260,7 @@ export const App = ({
 				cutterPokemon: { dexId: team[0].dexId },
 			}}
 			cutBushes={saveFile.cutBushes}
+			playerSprite={saveFile.sprite}
 		/>
 	);
 };
