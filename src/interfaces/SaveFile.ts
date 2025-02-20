@@ -44,4 +44,5 @@ export interface SaveFile {
 		randomStarters: boolean;
 	};
 	quests: Record<QuestName, QuestStatus>;
+	sprite: string;
 }
