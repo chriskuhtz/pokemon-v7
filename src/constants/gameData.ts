@@ -16,7 +16,7 @@ export const testPokemon: OwnedPokemon = {
 	onTeam: true,
 	firstMove: { name: 'swords-dance', usedPP: 15 },
 	secondMove: { name: 'double-slap', usedPP: 5 },
-	thirdMove: { name: 'razor-wind', usedPP: 7 },
+	thirdMove: { name: 'whirlwind', usedPP: 7 },
 	fourthMove: { name: 'ice-punch', usedPP: 8 },
 	damage: 0,
 	nature: 'adamant',
