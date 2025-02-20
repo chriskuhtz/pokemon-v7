@@ -159,6 +159,13 @@ export const Overworld = ({
 
 		return 1;
 	}, [assembledMap.weather, firstTeamMember.ability]);
+	const fishingEncounterRateModifier = useMemo(() => {
+		if (firstTeamMember.ability === 'suction-cups') {
+			return 1.5;
+		}
+
+		return 1;
+	}, [firstTeamMember.ability]);
 
 	//DRAWING
 	useDrawCharacter(playerCanvasId, playerLocation);
