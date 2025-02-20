@@ -3,8 +3,10 @@ import { battleSpriteSize } from '../../constants/gameData';
 import { typeColors } from '../../constants/typeColors';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getRandomPokemonId } from '../../functions/getRandomPokemonId';
+import { Banner } from '../../uiComponents/Banner/Banner';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import { useBattleMessages } from '../Battle/hooks/useBattleMessages';
 
 const defaultStarters = [1, 4, 7];
 const randomStarterOptions = [
@@ -19,10 +21,26 @@ export const StarterSelection = ({
 	randomStarters: boolean;
 	proceed: (name: string, starterDexId: number) => void;
 }): JSX.Element => {
+	const { latestMessage, addMultipleMessages } = useBattleMessages();
 	const options = randomStarters ? randomStarterOptions : defaultStarters;
 	const [chosenStarter, setChosenStarter] = useState<number | undefined>();
 	const [name, setName] = useState<string | undefined>('');
-	return (
+
+	const finishForm = (name: string, starterDexId: number) => {
+		addMultipleMessages([
+			{ message: `I see, so you are ${name}` },
+			{ message: `You chose an excellent first pokemon` },
+			{
+				message: `Now have fun exploring the world of pokemon`,
+				onRemoval: () => proceed(name, starterDexId),
+			},
+		]);
+	};
+	return latestMessage ? (
+		<Banner>
+			<h2>{latestMessage.message}</h2>
+		</Banner>
+	) : (
 		<Page headline="Intro:">
 			<Stack mode="column" alignItems="center">
 				{' '}
@@ -41,7 +59,7 @@ export const StarterSelection = ({
 								if (e.key === 'Enter') {
 									if (!name) {
 										setChosenStarter(o);
-									} else proceed(name, o);
+									} else finishForm(name, o);
 								}
 							}}
 							style={{
@@ -60,7 +78,7 @@ export const StarterSelection = ({
 				</Stack>
 				<button
 					disabled={!name || !chosenStarter}
-					onClick={() => proceed(name ?? '', chosenStarter ?? 0)}
+					onClick={() => finishForm(name ?? '', chosenStarter ?? 0)}
 				>
 					Proceed
 				</button>
