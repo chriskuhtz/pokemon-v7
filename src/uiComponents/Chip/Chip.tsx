@@ -11,7 +11,15 @@ export const Chip = ({
 }) => {
 	return (
 		<div
+			tabIndex={onClick ? 0 : undefined}
+			role={onClick ? 'button' : undefined}
 			onClick={onClick}
+			onKeyDown={(e) => {
+				e.stopPropagation();
+				if (onClick && e.key === 'Enter') {
+					onClick();
+				}
+			}}
 			style={{
 				color: 'white',
 				backgroundColor: 'black',

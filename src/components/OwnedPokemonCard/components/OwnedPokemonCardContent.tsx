@@ -46,6 +46,7 @@ export const OwnedPokemonCardContent = ({
 							if (amount > 0) {
 								return (
 									<button
+										tabIndex={0}
 										style={{ backgroundColor: 'white' }}
 										key={item}
 										onClick={() => {
