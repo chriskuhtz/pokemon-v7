@@ -28,6 +28,7 @@ export const testPokemon: OwnedPokemon = {
 	maxHp: 20,
 };
 export const testState: SaveFile = {
+	sprite: '',
 	badges: ['boulder-badge'],
 	quests: { 'catch a pikachu': 'ACTIVE' },
 	inventory: generateInventory({

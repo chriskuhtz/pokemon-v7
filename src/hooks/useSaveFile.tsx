@@ -344,6 +344,15 @@ export const useSaveFile = (
 		}
 		if (
 			saveFile.settings &&
+			saveFile.meta.activeTab !== 'SPRITE_SELECTION' &&
+			saveFile.sprite === ''
+		) {
+			setActiveTabReducer('SPRITE_SELECTION');
+			return;
+		}
+		if (
+			saveFile.settings &&
+			saveFile.sprite &&
 			saveFile.meta.activeTab !== 'STARTER_SELECTION' &&
 			(saveFile.playerId === '' || saveFile.pokemon.length === 0)
 		) {

@@ -9,6 +9,7 @@ export const routes = [
 	'SELL_MARKET',
 	'STORAGE',
 	'STARTER_SELECTION',
+	'SPRITE_SELECTION',
 	'SETTINGS',
 	'QUESTS',
 ] as const;

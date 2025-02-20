@@ -18,7 +18,7 @@ import { SellMarket } from './modules/Market/SellMarket';
 import { Overworld } from './modules/Overworld/Overworld';
 import { PokemonStorage } from './modules/PokemonStorage/PokemonStorage';
 import { Quests } from './modules/Quests/Quests';
-import { Settings } from './modules/Settings/Settings';
+import { Settings, SpriteSelection } from './modules/Settings/Settings';
 import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { Team } from './modules/Team/Team';
 
@@ -109,6 +109,17 @@ export const App = ({
 						settings: {
 							randomStarters: randomStarters,
 						},
+					});
+				}}
+			/>
+		);
+	}
+	if (activeTab === 'SPRITE_SELECTION') {
+		return (
+			<SpriteSelection
+				proceed={(sprite: string) => {
+					patchSaveFileReducer({
+						sprite: sprite,
 					});
 				}}
 			/>
@@ -248,6 +259,7 @@ export const App = ({
 				cutterPokemon: { dexId: team[0].dexId },
 			}}
 			cutBushes={saveFile.cutBushes}
+			playerSprite={saveFile.sprite}
 		/>
 	);
 };
