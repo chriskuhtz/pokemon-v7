@@ -522,6 +522,7 @@ export const abilityNames = [
 	'color-change',
 	'shield-dust',
 	'own-tempo',
+	'suction-cups',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
