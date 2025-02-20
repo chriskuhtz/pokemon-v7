@@ -3,6 +3,7 @@ import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
 import { applyEndOfTurnAbility } from '../../functions/applyEndOfTurnAbility';
+import { applyEndOfTurnHeldItem } from '../../functions/applyEndOfTurnHeldItem';
 import { applyOnBattleEnterAbility } from '../../functions/applyOnBattleEnterAbility';
 import { applyPrimaryAilmentDamage } from '../../functions/applyPrimaryAilmentDamage';
 import { changeMovePP } from '../../functions/changeMovePP';
@@ -343,7 +344,9 @@ export const BattleField = ({
 						pokemon: p,
 						addMessage: (x) => collectedMessages.push(x),
 					});
+					up = applyEndOfTurnHeldItem(up, (x) => collectedMessages.push(x));
 					up = applyPrimaryAilmentDamage(up, (x) => collectedMessages.push(x));
+
 					return up;
 				}
 
