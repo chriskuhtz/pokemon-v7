@@ -50,7 +50,8 @@ export const applyPrimaryAilmentToPokemon = (
 	if (
 		ailment === 'freeze' &&
 		//ice pokemon cant get frozen
-		!getTypeNames(pokemon).includes('ice')
+		!getTypeNames(pokemon).includes('ice') &&
+		pokemon.ability !== 'magma-armor'
 	) {
 		dispatchToast(
 			`${pokemon.data.name} was frozen solid ${
