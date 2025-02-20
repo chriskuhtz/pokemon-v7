@@ -57,6 +57,7 @@ export const useSaveFile = (
 		move?: MoveName
 	) => void;
 	fulfillQuestReducer: (q: QuestName) => void;
+	changeHeldItemReducer: (pokemonId: string, newItem?: ItemType) => void;
 } => {
 	const local = window.localStorage.getItem(localStorageId);
 	const loaded = local ? (JSON.parse(local) as SaveFile) : init;
@@ -284,6 +285,30 @@ export const useSaveFile = (
 			'applyItem'
 		);
 	};
+	const changeHeldItemReducer = (pokemonId: string, newItem?: ItemType) => {
+		const heldItem = saveFile.pokemon.find(
+			(p) => p.id === pokemonId
+		)?.heldItemName;
+
+		let updatedInventory = { ...saveFile.inventory };
+
+		if (heldItem) {
+			updatedInventory = joinInventories(updatedInventory, { [heldItem]: 1 });
+		}
+		if (newItem) {
+			updatedInventory = joinInventories(updatedInventory, { [newItem]: -1 });
+		}
+
+		patchSaveFileReducer({
+			pokemon: saveFile.pokemon.map((p) => {
+				if (p.id === pokemonId) {
+					return { ...p, heldItemName: newItem };
+				}
+				return p;
+			}),
+			inventory: updatedInventory,
+		});
+	};
 
 	//SYNC WITH LOCAL STORAGE
 	useEffect(() => {
@@ -322,5 +347,6 @@ export const useSaveFile = (
 		cutBushReducer,
 		applyItemToPokemonReducer,
 		fulfillQuestReducer,
+		changeHeldItemReducer,
 	};
 };

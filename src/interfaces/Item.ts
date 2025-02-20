@@ -186,13 +186,14 @@ export const HappinessChangeTable: Partial<Record<ItemType, number>> = {
 
 export const HPHealTable: Partial<Record<ItemType, number>> = {
 	potion: 20,
-	'max-potion': 10000,
-	'hyper-potion': 200,
+	'berry-juice': 20,
+	'energy-powder': 50,
 	'super-potion': 50,
 	'fresh-water': 50,
 	'soda-pop': 60,
 	lemonade: 80,
 	'moomoo-milk': 100,
-	'energy-powder': 50,
 	'energy-root': 200,
+	'hyper-potion': 200,
+	'max-potion': 10000,
 };

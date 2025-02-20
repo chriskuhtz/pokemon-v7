@@ -3,12 +3,23 @@ import { CSSProperties } from 'react';
 export const Chip = ({
 	children,
 	style,
+	onClick,
 }: {
 	children: React.JSX.Element;
 	style?: CSSProperties;
+	onClick?: () => void;
 }) => {
 	return (
 		<div
+			tabIndex={onClick ? 0 : undefined}
+			role={onClick ? 'button' : undefined}
+			onClick={onClick}
+			onKeyDown={(e) => {
+				e.stopPropagation();
+				if (onClick && e.key === 'Enter') {
+					onClick();
+				}
+			}}
 			style={{
 				color: 'white',
 				backgroundColor: 'black',

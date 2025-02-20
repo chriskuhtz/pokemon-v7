@@ -17,10 +17,18 @@ export const sortByPriority = (
 	if (bMove && !aMove) {
 		return 1;
 	}
-	if (aMove?.type === 'CatchProcessInfo' || aMove?.type === 'InBattleItem') {
+	if (
+		aMove?.type === 'CatchProcessInfo' ||
+		aMove?.type === 'InBattleItem' ||
+		aMove?.type === 'RunAway'
+	) {
 		return -1;
 	}
-	if (bMove?.type === 'CatchProcessInfo' || bMove?.type === 'InBattleItem') {
+	if (
+		bMove?.type === 'CatchProcessInfo' ||
+		bMove?.type === 'InBattleItem' ||
+		bMove?.type === 'RunAway'
+	) {
 		return 1;
 	}
 
