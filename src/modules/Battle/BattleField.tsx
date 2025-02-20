@@ -295,10 +295,21 @@ export const BattleField = ({
 	}, [addMultipleMessages, battleStep, nextPokemonWithoutMove, pokemon]);
 	// Refilling
 	useEffect(() => {
-		if (battleStep === 'REFILLING' && !teamCanRefill && !opponentCanRefill) {
+		if (
+			!latestMessage &&
+			battleStep === 'REFILLING' &&
+			!teamCanRefill &&
+			!opponentCanRefill
+		) {
 			setBattleStep('COLLECTING');
 		}
-	}, [battleStep, nextPokemonWithoutMove, opponentCanRefill, teamCanRefill]);
+	}, [
+		battleStep,
+		latestMessage,
+		nextPokemonWithoutMove,
+		opponentCanRefill,
+		teamCanRefill,
+	]);
 	// Battle Over
 	useEffect(() => {
 		if (battleLost && !latestMessage) {
