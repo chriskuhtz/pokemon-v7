@@ -165,12 +165,17 @@ export const handleAttack = ({
 		);
 	}
 	//5. check flash fire
-	if (target.ability === 'flash-fire' && move.data.type.name === 'fire') {
+	if (
+		!isKO(updatedTarget) &&
+		target.ability === 'flash-fire' &&
+		move.data.type.name === 'fire'
+	) {
 		addMessage(`${target.data.name} raised its power with ${target.ability}`);
 		updatedTarget.flashFired = true;
 	}
 	//6. check color change
 	if (
+		!isKO(updatedTarget) &&
 		updatedTarget.damage > target.damage &&
 		updatedTarget.ability === 'color-change'
 	) {
