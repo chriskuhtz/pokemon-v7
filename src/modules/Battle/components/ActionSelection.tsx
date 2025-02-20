@@ -24,6 +24,21 @@ export function ActionSelection({
 	allTargets: BattlePokemon[];
 }) {
 	const trapped = isTrapped(controlled);
+	const shadowTagged =
+		allTargets.some(
+			(p) => p.id !== controlled.id && p.ability === 'shadow-tag'
+		) && controlled.ability !== 'shadow-tag';
+
+	const runButtonMessage = () => {
+		if (trapped) {
+			return 'Trapped';
+		}
+		if (shadowTagged) {
+			return 'Shadow Tag in Effect';
+		}
+		return 'Run Away';
+	};
+
 	return (
 		<div
 			style={{
@@ -59,7 +74,7 @@ export function ActionSelection({
 				})}
 
 				<button
-					disabled={trapped}
+					disabled={trapped || shadowTagged}
 					onClick={() =>
 						chooseAction({
 							userId: controlled.id,
@@ -68,7 +83,7 @@ export function ActionSelection({
 						})
 					}
 				>
-					{trapped ? 'Trapped' : 'Run Away'}
+					{runButtonMessage()}
 				</button>
 			</div>
 		</div>
