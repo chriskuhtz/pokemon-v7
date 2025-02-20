@@ -51,10 +51,8 @@ export const extraFeatureCheckList: {
 	{ name: 'hpbar colors', handled: true },
 	{ name: 'time of day icon in battle', handled: true },
 	{ name: 'choose random moves for opponent', handled: true },
-	{
-		name: 'only factor volt-absorb etc into recommendation after it has been revealed',
-	},
-	{ name: 'different encounters for time of day' },
+
+	{ name: 'different encounters for time of day', handled: true },
 	{ name: 'smooth transition with dialogue after Starter Selection' },
 	{ name: 'player sprite selection' },
 	{ name: 'check if pokemon can actually cut' },
@@ -164,4 +162,7 @@ export const extraFeatureCheckList: {
 	{ name: 'disable moves with no pp left' },
 	{ name: 'animation state for flying pokemon' },
 	{ name: 'eggs?' },
+	{
+		name: 'only factor volt-absorb etc into recommendation after it has been revealed',
+	},
 ];

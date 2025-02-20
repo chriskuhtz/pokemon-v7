@@ -1,14 +1,24 @@
-export const isMorning = (): boolean => {
+export type TimeOfDay = 'MORNING' | 'DAY' | 'EVENING' | 'NIGHT';
+
+export const getTimeOfDay = (): TimeOfDay => {
 	const hours = new Date().getHours();
-	return hours > 5 && hours <= 9;
+
+	if (hours > 5 && hours <= 9) {
+		return 'MORNING';
+	}
+	if (hours > 16 && hours <= 20) {
+		return 'EVENING';
+	}
+	if (hours <= 5 || hours > 20) {
+		return 'NIGHT';
+	}
+
+	return 'DAY';
 };
 
-export const isEvening = (): boolean => {
-	const hours = new Date().getHours();
-	return hours > 16 && hours <= 20;
-};
-
-export const isNight = (): boolean => {
-	const hours = new Date().getHours();
-	return hours <= 5 || hours > 20;
+export const OverworldShaderMap: Record<TimeOfDay, string> = {
+	MORNING: 'rgba(156, 98, 0,.2)',
+	DAY: '',
+	EVENING: 'rgba(156, 98, 0,.2)',
+	NIGHT: 'rgba(23, 44, 79,.4)',
 };
