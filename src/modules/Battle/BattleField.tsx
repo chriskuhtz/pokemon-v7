@@ -5,6 +5,7 @@ import { MoveName } from '../../constants/checkLists/movesCheckList';
 import { applyEndOfTurnAbility } from '../../functions/applyEndOfTurnAbility';
 import { applyOnBattleEnterAbility } from '../../functions/applyOnBattleEnterAbility';
 import { applyPrimaryAilmentDamage } from '../../functions/applyPrimaryAilmentDamage';
+import { changeMovePP } from '../../functions/changeMovePP';
 import { BattleLocation } from '../../functions/determineCaptureSuccess';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
@@ -236,13 +237,31 @@ export const BattleField = ({
 	);
 	const handleForceSwitch = useCallback(
 		(user: BattlePokemon, moveName: MoveName) => {
+			const otherSideHasSuctionCups = pokemon.find(
+				(p) => p.ability === 'suction-cups' && p.ownerId !== user.ownerId
+			);
+			if (otherSideHasSuctionCups) {
+				addMessage({
+					message: `${otherSideHasSuctionCups.data.name} prevents force switching with suction cups`,
+				});
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.id === user.id) {
+							return { ...changeMovePP(user, moveName, -1), moveQueue: [] };
+						}
+						return p;
+					})
+				);
+				return;
+			}
+
 			//TODO: consider trainer battles
 			addMessage({
 				message: `${user.data.name} separated the fighters with ${moveName}`,
 				onRemoval: () => leaveWithCurrentData(),
 			});
 		},
-		[addMessage, leaveWithCurrentData]
+		[addMessage, leaveWithCurrentData, pokemon]
 	);
 	const chooseAction = useChooseAction(
 		allOnField,
