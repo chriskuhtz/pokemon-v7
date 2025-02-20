@@ -1,22 +1,20 @@
 import { AddToastFunction } from '../hooks/useToasts';
 import { BattlePokemon, isBattlePokemon } from '../interfaces/BattlePokemon';
-import { HealingItemType, ItemType } from '../interfaces/Item';
+import {
+	HappinessChangeTable,
+	HealingItemType,
+	HPHealTable,
+} from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { removeHealableAilments } from './removeHealableAilments';
 
-const HPHealTable: Partial<Record<ItemType, number>> = {
-	potion: 20,
-	'max-potion': 10000,
-	'hyper-potion': 200,
-	'super-potion': 50,
-};
 export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	pokemon: T,
 	item: HealingItemType,
 	addToast?: AddToastFunction
 ): T {
 	if (
-		(item === 'revive' || item === 'max-revive') &&
+		(item === 'revive' || item === 'max-revive' || item === 'revival-herb') &&
 		pokemon.damage >= pokemon.maxHp
 	) {
 		if (addToast) {
@@ -32,12 +30,14 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 				moveQueue: [],
 				roundsInBattle: 0,
 				status: 'BENCH',
+				happiness: pokemon.happiness + (HappinessChangeTable[item] ?? 0),
 			};
 		}
 		return {
 			...pokemon,
 			damage: Math.round(pokemon.maxHp / 2),
 			primaryAilment: undefined,
+			happiness: pokemon.happiness + (HappinessChangeTable[item] ?? 0),
 		};
 	}
 	if (item === 'full-restore') {
@@ -50,12 +50,13 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 				damage: 0,
 				primaryAilment: undefined,
 				secondaryAilments: removeHealableAilments(pokemon.secondaryAilments),
+				happiness: pokemon.happiness + (HappinessChangeTable[item] ?? 0),
 			};
 		}
 
 		return { ...pokemon, damage: 0, primaryAilment: undefined };
 	}
-	if (item === 'full-heal') {
+	if (item === 'full-heal' || item === 'heal-powder') {
 		if (addToast) {
 			addToast(`all ailments healed`);
 		}
@@ -64,6 +65,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 				...pokemon,
 				primaryAilment: undefined,
 				secondaryAilments: removeHealableAilments(pokemon.secondaryAilments),
+				happiness: pokemon.happiness + (HappinessChangeTable[item] ?? 0),
 			};
 		}
 
@@ -86,25 +88,41 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		if (addToast) {
 			addToast(`Poisoning cured`);
 		}
-		return { ...pokemon, primaryAilment: undefined };
+		return {
+			...pokemon,
+			primaryAilment: undefined,
+			happiness: pokemon.happiness + (HappinessChangeTable[item] ?? 0),
+		};
 	}
 	if (item === 'burn-heal' && pokemon.primaryAilment?.type === 'burn') {
 		if (addToast) {
 			addToast(`Burn cured`);
 		}
-		return { ...pokemon, primaryAilment: undefined };
+		return {
+			...pokemon,
+			primaryAilment: undefined,
+			happiness: pokemon.happiness + (HappinessChangeTable[item] ?? 0),
+		};
 	}
 	if (item === 'ice-heal' && pokemon.primaryAilment?.type === 'freeze') {
 		if (addToast) {
 			addToast(`Defrosted`);
 		}
-		return { ...pokemon, primaryAilment: undefined };
+		return {
+			...pokemon,
+			primaryAilment: undefined,
+			happiness: pokemon.happiness + (HappinessChangeTable[item] ?? 0),
+		};
 	}
 	if (item === 'awakening' && pokemon.primaryAilment?.type === 'sleep') {
 		if (addToast) {
 			addToast(`Woken Up`);
 		}
-		return { ...pokemon, primaryAilment: undefined };
+		return {
+			...pokemon,
+			primaryAilment: undefined,
+			happiness: pokemon.happiness + (HappinessChangeTable[item] ?? 0),
+		};
 	}
 	if (
 		item === 'paralyze-heal' &&
@@ -113,7 +131,11 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		if (addToast) {
 			addToast(`Paralysis healed`);
 		}
-		return { ...pokemon, primaryAilment: undefined };
+		return {
+			...pokemon,
+			primaryAilment: undefined,
+			happiness: pokemon.happiness + (HappinessChangeTable[item] ?? 0),
+		};
 	}
 
 	return pokemon;

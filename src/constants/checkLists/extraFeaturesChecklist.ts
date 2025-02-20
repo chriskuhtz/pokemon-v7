@@ -49,6 +49,7 @@ export const extraFeatureCheckList: {
 	{ name: 'battle platforms', handled: true },
 
 	{ name: 'hpbar colors', handled: true },
+	{ name: 'time of day icon in battle' },
 	{ name: 'choose random moves for opponent' },
 	{
 		name: 'only factor volt-absorb etc into recommendation after it has been revealed',
@@ -155,4 +156,7 @@ export const extraFeatureCheckList: {
 		name: 'prettier weather display',
 	},
 	{ name: 'Battle Attack animation' },
+	{ name: 'refactor primaryAilment healing table' },
+	{ name: 'item descriptions somewhere' },
+	{ name: 'move descriptions somewhere' },
 ];

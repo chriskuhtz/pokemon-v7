@@ -173,7 +173,26 @@ export const hasFriendshipEffect = (itemName: ItemType) => {
 		'energy-powder',
 		'revival-herb',
 		'energy-root',
-		...evBoostItemTypes,
 		'rare-candy',
+		...evBoostItemTypes,
 	].includes(itemName);
+};
+export const HappinessChangeTable: Partial<Record<ItemType, number>> = {
+	'heal-powder': -10,
+	'energy-powder': -10,
+	'revival-herb': -10,
+	'energy-root': -10,
+};
+
+export const HPHealTable: Partial<Record<ItemType, number>> = {
+	potion: 20,
+	'max-potion': 10000,
+	'hyper-potion': 200,
+	'super-potion': 50,
+	'fresh-water': 50,
+	'soda-pop': 60,
+	lemonade: 80,
+	'moomoo-milk': 100,
+	'energy-powder': 50,
+	'energy-root': 200,
 };
