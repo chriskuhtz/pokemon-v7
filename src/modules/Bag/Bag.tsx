@@ -1,8 +1,10 @@
 import React from 'react';
+import { MdHealing } from 'react-icons/md';
 import { HealAction } from '../../components/ItemCard/components/HealAction';
 import { ThrowAwayAction } from '../../components/ItemCard/components/ThrowAwayAction';
 import { ItemCard } from '../../components/ItemCard/ItemCard';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
+import { baseSize } from '../../constants/gameData';
 import { canBenefitFromItem } from '../../functions/canBenefitFromItem';
 import { Inventory } from '../../interfaces/Inventory';
 import {
@@ -22,11 +24,13 @@ export const Bag = ({
 	goBack,
 	applyItem,
 	team,
+	applySacredAsh,
 }: {
 	inventory: Inventory;
 	discardItem: (item: ItemType, number: number) => void;
 	goBack: () => void;
 	team: OwnedPokemon[];
+	applySacredAsh: () => void;
 	applyItem: (
 		pokemon: OwnedPokemon,
 		item: HealingItemType | PPRestoringItemType,
@@ -59,6 +63,22 @@ export const Bag = ({
 										healablePokemon={team.filter((t) =>
 											canBenefitFromItem(t, item)
 										)}
+									/>
+								) : (
+									<></>
+								),
+								item === 'sacred-ash' ? (
+									<MdHealing
+										tabIndex={0}
+										role="button"
+										onKeyDown={(e) => {
+											e.stopPropagation();
+											if (e.key === 'Enter') {
+												applySacredAsh();
+											}
+										}}
+										onClick={() => applySacredAsh()}
+										size={baseSize / 2}
 									/>
 								) : (
 									<></>
