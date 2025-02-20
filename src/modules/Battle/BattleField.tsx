@@ -295,12 +295,7 @@ export const BattleField = ({
 	}, [addMultipleMessages, battleStep, nextPokemonWithoutMove, pokemon]);
 	// Refilling
 	useEffect(() => {
-		if (
-			!latestMessage &&
-			battleStep === 'REFILLING' &&
-			!teamCanRefill &&
-			!opponentCanRefill
-		) {
+		if (battleStep === 'REFILLING' && !teamCanRefill && !opponentCanRefill) {
 			setBattleStep('COLLECTING');
 		}
 	}, [
