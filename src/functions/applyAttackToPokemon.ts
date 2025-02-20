@@ -8,7 +8,6 @@ import { applyAttackAilmentsToPokemon } from './applyAttackAilmentsToPokemon';
 import { applyPrimaryAilmentToPokemon } from './applyPrimaryAilmentToPokemon';
 import { applyStatusMove } from './applyStatusMove';
 import { calculateDamage } from './calculateDamage';
-import { changeBattlePokemonType } from './changeBattlePokemonType';
 import { reduceMovePP } from './reduceMovePP';
 
 export const applyAttackToPokemon = ({
@@ -102,13 +101,6 @@ export const applyAttackToPokemon = ({
 		attack,
 		dispatchToast
 	);
-	if (damage > 0 && updatedTarget.ability === 'color-change') {
-		updatedTarget = changeBattlePokemonType(
-			updatedTarget,
-			attack.data.type.name,
-			dispatchToast
-		);
-	}
 
 	setAttacker(updatedAttacker);
 	setTarget(updatedTarget);

@@ -4,6 +4,7 @@ import { applyAttackAilmentsToPokemon } from '../../../../../functions/applyAtta
 import { applyPrimaryAilmentToPokemon } from '../../../../../functions/applyPrimaryAilmentToPokemon';
 import { applyStatusMove } from '../../../../../functions/applyStatusMove';
 import { calculateDamage } from '../../../../../functions/calculateDamage';
+import { changeBattlePokemonType } from '../../../../../functions/changeBattlePokemonType';
 import { determineMiss } from '../../../../../functions/determineMiss';
 import { handleFlinching } from '../../../../../functions/handleFlinching';
 import { isKO } from '../../../../../functions/isKo';
@@ -160,6 +161,22 @@ export const handleAttack = ({
 			updatedAttacker,
 			updatedTarget,
 			move,
+			addMessage
+		);
+	}
+	//5. check flash fire
+	if (target.ability === 'flash-fire' && move.data.type.name === 'fire') {
+		addMessage(`${target.data.name} raised its power with ${target.ability}`);
+		updatedTarget.flashFired = true;
+	}
+	//6. check color change
+	if (
+		updatedTarget.damage > target.damage &&
+		updatedTarget.ability === 'color-change'
+	) {
+		updatedTarget = changeBattlePokemonType(
+			updatedTarget,
+			move.data.type.name,
 			addMessage
 		);
 	}
