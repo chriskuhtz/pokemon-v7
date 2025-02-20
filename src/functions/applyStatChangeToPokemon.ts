@@ -1,4 +1,3 @@
-import { AddToastFunction } from '../hooks/useToasts';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { Stat } from '../interfaces/StatObject';
 import { getMiddleOfThree } from './getMiddleOfThree';
@@ -7,7 +6,7 @@ export const applyStatChangeToPokemon = (
 	pokemon: BattlePokemon,
 	stat: Stat,
 	modifier: number,
-	dispatchToast: AddToastFunction,
+	dispatchToast: (x: string) => void,
 	toastSuffix?: string
 ) => {
 	if (modifier > 6 || modifier < -6 || stat === 'hp' || modifier === 0) {

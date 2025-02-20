@@ -1,6 +1,7 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleMessage } from '../modules/Battle/BattleField';
+import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 
 export const applyOnBattleEnterAbility = ({
 	user,
@@ -27,22 +28,37 @@ export const applyOnBattleEnterAbility = ({
 			message: `${user.data.name} negates all weather effects with ${user.ability}`,
 		});
 	}
-	// if (opponent && user.ability === 'intimidate') {
-	// 	setOpponent(
-	// 		applyStatChangeToPokemon(
-	// 			opponent,
-	// 			'attack',
-	// 			-1,
-	// 			dispatchToast,
-	// 			'intimidate'
-	// 		)
-	// 	);
-	// }
+	if (user.ability === 'intimidate') {
+		setPokemon((pokemon) =>
+			pokemon.map((p) => {
+				if (p.status !== 'ONFIELD') {
+					return p;
+				}
+				if (p.id === user.id) {
+					return { ...user, roundsInBattle: p.roundsInBattle + 1 };
+				}
+				if (p.ownerId === user.ownerId) {
+					return p;
+				}
+				return applyStatChangeToPokemon(
+					p,
+					'attack',
+					-1,
+					(x) => addMessage({ message: x }),
+					`${user.data.name}'s intimidate`
+				);
+			})
+		);
+		return;
+	}
 
 	setPokemon((pokemon) =>
 		pokemon.map((p) => {
+			if (p.status !== 'ONFIELD') {
+				return p;
+			}
 			if (p.id === user.id) {
-				return { ...p, roundsInBattle: p.roundsInBattle + 1 };
+				return { ...user, roundsInBattle: p.roundsInBattle + 1 };
 			}
 			return p;
 		})
