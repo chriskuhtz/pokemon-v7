@@ -4,6 +4,8 @@ import { getItemUrl } from '../../functions/getItemUrl';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getTypeNames } from '../../functions/getTypeNames';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
+import { Inventory } from '../../interfaces/Inventory';
+import { ItemType } from '../../interfaces/Item';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { Card } from '../../uiComponents/Card/Card';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
@@ -13,9 +15,15 @@ import { OwnedPokemonCardContent } from './components/OwnedPokemonCardContent';
 export const OwnedPokemonCard = ({
 	pokemon,
 	reorder,
+	giveHeldItem,
+	takeHeldItem,
+	inventory,
 }: {
 	pokemon: OwnedPokemon;
 	reorder: (x: 'UP' | 'DOWN') => void;
+	giveHeldItem: (newItem: ItemType) => void;
+	takeHeldItem: () => void;
+	inventory: Inventory;
 }) => {
 	const { res } = useGetPokemonData(pokemon.dexId);
 
@@ -41,7 +49,14 @@ export const OwnedPokemonCard = ({
 					}
 				/>
 			}
-			content={<OwnedPokemonCardContent ownedPokemon={pokemon} data={res} />}
+			content={
+				<div>
+					{pokemon.heldItemName && (
+						<button onClick={takeHeldItem}>Take Item</button>
+					)}
+					<OwnedPokemonCardContent ownedPokemon={pokemon} data={res} />
+				</div>
+			}
 			actionElements={[
 				<FaArrowUp
 					onClick={() => reorder('UP')}
