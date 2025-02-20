@@ -24,8 +24,8 @@ export const calculateDamage = (
 	attack: BattleAttack,
 	weather: WeatherType | undefined,
 	calculateCrits: boolean,
-	addMessage?: (x: string) => void,
-	targetIsFlying?: boolean
+	targetIsFlying: boolean,
+	addMessage?: (x: string) => void
 ): number => {
 	const damageClass = attack.data.damage_class.name;
 	if (damageClass === 'status') {
