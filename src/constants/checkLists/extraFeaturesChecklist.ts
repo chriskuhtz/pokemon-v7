@@ -157,4 +157,6 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'Battle Attack animation' },
 	{ name: 'refactor primaryAilment healing table' },
+	{ name: 'item descriptions somewhere' },
+	{ name: 'move descriptions somewhere' },
 ];
