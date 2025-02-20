@@ -22,7 +22,7 @@ export const applyPrimaryAilmentToPokemon = (
 	if (
 		ailment === 'burn' &&
 		//fire pokemon cant get burned
-		!getTypeNames(pokemon.data.types).includes('fire') &&
+		!getTypeNames(pokemon).includes('fire') &&
 		//flash fire pokemon cant get burned
 		pokemon.ability !== 'flash-fire'
 	) {
@@ -36,7 +36,7 @@ export const applyPrimaryAilmentToPokemon = (
 	if (
 		ailment === 'paralysis' &&
 		//electric pokemon cant get paralyzed
-		!getTypeNames(pokemon.data.types).includes('electric') &&
+		!getTypeNames(pokemon).includes('electric') &&
 		//limber pokemon cant get paralyzed
 		pokemon.ability !== 'limber'
 	) {
@@ -50,7 +50,7 @@ export const applyPrimaryAilmentToPokemon = (
 	if (
 		ailment === 'freeze' &&
 		//ice pokemon cant get frozen
-		!getTypeNames(pokemon.data.types).includes('ice')
+		!getTypeNames(pokemon).includes('ice')
 	) {
 		dispatchToast(
 			`${pokemon.data.name} was frozen solid ${
@@ -74,8 +74,8 @@ export const applyPrimaryAilmentToPokemon = (
 		(ailment === 'poison' || ailment === 'toxic') &&
 		!['immunity'].includes(pokemon.ability) &&
 		//poison and steel pokemon cant get poisoned
-		!getTypeNames(pokemon.data.types).includes('poison') &&
-		!getTypeNames(pokemon.data.types).includes('steel')
+		!getTypeNames(pokemon).includes('poison') &&
+		!getTypeNames(pokemon).includes('steel')
 	) {
 		dispatchToast(
 			`${pokemon.data.name} was ${

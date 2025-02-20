@@ -1,13 +1,14 @@
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { typeEffectivenessChart } from '../interfaces/PokemonType';
+import { getTypeNames } from './getTypeNames';
 
 export const determineTypeFactor = (
 	target: BattlePokemon,
 	attack: BattleAttack
 ): number => {
 	let res = 1;
-	const targetTypes = target.data.types.map((t) => t.type.name);
+	const targetTypes = getTypeNames(target);
 
 	const effectiveness = typeEffectivenessChart[attack.data.type.name];
 

@@ -23,9 +23,7 @@ export const OwnedPokemonCard = ({
 		return <LoadingScreen />;
 	}
 
-	const { types } = res;
-
-	const typeNames = getTypeNames(types);
+	const typeNames = getTypeNames({ ...pokemon, data: res });
 
 	return (
 		<Card

@@ -1,11 +1,12 @@
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { getTypeNames } from './getTypeNames';
 
 export const determineStabFactor = (
 	attacker: BattlePokemon,
 	attack: BattleAttack
 ): number => {
-	const attackerTypes = attacker.data.types.map((t) => t.type.name);
+	const attackerTypes = getTypeNames(attacker);
 	if (attackerTypes.includes(attack.data.type.name)) {
 		return 1.5;
 	}
