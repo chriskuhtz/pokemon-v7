@@ -53,7 +53,10 @@ export const extraFeatureCheckList: {
 	{ name: 'choose random moves for opponent', handled: true },
 
 	{ name: 'different encounters for time of day', handled: true },
-	{ name: 'smooth transition with dialogue after Starter Selection' },
+	{
+		name: 'smooth transition with dialogue after Starter Selection',
+		handled: true,
+	},
 	{ name: 'player sprite selection' },
 	{ name: 'check if pokemon can actually cut' },
 	{ name: 'reset button' },
