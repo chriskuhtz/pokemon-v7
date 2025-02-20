@@ -67,8 +67,13 @@ export const BattleField = ({
 	const scatterCoins = () =>
 		setScatteredCoins((c) => c + Math.floor(Math.random() * 100));
 	const [battleStep, setBattleStep] = useState<
-		'BATTLE_ENTRY' | 'COLLECTING' | 'EXECUTING' | 'END_OF_TURN' | 'REFILLING'
-	>('BATTLE_ENTRY');
+		| 'UNITIALIZED'
+		| 'BATTLE_ENTRY'
+		| 'COLLECTING'
+		| 'EXECUTING'
+		| 'END_OF_TURN'
+		| 'REFILLING'
+	>('UNITIALIZED');
 	useEffect(() => {
 		console.log(battleStep);
 	}, [battleStep]);
@@ -292,6 +297,11 @@ export const BattleField = ({
 	//Steps:
 	// Battle Entry
 	useEffect(() => {
+		if (battleStep === 'UNITIALIZED' && !opponentCanRefill && !teamCanRefill) {
+			setBattleStep('BATTLE_ENTRY');
+		}
+	}, [battleStep, opponentCanRefill, teamCanRefill]);
+	useEffect(() => {
 		if (battleStep === 'BATTLE_ENTRY') {
 			if (!newlyDeployedPokemon) {
 				setBattleStep('COLLECTING');
@@ -386,7 +396,7 @@ export const BattleField = ({
 	// Refilling
 	useEffect(() => {
 		if (battleStep === 'REFILLING' && !teamCanRefill && !opponentCanRefill) {
-			setBattleStep('COLLECTING');
+			setBattleStep('BATTLE_ENTRY');
 		}
 	}, [
 		battleStep,
