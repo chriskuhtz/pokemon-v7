@@ -1,4 +1,6 @@
 import { useCallback } from 'react';
+import { MoveName } from '../../../../constants/checkLists/movesCheckList';
+import { forceSwitchMoves } from '../../../../constants/forceSwitchMoves';
 import { applyItemToPokemon } from '../../../../functions/applyItemToPokemon';
 import { BattleLocation } from '../../../../functions/determineCaptureSuccess';
 import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
@@ -11,8 +13,9 @@ import { handleCatch } from './functions/handleCatch';
 export const useHandleAction = (
 	pokemon: BattlePokemon[],
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
+
 	addMessage: (x: BattleMessage) => void,
-	leave: (x: BattlePokemon[]) => void,
+	leave: () => void,
 	battleWeather: WeatherType | undefined,
 	addMultipleMessages: (x: BattleMessage[]) => void,
 	battleRound: number,
@@ -20,7 +23,8 @@ export const useHandleAction = (
 	interjectMessage: (x: BattleMessage) => void,
 	addUsedItem: (x: ItemType) => void,
 	scatterCoins: () => void,
-	dampy: { name: string } | undefined
+	dampy: { name: string } | undefined,
+	handleForceSwitch: (x: BattlePokemon, moveName: MoveName) => void
 ) => {
 	return useCallback(
 		(attacker: BattlePokemon) => {
@@ -40,7 +44,7 @@ export const useHandleAction = (
 			if (move.type === 'RunAway') {
 				addMessage({
 					message: `You ran away`,
-					onRemoval: () => leave(pokemon.filter((p) => p.status === 'CAUGHT')),
+					onRemoval: () => leave(),
 				});
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
@@ -119,6 +123,10 @@ export const useHandleAction = (
 			}
 
 			if (move.type === 'BattleAttack') {
+				if (forceSwitchMoves.includes(move.name)) {
+					handleForceSwitch(attacker, move.name);
+					return;
+				}
 				handleAttack({
 					attacker,
 					pokemon,
@@ -140,6 +148,7 @@ export const useHandleAction = (
 			battleRound,
 			battleWeather,
 			dampy,
+			handleForceSwitch,
 			interjectMessage,
 			leave,
 			pokemon,
