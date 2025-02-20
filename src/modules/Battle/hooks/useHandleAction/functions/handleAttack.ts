@@ -140,7 +140,6 @@ export const handleAttack = ({
 	}
 
 	//1. apply damage
-
 	updatedTarget = {
 		...updatedTarget,
 		damage:
