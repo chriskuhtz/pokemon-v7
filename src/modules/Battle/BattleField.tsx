@@ -165,25 +165,15 @@ export const BattleField = ({
 	}, [allOnField]);
 
 	//REDUCERS
-	const chooseAction = useChooseAction(
-		allOnField,
-		pokemon,
-		setPokemon,
-		battleRound
-	);
-	const handleAction = useHandleAction(
-		pokemon,
-		setPokemon,
-		addMessage,
-		(caught) => leave(caught, battleInventory, scatteredCoins, team),
-		battleWeather,
-		addMultipleMessages,
-		battleRound,
-		battleLocation,
-		interjectMessage,
-		addUsedItem,
-		scatterCoins,
-		dampy
+	const leaveWithCurrentData = useCallback(
+		() =>
+			leave(
+				pokemon.filter((p) => p.status === 'CAUGHT'),
+				battleInventory,
+				scatteredCoins,
+				team
+			),
+		[battleInventory, leave, pokemon, scatteredCoins, team]
 	);
 	const putPokemonOnField = useCallback(
 		(id: string) =>
@@ -210,7 +200,6 @@ export const BattleField = ({
 			),
 		[]
 	);
-
 	const handleDeploymentAbility = useCallback(
 		(p: BattlePokemon) => {
 			applyOnBattleEnterAbility({
@@ -223,6 +212,60 @@ export const BattleField = ({
 		},
 		[addMessage, battleWeather]
 	);
+	const switchPokemon = useCallback(
+		(leavesBattle: BattlePokemon, entersBattle: BattlePokemon) => {
+			setPokemon((pokemon) =>
+				pokemon.map((p) => {
+					if (p.id === leavesBattle.id) {
+						addMessage({ message: `withdrew ${leavesBattle.data.name}` });
+						return { ...leavesBattle, status: 'BENCH' };
+					}
+					if (p.id === entersBattle.id) {
+						addMessage({
+							message: `Lets go ${entersBattle.data.name}`,
+						});
+
+						return { ...entersBattle, status: 'ONFIELD' };
+					}
+
+					return p;
+				})
+			);
+		},
+		[addMessage]
+	);
+	const handleForceSwitch = useCallback(
+		(user: BattlePokemon, moveName: MoveName) => {
+			//TODO: consider trainer battles
+			addMessage({
+				message: `${user.data.name} separated the fighters with ${moveName}`,
+				onRemoval: () => leaveWithCurrentData(),
+			});
+		},
+		[addMessage, leaveWithCurrentData]
+	);
+	const chooseAction = useChooseAction(
+		allOnField,
+		pokemon,
+		setPokemon,
+		battleRound
+	);
+	const handleAction = useHandleAction(
+		pokemon,
+		setPokemon,
+		addMessage,
+		leaveWithCurrentData,
+		battleWeather,
+		addMultipleMessages,
+		battleRound,
+		battleLocation,
+		interjectMessage,
+		addUsedItem,
+		scatterCoins,
+		dampy,
+		handleForceSwitch
+	);
+
 	//Steps:
 	// Battle Entry
 	useEffect(() => {
@@ -328,26 +371,14 @@ export const BattleField = ({
 			console.log('effect battlelost');
 			addMessage({
 				message: 'You lost the battle',
-				onRemoval: () =>
-					leave(
-						pokemon.filter((p) => p.status === 'CAUGHT'),
-						battleInventory,
-						scatteredCoins,
-						team
-					),
+				onRemoval: () => leaveWithCurrentData(),
 			});
 		}
 		if (battleWon && !latestMessage) {
 			console.log('effect battlewon');
 			addMessage({
 				message: 'You won the battle',
-				onRemoval: () =>
-					leave(
-						pokemon.filter((p) => p.status === 'CAUGHT'),
-						battleInventory,
-						scatteredCoins,
-						team
-					),
+				onRemoval: () => leaveWithCurrentData(),
 			});
 		}
 	}, [
@@ -356,7 +387,7 @@ export const BattleField = ({
 		battleLost,
 		battleWon,
 		latestMessage,
-		leave,
+		leaveWithCurrentData,
 		pokemon,
 		scatteredCoins,
 		team,
