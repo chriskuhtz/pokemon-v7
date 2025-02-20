@@ -1,7 +1,15 @@
+import { getMovesArray } from '../../../functions/getMovesArray';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { ActionType, ChooseActionPayload } from '../BattleField';
 
-export function TargetSelection(props: {
+export function TargetSelection({
+	name,
+	id,
+	targets,
+	chooseAction,
+	chosenAction,
+	setChosenAction,
+}: {
 	name: string;
 	id: string;
 	targets: BattlePokemon[];
@@ -16,7 +24,7 @@ export function TargetSelection(props: {
 			}}
 		>
 			<strong>
-				Who is the target for {props.name}'s {props.chosenAction}?
+				Who is the target for {name}'s {chosenAction}?
 			</strong>
 			<div
 				style={{
@@ -24,21 +32,45 @@ export function TargetSelection(props: {
 					gap: '1rem',
 				}}
 			>
-				{props.targets.map((t) => (
-					<button
-						key={t.id}
-						onClick={() => {
-							props.chooseAction({
-								userId: props.id,
-								actionName: props.chosenAction,
-								targetId: t.id,
-							});
-							props.setChosenAction(undefined);
-						}}
-					>
-						{t.data.name}
-					</button>
-				))}
+				{!['ether', 'max-ether'].includes(chosenAction) &&
+					targets.map((t) => (
+						<button
+							key={t.id}
+							onClick={() => {
+								chooseAction({
+									userId: id,
+									actionName: chosenAction,
+									targetId: t.id,
+								});
+								setChosenAction(undefined);
+							}}
+						>
+							{t.data.name}
+						</button>
+					))}
+				{['ether', 'max-ether'].includes(chosenAction) &&
+					targets.map((t) => {
+						const moves = getMovesArray(t);
+
+						return moves
+							.filter((m) => m.usedPP > 0)
+							.map((m) => (
+								<button
+									key={t.id + m.name}
+									onClick={() => {
+										chooseAction({
+											userId: id,
+											actionName: chosenAction,
+											targetId: t.id,
+											moveToRestore: m.name,
+										});
+										setChosenAction(undefined);
+									}}
+								>
+									{t.data.name} {m.name}
+								</button>
+							));
+					})}
 			</div>
 		</div>
 	);

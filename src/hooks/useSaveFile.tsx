@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { MoveName } from '../constants/checkLists/movesCheckList';
 import { localStorageId } from '../constants/gameData';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
@@ -6,7 +7,11 @@ import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { updateItemFunction } from '../functions/updateItemFunction';
 import { joinInventories } from '../interfaces/Inventory';
-import { HealingItemType, ItemType } from '../interfaces/Item';
+import {
+	HealingItemType,
+	ItemType,
+	PPRestoringItemType,
+} from '../interfaces/Item';
 import { OverworldItem } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { QuestName, QuestsRecord } from '../interfaces/Quest';
@@ -44,7 +49,8 @@ export const useSaveFile = (
 	navigateAwayFromOverworldReducer: (to: RoutesType, steps: number) => void;
 	applyItemToPokemonReducer: (
 		pokemon: OwnedPokemon,
-		item: HealingItemType
+		item: HealingItemType | PPRestoringItemType,
+		move?: MoveName
 	) => void;
 	fulfillQuestReducer: (q: QuestName) => void;
 } => {
@@ -236,9 +242,10 @@ export const useSaveFile = (
 	};
 	const applyItemToPokemonReducer = (
 		pokemon: OwnedPokemon,
-		item: HealingItemType
+		item: HealingItemType | PPRestoringItemType,
+		move?: MoveName
 	) => {
-		const updatedPokemon = applyItemToPokemon(pokemon, item, addToast);
+		const updatedPokemon = applyItemToPokemon(pokemon, item, addToast, move);
 		const updatedInventory = joinInventories(
 			saveFile.inventory,
 			{ [item]: 1 },

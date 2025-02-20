@@ -8,7 +8,7 @@ import { applyAttackAilmentsToPokemon } from './applyAttackAilmentsToPokemon';
 import { applyPrimaryAilmentToPokemon } from './applyPrimaryAilmentToPokemon';
 import { applyStatusMove } from './applyStatusMove';
 import { calculateDamage } from './calculateDamage';
-import { reduceMovePP } from './reduceMovePP';
+import { changeMovePP } from './changeMovePP';
 
 export const applyAttackToPokemon = ({
 	attacker,
@@ -33,18 +33,18 @@ export const applyAttackToPokemon = ({
 	let updatedAttacker =
 		(attack.multiHits ?? 0) > 1
 			? attacker
-			: reduceMovePP(attacker, attack.name);
+			: changeMovePP(attacker, attack.name);
 
 	if (attack.data.damage_class.name === 'status') {
 		if (attack.data.target.name === 'user') {
 			const res = applyStatusMove(attacker, attack, dispatchToast);
-			const pp = reduceMovePP(res, attack.name);
+			const pp = changeMovePP(res, attack.name, -1);
 			setAttacker(pp);
 			return { updatedAttacker: pp, updatedTarget: target };
 		}
 		if (attack.data.target.name === 'selected-pokemon') {
 			const res = applyStatusMove(target, attack, dispatchToast);
-			const pp = reduceMovePP(res, attack.name);
+			const pp = changeMovePP(res, attack.name, -1);
 			setTarget(pp);
 			return { updatedAttacker: attacker, updatedTarget: pp };
 		}

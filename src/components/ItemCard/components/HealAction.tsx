@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { MdHealing } from 'react-icons/md';
+import { MoveName } from '../../../constants/checkLists/movesCheckList';
 import { baseSize } from '../../../constants/gameData';
+import { getMovesArray } from '../../../functions/getMovesArray';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
-import { HealingItemType } from '../../../interfaces/Item';
+import { HealingItemType, PPRestoringItemType } from '../../../interfaces/Item';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { Banner } from '../../../uiComponents/Banner/Banner';
 
@@ -11,37 +13,93 @@ export const HealAction = ({
 	healablePokemon,
 	healPokemon,
 }: {
-	item: HealingItemType;
+	item: HealingItemType | PPRestoringItemType;
 	healablePokemon: OwnedPokemon[];
-	healPokemon: (pokemon: OwnedPokemon, item: HealingItemType) => void;
+	healPokemon: (
+		pokemon: OwnedPokemon,
+		item: HealingItemType | PPRestoringItemType,
+		move?: MoveName
+	) => void;
 }) => {
-	const [open, setOpen] = useState<boolean>(false);
+	const [pokemonSelectionOpen, setPokemonSelectionOpen] =
+		useState<boolean>(false);
+	const [selectedPokemon, setSelectedPokemon] = useState<
+		OwnedPokemon | undefined
+	>();
 
 	return (
 		<>
-			{open && healablePokemon.length > 0 && (
+			{pokemonSelectionOpen && healablePokemon.length > 0 && (
 				<Banner>
-					<strong onClick={() => setOpen(false)}>X</strong>
+					<strong onClick={() => setPokemonSelectionOpen(false)}>X</strong>
 					<h3>Which Pokemon should receive the {item}:</h3>
 					{healablePokemon.map((p) => (
 						<img
 							key={p.id}
 							src={getPokemonSprite(p.dexId)}
 							onClick={() => {
-								healPokemon(p, item);
-								setOpen(false);
+								if (['ether', 'max-ether'].includes(item)) {
+									setSelectedPokemon(p);
+									setPokemonSelectionOpen(false);
+								} else {
+									healPokemon(p, item);
+									setPokemonSelectionOpen(false);
+								}
 							}}
 							tabIndex={0}
 							role="button"
 							onKeyDown={(e) => {
 								e.stopPropagation();
 								if (e.key === 'Enter') {
-									healPokemon(p, item);
-									setOpen(false);
+									if (['ether', 'max-ether'].includes(item)) {
+										setSelectedPokemon(p);
+										setPokemonSelectionOpen(false);
+									} else {
+										healPokemon(p, item);
+										setPokemonSelectionOpen(false);
+									}
 								}
 							}}
 						/>
 					))}
+				</Banner>
+			)}
+			{selectedPokemon && (
+				<Banner>
+					<strong
+						onClick={() => {
+							setPokemonSelectionOpen(false);
+							setSelectedPokemon(undefined);
+						}}
+					>
+						X
+					</strong>
+					<h3>Which Move do you want to restore with {item}:</h3>
+					{getMovesArray(selectedPokemon)
+						.filter((m) => m.usedPP > 0)
+						.map((m) => (
+							<button
+								style={{ backgroundColor: 'white' }}
+								key={m.name}
+								onClick={() => {
+									healPokemon(selectedPokemon, item, m.name);
+									setPokemonSelectionOpen(false);
+									setSelectedPokemon(undefined);
+								}}
+								tabIndex={0}
+								role="button"
+								onKeyDown={(e) => {
+									e.stopPropagation();
+									if (e.key === 'Enter') {
+										healPokemon(selectedPokemon, item, m.name);
+										setPokemonSelectionOpen(false);
+										setSelectedPokemon(undefined);
+									}
+								}}
+							>
+								{m.name}
+							</button>
+						))}
 				</Banner>
 			)}
 			<MdHealing
@@ -50,10 +108,10 @@ export const HealAction = ({
 				onKeyDown={(e) => {
 					e.stopPropagation();
 					if (e.key === 'Enter') {
-						setOpen(true);
+						setPokemonSelectionOpen(true);
 					}
 				}}
-				onClick={() => setOpen(true)}
+				onClick={() => setPokemonSelectionOpen(true)}
 				size={baseSize / 2}
 			/>
 		</>

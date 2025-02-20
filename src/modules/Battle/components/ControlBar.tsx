@@ -6,7 +6,11 @@ import { getPlayerId } from '../../../functions/getPlayerId';
 import { getPlayerPokemon } from '../../../functions/getPlayerPokemon';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
-import { isHealingItem, isPokeball } from '../../../interfaces/Item';
+import {
+	isHealingItem,
+	isPokeball,
+	isPPRestorationItem,
+} from '../../../interfaces/Item';
 import { ActionType, ChooseActionPayload } from '../BattleField';
 import { ActionSelection } from './ActionSelection';
 import { TargetSelection } from './TargetSelection';
@@ -27,7 +31,7 @@ export function ControlBar({
 	const [chosenAction, setChosenAction] = useState<ActionType | undefined>();
 
 	const filteredTargets = useMemo(() => {
-		if (isHealingItem(chosenAction)) {
+		if (isHealingItem(chosenAction) || isPPRestorationItem(chosenAction)) {
 			if (controlled?.ownerId === getPlayerId()) {
 				return getPlayerPokemon(targets).filter((t) =>
 					canBenefitFromItem(t, chosenAction)

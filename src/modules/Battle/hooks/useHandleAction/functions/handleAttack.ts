@@ -5,10 +5,10 @@ import { applyPrimaryAilmentToPokemon } from '../../../../../functions/applyPrim
 import { applyStatusMove } from '../../../../../functions/applyStatusMove';
 import { calculateDamage } from '../../../../../functions/calculateDamage';
 import { changeBattlePokemonType } from '../../../../../functions/changeBattlePokemonType';
+import { changeMovePP } from '../../../../../functions/changeMovePP';
 import { determineMiss } from '../../../../../functions/determineMiss';
 import { handleFlinching } from '../../../../../functions/handleFlinching';
 import { isKO } from '../../../../../functions/isKo';
-import { reduceMovePP } from '../../../../../functions/reduceMovePP';
 import {
 	PARA_CHANCE,
 	STATIC_CHANCE,
@@ -113,7 +113,7 @@ export const handleAttack = ({
 
 	//2. reduce pp after all multihits are done
 	if (move.multiHits === 0) {
-		updatedAttacker = reduceMovePP(updatedAttacker, move.name);
+		updatedAttacker = changeMovePP(updatedAttacker, move.name, -1);
 	}
 	//3. apply stat changes
 	if (selfTargeting) {
@@ -165,12 +165,17 @@ export const handleAttack = ({
 		);
 	}
 	//5. check flash fire
-	if (target.ability === 'flash-fire' && move.data.type.name === 'fire') {
+	if (
+		!isKO(updatedTarget) &&
+		target.ability === 'flash-fire' &&
+		move.data.type.name === 'fire'
+	) {
 		addMessage(`${target.data.name} raised its power with ${target.ability}`);
 		updatedTarget.flashFired = true;
 	}
 	//6. check color change
 	if (
+		!isKO(updatedTarget) &&
 		updatedTarget.damage > target.damage &&
 		updatedTarget.ability === 'color-change'
 	) {

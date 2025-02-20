@@ -1,18 +1,44 @@
+import { MoveName } from '../constants/checkLists/movesCheckList';
 import { AddToastFunction } from '../hooks/useToasts';
 import { BattlePokemon, isBattlePokemon } from '../interfaces/BattlePokemon';
 import {
 	HappinessChangeTable,
 	HealingItemType,
 	HPHealTable,
+	PPRestoringItemType,
 } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { changeMovePP } from './changeMovePP';
 import { removeHealableAilments } from './removeHealableAilments';
 
 export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	pokemon: T,
-	item: HealingItemType,
-	addToast?: AddToastFunction
+	item: HealingItemType | PPRestoringItemType,
+	addToast?: AddToastFunction,
+	move?: MoveName
 ): T {
+	if ((item === 'ether' || item === 'max-ether') && move) {
+		return changeMovePP(pokemon, move, item === 'ether' ? 10 : 1000);
+	}
+	if (item === 'elixir' || item === 'max-elixir') {
+		const amount = item === 'elixir' ? 10 : 1000;
+
+		let res = { ...pokemon } as T;
+
+		[
+			pokemon.firstMove,
+			pokemon.secondMove,
+			pokemon.thirdMove,
+			pokemon.fourthMove,
+		].forEach((nextMove) => {
+			if (!nextMove) {
+				return;
+			}
+			res = changeMovePP(res, nextMove.name, amount);
+		});
+
+		return res;
+	}
 	if (
 		(item === 'revive' || item === 'max-revive' || item === 'revival-herb') &&
 		pokemon.damage >= pokemon.maxHp
