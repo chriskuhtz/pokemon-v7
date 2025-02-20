@@ -190,15 +190,17 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/37/',
 		handled: true,
 	},
-	{ name: 'ether', url: 'https://pokeapi.co/api/v2/item/38/' },
+	{ name: 'ether', url: 'https://pokeapi.co/api/v2/item/38/', handled: true },
 	{
 		name: 'max-ether',
 		url: 'https://pokeapi.co/api/v2/item/39/',
+		handled: true,
 	},
-	{ name: 'elixir', url: 'https://pokeapi.co/api/v2/item/40/' },
+	{ name: 'elixir', url: 'https://pokeapi.co/api/v2/item/40/', handled: true },
 	{
 		name: 'max-elixir',
 		url: 'https://pokeapi.co/api/v2/item/41/',
+		handled: true,
 	},
 	{
 		name: 'lava-cookie',

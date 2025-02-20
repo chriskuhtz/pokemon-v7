@@ -160,4 +160,6 @@ export const extraFeatureCheckList: {
 	{ name: 'item descriptions somewhere' },
 	{ name: 'move descriptions somewhere' },
 	{ name: 'xtract subcomponents from healaction' },
+	{ name: 'display usedPP on action selection' },
+	{ name: 'disable moves with no pp left' },
 ];

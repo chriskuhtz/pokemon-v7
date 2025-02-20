@@ -84,6 +84,7 @@ export const movesCheckList: {
 	{
 		name: 'whirlwind',
 		url: 'https://pokeapi.co/api/v2/move/18/',
+		handled: true,
 	},
 	{
 		name: 'fly',
@@ -174,7 +175,7 @@ export const movesCheckList: {
 	{ name: 'leer', url: 'https://pokeapi.co/api/v2/move/43/' },
 	{ name: 'bite', url: 'https://pokeapi.co/api/v2/move/44/' },
 	{ name: 'growl', url: 'https://pokeapi.co/api/v2/move/45/' },
-	{ name: 'roar', url: 'https://pokeapi.co/api/v2/move/46/' },
+	{ name: 'roar', url: 'https://pokeapi.co/api/v2/move/46/', handled: true },
 	{ name: 'sing', url: 'https://pokeapi.co/api/v2/move/47/' },
 	{
 		name: 'supersonic',
@@ -1291,6 +1292,8 @@ export const handledMoves = [
 	'cut',
 	'gust',
 	'wing-attack',
+	'whirlwind',
+	'roar',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
