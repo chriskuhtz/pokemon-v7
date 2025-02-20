@@ -18,9 +18,10 @@ import { SellMarket } from './modules/Market/SellMarket';
 import { Overworld } from './modules/Overworld/Overworld';
 import { PokemonStorage } from './modules/PokemonStorage/PokemonStorage';
 import { Quests } from './modules/Quests/Quests';
-import { Settings, SpriteSelection } from './modules/Settings/Settings';
+import { Settings } from './modules/Settings/Settings';
 import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { Team } from './modules/Team/Team';
+import { SpriteSelection } from './modules/SpriteSelection/SpriteSelection';
 
 export const App = ({
 	addToast,
@@ -155,7 +156,7 @@ export const App = ({
 				goBack={() => setActiveTabReducer('OVERWORLD')}
 				navigate={setActiveTabReducer}
 				badges={badges}
-				spriteUrl="/npcs/NPC_001.png"
+				spriteUrl={`/npcs/${saveFile.sprite}.png`}
 				name={playerId}
 			/>
 		);
