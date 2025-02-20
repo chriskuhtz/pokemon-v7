@@ -163,4 +163,5 @@ export const extraFeatureCheckList: {
 	{ name: 'display usedPP on action selection' },
 	{ name: 'disable moves with no pp left' },
 	{ name: 'animation state for flying pokemon' },
+	{ name: 'eggs?' },
 ];
