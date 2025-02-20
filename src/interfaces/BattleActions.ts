@@ -1,5 +1,5 @@
 import { MoveName } from '../constants/checkLists/movesCheckList';
-import { HealingItemType, PokeballType } from './Item';
+import { HealingItemType, PokeballType, PPRestoringItemType } from './Item';
 import { MoveDto } from './Move';
 
 export type BattleAttack = {
@@ -23,10 +23,11 @@ export type ChargeUp = {
 	round: number;
 };
 export interface InBattleItem {
-	item: HealingItemType;
+	item: HealingItemType | PPRestoringItemType;
 	type: 'InBattleItem';
 	round: number;
 	targetId: string;
+	moveToRestore?: MoveName;
 }
 
 export interface RunAway {
