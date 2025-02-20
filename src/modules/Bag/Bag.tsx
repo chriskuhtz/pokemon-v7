@@ -2,16 +2,19 @@ import React from 'react';
 import { HealAction } from '../../components/ItemCard/components/HealAction';
 import { ThrowAwayAction } from '../../components/ItemCard/components/ThrowAwayAction';
 import { ItemCard } from '../../components/ItemCard/ItemCard';
+import { MoveName } from '../../constants/checkLists/movesCheckList';
+import { canBenefitFromItem } from '../../functions/canBenefitFromItem';
 import { Inventory } from '../../interfaces/Inventory';
 import {
 	HealingItemType,
 	isHealingItem,
+	isPPRestorationItem,
 	ItemType,
+	PPRestoringItemType,
 } from '../../interfaces/Item';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { canBenefitFromItem } from '../../functions/canBenefitFromItem';
 
 export const Bag = ({
 	inventory,
@@ -24,7 +27,11 @@ export const Bag = ({
 	discardItem: (item: ItemType, number: number) => void;
 	goBack: () => void;
 	team: OwnedPokemon[];
-	applyItem: (pokemon: OwnedPokemon, item: HealingItemType) => void;
+	applyItem: (
+		pokemon: OwnedPokemon,
+		item: HealingItemType | PPRestoringItemType,
+		move?: MoveName
+	) => void;
 }): JSX.Element => {
 	return (
 		<Page goBack={goBack} headline="Inventory:">
@@ -44,7 +51,7 @@ export const Bag = ({
 									amount={amount}
 									discardItem={(x: number) => discardItem(item as ItemType, x)}
 								/>,
-								isHealingItem(item) &&
+								(isHealingItem(item) || isPPRestorationItem(item)) &&
 								team.filter((t) => canBenefitFromItem(t, item)).length > 0 ? (
 									<HealAction
 										item={item}
