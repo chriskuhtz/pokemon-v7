@@ -1,7 +1,12 @@
 import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
+import { getMovesArray } from '../../../functions/getMovesArray';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
-import { isHealingItem, isPokeball } from '../../../interfaces/Item';
+import {
+	isHealingItem,
+	isPokeball,
+	isPPRestorationItem,
+} from '../../../interfaces/Item';
 import { ActionType, ChooseActionPayload } from '../BattleField';
 
 export function ActionSelection({
@@ -30,41 +35,15 @@ export function ActionSelection({
 					gap: '1rem',
 				}}
 			>
-				<button onClick={() => setChosenAction(controlled.firstMove.name)}>
-					{controlled.firstMove.name}
-				</button>
-				{controlled.secondMove && (
-					<button
-						onClick={() =>
-							setChosenAction(controlled.secondMove?.name ?? 'pound')
-						}
-					>
-						{controlled.secondMove.name}
-					</button>
-				)}
-				{controlled.thirdMove && (
-					<button
-						onClick={() =>
-							setChosenAction(controlled.thirdMove?.name ?? 'pound')
-						}
-					>
-						{controlled.thirdMove.name}
-					</button>
-				)}
-				{controlled.fourthMove && (
-					<button
-						onClick={() =>
-							setChosenAction(controlled.fourthMove?.name ?? 'pound')
-						}
-					>
-						{controlled.fourthMove.name}
-					</button>
-				)}
+				{getMovesArray(controlled).map((m) => (
+					<button onClick={() => setChosenAction(m.name)}>{m.name}</button>
+				))}
+
 				{Object.entries(inventory).map(([item, amount]) => {
 					if (
 						amount > 0 &&
 						(isPokeball(item) ||
-							(isHealingItem(item) &&
+							((isHealingItem(item) || isPPRestorationItem(item)) &&
 								allTargets.some((t) => canBenefitFromItem(t, item))))
 					) {
 						return (
