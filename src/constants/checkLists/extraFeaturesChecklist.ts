@@ -162,4 +162,5 @@ export const extraFeatureCheckList: {
 	{ name: 'xtract subcomponents from healaction' },
 	{ name: 'display usedPP on action selection' },
 	{ name: 'disable moves with no pp left' },
+	{ name: 'animation state for flying pokemon' },
 ];

@@ -3,6 +3,7 @@ import { MoveName } from '../../../../constants/checkLists/movesCheckList';
 import { forceSwitchMoves } from '../../../../constants/forceSwitchMoves';
 import { applyItemToPokemon } from '../../../../functions/applyItemToPokemon';
 import { BattleLocation } from '../../../../functions/determineCaptureSuccess';
+import { getChargeUpMessage } from '../../../../functions/getChargeUpMessage';
 import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
 import { ItemType } from '../../../../interfaces/Item';
 import { WeatherType } from '../../../../interfaces/Weather';
@@ -110,7 +111,7 @@ export const useHandleAction = (
 			}
 			if (move.type === 'ChargeUp') {
 				addMessage({
-					message: ` ${attacker.data.name} is charging up ${move.name}`,
+					message: getChargeUpMessage(attacker.data.name, move.name),
 				});
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
