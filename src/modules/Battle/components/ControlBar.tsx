@@ -1,16 +1,9 @@
-import { useMemo, useState } from 'react';
-import { isMove } from '../../../constants/checkLists/movesCheckList';
-import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
-import { getOpponentPokemon } from '../../../functions/getOpponentPokemon';
-import { getPlayerId } from '../../../functions/getPlayerId';
-import { getPlayerPokemon } from '../../../functions/getPlayerPokemon';
+import { useEffect, useMemo, useState } from 'react';
+import { OPPO_ID } from '../../../constants/gameData';
+import { filterTargets } from '../../../functions/filterTargets';
+import { getMovesArray } from '../../../functions/getMovesArray';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
-import {
-	isHealingItem,
-	isPokeball,
-	isPPRestorationItem,
-} from '../../../interfaces/Item';
 import { ActionType, ChooseActionPayload } from '../BattleField';
 import { ActionSelection } from './ActionSelection';
 import { TargetSelection } from './TargetSelection';
@@ -30,25 +23,32 @@ export function ControlBar({
 }) {
 	const [chosenAction, setChosenAction] = useState<ActionType | undefined>();
 
-	const filteredTargets = useMemo(() => {
-		if (isHealingItem(chosenAction) || isPPRestorationItem(chosenAction)) {
-			if (controlled?.ownerId === getPlayerId()) {
-				return getPlayerPokemon(targets).filter((t) =>
-					canBenefitFromItem(t, chosenAction)
-				);
-			}
-			return getOpponentPokemon(targets).filter((t) =>
-				canBenefitFromItem(t, chosenAction)
+	const filteredTargets = useMemo(
+		() => filterTargets(targets, chosenAction, controlled),
+		[chosenAction, controlled, targets]
+	);
+
+	useEffect(() => {
+		if (controlled?.ownerId === OPPO_ID) {
+			console.log(
+				"opps choose their own moves and real g's move in silence like lasagna"
 			);
+
+			const moves = getMovesArray(controlled);
+			const actionName = moves[Math.floor(Math.random() * moves.length)].name;
+			const filtered = filterTargets(targets, actionName, controlled).filter(
+				//first pokemon that is on the other side
+				(p) => p.ownerId !== controlled.ownerId
+			);
+			const targetId = filtered[Math.floor(Math.random() * filtered.length)].id;
+
+			chooseAction({
+				userId: controlled.id,
+				actionName: actionName,
+				targetId,
+			});
 		}
-		if (isPokeball(chosenAction)) {
-			return getOpponentPokemon(targets).filter((t) => t.status === 'ONFIELD');
-		}
-		if (isMove(chosenAction)) {
-			return targets.filter((t) => t.status === 'ONFIELD');
-		}
-		return targets;
-	}, [chosenAction, controlled, targets]);
+	}, [chooseAction, controlled, targets]);
 
 	if (message) {
 		return (
