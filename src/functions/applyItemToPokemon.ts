@@ -82,7 +82,11 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 
 		return { ...pokemon, damage: 0, primaryAilment: undefined };
 	}
-	if (item === 'full-heal' || item === 'heal-powder') {
+	if (
+		item === 'full-heal' ||
+		item === 'heal-powder' ||
+		item === 'lava-cookie'
+	) {
 		if (addToast) {
 			addToast(`all ailments healed`);
 		}
