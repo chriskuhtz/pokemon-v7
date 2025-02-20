@@ -91,20 +91,23 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/19/',
 		handled: true,
 	},
-	{ name: 'bind', url: 'https://pokeapi.co/api/v2/move/20/' },
-	{ name: 'slam', url: 'https://pokeapi.co/api/v2/move/21/' },
+	{ name: 'bind', url: 'https://pokeapi.co/api/v2/move/20/', handled: true },
+	{ name: 'slam', url: 'https://pokeapi.co/api/v2/move/21/', handled: true },
 	{
 		name: 'vine-whip',
 		url: 'https://pokeapi.co/api/v2/move/22/',
+		handled: true,
 	},
-	{ name: 'stomp', url: 'https://pokeapi.co/api/v2/move/23/' },
+	{ name: 'stomp', url: 'https://pokeapi.co/api/v2/move/23/', handled: true },
 	{
 		name: 'double-kick',
 		url: 'https://pokeapi.co/api/v2/move/24/',
+		handled: true,
 	},
 	{
 		name: 'mega-kick',
 		url: 'https://pokeapi.co/api/v2/move/25/',
+		handled: true,
 	},
 	{
 		name: 'jump-kick',
@@ -1296,6 +1299,11 @@ export const handledMoves = [
 	'whirlwind',
 	'roar',
 	'fly',
+	'bind',
+	'slam',
+	'vine-whip',
+	'stomp',
+	'double-kick',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
