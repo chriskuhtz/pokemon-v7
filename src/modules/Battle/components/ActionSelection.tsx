@@ -36,7 +36,9 @@ export function ActionSelection({
 				}}
 			>
 				{getMovesArray(controlled).map((m) => (
-					<button onClick={() => setChosenAction(m.name)}>{m.name}</button>
+					<button key={m.name} onClick={() => setChosenAction(m.name)}>
+						{m.name}
+					</button>
 				))}
 
 				{Object.entries(inventory).map(([item, amount]) => {
