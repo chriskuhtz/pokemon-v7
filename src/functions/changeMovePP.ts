@@ -10,31 +10,39 @@ export function changeMovePP<T extends BattlePokemon | OwnedPokemon>(
 		...user,
 		firstMove: {
 			...user.firstMove,
-			usedPP:
+			usedPP: Math.max(
 				user.firstMove.usedPP - (moveName === user.firstMove.name ? amount : 0),
+				0
+			),
 		},
 		secondMove: user.secondMove
 			? {
 					...user.secondMove,
-					usedPP:
+					usedPP: Math.max(
 						user.secondMove?.usedPP -
-						(moveName === user.secondMove?.name ? amount : 0),
+							(moveName === user.secondMove?.name ? amount : 0),
+						0
+					),
 			  }
 			: undefined,
 		thirdMove: user.thirdMove
 			? {
 					...user.thirdMove,
-					usedPP:
+					usedPP: Math.max(
 						user.thirdMove?.usedPP -
-						(moveName === user.thirdMove?.name ? amount : 0),
+							(moveName === user.thirdMove?.name ? amount : 0),
+						0
+					),
 			  }
 			: undefined,
 		fourthMove: user.fourthMove
 			? {
 					...user.fourthMove,
-					usedPP:
+					usedPP: Math.max(
 						user.fourthMove?.usedPP -
-						(moveName === user.fourthMove?.name ? amount : 0),
+							(moveName === user.fourthMove?.name ? amount : 0),
+						0
+					),
 			  }
 			: undefined,
 	};
