@@ -57,7 +57,7 @@ export const extraFeatureCheckList: {
 		name: 'smooth transition with dialogue after Starter Selection',
 		handled: true,
 	},
-	{ name: 'player sprite selection' },
+	{ name: 'player sprite selection', handled: true },
 	{ name: 'check if pokemon can actually cut' },
 	{ name: 'reset button' },
 	{ name: 'setting `reset on faint`' },
