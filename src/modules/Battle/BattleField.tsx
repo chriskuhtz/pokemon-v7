@@ -240,7 +240,7 @@ export const BattleField = ({
 	// Executing
 	useEffect(() => {
 		if (battleStep === 'EXECUTING') {
-			if (!nextMover) {
+			if (!latestMessage && !nextMover) {
 				setBattleStep('END_OF_TURN');
 				setBattleRound((battleRound) => battleRound + 1);
 				setPokemon((pokemon) =>
@@ -275,7 +275,7 @@ export const BattleField = ({
 				return p;
 			});
 
-			if (collectedMessages.length === 0) {
+			if (!latestMessage && collectedMessages.length === 0) {
 				setBattleStep('REFILLING');
 				return;
 			} else
