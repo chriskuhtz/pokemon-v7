@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { typeColors } from '../../constants/typeColors';
+import { percentageBasedColor } from '../../constants/typeColors';
 
 export const HpBar = ({ max, damage }: { max: number; damage: number }) => {
 	const [current, setCurrent] = useState<number>(max - damage);
@@ -67,16 +67,25 @@ export const HpBar = ({ max, damage }: { max: number; damage: number }) => {
 		>
 			<div
 				style={{
+					zIndex: 2,
+					width: 100,
 					textAlign: 'center',
-					backgroundColor: typeColors.grass,
+					position: 'absolute',
+					height: '1rem',
+				}}
+			>
+				{current}/{max}
+			</div>
+			<div
+				style={{
+					backgroundColor: percentageBasedColor(percentage).color,
+					zIndex: 1,
 					position: 'absolute',
 					height: '1rem',
 					width: 100 * percentage,
 					borderRadius: 9000,
 				}}
-			>
-				{current}/{max}
-			</div>
+			></div>
 		</div>
 	);
 };

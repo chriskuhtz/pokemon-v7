@@ -41,3 +41,21 @@ export const typeContrastColors: Record<PokemonType, string> = {
 	steel: 'black',
 	fairy: 'black',
 };
+
+export const percentageBasedColor = (
+	percentage: number
+): { color: string; contrast: string } => {
+	if (percentage < 0.25) {
+		return {
+			color: typeColors.fighting,
+			contrast: typeContrastColors.fighting,
+		};
+	}
+	if (percentage < 0.5) {
+		return {
+			color: typeColors.electric,
+			contrast: typeContrastColors.electric,
+		};
+	}
+	return { color: typeColors.grass, contrast: typeContrastColors.grass };
+};

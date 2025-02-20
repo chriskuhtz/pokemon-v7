@@ -47,9 +47,8 @@ export const extraFeatureCheckList: {
 	{ name: 'walking npcs on set paths', handled: true },
 	{ name: 'pretty stat display', handled: true },
 	{ name: 'battle platforms', handled: true },
-	{ name: 'prettier weather display' },
-	{ name: 'Battle Attack animation' },
-	{ name: 'hpbar colors' },
+
+	{ name: 'hpbar colors', handled: true },
 	{ name: 'choose random moves for opponent' },
 	{
 		name: 'only factor volt-absorb etc into recommendation after it has been revealed',
@@ -149,4 +148,11 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'setting: random quest rewards' },
 	{ name: 'shaders in battle' },
+	{
+		name: 'Pokemon sprites in message display based on name search (if message includes(pokemon.name)=> sprite )',
+	},
+	{
+		name: 'prettier weather display',
+	},
+	{ name: 'Battle Attack animation' },
 ];
