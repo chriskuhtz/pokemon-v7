@@ -1,5 +1,5 @@
 import { baseSize } from '../../constants/gameData';
-import { BattleAttack } from '../../interfaces/BattleActions';
+import { BattleMove } from '../../interfaces/BattlePokemon';
 import { Card } from '../../uiComponents/Card/Card';
 
 export const MoveCard = ({
@@ -8,7 +8,7 @@ export const MoveCard = ({
 	highlighted,
 	note,
 }: {
-	move: BattleAttack;
+	move: BattleMove;
 	onClick: () => void;
 	highlighted?: boolean;
 	note?: string;
