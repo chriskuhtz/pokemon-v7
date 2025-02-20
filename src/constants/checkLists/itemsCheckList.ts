@@ -210,6 +210,7 @@ export const itemsCheckList: {
 	{
 		name: 'berry-juice',
 		url: 'https://pokeapi.co/api/v2/item/43/',
+		todos: ['take/give held items', 'use held items in battle'],
 	},
 	{
 		name: 'sacred-ash',
