@@ -49,7 +49,7 @@ export const extraFeatureCheckList: {
 	{ name: 'battle platforms', handled: true },
 
 	{ name: 'hpbar colors', handled: true },
-	{ name: 'time of day icon in battle' },
+	{ name: 'time of day icon in battle', handled: true },
 	{ name: 'choose random moves for opponent' },
 	{
 		name: 'only factor volt-absorb etc into recommendation after it has been revealed',
