@@ -46,6 +46,7 @@ export const App = ({
 		applyItemToPokemonReducer,
 		fulfillQuestReducer,
 		putSaveFileReducer,
+		changeHeldItemReducer,
 	} = useSaveFile(testState, addToast);
 
 	const {
@@ -173,9 +174,11 @@ export const App = ({
 			<Team
 				team={team}
 				goBack={() => setActiveTabReducer('MAIN')}
-				reorderTeam={(newTeam: OwnedPokemon[]) =>
+				setTeam={(newTeam: OwnedPokemon[]) =>
 					setPokemonReducer([...newTeam, ...pokemon.filter((p) => !p.onTeam)])
 				}
+				inventory={inventory}
+				changeHeldItem={changeHeldItemReducer}
 			/>
 		);
 	}
