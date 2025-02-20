@@ -10,6 +10,6 @@ export const changeBattlePokemonType = (
 	dispatchToast(`${p.data.name} became a ${newType} Pokemon`);
 	return {
 		...p,
-		data: { ...p.data, types: [{ type: { name: newType, url: '' }, slot: 1 }] },
+		colorChangedType: newType,
 	};
 };

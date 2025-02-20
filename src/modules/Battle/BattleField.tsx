@@ -11,6 +11,7 @@ import { sortByPriority } from '../../functions/sortByPriority';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Inventory, joinInventories } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
+import { EmptyStatObject } from '../../interfaces/StatObject';
 import { WeatherType } from '../../interfaces/Weather';
 import { ControlBar } from './components/ControlBar';
 import { EnemyLane } from './components/EnemyLane';
@@ -192,7 +193,15 @@ export const BattleField = ({
 								'how on gods good earth do ya wanna put a fainted/caught pokemon on the field, lebowski?'
 							);
 						}
-						return { ...p, status: 'ONFIELD', roundsInBattle: 0 };
+						return {
+							...p,
+							status: 'ONFIELD',
+							roundsInBattle: 0,
+							moveQueue: [],
+							flashFired: false,
+							colorChangedType: undefined,
+							statBoosts: EmptyStatObject,
+						};
 					}
 					return p;
 				})
@@ -292,7 +301,13 @@ export const BattleField = ({
 					}))
 				);
 		}
-	}, [addMultipleMessages, battleStep, nextPokemonWithoutMove, pokemon]);
+	}, [
+		addMultipleMessages,
+		battleStep,
+		latestMessage,
+		nextPokemonWithoutMove,
+		pokemon,
+	]);
 	// Refilling
 	useEffect(() => {
 		if (battleStep === 'REFILLING' && !teamCanRefill && !opponentCanRefill) {

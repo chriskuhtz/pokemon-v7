@@ -2,6 +2,7 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { PokeballType } from '../interfaces/Item';
 import { calculateLevelData } from './calculateLevelData';
 import { isEvening, isNight } from './getTimeOfDay';
+import { getTypeNames } from './getTypeNames';
 
 export type BattleLocation = 'UNDERWATER' | 'CAVE' | 'STANDARD';
 
@@ -16,7 +17,7 @@ export const determineCaptureSuccess = (
 		return true;
 	}
 	const { level } = calculateLevelData(target.xp);
-	const targetTypes = target.data.types.map((t) => t.type.name);
+	const targetTypes = getTypeNames(target);
 
 	let ballfactor = 0.5; // base: poke-ball, luxury-ball, heal-ball, cherish-ball
 

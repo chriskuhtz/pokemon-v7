@@ -16,7 +16,7 @@ export const OwnedPokemonCardContent = ({
 	ownedPokemon: OwnedPokemon;
 	data: PokemonData;
 }) => {
-	const typeNames = getTypeNames(data.types);
+	const typeNames = getTypeNames({ ...ownedPokemon, data });
 	return (
 		<div>
 			<div
