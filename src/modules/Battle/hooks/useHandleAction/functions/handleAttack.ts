@@ -2,6 +2,7 @@ import { contactMoves } from '../../../../../constants/contactMoves';
 import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/selfDestructingMoves';
 import { applyAttackAilmentsToPokemon } from '../../../../../functions/applyAttackAilmentsToPokemon';
 import { applyPrimaryAilmentToPokemon } from '../../../../../functions/applyPrimaryAilmentToPokemon';
+import { applyStatusMove } from '../../../../../functions/applyStatusMove';
 import { calculateDamage } from '../../../../../functions/calculateDamage';
 import { determineMiss } from '../../../../../functions/determineMiss';
 import { handleFlinching } from '../../../../../functions/handleFlinching';
@@ -73,14 +74,10 @@ export const handleAttack = ({
 		return;
 	}
 
-	const miss = determineMiss(move, attacker, target, battleWeather, false);
+	const selfTargeting = move.data.target.name === 'user';
 
-	if (miss) {
-		handleMiss(attacker, move, setPokemon, addMessage);
-		return;
-	}
 	//TODO: handle self targeting, this currently leads to bugs bc. of mapping over pokemon and not applying target updates
-	if (target.id === attacker.id) {
+	if (target.id === attacker.id && !selfTargeting) {
 		console.warn('attacking yourself much?', attacker.data.name);
 	}
 
@@ -88,6 +85,12 @@ export const handleAttack = ({
 	addMessage(
 		`${attacker.data.name} used ${move.name} against ${target.data.name}`
 	);
+	const miss = determineMiss(move, attacker, target, battleWeather, false);
+
+	if (miss) {
+		handleMiss(attacker, move, setPokemon, addMessage);
+		return;
+	}
 
 	if (move.name === 'pay-day') {
 		addMessage(`Coins scattered everywhere`);
@@ -111,7 +114,11 @@ export const handleAttack = ({
 	if (move.multiHits === 0) {
 		updatedAttacker = reduceMovePP(updatedAttacker, move.name);
 	}
-	//3. check for static
+	//3. apply stat changes
+	if (selfTargeting) {
+		updatedAttacker = applyStatusMove(updatedAttacker, move, addMessage);
+	}
+	//4. check for static
 	if (
 		target.ability === 'static' &&
 		contactMoves.includes(move.name) &&
@@ -159,6 +166,12 @@ export const handleAttack = ({
 
 	setPokemon((pokemon) =>
 		pokemon.map((p) => {
+			if (
+				updatedAttacker.id === updatedTarget.id &&
+				p.id === updatedAttacker.id
+			) {
+				return updatedAttacker;
+			}
 			if (p.id === updatedAttacker.id) {
 				return updatedAttacker;
 			}

@@ -18,6 +18,11 @@ export const determineMiss = (
 	weather?: WeatherType,
 	targetIsFlying?: boolean
 ): boolean => {
+	const selfTargeting = attack.data.target.name === 'user';
+
+	if (selfTargeting) {
+		return false;
+	}
 	const ratio =
 		calculateModifiedStat(
 			attacker.stats.accuracy,

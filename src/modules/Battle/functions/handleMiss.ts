@@ -8,7 +8,6 @@ export const handleMiss = (
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
 	addMessage: (x: string) => void
 ) => {
-	addMessage(`${attacker.data.name} used ${attack.name} `);
 	addMessage('It Missed');
 	//UPDATES
 
