@@ -7,7 +7,10 @@ export const changeBattlePokemonType = (
 	newType: PokemonType,
 	dispatchToast: AddToastFunction
 ): BattlePokemon => {
-	dispatchToast(`${p.data.name} became a ${newType} Pokemon`);
+	if (p.colorChangedType !== newType) {
+		dispatchToast(`${p.data.name} became a ${newType} Pokemon`);
+	}
+
 	return {
 		...p,
 		colorChangedType: newType,
