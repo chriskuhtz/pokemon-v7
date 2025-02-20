@@ -86,7 +86,13 @@ export const handleAttack = ({
 	addMessage(
 		`${attacker.data.name} used ${move.name} against ${target.data.name}`
 	);
-	const miss = determineMiss(move, attacker, target, battleWeather, false);
+	//updated Target
+	let updatedTarget = { ...target };
+	const isFlying =
+		updatedTarget.moveQueue.length > 0 &&
+		updatedTarget.moveQueue[0].type === 'BattleAttack' &&
+		updatedTarget.moveQueue[0].name === 'fly';
+	const miss = determineMiss(move, attacker, target, battleWeather, isFlying);
 
 	if (miss) {
 		handleMiss(attacker, move, setPokemon, addMessage);
@@ -133,9 +139,8 @@ export const handleAttack = ({
 		);
 	}
 
-	//updated Target
-	let updatedTarget = { ...target };
 	//1. apply damage
+
 	updatedTarget = {
 		...updatedTarget,
 		damage:
@@ -146,6 +151,7 @@ export const handleAttack = ({
 				move,
 				battleWeather,
 				true,
+				isFlying,
 				addMessage
 			),
 	};
