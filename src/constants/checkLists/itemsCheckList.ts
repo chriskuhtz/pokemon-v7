@@ -147,39 +147,48 @@ export const itemsCheckList: {
 	{
 		name: 'max-revive',
 		url: 'https://pokeapi.co/api/v2/item/29/',
+		handled: true,
 	},
 	{
 		name: 'fresh-water',
 		url: 'https://pokeapi.co/api/v2/item/30/',
+		handled: true,
 	},
 
 	{
 		name: 'soda-pop',
 		url: 'https://pokeapi.co/api/v2/item/31/',
+		handled: true,
 	},
 	{
 		name: 'lemonade',
 		url: 'https://pokeapi.co/api/v2/item/32/',
+		handled: true,
 	},
 	{
 		name: 'moomoo-milk',
 		url: 'https://pokeapi.co/api/v2/item/33/',
+		handled: true,
 	},
 	{
 		name: 'energy-powder',
 		url: 'https://pokeapi.co/api/v2/item/34/',
+		handled: true,
 	},
 	{
 		name: 'energy-root',
 		url: 'https://pokeapi.co/api/v2/item/35/',
+		handled: true,
 	},
 	{
 		name: 'heal-powder',
 		url: 'https://pokeapi.co/api/v2/item/36/',
+		handled: true,
 	},
 	{
 		name: 'revival-herb',
 		url: 'https://pokeapi.co/api/v2/item/37/',
+		handled: true,
 	},
 	{ name: 'ether', url: 'https://pokeapi.co/api/v2/item/38/' },
 	{
