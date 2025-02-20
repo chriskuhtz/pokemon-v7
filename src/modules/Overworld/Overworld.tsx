@@ -159,6 +159,8 @@ export const Overworld = ({
 
 		return 1;
 	}, [assembledMap.weather, firstTeamMember.ability]);
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const fishingEncounterRateModifier = useMemo(() => {
 		if (firstTeamMember.ability === 'suction-cups') {
 			return 1.5;

@@ -213,6 +213,8 @@ export const BattleField = ({
 		},
 		[addMessage, battleWeather]
 	);
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const switchPokemon = useCallback(
 		(leavesBattle: BattlePokemon, entersBattle: BattlePokemon) => {
 			setPokemon((pokemon) =>
