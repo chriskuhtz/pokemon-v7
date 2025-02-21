@@ -204,6 +204,7 @@ export const movesCheckList: {
 	{
 		name: 'sonic-boom',
 		url: 'https://pokeapi.co/api/v2/move/49/',
+		handled: true,
 	},
 	{ name: 'disable', url: 'https://pokeapi.co/api/v2/move/50/' },
 	{ name: 'acid', url: 'https://pokeapi.co/api/v2/move/51/' },
@@ -304,7 +305,11 @@ export const movesCheckList: {
 	},
 
 	{ name: 'string-shot', url: 'https://pokeapi.co/api/v2/move/81/' },
-	{ name: 'dragon-rage', url: 'https://pokeapi.co/api/v2/move/82/' },
+	{
+		name: 'dragon-rage',
+		url: 'https://pokeapi.co/api/v2/move/82/',
+		handled: true,
+	},
 	{ name: 'fire-spin', url: 'https://pokeapi.co/api/v2/move/83/' },
 	{ name: 'thunder-shock', url: 'https://pokeapi.co/api/v2/move/84/' },
 	{ name: 'thunderbolt', url: 'https://pokeapi.co/api/v2/move/85/' },
@@ -1357,6 +1362,8 @@ export const handledMoves = [
 	'spore',
 	'supersonic',
 	'confuse-ray',
+	'sonic-boom',
+	'dragon-rage',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
