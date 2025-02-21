@@ -65,7 +65,7 @@ export interface OverworldNpc {
 	unhandledDialogue: string[];
 	handledDialogue?: string[];
 	sprite: string;
-	movememt?: { path: CharacterOrientation[]; currentStep: number };
+	movement?: { path: CharacterOrientation[]; currentStep: number };
 	gifts?: Partial<Inventory>;
 	quest?: QuestName;
 }
@@ -75,6 +75,7 @@ export interface OverworldBush {
 	y: number;
 	map: MapId;
 }
+
 export type Occupant =
 	| OverworldItem
 	| OverworldHiddenItem

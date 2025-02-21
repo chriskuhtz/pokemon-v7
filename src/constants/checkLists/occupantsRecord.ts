@@ -76,7 +76,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		orientation: 'UP',
 		unhandledDialogue: ["i'll try spinning", 'thats a good trick'],
 		sprite: '060',
-		movememt: { path: ['UP', 'RIGHT', 'LEFT', 'DOWN'], currentStep: 0 },
+		movement: { path: ['UP', 'RIGHT', 'LEFT', 'DOWN'], currentStep: 0 },
 	},
 	600002: {
 		type: 'NPC',
@@ -93,7 +93,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		sprite: '040',
 		gifts: { 'dusk-ball': 5 },
 		quest: 'Catch a nocturnal pokemon from the meadow',
-		movememt: { path: ['RIGHT', 'LEFT'], currentStep: 0 },
+		movement: { path: ['RIGHT', 'LEFT'], currentStep: 0 },
 	},
 	600003: {
 		type: 'NPC',
@@ -103,7 +103,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		orientation: 'LEFT',
 		unhandledDialogue: ['Running in circles is dank af'],
 		sprite: '070',
-		movememt: {
+		movement: {
 			path: ['RIGHT', 'RIGHT', 'DOWN', 'DOWN', 'LEFT', 'LEFT', 'UP', 'UP'],
 			currentStep: 0,
 		},

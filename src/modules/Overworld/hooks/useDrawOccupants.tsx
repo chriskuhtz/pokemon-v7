@@ -31,15 +31,15 @@ export const useDrawOccupants = (
 		}
 		if (
 			Object.values(statefulOccupants).some(
-				(occ) => occ.type === 'NPC' && occ.movememt
+				(occ) => occ.type === 'NPC' && occ.movement
 			)
 		) {
 			const t = setTimeout(() => {
 				setStatefulOccupants(
 					Object.fromEntries(
 						Object.entries(statefulOccupants).map(([id, occ]) => {
-							if (occ.type === 'NPC' && occ.movememt && Math.random() > 0.5) {
-								const step = occ.movememt.path[occ.movememt.currentStep];
+							if (occ.type === 'NPC' && occ.movement && Math.random() > 0.5) {
+								const step = occ.movement.path[occ.movement.currentStep];
 								const update =
 									step === occ.orientation
 										? getNextLocation(
@@ -58,11 +58,11 @@ export const useDrawOccupants = (
 									{
 										...occ,
 										...update,
-										movememt: {
-											...occ.movememt,
+										movement: {
+											...occ.movement,
 											currentStep: overflow(
-												occ.movememt.currentStep,
-												occ.movememt.path.length
+												occ.movement.currentStep,
+												occ.movement.path.length
 											),
 										},
 									},
