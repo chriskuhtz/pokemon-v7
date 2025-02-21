@@ -194,6 +194,11 @@ export const BattleField = ({
 								'how on gods good earth do ya wanna put a fainted/caught pokemon on the field, lebowski?'
 							);
 						}
+						if (p.ability === 'natural-cure' && p.primaryAilment) {
+							addMessage({
+								message: `${p.data.name} cured itself with natural cure`,
+							});
+						}
 						return {
 							...p,
 							status: 'ONFIELD',
@@ -202,12 +207,16 @@ export const BattleField = ({
 							flashFired: false,
 							colorChangedType: undefined,
 							statBoosts: EmptyStatObject,
+							secondaryAilments: [],
+							primaryAilment:
+								//natural cure removes ailments on battle enter
+								p.ability === 'natural-cure' ? undefined : p.primaryAilment,
 						};
 					}
 					return p;
 				})
 			),
-		[]
+		[addMessage]
 	);
 	const handleDeploymentAbility = useCallback(
 		(p: BattlePokemon) => {

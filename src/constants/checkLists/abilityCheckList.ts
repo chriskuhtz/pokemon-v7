@@ -154,6 +154,7 @@ export const abilityCheckList: {
 	{
 		name: 'natural-cure',
 		url: 'https://pokeapi.co/api/v2/ability/30/',
+		handled: true,
 	},
 	{ name: 'lightning-rod', url: 'https://pokeapi.co/api/v2/ability/31/' },
 	{ name: 'serene-grace', url: 'https://pokeapi.co/api/v2/ability/32/' },
@@ -552,6 +553,7 @@ export const abilityNames = [
 	'synchronize',
 	'clear-body',
 	'white-smoke',
+	'natural-cure',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
