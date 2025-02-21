@@ -67,7 +67,7 @@ export const extraFeatureCheckList: {
 		name: 'only show three pokeballs that open onClick for starter selection',
 		handled: true,
 	},
-	{ name: 'handled npcs list' },
+	{ name: 'handled npcs list', handled: true },
 	{ name: 'trainers' },
 	{ name: 'play pokecenter sound on visit' },
 	{ name: 'fix toast and Banner position' },
@@ -191,4 +191,6 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'map portals' },
 	{ name: 'display level when applying rare candy from bag' },
+	{ name: 'individual reset timers for npcs' },
+	{ name: 'time based occupants' },
 ];

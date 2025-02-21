@@ -42,8 +42,13 @@ export interface SaveFile {
 		activeTab: RoutesType;
 	};
 	location: CharacterLocationData;
-	collectedItems: number[];
-	cutBushes: number[];
+
+	handledOccupants: {
+		id: number;
+		//at this point in time (in ms), this occupant will be removed from the handled list
+		resetAt: number;
+	}[];
+
 	lastEdited: number;
 	lastNurse: number;
 	settings?: SettingsObject;

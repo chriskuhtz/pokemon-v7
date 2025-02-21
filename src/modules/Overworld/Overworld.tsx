@@ -9,11 +9,8 @@ import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { isValidOverWorldMap } from '../../functions/isValidOverworldMap';
 import { Inventory } from '../../interfaces/Inventory';
-import {
-	Occupant,
-	OverworldItem,
-	OverworldMap,
-} from '../../interfaces/OverworldMap';
+import { ItemType } from '../../interfaces/Item';
+import { Occupant, OverworldMap } from '../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { CharacterLocationData } from '../../interfaces/SaveFile';
 import { Banner } from '../../uiComponents/Banner/Banner';
@@ -26,7 +23,6 @@ import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
-import { ItemType } from '../../interfaces/Item';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -42,47 +38,51 @@ export const Overworld = ({
 	openMenu,
 	playerLocation,
 	setCharacterLocation,
-	collectItem,
 	map,
 	startEncounter,
 	firstTeamMember,
-	collectedItems,
 	goToMarket,
 	talkToNurse,
 	openStorage,
-	bushCutting,
-	cutBushes,
 	playerSprite,
-	receiveItems,
+	handleThisOccupant,
+	handledOccupants,
+	cutterPokemon,
 }: {
 	openMenu: (stepsTaken: number) => void;
 	playerLocation: CharacterLocationData;
 	setCharacterLocation: (update: CharacterLocationData) => void;
-	collectItem: (item: [string, OverworldItem]) => void;
 	map: OverworldMap;
-	collectedItems: number[];
 	startEncounter: (stepsTaken: number) => void;
 	encounterRateModifier?: number;
 	openStorage: (stepsTaken: number) => void;
 	goToMarket: (marketInventory: Partial<Inventory>, stepsTaken: number) => void;
 	firstTeamMember: OwnedPokemon;
 	talkToNurse: (id: number) => void;
-	bushCutting?: {
-		cut: (id: number) => void;
-		cutterPokemon: { dexId: number };
-	};
-	cutBushes: number[];
 	playerSprite: string;
 	receiveItems: (item: ItemType, amount: number) => void;
+	handledOccupants: number[];
+	handleThisOccupant: (id: number) => void;
+	cutterPokemon?: { dexId: number };
 }) => {
 	const [statefulOccupants, setStatefulOccupants] = useState<
 		Record<number, Occupant>
 	>({});
 	useEffect(() => {
-		const filteredOccupants = [...map.occupants].filter(
-			(o) =>
-				!collectedItems.some((c) => c === o) && !cutBushes.some((c) => c === o)
-		);
+		const filteredOccupants = [...map.occupants].filter((o) => {
+			const occ = occupantsRecord[o];
+
+			if (occ.type === 'ITEM' && handledOccupants.includes(o)) {
+				return false;
+			}
+			if (occ.type === 'BUSH' && handledOccupants.includes(o)) {
+				return false;
+			}
+			if (occ.type === 'HIDDEN_ITEM' && handledOccupants.includes(o)) {
+				return false;
+			}
+			return true;
+		});
 		setStatefulOccupants(
 			Object.fromEntries(
 				Object.entries(occupantsRecord).filter(([id]) =>
@@ -90,7 +90,7 @@ export const Overworld = ({
 				)
 			)
 		);
-	}, [collectedItems, cutBushes, map]);
+	}, [handledOccupants, map]);
 	const changeOccupant = useCallback(
 		(id: number, updatedOccupant: Occupant) => {
 			setStatefulOccupants((statefulOccupants) => {
@@ -174,26 +174,24 @@ export const Overworld = ({
 			interactWithFunction({
 				occ,
 				addDialogue,
-				collectItem,
-				cutBushes,
-				bushCutting,
 				openStorage,
 				stepsTaken,
 				changeOccupant,
 				playerLocation,
 				goToMarket,
 				talkToNurse,
-				receiveItems,
+				handledOccupants,
+				handleThisOccupant,
+				cutterPokemon,
 			}),
 		[
-			bushCutting,
 			changeOccupant,
-			collectItem,
-			cutBushes,
+			cutterPokemon,
 			goToMarket,
+			handleThisOccupant,
+			handledOccupants,
 			openStorage,
 			playerLocation,
-			receiveItems,
 			stepsTaken,
 			talkToNurse,
 		]
@@ -212,7 +210,11 @@ export const Overworld = ({
 		playerLocation,
 		setNextInput,
 		interactWith,
-		collectedItems,
+		handledOccupants.filter(
+			(h) =>
+				occupantsRecord[h].type === 'ITEM' ||
+				occupantsRecord[h].type === 'HIDDEN_ITEM'
+		),
 		dialogues.length > 0,
 		statefulOccupants
 	);
@@ -221,7 +223,11 @@ export const Overworld = ({
 		() =>
 			handleEnterPress(
 				playerLocation,
-				collectedItems,
+				handledOccupants.filter(
+					(h) =>
+						occupantsRecord[h].type === 'ITEM' ||
+						occupantsRecord[h].type === 'HIDDEN_ITEM'
+				),
 				interactWith,
 				statefulOccupants
 			),

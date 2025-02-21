@@ -37,12 +37,11 @@ export const App = ({
 		sellItemReducer,
 		buyItemReducer,
 		setCharacterLocationReducer,
-		collectItemReducer,
+		handleOccupantReducer,
 		setPokemonReducer,
 		talkToNurseReducer,
 		patchSaveFileReducer,
 		navigateAwayFromOverworldReducer,
-		cutBushReducer,
 		applyItemToPokemonReducer,
 		fulfillQuestReducer,
 		changeHeldItemReducer,
@@ -58,7 +57,7 @@ export const App = ({
 		pokemon,
 		money,
 		location,
-		collectedItems,
+		handledOccupants,
 		badges,
 		playerId,
 		quests,
@@ -217,10 +216,8 @@ export const App = ({
 		<Overworld
 			openMenu={(steps) => navigateAwayFromOverworldReducer('MAIN', steps)}
 			setCharacterLocation={setCharacterLocationReducer}
-			collectItem={collectItemReducer}
 			playerLocation={location}
 			map={testMap}
-			collectedItems={collectedItems}
 			startEncounter={(steps) => {
 				navigateAwayFromOverworldReducer('BATTLE', steps);
 			}}
@@ -233,13 +230,11 @@ export const App = ({
 				navigateAwayFromOverworldReducer('STORAGE', steps)
 			}
 			talkToNurse={talkToNurseReducer}
-			bushCutting={{
-				cut: cutBushReducer,
-				cutterPokemon: { dexId: team[0].dexId },
-			}}
-			cutBushes={saveFile.cutBushes}
+			cutterPokemon={{ dexId: team[0].dexId }}
 			playerSprite={saveFile.sprite}
 			receiveItems={addItemReducer}
+			handleThisOccupant={handleOccupantReducer}
+			handledOccupants={handledOccupants.map((h) => h.id)}
 		/>
 	);
 };
