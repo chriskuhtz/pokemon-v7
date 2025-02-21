@@ -37,7 +37,17 @@ export const occupantsRecord: Record<number, Occupant> = {
 		approachDirection: 'UP',
 	},
 	//Trainers start at 200000
-
+	200001: {
+		type: 'TRAINER',
+		x: 12,
+		y: 3,
+		map: 'meadow',
+		orientation: 'LEFT',
+		unhandledDialogue: ['fight me', 'big dog'],
+		handledDialogue: ['you are the big dog'],
+		sprite: '033',
+		team: [],
+	},
 	//Merchants start at 300000,
 	300001: {
 		type: 'MERCHANT',

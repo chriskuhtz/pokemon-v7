@@ -122,6 +122,33 @@ export const interactWithFunction = ({
 
 		return;
 	}
+	if (data.type === 'TRAINER') {
+		changeOccupant(Number.parseInt(id), {
+			...data,
+			orientation: getOppositeDirection(playerLocation.orientation),
+		});
+
+		if (
+			!handledOccupants.includes(Number.parseInt(id)) ||
+			!data.handledDialogue
+		) {
+			data.unhandledDialogue.forEach((d) =>
+				addDialogue({
+					message: d,
+				})
+			);
+
+			handleThisOccupant(Number.parseInt(id));
+		} else {
+			data.handledDialogue.forEach((d) =>
+				addDialogue({
+					message: d,
+				})
+			);
+		}
+
+		return;
+	}
 
 	console.error('what is this occupant', occ);
 };

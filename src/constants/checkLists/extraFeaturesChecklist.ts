@@ -193,4 +193,8 @@ export const extraFeatureCheckList: {
 	{ name: 'display level when applying rare candy from bag' },
 	{ name: 'individual reset timers for npcs' },
 	{ name: 'time based occupants' },
+	{ name: 'trainers give rewards' },
+	{ name: 'trainers spot you' },
+	{ name: 'trainers can move and still spot you' },
+	{ name: 'scripted npcs' },
 ];

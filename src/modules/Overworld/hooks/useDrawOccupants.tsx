@@ -24,6 +24,7 @@ export const useDrawOccupants = (
 		Record<number, Occupant>
 	>({});
 
+	//Walk the npcs
 	useEffect(() => {
 		if (activeDialogue) {
 			//stop movement during dialogue
@@ -78,6 +79,7 @@ export const useDrawOccupants = (
 		}
 	}, [activeDialogue, setStatefulOccupants, statefulOccupants]);
 
+	//draw the npcs
 	useEffect(() => {
 		console.log('draw occupants');
 
@@ -134,6 +136,7 @@ const drawOccupant = (
 			case 'MERCHANT':
 			case 'NURSE':
 			case 'NPC':
+			case 'TRAINER':
 				ctx?.drawImage(
 					img,
 					0,
@@ -177,6 +180,7 @@ const getSource = (occ: Occupant) => {
 		case 'MERCHANT':
 		case 'NURSE':
 		case 'NPC':
+		case 'TRAINER':
 			return `/npcs/NPC_${occ.sprite}.png`;
 		case 'PC':
 			return '/mapObjects/pc.png';

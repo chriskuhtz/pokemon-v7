@@ -70,7 +70,6 @@ export const useSaveFile = (
 	const loaded = local ? (JSON.parse(local) as SaveFile) : init;
 
 	const [saveFile, s] = useState<SaveFile>(loaded);
-
 	const setSaveFile = useCallback(
 		(
 			update: SaveFile,
@@ -288,6 +287,10 @@ export const useSaveFile = (
 				...saveFile,
 				inventory: newInventory,
 				quests: updatedQuests,
+				meta: {
+					activeTab:
+						occ.type === 'TRAINER' ? 'BATTLE' : saveFile.meta.activeTab,
+				},
 				handledOccupants: [
 					...saveFile.handledOccupants,
 					{ id, resetAt: timer },
