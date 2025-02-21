@@ -1,12 +1,15 @@
 import { contactMoves } from '../../../../../constants/contactMoves';
+import { lockInMoves } from '../../../../../constants/forceSwitchMoves';
 import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/selfDestructingMoves';
 import { applyAttackAilmentsToPokemon } from '../../../../../functions/applyAttackAilmentsToPokemon';
 import { applyPrimaryAilmentToPokemon } from '../../../../../functions/applyPrimaryAilmentToPokemon';
+import { applySecondaryAilmentToPokemon } from '../../../../../functions/applySecondaryAilmentToPokemon';
 import { applyAttackStatChanges } from '../../../../../functions/applyStatusMove';
 import { calculateDamage } from '../../../../../functions/calculateDamage';
 import { changeBattlePokemonType } from '../../../../../functions/changeBattlePokemonType';
 import { changeMovePP } from '../../../../../functions/changeMovePP';
 import { determineMiss } from '../../../../../functions/determineMiss';
+import { getRandomTargetId } from '../../../../../functions/filterTargets';
 import { handleFlinching } from '../../../../../functions/handleFlinching';
 import { isKO } from '../../../../../functions/isKo';
 import {
@@ -44,8 +47,17 @@ export const handleAttack = ({
 	scatterCoins: () => void;
 	dampy?: { name: string };
 }): void => {
+	//lock in moves choose a random target at execution
+	const realTargetId = lockInMoves.includes(move.name)
+		? getRandomTargetId({
+				targets: pokemon,
+				user: attacker,
+				chosenAction: move.name,
+				onlyOpponents: false,
+		  })
+		: move.targetId;
 	const target = pokemon.find(
-		(p) => p.id === move.targetId && p.status === 'ONFIELD'
+		(p) => p.id === realTargetId && p.status === 'ONFIELD'
 	);
 
 	let updatedAttacker = { ...attacker };
@@ -109,6 +121,18 @@ export const handleAttack = ({
 
 	//ATTACKER
 
+	//apply confusion on lock in end
+	if (
+		lockInMoves.includes(move.name) &&
+		updatedAttacker.moveQueue.length === 1
+	) {
+		addMessage(`${updatedAttacker.data.name} stopped thrashing`);
+		updatedAttacker = applySecondaryAilmentToPokemon(
+			updatedAttacker,
+			'confusion',
+			addMessage
+		);
+	}
 	//update moveQueue
 	if (move.multiHits > 0) {
 		addMessage('Multi hit!');
@@ -116,7 +140,11 @@ export const handleAttack = ({
 			...updatedAttacker,
 			moveQueue: [{ ...move, multiHits: move.multiHits - 1 }],
 		};
-	} else updatedAttacker = { ...updatedAttacker, moveQueue: [] };
+	} else
+		updatedAttacker = {
+			...updatedAttacker,
+			moveQueue: updatedAttacker.moveQueue.slice(1),
+		};
 
 	//reduce pp after all multihits are done
 	if (move.multiHits === 0) {

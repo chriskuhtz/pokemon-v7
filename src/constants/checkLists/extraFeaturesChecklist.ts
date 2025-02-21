@@ -177,4 +177,5 @@ export const extraFeatureCheckList: {
 	{ name: 'ivs' },
 	{ name: 'check if pokemon can actually cut' },
 	{ name: 'gain xp from battle' },
+	{ name: 'chosen settings overview' },
 ];

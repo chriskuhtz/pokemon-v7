@@ -1,7 +1,9 @@
 import { useCallback } from 'react';
 import { MoveName } from '../../../constants/checkLists/movesCheckList';
+import { lockInMoves } from '../../../constants/forceSwitchMoves';
 import { secondTurnMoves } from '../../../constants/secondTurnMoves';
 import { determineMultiHits } from '../../../functions/determineMultiHits';
+import { BattleAction } from '../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import {
 	isHealingItem,
@@ -117,6 +119,47 @@ export const useChooseAction = (
 										multiHits: determineMultiHits(move.data),
 									},
 								],
+							};
+						}
+						return p;
+					})
+				);
+				return;
+			}
+			if (lockInMoves.includes(actionName)) {
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.id === user.id) {
+							return {
+								...user,
+								moveQueue: [
+									{
+										type: 'BattleAttack',
+										data: move.data,
+										name: actionName as MoveName,
+										round: battleRound,
+										targetId,
+										multiHits: determineMultiHits(move.data),
+									},
+									{
+										type: 'BattleAttack',
+										data: move.data,
+										name: actionName as MoveName,
+										round: battleRound + 1,
+										targetId,
+										multiHits: determineMultiHits(move.data),
+									},
+									Math.random() > 0.5
+										? {
+												type: 'BattleAttack',
+												data: move.data,
+												name: actionName as MoveName,
+												round: battleRound + 2,
+												targetId,
+												multiHits: determineMultiHits(move.data),
+										  }
+										: undefined,
+								].filter((m) => m !== undefined) as BattleAction[],
 							};
 						}
 						return p;

@@ -237,7 +237,7 @@ export const BattleField = ({
 
 						return { ...entersBattle, status: 'ONFIELD' };
 					}
-
+					//TODO: remap moves if "leavesBattle" is the target
 					return p;
 				})
 			);
