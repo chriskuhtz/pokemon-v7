@@ -1,10 +1,9 @@
 import { useMemo, useState } from 'react';
 import { v4 } from 'uuid';
-import { testOpponent, testPokemon, testState } from './constants/gameData';
+import { testPokemon, testState } from './constants/gameData';
 import { testMap } from './constants/maps/testmap';
 import { STANDARD_BUY_MARKET } from './constants/standardBuyMarket';
-import { getRandomEncounter } from './functions/getRandomEncounter';
-import { reduceBattlePokemonToOwnedPokemon } from './functions/reduceBattlePokemonToOwnedPokemon';
+import { determineWildPokemon } from './functions/determineWildPokemon';
 import { useSaveFile } from './hooks/useSaveFile';
 import { AddToastFunction } from './hooks/useToasts';
 import { generateInventory, Inventory } from './interfaces/Inventory';
@@ -46,10 +45,10 @@ export const App = ({
 		cutBushReducer,
 		applyItemToPokemonReducer,
 		fulfillQuestReducer,
-		putSaveFileReducer,
 		changeHeldItemReducer,
 		useSacredAshReducer,
 		reset,
+		leaveBattleReducer,
 	} = useSaveFile(testState, addToast);
 
 	const {
@@ -62,7 +61,6 @@ export const App = ({
 		badges,
 		playerId,
 		quests,
-		settings,
 	} = saveFile;
 
 	const team = useMemo(() => pokemon.filter((p) => p.onTeam), [pokemon]);
@@ -70,58 +68,13 @@ export const App = ({
 	const firstTeamMember = team[0];
 
 	if (activeTab === 'BATTLE') {
+		const opps = determineWildPokemon(team, testMap);
 		return (
 			<BattleLoader
-				opponents={
-					team.length > 1
-						? [
-								{ ...testOpponent, ...getRandomEncounter(testMap), id: v4() },
-								{ ...testOpponent, ...getRandomEncounter(testMap), id: v4() },
-						  ]
-						: [{ ...testOpponent, ...getRandomEncounter(testMap), id: v4() }]
-				}
+				opponents={opps}
 				team={team}
-				leave={(
-					caughtPokemon,
-					updatedInventory,
-					scatteredCoins,
-					updatedTeam
-				) => {
-					const filteredTeam = updatedTeam
-						.filter((p) => {
-							if (
-								settings?.disqualifyFaintedPokemon &&
-								p.status === 'FAINTED'
-							) {
-								return false;
-							}
-
-							return true;
-						})
-						.map((t) => reduceBattlePokemonToOwnedPokemon(t));
-
-					if (filteredTeam.length === 0) {
-						reset();
-					}
-					const updatedPokemon = [
-						...filteredTeam,
-						...pokemon.filter((p) => !team.some((t) => t.id === p.id)),
-						...caughtPokemon.map((c) => {
-							return {
-								...reduceBattlePokemonToOwnedPokemon(c, c.ball === 'heal-ball'),
-								ownerId: saveFile.playerId,
-							};
-						}),
-					];
-					putSaveFileReducer({
-						...saveFile,
-						inventory: updatedInventory,
-						money: saveFile.money + scatteredCoins,
-						pokemon: updatedPokemon,
-						meta: { activeTab: 'OVERWORLD' },
-					});
-				}}
-				fightersPerSide={team.length > 1 ? 2 : 1}
+				leave={leaveBattleReducer}
+				fightersPerSide={opps.length}
 				inventory={inventory}
 				ownedPokemonDexIds={saveFile.pokemon.map((p) => p.dexId)}
 			/>
