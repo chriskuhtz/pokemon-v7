@@ -7,4 +7,6 @@
 }
 .page {
 	padding: 0.5rem;
+	max-height: 100dvh;
+	overflow: scroll;
 }

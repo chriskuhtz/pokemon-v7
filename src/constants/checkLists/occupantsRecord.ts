@@ -146,7 +146,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		unhandledDialogue: [
 			'During the day, i work in the city',
 			'I come here at night to search for zorua',
-			'These Dusk ball work well at night',
+			'These Dusk balls work well at night',
 		],
 		quest: 'Catch a Zorua at night in the meadow',
 		sprite: '080',

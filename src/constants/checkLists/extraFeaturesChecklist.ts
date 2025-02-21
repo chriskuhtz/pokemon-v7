@@ -68,9 +68,9 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'handled npcs list', handled: true },
-	{ name: 'trainers' },
-	{ name: 'play pokecenter sound on visit' },
-	{ name: 'fix toast and Banner position' },
+	{ name: 'trainers', handled: true },
+
+	{ name: 'fix toast and Banner position', handled: true },
 	{ name: 'Opponents can use items' },
 	{ name: 'Properly determine held item from options' },
 	{
@@ -199,4 +199,5 @@ export const extraFeatureCheckList: {
 	{ name: 'scripted npcs' },
 	{ name: 'no running or catching in trainer battles' },
 	{ name: 'surf outside of battle' },
+	{ name: 'play pokecenter sound on visit' },
 ];
