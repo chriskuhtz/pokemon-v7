@@ -270,6 +270,7 @@ export const itemsCheckList: {
 	{
 		name: 'dire-hit',
 		url: 'https://pokeapi.co/api/v2/item/56/',
+		handled: true,
 	},
 	{
 		name: 'poke-doll',

@@ -278,7 +278,7 @@ export const useSaveFile = (
 		}
 		if (occ.type === 'ITEM' || occ.type === 'HIDDEN_ITEM') {
 			const { item, amount } = occ;
-			addToast(`found ${amount} ${item}`);
+			addToast(`found ${amount} ${item}`, 'SUCCESS');
 
 			newInventory = joinInventories(newInventory, { [item]: amount });
 		}
