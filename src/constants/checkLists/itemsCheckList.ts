@@ -233,8 +233,8 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/54/',
 		handled: true,
 	},
-	{ name: 'pp-up', url: 'https://pokeapi.co/api/v2/item/51/' },
-	{ name: 'pp-max', url: 'https://pokeapi.co/api/v2/item/53/' },
+	{ name: 'pp-up', url: 'https://pokeapi.co/api/v2/item/51/', handled: true },
+	{ name: 'pp-max', url: 'https://pokeapi.co/api/v2/item/53/', handled: true },
 	{
 		name: 'x-attack',
 		url: 'https://pokeapi.co/api/v2/item/57/',

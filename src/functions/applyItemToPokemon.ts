@@ -5,11 +5,13 @@ import {
 	HappinessChangeTable,
 	HPHealTable,
 	isEvBoostItem,
+	isPPBoostItem,
 	ItemType,
 } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { applyEVBoostItem } from './applyEVGain';
 import { applyHappinessChange } from './applyHappinessChange';
+import { applyPPMoveBooster } from './applyPPBooster';
 import { calculateLevelData } from './calculateLevelData';
 import { changeMovePP } from './changeMovePP';
 import { removeHealableAilments } from './removeHealableAilments';
@@ -188,6 +190,9 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 			...applyHappinessChange(pokemon, HappinessChangeTable[item] ?? 0),
 			xp: xpAtNextLevel,
 		};
+	}
+	if (isPPBoostItem(item) && move) {
+		return applyPPMoveBooster(pokemon, move, item);
 	}
 
 	return pokemon;

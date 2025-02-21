@@ -27,12 +27,13 @@ export const testPokemon: OwnedPokemon = {
 	heldItemName: 'potion',
 	maxHp: 20,
 	effortValues: EmptyStatObject,
+	ppBoostedMoves: [],
 };
 export const testState: SaveFile = {
 	sprite: '',
 	badges: [],
 	quests: { 'catch a pikachu': 'ACTIVE' },
-	inventory: generateInventory({}),
+	inventory: generateInventory({ 'pp-up': 3, 'pp-max': 4 }),
 	playerId: '',
 	money: 5000,
 	pokemon: [],
@@ -71,6 +72,7 @@ export const testOpponent: OwnedPokemon = {
 	stepsWalked: 0,
 	maxHp: 50,
 	effortValues: EmptyStatObject,
+	ppBoostedMoves: [],
 };
 
 export const localStorageId = 'pokemonv7SaveFile';

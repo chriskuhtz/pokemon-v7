@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { MdHealing } from 'react-icons/md';
 import { MoveName } from '../../../constants/checkLists/movesCheckList';
 import { baseSize } from '../../../constants/gameData';
+import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
-import { ItemType } from '../../../interfaces/Item';
+import { isPPBoostItem, ItemType } from '../../../interfaces/Item';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { Banner } from '../../../uiComponents/Banner/Banner';
 
@@ -34,7 +35,10 @@ export const HealAction = ({
 							key={p.id}
 							src={getPokemonSprite(p.dexId)}
 							onClick={() => {
-								if (['ether', 'max-ether'].includes(item)) {
+								if (
+									['ether', 'max-ether'].includes(item) ||
+									isPPBoostItem(item)
+								) {
 									setSelectedPokemon(p);
 									setPokemonSelectionOpen(false);
 								} else {
@@ -47,7 +51,10 @@ export const HealAction = ({
 							onKeyDown={(e) => {
 								e.stopPropagation();
 								if (e.key === 'Enter') {
-									if (['ether', 'max-ether'].includes(item)) {
+									if (
+										['ether', 'max-ether'].includes(item) ||
+										isPPBoostItem(item)
+									) {
 										setSelectedPokemon(p);
 										setPokemonSelectionOpen(false);
 									} else {
@@ -70,9 +77,9 @@ export const HealAction = ({
 					>
 						X
 					</strong>
-					<h3>Which Move do you want to restore with {item}:</h3>
+					<h3>For which Move should {item} be used:</h3>
 					{getMovesArray(selectedPokemon)
-						.filter((m) => m.usedPP > 0)
+						.filter((m) => canBenefitFromItem(selectedPokemon, item, m.name))
 						.map((m) => (
 							<button
 								style={{ backgroundColor: 'white' }}
