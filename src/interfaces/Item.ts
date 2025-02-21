@@ -134,15 +134,6 @@ export function isPPRestorationItem(
 	return (ppRestorationItemTypes as unknown as string[]).includes(x ?? '');
 }
 
-export const EVBoostMap: Record<EvBoostItemType, Stat> = {
-	calcium: 'spatk',
-	carbos: 'speed',
-	'hp-up': 'hp',
-	iron: 'defense',
-	protein: 'attack',
-	zinc: 'spdef',
-};
-
 export function isEvBoostItem(x: string | undefined): x is EvBoostItemType {
 	return (evBoostItemTypes as unknown as string[]).includes(x ?? '');
 }
@@ -163,25 +154,31 @@ export function isEncounterChanceItem(
 export function isItem(x: string | undefined): x is ItemType {
 	return (itemTypes as unknown as string[]).includes(x ?? '');
 }
-export function isHoldable(x: string | undefined): boolean {
-	return ['berry-juice'].includes(x ?? '');
-}
 
-export const hasFriendshipEffect = (itemName: ItemType) => {
-	return [
-		'heal-powder',
-		'energy-powder',
-		'revival-herb',
-		'energy-root',
-		'rare-candy',
-		...evBoostItemTypes,
-	].includes(itemName);
-};
+//TODO: implement limits, e.g. hp up cant improve over 100
 export const HappinessChangeTable: Partial<Record<ItemType, number>> = {
 	'heal-powder': -10,
 	'energy-powder': -10,
 	'revival-herb': -10,
 	'energy-root': -10,
+	'rare-candy': 10,
+	'hp-up': 5,
+	calcium: 5,
+	zinc: 5,
+	iron: 5,
+	protein: 5,
+	carbos: 5,
+};
+export const EvBoostTable: Record<
+	EvBoostItemType,
+	{ stat: Stat; change: number }
+> = {
+	'hp-up': { change: 10, stat: 'hp' },
+	calcium: { change: 10, stat: 'spatk' },
+	zinc: { change: 10, stat: 'spdef' },
+	iron: { change: 10, stat: 'defense' },
+	protein: { change: 10, stat: 'attack' },
+	carbos: { change: 10, stat: 'speed' },
 };
 
 export const HPHealTable: Partial<Record<ItemType, number>> = {
