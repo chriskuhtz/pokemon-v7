@@ -15,6 +15,19 @@ export const applyStatChangeToPokemon = (
 	}
 	const existingStat = pokemon.statBoosts[stat];
 
+	if (
+		pokemon.secondaryAilments.some((a) => a.type === 'guard-spec') &&
+		modifier < 0
+	) {
+		if (dispatchToast) {
+			dispatchToast(
+				`${pokemon.data.name}'s guard spec prevents stat reduction`
+			);
+		}
+
+		return pokemon;
+	}
+
 	if (existingStat >= 6 && modifier > 0) {
 		if (dispatchToast) {
 			dispatchToast(`${pokemon.data.name}'s ${stat} can't go any higher`);

@@ -77,5 +77,15 @@ export const applySecondaryAilmentToPokemon = (
 			],
 		};
 	}
+	if (ailment === 'guard-spec') {
+		addMessage(`guard spec applied`);
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{ type: 'guard-spec', duration: 5 },
+			],
+		};
+	}
 	return pokemon;
 };

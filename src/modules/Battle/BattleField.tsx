@@ -11,6 +11,7 @@ import { changeMovePP } from '../../functions/changeMovePP';
 import { BattleLocation } from '../../functions/determineCaptureSuccess';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
+import { reduceSecondaryAilmentDurations } from '../../functions/reduceSecondaryAilmentDurations';
 import { sortByPriority } from '../../functions/sortByPriority';
 import { useMessageQueue } from '../../hooks/useMessageQueue';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
@@ -358,6 +359,9 @@ export const BattleField = ({
 					up = applyEndOfTurnHeldItem(up, (x) => collectedMessages.push(x));
 					up = applyPrimaryAilmentDamage(up, (x) => collectedMessages.push(x));
 					up = applySecondaryAilmentDamage(up, (x) =>
+						collectedMessages.push(x)
+					);
+					up = reduceSecondaryAilmentDurations(p, (x) =>
 						collectedMessages.push(x)
 					);
 

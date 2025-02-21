@@ -9,17 +9,18 @@ export const reduceSecondaryAilmentDurations = (
 	//reduce ailment duration
 	updated.secondaryAilments = updated.secondaryAilments
 		.map((a) => {
-			if (a.duration === 0) {
-				if (a.type === 'confusion') {
-					dispatchToast(`${p.data.name} is no longer confused`);
+			if (['trap', 'guard-spec'].includes(a.type)) {
+				if (a.duration === 0) {
+					if (a.type === 'trap') {
+						dispatchToast(`${p.data.name} is no longer trapped`);
+					}
+					if (a.type === 'guard-spec') {
+						dispatchToast(`${p.data.name}'s guard spec effect ended`);
+					}
+					return undefined;
+				} else {
+					return { ...a, duration: a.duration - 1 };
 				}
-				if (a.type === 'trap') {
-					dispatchToast(`${p.data.name} is no longer trapped`);
-				}
-
-				return undefined;
-			} else {
-				return { ...a, duration: a.duration - 1 };
 			}
 		})
 		.filter((a) => a !== undefined);
