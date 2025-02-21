@@ -2,12 +2,10 @@ import { MoveName } from '../constants/checkLists/movesCheckList';
 import { AddToastFunction } from '../hooks/useToasts';
 import { BattlePokemon, isBattlePokemon } from '../interfaces/BattlePokemon';
 import {
-	EvBoostItemType,
 	HappinessChangeTable,
-	HealingItemType,
 	HPHealTable,
 	isEvBoostItem,
-	PPRestoringItemType,
+	ItemType,
 } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { applyEVBoostItem } from './applyEVGain';
@@ -16,7 +14,7 @@ import { removeHealableAilments } from './removeHealableAilments';
 
 export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	pokemon: T,
-	item: HealingItemType | PPRestoringItemType | EvBoostItemType,
+	item: ItemType,
 	addToast?: AddToastFunction,
 	move?: MoveName
 ): T {

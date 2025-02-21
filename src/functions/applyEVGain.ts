@@ -13,14 +13,6 @@ export function applyEVBoostItem<T extends OwnedPokemon | BattlePokemon>(
 	pokemon: T,
 	item: EvBoostItemType
 ): T {
-	console.log(pokemon, {
-		...applyHappinessChange(pokemon, HappinessChangeTable[item] ?? 0),
-		effortValues: applyEVGain(
-			pokemon.effortValues,
-			EvBoostTable[item].stat,
-			EvBoostTable[item].change
-		),
-	});
 	return {
 		...applyHappinessChange(pokemon, HappinessChangeTable[item] ?? 0),
 		effortValues: applyEVGain(
