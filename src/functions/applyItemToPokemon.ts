@@ -9,6 +9,8 @@ import {
 } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { applyEVBoostItem } from './applyEVGain';
+import { applyHappinessChange } from './applyHappinessChange';
+import { calculateLevelData } from './calculateLevelData';
 import { changeMovePP } from './changeMovePP';
 import { removeHealableAilments } from './removeHealableAilments';
 
@@ -170,6 +172,21 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	}
 	if (isEvBoostItem(item)) {
 		return applyEVBoostItem(pokemon, item);
+	}
+	if (item === 'rare-candy') {
+		const { xpAtNextLevel, level } = calculateLevelData(pokemon.xp);
+
+		if (level === 100) {
+			return pokemon;
+		}
+
+		if (addToast) {
+			addToast(`reached level ${level + 1}`, 'SUCCESS');
+		}
+		return {
+			...applyHappinessChange(pokemon, HappinessChangeTable[item] ?? 0),
+			xp: xpAtNextLevel,
+		};
 	}
 
 	return pokemon;
