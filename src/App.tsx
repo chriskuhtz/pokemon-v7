@@ -49,6 +49,7 @@ export const App = ({
 		useSacredAshReducer,
 		reset,
 		leaveBattleReducer,
+		addItemReducer,
 	} = useSaveFile(testState, addToast);
 
 	const {
@@ -238,6 +239,7 @@ export const App = ({
 			}}
 			cutBushes={saveFile.cutBushes}
 			playerSprite={saveFile.sprite}
+			receiveItems={addItemReducer}
 		/>
 	);
 };

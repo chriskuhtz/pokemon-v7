@@ -64,6 +64,7 @@ export interface OverworldNpc {
 	dialogue: string[];
 	sprite: string;
 	movememt?: { path: CharacterOrientation[]; currentStep: number };
+	gifts?: Partial<Inventory>;
 }
 export interface OverworldBush {
 	type: 'BUSH';

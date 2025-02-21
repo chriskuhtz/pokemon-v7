@@ -101,4 +101,18 @@ export const occupantsRecord: Record<number, Occupant> = {
 			currentStep: 0,
 		},
 	},
+	600004: {
+		type: 'NPC',
+		x: 14,
+		y: 0,
+		map: 'testMap',
+		orientation: 'DOWN',
+		dialogue: [
+			'Your Pokemon look hungry',
+			'maybe they will like these',
+			'i made them myself',
+		],
+		sprite: '077',
+		gifts: { 'lava-cookie': 5 },
+	},
 };

@@ -26,6 +26,7 @@ import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
+import { ItemType } from '../../interfaces/Item';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -52,6 +53,7 @@ export const Overworld = ({
 	bushCutting,
 	cutBushes,
 	playerSprite,
+	receiveItems,
 }: {
 	openMenu: (stepsTaken: number) => void;
 	playerLocation: CharacterLocationData;
@@ -71,6 +73,7 @@ export const Overworld = ({
 	};
 	cutBushes: number[];
 	playerSprite: string;
+	receiveItems: (item: ItemType, amount: number) => void;
 }) => {
 	const [statefulOccupants, setStatefulOccupants] = useState<
 		Record<number, Occupant>
@@ -180,6 +183,7 @@ export const Overworld = ({
 				playerLocation,
 				goToMarket,
 				talkToNurse,
+				receiveItems,
 			}),
 		[
 			bushCutting,
@@ -189,6 +193,7 @@ export const Overworld = ({
 			goToMarket,
 			openStorage,
 			playerLocation,
+			receiveItems,
 			stepsTaken,
 			talkToNurse,
 		]
