@@ -6,7 +6,8 @@ import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 export const applyAttackStatChanges = (
 	pokemon: BattlePokemon,
 	attack: BattleAttack,
-	dispatchToast: AddToastFunction
+	dispatchToast: AddToastFunction,
+	selfInflicted: boolean
 ): BattlePokemon => {
 	let updatedMon = { ...pokemon };
 
@@ -15,6 +16,7 @@ export const applyAttackStatChanges = (
 			updatedMon,
 			s.stat.name,
 			s.change,
+			selfInflicted,
 			dispatchToast
 		);
 	});

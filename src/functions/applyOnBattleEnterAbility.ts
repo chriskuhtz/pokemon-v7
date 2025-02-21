@@ -49,6 +49,7 @@ export const applyOnBattleEnterAbility = ({
 					p,
 					'attack',
 					-1,
+					false,
 					(x) => addMessage({ message: x }),
 					`${user.data.name}'s intimidate`
 				);

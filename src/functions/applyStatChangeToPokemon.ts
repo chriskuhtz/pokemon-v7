@@ -6,6 +6,7 @@ export const applyStatChangeToPokemon = (
 	pokemon: BattlePokemon,
 	stat: Stat,
 	modifier: number,
+	selfInflicted: boolean,
 	dispatchToast?: (x: string) => void,
 	toastSuffix?: string
 ) => {
@@ -16,12 +17,26 @@ export const applyStatChangeToPokemon = (
 	const existingStat = pokemon.statBoosts[stat];
 
 	if (
+		!selfInflicted &&
 		pokemon.secondaryAilments.some((a) => a.type === 'guard-spec') &&
 		modifier < 0
 	) {
 		if (dispatchToast) {
 			dispatchToast(
 				`${pokemon.data.name}'s guard spec prevents stat reduction`
+			);
+		}
+
+		return pokemon;
+	}
+	if (
+		!selfInflicted &&
+		['white-smoke', 'clear-body'].includes(pokemon.ability) &&
+		modifier < 0
+	) {
+		if (dispatchToast) {
+			dispatchToast(
+				`${pokemon.data.name} prevents stat reduction with ${pokemon.ability}`
 			);
 		}
 

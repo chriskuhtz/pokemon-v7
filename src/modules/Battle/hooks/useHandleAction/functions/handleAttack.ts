@@ -156,7 +156,12 @@ export const handleAttack = ({
 
 	//apply stat changes
 	if (selfTargeting) {
-		updatedAttacker = applyAttackStatChanges(updatedAttacker, move, addMessage);
+		updatedAttacker = applyAttackStatChanges(
+			updatedAttacker,
+			move,
+			addMessage,
+			true
+		);
 	}
 
 	//check for static
@@ -260,7 +265,12 @@ export const handleAttack = ({
 	updatedAttacker = a;
 	updatedTarget = b;
 	// apply stat changes
-	updatedTarget = applyAttackStatChanges(updatedTarget, move, addMessage);
+	updatedTarget = applyAttackStatChanges(
+		updatedTarget,
+		move,
+		addMessage,
+		false
+	);
 
 	//check for flinch
 	if (!isKO(updatedTarget)) {
