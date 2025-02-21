@@ -19,7 +19,7 @@ export const Sprite = ({
 			y: 0,
 			forwardFoot: 'CENTER1',
 			orientation: rotating ? orientation : 'DOWN',
-			mapId: 'testMap',
+			mapId: 'meadow',
 		},
 		id
 	);

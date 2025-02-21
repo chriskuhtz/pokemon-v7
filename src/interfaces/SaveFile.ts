@@ -7,7 +7,7 @@ import { RoutesType } from './Routing';
 
 export type CharacterOrientation = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
 export type ForwardFoot = 'CENTER1' | 'RIGHT' | 'CENTER2' | 'LEFT';
-export type MapId = 'testMap';
+export type MapId = 'meadow';
 
 export const OrientationKeyMap: Record<string, CharacterOrientation> = {
 	ArrowUp: 'UP',
