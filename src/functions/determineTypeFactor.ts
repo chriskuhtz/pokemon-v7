@@ -23,6 +23,13 @@ export const determineTypeFactor = (
 		}
 	});
 
+	if (target.ability === 'levitate' && attack.data.type.name === 'ground') {
+		if (addMessage) {
+			addMessage(`${target.data.name} prevents damage with levitate`);
+		}
+		res = 0;
+	}
+
 	if (target.ability === 'wonder-guard' && res <= 1) {
 		if (addMessage) {
 			addMessage(`${target.data.name} prevents damage with wonder guard`);
