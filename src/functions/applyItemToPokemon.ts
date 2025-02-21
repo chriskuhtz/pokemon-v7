@@ -8,11 +8,13 @@ import {
 	isPPBoostItem,
 	isXItem,
 	ItemType,
+	XItemTable,
 } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { applyEVBoostItem } from './applyEVGain';
 import { applyHappinessChange } from './applyHappinessChange';
 import { applyPPMoveBooster } from './applyPPBooster';
+import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { calculateLevelData } from './calculateLevelData';
 import { changeMovePP } from './changeMovePP';
 import { removeHealableAilments } from './removeHealableAilments';
@@ -196,7 +198,11 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		return applyPPMoveBooster(pokemon, move, item);
 	}
 	if (isXItem(item) && isBattlePokemon(pokemon)) {
-		return pokemon;
+		const stat = XItemTable[item];
+		if (stat) {
+			//@ts-expect-error i checked it
+			return applyStatChangeToPokemon(pokemon, stat, 1, addToast);
+		}
 	}
 
 	return pokemon;

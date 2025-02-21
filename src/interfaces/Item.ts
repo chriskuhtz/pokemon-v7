@@ -194,3 +194,12 @@ export const HPHealTable: Partial<Record<ItemType, number>> = {
 	'hyper-potion': 200,
 	'max-potion': 10000,
 };
+
+export const XItemTable: Partial<Record<XItemType, Stat>> = {
+	'x-accuracy': 'accuracy',
+	'x-attack': 'attack',
+	'x-sp-def': 'spdef',
+	'x-sp-atk': 'spatk',
+	'x-defense': 'defense',
+	'x-speed': 'speed',
+};
