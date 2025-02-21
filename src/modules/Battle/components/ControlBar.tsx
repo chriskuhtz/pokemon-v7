@@ -1,6 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { OPPO_ID } from '../../../constants/gameData';
-import { filterTargets } from '../../../functions/filterTargets';
+import {
+	filterTargets,
+	getRandomIndex,
+} from '../../../functions/filterTargets';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
@@ -38,8 +41,8 @@ export function ControlBar({
 
 	useEffect(() => {
 		if (controlled?.ownerId === OPPO_ID) {
-			const moves = getMovesArray(controlled);
-			const actionName = moves[Math.floor(Math.random() * moves.length)].name;
+			const moves = getMovesArray(controlled, true);
+			const actionName = moves[getRandomIndex(moves.length)].name;
 			const filtered = filterTargets({
 				targets,
 				user: controlled,
