@@ -129,6 +129,7 @@ export const abilityCheckList: {
 	{
 		name: 'wonder-guard',
 		url: 'https://pokeapi.co/api/v2/ability/25/',
+		handled: true,
 	},
 	{
 		name: 'levitate',
@@ -537,6 +538,7 @@ export const abilityNames = [
 	'intimidate',
 	'shadow-tag',
 	'rough-skin',
+	'wonder-guard',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

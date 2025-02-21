@@ -31,19 +31,11 @@ export const calculateDamage = (
 	if (damageClass === 'status') {
 		return 0;
 	}
-	const typeFactor = determineTypeFactor(target, attack);
+	const typeFactor = determineTypeFactor(target, attack, addMessage);
 	if (typeFactor === 0) {
-		if (addMessage) {
-			addMessage('It has no effect');
-		}
 		return 0;
 	}
-	if (typeFactor > 1 && addMessage) {
-		addMessage('It is very effective');
-	}
-	if (typeFactor < 1 && addMessage) {
-		addMessage('It is not very effective');
-	}
+
 	if (ohkoMoves.includes(attack.name)) {
 		if (target.ability === 'sturdy') {
 			if (addMessage) {
