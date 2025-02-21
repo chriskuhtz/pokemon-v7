@@ -11,6 +11,7 @@ import { handleFlinching } from '../../../../../functions/handleFlinching';
 import { isKO } from '../../../../../functions/isKo';
 import {
 	PARA_CHANCE,
+	ROUGH_SKIN_FACTOR,
 	STATIC_CHANCE,
 	UNFREEZE_CHANCE,
 } from '../../../../../interfaces/Ailment';
@@ -106,9 +107,9 @@ export const handleAttack = ({
 
 	//UPDATES
 
-	//updated Attacker
+	//ATTACKER
 
-	//1. update moveQueue
+	//update moveQueue
 	if (move.multiHits > 0) {
 		addMessage('Multi hit!');
 		updatedAttacker = {
@@ -117,15 +118,15 @@ export const handleAttack = ({
 		};
 	} else updatedAttacker = { ...updatedAttacker, moveQueue: [] };
 
-	//2. reduce pp after all multihits are done
+	//reduce pp after all multihits are done
 	if (move.multiHits === 0) {
 		updatedAttacker = changeMovePP(updatedAttacker, move.name, -1);
 	}
-	//3. apply stat changes
+	//apply stat changes
 	if (selfTargeting) {
 		updatedAttacker = applyAttackStatChanges(updatedAttacker, move, addMessage);
 	}
-	//4. check for static
+	//check for static
 	if (
 		target.ability === 'static' &&
 		contactMoves.includes(move.name) &&
@@ -138,6 +139,22 @@ export const handleAttack = ({
 			`by ${target.data.name}'s static`
 		);
 	}
+	//check for rough-skin
+	if (target.ability === 'rough-skin' && contactMoves.includes(move.name)) {
+		updatedAttacker = {
+			...updatedAttacker,
+			damage:
+				updatedAttacker.damage +
+				Math.round(updatedAttacker.stats.hp * ROUGH_SKIN_FACTOR),
+		};
+		addMessage(`${updatedAttacker.data.name} was hurt by rough skin`);
+
+		if (isKO(updatedAttacker)) {
+			updatedAttacker = handleFainting(updatedAttacker, addMessage);
+		}
+	}
+
+	//TARGET
 
 	// apply damage
 	updatedTarget = {
