@@ -1340,6 +1340,8 @@ export const handledMoves = [
 	'twinneedle',
 	'pin-missile',
 	'thrash',
+	'petal-dance',
+	'outrage',
 	'leer',
 	'bite',
 	'growl',
