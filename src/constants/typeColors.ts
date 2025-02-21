@@ -19,6 +19,7 @@ export const typeColors: Record<PokemonType, string> = {
 	dark: '#705746',
 	steel: '#B7B7CE',
 	fairy: '#D685AD',
+	typeless: '#ffffff',
 };
 
 export const typeContrastColors: Record<PokemonType, string> = {
@@ -40,6 +41,7 @@ export const typeContrastColors: Record<PokemonType, string> = {
 	dark: 'white',
 	steel: 'black',
 	fairy: 'black',
+	typeless: 'black',
 };
 
 export const percentageBasedColor = (

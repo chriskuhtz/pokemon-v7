@@ -10,16 +10,17 @@ import { applyPrimaryAilmentToPokemon } from './applyPrimaryAilmentToPokemon';
 import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
 
 export const applyAttackAilmentsToPokemon = (
-	pokemon: BattlePokemon,
+	target: BattlePokemon,
+	applicator: BattlePokemon,
 	attack: BattleAttack,
 	addMessage: (x: string) => void
-): BattlePokemon => {
+): { updatedTarget: BattlePokemon; updatedApplicator: BattlePokemon } => {
 	if (
 		//shield dust prevents all side effects
-		pokemon.ability === 'shield-dust' &&
+		target.ability === 'shield-dust' &&
 		attack.data.damage_class.name !== 'status'
 	) {
-		return pokemon;
+		return { updatedTarget: target, updatedApplicator: applicator };
 	}
 	const random = Math.random() * 100;
 	const ailment = attack.data.meta.ailment.name;
@@ -31,19 +32,23 @@ export const applyAttackAilmentsToPokemon = (
 	if (random < chance) {
 		if (isPrimaryAilment({ type: ailment })) {
 			return applyPrimaryAilmentToPokemon(
-				pokemon,
+				target,
+				applicator,
 				ailment as PrimaryAilment['type'],
 				addMessage
 			);
 		}
 		if (isSecondaryAilment({ type: ailment })) {
-			return applySecondaryAilmentToPokemon(
-				pokemon,
-				ailment as SecondaryAilment['type'],
-				addMessage
-			);
+			return {
+				updatedTarget: applySecondaryAilmentToPokemon(
+					target,
+					ailment as SecondaryAilment['type'],
+					addMessage
+				),
+				updatedApplicator: applicator,
+			};
 		}
 	}
 
-	return pokemon;
+	return { updatedTarget: target, updatedApplicator: applicator };
 };

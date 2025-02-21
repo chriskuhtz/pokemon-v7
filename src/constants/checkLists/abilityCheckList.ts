@@ -543,6 +543,7 @@ export const abilityNames = [
 	'wonder-guard',
 	'levitate',
 	'effect-spore',
+	'synchronize',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

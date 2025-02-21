@@ -6,92 +6,145 @@ import { getTypeNames } from './getTypeNames';
 import { isKO } from './isKo';
 
 export const applyPrimaryAilmentToPokemon = (
-	pokemon: BattlePokemon,
+	target: BattlePokemon,
+	applicator: BattlePokemon,
 	ailment: PrimaryAilment['type'],
 	dispatchToast: AddToastFunction,
 	toastSuffix?: string
-): BattlePokemon => {
-	if (isKO(pokemon)) {
+): { updatedTarget: BattlePokemon; updatedApplicator: BattlePokemon } => {
+	if (isKO(target)) {
 		//already knocked out, no need to add ailments
-		return pokemon;
+		return { updatedTarget: target, updatedApplicator: applicator };
 	}
-	if (pokemon.primaryAilment) {
+	if (target.primaryAilment) {
 		//already has an ailment
-		return pokemon;
+		return { updatedTarget: target, updatedApplicator: applicator };
 	}
 
 	if (
 		ailment === 'burn' &&
 		//fire pokemon cant get burned
-		!getTypeNames(pokemon).includes('fire') &&
+		!getTypeNames(target).includes('fire') &&
 		//flash fire pokemon cant get burned
-		pokemon.ability !== 'flash-fire'
+		target.ability !== 'flash-fire'
 	) {
 		dispatchToast(
-			`${pokemon.data.name} was burned ${
-				toastSuffix ? 'by ' + toastSuffix : ''
-			}`
+			`${target.data.name} was burned ${toastSuffix ? 'by ' + toastSuffix : ''}`
 		);
-		return { ...pokemon, primaryAilment: { type: 'burn' } };
+		if (
+			target.id !== applicator.id &&
+			target.ability === 'synchronize' &&
+			!applicator.primaryAilment
+		) {
+			dispatchToast(`${target.data.name} synchronized the status condition`);
+			return {
+				updatedTarget: { ...target, primaryAilment: { type: 'burn' } },
+				updatedApplicator: { ...applicator, primaryAilment: { type: 'burn' } },
+			};
+		}
+
+		return {
+			updatedTarget: { ...target, primaryAilment: { type: 'burn' } },
+			updatedApplicator: applicator,
+		};
 	}
 	if (
 		ailment === 'paralysis' &&
 		//electric pokemon cant get paralyzed
-		!getTypeNames(pokemon).includes('electric') &&
+		!getTypeNames(target).includes('electric') &&
 		//limber pokemon cant get paralyzed
-		pokemon.ability !== 'limber'
+		target.ability !== 'limber'
 	) {
 		dispatchToast(
-			`${pokemon.data.name} was paralyzed ${
+			`${target.data.name} was paralyzed ${
 				toastSuffix ? 'by ' + toastSuffix : ''
 			}`
 		);
-		return { ...pokemon, primaryAilment: { type: 'paralysis' } };
+		if (
+			target.id !== applicator.id &&
+			target.ability === 'synchronize' &&
+			!applicator.primaryAilment
+		) {
+			dispatchToast(`${target.data.name} synchronized the status condition`);
+			return {
+				updatedTarget: { ...target, primaryAilment: { type: 'paralysis' } },
+				updatedApplicator: {
+					...applicator,
+					primaryAilment: { type: 'paralysis' },
+				},
+			};
+		}
+
+		return {
+			updatedTarget: { ...target, primaryAilment: { type: 'paralysis' } },
+			updatedApplicator: applicator,
+		};
 	}
 	if (
 		ailment === 'freeze' &&
 		//ice pokemon cant get frozen
-		!getTypeNames(pokemon).includes('ice') &&
-		pokemon.ability !== 'magma-armor'
+		!getTypeNames(target).includes('ice') &&
+		target.ability !== 'magma-armor'
 	) {
 		dispatchToast(
-			`${pokemon.data.name} was frozen solid ${
-				toastSuffix ? 'by ' + toastSuffix : ''
-			}`
-		);
-		return { ...pokemon, primaryAilment: { type: 'freeze' } };
-	}
-	if (
-		ailment === 'sleep' &&
-		!['vital-spirit', 'insomnia'].includes(pokemon.ability)
-	) {
-		const duration = getMiddleOfThree([1, Math.round(Math.random() * 5), 4]);
-		dispatchToast(
-			`${pokemon.data.name} was put to sleep for ${duration} turns ${
+			`${target.data.name} was frozen solid ${
 				toastSuffix ? 'by ' + toastSuffix : ''
 			}`
 		);
 		return {
-			...pokemon,
-			primaryAilment: {
-				type: 'sleep',
-				duration,
+			updatedTarget: { ...target, primaryAilment: { type: 'freeze' } },
+			updatedApplicator: applicator,
+		};
+	}
+	if (
+		ailment === 'sleep' &&
+		!['vital-spirit', 'insomnia'].includes(target.ability)
+	) {
+		const duration = getMiddleOfThree([1, Math.round(Math.random() * 5), 4]);
+		dispatchToast(
+			`${target.data.name} was put to sleep for ${duration} turns ${
+				toastSuffix ? 'by ' + toastSuffix : ''
+			}`
+		);
+		return {
+			updatedTarget: {
+				...target,
+				primaryAilment: {
+					type: 'sleep',
+					duration,
+				},
 			},
+			updatedApplicator: applicator,
 		};
 	}
 	if (
 		(ailment === 'poison' || ailment === 'toxic') &&
-		!['immunity'].includes(pokemon.ability) &&
+		!['immunity'].includes(target.ability) &&
 		//poison and steel pokemon cant get poisoned
-		!getTypeNames(pokemon).includes('poison') &&
-		!getTypeNames(pokemon).includes('steel')
+		!getTypeNames(target).includes('poison') &&
+		!getTypeNames(target).includes('steel')
 	) {
 		dispatchToast(
-			`${pokemon.data.name} was ${
-				ailment === 'toxic' ? 'badly' : ''
-			} poisoned ${toastSuffix ? 'by ' + toastSuffix : ''}`
+			`${target.data.name} was ${ailment === 'toxic' ? 'badly' : ''} poisoned ${
+				toastSuffix ? 'by ' + toastSuffix : ''
+			}`
 		);
-		return { ...pokemon, primaryAilment: { type: ailment } };
+		if (
+			target.id !== applicator.id &&
+			target.ability === 'synchronize' &&
+			!applicator.primaryAilment
+		) {
+			dispatchToast(`${target.data.name} synchronized the status condition`);
+			return {
+				updatedTarget: { ...target, primaryAilment: { type: ailment } },
+				updatedApplicator: { ...applicator, primaryAilment: { type: ailment } },
+			};
+		}
+
+		return {
+			updatedTarget: { ...target, primaryAilment: { type: ailment } },
+			updatedApplicator: applicator,
+		};
 	}
-	return pokemon;
+	return { updatedTarget: target, updatedApplicator: applicator };
 };

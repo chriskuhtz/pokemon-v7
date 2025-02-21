@@ -165,12 +165,14 @@ export const handleAttack = ({
 		contactMoves.includes(move.name) &&
 		Math.random() < STATIC_CHANCE
 	) {
-		updatedAttacker = applyPrimaryAilmentToPokemon(
+		const { updatedTarget: b } = applyPrimaryAilmentToPokemon(
+			updatedAttacker,
 			updatedAttacker,
 			'paralysis',
 			addMessage,
 			`by ${target.data.name}'s static`
 		);
+		updatedAttacker = b;
 	}
 
 	//check for effect spore
@@ -180,7 +182,8 @@ export const handleAttack = ({
 		Math.random() < EFFECT_SPORE_CHANCE
 	) {
 		const possibleAilments = ['paralysis', 'poison', 'sleep'];
-		updatedAttacker = applyPrimaryAilmentToPokemon(
+		const { updatedTarget: b } = applyPrimaryAilmentToPokemon(
+			updatedAttacker,
 			updatedAttacker,
 			possibleAilments[
 				getRandomIndex(possibleAilments.length)
@@ -188,6 +191,7 @@ export const handleAttack = ({
 			addMessage,
 			`by ${target.data.name}'s effect spore`
 		);
+		updatedAttacker = b;
 	}
 	//check for rough-skin
 	if (target.ability === 'rough-skin' && contactMoves.includes(move.name)) {
@@ -246,7 +250,15 @@ export const handleAttack = ({
 		updatedTarget = handleFainting(updatedTarget, addMessage);
 	}
 	//apply ailments
-	updatedTarget = applyAttackAilmentsToPokemon(updatedTarget, move, addMessage);
+	const { updatedApplicator: a, updatedTarget: b } =
+		applyAttackAilmentsToPokemon(
+			updatedTarget,
+			updatedAttacker,
+			move,
+			addMessage
+		);
+	updatedAttacker = a;
+	updatedTarget = b;
 	// apply stat changes
 	updatedTarget = applyAttackStatChanges(updatedTarget, move, addMessage);
 
