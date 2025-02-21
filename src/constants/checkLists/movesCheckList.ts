@@ -214,46 +214,55 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/53/',
 		handled: true,
 	},
-	{ name: 'mist', url: 'https://pokeapi.co/api/v2/move/54/' },
+	{ name: 'mist', url: 'https://pokeapi.co/api/v2/move/54/', handled: true },
 	{
 		name: 'water-gun',
 		url: 'https://pokeapi.co/api/v2/move/55/',
+		handled: true,
 	},
 	{
 		name: 'hydro-pump',
 		url: 'https://pokeapi.co/api/v2/move/56/',
+		handled: true,
 	},
-	{ name: 'surf', url: 'https://pokeapi.co/api/v2/move/57/' },
+	{ name: 'surf', url: 'https://pokeapi.co/api/v2/move/57/', handled: true },
 	{
 		name: 'ice-beam',
 		url: 'https://pokeapi.co/api/v2/move/58/',
+		handled: true,
 	},
 	{
 		name: 'blizzard',
 		url: 'https://pokeapi.co/api/v2/move/59/',
+		handled: true,
 	},
-	{ name: 'psybeam', url: 'https://pokeapi.co/api/v2/move/60/' },
+	{ name: 'psybeam', url: 'https://pokeapi.co/api/v2/move/60/', handled: true },
 
 	{
 		name: 'bubble-beam',
 		url: 'https://pokeapi.co/api/v2/move/61/',
+		handled: true,
 	},
 	{
 		name: 'aurora-beam',
 		url: 'https://pokeapi.co/api/v2/move/62/',
+		handled: true,
 	},
 	{
 		name: 'hyper-beam',
 		url: 'https://pokeapi.co/api/v2/move/63/',
+		handled: true,
 	},
-	{ name: 'peck', url: 'https://pokeapi.co/api/v2/move/64/' },
+	{ name: 'peck', url: 'https://pokeapi.co/api/v2/move/64/', handled: true },
 	{
 		name: 'drill-peck',
 		url: 'https://pokeapi.co/api/v2/move/65/',
+		handled: true,
 	},
 	{
 		name: 'submission',
 		url: 'https://pokeapi.co/api/v2/move/66/',
+		handled: true,
 	},
 	{
 		name: 'low-kick',
@@ -1369,6 +1378,19 @@ export const handledMoves = [
 	'acid',
 	'ember',
 	'flamethrower',
+	'mist',
+	'water-gun',
+	'surf',
+	'hydro-pump',
+	'ice-beam',
+	'blizzard',
+	'hyper-beam',
+	'bubble-beam',
+	'psybeam',
+	'aurora-beam',
+	'peck',
+	'drill-peck',
+	'submission',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

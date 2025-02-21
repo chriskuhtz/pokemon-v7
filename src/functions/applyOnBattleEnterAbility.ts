@@ -1,6 +1,9 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
-import { BattleMessage } from '../modules/Battle/BattleField';
+import {
+	BattleFieldEffect,
+	BattleMessage,
+} from '../modules/Battle/BattleField';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 
 export const applyOnBattleEnterAbility = ({
@@ -9,12 +12,14 @@ export const applyOnBattleEnterAbility = ({
 	currentWeather,
 	setPokemon,
 	addMessage,
+	battleFieldEffects,
 }: {
 	user: BattlePokemon;
 	setWeather: (x: WeatherType) => void;
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>;
 	currentWeather: WeatherType | undefined;
 	addMessage: (x: BattleMessage) => void;
+	battleFieldEffects: BattleFieldEffect[];
 }) => {
 	if (user.ability === 'drizzle' && currentWeather !== 'rain') {
 		setWeather('rain');
@@ -50,6 +55,7 @@ export const applyOnBattleEnterAbility = ({
 					'attack',
 					-1,
 					false,
+					battleFieldEffects,
 					(x) => addMessage({ message: x }),
 					`${user.data.name}'s intimidate`
 				);

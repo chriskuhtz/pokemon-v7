@@ -1,5 +1,6 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { Stat } from '../interfaces/StatObject';
+import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { getMiddleOfThree } from './getMiddleOfThree';
 
 export const applyStatChangeToPokemon = (
@@ -7,6 +8,7 @@ export const applyStatChangeToPokemon = (
 	stat: Stat,
 	modifier: number,
 	selfInflicted: boolean,
+	battleFieldEffects: BattleFieldEffect[],
 	dispatchToast?: (x: string) => void,
 	toastSuffix?: string
 ) => {
@@ -16,14 +18,19 @@ export const applyStatChangeToPokemon = (
 	}
 	const existingStat = pokemon.statBoosts[stat];
 
-	if (
-		!selfInflicted &&
-		pokemon.secondaryAilments.some((a) => a.type === 'guard-spec') &&
-		modifier < 0
-	) {
+	const guardSpecced = pokemon.secondaryAilments.some(
+		(a) => a.type === 'guard-spec'
+	);
+	const misted = battleFieldEffects.some(
+		(b) => b.type === 'mist' && b.ownerId === pokemon.ownerId
+	);
+
+	if (!selfInflicted && (guardSpecced || misted) && modifier < 0) {
 		if (dispatchToast) {
 			dispatchToast(
-				`${pokemon.data.name}'s guard spec prevents stat reduction`
+				`${pokemon.data.name}'s ${
+					misted ? 'mist' : 'guard spec'
+				} prevents stat reduction`
 			);
 		}
 

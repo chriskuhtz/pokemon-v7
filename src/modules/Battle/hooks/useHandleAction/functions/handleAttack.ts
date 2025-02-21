@@ -2,9 +2,9 @@ import { contactMoves } from '../../../../../constants/contactMoves';
 import { lockInMoves } from '../../../../../constants/forceSwitchMoves';
 import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/selfDestructingMoves';
 import { applyAttackAilmentsToPokemon } from '../../../../../functions/applyAttackAilmentsToPokemon';
+import { applyAttackStatChanges } from '../../../../../functions/applyAttackStatChanges';
 import { applyPrimaryAilmentToPokemon } from '../../../../../functions/applyPrimaryAilmentToPokemon';
 import { applySecondaryAilmentToPokemon } from '../../../../../functions/applySecondaryAilmentToPokemon';
-import { applyAttackStatChanges } from '../../../../../functions/applyStatusMove';
 import { calculateDamage } from '../../../../../functions/calculateDamage';
 import { changeMovePP } from '../../../../../functions/changeMovePP';
 import { determineMiss } from '../../../../../functions/determineMiss';
@@ -23,6 +23,7 @@ import {
 import { BattleAttack } from '../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../../../interfaces/Weather';
+import { BattleFieldEffect } from '../../../BattleField';
 import { handleDampy } from '../../../functions/handleDampy';
 import { handleFainting } from '../../../functions/handleFainting';
 import { handleMiss } from '../../../functions/handleMiss';
@@ -38,6 +39,8 @@ export const handleAttack = ({
 	battleWeather,
 	scatterCoins,
 	dampy,
+	addBattleFieldEffect,
+	battleFieldEffects,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
@@ -47,6 +50,8 @@ export const handleAttack = ({
 	battleWeather: WeatherType | undefined;
 	scatterCoins: () => void;
 	dampy?: { name: string };
+	addBattleFieldEffect: (x: BattleFieldEffect) => void;
+	battleFieldEffects: BattleFieldEffect[];
 }): void => {
 	//lock in moves choose a random target at execution
 	const realTargetId = lockInMoves.includes(move.name)
@@ -103,6 +108,29 @@ export const handleAttack = ({
 	addMessage(
 		`${attacker.data.name} used ${move.name} against ${target.data.name}`
 	);
+
+	//MIST
+	if (move.name === 'mist') {
+		addBattleFieldEffect({
+			type: 'mist',
+			ownerId: updatedAttacker.ownerId,
+			duration: 5,
+		});
+		setPokemon((pokemon) =>
+			pokemon.map((p) => {
+				if (p.id === updatedAttacker.id) {
+					return {
+						...changeMovePP(updatedAttacker, move.name, -1),
+						moveQueue: [],
+					};
+				}
+
+				return p;
+			})
+		);
+		return;
+	}
+
 	//updated Target
 	let updatedTarget = { ...target };
 	const isFlying =
@@ -161,7 +189,8 @@ export const handleAttack = ({
 			updatedAttacker,
 			move,
 			addMessage,
-			true
+			true,
+			battleFieldEffects
 		);
 	}
 
@@ -269,7 +298,8 @@ export const handleAttack = ({
 		updatedTarget,
 		move,
 		addMessage,
-		false
+		false,
+		battleFieldEffects
 	);
 
 	//check for flinch
