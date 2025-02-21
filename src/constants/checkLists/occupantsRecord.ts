@@ -48,6 +48,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		handledDialogue: ['you are the big dog'],
 		sprite: '033',
 		team: [{ ...testOpponent, dexId: 66 }],
+		name: 'Sailor Bob',
 	},
 	//Merchants start at 300000,
 	300001: {

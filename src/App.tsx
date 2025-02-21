@@ -51,7 +51,7 @@ export const App = ({
 	} = useSaveFile(testState, addToast);
 
 	const {
-		meta: { activeTab, currentOpponents },
+		meta: { activeTab, currentChallenger },
 		inventory,
 		pokemon,
 		money,
@@ -66,13 +66,12 @@ export const App = ({
 
 	const firstTeamMember = team[0];
 
-	if (activeTab === 'BATTLE' && currentOpponents) {
+	if (activeTab === 'BATTLE' && currentChallenger) {
 		return (
 			<BattleLoader
-				opponents={currentOpponents}
+				challenger={currentChallenger}
 				team={team}
 				leave={leaveBattleReducer}
-				fightersPerSide={currentOpponents.length}
 				inventory={inventory}
 				ownedPokemonDexIds={saveFile.pokemon.map((p) => p.dexId)}
 			/>

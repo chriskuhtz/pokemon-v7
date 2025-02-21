@@ -211,8 +211,10 @@ export const useSaveFile = (
 				}),
 				meta: {
 					activeTab: route,
-					currentOpponents:
-						route === 'BATTLE' ? determineWildPokemon(team, meadow) : undefined,
+					currentChallenger:
+						route === 'BATTLE'
+							? { team: determineWildPokemon(team, meadow), id: -1 }
+							: undefined,
 				},
 			},
 			'navigateAwayFromOverworld'
@@ -298,7 +300,8 @@ export const useSaveFile = (
 				meta: {
 					activeTab:
 						occ.type === 'TRAINER' ? 'BATTLE' : saveFile.meta.activeTab,
-					currentOpponents: occ.type === 'TRAINER' ? occ.team : undefined,
+					currentChallenger:
+						occ.type === 'TRAINER' ? { team: occ.team, id } : undefined,
 				},
 				handledOccupants: [
 					...saveFile.handledOccupants,
@@ -419,7 +422,7 @@ export const useSaveFile = (
 				inventory: updatedInventory,
 				money: saveFile.money + scatteredCoins,
 				pokemon: updatedPokemon,
-				meta: { activeTab: 'OVERWORLD', currentOpponents: undefined },
+				meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
 			});
 		},
 		[putSaveFileReducer, reset, saveFile, team]

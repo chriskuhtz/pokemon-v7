@@ -15,7 +15,7 @@ export const SpriteSelection = ({
 					<Sprite
 						rotating={true}
 						key={s}
-						id={`NPC_${s}`}
+						id={s}
 						onClick={() => proceed(`NPC_${s}`)}
 					/>
 				))}

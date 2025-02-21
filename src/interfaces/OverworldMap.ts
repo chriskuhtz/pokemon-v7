@@ -87,6 +87,7 @@ export interface OverworldTrainer {
 	handledDialogue?: string[];
 	sprite: string;
 	team: OwnedPokemon[];
+	name: string;
 }
 
 export type Occupant =
