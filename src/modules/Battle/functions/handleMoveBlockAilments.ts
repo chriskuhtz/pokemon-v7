@@ -3,6 +3,7 @@ import {
 	PARA_CHANCE,
 	UNFREEZE_CHANCE,
 } from '../../../interfaces/Ailment';
+import { BattleAttack, ChargeUp } from '../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { handleAsleep } from './handleAsleep';
 import { handleConfused } from './handleConfused';
@@ -11,9 +12,11 @@ import { handleParalyzed } from './handleParalyzed';
 
 export const handleMoveBlockAilments = ({
 	attacker,
+	attack,
 	addMessage,
 }: {
 	attacker: BattlePokemon;
+	attack: BattleAttack | ChargeUp;
 	addMessage: (x: string) => void;
 }): { canAttack: boolean; updatedAttacker: BattlePokemon } => {
 	let updatedAttacker = { ...attacker };
@@ -63,6 +66,16 @@ export const handleMoveBlockAilments = ({
 			updatedAttacker = handleConfused(attacker, addMessage, hitHimself);
 			return { canAttack: !hitHimself, updatedAttacker };
 		}
+	}
+	const disabledMove =
+		updatedAttacker.secondaryAilments.find((a) => a.type === 'disable')
+			?.move === attack.name;
+	if (disabledMove) {
+		addMessage(`${attacker.data.name}'s ${attack.name} is disabled`);
+		return {
+			canAttack: false,
+			updatedAttacker: { ...updatedAttacker, moveQueue: [] },
+		};
 	}
 	return { canAttack: true, updatedAttacker };
 };
