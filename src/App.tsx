@@ -19,9 +19,9 @@ import { Overworld } from './modules/Overworld/Overworld';
 import { PokemonStorage } from './modules/PokemonStorage/PokemonStorage';
 import { Quests } from './modules/Quests/Quests';
 import { Settings } from './modules/Settings/Settings';
+import { SpriteSelection } from './modules/SpriteSelection/SpriteSelection';
 import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { Team } from './modules/Team/Team';
-import { SpriteSelection } from './modules/SpriteSelection/SpriteSelection';
 
 export const App = ({
 	addToast,
