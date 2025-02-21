@@ -4,11 +4,7 @@ import { MoveName } from '../../../constants/checkLists/movesCheckList';
 import { baseSize } from '../../../constants/gameData';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
-import {
-	EvBoostItemType,
-	HealingItemType,
-	PPRestoringItemType,
-} from '../../../interfaces/Item';
+import { ItemType } from '../../../interfaces/Item';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { Banner } from '../../../uiComponents/Banner/Banner';
 
@@ -17,13 +13,9 @@ export const HealAction = ({
 	healablePokemon,
 	applyItem,
 }: {
-	item: HealingItemType | PPRestoringItemType | EvBoostItemType;
+	item: ItemType;
 	healablePokemon: OwnedPokemon[];
-	applyItem: (
-		pokemon: OwnedPokemon,
-		item: HealingItemType | PPRestoringItemType | EvBoostItemType,
-		move?: MoveName
-	) => void;
+	applyItem: (pokemon: OwnedPokemon, item: ItemType, move?: MoveName) => void;
 }) => {
 	const [pokemonSelectionOpen, setPokemonSelectionOpen] =
 		useState<boolean>(false);
