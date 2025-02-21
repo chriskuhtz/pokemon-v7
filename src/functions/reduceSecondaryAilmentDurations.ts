@@ -17,6 +17,9 @@ export const reduceSecondaryAilmentDurations = (
 					if (a.type === 'guard-spec') {
 						dispatchToast(`${p.data.name}'s guard spec effect ended`);
 					}
+					if (a.type === 'disable') {
+						dispatchToast(`${p.data.name} is no longer disabled`);
+					}
 					return undefined;
 				} else {
 					return { ...a, duration: a.duration - 1 };
