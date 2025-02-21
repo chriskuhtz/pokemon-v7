@@ -35,7 +35,8 @@ export const testState: SaveFile = {
 	quests: {
 		'catch a pikachu': 'INACTIVE',
 		'Train a Pokemon to lvl 10': 'INACTIVE',
-		'Catch a nocturnal pokemon from the meadow': 'INACTIVE',
+		'Catch a Zorua at night in the meadow': 'INACTIVE',
+		'Catch a morning pokemon from the meadow': 'INACTIVE',
 	},
 	inventory: generateInventory({
 		'pp-up': 3,

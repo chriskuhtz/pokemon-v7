@@ -5,7 +5,8 @@ import { meadow } from '../maps/meadow';
 export const questNames = [
 	'catch a pikachu',
 	'Train a Pokemon to lvl 10',
-	'Catch a nocturnal pokemon from the meadow',
+	'Catch a Zorua at night in the meadow',
+	'Catch a morning pokemon from the meadow',
 ] as const;
 export type QuestName = (typeof questNames)[number];
 
@@ -25,11 +26,17 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			});
 		},
 	},
-	'Catch a nocturnal pokemon from the meadow': {
+	'Catch a Zorua at night in the meadow': {
 		rewardItems: { 'dusk-stone': 1 },
 		conditionFunction: (s) => {
+			return s.pokemon.some((p) => p.dexId === 570);
+		},
+	},
+	'Catch a morning pokemon from the meadow': {
+		rewardItems: { 'dawn-stone': 1 },
+		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
-				meadow.possibleEncounters.NIGHT.some(
+				meadow.possibleEncounters.MORNING.some(
 					(encounter) => encounter.dexId === p.dexId
 				)
 			);
