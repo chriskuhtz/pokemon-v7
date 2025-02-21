@@ -238,23 +238,28 @@ export const itemsCheckList: {
 	{
 		name: 'x-attack',
 		url: 'https://pokeapi.co/api/v2/item/57/',
+		handled: true,
 	},
 	{
 		name: 'x-defense',
 		url: 'https://pokeapi.co/api/v2/item/58/',
+		handled: true,
 	},
-	{ name: 'x-speed', url: 'https://pokeapi.co/api/v2/item/59/' },
+	{ name: 'x-speed', url: 'https://pokeapi.co/api/v2/item/59/', handled: true },
 	{
 		name: 'x-accuracy',
 		url: 'https://pokeapi.co/api/v2/item/60/',
+		handled: true,
 	},
 	{
 		name: 'x-sp-atk',
 		url: 'https://pokeapi.co/api/v2/item/61/',
+		handled: true,
 	},
 	{
 		name: 'x-sp-def',
 		url: 'https://pokeapi.co/api/v2/item/62/',
+		handled: true,
 	},
 
 	{

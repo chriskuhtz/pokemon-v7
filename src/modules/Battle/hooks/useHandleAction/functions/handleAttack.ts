@@ -6,7 +6,6 @@ import { applyPrimaryAilmentToPokemon } from '../../../../../functions/applyPrim
 import { applySecondaryAilmentToPokemon } from '../../../../../functions/applySecondaryAilmentToPokemon';
 import { applyAttackStatChanges } from '../../../../../functions/applyStatusMove';
 import { calculateDamage } from '../../../../../functions/calculateDamage';
-import { changeBattlePokemonType } from '../../../../../functions/changeBattlePokemonType';
 import { changeMovePP } from '../../../../../functions/changeMovePP';
 import { determineMiss } from '../../../../../functions/determineMiss';
 import {
@@ -266,8 +265,11 @@ export const handleAttack = ({
 		target.ability === 'flash-fire' &&
 		move.data.type.name === 'fire'
 	) {
-		addMessage(`${target.data.name} raised its power with ${target.ability}`);
-		updatedTarget.flashFired = true;
+		updatedTarget = applySecondaryAilmentToPokemon(
+			updatedTarget,
+			'flash-fire',
+			addMessage
+		);
 	}
 	//check color change
 	if (
@@ -275,10 +277,11 @@ export const handleAttack = ({
 		updatedTarget.damage > target.damage &&
 		updatedTarget.ability === 'color-change'
 	) {
-		updatedTarget = changeBattlePokemonType(
+		updatedTarget = applySecondaryAilmentToPokemon(
 			updatedTarget,
-			move.data.type.name,
-			addMessage
+			'color-changed',
+			addMessage,
+			move.data.type.name
 		);
 	}
 

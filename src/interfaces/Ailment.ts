@@ -1,3 +1,5 @@
+import { PokemonType } from './PokemonType';
+
 export interface PrimaryAilment {
 	type: 'paralysis' | 'burn' | 'freeze' | 'poison' | 'toxic' | 'sleep';
 	duration?: number;
@@ -12,12 +14,15 @@ const secondaryAilments = [
 	'trap',
 	'infatuation',
 	'leech-seed',
+	'flash-fire',
+	'color-changed',
 ] as const;
 
 export type SecondaryAilmentType = (typeof secondaryAilments)[number];
 export interface SecondaryAilment {
 	type: SecondaryAilmentType;
 	duration: number;
+	newType?: PokemonType;
 }
 
 export function isSecondaryAilment(x: { type: string }): x is SecondaryAilment {

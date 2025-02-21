@@ -9,6 +9,7 @@ import {
 	isHealingItem,
 	isPokeball,
 	isPPRestorationItem,
+	isXItem,
 } from '../../../interfaces/Item';
 import { ChooseActionPayload } from '../BattleField';
 
@@ -64,7 +65,11 @@ export const useChooseAction = (
 				);
 				return;
 			}
-			if (isHealingItem(actionName) || isPPRestorationItem(actionName)) {
+			if (
+				isHealingItem(actionName) ||
+				isPPRestorationItem(actionName) ||
+				isXItem(actionName)
+			) {
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
 						if (p.id === user.id) {

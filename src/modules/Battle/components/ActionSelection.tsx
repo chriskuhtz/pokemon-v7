@@ -7,6 +7,7 @@ import {
 	isHealingItem,
 	isPokeball,
 	isPPRestorationItem,
+	isXItem,
 } from '../../../interfaces/Item';
 import { ActionType, ChooseActionPayload } from '../BattleField';
 
@@ -62,7 +63,9 @@ export function ActionSelection({
 					if (
 						amount > 0 &&
 						(isPokeball(item) ||
-							((isHealingItem(item) || isPPRestorationItem(item)) &&
+							((isHealingItem(item) ||
+								isPPRestorationItem(item) ||
+								isXItem(item)) &&
 								allTargets.some((t) => canBenefitFromItem(t, item))))
 					) {
 						return (

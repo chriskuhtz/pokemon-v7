@@ -114,7 +114,10 @@ export const calculateDamage = (
 	const flyingFactor =
 		targetIsFlying && flyDoubleDamageMoves.includes(attack.name) ? 2 : 1;
 	const flashFireFactor =
-		attacker.flashFired && attack.data.type.name === 'fire' ? 1.5 : 1;
+		attacker.secondaryAilments.some((a) => a.type === 'flash-fire') &&
+		attack.data.type.name === 'fire'
+			? 1.5
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *

@@ -7,9 +7,13 @@ export const getTypeNames = (
 	pokemon: BattlePokemon | (OwnedPokemon & { data: PokemonData })
 ): PokemonType[] => {
 	if (isBattlePokemon(pokemon)) {
-		return pokemon.colorChangedType
-			? [pokemon.colorChangedType]
-			: pokemon.data.types.map((t) => t.type.name);
+		const changedType = pokemon.secondaryAilments.find(
+			(a) => a.type === 'color-changed'
+		)?.newType;
+		if (changedType) {
+			return [changedType];
+		}
+		return pokemon.data.types.map((t) => t.type.name);
 	}
 	return pokemon.data.types.map((t) => t.type.name);
 };
