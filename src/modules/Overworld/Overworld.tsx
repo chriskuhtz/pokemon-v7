@@ -81,6 +81,13 @@ export const Overworld = ({
 			if (occ.type === 'HIDDEN_ITEM' && handledOccupants.includes(o)) {
 				return false;
 			}
+			if (
+				occ.type === 'NPC' &&
+				occ.timeofDay &&
+				occ.timeofDay !== getTimeOfDay()
+			) {
+				return false;
+			}
 			return true;
 		});
 		setStatefulOccupants(

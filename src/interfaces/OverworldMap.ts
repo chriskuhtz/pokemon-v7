@@ -69,6 +69,7 @@ export interface OverworldNpc {
 	movement?: { path: CharacterOrientation[]; currentStep: number };
 	gifts?: Partial<Inventory>;
 	quest?: QuestName;
+	timeofDay?: TimeOfDay;
 }
 export interface OverworldBush {
 	type: 'BUSH';

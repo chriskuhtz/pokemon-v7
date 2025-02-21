@@ -73,6 +73,9 @@ export enum SpriteEnum {
 	grandFather2 = '075',
 	grandma = '076',
 	grandma2 = '077',
+	possessed = '078',
+	possessed2 = '079',
+	builder = '080',
 	//continue here
 
 	clerkMale = '113',

@@ -135,4 +135,17 @@ export const occupantsRecord: Record<number, Occupant> = {
 		sprite: '077',
 		gifts: { 'rare-candy': 10 },
 	},
+	600005: {
+		type: 'NPC',
+		x: 16,
+		y: 4,
+		map: 'meadow',
+		timeofDay: 'NIGHT',
+		orientation: 'DOWN',
+		unhandledDialogue: [
+			'During the day, i work in the city',
+			'I come here at night to search for zorua',
+		],
+		sprite: '080',
+	},
 };
