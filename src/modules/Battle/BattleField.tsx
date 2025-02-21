@@ -371,7 +371,6 @@ export const BattleField = ({
 				setBattleStep('REFILLING');
 				return;
 			} else {
-				console.log(collectedMessages);
 				addMultipleMessages(
 					collectedMessages.map((m, i) => ({
 						message: m,
