@@ -8,7 +8,9 @@ import { baseSize } from '../../constants/gameData';
 import { canBenefitFromItem } from '../../functions/canBenefitFromItem';
 import { Inventory } from '../../interfaces/Inventory';
 import {
+	EvBoostItemType,
 	HealingItemType,
+	isEvBoostItem,
 	isHealingItem,
 	isPPRestorationItem,
 	ItemType,
@@ -33,7 +35,7 @@ export const Bag = ({
 	applySacredAsh: () => void;
 	applyItem: (
 		pokemon: OwnedPokemon,
-		item: HealingItemType | PPRestoringItemType,
+		item: HealingItemType | PPRestoringItemType | EvBoostItemType,
 		move?: MoveName
 	) => void;
 }): JSX.Element => {
@@ -55,11 +57,13 @@ export const Bag = ({
 									amount={amount}
 									discardItem={(x: number) => discardItem(item as ItemType, x)}
 								/>,
-								(isHealingItem(item) || isPPRestorationItem(item)) &&
+								(isHealingItem(item) ||
+									isPPRestorationItem(item) ||
+									isEvBoostItem(item)) &&
 								team.filter((t) => canBenefitFromItem(t, item)).length > 0 ? (
 									<HealAction
 										item={item}
-										healPokemon={applyItem}
+										applyItem={applyItem}
 										healablePokemon={team.filter((t) =>
 											canBenefitFromItem(t, item)
 										)}

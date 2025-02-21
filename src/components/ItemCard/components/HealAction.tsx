@@ -4,20 +4,24 @@ import { MoveName } from '../../../constants/checkLists/movesCheckList';
 import { baseSize } from '../../../constants/gameData';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
-import { HealingItemType, PPRestoringItemType } from '../../../interfaces/Item';
+import {
+	EvBoostItemType,
+	HealingItemType,
+	PPRestoringItemType,
+} from '../../../interfaces/Item';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { Banner } from '../../../uiComponents/Banner/Banner';
 
 export const HealAction = ({
 	item,
 	healablePokemon,
-	healPokemon,
+	applyItem,
 }: {
-	item: HealingItemType | PPRestoringItemType;
+	item: HealingItemType | PPRestoringItemType | EvBoostItemType;
 	healablePokemon: OwnedPokemon[];
-	healPokemon: (
+	applyItem: (
 		pokemon: OwnedPokemon,
-		item: HealingItemType | PPRestoringItemType,
+		item: HealingItemType | PPRestoringItemType | EvBoostItemType,
 		move?: MoveName
 	) => void;
 }) => {
@@ -42,7 +46,7 @@ export const HealAction = ({
 									setSelectedPokemon(p);
 									setPokemonSelectionOpen(false);
 								} else {
-									healPokemon(p, item);
+									applyItem(p, item);
 									setPokemonSelectionOpen(false);
 								}
 							}}
@@ -55,7 +59,7 @@ export const HealAction = ({
 										setSelectedPokemon(p);
 										setPokemonSelectionOpen(false);
 									} else {
-										healPokemon(p, item);
+										applyItem(p, item);
 										setPokemonSelectionOpen(false);
 									}
 								}
@@ -82,7 +86,7 @@ export const HealAction = ({
 								style={{ backgroundColor: 'white' }}
 								key={m.name}
 								onClick={() => {
-									healPokemon(selectedPokemon, item, m.name);
+									applyItem(selectedPokemon, item, m.name);
 									setPokemonSelectionOpen(false);
 									setSelectedPokemon(undefined);
 								}}
@@ -91,7 +95,7 @@ export const HealAction = ({
 								onKeyDown={(e) => {
 									e.stopPropagation();
 									if (e.key === 'Enter') {
-										healPokemon(selectedPokemon, item, m.name);
+										applyItem(selectedPokemon, item, m.name);
 										setPokemonSelectionOpen(false);
 										setSelectedPokemon(undefined);
 									}

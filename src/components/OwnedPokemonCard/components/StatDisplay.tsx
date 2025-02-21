@@ -32,10 +32,20 @@ export const StatDisplay = ({
 				}}
 			>
 				{Object.entries(
-					getStats(data.stats, ownedPokemon.xp, ownedPokemon.nature)
+					getStats(
+						data.stats,
+						ownedPokemon.xp,
+						ownedPokemon.nature,
+						ownedPokemon.effortValues
+					)
 				).map(([stat, value]) => {
 					const highestStat = Object.entries(
-						getStats(data.stats, ownedPokemon.xp, ownedPokemon.nature)
+						getStats(
+							data.stats,
+							ownedPokemon.xp,
+							ownedPokemon.nature,
+							ownedPokemon.effortValues
+						)
 					)
 						.filter(([stat]) => !HIDDEN_STATS.includes(stat))
 						.sort((a, b) => b[1] - a[1])[0][1];
