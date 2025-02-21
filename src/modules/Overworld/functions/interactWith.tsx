@@ -1,40 +1,34 @@
 import { getOppositeDirection } from '../../../functions/getOppositeDirection';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { Inventory } from '../../../interfaces/Inventory';
-import { ItemType } from '../../../interfaces/Item';
-import { Occupant, OverworldItem } from '../../../interfaces/OverworldMap';
+import { Occupant } from '../../../interfaces/OverworldMap';
 import { CharacterLocationData } from '../../../interfaces/SaveFile';
 import { Dialogue } from '../Overworld';
 
 export const interactWithFunction = ({
 	occ,
 	addDialogue,
-	collectItem,
-	cutBushes,
-	bushCutting,
 	openStorage,
 	stepsTaken,
 	changeOccupant,
 	playerLocation,
 	goToMarket,
 	talkToNurse,
-	receiveItems,
+	handledOccupants,
+	handleThisOccupant,
+	cutterPokemon,
 }: {
 	occ: [string, Occupant] | undefined;
 	addDialogue: (x: Dialogue) => void;
-	collectItem: (item: [string, OverworldItem]) => void;
-	cutBushes: number[];
-	bushCutting?: {
-		cut: (id: number) => void;
-		cutterPokemon: { dexId: number };
-	};
+	cutterPokemon?: { dexId: number };
 	openStorage: (stepsTaken: number) => void;
 	stepsTaken: number;
 	changeOccupant: (id: number, updatedOccupant: Occupant) => void;
 	playerLocation: CharacterLocationData;
 	goToMarket: (marketInventory: Partial<Inventory>, stepsTaken: number) => void;
 	talkToNurse: (id: number) => void;
-	receiveItems: (item: ItemType, amount: number) => void;
+	handleThisOccupant: (id: number) => void;
+	handledOccupants: number[];
 }) => {
 	if (!occ) {
 		return;
@@ -44,16 +38,16 @@ export const interactWithFunction = ({
 	if (data.type === 'ITEM' || data.type === 'HIDDEN_ITEM') {
 		addDialogue({
 			message: `Found ${data.amount} ${data.item}`,
-			onRemoval: () => collectItem(occ as [string, OverworldItem]),
+			onRemoval: () => handleThisOccupant(Number.parseInt(id)),
 		});
 		return;
 	}
-	if (data.type === 'BUSH' && !cutBushes.includes(Number.parseInt(id))) {
-		if (bushCutting) {
+	if (data.type === 'BUSH' && !handledOccupants.includes(Number.parseInt(id))) {
+		if (cutterPokemon) {
 			addDialogue({
 				message: `Your Pokemon used cut`,
-				icon: <img src={getPokemonSprite(bushCutting.cutterPokemon.dexId)} />,
-				onRemoval: () => bushCutting.cut(Number.parseInt(id)),
+				icon: <img src={getPokemonSprite(cutterPokemon.dexId)} />,
+				onRemoval: () => handleThisOccupant(Number.parseInt(id)),
 			});
 		} else addDialogue({ message: 'Maybe a Pokemon can cut this' });
 		return;
@@ -107,19 +101,25 @@ export const interactWithFunction = ({
 			orientation: getOppositeDirection(playerLocation.orientation),
 		});
 
-		data.dialogue.forEach((d) =>
-			addDialogue({
-				message: d,
-			})
-		);
-		if (data.gifts) {
-			Object.entries(data.gifts).forEach(([item, amount]) => {
+		if (
+			!handledOccupants.includes(Number.parseInt(id)) ||
+			!data.handledDialogue
+		) {
+			data.unhandledDialogue.forEach((d) =>
 				addDialogue({
-					message: `received ${amount} ${item}`,
-					onRemoval: () => receiveItems(item as ItemType, amount),
-				});
-			});
+					message: d,
+				})
+			);
+
+			handleThisOccupant(Number.parseInt(id));
+		} else {
+			data.handledDialogue.forEach((d) =>
+				addDialogue({
+					message: d,
+				})
+			);
 		}
+
 		return;
 	}
 

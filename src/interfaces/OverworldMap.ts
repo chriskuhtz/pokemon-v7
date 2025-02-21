@@ -61,7 +61,8 @@ export interface OverworldNpc {
 	y: number;
 	orientation: CharacterOrientation;
 	map: MapId;
-	dialogue: string[];
+	unhandledDialogue: string[];
+	handledDialogue?: string[];
 	sprite: string;
 	movememt?: { path: CharacterOrientation[]; currentStep: number };
 	gifts?: Partial<Inventory>;

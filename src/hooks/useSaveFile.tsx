@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { MoveName } from '../constants/checkLists/movesCheckList';
+import { occupantsRecord } from '../constants/checkLists/occupantsRecord';
 import { QuestName, QuestsRecord } from '../constants/checkLists/questsRecord';
 import { localStorageId, testState } from '../constants/gameData';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
@@ -11,7 +12,6 @@ import { updateItemFunction } from '../functions/updateItemFunction';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { Inventory, joinInventories } from '../interfaces/Inventory';
 import { ItemType } from '../interfaces/Item';
-import { OverworldItem } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { RoutesType } from '../interfaces/Routing';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
@@ -40,11 +40,10 @@ export interface UseSaveFile {
 		pricePerItem: number
 	) => void;
 	setCharacterLocationReducer: (update: CharacterLocationData) => void;
-	collectItemReducer: (item: [string, OverworldItem]) => void;
 	setPokemonReducer: (update: OwnedPokemon[]) => void;
 
 	talkToNurseReducer: (id: number) => void;
-	cutBushReducer: (id: number) => void;
+	handleOccupantReducer: (id: number) => void;
 	navigateAwayFromOverworldReducer: (to: RoutesType, steps: number) => void;
 	applyItemToPokemonReducer: (
 		pokemon: OwnedPokemon,
@@ -84,11 +83,12 @@ export const useSaveFile = (
 			s({
 				...update,
 				lastEdited: newTime,
-				cutBushes:
-					newTime - saveFile.lastEdited > 900000 ? [] : update.cutBushes,
+				handledOccupants: update.handledOccupants.filter(
+					(h) => h.resetAt > newTime
+				),
 			});
 		},
-		[saveFile]
+		[]
 	);
 	const discardItemReducer = (item: ItemType, number: number) => {
 		const updatedInventory = updateItemFunction(
@@ -182,25 +182,7 @@ export const useSaveFile = (
 			'setCharacter'
 		);
 	};
-	const collectItemReducer = (item: [string, OverworldItem]) => {
-		const id = Number.parseInt(item[0]);
-		const updatedInventory = updateItemFunction(
-			item[1].item,
-			item[1].amount,
-			saveFile.inventory
-		);
-		setSaveFile(
-			{
-				...saveFile,
-				inventory: updatedInventory,
-				collectedItems: [
-					...saveFile.collectedItems.filter((c) => c !== id),
-					id,
-				],
-			},
-			'collectItem'
-		);
-	};
+
 	const setPokemonReducer = (update: OwnedPokemon[]) => {
 		setSaveFile(
 			{
@@ -268,13 +250,40 @@ export const useSaveFile = (
 		);
 		addToast('Whole Team fully healed', 'SUCCESS');
 	};
-	const cutBushReducer = (id: number) => {
+
+	const handleOccupantReducer = (id: number) => {
+		const occ = occupantsRecord[id];
+
+		if (!occ) {
+			throw new Error(`what is this occupant supposed to be ${id}`);
+		}
+		const timer = new Date().getTime() + 900000;
+
+		let newInventory = { ...saveFile.inventory };
+		if (occ.type === 'NPC' && occ.gifts) {
+			Object.entries(occ.gifts).forEach(([item, amount]) => {
+				addToast(`received ${amount} ${item}`);
+			});
+
+			newInventory = joinInventories(newInventory, occ.gifts);
+		}
+		if (occ.type === 'ITEM' || occ.type === 'HIDDEN_ITEM') {
+			const { item, amount } = occ;
+			addToast(`found ${amount} ${item}`);
+
+			newInventory = joinInventories(newInventory, { [item]: amount });
+		}
+
 		setSaveFile(
 			{
 				...saveFile,
-				cutBushes: [...(saveFile.cutBushes ?? []), id],
+				inventory: newInventory,
+				handledOccupants: [
+					...saveFile.handledOccupants,
+					{ id, resetAt: timer },
+				],
 			},
-			'cutBush'
+			'handleOccupant'
 		);
 	};
 	const applyItemToPokemonReducer = (
@@ -434,11 +443,10 @@ export const useSaveFile = (
 		sellItemReducer,
 		buyItemReducer,
 		setCharacterLocationReducer,
-		collectItemReducer,
 		setPokemonReducer,
 		talkToNurseReducer,
 		navigateAwayFromOverworldReducer,
-		cutBushReducer,
+		handleOccupantReducer,
 		applyItemToPokemonReducer,
 		fulfillQuestReducer,
 		changeHeldItemReducer,

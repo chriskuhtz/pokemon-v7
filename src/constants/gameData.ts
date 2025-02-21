@@ -50,8 +50,7 @@ export const testState: SaveFile = {
 		x: 0,
 		y: 0,
 	},
-	collectedItems: [],
-	cutBushes: [],
+	handledOccupants: [],
 	lastEdited: new Date().getTime(),
 	lastNurse: 400001,
 };
