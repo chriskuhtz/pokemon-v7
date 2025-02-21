@@ -24,7 +24,7 @@ export const testPokemon: OwnedPokemon = {
 	ability: 'air-lock',
 	happiness: 70,
 	stepsWalked: 0,
-	heldItemName: 'potion',
+	heldItemName: 'berry-juice',
 	maxHp: 20,
 	effortValues: EmptyStatObject,
 	ppBoostedMoves: [],
@@ -32,7 +32,10 @@ export const testPokemon: OwnedPokemon = {
 export const testState: SaveFile = {
 	sprite: '',
 	badges: [],
-	quests: { 'catch a pikachu': 'ACTIVE' },
+	quests: {
+		'catch a pikachu': 'ACTIVE',
+		'Train a Pokemon to lvl 10': 'ACTIVE',
+	},
 	inventory: generateInventory({ 'pp-up': 3, 'pp-max': 4, 'x-attack': 7 }),
 	playerId: '',
 	money: 5000,
