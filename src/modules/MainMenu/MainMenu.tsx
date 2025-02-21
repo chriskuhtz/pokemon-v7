@@ -4,10 +4,13 @@ import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
+import { useState } from 'react';
 import { GoTasklist } from 'react-icons/go';
 import { baseSize } from '../../constants/gameData';
+import { useMessageQueue } from '../../hooks/useMessageQueue';
 import { BadgeName } from '../../interfaces/Badge';
 import { RoutesType } from '../../interfaces/Routing';
+import { Banner } from '../../uiComponents/Banner/Banner';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
 
 export const MainMenu = ({
@@ -17,6 +20,7 @@ export const MainMenu = ({
 	name,
 	spriteUrl,
 	badges,
+	reset,
 }: {
 	navigate: (x: RoutesType) => void;
 	goBack: () => void;
@@ -24,9 +28,17 @@ export const MainMenu = ({
 	name: string;
 	badges: BadgeName[];
 	spriteUrl: string;
+	reset: () => void;
 }): JSX.Element => {
+	const [resetConfirmationInProgress, setRCIP] = useState<boolean>(false);
+	const { latestMessage, addMessage } = useMessageQueue();
 	return (
 		<Page headline="Main Menu:" goBack={goBack}>
+			{latestMessage && (
+				<Banner>
+					<h3>{latestMessage.message}</h3>
+				</Banner>
+			)}
 			<Stack mode="column">
 				<Card
 					content={
@@ -80,6 +92,26 @@ export const MainMenu = ({
 					icon={<GoTasklist size={baseSize / 2} />}
 					actionElements={[]}
 				/>
+				{resetConfirmationInProgress ? (
+					<button
+						onClick={() =>
+							addMessage({
+								message: 'Resetting Your Save File',
+								onRemoval: () => reset(),
+							})
+						}
+						style={{ backgroundColor: 'darkred', color: 'white' }}
+					>
+						<h3>Are you sure? Click again to confirm</h3>
+					</button>
+				) : (
+					<button
+						onClick={() => setRCIP(true)}
+						style={{ backgroundColor: 'darkred', color: 'white' }}
+					>
+						Delete Savefile and reset
+					</button>
+				)}
 			</Stack>
 		</Page>
 	);

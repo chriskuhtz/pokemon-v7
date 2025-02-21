@@ -58,9 +58,9 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'player sprite selection', handled: true },
-	{ name: 'check if pokemon can actually cut' },
-	{ name: 'reset button' },
-	{ name: 'setting `reset on faint`' },
+
+	{ name: 'reset button', handled: true },
+	{ name: 'setting `reset on battle lost`' },
 	{ name: 'setting: fainted pokemon are removed' },
 	{ name: 'inventory and market filters' },
 	{ name: "put randomized starters into localstorage to 'prevent' reloading" },
@@ -175,4 +175,5 @@ export const extraFeatureCheckList: {
 	{ name: 'alternate forms (galar, alola)' },
 	{ name: 'encounter rarity' },
 	{ name: 'ivs' },
+	{ name: 'check if pokemon can actually cut' },
 ];
