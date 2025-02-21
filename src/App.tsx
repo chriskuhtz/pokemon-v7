@@ -62,6 +62,7 @@ export const App = ({
 		badges,
 		playerId,
 		quests,
+		settings,
 	} = saveFile;
 
 	const team = useMemo(() => pokemon.filter((p) => p.onTeam), [pokemon]);
@@ -76,24 +77,43 @@ export const App = ({
 					{ ...testOpponent, ...getRandomEncounter(testMap), id: v4() },
 				]}
 				team={team}
-				leave={(caughtPokemon, updatedInventory, scatteredCoins, team) => {
+				leave={(
+					caughtPokemon,
+					updatedInventory,
+					scatteredCoins,
+					updatedTeam
+				) => {
+					const filteredTeam = updatedTeam
+						.filter((p) => {
+							if (
+								settings?.disqualifyFaintedPokemon &&
+								p.status === 'FAINTED'
+							) {
+								return false;
+							}
+
+							return true;
+						})
+						.map((t) => reduceBattlePokemonToOwnedPokemon(t));
+
+					if (filteredTeam.length === 0) {
+						reset();
+					}
+					const updatedPokemon = [
+						...filteredTeam,
+						...pokemon.filter((p) => !team.some((t) => t.id === p.id)),
+						...caughtPokemon.map((c) => {
+							return {
+								...reduceBattlePokemonToOwnedPokemon(c, c.ball === 'heal-ball'),
+								ownerId: saveFile.playerId,
+							};
+						}),
+					];
 					putSaveFileReducer({
 						...saveFile,
 						inventory: updatedInventory,
 						money: saveFile.money + scatteredCoins,
-						pokemon: [
-							...team.map((t) => reduceBattlePokemonToOwnedPokemon(t)),
-							...pokemon.filter((p) => !team.some((t) => t.id === p.id)),
-							...caughtPokemon.map((c) => {
-								return {
-									...reduceBattlePokemonToOwnedPokemon(
-										c,
-										c.ball === 'heal-ball'
-									),
-									ownerId: saveFile.playerId,
-								};
-							}),
-						],
+						pokemon: updatedPokemon,
 						meta: { activeTab: 'OVERWORLD' },
 					});
 				}}
@@ -106,11 +126,9 @@ export const App = ({
 	if (activeTab === 'SETTINGS') {
 		return (
 			<Settings
-				proceed={(randomStarters: boolean) => {
+				proceed={(settings) => {
 					patchSaveFileReducer({
-						settings: {
-							randomStarters: randomStarters,
-						},
+						settings,
 					});
 				}}
 			/>

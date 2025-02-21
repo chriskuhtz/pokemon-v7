@@ -26,6 +26,11 @@ export interface CharacterLocationData {
 	y: number;
 }
 
+export interface SettingsObject {
+	randomStarters: boolean;
+	disqualifyFaintedPokemon: boolean;
+}
+
 export interface SaveFile {
 	badges: BadgeName[];
 	playerId: string;
@@ -40,9 +45,7 @@ export interface SaveFile {
 	cutBushes: number[];
 	lastEdited: number;
 	lastNurse: number;
-	settings?: {
-		randomStarters: boolean;
-	};
+	settings?: SettingsObject;
 	quests: Record<QuestName, QuestStatus>;
 	sprite: string;
 }
