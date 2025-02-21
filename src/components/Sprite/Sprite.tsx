@@ -5,9 +5,11 @@ import { useDrawCharacter } from '../../modules/Overworld/hooks/useDrawCharacter
 export const Sprite = ({
 	id,
 	onClick,
+	rotating,
 }: {
 	id: string;
 	onClick: () => void;
+	rotating: boolean;
 }) => {
 	const orientation = useRotate();
 	useDrawCharacter(
@@ -16,7 +18,7 @@ export const Sprite = ({
 			x: 0,
 			y: 0,
 			forwardFoot: 'CENTER1',
-			orientation,
+			orientation: rotating ? orientation : 'DOWN',
 			mapId: 'testMap',
 		},
 		id
