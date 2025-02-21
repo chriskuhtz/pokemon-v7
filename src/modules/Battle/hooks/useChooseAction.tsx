@@ -9,6 +9,7 @@ import {
 	isHealingItem,
 	isPokeball,
 	isPPRestorationItem,
+	isRunawayItem,
 	isXItem,
 } from '../../../interfaces/Item';
 import { ChooseActionPayload } from '../BattleField';
@@ -29,7 +30,7 @@ export const useChooseAction = (
 			if (targetId && !target) {
 				throw new Error('could not find target');
 			}
-			if (actionName === 'RUN_AWAY') {
+			if (actionName === 'RUN_AWAY' || isRunawayItem(actionName)) {
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
 						if (p.id === user.id) {

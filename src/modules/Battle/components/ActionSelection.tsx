@@ -7,6 +7,7 @@ import {
 	isHealingItem,
 	isPokeball,
 	isPPRestorationItem,
+	isRunawayItem,
 	isXItem,
 } from '../../../interfaces/Item';
 import { ActionType, ChooseActionPayload } from '../BattleField';
@@ -62,7 +63,8 @@ export function ActionSelection({
 				{Object.entries(inventory).map(([item, amount]) => {
 					if (
 						amount > 0 &&
-						(isPokeball(item) ||
+						(isRunawayItem(item) ||
+							isPokeball(item) ||
 							((isHealingItem(item) ||
 								isPPRestorationItem(item) ||
 								isXItem(item)) &&
