@@ -60,8 +60,8 @@ export const extraFeatureCheckList: {
 	{ name: 'player sprite selection', handled: true },
 
 	{ name: 'reset button', handled: true },
+	{ name: 'setting: fainted pokemon are removed', handled: true },
 	{ name: 'setting `reset on battle lost`' },
-	{ name: 'setting: fainted pokemon are removed' },
 	{ name: 'inventory and market filters' },
 	{ name: "put randomized starters into localstorage to 'prevent' reloading" },
 	{ name: 'only show three pokeballs that open onClick for starter selection' },

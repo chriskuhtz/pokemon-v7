@@ -225,6 +225,7 @@ export const itemsCheckList: {
 	{
 		name: 'rare-candy',
 		url: 'https://pokeapi.co/api/v2/item/50/',
+		handled: true,
 	},
 	{ name: 'pp-up', url: 'https://pokeapi.co/api/v2/item/51/' },
 	{ name: 'zinc', url: 'https://pokeapi.co/api/v2/item/52/', handled: true },
