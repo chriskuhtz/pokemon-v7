@@ -177,4 +177,7 @@ export const extraFeatureCheckList: {
 	{ name: 'gain xp from battle' },
 	{ name: 'chosen settings overview' },
 	{ name: 'put caught pokemon on team if space' },
+	{
+		name: 'create toggle component instead of always black/white check on button',
+	},
 ];
