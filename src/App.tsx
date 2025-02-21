@@ -72,10 +72,14 @@ export const App = ({
 	if (activeTab === 'BATTLE') {
 		return (
 			<BattleLoader
-				opponents={[
-					{ ...testOpponent, ...getRandomEncounter(testMap), id: v4() },
-					{ ...testOpponent, ...getRandomEncounter(testMap), id: v4() },
-				]}
+				opponents={
+					team.length > 1
+						? [
+								{ ...testOpponent, ...getRandomEncounter(testMap), id: v4() },
+								{ ...testOpponent, ...getRandomEncounter(testMap), id: v4() },
+						  ]
+						: [{ ...testOpponent, ...getRandomEncounter(testMap), id: v4() }]
+				}
 				team={team}
 				leave={(
 					caughtPokemon,
@@ -117,7 +121,7 @@ export const App = ({
 						meta: { activeTab: 'OVERWORLD' },
 					});
 				}}
-				fightersPerSide={2}
+				fightersPerSide={team.length > 1 ? 2 : 1}
 				inventory={inventory}
 				ownedPokemonDexIds={saveFile.pokemon.map((p) => p.dexId)}
 			/>
