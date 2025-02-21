@@ -198,4 +198,5 @@ export const extraFeatureCheckList: {
 	{ name: 'trainers can move and still spot you' },
 	{ name: 'scripted npcs' },
 	{ name: 'no running or catching in trainer battles' },
+	{ name: 'surf outside of battle' },
 ];
