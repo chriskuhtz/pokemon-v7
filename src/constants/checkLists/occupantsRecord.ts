@@ -98,13 +98,13 @@ export const occupantsRecord: Record<number, Occupant> = {
 		orientation: 'LEFT',
 		unhandledDialogue: [
 			'did you know?',
-			'some pokemon only appear at night!',
+			'some pokemon only appear in the morning!',
 			'These might help you catch them',
 		],
 		handledDialogue: ['did you find one?'],
 		sprite: '040',
-		gifts: { 'dusk-ball': 5 },
-		quest: 'Catch a nocturnal pokemon from the meadow',
+		gifts: { 'quick-ball': 5 },
+		quest: 'Catch a morning pokemon from the meadow',
 		movement: { path: ['RIGHT', 'LEFT'], currentStep: 0 },
 	},
 	600003: {
@@ -142,10 +142,13 @@ export const occupantsRecord: Record<number, Occupant> = {
 		map: 'meadow',
 		timeofDay: 'NIGHT',
 		orientation: 'DOWN',
+		gifts: { 'dusk-ball': 5 },
 		unhandledDialogue: [
 			'During the day, i work in the city',
 			'I come here at night to search for zorua',
+			'These Dusk ball work well at night',
 		],
+		quest: 'Catch a Zorua at night in the meadow',
 		sprite: '080',
 	},
 };
