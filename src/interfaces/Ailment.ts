@@ -17,6 +17,7 @@ const secondaryAilments = [
 	'flash-fire',
 	'color-changed',
 	'guard-spec',
+	'dire-hit',
 ] as const;
 
 export type SecondaryAilmentType = (typeof secondaryAilments)[number];

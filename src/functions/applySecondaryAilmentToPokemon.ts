@@ -87,5 +87,15 @@ export const applySecondaryAilmentToPokemon = (
 			],
 		};
 	}
+	if (ailment === 'dire-hit') {
+		addMessage(`dire hit applied`);
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{ type: 'guard-spec', duration: 9000 },
+			],
+		};
+	}
 	return pokemon;
 };
