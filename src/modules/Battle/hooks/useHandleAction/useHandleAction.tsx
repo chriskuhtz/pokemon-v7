@@ -8,6 +8,7 @@ import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
 import { ItemType } from '../../../../interfaces/Item';
 import { WeatherType } from '../../../../interfaces/Weather';
 import { BattleMessage } from '../../BattleField';
+import { handleMoveBlockAilments } from '../../functions/handleMoveBlockAilments';
 import { handleAttack } from './functions/handleAttack';
 import { handleCatch } from './functions/handleCatch';
 
@@ -110,13 +111,32 @@ export const useHandleAction = (
 				);
 			}
 			if (move.type === 'ChargeUp') {
+				const { canAttack, updatedAttacker } = handleMoveBlockAilments({
+					attacker,
+					addMessage: (x: string) => addMessage({ message: x }),
+				});
+
+				if (!canAttack) {
+					setPokemon((pokemon) =>
+						pokemon.map((p) => {
+							if (p.id === updatedAttacker.id) {
+								return updatedAttacker;
+							}
+							return p;
+						})
+					);
+					return;
+				}
 				addMessage({
-					message: getChargeUpMessage(attacker.data.name, move.name),
+					message: getChargeUpMessage(updatedAttacker.data.name, move.name),
 				});
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
 						if (p.id === attacker.id) {
-							return { ...attacker, moveQueue: attacker.moveQueue.slice(1) };
+							return {
+								...updatedAttacker,
+								moveQueue: attacker.moveQueue.slice(1),
+							};
 						}
 						return p;
 					})

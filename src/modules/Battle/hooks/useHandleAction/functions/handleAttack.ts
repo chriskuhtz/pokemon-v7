@@ -13,20 +13,17 @@ import { getRandomTargetId } from '../../../../../functions/filterTargets';
 import { handleFlinching } from '../../../../../functions/handleFlinching';
 import { isKO } from '../../../../../functions/isKo';
 import {
-	PARA_CHANCE,
 	ROUGH_SKIN_FACTOR,
 	STATIC_CHANCE,
-	UNFREEZE_CHANCE,
 } from '../../../../../interfaces/Ailment';
 import { BattleAttack } from '../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../../../interfaces/Weather';
 import { handleDampy } from '../../../functions/handleDampy';
 import { handleFainting } from '../../../functions/handleFainting';
-import { handleFrozen } from '../../../functions/handleFrozen';
 import { handleMiss } from '../../../functions/handleMiss';
+import { handleMoveBlockAilments } from '../../../functions/handleMoveBlockAilments';
 import { handleNoTarget } from '../../../functions/handleNoTarget';
-import { handleParalyzed } from '../../../functions/handleParalyzed';
 
 export const handleAttack = ({
 	attacker,
@@ -61,24 +58,26 @@ export const handleAttack = ({
 	);
 
 	let updatedAttacker = { ...attacker };
-	if (updatedAttacker.primaryAilment?.type === 'freeze') {
-		const defrosted = Math.random() <= UNFREEZE_CHANCE;
-		if (defrosted) {
-			addMessage(`${attacker.data.name} was thawed out`);
-			updatedAttacker.primaryAilment = undefined;
-		} else {
-			handleFrozen(attacker, setPokemon, addMessage);
-			return;
+
+	const { canAttack, updatedAttacker: afterBlockers } = handleMoveBlockAilments(
+		{
+			attacker,
+			addMessage,
 		}
-	}
-	if (
-		updatedAttacker.primaryAilment?.type === 'paralysis' &&
-		Math.random() <= PARA_CHANCE
-	) {
-		handleParalyzed(attacker, setPokemon, addMessage);
+	);
+	updatedAttacker = afterBlockers;
+
+	if (!canAttack) {
+		setPokemon((pokemon) =>
+			pokemon.map((p) => {
+				if (p.id === updatedAttacker.id) {
+					return updatedAttacker;
+				}
+				return p;
+			})
+		);
 		return;
 	}
-
 	if (!target) {
 		handleNoTarget(attacker, move, setPokemon, addMessage);
 		return;
