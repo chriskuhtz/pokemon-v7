@@ -3,6 +3,7 @@ import { MdHealing } from 'react-icons/md';
 import { HealAction } from '../../components/ItemCard/components/HealAction';
 import { ThrowAwayAction } from '../../components/ItemCard/components/ThrowAwayAction';
 import { ItemCard } from '../../components/ItemCard/ItemCard';
+import { useFilteredInventory } from '../../components/ItemsFilter/ItemsFilter';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
 import { baseSize } from '../../constants/gameData';
 import { canBenefitFromItem } from '../../functions/canBenefitFromItem';
@@ -27,10 +28,13 @@ export const Bag = ({
 	applySacredAsh: () => void;
 	applyItem: (pokemon: OwnedPokemon, item: ItemType, move?: MoveName) => void;
 }): JSX.Element => {
+	const { filteredInventory, buttons } = useFilteredInventory(inventory);
 	return (
 		<Page goBack={goBack} headline="Inventory:">
 			<Stack mode="column">
-				{Object.entries(inventory).map(([item, amount]) => {
+				{buttons}
+				{Object.entries(filteredInventory)
+				.map(([item, amount]) => {
 					if (amount <= 0) {
 						return <React.Fragment key={item}></React.Fragment>;
 					}

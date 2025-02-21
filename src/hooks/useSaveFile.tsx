@@ -1,12 +1,14 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { MoveName } from '../constants/checkLists/movesCheckList';
 import { localStorageId, testState } from '../constants/gameData';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
+import { reduceBattlePokemonToOwnedPokemon } from '../functions/reduceBattlePokemonToOwnedPokemon';
 import { updateItemFunction } from '../functions/updateItemFunction';
-import { joinInventories } from '../interfaces/Inventory';
+import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { Inventory, joinInventories } from '../interfaces/Inventory';
 import { ItemType } from '../interfaces/Item';
 import { OverworldItem } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
@@ -56,6 +58,12 @@ export const useSaveFile = (
 	changeHeldItemReducer: (pokemonId: string, newItem?: ItemType) => void;
 	useSacredAshReducer: () => void;
 	reset: () => void;
+	leaveBattleReducer: (
+		caughtPokemon: BattlePokemon[],
+		updatedInventory: Inventory,
+		scatteredCoins: number,
+		team: BattlePokemon[]
+	) => void;
 } => {
 	const local = window.localStorage.getItem(localStorageId);
 	const loaded = local ? (JSON.parse(local) as SaveFile) : init;
@@ -143,9 +151,12 @@ export const useSaveFile = (
 
 		setSaveFile({ ...saveFile, pokemon: updatedPokemon }, 'receiveItem');
 	};
-	const putSaveFileReducer = (update: SaveFile) => {
-		setSaveFile(update, 'putSavefile');
-	};
+	const putSaveFileReducer = useCallback(
+		(update: SaveFile) => {
+			setSaveFile(update, 'putSavefile');
+		},
+		[setSaveFile]
+	);
 	const patchSaveFileReducer = (update: Partial<SaveFile>) =>
 		setSaveFile({ ...saveFile, ...update }, 'patchSavefile');
 	const setActiveTabReducer = useCallback(
@@ -328,9 +339,58 @@ export const useSaveFile = (
 			inventory: updatedInventory,
 		});
 	};
-	const reset = () => {
+	const reset = useCallback(() => {
 		setSaveFile(testState, 'reset');
-	};
+	}, [setSaveFile]);
+
+	const team = useMemo(
+		() => saveFile.pokemon.filter((p) => p.onTeam),
+		[saveFile]
+	);
+
+	const leaveBattleReducer = useCallback(
+		(
+			caughtPokemon: BattlePokemon[],
+			updatedInventory: Inventory,
+			scatteredCoins: number,
+			updatedTeam: BattlePokemon[]
+		) => {
+			const filteredTeam = updatedTeam
+				.filter((p) => {
+					if (
+						saveFile.settings?.disqualifyFaintedPokemon &&
+						p.status === 'FAINTED'
+					) {
+						return false;
+					}
+
+					return true;
+				})
+				.map((t) => reduceBattlePokemonToOwnedPokemon(t));
+
+			if (filteredTeam.length === 0) {
+				reset();
+			}
+			const updatedPokemon = [
+				...filteredTeam,
+				...saveFile.pokemon.filter((p) => !team.some((t) => t.id === p.id)),
+				...caughtPokemon.map((c) => {
+					return {
+						...reduceBattlePokemonToOwnedPokemon(c, c.ball === 'heal-ball'),
+						ownerId: saveFile.playerId,
+					};
+				}),
+			];
+			putSaveFileReducer({
+				...saveFile,
+				inventory: updatedInventory,
+				money: saveFile.money + scatteredCoins,
+				pokemon: updatedPokemon,
+				meta: { activeTab: 'OVERWORLD' },
+			});
+		},
+		[putSaveFileReducer, reset, saveFile, team]
+	);
 
 	//SYNC WITH LOCAL STORAGE
 	useEffect(() => {
@@ -381,5 +441,6 @@ export const useSaveFile = (
 		fulfillQuestReducer,
 		changeHeldItemReducer,
 		useSacredAshReducer,
+		leaveBattleReducer,
 	};
 };
