@@ -204,13 +204,22 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 			//@ts-expect-error i checked that its a battlepokemon
 			return applyStatChangeToPokemon(pokemon, stat, 1, addToast);
 		}
-		if (item === 'guard-spec')
+		if (item === 'guard-spec') {
 			//@ts-expect-error  i checked that its a battlepokemon
 			return applySecondaryAilmentToPokemon(
 				pokemon,
 				'guard-spec',
 				addToast ? addToast : () => {}
 			);
+		}
+		if (item === 'dire-hit') {
+			//@ts-expect-error  i checked that its a battlepokemon
+			return applySecondaryAilmentToPokemon(
+				pokemon,
+				'dire-hit',
+				addToast ? addToast : () => {}
+			);
+		}
 	}
 
 	return pokemon;
