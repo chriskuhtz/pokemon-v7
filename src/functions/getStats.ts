@@ -8,7 +8,7 @@ export const getStats = (
 	stats: StatInfo[],
 	xp: number,
 	nature: Nature,
-	evs?: StatObject
+	evs: StatObject
 ): StatObject => {
 	const baseHp = stats.find((s) => s.stat.name === 'hp')?.base_stat ?? 100;
 	const baseAttack =

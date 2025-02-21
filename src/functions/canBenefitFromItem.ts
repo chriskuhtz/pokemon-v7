@@ -1,6 +1,7 @@
 import { isEqual } from 'lodash';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import {
+	EvBoostItemType,
 	HealingItemType,
 	isPPRestorationItem,
 	PPRestoringItemType,
@@ -11,7 +12,7 @@ import { getMovesArray } from './getMovesArray';
 
 export function canBenefitFromItem<T extends OwnedPokemon | BattlePokemon>(
 	pokemon: T,
-	item: HealingItemType | PPRestoringItemType
+	item: HealingItemType | PPRestoringItemType | EvBoostItemType
 ): boolean {
 	if (
 		isPPRestorationItem(item) &&

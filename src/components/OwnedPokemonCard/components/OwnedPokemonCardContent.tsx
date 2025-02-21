@@ -78,7 +78,14 @@ export const OwnedPokemonCardContent = ({
 					</div>
 
 					<HpBar
-						max={getStats(data.stats, ownedPokemon.xp, ownedPokemon.nature).hp}
+						max={
+							getStats(
+								data.stats,
+								ownedPokemon.xp,
+								ownedPokemon.nature,
+								ownedPokemon.effortValues
+							).hp
+						}
 						damage={ownedPokemon.damage}
 					/>
 					<h5>{typeNames.join('/')} type</h5>

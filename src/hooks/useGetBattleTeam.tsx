@@ -75,7 +75,12 @@ export const useGetBattleTeam = (
 							  }
 							: undefined,
 					data: d,
-					stats: getStats(d.stats, pokemon.xp, pokemon.nature),
+					stats: getStats(
+						d.stats,
+						pokemon.xp,
+						pokemon.nature,
+						pokemon.effortValues
+					),
 					statBoosts: EmptyStatObject,
 					capture_rate: spd.capture_rate,
 					happiness:

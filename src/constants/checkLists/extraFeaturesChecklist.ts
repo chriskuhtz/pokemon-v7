@@ -174,4 +174,5 @@ export const extraFeatureCheckList: {
 	{ name: 'quest: catch a morning pokemon' },
 	{ name: 'alternate forms (galar, alola)' },
 	{ name: 'encounter rarity' },
+	{ name: 'ivs' },
 ];

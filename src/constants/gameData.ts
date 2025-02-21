@@ -2,6 +2,7 @@ import { v4 } from 'uuid';
 import { generateInventory } from '../interfaces/Inventory';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { SaveFile } from '../interfaces/SaveFile';
+import { EmptyStatObject } from '../interfaces/StatObject';
 
 export const fps = 16;
 export const baseSize = 64;
@@ -26,6 +27,7 @@ export const testPokemon: OwnedPokemon = {
 	stepsWalked: 0,
 	heldItemName: 'potion',
 	maxHp: 20,
+	effortValues: EmptyStatObject,
 };
 export const testState: SaveFile = {
 	sprite: '',
@@ -43,6 +45,8 @@ export const testState: SaveFile = {
 		elixir: 5,
 		ether: 5,
 		'sacred-ash': 5,
+		'hp-up': 4,
+		calcium: 3,
 	}),
 	playerId: '',
 	money: 5000,
@@ -84,6 +88,7 @@ export const testOpponent: OwnedPokemon = {
 	happiness: -1,
 	stepsWalked: 0,
 	maxHp: 50,
+	effortValues: EmptyStatObject,
 };
 
 export const localStorageId = 'pokemonv7SaveFile';
