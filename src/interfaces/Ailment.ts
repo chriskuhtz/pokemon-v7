@@ -1,5 +1,6 @@
 export interface PrimaryAilment {
 	type: 'paralysis' | 'burn' | 'freeze' | 'poison' | 'toxic' | 'sleep';
+	duration?: number;
 }
 
 export function isPrimaryAilment(x: { type: string }): x is PrimaryAilment {
