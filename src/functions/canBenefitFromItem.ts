@@ -1,13 +1,19 @@
 import { isEqual } from 'lodash';
+import { MoveName } from '../constants/checkLists/movesCheckList';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { isPPRestorationItem, ItemType } from '../interfaces/Item';
+import {
+	isPPBoostItem,
+	isPPRestorationItem,
+	ItemType,
+} from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { applyItemToPokemon } from './applyItemToPokemon';
 import { getMovesArray } from './getMovesArray';
 
 export function canBenefitFromItem<T extends OwnedPokemon | BattlePokemon>(
 	pokemon: T,
-	item: ItemType
+	item: ItemType,
+	move?: MoveName
 ): boolean {
 	if (
 		isPPRestorationItem(item) &&
@@ -15,5 +21,8 @@ export function canBenefitFromItem<T extends OwnedPokemon | BattlePokemon>(
 	) {
 		return true;
 	}
-	return !isEqual(pokemon, applyItemToPokemon(pokemon, item));
+	if (!move && isPPBoostItem(item)) {
+		return true;
+	}
+	return !isEqual(pokemon, applyItemToPokemon(pokemon, item, undefined, move));
 }

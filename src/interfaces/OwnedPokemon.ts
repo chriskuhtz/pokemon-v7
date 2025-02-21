@@ -9,6 +9,11 @@ export interface OwnedPokemonMove {
 	name: MoveName;
 	usedPP: number;
 }
+export interface PPBoostedMove {
+	name: MoveName;
+	stage: number;
+}
+
 export interface OwnedPokemon {
 	dexId: number;
 	id: string;
@@ -32,5 +37,5 @@ export interface OwnedPokemon {
 	maxHp: number;
 	effortValues: StatObject;
 	//intrinsicValues: StatObject;
-	//ppBoostedMoves: PPBoostedMove[];
+	ppBoostedMoves: PPBoostedMove[];
 }
