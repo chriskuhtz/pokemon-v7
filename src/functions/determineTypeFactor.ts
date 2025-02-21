@@ -5,7 +5,8 @@ import { getTypeNames } from './getTypeNames';
 
 export const determineTypeFactor = (
 	target: BattlePokemon,
-	attack: BattleAttack
+	attack: BattleAttack,
+	addMessage?: (x: string) => void
 ): number => {
 	let res = 1;
 	const targetTypes = getTypeNames(target);
@@ -21,5 +22,25 @@ export const determineTypeFactor = (
 			res = 0;
 		}
 	});
+
+	if (target.ability === 'wonder-guard' && res <= 1) {
+		if (addMessage) {
+			addMessage(`${target.data.name} prevents damage with wonder guard`);
+		}
+		return 0;
+	}
+
+	if (res === 0) {
+		if (addMessage) {
+			addMessage('It has no effect');
+		}
+		return 0;
+	}
+	if (res > 1 && addMessage) {
+		addMessage('It is very effective');
+	}
+	if (res < 1 && addMessage) {
+		addMessage('It is not very effective');
+	}
 	return res;
 };
