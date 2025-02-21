@@ -1,5 +1,6 @@
 import { Occupant } from '../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
+import { testOpponent } from '../gameData';
 import { STANDARD_BUY_MARKET } from '../standardBuyMarket';
 
 export const occupantsRecord: Record<number, Occupant> = {
@@ -46,7 +47,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		unhandledDialogue: ['fight me', 'big dog'],
 		handledDialogue: ['you are the big dog'],
 		sprite: '033',
-		team: [],
+		team: [{ ...testOpponent, dexId: 66 }],
 	},
 	//Merchants start at 300000,
 	300001: {

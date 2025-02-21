@@ -40,6 +40,7 @@ export interface SaveFile {
 	money: number;
 	meta: {
 		activeTab: RoutesType;
+		currentOpponents?: OwnedPokemon[];
 	};
 	location: CharacterLocationData;
 

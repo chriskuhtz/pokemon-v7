@@ -3,7 +3,6 @@ import { v4 } from 'uuid';
 import { testPokemon, testState } from './constants/gameData';
 import { meadow } from './constants/maps/meadow';
 import { STANDARD_BUY_MARKET } from './constants/standardBuyMarket';
-import { determineWildPokemon } from './functions/determineWildPokemon';
 import { useSaveFile } from './hooks/useSaveFile';
 import { AddToastFunction } from './hooks/useToasts';
 import { generateInventory, Inventory } from './interfaces/Inventory';
@@ -52,7 +51,7 @@ export const App = ({
 	} = useSaveFile(testState, addToast);
 
 	const {
-		meta: { activeTab },
+		meta: { activeTab, currentOpponents },
 		inventory,
 		pokemon,
 		money,
@@ -67,14 +66,13 @@ export const App = ({
 
 	const firstTeamMember = team[0];
 
-	if (activeTab === 'BATTLE') {
-		const opps = determineWildPokemon(team, meadow);
+	if (activeTab === 'BATTLE' && currentOpponents) {
 		return (
 			<BattleLoader
-				opponents={opps}
+				opponents={currentOpponents}
 				team={team}
 				leave={leaveBattleReducer}
-				fightersPerSide={opps.length}
+				fightersPerSide={currentOpponents.length}
 				inventory={inventory}
 				ownedPokemonDexIds={saveFile.pokemon.map((p) => p.dexId)}
 			/>

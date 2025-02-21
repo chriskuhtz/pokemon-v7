@@ -3,8 +3,10 @@ import { MoveName } from '../constants/checkLists/movesCheckList';
 import { occupantsRecord } from '../constants/checkLists/occupantsRecord';
 import { QuestName, QuestsRecord } from '../constants/checkLists/questsRecord';
 import { localStorageId, testState } from '../constants/gameData';
+import { meadow } from '../constants/maps/meadow';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
+import { determineWildPokemon } from '../functions/determineWildPokemon';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { reduceBattlePokemonToOwnedPokemon } from '../functions/reduceBattlePokemonToOwnedPokemon';
@@ -196,21 +198,27 @@ export const useSaveFile = (
 		stepsTaken: number
 	) => {
 		console.log('navigate away');
-		applyStepsWalkedToTeamReducer(stepsTaken);
-		setActiveTabReducer(route);
-	};
-	const applyStepsWalkedToTeamReducer = (steps: number) => {
-		console.log('apply Steps walked');
-		setPokemonReducer(
-			saveFile.pokemon.map((p) => {
-				if (!p.onTeam) {
-					return p;
-				}
 
-				return applyHappinessFromWalking(p, steps);
-			})
+		setSaveFile(
+			{
+				...saveFile,
+				pokemon: saveFile.pokemon.map((p) => {
+					if (!p.onTeam) {
+						return p;
+					}
+
+					return applyHappinessFromWalking(p, stepsTaken);
+				}),
+				meta: {
+					activeTab: route,
+					currentOpponents:
+						route === 'BATTLE' ? determineWildPokemon(team, meadow) : undefined,
+				},
+			},
+			'navigateAwayFromOverworld'
 		);
 	};
+
 	const talkToNurseReducer = (id: number) => {
 		setSaveFile(
 			{
@@ -290,6 +298,7 @@ export const useSaveFile = (
 				meta: {
 					activeTab:
 						occ.type === 'TRAINER' ? 'BATTLE' : saveFile.meta.activeTab,
+					currentOpponents: occ.type === 'TRAINER' ? occ.team : undefined,
 				},
 				handledOccupants: [
 					...saveFile.handledOccupants,
@@ -410,7 +419,7 @@ export const useSaveFile = (
 				inventory: updatedInventory,
 				money: saveFile.money + scatteredCoins,
 				pokemon: updatedPokemon,
-				meta: { activeTab: 'OVERWORLD' },
+				meta: { activeTab: 'OVERWORLD', currentOpponents: undefined },
 			});
 		},
 		[putSaveFileReducer, reset, saveFile, team]
