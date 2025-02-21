@@ -122,10 +122,12 @@ export const handleAttack = ({
 	if (move.multiHits === 0) {
 		updatedAttacker = changeMovePP(updatedAttacker, move.name, -1);
 	}
+
 	//apply stat changes
 	if (selfTargeting) {
 		updatedAttacker = applyAttackStatChanges(updatedAttacker, move, addMessage);
 	}
+
 	//check for static
 	if (
 		target.ability === 'static' &&
@@ -157,20 +159,40 @@ export const handleAttack = ({
 	//TARGET
 
 	// apply damage
+	const damage = calculateDamage(
+		updatedAttacker,
+		target,
+		move,
+		battleWeather,
+		true,
+		isFlying,
+		addMessage
+	);
 	updatedTarget = {
 		...updatedTarget,
-		damage:
-			updatedTarget.damage +
-			calculateDamage(
-				updatedAttacker,
-				target,
-				move,
-				battleWeather,
-				true,
-				isFlying,
-				addMessage
-			),
+		damage: updatedTarget.damage + damage,
 	};
+
+	// check attacker  drain/recoil
+	const drain = move.data.meta.drain;
+	if (drain) {
+		const drained = Math.round((attacker.damage * drain) / 100);
+		updatedAttacker = {
+			...updatedAttacker,
+			damage: updatedAttacker.damage - drained,
+		};
+		if (drain > 0) {
+			addMessage(`${updatedAttacker.data.name} restored ${drained} HP`);
+		}
+		if (drain < 0) {
+			addMessage(
+				`${updatedAttacker.data.name} took ${drained} HP recoil damage`
+			);
+		}
+		if (isKO(updatedAttacker)) {
+			updatedAttacker = handleFainting(updatedAttacker, addMessage);
+		}
+	}
 	//check for fainting
 	if (isKO(updatedTarget)) {
 		updatedTarget = handleFainting(updatedTarget, addMessage);
