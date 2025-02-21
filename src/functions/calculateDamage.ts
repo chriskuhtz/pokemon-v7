@@ -1,4 +1,5 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
+import { fixedDamageMoves } from '../constants/fixedDamageMoves';
 import { flyDoubleDamageMoves, ohkoMoves } from '../constants/ohkoMoves';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -44,6 +45,9 @@ export const calculateDamage = (
 			return 0;
 		}
 		return target.stats.hp;
+	}
+	if (fixedDamageMoves[attack.name]) {
+		return fixedDamageMoves[attack.name];
 	}
 
 	if (target.ability === 'flash-fire' && attack.data.type.name === 'fire') {
