@@ -1,6 +1,7 @@
 import { AddToastFunction } from '../hooks/useToasts';
 import { PrimaryAilment } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { getMiddleOfThree } from './getMiddleOfThree';
 import { getTypeNames } from './getTypeNames';
 import { isKO } from './isKo';
 
@@ -64,12 +65,19 @@ export const applyPrimaryAilmentToPokemon = (
 		ailment === 'sleep' &&
 		!['vital-spirit', 'insomnia'].includes(pokemon.ability)
 	) {
+		const duration = getMiddleOfThree([1, Math.round(Math.random() * 5), 4]);
 		dispatchToast(
-			`${pokemon.data.name} was put to sleep ${
+			`${pokemon.data.name} was put to sleep for ${duration} turns ${
 				toastSuffix ? 'by ' + toastSuffix : ''
 			}`
 		);
-		return { ...pokemon, primaryAilment: { type: 'sleep' } };
+		return {
+			...pokemon,
+			primaryAilment: {
+				type: 'sleep',
+				duration,
+			},
+		};
 	}
 	if (
 		(ailment === 'poison' || ailment === 'toxic') &&
