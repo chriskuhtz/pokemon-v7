@@ -3,16 +3,11 @@ import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 
-export const applyStatusMove = (
+export const applyAttackStatChanges = (
 	pokemon: BattlePokemon,
 	attack: BattleAttack,
 	dispatchToast: AddToastFunction
 ): BattlePokemon => {
-	if (attack.data.damage_class.name !== 'status') {
-		console.warn('why did you enter applyStatusMove for move', attack);
-		return pokemon;
-	}
-
 	let updatedMon = { ...pokemon };
 
 	attack.data.stat_changes.forEach((s) => {

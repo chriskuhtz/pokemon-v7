@@ -2,7 +2,7 @@ import { contactMoves } from '../../../../../constants/contactMoves';
 import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/selfDestructingMoves';
 import { applyAttackAilmentsToPokemon } from '../../../../../functions/applyAttackAilmentsToPokemon';
 import { applyPrimaryAilmentToPokemon } from '../../../../../functions/applyPrimaryAilmentToPokemon';
-import { applyStatusMove } from '../../../../../functions/applyStatusMove';
+import { applyAttackStatChanges } from '../../../../../functions/applyStatusMove';
 import { calculateDamage } from '../../../../../functions/calculateDamage';
 import { changeBattlePokemonType } from '../../../../../functions/changeBattlePokemonType';
 import { changeMovePP } from '../../../../../functions/changeMovePP';
@@ -123,7 +123,7 @@ export const handleAttack = ({
 	}
 	//3. apply stat changes
 	if (selfTargeting) {
-		updatedAttacker = applyStatusMove(updatedAttacker, move, addMessage);
+		updatedAttacker = applyAttackStatChanges(updatedAttacker, move, addMessage);
 	}
 	//4. check for static
 	if (
@@ -139,7 +139,7 @@ export const handleAttack = ({
 		);
 	}
 
-	//1. apply damage
+	// apply damage
 	updatedTarget = {
 		...updatedTarget,
 		damage:
@@ -154,13 +154,16 @@ export const handleAttack = ({
 				addMessage
 			),
 	};
-	//2. apply ailments
-	updatedTarget = applyAttackAilmentsToPokemon(updatedTarget, move, addMessage);
-	//3. check for fainting
+	//check for fainting
 	if (isKO(updatedTarget)) {
 		updatedTarget = handleFainting(updatedTarget, addMessage);
 	}
-	//4. check for flinch
+	//apply ailments
+	updatedTarget = applyAttackAilmentsToPokemon(updatedTarget, move, addMessage);
+	// apply stat changes
+	updatedTarget = applyAttackStatChanges(updatedTarget, move, addMessage);
+
+	//check for flinch
 	if (!isKO(updatedTarget)) {
 		updatedTarget = handleFlinching(
 			updatedAttacker,
@@ -169,7 +172,7 @@ export const handleAttack = ({
 			addMessage
 		);
 	}
-	//5. check flash fire
+	//check flash fire
 	if (
 		!isKO(updatedTarget) &&
 		target.ability === 'flash-fire' &&
@@ -178,7 +181,7 @@ export const handleAttack = ({
 		addMessage(`${target.data.name} raised its power with ${target.ability}`);
 		updatedTarget.flashFired = true;
 	}
-	//6. check color change
+	//check color change
 	if (
 		!isKO(updatedTarget) &&
 		updatedTarget.damage > target.damage &&

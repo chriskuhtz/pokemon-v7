@@ -33,6 +33,7 @@ export const reduceBattlePokemonToOwnedPokemon = (
 		stepsWalked: newMon.stepsWalked,
 		heldItemName: newMon.heldItemName,
 		maxHp: newMon.stats.hp,
+		effortValues: newMon.effortValues,
 	};
 
 	if (heal) {
