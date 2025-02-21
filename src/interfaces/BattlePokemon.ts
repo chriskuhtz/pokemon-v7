@@ -3,7 +3,6 @@ import { BattleAction } from './BattleActions';
 import { MoveDto } from './Move';
 import { OwnedPokemon, OwnedPokemonMove } from './OwnedPokemon';
 import { PokemonData } from './PokemonData';
-import { PokemonType } from './PokemonType';
 import { StatObject } from './StatObject';
 
 export interface BattleMove extends OwnedPokemonMove {
@@ -19,8 +18,6 @@ export interface BattlePokemon extends OwnedPokemon {
 	statBoosts: StatObject;
 	capture_rate: number;
 	secondaryAilments: SecondaryAilment[];
-	flashFired?: boolean;
-	colorChangedType?: PokemonType;
 	moveQueue: BattleAction[];
 	status:
 		| 'ONFIELD'

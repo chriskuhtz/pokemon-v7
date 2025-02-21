@@ -6,6 +6,7 @@ import {
 	HPHealTable,
 	isEvBoostItem,
 	isPPBoostItem,
+	isXItem,
 	ItemType,
 } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
@@ -193,6 +194,9 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	}
 	if (isPPBoostItem(item) && move) {
 		return applyPPMoveBooster(pokemon, move, item);
+	}
+	if (isXItem(item) && isBattlePokemon(pokemon)) {
+		return pokemon;
 	}
 
 	return pokemon;
