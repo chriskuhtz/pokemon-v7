@@ -33,7 +33,7 @@ export const testState: SaveFile = {
 	sprite: '',
 	badges: [],
 	quests: { 'catch a pikachu': 'ACTIVE' },
-	inventory: generateInventory({ 'pp-up': 3, 'pp-max': 4 }),
+	inventory: generateInventory({ 'pp-up': 3, 'pp-max': 4, 'x-attack': 7 }),
 	playerId: '',
 	money: 5000,
 	pokemon: [],
