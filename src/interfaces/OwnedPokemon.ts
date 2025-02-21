@@ -3,6 +3,7 @@ import { MoveName } from '../constants/checkLists/movesCheckList';
 import { PrimaryAilment } from './Ailment';
 import { ItemType, PokeballType } from './Item';
 import { Nature } from './Natures';
+import { StatObject } from './StatObject';
 
 export interface OwnedPokemonMove {
 	name: MoveName;
@@ -29,7 +30,7 @@ export interface OwnedPokemon {
 	stepsWalked: number;
 	heldItemName?: ItemType;
 	maxHp: number;
-	//effortValues: StatObject;
+	effortValues: StatObject;
 	//intrinsicValues: StatObject;
 	//ppBoostedMoves: PPBoostedMove[];
 }
