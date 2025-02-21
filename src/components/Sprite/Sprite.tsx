@@ -24,6 +24,13 @@ export const Sprite = ({
 
 	return (
 		<canvas
+			role="button"
+			tabIndex={0}
+			onKeyDown={(e) => {
+				if (e.key === 'Enter') {
+					onClick();
+				}
+			}}
 			width={baseSize}
 			height={baseSize}
 			onClick={onClick}
