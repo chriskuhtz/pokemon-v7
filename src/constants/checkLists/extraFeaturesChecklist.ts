@@ -189,4 +189,6 @@ export const extraFeatureCheckList: {
 	{
 		name: 'separate name selection and starter selection',
 	},
+	{ name: 'map portals' },
+	{ name: 'display level when applying rare candy from bag' },
 ];

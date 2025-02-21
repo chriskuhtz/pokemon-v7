@@ -113,6 +113,6 @@ export const occupantsRecord: Record<number, Occupant> = {
 			'i made them myself',
 		],
 		sprite: '077',
-		gifts: { 'lava-cookie': 5 },
+		gifts: { 'rare-candy': 10 },
 	},
 };
