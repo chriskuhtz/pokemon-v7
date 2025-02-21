@@ -262,7 +262,7 @@ export const useSaveFile = (
 		let newInventory = { ...saveFile.inventory };
 		if (occ.type === 'NPC' && occ.gifts) {
 			Object.entries(occ.gifts).forEach(([item, amount]) => {
-				addToast(`received ${amount} ${item}`);
+				addToast(`received ${amount} ${item}`, 'SUCCESS');
 			});
 
 			newInventory = joinInventories(newInventory, occ.gifts);
@@ -273,11 +273,21 @@ export const useSaveFile = (
 
 			newInventory = joinInventories(newInventory, { [item]: amount });
 		}
+		const updatedQuests = saveFile.quests;
+		if (occ.type === 'NPC' && occ.quest) {
+			const { quest } = occ;
+			addToast(`new quest: ${quest}`);
+
+			if (updatedQuests[quest] === 'INACTIVE') {
+				updatedQuests[quest] = 'ACTIVE';
+			}
+		}
 
 		setSaveFile(
 			{
 				...saveFile,
 				inventory: newInventory,
+				quests: updatedQuests,
 				handledOccupants: [
 					...saveFile.handledOccupants,
 					{ id, resetAt: timer },

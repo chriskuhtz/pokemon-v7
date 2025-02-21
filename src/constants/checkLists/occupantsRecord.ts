@@ -6,18 +6,18 @@ export const occupantsRecord: Record<number, Occupant> = {
 	//items start at 0
 	0: {
 		type: 'ITEM',
-		item: 'master-ball',
+		item: 'poke-ball',
 		x: 4,
 		y: 0,
-		amount: 3,
+		amount: 1,
 		map: 'meadow',
 	},
 	1: {
 		type: 'ITEM',
-		item: 'master-ball',
+		item: 'potion',
 		x: 9,
 		y: 1,
-		amount: 7,
+		amount: 2,
 		map: 'meadow',
 	},
 	2: {
@@ -84,8 +84,15 @@ export const occupantsRecord: Record<number, Occupant> = {
 		y: 4,
 		map: 'meadow',
 		orientation: 'LEFT',
-		unhandledDialogue: ['did you know', 'some pokemon only appear at night'],
+		unhandledDialogue: [
+			'did you know?',
+			'some pokemon only appear at night!',
+			'These might help you',
+		],
+		handledDialogue: ['did you find one?'],
 		sprite: '040',
+		gifts: { 'dusk-ball': 5 },
+		quest: 'Catch a nocturnal pokemon from the meadow',
 		movememt: { path: ['RIGHT', 'LEFT'], currentStep: 0 },
 	},
 	600003: {

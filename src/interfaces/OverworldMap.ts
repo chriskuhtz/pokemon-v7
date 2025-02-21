@@ -7,6 +7,7 @@
  * 2 = blocked field
  */
 
+import { QuestName } from '../constants/checkLists/questsRecord';
 import { TimeOfDay } from '../functions/getTimeOfDay';
 import { Inventory } from './Inventory';
 import { ItemType } from './Item';
@@ -66,6 +67,7 @@ export interface OverworldNpc {
 	sprite: string;
 	movememt?: { path: CharacterOrientation[]; currentStep: number };
 	gifts?: Partial<Inventory>;
+	quest?: QuestName;
 }
 export interface OverworldBush {
 	type: 'BUSH';
