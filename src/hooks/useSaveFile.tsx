@@ -12,10 +12,10 @@ import { Inventory, joinInventories } from '../interfaces/Inventory';
 import { ItemType } from '../interfaces/Item';
 import { OverworldItem } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
-import { QuestName, QuestsRecord } from '../interfaces/Quest';
 import { RoutesType } from '../interfaces/Routing';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
 import { AddToastFunction } from './useToasts';
+import { QuestName, QuestsRecord } from '../constants/checkLists/questsRecord';
 
 export const getHatchTimeModifier = (team: OwnedPokemon[]): number => {
 	return team.some((t) => t.ability === 'magma-armor') ? 2 : 1;

@@ -1,10 +1,13 @@
 import React from 'react';
 import { FaPlus } from 'react-icons/fa';
 import { MdCatchingPokemon } from 'react-icons/md';
+import {
+	QuestName,
+	QuestsRecord,
+} from '../../constants/checkLists/questsRecord';
 import { baseSize } from '../../constants/gameData';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { ItemType } from '../../interfaces/Item';
-import { QuestName, QuestsRecord } from '../../interfaces/Quest';
 import { SaveFile } from '../../interfaces/SaveFile';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';

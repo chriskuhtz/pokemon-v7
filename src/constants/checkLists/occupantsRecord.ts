@@ -1,6 +1,6 @@
-import { Occupant } from '../interfaces/OverworldMap';
-import { SpriteEnum } from '../interfaces/SpriteEnum';
-import { STANDARD_BUY_MARKET } from './standardBuyMarket';
+import { Occupant } from '../../interfaces/OverworldMap';
+import { SpriteEnum } from '../../interfaces/SpriteEnum';
+import { STANDARD_BUY_MARKET } from '../standardBuyMarket';
 
 export const occupantsRecord: Record<number, Occupant> = {
 	//items start at 0
