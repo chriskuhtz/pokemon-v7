@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { battleSpriteSize } from '../../constants/gameData';
 import { typeColors } from '../../constants/typeColors';
+import { getItemUrl } from '../../functions/getItemUrl';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getRandomPokemonId } from '../../functions/getRandomPokemonId';
 import { useMessageQueue } from '../../hooks/useMessageQueue';
@@ -49,7 +50,7 @@ export const StarterSelection = ({
 					<input value={name} onChange={(e) => setName(e.target.value)} />
 				</Stack>
 				<h3 style={{ margin: 0 }}>Which starter will you choose:</h3>
-				<Stack mode="row" justifyContent="center">
+				<Stack mode="row" justifyContent="center" alignItems="center">
 					{options.map((o) => (
 						<img
 							role="button"
@@ -57,9 +58,7 @@ export const StarterSelection = ({
 							key={o}
 							onKeyDown={(e) => {
 								if (e.key === 'Enter') {
-									if (!name) {
-										setChosenStarter(o);
-									} else finishForm(name, o);
+									setChosenStarter(o);
 								}
 							}}
 							style={{
@@ -69,9 +68,13 @@ export const StarterSelection = ({
 										? `2px solid ${typeColors['dark']}`
 										: undefined,
 							}}
-							height={battleSpriteSize}
-							width={battleSpriteSize}
-							src={getPokemonSprite(o)}
+							height={battleSpriteSize / (o === chosenStarter ? 1 : 2)}
+							width={battleSpriteSize / (o === chosenStarter ? 1 : 2)}
+							src={
+								o === chosenStarter
+									? getPokemonSprite(o)
+									: getItemUrl('poke-ball')
+							}
 							onClick={() => setChosenStarter(o)}
 						/>
 					))}

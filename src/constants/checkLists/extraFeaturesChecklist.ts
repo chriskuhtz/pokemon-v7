@@ -63,7 +63,10 @@ export const extraFeatureCheckList: {
 	{ name: 'setting: fainted pokemon are removed', handled: true },
 	{ name: 'inventory and market filters', handled: true },
 	{ name: 'nicer loading screen', handled: true },
-	{ name: 'only show three pokeballs that open onClick for starter selection' },
+	{
+		name: 'only show three pokeballs that open onClick for starter selection',
+		handled: true,
+	},
 	{ name: 'play pokecenter sound on visit' },
 	{ name: 'fix toast and Banner position' },
 	{ name: 'Opponents can use items' },
@@ -180,5 +183,8 @@ export const extraFeatureCheckList: {
 	{ name: 'put caught pokemon on team if space' },
 	{
 		name: 'create toggle component instead of always black/white check on button',
+	},
+	{
+		name: 'separate name selection and starter selection',
 	},
 ];
