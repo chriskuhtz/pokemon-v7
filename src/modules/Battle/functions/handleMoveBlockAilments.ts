@@ -1,6 +1,11 @@
-import { PARA_CHANCE, UNFREEZE_CHANCE } from '../../../interfaces/Ailment';
+import {
+	CONFUSION_HURT_CHANCE,
+	PARA_CHANCE,
+	UNFREEZE_CHANCE,
+} from '../../../interfaces/Ailment';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { handleAsleep } from './handleAsleep';
+import { handleConfused } from './handleConfused';
 import { handleFrozen } from './handleFrozen';
 import { handleParalyzed } from './handleParalyzed';
 
@@ -41,6 +46,23 @@ export const handleMoveBlockAilments = ({
 	) {
 		updatedAttacker = handleParalyzed(attacker, addMessage);
 		return { canAttack: false, updatedAttacker };
+	}
+
+	const confusionAilment = updatedAttacker.secondaryAilments.find(
+		(a) => a.type === 'confusion'
+	);
+	if (confusionAilment) {
+		const snappedOut = confusionAilment && confusionAilment.duration === 0;
+		const hitHimself = Math.random() <= CONFUSION_HURT_CHANCE;
+		addMessage(`${attacker.data.name} is confused`);
+		if (snappedOut) {
+			addMessage(`${attacker.data.name} snapped out of confusion`);
+			updatedAttacker.secondaryAilments =
+				updatedAttacker.secondaryAilments.filter((a) => a.type !== 'confusion');
+		} else {
+			updatedAttacker = handleConfused(attacker, addMessage, hitHimself);
+			return { canAttack: !hitHimself, updatedAttacker };
+		}
 	}
 	return { canAttack: true, updatedAttacker };
 };

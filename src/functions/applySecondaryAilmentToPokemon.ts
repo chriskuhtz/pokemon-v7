@@ -2,6 +2,7 @@ import { AddToastFunction } from '../hooks/useToasts';
 import { SecondaryAilment } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { PokemonType } from '../interfaces/PokemonType';
+import { getMiddleOfThree } from './getMiddleOfThree';
 import { isKO } from './isKo';
 
 export const applySecondaryAilmentToPokemon = (
@@ -42,7 +43,7 @@ export const applySecondaryAilmentToPokemon = (
 	}
 	if (ailment === 'confusion') {
 		addMessage(`${pokemon.data.name} became confused`);
-		const duration = 2 + Math.round(Math.random() * 3);
+		const duration = getMiddleOfThree([1, Math.round(Math.random() * 5), 5]);
 		return {
 			...pokemon,
 			secondaryAilments: [
