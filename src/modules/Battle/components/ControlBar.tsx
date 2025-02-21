@@ -24,7 +24,15 @@ export function ControlBar({
 	const [chosenAction, setChosenAction] = useState<ActionType | undefined>();
 
 	const filteredTargets = useMemo(
-		() => filterTargets(targets, chosenAction, controlled),
+		() =>
+			controlled && chosenAction
+				? filterTargets({
+						targets,
+						user: controlled,
+						chosenAction,
+						onlyOpponents: false,
+				  })
+				: [],
 		[chosenAction, controlled, targets]
 	);
 
@@ -36,10 +44,12 @@ export function ControlBar({
 
 			const moves = getMovesArray(controlled);
 			const actionName = moves[Math.floor(Math.random() * moves.length)].name;
-			const filtered = filterTargets(targets, actionName, controlled).filter(
-				//first pokemon that is on the other side
-				(p) => p.ownerId !== controlled.ownerId
-			);
+			const filtered = filterTargets({
+				targets,
+				user: controlled,
+				chosenAction: actionName,
+				onlyOpponents: true,
+			});
 			const targetId = filtered[Math.floor(Math.random() * filtered.length)].id;
 
 			chooseAction({
