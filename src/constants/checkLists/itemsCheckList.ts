@@ -275,10 +275,12 @@ export const itemsCheckList: {
 	{
 		name: 'poke-doll',
 		url: 'https://pokeapi.co/api/v2/item/63/',
+		handled: true,
 	},
 	{
 		name: 'fluffy-tail',
 		url: 'https://pokeapi.co/api/v2/item/64/',
+		handled: true,
 	},
 	{
 		name: 'blue-flute',
