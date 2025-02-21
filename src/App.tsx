@@ -49,6 +49,7 @@ export const App = ({
 		putSaveFileReducer,
 		changeHeldItemReducer,
 		useSacredAshReducer,
+		reset,
 	} = useSaveFile(testState, addToast);
 
 	const {
@@ -158,6 +159,7 @@ export const App = ({
 				badges={badges}
 				spriteUrl={`/npcs/${saveFile.sprite}.png`}
 				name={playerId}
+				reset={reset}
 			/>
 		);
 	}

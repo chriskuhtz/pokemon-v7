@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { MoveName } from '../constants/checkLists/movesCheckList';
-import { localStorageId } from '../constants/gameData';
+import { localStorageId, testState } from '../constants/gameData';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
@@ -55,6 +55,7 @@ export const useSaveFile = (
 	fulfillQuestReducer: (q: QuestName) => void;
 	changeHeldItemReducer: (pokemonId: string, newItem?: ItemType) => void;
 	useSacredAshReducer: () => void;
+	reset: () => void;
 } => {
 	const local = window.localStorage.getItem(localStorageId);
 	const loaded = local ? (JSON.parse(local) as SaveFile) : init;
@@ -327,6 +328,9 @@ export const useSaveFile = (
 			inventory: updatedInventory,
 		});
 	};
+	const reset = () => {
+		setSaveFile(testState, 'reset');
+	};
 
 	//SYNC WITH LOCAL STORAGE
 	useEffect(() => {
@@ -357,6 +361,7 @@ export const useSaveFile = (
 	}, [saveFile, setActiveTabReducer]);
 
 	return {
+		reset,
 		saveFile,
 		discardItemReducer,
 		addItemReducer,

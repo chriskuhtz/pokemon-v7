@@ -1,4 +1,3 @@
-import { v4 } from 'uuid';
 import { generateInventory } from '../interfaces/Inventory';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { SaveFile } from '../interfaces/SaveFile';
@@ -31,29 +30,12 @@ export const testPokemon: OwnedPokemon = {
 };
 export const testState: SaveFile = {
 	sprite: '',
-	badges: ['boulder-badge'],
+	badges: [],
 	quests: { 'catch a pikachu': 'ACTIVE' },
-	inventory: generateInventory({
-		'master-ball': 10,
-		'ultra-ball': 20,
-		'safari-ball': 10,
-		'poke-ball': 10,
-		'great-ball': 10,
-		potion: 10,
-		antidote: 10,
-		revive: 10,
-		elixir: 5,
-		ether: 5,
-		'sacred-ash': 5,
-		'hp-up': 4,
-		calcium: 3,
-	}),
+	inventory: generateInventory({}),
 	playerId: '',
 	money: 5000,
-	pokemon: [
-		{ ...testPokemon, dexId: 87, id: v4() },
-		{ ...testPokemon, dexId: 153, id: v4() },
-	],
+	pokemon: [],
 	meta: {
 		activeTab: 'MAIN',
 	},
