@@ -35,6 +35,8 @@ export function EnemyLane({
 					backgroundImage: "url('/battlePlatforms/grass.png')",
 					backgroundSize: '100% 100%',
 					backgroundRepeat: 'no-repeat',
+					minWidth: '300px',
+					justifyContent: 'center',
 				}}
 			>
 				{onFieldOpponents.map((t) => {
