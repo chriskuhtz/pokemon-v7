@@ -164,6 +164,7 @@ export const movesCheckList: {
 	{
 		name: 'thrash',
 		url: 'https://pokeapi.co/api/v2/move/37/',
+		handled: true,
 	},
 	{
 		name: 'double-edge',
@@ -190,11 +191,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/42/',
 		handled: true,
 	},
-	{ name: 'leer', url: 'https://pokeapi.co/api/v2/move/43/' },
-	{ name: 'bite', url: 'https://pokeapi.co/api/v2/move/44/' },
-	{ name: 'growl', url: 'https://pokeapi.co/api/v2/move/45/' },
+	{ name: 'leer', url: 'https://pokeapi.co/api/v2/move/43/', handled: true },
+	{ name: 'bite', url: 'https://pokeapi.co/api/v2/move/44/', handled: true },
+	{ name: 'growl', url: 'https://pokeapi.co/api/v2/move/45/', handled: true },
 	{ name: 'roar', url: 'https://pokeapi.co/api/v2/move/46/', handled: true },
-	{ name: 'sing', url: 'https://pokeapi.co/api/v2/move/47/' },
+	{ name: 'sing', url: 'https://pokeapi.co/api/v2/move/47/', handled: true },
 	{
 		name: 'supersonic',
 		url: 'https://pokeapi.co/api/v2/move/48/',
@@ -298,6 +299,7 @@ export const movesCheckList: {
 	{
 		name: 'petal-dance',
 		url: 'https://pokeapi.co/api/v2/move/80/',
+		handled: true,
 	},
 
 	{ name: 'string-shot', url: 'https://pokeapi.co/api/v2/move/81/' },
@@ -370,7 +372,7 @@ export const movesCheckList: {
 	{ name: 'transform', url: 'https://pokeapi.co/api/v2/move/144/' },
 	{ name: 'bubble', url: 'https://pokeapi.co/api/v2/move/145/' },
 	{ name: 'dizzy-punch', url: 'https://pokeapi.co/api/v2/move/146/' },
-	{ name: 'spore', url: 'https://pokeapi.co/api/v2/move/147/' },
+	{ name: 'spore', url: 'https://pokeapi.co/api/v2/move/147/', handled: true },
 	{ name: 'flash', url: 'https://pokeapi.co/api/v2/move/148/' },
 	{ name: 'psywave', url: 'https://pokeapi.co/api/v2/move/149/' },
 	{ name: 'splash', url: 'https://pokeapi.co/api/v2/move/150/' },
@@ -426,6 +428,7 @@ export const movesCheckList: {
 	{
 		name: 'outrage',
 		url: 'https://pokeapi.co/api/v2/move/200/',
+		handled: true,
 	},
 	{ name: 'sandstorm', url: 'https://pokeapi.co/api/v2/move/201/' },
 	{ name: 'giga-drain', url: 'https://pokeapi.co/api/v2/move/202/' },
@@ -1345,6 +1348,8 @@ export const handledMoves = [
 	'leer',
 	'bite',
 	'growl',
+	'sing',
+	'spore',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

@@ -1,15 +1,21 @@
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
-export const handleFrozen = (
+export const handleAsleep = (
 	attacker: BattlePokemon,
 	addMessage: (x: string) => void
 ) => {
-	addMessage(`${attacker.data.name} is fully frozen `);
+	addMessage(`${attacker.data.name} is deeply asleep `);
 
 	//UPDATES
 
 	//updated Attacker
-	let updatedAttacker = { ...attacker };
+	let updatedAttacker: BattlePokemon = {
+		...attacker,
+		primaryAilment: {
+			type: 'sleep',
+			duration: (attacker.primaryAilment?.duration ?? 1) - 1,
+		},
+	};
 	//1. update moveQueue
 	updatedAttacker = { ...updatedAttacker, moveQueue: [] };
 	//Dont reduce pp, didnt attack

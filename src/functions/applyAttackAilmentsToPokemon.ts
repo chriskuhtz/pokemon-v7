@@ -23,8 +23,12 @@ export const applyAttackAilmentsToPokemon = (
 	}
 	const random = Math.random() * 100;
 	const ailment = attack.data.meta.ailment.name;
+	const chance =
+		attack.data.damage_class.name === 'status'
+			? 100
+			: attack.data.meta.ailment_chance;
 
-	if (random < attack.data.meta.ailment_chance) {
+	if (random < chance) {
 		if (isPrimaryAilment({ type: ailment })) {
 			return applyPrimaryAilmentToPokemon(
 				pokemon,

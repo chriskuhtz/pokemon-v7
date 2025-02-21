@@ -38,10 +38,6 @@ export function ControlBar({
 
 	useEffect(() => {
 		if (controlled?.ownerId === OPPO_ID) {
-			console.log(
-				"opps choose their own moves and real g's move in silence like lasagna"
-			);
-
 			const moves = getMovesArray(controlled);
 			const actionName = moves[Math.floor(Math.random() * moves.length)].name;
 			const filtered = filterTargets({
