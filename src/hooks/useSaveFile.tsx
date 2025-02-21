@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { MoveName } from '../constants/checkLists/movesCheckList';
+import { QuestName, QuestsRecord } from '../constants/checkLists/questsRecord';
 import { localStorageId, testState } from '../constants/gameData';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
@@ -15,16 +16,12 @@ import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { RoutesType } from '../interfaces/Routing';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
 import { AddToastFunction } from './useToasts';
-import { QuestName, QuestsRecord } from '../constants/checkLists/questsRecord';
 
 export const getHatchTimeModifier = (team: OwnedPokemon[]): number => {
 	return team.some((t) => t.ability === 'magma-armor') ? 2 : 1;
 };
 
-export const useSaveFile = (
-	init: SaveFile,
-	addToast: AddToastFunction
-): {
+export interface UseSaveFile {
 	saveFile: SaveFile;
 	discardItemReducer: (item: ItemType, number: number) => void;
 	addItemReducer: (item: ItemType, number: number) => void;
@@ -64,7 +61,12 @@ export const useSaveFile = (
 		scatteredCoins: number,
 		team: BattlePokemon[]
 	) => void;
-} => {
+}
+
+export const useSaveFile = (
+	init: SaveFile,
+	addToast: AddToastFunction
+): UseSaveFile => {
 	const local = window.localStorage.getItem(localStorageId);
 	const loaded = local ? (JSON.parse(local) as SaveFile) : init;
 

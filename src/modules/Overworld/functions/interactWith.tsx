@@ -1,6 +1,7 @@
 import { getOppositeDirection } from '../../../functions/getOppositeDirection';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { Inventory } from '../../../interfaces/Inventory';
+import { ItemType } from '../../../interfaces/Item';
 import { Occupant, OverworldItem } from '../../../interfaces/OverworldMap';
 import { CharacterLocationData } from '../../../interfaces/SaveFile';
 import { Dialogue } from '../Overworld';
@@ -17,6 +18,7 @@ export const interactWithFunction = ({
 	playerLocation,
 	goToMarket,
 	talkToNurse,
+	receiveItems,
 }: {
 	occ: [string, Occupant] | undefined;
 	addDialogue: (x: Dialogue) => void;
@@ -32,6 +34,7 @@ export const interactWithFunction = ({
 	playerLocation: CharacterLocationData;
 	goToMarket: (marketInventory: Partial<Inventory>, stepsTaken: number) => void;
 	talkToNurse: (id: number) => void;
+	receiveItems: (item: ItemType, amount: number) => void;
 }) => {
 	if (!occ) {
 		return;
@@ -109,6 +112,14 @@ export const interactWithFunction = ({
 				message: d,
 			})
 		);
+		if (data.gifts) {
+			Object.entries(data.gifts).forEach(([item, amount]) => {
+				addDialogue({
+					message: `received ${amount} ${item}`,
+					onRemoval: () => receiveItems(item as ItemType, amount),
+				});
+			});
+		}
 		return;
 	}
 

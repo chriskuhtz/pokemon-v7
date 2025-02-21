@@ -67,6 +67,8 @@ export const extraFeatureCheckList: {
 		name: 'only show three pokeballs that open onClick for starter selection',
 		handled: true,
 	},
+	{ name: 'handled npcs list' },
+	{ name: 'trainers' },
 	{ name: 'play pokecenter sound on visit' },
 	{ name: 'fix toast and Banner position' },
 	{ name: 'Opponents can use items' },
