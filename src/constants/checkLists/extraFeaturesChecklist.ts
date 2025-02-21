@@ -61,9 +61,7 @@ export const extraFeatureCheckList: {
 
 	{ name: 'reset button', handled: true },
 	{ name: 'setting: fainted pokemon are removed', handled: true },
-	{ name: 'setting `reset on battle lost`' },
 	{ name: 'inventory and market filters' },
-	{ name: "put randomized starters into localstorage to 'prevent' reloading" },
 	{ name: 'only show three pokeballs that open onClick for starter selection' },
 	{ name: 'play pokecenter sound on visit' },
 	{ name: 'fix toast and Banner position' },
@@ -178,4 +176,5 @@ export const extraFeatureCheckList: {
 	{ name: 'check if pokemon can actually cut' },
 	{ name: 'gain xp from battle' },
 	{ name: 'chosen settings overview' },
+	{ name: 'put caught pokemon on team if space' },
 ];
