@@ -20,7 +20,7 @@ export const meadow: OverworldMap = {
 	],
 	occupants: [
 		0, 1, 2, 100001, 200001, 300001, 400001, 500001, 600001, 600002, 600003,
-		600004,
+		600004, 600005,
 	],
 	possibleEncounters: {
 		MORNING: [
