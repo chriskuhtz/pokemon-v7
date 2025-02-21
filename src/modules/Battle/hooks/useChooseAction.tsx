@@ -116,7 +116,7 @@ export const useChooseAction = (
 										name: actionName as MoveName,
 										round: battleRound + 1,
 										targetId,
-										multiHits: determineMultiHits(move.data),
+										multiHits: 0,
 									},
 								],
 							};
@@ -139,7 +139,7 @@ export const useChooseAction = (
 										name: actionName as MoveName,
 										round: battleRound,
 										targetId,
-										multiHits: determineMultiHits(move.data),
+										multiHits: 0,
 									},
 									{
 										type: 'BattleAttack',
@@ -147,7 +147,7 @@ export const useChooseAction = (
 										name: actionName as MoveName,
 										round: battleRound + 1,
 										targetId,
-										multiHits: determineMultiHits(move.data),
+										multiHits: 0,
 									},
 									Math.random() > 0.5
 										? {
@@ -156,7 +156,7 @@ export const useChooseAction = (
 												name: actionName as MoveName,
 												round: battleRound + 2,
 												targetId,
-												multiHits: determineMultiHits(move.data),
+												multiHits: 0,
 										  }
 										: undefined,
 								].filter((m) => m !== undefined) as BattleAction[],
@@ -171,6 +171,8 @@ export const useChooseAction = (
 			setPokemon((pokemon) =>
 				pokemon.map((p) => {
 					if (p.id === user.id) {
+						const m = determineMultiHits(move.data);
+
 						return {
 							...user,
 							moveQueue: [
@@ -180,7 +182,7 @@ export const useChooseAction = (
 									name: actionName as MoveName,
 									round: battleRound,
 									targetId,
-									multiHits: determineMultiHits(move.data),
+									multiHits: m,
 								},
 							],
 						};

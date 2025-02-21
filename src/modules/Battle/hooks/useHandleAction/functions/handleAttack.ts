@@ -134,7 +134,7 @@ export const handleAttack = ({
 		);
 	}
 	//update moveQueue
-	if (move.multiHits > 0) {
+	if (move.multiHits > 1) {
 		addMessage('Multi hit!');
 		updatedAttacker = {
 			...updatedAttacker,
