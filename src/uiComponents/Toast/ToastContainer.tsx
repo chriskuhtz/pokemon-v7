@@ -1,9 +1,10 @@
 import { App } from '../../App';
+import { animationTimer } from '../../constants/gameData';
 import { useToasts } from '../../hooks/useToasts';
 import { Toast } from './Toast';
 
 export const ToastContainer = () => {
-	const { latestToast, addToast } = useToasts();
+	const { latestToast, addToast } = useToasts(animationTimer * 4);
 	return (
 		<>
 			{latestToast && <Toast toast={latestToast} />}
