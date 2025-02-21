@@ -1,3 +1,4 @@
+import { MoveName } from '../constants/checkLists/movesCheckList';
 import { PokemonType } from './PokemonType';
 
 export interface PrimaryAilment {
@@ -18,6 +19,7 @@ const secondaryAilments = [
 	'color-changed',
 	'guard-spec',
 	'dire-hit',
+	'disable',
 ] as const;
 
 export type SecondaryAilmentType = (typeof secondaryAilments)[number];
@@ -25,6 +27,7 @@ export interface SecondaryAilment {
 	type: SecondaryAilmentType;
 	duration: number;
 	newType?: PokemonType;
+	move?: MoveName;
 }
 
 export function isSecondaryAilment(x: { type: string }): x is SecondaryAilment {

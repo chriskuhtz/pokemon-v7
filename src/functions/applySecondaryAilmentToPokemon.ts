@@ -1,3 +1,4 @@
+import { MoveName } from '../constants/checkLists/movesCheckList';
 import { AddToastFunction } from '../hooks/useToasts';
 import { SecondaryAilment } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -9,7 +10,8 @@ export const applySecondaryAilmentToPokemon = (
 	pokemon: BattlePokemon,
 	ailment: SecondaryAilment['type'],
 	addMessage: AddToastFunction,
-	newType?: PokemonType
+	newType?: PokemonType,
+	move?: MoveName
 ): BattlePokemon => {
 	if (isKO(pokemon)) {
 		//already knocked out, no need to add ailments
@@ -96,6 +98,24 @@ export const applySecondaryAilmentToPokemon = (
 				{ type: 'guard-spec', duration: 9000 },
 			],
 		};
+	}
+	if (ailment === 'disable') {
+		if (!move) {
+			throw new Error('disabled has to be applied with move');
+		} else {
+			addMessage(`${pokemon.data.name}'s ${move} was disabled`);
+			return {
+				...pokemon,
+				secondaryAilments: [
+					...pokemon.secondaryAilments,
+					{
+						type: 'disable',
+						duration: getMiddleOfThree([4, Math.floor(Math.random() * 7), 7]),
+						move,
+					},
+				],
+			};
+		}
 	}
 	return pokemon;
 };

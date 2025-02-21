@@ -113,6 +113,7 @@ export const useHandleAction = (
 			if (move.type === 'ChargeUp') {
 				const { canAttack, updatedAttacker } = handleMoveBlockAilments({
 					attacker,
+					attack: move,
 					addMessage: (x: string) => addMessage({ message: x }),
 				});
 

@@ -8,6 +8,8 @@ import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { applyPrimaryAilmentToPokemon } from './applyPrimaryAilmentToPokemon';
 import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
+import { getRandomIndex } from './filterTargets';
+import { getMovesArray } from './getMovesArray';
 
 export const applyAttackAilmentsToPokemon = (
 	target: BattlePokemon,
@@ -37,6 +39,24 @@ export const applyAttackAilmentsToPokemon = (
 				ailment as PrimaryAilment['type'],
 				addMessage
 			);
+		}
+		if (ailment === 'disable') {
+			const moves = getMovesArray(target, false);
+			const randomMoveName = moves[getRandomIndex(moves.length)].name;
+			if (moves.length === 1) {
+				addMessage(`cant disable ${target.data.name}'s only move`);
+				return { updatedApplicator: applicator, updatedTarget: target };
+			}
+			return {
+				updatedTarget: applySecondaryAilmentToPokemon(
+					target,
+					ailment as SecondaryAilment['type'],
+					addMessage,
+					undefined,
+					randomMoveName
+				),
+				updatedApplicator: applicator,
+			};
 		}
 		if (isSecondaryAilment({ type: ailment })) {
 			return {

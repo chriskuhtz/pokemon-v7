@@ -53,7 +53,7 @@ export function ActionSelection({
 					gap: '1rem',
 				}}
 			>
-				{getMovesArray(controlled).map((m) => (
+				{getMovesArray(controlled, true).map((m) => (
 					<button key={m.name} onClick={() => setChosenAction(m.name)}>
 						{m.name}
 					</button>
