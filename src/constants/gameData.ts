@@ -12,7 +12,7 @@ export const testPokemon: OwnedPokemon = {
 	dexId: 217,
 	ownerId: 'test',
 	id: 'bingo',
-	ball: 'master-ball',
+	ball: 'poke-ball',
 	onTeam: true,
 	firstMove: { name: 'confuse-ray', usedPP: 15 },
 	secondMove: { name: 'fly', usedPP: 5 },

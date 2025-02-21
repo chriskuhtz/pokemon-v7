@@ -1,7 +1,8 @@
+import { QuestName } from '../constants/checkLists/questsRecord';
 import { BadgeName } from './Badge';
 import { Inventory } from './Inventory';
 import { OwnedPokemon } from './OwnedPokemon';
-import { QuestName, QuestStatus } from './Quest';
+import { QuestStatus } from './Quest';
 import { RoutesType } from './Routing';
 
 export type CharacterOrientation = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
