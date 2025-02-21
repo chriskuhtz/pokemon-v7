@@ -1,7 +1,7 @@
 import { OverworldMap } from '../../interfaces/OverworldMap';
 
-export const testMap: OverworldMap = {
-	id: 'testMap',
+export const meadow: OverworldMap = {
+	id: 'meadow',
 	backgroundTile: { x: 103, y: 1 },
 	encounterTile: { x: 120, y: 1 },
 	width: 20,

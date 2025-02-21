@@ -33,8 +33,9 @@ export const testState: SaveFile = {
 	sprite: '',
 	badges: [],
 	quests: {
-		'catch a pikachu': 'ACTIVE',
-		'Train a Pokemon to lvl 10': 'ACTIVE',
+		'catch a pikachu': 'INACTIVE',
+		'Train a Pokemon to lvl 10': 'INACTIVE',
+		'Catch a nocturnal pokemon from the meadow': 'INACTIVE',
 	},
 	inventory: generateInventory({ 'pp-up': 3, 'pp-max': 4, 'x-attack': 7 }),
 	playerId: '',
@@ -44,7 +45,7 @@ export const testState: SaveFile = {
 		activeTab: 'MAIN',
 	},
 	location: {
-		mapId: 'testMap',
+		mapId: 'meadow',
 		orientation: 'RIGHT',
 		forwardFoot: 'CENTER1',
 		x: 0,

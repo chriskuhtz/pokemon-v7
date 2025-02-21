@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 import { testPokemon, testState } from './constants/gameData';
-import { testMap } from './constants/maps/testmap';
+import { meadow } from './constants/maps/meadow';
 import { STANDARD_BUY_MARKET } from './constants/standardBuyMarket';
 import { determineWildPokemon } from './functions/determineWildPokemon';
 import { useSaveFile } from './hooks/useSaveFile';
@@ -68,7 +68,7 @@ export const App = ({
 	const firstTeamMember = team[0];
 
 	if (activeTab === 'BATTLE') {
-		const opps = determineWildPokemon(team, testMap);
+		const opps = determineWildPokemon(team, meadow);
 		return (
 			<BattleLoader
 				opponents={opps}
@@ -217,7 +217,7 @@ export const App = ({
 			openMenu={(steps) => navigateAwayFromOverworldReducer('MAIN', steps)}
 			setCharacterLocation={setCharacterLocationReducer}
 			playerLocation={location}
-			map={testMap}
+			map={meadow}
 			startEncounter={(steps) => {
 				navigateAwayFromOverworldReducer('BATTLE', steps);
 			}}
