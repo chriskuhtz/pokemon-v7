@@ -16,7 +16,8 @@ export type PokemonType =
 	| 'fighting'
 	| 'flying'
 	| 'poison'
-	| 'bug';
+	| 'bug'
+	| 'typeless';
 
 //key : MoveType, values: Target Types
 export const typeEffectivenessChart: Record<
@@ -130,6 +131,11 @@ export const typeEffectivenessChart: Record<
 	fairy: {
 		isSuperEffectiveAgainst: ['fighting', 'dragon', 'dark'],
 		isNotVeryEffectiveAgainst: ['steel', 'fire', 'poison'],
+		doesntEffect: [],
+	},
+	typeless: {
+		isSuperEffectiveAgainst: [],
+		isNotVeryEffectiveAgainst: [],
 		doesntEffect: [],
 	},
 };
