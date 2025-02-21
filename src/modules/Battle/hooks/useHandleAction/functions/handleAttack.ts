@@ -8,10 +8,8 @@ import { applySecondaryAilmentToPokemon } from '../../../../../functions/applySe
 import { calculateDamage } from '../../../../../functions/calculateDamage';
 import { changeMovePP } from '../../../../../functions/changeMovePP';
 import { determineMiss } from '../../../../../functions/determineMiss';
-import {
-	getRandomIndex,
-	getRandomTargetId,
-} from '../../../../../functions/filterTargets';
+import { getRandomIndex } from '../../../../../functions/filterTargets';
+import { getActualTargetId } from '../../../../../functions/getActualTargetId';
 import { handleFlinching } from '../../../../../functions/handleFlinching';
 import { isKO } from '../../../../../functions/isKo';
 import {
@@ -54,14 +52,12 @@ export const handleAttack = ({
 	battleFieldEffects: BattleFieldEffect[];
 }): void => {
 	//lock in moves choose a random target at execution
-	const realTargetId = lockInMoves.includes(move.name)
-		? getRandomTargetId({
-				targets: pokemon,
-				user: attacker,
-				chosenAction: move.name,
-				onlyOpponents: false,
-		  })
-		: move.targetId;
+	const realTargetId = getActualTargetId({
+		pokemon,
+		attacker,
+		move,
+		addMessage,
+	});
 	const target = pokemon.find(
 		(p) => p.id === realTargetId && p.status === 'ONFIELD'
 	);
