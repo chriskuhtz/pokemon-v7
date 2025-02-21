@@ -154,7 +154,10 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 			happiness: pokemon.happiness + (HappinessChangeTable[item] ?? 0),
 		};
 	}
-	if (item === 'awakening' && pokemon.primaryAilment?.type === 'sleep') {
+	if (
+		(item === 'awakening' || item === 'blue-flute') &&
+		pokemon.primaryAilment?.type === 'sleep'
+	) {
 		if (addToast) {
 			addToast(`Woken Up`);
 		}
