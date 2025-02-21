@@ -9,10 +9,15 @@ import { calculateDamage } from '../../../../../functions/calculateDamage';
 import { changeBattlePokemonType } from '../../../../../functions/changeBattlePokemonType';
 import { changeMovePP } from '../../../../../functions/changeMovePP';
 import { determineMiss } from '../../../../../functions/determineMiss';
-import { getRandomTargetId } from '../../../../../functions/filterTargets';
+import {
+	getRandomIndex,
+	getRandomTargetId,
+} from '../../../../../functions/filterTargets';
 import { handleFlinching } from '../../../../../functions/handleFlinching';
 import { isKO } from '../../../../../functions/isKo';
 import {
+	EFFECT_SPORE_CHANCE,
+	PrimaryAilment,
 	ROUGH_SKIN_FACTOR,
 	STATIC_CHANCE,
 } from '../../../../../interfaces/Ailment';
@@ -166,6 +171,23 @@ export const handleAttack = ({
 			'paralysis',
 			addMessage,
 			`by ${target.data.name}'s static`
+		);
+	}
+
+	//check for effect spore
+	if (
+		target.ability === 'effect-spore' &&
+		contactMoves.includes(move.name) &&
+		Math.random() < EFFECT_SPORE_CHANCE
+	) {
+		const possibleAilments = ['paralysis', 'poison', 'sleep'];
+		updatedAttacker = applyPrimaryAilmentToPokemon(
+			updatedAttacker,
+			possibleAilments[
+				getRandomIndex(possibleAilments.length)
+			] as PrimaryAilment['type'],
+			addMessage,
+			`by ${target.data.name}'s effect spore`
 		);
 	}
 	//check for rough-skin
