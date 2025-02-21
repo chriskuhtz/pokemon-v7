@@ -61,7 +61,7 @@ export const extraFeatureCheckList: {
 
 	{ name: 'reset button', handled: true },
 	{ name: 'setting: fainted pokemon are removed', handled: true },
-	{ name: 'inventory and market filters' },
+	{ name: 'inventory and market filters', handled: true },
 	{ name: 'only show three pokeballs that open onClick for starter selection' },
 	{ name: 'play pokecenter sound on visit' },
 	{ name: 'fix toast and Banner position' },
