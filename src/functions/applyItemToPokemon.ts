@@ -14,6 +14,7 @@ import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { applyEVBoostItem } from './applyEVGain';
 import { applyHappinessChange } from './applyHappinessChange';
 import { applyPPMoveBooster } from './applyPPBooster';
+import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { calculateLevelData } from './calculateLevelData';
 import { changeMovePP } from './changeMovePP';
@@ -200,9 +201,16 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	if (isXItem(item) && isBattlePokemon(pokemon)) {
 		const stat = XItemTable[item];
 		if (stat) {
-			//@ts-expect-error i checked it
+			//@ts-expect-error i checked that its a battlepokemon
 			return applyStatChangeToPokemon(pokemon, stat, 1, addToast);
 		}
+		if (item === 'guard-spec')
+			//@ts-expect-error  i checked that its a battlepokemon
+			return applySecondaryAilmentToPokemon(
+				pokemon,
+				'guard-spec',
+				addToast ? addToast : () => {}
+			);
 	}
 
 	return pokemon;

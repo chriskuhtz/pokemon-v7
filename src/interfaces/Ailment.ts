@@ -16,6 +16,7 @@ const secondaryAilments = [
 	'leech-seed',
 	'flash-fire',
 	'color-changed',
+	'guard-spec',
 ] as const;
 
 export type SecondaryAilmentType = (typeof secondaryAilments)[number];

@@ -265,6 +265,7 @@ export const itemsCheckList: {
 	{
 		name: 'guard-spec',
 		url: 'https://pokeapi.co/api/v2/item/55/',
+		handled: true,
 	},
 	{
 		name: 'dire-hit',
