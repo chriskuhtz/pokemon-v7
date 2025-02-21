@@ -12,7 +12,12 @@ export const SpriteSelection = ({
 		<Page headline="What do you look like:">
 			<Stack mode="row" justifyContent="stretch">
 				{Object.values(SpriteEnum).map((s) => (
-					<Sprite key={s} id={`NPC_${s}`} onClick={() => proceed(`NPC_${s}`)} />
+					<Sprite
+						rotating={true}
+						key={s}
+						id={`NPC_${s}`}
+						onClick={() => proceed(`NPC_${s}`)}
+					/>
 				))}
 			</Stack>
 		</Page>
