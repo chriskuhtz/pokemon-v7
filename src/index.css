@@ -32,6 +32,6 @@ button {
 	font-weight: 900;
 }
 :focus {
-	background-color: black !important;
+	background-color: darkgrey !important;
 	color: white !important;
 }
