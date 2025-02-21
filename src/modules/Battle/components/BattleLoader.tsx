@@ -1,15 +1,17 @@
+import { occupantsRecord } from '../../../constants/checkLists/occupantsRecord';
 import { useGetBattleTeam } from '../../../hooks/useGetBattleTeam';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
+import { OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
+import { Challenger } from '../../../interfaces/SaveFile';
 import { LoadingScreen } from '../../../uiComponents/LoadingScreen/LoadingScreen';
 import { BattleOverview } from './BattleOverview';
 
 export const BattleLoader = ({
 	leave,
-	opponents,
 	team,
-	fightersPerSide,
+	challenger,
 	inventory,
 	ownedPokemonDexIds,
 }: {
@@ -19,14 +21,13 @@ export const BattleLoader = ({
 		scatteredCoins: number,
 		team: BattlePokemon[]
 	) => void;
-	opponents: OwnedPokemon[];
+	challenger: Challenger;
 	team: OwnedPokemon[];
-	fightersPerSide: number;
 	inventory: Inventory;
 	ownedPokemonDexIds: number[];
 }): JSX.Element => {
 	const { res: battleOpponents } = useGetBattleTeam(
-		opponents.map((o) => ({
+		challenger.team.map((o) => ({
 			...o,
 			caughtBefore: ownedPokemonDexIds.includes(o.dexId),
 		}))
@@ -34,6 +35,7 @@ export const BattleLoader = ({
 	const { res: battleTeam } = useGetBattleTeam(
 		team.map((t) => ({ ...t, caughtBefore: true }))
 	);
+	const trainer = occupantsRecord[challenger.id] as OverworldTrainer;
 
 	if (!battleOpponents || !battleTeam) {
 		return <LoadingScreen />;
@@ -43,8 +45,9 @@ export const BattleLoader = ({
 			leave={leave}
 			opponents={battleOpponents}
 			team={battleTeam}
-			fightersPerSide={fightersPerSide}
+			fightersPerSide={Math.min(team.length, challenger.team.length)}
 			inventory={inventory}
+			trainer={trainer}
 		/>
 	);
 };

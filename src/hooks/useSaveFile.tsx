@@ -3,8 +3,10 @@ import { MoveName } from '../constants/checkLists/movesCheckList';
 import { occupantsRecord } from '../constants/checkLists/occupantsRecord';
 import { QuestName, QuestsRecord } from '../constants/checkLists/questsRecord';
 import { localStorageId, testState } from '../constants/gameData';
+import { meadow } from '../constants/maps/meadow';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
+import { determineWildPokemon } from '../functions/determineWildPokemon';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { reduceBattlePokemonToOwnedPokemon } from '../functions/reduceBattlePokemonToOwnedPokemon';
@@ -70,7 +72,6 @@ export const useSaveFile = (
 	const loaded = local ? (JSON.parse(local) as SaveFile) : init;
 
 	const [saveFile, s] = useState<SaveFile>(loaded);
-
 	const setSaveFile = useCallback(
 		(
 			update: SaveFile,
@@ -197,21 +198,29 @@ export const useSaveFile = (
 		stepsTaken: number
 	) => {
 		console.log('navigate away');
-		applyStepsWalkedToTeamReducer(stepsTaken);
-		setActiveTabReducer(route);
-	};
-	const applyStepsWalkedToTeamReducer = (steps: number) => {
-		console.log('apply Steps walked');
-		setPokemonReducer(
-			saveFile.pokemon.map((p) => {
-				if (!p.onTeam) {
-					return p;
-				}
 
-				return applyHappinessFromWalking(p, steps);
-			})
+		setSaveFile(
+			{
+				...saveFile,
+				pokemon: saveFile.pokemon.map((p) => {
+					if (!p.onTeam) {
+						return p;
+					}
+
+					return applyHappinessFromWalking(p, stepsTaken);
+				}),
+				meta: {
+					activeTab: route,
+					currentChallenger:
+						route === 'BATTLE'
+							? { team: determineWildPokemon(team, meadow), id: -1 }
+							: undefined,
+				},
+			},
+			'navigateAwayFromOverworld'
 		);
 	};
+
 	const talkToNurseReducer = (id: number) => {
 		setSaveFile(
 			{
@@ -288,6 +297,12 @@ export const useSaveFile = (
 				...saveFile,
 				inventory: newInventory,
 				quests: updatedQuests,
+				meta: {
+					activeTab:
+						occ.type === 'TRAINER' ? 'BATTLE' : saveFile.meta.activeTab,
+					currentChallenger:
+						occ.type === 'TRAINER' ? { team: occ.team, id } : undefined,
+				},
 				handledOccupants: [
 					...saveFile.handledOccupants,
 					{ id, resetAt: timer },
@@ -407,7 +422,7 @@ export const useSaveFile = (
 				inventory: updatedInventory,
 				money: saveFile.money + scatteredCoins,
 				pokemon: updatedPokemon,
-				meta: { activeTab: 'OVERWORLD' },
+				meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
 			});
 		},
 		[putSaveFileReducer, reset, saveFile, team]

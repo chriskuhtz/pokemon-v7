@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 import { useScreenTransition } from '../../../hooks/useScreenTransition';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
+import { OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { BattleField } from '../BattleField';
 import { IntroBanner } from './IntroBanner';
 import { LineUpSelection } from './LineUpSelection';
@@ -12,6 +13,7 @@ export const BattleOverview = ({
 	team,
 	fightersPerSide,
 	inventory,
+	trainer,
 }: {
 	leave: (
 		caughtPokemon: BattlePokemon[],
@@ -23,6 +25,7 @@ export const BattleOverview = ({
 	team: BattlePokemon[];
 	fightersPerSide: number;
 	inventory: Inventory;
+	trainer?: OverworldTrainer;
 }): JSX.Element => {
 	const [battleStarted, setBattleStarted] = useState<boolean>(false);
 
@@ -56,6 +59,7 @@ export const BattleOverview = ({
 	if (!battleStarted) {
 		return (
 			<LineUpSelection
+				trainer={trainer}
 				leave={() => leave([], inventory, 0, team)}
 				opponents={opponents}
 				team={team}

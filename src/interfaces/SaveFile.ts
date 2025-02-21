@@ -32,6 +32,11 @@ export interface SettingsObject {
 	disqualifyFaintedPokemon: boolean;
 }
 
+export interface Challenger {
+	id: number;
+	team: OwnedPokemon[];
+}
+
 export interface SaveFile {
 	badges: BadgeName[];
 	playerId: string;
@@ -40,6 +45,7 @@ export interface SaveFile {
 	money: number;
 	meta: {
 		activeTab: RoutesType;
+		currentChallenger?: Challenger;
 	};
 	location: CharacterLocationData;
 

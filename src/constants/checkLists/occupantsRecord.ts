@@ -1,5 +1,6 @@
 import { Occupant } from '../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
+import { testOpponent } from '../gameData';
 import { STANDARD_BUY_MARKET } from '../standardBuyMarket';
 
 export const occupantsRecord: Record<number, Occupant> = {
@@ -37,7 +38,18 @@ export const occupantsRecord: Record<number, Occupant> = {
 		approachDirection: 'UP',
 	},
 	//Trainers start at 200000
-
+	200001: {
+		type: 'TRAINER',
+		x: 12,
+		y: 3,
+		map: 'meadow',
+		orientation: 'LEFT',
+		unhandledDialogue: ['fight me', 'big dog'],
+		handledDialogue: ['you are the big dog'],
+		sprite: '033',
+		team: [{ ...testOpponent, dexId: 66 }],
+		name: 'Sailor Bob',
+	},
 	//Merchants start at 300000,
 	300001: {
 		type: 'MERCHANT',
@@ -76,7 +88,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		orientation: 'UP',
 		unhandledDialogue: ["i'll try spinning", 'thats a good trick'],
 		sprite: '060',
-		movememt: { path: ['UP', 'RIGHT', 'LEFT', 'DOWN'], currentStep: 0 },
+		movement: { path: ['UP', 'RIGHT', 'LEFT', 'DOWN'], currentStep: 0 },
 	},
 	600002: {
 		type: 'NPC',
@@ -93,7 +105,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		sprite: '040',
 		gifts: { 'dusk-ball': 5 },
 		quest: 'Catch a nocturnal pokemon from the meadow',
-		movememt: { path: ['RIGHT', 'LEFT'], currentStep: 0 },
+		movement: { path: ['RIGHT', 'LEFT'], currentStep: 0 },
 	},
 	600003: {
 		type: 'NPC',
@@ -103,7 +115,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		orientation: 'LEFT',
 		unhandledDialogue: ['Running in circles is dank af'],
 		sprite: '070',
-		movememt: {
+		movement: {
 			path: ['RIGHT', 'RIGHT', 'DOWN', 'DOWN', 'LEFT', 'LEFT', 'UP', 'UP'],
 			currentStep: 0,
 		},

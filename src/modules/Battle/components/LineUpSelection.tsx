@@ -1,5 +1,7 @@
+import { Sprite } from '../../../components/Sprite/Sprite';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
+import { OverworldTrainer } from '../../../interfaces/OverworldMap';
 
 export const LineUpSelection = ({
 	leave,
@@ -9,6 +11,7 @@ export const LineUpSelection = ({
 	toggleSelected,
 	selectedTeam,
 	startBattle,
+	trainer,
 }: {
 	leave: () => void;
 	opponents: BattlePokemon[];
@@ -17,6 +20,7 @@ export const LineUpSelection = ({
 	selectedTeam: string[];
 	toggleSelected: (id: string) => void;
 	startBattle: () => void;
+	trainer?: OverworldTrainer;
 }) => {
 	return (
 		<div
@@ -29,9 +33,12 @@ export const LineUpSelection = ({
 				alignItems: 'center',
 			}}
 		>
-			<h2>
-				Its {fightersPerSide} versus {fightersPerSide}
-			</h2>
+			<div>
+				<h2>{trainer && `${trainer.name} is challenging you`}</h2>
+				<h2>
+					Its {fightersPerSide} versus {fightersPerSide}
+				</h2>
+			</div>
 			<div
 				style={{
 					display: 'flex',
@@ -40,12 +47,9 @@ export const LineUpSelection = ({
 					justifyContent: 'flex-end',
 				}}
 			>
+				{trainer && <Sprite id={trainer.sprite} rotating={false} />}
 				{opponents.map((opponent) => (
-					<div key={opponent.id}>
-						<img src={getPokemonSprite(opponent.dexId)} />
-						<br />
-						<strong>{opponent.data.name}</strong>
-					</div>
+					<img key={opponent.id} src={getPokemonSprite(opponent.dexId)} />
 				))}
 			</div>
 			<div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>

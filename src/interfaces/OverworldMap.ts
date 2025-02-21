@@ -11,6 +11,7 @@ import { QuestName } from '../constants/checkLists/questsRecord';
 import { TimeOfDay } from '../functions/getTimeOfDay';
 import { Inventory } from './Inventory';
 import { ItemType } from './Item';
+import { OwnedPokemon } from './OwnedPokemon';
 import { CharacterOrientation, MapId } from './SaveFile';
 import { WeatherType } from './Weather';
 
@@ -65,7 +66,7 @@ export interface OverworldNpc {
 	unhandledDialogue: string[];
 	handledDialogue?: string[];
 	sprite: string;
-	movememt?: { path: CharacterOrientation[]; currentStep: number };
+	movement?: { path: CharacterOrientation[]; currentStep: number };
 	gifts?: Partial<Inventory>;
 	quest?: QuestName;
 }
@@ -75,6 +76,20 @@ export interface OverworldBush {
 	y: number;
 	map: MapId;
 }
+
+export interface OverworldTrainer {
+	type: 'TRAINER';
+	x: number;
+	y: number;
+	orientation: CharacterOrientation;
+	map: MapId;
+	unhandledDialogue: string[];
+	handledDialogue?: string[];
+	sprite: string;
+	team: OwnedPokemon[];
+	name: string;
+}
+
 export type Occupant =
 	| OverworldItem
 	| OverworldHiddenItem
@@ -82,7 +97,8 @@ export type Occupant =
 	| OverworldMerchant
 	| OverworldNurse
 	| OverworldBush
-	| OverworldNpc;
+	| OverworldNpc
+	| OverworldTrainer;
 
 export interface OverworldEncounter {
 	dexId: number;

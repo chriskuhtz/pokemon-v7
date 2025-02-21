@@ -8,7 +8,7 @@ export const Sprite = ({
 	rotating,
 }: {
 	id: string;
-	onClick: () => void;
+	onClick?: () => void;
 	rotating: boolean;
 }) => {
 	const orientation = useRotate();
@@ -21,7 +21,7 @@ export const Sprite = ({
 			orientation: rotating ? orientation : 'DOWN',
 			mapId: 'meadow',
 		},
-		id
+		`NPC_${id}`
 	);
 
 	return (
@@ -29,7 +29,7 @@ export const Sprite = ({
 			role="button"
 			tabIndex={0}
 			onKeyDown={(e) => {
-				if (e.key === 'Enter') {
+				if (onClick && e.key === 'Enter') {
 					onClick();
 				}
 			}}
