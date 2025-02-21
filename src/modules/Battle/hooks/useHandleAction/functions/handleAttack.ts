@@ -66,6 +66,7 @@ export const handleAttack = ({
 	const { canAttack, updatedAttacker: afterBlockers } = handleMoveBlockAilments(
 		{
 			attacker,
+			attack: move,
 			addMessage,
 		}
 	);
@@ -229,7 +230,6 @@ export const handleAttack = ({
 		...updatedTarget,
 		damage: updatedTarget.damage + damage,
 	};
-
 	// check attacker  drain/recoil
 	const drain = move.data.meta.drain;
 	if (drain) {
