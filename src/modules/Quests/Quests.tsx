@@ -30,7 +30,7 @@ export const Quests = ({
 					const status = quests[name as QuestName];
 					const fulfilled = quest.conditionFunction(saveFile);
 					const collected = status === 'COLLECTED';
-					const active = status === 'ACTIVE';
+					const active = status === 'ACTIVE' && !fulfilled;
 					if (status === 'INACTIVE') {
 						return <React.Fragment key={name}></React.Fragment>;
 					}

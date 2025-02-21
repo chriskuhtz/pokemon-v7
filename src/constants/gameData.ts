@@ -37,7 +37,12 @@ export const testState: SaveFile = {
 		'Train a Pokemon to lvl 10': 'INACTIVE',
 		'Catch a nocturnal pokemon from the meadow': 'INACTIVE',
 	},
-	inventory: generateInventory({ 'pp-up': 3, 'pp-max': 4, 'x-attack': 7 }),
+	inventory: generateInventory({
+		'pp-up': 3,
+		'pp-max': 4,
+		'x-attack': 7,
+		'poke-doll': 2,
+	}),
 	playerId: '',
 	money: 5000,
 	pokemon: [],

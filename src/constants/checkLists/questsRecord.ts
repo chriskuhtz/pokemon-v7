@@ -28,11 +28,11 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'Catch a nocturnal pokemon from the meadow': {
 		rewardItems: { 'dusk-stone': 1 },
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) => {
+			return s.pokemon.some((p) =>
 				meadow.possibleEncounters.NIGHT.some(
 					(encounter) => encounter.dexId === p.dexId
-				);
-			});
+				)
+			);
 		},
 	},
 };

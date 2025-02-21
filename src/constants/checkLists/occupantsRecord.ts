@@ -45,7 +45,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		map: 'meadow',
 		orientation: 'LEFT',
 		unhandledDialogue: ['fight me', 'big dog'],
-		handledDialogue: ['you are the big dog'],
+		handledDialogue: ['you are the big dog, big dog'],
 		sprite: '033',
 		team: [{ ...testOpponent, dexId: 66 }],
 		name: 'Sailor Bob',
@@ -99,7 +99,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		unhandledDialogue: [
 			'did you know?',
 			'some pokemon only appear at night!',
-			'These might help you',
+			'These might help you catch them',
 		],
 		handledDialogue: ['did you find one?'],
 		sprite: '040',
