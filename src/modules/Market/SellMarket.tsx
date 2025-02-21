@@ -1,4 +1,5 @@
 import React from 'react';
+import { useFilteredInventory } from '../../components/ItemsFilter/ItemsFilter';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
 import { Page } from '../../uiComponents/Page/Page';
@@ -12,13 +13,14 @@ export const SellMarket = ({
 }: {
 	goBack: () => void;
 	inventory: Inventory;
-
 	sellItem: (item: ItemType, number: number, pricePerItem: number) => void;
 }): JSX.Element => {
+	const { filteredInventory, buttons } = useFilteredInventory(inventory);
 	return (
 		<Page goBack={goBack} headline="What do you want to sell:">
 			<Stack mode="column">
-				{Object.entries(inventory).map(([item, amount]) => {
+				{buttons}
+				{Object.entries(filteredInventory).map(([item, amount]) => {
 					if (amount <= 0) {
 						return <React.Fragment key={item}></React.Fragment>;
 					}

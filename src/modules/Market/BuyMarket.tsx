@@ -4,6 +4,7 @@ import { ItemType } from '../../interfaces/Item';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 import { BuyCard } from './components/BuyCard';
+import { useFilteredInventory } from '../../components/ItemsFilter/ItemsFilter';
 
 export const BuyMarket = ({
 	goBack,
@@ -18,10 +19,12 @@ export const BuyMarket = ({
 	money: number;
 	owned: Inventory;
 }): JSX.Element => {
+	const { filteredInventory, buttons } = useFilteredInventory(inventory);
 	return (
 		<Page goBack={goBack} headline="What do you want to buy:">
 			<Stack mode="column">
-				{Object.entries(inventory).map(([item, amount]) => {
+				{buttons}
+				{Object.entries(filteredInventory).map(([item, amount]) => {
 					if (amount <= 0) {
 						return <React.Fragment key={item}></React.Fragment>;
 					}
