@@ -1,7 +1,7 @@
 import { BsFire } from 'react-icons/bs';
 import { FaRegSnowflake } from 'react-icons/fa';
 import { FaBoltLightning } from 'react-icons/fa6';
-import { GiPoisonBottle } from 'react-icons/gi';
+import { GiNightSleep, GiPoisonBottle } from 'react-icons/gi';
 import { baseSize } from '../../constants/gameData';
 import { typeColors } from '../../constants/typeColors';
 import { PrimaryAilment } from '../../interfaces/Ailment';
@@ -35,6 +35,11 @@ export const PrimaryAilmentIcon = ({
 				color={typeColors['poison']}
 				size={size ?? baseSize / 3}
 			/>
+		);
+	}
+	if (primaryAilment?.type === 'sleep') {
+		return (
+			<GiNightSleep color={typeColors['ghost']} size={size ?? baseSize / 3} />
 		);
 	}
 
