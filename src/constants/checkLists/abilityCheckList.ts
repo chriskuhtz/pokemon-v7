@@ -144,10 +144,12 @@ export const abilityCheckList: {
 	{
 		name: 'synchronize',
 		url: 'https://pokeapi.co/api/v2/ability/28/',
+		handled: true,
 	},
 	{
 		name: 'clear-body',
 		url: 'https://pokeapi.co/api/v2/ability/29/',
+		handled: true,
 	},
 	{
 		name: 'natural-cure',
@@ -207,7 +209,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/72/',
 		handled: true,
 	},
-	{ name: 'white-smoke', url: 'https://pokeapi.co/api/v2/ability/73/' },
+	{
+		name: 'white-smoke',
+		url: 'https://pokeapi.co/api/v2/ability/73/',
+		handled: true,
+	},
 	{ name: 'pure-power', url: 'https://pokeapi.co/api/v2/ability/74/' },
 	{
 		name: 'shell-armor',
@@ -544,6 +550,8 @@ export const abilityNames = [
 	'levitate',
 	'effect-spore',
 	'synchronize',
+	'clear-body',
+	'white-smoke',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

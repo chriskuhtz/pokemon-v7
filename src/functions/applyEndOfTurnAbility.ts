@@ -13,6 +13,7 @@ export const applyEndOfTurnAbility = ({
 			pokemon,
 			'speed',
 			1,
+			true,
 			addMessage,
 			'by speed boost'
 		);
