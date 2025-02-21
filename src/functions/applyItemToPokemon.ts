@@ -201,24 +201,28 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	if (isXItem(item) && isBattlePokemon(pokemon)) {
 		const stat = XItemTable[item];
 		if (stat) {
-			//@ts-expect-error i checked that its a battlepokemon
-			return applyStatChangeToPokemon(pokemon, stat, 1, addToast);
+			return applyStatChangeToPokemon(
+				pokemon,
+				stat,
+				1,
+				true,
+				[],
+				addToast
+			) as T;
 		}
 		if (item === 'guard-spec') {
-			//@ts-expect-error  i checked that its a battlepokemon
 			return applySecondaryAilmentToPokemon(
 				pokemon,
 				'guard-spec',
 				addToast ? addToast : () => {}
-			);
+			) as T;
 		}
 		if (item === 'dire-hit') {
-			//@ts-expect-error  i checked that its a battlepokemon
 			return applySecondaryAilmentToPokemon(
 				pokemon,
 				'dire-hit',
 				addToast ? addToast : () => {}
-			);
+			) as T;
 		}
 	}
 

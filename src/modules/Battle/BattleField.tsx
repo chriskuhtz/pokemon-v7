@@ -39,6 +39,11 @@ export interface BattleMessage {
 	onRemoval?: () => void;
 	clearStackOnRemoval?: boolean;
 }
+export interface BattleFieldEffect {
+	type: 'mist';
+	ownerId: string;
+	duration: number;
+}
 
 export const BattleField = ({
 	leave,
@@ -62,8 +67,35 @@ export const BattleField = ({
 		useMessageQueue();
 	const [battleRound, setBattleRound] = useState<number>(0);
 	const [bW, setBattleWeather] = useState<WeatherType | undefined>();
-
 	const [battleLocation] = useState<BattleLocation>('STANDARD');
+	const [battleFieldEffects, setBattleFieldEffects] = useState<
+		BattleFieldEffect[]
+	>([]);
+	const addBattleFieldEffect = (x: BattleFieldEffect) => {
+		if (
+			battleFieldEffects.some(
+				(b) => b.type === x.type && b.ownerId === x.ownerId
+			)
+		) {
+			addMessage({ message: `${x.type} is already in effect for this side` });
+			return;
+		}
+		setBattleFieldEffects([...battleFieldEffects, x]);
+	};
+	const reduceBatttleFieldEffectDurations = useCallback(
+		() =>
+			setBattleFieldEffects((effects) =>
+				effects
+					.map((e) => {
+						if (e.duration === 1) {
+							addMessage({ message: `${e.type} ended` });
+							return undefined;
+						} else return { ...e, duration: e.duration - 1 };
+					})
+					.filter((e) => e !== undefined)
+			),
+		[addMessage]
+	);
 	const [scatteredCoins, setScatteredCoins] = useState<number>(0);
 	const scatterCoins = () =>
 		setScatteredCoins((c) => c + Math.floor(Math.random() * 100));
@@ -226,9 +258,10 @@ export const BattleField = ({
 				addMessage,
 				currentWeather: battleWeather,
 				setWeather: setBattleWeather,
+				battleFieldEffects,
 			});
 		},
-		[addMessage, battleWeather]
+		[addMessage, battleFieldEffects, battleWeather]
 	);
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -301,7 +334,9 @@ export const BattleField = ({
 		addUsedItem,
 		scatterCoins,
 		dampy,
-		handleForceSwitch
+		handleForceSwitch,
+		addBattleFieldEffect,
+		battleFieldEffects
 	);
 
 	//Steps:
@@ -340,6 +375,7 @@ export const BattleField = ({
 			if (!latestMessage && !nextMover) {
 				setBattleStep('END_OF_TURN');
 				setBattleRound((battleRound) => battleRound + 1);
+				reduceBatttleFieldEffectDurations();
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
 						if (p.status === 'ONFIELD') {
@@ -354,7 +390,13 @@ export const BattleField = ({
 				handleAction(nextMover);
 			}
 		}
-	}, [battleStep, handleAction, latestMessage, nextMover]);
+	}, [
+		battleStep,
+		handleAction,
+		latestMessage,
+		nextMover,
+		reduceBatttleFieldEffectDurations,
+	]);
 	// End Of Turn
 	useEffect(() => {
 		if (!latestMessage && battleStep === 'END_OF_TURN') {

@@ -14,6 +14,7 @@ export const applyEndOfTurnAbility = ({
 			'speed',
 			1,
 			true,
+			[],
 			addMessage,
 			'by speed boost'
 		);

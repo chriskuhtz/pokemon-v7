@@ -7,7 +7,7 @@ import { getChargeUpMessage } from '../../../../functions/getChargeUpMessage';
 import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
 import { ItemType } from '../../../../interfaces/Item';
 import { WeatherType } from '../../../../interfaces/Weather';
-import { BattleMessage } from '../../BattleField';
+import { BattleFieldEffect, BattleMessage } from '../../BattleField';
 import { handleMoveBlockAilments } from '../../functions/handleMoveBlockAilments';
 import { handleAttack } from './functions/handleAttack';
 import { handleCatch } from './functions/handleCatch';
@@ -15,7 +15,6 @@ import { handleCatch } from './functions/handleCatch';
 export const useHandleAction = (
 	pokemon: BattlePokemon[],
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
-
 	addMessage: (x: BattleMessage) => void,
 	leave: () => void,
 	battleWeather: WeatherType | undefined,
@@ -26,7 +25,9 @@ export const useHandleAction = (
 	addUsedItem: (x: ItemType) => void,
 	scatterCoins: () => void,
 	dampy: { name: string } | undefined,
-	handleForceSwitch: (x: BattlePokemon, moveName: MoveName) => void
+	handleForceSwitch: (x: BattlePokemon, moveName: MoveName) => void,
+	addBattleFieldEffect: (x: BattleFieldEffect) => void,
+	battleFieldEffects: BattleFieldEffect[]
 ) => {
 	return useCallback(
 		(attacker: BattlePokemon) => {
@@ -158,14 +159,18 @@ export const useHandleAction = (
 					battleWeather,
 					scatterCoins,
 					dampy,
+					addBattleFieldEffect,
+					battleFieldEffects,
 				});
 				return;
 			}
 		},
 		[
+			addBattleFieldEffect,
 			addMessage,
 			addMultipleMessages,
 			addUsedItem,
+			battleFieldEffects,
 			battleLocation,
 			battleRound,
 			battleWeather,
