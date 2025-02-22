@@ -10,6 +10,7 @@ export const Settings = ({
 	const [state, setState] = useState<SettingsObject>({
 		randomStarters: false,
 		disqualifyFaintedPokemon: false,
+		randomHeldItems: false,
 	});
 	return (
 		<Page headline="Settings:">
@@ -22,60 +23,24 @@ export const Settings = ({
 					alignItems: 'center',
 				}}
 			>
-				<h4 style={{ margin: 0 }}>
-					Do you want to randomize your starter pokemon choices:
-				</h4>
-				<button
-					style={{
-						backgroundColor: state.randomStarters === false ? 'black' : 'white',
-
-						color: state.randomStarters === false ? 'white' : 'black',
-					}}
-					onClick={() => setState({ ...state, randomStarters: false })}
-				>
-					No
-				</button>
-				<button
-					style={{
-						backgroundColor: state.randomStarters === true ? 'black' : 'white',
-
-						color: state.randomStarters === true ? 'white' : 'black',
-					}}
-					onClick={() => setState({ ...state, randomStarters: true })}
-				>
-					Yes
-				</button>
-				<div>
-					<h4 style={{ margin: 0 }}>
-						Should your defeated Pokemon automatically be released into the
-						wild:
-					</h4>
-					<strong>(Losing a battle = complete reset)</strong>
-				</div>
-				<button
-					style={{
-						backgroundColor:
-							state.disqualifyFaintedPokemon === false ? 'black' : 'white',
-
-						color: state.disqualifyFaintedPokemon === false ? 'white' : 'black',
-					}}
-					onClick={() =>
-						setState({ ...state, disqualifyFaintedPokemon: false })
+				<SettingsRow
+					value={state.randomStarters}
+					setValue={(x) => setState({ ...state, randomStarters: x })}
+					label={'Do you want to randomize your starter pokemon choices:'}
+				/>
+				<SettingsRow
+					value={state.randomHeldItems}
+					setValue={(x) => setState({ ...state, randomHeldItems: x })}
+					label={'Do you want to randomize the held items of wild pokemon:'}
+				/>{' '}
+				<SettingsRow
+					value={state.disqualifyFaintedPokemon}
+					setValue={(x) => setState({ ...state, disqualifyFaintedPokemon: x })}
+					label={
+						'	Should your defeated Pokemon automatically be released into the wild:'
 					}
-				>
-					No
-				</button>
-				<button
-					style={{
-						backgroundColor:
-							state.disqualifyFaintedPokemon === true ? 'black' : 'white',
-
-						color: state.disqualifyFaintedPokemon === true ? 'white' : 'black',
-					}}
-					onClick={() => setState({ ...state, disqualifyFaintedPokemon: true })}
-				>
-					Yes
-				</button>
+					description={'Losing a battle = complete reset'}
+				/>
 			</div>
 
 			<h3
@@ -92,5 +57,46 @@ export const Settings = ({
 				Lets go
 			</button>
 		</Page>
+	);
+};
+
+export const SettingsRow = ({
+	label,
+	value,
+	setValue,
+	description,
+}: {
+	value: boolean;
+	setValue: (x: boolean) => void;
+	label: string;
+	description?: string;
+}) => {
+	return (
+		<>
+			<div>
+				<h4 style={{ margin: 0 }}>{label}</h4>
+				{description && <strong>{description}</strong>}
+			</div>
+			<button
+				style={{
+					backgroundColor: !value ? 'black' : 'white',
+
+					color: !value ? 'white' : 'black',
+				}}
+				onClick={() => setValue(false)}
+			>
+				No
+			</button>
+			<button
+				style={{
+					backgroundColor: value ? 'black' : 'white',
+
+					color: value ? 'white' : 'black',
+				}}
+				onClick={() => setValue(true)}
+			>
+				Yes
+			</button>
+		</>
 	);
 };

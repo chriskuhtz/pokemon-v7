@@ -1,8 +1,9 @@
 import { useFetch } from '@potfisch-industries-npm/usefetch';
 import { getRandomIndex } from '../functions/filterTargets';
+import { getSettings } from '../functions/getPlayerId';
 import { getStats } from '../functions/getStats';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { ItemType } from '../interfaces/Item';
+import { ItemType, itemTypes } from '../interfaces/Item';
 import { MoveDto } from '../interfaces/Move';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { PokemonData } from '../interfaces/PokemonData';
@@ -12,8 +13,12 @@ import { EmptyStatObject } from '../interfaces/StatObject';
 export const maybeGetHeldItemFromData = (
 	data: PokemonData
 ): ItemType | undefined => {
+	const { randomHeldItems } = getSettings() ?? {};
 	const { held_items } = data;
 
+	if (randomHeldItems) {
+		return itemTypes[getRandomIndex(itemTypes.length)];
+	}
 	if (held_items.length === 0) {
 		return undefined;
 	}

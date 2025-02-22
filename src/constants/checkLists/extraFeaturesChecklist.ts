@@ -148,4 +148,5 @@ export const extraFeatureCheckList: {
 	{ name: 'shaders per map (no daytimes in caves, buildings)' },
 	{ name: 'Opponents can use items' },
 	{ name: 'consider rarity of held items' },
+	{ name: 'show held item in pc' },
 ];

@@ -30,6 +30,7 @@ export interface CharacterLocationData {
 export interface SettingsObject {
 	randomStarters: boolean;
 	disqualifyFaintedPokemon: boolean;
+	randomHeldItems: boolean;
 }
 
 export interface Challenger {
