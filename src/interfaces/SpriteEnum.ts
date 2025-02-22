@@ -85,4 +85,5 @@ export enum SpriteEnum {
 	elm = '137',
 	rowan = '138',
 	brock = '148',
+	gary = '179',
 }
