@@ -300,10 +300,12 @@ export const itemsCheckList: {
 	{
 		name: 'black-flute',
 		url: 'https://pokeapi.co/api/v2/item/68/',
+		handled: true,
 	},
 	{
 		name: 'white-flute',
 		url: 'https://pokeapi.co/api/v2/item/69/',
+		handled: true,
 	},
 
 	{
@@ -344,10 +346,18 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/109/',
 	},
 
-	{ name: 'super-repel', url: 'https://pokeapi.co/api/v2/item/76/' },
-	{ name: 'max-repel', url: 'https://pokeapi.co/api/v2/item/77/' },
+	{
+		name: 'super-repel',
+		url: 'https://pokeapi.co/api/v2/item/76/',
+		handled: true,
+	},
+	{
+		name: 'max-repel',
+		url: 'https://pokeapi.co/api/v2/item/77/',
+		handled: true,
+	},
 	{ name: 'escape-rope', url: 'https://pokeapi.co/api/v2/item/78/' },
-	{ name: 'repel', url: 'https://pokeapi.co/api/v2/item/79/' },
+	{ name: 'repel', url: 'https://pokeapi.co/api/v2/item/79/', handled: true },
 
 	{ name: 'shoal-salt', url: 'https://pokeapi.co/api/v2/item/70/' },
 	{ name: 'shoal-shell', url: 'https://pokeapi.co/api/v2/item/71/' },

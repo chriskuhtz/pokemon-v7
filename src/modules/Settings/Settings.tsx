@@ -36,9 +36,7 @@ export const Settings = ({
 				<SettingsRow
 					value={state.disqualifyFaintedPokemon}
 					setValue={(x) => setState({ ...state, disqualifyFaintedPokemon: x })}
-					label={
-						'	Should your defeated Pokemon automatically be released into the wild:'
-					}
+					label={'	Should your defeated Pokemon be released back into the wild:'}
 					description={'Losing a battle = complete reset'}
 				/>
 			</div>
@@ -47,7 +45,7 @@ export const Settings = ({
 				style={{
 					borderTop: '1px solid black',
 					paddingTop: '2rem',
-					color: 'darkred',
+					color: 'red',
 				}}
 			>
 				These settings cannot be changed later
@@ -74,8 +72,8 @@ export const SettingsRow = ({
 	return (
 		<>
 			<div>
-				<h4 style={{ margin: 0 }}>{label}</h4>
-				{description && <strong>{description}</strong>}
+				<h3 style={{ margin: 0 }}>{label}</h3>
+				{description && <strong>({description})</strong>}
 			</div>
 			<button
 				style={{
