@@ -7,21 +7,22 @@ import { getChargeUpMessage } from '../../../../functions/getChargeUpMessage';
 import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
 import { ItemType } from '../../../../interfaces/Item';
 import { WeatherType } from '../../../../interfaces/Weather';
-import { BattleFieldEffect, BattleMessage } from '../../BattleField';
+import { BattleFieldEffect } from '../../BattleField';
 import { handleMoveBlockAilments } from '../../functions/handleMoveBlockAilments';
 import { handleAttack } from './functions/handleAttack';
 import { handleCatch } from './functions/handleCatch';
+import { Message } from '../../../../hooks/useMessageQueue';
 
 export const useHandleAction = (
 	pokemon: BattlePokemon[],
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
-	addMessage: (x: BattleMessage) => void,
+	addMessage: (x: Message) => void,
 	leave: () => void,
 	battleWeather: WeatherType | undefined,
-	addMultipleMessages: (x: BattleMessage[]) => void,
+	addMultipleMessages: (x: Message[]) => void,
 	battleRound: number,
 	battleLocation: BattleLocation,
-	interjectMessage: (x: BattleMessage) => void,
+	interjectMessage: (x: Message) => void,
 	addUsedItem: (x: ItemType) => void,
 	scatterCoins: () => void,
 	dampy: { name: string } | undefined,

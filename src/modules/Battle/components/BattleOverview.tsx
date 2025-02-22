@@ -6,6 +6,7 @@ import { OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { BattleField } from '../BattleField';
 import { IntroBanner } from './IntroBanner';
 import { LineUpSelection } from './LineUpSelection';
+import { Message } from '../../../hooks/useMessageQueue';
 
 export const BattleOverview = ({
 	leave,
@@ -14,6 +15,10 @@ export const BattleOverview = ({
 	fightersPerSide,
 	inventory,
 	trainer,
+	latestMessage,
+	addMessage,
+	addMultipleMessages,
+	interjectMessage,
 }: {
 	leave: (
 		caughtPokemon: BattlePokemon[],
@@ -26,6 +31,10 @@ export const BattleOverview = ({
 	fightersPerSide: number;
 	inventory: Inventory;
 	trainer?: OverworldTrainer;
+	latestMessage: Message | undefined;
+	addMessage: (message: Message) => void;
+	addMultipleMessages: (newMessages: Message[]) => void;
+	interjectMessage: (message: Message) => void;
 }): JSX.Element => {
 	const [battleStarted, setBattleStarted] = useState<boolean>(false);
 
@@ -84,6 +93,10 @@ export const BattleOverview = ({
 				...o,
 				status: i < fightersPerSide ? 'ONFIELD' : 'BENCH',
 			}))}
+			latestMessage={latestMessage}
+			addMessage={addMessage}
+			interjectMessage={interjectMessage}
+			addMultipleMessages={addMultipleMessages}
 		/>
 	);
 };

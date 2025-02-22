@@ -1,11 +1,10 @@
-import { AddToastFunction } from '../hooks/useToasts';
 import { TRAP_DAMAGE_FACTOR } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { isTrapped } from './isTrapped';
 
 export const applySecondaryAilmentDamage = (
 	pokemon: BattlePokemon,
-	dispatchToast: AddToastFunction
+	dispatchToast: (x: string) => void
 ): BattlePokemon => {
 	let updated = { ...pokemon };
 

@@ -1,14 +1,23 @@
 import { App } from '../../App';
-import { animationTimer } from '../../constants/gameData';
-import { useToasts } from '../../hooks/useToasts';
-import { Toast } from './Toast';
+import { useMessageQueue } from '../../hooks/useMessageQueue';
+import { Banner } from '../Banner/Banner';
 
 export const ToastContainer = () => {
-	const { latestToast, addToast } = useToasts(animationTimer * 2);
+	const { addMessage, latestMessage, addMultipleMessages, interjectMessage } =
+		useMessageQueue();
 	return (
 		<>
-			{latestToast && <Toast toast={latestToast} />}
-			<App activeToast={!!latestToast} addToast={addToast} />
+			{latestMessage && (
+				<Banner>
+					<h2>{latestMessage?.message}</h2>
+				</Banner>
+			)}
+			<App
+				addMessage={addMessage}
+				latestMessage={latestMessage}
+				addMultipleMessages={addMultipleMessages}
+				interjectMessage={interjectMessage}
+			/>
 		</>
 	);
 };

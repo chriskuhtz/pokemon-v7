@@ -1,5 +1,6 @@
 import { occupantsRecord } from '../../../constants/checkLists/occupantsRecord';
 import { useGetBattleTeam } from '../../../hooks/useGetBattleTeam';
+import { Message } from '../../../hooks/useMessageQueue';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import { OverworldTrainer } from '../../../interfaces/OverworldMap';
@@ -14,6 +15,10 @@ export const BattleLoader = ({
 	challenger,
 	inventory,
 	ownedPokemonDexIds,
+	latestMessage,
+	addMessage,
+	addMultipleMessages,
+	interjectMessage,
 }: {
 	leave: (
 		caughtPokemon: BattlePokemon[],
@@ -25,6 +30,10 @@ export const BattleLoader = ({
 	team: OwnedPokemon[];
 	inventory: Inventory;
 	ownedPokemonDexIds: number[];
+	latestMessage: Message | undefined;
+	addMessage: (message: Message) => void;
+	addMultipleMessages: (newMessages: Message[]) => void;
+	interjectMessage: (message: Message) => void;
 }): JSX.Element => {
 	const { res: battleOpponents } = useGetBattleTeam(
 		challenger.team.map((o) => ({
@@ -48,6 +57,10 @@ export const BattleLoader = ({
 			fightersPerSide={Math.min(team.length, challenger.team.length)}
 			inventory={inventory}
 			trainer={trainer}
+			latestMessage={latestMessage}
+			addMessage={addMessage}
+			interjectMessage={interjectMessage}
+			addMultipleMessages={addMultipleMessages}
 		/>
 	);
 };

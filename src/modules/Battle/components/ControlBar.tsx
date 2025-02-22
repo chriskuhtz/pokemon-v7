@@ -69,7 +69,7 @@ export function ControlBar({
 					justifyContent: 'center',
 				}}
 			>
-				<h3>{message}</h3>
+				<h3></h3>
 			</div>
 		);
 	}

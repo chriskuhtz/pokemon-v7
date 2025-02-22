@@ -1,4 +1,3 @@
-import { AddToastFunction } from '../hooks/useToasts';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
@@ -7,7 +6,7 @@ import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 export const applyAttackStatChanges = (
 	pokemon: BattlePokemon,
 	attack: BattleAttack,
-	dispatchToast: AddToastFunction,
+	dispatchToast: (x: string) => void,
 	selfInflicted: boolean,
 	battleFieldEffects: BattleFieldEffect[]
 ): BattlePokemon => {

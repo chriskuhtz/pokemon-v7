@@ -1,4 +1,3 @@
-import { AddToastFunction } from '../hooks/useToasts';
 import {
 	BURN_DAMAGE_FACTOR,
 	POISON_DAMAGE_FACTOR,
@@ -7,7 +6,7 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 
 export const applyPrimaryAilmentDamage = (
 	pokemon: BattlePokemon,
-	dispatchToast: AddToastFunction
+	dispatchToast: (x: string) => void
 ): BattlePokemon => {
 	if (pokemon.primaryAilment?.type === 'burn') {
 		dispatchToast(`${pokemon.data.name} is hurt by burn`);

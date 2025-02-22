@@ -7,11 +7,11 @@ import { Stack } from '../../uiComponents/Stack/Stack';
 import { useState } from 'react';
 import { GoTasklist } from 'react-icons/go';
 import { baseSize } from '../../constants/gameData';
-import { useMessageQueue } from '../../hooks/useMessageQueue';
 import { BadgeName } from '../../interfaces/Badge';
 import { RoutesType } from '../../interfaces/Routing';
 import { Banner } from '../../uiComponents/Banner/Banner';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
+import { Message } from '../../hooks/useMessageQueue';
 
 export const MainMenu = ({
 	navigate,
@@ -21,6 +21,8 @@ export const MainMenu = ({
 	spriteUrl,
 	badges,
 	reset,
+	latestMessage,
+	addMessage,
 }: {
 	navigate: (x: RoutesType) => void;
 	goBack: () => void;
@@ -29,9 +31,13 @@ export const MainMenu = ({
 	badges: BadgeName[];
 	spriteUrl: string;
 	reset: () => void;
+	latestMessage: Message | undefined;
+	addMessage: (message: Message) => void;
+	addMultipleMessages: (newMessages: Message[]) => void;
+	interjectMessage: (message: Message) => void;
 }): JSX.Element => {
 	const [resetConfirmationInProgress, setRCIP] = useState<boolean>(false);
-	const { latestMessage, addMessage } = useMessageQueue();
+
 	return (
 		<Page headline="Main Menu:" goBack={goBack}>
 			{latestMessage && (

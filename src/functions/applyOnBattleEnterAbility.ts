@@ -1,9 +1,7 @@
+import { Message } from '../hooks/useMessageQueue';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
-import {
-	BattleFieldEffect,
-	BattleMessage,
-} from '../modules/Battle/BattleField';
+import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 
 export const applyOnBattleEnterAbility = ({
@@ -18,7 +16,7 @@ export const applyOnBattleEnterAbility = ({
 	setWeather: (x: WeatherType) => void;
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>;
 	currentWeather: WeatherType | undefined;
-	addMessage: (x: BattleMessage) => void;
+	addMessage: (x: Message) => void;
 	battleFieldEffects: BattleFieldEffect[];
 }) => {
 	if (user.ability === 'drizzle' && currentWeather !== 'rain') {

@@ -1,10 +1,9 @@
-import { AddToastFunction } from '../hooks/useToasts';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { applyItemToPokemon } from './applyItemToPokemon';
 
 export const applyEndOfTurnHeldItem = (
 	pokemon: BattlePokemon,
-	addMessage: AddToastFunction
+	addMessage: (x: string) => void
 ): BattlePokemon => {
 	if (
 		pokemon.heldItemName === 'berry-juice' &&

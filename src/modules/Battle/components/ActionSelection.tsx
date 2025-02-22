@@ -1,5 +1,6 @@
 import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
 import { getMovesArray } from '../../../functions/getMovesArray';
+import { getPlayerPokemon } from '../../../functions/getPlayerPokemon';
 import { isTrapped } from '../../../functions/isTrapped';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
@@ -68,7 +69,9 @@ export function ActionSelection({
 							((isHealingItem(item) ||
 								isPPRestorationItem(item) ||
 								isXItem(item)) &&
-								allTargets.some((t) => canBenefitFromItem(t, item))))
+								getPlayerPokemon(allTargets).some((t) =>
+									canBenefitFromItem(t, item)
+								)))
 					) {
 						return (
 							<button onClick={() => setChosenAction(item)} key={item}>

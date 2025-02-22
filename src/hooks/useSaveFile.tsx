@@ -17,7 +17,6 @@ import { ItemType } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { RoutesType } from '../interfaces/Routing';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
-import { AddToastFunction } from './useToasts';
 
 export const getHatchTimeModifier = (team: OwnedPokemon[]): number => {
 	return team.some((t) => t.ability === 'magma-armor') ? 2 : 1;
@@ -66,7 +65,7 @@ export interface UseSaveFile {
 
 export const useSaveFile = (
 	init: SaveFile,
-	addToast: AddToastFunction
+	addToast: (x: string) => void
 ): UseSaveFile => {
 	const local = window.localStorage.getItem(localStorageId);
 	const loaded = local ? (JSON.parse(local) as SaveFile) : init;
@@ -243,7 +242,7 @@ export const useSaveFile = (
 			},
 			'talkToNurse'
 		);
-		addToast('Whole Team fully healed', 'SUCCESS');
+		addToast('Whole Team fully healed');
 	};
 	const useSacredAshReducer = () => {
 		setSaveFile(
@@ -264,7 +263,7 @@ export const useSaveFile = (
 			},
 			'sacredAsh'
 		);
-		addToast('Whole Team fully healed', 'SUCCESS');
+		addToast('Whole Team fully healed');
 	};
 
 	const handleOccupantReducer = (id: number) => {
@@ -279,14 +278,14 @@ export const useSaveFile = (
 		let newInventory = { ...saveFile.inventory };
 		if (occ.type === 'NPC' && occ.gifts) {
 			Object.entries(occ.gifts).forEach(([item, amount]) => {
-				addToast(`received ${amount} ${item}`, 'SUCCESS');
+				addToast(`received ${amount} ${item}`);
 			});
 
 			newInventory = joinInventories(newInventory, occ.gifts);
 		}
 		if (occ.type === 'ITEM' || occ.type === 'HIDDEN_ITEM') {
 			const { item, amount } = occ;
-			addToast(`found ${amount} ${item}`, 'SUCCESS');
+			addToast(`found ${amount} ${item}`);
 
 			newInventory = joinInventories(newInventory, { [item]: amount });
 		}

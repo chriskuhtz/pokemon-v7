@@ -3,7 +3,7 @@ import { IoMdMenu } from 'react-icons/io';
 import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 import { occupantsRecord } from '../../constants/checkLists/occupantsRecord';
-import { animationTimer, baseSize } from '../../constants/gameData';
+import { baseSize } from '../../constants/gameData';
 import { assembleMap } from '../../functions/assembleMap';
 import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
@@ -13,7 +13,6 @@ import { ItemType } from '../../interfaces/Item';
 import { Occupant, OverworldMap } from '../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { CharacterLocationData, SaveFile } from '../../interfaces/SaveFile';
-import { Banner } from '../../uiComponents/Banner/Banner';
 import './Overworld.css';
 import { ClickerGrid } from './components/ClickerGrid';
 import { interactWithFunction } from './functions/interactWith';
@@ -23,6 +22,7 @@ import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
+import { Message } from '../../hooks/useMessageQueue';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -49,6 +49,8 @@ export const Overworld = ({
 	handledOccupants,
 	cutterPokemon,
 	saveFile,
+	latestMessage,
+	addMessage,
 }: {
 	openMenu: (stepsTaken: number) => void;
 	playerLocation: CharacterLocationData;
@@ -66,6 +68,10 @@ export const Overworld = ({
 	handleThisOccupant: (id: number) => void;
 	cutterPokemon?: { dexId: number };
 	saveFile: SaveFile;
+	latestMessage: Message | undefined;
+	addMessage: (message: Message) => void;
+	addMultipleMessages: (newMessages: Message[]) => void;
+	interjectMessage: (message: Message) => void;
 }) => {
 	const [statefulOccupants, setStatefulOccupants] = useState<
 		Record<number, Occupant>
@@ -115,26 +121,9 @@ export const Overworld = ({
 	const valid = useMemo(() => isValidOverWorldMap(map), [map]);
 
 	const [stepsTaken, setStepsTaken] = useState<number>(0);
-	const [dialogues, setDialogues] = useState<Dialogue[]>([]);
-	useEffect(() => {
-		if (dialogues.length === 0) {
-			return;
-		}
-		const t = setTimeout(() => {
-			if (dialogues[0].onRemoval) {
-				dialogues[0].onRemoval();
-			}
-			setDialogues(dialogues.slice(1));
-		}, animationTimer);
-
-		return () => clearTimeout(t);
-	}, [dialogues]);
-	const addDialogue = (x: Dialogue) => {
-		setDialogues((dialogues) => [...dialogues, x]);
-	};
 
 	const addEncounterDialogue = () => {
-		addDialogue({
+		addMessage({
 			message: 'Wild Pokemon appeared!',
 			onRemoval: () => startEncounter(stepsTaken),
 		});
@@ -168,7 +157,7 @@ export const Overworld = ({
 	useDrawBackground(backgroundCanvasId, map);
 	useDrawOccupants(
 		occupantsCanvasId,
-		dialogues.length > 0,
+		!!latestMessage,
 		statefulOccupants,
 		setStatefulOccupants
 	);
@@ -177,7 +166,7 @@ export const Overworld = ({
 		(occ: [string, Occupant] | undefined) =>
 			interactWithFunction({
 				occ,
-				addDialogue,
+				addDialogue: addMessage,
 				openStorage,
 				stepsTaken,
 				changeOccupant,
@@ -190,6 +179,7 @@ export const Overworld = ({
 				goToPosition: setCharacterLocation,
 			}),
 		[
+			addMessage,
 			changeOccupant,
 			cutterPokemon,
 			goToMarket,
@@ -221,7 +211,7 @@ export const Overworld = ({
 				occupantsRecord[h].type === 'ITEM' ||
 				occupantsRecord[h].type === 'HIDDEN_ITEM'
 		),
-		dialogues.length > 0,
+		!!latestMessage,
 		statefulOccupants
 	);
 	useKeyboardControl(
@@ -238,7 +228,7 @@ export const Overworld = ({
 				statefulOccupants
 			),
 		() => openMenu(stepsTaken),
-		dialogues.length > 0
+		!!latestMessage
 	);
 
 	if (!valid) {
@@ -278,12 +268,12 @@ export const Overworld = ({
 				<WeatherIcon weather={assembledMap.weather} />
 				<TimeOfDayIcon />
 			</div>
-			{dialogues.length > 0 && (
+			{/* {dialogues.length > 0 && (
 				<Banner>
 					<h2>{dialogues[0].message}</h2>
 					{dialogues[0].icon}
 				</Banner>
-			)}
+			)} */}
 			<div className="overworldPage">
 				<div id="canvassesAndShaders" style={{ position: 'relative' }}>
 					<div

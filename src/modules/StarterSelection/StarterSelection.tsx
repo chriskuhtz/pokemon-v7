@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { animationTimer, battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData';
 import { typeColors } from '../../constants/typeColors';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getRandomPokemonId } from '../../functions/getRandomPokemonId';
-import { useMessageQueue } from '../../hooks/useMessageQueue';
 import { Banner } from '../../uiComponents/Banner/Banner';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import { Message } from '../../hooks/useMessageQueue';
 
 const defaultStarters = [1, 4, 7];
 const randomStarterOptions = [
@@ -18,13 +18,16 @@ const randomStarterOptions = [
 export const StarterSelection = ({
 	randomStarters,
 	proceed,
+	latestMessage,
+	addMultipleMessages,
 }: {
 	randomStarters: boolean;
 	proceed: (name: string, starterDexId: number) => void;
+	latestMessage: Message | undefined;
+	addMessage: (message: Message) => void;
+	addMultipleMessages: (newMessages: Message[]) => void;
+	interjectMessage: (message: Message) => void;
 }): JSX.Element => {
-	const { latestMessage, addMultipleMessages } = useMessageQueue(
-		animationTimer * 2
-	);
 	const options = randomStarters ? randomStarterOptions : defaultStarters;
 	const [chosenStarter, setChosenStarter] = useState<number | undefined>();
 	const [name, setName] = useState<string | undefined>('');
