@@ -31,8 +31,10 @@ export const meadow: OverworldMap = {
 		400001,
 		//bushes
 		500001,
-		// npcs
+		//npcs
 		600001, 600002, 600003, 600004, 600005,
+		//buildings
+		700001,
 	],
 	possibleEncounters: {
 		MORNING: [

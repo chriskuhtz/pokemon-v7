@@ -166,4 +166,13 @@ export const occupantsRecord: Record<number, Occupant> = {
 		quest: 'Catch a Zorua at night in the meadow',
 		sprite: '080',
 	},
+	//Buildings start at 700000
+	700001: {
+		type: 'BUILDING',
+		x: 15,
+		y: 0,
+		height: 1,
+		width: 1,
+		sprite: '/mapObjects/houses/market.png',
+	},
 };

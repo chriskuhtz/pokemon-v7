@@ -133,6 +133,15 @@ const drawOccupant = (
 
 	img.addEventListener('load', () => {
 		switch (occ.type) {
+			case 'BUILDING':
+				ctx?.drawImage(
+					img,
+					baseSize * occ.x,
+					baseSize * occ.y,
+					baseSize * occ.height,
+					baseSize * occ.width
+				);
+				break;
 			case 'MERCHANT':
 			case 'NURSE':
 			case 'NPC':
@@ -177,6 +186,8 @@ const drawOccupant = (
 
 const getSource = (occ: Occupant) => {
 	switch (occ.type) {
+		case 'BUILDING':
+			return occ.sprite;
 		case 'MERCHANT':
 		case 'NURSE':
 		case 'NPC':

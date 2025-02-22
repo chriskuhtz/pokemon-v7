@@ -91,6 +91,15 @@ export interface OverworldTrainer {
 	name: string;
 }
 
+export interface Building {
+	type: 'BUILDING';
+	height: number;
+	width: number;
+	x: number;
+	y: number;
+	sprite: string;
+}
+
 export type Occupant =
 	| OverworldItem
 	| OverworldHiddenItem
@@ -99,7 +108,8 @@ export type Occupant =
 	| OverworldNurse
 	| OverworldBush
 	| OverworldNpc
-	| OverworldTrainer;
+	| OverworldTrainer
+	| Building;
 
 export interface OverworldEncounter {
 	dexId: number;
