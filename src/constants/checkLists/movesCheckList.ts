@@ -267,6 +267,7 @@ export const movesCheckList: {
 	{
 		name: 'low-kick',
 		url: 'https://pokeapi.co/api/v2/move/67/',
+		handled: true,
 	},
 	{ name: 'counter', url: 'https://pokeapi.co/api/v2/move/68/' },
 	{
@@ -1391,6 +1392,7 @@ export const handledMoves = [
 	'peck',
 	'drill-peck',
 	'submission',
+	'low-kick',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

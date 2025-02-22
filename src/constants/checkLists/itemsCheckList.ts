@@ -285,6 +285,7 @@ export const itemsCheckList: {
 	{
 		name: 'blue-flute',
 		url: 'https://pokeapi.co/api/v2/item/65/',
+		handled: true,
 	},
 	{
 		name: 'yellow-flute',
