@@ -32,6 +32,8 @@ export const meadow: OverworldMap = {
 		//obstacles
 		800001, 800002, 800003, 800004, 800005, 800006, 800007, 800008, 800009,
 		800010, 800011, 800012,
+		//signs
+		900001,
 	],
 	possibleEncounters: {
 		MORNING: [

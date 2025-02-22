@@ -81,7 +81,11 @@ export const occupantsRecord: Record<number, Occupant> = {
 		orientation: 'DOWN',
 		map: 'market_meadow',
 		inventory: STANDARD_BUY_MARKET,
-		dialogue: ['Get your supplies here'],
+		dialogue: [
+			'Get your supplies here',
+			'My Apologies, We only opened recently',
+			'so we dont have much yet',
+		],
 		sprite: SpriteEnum['clerkMale'],
 		conditionFunction: () => true,
 	},
@@ -395,6 +399,16 @@ export const occupantsRecord: Record<number, Occupant> = {
 		x: 0,
 		y: 4,
 		map: 'meadow',
+		conditionFunction: () => true,
+	},
+	//signs start at 900000
+	900001: {
+		map: 'meadow',
+		type: 'SIGN',
+		x: 8,
+		y: 1,
+		dialogue: ['Oak Research Outpost', 'Kuma Region'],
+		approachDirection: 'UP',
 		conditionFunction: () => true,
 	},
 };
