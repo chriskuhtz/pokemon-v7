@@ -32,6 +32,7 @@ export interface BattlePokemon extends OwnedPokemon {
 	lastReceivedDamage?: {
 		damageClass: DamageClass['name'];
 		damage: number;
+		applicatorId: string;
 	};
 }
 

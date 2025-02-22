@@ -258,6 +258,7 @@ export const handleAttack = ({
 		lastReceivedDamage: {
 			damageClass: move.data.damage_class.name,
 			damage: damage,
+			applicatorId: attacker.id,
 		},
 	};
 	// check attacker  drain/recoil
