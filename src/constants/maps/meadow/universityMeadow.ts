@@ -1,19 +1,15 @@
 import { generateEmptyBackground } from '../../../functions/generateEmptyBackground';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 
-export const pokecenterMeadow: OverworldMap = {
-	id: 'pokecenter_meadow',
-	backgroundTile: '/tiles/redTiles.png',
+export const universityMeadow: OverworldMap = {
+	id: 'university_meadow',
+	backgroundTile: '/tiles/whiteBoards.png',
 	possibleEncounters: { MORNING: [], DAY: [], EVENING: [], NIGHT: [] },
-	height: 4,
-	width: 5,
-	tileMap: generateEmptyBackground(4, 5),
+	height: 8,
+	width: 20,
+	tileMap: generateEmptyBackground(8, 20),
 	occupants: [
-		//pcs
-		100001,
-		//nurses
-		400001,
 		//portals
-		700004,
+		700006,
 	],
 };
