@@ -290,10 +290,12 @@ export const itemsCheckList: {
 	{
 		name: 'yellow-flute',
 		url: 'https://pokeapi.co/api/v2/item/66/',
+		handled: true,
 	},
 	{
 		name: 'red-flute',
 		url: 'https://pokeapi.co/api/v2/item/67/',
+		handled: true,
 	},
 	{
 		name: 'black-flute',
