@@ -244,7 +244,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		map: 'trailer_meadow',
 		orientation: 'LEFT',
 
-		unhandledMessage: ['Dont even think about it', 'this is my bed'],
+		unhandledMessage: ['Dont even think about it', 'this one is my bed'],
 		sprite: SpriteEnum['gary'],
 		conditionFunction: (s) => s.handledOccupants.some((h) => h.id === 600007),
 	},
@@ -355,7 +355,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		portal: {
 			forwardFoot: 'CENTER1',
 			x: 1,
-			y: 2,
+			y: 1,
 			orientation: 'UP',
 			mapId: 'trailer_meadow',
 		},
@@ -366,7 +366,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		small: true,
 		map: 'trailer_meadow',
 		x: 1,
-		y: 2,
+		y: 1,
 		sprite: '/mapObjects/doormat.png',
 		portal: {
 			forwardFoot: 'CENTER1',
@@ -486,6 +486,23 @@ export const occupantsRecord: Record<number, Occupant> = {
 		map: 'university_meadow',
 		conditionFunction: () => true,
 	},
+	800014: {
+		type: 'OBSTACLE',
+		sprite: '/mapObjects/mattress.png',
+		x: 0,
+		y: 0,
+		map: 'trailer_meadow',
+		conditionFunction: () => true,
+	},
+	800015: {
+		type: 'OBSTACLE',
+		sprite: '/mapObjects/mattress.png',
+		x: 2,
+		y: 1,
+		map: 'trailer_meadow',
+		conditionFunction: () => true,
+	},
+
 	//signs start at 900000
 	900001: {
 		map: 'meadow',
