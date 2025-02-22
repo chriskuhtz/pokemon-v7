@@ -37,6 +37,7 @@ export const testState: SaveFile = {
 		'Train a Pokemon to lvl 10': 'INACTIVE',
 		'Catch a Zorua at night in the meadow': 'INACTIVE',
 		'Catch a morning pokemon from the meadow': 'INACTIVE',
+		'Defeat all the Trainers in the meadow': 'INACTIVE',
 	},
 	inventory: generateInventory({
 		'pp-up': 3,
