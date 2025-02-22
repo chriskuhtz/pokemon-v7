@@ -68,6 +68,7 @@ export const Overworld = ({
 	const [statefulOccupants, setStatefulOccupants] = useState<
 		Record<number, Occupant>
 	>({});
+
 	useEffect(() => {
 		const filteredOccupants = [...map.occupants].filter((o) => {
 			const occ = occupantsRecord[o];
@@ -190,6 +191,7 @@ export const Overworld = ({
 				handledOccupants,
 				handleThisOccupant,
 				cutterPokemon,
+				goToPosition: setCharacterLocation,
 			}),
 		[
 			changeOccupant,
@@ -199,6 +201,7 @@ export const Overworld = ({
 			handledOccupants,
 			openStorage,
 			playerLocation,
+			setCharacterLocation,
 			stepsTaken,
 			talkToNurse,
 		]

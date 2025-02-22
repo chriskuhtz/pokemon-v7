@@ -69,10 +69,10 @@ export const occupantsRecord: Record<number, Occupant> = {
 	//Merchants start at 300000,
 	300001: {
 		type: 'MERCHANT',
-		x: 6,
+		x: 2,
 		y: 0,
 		orientation: 'DOWN',
-		map: 'meadow',
+		map: 'market',
 		inventory: STANDARD_BUY_MARKET,
 		dialogue: ['Get your supplies here'],
 		sprite: SpriteEnum['clerkMale'],
@@ -168,5 +168,36 @@ export const occupantsRecord: Record<number, Occupant> = {
 		],
 		quest: 'Catch a Zorua at night in the meadow',
 		sprite: '080',
+	},
+	//Portals start at 700000
+	700001: {
+		type: 'PORTAL',
+		map: 'meadow',
+		x: 15,
+		y: 0,
+
+		sprite: '/mapObjects/houses/market.png',
+		portal: {
+			forwardFoot: 'CENTER1',
+			x: 2,
+			y: 3,
+			orientation: 'UP',
+			mapId: 'market',
+		},
+	},
+	700002: {
+		type: 'PORTAL',
+		small: true,
+		map: 'market',
+		x: 2,
+		y: 3,
+		sprite: '/mapObjects/doormat.png',
+		portal: {
+			forwardFoot: 'CENTER1',
+			x: 15,
+			y: 1,
+			orientation: 'DOWN',
+			mapId: 'meadow',
+		},
 	},
 };

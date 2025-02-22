@@ -12,7 +12,7 @@ import { TimeOfDay } from '../functions/getTimeOfDay';
 import { Inventory } from './Inventory';
 import { ItemType } from './Item';
 import { OwnedPokemon } from './OwnedPokemon';
-import { CharacterOrientation, MapId } from './SaveFile';
+import { CharacterLocationData, CharacterOrientation, MapId } from './SaveFile';
 import { WeatherType } from './Weather';
 
 export interface OverworldItem {
@@ -91,6 +91,16 @@ export interface OverworldTrainer {
 	name: string;
 }
 
+export interface Portal {
+	type: 'PORTAL';
+	x: number;
+	y: number;
+	sprite: string;
+	portal: CharacterLocationData;
+	map: MapId;
+	small?: boolean;
+}
+
 export type Occupant =
 	| OverworldItem
 	| OverworldHiddenItem
@@ -99,16 +109,17 @@ export type Occupant =
 	| OverworldNurse
 	| OverworldBush
 	| OverworldNpc
-	| OverworldTrainer;
+	| OverworldTrainer
+	| Portal;
 
 export interface OverworldEncounter {
 	dexId: number;
 	xp: number;
 }
 export interface OverworldMap {
-	id: string;
-	backgroundTile: { x: number; y: number };
-	encounterTile: { x: number; y: number };
+	id: MapId;
+	backgroundTile: string;
+	encounterTile?: string;
 	possibleEncounters: Record<TimeOfDay, OverworldEncounter[]>;
 	width: number;
 	height: number;

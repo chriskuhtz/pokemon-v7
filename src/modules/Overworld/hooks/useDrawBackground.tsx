@@ -10,29 +10,49 @@ export const useDrawBackground = (canvasId: string, map: OverworldMap) => {
 		) as HTMLCanvasElement | null;
 		const ctx = el?.getContext('2d');
 
-		const img = new Image();
+		const baseTileImage = new Image();
 
-		img.addEventListener('load', () => {
+		baseTileImage.addEventListener('load', () => {
 			ctx?.clearRect(0, 0, width * baseSize, height * baseSize);
 
 			tileMap.forEach((row, h) => {
 				row.forEach((value, w) => {
 					const isEncounterGrass = value === 1;
-					ctx?.drawImage(
-						img,
-						isEncounterGrass ? encounterTile.x : backgroundTile.x,
-						isEncounterGrass ? encounterTile.y : backgroundTile.y,
-						baseSize / 4,
-						baseSize / 4,
-						w * baseSize,
-						h * baseSize,
-						baseSize,
-						baseSize
-					);
+					if (!isEncounterGrass) {
+						ctx?.drawImage(
+							baseTileImage,
+							w * baseSize,
+							h * baseSize,
+							baseSize,
+							baseSize
+						);
+					}
 				});
 			});
 		});
+		baseTileImage.src = backgroundTile;
+		const encounterTileImage = new Image();
+		if (encounterTile) {
+			encounterTileImage.addEventListener('load', () => {
+				//ctx?.clearRect(0, 0, width * baseSize, height * baseSize);
 
-		img.src = '/tileset.png';
+				tileMap.forEach((row, h) => {
+					row.forEach((value, w) => {
+						const isEncounterGrass = value === 1;
+						if (isEncounterGrass) {
+							ctx?.drawImage(
+								encounterTileImage,
+								w * baseSize,
+								h * baseSize,
+								baseSize,
+								baseSize
+							);
+						}
+					});
+				});
+			});
+
+			encounterTileImage.src = encounterTile;
+		}
 	}, [canvasId, map]);
 };

@@ -17,6 +17,7 @@ export const interactWithFunction = ({
 	handledOccupants,
 	handleThisOccupant,
 	cutterPokemon,
+	goToPosition,
 }: {
 	occ: [string, Occupant] | undefined;
 	addDialogue: (x: Dialogue) => void;
@@ -29,12 +30,17 @@ export const interactWithFunction = ({
 	talkToNurse: (id: number) => void;
 	handleThisOccupant: (id: number) => void;
 	handledOccupants: number[];
+	goToPosition: (x: CharacterLocationData) => void;
 }) => {
 	if (!occ) {
 		return;
 	}
 	const [id, data] = occ;
 
+	if (data.type === 'PORTAL') {
+		goToPosition(data.portal);
+		return;
+	}
 	if (data.type === 'ITEM' || data.type === 'HIDDEN_ITEM') {
 		addDialogue({
 			message: `Found ${data.amount} ${data.item}`,
