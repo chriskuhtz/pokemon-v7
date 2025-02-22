@@ -9,8 +9,8 @@ import { Banner } from '../../../uiComponents/Banner/Banner';
 import { Chip } from '../../../uiComponents/Chip/Chip';
 import { HappinessIcon } from '../../HappinessIcon/HappinessIcon';
 import { HpBar } from '../../HpBar/HpBar';
-import { LevelBar } from '../../LevelBar/LevelBar';
 import { PrimaryAilmentIcon } from '../../PrimaryAilmentIcon/PrimaryAilmentIcon';
+import { XpBar } from '../../XpBar/XpBar';
 import { StatDisplay } from './StatDisplay';
 
 export const HIDDEN_STATS = ['accuracy', 'evasion', 'hp'];
@@ -74,7 +74,7 @@ export const OwnedPokemonCardContent = ({
 				<div>
 					<div style={{ display: 'flex', gap: '2.5rem' }}>
 						<HappinessIcon value={ownedPokemon.happiness} />
-						<LevelBar xp={ownedPokemon.xp} />
+						<XpBar xp={ownedPokemon.xp} />
 					</div>
 
 					<HpBar
