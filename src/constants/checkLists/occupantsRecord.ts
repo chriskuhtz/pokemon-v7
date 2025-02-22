@@ -101,7 +101,8 @@ export const occupantsRecord: Record<number, Occupant> = {
 		y: 7,
 		map: 'meadow',
 		orientation: 'UP',
-		unhandledDialogue: ["i'll try spinning", 'thats a good trick'],
+		unhandledDialogue: ['Can you defeat all the trainers here,', 'Big dog?'],
+		quest: 'Defeat all the Trainers in the meadow',
 		sprite: '060',
 		movement: { path: ['UP', 'RIGHT', 'LEFT', 'DOWN'], currentStep: 0 },
 	},
@@ -128,7 +129,8 @@ export const occupantsRecord: Record<number, Occupant> = {
 		y: 5,
 		map: 'meadow',
 		orientation: 'LEFT',
-		unhandledDialogue: ['Running in circles is dank af'],
+		unhandledDialogue: ['Have you seen a little yellow mouse?'],
+		quest: 'catch a pikachu',
 		sprite: '070',
 		movement: {
 			path: ['RIGHT', 'RIGHT', 'DOWN', 'DOWN', 'LEFT', 'LEFT', 'UP', 'UP'],
@@ -149,6 +151,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		handledDialogue: ['did your pokemon enjoy the candies'],
 		sprite: '077',
 		gifts: { 'rare-candy': 10 },
+		quest: 'Train a Pokemon to lvl 10',
 	},
 	600005: {
 		type: 'NPC',
