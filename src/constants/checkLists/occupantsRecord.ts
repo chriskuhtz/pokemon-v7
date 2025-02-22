@@ -50,6 +50,22 @@ export const occupantsRecord: Record<number, Occupant> = {
 		team: [{ ...testOpponent, dexId: 66 }],
 		name: 'Sailor Bob',
 	},
+	200002: {
+		type: 'TRAINER',
+		x: 13,
+		y: 3,
+		map: 'meadow',
+		orientation: 'RIGHT',
+		unhandledDialogue: ['Watt up', 'can you feel the electricity'],
+		handledDialogue: ['I short circuited'],
+		sprite: '069',
+		team: [
+			{ ...testOpponent, dexId: 100 },
+			{ ...testOpponent, dexId: 309 },
+			{ ...testOpponent, dexId: 522 },
+		],
+		name: 'Electrician Erik',
+	},
 	//Merchants start at 300000,
 	300001: {
 		type: 'MERCHANT',
@@ -61,7 +77,6 @@ export const occupantsRecord: Record<number, Occupant> = {
 		dialogue: ['Get your supplies here'],
 		sprite: SpriteEnum['clerkMale'],
 	},
-
 	//Nurses start at 400000,
 	400001: {
 		type: 'NURSE',
