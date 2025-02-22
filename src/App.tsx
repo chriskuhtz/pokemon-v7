@@ -218,7 +218,7 @@ export const App = ({
 				allPokemon={pokemon}
 				goBack={() => setActiveTabReducer('OVERWORLD')}
 				setPokemon={setPokemonReducer}
-				addToast={addMessage}
+				addMessage={addMessage}
 			/>
 		);
 	}

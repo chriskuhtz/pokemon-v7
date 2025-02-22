@@ -2,7 +2,7 @@ import { App } from '../../App';
 import { useMessageQueue } from '../../hooks/useMessageQueue';
 import { Banner } from '../Banner/Banner';
 
-export const ToastContainer = () => {
+export const MessageContainer = () => {
 	const { addMessage, latestMessage, addMultipleMessages, interjectMessage } =
 		useMessageQueue();
 	return (

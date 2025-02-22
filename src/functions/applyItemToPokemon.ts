@@ -22,7 +22,7 @@ import { removeHealableAilments } from './removeHealableAilments';
 export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	pokemon: T,
 	item: ItemType,
-	addToast?: (x: string) => void,
+	addMessage?: (x: string) => void,
 	move?: MoveName
 ): T {
 	if ((item === 'ether' || item === 'max-ether') && move) {
@@ -51,8 +51,8 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		(item === 'revive' || item === 'max-revive' || item === 'revival-herb') &&
 		pokemon.damage >= pokemon.maxHp
 	) {
-		if (addToast) {
-			addToast(`regained ${item === 'revive' ? '50%' : 'full'} HP`);
+		if (addMessage) {
+			addMessage(`regained ${item === 'revive' ? '50%' : 'full'} HP`);
 		}
 		if (isBattlePokemon(pokemon)) {
 			return {
@@ -75,8 +75,8 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		};
 	}
 	if (item === 'full-restore') {
-		if (addToast) {
-			addToast(`fully healed`);
+		if (addMessage) {
+			addMessage(`fully healed`);
 		}
 		if (isBattlePokemon(pokemon)) {
 			return {
@@ -96,8 +96,8 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		item === 'lava-cookie' ||
 		item === 'old-gateau'
 	) {
-		if (addToast) {
-			addToast(`all ailments healed`);
+		if (addMessage) {
+			addMessage(`all ailments healed`);
 		}
 		if (isBattlePokemon(pokemon)) {
 			return {
@@ -113,8 +113,8 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 
 	if (HPHealTable[item]) {
 		const updatedDamage = Math.max(pokemon.damage - HPHealTable[item], 0);
-		if (addToast) {
-			addToast(`healed ${pokemon.damage - updatedDamage} HP`);
+		if (addMessage) {
+			addMessage(`healed ${pokemon.damage - updatedDamage} HP`);
 		}
 
 		return { ...pokemon, damage: updatedDamage };
@@ -124,8 +124,8 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		(pokemon.primaryAilment?.type === 'poison' ||
 			pokemon.primaryAilment?.type === 'toxic')
 	) {
-		if (addToast) {
-			addToast(`Poisoning cured`);
+		if (addMessage) {
+			addMessage(`Poisoning cured`);
 		}
 		return {
 			...pokemon,
@@ -134,8 +134,8 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		};
 	}
 	if (item === 'burn-heal' && pokemon.primaryAilment?.type === 'burn') {
-		if (addToast) {
-			addToast(`Burn cured`);
+		if (addMessage) {
+			addMessage(`Burn cured`);
 		}
 		return {
 			...pokemon,
@@ -144,8 +144,8 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		};
 	}
 	if (item === 'ice-heal' && pokemon.primaryAilment?.type === 'freeze') {
-		if (addToast) {
-			addToast(`Defrosted`);
+		if (addMessage) {
+			addMessage(`Defrosted`);
 		}
 		return {
 			...pokemon,
@@ -157,8 +157,8 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		(item === 'awakening' || item === 'blue-flute') &&
 		pokemon.primaryAilment?.type === 'sleep'
 	) {
-		if (addToast) {
-			addToast(`Woken Up`);
+		if (addMessage) {
+			addMessage(`Woken Up`);
 		}
 		return {
 			...pokemon,
@@ -170,8 +170,8 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		item === 'paralyze-heal' &&
 		pokemon.primaryAilment?.type === 'paralysis'
 	) {
-		if (addToast) {
-			addToast(`Paralysis healed`);
+		if (addMessage) {
+			addMessage(`Paralysis healed`);
 		}
 		return {
 			...pokemon,
@@ -180,8 +180,8 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		};
 	}
 	if (item === 'yellow-flute') {
-		if (addToast) {
-			addToast(`confusion healed`);
+		if (addMessage) {
+			addMessage(`confusion healed`);
 		}
 		if (isBattlePokemon(pokemon)) {
 			return {
@@ -196,8 +196,8 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		return { ...pokemon, primaryAilment: undefined };
 	}
 	if (item === 'red-flute') {
-		if (addToast) {
-			addToast(`infatuation healed`);
+		if (addMessage) {
+			addMessage(`infatuation healed`);
 		}
 		if (isBattlePokemon(pokemon)) {
 			return {
@@ -221,8 +221,8 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 			return pokemon;
 		}
 
-		if (addToast) {
-			addToast(`reached level ${level + 1}`);
+		if (addMessage) {
+			addMessage(`reached level ${level + 1}`);
 		}
 		return {
 			...applyHappinessChange(pokemon, HappinessChangeTable[item] ?? 0),
@@ -241,21 +241,21 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 				1,
 				true,
 				[],
-				addToast
+				addMessage
 			) as T;
 		}
 		if (item === 'guard-spec') {
 			return applySecondaryAilmentToPokemon(
 				pokemon,
 				'guard-spec',
-				addToast ? addToast : () => {}
+				addMessage ? addMessage : () => {}
 			) as T;
 		}
 		if (item === 'dire-hit') {
 			return applySecondaryAilmentToPokemon(
 				pokemon,
 				'dire-hit',
-				addToast ? addToast : () => {}
+				addMessage ? addMessage : () => {}
 			) as T;
 		}
 	}

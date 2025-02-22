@@ -56,8 +56,8 @@ export interface OverworldNurse extends BaseOccupant {
 export interface OverworldNpc extends BaseOccupant {
 	type: 'NPC';
 	orientation: CharacterOrientation;
-	unhandledDialogue: string[];
-	handledDialogue?: string[];
+	unhandledMessage: string[];
+	handledMessage?: string[];
 	sprite: string;
 	movement?: { path: CharacterOrientation[]; currentStep: number };
 	gifts?: Partial<Inventory>;
@@ -75,13 +75,14 @@ export interface OverworldBush extends BaseOccupant {
 export interface OverworldObstacle extends BaseOccupant {
 	type: 'OBSTACLE';
 	sprite: string;
+	small?: boolean;
 }
 
 export interface OverworldTrainer extends BaseOccupant {
 	type: 'TRAINER';
 	orientation: CharacterOrientation;
-	unhandledDialogue: string[];
-	handledDialogue?: string[];
+	unhandledMessage: string[];
+	handledMessage?: string[];
 	sprite: string;
 	team: OwnedPokemon[];
 	name: string;

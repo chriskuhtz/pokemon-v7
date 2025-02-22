@@ -6,10 +6,10 @@
 // 		damage: updatedAttacker.damage - drained,
 // 	};
 // 	if (drain > 0) {
-// 		dispatchToast(`${updatedAttacker.data.name} restored ${drained} HP`);
+// 		addMessage(`${updatedAttacker.data.name} restored ${drained} HP`);
 // 	}
 // 	if (drain < 0) {
-// 		dispatchToast(
+// 		addMessage(
 // 			`${updatedAttacker.data.name} took ${drained} HP recoil damage`
 // 		);
 // 	}

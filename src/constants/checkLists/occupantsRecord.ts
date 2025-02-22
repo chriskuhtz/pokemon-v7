@@ -49,8 +49,8 @@ export const occupantsRecord: Record<number, Occupant> = {
 		y: 7,
 		map: 'meadow',
 		orientation: 'LEFT',
-		unhandledDialogue: ['fight me', 'big dog'],
-		handledDialogue: ['you are the big dog, big dog'],
+		unhandledMessage: ['fight me', 'big dog'],
+		handledMessage: ['you are the big dog, big dog'],
 		sprite: SpriteEnum['sailor'],
 		team: [{ ...testOpponent, dexId: 66 }],
 		name: 'Sailor Bob',
@@ -62,8 +62,8 @@ export const occupantsRecord: Record<number, Occupant> = {
 		y: 8,
 		map: 'meadow',
 		orientation: 'RIGHT',
-		unhandledDialogue: ['Watt up', 'can you feel the electricity'],
-		handledDialogue: ['I short circuited'],
+		unhandledMessage: ['Watt up', 'can you feel the electricity'],
+		handledMessage: ['I short circuited'],
 		sprite: SpriteEnum['rocker'],
 		team: [
 			{ ...testOpponent, dexId: 100 },
@@ -115,11 +115,11 @@ export const occupantsRecord: Record<number, Occupant> = {
 		y: 4,
 		map: 'meadow',
 		orientation: 'UP',
-		unhandledDialogue: [
+		unhandledMessage: [
 			'Pokemon Trainers compete with each other',
 			'Can you become the best of them all?',
 		],
-		handledDialogue: ['I cant wait to grow up and become a trainer'],
+		handledMessage: ['I cant wait to grow up and become a trainer'],
 		quest: 'Defeat all the Trainers in the meadow',
 		sprite: SpriteEnum['boy'],
 		conditionFunction: () => getTimeOfDay() !== 'NIGHT',
@@ -130,12 +130,12 @@ export const occupantsRecord: Record<number, Occupant> = {
 		y: 1,
 		map: 'meadow',
 		orientation: 'LEFT',
-		unhandledDialogue: [
+		unhandledMessage: [
 			'did you know?',
 			'some pokemon only appear in the morning!',
 			'These might help you catch them',
 		],
-		handledDialogue: ['did you find one?'],
+		handledMessage: ['did you find one?'],
 		sprite: SpriteEnum['uncle'],
 		gifts: { 'quick-ball': 5 },
 		quest: 'Catch a morning pokemon from the meadow',
@@ -148,7 +148,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		y: 5,
 		map: 'meadow',
 		orientation: 'LEFT',
-		unhandledDialogue: ['Have you seen a little yellow mouse?'],
+		unhandledMessage: ['Have you seen a little yellow mouse?'],
 		quest: 'catch a pikachu',
 		sprite: SpriteEnum['lass1'],
 		movement: {
@@ -163,12 +163,12 @@ export const occupantsRecord: Record<number, Occupant> = {
 		y: 4,
 		map: 'meadow',
 		orientation: 'UP',
-		unhandledDialogue: [
+		unhandledMessage: [
 			'Your Pokemon look hungry',
 			'maybe they will like these',
 			'i made them myself',
 		],
-		handledDialogue: ['did your pokemon enjoy the candies'],
+		handledMessage: ['did your pokemon enjoy the candies'],
 		sprite: SpriteEnum['grandma2'],
 		gifts: { 'rare-candy': 2 },
 		quest: 'Train a Pokemon to lvl 10',
@@ -182,7 +182,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 
 		orientation: 'DOWN',
 		gifts: { 'dusk-ball': 5 },
-		unhandledDialogue: [
+		unhandledMessage: [
 			'During the day, i work in the city',
 			'I come here at night to search for zorua',
 			'These Dusk balls work well at night',
@@ -198,14 +198,14 @@ export const occupantsRecord: Record<number, Occupant> = {
 		map: 'university_meadow',
 		orientation: 'DOWN',
 		gifts: { 'poke-ball': 20 },
-		unhandledDialogue: [
+		unhandledMessage: [
 			'Ah, the new research assistant',
 			'perfect timing',
 			'Since we have only just established this university outpost,',
 			'we need to learn about the local pokemon',
 			'Can you catch 5 different species?',
 		],
-		handledDialogue: ['how is the catching going?'],
+		handledMessage: ['how is the catching going?'],
 		quest: 'Catch five different pokemon',
 		sprite: '136',
 		conditionFunction: () => true,
@@ -311,6 +311,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800001: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
 		x: 7,
 		y: 0,
 		map: 'meadow',
@@ -319,6 +320,8 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800003: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
+
 		x: 7,
 		y: 3,
 		map: 'meadow',
@@ -327,6 +330,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800004: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
 		x: 7,
 		y: 4,
 		map: 'meadow',
@@ -335,6 +339,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800005: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
 		x: 7,
 		y: 5,
 		map: 'meadow',
@@ -343,6 +348,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800006: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
 		x: 6,
 		y: 5,
 		map: 'meadow',
@@ -351,6 +357,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800007: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
 		x: 5,
 		y: 5,
 		map: 'meadow',
@@ -359,6 +366,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800008: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
 		x: 4,
 		y: 5,
 		map: 'meadow',
@@ -367,6 +375,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800009: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
 		x: 3,
 		y: 5,
 		map: 'meadow',
@@ -375,6 +384,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800010: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
 		x: 2,
 		y: 5,
 		map: 'meadow',
@@ -383,6 +393,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800011: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
 		x: 1,
 		y: 5,
 		map: 'meadow',
@@ -391,9 +402,18 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800012: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
 		x: 0,
 		y: 5,
 		map: 'meadow',
+		conditionFunction: () => true,
+	},
+	800013: {
+		type: 'OBSTACLE',
+		sprite: '/mapObjects/bookshelf.png',
+		x: 0,
+		y: 0,
+		map: 'university_meadow',
 		conditionFunction: () => true,
 	},
 	//signs start at 900000

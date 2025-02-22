@@ -83,7 +83,7 @@ export interface UseSaveFile {
 
 export const useSaveFile = (
 	init: SaveFile,
-	addToast: (x: string) => void
+	addMessage: (x: string) => void
 ): UseSaveFile => {
 	const local = window.localStorage.getItem(localStorageId);
 	const loaded = local ? (JSON.parse(local) as SaveFile) : init;
@@ -198,7 +198,7 @@ export const useSaveFile = (
 			saveFile.encounterRateModifier
 		);
 		if (saveFile.encounterRateModifier && !updatedModifier) {
-			addToast(`Encounter Rate Modifier ended`);
+			addMessage(`Encounter Rate Modifier ended`);
 		}
 		setSaveFile(
 			{
@@ -268,7 +268,7 @@ export const useSaveFile = (
 			},
 			'talkToNurse'
 		);
-		addToast('Whole Team fully healed');
+		addMessage('Whole Team fully healed');
 	};
 	const useSacredAshReducer = () => {
 		setSaveFile(
@@ -289,7 +289,7 @@ export const useSaveFile = (
 			},
 			'sacredAsh'
 		);
-		addToast('Whole Team fully healed');
+		addMessage('Whole Team fully healed');
 	};
 
 	const handleOccupantReducer = (id: number) => {
@@ -304,21 +304,21 @@ export const useSaveFile = (
 		let newInventory = { ...saveFile.inventory };
 		if (occ.type === 'NPC' && occ.gifts) {
 			Object.entries(occ.gifts).forEach(([item, amount]) => {
-				addToast(`received ${amount} ${item}`);
+				addMessage(`received ${amount} ${item}`);
 			});
 
 			newInventory = joinInventories(newInventory, occ.gifts);
 		}
 		if (occ.type === 'ITEM' || occ.type === 'HIDDEN_ITEM') {
 			const { item, amount } = occ;
-			addToast(`found ${amount} ${item}`);
+			addMessage(`found ${amount} ${item}`);
 
 			newInventory = joinInventories(newInventory, { [item]: amount });
 		}
 		const updatedQuests = saveFile.quests;
 		if (occ.type === 'NPC' && occ.quest) {
 			const { quest } = occ;
-			addToast(`new quest: ${quest}`);
+			addMessage(`new quest: ${quest}`);
 
 			if (updatedQuests[quest] === 'INACTIVE') {
 				updatedQuests[quest] = 'ACTIVE';
@@ -349,7 +349,7 @@ export const useSaveFile = (
 		item: ItemType,
 		move?: MoveName
 	) => {
-		const updatedPokemon = applyItemToPokemon(pokemon, item, addToast, move);
+		const updatedPokemon = applyItemToPokemon(pokemon, item, addMessage, move);
 		const updatedInventory = joinInventories(
 			saveFile.inventory,
 			{ [item]: 1 },
@@ -464,7 +464,7 @@ export const useSaveFile = (
 	const applyEncounterRateModifierItem = (item: EncounterChanceItem) => {
 		let modifier: { factor: number; steps: number } = { factor: 0, steps: 0 };
 		if (saveFile.encounterRateModifier) {
-			addToast('There is already a encounter rate modifier');
+			addMessage('There is already a encounter rate modifier');
 			return;
 		}
 		if (item === 'white-flute') {
@@ -483,7 +483,7 @@ export const useSaveFile = (
 			modifier = { factor: 0, steps: 500 };
 		}
 
-		addToast(`${item} applied`);
+		addMessage(`${item} applied`);
 		setSaveFile(
 			{
 				...saveFile,

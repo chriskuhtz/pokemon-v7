@@ -13,5 +13,7 @@ export const universityMeadow: OverworldMap = {
 		600006,
 		//portals
 		700006,
+		//obstacles
+		800013,
 	],
 };

@@ -1,22 +1,22 @@
 import { useMemo, useState } from 'react';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
+import { Message } from '../../hooks/useMessageQueue';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { Message } from '../../hooks/useMessageQueue';
 
 export const PokemonStorage = ({
 	allPokemon,
 	goBack,
 	setPokemon,
-	addToast,
+	addMessage,
 }: {
 	allPokemon: OwnedPokemon[];
 	goBack: () => void;
 	setPokemon: (x: OwnedPokemon[]) => void;
-	addToast: (x: Message) => void;
+	addMessage: (x: Message) => void;
 }): JSX.Element => {
 	const [sortBy, setSortBy] = useState<'DEX_ID' | 'HAPPINESS' | 'XP'>('DEX_ID');
 	const sortFunction = useMemo(() => {
@@ -55,7 +55,7 @@ export const PokemonStorage = ({
 						key={pokemon.id}
 						onClick={() => {
 							if (team.length === 1) {
-								addToast({ message: 'One Pokemon must remain on the team!' });
+								addMessage({ message: 'One Pokemon must remain on the team!' });
 								return;
 							}
 							togglePokemonOnTeam(pokemon.id);
@@ -115,7 +115,7 @@ export const PokemonStorage = ({
 						key={pokemon.id}
 						onClick={() => {
 							if (team.length === 6) {
-								addToast({
+								addMessage({
 									message: 'You can only take 6 Pokemon on the team!',
 								});
 								return;

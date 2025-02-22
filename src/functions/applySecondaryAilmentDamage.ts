@@ -4,13 +4,13 @@ import { isTrapped } from './isTrapped';
 
 export const applySecondaryAilmentDamage = (
 	pokemon: BattlePokemon,
-	dispatchToast: (x: string) => void
+	addMessage: (x: string) => void
 ): BattlePokemon => {
 	let updated = { ...pokemon };
 
 	//apply ailment damage
 	if (isTrapped(updated)) {
-		dispatchToast(`${pokemon.data.name} is hurt by its trap`);
+		addMessage(`${pokemon.data.name} is hurt by its trap`);
 		const trapDamage = Math.floor(TRAP_DAMAGE_FACTOR * updated.stats.hp);
 		updated = {
 			...updated,

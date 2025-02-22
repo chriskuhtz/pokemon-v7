@@ -2,7 +2,7 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 
 export const reduceSecondaryAilmentDurations = (
 	p: BattlePokemon,
-	dispatchToast: (x: string) => void
+	addMessage: (x: string) => void
 ): BattlePokemon => {
 	const updated = { ...p };
 	//reduce ailment duration
@@ -11,13 +11,13 @@ export const reduceSecondaryAilmentDurations = (
 			if (['trap', 'guard-spec'].includes(a.type)) {
 				if (a.duration === 0) {
 					if (a.type === 'trap') {
-						dispatchToast(`${p.data.name} is no longer trapped`);
+						addMessage(`${p.data.name} is no longer trapped`);
 					}
 					if (a.type === 'guard-spec') {
-						dispatchToast(`${p.data.name}'s guard spec effect ended`);
+						addMessage(`${p.data.name}'s guard spec effect ended`);
 					}
 					if (a.type === 'disable') {
-						dispatchToast(`${p.data.name} is no longer disabled`);
+						addMessage(`${p.data.name} is no longer disabled`);
 					}
 					return undefined;
 				} else {

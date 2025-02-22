@@ -1,13 +1,12 @@
 import { getOppositeDirection } from '../../../functions/getOppositeDirection';
-import { getPokemonSprite } from '../../../functions/getPokemonSprite';
+import { Message } from '../../../hooks/useMessageQueue';
 import { Inventory } from '../../../interfaces/Inventory';
 import { Occupant } from '../../../interfaces/OverworldMap';
 import { CharacterLocationData } from '../../../interfaces/SaveFile';
-import { Dialogue } from '../Overworld';
 
 export const interactWithFunction = ({
 	occ,
-	addDialogue,
+	addMessage,
 	openStorage,
 	stepsTaken,
 	changeOccupant,
@@ -20,7 +19,7 @@ export const interactWithFunction = ({
 	goToPosition,
 }: {
 	occ: [string, Occupant] | undefined;
-	addDialogue: (x: Dialogue) => void;
+	addMessage: (x: Message) => void;
 	cutterPokemon?: { dexId: number };
 	openStorage: (stepsTaken: number) => void;
 	stepsTaken: number;
@@ -42,7 +41,7 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'ITEM' || data.type === 'HIDDEN_ITEM') {
-		addDialogue({
+		addMessage({
 			message: `Found ${data.amount} ${data.item}`,
 			onRemoval: () => handleThisOccupant(Number.parseInt(id)),
 		});
@@ -50,19 +49,18 @@ export const interactWithFunction = ({
 	}
 	if (data.type === 'BUSH' && !handledOccupants.includes(Number.parseInt(id))) {
 		if (cutterPokemon) {
-			addDialogue({
+			addMessage({
 				message: `Your Pokemon used cut`,
-				icon: <img src={getPokemonSprite(cutterPokemon.dexId)} />,
 				onRemoval: () => handleThisOccupant(Number.parseInt(id)),
 			});
-		} else addDialogue({ message: 'Maybe a Pokemon can cut this' });
+		} else addMessage({ message: 'Maybe a Pokemon can cut this' });
 		return;
 	}
 	if (
 		data.type === 'PC' &&
 		playerLocation.orientation === data.approachDirection
 	) {
-		addDialogue({
+		addMessage({
 			message: 'Accessing Pokemon Storage',
 			onRemoval: () => openStorage(stepsTaken),
 		});
@@ -73,7 +71,7 @@ export const interactWithFunction = ({
 		playerLocation.orientation === data.approachDirection
 	) {
 		data.dialogue.forEach((d) =>
-			addDialogue({
+			addMessage({
 				message: d,
 			})
 		);
@@ -85,7 +83,7 @@ export const interactWithFunction = ({
 			orientation: getOppositeDirection(playerLocation.orientation),
 		});
 		data.dialogue.forEach((d, i) =>
-			addDialogue({
+			addMessage({
 				message: d,
 				onRemoval:
 					i === data.dialogue.length - 1
@@ -102,7 +100,7 @@ export const interactWithFunction = ({
 		});
 
 		data.dialogue.forEach((d, i) =>
-			addDialogue({
+			addMessage({
 				message: d,
 				onRemoval:
 					i === data.dialogue.length - 1
@@ -119,16 +117,16 @@ export const interactWithFunction = ({
 		});
 
 		if (!handledOccupants.includes(Number.parseInt(id))) {
-			data.unhandledDialogue.forEach((d) =>
-				addDialogue({
+			data.unhandledMessage.forEach((d) =>
+				addMessage({
 					message: d,
 				})
 			);
 
 			handleThisOccupant(Number.parseInt(id));
 		} else {
-			(data.handledDialogue ?? data.unhandledDialogue).forEach((d) =>
-				addDialogue({
+			(data.handledMessage ?? data.unhandledMessage).forEach((d) =>
+				addMessage({
 					message: d,
 				})
 			);
@@ -144,18 +142,18 @@ export const interactWithFunction = ({
 
 		if (
 			!handledOccupants.includes(Number.parseInt(id)) ||
-			!data.handledDialogue
+			!data.handledMessage
 		) {
-			data.unhandledDialogue.forEach((d) =>
-				addDialogue({
+			data.unhandledMessage.forEach((d) =>
+				addMessage({
 					message: d,
 				})
 			);
 
 			handleThisOccupant(Number.parseInt(id));
 		} else {
-			data.handledDialogue.forEach((d) =>
-				addDialogue({
+			data.handledMessage.forEach((d) =>
+				addMessage({
 					message: d,
 				})
 			);

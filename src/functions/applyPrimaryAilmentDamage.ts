@@ -6,10 +6,10 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 
 export const applyPrimaryAilmentDamage = (
 	pokemon: BattlePokemon,
-	dispatchToast: (x: string) => void
+	addMessage: (x: string) => void
 ): BattlePokemon => {
 	if (pokemon.primaryAilment?.type === 'burn') {
-		dispatchToast(`${pokemon.data.name} is hurt by burn`);
+		addMessage(`${pokemon.data.name} is hurt by burn`);
 
 		const burnDamage = Math.floor(BURN_DAMAGE_FACTOR * pokemon.stats.hp);
 		return {
@@ -18,7 +18,7 @@ export const applyPrimaryAilmentDamage = (
 		};
 	}
 	if (pokemon.primaryAilment?.type === 'poison') {
-		dispatchToast(`${pokemon.data.name} is hurt by poison`);
+		addMessage(`${pokemon.data.name} is hurt by poison`);
 
 		const poisonDamage = Math.floor(POISON_DAMAGE_FACTOR * pokemon.stats.hp);
 		return {
