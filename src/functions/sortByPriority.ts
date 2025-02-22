@@ -48,19 +48,25 @@ export const sortByPriority = (
 		a.primaryAilment?.type === 'paralysis' ? PARA_SPEED_FACTOR : 1;
 	const swiftSwimFactorA =
 		a.ability === 'swift-swim' && battleWeather === 'rain' ? 2 : 1;
+	const chlorophyllFactorA =
+		a.ability === 'chlorophyll' && battleWeather === 'sun' ? 2 : 1;
 	const aSpeed =
 		calculateModifiedStat(a.stats.speed, a.statBoosts.speed) *
 		paraFactorA *
-		swiftSwimFactorA;
+		swiftSwimFactorA *
+		chlorophyllFactorA;
 
 	const paraFactorB =
 		b.primaryAilment?.type === 'paralysis' ? PARA_SPEED_FACTOR : 1;
 	const swiftSwimFactorB =
 		b.ability === 'swift-swim' && battleWeather === 'rain' ? 2 : 1;
+	const chlorophyllFactorB =
+		b.ability === 'chlorophyll' && battleWeather === 'sun' ? 2 : 1;
 	const bSpeed =
 		calculateModifiedStat(b.stats.speed, b.statBoosts.speed) *
 		paraFactorB *
-		swiftSwimFactorB;
+		swiftSwimFactorB *
+		chlorophyllFactorB;
 
 	if (bSpeed > aSpeed) {
 		return 1;
