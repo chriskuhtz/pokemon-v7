@@ -1,6 +1,6 @@
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { Quest } from '../../interfaces/Quest';
-import { meadow } from '../maps/meadow';
+import { meadow } from '../maps/meadow/meadow';
 
 export const questNames = [
 	'catch a pikachu',

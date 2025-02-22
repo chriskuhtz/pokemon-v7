@@ -1,3 +1,4 @@
+import { MapId } from '../constants/checkLists/mapsRecord';
 import { QuestName } from '../constants/checkLists/questsRecord';
 import { BadgeName } from './Badge';
 import { Inventory } from './Inventory';
@@ -7,7 +8,6 @@ import { RoutesType } from './Routing';
 
 export type CharacterOrientation = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
 export type ForwardFoot = 'CENTER1' | 'RIGHT' | 'CENTER2' | 'LEFT';
-export type MapId = 'meadow' | 'market';
 
 export const OrientationKeyMap: Record<string, CharacterOrientation> = {
 	ArrowUp: 'UP',

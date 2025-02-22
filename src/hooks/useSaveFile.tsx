@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { mapsRecord } from '../constants/checkLists/mapsRecord';
 import { MoveName } from '../constants/checkLists/movesCheckList';
 import { occupantsRecord } from '../constants/checkLists/occupantsRecord';
 import { QuestName, QuestsRecord } from '../constants/checkLists/questsRecord';
 import { localStorageId, testState } from '../constants/gameData';
-import { meadow } from '../constants/maps/meadow';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 import { determineWildPokemon } from '../functions/determineWildPokemon';
@@ -213,7 +213,13 @@ export const useSaveFile = (
 					activeTab: route,
 					currentChallenger:
 						route === 'BATTLE'
-							? { team: determineWildPokemon(team, meadow), id: -1 }
+							? {
+									team: determineWildPokemon(
+										team,
+										mapsRecord[saveFile.location.mapId]
+									),
+									id: -1,
+							  }
 							: undefined,
 				},
 			},

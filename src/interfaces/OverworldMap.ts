@@ -7,12 +7,13 @@
  * 2 = blocked field
  */
 
+import { MapId } from '../constants/checkLists/mapsRecord';
 import { QuestName } from '../constants/checkLists/questsRecord';
 import { TimeOfDay } from '../functions/getTimeOfDay';
 import { Inventory } from './Inventory';
 import { ItemType } from './Item';
 import { OwnedPokemon } from './OwnedPokemon';
-import { CharacterLocationData, CharacterOrientation, MapId } from './SaveFile';
+import { CharacterLocationData, CharacterOrientation } from './SaveFile';
 import { WeatherType } from './Weather';
 
 export interface OverworldItem {

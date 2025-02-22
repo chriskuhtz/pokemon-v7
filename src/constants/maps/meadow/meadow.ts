@@ -1,4 +1,4 @@
-import { OverworldMap } from '../../interfaces/OverworldMap';
+import { OverworldMap } from '../../../interfaces/OverworldMap';
 
 export const meadow: OverworldMap = {
 	id: 'meadow',
@@ -21,19 +21,14 @@ export const meadow: OverworldMap = {
 	occupants: [
 		//items
 		0, 1, 2,
-		//pcs
-		100001,
 		// trainers
 		200001, 200002,
-
-		//nurses
-		400001,
 		//bushes
 		500001,
 		//npcs
 		600001, 600002, 600003, 600004, 600005,
 		//portals
-		700001,
+		700001, 700003,
 	],
 	possibleEncounters: {
 		MORNING: [
