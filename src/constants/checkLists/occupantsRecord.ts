@@ -24,8 +24,8 @@ export const occupantsRecord: Record<number, Occupant> = {
 	2: {
 		type: 'HIDDEN_ITEM',
 		item: 'antidote',
-		x: 8,
-		y: 8,
+		x: 13,
+		y: 2,
 		amount: 1,
 		map: 'meadow',
 	},
@@ -168,6 +168,26 @@ export const occupantsRecord: Record<number, Occupant> = {
 		],
 		quest: 'Catch a Zorua at night in the meadow',
 		sprite: '080',
+	},
+	600006: {
+		type: 'NPC',
+		x: 1,
+		y: 1,
+		map: 'university_meadow',
+		orientation: 'DOWN',
+		gifts: { 'poke-ball': 20 },
+		unhandledDialogue: [
+			'Nice to meet you',
+			'My name is Oak',
+			'I have dedicated my life to studying pokemon',
+			'Would you like to help me?',
+			'We have just established this university outpost,',
+			'So we need to learn about the local pokemon',
+			'Can you catch 5 different species?',
+		],
+		handledDialogue: ['how is the catching going?'],
+		quest: 'Catch five different pokemon',
+		sprite: '136',
 	},
 	//Portals start at 700000
 	700001: {

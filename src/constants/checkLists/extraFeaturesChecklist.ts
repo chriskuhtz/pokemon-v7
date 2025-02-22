@@ -152,4 +152,5 @@ export const extraFeatureCheckList: {
 	{ name: 'queststatus conditional npcs' },
 	{ name: 'random quest' },
 	{ name: 'bulletin board' },
+	{ name: 'anounce map on change' },
 ];
