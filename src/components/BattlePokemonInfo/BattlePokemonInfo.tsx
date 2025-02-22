@@ -1,9 +1,13 @@
+import { calculateLevelData } from '../../functions/calculateLevelData';
+import { getPlayerId } from '../../functions/getPlayerId';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Chip } from '../../uiComponents/Chip/Chip';
 import { HpBar } from '../HpBar/HpBar';
 import { PrimaryAilmentIcon } from '../PrimaryAilmentIcon/PrimaryAilmentIcon';
+import { XpBar } from '../XpBar/XpBar';
 
 export const BattlePokemonInfo = ({ pokemon }: { pokemon: BattlePokemon }) => {
+	const { level } = calculateLevelData(pokemon.xp);
 	return (
 		<div
 			style={{
@@ -13,7 +17,9 @@ export const BattlePokemonInfo = ({ pokemon }: { pokemon: BattlePokemon }) => {
 			}}
 			key={pokemon.id}
 		>
-			<strong>{pokemon.data.name}</strong>
+			<strong>
+				{pokemon.data.name} | Lvl {level}
+			</strong>
 			{Object.entries(pokemon.statBoosts).map(([stat, boost]) => {
 				if (boost !== 0) {
 					return (
@@ -28,6 +34,7 @@ export const BattlePokemonInfo = ({ pokemon }: { pokemon: BattlePokemon }) => {
 			})}
 			<PrimaryAilmentIcon primaryAilment={pokemon.primaryAilment} />
 			<HpBar max={pokemon.stats.hp} damage={pokemon.damage} />
+			{pokemon.ownerId === getPlayerId() && <XpBar xp={pokemon.xp} />}
 		</div>
 	);
 };

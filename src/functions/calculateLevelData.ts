@@ -17,6 +17,7 @@ export const calculateLevelData = (
 	level: number;
 	xpAtNextLevel: number;
 	progressToNextLevel: number;
+	xpForThisLevel: number;
 } => {
 	//level must be between 1 and 100
 	const level = getMiddleOfThree([1, Math.floor(Math.cbrt(xp)), 100]);
@@ -26,5 +27,5 @@ export const calculateLevelData = (
 	const totalXpToNextLevel = xpAtNextLevel - xpForThisLevel;
 	const progressToNextLevel = (xp - xpForThisLevel) / totalXpToNextLevel;
 
-	return { level, progressToNextLevel, xpAtNextLevel };
+	return { level, progressToNextLevel, xpAtNextLevel, xpForThisLevel };
 };

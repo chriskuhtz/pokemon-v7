@@ -31,7 +31,7 @@ export const useOverworldMovement = (
 			}
 			setEncounterChance(baseEncounterRate);
 		};
-		const int = setInterval(() => {
+		const int = setTimeout(() => {
 			if (
 				!nextInput &&
 				!['CENTER1', 'CENTER2'].includes(playerLocation.forwardFoot)
@@ -68,7 +68,7 @@ export const useOverworldMovement = (
 			setNextInput(undefined);
 		}, 1000 / fps);
 
-		return () => clearInterval(int);
+		return () => clearTimeout(int);
 	}, [
 		addStep,
 		encounterChance,
