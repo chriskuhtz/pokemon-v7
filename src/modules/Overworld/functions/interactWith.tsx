@@ -107,10 +107,7 @@ export const interactWithFunction = ({
 			orientation: getOppositeDirection(playerLocation.orientation),
 		});
 
-		if (
-			!handledOccupants.includes(Number.parseInt(id)) ||
-			!data.handledDialogue
-		) {
+		if (!handledOccupants.includes(Number.parseInt(id))) {
 			data.unhandledDialogue.forEach((d) =>
 				addDialogue({
 					message: d,
@@ -119,7 +116,7 @@ export const interactWithFunction = ({
 
 			handleThisOccupant(Number.parseInt(id));
 		} else {
-			data.handledDialogue.forEach((d) =>
+			(data.handledDialogue ?? data.unhandledDialogue).forEach((d) =>
 				addDialogue({
 					message: d,
 				})
