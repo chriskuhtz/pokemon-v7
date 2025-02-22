@@ -13,6 +13,14 @@ import { determineTypeFactor } from './determineTypeFactor';
 import { determineWeatherFactor } from './determineWeatherFactor';
 import { getMiddleOfThree } from './getMiddleOfThree';
 
+export const getLowKickDamage = (weight: number): number => {
+	if (weight > 200) return 120;
+	if (weight > 100) return 100;
+	if (weight > 50) return 80;
+	if (weight > 25) return 60;
+	if (weight > 10) return 40;
+	return 20;
+};
 export const DamageAbsorbAbilityMap: Partial<Record<AbilityName, PokemonType>> =
 	{
 		'volt-absorb': 'electric',
@@ -66,7 +74,10 @@ export const calculateDamage = (
 	const { level } = calculateLevelData(attacker.xp);
 
 	const levelFactor = (2 * level) / 5 + 2;
-	const power = attack.data.power ?? 0;
+	const power =
+		attack.name === 'low-kick'
+			? getLowKickDamage(target.data.weight)
+			: attack.data.power ?? 0;
 
 	const critRate =
 		attack.data.meta.crit_rate +
