@@ -4,10 +4,9 @@ import { typeColors } from '../../constants/typeColors';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getRandomPokemonId } from '../../functions/getRandomPokemonId';
-import { Banner } from '../../uiComponents/Banner/Banner';
+import { Message } from '../../hooks/useMessageQueue';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { Message } from '../../hooks/useMessageQueue';
 
 const defaultStarters = [1, 4, 7];
 const randomStarterOptions = [
@@ -48,9 +47,7 @@ export const StarterSelection = ({
 		]);
 	};
 	return latestMessage ? (
-		<Banner>
-			<h2>{latestMessage.message}</h2>
-		</Banner>
+		<></>
 	) : (
 		<Page headline="Intro:">
 			<Stack mode="column" alignItems="center">

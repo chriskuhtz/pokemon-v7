@@ -5,6 +5,7 @@ export interface Message {
 	message: string;
 	onRemoval?: () => void;
 	clearStackOnRemoval?: boolean;
+	needsConfirmation?: boolean;
 }
 export const useMessageQueue = (
 	speed?: number
@@ -13,6 +14,7 @@ export const useMessageQueue = (
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
 	interjectMessage: (message: Message) => void;
+	confirmLatestMessage: () => void;
 } => {
 	const [messages, setMessages] = useState<Message[]>([]);
 	const addMessage = useCallback((message: Message) => {
@@ -24,28 +26,40 @@ export const useMessageQueue = (
 	const interjectMessage = useCallback((message: Message) => {
 		setMessages((messages) => [message, ...messages]);
 	}, []);
+	const confirmLatestMessage = useCallback(() => {
+		if (messages[0].onRemoval) {
+			messages[0].onRemoval();
+		}
+		if (messages[0].clearStackOnRemoval) {
+			setMessages([]);
+			return;
+		}
+		setMessages(messages.slice(1));
+	}, [messages]);
 	useEffect(() => {
 		if (messages.length === 0) {
 			return;
 		}
+		if (messages[0].needsConfirmation) {
+			return;
+		}
 		const t = setTimeout(() => {
-			if (messages[0].onRemoval) {
-				messages[0].onRemoval();
-			}
-			if (messages[0].clearStackOnRemoval) {
-				setMessages([]);
-				return;
-			}
-			setMessages(messages.slice(1));
+			confirmLatestMessage();
 		}, speed ?? animationTimer);
 
 		return () => clearTimeout(t);
-	}, [messages, speed]);
+	}, [confirmLatestMessage, messages, speed]);
 
 	const latestMessage = useMemo(
 		() => (messages.length > 0 ? messages[0] : undefined),
 		[messages]
 	);
 
-	return { latestMessage, addMessage, addMultipleMessages, interjectMessage };
+	return {
+		latestMessage,
+		addMessage,
+		addMultipleMessages,
+		interjectMessage,
+		confirmLatestMessage,
+	};
 };
