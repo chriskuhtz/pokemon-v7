@@ -311,6 +311,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800001: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
 		x: 7,
 		y: 0,
 		map: 'meadow',
@@ -319,6 +320,8 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800003: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
+
 		x: 7,
 		y: 3,
 		map: 'meadow',
@@ -327,6 +330,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800004: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
 		x: 7,
 		y: 4,
 		map: 'meadow',
@@ -335,6 +339,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800005: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
 		x: 7,
 		y: 5,
 		map: 'meadow',
@@ -343,6 +348,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800006: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
 		x: 6,
 		y: 5,
 		map: 'meadow',
@@ -351,6 +357,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800007: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
 		x: 5,
 		y: 5,
 		map: 'meadow',
@@ -359,6 +366,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800008: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
 		x: 4,
 		y: 5,
 		map: 'meadow',
@@ -367,6 +375,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800009: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
 		x: 3,
 		y: 5,
 		map: 'meadow',
@@ -375,6 +384,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800010: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
 		x: 2,
 		y: 5,
 		map: 'meadow',
@@ -383,6 +393,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800011: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
 		x: 1,
 		y: 5,
 		map: 'meadow',
@@ -391,9 +402,18 @@ export const occupantsRecord: Record<number, Occupant> = {
 	800012: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/fence.png',
+		small: true,
 		x: 0,
 		y: 5,
 		map: 'meadow',
+		conditionFunction: () => true,
+	},
+	800013: {
+		type: 'OBSTACLE',
+		sprite: '/mapObjects/bookshelf.png',
+		x: 0,
+		y: 0,
+		map: 'university_meadow',
 		conditionFunction: () => true,
 	},
 	//signs start at 900000

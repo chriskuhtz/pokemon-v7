@@ -2,6 +2,10 @@ import { isEqual } from 'lodash';
 import { useEffect, useState } from 'react';
 import { animationTimer, baseSize } from '../../../constants/gameData';
 import { getNextLocation } from '../../../functions/getNextLocation';
+import {
+	getTimeOfDay,
+	OverworldShaderMap,
+} from '../../../functions/getTimeOfDay';
 import { getYOffsetFromOrientation } from '../../../functions/getYOffsetFromOrientation';
 import { Occupant } from '../../../interfaces/OverworldMap';
 
@@ -131,6 +135,9 @@ const drawOccupant = (
 ) => {
 	const img = new Image();
 
+	if (!ctx) {
+		return;
+	}
 	img.addEventListener('load', () => {
 		switch (occ.type) {
 			case 'PORTAL':
@@ -170,7 +177,6 @@ const drawOccupant = (
 				);
 				break;
 			case 'BUSH':
-			case 'HIDDEN_ITEM':
 				ctx?.drawImage(
 					img,
 					baseSize * occ.x,
@@ -179,9 +185,53 @@ const drawOccupant = (
 					baseSize
 				);
 				break;
+			case 'HIDDEN_ITEM':
+				ctx?.drawImage(
+					img,
+					baseSize * occ.x,
+					baseSize * occ.y,
+					baseSize,
+					baseSize
+				);
+				ctx.fillStyle = OverworldShaderMap[getTimeOfDay()];
+				ctx?.fillRect(baseSize * occ.x, baseSize * occ.y, baseSize, baseSize);
+				break;
+			case 'OBSTACLE':
+				if (occ.small) {
+					ctx?.drawImage(
+						img,
+						baseSize * occ.x + baseSize * 0.125,
+						baseSize * occ.y + baseSize * 0.125,
+						baseSize * 0.75,
+						baseSize * 0.75
+					);
+				} else {
+					ctx?.drawImage(
+						img,
+						baseSize * occ.x,
+						baseSize * occ.y,
+						baseSize,
+						baseSize
+					);
+					ctx?.drawImage(
+						img,
+						baseSize * occ.x,
+						baseSize * occ.y,
+						baseSize,
+						baseSize
+					);
+				}
+
+				ctx.fillStyle = OverworldShaderMap[getTimeOfDay()];
+				ctx?.fillRect(
+					baseSize * occ.x + baseSize * 0.125,
+					baseSize * occ.y + baseSize * 0.125,
+					baseSize * 0.75,
+					baseSize * 0.75
+				);
+				break;
 			case 'ITEM':
 			case 'PC':
-			case 'OBSTACLE':
 			default:
 				ctx?.drawImage(
 					img,

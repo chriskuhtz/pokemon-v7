@@ -75,6 +75,7 @@ export interface OverworldBush extends BaseOccupant {
 export interface OverworldObstacle extends BaseOccupant {
 	type: 'OBSTACLE';
 	sprite: string;
+	small?: boolean;
 }
 
 export interface OverworldTrainer extends BaseOccupant {
