@@ -24,8 +24,8 @@ export const occupantsRecord: Record<number, Occupant> = {
 	2: {
 		type: 'HIDDEN_ITEM',
 		item: 'antidote',
-		x: 1,
-		y: 1,
+		x: 8,
+		y: 8,
 		amount: 1,
 		map: 'meadow',
 	},
@@ -200,7 +200,6 @@ export const occupantsRecord: Record<number, Occupant> = {
 			mapId: 'meadow',
 		},
 	},
-
 	700003: {
 		type: 'PORTAL',
 		map: 'meadow',
@@ -226,6 +225,36 @@ export const occupantsRecord: Record<number, Occupant> = {
 		portal: {
 			forwardFoot: 'CENTER1',
 			x: 3,
+			y: 1,
+			orientation: 'DOWN',
+			mapId: 'meadow',
+		},
+	},
+	700005: {
+		type: 'PORTAL',
+		map: 'meadow',
+		x: 5,
+		y: 0,
+
+		sprite: '/mapObjects/houses/blueRoof.png',
+		portal: {
+			forwardFoot: 'CENTER1',
+			x: 4,
+			y: 7,
+			orientation: 'UP',
+			mapId: 'university_meadow',
+		},
+	},
+	700006: {
+		type: 'PORTAL',
+		small: true,
+		map: 'university_meadow',
+		x: 4,
+		y: 7,
+		sprite: '/mapObjects/doormat.png',
+		portal: {
+			forwardFoot: 'CENTER1',
+			x: 5,
 			y: 1,
 			orientation: 'DOWN',
 			mapId: 'meadow',

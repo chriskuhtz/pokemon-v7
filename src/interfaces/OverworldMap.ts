@@ -132,7 +132,7 @@ export interface OverworldMap {
 	possibleEncounters: Record<TimeOfDay, OverworldEncounter[]>;
 	width: number;
 	height: number;
-	tileMap: (0 | 1 | 2)[][];
+	tileMap: number[][];
 	occupants: number[];
 	weather?: WeatherType;
 }

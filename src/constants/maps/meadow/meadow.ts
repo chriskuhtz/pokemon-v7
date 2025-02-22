@@ -28,7 +28,7 @@ export const meadow: OverworldMap = {
 		//npcs
 		600001, 600002, 600003, 600004, 600005,
 		//portals
-		700001, 700003,
+		700001, 700003, 700005,
 		//obstacles
 		800001,
 	],

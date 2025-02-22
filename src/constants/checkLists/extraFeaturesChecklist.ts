@@ -149,4 +149,7 @@ export const extraFeatureCheckList: {
 	{ name: 'Opponents can use items' },
 	{ name: 'consider rarity of held items' },
 	{ name: 'show held item in pc' },
+	{ name: 'queststatus conditional npcs' },
+	{ name: 'random quest' },
+	{ name: 'bulletin board' },
 ];
