@@ -46,7 +46,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	200001: {
 		type: 'TRAINER',
 		x: 12,
-		y: 3,
+		y: 7,
 		map: 'meadow',
 		orientation: 'LEFT',
 		unhandledDialogue: ['fight me', 'big dog'],
@@ -58,8 +58,8 @@ export const occupantsRecord: Record<number, Occupant> = {
 	},
 	200002: {
 		type: 'TRAINER',
-		x: 13,
-		y: 3,
+		x: 8,
+		y: 8,
 		map: 'meadow',
 		orientation: 'RIGHT',
 		unhandledDialogue: ['Watt up', 'can you feel the electricity'],
@@ -103,7 +103,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	//Bushes start at 500000,
 	500001: {
 		type: 'BUSH',
-		x: 10,
+		x: 19,
 		y: 1,
 		map: 'meadow',
 		conditionFunction: () => true,
@@ -112,19 +112,22 @@ export const occupantsRecord: Record<number, Occupant> = {
 	600001: {
 		type: 'NPC',
 		x: 5,
-		y: 7,
+		y: 4,
 		map: 'meadow',
 		orientation: 'UP',
-		unhandledDialogue: ['Can you defeat all the trainers here,', 'Big dog?'],
+		unhandledDialogue: [
+			'Pokemon Trainers compete with each other',
+			'Can you become the best of them all?',
+		],
+		handledDialogue: ['I cant wait to grow up and become a trainer'],
 		quest: 'Defeat all the Trainers in the meadow',
 		sprite: SpriteEnum['boy'],
-		movement: { path: ['UP', 'RIGHT', 'LEFT', 'DOWN'], currentStep: 0 },
-		conditionFunction: () => true,
+		conditionFunction: () => getTimeOfDay() !== 'NIGHT',
 	},
 	600002: {
 		type: 'NPC',
-		x: 8,
-		y: 4,
+		x: 9,
+		y: 1,
 		map: 'meadow',
 		orientation: 'LEFT',
 		unhandledDialogue: [
@@ -156,10 +159,10 @@ export const occupantsRecord: Record<number, Occupant> = {
 	},
 	600004: {
 		type: 'NPC',
-		x: 14,
-		y: 0,
+		x: 6,
+		y: 4,
 		map: 'meadow',
-		orientation: 'DOWN',
+		orientation: 'UP',
 		unhandledDialogue: [
 			'Your Pokemon look hungry',
 			'maybe they will like these',
@@ -167,9 +170,9 @@ export const occupantsRecord: Record<number, Occupant> = {
 		],
 		handledDialogue: ['did your pokemon enjoy the candies'],
 		sprite: SpriteEnum['grandma2'],
-		gifts: { 'rare-candy': 10 },
+		gifts: { 'rare-candy': 2 },
 		quest: 'Train a Pokemon to lvl 10',
-		conditionFunction: () => getTimeOfDay() === 'DAY',
+		conditionFunction: () => getTimeOfDay() !== 'NIGHT',
 	},
 	600005: {
 		type: 'NPC',
