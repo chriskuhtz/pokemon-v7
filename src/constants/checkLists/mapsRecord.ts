@@ -1,10 +1,8 @@
 import { OverworldMap } from '../../interfaces/OverworldMap';
 import { marketMeadow } from '../maps/meadow/marketMeadow';
 import { meadow } from '../maps/meadow/meadow';
-import {
-	pokecenterMeadow,
-	universityMeadow,
-} from '../maps/meadow/pokecenterMeadow';
+import { pokecenterMeadow } from '../maps/meadow/pokecenterMeadow';
+import { universityMeadow } from '../maps/meadow/universityMeadow';
 
 export type MapId =
 	| 'meadow'

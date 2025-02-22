@@ -273,16 +273,19 @@ export const movesCheckList: {
 	{
 		name: 'seismic-toss',
 		url: 'https://pokeapi.co/api/v2/move/69/',
+		handled: true,
 	},
 	{
 		name: 'strength',
 		url: 'https://pokeapi.co/api/v2/move/70/',
+		handled: true,
 	},
 
-	{ name: 'absorb', url: 'https://pokeapi.co/api/v2/move/71/' },
+	{ name: 'absorb', url: 'https://pokeapi.co/api/v2/move/71/', handled: true },
 	{
 		name: 'mega-drain',
 		url: 'https://pokeapi.co/api/v2/move/72/',
+		handled: true,
 	},
 	{
 		name: 'leech-seed',
@@ -339,7 +342,11 @@ export const movesCheckList: {
 	{ name: 'quick-attack', url: 'https://pokeapi.co/api/v2/move/98/' },
 	{ name: 'rage', url: 'https://pokeapi.co/api/v2/move/99/' },
 	{ name: 'teleport', url: 'https://pokeapi.co/api/v2/move/100/' },
-	{ name: 'night-shade', url: 'https://pokeapi.co/api/v2/move/101/' },
+	{
+		name: 'night-shade',
+		url: 'https://pokeapi.co/api/v2/move/101/',
+		handled: true,
+	},
 	{ name: 'mimic', url: 'https://pokeapi.co/api/v2/move/102/' },
 	{ name: 'screech', url: 'https://pokeapi.co/api/v2/move/103/' },
 	{ name: 'double-team', url: 'https://pokeapi.co/api/v2/move/104/' },
@@ -1394,6 +1401,11 @@ export const handledMoves = [
 	'submission',
 	'low-kick',
 	'counter',
+	'seismic-toss',
+	'strength',
+	'absorb',
+	'mega-drain',
+	'night-shade',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
