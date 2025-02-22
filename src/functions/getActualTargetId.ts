@@ -14,6 +14,9 @@ export const getActualTargetId = ({
 	move: BattleAttack;
 	addMessage: (x: string) => void;
 }): string => {
+	if (move.name === 'counter' && attacker.lastReceivedDamage) {
+		return attacker.lastReceivedDamage.applicatorId;
+	}
 	if (lockInMoves.includes(move.name)) {
 		return getRandomTargetId({
 			targets: pokemon,

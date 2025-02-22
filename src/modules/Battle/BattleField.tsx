@@ -415,6 +415,8 @@ export const BattleField = ({
 					up = reduceSecondaryAilmentDurations(p, (x) =>
 						collectedMessages.push(x)
 					);
+					//resets at end of turn
+					up = { ...up, lastReceivedDamage: undefined };
 
 					return up;
 				}

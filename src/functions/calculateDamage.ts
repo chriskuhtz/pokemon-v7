@@ -45,6 +45,19 @@ export const calculateDamage = (
 		return 0;
 	}
 
+	if (attack.name === 'counter') {
+		if (
+			attacker.lastReceivedDamage?.damageClass === 'physical' &&
+			attacker.lastReceivedDamage.applicatorId === target.id
+		) {
+			return attacker.lastReceivedDamage.damage * 2;
+		} else {
+			if (addMessage) {
+				addMessage('Counter failed');
+			}
+			return 0;
+		}
+	}
 	if (ohkoMoves.includes(attack.name)) {
 		if (target.ability === 'sturdy') {
 			if (addMessage) {
