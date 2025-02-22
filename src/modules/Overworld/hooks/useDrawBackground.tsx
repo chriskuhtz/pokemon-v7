@@ -11,10 +11,9 @@ export const useDrawBackground = (canvasId: string, map: OverworldMap) => {
 		const ctx = el?.getContext('2d');
 
 		const baseTileImage = new Image();
+		ctx?.clearRect(0, 0, width * baseSize, height * baseSize);
 
 		baseTileImage.addEventListener('load', () => {
-			ctx?.clearRect(0, 0, width * baseSize, height * baseSize);
-
 			tileMap.forEach((row, h) => {
 				row.forEach((value, w) => {
 					const isEncounterGrass = value === 1;

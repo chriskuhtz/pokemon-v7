@@ -201,4 +201,5 @@ export const extraFeatureCheckList: {
 	{ name: 'surf outside of battle' },
 	{ name: 'play pokecenter sound on visit' },
 	{ name: 'onstep events' },
+	{ name: 'shaders per map (no daytimes in caves, buildings)' },
 ];

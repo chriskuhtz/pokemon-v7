@@ -26,10 +26,11 @@ export const applyAttackAilmentsToPokemon = (
 	}
 	const random = Math.random() * 100;
 	const ailment = attack.data.meta.ailment.name;
+	const sereneGraceFactor = applicator.ability === 'serene-grace' ? 2 : 1;
 	const chance =
 		attack.data.damage_class.name === 'status'
 			? 100
-			: attack.data.meta.ailment_chance;
+			: attack.data.meta.ailment_chance * sereneGraceFactor;
 
 	if (random < chance) {
 		if (isPrimaryAilment({ type: ailment })) {
