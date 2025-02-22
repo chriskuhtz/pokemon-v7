@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { battleSpriteSize } from '../../constants/gameData';
+import { animationTimer, battleSpriteSize } from '../../constants/gameData';
 import { typeColors } from '../../constants/typeColors';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
@@ -22,7 +22,9 @@ export const StarterSelection = ({
 	randomStarters: boolean;
 	proceed: (name: string, starterDexId: number) => void;
 }): JSX.Element => {
-	const { latestMessage, addMultipleMessages } = useMessageQueue();
+	const { latestMessage, addMultipleMessages } = useMessageQueue(
+		animationTimer * 2
+	);
 	const options = randomStarters ? randomStarterOptions : defaultStarters;
 	const [chosenStarter, setChosenStarter] = useState<number | undefined>();
 	const [name, setName] = useState<string | undefined>('');
@@ -30,9 +32,14 @@ export const StarterSelection = ({
 	const finishForm = (name: string, starterDexId: number) => {
 		addMultipleMessages([
 			{ message: `I see, so you are ${name}` },
-			{ message: `You chose an excellent first pokemon` },
+			{ message: `Thank you for deciding to join our research outpost` },
 			{
-				message: `Now have fun exploring the world of pokemon`,
+				message: `Our Goal is to learn everything about the pokemon of this region`,
+			},
+			{ message: `There are many ways to contribute` },
+			{ message: `Just talk to the people in the camp` },
+			{
+				message: `Be kind, brave and curious`,
 				onRemoval: () => proceed(name, starterDexId),
 			},
 		]);

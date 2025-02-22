@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { animationTimer } from '../constants/gameData';
 import { BattleMessage } from '../modules/Battle/BattleField';
 
-export const useMessageQueue = () => {
+export const useMessageQueue = (speed?: number) => {
 	const [messages, setMessages] = useState<BattleMessage[]>([]);
 	const addMessage = useCallback((message: BattleMessage) => {
 		setMessages((messages) => [...messages, message]);
@@ -27,10 +27,11 @@ export const useMessageQueue = () => {
 			}
 
 			setMessages(messages.slice(1));
-		}, animationTimer);
+		}, speed ?? animationTimer);
 
 		return () => clearTimeout(t);
-	}, [messages]);
+	}, [messages, speed]);
+
 	const latestMessage = useMemo(
 		() => (messages.length > 0 ? messages[0] : undefined),
 		[messages]
