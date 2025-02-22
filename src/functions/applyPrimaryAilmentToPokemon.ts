@@ -26,7 +26,7 @@ export const applyPrimaryAilmentToPokemon = (
 		//fire pokemon cant get burned
 		!getTypeNames(target).includes('fire') &&
 		//flash fire pokemon cant get burned
-		target.ability !== 'flash-fire'
+		!['flash-fire', 'water-veil'].includes(target.ability)
 	) {
 		dispatchToast(
 			`${target.data.name} was burned ${toastSuffix ? 'by ' + toastSuffix : ''}`
