@@ -165,9 +165,9 @@ export const BattleField = ({
 		}
 
 		return [...onFieldOpponents, ...onFieldTeam]
-			.sort((a, b) => sortByPriority(a, b, battleRound))
+			.sort((a, b) => sortByPriority(a, b, battleRound, battleWeather))
 			.find((p) => p.moveQueue.some((m) => m.round === battleRound));
-	}, [battleRound, battleStep, onFieldOpponents, onFieldTeam]);
+	}, [battleRound, battleStep, battleWeather, onFieldOpponents, onFieldTeam]);
 	const newlyDeployedPokemon = useMemo(() => {
 		if (battleStep !== 'BATTLE_ENTRY') {
 			return;
