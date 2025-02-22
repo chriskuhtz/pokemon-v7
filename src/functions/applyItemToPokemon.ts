@@ -196,6 +196,22 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 
 		return { ...pokemon, primaryAilment: undefined };
 	}
+	if (item === 'red-flute') {
+		if (addToast) {
+			addToast(`infatuation healed`);
+		}
+		if (isBattlePokemon(pokemon)) {
+			return {
+				...pokemon,
+				primaryAilment: undefined,
+				secondaryAilments: pokemon.secondaryAilments.filter(
+					(ailment) => !['infatuation'].includes(ailment.type)
+				),
+			};
+		}
+
+		return { ...pokemon, primaryAilment: undefined };
+	}
 	if (isEvBoostItem(item)) {
 		return applyEVBoostItem(pokemon, item);
 	}
