@@ -81,11 +81,12 @@ export const useSaveFile = (
 			const newTime = new Date().getTime();
 
 			//console.log('setSaveFile', update, 'CULPRIT:', culprit);
+
 			s({
 				...update,
 				lastEdited: newTime,
 				handledOccupants: update.handledOccupants.filter(
-					(h) => h.resetAt > newTime
+					(h) => h.resetAt < 0 || h.resetAt > newTime
 				),
 			});
 		},
@@ -272,7 +273,8 @@ export const useSaveFile = (
 		if (!occ) {
 			throw new Error(`what is this occupant supposed to be ${id}`);
 		}
-		const timer = new Date().getTime() + 900000;
+
+		const timer = occ.type === 'BUSH' ? new Date().getTime() + 900000 : -1;
 
 		let newInventory = { ...saveFile.inventory };
 		if (occ.type === 'NPC' && occ.gifts) {
