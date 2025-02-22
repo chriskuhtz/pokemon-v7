@@ -22,6 +22,7 @@ export const IconSolarSystem = ({
 		<div
 			style={{
 				width: `${baseSize * 1.5}px`,
+				height: `${baseSize * 1.5}px`,
 				position: 'relative',
 			}}
 		>
@@ -39,6 +40,9 @@ export const IconSolarSystem = ({
 					...sun.styles,
 					border: '2px solid black',
 					borderRadius: '9000px',
+					width: baseSize,
+					height: baseSize,
+					padding: baseSize * 0.25,
 				}}
 				src={sun.url}
 			/>

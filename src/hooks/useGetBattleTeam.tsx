@@ -1,11 +1,24 @@
 import { useFetch } from '@potfisch-industries-npm/usefetch';
+import { getRandomIndex } from '../functions/filterTargets';
 import { getStats } from '../functions/getStats';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { ItemType } from '../interfaces/Item';
 import { MoveDto } from '../interfaces/Move';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { PokemonData } from '../interfaces/PokemonData';
 import { PokemonSpeciesData } from '../interfaces/PokemonSpeciesData';
 import { EmptyStatObject } from '../interfaces/StatObject';
+
+export const maybeGetHeldItemFromData = (
+	data: PokemonData
+): ItemType | undefined => {
+	const { held_items } = data;
+
+	if (held_items.length === 0) {
+		return undefined;
+	}
+	return held_items[getRandomIndex(held_items.length)].item.name as ItemType;
+};
 
 export const useGetBattleTeam = (
 	initTeam: (OwnedPokemon & { caughtBefore: boolean })[]
@@ -46,6 +59,7 @@ export const useGetBattleTeam = (
 				const f = await fourthMoveData;
 				const battleMon: BattlePokemon = {
 					...pokemon,
+					heldItemName: pokemon.heldItemName ?? maybeGetHeldItemFromData(d),
 					roundsInBattle: 0,
 					secondaryAilments: [],
 					moveQueue: [],
