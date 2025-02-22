@@ -2,8 +2,8 @@ import { OverworldMap } from '../../interfaces/OverworldMap';
 
 export const meadow: OverworldMap = {
 	id: 'meadow',
-	backgroundTile: { x: 103, y: 1 },
-	encounterTile: { x: 120, y: 1 },
+	backgroundTile: '/tiles/grass.png',
+	encounterTile: '/tiles/tallGrass.png',
 	width: 20,
 	height: 10,
 	tileMap: [
@@ -25,8 +25,7 @@ export const meadow: OverworldMap = {
 		100001,
 		// trainers
 		200001, 200002,
-		//merchants
-		300001,
+
 		//nurses
 		400001,
 		//bushes

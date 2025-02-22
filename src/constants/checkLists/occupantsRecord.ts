@@ -69,10 +69,10 @@ export const occupantsRecord: Record<number, Occupant> = {
 	//Merchants start at 300000,
 	300001: {
 		type: 'MERCHANT',
-		x: 6,
+		x: 2,
 		y: 0,
 		orientation: 'DOWN',
-		map: 'meadow',
+		map: 'market',
 		inventory: STANDARD_BUY_MARKET,
 		dialogue: ['Get your supplies here'],
 		sprite: SpriteEnum['clerkMale'],
@@ -169,10 +169,18 @@ export const occupantsRecord: Record<number, Occupant> = {
 	//Buildings start at 700000
 	700001: {
 		type: 'BUILDING',
+		map: 'meadow',
 		x: 15,
 		y: 0,
 		height: 1,
 		width: 1,
 		sprite: '/mapObjects/houses/market.png',
+		portal: {
+			forwardFoot: 'CENTER1',
+			x: 2,
+			y: 3,
+			orientation: 'UP',
+			mapId: 'market',
+		},
 	},
 };

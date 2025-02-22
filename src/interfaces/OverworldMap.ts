@@ -12,7 +12,7 @@ import { TimeOfDay } from '../functions/getTimeOfDay';
 import { Inventory } from './Inventory';
 import { ItemType } from './Item';
 import { OwnedPokemon } from './OwnedPokemon';
-import { CharacterOrientation, MapId } from './SaveFile';
+import { CharacterLocationData, CharacterOrientation, MapId } from './SaveFile';
 import { WeatherType } from './Weather';
 
 export interface OverworldItem {
@@ -98,6 +98,8 @@ export interface Building {
 	x: number;
 	y: number;
 	sprite: string;
+	portal: CharacterLocationData;
+	map: MapId;
 }
 
 export type Occupant =
@@ -116,9 +118,9 @@ export interface OverworldEncounter {
 	xp: number;
 }
 export interface OverworldMap {
-	id: string;
-	backgroundTile: { x: number; y: number };
-	encounterTile: { x: number; y: number };
+	id: MapId;
+	backgroundTile: string;
+	encounterTile?: string;
 	possibleEncounters: Record<TimeOfDay, OverworldEncounter[]>;
 	width: number;
 	height: number;

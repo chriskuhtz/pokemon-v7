@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { v4 } from 'uuid';
+import { mapsRecord } from './constants/checkLists/mapsRecord';
 import { testPokemon, testState } from './constants/gameData';
-import { meadow } from './constants/maps/meadow';
 import { STANDARD_BUY_MARKET } from './constants/standardBuyMarket';
 import { useSaveFile } from './hooks/useSaveFile';
 import { AddToastFunction } from './hooks/useToasts';
@@ -214,7 +214,7 @@ export const App = ({
 			openMenu={(steps) => navigateAwayFromOverworldReducer('MAIN', steps)}
 			setCharacterLocation={setCharacterLocationReducer}
 			playerLocation={location}
-			map={meadow}
+			map={mapsRecord[saveFile.location.mapId]}
 			startEncounter={(steps) => {
 				navigateAwayFromOverworldReducer('BATTLE', steps);
 			}}
