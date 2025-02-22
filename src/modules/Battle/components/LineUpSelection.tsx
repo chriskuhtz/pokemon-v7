@@ -33,12 +33,26 @@ export const LineUpSelection = ({
 				alignItems: 'center',
 			}}
 		>
-			<div>
-				<h2>{trainer && `${trainer.name} is challenging you`}</h2>
+			<div
+				style={{
+					border: '2px solid black',
+					borderRadius: '.5rem',
+					padding: '0 1rem',
+				}}
+			>
+				{trainer ? (
+					<h2 style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+						{' '}
+						VS {trainer.name} <Sprite id={trainer.sprite} rotating={false} />
+					</h2>
+				) : (
+					<h2>VS Wild Pokemon</h2>
+				)}
 				<h2>
-					Its {fightersPerSide} versus {fightersPerSide}
+					Its {fightersPerSide} v {fightersPerSide}
 				</h2>
 			</div>
+
 			<div
 				style={{
 					display: 'flex',
@@ -47,7 +61,6 @@ export const LineUpSelection = ({
 					justifyContent: 'flex-end',
 				}}
 			>
-				{trainer && <Sprite id={trainer.sprite} rotating={false} />}
 				{opponents.map((opponent) => (
 					<img key={opponent.id} src={getPokemonSprite(opponent.dexId)} />
 				))}
@@ -81,7 +94,6 @@ export const LineUpSelection = ({
 			</div>
 
 			<div style={{ display: 'flex', gap: '1rem' }}>
-				<button onClick={leave}>Try to run</button>
 				<button
 					onClick={startBattle}
 					disabled={selectedTeam.length !== fightersPerSide}
@@ -92,6 +104,7 @@ export const LineUpSelection = ({
 					{selectedTeam.length > fightersPerSide &&
 						`select ${fightersPerSide - selectedTeam.length} less`}
 				</button>
+				<button onClick={leave}>Try to run</button>
 			</div>
 		</div>
 	);
