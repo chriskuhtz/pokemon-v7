@@ -269,7 +269,7 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/67/',
 		handled: true,
 	},
-	{ name: 'counter', url: 'https://pokeapi.co/api/v2/move/68/' },
+	{ name: 'counter', url: 'https://pokeapi.co/api/v2/move/68/', handled: true },
 	{
 		name: 'seismic-toss',
 		url: 'https://pokeapi.co/api/v2/move/69/',
@@ -1393,6 +1393,7 @@ export const handledMoves = [
 	'drill-peck',
 	'submission',
 	'low-kick',
+	'counter',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
