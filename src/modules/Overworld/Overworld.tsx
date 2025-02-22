@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { IoMdMenu } from 'react-icons/io';
 import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
@@ -26,12 +26,6 @@ import { useOverworldMovement } from './hooks/useOverworldMovement';
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
 const occupantsCanvasId = 'occs';
-
-export interface Dialogue {
-	message: string;
-	onRemoval?: () => void;
-	icon?: ReactNode;
-}
 
 export const Overworld = ({
 	openMenu,
@@ -121,7 +115,7 @@ export const Overworld = ({
 
 	const [stepsTaken, setStepsTaken] = useState<number>(0);
 
-	const addEncounterDialogue = () => {
+	const addEncounterMessage = () => {
 		addMessage({
 			message: 'Wild Pokemon appeared!',
 			onRemoval: () => startEncounter(stepsTaken),
@@ -142,7 +136,7 @@ export const Overworld = ({
 		(occ: [string, Occupant] | undefined) =>
 			interactWithFunction({
 				occ,
-				addDialogue: addMessage,
+				addMessage: addMessage,
 				openStorage,
 				stepsTaken,
 				changeOccupant,
@@ -173,7 +167,7 @@ export const Overworld = ({
 		playerLocation,
 		setCharacterLocation,
 		assembledMap,
-		addEncounterDialogue,
+		addEncounterMessage,
 		() => setStepsTaken((s) => s + 1),
 		encounterRateModifier
 	);

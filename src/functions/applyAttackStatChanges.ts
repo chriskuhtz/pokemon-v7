@@ -6,7 +6,7 @@ import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 export const applyAttackStatChanges = (
 	pokemon: BattlePokemon,
 	attack: BattleAttack,
-	dispatchToast: (x: string) => void,
+	addMessage: (x: string) => void,
 	selfInflicted: boolean,
 	battleFieldEffects: BattleFieldEffect[]
 ): BattlePokemon => {
@@ -19,7 +19,7 @@ export const applyAttackStatChanges = (
 			s.change,
 			selfInflicted,
 			battleFieldEffects,
-			dispatchToast
+			addMessage
 		);
 	});
 

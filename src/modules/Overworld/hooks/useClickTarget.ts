@@ -16,7 +16,7 @@ export const useClickTarget = (
 	>,
 	interactWith: (occ: [string, Occupant] | undefined) => void,
 	collectedItems: number[],
-	activeDialogue: boolean,
+	activeMessage: boolean,
 	statefulOccupantsRecord: Record<number, Occupant>
 ): React.Dispatch<
 	React.SetStateAction<
@@ -31,7 +31,7 @@ export const useClickTarget = (
 		{ x: number; y: number } | undefined
 	>();
 	useEffect(() => {
-		if (activeDialogue) {
+		if (activeMessage) {
 			setClickTarget(undefined);
 			return;
 		}
@@ -102,7 +102,7 @@ export const useClickTarget = (
 
 		setClickTarget(undefined);
 	}, [
-		activeDialogue,
+		activeMessage,
 		assembledMap,
 		clickTarget,
 		collectedItems,

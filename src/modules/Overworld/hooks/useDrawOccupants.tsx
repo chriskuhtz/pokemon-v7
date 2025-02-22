@@ -18,7 +18,7 @@ export const overflow = (current: number, excludedMax: number) => {
 
 export const useDrawOccupants = (
 	canvasId: string,
-	activeDialogue: boolean,
+	activeMessage: boolean,
 	statefulOccupants: Record<number, Occupant>,
 	setStatefulOccupants: React.Dispatch<
 		React.SetStateAction<Record<number, Occupant>>
@@ -30,7 +30,7 @@ export const useDrawOccupants = (
 
 	//Walk the npcs
 	useEffect(() => {
-		if (activeDialogue) {
+		if (activeMessage) {
 			//stop movement during dialogue
 			return;
 		}
@@ -81,7 +81,7 @@ export const useDrawOccupants = (
 
 			return () => clearTimeout(t);
 		}
-	}, [activeDialogue, setStatefulOccupants, statefulOccupants]);
+	}, [activeMessage, setStatefulOccupants, statefulOccupants]);
 
 	//draw the npcs
 	useEffect(() => {

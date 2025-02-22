@@ -149,7 +149,7 @@ export const extraFeatureCheckList: {
 	{ name: 'random quest' },
 	{ name: 'bulletin board' },
 	{ name: 'anounce map on change' },
-	{ name: 'Unify Toast, Dialogue and MessageQueue' },
+	{ name: 'Unify Toast, Message and MessageQueue' },
 	{
 		name: 'algorithmic fences',
 	},
