@@ -5,7 +5,7 @@ import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { BattleMessage } from '../Battle/BattleField';
+import { Message } from '../../hooks/useMessageQueue';
 
 export const PokemonStorage = ({
 	allPokemon,
@@ -16,7 +16,7 @@ export const PokemonStorage = ({
 	allPokemon: OwnedPokemon[];
 	goBack: () => void;
 	setPokemon: (x: OwnedPokemon[]) => void;
-	addToast: (x: BattleMessage) => void;
+	addToast: (x: Message) => void;
 }): JSX.Element => {
 	const [sortBy, setSortBy] = useState<'DEX_ID' | 'HAPPINESS' | 'XP'>('DEX_ID');
 	const sortFunction = useMemo(() => {

@@ -157,4 +157,5 @@ export const extraFeatureCheckList: {
 	{ name: 'prettier team overview' },
 	{ name: 'poison step damage' },
 	{ name: 'fly outside of battle' },
+	{ name: 'allow save snapshots' },
 ];

@@ -13,7 +13,6 @@ import { ItemType } from '../../interfaces/Item';
 import { Occupant, OverworldMap } from '../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { CharacterLocationData, SaveFile } from '../../interfaces/SaveFile';
-import { BattleMessage } from '../Battle/BattleField';
 import './Overworld.css';
 import { ClickerGrid } from './components/ClickerGrid';
 import { interactWithFunction } from './functions/interactWith';
@@ -23,6 +22,7 @@ import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
+import { Message } from '../../hooks/useMessageQueue';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -68,10 +68,10 @@ export const Overworld = ({
 	handleThisOccupant: (id: number) => void;
 	cutterPokemon?: { dexId: number };
 	saveFile: SaveFile;
-	latestMessage: BattleMessage | undefined;
-	addMessage: (message: BattleMessage) => void;
-	addMultipleMessages: (newMessages: BattleMessage[]) => void;
-	interjectMessage: (message: BattleMessage) => void;
+	latestMessage: Message | undefined;
+	addMessage: (message: Message) => void;
+	addMultipleMessages: (newMessages: Message[]) => void;
+	interjectMessage: (message: Message) => void;
 }) => {
 	const [statefulOccupants, setStatefulOccupants] = useState<
 		Record<number, Occupant>

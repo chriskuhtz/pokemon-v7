@@ -7,7 +7,7 @@ import { getRandomPokemonId } from '../../functions/getRandomPokemonId';
 import { Banner } from '../../uiComponents/Banner/Banner';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { BattleMessage } from '../Battle/BattleField';
+import { Message } from '../../hooks/useMessageQueue';
 
 const defaultStarters = [1, 4, 7];
 const randomStarterOptions = [
@@ -23,10 +23,10 @@ export const StarterSelection = ({
 }: {
 	randomStarters: boolean;
 	proceed: (name: string, starterDexId: number) => void;
-	latestMessage: BattleMessage | undefined;
-	addMessage: (message: BattleMessage) => void;
-	addMultipleMessages: (newMessages: BattleMessage[]) => void;
-	interjectMessage: (message: BattleMessage) => void;
+	latestMessage: Message | undefined;
+	addMessage: (message: Message) => void;
+	addMultipleMessages: (newMessages: Message[]) => void;
+	interjectMessage: (message: Message) => void;
 }): JSX.Element => {
 	const options = randomStarters ? randomStarterOptions : defaultStarters;
 	const [chosenStarter, setChosenStarter] = useState<number | undefined>();

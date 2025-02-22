@@ -1,7 +1,7 @@
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
+import { Message } from '../../../hooks/useMessageQueue';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Banner } from '../../../uiComponents/Banner/Banner';
-import { BattleMessage } from '../BattleField';
 
 export const RefillHandling = ({
 	team,
@@ -15,9 +15,9 @@ export const RefillHandling = ({
 	teamCanRefill: boolean;
 	team: BattlePokemon[];
 	opponents: BattlePokemon[];
-	addMessage: (x: BattleMessage) => void;
+	addMessage: (x: Message) => void;
 	putPokemonOnField: (id: string) => void;
-	latestMessage: BattleMessage | undefined;
+	latestMessage: Message | undefined;
 	opponentCanRefill: boolean;
 }) => {
 	if (teamCanRefill) {

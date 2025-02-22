@@ -24,6 +24,7 @@ import { PlayerLane } from './components/PlayerLane';
 import { RefillHandling } from './components/RefillHandling';
 import { useChooseAction } from './hooks/useChooseAction';
 import { useHandleAction } from './hooks/useHandleAction/useHandleAction';
+import { Message } from '../../hooks/useMessageQueue';
 
 export type ActionType = MoveName | ItemType | 'RUN_AWAY';
 export interface ChooseActionPayload {
@@ -33,11 +34,6 @@ export interface ChooseActionPayload {
 	moveToRestore?: MoveName;
 }
 
-export interface BattleMessage {
-	message: string;
-	onRemoval?: () => void;
-	clearStackOnRemoval?: boolean;
-}
 export interface BattleFieldEffect {
 	type: 'mist';
 	ownerId: string;
@@ -65,10 +61,10 @@ export const BattleField = ({
 	initTeam: BattlePokemon[];
 	fightersPerSide: number;
 	inventory: Inventory;
-	latestMessage: BattleMessage | undefined;
-	addMessage: (message: BattleMessage) => void;
-	addMultipleMessages: (newMessages: BattleMessage[]) => void;
-	interjectMessage: (message: BattleMessage) => void;
+	latestMessage: Message | undefined;
+	addMessage: (message: Message) => void;
+	addMultipleMessages: (newMessages: Message[]) => void;
+	interjectMessage: (message: Message) => void;
 }) => {
 	const [battleRound, setBattleRound] = useState<number>(0);
 	const [bW, setBattleWeather] = useState<WeatherType | undefined>();

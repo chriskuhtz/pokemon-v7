@@ -7,7 +7,6 @@ import { useSaveFile } from './hooks/useSaveFile';
 import { generateInventory, Inventory } from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
 import { Bag } from './modules/Bag/Bag';
-import { BattleMessage } from './modules/Battle/BattleField';
 import { BattleLoader } from './modules/Battle/components/BattleLoader';
 import { MainMenu } from './modules/MainMenu/MainMenu';
 import { BuyMarket } from './modules/Market/BuyMarket';
@@ -20,6 +19,7 @@ import { Settings } from './modules/Settings/Settings';
 import { SpriteSelection } from './modules/SpriteSelection/SpriteSelection';
 import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { Team } from './modules/Team/Team';
+import { Message } from './hooks/useMessageQueue';
 
 export const App = ({
 	latestMessage,
@@ -27,10 +27,10 @@ export const App = ({
 	addMultipleMessages,
 	interjectMessage,
 }: {
-	latestMessage: BattleMessage | undefined;
-	addMessage: (message: BattleMessage) => void;
-	addMultipleMessages: (newMessages: BattleMessage[]) => void;
-	interjectMessage: (message: BattleMessage) => void;
+	latestMessage: Message | undefined;
+	addMessage: (message: Message) => void;
+	addMultipleMessages: (newMessages: Message[]) => void;
+	interjectMessage: (message: Message) => void;
 }): JSX.Element => {
 	const [currentMarketInventory, setCurrentMarketInventory] =
 		useState<Partial<Inventory>>(STANDARD_BUY_MARKET);

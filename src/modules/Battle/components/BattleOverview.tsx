@@ -3,9 +3,10 @@ import { useScreenTransition } from '../../../hooks/useScreenTransition';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import { OverworldTrainer } from '../../../interfaces/OverworldMap';
-import { BattleField, BattleMessage } from '../BattleField';
+import { BattleField } from '../BattleField';
 import { IntroBanner } from './IntroBanner';
 import { LineUpSelection } from './LineUpSelection';
+import { Message } from '../../../hooks/useMessageQueue';
 
 export const BattleOverview = ({
 	leave,
@@ -30,10 +31,10 @@ export const BattleOverview = ({
 	fightersPerSide: number;
 	inventory: Inventory;
 	trainer?: OverworldTrainer;
-	latestMessage: BattleMessage | undefined;
-	addMessage: (message: BattleMessage) => void;
-	addMultipleMessages: (newMessages: BattleMessage[]) => void;
-	interjectMessage: (message: BattleMessage) => void;
+	latestMessage: Message | undefined;
+	addMessage: (message: Message) => void;
+	addMultipleMessages: (newMessages: Message[]) => void;
+	interjectMessage: (message: Message) => void;
 }): JSX.Element => {
 	const [battleStarted, setBattleStarted] = useState<boolean>(false);
 

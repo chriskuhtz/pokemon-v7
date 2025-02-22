@@ -1,23 +1,27 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { animationTimer } from '../constants/gameData';
-import { BattleMessage } from '../modules/Battle/BattleField';
 
+export interface Message {
+	message: string;
+	onRemoval?: () => void;
+	clearStackOnRemoval?: boolean;
+}
 export const useMessageQueue = (
 	speed?: number
 ): {
-	latestMessage: BattleMessage | undefined;
-	addMessage: (message: BattleMessage) => void;
-	addMultipleMessages: (newMessages: BattleMessage[]) => void;
-	interjectMessage: (message: BattleMessage) => void;
+	latestMessage: Message | undefined;
+	addMessage: (message: Message) => void;
+	addMultipleMessages: (newMessages: Message[]) => void;
+	interjectMessage: (message: Message) => void;
 } => {
-	const [messages, setMessages] = useState<BattleMessage[]>([]);
-	const addMessage = useCallback((message: BattleMessage) => {
+	const [messages, setMessages] = useState<Message[]>([]);
+	const addMessage = useCallback((message: Message) => {
 		setMessages((messages) => [...messages, message]);
 	}, []);
-	const addMultipleMessages = useCallback((newMessages: BattleMessage[]) => {
+	const addMultipleMessages = useCallback((newMessages: Message[]) => {
 		setMessages((messages) => [...messages, ...newMessages]);
 	}, []);
-	const interjectMessage = useCallback((message: BattleMessage) => {
+	const interjectMessage = useCallback((message: Message) => {
 		setMessages((messages) => [message, ...messages]);
 	}, []);
 	useEffect(() => {

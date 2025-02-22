@@ -11,7 +11,7 @@ import { BadgeName } from '../../interfaces/Badge';
 import { RoutesType } from '../../interfaces/Routing';
 import { Banner } from '../../uiComponents/Banner/Banner';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
-import { BattleMessage } from '../Battle/BattleField';
+import { Message } from '../../hooks/useMessageQueue';
 
 export const MainMenu = ({
 	navigate,
@@ -31,10 +31,10 @@ export const MainMenu = ({
 	badges: BadgeName[];
 	spriteUrl: string;
 	reset: () => void;
-	latestMessage: BattleMessage | undefined;
-	addMessage: (message: BattleMessage) => void;
-	addMultipleMessages: (newMessages: BattleMessage[]) => void;
-	interjectMessage: (message: BattleMessage) => void;
+	latestMessage: Message | undefined;
+	addMessage: (message: Message) => void;
+	addMultipleMessages: (newMessages: Message[]) => void;
+	interjectMessage: (message: Message) => void;
 }): JSX.Element => {
 	const [resetConfirmationInProgress, setRCIP] = useState<boolean>(false);
 

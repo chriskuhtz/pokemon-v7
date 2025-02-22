@@ -1,12 +1,12 @@
 import { occupantsRecord } from '../../../constants/checkLists/occupantsRecord';
 import { useGetBattleTeam } from '../../../hooks/useGetBattleTeam';
+import { Message } from '../../../hooks/useMessageQueue';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import { OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { Challenger } from '../../../interfaces/SaveFile';
 import { LoadingScreen } from '../../../uiComponents/LoadingScreen/LoadingScreen';
-import { BattleMessage } from '../BattleField';
 import { BattleOverview } from './BattleOverview';
 
 export const BattleLoader = ({
@@ -30,10 +30,10 @@ export const BattleLoader = ({
 	team: OwnedPokemon[];
 	inventory: Inventory;
 	ownedPokemonDexIds: number[];
-	latestMessage: BattleMessage | undefined;
-	addMessage: (message: BattleMessage) => void;
-	addMultipleMessages: (newMessages: BattleMessage[]) => void;
-	interjectMessage: (message: BattleMessage) => void;
+	latestMessage: Message | undefined;
+	addMessage: (message: Message) => void;
+	addMultipleMessages: (newMessages: Message[]) => void;
+	interjectMessage: (message: Message) => void;
 }): JSX.Element => {
 	const { res: battleOpponents } = useGetBattleTeam(
 		challenger.team.map((o) => ({

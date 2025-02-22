@@ -2,20 +2,20 @@ import {
 	BattleLocation,
 	determineCaptureSuccess,
 } from '../../../../../functions/determineCaptureSuccess';
+import { Message } from '../../../../../hooks/useMessageQueue';
 import { CatchProcessInfo } from '../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
 import { ItemType } from '../../../../../interfaces/Item';
-import { BattleMessage } from '../../../BattleField';
 
 export const handleCatch = (
 	pokemon: BattlePokemon[],
 	attacker: BattlePokemon,
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
 	move: CatchProcessInfo,
-	addMultipleMessages: (x: BattleMessage[]) => void,
+	addMultipleMessages: (x: Message[]) => void,
 	battleRound: number,
 	battleLocation: BattleLocation,
-	interjectMessage: (x: BattleMessage) => void,
+	interjectMessage: (x: Message) => void,
 	addUsedItem: (x: ItemType) => void
 ) => {
 	const target = pokemon.find(
@@ -45,7 +45,7 @@ export const handleCatch = (
 		return;
 	}
 
-	const getCatchStepMessage = (step: 2 | 3): BattleMessage => ({
+	const getCatchStepMessage = (step: 2 | 3): Message => ({
 		message: Array.from({ length: step })
 			.map(() => 'wiggle')
 			.join('...'),
