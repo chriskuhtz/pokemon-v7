@@ -13,7 +13,6 @@ export const XpBar = ({ xp }: { xp: number }) => {
 			color="#436ebf"
 			max={xpAtNextLevel - xpForThisLevel}
 			offset={xpAtNextLevel - xp}
-			textColor="white"
 		/>
 	);
 };

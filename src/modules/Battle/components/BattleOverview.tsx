@@ -1,4 +1,6 @@
 import { useCallback, useState } from 'react';
+import { Message } from '../../../hooks/useMessageQueue';
+import { LeaveBattlePayload } from '../../../hooks/useSaveFile';
 import { useScreenTransition } from '../../../hooks/useScreenTransition';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
@@ -6,7 +8,6 @@ import { OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { BattleField } from '../BattleField';
 import { IntroBanner } from './IntroBanner';
 import { LineUpSelection } from './LineUpSelection';
-import { Message } from '../../../hooks/useMessageQueue';
 
 export const BattleOverview = ({
 	leave,
@@ -20,12 +21,7 @@ export const BattleOverview = ({
 	addMultipleMessages,
 	interjectMessage,
 }: {
-	leave: (
-		caughtPokemon: BattlePokemon[],
-		updatedInventory: Inventory,
-		scatteredCoins: number,
-		team: BattlePokemon[]
-	) => void;
+	leave: (x: LeaveBattlePayload) => void;
 	opponents: BattlePokemon[];
 	team: BattlePokemon[];
 	fightersPerSide: number;
@@ -69,7 +65,16 @@ export const BattleOverview = ({
 		return (
 			<LineUpSelection
 				trainer={trainer}
-				leave={() => leave([], inventory, 0, team)}
+				leave={() =>
+					leave({
+						updatedInventory: inventory,
+						scatteredCoins: 0,
+						team,
+						defeatedPokemon: [],
+						outcome: 'WIN',
+						caughtPokemon: [],
+					})
+				}
 				opponents={opponents}
 				team={team}
 				fightersPerSide={fightersPerSide}

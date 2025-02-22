@@ -21,7 +21,7 @@ export const Banner = ({
 				overflow: 'hidden',
 				top: 0,
 				left: 0,
-				zIndex: 1,
+				zIndex: 9000,
 			}}
 		>
 			<div

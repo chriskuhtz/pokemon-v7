@@ -6,6 +6,7 @@ import { QuestName, QuestsRecord } from '../constants/checkLists/questsRecord';
 import { localStorageId, testState } from '../constants/gameData';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
+import { calculateLevelData } from '../functions/calculateLevelData';
 import { determineWildPokemon } from '../functions/determineWildPokemon';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
@@ -38,6 +39,15 @@ export const reduceEncounterRateModifier = (
 		steps: encounterRateModifier.steps - steps,
 	};
 };
+
+export interface LeaveBattlePayload {
+	caughtPokemon: BattlePokemon[];
+	updatedInventory: Inventory;
+	scatteredCoins: number;
+	team: BattlePokemon[];
+	outcome: 'WIN' | 'LOSS' | 'DRAW';
+	defeatedPokemon: BattlePokemon[];
+}
 
 export interface UseSaveFile {
 	saveFile: SaveFile;
@@ -72,12 +82,7 @@ export interface UseSaveFile {
 	changeHeldItemReducer: (pokemonId: string, newItem?: ItemType) => void;
 	useSacredAshReducer: () => void;
 	reset: () => void;
-	leaveBattleReducer: (
-		caughtPokemon: BattlePokemon[],
-		updatedInventory: Inventory,
-		scatteredCoins: number,
-		team: BattlePokemon[]
-	) => void;
+	leaveBattleReducer: (x: LeaveBattlePayload) => void;
 	applyEncounterRateModifierItem: (item: EncounterChanceItem) => void;
 }
 
@@ -98,7 +103,6 @@ export const useSaveFile = (
 			const newTime = new Date().getTime();
 
 			//console.log('setSaveFile', update, 'CULPRIT:', culprit);
-
 			s({
 				...update,
 				lastEdited: newTime,
@@ -418,38 +422,58 @@ export const useSaveFile = (
 	);
 
 	const leaveBattleReducer = useCallback(
-		(
-			caughtPokemon: BattlePokemon[],
-			updatedInventory: Inventory,
-			scatteredCoins: number,
-			updatedTeam: BattlePokemon[]
-		) => {
-			const filteredTeam = updatedTeam
-				.filter((p) => {
-					if (
-						saveFile.settings?.disqualifyFaintedPokemon &&
-						p.status === 'FAINTED'
-					) {
-						return false;
-					}
+		({
+			team: updatedTeam,
+			updatedInventory,
+			caughtPokemon,
+			scatteredCoins,
+			outcome,
+			defeatedPokemon,
+		}: LeaveBattlePayload) => {
+			const gainedXp = defeatedPokemon.reduce((sum, d) => {
+				const { level } = calculateLevelData(d.xp);
 
-					return true;
-				})
-				.map((t) => reduceBattlePokemonToOwnedPokemon(t));
+				return sum + Math.floor((d.data.base_experience * level) / 7);
+			}, 0);
 
+			const filteredTeam = updatedTeam.filter((p) => {
+				if (
+					saveFile.settings?.disqualifyFaintedPokemon &&
+					p.status === 'FAINTED'
+				) {
+					return false;
+				}
+				return true;
+			});
 			if (filteredTeam.length === 0) {
 				reset();
 			}
+
+			const xpPerTeamMember =
+				outcome === 'WIN' ? Math.round(gainedXp / filteredTeam.length) : 0;
+
+			const leveledUpTeam = filteredTeam
+				.map((p) => {
+					const newXp = p.xp + xpPerTeamMember;
+					return { ...p, xp: newXp };
+				})
+				.map((p) => reduceBattlePokemonToOwnedPokemon(p));
+
+			const teamAndCaught = [
+				...leveledUpTeam,
+				...caughtPokemon.map((c) =>
+					reduceBattlePokemonToOwnedPokemon(
+						{ ...c, ownerId: saveFile.playerId },
+						c.ball === 'heal-ball'
+					)
+				),
+			].map((t, i) => ({ ...t, onTeam: i < 6 }));
+
 			const updatedPokemon = [
-				...filteredTeam,
+				...teamAndCaught,
 				...saveFile.pokemon.filter((p) => !team.some((t) => t.id === p.id)),
-				...caughtPokemon.map((c) => {
-					return {
-						...reduceBattlePokemonToOwnedPokemon(c, c.ball === 'heal-ball'),
-						ownerId: saveFile.playerId,
-					};
-				}),
 			];
+
 			putSaveFileReducer({
 				...saveFile,
 				inventory: updatedInventory,

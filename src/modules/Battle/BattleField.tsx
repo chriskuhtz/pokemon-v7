@@ -13,6 +13,8 @@ import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
 import { reduceSecondaryAilmentDurations } from '../../functions/reduceSecondaryAilmentDurations';
 import { sortByPriority } from '../../functions/sortByPriority';
+import { Message } from '../../hooks/useMessageQueue';
+import { LeaveBattlePayload } from '../../hooks/useSaveFile';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Inventory, joinInventories } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
@@ -24,7 +26,6 @@ import { PlayerLane } from './components/PlayerLane';
 import { RefillHandling } from './components/RefillHandling';
 import { useChooseAction } from './hooks/useChooseAction';
 import { useHandleAction } from './hooks/useHandleAction/useHandleAction';
-import { Message } from '../../hooks/useMessageQueue';
 
 export type ActionType = MoveName | ItemType | 'RUN_AWAY';
 export interface ChooseActionPayload {
@@ -51,12 +52,7 @@ export const BattleField = ({
 	addMultipleMessages,
 	interjectMessage,
 }: {
-	leave: (
-		caughtPokemon: BattlePokemon[],
-		updatedInventory: Inventory,
-		scatteredCoins: number,
-		team: BattlePokemon[]
-	) => void;
+	leave: (x: LeaveBattlePayload) => void;
 	initOpponents: BattlePokemon[];
 	initTeam: BattlePokemon[];
 	fightersPerSide: number;
@@ -208,13 +204,17 @@ export const BattleField = ({
 
 	//REDUCERS
 	const leaveWithCurrentData = useCallback(
-		() =>
-			leave(
-				pokemon.filter((p) => p.status === 'CAUGHT'),
-				battleInventory,
+		(outcome: 'WIN' | 'LOSS' | 'DRAW') =>
+			leave({
+				caughtPokemon: pokemon.filter((p) => p.status === 'CAUGHT'),
+				updatedInventory: battleInventory,
 				scatteredCoins,
-				team
-			),
+				team,
+				defeatedPokemon: getOpponentPokemon(pokemon).filter(
+					(p) => p.status === 'FAINTED'
+				),
+				outcome,
+			}),
 		[battleInventory, leave, pokemon, scatteredCoins, team]
 	);
 	const putPokemonOnField = useCallback(
@@ -311,7 +311,7 @@ export const BattleField = ({
 			//TODO: consider trainer battles
 			addMessage({
 				message: `${user.data.name} separated the fighters with ${moveName}`,
-				onRemoval: () => leaveWithCurrentData(),
+				onRemoval: () => leaveWithCurrentData('DRAW'),
 			});
 		},
 		[addMessage, leaveWithCurrentData, pokemon]
@@ -404,22 +404,26 @@ export const BattleField = ({
 			const collectedMessages: string[] = [];
 			const updatedPokemon = pokemon.map((p) => {
 				if (p.status === 'ONFIELD') {
-					let up = applyEndOfTurnAbility({
+					let updated = applyEndOfTurnAbility({
 						pokemon: p,
 						addMessage: (x) => collectedMessages.push(x),
 					});
-					up = applyEndOfTurnHeldItem(up, (x) => collectedMessages.push(x));
-					up = applyPrimaryAilmentDamage(up, (x) => collectedMessages.push(x));
-					up = applySecondaryAilmentDamage(up, (x) =>
+					updated = applyEndOfTurnHeldItem(updated, (x) =>
 						collectedMessages.push(x)
 					);
-					up = reduceSecondaryAilmentDurations(p, (x) =>
+					updated = applyPrimaryAilmentDamage(updated, (x) =>
+						collectedMessages.push(x)
+					);
+					updated = applySecondaryAilmentDamage(updated, (x) =>
+						collectedMessages.push(x)
+					);
+					updated = reduceSecondaryAilmentDurations(updated, (x) =>
 						collectedMessages.push(x)
 					);
 					//resets at end of turn
-					up = { ...up, lastReceivedDamage: undefined };
+					updated = { ...updated, lastReceivedDamage: undefined };
 
-					return up;
+					return updated;
 				}
 
 				return p;
@@ -468,14 +472,14 @@ export const BattleField = ({
 			console.log('effect battlelost');
 			addMessage({
 				message: 'You lost the battle',
-				onRemoval: () => leaveWithCurrentData(),
+				onRemoval: () => leaveWithCurrentData('LOSS'),
 			});
 		}
 		if (battleWon && !latestMessage) {
 			console.log('effect battlewon');
 			addMessage({
 				message: 'You won the battle',
-				onRemoval: () => leaveWithCurrentData(),
+				onRemoval: () => leaveWithCurrentData('WIN'),
 			});
 		}
 	}, [

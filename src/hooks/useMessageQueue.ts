@@ -36,7 +36,6 @@ export const useMessageQueue = (
 				setMessages([]);
 				return;
 			}
-
 			setMessages(messages.slice(1));
 		}, speed ?? animationTimer);
 

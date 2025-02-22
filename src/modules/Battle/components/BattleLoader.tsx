@@ -1,7 +1,7 @@
 import { occupantsRecord } from '../../../constants/checkLists/occupantsRecord';
 import { useGetBattleTeam } from '../../../hooks/useGetBattleTeam';
 import { Message } from '../../../hooks/useMessageQueue';
-import { BattlePokemon } from '../../../interfaces/BattlePokemon';
+import { LeaveBattlePayload } from '../../../hooks/useSaveFile';
 import { Inventory } from '../../../interfaces/Inventory';
 import { OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
@@ -20,12 +20,7 @@ export const BattleLoader = ({
 	addMultipleMessages,
 	interjectMessage,
 }: {
-	leave: (
-		caughtPokemon: BattlePokemon[],
-		updatedInventory: Inventory,
-		scatteredCoins: number,
-		team: BattlePokemon[]
-	) => void;
+	leave: (x: LeaveBattlePayload) => void;
 	challenger: Challenger;
 	team: OwnedPokemon[];
 	inventory: Inventory;

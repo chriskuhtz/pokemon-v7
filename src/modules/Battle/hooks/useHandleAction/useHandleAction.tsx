@@ -4,6 +4,7 @@ import { forceSwitchMoves } from '../../../../constants/forceSwitchMoves';
 import { applyItemToPokemon } from '../../../../functions/applyItemToPokemon';
 import { BattleLocation } from '../../../../functions/determineCaptureSuccess';
 import { getChargeUpMessage } from '../../../../functions/getChargeUpMessage';
+import { Message } from '../../../../hooks/useMessageQueue';
 import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
 import { ItemType } from '../../../../interfaces/Item';
 import { WeatherType } from '../../../../interfaces/Weather';
@@ -11,13 +12,12 @@ import { BattleFieldEffect } from '../../BattleField';
 import { handleMoveBlockAilments } from '../../functions/handleMoveBlockAilments';
 import { handleAttack } from './functions/handleAttack';
 import { handleCatch } from './functions/handleCatch';
-import { Message } from '../../../../hooks/useMessageQueue';
 
 export const useHandleAction = (
 	pokemon: BattlePokemon[],
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
 	addMessage: (x: Message) => void,
-	leave: () => void,
+	leave: (outcome: 'WIN' | 'LOSS' | 'DRAW') => void,
 	battleWeather: WeatherType | undefined,
 	addMultipleMessages: (x: Message[]) => void,
 	battleRound: number,
@@ -48,7 +48,7 @@ export const useHandleAction = (
 			if (move.type === 'RunAway') {
 				addMessage({
 					message: `You ran away`,
-					onRemoval: () => leave(),
+					onRemoval: () => leave('DRAW'),
 				});
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
