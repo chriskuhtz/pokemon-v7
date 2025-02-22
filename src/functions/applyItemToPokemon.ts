@@ -180,6 +180,22 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 			happiness: pokemon.happiness + (HappinessChangeTable[item] ?? 0),
 		};
 	}
+	if (item === 'yellow-flute') {
+		if (addToast) {
+			addToast(`confusion healed`);
+		}
+		if (isBattlePokemon(pokemon)) {
+			return {
+				...pokemon,
+				primaryAilment: undefined,
+				secondaryAilments: pokemon.secondaryAilments.filter(
+					(ailment) => !['confusion'].includes(ailment.type)
+				),
+			};
+		}
+
+		return { ...pokemon, primaryAilment: undefined };
+	}
 	if (isEvBoostItem(item)) {
 		return applyEVBoostItem(pokemon, item);
 	}
