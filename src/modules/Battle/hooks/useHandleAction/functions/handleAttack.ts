@@ -254,6 +254,11 @@ export const handleAttack = ({
 	updatedTarget = {
 		...updatedTarget,
 		damage: updatedTarget.damage + damage,
+		//setLastReceivedDamage
+		lastReceivedDamage: {
+			damageClass: move.data.damage_class.name,
+			damage: damage,
+		},
 	};
 	// check attacker  drain/recoil
 	const drain = move.data.meta.drain;
