@@ -9,6 +9,8 @@ export const universityMeadow: OverworldMap = {
 	width: 20,
 	tileMap: generateEmptyBackground(8, 20),
 	occupants: [
+		//npcs
+		600006,
 		//portals
 		700006,
 	],
