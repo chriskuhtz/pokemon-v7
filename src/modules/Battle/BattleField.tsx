@@ -505,7 +505,7 @@ export const BattleField = ({
 		<div
 			style={{
 				display: 'grid',
-				gridTemplateRows: '2fr 2fr 1fr',
+				gridTemplateRows: '4fr 4fr 1fr',
 				height: '100dvh',
 			}}
 		>

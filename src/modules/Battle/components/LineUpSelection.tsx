@@ -54,24 +54,26 @@ export const LineUpSelection = ({
 			</div>
 			<div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
 				{team.map((teamMember) => (
-					<div key={teamMember.id}>
-						<img
-							role="button"
-							onClick={() => toggleSelected(teamMember.id)}
-							tabIndex={0}
-							style={{
-								border: selectedTeam.includes(teamMember.id)
-									? '2px solid black'
-									: undefined,
-								borderRadius: 9000,
-							}}
-							onKeyDown={(e) => {
-								if (e.key === 'Enter') {
-									toggleSelected(teamMember.id);
-								}
-							}}
-							src={getPokemonSprite(teamMember.dexId, 'back')}
-						/>
+					<div
+						role="button"
+						onClick={() => toggleSelected(teamMember.id)}
+						tabIndex={0}
+						style={{
+							border: selectedTeam.includes(teamMember.id)
+								? '2px solid black'
+								: undefined,
+							borderRadius: 9000,
+							aspectRatio: '1/1',
+							padding: '1rem',
+						}}
+						onKeyDown={(e) => {
+							if (e.key === 'Enter') {
+								toggleSelected(teamMember.id);
+							}
+						}}
+						key={teamMember.id}
+					>
+						<img src={getPokemonSprite(teamMember.dexId, 'back')} />
 						<br />
 						<strong>{teamMember.data.name}</strong>
 					</div>

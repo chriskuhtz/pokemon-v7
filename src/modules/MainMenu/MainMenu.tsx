@@ -46,6 +46,7 @@ export const MainMenu = ({
 							style={{
 								display: 'flex',
 								padding: '.5rem',
+								gap: '1rem',
 								alignItems: 'center',
 							}}
 						>
