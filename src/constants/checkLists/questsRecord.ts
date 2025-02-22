@@ -8,6 +8,7 @@ export const questNames = [
 	'Catch a Zorua at night in the meadow',
 	'Catch a morning pokemon from the meadow',
 	'Defeat all the Trainers in the meadow',
+	'Catch five different pokemon',
 ] as const;
 export type QuestName = (typeof questNames)[number];
 
@@ -49,6 +50,14 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			return meadow.occupants
 				.filter((o) => o > 200000 && o < 300000)
 				.every((o) => s.handledOccupants.some((ho) => ho.id === o));
+		},
+	},
+	'Catch five different pokemon': {
+		rewardItems: { 'ultra-ball': 10 },
+		conditionFunction: (s) => {
+			const dexIds = s.pokemon.map((p) => p.dexId);
+
+			return [...new Set(dexIds)].length >= 5;
 		},
 	},
 };
