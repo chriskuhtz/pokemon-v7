@@ -222,13 +222,16 @@ const drawOccupant = (
 					);
 				}
 
-				ctx.fillStyle = OverworldShaderMap[getTimeOfDay()];
-				ctx?.fillRect(
-					baseSize * occ.x + baseSize * 0.125,
-					baseSize * occ.y + baseSize * 0.125,
-					baseSize * 0.75,
-					baseSize * 0.75
-				);
+				if (occ.sprite.includes('fence')) {
+					ctx.fillStyle = OverworldShaderMap[getTimeOfDay()];
+					ctx?.fillRect(
+						baseSize * occ.x + baseSize * 0.125,
+						baseSize * occ.y + baseSize * 0.125,
+						baseSize * 0.75,
+						baseSize * 0.75
+					);
+				}
+
 				break;
 			case 'ITEM':
 			case 'PC':

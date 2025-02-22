@@ -210,6 +210,44 @@ export const occupantsRecord: Record<number, Occupant> = {
 		sprite: '136',
 		conditionFunction: () => true,
 	},
+	600007: {
+		type: 'NPC',
+		x: 7,
+		y: 2,
+		map: 'meadow',
+		orientation: 'LEFT',
+		gifts: {
+			repel: 5,
+			'poke-ball': 10,
+			potion: 5,
+		},
+		unhandledMessage: [
+			'Nice to meet you, new guy',
+			'I am Gary, the other research assistant',
+			'Professor Oak is my Grandpa',
+			'So i am basically your boss!',
+			'Unfortunately',
+			'we still have to share',
+			'that old trailer next to the lab.',
+			'Before i forget',
+			'here is your starter kit',
+			'smell ya later, small dog',
+		],
+		handledMessage: ['i bet i will find much stronger pokemon than you'],
+		sprite: SpriteEnum['gary'],
+		conditionFunction: (s) => !s.handledOccupants.some((h) => h.id === 600007),
+	},
+	600008: {
+		type: 'NPC',
+		x: 2,
+		y: 0,
+		map: 'trailer_meadow',
+		orientation: 'LEFT',
+
+		unhandledMessage: ['Dont even think about it', 'this one is my bed'],
+		sprite: SpriteEnum['gary'],
+		conditionFunction: (s) => s.handledOccupants.some((h) => h.id === 600007),
+	},
 	//Portals start at 700000
 	700001: {
 		type: 'PORTAL',
@@ -301,6 +339,38 @@ export const occupantsRecord: Record<number, Occupant> = {
 		portal: {
 			forwardFoot: 'CENTER1',
 			x: 5,
+			y: 1,
+			orientation: 'DOWN',
+			mapId: 'meadow',
+		},
+		conditionFunction: () => true,
+	},
+	700007: {
+		type: 'PORTAL',
+		map: 'meadow',
+		x: 6,
+		y: 0,
+
+		sprite: '/mapObjects/houses/trailer.png',
+		portal: {
+			forwardFoot: 'CENTER1',
+			x: 1,
+			y: 1,
+			orientation: 'UP',
+			mapId: 'trailer_meadow',
+		},
+		conditionFunction: () => true,
+	},
+	700008: {
+		type: 'PORTAL',
+		small: true,
+		map: 'trailer_meadow',
+		x: 1,
+		y: 1,
+		sprite: '/mapObjects/doormat.png',
+		portal: {
+			forwardFoot: 'CENTER1',
+			x: 6,
 			y: 1,
 			orientation: 'DOWN',
 			mapId: 'meadow',
@@ -416,6 +486,23 @@ export const occupantsRecord: Record<number, Occupant> = {
 		map: 'university_meadow',
 		conditionFunction: () => true,
 	},
+	800014: {
+		type: 'OBSTACLE',
+		sprite: '/mapObjects/mattress.png',
+		x: 0,
+		y: 0,
+		map: 'trailer_meadow',
+		conditionFunction: () => true,
+	},
+	800015: {
+		type: 'OBSTACLE',
+		sprite: '/mapObjects/mattress.png',
+		x: 2,
+		y: 1,
+		map: 'trailer_meadow',
+		conditionFunction: () => true,
+	},
+
 	//signs start at 900000
 	900001: {
 		map: 'meadow',
