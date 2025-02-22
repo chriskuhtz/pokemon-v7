@@ -214,6 +214,7 @@ export const App = ({
 			openMenu={(steps) => navigateAwayFromOverworldReducer('MAIN', steps)}
 			setCharacterLocation={setCharacterLocationReducer}
 			playerLocation={location}
+			saveFile={saveFile}
 			map={mapsRecord[saveFile.location.mapId]}
 			startEncounter={(steps) => {
 				navigateAwayFromOverworldReducer('BATTLE', steps);

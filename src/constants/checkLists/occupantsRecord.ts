@@ -1,3 +1,4 @@
+import { getTimeOfDay } from '../../functions/getTimeOfDay';
 import { Occupant } from '../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { testOpponent } from '../gameData';
@@ -12,6 +13,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		y: 0,
 		amount: 1,
 		map: 'meadow',
+		conditionFunction: () => true,
 	},
 	1: {
 		type: 'ITEM',
@@ -20,6 +22,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		y: 1,
 		amount: 2,
 		map: 'meadow',
+		conditionFunction: () => true,
 	},
 	2: {
 		type: 'HIDDEN_ITEM',
@@ -28,6 +31,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		y: 2,
 		amount: 1,
 		map: 'meadow',
+		conditionFunction: () => true,
 	},
 	//PCS start at 100000
 	100001: {
@@ -36,6 +40,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		y: 0,
 		map: 'pokecenter_meadow',
 		approachDirection: 'UP',
+		conditionFunction: () => true,
 	},
 	//Trainers start at 200000
 	200001: {
@@ -46,9 +51,10 @@ export const occupantsRecord: Record<number, Occupant> = {
 		orientation: 'LEFT',
 		unhandledDialogue: ['fight me', 'big dog'],
 		handledDialogue: ['you are the big dog, big dog'],
-		sprite: '033',
+		sprite: SpriteEnum['sailor'],
 		team: [{ ...testOpponent, dexId: 66 }],
 		name: 'Sailor Bob',
+		conditionFunction: () => true,
 	},
 	200002: {
 		type: 'TRAINER',
@@ -58,13 +64,14 @@ export const occupantsRecord: Record<number, Occupant> = {
 		orientation: 'RIGHT',
 		unhandledDialogue: ['Watt up', 'can you feel the electricity'],
 		handledDialogue: ['I short circuited'],
-		sprite: '069',
+		sprite: SpriteEnum['rocker'],
 		team: [
 			{ ...testOpponent, dexId: 100 },
 			{ ...testOpponent, dexId: 309 },
 			{ ...testOpponent, dexId: 522 },
 		],
 		name: 'Electrician Erik',
+		conditionFunction: () => true,
 	},
 	//Merchants start at 300000,
 	300001: {
@@ -76,6 +83,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		inventory: STANDARD_BUY_MARKET,
 		dialogue: ['Get your supplies here'],
 		sprite: SpriteEnum['clerkMale'],
+		conditionFunction: () => true,
 	},
 	//Nurses start at 400000,
 	400001: {
@@ -86,6 +94,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		map: 'pokecenter_meadow',
 		dialogue: ['Let me heal your pokemon'],
 		sprite: SpriteEnum['nurse'],
+		conditionFunction: () => true,
 	},
 	//Bushes start at 500000,
 	500001: {
@@ -93,6 +102,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		x: 6,
 		y: 1,
 		map: 'meadow',
+		conditionFunction: () => true,
 	},
 	//NPCs start at 600000
 	600001: {
@@ -103,8 +113,9 @@ export const occupantsRecord: Record<number, Occupant> = {
 		orientation: 'UP',
 		unhandledDialogue: ['Can you defeat all the trainers here,', 'Big dog?'],
 		quest: 'Defeat all the Trainers in the meadow',
-		sprite: '060',
+		sprite: SpriteEnum['boy'],
 		movement: { path: ['UP', 'RIGHT', 'LEFT', 'DOWN'], currentStep: 0 },
+		conditionFunction: () => true,
 	},
 	600002: {
 		type: 'NPC',
@@ -118,10 +129,11 @@ export const occupantsRecord: Record<number, Occupant> = {
 			'These might help you catch them',
 		],
 		handledDialogue: ['did you find one?'],
-		sprite: '040',
+		sprite: SpriteEnum['uncle'],
 		gifts: { 'quick-ball': 5 },
 		quest: 'Catch a morning pokemon from the meadow',
 		movement: { path: ['RIGHT', 'LEFT'], currentStep: 0 },
+		conditionFunction: () => true,
 	},
 	600003: {
 		type: 'NPC',
@@ -131,11 +143,12 @@ export const occupantsRecord: Record<number, Occupant> = {
 		orientation: 'LEFT',
 		unhandledDialogue: ['Have you seen a little yellow mouse?'],
 		quest: 'catch a pikachu',
-		sprite: '070',
+		sprite: SpriteEnum['lass1'],
 		movement: {
 			path: ['RIGHT', 'RIGHT', 'DOWN', 'DOWN', 'LEFT', 'LEFT', 'UP', 'UP'],
 			currentStep: 0,
 		},
+		conditionFunction: () => true,
 	},
 	600004: {
 		type: 'NPC',
@@ -149,16 +162,17 @@ export const occupantsRecord: Record<number, Occupant> = {
 			'i made them myself',
 		],
 		handledDialogue: ['did your pokemon enjoy the candies'],
-		sprite: '077',
+		sprite: SpriteEnum['grandma2'],
 		gifts: { 'rare-candy': 10 },
 		quest: 'Train a Pokemon to lvl 10',
+		conditionFunction: () => getTimeOfDay() === 'DAY',
 	},
 	600005: {
 		type: 'NPC',
 		x: 16,
 		y: 4,
 		map: 'meadow',
-		timeofDay: 'NIGHT',
+
 		orientation: 'DOWN',
 		gifts: { 'dusk-ball': 5 },
 		unhandledDialogue: [
@@ -167,7 +181,8 @@ export const occupantsRecord: Record<number, Occupant> = {
 			'These Dusk balls work well at night',
 		],
 		quest: 'Catch a Zorua at night in the meadow',
-		sprite: '080',
+		sprite: SpriteEnum['builder'],
+		conditionFunction: () => getTimeOfDay() === 'NIGHT',
 	},
 	600006: {
 		type: 'NPC',
@@ -188,6 +203,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		handledDialogue: ['how is the catching going?'],
 		quest: 'Catch five different pokemon',
 		sprite: '136',
+		conditionFunction: () => true,
 	},
 	//Portals start at 700000
 	700001: {
@@ -204,6 +220,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 			orientation: 'UP',
 			mapId: 'market_meadow',
 		},
+		conditionFunction: () => true,
 	},
 	700002: {
 		type: 'PORTAL',
@@ -219,6 +236,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 			orientation: 'DOWN',
 			mapId: 'meadow',
 		},
+		conditionFunction: () => true,
 	},
 	700003: {
 		type: 'PORTAL',
@@ -234,6 +252,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 			orientation: 'UP',
 			mapId: 'pokecenter_meadow',
 		},
+		conditionFunction: () => true,
 	},
 	700004: {
 		type: 'PORTAL',
@@ -249,6 +268,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 			orientation: 'DOWN',
 			mapId: 'meadow',
 		},
+		conditionFunction: () => true,
 	},
 	700005: {
 		type: 'PORTAL',
@@ -264,6 +284,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 			orientation: 'UP',
 			mapId: 'university_meadow',
 		},
+		conditionFunction: () => true,
 	},
 	700006: {
 		type: 'PORTAL',
@@ -279,6 +300,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 			orientation: 'DOWN',
 			mapId: 'meadow',
 		},
+		conditionFunction: () => true,
 	},
 	//obstacles start at 800000
 	800001: {
@@ -287,5 +309,6 @@ export const occupantsRecord: Record<number, Occupant> = {
 		x: 2,
 		y: 3,
 		map: 'meadow',
+		conditionFunction: () => true,
 	},
 };
