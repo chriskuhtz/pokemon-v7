@@ -32,6 +32,16 @@ export const sortByPriority = (
 		return 1;
 	}
 
+	const aPriority = aMove?.data.priority ?? 0;
+	const bPriority = bMove?.data.priority ?? 0;
+
+	if (aPriority > bPriority) {
+		return -1;
+	}
+	if (aPriority < bPriority) {
+		return 1;
+	}
+
 	const aSpeed =
 		calculateModifiedStat(a.stats.speed, a.statBoosts.speed) *
 		(a.primaryAilment?.type === 'paralysis' ? PARA_SPEED_FACTOR : 1);
