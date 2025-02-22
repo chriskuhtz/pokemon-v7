@@ -1,6 +1,6 @@
 import { SecondaryAilment } from './Ailment';
 import { BattleAction } from './BattleActions';
-import { MoveDto } from './Move';
+import { DamageClass, MoveDto } from './Move';
 import { OwnedPokemon, OwnedPokemonMove } from './OwnedPokemon';
 import { PokemonData } from './PokemonData';
 import { StatObject } from './StatObject';
@@ -29,6 +29,10 @@ export interface BattlePokemon extends OwnedPokemon {
 		| 'FAINTED';
 	roundsInBattle: number;
 	caughtBefore: boolean;
+	lastReceivedDamage?: {
+		damageClass: DamageClass['name'];
+		damage: number;
+	};
 }
 
 export function isBattlePokemon(
