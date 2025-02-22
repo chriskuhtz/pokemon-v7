@@ -63,6 +63,12 @@ export interface OverworldNpc extends BaseOccupant {
 	gifts?: Partial<Inventory>;
 	quest?: QuestName;
 }
+export interface OverworldSign extends BaseOccupant {
+	type: 'SIGN';
+	approachDirection: CharacterOrientation;
+	dialogue: string[];
+	quest?: QuestName;
+}
 export interface OverworldBush extends BaseOccupant {
 	type: 'BUSH';
 }
@@ -98,7 +104,8 @@ export type Occupant =
 	| OverworldNpc
 	| OverworldTrainer
 	| Portal
-	| OverworldObstacle;
+	| OverworldObstacle
+	| OverworldSign;
 
 export interface OverworldEncounter {
 	dexId: number;

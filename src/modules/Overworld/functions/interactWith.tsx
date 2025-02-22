@@ -68,6 +68,17 @@ export const interactWithFunction = ({
 		});
 		return;
 	}
+	if (
+		data.type === 'SIGN' &&
+		playerLocation.orientation === data.approachDirection
+	) {
+		data.dialogue.forEach((d) =>
+			addDialogue({
+				message: d,
+			})
+		);
+		return;
+	}
 	if (data.type === 'MERCHANT') {
 		changeOccupant(Number.parseInt(id), {
 			...data,

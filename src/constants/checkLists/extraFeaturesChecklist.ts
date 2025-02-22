@@ -153,4 +153,8 @@ export const extraFeatureCheckList: {
 	{ name: 'bulletin board' },
 	{ name: 'anounce map on change' },
 	{ name: 'Unify Toast, Dialogue and MessageQueue' },
+	{
+		name: 'algorithmic fences',
+	},
+	{ name: 'fence w/o background' },
 ];
