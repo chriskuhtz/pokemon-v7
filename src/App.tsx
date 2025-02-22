@@ -3,6 +3,7 @@ import { v4 } from 'uuid';
 import { mapsRecord } from './constants/checkLists/mapsRecord';
 import { testPokemon, testState } from './constants/gameData';
 import { STANDARD_BUY_MARKET } from './constants/standardBuyMarket';
+import { Message } from './hooks/useMessageQueue';
 import { useSaveFile } from './hooks/useSaveFile';
 import { generateInventory, Inventory } from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
@@ -19,7 +20,6 @@ import { Settings } from './modules/Settings/Settings';
 import { SpriteSelection } from './modules/SpriteSelection/SpriteSelection';
 import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { Team } from './modules/Team/Team';
-import { Message } from './hooks/useMessageQueue';
 
 export const App = ({
 	latestMessage,
@@ -50,6 +50,7 @@ export const App = ({
 		fulfillQuestReducer,
 		changeHeldItemReducer,
 		useSacredAshReducer,
+		applyEncounterRateModifierItem,
 		reset,
 		leaveBattleReducer,
 		addItemReducer,
@@ -69,7 +70,30 @@ export const App = ({
 
 	const team = useMemo(() => pokemon.filter((p) => p.onTeam), [pokemon]);
 
-	const firstTeamMember = team[0];
+	const firstTeamMember = useMemo(
+		() => (team.length > 0 ? team[0] : undefined),
+		[team]
+	);
+
+	const encounterRateModifier = useMemo(() => {
+		const stenchFactor = firstTeamMember?.ability === 'stench' ? 0.5 : 1;
+		const itemFactor = saveFile.encounterRateModifier?.factor ?? 1;
+		const weatherFactor =
+			firstTeamMember?.ability === 'sand-veil' &&
+			mapsRecord[saveFile.location.mapId].weather === 'sandstorm'
+				? 0.5
+				: 1;
+
+		return 1 * stenchFactor * itemFactor * weatherFactor;
+	}, [firstTeamMember, saveFile]);
+
+	// const fishingEncounterRateModifier = useMemo(() => {
+	// 	if (firstTeamMember.ability === 'suction-cups') {
+	// 		return 1.5;
+	// 	}
+
+	// 	return 1;
+	// }, [firstTeamMember.ability]);
 
 	if (activeTab === 'BATTLE' && currentChallenger) {
 		return (
@@ -171,6 +195,7 @@ export const App = ({
 				team={team}
 				applyItem={applyItemToPokemonReducer}
 				applySacredAsh={useSacredAshReducer}
+				applyEncounterRateModifierItem={applyEncounterRateModifierItem}
 			/>
 		);
 	}
@@ -236,7 +261,6 @@ export const App = ({
 			startEncounter={(steps) => {
 				navigateAwayFromOverworldReducer('BATTLE', steps);
 			}}
-			firstTeamMember={firstTeamMember}
 			goToMarket={(i, steps) => {
 				navigateAwayFromOverworldReducer('MARKET', steps);
 				setCurrentMarketInventory(i);
@@ -254,6 +278,7 @@ export const App = ({
 			addMessage={addMessage}
 			interjectMessage={interjectMessage}
 			addMultipleMessages={addMultipleMessages}
+			encounterRateModifier={encounterRateModifier}
 		/>
 	);
 };

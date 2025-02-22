@@ -21,6 +21,8 @@ export const EmptyInventory: Inventory = {
 	'premier-ball': 0,
 	potion: 0,
 	repel: 0,
+	'max-repel': 0,
+	'super-repel': 0,
 	antidote: 0,
 	'burn-heal': 0,
 	awakening: 0,

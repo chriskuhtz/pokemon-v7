@@ -80,7 +80,13 @@ export const xItemTypes = [
 
 export const runawayItemTypes = ['poke-doll', 'fluffy-tail'] as const;
 
-export const encounterChanceItems = ['white-flute', 'black-flute'] as const;
+export const encounterChanceItems = [
+	'white-flute',
+	'black-flute',
+	'repel',
+	'max-repel',
+	'super-repel',
+] as const;
 
 export const evoStones = [
 	'sun-stone',
@@ -105,6 +111,8 @@ export const itemTypes = [
 	...encounterChanceItems,
 	...evoStones,
 	'repel',
+	'max-repel',
+	'super-repel',
 	'sacred-ash',
 	'rare-candy',
 ] as const;

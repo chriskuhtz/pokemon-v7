@@ -8,10 +8,10 @@ import { assembleMap } from '../../functions/assembleMap';
 import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { isValidOverWorldMap } from '../../functions/isValidOverworldMap';
+import { Message } from '../../hooks/useMessageQueue';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
 import { Occupant, OverworldMap } from '../../interfaces/OverworldMap';
-import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { CharacterLocationData, SaveFile } from '../../interfaces/SaveFile';
 import './Overworld.css';
 import { ClickerGrid } from './components/ClickerGrid';
@@ -22,7 +22,6 @@ import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
-import { Message } from '../../hooks/useMessageQueue';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -40,7 +39,7 @@ export const Overworld = ({
 	setCharacterLocation,
 	map,
 	startEncounter,
-	firstTeamMember,
+
 	goToMarket,
 	talkToNurse,
 	openStorage,
@@ -51,6 +50,7 @@ export const Overworld = ({
 	saveFile,
 	latestMessage,
 	addMessage,
+	encounterRateModifier,
 }: {
 	openMenu: (stepsTaken: number) => void;
 	playerLocation: CharacterLocationData;
@@ -60,7 +60,6 @@ export const Overworld = ({
 	encounterRateModifier?: number;
 	openStorage: (stepsTaken: number) => void;
 	goToMarket: (marketInventory: Partial<Inventory>, stepsTaken: number) => void;
-	firstTeamMember: OwnedPokemon;
 	talkToNurse: (id: number) => void;
 	playerSprite: string;
 	receiveItems: (item: ItemType, amount: number) => void;
@@ -128,29 +127,6 @@ export const Overworld = ({
 			onRemoval: () => startEncounter(stepsTaken),
 		});
 	};
-
-	const encounterRateModifier = useMemo(() => {
-		if (firstTeamMember.ability === 'stench') {
-			return 0.5;
-		}
-		if (
-			firstTeamMember.ability === 'sand-veil' &&
-			assembledMap.weather === 'sandstorm'
-		) {
-			return 0.5;
-		}
-
-		return 1;
-	}, [assembledMap.weather, firstTeamMember.ability]);
-
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const fishingEncounterRateModifier = useMemo(() => {
-		if (firstTeamMember.ability === 'suction-cups') {
-			return 1.5;
-		}
-
-		return 1;
-	}, [firstTeamMember.ability]);
 
 	//DRAWING
 	useDrawCharacter(playerCanvasId, playerLocation, playerSprite);

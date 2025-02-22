@@ -158,4 +158,5 @@ export const extraFeatureCheckList: {
 	{ name: 'poison step damage' },
 	{ name: 'fly outside of battle' },
 	{ name: 'allow save snapshots' },
+	{ name: 'higher level pokemon ignore repel' },
 ];

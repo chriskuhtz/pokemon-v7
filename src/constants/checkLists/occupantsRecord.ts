@@ -402,7 +402,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		type: 'SIGN',
 		x: 7,
 		y: 1,
-		dialogue: ['Oak Research Outpost', 'Kuma Region'],
+		dialogue: ['Oak Labs Research Outpost', 'Kuma Region'],
 		approachDirection: 'UP',
 		conditionFunction: () => true,
 	},

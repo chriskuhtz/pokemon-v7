@@ -61,4 +61,5 @@ export interface SaveFile {
 	settings?: SettingsObject;
 	quests: Record<QuestName, QuestStatus>;
 	sprite: string;
+	encounterRateModifier?: { factor: number; steps: number };
 }

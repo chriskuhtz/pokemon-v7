@@ -13,13 +13,30 @@ import { reduceBattlePokemonToOwnedPokemon } from '../functions/reduceBattlePoke
 import { updateItemFunction } from '../functions/updateItemFunction';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { Inventory, joinInventories } from '../interfaces/Inventory';
-import { ItemType } from '../interfaces/Item';
+import { EncounterChanceItem, ItemType } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { RoutesType } from '../interfaces/Routing';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
 
 export const getHatchTimeModifier = (team: OwnedPokemon[]): number => {
 	return team.some((t) => t.ability === 'magma-armor') ? 2 : 1;
+};
+
+export const reduceEncounterRateModifier = (
+	steps: number,
+	encounterRateModifier?: { factor: number; steps: number }
+): { factor: number; steps: number } | undefined => {
+	if (!encounterRateModifier) {
+		return;
+	}
+	if (steps >= encounterRateModifier.steps) {
+		return;
+	}
+
+	return {
+		...encounterRateModifier,
+		steps: encounterRateModifier.steps - steps,
+	};
 };
 
 export interface UseSaveFile {
@@ -61,6 +78,7 @@ export interface UseSaveFile {
 		scatteredCoins: number,
 		team: BattlePokemon[]
 	) => void;
+	applyEncounterRateModifierItem: (item: EncounterChanceItem) => void;
 }
 
 export const useSaveFile = (
@@ -175,10 +193,18 @@ export const useSaveFile = (
 		[saveFile, setSaveFile]
 	);
 	const setCharacterLocationReducer = (update: CharacterLocationData) => {
+		const updatedModifier = reduceEncounterRateModifier(
+			1,
+			saveFile.encounterRateModifier
+		);
+		if (saveFile.encounterRateModifier && !updatedModifier) {
+			addToast(`Encounter Rate Modifier ended`);
+		}
 		setSaveFile(
 			{
 				...saveFile,
 				location: update,
+				encounterRateModifier: updatedModifier,
 			},
 			'setCharacter'
 		);
@@ -435,6 +461,39 @@ export const useSaveFile = (
 		[putSaveFileReducer, reset, saveFile, team]
 	);
 
+	const applyEncounterRateModifierItem = (item: EncounterChanceItem) => {
+		let modifier: { factor: number; steps: number } = { factor: 0, steps: 0 };
+		if (saveFile.encounterRateModifier) {
+			addToast('There is already a encounter rate modifier');
+			return;
+		}
+		if (item === 'white-flute') {
+			modifier = { factor: 2, steps: 250 };
+		}
+		if (item === 'black-flute') {
+			modifier = { factor: 0.5, steps: 250 };
+		}
+		if (item === 'repel') {
+			modifier = { factor: 0, steps: 100 };
+		}
+		if (item === 'super-repel') {
+			modifier = { factor: 0, steps: 200 };
+		}
+		if (item === 'max-repel') {
+			modifier = { factor: 0, steps: 500 };
+		}
+
+		addToast(`${item} applied`);
+		setSaveFile(
+			{
+				...saveFile,
+				encounterRateModifier: modifier,
+				inventory: joinInventories(saveFile.inventory, { [item]: 1 }, true),
+			},
+			'applyEncounterRate'
+		);
+	};
+
 	//SYNC WITH LOCAL STORAGE
 	useEffect(() => {
 		window.localStorage.setItem(localStorageId, JSON.stringify(saveFile));
@@ -484,5 +543,6 @@ export const useSaveFile = (
 		changeHeldItemReducer,
 		useSacredAshReducer,
 		leaveBattleReducer,
+		applyEncounterRateModifierItem,
 	};
 };
