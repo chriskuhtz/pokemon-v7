@@ -9,8 +9,8 @@ export const occupantsRecord: Record<number, Occupant> = {
 	0: {
 		type: 'ITEM',
 		item: 'poke-ball',
-		x: 4,
-		y: 0,
+		x: 0,
+		y: 9,
 		amount: 1,
 		map: 'meadow',
 		conditionFunction: () => true,
