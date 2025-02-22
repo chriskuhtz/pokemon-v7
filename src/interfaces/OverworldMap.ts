@@ -63,6 +63,7 @@ export interface OverworldNpc extends BaseOccupant {
 	gifts?: Partial<Inventory>;
 	quest?: QuestName;
 }
+
 export interface OverworldBush extends BaseOccupant {
 	type: 'BUSH';
 }
