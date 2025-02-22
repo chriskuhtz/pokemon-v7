@@ -13,7 +13,6 @@ import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
 import { reduceSecondaryAilmentDurations } from '../../functions/reduceSecondaryAilmentDurations';
 import { sortByPriority } from '../../functions/sortByPriority';
-import { useMessageQueue } from '../../hooks/useMessageQueue';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Inventory, joinInventories } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
@@ -51,6 +50,10 @@ export const BattleField = ({
 	initTeam,
 	inventory,
 	fightersPerSide,
+	latestMessage,
+	addMessage,
+	addMultipleMessages,
+	interjectMessage,
 }: {
 	leave: (
 		caughtPokemon: BattlePokemon[],
@@ -62,9 +65,11 @@ export const BattleField = ({
 	initTeam: BattlePokemon[];
 	fightersPerSide: number;
 	inventory: Inventory;
+	latestMessage: BattleMessage | undefined;
+	addMessage: (message: BattleMessage) => void;
+	addMultipleMessages: (newMessages: BattleMessage[]) => void;
+	interjectMessage: (message: BattleMessage) => void;
 }) => {
-	const { latestMessage, addMessage, addMultipleMessages, interjectMessage } =
-		useMessageQueue();
 	const [battleRound, setBattleRound] = useState<number>(0);
 	const [bW, setBattleWeather] = useState<WeatherType | undefined>();
 	const [battleLocation] = useState<BattleLocation>('STANDARD');
@@ -532,6 +537,8 @@ export const BattleField = ({
 					maxWidth: '100dvw',
 					overflow: 'scroll',
 					borderTop: '1px solid black',
+					minHeight: '103px',
+					maxHeight: '103px',
 				}}
 			>
 				<ControlBar

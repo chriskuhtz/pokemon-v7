@@ -4,10 +4,10 @@ import { mapsRecord } from './constants/checkLists/mapsRecord';
 import { testPokemon, testState } from './constants/gameData';
 import { STANDARD_BUY_MARKET } from './constants/standardBuyMarket';
 import { useSaveFile } from './hooks/useSaveFile';
-import { AddToastFunction } from './hooks/useToasts';
 import { generateInventory, Inventory } from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
 import { Bag } from './modules/Bag/Bag';
+import { BattleMessage } from './modules/Battle/BattleField';
 import { BattleLoader } from './modules/Battle/components/BattleLoader';
 import { MainMenu } from './modules/MainMenu/MainMenu';
 import { BuyMarket } from './modules/Market/BuyMarket';
@@ -22,10 +22,15 @@ import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { Team } from './modules/Team/Team';
 
 export const App = ({
-	addToast,
+	latestMessage,
+	addMessage,
+	addMultipleMessages,
+	interjectMessage,
 }: {
-	activeToast: boolean;
-	addToast: AddToastFunction;
+	latestMessage: BattleMessage | undefined;
+	addMessage: (message: BattleMessage) => void;
+	addMultipleMessages: (newMessages: BattleMessage[]) => void;
+	interjectMessage: (message: BattleMessage) => void;
 }): JSX.Element => {
 	const [currentMarketInventory, setCurrentMarketInventory] =
 		useState<Partial<Inventory>>(STANDARD_BUY_MARKET);
@@ -48,7 +53,7 @@ export const App = ({
 		reset,
 		leaveBattleReducer,
 		addItemReducer,
-	} = useSaveFile(testState, addToast);
+	} = useSaveFile(testState, (x: string) => addMessage({ message: x }));
 
 	const {
 		meta: { activeTab, currentChallenger },
@@ -74,6 +79,10 @@ export const App = ({
 				leave={leaveBattleReducer}
 				inventory={inventory}
 				ownedPokemonDexIds={saveFile.pokemon.map((p) => p.dexId)}
+				latestMessage={latestMessage}
+				addMessage={addMessage}
+				interjectMessage={interjectMessage}
+				addMultipleMessages={addMultipleMessages}
 			/>
 		);
 	}
@@ -119,6 +128,10 @@ export const App = ({
 						meta: { activeTab: 'OVERWORLD' },
 					});
 				}}
+				latestMessage={latestMessage}
+				addMessage={addMessage}
+				interjectMessage={interjectMessage}
+				addMultipleMessages={addMultipleMessages}
 			/>
 		);
 	}
@@ -132,6 +145,10 @@ export const App = ({
 				spriteUrl={`/npcs/${saveFile.sprite}.png`}
 				name={playerId}
 				reset={reset}
+				latestMessage={latestMessage}
+				addMessage={addMessage}
+				interjectMessage={interjectMessage}
+				addMultipleMessages={addMultipleMessages}
 			/>
 		);
 	}
@@ -173,10 +190,10 @@ export const App = ({
 	if (activeTab === 'STORAGE') {
 		return (
 			<PokemonStorage
-				addToast={addToast}
 				allPokemon={pokemon}
 				goBack={() => setActiveTabReducer('OVERWORLD')}
 				setPokemon={setPokemonReducer}
+				addToast={addMessage}
 			/>
 		);
 	}
@@ -233,6 +250,10 @@ export const App = ({
 			receiveItems={addItemReducer}
 			handleThisOccupant={handleOccupantReducer}
 			handledOccupants={handledOccupants.map((h) => h.id)}
+			latestMessage={latestMessage}
+			addMessage={addMessage}
+			interjectMessage={interjectMessage}
+			addMultipleMessages={addMultipleMessages}
 		/>
 	);
 };

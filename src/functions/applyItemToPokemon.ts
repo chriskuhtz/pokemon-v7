@@ -1,5 +1,4 @@
 import { MoveName } from '../constants/checkLists/movesCheckList';
-import { AddToastFunction } from '../hooks/useToasts';
 import { BattlePokemon, isBattlePokemon } from '../interfaces/BattlePokemon';
 import {
 	HappinessChangeTable,
@@ -23,7 +22,7 @@ import { removeHealableAilments } from './removeHealableAilments';
 export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	pokemon: T,
 	item: ItemType,
-	addToast?: AddToastFunction,
+	addToast?: (x: string) => void,
 	move?: MoveName
 ): T {
 	if ((item === 'ether' || item === 'max-ether') && move) {
@@ -223,7 +222,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		}
 
 		if (addToast) {
-			addToast(`reached level ${level + 1}`, 'SUCCESS');
+			addToast(`reached level ${level + 1}`);
 		}
 		return {
 			...applyHappinessChange(pokemon, HappinessChangeTable[item] ?? 0),

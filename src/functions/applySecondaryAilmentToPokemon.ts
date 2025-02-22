@@ -1,5 +1,4 @@
 import { MoveName } from '../constants/checkLists/movesCheckList';
-import { AddToastFunction } from '../hooks/useToasts';
 import { SecondaryAilment } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { PokemonType } from '../interfaces/PokemonType';
@@ -9,7 +8,7 @@ import { isKO } from './isKo';
 export const applySecondaryAilmentToPokemon = (
 	pokemon: BattlePokemon,
 	ailment: SecondaryAilment['type'],
-	addMessage: AddToastFunction,
+	addMessage: (x: string) => void,
 	newType?: PokemonType,
 	move?: MoveName
 ): BattlePokemon => {

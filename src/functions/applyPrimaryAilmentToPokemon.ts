@@ -1,4 +1,3 @@
-import { AddToastFunction } from '../hooks/useToasts';
 import { PrimaryAilment } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { getMiddleOfThree } from './getMiddleOfThree';
@@ -9,7 +8,7 @@ export const applyPrimaryAilmentToPokemon = (
 	target: BattlePokemon,
 	applicator: BattlePokemon,
 	ailment: PrimaryAilment['type'],
-	dispatchToast: AddToastFunction,
+	dispatchToast: (x: string) => void,
 	toastSuffix?: string
 ): { updatedTarget: BattlePokemon; updatedApplicator: BattlePokemon } => {
 	if (isKO(target)) {

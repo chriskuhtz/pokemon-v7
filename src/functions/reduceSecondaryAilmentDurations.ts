@@ -1,9 +1,8 @@
-import { AddToastFunction } from '../hooks/useToasts';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 
 export const reduceSecondaryAilmentDurations = (
 	p: BattlePokemon,
-	dispatchToast: AddToastFunction
+	dispatchToast: (x: string) => void
 ): BattlePokemon => {
 	const updated = { ...p };
 	//reduce ailment duration

@@ -2,7 +2,14 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { animationTimer } from '../constants/gameData';
 import { BattleMessage } from '../modules/Battle/BattleField';
 
-export const useMessageQueue = (speed?: number) => {
+export const useMessageQueue = (
+	speed?: number
+): {
+	latestMessage: BattleMessage | undefined;
+	addMessage: (message: BattleMessage) => void;
+	addMultipleMessages: (newMessages: BattleMessage[]) => void;
+	interjectMessage: (message: BattleMessage) => void;
+} => {
 	const [messages, setMessages] = useState<BattleMessage[]>([]);
 	const addMessage = useCallback((message: BattleMessage) => {
 		setMessages((messages) => [...messages, message]);

@@ -3,7 +3,7 @@ import { useScreenTransition } from '../../../hooks/useScreenTransition';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import { OverworldTrainer } from '../../../interfaces/OverworldMap';
-import { BattleField } from '../BattleField';
+import { BattleField, BattleMessage } from '../BattleField';
 import { IntroBanner } from './IntroBanner';
 import { LineUpSelection } from './LineUpSelection';
 
@@ -14,6 +14,10 @@ export const BattleOverview = ({
 	fightersPerSide,
 	inventory,
 	trainer,
+	latestMessage,
+	addMessage,
+	addMultipleMessages,
+	interjectMessage,
 }: {
 	leave: (
 		caughtPokemon: BattlePokemon[],
@@ -26,6 +30,10 @@ export const BattleOverview = ({
 	fightersPerSide: number;
 	inventory: Inventory;
 	trainer?: OverworldTrainer;
+	latestMessage: BattleMessage | undefined;
+	addMessage: (message: BattleMessage) => void;
+	addMultipleMessages: (newMessages: BattleMessage[]) => void;
+	interjectMessage: (message: BattleMessage) => void;
 }): JSX.Element => {
 	const [battleStarted, setBattleStarted] = useState<boolean>(false);
 
@@ -84,6 +92,10 @@ export const BattleOverview = ({
 				...o,
 				status: i < fightersPerSide ? 'ONFIELD' : 'BENCH',
 			}))}
+			latestMessage={latestMessage}
+			addMessage={addMessage}
+			interjectMessage={interjectMessage}
+			addMultipleMessages={addMultipleMessages}
 		/>
 	);
 };

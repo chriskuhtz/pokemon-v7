@@ -18,7 +18,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	1: {
 		type: 'ITEM',
 		item: 'potion',
-		x: 9,
+		x: 11,
 		y: 1,
 		amount: 2,
 		map: 'meadow',
