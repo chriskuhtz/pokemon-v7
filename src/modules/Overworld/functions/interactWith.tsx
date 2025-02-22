@@ -37,7 +37,7 @@ export const interactWithFunction = ({
 	}
 	const [id, data] = occ;
 
-	if (data.type === 'BUILDING') {
+	if (data.type === 'PORTAL') {
 		goToPosition(data.portal);
 		return;
 	}

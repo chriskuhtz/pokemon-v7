@@ -32,7 +32,7 @@ export const meadow: OverworldMap = {
 		500001,
 		//npcs
 		600001, 600002, 600003, 600004, 600005,
-		//buildings
+		//portals
 		700001,
 	],
 	possibleEncounters: {

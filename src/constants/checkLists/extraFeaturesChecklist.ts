@@ -200,4 +200,5 @@ export const extraFeatureCheckList: {
 	{ name: 'no running or catching in trainer battles' },
 	{ name: 'surf outside of battle' },
 	{ name: 'play pokecenter sound on visit' },
+	{ name: 'onstep events' },
 ];

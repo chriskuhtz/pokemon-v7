@@ -166,14 +166,13 @@ export const occupantsRecord: Record<number, Occupant> = {
 		quest: 'Catch a Zorua at night in the meadow',
 		sprite: '080',
 	},
-	//Buildings start at 700000
+	//Portals start at 700000
 	700001: {
-		type: 'BUILDING',
+		type: 'PORTAL',
 		map: 'meadow',
 		x: 15,
 		y: 0,
-		height: 1,
-		width: 1,
+
 		sprite: '/mapObjects/houses/market.png',
 		portal: {
 			forwardFoot: 'CENTER1',
@@ -181,6 +180,21 @@ export const occupantsRecord: Record<number, Occupant> = {
 			y: 3,
 			orientation: 'UP',
 			mapId: 'market',
+		},
+	},
+	700002: {
+		type: 'PORTAL',
+		small: true,
+		map: 'market',
+		x: 2,
+		y: 3,
+		sprite: '/mapObjects/doormat.png',
+		portal: {
+			forwardFoot: 'CENTER1',
+			x: 15,
+			y: 1,
+			orientation: 'DOWN',
+			mapId: 'meadow',
 		},
 	},
 };

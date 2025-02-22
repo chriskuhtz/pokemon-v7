@@ -15,5 +15,7 @@ export const market: OverworldMap = {
 	occupants: [
 		//merchants
 		300001,
+		//portals
+		700002,
 	],
 };

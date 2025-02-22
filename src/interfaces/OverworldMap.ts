@@ -91,15 +91,14 @@ export interface OverworldTrainer {
 	name: string;
 }
 
-export interface Building {
-	type: 'BUILDING';
-	height: number;
-	width: number;
+export interface Portal {
+	type: 'PORTAL';
 	x: number;
 	y: number;
 	sprite: string;
 	portal: CharacterLocationData;
 	map: MapId;
+	small?: boolean;
 }
 
 export type Occupant =
@@ -111,7 +110,7 @@ export type Occupant =
 	| OverworldBush
 	| OverworldNpc
 	| OverworldTrainer
-	| Building;
+	| Portal;
 
 export interface OverworldEncounter {
 	dexId: number;
