@@ -173,7 +173,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	700001: {
 		type: 'PORTAL',
 		map: 'meadow',
-		x: 15,
+		x: 2,
 		y: 0,
 
 		sprite: '/mapObjects/houses/market.png',
@@ -194,7 +194,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		sprite: '/mapObjects/doormat.png',
 		portal: {
 			forwardFoot: 'CENTER1',
-			x: 15,
+			x: 2,
 			y: 1,
 			orientation: 'DOWN',
 			mapId: 'meadow',
@@ -204,7 +204,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	700003: {
 		type: 'PORTAL',
 		map: 'meadow',
-		x: 17,
+		x: 3,
 		y: 0,
 
 		sprite: '/mapObjects/houses/pokemonCenter.png',
@@ -225,10 +225,18 @@ export const occupantsRecord: Record<number, Occupant> = {
 		sprite: '/mapObjects/doormat.png',
 		portal: {
 			forwardFoot: 'CENTER1',
-			x: 17,
+			x: 3,
 			y: 1,
 			orientation: 'DOWN',
 			mapId: 'meadow',
 		},
+	},
+	//obstacles start at 800000
+	800001: {
+		type: 'OBSTACLE',
+		sprite: '/mapObjects/greenRock.png',
+		x: 2,
+		y: 3,
+		map: 'meadow',
 	},
 };

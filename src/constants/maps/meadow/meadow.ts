@@ -29,6 +29,8 @@ export const meadow: OverworldMap = {
 		600001, 600002, 600003, 600004, 600005,
 		//portals
 		700001, 700003,
+		//obstacles
+		800001,
 	],
 	possibleEncounters: {
 		MORNING: [

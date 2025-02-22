@@ -181,6 +181,7 @@ const drawOccupant = (
 				break;
 			case 'ITEM':
 			case 'PC':
+			case 'OBSTACLE':
 			default:
 				ctx?.drawImage(
 					img,
@@ -198,6 +199,7 @@ const drawOccupant = (
 const getSource = (occ: Occupant) => {
 	switch (occ.type) {
 		case 'PORTAL':
+		case 'OBSTACLE':
 			return occ.sprite;
 		case 'MERCHANT':
 		case 'NURSE':

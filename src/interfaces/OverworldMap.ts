@@ -78,6 +78,13 @@ export interface OverworldBush {
 	y: number;
 	map: MapId;
 }
+export interface OverworldObstacle {
+	type: 'OBSTACLE';
+	x: number;
+	y: number;
+	map: MapId;
+	sprite: string;
+}
 
 export interface OverworldTrainer {
 	type: 'TRAINER';
@@ -111,7 +118,8 @@ export type Occupant =
 	| OverworldBush
 	| OverworldNpc
 	| OverworldTrainer
-	| Portal;
+	| Portal
+	| OverworldObstacle;
 
 export interface OverworldEncounter {
 	dexId: number;
