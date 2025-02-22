@@ -44,9 +44,8 @@ export const extraFeatureCheckList: {
 	{ name: 'trainers', handled: true },
 	{ name: 'fix toast and Banner position', handled: true },
 	{ name: 'Properly determine held item from options', handled: true },
-	{ name: 'setting: randomize held items' },
-	{ name: 'fallback for backSprites' },
-	{ name: 'Conditional npc if you dont have badge ' },
+	{ name: 'setting: randomize held items', handled: true },
+	{ name: 'Conditional npc if you dont have badge ', handled: true },
 	{ name: 'take/give heldItem' },
 	{ name: 'prettier team overview' },
 	{ name: 'filter in battle items by if someone can benefit' },
@@ -153,4 +152,5 @@ export const extraFeatureCheckList: {
 	{ name: 'random quest' },
 	{ name: 'bulletin board' },
 	{ name: 'anounce map on change' },
+	{ name: 'Unify Toast, Dialogue and MessageQueue' },
 ];

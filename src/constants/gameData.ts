@@ -57,7 +57,7 @@ export const testState: SaveFile = {
 		orientation: 'RIGHT',
 		forwardFoot: 'CENTER1',
 		x: 0,
-		y: 0,
+		y: 2,
 	},
 	handledOccupants: [],
 	lastEdited: new Date().getTime(),

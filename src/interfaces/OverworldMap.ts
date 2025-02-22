@@ -13,85 +13,67 @@ import { TimeOfDay } from '../functions/getTimeOfDay';
 import { Inventory } from './Inventory';
 import { ItemType } from './Item';
 import { OwnedPokemon } from './OwnedPokemon';
-import { CharacterLocationData, CharacterOrientation } from './SaveFile';
+import {
+	CharacterLocationData,
+	CharacterOrientation,
+	SaveFile,
+} from './SaveFile';
 import { WeatherType } from './Weather';
 
-export interface OverworldItem {
+export interface BaseOccupant {
+	x: number;
+	y: number;
+	map: MapId;
+	conditionFunction: (saveFile: SaveFile) => boolean;
+}
+export interface OverworldItem extends BaseOccupant {
 	type: 'ITEM';
-	x: number;
-	y: number;
 	item: ItemType;
 	amount: number;
-	map: MapId;
 }
-export interface OverworldHiddenItem {
+export interface OverworldHiddenItem extends BaseOccupant {
 	type: 'HIDDEN_ITEM';
-	x: number;
-	y: number;
 	item: ItemType;
 	amount: number;
-	map: MapId;
 }
-export interface OverworldPC {
+export interface OverworldPC extends BaseOccupant {
 	type: 'PC';
-	x: number;
-	y: number;
-	map: MapId;
 	approachDirection: CharacterOrientation;
 }
-export interface OverworldMerchant {
+export interface OverworldMerchant extends BaseOccupant {
 	type: 'MERCHANT';
-	x: number;
-	y: number;
 	orientation: CharacterOrientation;
-	map: MapId;
 	inventory: Partial<Inventory>;
 	dialogue: string[];
 	sprite: '113';
 }
-export interface OverworldNurse {
+export interface OverworldNurse extends BaseOccupant {
 	type: 'NURSE';
-	x: number;
-	y: number;
 	orientation: CharacterOrientation;
-	map: MapId;
 	dialogue: string[];
 	sprite: '115';
 }
-export interface OverworldNpc {
+export interface OverworldNpc extends BaseOccupant {
 	type: 'NPC';
-	x: number;
-	y: number;
 	orientation: CharacterOrientation;
-	map: MapId;
 	unhandledDialogue: string[];
 	handledDialogue?: string[];
 	sprite: string;
 	movement?: { path: CharacterOrientation[]; currentStep: number };
 	gifts?: Partial<Inventory>;
 	quest?: QuestName;
-	timeofDay?: TimeOfDay;
 }
-export interface OverworldBush {
+export interface OverworldBush extends BaseOccupant {
 	type: 'BUSH';
-	x: number;
-	y: number;
-	map: MapId;
 }
-export interface OverworldObstacle {
+export interface OverworldObstacle extends BaseOccupant {
 	type: 'OBSTACLE';
-	x: number;
-	y: number;
-	map: MapId;
 	sprite: string;
 }
 
-export interface OverworldTrainer {
+export interface OverworldTrainer extends BaseOccupant {
 	type: 'TRAINER';
-	x: number;
-	y: number;
 	orientation: CharacterOrientation;
-	map: MapId;
 	unhandledDialogue: string[];
 	handledDialogue?: string[];
 	sprite: string;
@@ -99,13 +81,10 @@ export interface OverworldTrainer {
 	name: string;
 }
 
-export interface Portal {
+export interface Portal extends BaseOccupant {
 	type: 'PORTAL';
-	x: number;
-	y: number;
 	sprite: string;
 	portal: CharacterLocationData;
-	map: MapId;
 	small?: boolean;
 }
 

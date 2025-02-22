@@ -12,7 +12,7 @@ import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
 import { Occupant, OverworldMap } from '../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
-import { CharacterLocationData } from '../../interfaces/SaveFile';
+import { CharacterLocationData, SaveFile } from '../../interfaces/SaveFile';
 import { Banner } from '../../uiComponents/Banner/Banner';
 import './Overworld.css';
 import { ClickerGrid } from './components/ClickerGrid';
@@ -48,6 +48,7 @@ export const Overworld = ({
 	handleThisOccupant,
 	handledOccupants,
 	cutterPokemon,
+	saveFile,
 }: {
 	openMenu: (stepsTaken: number) => void;
 	playerLocation: CharacterLocationData;
@@ -64,6 +65,7 @@ export const Overworld = ({
 	handledOccupants: number[];
 	handleThisOccupant: (id: number) => void;
 	cutterPokemon?: { dexId: number };
+	saveFile: SaveFile;
 }) => {
 	const [statefulOccupants, setStatefulOccupants] = useState<
 		Record<number, Occupant>
@@ -82,14 +84,8 @@ export const Overworld = ({
 			if (occ.type === 'HIDDEN_ITEM' && handledOccupants.includes(o)) {
 				return false;
 			}
-			if (
-				occ.type === 'NPC' &&
-				occ.timeofDay &&
-				occ.timeofDay !== getTimeOfDay()
-			) {
-				return false;
-			}
-			return true;
+
+			return occ.conditionFunction(saveFile);
 		});
 		setStatefulOccupants(
 			Object.fromEntries(
@@ -98,7 +94,7 @@ export const Overworld = ({
 				)
 			)
 		);
-	}, [handledOccupants, map]);
+	}, [handledOccupants, map, saveFile]);
 	const changeOccupant = useCallback(
 		(id: number, updatedOccupant: Occupant) => {
 			setStatefulOccupants((statefulOccupants) => {
