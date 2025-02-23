@@ -235,17 +235,16 @@ export const Overworld = ({
 					right: '1rem',
 					display: 'flex',
 					gap: '1rem',
+					alignItems: 'center',
 				}}
 			>
 				<WeatherIcon weather={assembledMap.weather} />
 				<TimeOfDayIcon />
+				<button style={{ backgroundColor: 'white', zIndex: 9000 }}>
+					{assembledMap.id}
+				</button>
 			</div>
-			{/* {dialogues.length > 0 && (
-				<Banner>
-					<h2>{dialogues[0].message}</h2>
-					{dialogues[0].icon}
-				</Banner>
-			)} */}
+
 			<div className="overworldPage">
 				<div id="canvassesAndShaders" style={{ position: 'relative' }}>
 					<div

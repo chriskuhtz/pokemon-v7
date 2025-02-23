@@ -78,7 +78,7 @@ export function EnemyLane({
 
 					return (
 						<img
-							style={{ margin: '1rem 0' }}
+							style={{ margin: '2rem 1rem' }}
 							height={baseSize}
 							key={t.id}
 							src={getPokemonSprite(t.dexId)}

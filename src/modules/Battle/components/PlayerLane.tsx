@@ -26,7 +26,7 @@ export function PlayerLane(props: { onFieldTeam: BattlePokemon[] }) {
 				{props.onFieldTeam.map((t) => (
 					<img
 						height={baseSize}
-						style={{ margin: '1rem 0' }}
+						style={{ margin: '2rem 1rem' }}
 						key={t.id}
 						src={getPokemonSprite(t.dexId, 'back')}
 					/>

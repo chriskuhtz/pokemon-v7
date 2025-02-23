@@ -1,5 +1,4 @@
 import { OccupantName } from '../../../constants/checkLists/occupantsRecord';
-import { getOppositeDirection } from '../../../functions/getOppositeDirection';
 import { Message } from '../../../hooks/useMessageQueue';
 import { Inventory } from '../../../interfaces/Inventory';
 import { Occupant } from '../../../interfaces/OverworldMap';
@@ -10,7 +9,7 @@ export const interactWithFunction = ({
 	addMultipleMessages,
 	openStorage,
 	stepsTaken,
-	changeOccupant,
+	//changeOccupant,
 	playerLocation,
 	goToMarket,
 	talkToNurse,
@@ -82,10 +81,11 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'MERCHANT') {
-		changeOccupant(id, {
-			...data,
-			orientation: getOppositeDirection(playerLocation.orientation),
-		});
+		//disable for now because of drawing bug
+		// changeOccupant(id, {
+		// 	...data,
+		// 	orientation: getOppositeDirection(playerLocation.orientation),
+		// });
 
 		addMultipleMessages(
 			data.dialogue.map((d, i) => ({
@@ -100,36 +100,45 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'NURSE') {
-		changeOccupant(id, {
-			...data,
-			orientation: getOppositeDirection(playerLocation.orientation),
-		});
+		//disable for now because of drawing bug
+		// changeOccupant(id, {
+		// 	...data,
+		// 	orientation: getOppositeDirection(playerLocation.orientation),
+		// });
 
-		addMultipleMessages(
-			data.dialogue.map((d, i) => ({
+		addMultipleMessages([
+			...data.dialogue.map((d, i) => ({
 				message: d,
 				onRemoval:
 					i === data.dialogue.length - 1 ? () => talkToNurse(id) : undefined,
-			}))
-		);
+			})),
+			{ message: 'Whole Team fully healed' },
+		]);
 
 		return;
 	}
 	if (data.type === 'NPC') {
-		changeOccupant(id, {
-			...data,
-			orientation: getOppositeDirection(playerLocation.orientation),
-		});
+		//disable for now because of drawing bug
+		// changeOccupant(id, {
+		// 	...data,
+		// 	orientation: getOppositeDirection(playerLocation.orientation),
+		// });
 
 		if (!handledOccupants.includes(id)) {
 			addMultipleMessages(
-				data.unhandledMessage.map((d, i) => ({
-					message: d,
-					onRemoval:
-						i === data.unhandledMessage.length - 1
-							? () => handleThisOccupant(id)
-							: undefined,
-				}))
+				[
+					...data.unhandledMessage.map((d, i) => ({
+						message: d,
+						onRemoval:
+							i === data.unhandledMessage.length - 1
+								? () => handleThisOccupant(id)
+								: undefined,
+					})),
+					...Object.entries(data.gifts ?? {}).map(([item, amount]) => ({
+						message: `received ${amount} ${item}`,
+					})),
+					data.quest ? { message: `new quest: ${data.quest}` } : undefined,
+				].filter((m) => m !== undefined)
 			);
 		} else {
 			addMultipleMessages(
@@ -142,10 +151,11 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'TRAINER') {
-		changeOccupant(id, {
-			...data,
-			orientation: getOppositeDirection(playerLocation.orientation),
-		});
+		//disable for now because of drawing bug
+		// changeOccupant(id, {
+		// 	...data,
+		// 	orientation: getOppositeDirection(playerLocation.orientation),
+		// });
 
 		if (!handledOccupants.includes(id)) {
 			addMultipleMessages(

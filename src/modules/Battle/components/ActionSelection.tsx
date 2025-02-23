@@ -1,3 +1,4 @@
+import { MoveCard } from '../../../components/MoveCard/MoveCard';
 import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { getPlayerPokemon } from '../../../functions/getPlayerPokemon';
@@ -56,9 +57,11 @@ export function ActionSelection({
 				}}
 			>
 				{getMovesArray(controlled, true).map((m) => (
-					<button key={m.name} onClick={() => setChosenAction(m.name)}>
-						{m.name}
-					</button>
+					<MoveCard
+						move={m}
+						key={m.name}
+						onClick={() => setChosenAction(m.name)}
+					/>
 				))}
 
 				{Object.entries(inventory).map(([item, amount]) => {
