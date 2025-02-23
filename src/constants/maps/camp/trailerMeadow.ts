@@ -7,11 +7,16 @@ export const trailerMeadow: OverworldMap = {
 	possibleEncounters: { MORNING: [], DAY: [], EVENING: [], NIGHT: [] },
 	height: 2,
 	width: 3,
-	tileMap: generateBackground(2, 3),
+	tileMap: generateBackground({
+		height: 2,
+		width: 3,
+		withBorder: false,
+		randomEncounterTiles: false,
+	}),
 	occupants: [
 		//portals
-		700008,
+		'trailer_to_camp',
 		//obstacles
-		800014,
+		'bed_trailer',
 	],
 };

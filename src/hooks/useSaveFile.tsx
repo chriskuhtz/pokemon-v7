@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { mapsRecord } from '../constants/checkLists/mapsRecord';
 import { MoveName } from '../constants/checkLists/movesCheckList';
-import { occupantsRecord } from '../constants/checkLists/occupantsRecord';
+import {
+	OccupantName,
+	occupantsRecord,
+} from '../constants/checkLists/occupantsRecord';
 import { QuestName, QuestsRecord } from '../constants/checkLists/questsRecord';
 import { localStorageId, testState } from '../constants/gameData';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
@@ -71,8 +74,8 @@ export interface UseSaveFile {
 	setCharacterLocationReducer: (update: CharacterLocationData) => void;
 	setPokemonReducer: (update: OwnedPokemon[]) => void;
 
-	talkToNurseReducer: (id: number) => void;
-	handleOccupantReducer: (id: number) => void;
+	talkToNurseReducer: (id: OccupantName) => void;
+	handleOccupantReducer: (id: OccupantName) => void;
 	navigateAwayFromOverworldReducer: (to: RoutesType, steps: number) => void;
 	applyItemToPokemonReducer: (
 		pokemon: OwnedPokemon,
@@ -249,7 +252,6 @@ export const useSaveFile = (
 										team,
 										mapsRecord[saveFile.location.mapId]
 									),
-									id: -1,
 							  }
 							: undefined,
 				},
@@ -258,7 +260,7 @@ export const useSaveFile = (
 		);
 	};
 
-	const talkToNurseReducer = (id: number) => {
+	const talkToNurseReducer = (id: OccupantName) => {
 		setSaveFile(
 			{
 				...saveFile,
@@ -297,7 +299,7 @@ export const useSaveFile = (
 		addMessage({ message: 'Whole Team fully healed' });
 	};
 
-	const handleOccupantReducer = (id: number) => {
+	const handleOccupantReducer = (id: OccupantName) => {
 		const occ = occupantsRecord[id];
 
 		if (!occ) {

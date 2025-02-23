@@ -37,7 +37,7 @@ export const testState: SaveFile = {
 		'Train a Pokemon to lvl 10': 'INACTIVE',
 		'Catch a Zorua at night in the meadow': 'INACTIVE',
 		'Catch a morning pokemon from the meadow': 'INACTIVE',
-		'Defeat all the Trainers in the meadow': 'INACTIVE',
+		//'Defeat all the Trainers in the meadow': 'INACTIVE',
 		'Catch five different pokemon': 'INACTIVE',
 	},
 	inventory: generateInventory({}),
@@ -56,7 +56,7 @@ export const testState: SaveFile = {
 	},
 	handledOccupants: [],
 	lastEdited: new Date().getTime(),
-	lastNurse: 400001,
+	lastNurse: 'nurse_Pokecenter_Camp',
 };
 
 export const OPPO_ID = 'oppo';

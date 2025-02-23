@@ -1,4 +1,5 @@
 import { MapId } from '../constants/checkLists/mapsRecord';
+import { OccupantName } from '../constants/checkLists/occupantsRecord';
 import { QuestName } from '../constants/checkLists/questsRecord';
 import { BadgeName } from './Badge';
 import { Inventory } from './Inventory';
@@ -34,7 +35,7 @@ export interface SettingsObject {
 }
 
 export interface Challenger {
-	id: number;
+	id?: OccupantName;
 	team: OwnedPokemon[];
 }
 
@@ -51,13 +52,13 @@ export interface SaveFile {
 	location: CharacterLocationData;
 
 	handledOccupants: {
-		id: number;
+		id: OccupantName;
 		//at this point in time (in ms), this occupant will be removed from the handled list
 		resetAt: number;
 	}[];
 
 	lastEdited: number;
-	lastNurse: number;
+	lastNurse: OccupantName;
 	settings?: SettingsObject;
 	quests: Record<QuestName, QuestStatus>;
 	sprite: string;

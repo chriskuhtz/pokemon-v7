@@ -1,3 +1,4 @@
+import { OccupantName } from '../../../constants/checkLists/occupantsRecord';
 import { getOppositeDirection } from '../../../functions/getOppositeDirection';
 import { Message } from '../../../hooks/useMessageQueue';
 import { Inventory } from '../../../interfaces/Inventory';
@@ -23,18 +24,18 @@ export const interactWithFunction = ({
 	cutterPokemon?: { dexId: number };
 	openStorage: (stepsTaken: number) => void;
 	stepsTaken: number;
-	changeOccupant: (id: number, updatedOccupant: Occupant) => void;
+	changeOccupant: (id: OccupantName, updatedOccupant: Occupant) => void;
 	playerLocation: CharacterLocationData;
 	goToMarket: (marketInventory: Partial<Inventory>, stepsTaken: number) => void;
-	talkToNurse: (id: number) => void;
-	handleThisOccupant: (id: number) => void;
-	handledOccupants: number[];
+	talkToNurse: (id: OccupantName) => void;
+	handleThisOccupant: (id: OccupantName) => void;
+	handledOccupants: OccupantName[];
 	goToPosition: (x: CharacterLocationData) => void;
 }) => {
 	if (!occ) {
 		return;
 	}
-	const [id, data] = occ;
+	const [id, data] = occ as [OccupantName, Occupant];
 
 	if (data.type === 'PORTAL') {
 		goToPosition(data.portal);
@@ -43,15 +44,15 @@ export const interactWithFunction = ({
 	if (data.type === 'ITEM' || data.type === 'HIDDEN_ITEM') {
 		addMessage({
 			message: `Found ${data.amount} ${data.item}`,
-			onRemoval: () => handleThisOccupant(Number.parseInt(id)),
+			onRemoval: () => handleThisOccupant(id),
 		});
 		return;
 	}
-	if (data.type === 'BUSH' && !handledOccupants.includes(Number.parseInt(id))) {
+	if (data.type === 'BUSH' && !handledOccupants.includes(id)) {
 		if (cutterPokemon) {
 			addMessage({
 				message: `Your Pokemon used cut`,
-				onRemoval: () => handleThisOccupant(Number.parseInt(id)),
+				onRemoval: () => handleThisOccupant(id),
 			});
 		} else addMessage({ message: 'Maybe a Pokemon can cut this' });
 		return;
@@ -78,7 +79,7 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'MERCHANT') {
-		changeOccupant(Number.parseInt(id), {
+		changeOccupant(id, {
 			...data,
 			orientation: getOppositeDirection(playerLocation.orientation),
 		});
@@ -94,7 +95,7 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'NURSE') {
-		changeOccupant(Number.parseInt(id), {
+		changeOccupant(id, {
 			...data,
 			orientation: getOppositeDirection(playerLocation.orientation),
 		});
@@ -103,26 +104,24 @@ export const interactWithFunction = ({
 			addMessage({
 				message: d,
 				onRemoval:
-					i === data.dialogue.length - 1
-						? () => talkToNurse(Number.parseInt(id))
-						: undefined,
+					i === data.dialogue.length - 1 ? () => talkToNurse(id) : undefined,
 			})
 		);
 		return;
 	}
 	if (data.type === 'NPC') {
-		changeOccupant(Number.parseInt(id), {
+		changeOccupant(id, {
 			...data,
 			orientation: getOppositeDirection(playerLocation.orientation),
 		});
 
-		if (!handledOccupants.includes(Number.parseInt(id))) {
+		if (!handledOccupants.includes(id)) {
 			data.unhandledMessage.forEach((d, i) =>
 				addMessage({
 					message: d,
 					onRemoval:
 						i === data.unhandledMessage.length - 1
-							? () => handleThisOccupant(Number.parseInt(id))
+							? () => handleThisOccupant(id)
 							: undefined,
 				})
 			);
@@ -137,22 +136,19 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'TRAINER') {
-		changeOccupant(Number.parseInt(id), {
+		changeOccupant(id, {
 			...data,
 			orientation: getOppositeDirection(playerLocation.orientation),
 		});
 
-		if (
-			!handledOccupants.includes(Number.parseInt(id)) ||
-			!data.handledMessage
-		) {
+		if (!handledOccupants.includes(id) || !data.handledMessage) {
 			data.unhandledMessage.forEach((d) =>
 				addMessage({
 					message: d,
 				})
 			);
 
-			handleThisOccupant(Number.parseInt(id));
+			handleThisOccupant(id);
 		} else {
 			data.handledMessage.forEach((d) =>
 				addMessage({

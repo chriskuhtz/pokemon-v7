@@ -14,8 +14,8 @@ export const marketMeadow: OverworldMap = {
 	],
 	occupants: [
 		//merchants
-		300001,
+		'merchant_Market_Camp',
 		//portals
-		700002,
+		'market_to_camp',
 	],
 };

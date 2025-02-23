@@ -15,10 +15,10 @@ export const pokecenterMeadow: OverworldMap = {
 	}),
 	occupants: [
 		//pcs
-		100001,
+		'pc_Pokecenter_Camp',
 		//nurses
-		400001,
+		'nurse_Pokecenter_Camp',
 		//portals
-		700004,
+		'pokecenter_to_camp',
 	],
 };

@@ -1,13 +1,12 @@
+import { OccupantName } from '../constants/checkLists/occupantsRecord';
 import { Occupant, OverworldMap } from '../interfaces/OverworldMap';
 
 export const assembleMap = (
 	map: OverworldMap,
-
-	statefulOccupantsRecord: Record<number, Occupant>
+	statefulOccupantsRecord: Partial<Record<OccupantName, Occupant>>
 ): OverworldMap => {
-	const occupantKeys = Object.keys(statefulOccupantsRecord).map((key) =>
-		Number.parseInt(key)
-	);
+	const occupantKeys = Object.keys(statefulOccupantsRecord) as OccupantName[];
+
 	const updatedTileMap = map.tileMap.map((row, rowIndex) => {
 		return row.map((c, columnIndex) =>
 			occupantKeys.some((occupantId) => {

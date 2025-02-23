@@ -7,7 +7,7 @@ export const questNames = [
 	'Train a Pokemon to lvl 10',
 	'Catch a Zorua at night in the meadow',
 	'Catch a morning pokemon from the meadow',
-	'Defeat all the Trainers in the meadow',
+	//'Defeat all the Trainers in the meadow',
 	'Catch five different pokemon',
 ] as const;
 export type QuestName = (typeof questNames)[number];
@@ -44,14 +44,14 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			);
 		},
 	},
-	'Defeat all the Trainers in the meadow': {
-		rewardItems: { lemonade: 10 },
-		conditionFunction: (s) => {
-			return camp.occupants
-				.filter((o) => o > 200000 && o < 300000)
-				.every((o) => s.handledOccupants.some((ho) => ho.id === o));
-		},
-	},
+	// 'Defeat all the Trainers in the meadow': {
+	// 	rewardItems: { lemonade: 10 },
+	// 	conditionFunction: (s) => {
+	// 		return camp.occupants
+	// 			.filter((o) => o > 200000 && o < 300000)
+	// 			.every((o) => s.handledOccupants.some((ho) => ho.id === o));
+	// 	},
+	// },
 	'Catch five different pokemon': {
 		rewardItems: { 'ultra-ball': 10 },
 		conditionFunction: (s) => {

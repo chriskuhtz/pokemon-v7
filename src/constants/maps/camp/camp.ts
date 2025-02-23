@@ -16,11 +16,18 @@ export const camp: OverworldMap = {
 	}),
 	occupants: [
 		//npcs
-		600001, 600003, 600004, 600007,
+		'kid_Camp',
+		'grandma_Camp',
+		'gary_intro',
+		'pikachu_fan_Camp',
 		//portals
-		700001, 700003, 700005, 700007,
+		'camp_to_market',
+		'camp_to_pokecenter',
+		'camp_to_trailer',
+		'camp_to_university',
 		//signs
-		900001,
+		'camp_sign',
+		'to_sector1x0_sign',
 	],
 	possibleEncounters: { MORNING: [], DAY: [], EVENING: [], NIGHT: [] },
 };

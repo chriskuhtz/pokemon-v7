@@ -15,10 +15,10 @@ export const universityMeadow: OverworldMap = {
 	}),
 	occupants: [
 		//npcs
-		600006,
+		'oak_University',
 		//portals
-		700006,
+		'university_to_camp',
 		//obstacles
-		800013,
+		'bookShelf1_university',
 	],
 };

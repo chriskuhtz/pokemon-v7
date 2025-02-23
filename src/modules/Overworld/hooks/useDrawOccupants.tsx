@@ -1,5 +1,6 @@
 import { isEqual } from 'lodash';
 import { useEffect, useState } from 'react';
+import { OccupantName } from '../../../constants/checkLists/occupantsRecord';
 import { animationTimer, baseSize } from '../../../constants/gameData';
 import { getNextLocation } from '../../../functions/getNextLocation';
 import {
@@ -19,13 +20,13 @@ export const overflow = (current: number, excludedMax: number) => {
 export const useDrawOccupants = (
 	canvasId: string,
 	activeMessage: boolean,
-	statefulOccupants: Record<number, Occupant>,
+	statefulOccupants: Partial<Record<OccupantName, Occupant>>,
 	setStatefulOccupants: React.Dispatch<
 		React.SetStateAction<Record<number, Occupant>>
 	>
 ) => {
 	const [lastDrawnOccupants, setLastDrawnOccupants] = useState<
-		Record<number, Occupant>
+		Partial<Record<OccupantName, Occupant>>
 	>({});
 
 	//Walk the npcs
@@ -85,7 +86,7 @@ export const useDrawOccupants = (
 
 	//draw the npcs
 	useEffect(() => {
-		console.log('draw occupants');
+		console.log('draw occupants', statefulOccupants);
 
 		const el: HTMLCanvasElement | null = document.getElementById(
 			canvasId
@@ -93,8 +94,8 @@ export const useDrawOccupants = (
 		const ctx = el?.getContext('2d');
 
 		Object.keys(statefulOccupants).forEach((id) => {
-			const current = statefulOccupants[Number.parseInt(id)];
-			const lastDrawn = lastDrawnOccupants[Number.parseInt(id)];
+			const current = statefulOccupants[id as OccupantName];
+			const lastDrawn = lastDrawnOccupants[id as OccupantName];
 			if (isEqual(current, lastDrawn)) {
 				return;
 			}
@@ -103,8 +104,14 @@ export const useDrawOccupants = (
 				drawOccupant(current, ctx);
 				return;
 			}
+			if (!current) {
+				return;
+			}
 
 			drawOccupant(current, ctx);
+			if (!lastDrawn) {
+				return;
+			}
 			ctx?.clearRect(
 				baseSize * lastDrawn.x,
 				baseSize * lastDrawn.y,
@@ -113,8 +120,8 @@ export const useDrawOccupants = (
 			);
 		});
 		Object.keys(lastDrawnOccupants).forEach((id) => {
-			const current = statefulOccupants[Number.parseInt(id)];
-			const lastDrawn = lastDrawnOccupants[Number.parseInt(id)];
+			const current = statefulOccupants[id as OccupantName];
+			const lastDrawn = lastDrawnOccupants[id as OccupantName];
 			if (!current && lastDrawn) {
 				ctx?.clearRect(
 					baseSize * lastDrawn.x,
