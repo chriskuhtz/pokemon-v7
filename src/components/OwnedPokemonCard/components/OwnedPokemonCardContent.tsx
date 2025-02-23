@@ -17,6 +17,7 @@ import { PrimaryAilmentIcon } from '../../PrimaryAilmentIcon/PrimaryAilmentIcon'
 import { XpBar } from '../../XpBar/XpBar';
 import { MovesDisplay } from './MovesDisplay';
 import { StatDisplay } from './StatDisplay';
+import { NickNameModal } from './NickNameModal';
 
 export const HIDDEN_STATS = ['accuracy', 'evasion', 'hp'];
 
@@ -27,6 +28,7 @@ export const OwnedPokemonCardContent = ({
 	giveHeldItem,
 	inventory,
 	setMoves,
+	setNickName,
 }: {
 	ownedPokemon: OwnedPokemon;
 	data: PokemonData;
@@ -34,13 +36,22 @@ export const OwnedPokemonCardContent = ({
 	takeHeldItem: () => void;
 	inventory: Inventory;
 	setMoves: (id: string, moves: MoveName[]) => void;
+	setNickName: (x: string | undefined) => void;
 }) => {
 	const [heldItemMenuOpen, setHeldItemMenuOpen] = useState<boolean>(false);
+	const [nickNameMenuOpen, setNickNameMenuOpen] = useState<boolean>(false);
+
 	const [collapsed, setCollapsed] = useState<boolean>(true);
 	const typeNames = getTypeNames({ ...ownedPokemon, data });
 	const { level } = calculateLevelData(ownedPokemon.xp);
 	return (
 		<div>
+			<NickNameModal
+				open={nickNameMenuOpen}
+				close={() => setNickNameMenuOpen(false)}
+				nickname={ownedPokemon.nickname}
+				setNickName={setNickName}
+			/>
 			<SelectionListModal
 				selected={ownedPokemon.heldItemName ? [ownedPokemon.heldItemName] : []}
 				open={heldItemMenuOpen}
@@ -93,7 +104,19 @@ export const OwnedPokemonCardContent = ({
 
 				<div>
 					<h4>
-						Lvl {level} {data.name.toUpperCase()}
+						Lvl {level} {ownedPokemon.nickname}/{data.name.toUpperCase()}{' '}
+						<MdEdit
+							role="button"
+							tabIndex={0}
+							size={baseSize / 4}
+							onClick={() => setNickNameMenuOpen(true)}
+							onKeyDown={(e) => {
+								e.stopPropagation();
+								if (e.key === 'Enter') {
+									setNickNameMenuOpen(true);
+								}
+							}}
+						/>
 					</h4>
 
 					<h5 style={{ display: 'flex', gap: '.5rem' }}>
@@ -101,6 +124,14 @@ export const OwnedPokemonCardContent = ({
 						<MdEdit
 							size={baseSize / 4}
 							onClick={() => setHeldItemMenuOpen(true)}
+							role="button"
+							tabIndex={0}
+							onKeyDown={(e) => {
+								e.stopPropagation();
+								if (e.key === 'Enter') {
+									setHeldItemMenuOpen(true);
+								}
+							}}
 						/>
 					</h5>
 					<h5>type: {typeNames.join('/')} </h5>
@@ -120,6 +151,14 @@ export const OwnedPokemonCardContent = ({
 					<FaChevronDown
 						onClick={() => setCollapsed(false)}
 						size={baseSize / 3}
+						role="button"
+						tabIndex={0}
+						onKeyDown={(e) => {
+							e.stopPropagation();
+							if (e.key === 'Enter') {
+								setCollapsed(false);
+							}
+						}}
 					/>
 				)}
 			</div>
@@ -142,6 +181,14 @@ export const OwnedPokemonCardContent = ({
 						<FaChevronUp
 							onClick={() => setCollapsed(true)}
 							size={baseSize / 3}
+							role="button"
+							tabIndex={0}
+							onKeyDown={(e) => {
+								e.stopPropagation();
+								if (e.key === 'Enter') {
+									setCollapsed(true);
+								}
+							}}
 						/>
 					</div>
 				</div>

@@ -20,6 +20,7 @@ export const OwnedPokemonCard = ({
 	inventory,
 	data,
 	setMoves,
+	setNickName,
 }: {
 	pokemon: OwnedPokemon;
 	reorder: (x: 'UP' | 'DOWN') => void;
@@ -28,6 +29,7 @@ export const OwnedPokemonCard = ({
 	takeHeldItem: () => void;
 	inventory: Inventory;
 	data: PokemonData;
+	setNickName: (id: string, newNick: string | undefined) => void;
 }) => {
 	const typeNames = getTypeNames({ ...pokemon, data });
 
@@ -55,6 +57,7 @@ export const OwnedPokemonCard = ({
 					inventory={inventory}
 					takeHeldItem={takeHeldItem}
 					giveHeldItem={giveHeldItem}
+					setNickName={(x) => setNickName(pokemon.id, x)}
 				/>
 			}
 			actionElements={[

@@ -50,9 +50,7 @@ export const extraFeatureCheckList: {
 	{ name: 'receive quests from npcs', handled: true },
 	{ name: 'filter in battle items by if someone can benefit', handled: true },
 	{ name: 'hidden items on obstacles', handled: true },
-	{ name: 'walk through grass animation' },
-	{ name: 'break step between move execution' },
-	{ name: 'nicknames for pokemon' },
+	{ name: 'nicknames for pokemon', handled: true },
 	{ name: 'fix hidden item shader at night' },
 	{ name: 'improved keyboard control, interpret direction buttons' },
 	{ name: 'display charge up and secondary ailments in info box' },
@@ -98,9 +96,6 @@ export const extraFeatureCheckList: {
 	{ name: 'setting: randomized items' },
 	{ name: 'setting: random quest rewards' },
 	{ name: 'shaders in battle' },
-	{
-		name: 'Pokemon sprites in message display based on name search (if message includes(pokemon.name)=> sprite )',
-	},
 	{ name: 'prettier weather display' },
 	{ name: 'Battle Attack animation' },
 	{ name: 'refactor primaryAilment healing table' },
@@ -157,4 +152,6 @@ export const extraFeatureCheckList: {
 	{ name: 'map maker' },
 	{ name: 'trainer builder' },
 	{ name: 'Edit and Collapse Buttons in pokemoncard need keyboard controls' },
+	{ name: 'walk through grass animation' },
+	{ name: 'break step between move execution' },
 ];
