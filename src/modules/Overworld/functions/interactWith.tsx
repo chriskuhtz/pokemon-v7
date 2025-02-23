@@ -7,7 +7,7 @@ import { CharacterLocationData } from '../../../interfaces/SaveFile';
 
 export const interactWithFunction = ({
 	occ,
-	addMessage,
+	addMultipleMessages,
 	openStorage,
 	stepsTaken,
 	changeOccupant,
@@ -20,7 +20,7 @@ export const interactWithFunction = ({
 	goToPosition,
 }: {
 	occ: [string, Occupant] | undefined;
-	addMessage: (x: Message) => void;
+	addMultipleMessages: (x: Message[]) => void;
 	cutterPokemon?: { dexId: number };
 	openStorage: (stepsTaken: number) => void;
 	stepsTaken: number;
@@ -42,40 +42,43 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'ITEM' || data.type === 'HIDDEN_ITEM') {
-		addMessage({
-			message: `Found ${data.amount} ${data.item}`,
-			onRemoval: () => handleThisOccupant(id),
-		});
+		addMultipleMessages([
+			{
+				message: `Found ${data.amount} ${data.item}`,
+				onRemoval: () => handleThisOccupant(id),
+			},
+		]);
 		return;
 	}
 	if (data.type === 'BUSH' && !handledOccupants.includes(id)) {
 		if (cutterPokemon) {
-			addMessage({
-				message: `Your Pokemon used cut`,
-				onRemoval: () => handleThisOccupant(id),
-			});
-		} else addMessage({ message: 'Maybe a Pokemon can cut this' });
+			addMultipleMessages([
+				{
+					message: `Your Pokemon used cut`,
+					onRemoval: () => handleThisOccupant(id),
+				},
+			]);
+		} else addMultipleMessages([{ message: 'Maybe a Pokemon can cut this' }]);
 		return;
 	}
 	if (
 		data.type === 'PC' &&
 		playerLocation.orientation === data.approachDirection
 	) {
-		addMessage({
-			message: 'Accessing Pokemon Storage',
-			onRemoval: () => openStorage(stepsTaken),
-		});
+		addMultipleMessages([
+			{
+				message: 'Accessing Pokemon Storage',
+				onRemoval: () => openStorage(stepsTaken),
+			},
+		]);
 		return;
 	}
 	if (
 		data.type === 'SIGN' &&
 		playerLocation.orientation === data.approachDirection
 	) {
-		data.dialogue.forEach((d) =>
-			addMessage({
-				message: d,
-			})
-		);
+		addMultipleMessages(data.dialogue.map((d) => ({ message: d })));
+
 		return;
 	}
 	if (data.type === 'MERCHANT') {
@@ -83,15 +86,17 @@ export const interactWithFunction = ({
 			...data,
 			orientation: getOppositeDirection(playerLocation.orientation),
 		});
-		data.dialogue.forEach((d, i) =>
-			addMessage({
+
+		addMultipleMessages(
+			data.dialogue.map((d, i) => ({
 				message: d,
 				onRemoval:
 					i === data.dialogue.length - 1
 						? () => goToMarket(data.inventory, stepsTaken)
 						: undefined,
-			})
+			}))
 		);
+
 		return;
 	}
 	if (data.type === 'NURSE') {
@@ -100,13 +105,14 @@ export const interactWithFunction = ({
 			orientation: getOppositeDirection(playerLocation.orientation),
 		});
 
-		data.dialogue.forEach((d, i) =>
-			addMessage({
+		addMultipleMessages(
+			data.dialogue.map((d, i) => ({
 				message: d,
 				onRemoval:
 					i === data.dialogue.length - 1 ? () => talkToNurse(id) : undefined,
-			})
+			}))
 		);
+
 		return;
 	}
 	if (data.type === 'NPC') {
@@ -116,20 +122,20 @@ export const interactWithFunction = ({
 		});
 
 		if (!handledOccupants.includes(id)) {
-			data.unhandledMessage.forEach((d, i) =>
-				addMessage({
+			addMultipleMessages(
+				data.unhandledMessage.map((d, i) => ({
 					message: d,
 					onRemoval:
 						i === data.unhandledMessage.length - 1
 							? () => handleThisOccupant(id)
 							: undefined,
-				})
+				}))
 			);
 		} else {
-			(data.handledMessage ?? data.unhandledMessage).forEach((d) =>
-				addMessage({
+			addMultipleMessages(
+				(data.handledMessage ?? data.unhandledMessage).map((d) => ({
 					message: d,
-				})
+				}))
 			);
 		}
 
@@ -141,19 +147,21 @@ export const interactWithFunction = ({
 			orientation: getOppositeDirection(playerLocation.orientation),
 		});
 
-		if (!handledOccupants.includes(id) || !data.handledMessage) {
-			data.unhandledMessage.forEach((d) =>
-				addMessage({
+		if (!handledOccupants.includes(id)) {
+			addMultipleMessages(
+				data.unhandledMessage.map((d, i) => ({
 					message: d,
-				})
+					onRemoval:
+						i === data.unhandledMessage.length - 1
+							? () => handleThisOccupant(id)
+							: undefined,
+				}))
 			);
-
-			handleThisOccupant(id);
 		} else {
-			data.handledMessage.forEach((d) =>
-				addMessage({
+			addMultipleMessages(
+				(data.handledMessage ?? data.unhandledMessage).map((d) => ({
 					message: d,
-				})
+				}))
 			);
 		}
 

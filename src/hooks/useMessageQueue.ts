@@ -16,12 +16,9 @@ export const useMessageQueue = (
 	confirmLatestMessage: () => void;
 } => {
 	const [messages, setMessages] = useState<Message[]>([]);
-	const addMessage = useCallback(
-		(message: Message) => {
-			setMessages([...messages, message]);
-		},
-		[messages]
-	);
+	const addMessage = useCallback((message: Message) => {
+		setMessages((messages) => [...messages, message]);
+	}, []);
 	const addMultipleMessages = useCallback((newMessages: Message[]) => {
 		setMessages((messages) => [...messages, ...newMessages]);
 	}, []);

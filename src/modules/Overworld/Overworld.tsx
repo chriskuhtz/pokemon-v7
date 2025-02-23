@@ -47,6 +47,7 @@ export const Overworld = ({
 	latestMessage,
 	addMessage,
 	encounterRateModifier,
+	addMultipleMessages,
 }: {
 	openMenu: (stepsTaken: number) => void;
 	playerLocation: CharacterLocationData;
@@ -137,7 +138,7 @@ export const Overworld = ({
 		(occ: [string, Occupant] | undefined) =>
 			interactWithFunction({
 				occ,
-				addMessage: addMessage,
+				addMultipleMessages,
 				openStorage,
 				stepsTaken,
 				changeOccupant,
@@ -150,7 +151,7 @@ export const Overworld = ({
 				goToPosition: setCharacterLocation,
 			}),
 		[
-			addMessage,
+			addMultipleMessages,
 			changeOccupant,
 			cutterPokemon,
 			goToMarket,

@@ -86,7 +86,7 @@ export const useDrawOccupants = (
 
 	//draw the npcs
 	useEffect(() => {
-		console.log('draw occupants', statefulOccupants);
+		console.log('draw occupants');
 
 		const el: HTMLCanvasElement | null = document.getElementById(
 			canvasId
@@ -96,6 +96,9 @@ export const useDrawOccupants = (
 		Object.keys(statefulOccupants).forEach((id) => {
 			const current = statefulOccupants[id as OccupantName];
 			const lastDrawn = lastDrawnOccupants[id as OccupantName];
+			if (!current) {
+				return;
+			}
 			if (isEqual(current, lastDrawn)) {
 				return;
 			}
@@ -103,21 +106,16 @@ export const useDrawOccupants = (
 			if (current && !lastDrawn) {
 				drawOccupant(current, ctx);
 				return;
-			}
-			if (!current) {
-				return;
-			}
+			} else if (lastDrawn) {
+				drawOccupant(current, ctx);
 
-			drawOccupant(current, ctx);
-			if (!lastDrawn) {
-				return;
+				ctx?.clearRect(
+					baseSize * lastDrawn.x,
+					baseSize * lastDrawn.y,
+					baseSize,
+					baseSize
+				);
 			}
-			ctx?.clearRect(
-				baseSize * lastDrawn.x,
-				baseSize * lastDrawn.y,
-				baseSize,
-				baseSize
-			);
 		});
 		Object.keys(lastDrawnOccupants).forEach((id) => {
 			const current = statefulOccupants[id as OccupantName];
