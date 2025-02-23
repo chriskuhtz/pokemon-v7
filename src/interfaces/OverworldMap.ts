@@ -78,6 +78,7 @@ export interface OverworldObstacle extends BaseOccupant {
 	type: 'OBSTACLE';
 	sprite: string;
 	small?: boolean;
+	gifts?: Partial<Inventory>;
 }
 
 export interface OverworldTrainer extends BaseOccupant {
