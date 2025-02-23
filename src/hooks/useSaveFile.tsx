@@ -433,24 +433,45 @@ export const useSaveFile = (
 			outcome,
 			defeatedPokemon,
 		}: LeaveBattlePayload) => {
+			let updatedLocation = saveFile.location;
+
+			if (outcome === 'LOSS') {
+				if (saveFile.settings?.rogueLike) {
+					reset();
+					return;
+				} else {
+					updatedLocation = {
+						mapId: 'camp_tent',
+						x: 0,
+						y: 0,
+						orientation: 'DOWN',
+						forwardFoot: 'CENTER1',
+					};
+
+					putSaveFileReducer({
+						...saveFile,
+						meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
+						location: updatedLocation,
+					});
+					return;
+				}
+			}
+
 			const gainedXp = defeatedPokemon.reduce((sum, d) => {
 				const { level } = calculateLevelData(d.xp);
 
 				return sum + Math.floor((d.data.base_experience * level) / 7);
 			}, 0);
 
-			const filteredTeam = updatedTeam.filter((p) => {
-				if (
-					saveFile.settings?.disqualifyFaintedPokemon &&
-					p.status === 'FAINTED'
-				) {
-					return false;
-				}
+			const filteredTeam = updatedTeam.filter(() => {
+				// if (
+				// 	saveFile.settings?.disqualifyFaintedPokemon &&
+				// 	p.status === 'FAINTED'
+				// ) {
+				// 	return false;
+				// }
 				return true;
 			});
-			if (filteredTeam.length === 0) {
-				reset();
-			}
 
 			const xpPerTeamMember =
 				outcome === 'WIN' ? Math.round(gainedXp / filteredTeam.length) : 0;

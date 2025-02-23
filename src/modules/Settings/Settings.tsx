@@ -10,8 +10,9 @@ export const Settings = ({
 }): JSX.Element => {
 	const [state, setState] = useState<SettingsObject>({
 		randomStarters: false,
-		disqualifyFaintedPokemon: false,
-		randomHeldItems: false,
+		rogueLike: false,
+		//disqualifyFaintedPokemon: false,
+		//randomHeldItems: false,
 	});
 	return (
 		<Page headline="Settings:">
@@ -30,6 +31,12 @@ export const Settings = ({
 					label={'Do you want to randomize your starter pokemon choices:'}
 				/>
 				<ToggleRow
+					value={state.rogueLike}
+					setValue={(x) => setState({ ...state, rogueLike: x })}
+					label={'Roguelike mode:'}
+					description="Losing a battle completely resets your save file"
+				/>
+				{/* <ToggleRow
 					value={state.randomHeldItems}
 					setValue={(x) => setState({ ...state, randomHeldItems: x })}
 					label={'Do you want to randomize the held items of wild pokemon:'}
@@ -39,7 +46,7 @@ export const Settings = ({
 					setValue={(x) => setState({ ...state, disqualifyFaintedPokemon: x })}
 					label={'	Should your defeated Pokemon be released back into the wild:'}
 					description={'Losing a battle = complete reset'}
-				/>
+				/> */}
 			</div>
 			<br />
 			<br />

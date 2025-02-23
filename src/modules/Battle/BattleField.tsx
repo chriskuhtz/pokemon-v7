@@ -10,6 +10,7 @@ import { applySecondaryAilmentDamage } from '../../functions/applySecondaryAilme
 import { changeMovePP } from '../../functions/changeMovePP';
 import { BattleLocation } from '../../functions/determineCaptureSuccess';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
+import { getSettings } from '../../functions/getPlayerId';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
 import { reduceSecondaryAilmentDurations } from '../../functions/reduceSecondaryAilmentDurations';
 import { sortByPriority } from '../../functions/sortByPriority';
@@ -466,9 +467,12 @@ export const BattleField = ({
 	// Battle Over
 	useEffect(() => {
 		if (battleLost && !latestMessage) {
+			const { rogueLike } = getSettings() ?? {};
 			console.log('effect battlelost');
 			addMessage({
-				message: 'You lost the battle',
+				message: rogueLike
+					? 'You lost the battle and have to reset'
+					: 'You lost the battle and rushed back home',
 				onRemoval: () => leaveWithCurrentData('LOSS'),
 			});
 		}
