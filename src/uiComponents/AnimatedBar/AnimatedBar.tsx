@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { animationTimer } from '../../constants/gameData';
 import { percentageBasedColor } from '../../constants/typeColors';
 
 export const AnimatedBar = ({
@@ -56,7 +57,7 @@ export const AnimatedBar = ({
 				}
 				setCurrent(current - 1);
 			}
-		}, 100);
+		}, animationTimer / 6);
 
 		return () => clearTimeout(t);
 	}, [current, max, offset]);
