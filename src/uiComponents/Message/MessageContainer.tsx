@@ -8,7 +8,6 @@ export const MessageContainer = () => {
 		addMessage,
 		latestMessage,
 		addMultipleMessages,
-		interjectMessage,
 	} = useMessageQueue();
 	return (
 		<>
@@ -21,7 +20,6 @@ export const MessageContainer = () => {
 				addMessage={addMessage}
 				latestMessage={latestMessage}
 				addMultipleMessages={addMultipleMessages}
-				interjectMessage={interjectMessage}
 			/>
 		</>
 	);

@@ -50,7 +50,6 @@ export const BattleField = ({
 	latestMessage,
 	addMessage,
 	addMultipleMessages,
-	interjectMessage,
 }: {
 	leave: (x: LeaveBattlePayload) => void;
 	initOpponents: BattlePokemon[];
@@ -60,7 +59,6 @@ export const BattleField = ({
 	latestMessage: Message | undefined;
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
-	interjectMessage: (message: Message) => void;
 }) => {
 	const [battleRound, setBattleRound] = useState<number>(0);
 	const [bW, setBattleWeather] = useState<WeatherType | undefined>();
@@ -331,7 +329,6 @@ export const BattleField = ({
 		addMultipleMessages,
 		battleRound,
 		battleLocation,
-		interjectMessage,
 		addUsedItem,
 		scatterCoins,
 		dampy,

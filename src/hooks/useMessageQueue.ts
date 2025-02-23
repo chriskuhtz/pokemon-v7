@@ -13,7 +13,6 @@ export const useMessageQueue = (
 	latestMessage: Message | undefined;
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
-	interjectMessage: (message: Message) => void;
 	confirmLatestMessage: () => void;
 } => {
 	const [messages, setMessages] = useState<Message[]>([]);
@@ -23,9 +22,7 @@ export const useMessageQueue = (
 	const addMultipleMessages = useCallback((newMessages: Message[]) => {
 		setMessages((messages) => [...messages, ...newMessages]);
 	}, []);
-	const interjectMessage = useCallback((message: Message) => {
-		setMessages((messages) => [message, ...messages]);
-	}, []);
+
 	const confirmLatestMessage = useCallback(() => {
 		if (messages[0].onRemoval) {
 			messages[0].onRemoval();
@@ -59,7 +56,6 @@ export const useMessageQueue = (
 		latestMessage,
 		addMessage,
 		addMultipleMessages,
-		interjectMessage,
 		confirmLatestMessage,
 	};
 };

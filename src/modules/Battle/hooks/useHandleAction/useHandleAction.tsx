@@ -22,7 +22,6 @@ export const useHandleAction = (
 	addMultipleMessages: (x: Message[]) => void,
 	battleRound: number,
 	battleLocation: BattleLocation,
-	interjectMessage: (x: Message) => void,
 	addUsedItem: (x: ItemType) => void,
 	scatterCoins: () => void,
 	dampy: { name: string } | undefined,
@@ -70,7 +69,6 @@ export const useHandleAction = (
 					addMultipleMessages,
 					battleRound,
 					battleLocation,
-					interjectMessage,
 					addUsedItem
 				);
 			}
@@ -177,7 +175,6 @@ export const useHandleAction = (
 			battleWeather,
 			dampy,
 			handleForceSwitch,
-			interjectMessage,
 			leave,
 			pokemon,
 			scatterCoins,

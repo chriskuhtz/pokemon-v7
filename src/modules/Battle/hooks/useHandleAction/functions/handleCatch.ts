@@ -15,7 +15,6 @@ export const handleCatch = (
 	addMultipleMessages: (x: Message[]) => void,
 	battleRound: number,
 	battleLocation: BattleLocation,
-	interjectMessage: (x: Message) => void,
 	addUsedItem: (x: ItemType) => void
 ) => {
 	const target = pokemon.find(
