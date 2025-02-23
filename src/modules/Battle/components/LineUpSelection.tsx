@@ -1,4 +1,6 @@
+import { useMemo } from 'react';
 import { Sprite } from '../../../components/Sprite/Sprite';
+import { baseSize } from '../../../constants/gameData';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { OverworldTrainer } from '../../../interfaces/OverworldMap';
@@ -22,6 +24,16 @@ export const LineUpSelection = ({
 	startBattle: () => void;
 	trainer?: OverworldTrainer;
 }) => {
+	const battleButtonMessage = useMemo(() => {
+		if (selectedTeam.length < fightersPerSide)
+			return `select ${fightersPerSide - selectedTeam.length} more`;
+
+		if (selectedTeam.length > fightersPerSide)
+			return `select ${fightersPerSide - selectedTeam.length} less`;
+
+		return 'Battle';
+	}, [fightersPerSide, selectedTeam.length]);
+
 	return (
 		<div
 			style={{
@@ -71,6 +83,8 @@ export const LineUpSelection = ({
 					alignItems: 'center',
 					justifyContent: 'center',
 					gridTemplateColumns: '1fr 1fr 1fr',
+					columnGap: '2rem',
+					rowGap: '.5rem',
 				}}
 			>
 				{team.map((teamMember) => (
@@ -78,24 +92,26 @@ export const LineUpSelection = ({
 						role="button"
 						onClick={() => toggleSelected(teamMember.id)}
 						tabIndex={0}
-						style={{
-							border: selectedTeam.includes(teamMember.id)
-								? '2px solid black'
-								: undefined,
-							borderRadius: 9000,
-							//aspectRatio: '1/1',
-							//padding: '1rem',
-						}}
 						onKeyDown={(e) => {
 							if (e.key === 'Enter') {
 								toggleSelected(teamMember.id);
 							}
 						}}
 						key={teamMember.id}
+						style={{
+							border: selectedTeam.includes(teamMember.id)
+								? '2px solid black'
+								: undefined,
+							borderRadius: 9000,
+							aspectRatio: '1/1',
+							padding: '1rem',
+						}}
 					>
-						<img src={getPokemonSprite(teamMember.dexId, 'back')} />
-						<br />
-						<strong>{teamMember.data.name}</strong>
+						<img
+							style={{}}
+							height={baseSize}
+							src={getPokemonSprite(teamMember.dexId, 'back')}
+						/>
 					</div>
 				))}
 			</div>
@@ -105,11 +121,7 @@ export const LineUpSelection = ({
 					onClick={startBattle}
 					disabled={selectedTeam.length !== fightersPerSide}
 				>
-					{selectedTeam.length == fightersPerSide && 'Battle'}
-					{selectedTeam.length < fightersPerSide &&
-						`select ${fightersPerSide - selectedTeam.length} more`}
-					{selectedTeam.length > fightersPerSide &&
-						`select ${fightersPerSide - selectedTeam.length} less`}
+					{battleButtonMessage}
 				</button>
 				<button onClick={leave}>Try to escape</button>
 			</div>

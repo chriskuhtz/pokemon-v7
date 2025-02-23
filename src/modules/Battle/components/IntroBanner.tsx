@@ -4,7 +4,14 @@ import { Banner } from '../../../uiComponents/Banner/Banner';
 export const IntroBanner = ({ dexIds }: { dexIds: number[] }): JSX.Element => {
 	return (
 		<Banner>
-			<div style={{ display: 'flex', alignItems: 'center', padding: '1rem' }}>
+			<div
+				style={{
+					display: 'flex',
+					alignItems: 'center',
+					padding: '1rem',
+					gap: '2rem',
+				}}
+			>
 				Lets go!{' '}
 				{dexIds.map((t) => (
 					<img key={t} src={getPokemonSprite(t, 'back')} />
