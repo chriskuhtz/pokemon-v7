@@ -34,7 +34,8 @@ export const BattleLoader = ({
 		challenger.team.map((o) => ({
 			...o,
 			caughtBefore: ownedPokemonDexIds.includes(o.dexId),
-		}))
+		})),
+		true
 	);
 	const { res: battleTeam } = useGetBattleTeam(
 		team.map((t) => ({ ...t, caughtBefore: true }))

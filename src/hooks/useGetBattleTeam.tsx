@@ -1,63 +1,64 @@
 import { useFetch } from '@potfisch-industries-npm/usefetch';
-import { getRandomIndex } from '../functions/filterTargets';
-import { getSettings } from '../functions/getPlayerId';
+import { MoveName } from '../constants/checkLists/movesCheckList';
 import { getStats } from '../functions/getStats';
+import { maybeGetHeldItemFromData } from '../functions/maybeGetHeldItemFromData';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { ItemType, itemTypes } from '../interfaces/Item';
 import { MoveDto } from '../interfaces/Move';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { PokemonData } from '../interfaces/PokemonData';
 import { PokemonSpeciesData } from '../interfaces/PokemonSpeciesData';
 import { EmptyStatObject } from '../interfaces/StatObject';
-
-export const maybeGetHeldItemFromData = (
-	data: PokemonData
-): ItemType | undefined => {
-	const { randomHeldItems } = getSettings() ?? {};
-	const { held_items } = data;
-
-	if (randomHeldItems) {
-		return itemTypes[getRandomIndex(itemTypes.length)];
-	}
-	if (held_items.length === 0) {
-		return undefined;
-	}
-	return held_items[getRandomIndex(held_items.length)].item.name as ItemType;
-};
-
 export const useGetBattleTeam = (
-	initTeam: (OwnedPokemon & { caughtBefore: boolean })[]
+	initTeam: (OwnedPokemon & { caughtBefore: boolean })[],
+	assignLearnsetMoves?: boolean
 ) => {
 	return useFetch<BattlePokemon[]>(() =>
 		Promise.all(
 			initTeam.map(async (pokemon) => {
-				const { dexId, firstMove, secondMove, thirdMove, fourthMove } = pokemon;
+				const { dexId } = pokemon;
 				const data: Promise<PokemonData> = (
 					await fetch(`https://pokeapi.co/api/v2/pokemon/${dexId}`)
 				).json();
+
+				const d = await data;
+
+				const firstMove = assignLearnsetMoves
+					? d.moves[0].move.name
+					: pokemon.firstMove.name;
+				const secondMove = assignLearnsetMoves
+					? d.moves[1].move.name
+					: pokemon.secondMove?.name;
+				const thirdMove = assignLearnsetMoves
+					? d.moves[2].move.name
+					: pokemon.thirdMove?.name;
+				const fourthMove = assignLearnsetMoves
+					? d.moves[3].move.name
+					: pokemon.fourthMove?.name;
+
+				console.log(
+					pokemon.dexId,
+					firstMove,
+					secondMove,
+					thirdMove,
+					fourthMove
+				);
+
 				const speciesData: Promise<PokemonSpeciesData> = (
 					await fetch(`https://pokeapi.co/api/v2/pokemon-species/${dexId}`)
 				).json();
 				const firstMoveData: Promise<MoveDto> = (
-					await fetch(`https://pokeapi.co/api/v2/move/${firstMove.name}`)
+					await fetch(`https://pokeapi.co/api/v2/move/${firstMove}`)
 				).json();
 				const secondMoveData: Promise<MoveDto> | undefined = secondMove
-					? (
-							await fetch(`https://pokeapi.co/api/v2/move/${secondMove.name}`)
-					  ).json()
+					? (await fetch(`https://pokeapi.co/api/v2/move/${secondMove}`)).json()
 					: undefined;
 				const thirdMoveData: Promise<MoveDto> | undefined = thirdMove
-					? (
-							await fetch(`https://pokeapi.co/api/v2/move/${thirdMove.name}`)
-					  ).json()
+					? (await fetch(`https://pokeapi.co/api/v2/move/${thirdMove}`)).json()
 					: undefined;
 				const fourthMoveData: Promise<MoveDto> | undefined = fourthMove
-					? (
-							await fetch(`https://pokeapi.co/api/v2/move/${fourthMove.name}`)
-					  ).json()
+					? (await fetch(`https://pokeapi.co/api/v2/move/${fourthMove}`)).json()
 					: undefined;
 
-				const d = await data;
 				const spd = await speciesData;
 				const s = await secondMoveData;
 				const t = await thirdMoveData;
@@ -70,12 +71,14 @@ export const useGetBattleTeam = (
 					moveQueue: [],
 					firstMove: {
 						...pokemon.firstMove,
+						name: firstMove as MoveName,
 						data: await firstMoveData,
 					},
 					secondMove:
 						pokemon.secondMove && s
 							? {
 									...pokemon.secondMove,
+									name: secondMove as MoveName,
 									data: s,
 							  }
 							: undefined,
@@ -83,6 +86,7 @@ export const useGetBattleTeam = (
 						pokemon.thirdMove && t
 							? {
 									...pokemon.thirdMove,
+									name: thirdMove as MoveName,
 									data: t,
 							  }
 							: undefined,
@@ -90,6 +94,7 @@ export const useGetBattleTeam = (
 						pokemon.fourthMove && f
 							? {
 									...pokemon.fourthMove,
+									name: fourthMove as MoveName,
 									data: f,
 							  }
 							: undefined,
