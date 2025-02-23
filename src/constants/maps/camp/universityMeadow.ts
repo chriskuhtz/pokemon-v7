@@ -1,4 +1,4 @@
-import { generateEmptyBackground } from '../../../functions/generateEmptyBackground';
+import { generateBackground } from '../../../functions/generateEmptyBackground';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 
 export const universityMeadow: OverworldMap = {
@@ -7,7 +7,12 @@ export const universityMeadow: OverworldMap = {
 	possibleEncounters: { MORNING: [], DAY: [], EVENING: [], NIGHT: [] },
 	height: 8,
 	width: 20,
-	tileMap: generateEmptyBackground(8, 20),
+	tileMap: generateBackground({
+		height: 8,
+		width: 20,
+		randomEncounterTiles: false,
+		withBorder: false,
+	}),
 	occupants: [
 		//npcs
 		600006,

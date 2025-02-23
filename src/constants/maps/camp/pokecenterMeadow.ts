@@ -1,4 +1,4 @@
-import { generateEmptyBackground } from '../../../functions/generateEmptyBackground';
+import { generateBackground } from '../../../functions/generateEmptyBackground';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 
 export const pokecenterMeadow: OverworldMap = {
@@ -7,7 +7,12 @@ export const pokecenterMeadow: OverworldMap = {
 	possibleEncounters: { MORNING: [], DAY: [], EVENING: [], NIGHT: [] },
 	height: 4,
 	width: 5,
-	tileMap: generateEmptyBackground(4, 5),
+	tileMap: generateBackground({
+		height: 4,
+		width: 5,
+		withBorder: false,
+		randomEncounterTiles: false,
+	}),
 	occupants: [
 		//pcs
 		100001,
