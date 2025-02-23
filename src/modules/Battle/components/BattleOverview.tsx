@@ -32,7 +32,9 @@ export const BattleOverview = ({
 }): JSX.Element => {
 	const [battleStarted, setBattleStarted] = useState<boolean>(false);
 
-	const [selectedTeam, setSelectedTeam] = useState<string[]>([]);
+	const [selectedTeam, setSelectedTeam] = useState<string[]>(
+		team.slice(0, fightersPerSide).map((p) => p.id)
+	);
 
 	const { startTransition, inTransition } = useScreenTransition(() =>
 		setBattleStarted(true)
