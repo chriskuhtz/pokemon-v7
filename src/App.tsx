@@ -52,6 +52,7 @@ export const App = ({
 		reset,
 		leaveBattleReducer,
 		addItemReducer,
+		evolvePokemonReducer,
 	} = useSaveFile(testState, addMessage);
 
 	const {
@@ -195,6 +196,7 @@ export const App = ({
 	if (activeTab === 'TEAM') {
 		return (
 			<Team
+				evolve={evolvePokemonReducer}
 				team={team}
 				goBack={() => setActiveTabReducer('MAIN')}
 				setTeam={(newTeam: OwnedPokemon[]) =>

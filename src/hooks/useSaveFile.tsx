@@ -88,6 +88,13 @@ export interface UseSaveFile {
 	reset: () => void;
 	leaveBattleReducer: (x: LeaveBattlePayload) => void;
 	applyEncounterRateModifierItem: (item: EncounterChanceItem) => void;
+	evolvePokemonReducer: (
+		id: string,
+		newDexId: number,
+		name: string,
+		newName: string,
+		consumedItem?: ItemType
+	) => void;
 }
 
 export const useSaveFile = (
@@ -535,6 +542,35 @@ export const useSaveFile = (
 			'applyEncounterRate'
 		);
 	};
+	const evolvePokemonReducer = (
+		id: string,
+		newDexId: number,
+		name: string,
+		newName: string,
+		consumedItem?: ItemType
+	) => {
+		const updatedInventory = consumedItem
+			? joinInventories(
+					saveFile.inventory,
+					{
+						[consumedItem]: 1,
+					},
+					true
+			  )
+			: saveFile.inventory;
+
+		addMessage({ message: `Your ${name} evolved into ${newName}` });
+
+		patchSaveFileReducer({
+			pokemon: saveFile.pokemon.map((p) => {
+				if (p.id === id) {
+					return { ...p, dexId: newDexId };
+				}
+				return p;
+			}),
+			inventory: updatedInventory,
+		});
+	};
 
 	//SYNC WITH LOCAL STORAGE
 	useEffect(() => {
@@ -565,6 +601,7 @@ export const useSaveFile = (
 	}, [saveFile, setActiveTabReducer]);
 
 	return {
+		evolvePokemonReducer,
 		reset,
 		saveFile,
 		discardItemReducer,

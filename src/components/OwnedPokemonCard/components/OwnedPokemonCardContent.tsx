@@ -6,6 +6,7 @@ import { baseSize } from '../../../constants/gameData';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
 import { getStats } from '../../../functions/getStats';
 import { getTypeNames } from '../../../functions/getTypeNames';
+import { useGetEvolution } from '../../../hooks/useGetEvolution';
 import { Inventory } from '../../../interfaces/Inventory';
 import { ItemType } from '../../../interfaces/Item';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
@@ -16,8 +17,8 @@ import { HpBar } from '../../HpBar/HpBar';
 import { PrimaryAilmentIcon } from '../../PrimaryAilmentIcon/PrimaryAilmentIcon';
 import { XpBar } from '../../XpBar/XpBar';
 import { MovesDisplay } from './MovesDisplay';
-import { StatDisplay } from './StatDisplay';
 import { NickNameModal } from './NickNameModal';
+import { StatDisplay } from './StatDisplay';
 
 export const HIDDEN_STATS = ['accuracy', 'evasion', 'hp'];
 
@@ -29,6 +30,7 @@ export const OwnedPokemonCardContent = ({
 	inventory,
 	setMoves,
 	setNickName,
+	evolve,
 }: {
 	ownedPokemon: OwnedPokemon;
 	data: PokemonData;
@@ -37,6 +39,7 @@ export const OwnedPokemonCardContent = ({
 	inventory: Inventory;
 	setMoves: (id: string, moves: MoveName[]) => void;
 	setNickName: (x: string | undefined) => void;
+	evolve: (newDexId: number, newName: string, item?: ItemType) => void;
 }) => {
 	const [heldItemMenuOpen, setHeldItemMenuOpen] = useState<boolean>(false);
 	const [nickNameMenuOpen, setNickNameMenuOpen] = useState<boolean>(false);
@@ -44,6 +47,7 @@ export const OwnedPokemonCardContent = ({
 	const [collapsed, setCollapsed] = useState<boolean>(true);
 	const typeNames = getTypeNames({ ...ownedPokemon, data });
 	const { level } = calculateLevelData(ownedPokemon.xp);
+
 	return (
 		<div>
 			<NickNameModal
@@ -104,7 +108,7 @@ export const OwnedPokemonCardContent = ({
 
 				<div>
 					<h4>
-						Lvl {level} {ownedPokemon.nickname}/{data.name.toUpperCase()}{' '}
+						Lvl {level} {ownedPokemon.nickname ?? data.name}/{data.name}{' '}
 						<MdEdit
 							role="button"
 							tabIndex={0}
@@ -138,7 +142,10 @@ export const OwnedPokemonCardContent = ({
 					<h5>nature: {ownedPokemon.nature}</h5>
 					<h5>ability: {ownedPokemon.ability}</h5>
 				</div>
-				<HappinessIcon value={ownedPokemon.happiness} />
+				<div>
+					<EvoInfo data={data} inventory={inventory} evolve={evolve} />
+					<HappinessIcon value={ownedPokemon.happiness} />
+				</div>
 			</div>
 			<div
 				style={{
@@ -195,4 +202,42 @@ export const OwnedPokemonCardContent = ({
 			)}
 		</div>
 	);
+};
+
+export const EvoInfo = ({
+	data,
+	inventory,
+	evolve,
+}: {
+	data: PokemonData;
+	inventory: Inventory;
+	evolve: (newDexId: number, newName: string, item?: ItemType) => void;
+}) => {
+	const { evos, invalidate } = useGetEvolution(data);
+
+	const evo = evos?.[0];
+
+	if (!evo) {
+		return <></>;
+	}
+
+	const item = evo.evolution_details[0].item?.name as ItemType | undefined;
+	const newDexId = Number.parseInt(evo.species.url.split('/').reverse()[1]);
+
+	if (item && inventory[item] > 0) {
+		return (
+			<button
+				onClick={() => {
+					evolve(newDexId, evo.species.name, item);
+					invalidate();
+				}}
+			>
+				Use {item} to evolve {data.name}
+			</button>
+		);
+	}
+	if (item) {
+		return <strong>{item} required for evolution</strong>;
+	}
+	return <></>;
 };

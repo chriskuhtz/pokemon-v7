@@ -307,43 +307,51 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/69/',
 		handled: true,
 	},
-
 	{
 		name: 'sun-stone',
 		url: 'https://pokeapi.co/api/v2/item/80/',
+		handled: true,
 	},
 	{
 		name: 'moon-stone',
 		url: 'https://pokeapi.co/api/v2/item/81/',
+		handled: true,
 	},
 	{
 		name: 'fire-stone',
 		url: 'https://pokeapi.co/api/v2/item/82/',
+		handled: true,
 	},
 	{
 		name: 'thunder-stone',
 		url: 'https://pokeapi.co/api/v2/item/83/',
+		handled: true,
 	},
 	{
 		name: 'water-stone',
 		url: 'https://pokeapi.co/api/v2/item/84/',
+		handled: true,
 	},
 	{
 		name: 'leaf-stone',
 		url: 'https://pokeapi.co/api/v2/item/85/',
+		handled: true,
 	},
 
 	{
 		name: 'shiny-stone',
 		url: 'https://pokeapi.co/api/v2/item/107/',
+		handled: true,
 	},
 	{
 		name: 'dusk-stone',
 		url: 'https://pokeapi.co/api/v2/item/108/',
+		handled: true,
 	},
 	{
 		name: 'dawn-stone',
 		url: 'https://pokeapi.co/api/v2/item/109/',
+		handled: true,
 	},
 
 	{

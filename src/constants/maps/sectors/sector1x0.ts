@@ -18,24 +18,26 @@ export const sector1x0: OverworldMap = {
 	occupants: ['sector1x0_to_camp'],
 	possibleEncounters: {
 		MORNING: [
-			{ dexId: 27, xp: 200 },
-			{ dexId: 16, xp: 200 },
-			{ dexId: 19, xp: 200 },
+			{ dexId: 27, xp: 100 },
+			{ dexId: 16, xp: 100 },
+			{ dexId: 19, xp: 100 },
+			{ dexId: 191, xp: 100 },
 		],
 		DAY: [
-			{ dexId: 25, xp: 200 },
-			{ dexId: 21, xp: 200 },
-			{ dexId: 396, xp: 200 },
+			{ dexId: 25, xp: 100 },
+			{ dexId: 21, xp: 100 },
+			{ dexId: 396, xp: 100 },
 		],
 		EVENING: [
-			{ dexId: 216, xp: 200 },
-			{ dexId: 236, xp: 200 },
-			{ dexId: 43, xp: 200 },
+			{ dexId: 216, xp: 100 },
+			{ dexId: 236, xp: 100 },
+			{ dexId: 43, xp: 100 },
 		],
 		NIGHT: [
-			{ dexId: 570, xp: 200 },
-			{ dexId: 163, xp: 200 },
-			{ dexId: 41, xp: 200 },
+			{ dexId: 570, xp: 100 },
+			{ dexId: 163, xp: 100 },
+			{ dexId: 41, xp: 100 },
+			{ dexId: 35, xp: 100 },
 		],
 	},
 };
