@@ -1,19 +1,19 @@
 import { OverworldMap } from '../../interfaces/OverworldMap';
-import { marketMeadow } from '../maps/meadow/marketMeadow';
-import { meadow } from '../maps/meadow/meadow';
-import { pokecenterMeadow } from '../maps/meadow/pokecenterMeadow';
-import { trailerMeadow } from '../maps/meadow/trailerMeadow';
-import { universityMeadow } from '../maps/meadow/universityMeadow';
+import { camp } from '../maps/camp/camp';
+import { marketMeadow } from '../maps/camp/marketMeadow';
+import { pokecenterMeadow } from '../maps/camp/pokecenterMeadow';
+import { trailerMeadow } from '../maps/camp/trailerMeadow';
+import { universityMeadow } from '../maps/camp/universityMeadow';
 
 export type MapId =
-	| 'meadow'
+	| 'camp'
 	| 'market_meadow'
 	| 'pokecenter_meadow'
 	| 'university_meadow'
 	| 'trailer_meadow';
 
 export const mapsRecord: Record<MapId, OverworldMap> = {
-	meadow: meadow,
+	camp: camp,
 	market_meadow: marketMeadow,
 	pokecenter_meadow: pokecenterMeadow,
 	university_meadow: universityMeadow,

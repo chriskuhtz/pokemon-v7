@@ -1,6 +1,6 @@
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { Quest } from '../../interfaces/Quest';
-import { meadow } from '../maps/meadow/meadow';
+import { camp } from '../maps/camp/camp';
 
 export const questNames = [
 	'catch a pikachu',
@@ -38,7 +38,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'dawn-stone': 1 },
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
-				meadow.possibleEncounters.MORNING.some(
+				camp.possibleEncounters.MORNING.some(
 					(encounter) => encounter.dexId === p.dexId
 				)
 			);
@@ -47,7 +47,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'Defeat all the Trainers in the meadow': {
 		rewardItems: { lemonade: 10 },
 		conditionFunction: (s) => {
-			return meadow.occupants
+			return camp.occupants
 				.filter((o) => o > 200000 && o < 300000)
 				.every((o) => s.handledOccupants.some((ho) => ho.id === o));
 		},

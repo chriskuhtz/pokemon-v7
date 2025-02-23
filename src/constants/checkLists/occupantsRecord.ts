@@ -12,7 +12,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		x: 0,
 		y: 9,
 		amount: 1,
-		map: 'meadow',
+		map: 'camp',
 		conditionFunction: () => true,
 	},
 	1: {
@@ -21,7 +21,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		x: 11,
 		y: 1,
 		amount: 2,
-		map: 'meadow',
+		map: 'camp',
 		conditionFunction: () => true,
 	},
 	2: {
@@ -30,7 +30,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		x: 13,
 		y: 2,
 		amount: 1,
-		map: 'meadow',
+		map: 'camp',
 		conditionFunction: () => true,
 	},
 	//PCS start at 100000
@@ -47,7 +47,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		type: 'TRAINER',
 		x: 12,
 		y: 7,
-		map: 'meadow',
+		map: 'camp',
 		orientation: 'LEFT',
 		unhandledMessage: ['fight me', 'big dog'],
 		handledMessage: ['you are the big dog, big dog'],
@@ -60,7 +60,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		type: 'TRAINER',
 		x: 8,
 		y: 8,
-		map: 'meadow',
+		map: 'camp',
 		orientation: 'RIGHT',
 		unhandledMessage: ['Watt up', 'can you feel the electricity'],
 		handledMessage: ['I short circuited'],
@@ -105,7 +105,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		type: 'BUSH',
 		x: 19,
 		y: 1,
-		map: 'meadow',
+		map: 'camp',
 		conditionFunction: () => true,
 	},
 	//NPCs start at 600000
@@ -113,7 +113,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		type: 'NPC',
 		x: 5,
 		y: 4,
-		map: 'meadow',
+		map: 'camp',
 		orientation: 'UP',
 		unhandledMessage: [
 			'Pokemon Trainers compete with each other',
@@ -128,7 +128,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		type: 'NPC',
 		x: 9,
 		y: 1,
-		map: 'meadow',
+		map: 'camp',
 		orientation: 'LEFT',
 		unhandledMessage: [
 			'did you know?',
@@ -146,7 +146,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		type: 'NPC',
 		x: 10,
 		y: 5,
-		map: 'meadow',
+		map: 'camp',
 		orientation: 'LEFT',
 		unhandledMessage: ['Have you seen a little yellow mouse?'],
 		quest: 'catch a pikachu',
@@ -161,7 +161,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		type: 'NPC',
 		x: 6,
 		y: 4,
-		map: 'meadow',
+		map: 'camp',
 		orientation: 'UP',
 		unhandledMessage: [
 			'Your Pokemon look hungry',
@@ -178,7 +178,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		type: 'NPC',
 		x: 16,
 		y: 4,
-		map: 'meadow',
+		map: 'camp',
 
 		orientation: 'DOWN',
 		gifts: { 'dusk-ball': 5 },
@@ -214,7 +214,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		type: 'NPC',
 		x: 7,
 		y: 2,
-		map: 'meadow',
+		map: 'camp',
 		orientation: 'LEFT',
 		gifts: {
 			repel: 5,
@@ -251,7 +251,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 	//Portals start at 700000
 	700001: {
 		type: 'PORTAL',
-		map: 'meadow',
+		map: 'camp',
 		x: 2,
 		y: 0,
 
@@ -277,13 +277,13 @@ export const occupantsRecord: Record<number, Occupant> = {
 			x: 2,
 			y: 1,
 			orientation: 'DOWN',
-			mapId: 'meadow',
+			mapId: 'camp',
 		},
 		conditionFunction: () => true,
 	},
 	700003: {
 		type: 'PORTAL',
-		map: 'meadow',
+		map: 'camp',
 		x: 3,
 		y: 0,
 
@@ -309,13 +309,13 @@ export const occupantsRecord: Record<number, Occupant> = {
 			x: 3,
 			y: 1,
 			orientation: 'DOWN',
-			mapId: 'meadow',
+			mapId: 'camp',
 		},
 		conditionFunction: () => true,
 	},
 	700005: {
 		type: 'PORTAL',
-		map: 'meadow',
+		map: 'camp',
 		x: 5,
 		y: 0,
 
@@ -341,13 +341,13 @@ export const occupantsRecord: Record<number, Occupant> = {
 			x: 5,
 			y: 1,
 			orientation: 'DOWN',
-			mapId: 'meadow',
+			mapId: 'camp',
 		},
 		conditionFunction: () => true,
 	},
 	700007: {
 		type: 'PORTAL',
-		map: 'meadow',
+		map: 'camp',
 		x: 6,
 		y: 0,
 
@@ -373,7 +373,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 			x: 6,
 			y: 1,
 			orientation: 'DOWN',
-			mapId: 'meadow',
+			mapId: 'camp',
 		},
 		conditionFunction: () => true,
 	},
@@ -384,7 +384,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		small: true,
 		x: 7,
 		y: 0,
-		map: 'meadow',
+		map: 'camp',
 		conditionFunction: () => true,
 	},
 	800003: {
@@ -394,7 +394,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 
 		x: 7,
 		y: 3,
-		map: 'meadow',
+		map: 'camp',
 		conditionFunction: () => true,
 	},
 	800004: {
@@ -403,7 +403,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		small: true,
 		x: 7,
 		y: 4,
-		map: 'meadow',
+		map: 'camp',
 		conditionFunction: () => true,
 	},
 	800005: {
@@ -412,7 +412,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		small: true,
 		x: 7,
 		y: 5,
-		map: 'meadow',
+		map: 'camp',
 		conditionFunction: () => true,
 	},
 	800006: {
@@ -421,7 +421,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		small: true,
 		x: 6,
 		y: 5,
-		map: 'meadow',
+		map: 'camp',
 		conditionFunction: () => true,
 	},
 	800007: {
@@ -430,7 +430,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		small: true,
 		x: 5,
 		y: 5,
-		map: 'meadow',
+		map: 'camp',
 		conditionFunction: () => true,
 	},
 	800008: {
@@ -439,7 +439,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		small: true,
 		x: 4,
 		y: 5,
-		map: 'meadow',
+		map: 'camp',
 		conditionFunction: () => true,
 	},
 	800009: {
@@ -448,7 +448,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		small: true,
 		x: 3,
 		y: 5,
-		map: 'meadow',
+		map: 'camp',
 		conditionFunction: () => true,
 	},
 	800010: {
@@ -457,7 +457,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		small: true,
 		x: 2,
 		y: 5,
-		map: 'meadow',
+		map: 'camp',
 		conditionFunction: () => true,
 	},
 	800011: {
@@ -466,7 +466,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		small: true,
 		x: 1,
 		y: 5,
-		map: 'meadow',
+		map: 'camp',
 		conditionFunction: () => true,
 	},
 	800012: {
@@ -475,7 +475,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		small: true,
 		x: 0,
 		y: 5,
-		map: 'meadow',
+		map: 'camp',
 		conditionFunction: () => true,
 	},
 	800013: {
@@ -505,7 +505,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 
 	//signs start at 900000
 	900001: {
-		map: 'meadow',
+		map: 'camp',
 		type: 'SIGN',
 		x: 7,
 		y: 1,
