@@ -75,6 +75,7 @@ export const App = ({
 
 	const encounterRateModifier = useMemo(() => {
 		const stenchFactor = firstTeamMember?.ability === 'stench' ? 0.5 : 1;
+		const illumFactor = firstTeamMember?.ability === 'illuminate' ? 2 : 1;
 		const itemFactor = saveFile.encounterRateModifier?.factor ?? 1;
 		const weatherFactor =
 			firstTeamMember?.ability === 'sand-veil' &&
@@ -82,7 +83,7 @@ export const App = ({
 				? 0.5
 				: 1;
 
-		return 1 * stenchFactor * itemFactor * weatherFactor;
+		return 1 * stenchFactor * itemFactor * weatherFactor * illumFactor;
 	}, [firstTeamMember, saveFile]);
 
 	// const fishingEncounterRateModifier = useMemo(() => {
