@@ -26,38 +26,48 @@ export const maybeGetHeldItemFromData = (
 };
 
 export const useGetBattleTeam = (
-	initTeam: (OwnedPokemon & { caughtBefore: boolean })[]
+	initTeam: (OwnedPokemon & { caughtBefore: boolean })[],
+	assignLearnsetMoves?: boolean
 ) => {
 	return useFetch<BattlePokemon[]>(() =>
 		Promise.all(
 			initTeam.map(async (pokemon) => {
-				const { dexId, firstMove, secondMove, thirdMove, fourthMove } = pokemon;
+				const { dexId } = pokemon;
 				const data: Promise<PokemonData> = (
 					await fetch(`https://pokeapi.co/api/v2/pokemon/${dexId}`)
 				).json();
+
+				const d = await data;
+
+				const firstMove = assignLearnsetMoves
+					? d.moves[0].move.name
+					: pokemon.firstMove.name;
+				const secondMove = assignLearnsetMoves
+					? d.moves[1].move.name
+					: pokemon.secondMove?.name;
+				const thirdMove = assignLearnsetMoves
+					? d.moves[2].move.name
+					: pokemon.thirdMove?.name;
+				const fourthMove = assignLearnsetMoves
+					? d.moves[3].move.name
+					: pokemon.fourthMove?.name;
+
 				const speciesData: Promise<PokemonSpeciesData> = (
 					await fetch(`https://pokeapi.co/api/v2/pokemon-species/${dexId}`)
 				).json();
 				const firstMoveData: Promise<MoveDto> = (
-					await fetch(`https://pokeapi.co/api/v2/move/${firstMove.name}`)
+					await fetch(`https://pokeapi.co/api/v2/move/${firstMove}`)
 				).json();
 				const secondMoveData: Promise<MoveDto> | undefined = secondMove
-					? (
-							await fetch(`https://pokeapi.co/api/v2/move/${secondMove.name}`)
-					  ).json()
+					? (await fetch(`https://pokeapi.co/api/v2/move/${secondMove}`)).json()
 					: undefined;
 				const thirdMoveData: Promise<MoveDto> | undefined = thirdMove
-					? (
-							await fetch(`https://pokeapi.co/api/v2/move/${thirdMove.name}`)
-					  ).json()
+					? (await fetch(`https://pokeapi.co/api/v2/move/${thirdMove}`)).json()
 					: undefined;
 				const fourthMoveData: Promise<MoveDto> | undefined = fourthMove
-					? (
-							await fetch(`https://pokeapi.co/api/v2/move/${fourthMove.name}`)
-					  ).json()
+					? (await fetch(`https://pokeapi.co/api/v2/move/${fourthMove}`)).json()
 					: undefined;
 
-				const d = await data;
 				const spd = await speciesData;
 				const s = await secondMoveData;
 				const t = await thirdMoveData;
