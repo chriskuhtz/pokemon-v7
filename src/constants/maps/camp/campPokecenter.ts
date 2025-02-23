@@ -1,8 +1,8 @@
 import { generateBackground } from '../../../functions/generateEmptyBackground';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 
-export const pokecenterMeadow: OverworldMap = {
-	id: 'pokecenter_meadow',
+export const campPokecenter: OverworldMap = {
+	id: 'camp_pokecenter',
 	backgroundTile: '/tiles/redTiles.png',
 	possibleEncounters: { MORNING: [], DAY: [], EVENING: [], NIGHT: [] },
 	height: 4,
