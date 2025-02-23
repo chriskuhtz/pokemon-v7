@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { ActionType, ChooseActionPayload } from '../BattleField';
@@ -17,6 +18,17 @@ export function TargetSelection({
 	chooseAction: (x: ChooseActionPayload) => void;
 	setChosenAction: (x: ActionType | undefined) => void;
 }) {
+	useEffect(() => {
+		//choose the only available option, skip menu
+		if (targets.length === 1) {
+			chooseAction({
+				userId: id,
+				actionName: chosenAction,
+				targetId: targets[0].id,
+			});
+			setChosenAction(undefined);
+		}
+	}, [chooseAction, chosenAction, id, setChosenAction, targets]);
 	return (
 		<div
 			style={{
