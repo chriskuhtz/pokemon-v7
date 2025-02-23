@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { Sprite } from '../../components/Sprite/Sprite';
 import { battleSpriteSize } from '../../constants/gameData';
 import { typeColors } from '../../constants/typeColors';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getRandomPokemonId } from '../../functions/getRandomPokemonId';
-import { Message } from '../../hooks/useMessageQueue';
+import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
@@ -17,37 +18,26 @@ const randomStarterOptions = [
 export const StarterSelection = ({
 	randomStarters,
 	proceed,
-	latestMessage,
-	addMultipleMessages,
 }: {
 	randomStarters: boolean;
 	proceed: (name: string, starterDexId: number) => void;
-	latestMessage: Message | undefined;
-	addMessage: (message: Message) => void;
-	addMultipleMessages: (newMessages: Message[]) => void;
-	interjectMessage: (message: Message) => void;
 }): JSX.Element => {
 	const options = randomStarters ? randomStarterOptions : defaultStarters;
 	const [chosenStarter, setChosenStarter] = useState<number | undefined>();
 	const [name, setName] = useState<string | undefined>('');
+	const [finished, setFinished] = useState<boolean>(false);
 
-	const finishForm = (name: string, starterDexId: number) => {
-		addMultipleMessages([
-			{ message: `I see, so you are ${name}` },
-			{ message: `Thank you for deciding to join our research outpost` },
-			{
-				message: `Our Goal is to learn everything about the pokemon of this region`,
-			},
-			{ message: `There are many ways to contribute` },
-			{ message: `Just talk to the people in the camp` },
-			{
-				message: `Be kind, brave and curious`,
-				onRemoval: () => proceed(name, starterDexId),
-			},
-		]);
-	};
-	return latestMessage ? (
-		<></>
+	return finished && name && chosenStarter ? (
+		<Stack mode="column" alignItems="center">
+			<Sprite id={SpriteEnum['oak']} rotating={false} />
+			<h3>I see, so you are {name}.</h3>
+			<h3>Thank you for deciding to join our research outpost</h3>
+			<h3>Our Goal is to learn everything about the pokemon of this region</h3>
+			<h3>There are many ways to contribute.</h3>
+			<h3>Just talk to the people in the camp.</h3>
+			<h3>Be kind, brave and curious...</h3>
+			<button onClick={() => proceed(name, chosenStarter)}>Continue</button>
+		</Stack>
 	) : (
 		<Page headline="Intro:">
 			<Stack mode="column" alignItems="center">
@@ -88,7 +78,7 @@ export const StarterSelection = ({
 				</Stack>
 				<button
 					disabled={!name || !chosenStarter}
-					onClick={() => finishForm(name ?? '', chosenStarter ?? 0)}
+					onClick={() => setFinished(true)}
 				>
 					Proceed
 				</button>

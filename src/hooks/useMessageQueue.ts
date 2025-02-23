@@ -45,7 +45,7 @@ export const useMessageQueue = (
 		}
 		const t = setTimeout(() => {
 			confirmLatestMessage();
-		}, speed ?? animationTimer);
+		}, speed ?? animationTimer * 2);
 
 		return () => clearTimeout(t);
 	}, [confirmLatestMessage, messages, speed]);

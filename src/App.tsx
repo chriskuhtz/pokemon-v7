@@ -152,10 +152,6 @@ export const App = ({
 						meta: { activeTab: 'OVERWORLD' },
 					});
 				}}
-				latestMessage={latestMessage}
-				addMessage={addMessage}
-				interjectMessage={interjectMessage}
-				addMultipleMessages={addMultipleMessages}
 			/>
 		);
 	}
