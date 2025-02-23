@@ -18,7 +18,7 @@ export const getTimeOfDay = (): TimeOfDay => {
 
 export const OverworldShaderMap: Record<TimeOfDay, string> = {
 	MORNING: 'rgba(156, 98, 0,.2)',
-	DAY: '',
+	DAY: 'rgba(0,0,0,0)',
 	EVENING: 'rgba(156, 98, 0,.2)',
 	NIGHT: 'rgba(23, 44, 79,.4)',
 };

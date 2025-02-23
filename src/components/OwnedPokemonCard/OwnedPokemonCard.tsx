@@ -1,15 +1,15 @@
 import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
+import { MoveName } from '../../constants/checkLists/movesCheckList';
 import { baseSize } from '../../constants/gameData';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getTypeNames } from '../../functions/getTypeNames';
-import { useGetPokemonData } from '../../hooks/useGetPokemonData';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
+import { PokemonData } from '../../interfaces/PokemonData';
 import { Card } from '../../uiComponents/Card/Card';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
-import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 import { OwnedPokemonCardContent } from './components/OwnedPokemonCardContent';
 
 export const OwnedPokemonCard = ({
@@ -18,20 +18,18 @@ export const OwnedPokemonCard = ({
 	giveHeldItem,
 	takeHeldItem,
 	inventory,
+	data,
+	setMoves,
 }: {
 	pokemon: OwnedPokemon;
 	reorder: (x: 'UP' | 'DOWN') => void;
 	giveHeldItem: (newItem: ItemType) => void;
+	setMoves: (id: string, moves: MoveName[]) => void;
 	takeHeldItem: () => void;
 	inventory: Inventory;
+	data: PokemonData;
 }) => {
-	const { res } = useGetPokemonData(pokemon.dexId);
-
-	if (!res) {
-		return <LoadingScreen />;
-	}
-
-	const typeNames = getTypeNames({ ...pokemon, data: res });
+	const typeNames = getTypeNames({ ...pokemon, data });
 
 	return (
 		<Card
@@ -51,8 +49,9 @@ export const OwnedPokemonCard = ({
 			}
 			content={
 				<OwnedPokemonCardContent
+					setMoves={setMoves}
 					ownedPokemon={pokemon}
-					data={res}
+					data={data}
 					inventory={inventory}
 					takeHeldItem={takeHeldItem}
 					giveHeldItem={giveHeldItem}

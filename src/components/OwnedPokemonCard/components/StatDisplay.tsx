@@ -13,18 +13,24 @@ export const StatDisplay = ({
 	data: PokemonData;
 }) => {
 	return (
-		<>
-			<div
+		<div
+			style={{
+				margin: '.5rem',
+				borderLeft: '1px solid black',
+				borderBottom: '1px solid black',
+				borderBottomLeftRadius: '.5rem',
+			}}
+		>
+			<strong
 				style={{
-					paddingTop: '1rem',
-					paddingLeft: '.5rem',
+					padding: '1rem .5rem',
 				}}
 			>
 				Stats:
-			</div>
+			</strong>
 			<div
 				style={{
-					paddingLeft: '.5rem',
+					padding: '.5rem',
 					display: 'grid',
 					gap: '1.5rem',
 					gridTemplateColumns: '1fr 1fr 1fr',
@@ -68,6 +74,6 @@ export const StatDisplay = ({
 					}
 				})}
 			</div>
-		</>
+		</div>
 	);
 };
