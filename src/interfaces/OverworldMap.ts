@@ -5,6 +5,7 @@
  * 0 = empty field
  * 1 = encounter possible
  * 2 = blocked field
+ * 3 = border
  */
 
 import { MapId } from '../constants/checkLists/mapsRecord';
@@ -116,6 +117,7 @@ export interface OverworldMap {
 	id: MapId;
 	backgroundTile: string;
 	encounterTile?: string;
+	borderTile?: string;
 	possibleEncounters: Record<TimeOfDay, OverworldEncounter[]>;
 	width: number;
 	height: number;

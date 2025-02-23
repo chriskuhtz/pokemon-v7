@@ -4,7 +4,14 @@ import { OverworldMap } from '../../../interfaces/OverworldMap';
 
 export const useDrawBackground = (canvasId: string, map: OverworldMap) => {
 	useEffect(() => {
-		const { backgroundTile, encounterTile, width, height, tileMap } = map;
+		const {
+			backgroundTile,
+			encounterTile,
+			borderTile,
+			width,
+			height,
+			tileMap,
+		} = map;
 		const el: HTMLCanvasElement | null = document.getElementById(
 			canvasId
 		) as HTMLCanvasElement | null;
@@ -17,7 +24,8 @@ export const useDrawBackground = (canvasId: string, map: OverworldMap) => {
 			tileMap.forEach((row, h) => {
 				row.forEach((value, w) => {
 					const isEncounterGrass = value === 1;
-					if (!isEncounterGrass) {
+					const isBorder = value === 3;
+					if (!isEncounterGrass && !isBorder) {
 						ctx?.drawImage(
 							baseTileImage,
 							w * baseSize,
@@ -33,8 +41,6 @@ export const useDrawBackground = (canvasId: string, map: OverworldMap) => {
 		const encounterTileImage = new Image();
 		if (encounterTile) {
 			encounterTileImage.addEventListener('load', () => {
-				//ctx?.clearRect(0, 0, width * baseSize, height * baseSize);
-
 				tileMap.forEach((row, h) => {
 					row.forEach((value, w) => {
 						const isEncounterGrass = value === 1;
@@ -52,6 +58,27 @@ export const useDrawBackground = (canvasId: string, map: OverworldMap) => {
 			});
 
 			encounterTileImage.src = encounterTile;
+		}
+		const borderTileImage = new Image();
+		if (borderTile) {
+			borderTileImage.addEventListener('load', () => {
+				tileMap.forEach((row, h) => {
+					row.forEach((value, w) => {
+						const isBorder = value === 3;
+						if (isBorder) {
+							ctx?.drawImage(
+								borderTileImage,
+								w * baseSize,
+								h * baseSize,
+								baseSize,
+								baseSize
+							);
+						}
+					});
+				});
+			});
+
+			borderTileImage.src = borderTile;
 		}
 	}, [canvasId, map]);
 };
