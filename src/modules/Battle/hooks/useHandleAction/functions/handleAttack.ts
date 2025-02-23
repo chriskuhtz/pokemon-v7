@@ -102,9 +102,15 @@ export const handleAttack = ({
 	}
 
 	//MESSAGES
-	addMessage({
-		message: `${attacker.data.name} used ${move.name} against ${target.data.name}`,
-	});
+	if (!selfTargeting) {
+		addMessage({
+			message: `${attacker.data.name} used ${move.name} against ${target.data.name}`,
+		});
+	} else {
+		addMessage({
+			message: `${attacker.data.name} used ${move.name} `,
+		});
+	}
 
 	//MIST
 	if (move.name === 'mist') {
