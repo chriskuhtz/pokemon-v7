@@ -1,7 +1,9 @@
 import { useFetch } from '@potfisch-industries-npm/usefetch';
 import { MoveName } from '../constants/checkLists/movesCheckList';
+import { calculateLevelData } from '../functions/calculateLevelData';
 import { getStats } from '../functions/getStats';
 import { maybeGetHeldItemFromData } from '../functions/maybeGetHeldItemFromData';
+import { moveIsAvailable } from '../functions/moveIsAvailable';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { MoveDto } from '../interfaces/Move';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
@@ -15,25 +17,34 @@ export const useGetBattleTeam = (
 	return useFetch<BattlePokemon[]>(() =>
 		Promise.all(
 			initTeam.map(async (pokemon) => {
-				const { dexId } = pokemon;
+				const { dexId, xp } = pokemon;
 				const data: Promise<PokemonData> = (
 					await fetch(`https://pokeapi.co/api/v2/pokemon/${dexId}`)
 				).json();
 
 				const d = await data;
 
+				const { level } = calculateLevelData(xp);
+
+				const availableMoves = d.moves.filter((m) => moveIsAvailable(m, level));
+
+				console.log(availableMoves);
+
 				const firstMove = assignLearnsetMoves
-					? d.moves[0].move.name
+					? availableMoves[0].move.name
 					: pokemon.firstMove.name;
-				const secondMove = assignLearnsetMoves
-					? d.moves[1].move.name
-					: pokemon.secondMove?.name;
-				const thirdMove = assignLearnsetMoves
-					? d.moves[2].move.name
-					: pokemon.thirdMove?.name;
-				const fourthMove = assignLearnsetMoves
-					? d.moves[3].move.name
-					: pokemon.fourthMove?.name;
+				const secondMove =
+					assignLearnsetMoves && availableMoves.length > 1
+						? availableMoves[1].move.name
+						: pokemon.secondMove?.name;
+				const thirdMove =
+					assignLearnsetMoves && availableMoves.length > 2
+						? availableMoves[2].move.name
+						: pokemon.thirdMove?.name;
+				const fourthMove =
+					assignLearnsetMoves && availableMoves.length > 3
+						? availableMoves[3].move.name
+						: pokemon.fourthMove?.name;
 
 				const speciesData: Promise<PokemonSpeciesData> = (
 					await fetch(`https://pokeapi.co/api/v2/pokemon-species/${dexId}`)
