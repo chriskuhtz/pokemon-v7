@@ -45,9 +45,12 @@ export const OwnedPokemonCardContent = ({
 				selected={ownedPokemon.heldItemName ? [ownedPokemon.heldItemName] : []}
 				open={heldItemMenuOpen}
 				close={() => setHeldItemMenuOpen(false)}
-				options={Object.entries(inventory)
-					.filter(([, amount]) => amount > 0)
-					.map(([item]) => item)}
+				options={[
+					ownedPokemon.heldItemName,
+					...Object.entries(inventory)
+						.filter(([, amount]) => amount > 0)
+						.map(([item]) => item),
+				].filter((s) => s !== undefined)}
 				min={1}
 				max={1}
 				toggle={(item) => {
