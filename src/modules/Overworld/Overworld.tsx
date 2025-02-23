@@ -240,7 +240,9 @@ export const Overworld = ({
 			>
 				<WeatherIcon weather={assembledMap.weather} />
 				<TimeOfDayIcon />
-				<button style={{ backgroundColor: 'white' }}>{assembledMap.id}</button>
+				<button style={{ backgroundColor: 'white', zIndex: 9000 }}>
+					{assembledMap.id}
+				</button>
 			</div>
 
 			<div className="overworldPage">
