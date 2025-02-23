@@ -5,6 +5,7 @@ import { WeatherType } from '../interfaces/Weather';
 import { calculateLevelData } from './calculateLevelData';
 import { calculateModifiedStat } from './calculateModifiedStat';
 import { getCompoundEyesFactor } from './getCompoundEyesFactor';
+import { isSelfTargeting } from './isSelfTargeting';
 
 /**
  *
@@ -18,7 +19,7 @@ export const determineMiss = (
 	weather?: WeatherType,
 	targetIsFlying?: boolean
 ): boolean => {
-	const selfTargeting = attack.data.target.name === 'user';
+	const selfTargeting = isSelfTargeting(attack.data);
 
 	if (selfTargeting) {
 		return false;

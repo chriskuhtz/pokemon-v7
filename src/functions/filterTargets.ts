@@ -8,9 +8,11 @@ import {
 } from '../interfaces/Item';
 import { ActionType } from '../modules/Battle/BattleField';
 import { canBenefitFromItem } from './canBenefitFromItem';
+import { getMovesArray } from './getMovesArray';
 import { getOpponentPokemon } from './getOpponentPokemon';
 import { getPlayerId } from './getPlayerId';
 import { getPlayerPokemon } from './getPlayerPokemon';
+import { isSelfTargeting } from './isSelfTargeting';
 
 export interface FilterTargetsPayload {
 	targets: BattlePokemon[];
@@ -42,14 +44,24 @@ export const filterTargets = ({
 			(t) => t.status === 'ONFIELD'
 		);
 	}
-	if (isMove(chosenAction) && lockInMoves.includes(chosenAction)) {
+
+	if (isMove(chosenAction)) {
+		const move = getMovesArray(user).find((m) => m.name === chosenAction);
+		if (move && isSelfTargeting(move.data)) {
+			return [user];
+		}
+
+		if (lockInMoves.includes(chosenAction)) {
+			return preFiltered.filter(
+				(t) => t.status === 'ONFIELD' && t.id !== user.id
+			);
+		}
+
 		return preFiltered.filter(
-			(t) => t.status === 'ONFIELD' && t.id !== user?.id
+			(t) => t.status === 'ONFIELD' && t.id !== user.id
 		);
 	}
-	if (isMove(chosenAction)) {
-		return preFiltered.filter((t) => t.status === 'ONFIELD');
-	}
+
 	return targets;
 };
 
