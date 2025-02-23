@@ -1,5 +1,3 @@
-import { Stack } from '../Stack/Stack';
-
 export const SelectionListModal = ({
 	options,
 	selected,
@@ -8,6 +6,7 @@ export const SelectionListModal = ({
 	max,
 	onConfirm,
 	open,
+	close,
 }: {
 	options: string[];
 	selected: string[];
@@ -16,7 +15,9 @@ export const SelectionListModal = ({
 	max: number;
 	onConfirm?: () => void;
 	open: boolean;
+	close: () => void;
 }) => {
+	const disabled = selected.length < min || selected.length > max;
 	if (!open) {
 		return <></>;
 	}
@@ -26,32 +27,37 @@ export const SelectionListModal = ({
 				position: 'absolute',
 				top: 0,
 				left: 0,
-				width: '100dvw',
+				width: 'calc(100dvw - 4rem)',
 				height: '100dvh',
-				maxHeight: '100dvh',
-				overflow: 'hidden',
 				backgroundColor: 'rgba(0,0,0,.8)',
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
 				zIndex: 9000,
+				padding: '2rem',
 			}}
 		>
 			<div
 				style={{
-					padding: '1rem',
-					margin: '1rem',
+					padding: '2rem',
 					borderRadius: '1rem',
 					border: '2px solid black',
 					backgroundColor: 'white',
-					maxWidth: 'calc(100dvw -2rem)',
-					maxHeight: 'calc(100dvh -4rem)',
+					maxHeight: '80%',
 					overflow: 'scroll',
 				}}
 			>
-				<Stack mode="row" alignItems="stretch">
+				<strong onClick={close}>X</strong>
+				<div
+					style={{
+						display: 'grid',
+						gap: '1rem',
+						gridTemplateColumns: '1fr 1fr 1fr',
+					}}
+				>
 					{options.map((o) => (
 						<button
+							key={o}
 							style={
 								selected.includes(o)
 									? { color: 'white', backgroundColor: 'black' }
@@ -64,13 +70,14 @@ export const SelectionListModal = ({
 					))}
 					{onConfirm && (
 						<button
+							style={{ backgroundColor: disabled ? 'red' : 'green' }}
 							onClick={onConfirm}
-							disabled={selected.length < min || selected.length > max}
+							disabled={disabled}
 						>
 							Confirm
 						</button>
 					)}
-				</Stack>
+				</div>
 			</div>
 		</div>
 	);
