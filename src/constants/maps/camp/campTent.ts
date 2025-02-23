@@ -1,24 +1,22 @@
 import { generateBackground } from '../../../functions/generateEmptyBackground';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 
-export const universityMeadow: OverworldMap = {
-	id: 'university_meadow',
-	backgroundTile: '/tiles/whiteBoards.png',
+export const campTent: OverworldMap = {
+	id: 'camp_tent',
+	backgroundTile: '/tiles/woodfloor.png',
 	possibleEncounters: { MORNING: [], DAY: [], EVENING: [], NIGHT: [] },
-	height: 8,
-	width: 20,
+	height: 2,
+	width: 3,
 	tileMap: generateBackground({
-		height: 8,
-		width: 20,
-		randomEncounterTiles: false,
+		height: 2,
+		width: 3,
 		withBorder: false,
+		randomEncounterTiles: false,
 	}),
 	occupants: [
-		//npcs
-		'oak_University',
 		//portals
-		'university_to_camp',
+		'trailer_to_camp',
 		//obstacles
-		'bookShelf1_university',
+		'bed_trailer',
 	],
 };

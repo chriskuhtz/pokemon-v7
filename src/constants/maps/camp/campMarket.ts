@@ -1,7 +1,7 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 
-export const marketMeadow: OverworldMap = {
-	id: 'market_meadow',
+export const campMarket: OverworldMap = {
+	id: 'camp_market',
 	backgroundTile: '/tiles/blueTiles.png',
 	possibleEncounters: { MORNING: [], DAY: [], EVENING: [], NIGHT: [] },
 	width: 5,

@@ -35,6 +35,7 @@ export const reduceBattlePokemonToOwnedPokemon = (
 		maxHp: newMon.stats.hp,
 		effortValues: newMon.effortValues,
 		ppBoostedMoves: newMon.ppBoostedMoves,
+		caughtOnMap: newMon.caughtOnMap,
 	};
 
 	if (heal) {
