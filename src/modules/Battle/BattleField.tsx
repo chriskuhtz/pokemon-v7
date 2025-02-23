@@ -533,23 +533,24 @@ export const BattleField = ({
 				<EnemyLane onFieldOpponents={onFieldOpponents} />
 				<PlayerLane onFieldTeam={onFieldTeam} />
 			</div>
-			<div
-				style={{
-					maxWidth: '100dvw',
-					overflow: 'scroll',
-					borderTop: '1px solid black',
-					minHeight: '103px',
-					maxHeight: '103px',
-				}}
-			>
-				<ControlBar
-					controlled={nextPokemonWithoutMove}
-					targets={pokemon}
-					chooseAction={chooseAction}
-					message={latestMessage?.message}
-					playerInventory={battleInventory}
-				/>
-			</div>
+			{!latestMessage && (
+				<div
+					style={{
+						maxWidth: '100dvw',
+						overflow: 'scroll',
+						borderTop: '1px solid black',
+						minHeight: '103px',
+						maxHeight: '103px',
+					}}
+				>
+					<ControlBar
+						controlled={nextPokemonWithoutMove}
+						targets={pokemon}
+						chooseAction={chooseAction}
+						playerInventory={battleInventory}
+					/>
+				</div>
+			)}
 		</div>
 	);
 };

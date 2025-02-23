@@ -15,13 +15,13 @@ export function ControlBar({
 	controlled,
 	targets,
 	chooseAction,
-	message,
+
 	playerInventory,
 }: {
 	controlled: BattlePokemon | undefined;
 	targets: BattlePokemon[];
 	chooseAction: (x: ChooseActionPayload) => void;
-	message?: string;
+
 	playerInventory: Inventory;
 }) {
 	const [chosenAction, setChosenAction] = useState<ActionType | undefined>();
@@ -59,20 +59,6 @@ export function ControlBar({
 		}
 	}, [chooseAction, controlled, targets]);
 
-	if (message) {
-		return (
-			<div
-				style={{
-					borderTop: '1px solid black',
-					display: 'flex',
-					alignItems: 'center',
-					justifyContent: 'center',
-				}}
-			>
-				<h3></h3>
-			</div>
-		);
-	}
 	if (!controlled) {
 		return (
 			<div

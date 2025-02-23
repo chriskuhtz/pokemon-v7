@@ -2,7 +2,10 @@ import { useEffect } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import { baseSize } from '../../../constants/gameData';
 import { getMovesArray } from '../../../functions/getMovesArray';
+import { isPlayerPokemon } from '../../../functions/getPlayerPokemon';
+import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
+import { Card } from '../../../uiComponents/Card/Card';
 import { ActionType, ChooseActionPayload } from '../BattleField';
 
 export function TargetSelection({
@@ -60,7 +63,17 @@ export function TargetSelection({
 				/>
 				{!['ether', 'max-ether'].includes(chosenAction) &&
 					targets.map((t) => (
-						<button
+						<Card
+							icon={
+								<img
+									height={baseSize * 0.8}
+									src={getPokemonSprite(
+										t.dexId,
+										isPlayerPokemon(t) ? 'back' : undefined
+									)}
+								/>
+							}
+							content={t.data.name}
 							key={t.id}
 							onClick={() => {
 								chooseAction({
@@ -70,9 +83,8 @@ export function TargetSelection({
 								});
 								setChosenAction(undefined);
 							}}
-						>
-							{t.data.name}
-						</button>
+							actionElements={[]}
+						/>
 					))}
 				{['ether', 'max-ether'].includes(chosenAction) &&
 					targets.map((t) => {
