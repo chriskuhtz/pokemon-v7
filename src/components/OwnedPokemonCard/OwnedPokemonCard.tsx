@@ -21,6 +21,7 @@ export const OwnedPokemonCard = ({
 	data,
 	setMoves,
 	setNickName,
+	evolve,
 }: {
 	pokemon: OwnedPokemon;
 	reorder: (x: 'UP' | 'DOWN') => void;
@@ -30,6 +31,7 @@ export const OwnedPokemonCard = ({
 	inventory: Inventory;
 	data: PokemonData;
 	setNickName: (id: string, newNick: string | undefined) => void;
+	evolve: (newDexId: number, newName: string, item?: ItemType) => void;
 }) => {
 	const typeNames = getTypeNames({ ...pokemon, data });
 
@@ -51,6 +53,7 @@ export const OwnedPokemonCard = ({
 			}
 			content={
 				<OwnedPokemonCardContent
+					evolve={evolve}
 					setMoves={setMoves}
 					ownedPokemon={pokemon}
 					data={data}

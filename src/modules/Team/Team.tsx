@@ -13,14 +13,22 @@ export const Team = ({
 	setTeam,
 	changeHeldItem,
 	inventory,
+	evolve,
 }: {
 	team: OwnedPokemon[];
 	goBack: () => void;
 	setTeam: (newTeam: OwnedPokemon[]) => void;
 	inventory: Inventory;
 	changeHeldItem: (pokemonId: string, newItem?: ItemType) => void;
+	evolve: (
+		id: string,
+		newDexId: number,
+		name: string,
+		newName: string,
+		consumedItem?: ItemType
+	) => void;
 }): JSX.Element => {
-	const { res } = useGetBattleTeam(
+	const { res, invalidate } = useGetBattleTeam(
 		team.map((t) => ({ ...t, caughtBefore: true }))
 	);
 
@@ -86,6 +94,10 @@ export const Team = ({
 									return t;
 								})
 							);
+						}}
+						evolve={(newDexId: number, newName: string, item?: ItemType) => {
+							evolve(pokemon.id, newDexId, res[index].data.name, newName, item);
+							invalidate();
 						}}
 						data={res[index].data}
 						key={pokemon.id}
