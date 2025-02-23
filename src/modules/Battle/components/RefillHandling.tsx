@@ -1,15 +1,14 @@
 import { baseSize } from '../../../constants/gameData';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
+import { isKO } from '../../../functions/isKo';
 import { Message } from '../../../hooks/useMessageQueue';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
-import { Banner } from '../../../uiComponents/Banner/Banner';
 
 export const RefillHandling = ({
 	team,
 	teamCanRefill,
 	addMessage,
 	putPokemonOnField,
-	latestMessage,
 	opponentCanRefill,
 	opponents,
 }: {
@@ -18,7 +17,6 @@ export const RefillHandling = ({
 	opponents: BattlePokemon[];
 	addMessage: (x: Message) => void;
 	putPokemonOnField: (id: string) => void;
-	latestMessage: Message | undefined;
 	opponentCanRefill: boolean;
 }) => {
 	if (teamCanRefill) {
@@ -41,7 +39,7 @@ export const RefillHandling = ({
 					}}
 				>
 					{team.map((teamMember) => {
-						if (teamMember.status === 'BENCH') {
+						if (teamMember.status === 'BENCH' && !isKO(teamMember)) {
 							return (
 								<img
 									style={{ borderRadius: 9000, padding: '1rem' }}
@@ -77,7 +75,7 @@ export const RefillHandling = ({
 			<div>
 				Refill Oppos Time:
 				{opponents.map((t) => {
-					if (t.status === 'BENCH') {
+					if (t.status === 'BENCH' && !isKO(t)) {
 						return (
 							<img
 								key={t.id}
@@ -92,7 +90,6 @@ export const RefillHandling = ({
 						);
 					}
 				})}
-				{latestMessage && <Banner>{latestMessage.message} </Banner>}
 			</div>
 		);
 	}

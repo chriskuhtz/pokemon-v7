@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Sprite } from '../../../components/Sprite/Sprite';
 import { baseSize } from '../../../constants/gameData';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
+import { isKO } from '../../../functions/isKo';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { OverworldTrainer } from '../../../interfaces/OverworldMap';
 
@@ -87,33 +88,35 @@ export const LineUpSelection = ({
 					rowGap: '.5rem',
 				}}
 			>
-				{team.map((teamMember) => (
-					<div
-						role="button"
-						onClick={() => toggleSelected(teamMember.id)}
-						tabIndex={0}
-						onKeyDown={(e) => {
-							if (e.key === 'Enter') {
-								toggleSelected(teamMember.id);
-							}
-						}}
-						key={teamMember.id}
-						style={{
-							border: selectedTeam.includes(teamMember.id)
-								? '2px solid black'
-								: undefined,
-							borderRadius: 9000,
-							aspectRatio: '1/1',
-							padding: '1rem',
-						}}
-					>
-						<img
-							style={{}}
-							height={baseSize}
-							src={getPokemonSprite(teamMember.dexId, 'back')}
-						/>
-					</div>
-				))}
+				{team
+					.filter((t) => !isKO(t))
+					.map((teamMember) => (
+						<div
+							role="button"
+							onClick={() => toggleSelected(teamMember.id)}
+							tabIndex={0}
+							onKeyDown={(e) => {
+								if (e.key === 'Enter') {
+									toggleSelected(teamMember.id);
+								}
+							}}
+							key={teamMember.id}
+							style={{
+								border: selectedTeam.includes(teamMember.id)
+									? '2px solid black'
+									: undefined,
+								borderRadius: 9000,
+								aspectRatio: '1/1',
+								padding: '1rem',
+							}}
+						>
+							<img
+								style={{}}
+								height={baseSize}
+								src={getPokemonSprite(teamMember.dexId, 'back')}
+							/>
+						</div>
+					))}
 			</div>
 
 			<div style={{ display: 'flex', gap: '1rem' }}>

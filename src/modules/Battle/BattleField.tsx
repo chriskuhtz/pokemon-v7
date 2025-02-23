@@ -503,7 +503,6 @@ export const BattleField = ({
 				opponentCanRefill={opponentCanRefill}
 				teamCanRefill={teamCanRefill}
 				opponents={opponents}
-				latestMessage={latestMessage}
 				addMessage={addMessage}
 			/>
 		);
