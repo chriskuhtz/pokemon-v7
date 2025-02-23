@@ -14,10 +14,7 @@ export const testPokemon: OwnedPokemon = {
 	id: 'bingo',
 	ball: 'poke-ball',
 	onTeam: true,
-	firstMove: { name: 'scratch', usedPP: 15 },
-	secondMove: { name: 'fly', usedPP: 5 },
-	thirdMove: { name: 'growl', usedPP: 7 },
-	fourthMove: { name: 'ice-punch', usedPP: 8 },
+	firstMove: { name: 'tackle', usedPP: 15 },
 	damage: 0,
 	nature: 'adamant',
 	xp: 200,
@@ -28,17 +25,14 @@ export const testPokemon: OwnedPokemon = {
 	maxHp: 20,
 	effortValues: EmptyStatObject,
 	ppBoostedMoves: [],
+	caughtOnMap: 'camp',
 };
 export const testState: SaveFile = {
 	sprite: '',
 	badges: [],
 	quests: {
+		'catch a pokemon in sector1x0': 'INACTIVE',
 		'catch a pikachu': 'INACTIVE',
-		'Train a Pokemon to lvl 10': 'INACTIVE',
-		'Catch a Zorua at night in the meadow': 'INACTIVE',
-		'Catch a morning pokemon from the meadow': 'INACTIVE',
-		//'Defeat all the Trainers in the meadow': 'INACTIVE',
-		'Catch five different pokemon': 'INACTIVE',
 	},
 	inventory: generateInventory({}),
 	playerId: '',
@@ -79,6 +73,7 @@ export const testOpponent: OwnedPokemon = {
 	maxHp: 50,
 	effortValues: EmptyStatObject,
 	ppBoostedMoves: [],
+	caughtOnMap: 'camp',
 };
 
 export const localStorageId = 'pokemonv7SaveFile';

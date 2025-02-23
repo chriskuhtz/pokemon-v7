@@ -464,12 +464,13 @@ export const useSaveFile = (
 
 			const teamAndCaught = [
 				...leveledUpTeam,
-				...caughtPokemon.map((c) =>
-					reduceBattlePokemonToOwnedPokemon(
+				...caughtPokemon.map((c) => ({
+					...reduceBattlePokemonToOwnedPokemon(
 						{ ...c, ownerId: saveFile.playerId },
 						c.ball === 'heal-ball'
-					)
-				),
+					),
+					caughtOnMap: saveFile.location.mapId,
+				})),
 			].map((t, i) => ({ ...t, onTeam: i < 6 }));
 
 			const updatedPokemon = [

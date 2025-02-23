@@ -159,4 +159,5 @@ export const extraFeatureCheckList: {
 	{ name: 'fly outside of battle' },
 	{ name: 'allow save snapshots' },
 	{ name: 'higher level pokemon ignore repel' },
+	{ name: 'T, B, Q keys as quicklinks to menues' },
 ];

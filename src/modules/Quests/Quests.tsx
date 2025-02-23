@@ -23,6 +23,15 @@ export const Quests = ({
 	goBack: () => void;
 	saveFile: SaveFile;
 }) => {
+	console.log(quests);
+	if (Object.values(quests).filter((v) => v !== 'INACTIVE').length === 0) {
+		return (
+			<Page headline={'Quests:'} goBack={goBack}>
+				Talk to the people in the camp to start quests
+			</Page>
+		);
+	}
+
 	return (
 		<Page headline={'Quests:'} goBack={goBack}>
 			<Stack mode="column">
@@ -31,6 +40,7 @@ export const Quests = ({
 					const fulfilled = quest.conditionFunction(saveFile);
 					const collected = status === 'COLLECTED';
 					const active = status === 'ACTIVE' && !fulfilled;
+
 					if (status === 'INACTIVE') {
 						return <React.Fragment key={name}></React.Fragment>;
 					}

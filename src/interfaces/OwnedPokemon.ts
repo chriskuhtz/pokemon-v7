@@ -1,4 +1,5 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
+import { MapId } from '../constants/checkLists/mapsRecord';
 import { MoveName } from '../constants/checkLists/movesCheckList';
 import { PrimaryAilment } from './Ailment';
 import { ItemType, PokeballType } from './Item';
@@ -38,4 +39,5 @@ export interface OwnedPokemon {
 	effortValues: StatObject;
 	//intrinsicValues: StatObject;
 	ppBoostedMoves: PPBoostedMove[];
+	caughtOnMap: MapId;
 }
