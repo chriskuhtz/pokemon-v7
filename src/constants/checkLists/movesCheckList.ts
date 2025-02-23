@@ -1406,6 +1406,7 @@ export const handledMoves = [
 	'absorb',
 	'mega-drain',
 	'night-shade',
+	'mega-kick',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
