@@ -33,7 +33,7 @@ export const getEvoChainForPokemon = async (data: PokemonData) => {
 
 export const useGetEvolution = (
 	data: PokemonData
-): { evo: EvolutionChainLink | undefined; invalidate: () => void } => {
+): { evos: EvolutionChainLink[] | undefined; invalidate: () => void } => {
 	const { status, res, invalidate } = useFetch<EvolutionChainData>(() =>
 		getEvoChainForPokemon(data)
 	);
@@ -60,7 +60,7 @@ export const useGetEvolution = (
 		}
 	}, [status, res, setFlattenedChain]);
 
-	const evo = useMemo(() => {
+	const evos = useMemo(() => {
 		const correctLink = flattenedChain.find(
 			(link) => link.species.name === data.name && link.evolves_to.length > 0
 		);
@@ -69,8 +69,8 @@ export const useGetEvolution = (
 			return;
 		}
 
-		return correctLink.evolves_to[0];
+		return correctLink.evolves_to;
 	}, [data.name, flattenedChain]);
 
-	return { evo, invalidate };
+	return { evos, invalidate };
 };

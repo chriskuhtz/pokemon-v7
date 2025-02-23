@@ -213,9 +213,9 @@ export const EvoInfo = ({
 	inventory: Inventory;
 	evolve: (newDexId: number, newName: string, item?: ItemType) => void;
 }) => {
-	const { evo, invalidate } = useGetEvolution(data);
+	const { evos, invalidate } = useGetEvolution(data);
 
-	console.log('evo', evo);
+	const evo = evos?.[0];
 
 	if (!evo) {
 		return <></>;

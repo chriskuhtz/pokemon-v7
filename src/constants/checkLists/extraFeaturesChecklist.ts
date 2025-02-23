@@ -152,4 +152,5 @@ export const extraFeatureCheckList: {
 	{ name: 'Edit and Collapse Buttons in pokemoncard need keyboard controls' },
 	{ name: 'walk through grass animation' },
 	{ name: 'break step between move execution' },
+	{ name: 'browser tab name and icon' },
 ];
