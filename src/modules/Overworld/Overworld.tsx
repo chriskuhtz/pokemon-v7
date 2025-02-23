@@ -33,7 +33,6 @@ export const Overworld = ({
 	setCharacterLocation,
 	map,
 	startEncounter,
-
 	goToMarket,
 	talkToNurse,
 	openStorage,
@@ -64,7 +63,6 @@ export const Overworld = ({
 	latestMessage: Message | undefined;
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
-	interjectMessage: (message: Message) => void;
 }) => {
 	const [statefulOccupants, setStatefulOccupants] = useState<
 		Record<number, Occupant>

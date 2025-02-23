@@ -25,12 +25,10 @@ export const App = ({
 	latestMessage,
 	addMessage,
 	addMultipleMessages,
-	interjectMessage,
 }: {
 	latestMessage: Message | undefined;
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
-	interjectMessage: (message: Message) => void;
 }): JSX.Element => {
 	const [currentMarketInventory, setCurrentMarketInventory] =
 		useState<Partial<Inventory>>(STANDARD_BUY_MARKET);
@@ -105,7 +103,6 @@ export const App = ({
 				ownedPokemonDexIds={saveFile.pokemon.map((p) => p.dexId)}
 				latestMessage={latestMessage}
 				addMessage={addMessage}
-				interjectMessage={interjectMessage}
 				addMultipleMessages={addMultipleMessages}
 			/>
 		);
@@ -167,7 +164,6 @@ export const App = ({
 				reset={reset}
 				latestMessage={latestMessage}
 				addMessage={addMessage}
-				interjectMessage={interjectMessage}
 				addMultipleMessages={addMultipleMessages}
 			/>
 		);
@@ -272,7 +268,6 @@ export const App = ({
 			handledOccupants={handledOccupants.map((h) => h.id)}
 			latestMessage={latestMessage}
 			addMessage={addMessage}
-			interjectMessage={interjectMessage}
 			addMultipleMessages={addMultipleMessages}
 			encounterRateModifier={encounterRateModifier}
 		/>

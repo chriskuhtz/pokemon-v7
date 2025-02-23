@@ -19,7 +19,6 @@ export const BattleOverview = ({
 	latestMessage,
 	addMessage,
 	addMultipleMessages,
-	interjectMessage,
 }: {
 	leave: (x: LeaveBattlePayload) => void;
 	opponents: BattlePokemon[];
@@ -30,7 +29,6 @@ export const BattleOverview = ({
 	latestMessage: Message | undefined;
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
-	interjectMessage: (message: Message) => void;
 }): JSX.Element => {
 	const [battleStarted, setBattleStarted] = useState<boolean>(false);
 
@@ -100,7 +98,6 @@ export const BattleOverview = ({
 			}))}
 			latestMessage={latestMessage}
 			addMessage={addMessage}
-			interjectMessage={interjectMessage}
 			addMultipleMessages={addMultipleMessages}
 		/>
 	);

@@ -18,7 +18,6 @@ export const BattleLoader = ({
 	latestMessage,
 	addMessage,
 	addMultipleMessages,
-	interjectMessage,
 }: {
 	leave: (x: LeaveBattlePayload) => void;
 	challenger: Challenger;
@@ -28,7 +27,6 @@ export const BattleLoader = ({
 	latestMessage: Message | undefined;
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
-	interjectMessage: (message: Message) => void;
 }): JSX.Element => {
 	const { res: battleOpponents } = useGetBattleTeam(
 		challenger.team.map((o) => ({
@@ -55,7 +53,6 @@ export const BattleLoader = ({
 			trainer={trainer}
 			latestMessage={latestMessage}
 			addMessage={addMessage}
-			interjectMessage={interjectMessage}
 			addMultipleMessages={addMultipleMessages}
 		/>
 	);
