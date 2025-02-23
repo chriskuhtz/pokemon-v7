@@ -1,10 +1,11 @@
+import { Message } from '../../../hooks/useMessageQueue';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
 export const handleAsleep = (
 	attacker: BattlePokemon,
-	addMessage: (x: string) => void
+	addMessage: (x: Message) => void
 ) => {
-	addMessage(`${attacker.data.name} is deeply asleep `);
+	addMessage({ message: `${attacker.data.name} is deeply asleep ` });
 
 	//UPDATES
 

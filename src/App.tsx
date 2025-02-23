@@ -52,7 +52,7 @@ export const App = ({
 		reset,
 		leaveBattleReducer,
 		addItemReducer,
-	} = useSaveFile(testState, (x: string) => addMessage({ message: x }));
+	} = useSaveFile(testState, addMessage);
 
 	const {
 		meta: { activeTab, currentChallenger },

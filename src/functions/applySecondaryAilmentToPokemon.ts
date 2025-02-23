@@ -1,4 +1,5 @@
 import { MoveName } from '../constants/checkLists/movesCheckList';
+import { Message } from '../hooks/useMessageQueue';
 import { SecondaryAilment } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { PokemonType } from '../interfaces/PokemonType';
@@ -8,7 +9,7 @@ import { isKO } from './isKo';
 export const applySecondaryAilmentToPokemon = (
 	pokemon: BattlePokemon,
 	ailment: SecondaryAilment['type'],
-	addMessage: (x: string) => void,
+	addMessage: (x: Message) => void,
 	newType?: PokemonType,
 	move?: MoveName
 ): BattlePokemon => {
@@ -24,15 +25,17 @@ export const applySecondaryAilmentToPokemon = (
 		return pokemon;
 	}
 	if (pokemon.ability === 'own-tempo' && ailment === 'confusion') {
-		addMessage(`${pokemon.data.name} prevents confusion with own tempo`);
+		addMessage({
+			message: `${pokemon.data.name} prevents confusion with own tempo`,
+		});
 		return pokemon;
 	}
 	if (pokemon.ability === 'oblivious' && ailment === 'infatuation') {
-		addMessage(`${pokemon.data.name} is oblivious`);
+		addMessage({ message: `${pokemon.data.name} is oblivious` });
 		return pokemon;
 	}
 	if (ailment === 'trap') {
-		addMessage(`${pokemon.data.name} became trapped`);
+		addMessage({ message: `${pokemon.data.name} became trapped` });
 		const duration = 2 + Math.round(Math.random() * 3);
 		return {
 			...pokemon,
@@ -43,7 +46,7 @@ export const applySecondaryAilmentToPokemon = (
 		};
 	}
 	if (ailment === 'confusion') {
-		addMessage(`${pokemon.data.name} became confused`);
+		addMessage({ message: `${pokemon.data.name} became confused` });
 		const duration = getMiddleOfThree([1, Math.round(Math.random() * 5), 5]);
 		return {
 			...pokemon,
@@ -54,7 +57,9 @@ export const applySecondaryAilmentToPokemon = (
 		};
 	}
 	if (ailment === 'flash-fire') {
-		addMessage(`${pokemon.data.name} raised its power with ${pokemon.ability}`);
+		addMessage({
+			message: `${pokemon.data.name} raised its power with ${pokemon.ability}`,
+		});
 		return {
 			...pokemon,
 			secondaryAilments: [
@@ -69,7 +74,7 @@ export const applySecondaryAilmentToPokemon = (
 		pokemon.secondaryAilments.find((a) => a.type === 'color-changed')
 			?.newType !== newType
 	) {
-		addMessage(`${pokemon.data.name} became a ${newType} pokemon`);
+		addMessage({ message: `${pokemon.data.name} became a ${newType} pokemon` });
 		return {
 			...pokemon,
 			secondaryAilments: [
@@ -79,7 +84,7 @@ export const applySecondaryAilmentToPokemon = (
 		};
 	}
 	if (ailment === 'guard-spec') {
-		addMessage(`guard spec applied`);
+		addMessage({ message: `guard spec applied` });
 		return {
 			...pokemon,
 			secondaryAilments: [
@@ -89,7 +94,7 @@ export const applySecondaryAilmentToPokemon = (
 		};
 	}
 	if (ailment === 'dire-hit') {
-		addMessage(`dire hit applied`);
+		addMessage({ message: `dire hit applied` });
 		return {
 			...pokemon,
 			secondaryAilments: [
@@ -102,7 +107,7 @@ export const applySecondaryAilmentToPokemon = (
 		if (!move) {
 			throw new Error('disabled has to be applied with move');
 		} else {
-			addMessage(`${pokemon.data.name}'s ${move} was disabled`);
+			addMessage({ message: `${pokemon.data.name}'s ${move} was disabled` });
 			return {
 				...pokemon,
 				secondaryAilments: [

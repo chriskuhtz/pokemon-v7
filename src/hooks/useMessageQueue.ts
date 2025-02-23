@@ -16,9 +16,12 @@ export const useMessageQueue = (
 	confirmLatestMessage: () => void;
 } => {
 	const [messages, setMessages] = useState<Message[]>([]);
-	const addMessage = useCallback((message: Message) => {
-		setMessages((messages) => [...messages, message]);
-	}, []);
+	const addMessage = useCallback(
+		(message: Message) => {
+			setMessages([...messages, message]);
+		},
+		[messages]
+	);
 	const addMultipleMessages = useCallback((newMessages: Message[]) => {
 		setMessages((messages) => [...messages, ...newMessages]);
 	}, []);
@@ -33,6 +36,7 @@ export const useMessageQueue = (
 		}
 		setMessages(messages.slice(1));
 	}, [messages]);
+
 	useEffect(() => {
 		if (messages.length === 0) {
 			return;

@@ -9,11 +9,9 @@ export const trailerMeadow: OverworldMap = {
 	width: 3,
 	tileMap: generateEmptyBackground(2, 3),
 	occupants: [
-		//npcs
-		600008,
 		//portals
 		700008,
 		//obstacles
-		800014, 800015,
+		800014,
 	],
 };

@@ -1,5 +1,6 @@
 import { applyCrashDamage } from '../../../functions/applyCrashDamage';
 import { changeMovePP } from '../../../functions/changeMovePP';
+import { Message } from '../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
@@ -7,9 +8,9 @@ export const handleMiss = (
 	attacker: BattlePokemon,
 	attack: BattleAttack,
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
-	addMessage: (x: string) => void
+	addMessage: (x: Message) => void
 ) => {
-	addMessage('It Missed');
+	addMessage({ message: 'It Missed' });
 	//UPDATES
 
 	//updated Attacker

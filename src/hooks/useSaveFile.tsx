@@ -18,6 +18,7 @@ import { EncounterChanceItem, ItemType } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { RoutesType } from '../interfaces/Routing';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
+import { Message } from './useMessageQueue';
 
 export const getHatchTimeModifier = (team: OwnedPokemon[]): number => {
 	return team.some((t) => t.ability === 'magma-armor') ? 2 : 1;
@@ -88,7 +89,7 @@ export interface UseSaveFile {
 
 export const useSaveFile = (
 	init: SaveFile,
-	addMessage: (x: string) => void
+	addMessage: (x: Message) => void
 ): UseSaveFile => {
 	const local = window.localStorage.getItem(localStorageId);
 	const loaded = local ? (JSON.parse(local) as SaveFile) : init;
@@ -202,7 +203,7 @@ export const useSaveFile = (
 			saveFile.encounterRateModifier
 		);
 		if (saveFile.encounterRateModifier && !updatedModifier) {
-			addMessage(`Encounter Rate Modifier ended`);
+			addMessage({ message: `Encounter Rate Modifier ended` });
 		}
 		setSaveFile(
 			{
@@ -272,7 +273,7 @@ export const useSaveFile = (
 			},
 			'talkToNurse'
 		);
-		addMessage('Whole Team fully healed');
+		addMessage({ message: 'Whole Team fully healed' });
 	};
 	const useSacredAshReducer = () => {
 		setSaveFile(
@@ -293,7 +294,7 @@ export const useSaveFile = (
 			},
 			'sacredAsh'
 		);
-		addMessage('Whole Team fully healed');
+		addMessage({ message: 'Whole Team fully healed' });
 	};
 
 	const handleOccupantReducer = (id: number) => {
@@ -308,21 +309,21 @@ export const useSaveFile = (
 		let newInventory = { ...saveFile.inventory };
 		if (occ.type === 'NPC' && occ.gifts) {
 			Object.entries(occ.gifts).forEach(([item, amount]) => {
-				addMessage(`received ${amount} ${item}`);
+				addMessage({ message: `received ${amount} ${item}` });
 			});
 
 			newInventory = joinInventories(newInventory, occ.gifts);
 		}
 		if (occ.type === 'ITEM' || occ.type === 'HIDDEN_ITEM') {
 			const { item, amount } = occ;
-			addMessage(`found ${amount} ${item}`);
+			addMessage({ message: `found ${amount} ${item}` });
 
 			newInventory = joinInventories(newInventory, { [item]: amount });
 		}
 		const updatedQuests = saveFile.quests;
 		if (occ.type === 'NPC' && occ.quest) {
 			const { quest } = occ;
-			addMessage(`new quest: ${quest}`);
+			addMessage({ message: `new quest: ${quest}` });
 
 			if (updatedQuests[quest] === 'INACTIVE') {
 				updatedQuests[quest] = 'ACTIVE';
@@ -488,7 +489,7 @@ export const useSaveFile = (
 	const applyEncounterRateModifierItem = (item: EncounterChanceItem) => {
 		let modifier: { factor: number; steps: number } = { factor: 0, steps: 0 };
 		if (saveFile.encounterRateModifier) {
-			addMessage('There is already a encounter rate modifier');
+			addMessage({ message: 'There is already a encounter rate modifier' });
 			return;
 		}
 		if (item === 'white-flute') {
@@ -507,7 +508,7 @@ export const useSaveFile = (
 			modifier = { factor: 0, steps: 500 };
 		}
 
-		addMessage(`${item} applied`);
+		addMessage({ message: `${item} applied` });
 		setSaveFile(
 			{
 				...saveFile,

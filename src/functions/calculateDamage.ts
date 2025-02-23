@@ -4,6 +4,7 @@ import {
 	levelDamageMoves,
 } from '../constants/fixedDamageMoves';
 import { flyDoubleDamageMoves, ohkoMoves } from '../constants/ohkoMoves';
+import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { PokemonType } from '../interfaces/PokemonType';
@@ -37,7 +38,7 @@ export const calculateDamage = (
 	weather: WeatherType | undefined,
 	calculateCrits: boolean,
 	targetIsFlying: boolean,
-	addMessage?: (x: string) => void
+	addMessage?: (x: Message) => void
 ): number => {
 	const damageClass = attack.data.damage_class.name;
 	if (damageClass === 'status') {
@@ -56,7 +57,7 @@ export const calculateDamage = (
 			return attacker.lastReceivedDamage.damage * 2;
 		} else {
 			if (addMessage) {
-				addMessage('Counter failed');
+				addMessage({ message: 'Counter failed' });
 			}
 			return 0;
 		}
@@ -64,7 +65,7 @@ export const calculateDamage = (
 	if (ohkoMoves.includes(attack.name)) {
 		if (target.ability === 'sturdy') {
 			if (addMessage) {
-				addMessage('sturdy prevents One Hit K.O moves');
+				addMessage({ message: 'sturdy prevents One Hit K.O moves' });
 			}
 			return 0;
 		}
@@ -85,7 +86,9 @@ export const calculateDamage = (
 	if (absorbAbility === attack.data.type.name) {
 		const res = Math.max(-Math.floor(target.stats.hp / 4), -target.damage);
 		if (addMessage && res < 0) {
-			addMessage(`${target.data.name} was healed by ${target.ability}`);
+			addMessage({
+				message: `${target.data.name} was healed by ${target.ability}`,
+			});
 		}
 		return res;
 	}
@@ -106,7 +109,7 @@ export const calculateDamage = (
 			? 2
 			: 1;
 	if (critFactor === 2 && addMessage) {
-		addMessage('critical hit!');
+		addMessage({ message: 'critical hit!' });
 	}
 
 	const atk =
@@ -182,7 +185,7 @@ export const calculateDamage = (
 		res > target.stats.hp
 	) {
 		if (addMessage) {
-			addMessage(`${target.data.name} hung on with sturdy`);
+			addMessage({ message: `${target.data.name} hung on with sturdy` });
 		}
 		return target.stats.hp - 1;
 	}

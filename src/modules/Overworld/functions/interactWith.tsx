@@ -117,13 +117,15 @@ export const interactWithFunction = ({
 		});
 
 		if (!handledOccupants.includes(Number.parseInt(id))) {
-			data.unhandledMessage.forEach((d) =>
+			data.unhandledMessage.forEach((d, i) =>
 				addMessage({
 					message: d,
+					onRemoval:
+						i === data.unhandledMessage.length - 1
+							? () => handleThisOccupant(Number.parseInt(id))
+							: undefined,
 				})
 			);
-
-			handleThisOccupant(Number.parseInt(id));
 		} else {
 			(data.handledMessage ?? data.unhandledMessage).forEach((d) =>
 				addMessage({

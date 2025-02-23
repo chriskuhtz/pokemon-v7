@@ -9,19 +9,11 @@ export const camp: OverworldMap = {
 	height: 10,
 	tileMap: generateEmptyBackground(10, 20, true),
 	occupants: [
-		//items
-		0, 1, 2,
-		// trainers
-		200001, 200002,
-		//bushes
-		500001,
 		//npcs
-		600001, 600002, 600003, 600004, 600005, 600007,
+		600001, 600003, 600004, 600007,
 		//portals
 		700001, 700003, 700005, 700007,
-		//obstacles
-		800001, 800003, 800004, 800005, 800006, 800007, 800008, 800009, 800010,
-		800011, 800012,
+
 		//signs
 		900001,
 	],

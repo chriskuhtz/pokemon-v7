@@ -1,3 +1,4 @@
+import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { determineTypeFactor } from './determineTypeFactor';
@@ -7,7 +8,7 @@ export const handleFlinching = (
 	attacker: BattlePokemon,
 	target: BattlePokemon,
 	attack: BattleAttack,
-	addMessage: (x: string) => void
+	addMessage: (x: Message) => void
 ): BattlePokemon => {
 	const typeFactor = determineTypeFactor(target, attack);
 
@@ -22,7 +23,7 @@ export const handleFlinching = (
 	const willFlinch = targetFlinched(attacker, target, attack);
 
 	if (willFlinch) {
-		addMessage(`${target.data.name} flinched!`);
+		addMessage({ message: `${target.data.name} flinched!` });
 		return { ...target, moveQueue: [] };
 	}
 

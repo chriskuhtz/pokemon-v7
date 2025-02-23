@@ -1,38 +1,11 @@
 import { getTimeOfDay } from '../../functions/getTimeOfDay';
 import { Occupant } from '../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
-import { testOpponent } from '../gameData';
 import { STANDARD_BUY_MARKET } from '../standardBuyMarket';
 
 export const occupantsRecord: Record<number, Occupant> = {
 	//items start at 0
-	0: {
-		type: 'ITEM',
-		item: 'poke-ball',
-		x: 0,
-		y: 9,
-		amount: 1,
-		map: 'camp',
-		conditionFunction: () => true,
-	},
-	1: {
-		type: 'ITEM',
-		item: 'potion',
-		x: 11,
-		y: 1,
-		amount: 2,
-		map: 'camp',
-		conditionFunction: () => true,
-	},
-	2: {
-		type: 'HIDDEN_ITEM',
-		item: 'antidote',
-		x: 13,
-		y: 2,
-		amount: 1,
-		map: 'camp',
-		conditionFunction: () => true,
-	},
+
 	//PCS start at 100000
 	100001: {
 		type: 'PC',
@@ -43,36 +16,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		conditionFunction: () => true,
 	},
 	//Trainers start at 200000
-	200001: {
-		type: 'TRAINER',
-		x: 12,
-		y: 7,
-		map: 'camp',
-		orientation: 'LEFT',
-		unhandledMessage: ['fight me', 'big dog'],
-		handledMessage: ['you are the big dog, big dog'],
-		sprite: SpriteEnum['sailor'],
-		team: [{ ...testOpponent, dexId: 66 }],
-		name: 'Sailor Bob',
-		conditionFunction: () => true,
-	},
-	200002: {
-		type: 'TRAINER',
-		x: 8,
-		y: 8,
-		map: 'camp',
-		orientation: 'RIGHT',
-		unhandledMessage: ['Watt up', 'can you feel the electricity'],
-		handledMessage: ['I short circuited'],
-		sprite: SpriteEnum['rocker'],
-		team: [
-			{ ...testOpponent, dexId: 100 },
-			{ ...testOpponent, dexId: 309 },
-			{ ...testOpponent, dexId: 522 },
-		],
-		name: 'Electrician Erik',
-		conditionFunction: () => true,
-	},
+
 	//Merchants start at 300000,
 	300001: {
 		type: 'MERCHANT',
@@ -101,13 +45,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		conditionFunction: () => true,
 	},
 	//Bushes start at 500000,
-	500001: {
-		type: 'BUSH',
-		x: 19,
-		y: 1,
-		map: 'camp',
-		conditionFunction: () => true,
-	},
+
 	//NPCs start at 600000
 	600001: {
 		type: 'NPC',
@@ -120,28 +58,10 @@ export const occupantsRecord: Record<number, Occupant> = {
 			'Can you become the best of them all?',
 		],
 		handledMessage: ['I cant wait to grow up and become a trainer'],
-		quest: 'Defeat all the Trainers in the meadow',
 		sprite: SpriteEnum['boy'],
 		conditionFunction: () => getTimeOfDay() !== 'NIGHT',
 	},
-	600002: {
-		type: 'NPC',
-		x: 9,
-		y: 1,
-		map: 'camp',
-		orientation: 'LEFT',
-		unhandledMessage: [
-			'did you know?',
-			'some pokemon only appear in the morning!',
-			'These might help you catch them',
-		],
-		handledMessage: ['did you find one?'],
-		sprite: SpriteEnum['uncle'],
-		gifts: { 'quick-ball': 5 },
-		quest: 'Catch a morning pokemon from the meadow',
-		movement: { path: ['RIGHT', 'LEFT'], currentStep: 0 },
-		conditionFunction: () => true,
-	},
+
 	600003: {
 		type: 'NPC',
 		x: 10,
@@ -174,23 +94,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		quest: 'Train a Pokemon to lvl 10',
 		conditionFunction: () => getTimeOfDay() !== 'NIGHT',
 	},
-	600005: {
-		type: 'NPC',
-		x: 16,
-		y: 4,
-		map: 'camp',
 
-		orientation: 'DOWN',
-		gifts: { 'dusk-ball': 5 },
-		unhandledMessage: [
-			'During the day, i work in the city',
-			'I come here at night to search for zorua',
-			'These Dusk balls work well at night',
-		],
-		quest: 'Catch a Zorua at night in the meadow',
-		sprite: SpriteEnum['builder'],
-		conditionFunction: () => getTimeOfDay() === 'NIGHT',
-	},
 	600006: {
 		type: 'NPC',
 		x: 1,
@@ -212,10 +116,10 @@ export const occupantsRecord: Record<number, Occupant> = {
 	},
 	600007: {
 		type: 'NPC',
-		x: 7,
+		x: 4,
 		y: 2,
 		map: 'camp',
-		orientation: 'LEFT',
+		orientation: 'DOWN',
 		gifts: {
 			repel: 5,
 			'poke-ball': 10,
@@ -226,10 +130,9 @@ export const occupantsRecord: Record<number, Occupant> = {
 			'I am Gary, the other research assistant',
 			'Professor Oak is my Grandpa',
 			'So i am basically your boss!',
-			'Unfortunately',
-			'we still have to share',
-			'that old trailer next to the lab.',
-			'Before i forget',
+			'This trailer will be your home',
+			'Its not much, but it will keep you warm and dry',
+			'...Before i forget',
 			'here is your starter kit',
 			'smell ya later, small dog',
 		],
@@ -237,23 +140,13 @@ export const occupantsRecord: Record<number, Occupant> = {
 		sprite: SpriteEnum['gary'],
 		conditionFunction: (s) => !s.handledOccupants.some((h) => h.id === 600007),
 	},
-	600008: {
-		type: 'NPC',
-		x: 2,
-		y: 0,
-		map: 'trailer_meadow',
-		orientation: 'LEFT',
 
-		unhandledMessage: ['Dont even think about it', 'this one is my bed'],
-		sprite: SpriteEnum['gary'],
-		conditionFunction: (s) => s.handledOccupants.some((h) => h.id === 600007),
-	},
 	//Portals start at 700000
 	700001: {
 		type: 'PORTAL',
 		map: 'camp',
 		x: 2,
-		y: 0,
+		y: 1,
 
 		sprite: '/mapObjects/houses/market.png',
 		portal: {
@@ -275,7 +168,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		portal: {
 			forwardFoot: 'CENTER1',
 			x: 2,
-			y: 1,
+			y: 2,
 			orientation: 'DOWN',
 			mapId: 'camp',
 		},
@@ -284,8 +177,8 @@ export const occupantsRecord: Record<number, Occupant> = {
 	700003: {
 		type: 'PORTAL',
 		map: 'camp',
-		x: 3,
-		y: 0,
+		x: 1,
+		y: 1,
 
 		sprite: '/mapObjects/houses/pokemonCenter.png',
 		portal: {
@@ -306,8 +199,8 @@ export const occupantsRecord: Record<number, Occupant> = {
 		sprite: '/mapObjects/doormat.png',
 		portal: {
 			forwardFoot: 'CENTER1',
-			x: 3,
-			y: 1,
+			x: 1,
+			y: 2,
 			orientation: 'DOWN',
 			mapId: 'camp',
 		},
@@ -316,8 +209,8 @@ export const occupantsRecord: Record<number, Occupant> = {
 	700005: {
 		type: 'PORTAL',
 		map: 'camp',
-		x: 5,
-		y: 0,
+		x: 3,
+		y: 1,
 
 		sprite: '/mapObjects/houses/blueRoof.png',
 		portal: {
@@ -338,8 +231,8 @@ export const occupantsRecord: Record<number, Occupant> = {
 		sprite: '/mapObjects/doormat.png',
 		portal: {
 			forwardFoot: 'CENTER1',
-			x: 5,
-			y: 1,
+			x: 3,
+			y: 2,
 			orientation: 'DOWN',
 			mapId: 'camp',
 		},
@@ -348,8 +241,8 @@ export const occupantsRecord: Record<number, Occupant> = {
 	700007: {
 		type: 'PORTAL',
 		map: 'camp',
-		x: 6,
-		y: 0,
+		x: 4,
+		y: 1,
 
 		sprite: '/mapObjects/houses/trailer.png',
 		portal: {
@@ -370,114 +263,15 @@ export const occupantsRecord: Record<number, Occupant> = {
 		sprite: '/mapObjects/doormat.png',
 		portal: {
 			forwardFoot: 'CENTER1',
-			x: 6,
-			y: 1,
+			x: 4,
+			y: 2,
 			orientation: 'DOWN',
 			mapId: 'camp',
 		},
 		conditionFunction: () => true,
 	},
 	//obstacles start at 800000
-	800001: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
-		x: 7,
-		y: 0,
-		map: 'camp',
-		conditionFunction: () => true,
-	},
-	800003: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
 
-		x: 7,
-		y: 3,
-		map: 'camp',
-		conditionFunction: () => true,
-	},
-	800004: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
-		x: 7,
-		y: 4,
-		map: 'camp',
-		conditionFunction: () => true,
-	},
-	800005: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
-		x: 7,
-		y: 5,
-		map: 'camp',
-		conditionFunction: () => true,
-	},
-	800006: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
-		x: 6,
-		y: 5,
-		map: 'camp',
-		conditionFunction: () => true,
-	},
-	800007: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
-		x: 5,
-		y: 5,
-		map: 'camp',
-		conditionFunction: () => true,
-	},
-	800008: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
-		x: 4,
-		y: 5,
-		map: 'camp',
-		conditionFunction: () => true,
-	},
-	800009: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
-		x: 3,
-		y: 5,
-		map: 'camp',
-		conditionFunction: () => true,
-	},
-	800010: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
-		x: 2,
-		y: 5,
-		map: 'camp',
-		conditionFunction: () => true,
-	},
-	800011: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
-		x: 1,
-		y: 5,
-		map: 'camp',
-		conditionFunction: () => true,
-	},
-	800012: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
-		x: 0,
-		y: 5,
-		map: 'camp',
-		conditionFunction: () => true,
-	},
 	800013: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/bookshelf.png',
@@ -491,14 +285,6 @@ export const occupantsRecord: Record<number, Occupant> = {
 		sprite: '/mapObjects/mattress.png',
 		x: 0,
 		y: 0,
-		map: 'trailer_meadow',
-		conditionFunction: () => true,
-	},
-	800015: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/mattress.png',
-		x: 2,
-		y: 1,
 		map: 'trailer_meadow',
 		conditionFunction: () => true,
 	},

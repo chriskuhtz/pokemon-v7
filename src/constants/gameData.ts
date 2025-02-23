@@ -49,10 +49,10 @@ export const testState: SaveFile = {
 	},
 	location: {
 		mapId: 'camp',
-		orientation: 'DOWN',
+		orientation: 'RIGHT',
 		forwardFoot: 'CENTER1',
-		x: 5,
-		y: 2,
+		x: 1,
+		y: 5,
 	},
 	handledOccupants: [],
 	lastEdited: new Date().getTime(),

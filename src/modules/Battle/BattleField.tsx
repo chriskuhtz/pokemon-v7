@@ -403,7 +403,7 @@ export const BattleField = ({
 				if (p.status === 'ONFIELD') {
 					let updated = applyEndOfTurnAbility({
 						pokemon: p,
-						addMessage: (x) => collectedMessages.push(x),
+						addMessage: (x) => collectedMessages.push(x.message),
 					});
 					updated = applyEndOfTurnHeldItem(updated, (x) =>
 						collectedMessages.push(x)

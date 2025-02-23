@@ -1,3 +1,4 @@
+import { Message } from '../../../hooks/useMessageQueue';
 import {
 	CONFUSION_HURT_CHANCE,
 	PARA_CHANCE,
@@ -17,14 +18,14 @@ export const handleMoveBlockAilments = ({
 }: {
 	attacker: BattlePokemon;
 	attack: BattleAttack | ChargeUp;
-	addMessage: (x: string) => void;
+	addMessage: (x: Message) => void;
 }): { canAttack: boolean; updatedAttacker: BattlePokemon } => {
 	let updatedAttacker = { ...attacker };
 
 	if (updatedAttacker.primaryAilment?.type === 'freeze') {
 		const defrosted = Math.random() <= UNFREEZE_CHANCE;
 		if (defrosted) {
-			addMessage(`${attacker.data.name} was thawed out`);
+			addMessage({ message: `${attacker.data.name} was thawed out` });
 			updatedAttacker.primaryAilment = undefined;
 		} else {
 			updatedAttacker = handleFrozen(attacker, addMessage);
@@ -36,7 +37,7 @@ export const handleMoveBlockAilments = ({
 			updatedAttacker.primaryAilment.duration &&
 			updatedAttacker.primaryAilment.duration <= 0;
 		if (wokeUp) {
-			addMessage(`${attacker.data.name} woke Up`);
+			addMessage({ message: `${attacker.data.name} woke Up` });
 			updatedAttacker.primaryAilment = undefined;
 		} else {
 			updatedAttacker = handleAsleep(attacker, addMessage);
@@ -57,9 +58,9 @@ export const handleMoveBlockAilments = ({
 	if (confusionAilment) {
 		const snappedOut = confusionAilment && confusionAilment.duration === 0;
 		const hitHimself = Math.random() <= CONFUSION_HURT_CHANCE;
-		addMessage(`${attacker.data.name} is confused`);
+		addMessage({ message: `${attacker.data.name} is confused` });
 		if (snappedOut) {
-			addMessage(`${attacker.data.name} snapped out of confusion`);
+			addMessage({ message: `${attacker.data.name} snapped out of confusion` });
 			updatedAttacker.secondaryAilments =
 				updatedAttacker.secondaryAilments.filter((a) => a.type !== 'confusion');
 		} else {
@@ -71,7 +72,9 @@ export const handleMoveBlockAilments = ({
 		updatedAttacker.secondaryAilments.find((a) => a.type === 'disable')
 			?.move === attack.name;
 	if (disabledMove) {
-		addMessage(`${attacker.data.name}'s ${attack.name} is disabled`);
+		addMessage({
+			message: `${attacker.data.name}'s ${attack.name} is disabled`,
+		});
 		return {
 			canAttack: false,
 			updatedAttacker: { ...updatedAttacker, moveQueue: [] },
