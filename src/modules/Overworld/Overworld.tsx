@@ -1,3 +1,4 @@
+import { isEqual } from 'lodash';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { IoMdMenu } from 'react-icons/io';
 import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
@@ -72,8 +73,8 @@ export const Overworld = ({
 		Partial<Record<OccupantName, Occupant>>
 	>({});
 
-	useEffect(() => {
-		const filteredOccupants = [...map.occupants].filter((o) => {
+	const filteredOccupants = useMemo(() => {
+		const f = [...map.occupants].filter((o) => {
 			const occ = occupantsRecord[o];
 
 			if (occ.type === 'ITEM' && handledOccupants.includes(o)) {
@@ -88,14 +89,18 @@ export const Overworld = ({
 
 			return occ.conditionFunction(saveFile);
 		});
-		setStatefulOccupants(
-			Object.fromEntries(
-				Object.entries(occupantsRecord).filter(([id]) =>
-					filteredOccupants.includes(id as OccupantName)
-				)
+
+		return Object.fromEntries(
+			Object.entries(occupantsRecord).filter(([id]) =>
+				f.includes(id as OccupantName)
 			)
 		);
 	}, [handledOccupants, map, saveFile]);
+	useEffect(() => {
+		if (!isEqual(statefulOccupants, filteredOccupants)) {
+			setStatefulOccupants(filteredOccupants);
+		}
+	}, [filteredOccupants, handledOccupants, map, saveFile, statefulOccupants]);
 	const changeOccupant = useCallback(
 		(id: OccupantName, updatedOccupant: Occupant) => {
 			setStatefulOccupants((statefulOccupants) => {
@@ -107,6 +112,60 @@ export const Overworld = ({
 		},
 		[]
 	);
+	//Walk the npcs
+	// useEffect(() => {
+	// 	if (latestMessage) {
+	// 		//stop movement during dialogue
+	// 		return;
+	// 	}
+	// 	if (
+	// 		Object.values(statefulOccupants).some(
+	// 			(occ) => occ.type === 'NPC' && occ.movement
+	// 		)
+	// 	) {
+	// 		const t = setTimeout(() => {
+	// 			setStatefulOccupants(
+	// 				Object.fromEntries(
+	// 					Object.entries(statefulOccupants).map(([id, occ]) => {
+	// 						if (occ.type === 'NPC' && occ.movement && Math.random() > 0.5) {
+	// 							const step = occ.movement.path[occ.movement.currentStep];
+	// 							const update =
+	// 								step === occ.orientation
+	// 									? getNextLocation(
+	// 											{
+	// 												x: occ.x,
+	// 												y: occ.y,
+	// 												orientation: occ.orientation,
+	// 												forwardFoot: 'CENTER1',
+	// 												mapId: occ.map,
+	// 											},
+	// 											step
+	// 									  )
+	// 									: { orientation: step };
+	// 							return [
+	// 								id,
+	// 								{
+	// 									...occ,
+	// 									...update,
+	// 									movement: {
+	// 										...occ.movement,
+	// 										currentStep: overflow(
+	// 											occ.movement.currentStep,
+	// 											occ.movement.path.length
+	// 										),
+	// 									},
+	// 								},
+	// 							];
+	// 						}
+	// 						return [id, occ];
+	// 					})
+	// 				)
+	// 			);
+	// 		}, animationTimer);
+
+	// 		return () => clearTimeout(t);
+	// 	}
+	// }, [latestMessage, statefulOccupants]);
 
 	const assembledMap = useMemo(
 		() => assembleMap(map, statefulOccupants),
@@ -127,12 +186,7 @@ export const Overworld = ({
 	//DRAWING
 	useDrawCharacter(playerCanvasId, playerLocation, playerSprite);
 	useDrawBackground(backgroundCanvasId, map);
-	useDrawOccupants(
-		occupantsCanvasId,
-		!!latestMessage,
-		statefulOccupants,
-		setStatefulOccupants
-	);
+	useDrawOccupants(occupantsCanvasId, statefulOccupants);
 	//INTERACTION
 	const interactWith = useCallback(
 		(occ: [string, Occupant] | undefined) =>

@@ -23,7 +23,6 @@ export const Quests = ({
 	goBack: () => void;
 	saveFile: SaveFile;
 }) => {
-	console.log(quests);
 	if (Object.values(quests).filter((v) => v !== 'INACTIVE').length === 0) {
 		return (
 			<Page headline={'Quests:'} goBack={goBack}>

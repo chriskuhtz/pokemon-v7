@@ -1,8 +1,7 @@
 import { isEqual } from 'lodash';
 import { useEffect, useState } from 'react';
 import { OccupantName } from '../../../constants/checkLists/occupantsRecord';
-import { animationTimer, baseSize } from '../../../constants/gameData';
-import { getNextLocation } from '../../../functions/getNextLocation';
+import { baseSize } from '../../../constants/gameData';
 import {
 	getTimeOfDay,
 	OverworldShaderMap,
@@ -19,70 +18,11 @@ export const overflow = (current: number, excludedMax: number) => {
 
 export const useDrawOccupants = (
 	canvasId: string,
-	activeMessage: boolean,
-	statefulOccupants: Partial<Record<OccupantName, Occupant>>,
-	setStatefulOccupants: React.Dispatch<
-		React.SetStateAction<Record<number, Occupant>>
-	>
+	statefulOccupants: Partial<Record<OccupantName, Occupant>>
 ) => {
 	const [lastDrawnOccupants, setLastDrawnOccupants] = useState<
 		Partial<Record<OccupantName, Occupant>>
 	>({});
-
-	//Walk the npcs
-	useEffect(() => {
-		if (activeMessage) {
-			//stop movement during dialogue
-			return;
-		}
-		if (
-			Object.values(statefulOccupants).some(
-				(occ) => occ.type === 'NPC' && occ.movement
-			)
-		) {
-			const t = setTimeout(() => {
-				setStatefulOccupants(
-					Object.fromEntries(
-						Object.entries(statefulOccupants).map(([id, occ]) => {
-							if (occ.type === 'NPC' && occ.movement && Math.random() > 0.5) {
-								const step = occ.movement.path[occ.movement.currentStep];
-								const update =
-									step === occ.orientation
-										? getNextLocation(
-												{
-													x: occ.x,
-													y: occ.y,
-													orientation: occ.orientation,
-													forwardFoot: 'CENTER1',
-													mapId: occ.map,
-												},
-												step
-										  )
-										: { orientation: step };
-								return [
-									id,
-									{
-										...occ,
-										...update,
-										movement: {
-											...occ.movement,
-											currentStep: overflow(
-												occ.movement.currentStep,
-												occ.movement.path.length
-											),
-										},
-									},
-								];
-							}
-							return [id, occ];
-						})
-					)
-				);
-			}, animationTimer);
-
-			return () => clearTimeout(t);
-		}
-	}, [activeMessage, setStatefulOccupants, statefulOccupants]);
 
 	//draw the npcs
 	useEffect(() => {

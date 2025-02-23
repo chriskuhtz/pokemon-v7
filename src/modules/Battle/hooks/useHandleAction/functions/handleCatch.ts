@@ -95,25 +95,8 @@ export const handleCatch = (
 		[
 			{
 				message: `You throw a ${move.ball} at ${target.data.name}`,
-				onRemoval: () =>
-					setPokemon((pokemon) =>
-						pokemon.map((p) => {
-							if (p.id === attacker.id) {
-								return { ...p, moveQueue: [] };
-							}
-							if (p.id === target.id) {
-								return {
-									...p,
-
-									status: `CATCHING_1`,
-									ball: move.ball,
-								};
-							}
-
-							return p;
-						})
-					),
 			},
+			getCatchStepMessage(1),
 			check1 ? getCatchStepMessage(2) : undefined,
 			check1 && check2 ? getCatchStepMessage(3) : undefined,
 			check1 && check2 && check3

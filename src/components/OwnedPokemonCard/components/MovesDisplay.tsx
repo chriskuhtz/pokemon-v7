@@ -1,11 +1,13 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { MdEdit } from 'react-icons/md';
 import { MoveName } from '../../../constants/checkLists/movesCheckList';
 import { baseSize } from '../../../constants/gameData';
+import { calculateLevelData } from '../../../functions/calculateLevelData';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { PokemonData } from '../../../interfaces/PokemonData';
 import { SelectionListModal } from '../../../uiComponents/SelectionListModal/SelectionListModal';
+import { moveIsAvailable } from '../../../functions/moveIsAvailable';
 
 export const MovesDisplay = ({
 	ownedPokemon,
@@ -21,6 +23,10 @@ export const MovesDisplay = ({
 		() => getMovesArray(ownedPokemon).map((m) => m.name),
 		[ownedPokemon]
 	);
+	const level = useMemo(
+		() => calculateLevelData(ownedPokemon.xp).level,
+		[ownedPokemon]
+	);
 
 	const [newMoveNames, setNewMoveNames] = useState<MoveName[]>([]);
 	useEffect(() => {
@@ -30,10 +36,15 @@ export const MovesDisplay = ({
 		() => [
 			...currentMoves,
 			...data.moves
-				.map((m) => m.move.name)
-				.filter((m) => !currentMoves.includes(m as MoveName)),
+				.filter((m) => {
+					if (currentMoves.includes(m.move.name as MoveName)) {
+						return false;
+					}
+					return moveIsAvailable(m, level);
+				})
+				.map((m) => m.move.name),
 		],
-		[currentMoves, data.moves]
+		[currentMoves, data.moves, level]
 	);
 
 	return (

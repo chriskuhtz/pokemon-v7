@@ -10,6 +10,7 @@ import { changeMovePP } from '../../../../../functions/changeMovePP';
 import { determineMiss } from '../../../../../functions/determineMiss';
 import { getRandomIndex } from '../../../../../functions/filterTargets';
 import { getActualTargetId } from '../../../../../functions/getActualTargetId';
+import { getMiddleOfThree } from '../../../../../functions/getMiddleOfThree';
 import { handleFlinching } from '../../../../../functions/handleFlinching';
 import { isKO } from '../../../../../functions/isKo';
 import { Message } from '../../../../../hooks/useMessageQueue';
@@ -273,7 +274,11 @@ export const handleAttack = ({
 	// check attacker  drain/recoil
 	const drain = move.data.meta.drain;
 	if (drain) {
-		const drained = Math.round((attacker.damage * drain) / 100);
+		const drained = getMiddleOfThree([
+			1,
+			Math.round((attacker.damage * drain) / 100),
+			attacker.stats.hp,
+		]);
 		updatedAttacker = {
 			...updatedAttacker,
 			damage: updatedAttacker.damage - drained,
