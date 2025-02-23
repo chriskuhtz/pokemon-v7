@@ -1,3 +1,4 @@
+import { Message } from '../hooks/useMessageQueue';
 import {
 	isPrimaryAilment,
 	isSecondaryAilment,
@@ -15,7 +16,7 @@ export const applyAttackAilmentsToPokemon = (
 	target: BattlePokemon,
 	applicator: BattlePokemon,
 	attack: BattleAttack,
-	addMessage: (x: string) => void
+	addMessage: (x: Message) => void
 ): { updatedTarget: BattlePokemon; updatedApplicator: BattlePokemon } => {
 	if (
 		//shield dust prevents all side effects
@@ -45,7 +46,7 @@ export const applyAttackAilmentsToPokemon = (
 			const moves = getMovesArray(target, false);
 			const randomMoveName = moves[getRandomIndex(moves.length)].name;
 			if (moves.length === 1) {
-				addMessage(`cant disable ${target.data.name}'s only move`);
+				addMessage({ message: `cant disable ${target.data.name}'s only move` });
 				return { updatedApplicator: applicator, updatedTarget: target };
 			}
 			return {

@@ -1,4 +1,5 @@
 import { changeMovePP } from '../../../functions/changeMovePP';
+import { Message } from '../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
@@ -6,11 +7,13 @@ export const handleDampy = (
 	attacker: BattlePokemon,
 	attack: BattleAttack,
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
-	addMessage: (x: string) => void,
+	addMessage: (x: Message) => void,
 	dampy: { name: string }
 ) => {
-	addMessage(`${attacker.data.name} used ${attack.name} `);
-	addMessage(`${dampy.name} prevents self destructing moves with damp`);
+	addMessage({ message: `${attacker.data.name} used ${attack.name} ` });
+	addMessage({
+		message: `${dampy.name} prevents self destructing moves with damp`,
+	});
 	//UPDATES
 
 	//updated Attacker

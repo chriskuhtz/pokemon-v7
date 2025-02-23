@@ -1,3 +1,4 @@
+import { Message } from '../hooks/useMessageQueue';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 
@@ -6,7 +7,7 @@ export const applyEndOfTurnAbility = ({
 	addMessage,
 }: {
 	pokemon: BattlePokemon;
-	addMessage: (x: string) => void;
+	addMessage: (x: Message) => void;
 }): BattlePokemon => {
 	if (pokemon.ability === 'speed-boost') {
 		return applyStatChangeToPokemon(
@@ -23,7 +24,9 @@ export const applyEndOfTurnAbility = ({
 		pokemon.ability === 'limber' &&
 		pokemon.primaryAilment?.type === 'paralysis'
 	) {
-		addMessage(`${pokemon.data.name} was cured of paralysis by limber`);
+		addMessage({
+			message: `${pokemon.data.name} was cured of paralysis by limber`,
+		});
 		return { ...pokemon, primaryAilment: undefined };
 	}
 	return pokemon;

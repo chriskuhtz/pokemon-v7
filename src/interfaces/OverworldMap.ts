@@ -5,9 +5,11 @@
  * 0 = empty field
  * 1 = encounter possible
  * 2 = blocked field
+ * 3 = border
  */
 
 import { MapId } from '../constants/checkLists/mapsRecord';
+import { OccupantName } from '../constants/checkLists/occupantsRecord';
 import { QuestName } from '../constants/checkLists/questsRecord';
 import { TimeOfDay } from '../functions/getTimeOfDay';
 import { Inventory } from './Inventory';
@@ -116,10 +118,11 @@ export interface OverworldMap {
 	id: MapId;
 	backgroundTile: string;
 	encounterTile?: string;
+	borderTile?: string;
 	possibleEncounters: Record<TimeOfDay, OverworldEncounter[]>;
 	width: number;
 	height: number;
 	tileMap: number[][];
-	occupants: number[];
+	occupants: OccupantName[];
 	weather?: WeatherType;
 }

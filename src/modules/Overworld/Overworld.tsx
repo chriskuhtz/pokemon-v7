@@ -2,7 +2,10 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { IoMdMenu } from 'react-icons/io';
 import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
-import { occupantsRecord } from '../../constants/checkLists/occupantsRecord';
+import {
+	OccupantName,
+	occupantsRecord,
+} from '../../constants/checkLists/occupantsRecord';
 import { baseSize } from '../../constants/gameData';
 import { assembleMap } from '../../functions/assembleMap';
 import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
@@ -44,6 +47,7 @@ export const Overworld = ({
 	latestMessage,
 	addMessage,
 	encounterRateModifier,
+	addMultipleMessages,
 }: {
 	openMenu: (stepsTaken: number) => void;
 	playerLocation: CharacterLocationData;
@@ -53,11 +57,11 @@ export const Overworld = ({
 	encounterRateModifier?: number;
 	openStorage: (stepsTaken: number) => void;
 	goToMarket: (marketInventory: Partial<Inventory>, stepsTaken: number) => void;
-	talkToNurse: (id: number) => void;
+	talkToNurse: (id: OccupantName) => void;
 	playerSprite: string;
 	receiveItems: (item: ItemType, amount: number) => void;
-	handledOccupants: number[];
-	handleThisOccupant: (id: number) => void;
+	handledOccupants: OccupantName[];
+	handleThisOccupant: (id: OccupantName) => void;
 	cutterPokemon?: { dexId: number };
 	saveFile: SaveFile;
 	latestMessage: Message | undefined;
@@ -65,7 +69,7 @@ export const Overworld = ({
 	addMultipleMessages: (newMessages: Message[]) => void;
 }) => {
 	const [statefulOccupants, setStatefulOccupants] = useState<
-		Record<number, Occupant>
+		Partial<Record<OccupantName, Occupant>>
 	>({});
 
 	useEffect(() => {
@@ -87,13 +91,13 @@ export const Overworld = ({
 		setStatefulOccupants(
 			Object.fromEntries(
 				Object.entries(occupantsRecord).filter(([id]) =>
-					filteredOccupants.includes(Number.parseInt(id))
+					filteredOccupants.includes(id as OccupantName)
 				)
 			)
 		);
 	}, [handledOccupants, map, saveFile]);
 	const changeOccupant = useCallback(
-		(id: number, updatedOccupant: Occupant) => {
+		(id: OccupantName, updatedOccupant: Occupant) => {
 			setStatefulOccupants((statefulOccupants) => {
 				const updated = { ...statefulOccupants };
 				updated[id] = updatedOccupant;
@@ -134,7 +138,7 @@ export const Overworld = ({
 		(occ: [string, Occupant] | undefined) =>
 			interactWithFunction({
 				occ,
-				addMessage: addMessage,
+				addMultipleMessages,
 				openStorage,
 				stepsTaken,
 				changeOccupant,
@@ -147,7 +151,7 @@ export const Overworld = ({
 				goToPosition: setCharacterLocation,
 			}),
 		[
-			addMessage,
+			addMultipleMessages,
 			changeOccupant,
 			cutterPokemon,
 			goToMarket,

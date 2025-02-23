@@ -1,11 +1,12 @@
+import { Message } from '../../../hooks/useMessageQueue';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
 export const handleParalyzed = (
 	attacker: BattlePokemon,
 
-	addMessage: (x: string) => void
+	addMessage: (x: Message) => void
 ) => {
-	addMessage(`${attacker.data.name} is fully paralyzed `);
+	addMessage({ message: `${attacker.data.name} is fully paralyzed ` });
 
 	//UPDATES
 

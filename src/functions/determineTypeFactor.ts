@@ -1,3 +1,4 @@
+import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { typeEffectivenessChart } from '../interfaces/PokemonType';
@@ -6,7 +7,7 @@ import { getTypeNames } from './getTypeNames';
 export const determineTypeFactor = (
 	target: BattlePokemon,
 	attack: BattleAttack,
-	addMessage?: (x: string) => void
+	addMessage?: (x: Message) => void
 ): number => {
 	let res = 1;
 	const targetTypes = getTypeNames(target);
@@ -25,29 +26,33 @@ export const determineTypeFactor = (
 
 	if (target.ability === 'levitate' && attack.data.type.name === 'ground') {
 		if (addMessage) {
-			addMessage(`${target.data.name} prevents damage with levitate`);
+			addMessage({
+				message: `${target.data.name} prevents damage with levitate`,
+			});
 		}
 		res = 0;
 	}
 
 	if (target.ability === 'wonder-guard' && res <= 1) {
 		if (addMessage) {
-			addMessage(`${target.data.name} prevents damage with wonder guard`);
+			addMessage({
+				message: `${target.data.name} prevents damage with wonder guard`,
+			});
 		}
 		return 0;
 	}
 
 	if (res === 0) {
 		if (addMessage) {
-			addMessage('It has no effect');
+			addMessage({ message: 'It has no effect' });
 		}
 		return 0;
 	}
 	if (res > 1 && addMessage) {
-		addMessage('It is very effective');
+		addMessage({ message: 'It is very effective' });
 	}
 	if (res < 1 && addMessage) {
-		addMessage('It is not very effective');
+		addMessage({ message: 'It is not very effective' });
 	}
 	return res;
 };

@@ -1,4 +1,5 @@
 import { lockInMoves } from '../constants/forceSwitchMoves';
+import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { getRandomTargetId } from './filterTargets';
@@ -12,7 +13,7 @@ export const getActualTargetId = ({
 	pokemon: BattlePokemon[];
 	attacker: BattlePokemon;
 	move: BattleAttack;
-	addMessage: (x: string) => void;
+	addMessage: (x: Message) => void;
 }): string => {
 	if (move.name === 'counter' && attacker.lastReceivedDamage) {
 		return attacker.lastReceivedDamage.applicatorId;
@@ -33,9 +34,9 @@ export const getActualTargetId = ({
 	);
 
 	if (lightningRod && move.data.type.name === 'electric') {
-		addMessage(
-			`${lightningRod.data.name} redirected the electric attack with lightning rod`
-		);
+		addMessage({
+			message: `${lightningRod.data.name} redirected the electric attack with lightning rod`,
+		});
 		return lightningRod.id;
 	}
 	return move.targetId;

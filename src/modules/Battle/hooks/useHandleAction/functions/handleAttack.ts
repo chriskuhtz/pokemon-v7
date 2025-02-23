@@ -12,6 +12,7 @@ import { getRandomIndex } from '../../../../../functions/filterTargets';
 import { getActualTargetId } from '../../../../../functions/getActualTargetId';
 import { handleFlinching } from '../../../../../functions/handleFlinching';
 import { isKO } from '../../../../../functions/isKo';
+import { Message } from '../../../../../hooks/useMessageQueue';
 import {
 	EFFECT_SPORE_CHANCE,
 	PrimaryAilment,
@@ -43,7 +44,7 @@ export const handleAttack = ({
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>;
-	addMessage: (x: string) => void;
+	addMessage: (x: Message) => void;
 	move: BattleAttack;
 	battleWeather: WeatherType | undefined;
 	scatterCoins: () => void;
@@ -101,9 +102,9 @@ export const handleAttack = ({
 	}
 
 	//MESSAGES
-	addMessage(
-		`${attacker.data.name} used ${move.name} against ${target.data.name}`
-	);
+	addMessage({
+		message: `${attacker.data.name} used ${move.name} against ${target.data.name}`,
+	});
 
 	//MIST
 	if (move.name === 'mist') {
@@ -141,7 +142,7 @@ export const handleAttack = ({
 	}
 
 	if (move.name === 'pay-day') {
-		addMessage(`Coins scattered everywhere`);
+		addMessage({ message: `Coins scattered everywhere` });
 		scatterCoins();
 	}
 
@@ -154,7 +155,7 @@ export const handleAttack = ({
 		lockInMoves.includes(move.name) &&
 		updatedAttacker.moveQueue.length === 1
 	) {
-		addMessage(`${updatedAttacker.data.name} stopped thrashing`);
+		addMessage({ message: `${updatedAttacker.data.name} stopped thrashing` });
 		updatedAttacker = applySecondaryAilmentToPokemon(
 			updatedAttacker,
 			'confusion',
@@ -163,7 +164,7 @@ export const handleAttack = ({
 	}
 	//update moveQueue
 	if (move.multiHits > 1) {
-		addMessage('Multi hit!');
+		addMessage({ message: 'Multi hit!' });
 		updatedAttacker = {
 			...updatedAttacker,
 			moveQueue: [{ ...move, multiHits: move.multiHits - 1 }],
@@ -232,7 +233,9 @@ export const handleAttack = ({
 				updatedAttacker.damage +
 				Math.round(updatedAttacker.stats.hp * ROUGH_SKIN_FACTOR),
 		};
-		addMessage(`${updatedAttacker.data.name} was hurt by rough skin`);
+		addMessage({
+			message: `${updatedAttacker.data.name} was hurt by rough skin`,
+		});
 
 		if (isKO(updatedAttacker)) {
 			updatedAttacker = handleFainting(updatedAttacker, addMessage);
@@ -270,12 +273,14 @@ export const handleAttack = ({
 			damage: updatedAttacker.damage - drained,
 		};
 		if (drain > 0) {
-			addMessage(`${updatedAttacker.data.name} restored ${drained} HP`);
+			addMessage({
+				message: `${updatedAttacker.data.name} restored ${drained} HP`,
+			});
 		}
 		if (drain < 0) {
-			addMessage(
-				`${updatedAttacker.data.name} took ${drained} HP recoil damage`
-			);
+			addMessage({
+				message: `${updatedAttacker.data.name} took ${drained} HP recoil damage`,
+			});
 		}
 		if (isKO(updatedAttacker)) {
 			updatedAttacker = handleFainting(updatedAttacker, addMessage);

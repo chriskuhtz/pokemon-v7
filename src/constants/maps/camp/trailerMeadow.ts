@@ -1,4 +1,4 @@
-import { generateEmptyBackground } from '../../../functions/generateEmptyBackground';
+import { generateBackground } from '../../../functions/generateEmptyBackground';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 
 export const trailerMeadow: OverworldMap = {
@@ -7,13 +7,16 @@ export const trailerMeadow: OverworldMap = {
 	possibleEncounters: { MORNING: [], DAY: [], EVENING: [], NIGHT: [] },
 	height: 2,
 	width: 3,
-	tileMap: generateEmptyBackground(2, 3),
+	tileMap: generateBackground({
+		height: 2,
+		width: 3,
+		withBorder: false,
+		randomEncounterTiles: false,
+	}),
 	occupants: [
-		//npcs
-		600008,
 		//portals
-		700008,
+		'trailer_to_camp',
 		//obstacles
-		800014, 800015,
+		'bed_trailer',
 	],
 };

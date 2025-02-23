@@ -54,7 +54,7 @@ export const applyOnBattleEnterAbility = ({
 					-1,
 					false,
 					battleFieldEffects,
-					(x) => addMessage({ message: x }),
+					addMessage,
 					`${user.data.name}'s intimidate`
 				);
 			})

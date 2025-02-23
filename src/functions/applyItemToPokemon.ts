@@ -1,4 +1,5 @@
 import { MoveName } from '../constants/checkLists/movesCheckList';
+import { Message } from '../hooks/useMessageQueue';
 import { BattlePokemon, isBattlePokemon } from '../interfaces/BattlePokemon';
 import {
 	HappinessChangeTable,
@@ -22,7 +23,7 @@ import { removeHealableAilments } from './removeHealableAilments';
 export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	pokemon: T,
 	item: ItemType,
-	addMessage?: (x: string) => void,
+	addMessage?: (x: Message) => void,
 	move?: MoveName
 ): T {
 	if ((item === 'ether' || item === 'max-ether') && move) {
@@ -52,7 +53,9 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		pokemon.damage >= pokemon.maxHp
 	) {
 		if (addMessage) {
-			addMessage(`regained ${item === 'revive' ? '50%' : 'full'} HP`);
+			addMessage({
+				message: `regained ${item === 'revive' ? '50%' : 'full'} HP`,
+			});
 		}
 		if (isBattlePokemon(pokemon)) {
 			return {
@@ -76,7 +79,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	}
 	if (item === 'full-restore') {
 		if (addMessage) {
-			addMessage(`fully healed`);
+			addMessage({ message: `fully healed` });
 		}
 		if (isBattlePokemon(pokemon)) {
 			return {
@@ -97,7 +100,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		item === 'old-gateau'
 	) {
 		if (addMessage) {
-			addMessage(`all ailments healed`);
+			addMessage({ message: `all ailments healed` });
 		}
 		if (isBattlePokemon(pokemon)) {
 			return {
@@ -114,7 +117,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	if (HPHealTable[item]) {
 		const updatedDamage = Math.max(pokemon.damage - HPHealTable[item], 0);
 		if (addMessage) {
-			addMessage(`healed ${pokemon.damage - updatedDamage} HP`);
+			addMessage({ message: `healed ${pokemon.damage - updatedDamage} HP` });
 		}
 
 		return { ...pokemon, damage: updatedDamage };
@@ -125,7 +128,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 			pokemon.primaryAilment?.type === 'toxic')
 	) {
 		if (addMessage) {
-			addMessage(`Poisoning cured`);
+			addMessage({ message: `Poisoning cured` });
 		}
 		return {
 			...pokemon,
@@ -135,7 +138,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	}
 	if (item === 'burn-heal' && pokemon.primaryAilment?.type === 'burn') {
 		if (addMessage) {
-			addMessage(`Burn cured`);
+			addMessage({ message: `Burn cured` });
 		}
 		return {
 			...pokemon,
@@ -145,7 +148,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	}
 	if (item === 'ice-heal' && pokemon.primaryAilment?.type === 'freeze') {
 		if (addMessage) {
-			addMessage(`Defrosted`);
+			addMessage({ message: `Defrosted` });
 		}
 		return {
 			...pokemon,
@@ -158,7 +161,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		pokemon.primaryAilment?.type === 'sleep'
 	) {
 		if (addMessage) {
-			addMessage(`Woken Up`);
+			addMessage({ message: `Woken Up` });
 		}
 		return {
 			...pokemon,
@@ -171,7 +174,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		pokemon.primaryAilment?.type === 'paralysis'
 	) {
 		if (addMessage) {
-			addMessage(`Paralysis healed`);
+			addMessage({ message: `Paralysis healed` });
 		}
 		return {
 			...pokemon,
@@ -181,7 +184,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	}
 	if (item === 'yellow-flute') {
 		if (addMessage) {
-			addMessage(`confusion healed`);
+			addMessage({ message: `confusion healed` });
 		}
 		if (isBattlePokemon(pokemon)) {
 			return {
@@ -197,7 +200,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	}
 	if (item === 'red-flute') {
 		if (addMessage) {
-			addMessage(`infatuation healed`);
+			addMessage({ message: `infatuation healed` });
 		}
 		if (isBattlePokemon(pokemon)) {
 			return {
@@ -222,7 +225,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		}
 
 		if (addMessage) {
-			addMessage(`reached level ${level + 1}`);
+			addMessage({ message: `reached level ${level + 1}` });
 		}
 		return {
 			...applyHappinessChange(pokemon, HappinessChangeTable[item] ?? 0),

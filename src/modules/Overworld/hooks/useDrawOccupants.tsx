@@ -1,5 +1,6 @@
 import { isEqual } from 'lodash';
 import { useEffect, useState } from 'react';
+import { OccupantName } from '../../../constants/checkLists/occupantsRecord';
 import { animationTimer, baseSize } from '../../../constants/gameData';
 import { getNextLocation } from '../../../functions/getNextLocation';
 import {
@@ -19,13 +20,13 @@ export const overflow = (current: number, excludedMax: number) => {
 export const useDrawOccupants = (
 	canvasId: string,
 	activeMessage: boolean,
-	statefulOccupants: Record<number, Occupant>,
+	statefulOccupants: Partial<Record<OccupantName, Occupant>>,
 	setStatefulOccupants: React.Dispatch<
 		React.SetStateAction<Record<number, Occupant>>
 	>
 ) => {
 	const [lastDrawnOccupants, setLastDrawnOccupants] = useState<
-		Record<number, Occupant>
+		Partial<Record<OccupantName, Occupant>>
 	>({});
 
 	//Walk the npcs
@@ -93,8 +94,11 @@ export const useDrawOccupants = (
 		const ctx = el?.getContext('2d');
 
 		Object.keys(statefulOccupants).forEach((id) => {
-			const current = statefulOccupants[Number.parseInt(id)];
-			const lastDrawn = lastDrawnOccupants[Number.parseInt(id)];
+			const current = statefulOccupants[id as OccupantName];
+			const lastDrawn = lastDrawnOccupants[id as OccupantName];
+			if (!current) {
+				return;
+			}
 			if (isEqual(current, lastDrawn)) {
 				return;
 			}
@@ -102,19 +106,20 @@ export const useDrawOccupants = (
 			if (current && !lastDrawn) {
 				drawOccupant(current, ctx);
 				return;
-			}
+			} else if (lastDrawn) {
+				drawOccupant(current, ctx);
 
-			drawOccupant(current, ctx);
-			ctx?.clearRect(
-				baseSize * lastDrawn.x,
-				baseSize * lastDrawn.y,
-				baseSize,
-				baseSize
-			);
+				ctx?.clearRect(
+					baseSize * lastDrawn.x,
+					baseSize * lastDrawn.y,
+					baseSize,
+					baseSize
+				);
+			}
 		});
 		Object.keys(lastDrawnOccupants).forEach((id) => {
-			const current = statefulOccupants[Number.parseInt(id)];
-			const lastDrawn = lastDrawnOccupants[Number.parseInt(id)];
+			const current = statefulOccupants[id as OccupantName];
+			const lastDrawn = lastDrawnOccupants[id as OccupantName];
 			if (!current && lastDrawn) {
 				ctx?.clearRect(
 					baseSize * lastDrawn.x,

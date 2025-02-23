@@ -33,6 +33,7 @@ export const useMessageQueue = (
 		}
 		setMessages(messages.slice(1));
 	}, [messages]);
+
 	useEffect(() => {
 		if (messages.length === 0) {
 			return;

@@ -114,7 +114,7 @@ export const useHandleAction = (
 				const { canAttack, updatedAttacker } = handleMoveBlockAilments({
 					attacker,
 					attack: move,
-					addMessage: (x: string) => addMessage({ message: x }),
+					addMessage,
 				});
 
 				if (!canAttack) {
@@ -153,7 +153,7 @@ export const useHandleAction = (
 					attacker,
 					pokemon,
 					setPokemon,
-					addMessage: (x: string) => addMessage({ message: x }),
+					addMessage,
 					move,
 					battleWeather,
 					scatterCoins,

@@ -38,7 +38,8 @@ export const BattleLoader = ({
 	const { res: battleTeam } = useGetBattleTeam(
 		team.map((t) => ({ ...t, caughtBefore: true }))
 	);
-	const trainer = occupantsRecord[challenger.id] as OverworldTrainer;
+	const trainer =
+		challenger.id && (occupantsRecord[challenger.id] as OverworldTrainer);
 
 	if (!battleOpponents || !battleTeam) {
 		return <LoadingScreen />;

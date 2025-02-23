@@ -1,40 +1,39 @@
 import { getTimeOfDay } from '../../functions/getTimeOfDay';
 import { Occupant } from '../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
-import { testOpponent } from '../gameData';
 import { STANDARD_BUY_MARKET } from '../standardBuyMarket';
 
-export const occupantsRecord: Record<number, Occupant> = {
-	//items start at 0
-	0: {
-		type: 'ITEM',
-		item: 'poke-ball',
-		x: 0,
-		y: 9,
-		amount: 1,
-		map: 'meadow',
-		conditionFunction: () => true,
-	},
-	1: {
-		type: 'ITEM',
-		item: 'potion',
-		x: 11,
-		y: 1,
-		amount: 2,
-		map: 'meadow',
-		conditionFunction: () => true,
-	},
-	2: {
-		type: 'HIDDEN_ITEM',
-		item: 'antidote',
-		x: 13,
-		y: 2,
-		amount: 1,
-		map: 'meadow',
-		conditionFunction: () => true,
-	},
-	//PCS start at 100000
-	100001: {
+export const occupantNames = [
+	'pc_Pokecenter_Camp',
+	'merchant_Market_Camp',
+	'nurse_Pokecenter_Camp',
+	'kid_Camp',
+	'pikachu_fan_Camp',
+	'grandma_Camp',
+	'oak_University',
+	'gary_intro',
+	'camp_to_market',
+	'market_to_camp',
+	'camp_to_pokecenter',
+	'pokecenter_to_camp',
+	'camp_to_university',
+	'university_to_camp',
+	'camp_to_trailer',
+	'trailer_to_camp',
+	'bookShelf1_university',
+	'bed_trailer',
+	'camp_sign',
+	'to_sector1x0_sign',
+	'camp_to_sector1x0',
+	'sector1x0_to_camp',
+] as const;
+export type OccupantName = (typeof occupantNames)[number];
+
+export const occupantsRecord: Record<OccupantName, Occupant> = {
+	//items
+
+	//PCS
+	pc_Pokecenter_Camp: {
 		type: 'PC',
 		x: 4,
 		y: 0,
@@ -42,39 +41,10 @@ export const occupantsRecord: Record<number, Occupant> = {
 		approachDirection: 'UP',
 		conditionFunction: () => true,
 	},
-	//Trainers start at 200000
-	200001: {
-		type: 'TRAINER',
-		x: 12,
-		y: 7,
-		map: 'meadow',
-		orientation: 'LEFT',
-		unhandledMessage: ['fight me', 'big dog'],
-		handledMessage: ['you are the big dog, big dog'],
-		sprite: SpriteEnum['sailor'],
-		team: [{ ...testOpponent, dexId: 66 }],
-		name: 'Sailor Bob',
-		conditionFunction: () => true,
-	},
-	200002: {
-		type: 'TRAINER',
-		x: 8,
-		y: 8,
-		map: 'meadow',
-		orientation: 'RIGHT',
-		unhandledMessage: ['Watt up', 'can you feel the electricity'],
-		handledMessage: ['I short circuited'],
-		sprite: SpriteEnum['rocker'],
-		team: [
-			{ ...testOpponent, dexId: 100 },
-			{ ...testOpponent, dexId: 309 },
-			{ ...testOpponent, dexId: 522 },
-		],
-		name: 'Electrician Erik',
-		conditionFunction: () => true,
-	},
-	//Merchants start at 300000,
-	300001: {
+	//Trainers
+
+	//Merchants
+	merchant_Market_Camp: {
 		type: 'MERCHANT',
 		x: 2,
 		y: 0,
@@ -89,8 +59,8 @@ export const occupantsRecord: Record<number, Occupant> = {
 		sprite: SpriteEnum['clerkMale'],
 		conditionFunction: () => true,
 	},
-	//Nurses start at 400000,
-	400001: {
+	//Nurses
+	nurse_Pokecenter_Camp: {
 		type: 'NURSE',
 		x: 2,
 		y: 0,
@@ -100,53 +70,29 @@ export const occupantsRecord: Record<number, Occupant> = {
 		sprite: SpriteEnum['nurse'],
 		conditionFunction: () => true,
 	},
-	//Bushes start at 500000,
-	500001: {
-		type: 'BUSH',
-		x: 19,
-		y: 1,
-		map: 'meadow',
-		conditionFunction: () => true,
-	},
-	//NPCs start at 600000
-	600001: {
+	//Bushes
+
+	//NPCs
+	kid_Camp: {
 		type: 'NPC',
 		x: 5,
 		y: 4,
-		map: 'meadow',
+		map: 'camp',
 		orientation: 'UP',
 		unhandledMessage: [
 			'Pokemon Trainers compete with each other',
 			'Can you become the best of them all?',
 		],
 		handledMessage: ['I cant wait to grow up and become a trainer'],
-		quest: 'Defeat all the Trainers in the meadow',
 		sprite: SpriteEnum['boy'],
 		conditionFunction: () => getTimeOfDay() !== 'NIGHT',
 	},
-	600002: {
-		type: 'NPC',
-		x: 9,
-		y: 1,
-		map: 'meadow',
-		orientation: 'LEFT',
-		unhandledMessage: [
-			'did you know?',
-			'some pokemon only appear in the morning!',
-			'These might help you catch them',
-		],
-		handledMessage: ['did you find one?'],
-		sprite: SpriteEnum['uncle'],
-		gifts: { 'quick-ball': 5 },
-		quest: 'Catch a morning pokemon from the meadow',
-		movement: { path: ['RIGHT', 'LEFT'], currentStep: 0 },
-		conditionFunction: () => true,
-	},
-	600003: {
+
+	pikachu_fan_Camp: {
 		type: 'NPC',
 		x: 10,
 		y: 5,
-		map: 'meadow',
+		map: 'camp',
 		orientation: 'LEFT',
 		unhandledMessage: ['Have you seen a little yellow mouse?'],
 		quest: 'catch a pikachu',
@@ -157,11 +103,11 @@ export const occupantsRecord: Record<number, Occupant> = {
 		},
 		conditionFunction: () => true,
 	},
-	600004: {
+	grandma_Camp: {
 		type: 'NPC',
 		x: 6,
 		y: 4,
-		map: 'meadow',
+		map: 'camp',
 		orientation: 'UP',
 		unhandledMessage: [
 			'Your Pokemon look hungry',
@@ -174,24 +120,8 @@ export const occupantsRecord: Record<number, Occupant> = {
 		quest: 'Train a Pokemon to lvl 10',
 		conditionFunction: () => getTimeOfDay() !== 'NIGHT',
 	},
-	600005: {
-		type: 'NPC',
-		x: 16,
-		y: 4,
-		map: 'meadow',
 
-		orientation: 'DOWN',
-		gifts: { 'dusk-ball': 5 },
-		unhandledMessage: [
-			'During the day, i work in the city',
-			'I come here at night to search for zorua',
-			'These Dusk balls work well at night',
-		],
-		quest: 'Catch a Zorua at night in the meadow',
-		sprite: SpriteEnum['builder'],
-		conditionFunction: () => getTimeOfDay() === 'NIGHT',
-	},
-	600006: {
+	oak_University: {
 		type: 'NPC',
 		x: 1,
 		y: 1,
@@ -210,12 +140,12 @@ export const occupantsRecord: Record<number, Occupant> = {
 		sprite: '136',
 		conditionFunction: () => true,
 	},
-	600007: {
+	gary_intro: {
 		type: 'NPC',
-		x: 7,
+		x: 4,
 		y: 2,
-		map: 'meadow',
-		orientation: 'LEFT',
+		map: 'camp',
+		orientation: 'DOWN',
 		gifts: {
 			repel: 5,
 			'poke-ball': 10,
@@ -226,34 +156,24 @@ export const occupantsRecord: Record<number, Occupant> = {
 			'I am Gary, the other research assistant',
 			'Professor Oak is my Grandpa',
 			'So i am basically your boss!',
-			'Unfortunately',
-			'we still have to share',
-			'that old trailer next to the lab.',
-			'Before i forget',
+			'This trailer will be your home',
+			'Its not much, but it will keep you warm and dry',
+			'...Before i forget',
 			'here is your starter kit',
 			'smell ya later, small dog',
 		],
 		handledMessage: ['i bet i will find much stronger pokemon than you'],
 		sprite: SpriteEnum['gary'],
-		conditionFunction: (s) => !s.handledOccupants.some((h) => h.id === 600007),
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'gary_intro'),
 	},
-	600008: {
-		type: 'NPC',
-		x: 2,
-		y: 0,
-		map: 'trailer_meadow',
-		orientation: 'LEFT',
 
-		unhandledMessage: ['Dont even think about it', 'this one is my bed'],
-		sprite: SpriteEnum['gary'],
-		conditionFunction: (s) => s.handledOccupants.some((h) => h.id === 600007),
-	},
-	//Portals start at 700000
-	700001: {
+	//Portals
+	camp_to_market: {
 		type: 'PORTAL',
-		map: 'meadow',
+		map: 'camp',
 		x: 2,
-		y: 0,
+		y: 1,
 
 		sprite: '/mapObjects/houses/market.png',
 		portal: {
@@ -265,7 +185,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		},
 		conditionFunction: () => true,
 	},
-	700002: {
+	market_to_camp: {
 		type: 'PORTAL',
 		small: true,
 		map: 'market_meadow',
@@ -275,17 +195,17 @@ export const occupantsRecord: Record<number, Occupant> = {
 		portal: {
 			forwardFoot: 'CENTER1',
 			x: 2,
-			y: 1,
+			y: 2,
 			orientation: 'DOWN',
-			mapId: 'meadow',
+			mapId: 'camp',
 		},
 		conditionFunction: () => true,
 	},
-	700003: {
+	camp_to_pokecenter: {
 		type: 'PORTAL',
-		map: 'meadow',
-		x: 3,
-		y: 0,
+		map: 'camp',
+		x: 1,
+		y: 1,
 
 		sprite: '/mapObjects/houses/pokemonCenter.png',
 		portal: {
@@ -297,7 +217,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		},
 		conditionFunction: () => true,
 	},
-	700004: {
+	pokecenter_to_camp: {
 		type: 'PORTAL',
 		small: true,
 		map: 'pokecenter_meadow',
@@ -306,18 +226,18 @@ export const occupantsRecord: Record<number, Occupant> = {
 		sprite: '/mapObjects/doormat.png',
 		portal: {
 			forwardFoot: 'CENTER1',
-			x: 3,
-			y: 1,
+			x: 1,
+			y: 2,
 			orientation: 'DOWN',
-			mapId: 'meadow',
+			mapId: 'camp',
 		},
 		conditionFunction: () => true,
 	},
-	700005: {
+	camp_to_university: {
 		type: 'PORTAL',
-		map: 'meadow',
-		x: 5,
-		y: 0,
+		map: 'camp',
+		x: 3,
+		y: 1,
 
 		sprite: '/mapObjects/houses/blueRoof.png',
 		portal: {
@@ -329,7 +249,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		},
 		conditionFunction: () => true,
 	},
-	700006: {
+	university_to_camp: {
 		type: 'PORTAL',
 		small: true,
 		map: 'university_meadow',
@@ -338,18 +258,18 @@ export const occupantsRecord: Record<number, Occupant> = {
 		sprite: '/mapObjects/doormat.png',
 		portal: {
 			forwardFoot: 'CENTER1',
-			x: 5,
-			y: 1,
+			x: 3,
+			y: 2,
 			orientation: 'DOWN',
-			mapId: 'meadow',
+			mapId: 'camp',
 		},
 		conditionFunction: () => true,
 	},
-	700007: {
+	camp_to_trailer: {
 		type: 'PORTAL',
-		map: 'meadow',
-		x: 6,
-		y: 0,
+		map: 'camp',
+		x: 4,
+		y: 1,
 
 		sprite: '/mapObjects/houses/trailer.png',
 		portal: {
@@ -361,7 +281,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		},
 		conditionFunction: () => true,
 	},
-	700008: {
+	trailer_to_camp: {
 		type: 'PORTAL',
 		small: true,
 		map: 'trailer_meadow',
@@ -370,115 +290,49 @@ export const occupantsRecord: Record<number, Occupant> = {
 		sprite: '/mapObjects/doormat.png',
 		portal: {
 			forwardFoot: 'CENTER1',
-			x: 6,
-			y: 1,
+			x: 4,
+			y: 2,
 			orientation: 'DOWN',
-			mapId: 'meadow',
+			mapId: 'camp',
 		},
 		conditionFunction: () => true,
 	},
-	//obstacles start at 800000
-	800001: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
-		x: 7,
-		y: 0,
-		map: 'meadow',
-		conditionFunction: () => true,
-	},
-	800003: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
+	camp_to_sector1x0: {
+		type: 'PORTAL',
+		map: 'camp',
+		x: 19,
+		y: 9,
 
-		x: 7,
-		y: 3,
-		map: 'meadow',
+		sprite: '/mapObjects/doormat.png',
+		small: true,
+		portal: {
+			forwardFoot: 'CENTER1',
+			x: 0,
+			y: 24,
+			orientation: 'RIGHT',
+			mapId: 'sector1x0',
+		},
 		conditionFunction: () => true,
 	},
-	800004: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
-		x: 7,
-		y: 4,
-		map: 'meadow',
-		conditionFunction: () => true,
-	},
-	800005: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
-		x: 7,
-		y: 5,
-		map: 'meadow',
-		conditionFunction: () => true,
-	},
-	800006: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
-		x: 6,
-		y: 5,
-		map: 'meadow',
-		conditionFunction: () => true,
-	},
-	800007: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
-		x: 5,
-		y: 5,
-		map: 'meadow',
-		conditionFunction: () => true,
-	},
-	800008: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
-		x: 4,
-		y: 5,
-		map: 'meadow',
-		conditionFunction: () => true,
-	},
-	800009: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
-		x: 3,
-		y: 5,
-		map: 'meadow',
-		conditionFunction: () => true,
-	},
-	800010: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
-		x: 2,
-		y: 5,
-		map: 'meadow',
-		conditionFunction: () => true,
-	},
-	800011: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
-		x: 1,
-		y: 5,
-		map: 'meadow',
-		conditionFunction: () => true,
-	},
-	800012: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/fence.png',
-		small: true,
+	sector1x0_to_camp: {
+		type: 'PORTAL',
+		map: 'sector1x0',
 		x: 0,
-		y: 5,
-		map: 'meadow',
+		y: 24,
+
+		sprite: '/mapObjects/doormat.png',
+		small: true,
+		portal: {
+			forwardFoot: 'CENTER1',
+			x: 19,
+			y: 9,
+			orientation: 'LEFT',
+			mapId: 'camp',
+		},
 		conditionFunction: () => true,
 	},
-	800013: {
+	//obstacles
+	bookShelf1_university: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/bookshelf.png',
 		x: 0,
@@ -486,7 +340,7 @@ export const occupantsRecord: Record<number, Occupant> = {
 		map: 'university_meadow',
 		conditionFunction: () => true,
 	},
-	800014: {
+	bed_trailer: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/mattress.png',
 		x: 0,
@@ -494,22 +348,22 @@ export const occupantsRecord: Record<number, Occupant> = {
 		map: 'trailer_meadow',
 		conditionFunction: () => true,
 	},
-	800015: {
-		type: 'OBSTACLE',
-		sprite: '/mapObjects/mattress.png',
-		x: 2,
-		y: 1,
-		map: 'trailer_meadow',
+	//signs
+	camp_sign: {
+		map: 'camp',
+		type: 'SIGN',
+		x: 10,
+		y: 9,
+		dialogue: ['Oak Labs Research Outpost', 'Kuma Region'],
+		approachDirection: 'UP',
 		conditionFunction: () => true,
 	},
-
-	//signs start at 900000
-	900001: {
-		map: 'meadow',
+	to_sector1x0_sign: {
+		map: 'camp',
 		type: 'SIGN',
-		x: 7,
-		y: 1,
-		dialogue: ['Oak Labs Research Outpost', 'Kuma Region'],
+		x: 18,
+		y: 8,
+		dialogue: ['Sector 1x0 this way', 'Beware of wild spearow'],
 		approachDirection: 'UP',
 		conditionFunction: () => true,
 	},

@@ -1,3 +1,4 @@
+import { Message } from '../hooks/useMessageQueue';
 import { PrimaryAilment } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { getMiddleOfThree } from './getMiddleOfThree';
@@ -8,7 +9,7 @@ export const applyPrimaryAilmentToPokemon = (
 	target: BattlePokemon,
 	applicator: BattlePokemon,
 	ailment: PrimaryAilment['type'],
-	addMessage: (x: string) => void,
+	addMessage: (x: Message) => void,
 	suffix?: string
 ): { updatedTarget: BattlePokemon; updatedApplicator: BattlePokemon } => {
 	if (isKO(target)) {
@@ -27,15 +28,17 @@ export const applyPrimaryAilmentToPokemon = (
 		//flash fire pokemon cant get burned
 		!['flash-fire', 'water-veil'].includes(target.ability)
 	) {
-		addMessage(
-			`${target.data.name} was burned ${suffix ? 'by ' + suffix : ''}`
-		);
+		addMessage({
+			message: `${target.data.name} was burned ${suffix ? 'by ' + suffix : ''}`,
+		});
 		if (
 			target.id !== applicator.id &&
 			target.ability === 'synchronize' &&
 			!applicator.primaryAilment
 		) {
-			addMessage(`${target.data.name} synchronized the status condition`);
+			addMessage({
+				message: `${target.data.name} synchronized the status condition`,
+			});
 			return {
 				updatedTarget: { ...target, primaryAilment: { type: 'burn' } },
 				updatedApplicator: { ...applicator, primaryAilment: { type: 'burn' } },
@@ -54,15 +57,19 @@ export const applyPrimaryAilmentToPokemon = (
 		//limber pokemon cant get paralyzed
 		target.ability !== 'limber'
 	) {
-		addMessage(
-			`${target.data.name} was paralyzed ${suffix ? 'by ' + suffix : ''}`
-		);
+		addMessage({
+			message: `${target.data.name} was paralyzed ${
+				suffix ? 'by ' + suffix : ''
+			}`,
+		});
 		if (
 			target.id !== applicator.id &&
 			target.ability === 'synchronize' &&
 			!applicator.primaryAilment
 		) {
-			addMessage(`${target.data.name} synchronized the status condition`);
+			addMessage({
+				message: `${target.data.name} synchronized the status condition`,
+			});
 			return {
 				updatedTarget: { ...target, primaryAilment: { type: 'paralysis' } },
 				updatedApplicator: {
@@ -83,9 +90,11 @@ export const applyPrimaryAilmentToPokemon = (
 		!getTypeNames(target).includes('ice') &&
 		target.ability !== 'magma-armor'
 	) {
-		addMessage(
-			`${target.data.name} was frozen solid ${suffix ? 'by ' + suffix : ''}`
-		);
+		addMessage({
+			message: `${target.data.name} was frozen solid ${
+				suffix ? 'by ' + suffix : ''
+			}`,
+		});
 		return {
 			updatedTarget: { ...target, primaryAilment: { type: 'freeze' } },
 			updatedApplicator: applicator,
@@ -96,11 +105,11 @@ export const applyPrimaryAilmentToPokemon = (
 		!['vital-spirit', 'insomnia'].includes(target.ability)
 	) {
 		const duration = getMiddleOfThree([1, Math.round(Math.random() * 5), 4]);
-		addMessage(
-			`${target.data.name} was put to sleep for ${duration} turns ${
+		addMessage({
+			message: `${target.data.name} was put to sleep for ${duration} turns ${
 				suffix ? 'by ' + suffix : ''
-			}`
-		);
+			}`,
+		});
 		return {
 			updatedTarget: {
 				...target,
@@ -119,17 +128,19 @@ export const applyPrimaryAilmentToPokemon = (
 		!getTypeNames(target).includes('poison') &&
 		!getTypeNames(target).includes('steel')
 	) {
-		addMessage(
-			`${target.data.name} was ${ailment === 'toxic' ? 'badly' : ''} poisoned ${
-				suffix ? 'by ' + suffix : ''
-			}`
-		);
+		addMessage({
+			message: `${target.data.name} was ${
+				ailment === 'toxic' ? 'badly' : ''
+			} poisoned ${suffix ? 'by ' + suffix : ''}`,
+		});
 		if (
 			target.id !== applicator.id &&
 			target.ability === 'synchronize' &&
 			!applicator.primaryAilment
 		) {
-			addMessage(`${target.data.name} synchronized the status condition`);
+			addMessage({
+				message: `${target.data.name} synchronized the status condition`,
+			});
 			return {
 				updatedTarget: { ...target, primaryAilment: { type: ailment } },
 				updatedApplicator: { ...applicator, primaryAilment: { type: ailment } },

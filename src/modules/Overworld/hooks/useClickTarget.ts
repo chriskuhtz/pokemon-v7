@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { OccupantName } from '../../../constants/checkLists/occupantsRecord';
 import { getNextFieldOccupant } from '../../../functions/getNextFieldOccupant';
 import { getOverworldDistance } from '../../../functions/getOverworldDistance';
 import { isPassable } from '../../../functions/isPassable';
@@ -14,10 +15,10 @@ export const useClickTarget = (
 	setNextInput: React.Dispatch<
 		React.SetStateAction<CharacterOrientation | undefined>
 	>,
-	interactWith: (occ: [string, Occupant] | undefined) => void,
-	collectedItems: number[],
+	interactWith: (occ: [OccupantName, Occupant] | undefined) => void,
+	collectedItems: OccupantName[],
 	activeMessage: boolean,
-	statefulOccupantsRecord: Record<number, Occupant>
+	statefulOccupantsRecord: Partial<Record<OccupantName, Occupant>>
 ): React.Dispatch<
 	React.SetStateAction<
 		| {

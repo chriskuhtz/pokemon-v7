@@ -1,4 +1,5 @@
 import { calculateDamage } from '../../../functions/calculateDamage';
+import { Message } from '../../../hooks/useMessageQueue';
 import { CONFUSION_POWER } from '../../../interfaces/Ailment';
 import { BattleAttack } from '../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
@@ -6,7 +7,7 @@ import { MoveDto } from '../../../interfaces/Move';
 
 export const handleConfused = (
 	attacker: BattlePokemon,
-	addMessage: (x: string) => void,
+	addMessage: (x: Message) => void,
 	hitHimself: boolean
 ) => {
 	//updated Attacker
@@ -20,7 +21,7 @@ export const handleConfused = (
 		}),
 	};
 	if (hitHimself) {
-		addMessage(`${attacker.data.name} hit himself in confusion `);
+		addMessage({ message: `${attacker.data.name} hit himself in confusion ` });
 		updatedAttacker = {
 			...updatedAttacker,
 			damage:

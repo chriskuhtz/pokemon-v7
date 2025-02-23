@@ -37,7 +37,7 @@ export const testState: SaveFile = {
 		'Train a Pokemon to lvl 10': 'INACTIVE',
 		'Catch a Zorua at night in the meadow': 'INACTIVE',
 		'Catch a morning pokemon from the meadow': 'INACTIVE',
-		'Defeat all the Trainers in the meadow': 'INACTIVE',
+		//'Defeat all the Trainers in the meadow': 'INACTIVE',
 		'Catch five different pokemon': 'INACTIVE',
 	},
 	inventory: generateInventory({}),
@@ -48,15 +48,15 @@ export const testState: SaveFile = {
 		activeTab: 'MAIN',
 	},
 	location: {
-		mapId: 'meadow',
-		orientation: 'DOWN',
+		mapId: 'camp',
+		orientation: 'RIGHT',
 		forwardFoot: 'CENTER1',
-		x: 5,
-		y: 2,
+		x: 1,
+		y: 5,
 	},
 	handledOccupants: [],
 	lastEdited: new Date().getTime(),
-	lastNurse: 400001,
+	lastNurse: 'nurse_Pokecenter_Camp',
 };
 
 export const OPPO_ID = 'oppo';

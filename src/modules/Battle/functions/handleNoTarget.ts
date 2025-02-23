@@ -1,4 +1,5 @@
 import { changeMovePP } from '../../../functions/changeMovePP';
+import { Message } from '../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
@@ -6,10 +7,10 @@ export const handleNoTarget = (
 	attacker: BattlePokemon,
 	attack: BattleAttack,
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
-	addMessage: (x: string) => void
+	addMessage: (x: Message) => void
 ) => {
-	addMessage(`${attacker.data.name} used ${attack.name} `);
-	addMessage('But there was no target');
+	addMessage({ message: `${attacker.data.name} used ${attack.name} ` });
+	addMessage({ message: 'But there was no target' });
 	//UPDATES
 
 	//updated Attacker
