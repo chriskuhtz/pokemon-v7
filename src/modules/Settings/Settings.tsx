@@ -40,16 +40,7 @@ export const Settings = ({
 					description={'Losing a battle = complete reset'}
 				/>
 			</div>
-
-			<h3
-				style={{
-					borderTop: '1px solid black',
-					paddingTop: '2rem',
-					color: 'red',
-				}}
-			>
-				These settings cannot be changed later
-			</h3>
+			<br />
 			<br />
 			<button style={{ width: '100%' }} onClick={() => proceed(state)}>
 				Lets go
@@ -73,7 +64,9 @@ export const SettingsRow = ({
 		<>
 			<div>
 				<h3 style={{ margin: 0 }}>{label}</h3>
-				{description && <strong>({description})</strong>}
+				{description && (
+					<strong style={{ color: 'red' }}>({description})</strong>
+				)}
 			</div>
 			<button
 				style={{

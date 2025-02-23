@@ -4,10 +4,12 @@ export const Banner = ({
 	children,
 	flexDirection,
 	backgroundColor,
+	onClick,
 }: {
 	children: ReactNode;
 	flexDirection?: CSSProperties['flexDirection'];
 	backgroundColor?: string;
+	onClick?: () => void;
 }) => {
 	return (
 		<div
@@ -25,6 +27,12 @@ export const Banner = ({
 			}}
 		>
 			<div
+				onClick={onClick}
+				onKeyDown={(e) => {
+					if (onClick && e.key === 'Enter') {
+						onClick();
+					}
+				}}
 				style={{
 					backgroundColor: backgroundColor ?? 'rgba(0,0,0,.8)',
 					color: 'white',

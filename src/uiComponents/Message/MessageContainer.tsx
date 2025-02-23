@@ -3,12 +3,17 @@ import { useMessageQueue } from '../../hooks/useMessageQueue';
 import { Banner } from '../Banner/Banner';
 
 export const MessageContainer = () => {
-	const { addMessage, latestMessage, addMultipleMessages, interjectMessage } =
-		useMessageQueue();
+	const {
+		confirmLatestMessage,
+		addMessage,
+		latestMessage,
+		addMultipleMessages,
+		interjectMessage,
+	} = useMessageQueue();
 	return (
 		<>
 			{latestMessage && (
-				<Banner>
+				<Banner onClick={confirmLatestMessage}>
 					<h2>{latestMessage?.message}</h2>
 				</Banner>
 			)}
