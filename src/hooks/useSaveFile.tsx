@@ -275,7 +275,6 @@ export const useSaveFile = (
 			},
 			'talkToNurse'
 		);
-		addMessage({ message: 'Whole Team fully healed' });
 	};
 	const useSacredAshReducer = () => {
 		setSaveFile(
@@ -310,22 +309,16 @@ export const useSaveFile = (
 
 		let newInventory = { ...saveFile.inventory };
 		if (occ.type === 'NPC' && occ.gifts) {
-			Object.entries(occ.gifts).forEach(([item, amount]) => {
-				addMessage({ message: `received ${amount} ${item}` });
-			});
-
 			newInventory = joinInventories(newInventory, occ.gifts);
 		}
 		if (occ.type === 'ITEM' || occ.type === 'HIDDEN_ITEM') {
 			const { item, amount } = occ;
-			addMessage({ message: `found ${amount} ${item}` });
 
 			newInventory = joinInventories(newInventory, { [item]: amount });
 		}
 		const updatedQuests = saveFile.quests;
 		if (occ.type === 'NPC' && occ.quest) {
 			const { quest } = occ;
-			addMessage({ message: `new quest: ${quest}` });
 
 			if (updatedQuests[quest] === 'INACTIVE') {
 				updatedQuests[quest] = 'ACTIVE';

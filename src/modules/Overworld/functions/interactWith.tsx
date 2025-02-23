@@ -105,13 +105,14 @@ export const interactWithFunction = ({
 			orientation: getOppositeDirection(playerLocation.orientation),
 		});
 
-		addMultipleMessages(
-			data.dialogue.map((d, i) => ({
+		addMultipleMessages([
+			...data.dialogue.map((d, i) => ({
 				message: d,
 				onRemoval:
 					i === data.dialogue.length - 1 ? () => talkToNurse(id) : undefined,
-			}))
-		);
+			})),
+			{ message: 'Whole Team fully healed' },
+		]);
 
 		return;
 	}
@@ -123,13 +124,19 @@ export const interactWithFunction = ({
 
 		if (!handledOccupants.includes(id)) {
 			addMultipleMessages(
-				data.unhandledMessage.map((d, i) => ({
-					message: d,
-					onRemoval:
-						i === data.unhandledMessage.length - 1
-							? () => handleThisOccupant(id)
-							: undefined,
-				}))
+				[
+					...data.unhandledMessage.map((d, i) => ({
+						message: d,
+						onRemoval:
+							i === data.unhandledMessage.length - 1
+								? () => handleThisOccupant(id)
+								: undefined,
+					})),
+					...Object.entries(data.gifts ?? {}).map(([item, amount]) => ({
+						message: `received ${amount} ${item}`,
+					})),
+					data.quest ? { message: `new quest: ${data.quest}` } : undefined,
+				].filter((m) => m !== undefined)
 			);
 		} else {
 			addMultipleMessages(
