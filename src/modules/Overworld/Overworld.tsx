@@ -7,9 +7,8 @@ import {
 	OccupantName,
 	occupantsRecord,
 } from '../../constants/checkLists/occupantsRecord';
-import { animationTimer, baseSize } from '../../constants/gameData';
+import { baseSize } from '../../constants/gameData';
 import { assembleMap } from '../../functions/assembleMap';
-import { getNextLocation } from '../../functions/getNextLocation';
 import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { isValidOverWorldMap } from '../../functions/isValidOverworldMap';
@@ -24,7 +23,7 @@ import { interactWithFunction } from './functions/interactWith';
 import { useClickTarget } from './hooks/useClickTarget';
 import { useDrawBackground } from './hooks/useDrawBackground';
 import { useDrawCharacter } from './hooks/useDrawCharacter';
-import { overflow, useDrawOccupants } from './hooks/useDrawOccupants';
+import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
 
@@ -114,59 +113,59 @@ export const Overworld = ({
 		[]
 	);
 	//Walk the npcs
-	useEffect(() => {
-		if (latestMessage) {
-			//stop movement during dialogue
-			return;
-		}
-		if (
-			Object.values(statefulOccupants).some(
-				(occ) => occ.type === 'NPC' && occ.movement
-			)
-		) {
-			const t = setTimeout(() => {
-				setStatefulOccupants(
-					Object.fromEntries(
-						Object.entries(statefulOccupants).map(([id, occ]) => {
-							if (occ.type === 'NPC' && occ.movement && Math.random() > 0.5) {
-								const step = occ.movement.path[occ.movement.currentStep];
-								const update =
-									step === occ.orientation
-										? getNextLocation(
-												{
-													x: occ.x,
-													y: occ.y,
-													orientation: occ.orientation,
-													forwardFoot: 'CENTER1',
-													mapId: occ.map,
-												},
-												step
-										  )
-										: { orientation: step };
-								return [
-									id,
-									{
-										...occ,
-										...update,
-										movement: {
-											...occ.movement,
-											currentStep: overflow(
-												occ.movement.currentStep,
-												occ.movement.path.length
-											),
-										},
-									},
-								];
-							}
-							return [id, occ];
-						})
-					)
-				);
-			}, animationTimer);
+	// useEffect(() => {
+	// 	if (latestMessage) {
+	// 		//stop movement during dialogue
+	// 		return;
+	// 	}
+	// 	if (
+	// 		Object.values(statefulOccupants).some(
+	// 			(occ) => occ.type === 'NPC' && occ.movement
+	// 		)
+	// 	) {
+	// 		const t = setTimeout(() => {
+	// 			setStatefulOccupants(
+	// 				Object.fromEntries(
+	// 					Object.entries(statefulOccupants).map(([id, occ]) => {
+	// 						if (occ.type === 'NPC' && occ.movement && Math.random() > 0.5) {
+	// 							const step = occ.movement.path[occ.movement.currentStep];
+	// 							const update =
+	// 								step === occ.orientation
+	// 									? getNextLocation(
+	// 											{
+	// 												x: occ.x,
+	// 												y: occ.y,
+	// 												orientation: occ.orientation,
+	// 												forwardFoot: 'CENTER1',
+	// 												mapId: occ.map,
+	// 											},
+	// 											step
+	// 									  )
+	// 									: { orientation: step };
+	// 							return [
+	// 								id,
+	// 								{
+	// 									...occ,
+	// 									...update,
+	// 									movement: {
+	// 										...occ.movement,
+	// 										currentStep: overflow(
+	// 											occ.movement.currentStep,
+	// 											occ.movement.path.length
+	// 										),
+	// 									},
+	// 								},
+	// 							];
+	// 						}
+	// 						return [id, occ];
+	// 					})
+	// 				)
+	// 			);
+	// 		}, animationTimer);
 
-			return () => clearTimeout(t);
-		}
-	}, [latestMessage, statefulOccupants]);
+	// 		return () => clearTimeout(t);
+	// 	}
+	// }, [latestMessage, statefulOccupants]);
 
 	const assembledMap = useMemo(
 		() => assembleMap(map, statefulOccupants),
