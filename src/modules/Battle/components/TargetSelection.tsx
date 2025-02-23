@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import { IoIosArrowBack } from 'react-icons/io';
+import { baseSize } from '../../../constants/gameData';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { ActionType, ChooseActionPayload } from '../BattleField';
@@ -44,6 +46,18 @@ export function TargetSelection({
 					gap: '1rem',
 				}}
 			>
+				<IoIosArrowBack
+					role="button"
+					size={baseSize / 2}
+					tabIndex={0}
+					onClick={() => setChosenAction(undefined)}
+					onKeyDown={(e) => {
+						e.stopPropagation();
+						if (e.key === 'Backspace' || e.key === 'Enter') {
+							setChosenAction(undefined);
+						}
+					}}
+				/>
 				{!['ether', 'max-ether'].includes(chosenAction) &&
 					targets.map((t) => (
 						<button
