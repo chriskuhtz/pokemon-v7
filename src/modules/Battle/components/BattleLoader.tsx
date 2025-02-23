@@ -31,13 +31,11 @@ export const BattleLoader = ({
 	interjectMessage: (message: Message) => void;
 }): JSX.Element => {
 	const { res: battleOpponents } = useGetBattleTeam(
-		challenger.team.map(
-			(o) => ({
-				...o,
-				caughtBefore: ownedPokemonDexIds.includes(o.dexId),
-			}),
-			true //assign learnset moves
-		)
+		challenger.team.map((o) => ({
+			...o,
+			caughtBefore: ownedPokemonDexIds.includes(o.dexId),
+		})),
+		true
 	);
 	const { res: battleTeam } = useGetBattleTeam(
 		team.map((t) => ({ ...t, caughtBefore: true }))
