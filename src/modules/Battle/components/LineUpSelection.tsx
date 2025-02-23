@@ -104,7 +104,7 @@ export const LineUpSelection = ({
 					{selectedTeam.length > fightersPerSide &&
 						`select ${fightersPerSide - selectedTeam.length} less`}
 				</button>
-				<button onClick={leave}>Try to run</button>
+				<button onClick={leave}>Try to escape</button>
 			</div>
 		</div>
 	);
