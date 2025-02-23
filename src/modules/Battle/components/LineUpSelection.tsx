@@ -65,7 +65,14 @@ export const LineUpSelection = ({
 					<img key={opponent.id} src={getPokemonSprite(opponent.dexId)} />
 				))}
 			</div>
-			<div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+			<div
+				style={{
+					display: 'grid',
+					alignItems: 'center',
+					justifyContent: 'center',
+					gridTemplateColumns: '1fr 1fr 1fr',
+				}}
+			>
 				{team.map((teamMember) => (
 					<div
 						role="button"
@@ -76,8 +83,8 @@ export const LineUpSelection = ({
 								? '2px solid black'
 								: undefined,
 							borderRadius: 9000,
-							aspectRatio: '1/1',
-							padding: '1rem',
+							//aspectRatio: '1/1',
+							//padding: '1rem',
 						}}
 						onKeyDown={(e) => {
 							if (e.key === 'Enter') {
