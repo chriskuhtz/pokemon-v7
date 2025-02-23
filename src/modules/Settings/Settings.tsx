@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { SettingsObject } from '../../interfaces/SaveFile';
 import { Page } from '../../uiComponents/Page/Page';
+import { ToggleRow } from '../../uiComponents/ToggleRow/ToggleRow';
 
 export const Settings = ({
 	proceed,
@@ -23,17 +24,17 @@ export const Settings = ({
 					alignItems: 'center',
 				}}
 			>
-				<SettingsRow
+				<ToggleRow
 					value={state.randomStarters}
 					setValue={(x) => setState({ ...state, randomStarters: x })}
 					label={'Do you want to randomize your starter pokemon choices:'}
 				/>
-				<SettingsRow
+				<ToggleRow
 					value={state.randomHeldItems}
 					setValue={(x) => setState({ ...state, randomHeldItems: x })}
 					label={'Do you want to randomize the held items of wild pokemon:'}
 				/>{' '}
-				<SettingsRow
+				<ToggleRow
 					value={state.disqualifyFaintedPokemon}
 					setValue={(x) => setState({ ...state, disqualifyFaintedPokemon: x })}
 					label={'	Should your defeated Pokemon be released back into the wild:'}
@@ -46,48 +47,5 @@ export const Settings = ({
 				Lets go
 			</button>
 		</Page>
-	);
-};
-
-export const SettingsRow = ({
-	label,
-	value,
-	setValue,
-	description,
-}: {
-	value: boolean;
-	setValue: (x: boolean) => void;
-	label: string;
-	description?: string;
-}) => {
-	return (
-		<>
-			<div>
-				<h3 style={{ margin: 0 }}>{label}</h3>
-				{description && (
-					<strong style={{ color: 'red' }}>({description})</strong>
-				)}
-			</div>
-			<button
-				style={{
-					backgroundColor: !value ? 'black' : 'white',
-
-					color: !value ? 'white' : 'black',
-				}}
-				onClick={() => setValue(false)}
-			>
-				No
-			</button>
-			<button
-				style={{
-					backgroundColor: value ? 'black' : 'white',
-
-					color: value ? 'white' : 'black',
-				}}
-				onClick={() => setValue(true)}
-			>
-				Yes
-			</button>
-		</>
 	);
 };
