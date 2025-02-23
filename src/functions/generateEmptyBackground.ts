@@ -23,7 +23,7 @@ export const generateBackground = ({
 				return 3;
 			}
 			if (randomEncounterTiles && Math.random() > 0.3) {
-				return 2;
+				return 1;
 			}
 
 			return 0;

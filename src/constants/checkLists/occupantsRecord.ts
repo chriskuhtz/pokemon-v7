@@ -25,13 +25,14 @@ export const occupantNames = [
 	'camp_sign',
 	'to_sector1x0_sign',
 	'camp_to_sector1x0',
+	'sector1x0_to_camp',
 ] as const;
 export type OccupantName = (typeof occupantNames)[number];
 
 export const occupantsRecord: Record<OccupantName, Occupant> = {
-	//items start at 0
+	//items
 
-	//PCS start at 100000
+	//PCS
 	pc_Pokecenter_Camp: {
 		type: 'PC',
 		x: 4,
@@ -40,9 +41,9 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 		approachDirection: 'UP',
 		conditionFunction: () => true,
 	},
-	//Trainers start at 200000
+	//Trainers
 
-	//Merchants start at 300000,
+	//Merchants
 	merchant_Market_Camp: {
 		type: 'MERCHANT',
 		x: 2,
@@ -58,7 +59,7 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 		sprite: SpriteEnum['clerkMale'],
 		conditionFunction: () => true,
 	},
-	//Nurses start at 400000,
+	//Nurses
 	nurse_Pokecenter_Camp: {
 		type: 'NURSE',
 		x: 2,
@@ -69,9 +70,9 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 		sprite: SpriteEnum['nurse'],
 		conditionFunction: () => true,
 	},
-	//Bushes start at 500000,
+	//Bushes
 
-	//NPCs start at 600000
+	//NPCs
 	kid_Camp: {
 		type: 'NPC',
 		x: 5,
@@ -167,7 +168,7 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 			!s.handledOccupants.some((h) => h.id === 'gary_intro'),
 	},
 
-	//Portals start at 700000
+	//Portals
 	camp_to_market: {
 		type: 'PORTAL',
 		map: 'camp',
@@ -302,18 +303,35 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 		x: 19,
 		y: 9,
 
-		sprite: '/mapObjects/arceusStatue.png',
+		sprite: '/mapObjects/doormat.png',
+		small: true,
 		portal: {
 			forwardFoot: 'CENTER1',
-			x: 1,
+			x: 0,
 			y: 24,
 			orientation: 'RIGHT',
 			mapId: 'sector1x0',
 		},
 		conditionFunction: () => true,
 	},
-	//obstacles start at 800000
+	sector1x0_to_camp: {
+		type: 'PORTAL',
+		map: 'sector1x0',
+		x: 0,
+		y: 24,
 
+		sprite: '/mapObjects/doormat.png',
+		small: true,
+		portal: {
+			forwardFoot: 'CENTER1',
+			x: 19,
+			y: 9,
+			orientation: 'LEFT',
+			mapId: 'camp',
+		},
+		conditionFunction: () => true,
+	},
+	//obstacles
 	bookShelf1_university: {
 		type: 'OBSTACLE',
 		sprite: '/mapObjects/bookshelf.png',
@@ -330,13 +348,12 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 		map: 'trailer_meadow',
 		conditionFunction: () => true,
 	},
-
-	//signs start at 900000
+	//signs
 	camp_sign: {
 		map: 'camp',
 		type: 'SIGN',
-		x: 7,
-		y: 1,
+		x: 10,
+		y: 9,
 		dialogue: ['Oak Labs Research Outpost', 'Kuma Region'],
 		approachDirection: 'UP',
 		conditionFunction: () => true,

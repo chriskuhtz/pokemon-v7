@@ -1,9 +1,10 @@
 import { OverworldMap } from '../../interfaces/OverworldMap';
-import { camp, sector1x0 } from '../maps/camp/camp';
+import { camp } from '../maps/camp/camp';
 import { marketMeadow } from '../maps/camp/marketMeadow';
 import { pokecenterMeadow } from '../maps/camp/pokecenterMeadow';
 import { trailerMeadow } from '../maps/camp/trailerMeadow';
 import { universityMeadow } from '../maps/camp/universityMeadow';
+import { sector1x0 } from '../maps/sectors/sector1x0';
 
 export type MapId =
 	| 'camp'

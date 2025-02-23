@@ -35,14 +35,6 @@ export const useGetBattleTeam = (
 					? d.moves[3].move.name
 					: pokemon.fourthMove?.name;
 
-				console.log(
-					pokemon.dexId,
-					firstMove,
-					secondMove,
-					thirdMove,
-					fourthMove
-				);
-
 				const speciesData: Promise<PokemonSpeciesData> = (
 					await fetch(`https://pokeapi.co/api/v2/pokemon-species/${dexId}`)
 				).json();
