@@ -20,5 +20,6 @@ export const campUniversity: OverworldMap = {
 		'university_to_camp',
 		//obstacles
 		'bookShelf1_university',
+		'chest_university',
 	],
 };

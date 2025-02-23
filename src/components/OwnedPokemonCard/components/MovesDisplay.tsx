@@ -4,10 +4,10 @@ import { MoveName } from '../../../constants/checkLists/movesCheckList';
 import { baseSize } from '../../../constants/gameData';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
 import { getMovesArray } from '../../../functions/getMovesArray';
+import { moveIsAvailable } from '../../../functions/moveIsAvailable';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { PokemonData } from '../../../interfaces/PokemonData';
 import { SelectionListModal } from '../../../uiComponents/SelectionListModal/SelectionListModal';
-import { moveIsAvailable } from '../../../functions/moveIsAvailable';
 
 export const MovesDisplay = ({
 	ownedPokemon,
@@ -80,7 +80,19 @@ export const MovesDisplay = ({
 					display: 'flex',
 				}}
 			>
-				Moves: <MdEdit size={baseSize / 3} onClick={() => setEditing(true)} />
+				Moves:{' '}
+				<MdEdit
+					size={baseSize / 3}
+					onClick={() => setEditing(true)}
+					role="button"
+					tabIndex={0}
+					onKeyDown={(e) => {
+						e.stopPropagation();
+						if (e.key === 'Enter') {
+							setEditing(true);
+						}
+					}}
+				/>
 			</strong>
 			<div
 				style={{

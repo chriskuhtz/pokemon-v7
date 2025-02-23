@@ -40,4 +40,5 @@ export interface OwnedPokemon {
 	//intrinsicValues: StatObject;
 	ppBoostedMoves: PPBoostedMove[];
 	caughtOnMap: MapId;
+	nickname?: string;
 }

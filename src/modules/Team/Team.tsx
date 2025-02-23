@@ -73,6 +73,20 @@ export const Team = ({
 								})
 							);
 						}}
+						setNickName={(id, nickname) => {
+							setTeam(
+								team.map((t) => {
+									if (t.id === id) {
+										return {
+											...t,
+											nickname,
+										};
+									}
+
+									return t;
+								})
+							);
+						}}
 						data={res[index].data}
 						key={pokemon.id}
 						pokemon={pokemon}

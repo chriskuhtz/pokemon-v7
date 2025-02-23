@@ -308,7 +308,7 @@ export const useSaveFile = (
 		const timer = occ.type === 'BUSH' ? new Date().getTime() + 900000 : -1;
 
 		let newInventory = { ...saveFile.inventory };
-		if (occ.type === 'NPC' && occ.gifts) {
+		if ((occ.type === 'NPC' || occ.type === 'OBSTACLE') && occ.gifts) {
 			newInventory = joinInventories(newInventory, occ.gifts);
 		}
 		if (occ.type === 'ITEM' || occ.type === 'HIDDEN_ITEM') {
