@@ -1,5 +1,4 @@
 import { OccupantName } from '../../../constants/checkLists/occupantsRecord';
-import { getOppositeDirection } from '../../../functions/getOppositeDirection';
 import { Message } from '../../../hooks/useMessageQueue';
 import { Inventory } from '../../../interfaces/Inventory';
 import { Occupant } from '../../../interfaces/OverworldMap';
@@ -10,7 +9,7 @@ export const interactWithFunction = ({
 	addMultipleMessages,
 	openStorage,
 	stepsTaken,
-	changeOccupant,
+	//changeOccupant,
 	playerLocation,
 	goToMarket,
 	talkToNurse,
@@ -82,10 +81,11 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'MERCHANT') {
-		changeOccupant(id, {
-			...data,
-			orientation: getOppositeDirection(playerLocation.orientation),
-		});
+		//disable for now because of drawing bug
+		// changeOccupant(id, {
+		// 	...data,
+		// 	orientation: getOppositeDirection(playerLocation.orientation),
+		// });
 
 		addMultipleMessages(
 			data.dialogue.map((d, i) => ({
@@ -100,10 +100,11 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'NURSE') {
-		changeOccupant(id, {
-			...data,
-			orientation: getOppositeDirection(playerLocation.orientation),
-		});
+		//disable for now because of drawing bug
+		// changeOccupant(id, {
+		// 	...data,
+		// 	orientation: getOppositeDirection(playerLocation.orientation),
+		// });
 
 		addMultipleMessages([
 			...data.dialogue.map((d, i) => ({
@@ -117,10 +118,11 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'NPC') {
-		changeOccupant(id, {
-			...data,
-			orientation: getOppositeDirection(playerLocation.orientation),
-		});
+		//disable for now because of drawing bug
+		// changeOccupant(id, {
+		// 	...data,
+		// 	orientation: getOppositeDirection(playerLocation.orientation),
+		// });
 
 		if (!handledOccupants.includes(id)) {
 			addMultipleMessages(
@@ -149,10 +151,11 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'TRAINER') {
-		changeOccupant(id, {
-			...data,
-			orientation: getOppositeDirection(playerLocation.orientation),
-		});
+		//disable for now because of drawing bug
+		// changeOccupant(id, {
+		// 	...data,
+		// 	orientation: getOppositeDirection(playerLocation.orientation),
+		// });
 
 		if (!handledOccupants.includes(id)) {
 			addMultipleMessages(
