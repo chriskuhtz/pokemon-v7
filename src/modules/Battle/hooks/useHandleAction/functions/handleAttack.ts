@@ -252,15 +252,19 @@ export const handleAttack = ({
 	//TARGET
 
 	// apply damage
-	const damage = calculateDamage(
-		updatedAttacker,
-		target,
-		move,
-		battleWeather,
-		true,
-		isFlying,
-		addMessage
-	);
+	const damage = getMiddleOfThree([
+		0,
+		calculateDamage(
+			updatedAttacker,
+			target,
+			move,
+			battleWeather,
+			true,
+			isFlying,
+			addMessage
+		),
+		updatedTarget.stats.hp - updatedTarget.damage,
+	]);
 	updatedTarget = {
 		...updatedTarget,
 		damage: updatedTarget.damage + damage,
@@ -276,12 +280,16 @@ export const handleAttack = ({
 	if (drain) {
 		const drained = getMiddleOfThree([
 			1,
-			Math.round((attacker.damage * drain) / 100),
+			Math.round((damage * drain) / 100),
 			attacker.stats.hp,
 		]);
 		updatedAttacker = {
 			...updatedAttacker,
-			damage: updatedAttacker.damage - drained,
+			damage: getMiddleOfThree([
+				0,
+				updatedAttacker.damage - drained,
+				updatedAttacker.stats.hp,
+			]),
 		};
 		if (drain > 0) {
 			addMessage({
