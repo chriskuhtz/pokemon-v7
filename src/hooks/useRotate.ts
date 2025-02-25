@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { animationTimer } from '../constants/gameData';
 import { getNextClockWiseDirection } from '../functions/getNextClockwiseDirection';
 import { CharacterOrientation } from '../interfaces/SaveFile';

@@ -116,7 +116,9 @@ export const extraFeatureCheckList: {
 	{ name: 'quest: catch a night pokemon' },
 	{ name: 'quest: catch a evening pokemon' },
 	{ name: 'quest: catch a morning pokemon' },
-	{ name: 'alternate forms (galar, alola)' },
+	{
+		name: 'alternate forms (galar, alola), also consider evo methods (e.g. ratatta)',
+	},
 	{ name: 'encounter rarity' },
 	{ name: 'ivs' },
 	{ name: 'check if pokemon can actually cut' },
@@ -155,4 +157,5 @@ export const extraFeatureCheckList: {
 	{ name: 'break step between move execution' },
 	{ name: 'browser tab name and icon' },
 	{ name: 'improved keyboard control, interpret direction buttons' },
+	{ name: 'fix loading after evo' },
 ];

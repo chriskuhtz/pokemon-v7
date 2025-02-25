@@ -1,4 +1,6 @@
+import { useMemo } from 'react';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
+import { getTimeOfDay } from '../../../functions/getTimeOfDay';
 import { useGetEvolution } from '../../../hooks/useGetEvolution';
 import { EvolutionChainLink } from '../../../interfaces/EvolutionChainData';
 import { Inventory } from '../../../interfaces/Inventory';
@@ -16,7 +18,12 @@ export const EvoInfo = ({
 	ownedPokemon: OwnedPokemon;
 	data: PokemonData;
 	inventory: Inventory;
-	evolve: (newDexId: number, newName: string, item?: ItemType) => void;
+	evolve: (
+		newDexId: number,
+		newName: string,
+		consumeHeldItem: boolean,
+		item?: ItemType
+	) => void;
 }) => {
 	const { evos, invalidate } = useGetEvolution(data);
 
@@ -33,8 +40,8 @@ export const EvoInfo = ({
 					name={data.name}
 					evo={evo}
 					inventory={inventory}
-					evolve={(newDexId, newName, item) => {
-						evolve(newDexId, newName, item);
+					evolve={(newDexId, newName, consumeHeldItem, item) => {
+						evolve(newDexId, newName, consumeHeldItem, item);
 						invalidate();
 					}}
 				/>
@@ -52,93 +59,66 @@ const EvoButton = ({
 }: {
 	evo: EvolutionChainLink;
 	inventory: Inventory;
-	evolve: (newDexId: number, newName: string, item?: ItemType) => void;
+	evolve: (
+		newDexId: number,
+		newName: string,
+		consumeHeldItem: boolean,
+		item?: ItemType
+	) => void;
 	name: string;
 	ownedPokemon: OwnedPokemon;
 }) => {
 	const deets = evo.evolution_details[evo.evolution_details.length - 1];
-	const { min_happiness, item, min_level } = deets;
+	const { min_happiness, item, min_level, time_of_day, held_item } = deets;
 	const itemName = item?.name as ItemType | undefined;
-
 	const newDexId = Number.parseInt(evo.species.url.split('/').reverse()[1]);
 	const { level } = calculateLevelData(ownedPokemon.xp);
 
+	const checks: string[] = useMemo(() => {
+		const res = [];
+
+		if (min_level && min_level > level) {
+			res.push(`Level ${min_level}`);
+		}
+		if (itemName && !inventory[itemName]) {
+			res.push(itemName);
+		}
+		if (min_happiness && ownedPokemon.happiness <= min_happiness) {
+			res.push(`${min_happiness} Happiness`);
+		}
+		if (time_of_day && getTimeOfDay().toLowerCase()) {
+			res.push(`${time_of_day}-time`);
+		}
+		if (held_item && ownedPokemon.heldItemName !== held_item) {
+			res.push(`held item ${held_item}`);
+		}
+
+		return res;
+	}, [
+		held_item,
+		inventory,
+		itemName,
+		level,
+		min_happiness,
+		min_level,
+		ownedPokemon.happiness,
+		ownedPokemon.heldItemName,
+		time_of_day,
+	]);
+
 	return (
-		<>
-			{itemName && inventory[itemName] > 0 && (
-				<button
-					style={{
-						padding: '.5rem',
-						border: '1px solid black',
-						borderRadius: '1rem',
-					}}
-					onClick={() => evolve(newDexId, evo.species.name, itemName)}
-				>
-					Use {itemName} to evolve {name}
-				</button>
-			)}
-			{itemName && inventory[itemName] <= 0 && (
-				<button
-					disabled
-					style={{
-						padding: '.5rem',
-						border: '1px solid black',
-						borderRadius: '1rem',
-					}}
-				>
-					{itemName} required for evolution
-				</button>
-			)}
-			{min_happiness && ownedPokemon.happiness >= min_happiness && (
-				<button
-					style={{
-						padding: '.5rem',
-						border: '1px solid black',
-						borderRadius: '1rem',
-					}}
-					onClick={() => evolve(newDexId, evo.species.name)}
-				>
-					Evolve {name}
-				</button>
-			)}
-			{min_happiness && ownedPokemon.happiness <= min_happiness && (
-				<button
-					disabled
-					style={{
-						padding: '.5rem',
-						border: '1px solid black',
-						borderRadius: '1rem',
-					}}
-					onClick={() => evolve(newDexId, evo.species.name)}
-				>
-					{min_happiness} Happiness required for evolution
-				</button>
-			)}
-			{min_level && level >= min_level && (
-				<button
-					style={{
-						padding: '.5rem',
-						border: '1px solid black',
-						borderRadius: '1rem',
-					}}
-					onClick={() => evolve(newDexId, evo.species.name)}
-				>
-					Evolve {name}
-				</button>
-			)}
-			{min_level && level < min_level && (
-				<button
-					disabled
-					style={{
-						padding: '.5rem',
-						border: '1px solid black',
-						borderRadius: '1rem',
-					}}
-					onClick={() => evolve(newDexId, evo.species.name)}
-				>
-					Level {min_level} required for evolution
-				</button>
-			)}
-		</>
+		<button
+			disabled={checks.length > 0}
+			style={{
+				padding: '.5rem',
+				border: '1px solid black',
+				borderRadius: '1rem',
+			}}
+			onClick={() => evolve(newDexId, evo.species.name, !!held_item, itemName)}
+		>
+			{checks.length > 0
+				? `${checks.join(' & ')} required for evolution`
+				: `Use ${itemName} to evolve ${name}`}
+		</button>
 	);
 };

@@ -32,6 +32,7 @@ export const Team = ({
 		newDexId: number,
 		name: string,
 		newName: string,
+		consumeHeldItem: boolean,
 		consumedItem?: ItemType
 	) => void;
 }): JSX.Element => {
@@ -209,8 +210,20 @@ export const Team = ({
 							})
 						);
 					}}
-					evolve={(newDexId: number, newName: string, item?: ItemType) => {
-						evolve(focused.id, newDexId, focusedData.name, newName, item);
+					evolve={(
+						newDexId: number,
+						newName: string,
+						consumeHeldItem: boolean,
+						item?: ItemType
+					) => {
+						evolve(
+							focused.id,
+							newDexId,
+							focusedData.name,
+							newName,
+							consumeHeldItem,
+							item
+						);
 						invalidate();
 					}}
 					data={focusedData}

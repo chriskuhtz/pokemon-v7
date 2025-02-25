@@ -7,7 +7,7 @@ import {
 	OccupantName,
 	occupantsRecord,
 } from '../../constants/checkLists/occupantsRecord';
-import { baseSize } from '../../constants/gameData';
+import { baseSize, fps } from '../../constants/gameData';
 import { assembleMap } from '../../functions/assembleMap';
 import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
@@ -337,6 +337,8 @@ export const Overworld = ({
 						style={{
 							top: -playerLocation.y * baseSize,
 							left: -playerLocation.x * baseSize,
+							transitionProperty: 'top,left',
+							transition: `${fps} ease 0s`,
 							zIndex: -1,
 							position: 'absolute',
 						}}
@@ -351,6 +353,8 @@ export const Overworld = ({
 							height: map.height * baseSize,
 							top: -playerLocation.y * baseSize,
 							left: -playerLocation.x * baseSize,
+							transitionProperty: 'top,left',
+							transition: `${fps} ease 0s`,
 							position: 'absolute',
 							backgroundColor: OverworldShaderMap[getTimeOfDay()],
 							zIndex: -2,

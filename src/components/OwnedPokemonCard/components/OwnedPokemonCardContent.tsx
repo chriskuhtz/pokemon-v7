@@ -42,7 +42,12 @@ export const OwnedPokemonCardContent = ({
 	inventory: Inventory;
 	setMoves: (id: string, moves: MoveName[]) => void;
 	setNickName: (x: string | undefined) => void;
-	evolve: (newDexId: number, newName: string, item?: ItemType) => void;
+	evolve: (
+		newDexId: number,
+		newName: string,
+		consumeHeldItem: boolean,
+		item?: ItemType
+	) => void;
 }) => {
 	const [heldItemMenuOpen, setHeldItemMenuOpen] = useState<boolean>(false);
 	const [nickNameMenuOpen, setNickNameMenuOpen] = useState<boolean>(false);

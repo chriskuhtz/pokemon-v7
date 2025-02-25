@@ -94,6 +94,7 @@ export const evoStones = [
 	'fire-stone',
 	'water-stone',
 	'leaf-stone',
+	'ice-stone',
 	'moon-stone',
 	'dawn-stone',
 	'dusk-stone',
