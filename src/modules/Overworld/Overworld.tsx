@@ -33,6 +33,9 @@ const occupantsCanvasId = 'occs';
 
 export const Overworld = ({
 	openMenu,
+	openBag,
+	openQuests,
+	openTeam,
 	playerLocation,
 	setCharacterLocation,
 	map,
@@ -51,6 +54,9 @@ export const Overworld = ({
 	addMultipleMessages,
 }: {
 	openMenu: (stepsTaken: number) => void;
+	openTeam: (stepsTaken: number) => void;
+	openQuests: (stepsTaken: number) => void;
+	openBag: (stepsTaken: number) => void;
 	playerLocation: CharacterLocationData;
 	setCharacterLocation: (update: CharacterLocationData) => void;
 	map: OverworldMap;
@@ -254,6 +260,9 @@ export const Overworld = ({
 				statefulOccupants
 			),
 		() => openMenu(stepsTaken),
+		() => openQuests(stepsTaken),
+		() => openTeam(stepsTaken),
+		() => openBag(stepsTaken),
 		!!latestMessage
 	);
 
