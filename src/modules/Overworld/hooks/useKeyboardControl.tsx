@@ -8,6 +8,9 @@ export const useKeyboardControl = (
 	registerNextInput: (x: CharacterOrientation) => void,
 	handleEnterPress: () => void,
 	openMenu: () => void,
+	openQuests: () => void,
+	openTeam: () => void,
+	openBag: () => void,
 	disabled: boolean
 ) => {
 	useEffect(() => {
@@ -26,6 +29,15 @@ export const useKeyboardControl = (
 			if (e.key === 'm') {
 				openMenu();
 			}
+			if (e.key === 'q') {
+				openQuests();
+			}
+			if (e.key === 'b' || e.key === 'i') {
+				openBag();
+			}
+			if (e.key === 't') {
+				openTeam();
+			}
 		}
 
 		document.addEventListener('keydown', keyDownHandler);
@@ -33,5 +45,13 @@ export const useKeyboardControl = (
 		return () => {
 			document.removeEventListener('keydown', keyDownHandler);
 		};
-	}, [disabled, handleEnterPress, openMenu, registerNextInput]);
+	}, [
+		disabled,
+		handleEnterPress,
+		openBag,
+		openMenu,
+		openQuests,
+		openTeam,
+		registerNextInput,
+	]);
 };

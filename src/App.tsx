@@ -249,6 +249,9 @@ export const App = ({
 	return (
 		<Overworld
 			openMenu={(steps) => navigateAwayFromOverworldReducer('MAIN', steps)}
+			openQuests={(steps) => navigateAwayFromOverworldReducer('QUESTS', steps)}
+			openBag={(steps) => navigateAwayFromOverworldReducer('BAG', steps)}
+			openTeam={(steps) => navigateAwayFromOverworldReducer('TEAM', steps)}
 			setCharacterLocation={setCharacterLocationReducer}
 			playerLocation={location}
 			saveFile={saveFile}
