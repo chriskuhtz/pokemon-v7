@@ -93,6 +93,7 @@ export interface UseSaveFile {
 		newDexId: number,
 		name: string,
 		newName: string,
+		consumeHeldItem: boolean,
 		consumedItem?: ItemType
 	) => void;
 }
@@ -547,6 +548,7 @@ export const useSaveFile = (
 		newDexId: number,
 		name: string,
 		newName: string,
+		consumeHeldItem: boolean,
 		consumedItem?: ItemType
 	) => {
 		const updatedInventory = consumedItem
@@ -564,7 +566,11 @@ export const useSaveFile = (
 		patchSaveFileReducer({
 			pokemon: saveFile.pokemon.map((p) => {
 				if (p.id === id) {
-					return { ...p, dexId: newDexId };
+					return {
+						...p,
+						dexId: newDexId,
+						heldItemName: consumeHeldItem ? undefined : p.heldItemName,
+					};
 				}
 				return p;
 			}),

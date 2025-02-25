@@ -116,7 +116,9 @@ export const extraFeatureCheckList: {
 	{ name: 'quest: catch a night pokemon' },
 	{ name: 'quest: catch a evening pokemon' },
 	{ name: 'quest: catch a morning pokemon' },
-	{ name: 'alternate forms (galar, alola)' },
+	{
+		name: 'alternate forms (galar, alola), also consider evo methods (e.g. ratatta)',
+	},
 	{ name: 'encounter rarity' },
 	{ name: 'ivs' },
 	{ name: 'check if pokemon can actually cut' },

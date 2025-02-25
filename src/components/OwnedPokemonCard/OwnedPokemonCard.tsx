@@ -23,7 +23,12 @@ export const OwnedPokemonCard = ({
 	inventory: Inventory;
 	data: PokemonData;
 	setNickName: (id: string, newNick: string | undefined) => void;
-	evolve: (newDexId: number, newName: string, item?: ItemType) => void;
+	evolve: (
+		newDexId: number,
+		newName: string,
+		consumeHeldItem: boolean,
+		item?: ItemType
+	) => void;
 }) => {
 	return (
 		<div
