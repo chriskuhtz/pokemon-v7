@@ -3,12 +3,15 @@ import { MdEdit } from 'react-icons/md';
 import { MoveName } from '../../../constants/checkLists/movesCheckList';
 import { baseSize } from '../../../constants/gameData';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
+import { getItemUrl } from '../../../functions/getItemUrl';
+import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { getStats } from '../../../functions/getStats';
 import { getTypeNames } from '../../../functions/getTypeNames';
 import { Inventory } from '../../../interfaces/Inventory';
 import { ItemType } from '../../../interfaces/Item';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { PokemonData } from '../../../interfaces/PokemonData';
+import { IconSolarSystem } from '../../../uiComponents/IconSolarSystem/IconSolarSystem';
 import { SelectionListModal } from '../../../uiComponents/SelectionListModal/SelectionListModal';
 import { Stack } from '../../../uiComponents/Stack/Stack';
 import { HappinessIcon } from '../../HappinessIcon/HappinessIcon';
@@ -84,10 +87,26 @@ export const OwnedPokemonCardContent = ({
 						paddingLeft: '.5rem',
 						display: 'grid',
 						gap: '1.5rem',
-						gridTemplateColumns: '2fr 2fr 1fr',
+						gridTemplateColumns: '1fr 4fr 3fr 1fr',
 						alignItems: 'center',
+						justifyItems: 'center',
 					}}
 				>
+					<IconSolarSystem
+						sun={{ url: getPokemonSprite(ownedPokemon.dexId) }}
+						firstPlanetUrl={`/typeIcons/${typeNames[0]}.png`}
+						secondPlanetUrl={
+							typeNames.length > 1
+								? `/typeIcons/${typeNames[1]}.png`
+								: undefined
+						}
+						thirdPlanetUrl={getItemUrl(ownedPokemon.ball)}
+						fourthPlanetUrl={
+							ownedPokemon.heldItemName
+								? getItemUrl(ownedPokemon.heldItemName)
+								: undefined
+						}
+					/>
 					<div>
 						<HpBar
 							max={

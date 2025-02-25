@@ -103,6 +103,7 @@ export const Team = ({
 										alignItems: 'center',
 										gap: '.5rem',
 									}}
+									key={pokemon.id}
 								>
 									{index !== 0 && pokemon.id === focused.id && (
 										<FaArrowLeft
@@ -120,7 +121,6 @@ export const Team = ({
 									)}
 									<IconSolarSystem
 										onClick={() => setFocused(pokemon)}
-										key={pokemon.id}
 										sun={{ url: getPokemonSprite(pokemon.dexId) }}
 										firstPlanetUrl={`/typeIcons/${typeNames[0]}.png`}
 										secondPlanetUrl={
