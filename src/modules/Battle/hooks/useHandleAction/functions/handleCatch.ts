@@ -69,7 +69,8 @@ export const handleCatch = (
 			.join('...')}...`;
 
 		return {
-			message: m,
+			message:
+				step === 1 ? `You throw a ${move.ball} at ${target.data.name}` : m,
 			onRemoval: () =>
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
@@ -93,9 +94,6 @@ export const handleCatch = (
 
 	addMultipleMessages(
 		[
-			{
-				message: `You throw a ${move.ball} at ${target.data.name}`,
-			},
 			getCatchStepMessage(1),
 			check1 ? getCatchStepMessage(2) : undefined,
 			check1 && check2 ? getCatchStepMessage(3) : undefined,

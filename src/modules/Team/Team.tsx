@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { OwnedPokemonCard } from '../../components/OwnedPokemonCard/OwnedPokemonCard';
 import { baseSize } from '../../constants/gameData';
@@ -86,9 +86,14 @@ export const Team = ({
 				>
 					<Stack alignItems="center" mode="row" justifyContent="space-evenly">
 						{team.map((pokemon, index) => {
+							const d = res.find((r) => r.dexId === pokemon.dexId)?.data;
+
+							if (!d) {
+								return <React.Fragment key={index}></React.Fragment>;
+							}
 							const typeNames = getTypeNames({
 								...pokemon,
-								data: res[index].data,
+								data: d,
 							});
 
 							return (
