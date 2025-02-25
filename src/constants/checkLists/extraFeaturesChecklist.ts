@@ -158,4 +158,7 @@ export const extraFeatureCheckList: {
 	{ name: 'browser tab name and icon' },
 	{ name: 'improved keyboard control, interpret direction buttons' },
 	{ name: 'fix loading after evo' },
+	{
+		name: 'use more typecolors',
+	},
 ];

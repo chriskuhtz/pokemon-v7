@@ -34,6 +34,10 @@ export const testState: SaveFile = {
 	quests: {
 		'catch a pokemon in sector1x0': 'INACTIVE',
 		'catch a pikachu': 'INACTIVE',
+		'catch a clefairy': 'INACTIVE',
+		'catch a gastly': 'INACTIVE',
+		'evolve a pokemon': 'INACTIVE',
+		'train a pokemon to level 10': 'INACTIVE',
 	},
 	inventory: generateInventory({}),
 	playerId: '',
@@ -47,11 +51,14 @@ export const testState: SaveFile = {
 		orientation: 'RIGHT',
 		forwardFoot: 'CENTER1',
 		x: 1,
-		y: 5,
+		y: 3,
 	},
 	handledOccupants: [],
 	lastEdited: new Date().getTime(),
 	lastNurse: 'nurse_Pokecenter_Camp',
+	mileStones: {
+		hasEvolvedAPokemon: false,
+	},
 };
 
 export const OPPO_ID = 'oppo';

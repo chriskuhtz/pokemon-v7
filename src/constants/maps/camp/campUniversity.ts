@@ -16,6 +16,7 @@ export const campUniversity: OverworldMap = {
 	occupants: [
 		//npcs
 		'oak_University',
+		'researcher1_University',
 		//portals
 		'university_to_camp',
 		//obstacles

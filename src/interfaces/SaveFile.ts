@@ -64,4 +64,7 @@ export interface SaveFile {
 	quests: Record<QuestName, QuestStatus>;
 	sprite: string;
 	encounterRateModifier?: { factor: number; steps: number };
+	mileStones: {
+		hasEvolvedAPokemon: boolean;
+	};
 }
