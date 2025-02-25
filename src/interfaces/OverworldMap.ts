@@ -6,7 +6,16 @@
  * 1 = encounter possible
  * 2 = blocked field
  * 3 = border
+ * 4= obstacle
  */
+
+export const tileMap: Record<string, number> = {
+	empty: 0,
+	encounter: 1,
+	blocked: 2,
+	border: 3,
+	obstacle: 4,
+};
 
 import { MapId } from '../constants/checkLists/mapsRecord';
 import { OccupantName } from '../constants/checkLists/occupantsRecord';
@@ -119,6 +128,7 @@ export interface OverworldMap {
 	id: MapId;
 	backgroundTile: string;
 	encounterTile?: string;
+	obstacleTile?: string;
 	borderTile?: string;
 	possibleEncounters: Record<TimeOfDay, OverworldEncounter[]>;
 	width: number;

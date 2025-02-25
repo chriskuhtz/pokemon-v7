@@ -1030,7 +1030,11 @@ export const movesCheckList: {
 	{ name: 'high-horsepower', url: 'https://pokeapi.co/api/v2/move/667/' },
 	{ name: 'strength-sap', url: 'https://pokeapi.co/api/v2/move/668/' },
 	{ name: 'solar-blade', url: 'https://pokeapi.co/api/v2/move/669/' },
-	{ name: 'leafage', url: 'https://pokeapi.co/api/v2/move/670/' },
+	{
+		name: 'leafage',
+		url: 'https://pokeapi.co/api/v2/move/670/',
+		handled: true,
+	},
 	{ name: 'spotlight', url: 'https://pokeapi.co/api/v2/move/671/' },
 	{ name: 'toxic-thread', url: 'https://pokeapi.co/api/v2/move/672/' },
 	{ name: 'laser-focus', url: 'https://pokeapi.co/api/v2/move/673/' },
@@ -1407,6 +1411,7 @@ export const handledMoves = [
 	'mega-drain',
 	'night-shade',
 	'mega-kick',
+	'leafage',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
