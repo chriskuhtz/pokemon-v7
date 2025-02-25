@@ -22,7 +22,7 @@ export interface EvolutionDetails {
 	location: string | null;
 	min_affection: string | null;
 	min_beauty: string | null;
-	min_happiness: string | null;
+	min_happiness: number | null;
 	min_level: number | null;
 	needs_overworld_rain: boolean | null;
 	party_species: string | null;

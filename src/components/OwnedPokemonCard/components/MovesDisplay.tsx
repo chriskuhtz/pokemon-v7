@@ -50,10 +50,9 @@ export const MovesDisplay = ({
 	return (
 		<div
 			style={{
-				margin: '.5rem',
-				borderLeft: '1px solid black',
-				borderBottom: '1px solid black',
-				borderBottomLeftRadius: '.5rem',
+				padding: '.5rem',
+				border: '1px solid black',
+				borderRadius: '1rem',
 			}}
 		>
 			<SelectionListModal
