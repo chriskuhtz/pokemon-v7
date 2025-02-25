@@ -4,6 +4,7 @@ import { OverworldMap } from '../../../interfaces/OverworldMap';
 export const sector1x0: OverworldMap = {
 	id: 'sector1x0',
 	borderTile: '/tiles/shrub.png',
+	obstacleTile: '/tiles/shrub.png',
 	backgroundTile: '/tiles/grass.png',
 	encounterTile: '/tiles/tallGrass.png',
 	width: 50,
@@ -13,6 +14,7 @@ export const sector1x0: OverworldMap = {
 		width: 50,
 		withBorder: true,
 		randomEncounterTiles: true,
+		randomObstacleTiles: true,
 		borderGates: [{ x: 0, y: 24 }],
 	}),
 	occupants: ['sector1x0_to_camp'],

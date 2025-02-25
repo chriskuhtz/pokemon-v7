@@ -8,6 +8,7 @@ export const useDrawBackground = (canvasId: string, map: OverworldMap) => {
 			backgroundTile,
 			encounterTile,
 			borderTile,
+			obstacleTile,
 			width,
 			height,
 			tileMap,
@@ -79,6 +80,28 @@ export const useDrawBackground = (canvasId: string, map: OverworldMap) => {
 			});
 
 			borderTileImage.src = borderTile;
+		}
+
+		const obstacleTileImage = new Image();
+		if (obstacleTile) {
+			obstacleTileImage.addEventListener('load', () => {
+				tileMap.forEach((row, h) => {
+					row.forEach((value, w) => {
+						const isObstacle = value === 4;
+						if (isObstacle) {
+							ctx?.drawImage(
+								obstacleTileImage,
+								w * baseSize,
+								h * baseSize,
+								baseSize,
+								baseSize
+							);
+						}
+					});
+				});
+			});
+
+			obstacleTileImage.src = obstacleTile;
 		}
 	}, [canvasId, map]);
 };
