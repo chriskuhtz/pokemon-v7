@@ -1,3 +1,4 @@
+import { AbilityName } from '../constants/checkLists/abilityCheckList';
 import { SecondaryAilment } from './Ailment';
 import { BattleAction } from './BattleActions';
 import { DamageClass, MoveDto } from './Move';
@@ -34,6 +35,7 @@ export interface BattlePokemon extends OwnedPokemon {
 		damage: number;
 		applicatorId: string;
 	};
+	initAbility: AbilityName;
 }
 
 export function isBattlePokemon(
