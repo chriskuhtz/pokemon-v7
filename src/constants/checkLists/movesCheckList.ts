@@ -295,6 +295,7 @@ export const movesCheckList: {
 	{
 		name: 'razor-leaf',
 		url: 'https://pokeapi.co/api/v2/move/75/',
+		handled: true,
 	},
 	{
 		name: 'solar-beam',
@@ -318,7 +319,11 @@ export const movesCheckList: {
 		handled: true,
 	},
 
-	{ name: 'string-shot', url: 'https://pokeapi.co/api/v2/move/81/' },
+	{
+		name: 'string-shot',
+		url: 'https://pokeapi.co/api/v2/move/81/',
+		handled: true,
+	},
 	{
 		name: 'dragon-rage',
 		url: 'https://pokeapi.co/api/v2/move/82/',
@@ -394,7 +399,11 @@ export const movesCheckList: {
 	{ name: 'dream-eater', url: 'https://pokeapi.co/api/v2/move/138/' },
 	{ name: 'poison-gas', url: 'https://pokeapi.co/api/v2/move/139/' },
 	{ name: 'barrage', url: 'https://pokeapi.co/api/v2/move/140/' },
-	{ name: 'leech-life', url: 'https://pokeapi.co/api/v2/move/141/' },
+	{
+		name: 'leech-life',
+		url: 'https://pokeapi.co/api/v2/move/141/',
+		handled: true,
+	},
 	{ name: 'lovely-kiss', url: 'https://pokeapi.co/api/v2/move/142/' },
 	{ name: 'sky-attack', url: 'https://pokeapi.co/api/v2/move/143/' },
 	{ name: 'transform', url: 'https://pokeapi.co/api/v2/move/144/' },
@@ -1412,6 +1421,9 @@ export const handledMoves = [
 	'night-shade',
 	'mega-kick',
 	'leafage',
+	'razor-leaf',
+	'string-shot',
+	'leech-life',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

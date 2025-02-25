@@ -121,6 +121,7 @@ export const LineUpSelection = ({
 
 			<div style={{ display: 'flex', gap: '1rem' }}>
 				<button
+					autoFocus
 					onClick={startBattle}
 					disabled={selectedTeam.length !== fightersPerSide}
 				>
