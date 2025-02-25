@@ -74,14 +74,13 @@ const EvoButton = ({
 	const newDexId = Number.parseInt(evo.species.url.split('/').reverse()[1]);
 	const { level } = calculateLevelData(ownedPokemon.xp);
 
-	console.log(deets);
 	const checks: string[] = useMemo(() => {
 		const res = [];
 
 		if (min_level && min_level > level) {
 			res.push(`Level ${min_level}`);
 		}
-		if (itemName && inventory[itemName] <= 0) {
+		if (itemName && !inventory[itemName]) {
 			res.push(itemName);
 		}
 		if (min_happiness && ownedPokemon.happiness <= min_happiness) {
