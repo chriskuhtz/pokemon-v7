@@ -8,7 +8,6 @@ import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { PokemonData } from '../../interfaces/PokemonData';
-import { Card } from '../../uiComponents/Card/Card';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
 import { OwnedPokemonCardContent } from './components/OwnedPokemonCardContent';
 
@@ -36,34 +35,46 @@ export const OwnedPokemonCard = ({
 	const typeNames = getTypeNames({ ...pokemon, data });
 
 	return (
-		<Card
-			key={pokemon.id}
-			icon={
-				<IconSolarSystem
-					sun={{ url: getPokemonSprite(pokemon.dexId) }}
-					firstPlanetUrl={`/typeIcons/${typeNames[0]}.png`}
-					secondPlanetUrl={
-						typeNames.length > 1 ? `/typeIcons/${typeNames[1]}.png` : undefined
-					}
-					thirdPlanetUrl={getItemUrl(pokemon.ball)}
-					fourthPlanetUrl={
-						pokemon.heldItemName ? getItemUrl(pokemon.heldItemName) : undefined
-					}
-				/>
-			}
-			content={
-				<OwnedPokemonCardContent
-					evolve={evolve}
-					setMoves={setMoves}
-					ownedPokemon={pokemon}
-					data={data}
-					inventory={inventory}
-					takeHeldItem={takeHeldItem}
-					giveHeldItem={giveHeldItem}
-					setNickName={(x) => setNickName(pokemon.id, x)}
-				/>
-			}
-			actionElements={[
+		<div
+			style={{
+				display: 'grid',
+				gridTemplateColumns: '2fr 9fr 1fr',
+				padding: '1rem',
+				alignItems: 'center',
+				justifyItems: 'center',
+				border: '2px solid black',
+				borderRadius: '1rem',
+			}}
+		>
+			<IconSolarSystem
+				sun={{ url: getPokemonSprite(pokemon.dexId) }}
+				firstPlanetUrl={`/typeIcons/${typeNames[0]}.png`}
+				secondPlanetUrl={
+					typeNames.length > 1 ? `/typeIcons/${typeNames[1]}.png` : undefined
+				}
+				thirdPlanetUrl={getItemUrl(pokemon.ball)}
+				fourthPlanetUrl={
+					pokemon.heldItemName ? getItemUrl(pokemon.heldItemName) : undefined
+				}
+			/>
+			<OwnedPokemonCardContent
+				evolve={evolve}
+				setMoves={setMoves}
+				ownedPokemon={pokemon}
+				data={data}
+				inventory={inventory}
+				takeHeldItem={takeHeldItem}
+				giveHeldItem={giveHeldItem}
+				setNickName={(x) => setNickName(pokemon.id, x)}
+			/>
+			<div
+				style={{
+					display: 'flex',
+					flexDirection: 'column',
+					justifyContent: 'space-between',
+					height: '50%',
+				}}
+			>
 				<FaArrowUp
 					onClick={() => reorder('UP')}
 					size={baseSize / 3}
@@ -75,7 +86,8 @@ export const OwnedPokemonCard = ({
 							reorder('UP');
 						}
 					}}
-				/>,
+				/>
+
 				<FaArrowDown
 					onClick={() => reorder('DOWN')}
 					size={baseSize / 3}
@@ -87,8 +99,8 @@ export const OwnedPokemonCard = ({
 							reorder('DOWN');
 						}
 					}}
-				/>,
-			]}
-		/>
+				/>
+			</div>
+		</div>
 	);
 };

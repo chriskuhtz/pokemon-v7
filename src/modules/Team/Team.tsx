@@ -1,8 +1,12 @@
 import { OwnedPokemonCard } from '../../components/OwnedPokemonCard/OwnedPokemonCard';
+import { getItemUrl } from '../../functions/getItemUrl';
+import { getPokemonSprite } from '../../functions/getPokemonSprite';
+import { getTypeNames } from '../../functions/getTypeNames';
 import { useGetBattleTeam } from '../../hooks/useGetBattleTeam';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
+import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
@@ -39,6 +43,41 @@ export const Team = ({
 	return (
 		<Page goBack={goBack} headline="Team:">
 			<Stack mode="column">
+				<div
+					style={{
+						padding: '1rem',
+						border: '2px solid black',
+						borderRadius: '1rem',
+					}}
+				>
+					<Stack mode="row">
+						{team.map((pokemon, index) => {
+							const typeNames = getTypeNames({
+								...pokemon,
+								data: res[index].data,
+							});
+
+							return (
+								<IconSolarSystem
+									key={pokemon.id}
+									sun={{ url: getPokemonSprite(pokemon.dexId) }}
+									firstPlanetUrl={`/typeIcons/${typeNames[0]}.png`}
+									secondPlanetUrl={
+										typeNames.length > 1
+											? `/typeIcons/${typeNames[1]}.png`
+											: undefined
+									}
+									thirdPlanetUrl={getItemUrl(pokemon.ball)}
+									fourthPlanetUrl={
+										pokemon.heldItemName
+											? getItemUrl(pokemon.heldItemName)
+											: undefined
+									}
+								/>
+							);
+						})}
+					</Stack>
+				</div>
 				{team.map((pokemon, index) => (
 					<OwnedPokemonCard
 						setMoves={(id, newMoveNames) => {
