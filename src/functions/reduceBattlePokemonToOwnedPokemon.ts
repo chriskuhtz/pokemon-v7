@@ -28,7 +28,7 @@ export const reduceBattlePokemonToOwnedPokemon = (
 		nature: newMon.nature,
 		onTeam: newMon.onTeam ?? false,
 		xp: newMon.xp,
-		ability: newMon.ability ?? 'stench',
+		ability: newMon.initAbility,
 		happiness: newMon.happiness,
 		stepsWalked: newMon.stepsWalked,
 		heldItemName: newMon.heldItemName,

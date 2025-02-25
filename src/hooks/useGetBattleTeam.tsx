@@ -66,6 +66,7 @@ export const useGetBattleTeam = (
 				const f = await fourthMoveData;
 				const battleMon: BattlePokemon = {
 					...pokemon,
+					initAbility: pokemon.ability,
 					heldItemName: pokemon.heldItemName ?? maybeGetHeldItemFromData(d),
 					roundsInBattle: 0,
 					secondaryAilments: [],

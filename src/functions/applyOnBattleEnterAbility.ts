@@ -70,6 +70,16 @@ export const applyOnBattleEnterAbility = ({
 			if (p.id === user.id) {
 				return { ...user, roundsInBattle: p.roundsInBattle + 1 };
 			}
+			if (
+				p.initAbility === 'trace' &&
+				p.ability === 'trace' &&
+				p.ownerId !== user.ownerId
+			) {
+				addMessage({
+					message: `${p.data.name} traced ${user.ability}`,
+				});
+				return { ...p, ability: user.ability };
+			}
 			return p;
 		})
 	);
