@@ -20,6 +20,8 @@ export const camp: OverworldMap = {
 		'grandma_Camp',
 		'gary_intro',
 		'pikachu_fan_Camp',
+		'gastly_fan_Camp',
+		'clefairy_fan_Camp',
 		//portals
 		'camp_to_market',
 		'camp_to_pokecenter',

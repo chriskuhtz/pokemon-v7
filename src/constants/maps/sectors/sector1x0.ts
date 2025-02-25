@@ -40,6 +40,7 @@ export const sector1x0: OverworldMap = {
 			{ dexId: 163, xp: 100 },
 			{ dexId: 41, xp: 100 },
 			{ dexId: 35, xp: 100 },
+			{ dexId: 92, xp: 100 },
 		],
 	},
 };

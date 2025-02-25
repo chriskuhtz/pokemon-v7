@@ -574,6 +574,7 @@ export const useSaveFile = (
 				}
 				return p;
 			}),
+			mileStones: { ...saveFile.mileStones, hasEvolvedAPokemon: true },
 			inventory: updatedInventory,
 		});
 	};

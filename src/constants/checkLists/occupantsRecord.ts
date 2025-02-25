@@ -9,8 +9,11 @@ export const occupantNames = [
 	'nurse_Pokecenter_Camp',
 	'kid_Camp',
 	'pikachu_fan_Camp',
+	'clefairy_fan_Camp',
+	'gastly_fan_Camp',
 	'grandma_Camp',
 	'oak_University',
+	'researcher1_University',
 	'gary_intro',
 	'camp_to_market',
 	'market_to_camp',
@@ -85,10 +88,10 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 			'Can you become the best of them all?',
 		],
 		handledMessage: ['I cant wait to grow up and become a trainer'],
+		quest: 'train a pokemon to level 10',
 		sprite: SpriteEnum['boy'],
 		conditionFunction: () => getTimeOfDay() !== 'NIGHT',
 	},
-
 	pikachu_fan_Camp: {
 		type: 'NPC',
 		x: 10,
@@ -103,6 +106,43 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 			currentStep: 0,
 		},
 		conditionFunction: (s) => s.quests['catch a pikachu'] !== 'COLLECTED',
+	},
+	clefairy_fan_Camp: {
+		type: 'NPC',
+		x: 11,
+		y: 5,
+		map: 'camp',
+		orientation: 'RIGHT',
+		unhandledMessage: [
+			'I have heard of a super cute pink pokemon',
+			'it dances in the moonlight',
+		],
+		quest: 'catch a clefairy',
+		sprite: SpriteEnum['blondeLass'],
+		movement: {
+			path: ['RIGHT', 'RIGHT', 'DOWN', 'DOWN', 'LEFT', 'LEFT', 'UP', 'UP'],
+			currentStep: 0,
+		},
+		conditionFunction: (s) => s.quests['catch a clefairy'] !== 'COLLECTED',
+	},
+	gastly_fan_Camp: {
+		type: 'NPC',
+		x: 15,
+		y: 3,
+		map: 'camp',
+		orientation: 'UP',
+		unhandledMessage: [
+			'I never used to believe in ghosts',
+			'Until I went to sector1x0 late at night',
+			'Now i dont leave the camp anymore',
+		],
+		quest: 'catch a gastly',
+		sprite: SpriteEnum['mechanic'],
+		movement: {
+			path: ['RIGHT', 'RIGHT', 'DOWN', 'DOWN', 'LEFT', 'LEFT', 'UP', 'UP'],
+			currentStep: 0,
+		},
+		conditionFunction: (s) => s.quests['catch a gastly'] !== 'COLLECTED',
 	},
 	grandma_Camp: {
 		type: 'NPC',
@@ -120,7 +160,6 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 		gifts: { 'rare-candy': 2 },
 		conditionFunction: () => getTimeOfDay() !== 'NIGHT',
 	},
-
 	oak_University: {
 		type: 'NPC',
 		x: 1,
@@ -140,9 +179,24 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 			'sector 1x0 is to the east of the camp',
 		],
 		quest: 'catch a pokemon in sector1x0',
-		sprite: '136',
+		sprite: SpriteEnum.oak,
 		conditionFunction: (s) =>
 			s.quests['catch a pokemon in sector1x0'] !== 'COLLECTED',
+	},
+	researcher1_University: {
+		type: 'NPC',
+		x: 7,
+		y: 5,
+		map: 'camp_university',
+		orientation: 'LEFT',
+		unhandledMessage: [
+			'My Research focuses on the growth of pokemon',
+			'Can you evolve a pokemon, so we can learn more?',
+		],
+		handledMessage: ['Evolution is fascinating'],
+		quest: 'evolve a pokemon',
+		sprite: SpriteEnum.nerd,
+		conditionFunction: (s) => s.quests['evolve a pokemon'] !== 'COLLECTED',
 	},
 	gary_intro: {
 		type: 'NPC',
@@ -171,7 +225,6 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'gary_intro'),
 	},
-
 	//Portals
 	camp_to_market: {
 		type: 'PORTAL',
@@ -344,6 +397,7 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 		map: 'camp_university',
 		conditionFunction: () => true,
 	},
+
 	chest_university: {
 		small: true,
 		type: 'OBSTACLE',
