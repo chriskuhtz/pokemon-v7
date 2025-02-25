@@ -23,7 +23,7 @@ export const typeColors: Record<PokemonType, string> = {
 };
 
 export const typeContrastColors: Record<PokemonType, string> = {
-	normal: 'black',
+	normal: 'white',
 	fire: 'black',
 	water: 'white',
 	electric: 'black',
