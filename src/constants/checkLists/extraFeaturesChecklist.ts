@@ -157,4 +157,5 @@ export const extraFeatureCheckList: {
 	{ name: 'break step between move execution' },
 	{ name: 'browser tab name and icon' },
 	{ name: 'improved keyboard control, interpret direction buttons' },
+	{ name: 'fix loading after evo' },
 ];
