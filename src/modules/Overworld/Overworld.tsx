@@ -337,6 +337,8 @@ export const Overworld = ({
 						style={{
 							top: -playerLocation.y * baseSize,
 							left: -playerLocation.x * baseSize,
+							transitionProperty: 'top,left',
+							transition: `${fps} ease 0s`,
 							zIndex: -1,
 							position: 'absolute',
 						}}

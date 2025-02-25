@@ -66,7 +66,7 @@ export const useOverworldMovement = (
 				});
 			}
 			setNextInput(undefined);
-		}, 1000 / fps);
+		}, fps);
 
 		return () => clearTimeout(int);
 	}, [
