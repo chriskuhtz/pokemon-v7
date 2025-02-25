@@ -1,6 +1,4 @@
-import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
-import { baseSize } from '../../constants/gameData';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getTypeNames } from '../../functions/getTypeNames';
@@ -13,7 +11,7 @@ import { OwnedPokemonCardContent } from './components/OwnedPokemonCardContent';
 
 export const OwnedPokemonCard = ({
 	pokemon,
-	reorder,
+
 	giveHeldItem,
 	takeHeldItem,
 	inventory,
@@ -23,7 +21,6 @@ export const OwnedPokemonCard = ({
 	evolve,
 }: {
 	pokemon: OwnedPokemon;
-	reorder: (x: 'UP' | 'DOWN') => void;
 	giveHeldItem: (newItem: ItemType) => void;
 	setMoves: (id: string, moves: MoveName[]) => void;
 	takeHeldItem: () => void;
@@ -38,7 +35,7 @@ export const OwnedPokemonCard = ({
 		<div
 			style={{
 				display: 'grid',
-				gridTemplateColumns: '2fr 9fr 1fr',
+				gridTemplateColumns: '2fr 10fr',
 				padding: '1rem',
 				alignItems: 'center',
 				justifyItems: 'center',
@@ -67,40 +64,6 @@ export const OwnedPokemonCard = ({
 				giveHeldItem={giveHeldItem}
 				setNickName={(x) => setNickName(pokemon.id, x)}
 			/>
-			<div
-				style={{
-					display: 'flex',
-					flexDirection: 'column',
-					justifyContent: 'space-between',
-					height: '50%',
-				}}
-			>
-				<FaArrowUp
-					onClick={() => reorder('UP')}
-					size={baseSize / 3}
-					role="button"
-					tabIndex={0}
-					onKeyDown={(e) => {
-						e.stopPropagation();
-						if (e.key === 'Enter') {
-							reorder('UP');
-						}
-					}}
-				/>
-
-				<FaArrowDown
-					onClick={() => reorder('DOWN')}
-					size={baseSize / 3}
-					role="button"
-					tabIndex={0}
-					onKeyDown={(e) => {
-						e.stopPropagation();
-						if (e.key === 'Enter') {
-							reorder('DOWN');
-						}
-					}}
-				/>
-			</div>
 		</div>
 	);
 };
