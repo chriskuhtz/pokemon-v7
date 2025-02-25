@@ -71,11 +71,12 @@ export const extraFeatureCheckList: {
 	{ name: 'anounce map on change', handled: true },
 	{ name: 'Unify Toast, Message and MessageQueue', handled: true },
 	{ name: 'queststatus conditional npcs', handled: true },
-	{ name: 'improved keyboard control, interpret direction buttons' },
-	{ name: 'display charge up and secondary ailments in info box' },
 	{
 		name: 'fix: recoil is too high if the move does more damage than target hp ',
+		handled: true,
 	},
+	{ name: 'display charge up and secondary ailments in info box' },
+
 	{ name: 'stop walking animations when encounter triggered' },
 	{ name: 'stop strange spinning of npcs when click navigating' },
 	{ name: 'show k/o pokemon as such in team overview' },
@@ -153,4 +154,5 @@ export const extraFeatureCheckList: {
 	{ name: 'walk through grass animation' },
 	{ name: 'break step between move execution' },
 	{ name: 'browser tab name and icon' },
+	{ name: 'improved keyboard control, interpret direction buttons' },
 ];
