@@ -12,7 +12,6 @@ export const applyOnBattleEnterAbility = ({
 	addMessage,
 	battleFieldEffects,
 }: {
-	opponent: BattlePokemon;
 	user: BattlePokemon;
 	setWeather: (x: WeatherType) => void;
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>;
