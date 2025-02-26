@@ -16,6 +16,7 @@ import { isKO } from '../../../../../functions/isKo';
 import { Message } from '../../../../../hooks/useMessageQueue';
 import {
 	EFFECT_SPORE_CHANCE,
+	POISON_POINT_CHANCE,
 	PrimaryAilment,
 	ROUGH_SKIN_FACTOR,
 	STATIC_CHANCE,
@@ -210,6 +211,21 @@ export const handleAttack = ({
 			'paralysis',
 			addMessage,
 			`by ${target.data.name}'s static`
+		);
+		updatedAttacker = b;
+	}
+	//check for poison-point
+	if (
+		target.ability === 'poison-point' &&
+		contactMoves.includes(move.name) &&
+		Math.random() < POISON_POINT_CHANCE
+	) {
+		const { updatedTarget: b } = applyPrimaryAilmentToPokemon(
+			updatedAttacker,
+			updatedAttacker,
+			'poison',
+			addMessage,
+			`by ${target.data.name}'s poison point`
 		);
 		updatedAttacker = b;
 	}
