@@ -81,6 +81,7 @@ export enum SpriteEnum {
 	umbrellaLady = '083',
 	//continue here
 	blondeLass = '098',
+	gangster = '099',
 	clerkMale = '113',
 	clerkFemale = '114',
 	nurse = '115',

@@ -28,6 +28,7 @@ export const BuyCard = ({
 		console.error('cant buy this item', item);
 		return <></>;
 	}
+
 	return (
 		<ItemCard
 			key={item}

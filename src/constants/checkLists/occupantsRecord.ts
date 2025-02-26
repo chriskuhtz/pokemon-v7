@@ -1,11 +1,15 @@
 import { getTimeOfDay } from '../../functions/getTimeOfDay';
 import { Occupant } from '../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
-import { STANDARD_BUY_MARKET } from '../standardBuyMarket';
+import {
+	STANDARD_BUY_MARKET,
+	VALUABLES_BUY_MARKET,
+} from '../standardBuyMarket';
 
 export const occupantNames = [
 	'pc_Pokecenter_Camp',
 	'merchant_Market_Camp',
+	'merchant_Valuables',
 	'nurse_Pokecenter_Camp',
 	'kid_Camp',
 	'pikachu_fan_Camp',
@@ -66,6 +70,21 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 		],
 		sprite: SpriteEnum['clerkMale'],
 		conditionFunction: () => true,
+	},
+	merchant_Valuables: {
+		type: 'MERCHANT',
+		x: 1,
+		y: 23,
+		orientation: 'DOWN',
+		map: 'sectorE1',
+		inventory: VALUABLES_BUY_MARKET,
+		dialogue: [
+			'I deal in rare items',
+			'Prof doesnt like that',
+			'So I am out here every night',
+		],
+		sprite: SpriteEnum['gangster'],
+		conditionFunction: () => getTimeOfDay() === 'NIGHT',
 	},
 	//Nurses
 	nurse_Pokecenter_Camp: {

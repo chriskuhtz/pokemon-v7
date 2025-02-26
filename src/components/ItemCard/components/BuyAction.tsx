@@ -14,13 +14,11 @@ export const BuyAction = ({
 	const [numberToBuy, setNumberToBuy] = useState<number>(max);
 	useEffect(() => setNumberToBuy(max), [max]);
 
-	if (max === 0) {
-		return <></>;
-	}
 	return (
 		<div className="buyAction">
 			<strong>{price}$</strong>
 			<input
+				disabled={max <= 0}
 				type="number"
 				value={numberToBuy}
 				onChange={(e) => setNumberToBuy(e.target.valueAsNumber)}
@@ -33,7 +31,9 @@ export const BuyAction = ({
 					}
 				}}
 			/>
-			<FaCartPlus onClick={() => buyItem(numberToBuy)} />
+			<FaCartPlus
+				onClick={() => (max > 0 ? buyItem(numberToBuy) : undefined)}
+			/>
 		</div>
 	);
 };
