@@ -157,6 +157,10 @@ export const calculateDamage = (
 		attack.data.type.name === 'fire'
 			? 1.5
 			: 1;
+	const hugePowerFactor =
+		attacker.ability === 'huge-power' || attacker.ability === 'pure-power'
+			? 2
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -173,7 +177,8 @@ export const calculateDamage = (
 				zMoveFactor *
 				teraShieldFactor *
 				flyingFactor *
-				flashFireFactor
+				flashFireFactor *
+				hugePowerFactor
 		),
 		1
 	);

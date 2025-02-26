@@ -186,7 +186,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/36/',
 		handled: true,
 	},
-	{ name: 'huge-power', url: 'https://pokeapi.co/api/v2/ability/37/' },
+	{
+		name: 'huge-power',
+		url: 'https://pokeapi.co/api/v2/ability/37/',
+		handled: true,
+	},
 	{ name: 'poison-point', url: 'https://pokeapi.co/api/v2/ability/38/' },
 	{
 		name: 'inner-focus',
@@ -239,7 +243,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/73/',
 		handled: true,
 	},
-	{ name: 'pure-power', url: 'https://pokeapi.co/api/v2/ability/74/' },
+	{
+		name: 'pure-power',
+		url: 'https://pokeapi.co/api/v2/ability/74/',
+		handled: true,
+	},
 	{
 		name: 'shell-armor',
 		url: 'https://pokeapi.co/api/v2/ability/75/',
@@ -586,6 +594,8 @@ export const abilityNames = [
 	'water-veil',
 	'illuminate',
 	'trace',
+	'huge-power',
+	'pure-power',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
