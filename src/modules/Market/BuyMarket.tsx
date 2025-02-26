@@ -19,7 +19,6 @@ export const BuyMarket = ({
 	money: number;
 	owned: Inventory;
 }): JSX.Element => {
-	console.log(inventory);
 	const { filteredInventory, buttons } = useFilteredInventory(inventory);
 	return (
 		<Page goBack={goBack} headline="What do you want to buy:">

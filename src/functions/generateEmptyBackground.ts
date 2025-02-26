@@ -29,7 +29,7 @@ export const generateBackground = ({
 			if (randomEncounterTiles && Math.random() > 0.3) {
 				return tileMap.encounter;
 			}
-			if (randomObstacleTiles && Math.random() > 0.3) {
+			if (randomObstacleTiles && Math.random() > 0.7) {
 				return tileMap.obstacle;
 			}
 
