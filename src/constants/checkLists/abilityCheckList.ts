@@ -191,7 +191,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/37/',
 		handled: true,
 	},
-	{ name: 'poison-point', url: 'https://pokeapi.co/api/v2/ability/38/' },
+	{
+		name: 'poison-point',
+		url: 'https://pokeapi.co/api/v2/ability/38/',
+		handled: true,
+	},
 	{
 		name: 'inner-focus',
 		url: 'https://pokeapi.co/api/v2/ability/39/',
@@ -596,6 +600,7 @@ export const abilityNames = [
 	'trace',
 	'huge-power',
 	'pure-power',
+	'poison-point',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
