@@ -170,4 +170,5 @@ export const extraFeatureCheckList: {
 	{ name: 'no random obstacles next to bordergates' },
 	{ name: 'stop walking animations when encounter triggered' },
 	{ name: 'stop strange spinning of npcs when click navigating' },
+	{ name: 'ledges' },
 ];

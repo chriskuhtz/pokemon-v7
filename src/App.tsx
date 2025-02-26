@@ -2,7 +2,6 @@ import { useContext, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 import { mapsRecord } from './constants/checkLists/mapsRecord';
 import { testPokemon } from './constants/gameData';
-import { STANDARD_BUY_MARKET } from './constants/standardBuyMarket';
 import { Message } from './hooks/useMessageQueue';
 import { SaveFileContext } from './hooks/useSaveFile';
 import { generateInventory, Inventory } from './interfaces/Inventory';
@@ -30,8 +29,9 @@ export const App = ({
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
 }): JSX.Element => {
-	const [currentMarketInventory, setCurrentMarketInventory] =
-		useState<Partial<Inventory>>(STANDARD_BUY_MARKET);
+	const [currentMarketInventory, setCurrentMarketInventory] = useState<
+		Partial<Inventory>
+	>({});
 	const {
 		saveFile,
 		discardItemReducer,

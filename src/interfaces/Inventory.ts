@@ -98,7 +98,7 @@ export const EmptyInventory: Inventory = {
 	'big-mushroom': 1,
 	pearl: 1,
 	'big-pearl': 1,
-	'star-dust': 1,
+	stardust: 1,
 	'star-piece': 1,
 	nugget: 1,
 	'heart-scale': 1,

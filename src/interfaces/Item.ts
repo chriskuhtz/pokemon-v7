@@ -114,7 +114,7 @@ export const valuables = [
 	'big-mushroom',
 	'pearl',
 	'big-pearl',
-	'star-dust',
+	'stardust',
 	'star-piece',
 	'nugget',
 	'heart-scale',

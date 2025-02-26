@@ -13,5 +13,3 @@ export const STANDARD_BUY_MARKET: Partial<Inventory> = {
 export const VALUABLES_BUY_MARKET: Partial<Inventory> = Object.fromEntries(
 	valuables.map((v) => [v, 1])
 );
-
-console.log(VALUABLES_BUY_MARKET);

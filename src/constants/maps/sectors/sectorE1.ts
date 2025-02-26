@@ -15,9 +15,16 @@ export const sectorE1: OverworldMap = {
 		withBorder: true,
 		randomEncounterTiles: true,
 		randomObstacleTiles: true,
-		borderGates: [{ x: 0, y: 24 }],
+		borderGates: [
+			{ x: 0, y: 24 },
+			{ x: 24, y: 0 },
+		],
 	}),
-	occupants: ['sectorE1_to_camp', 'merchant_Valuables'],
+	occupants: [
+		'sectorE1_to_camp',
+		'merchant_Valuables',
+		'sectorE1_to_sectorN1E1',
+	],
 	possibleEncounters: {
 		MORNING: [
 			{ dexId: 27, xp: 100 },
