@@ -161,4 +161,5 @@ export const extraFeatureCheckList: {
 	{
 		name: 'use more typecolors',
 	},
+	{ name: " be careful with state updates for 'focused' in team" },
 ];

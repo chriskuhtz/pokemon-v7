@@ -9,7 +9,7 @@ import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
-const defaultStarters = [133, 4, 7];
+const defaultStarters = [1, 4, 7];
 const randomStarterOptions = [
 	getRandomPokemonId(),
 	getRandomPokemonId(),

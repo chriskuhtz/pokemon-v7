@@ -40,15 +40,22 @@ export const Team = ({
 		team.map((t) => ({ ...t, caughtBefore: true }))
 	);
 
-	const [focused, setFocused] = useState<OwnedPokemon>(team[0]);
+	const [focusedId, setFocusedId] = useState<string>(team[0].id);
 
+	const focused = useMemo(
+		() => team?.find((r) => r.id === focusedId),
+		[team, focusedId]
+	);
 	const focusedData = useMemo(
-		() => res?.find((r) => r.dexId === focused.dexId)?.data,
+		() => res?.find((r) => r.dexId === focused?.dexId)?.data,
 		[res, focused]
 	);
 
 	const reorder = (dir: 'UP' | 'DOWN') => {
-		const index = team.findIndex((p) => p.id === focused.id);
+		if (!focused) {
+			return;
+		}
+		const index = team.findIndex((p) => p.id === focusedId);
 		if (index === 0 && dir == 'UP') {
 			return;
 		}
@@ -62,7 +69,7 @@ export const Team = ({
 			if (p.id === displaced.id) {
 				return focused;
 			}
-			if (p.id === focused.id) {
+			if (p.id === focusedId) {
 				return displaced;
 			}
 			return p;
@@ -71,7 +78,7 @@ export const Team = ({
 		setTeam(newTeam);
 	};
 
-	if (!focusedData || !res) {
+	if (!focusedData || !res || !focused) {
 		return <LoadingScreen />;
 	}
 
@@ -106,7 +113,7 @@ export const Team = ({
 									}}
 									key={pokemon.id}
 								>
-									{index !== 0 && pokemon.id === focused.id && (
+									{index !== 0 && pokemon.id === focusedId && (
 										<FaArrowLeft
 											onClick={() => reorder('UP')}
 											size={baseSize / 3}
@@ -121,7 +128,7 @@ export const Team = ({
 										/>
 									)}
 									<IconSolarSystem
-										onClick={() => setFocused(pokemon)}
+										onClick={() => setFocusedId(pokemon.id)}
 										sun={{ url: getPokemonSprite(pokemon.dexId) }}
 										firstPlanetUrl={`/typeIcons/${typeNames[0]}.png`}
 										secondPlanetUrl={
@@ -136,7 +143,7 @@ export const Team = ({
 												: undefined
 										}
 									/>
-									{pokemon.id === focused.id && index !== team.length - 1 && (
+									{pokemon.id === focusedId && index !== team.length - 1 && (
 										<FaArrowRight
 											onClick={() => reorder('DOWN')}
 											size={baseSize / 3}
@@ -217,7 +224,7 @@ export const Team = ({
 						item?: ItemType
 					) => {
 						evolve(
-							focused.id,
+							focusedId,
 							newDexId,
 							focusedData.name,
 							newName,
@@ -227,12 +234,12 @@ export const Team = ({
 						invalidate();
 					}}
 					data={focusedData}
-					key={focused.id}
+					key={focusedId}
 					pokemon={focused}
 					inventory={inventory}
-					takeHeldItem={() => changeHeldItem(focused.id)}
+					takeHeldItem={() => changeHeldItem(focusedId)}
 					giveHeldItem={(newItem: ItemType) =>
-						changeHeldItem(focused.id, newItem)
+						changeHeldItem(focusedId, newItem)
 					}
 				/>
 			</Stack>
