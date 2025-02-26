@@ -111,7 +111,9 @@ export const LineUpSelection = ({
 							}}
 						>
 							<img
-								style={{}}
+								style={{
+									filter: isKO(teamMember) ? 'grayscale(1)' : undefined,
+								}}
 								height={baseSize}
 								src={getPokemonSprite(teamMember.dexId, 'back')}
 							/>

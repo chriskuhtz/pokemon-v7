@@ -79,10 +79,7 @@ export const extraFeatureCheckList: {
 		name: 'display charge up and secondary ailments in info box',
 		handled: true,
 	},
-
-	{ name: 'stop walking animations when encounter triggered' },
-	{ name: 'stop strange spinning of npcs when click navigating' },
-	{ name: 'show k/o pokemon as such in team overview' },
+	{ name: 'show k/o pokemon as such in team overview', handled: true },
 	{ name: 'setting: instant mode' },
 	{ name: 'flex display on Line up Selection' },
 	{ name: 'Team overview on overworld' },
@@ -170,4 +167,7 @@ export const extraFeatureCheckList: {
 	{ name: 'battle tent' },
 	{ name: 'accurate house sizes' },
 	{ name: 'battlepokemon size?' },
+	{ name: 'no random obstacles next to bordergates' },
+	{ name: 'stop walking animations when encounter triggered' },
+	{ name: 'stop strange spinning of npcs when click navigating' },
 ];

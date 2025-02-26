@@ -7,6 +7,7 @@ import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { getStats } from '../../../functions/getStats';
 import { getTypeNames } from '../../../functions/getTypeNames';
+import { isOwnedPokemonKO } from '../../../functions/isKo';
 import { Inventory } from '../../../interfaces/Inventory';
 import { ItemType } from '../../../interfaces/Item';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
@@ -98,7 +99,12 @@ export const OwnedPokemonCardContent = ({
 					}}
 				>
 					<IconSolarSystem
-						sun={{ url: getPokemonSprite(ownedPokemon.dexId) }}
+						sun={{
+							url: getPokemonSprite(ownedPokemon.dexId),
+							styles: isOwnedPokemonKO(ownedPokemon)
+								? { filter: 'grayscale(1)' }
+								: undefined,
+						}}
 						firstPlanetUrl={`/typeIcons/${typeNames[0]}.png`}
 						secondPlanetUrl={
 							typeNames.length > 1

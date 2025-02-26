@@ -42,7 +42,11 @@ export const RefillHandling = ({
 						if (teamMember.status === 'BENCH' && !isKO(teamMember)) {
 							return (
 								<img
-									style={{ borderRadius: 9000, padding: '1rem' }}
+									style={{
+										borderRadius: 9000,
+										padding: '1rem',
+										filter: isKO(teamMember) ? 'grayscale(1)' : undefined,
+									}}
 									role="button"
 									onClick={() =>
 										addMessage({
