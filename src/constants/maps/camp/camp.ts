@@ -12,7 +12,10 @@ export const camp: OverworldMap = {
 		width: 20,
 		withBorder: true,
 		randomEncounterTiles: false,
-		borderGates: [{ x: 19, y: 9 }],
+		borderGates: [
+			{ x: 19, y: 9 },
+			{ x: 9, y: 0 },
+		],
 	}),
 	occupants: [
 		//npcs
@@ -27,10 +30,12 @@ export const camp: OverworldMap = {
 		'camp_to_pokecenter',
 		'camp_to_trailer',
 		'camp_to_university',
-		'camp_to_sector1x0',
+		'camp_to_sectorN1',
+		'camp_to_sectorE1',
 		//signs
 		'camp_sign',
-		'to_sector1x0_sign',
+		'to_sectorE1_sign',
+		'to_sectorN1_sign',
 	],
 	possibleEncounters: { MORNING: [], DAY: [], EVENING: [], NIGHT: [] },
 };

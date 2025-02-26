@@ -27,9 +27,12 @@ export const occupantNames = [
 	'chest_university',
 	'bed_trailer',
 	'camp_sign',
-	'to_sector1x0_sign',
-	'camp_to_sector1x0',
-	'sector1x0_to_camp',
+	'to_sectorE1_sign',
+	'to_sectorN1_sign',
+	'camp_to_sectorE1',
+	'sectorE1_to_camp',
+	'camp_to_sectorN1',
+	'sectorN1_to_camp',
 ] as const;
 export type OccupantName = (typeof occupantNames)[number];
 
@@ -178,10 +181,10 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 			'how is the catching going?',
 			'sector 1x0 is to the east of the camp',
 		],
-		quest: 'catch a pokemon in sector1x0',
+		quest: 'catch a pokemon in sectorE1',
 		sprite: SpriteEnum.oak,
 		conditionFunction: (s) =>
-			s.quests['catch a pokemon in sector1x0'] !== 'COLLECTED',
+			s.quests['catch a pokemon in sectorE1'] !== 'COLLECTED',
 	},
 	researcher1_University: {
 		type: 'NPC',
@@ -354,7 +357,7 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 		},
 		conditionFunction: () => true,
 	},
-	camp_to_sector1x0: {
+	camp_to_sectorE1: {
 		type: 'PORTAL',
 		map: 'camp',
 		x: 19,
@@ -367,13 +370,13 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 			x: 0,
 			y: 24,
 			orientation: 'RIGHT',
-			mapId: 'sector1x0',
+			mapId: 'sectorE1',
 		},
 		conditionFunction: () => true,
 	},
-	sector1x0_to_camp: {
+	sectorE1_to_camp: {
 		type: 'PORTAL',
-		map: 'sector1x0',
+		map: 'sectorE1',
 		x: 0,
 		y: 24,
 
@@ -384,6 +387,39 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 			x: 19,
 			y: 9,
 			orientation: 'LEFT',
+			mapId: 'camp',
+		},
+		conditionFunction: () => true,
+	},
+	camp_to_sectorN1: {
+		type: 'PORTAL',
+		map: 'camp',
+		x: 9,
+		y: 0,
+
+		sprite: '/mapObjects/doormat.png',
+		small: true,
+		portal: {
+			forwardFoot: 'CENTER1',
+			x: 24,
+			y: 49,
+			orientation: 'UP',
+			mapId: 'sectorN1',
+		},
+		conditionFunction: () => true,
+	},
+	sectorN1_to_camp: {
+		type: 'PORTAL',
+		map: 'sectorN1',
+		x: 24,
+		y: 49,
+		sprite: '/mapObjects/doormat.png',
+		small: true,
+		portal: {
+			forwardFoot: 'CENTER1',
+			x: 9,
+			y: 0,
+			orientation: 'DOWN',
 			mapId: 'camp',
 		},
 		conditionFunction: () => true,
@@ -427,12 +463,24 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 		approachDirection: 'UP',
 		conditionFunction: () => true,
 	},
-	to_sector1x0_sign: {
+	to_sectorE1_sign: {
 		map: 'camp',
 		type: 'SIGN',
 		x: 18,
 		y: 8,
-		dialogue: ['Sector 1x0 this way', 'Beware of wild spearow'],
+		dialogue: ['Sector E1 this way', 'Beware of wild spearow'],
+		approachDirection: 'UP',
+		conditionFunction: () => true,
+	},
+	to_sectorN1_sign: {
+		map: 'camp',
+		type: 'SIGN',
+		x: 10,
+		y: 1,
+		dialogue: [
+			'Sector 1x1',
+			'The Rangers are investigating if wild pokemon cut down the trees',
+		],
 		approachDirection: 'UP',
 		conditionFunction: () => true,
 	},

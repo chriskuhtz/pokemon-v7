@@ -25,8 +25,8 @@ export const useDrawBackground = (canvasId: string, map: OverworldMap) => {
 			tileMap.forEach((row, h) => {
 				row.forEach((value, w) => {
 					const isEncounterGrass = value === 1;
-					const isBorder = value === 3;
-					if (!isEncounterGrass && !isBorder) {
+					//const isBorder = value === 3;
+					if (!isEncounterGrass) {
 						ctx?.drawImage(
 							baseTileImage,
 							w * baseSize,

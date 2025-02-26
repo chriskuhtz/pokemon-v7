@@ -4,7 +4,8 @@ import { campMarket } from '../maps/camp/campMarket';
 import { campPokecenter } from '../maps/camp/campPokecenter';
 import { campTent } from '../maps/camp/campTent';
 import { campUniversity } from '../maps/camp/campUniversity';
-import { sector1x0 } from '../maps/sectors/sector1x0';
+import { sectorE1 } from '../maps/sectors/sectorE1';
+import { sectorN1 } from '../maps/sectors/sectorN1';
 
 export type MapId =
 	| 'camp'
@@ -12,7 +13,8 @@ export type MapId =
 	| 'camp_pokecenter'
 	| 'camp_university'
 	| 'camp_tent'
-	| 'sector1x0';
+	| 'sectorE1'
+	| 'sectorN1';
 
 export const mapsRecord: Record<MapId, OverworldMap> = {
 	camp: camp,
@@ -20,5 +22,6 @@ export const mapsRecord: Record<MapId, OverworldMap> = {
 	camp_pokecenter: campPokecenter,
 	camp_university: campUniversity,
 	camp_tent: campTent,
-	sector1x0: sector1x0,
+	sectorE1: sectorE1,
+	sectorN1: sectorN1,
 };

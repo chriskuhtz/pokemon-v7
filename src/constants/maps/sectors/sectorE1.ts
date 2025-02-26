@@ -1,8 +1,8 @@
 import { generateBackground } from '../../../functions/generateEmptyBackground';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 
-export const sector1x0: OverworldMap = {
-	id: 'sector1x0',
+export const sectorE1: OverworldMap = {
+	id: 'sectorE1',
 	borderTile: '/tiles/shrub.png',
 	obstacleTile: '/tiles/shrub.png',
 	backgroundTile: '/tiles/grass.png',
@@ -17,7 +17,7 @@ export const sector1x0: OverworldMap = {
 		randomObstacleTiles: true,
 		borderGates: [{ x: 0, y: 24 }],
 	}),
-	occupants: ['sector1x0_to_camp'],
+	occupants: ['sectorE1_to_camp'],
 	possibleEncounters: {
 		MORNING: [
 			{ dexId: 27, xp: 100 },
