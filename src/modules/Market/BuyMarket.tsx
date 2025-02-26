@@ -1,10 +1,10 @@
 import React from 'react';
+import { useFilteredInventory } from '../../components/ItemsFilter/ItemsFilter';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 import { BuyCard } from './components/BuyCard';
-import { useFilteredInventory } from '../../components/ItemsFilter/ItemsFilter';
 
 export const BuyMarket = ({
 	goBack,
@@ -19,6 +19,7 @@ export const BuyMarket = ({
 	money: number;
 	owned: Inventory;
 }): JSX.Element => {
+	console.log(inventory);
 	const { filteredInventory, buttons } = useFilteredInventory(inventory);
 	return (
 		<Page goBack={goBack} headline="What do you want to buy:">

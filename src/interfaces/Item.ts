@@ -103,6 +103,23 @@ export const evoStones = [
 ] as const;
 export const heldItems = ['metal-coat'] as const;
 
+export const valuables = [
+	'shoal-salt',
+	'shoal-shell',
+	'green-shard',
+	'red-shard',
+	'blue-shard',
+	'yellow-shard',
+	'tiny-mushroom',
+	'big-mushroom',
+	'pearl',
+	'big-pearl',
+	'star-dust',
+	'star-piece',
+	'nugget',
+	'heart-scale',
+] as const;
+
 export const itemTypes = [
 	...balltypes,
 	...healingItemTypes,
@@ -114,6 +131,7 @@ export const itemTypes = [
 	...encounterChanceItems,
 	...evoStones,
 	...heldItems,
+	...valuables,
 	'repel',
 	'max-repel',
 	'super-repel',

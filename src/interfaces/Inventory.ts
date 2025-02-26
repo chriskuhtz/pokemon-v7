@@ -88,6 +88,20 @@ export const EmptyInventory: Inventory = {
 	'escape-rope': 0,
 	'metal-coat': 0,
 	'black-augurite': 0,
+	'shoal-salt': 1,
+	'shoal-shell': 1,
+	'green-shard': 1,
+	'red-shard': 1,
+	'blue-shard': 1,
+	'yellow-shard': 1,
+	'tiny-mushroom': 1,
+	'big-mushroom': 1,
+	pearl: 1,
+	'big-pearl': 1,
+	'star-dust': 1,
+	'star-piece': 1,
+	nugget: 1,
+	'heart-scale': 1,
 };
 export const generateInventory = (wanted: Partial<Inventory>): Inventory => {
 	return joinInventories(EmptyInventory, wanted);

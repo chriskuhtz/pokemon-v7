@@ -1,4 +1,5 @@
 import { Inventory } from '../interfaces/Inventory';
+import { valuables } from '../interfaces/Item';
 
 export const STANDARD_BUY_MARKET: Partial<Inventory> = {
 	'poke-ball': 1,
@@ -8,3 +9,9 @@ export const STANDARD_BUY_MARKET: Partial<Inventory> = {
 	'berry-juice': 1,
 	'escape-rope': 1,
 };
+
+export const VALUABLES_BUY_MARKET: Partial<Inventory> = Object.fromEntries(
+	valuables.map((v) => [v, 1])
+);
+
+console.log(VALUABLES_BUY_MARKET);

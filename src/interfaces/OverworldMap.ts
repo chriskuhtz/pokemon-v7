@@ -56,7 +56,7 @@ export interface OverworldMerchant extends BaseOccupant {
 	orientation: CharacterOrientation;
 	inventory: Partial<Inventory>;
 	dialogue: string[];
-	sprite: '113';
+	sprite: string;
 }
 export interface OverworldNurse extends BaseOccupant {
 	type: 'NURSE';
