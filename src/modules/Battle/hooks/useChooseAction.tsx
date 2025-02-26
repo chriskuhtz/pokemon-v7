@@ -12,13 +12,15 @@ import {
 	isRunawayItem,
 	isXItem,
 } from '../../../interfaces/Item';
+import { WeatherType } from '../../../interfaces/Weather';
 import { ChooseActionPayload } from '../BattleField';
 
 export const useChooseAction = (
 	allOnField: BattlePokemon[],
 	pokemon: BattlePokemon[],
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
-	battleRound: number
+	battleRound: number,
+	battleWeather: WeatherType | undefined
 ) => {
 	return useCallback(
 		({ userId, actionName, targetId, moveToRestore }: ChooseActionPayload) => {
@@ -103,7 +105,11 @@ export const useChooseAction = (
 				throw new Error('user does not know the selected move');
 			}
 
-			if (secondTurnMoves.includes(actionName)) {
+			if (
+				secondTurnMoves.includes(actionName) &&
+				//solar beam doesnt need charge up in sunlight
+				!(battleWeather === 'sun' && actionName === 'solar-beam')
+			) {
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
 						if (p.id === user.id) {
@@ -197,6 +203,6 @@ export const useChooseAction = (
 				})
 			);
 		},
-		[allOnField, battleRound, pokemon, setPokemon]
+		[allOnField, battleRound, battleWeather, pokemon, setPokemon]
 	);
 };
