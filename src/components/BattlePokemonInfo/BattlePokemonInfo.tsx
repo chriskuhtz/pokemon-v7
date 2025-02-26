@@ -1,3 +1,4 @@
+import { secondTurnMoves } from '../../constants/secondTurnMoves';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getPlayerId } from '../../functions/getPlayerId';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
@@ -33,6 +34,18 @@ export const BattlePokemonInfo = ({ pokemon }: { pokemon: BattlePokemon }) => {
 				}
 			})}
 			<PrimaryAilmentIcon primaryAilment={pokemon.primaryAilment} />
+			{pokemon.moveQueue.length > 0 &&
+				pokemon.moveQueue[0].type === 'BattleAttack' &&
+				secondTurnMoves.includes(pokemon.moveQueue[0].name) && (
+					<Chip>
+						<span>Charged Up: {pokemon.moveQueue[0].name}</span>
+					</Chip>
+				)}
+			{pokemon.secondaryAilments.map((s) => (
+				<Chip>
+					<span>{s.type}</span>
+				</Chip>
+			))}
 			<HpBar max={pokemon.stats.hp} damage={pokemon.damage} />
 			{pokemon.ownerId === getPlayerId() && <XpBar xp={pokemon.xp} />}
 		</div>
