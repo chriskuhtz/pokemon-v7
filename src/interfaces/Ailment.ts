@@ -15,6 +15,7 @@ const secondaryAilments = [
 	'trap',
 	'infatuation',
 	'leech-seed',
+	'leeching-on',
 	'flash-fire',
 	'color-changed',
 	'guard-spec',
@@ -26,8 +27,9 @@ export type SecondaryAilmentType = (typeof secondaryAilments)[number];
 export interface SecondaryAilment {
 	type: SecondaryAilmentType;
 	duration: number;
-	newType?: PokemonType;
-	move?: MoveName;
+	newType?: PokemonType; // for color change
+	move?: MoveName; // For Disable
+	healAmount?: number; // for leech seed
 }
 
 export function isSecondaryAilment(x: { type: string }): x is SecondaryAilment {

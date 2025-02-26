@@ -16,6 +16,7 @@ import { isKO } from '../../../../../functions/isKo';
 import { Message } from '../../../../../hooks/useMessageQueue';
 import {
 	EFFECT_SPORE_CHANCE,
+	LEECH_DAMAGE_FACTOR,
 	POISON_POINT_CHANCE,
 	PrimaryAilment,
 	ROUGH_SKIN_FACTOR,
@@ -187,7 +188,17 @@ export const handleAttack = ({
 	if (move.multiHits === 0) {
 		updatedAttacker = changeMovePP(updatedAttacker, move.name, -1);
 	}
-
+	//leech on
+	if (move.name === 'leech-seed') {
+		updatedAttacker = applySecondaryAilmentToPokemon(
+			updatedAttacker,
+			'leeching-on',
+			addMessage,
+			undefined,
+			undefined,
+			updatedTarget.stats.hp * LEECH_DAMAGE_FACTOR
+		);
+	}
 	//apply stat changes
 	if (selfTargeting) {
 		updatedAttacker = applyAttackStatChanges(

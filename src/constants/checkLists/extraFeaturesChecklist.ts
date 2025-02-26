@@ -80,6 +80,7 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'show k/o pokemon as such in team overview', handled: true },
+	{ name: 'fix draw order' },
 	{ name: 'setting: instant mode' },
 	{ name: 'flex display on Line up Selection' },
 	{ name: 'Team overview on overworld' },
@@ -171,4 +172,5 @@ export const extraFeatureCheckList: {
 	{ name: 'stop walking animations when encounter triggered' },
 	{ name: 'stop strange spinning of npcs when click navigating' },
 	{ name: 'ledges' },
+	{ name: 'random location items that respawn' },
 ];
