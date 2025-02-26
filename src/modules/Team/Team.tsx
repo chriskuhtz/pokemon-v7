@@ -5,6 +5,7 @@ import { baseSize } from '../../constants/gameData';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getTypeNames } from '../../functions/getTypeNames';
+import { isOwnedPokemonKO } from '../../functions/isKo';
 import { useGetBattleTeam } from '../../hooks/useGetBattleTeam';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
@@ -129,7 +130,12 @@ export const Team = ({
 									)}
 									<IconSolarSystem
 										onClick={() => setFocusedId(pokemon.id)}
-										sun={{ url: getPokemonSprite(pokemon.dexId) }}
+										sun={{
+											url: getPokemonSprite(pokemon.dexId),
+											styles: isOwnedPokemonKO(pokemon)
+												? { filter: 'grayscale(1)' }
+												: undefined,
+										}}
 										firstPlanetUrl={`/typeIcons/${typeNames[0]}.png`}
 										secondPlanetUrl={
 											typeNames.length > 1

@@ -376,7 +376,11 @@ export const movesCheckList: {
 	},
 	{ name: 'meditate', url: 'https://pokeapi.co/api/v2/move/96/' },
 	{ name: 'agility', url: 'https://pokeapi.co/api/v2/move/97/' },
-	{ name: 'quick-attack', url: 'https://pokeapi.co/api/v2/move/98/' },
+	{
+		name: 'quick-attack',
+		url: 'https://pokeapi.co/api/v2/move/98/',
+		handled: true,
+	},
 	{ name: 'rage', url: 'https://pokeapi.co/api/v2/move/99/' },
 	{ name: 'teleport', url: 'https://pokeapi.co/api/v2/move/100/' },
 	{
@@ -712,7 +716,11 @@ export const movesCheckList: {
 	{ name: 'dragon-rush', url: 'https://pokeapi.co/api/v2/move/407/' },
 	{ name: 'power-gem', url: 'https://pokeapi.co/api/v2/move/408/' },
 	{ name: 'drain-punch', url: 'https://pokeapi.co/api/v2/move/409/' },
-	{ name: 'vacuum-wave', url: 'https://pokeapi.co/api/v2/move/410/' },
+	{
+		name: 'vacuum-wave',
+		url: 'https://pokeapi.co/api/v2/move/410/',
+		handled: true,
+	},
 	{ name: 'focus-blast', url: 'https://pokeapi.co/api/v2/move/411/' },
 	{ name: 'energy-ball', url: 'https://pokeapi.co/api/v2/move/412/' },
 	{ name: 'brave-bird', url: 'https://pokeapi.co/api/v2/move/413/' },
@@ -724,7 +732,11 @@ export const movesCheckList: {
 	{ name: 'avalanche', url: 'https://pokeapi.co/api/v2/move/419/' },
 	{ name: 'ice-shard', url: 'https://pokeapi.co/api/v2/move/420/' },
 	{ name: 'shadow-claw', url: 'https://pokeapi.co/api/v2/move/421/' },
-	{ name: 'thunder-fang', url: 'https://pokeapi.co/api/v2/move/422/' },
+	{
+		name: 'thunder-fang',
+		url: 'https://pokeapi.co/api/v2/move/422/',
+		handled: true,
+	},
 	{ name: 'ice-fang', url: 'https://pokeapi.co/api/v2/move/423/' },
 	{ name: 'fire-fang', url: 'https://pokeapi.co/api/v2/move/424/' },
 	{ name: 'shadow-sneak', url: 'https://pokeapi.co/api/v2/move/425/' },
@@ -1469,6 +1481,9 @@ export const handledMoves = [
 	'confusion',
 	'psychic',
 	'hypnosis',
+	'thunder-fang',
+	'quick-attack',
+	'vacuum-wave',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
