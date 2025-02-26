@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+	ReactNode,
+	useCallback,
+	useEffect,
+	useMemo,
+	useState,
+} from 'react';
 import { mapsRecord } from '../constants/checkLists/mapsRecord';
 import { MoveName } from '../constants/checkLists/movesCheckList';
 import {
@@ -14,6 +20,7 @@ import { determineWildPokemon } from '../functions/determineWildPokemon';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { reduceBattlePokemonToOwnedPokemon } from '../functions/reduceBattlePokemonToOwnedPokemon';
+import { reduceEncounterRateModifier } from '../functions/reduceEncounterRateModifier';
 import { updateItemFunction } from '../functions/updateItemFunction';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { Inventory, joinInventories } from '../interfaces/Inventory';
@@ -22,27 +29,6 @@ import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { RoutesType } from '../interfaces/Routing';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
 import { Message } from './useMessageQueue';
-
-export const getHatchTimeModifier = (team: OwnedPokemon[]): number => {
-	return team.some((t) => t.ability === 'magma-armor') ? 2 : 1;
-};
-
-export const reduceEncounterRateModifier = (
-	steps: number,
-	encounterRateModifier?: { factor: number; steps: number }
-): { factor: number; steps: number } | undefined => {
-	if (!encounterRateModifier) {
-		return;
-	}
-	if (steps >= encounterRateModifier.steps) {
-		return;
-	}
-
-	return {
-		...encounterRateModifier,
-		steps: encounterRateModifier.steps - steps,
-	};
-};
 
 export interface LeaveBattlePayload {
 	caughtPokemon: BattlePokemon[];
@@ -98,7 +84,7 @@ export interface UseSaveFile {
 	) => void;
 }
 
-export const useSaveFile = (
+const useSaveFile = (
 	init: SaveFile,
 	addMessage: (x: Message) => void
 ): UseSaveFile => {
@@ -631,4 +617,22 @@ export const useSaveFile = (
 		leaveBattleReducer,
 		applyEncounterRateModifierItem,
 	};
+};
+
+export const SaveFileContext = React.createContext({} as UseSaveFile);
+
+export const SaveFileProvider = ({
+	children,
+	addMessage,
+}: {
+	children: ReactNode;
+	addMessage: (x: Message) => void;
+}) => {
+	const value = useSaveFile(testState, addMessage);
+
+	return (
+		<SaveFileContext.Provider value={value}>
+			{children}
+		</SaveFileContext.Provider>
+	);
 };
