@@ -75,7 +75,10 @@ export const extraFeatureCheckList: {
 		name: 'fix: recoil is too high if the move does more damage than target hp ',
 		handled: true,
 	},
-	{ name: 'display charge up and secondary ailments in info box' },
+	{
+		name: 'display charge up and secondary ailments in info box',
+		handled: true,
+	},
 
 	{ name: 'stop walking animations when encounter triggered' },
 	{ name: 'stop strange spinning of npcs when click navigating' },
@@ -161,5 +164,4 @@ export const extraFeatureCheckList: {
 	{
 		name: 'use more typecolors',
 	},
-	{ name: " be careful with state updates for 'focused' in team" },
 ];
