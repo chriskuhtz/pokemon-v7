@@ -33,6 +33,7 @@ export const occupantNames = [
 	'sectorE1_to_camp',
 	'camp_to_sectorN1',
 	'sectorN1_to_camp',
+	'ranger_sectorN1',
 ] as const;
 export type OccupantName = (typeof occupantNames)[number];
 
@@ -203,8 +204,8 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 	},
 	gary_intro: {
 		type: 'NPC',
-		x: 18,
-		y: 9,
+		x: 4,
+		y: 3,
 		map: 'camp',
 		orientation: 'LEFT',
 		gifts: {
@@ -227,6 +228,28 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 		sprite: SpriteEnum['gary'],
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'gary_intro'),
+	},
+	ranger_sectorN1: {
+		type: 'NPC',
+		x: 20,
+		y: 40,
+		map: 'sectorN1',
+		orientation: 'LEFT',
+		unhandledMessage: [
+			'I am one of the forest rangers for our camp',
+			'I am investigating',
+			'what cut down these trees',
+			'I think the pokemon Scyther',
+			'might have something to do with it',
+			'Can you catch one, so we can learn more?',
+		],
+		handledMessage: [
+			'Pokemon live in a balance with the environment',
+			'Too many scyther might destroy their own habitat',
+		],
+		quest: 'catch a scyther',
+		sprite: SpriteEnum.explorer,
+		conditionFunction: (s) => s.quests['catch a scyther'] !== 'COLLECTED',
 	},
 	//Portals
 	camp_to_market: {
@@ -478,7 +501,7 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 		x: 10,
 		y: 1,
 		dialogue: [
-			'Sector 1x1',
+			'Sector N1',
 			'The Rangers are investigating if wild pokemon cut down the trees',
 		],
 		approachDirection: 'UP',

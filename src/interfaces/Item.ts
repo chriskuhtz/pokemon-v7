@@ -99,7 +99,9 @@ export const evoStones = [
 	'dawn-stone',
 	'dusk-stone',
 	'shiny-stone',
+	'black-augurite',
 ] as const;
+export const heldItems = ['metal-coat'] as const;
 
 export const itemTypes = [
 	...balltypes,
@@ -111,6 +113,7 @@ export const itemTypes = [
 	...runawayItemTypes,
 	...encounterChanceItems,
 	...evoStones,
+	...heldItems,
 	'repel',
 	'max-repel',
 	'super-repel',

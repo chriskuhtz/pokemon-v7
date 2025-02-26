@@ -7,6 +7,7 @@ export const questNames = [
 	'catch a gastly',
 	'catch a clefairy',
 	'evolve a pokemon',
+	'catch a scyther',
 	'train a pokemon to level 10',
 ] as const;
 export type QuestName = (typeof questNames)[number];
@@ -34,6 +35,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'moon-stone': 1 },
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) => p.dexId === 92);
+		},
+	},
+	'catch a scyther': {
+		rewardItems: { 'metal-coat': 1, 'black-augurite': 1 },
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) => p.dexId === 123);
 		},
 	},
 	'evolve a pokemon': {

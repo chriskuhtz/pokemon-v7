@@ -169,4 +169,5 @@ export const extraFeatureCheckList: {
 	{ name: 'berry planting' },
 	{ name: 'battle tent' },
 	{ name: 'accurate house sizes' },
+	{ name: 'battlepokemon size?' },
 ];

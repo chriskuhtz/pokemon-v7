@@ -319,7 +319,8 @@ export const BattleField = ({
 		allOnField,
 		pokemon,
 		setPokemon,
-		battleRound
+		battleRound,
+		battleWeather
 	);
 	const handleAction = useHandleAction(
 		pokemon,

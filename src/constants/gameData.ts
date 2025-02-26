@@ -36,6 +36,7 @@ export const testState: SaveFile = {
 		'catch a pikachu': 'INACTIVE',
 		'catch a clefairy': 'INACTIVE',
 		'catch a gastly': 'INACTIVE',
+		'catch a scyther': 'INACTIVE',
 		'evolve a pokemon': 'INACTIVE',
 		'train a pokemon to level 10': 'INACTIVE',
 	},
