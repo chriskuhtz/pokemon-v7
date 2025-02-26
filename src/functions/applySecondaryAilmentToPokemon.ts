@@ -11,7 +11,8 @@ export const applySecondaryAilmentToPokemon = (
 	ailment: SecondaryAilment['type'],
 	addMessage: (x: Message) => void,
 	newType?: PokemonType,
-	move?: MoveName
+	move?: MoveName,
+	healAmount?: number
 ): BattlePokemon => {
 	if (isKO(pokemon)) {
 		//already knocked out, no need to add ailments
@@ -120,6 +121,33 @@ export const applySecondaryAilmentToPokemon = (
 				],
 			};
 		}
+	}
+	if (ailment === 'leech-seed') {
+		addMessage({ message: `${pokemon.data.name} was seeded` });
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'leech-seed',
+					duration: 9000,
+				},
+			],
+		};
+	}
+	if (ailment === 'leeching-on' && healAmount) {
+		addMessage({ message: `${pokemon.data.name} leeched on` });
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'leeching-on',
+					duration: 9000,
+					healAmount,
+				},
+			],
+		};
 	}
 	return pokemon;
 };

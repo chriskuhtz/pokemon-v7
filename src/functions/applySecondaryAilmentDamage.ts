@@ -1,6 +1,7 @@
-import { TRAP_DAMAGE_FACTOR } from '../interfaces/Ailment';
+import { LEECH_DAMAGE_FACTOR, TRAP_DAMAGE_FACTOR } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { isTrapped } from './isTrapped';
+import { getMiddleOfThree } from './getMiddleOfThree';
+import { isLeechSeeded, isTrapped, leechingOn } from './isTrapped';
 
 export const applySecondaryAilmentDamage = (
 	pokemon: BattlePokemon,
@@ -17,5 +18,24 @@ export const applySecondaryAilmentDamage = (
 			damage: updated.damage + trapDamage,
 		};
 	}
+	if (isLeechSeeded(updated)) {
+		addMessage(`${pokemon.data.name} had its energy drained`);
+		const leechDamage = Math.floor(LEECH_DAMAGE_FACTOR * updated.stats.hp);
+		updated = {
+			...updated,
+			damage: updated.damage + leechDamage,
+		};
+	}
+
+	const leechTargets = leechingOn(updated);
+
+	leechTargets.forEach((l) => {
+		addMessage(`${pokemon.data.name} leeched health`);
+		updated = {
+			...updated,
+			damage: getMiddleOfThree([0, updated.damage - l, pokemon.stats.hp]),
+		};
+	});
+
 	return updated;
 };
