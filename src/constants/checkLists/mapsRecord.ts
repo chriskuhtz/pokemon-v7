@@ -5,7 +5,8 @@ import { campPokecenter } from '../maps/camp/campPokecenter';
 import { campTent } from '../maps/camp/campTent';
 import { campUniversity } from '../maps/camp/campUniversity';
 import { sectorE1 } from '../maps/sectors/sectorE1';
-import { sectorN1, sectorN1E1 } from '../maps/sectors/sectorN1';
+import { sectorN1 } from '../maps/sectors/sectorN1';
+import { sectorN1E1 } from '../maps/sectors/sectorN1E1';
 
 export type MapId =
 	| 'camp'
