@@ -89,8 +89,8 @@ const EvoButton = ({
 		if (time_of_day && getTimeOfDay().toLowerCase()) {
 			res.push(`${time_of_day}-time`);
 		}
-		if (held_item && ownedPokemon.heldItemName !== held_item) {
-			res.push(`held item ${held_item}`);
+		if (held_item && ownedPokemon.heldItemName !== held_item.name) {
+			res.push(`held item ${held_item.name}`);
 		}
 
 		return res;
@@ -118,7 +118,9 @@ const EvoButton = ({
 		>
 			{checks.length > 0
 				? `${checks.join(' & ')} required for evolution`
-				: `Use ${itemName} to evolve ${name}`}
+				: itemName
+				? `Use ${itemName} to evolve ${name}`
+				: `evolve ${name}`}
 		</button>
 	);
 };

@@ -17,7 +17,7 @@ export const sectorN1: OverworldMap = {
 		randomObstacleTiles: true,
 		borderGates: [{ x: 24, y: 49 }],
 	}),
-	occupants: ['sectorN1_to_camp'],
+	occupants: ['sectorN1_to_camp', 'ranger_sectorN1'],
 	possibleEncounters: {
 		MORNING: [
 			{ dexId: 123, xp: 100 },
