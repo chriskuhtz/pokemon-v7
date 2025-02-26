@@ -18,7 +18,7 @@ export const testPokemon: OwnedPokemon = {
 	firstMove: { name: 'tackle', usedPP: 15 },
 	damage: 0,
 	nature: 'adamant',
-	xp: 200,
+	xp: 125,
 	ability: 'air-lock',
 	happiness: 70,
 	stepsWalked: 0,
@@ -32,7 +32,7 @@ export const testState: SaveFile = {
 	sprite: '',
 	badges: [],
 	quests: {
-		'catch a pokemon in sector1x0': 'INACTIVE',
+		'catch a pokemon in sectorE1': 'INACTIVE',
 		'catch a pikachu': 'INACTIVE',
 		'catch a clefairy': 'INACTIVE',
 		'catch a gastly': 'INACTIVE',

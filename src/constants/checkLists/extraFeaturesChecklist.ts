@@ -165,4 +165,8 @@ export const extraFeatureCheckList: {
 		name: 'use more typecolors',
 	},
 	{ name: 'escape rope only in cave' },
+	{ name: 'berry bushes' },
+	{ name: 'berry planting' },
+	{ name: 'battle tent' },
+	{ name: 'accurate house sizes' },
 ];
