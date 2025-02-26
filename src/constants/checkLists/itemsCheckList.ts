@@ -364,7 +364,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/77/',
 		handled: true,
 	},
-	{ name: 'escape-rope', url: 'https://pokeapi.co/api/v2/item/78/' },
+	{
+		name: 'escape-rope',
+		url: 'https://pokeapi.co/api/v2/item/78/',
+		handled: true,
+	},
 	{ name: 'repel', url: 'https://pokeapi.co/api/v2/item/79/', handled: true },
 
 	{ name: 'shoal-salt', url: 'https://pokeapi.co/api/v2/item/70/' },

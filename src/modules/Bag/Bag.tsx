@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaRunning, FaSprayCan } from 'react-icons/fa';
 import { MdHealing } from 'react-icons/md';
 import { HealAction } from '../../components/ItemCard/components/HealAction';
 import { ThrowAwayAction } from '../../components/ItemCard/components/ThrowAwayAction';
@@ -7,6 +8,7 @@ import { useFilteredInventory } from '../../components/ItemsFilter/ItemsFilter';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
 import { baseSize } from '../../constants/gameData';
 import { canBenefitFromItem } from '../../functions/canBenefitFromItem';
+import { useEscapeRope } from '../../hooks/useEscapeRope';
 import { Inventory } from '../../interfaces/Inventory';
 import {
 	EncounterChanceItem,
@@ -17,7 +19,6 @@ import {
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { FaSprayCan } from 'react-icons/fa';
 
 export const Bag = ({
 	inventory,
@@ -37,6 +38,7 @@ export const Bag = ({
 	applyItem: (pokemon: OwnedPokemon, item: ItemType, move?: MoveName) => void;
 }): JSX.Element => {
 	const { filteredInventory, buttons } = useFilteredInventory(inventory);
+	const { applyEscapeRope, disabled } = useEscapeRope();
 	return (
 		<Page goBack={goBack} headline="Inventory:">
 			<Stack mode="column">
@@ -46,6 +48,37 @@ export const Bag = ({
 						return <React.Fragment key={item}></React.Fragment>;
 					}
 
+					if (item === 'escape-rope') {
+						return (
+							<ItemCard
+								key={item}
+								item={item as ItemType}
+								amount={amount}
+								actionElements={[
+									<ThrowAwayAction
+										amount={amount}
+										discardItem={(x: number) =>
+											discardItem(item as ItemType, x)
+										}
+									/>,
+									disabled ? undefined : (
+										<FaRunning
+											tabIndex={0}
+											role="button"
+											onKeyDown={(e) => {
+												e.stopPropagation();
+												if (e.key === 'Enter') {
+													applyEscapeRope();
+												}
+											}}
+											onClick={() => applyEscapeRope()}
+											size={baseSize / 2}
+										/>
+									),
+								].filter((e) => e !== undefined)}
+							/>
+						);
+					}
 					return (
 						<ItemCard
 							key={item}

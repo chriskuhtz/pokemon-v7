@@ -6,4 +6,5 @@ export const STANDARD_BUY_MARKET: Partial<Inventory> = {
 	potion: 1,
 	antidote: 1,
 	'berry-juice': 1,
+	'escape-rope': 1,
 };

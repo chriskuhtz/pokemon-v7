@@ -1,10 +1,10 @@
-import { useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 import { mapsRecord } from './constants/checkLists/mapsRecord';
-import { testPokemon, testState } from './constants/gameData';
+import { testPokemon } from './constants/gameData';
 import { STANDARD_BUY_MARKET } from './constants/standardBuyMarket';
 import { Message } from './hooks/useMessageQueue';
-import { useSaveFile } from './hooks/useSaveFile';
+import { SaveFileContext } from './hooks/useSaveFile';
 import { generateInventory, Inventory } from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
 import { Bag } from './modules/Bag/Bag';
@@ -53,7 +53,7 @@ export const App = ({
 		leaveBattleReducer,
 		addItemReducer,
 		evolvePokemonReducer,
-	} = useSaveFile(testState, addMessage);
+	} = useContext(SaveFileContext);
 
 	const {
 		meta: { activeTab, currentChallenger },

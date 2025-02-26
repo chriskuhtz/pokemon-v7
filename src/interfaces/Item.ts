@@ -116,6 +116,7 @@ export const itemTypes = [
 	'super-repel',
 	'sacred-ash',
 	'rare-candy',
+	'escape-rope',
 ] as const;
 
 export type ItemType = (typeof itemTypes)[number];

@@ -164,4 +164,5 @@ export const extraFeatureCheckList: {
 	{
 		name: 'use more typecolors',
 	},
+	{ name: 'escape rope only in cave' },
 ];

@@ -1,5 +1,6 @@
 import { App } from '../../App';
 import { useMessageQueue } from '../../hooks/useMessageQueue';
+import { SaveFileProvider } from '../../hooks/useSaveFile';
 import { Banner } from '../Banner/Banner';
 
 export const MessageContainer = () => {
@@ -16,11 +17,13 @@ export const MessageContainer = () => {
 					<h2>{latestMessage?.message}</h2>
 				</Banner>
 			)}
-			<App
-				addMessage={addMessage}
-				latestMessage={latestMessage}
-				addMultipleMessages={addMultipleMessages}
-			/>
+			<SaveFileProvider addMessage={addMessage}>
+				<App
+					addMessage={addMessage}
+					latestMessage={latestMessage}
+					addMultipleMessages={addMultipleMessages}
+				/>
+			</SaveFileProvider>
 		</>
 	);
 };
