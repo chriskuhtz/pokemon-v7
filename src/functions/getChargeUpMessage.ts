@@ -5,7 +5,10 @@ export const getChargeUpMessage = (
 	moveName: MoveName
 ): string => {
 	if (moveName === 'fly') {
-		return ` ${userName} flew up high ${moveName}`;
+		return ` ${userName} flew up high `;
+	}
+	if (moveName === 'solar-beam') {
+		return ` ${userName} is taking in sunlight`;
 	}
 	return ` ${userName} is charging up ${moveName}`;
 };
