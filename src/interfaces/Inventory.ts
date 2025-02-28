@@ -102,6 +102,7 @@ export const EmptyInventory: Inventory = {
 	'star-piece': 1,
 	nugget: 1,
 	'heart-scale': 1,
+	honey: 1,
 };
 export const generateInventory = (wanted: Partial<Inventory>): Inventory => {
 	return joinInventories(EmptyInventory, wanted);
