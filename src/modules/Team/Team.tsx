@@ -22,8 +22,10 @@ export const Team = ({
 	changeHeldItem,
 	inventory,
 	evolve,
+	initialFocus,
 }: {
 	team: OwnedPokemon[];
+	initialFocus: string;
 	goBack: () => void;
 	setTeam: (newTeam: OwnedPokemon[]) => void;
 	inventory: Inventory;
@@ -41,7 +43,7 @@ export const Team = ({
 		team.map((t) => ({ ...t, caughtBefore: true }))
 	);
 
-	const [focusedId, setFocusedId] = useState<string>(team[0].id);
+	const [focusedId, setFocusedId] = useState<string>(initialFocus);
 
 	const focused = useMemo(
 		() => team?.find((r) => r.id === focusedId),
