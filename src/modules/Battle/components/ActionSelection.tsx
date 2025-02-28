@@ -2,6 +2,7 @@ import { MoveCard } from '../../../components/MoveCard/MoveCard';
 import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { getPlayerPokemon } from '../../../functions/getPlayerPokemon';
+import { getTypeNames } from '../../../functions/getTypeNames';
 import { isTrapped } from '../../../functions/isTrapped';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
@@ -30,8 +31,14 @@ export function ActionSelection({
 	const trapped = isTrapped(controlled);
 	const shadowTagged =
 		allTargets.some(
-			(p) => p.id !== controlled.id && p.ability === 'shadow-tag'
+			(p) => p.ownerId !== controlled.ownerId && p.ability === 'shadow-tag'
 		) && controlled.ability !== 'shadow-tag';
+	const magnetPulled = allTargets.some(
+		(p) =>
+			p.ownerId !== controlled.ownerId &&
+			p.ability === 'magnet-pull' &&
+			getTypeNames(controlled).includes('steel')
+	);
 
 	const runButtonMessage = () => {
 		if (trapped) {
@@ -39,6 +46,9 @@ export function ActionSelection({
 		}
 		if (shadowTagged) {
 			return 'Shadow Tag in Effect';
+		}
+		if (magnetPulled) {
+			return 'Magnet Pull in Effect';
 		}
 		return 'Run Away';
 	};
@@ -85,7 +95,7 @@ export function ActionSelection({
 				})}
 
 				<button
-					disabled={trapped || shadowTagged}
+					disabled={trapped || shadowTagged || magnetPulled}
 					onClick={() =>
 						chooseAction({
 							userId: controlled.id,

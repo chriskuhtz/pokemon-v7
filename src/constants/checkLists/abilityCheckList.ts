@@ -206,8 +206,16 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/40/',
 		handled: true,
 	},
-	{ name: 'water-veil', url: 'https://pokeapi.co/api/v2/ability/41/' },
-	{ name: 'magnet-pull', url: 'https://pokeapi.co/api/v2/ability/42/' },
+	{
+		name: 'water-veil',
+		url: 'https://pokeapi.co/api/v2/ability/41/',
+		handled: true,
+	},
+	{
+		name: 'magnet-pull',
+		url: 'https://pokeapi.co/api/v2/ability/42/',
+		handled: true,
+	},
 	{ name: 'soundproof', url: 'https://pokeapi.co/api/v2/ability/43/' },
 	{ name: 'rain-dish', url: 'https://pokeapi.co/api/v2/ability/44/' },
 	{ name: 'sand-stream', url: 'https://pokeapi.co/api/v2/ability/45/' },
@@ -601,6 +609,7 @@ export const abilityNames = [
 	'huge-power',
 	'pure-power',
 	'poison-point',
+	'magnet-pull',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
