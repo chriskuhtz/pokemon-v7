@@ -39,6 +39,7 @@ export const testState: SaveFile = {
 		'catch a scyther': 'INACTIVE',
 		'evolve a pokemon': 'INACTIVE',
 		'train a pokemon to level 10': 'INACTIVE',
+		'catch a pokemon with honey': 'INACTIVE',
 	},
 	inventory: generateInventory({}),
 	playerId: '',
@@ -59,6 +60,7 @@ export const testState: SaveFile = {
 	lastNurse: 'nurse_Pokecenter_Camp',
 	mileStones: {
 		hasEvolvedAPokemon: false,
+		hasCaughtAPokemonWithHoney: false,
 	},
 };
 

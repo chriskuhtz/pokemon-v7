@@ -66,5 +66,6 @@ export interface SaveFile {
 	encounterRateModifier?: { factor: number; steps: number };
 	mileStones: {
 		hasEvolvedAPokemon: boolean;
+		hasCaughtAPokemonWithHoney: boolean;
 	};
 }
