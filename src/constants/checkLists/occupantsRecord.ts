@@ -42,6 +42,7 @@ export const occupantNames = [
 	'sectorN1E1_to_sectorE1',
 	'sectorN1E1_to_sectorN1',
 	'ranger_sectorN1',
+	'honey_explainer',
 ] as const;
 export type OccupantName = (typeof occupantNames)[number];
 
@@ -272,6 +273,25 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 		],
 		quest: 'catch a scyther',
 		sprite: SpriteEnum.explorer,
+		conditionFunction: (s) => s.quests['catch a scyther'] !== 'COLLECTED',
+	},
+	honey_explainer: {
+		type: 'NPC',
+		x: 15,
+		y: 15,
+		map: 'camp',
+		orientation: 'UP',
+		unhandledMessage: [
+			'I observed that some pokemon',
+			'seem to love sweet foods.',
+			'If you apply this honey',
+			'to the small trees in sectorN1E1,',
+			'Wild Pokemon might appear',
+		],
+		handledMessage: ['Did it work?'],
+		gifts: { honey: 10 },
+		quest: 'catch a scyther',
+		sprite: SpriteEnum.bugCatcher,
 		conditionFunction: (s) => s.quests['catch a scyther'] !== 'COLLECTED',
 	},
 	//Portals
