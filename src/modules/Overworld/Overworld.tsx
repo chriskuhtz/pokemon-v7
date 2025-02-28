@@ -1,5 +1,5 @@
 import { isEqual } from 'lodash';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { IoMdMenu } from 'react-icons/io';
 import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
@@ -9,10 +9,12 @@ import {
 } from '../../constants/checkLists/occupantsRecord';
 import { baseSize, fps } from '../../constants/gameData';
 import { assembleMap } from '../../functions/assembleMap';
+import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { isValidOverWorldMap } from '../../functions/isValidOverworldMap';
 import { Message } from '../../hooks/useMessageQueue';
+import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
 import { Occupant, OverworldMap } from '../../interfaces/OverworldMap';
@@ -26,6 +28,7 @@ import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
+import { isOwnedPokemonKO } from '../../functions/isKo';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -277,20 +280,30 @@ export const Overworld = ({
 
 	return (
 		<div>
-			<IoMdMenu
+			<div
 				style={{
 					position: 'absolute',
 					top: '1.5rem',
 					left: '1rem',
 					zIndex: 9000,
+					padding: '.5rem',
+					borderRadius: 9000,
+					backgroundColor: 'rgba(255,255,255,.6)',
+					display: 'flex',
+					flexDirection: 'column',
+					gap: '1rem',
 				}}
-				onClick={(e) => {
-					e.stopPropagation();
-					e.preventDefault();
-					openMenu(stepsTaken);
-				}}
-				size={baseSize / 2}
-			/>
+			>
+				<IoMdMenu
+					onClick={(e) => {
+						e.stopPropagation();
+						e.preventDefault();
+						openMenu(stepsTaken);
+					}}
+					size={baseSize / 2}
+				/>
+				<TeamOverview />
+			</div>
 			<div
 				style={{
 					position: 'absolute',
@@ -395,5 +408,26 @@ export const Overworld = ({
 				/>
 			</div>
 		</div>
+	);
+};
+
+export const TeamOverview = () => {
+	const { saveFile } = useContext(SaveFileContext);
+	const team = useMemo(
+		() => saveFile.pokemon.filter((p) => p.onTeam),
+		[saveFile]
+	);
+
+	return (
+		<>
+			{team.map((t) => (
+				<img
+					height={baseSize / 2}
+					width={baseSize / 2}
+					src={getPokemonSprite(t.dexId)}
+					style={isOwnedPokemonKO(t) ? { filter: 'grayscale(1)' } : undefined}
+				/>
+			))}
+		</>
 	);
 };

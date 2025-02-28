@@ -196,6 +196,7 @@ export const App = ({
 	if (activeTab === 'TEAM') {
 		return (
 			<Team
+				initialFocus={team[0].id}
 				evolve={evolvePokemonReducer}
 				team={team}
 				goBack={() => setActiveTabReducer('MAIN')}
