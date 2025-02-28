@@ -33,7 +33,12 @@ export const applyOnBattleEnterAbility = ({
 	}
 	if (user.ability === 'shadow-tag') {
 		addMessage({
-			message: `${user.data.name} prevents escape with shadow tag ${user.ability}`,
+			message: `${user.data.name} prevents escape with shadow tag`,
+		});
+	}
+	if (user.ability === 'magnet-pull') {
+		addMessage({
+			message: `${user.data.name} pulls in steel pokemon with magnet pull`,
 		});
 	}
 	if (user.ability === 'intimidate') {

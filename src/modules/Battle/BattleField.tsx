@@ -281,6 +281,7 @@ export const BattleField = ({
 						return { ...entersBattle, status: 'ONFIELD' };
 					}
 					//TODO: remap moves if "leavesBattle" is the target
+					//TODO: consider shadow tag and magnet pull
 					return p;
 				})
 			);
