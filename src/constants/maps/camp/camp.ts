@@ -25,6 +25,7 @@ export const camp: OverworldMap = {
 		'pikachu_fan_Camp',
 		'gastly_fan_Camp',
 		'clefairy_fan_Camp',
+		'honey_explainer',
 		//portals
 		'camp_to_market',
 		'camp_to_pokecenter',

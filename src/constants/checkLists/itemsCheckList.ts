@@ -433,7 +433,7 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/93/',
 		handled: true,
 	},
-	{ name: 'honey', url: 'https://pokeapi.co/api/v2/item/94/' },
+	{ name: 'honey', url: 'https://pokeapi.co/api/v2/item/94/', handled: true },
 	{ name: 'growth-mulch', url: 'https://pokeapi.co/api/v2/item/95/' },
 	{ name: 'damp-mulch', url: 'https://pokeapi.co/api/v2/item/96/' },
 	{ name: 'stable-mulch', url: 'https://pokeapi.co/api/v2/item/97/' },

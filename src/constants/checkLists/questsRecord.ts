@@ -9,6 +9,7 @@ export const questNames = [
 	'evolve a pokemon',
 	'catch a scyther',
 	'train a pokemon to level 10',
+	'catch a pokemon with honey',
 ] as const;
 export type QuestName = (typeof questNames)[number];
 
@@ -47,6 +48,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'lava-cookie': 2 },
 		conditionFunction: (s) => {
 			return s.mileStones.hasEvolvedAPokemon;
+		},
+	},
+	'catch a pokemon with honey': {
+		rewardItems: { honey: 20 },
+		conditionFunction: (s) => {
+			return s.mileStones.hasCaughtAPokemonWithHoney;
 		},
 	},
 	'train a pokemon to level 10': {
