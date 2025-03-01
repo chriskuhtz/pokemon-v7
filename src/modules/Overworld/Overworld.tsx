@@ -12,6 +12,7 @@ import { assembleMap } from '../../functions/assembleMap';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
+import { isOwnedPokemonKO } from '../../functions/isKo';
 import { isValidOverWorldMap } from '../../functions/isValidOverworldMap';
 import { Message } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
@@ -28,7 +29,6 @@ import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
-import { isOwnedPokemonKO } from '../../functions/isKo';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -312,13 +312,15 @@ export const Overworld = ({
 					display: 'flex',
 					gap: '1rem',
 					alignItems: 'center',
+					zIndex: 9000,
+					padding: '.5rem',
+					borderRadius: 9000,
+					backgroundColor: 'rgba(255,255,255,.6)',
 				}}
 			>
+				<strong>{assembledMap.id}</strong>
 				<WeatherIcon weather={assembledMap.weather} />
 				<TimeOfDayIcon />
-				<button style={{ backgroundColor: 'white', zIndex: 9000 }}>
-					{assembledMap.id}
-				</button>
 			</div>
 
 			<div className="overworldPage">
