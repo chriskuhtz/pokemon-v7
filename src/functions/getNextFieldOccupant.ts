@@ -1,4 +1,4 @@
-import { Occupant } from '../interfaces/OverworldMap';
+import { Occupant } from '../shared/OverworldMap';
 
 export const getNextFieldOccupant = (
 	mapId: string,

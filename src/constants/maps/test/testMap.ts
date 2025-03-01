@@ -1,4 +1,4 @@
-import { OverworldMap } from '../../../interfaces/OverworldMap';
+import { OverworldMap } from '../../../shared/OverworldMap';
 import { GameMap } from '../../../shared/interfaces';
 
 export const tiles: GameMap = {

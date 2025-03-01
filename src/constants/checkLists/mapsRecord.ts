@@ -1,4 +1,4 @@
-import { OverworldMap } from '../../interfaces/OverworldMap';
+import { OverworldMap } from '../../shared/OverworldMap';
 import { testMap } from '../maps/test/testMap';
 
 export type MapId = 'testMap';

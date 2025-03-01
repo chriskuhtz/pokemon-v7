@@ -20,16 +20,16 @@ export const tileMap: Record<string, number> = {
 import { MapId } from '../constants/checkLists/mapsRecord';
 import { QuestName } from '../constants/checkLists/questsRecord';
 import { TimeOfDay } from '../functions/getTimeOfDay';
-import { GameMap } from '../shared/interfaces';
-import { Inventory } from './Inventory';
-import { ItemType } from './Item';
-import { OwnedPokemon } from './OwnedPokemon';
+import { Inventory } from '../interfaces/Inventory';
+import { ItemType } from '../interfaces/Item';
+import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import {
 	CharacterLocationData,
 	CharacterOrientation,
 	SaveFile,
-} from './SaveFile';
-import { WeatherType } from './Weather';
+} from '../interfaces/SaveFile';
+import { WeatherType } from '../interfaces/Weather';
+import { GameMap } from './interfaces';
 
 export interface BaseOccupant {
 	id: string;

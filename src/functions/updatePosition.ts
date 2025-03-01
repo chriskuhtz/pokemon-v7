@@ -1,8 +1,8 @@
-import { OverworldMap } from '../interfaces/OverworldMap';
 import {
 	CharacterLocationData,
 	CharacterOrientation,
 } from '../interfaces/SaveFile';
+import { OverworldMap } from '../shared/OverworldMap';
 import { getNextLocation } from './getNextLocation';
 import { isPassable } from './isPassable';
 

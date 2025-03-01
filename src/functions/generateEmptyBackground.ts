@@ -1,4 +1,4 @@
-import { tileMap } from '../interfaces/OverworldMap';
+import { tileMap } from '../shared/OverworldMap';
 
 export const generateBackground = ({
 	height,

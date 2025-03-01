@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { fps } from '../../../constants/gameData';
 import { getNextForwardFoot } from '../../../functions/getNextForwardFoot';
 import { updatePosition } from '../../../functions/updatePosition';
-import { OverworldMap } from '../../../interfaces/OverworldMap';
 import {
 	CharacterLocationData,
 	CharacterOrientation,
 } from '../../../interfaces/SaveFile';
+import { OverworldMap } from '../../../shared/OverworldMap';
 
 const baseEncounterRate = 0;
 export const useOverworldMovement = (

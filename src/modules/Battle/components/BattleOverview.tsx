@@ -4,7 +4,7 @@ import { LeaveBattlePayload } from '../../../hooks/useSaveFile';
 import { useScreenTransition } from '../../../hooks/useScreenTransition';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
-import { OverworldTrainer } from '../../../interfaces/OverworldMap';
+import { OverworldTrainer } from '../../../shared/OverworldMap';
 import { BattleField } from '../BattleField';
 import { IntroBanner } from './IntroBanner';
 import { LineUpSelection } from './LineUpSelection';
