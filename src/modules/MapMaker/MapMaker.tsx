@@ -14,9 +14,12 @@ export interface Eraser {
 	type: 'eraser';
 }
 export type Tool = TilePlacer | Eraser;
+export type Tab = 'TileMap' | 'Encounters' | 'Occupants';
 
 export const MapMaker = ({ goBack }: { goBack: () => void }) => {
 	const [selected, setSelected] = useState<Tool | undefined>();
+
+	const [activeTab, setActiveTab] = useState<Tab>('TileMap');
 
 	return (
 		<div
@@ -28,9 +31,16 @@ export const MapMaker = ({ goBack }: { goBack: () => void }) => {
 		>
 			<IoIosArrowBack role="button" tabIndex={0} onClick={goBack} />
 			<div style={{ display: 'grid', gridTemplateColumns: '3fr 1fr' }}>
-				<MapEditor tool={selected} initialMap={testMap} />
+				<MapEditor
+					activeTab={activeTab}
+					setActiveTab={setActiveTab}
+					tool={selected}
+					initialMap={testMap}
+				/>
 
-				<ToolSelection selected={selected} setSelected={setSelected} />
+				{activeTab === 'TileMap' && (
+					<ToolSelection selected={selected} setSelected={setSelected} />
+				)}
 			</div>
 		</div>
 	);

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { TimeOfDay } from '../../../functions/getTimeOfDay';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { Tool } from '../MapMaker';
 
@@ -263,6 +264,29 @@ export const useMapEditor = ({
 		}));
 	};
 
+	const addEncounter = (dexId: number, xp: number, timeOfDay: TimeOfDay) => {
+		setNewMap({
+			...newMap,
+			possibleEncounters: {
+				...newMap.possibleEncounters,
+				[timeOfDay]: [...newMap.possibleEncounters[timeOfDay], { dexId, xp }],
+			},
+		});
+	};
+	const removeEncounter = (dexId: number, xp: number, timeOfDay: TimeOfDay) => {
+		setNewMap({
+			...newMap,
+			possibleEncounters: {
+				...newMap.possibleEncounters,
+				[timeOfDay]: [
+					...newMap.possibleEncounters[timeOfDay].filter(
+						(e) => e.dexId !== dexId && e.xp !== xp
+					),
+				],
+			},
+		});
+	};
+
 	return {
 		newMap,
 		addColumn,
@@ -271,5 +295,7 @@ export const useMapEditor = ({
 		clearLayer,
 		changeRow,
 		changeColumn,
+		addEncounter,
+		removeEncounter,
 	};
 };

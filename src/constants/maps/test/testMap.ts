@@ -2,7 +2,15 @@ import { OverworldMap } from '../../../interfaces/OverworldMap';
 
 export const testMap: OverworldMap = {
 	id: 'testMap',
-	possibleEncounters: { MORNING: [], DAY: [], EVENING: [], NIGHT: [] },
+	possibleEncounters: {
+		MORNING: [
+			{ dexId: 25, xp: 125 },
+			{ dexId: 324, xp: 44 },
+		],
+		DAY: [],
+		EVENING: [],
+		NIGHT: [],
+	},
 	tileMap: {
 		baseLayer: [
 			[
