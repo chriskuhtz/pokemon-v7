@@ -290,7 +290,7 @@ export const occupantsRecord: Record<OccupantName, Occupant> = {
 		],
 		handledMessage: ['Did it work?'],
 		gifts: { honey: 10 },
-		quest: 'catch a scyther',
+		quest: 'catch a pokemon with honey',
 		sprite: SpriteEnum.bugCatcher,
 		conditionFunction: (s) => s.quests['catch a scyther'] !== 'COLLECTED',
 	},
