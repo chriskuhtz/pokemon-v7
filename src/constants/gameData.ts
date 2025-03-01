@@ -26,7 +26,7 @@ export const testPokemon: OwnedPokemon = {
 	maxHp: 20,
 	effortValues: EmptyStatObject,
 	ppBoostedMoves: [],
-	caughtOnMap: 'camp',
+	caughtOnMap: 'testMap',
 };
 export const testState: SaveFile = {
 	sprite: '',
@@ -49,7 +49,7 @@ export const testState: SaveFile = {
 		activeTab: 'MAIN',
 	},
 	location: {
-		mapId: 'camp',
+		mapId: 'testMap',
 		orientation: 'RIGHT',
 		forwardFoot: 'CENTER1',
 		x: 1,
@@ -84,7 +84,7 @@ export const testOpponent: OwnedPokemon = {
 	maxHp: 50,
 	effortValues: EmptyStatObject,
 	ppBoostedMoves: [],
-	caughtOnMap: 'camp',
+	caughtOnMap: 'testMap',
 };
 
 export const localStorageId = 'pokemonv7SaveFile';

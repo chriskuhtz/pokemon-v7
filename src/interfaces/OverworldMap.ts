@@ -18,9 +18,9 @@ export const tileMap: Record<string, number> = {
 };
 
 import { MapId } from '../constants/checkLists/mapsRecord';
-import { OccupantName } from '../constants/checkLists/occupantsRecord';
 import { QuestName } from '../constants/checkLists/questsRecord';
 import { TimeOfDay } from '../functions/getTimeOfDay';
+import { GameMap } from '../shared/interfaces';
 import { Inventory } from './Inventory';
 import { ItemType } from './Item';
 import { OwnedPokemon } from './OwnedPokemon';
@@ -32,6 +32,7 @@ import {
 import { WeatherType } from './Weather';
 
 export interface BaseOccupant {
+	id: string;
 	x: number;
 	y: number;
 	map: MapId;
@@ -126,14 +127,8 @@ export interface OverworldEncounter {
 }
 export interface OverworldMap {
 	id: MapId;
-	backgroundTile: string;
-	encounterTile?: string;
-	obstacleTile?: string;
-	borderTile?: string;
 	possibleEncounters: Record<TimeOfDay, OverworldEncounter[]>;
-	width: number;
-	height: number;
-	tileMap: number[][];
-	occupants: OccupantName[];
+	tileMap: GameMap;
+	occupants: Occupant[];
 	weather?: WeatherType;
 }

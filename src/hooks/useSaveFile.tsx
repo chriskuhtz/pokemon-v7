@@ -7,10 +7,7 @@ import React, {
 } from 'react';
 import { mapsRecord } from '../constants/checkLists/mapsRecord';
 import { MoveName } from '../constants/checkLists/movesCheckList';
-import {
-	OccupantName,
-	occupantsRecord,
-} from '../constants/checkLists/occupantsRecord';
+
 import { QuestName, QuestsRecord } from '../constants/checkLists/questsRecord';
 import { localStorageId, testState } from '../constants/gameData';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
@@ -60,8 +57,8 @@ export interface UseSaveFile {
 	setCharacterLocationReducer: (update: CharacterLocationData) => void;
 	setPokemonReducer: (update: OwnedPokemon[]) => void;
 
-	talkToNurseReducer: (id: OccupantName) => void;
-	handleOccupantReducer: (id: OccupantName) => void;
+	talkToNurseReducer: (id: string) => void;
+	handleOccupantReducer: (id: string) => void;
 	navigateAwayFromOverworldReducer: (to: RoutesType, steps: number) => void;
 	applyItemToPokemonReducer: (
 		pokemon: OwnedPokemon,
@@ -254,7 +251,7 @@ const useSaveFile = (
 		);
 	};
 
-	const talkToNurseReducer = (id: OccupantName) => {
+	const talkToNurseReducer = (id: string) => {
 		setSaveFile(
 			{
 				...saveFile,
@@ -292,51 +289,45 @@ const useSaveFile = (
 		addMessage({ message: 'Whole Team fully healed' });
 	};
 
-	const handleOccupantReducer = (id: OccupantName) => {
-		const occ = occupantsRecord[id];
-
-		if (!occ) {
-			throw new Error(`what is this occupant supposed to be ${id}`);
-		}
-
-		const timer = occ.type === 'BUSH' ? new Date().getTime() + 900000 : -1;
-
-		let newInventory = { ...saveFile.inventory };
-		if ((occ.type === 'NPC' || occ.type === 'OBSTACLE') && occ.gifts) {
-			newInventory = joinInventories(newInventory, occ.gifts);
-		}
-		if (occ.type === 'ITEM' || occ.type === 'HIDDEN_ITEM') {
-			const { item, amount } = occ;
-
-			newInventory = joinInventories(newInventory, { [item]: amount });
-		}
-		const updatedQuests = saveFile.quests;
-		if (occ.type === 'NPC' && occ.quest) {
-			const { quest } = occ;
-
-			if (updatedQuests[quest] === 'INACTIVE') {
-				updatedQuests[quest] = 'ACTIVE';
-			}
-		}
-
-		setSaveFile(
-			{
-				...saveFile,
-				inventory: newInventory,
-				quests: updatedQuests,
-				meta: {
-					activeTab:
-						occ.type === 'TRAINER' ? 'BATTLE' : saveFile.meta.activeTab,
-					currentChallenger:
-						occ.type === 'TRAINER' ? { team: occ.team, id } : undefined,
-				},
-				handledOccupants: [
-					...saveFile.handledOccupants,
-					{ id, resetAt: timer },
-				],
-			},
-			'handleOccupant'
-		);
+	const handleOccupantReducer = () => {
+		//const occ: Occupant | undefined = undefined; //occupantsRecord[id];
+		// if (!occ) {
+		// 	throw new Error(`what is this occupant supposed to be ${id}`);
+		// }
+		// const timer = occ.type === 'BUSH' ? new Date().getTime() + 900000 : -1;
+		// let newInventory = { ...saveFile.inventory };
+		// if ((occ.type === 'NPC' || occ.type === 'OBSTACLE') && occ.gifts) {
+		// 	newInventory = joinInventories(newInventory, occ.gifts);
+		// }
+		// if (occ.type === 'ITEM' || occ.type === 'HIDDEN_ITEM') {
+		// 	const { item, amount } = occ;
+		// 	newInventory = joinInventories(newInventory, { [item]: amount });
+		// }
+		// const updatedQuests = saveFile.quests;
+		// if (occ.type === 'NPC' && occ.quest) {
+		// 	const { quest } = occ;
+		// 	if (updatedQuests[quest] === 'INACTIVE') {
+		// 		updatedQuests[quest] = 'ACTIVE';
+		// 	}
+		// }
+		// setSaveFile(
+		// 	{
+		// 		...saveFile,
+		// 		inventory: newInventory,
+		// 		quests: updatedQuests,
+		// 		meta: {
+		// 			activeTab:
+		// 				occ.type === 'TRAINER' ? 'BATTLE' : saveFile.meta.activeTab,
+		// 			currentChallenger:
+		// 				occ.type === 'TRAINER' ? { team: occ.team, id } : undefined,
+		// 		},
+		// 		handledOccupants: [
+		// 			...saveFile.handledOccupants,
+		// 			{ id, resetAt: timer },
+		// 		],
+		// 	},
+		// 	'handleOccupant'
+		// );
 	};
 	const applyItemToPokemonReducer = (
 		pokemon: OwnedPokemon,
@@ -428,7 +419,7 @@ const useSaveFile = (
 					return;
 				} else {
 					updatedLocation = {
-						mapId: 'camp_tent',
+						mapId: 'testMap',
 						x: 0,
 						y: 0,
 						orientation: 'DOWN',

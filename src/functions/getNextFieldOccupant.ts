@@ -1,17 +1,15 @@
-import { OccupantName } from '../constants/checkLists/occupantsRecord';
 import { Occupant } from '../interfaces/OverworldMap';
 
 export const getNextFieldOccupant = (
 	mapId: string,
-	collectedItems: OccupantName[],
+	collectedItems: string[],
 	focusedField: { x: number; y: number },
-	statefulOccupantsRecord: Partial<Record<OccupantName, Occupant>>
-): [OccupantName, Occupant] | undefined => {
-	return Object.entries(statefulOccupantsRecord).find(
-		([id, occ]) =>
-			occ.x === focusedField.x &&
-			occ.y === focusedField.y &&
-			occ.map === mapId &&
-			!collectedItems.find((c) => c === id)
-	) as [OccupantName, Occupant] | undefined;
+	statefulOccupantsRecord: Occupant[]
+): Occupant | undefined => {
+	return statefulOccupantsRecord.find(
+		(occ) =>
+			occ.x === focusedField.x && occ.y === focusedField.y && occ.map === mapId
+		//&&
+		//!collectedItems.find((c) => c === occ.id)
+	);
 };

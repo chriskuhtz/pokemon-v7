@@ -16,8 +16,10 @@ export type QuestName = (typeof questNames)[number];
 export const QuestsRecord: Record<QuestName, Quest> = {
 	'catch a pokemon in sectorE1': {
 		rewardItems: { 'berry-juice': 5 },
-		conditionFunction: (s) => {
-			return s.pokemon.some((p) => p.caughtOnMap === 'sectorE1');
+		conditionFunction: () => {
+			//return s.pokemon.some((p) => p.caughtOnMap === 'sectorE1');
+			// repair me
+			return true;
 		},
 	},
 	'catch a pikachu': {
