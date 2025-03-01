@@ -1,5 +1,5 @@
 import { isEqual } from 'lodash';
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { IoMdMenu } from 'react-icons/io';
 import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
@@ -9,13 +9,10 @@ import {
 } from '../../constants/checkLists/occupantsRecord';
 import { baseSize, fps } from '../../constants/gameData';
 import { assembleMap } from '../../functions/assembleMap';
-import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
-import { isOwnedPokemonKO } from '../../functions/isKo';
 import { isValidOverWorldMap } from '../../functions/isValidOverworldMap';
 import { Message } from '../../hooks/useMessageQueue';
-import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
 import { Occupant, OverworldMap } from '../../interfaces/OverworldMap';
@@ -29,6 +26,7 @@ import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
+import { TeamOverview } from '../../components/TeamOverview/TeamOverview';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -410,26 +408,5 @@ export const Overworld = ({
 				/>
 			</div>
 		</div>
-	);
-};
-
-export const TeamOverview = () => {
-	const { saveFile } = useContext(SaveFileContext);
-	const team = useMemo(
-		() => saveFile.pokemon.filter((p) => p.onTeam),
-		[saveFile]
-	);
-
-	return (
-		<>
-			{team.map((t) => (
-				<img
-					height={baseSize / 2}
-					width={baseSize / 2}
-					src={getPokemonSprite(t.dexId)}
-					style={isOwnedPokemonKO(t) ? { filter: 'grayscale(1)' } : undefined}
-				/>
-			))}
-		</>
 	);
 };
