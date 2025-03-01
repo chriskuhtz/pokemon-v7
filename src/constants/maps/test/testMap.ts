@@ -9,7 +9,7 @@ export const testMap: OverworldMap = {
 		],
 		DAY: [],
 		EVENING: [],
-		NIGHT: [],
+		NIGHT: [{ dexId: 167, xp: 125 }],
 	},
 	tileMap: {
 		baseLayer: [
