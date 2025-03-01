@@ -9,11 +9,13 @@ export const LayerEditor = ({
 	addRow,
 	clear,
 	changeRow,
+	changeColumn,
 }: {
 	layerName: LayerName;
 	layer: (TileIdentifier | undefined)[][];
 	addColumn: () => void;
 	addRow: () => void;
+	changeColumn: (index: number) => void;
 	changeRow: (index: number) => void;
 	changeTile: (i: number, j: number, layer: LayerName) => void;
 	clear: () => void;
@@ -33,6 +35,28 @@ export const LayerEditor = ({
 					gridTemplateColumns: '1fr 10fr 1fr',
 				}}
 			>
+				<span></span>{' '}
+				<div
+					style={{
+						cursor: 'default',
+						display: 'grid',
+						gap: '1px',
+						gridTemplateColumns: Array.from({ length: layer[0].length })
+							.map(() => '18px')
+							.join(' '),
+					}}
+				>
+					{Array.from({ length: layer[0].length }).map((_, i) => (
+						<div
+							style={{ border: '1px solid red' }}
+							role={'button'}
+							onClick={() => changeColumn(i)}
+						>
+							{i}
+						</div>
+					))}
+				</div>
+				<span></span>
 				<div
 					style={{
 						cursor: 'default',
@@ -51,7 +75,6 @@ export const LayerEditor = ({
 					layerName={layerName}
 					changeTile={changeTile}
 				/>
-
 				<div style={{ border: '1px solid white' }} onClick={addColumn}>
 					add Column
 				</div>

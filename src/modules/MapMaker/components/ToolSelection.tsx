@@ -12,7 +12,14 @@ export const ToolSelection = ({
 }): JSX.Element => {
 	return (
 		<div>
-			<h2 style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+			<h2
+				style={{
+					color: 'wheat',
+					display: 'flex',
+					alignItems: 'center',
+					gap: '2rem',
+				}}
+			>
 				Selected Tool:{' '}
 				{selected?.type === 'tileplacer' && (
 					<div

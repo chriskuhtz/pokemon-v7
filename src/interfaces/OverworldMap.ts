@@ -126,9 +126,9 @@ export interface OverworldMap {
 
 export interface GameMap {
 	baseLayer: TileIdentifier[][];
-	encounterLayer: (TileIdentifier | undefined)[][];
-	decorationLayer: (TileIdentifier | undefined)[][];
-	obstacleLayer: (TileIdentifier | undefined)[][];
+	encounterLayer: (TileIdentifier | null)[][];
+	decorationLayer: (TileIdentifier | null)[][];
+	obstacleLayer: (TileIdentifier | null)[][];
 }
 export interface TileIdentifier {
 	yOffset: number;
