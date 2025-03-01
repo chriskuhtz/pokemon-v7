@@ -12,7 +12,7 @@ export const useDrawBackground = (
 		) as HTMLCanvasElement | null;
 		const ctx = el?.getContext('2d');
 
-		const { baseLayer, obstacleLayer, decorationLayer } = map;
+		const { baseLayer, obstacleLayer, decorationLayer, encounterLayer } = map;
 		const spriteSheet = new Image();
 		ctx?.clearRect(
 			0,
@@ -35,6 +35,20 @@ export const useDrawBackground = (
 						tileSize,
 						tileSize
 					);
+					const enco = encounterLayer[h][w];
+					if (enco) {
+						ctx?.drawImage(
+							spriteSheet,
+							-enco.xOffset,
+							-enco.yOffset,
+							16,
+							16,
+							tileSize * w,
+							tileSize * h,
+							tileSize,
+							tileSize
+						);
+					}
 					const deco = decorationLayer[h][w];
 					if (deco) {
 						ctx?.drawImage(

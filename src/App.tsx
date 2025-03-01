@@ -9,6 +9,7 @@ import { OwnedPokemon } from './interfaces/OwnedPokemon';
 import { Bag } from './modules/Bag/Bag';
 import { BattleLoader } from './modules/Battle/components/BattleLoader';
 import { MainMenu } from './modules/MainMenu/MainMenu';
+import { MapMaker } from './modules/MapMaker/MapMaker';
 import { BuyMarket } from './modules/Market/BuyMarket';
 import { Market } from './modules/Market/Market';
 import { SellMarket } from './modules/Market/SellMarket';
@@ -245,6 +246,9 @@ export const App = ({
 				navigate={setActiveTabReducer}
 			/>
 		);
+	}
+	if (activeTab === 'MAP_MAKER') {
+		return <MapMaker goBack={() => setActiveTabReducer('MAIN')} />;
 	}
 
 	return (

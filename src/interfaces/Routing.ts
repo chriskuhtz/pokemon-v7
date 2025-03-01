@@ -12,5 +12,6 @@ export const routes = [
 	'SPRITE_SELECTION',
 	'SETTINGS',
 	'QUESTS',
+	'MAP_MAKER',
 ] as const;
 export type RoutesType = (typeof routes)[number];

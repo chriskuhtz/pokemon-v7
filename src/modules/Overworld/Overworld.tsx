@@ -4,6 +4,7 @@ import { TeamOverview } from '../../components/TeamOverview/TeamOverview';
 import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 
+import { CombinedCanvas } from '../../components/CombinedCanvas/CombinedCanvas';
 import { baseSize, fps } from '../../constants/gameData';
 import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
@@ -19,7 +20,6 @@ import { useClickTarget } from './hooks/useClickTarget';
 import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
-import { CombinedCanvas } from '../../components/CombinedCanvas/CombinedCanvas';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';

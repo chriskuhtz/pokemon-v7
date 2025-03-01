@@ -28,7 +28,7 @@ export const ToolSelection = ({
 				{!selected && '-'}
 			</h2>
 			<button
-				style={{ margin: '1rem', padding: '1rem' }}
+				style={{ margin: '1rem', padding: '1rem', color: 'white' }}
 				onClick={() => setSelected({ type: 'eraser' })}
 			>
 				Eraser

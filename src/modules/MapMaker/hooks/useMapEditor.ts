@@ -1,21 +1,16 @@
 import { useState } from 'react';
-import { GameMap, TileIdentifier } from '../../../interfaces/OverworldMap';
+import { testMap } from '../../../constants/maps/test/testMap';
+import { GameMap } from '../../../interfaces/OverworldMap';
 import { Tool } from '../MapMaker';
 
-const initialBaseLayer: TileIdentifier[][] = [[{ yOffset: -1, xOffset: -1 }]];
-
-const init: GameMap = {
-	baseLayer: initialBaseLayer,
-	obstacleLayer: [[undefined]],
-	decorationLayer: [[undefined]],
-};
-
+export type LayerName = 'Base' | 'Obstacle' | 'Decoration' | 'Encounter';
 export const useMapEditor = ({ tool }: { tool: Tool | undefined }) => {
-	const [newMap, setNewMap] = useState<GameMap>(init);
+	const [newMap, setNewMap] = useState<GameMap>(testMap.tileMap);
 
 	const addColumn = () =>
 		setNewMap((newMap) => ({
 			baseLayer: newMap.baseLayer.map((row) => [...row, row[row.length - 1]]),
+			encounterLayer: newMap.encounterLayer.map((row) => [...row, undefined]),
 			obstacleLayer: newMap.obstacleLayer.map((row) => [...row, undefined]),
 			decorationLayer: newMap.decorationLayer.map((row) => [...row, undefined]),
 		}));
@@ -24,6 +19,12 @@ export const useMapEditor = ({ tool }: { tool: Tool | undefined }) => {
 			baseLayer: [
 				...newMap.baseLayer,
 				newMap.baseLayer[newMap.baseLayer.length - 1],
+			],
+			encounterLayer: [
+				...newMap.encounterLayer,
+				Array.from({ length: newMap.encounterLayer[0].length }).map(
+					() => undefined
+				),
 			],
 			obstacleLayer: [
 				...newMap.obstacleLayer,
@@ -39,11 +40,7 @@ export const useMapEditor = ({ tool }: { tool: Tool | undefined }) => {
 			],
 		}));
 
-	const changeTile = (
-		i: number,
-		j: number,
-		layer: 'Base' | 'Obstacle' | 'Decoration'
-	) => {
+	const changeTile = (i: number, j: number, layer: LayerName) => {
 		if (!tool) {
 			return;
 		}
@@ -60,6 +57,17 @@ export const useMapEditor = ({ tool }: { tool: Tool | undefined }) => {
 							});
 					  })
 					: newMap.baseLayer,
+			encounterLayer:
+				layer === 'Encounter'
+					? newMap.encounterLayer.map((row, h) => {
+							return row.map((el, k) => {
+								if (h === i && k === j) {
+									return tool.type === 'eraser' ? undefined : tool.tile;
+								}
+								return el;
+							});
+					  })
+					: newMap.encounterLayer,
 			obstacleLayer:
 				layer === 'Obstacle'
 					? newMap.obstacleLayer.map((row, h) => {
@@ -85,5 +93,39 @@ export const useMapEditor = ({ tool }: { tool: Tool | undefined }) => {
 		}));
 	};
 
-	return { newMap, addColumn, addRow, changeTile };
+	const clearLayer = (layer: LayerName) => {
+		if (layer === 'Base') {
+			return;
+		}
+
+		setNewMap((newMap) => ({
+			...newMap,
+			encounterLayer:
+				layer === 'Encounter'
+					? newMap.encounterLayer.map((row) => {
+							return row.map(() => {
+								return undefined;
+							});
+					  })
+					: newMap.encounterLayer,
+			obstacleLayer:
+				layer === 'Obstacle'
+					? newMap.obstacleLayer.map((row) => {
+							return row.map(() => {
+								return undefined;
+							});
+					  })
+					: newMap.obstacleLayer,
+			decorationLayer:
+				layer === 'Decoration'
+					? newMap.decorationLayer.map((row) => {
+							return row.map(() => {
+								return undefined;
+							});
+					  })
+					: newMap.decorationLayer,
+		}));
+	};
+
+	return { newMap, addColumn, addRow, changeTile, clearLayer };
 };

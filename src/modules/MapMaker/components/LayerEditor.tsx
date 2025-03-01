@@ -1,4 +1,5 @@
 import { TileIdentifier } from '../../../interfaces/OverworldMap';
+import { LayerName } from '../hooks/useMapEditor';
 
 export const LayerEditor = ({
 	layerName,
@@ -6,20 +7,23 @@ export const LayerEditor = ({
 	changeTile,
 	addColumn,
 	addRow,
+	clear,
 }: {
-	layerName: 'Base' | 'Obstacle' | 'Decoration';
+	layerName: LayerName;
 	layer: (TileIdentifier | undefined)[][];
 	addColumn: () => void;
 	addRow: () => void;
-	changeTile: (
-		i: number,
-		j: number,
-		layer: 'Base' | 'Obstacle' | 'Decoration'
-	) => void;
+	changeTile: (i: number, j: number, layer: LayerName) => void;
+	clear: () => void;
 }) => {
 	return (
 		<>
-			<h3>{layerName}:</h3>
+			<h3>
+				<button style={{ color: 'white', marginRight: '1rem' }} onClick={clear}>
+					Clear
+				</button>
+				{layerName}:
+			</h3>
 			<div
 				style={{
 					padding: '2rem',
@@ -48,14 +52,9 @@ export const LayerDisplay = ({
 	layer,
 	changeTile,
 }: {
-	layerName: 'Base' | 'Obstacle' | 'Decoration';
+	layerName: LayerName;
 	layer: (TileIdentifier | undefined)[][];
-
-	changeTile: (
-		i: number,
-		j: number,
-		layer: 'Base' | 'Obstacle' | 'Decoration'
-	) => void;
+	changeTile: (i: number, j: number, layer: LayerName) => void;
 }) => {
 	return (
 		<div
