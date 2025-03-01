@@ -8,11 +8,13 @@ export const LayerEditor = ({
 	addColumn,
 	addRow,
 	clear,
+	changeRow,
 }: {
 	layerName: LayerName;
 	layer: (TileIdentifier | undefined)[][];
 	addColumn: () => void;
 	addRow: () => void;
+	changeRow: (index: number) => void;
 	changeTile: (i: number, j: number, layer: LayerName) => void;
 	clear: () => void;
 }) => {
@@ -28,17 +30,32 @@ export const LayerEditor = ({
 				style={{
 					padding: '2rem',
 					display: 'grid',
-					gridTemplateColumns: '10fr 1fr',
+					gridTemplateColumns: '1fr 10fr 1fr',
 				}}
 			>
+				<div
+					style={{
+						cursor: 'default',
+						display: 'flex',
+						flexDirection: 'column',
+					}}
+				>
+					{Array.from({ length: layer.length }).map((_, i) => (
+						<div role={'button'} onClick={() => changeRow(i)}>
+							{i}
+						</div>
+					))}
+				</div>
 				<LayerDisplay
 					layer={layer}
 					layerName={layerName}
 					changeTile={changeTile}
 				/>
+
 				<div style={{ border: '1px solid white' }} onClick={addColumn}>
 					add Column
 				</div>
+				<span></span>
 				<div style={{ border: '1px solid white' }} onClick={addRow}>
 					add Row
 				</div>

@@ -118,6 +118,59 @@ export const useMapEditor = ({
 			},
 		}));
 	};
+	const changeRow = (i: number, layer: LayerName) => {
+		if (!tool) {
+			return;
+		}
+
+		setNewMap((newMap) => ({
+			...newMap,
+			tileMap: {
+				baseLayer:
+					layer === 'Base'
+						? newMap.tileMap.baseLayer.map((row, h) => {
+								if (h === i && tool.type === 'tileplacer') {
+									return row.map(() => tool.tile);
+								}
+								return row;
+						  })
+						: newMap.tileMap.baseLayer,
+				encounterLayer:
+					layer === 'Encounter'
+						? newMap.tileMap.encounterLayer.map((row, h) => {
+								if (h === i) {
+									return row.map(() =>
+										tool.type === 'eraser' ? undefined : tool.tile
+									);
+								}
+								return row;
+						  })
+						: newMap.tileMap.encounterLayer,
+				obstacleLayer:
+					layer === 'Obstacle'
+						? newMap.tileMap.obstacleLayer.map((row, h) => {
+								if (h === i) {
+									return row.map(() =>
+										tool.type === 'eraser' ? undefined : tool.tile
+									);
+								}
+								return row;
+						  })
+						: newMap.tileMap.obstacleLayer,
+				decorationLayer:
+					layer === 'Decoration'
+						? newMap.tileMap.decorationLayer.map((row, h) => {
+								if (h === i) {
+									return row.map(() =>
+										tool.type === 'eraser' ? undefined : tool.tile
+									);
+								}
+								return row;
+						  })
+						: newMap.tileMap.decorationLayer,
+			},
+		}));
+	};
 
 	const clearLayer = (layer: LayerName) => {
 		if (layer === 'Base') {
@@ -153,5 +206,5 @@ export const useMapEditor = ({
 		}));
 	};
 
-	return { newMap, addColumn, addRow, changeTile, clearLayer };
+	return { newMap, addColumn, addRow, changeTile, clearLayer, changeRow };
 };

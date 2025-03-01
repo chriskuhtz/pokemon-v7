@@ -12,10 +12,11 @@ export const MapEditor = ({
 	tool: Tool | undefined;
 	initialMap: OverworldMap;
 }): JSX.Element => {
-	const { newMap, addColumn, addRow, changeTile, clearLayer } = useMapEditor({
-		tool,
-		initialMap,
-	});
+	const { newMap, addColumn, addRow, changeTile, clearLayer, changeRow } =
+		useMapEditor({
+			tool,
+			initialMap,
+		});
 	return (
 		<div>
 			<h2>
@@ -31,6 +32,7 @@ export const MapEditor = ({
 					layer={newMap.tileMap.baseLayer}
 					layerName="Base"
 					clear={() => clearLayer('Base')}
+					changeRow={(index) => changeRow(index, 'Base')}
 				/>
 				<LayerEditor
 					addColumn={addColumn}
@@ -39,6 +41,7 @@ export const MapEditor = ({
 					layer={newMap.tileMap.encounterLayer}
 					layerName="Encounter"
 					clear={() => clearLayer('Encounter')}
+					changeRow={(index) => changeRow(index, 'Encounter')}
 				/>
 				<LayerEditor
 					addColumn={addColumn}
@@ -47,6 +50,7 @@ export const MapEditor = ({
 					layer={newMap.tileMap.decorationLayer}
 					layerName="Decoration"
 					clear={() => clearLayer('Decoration')}
+					changeRow={(index) => changeRow(index, 'Decoration')}
 				/>
 				<LayerEditor
 					addColumn={addColumn}
@@ -55,6 +59,7 @@ export const MapEditor = ({
 					layer={newMap.tileMap.obstacleLayer}
 					layerName="Obstacle"
 					clear={() => clearLayer('Obstacle')}
+					changeRow={(index) => changeRow(index, 'Obstacle')}
 				/>
 				<CombinedCanvas map={newMap.tileMap} tileSize={16} />
 				<br />
