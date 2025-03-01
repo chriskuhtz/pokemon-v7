@@ -1,43 +1,66 @@
 import { useState } from 'react';
-import { testMap } from '../../../constants/maps/test/testMap';
-import { GameMap } from '../../../interfaces/OverworldMap';
+import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { Tool } from '../MapMaker';
 
 export type LayerName = 'Base' | 'Obstacle' | 'Decoration' | 'Encounter';
-export const useMapEditor = ({ tool }: { tool: Tool | undefined }) => {
-	const [newMap, setNewMap] = useState<GameMap>(testMap.tileMap);
+export const useMapEditor = ({
+	tool,
+	initialMap,
+}: {
+	tool: Tool | undefined;
+	initialMap: OverworldMap;
+}) => {
+	const [newMap, setNewMap] = useState<OverworldMap>(initialMap);
 
 	const addColumn = () =>
 		setNewMap((newMap) => ({
-			baseLayer: newMap.baseLayer.map((row) => [...row, row[row.length - 1]]),
-			encounterLayer: newMap.encounterLayer.map((row) => [...row, undefined]),
-			obstacleLayer: newMap.obstacleLayer.map((row) => [...row, undefined]),
-			decorationLayer: newMap.decorationLayer.map((row) => [...row, undefined]),
+			...newMap,
+			tileMap: {
+				baseLayer: newMap.tileMap.baseLayer.map((row) => [
+					...row,
+					row[row.length - 1],
+				]),
+				encounterLayer: newMap.tileMap.encounterLayer.map((row) => [
+					...row,
+					undefined,
+				]),
+				obstacleLayer: newMap.tileMap.obstacleLayer.map((row) => [
+					...row,
+					undefined,
+				]),
+				decorationLayer: newMap.tileMap.decorationLayer.map((row) => [
+					...row,
+					undefined,
+				]),
+			},
 		}));
 	const addRow = () =>
 		setNewMap((newMap) => ({
-			baseLayer: [
-				...newMap.baseLayer,
-				newMap.baseLayer[newMap.baseLayer.length - 1],
-			],
-			encounterLayer: [
-				...newMap.encounterLayer,
-				Array.from({ length: newMap.encounterLayer[0].length }).map(
-					() => undefined
-				),
-			],
-			obstacleLayer: [
-				...newMap.obstacleLayer,
-				Array.from({ length: newMap.obstacleLayer[0].length }).map(
-					() => undefined
-				),
-			],
-			decorationLayer: [
-				...newMap.decorationLayer,
-				Array.from({ length: newMap.decorationLayer[0].length }).map(
-					() => undefined
-				),
-			],
+			...newMap,
+			tileMap: {
+				baseLayer: [
+					...newMap.tileMap.baseLayer,
+					newMap.tileMap.baseLayer[newMap.tileMap.baseLayer.length - 1],
+				],
+				encounterLayer: [
+					...newMap.tileMap.encounterLayer,
+					Array.from({ length: newMap.tileMap.encounterLayer[0].length }).map(
+						() => undefined
+					),
+				],
+				obstacleLayer: [
+					...newMap.tileMap.obstacleLayer,
+					Array.from({ length: newMap.tileMap.obstacleLayer[0].length }).map(
+						() => undefined
+					),
+				],
+				decorationLayer: [
+					...newMap.tileMap.decorationLayer,
+					Array.from({ length: newMap.tileMap.decorationLayer[0].length }).map(
+						() => undefined
+					),
+				],
+			},
 		}));
 
 	const changeTile = (i: number, j: number, layer: LayerName) => {
@@ -46,50 +69,53 @@ export const useMapEditor = ({ tool }: { tool: Tool | undefined }) => {
 		}
 
 		setNewMap((newMap) => ({
-			baseLayer:
-				layer === 'Base'
-					? newMap.baseLayer.map((row, h) => {
-							return row.map((el, k) => {
-								if (h === i && k === j) {
-									return tool.type === 'eraser' ? el : tool.tile;
-								}
-								return el;
-							});
-					  })
-					: newMap.baseLayer,
-			encounterLayer:
-				layer === 'Encounter'
-					? newMap.encounterLayer.map((row, h) => {
-							return row.map((el, k) => {
-								if (h === i && k === j) {
-									return tool.type === 'eraser' ? undefined : tool.tile;
-								}
-								return el;
-							});
-					  })
-					: newMap.encounterLayer,
-			obstacleLayer:
-				layer === 'Obstacle'
-					? newMap.obstacleLayer.map((row, h) => {
-							return row.map((el, k) => {
-								if (h === i && k === j) {
-									return tool.type === 'eraser' ? undefined : tool.tile;
-								}
-								return el;
-							});
-					  })
-					: newMap.obstacleLayer,
-			decorationLayer:
-				layer === 'Decoration'
-					? newMap.decorationLayer.map((row, h) => {
-							return row.map((el, k) => {
-								if (h === i && k === j) {
-									return tool.type === 'eraser' ? undefined : tool.tile;
-								}
-								return el;
-							});
-					  })
-					: newMap.decorationLayer,
+			...newMap,
+			tileMap: {
+				baseLayer:
+					layer === 'Base'
+						? newMap.tileMap.baseLayer.map((row, h) => {
+								return row.map((el, k) => {
+									if (h === i && k === j) {
+										return tool.type === 'eraser' ? el : tool.tile;
+									}
+									return el;
+								});
+						  })
+						: newMap.tileMap.baseLayer,
+				encounterLayer:
+					layer === 'Encounter'
+						? newMap.tileMap.encounterLayer.map((row, h) => {
+								return row.map((el, k) => {
+									if (h === i && k === j) {
+										return tool.type === 'eraser' ? undefined : tool.tile;
+									}
+									return el;
+								});
+						  })
+						: newMap.tileMap.encounterLayer,
+				obstacleLayer:
+					layer === 'Obstacle'
+						? newMap.tileMap.obstacleLayer.map((row, h) => {
+								return row.map((el, k) => {
+									if (h === i && k === j) {
+										return tool.type === 'eraser' ? undefined : tool.tile;
+									}
+									return el;
+								});
+						  })
+						: newMap.tileMap.obstacleLayer,
+				decorationLayer:
+					layer === 'Decoration'
+						? newMap.tileMap.decorationLayer.map((row, h) => {
+								return row.map((el, k) => {
+									if (h === i && k === j) {
+										return tool.type === 'eraser' ? undefined : tool.tile;
+									}
+									return el;
+								});
+						  })
+						: newMap.tileMap.decorationLayer,
+			},
 		}));
 	};
 
@@ -102,28 +128,28 @@ export const useMapEditor = ({ tool }: { tool: Tool | undefined }) => {
 			...newMap,
 			encounterLayer:
 				layer === 'Encounter'
-					? newMap.encounterLayer.map((row) => {
+					? newMap.tileMap.encounterLayer.map((row) => {
 							return row.map(() => {
 								return undefined;
 							});
 					  })
-					: newMap.encounterLayer,
+					: newMap.tileMap.encounterLayer,
 			obstacleLayer:
 				layer === 'Obstacle'
-					? newMap.obstacleLayer.map((row) => {
+					? newMap.tileMap.obstacleLayer.map((row) => {
 							return row.map(() => {
 								return undefined;
 							});
 					  })
-					: newMap.obstacleLayer,
+					: newMap.tileMap.obstacleLayer,
 			decorationLayer:
 				layer === 'Decoration'
-					? newMap.decorationLayer.map((row) => {
+					? newMap.tileMap.decorationLayer.map((row) => {
 							return row.map(() => {
 								return undefined;
 							});
 					  })
-					: newMap.decorationLayer,
+					: newMap.tileMap.decorationLayer,
 		}));
 	};
 

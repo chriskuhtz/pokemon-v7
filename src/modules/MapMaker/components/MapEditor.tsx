@@ -1,21 +1,26 @@
 import { JSX } from 'react';
 import { CombinedCanvas } from '../../../components/CombinedCanvas/CombinedCanvas';
+import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { Tool } from '../MapMaker';
 import { useMapEditor } from '../hooks/useMapEditor';
 import { LayerEditor } from './LayerEditor';
 
 export const MapEditor = ({
 	tool,
+	initialMap,
 }: {
 	tool: Tool | undefined;
+	initialMap: OverworldMap;
 }): JSX.Element => {
 	const { newMap, addColumn, addRow, changeTile, clearLayer } = useMapEditor({
 		tool,
+		initialMap,
 	});
 	return (
 		<div>
 			<h2>
-				My Map {newMap.baseLayer.length}/{newMap.baseLayer[0].length}
+				My Map {newMap.tileMap.baseLayer.length}/
+				{newMap.tileMap.baseLayer[0].length}
 			</h2>
 
 			<div style={{ maxHeight: '80dvh', overflowY: 'scroll' }}>
@@ -23,7 +28,7 @@ export const MapEditor = ({
 					addColumn={addColumn}
 					addRow={addRow}
 					changeTile={changeTile}
-					layer={newMap.baseLayer}
+					layer={newMap.tileMap.baseLayer}
 					layerName="Base"
 					clear={() => clearLayer('Base')}
 				/>
@@ -31,7 +36,7 @@ export const MapEditor = ({
 					addColumn={addColumn}
 					addRow={addRow}
 					changeTile={changeTile}
-					layer={newMap.encounterLayer}
+					layer={newMap.tileMap.encounterLayer}
 					layerName="Encounter"
 					clear={() => clearLayer('Encounter')}
 				/>
@@ -39,7 +44,7 @@ export const MapEditor = ({
 					addColumn={addColumn}
 					addRow={addRow}
 					changeTile={changeTile}
-					layer={newMap.decorationLayer}
+					layer={newMap.tileMap.decorationLayer}
 					layerName="Decoration"
 					clear={() => clearLayer('Decoration')}
 				/>
@@ -47,17 +52,21 @@ export const MapEditor = ({
 					addColumn={addColumn}
 					addRow={addRow}
 					changeTile={changeTile}
-					layer={newMap.obstacleLayer}
+					layer={newMap.tileMap.obstacleLayer}
 					layerName="Obstacle"
 					clear={() => clearLayer('Obstacle')}
 				/>
-				<CombinedCanvas map={newMap} tileSize={16} />
+				<CombinedCanvas map={newMap.tileMap} tileSize={16} />
 				<br />
 				<a
 					style={{ color: 'white' }}
 					href={
 						'data:text/json;charset=utf-8,' +
-						encodeURIComponent(JSON.stringify(newMap))
+						encodeURIComponent(
+							JSON.stringify(newMap, function (k, v) {
+								return v === undefined ? null : v;
+							})
+						)
 					}
 					download={`map_${new Date().getTime()}.json`}
 				>

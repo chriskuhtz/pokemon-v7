@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
+import { testMap } from '../../constants/maps/test/testMap';
 import { TileIdentifier } from '../../interfaces/OverworldMap';
 import { MapEditor } from './components/MapEditor';
 import { ToolSelection } from './components/ToolSelection';
@@ -27,7 +28,7 @@ export const MapMaker = ({ goBack }: { goBack: () => void }) => {
 		>
 			<IoIosArrowBack role="button" tabIndex={0} onClick={goBack} />
 			<div style={{ display: 'grid', gridTemplateColumns: '3fr 1fr' }}>
-				<MapEditor tool={selected} />
+				<MapEditor tool={selected} initialMap={testMap} />
 
 				<ToolSelection selected={selected} setSelected={setSelected} />
 			</div>
