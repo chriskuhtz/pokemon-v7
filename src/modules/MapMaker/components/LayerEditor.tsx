@@ -39,19 +39,19 @@ export const LayerEditor = ({
 				<div
 					style={{
 						cursor: 'default',
+						width: 'min-content',
 						display: 'grid',
-						gap: '1px',
-						gridTemplateColumns: Array.from({ length: layer[0].length })
-							.map(() => '18px')
-							.join(' '),
+						justifyItems: 'flex-start',
+						gridTemplateColumns: `${Array.from({
+							length: layer[0].length,
+						})
+							.map(() => '1fr')
+							.join(' ')}`,
+						gap: '2px',
 					}}
 				>
 					{Array.from({ length: layer[0].length }).map((_, i) => (
-						<div
-							style={{ border: '1px solid red' }}
-							role={'button'}
-							onClick={() => changeColumn(i)}
-						>
+						<div role={'button'} onClick={() => changeColumn(i)}>
 							{i}
 						</div>
 					))}
@@ -99,7 +99,6 @@ export const LayerDisplay = ({
 	return (
 		<div
 			style={{
-				scale: 1,
 				width: 'min-content',
 				display: 'grid',
 				justifyItems: 'flex-start',
