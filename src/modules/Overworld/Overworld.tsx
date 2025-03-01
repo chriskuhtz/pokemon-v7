@@ -10,9 +10,8 @@ import { handleEnterPress } from '../../functions/handleEnterPress';
 import { Message } from '../../hooks/useMessageQueue';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
+import { Occupant, OverworldMap } from '../../interfaces/OverworldMap';
 import { CharacterLocationData, SaveFile } from '../../interfaces/SaveFile';
-import { CombinedCanvas } from '../../shared/CombinedCanvas';
-import { Occupant, OverworldMap } from '../../shared/OverworldMap';
 import './Overworld.css';
 import { ClickerGrid } from './components/ClickerGrid';
 import { interactWithFunction } from './functions/interactWith';
@@ -20,6 +19,7 @@ import { useClickTarget } from './hooks/useClickTarget';
 import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
+import { CombinedCanvas } from '../../components/CombinedCanvas/CombinedCanvas';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';

@@ -4,7 +4,7 @@ import { baseSize } from '../../../constants/gameData';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { isKO } from '../../../functions/isKo';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
-import { OverworldTrainer } from '../../../shared/OverworldMap';
+import { OverworldTrainer } from '../../../interfaces/OverworldMap';
 
 export const LineUpSelection = ({
 	leave,

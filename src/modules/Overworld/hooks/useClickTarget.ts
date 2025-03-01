@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { getNextFieldOccupant } from '../../../functions/getNextFieldOccupant';
 import { getOverworldDistance } from '../../../functions/getOverworldDistance';
 import { isPassable } from '../../../functions/isPassable';
+import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
 import {
 	CharacterLocationData,
 	CharacterOrientation,
 } from '../../../interfaces/SaveFile';
-import { Occupant, OverworldMap } from '../../../shared/OverworldMap';
 
 export const useClickTarget = (
 	assembledMap: OverworldMap,

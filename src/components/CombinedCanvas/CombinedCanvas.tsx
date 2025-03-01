@@ -1,6 +1,6 @@
 import { JSX } from 'react';
-import { GameMap } from './interfaces';
-import { useDrawBackground } from './useDrawBackground';
+import { useDrawBackground } from '../../hooks/useDrawBackground';
+import { GameMap } from '../../interfaces/OverworldMap';
 export const CombinedCanvas = ({
 	map,
 	tileSize,

@@ -1,4 +1,4 @@
-import { OverworldMap } from '../shared/OverworldMap';
+import { OverworldMap } from '../interfaces/OverworldMap';
 
 export const getMapDimensions = (
 	map: OverworldMap

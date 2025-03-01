@@ -1,3 +1,16 @@
+import { MapId } from '../constants/checkLists/mapsRecord';
+import { QuestName } from '../constants/checkLists/questsRecord';
+import { TimeOfDay } from '../functions/getTimeOfDay';
+import { Inventory } from './Inventory';
+import { ItemType } from './Item';
+import { OwnedPokemon } from './OwnedPokemon';
+import {
+	CharacterLocationData,
+	CharacterOrientation,
+	SaveFile,
+} from './SaveFile';
+import { WeatherType } from './Weather';
+
 /**
  *
  *
@@ -8,28 +21,6 @@
  * 3 = border
  * 4= obstacle
  */
-
-export const tileMap: Record<string, number> = {
-	empty: 0,
-	encounter: 1,
-	blocked: 2,
-	border: 3,
-	obstacle: 4,
-};
-
-import { MapId } from '../constants/checkLists/mapsRecord';
-import { QuestName } from '../constants/checkLists/questsRecord';
-import { TimeOfDay } from '../functions/getTimeOfDay';
-import { Inventory } from '../interfaces/Inventory';
-import { ItemType } from '../interfaces/Item';
-import { OwnedPokemon } from '../interfaces/OwnedPokemon';
-import {
-	CharacterLocationData,
-	CharacterOrientation,
-	SaveFile,
-} from '../interfaces/SaveFile';
-import { WeatherType } from '../interfaces/Weather';
-import { GameMap } from './interfaces';
 
 export interface BaseOccupant {
 	id: string;
@@ -131,4 +122,14 @@ export interface OverworldMap {
 	tileMap: GameMap;
 	occupants: Occupant[];
 	weather?: WeatherType;
+}
+
+export interface GameMap {
+	baseLayer: TileIdentifier[][];
+	decorationLayer: (TileIdentifier | undefined)[][];
+	obstacleLayer: (TileIdentifier | undefined)[][];
+}
+export interface TileIdentifier {
+	yOffset: number;
+	xOffset: number;
 }

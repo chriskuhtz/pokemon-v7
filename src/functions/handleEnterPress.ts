@@ -1,5 +1,5 @@
+import { Occupant } from '../interfaces/OverworldMap';
 import { CharacterLocationData } from '../interfaces/SaveFile';
-import { Occupant } from '../shared/OverworldMap';
 import { getNextFieldOccupant } from './getNextFieldOccupant';
 import { getNextLocation } from './getNextLocation';
 

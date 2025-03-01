@@ -1,4 +1,4 @@
-import { OverworldEncounter, OverworldMap } from '../shared/OverworldMap';
+import { OverworldEncounter, OverworldMap } from '../interfaces/OverworldMap';
 import { getTimeOfDay } from './getTimeOfDay';
 
 export const getRandomEncounter = (map: OverworldMap): OverworldEncounter =>

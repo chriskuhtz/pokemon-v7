@@ -1,7 +1,7 @@
 import { Message } from '../../../hooks/useMessageQueue';
 import { Inventory } from '../../../interfaces/Inventory';
+import { Occupant } from '../../../interfaces/OverworldMap';
 import { CharacterLocationData } from '../../../interfaces/SaveFile';
-import { Occupant } from '../../../shared/OverworldMap';
 
 export const interactWithFunction = ({
 	occ,

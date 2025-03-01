@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { GameMap } from './interfaces';
+import { GameMap } from '../interfaces/OverworldMap';
 
 export const useDrawBackground = (
 	canvasId: string,
