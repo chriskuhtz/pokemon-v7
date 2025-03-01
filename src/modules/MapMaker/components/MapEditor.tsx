@@ -27,7 +27,7 @@ export const MapEditor = ({
 	return (
 		<div>
 			<h2>
-				My Map {newMap.tileMap.baseLayer.length}/
+				{newMap.id} {newMap.tileMap.baseLayer.length}/
 				{newMap.tileMap.baseLayer[0].length}
 			</h2>
 
@@ -78,11 +78,7 @@ export const MapEditor = ({
 					style={{ color: 'white' }}
 					href={
 						'data:text/json;charset=utf-8,' +
-						encodeURIComponent(
-							JSON.stringify(newMap, function (k, v) {
-								return v === undefined ? null : v;
-							})
-						)
+						encodeURIComponent(JSON.stringify(newMap))
 					}
 					download={`map_${new Date().getTime()}.json`}
 				>
