@@ -12,7 +12,7 @@ export const LayerEditor = ({
 	changeColumn,
 }: {
 	layerName: LayerName;
-	layer: (TileIdentifier | undefined)[][];
+	layer: (TileIdentifier | null)[][];
 	addColumn: () => void;
 	addRow: () => void;
 	changeColumn: (index: number) => void;
@@ -93,7 +93,7 @@ export const LayerDisplay = ({
 	changeTile,
 }: {
 	layerName: LayerName;
-	layer: (TileIdentifier | undefined)[][];
+	layer: (TileIdentifier | null)[][];
 	changeTile: (i: number, j: number, layer: LayerName) => void;
 }) => {
 	return (

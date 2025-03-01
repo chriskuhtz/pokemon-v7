@@ -7,7 +7,7 @@ export const useMapEditor = ({
 	tool,
 	initialMap,
 }: {
-	tool: Tool | null;
+	tool: Tool | undefined;
 	initialMap: OverworldMap;
 }) => {
 	const [newMap, setNewMap] = useState<OverworldMap>(initialMap);
