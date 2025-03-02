@@ -1243,6 +1243,7 @@ export const testMap: OverworldMap = {
 				{ yOffset: -48, xOffset: -928 },
 			],
 			[
+				{ yOffset: -48, xOffset: -928 },
 				{ yOffset: -16, xOffset: -96 },
 				{ yOffset: -16, xOffset: -96 },
 				{ yOffset: -16, xOffset: -96 },
@@ -1288,8 +1289,7 @@ export const testMap: OverworldMap = {
 				{ yOffset: -16, xOffset: -96 },
 				{ yOffset: -16, xOffset: -96 },
 				{ yOffset: -16, xOffset: -96 },
-				{ yOffset: -16, xOffset: -96 },
-				{ yOffset: -16, xOffset: -96 },
+				{ yOffset: -48, xOffset: -928 },
 			],
 			[
 				{ yOffset: -32, xOffset: -96 },
