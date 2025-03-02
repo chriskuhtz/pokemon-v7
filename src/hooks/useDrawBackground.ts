@@ -82,6 +82,6 @@ export const useDrawBackground = (
 			});
 		});
 
-		spriteSheet.src = '/tilesets/fireRedBase.png';
+		spriteSheet.src = '/tilesets/masterSheet.png';
 	}, [canvasId, map, tileSize]);
 };

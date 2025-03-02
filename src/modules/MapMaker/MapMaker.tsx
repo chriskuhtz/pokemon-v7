@@ -27,10 +27,11 @@ export const MapMaker = ({ goBack }: { goBack: () => void }) => {
 				padding: '0 2rem',
 				color: 'white',
 				backgroundColor: 'rgba(0,0,0,.8)',
+				width: 'max-content',
 			}}
 		>
 			<IoIosArrowBack role="button" tabIndex={0} onClick={goBack} />
-			<div style={{ display: 'grid', gridTemplateColumns: '3fr 1fr' }}>
+			<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
 				<MapEditor
 					activeTab={activeTab}
 					setActiveTab={setActiveTab}

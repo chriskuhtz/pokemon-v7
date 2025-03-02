@@ -5,10 +5,10 @@ export interface TileMap {
 	gap: number;
 }
 export const tileMaps: Record<string, TileMap> = {
-	fireRedBase: {
-		src: "url('/tilesets/fireRedBase.png')",
-		height: 47,
-		width: 28,
-		gap: 1,
+	masterSheet: {
+		src: "url('/tilesets/masterSheet.png')",
+		height: 133,
+		width: 88,
+		gap: 0,
 	},
 };

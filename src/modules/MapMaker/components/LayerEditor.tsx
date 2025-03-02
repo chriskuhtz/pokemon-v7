@@ -125,7 +125,7 @@ export const LayerDisplay = ({
 								height: 16,
 								width: 16,
 								border: '1px solid red',
-								background: `url(/tilesets/fireRedBase.png) ${xOffset}px ${yOffset}px`,
+								background: `url(/tilesets/masterSheet.png) ${xOffset}px ${yOffset}px`,
 							}}
 						></div>
 					);

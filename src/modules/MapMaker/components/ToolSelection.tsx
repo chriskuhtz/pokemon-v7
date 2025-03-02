@@ -27,7 +27,7 @@ export const ToolSelection = ({
 							scale: 2,
 							height: 16,
 							width: 16,
-							background: `url(/tilesets/fireRedBase.png) ${selected.tile.xOffset}px ${selected.tile.yOffset}px`,
+							background: `url(/tilesets/masterSheet.png) ${selected.tile.xOffset}px ${selected.tile.yOffset}px`,
 						}}
 					></div>
 				)}
