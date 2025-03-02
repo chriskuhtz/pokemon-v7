@@ -5,17 +5,20 @@ import { useMapEditor } from '../hooks/useMapEditor';
 import { EncountersTab } from './EncountersTab';
 import { OccupantsTab } from './OccupantsTab';
 import { TileMapTab } from './TileMapTab';
+import { ToolSelection } from './ToolSelection';
 
 export const MapEditor = ({
 	tool,
 	initialMap,
 	activeTab,
 	setActiveTab,
+	setSelected,
 }: {
 	tool: Tool | undefined;
 	initialMap: OverworldMap;
 	activeTab: Tab;
 	setActiveTab: (x: Tab) => void;
+	setSelected: (x: Tool) => void;
 }): JSX.Element => {
 	const {
 		newMap,
@@ -38,7 +41,7 @@ export const MapEditor = ({
 		<div>
 			<h2>{newMap.id}</h2>
 			<div style={{ display: 'flex', gap: '1rem' }}>
-				{['TileMap', 'Encounters', 'Occupants'].map((t) => (
+				{['TileMap', 'Encounters', 'Occupants', 'ToolSelection'].map((t) => (
 					<button
 						key={t}
 						style={{ color: t === activeTab ? 'wheat' : 'lightgray' }}
@@ -72,6 +75,9 @@ export const MapEditor = ({
 					removeOccupant={removeOccupant}
 					newMap={newMap}
 				/>
+			)}
+			{activeTab === 'ToolSelection' && (
+				<ToolSelection setSelected={setSelected} />
 			)}
 			<a
 				style={{ color: 'white' }}

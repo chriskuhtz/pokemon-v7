@@ -4,36 +4,12 @@ import { tileMaps } from '../constants/tileMaps';
 import { TileMapViewer } from './TileMapViewer';
 
 export const ToolSelection = ({
-	selected,
 	setSelected,
 }: {
-	selected: Tool | undefined;
 	setSelected: (x: Tool) => void;
 }): JSX.Element => {
 	return (
 		<div>
-			<h2
-				style={{
-					color: 'wheat',
-					display: 'flex',
-					alignItems: 'center',
-					gap: '2rem',
-				}}
-			>
-				Selected Tool:{' '}
-				{selected?.type === 'tileplacer' && (
-					<div
-						style={{
-							scale: 2,
-							height: 16,
-							width: 16,
-							background: `url(/tilesets/masterSheet.png) ${selected.tile.xOffset}px ${selected.tile.yOffset}px`,
-						}}
-					></div>
-				)}
-				{selected?.type === 'eraser' && 'Eraser'}
-				{!selected && '-'}
-			</h2>
 			<button
 				style={{ margin: '1rem', padding: '1rem', color: 'white' }}
 				onClick={() => setSelected({ type: 'eraser' })}

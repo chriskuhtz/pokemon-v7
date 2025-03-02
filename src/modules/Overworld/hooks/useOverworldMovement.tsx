@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { fps } from '../../../constants/gameData';
 import { getNextForwardFoot } from '../../../functions/getNextForwardFoot';
 import { updatePosition } from '../../../functions/updatePosition';
-import { OverworldMap } from '../../../interfaces/OverworldMap';
+import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
 import {
 	CharacterLocationData,
 	CharacterOrientation,
@@ -15,6 +15,7 @@ export const useOverworldMovement = (
 	map: OverworldMap,
 	startEncounter: () => void,
 	addStep: () => void,
+	currentOccupants: Occupant[],
 	encounterRateModifier?: number
 ) => {
 	const [encounterChance, setEncounterChance] =
@@ -55,7 +56,13 @@ export const useOverworldMovement = (
 			if (nextInput === playerLocation.orientation) {
 				setCharacterLocation({
 					...playerLocation,
-					...updatePosition(playerLocation, nextInput, map, addStep),
+					...updatePosition(
+						playerLocation,
+						nextInput,
+						map,
+						addStep,
+						currentOccupants
+					),
 					forwardFoot: getNextForwardFoot(playerLocation.forwardFoot),
 				});
 			}
@@ -72,6 +79,7 @@ export const useOverworldMovement = (
 		return () => clearTimeout(int);
 	}, [
 		addStep,
+		currentOccupants,
 		encounterChance,
 		encounterRateModifier,
 		map,

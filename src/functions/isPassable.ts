@@ -1,4 +1,4 @@
-import { OverworldMap } from '../interfaces/OverworldMap';
+import { Occupant, OverworldMap } from '../interfaces/OverworldMap';
 
 export const getMapDimensions = (
 	map: OverworldMap
@@ -11,7 +11,8 @@ export const getMapDimensions = (
 
 export const isPassable = (
 	field: { x: number; y: number },
-	map: OverworldMap
+	map: OverworldMap,
+	currentOccupants: Occupant[]
 ): boolean => {
 	const { width, height } = getMapDimensions(map);
 	if (field.y >= height) {
@@ -29,6 +30,14 @@ export const isPassable = (
 	const nextFieldObstacle = map.tileMap.obstacleLayer[field.y][field.x];
 
 	if (nextFieldObstacle) {
+		return false;
+	}
+
+	const nextFieldOccupant = currentOccupants.find(
+		(c) => c.x === field.x && c.y === field.y
+	);
+
+	if (nextFieldOccupant) {
 		return false;
 	}
 

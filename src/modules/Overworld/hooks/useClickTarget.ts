@@ -17,7 +17,7 @@ export const useClickTarget = (
 	interactWith: (occ: Occupant | undefined) => void,
 	collectedItems: string[],
 	activeMessage: boolean,
-	statefulOccupantsRecord: Occupant[]
+	currentOccupants: Occupant[]
 ): React.Dispatch<
 	React.SetStateAction<
 		| {
@@ -39,35 +39,51 @@ export const useClickTarget = (
 			return;
 		}
 
-		const occ = getNextFieldOccupant(clickTarget, statefulOccupantsRecord);
+		const occ = getNextFieldOccupant(clickTarget, currentOccupants);
 		if (occ && getOverworldDistance(clickTarget, playerLocation) === 1) {
 			interactWith(occ);
 		}
 
 		if (
 			playerLocation.x < clickTarget.x &&
-			isPassable({ x: playerLocation.x + 1, y: playerLocation.y }, assembledMap)
+			isPassable(
+				{ x: playerLocation.x + 1, y: playerLocation.y },
+				assembledMap,
+				currentOccupants
+			)
 		) {
 			setNextInput('RIGHT');
 			return;
 		}
 		if (
 			playerLocation.x > clickTarget.x &&
-			isPassable({ x: playerLocation.x - 1, y: playerLocation.y }, assembledMap)
+			isPassable(
+				{ x: playerLocation.x - 1, y: playerLocation.y },
+				assembledMap,
+				currentOccupants
+			)
 		) {
 			setNextInput('LEFT');
 			return;
 		}
 		if (
 			playerLocation.y < clickTarget.y &&
-			isPassable({ x: playerLocation.x, y: playerLocation.y + 1 }, assembledMap)
+			isPassable(
+				{ x: playerLocation.x, y: playerLocation.y + 1 },
+				assembledMap,
+				currentOccupants
+			)
 		) {
 			setNextInput('DOWN');
 			return;
 		}
 		if (
 			playerLocation.y > clickTarget.y &&
-			isPassable({ x: playerLocation.x, y: playerLocation.y - 1 }, assembledMap)
+			isPassable(
+				{ x: playerLocation.x, y: playerLocation.y - 1 },
+				assembledMap,
+				currentOccupants
+			)
 		) {
 			setNextInput('UP');
 			return;
@@ -76,7 +92,7 @@ export const useClickTarget = (
 		if (
 			(clickTarget.x === playerLocation.x &&
 				clickTarget.y === playerLocation.y) ||
-			(!isPassable(clickTarget, assembledMap) &&
+			(!isPassable(clickTarget, assembledMap, currentOccupants) &&
 				getOverworldDistance(clickTarget, playerLocation) === 1)
 		) {
 			if (playerLocation.x > clickTarget.x) {
@@ -104,7 +120,7 @@ export const useClickTarget = (
 		interactWith,
 		playerLocation,
 		setNextInput,
-		statefulOccupantsRecord,
+		currentOccupants,
 	]);
 
 	return setClickTarget;

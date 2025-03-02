@@ -128,6 +128,7 @@ export const Overworld = ({
 		map,
 		addEncounterMessage,
 		() => setStepsTaken((s) => s + 1),
+		conditionalOccupants,
 		encounterRateModifier
 	);
 	const setClickTarget = useClickTarget(
