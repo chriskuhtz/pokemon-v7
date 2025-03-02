@@ -5,7 +5,6 @@ import { getNextLocation } from './getNextLocation';
 
 export const handleEnterPress = (
 	playerLocation: CharacterLocationData,
-	collectedItems: string[],
 	interactWith: (x: Occupant | undefined) => void,
 	statefulOccupantsRecord: Occupant[]
 ) => {
@@ -14,12 +13,5 @@ export const handleEnterPress = (
 		playerLocation.orientation
 	);
 
-	interactWith(
-		getNextFieldOccupant(
-			playerLocation.mapId,
-			collectedItems,
-			focusedField,
-			statefulOccupantsRecord
-		)
-	);
+	interactWith(getNextFieldOccupant(focusedField, statefulOccupantsRecord));
 };

@@ -178,20 +178,6 @@ export const interactWithFunction = ({
 
 		return;
 	}
-	if (data.type === 'OBSTACLE' && data.gifts) {
-		const gifts = Object.entries(data.gifts ?? {});
-		if (!handledOccupants.includes(occ.id)) {
-			addMultipleMessages(
-				gifts.map(([item, amount], i) => ({
-					message: `received ${amount} ${item}`,
-					onRemoval:
-						i === gifts.length - 1
-							? () => handleThisOccupant(occ.id)
-							: undefined,
-				}))
-			);
-		}
-	}
 
 	console.error('what is this occupant', occ);
 };

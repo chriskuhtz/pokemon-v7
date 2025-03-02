@@ -3,6 +3,7 @@ import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { Tab, Tool } from '../MapMaker';
 import { useMapEditor } from '../hooks/useMapEditor';
 import { EncountersTab } from './EncountersTab';
+import { OccupantsTab } from './OccupantsTab';
 import { TileMapTab } from './TileMapTab';
 
 export const MapEditor = ({
@@ -26,6 +27,8 @@ export const MapEditor = ({
 		changeColumn,
 		addEncounter,
 		removeEncounter,
+		addOccupant,
+		removeOccupant,
 	} = useMapEditor({
 		tool,
 		initialMap,
@@ -37,6 +40,7 @@ export const MapEditor = ({
 			<div style={{ display: 'flex', gap: '1rem' }}>
 				{['TileMap', 'Encounters', 'Occupants'].map((t) => (
 					<button
+						key={t}
 						style={{ color: t === activeTab ? 'wheat' : 'lightgray' }}
 						onClick={() => setActiveTab(t as Tab)}
 					>
@@ -59,6 +63,13 @@ export const MapEditor = ({
 				<EncountersTab
 					removeEncounter={removeEncounter}
 					addEncounter={addEncounter}
+					newMap={newMap}
+				/>
+			)}
+			{activeTab === 'Occupants' && (
+				<OccupantsTab
+					addOccupant={addOccupant}
+					removeOccupant={removeOccupant}
 					newMap={newMap}
 				/>
 			)}

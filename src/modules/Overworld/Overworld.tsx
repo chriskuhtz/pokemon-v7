@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useContext, useMemo, useState } from 'react';
 import { IoMdMenu } from 'react-icons/io';
 import { TeamOverview } from '../../components/TeamOverview/TeamOverview';
 import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
@@ -9,6 +9,7 @@ import { baseSize, fps } from '../../constants/gameData';
 import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { Message } from '../../hooks/useMessageQueue';
+import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
 import { Occupant, OverworldMap } from '../../interfaces/OverworldMap';
@@ -18,6 +19,7 @@ import { ClickerGrid } from './components/ClickerGrid';
 import { interactWithFunction } from './functions/interactWith';
 import { useClickTarget } from './hooks/useClickTarget';
 import { useDrawCharacter } from './hooks/useDrawCharacter';
+import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
 
@@ -68,6 +70,10 @@ export const Overworld = ({
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
 }) => {
+	const { saveFile } = useContext(SaveFileContext);
+	const conditionalOccupants = useMemo(() => {
+		return map.occupants.filter((m) => m.conditionFunction(saveFile));
+	}, [map, saveFile]);
 	const { width, height } = {
 		width: map.tileMap.baseLayer[0].length,
 		height: map.tileMap.baseLayer.length,
@@ -84,7 +90,7 @@ export const Overworld = ({
 
 	//DRAWING
 	useDrawCharacter(playerCanvasId, playerLocation, playerSprite);
-	//useDrawOccupants(occupantsCanvasId, map.occupants);
+	useDrawOccupants(occupantsCanvasId, conditionalOccupants);
 	//INTERACTION
 	const interactWith = useCallback(
 		(occ: Occupant | undefined) =>
@@ -131,11 +137,11 @@ export const Overworld = ({
 		interactWith,
 		[],
 		!!latestMessage,
-		map.occupants
+		conditionalOccupants
 	);
 	useKeyboardControl(
 		setNextInput,
-		() => handleEnterPress(playerLocation, [], interactWith, map.occupants),
+		() => handleEnterPress(playerLocation, interactWith, conditionalOccupants),
 		() => openMenu(stepsTaken),
 		() => openQuests(stepsTaken),
 		() => openTeam(stepsTaken),

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { TimeOfDay } from '../../../functions/getTimeOfDay';
-import { OverworldMap } from '../../../interfaces/OverworldMap';
+import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
 import { Tool } from '../MapMaker';
 
 export type LayerName = 'Base' | 'Obstacle' | 'Decoration' | 'Encounter';
@@ -286,6 +286,15 @@ export const useMapEditor = ({
 			},
 		});
 	};
+	const addOccupant = (x: Occupant) => {
+		setNewMap({ ...newMap, occupants: [...newMap.occupants, x] });
+	};
+	const removeOccupant = (id: string) => {
+		setNewMap({
+			...newMap,
+			occupants: newMap.occupants.filter((o) => o.id !== id),
+		});
+	};
 
 	return {
 		newMap,
@@ -297,5 +306,7 @@ export const useMapEditor = ({
 		changeColumn,
 		addEncounter,
 		removeEncounter,
+		addOccupant,
+		removeOccupant,
 	};
 };

@@ -51,7 +51,11 @@ export const LayerEditor = ({
 					}}
 				>
 					{Array.from({ length: layer[0].length }).map((_, i) => (
-						<div role={'button'} onClick={() => changeColumn(i)}>
+						<div
+							key={'column' + i}
+							role={'button'}
+							onClick={() => changeColumn(i)}
+						>
 							{i}
 						</div>
 					))}
@@ -65,7 +69,7 @@ export const LayerEditor = ({
 					}}
 				>
 					{Array.from({ length: layer.length }).map((_, i) => (
-						<div role={'button'} onClick={() => changeRow(i)}>
+						<div key={'row' + i} role={'button'} onClick={() => changeRow(i)}>
 							{i}
 						</div>
 					))}

@@ -26,7 +26,6 @@ export interface BaseOccupant {
 	id: string;
 	x: number;
 	y: number;
-	map: MapId;
 	conditionFunction: (saveFile: SaveFile) => boolean;
 }
 export interface OverworldItem extends BaseOccupant {
@@ -75,12 +74,6 @@ export interface OverworldSign extends BaseOccupant {
 export interface OverworldBush extends BaseOccupant {
 	type: 'BUSH';
 }
-export interface OverworldObstacle extends BaseOccupant {
-	type: 'OBSTACLE';
-	sprite: string;
-	small?: boolean;
-	gifts?: Partial<Inventory>;
-}
 
 export interface OverworldTrainer extends BaseOccupant {
 	type: 'TRAINER';
@@ -91,7 +84,6 @@ export interface OverworldTrainer extends BaseOccupant {
 	team: OwnedPokemon[];
 	name: string;
 }
-
 export interface Portal extends BaseOccupant {
 	type: 'PORTAL';
 	sprite: string;
@@ -109,7 +101,6 @@ export type Occupant =
 	| OverworldNpc
 	| OverworldTrainer
 	| Portal
-	| OverworldObstacle
 	| OverworldSign;
 
 export interface OverworldEncounter {
