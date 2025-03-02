@@ -40,7 +40,6 @@ export const Overworld = ({
 	talkToNurse,
 	openStorage,
 	playerSprite,
-	handleThisOccupant,
 	handledOccupants,
 	cutterPokemon,
 	latestMessage,
@@ -63,16 +62,16 @@ export const Overworld = ({
 	playerSprite: string;
 	receiveItems: (item: ItemType, amount: number) => void;
 	handledOccupants: string[];
-	handleThisOccupant: (id: string) => void;
 	cutterPokemon?: { dexId: number };
 	saveFile: SaveFile;
 	latestMessage: Message | undefined;
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
 }) => {
-	const { saveFile } = useContext(SaveFileContext);
+	const { saveFile, handleOccupantReducer } = useContext(SaveFileContext);
 	const conditionalOccupants = useMemo(() => {
-		return map.occupants.filter((m) => m.conditionFunction(saveFile));
+		console.log(map.occupants, saveFile.handledOccupants);
+		return map.occupants.filter((m) => m.conditionFunction(saveFile) === true);
 	}, [map, saveFile]);
 	const { width, height } = {
 		width: map.tileMap.baseLayer[0].length,
@@ -92,6 +91,7 @@ export const Overworld = ({
 	useDrawCharacter(playerCanvasId, playerLocation, playerSprite);
 	useDrawOccupants(occupantsCanvasId, conditionalOccupants);
 	//INTERACTION
+
 	const interactWith = useCallback(
 		(occ: Occupant | undefined) =>
 			interactWithFunction({
@@ -104,7 +104,7 @@ export const Overworld = ({
 				goToMarket,
 				talkToNurse,
 				handledOccupants,
-				handleThisOccupant,
+				handleThisOccupant: handleOccupantReducer,
 				cutterPokemon,
 				goToPosition: setCharacterLocation,
 			}),
@@ -112,7 +112,7 @@ export const Overworld = ({
 			addMultipleMessages,
 			cutterPokemon,
 			goToMarket,
-			handleThisOccupant,
+			handleOccupantReducer,
 			handledOccupants,
 			openStorage,
 			playerLocation,

@@ -39,12 +39,7 @@ export const useClickTarget = (
 			return;
 		}
 
-		const occ = getNextFieldOccupant(
-			playerLocation.mapId,
-			collectedItems,
-			clickTarget,
-			statefulOccupantsRecord
-		);
+		const occ = getNextFieldOccupant(clickTarget, statefulOccupantsRecord);
 		if (occ && getOverworldDistance(clickTarget, playerLocation) === 1) {
 			interactWith(occ);
 		}

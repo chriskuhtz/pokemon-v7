@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { isEqual } from 'lodash';
+import { useEffect, useState } from 'react';
 import { baseSize } from '../../../constants/gameData';
 import {
 	OverworldShaderMap,
@@ -18,21 +19,31 @@ export const useDrawOccupants = (
 	canvasId: string,
 	statefulOccupants: Occupant[]
 ) => {
+	const [lastDrawnOccupants, setLastDrawnOccupants] = useState<Occupant[]>([]);
 	//draw the npcs
 	useEffect(() => {
-		console.log('draw occupants');
-
-		const el: HTMLCanvasElement | null = document.getElementById(
-			canvasId
-		) as HTMLCanvasElement | null;
-		const ctx = el?.getContext('2d');
-
-		statefulOccupants.forEach((occ) => {
-			ctx?.clearRect(baseSize * occ.x, baseSize * occ.y, baseSize, baseSize);
-			drawOccupant(occ, ctx);
+		if (
+			lastDrawnOccupants.length === statefulOccupants.length &&
+			statefulOccupants.every((o, i) => isEqual(o, lastDrawnOccupants[i]))
+		) {
+			//no need to draw
 			return;
-		});
-	}, [canvasId, statefulOccupants]);
+		} else {
+			console.log('draw occupants');
+
+			const el: HTMLCanvasElement | null = document.getElementById(
+				canvasId
+			) as HTMLCanvasElement | null;
+			const ctx = el?.getContext('2d');
+			ctx?.clearRect(0, 0, 9000, 9000);
+
+			statefulOccupants.forEach((occ) => {
+				drawOccupant(occ, ctx);
+				return;
+			});
+			setLastDrawnOccupants(statefulOccupants);
+		}
+	}, [canvasId, lastDrawnOccupants, statefulOccupants]);
 };
 
 const drawOccupant = (

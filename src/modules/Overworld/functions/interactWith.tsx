@@ -26,7 +26,7 @@ export const interactWithFunction = ({
 	playerLocation: CharacterLocationData;
 	goToMarket: (marketInventory: Partial<Inventory>, stepsTaken: number) => void;
 	talkToNurse: (id: string) => void;
-	handleThisOccupant: (id: string) => void;
+	handleThisOccupant: (occ: Occupant) => void;
 	handledOccupants: string[];
 	goToPosition: (x: CharacterLocationData) => void;
 }) => {
@@ -43,7 +43,7 @@ export const interactWithFunction = ({
 		addMultipleMessages([
 			{
 				message: `Found ${data.amount} ${data.item}`,
-				onRemoval: () => handleThisOccupant(occ.id),
+				onRemoval: () => handleThisOccupant(occ),
 			},
 		]);
 		return;
@@ -53,7 +53,7 @@ export const interactWithFunction = ({
 			addMultipleMessages([
 				{
 					message: `Your Pokemon used cut`,
-					onRemoval: () => handleThisOccupant(occ.id),
+					onRemoval: () => handleThisOccupant(occ),
 				},
 			]);
 		} else addMultipleMessages([{ message: 'Maybe a Pokemon can cut this' }]);
@@ -132,7 +132,7 @@ export const interactWithFunction = ({
 						message: d,
 						onRemoval:
 							i === data.unhandledMessage.length - 1
-								? () => handleThisOccupant(occ.id)
+								? () => handleThisOccupant(occ)
 								: undefined,
 					})),
 					...Object.entries(data.gifts ?? {}).map(([item, amount]) => ({
@@ -164,7 +164,7 @@ export const interactWithFunction = ({
 					message: d,
 					onRemoval:
 						i === data.unhandledMessage.length - 1
-							? () => handleThisOccupant(occ.id)
+							? () => handleThisOccupant(occ)
 							: undefined,
 				}))
 			);

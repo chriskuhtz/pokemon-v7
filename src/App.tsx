@@ -40,7 +40,6 @@ export const App = ({
 		sellItemReducer,
 		buyItemReducer,
 		setCharacterLocationReducer,
-		handleOccupantReducer,
 		setPokemonReducer,
 		talkToNurseReducer,
 		patchSaveFileReducer,
@@ -275,7 +274,6 @@ export const App = ({
 			cutterPokemon={{ dexId: team[0].dexId }}
 			playerSprite={saveFile.sprite}
 			receiveItems={addItemReducer}
-			handleThisOccupant={handleOccupantReducer}
 			handledOccupants={handledOccupants.map((h) => h.id)}
 			latestMessage={latestMessage}
 			addMessage={addMessage}

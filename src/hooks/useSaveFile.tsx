@@ -22,6 +22,7 @@ import { updateItemFunction } from '../functions/updateItemFunction';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { Inventory, joinInventories } from '../interfaces/Inventory';
 import { EncounterChanceItem, ItemType } from '../interfaces/Item';
+import { Occupant } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { RoutesType } from '../interfaces/Routing';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
@@ -58,7 +59,7 @@ export interface UseSaveFile {
 	setPokemonReducer: (update: OwnedPokemon[]) => void;
 
 	talkToNurseReducer: (id: string) => void;
-	handleOccupantReducer: (id: string) => void;
+	handleOccupantReducer: (occ: Occupant) => void;
 	navigateAwayFromOverworldReducer: (to: RoutesType, steps: number) => void;
 	applyItemToPokemonReducer: (
 		pokemon: OwnedPokemon,
@@ -289,45 +290,41 @@ const useSaveFile = (
 		addMessage({ message: 'Whole Team fully healed' });
 	};
 
-	const handleOccupantReducer = () => {
-		//const occ: Occupant | undefined = undefined; //occupantsRecord[id];
-		// if (!occ) {
-		// 	throw new Error(`what is this occupant supposed to be ${id}`);
-		// }
-		// const timer = occ.type === 'BUSH' ? new Date().getTime() + 900000 : -1;
-		// let newInventory = { ...saveFile.inventory };
-		// if ((occ.type === 'NPC' || occ.type === 'OBSTACLE') && occ.gifts) {
-		// 	newInventory = joinInventories(newInventory, occ.gifts);
-		// }
-		// if (occ.type === 'ITEM' || occ.type === 'HIDDEN_ITEM') {
-		// 	const { item, amount } = occ;
-		// 	newInventory = joinInventories(newInventory, { [item]: amount });
-		// }
-		// const updatedQuests = saveFile.quests;
-		// if (occ.type === 'NPC' && occ.quest) {
-		// 	const { quest } = occ;
-		// 	if (updatedQuests[quest] === 'INACTIVE') {
-		// 		updatedQuests[quest] = 'ACTIVE';
-		// 	}
-		// }
-		// setSaveFile(
-		// 	{
-		// 		...saveFile,
-		// 		inventory: newInventory,
-		// 		quests: updatedQuests,
-		// 		meta: {
-		// 			activeTab:
-		// 				occ.type === 'TRAINER' ? 'BATTLE' : saveFile.meta.activeTab,
-		// 			currentChallenger:
-		// 				occ.type === 'TRAINER' ? { team: occ.team, id } : undefined,
-		// 		},
-		// 		handledOccupants: [
-		// 			...saveFile.handledOccupants,
-		// 			{ id, resetAt: timer },
-		// 		],
-		// 	},
-		// 	'handleOccupant'
-		// );
+	const handleOccupantReducer = (occ: Occupant) => {
+		const timer = occ.type === 'BUSH' ? new Date().getTime() + 900000 : -1;
+		let newInventory = { ...saveFile.inventory };
+		if (occ.type === 'NPC' && occ.gifts) {
+			newInventory = joinInventories(newInventory, occ.gifts);
+		}
+		if (occ.type === 'ITEM' || occ.type === 'HIDDEN_ITEM') {
+			const { item, amount } = occ;
+			newInventory = joinInventories(newInventory, { [item]: amount });
+		}
+		const updatedQuests = saveFile.quests;
+		if (occ.type === 'NPC' && occ.quest) {
+			const { quest } = occ;
+			if (updatedQuests[quest] === 'INACTIVE') {
+				updatedQuests[quest] = 'ACTIVE';
+			}
+		}
+		setSaveFile(
+			{
+				...saveFile,
+				inventory: newInventory,
+				quests: updatedQuests,
+				meta: {
+					activeTab:
+						occ.type === 'TRAINER' ? 'BATTLE' : saveFile.meta.activeTab,
+					currentChallenger:
+						occ.type === 'TRAINER' ? { team: occ.team, id: occ.id } : undefined,
+				},
+				handledOccupants: [
+					...saveFile.handledOccupants,
+					{ id: occ.id, resetAt: timer },
+				],
+			},
+			'handleOccupant'
+		);
 	};
 	const applyItemToPokemonReducer = (
 		pokemon: OwnedPokemon,
