@@ -1,5 +1,5 @@
-import { JSX } from 'react';
-import { OverworldMap } from '../../../interfaces/OverworldMap';
+import { JSX, useMemo } from 'react';
+import { OverworldMap, TileIdentifier } from '../../../interfaces/OverworldMap';
 import { Tab, Tool } from '../MapMaker';
 import { useMapEditor } from '../hooks/useMapEditor';
 import { EncountersTab } from './EncountersTab';
@@ -37,6 +37,29 @@ export const MapEditor = ({
 		initialMap,
 	});
 
+	const usedTiles = useMemo(() => {
+		const used: TileIdentifier[] = [];
+
+		const all = [
+			...newMap.tileMap.baseLayer.flat(),
+			...newMap.tileMap.encounterLayer.flat(),
+			...newMap.tileMap.obstacleLayer.flat(),
+			...newMap.tileMap.decorationLayer.flat(),
+		];
+
+		all.forEach((t) => {
+			if (
+				t &&
+				!used.find(
+					(entry) => entry.yOffset === t.yOffset && entry.xOffset === t.xOffset
+				)
+			) {
+				used.push(t);
+			}
+		});
+
+		return used;
+	}, [newMap]);
 	return (
 		<div>
 			<h2>{newMap.id}</h2>
@@ -49,6 +72,22 @@ export const MapEditor = ({
 					>
 						{t}
 					</button>
+				))}
+			</div>
+
+			<div style={{ display: 'flex', gap: '1rem', padding: '1rem' }}>
+				{' '}
+				<h4>Quick select:</h4>
+				{usedTiles.map((ut, i) => (
+					<div
+						onClick={() => setSelected({ type: 'tileplacer', tile: ut })}
+						key={ut.xOffset + ut.yOffset + i}
+						style={{
+							height: 16,
+							width: 16,
+							background: `url('/tilesets/masterSheet.png') ${ut.xOffset}px ${ut.yOffset}px`,
+						}}
+					></div>
 				))}
 			</div>
 			{activeTab === 'TileMap' && (

@@ -4,11 +4,9 @@ export interface TileMap {
 	src: string;
 	gap: number;
 }
-export const tileMaps: Record<string, TileMap> = {
-	masterSheet: {
-		src: "url('/tilesets/masterSheet.png')",
-		height: 133,
-		width: 88,
-		gap: 0,
-	},
+export const masterSheet: TileMap = {
+	src: "url('/tilesets/masterSheet.png')",
+	height: 133,
+	width: 88,
+	gap: 0,
 };

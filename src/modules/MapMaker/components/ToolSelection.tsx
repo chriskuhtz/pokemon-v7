@@ -1,6 +1,6 @@
 import { JSX } from 'react';
+import { masterSheet } from '../constants/tileMaps';
 import { Tool } from '../MapMaker';
-import { tileMaps } from '../constants/tileMaps';
 import { TileMapViewer } from './TileMapViewer';
 
 export const ToolSelection = ({
@@ -17,14 +17,11 @@ export const ToolSelection = ({
 				Eraser
 			</button>
 			<div style={{ maxHeight: '80dvh', overflowY: 'scroll' }}>
-				{Object.entries(tileMaps).map(([name, t]) => (
-					<TileMapViewer
-						name={name}
-						t={t}
-						key={name}
-						onClick={(tile) => setSelected({ type: 'tileplacer', tile })}
-					/>
-				))}
+				<TileMapViewer
+					name={'mastersheet'}
+					t={masterSheet}
+					onClick={(tile) => setSelected({ type: 'tileplacer', tile })}
+				/>
 			</div>
 		</div>
 	);
