@@ -1,4 +1,4 @@
-import { OverworldMap } from '../interfaces/OverworldMap';
+import { Occupant, OverworldMap } from '../interfaces/OverworldMap';
 import {
 	CharacterLocationData,
 	CharacterOrientation,
@@ -10,11 +10,12 @@ export const updatePosition = (
 	playerLocation: CharacterLocationData,
 	nextInput: CharacterOrientation,
 	map: OverworldMap,
-	addStep: () => void
+	addStep: () => void,
+	currentOccupants: Occupant[]
 ): { x: number; y: number } => {
 	const nextLocation = getNextLocation(playerLocation, nextInput);
 
-	if (isPassable(nextLocation, map)) {
+	if (isPassable(nextLocation, map, currentOccupants)) {
 		addStep();
 		return nextLocation;
 	}

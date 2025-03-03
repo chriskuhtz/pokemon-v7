@@ -264,30 +264,29 @@ export const BattleField = ({
 		[addMessage, battleFieldEffects, battleWeather]
 	);
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const switchPokemon = useCallback(
-		(leavesBattle: BattlePokemon, entersBattle: BattlePokemon) => {
-			setPokemon((pokemon) =>
-				pokemon.map((p) => {
-					if (p.id === leavesBattle.id) {
-						addMessage({ message: `withdrew ${leavesBattle.data.name}` });
-						return { ...leavesBattle, status: 'BENCH' };
-					}
-					if (p.id === entersBattle.id) {
-						addMessage({
-							message: `Lets go ${entersBattle.data.name}`,
-						});
+	// const switchPokemon = useCallback(
+	// 	(leavesBattle: BattlePokemon, entersBattle: BattlePokemon) => {
+	// 		setPokemon((pokemon) =>
+	// 			pokemon.map((p) => {
+	// 				if (p.id === leavesBattle.id) {
+	// 					addMessage({ message: `withdrew ${leavesBattle.data.name}` });
+	// 					return { ...leavesBattle, status: 'BENCH' };
+	// 				}
+	// 				if (p.id === entersBattle.id) {
+	// 					addMessage({
+	// 						message: `Lets go ${entersBattle.data.name}`,
+	// 					});
 
-						return { ...entersBattle, status: 'ONFIELD' };
-					}
-					//TODO: remap moves if "leavesBattle" is the target
-					//TODO: consider shadow tag and magnet pull
-					return p;
-				})
-			);
-		},
-		[addMessage]
-	);
+	// 					return { ...entersBattle, status: 'ONFIELD' };
+	// 				}
+	// 				//TODO: remap moves if "leavesBattle" is the target
+	// 				//TODO: consider shadow tag and magnet pull
+	// 				return p;
+	// 			})
+	// 		);
+	// 	},
+	// 	[addMessage]
+	// );
 	const handleForceSwitch = useCallback(
 		(user: BattlePokemon, moveName: MoveName) => {
 			const otherSideHasSuctionCups = pokemon.find(

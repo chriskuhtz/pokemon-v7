@@ -1,4 +1,3 @@
-import { OccupantName } from '../../../constants/checkLists/occupantsRecord';
 import { Message } from '../../../hooks/useMessageQueue';
 import { Inventory } from '../../../interfaces/Inventory';
 import { Occupant } from '../../../interfaces/OverworldMap';
@@ -18,23 +17,23 @@ export const interactWithFunction = ({
 	cutterPokemon,
 	goToPosition,
 }: {
-	occ: [string, Occupant] | undefined;
+	occ: Occupant | undefined;
 	addMultipleMessages: (x: Message[]) => void;
 	cutterPokemon?: { dexId: number };
 	openStorage: (stepsTaken: number) => void;
 	stepsTaken: number;
-	changeOccupant: (id: OccupantName, updatedOccupant: Occupant) => void;
+	changeOccupant: (id: string, updatedOccupant: Occupant) => void;
 	playerLocation: CharacterLocationData;
 	goToMarket: (marketInventory: Partial<Inventory>, stepsTaken: number) => void;
-	talkToNurse: (id: OccupantName) => void;
-	handleThisOccupant: (id: OccupantName) => void;
-	handledOccupants: OccupantName[];
+	talkToNurse: (id: string) => void;
+	handleThisOccupant: (occ: Occupant) => void;
+	handledOccupants: string[];
 	goToPosition: (x: CharacterLocationData) => void;
 }) => {
 	if (!occ) {
 		return;
 	}
-	const [id, data] = occ as [OccupantName, Occupant];
+	const data = occ;
 
 	if (data.type === 'PORTAL') {
 		goToPosition(data.portal);
@@ -44,17 +43,17 @@ export const interactWithFunction = ({
 		addMultipleMessages([
 			{
 				message: `Found ${data.amount} ${data.item}`,
-				onRemoval: () => handleThisOccupant(id),
+				onRemoval: () => handleThisOccupant(occ),
 			},
 		]);
 		return;
 	}
-	if (data.type === 'BUSH' && !handledOccupants.includes(id)) {
+	if (data.type === 'BUSH' && !handledOccupants.includes(occ.id)) {
 		if (cutterPokemon) {
 			addMultipleMessages([
 				{
 					message: `Your Pokemon used cut`,
-					onRemoval: () => handleThisOccupant(id),
+					onRemoval: () => handleThisOccupant(occ),
 				},
 			]);
 		} else addMultipleMessages([{ message: 'Maybe a Pokemon can cut this' }]);
@@ -82,7 +81,7 @@ export const interactWithFunction = ({
 	}
 	if (data.type === 'MERCHANT') {
 		//disable for now because of drawing bug
-		// changeOccupant(id, {
+		// changeOccupant(occ.id, {
 		// 	...data,
 		// 	orientation: getOppositeDirection(playerLocation.orientation),
 		// });
@@ -101,7 +100,7 @@ export const interactWithFunction = ({
 	}
 	if (data.type === 'NURSE') {
 		//disable for now because of drawing bug
-		// changeOccupant(id, {
+		// changeOccupant(occ.id, {
 		// 	...data,
 		// 	orientation: getOppositeDirection(playerLocation.orientation),
 		// });
@@ -110,7 +109,9 @@ export const interactWithFunction = ({
 			...data.dialogue.map((d, i) => ({
 				message: d,
 				onRemoval:
-					i === data.dialogue.length - 1 ? () => talkToNurse(id) : undefined,
+					i === data.dialogue.length - 1
+						? () => talkToNurse(occ.id)
+						: undefined,
 			})),
 			{ message: 'Whole Team fully healed' },
 		]);
@@ -119,19 +120,19 @@ export const interactWithFunction = ({
 	}
 	if (data.type === 'NPC') {
 		//disable for now because of drawing bug
-		// changeOccupant(id, {
+		// changeOccupant(occ.id, {
 		// 	...data,
 		// 	orientation: getOppositeDirection(playerLocation.orientation),
 		// });
 
-		if (!handledOccupants.includes(id)) {
+		if (!handledOccupants.includes(occ.id)) {
 			addMultipleMessages(
 				[
 					...data.unhandledMessage.map((d, i) => ({
 						message: d,
 						onRemoval:
 							i === data.unhandledMessage.length - 1
-								? () => handleThisOccupant(id)
+								? () => handleThisOccupant(occ)
 								: undefined,
 					})),
 					...Object.entries(data.gifts ?? {}).map(([item, amount]) => ({
@@ -152,18 +153,18 @@ export const interactWithFunction = ({
 	}
 	if (data.type === 'TRAINER') {
 		//disable for now because of drawing bug
-		// changeOccupant(id, {
+		// changeOccupant(occ.id, {
 		// 	...data,
 		// 	orientation: getOppositeDirection(playerLocation.orientation),
 		// });
 
-		if (!handledOccupants.includes(id)) {
+		if (!handledOccupants.includes(occ.id)) {
 			addMultipleMessages(
 				data.unhandledMessage.map((d, i) => ({
 					message: d,
 					onRemoval:
 						i === data.unhandledMessage.length - 1
-							? () => handleThisOccupant(id)
+							? () => handleThisOccupant(occ)
 							: undefined,
 				}))
 			);
@@ -176,18 +177,6 @@ export const interactWithFunction = ({
 		}
 
 		return;
-	}
-	if (data.type === 'OBSTACLE' && data.gifts) {
-		const gifts = Object.entries(data.gifts ?? {});
-		if (!handledOccupants.includes(id)) {
-			addMultipleMessages(
-				gifts.map(([item, amount], i) => ({
-					message: `received ${amount} ${item}`,
-					onRemoval:
-						i === gifts.length - 1 ? () => handleThisOccupant(id) : undefined,
-				}))
-			);
-		}
 	}
 
 	console.error('what is this occupant', occ);

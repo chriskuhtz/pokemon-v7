@@ -118,6 +118,13 @@ export const MainMenu = ({
 						Delete Savefile and reset
 					</button>
 				)}
+
+				<Card
+					onClick={() => navigate('MAP_MAKER')}
+					content={<h4>Map Maker</h4>}
+					icon={<GoTasklist size={baseSize / 2} />}
+					actionElements={[]}
+				/>
 			</Stack>
 		</Page>
 	);

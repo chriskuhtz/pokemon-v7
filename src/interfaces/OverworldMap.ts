@@ -1,24 +1,4 @@
-/**
- *
- *
- * TILEMAP:
- * 0 = empty field
- * 1 = encounter possible
- * 2 = blocked field
- * 3 = border
- * 4= obstacle
- */
-
-export const tileMap: Record<string, number> = {
-	empty: 0,
-	encounter: 1,
-	blocked: 2,
-	border: 3,
-	obstacle: 4,
-};
-
 import { MapId } from '../constants/checkLists/mapsRecord';
-import { OccupantName } from '../constants/checkLists/occupantsRecord';
 import { QuestName } from '../constants/checkLists/questsRecord';
 import { TimeOfDay } from '../functions/getTimeOfDay';
 import { Inventory } from './Inventory';
@@ -31,10 +11,24 @@ import {
 } from './SaveFile';
 import { WeatherType } from './Weather';
 
+export const OCCUPANT_TYPES = [
+	'ITEM',
+	'HIDDEN_ITEM',
+	'PC',
+	'MERCHANT',
+	'NURSE',
+	'TRAINER',
+	'BUSH',
+	'NPC',
+	'PORTAL',
+	'SIGN',
+] as const;
+export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
+	type: OccupantType;
+	id: string;
 	x: number;
 	y: number;
-	map: MapId;
 	conditionFunction: (saveFile: SaveFile) => boolean;
 }
 export interface OverworldItem extends BaseOccupant {
@@ -83,12 +77,6 @@ export interface OverworldSign extends BaseOccupant {
 export interface OverworldBush extends BaseOccupant {
 	type: 'BUSH';
 }
-export interface OverworldObstacle extends BaseOccupant {
-	type: 'OBSTACLE';
-	sprite: string;
-	small?: boolean;
-	gifts?: Partial<Inventory>;
-}
 
 export interface OverworldTrainer extends BaseOccupant {
 	type: 'TRAINER';
@@ -99,7 +87,6 @@ export interface OverworldTrainer extends BaseOccupant {
 	team: OwnedPokemon[];
 	name: string;
 }
-
 export interface Portal extends BaseOccupant {
 	type: 'PORTAL';
 	sprite: string;
@@ -117,7 +104,6 @@ export type Occupant =
 	| OverworldNpc
 	| OverworldTrainer
 	| Portal
-	| OverworldObstacle
 	| OverworldSign;
 
 export interface OverworldEncounter {
@@ -126,14 +112,20 @@ export interface OverworldEncounter {
 }
 export interface OverworldMap {
 	id: MapId;
-	backgroundTile: string;
-	encounterTile?: string;
-	obstacleTile?: string;
-	borderTile?: string;
 	possibleEncounters: Record<TimeOfDay, OverworldEncounter[]>;
-	width: number;
-	height: number;
-	tileMap: number[][];
-	occupants: OccupantName[];
+	tileMap: GameMap;
+	occupants: Occupant[];
 	weather?: WeatherType;
+}
+
+export interface GameMap {
+	baseLayer: TileIdentifier[][];
+	encounterLayer: (TileIdentifier | null)[][];
+	decorationLayer: (TileIdentifier | null)[][];
+	obstacleLayer: (TileIdentifier | null)[][];
+	foregroundLayer: (TileIdentifier | null)[][];
+}
+export interface TileIdentifier {
+	yOffset: number;
+	xOffset: number;
 }

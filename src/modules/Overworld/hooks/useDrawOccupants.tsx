@@ -1,10 +1,9 @@
 import { isEqual } from 'lodash';
 import { useEffect, useState } from 'react';
-import { OccupantName } from '../../../constants/checkLists/occupantsRecord';
 import { baseSize } from '../../../constants/gameData';
 import {
-	getTimeOfDay,
 	OverworldShaderMap,
+	getTimeOfDay,
 } from '../../../functions/getTimeOfDay';
 import { getYOffsetFromOrientation } from '../../../functions/getYOffsetFromOrientation';
 import { Occupant } from '../../../interfaces/OverworldMap';
@@ -18,59 +17,32 @@ export const overflow = (current: number, excludedMax: number) => {
 
 export const useDrawOccupants = (
 	canvasId: string,
-	statefulOccupants: Partial<Record<OccupantName, Occupant>>
+	statefulOccupants: Occupant[]
 ) => {
-	const [lastDrawnOccupants, setLastDrawnOccupants] = useState<
-		Partial<Record<OccupantName, Occupant>>
-	>({});
-
+	const [lastDrawnOccupants, setLastDrawnOccupants] = useState<Occupant[]>([]);
 	//draw the npcs
 	useEffect(() => {
-		console.log('draw occupants');
+		if (
+			lastDrawnOccupants.length === statefulOccupants.length &&
+			statefulOccupants.every((o, i) => isEqual(o, lastDrawnOccupants[i]))
+		) {
+			//no need to draw
+			return;
+		} else {
+			console.log('draw occupants');
 
-		const el: HTMLCanvasElement | null = document.getElementById(
-			canvasId
-		) as HTMLCanvasElement | null;
-		const ctx = el?.getContext('2d');
+			const el: HTMLCanvasElement | null = document.getElementById(
+				canvasId
+			) as HTMLCanvasElement | null;
+			const ctx = el?.getContext('2d');
+			ctx?.clearRect(0, 0, 9000, 9000);
 
-		Object.keys(statefulOccupants).forEach((id) => {
-			const current = statefulOccupants[id as OccupantName];
-			const lastDrawn = lastDrawnOccupants[id as OccupantName];
-			if (!current) {
+			statefulOccupants.forEach((occ) => {
+				drawOccupant(occ, ctx);
 				return;
-			}
-			if (isEqual(current, lastDrawn)) {
-				return;
-			}
-
-			if (current && !lastDrawn) {
-				drawOccupant(current, ctx);
-				return;
-			} else if (lastDrawn) {
-				drawOccupant(current, ctx);
-
-				ctx?.clearRect(
-					baseSize * lastDrawn.x,
-					baseSize * lastDrawn.y,
-					baseSize,
-					baseSize
-				);
-			}
-		});
-		Object.keys(lastDrawnOccupants).forEach((id) => {
-			const current = statefulOccupants[id as OccupantName];
-			const lastDrawn = lastDrawnOccupants[id as OccupantName];
-			if (!current && lastDrawn) {
-				ctx?.clearRect(
-					baseSize * lastDrawn.x,
-					baseSize * lastDrawn.y,
-					baseSize,
-					baseSize
-				);
-				return;
-			}
-		});
-		setLastDrawnOccupants(statefulOccupants);
+			});
+			setLastDrawnOccupants(statefulOccupants);
+		}
 	}, [canvasId, lastDrawnOccupants, statefulOccupants]);
 };
 
@@ -141,43 +113,7 @@ const drawOccupant = (
 				ctx.fillStyle = OverworldShaderMap[getTimeOfDay()];
 				ctx?.fillRect(baseSize * occ.x, baseSize * occ.y, baseSize, baseSize);
 				break;
-			case 'OBSTACLE':
-				if (occ.small) {
-					ctx?.drawImage(
-						img,
-						baseSize * occ.x + baseSize * 0.125,
-						baseSize * occ.y + baseSize * 0.125,
-						baseSize * 0.75,
-						baseSize * 0.75
-					);
-				} else {
-					ctx?.drawImage(
-						img,
-						baseSize * occ.x,
-						baseSize * occ.y,
-						baseSize,
-						baseSize
-					);
-					ctx?.drawImage(
-						img,
-						baseSize * occ.x,
-						baseSize * occ.y,
-						baseSize,
-						baseSize
-					);
-				}
 
-				if (occ.sprite.includes('fence')) {
-					ctx.fillStyle = OverworldShaderMap[getTimeOfDay()];
-					ctx?.fillRect(
-						baseSize * occ.x + baseSize * 0.125,
-						baseSize * occ.y + baseSize * 0.125,
-						baseSize * 0.75,
-						baseSize * 0.75
-					);
-				}
-
-				break;
 			case 'ITEM':
 			case 'PC':
 			default:
@@ -197,7 +133,6 @@ const drawOccupant = (
 const getSource = (occ: Occupant) => {
 	switch (occ.type) {
 		case 'PORTAL':
-		case 'OBSTACLE':
 			return occ.sprite;
 		case 'MERCHANT':
 		case 'NURSE':

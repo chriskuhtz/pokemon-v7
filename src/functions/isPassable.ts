@@ -1,10 +1,21 @@
-import { OverworldMap } from '../interfaces/OverworldMap';
+import { Occupant, OverworldMap } from '../interfaces/OverworldMap';
+
+export const getMapDimensions = (
+	map: OverworldMap
+): { width: number; height: number } => {
+	return {
+		width: map.tileMap.baseLayer[0].length,
+		height: map.tileMap.baseLayer.length,
+	};
+};
 
 export const isPassable = (
 	field: { x: number; y: number },
-	map: OverworldMap
+	map: OverworldMap,
+	currentOccupants: Occupant[]
 ): boolean => {
-	if (field.y >= map.height) {
+	const { width, height } = getMapDimensions(map);
+	if (field.y >= height) {
 		return false;
 	}
 	if (field.y < 0) {
@@ -13,12 +24,20 @@ export const isPassable = (
 	if (field.x < 0) {
 		return false;
 	}
-	if (field.x >= map.width) {
+	if (field.x >= width) {
 		return false;
 	}
-	const nextField = map.tileMap[field.y][field.x];
+	const nextFieldObstacle = map.tileMap.obstacleLayer[field.y][field.x];
 
-	if (nextField >= 2) {
+	if (nextFieldObstacle) {
+		return false;
+	}
+
+	const nextFieldOccupant = currentOccupants.find(
+		(c) => c.x === field.x && c.y === field.y && c.type !== 'HIDDEN_ITEM'
+	);
+
+	if (nextFieldOccupant) {
 		return false;
 	}
 

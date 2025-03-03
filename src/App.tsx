@@ -9,6 +9,7 @@ import { OwnedPokemon } from './interfaces/OwnedPokemon';
 import { Bag } from './modules/Bag/Bag';
 import { BattleLoader } from './modules/Battle/components/BattleLoader';
 import { MainMenu } from './modules/MainMenu/MainMenu';
+import { MapMaker } from './modules/MapMaker/MapMaker';
 import { BuyMarket } from './modules/Market/BuyMarket';
 import { Market } from './modules/Market/Market';
 import { SellMarket } from './modules/Market/SellMarket';
@@ -39,7 +40,6 @@ export const App = ({
 		sellItemReducer,
 		buyItemReducer,
 		setCharacterLocationReducer,
-		handleOccupantReducer,
 		setPokemonReducer,
 		talkToNurseReducer,
 		patchSaveFileReducer,
@@ -246,6 +246,9 @@ export const App = ({
 			/>
 		);
 	}
+	if (activeTab === 'MAP_MAKER') {
+		return <MapMaker goBack={() => setActiveTabReducer('MAIN')} />;
+	}
 
 	return (
 		<Overworld
@@ -271,7 +274,6 @@ export const App = ({
 			cutterPokemon={{ dexId: team[0].dexId }}
 			playerSprite={saveFile.sprite}
 			receiveItems={addItemReducer}
-			handleThisOccupant={handleOccupantReducer}
 			handledOccupants={handledOccupants.map((h) => h.id)}
 			latestMessage={latestMessage}
 			addMessage={addMessage}
