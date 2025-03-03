@@ -123,6 +123,7 @@ export interface GameMap {
 	encounterLayer: (TileIdentifier | null)[][];
 	decorationLayer: (TileIdentifier | null)[][];
 	obstacleLayer: (TileIdentifier | null)[][];
+	foregroundLayer: (TileIdentifier | null)[][];
 }
 export interface TileIdentifier {
 	yOffset: number;

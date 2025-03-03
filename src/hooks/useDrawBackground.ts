@@ -12,7 +12,13 @@ export const useDrawBackground = (
 		) as HTMLCanvasElement | null;
 		const ctx = el?.getContext('2d');
 
-		const { baseLayer, obstacleLayer, decorationLayer, encounterLayer } = map;
+		const {
+			baseLayer,
+			obstacleLayer,
+			decorationLayer,
+			encounterLayer,
+			foregroundLayer,
+		} = map;
 		const spriteSheet = new Image();
 		ctx?.clearRect(
 			0,
@@ -70,6 +76,64 @@ export const useDrawBackground = (
 							spriteSheet,
 							-ob.xOffset,
 							-ob.yOffset,
+							16,
+							16,
+							tileSize * w,
+							tileSize * h,
+							tileSize,
+							tileSize
+						);
+					}
+					const fore = foregroundLayer[h][w];
+					if (fore) {
+						ctx?.drawImage(
+							spriteSheet,
+							-fore.xOffset,
+							-fore.yOffset,
+							16,
+							16,
+							tileSize * w,
+							tileSize * h,
+							tileSize,
+							tileSize
+						);
+					}
+				});
+			});
+		});
+
+		spriteSheet.src = '/tilesets/masterSheet.png';
+	}, [canvasId, map, tileSize]);
+};
+
+export const useDrawForeground = (
+	canvasId: string,
+	map: GameMap,
+	tileSize: number
+) => {
+	useEffect(() => {
+		const el: HTMLCanvasElement | null = document.getElementById(
+			canvasId
+		) as HTMLCanvasElement | null;
+		const ctx = el?.getContext('2d');
+
+		const { foregroundLayer } = map;
+		const spriteSheet = new Image();
+		ctx?.clearRect(
+			0,
+			0,
+			foregroundLayer[0].length * tileSize,
+			foregroundLayer.length * tileSize
+		);
+
+		spriteSheet.addEventListener('load', () => {
+			foregroundLayer.forEach((row, h) => {
+				row.forEach((el, w) => {
+					if (el) {
+						ctx?.drawImage(
+							spriteSheet,
+							-el.xOffset,
+							-el.yOffset,
 							16,
 							16,
 							tileSize * w,

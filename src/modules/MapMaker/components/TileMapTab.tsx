@@ -63,6 +63,16 @@ export const TileMapTab = ({
 					changeRow={(index) => changeRow(index, 'Obstacle')}
 					changeColumn={(index) => changeColumn(index, 'Obstacle')}
 				/>
+				<LayerEditor
+					addColumn={addColumn}
+					addRow={addRow}
+					changeTile={changeTile}
+					layer={newMap.tileMap.foregroundLayer}
+					layerName="Foreground"
+					clear={() => clearLayer('Foreground')}
+					changeRow={(index) => changeRow(index, 'Foreground')}
+					changeColumn={(index) => changeColumn(index, 'Foreground')}
+				/>
 				<CombinedCanvas map={newMap.tileMap} tileSize={16} />
 				<br />
 			</div>

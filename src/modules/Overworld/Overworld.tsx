@@ -8,6 +8,7 @@ import { CombinedCanvas } from '../../components/CombinedCanvas/CombinedCanvas';
 import { baseSize, fps } from '../../constants/gameData';
 import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
+import { useDrawForeground } from '../../hooks/useDrawBackground';
 import { Message } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Inventory } from '../../interfaces/Inventory';
@@ -91,7 +92,7 @@ export const Overworld = ({
 	useDrawCharacter(playerCanvasId, playerLocation, playerSprite);
 	useDrawOccupants(occupantsCanvasId, conditionalOccupants);
 	//INTERACTION
-
+	useDrawForeground('foreground', map.tileMap, baseSize);
 	const interactWith = useCallback(
 		(occ: Occupant | undefined) =>
 			interactWithFunction({
@@ -226,7 +227,19 @@ export const Overworld = ({
 							zIndex: 0,
 						}}
 					/>
-
+					<canvas
+						style={{
+							top: -playerLocation.y * baseSize,
+							left: -playerLocation.x * baseSize,
+							transitionProperty: 'top,left',
+							transition: `${fps} ease 0s`,
+							zIndex: 1,
+							position: 'absolute',
+						}}
+						id={'foreground'}
+						height={height * baseSize}
+						width={width * baseSize}
+					/>
 					<canvas id={playerCanvasId} height={baseSize} width={baseSize} />
 
 					<canvas

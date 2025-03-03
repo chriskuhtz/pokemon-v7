@@ -7,7 +7,12 @@ import {
 } from '../../../interfaces/OverworldMap';
 import { Tool } from '../MapMaker';
 
-export type LayerName = 'Base' | 'Obstacle' | 'Decoration' | 'Encounter';
+export type LayerName =
+	| 'Base'
+	| 'Obstacle'
+	| 'Decoration'
+	| 'Encounter'
+	| 'Foreground';
 export const useMapEditor = ({
 	tool,
 	initialMap,
@@ -25,6 +30,7 @@ export const useMapEditor = ({
 			...newMap.tileMap.encounterLayer.flat(),
 			...newMap.tileMap.obstacleLayer.flat(),
 			...newMap.tileMap.decorationLayer.flat(),
+			...newMap.tileMap.foregroundLayer.flat(),
 		];
 
 		all.forEach((t) => {
@@ -61,6 +67,10 @@ export const useMapEditor = ({
 					...row,
 					null,
 				]),
+				foregroundLayer: newMap.tileMap.foregroundLayer.map((row) => [
+					...row,
+					null,
+				]),
 			},
 		}));
 	const addRow = () =>
@@ -86,6 +96,12 @@ export const useMapEditor = ({
 				decorationLayer: [
 					...newMap.tileMap.decorationLayer,
 					Array.from({ length: newMap.tileMap.decorationLayer[0].length }).map(
+						() => null
+					),
+				],
+				foregroundLayer: [
+					...newMap.tileMap.foregroundLayer,
+					Array.from({ length: newMap.tileMap.foregroundLayer[0].length }).map(
 						() => null
 					),
 				],
@@ -144,6 +160,17 @@ export const useMapEditor = ({
 								});
 						  })
 						: newMap.tileMap.decorationLayer,
+				foregroundLayer:
+					layer === 'Foreground'
+						? newMap.tileMap.foregroundLayer.map((row, h) => {
+								return row.map((el, k) => {
+									if (h === i && k === j) {
+										return tool.type === 'eraser' ? null : tool.tile;
+									}
+									return el;
+								});
+						  })
+						: newMap.tileMap.foregroundLayer,
 			},
 		}));
 	};
@@ -199,6 +226,17 @@ export const useMapEditor = ({
 								return row;
 						  })
 						: newMap.tileMap.decorationLayer,
+				foregroundLayer:
+					layer === 'Foreground'
+						? newMap.tileMap.foregroundLayer.map((row, h) => {
+								if (h === i) {
+									return row.map(() =>
+										tool.type === 'eraser' ? null : tool.tile
+									);
+								}
+								return row;
+						  })
+						: newMap.tileMap.foregroundLayer,
 			},
 		}));
 	};
@@ -254,6 +292,17 @@ export const useMapEditor = ({
 								});
 						  })
 						: newMap.tileMap.decorationLayer,
+				foregroundLayer:
+					layer === 'Foreground'
+						? newMap.tileMap.foregroundLayer.map((row) => {
+								return row.map((el, k) => {
+									if (k === j) {
+										return tool.type === 'eraser' ? null : tool.tile;
+									}
+									return el;
+								});
+						  })
+						: newMap.tileMap.foregroundLayer,
 			},
 		}));
 	};
@@ -289,6 +338,14 @@ export const useMapEditor = ({
 							});
 					  })
 					: newMap.tileMap.decorationLayer,
+			foregroundLayer:
+				layer === 'Decoration'
+					? newMap.tileMap.foregroundLayer.map((row) => {
+							return row.map(() => {
+								return null;
+							});
+					  })
+					: newMap.tileMap.foregroundLayer,
 		}));
 	};
 
