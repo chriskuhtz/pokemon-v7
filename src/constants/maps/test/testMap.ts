@@ -1796,5 +1796,15 @@ export const testMap: OverworldMap = {
 			conditionFunction: (s) =>
 				s.handledOccupants.every((h) => h.id !== 'bubu'),
 		},
+		{
+			id: 'HIdden_IT',
+			type: 'HIDDEN_ITEM',
+			item: 'ultra-ball',
+			amount: 3,
+			x: 3,
+			y: 3,
+			conditionFunction: (s) =>
+				s.handledOccupants.every((h) => h.id !== 'HIdden_IT'),
+		},
 	],
 };

@@ -34,7 +34,7 @@ export const isPassable = (
 	}
 
 	const nextFieldOccupant = currentOccupants.find(
-		(c) => c.x === field.x && c.y === field.y
+		(c) => c.x === field.x && c.y === field.y && c.type !== 'HIDDEN_ITEM'
 	);
 
 	if (nextFieldOccupant) {

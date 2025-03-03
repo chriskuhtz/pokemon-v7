@@ -1,6 +1,10 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { TimeOfDay } from '../../../functions/getTimeOfDay';
-import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
+import {
+	Occupant,
+	OverworldMap,
+	TileIdentifier,
+} from '../../../interfaces/OverworldMap';
 import { Tool } from '../MapMaker';
 
 export type LayerName = 'Base' | 'Obstacle' | 'Decoration' | 'Encounter';
@@ -12,6 +16,30 @@ export const useMapEditor = ({
 	initialMap: OverworldMap;
 }) => {
 	const [newMap, setNewMap] = useState<OverworldMap>(initialMap);
+
+	const usedTiles = useMemo(() => {
+		const used: TileIdentifier[] = [];
+
+		const all = [
+			...newMap.tileMap.baseLayer.flat(),
+			...newMap.tileMap.encounterLayer.flat(),
+			...newMap.tileMap.obstacleLayer.flat(),
+			...newMap.tileMap.decorationLayer.flat(),
+		];
+
+		all.forEach((t) => {
+			if (
+				t &&
+				!used.find(
+					(entry) => entry.yOffset === t.yOffset && entry.xOffset === t.xOffset
+				)
+			) {
+				used.push(t);
+			}
+		});
+
+		return used;
+	}, [newMap]);
 
 	const addColumn = () =>
 		setNewMap((newMap) => ({
@@ -308,5 +336,6 @@ export const useMapEditor = ({
 		removeEncounter,
 		addOccupant,
 		removeOccupant,
+		usedTiles,
 	};
 };

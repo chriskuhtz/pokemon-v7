@@ -11,18 +11,21 @@ import {
 } from './SaveFile';
 import { WeatherType } from './Weather';
 
-/**
- *
- *
- * TILEMAP:
- * 0 = empty field
- * 1 = encounter possible
- * 2 = blocked field
- * 3 = border
- * 4= obstacle
- */
-
+export const OCCUPANT_TYPES = [
+	'ITEM',
+	'HIDDEN_ITEM',
+	'PC',
+	'MERCHANT',
+	'NURSE',
+	'TRAINER',
+	'BUSH',
+	'NPC',
+	'PORTAL',
+	'SIGN',
+] as const;
+export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
+	type: OccupantType;
 	id: string;
 	x: number;
 	y: number;

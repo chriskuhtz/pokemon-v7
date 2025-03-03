@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { ItemType, itemTypes } from '../../../interfaces/Item';
-import { OverworldItem } from '../../../interfaces/OverworldMap';
+import { OverworldHiddenItem } from '../../../interfaces/OverworldMap';
 
-export const ItemForm = ({
+export const HiddenItemForm = ({
 	initial,
 	submit,
 }: {
-	submit: (x: OverworldItem) => void;
-	initial: OverworldItem;
+	submit: (x: OverworldHiddenItem) => void;
+	initial: OverworldHiddenItem;
 }) => {
-	const [form, setForm] = useState<OverworldItem>(initial);
+	const [form, setForm] = useState<OverworldHiddenItem>(initial);
 
 	return (
 		<div
@@ -21,7 +21,7 @@ export const ItemForm = ({
 				padding: '1rem',
 			}}
 		>
-			<h2>Item Form:</h2>
+			<h2>Hidden Item Form:</h2>
 			<input
 				onChange={(e) => setForm({ ...form, id: e.target.value })}
 				placeholder="Id"
