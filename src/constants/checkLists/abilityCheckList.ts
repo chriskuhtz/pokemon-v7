@@ -216,7 +216,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/42/',
 		handled: true,
 	},
-	{ name: 'soundproof', url: 'https://pokeapi.co/api/v2/ability/43/' },
+	{
+		name: 'soundproof',
+		url: 'https://pokeapi.co/api/v2/ability/43/',
+		handled: true,
+	},
 	{ name: 'rain-dish', url: 'https://pokeapi.co/api/v2/ability/44/' },
 	{ name: 'sand-stream', url: 'https://pokeapi.co/api/v2/ability/45/' },
 	{ name: 'pressure', url: 'https://pokeapi.co/api/v2/ability/46/' },

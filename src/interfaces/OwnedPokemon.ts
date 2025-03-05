@@ -1,6 +1,7 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
-import { MapId } from '../constants/checkLists/mapsRecord';
+
 import { MoveName } from '../constants/checkLists/movesCheckList';
+import { MapId } from '../constants/maps/mapsRecord';
 import { PrimaryAilment } from './Ailment';
 import { ItemType, PokeballType } from './Item';
 import { Nature } from './Natures';

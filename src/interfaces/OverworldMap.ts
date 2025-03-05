@@ -1,5 +1,5 @@
-import { MapId } from '../constants/checkLists/mapsRecord';
 import { QuestName } from '../constants/checkLists/questsRecord';
+import { MapId } from '../constants/maps/mapsRecord';
 import { TimeOfDay } from '../functions/getTimeOfDay';
 import { Inventory } from './Inventory';
 import { ItemType } from './Item';

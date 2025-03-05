@@ -1,5 +1,5 @@
-import { MapId } from '../constants/checkLists/mapsRecord';
 import { QuestName } from '../constants/checkLists/questsRecord';
+import { MapId } from '../constants/maps/mapsRecord';
 import { BadgeName } from './Badge';
 import { Inventory } from './Inventory';
 import { OwnedPokemon } from './OwnedPokemon';
