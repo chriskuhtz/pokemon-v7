@@ -7,7 +7,9 @@ export interface PrimaryAilment {
 }
 
 export function isPrimaryAilment(x: { type: string }): x is PrimaryAilment {
-	return ['paralysis', 'burn', 'freeze', 'poison', 'sleep'].includes(x.type);
+	return ['paralysis', 'burn', 'freeze', 'poison', 'sleep', 'toxic'].includes(
+		x.type
+	);
 }
 
 const secondaryAilments = [
