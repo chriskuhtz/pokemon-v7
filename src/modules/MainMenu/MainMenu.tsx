@@ -67,7 +67,7 @@ export const MainMenu = ({
 										height: baseSize,
 									},
 								}}
-								firstPlanetUrl={
+								firstPlanet={
 									badges.includes('boulder-badge')
 										? '/badges/boulder-badge.png'
 										: undefined
@@ -128,6 +128,12 @@ export const MainMenu = ({
 				<Card
 					onClick={() => navigate('MAP_MAKER')}
 					content={<h4>Map Maker</h4>}
+					icon={<GoTasklist size={baseSize / 2} />}
+					actionElements={[]}
+				/>
+				<Card
+					onClick={() => navigate('STORAGE')}
+					content={<h4>Storage</h4>}
 					icon={<GoTasklist size={baseSize / 2} />}
 					actionElements={[]}
 				/>

@@ -80,7 +80,7 @@ export const extraFeatureCheckList: {
 		name: 'Uncollected Quests Badge on Menu Button and Quest Menu Button',
 		handled: true,
 	},
-	{ name: 'level badges in storage' },
+	{ name: 'level badges in storage', handled: true },
 	{ name: 'only consider occupants in view (+2 or 3 fields) when redrawing' },
 	{ name: 'walking npcs randomly' },
 	{ name: 'stop npcs from walking through player' },

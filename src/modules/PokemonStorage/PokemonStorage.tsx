@@ -1,8 +1,10 @@
 import { useMemo, useState } from 'react';
+import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { Message } from '../../hooks/useMessageQueue';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
+import { Chip } from '../../uiComponents/Chip/Chip';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
@@ -51,7 +53,12 @@ export const PokemonStorage = ({
 				{team.map((pokemon) => (
 					<IconSolarSystem
 						sun={{ url: getPokemonSprite(pokemon.dexId) }}
-						firstPlanetUrl={getItemUrl(pokemon.ball)}
+						firstPlanet={
+							<Chip>
+								<strong>Lvl {calculateLevelData(pokemon.xp).level}</strong>
+							</Chip>
+						}
+						secondPlanetUrl={getItemUrl(pokemon.ball)}
 						key={pokemon.id}
 						onClick={() => {
 							if (team.length === 1) {
@@ -111,7 +118,12 @@ export const PokemonStorage = ({
 				{stored.sort(sortFunction).map((pokemon) => (
 					<IconSolarSystem
 						sun={{ url: getPokemonSprite(pokemon.dexId) }}
-						firstPlanetUrl={getItemUrl(pokemon.ball)}
+						firstPlanet={
+							<Chip>
+								<strong>Lvl {calculateLevelData(pokemon.xp).level}</strong>
+							</Chip>
+						}
+						secondPlanetUrl={getItemUrl(pokemon.ball)}
 						key={pokemon.id}
 						onClick={() => {
 							if (team.length === 6) {
