@@ -260,9 +260,6 @@ export const App = ({
 			playerLocation={location}
 			saveFile={saveFile}
 			map={mapsRecord[saveFile.location.mapId]}
-			startEncounter={(steps) => {
-				navigateAwayFromOverworldReducer('BATTLE', steps);
-			}}
 			goToMarket={(i, steps) => {
 				navigateAwayFromOverworldReducer('MARKET', steps);
 				setCurrentMarketInventory(i);
@@ -276,7 +273,6 @@ export const App = ({
 			receiveItems={addItemReducer}
 			handledOccupants={handledOccupants.map((h) => h.id)}
 			latestMessage={latestMessage}
-			addMessage={addMessage}
 			addMultipleMessages={addMultipleMessages}
 			encounterRateModifier={encounterRateModifier}
 		/>

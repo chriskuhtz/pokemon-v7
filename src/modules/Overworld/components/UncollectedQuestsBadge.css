@@ -1,0 +1,17 @@
+.uncollectedQuestsBadge {
+	animation-duration: 1s;
+	animation-name: rotate;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	color: green;
+}
+
+@keyframes rotate {
+	from {
+		transform: rotate(-15deg);
+	}
+
+	to {
+		transform: rotate(15deg);
+	}
+}

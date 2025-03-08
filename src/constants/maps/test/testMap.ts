@@ -1,4 +1,49 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
+import { SpriteEnum } from '../../../interfaces/SpriteEnum';
+
+const occs: OverworldMap['occupants'] = [
+	{
+		id: 'bubu',
+		type: 'ITEM',
+		item: 'poke-ball',
+		amount: 5,
+		x: 20,
+		y: 3,
+		conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== 'bubu'),
+	},
+	{
+		id: 'HIdden_IT',
+		type: 'HIDDEN_ITEM',
+		item: 'ultra-ball',
+		amount: 3,
+		x: 3,
+		y: 3,
+		conditionFunction: (s) =>
+			s.handledOccupants.every((h) => h.id !== 'HIdden_IT'),
+	},
+	{
+		id: 'Honey Tree',
+		type: 'HONEY_TREE',
+		x: 4,
+		y: 4,
+		conditionFunction: () => true,
+	},
+	{
+		id: 'pikachu-fan',
+		type: 'NPC',
+		x: 10,
+		y: 6,
+		quest: 'catch a pikachu',
+		handledMessage: ['Did you find a pikachu?'],
+		unhandledMessage: [
+			'My favorite pokemon is pikachu',
+			'Do you have one yet?',
+		],
+		orientation: 'UP',
+		sprite: SpriteEnum.nerd,
+		conditionFunction: () => true,
+	},
+];
 
 export const testMap: OverworldMap = {
 	id: 'testMap',
@@ -7,9 +52,12 @@ export const testMap: OverworldMap = {
 			{ dexId: 25, xp: 125 },
 			{ dexId: 324, xp: 44 },
 		],
-		DAY: [],
-		EVENING: [],
-		NIGHT: [{ dexId: 167, xp: 125 }],
+		DAY: [{ dexId: 25, xp: 125 }],
+		EVENING: [{ dexId: 25, xp: 125 }],
+		NIGHT: [
+			{ dexId: 167, xp: 125 },
+			{ dexId: 25, xp: 125 },
+		],
 	},
 	tileMap: {
 		baseLayer: [
@@ -2229,33 +2277,5 @@ export const testMap: OverworldMap = {
 		],
 	},
 
-	occupants: [
-		{
-			id: 'bubu',
-			type: 'ITEM',
-			item: 'poke-ball',
-			amount: 5,
-			x: 20,
-			y: 3,
-			conditionFunction: (s) =>
-				s.handledOccupants.every((h) => h.id !== 'bubu'),
-		},
-		{
-			id: 'HIdden_IT',
-			type: 'HIDDEN_ITEM',
-			item: 'ultra-ball',
-			amount: 3,
-			x: 3,
-			y: 3,
-			conditionFunction: (s) =>
-				s.handledOccupants.every((h) => h.id !== 'HIdden_IT'),
-		},
-		{
-			id: 'Honey Tree',
-			type: 'HONEY_TREE',
-			x: 4,
-			y: 4,
-			conditionFunction: () => true,
-		},
-	],
+	occupants: occs,
 };
