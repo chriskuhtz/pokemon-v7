@@ -360,9 +360,13 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/88/',
 		handled: true,
 	},
-	{ name: 'earthquake', url: 'https://pokeapi.co/api/v2/move/89/' },
+	{
+		name: 'earthquake',
+		url: 'https://pokeapi.co/api/v2/move/89/',
+		handled: true,
+	},
 	{ name: 'fissure', url: 'https://pokeapi.co/api/v2/move/90/', handled: true },
-	{ name: 'dig', url: 'https://pokeapi.co/api/v2/move/91/' },
+	{ name: 'dig', url: 'https://pokeapi.co/api/v2/move/91/', handled: true },
 	{ name: 'toxic', url: 'https://pokeapi.co/api/v2/move/92/' },
 	{
 		name: 'confusion',
@@ -375,8 +379,12 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/95/',
 		handled: true,
 	},
-	{ name: 'meditate', url: 'https://pokeapi.co/api/v2/move/96/' },
-	{ name: 'agility', url: 'https://pokeapi.co/api/v2/move/97/' },
+	{
+		name: 'meditate',
+		url: 'https://pokeapi.co/api/v2/move/96/',
+		handled: true,
+	},
+	{ name: 'agility', url: 'https://pokeapi.co/api/v2/move/97/', handled: true },
 	{
 		name: 'quick-attack',
 		url: 'https://pokeapi.co/api/v2/move/98/',
@@ -1487,6 +1495,10 @@ export const handledMoves = [
 	'vacuum-wave',
 	'leech-seed',
 	'thunder',
+	'earthquake',
+	'dig',
+	'meditate',
+	'agility',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

@@ -19,7 +19,8 @@ export const determineMiss = (
 	attacker: BattlePokemon,
 	target: BattlePokemon,
 	weather?: WeatherType,
-	targetIsFlying?: boolean
+	targetIsFlying?: boolean,
+	targetIsUnderground?: boolean
 ): { miss: boolean; reason?: MissReason } => {
 	const selfTargeting = isSelfTargeting(attack.data);
 
@@ -34,6 +35,9 @@ export const determineMiss = (
 		return { miss: true, reason: 'SOUNDPROOF' };
 	}
 	if (targetIsFlying && !flyHitMoves.includes(attack.name)) {
+		return { miss: true };
+	}
+	if (targetIsUnderground && attack.name !== 'earthquake') {
 		return { miss: true };
 	}
 	if (attack.data.accuracy === null) {

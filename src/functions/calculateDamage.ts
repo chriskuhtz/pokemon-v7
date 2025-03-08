@@ -38,6 +38,7 @@ export const calculateDamage = (
 	weather: WeatherType | undefined,
 	calculateCrits: boolean,
 	targetIsFlying: boolean,
+	targetIsUnderground: boolean,
 	addMessage?: (x: Message) => void
 ): number => {
 	const damageClass = attack.data.damage_class.name;
@@ -152,6 +153,8 @@ export const calculateDamage = (
 	const teraShieldFactor = 1;
 	const flyingFactor =
 		targetIsFlying && flyDoubleDamageMoves.includes(attack.name) ? 2 : 1;
+	const undergroundFactor =
+		targetIsUnderground && attack.name === 'earthquake' ? 2 : 1;
 	const flashFireFactor =
 		attacker.secondaryAilments.some((a) => a.type === 'flash-fire') &&
 		attack.data.type.name === 'fire'
@@ -178,7 +181,8 @@ export const calculateDamage = (
 				teraShieldFactor *
 				flyingFactor *
 				flashFireFactor *
-				hugePowerFactor
+				hugePowerFactor *
+				undergroundFactor
 		),
 		1
 	);
