@@ -657,7 +657,7 @@ export const testMap: OverworldMap = {
 				null,
 				null,
 				null,
-				{ yOffset: -16, xOffset: -80 },
+				null,
 				null,
 				null,
 				null,
@@ -2249,6 +2249,13 @@ export const testMap: OverworldMap = {
 			y: 3,
 			conditionFunction: (s) =>
 				s.handledOccupants.every((h) => h.id !== 'HIdden_IT'),
+		},
+		{
+			id: 'Honey Tree',
+			type: 'HONEY_TREE',
+			x: 4,
+			y: 4,
+			conditionFunction: () => true,
 		},
 	],
 };
