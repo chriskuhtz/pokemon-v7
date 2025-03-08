@@ -1,31 +1,35 @@
+import { getRandomIndex } from '../functions/filterTargets';
 import { Stat } from './StatObject';
 
-export type Nature =
-	| 'hardy'
-	| 'lonely'
-	| 'adamant'
-	| 'naughty'
-	| 'brave'
-	| 'bold'
-	| 'docile'
-	| 'impish'
-	| 'lax'
-	| 'relaxed'
-	| 'modest'
-	| 'mild'
-	| 'bashful'
-	| 'rash'
-	| 'quiet'
-	| 'calm'
-	| 'gentle'
-	| 'careful'
-	| 'quirky'
-	| 'sassy'
-	| 'timid'
-	| 'hasty'
-	| 'jolly'
-	| 'naive'
-	| 'serious';
+export const natureNames = [
+	'hardy',
+	'lonely',
+	'adamant',
+	'naughty',
+	'brave',
+	'bold',
+	'docile',
+	'impish',
+	'lax',
+	'relaxed',
+	'modest',
+	'mild',
+	'bashful',
+	'rash',
+	'quiet',
+	'calm',
+	'gentle',
+	'careful',
+	'quirky',
+	'sassy',
+	'timid',
+	'hasty',
+	'jolly',
+	'naive',
+	'serious',
+] as const;
+
+export type Nature = (typeof natureNames)[number];
 
 export const natures: Record<Nature, { buff?: Stat; debuff?: Stat }> = {
 	hardy: {},
@@ -56,3 +60,7 @@ export const natures: Record<Nature, { buff?: Stat; debuff?: Stat }> = {
 };
 
 export type NatureFactor = 0.9 | 1 | 1.1;
+
+export const getRandomNature = () => {
+	return natureNames[getRandomIndex(natureNames.length)];
+};
