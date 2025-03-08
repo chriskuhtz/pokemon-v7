@@ -125,7 +125,22 @@ export const mulches = [
 	'stable-mulch',
 	'gooey-mulch',
 ] as const;
+
 export const berries = ['sitrus-berry'] as const;
+
+export const fossils = [
+	'old-amber',
+	'root-fossil',
+	'claw-fossil',
+	'helix-fossil',
+	'dome-fossil',
+	'armor-fossil',
+	'skull-fossil',
+	'cover-fossil',
+	'plume-fossil',
+	'jaw-fossil',
+	'sail-fossil',
+] as const;
 
 export const itemTypes = [
 	...balltypes,
@@ -141,6 +156,7 @@ export const itemTypes = [
 	...valuables,
 	...mulches,
 	...berries,
+	...fossils,
 	'sacred-ash',
 	'rare-candy',
 	'escape-rope',
@@ -160,6 +176,7 @@ export type RunawayItem = (typeof runawayItemTypes)[number];
 export type EncounterChanceItem = (typeof encounterChanceItems)[number];
 export type BerryType = (typeof berries)[number];
 export type MulchType = (typeof mulches)[number];
+export type FossilType = (typeof fossils)[number];
 
 export function isPokeball(x: string | undefined): x is PokeballType {
 	return (balltypes as unknown as string[]).includes(x ?? '');
@@ -170,6 +187,9 @@ export function isBerry(x: string | undefined): x is BerryType {
 }
 export function isMulch(x: string | undefined): x is MulchType {
 	return (mulches as unknown as string[]).includes(x ?? '');
+}
+export function isFossil(x: string | undefined): x is FossilType {
+	return (fossils as unknown as string[]).includes(x ?? '');
 }
 
 export function isHealingItem(x: string | undefined): x is HealingItemType {
@@ -249,4 +269,17 @@ export const XItemTable: Partial<Record<XItemType, Stat>> = {
 	'x-sp-atk': 'spatk',
 	'x-defense': 'defense',
 	'x-speed': 'speed',
+};
+export const fossilTable: Record<FossilType, number> = {
+	'helix-fossil': 138,
+	'dome-fossil': 140,
+	'old-amber': 142,
+	'root-fossil': 345,
+	'claw-fossil': 347,
+	'skull-fossil': 408,
+	'armor-fossil': 410,
+	'cover-fossil': 564,
+	'plume-fossil': 566,
+	'jaw-fossil': 696,
+	'sail-fossil': 698,
 };

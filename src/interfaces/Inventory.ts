@@ -108,6 +108,17 @@ export const EmptyInventory: Inventory = {
 	'growth-mulch': 0,
 	'stable-mulch': 0,
 	'sitrus-berry': 0,
+	'helix-fossil': 0,
+	'dome-fossil': 0,
+	'old-amber': 0,
+	'root-fossil': 0,
+	'claw-fossil': 0,
+	'skull-fossil': 0,
+	'armor-fossil': 0,
+	'cover-fossil': 0,
+	'plume-fossil': 0,
+	'jaw-fossil': 0,
+	'sail-fossil': 0,
 };
 export const generateInventory = (wanted: Partial<Inventory>): Inventory => {
 	return joinInventories(EmptyInventory, wanted);
