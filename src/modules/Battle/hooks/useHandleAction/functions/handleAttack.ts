@@ -143,12 +143,17 @@ export const handleAttack = ({
 		updatedTarget.moveQueue.length > 0 &&
 		updatedTarget.moveQueue[0].type === 'BattleAttack' &&
 		updatedTarget.moveQueue[0].name === 'fly';
+	const isUnderground =
+		updatedTarget.moveQueue.length > 0 &&
+		updatedTarget.moveQueue[0].type === 'BattleAttack' &&
+		updatedTarget.moveQueue[0].name === 'dig';
 	const { miss, reason } = determineMiss(
 		move,
 		attacker,
 		target,
 		battleWeather,
-		isFlying
+		isFlying,
+		isUnderground
 	);
 
 	if (miss) {
@@ -294,6 +299,7 @@ export const handleAttack = ({
 			battleWeather,
 			true,
 			isFlying,
+			isUnderground,
 			addMessage
 		),
 		updatedTarget.stats.hp - updatedTarget.damage,

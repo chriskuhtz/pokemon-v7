@@ -7,6 +7,9 @@ export const getChargeUpMessage = (
 	if (moveName === 'fly') {
 		return ` ${userName} flew up high `;
 	}
+	if (moveName === 'dig') {
+		return ` ${userName} dug underground `;
+	}
 	if (moveName === 'solar-beam') {
 		return ` ${userName} is taking in sunlight`;
 	}
