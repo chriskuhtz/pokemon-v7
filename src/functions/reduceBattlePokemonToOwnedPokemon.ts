@@ -1,17 +1,8 @@
-import { PrimaryAilment } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { fullyHealPokemon } from './fullyHealPokemon';
+import { persistentPrimaryAilment } from './persistentPrimaryAilment';
 
-const persistentPrimaryAilment = (
-	ailment?: PrimaryAilment
-): PrimaryAilment | undefined => {
-	if (ailment?.type === 'toxic') {
-		return { type: 'toxic', duration: 1 };
-	}
-
-	return ailment;
-};
 export const reduceBattlePokemonToOwnedPokemon = (
 	newMon: BattlePokemon,
 	heal?: boolean

@@ -271,7 +271,7 @@ export const BattleField = ({
 	// 			pokemon.map((p) => {
 	// 				if (p.id === leavesBattle.id) {
 	// 					addMessage({ message: `withdrew ${leavesBattle.data.name}` });
-	// 					return { ...leavesBattle, status: 'BENCH' };
+	// 					return { ...leavesBattle, status: 'BENCH', primaryAilment:persistentPrimaryAilment(leavesBattle.primaryAilment) };
 	// 				}
 	// 				if (p.id === entersBattle.id) {
 	// 					addMessage({
