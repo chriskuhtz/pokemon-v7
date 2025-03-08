@@ -90,6 +90,12 @@ const useSaveFile = (
 	const loaded = local ? (JSON.parse(local) as SaveFile) : init;
 
 	const [saveFile, s] = useState<SaveFile>(loaded);
+
+	const team = useMemo(
+		() => saveFile.pokemon.filter((p) => p.onTeam),
+		[saveFile]
+	);
+
 	const setSaveFile = useCallback(
 		(
 			update: SaveFile,
@@ -393,11 +399,6 @@ const useSaveFile = (
 	const reset = useCallback(() => {
 		setSaveFile(testState, 'reset');
 	}, [setSaveFile]);
-
-	const team = useMemo(
-		() => saveFile.pokemon.filter((p) => p.onTeam),
-		[saveFile]
-	);
 
 	const leaveBattleReducer = useCallback(
 		({

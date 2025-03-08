@@ -43,7 +43,6 @@ export const useOverworldMovement = (
 				});
 			}
 			if (nextInput) {
-				//TODO: implement a encounterGrass Layer
 				if (map.tileMap.encounterLayer[playerLocation.y][playerLocation.x]) {
 					const modifiedEncounterRate =
 						encounterChance * (encounterRateModifier ?? 1);
