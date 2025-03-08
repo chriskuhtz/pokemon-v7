@@ -1,5 +1,6 @@
 import { useCallback, useContext } from 'react';
 import { v4 } from 'uuid';
+import { OPPO_ID } from '../constants/gameData';
 import { joinInventories } from '../interfaces/Inventory';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { EmptyStatObject } from '../interfaces/StatObject';
@@ -11,7 +12,7 @@ const HONEY_ENCOUNTER: OwnedPokemon = {
 	xp: 300,
 	id: v4(),
 	damage: 0,
-	ownerId: '',
+	ownerId: OPPO_ID,
 	firstMove: { name: 'tackle', usedPP: 0 },
 	ball: 'poke-ball',
 	nature: 'bold',
@@ -57,6 +58,10 @@ export const useHoneyTree = () => {
 								currentChallenger: {
 									team: [HONEY_ENCOUNTER],
 								},
+							},
+							mileStones: {
+								...saveFile.mileStones,
+								hasCaughtAPokemonWithHoney: true,
 							},
 						});
 					},

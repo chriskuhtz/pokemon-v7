@@ -33,6 +33,7 @@ export const testState: SaveFile = {
 	badges: [],
 	quests: {
 		'catch a pikachu': 'INACTIVE',
+		'lure a pokemon with honey': 'INACTIVE',
 	},
 	inventory: generateInventory({}),
 	playerId: '',
