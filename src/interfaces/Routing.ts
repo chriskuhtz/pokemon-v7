@@ -14,5 +14,6 @@ export const routes = [
 	'QUESTS',
 	'MAP_MAKER',
 	'FARM',
+	'FOSSIL_REVIVER',
 ] as const;
 export type RoutesType = (typeof routes)[number];

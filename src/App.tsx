@@ -9,6 +9,7 @@ import { OwnedPokemon } from './interfaces/OwnedPokemon';
 import { Bag } from './modules/Bag/Bag';
 import { BattleLoader } from './modules/Battle/components/BattleLoader';
 import { Farm } from './modules/Farm/Farm';
+import { FossilReviver } from './modules/FossilReviver/FossilReviver';
 import { MainMenu } from './modules/MainMenu/MainMenu';
 import { MapMaker } from './modules/MapMaker/MapMaker';
 import { BuyMarket } from './modules/Market/BuyMarket';
@@ -237,6 +238,9 @@ export const App = ({
 	}
 	if (activeTab === 'FARM') {
 		return <Farm />;
+	}
+	if (activeTab === 'FOSSIL_REVIVER') {
+		return <FossilReviver />;
 	}
 	if (activeTab === 'MARKET') {
 		return (

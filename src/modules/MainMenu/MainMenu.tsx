@@ -132,6 +132,12 @@ export const MainMenu = ({
 					icon={<GoTasklist size={baseSize / 2} />}
 					actionElements={[]}
 				/>
+				<Card
+					onClick={() => navigate('MAIN', 'FOSSIL_REVIVER')}
+					content={<h4>FOSSIL REVIVER</h4>}
+					icon={<GoTasklist size={baseSize / 2} />}
+					actionElements={[]}
+				/>
 			</Stack>
 		</Page>
 	);
