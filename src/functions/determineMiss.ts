@@ -39,6 +39,9 @@ export const determineMiss = (
 	if (attack.data.accuracy === null) {
 		return { miss: false };
 	}
+	if (attack.name === 'thunder' && weather === 'rain') {
+		return { miss: false };
+	}
 
 	const ratio =
 		calculateModifiedStat(
