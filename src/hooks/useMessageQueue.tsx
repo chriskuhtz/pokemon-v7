@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+	ReactNode,
+	useCallback,
+	useEffect,
+	useMemo,
+	useState,
+} from 'react';
 import { animationTimer } from '../constants/gameData';
 
 export interface Message {
@@ -7,14 +13,14 @@ export interface Message {
 	clearStackOnRemoval?: boolean;
 	needsConfirmation?: boolean;
 }
-export const useMessageQueue = (
-	speed?: number
-): {
+
+export interface UseMessageQueue {
 	latestMessage: Message | undefined;
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
 	confirmLatestMessage: () => void;
-} => {
+}
+export const useMessageQueue = (speed?: number): UseMessageQueue => {
 	const [messages, setMessages] = useState<Message[]>([]);
 	const addMessage = useCallback((message: Message) => {
 		setMessages((messages) => [...messages, message]);
@@ -59,4 +65,16 @@ export const useMessageQueue = (
 		addMultipleMessages,
 		confirmLatestMessage,
 	};
+};
+
+export const MessageQueueContext = React.createContext({} as UseMessageQueue);
+
+export const MessageQueueProvider = ({ children }: { children: ReactNode }) => {
+	const value = useMessageQueue();
+
+	return (
+		<MessageQueueContext.Provider value={value}>
+			{children}
+		</MessageQueueContext.Provider>
+	);
 };

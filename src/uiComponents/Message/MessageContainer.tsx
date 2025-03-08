@@ -1,5 +1,6 @@
+import { useContext } from 'react';
 import { App } from '../../App';
-import { useMessageQueue } from '../../hooks/useMessageQueue';
+import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileProvider } from '../../hooks/useSaveFile';
 import { Banner } from '../Banner/Banner';
 
@@ -9,7 +10,7 @@ export const MessageContainer = () => {
 		addMessage,
 		latestMessage,
 		addMultipleMessages,
-	} = useMessageQueue();
+	} = useContext(MessageQueueContext);
 	return (
 		<>
 			{latestMessage && (
