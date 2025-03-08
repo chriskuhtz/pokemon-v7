@@ -9,6 +9,7 @@ import { baseSize, fps } from '../../constants/gameData';
 import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { useDrawForeground } from '../../hooks/useDrawBackground';
+import { useHoneyTree } from '../../hooks/useHoneyTree';
 import { Message } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Inventory } from '../../interfaces/Inventory';
@@ -71,6 +72,8 @@ export const Overworld = ({
 	addMultipleMessages: (newMessages: Message[]) => void;
 }) => {
 	const { saveFile, handleOccupantReducer } = useContext(SaveFileContext);
+	const interactWithHoneyTree = useHoneyTree();
+
 	const conditionalOccupants = useMemo(() => {
 		return map.occupants.filter((m) => m.conditionFunction(saveFile) === true);
 	}, [map, saveFile]);
@@ -108,6 +111,7 @@ export const Overworld = ({
 				handleThisOccupant: handleOccupantReducer,
 				cutterPokemon,
 				goToPosition: setCharacterLocation,
+				interactWithHoneyTree,
 			}),
 		[
 			addMultipleMessages,
@@ -115,6 +119,7 @@ export const Overworld = ({
 			goToMarket,
 			handleOccupantReducer,
 			handledOccupants,
+			interactWithHoneyTree,
 			openStorage,
 			playerLocation,
 			setCharacterLocation,

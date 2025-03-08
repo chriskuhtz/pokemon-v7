@@ -22,6 +22,7 @@ export const OCCUPANT_TYPES = [
 	'NPC',
 	'PORTAL',
 	'SIGN',
+	'HONEY_TREE',
 ] as const;
 export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
@@ -77,6 +78,9 @@ export interface OverworldSign extends BaseOccupant {
 export interface OverworldBush extends BaseOccupant {
 	type: 'BUSH';
 }
+export interface OverworldHoneyTree extends BaseOccupant {
+	type: 'HONEY_TREE';
+}
 
 export interface OverworldTrainer extends BaseOccupant {
 	type: 'TRAINER';
@@ -104,7 +108,8 @@ export type Occupant =
 	| OverworldNpc
 	| OverworldTrainer
 	| Portal
-	| OverworldSign;
+	| OverworldSign
+	| OverworldHoneyTree;
 
 export interface OverworldEncounter {
 	dexId: number;

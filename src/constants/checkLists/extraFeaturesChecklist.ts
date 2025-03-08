@@ -174,4 +174,5 @@ export const extraFeatureCheckList: {
 	{ name: 'weight modifier' },
 	{ name: 'weight mod based quests' },
 	{ name: 'go through functions, delete unused' },
+	{ name: 'Encounterlist for honey trees' },
 ];

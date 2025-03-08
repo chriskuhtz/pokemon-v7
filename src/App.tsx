@@ -1,6 +1,7 @@
 import { useContext, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 import { testPokemon } from './constants/gameData';
+import { mapsRecord } from './constants/maps/mapsRecord';
 import { Message } from './hooks/useMessageQueue';
 import { SaveFileContext } from './hooks/useSaveFile';
 import { generateInventory, Inventory } from './interfaces/Inventory';
@@ -19,7 +20,6 @@ import { Settings } from './modules/Settings/Settings';
 import { SpriteSelection } from './modules/SpriteSelection/SpriteSelection';
 import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { Team } from './modules/Team/Team';
-import { mapsRecord } from './constants/maps/mapsRecord';
 
 export const App = ({
 	latestMessage,

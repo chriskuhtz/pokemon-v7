@@ -16,6 +16,7 @@ export const interactWithFunction = ({
 	handleThisOccupant,
 	cutterPokemon,
 	goToPosition,
+	interactWithHoneyTree,
 }: {
 	occ: Occupant | undefined;
 	addMultipleMessages: (x: Message[]) => void;
@@ -29,6 +30,7 @@ export const interactWithFunction = ({
 	handleThisOccupant: (occ: Occupant) => void;
 	handledOccupants: string[];
 	goToPosition: (x: CharacterLocationData) => void;
+	interactWithHoneyTree: () => void;
 }) => {
 	if (!occ) {
 		return;
@@ -176,6 +178,11 @@ export const interactWithFunction = ({
 			);
 		}
 
+		return;
+	}
+
+	if (data.type === 'HONEY_TREE') {
+		interactWithHoneyTree();
 		return;
 	}
 

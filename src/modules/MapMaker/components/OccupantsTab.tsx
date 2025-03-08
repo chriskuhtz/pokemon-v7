@@ -1,23 +1,32 @@
 import { useState } from 'react';
-import { FaTrash } from 'react-icons/fa';
+import { FaCopy, FaTrash } from 'react-icons/fa';
 import { IoPersonSharp } from 'react-icons/io5';
 import {
 	Occupant,
 	OCCUPANT_TYPES,
 	OccupantType,
 	OverworldHiddenItem,
+	OverworldHoneyTree,
 	OverworldItem,
 	OverworldMap,
 } from '../../../interfaces/OverworldMap';
 import { Card } from '../../../uiComponents/Card/Card';
-import { ItemForm } from './ItemForm';
 import { HiddenItemForm } from './HiddenItemForm';
+import { HoneyTreeForm } from './HoneyTreeForm';
+import { ItemForm } from './ItemForm';
 
 export const DEFAULT_ITEM: OverworldItem = {
 	id: 'enter an id',
 	type: 'ITEM',
 	item: 'poke-ball',
 	amount: 1,
+	x: 0,
+	y: 0,
+	conditionFunction: () => true,
+};
+export const DEFAULT_HONEY_TREE: OverworldHoneyTree = {
+	id: 'enter an id',
+	type: 'HONEY_TREE',
 	x: 0,
 	y: 0,
 	conditionFunction: () => true,
@@ -58,15 +67,29 @@ export const OccupantsTab = ({
 						icon={<IoPersonSharp />}
 						content={
 							<strong>
-								{o.id}|{o.x}/{o.y}
+								{o.id}
+								{'    '}|{'     '}
+								{o.x}/{o.y}
 							</strong>
 						}
-						actionElements={[<FaTrash onClick={() => removeOccupant(o.id)} />]}
+						actionElements={[
+							<FaTrash onClick={() => removeOccupant(o.id)} />,
+							<FaCopy
+								onClick={() => navigator.clipboard.writeText(JSON.stringify(o))}
+							/>,
+						]}
 					/>
 				);
 			})}
 			<div style={{ border: '1px solid white', borderRadius: '1rem' }}>
-				<div style={{ display: 'flex', gap: '1rem', padding: '1rem' }}>
+				<div
+					style={{
+						display: 'flex',
+						gap: '1rem',
+						padding: '1rem',
+						flexWrap: 'wrap',
+					}}
+				>
 					{OCCUPANT_TYPES.map((t) => (
 						<button
 							key={t}
@@ -82,6 +105,9 @@ export const OccupantsTab = ({
 				)}
 				{occupantType === 'HIDDEN_ITEM' && (
 					<HiddenItemForm initial={DEFAULT_HIDDEN_ITEM} submit={addOccupant} />
+				)}
+				{occupantType === 'HONEY_TREE' && (
+					<HoneyTreeForm initial={DEFAULT_HONEY_TREE} submit={addOccupant} />
 				)}
 			</div>
 		</div>
