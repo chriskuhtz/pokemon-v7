@@ -34,6 +34,7 @@ export const testState: SaveFile = {
 	quests: {
 		'catch a pikachu': 'INACTIVE',
 		'lure a pokemon with honey': 'INACTIVE',
+		'evolve a pokemon': 'INACTIVE',
 	},
 	inventory: generateInventory({}),
 	playerId: '',
