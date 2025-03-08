@@ -2,6 +2,7 @@ import { QuestName } from '../constants/checkLists/questsRecord';
 import { MapId } from '../constants/maps/mapsRecord';
 import { BadgeName } from './Badge';
 import { Inventory } from './Inventory';
+import { BerryType, MulchType } from './Item';
 import { OwnedPokemon } from './OwnedPokemon';
 import { QuestStatus } from './Quest';
 import { RoutesType } from './Routing';
@@ -39,6 +40,22 @@ export interface Challenger {
 	team: OwnedPokemon[];
 }
 
+export type BerryBushStatus =
+	| 'READY'
+	| 'SAPLING'
+	| 'FLOWERING'
+	| 'WITHERED'
+	| 'SEED'
+	| 'SPROUT';
+export interface BerryBush {
+	status: BerryBushStatus;
+	yield: number;
+	type: BerryType;
+	nextGrowthAt: number; //date in milliseconds
+	mulch?: MulchType;
+	id: string;
+}
+
 export interface SaveFile {
 	badges: BadgeName[];
 	playerId: string;
@@ -66,5 +83,9 @@ export interface SaveFile {
 	mileStones: {
 		hasEvolvedAPokemon: boolean;
 		hasCaughtAPokemonWithHoney: boolean;
+	};
+	farm: {
+		unlockedPlots: number;
+		plants: BerryBush[];
 	};
 }

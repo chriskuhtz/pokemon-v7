@@ -43,6 +43,14 @@ const occs: OverworldMap['occupants'] = [
 		sprite: SpriteEnum.nerd,
 		conditionFunction: () => true,
 	},
+	{
+		id: 'pc',
+		type: 'PC',
+		x: 11,
+		y: 2,
+		approachDirection: 'UP',
+		conditionFunction: () => true,
+	},
 ];
 
 export const testMap: OverworldMap = {

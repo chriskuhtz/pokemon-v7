@@ -55,6 +55,7 @@ export const testState: SaveFile = {
 		hasEvolvedAPokemon: false,
 		hasCaughtAPokemonWithHoney: false,
 	},
+	farm: { unlockedPlots: 1, plants: [] },
 };
 
 export const OPPO_ID = 'oppo';

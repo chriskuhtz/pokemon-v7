@@ -103,6 +103,11 @@ export const EmptyInventory: Inventory = {
 	nugget: 0,
 	'heart-scale': 0,
 	honey: 0,
+	'damp-mulch': 0,
+	'gooey-mulch': 0,
+	'growth-mulch': 0,
+	'stable-mulch': 0,
+	'sitrus-berry': 0,
 };
 export const generateInventory = (wanted: Partial<Inventory>): Inventory => {
 	return joinInventories(EmptyInventory, wanted);
