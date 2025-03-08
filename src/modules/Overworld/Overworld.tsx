@@ -17,6 +17,7 @@ import { Occupant, OverworldMap } from '../../interfaces/OverworldMap';
 import { CharacterLocationData, SaveFile } from '../../interfaces/SaveFile';
 import './Overworld.css';
 import { ClickerGrid } from './components/ClickerGrid';
+import { UncollectedQuestsBadge } from './components/UncollectedQuestsBadge';
 import { interactWithFunction } from './functions/interactWith';
 import { useClickTarget } from './hooks/useClickTarget';
 import { useDrawCharacter } from './hooks/useDrawCharacter';
@@ -71,7 +72,6 @@ export const Overworld = ({
 }) => {
 	const { saveFile, handleOccupantReducer } = useContext(SaveFileContext);
 	const conditionalOccupants = useMemo(() => {
-		console.log(map.occupants, saveFile.handledOccupants);
 		return map.occupants.filter((m) => m.conditionFunction(saveFile) === true);
 	}, [map, saveFile]);
 	const { width, height } = {
@@ -175,6 +175,7 @@ export const Overworld = ({
 					}}
 					size={baseSize / 2}
 				/>
+				<UncollectedQuestsBadge stepsWalked={stepsTaken} />
 				<TeamOverview />
 			</div>
 			<div

@@ -2,7 +2,6 @@ import { calculateLevelData } from '../../functions/calculateLevelData';
 import { Quest } from '../../interfaces/Quest';
 
 export const questNames = [
-	'catch a pokemon in sectorE1',
 	'catch a pikachu',
 	'catch a gastly',
 	'catch a clefairy',
@@ -14,14 +13,6 @@ export const questNames = [
 export type QuestName = (typeof questNames)[number];
 
 export const QuestsRecord: Record<QuestName, Quest> = {
-	'catch a pokemon in sectorE1': {
-		rewardItems: { 'berry-juice': 5 },
-		conditionFunction: () => {
-			//return s.pokemon.some((p) => p.caughtOnMap === 'sectorE1');
-			// repair me
-			return true;
-		},
-	},
 	'catch a pikachu': {
 		rewardItems: { 'thunder-stone': 1 },
 		conditionFunction: (s) => {
