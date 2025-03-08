@@ -1,7 +1,17 @@
+import { PrimaryAilment } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { fullyHealPokemon } from './fullyHealPokemon';
 
+const persistentPrimaryAilment = (
+	ailment?: PrimaryAilment
+): PrimaryAilment | undefined => {
+	if (ailment?.type === 'toxic') {
+		return { type: 'toxic', duration: 1 };
+	}
+
+	return ailment;
+};
 export const reduceBattlePokemonToOwnedPokemon = (
 	newMon: BattlePokemon,
 	heal?: boolean
@@ -22,7 +32,7 @@ export const reduceBattlePokemonToOwnedPokemon = (
 		id: newMon.id,
 
 		damage: newMon.damage,
-		primaryAilment: newMon.primaryAilment,
+		primaryAilment: persistentPrimaryAilment(newMon.primaryAilment),
 		ball: newMon.ball,
 		ownerId: newMon.ownerId,
 		nature: newMon.nature,
