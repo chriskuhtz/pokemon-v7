@@ -67,6 +67,23 @@ const occs: OverworldMap['occupants'] = [
 		sprite: SpriteEnum.artist,
 		conditionFunction: () => true,
 	},
+	{
+		id: 'evolution-researcher',
+		type: 'NPC',
+		x: 13,
+		y: 2,
+		quest: 'evolve a pokemon',
+		handledMessage: ['Evolution is so cool'],
+		unhandledMessage: [
+			'Some Pokemon change their form',
+			',when they reach a higher level',
+			'Others need special items',
+			'Can you please evolve a pokemon for me?',
+		],
+		orientation: 'DOWN',
+		sprite: SpriteEnum.scientistFemale,
+		conditionFunction: () => true,
+	},
 ];
 
 export const testMap: OverworldMap = {
