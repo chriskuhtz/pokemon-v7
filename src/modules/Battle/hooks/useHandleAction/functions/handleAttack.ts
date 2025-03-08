@@ -143,10 +143,16 @@ export const handleAttack = ({
 		updatedTarget.moveQueue.length > 0 &&
 		updatedTarget.moveQueue[0].type === 'BattleAttack' &&
 		updatedTarget.moveQueue[0].name === 'fly';
-	const miss = determineMiss(move, attacker, target, battleWeather, isFlying);
+	const { miss, reason } = determineMiss(
+		move,
+		attacker,
+		target,
+		battleWeather,
+		isFlying
+	);
 
 	if (miss) {
-		handleMiss(attacker, move, setPokemon, addMessage);
+		handleMiss(attacker, move, setPokemon, addMessage, reason);
 		return;
 	}
 

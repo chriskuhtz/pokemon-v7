@@ -168,4 +168,7 @@ export const extraFeatureCheckList: {
 	{ name: 'fix draw order' },
 	{ name: 'setting: instant mode' },
 	{ name: 'open team screen from overworld view' },
+	{ name: 'quiz hut' },
+	{ name: 'weight modifier' },
+	{ name: 'weight mod based quests' },
 ];

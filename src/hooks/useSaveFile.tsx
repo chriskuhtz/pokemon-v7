@@ -5,11 +5,11 @@ import React, {
 	useMemo,
 	useState,
 } from 'react';
-import { mapsRecord } from '../constants/checkLists/mapsRecord';
 import { MoveName } from '../constants/checkLists/movesCheckList';
 
 import { QuestName, QuestsRecord } from '../constants/checkLists/questsRecord';
 import { localStorageId, testState } from '../constants/gameData';
+import { mapsRecord } from '../constants/maps/mapsRecord';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 import { calculateLevelData } from '../functions/calculateLevelData';
