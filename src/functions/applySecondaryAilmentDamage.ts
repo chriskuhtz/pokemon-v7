@@ -12,7 +12,7 @@ export const applySecondaryAilmentDamage = (
 	//apply ailment damage
 	if (isTrapped(updated)) {
 		addMessage(`${pokemon.data.name} is hurt by its trap`);
-		const trapDamage = Math.floor(TRAP_DAMAGE_FACTOR * updated.stats.hp);
+		const trapDamage = Math.round(TRAP_DAMAGE_FACTOR * updated.stats.hp);
 		updated = {
 			...updated,
 			damage: updated.damage + trapDamage,
@@ -20,7 +20,7 @@ export const applySecondaryAilmentDamage = (
 	}
 	if (isLeechSeeded(updated)) {
 		addMessage(`${pokemon.data.name} had its energy drained`);
-		const leechDamage = Math.floor(LEECH_DAMAGE_FACTOR * updated.stats.hp);
+		const leechDamage = Math.round(LEECH_DAMAGE_FACTOR * updated.stats.hp);
 		updated = {
 			...updated,
 			damage: updated.damage + leechDamage,
