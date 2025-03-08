@@ -119,6 +119,13 @@ export const valuables = [
 	'nugget',
 	'heart-scale',
 ] as const;
+export const mulches = [
+	'growth-mulch',
+	'damp-mulch',
+	'stable-mulch',
+	'gooey-mulch',
+] as const;
+export const berries = ['sitrus-berry'] as const;
 
 export const itemTypes = [
 	...balltypes,
@@ -132,6 +139,8 @@ export const itemTypes = [
 	...evoStones,
 	...heldItems,
 	...valuables,
+	...mulches,
+	...berries,
 	'sacred-ash',
 	'rare-candy',
 	'escape-rope',
@@ -149,6 +158,8 @@ export type EvBoostItemType = (typeof evBoostItemTypes)[number];
 export type XItemType = (typeof xItemTypes)[number];
 export type RunawayItem = (typeof runawayItemTypes)[number];
 export type EncounterChanceItem = (typeof encounterChanceItems)[number];
+export type BerryType = (typeof berries)[number];
+export type MulchType = (typeof mulches)[number];
 
 export function isPokeball(x: string | undefined): x is PokeballType {
 	return (balltypes as unknown as string[]).includes(x ?? '');

@@ -4,40 +4,35 @@ import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { GoTasklist } from 'react-icons/go';
 import { baseSize } from '../../constants/gameData';
-import { Message } from '../../hooks/useMessageQueue';
+import { MessageQueueContext } from '../../hooks/useMessageQueue';
+import { useNavigate } from '../../hooks/useNavigate';
 import { useQuests } from '../../hooks/useQuests';
 import { BadgeName } from '../../interfaces/Badge';
-import { RoutesType } from '../../interfaces/Routing';
 import { Banner } from '../../uiComponents/Banner/Banner';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
 
 export const MainMenu = ({
-	navigate,
 	goBack,
 	money,
 	name,
 	spriteUrl,
 	badges,
 	reset,
-	latestMessage,
-	addMessage,
 }: {
-	navigate: (x: RoutesType) => void;
 	goBack: () => void;
 	money: number;
 	name: string;
 	badges: BadgeName[];
 	spriteUrl: string;
 	reset: () => void;
-	latestMessage: Message | undefined;
-	addMessage: (message: Message) => void;
-	addMultipleMessages: (newMessages: Message[]) => void;
 }): JSX.Element => {
 	const [resetConfirmationInProgress, setRCIP] = useState<boolean>(false);
 	const { numberOfUncollected } = useQuests();
+	const navigate = useNavigate();
+	const { latestMessage, addMessage } = useContext(MessageQueueContext);
 
 	return (
 		<Page headline="Main Menu:" goBack={goBack}>
@@ -83,19 +78,19 @@ export const MainMenu = ({
 					actionElements={[]}
 				/>
 				<Card
-					onClick={() => navigate('BAG')}
+					onClick={() => navigate('MAIN', 'BAG')}
 					content={<h4>Bag</h4>}
 					icon={<BsBackpack4 size={baseSize / 2} />}
 					actionElements={[]}
 				/>
 				<Card
-					onClick={() => navigate('TEAM')}
+					onClick={() => navigate('MAIN', 'TEAM')}
 					content={<h4>Team</h4>}
 					icon={<MdCatchingPokemon size={baseSize / 2} />}
 					actionElements={[]}
 				/>
 				<Card
-					onClick={() => navigate('QUESTS')}
+					onClick={() => navigate('MAIN', 'QUESTS')}
 					content={<h4>Quests</h4>}
 					icon={<GoTasklist size={baseSize / 2} />}
 					actionElements={
@@ -126,14 +121,8 @@ export const MainMenu = ({
 				)}
 
 				<Card
-					onClick={() => navigate('MAP_MAKER')}
+					onClick={() => navigate('MAIN', 'MAP_MAKER')}
 					content={<h4>Map Maker</h4>}
-					icon={<GoTasklist size={baseSize / 2} />}
-					actionElements={[]}
-				/>
-				<Card
-					onClick={() => navigate('STORAGE')}
-					content={<h4>Storage</h4>}
 					icon={<GoTasklist size={baseSize / 2} />}
 					actionElements={[]}
 				/>

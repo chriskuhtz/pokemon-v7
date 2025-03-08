@@ -159,14 +159,10 @@ export const App = ({
 			<MainMenu
 				money={money}
 				goBack={() => setActiveTabReducer('OVERWORLD')}
-				navigate={setActiveTabReducer}
 				badges={badges}
 				spriteUrl={`/npcs/${saveFile.sprite}.png`}
 				name={playerId}
 				reset={reset}
-				latestMessage={latestMessage}
-				addMessage={addMessage}
-				addMultipleMessages={addMultipleMessages}
 			/>
 		);
 	}
