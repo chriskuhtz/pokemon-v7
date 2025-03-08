@@ -1,11 +1,11 @@
-import { CSSProperties } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 
 export const Chip = ({
 	children,
 	style,
 	onClick,
 }: {
-	children: React.JSX.Element;
+	children: ReactNode;
 	style?: CSSProperties;
 	onClick?: () => void;
 }) => {

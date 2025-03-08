@@ -105,7 +105,7 @@ export const OwnedPokemonCardContent = ({
 								? { filter: 'grayscale(1)' }
 								: undefined,
 						}}
-						firstPlanetUrl={`/typeIcons/${typeNames[0]}.png`}
+						firstPlanet={`/typeIcons/${typeNames[0]}.png`}
 						secondPlanetUrl={
 							typeNames.length > 1
 								? `/typeIcons/${typeNames[1]}.png`
