@@ -25,6 +25,7 @@ import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
+import { useStartEncounter } from './hooks/useStartEncounter';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -38,7 +39,6 @@ export const Overworld = ({
 	playerLocation,
 	setCharacterLocation,
 	map,
-	startEncounter,
 	goToMarket,
 	talkToNurse,
 	openStorage,
@@ -46,7 +46,6 @@ export const Overworld = ({
 	handledOccupants,
 	cutterPokemon,
 	latestMessage,
-	addMessage,
 	encounterRateModifier,
 	addMultipleMessages,
 }: {
@@ -57,7 +56,6 @@ export const Overworld = ({
 	playerLocation: CharacterLocationData;
 	setCharacterLocation: (update: CharacterLocationData) => void;
 	map: OverworldMap;
-	startEncounter: (stepsTaken: number) => void;
 	encounterRateModifier?: number;
 	openStorage: (stepsTaken: number) => void;
 	goToMarket: (marketInventory: Partial<Inventory>, stepsTaken: number) => void;
@@ -68,11 +66,11 @@ export const Overworld = ({
 	cutterPokemon?: { dexId: number };
 	saveFile: SaveFile;
 	latestMessage: Message | undefined;
-	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
 }) => {
 	const { saveFile, handleOccupantReducer } = useContext(SaveFileContext);
 	const interactWithHoneyTree = useHoneyTree();
+	const addEncounterMessage = useStartEncounter();
 
 	const conditionalOccupants = useMemo(() => {
 		return map.occupants.filter((m) => m.conditionFunction(saveFile) === true);
@@ -83,13 +81,6 @@ export const Overworld = ({
 	};
 
 	const [stepsTaken, setStepsTaken] = useState<number>(0);
-
-	const addEncounterMessage = () => {
-		addMessage({
-			message: 'Wild Pokemon appeared!',
-			onRemoval: () => startEncounter(stepsTaken),
-		});
-	};
 
 	//DRAWING
 	useDrawCharacter(playerCanvasId, playerLocation, playerSprite);
@@ -132,7 +123,7 @@ export const Overworld = ({
 		playerLocation,
 		setCharacterLocation,
 		map,
-		addEncounterMessage,
+		() => addEncounterMessage(stepsTaken),
 		() => setStepsTaken((s) => s + 1),
 		conditionalOccupants,
 		encounterRateModifier
