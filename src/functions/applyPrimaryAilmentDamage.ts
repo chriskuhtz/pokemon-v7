@@ -11,16 +11,31 @@ export const applyPrimaryAilmentDamage = (
 	if (pokemon.primaryAilment?.type === 'burn') {
 		addMessage(`${pokemon.data.name} is hurt by burn`);
 
-		const burnDamage = Math.floor(BURN_DAMAGE_FACTOR * pokemon.stats.hp);
+		const burnDamage = Math.round(BURN_DAMAGE_FACTOR * pokemon.stats.hp);
 		return {
 			...pokemon,
 			damage: pokemon.damage + burnDamage,
 		};
 	}
+	if (pokemon.primaryAilment?.type === 'toxic') {
+		addMessage(`${pokemon.data.name} is hurt by poison`);
+
+		const toxicDamage =
+			Math.round(POISON_DAMAGE_FACTOR * pokemon.stats.hp) *
+			(pokemon.primaryAilment.duration ?? 1);
+		return {
+			...pokemon,
+			damage: pokemon.damage + toxicDamage,
+			primaryAilment: {
+				type: 'toxic',
+				duration: (pokemon.primaryAilment.duration ?? 1) + 1,
+			},
+		};
+	}
 	if (pokemon.primaryAilment?.type === 'poison') {
 		addMessage(`${pokemon.data.name} is hurt by poison`);
 
-		const poisonDamage = Math.floor(POISON_DAMAGE_FACTOR * pokemon.stats.hp);
+		const poisonDamage = Math.round(POISON_DAMAGE_FACTOR * pokemon.stats.hp);
 		return {
 			...pokemon,
 			damage: pokemon.damage + poisonDamage,

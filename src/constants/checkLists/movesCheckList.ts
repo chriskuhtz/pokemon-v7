@@ -367,7 +367,7 @@ export const movesCheckList: {
 	},
 	{ name: 'fissure', url: 'https://pokeapi.co/api/v2/move/90/', handled: true },
 	{ name: 'dig', url: 'https://pokeapi.co/api/v2/move/91/', handled: true },
-	{ name: 'toxic', url: 'https://pokeapi.co/api/v2/move/92/' },
+	{ name: 'toxic', url: 'https://pokeapi.co/api/v2/move/92/', handled: true },
 	{
 		name: 'confusion',
 		url: 'https://pokeapi.co/api/v2/move/93/',
@@ -1499,6 +1499,7 @@ export const handledMoves = [
 	'dig',
 	'meditate',
 	'agility',
+	'toxic',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

@@ -26,7 +26,8 @@ export const applyAttackAilmentsToPokemon = (
 		return { updatedTarget: target, updatedApplicator: applicator };
 	}
 	const random = Math.random() * 100;
-	const ailment = attack.data.meta.ailment.name;
+	const ailment =
+		attack.name === 'toxic' ? 'toxic' : attack.data.meta.ailment.name;
 	const sereneGraceFactor = applicator.ability === 'serene-grace' ? 2 : 1;
 	const chance =
 		attack.data.damage_class.name === 'status'

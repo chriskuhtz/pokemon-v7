@@ -1,6 +1,7 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { fullyHealPokemon } from './fullyHealPokemon';
+import { persistentPrimaryAilment } from './persistentPrimaryAilment';
 
 export const reduceBattlePokemonToOwnedPokemon = (
 	newMon: BattlePokemon,
@@ -22,7 +23,7 @@ export const reduceBattlePokemonToOwnedPokemon = (
 		id: newMon.id,
 
 		damage: newMon.damage,
-		primaryAilment: newMon.primaryAilment,
+		primaryAilment: persistentPrimaryAilment(newMon.primaryAilment),
 		ball: newMon.ball,
 		ownerId: newMon.ownerId,
 		nature: newMon.nature,
