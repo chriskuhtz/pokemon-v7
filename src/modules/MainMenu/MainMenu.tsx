@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { GoTasklist } from 'react-icons/go';
 import { baseSize } from '../../constants/gameData';
 import { Message } from '../../hooks/useMessageQueue';
+import { useQuests } from '../../hooks/useQuests';
 import { BadgeName } from '../../interfaces/Badge';
 import { RoutesType } from '../../interfaces/Routing';
 import { Banner } from '../../uiComponents/Banner/Banner';
@@ -36,6 +37,7 @@ export const MainMenu = ({
 	addMultipleMessages: (newMessages: Message[]) => void;
 }): JSX.Element => {
 	const [resetConfirmationInProgress, setRCIP] = useState<boolean>(false);
+	const { numberOfUncollected } = useQuests();
 
 	return (
 		<Page headline="Main Menu:" goBack={goBack}>
@@ -96,7 +98,11 @@ export const MainMenu = ({
 					onClick={() => navigate('QUESTS')}
 					content={<h4>Quests</h4>}
 					icon={<GoTasklist size={baseSize / 2} />}
-					actionElements={[]}
+					actionElements={
+						numberOfUncollected > 0
+							? [<strong>Uncollected: {numberOfUncollected}</strong>]
+							: []
+					}
 				/>
 				{resetConfirmationInProgress ? (
 					<button

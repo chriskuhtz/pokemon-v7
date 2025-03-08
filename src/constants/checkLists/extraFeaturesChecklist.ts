@@ -76,8 +76,10 @@ export const extraFeatureCheckList: {
 	{ name: 'show k/o pokemon as such in team overview', handled: true },
 	{ name: 'flex display on Line up Selection', handled: true },
 	{ name: 'Team overview on overworld', handled: true },
-	{ name: 'go through functions, delete unused' },
-	{ name: 'Uncollected Quests Badge on Menu Button' },
+	{
+		name: 'Uncollected Quests Badge on Menu Button and Quest Menu Button',
+		handled: true,
+	},
 	{ name: 'level badges in storage' },
 	{ name: 'only consider occupants in view (+2 or 3 fields) when redrawing' },
 	{ name: 'walking npcs randomly' },
@@ -171,4 +173,5 @@ export const extraFeatureCheckList: {
 	{ name: 'quiz hut' },
 	{ name: 'weight modifier' },
 	{ name: 'weight mod based quests' },
+	{ name: 'go through functions, delete unused' },
 ];

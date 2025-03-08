@@ -32,7 +32,6 @@ export const testState: SaveFile = {
 	sprite: '',
 	badges: [],
 	quests: {
-		'catch a pokemon in sectorE1': 'INACTIVE',
 		'catch a pikachu': 'INACTIVE',
 		'catch a clefairy': 'INACTIVE',
 		'catch a gastly': 'INACTIVE',
