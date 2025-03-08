@@ -8,6 +8,7 @@ import { generateInventory, Inventory } from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
 import { Bag } from './modules/Bag/Bag';
 import { BattleLoader } from './modules/Battle/components/BattleLoader';
+import { Farm } from './modules/Farm/Farm';
 import { MainMenu } from './modules/MainMenu/MainMenu';
 import { MapMaker } from './modules/MapMaker/MapMaker';
 import { BuyMarket } from './modules/Market/BuyMarket';
@@ -233,6 +234,9 @@ export const App = ({
 				sellItem={sellItemReducer}
 			/>
 		);
+	}
+	if (activeTab === 'FARM') {
+		return <Farm />;
 	}
 	if (activeTab === 'MARKET') {
 		return (

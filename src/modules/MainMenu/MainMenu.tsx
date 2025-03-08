@@ -126,6 +126,12 @@ export const MainMenu = ({
 					icon={<GoTasklist size={baseSize / 2} />}
 					actionElements={[]}
 				/>
+				<Card
+					onClick={() => navigate('MAIN', 'FARM')}
+					content={<h4>FARM</h4>}
+					icon={<GoTasklist size={baseSize / 2} />}
+					actionElements={[]}
+				/>
 			</Stack>
 		</Page>
 	);

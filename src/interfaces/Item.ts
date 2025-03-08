@@ -165,6 +165,13 @@ export function isPokeball(x: string | undefined): x is PokeballType {
 	return (balltypes as unknown as string[]).includes(x ?? '');
 }
 
+export function isBerry(x: string | undefined): x is BerryType {
+	return (berries as unknown as string[]).includes(x ?? '');
+}
+export function isMulch(x: string | undefined): x is MulchType {
+	return (mulches as unknown as string[]).includes(x ?? '');
+}
+
 export function isHealingItem(x: string | undefined): x is HealingItemType {
 	return (healingItemTypes as unknown as string[]).includes(x ?? '');
 }

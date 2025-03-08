@@ -40,12 +40,20 @@ export interface Challenger {
 	team: OwnedPokemon[];
 }
 
+export type BerryBushStatus =
+	| 'READY'
+	| 'SAPLING'
+	| 'FLOWERING'
+	| 'WITHERED'
+	| 'SEED'
+	| 'SPROUT';
 export interface BerryBush {
-	status: 'READY' | 'SAPLING' | 'SPROUTED';
+	status: BerryBushStatus;
 	yield: number;
 	type: BerryType;
-	nextGrowthAt: string; //date in milliseconds
+	nextGrowthAt: number; //date in milliseconds
 	mulch?: MulchType;
+	id: string;
 }
 
 export interface SaveFile {
