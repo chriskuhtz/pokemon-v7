@@ -23,6 +23,10 @@ export const applyOnBattleEnterAbility = ({
 		setWeather('rain');
 		addMessage({ message: `${user.data.name} made it rain with drizzle` });
 	}
+	if (user.ability === 'sand-stream' && currentWeather !== 'sandstorm') {
+		setWeather('sandstorm');
+		addMessage({ message: `${user.data.name} summoned a sand storm` });
+	}
 	if (
 		currentWeather &&
 		(user.ability === 'air-lock' || user.ability === 'cloud-nine')

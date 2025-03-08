@@ -4,6 +4,7 @@ import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
 import { applyEndOfTurnAbility } from '../../functions/applyEndOfTurnAbility';
 import { applyEndOfTurnHeldItem } from '../../functions/applyEndOfTurnHeldItem';
+import { applyEndOfTurnWeatherDamage } from '../../functions/applyEndOfTurnWeatherDamage';
 import { applyOnBattleEnterAbility } from '../../functions/applyOnBattleEnterAbility';
 import { applyPrimaryAilmentDamage } from '../../functions/applyPrimaryAilmentDamage';
 import { applySecondaryAilmentDamage } from '../../functions/applySecondaryAilmentDamage';
@@ -419,6 +420,11 @@ export const BattleField = ({
 					updated = reduceSecondaryAilmentDurations(updated, (x) =>
 						collectedMessages.push(x)
 					);
+					updated = applyEndOfTurnWeatherDamage(
+						updated,
+						(x) => collectedMessages.push(x),
+						battleWeather
+					);
 					//resets at end of turn
 					updated = { ...updated, lastReceivedDamage: undefined };
 
@@ -449,6 +455,7 @@ export const BattleField = ({
 	}, [
 		addMultipleMessages,
 		battleStep,
+		battleWeather,
 		latestMessage,
 		nextPokemonWithoutMove,
 		pokemon,
