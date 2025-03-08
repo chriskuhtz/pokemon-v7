@@ -1,4 +1,5 @@
 import { flyHitMoves, ohkoMoves } from '../constants/ohkoMoves';
+import { soundBasedMoves } from '../constants/soundBasedMoves';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
@@ -7,6 +8,7 @@ import { calculateModifiedStat } from './calculateModifiedStat';
 import { getCompoundEyesFactor } from './getCompoundEyesFactor';
 import { isSelfTargeting } from './isSelfTargeting';
 
+export type MissReason = 'SOUNDPROOF';
 /**
  *
  * @param attack
@@ -18,24 +20,32 @@ export const determineMiss = (
 	target: BattlePokemon,
 	weather?: WeatherType,
 	targetIsFlying?: boolean
-): boolean => {
+): { miss: boolean; reason?: MissReason } => {
 	const selfTargeting = isSelfTargeting(attack.data);
 
 	if (selfTargeting) {
-		return false;
+		return { miss: false };
 	}
+
+	if (
+		target.ability === 'soundproof' &&
+		soundBasedMoves.includes(attack.name)
+	) {
+		return { miss: true, reason: 'SOUNDPROOF' };
+	}
+	if (targetIsFlying && !flyHitMoves.includes(attack.name)) {
+		return { miss: true };
+	}
+	if (attack.data.accuracy === null) {
+		return { miss: false };
+	}
+
 	const ratio =
 		calculateModifiedStat(
 			attacker.stats.accuracy,
 			attacker.statBoosts.accuracy
 		) / calculateModifiedStat(target.stats.evasion, target.statBoosts.evasion);
 
-	if (targetIsFlying && !flyHitMoves.includes(attack.name)) {
-		return true;
-	}
-	if (attack.data.accuracy === null) {
-		return false;
-	}
 	const weatherFactor =
 		weather === 'sandstorm' && target.ability === 'sand-veil' ? 0.8 : 1;
 
@@ -54,5 +64,5 @@ export const determineMiss = (
 			levelDifferenceSummand) *
 		weatherFactor;
 
-	return Math.random() * 100 > res;
+	return { miss: Math.random() * 100 > res };
 };

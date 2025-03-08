@@ -614,6 +614,7 @@ export const abilityNames = [
 	'pure-power',
 	'poison-point',
 	'magnet-pull',
+	'soundproof',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
