@@ -203,7 +203,7 @@ export const Overworld = ({
 							top: -playerLocation.y * baseSize,
 							left: -playerLocation.x * baseSize,
 							position: 'absolute',
-							zIndex: 1,
+							zIndex: 2,
 						}}
 					>
 						<ClickerGrid
@@ -221,7 +221,7 @@ export const Overworld = ({
 							left: -playerLocation.x * baseSize,
 							position: 'absolute',
 							backgroundColor: OverworldShaderMap[getTimeOfDay()],
-							zIndex: 0,
+							zIndex: 1,
 						}}
 					/>
 					<canvas
@@ -230,7 +230,7 @@ export const Overworld = ({
 							left: -playerLocation.x * baseSize,
 							transitionProperty: 'top,left',
 							transition: `${fps} ease 0s`,
-							zIndex: 1,
+							zIndex: 0,
 							position: 'absolute',
 						}}
 						id={'foreground'}

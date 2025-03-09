@@ -55,6 +55,9 @@ export const handleAttack = ({
 	addBattleFieldEffect: (x: BattleFieldEffect) => void;
 	battleFieldEffects: BattleFieldEffect[];
 }): void => {
+	const underPressure = battleFieldEffects.some(
+		(b) => b.type === 'pressure' && b.ownerId !== attacker.ownerId
+	);
 	//lock in moves choose a random target at execution
 	const realTargetId = getActualTargetId({
 		pokemon,
@@ -89,11 +92,12 @@ export const handleAttack = ({
 		return;
 	}
 	if (!target) {
-		handleNoTarget(attacker, move, setPokemon, addMessage);
+		handleNoTarget(attacker, move, setPokemon, addMessage, underPressure);
 		return;
 	}
+
 	if (dampy && SELF_DESTRUCTING_MOVES.includes(move.name)) {
-		handleDampy(attacker, move, setPokemon, addMessage, dampy);
+		handleDampy(attacker, move, setPokemon, addMessage, dampy, underPressure);
 		return;
 	}
 
@@ -157,7 +161,7 @@ export const handleAttack = ({
 	);
 
 	if (miss) {
-		handleMiss(attacker, move, setPokemon, addMessage, reason);
+		handleMiss(attacker, move, setPokemon, addMessage, underPressure, reason);
 		return;
 	}
 
@@ -197,7 +201,11 @@ export const handleAttack = ({
 
 	//reduce pp after all multihits are done
 	if (move.multiHits === 0) {
-		updatedAttacker = changeMovePP(updatedAttacker, move.name, -1);
+		updatedAttacker = changeMovePP(
+			updatedAttacker,
+			move.name,
+			underPressure ? -2 : -1
+		);
 	}
 	//leech on
 	if (move.name === 'leech-seed') {

@@ -10,6 +10,7 @@ export const handleMiss = (
 	attack: BattleAttack,
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
 	addMessage: (x: Message) => void,
+	underPressure: boolean,
 	reason?: MissReason
 ) => {
 	if (reason === 'SOUNDPROOF') {
@@ -23,7 +24,11 @@ export const handleMiss = (
 	//1. update moveQueue
 	updatedAttacker = { ...updatedAttacker, moveQueue: [] };
 	//2. reduce pp
-	updatedAttacker = changeMovePP(updatedAttacker, attack.name, -1);
+	updatedAttacker = changeMovePP(
+		updatedAttacker,
+		attack.name,
+		underPressure ? -2 : -1
+	);
 
 	setPokemon((pokemon) =>
 		pokemon.map((p) => {
