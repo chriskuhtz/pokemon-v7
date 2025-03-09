@@ -60,18 +60,29 @@ export const Farm = (): JSX.Element => {
 							key={berry}
 							icon={<img src={getItemUrl(berry)} />}
 							content={`plant a ${berry}`}
-							actionElements={mulches.map(([m]) => (
+							actionElements={[
 								<strong
 									style={{
 										border: '1px solid',
 										borderRadius: '.5rem',
 									}}
-									onClick={() => plant(berry, m)}
+									onClick={() => plant(berry)}
 								>
-									{`with ${m}`}
-									<img src={getItemUrl(m)} />
-								</strong>
-							))}
+									{`no mulch`}
+								</strong>,
+								...mulches.map(([m]) => (
+									<strong
+										style={{
+											border: '1px solid',
+											borderRadius: '.5rem',
+										}}
+										onClick={() => plant(berry, m)}
+									>
+										{`with ${m}`}
+										<img src={getItemUrl(m)} />
+									</strong>
+								)),
+							]}
 						/>
 					))
 				) : (
