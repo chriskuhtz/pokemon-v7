@@ -7,7 +7,8 @@ export const handleNoTarget = (
 	attacker: BattlePokemon,
 	attack: BattleAttack,
 	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
-	addMessage: (x: Message) => void
+	addMessage: (x: Message) => void,
+	underPressure: boolean
 ) => {
 	addMessage({ message: `${attacker.data.name} used ${attack.name} ` });
 	addMessage({ message: 'But there was no target' });
@@ -18,7 +19,11 @@ export const handleNoTarget = (
 	//1. update moveQueue
 	updatedAttacker = { ...updatedAttacker, moveQueue: [] };
 	//2. reduce pp
-	updatedAttacker = changeMovePP(updatedAttacker, attack.name, -1);
+	updatedAttacker = changeMovePP(
+		updatedAttacker,
+		attack.name,
+		underPressure ? -2 : -1
+	);
 
 	setPokemon((pokemon) =>
 		pokemon.map((p) => {

@@ -38,7 +38,7 @@ export interface ChooseActionPayload {
 }
 
 export interface BattleFieldEffect {
-	type: 'mist';
+	type: 'mist' | 'pressure';
 	ownerId: string;
 	duration: number;
 }
@@ -131,6 +131,79 @@ export const BattleField = ({
 		() => team.filter((p) => p.status !== 'BENCH' && p.status !== 'FAINTED'),
 		[team]
 	);
+	//APPLY OPPONENT PRESSURE ABILITY
+	useEffect(() => {
+		if (
+			onFieldOpponents.length > 0 &&
+			onFieldOpponents.some((p) => p.ability === 'pressure') &&
+			!battleFieldEffects.some(
+				(eff) =>
+					eff.type === 'pressure' && eff.ownerId === onFieldOpponents[0].ownerId
+			)
+		) {
+			addMessage({ message: `Opponent Side is exerting pressure` });
+			setBattleFieldEffects([
+				...battleFieldEffects,
+				{
+					type: 'pressure',
+					ownerId: onFieldOpponents[0].ownerId,
+					duration: 9000,
+				},
+			]);
+		} else if (
+			onFieldOpponents.length > 0 &&
+			!onFieldOpponents.some((p) => p.ability === 'pressure') &&
+			battleFieldEffects.some(
+				(eff) =>
+					eff.type === 'pressure' && eff.ownerId === onFieldOpponents[0].ownerId
+			)
+		) {
+			addMessage({ message: `Opponent Side is exerting pressure` });
+			setBattleFieldEffects(
+				[...battleFieldEffects].filter(
+					(eff) =>
+						eff.type !== 'pressure' ||
+						eff.ownerId !== onFieldOpponents[0].ownerId
+				)
+			);
+		}
+	}, [addMessage, battleFieldEffects, onFieldOpponents]);
+	//APPLY PLAYER PRESSURE ABILITY
+	useEffect(() => {
+		if (
+			onFieldTeam.length > 0 &&
+			onFieldTeam.some((p) => p.ability === 'pressure') &&
+			!battleFieldEffects.some(
+				(eff) =>
+					eff.type === 'pressure' && eff.ownerId === onFieldTeam[0].ownerId
+			)
+		) {
+			addMessage({ message: `Opponent Side is exerting pressure` });
+			setBattleFieldEffects([
+				...battleFieldEffects,
+				{
+					type: 'pressure',
+					ownerId: onFieldTeam[0].ownerId,
+					duration: 9000,
+				},
+			]);
+		} else if (
+			onFieldTeam.length > 0 &&
+			!onFieldTeam.some((p) => p.ability === 'pressure') &&
+			battleFieldEffects.some(
+				(eff) =>
+					eff.type === 'pressure' && eff.ownerId === onFieldTeam[0].ownerId
+			)
+		) {
+			addMessage({ message: `Player Side is exerting pressure` });
+			setBattleFieldEffects(
+				[...battleFieldEffects].filter(
+					(eff) =>
+						eff.type !== 'pressure' || eff.ownerId !== onFieldTeam[0].ownerId
+				)
+			);
+		}
+	}, [addMessage, battleFieldEffects, onFieldTeam]);
 	const allOnField = useMemo(
 		() => [...onFieldTeam, ...onFieldOpponents],
 		[onFieldOpponents, onFieldTeam]
@@ -291,8 +364,12 @@ export const BattleField = ({
 	const handleForceSwitch = useCallback(
 		(user: BattlePokemon, moveName: MoveName) => {
 			const otherSideHasSuctionCups = pokemon.find(
-				(p) => p.ability === 'suction-cups' && p.ownerId !== user.ownerId
+				(p) =>
+					p.ability === 'suction-cups' &&
+					p.ownerId !== user.ownerId &&
+					p.status === 'ONFIELD'
 			);
+
 			if (otherSideHasSuctionCups) {
 				addMessage({
 					message: `${otherSideHasSuctionCups.data.name} prevents force switching with suction cups`,
@@ -300,7 +377,10 @@ export const BattleField = ({
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
 						if (p.id === user.id) {
-							return { ...changeMovePP(user, moveName, -1), moveQueue: [] };
+							return {
+								...changeMovePP(user, moveName, -1),
+								moveQueue: [],
+							};
 						}
 						return p;
 					})
