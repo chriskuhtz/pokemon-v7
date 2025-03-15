@@ -1,4 +1,4 @@
-import { useCallback, useContext, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { IoMdMenu } from 'react-icons/io';
 import { TeamOverview } from '../../components/TeamOverview/TeamOverview';
 import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
@@ -43,9 +43,10 @@ const useOccupants = () => {
 		[saveFile.location.mapId]
 	);
 
-	const [statefulOccupants, setStatefulOccupants] = useState<Occupant[]>(
-		map.occupants
-	);
+	const [statefulOccupants, setStatefulOccupants] = useState<Occupant[]>([]);
+	useEffect(() => {
+		setStatefulOccupants(map.occupants);
+	}, [map]);
 
 	const conditionalOccupants = useMemo(() => {
 		return statefulOccupants.filter(

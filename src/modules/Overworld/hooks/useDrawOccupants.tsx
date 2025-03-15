@@ -57,8 +57,8 @@ const drawOccupant = (
 	}
 	img.addEventListener('load', () => {
 		switch (occ.type) {
-			case 'ON_STEP_PORTAL':
-				break;
+			// case 'ON_STEP_PORTAL':
+			// 	break;
 			case 'PORTAL':
 				if (occ.small) {
 					ctx?.drawImage(

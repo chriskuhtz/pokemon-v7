@@ -47,8 +47,8 @@ const occs: OverworldMap['occupants'] = [
 		y: 0,
 		portal: {
 			mapId: 'routeN1',
-			x: 0,
-			y: 0,
+			x: 25,
+			y: 49,
 			orientation: 'UP',
 			forwardFoot: 'CENTER1',
 		},

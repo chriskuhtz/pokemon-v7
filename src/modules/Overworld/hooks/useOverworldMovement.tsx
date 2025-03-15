@@ -26,18 +26,14 @@ export const useOverworldMovement = (
 		CharacterOrientation | undefined
 	>();
 
-	const stepOnPortal: OnStepPortal | undefined = useMemo(
-		() =>
-			map.occupants.find(
-				(o) =>
-					o.type === 'ON_STEP_PORTAL' &&
-					o.x === playerLocation.x &&
-					o.y === playerLocation.y
-			) as OnStepPortal | undefined,
-		[map, playerLocation.x, playerLocation.y]
-	);
-
 	useEffect(() => {
+		const stepOnPortal: OnStepPortal | undefined = map.occupants.find(
+			(o) =>
+				o.type === 'ON_STEP_PORTAL' &&
+				o.x === playerLocation.x &&
+				o.y === playerLocation.y
+		) as OnStepPortal | undefined;
+
 		const resetEncounterRate = () => {
 			if (encounterChance === baseEncounterRate) {
 				return;
@@ -57,6 +53,7 @@ export const useOverworldMovement = (
 			if (stepOnPortal) {
 				console.log('yaya');
 				setCharacterLocation(stepOnPortal.portal);
+				return;
 			}
 
 			if (nextInput) {
@@ -103,7 +100,6 @@ export const useOverworldMovement = (
 		playerLocation,
 		setCharacterLocation,
 		startEncounter,
-		stepOnPortal,
 	]);
 
 	return setNextInput;
