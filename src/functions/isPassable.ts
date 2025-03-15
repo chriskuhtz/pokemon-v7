@@ -34,7 +34,11 @@ export const isPassable = (
 	}
 
 	const nextFieldOccupant = currentOccupants.find(
-		(c) => c.x === field.x && c.y === field.y && c.type !== 'HIDDEN_ITEM'
+		(c) =>
+			c.x === field.x &&
+			c.y === field.y &&
+			c.type !== 'HIDDEN_ITEM' &&
+			c.type !== 'ON_STEP_PORTAL'
 	);
 
 	if (nextFieldOccupant) {

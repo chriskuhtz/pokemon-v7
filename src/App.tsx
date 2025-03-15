@@ -64,8 +64,6 @@ export const App = ({
 		money,
 		location,
 		handledOccupants,
-		badges,
-		playerId,
 		quests,
 	} = saveFile;
 
@@ -158,14 +156,7 @@ export const App = ({
 	}
 	if (activeTab === 'MAIN') {
 		return (
-			<MainMenu
-				money={money}
-				goBack={() => setActiveTabReducer('OVERWORLD')}
-				badges={badges}
-				spriteUrl={`/npcs/${saveFile.sprite}.png`}
-				name={playerId}
-				reset={reset}
-			/>
+			<MainMenu goBack={() => setActiveTabReducer('OVERWORLD')} reset={reset} />
 		);
 	}
 	if (activeTab === 'QUESTS') {

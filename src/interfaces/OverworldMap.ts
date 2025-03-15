@@ -23,6 +23,7 @@ export const OCCUPANT_TYPES = [
 	'PORTAL',
 	'SIGN',
 	'HONEY_TREE',
+	'ON_STEP_PORTAL',
 ] as const;
 export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
@@ -97,6 +98,10 @@ export interface Portal extends BaseOccupant {
 	portal: CharacterLocationData;
 	small?: boolean;
 }
+export interface OnStepPortal extends BaseOccupant {
+	type: 'ON_STEP_PORTAL';
+	portal: CharacterLocationData;
+}
 
 export type Occupant =
 	| OverworldItem
@@ -109,7 +114,8 @@ export type Occupant =
 	| OverworldTrainer
 	| Portal
 	| OverworldSign
-	| OverworldHoneyTree;
+	| OverworldHoneyTree
+	| OnStepPortal;
 
 export interface OverworldEncounter {
 	dexId: number;

@@ -62,6 +62,7 @@ export interface SaveFile {
 	inventory: Inventory;
 	pokemon: OwnedPokemon[];
 	money: number;
+	researchPoints: number;
 	meta: {
 		activeTab: RoutesType;
 		currentChallenger?: Challenger;

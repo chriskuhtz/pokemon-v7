@@ -28,7 +28,7 @@ export const Settings = ({
 				<ToggleRow
 					value={state.randomStarters}
 					setValue={(x) => setState({ ...state, randomStarters: x })}
-					label={'Do you want to randomize your starter pokemon choices:'}
+					label={'Do you want random starter pokemon choices:'}
 				/>
 				<ToggleRow
 					value={state.rogueLike}
