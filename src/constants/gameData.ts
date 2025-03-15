@@ -65,7 +65,8 @@ export const testState: SaveFile = {
 	},
 	farm: { unlockedPlots: 1, plants: [] },
 	campUpgrades: {
-		basic_market: false,
+		market_1: false,
+		market_2: false,
 		bulletin_board: false,
 	},
 };
