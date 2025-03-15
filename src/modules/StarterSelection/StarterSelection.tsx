@@ -28,7 +28,7 @@ export const StarterSelection = ({
 	const [finished, setFinished] = useState<boolean>(false);
 
 	return finished && name && chosenStarter ? (
-		<div style={{ padding: '0 1rem' }}>
+		<div style={{ padding: '0 1rem', backgroundColor: 'white' }}>
 			<Stack mode="column" alignItems="center">
 				<Sprite id={SpriteEnum['oak']} rotating={false} />
 				<h3>I see, so you are {name}.</h3>
