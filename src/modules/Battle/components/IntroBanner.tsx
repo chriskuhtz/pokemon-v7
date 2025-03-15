@@ -10,6 +10,7 @@ export const IntroBanner = ({ dexIds }: { dexIds: number[] }): JSX.Element => {
 					alignItems: 'center',
 					padding: '1rem',
 					gap: '2rem',
+					backgroundColor: 'white',
 				}}
 			>
 				Lets go!{' '}
