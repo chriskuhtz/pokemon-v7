@@ -352,14 +352,16 @@ export const useMapEditor = ({
 		if (tool?.type !== 'tileplacer') {
 			return;
 		}
-		if (layer === 'Base') {
-			return;
-		}
 
 		const updatedMap = {
 			...newMap,
 			tileMap: {
-				baseLayer: newMap.tileMap.baseLayer,
+				baseLayer:
+					layer === 'Base'
+						? newMap.tileMap.baseLayer.map((row) =>
+								row.map((c) => (Math.random() < percentage ? tool.tile : c))
+						  )
+						: newMap.tileMap.baseLayer,
 				encounterLayer:
 					layer === 'Encounter'
 						? newMap.tileMap.encounterLayer.map((row) =>
@@ -383,7 +385,7 @@ export const useMapEditor = ({
 						  })
 						: newMap.tileMap.decorationLayer,
 				foregroundLayer:
-					layer === 'Decoration'
+					layer === 'Foreground'
 						? newMap.tileMap.foregroundLayer.map((row) => {
 								return row.map((c) => {
 									return Math.random() < percentage ? tool.tile : c;

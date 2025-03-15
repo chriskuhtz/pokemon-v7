@@ -7,10 +7,10 @@ import { Stack } from '../../uiComponents/Stack/Stack';
 import { useContext, useState } from 'react';
 import { GoTasklist } from 'react-icons/go';
 import { TrainerCard } from '../../components/TrainerCard/TrainerCard';
+import { battleSpriteSize } from '../../constants/gameData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { useQuests } from '../../hooks/useQuests';
-import { battleSpriteSize } from '../../constants/gameData';
 
 export const MainMenu = ({
 	goBack,
@@ -84,7 +84,7 @@ export const MainMenu = ({
 					icon={<GoTasklist size={battleSpriteSize} />}
 					actionElements={[]}
 				/> */}
-				{/* <Card
+				<Card
 					onClick={() => navigate('MAIN', 'MAP_MAKER_CAMP')}
 					content={<h4>Map Maker Camp</h4>}
 					icon={<GoTasklist size={battleSpriteSize} />}
@@ -95,7 +95,7 @@ export const MainMenu = ({
 					content={<h4>Map Maker RouteN1</h4>}
 					icon={<GoTasklist size={battleSpriteSize} />}
 					actionElements={[]}
-				/> */}
+				/>
 			</Stack>
 		</Page>
 	);
