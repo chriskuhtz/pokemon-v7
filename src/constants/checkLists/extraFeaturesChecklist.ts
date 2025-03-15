@@ -172,4 +172,6 @@ export const extraFeatureCheckList: {
 	{ name: 'extract battlefield state, selectors and reducers' },
 	{ name: 'battle backgrounds' },
 	{ name: 'pokedex' },
+	{ name: 'assign correct ability on load' },
+	{ name: 'pick moves for starters' },
 ];
