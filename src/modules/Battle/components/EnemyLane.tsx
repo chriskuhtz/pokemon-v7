@@ -1,8 +1,7 @@
-import { useContext } from 'react';
 import { BattlePokemonInfo } from '../../../components/BattlePokemonInfo/BattlePokemonInfo';
+import { battleSpriteSize } from '../../../constants/gameData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
-import { BaseSizeContext } from '../../../hooks/useBaseSize';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
 export function EnemyLane({
@@ -10,7 +9,6 @@ export function EnemyLane({
 }: {
 	onFieldOpponents: BattlePokemon[];
 }) {
-	const { baseSize } = useContext(BaseSizeContext);
 	return (
 		<div
 			style={{
@@ -44,14 +42,18 @@ export function EnemyLane({
 				{onFieldOpponents.map((t) => {
 					if (t.status === 'CAUGHT') {
 						return (
-							<img height={baseSize} key={t.id} src={getItemUrl(t.ball)} />
+							<img
+								height={battleSpriteSize}
+								key={t.id}
+								src={getItemUrl(t.ball)}
+							/>
 						);
 					}
 					if (t.status === 'CATCHING_1') {
 						return (
 							<img
 								style={{ transform: 'translate(0, -2rem)' }}
-								height={baseSize}
+								height={battleSpriteSize}
 								key={t.id}
 								src={getItemUrl(t.ball)}
 							/>
@@ -61,7 +63,7 @@ export function EnemyLane({
 						return (
 							<img
 								style={{ transform: 'rotate(45deg)' }}
-								height={baseSize}
+								height={battleSpriteSize}
 								key={t.id}
 								src={getItemUrl(t.ball)}
 							/>
@@ -71,7 +73,7 @@ export function EnemyLane({
 						return (
 							<img
 								style={{ transform: 'rotate(315deg)' }}
-								height={baseSize}
+								height={battleSpriteSize}
 								key={t.id}
 								src={getItemUrl(t.ball)}
 							/>
@@ -81,7 +83,7 @@ export function EnemyLane({
 					return (
 						<img
 							style={{ margin: '2rem 1rem' }}
-							height={baseSize}
+							height={battleSpriteSize}
 							key={t.id}
 							src={getPokemonSprite(t.dexId)}
 						/>

@@ -1,10 +1,10 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { MdEdit } from 'react-icons/md';
 import { MoveName } from '../../../constants/checkLists/movesCheckList';
+import { battleSpriteSize } from '../../../constants/gameData';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { moveIsAvailable } from '../../../functions/moveIsAvailable';
-import { BaseSizeContext } from '../../../hooks/useBaseSize';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { PokemonData } from '../../../interfaces/PokemonData';
 import { SelectionListModal } from '../../../uiComponents/SelectionListModal/SelectionListModal';
@@ -18,7 +18,6 @@ export const MovesDisplay = ({
 	data: PokemonData;
 	setMoves: (id: string, moves: MoveName[]) => void;
 }) => {
-	const { baseSize } = useContext(BaseSizeContext);
 	const [editing, setEditing] = useState<boolean>(false);
 	const currentMoves = useMemo(
 		() => getMovesArray(ownedPokemon).map((m) => m.name),
@@ -82,7 +81,7 @@ export const MovesDisplay = ({
 			>
 				Moves:{' '}
 				<MdEdit
-					size={baseSize / 3}
+					size={battleSpriteSize}
 					onClick={() => setEditing(true)}
 					role="button"
 					tabIndex={0}

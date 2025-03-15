@@ -1,6 +1,7 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { MdEdit } from 'react-icons/md';
 import { MoveName } from '../../../constants/checkLists/movesCheckList';
+import { battleSpriteSize } from '../../../constants/gameData';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
@@ -22,7 +23,6 @@ import { EvoInfo } from './EvoInfo';
 import { MovesDisplay } from './MovesDisplay';
 import { NickNameModal } from './NickNameModal';
 import { StatDisplay } from './StatDisplay';
-import { BaseSizeContext } from '../../../hooks/useBaseSize';
 
 export const HIDDEN_STATS = ['accuracy', 'evasion', 'hp'];
 
@@ -50,7 +50,6 @@ export const OwnedPokemonCardContent = ({
 		item?: ItemType
 	) => void;
 }) => {
-	const { baseSize } = useContext(BaseSizeContext);
 	const [heldItemMenuOpen, setHeldItemMenuOpen] = useState<boolean>(false);
 	const [nickNameMenuOpen, setNickNameMenuOpen] = useState<boolean>(false);
 
@@ -138,7 +137,7 @@ export const OwnedPokemonCardContent = ({
 						<h5 style={{ display: 'flex', gap: '.5rem' }}>
 							Held Item: {ownedPokemon.heldItemName ?? 'none'}{' '}
 							<MdEdit
-								size={baseSize / 4}
+								size={battleSpriteSize / 2}
 								onClick={() => setHeldItemMenuOpen(true)}
 								role="button"
 								tabIndex={0}
@@ -158,7 +157,7 @@ export const OwnedPokemonCardContent = ({
 							<MdEdit
 								role="button"
 								tabIndex={0}
-								size={baseSize / 4}
+								size={battleSpriteSize / 2}
 								onClick={() => setNickNameMenuOpen(true)}
 								onKeyDown={(e) => {
 									e.stopPropagation();

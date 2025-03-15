@@ -1,7 +1,6 @@
-import { useContext } from 'react';
+import { battleSpriteSize } from '../../../constants/gameData';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { isKO } from '../../../functions/isKo';
-import { BaseSizeContext } from '../../../hooks/useBaseSize';
 import { Message } from '../../../hooks/useMessageQueue';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
@@ -20,7 +19,6 @@ export const RefillHandling = ({
 	putPokemonOnField: (id: string) => void;
 	opponentCanRefill: boolean;
 }) => {
-	const { baseSize } = useContext(BaseSizeContext);
 	if (teamCanRefill) {
 		return (
 			<div
@@ -66,7 +64,7 @@ export const RefillHandling = ({
 										}
 									}}
 									key={teamMember.id}
-									height={baseSize}
+									height={battleSpriteSize}
 									src={getPokemonSprite(teamMember.dexId)}
 								/>
 							);

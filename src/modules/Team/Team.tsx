@@ -1,11 +1,11 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { OwnedPokemonCard } from '../../components/OwnedPokemonCard/OwnedPokemonCard';
+import { battleSpriteSize } from '../../constants/gameData';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getTypeNames } from '../../functions/getTypeNames';
 import { isOwnedPokemonKO } from '../../functions/isKo';
-import { BaseSizeContext } from '../../hooks/useBaseSize';
 import { useGetBattleTeam } from '../../hooks/useGetBattleTeam';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
@@ -39,7 +39,6 @@ export const Team = ({
 		consumedItem?: ItemType
 	) => void;
 }): JSX.Element => {
-	const { baseSize } = useContext(BaseSizeContext);
 	const { res, invalidate } = useGetBattleTeam(
 		team.map((t) => ({ ...t, caughtBefore: true }))
 	);
@@ -120,7 +119,7 @@ export const Team = ({
 									{index !== 0 && pokemon.id === focusedId && (
 										<FaArrowLeft
 											onClick={() => reorder('UP')}
-											size={baseSize / 3}
+											size={battleSpriteSize}
 											role="button"
 											tabIndex={0}
 											onKeyDown={(e) => {
@@ -155,7 +154,7 @@ export const Team = ({
 									{pokemon.id === focusedId && index !== team.length - 1 && (
 										<FaArrowRight
 											onClick={() => reorder('DOWN')}
-											size={baseSize / 3}
+											size={battleSpriteSize}
 											role="button"
 											tabIndex={0}
 											onKeyDown={(e) => {

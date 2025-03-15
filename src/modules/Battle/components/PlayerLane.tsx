@@ -1,11 +1,9 @@
-import { useContext } from 'react';
 import { BattlePokemonInfo } from '../../../components/BattlePokemonInfo/BattlePokemonInfo';
+import { battleSpriteSize } from '../../../constants/gameData';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
-import { BaseSizeContext } from '../../../hooks/useBaseSize';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
 export function PlayerLane(props: { onFieldTeam: BattlePokemon[] }) {
-	const { baseSize } = useContext(BaseSizeContext);
 	return (
 		<div
 			style={{
@@ -27,7 +25,7 @@ export function PlayerLane(props: { onFieldTeam: BattlePokemon[] }) {
 			>
 				{props.onFieldTeam.map((t) => (
 					<img
-						height={baseSize}
+						height={battleSpriteSize}
 						style={{ margin: '2rem 1rem' }}
 						key={t.id}
 						src={getPokemonSprite(t.dexId, 'back')}

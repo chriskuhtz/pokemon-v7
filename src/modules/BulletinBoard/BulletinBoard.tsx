@@ -48,7 +48,6 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 		[quests]
 	);
 
-	console.log(quests, availableQuests);
 	if (availableQuests.length === 0) {
 		return (
 			<Page headline={'Bulletin Board:'} goBack={goBack}>

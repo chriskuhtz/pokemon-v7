@@ -51,7 +51,6 @@ export const useOverworldMovement = (
 				});
 			}
 			if (stepOnPortal) {
-				console.log('yaya');
 				setCharacterLocation(stepOnPortal.portal);
 				return;
 			}

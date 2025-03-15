@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { BsCashCoin } from 'react-icons/bs';
 import { battleSpriteSize } from '../../constants/gameData';
-import { BaseSizeContext } from '../../hooks/useBaseSize';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Card } from '../../uiComponents/Card/Card';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
@@ -10,7 +9,7 @@ export const TrainerCard = () => {
 	const {
 		saveFile: { sprite, money, badges, playerId, researchPoints },
 	} = useContext(SaveFileContext);
-	const { baseSize } = useContext(BaseSizeContext);
+
 	return (
 		<Card
 			content={
@@ -28,8 +27,8 @@ export const TrainerCard = () => {
 							styles: {
 								objectFit: 'none',
 								objectPosition: '0 0',
-								width: baseSize,
-								height: baseSize,
+								width: battleSpriteSize * 2,
+								height: battleSpriteSize * 2,
 							},
 						}}
 						firstPlanet={
