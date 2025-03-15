@@ -22,7 +22,7 @@ const occs: OverworldMap['occupants'] = [
 		item: 'antidote',
 		amount: 2,
 		id: 'routeN1_antidote',
-		conditionFunction: () => true,
+		conditionFunction: (s) => !s.handledOccupants.some(h=>h.id==='routeN1_antidote'),
 	},
 	{
 		type: 'ITEM',
@@ -31,7 +31,7 @@ const occs: OverworldMap['occupants'] = [
 		item: 'honey',
 		amount: 5,
 		id: 'routeN1_honey',
-		conditionFunction: () => true,
+		conditionFunction: (s) => !s.handledOccupants.some(h=>h.id==='routeN1_honey'),
 	},
 	{
 		type: 'ITEM',
@@ -40,7 +40,7 @@ const occs: OverworldMap['occupants'] = [
 		item: 'great-ball',
 		amount: 2,
 		id: 'routeN1_great_ball',
-		conditionFunction: () => true,
+		conditionFunction: (s) => !s.handledOccupants.some(h=>h.id==='routeN1_great_ball'),
 	},
 	{
 		type: 'HONEY_TREE',

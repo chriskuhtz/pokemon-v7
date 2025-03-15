@@ -70,7 +70,7 @@ export const MainMenu = ({
 						Delete Savefile and reset
 					</button>
 				)}
-				<h2>Dev Area:</h2>
+				{/* <h2>Dev Area:</h2> */}
 				{/* <Card
 					onClick={() => navigate('MAIN', 'FARM')}
 					content={<h4>FARM</h4>}
