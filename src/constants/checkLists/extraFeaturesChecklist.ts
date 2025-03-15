@@ -79,9 +79,7 @@ export const extraFeatureCheckList: {
 	{ name: 'Uncollected Quests Badge on Menu Button and ', handled: true },
 	{ name: 'level badges in storage', handled: true },
 	{ name: 'assign random nature to encounters', handled: true },
-	{ name: 'extract battlefield state, selectors and reducers' },
-	{ name: 'battle backgrounds' },
-	{ name: 'setting: randomized items' },
+	{ name: 'setting: randomized items', handled: true },
 	{ name: 'setting: random quest rewards' },
 	{ name: 'shaders in battle' },
 	{ name: 'prettier weather display' },
@@ -171,5 +169,7 @@ export const extraFeatureCheckList: {
 	{ name: 'sleep shader' },
 	{ name: 'even prettier stat display' },
 	{ name: 'Bag capacity' },
+	{ name: 'extract battlefield state, selectors and reducers' },
+	{ name: 'battle backgrounds' },
 	{ name: 'pokedex' },
 ];
