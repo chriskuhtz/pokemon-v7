@@ -96,32 +96,24 @@ const useSaveFile = (
 		[saveFile]
 	);
 
-	const setSaveFile = useCallback(
-		(
-			update: SaveFile,
-			// eslint-disable-next-line @typescript-eslint/no-unused-vars
-			culprit: string
-		) => {
-			const newTime = new Date().getTime();
+	const setSaveFile = useCallback((update: SaveFile) => {
+		const newTime = new Date().getTime();
 
-			//console.log('setSaveFile', update, 'CULPRIT:', culprit);
-			s({
-				...update,
-				lastEdited: newTime,
-				handledOccupants: update.handledOccupants.filter(
-					(h) => h.resetAt < 0 || h.resetAt > newTime
-				),
-			});
-		},
-		[]
-	);
+		s({
+			...update,
+			lastEdited: newTime,
+			handledOccupants: update.handledOccupants.filter(
+				(h) => h.resetAt < 0 || h.resetAt > newTime
+			),
+		});
+	}, []);
 	const discardItemReducer = (item: ItemType, number: number) => {
 		const updatedInventory = updateItemFunction(
 			item,
 			-number,
 			saveFile.inventory
 		);
-		setSaveFile({ ...saveFile, inventory: updatedInventory }, 'discardItem');
+		setSaveFile({ ...saveFile, inventory: updatedInventory });
 	};
 	const sellItemReducer = (
 		item: ItemType,
@@ -135,14 +127,11 @@ const useSaveFile = (
 		);
 		const updatedMoney = saveFile.money + number * pricePerItem;
 
-		setSaveFile(
-			{
-				...saveFile,
-				inventory: updatedInventory,
-				money: updatedMoney,
-			},
-			'sellItem'
-		);
+		setSaveFile({
+			...saveFile,
+			inventory: updatedInventory,
+			money: updatedMoney,
+		});
 	};
 	const buyItemReducer = (
 		item: ItemType,
@@ -156,14 +145,11 @@ const useSaveFile = (
 		);
 		const updatedMoney = saveFile.money - number * pricePerItem;
 
-		setSaveFile(
-			{
-				...saveFile,
-				inventory: updatedInventory,
-				money: updatedMoney,
-			},
-			'buyItem'
-		);
+		setSaveFile({
+			...saveFile,
+			inventory: updatedInventory,
+			money: updatedMoney,
+		});
 	};
 	const addItemReducer = (item: ItemType, number: number) => {
 		const updatedInventory = updateItemFunction(
@@ -171,30 +157,27 @@ const useSaveFile = (
 			number,
 			saveFile.inventory
 		);
-		setSaveFile({ ...saveFile, inventory: updatedInventory }, 'addItem');
+		setSaveFile({ ...saveFile, inventory: updatedInventory });
 	};
 	const receiveNewPokemonReducer = (newMon: Omit<OwnedPokemon, 'onTeam'>) => {
 		const updatedPokemon = receiveNewPokemonFunction(newMon, saveFile.pokemon);
 
-		setSaveFile({ ...saveFile, pokemon: updatedPokemon }, 'receiveItem');
+		setSaveFile({ ...saveFile, pokemon: updatedPokemon });
 	};
 	const putSaveFileReducer = useCallback(
 		(update: SaveFile) => {
-			setSaveFile(update, 'putSavefile');
+			setSaveFile(update);
 		},
 		[setSaveFile]
 	);
 	const patchSaveFileReducer = (update: Partial<SaveFile>) =>
-		setSaveFile({ ...saveFile, ...update }, 'patchSavefile');
+		setSaveFile({ ...saveFile, ...update });
 	const setActiveTabReducer = useCallback(
 		(update: RoutesType) => {
-			setSaveFile(
-				{
-					...saveFile,
-					meta: { ...saveFile.meta, activeTab: update },
-				},
-				'setactivetab'
-			);
+			setSaveFile({
+				...saveFile,
+				meta: { ...saveFile.meta, activeTab: update },
+			});
 		},
 		[saveFile, setSaveFile]
 	);
@@ -206,24 +189,18 @@ const useSaveFile = (
 		if (saveFile.encounterRateModifier && !updatedModifier) {
 			addMessage({ message: `Encounter Rate Modifier ended` });
 		}
-		setSaveFile(
-			{
-				...saveFile,
-				location: update,
-				encounterRateModifier: updatedModifier,
-			},
-			'setCharacter'
-		);
+		setSaveFile({
+			...saveFile,
+			location: update,
+			encounterRateModifier: updatedModifier,
+		});
 	};
 
 	const setPokemonReducer = (update: OwnedPokemon[]) => {
-		setSaveFile(
-			{
-				...saveFile,
-				pokemon: update,
-			},
-			'setPokemon'
-		);
+		setSaveFile({
+			...saveFile,
+			pokemon: update,
+		});
 	};
 	const navigateAwayFromOverworldReducer = (
 		route: RoutesType,
@@ -231,68 +208,55 @@ const useSaveFile = (
 	) => {
 		console.log('navigate away');
 
-		setSaveFile(
-			{
-				...saveFile,
-				pokemon: saveFile.pokemon.map((p) => {
-					if (!p.onTeam) {
-						return p;
-					}
+		setSaveFile({
+			...saveFile,
+			pokemon: saveFile.pokemon.map((p) => {
+				if (!p.onTeam) {
+					return p;
+				}
 
-					return applyHappinessFromWalking(p, stepsTaken);
-				}),
-				meta: {
-					activeTab: route,
-					currentChallenger:
-						route === 'BATTLE'
-							? {
-									team: determineWildPokemon(
-										team,
-										mapsRecord[saveFile.location.mapId]
-									),
-							  }
-							: undefined,
-				},
+				return applyHappinessFromWalking(p, stepsTaken);
+			}),
+			meta: {
+				activeTab: route,
+				currentChallenger:
+					route === 'BATTLE'
+						? {
+								team: determineWildPokemon(
+									team,
+									mapsRecord[saveFile.location.mapId]
+								),
+						  }
+						: undefined,
 			},
-			'navigateAwayFromOverworld'
-		);
+		});
 	};
 
 	const talkToNurseReducer = (id: string) => {
-		setSaveFile(
-			{
-				...saveFile,
-				lastNurse: id,
-				pokemon: saveFile.pokemon.map((p) => {
-					if (!p.onTeam) {
-						return p;
-					}
+		setSaveFile({
+			...saveFile,
+			lastNurse: id,
+			pokemon: saveFile.pokemon.map((p) => {
+				if (!p.onTeam) {
+					return p;
+				}
 
-					return fullyHealPokemon(p);
-				}),
-			},
-			'talkToNurse'
-		);
+				return fullyHealPokemon(p);
+			}),
+		});
 	};
 	const useSacredAshReducer = () => {
-		setSaveFile(
-			{
-				...saveFile,
-				inventory: joinInventories(
-					saveFile.inventory,
-					{ 'sacred-ash': 1 },
-					true
-				),
-				pokemon: saveFile.pokemon.map((p) => {
-					if (!p.onTeam) {
-						return p;
-					}
+		setSaveFile({
+			...saveFile,
+			inventory: joinInventories(saveFile.inventory, { 'sacred-ash': 1 }, true),
+			pokemon: saveFile.pokemon.map((p) => {
+				if (!p.onTeam) {
+					return p;
+				}
 
-					return fullyHealPokemon(p);
-				}),
-			},
-			'sacredAsh'
-		);
+				return fullyHealPokemon(p);
+			}),
+		});
 		addMessage({ message: 'Whole Team fully healed' });
 	};
 
@@ -313,24 +277,20 @@ const useSaveFile = (
 				updatedQuests[quest] = 'ACTIVE';
 			}
 		}
-		setSaveFile(
-			{
-				...saveFile,
-				inventory: newInventory,
-				quests: updatedQuests,
-				meta: {
-					activeTab:
-						occ.type === 'TRAINER' ? 'BATTLE' : saveFile.meta.activeTab,
-					currentChallenger:
-						occ.type === 'TRAINER' ? { team: occ.team, id: occ.id } : undefined,
-				},
-				handledOccupants: [
-					...saveFile.handledOccupants,
-					{ id: occ.id, resetAt: timer },
-				],
+		setSaveFile({
+			...saveFile,
+			inventory: newInventory,
+			quests: updatedQuests,
+			meta: {
+				activeTab: occ.type === 'TRAINER' ? 'BATTLE' : saveFile.meta.activeTab,
+				currentChallenger:
+					occ.type === 'TRAINER' ? { team: occ.team, id: occ.id } : undefined,
 			},
-			'handleOccupant'
-		);
+			handledOccupants: [
+				...saveFile.handledOccupants,
+				{ id: occ.id, resetAt: timer },
+			],
+		});
 	};
 	const applyItemToPokemonReducer = (
 		pokemon: OwnedPokemon,
@@ -343,19 +303,16 @@ const useSaveFile = (
 			{ [item]: 1 },
 			true
 		);
-		setSaveFile(
-			{
-				...saveFile,
-				pokemon: saveFile.pokemon.map((p) => {
-					if (p.id == updatedPokemon.id) {
-						return updatedPokemon;
-					}
-					return p;
-				}),
-				inventory: updatedInventory,
-			},
-			'applyItem'
-		);
+		setSaveFile({
+			...saveFile,
+			pokemon: saveFile.pokemon.map((p) => {
+				if (p.id == updatedPokemon.id) {
+					return updatedPokemon;
+				}
+				return p;
+			}),
+			inventory: updatedInventory,
+		});
 	};
 	const fulfillQuestReducer = (q: QuestName) => {
 		const quest = QuestsRecord[q];
@@ -363,15 +320,12 @@ const useSaveFile = (
 			saveFile.inventory,
 			quest.rewardItems
 		);
-		setSaveFile(
-			{
-				...saveFile,
-				inventory: updatedInventory,
-				quests: { ...saveFile.quests, [q]: 'COLLECTED' },
-				researchPoints: saveFile.researchPoints + quest.researchPoints,
-			},
-			'fulfillQuest'
-		);
+		setSaveFile({
+			...saveFile,
+			inventory: updatedInventory,
+			quests: { ...saveFile.quests, [q]: 'COLLECTED' },
+			researchPoints: saveFile.researchPoints + quest.researchPoints,
+		});
 	};
 	const changeHeldItemReducer = (pokemonId: string, newItem?: ItemType) => {
 		const heldItem = saveFile.pokemon.find(
@@ -398,7 +352,7 @@ const useSaveFile = (
 		});
 	};
 	const reset = useCallback(() => {
-		setSaveFile(testState, 'reset');
+		setSaveFile(testState);
 	}, [setSaveFile]);
 
 	const leaveBattleReducer = useCallback(
@@ -510,14 +464,11 @@ const useSaveFile = (
 		}
 
 		addMessage({ message: `${item} applied` });
-		setSaveFile(
-			{
-				...saveFile,
-				encounterRateModifier: modifier,
-				inventory: joinInventories(saveFile.inventory, { [item]: 1 }, true),
-			},
-			'applyEncounterRate'
-		);
+		setSaveFile({
+			...saveFile,
+			encounterRateModifier: modifier,
+			inventory: joinInventories(saveFile.inventory, { [item]: 1 }, true),
+		});
 	};
 	const evolvePokemonReducer = (
 		id: string,
