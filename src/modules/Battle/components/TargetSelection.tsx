@@ -1,12 +1,13 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
-import { baseSize, battleSpriteSize } from '../../../constants/gameData';
+import { battleSpriteSize } from '../../../constants/gameData';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { isPlayerPokemon } from '../../../functions/getPlayerPokemon';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Card } from '../../../uiComponents/Card/Card';
 import { ActionType, ChooseActionPayload } from '../BattleField';
+import { BaseSizeContext } from '../../../hooks/useBaseSize';
 
 export function TargetSelection({
 	name,
@@ -23,6 +24,7 @@ export function TargetSelection({
 	chooseAction: (x: ChooseActionPayload) => void;
 	setChosenAction: (x: ActionType | undefined) => void;
 }) {
+	const { baseSize } = useContext(BaseSizeContext);
 	useEffect(() => {
 		//choose the only available option, skip menu
 		if (targets.length === 1) {

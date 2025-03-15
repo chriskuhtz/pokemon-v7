@@ -1,6 +1,6 @@
-import { useEffect, useMemo } from 'react';
-import { baseSize } from '../../../constants/gameData';
+import { useContext, useEffect, useMemo } from 'react';
 import { getYOffsetFromOrientation } from '../../../functions/getYOffsetFromOrientation';
+import { BaseSizeContext } from '../../../hooks/useBaseSize';
 import { CharacterLocationData } from '../../../interfaces/SaveFile';
 
 export const useDrawCharacter = (
@@ -8,6 +8,7 @@ export const useDrawCharacter = (
 	playerLocation: CharacterLocationData,
 	playerSprite: string
 ) => {
+	const { baseSize } = useContext(BaseSizeContext);
 	const yOffset = useMemo(
 		() => getYOffsetFromOrientation(playerLocation.orientation),
 		[playerLocation.orientation]
@@ -15,13 +16,13 @@ export const useDrawCharacter = (
 
 	const xOffset = useMemo(() => {
 		if (playerLocation.forwardFoot === 'LEFT') {
-			return -3 * baseSize;
+			return -3 * 64;
 		}
 		if (playerLocation.forwardFoot === 'CENTER2') {
-			return -2 * baseSize;
+			return -2 * 64;
 		}
 		if (playerLocation.forwardFoot === 'RIGHT') {
-			return -baseSize;
+			return -64;
 		}
 		return 0;
 	}, [playerLocation.forwardFoot]);
@@ -36,9 +37,9 @@ export const useDrawCharacter = (
 
 		img.addEventListener('load', () => {
 			ctx?.clearRect(0, 0, baseSize, baseSize);
-			ctx?.drawImage(img, xOffset, yOffset);
+			ctx?.drawImage(img, -xOffset, -yOffset, 64, 64, 0, 0, baseSize, baseSize);
 		});
 
 		img.src = `/npcs/${playerSprite}.png`;
-	}, [canvasId, playerSprite, xOffset, yOffset]);
+	}, [baseSize, canvasId, playerSprite, xOffset, yOffset]);
 };

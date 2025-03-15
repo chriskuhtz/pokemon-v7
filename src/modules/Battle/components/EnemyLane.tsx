@@ -1,7 +1,8 @@
+import { useContext } from 'react';
 import { BattlePokemonInfo } from '../../../components/BattlePokemonInfo/BattlePokemonInfo';
-import { baseSize } from '../../../constants/gameData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
+import { BaseSizeContext } from '../../../hooks/useBaseSize';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
 export function EnemyLane({
@@ -9,6 +10,7 @@ export function EnemyLane({
 }: {
 	onFieldOpponents: BattlePokemon[];
 }) {
+	const { baseSize } = useContext(BaseSizeContext);
 	return (
 		<div
 			style={{

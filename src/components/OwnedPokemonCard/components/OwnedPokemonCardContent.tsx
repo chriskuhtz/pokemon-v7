@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { MdEdit } from 'react-icons/md';
 import { MoveName } from '../../../constants/checkLists/movesCheckList';
-import { baseSize } from '../../../constants/gameData';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
@@ -23,6 +22,7 @@ import { EvoInfo } from './EvoInfo';
 import { MovesDisplay } from './MovesDisplay';
 import { NickNameModal } from './NickNameModal';
 import { StatDisplay } from './StatDisplay';
+import { BaseSizeContext } from '../../../hooks/useBaseSize';
 
 export const HIDDEN_STATS = ['accuracy', 'evasion', 'hp'];
 
@@ -50,6 +50,7 @@ export const OwnedPokemonCardContent = ({
 		item?: ItemType
 	) => void;
 }) => {
+	const { baseSize } = useContext(BaseSizeContext);
 	const [heldItemMenuOpen, setHeldItemMenuOpen] = useState<boolean>(false);
 	const [nickNameMenuOpen, setNickNameMenuOpen] = useState<boolean>(false);
 

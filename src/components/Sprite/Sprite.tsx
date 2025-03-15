@@ -1,4 +1,5 @@
-import { baseSize } from '../../constants/gameData';
+import { useContext } from 'react';
+import { BaseSizeContext } from '../../hooks/useBaseSize';
 import { useRotate } from '../../hooks/useRotate';
 import { useDrawCharacter } from '../../modules/Overworld/hooks/useDrawCharacter';
 
@@ -11,6 +12,7 @@ export const Sprite = ({
 	onClick?: () => void;
 	rotating: boolean;
 }) => {
+	const { baseSize } = useContext(BaseSizeContext);
 	const orientation = useRotate();
 	useDrawCharacter(
 		id,

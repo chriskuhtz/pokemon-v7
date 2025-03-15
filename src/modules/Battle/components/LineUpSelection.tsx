@@ -1,10 +1,10 @@
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import { Sprite } from '../../../components/Sprite/Sprite';
-import { baseSize } from '../../../constants/gameData';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { isKO } from '../../../functions/isKo';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { OverworldTrainer } from '../../../interfaces/OverworldMap';
+import { BaseSizeContext } from '../../../hooks/useBaseSize';
 
 export const LineUpSelection = ({
 	leave,
@@ -25,6 +25,7 @@ export const LineUpSelection = ({
 	startBattle: () => void;
 	trainer?: OverworldTrainer;
 }) => {
+	const { baseSize } = useContext(BaseSizeContext);
 	const battleButtonMessage = useMemo(() => {
 		if (selectedTeam.length < fightersPerSide)
 			return `select ${fightersPerSide - selectedTeam.length} more`;

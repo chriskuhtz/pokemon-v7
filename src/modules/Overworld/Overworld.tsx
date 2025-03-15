@@ -4,11 +4,13 @@ import { TeamOverview } from '../../components/TeamOverview/TeamOverview';
 import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 
+import { CgZoomIn, CgZoomOut } from 'react-icons/cg';
 import { CombinedCanvas } from '../../components/CombinedCanvas/CombinedCanvas';
-import { baseSize, battleSpriteSize, fps } from '../../constants/gameData';
+import { battleSpriteSize, fps } from '../../constants/gameData';
 import { mapsRecord } from '../../constants/maps/mapsRecord';
 import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
+import { BaseSizeContext } from '../../hooks/useBaseSize';
 import { useDrawForeground } from '../../hooks/useDrawBackground';
 import { useHoneyTree } from '../../hooks/useHoneyTree';
 import { Message } from '../../hooks/useMessageQueue';
@@ -96,6 +98,7 @@ export const Overworld = ({
 	latestMessage: Message | undefined;
 	addMultipleMessages: (newMessages: Message[]) => void;
 }) => {
+	const { baseSize, setBaseSize } = useContext(BaseSizeContext);
 	const { saveFile, handleOccupantReducer, navigateAwayFromOverworldReducer } =
 		useContext(SaveFileContext);
 	const interactWithHoneyTree = useHoneyTree();
@@ -205,6 +208,24 @@ export const Overworld = ({
 				/>
 				<UncollectedQuestsBadge stepsWalked={stepsTaken} />
 				<TeamOverview />
+				<CgZoomIn
+					size={battleSpriteSize}
+					onClick={() => {
+						if (baseSize === 256) {
+							return;
+						}
+						setBaseSize(baseSize * 2);
+					}}
+				/>
+				<CgZoomOut
+					size={battleSpriteSize}
+					onClick={() => {
+						if (baseSize === 1) {
+							return;
+						}
+						setBaseSize(baseSize / 2);
+					}}
+				/>
 			</div>
 			<div
 				style={{
@@ -242,6 +263,7 @@ export const Overworld = ({
 							width={width}
 							height={height}
 							onClick={setClickTarget}
+							baseSize={baseSize}
 						/>
 					</div>
 					<div

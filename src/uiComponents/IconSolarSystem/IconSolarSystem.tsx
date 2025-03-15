@@ -1,5 +1,6 @@
-import { CSSProperties, ReactNode } from 'react';
-import { baseSize, battleSpriteSize } from '../../constants/gameData';
+import { CSSProperties, ReactNode, useContext } from 'react';
+import { battleSpriteSize } from '../../constants/gameData';
+import { BaseSizeContext } from '../../hooks/useBaseSize';
 
 export const IconSolarSystem = ({
 	sun,
@@ -18,6 +19,7 @@ export const IconSolarSystem = ({
 	fifthPlanetUrl?: string;
 	onClick?: () => void;
 }) => {
+	const { baseSize } = useContext(BaseSizeContext);
 	return (
 		<div
 			style={{

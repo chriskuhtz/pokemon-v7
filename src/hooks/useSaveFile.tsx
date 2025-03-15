@@ -373,8 +373,8 @@ const useSaveFile = (
 				} else {
 					updatedLocation = {
 						mapId: 'camp',
-						x: 0,
-						y: 0,
+						x: 6,
+						y: 5,
 						orientation: 'DOWN',
 						forwardFoot: 'CENTER1',
 					};

@@ -1,11 +1,11 @@
-import React, { useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { OwnedPokemonCard } from '../../components/OwnedPokemonCard/OwnedPokemonCard';
-import { baseSize } from '../../constants/gameData';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getTypeNames } from '../../functions/getTypeNames';
 import { isOwnedPokemonKO } from '../../functions/isKo';
+import { BaseSizeContext } from '../../hooks/useBaseSize';
 import { useGetBattleTeam } from '../../hooks/useGetBattleTeam';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
@@ -39,6 +39,7 @@ export const Team = ({
 		consumedItem?: ItemType
 	) => void;
 }): JSX.Element => {
+	const { baseSize } = useContext(BaseSizeContext);
 	const { res, invalidate } = useGetBattleTeam(
 		team.map((t) => ({ ...t, caughtBefore: true }))
 	);

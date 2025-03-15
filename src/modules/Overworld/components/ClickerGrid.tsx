@@ -1,14 +1,15 @@
 import React from 'react';
-import { baseSize } from '../../../constants/gameData';
 
 const unmemoedClickerGrid = ({
 	width,
 	height,
 	onClick,
+	baseSize,
 }: {
 	width: number;
 	height: number;
 	onClick: (update: { y: number; x: number }) => void;
+	baseSize: number;
 }) => {
 	return (
 		<div

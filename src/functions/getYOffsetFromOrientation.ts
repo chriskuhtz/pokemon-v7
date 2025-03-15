@@ -1,17 +1,16 @@
-import { baseSize } from '../constants/gameData';
 import { CharacterOrientation } from '../interfaces/SaveFile';
 
 export const getYOffsetFromOrientation = (
 	orientation: CharacterOrientation
 ) => {
 	if (orientation === 'UP') {
-		return -3 * baseSize;
+		return -3 * 64;
 	}
 	if (orientation === 'RIGHT') {
-		return -2 * baseSize;
+		return -2 * 64;
 	}
 	if (orientation === 'LEFT') {
-		return -baseSize;
+		return -64;
 	}
 	return 0;
 };

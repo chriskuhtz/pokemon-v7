@@ -1,11 +1,11 @@
 import { isEqual } from 'lodash';
-import { useEffect, useState } from 'react';
-import { baseSize } from '../../../constants/gameData';
+import { useContext, useEffect, useState } from 'react';
 import {
 	OverworldShaderMap,
 	getTimeOfDay,
 } from '../../../functions/getTimeOfDay';
 import { getYOffsetFromOrientation } from '../../../functions/getYOffsetFromOrientation';
+import { BaseSizeContext } from '../../../hooks/useBaseSize';
 import { Occupant } from '../../../interfaces/OverworldMap';
 
 export const overflow = (current: number, excludedMax: number) => {
@@ -19,7 +19,9 @@ export const useDrawOccupants = (
 	canvasId: string,
 	statefulOccupants: Occupant[]
 ) => {
+	const { baseSize } = useContext(BaseSizeContext);
 	const [lastDrawnOccupants, setLastDrawnOccupants] = useState<Occupant[]>([]);
+	useEffect(() => setLastDrawnOccupants([]), [baseSize]);
 	//draw the npcs
 	useEffect(() => {
 		if (
@@ -38,17 +40,18 @@ export const useDrawOccupants = (
 			ctx?.clearRect(0, 0, 9000, 9000);
 
 			statefulOccupants.forEach((occ) => {
-				drawOccupant(occ, ctx);
+				drawOccupant(occ, ctx, baseSize);
 				return;
 			});
 			setLastDrawnOccupants(statefulOccupants);
 		}
-	}, [canvasId, lastDrawnOccupants, statefulOccupants]);
+	}, [baseSize, canvasId, lastDrawnOccupants, statefulOccupants]);
 };
 
 const drawOccupant = (
 	occ: Occupant,
-	ctx: CanvasRenderingContext2D | null | undefined
+	ctx: CanvasRenderingContext2D | null | undefined,
+	baseSize: number
 ) => {
 	const img = new Image();
 
@@ -88,8 +91,8 @@ const drawOccupant = (
 					img,
 					0,
 					-getYOffsetFromOrientation(occ.orientation),
-					baseSize,
-					baseSize,
+					64,
+					64,
 					baseSize * occ.x,
 					baseSize * occ.y,
 					baseSize,

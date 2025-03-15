@@ -2,9 +2,10 @@ import { BsFire } from 'react-icons/bs';
 import { FaRegSnowflake } from 'react-icons/fa';
 import { FaBoltLightning } from 'react-icons/fa6';
 import { GiNightSleep, GiPoisonBottle } from 'react-icons/gi';
-import { baseSize } from '../../constants/gameData';
 import { typeColors } from '../../constants/typeColors';
 import { PrimaryAilment } from '../../interfaces/Ailment';
+import { useContext } from 'react';
+import { BaseSizeContext } from '../../hooks/useBaseSize';
 
 export const PrimaryAilmentIcon = ({
 	primaryAilment,
@@ -13,6 +14,7 @@ export const PrimaryAilmentIcon = ({
 	primaryAilment?: PrimaryAilment;
 	size?: number;
 }) => {
+	const { baseSize } = useContext(BaseSizeContext);
 	if (primaryAilment?.type === 'burn') {
 		return <BsFire color={typeColors['fire']} size={size ?? baseSize / 3} />;
 	}
