@@ -154,9 +154,6 @@ export const Overworld = ({
 	);
 	//MOVEMENT
 	const setNextInput = useOverworldMovement(
-		playerLocation,
-		setCharacterLocation,
-		map,
 		() => addEncounterMessage(stepsTaken),
 		() => setStepsTaken((s) => s + 1),
 		occupants,

@@ -1,29 +1,41 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { fps } from '../../../constants/gameData';
+import { mapsRecord } from '../../../constants/maps/mapsRecord';
 import { getNextForwardFoot } from '../../../functions/getNextForwardFoot';
 import { updatePosition } from '../../../functions/updatePosition';
-import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
-import {
-	CharacterLocationData,
-	CharacterOrientation,
-} from '../../../interfaces/SaveFile';
+import { SaveFileContext } from '../../../hooks/useSaveFile';
+import { Occupant, OnStepPortal } from '../../../interfaces/OverworldMap';
+import { CharacterOrientation } from '../../../interfaces/SaveFile';
 
 const baseEncounterRate = 0;
 export const useOverworldMovement = (
-	playerLocation: CharacterLocationData,
-	setCharacterLocation: (update: CharacterLocationData) => void,
-	map: OverworldMap,
 	startEncounter: () => void,
 	addStep: () => void,
 	currentOccupants: Occupant[],
 	encounterRateModifier?: number
 ) => {
+	const {
+		saveFile: { location: playerLocation },
+		setCharacterLocationReducer: setCharacterLocation,
+	} = useContext(SaveFileContext);
+	const map = useMemo(() => mapsRecord[playerLocation.mapId], [playerLocation]);
 	const [encounterChance, setEncounterChance] =
 		useState<number>(baseEncounterRate);
 
 	const [nextInput, setNextInput] = useState<
 		CharacterOrientation | undefined
 	>();
+
+	const stepOnPortal: OnStepPortal | undefined = useMemo(
+		() =>
+			map.occupants.find(
+				(o) =>
+					o.type === 'ON_STEP_PORTAL' &&
+					o.x === playerLocation.x &&
+					o.y === playerLocation.y
+			) as OnStepPortal | undefined,
+		[map, playerLocation.x, playerLocation.y]
+	);
 
 	useEffect(() => {
 		const resetEncounterRate = () => {
@@ -42,6 +54,11 @@ export const useOverworldMovement = (
 					forwardFoot: getNextForwardFoot(playerLocation.forwardFoot),
 				});
 			}
+			if (stepOnPortal) {
+				console.log('yaya');
+				setCharacterLocation(stepOnPortal.portal);
+			}
+
 			if (nextInput) {
 				if (map.tileMap.encounterLayer[playerLocation.y][playerLocation.x]) {
 					const modifiedEncounterRate =
@@ -86,6 +103,7 @@ export const useOverworldMovement = (
 		playerLocation,
 		setCharacterLocation,
 		startEncounter,
+		stepOnPortal,
 	]);
 
 	return setNextInput;

@@ -38,11 +38,11 @@ export const StarterSelection = ({
 			<h3>
 				We are establishing a research outpost in the uninhabited Kuma Region.
 			</h3>
-			<h3>Our Goal is to learn everything about the pokemon here</h3>
+			<h3>Our Goal is to learn everything about the pokemon here.</h3>
 			<h3>We will start out with very limited resources.</h3>
 			<h3>
 				But if we achieve research breakthroughs, we will attract more attention
-				and can expand our research camp.
+				and expand our research camp.
 			</h3>
 
 			<h3>Safe travels, I will meet you there.</h3>

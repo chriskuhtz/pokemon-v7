@@ -41,6 +41,20 @@ const occs: OverworldMap['occupants'] = [
 		sprite: SpriteEnum.butler,
 		conditionFunction: () => true,
 	},
+	{
+		type: 'ON_STEP_PORTAL',
+		x: 10,
+		y: 0,
+		portal: {
+			mapId: 'routeN1',
+			x: 0,
+			y: 0,
+			orientation: 'UP',
+			forwardFoot: 'CENTER1',
+		},
+		id: 'camp_to_routeN1',
+		conditionFunction: () => true,
+	},
 ];
 
 export const camp: OverworldMap = {
