@@ -26,7 +26,7 @@ export const testPokemon: OwnedPokemon = {
 	maxHp: 20,
 	effortValues: EmptyStatObject,
 	ppBoostedMoves: [],
-	caughtOnMap: 'testMap',
+	caughtOnMap: 'camp',
 };
 export const testState: SaveFile = {
 	sprite: '',
@@ -44,7 +44,7 @@ export const testState: SaveFile = {
 		activeTab: 'MAIN',
 	},
 	location: {
-		mapId: 'testMap',
+		mapId: 'camp',
 		orientation: 'RIGHT',
 		forwardFoot: 'CENTER1',
 		x: 1,
@@ -58,6 +58,14 @@ export const testState: SaveFile = {
 		hasCaughtAPokemonWithHoney: false,
 	},
 	farm: { unlockedPlots: 1, plants: [] },
+	campUpgrades: {
+		storeLevel1: false,
+		storeLevel2: false,
+		storeLevel3: false,
+		farm: false,
+		battleTent: false,
+		fossilMachine: false,
+	},
 };
 
 export const OPPO_ID = 'oppo';
@@ -80,7 +88,7 @@ export const testOpponent: OwnedPokemon = {
 	maxHp: 50,
 	effortValues: EmptyStatObject,
 	ppBoostedMoves: [],
-	caughtOnMap: 'testMap',
+	caughtOnMap: 'camp',
 };
 
 export const localStorageId = 'pokemonv7SaveFile';

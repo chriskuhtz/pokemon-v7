@@ -12,7 +12,8 @@ export const routes = [
 	'SPRITE_SELECTION',
 	'SETTINGS',
 	'QUESTS',
-	'MAP_MAKER',
+	'MAP_MAKER_CAMP',
+	'MAP_MAKER_ROUTEN1',
 	'FARM',
 	'FOSSIL_REVIVER',
 ] as const;

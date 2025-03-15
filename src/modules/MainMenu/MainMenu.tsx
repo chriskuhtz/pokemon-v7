@@ -119,13 +119,6 @@ export const MainMenu = ({
 						Delete Savefile and reset
 					</button>
 				)}
-
-				<Card
-					onClick={() => navigate('MAIN', 'MAP_MAKER')}
-					content={<h4>Map Maker</h4>}
-					icon={<GoTasklist size={baseSize / 2} />}
-					actionElements={[]}
-				/>
 				<Card
 					onClick={() => navigate('MAIN', 'FARM')}
 					content={<h4>FARM</h4>}
@@ -135,6 +128,18 @@ export const MainMenu = ({
 				<Card
 					onClick={() => navigate('MAIN', 'FOSSIL_REVIVER')}
 					content={<h4>FOSSIL REVIVER</h4>}
+					icon={<GoTasklist size={baseSize / 2} />}
+					actionElements={[]}
+				/>
+				<Card
+					onClick={() => navigate('MAIN', 'MAP_MAKER_CAMP')}
+					content={<h4>Map Maker Camp</h4>}
+					icon={<GoTasklist size={baseSize / 2} />}
+					actionElements={[]}
+				/>{' '}
+				<Card
+					onClick={() => navigate('MAIN', 'MAP_MAKER_ROUTEN1')}
+					content={<h4>Map Maker RouteN1</h4>}
 					icon={<GoTasklist size={baseSize / 2} />}
 					actionElements={[]}
 				/>

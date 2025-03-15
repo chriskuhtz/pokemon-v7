@@ -1,8 +1,10 @@
 import { OverworldMap } from '../../interfaces/OverworldMap';
-import { testMap } from '../maps/test/testMap';
+import { camp } from './camp';
+import { routeN1 } from './routeN1';
 
-export type MapId = 'testMap';
+export type MapId = 'camp' | 'routeN1';
 
 export const mapsRecord: Record<MapId, OverworldMap> = {
-	testMap: testMap,
+	camp: camp,
+	routeN1: routeN1,
 };

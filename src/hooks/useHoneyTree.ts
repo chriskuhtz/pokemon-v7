@@ -22,7 +22,7 @@ const HONEY_ENCOUNTER: OwnedPokemon = {
 	maxHp: 0,
 	effortValues: EmptyStatObject,
 	ppBoostedMoves: [],
-	caughtOnMap: 'testMap',
+	caughtOnMap: 'camp',
 };
 
 export const useHoneyTree = () => {
@@ -56,7 +56,12 @@ export const useHoneyTree = () => {
 							meta: {
 								activeTab: 'BATTLE',
 								currentChallenger: {
-									team: [HONEY_ENCOUNTER],
+									team: [
+										{
+											...HONEY_ENCOUNTER,
+											caughtOnMap: saveFile.location.mapId,
+										},
+									],
 								},
 							},
 							mileStones: {

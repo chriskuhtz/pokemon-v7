@@ -250,8 +250,13 @@ export const App = ({
 			/>
 		);
 	}
-	if (activeTab === 'MAP_MAKER') {
-		return <MapMaker goBack={() => setActiveTabReducer('MAIN')} />;
+	if (activeTab === 'MAP_MAKER_CAMP') {
+		return <MapMaker mapId="camp" goBack={() => setActiveTabReducer('MAIN')} />;
+	}
+	if (activeTab === 'MAP_MAKER_ROUTEN1') {
+		return (
+			<MapMaker mapId="routeN1" goBack={() => setActiveTabReducer('MAIN')} />
+		);
 	}
 
 	return (

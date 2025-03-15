@@ -1,5 +1,5 @@
-import { OverworldMap } from '../../../interfaces/OverworldMap';
-import { SpriteEnum } from '../../../interfaces/SpriteEnum';
+import { OverworldMap } from '../../interfaces/OverworldMap';
+import { SpriteEnum } from '../../interfaces/SpriteEnum';
 
 const occs: OverworldMap['occupants'] = [
 	{
@@ -86,8 +86,8 @@ const occs: OverworldMap['occupants'] = [
 	},
 ];
 
-export const testMap: OverworldMap = {
-	id: 'testMap',
+export const routeN1: OverworldMap = {
+	id: 'routeN1',
 	possibleEncounters: {
 		MORNING: [
 			{ dexId: 25, xp: 125 },

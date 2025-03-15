@@ -417,7 +417,7 @@ const useSaveFile = (
 					return;
 				} else {
 					updatedLocation = {
-						mapId: 'testMap',
+						mapId: 'camp',
 						x: 0,
 						y: 0,
 						orientation: 'DOWN',

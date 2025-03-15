@@ -88,4 +88,12 @@ export interface SaveFile {
 		unlockedPlots: number;
 		plants: BerryBush[];
 	};
+	campUpgrades: {
+		storeLevel1: boolean;
+		storeLevel2: boolean;
+		storeLevel3: boolean;
+		farm: boolean;
+		battleTent: boolean;
+		fossilMachine: boolean;
+	};
 }

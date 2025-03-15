@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
-import { testMap } from '../../constants/maps/test/testMap';
+import { MapId, mapsRecord } from '../../constants/maps/mapsRecord';
 import { TileIdentifier } from '../../interfaces/OverworldMap';
 import { MapEditor } from './components/MapEditor';
 
@@ -15,7 +15,13 @@ export interface Eraser {
 export type Tool = TilePlacer | Eraser;
 export type Tab = 'TileMap' | 'Encounters' | 'Occupants' | 'ToolSelection';
 
-export const MapMaker = ({ goBack }: { goBack: () => void }) => {
+export const MapMaker = ({
+	goBack,
+	mapId,
+}: {
+	goBack: () => void;
+	mapId: MapId;
+}) => {
 	const [selected, setSelected] = useState<Tool | undefined>();
 
 	const [activeTab, setActiveTab] = useState<Tab>('TileMap');
@@ -58,7 +64,7 @@ export const MapMaker = ({ goBack }: { goBack: () => void }) => {
 					setActiveTab={setActiveTab}
 					tool={selected}
 					setSelected={setSelected}
-					initialMap={testMap}
+					initialMap={mapsRecord[mapId]}
 				/>
 			</div>
 		</div>
