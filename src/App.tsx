@@ -24,6 +24,39 @@ import { SpriteSelection } from './modules/SpriteSelection/SpriteSelection';
 import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { Team } from './modules/Team/Team';
 
+export const FullScreenToggle = () => {
+	const [f, setF] = useState<boolean>(!!document.fullscreenElement);
+
+	if (f) {
+		return <></>;
+	}
+	return (
+		<div
+			style={{
+				position: 'absolute',
+				zIndex: 9000,
+				backgroundColor: 'rgba(0,0,0,.8)',
+				width: '100dvw',
+				height: '100dvh',
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'center',
+			}}
+		>
+			<button
+				style={{ color: 'white', borderColor: 'white' }}
+				onClick={() => {
+					document
+						.getElementById('root')
+						?.requestFullscreen({ navigationUI: 'hide' });
+					setF(true);
+				}}
+			>
+				Enter FullScreen mode
+			</button>
+		</div>
+	);
+};
 export const App = ({
 	latestMessage,
 	addMessage,

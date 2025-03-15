@@ -40,6 +40,7 @@ export const useClickTarget = (
 		}
 
 		const occ = getNextFieldOccupant(clickTarget, currentOccupants);
+
 		if (occ && getOverworldDistance(clickTarget, playerLocation) === 1) {
 			interactWith(occ);
 		}
