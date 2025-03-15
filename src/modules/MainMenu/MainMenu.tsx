@@ -56,6 +56,7 @@ export const MainMenu = ({
 							addMessage({
 								message: 'Resetting Your Save File',
 								onRemoval: () => reset(),
+								needsNoConfirmation: true,
 							})
 						}
 						style={{ backgroundColor: 'darkred', color: 'white' }}

@@ -45,11 +45,12 @@ export const useHoneyTree = () => {
 			addMultipleMessages([
 				{ message: 'You rub some honey on the bark of the tree...' },
 				{ message: '... and hide nearby' },
-				{ message: '...waiting' },
-				{ message: '..waiting.' },
-				{ message: '.waiting..' },
+				{ message: '...waiting', needsNoConfirmation: true },
+				{ message: '..waiting.', needsNoConfirmation: true },
+				{ message: '.waiting..', needsNoConfirmation: true },
 				{
 					message: 'A wild Pokemon is lured in by the honey!',
+					needsNoConfirmation: true,
 					onRemoval: () => {
 						//Start encounter
 						putSaveFileReducer({

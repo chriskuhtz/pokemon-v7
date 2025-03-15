@@ -11,6 +11,7 @@ export const useStartEncounter = () => {
 			addMessage({
 				message: 'Wild Pokemon appeared!',
 				onRemoval: () => navigateAwayFromOverworldReducer('BATTLE', stepsTaken),
+				needsNoConfirmation: true,
 			});
 		},
 		[addMessage, navigateAwayFromOverworldReducer]

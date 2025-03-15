@@ -80,6 +80,7 @@ export const interactWithFunction = ({
 		addMultipleMessages([
 			{
 				message: 'Accessing Pokemon Storage',
+				needsNoConfirmation: true,
 				onRemoval: () => openStorage(stepsTaken),
 			},
 		]);
@@ -89,7 +90,9 @@ export const interactWithFunction = ({
 		data.type === 'SIGN' &&
 		playerLocation.orientation === data.approachDirection
 	) {
-		addMultipleMessages(data.dialogue.map((d) => ({ message: d })));
+		addMultipleMessages(
+			data.dialogue.map((d) => ({ message: d, needsNoConfirmation: true }))
+		);
 
 		return;
 	}
@@ -101,6 +104,7 @@ export const interactWithFunction = ({
 					i === data.dialogue.length - 1
 						? () => goToMarket(data.inventory, stepsTaken)
 						: undefined,
+				needsNoConfirmation: true,
 			}))
 		);
 
@@ -112,18 +116,13 @@ export const interactWithFunction = ({
 				message: d,
 				onRemoval:
 					i === data.dialogue.length - 1 ? () => goToCampMenu() : undefined,
+				needsNoConfirmation: true,
 			}))
 		);
 
 		return;
 	}
 	if (data.type === 'NURSE') {
-		//disable for now because of drawing bug
-		// changeOccupant(occ.id, {
-		// 	...data,
-		// 	orientation: getOppositeDirection(playerLocation.orientation),
-		// });
-
 		addMultipleMessages([
 			...data.dialogue.map((d, i) => ({
 				message: d,
@@ -131,8 +130,9 @@ export const interactWithFunction = ({
 					i === data.dialogue.length - 1
 						? () => talkToNurse(occ.id)
 						: undefined,
+				needsNoConfirmation: true,
 			})),
-			{ message: 'Whole Team fully healed' },
+			{ message: 'Whole Team fully healed', needsNoConfirmation: true },
 		]);
 
 		return;
