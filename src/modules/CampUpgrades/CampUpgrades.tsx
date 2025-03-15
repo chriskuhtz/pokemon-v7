@@ -1,17 +1,17 @@
 import { useCallback, useContext } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
+import { LuHousePlus } from 'react-icons/lu';
 import {
 	CampUpgrade,
 	campUpgradeNames,
 	campUpgradePrices,
-} from '../../constants/campUpgrades';
+} from '../../constants/checkLists/campUpgrades';
 import { battleSpriteSize } from '../../constants/gameData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { LuHousePlus } from 'react-icons/lu';
 
 export const CampUpgrades = ({
 	goBack,

@@ -119,6 +119,7 @@ export const EmptyInventory: Inventory = {
 	'plume-fossil': 0,
 	'jaw-fossil': 0,
 	'sail-fossil': 0,
+	'rare-bone': 0,
 };
 export const generateInventory = (wanted: Partial<Inventory>): Inventory => {
 	return joinInventories(EmptyInventory, wanted);

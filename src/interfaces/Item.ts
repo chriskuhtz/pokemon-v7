@@ -119,6 +119,7 @@ export const valuables = [
 	'star-piece',
 	'nugget',
 	'heart-scale',
+	'rare-bone',
 ] as const;
 export const mulches = [
 	'growth-mulch',

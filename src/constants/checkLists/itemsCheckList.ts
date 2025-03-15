@@ -489,7 +489,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/105/',
 		handled: true,
 	},
-	{ name: 'rare-bone', url: 'https://pokeapi.co/api/v2/item/106/' },
+	{
+		name: 'rare-bone',
+		url: 'https://pokeapi.co/api/v2/item/106/',
+		handled: true,
+	},
 	{ name: 'oval-stone', url: 'https://pokeapi.co/api/v2/item/110/' },
 	{ name: 'odd-keystone', url: 'https://pokeapi.co/api/v2/item/111/' },
 	{ name: 'adamant-orb', url: 'https://pokeapi.co/api/v2/item/112/' },
