@@ -1,4 +1,4 @@
-import { CampUpgrade } from '../constants/campUpgrades';
+import { CampUpgrade } from '../constants/checkLists/campUpgrades';
 import { QuestName } from '../constants/checkLists/questsRecord';
 import { MapId } from '../constants/maps/mapsRecord';
 import { BadgeName } from './Badge';
