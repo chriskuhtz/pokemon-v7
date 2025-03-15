@@ -1,14 +1,18 @@
+import { getOppositeDirection } from '../../../functions/getOppositeDirection';
 import { Message } from '../../../hooks/useMessageQueue';
 import { Inventory } from '../../../interfaces/Inventory';
 import { Occupant } from '../../../interfaces/OverworldMap';
-import { CharacterLocationData } from '../../../interfaces/SaveFile';
+import {
+	CharacterLocationData,
+	CharacterOrientation,
+} from '../../../interfaces/SaveFile';
 
 export const interactWithFunction = ({
 	occ,
 	addMultipleMessages,
 	openStorage,
 	stepsTaken,
-	//changeOccupant,
+	rotateOccupant,
 	playerLocation,
 	goToMarket,
 	talkToNurse,
@@ -23,7 +27,7 @@ export const interactWithFunction = ({
 	cutterPokemon?: { dexId: number };
 	openStorage: (stepsTaken: number) => void;
 	stepsTaken: number;
-	changeOccupant: (id: string, updatedOccupant: Occupant) => void;
+	rotateOccupant: (id: string, newOrientation: CharacterOrientation) => void;
 	playerLocation: CharacterLocationData;
 	goToMarket: (marketInventory: Partial<Inventory>, stepsTaken: number) => void;
 	talkToNurse: (id: string) => void;
@@ -121,11 +125,7 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'NPC') {
-		//disable for now because of drawing bug
-		// changeOccupant(occ.id, {
-		// 	...data,
-		// 	orientation: getOppositeDirection(playerLocation.orientation),
-		// });
+		rotateOccupant(occ.id, getOppositeDirection(playerLocation.orientation));
 
 		if (!handledOccupants.includes(occ.id)) {
 			addMultipleMessages(

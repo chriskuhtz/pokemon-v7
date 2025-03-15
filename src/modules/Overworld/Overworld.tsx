@@ -6,6 +6,7 @@ import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 
 import { CombinedCanvas } from '../../components/CombinedCanvas/CombinedCanvas';
 import { baseSize, fps } from '../../constants/gameData';
+import { mapsRecord } from '../../constants/maps/mapsRecord';
 import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { useDrawForeground } from '../../hooks/useDrawBackground';
@@ -14,8 +15,12 @@ import { Message } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
-import { Occupant, OverworldMap } from '../../interfaces/OverworldMap';
-import { CharacterLocationData, SaveFile } from '../../interfaces/SaveFile';
+import { Occupant } from '../../interfaces/OverworldMap';
+import {
+	CharacterLocationData,
+	CharacterOrientation,
+	SaveFile,
+} from '../../interfaces/SaveFile';
 import './Overworld.css';
 import { ClickerGrid } from './components/ClickerGrid';
 import { UncollectedQuestsBadge } from './components/UncollectedQuestsBadge';
@@ -31,6 +36,39 @@ const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
 const occupantsCanvasId = 'occs';
 
+const useOccupants = () => {
+	const { saveFile } = useContext(SaveFileContext);
+	const map = useMemo(
+		() => mapsRecord[saveFile.location.mapId],
+		[saveFile.location.mapId]
+	);
+
+	const [statefulOccupants, setStatefulOccupants] = useState<Occupant[]>(
+		map.occupants
+	);
+
+	const conditionalOccupants = useMemo(() => {
+		return statefulOccupants.filter(
+			(m) => m.conditionFunction(saveFile) === true
+		);
+	}, [saveFile, statefulOccupants]);
+
+	const rotateOccupant = useCallback(
+		(id: string, newOrientation: CharacterOrientation) =>
+			setStatefulOccupants((os) =>
+				os.map((o) => {
+					if (o.id === id) {
+						return { ...o, orientation: newOrientation };
+					}
+					return o;
+				})
+			),
+		[]
+	);
+
+	return { rotateOccupant, occupants: conditionalOccupants };
+};
+
 export const Overworld = ({
 	openMenu,
 	openBag,
@@ -38,7 +76,7 @@ export const Overworld = ({
 	openTeam,
 	playerLocation,
 	setCharacterLocation,
-	map,
+
 	goToMarket,
 	talkToNurse,
 	openStorage,
@@ -55,7 +93,6 @@ export const Overworld = ({
 	openBag: (stepsTaken: number) => void;
 	playerLocation: CharacterLocationData;
 	setCharacterLocation: (update: CharacterLocationData) => void;
-	map: OverworldMap;
 	encounterRateModifier?: number;
 	openStorage: (stepsTaken: number) => void;
 	goToMarket: (marketInventory: Partial<Inventory>, stepsTaken: number) => void;
@@ -71,20 +108,22 @@ export const Overworld = ({
 	const { saveFile, handleOccupantReducer } = useContext(SaveFileContext);
 	const interactWithHoneyTree = useHoneyTree();
 	const addEncounterMessage = useStartEncounter();
+	const map = useMemo(
+		() => mapsRecord[saveFile.location.mapId],
+		[saveFile.location.mapId]
+	);
 
-	const conditionalOccupants = useMemo(() => {
-		return map.occupants.filter((m) => m.conditionFunction(saveFile) === true);
-	}, [map, saveFile]);
 	const { width, height } = {
 		width: map.tileMap.baseLayer[0].length,
 		height: map.tileMap.baseLayer.length,
 	};
 
 	const [stepsTaken, setStepsTaken] = useState<number>(0);
+	const { rotateOccupant, occupants } = useOccupants();
 
 	//DRAWING
 	useDrawCharacter(playerCanvasId, playerLocation, playerSprite);
-	useDrawOccupants(occupantsCanvasId, conditionalOccupants);
+	useDrawOccupants(occupantsCanvasId, occupants);
 	//INTERACTION
 	useDrawForeground('foreground', map.tileMap, baseSize);
 	const interactWith = useCallback(
@@ -94,7 +133,7 @@ export const Overworld = ({
 				addMultipleMessages,
 				openStorage,
 				stepsTaken,
-				changeOccupant: () => {},
+				rotateOccupant,
 				playerLocation,
 				goToMarket,
 				talkToNurse,
@@ -113,6 +152,7 @@ export const Overworld = ({
 			interactWithHoneyTree,
 			openStorage,
 			playerLocation,
+			rotateOccupant,
 			setCharacterLocation,
 			stepsTaken,
 			talkToNurse,
@@ -125,7 +165,7 @@ export const Overworld = ({
 		map,
 		() => addEncounterMessage(stepsTaken),
 		() => setStepsTaken((s) => s + 1),
-		conditionalOccupants,
+		occupants,
 		encounterRateModifier
 	);
 	const setClickTarget = useClickTarget(
@@ -135,11 +175,11 @@ export const Overworld = ({
 		interactWith,
 		[],
 		!!latestMessage,
-		conditionalOccupants
+		occupants
 	);
 	useKeyboardControl(
 		setNextInput,
-		() => handleEnterPress(playerLocation, interactWith, conditionalOccupants),
+		() => handleEnterPress(playerLocation, interactWith, occupants),
 		() => openMenu(stepsTaken),
 		() => openQuests(stepsTaken),
 		() => openTeam(stepsTaken),
