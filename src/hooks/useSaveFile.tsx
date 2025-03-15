@@ -368,8 +368,9 @@ const useSaveFile = (
 				...saveFile,
 				inventory: updatedInventory,
 				quests: { ...saveFile.quests, [q]: 'COLLECTED' },
+				researchPoints: saveFile.researchPoints + quest.researchPoints,
 			},
-			'applyItem'
+			'fulfillQuest'
 		);
 	};
 	const changeHeldItemReducer = (pokemonId: string, newItem?: ItemType) => {

@@ -31,6 +31,7 @@ export const testPokemon: OwnedPokemon = {
 export const testState: SaveFile = {
 	sprite: '',
 	badges: [],
+	researchPoints: 0,
 	quests: {
 		'catch a pikachu': 'INACTIVE',
 		'lure a pokemon with honey': 'INACTIVE',

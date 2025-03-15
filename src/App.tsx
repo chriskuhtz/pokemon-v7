@@ -47,7 +47,6 @@ export const App = ({
 		patchSaveFileReducer,
 		navigateAwayFromOverworldReducer,
 		applyItemToPokemonReducer,
-		fulfillQuestReducer,
 		changeHeldItemReducer,
 		useSacredAshReducer,
 		applyEncounterRateModifierItem,
@@ -64,7 +63,6 @@ export const App = ({
 		money,
 		location,
 		handledOccupants,
-		quests,
 	} = saveFile;
 
 	const team = useMemo(() => pokemon.filter((p) => p.onTeam), [pokemon]);
@@ -160,14 +158,7 @@ export const App = ({
 		);
 	}
 	if (activeTab === 'QUESTS') {
-		return (
-			<Quests
-				quests={quests}
-				goBack={() => setActiveTabReducer('MAIN')}
-				fulfillQuest={fulfillQuestReducer}
-				saveFile={saveFile}
-			/>
-		);
+		return <Quests goBack={() => setActiveTabReducer('MAIN')} />;
 	}
 	if (activeTab === 'BAG') {
 		return (
