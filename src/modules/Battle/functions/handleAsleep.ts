@@ -10,11 +10,12 @@ export const handleAsleep = (
 	//UPDATES
 
 	//updated Attacker
+	const reducer = attacker.ability === 'early-bird' ? 2 : 1;
 	let updatedAttacker: BattlePokemon = {
 		...attacker,
 		primaryAilment: {
 			type: 'sleep',
-			duration: (attacker.primaryAilment?.duration ?? 1) - 1,
+			duration: (attacker.primaryAilment?.duration ?? 1) - reducer,
 		},
 	};
 	//1. update moveQueue
