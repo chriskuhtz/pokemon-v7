@@ -40,6 +40,7 @@ export const testState: SaveFile = {
 		'catch a morning pokemon from routeN1': 'INACTIVE',
 		'catch a evening pokemon from routeN1': 'INACTIVE',
 		'catch a nighttime pokemon from routeN1': 'INACTIVE',
+		'catch a pokemon orginally found in kanto': 'INACTIVE',
 	},
 	inventory: generateInventory({}),
 	playerId: '',

@@ -1,3 +1,4 @@
+import { getMiddleOfThree } from '../../functions/getMiddleOfThree';
 import { Quest } from '../../interfaces/Quest';
 import { routeN1 } from '../maps/routeN1';
 
@@ -10,6 +11,7 @@ export const questNames = [
 	'catch a daytime pokemon from routeN1',
 	'catch a evening pokemon from routeN1',
 	'catch a nighttime pokemon from routeN1',
+	'catch a pokemon orginally found in kanto',
 ] as const;
 export type QuestName = (typeof questNames)[number];
 
@@ -32,7 +34,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch a morning pokemon from routeN1': {
 		rewardItems: { 'sun-stone': 1 },
-		researchPoints: 10,
+		researchPoints: 5,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
 				routeN1.possibleEncounters.MORNING.some((e) => e.dexId === p.dexId)
@@ -42,7 +44,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch a daytime pokemon from routeN1': {
 		rewardItems: { 'fire-stone': 1 },
-		researchPoints: 10,
+		researchPoints: 5,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
 				routeN1.possibleEncounters.DAY.some((e) => e.dexId === p.dexId)
@@ -52,7 +54,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch a evening pokemon from routeN1': {
 		rewardItems: { 'dusk-stone': 1 },
-		researchPoints: 10,
+		researchPoints: 5,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
 				routeN1.possibleEncounters.EVENING.some((e) => e.dexId === p.dexId)
@@ -62,7 +64,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch a nighttime pokemon from routeN1': {
 		rewardItems: { 'moon-stone': 1 },
-		researchPoints: 10,
+		researchPoints: 5,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
 				routeN1.possibleEncounters.NIGHT.some((e) => e.dexId === p.dexId)
@@ -83,6 +85,16 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 10,
 		conditionFunction: (s) => {
 			return s.mileStones.hasEvolvedAPokemon;
+		},
+		kind: 'GENERIC',
+	},
+	'catch a pokemon orginally found in kanto': {
+		rewardItems: { 'great-ball': 10 },
+		researchPoints: 5,
+		conditionFunction: (s) => {
+			return s.pokemon.some(
+				(p) => getMiddleOfThree([0, p.dexId, 151]) === p.dexId
+			);
 		},
 		kind: 'GENERIC',
 	},
