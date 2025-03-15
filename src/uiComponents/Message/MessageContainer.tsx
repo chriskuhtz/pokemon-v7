@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { App } from '../../App';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileProvider } from '../../hooks/useSaveFile';
@@ -11,6 +11,14 @@ export const MessageContainer = () => {
 		latestMessage,
 		addMultipleMessages,
 	} = useContext(MessageQueueContext);
+
+	useEffect(() => {
+		const root = document.getElementById('root');
+
+		if (root && screen.orientation.type === 'landscape-primary') {
+			root.requestFullscreen();
+		}
+	}, []);
 	return (
 		<>
 			{latestMessage && (
