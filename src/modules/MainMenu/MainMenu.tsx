@@ -71,31 +71,23 @@ export const MainMenu = ({
 						Delete Savefile and reset
 					</button>
 				)}
-				{/* <h2>Dev Area:</h2> */}
-				{/* <Card
-					onClick={() => navigate('MAIN', 'FARM')}
-					content={<h4>FARM</h4>}
-					icon={<GoTasklist size={battleSpriteSize} />}
-					actionElements={[]}
-				/>
-				<Card
-					onClick={() => navigate('MAIN', 'FOSSIL_REVIVER')}
-					content={<h4>FOSSIL REVIVER</h4>}
-					icon={<GoTasklist size={battleSpriteSize} />}
-					actionElements={[]}
-				/> */}
-				<Card
-					onClick={() => navigate('MAIN', 'MAP_MAKER_CAMP')}
-					content={<h4>Map Maker Camp</h4>}
-					icon={<GoTasklist size={battleSpriteSize} />}
-					actionElements={[]}
-				/>{' '}
-				<Card
-					onClick={() => navigate('MAIN', 'MAP_MAKER_ROUTEN1')}
-					content={<h4>Map Maker RouteN1</h4>}
-					icon={<GoTasklist size={battleSpriteSize} />}
-					actionElements={[]}
-				/>
+
+				{window.localStorage.getItem('devmode') && (
+					<Card
+						onClick={() => navigate('MAIN', 'MAP_MAKER_CAMP')}
+						content={<h4>Map Maker Camp</h4>}
+						icon={<GoTasklist size={battleSpriteSize} />}
+						actionElements={[]}
+					/>
+				)}
+				{window.localStorage.getItem('devmode') && (
+					<Card
+						onClick={() => navigate('MAIN', 'MAP_MAKER_ROUTEN1')}
+						content={<h4>Map Maker RouteN1</h4>}
+						icon={<GoTasklist size={battleSpriteSize} />}
+						actionElements={[]}
+					/>
+				)}
 			</Stack>
 		</Page>
 	);

@@ -1,3 +1,4 @@
+import { Inventory } from '../../interfaces/Inventory';
 import { OverworldMap } from '../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
 
@@ -55,6 +56,21 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 	},
 ];
 
+const market1Inventory: Partial<Inventory> = {
+	'poke-ball': 1,
+	potion: 1,
+	antidote: 1,
+	repel: 1,
+};
+const market2Inventory: Partial<Inventory> = {
+	...market1Inventory,
+	'great-ball': 1,
+	'paralyze-heal': 1,
+	'burn-heal': 1,
+	'super-potion': 1,
+	'ice-heal': 1,
+	awakening: 1,
+};
 export const campOccupants: OverworldMap['occupants'] = [
 	{
 		type: 'NPC',
@@ -128,14 +144,27 @@ export const campOccupants: OverworldMap['occupants'] = [
 	},
 	{
 		type: 'MERCHANT',
-		id: 'basic_market',
+		id: 'market_1',
 		x: 14,
 		y: 1,
 		orientation: 'DOWN',
 		sprite: SpriteEnum.clerkMale,
 		dialogue: ['If we get more famous, we can get more items delivered'],
 		inventory: { 'poke-ball': 1, potion: 1, antidote: 1, repel: 1 },
-		conditionFunction: (s) => s.campUpgrades.basic_market,
+		conditionFunction: (s) =>
+			s.campUpgrades.market_1 && !s.campUpgrades.market_2,
+	},
+	{
+		type: 'MERCHANT',
+		id: 'market_2',
+		x: 14,
+		y: 1,
+		orientation: 'DOWN',
+		sprite: SpriteEnum.clerkMale,
+		dialogue: ['Thanks to your hard work, we get better deliveries'],
+		inventory: market2Inventory,
+		conditionFunction: (s) =>
+			s.campUpgrades.market_1 && s.campUpgrades.market_2,
 	},
 	{
 		type: 'BULLETIN_BOARD',

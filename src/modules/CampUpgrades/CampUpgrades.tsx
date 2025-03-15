@@ -1,8 +1,9 @@
-import { useCallback, useContext } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { LuHousePlus } from 'react-icons/lu';
 import {
 	CampUpgrade,
+	campUpgradeConditions,
 	campUpgradeNames,
 	campUpgradePrices,
 } from '../../constants/checkLists/campUpgrades';
@@ -38,6 +39,18 @@ export const CampUpgrades = ({
 		},
 		[addMessage, campUpgrades, putSaveFileReducer, researchPoints, saveFile]
 	);
+
+	const availableUpgrades: CampUpgrade[] = useMemo(
+		() =>
+			campUpgradeNames.filter(
+				(name) =>
+					campUpgradeConditions[name].length === 0 ||
+					campUpgradeConditions[name].every(
+						(condition) => campUpgrades[condition]
+					)
+			),
+		[campUpgrades]
+	);
 	return (
 		<Page headline="Main Menu:" goBack={goBack}>
 			<Stack mode="column">
@@ -45,7 +58,7 @@ export const CampUpgrades = ({
 					We can use the research points earned from quests to expand our camp
 				</h2>
 				<h2>Research Points: {researchPoints}</h2>
-				{campUpgradeNames.map((upgrade) => (
+				{availableUpgrades.map((upgrade) => (
 					<Card
 						key={upgrade}
 						disabled={campUpgrades[upgrade]}
