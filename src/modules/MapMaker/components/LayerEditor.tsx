@@ -7,7 +7,6 @@ export const LayerEditor = ({
 	changeTile,
 	addColumn,
 	addRow,
-	clear,
 	changeRow,
 	changeColumn,
 }: {
@@ -22,12 +21,7 @@ export const LayerEditor = ({
 }) => {
 	return (
 		<>
-			<h3>
-				<button style={{ color: 'white', marginRight: '1rem' }} onClick={clear}>
-					Clear
-				</button>
-				{layerName}:
-			</h3>
+			<h3>{layerName}:</h3>
 			<div
 				style={{
 					padding: '2rem',

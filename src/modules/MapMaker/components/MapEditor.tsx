@@ -5,8 +5,8 @@ import { useMapEditor } from '../hooks/useMapEditor';
 import { EncountersTab } from './EncountersTab';
 import { OccupantsTab } from './OccupantsTab';
 import { TileMapTab } from './TileMapTab';
-import { ToolSelection } from './ToolSelection';
 import { TileQuickSelection } from './TileQuickSelection';
+import { ToolSelection } from './ToolSelection';
 
 export const MapEditor = ({
 	tool,
@@ -99,7 +99,19 @@ export const MapEditor = ({
 			</a>
 			<a
 				style={{ color: 'white', paddingLeft: '2rem' }}
-				onClick={() => navigator.clipboard.writeText(JSON.stringify(newMap))}
+				onClick={() => {
+					if (activeTab === 'TileMap') {
+						navigator.clipboard.writeText(JSON.stringify(newMap.tileMap));
+					}
+					if (activeTab === 'Occupants') {
+						navigator.clipboard.writeText(JSON.stringify(newMap.occupants));
+					}
+					if (activeTab === 'Encounters') {
+						navigator.clipboard.writeText(
+							JSON.stringify(newMap.possibleEncounters)
+						);
+					}
+				}}
 			>
 				Copy to Clipboard
 			</a>
