@@ -2,12 +2,20 @@ import { Quest } from '../../interfaces/Quest';
 
 export const questNames = [
 	'catch a pikachu',
+	'catch a pokemon',
 	'lure a pokemon with honey',
 	'evolve a pokemon',
 ] as const;
 export type QuestName = (typeof questNames)[number];
 
 export const QuestsRecord: Record<QuestName, Quest> = {
+	'catch a pokemon': {
+		rewardItems: { potion: 5 },
+		researchPoints: 10,
+		conditionFunction: (s) => {
+			return s.pokemon.length > 1;
+		},
+	},
 	'catch a pikachu': {
 		rewardItems: { 'thunder-stone': 1 },
 		researchPoints: 10,

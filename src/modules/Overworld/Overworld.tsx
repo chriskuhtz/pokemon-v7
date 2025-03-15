@@ -70,16 +70,11 @@ const useOccupants = () => {
 };
 
 export const Overworld = ({
-	openMenu,
-	openBag,
-	openQuests,
-	openTeam,
 	playerLocation,
 	setCharacterLocation,
 
 	goToMarket,
 	talkToNurse,
-	openStorage,
 	playerSprite,
 	handledOccupants,
 	cutterPokemon,
@@ -87,14 +82,9 @@ export const Overworld = ({
 	encounterRateModifier,
 	addMultipleMessages,
 }: {
-	openMenu: (stepsTaken: number) => void;
-	openTeam: (stepsTaken: number) => void;
-	openQuests: (stepsTaken: number) => void;
-	openBag: (stepsTaken: number) => void;
 	playerLocation: CharacterLocationData;
 	setCharacterLocation: (update: CharacterLocationData) => void;
 	encounterRateModifier?: number;
-	openStorage: (stepsTaken: number) => void;
 	goToMarket: (marketInventory: Partial<Inventory>, stepsTaken: number) => void;
 	talkToNurse: (id: string) => void;
 	playerSprite: string;
@@ -105,7 +95,8 @@ export const Overworld = ({
 	latestMessage: Message | undefined;
 	addMultipleMessages: (newMessages: Message[]) => void;
 }) => {
-	const { saveFile, handleOccupantReducer } = useContext(SaveFileContext);
+	const { saveFile, handleOccupantReducer, navigateAwayFromOverworldReducer } =
+		useContext(SaveFileContext);
 	const interactWithHoneyTree = useHoneyTree();
 	const addEncounterMessage = useStartEncounter();
 	const map = useMemo(
@@ -131,7 +122,8 @@ export const Overworld = ({
 			interactWithFunction({
 				occ,
 				addMultipleMessages,
-				openStorage,
+				openStorage: () =>
+					navigateAwayFromOverworldReducer('STORAGE', stepsTaken),
 				stepsTaken,
 				rotateOccupant,
 				playerLocation,
@@ -142,6 +134,8 @@ export const Overworld = ({
 				cutterPokemon,
 				goToPosition: setCharacterLocation,
 				interactWithHoneyTree,
+				goToCampMenu: () =>
+					navigateAwayFromOverworldReducer('CAMP_UPGRADES', stepsTaken),
 			}),
 		[
 			addMultipleMessages,
@@ -150,7 +144,7 @@ export const Overworld = ({
 			handleOccupantReducer,
 			handledOccupants,
 			interactWithHoneyTree,
-			openStorage,
+			navigateAwayFromOverworldReducer,
 			playerLocation,
 			rotateOccupant,
 			setCharacterLocation,
@@ -180,10 +174,10 @@ export const Overworld = ({
 	useKeyboardControl(
 		setNextInput,
 		() => handleEnterPress(playerLocation, interactWith, occupants),
-		() => openMenu(stepsTaken),
-		() => openQuests(stepsTaken),
-		() => openTeam(stepsTaken),
-		() => openBag(stepsTaken),
+		() => navigateAwayFromOverworldReducer('MAIN', stepsTaken),
+		() => navigateAwayFromOverworldReducer('QUESTS', stepsTaken),
+		() => navigateAwayFromOverworldReducer('TEAM', stepsTaken),
+		() => navigateAwayFromOverworldReducer('BAG', stepsTaken),
 		!!latestMessage
 	);
 
@@ -207,7 +201,7 @@ export const Overworld = ({
 					onClick={(e) => {
 						e.stopPropagation();
 						e.preventDefault();
-						openMenu(stepsTaken);
+						navigateAwayFromOverworldReducer('MAIN', stepsTaken);
 					}}
 					size={baseSize / 2}
 				/>

@@ -71,7 +71,7 @@ export const MainMenu = ({
 					</button>
 				)}
 				<h2>Dev Area:</h2>
-				<Card
+				{/* <Card
 					onClick={() => navigate('MAIN', 'FARM')}
 					content={<h4>FARM</h4>}
 					icon={<GoTasklist size={baseSize / 2} />}
@@ -82,7 +82,7 @@ export const MainMenu = ({
 					content={<h4>FOSSIL REVIVER</h4>}
 					icon={<GoTasklist size={baseSize / 2} />}
 					actionElements={[]}
-				/>
+				/> */}
 				<Card
 					onClick={() => navigate('MAIN', 'MAP_MAKER_CAMP')}
 					content={<h4>Map Maker Camp</h4>}

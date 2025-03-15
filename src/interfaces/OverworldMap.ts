@@ -24,6 +24,7 @@ export const OCCUPANT_TYPES = [
 	'SIGN',
 	'HONEY_TREE',
 	'ON_STEP_PORTAL',
+	'CAMP_MANAGER',
 ] as const;
 export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
@@ -51,6 +52,12 @@ export interface OverworldMerchant extends BaseOccupant {
 	type: 'MERCHANT';
 	orientation: CharacterOrientation;
 	inventory: Partial<Inventory>;
+	dialogue: string[];
+	sprite: string;
+}
+export interface OverworldCampManager extends BaseOccupant {
+	type: 'CAMP_MANAGER';
+	orientation: CharacterOrientation;
 	dialogue: string[];
 	sprite: string;
 }
@@ -115,7 +122,8 @@ export type Occupant =
 	| Portal
 	| OverworldSign
 	| OverworldHoneyTree
-	| OnStepPortal;
+	| OnStepPortal
+	| OverworldCampManager;
 
 export interface OverworldEncounter {
 	dexId: number;

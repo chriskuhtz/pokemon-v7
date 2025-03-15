@@ -8,6 +8,7 @@ import { generateInventory, Inventory } from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
 import { Bag } from './modules/Bag/Bag';
 import { BattleLoader } from './modules/Battle/components/BattleLoader';
+import { CampUpgrades } from './modules/CampUpgrades/CampUpgrades';
 import { Farm } from './modules/Farm/Farm';
 import { FossilReviver } from './modules/FossilReviver/FossilReviver';
 import { MainMenu } from './modules/MainMenu/MainMenu';
@@ -224,6 +225,9 @@ export const App = ({
 	if (activeTab === 'FOSSIL_REVIVER') {
 		return <FossilReviver />;
 	}
+	if (activeTab === 'CAMP_UPGRADES') {
+		return <CampUpgrades goBack={() => setActiveTabReducer('OVERWORLD')} />;
+	}
 	if (activeTab === 'MARKET') {
 		return (
 			<Market
@@ -243,21 +247,13 @@ export const App = ({
 
 	return (
 		<Overworld
-			openMenu={(steps) => navigateAwayFromOverworldReducer('MAIN', steps)}
-			openQuests={(steps) => navigateAwayFromOverworldReducer('QUESTS', steps)}
-			openBag={(steps) => navigateAwayFromOverworldReducer('BAG', steps)}
-			openTeam={(steps) => navigateAwayFromOverworldReducer('TEAM', steps)}
 			setCharacterLocation={setCharacterLocationReducer}
 			playerLocation={location}
 			saveFile={saveFile}
-			map={mapsRecord[saveFile.location.mapId]}
 			goToMarket={(i, steps) => {
 				navigateAwayFromOverworldReducer('MARKET', steps);
 				setCurrentMarketInventory(i);
 			}}
-			openStorage={(steps) =>
-				navigateAwayFromOverworldReducer('STORAGE', steps)
-			}
 			talkToNurse={talkToNurseReducer}
 			cutterPokemon={{ dexId: team[0].dexId }}
 			playerSprite={saveFile.sprite}

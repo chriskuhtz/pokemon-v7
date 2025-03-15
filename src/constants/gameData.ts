@@ -33,6 +33,7 @@ export const testState: SaveFile = {
 	badges: [],
 	researchPoints: 0,
 	quests: {
+		'catch a pokemon': 'INACTIVE',
 		'catch a pikachu': 'INACTIVE',
 		'lure a pokemon with honey': 'INACTIVE',
 		'evolve a pokemon': 'INACTIVE',
@@ -60,12 +61,7 @@ export const testState: SaveFile = {
 	},
 	farm: { unlockedPlots: 1, plants: [] },
 	campUpgrades: {
-		storeLevel1: false,
-		storeLevel2: false,
-		storeLevel3: false,
-		farm: false,
-		battleTent: false,
-		fossilMachine: false,
+		basic_market: false,
 	},
 };
 

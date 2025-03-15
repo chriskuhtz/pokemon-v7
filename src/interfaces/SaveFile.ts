@@ -1,3 +1,4 @@
+import { CampUpgrade } from '../constants/campUpgrades';
 import { QuestName } from '../constants/checkLists/questsRecord';
 import { MapId } from '../constants/maps/mapsRecord';
 import { BadgeName } from './Badge';
@@ -89,12 +90,5 @@ export interface SaveFile {
 		unlockedPlots: number;
 		plants: BerryBush[];
 	};
-	campUpgrades: {
-		storeLevel1: boolean;
-		storeLevel2: boolean;
-		storeLevel3: boolean;
-		farm: boolean;
-		battleTent: boolean;
-		fossilMachine: boolean;
-	};
+	campUpgrades: Record<CampUpgrade, boolean>;
 }

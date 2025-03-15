@@ -21,6 +21,7 @@ export const interactWithFunction = ({
 	cutterPokemon,
 	goToPosition,
 	interactWithHoneyTree,
+	goToCampMenu,
 }: {
 	occ: Occupant | undefined;
 	addMultipleMessages: (x: Message[]) => void;
@@ -35,6 +36,7 @@ export const interactWithFunction = ({
 	handledOccupants: string[];
 	goToPosition: (x: CharacterLocationData) => void;
 	interactWithHoneyTree: () => void;
+	goToCampMenu: () => void;
 }) => {
 	if (!occ) {
 		return;
@@ -86,12 +88,6 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'MERCHANT') {
-		//disable for now because of drawing bug
-		// changeOccupant(occ.id, {
-		// 	...data,
-		// 	orientation: getOppositeDirection(playerLocation.orientation),
-		// });
-
 		addMultipleMessages(
 			data.dialogue.map((d, i) => ({
 				message: d,
@@ -99,6 +95,17 @@ export const interactWithFunction = ({
 					i === data.dialogue.length - 1
 						? () => goToMarket(data.inventory, stepsTaken)
 						: undefined,
+			}))
+		);
+
+		return;
+	}
+	if (data.type === 'CAMP_MANAGER') {
+		addMultipleMessages(
+			data.dialogue.map((d, i) => ({
+				message: d,
+				onRemoval:
+					i === data.dialogue.length - 1 ? () => goToCampMenu() : undefined,
 			}))
 		);
 
