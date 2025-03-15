@@ -1,5 +1,5 @@
 import { useCallback, useContext } from 'react';
-import { FaCheckCircle, FaShoppingCart } from 'react-icons/fa';
+import { FaCheckCircle } from 'react-icons/fa';
 import {
 	CampUpgrade,
 	campUpgradeNames,
@@ -11,6 +11,7 @@ import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import { LuHousePlus } from 'react-icons/lu';
 
 export const CampUpgrades = ({
 	goBack,
@@ -49,13 +50,18 @@ export const CampUpgrades = ({
 						key={upgrade}
 						disabled={campUpgrades[upgrade]}
 						onClick={() => unlock(upgrade)}
-						content={<h3>{upgrade}</h3>}
+						content={
+							<div>
+								<h3>{upgrade}</h3>
+								<h4>Research Points: {campUpgradePrices[upgrade] || 'FREE'}</h4>
+							</div>
+						}
 						actionElements={
 							campUpgrades[upgrade]
 								? [<FaCheckCircle size={battleSpriteSize} />]
-								: [<strong>Unlock</strong>]
+								: [<button>Unlock</button>]
 						}
-						icon={<FaShoppingCart size={battleSpriteSize} />}
+						icon={<LuHousePlus size={battleSpriteSize} />}
 					/>
 				))}
 			</Stack>

@@ -8,6 +8,7 @@ import { generateInventory, Inventory } from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
 import { Bag } from './modules/Bag/Bag';
 import { BattleLoader } from './modules/Battle/components/BattleLoader';
+import { BulletinBoard } from './modules/BulletinBoard/BulletinBoard';
 import { CampUpgrades } from './modules/CampUpgrades/CampUpgrades';
 import { Farm } from './modules/Farm/Farm';
 import { FossilReviver } from './modules/FossilReviver/FossilReviver';
@@ -27,7 +28,7 @@ import { Team } from './modules/Team/Team';
 export const FullScreenToggle = () => {
 	const [f, setF] = useState<boolean>(!!document.fullscreenElement);
 
-	if (f) {
+	if (f || (window.innerHeight > 800 && window.innerWidth > 800)) {
 		return <></>;
 	}
 	return (
@@ -187,6 +188,9 @@ export const App = (): JSX.Element => {
 	}
 	if (activeTab === 'QUESTS') {
 		return <Quests goBack={() => setActiveTabReducer('MAIN')} />;
+	}
+	if (activeTab === 'BULLETIN_BOARD') {
+		return <BulletinBoard goBack={() => setActiveTabReducer('MAIN')} />;
 	}
 	if (activeTab === 'BAG') {
 		return (

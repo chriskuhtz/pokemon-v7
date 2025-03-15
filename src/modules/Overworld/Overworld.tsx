@@ -140,6 +140,8 @@ export const Overworld = ({
 				interactWithHoneyTree,
 				goToCampMenu: () =>
 					navigateAwayFromOverworldReducer('CAMP_UPGRADES', stepsTaken),
+				goToBulletinBoard: () =>
+					navigateAwayFromOverworldReducer('BULLETIN_BOARD', stepsTaken),
 			}),
 		[
 			addMultipleMessages,

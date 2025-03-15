@@ -158,6 +158,8 @@ const getSource = (occ: Occupant) => {
 			return '/mapObjects/pc.png';
 		case 'SIGN':
 			return '/mapObjects/sign.png';
+		case 'BULLETIN_BOARD':
+			return '/mapObjects/largeInfoSign.png';
 		case 'BUSH':
 			return '/mapObjects/bush.png';
 		case 'HIDDEN_ITEM':

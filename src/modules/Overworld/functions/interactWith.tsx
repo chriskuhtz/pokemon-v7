@@ -24,6 +24,7 @@ export const interactWithFunction = ({
 	goToPosition,
 	interactWithHoneyTree,
 	goToCampMenu,
+	goToBulletinBoard,
 }: {
 	occ: Occupant | undefined;
 	addMultipleMessages: (x: Message[]) => void;
@@ -39,6 +40,7 @@ export const interactWithFunction = ({
 	goToPosition: (x: CharacterLocationData) => void;
 	interactWithHoneyTree: () => void;
 	goToCampMenu: () => void;
+	goToBulletinBoard: () => void;
 }) => {
 	if (!occ) {
 		return;
@@ -123,6 +125,20 @@ export const interactWithFunction = ({
 
 		return;
 	}
+	if (data.type === 'BULLETIN_BOARD') {
+		addMultipleMessages(
+			data.dialogue.map((d, i) => ({
+				message: d,
+				onRemoval:
+					i === data.dialogue.length - 1
+						? () => goToBulletinBoard()
+						: undefined,
+				needsNoConfirmation: true,
+			}))
+		);
+
+		return;
+	}
 	if (data.type === 'NURSE') {
 		addMultipleMessages([
 			...data.dialogue.map((d, i) => ({
@@ -192,7 +208,6 @@ export const interactWithFunction = ({
 
 		return;
 	}
-
 	if (data.type === 'HONEY_TREE') {
 		interactWithHoneyTree();
 		return;

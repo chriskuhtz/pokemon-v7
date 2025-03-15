@@ -15,7 +15,7 @@ const occs: OverworldMap['occupants'] = [
 			'For camp related issues, Camp Manager Kevin can help you',
 			'I have a first request for you and some equipment to get you started',
 		],
-		handledMessage: ['Be careful outside the fence'],
+		handledMessage: ['Check the Bulletin board for more quests'],
 		gifts: { 'poke-ball': 10 },
 		quest: 'catch a pokemon',
 		sprite: SpriteEnum.oak,
@@ -82,6 +82,15 @@ const occs: OverworldMap['occupants'] = [
 		dialogue: ['If we get more famous, we can get more items delivered'],
 		inventory: { 'poke-ball': 1, potion: 1, antidote: 1, repel: 1 },
 		conditionFunction: (s) => s.campUpgrades.basic_market,
+	},
+	{
+		type: 'BULLETIN_BOARD',
+		id: 'camp_bulletin_board',
+		x: 10,
+		y: 10,
+		approachDirection: 'UP',
+		dialogue: ['Looking for new Quests ...'],
+		conditionFunction: (s) => s.campUpgrades.bulletin_board,
 	},
 ];
 

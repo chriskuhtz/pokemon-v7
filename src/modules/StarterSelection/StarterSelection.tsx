@@ -77,8 +77,8 @@ export const StarterSelection = ({
 										? `2px solid ${typeColors['dark']}`
 										: undefined,
 							}}
-							height={battleSpriteSize / (o === chosenStarter ? 1 : 2)}
-							width={battleSpriteSize / (o === chosenStarter ? 1 : 2)}
+							height={battleSpriteSize * (o === chosenStarter ? 3 : 1.5)}
+							width={battleSpriteSize * (o === chosenStarter ? 3 : 1.5)}
 							src={
 								o === chosenStarter
 									? getPokemonSprite(o)
