@@ -1,4 +1,5 @@
 import { OverworldMap } from '../../interfaces/OverworldMap';
+import { SpriteEnum } from '../../interfaces/SpriteEnum';
 
 export const routeN1Occupants: OverworldMap['occupants'] = [
 	{
@@ -51,5 +52,98 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		y: 25,
 		id: 'routeN1_honey_tree',
 		conditionFunction: () => true,
+	},
+];
+
+export const campOccupants: OverworldMap['occupants'] = [
+	{
+		type: 'NPC',
+		id: 'oak_1',
+		x: 5,
+		y: 4,
+		orientation: 'DOWN',
+		unhandledMessage: [
+			'Ah, you made it',
+			'Outside of the fence, the wild Kuma Region awaits',
+			'If your Pokemon are hurt, talk to nurse joy on my right',
+			'For camp related issues, Camp Manager Kevin can help you',
+			'I have a first request for you and some equipment to get you started',
+		],
+		handledMessage: ['Check the Bulletin board for more quests'],
+		gifts: { 'poke-ball': 10 },
+		quest: 'catch a pokemon',
+		sprite: SpriteEnum.oak,
+		conditionFunction: (s) => s.quests['catch a pokemon'] !== 'FULFILLED',
+	},
+	{
+		type: 'NURSE',
+		id: 'camp_nurse',
+		x: 6,
+		y: 4,
+		orientation: 'DOWN',
+		sprite: SpriteEnum.nurse,
+		dialogue: ['Lets heal your Pokemon'],
+		conditionFunction: () => true,
+	},
+	{
+		type: 'CAMP_MANAGER',
+		id: 'camp_manager',
+		x: 4,
+		y: 4,
+		orientation: 'DOWN',
+		dialogue: ['How should we expand our camp?'],
+		sprite: SpriteEnum.butler,
+		conditionFunction: () => true,
+	},
+	{
+		type: 'ON_STEP_PORTAL',
+		x: 10,
+		y: 0,
+		portal: {
+			mapId: 'routeN1',
+			x: 25,
+			y: 49,
+			orientation: 'UP',
+			forwardFoot: 'CENTER1',
+		},
+		id: 'camp_to_routeN1',
+		conditionFunction: () => true,
+	},
+	{
+		type: 'SIGN',
+		x: 11,
+		y: 1,
+		dialogue: ['Route N1, beware of wild pokemon'],
+		approachDirection: 'UP',
+		id: 'routeN1Sign',
+		conditionFunction: () => true,
+	},
+	{
+		type: 'PC',
+		x: 2,
+		y: 1,
+		approachDirection: 'UP',
+		id: 'camp_pc',
+		conditionFunction: () => true,
+	},
+	{
+		type: 'MERCHANT',
+		id: 'basic_market',
+		x: 14,
+		y: 1,
+		orientation: 'DOWN',
+		sprite: SpriteEnum.clerkMale,
+		dialogue: ['If we get more famous, we can get more items delivered'],
+		inventory: { 'poke-ball': 1, potion: 1, antidote: 1, repel: 1 },
+		conditionFunction: (s) => s.campUpgrades.basic_market,
+	},
+	{
+		type: 'BULLETIN_BOARD',
+		id: 'camp_bulletin_board',
+		x: 10,
+		y: 10,
+		approachDirection: 'UP',
+		dialogue: ['Looking for new Quests ...'],
+		conditionFunction: (s) => s.campUpgrades.bulletin_board,
 	},
 ];
