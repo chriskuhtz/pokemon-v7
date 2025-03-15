@@ -23,6 +23,7 @@ const secondaryAilments = [
 	'guard-spec',
 	'dire-hit',
 	'disable',
+	'raging',
 ] as const;
 
 export type SecondaryAilmentType = (typeof secondaryAilments)[number];
