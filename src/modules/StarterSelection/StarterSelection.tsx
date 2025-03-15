@@ -28,7 +28,7 @@ export const StarterSelection = ({
 	const [finished, setFinished] = useState<boolean>(false);
 
 	return finished && name && chosenStarter ? (
-		<div style={{ padding: '0 1rem', backgroundColor: 'white' }}>
+		<Page headline="">
 			<Stack mode="column" alignItems="center">
 				<Sprite id={SpriteEnum['oak']} rotating={false} />
 				<h3>I see, so you are {name}.</h3>
@@ -49,7 +49,7 @@ export const StarterSelection = ({
 				<h3>Safe travels, I will meet you there.</h3>
 				<button onClick={() => proceed(name, chosenStarter)}>Continue</button>
 			</Stack>
-		</div>
+		</Page>
 	) : (
 		<Page headline="Intro:">
 			<Stack mode="column" alignItems="center">
