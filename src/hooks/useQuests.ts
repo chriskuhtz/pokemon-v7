@@ -16,8 +16,9 @@ export const useQuests = (): {
 				const collected = status === 'COLLECTED';
 				const fulfilled = quest.conditionFunction(saveFile);
 				const active = status === 'ACTIVE' && !fulfilled;
+				const inactive = status === 'INACTIVE';
 
-				if (collected || active) {
+				if (collected || active || inactive) {
 					return { name, status };
 				}
 				if (fulfilled) {
