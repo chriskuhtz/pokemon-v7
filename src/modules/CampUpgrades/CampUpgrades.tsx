@@ -28,7 +28,7 @@ export const CampUpgrades = ({
 				addMessage({ message: 'Earn more research points' });
 				return;
 			}
-			addMessage({ message: `Unlocking ${id}` });
+			addMessage({ message: `Unlocked ${id}`, needsNoConfirmation: true });
 			putSaveFileReducer({
 				...saveFile,
 				researchPoints: researchPoints - campUpgradePrices[id],

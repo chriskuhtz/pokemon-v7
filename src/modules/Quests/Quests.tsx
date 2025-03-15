@@ -4,15 +4,17 @@ import {
 	QuestName,
 	QuestsRecord,
 } from '../../constants/checkLists/questsRecord';
+import { battleSpriteSize } from '../../constants/gameData';
 import { getItemUrl } from '../../functions/getItemUrl';
+import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { ItemType } from '../../interfaces/Item';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { battleSpriteSize } from '../../constants/gameData';
 
 export const Quests = ({ goBack }: { goBack: () => void }) => {
+	const { addMessage } = useContext(MessageQueueContext);
 	const { saveFile, fulfillQuestReducer: fulfillQuest } =
 		useContext(SaveFileContext);
 	const { quests } = saveFile;
@@ -62,12 +64,22 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 								fulfilled && !collected && (
 									<button
 										style={{ borderRadius: 9000 }}
-										onClick={() => fulfillQuest(name as QuestName)}
+										onClick={() => {
+											addMessage({
+												message: `Earned ${quest.researchPoints} Research Points`,
+												needsNoConfirmation: true,
+											});
+											fulfillQuest(name as QuestName);
+										}}
 										role="button"
 										tabIndex={0}
 										onKeyDown={(e) => {
 											e.stopPropagation();
 											if (e.key === 'Enter') {
+												addMessage({
+													message: `Earned ${quest.researchPoints} Research Points`,
+													needsNoConfirmation: true,
+												});
 												fulfillQuest(name as QuestName);
 											}
 										}}

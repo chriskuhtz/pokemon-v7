@@ -198,16 +198,6 @@ export const Overworld = ({
 					gap: '1rem',
 				}}
 			>
-				<IoMdMenu
-					onClick={(e) => {
-						e.stopPropagation();
-						e.preventDefault();
-						navigateAwayFromOverworldReducer('MAIN', stepsTaken);
-					}}
-					size={battleSpriteSize}
-				/>
-				<UncollectedQuestsBadge stepsWalked={stepsTaken} />
-				<TeamOverview />
 				<CgZoomIn
 					size={battleSpriteSize}
 					onClick={() => {
@@ -220,12 +210,22 @@ export const Overworld = ({
 				<CgZoomOut
 					size={battleSpriteSize}
 					onClick={() => {
-						if (baseSize === 1) {
+						if (baseSize === 16) {
 							return;
 						}
 						setBaseSize(baseSize / 2);
 					}}
 				/>
+				<IoMdMenu
+					onClick={(e) => {
+						e.stopPropagation();
+						e.preventDefault();
+						navigateAwayFromOverworldReducer('MAIN', stepsTaken);
+					}}
+					size={battleSpriteSize}
+				/>
+				<UncollectedQuestsBadge stepsWalked={stepsTaken} />
+				<TeamOverview />
 			</div>
 			<div
 				style={{

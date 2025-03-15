@@ -3,21 +3,28 @@ import { Banner } from '../../../uiComponents/Banner/Banner';
 
 export const IntroBanner = ({ dexIds }: { dexIds: number[] }): JSX.Element => {
 	return (
-		<Banner>
-			<div
-				style={{
-					display: 'flex',
-					alignItems: 'center',
-					padding: '1rem',
-					gap: '2rem',
-					backgroundColor: 'white',
-				}}
-			>
-				Lets go!{' '}
-				{dexIds.map((t) => (
-					<img key={t} src={getPokemonSprite(t, 'back')} />
-				))}
-			</div>
-		</Banner>
+		<div
+			style={{
+				height: '100dvh',
+				width: '100dvw',
+				backgroundColor: 'white',
+			}}
+		>
+			<Banner>
+				<div
+					style={{
+						display: 'flex',
+						alignItems: 'center',
+						padding: '1rem',
+						gap: '2rem',
+					}}
+				>
+					Lets go!{' '}
+					{dexIds.map((t) => (
+						<img key={t} src={getPokemonSprite(t, 'back')} />
+					))}
+				</div>
+			</Banner>
+		</div>
 	);
 };

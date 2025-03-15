@@ -58,6 +58,7 @@ export const interactWithFunction = ({
 			{
 				message: `Found ${data.amount} ${data.item}`,
 				onRemoval: () => handleThisOccupant(occ),
+				needsNoConfirmation: true,
 			},
 		]);
 		return;

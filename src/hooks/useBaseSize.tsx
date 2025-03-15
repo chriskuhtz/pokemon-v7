@@ -5,7 +5,7 @@ export const BaseSizeContext = React.createContext(
 );
 
 export const BaseSizeProvider = ({ children }: { children: ReactNode }) => {
-	const [baseSize, setBaseSize] = useState<number>(16);
+	const [baseSize, setBaseSize] = useState<number>(64);
 
 	return (
 		<BaseSizeContext.Provider value={{ baseSize, setBaseSize }}>

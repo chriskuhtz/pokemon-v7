@@ -44,7 +44,7 @@ export const useHoneyTree = () => {
 		if (honeySuccess) {
 			addMultipleMessages([
 				{ message: 'You rub some honey on the bark of the tree...' },
-				{ message: '... and hide nearby' },
+				{ message: '... and hide nearby', needsNoConfirmation: true },
 				{ message: '...waiting', needsNoConfirmation: true },
 				{ message: '..waiting.', needsNoConfirmation: true },
 				{ message: '.waiting..', needsNoConfirmation: true },
@@ -84,9 +84,9 @@ export const useHoneyTree = () => {
 		} else {
 			addMultipleMessages([
 				{ message: 'You rub some honey on the bark of the tree...' },
-				{ message: '... and hide nearby' },
-				{ message: '...waiting' },
-				{ message: '..waiting.' },
+				{ message: '... and hide nearby', needsNoConfirmation: true },
+				{ message: '...waiting', needsNoConfirmation: true },
+				{ message: '..waiting.', needsNoConfirmation: true },
 				{
 					message: 'No Pokemon seem interested in the honey',
 					onRemoval: () => {
