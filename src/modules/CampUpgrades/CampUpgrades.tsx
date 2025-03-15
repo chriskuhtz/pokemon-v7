@@ -40,12 +40,14 @@ export const CampUpgrades = ({
 				<h2>Research Points: {researchPoints}</h2>
 				{campUpgradeNames.map((upgrade) => (
 					<Card
+						key={upgrade}
 						disabled={researchPoints < campUpgradePrices[upgrade]}
+						onClick={() => unlock(upgrade)}
 						content={<h3>{upgrade}</h3>}
 						actionElements={
 							campUpgrades[upgrade]
 								? [<FaCheckCircle size={baseSize / 2} />]
-								: [<strong onClick={() => unlock(upgrade)}>Unlock</strong>]
+								: []
 						}
 						icon={<FaShoppingCart size={baseSize / 2} />}
 					/>

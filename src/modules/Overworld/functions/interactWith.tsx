@@ -1,12 +1,14 @@
 import { getOppositeDirection } from '../../../functions/getOppositeDirection';
 import { Message } from '../../../hooks/useMessageQueue';
 import { Inventory } from '../../../interfaces/Inventory';
-import { Occupant } from '../../../interfaces/OverworldMap';
+import { Occupant, OccupantType } from '../../../interfaces/OverworldMap';
 import {
 	CharacterLocationData,
 	CharacterOrientation,
 } from '../../../interfaces/SaveFile';
 
+export const shouldRotate = (t: OccupantType) =>
+	['NURSE', 'NPC', 'MERCHANT', 'CAMP_MANAGER', 'TRAINER'].includes(t);
 export const interactWithFunction = ({
 	occ,
 	addMultipleMessages,
@@ -42,6 +44,10 @@ export const interactWithFunction = ({
 		return;
 	}
 	const data = occ;
+
+	if (shouldRotate(data.type)) {
+		rotateOccupant(occ.id, getOppositeDirection(playerLocation.orientation));
+	}
 
 	if (data.type === 'PORTAL') {
 		goToPosition(data.portal);
@@ -132,8 +138,6 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'NPC') {
-		rotateOccupant(occ.id, getOppositeDirection(playerLocation.orientation));
-
 		if (!handledOccupants.includes(occ.id)) {
 			addMultipleMessages(
 				[

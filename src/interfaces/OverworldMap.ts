@@ -89,7 +89,6 @@ export interface OverworldBush extends BaseOccupant {
 export interface OverworldHoneyTree extends BaseOccupant {
 	type: 'HONEY_TREE';
 }
-
 export interface OverworldTrainer extends BaseOccupant {
 	type: 'TRAINER';
 	orientation: CharacterOrientation;
