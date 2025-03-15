@@ -168,4 +168,5 @@ export const extraFeatureCheckList: {
 	{ name: 'frozen shader' },
 	{ name: 'sleep shader' },
 	{ name: 'even prettier stat display' },
+	{ name: 'Bag capacity' },
 ];

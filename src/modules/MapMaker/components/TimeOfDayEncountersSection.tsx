@@ -24,6 +24,7 @@ export const TimeOfDayEncountersSection = ({
 			<h2>{time}</h2>
 			{encounters.map((p) => (
 				<Card
+					key={p.dexId + time + xp}
 					icon={
 						<img
 							style={{ padding: '0.5rem' }}
@@ -43,6 +44,7 @@ export const TimeOfDayEncountersSection = ({
 			></input>
 			<input
 				placeholder="XP"
+				type="number"
 				value={xp}
 				onChange={(e) => setXp(Number.parseInt(e.target.value))}
 			></input>

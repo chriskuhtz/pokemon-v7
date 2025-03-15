@@ -17,6 +17,7 @@ export const EncountersTab = ({
 				{Object.entries(newMap.possibleEncounters).map(([time, encounters]) => {
 					return (
 						<TimeOfDayEncountersSection
+							key={time}
 							time={time as TimeOfDay}
 							encounters={encounters}
 							addEncounter={addEncounter}
