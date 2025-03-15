@@ -34,6 +34,7 @@ export const MapEditor = ({
 		addOccupant,
 		removeOccupant,
 		usedTiles,
+		randomFill,
 	} = useMapEditor({
 		tool,
 		initialMap,
@@ -65,6 +66,7 @@ export const MapEditor = ({
 						addRow={addRow}
 						clearLayer={clearLayer}
 						changeTile={changeTile}
+						randomFill={randomFill}
 					/>
 				</>
 			)}

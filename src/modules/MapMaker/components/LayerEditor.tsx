@@ -9,6 +9,7 @@ export const LayerEditor = ({
 	addRow,
 	changeRow,
 	changeColumn,
+	randomFill,
 }: {
 	layerName: LayerName;
 	layer: (TileIdentifier | null)[][];
@@ -18,10 +19,20 @@ export const LayerEditor = ({
 	changeRow: (index: number) => void;
 	changeTile: (i: number, j: number, layer: LayerName) => void;
 	clear: () => void;
+	randomFill: (layer: LayerName, percentage: number) => void;
 }) => {
 	return (
 		<>
-			<h3>{layerName}:</h3>
+			<h3>
+				{' '}
+				<button
+					style={{ color: 'white', marginRight: '1rem' }}
+					onClick={() => randomFill(layerName, 0.1)}
+				>
+					Random 10%
+				</button>
+				{layerName}:
+			</h3>
 			<div
 				style={{
 					padding: '2rem',

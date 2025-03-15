@@ -11,6 +11,7 @@ export const TileMapTab = ({
 	changeTile,
 	changeRow,
 	clearLayer,
+	randomFill,
 }: {
 	newMap: OverworldMap;
 	addColumn: () => void;
@@ -19,6 +20,7 @@ export const TileMapTab = ({
 	clearLayer: (layer: LayerName) => void;
 	changeRow: (i: number, layer: LayerName) => void;
 	changeColumn: (j: number, layer: LayerName) => void;
+	randomFill: (layer: LayerName, percentage: number) => void;
 }) => {
 	return (
 		<div>
@@ -32,6 +34,7 @@ export const TileMapTab = ({
 					clear={() => clearLayer('Base')}
 					changeRow={(index) => changeRow(index, 'Base')}
 					changeColumn={(index) => changeColumn(index, 'Base')}
+					randomFill={randomFill}
 				/>
 				<LayerEditor
 					addColumn={addColumn}
@@ -42,6 +45,7 @@ export const TileMapTab = ({
 					clear={() => clearLayer('Encounter')}
 					changeRow={(index) => changeRow(index, 'Encounter')}
 					changeColumn={(index) => changeColumn(index, 'Encounter')}
+					randomFill={randomFill}
 				/>
 				<LayerEditor
 					addColumn={addColumn}
@@ -52,6 +56,7 @@ export const TileMapTab = ({
 					clear={() => clearLayer('Decoration')}
 					changeRow={(index) => changeRow(index, 'Decoration')}
 					changeColumn={(index) => changeColumn(index, 'Decoration')}
+					randomFill={randomFill}
 				/>
 				<LayerEditor
 					addColumn={addColumn}
@@ -62,6 +67,7 @@ export const TileMapTab = ({
 					clear={() => clearLayer('Obstacle')}
 					changeRow={(index) => changeRow(index, 'Obstacle')}
 					changeColumn={(index) => changeColumn(index, 'Obstacle')}
+					randomFill={randomFill}
 				/>
 				<LayerEditor
 					addColumn={addColumn}
@@ -72,6 +78,7 @@ export const TileMapTab = ({
 					clear={() => clearLayer('Foreground')}
 					changeRow={(index) => changeRow(index, 'Foreground')}
 					changeColumn={(index) => changeColumn(index, 'Foreground')}
+					randomFill={randomFill}
 				/>
 				<CombinedCanvas map={newMap.tileMap} tileSize={16} />
 				<br />

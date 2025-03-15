@@ -348,6 +348,52 @@ export const useMapEditor = ({
 					: newMap.tileMap.foregroundLayer,
 		}));
 	};
+	const randomFill = (layer: LayerName, percentage: number) => {
+		if (tool?.type !== 'tileplacer') {
+			return;
+		}
+		if (layer === 'Base') {
+			return;
+		}
+
+		const updatedMap = {
+			...newMap,
+			tileMap: {
+				baseLayer: newMap.tileMap.baseLayer,
+				encounterLayer:
+					layer === 'Encounter'
+						? newMap.tileMap.encounterLayer.map((row) =>
+								row.map((c) => (Math.random() < percentage ? tool.tile : c))
+						  )
+						: newMap.tileMap.encounterLayer,
+				obstacleLayer:
+					layer === 'Obstacle'
+						? newMap.tileMap.obstacleLayer.map((row) => {
+								return row.map((c) => {
+									return Math.random() < percentage ? tool.tile : c;
+								});
+						  })
+						: newMap.tileMap.obstacleLayer,
+				decorationLayer:
+					layer === 'Decoration'
+						? newMap.tileMap.decorationLayer.map((row) => {
+								return row.map((c) => {
+									return Math.random() < percentage ? tool.tile : c;
+								});
+						  })
+						: newMap.tileMap.decorationLayer,
+				foregroundLayer:
+					layer === 'Decoration'
+						? newMap.tileMap.foregroundLayer.map((row) => {
+								return row.map((c) => {
+									return Math.random() < percentage ? tool.tile : c;
+								});
+						  })
+						: newMap.tileMap.foregroundLayer,
+			},
+		};
+		setNewMap(updatedMap);
+	};
 
 	const addEncounter = (dexId: number, xp: number, timeOfDay: TimeOfDay) => {
 		setNewMap({
@@ -394,5 +440,6 @@ export const useMapEditor = ({
 		addOccupant,
 		removeOccupant,
 		usedTiles,
+		randomFill,
 	};
 };
