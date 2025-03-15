@@ -46,10 +46,10 @@ export const FullScreenToggle = () => {
 			<button
 				style={{ color: 'white', borderColor: 'white' }}
 				onClick={() => {
+					setF(true);
 					document
 						.getElementById('root')
 						?.requestFullscreen({ navigationUI: 'hide' });
-					setF(true);
 				}}
 			>
 				Enter FullScreen mode
