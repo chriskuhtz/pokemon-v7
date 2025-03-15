@@ -17,10 +17,10 @@ export const CampUpgrades = ({
 }: {
 	goBack: () => void;
 }): JSX.Element => {
-	const {
-		saveFile: { campUpgrades, researchPoints },
-	} = useContext(SaveFileContext);
+	const { saveFile, putSaveFileReducer } = useContext(SaveFileContext);
 	const { addMessage } = useContext(MessageQueueContext);
+
+	const { campUpgrades, researchPoints } = saveFile;
 
 	const unlock = useCallback(
 		(id: CampUpgrade) => {
@@ -28,8 +28,14 @@ export const CampUpgrades = ({
 				addMessage({ message: 'Earn more research points' });
 				return;
 			}
+			addMessage({ message: `Unlocking ${id}` });
+			putSaveFileReducer({
+				...saveFile,
+				researchPoints: researchPoints - campUpgradePrices[id],
+				campUpgrades: { ...campUpgrades, [id]: true },
+			});
 		},
-		[addMessage, researchPoints]
+		[addMessage, campUpgrades, putSaveFileReducer, researchPoints, saveFile]
 	);
 	return (
 		<Page headline="Main Menu:" goBack={goBack}>

@@ -55,6 +55,34 @@ const occs: OverworldMap['occupants'] = [
 		id: 'camp_to_routeN1',
 		conditionFunction: () => true,
 	},
+	{
+		type: 'SIGN',
+		x: 11,
+		y: 1,
+		dialogue: ['Route N1, beware of wild pokemon'],
+		approachDirection: 'UP',
+		id: 'routeN1Sign',
+		conditionFunction: () => true,
+	},
+	{
+		type: 'PC',
+		x: 2,
+		y: 1,
+		approachDirection: 'UP',
+		id: 'camp_pc',
+		conditionFunction: () => true,
+	},
+	{
+		type: 'MERCHANT',
+		id: 'basic_market',
+		x: 14,
+		y: 1,
+		orientation: 'DOWN',
+		sprite: SpriteEnum.clerkMale,
+		dialogue: ['If we get more famous, we can get more items delivered'],
+		inventory: { 'poke-ball': 1, potion: 1, antidote: 1, repel: 1 },
+		conditionFunction: (s) => s.campUpgrades.basic_market,
+	},
 ];
 
 export const camp: OverworldMap = {
