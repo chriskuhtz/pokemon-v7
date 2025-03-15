@@ -2,7 +2,7 @@ import { useContext, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 import { testPokemon } from './constants/gameData';
 import { mapsRecord } from './constants/maps/mapsRecord';
-import { Message } from './hooks/useMessageQueue';
+import { MessageQueueContext } from './hooks/useMessageQueue';
 import { SaveFileContext } from './hooks/useSaveFile';
 import { generateInventory, Inventory } from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
@@ -57,15 +57,9 @@ export const FullScreenToggle = () => {
 		</div>
 	);
 };
-export const App = ({
-	latestMessage,
-	addMessage,
-	addMultipleMessages,
-}: {
-	latestMessage: Message | undefined;
-	addMessage: (message: Message) => void;
-	addMultipleMessages: (newMessages: Message[]) => void;
-}): JSX.Element => {
+export const App = (): JSX.Element => {
+	const { latestMessage, addMessage, addMultipleMessages } =
+		useContext(MessageQueueContext);
 	const [currentMarketInventory, setCurrentMarketInventory] = useState<
 		Partial<Inventory>
 	>({});

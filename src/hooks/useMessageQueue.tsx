@@ -11,7 +11,7 @@ export interface Message {
 	message: string;
 	onRemoval?: () => void;
 	clearStackOnRemoval?: boolean;
-	needsConfirmation?: boolean;
+	needsNoConfirmation?: boolean;
 }
 
 export interface UseMessageQueue {
@@ -44,7 +44,7 @@ export const useMessageQueue = (speed?: number): UseMessageQueue => {
 		if (messages.length === 0) {
 			return;
 		}
-		if (messages[0].needsConfirmation) {
+		if (!messages[0].needsNoConfirmation) {
 			return;
 		}
 		const t = setTimeout(() => {

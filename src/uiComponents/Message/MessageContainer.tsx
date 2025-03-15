@@ -5,12 +5,8 @@ import { SaveFileProvider } from '../../hooks/useSaveFile';
 import { Banner } from '../Banner/Banner';
 
 export const MessageContainer = () => {
-	const {
-		confirmLatestMessage,
-		addMessage,
-		latestMessage,
-		addMultipleMessages,
-	} = useContext(MessageQueueContext);
+	const { confirmLatestMessage, addMessage, latestMessage } =
+		useContext(MessageQueueContext);
 
 	return (
 		<>
@@ -21,11 +17,7 @@ export const MessageContainer = () => {
 			)}
 			<SaveFileProvider addMessage={addMessage}>
 				<FullScreenToggle />
-				<App
-					addMessage={addMessage}
-					latestMessage={latestMessage}
-					addMultipleMessages={addMultipleMessages}
-				/>
+				<App />
 			</SaveFileProvider>
 		</>
 	);
