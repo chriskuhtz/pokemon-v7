@@ -1,5 +1,5 @@
 import { CSSProperties, ReactNode } from 'react';
-import { baseSize } from '../../constants/gameData';
+import { baseSize, battleSpriteSize } from '../../constants/gameData';
 
 export const IconSolarSystem = ({
 	sun,
@@ -51,11 +51,15 @@ export const IconSolarSystem = ({
 					style={{
 						position: 'absolute',
 						top: `${-baseSize / 6}px`,
-						left: `${baseSize / 2}px`,
+						left: `${battleSpriteSize}px`,
 					}}
 				>
 					{typeof firstPlanet === 'string' ? (
-						<img height={baseSize / 2} width={baseSize / 2} src={firstPlanet} />
+						<img
+							height={battleSpriteSize}
+							width={battleSpriteSize}
+							src={firstPlanet}
+						/>
 					) : (
 						firstPlanet
 					)}
@@ -69,8 +73,8 @@ export const IconSolarSystem = ({
 						top: `${baseSize / 16}px`,
 						right: `${-baseSize / 16}px`,
 					}}
-					height={baseSize / 2}
-					width={baseSize / 2}
+					height={battleSpriteSize}
+					width={battleSpriteSize}
 					src={secondPlanetUrl}
 				/>
 			)}
@@ -79,11 +83,11 @@ export const IconSolarSystem = ({
 				<img
 					style={{
 						position: 'absolute',
-						top: `${baseSize / 2}px`,
+						top: `${battleSpriteSize}px`,
 						right: `${-baseSize / 4}px`,
 					}}
-					height={baseSize / 2}
-					width={baseSize / 2}
+					height={battleSpriteSize}
+					width={battleSpriteSize}
 					src={thirdPlanetUrl}
 				/>
 			)}
@@ -94,8 +98,8 @@ export const IconSolarSystem = ({
 						top: `${baseSize}px`,
 						right: `${-baseSize / 16}px`,
 					}}
-					height={baseSize / 2}
-					width={baseSize / 2}
+					height={battleSpriteSize}
+					width={battleSpriteSize}
 					src={fourthPlanetUrl}
 				/>
 			)}
@@ -104,10 +108,10 @@ export const IconSolarSystem = ({
 					style={{
 						position: 'absolute',
 						top: `${(baseSize * 7.5) / 6}px`,
-						left: `${baseSize / 2}px`,
+						left: `${battleSpriteSize}px`,
 					}}
-					height={baseSize / 2}
-					width={baseSize / 2}
+					height={battleSpriteSize}
+					width={battleSpriteSize}
 					src={fifthPlanetUrl}
 				/>
 			)}

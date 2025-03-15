@@ -6,7 +6,7 @@ import { EmptyStatObject } from '../interfaces/StatObject';
 export const frames = 16;
 export const fps = 1000 / 16;
 export const baseSize = 64;
-export const battleSpriteSize = baseSize * 2;
+export const battleSpriteSize = 32;
 export const animationTimer = 16000 / frames;
 
 export const testPokemon: OwnedPokemon = {

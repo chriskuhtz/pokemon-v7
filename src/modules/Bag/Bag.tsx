@@ -6,7 +6,6 @@ import { ThrowAwayAction } from '../../components/ItemCard/components/ThrowAwayA
 import { ItemCard } from '../../components/ItemCard/ItemCard';
 import { useFilteredInventory } from '../../components/ItemsFilter/ItemsFilter';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
-import { baseSize } from '../../constants/gameData';
 import { canBenefitFromItem } from '../../functions/canBenefitFromItem';
 import { useEscapeRope } from '../../hooks/useEscapeRope';
 import { Inventory } from '../../interfaces/Inventory';
@@ -19,6 +18,7 @@ import {
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import { battleSpriteSize } from '../../constants/gameData';
 
 export const Bag = ({
 	inventory,
@@ -72,7 +72,7 @@ export const Bag = ({
 												}
 											}}
 											onClick={() => applyEscapeRope()}
-											size={baseSize / 2}
+											size={battleSpriteSize}
 										/>
 									),
 								].filter((e) => e !== undefined)}
@@ -112,7 +112,7 @@ export const Bag = ({
 											}
 										}}
 										onClick={() => applySacredAsh()}
-										size={baseSize / 2}
+										size={battleSpriteSize}
 									/>
 								) : (
 									<></>
@@ -128,7 +128,7 @@ export const Bag = ({
 											}
 										}}
 										onClick={() => applyEncounterRateModifierItem(item)}
-										size={baseSize / 2}
+										size={battleSpriteSize}
 									/>
 								) : (
 									<></>

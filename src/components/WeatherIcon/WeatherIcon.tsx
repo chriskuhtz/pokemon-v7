@@ -1,16 +1,18 @@
 import { FaCloudRain } from 'react-icons/fa';
 import { WiSandstorm } from 'react-icons/wi';
-import { baseSize } from '../../constants/gameData';
 import { WeatherType } from '../../interfaces/Weather';
+import { battleSpriteSize } from '../../constants/gameData';
 
 export const WeatherIcon = ({ weather }: { weather?: WeatherType }) => {
 	return (
 		<>
 			{weather === 'rain' ||
-				(weather === 'rain_effectless' && <FaCloudRain size={baseSize / 2} />)}
+				(weather === 'rain_effectless' && (
+					<FaCloudRain size={battleSpriteSize} />
+				))}
 			{weather === 'sandstorm' ||
 				(weather === 'sandstorm_effectless' && (
-					<WiSandstorm size={baseSize / 2} />
+					<WiSandstorm size={battleSpriteSize} />
 				))}
 		</>
 	);

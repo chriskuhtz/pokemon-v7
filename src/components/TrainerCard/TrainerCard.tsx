@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { BsCashCoin } from 'react-icons/bs';
-import { baseSize } from '../../constants/gameData';
+import { baseSize, battleSpriteSize } from '../../constants/gameData';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Card } from '../../uiComponents/Card/Card';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
@@ -43,7 +43,7 @@ export const TrainerCard = () => {
 					</div>
 				</div>
 			}
-			icon={<BsCashCoin size={baseSize / 2} />}
+			icon={<BsCashCoin size={battleSpriteSize} />}
 			actionElements={[]}
 		/>
 	);

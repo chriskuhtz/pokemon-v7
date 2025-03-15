@@ -1,4 +1,4 @@
-import { baseSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { useNavigate } from '../../hooks/useNavigate';
@@ -31,8 +31,8 @@ export const FossilReviver = (): JSX.Element => {
 									>
 										Revive{' '}
 										<img
-											height={baseSize / 2}
-											width={baseSize / 2}
+											height={battleSpriteSize}
+											width={battleSpriteSize}
 											src={getPokemonSprite(fossilTable[f])}
 										/>
 									</button>,

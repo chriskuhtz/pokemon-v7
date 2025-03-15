@@ -5,7 +5,7 @@ import {
 	campUpgradeNames,
 	campUpgradePrices,
 } from '../../constants/campUpgrades';
-import { baseSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Card } from '../../uiComponents/Card/Card';
@@ -52,10 +52,10 @@ export const CampUpgrades = ({
 						content={<h3>{upgrade}</h3>}
 						actionElements={
 							campUpgrades[upgrade]
-								? [<FaCheckCircle size={baseSize / 2} />]
+								? [<FaCheckCircle size={battleSpriteSize} />]
 								: [<strong>Unlock</strong>]
 						}
-						icon={<FaShoppingCart size={baseSize / 2} />}
+						icon={<FaShoppingCart size={battleSpriteSize} />}
 					/>
 				))}
 			</Stack>

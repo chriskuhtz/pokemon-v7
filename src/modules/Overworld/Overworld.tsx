@@ -5,7 +5,7 @@ import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 
 import { CombinedCanvas } from '../../components/CombinedCanvas/CombinedCanvas';
-import { baseSize, fps } from '../../constants/gameData';
+import { baseSize, battleSpriteSize, fps } from '../../constants/gameData';
 import { mapsRecord } from '../../constants/maps/mapsRecord';
 import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
@@ -201,7 +201,7 @@ export const Overworld = ({
 						e.preventDefault();
 						navigateAwayFromOverworldReducer('MAIN', stepsTaken);
 					}}
-					size={baseSize / 2}
+					size={battleSpriteSize}
 				/>
 				<UncollectedQuestsBadge stepsWalked={stepsTaken} />
 				<TeamOverview />

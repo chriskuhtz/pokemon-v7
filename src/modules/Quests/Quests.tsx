@@ -4,13 +4,13 @@ import {
 	QuestName,
 	QuestsRecord,
 } from '../../constants/checkLists/questsRecord';
-import { baseSize } from '../../constants/gameData';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { ItemType } from '../../interfaces/Item';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import { battleSpriteSize } from '../../constants/gameData';
 
 export const Quests = ({ goBack }: { goBack: () => void }) => {
 	const { saveFile, fulfillQuestReducer: fulfillQuest } =
@@ -41,7 +41,7 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 					return (
 						<Card
 							key={name}
-							icon={<MdCatchingPokemon size={baseSize / 2} />}
+							icon={<MdCatchingPokemon size={battleSpriteSize} />}
 							content={
 								<div>
 									<h3>{name}</h3>

@@ -1,4 +1,4 @@
-import { baseSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData';
 import { BattleMove } from '../../interfaces/BattlePokemon';
 import { Card } from '../../uiComponents/Card/Card';
 
@@ -21,7 +21,7 @@ export const MoveCard = ({
 			onClick={onClick}
 			icon={
 				<img
-					height={baseSize / 2}
+					height={battleSpriteSize}
 					src={`/typeIcons/${move.data.type.name}.png`}
 				/>
 			}

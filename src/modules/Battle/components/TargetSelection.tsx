@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
-import { baseSize } from '../../../constants/gameData';
+import { baseSize, battleSpriteSize } from '../../../constants/gameData';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { isPlayerPokemon } from '../../../functions/getPlayerPokemon';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
@@ -51,7 +51,7 @@ export function TargetSelection({
 			>
 				<IoIosArrowBack
 					role="button"
-					size={baseSize / 2}
+					size={battleSpriteSize}
 					tabIndex={0}
 					onClick={() => setChosenAction(undefined)}
 					onKeyDown={(e) => {

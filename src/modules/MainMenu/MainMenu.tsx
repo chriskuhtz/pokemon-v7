@@ -7,10 +7,10 @@ import { Stack } from '../../uiComponents/Stack/Stack';
 import { useContext, useState } from 'react';
 import { GoTasklist } from 'react-icons/go';
 import { TrainerCard } from '../../components/TrainerCard/TrainerCard';
-import { baseSize } from '../../constants/gameData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { useQuests } from '../../hooks/useQuests';
+import { battleSpriteSize } from '../../constants/gameData';
 
 export const MainMenu = ({
 	goBack,
@@ -31,19 +31,19 @@ export const MainMenu = ({
 				<Card
 					onClick={() => navigate('MAIN', 'BAG')}
 					content={<h4>Bag</h4>}
-					icon={<BsBackpack4 size={baseSize / 2} />}
+					icon={<BsBackpack4 size={battleSpriteSize} />}
 					actionElements={[]}
 				/>
 				<Card
 					onClick={() => navigate('MAIN', 'TEAM')}
 					content={<h4>Team</h4>}
-					icon={<MdCatchingPokemon size={baseSize / 2} />}
+					icon={<MdCatchingPokemon size={battleSpriteSize} />}
 					actionElements={[]}
 				/>
 				<Card
 					onClick={() => navigate('MAIN', 'QUESTS')}
 					content={<h4>Quests</h4>}
-					icon={<GoTasklist size={baseSize / 2} />}
+					icon={<GoTasklist size={battleSpriteSize} />}
 					actionElements={
 						numberOfUncollected > 0
 							? [<strong>Uncollected: {numberOfUncollected}</strong>]
@@ -75,25 +75,25 @@ export const MainMenu = ({
 				{/* <Card
 					onClick={() => navigate('MAIN', 'FARM')}
 					content={<h4>FARM</h4>}
-					icon={<GoTasklist size={baseSize / 2} />}
+					icon={<GoTasklist size={battleSpriteSize} />}
 					actionElements={[]}
 				/>
 				<Card
 					onClick={() => navigate('MAIN', 'FOSSIL_REVIVER')}
 					content={<h4>FOSSIL REVIVER</h4>}
-					icon={<GoTasklist size={baseSize / 2} />}
+					icon={<GoTasklist size={battleSpriteSize} />}
 					actionElements={[]}
 				/> */}
 				{/* <Card
 					onClick={() => navigate('MAIN', 'MAP_MAKER_CAMP')}
 					content={<h4>Map Maker Camp</h4>}
-					icon={<GoTasklist size={baseSize / 2} />}
+					icon={<GoTasklist size={battleSpriteSize} />}
 					actionElements={[]}
 				/>{' '}
 				<Card
 					onClick={() => navigate('MAIN', 'MAP_MAKER_ROUTEN1')}
 					content={<h4>Map Maker RouteN1</h4>}
-					icon={<GoTasklist size={baseSize / 2} />}
+					icon={<GoTasklist size={battleSpriteSize} />}
 					actionElements={[]}
 				/> */}
 			</Stack>

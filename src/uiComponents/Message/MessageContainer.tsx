@@ -1,10 +1,10 @@
 import { useContext } from 'react';
+import { FaRegCircleCheck } from 'react-icons/fa6';
 import { App, FullScreenToggle } from '../../App';
-import { baseSize } from '../../constants/gameData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileProvider } from '../../hooks/useSaveFile';
 import { Banner } from '../Banner/Banner';
-import { FaRegCircleCheck } from 'react-icons/fa6';
+import { battleSpriteSize } from '../../constants/gameData';
 
 export const MessageContainer = () => {
 	const { confirmLatestMessage, addMessage, latestMessage } =
@@ -17,7 +17,7 @@ export const MessageContainer = () => {
 					<h2 style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
 						{latestMessage?.message}{' '}
 						{!latestMessage.needsNoConfirmation && (
-							<FaRegCircleCheck size={baseSize / 2} />
+							<FaRegCircleCheck size={battleSpriteSize} />
 						)}
 					</h2>
 				</Banner>
