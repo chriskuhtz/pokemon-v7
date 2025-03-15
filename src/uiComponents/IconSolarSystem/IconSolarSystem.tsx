@@ -1,6 +1,5 @@
-import { CSSProperties, ReactNode, useContext } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 import { battleSpriteSize } from '../../constants/gameData';
-import { BaseSizeContext } from '../../hooks/useBaseSize';
 
 export const IconSolarSystem = ({
 	sun,
@@ -19,12 +18,11 @@ export const IconSolarSystem = ({
 	fifthPlanetUrl?: string;
 	onClick?: () => void;
 }) => {
-	const { baseSize } = useContext(BaseSizeContext);
 	return (
 		<div
 			style={{
-				width: `${baseSize * 1.5}px`,
-				height: `${baseSize * 1.5}px`,
+				width: `${64 * 1.5}px`,
+				height: `${64 * 1.5}px`,
 				position: 'relative',
 			}}
 		>
@@ -42,9 +40,9 @@ export const IconSolarSystem = ({
 					...sun.styles,
 					border: '2px solid black',
 					borderRadius: '9000px',
-					width: baseSize,
-					height: baseSize,
-					padding: baseSize * 0.25,
+					width: 64,
+					height: 64,
+					padding: 64 * 0.25,
 				}}
 				src={sun.url}
 			/>
@@ -52,7 +50,7 @@ export const IconSolarSystem = ({
 				<div
 					style={{
 						position: 'absolute',
-						top: `${-baseSize / 6}px`,
+						top: `${-64 / 6}px`,
 						left: `${battleSpriteSize}px`,
 					}}
 				>
@@ -72,8 +70,8 @@ export const IconSolarSystem = ({
 				<img
 					style={{
 						position: 'absolute',
-						top: `${baseSize / 16}px`,
-						right: `${-baseSize / 16}px`,
+						top: `${64 / 16}px`,
+						right: `${-64 / 16}px`,
 					}}
 					height={battleSpriteSize}
 					width={battleSpriteSize}
@@ -86,7 +84,7 @@ export const IconSolarSystem = ({
 					style={{
 						position: 'absolute',
 						top: `${battleSpriteSize}px`,
-						right: `${-baseSize / 4}px`,
+						right: `${-64 / 4}px`,
 					}}
 					height={battleSpriteSize}
 					width={battleSpriteSize}
@@ -97,8 +95,8 @@ export const IconSolarSystem = ({
 				<img
 					style={{
 						position: 'absolute',
-						top: `${baseSize}px`,
-						right: `${-baseSize / 16}px`,
+						top: `${64}px`,
+						right: `${-64 / 16}px`,
 					}}
 					height={battleSpriteSize}
 					width={battleSpriteSize}
@@ -109,7 +107,7 @@ export const IconSolarSystem = ({
 				<img
 					style={{
 						position: 'absolute',
-						top: `${(baseSize * 7.5) / 6}px`,
+						top: `${(64 * 7.5) / 6}px`,
 						left: `${battleSpriteSize}px`,
 					}}
 					height={battleSpriteSize}
