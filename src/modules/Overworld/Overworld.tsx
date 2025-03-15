@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { useCallback, useContext, useMemo, useState } from 'react';
 import { IoMdMenu } from 'react-icons/io';
 import { TeamOverview } from '../../components/TeamOverview/TeamOverview';
 import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
@@ -18,11 +18,7 @@ import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
 import { Occupant } from '../../interfaces/OverworldMap';
-import {
-	CharacterLocationData,
-	CharacterOrientation,
-	SaveFile,
-} from '../../interfaces/SaveFile';
+import { CharacterLocationData, SaveFile } from '../../interfaces/SaveFile';
 import './Overworld.css';
 import { ClickerGrid } from './components/ClickerGrid';
 import { UncollectedQuestsBadge } from './components/UncollectedQuestsBadge';
@@ -31,46 +27,13 @@ import { useClickTarget } from './hooks/useClickTarget';
 import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
+import { useOccupants } from './hooks/useOccupants';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
 import { useStartEncounter } from './hooks/useStartEncounter';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
 const occupantsCanvasId = 'occs';
-
-const useOccupants = () => {
-	const { saveFile } = useContext(SaveFileContext);
-	const map = useMemo(
-		() => mapsRecord[saveFile.location.mapId],
-		[saveFile.location.mapId]
-	);
-
-	const [statefulOccupants, setStatefulOccupants] = useState<Occupant[]>([]);
-	useEffect(() => {
-		setStatefulOccupants(map.occupants);
-	}, [map]);
-
-	const conditionalOccupants = useMemo(() => {
-		return statefulOccupants.filter(
-			(m) => m.conditionFunction(saveFile) === true
-		);
-	}, [saveFile, statefulOccupants]);
-
-	const rotateOccupant = useCallback(
-		(id: string, newOrientation: CharacterOrientation) =>
-			setStatefulOccupants((os) =>
-				os.map((o) => {
-					if (o.id === id) {
-						return { ...o, orientation: newOrientation };
-					}
-					return o;
-				})
-			),
-		[]
-	);
-
-	return { rotateOccupant, occupants: conditionalOccupants };
-};
 
 export const Overworld = ({
 	playerLocation,
@@ -227,7 +190,7 @@ export const Overworld = ({
 					size={battleSpriteSize}
 				/>
 				<UncollectedQuestsBadge stepsWalked={stepsTaken} />
-				<TeamOverview />
+				<TeamOverview steps={stepsTaken} />
 			</div>
 			<div
 				style={{
