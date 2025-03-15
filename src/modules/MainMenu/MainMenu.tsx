@@ -83,7 +83,7 @@ export const MainMenu = ({
 					icon={<GoTasklist size={baseSize / 2} />}
 					actionElements={[]}
 				/> */}
-				<Card
+				{/* <Card
 					onClick={() => navigate('MAIN', 'MAP_MAKER_CAMP')}
 					content={<h4>Map Maker Camp</h4>}
 					icon={<GoTasklist size={baseSize / 2} />}
@@ -94,7 +94,7 @@ export const MainMenu = ({
 					content={<h4>Map Maker RouteN1</h4>}
 					icon={<GoTasklist size={baseSize / 2} />}
 					actionElements={[]}
-				/>
+				/> */}
 			</Stack>
 		</Page>
 	);
