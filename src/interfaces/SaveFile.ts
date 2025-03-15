@@ -34,6 +34,7 @@ export interface SettingsObject {
 	//disqualifyFaintedPokemon: boolean;
 	//randomHeldItems: boolean;
 	rogueLike: boolean;
+	randomOverworldItems: boolean;
 }
 
 export interface Challenger {

@@ -11,6 +11,7 @@ export const Settings = ({
 	const [state, setState] = useState<SettingsObject>({
 		randomStarters: false,
 		rogueLike: false,
+		randomOverworldItems: false,
 		//disqualifyFaintedPokemon: false,
 		//randomHeldItems: false,
 	});
@@ -35,6 +36,12 @@ export const Settings = ({
 					setValue={(x) => setState({ ...state, rogueLike: x })}
 					label={'Roguelike mode:'}
 					description="Losing a battle completely resets your save file"
+				/>
+				<ToggleRow
+					value={state.randomOverworldItems}
+					setValue={(x) => setState({ ...state, randomOverworldItems: x })}
+					label={'Random Overworld Items:'}
+					description="This might make some quests impossible"
 				/>
 				{/* <ToggleRow
 					value={state.randomHeldItems}

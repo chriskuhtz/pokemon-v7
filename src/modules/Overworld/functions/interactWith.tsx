@@ -1,10 +1,12 @@
 import { getOppositeDirection } from '../../../functions/getOppositeDirection';
 import { Message } from '../../../hooks/useMessageQueue';
 import { Inventory } from '../../../interfaces/Inventory';
+import { getRandomItem } from '../../../interfaces/Item';
 import { Occupant, OccupantType } from '../../../interfaces/OverworldMap';
 import {
 	CharacterLocationData,
 	CharacterOrientation,
+	SettingsObject,
 } from '../../../interfaces/SaveFile';
 
 export const shouldRotate = (t: OccupantType) =>
@@ -25,6 +27,7 @@ export const interactWithFunction = ({
 	interactWithHoneyTree,
 	goToCampMenu,
 	goToBulletinBoard,
+	settings,
 }: {
 	occ: Occupant | undefined;
 	addMultipleMessages: (x: Message[]) => void;
@@ -41,6 +44,7 @@ export const interactWithFunction = ({
 	interactWithHoneyTree: () => void;
 	goToCampMenu: () => void;
 	goToBulletinBoard: () => void;
+	settings?: SettingsObject;
 }) => {
 	if (!occ) {
 		return;
@@ -56,10 +60,13 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'ITEM' || data.type === 'HIDDEN_ITEM') {
+		const checkedData = settings?.randomOverworldItems
+			? { ...data, item: getRandomItem() }
+			: data;
 		addMultipleMessages([
 			{
-				message: `Found ${data.amount} ${data.item}`,
-				onRemoval: () => handleThisOccupant(occ),
+				message: `Found ${data.amount} ${checkedData.item}`,
+				onRemoval: () => handleThisOccupant(checkedData),
 				needsNoConfirmation: true,
 			},
 		]);

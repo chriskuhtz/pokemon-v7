@@ -1,3 +1,4 @@
+import { getRandomIndex } from '../functions/filterTargets';
 import { Stat } from './StatObject';
 
 export const healingItemTypes = [
@@ -282,4 +283,8 @@ export const fossilTable: Record<FossilType, number> = {
 	'plume-fossil': 566,
 	'jaw-fossil': 696,
 	'sail-fossil': 698,
+};
+
+export const getRandomItem = () => {
+	return itemTypes[getRandomIndex(itemTypes.length)];
 };

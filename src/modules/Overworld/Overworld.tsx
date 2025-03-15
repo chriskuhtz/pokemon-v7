@@ -105,6 +105,7 @@ export const Overworld = ({
 					navigateAwayFromOverworldReducer('CAMP_UPGRADES', stepsTaken),
 				goToBulletinBoard: () =>
 					navigateAwayFromOverworldReducer('BULLETIN_BOARD', stepsTaken),
+				settings: saveFile.settings,
 			}),
 		[
 			addMultipleMessages,
@@ -116,6 +117,7 @@ export const Overworld = ({
 			navigateAwayFromOverworldReducer,
 			playerLocation,
 			rotateOccupant,
+			saveFile.settings,
 			setCharacterLocation,
 			stepsTaken,
 			talkToNurse,
