@@ -153,6 +153,8 @@ export const extraFeatureCheckList: {
 	{ name: 'quiz hut' },
 	{ name: 'weight modifier' },
 	{ name: 'weight mod based quests' },
+	{ name: 'size modifier' },
+	{ name: 'size mod based quests' },
 	{ name: 'go through functions, delete unused' },
 	{ name: 'Encounterlist for honey trees' },
 	{ name: 'only consider occupants in view (+2 or 3 fields) when redrawing' },
@@ -169,4 +171,5 @@ export const extraFeatureCheckList: {
 	{ name: 'Bag capacity' },
 	{ name: 'extract battlefield state, selectors and reducers' },
 	{ name: 'battle backgrounds' },
+	{ name: 'pokedex' },
 ];

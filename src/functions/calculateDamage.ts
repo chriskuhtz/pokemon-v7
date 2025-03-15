@@ -164,6 +164,10 @@ export const calculateDamage = (
 		attacker.ability === 'huge-power' || attacker.ability === 'pure-power'
 			? 2
 			: 1;
+	const thickFatFactor =
+		target.ability === 'thick-fat' && ['fire', 'ice'].includes(attack.type)
+			? 0.5
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -182,7 +186,8 @@ export const calculateDamage = (
 				flyingFactor *
 				flashFireFactor *
 				hugePowerFactor *
-				undergroundFactor
+				undergroundFactor *
+				thickFatFactor
 		),
 		1
 	);
