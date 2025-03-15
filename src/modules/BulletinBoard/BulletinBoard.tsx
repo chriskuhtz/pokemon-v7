@@ -21,7 +21,10 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 
 	const acceptQuest = useCallback(
 		(name: QuestName) => {
-			addMessage({ message: `Accepted Quest: ${name}` });
+			addMessage({
+				message: `Accepted Quest: ${name}`,
+				needsNoConfirmation: true,
+			});
 			putSaveFileReducer({
 				...saveFile,
 				quests: { ...saveFile.quests, [name]: 'ACTIVE' },
@@ -35,20 +38,17 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 			Object.entries(QuestsRecord)
 				.map(([id, questData]) => {
 					if (
-						questData.kind === 'GENERIC' ||
+						questData.kind === 'GENERIC' &&
 						quests[id as QuestName] === 'INACTIVE'
 					) {
-						return { name: name, questData };
+						return { name: id as QuestName, quest: questData };
 					}
 				})
-				.filter((q) => q !== undefined) as unknown as {
-				name: QuestName;
-				quest: Quest;
-			}[],
+				.filter((q) => q !== undefined),
 		[quests]
 	);
 
-	console.log(availableQuests);
+	console.log(quests, availableQuests);
 	if (availableQuests.length === 0) {
 		return (
 			<Page headline={'Bulletin Board:'} goBack={goBack}>
