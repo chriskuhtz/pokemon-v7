@@ -15,7 +15,7 @@ export const testPokemon: OwnedPokemon = {
 	id: 'bingo',
 	ball: 'poke-ball',
 	onTeam: true,
-	firstMove: { name: 'tackle', usedPP: 15 },
+	firstMove: { name: 'tackle', usedPP: 0 },
 	damage: 0,
 	nature: 'adamant',
 	xp: 125,

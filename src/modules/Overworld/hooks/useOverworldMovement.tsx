@@ -34,11 +34,11 @@ export const useOverworldMovement = (
 				o.y === playerLocation.y
 		) as OnStepPortal | undefined;
 
-		const resetEncounterRate = () => {
+		const reduceEncounterRate = () => {
 			if (encounterChance === baseEncounterRate) {
 				return;
 			}
-			setEncounterChance(baseEncounterRate);
+			setEncounterChance(encounterChance - 0.02);
 		};
 		const int = setTimeout(() => {
 			if (
@@ -64,7 +64,7 @@ export const useOverworldMovement = (
 						startEncounter();
 						return;
 					} else setEncounterChance(encounterChance + 0.02);
-				} else resetEncounterRate();
+				} else reduceEncounterRate();
 			}
 			if (nextInput === playerLocation.orientation) {
 				setCharacterLocation({
