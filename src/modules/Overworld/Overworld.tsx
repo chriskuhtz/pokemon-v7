@@ -186,7 +186,7 @@ export const Overworld = ({
 					position: 'absolute',
 					top: '1.5rem',
 					left: '1rem',
-					zIndex: 9000,
+					zIndex: 8999,
 					padding: '.5rem',
 					borderRadius: 9000,
 					backgroundColor: 'rgba(255,255,255,.6)',
