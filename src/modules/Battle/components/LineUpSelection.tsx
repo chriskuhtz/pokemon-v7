@@ -44,6 +44,7 @@ export const LineUpSelection = ({
 				height: '100dvh',
 				justifyItems: 'center',
 				alignItems: 'center',
+				backgroundColor: 'white',
 			}}
 		>
 			<div

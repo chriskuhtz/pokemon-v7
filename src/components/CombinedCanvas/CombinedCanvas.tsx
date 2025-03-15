@@ -13,7 +13,6 @@ export const CombinedCanvas = ({
 	return (
 		<canvas
 			id="assembled"
-			style={{ border: '1px solid red' }}
 			height={map.baseLayer.length * tileSize}
 			width={map.baseLayer[0].length * tileSize}
 		></canvas>

@@ -582,6 +582,7 @@ export const BattleField = ({
 				display: 'grid',
 				gridTemplateRows: '4fr 4fr 1fr',
 				height: '100dvh',
+				backgroundColor: 'white',
 			}}
 		>
 			<div style={{ position: 'absolute', top: 0, left: '48dvw' }}>
