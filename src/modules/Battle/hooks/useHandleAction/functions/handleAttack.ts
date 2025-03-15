@@ -5,6 +5,7 @@ import { applyAttackAilmentsToPokemon } from '../../../../../functions/applyAtta
 import { applyAttackStatChanges } from '../../../../../functions/applyAttackStatChanges';
 import { applyPrimaryAilmentToPokemon } from '../../../../../functions/applyPrimaryAilmentToPokemon';
 import { applySecondaryAilmentToPokemon } from '../../../../../functions/applySecondaryAilmentToPokemon';
+import { applyStatChangeToPokemon } from '../../../../../functions/applyStatChangeToPokemon';
 import { calculateDamage } from '../../../../../functions/calculateDamage';
 import { changeMovePP } from '../../../../../functions/changeMovePP';
 import { determineMiss } from '../../../../../functions/determineMiss';
@@ -169,6 +170,16 @@ export const handleAttack = ({
 		addMessage({ message: `Coins scattered everywhere` });
 		scatterCoins();
 	}
+	if (
+		move.name === 'rage' &&
+		!updatedAttacker.secondaryAilments.some((a) => a.type === 'raging')
+	) {
+		addMessage({ message: `${attacker.data.name} is starting to rage` });
+		updatedAttacker.secondaryAilments = [
+			...updatedAttacker.secondaryAilments,
+			{ type: 'raging', duration: 9000 },
+		];
+	}
 
 	//UPDATES
 
@@ -298,18 +309,19 @@ export const handleAttack = ({
 	//TARGET
 
 	// apply damage
+	const calculatedDamage = calculateDamage(
+		updatedAttacker,
+		target,
+		move,
+		battleWeather,
+		true,
+		isFlying,
+		isUnderground,
+		addMessage
+	);
 	const damage = getMiddleOfThree([
 		0,
-		calculateDamage(
-			updatedAttacker,
-			target,
-			move,
-			battleWeather,
-			true,
-			isFlying,
-			isUnderground,
-			addMessage
-		),
+		calculatedDamage,
 		updatedTarget.stats.hp - updatedTarget.damage,
 	]);
 	updatedTarget = {
@@ -374,6 +386,21 @@ export const handleAttack = ({
 		false,
 		battleFieldEffects
 	);
+
+	// apply rage boost
+	if (
+		calculatedDamage > 0 &&
+		target.secondaryAilments.some((a) => a.type === 'raging')
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'attack',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage
+		);
+	}
 
 	//check for flinch
 	if (!isKO(updatedTarget)) {

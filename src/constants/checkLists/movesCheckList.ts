@@ -390,7 +390,7 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/98/',
 		handled: true,
 	},
-	{ name: 'rage', url: 'https://pokeapi.co/api/v2/move/99/' },
+	{ name: 'rage', url: 'https://pokeapi.co/api/v2/move/99/', handled: true },
 	{ name: 'teleport', url: 'https://pokeapi.co/api/v2/move/100/' },
 	{
 		name: 'night-shade',
@@ -1650,6 +1650,7 @@ export const handledMoves = [
 	'slash',
 	'triple-kick',
 	'flame-wheel',
+	'rage',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
