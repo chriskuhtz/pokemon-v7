@@ -27,6 +27,8 @@ export const Banner = ({
 			}}
 		>
 			<div
+				role="button"
+				tabIndex={0}
 				onClick={onClick}
 				onKeyDown={(e) => {
 					if (onClick && e.key === 'Enter') {

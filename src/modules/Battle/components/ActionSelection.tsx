@@ -1,5 +1,6 @@
 import { MoveCard } from '../../../components/MoveCard/MoveCard';
 import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
+import { getItemUrl } from '../../../functions/getItemUrl';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { getPlayerPokemon } from '../../../functions/getPlayerPokemon';
 import { getTypeNames } from '../../../functions/getTypeNames';
@@ -92,7 +93,12 @@ export function ActionSelection({
 								)))
 					) {
 						return (
-							<button onClick={() => setChosenAction(item)} key={item}>
+							<button
+								style={{ display: 'flex', alignItems: 'center' }}
+								onClick={() => setChosenAction(item)}
+								key={item}
+							>
+								<img src={getItemUrl(item)} />
 								{item}
 							</button>
 						);
