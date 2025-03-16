@@ -425,10 +425,26 @@ export const handleAttack = ({
 			1,
 			true,
 			battleFieldEffects,
-			addMessage
+			addMessage,
+			' by rage'
 		);
 	}
-
+	// apply motor drive boost
+	if (
+		move.data.type.name === 'electric' &&
+		['physical', 'special'].includes(move.data.damage_class.name) &&
+		target.ability === 'motor-drive'
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'speed',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage,
+			' by motor drive'
+		);
+	}
 	//check for flinch
 	if (!isKO(updatedTarget)) {
 		updatedTarget = handleFlinching(

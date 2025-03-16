@@ -86,6 +86,12 @@ export const calculateDamage = (
 	if (target.ability === 'flash-fire' && attack.data.type.name === 'fire') {
 		return 0;
 	}
+	if (
+		target.ability === 'motor-drive' &&
+		attack.data.type.name === 'electric'
+	) {
+		return 0;
+	}
 
 	const absorbAbility = DamageAbsorbAbilityMap[target.ability];
 	if (absorbAbility === attack.data.type.name) {
