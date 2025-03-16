@@ -8,9 +8,11 @@ import { useContext, useState } from 'react';
 import { GoTasklist } from 'react-icons/go';
 import { TrainerCard } from '../../components/TrainerCard/TrainerCard';
 import { battleSpriteSize } from '../../constants/gameData';
+import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { useQuests } from '../../hooks/useQuests';
+import { useTeleport } from '../../hooks/useTeleport';
 
 export const MainMenu = ({
 	goBack,
@@ -23,11 +25,26 @@ export const MainMenu = ({
 	const { numberOfUncollected } = useQuests();
 	const navigate = useNavigate();
 	const { addMessage } = useContext(MessageQueueContext);
+	const { teleporter, teleportHome } = useTeleport();
 
 	return (
 		<Page headline="Main Menu:" goBack={goBack}>
 			<Stack mode="column">
 				<TrainerCard />
+				{teleporter && (
+					<Card
+						onClick={() => teleportHome()}
+						content={<h4>Teleport back to camp</h4>}
+						icon={
+							<img
+								src={getPokemonSprite(teleporter.dexId)}
+								height={battleSpriteSize}
+								width={battleSpriteSize}
+							/>
+						}
+						actionElements={[]}
+					/>
+				)}
 				<Card
 					onClick={() => navigate('MAIN', 'BAG')}
 					content={<h4>Bag</h4>}

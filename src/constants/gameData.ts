@@ -1,6 +1,6 @@
 import { generateInventory } from '../interfaces/Inventory';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
-import { SaveFile } from '../interfaces/SaveFile';
+import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
 import { EmptyStatObject } from '../interfaces/StatObject';
 
 export const frames = 16;
@@ -27,6 +27,14 @@ export const testPokemon: OwnedPokemon = {
 	ppBoostedMoves: [],
 	caughtOnMap: 'camp',
 };
+
+export const startingLocation: CharacterLocationData = {
+	mapId: 'camp',
+	orientation: 'UP',
+	forwardFoot: 'CENTER1',
+	x: 5,
+	y: 6,
+};
 export const testState: SaveFile = {
 	sprite: '',
 	badges: [],
@@ -49,13 +57,7 @@ export const testState: SaveFile = {
 	meta: {
 		activeTab: 'MAIN',
 	},
-	location: {
-		mapId: 'camp',
-		orientation: 'UP',
-		forwardFoot: 'CENTER1',
-		x: 5,
-		y: 6,
-	},
+	location: startingLocation,
 	handledOccupants: [],
 	lastEdited: new Date().getTime(),
 	lastNurse: 'nurse_Pokecenter_Camp',
