@@ -1,3 +1,4 @@
+import { calculateLevelData } from '../../functions/calculateLevelData';
 import { Quest } from '../../interfaces/Quest';
 import { routeN1 } from '../maps/routeN1';
 import { routeS1 } from '../maps/routeS1';
@@ -42,6 +43,9 @@ export const questNames = [
 	'craft a apricorn ball',
 	'lure a pokemon with honey',
 	'evolve a pokemon',
+	'train a pokemon to level 10',
+	'train a pokemon to level 20',
+	'train a pokemon to level 30',
 ] as const;
 /**
  * Ideas:
@@ -459,5 +463,31 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			return s.mileStones.hasEvolvedAPokemon;
 		},
 		kind: 'BULLETIN',
+	},
+	'train a pokemon to level 10': {
+		rewardItems: { 'rare-candy': 1 },
+		researchPoints: 10,
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 10);
+		},
+		kind: 'BULLETIN',
+	},
+	'train a pokemon to level 20': {
+		rewardItems: { 'rare-candy': 2 },
+		researchPoints: 10,
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 20);
+		},
+		kind: 'BULLETIN',
+		availableAfter: 'train a pokemon to level 10',
+	},
+	'train a pokemon to level 30': {
+		rewardItems: { 'rare-candy': 3 },
+		researchPoints: 10,
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 30);
+		},
+		kind: 'BULLETIN',
+		availableAfter: 'train a pokemon to level 20',
 	},
 };
