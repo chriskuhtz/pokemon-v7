@@ -395,25 +395,16 @@ const useSaveFile = (
 				return sum + Math.floor((d.data.base_experience * level) / 7);
 			}, 0);
 
-			const filteredTeam = updatedTeam.filter(() => {
-				// if (
-				// 	saveFile.settings?.disqualifyFaintedPokemon &&
-				// 	p.status === 'FAINTED'
-				// ) {
-				// 	return false;
-				// }
-				return true;
-			});
-
 			const xpPerTeamMember =
-				outcome === 'WIN' ? Math.round(gainedXp / filteredTeam.length) : 0;
+				outcome === 'WIN' ? Math.round(gainedXp / updatedTeam.length) : 0;
 
-			const leveledUpTeam = filteredTeam
+			const leveledUpTeam = updatedTeam
 				.map((p) => {
 					const newXp = p.xp + xpPerTeamMember;
 					return { ...p, xp: newXp };
 				})
 				.map((p) => reduceBattlePokemonToOwnedPokemon(p));
+			addMessage({ message: `Each Team Member gained ${xpPerTeamMember} XP` });
 
 			const teamAndCaught = [
 				...leveledUpTeam,
@@ -439,7 +430,7 @@ const useSaveFile = (
 				meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
 			});
 		},
-		[putSaveFileReducer, reset, saveFile, team]
+		[addMessage, putSaveFileReducer, reset, saveFile, team]
 	);
 
 	const applyEncounterRateModifierItem = (item: EncounterChanceItem) => {
