@@ -47,11 +47,25 @@ export const determineMiss = (
 		return { miss: false };
 	}
 
-	const ratio =
+	const tangledFeetFactor =
+		target.ability === 'tangled-feet' &&
+		target.secondaryAilments.some((a) => a.type === 'confusion')
+			? 2
+			: 1;
+
+	const targetEvasion =
+		calculateModifiedStat(target.stats.evasion, target.statBoosts.evasion) *
+		tangledFeetFactor;
+
+	const compoundEyesFactor = getCompoundEyesFactor(attacker, attack);
+
+	const attackerAccuracy =
 		calculateModifiedStat(
 			attacker.stats.accuracy,
 			attacker.statBoosts.accuracy
-		) / calculateModifiedStat(target.stats.evasion, target.statBoosts.evasion);
+		) * compoundEyesFactor;
+
+	const ratio = attackerAccuracy / targetEvasion;
 
 	const weatherFactor =
 		weather === 'sandstorm' && target.ability === 'sand-veil' ? 0.8 : 1;
@@ -64,12 +78,8 @@ export const determineMiss = (
 			? attackerlevel - targetlevel
 			: 0;
 
-	const compoundEyesFactor = getCompoundEyesFactor(attacker, attack);
-
 	const res =
-		(attack.data.accuracy * compoundEyesFactor * ratio +
-			levelDifferenceSummand) *
-		weatherFactor;
+		(attack.data.accuracy * ratio + levelDifferenceSummand) * weatherFactor;
 
 	return { miss: Math.random() * 100 > res };
 };
