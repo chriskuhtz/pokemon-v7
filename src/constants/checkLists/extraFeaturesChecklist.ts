@@ -86,7 +86,10 @@ export const extraFeatureCheckList: {
 	{ name: 'quest: catch a night pokemon', handled: true },
 	{ name: 'quest: catch a evening pokemon', handled: true },
 	{ name: 'quest: catch a morning pokemon', handled: true },
-	{ name: 'alternate forms (galar, alola), also consider evo methods' },
+	{
+		name: 'alternate forms (galar, alola), also consider evo methods',
+		handled: true,
+	},
 	{ name: 'encounter rarity' },
 	{ name: 'ivs' },
 	{ name: 'check if pokemon can actually cut' },
@@ -180,4 +183,5 @@ export const extraFeatureCheckList: {
 	{ name: 'animation state for flying pokemon' },
 	{ name: 'eggs?' },
 	{ name: 'opponent "learns" about volt-absorb etc ' },
+	{ name: 'pokemonSprite component' },
 ];
