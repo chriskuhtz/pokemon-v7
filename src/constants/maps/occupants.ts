@@ -71,6 +71,13 @@ const market2Inventory: Partial<Inventory> = {
 	'ice-heal': 1,
 	awakening: 1,
 };
+const market3Inventory: Partial<Inventory> = {
+	...market2Inventory,
+	'ultra-ball': 1,
+	'full-heal': 1,
+	'hyper-potion': 1,
+	'super-repel': 1,
+};
 export const campOccupants: OverworldMap['occupants'] = [
 	{
 		type: 'NPC',
@@ -152,7 +159,9 @@ export const campOccupants: OverworldMap['occupants'] = [
 		dialogue: ['If we get more famous, we can get more items delivered'],
 		inventory: { 'poke-ball': 1, potion: 1, antidote: 1, repel: 1 },
 		conditionFunction: (s) =>
-			s.campUpgrades.market_1 && !s.campUpgrades.market_2,
+			s.campUpgrades.market_1 &&
+			!s.campUpgrades.market_2 &&
+			!s.campUpgrades.market_3,
 	},
 	{
 		type: 'MERCHANT',
@@ -164,7 +173,25 @@ export const campOccupants: OverworldMap['occupants'] = [
 		dialogue: ['Thanks to your hard work, we get better deliveries'],
 		inventory: market2Inventory,
 		conditionFunction: (s) =>
-			s.campUpgrades.market_1 && s.campUpgrades.market_2,
+			s.campUpgrades.market_1 &&
+			s.campUpgrades.market_2 &&
+			!s.campUpgrades.market_3,
+	},
+	{
+		type: 'MERCHANT',
+		id: 'market_3',
+		x: 14,
+		y: 1,
+		orientation: 'DOWN',
+		sprite: SpriteEnum.clerkMale,
+		dialogue: [
+			'Keep it up and we will have a better selection than celadon city',
+		],
+		inventory: market3Inventory,
+		conditionFunction: (s) =>
+			s.campUpgrades.market_1 &&
+			s.campUpgrades.market_2 &&
+			s.campUpgrades.market_3,
 	},
 	{
 		type: 'BULLETIN_BOARD',
