@@ -15,6 +15,7 @@ export const questNames = [
 	'catch a pokemon orginally found in johto',
 	'catch a spiritomb',
 	'catch all nighttime pokemon from routeN1',
+	'catch Haunter and Mightyena',
 ] as const;
 export type QuestName = (typeof questNames)[number];
 
@@ -25,7 +26,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => {
 			return s.pokemon.length > 1;
 		},
-		kind: 'GENERIC',
+		kind: 'STORY',
 	},
 	'catch a pikachu': {
 		rewardItems: { 'thunder-stone': 1 },
@@ -122,11 +123,22 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'GENERIC',
 	},
 	'catch a spiritomb': {
-		rewardItems: { 'rare-candy': 5 },
+		rewardItems: { 'rare-candy': 3 },
 		researchPoints: 50,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) => p.dexId === 442);
 		},
-		kind: 'GENERIC',
+		kind: 'STORY',
+	},
+	'catch Haunter and Mightyena': {
+		rewardItems: { 'rare-bone': 2 },
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			return (
+				s.pokemon.some((p) => p.dexId === 93) &&
+				s.pokemon.some((p) => p.dexId === 262)
+			);
+		},
+		kind: 'STORY',
 	},
 };
