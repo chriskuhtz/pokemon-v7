@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { isKO } from '../../../functions/isKo';
 import { Message } from '../../../hooks/useMessageQueue';
 import { LeaveBattlePayload } from '../../../hooks/useSaveFile';
 import { useScreenTransition } from '../../../hooks/useScreenTransition';
@@ -33,7 +34,10 @@ export const BattleOverview = ({
 	const [battleStarted, setBattleStarted] = useState<boolean>(false);
 
 	const [selectedTeam, setSelectedTeam] = useState<string[]>(
-		team.slice(0, fightersPerSide).map((p) => p.id)
+		team
+			.filter((p) => !isKO(p))
+			.slice(0, fightersPerSide)
+			.map((p) => p.id)
 	);
 
 	const { startTransition, inTransition } = useScreenTransition(() =>
@@ -73,6 +77,7 @@ export const BattleOverview = ({
 						defeatedPokemon: [],
 						outcome: 'WIN',
 						caughtPokemon: [],
+						xpPerTeamMember: 0,
 					})
 				}
 				opponents={opponents}
