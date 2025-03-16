@@ -1,62 +1,10 @@
 import { OverworldMap } from '../../interfaces/OverworldMap';
+import { routeN1Encounters } from './encounters';
 import { routeN1Occupants } from './occupants';
 
 export const routeN1: OverworldMap = {
 	id: 'routeN1',
-	possibleEncounters: {
-		MORNING: [
-			{ name: 'pikachu', xp: 125 },
-			{ name: 'starly', xp: 50 },
-			{ name: 'starly', xp: 100 },
-			{ name: 'starly', xp: 125 },
-			{ name: 'bidoof', xp: 50 },
-			{ name: 'bidoof', xp: 100 },
-			{ name: 'bidoof', xp: 125 },
-			{ name: 'kricketot', xp: 50 },
-			{ name: 'kricketot', xp: 100 },
-			{ name: 'kricketot', xp: 125 },
-			{ name: 'shinx', xp: 125 },
-		],
-		DAY: [
-			{ name: 'poochyena', xp: 50 },
-			{ name: 'poochyena', xp: 100 },
-			{ name: 'poochyena', xp: 125 },
-			{ name: 'zigzagoon', xp: 50 },
-			{ name: 'zigzagoon', xp: 100 },
-			{ name: 'zigzagoon', xp: 125 },
-			{ name: 'taillow', xp: 50 },
-			{ name: 'taillow', xp: 100 },
-			{ name: 'taillow', xp: 125 },
-			{ name: 'lotad', xp: 125 },
-			{ name: 'pikachu', xp: 125 },
-		],
-		EVENING: [
-			{ name: 'pikachu', xp: 125 },
-			{ name: 'rattata', xp: 50 },
-			{ name: 'rattata', xp: 100 },
-			{ name: 'rattata', xp: 125 },
-			{ name: 'pidgey', xp: 50 },
-			{ name: 'pidgey', xp: 100 },
-			{ name: 'pidgey', xp: 125 },
-			{ name: 'caterpie', xp: 50 },
-			{ name: 'caterpie', xp: 100 },
-			{ name: 'caterpie', xp: 125 },
-			{ name: 'gastly', xp: 125 },
-		],
-		NIGHT: [
-			{ name: 'pikachu', xp: 125 },
-			{ name: 'hoothoot', xp: 100 },
-			{ name: 'hoothoot', xp: 50 },
-			{ name: 'hoothoot', xp: 125 },
-			{ name: 'spinarak', xp: 100 },
-			{ name: 'spinarak', xp: 50 },
-			{ name: 'spinarak', xp: 125 },
-			{ name: 'teddiursa', xp: 100 },
-			{ name: 'teddiursa', xp: 50 },
-			{ name: 'teddiursa', xp: 125 },
-			{ name: 'misdreavus', xp: 125 },
-		],
-	},
+	possibleEncounters: routeN1Encounters,
 	tileMap: {
 		baseLayer: [
 			[
