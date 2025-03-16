@@ -242,7 +242,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 			'I have a first request for you and some equipment to get you started',
 		],
 		handledMessage: ['Check the Bulletin board for more quests'],
-		gifts: { 'poke-ball': 10 },
+		gifts: { 'poke-ball': 20 },
 		quest: 'catch a pokemon',
 		sprite: SpriteEnum.oak,
 		conditionFunction: (s) => s.quests['catch a pokemon'] !== 'FULFILLED',
