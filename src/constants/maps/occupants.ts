@@ -1,5 +1,5 @@
 import { Inventory } from '../../interfaces/Inventory';
-import { OverworldMap } from '../../interfaces/OverworldMap';
+import { Occupant, OverworldMap } from '../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
 
 export const routeN1Occupants: OverworldMap['occupants'] = [
@@ -85,6 +85,68 @@ const market3Inventory: Partial<Inventory> = {
 	'hyper-potion': 1,
 	'super-repel': 1,
 };
+
+const rowanLine: Occupant[] = [
+	{
+		type: 'NPC',
+		id: 'rowan_1',
+		x: 5,
+		y: 15,
+		unhandledMessage: [
+			'My name is Professor Rowan',
+			'I have travelled all across the world',
+			'to study pokemon',
+			'It is important to encounter pokemon from all regions',
+		],
+		handledMessage: ['How is the catching going'],
+		quest: 'catch a pokemon orginally found in kanto',
+		conditionFunction: (s) => s.campUpgrades.rowan,
+		orientation: 'DOWN',
+		sprite: SpriteEnum.rowan,
+	},
+];
+const mortyLine: Occupant[] = [
+	{
+		type: 'NPC',
+		id: 'morty_1',
+		x: 12,
+		y: 7,
+		orientation: 'LEFT',
+		sprite: SpriteEnum.morty,
+		unhandledMessage: [
+			'I am Morty, a Gym Leader from Johto',
+			'I have heard rumours',
+			'about a very rare ghost pokemon,',
+			'that is trapped in a ruin here',
+			'Its a very odd tale',
+			'A stone might be the key',
+		],
+		handledMessage: ['Did you find the rare ghost pokemon?'],
+		quest: 'catch a spiritomb',
+		gifts: { 'dusk-ball': 5 },
+		conditionFunction: (s) =>
+			s.campUpgrades.morty && s.quests['catch a spiritomb'] !== 'COLLECTED',
+	},
+	{
+		type: 'NPC',
+		id: 'morty_2',
+		x: 12,
+		y: 7,
+		orientation: 'LEFT',
+		sprite: SpriteEnum.morty,
+		unhandledMessage: [
+			'Great work with spiritomb',
+			'Can i ask you to find out more',
+			'about the ghost and dark pokemon of this region',
+		],
+		handledMessage: ['I hope they dont scare you too much'],
+		quest: 'catch a spiritomb',
+		gifts: { 'dusk-ball': 5 },
+		conditionFunction: (s) =>
+			s.campUpgrades.morty && s.quests['catch a spiritomb'] === 'COLLECTED',
+	},
+];
+
 export const campOccupants: OverworldMap['occupants'] = [
 	{
 		type: 'NPC',
@@ -200,46 +262,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 			s.campUpgrades.market_2 &&
 			s.campUpgrades.market_3,
 	},
-	{
-		type: 'NPC',
-		id: 'ghost_expert_1',
-		x: 12,
-		y: 7,
-		orientation: 'LEFT',
-		sprite: SpriteEnum.possessed,
-		unhandledMessage: [
-			'I have heard rumours',
-			'about a very rare ghost pokemon,',
-			'that is trapped in a ruin here',
-			'A very odd tale',
-			'A stone might be the key',
-		],
-		handledMessage: ['Did you find the rare ghost pokemon?'],
-		quest: 'catch a spiritomb',
-		gifts: { 'dusk-ball': 5 },
-		conditionFunction: (s) =>
-			s.campUpgrades.ghost_expert &&
-			s.quests['catch a spiritomb'] !== 'COLLECTED',
-	},
-	{
-		type: 'NPC',
-		id: 'ghost_expert_2',
-		x: 12,
-		y: 7,
-		orientation: 'LEFT',
-		sprite: SpriteEnum.possessed,
-		unhandledMessage: [
-			'Great work with spiritomb',
-			'Can i ask you to find out more',
-			'about the ghost and dark pokemon of this region',
-		],
-		handledMessage: ['I hope they dont scare you too much'],
-		quest: 'catch a spiritomb',
-		gifts: { 'dusk-ball': 5 },
-		conditionFunction: (s) =>
-			s.campUpgrades.ghost_expert &&
-			s.quests['catch a spiritomb'] === 'COLLECTED',
-	},
+
 	{
 		type: 'BULLETIN_BOARD',
 		id: 'camp_bulletin_board',
@@ -249,4 +272,6 @@ export const campOccupants: OverworldMap['occupants'] = [
 		dialogue: ['Looking for new Quests ...'],
 		conditionFunction: (s) => s.campUpgrades.bulletin_board,
 	},
+	...mortyLine,
+	...rowanLine,
 ];

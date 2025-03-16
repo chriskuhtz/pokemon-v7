@@ -39,7 +39,7 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 			Object.entries(QuestsRecord)
 				.map(([id, questData]) => {
 					if (
-						questData.kind === 'GENERIC' &&
+						questData.kind === 'BULLETIN' &&
 						quests[id as QuestName] === 'INACTIVE'
 					) {
 						return { name: id as QuestName, quest: questData };
