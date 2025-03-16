@@ -81,7 +81,7 @@ export const extraFeatureCheckList: {
 	{ name: 'assign random nature to encounters', handled: true },
 	{ name: 'setting: randomized items', handled: true },
 	{ name: 'setting: random quest rewards', handled: true },
-	{ name: 'shaders in battle' },
+	{ name: 'shaders in battle', handled: true },
 	{ name: 'prettier weather display' },
 	{ name: 'Battle Attack animation' },
 	{ name: 'refactor primaryAilment healing table' },

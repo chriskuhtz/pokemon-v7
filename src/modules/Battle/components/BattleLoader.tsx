@@ -1,3 +1,7 @@
+import {
+	OverworldShaderMap,
+	getTimeOfDay,
+} from '../../../functions/getTimeOfDay';
 import { useGetBattleTeam } from '../../../hooks/useGetBattleTeam';
 import { Message } from '../../../hooks/useMessageQueue';
 import { LeaveBattlePayload } from '../../../hooks/useSaveFile';
@@ -43,16 +47,31 @@ export const BattleLoader = ({
 		return <LoadingScreen />;
 	}
 	return (
-		<BattleOverview
-			leave={leave}
-			opponents={battleOpponents}
-			team={battleTeam}
-			fightersPerSide={Math.min(team.length, challenger.team.length)}
-			inventory={inventory}
-			trainer={trainer}
-			latestMessage={latestMessage}
-			addMessage={addMessage}
-			addMultipleMessages={addMultipleMessages}
-		/>
+		<>
+			<div
+				id="shader1"
+				style={{
+					pointerEvents: 'none',
+					width: '100dvw',
+					height: '100dvh',
+					top: 0,
+					left: 0,
+					position: 'absolute',
+					backgroundColor: OverworldShaderMap[getTimeOfDay()],
+					zIndex: 1,
+				}}
+			/>
+			<BattleOverview
+				leave={leave}
+				opponents={battleOpponents}
+				team={battleTeam}
+				fightersPerSide={Math.min(team.length, challenger.team.length)}
+				inventory={inventory}
+				trainer={trainer}
+				latestMessage={latestMessage}
+				addMessage={addMessage}
+				addMultipleMessages={addMultipleMessages}
+			/>
+		</>
 	);
 };
