@@ -1,5 +1,6 @@
 import { isEqual } from 'lodash';
 import { useContext, useEffect, useState } from 'react';
+import { getItemUrl } from '../../../functions/getItemUrl';
 import {
 	OverworldShaderMap,
 	getTimeOfDay,
@@ -172,6 +173,7 @@ const getSource = (occ: Occupant) => {
 		case 'HALLOWED_TOWER':
 			return '/mapObjects/hallowedTower.png';
 		case 'ITEM':
+			return getItemUrl(occ.item);
 		default:
 			return '/mapObjects/pokeball.png';
 	}

@@ -50,7 +50,7 @@ const baseCampUpgrades: Record<CampUpgrade, boolean> = Object.fromEntries(
 export const testState: SaveFile = {
 	sprite: '',
 	badges: [],
-	researchPoints: 1000,
+	researchPoints: 0,
 	quests: baseQuestState,
 	inventory: generateInventory({ 'black-apricorn': 5, 'white-apricorn': 4 }),
 	playerId: '',
