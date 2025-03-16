@@ -15,8 +15,8 @@ export const campUpgradePrices: Record<CampUpgrade, number> = {
 	market_2: 30,
 	market_3: 90,
 	bulletin_board: 10,
-	'invite ghost expert morty': 100,
-	'invite professor rowan': 100,
+	'invite ghost expert morty': 50,
+	'invite professor rowan': 50,
 	'invite apricorn smith kurt': 50,
 };
 export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
