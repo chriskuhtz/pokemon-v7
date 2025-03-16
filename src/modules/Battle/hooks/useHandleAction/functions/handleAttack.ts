@@ -26,6 +26,7 @@ import {
 } from '../../../../../interfaces/Ailment';
 import { BattleAttack } from '../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
+import { EmptyStatObject } from '../../../../../interfaces/StatObject';
 import { WeatherType } from '../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../BattleField';
 import { handleDampy } from '../../../functions/handleDampy';
@@ -133,6 +134,25 @@ export const handleAttack = ({
 				}
 
 				return p;
+			})
+		);
+		return;
+	}
+	if (move.name === 'haze') {
+		addMessage({
+			message: `${attacker.name} removed all stat changes with haze`,
+		});
+		setPokemon((pokemon) =>
+			pokemon.map((p) => {
+				if (p.id === updatedAttacker.id) {
+					return {
+						...changeMovePP(updatedAttacker, move.name, -1),
+						moveQueue: [],
+						statBoosts: EmptyStatObject,
+					};
+				}
+
+				return { ...p, statBoosts: EmptyStatObject };
 			})
 		);
 		return;
