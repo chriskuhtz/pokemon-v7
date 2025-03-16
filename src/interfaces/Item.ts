@@ -1,3 +1,4 @@
+import { PokemonName } from '../constants/pokemonNames';
 import { getRandomIndex } from '../functions/filterTargets';
 import { Stat } from './StatObject';
 
@@ -271,18 +272,18 @@ export const XItemTable: Partial<Record<XItemType, Stat>> = {
 	'x-defense': 'defense',
 	'x-speed': 'speed',
 };
-export const fossilTable: Record<FossilType, number> = {
-	'helix-fossil': 138,
-	'dome-fossil': 140,
-	'old-amber': 142,
-	'root-fossil': 345,
-	'claw-fossil': 347,
-	'skull-fossil': 408,
-	'armor-fossil': 410,
-	'cover-fossil': 564,
-	'plume-fossil': 566,
-	'jaw-fossil': 696,
-	'sail-fossil': 698,
+export const fossilTable: Record<FossilType, PokemonName> = {
+	'helix-fossil': 'omanyte',
+	'dome-fossil': 'kabuto',
+	'old-amber': 'aerodactyl',
+	'root-fossil': 'lileep',
+	'claw-fossil': 'anorith',
+	'skull-fossil': 'cranidos',
+	'armor-fossil': 'shieldon',
+	'cover-fossil': 'tirtouga',
+	'plume-fossil': 'archen',
+	'jaw-fossil': 'tyrunt',
+	'sail-fossil': 'amaura',
 };
 
 export const getRandomItem = () => {

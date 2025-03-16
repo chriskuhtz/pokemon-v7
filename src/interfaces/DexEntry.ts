@@ -1,4 +1,4 @@
 export interface DexEntry {
-	dexId: number;
+	name: number;
 	status: 'seen' | 'owned';
 }

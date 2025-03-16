@@ -1,3 +1,5 @@
+import { PokemonName } from '../constants/pokemonNames';
+
 export interface EvolutionChainData {
 	baby_trigger_item: string | null;
 	id: number;
@@ -8,7 +10,7 @@ export interface EvolutionChainLink {
 	evolution_details: EvolutionDetails[];
 	is_Baby: boolean;
 	species: {
-		name: string;
+		name: PokemonName;
 		url: string;
 	};
 }

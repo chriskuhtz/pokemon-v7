@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { MdEdit } from 'react-icons/md';
 import { MoveName } from '../../../constants/checkLists/movesCheckList';
 import { battleSpriteSize } from '../../../constants/gameData';
+import { PokemonName } from '../../../constants/pokemonNames';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
@@ -44,8 +45,7 @@ export const OwnedPokemonCardContent = ({
 	setMoves: (id: string, moves: MoveName[]) => void;
 	setNickName: (x: string | undefined) => void;
 	evolve: (
-		newDexId: number,
-		newName: string,
+		newName: PokemonName,
 		consumeHeldItem: boolean,
 		item?: ItemType
 	) => void;
@@ -100,7 +100,7 @@ export const OwnedPokemonCardContent = ({
 				>
 					<IconSolarSystem
 						sun={{
-							url: getPokemonSprite(ownedPokemon.dexId),
+							url: getPokemonSprite(ownedPokemon.name),
 							styles: isOwnedPokemonKO(ownedPokemon)
 								? { filter: 'grayscale(1)' }
 								: undefined,

@@ -54,9 +54,9 @@ export const BattleOverview = ({
 	if (inTransition) {
 		return (
 			<IntroBanner
-				dexIds={team
+				names={team
 					.filter((t) => selectedTeam.includes(t.id))
-					.map((t) => t.dexId)}
+					.map((t) => t.name)}
 			/>
 		);
 	}

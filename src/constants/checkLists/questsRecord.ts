@@ -1,6 +1,6 @@
-import { getMiddleOfThree } from '../../functions/getMiddleOfThree';
 import { Quest } from '../../interfaces/Quest';
 import { routeN1 } from '../maps/routeN1';
+import { pokemonNames } from '../pokemonNames';
 
 export const questNames = [
 	'catch a pikachu',
@@ -32,7 +32,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'thunder-stone': 1 },
 		researchPoints: 10,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) => p.dexId === 25);
+			return s.pokemon.some((p) => p.name === 'pikachu');
 		},
 		kind: 'GENERIC',
 	},
@@ -41,7 +41,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 5,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
-				routeN1.possibleEncounters.MORNING.some((e) => e.dexId === p.dexId)
+				routeN1.possibleEncounters.MORNING.some((e) => e.name === p.name)
 			);
 		},
 		kind: 'GENERIC',
@@ -51,7 +51,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 5,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
-				routeN1.possibleEncounters.DAY.some((e) => e.dexId === p.dexId)
+				routeN1.possibleEncounters.DAY.some((e) => e.name === p.name)
 			);
 		},
 		kind: 'GENERIC',
@@ -61,7 +61,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 5,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
-				routeN1.possibleEncounters.EVENING.some((e) => e.dexId === p.dexId)
+				routeN1.possibleEncounters.EVENING.some((e) => e.name === p.name)
 			);
 		},
 		kind: 'GENERIC',
@@ -71,7 +71,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 5,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
-				routeN1.possibleEncounters.NIGHT.some((e) => e.dexId === p.dexId)
+				routeN1.possibleEncounters.NIGHT.some((e) => e.name === p.name)
 			);
 		},
 		kind: 'GENERIC',
@@ -96,9 +96,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'great-ball': 10 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
-			return s.pokemon.some(
-				(p) => getMiddleOfThree([0, p.dexId, 151]) === p.dexId
-			);
+			return s.pokemon.some((p) => pokemonNames.slice(0, 151).includes(p.name));
 		},
 		kind: 'GENERIC',
 	},
@@ -106,8 +104,8 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'super-potion': 5 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
-			return s.pokemon.some(
-				(p) => getMiddleOfThree([151, p.dexId, 251]) === p.dexId
+			return s.pokemon.some((p) =>
+				pokemonNames.slice(150, 251).includes(p.name)
 			);
 		},
 		kind: 'GENERIC',
@@ -117,7 +115,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return routeN1.possibleEncounters.NIGHT.every((e) =>
-				s.pokemon.some((p) => p.dexId === e.dexId)
+				s.pokemon.some((p) => p.name === e.name)
 			);
 		},
 		kind: 'GENERIC',
@@ -126,7 +124,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'rare-candy': 3 },
 		researchPoints: 50,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) => p.dexId === 442);
+			return s.pokemon.some((p) => p.name === 'spiritomb');
 		},
 		kind: 'STORY',
 	},
@@ -135,8 +133,8 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return (
-				s.pokemon.some((p) => p.dexId === 93) &&
-				s.pokemon.some((p) => p.dexId === 262)
+				s.pokemon.some((p) => p.name === 'haunter') &&
+				s.pokemon.some((p) => p.name === 'mightyena')
 			);
 		},
 		kind: 'STORY',

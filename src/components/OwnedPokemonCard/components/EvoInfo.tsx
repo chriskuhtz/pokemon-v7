@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { PokemonName } from '../../../constants/pokemonNames';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
 import { getTimeOfDay } from '../../../functions/getTimeOfDay';
 import { useGetEvolution } from '../../../hooks/useGetEvolution';
@@ -19,8 +20,7 @@ export const EvoInfo = ({
 	data: PokemonData;
 	inventory: Inventory;
 	evolve: (
-		newDexId: number,
-		newName: string,
+		newName: PokemonName,
 		consumeHeldItem: boolean,
 		item?: ItemType
 	) => void;
@@ -40,8 +40,8 @@ export const EvoInfo = ({
 					name={data.name}
 					evo={evo}
 					inventory={inventory}
-					evolve={(newDexId, newName, consumeHeldItem, item) => {
-						evolve(newDexId, newName, consumeHeldItem, item);
+					evolve={(newName, consumeHeldItem, item) => {
+						evolve(newName, consumeHeldItem, item);
 						invalidate();
 					}}
 				/>
@@ -60,8 +60,7 @@ const EvoButton = ({
 	evo: EvolutionChainLink;
 	inventory: Inventory;
 	evolve: (
-		newDexId: number,
-		newName: string,
+		newName: PokemonName,
 		consumeHeldItem: boolean,
 		item?: ItemType
 	) => void;
@@ -71,7 +70,6 @@ const EvoButton = ({
 	const deets = evo.evolution_details[evo.evolution_details.length - 1];
 	const { min_happiness, item, min_level, time_of_day, held_item } = deets;
 	const itemName = item?.name as ItemType | undefined;
-	const newDexId = Number.parseInt(evo.species.url.split('/').reverse()[1]);
 	const { level } = calculateLevelData(ownedPokemon.xp);
 
 	const checks: string[] = useMemo(() => {
@@ -114,7 +112,7 @@ const EvoButton = ({
 				border: '1px solid black',
 				borderRadius: '1rem',
 			}}
-			onClick={() => evolve(newDexId, evo.species.name, !!held_item, itemName)}
+			onClick={() => evolve(evo.species.name, !!held_item, itemName)}
 		>
 			{checks.length > 0
 				? `${checks.join(' & ')} required for evolution`

@@ -76,7 +76,7 @@ export const LineUpSelection = ({
 				}}
 			>
 				{opponents.map((opponent) => (
-					<img key={opponent.id} src={getPokemonSprite(opponent.dexId)} />
+					<img key={opponent.id} src={getPokemonSprite(opponent.name)} />
 				))}
 			</div>
 			<div
@@ -116,7 +116,7 @@ export const LineUpSelection = ({
 									filter: isKO(teamMember) ? 'grayscale(1)' : undefined,
 								}}
 								height={battleSpriteSize}
-								src={getPokemonSprite(teamMember.dexId, 'back')}
+								src={getPokemonSprite(teamMember.name, 'back')}
 							/>
 						</div>
 					))}

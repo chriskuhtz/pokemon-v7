@@ -1,11 +1,11 @@
 import { useCallback, useContext, useMemo } from 'react';
+import { v4 } from 'uuid';
 import { testPokemon } from '../../../constants/gameData';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { joinInventories } from '../../../interfaces/Inventory';
 import { FossilType, fossilTable, isFossil } from '../../../interfaces/Item';
 import { getRandomNature } from '../../../interfaces/Natures';
-import { v4 } from 'uuid';
 
 export const useFossils = () => {
 	const { addMessage } = useContext(MessageQueueContext);
@@ -31,7 +31,7 @@ export const useFossils = () => {
 					...saveFile.pokemon,
 					{
 						...testPokemon,
-						dexId: fossilTable[fossil],
+						name: fossilTable[fossil],
 						id: v4(),
 						xp: 1000,
 						nature: getRandomNature(),

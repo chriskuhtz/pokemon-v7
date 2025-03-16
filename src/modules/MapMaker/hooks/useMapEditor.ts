@@ -397,23 +397,23 @@ export const useMapEditor = ({
 		setNewMap(updatedMap);
 	};
 
-	const addEncounter = (dexId: number, xp: number, timeOfDay: TimeOfDay) => {
+	const addEncounter = (name: string, xp: number, timeOfDay: TimeOfDay) => {
 		setNewMap({
 			...newMap,
 			possibleEncounters: {
 				...newMap.possibleEncounters,
-				[timeOfDay]: [...newMap.possibleEncounters[timeOfDay], { dexId, xp }],
+				[timeOfDay]: [...newMap.possibleEncounters[timeOfDay], { name, xp }],
 			},
 		});
 	};
-	const removeEncounter = (dexId: number, xp: number, timeOfDay: TimeOfDay) => {
+	const removeEncounter = (name: string, xp: number, timeOfDay: TimeOfDay) => {
 		setNewMap({
 			...newMap,
 			possibleEncounters: {
 				...newMap.possibleEncounters,
 				[timeOfDay]: [
 					...newMap.possibleEncounters[timeOfDay].filter(
-						(e) => e.dexId !== dexId && e.xp !== xp
+						(e) => e.name !== name && e.xp !== xp
 					),
 				],
 			},

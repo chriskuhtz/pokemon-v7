@@ -1,3 +1,6 @@
-export const getRandomPokemonId = () => {
-	return Math.floor(1 + Math.random() * 1025);
+import { PokemonName, pokemonNames } from '../constants/pokemonNames';
+import { getRandomIndex } from './filterTargets';
+
+export const getRandomPokemonName = (): PokemonName => {
+	return pokemonNames[getRandomIndex(pokemonNames.length)];
 };

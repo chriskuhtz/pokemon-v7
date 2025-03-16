@@ -10,21 +10,21 @@ import { SaveFileContext } from './useSaveFile';
 const HONEY_ENCOUNTER_OPTIONS: OwnedPokemon[] = [
 	{
 		...testOpponent,
-		dexId: 446,
+		name: 'burmy',
 		xp: 200,
 		id: v4(),
 		caughtOnMap: 'routeN1',
 	},
 	{
 		...testOpponent,
-		dexId: 214,
+		name: 'heracross',
 		xp: 200,
 		id: v4(),
 		caughtOnMap: 'routeN1',
 	},
 	{
 		...testOpponent,
-		dexId: 56,
+		name: 'mankey',
 		xp: 200,
 		id: v4(),
 		caughtOnMap: 'routeN1',

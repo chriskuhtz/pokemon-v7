@@ -1,4 +1,4 @@
-import { useContext, useCallback } from 'react';
+import { useCallback, useContext } from 'react';
 import { v4 } from 'uuid';
 import { testOpponent } from '../constants/gameData';
 import { getTimeOfDay } from '../functions/getTimeOfDay';
@@ -50,7 +50,7 @@ export const useHallowedTower = () => {
 								team: [
 									{
 										...testOpponent,
-										dexId: 442,
+										name: 'spiritomb',
 										xp: 2000,
 										id: v4(),
 										caughtOnMap: saveFile.location.mapId,

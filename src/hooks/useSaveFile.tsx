@@ -10,6 +10,7 @@ import { MoveName } from '../constants/checkLists/movesCheckList';
 import { QuestName, QuestsRecord } from '../constants/checkLists/questsRecord';
 import { localStorageId, testState } from '../constants/gameData';
 import { mapsRecord } from '../constants/maps/mapsRecord';
+import { PokemonName } from '../constants/pokemonNames';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 import { calculateLevelData } from '../functions/calculateLevelData';
@@ -75,9 +76,8 @@ export interface UseSaveFile {
 	applyEncounterRateModifierItem: (item: EncounterChanceItem) => void;
 	evolvePokemonReducer: (
 		id: string,
-		newDexId: number,
-		name: string,
-		newName: string,
+		newName: PokemonName,
+		name: PokemonName,
 		consumeHeldItem: boolean,
 		consumedItem?: ItemType
 	) => void;
@@ -473,9 +473,8 @@ const useSaveFile = (
 	};
 	const evolvePokemonReducer = (
 		id: string,
-		newDexId: number,
-		name: string,
-		newName: string,
+		newName: PokemonName,
+		name: PokemonName,
 		consumeHeldItem: boolean,
 		consumedItem?: ItemType
 	) => {
@@ -499,7 +498,7 @@ const useSaveFile = (
 				if (p.id === id) {
 					return {
 						...p,
-						dexId: newDexId,
+						name: newName,
 						heldItemName: consumeHeldItem ? undefined : p.heldItemName,
 					};
 				}
