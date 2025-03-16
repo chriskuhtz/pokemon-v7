@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 import { MoveName } from '../../../../constants/checkLists/movesCheckList';
 import { forceSwitchMoves } from '../../../../constants/forceSwitchMoves';
 import { applyItemToPokemon } from '../../../../functions/applyItemToPokemon';
+import { applyStatChangeToPokemon } from '../../../../functions/applyStatChangeToPokemon';
 import { BattleLocation } from '../../../../functions/determineCaptureSuccess';
 import { getChargeUpMessage } from '../../../../functions/getChargeUpMessage';
 import { Message } from '../../../../hooks/useMessageQueue';
@@ -150,6 +151,19 @@ export const useHandleAction = (
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
 						if (p.id === attacker.id) {
+							if (move.name === 'skull-bash') {
+								return applyStatChangeToPokemon(
+									{
+										...updatedAttacker,
+										moveQueue: attacker.moveQueue.slice(1),
+									},
+									'defense',
+									1,
+									true,
+									[],
+									addMessage
+								);
+							}
 							return {
 								...updatedAttacker,
 								moveQueue: attacker.moveQueue.slice(1),

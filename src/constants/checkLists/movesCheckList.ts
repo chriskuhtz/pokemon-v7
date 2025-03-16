@@ -494,7 +494,11 @@ export const movesCheckList: {
 	},
 	{ name: 'clamp', url: 'https://pokeapi.co/api/v2/move/128/', handled: true },
 	{ name: 'swift', url: 'https://pokeapi.co/api/v2/move/129/', handled: true },
-	{ name: 'skull-bash', url: 'https://pokeapi.co/api/v2/move/130/' },
+	{
+		name: 'skull-bash',
+		url: 'https://pokeapi.co/api/v2/move/130/',
+		handled: true,
+	},
 	{
 		name: 'spike-cannon',
 		url: 'https://pokeapi.co/api/v2/move/131/',
@@ -1683,6 +1687,7 @@ export const handledMoves = [
 	'haze',
 	'focus-energy',
 	'self-destruct',
+	'skull-bash',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
