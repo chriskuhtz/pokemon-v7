@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { MdCatchingPokemon } from 'react-icons/md';
 import {
 	QuestName,
@@ -10,16 +10,35 @@ import { getRewardForQuest } from '../../functions/getRewardForQuest';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { ItemType } from '../../interfaces/Item';
+import { QuestStatus } from '../../interfaces/Quest';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
 export const Quests = ({ goBack }: { goBack: () => void }) => {
 	const { addMessage } = useContext(MessageQueueContext);
-	const { saveFile, fulfillQuestReducer: fulfillQuest } =
-		useContext(SaveFileContext);
+	const {
+		saveFile,
+		fulfillQuestReducer: fulfillQuest,
+		patchSaveFileReducer,
+	} = useContext(SaveFileContext);
 	const { quests } = saveFile;
 
+	useEffect(() => {
+		//Migrate new quests
+		if (Object.entries(QuestsRecord).length > Object.entries(quests).length) {
+			const migratedQuests = Object.fromEntries(
+				Object.entries(QuestsRecord).map(([qn]) => {
+					const q = qn as QuestName;
+					const status = quests[q] ?? ('INACTIVE' as QuestStatus);
+					return [q, status];
+				})
+			) as Record<QuestName, QuestStatus>;
+			patchSaveFileReducer({
+				quests: migratedQuests,
+			});
+		}
+	}, [patchSaveFileReducer, quests]);
 	if (Object.values(quests).filter((v) => v !== 'INACTIVE').length === 0) {
 		return (
 			<Page headline={'Quests:'} goBack={goBack}>
