@@ -29,12 +29,13 @@ export const questNames = [
 	'catch a pokemon and its hisui variant',
 	'catch a pokemon and its paldea variant',
 	'catch a ultra rare pokemon on routeN1',
+	'craft a apricorn ball',
 ] as const;
 /**
  * Ideas:
  * catch Baby Pokemon
  * weight/height based
- * catch a ultra rare pokemon
+ * catch a pokemon in a apricorn ball
  */
 export type QuestName = (typeof questNames)[number];
 
@@ -126,7 +127,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		kind: 'BULLETIN',
 	},
-
 	'catch all nighttime pokemon from routeN1': {
 		rewardItems: { 'odd-keystone': 1 },
 		researchPoints: 20,
@@ -301,5 +301,19 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			);
 		},
 		kind: 'QUEST_LINE',
+	},
+	'craft a apricorn ball': {
+		kind: 'BULLETIN',
+		rewardItems: {
+			'black-apricorn': 1,
+			'blue-apricorn': 1,
+			'green-apricorn': 1,
+			'pink-apricorn': 1,
+			'red-apricorn': 1,
+			'white-apricorn': 1,
+			'yellow-apricorn': 1,
+		},
+		researchPoints: 10,
+		conditionFunction: (s) => s.mileStones.hasCraftedApricorn,
 	},
 };

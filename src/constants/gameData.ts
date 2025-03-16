@@ -67,6 +67,7 @@ export const testState: SaveFile = {
 	mileStones: {
 		hasEvolvedAPokemon: false,
 		hasCaughtAPokemonWithHoney: false,
+		hasCraftedApricorn: false,
 	},
 	farm: { unlockedPlots: 1, plants: [] },
 	campUpgrades: baseCampUpgrades,

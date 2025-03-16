@@ -33,6 +33,7 @@ export const ApricornSmithy = ({ goBack }: { goBack: () => void }) => {
 					[apricorn]: -1,
 					[apricornTable[apricorn]]: 1,
 				}),
+				mileStones: { ...saveFile.mileStones, hasCraftedApricorn: true },
 			});
 		},
 		[addMessage, putSaveFileReducer, saveFile]
