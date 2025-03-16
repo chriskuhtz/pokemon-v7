@@ -26,7 +26,7 @@ export const applyEndOfTurnHeldItem = (
 		pokemon.primaryAilment?.type === 'paralysis'
 	) {
 		addMessage(
-			`${pokemon.data.name} healed its paralysis with ${pokemon.heldItemName}`
+			`${pokemon.data.name} cured its paralysis with ${pokemon.heldItemName}`
 		);
 		return {
 			...applyItemToPokemon(pokemon, pokemon.heldItemName),
@@ -38,7 +38,20 @@ export const applyEndOfTurnHeldItem = (
 		pokemon.primaryAilment?.type === 'sleep'
 	) {
 		addMessage(
-			`${pokemon.data.name} healed its sleep with ${pokemon.heldItemName}`
+			`${pokemon.data.name} cured its sleep with ${pokemon.heldItemName}`
+		);
+		return {
+			...applyItemToPokemon(pokemon, pokemon.heldItemName),
+			heldItemName: undefined,
+		};
+	}
+	if (
+		pokemon.heldItemName === 'pecha-berry' &&
+		(pokemon.primaryAilment?.type === 'poison' ||
+			pokemon.primaryAilment?.type === 'toxic')
+	) {
+		addMessage(
+			`${pokemon.data.name} cured its poison with ${pokemon.heldItemName}`
 		);
 		return {
 			...applyItemToPokemon(pokemon, pokemon.heldItemName),

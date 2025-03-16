@@ -123,7 +123,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		return { ...pokemon, damage: updatedDamage };
 	}
 	if (
-		item === 'antidote' &&
+		(item === 'antidote' || item === 'pecha-berry') &&
 		(pokemon.primaryAilment?.type === 'poison' ||
 			pokemon.primaryAilment?.type === 'toxic')
 	) {
