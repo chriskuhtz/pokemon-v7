@@ -14,6 +14,9 @@ export const applySecondaryAilmentToPokemon = (
 	move?: MoveName,
 	healAmount?: number
 ): BattlePokemon => {
+	if (pokemon.secondaryAilments.some((t) => t.type === ailment)) {
+		return pokemon;
+	}
 	if (isKO(pokemon)) {
 		//already knocked out, no need to add ailments
 		return pokemon;
@@ -145,6 +148,32 @@ export const applySecondaryAilmentToPokemon = (
 					type: 'leeching-on',
 					duration: 9000,
 					healAmount,
+				},
+			],
+		};
+	}
+	if (ailment === 'raging') {
+		addMessage({ message: `${pokemon.data.name} is starting to rage` });
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'raging',
+					duration: 9000,
+				},
+			],
+		};
+	}
+	if (ailment === 'focused') {
+		addMessage({ message: `${pokemon.data.name} tightened its focus` });
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'focused',
+					duration: 9000,
 				},
 			],
 		};

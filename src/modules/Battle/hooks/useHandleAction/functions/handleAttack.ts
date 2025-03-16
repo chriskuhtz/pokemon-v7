@@ -187,15 +187,19 @@ export const handleAttack = ({
 		addMessage({ message: `Coins scattered everywhere` });
 		scatterCoins();
 	}
-	if (
-		move.name === 'rage' &&
-		!updatedAttacker.secondaryAilments.some((a) => a.type === 'raging')
-	) {
-		addMessage({ message: `${attacker.data.name} is starting to rage` });
-		updatedAttacker.secondaryAilments = [
-			...updatedAttacker.secondaryAilments,
-			{ type: 'raging', duration: 9000 },
-		];
+	if (move.name === 'rage') {
+		updatedAttacker = applySecondaryAilmentToPokemon(
+			updatedAttacker,
+			'raging',
+			addMessage
+		);
+	}
+	if (move.name === 'focus-energy') {
+		updatedAttacker = applySecondaryAilmentToPokemon(
+			updatedAttacker,
+			'focused',
+			addMessage
+		);
 	}
 
 	//UPDATES

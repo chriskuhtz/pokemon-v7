@@ -24,6 +24,7 @@ const secondaryAilments = [
 	'dire-hit',
 	'disable',
 	'raging',
+	'focused',
 ] as const;
 
 export type SecondaryAilmentType = (typeof secondaryAilments)[number];

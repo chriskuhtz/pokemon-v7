@@ -459,7 +459,11 @@ export const movesCheckList: {
 		handled: true,
 	},
 	{ name: 'haze', url: 'https://pokeapi.co/api/v2/move/114/', handled: true },
-	{ name: 'focus-energy', url: 'https://pokeapi.co/api/v2/move/116/' },
+	{
+		name: 'focus-energy',
+		url: 'https://pokeapi.co/api/v2/move/116/',
+		handled: true,
+	},
 	{ name: 'bide', url: 'https://pokeapi.co/api/v2/move/117/' },
 	{ name: 'metronome', url: 'https://pokeapi.co/api/v2/move/118/' },
 	{ name: 'mirror-move', url: 'https://pokeapi.co/api/v2/move/119/' },
@@ -1673,6 +1677,7 @@ export const handledMoves = [
 	'light-screen',
 	'reflect',
 	'haze',
+	'focus-energy',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

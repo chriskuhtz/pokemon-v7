@@ -117,7 +117,13 @@ export const calculateDamage = (
 		attack.data.meta.crit_rate +
 		(attacker.secondaryAilments.some((a) => a.type === 'dire-hit') ? 1 : 0);
 	const critFactor =
-		calculateCrits && determineCrit(attack.name, critRate, target.ability)
+		calculateCrits &&
+		determineCrit(
+			attack.name,
+			critRate,
+			target.ability,
+			attacker.secondaryAilments.some((s) => s.type === 'focused')
+		)
 			? 2
 			: 1;
 	if (critFactor === 2 && addMessage) {
