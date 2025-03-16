@@ -125,6 +125,13 @@ export const EmptyInventory: Inventory = {
 	'adamant-orb': 0,
 	'lustrous-orb': 0,
 	'peat-block': 0,
+	'red-apricorn': 0,
+	'blue-apricorn': 0,
+	'black-apricorn': 0,
+	'white-apricorn': 0,
+	'pink-apricorn': 0,
+	'yellow-apricorn': 0,
+	'green-apricorn': 0,
 };
 export const generateInventory = (wanted: Partial<Inventory>): Inventory => {
 	return joinInventories(EmptyInventory, wanted);

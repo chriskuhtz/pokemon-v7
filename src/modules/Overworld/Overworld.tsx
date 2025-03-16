@@ -107,6 +107,8 @@ export const Overworld = ({
 					navigateAwayFromOverworldReducer('CAMP_UPGRADES', stepsTaken),
 				goToBulletinBoard: () =>
 					navigateAwayFromOverworldReducer('BULLETIN_BOARD', stepsTaken),
+				goToApricornSmith: () =>
+					navigateAwayFromOverworldReducer('APRICORN_SMITHY', stepsTaken),
 				settings: saveFile.settings,
 			}),
 		[

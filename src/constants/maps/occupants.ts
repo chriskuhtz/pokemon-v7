@@ -330,6 +330,21 @@ export const campOccupants: OverworldMap['occupants'] = [
 		dialogue: ['Looking for new Quests ...'],
 		conditionFunction: (s) => s.campUpgrades.bulletin_board,
 	},
+	{
+		type: 'APRICORN_SMITH',
+		sprite: SpriteEnum.kurt,
+		x: 8,
+		y: 13,
+		orientation: 'UP',
+		id: 'campUpgrade_kurt',
+		dialogue: [
+			'My name is kurt',
+			'Professor Oak and me came up together',
+			'I practice the ancient art',
+			'of turning apricorns into pokeballs',
+		],
+		conditionFunction: (s) => s.campUpgrades.kurt,
+	},
 	...mortyLine,
 	...rowanLine,
 ];

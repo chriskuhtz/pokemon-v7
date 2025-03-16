@@ -5,6 +5,7 @@ export const campUpgradeNames = [
 	'market_3',
 	'morty',
 	'rowan',
+	'kurt',
 ] as const;
 
 export type CampUpgrade = (typeof campUpgradeNames)[number];
@@ -16,6 +17,7 @@ export const campUpgradePrices: Record<CampUpgrade, number> = {
 	bulletin_board: 0,
 	morty: 100,
 	rowan: 100,
+	kurt: 50,
 };
 export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	market_1: [],
@@ -24,4 +26,5 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	bulletin_board: [],
 	morty: ['bulletin_board'],
 	rowan: ['bulletin_board'],
+	kurt: ['bulletin_board'],
 };

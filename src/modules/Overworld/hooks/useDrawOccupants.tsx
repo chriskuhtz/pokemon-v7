@@ -84,6 +84,7 @@ const drawOccupant = (
 				break;
 			case 'MERCHANT':
 			case 'CAMP_MANAGER':
+			case 'APRICORN_SMITH':
 			case 'NURSE':
 			case 'NPC':
 			case 'TRAINER':
@@ -151,6 +152,7 @@ const getSource = (occ: Occupant) => {
 			return occ.sprite;
 		case 'MERCHANT':
 		case 'CAMP_MANAGER':
+		case 'APRICORN_SMITH':
 		case 'NURSE':
 		case 'NPC':
 		case 'TRAINER':

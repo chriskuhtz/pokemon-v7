@@ -10,7 +10,14 @@ import {
 } from '../../../interfaces/SaveFile';
 
 export const shouldRotate = (t: OccupantType) =>
-	['NURSE', 'NPC', 'MERCHANT', 'CAMP_MANAGER', 'TRAINER'].includes(t);
+	[
+		'NURSE',
+		'NPC',
+		'MERCHANT',
+		'CAMP_MANAGER',
+		'TRAINER',
+		'APRICORN_SMITH',
+	].includes(t);
 export const interactWithFunction = ({
 	occ,
 	addMultipleMessages,
@@ -28,6 +35,7 @@ export const interactWithFunction = ({
 	interactWithHallowedTower,
 	goToCampMenu,
 	goToBulletinBoard,
+	goToApricornSmith,
 	settings,
 }: {
 	occ: Occupant | undefined;
@@ -46,6 +54,7 @@ export const interactWithFunction = ({
 	interactWithHallowedTower: () => void;
 	goToCampMenu: () => void;
 	goToBulletinBoard: () => void;
+	goToApricornSmith: () => void;
 	settings?: SettingsObject;
 }) => {
 	if (!occ) {
@@ -128,6 +137,20 @@ export const interactWithFunction = ({
 				message: d,
 				onRemoval:
 					i === data.dialogue.length - 1 ? () => goToCampMenu() : undefined,
+				needsNoConfirmation: true,
+			}))
+		);
+
+		return;
+	}
+	if (data.type === 'APRICORN_SMITH') {
+		addMultipleMessages(
+			data.dialogue.map((d, i) => ({
+				message: d,
+				onRemoval:
+					i === data.dialogue.length - 1
+						? () => goToApricornSmith()
+						: undefined,
 				needsNoConfirmation: true,
 			}))
 		);

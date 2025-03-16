@@ -7,6 +7,7 @@ import { MessageQueueContext } from './hooks/useMessageQueue';
 import { SaveFileContext } from './hooks/useSaveFile';
 import { generateInventory, Inventory } from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
+import { ApricornSmithy } from './modules/ApricornSmithy/ApricornSmithy';
 import { Bag } from './modules/Bag/Bag';
 import { BattleLoader } from './modules/Battle/components/BattleLoader';
 import { BulletinBoard } from './modules/BulletinBoard/BulletinBoard';
@@ -248,6 +249,9 @@ export const App = (): JSX.Element => {
 	}
 	if (activeTab === 'FOSSIL_REVIVER') {
 		return <FossilReviver />;
+	}
+	if (activeTab === 'APRICORN_SMITHY') {
+		return <ApricornSmithy goBack={() => setActiveTabReducer('OVERWORLD')} />;
 	}
 	if (activeTab === 'CAMP_UPGRADES') {
 		return <CampUpgrades goBack={() => setActiveTabReducer('OVERWORLD')} />;
