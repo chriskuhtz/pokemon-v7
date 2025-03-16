@@ -122,6 +122,53 @@ const market3Inventory: Partial<Inventory> = {
 	'super-repel': 1,
 };
 
+const merchants: Occupant[] = [
+	{
+		type: 'MERCHANT',
+		id: 'market_1',
+		x: 13,
+		y: 1,
+		orientation: 'DOWN',
+		sprite: SpriteEnum.clerkMale,
+		dialogue: ['If we get more famous, we can get more items delivered'],
+		inventory: { 'poke-ball': 1, potion: 1, antidote: 1, repel: 1 },
+		conditionFunction: (s) =>
+			s.campUpgrades.market_1 &&
+			!s.campUpgrades.market_2 &&
+			!s.campUpgrades.market_3,
+	},
+	{
+		type: 'MERCHANT',
+		id: 'market_2',
+		x: 13,
+		y: 1,
+		orientation: 'DOWN',
+		sprite: SpriteEnum.clerkMale,
+		dialogue: ['Thanks to your hard work, we get better deliveries'],
+		inventory: market2Inventory,
+		conditionFunction: (s) =>
+			s.campUpgrades.market_1 &&
+			s.campUpgrades.market_2 &&
+			!s.campUpgrades.market_3,
+	},
+	{
+		type: 'MERCHANT',
+		id: 'market_3',
+		x: 13,
+		y: 1,
+		orientation: 'DOWN',
+		sprite: SpriteEnum.clerkMale,
+		dialogue: [
+			'Keep it up and we will have a better selection than celadon city',
+		],
+		inventory: market3Inventory,
+		conditionFunction: (s) =>
+			s.campUpgrades.market_1 &&
+			s.campUpgrades.market_2 &&
+			s.campUpgrades.market_3,
+	},
+];
+
 const rowanLine: Occupant[] = [
 	{
 		type: 'NPC',
@@ -139,13 +186,13 @@ const rowanLine: Occupant[] = [
 		quest: 'catch a pokemon orginally found in kanto',
 		conditionFunction: (s) =>
 			s.campUpgrades['invite professor rowan'] &&
-			s.quests['catch a pokemon orginally found in kanto'] !== 'FULFILLED',
+			s.quests['catch a pokemon orginally found in kanto'] !== 'COLLECTED',
 		orientation: 'DOWN',
 		sprite: SpriteEnum.rowan,
 	},
 	{
 		type: 'NPC',
-		id: 'rowan_1',
+		id: 'rowan_2',
 		x: 5,
 		y: 15,
 		unhandledMessage: ['Great', 'Next, my travels took me to johto'],
@@ -153,14 +200,14 @@ const rowanLine: Occupant[] = [
 		quest: 'catch a pokemon orginally found in johto',
 		conditionFunction: (s) =>
 			s.campUpgrades['invite professor rowan'] &&
-			s.quests['catch a pokemon orginally found in kanto'] === 'FULFILLED' &&
-			s.quests['catch a pokemon orginally found in johto'] !== 'FULFILLED',
+			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in johto'] !== 'COLLECTED',
 		orientation: 'DOWN',
 		sprite: SpriteEnum.rowan,
 	},
 	{
 		type: 'NPC',
-		id: 'rowan_1',
+		id: 'rowan_3',
 		x: 5,
 		y: 15,
 		unhandledMessage: [
@@ -172,15 +219,15 @@ const rowanLine: Occupant[] = [
 		quest: 'catch a pokemon orginally found in hoenn',
 		conditionFunction: (s) =>
 			s.campUpgrades['invite professor rowan'] &&
-			s.quests['catch a pokemon orginally found in kanto'] === 'FULFILLED' &&
-			s.quests['catch a pokemon orginally found in johto'] === 'FULFILLED' &&
-			s.quests['catch a pokemon orginally found in hoenn'] !== 'FULFILLED',
+			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in hoenn'] !== 'COLLECTED',
 		orientation: 'DOWN',
 		sprite: SpriteEnum.rowan,
 	},
 	{
 		type: 'NPC',
-		id: 'rowan_1',
+		id: 'rowan_4',
 		x: 5,
 		y: 15,
 		unhandledMessage: [
@@ -191,10 +238,10 @@ const rowanLine: Occupant[] = [
 		quest: 'catch a pokemon orginally found in sinnoh',
 		conditionFunction: (s) =>
 			s.campUpgrades['invite professor rowan'] &&
-			s.quests['catch a pokemon orginally found in kanto'] === 'FULFILLED' &&
-			s.quests['catch a pokemon orginally found in johto'] === 'FULFILLED' &&
-			s.quests['catch a pokemon orginally found in hoenn'] === 'FULFILLED' &&
-			s.quests['catch a pokemon orginally found in sinnoh'] !== 'FULFILLED',
+			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in hoenn'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in sinnoh'] !== 'COLLECTED',
 		orientation: 'DOWN',
 		sprite: SpriteEnum.rowan,
 	},
@@ -242,6 +289,54 @@ const mortyLine: Occupant[] = [
 			s.quests['catch a spiritomb'] === 'COLLECTED',
 	},
 ];
+const trainingField: Occupant[] = [
+	{
+		type: 'OBSTACLE',
+		x: 15,
+		y: 0,
+		src: '/mapObjects/statueTop.png',
+		id: 'statue_1',
+		conditionFunction: (s) => s.campUpgrades['training field 1'],
+	},
+	{
+		type: 'OBSTACLE',
+		x: 15,
+		y: 1,
+		src: '/mapObjects/statueBottom.png',
+		id: 'statue_1',
+		conditionFunction: (s) => s.campUpgrades['training field 1'],
+	},
+	{
+		type: 'OBSTACLE',
+		x: 17,
+		y: 0,
+		src: '/mapObjects/statueTop.png',
+		id: 'statue_1',
+		conditionFunction: (s) => s.campUpgrades['training field 1'],
+	},
+	{
+		type: 'OBSTACLE',
+		x: 17,
+		y: 1,
+		src: '/mapObjects/statueBottom.png',
+		id: 'statue_1',
+		conditionFunction: (s) => s.campUpgrades['training field 1'],
+	},
+	{
+		type: 'TRAINING_FIELD_MASTER',
+		x: 16,
+		y: 1,
+		orientation: 'DOWN',
+		sprite: SpriteEnum.aceFemale,
+		id: 'training_field_master',
+		dialogue: [
+			'Welcome to the training field',
+			'Here you can challenge different trainers',
+			'and improve your skills',
+		],
+		conditionFunction: (s) => s.campUpgrades['training field 1'],
+	},
+];
 
 export const campOccupants: OverworldMap['occupants'] = [
 	{
@@ -261,7 +356,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 		gifts: { 'poke-ball': 20 },
 		quest: 'catch a pokemon',
 		sprite: SpriteEnum.oak,
-		conditionFunction: (s) => s.quests['catch a pokemon'] !== 'FULFILLED',
+		conditionFunction: (s) => s.quests['catch a pokemon'] !== 'COLLECTED',
 	},
 	{
 		type: 'NURSE',
@@ -337,50 +432,6 @@ export const campOccupants: OverworldMap['occupants'] = [
 		id: 'camp_pc',
 		conditionFunction: () => true,
 	},
-	{
-		type: 'MERCHANT',
-		id: 'market_1',
-		x: 14,
-		y: 1,
-		orientation: 'DOWN',
-		sprite: SpriteEnum.clerkMale,
-		dialogue: ['If we get more famous, we can get more items delivered'],
-		inventory: { 'poke-ball': 1, potion: 1, antidote: 1, repel: 1 },
-		conditionFunction: (s) =>
-			s.campUpgrades.market_1 &&
-			!s.campUpgrades.market_2 &&
-			!s.campUpgrades.market_3,
-	},
-	{
-		type: 'MERCHANT',
-		id: 'market_2',
-		x: 14,
-		y: 1,
-		orientation: 'DOWN',
-		sprite: SpriteEnum.clerkMale,
-		dialogue: ['Thanks to your hard work, we get better deliveries'],
-		inventory: market2Inventory,
-		conditionFunction: (s) =>
-			s.campUpgrades.market_1 &&
-			s.campUpgrades.market_2 &&
-			!s.campUpgrades.market_3,
-	},
-	{
-		type: 'MERCHANT',
-		id: 'market_3',
-		x: 14,
-		y: 1,
-		orientation: 'DOWN',
-		sprite: SpriteEnum.clerkMale,
-		dialogue: [
-			'Keep it up and we will have a better selection than celadon city',
-		],
-		inventory: market3Inventory,
-		conditionFunction: (s) =>
-			s.campUpgrades.market_1 &&
-			s.campUpgrades.market_2 &&
-			s.campUpgrades.market_3,
-	},
 
 	{
 		type: 'BULLETIN_BOARD',
@@ -400,12 +451,14 @@ export const campOccupants: OverworldMap['occupants'] = [
 		id: 'campUpgrade_kurt',
 		dialogue: [
 			'My name is kurt',
-			'Professor Oak and me came up together',
+			'Professor Oak and I started out together',
 			'I practice the ancient art',
 			'of turning apricorns into pokeballs',
 		],
 		conditionFunction: (s) => s.campUpgrades['invite apricorn smith kurt'],
 	},
+	...merchants,
+	...trainingField,
 	...mortyLine,
 	...rowanLine,
 ];

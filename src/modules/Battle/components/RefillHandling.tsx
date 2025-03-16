@@ -10,15 +10,12 @@ export const RefillHandling = ({
 	teamCanRefill,
 	addMessage,
 	putPokemonOnField,
-	opponentCanRefill,
-	opponents,
 }: {
 	teamCanRefill: boolean;
 	team: BattlePokemon[];
-	opponents: BattlePokemon[];
+
 	addMessage: (x: Message) => void;
 	putPokemonOnField: (id: string) => void;
-	opponentCanRefill: boolean;
 }) => {
 	if (teamCanRefill) {
 		return (
@@ -77,30 +74,6 @@ export const RefillHandling = ({
 			</Page>
 		);
 	}
-	if (opponentCanRefill) {
-		return (
-			<Page headline="">
-				<div>
-					Refill Oppos Time:
-					{opponents.map((t) => {
-						if (t.status === 'BENCH' && !isKO(t)) {
-							return (
-								<img
-									key={t.id}
-									src={getPokemonSprite(t.name)}
-									onClick={() =>
-										addMessage({
-											message: `Wild ${t.data.name} appears`,
-											onRemoval: () => putPokemonOnField(t.id),
-										})
-									}
-								/>
-							);
-						}
-					})}
-				</div>
-			</Page>
-		);
-	}
+
 	return <></>;
 };

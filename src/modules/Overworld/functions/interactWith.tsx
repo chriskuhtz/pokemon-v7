@@ -17,6 +17,7 @@ export const shouldRotate = (t: OccupantType) =>
 		'CAMP_MANAGER',
 		'TRAINER',
 		'APRICORN_SMITH',
+		'TRAINING_FIELD_MASTER',
 	].includes(t);
 export const interactWithFunction = ({
 	occ,
@@ -36,6 +37,7 @@ export const interactWithFunction = ({
 	goToCampMenu,
 	goToBulletinBoard,
 	goToApricornSmith,
+	challengeRandomTrainer,
 	settings,
 }: {
 	occ: Occupant | undefined;
@@ -55,6 +57,7 @@ export const interactWithFunction = ({
 	goToCampMenu: () => void;
 	goToBulletinBoard: () => void;
 	goToApricornSmith: () => void;
+	challengeRandomTrainer: () => void;
 	settings?: SettingsObject;
 }) => {
 	if (!occ) {
@@ -232,6 +235,18 @@ export const interactWithFunction = ({
 			);
 		}
 
+		return;
+	}
+	if (data.type === 'TRAINING_FIELD_MASTER') {
+		addMultipleMessages(
+			data.dialogue.map((d, i) => ({
+				message: d,
+				onRemoval:
+					i === data.dialogue.length - 1
+						? () => challengeRandomTrainer()
+						: undefined,
+			}))
+		);
 		return;
 	}
 	if (data.type === 'HONEY_TREE') {

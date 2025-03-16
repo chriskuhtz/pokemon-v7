@@ -1,34 +1,32 @@
 import { useCallback, useContext } from 'react';
-import { v4 } from 'uuid';
-import { testOpponent } from '../constants/gameData';
+import { OPPO_ID } from '../constants/gameData';
 import { getRandomIndex } from '../functions/filterTargets';
-import { joinInventories } from '../interfaces/Inventory';
+import { EmptyInventory, joinInventories } from '../interfaces/Inventory';
+import { getRandomNature } from '../interfaces/Natures';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { makeChallengerPokemon } from '../modules/Overworld/hooks/useChallengeTrainer';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
 const HONEY_ENCOUNTER_OPTIONS: OwnedPokemon[] = [
-	{
-		...testOpponent,
+	makeChallengerPokemon({
+		nature: getRandomNature(),
 		name: 'burmy',
 		xp: 200,
-		id: v4(),
 		caughtOnMap: 'routeN1',
-	},
-	{
-		...testOpponent,
-		name: 'heracross',
-		xp: 200,
-		id: v4(),
-		caughtOnMap: 'routeN1',
-	},
-	{
-		...testOpponent,
+	}),
+	makeChallengerPokemon({
+		nature: getRandomNature(),
 		name: 'mankey',
 		xp: 200,
-		id: v4(),
 		caughtOnMap: 'routeN1',
-	},
+	}),
+	makeChallengerPokemon({
+		nature: getRandomNature(),
+		name: 'heracross',
+		xp: 200,
+		caughtOnMap: 'routeN1',
+	}),
 ];
 
 export const useHoneyTree = () => {
@@ -63,6 +61,9 @@ export const useHoneyTree = () => {
 							meta: {
 								activeTab: 'BATTLE',
 								currentChallenger: {
+									type: 'WILD',
+									id: OPPO_ID,
+									inventory: EmptyInventory,
 									team: [
 										{
 											...HONEY_ENCOUNTER_OPTIONS[

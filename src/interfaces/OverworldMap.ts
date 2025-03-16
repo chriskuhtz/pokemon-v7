@@ -29,6 +29,8 @@ export const OCCUPANT_TYPES = [
 	'CAMP_MANAGER',
 	'BULLETIN_BOARD',
 	'APRICORN_SMITH',
+	'OBSTACLE',
+	'TRAINING_FIELD_MASTER',
 ] as const;
 export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
@@ -61,6 +63,12 @@ export interface OverworldMerchant extends BaseOccupant {
 }
 export interface OverworldCampManager extends BaseOccupant {
 	type: 'CAMP_MANAGER';
+	orientation: CharacterOrientation;
+	dialogue: string[];
+	sprite: string;
+}
+export interface TrainingFieldMaster extends BaseOccupant {
+	type: 'TRAINING_FIELD_MASTER';
 	orientation: CharacterOrientation;
 	dialogue: string[];
 	sprite: string;
@@ -126,6 +134,10 @@ export interface OverworldBulletinBoard extends BaseOccupant {
 	approachDirection: CharacterOrientation;
 	dialogue: string[];
 }
+export interface Obstacle extends BaseOccupant {
+	type: 'OBSTACLE';
+	src: string;
+}
 
 export type Occupant =
 	| OverworldItem
@@ -143,7 +155,9 @@ export type Occupant =
 	| OverworldCampManager
 	| OverworldBulletinBoard
 	| OverworldHallowedTower
-	| OverworldApricornSmith;
+	| OverworldApricornSmith
+	| Obstacle
+	| TrainingFieldMaster;
 
 export interface OverworldEncounter {
 	name: PokemonName;

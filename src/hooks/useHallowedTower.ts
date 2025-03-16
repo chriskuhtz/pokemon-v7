@@ -1,8 +1,9 @@
 import { useCallback, useContext } from 'react';
-import { v4 } from 'uuid';
-import { testOpponent } from '../constants/gameData';
+import { OPPO_ID } from '../constants/gameData';
 import { getTimeOfDay } from '../functions/getTimeOfDay';
-import { joinInventories } from '../interfaces/Inventory';
+import { EmptyInventory, joinInventories } from '../interfaces/Inventory';
+import { getRandomNature } from '../interfaces/Natures';
+import { makeChallengerPokemon } from '../modules/Overworld/hooks/useChallengeTrainer';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
@@ -47,14 +48,16 @@ export const useHallowedTower = () => {
 						meta: {
 							activeTab: 'BATTLE',
 							currentChallenger: {
+								type: 'WILD',
+								id: OPPO_ID,
+								inventory: EmptyInventory,
 								team: [
-									{
-										...testOpponent,
+									makeChallengerPokemon({
+										nature: getRandomNature(),
 										name: 'spiritomb',
 										xp: 2000,
-										id: v4(),
 										caughtOnMap: saveFile.location.mapId,
-									},
+									}),
 								],
 							},
 						},

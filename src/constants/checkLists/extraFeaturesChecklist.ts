@@ -185,4 +185,9 @@ export const extraFeatureCheckList: {
 	{ name: 'poison step damage' },
 	{ name: 'fly outside of battle' },
 	{ name: 'allow save snapshots' },
+	{ name: 'camp upgrade explanations' },
+	{ name: 'faster days setting' },
+	{
+		name: 'determine pokemon genders',
+	},
 ];

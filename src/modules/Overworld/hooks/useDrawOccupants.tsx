@@ -88,6 +88,7 @@ const drawOccupant = (
 			case 'APRICORN_SMITH':
 			case 'NURSE':
 			case 'NPC':
+			case 'TRAINING_FIELD_MASTER':
 			case 'TRAINER':
 				ctx?.drawImage(
 					img,
@@ -120,6 +121,7 @@ const drawOccupant = (
 					baseSize
 				);
 				break;
+			case 'OBSTACLE':
 			case 'HIDDEN_ITEM':
 				ctx?.drawImage(
 					img,
@@ -156,6 +158,7 @@ const getSource = (occ: Occupant) => {
 		case 'APRICORN_SMITH':
 		case 'NURSE':
 		case 'NPC':
+		case 'TRAINING_FIELD_MASTER':
 		case 'TRAINER':
 			return `/npcs/NPC_${occ.sprite}.png`;
 		case 'PC':
@@ -172,6 +175,8 @@ const getSource = (occ: Occupant) => {
 			return '/mapObjects/honeyTree.png';
 		case 'HALLOWED_TOWER':
 			return '/mapObjects/hallowedTower.png';
+		case 'OBSTACLE':
+			return occ.src;
 		case 'ITEM':
 			return getItemUrl(occ.item);
 		default:

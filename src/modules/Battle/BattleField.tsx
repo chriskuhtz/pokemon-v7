@@ -14,6 +14,7 @@ import { BattleLocation } from '../../functions/determineCaptureSuccess';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getSettings } from '../../functions/getPlayerId';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
+import { isKO } from '../../functions/isKo';
 import { reduceSecondaryAilmentDurations } from '../../functions/reduceSecondaryAilmentDurations';
 import { sortByPriority } from '../../functions/sortByPriority';
 import { Message } from '../../hooks/useMessageQueue';
@@ -581,14 +582,24 @@ export const BattleField = ({
 		team,
 	]);
 
-	if (battleStep === 'REFILLING') {
+	//Refill opponents
+	useEffect(() => {
+		if (battleStep === 'REFILLING' && opponentCanRefill) {
+			const options = opponents.filter((t) => t.status === 'BENCH' && !isKO(t));
+			const t = options[0];
+			addMessage({
+				message: `Opponent sends out ${t.data.name}`,
+				onRemoval: () => putPokemonOnField(t.id),
+			});
+		}
+	}, [addMessage, battleStep, opponentCanRefill, opponents, putPokemonOnField]);
+
+	if (battleStep === 'REFILLING' && teamCanRefill) {
 		return (
 			<RefillHandling
 				putPokemonOnField={putPokemonOnField}
 				team={team}
-				opponentCanRefill={opponentCanRefill}
 				teamCanRefill={teamCanRefill}
-				opponents={opponents}
 				addMessage={addMessage}
 			/>
 		);

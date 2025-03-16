@@ -4,8 +4,8 @@ import { Message } from '../../../hooks/useMessageQueue';
 import { LeaveBattlePayload } from '../../../hooks/useSaveFile';
 import { useScreenTransition } from '../../../hooks/useScreenTransition';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
+import { TrainerInfo } from '../../../interfaces/Challenger';
 import { Inventory } from '../../../interfaces/Inventory';
-import { OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { BattleField } from '../BattleField';
 import { IntroBanner } from './IntroBanner';
 import { LineUpSelection } from './LineUpSelection';
@@ -26,7 +26,7 @@ export const BattleOverview = ({
 	team: BattlePokemon[];
 	fightersPerSide: number;
 	inventory: Inventory;
-	trainer?: OverworldTrainer;
+	trainer?: TrainerInfo;
 	latestMessage: Message | undefined;
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;

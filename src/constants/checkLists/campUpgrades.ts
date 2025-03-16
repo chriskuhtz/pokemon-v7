@@ -7,6 +7,7 @@ export const campUpgradeNames = [
 	'invite professor rowan',
 	'invite apricorn smith kurt',
 	'access routeS1',
+	'training field 1',
 ] as const;
 
 export type CampUpgrade = (typeof campUpgradeNames)[number];
@@ -20,6 +21,7 @@ export const campUpgradePrices: Record<CampUpgrade, number> = {
 	'invite professor rowan': 50,
 	'invite apricorn smith kurt': 50,
 	'access routeS1': 50,
+	'training field 1': 50,
 };
 export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	bulletin_board: [],
@@ -30,4 +32,5 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'invite professor rowan': ['bulletin_board'],
 	'invite apricorn smith kurt': ['bulletin_board'],
 	'access routeS1': ['bulletin_board'],
+	'training field 1': ['bulletin_board'],
 };

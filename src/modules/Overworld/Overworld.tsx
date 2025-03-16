@@ -17,6 +17,7 @@ import { Occupant } from '../../interfaces/OverworldMap';
 import { CharacterLocationData, SaveFile } from '../../interfaces/SaveFile';
 import './Overworld.css';
 import { ClickerGrid } from './components/ClickerGrid';
+import { OverworldMenus } from './components/OverworldMenus';
 import { interactWithFunction } from './functions/interactWith';
 import { useClickTarget } from './hooks/useClickTarget';
 import { useDrawCharacter } from './hooks/useDrawCharacter';
@@ -25,7 +26,7 @@ import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOccupants } from './hooks/useOccupants';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
 import { useStartEncounter } from './hooks/useStartEncounter';
-import { OverworldMenus } from './components/OverworldMenus';
+import { useChallengeTrainer } from './hooks/useChallengeTrainer';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -59,6 +60,7 @@ export const Overworld = ({
 	const { baseSize } = useContext(BaseSizeContext);
 	const { saveFile, handleOccupantReducer, navigateAwayFromOverworldReducer } =
 		useContext(SaveFileContext);
+	const challengeRandomTrainer = useChallengeTrainer();
 	const interactWithHoneyTree = useHoneyTree();
 	const interactWithHallowedTower = useHallowedTower();
 	const addEncounterMessage = useStartEncounter();
@@ -105,9 +107,11 @@ export const Overworld = ({
 				goToApricornSmith: () =>
 					navigateAwayFromOverworldReducer('APRICORN_SMITHY', stepsTaken),
 				settings: saveFile.settings,
+				challengeRandomTrainer,
 			}),
 		[
 			addMultipleMessages,
+			challengeRandomTrainer,
 			cutterPokemon,
 			goToMarket,
 			handleOccupantReducer,

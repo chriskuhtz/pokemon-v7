@@ -4,7 +4,7 @@ import { battleSpriteSize } from '../../../constants/gameData';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { isKO } from '../../../functions/isKo';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
-import { OverworldTrainer } from '../../../interfaces/OverworldMap';
+import { TrainerInfo } from '../../../interfaces/Challenger';
 
 export const LineUpSelection = ({
 	leave,
@@ -23,7 +23,7 @@ export const LineUpSelection = ({
 	selectedTeam: string[];
 	toggleSelected: (id: string) => void;
 	startBattle: () => void;
-	trainer?: OverworldTrainer;
+	trainer?: TrainerInfo;
 }) => {
 	const battleButtonMessage = useMemo(() => {
 		if (selectedTeam.length < fightersPerSide)

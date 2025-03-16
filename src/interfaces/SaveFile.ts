@@ -2,6 +2,7 @@ import { CampUpgrade } from '../constants/checkLists/campUpgrades';
 import { QuestName } from '../constants/checkLists/questsRecord';
 import { MapId } from '../constants/maps/mapsRecord';
 import { BadgeName } from './Badge';
+import { Challenger } from './Challenger';
 import { Inventory } from './Inventory';
 import { BerryType, MulchType } from './Item';
 import { OwnedPokemon } from './OwnedPokemon';
@@ -36,11 +37,6 @@ export interface SettingsObject {
 	rogueLike: boolean;
 	randomOverworldItems: boolean;
 	randomQuestRewards: boolean;
-}
-
-export interface Challenger {
-	id?: string;
-	team: OwnedPokemon[];
 }
 
 export type BerryBushStatus =

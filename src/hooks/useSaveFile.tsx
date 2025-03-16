@@ -8,7 +8,7 @@ import React, {
 import { MoveName } from '../constants/checkLists/movesCheckList';
 
 import { QuestName, QuestsRecord } from '../constants/checkLists/questsRecord';
-import { localStorageId, testState } from '../constants/gameData';
+import { localStorageId, OPPO_ID, testState } from '../constants/gameData';
 import { mapsRecord } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
@@ -21,7 +21,11 @@ import { reduceBattlePokemonToOwnedPokemon } from '../functions/reduceBattlePoke
 import { reduceEncounterRateModifier } from '../functions/reduceEncounterRateModifier';
 import { updateItemFunction } from '../functions/updateItemFunction';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { Inventory, joinInventories } from '../interfaces/Inventory';
+import {
+	EmptyInventory,
+	Inventory,
+	joinInventories,
+} from '../interfaces/Inventory';
 import { EncounterChanceItem, ItemType } from '../interfaces/Item';
 import { Occupant } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
@@ -223,6 +227,9 @@ const useSaveFile = (
 				currentChallenger:
 					route === 'BATTLE'
 						? {
+								type: 'WILD',
+								id: OPPO_ID,
+								inventory: EmptyInventory,
 								team: determineWildPokemon(
 									team,
 									mapsRecord[saveFile.location.mapId]
@@ -282,11 +289,6 @@ const useSaveFile = (
 			...saveFile,
 			inventory: newInventory,
 			quests: updatedQuests,
-			meta: {
-				activeTab: occ.type === 'TRAINER' ? 'BATTLE' : saveFile.meta.activeTab,
-				currentChallenger:
-					occ.type === 'TRAINER' ? { team: occ.team, id: occ.id } : undefined,
-			},
 			handledOccupants: [
 				...saveFile.handledOccupants,
 				{ id: occ.id, resetAt: timer },
