@@ -3,6 +3,7 @@ import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { QuestStatus } from '../interfaces/Quest';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
 import { EmptyStatObject } from '../interfaces/StatObject';
+import { CampUpgrade, campUpgradeNames } from './checkLists/campUpgrades';
 import { QuestName, QuestsRecord } from './checkLists/questsRecord';
 
 export const frames = 16;
@@ -42,6 +43,10 @@ const baseQuestState: Record<QuestName, QuestStatus> = Object.fromEntries(
 	Object.keys(QuestsRecord).map((key) => [key, 'INACTIVE'])
 ) as Record<QuestName, QuestStatus>;
 
+const baseCampUpgrades: Record<CampUpgrade, boolean> = Object.fromEntries(
+	campUpgradeNames.map((key) => [key, false])
+) as Record<CampUpgrade, boolean>;
+
 export const testState: SaveFile = {
 	sprite: '',
 	badges: [],
@@ -63,11 +68,7 @@ export const testState: SaveFile = {
 		hasCaughtAPokemonWithHoney: false,
 	},
 	farm: { unlockedPlots: 1, plants: [] },
-	campUpgrades: {
-		market_1: false,
-		market_2: false,
-		bulletin_board: false,
-	},
+	campUpgrades: baseCampUpgrades,
 };
 
 export const OPPO_ID = 'oppo';
