@@ -17,6 +17,7 @@ import { isKO } from '../../../../../functions/isKo';
 import { Message } from '../../../../../hooks/useMessageQueue';
 import {
 	EFFECT_SPORE_CHANCE,
+	FLAME_BODY_CHANCE,
 	LEECH_DAMAGE_FACTOR,
 	POISON_POINT_CHANCE,
 	PrimaryAilment,
@@ -252,6 +253,21 @@ export const handleAttack = ({
 			'paralysis',
 			addMessage,
 			`by ${target.data.name}'s static`
+		);
+		updatedAttacker = b;
+	}
+	//check for flame-body
+	if (
+		target.ability === 'flame-body' &&
+		contactMoves.includes(move.name) &&
+		Math.random() < FLAME_BODY_CHANCE
+	) {
+		const { updatedTarget: b } = applyPrimaryAilmentToPokemon(
+			updatedAttacker,
+			updatedAttacker,
+			'burn',
+			addMessage,
+			`by ${target.data.name}'s flame body`
 		);
 		updatedAttacker = b;
 	}

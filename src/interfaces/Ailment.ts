@@ -57,4 +57,5 @@ export const RAIN_DISH_FACTOR = 1 / 16;
 //contact ability factors
 export const STATIC_CHANCE = 0.3;
 export const POISON_POINT_CHANCE = 0.3;
+export const FLAME_BODY_CHANCE = 0.3;
 export const EFFECT_SPORE_CHANCE = 0.1;
