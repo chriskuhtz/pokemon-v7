@@ -137,15 +137,7 @@ export const App = (): JSX.Element => {
 		);
 	}
 	if (activeTab === 'SETTINGS') {
-		return (
-			<Settings
-				proceed={(settings) => {
-					patchSaveFileReducer({
-						settings,
-					});
-				}}
-			/>
-		);
+		return <Settings />;
 	}
 	if (activeTab === 'SPRITE_SELECTION') {
 		return (

@@ -6,6 +6,7 @@ import {
 } from '../../constants/checkLists/questsRecord';
 import { battleSpriteSize } from '../../constants/gameData';
 import { getItemUrl } from '../../functions/getItemUrl';
+import { getRewardForQuest } from '../../functions/getRewardForQuest';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { ItemType } from '../../interfaces/Item';
@@ -30,8 +31,9 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 	return (
 		<Page headline={'Quests:'} goBack={goBack}>
 			<Stack mode="column">
-				{Object.entries(QuestsRecord).map(([name, quest]) => {
-					const status = quests[name as QuestName];
+				{Object.entries(QuestsRecord).map(([n, quest]) => {
+					const name = n as QuestName;
+					const status = quests[name];
 					const fulfilled = quest.conditionFunction(saveFile);
 					const collected = status === 'COLLECTED';
 					const active = status === 'ACTIVE' && !fulfilled;
@@ -51,11 +53,13 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 									{collected && <h4>COLLECTED</h4>}
 									<h5 style={{ display: 'flex', alignItems: 'center' }}>
 										Reward:
-										{Object.entries(quest.rewardItems).map(([item, amount]) => (
-											<React.Fragment key={item}>
-												{amount} x <img src={getItemUrl(item as ItemType)} />
-											</React.Fragment>
-										))}
+										{Object.entries(getRewardForQuest(name)).map(
+											([item, amount]) => (
+												<React.Fragment key={item}>
+													{amount} x <img src={getItemUrl(item as ItemType)} />
+												</React.Fragment>
+											)
+										)}
 									</h5>
 									<h5>Research Points: {quest.researchPoints}</h5>
 								</div>
@@ -69,7 +73,7 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 												message: `Earned ${quest.researchPoints} Research Points`,
 												needsNoConfirmation: true,
 											});
-											fulfillQuest(name as QuestName);
+											fulfillQuest(name);
 										}}
 										role="button"
 										tabIndex={0}

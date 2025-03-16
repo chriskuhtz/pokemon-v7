@@ -35,6 +35,7 @@ export interface SettingsObject {
 	//randomHeldItems: boolean;
 	rogueLike: boolean;
 	randomOverworldItems: boolean;
+	randomQuestRewards: boolean;
 }
 
 export interface Challenger {
