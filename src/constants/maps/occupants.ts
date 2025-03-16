@@ -97,10 +97,68 @@ const rowanLine: Occupant[] = [
 			'I have travelled all across the world',
 			'to study pokemon',
 			'It is important to encounter pokemon from all regions',
+			'Can you catch one from Kanto',
 		],
 		handledMessage: ['How is the catching going'],
 		quest: 'catch a pokemon orginally found in kanto',
-		conditionFunction: (s) => s.campUpgrades.rowan,
+		conditionFunction: (s) =>
+			s.campUpgrades.rowan &&
+			s.quests['catch a pokemon orginally found in kanto'] !== 'FULFILLED',
+		orientation: 'DOWN',
+		sprite: SpriteEnum.rowan,
+	},
+	{
+		type: 'NPC',
+		id: 'rowan_1',
+		x: 5,
+		y: 15,
+		unhandledMessage: ['Great', 'Next, my travels took me to johto'],
+		handledMessage: ['How is the catching going'],
+		quest: 'catch a pokemon orginally found in johto',
+		conditionFunction: (s) =>
+			s.campUpgrades.rowan &&
+			s.quests['catch a pokemon orginally found in kanto'] === 'FULFILLED' &&
+			s.quests['catch a pokemon orginally found in johto'] !== 'FULFILLED',
+		orientation: 'DOWN',
+		sprite: SpriteEnum.rowan,
+	},
+	{
+		type: 'NPC',
+		id: 'rowan_1',
+		x: 5,
+		y: 15,
+		unhandledMessage: [
+			'If you ever plan on going to hoenn',
+			'you better bring a boat',
+			'So much water ...',
+		],
+		handledMessage: ['How is the catching going'],
+		quest: 'catch a pokemon orginally found in hoenn',
+		conditionFunction: (s) =>
+			s.campUpgrades.rowan &&
+			s.quests['catch a pokemon orginally found in kanto'] === 'FULFILLED' &&
+			s.quests['catch a pokemon orginally found in johto'] === 'FULFILLED' &&
+			s.quests['catch a pokemon orginally found in hoenn'] !== 'FULFILLED',
+		orientation: 'DOWN',
+		sprite: SpriteEnum.rowan,
+	},
+	{
+		type: 'NPC',
+		id: 'rowan_1',
+		x: 5,
+		y: 15,
+		unhandledMessage: [
+			'I once got lost in Mt. coronet for a week',
+			'I did find some cranidos fossils though',
+		],
+		handledMessage: ['How is the catching going'],
+		quest: 'catch a pokemon orginally found in sinnoh',
+		conditionFunction: (s) =>
+			s.campUpgrades.rowan &&
+			s.quests['catch a pokemon orginally found in kanto'] === 'FULFILLED' &&
+			s.quests['catch a pokemon orginally found in johto'] === 'FULFILLED' &&
+			s.quests['catch a pokemon orginally found in hoenn'] === 'FULFILLED' &&
+			s.quests['catch a pokemon orginally found in sinnoh'] !== 'FULFILLED',
 		orientation: 'DOWN',
 		sprite: SpriteEnum.rowan,
 	},
