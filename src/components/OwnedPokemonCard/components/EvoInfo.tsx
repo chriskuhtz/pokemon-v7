@@ -86,7 +86,7 @@ const EvoButton = ({
 		if (min_happiness && ownedPokemon.happiness <= min_happiness) {
 			res.push(`${min_happiness} Happiness`);
 		}
-		if (time_of_day && getTimeOfDay().toLowerCase()) {
+		if (time_of_day && getTimeOfDay().toLowerCase() !== time_of_day) {
 			res.push(`${time_of_day}-time`);
 		}
 		if (held_item && ownedPokemon.heldItemName !== held_item.name) {

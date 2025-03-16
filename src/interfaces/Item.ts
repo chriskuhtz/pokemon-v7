@@ -102,7 +102,7 @@ export const evoStones = [
 	'shiny-stone',
 	'black-augurite',
 ] as const;
-export const heldItems = ['metal-coat'] as const;
+export const heldItems = ['metal-coat', 'oval-stone'] as const;
 
 export const valuables = [
 	'shoal-salt',
