@@ -181,4 +181,5 @@ export const extraFeatureCheckList: {
 	{ name: 'eggs?' },
 	{ name: 'opponent "learns" about volt-absorb etc ' },
 	{ name: 'pokemonSprite component' },
+	{ name: 'show evo readyness in overworld' },
 ];

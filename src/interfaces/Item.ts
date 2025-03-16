@@ -102,6 +102,7 @@ export const evoStones = [
 	'dusk-stone',
 	'shiny-stone',
 	'black-augurite',
+	'peat-block',
 ] as const;
 export const heldItems = [
 	'metal-coat',
