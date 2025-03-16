@@ -141,7 +141,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch a pokemon orginally found in kanto': {
 		rewardItems: { protein: 2 },
-		researchPoints: 5,
+		researchPoints: 10,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) => pokemonNames.slice(0, 151).includes(p.name));
 		},
@@ -149,7 +149,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch a pokemon orginally found in johto': {
 		rewardItems: { iron: 2 },
-		researchPoints: 5,
+		researchPoints: 10,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
 				pokemonNames.slice(150, 251).includes(p.name)
@@ -159,7 +159,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch a pokemon orginally found in hoenn': {
 		rewardItems: { calcium: 2 },
-		researchPoints: 5,
+		researchPoints: 10,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
 				pokemonNames.slice(250, 387).includes(p.name)
@@ -169,7 +169,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch a pokemon orginally found in sinnoh': {
 		rewardItems: { zinc: 2 },
-		researchPoints: 5,
+		researchPoints: 10,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
 				pokemonNames.slice(386, 494).includes(p.name)
