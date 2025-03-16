@@ -148,7 +148,9 @@ export const calculateDamage = (
 		damageClass === 'physical'
 			? calculateModifiedStat(target.stats.defense, defBoost)
 			: calculateModifiedStat(target.stats.spdef, spdefBoost);
-	const statFactor = atk / def;
+
+	const finalDef = attack.name === 'self-destruct' ? def / 2 : def;
+	const statFactor = atk / finalDef;
 
 	const pureDamage = (levelFactor * power * statFactor) / 50 + 2;
 

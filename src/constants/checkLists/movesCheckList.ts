@@ -464,10 +464,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/116/',
 		handled: true,
 	},
-	{ name: 'bide', url: 'https://pokeapi.co/api/v2/move/117/' },
-	{ name: 'metronome', url: 'https://pokeapi.co/api/v2/move/118/' },
-	{ name: 'mirror-move', url: 'https://pokeapi.co/api/v2/move/119/' },
-	{ name: 'self-destruct', url: 'https://pokeapi.co/api/v2/move/120/' },
+	{
+		name: 'self-destruct',
+		url: 'https://pokeapi.co/api/v2/move/120/',
+		handled: true,
+	},
 	{
 		name: 'egg-bomb',
 		url: 'https://pokeapi.co/api/v2/move/121/',
@@ -1519,7 +1520,10 @@ export const movesCheckList: {
 	{ name: 'shadow-panic', url: 'https://pokeapi.co/api/v2/move/10016/' },
 	{ name: 'shadow-shed', url: 'https://pokeapi.co/api/v2/move/10017/' },
 	{ name: 'shadow-sky', url: 'https://pokeapi.co/api/v2/move/10018/' },
-	{ name: 'mimic', url: 'https://pokeapi.co/api/v2/move/102/', handled: true },
+	{ name: 'mimic', url: 'https://pokeapi.co/api/v2/move/102/' },
+	{ name: 'bide', url: 'https://pokeapi.co/api/v2/move/117/' },
+	{ name: 'metronome', url: 'https://pokeapi.co/api/v2/move/118/' },
+	{ name: 'mirror-move', url: 'https://pokeapi.co/api/v2/move/119/' },
 ];
 
 export const handledMoves = [
@@ -1678,6 +1682,7 @@ export const handledMoves = [
 	'reflect',
 	'haze',
 	'focus-energy',
+	'self-destruct',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

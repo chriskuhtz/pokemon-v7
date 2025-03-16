@@ -187,6 +187,11 @@ export const handleAttack = ({
 		addMessage({ message: `Coins scattered everywhere` });
 		scatterCoins();
 	}
+
+	//UPDATES
+
+	//ATTACKER
+	//apply rage
 	if (move.name === 'rage') {
 		updatedAttacker = applySecondaryAilmentToPokemon(
 			updatedAttacker,
@@ -194,6 +199,7 @@ export const handleAttack = ({
 			addMessage
 		);
 	}
+	//apply focus
 	if (move.name === 'focus-energy') {
 		updatedAttacker = applySecondaryAilmentToPokemon(
 			updatedAttacker,
@@ -201,10 +207,10 @@ export const handleAttack = ({
 			addMessage
 		);
 	}
-
-	//UPDATES
-
-	//ATTACKER
+	//self destruct
+	if (SELF_DESTRUCTING_MOVES.includes(move.name)) {
+		updatedAttacker = handleFainting(updatedAttacker, addMessage);
+	}
 
 	//apply confusion on lock in end
 	if (
