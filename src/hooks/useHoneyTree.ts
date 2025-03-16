@@ -1,10 +1,12 @@
 import { useCallback, useContext } from 'react';
-import { OPPO_ID } from '../constants/gameData';
 import { getRandomIndex } from '../functions/filterTargets';
+import {
+	makeChallengerPokemon,
+	OPPO_ID,
+} from '../functions/makeChallengerPokemon';
 import { EmptyInventory, joinInventories } from '../interfaces/Inventory';
 import { getRandomNature } from '../interfaces/Natures';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
-import { makeChallengerPokemon } from '../modules/Overworld/hooks/useChallengeTrainer';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 

@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react';
-import { OPPO_ID } from '../../../constants/gameData';
 import {
 	filterTargets,
 	getRandomIndex,
@@ -10,6 +9,7 @@ import { Inventory } from '../../../interfaces/Inventory';
 import { ActionType, ChooseActionPayload } from '../BattleField';
 import { ActionSelection } from './ActionSelection';
 import { TargetSelection } from './TargetSelection';
+import { OPPO_ID } from '../../../functions/makeChallengerPokemon';
 
 export function ControlBar({
 	controlled,

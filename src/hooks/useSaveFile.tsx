@@ -8,7 +8,7 @@ import React, {
 import { MoveName } from '../constants/checkLists/movesCheckList';
 
 import { QuestName, QuestsRecord } from '../constants/checkLists/questsRecord';
-import { localStorageId, OPPO_ID, testState } from '../constants/gameData';
+import { localStorageId, testState } from '../constants/gameData';
 import { mapsRecord } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
@@ -16,6 +16,7 @@ import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 import { determineWildPokemon } from '../functions/determineWildPokemon';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getRewardForQuest } from '../functions/getRewardForQuest';
+import { OPPO_ID } from '../functions/makeChallengerPokemon';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { reduceBattlePokemonToOwnedPokemon } from '../functions/reduceBattlePokemonToOwnedPokemon';
 import { reduceEncounterRateModifier } from '../functions/reduceEncounterRateModifier';

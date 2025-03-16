@@ -1,8 +1,8 @@
 import { getRandomNature } from '../interfaces/Natures';
 import { OverworldMap } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
-import { makeChallengerPokemon } from '../modules/Overworld/hooks/useChallengeTrainer';
 import { getRandomEncounter } from './getRandomEncounter';
+import { makeChallengerPokemon } from './makeChallengerPokemon';
 
 export const determineWildPokemon = (
 	team: OwnedPokemon[],
