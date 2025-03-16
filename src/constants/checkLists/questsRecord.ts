@@ -16,6 +16,10 @@ export const questNames = [
 	'catch a spiritomb',
 	'catch all nighttime pokemon from routeN1',
 	'catch Haunter and Mightyena',
+	'catch a pokemon and its galarian variant',
+	'catch a pokemon and its alolan variant',
+	'catch a pokemon and its hisui variant',
+	'catch a pokemon and its paldea variant',
 ] as const;
 export type QuestName = (typeof questNames)[number];
 
@@ -135,6 +139,54 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			return (
 				s.pokemon.some((p) => p.name === 'haunter') &&
 				s.pokemon.some((p) => p.name === 'mightyena')
+			);
+		},
+		kind: 'STORY',
+	},
+	'catch a pokemon and its galarian variant': {
+		rewardItems: { 'sitrus-berry': 10 },
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			return s.pokemon.some((search) =>
+				s.pokemon.some((result) =>
+					[search.name + '-galar'].includes(result.name)
+				)
+			);
+		},
+		kind: 'STORY',
+	},
+	'catch a pokemon and its alolan variant': {
+		rewardItems: { 'ultra-ball': 10 },
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			return s.pokemon.some((search) =>
+				s.pokemon.some((result) =>
+					[search.name + '-alola'].includes(result.name)
+				)
+			);
+		},
+		kind: 'STORY',
+	},
+	'catch a pokemon and its hisui variant': {
+		rewardItems: { 'black-augurite': 1 },
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			return s.pokemon.some((search) =>
+				s.pokemon.some((result) =>
+					[search.name + '-hisui'].includes(result.name)
+				)
+			);
+		},
+		kind: 'STORY',
+	},
+	'catch a pokemon and its paldea variant': {
+		rewardItems: { elixir: 3 },
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			return s.pokemon.some((search) =>
+				s.pokemon.some((result) =>
+					[search.name + '-paldea'].includes(result.name)
+				)
 			);
 		},
 		kind: 'STORY',
