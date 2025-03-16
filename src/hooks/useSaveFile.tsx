@@ -489,7 +489,10 @@ const useSaveFile = (
 			  )
 			: saveFile.inventory;
 
-		addMessage({ message: `Your ${name} evolved into ${newName}` });
+		addMessage({
+			message: `Your ${name} evolved into ${newName}`,
+			needsNoConfirmation: true,
+		});
 
 		patchSaveFileReducer({
 			pokemon: saveFile.pokemon.map((p) => {
