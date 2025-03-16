@@ -80,7 +80,7 @@ export const extraFeatureCheckList: {
 	{ name: 'level badges in storage', handled: true },
 	{ name: 'assign random nature to encounters', handled: true },
 	{ name: 'setting: randomized items', handled: true },
-	{ name: 'setting: random quest rewards' },
+	{ name: 'setting: random quest rewards', handled: true },
 	{ name: 'shaders in battle' },
 	{ name: 'prettier weather display' },
 	{ name: 'Battle Attack animation' },
@@ -174,4 +174,9 @@ export const extraFeatureCheckList: {
 	{ name: 'pokedex' },
 	{ name: 'assign correct ability on load' },
 	{ name: 'pick moves for starters' },
+	{ name: 'Route E1' },
+	{ name: 'Route N1E1' },
+	{ name: 'Route S1' },
+	{ name: 'Route S1E1' },
+	{ name: 'random encounters' },
 ];

@@ -15,6 +15,7 @@ import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 import { calculateLevelData } from '../functions/calculateLevelData';
 import { determineWildPokemon } from '../functions/determineWildPokemon';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
+import { getRewardForQuest } from '../functions/getRewardForQuest';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { reduceBattlePokemonToOwnedPokemon } from '../functions/reduceBattlePokemonToOwnedPokemon';
 import { reduceEncounterRateModifier } from '../functions/reduceEncounterRateModifier';
@@ -314,12 +315,12 @@ const useSaveFile = (
 			inventory: updatedInventory,
 		});
 	};
+
 	const fulfillQuestReducer = (q: QuestName) => {
 		const quest = QuestsRecord[q];
-		const updatedInventory = joinInventories(
-			saveFile.inventory,
-			quest.rewardItems
-		);
+
+		const reward = getRewardForQuest(q);
+		const updatedInventory = joinInventories(saveFile.inventory, reward);
 		setSaveFile({
 			...saveFile,
 			inventory: updatedInventory,

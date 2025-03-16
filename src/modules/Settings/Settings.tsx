@@ -1,20 +1,50 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { QuestsRecord } from '../../constants/checkLists/questsRecord';
+import { SaveFileContext } from '../../hooks/useSaveFile';
+import { getRandomItem } from '../../interfaces/Item';
 import { SettingsObject } from '../../interfaces/SaveFile';
 import { Page } from '../../uiComponents/Page/Page';
 import { ToggleRow } from '../../uiComponents/ToggleRow/ToggleRow';
 
-export const Settings = ({
-	proceed,
-}: {
-	proceed: (settings: SettingsObject) => void;
-}): JSX.Element => {
+export const randomQuestRewards = 'randomQuestRewards';
+export const Settings = (): JSX.Element => {
+	const { patchSaveFileReducer } = useContext(SaveFileContext);
+
 	const [state, setState] = useState<SettingsObject>({
 		randomStarters: false,
 		rogueLike: false,
 		randomOverworldItems: false,
+		randomQuestRewards: false,
 		//disqualifyFaintedPokemon: false,
 		//randomHeldItems: false,
 	});
+
+	const proceed = () => {
+		if (state.randomQuestRewards) {
+			window.localStorage.setItem(
+				randomQuestRewards,
+				JSON.stringify(
+					Object.fromEntries(
+						Object.entries(QuestsRecord).map(([name, quest]) => {
+							return [
+								name,
+								{
+									...quest,
+									rewardItems: {
+										[getRandomItem()]: Math.floor(1 + Math.random() * 9),
+									},
+								},
+							];
+						})
+					)
+				)
+			);
+		} else window.localStorage.removeItem(randomQuestRewards);
+
+		patchSaveFileReducer({
+			settings: state,
+		});
+	};
 	return (
 		<Page headline="Settings:">
 			<div
@@ -41,7 +71,13 @@ export const Settings = ({
 					value={state.randomOverworldItems}
 					setValue={(x) => setState({ ...state, randomOverworldItems: x })}
 					label={'Random Overworld Items:'}
-					description="This might make some quests impossible"
+					description="This can make some quests impossible"
+				/>
+				<ToggleRow
+					value={state.randomQuestRewards}
+					setValue={(x) => setState({ ...state, randomQuestRewards: x })}
+					label={'Random Quest Rewards:'}
+					description="This can make some quests impossible"
 				/>
 				{/* <ToggleRow
 					value={state.randomHeldItems}
@@ -57,7 +93,7 @@ export const Settings = ({
 			</div>
 			<br />
 			<br />
-			<button style={{ width: '100%' }} onClick={() => proceed(state)}>
+			<button style={{ width: '100%' }} onClick={() => proceed()}>
 				Lets go
 			</button>
 		</Page>

@@ -6,6 +6,7 @@ import {
 } from '../../constants/checkLists/questsRecord';
 import { battleSpriteSize } from '../../constants/gameData';
 import { getItemUrl } from '../../functions/getItemUrl';
+import { getRewardForQuest } from '../../functions/getRewardForQuest';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { ItemType } from '../../interfaces/Item';
@@ -70,11 +71,13 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 
 									<h5 style={{ display: 'flex', alignItems: 'center' }}>
 										Reward:
-										{Object.entries(quest.rewardItems).map(([item, amount]) => (
-											<React.Fragment key={item}>
-												{amount} x <img src={getItemUrl(item as ItemType)} />
-											</React.Fragment>
-										))}
+										{Object.entries(getRewardForQuest(name)).map(
+											([item, amount]) => (
+												<React.Fragment key={item}>
+													{amount} x <img src={getItemUrl(item as ItemType)} />
+												</React.Fragment>
+											)
+										)}
 									</h5>
 									<h5>Research Points: {quest.researchPoints}</h5>
 								</div>
