@@ -1,7 +1,9 @@
 import { generateInventory } from '../interfaces/Inventory';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { QuestStatus } from '../interfaces/Quest';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
 import { EmptyStatObject } from '../interfaces/StatObject';
+import { QuestName, QuestsRecord } from './checkLists/questsRecord';
 
 export const frames = 16;
 export const fps = 1000 / 16;
@@ -35,21 +37,16 @@ export const startingLocation: CharacterLocationData = {
 	x: 5,
 	y: 6,
 };
+
+const baseQuestState: Record<QuestName, QuestStatus> = Object.fromEntries(
+	Object.keys(QuestsRecord).map((key) => [key, 'INACTIVE'])
+) as Record<QuestName, QuestStatus>;
+
 export const testState: SaveFile = {
 	sprite: '',
 	badges: [],
 	researchPoints: 0,
-	quests: {
-		'catch a pokemon': 'INACTIVE',
-		'catch a pikachu': 'INACTIVE',
-		'lure a pokemon with honey': 'INACTIVE',
-		'evolve a pokemon': 'INACTIVE',
-		'catch a daytime pokemon from routeN1': 'INACTIVE',
-		'catch a morning pokemon from routeN1': 'INACTIVE',
-		'catch a evening pokemon from routeN1': 'INACTIVE',
-		'catch a nighttime pokemon from routeN1': 'INACTIVE',
-		'catch a pokemon orginally found in kanto': 'INACTIVE',
-	},
+	quests: baseQuestState,
 	inventory: generateInventory({}),
 	playerId: '',
 	money: 5000,
