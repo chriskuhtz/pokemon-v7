@@ -26,6 +26,7 @@ import { Settings } from './modules/Settings/Settings';
 import { SpriteSelection } from './modules/SpriteSelection/SpriteSelection';
 import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { Team } from './modules/Team/Team';
+import { TrainingField } from './modules/TrainingField/TrainingField';
 
 export const FullScreenToggle = () => {
 	const [f, setF] = useState<boolean>(!!document.fullscreenElement);
@@ -255,6 +256,9 @@ export const App = (): JSX.Element => {
 	}
 	if (activeTab === 'CAMP_UPGRADES') {
 		return <CampUpgrades goBack={() => setActiveTabReducer('OVERWORLD')} />;
+	}
+	if (activeTab === 'TRAINING_FIELD') {
+		return <TrainingField />;
 	}
 	if (activeTab === 'MARKET') {
 		return (

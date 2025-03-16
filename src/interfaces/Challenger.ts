@@ -1,3 +1,5 @@
+import { CampUpgrade } from '../constants/checkLists/campUpgrades';
+import { QuestName } from '../constants/checkLists/questsRecord';
 import { BattlePokemon } from './BattlePokemon';
 import { Inventory } from './Inventory';
 import { OwnedPokemon } from './OwnedPokemon';
@@ -12,6 +14,8 @@ export interface Challenger {
 	id: string;
 	inventory: Inventory;
 	trainer?: TrainerInfo;
+	availableAfter?: QuestName;
+	requiredUpgrade?: CampUpgrade;
 }
 
 export interface BattleChallenger {

@@ -37,7 +37,7 @@ export const interactWithFunction = ({
 	goToCampMenu,
 	goToBulletinBoard,
 	goToApricornSmith,
-	challengeRandomTrainer,
+	goToTrainingField,
 	settings,
 }: {
 	occ: Occupant | undefined;
@@ -57,7 +57,7 @@ export const interactWithFunction = ({
 	goToCampMenu: () => void;
 	goToBulletinBoard: () => void;
 	goToApricornSmith: () => void;
-	challengeRandomTrainer: () => void;
+	goToTrainingField: () => void;
 	settings?: SettingsObject;
 }) => {
 	if (!occ) {
@@ -243,7 +243,7 @@ export const interactWithFunction = ({
 				message: d,
 				onRemoval:
 					i === data.dialogue.length - 1
-						? () => challengeRandomTrainer()
+						? () => goToTrainingField()
 						: undefined,
 			}))
 		);

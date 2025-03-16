@@ -20,5 +20,6 @@ export const routes = [
 	'CAMP_UPGRADES',
 	'BULLETIN_BOARD',
 	'APRICORN_SMITHY',
+	'TRAINING_FIELD',
 ] as const;
 export type RoutesType = (typeof routes)[number];

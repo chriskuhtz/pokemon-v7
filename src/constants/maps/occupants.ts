@@ -281,8 +281,14 @@ const mortyLine: Occupant[] = [
 			'Can i ask you to find out more',
 			'about the ghost and dark pokemon of this region',
 		],
-		handledMessage: ['I hope they dont scare you too much'],
-		quest: 'catch a spiritomb',
+		handledMessage: [
+			'If you complete this quest',
+			'I might stop by the training field',
+			'and we can see who´s the better trainer',
+			'Keep in mind, i am a gym leader back home',
+			'So dont feel too bad if you loose',
+		],
+		quest: 'catch Haunter and Mightyena',
 		gifts: { 'dusk-ball': 5 },
 		conditionFunction: (s) =>
 			s.campUpgrades['invite ghost expert morty'] &&
