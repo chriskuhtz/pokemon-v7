@@ -12,6 +12,7 @@ export const questNames = [
 	'catch a evening pokemon from routeN1',
 	'catch a nighttime pokemon from routeN1',
 	'catch a pokemon orginally found in kanto',
+	'catch a pokemon orginally found in johto',
 ] as const;
 export type QuestName = (typeof questNames)[number];
 
@@ -94,6 +95,16 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => {
 			return s.pokemon.some(
 				(p) => getMiddleOfThree([0, p.dexId, 151]) === p.dexId
+			);
+		},
+		kind: 'GENERIC',
+	},
+	'catch a pokemon orginally found in johto': {
+		rewardItems: { 'super-potion': 5 },
+		researchPoints: 5,
+		conditionFunction: (s) => {
+			return s.pokemon.some(
+				(p) => getMiddleOfThree([151, p.dexId, 251]) === p.dexId
 			);
 		},
 		kind: 'GENERIC',
