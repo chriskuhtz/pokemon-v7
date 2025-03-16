@@ -1,3 +1,5 @@
+import { CampUpgrade } from '../constants/checkLists/campUpgrades';
+import { QuestName } from '../constants/checkLists/questsRecord';
 import { Inventory } from './Inventory';
 import { SaveFile } from './SaveFile';
 
@@ -10,4 +12,6 @@ export interface Quest {
 	researchPoints: number;
 	conditionFunction: (saveFile: SaveFile) => boolean;
 	kind: QuestKind;
+	availableAfter?: QuestName;
+	requiredUpgrade?: CampUpgrade;
 }

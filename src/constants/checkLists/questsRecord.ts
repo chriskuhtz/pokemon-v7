@@ -1,20 +1,31 @@
 import { Quest } from '../../interfaces/Quest';
 import { routeN1 } from '../maps/routeN1';
+import { routeS1 } from '../maps/routeS1';
 import { pokemonNames } from '../pokemonNames';
 
 export const questNames = [
 	'catch a pikachu',
 	'catch a pokemon',
-	'lure a pokemon with honey',
-	'evolve a pokemon',
+	'catch a spiritomb',
+	'catch Haunter and Mightyena',
 	'catch a morning pokemon from routeN1',
 	'catch a daytime pokemon from routeN1',
 	'catch a evening pokemon from routeN1',
 	'catch a nighttime pokemon from routeN1',
-	'catch a spiritomb',
-	'catch all nighttime pokemon from routeN1',
+	'catch all morning pokemon from routeN1',
 	'catch all daytime pokemon from routeN1',
-	'catch Haunter and Mightyena',
+	'catch all evening pokemon from routeN1',
+	'catch all nighttime pokemon from routeN1',
+	'catch a ultra rare pokemon on routeN1',
+	'catch a morning pokemon from routeS1',
+	'catch a daytime pokemon from routeS1',
+	'catch a evening pokemon from routeS1',
+	'catch a nighttime pokemon from routeS1',
+	'catch all morning pokemon from routeS1',
+	'catch all daytime pokemon from routeS1',
+	'catch all evening pokemon from routeS1',
+	'catch all nighttime pokemon from routeS1',
+	'catch a ultra rare pokemon on routeS1',
 	'catch a pokemon orginally found in kanto',
 	'catch a pokemon orginally found in johto',
 	'catch a pokemon orginally found in hoenn',
@@ -28,8 +39,9 @@ export const questNames = [
 	'catch a pokemon and its alolan variant',
 	'catch a pokemon and its hisui variant',
 	'catch a pokemon and its paldea variant',
-	'catch a ultra rare pokemon on routeN1',
 	'craft a apricorn ball',
+	'lure a pokemon with honey',
+	'evolve a pokemon',
 ] as const;
 /**
  * Ideas:
@@ -55,6 +67,25 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			return s.pokemon.some((p) => p.name === 'pikachu');
 		},
 		kind: 'BULLETIN',
+	},
+	'catch a spiritomb': {
+		rewardItems: { 'rare-candy': 3 },
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) => p.name === 'spiritomb');
+		},
+		kind: 'QUEST_LINE',
+	},
+	'catch Haunter and Mightyena': {
+		rewardItems: { 'rare-bone': 2 },
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			return (
+				s.pokemon.some((p) => p.name === 'haunter') &&
+				s.pokemon.some((p) => p.name === 'mightyena')
+			);
+		},
+		kind: 'QUEST_LINE',
 	},
 	'catch a morning pokemon from routeN1': {
 		rewardItems: { 'sun-stone': 1 },
@@ -111,31 +142,16 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		kind: 'BULLETIN',
 	},
-	'lure a pokemon with honey': {
-		rewardItems: { 'sitrus-berry': 3 },
-		researchPoints: 10,
-		conditionFunction: (s) => {
-			return s.mileStones.hasCaughtAPokemonWithHoney;
-		},
-		kind: 'BULLETIN',
-	},
-	'evolve a pokemon': {
-		rewardItems: { 'rare-candy': 1 },
-		researchPoints: 10,
-		conditionFunction: (s) => {
-			return s.mileStones.hasEvolvedAPokemon;
-		},
-		kind: 'BULLETIN',
-	},
-	'catch all nighttime pokemon from routeN1': {
-		rewardItems: { 'odd-keystone': 1 },
+	'catch all morning pokemon from routeN1': {
+		rewardItems: { 'hyper-potion': 2 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return routeN1.possibleEncounters.NIGHT.every((e) =>
+			return routeN1.possibleEncounters.EVENING.every((e) =>
 				s.pokemon.some((p) => p.name === e.name)
 			);
 		},
 		kind: 'BULLETIN',
+		availableAfter: 'catch a morning pokemon from routeN1',
 	},
 	'catch all daytime pokemon from routeN1': {
 		rewardItems: { honey: 10 },
@@ -146,25 +162,137 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			);
 		},
 		kind: 'BULLETIN',
+		availableAfter: 'catch a daytime pokemon from routeN1',
 	},
-	'catch a spiritomb': {
-		rewardItems: { 'rare-candy': 3 },
-		researchPoints: 50,
-		conditionFunction: (s) => {
-			return s.pokemon.some((p) => p.name === 'spiritomb');
-		},
-		kind: 'QUEST_LINE',
-	},
-	'catch Haunter and Mightyena': {
-		rewardItems: { 'rare-bone': 2 },
+	'catch all evening pokemon from routeN1': {
+		rewardItems: { 'full-heal': 5 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return (
-				s.pokemon.some((p) => p.name === 'haunter') &&
-				s.pokemon.some((p) => p.name === 'mightyena')
+			return routeN1.possibleEncounters.MORNING.every((e) =>
+				s.pokemon.some((p) => p.name === e.name)
 			);
 		},
-		kind: 'QUEST_LINE',
+		kind: 'BULLETIN',
+		availableAfter: 'catch a evening pokemon from routeN1',
+	},
+	'catch all nighttime pokemon from routeN1': {
+		rewardItems: { 'odd-keystone': 1 },
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			return routeN1.possibleEncounters.NIGHT.every((e) =>
+				s.pokemon.some((p) => p.name === e.name)
+			);
+		},
+		kind: 'BULLETIN',
+		availableAfter: 'catch a nighttime pokemon from routeN1',
+	},
+	'catch a morning pokemon from routeS1': {
+		rewardItems: { 'sun-stone': 1 },
+		researchPoints: 5,
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) =>
+				routeS1.possibleEncounters.MORNING.some((e) => e.name === p.name)
+			);
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'access routeS1',
+	},
+	'catch a daytime pokemon from routeS1': {
+		rewardItems: { 'fire-stone': 1 },
+		researchPoints: 5,
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) =>
+				routeS1.possibleEncounters.DAY.some((e) => e.name === p.name)
+			);
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'access routeS1',
+	},
+	'catch a evening pokemon from routeS1': {
+		rewardItems: { 'dusk-stone': 1 },
+		researchPoints: 5,
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) =>
+				routeS1.possibleEncounters.EVENING.some((e) => e.name === p.name)
+			);
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'access routeS1',
+	},
+	'catch a nighttime pokemon from routeS1': {
+		rewardItems: { 'moon-stone': 1 },
+		researchPoints: 5,
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) =>
+				routeS1.possibleEncounters.NIGHT.some((e) => e.name === p.name)
+			);
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'access routeS1',
+	},
+	'catch a ultra rare pokemon on routeS1': {
+		rewardItems: { 'berry-juice': 5 },
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) =>
+				[
+					...routeS1.possibleEncounters.NIGHT,
+					...routeS1.possibleEncounters.MORNING,
+					...routeS1.possibleEncounters.DAY,
+					...routeS1.possibleEncounters.EVENING,
+				].some((e) => e.rarity === 'ultra-rare' && e.name === p.name)
+			);
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'access routeS1',
+	},
+	'catch all morning pokemon from routeS1': {
+		rewardItems: { 'hyper-potion': 2 },
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			return routeS1.possibleEncounters.EVENING.every((e) =>
+				s.pokemon.some((p) => p.name === e.name)
+			);
+		},
+		kind: 'BULLETIN',
+		availableAfter: 'catch a morning pokemon from routeS1',
+		requiredUpgrade: 'access routeS1',
+	},
+	'catch all daytime pokemon from routeS1': {
+		rewardItems: { honey: 10 },
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			return routeS1.possibleEncounters.DAY.every((e) =>
+				s.pokemon.some((p) => p.name === e.name)
+			);
+		},
+		kind: 'BULLETIN',
+		availableAfter: 'catch a daytime pokemon from routeS1',
+		requiredUpgrade: 'access routeS1',
+	},
+	'catch all evening pokemon from routeS1': {
+		rewardItems: { 'full-heal': 5 },
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			return routeS1.possibleEncounters.MORNING.every((e) =>
+				s.pokemon.some((p) => p.name === e.name)
+			);
+		},
+		kind: 'BULLETIN',
+		availableAfter: 'catch a evening pokemon from routeS1',
+		requiredUpgrade: 'access routeS1',
+	},
+	'catch all nighttime pokemon from routeS1': {
+		rewardItems: { 'odd-keystone': 1 },
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			return routeS1.possibleEncounters.NIGHT.every((e) =>
+				s.pokemon.some((p) => p.name === e.name)
+			);
+		},
+		kind: 'BULLETIN',
+		availableAfter: 'catch a nighttime pokemon from routeS1',
+		requiredUpgrade: 'access routeS1',
 	},
 	'catch a pokemon orginally found in kanto': {
 		rewardItems: { protein: 2 },
@@ -315,5 +443,21 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 10,
 		conditionFunction: (s) => s.mileStones.hasCraftedApricorn,
+	},
+	'lure a pokemon with honey': {
+		rewardItems: { 'sitrus-berry': 3 },
+		researchPoints: 10,
+		conditionFunction: (s) => {
+			return s.mileStones.hasCaughtAPokemonWithHoney;
+		},
+		kind: 'BULLETIN',
+	},
+	'evolve a pokemon': {
+		rewardItems: { 'rare-candy': 1 },
+		researchPoints: 10,
+		conditionFunction: (s) => {
+			return s.mileStones.hasEvolvedAPokemon;
+		},
+		kind: 'BULLETIN',
 	},
 };

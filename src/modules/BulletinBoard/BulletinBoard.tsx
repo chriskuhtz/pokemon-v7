@@ -18,7 +18,7 @@ import { Stack } from '../../uiComponents/Stack/Stack';
 export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 	const { addMessage } = useContext(MessageQueueContext);
 	const { saveFile, putSaveFileReducer } = useContext(SaveFileContext);
-	const { quests } = saveFile;
+	const { quests, campUpgrades } = saveFile;
 
 	const acceptQuest = useCallback(
 		(name: QuestName) => {
@@ -39,6 +39,18 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 			Object.entries(QuestsRecord)
 				.map(([id, questData]) => {
 					if (
+						questData.availableAfter &&
+						quests[questData.availableAfter] !== 'COLLECTED'
+					) {
+						return;
+					}
+					if (
+						questData.requiredUpgrade &&
+						!campUpgrades[questData.requiredUpgrade]
+					) {
+						return;
+					}
+					if (
 						questData.kind === 'BULLETIN' &&
 						quests[id as QuestName] === 'INACTIVE'
 					) {
@@ -46,7 +58,7 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 					}
 				})
 				.filter((q) => q !== undefined),
-		[quests]
+		[campUpgrades, quests]
 	);
 
 	if (availableQuests.length === 0) {
