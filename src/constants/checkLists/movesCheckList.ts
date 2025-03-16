@@ -401,7 +401,6 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/101/',
 		handled: true,
 	},
-	{ name: 'mimic', url: 'https://pokeapi.co/api/v2/move/102/' },
 	{
 		name: 'screech',
 		url: 'https://pokeapi.co/api/v2/move/103/',
@@ -412,7 +411,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/104/',
 		handled: true,
 	},
-	{ name: 'recover', url: 'https://pokeapi.co/api/v2/move/105/' },
+	{
+		name: 'recover',
+		url: 'https://pokeapi.co/api/v2/move/105/',
+		handled: true,
+	},
 	{ name: 'harden', url: 'https://pokeapi.co/api/v2/move/106/', handled: true },
 	{
 		name: 'minimize',
@@ -1503,6 +1506,7 @@ export const movesCheckList: {
 	{ name: 'shadow-panic', url: 'https://pokeapi.co/api/v2/move/10016/' },
 	{ name: 'shadow-shed', url: 'https://pokeapi.co/api/v2/move/10017/' },
 	{ name: 'shadow-sky', url: 'https://pokeapi.co/api/v2/move/10018/' },
+	{ name: 'mimic', url: 'https://pokeapi.co/api/v2/move/102/', handled: true },
 ];
 
 export const handledMoves = [
@@ -1656,6 +1660,7 @@ export const handledMoves = [
 	'flame-wheel',
 	'rage',
 	'teleport',
+	'recover',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

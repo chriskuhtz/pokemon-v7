@@ -105,11 +105,6 @@ export const handleAttack = ({
 
 	const selfTargeting = move.data.target.name === 'user';
 
-	//TODO: handle self targeting, this currently leads to bugs bc. of mapping over pokemon and not applying target updates
-	if (target.id === attacker.id && !selfTargeting) {
-		console.warn('attacking yourself much?', attacker.data.name);
-	}
-
 	//MESSAGES
 	if (!selfTargeting) {
 		addMessage({
@@ -145,6 +140,7 @@ export const handleAttack = ({
 
 	//updated Target
 	let updatedTarget = { ...target };
+
 	const isFlying =
 		updatedTarget.moveQueue.length > 0 &&
 		updatedTarget.moveQueue[0].type === 'BattleAttack' &&
@@ -198,6 +194,7 @@ export const handleAttack = ({
 			addMessage
 		);
 	}
+
 	//update moveQueue
 	if (move.multiHits > 1) {
 		addMessage({ message: 'Multi hit!' });
@@ -239,6 +236,19 @@ export const handleAttack = ({
 			true,
 			battleFieldEffects
 		);
+		//healing
+
+		if (move.data.meta.healing) {
+			updatedAttacker = {
+				...updatedAttacker,
+				damage: getMiddleOfThree([
+					0,
+					updatedAttacker.damage -
+						updatedAttacker.stats.hp * (100 / move.data.meta.healing),
+					updatedAttacker.stats.hp,
+				]),
+			};
+		}
 	}
 
 	//check for static
