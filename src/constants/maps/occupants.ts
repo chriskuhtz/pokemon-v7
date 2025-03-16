@@ -48,6 +48,36 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 			!s.handledOccupants.some((h) => h.id === 'routeN1_great_ball'),
 	},
 	{
+		type: 'ITEM',
+		x: 13,
+		y: 44,
+		item: 'black-apricorn',
+		amount: 5,
+		id: 'routeN1_black_apricorn',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'routeN1_black_apricorn'),
+	},
+	{
+		type: 'ITEM',
+		x: 20,
+		y: 3,
+		item: 'green-apricorn',
+		amount: 5,
+		id: 'routeN1_green_apricorn',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'routeN1_green_apricorn'),
+	},
+	{
+		type: 'ITEM',
+		x: 37,
+		y: 15,
+		item: 'yellow-apricorn',
+		amount: 5,
+		id: 'routeN1_yellow_apricorn',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'routeN1_yellow_apricorn'),
+	},
+	{
 		type: 'HONEY_TREE',
 		x: 25,
 		y: 25,
@@ -329,6 +359,21 @@ export const campOccupants: OverworldMap['occupants'] = [
 		approachDirection: 'UP',
 		dialogue: ['Looking for new Quests ...'],
 		conditionFunction: (s) => s.campUpgrades.bulletin_board,
+	},
+	{
+		type: 'APRICORN_SMITH',
+		sprite: SpriteEnum.kurt,
+		x: 8,
+		y: 13,
+		orientation: 'UP',
+		id: 'campUpgrade_kurt',
+		dialogue: [
+			'My name is kurt',
+			'Professor Oak and me came up together',
+			'I practice the ancient art',
+			'of turning apricorns into pokeballs',
+		],
+		conditionFunction: (s) => s.campUpgrades.kurt,
 	},
 	...mortyLine,
 	...rowanLine,

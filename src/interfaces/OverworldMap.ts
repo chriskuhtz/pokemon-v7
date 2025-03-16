@@ -28,6 +28,7 @@ export const OCCUPANT_TYPES = [
 	'ON_STEP_PORTAL',
 	'CAMP_MANAGER',
 	'BULLETIN_BOARD',
+	'APRICORN_SMITH',
 ] as const;
 export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
@@ -60,6 +61,12 @@ export interface OverworldMerchant extends BaseOccupant {
 }
 export interface OverworldCampManager extends BaseOccupant {
 	type: 'CAMP_MANAGER';
+	orientation: CharacterOrientation;
+	dialogue: string[];
+	sprite: string;
+}
+export interface OverworldApricornSmith extends BaseOccupant {
+	type: 'APRICORN_SMITH';
 	orientation: CharacterOrientation;
 	dialogue: string[];
 	sprite: string;
@@ -135,7 +142,8 @@ export type Occupant =
 	| OnStepPortal
 	| OverworldCampManager
 	| OverworldBulletinBoard
-	| OverworldHallowedTower;
+	| OverworldHallowedTower
+	| OverworldApricornSmith;
 
 export interface OverworldEncounter {
 	name: PokemonName;

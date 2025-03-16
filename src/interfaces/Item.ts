@@ -82,6 +82,15 @@ export const xItemTypes = [
 
 export const runawayItemTypes = ['poke-doll', 'fluffy-tail'] as const;
 
+export const apricorns = [
+	'red-apricorn',
+	'blue-apricorn',
+	'yellow-apricorn',
+	'green-apricorn',
+	'pink-apricorn',
+	'white-apricorn',
+	'black-apricorn',
+] as const;
 export const encounterChanceItems = [
 	'white-flute',
 	'black-flute',
@@ -153,6 +162,7 @@ export const fossils = [
 ] as const;
 
 export const itemTypes = [
+	...apricorns,
 	...balltypes,
 	...healingItemTypes,
 	...ppRestorationItemTypes,
@@ -187,9 +197,13 @@ export type EncounterChanceItem = (typeof encounterChanceItems)[number];
 export type BerryType = (typeof berries)[number];
 export type MulchType = (typeof mulches)[number];
 export type FossilType = (typeof fossils)[number];
+export type ApricornType = (typeof apricorns)[number];
 
 export function isPokeball(x: string | undefined): x is PokeballType {
 	return (balltypes as unknown as string[]).includes(x ?? '');
+}
+export function isApricorn(x: string | undefined): x is ApricornType {
+	return (apricorns as unknown as string[]).includes(x ?? '');
 }
 export function isBerry(x: string | undefined): x is BerryType {
 	return (berries as unknown as string[]).includes(x ?? '');
@@ -290,6 +304,15 @@ export const fossilTable: Record<FossilType, PokemonName> = {
 	'plume-fossil': 'archen',
 	'jaw-fossil': 'tyrunt',
 	'sail-fossil': 'amaura',
+};
+export const apricornTable: Record<ApricornType, PokeballType> = {
+	'black-apricorn': 'dusk-ball',
+	'blue-apricorn': 'dive-ball',
+	'green-apricorn': 'nest-ball',
+	'pink-apricorn': 'luxury-ball',
+	'red-apricorn': 'heal-ball',
+	'white-apricorn': 'timer-ball',
+	'yellow-apricorn': 'quick-ball',
 };
 
 export const getRandomItem = () => {
