@@ -18,6 +18,7 @@ import { determineTypeFactor } from './determineTypeFactor';
 import { determineWeatherFactor } from './determineWeatherFactor';
 import { getHeldItemFactor } from './getHeldItemFactor';
 import { getMiddleOfThree } from './getMiddleOfThree';
+import { getRivalryFactor } from './getRivalryFactor';
 
 export const getLowKickDamage = (weight: number): number => {
 	if (weight > 200) return 120;
@@ -197,6 +198,7 @@ export const calculateDamage = (
 		)
 			? 0.66
 			: 1;
+	const rivalryFactor = getRivalryFactor(attacker, target.gender);
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -219,7 +221,8 @@ export const calculateDamage = (
 				thickFatFactor *
 				heldItemFactor *
 				lightScreenFactor *
-				reflectFactor
+				reflectFactor *
+				rivalryFactor
 		),
 		1
 	);

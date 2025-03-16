@@ -13,6 +13,7 @@ export const animationTimer = 16000 / frames;
 
 export const testPokemon: OwnedPokemon = {
 	name: 'teddiursa',
+	gender: 'MALE',
 	ownerId: 'test',
 	id: 'bingo',
 	ball: 'poke-ball',
@@ -75,6 +76,7 @@ export const OPPO_ID = 'oppo';
 
 export const testOpponent: OwnedPokemon = {
 	name: 'bulbasaur',
+	gender: 'MALE',
 	nature: 'adamant',
 	ownerId: OPPO_ID,
 	ball: 'poke-ball',

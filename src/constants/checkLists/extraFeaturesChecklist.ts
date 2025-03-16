@@ -183,4 +183,6 @@ export const extraFeatureCheckList: {
 	{ name: 'pokemonSprite component' },
 	{ name: 'show evo readyness in overworld' },
 	{ name: 'apricorn trees' },
+	{ name: 'setting: faster days' },
+	{ name: 'MakePokemon function' },
 ];

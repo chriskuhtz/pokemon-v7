@@ -17,6 +17,8 @@ export interface PPBoostedMove {
 	stage: number;
 }
 
+export type PokemonGender = 'MALE' | 'FEMALE' | 'GENDERLESS';
+
 export interface OwnedPokemon {
 	name: PokemonName;
 	id: string;
@@ -43,4 +45,5 @@ export interface OwnedPokemon {
 	ppBoostedMoves: PPBoostedMove[];
 	caughtOnMap: MapId;
 	nickname?: string;
+	gender: PokemonGender;
 }
