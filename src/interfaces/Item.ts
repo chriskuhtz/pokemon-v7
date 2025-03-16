@@ -30,6 +30,8 @@ export const healingItemTypes = [
 	'blue-flute',
 	'red-flute',
 	'yellow-flute',
+	'sitrus-berry',
+	'cheri-berry',
 ] as const;
 
 export const ppRestorationItemTypes = [
@@ -145,7 +147,7 @@ export const mulches = [
 	'gooey-mulch',
 ] as const;
 
-export const berries = ['sitrus-berry'] as const;
+export const berries = ['sitrus-berry', 'cheri-berry'] as const;
 
 export const fossils = [
 	'old-amber',
@@ -244,7 +246,7 @@ export function isItem(x: string | undefined): x is ItemType {
 	return (itemTypes as unknown as string[]).includes(x ?? '');
 }
 
-export const hasHeldEffect = (item: ItemType): boolean => {
+export const hasEndOfTurnEffect = (item: ItemType): boolean => {
 	if (isBerry(item) || item === 'berry-juice') {
 		return true;
 	}

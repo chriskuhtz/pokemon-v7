@@ -170,7 +170,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		};
 	}
 	if (
-		item === 'paralyze-heal' &&
+		(item === 'paralyze-heal' || item === 'cheri-berry') &&
 		pokemon.primaryAilment?.type === 'paralysis'
 	) {
 		if (addMessage) {

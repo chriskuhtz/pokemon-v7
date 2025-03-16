@@ -1,12 +1,12 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { hasHeldEffect, HPHealTable } from '../interfaces/Item';
+import { hasEndOfTurnEffect, HPHealTable } from '../interfaces/Item';
 import { applyItemToPokemon } from './applyItemToPokemon';
 
 export const applyEndOfTurnHeldItem = (
 	pokemon: BattlePokemon,
 	addMessage: (x: string) => void
 ): BattlePokemon => {
-	if (!pokemon.heldItemName || !hasHeldEffect(pokemon.heldItemName)) {
+	if (!pokemon.heldItemName || !hasEndOfTurnEffect(pokemon.heldItemName)) {
 		return pokemon;
 	}
 	if (
@@ -15,6 +15,18 @@ export const applyEndOfTurnHeldItem = (
 	) {
 		addMessage(
 			`${pokemon.data.name} healed itself with ${pokemon.heldItemName}`
+		);
+		return {
+			...applyItemToPokemon(pokemon, pokemon.heldItemName),
+			heldItemName: undefined,
+		};
+	}
+	if (
+		pokemon.heldItemName === 'cheri-berry' &&
+		pokemon.primaryAilment?.type === 'paralysis'
+	) {
+		addMessage(
+			`${pokemon.data.name} healed its paralysis with ${pokemon.heldItemName}`
 		);
 		return {
 			...applyItemToPokemon(pokemon, pokemon.heldItemName),
