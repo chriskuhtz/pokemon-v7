@@ -28,6 +28,12 @@ export const questNames = [
 	'catch a pokemon and its hisui variant',
 	'catch a pokemon and its paldea variant',
 ] as const;
+/**
+ * Ideas:
+ * catch Baby Pokemon
+ * weight/height based
+ * catch a ultra rare pokemon
+ */
 export type QuestName = (typeof questNames)[number];
 
 export const QuestsRecord: Record<QuestName, Quest> = {

@@ -86,11 +86,8 @@ export const extraFeatureCheckList: {
 	{ name: 'quest: catch a night pokemon', handled: true },
 	{ name: 'quest: catch a evening pokemon', handled: true },
 	{ name: 'quest: catch a morning pokemon', handled: true },
-	{
-		name: 'alternate forms (galar, alola), also consider evo methods',
-		handled: true,
-	},
-	{ name: 'encounter rarity' },
+	{ name: 'alternate forms ', handled: true },
+	{ name: 'encounter rarity', handled: true },
 	{ name: 'ivs' },
 	{ name: 'check if pokemon can actually cut' },
 	{ name: 'gain xp from battle' },
