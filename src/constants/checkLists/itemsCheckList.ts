@@ -499,7 +499,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/110/',
 		handled: true,
 	},
-	{ name: 'odd-keystone', url: 'https://pokeapi.co/api/v2/item/111/' },
+	{
+		name: 'odd-keystone',
+		url: 'https://pokeapi.co/api/v2/item/111/',
+		handled: true,
+	},
 	{ name: 'adamant-orb', url: 'https://pokeapi.co/api/v2/item/112/' },
 	{ name: 'lustrous-orb', url: 'https://pokeapi.co/api/v2/item/113/' },
 	{ name: 'grass-mail', url: 'https://pokeapi.co/api/v2/item/114/' },
