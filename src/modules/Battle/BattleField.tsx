@@ -8,6 +8,7 @@ import { applyEndOfTurnWeatherDamage } from '../../functions/applyEndOfTurnWeath
 import { applyOnBattleEnterAbility } from '../../functions/applyOnBattleEnterAbility';
 import { applyPrimaryAilmentDamage } from '../../functions/applyPrimaryAilmentDamage';
 import { applySecondaryAilmentDamage } from '../../functions/applySecondaryAilmentDamage';
+import { calculateLevelData } from '../../functions/calculateLevelData';
 import { changeMovePP } from '../../functions/changeMovePP';
 import { BattleLocation } from '../../functions/determineCaptureSuccess';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
@@ -257,18 +258,35 @@ export const BattleField = ({
 
 	//REDUCERS
 	const leaveWithCurrentData = useCallback(
-		(outcome: 'WIN' | 'LOSS' | 'DRAW') =>
+		(outcome: 'WIN' | 'LOSS' | 'DRAW') => {
+			const defeatedPokemon = getOpponentPokemon(pokemon).filter(
+				(p) => p.status === 'FAINTED'
+			);
+			const gainedXp = defeatedPokemon.reduce((sum, d) => {
+				const { level } = calculateLevelData(d.xp);
+
+				return sum + Math.floor((d.data.base_experience * level) / 7);
+			}, 0);
+
+			const xpPerTeamMember =
+				outcome === 'WIN' ? Math.round(gainedXp / team.length) : 0;
+
+			if (outcome === 'WIN') {
+				addMessage({
+					message: `Each Team Member gained ${xpPerTeamMember} XP`,
+				});
+			}
 			leave({
 				caughtPokemon: pokemon.filter((p) => p.status === 'CAUGHT'),
 				updatedInventory: battleInventory,
 				scatteredCoins,
 				team,
-				defeatedPokemon: getOpponentPokemon(pokemon).filter(
-					(p) => p.status === 'FAINTED'
-				),
+				defeatedPokemon,
 				outcome,
-			}),
-		[battleInventory, leave, pokemon, scatteredCoins, team]
+				xpPerTeamMember,
+			});
+		},
+		[addMessage, battleInventory, leave, pokemon, scatteredCoins, team]
 	);
 	const putPokemonOnField = useCallback(
 		(id: string) =>

@@ -13,7 +13,6 @@ import { mapsRecord } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
-import { calculateLevelData } from '../functions/calculateLevelData';
 import { determineWildPokemon } from '../functions/determineWildPokemon';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getRewardForQuest } from '../functions/getRewardForQuest';
@@ -37,6 +36,7 @@ export interface LeaveBattlePayload {
 	team: BattlePokemon[];
 	outcome: 'WIN' | 'LOSS' | 'DRAW';
 	defeatedPokemon: BattlePokemon[];
+	xpPerTeamMember: number;
 }
 
 export interface UseSaveFile {
@@ -363,7 +363,7 @@ const useSaveFile = (
 			caughtPokemon,
 			scatteredCoins,
 			outcome,
-			defeatedPokemon,
+			xpPerTeamMember,
 		}: LeaveBattlePayload) => {
 			let updatedLocation = saveFile.location;
 
@@ -389,22 +389,12 @@ const useSaveFile = (
 				}
 			}
 
-			const gainedXp = defeatedPokemon.reduce((sum, d) => {
-				const { level } = calculateLevelData(d.xp);
-
-				return sum + Math.floor((d.data.base_experience * level) / 7);
-			}, 0);
-
-			const xpPerTeamMember =
-				outcome === 'WIN' ? Math.round(gainedXp / updatedTeam.length) : 0;
-
 			const leveledUpTeam = updatedTeam
 				.map((p) => {
 					const newXp = p.xp + xpPerTeamMember;
 					return { ...p, xp: newXp };
 				})
 				.map((p) => reduceBattlePokemonToOwnedPokemon(p));
-			addMessage({ message: `Each Team Member gained ${xpPerTeamMember} XP` });
 
 			const teamAndCaught = [
 				...leveledUpTeam,
@@ -430,7 +420,7 @@ const useSaveFile = (
 				meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
 			});
 		},
-		[addMessage, putSaveFileReducer, reset, saveFile, team]
+		[putSaveFileReducer, reset, saveFile, team]
 	);
 
 	const applyEncounterRateModifierItem = (item: EncounterChanceItem) => {
