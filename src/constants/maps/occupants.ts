@@ -74,13 +74,6 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		id: 'routeN1_honey_tree',
 		conditionFunction: () => true,
 	},
-	{
-		type: 'HALLOWED_TOWER',
-		x: 47,
-		y: 4,
-		id: 'hallowed_tower',
-		conditionFunction: () => true,
-	},
 ];
 export const routeS1Occupants: OverworldMap['occupants'] = [
 	{
@@ -96,6 +89,13 @@ export const routeS1Occupants: OverworldMap['occupants'] = [
 		},
 		conditionFunction: () => true,
 		id: 'routeS1_to_camp',
+	},
+	{
+		type: 'HALLOWED_TOWER',
+		x: 47,
+		y: 40,
+		id: 'hallowed_tower',
+		conditionFunction: () => true,
 	},
 ];
 
@@ -211,7 +211,7 @@ const mortyLine: Occupant[] = [
 			'I am Morty, a Gym Leader from Johto',
 			'I have heard rumours',
 			'about a very rare ghost pokemon,',
-			'that is trapped in a ruin here',
+			'that is trapped in a ruin south of here',
 			'Its a very odd tale',
 			'A stone might be the key',
 		],
@@ -309,7 +309,16 @@ export const campOccupants: OverworldMap['occupants'] = [
 			forwardFoot: 'CENTER1',
 		},
 		id: 'camp_to_routeS1',
-		conditionFunction: () => true,
+		conditionFunction: (s) => s.campUpgrades['clear access to routeS1'],
+	},
+	{
+		type: 'SIGN',
+		x: 10,
+		y: 19,
+		dialogue: ['Route S1', 'No Access for inexperienced Researchers'],
+		approachDirection: 'DOWN',
+		id: 'routeS1Sign',
+		conditionFunction: (s) => !s.campUpgrades['clear access to routeS1'],
 	},
 	{
 		type: 'SIGN',
