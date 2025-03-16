@@ -82,6 +82,22 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		conditionFunction: () => true,
 	},
 ];
+export const routeS1Occupants: OverworldMap['occupants'] = [
+	{
+		type: 'ON_STEP_PORTAL',
+		x: 25,
+		y: 0,
+		portal: {
+			mapId: 'camp',
+			y: 18,
+			x: 10,
+			orientation: 'UP',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+		id: 'routeS1_to_camp',
+	},
+];
 
 const market1Inventory: Partial<Inventory> = {
 	'poke-ball': 1,
@@ -279,6 +295,20 @@ export const campOccupants: OverworldMap['occupants'] = [
 			forwardFoot: 'CENTER1',
 		},
 		id: 'camp_to_routeN1',
+		conditionFunction: () => true,
+	},
+	{
+		type: 'ON_STEP_PORTAL',
+		x: 10,
+		y: 19,
+		portal: {
+			mapId: 'routeS1',
+			x: 25,
+			y: 1,
+			orientation: 'DOWN',
+			forwardFoot: 'CENTER1',
+		},
+		id: 'camp_to_routeS1',
 		conditionFunction: () => true,
 	},
 	{

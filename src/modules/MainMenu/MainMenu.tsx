@@ -105,6 +105,14 @@ export const MainMenu = ({
 						actionElements={[]}
 					/>
 				)}
+				{window.localStorage.getItem('devmode') && (
+					<Card
+						onClick={() => navigate('MAIN', 'MAP_MAKER_ROUTES1')}
+						content={<h4>Map Maker RouteS1</h4>}
+						icon={<GoTasklist size={battleSpriteSize} />}
+						actionElements={[]}
+					/>
+				)}
 			</Stack>
 		</Page>
 	);

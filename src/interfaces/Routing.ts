@@ -14,6 +14,7 @@ export const routes = [
 	'QUESTS',
 	'MAP_MAKER_CAMP',
 	'MAP_MAKER_ROUTEN1',
+	'MAP_MAKER_ROUTES1',
 	'FARM',
 	'FOSSIL_REVIVER',
 	'CAMP_UPGRADES',

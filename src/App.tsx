@@ -272,6 +272,11 @@ export const App = (): JSX.Element => {
 			<MapMaker mapId="routeN1" goBack={() => setActiveTabReducer('MAIN')} />
 		);
 	}
+	if (activeTab === 'MAP_MAKER_ROUTES1') {
+		return (
+			<MapMaker mapId="routeS1" goBack={() => setActiveTabReducer('MAIN')} />
+		);
+	}
 
 	return (
 		<Overworld
