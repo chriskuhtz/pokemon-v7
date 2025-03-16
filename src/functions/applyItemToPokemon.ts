@@ -157,7 +157,9 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		};
 	}
 	if (
-		(item === 'awakening' || item === 'blue-flute') &&
+		(item === 'awakening' ||
+			item === 'blue-flute' ||
+			item === 'chesto-berry') &&
 		pokemon.primaryAilment?.type === 'sleep'
 	) {
 		if (addMessage) {

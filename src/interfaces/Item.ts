@@ -32,6 +32,7 @@ export const healingItemTypes = [
 	'yellow-flute',
 	'sitrus-berry',
 	'cheri-berry',
+	'chesto-berry',
 ] as const;
 
 export const ppRestorationItemTypes = [
@@ -147,7 +148,7 @@ export const mulches = [
 	'gooey-mulch',
 ] as const;
 
-export const berries = ['sitrus-berry', 'cheri-berry'] as const;
+export const berries = ['sitrus-berry', 'cheri-berry', 'chesto-berry'] as const;
 
 export const fossils = [
 	'old-amber',

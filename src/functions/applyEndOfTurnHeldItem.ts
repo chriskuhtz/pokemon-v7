@@ -33,5 +33,17 @@ export const applyEndOfTurnHeldItem = (
 			heldItemName: undefined,
 		};
 	}
+	if (
+		pokemon.heldItemName === 'chesto-berry' &&
+		pokemon.primaryAilment?.type === 'sleep'
+	) {
+		addMessage(
+			`${pokemon.data.name} healed its sleep with ${pokemon.heldItemName}`
+		);
+		return {
+			...applyItemToPokemon(pokemon, pokemon.heldItemName),
+			heldItemName: undefined,
+		};
+	}
 	return pokemon;
 };
