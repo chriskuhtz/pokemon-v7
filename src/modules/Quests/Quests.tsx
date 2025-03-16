@@ -38,7 +38,7 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 					const collected = status === 'COLLECTED';
 					const active = status === 'ACTIVE' && !fulfilled;
 
-					if (status === 'INACTIVE') {
+					if (status === 'INACTIVE' || status === 'COLLECTED') {
 						return <React.Fragment key={name}></React.Fragment>;
 					}
 
