@@ -13,6 +13,8 @@ export const questNames = [
 	'catch a nighttime pokemon from routeN1',
 	'catch a pokemon orginally found in kanto',
 	'catch a pokemon orginally found in johto',
+	'catch a spiritomb',
+	'catch all nighttime pokemon from routeN1',
 ] as const;
 export type QuestName = (typeof questNames)[number];
 
@@ -106,6 +108,24 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			return s.pokemon.some(
 				(p) => getMiddleOfThree([151, p.dexId, 251]) === p.dexId
 			);
+		},
+		kind: 'GENERIC',
+	},
+	'catch all nighttime pokemon from routeN1': {
+		rewardItems: { 'odd-keystone': 1 },
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			return routeN1.possibleEncounters.NIGHT.every((e) =>
+				s.pokemon.some((p) => p.dexId === e.dexId)
+			);
+		},
+		kind: 'GENERIC',
+	},
+	'catch a spiritomb': {
+		rewardItems: { 'rare-candy': 5 },
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) => p.dexId === 442);
 		},
 		kind: 'GENERIC',
 	},
