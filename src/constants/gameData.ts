@@ -45,8 +45,8 @@ const baseQuestState: Record<QuestName, QuestStatus> = Object.fromEntries(
 ) as Record<QuestName, QuestStatus>;
 
 const baseCampUpgrades: Record<CampUpgrade, boolean> = Object.fromEntries(
-	//campUpgradeNames.map((key) => [key, false])
-	campUpgradeNames.map((key) => [key, true])
+	campUpgradeNames.map((key) => [key, false])
+	//campUpgradeNames.map((key) => [key, true])
 ) as Record<CampUpgrade, boolean>;
 
 export const testState: SaveFile = {
