@@ -201,6 +201,46 @@ export const campOccupants: OverworldMap['occupants'] = [
 			s.campUpgrades.market_3,
 	},
 	{
+		type: 'NPC',
+		id: 'ghost_expert_1',
+		x: 12,
+		y: 7,
+		orientation: 'LEFT',
+		sprite: SpriteEnum.possessed,
+		unhandledMessage: [
+			'I have heard rumours',
+			'about a very rare ghost pokemon,',
+			'that is trapped in a ruin here',
+			'A very odd tale',
+			'A stone might be the key',
+		],
+		handledMessage: ['Did you find the rare ghost pokemon?'],
+		quest: 'catch a spiritomb',
+		gifts: { 'dusk-ball': 5 },
+		conditionFunction: (s) =>
+			s.campUpgrades.ghost_expert &&
+			s.quests['catch a spiritomb'] !== 'COLLECTED',
+	},
+	{
+		type: 'NPC',
+		id: 'ghost_expert_2',
+		x: 12,
+		y: 7,
+		orientation: 'LEFT',
+		sprite: SpriteEnum.possessed,
+		unhandledMessage: [
+			'Great work with spiritomb',
+			'Can i ask you to find out more',
+			'about the ghost and dark pokemon of this region',
+		],
+		handledMessage: ['I hope they dont scare you too much'],
+		quest: 'catch a spiritomb',
+		gifts: { 'dusk-ball': 5 },
+		conditionFunction: (s) =>
+			s.campUpgrades.ghost_expert &&
+			s.quests['catch a spiritomb'] === 'COLLECTED',
+	},
+	{
 		type: 'BULLETIN_BOARD',
 		id: 'camp_bulletin_board',
 		x: 10,
