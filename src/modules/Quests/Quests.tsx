@@ -30,7 +30,7 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 			const migratedQuests = Object.fromEntries(
 				Object.entries(QuestsRecord).map(([qn]) => {
 					const q = qn as QuestName;
-					const status = quests[q] ?? ('INACTIVE' as QuestStatus);
+					const status = quests[q] ?? 'INACTIVE';
 					return [q, status];
 				})
 			) as Record<QuestName, QuestStatus>;
