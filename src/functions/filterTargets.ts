@@ -68,9 +68,12 @@ export const filterTargets = ({
 export const getRandomIndex = (arrayLength: number): number => {
 	return Math.floor(Math.random() * arrayLength);
 };
+export function getRandomEntry<T>(array: T[]) {
+	return array[getRandomIndex(array.length)];
+}
 
 export const getRandomTargetId = (x: FilterTargetsPayload): string => {
 	const possibleTargets = filterTargets(x);
 
-	return possibleTargets[getRandomIndex(possibleTargets.length)].id;
+	return getRandomEntry(possibleTargets).id;
 };
