@@ -32,7 +32,7 @@ export const interactWithFunction = ({
 }: {
 	occ: Occupant | undefined;
 	addMultipleMessages: (x: Message[]) => void;
-	cutterPokemon?: { dexId: number };
+	cutterPokemon?: { name: string };
 	openStorage: (stepsTaken: number) => void;
 	stepsTaken: number;
 	rotateOccupant: (id: string, newOrientation: CharacterOrientation) => void;

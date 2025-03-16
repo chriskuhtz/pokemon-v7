@@ -8,8 +8,8 @@ export const EncountersTab = ({
 	removeEncounter,
 }: {
 	newMap: OverworldMap;
-	addEncounter: (dexId: number, xp: number, timeOfDay: TimeOfDay) => void;
-	removeEncounter: (dexId: number, xp: number, timeOfDay: TimeOfDay) => void;
+	addEncounter: (name: string, xp: number, timeOfDay: TimeOfDay) => void;
+	removeEncounter: (name: string, xp: number, timeOfDay: TimeOfDay) => void;
 }) => {
 	return (
 		<div>

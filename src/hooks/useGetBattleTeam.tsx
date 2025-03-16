@@ -17,9 +17,9 @@ export const useGetBattleTeam = (
 	return useFetch<BattlePokemon[]>(() =>
 		Promise.all(
 			initTeam.map(async (pokemon) => {
-				const { dexId, xp } = pokemon;
+				const { name, xp } = pokemon;
 				const data: Promise<PokemonData> = (
-					await fetch(`https://pokeapi.co/api/v2/pokemon/${dexId}`)
+					await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
 				).json();
 
 				const d = await data;
@@ -45,7 +45,7 @@ export const useGetBattleTeam = (
 						: pokemon.fourthMove?.name;
 
 				const speciesData: Promise<PokemonSpeciesData> = (
-					await fetch(`https://pokeapi.co/api/v2/pokemon-species/${dexId}`)
+					await fetch(`https://pokeapi.co/api/v2/pokemon-species/${name}`)
 				).json();
 				const firstMoveData: Promise<MoveDto> = (
 					await fetch(`https://pokeapi.co/api/v2/move/${firstMove}`)

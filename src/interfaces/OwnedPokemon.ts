@@ -2,6 +2,7 @@ import { AbilityName } from '../constants/checkLists/abilityCheckList';
 
 import { MoveName } from '../constants/checkLists/movesCheckList';
 import { MapId } from '../constants/maps/mapsRecord';
+import { PokemonName } from '../constants/pokemonNames';
 import { PrimaryAilment } from './Ailment';
 import { ItemType, PokeballType } from './Item';
 import { Nature } from './Natures';
@@ -17,7 +18,7 @@ export interface PPBoostedMove {
 }
 
 export interface OwnedPokemon {
-	dexId: number;
+	name: PokemonName;
 	id: string;
 	onTeam?: boolean;
 	damage: number;

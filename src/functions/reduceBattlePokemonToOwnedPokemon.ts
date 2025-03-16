@@ -8,7 +8,7 @@ export const reduceBattlePokemonToOwnedPokemon = (
 	heal?: boolean
 ): OwnedPokemon => {
 	const res = {
-		dexId: newMon.dexId,
+		name: newMon.name,
 		firstMove: { name: newMon.firstMove.name, usedPP: newMon.firstMove.usedPP },
 		secondMove: newMon.secondMove
 			? { name: newMon.secondMove.name, usedPP: newMon.secondMove.usedPP }

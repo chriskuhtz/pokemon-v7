@@ -1,29 +1,30 @@
 import { useState } from 'react';
 import { Sprite } from '../../components/Sprite/Sprite';
 import { battleSpriteSize } from '../../constants/gameData';
+import { PokemonName } from '../../constants/pokemonNames';
 import { typeColors } from '../../constants/typeColors';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
-import { getRandomPokemonId } from '../../functions/getRandomPokemonId';
+import { getRandomPokemonName } from '../../functions/getRandomPokemonId';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
-const defaultStarters = [1, 4, 7];
+const defaultStarters: PokemonName[] = ['rattata', 'charmander', 'squirtle'];
 const randomStarterOptions = [
-	getRandomPokemonId(),
-	getRandomPokemonId(),
-	getRandomPokemonId(),
+	getRandomPokemonName(),
+	getRandomPokemonName(),
+	getRandomPokemonName(),
 ];
 export const StarterSelection = ({
 	randomStarters,
 	proceed,
 }: {
 	randomStarters: boolean;
-	proceed: (name: string, starterDexId: number) => void;
+	proceed: (name: string, starterName: PokemonName) => void;
 }): JSX.Element => {
 	const options = randomStarters ? randomStarterOptions : defaultStarters;
-	const [chosenStarter, setChosenStarter] = useState<number | undefined>();
+	const [chosenStarter, setChosenStarter] = useState<PokemonName | undefined>();
 	const [name, setName] = useState<string | undefined>('');
 	const [finished, setFinished] = useState<boolean>(false);
 

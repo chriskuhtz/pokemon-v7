@@ -39,7 +39,6 @@ const occupantsCanvasId = 'occs';
 export const Overworld = ({
 	playerLocation,
 	setCharacterLocation,
-
 	goToMarket,
 	talkToNurse,
 	playerSprite,
@@ -57,7 +56,7 @@ export const Overworld = ({
 	playerSprite: string;
 	receiveItems: (item: ItemType, amount: number) => void;
 	handledOccupants: string[];
-	cutterPokemon?: { dexId: number };
+	cutterPokemon?: { name: string };
 	saveFile: SaveFile;
 	latestMessage: Message | undefined;
 	addMultipleMessages: (newMessages: Message[]) => void;

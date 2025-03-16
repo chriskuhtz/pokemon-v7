@@ -16,7 +16,7 @@ export const BattleLoader = ({
 	team,
 	challenger,
 	inventory,
-	ownedPokemonDexIds,
+	ownedPokemonNames,
 	latestMessage,
 	addMessage,
 	addMultipleMessages,
@@ -25,7 +25,7 @@ export const BattleLoader = ({
 	challenger: Challenger;
 	team: OwnedPokemon[];
 	inventory: Inventory;
-	ownedPokemonDexIds: number[];
+	ownedPokemonNames: string[];
 	latestMessage: Message | undefined;
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
@@ -33,7 +33,7 @@ export const BattleLoader = ({
 	const { res: battleOpponents } = useGetBattleTeam(
 		challenger.team.map((o) => ({
 			...o,
-			caughtBefore: ownedPokemonDexIds.includes(o.dexId),
+			caughtBefore: ownedPokemonNames.includes(o.name),
 		})),
 		true
 	);

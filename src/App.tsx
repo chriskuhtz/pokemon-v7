@@ -2,6 +2,7 @@ import { useContext, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 import { testPokemon } from './constants/gameData';
 import { mapsRecord } from './constants/maps/mapsRecord';
+import { PokemonName } from './constants/pokemonNames';
 import { MessageQueueContext } from './hooks/useMessageQueue';
 import { SaveFileContext } from './hooks/useSaveFile';
 import { generateInventory, Inventory } from './interfaces/Inventory';
@@ -129,7 +130,7 @@ export const App = (): JSX.Element => {
 				team={team}
 				leave={leaveBattleReducer}
 				inventory={inventory}
-				ownedPokemonDexIds={saveFile.pokemon.map((p) => p.dexId)}
+				ownedPokemonNames={saveFile.pokemon.map((p) => p.name)}
 				latestMessage={latestMessage}
 				addMessage={addMessage}
 				addMultipleMessages={addMultipleMessages}
@@ -154,14 +155,14 @@ export const App = (): JSX.Element => {
 		return (
 			<StarterSelection
 				randomStarters={!!saveFile.settings?.randomStarters}
-				proceed={(name: string, starterId: number) => {
+				proceed={(name: string, starterName: PokemonName) => {
 					patchSaveFileReducer({
 						playerId: name,
 						pokemon: [
 							...saveFile.pokemon.map((p) => ({ ...p, ownerId: name })),
 							{
 								...testPokemon,
-								dexId: starterId,
+								name: starterName,
 								id: v4(),
 								ownerId: name,
 								onTeam: true,
@@ -278,7 +279,7 @@ export const App = (): JSX.Element => {
 				setCurrentMarketInventory(i);
 			}}
 			talkToNurse={talkToNurseReducer}
-			cutterPokemon={{ dexId: team[0].dexId }}
+			cutterPokemon={{ name: team[0].name }}
 			playerSprite={saveFile.sprite}
 			receiveItems={addItemReducer}
 			handledOccupants={handledOccupants.map((h) => h.id)}

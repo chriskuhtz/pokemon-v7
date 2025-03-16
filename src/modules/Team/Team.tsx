@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { OwnedPokemonCard } from '../../components/OwnedPokemonCard/OwnedPokemonCard';
 import { battleSpriteSize } from '../../constants/gameData';
+import { PokemonName } from '../../constants/pokemonNames';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getTypeNames } from '../../functions/getTypeNames';
@@ -32,9 +33,8 @@ export const Team = ({
 	changeHeldItem: (pokemonId: string, newItem?: ItemType) => void;
 	evolve: (
 		id: string,
-		newDexId: number,
-		name: string,
-		newName: string,
+		newName: PokemonName,
+		name: PokemonName,
 		consumeHeldItem: boolean,
 		consumedItem?: ItemType
 	) => void;
@@ -50,7 +50,7 @@ export const Team = ({
 		[team, focusedId]
 	);
 	const focusedData = useMemo(
-		() => res?.find((r) => r.dexId === focused?.dexId)?.data,
+		() => res?.find((r) => r.name === focused?.name)?.data,
 		[res, focused]
 	);
 
@@ -97,7 +97,7 @@ export const Team = ({
 				>
 					<Stack alignItems="center" mode="row" justifyContent="space-evenly">
 						{team.map((pokemon, index) => {
-							const d = res.find((r) => r.dexId === pokemon.dexId)?.data;
+							const d = res.find((r) => r.name === pokemon.name)?.data;
 
 							if (!d) {
 								return <React.Fragment key={index}></React.Fragment>;
@@ -133,7 +133,7 @@ export const Team = ({
 									<IconSolarSystem
 										onClick={() => setFocusedId(pokemon.id)}
 										sun={{
-											url: getPokemonSprite(pokemon.dexId),
+											url: getPokemonSprite(pokemon.name),
 											styles: isOwnedPokemonKO(pokemon)
 												? { filter: 'grayscale(1)' }
 												: undefined,
@@ -226,19 +226,11 @@ export const Team = ({
 						);
 					}}
 					evolve={(
-						newDexId: number,
-						newName: string,
+						newName: PokemonName,
 						consumeHeldItem: boolean,
 						item?: ItemType
 					) => {
-						evolve(
-							focusedId,
-							newDexId,
-							focusedData.name,
-							newName,
-							consumeHeldItem,
-							item
-						);
+						evolve(focusedId, focusedData.name, newName, consumeHeldItem, item);
 						invalidate();
 					}}
 					data={focusedData}

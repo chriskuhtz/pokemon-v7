@@ -37,7 +37,7 @@ export const MainMenu = ({
 						content={<h4>Teleport back to camp</h4>}
 						icon={
 							<img
-								src={getPokemonSprite(teleporter.dexId)}
+								src={getPokemonSprite(teleporter.name)}
 								height={battleSpriteSize}
 								width={battleSpriteSize}
 							/>

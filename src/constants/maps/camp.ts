@@ -4,16 +4,10 @@ import { campOccupants } from './occupants';
 export const camp: OverworldMap = {
 	id: 'camp',
 	possibleEncounters: {
-		MORNING: [
-			{ dexId: 25, xp: 125 },
-			{ dexId: 324, xp: 44 },
-		],
-		DAY: [{ dexId: 25, xp: 125 }],
-		EVENING: [{ dexId: 25, xp: 125 }],
-		NIGHT: [
-			{ dexId: 167, xp: 125 },
-			{ dexId: 25, xp: 125 },
-		],
+		MORNING: [],
+		DAY: [],
+		EVENING: [],
+		NIGHT: [],
 	},
 	tileMap: {
 		baseLayer: [

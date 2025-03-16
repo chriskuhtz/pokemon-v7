@@ -20,7 +20,7 @@ export const TeamOverview = ({ steps }: { steps: number }) => {
 					key={t.id}
 					height={battleSpriteSize}
 					width={battleSpriteSize}
-					src={getPokemonSprite(t.dexId)}
+					src={getPokemonSprite(t.name)}
 					style={isOwnedPokemonKO(t) ? { filter: 'grayscale(1)' } : undefined}
 				/>
 			))}

@@ -14,33 +14,30 @@ export const TimeOfDayEncountersSection = ({
 }: {
 	time: TimeOfDay;
 	encounters: OverworldEncounter[];
-	addEncounter: (dexId: number, xp: number, timeOfDay: TimeOfDay) => void;
-	removeEncounter: (dexId: number, xp: number, timeOfDay: TimeOfDay) => void;
+	addEncounter: (name: string, xp: number, timeOfDay: TimeOfDay) => void;
+	removeEncounter: (name: string, xp: number, timeOfDay: TimeOfDay) => void;
 }) => {
-	const [dexId, setDexId] = useState<number | undefined>();
+	const [name, setName] = useState<string | undefined>();
 	const [xp, setXp] = useState<number | undefined>();
 	return (
 		<div>
 			<h2>{time}</h2>
 			{encounters.map((p) => (
 				<Card
-					key={p.dexId + time + xp}
+					key={p.name + time + xp}
 					icon={
-						<img
-							style={{ padding: '0.5rem' }}
-							src={getPokemonSprite(p.dexId)}
-						/>
+						<img style={{ padding: '0.5rem' }} src={getPokemonSprite(p.name)} />
 					}
 					content={<strong>Level: {calculateLevelData(p.xp).level} </strong>}
 					actionElements={[
-						<FaTrash onClick={() => removeEncounter(p.dexId, p.xp, time)} />,
+						<FaTrash onClick={() => removeEncounter(p.name, p.xp, time)} />,
 					]}
 				/>
 			))}
 			<input
-				placeholder="DEX ID"
-				value={dexId}
-				onChange={(e) => setDexId(Number.parseInt(e.target.value))}
+				placeholder="Name"
+				value={name}
+				onChange={(e) => setName(e.target.value)}
 			></input>
 			<input
 				placeholder="XP"
@@ -49,11 +46,11 @@ export const TimeOfDayEncountersSection = ({
 				onChange={(e) => setXp(Number.parseInt(e.target.value))}
 			></input>
 			<button
-				disabled={!dexId || !xp}
+				disabled={!name || !xp}
 				style={{ color: 'white' }}
 				onClick={() => {
-					if (dexId && xp) {
-						addEncounter(dexId, xp, time);
+					if (name && xp) {
+						addEncounter(name, xp, time);
 					}
 				}}
 			>

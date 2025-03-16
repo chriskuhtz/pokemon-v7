@@ -21,7 +21,7 @@ export const PokemonIconBanner = ({
 			<img
 				height={battleSpriteSize}
 				width={battleSpriteSize}
-				src={getPokemonSprite(pokemon.dexId)}
+				src={getPokemonSprite(pokemon.name)}
 			/>
 		</Banner>
 	);

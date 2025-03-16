@@ -1,5 +1,6 @@
 import { QuestName } from '../constants/checkLists/questsRecord';
 import { MapId } from '../constants/maps/mapsRecord';
+import { PokemonName } from '../constants/pokemonNames';
 import { TimeOfDay } from '../functions/getTimeOfDay';
 import { Inventory } from './Inventory';
 import { ItemType } from './Item';
@@ -137,7 +138,7 @@ export type Occupant =
 	| OverworldHallowedTower;
 
 export interface OverworldEncounter {
-	dexId: number;
+	name: PokemonName;
 	xp: number;
 }
 export interface OverworldMap {

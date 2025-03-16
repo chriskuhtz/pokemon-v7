@@ -1,7 +1,12 @@
+import { PokemonName } from '../../../constants/pokemonNames';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { Banner } from '../../../uiComponents/Banner/Banner';
 
-export const IntroBanner = ({ dexIds }: { dexIds: number[] }): JSX.Element => {
+export const IntroBanner = ({
+	names,
+}: {
+	names: PokemonName[];
+}): JSX.Element => {
 	return (
 		<div
 			style={{
@@ -20,7 +25,7 @@ export const IntroBanner = ({ dexIds }: { dexIds: number[] }): JSX.Element => {
 					}}
 				>
 					Lets go!{' '}
-					{dexIds.map((t) => (
+					{names.map((t) => (
 						<img key={t} src={getPokemonSprite(t, 'back')} />
 					))}
 				</div>

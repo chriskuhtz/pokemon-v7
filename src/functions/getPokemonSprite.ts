@@ -1,8 +1,18 @@
-export const getPokemonSprite = (dexId: number, mode?: 'back'): string =>
-	`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${
-		mode ? `${mode}/` : ''
-	}${dexId}.gif`;
+import { nameToIdMap, PokemonName } from '../constants/pokemonNames';
 
-// `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-// 	mode ? `${mode}/` : ''
-// }${dexId}.png`;
+export const getPokemonSprite = (
+	name: PokemonName,
+	mode?: 'back',
+	gif?: boolean
+): string => {
+	const id = nameToIdMap[name];
+	if (gif) {
+		return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${
+			mode ? `${mode}/` : ''
+		}${id}.gif`;
+	}
+	if (mode === 'back') {
+		return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${id}.png`;
+	}
+	return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+};

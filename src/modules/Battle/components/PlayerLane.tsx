@@ -28,7 +28,7 @@ export function PlayerLane(props: { onFieldTeam: BattlePokemon[] }) {
 						height={battleSpriteSize}
 						style={{ margin: '2rem 1rem' }}
 						key={t.id}
-						src={getPokemonSprite(t.dexId, 'back')}
+						src={getPokemonSprite(t.name, 'back')}
 					/>
 				))}
 			</div>

@@ -65,7 +65,7 @@ export const RefillHandling = ({
 									}}
 									key={teamMember.id}
 									height={battleSpriteSize}
-									src={getPokemonSprite(teamMember.dexId)}
+									src={getPokemonSprite(teamMember.name)}
 								/>
 							);
 						}
@@ -83,7 +83,7 @@ export const RefillHandling = ({
 						return (
 							<img
 								key={t.id}
-								src={getPokemonSprite(t.dexId)}
+								src={getPokemonSprite(t.name)}
 								onClick={() =>
 									addMessage({
 										message: `Wild ${t.data.name} appears`,

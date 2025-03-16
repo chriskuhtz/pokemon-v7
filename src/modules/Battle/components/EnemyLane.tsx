@@ -85,7 +85,7 @@ export function EnemyLane({
 							style={{ margin: '2rem 1rem' }}
 							height={battleSpriteSize}
 							key={t.id}
-							src={getPokemonSprite(t.dexId)}
+							src={getPokemonSprite(t.name)}
 						/>
 					);
 				})}

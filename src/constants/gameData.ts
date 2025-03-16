@@ -12,7 +12,7 @@ export const battleSpriteSize = 32;
 export const animationTimer = 16000 / frames;
 
 export const testPokemon: OwnedPokemon = {
-	dexId: 217,
+	name: 'teddiursa',
 	ownerId: 'test',
 	id: 'bingo',
 	ball: 'poke-ball',
@@ -74,7 +74,7 @@ export const testState: SaveFile = {
 export const OPPO_ID = 'oppo';
 
 export const testOpponent: OwnedPokemon = {
-	dexId: 1,
+	name: 'bulbasaur',
 	nature: 'adamant',
 	ownerId: OPPO_ID,
 	ball: 'poke-ball',

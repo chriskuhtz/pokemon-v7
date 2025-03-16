@@ -1,3 +1,4 @@
+import { PokemonName } from '../constants/pokemonNames';
 import { PokemonType } from './PokemonType';
 
 export interface AbilitySlot {
@@ -62,7 +63,7 @@ export interface PokemonData {
 			};
 		}[];
 	}[];
-	name: string;
+	name: PokemonName;
 	order: number;
 	species: {
 		name: string;

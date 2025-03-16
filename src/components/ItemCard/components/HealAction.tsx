@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { MdHealing } from 'react-icons/md';
 import { MoveName } from '../../../constants/checkLists/movesCheckList';
+import { battleSpriteSize } from '../../../constants/gameData';
 import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { isPPBoostItem, ItemType } from '../../../interfaces/Item';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { Banner } from '../../../uiComponents/Banner/Banner';
-import { battleSpriteSize } from '../../../constants/gameData';
 
 export const HealAction = ({
 	item,
@@ -33,7 +33,7 @@ export const HealAction = ({
 					{healablePokemon.map((p) => (
 						<img
 							key={p.id}
-							src={getPokemonSprite(p.dexId)}
+							src={getPokemonSprite(p.name)}
 							onClick={() => {
 								if (
 									['ether', 'max-ether'].includes(item) ||

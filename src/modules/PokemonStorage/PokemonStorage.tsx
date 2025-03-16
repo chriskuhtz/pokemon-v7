@@ -20,7 +20,7 @@ export const PokemonStorage = ({
 	setPokemon: (x: OwnedPokemon[]) => void;
 	addMessage: (x: Message) => void;
 }): JSX.Element => {
-	const [sortBy, setSortBy] = useState<'DEX_ID' | 'HAPPINESS' | 'XP'>('DEX_ID');
+	const [sortBy, setSortBy] = useState<'HAPPINESS' | 'XP' | 'NAME'>('NAME');
 	const sortFunction = useMemo(() => {
 		if (sortBy === 'XP') {
 			return (a: OwnedPokemon, b: OwnedPokemon) => b.xp - a.xp;
@@ -28,7 +28,6 @@ export const PokemonStorage = ({
 		if (sortBy === 'HAPPINESS') {
 			return (a: OwnedPokemon, b: OwnedPokemon) => b.happiness - a.happiness;
 		}
-		return (a: OwnedPokemon, b: OwnedPokemon) => a.dexId - b.dexId;
 	}, [sortBy]);
 	const team = useMemo(() => allPokemon.filter((p) => p.onTeam), [allPokemon]);
 	const stored = useMemo(
@@ -52,7 +51,7 @@ export const PokemonStorage = ({
 			<Stack mode="row">
 				{team.map((pokemon) => (
 					<IconSolarSystem
-						sun={{ url: getPokemonSprite(pokemon.dexId) }}
+						sun={{ url: getPokemonSprite(pokemon.name) }}
 						firstPlanet={
 							<Chip>
 								<strong>Lvl {calculateLevelData(pokemon.xp).level}</strong>
@@ -83,13 +82,13 @@ export const PokemonStorage = ({
 					Sort By
 					<button
 						style={
-							sortBy === 'DEX_ID'
+							sortBy === 'NAME'
 								? { backgroundColor: 'black', color: 'white' }
 								: undefined
 						}
-						onClick={() => setSortBy('DEX_ID')}
+						onClick={() => setSortBy('NAME')}
 					>
-						Dex Id
+						NAME
 					</button>
 					<button
 						style={
@@ -117,7 +116,7 @@ export const PokemonStorage = ({
 			<Stack mode="row">
 				{stored.sort(sortFunction).map((pokemon) => (
 					<IconSolarSystem
-						sun={{ url: getPokemonSprite(pokemon.dexId) }}
+						sun={{ url: getPokemonSprite(pokemon.name) }}
 						firstPlanet={
 							<Chip>
 								<strong>Lvl {calculateLevelData(pokemon.xp).level}</strong>

@@ -1,4 +1,5 @@
 import { MoveName } from '../../constants/checkLists/movesCheckList';
+import { PokemonName } from '../../constants/pokemonNames';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
@@ -24,8 +25,7 @@ export const OwnedPokemonCard = ({
 	data: PokemonData;
 	setNickName: (id: string, newNick: string | undefined) => void;
 	evolve: (
-		newDexId: number,
-		newName: string,
+		newName: PokemonName,
 		consumeHeldItem: boolean,
 		item?: ItemType
 	) => void;
