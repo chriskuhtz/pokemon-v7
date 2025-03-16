@@ -273,6 +273,7 @@ export const EvBoostTable: Record<
 export const HPHealTable: Partial<Record<ItemType, number>> = {
 	potion: 20,
 	'berry-juice': 20,
+	'sitrus-berry': 30,
 	'energy-powder': 50,
 	'super-potion': 50,
 	'fresh-water': 50,

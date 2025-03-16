@@ -1,4 +1,5 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { HPHealTable } from '../interfaces/Item';
 import { applyItemToPokemon } from './applyItemToPokemon';
 
 export const applyEndOfTurnHeldItem = (
@@ -6,10 +7,13 @@ export const applyEndOfTurnHeldItem = (
 	addMessage: (x: string) => void
 ): BattlePokemon => {
 	if (
-		pokemon.heldItemName === 'berry-juice' &&
+		pokemon.heldItemName &&
+		HPHealTable[pokemon.heldItemName] &&
 		pokemon.damage / pokemon.stats.hp > 0.5
 	) {
-		addMessage(`${pokemon.data.name} healed itself with berry juice`);
+		addMessage(
+			`${pokemon.data.name} healed itself with ${pokemon.heldItemName}`
+		);
 		return {
 			...applyItemToPokemon(pokemon, pokemon.heldItemName),
 			heldItemName: undefined,
