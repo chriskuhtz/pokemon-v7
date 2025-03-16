@@ -23,6 +23,7 @@ export const OCCUPANT_TYPES = [
 	'PORTAL',
 	'SIGN',
 	'HONEY_TREE',
+	'HALLOWED_TOWER',
 	'ON_STEP_PORTAL',
 	'CAMP_MANAGER',
 	'BULLETIN_BOARD',
@@ -90,6 +91,9 @@ export interface OverworldBush extends BaseOccupant {
 export interface OverworldHoneyTree extends BaseOccupant {
 	type: 'HONEY_TREE';
 }
+export interface OverworldHallowedTower extends BaseOccupant {
+	type: 'HALLOWED_TOWER';
+}
 export interface OverworldTrainer extends BaseOccupant {
 	type: 'TRAINER';
 	orientation: CharacterOrientation;
@@ -129,7 +133,8 @@ export type Occupant =
 	| OverworldHoneyTree
 	| OnStepPortal
 	| OverworldCampManager
-	| OverworldBulletinBoard;
+	| OverworldBulletinBoard
+	| OverworldHallowedTower;
 
 export interface OverworldEncounter {
 	dexId: number;

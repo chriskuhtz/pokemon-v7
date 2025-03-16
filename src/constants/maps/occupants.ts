@@ -54,6 +54,13 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		id: 'routeN1_honey_tree',
 		conditionFunction: () => true,
 	},
+	{
+		type: 'HALLOWED_TOWER',
+		x: 47,
+		y: 4,
+		id: 'hallowed_tower',
+		conditionFunction: () => true,
+	},
 ];
 
 const market1Inventory: Partial<Inventory> = {

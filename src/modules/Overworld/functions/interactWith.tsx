@@ -25,6 +25,7 @@ export const interactWithFunction = ({
 	cutterPokemon,
 	goToPosition,
 	interactWithHoneyTree,
+	interactWithHallowedTower,
 	goToCampMenu,
 	goToBulletinBoard,
 	settings,
@@ -42,6 +43,7 @@ export const interactWithFunction = ({
 	handledOccupants: string[];
 	goToPosition: (x: CharacterLocationData) => void;
 	interactWithHoneyTree: () => void;
+	interactWithHallowedTower: () => void;
 	goToCampMenu: () => void;
 	goToBulletinBoard: () => void;
 	settings?: SettingsObject;
@@ -189,12 +191,6 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'TRAINER') {
-		//disable for now because of drawing bug
-		// changeOccupant(occ.id, {
-		// 	...data,
-		// 	orientation: getOppositeDirection(playerLocation.orientation),
-		// });
-
 		if (!handledOccupants.includes(occ.id)) {
 			addMultipleMessages(
 				data.unhandledMessage.map((d, i) => ({
@@ -217,6 +213,10 @@ export const interactWithFunction = ({
 	}
 	if (data.type === 'HONEY_TREE') {
 		interactWithHoneyTree();
+		return;
+	}
+	if (data.type === 'HALLOWED_TOWER') {
+		interactWithHallowedTower();
 		return;
 	}
 

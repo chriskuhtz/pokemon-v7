@@ -109,6 +109,7 @@ const drawOccupant = (
 				);
 				break;
 			case 'HONEY_TREE':
+			case 'HALLOWED_TOWER':
 				ctx?.drawImage(
 					img,
 					baseSize * occ.x + baseSize * 0.125,
@@ -166,6 +167,8 @@ const getSource = (occ: Occupant) => {
 			return '/mapObjects/hiddenItem.png';
 		case 'HONEY_TREE':
 			return '/mapObjects/honeyTree.png';
+		case 'HALLOWED_TOWER':
+			return '/mapObjects/hallowedTower.png';
 		case 'ITEM':
 		default:
 			return '/mapObjects/pokeball.png';
