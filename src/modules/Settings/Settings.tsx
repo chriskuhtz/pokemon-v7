@@ -15,6 +15,7 @@ export const Settings = (): JSX.Element => {
 		rogueLike: false,
 		randomOverworldItems: false,
 		randomQuestRewards: false,
+		fasterDays: false,
 		//disqualifyFaintedPokemon: false,
 		//randomHeldItems: false,
 	});
@@ -41,6 +42,9 @@ export const Settings = (): JSX.Element => {
 			);
 		} else window.localStorage.removeItem(randomQuestRewards);
 
+		if (state.fasterDays) {
+			window.localStorage.setItem('fasterDays', 'true');
+		} else window.localStorage.removeItem('fasterDays');
 		patchSaveFileReducer({
 			settings: state,
 		});
@@ -78,6 +82,11 @@ export const Settings = (): JSX.Element => {
 					setValue={(x) => setState({ ...state, randomQuestRewards: x })}
 					label={'Random Quest Rewards:'}
 					description="This can make some quests impossible"
+				/>
+				<ToggleRow
+					value={state.fasterDays}
+					setValue={(x) => setState({ ...state, fasterDays: x })}
+					label={'Should Days take 4 hours instead of 24?'}
 				/>
 				{/* <ToggleRow
 					value={state.randomHeldItems}

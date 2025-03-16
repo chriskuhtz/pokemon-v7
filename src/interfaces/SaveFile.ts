@@ -37,6 +37,7 @@ export interface SettingsObject {
 	rogueLike: boolean;
 	randomOverworldItems: boolean;
 	randomQuestRewards: boolean;
+	fasterDays: boolean;
 }
 
 export type BerryBushStatus =
