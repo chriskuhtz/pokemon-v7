@@ -39,7 +39,7 @@ export interface ChooseActionPayload {
 }
 
 export interface BattleFieldEffect {
-	type: 'mist' | 'pressure';
+	type: 'mist' | 'pressure' | 'light-screen' | 'reflect';
 	ownerId: string;
 	duration: number;
 }

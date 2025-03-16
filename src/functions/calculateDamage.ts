@@ -9,6 +9,7 @@ import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { PokemonType } from '../interfaces/PokemonType';
 import { WeatherType } from '../interfaces/Weather';
+import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { calculateLevelData } from './calculateLevelData';
 import { calculateModifiedStat } from './calculateModifiedStat';
 import { determineCrit } from './determineCrit';
@@ -38,6 +39,7 @@ export const calculateDamage = (
 	target: BattlePokemon,
 	attack: BattleAttack,
 	weather: WeatherType | undefined,
+	battleFieldEffects: BattleFieldEffect[],
 	calculateCrits: boolean,
 	targetIsFlying: boolean,
 	targetIsUnderground: boolean,
@@ -175,6 +177,20 @@ export const calculateDamage = (
 		attack.data.type.name,
 		attacker.heldItemName
 	);
+	const lightScreenFactor =
+		damageClass === 'special' &&
+		battleFieldEffects.some(
+			(b) => b.type == 'light-screen' && b.ownerId !== attacker.ownerId
+		)
+			? 0.66
+			: 1;
+	const reflectFactor =
+		damageClass === 'physical' &&
+		battleFieldEffects.some(
+			(b) => b.type == 'reflect' && b.ownerId !== attacker.ownerId
+		)
+			? 0.66
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -195,7 +211,9 @@ export const calculateDamage = (
 				hugePowerFactor *
 				undergroundFactor *
 				thickFatFactor *
-				heldItemFactor
+				heldItemFactor *
+				lightScreenFactor *
+				reflectFactor
 		),
 		1
 	);

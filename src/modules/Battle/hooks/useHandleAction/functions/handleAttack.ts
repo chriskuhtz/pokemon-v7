@@ -116,10 +116,10 @@ export const handleAttack = ({
 		});
 	}
 
-	//MIST
-	if (move.name === 'mist') {
+	//MIST, LIGHT-SCREEN, REFLECT
+	if (['mist', 'light-screen', 'reflect'].includes(move.name)) {
 		addBattleFieldEffect({
-			type: 'mist',
+			type: move.name as BattleFieldEffect['type'],
 			ownerId: updatedAttacker.ownerId,
 			duration: 5,
 		});
@@ -340,6 +340,7 @@ export const handleAttack = ({
 		target,
 		move,
 		battleWeather,
+		battleFieldEffects,
 		true,
 		isFlying,
 		isUnderground,
