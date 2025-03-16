@@ -59,6 +59,15 @@ export const applyStatChangeToPokemon = (
 
 		return pokemon;
 	}
+	if (pokemon.ability === 'hyper-cutter' && stat === 'attack' && modifier < 1) {
+		if (addMessage) {
+			addMessage({
+				message: `${pokemon.data.name} prevents attackreduction with ${pokemon.ability}`,
+			});
+		}
+
+		return pokemon;
+	}
 
 	if (existingStat >= 6 && modifier > 0) {
 		if (addMessage) {
