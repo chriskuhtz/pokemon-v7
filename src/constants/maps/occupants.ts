@@ -202,4 +202,11 @@ export const campOccupants: OverworldMap['occupants'] = [
 		dialogue: ['Looking for new Quests ...'],
 		conditionFunction: (s) => s.campUpgrades.bulletin_board,
 	},
+	{
+		type: 'HALLOWED_TOWER',
+		x: 17,
+		y: 17,
+		id: 'hallowed_tower',
+		conditionFunction: () => true,
+	},
 ];

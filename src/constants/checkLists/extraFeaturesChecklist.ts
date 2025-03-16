@@ -179,4 +179,5 @@ export const extraFeatureCheckList: {
 	{ name: 'Route S1' },
 	{ name: 'Route S1E1' },
 	{ name: 'random encounters' },
+	{ name: 'move hallowed tower' },
 ];

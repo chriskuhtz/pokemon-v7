@@ -12,6 +12,7 @@ import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { BaseSizeContext } from '../../hooks/useBaseSize';
 import { useDrawForeground } from '../../hooks/useDrawBackground';
+import { useHallowedTower } from '../../hooks/useHallowedTower';
 import { useHoneyTree } from '../../hooks/useHoneyTree';
 import { Message } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
@@ -65,6 +66,7 @@ export const Overworld = ({
 	const { saveFile, handleOccupantReducer, navigateAwayFromOverworldReducer } =
 		useContext(SaveFileContext);
 	const interactWithHoneyTree = useHoneyTree();
+	const interactWithHallowedTower = useHallowedTower();
 	const addEncounterMessage = useStartEncounter();
 	const map = useMemo(
 		() => mapsRecord[saveFile.location.mapId],
@@ -101,6 +103,7 @@ export const Overworld = ({
 				cutterPokemon,
 				goToPosition: setCharacterLocation,
 				interactWithHoneyTree,
+				interactWithHallowedTower,
 				goToCampMenu: () =>
 					navigateAwayFromOverworldReducer('CAMP_UPGRADES', stepsTaken),
 				goToBulletinBoard: () =>
@@ -113,6 +116,7 @@ export const Overworld = ({
 			goToMarket,
 			handleOccupantReducer,
 			handledOccupants,
+			interactWithHallowedTower,
 			interactWithHoneyTree,
 			navigateAwayFromOverworldReducer,
 			playerLocation,
