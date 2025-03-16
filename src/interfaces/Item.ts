@@ -244,6 +244,13 @@ export function isItem(x: string | undefined): x is ItemType {
 	return (itemTypes as unknown as string[]).includes(x ?? '');
 }
 
+export const hasHeldEffect = (item: ItemType): boolean => {
+	if (isBerry(item) || item === 'berry-juice') {
+		return true;
+	}
+	return false;
+};
+
 //TODO: implement limits, e.g. hp up cant improve over 100
 export const HappinessChangeTable: Partial<Record<ItemType, number>> = {
 	'heal-powder': -10,

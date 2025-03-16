@@ -1,13 +1,15 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { HPHealTable } from '../interfaces/Item';
+import { hasHeldEffect, HPHealTable } from '../interfaces/Item';
 import { applyItemToPokemon } from './applyItemToPokemon';
 
 export const applyEndOfTurnHeldItem = (
 	pokemon: BattlePokemon,
 	addMessage: (x: string) => void
 ): BattlePokemon => {
+	if (!pokemon.heldItemName || !hasHeldEffect(pokemon.heldItemName)) {
+		return pokemon;
+	}
 	if (
-		pokemon.heldItemName &&
 		HPHealTable[pokemon.heldItemName] &&
 		pokemon.damage / pokemon.stats.hp > 0.5
 	) {
