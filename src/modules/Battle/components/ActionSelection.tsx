@@ -28,17 +28,22 @@ export function ActionSelection({
 	chooseAction: (x: ChooseActionPayload) => void;
 	allTargets: BattlePokemon[];
 }) {
-	const trapped = isTrapped(controlled);
+	const runAwayer = controlled.ability === 'run-away';
+	const trapped = !runAwayer && isTrapped(controlled);
 	const shadowTagged =
+		!runAwayer &&
 		allTargets.some(
 			(p) => p.ownerId !== controlled.ownerId && p.ability === 'shadow-tag'
-		) && controlled.ability !== 'shadow-tag';
-	const magnetPulled = allTargets.some(
-		(p) =>
-			p.ownerId !== controlled.ownerId &&
-			p.ability === 'magnet-pull' &&
-			getTypeNames(controlled).includes('steel')
-	);
+		) &&
+		controlled.ability !== 'shadow-tag';
+	const magnetPulled =
+		!runAwayer &&
+		allTargets.some(
+			(p) =>
+				p.ownerId !== controlled.ownerId &&
+				p.ability === 'magnet-pull' &&
+				getTypeNames(controlled).includes('steel')
+		);
 
 	const runButtonMessage = () => {
 		if (trapped) {
