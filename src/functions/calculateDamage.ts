@@ -15,6 +15,7 @@ import { determineCrit } from './determineCrit';
 import { determineStabFactor } from './determineStabFactor';
 import { determineTypeFactor } from './determineTypeFactor';
 import { determineWeatherFactor } from './determineWeatherFactor';
+import { getHeldItemFactor } from './getHeldItemFactor';
 import { getMiddleOfThree } from './getMiddleOfThree';
 
 export const getLowKickDamage = (weight: number): number => {
@@ -25,6 +26,7 @@ export const getLowKickDamage = (weight: number): number => {
 	if (weight > 10) return 40;
 	return 20;
 };
+
 export const DamageAbsorbAbilityMap: Partial<Record<AbilityName, PokemonType>> =
 	{
 		'volt-absorb': 'electric',
@@ -168,6 +170,11 @@ export const calculateDamage = (
 		target.ability === 'thick-fat' && ['fire', 'ice'].includes(attack.type)
 			? 0.5
 			: 1;
+	const heldItemFactor = getHeldItemFactor(
+		attacker.name,
+		attack.data.type.name,
+		attacker.heldItemName
+	);
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -187,7 +194,8 @@ export const calculateDamage = (
 				flashFireFactor *
 				hugePowerFactor *
 				undergroundFactor *
-				thickFatFactor
+				thickFatFactor *
+				heldItemFactor
 		),
 		1
 	);
