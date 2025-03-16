@@ -39,6 +39,7 @@ export const handleConfused = (
 						} as MoveDto,
 					} as BattleAttack,
 					undefined,
+					[],
 					false,
 					false,
 					false
