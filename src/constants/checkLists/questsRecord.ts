@@ -13,6 +13,7 @@ export const questNames = [
 	'catch a nighttime pokemon from routeN1',
 	'catch a spiritomb',
 	'catch all nighttime pokemon from routeN1',
+	'catch all daytime pokemon from routeN1',
 	'catch Haunter and Mightyena',
 	'catch a pokemon orginally found in kanto',
 	'catch a pokemon orginally found in johto',
@@ -27,6 +28,7 @@ export const questNames = [
 	'catch a pokemon and its alolan variant',
 	'catch a pokemon and its hisui variant',
 	'catch a pokemon and its paldea variant',
+	'catch a ultra rare pokemon on routeN1',
 ] as const;
 /**
  * Ideas:
@@ -93,6 +95,21 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		kind: 'BULLETIN',
 	},
+	'catch a ultra rare pokemon on routeN1': {
+		rewardItems: { 'berry-juice': 5 },
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) =>
+				[
+					...routeN1.possibleEncounters.NIGHT,
+					...routeN1.possibleEncounters.MORNING,
+					...routeN1.possibleEncounters.DAY,
+					...routeN1.possibleEncounters.EVENING,
+				].some((e) => e.rarity === 'ultra-rare' && e.name === p.name)
+			);
+		},
+		kind: 'BULLETIN',
+	},
 	'lure a pokemon with honey': {
 		rewardItems: { 'sitrus-berry': 3 },
 		researchPoints: 10,
@@ -115,6 +132,16 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return routeN1.possibleEncounters.NIGHT.every((e) =>
+				s.pokemon.some((p) => p.name === e.name)
+			);
+		},
+		kind: 'BULLETIN',
+	},
+	'catch all daytime pokemon from routeN1': {
+		rewardItems: { honey: 10 },
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			return routeN1.possibleEncounters.DAY.every((e) =>
 				s.pokemon.some((p) => p.name === e.name)
 			);
 		},

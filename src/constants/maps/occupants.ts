@@ -29,16 +29,6 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 	},
 	{
 		type: 'ITEM',
-		x: 30,
-		y: 10,
-		item: 'honey',
-		amount: 5,
-		id: 'routeN1_honey',
-		conditionFunction: (s) =>
-			!s.handledOccupants.some((h) => h.id === 'routeN1_honey'),
-	},
-	{
-		type: 'ITEM',
 		x: 40,
 		y: 30,
 		item: 'great-ball',
@@ -132,7 +122,7 @@ const rowanLine: Occupant[] = [
 		handledMessage: ['How is the catching going'],
 		quest: 'catch a pokemon orginally found in kanto',
 		conditionFunction: (s) =>
-			s.campUpgrades.rowan &&
+			s.campUpgrades['invite professor rowan'] &&
 			s.quests['catch a pokemon orginally found in kanto'] !== 'FULFILLED',
 		orientation: 'DOWN',
 		sprite: SpriteEnum.rowan,
@@ -146,7 +136,7 @@ const rowanLine: Occupant[] = [
 		handledMessage: ['How is the catching going'],
 		quest: 'catch a pokemon orginally found in johto',
 		conditionFunction: (s) =>
-			s.campUpgrades.rowan &&
+			s.campUpgrades['invite professor rowan'] &&
 			s.quests['catch a pokemon orginally found in kanto'] === 'FULFILLED' &&
 			s.quests['catch a pokemon orginally found in johto'] !== 'FULFILLED',
 		orientation: 'DOWN',
@@ -165,7 +155,7 @@ const rowanLine: Occupant[] = [
 		handledMessage: ['How is the catching going'],
 		quest: 'catch a pokemon orginally found in hoenn',
 		conditionFunction: (s) =>
-			s.campUpgrades.rowan &&
+			s.campUpgrades['invite professor rowan'] &&
 			s.quests['catch a pokemon orginally found in kanto'] === 'FULFILLED' &&
 			s.quests['catch a pokemon orginally found in johto'] === 'FULFILLED' &&
 			s.quests['catch a pokemon orginally found in hoenn'] !== 'FULFILLED',
@@ -184,7 +174,7 @@ const rowanLine: Occupant[] = [
 		handledMessage: ['How is the catching going'],
 		quest: 'catch a pokemon orginally found in sinnoh',
 		conditionFunction: (s) =>
-			s.campUpgrades.rowan &&
+			s.campUpgrades['invite professor rowan'] &&
 			s.quests['catch a pokemon orginally found in kanto'] === 'FULFILLED' &&
 			s.quests['catch a pokemon orginally found in johto'] === 'FULFILLED' &&
 			s.quests['catch a pokemon orginally found in hoenn'] === 'FULFILLED' &&
@@ -213,7 +203,8 @@ const mortyLine: Occupant[] = [
 		quest: 'catch a spiritomb',
 		gifts: { 'dusk-ball': 5 },
 		conditionFunction: (s) =>
-			s.campUpgrades.morty && s.quests['catch a spiritomb'] !== 'COLLECTED',
+			s.campUpgrades['invite ghost expert morty'] &&
+			s.quests['catch a spiritomb'] !== 'COLLECTED',
 	},
 	{
 		type: 'NPC',
@@ -231,7 +222,8 @@ const mortyLine: Occupant[] = [
 		quest: 'catch a spiritomb',
 		gifts: { 'dusk-ball': 5 },
 		conditionFunction: (s) =>
-			s.campUpgrades.morty && s.quests['catch a spiritomb'] === 'COLLECTED',
+			s.campUpgrades['invite ghost expert morty'] &&
+			s.quests['catch a spiritomb'] === 'COLLECTED',
 	},
 ];
 
@@ -373,7 +365,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 			'I practice the ancient art',
 			'of turning apricorns into pokeballs',
 		],
-		conditionFunction: (s) => s.campUpgrades.kurt,
+		conditionFunction: (s) => s.campUpgrades['invite apricorn smith kurt'],
 	},
 	...mortyLine,
 	...rowanLine,
