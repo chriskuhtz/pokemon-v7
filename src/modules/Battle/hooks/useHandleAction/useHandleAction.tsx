@@ -60,6 +60,22 @@ export const useHandleAction = (
 				);
 				return;
 			}
+			if (move.type === 'BattleAttack' && move.name === 'teleport') {
+				addMessage({
+					message: `${attacker} escaped the battle with teleport`,
+					onRemoval: () => leave('DRAW'),
+				});
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.id === attacker.id) {
+							return { ...p, moveQueue: [] };
+						}
+
+						return p;
+					})
+				);
+				return;
+			}
 			if (move.type === 'CatchProcessInfo') {
 				handleCatch(
 					pokemon,
@@ -149,6 +165,7 @@ export const useHandleAction = (
 					handleForceSwitch(attacker, move.name);
 					return;
 				}
+
 				handleAttack({
 					attacker,
 					pokemon,
