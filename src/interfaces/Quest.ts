@@ -3,7 +3,7 @@ import { SaveFile } from './SaveFile';
 
 export type QuestStatus = 'INACTIVE' | 'ACTIVE' | 'COLLECTED' | 'FULFILLED';
 
-export type QuestKind = 'GENERIC' | 'STORY';
+export type QuestKind = 'BULLETIN' | 'QUEST_LINE';
 
 export interface Quest {
 	rewardItems: Partial<Inventory>;
