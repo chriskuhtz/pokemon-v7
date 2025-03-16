@@ -309,7 +309,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 			forwardFoot: 'CENTER1',
 		},
 		id: 'camp_to_routeS1',
-		conditionFunction: (s) => s.campUpgrades['clear access to routeS1'],
+		conditionFunction: (s) => s.campUpgrades['access routeS1'],
 	},
 	{
 		type: 'SIGN',
@@ -318,7 +318,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 		dialogue: ['Route S1', 'No Access for inexperienced Researchers'],
 		approachDirection: 'DOWN',
 		id: 'routeS1Sign',
-		conditionFunction: (s) => !s.campUpgrades['clear access to routeS1'],
+		conditionFunction: (s) => !s.campUpgrades['access routeS1'],
 	},
 	{
 		type: 'SIGN',
