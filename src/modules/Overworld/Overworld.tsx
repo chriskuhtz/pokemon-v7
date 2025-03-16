@@ -1,12 +1,7 @@
 import { useCallback, useContext, useMemo, useState } from 'react';
-import { IoMdMenu } from 'react-icons/io';
-import { TeamOverview } from '../../components/TeamOverview/TeamOverview';
-import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
-import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 
-import { CgZoomIn, CgZoomOut } from 'react-icons/cg';
 import { CombinedCanvas } from '../../components/CombinedCanvas/CombinedCanvas';
-import { battleSpriteSize, fps } from '../../constants/gameData';
+import { fps } from '../../constants/gameData';
 import { mapsRecord } from '../../constants/maps/mapsRecord';
 import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
@@ -22,7 +17,6 @@ import { Occupant } from '../../interfaces/OverworldMap';
 import { CharacterLocationData, SaveFile } from '../../interfaces/SaveFile';
 import './Overworld.css';
 import { ClickerGrid } from './components/ClickerGrid';
-import { UncollectedQuestsBadge } from './components/UncollectedQuestsBadge';
 import { interactWithFunction } from './functions/interactWith';
 import { useClickTarget } from './hooks/useClickTarget';
 import { useDrawCharacter } from './hooks/useDrawCharacter';
@@ -31,6 +25,7 @@ import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOccupants } from './hooks/useOccupants';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
 import { useStartEncounter } from './hooks/useStartEncounter';
+import { OverworldMenus } from './components/OverworldMenus';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -61,7 +56,7 @@ export const Overworld = ({
 	latestMessage: Message | undefined;
 	addMultipleMessages: (newMessages: Message[]) => void;
 }) => {
-	const { baseSize, setBaseSize } = useContext(BaseSizeContext);
+	const { baseSize } = useContext(BaseSizeContext);
 	const { saveFile, handleOccupantReducer, navigateAwayFromOverworldReducer } =
 		useContext(SaveFileContext);
 	const interactWithHoneyTree = useHoneyTree();
@@ -156,67 +151,7 @@ export const Overworld = ({
 
 	return (
 		<div>
-			<div
-				style={{
-					position: 'absolute',
-					top: '1.5rem',
-					left: '1rem',
-					zIndex: 8999,
-					padding: '.5rem',
-					borderRadius: 9000,
-					backgroundColor: 'rgba(255,255,255,.6)',
-					display: 'flex',
-					flexDirection: 'column',
-					gap: '1rem',
-				}}
-			>
-				<CgZoomIn
-					size={battleSpriteSize}
-					onClick={() => {
-						if (baseSize === 256) {
-							return;
-						}
-						setBaseSize(baseSize * 2);
-					}}
-				/>
-				<CgZoomOut
-					size={battleSpriteSize}
-					onClick={() => {
-						if (baseSize === 16) {
-							return;
-						}
-						setBaseSize(baseSize / 2);
-					}}
-				/>
-				<IoMdMenu
-					onClick={(e) => {
-						e.stopPropagation();
-						e.preventDefault();
-						navigateAwayFromOverworldReducer('MAIN', stepsTaken);
-					}}
-					size={battleSpriteSize}
-				/>
-				<UncollectedQuestsBadge stepsWalked={stepsTaken} />
-				<TeamOverview steps={stepsTaken} />
-			</div>
-			<div
-				style={{
-					position: 'absolute',
-					top: '1.5rem',
-					right: '1rem',
-					display: 'flex',
-					gap: '1rem',
-					alignItems: 'center',
-					zIndex: 9000,
-					padding: '.5rem',
-					borderRadius: 9000,
-					backgroundColor: 'rgba(255,255,255,.6)',
-				}}
-			>
-				<strong>{map.id}</strong>
-				<WeatherIcon weather={map.weather} />
-				<TimeOfDayIcon />
-			</div>
+			<OverworldMenus stepsTaken={stepsTaken} />
 
 			<div className="overworldPage">
 				<div id="canvassesAndShaders" style={{ position: 'relative' }}>
