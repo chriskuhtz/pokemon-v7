@@ -12,6 +12,7 @@ export const campUpgradeNames = [
 	'training field 1',
 	'second slot for farm',
 	'third slot for farm',
+	'fourth slot for farm',
 ] as const;
 
 export type CampUpgrade = (typeof campUpgradeNames)[number];
@@ -30,6 +31,7 @@ export const campUpgradePrices: Record<CampUpgrade, number> = {
 	berry_farm: 50,
 	'second slot for farm': 10,
 	'third slot for farm': 15,
+	'fourth slot for farm': 20,
 };
 export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	bulletin_board: [],
@@ -45,4 +47,5 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	berry_farm: ['bulletin_board'],
 	'second slot for farm': ['berry_farm'],
 	'third slot for farm': ['second slot for farm'],
+	'fourth slot for farm': ['third slot for farm'],
 };
