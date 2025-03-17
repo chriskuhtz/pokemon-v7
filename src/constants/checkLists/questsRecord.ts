@@ -49,12 +49,15 @@ export const questNames = [
 	'train a pokemon to level 30',
 	'defeat a training field trainer',
 	'defeat five training field trainers',
+	'grow a berry',
 ] as const;
 /**
  * Ideas:
  * catch Baby Pokemon
  * weight/height based
  * catch a pokemon in a apricorn ball
+ * grow apricorn
+ * defeat morty
  */
 export type QuestName = (typeof questNames)[number];
 
@@ -535,5 +538,17 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 1',
 		availableAfter: 'defeat a training field trainer',
+	},
+	'grow a berry': {
+		rewardItems: {
+			'damp-mulch': 2,
+			'growth-mulch': 2,
+			'gooey-mulch': 2,
+			'stable-mulch': 2,
+		},
+		researchPoints: 10,
+		conditionFunction: (s) => s.mileStones.hasGrownABerry,
+		kind: 'BULLETIN',
+		requiredUpgrade: 'berry_farm',
 	},
 };

@@ -85,6 +85,7 @@ export interface SaveFile {
 		hasEvolvedAPokemon: boolean;
 		hasCaughtAPokemonWithHoney: boolean;
 		hasCraftedApricorn: boolean;
+		hasGrownABerry: boolean;
 	};
 	farm: {
 		unlockedPlots: number;
