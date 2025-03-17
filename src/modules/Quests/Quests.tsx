@@ -5,9 +5,11 @@ import {
 	QuestsRecord,
 } from '../../constants/checkLists/questsRecord';
 import { battleSpriteSize } from '../../constants/gameData';
+import { typeColors } from '../../constants/typeColors';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getRewardForQuest } from '../../functions/getRewardForQuest';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
+import { useQuests } from '../../hooks/useQuests';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { ItemType } from '../../interfaces/Item';
 import { QuestStatus } from '../../interfaces/Quest';
@@ -22,15 +24,19 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 		fulfillQuestReducer: fulfillQuest,
 		patchSaveFileReducer,
 	} = useContext(SaveFileContext);
-	const { quests } = saveFile;
+
+	const { all } = useQuests();
 
 	useEffect(() => {
 		//Migrate new quests
-		if (Object.entries(QuestsRecord).length > Object.entries(quests).length) {
+		if (
+			Object.entries(QuestsRecord).length >
+			Object.entries(saveFile.quests).length
+		) {
 			const migratedQuests = Object.fromEntries(
 				Object.entries(QuestsRecord).map(([qn]) => {
 					const q = qn as QuestName;
-					const status = quests[q] ?? 'INACTIVE';
+					const status = saveFile.quests[q] ?? 'INACTIVE';
 					return [q, status];
 				})
 			) as Record<QuestName, QuestStatus>;
@@ -38,8 +44,9 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 				quests: migratedQuests,
 			});
 		}
-	}, [patchSaveFileReducer, quests]);
-	if (Object.values(quests).filter((v) => v !== 'INACTIVE').length === 0) {
+	}, [patchSaveFileReducer, saveFile.quests]);
+
+	if (Object.values(all).filter((v) => v.status !== 'INACTIVE').length === 0) {
 		return (
 			<Page headline={'Quests:'} goBack={goBack}>
 				Talk to the people in the camp to start quests
@@ -50,13 +57,8 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 	return (
 		<Page headline={'Quests:'} goBack={goBack}>
 			<Stack mode="column">
-				{Object.entries(QuestsRecord).map(([n, quest]) => {
-					const name = n as QuestName;
-					const status = quests[name];
-					const fulfilled = quest.conditionFunction(saveFile);
-					const collected = status === 'COLLECTED';
-					const active = status === 'ACTIVE' && !fulfilled;
-
+				{all.map(({ name, status }) => {
+					const quest = QuestsRecord[name];
 					if (status === 'INACTIVE' || status === 'COLLECTED') {
 						return <React.Fragment key={name}></React.Fragment>;
 					}
@@ -68,11 +70,10 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 							content={
 								<div>
 									<h3>{name}</h3>
-									{fulfilled && !collected && <h4>ready to collect</h4>}
-									{collected && <h4>COLLECTED</h4>}
+									{status === 'FULFILLED' && <h4>ready to collect</h4>}
 									<h5 style={{ display: 'flex', alignItems: 'center' }}>
 										Reward:
-										{Object.entries(getRewardForQuest(name)).map(
+										{Object.entries(getRewardForQuest(name as QuestName)).map(
 											([item, amount]) => (
 												<React.Fragment key={item}>
 													{amount} x <img src={getItemUrl(item as ItemType)} />
@@ -84,9 +85,12 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 								</div>
 							}
 							actionElements={[
-								fulfilled && !collected && (
+								status === 'FULFILLED' && (
 									<button
-										style={{ borderRadius: 9000 }}
+										style={{
+											borderRadius: 9000,
+											backgroundColor: typeColors['grass'],
+										}}
 										onClick={() => {
 											addMessage({
 												message: `Earned ${quest.researchPoints} Research Points`,
@@ -110,8 +114,7 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 										Collect Reward
 									</button>
 								),
-								collected && <button>Collected</button>,
-								active && <button>Active</button>,
+								status === 'ACTIVE' && <strong>Active</strong>,
 							].filter((x) => !!x)}
 						/>
 					);

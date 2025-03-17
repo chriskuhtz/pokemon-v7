@@ -13,14 +13,9 @@ export const useQuests = (): {
 		() =>
 			Object.entries(QuestsRecord).map(([name, quest]) => {
 				const status = saveFile.quests[name as QuestName];
-				const collected = status === 'COLLECTED';
-				const fulfilled = quest.conditionFunction(saveFile);
-				const active = status === 'ACTIVE' && !fulfilled;
-				const inactive = status === 'INACTIVE';
 
-				if (collected || active || inactive) {
-					return { name, status };
-				}
+				const fulfilled =
+					quest.conditionFunction(saveFile) && status !== 'COLLECTED';
 				if (fulfilled) {
 					return { name, status: 'FULFILLED' };
 				}
