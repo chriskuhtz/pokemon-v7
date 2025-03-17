@@ -103,7 +103,7 @@ export const extraFeatureCheckList: {
 	{ name: 'faster days setting', handled: true },
 	{ name: 'item icons in battle', handled: true },
 	{ name: 'dismiss messages with enter', handled: true },
-	{ name: 'message about xp gain' },
+	{ name: 'message about xp gain', handled: true },
 	{ name: 'use more typecolors' },
 	{ name: 'escape rope only in cave' },
 	{ name: 'berry bushes' },
