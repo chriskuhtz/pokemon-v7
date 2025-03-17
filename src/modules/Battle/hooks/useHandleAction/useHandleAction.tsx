@@ -61,6 +61,21 @@ export const useHandleAction = (
 				);
 				return;
 			}
+			if (move.type === 'Slacking') {
+				addMessage({
+					message: `${attacker.name} is slacking off`,
+				});
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.id === attacker.id) {
+							return { ...p, moveQueue: [] };
+						}
+
+						return p;
+					})
+				);
+				return;
+			}
 			if (move.type === 'BattleAttack' && move.name === 'teleport') {
 				addMessage({
 					message: `${attacker} escaped the battle with teleport`,

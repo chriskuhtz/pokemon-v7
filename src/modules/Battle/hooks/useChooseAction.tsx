@@ -28,6 +28,24 @@ export const useChooseAction = (
 			if (!user) {
 				throw new Error('the user is not on the field');
 			}
+			if (actionName === 'SLACKING') {
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.id === user.id) {
+							return {
+								...user,
+								moveQueue: [
+									{
+										type: 'Slacking',
+										round: battleRound,
+									},
+								],
+							};
+						}
+						return p;
+					})
+				);
+			}
 			const target = pokemon.find((p) => p.id === targetId);
 			if (targetId && !target) {
 				throw new Error('could not find target');

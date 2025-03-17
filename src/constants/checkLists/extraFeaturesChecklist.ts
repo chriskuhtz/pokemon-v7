@@ -104,6 +104,8 @@ export const extraFeatureCheckList: {
 	{ name: 'item icons in battle', handled: true },
 	{ name: 'dismiss messages with enter', handled: true },
 	{ name: 'message about xp gain', handled: true },
+	{ name: 'assign actual ability if possible' },
+	{ name: 'earthquake etc hit all participants' },
 	{ name: 'use more typecolors' },
 	{ name: 'escape rope only in cave' },
 	{ name: 'berry bushes' },

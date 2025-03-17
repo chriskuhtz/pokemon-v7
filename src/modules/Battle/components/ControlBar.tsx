@@ -4,18 +4,17 @@ import {
 	getRandomIndex,
 } from '../../../functions/filterTargets';
 import { getMovesArray } from '../../../functions/getMovesArray';
+import { OPPO_ID } from '../../../functions/makeChallengerPokemon';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import { ActionType, ChooseActionPayload } from '../BattleField';
 import { ActionSelection } from './ActionSelection';
 import { TargetSelection } from './TargetSelection';
-import { OPPO_ID } from '../../../functions/makeChallengerPokemon';
 
 export function ControlBar({
 	controlled,
 	targets,
 	chooseAction,
-
 	playerInventory,
 }: {
 	controlled: BattlePokemon | undefined;
@@ -40,6 +39,17 @@ export function ControlBar({
 	);
 
 	useEffect(() => {
+		if (
+			controlled?.ability === 'truant' &&
+			controlled.roundsInBattle % 2 === 1
+		) {
+			chooseAction({
+				userId: controlled.id,
+				actionName: 'SLACKING',
+				targetId: controlled.id,
+			});
+			return;
+		}
 		if (controlled?.ownerId === OPPO_ID) {
 			const moves = getMovesArray(controlled, true);
 			const actionName = moves[getRandomIndex(moves.length)].name;

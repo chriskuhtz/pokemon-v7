@@ -39,10 +39,15 @@ export interface RunAway {
 	type: 'RunAway';
 	round: number;
 }
+export interface Slacking {
+	type: 'Slacking';
+	round: number;
+}
 
 export type BattleAction =
 	| CatchProcessInfo
 	| BattleAttack
 	| ChargeUp
 	| InBattleItem
-	| RunAway;
+	| RunAway
+	| Slacking;
