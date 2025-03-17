@@ -270,7 +270,6 @@ export const handleAttack = ({
 			battleFieldEffects
 		);
 		//healing
-
 		if (move.data.meta.healing) {
 			addMessage({ message: `${updatedAttacker.name} healed itself` });
 			updatedAttacker = {
@@ -284,7 +283,6 @@ export const handleAttack = ({
 			};
 		}
 	}
-
 	//check for static
 	if (
 		target.ability === 'static' &&
@@ -382,6 +380,10 @@ export const handleAttack = ({
 		if (isKO(updatedAttacker)) {
 			updatedAttacker = handleFainting(updatedAttacker, addMessage);
 		}
+	}
+	//handle splash
+	if (move.name === 'splash') {
+		addMessage({ message: 'Nothing happened' });
 	}
 
 	//TARGET

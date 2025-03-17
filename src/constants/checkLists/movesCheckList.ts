@@ -574,7 +574,7 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/149/',
 		handled: true,
 	},
-	{ name: 'splash', url: 'https://pokeapi.co/api/v2/move/150/' },
+	{ name: 'splash', url: 'https://pokeapi.co/api/v2/move/150/', handled: true },
 	{
 		name: 'acid-armor',
 		url: 'https://pokeapi.co/api/v2/move/151/',
@@ -1709,6 +1709,7 @@ export const handledMoves = [
 	'dream-eater',
 	'sky-attack',
 	'psywave',
+	'splash',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
