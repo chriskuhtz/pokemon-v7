@@ -38,6 +38,7 @@ export const useChooseAction = (
 									{
 										type: 'Slacking',
 										round: battleRound,
+										data: { priority: 0 },
 									},
 								],
 							};

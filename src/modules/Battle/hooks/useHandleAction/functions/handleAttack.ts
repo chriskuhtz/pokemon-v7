@@ -269,6 +269,7 @@ export const handleAttack = ({
 		//healing
 
 		if (move.data.meta.healing) {
+			addMessage({ message: `${updatedAttacker.name} healed itself` });
 			updatedAttacker = {
 				...updatedAttacker,
 				damage: getMiddleOfThree([

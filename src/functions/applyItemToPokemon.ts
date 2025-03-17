@@ -149,7 +149,10 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 			happiness: pokemon.happiness + (HappinessChangeTable[item] ?? 0),
 		};
 	}
-	if (item === 'ice-heal' && pokemon.primaryAilment?.type === 'freeze') {
+	if (
+		(item === 'ice-heal' || item === 'aspear-berry') &&
+		pokemon.primaryAilment?.type === 'freeze'
+	) {
 		if (addMessage) {
 			addMessage({ message: `Defrosted` });
 		}

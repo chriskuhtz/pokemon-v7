@@ -42,6 +42,7 @@ export interface RunAway {
 export interface Slacking {
 	type: 'Slacking';
 	round: number;
+	data: { priority: 0 };
 }
 
 export type BattleAction =

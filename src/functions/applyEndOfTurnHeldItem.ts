@@ -70,5 +70,17 @@ export const applyEndOfTurnHeldItem = (
 			heldItemName: undefined,
 		};
 	}
+	if (
+		pokemon.heldItemName === 'aspear-berry' &&
+		pokemon.primaryAilment?.type === 'freeze'
+	) {
+		addMessage(
+			`${pokemon.data.name} cured its freeze with ${pokemon.heldItemName}`
+		);
+		return {
+			...applyItemToPokemon(pokemon, pokemon.heldItemName),
+			heldItemName: undefined,
+		};
+	}
 	return pokemon;
 };
