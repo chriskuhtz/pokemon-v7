@@ -1,4 +1,9 @@
 import { Inventory } from '../../interfaces/Inventory';
+import {
+	evBoostItemTypes,
+	ppRestorationItemTypes,
+	xItemTypes,
+} from '../../interfaces/Item';
 import { Occupant, OverworldMap } from '../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
 
@@ -121,6 +126,11 @@ const market3Inventory: Partial<Inventory> = {
 	'hyper-potion': 1,
 	'super-repel': 1,
 };
+const battleItemMarket: Partial<Inventory> = {
+	...Object.fromEntries(xItemTypes.map((item) => [item, 1])),
+	...Object.fromEntries(evBoostItemTypes.map((item) => [item, 1])),
+	...Object.fromEntries(ppRestorationItemTypes.map((item) => [item, 1])),
+};
 
 const merchants: Occupant[] = [
 	{
@@ -166,6 +176,17 @@ const merchants: Occupant[] = [
 			s.campUpgrades.market_1 &&
 			s.campUpgrades.market_2 &&
 			s.campUpgrades.market_3,
+	},
+	{
+		type: 'MERCHANT',
+		id: 'battle_item_market',
+		x: 14,
+		y: 1,
+		orientation: 'DOWN',
+		sprite: SpriteEnum.clerkFemale,
+		dialogue: ['My Market specialises in battle items'],
+		inventory: battleItemMarket,
+		conditionFunction: (s) => s.campUpgrades.battle_item_market,
 	},
 ];
 

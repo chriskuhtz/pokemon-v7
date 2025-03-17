@@ -106,6 +106,7 @@ export const extraFeatureCheckList: {
 	{ name: 'message about xp gain', handled: true },
 	{ name: 'assign actual ability if possible' },
 	{ name: 'earthquake etc hit all participants' },
+	{ name: 'training_field win gives 1 research point' },
 	{ name: 'use more typecolors' },
 	{ name: 'escape rope only in cave' },
 	{ name: 'berry bushes' },
