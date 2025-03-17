@@ -210,6 +210,17 @@ export const handleAttack = ({
 			addMessage
 		);
 	}
+	//rest
+	if (move.name === 'rest') {
+		addMessage({
+			message: `${updatedAttacker.data.name} went to sleep and became healthy`,
+		});
+		updatedAttacker = {
+			...updatedAttacker,
+			damage: 0,
+			primaryAilment: { type: 'sleep', duration: 2 },
+		};
+	}
 	//self destruct
 	if (SELF_DESTRUCTING_MOVES.includes(move.name)) {
 		addMessage({ message: `${updatedAttacker.name} self destructed` });
