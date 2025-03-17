@@ -95,6 +95,19 @@ export const applyEndOfTurnHeldItem = (
 			heldItemName: undefined,
 		};
 	}
+	if (
+		pokemon.heldItemName === 'lum-berry' &&
+		(pokemon.secondaryAilments.some((ail) => ail.type === 'confusion') ||
+			pokemon.primaryAilment)
+	) {
+		addMessage(
+			`${pokemon.data.name} cured itself with ${pokemon.heldItemName}`
+		);
+		return {
+			...applyItemToPokemon(pokemon, pokemon.heldItemName),
+			heldItemName: undefined,
+		};
+	}
 	if (pokemon.heldItemName === 'leppa-berry') {
 		const depletedMove = getMovesArray(pokemon).find(
 			(m) => m.data.pp - m.usedPP <= 0

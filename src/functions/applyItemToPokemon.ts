@@ -100,7 +100,8 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		item === 'full-heal' ||
 		item === 'heal-powder' ||
 		item === 'lava-cookie' ||
-		item === 'old-gateau'
+		item === 'old-gateau' ||
+		item === 'lum-berry'
 	) {
 		if (addMessage) {
 			addMessage({ message: `all ailments healed` });
