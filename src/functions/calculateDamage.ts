@@ -233,7 +233,11 @@ export const calculateDamage = (
 	const rivalryFactor = getRivalryFactor(attacker, target.gender);
 	const hustleFactor =
 		attacker.ability === 'hustle' && damageClass === 'physical' ? 1.5 : 1;
-	const selfDestructFactor = attack.name === 'self-destruct' ? 2 : 1;
+	const selfDestructFactor = ['self-destruct', 'explosion'].includes(
+		attack.name
+	)
+		? 2
+		: 1;
 	const plusFactor =
 		attacker.ability === 'plus' &&
 		battleFieldEffects.some(

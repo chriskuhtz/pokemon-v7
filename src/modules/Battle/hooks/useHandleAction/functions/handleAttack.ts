@@ -212,6 +212,7 @@ export const handleAttack = ({
 	}
 	//self destruct
 	if (SELF_DESTRUCTING_MOVES.includes(move.name)) {
+		addMessage({ message: `${updatedAttacker.name} self destructed` });
 		updatedAttacker = handleFainting(updatedAttacker, addMessage);
 	}
 
