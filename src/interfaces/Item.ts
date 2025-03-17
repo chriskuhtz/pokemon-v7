@@ -36,6 +36,7 @@ export const healingItemTypes = [
 	'pecha-berry',
 	'rawst-berry',
 	'aspear-berry',
+	'oran-berry',
 ] as const;
 
 export const ppRestorationItemTypes = [
@@ -160,6 +161,7 @@ export const berries = [
 	'rawst-berry',
 	'aspear-berry',
 	'leppa-berry',
+	'oran-berry',
 ] as const;
 
 export const fossils = [
@@ -293,6 +295,7 @@ export const EvBoostTable: Record<
 };
 
 export const HPHealTable: Partial<Record<ItemType, number>> = {
+	'oran-berry': 10,
 	potion: 20,
 	'berry-juice': 20,
 	'sitrus-berry': 30,
@@ -346,11 +349,8 @@ export const pickupTable: ItemType[] = [
 	...berries,
 	...berries,
 	...berries,
-	...berries,
 	'berry-juice',
 	'berry-juice',
-	'berry-juice',
-	...apricorns,
 	...apricorns,
 	...apricorns,
 	'rare-candy',
