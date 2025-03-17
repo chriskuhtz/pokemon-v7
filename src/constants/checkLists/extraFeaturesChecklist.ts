@@ -111,7 +111,10 @@ export const extraFeatureCheckList: {
 		name: 'make fulfilled quests more recognizable and sort them to the top',
 		handled: true,
 	},
-	{ name: 'limit amount of bulletin quests active at the same time' },
+	{
+		name: 'limit amount of bulletin quests active at the same time',
+		handled: true,
+	},
 	{ name: 'distinct double/single battle definition' },
 	{ name: 'earthquake etc hit all participants' },
 	{ name: 'use more typecolors' },

@@ -20,8 +20,22 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 	const { saveFile, putSaveFileReducer } = useContext(SaveFileContext);
 	const { quests, campUpgrades } = saveFile;
 
+	const activeQuests = useMemo(
+		() =>
+			Object.keys(QuestsRecord).filter(
+				(q) => quests[q as QuestName] === 'ACTIVE'
+			),
+		[quests]
+	);
 	const acceptQuest = useCallback(
 		(name: QuestName) => {
+			if (activeQuests.length >= 3) {
+				addMessage({
+					message: 'You can only have 3 active Quests at the same time',
+				});
+
+				return;
+			}
 			addMessage({
 				message: `Accepted Quest: ${name}`,
 				needsNoConfirmation: true,
@@ -31,7 +45,7 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 				quests: { ...saveFile.quests, [name]: 'ACTIVE' },
 			});
 		},
-		[addMessage, putSaveFileReducer, saveFile]
+		[activeQuests, addMessage, putSaveFileReducer, saveFile]
 	);
 
 	const availableQuests: { name: QuestName; quest: Quest }[] = useMemo(
