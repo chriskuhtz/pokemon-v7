@@ -1,6 +1,11 @@
 import { useFetch } from '@potfisch-industries-npm/usefetch';
+import {
+	AbilityName,
+	abilityNames,
+} from '../constants/checkLists/abilityCheckList';
 import { MoveName } from '../constants/checkLists/movesCheckList';
 import { calculateLevelData } from '../functions/calculateLevelData';
+import { getRandomEntry } from '../functions/filterTargets';
 import { getStats } from '../functions/getStats';
 import { maybeGetHeldItemFromData } from '../functions/maybeGetHeldItemFromData';
 import { moveIsAvailable } from '../functions/moveIsAvailable';
@@ -12,7 +17,8 @@ import { PokemonSpeciesData } from '../interfaces/PokemonSpeciesData';
 import { EmptyStatObject } from '../interfaces/StatObject';
 export const useGetBattleTeam = (
 	initTeam: (OwnedPokemon & { caughtBefore: boolean })[],
-	assignLearnsetMoves?: boolean
+	assignLearnsetMoves?: boolean,
+	assignNaturalAbility?: boolean
 ) => {
 	return useFetch<BattlePokemon[]>(() =>
 		Promise.all(
@@ -22,11 +28,24 @@ export const useGetBattleTeam = (
 					await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
 				).json();
 
-				const d = await data;
+				const fetchedData = await data;
 
 				const { level } = calculateLevelData(xp);
 
-				const availableMoves = d.moves.filter((m) => moveIsAvailable(m, level));
+				const possibleAbilities = [
+					...fetchedData.abilities
+						.map((a) => a.ability.name)
+						.filter((name) => abilityNames.includes(name as AbilityName)),
+					'run-away', //run away as fallb
+				] as AbilityName[];
+
+				const ability: AbilityName = assignNaturalAbility
+					? getRandomEntry(possibleAbilities)
+					: pokemon.ability;
+
+				const availableMoves = fetchedData.moves
+					.filter((m) => moveIsAvailable(m, level))
+					.reverse();
 
 				const firstMove = assignLearnsetMoves
 					? availableMoves[0].move.name
@@ -66,8 +85,10 @@ export const useGetBattleTeam = (
 				const f = await fourthMoveData;
 				const battleMon: BattlePokemon = {
 					...pokemon,
-					initAbility: pokemon.ability,
-					heldItemName: pokemon.heldItemName ?? maybeGetHeldItemFromData(d),
+					ability: ability,
+					initAbility: ability,
+					heldItemName:
+						pokemon.heldItemName ?? maybeGetHeldItemFromData(fetchedData),
 					roundsInBattle: 0,
 					secondaryAilments: [],
 					moveQueue: [],
@@ -100,9 +121,9 @@ export const useGetBattleTeam = (
 									data: f,
 							  }
 							: undefined,
-					data: d,
+					data: fetchedData,
 					stats: getStats(
-						d.stats,
+						fetchedData.stats,
 						pokemon.xp,
 						pokemon.nature,
 						pokemon.effortValues

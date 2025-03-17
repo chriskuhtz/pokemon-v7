@@ -35,6 +35,7 @@ export const BattleLoader = ({
 			...o,
 			caughtBefore: ownedPokemonNames.includes(o.name),
 		})),
+		true,
 		true
 	);
 	const { res: battleTeam } = useGetBattleTeam(
