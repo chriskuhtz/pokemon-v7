@@ -190,7 +190,10 @@ export const calculateDamage = (
 
 	const randomFactor = 0.85 + Math.random() * 0.15;
 	const stabFactor = determineStabFactor(attacker, attack);
-	const burnFactor = attacker.primaryAilment?.type === 'burn' ? 0.5 : 1;
+	const burnFactor =
+		attacker.primaryAilment?.type === 'burn' && attacker.ability !== 'guts'
+			? 0.5
+			: 1;
 	const otherFactor = 1;
 	const zMoveFactor = 1;
 	const teraShieldFactor = 1;
@@ -254,6 +257,9 @@ export const calculateDamage = (
 		damageClass === 'special'
 			? 1.5
 			: 1;
+	const gutsFactor =
+		attacker.primaryAilment && attacker.ability === 'guts' ? 1.5 : 1;
+
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -281,7 +287,8 @@ export const calculateDamage = (
 				hustleFactor *
 				selfDestructFactor *
 				plusFactor *
-				minusFactor
+				minusFactor *
+				gutsFactor
 		),
 		1
 	);
