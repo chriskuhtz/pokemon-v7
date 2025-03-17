@@ -24,10 +24,11 @@ export const testOpponent: OwnedPokemon = {
 	effortValues: EmptyStatObject,
 	ppBoostedMoves: [],
 	caughtOnMap: 'camp',
+	weightModifier: 1,
 };
 
 export const makeChallengerPokemon = (
 	data: Partial<Omit<OwnedPokemon, 'id'>>
 ): OwnedPokemon => {
-	return { ...testOpponent, ...data, id: v4() };
+	return { ...testOpponent, weightModifier: Math.random(), ...data, id: v4() };
 };

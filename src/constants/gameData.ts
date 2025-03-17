@@ -30,6 +30,7 @@ export const testPokemon: OwnedPokemon = {
 	effortValues: EmptyStatObject,
 	ppBoostedMoves: [],
 	caughtOnMap: 'camp',
+	weightModifier: Math.random(),
 };
 
 export const startingLocation: CharacterLocationData = {

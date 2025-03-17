@@ -171,6 +171,9 @@ export const OwnedPokemonCardContent = ({
 						<h5>type: {typeNames.join('/')} </h5>
 						<h5>nature: {ownedPokemon.nature}</h5>
 						<h5>ability: {ownedPokemon.ability}</h5>
+						{ownedPokemon.weightModifier && (
+							<h5>rel. Weight: {ownedPokemon.weightModifier.toFixed(2)}</h5>
+						)}
 					</div>
 					<div>
 						<HappinessIcon value={ownedPokemon.happiness} />

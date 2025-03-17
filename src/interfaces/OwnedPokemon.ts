@@ -46,4 +46,5 @@ export interface OwnedPokemon {
 	caughtOnMap: MapId;
 	nickname?: string;
 	gender: PokemonGender;
+	weightModifier?: number;
 }

@@ -1,6 +1,5 @@
 import { useCallback, useContext, useMemo } from 'react';
-import { v4 } from 'uuid';
-import { testPokemon } from '../../../constants/gameData';
+import { makeChallengerPokemon } from '../../../functions/makeChallengerPokemon';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { joinInventories } from '../../../interfaces/Inventory';
@@ -29,14 +28,14 @@ export const useFossils = () => {
 				inventory: joinInventories(saveFile.inventory, { [fossil]: 1 }, true),
 				pokemon: [
 					...saveFile.pokemon,
-					{
-						...testPokemon,
+					makeChallengerPokemon({
 						name: fossilTable[fossil],
-						id: v4(),
 						xp: 1000,
 						nature: getRandomNature(),
 						onTeam: saveFile.pokemon.filter((p) => p.onTeam).length < 6,
-					},
+						ownerId: saveFile.playerId,
+						weightModifier: Math.random(),
+					}),
 				],
 			});
 		},
