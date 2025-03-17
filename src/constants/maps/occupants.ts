@@ -365,6 +365,19 @@ export const campOccupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) => s.quests['catch a pokemon'] !== 'COLLECTED',
 	},
 	{
+		type: 'NPC',
+		id: 'oak_2',
+		x: 5,
+		y: 4,
+		orientation: 'DOWN',
+		unhandledMessage: [
+			'Great work',
+			'Check the Bulletin board for more quests',
+		],
+		sprite: SpriteEnum.oak,
+		conditionFunction: (s) => s.quests['catch a pokemon'] === 'COLLECTED',
+	},
+	{
 		type: 'NURSE',
 		id: 'camp_nurse',
 		x: 6,
