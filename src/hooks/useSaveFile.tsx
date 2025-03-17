@@ -14,6 +14,7 @@ import { PokemonName } from '../constants/pokemonNames';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 import { determineWildPokemon } from '../functions/determineWildPokemon';
+import { getRandomEntry } from '../functions/filterTargets';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getRewardForQuest } from '../functions/getRewardForQuest';
 import { OPPO_ID } from '../functions/makeChallengerPokemon';
@@ -27,7 +28,7 @@ import {
 	Inventory,
 	joinInventories,
 } from '../interfaces/Inventory';
-import { EncounterChanceItem, ItemType } from '../interfaces/Item';
+import { EncounterChanceItem, ItemType, pickupTable } from '../interfaces/Item';
 import { Occupant } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { RoutesType } from '../interfaces/Routing';
@@ -399,8 +400,17 @@ const useSaveFile = (
 				})
 				.map((p) => reduceBattlePokemonToOwnedPokemon(p));
 
+			//check pickup
+			const pickUpCheckedTeam = leveledUpTeam.map((p) => {
+				if (p.ability === 'pickup' && !p.heldItemName && Math.random() < 0.1) {
+					return { ...p, heldItemName: getRandomEntry(pickupTable) };
+				}
+
+				return p;
+			});
+
 			const teamAndCaught = [
-				...leveledUpTeam,
+				...pickUpCheckedTeam,
 				...caughtPokemon.map((c) => ({
 					...reduceBattlePokemonToOwnedPokemon(
 						{ ...c, ownerId: saveFile.playerId },

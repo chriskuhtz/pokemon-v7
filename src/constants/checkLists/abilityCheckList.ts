@@ -306,7 +306,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/52/',
 		handled: true,
 	},
-	{ name: 'pickup', url: 'https://pokeapi.co/api/v2/ability/53/' },
+	{
+		name: 'pickup',
+		url: 'https://pokeapi.co/api/v2/ability/53/',
+		handled: true,
+	},
 	{ name: 'truant', url: 'https://pokeapi.co/api/v2/ability/54/' },
 	{ name: 'hustle', url: 'https://pokeapi.co/api/v2/ability/55/' },
 	{ name: 'cute-charm', url: 'https://pokeapi.co/api/v2/ability/56/' },
@@ -675,6 +679,7 @@ export const abilityNames = [
 	'rivalry',
 	'keen-eye',
 	'hyper-cutter',
+	'pickup',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

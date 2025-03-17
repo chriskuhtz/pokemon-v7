@@ -335,3 +335,17 @@ export const apricornTable: Record<ApricornType, PokeballType> = {
 export const getRandomItem = () => {
 	return itemTypes[getRandomIndex(itemTypes.length)];
 };
+
+export const pickupTable: ItemType[] = [
+	...berries,
+	...berries,
+	...berries,
+	...berries,
+	'berry-juice',
+	'berry-juice',
+	'berry-juice',
+	...apricorns,
+	...apricorns,
+	...apricorns,
+	'rare-candy',
+];
