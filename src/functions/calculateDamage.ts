@@ -54,6 +54,15 @@ export const calculateDamage = (
 	if (typeFactor === 0) {
 		return 0;
 	}
+	if (
+		attack.name === 'dream-eater' &&
+		target.primaryAilment?.type !== 'sleep'
+	) {
+		if (addMessage) {
+			addMessage({ message: 'It failed' });
+		}
+		return 0;
+	}
 
 	if (attack.name === 'counter') {
 		if (

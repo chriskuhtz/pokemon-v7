@@ -519,14 +519,22 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/134/',
 		handled: true,
 	},
-	{ name: 'soft-boiled', url: 'https://pokeapi.co/api/v2/move/135/' },
+	{
+		name: 'soft-boiled',
+		url: 'https://pokeapi.co/api/v2/move/135/',
+		handled: true,
+	},
 	{
 		name: 'high-jump-kick',
 		url: 'https://pokeapi.co/api/v2/move/136/',
 		handled: true,
 	},
 	{ name: 'glare', url: 'https://pokeapi.co/api/v2/move/137/', handled: true },
-	{ name: 'dream-eater', url: 'https://pokeapi.co/api/v2/move/138/' },
+	{
+		name: 'dream-eater',
+		url: 'https://pokeapi.co/api/v2/move/138/',
+		handled: true,
+	},
 	{
 		name: 'poison-gas',
 		url: 'https://pokeapi.co/api/v2/move/139/',
@@ -1688,6 +1696,8 @@ export const handledMoves = [
 	'focus-energy',
 	'self-destruct',
 	'skull-bash',
+	'soft-boiled',
+	'dream-eater',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
