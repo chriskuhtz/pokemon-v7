@@ -30,7 +30,6 @@ export const BattleLoader = ({
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
 }): JSX.Element => {
-	console.log(challenger);
 	const { res: battleOpponents } = useGetBattleTeam(
 		challenger.team.map((o) => ({
 			...o,

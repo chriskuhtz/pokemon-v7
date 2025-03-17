@@ -259,35 +259,21 @@ export const BattleField = ({
 
 	//REDUCERS
 	const leaveWithCurrentData = useCallback(
-		(outcome: 'WIN' | 'LOSS' | 'DRAW') => {
-			const defeatedPokemon = getOpponentPokemon(pokemon).filter(
-				(p) => p.status === 'FAINTED'
-			);
-			const gainedXp = defeatedPokemon.reduce((sum, d) => {
-				const { level } = calculateLevelData(d.xp);
-
-				return sum + Math.floor((d.data.base_experience * level) / 7);
-			}, 0);
-
-			const xpPerTeamMember =
-				outcome === 'WIN' ? Math.round(gainedXp / team.length) : 0;
-
-			if (outcome === 'WIN') {
-				addMessage({
-					message: `Each Team Member gained ${xpPerTeamMember} XP`,
-				});
-			}
+		(
+			outcome: 'WIN' | 'LOSS' | 'DRAW',
+			defeatedPokemon?: BattlePokemon[],
+			leveledUpTeam?: BattlePokemon[]
+		) => {
 			leave({
 				caughtPokemon: pokemon.filter((p) => p.status === 'CAUGHT'),
 				updatedInventory: battleInventory,
 				scatteredCoins,
-				team,
-				defeatedPokemon,
+				team: leveledUpTeam ?? team,
+				defeatedPokemon: defeatedPokemon ?? [],
 				outcome,
-				xpPerTeamMember,
 			});
 		},
-		[addMessage, battleInventory, leave, pokemon, scatteredCoins, team]
+		[battleInventory, leave, pokemon, scatteredCoins, team]
 	);
 	const putPokemonOnField = useCallback(
 		(id: string) =>
@@ -565,13 +551,54 @@ export const BattleField = ({
 		}
 		if (battleWon && !latestMessage) {
 			console.log('effect battlewon');
-			addMessage({
-				message: 'You won the battle',
-				onRemoval: () => leaveWithCurrentData('WIN'),
+
+			const defeatedPokemon = getOpponentPokemon(pokemon).filter(
+				(p) => p.status === 'FAINTED'
+			);
+			const gainedXp = defeatedPokemon.reduce((sum, d) => {
+				const { level } = calculateLevelData(d.xp);
+
+				return sum + Math.floor((d.data.base_experience * level) / 7);
+			}, 0);
+
+			const xpPerTeamMember = Math.round(gainedXp / team.length);
+
+			const leveledUpTeam = team.map((p) => {
+				const newXp = p.xp + xpPerTeamMember;
+				return { ...p, xp: newXp };
 			});
+
+			const levelUpMessages: Message[] = leveledUpTeam
+				.map((pokemon) => {
+					const prev = team.find((t) => t.id === pokemon.id);
+					if (!prev) {
+						return;
+					}
+					const prevLevel = calculateLevelData(prev.xp).level;
+					const level = calculateLevelData(pokemon.xp).level;
+
+					if (prevLevel !== level) {
+						return { message: `${pokemon.name} reached level ${level}` };
+					}
+					return;
+				})
+				.filter((m) => m !== undefined);
+
+			addMultipleMessages([
+				{
+					message: `Each Team Member gained ${xpPerTeamMember} XP`,
+				},
+				...levelUpMessages,
+				{
+					message: 'You won the battle',
+					onRemoval: () =>
+						leaveWithCurrentData('WIN', defeatedPokemon, leveledUpTeam),
+				},
+			]);
 		}
 	}, [
 		addMessage,
+		addMultipleMessages,
 		battleInventory,
 		battleLost,
 		battleWon,

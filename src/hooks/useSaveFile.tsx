@@ -42,7 +42,6 @@ export interface LeaveBattlePayload {
 	team: BattlePokemon[];
 	outcome: 'WIN' | 'LOSS' | 'DRAW';
 	defeatedPokemon: BattlePokemon[];
-	xpPerTeamMember: number;
 }
 
 export interface UseSaveFile {
@@ -367,7 +366,6 @@ const useSaveFile = (
 			caughtPokemon,
 			scatteredCoins,
 			outcome,
-			xpPerTeamMember,
 		}: LeaveBattlePayload) => {
 			let updatedLocation = saveFile.location;
 
@@ -393,15 +391,12 @@ const useSaveFile = (
 				}
 			}
 
-			const leveledUpTeam = updatedTeam
-				.map((p) => {
-					const newXp = p.xp + xpPerTeamMember;
-					return { ...p, xp: newXp };
-				})
-				.map((p) => reduceBattlePokemonToOwnedPokemon(p));
+			const ownedTeam = updatedTeam.map((p) =>
+				reduceBattlePokemonToOwnedPokemon(p)
+			);
 
 			//check pickup
-			const pickUpCheckedTeam = leveledUpTeam.map((p) => {
+			const pickUpCheckedTeam = ownedTeam.map((p) => {
 				if (p.ability === 'pickup' && !p.heldItemName && Math.random() < 0.1) {
 					return { ...p, heldItemName: getRandomEntry(pickupTable) };
 				}

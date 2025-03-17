@@ -77,7 +77,6 @@ export const BattleOverview = ({
 						defeatedPokemon: [],
 						outcome: 'WIN',
 						caughtPokemon: [],
-						xpPerTeamMember: 0,
 					})
 				}
 				opponents={opponents}
