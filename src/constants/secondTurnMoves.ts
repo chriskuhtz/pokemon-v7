@@ -6,4 +6,5 @@ export const secondTurnMoves = [
 	'dig',
 	'dive',
 	'bounce',
+	'sky-attack',
 ];
