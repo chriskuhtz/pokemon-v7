@@ -174,8 +174,7 @@ export const calculateDamage = (
 			? calculateModifiedStat(target.stats.defense, defBoost)
 			: calculateModifiedStat(target.stats.spdef, spdefBoost);
 
-	const finalDef = attack.name === 'self-destruct' ? def / 2 : def;
-	const statFactor = atk / finalDef;
+	const statFactor = atk / def;
 
 	const pureDamage = (levelFactor * power * statFactor) / 50 + 2;
 
@@ -234,6 +233,23 @@ export const calculateDamage = (
 	const rivalryFactor = getRivalryFactor(attacker, target.gender);
 	const hustleFactor =
 		attacker.ability === 'hustle' && damageClass === 'physical' ? 1.5 : 1;
+	const selfDestructFactor = attack.name === 'self-destruct' ? 2 : 1;
+	const plusFactor =
+		attacker.ability === 'plus' &&
+		battleFieldEffects.some(
+			(b) => b.ownerId === attacker.ownerId && b.type === 'minus'
+		) &&
+		damageClass === 'special'
+			? 1.5
+			: 1;
+	const minusFactor =
+		attacker.ability === 'minus' &&
+		battleFieldEffects.some(
+			(b) => b.ownerId === attacker.ownerId && b.type === 'plus'
+		) &&
+		damageClass === 'special'
+			? 1.5
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -258,7 +274,10 @@ export const calculateDamage = (
 				lightScreenFactor *
 				reflectFactor *
 				rivalryFactor *
-				hustleFactor
+				hustleFactor *
+				selfDestructFactor *
+				plusFactor *
+				minusFactor
 		),
 		1
 	);

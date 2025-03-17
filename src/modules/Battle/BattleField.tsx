@@ -15,6 +15,7 @@ import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getSettings } from '../../functions/getPlayerId';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
 import { isKO } from '../../functions/isKo';
+import { OPPO_ID } from '../../functions/makeChallengerPokemon';
 import { reduceSecondaryAilmentDurations } from '../../functions/reduceSecondaryAilmentDurations';
 import { sortByPriority } from '../../functions/sortByPriority';
 import { Message } from '../../hooks/useMessageQueue';
@@ -41,7 +42,7 @@ export interface ChooseActionPayload {
 }
 
 export interface BattleFieldEffect {
-	type: 'mist' | 'pressure' | 'light-screen' | 'reflect';
+	type: 'mist' | 'pressure' | 'light-screen' | 'reflect' | 'plus' | 'minus';
 	ownerId: string;
 	duration: number;
 }
@@ -68,8 +69,7 @@ export const BattleField = ({
 	challengerId?: string;
 }) => {
 	const {
-		battleFieldEffects,
-		setBattleFieldEffects,
+		battleFieldEffects: bf,
 		addBattleFieldEffect,
 		reduceBatttleFieldEffectDurations,
 	} = useBattleFieldEffects();
@@ -115,79 +115,30 @@ export const BattleField = ({
 		() => team.filter((p) => p.status !== 'BENCH' && p.status !== 'FAINTED'),
 		[team]
 	);
-	//APPLY OPPONENT PRESSURE ABILITY
-	useEffect(() => {
-		if (
-			onFieldOpponents.length > 0 &&
-			onFieldOpponents.some((p) => p.ability === 'pressure') &&
-			!battleFieldEffects.some(
-				(eff) =>
-					eff.type === 'pressure' && eff.ownerId === onFieldOpponents[0].ownerId
-			)
-		) {
-			addMessage({ message: `Opponent Side is exerting pressure` });
-			setBattleFieldEffects([
-				...battleFieldEffects,
-				{
-					type: 'pressure',
-					ownerId: onFieldOpponents[0].ownerId,
-					duration: 9000,
-				},
-			]);
-		} else if (
-			onFieldOpponents.length > 0 &&
-			!onFieldOpponents.some((p) => p.ability === 'pressure') &&
-			battleFieldEffects.some(
-				(eff) =>
-					eff.type === 'pressure' && eff.ownerId === onFieldOpponents[0].ownerId
-			)
-		) {
-			addMessage({ message: `Opponent Side is exerting pressure` });
-			setBattleFieldEffects(
-				[...battleFieldEffects].filter(
-					(eff) =>
-						eff.type !== 'pressure' ||
-						eff.ownerId !== onFieldOpponents[0].ownerId
-				)
-			);
+
+	const battleFieldEffects = useMemo(() => {
+		const res = [...bf];
+		if (onFieldOpponents.some((p) => p.ability === 'pressure')) {
+			res.push({ type: 'pressure', ownerId: OPPO_ID, duration: 9000 });
 		}
-	}, [addMessage, battleFieldEffects, onFieldOpponents, setBattleFieldEffects]);
-	//APPLY PLAYER PRESSURE ABILITY
-	useEffect(() => {
-		if (
-			onFieldTeam.length > 0 &&
-			onFieldTeam.some((p) => p.ability === 'pressure') &&
-			!battleFieldEffects.some(
-				(eff) =>
-					eff.type === 'pressure' && eff.ownerId === onFieldTeam[0].ownerId
-			)
-		) {
-			addMessage({ message: `Opponent Side is exerting pressure` });
-			setBattleFieldEffects([
-				...battleFieldEffects,
-				{
-					type: 'pressure',
-					ownerId: onFieldTeam[0].ownerId,
-					duration: 9000,
-				},
-			]);
-		} else if (
-			onFieldTeam.length > 0 &&
-			!onFieldTeam.some((p) => p.ability === 'pressure') &&
-			battleFieldEffects.some(
-				(eff) =>
-					eff.type === 'pressure' && eff.ownerId === onFieldTeam[0].ownerId
-			)
-		) {
-			addMessage({ message: `Player Side is exerting pressure` });
-			setBattleFieldEffects(
-				[...battleFieldEffects].filter(
-					(eff) =>
-						eff.type !== 'pressure' || eff.ownerId !== onFieldTeam[0].ownerId
-				)
-			);
+		if (onFieldTeam.some((p) => p.ability === 'pressure')) {
+			res.push({ type: 'pressure', ownerId: OPPO_ID, duration: 9000 });
 		}
-	}, [addMessage, battleFieldEffects, onFieldTeam, setBattleFieldEffects]);
+		if (onFieldOpponents.some((p) => p.ability === 'plus')) {
+			res.push({ type: 'plus', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'plus')) {
+			res.push({ type: 'plus', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldOpponents.some((p) => p.ability === 'minus')) {
+			res.push({ type: 'minus', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'minus')) {
+			res.push({ type: 'minus', ownerId: OPPO_ID, duration: 9000 });
+		}
+		return res;
+	}, [bf, onFieldOpponents, onFieldTeam]);
+
 	const allOnField = useMemo(
 		() => [...onFieldTeam, ...onFieldOpponents],
 		[onFieldOpponents, onFieldTeam]
