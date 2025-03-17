@@ -105,7 +105,7 @@ export const extraFeatureCheckList: {
 	{ name: 'dismiss messages with enter', handled: true },
 	{ name: 'message about xp gain', handled: true },
 	{ name: 'assign actual ability if possible', handled: true },
-	{ name: 'training_field win gives 1 research point' },
+	{ name: 'defeating trainers gives 1 research point', handled: true },
 	{ name: 'earthquake etc hit all participants' },
 	{ name: 'use more typecolors' },
 	{ name: 'escape rope only in cave' },

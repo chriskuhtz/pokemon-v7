@@ -13,6 +13,7 @@ import { useChallengeTrainer } from '../Overworld/hooks/useChallengeTrainer';
 export const TrainingField = () => {
 	const { setActiveTabReducer, saveFile } = useContext(SaveFileContext);
 	const challenge = useChallengeTrainer();
+
 	return (
 		<Page
 			goBack={() => setActiveTabReducer('OVERWORLD')}
@@ -38,39 +39,47 @@ export const TrainingField = () => {
 						}
 						return res;
 					})
-					.map((t) => (
-						<Card
-							key={t.id}
-							icon={<Sprite id={t.trainer?.sprite ?? '136'} rotating={false} />}
-							content={
-								<div>
-									<h3
-										style={{
-											display: 'grid',
-											alignItems: 'center',
-											gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 1fr 1fr',
-											gap: '1rem',
-										}}
-									>
-										{t.trainer?.name}{' '}
-										{t.team.map((p) => (
-											<img src={getPokemonSprite(p.name)} />
-										))}
-									</h3>
-									<div style={{ display: 'flex', gap: '1rem' }}>
-										{t.team.map((p) => (
-											<strong>
-												Lvl {calculateLevelData(p.xp).level} {p.name},
-											</strong>
-										))}
+					.map((t) => {
+						const defeatedBefore = saveFile.handledOccupants.some(
+							(h) => h.id === t.id
+						);
+						return (
+							<Card
+								key={t.id}
+								icon={
+									<Sprite id={t.trainer?.sprite ?? '136'} rotating={false} />
+								}
+								content={
+									<div>
+										<h3
+											style={{
+												display: 'grid',
+												alignItems: 'center',
+												gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 1fr 1fr',
+												gap: '1rem',
+											}}
+										>
+											{t.trainer?.name}{' '}
+											{t.team.map((p) => (
+												<img src={getPokemonSprite(p.name)} />
+											))}
+										</h3>
+										<div style={{ display: 'flex', gap: '1rem' }}>
+											{t.team.map((p) => (
+												<strong>
+													Lvl {calculateLevelData(p.xp).level} {p.name},
+												</strong>
+											))}
+										</div>
+										{defeatedBefore && <strong>Defeated before</strong>}
 									</div>
-								</div>
-							}
-							actionElements={[
-								<button onClick={() => challenge(t.id)}>Challenge</button>,
-							]}
-						/>
-					))}
+								}
+								actionElements={[
+									<button onClick={() => challenge(t.id)}>Challenge</button>,
+								]}
+							/>
+						);
+					})}
 			</Stack>
 		</Page>
 	);
