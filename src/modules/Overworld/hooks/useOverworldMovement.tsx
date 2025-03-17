@@ -8,6 +8,7 @@ import { Occupant, OnStepPortal } from '../../../interfaces/OverworldMap';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
 
 const baseEncounterRate = 0;
+const encounterRateStep = 0.05;
 export const useOverworldMovement = (
 	startEncounter: () => void,
 	addStep: () => void,
@@ -38,7 +39,7 @@ export const useOverworldMovement = (
 			if (encounterChance === baseEncounterRate) {
 				return;
 			}
-			setEncounterChance(encounterChance - 0.02);
+			setEncounterChance(encounterChance - encounterRateStep);
 		};
 		const int = setTimeout(() => {
 			if (
@@ -62,7 +63,7 @@ export const useOverworldMovement = (
 					if (Math.random() < modifiedEncounterRate) {
 						startEncounter();
 						return;
-					} else setEncounterChance(encounterChance + 0.02);
+					} else setEncounterChance(encounterChance + encounterRateStep);
 				} else reduceEncounterRate();
 			}
 			if (nextInput === playerLocation.orientation) {
