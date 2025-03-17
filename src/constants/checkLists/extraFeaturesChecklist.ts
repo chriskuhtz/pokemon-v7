@@ -194,4 +194,5 @@ export const extraFeatureCheckList: {
 	{ name: 'break step between move execution' },
 	{ name: 'improved keyboard control, interpret direction buttons' },
 	{ name: 'fix loading after evo' },
+	{ name: 'actually apply ppboost in battle' },
 ];

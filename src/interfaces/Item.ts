@@ -43,6 +43,7 @@ export const ppRestorationItemTypes = [
 	'max-ether',
 	'elixir',
 	'max-elixir',
+	'leppa-berry',
 ] as const;
 
 export const evBoostItemTypes = [
@@ -158,6 +159,7 @@ export const berries = [
 	'pecha-berry',
 	'rawst-berry',
 	'aspear-berry',
+	'leppa-berry',
 ] as const;
 
 export const fossils = [

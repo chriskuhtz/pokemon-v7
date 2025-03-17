@@ -1,6 +1,7 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { hasEndOfTurnEffect, HPHealTable } from '../interfaces/Item';
 import { applyItemToPokemon } from './applyItemToPokemon';
+import { getMovesArray } from './getMovesArray';
 
 export const applyEndOfTurnHeldItem = (
 	pokemon: BattlePokemon,
@@ -81,6 +82,23 @@ export const applyEndOfTurnHeldItem = (
 			...applyItemToPokemon(pokemon, pokemon.heldItemName),
 			heldItemName: undefined,
 		};
+	}
+	if (pokemon.heldItemName === 'leppa-berry') {
+		const depletedMove = getMovesArray(pokemon).find(
+			(m) => m.data.pp - m.usedPP <= 0
+		);
+		if (depletedMove) {
+			addMessage(`${pokemon.data.name} used its ${pokemon.heldItemName}`);
+			return {
+				...applyItemToPokemon(
+					pokemon,
+					pokemon.heldItemName,
+					undefined,
+					depletedMove.name
+				),
+				heldItemName: undefined,
+			};
+		}
 	}
 	return pokemon;
 };

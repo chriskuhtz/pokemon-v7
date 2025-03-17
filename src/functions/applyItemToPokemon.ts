@@ -26,8 +26,11 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	addMessage?: (x: Message) => void,
 	move?: MoveName
 ): T {
-	if ((item === 'ether' || item === 'max-ether') && move) {
-		return changeMovePP(pokemon, move, item === 'ether' ? 10 : 1000);
+	if (
+		(item === 'ether' || item === 'max-ether' || item === 'leppa-berry') &&
+		move
+	) {
+		return changeMovePP(pokemon, move, item === 'max-ether' ? 1000 : 10);
 	}
 	if (item === 'elixir' || item === 'max-elixir') {
 		const amount = item === 'elixir' ? 10 : 1000;
