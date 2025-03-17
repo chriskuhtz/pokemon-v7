@@ -36,12 +36,12 @@ export const useGetBattleTeam = (
 					...fetchedData.abilities
 						.map((a) => a.ability.name)
 						.filter((name) => abilityNames.includes(name as AbilityName)),
-					'run-away', //run away as fallb
 				] as AbilityName[];
 
-				const ability: AbilityName = assignNaturalAbility
-					? getRandomEntry(possibleAbilities)
-					: pokemon.ability;
+				const ability: AbilityName =
+					assignNaturalAbility && possibleAbilities.length > 0
+						? getRandomEntry(possibleAbilities)
+						: pokemon.ability;
 
 				const availableMoves = fetchedData.moves
 					.filter((m) => moveIsAvailable(m, level))
