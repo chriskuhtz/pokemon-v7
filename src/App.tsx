@@ -1,8 +1,5 @@
 import { useContext, useMemo, useState } from 'react';
-import { v4 } from 'uuid';
-import { testPokemon } from './constants/gameData';
 import { mapsRecord } from './constants/maps/mapsRecord';
-import { PokemonName } from './constants/pokemonNames';
 import { MessageQueueContext } from './hooks/useMessageQueue';
 import { SaveFileContext } from './hooks/useSaveFile';
 import { generateInventory, Inventory } from './interfaces/Inventory';
@@ -154,27 +151,7 @@ export const App = (): JSX.Element => {
 		);
 	}
 	if (activeTab === 'STARTER_SELECTION') {
-		return (
-			<StarterSelection
-				randomStarters={!!saveFile.settings?.randomStarters}
-				proceed={(name: string, starterName: PokemonName) => {
-					patchSaveFileReducer({
-						playerId: name,
-						pokemon: [
-							...saveFile.pokemon.map((p) => ({ ...p, ownerId: name })),
-							{
-								...testPokemon,
-								name: starterName,
-								id: v4(),
-								ownerId: name,
-								onTeam: true,
-							},
-						],
-						meta: { activeTab: 'OVERWORLD' },
-					});
-				}}
-			/>
-		);
+		return <StarterSelection />;
 	}
 	if (activeTab === 'MAIN') {
 		return (

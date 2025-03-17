@@ -1,11 +1,17 @@
-import { useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
+import { v4 } from 'uuid';
 import { Sprite } from '../../components/Sprite/Sprite';
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize, testPokemon } from '../../constants/gameData';
 import { PokemonName } from '../../constants/pokemonNames';
 import { typeColors } from '../../constants/typeColors';
 import { getItemUrl } from '../../functions/getItemUrl';
+import { getMovesArray } from '../../functions/getMovesArray';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getRandomPokemonName } from '../../functions/getRandomPokemonId';
+import { reduceBattlePokemonToOwnedPokemon } from '../../functions/reduceBattlePokemonToOwnedPokemon';
+import { useGetBattleTeam } from '../../hooks/useGetBattleTeam';
+import { SaveFileContext } from '../../hooks/useSaveFile';
+import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
@@ -16,17 +22,49 @@ const randomStarterOptions = [
 	getRandomPokemonName(),
 	getRandomPokemonName(),
 ];
-export const StarterSelection = ({
-	randomStarters,
-	proceed,
-}: {
-	randomStarters: boolean;
-	proceed: (name: string, starterName: PokemonName) => void;
-}): JSX.Element => {
-	const options = randomStarters ? randomStarterOptions : defaultStarters;
-	const [chosenStarter, setChosenStarter] = useState<PokemonName | undefined>();
+export const StarterSelection = (): JSX.Element => {
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+
+	const options = saveFile.settings?.randomStarters
+		? randomStarterOptions
+		: defaultStarters;
+
+	const { res: fullStarters } = useGetBattleTeam(
+		options.map((o) => ({
+			...testPokemon,
+			name: o,
+			id: v4(),
+			caughtBefore: false,
+		})),
+		true,
+		true
+	);
+	const [chosenStarter, setChosenStarter] = useState<
+		BattlePokemon | undefined
+	>();
 	const [name, setName] = useState<string | undefined>('');
 	const [finished, setFinished] = useState<boolean>(false);
+
+	const proceed = useCallback(() => {
+		if (!name || !chosenStarter) {
+			return;
+		}
+		const mon = reduceBattlePokemonToOwnedPokemon(chosenStarter);
+		console.log(
+			getMovesArray(chosenStarter).map((m) => m.name),
+			getMovesArray(mon).map((m) => m.name)
+		);
+		patchSaveFileReducer({
+			...saveFile,
+			playerId: name,
+			pokemon: [mon],
+			meta: { activeTab: 'OVERWORLD' },
+		});
+	}, [chosenStarter, name, patchSaveFileReducer, saveFile]);
+
+	if (!fullStarters) {
+		return <></>;
+	}
 
 	return finished && name && chosenStarter ? (
 		<Page headline="">
@@ -48,7 +86,7 @@ export const StarterSelection = ({
 				</h3>
 
 				<h3>Safe travels, I will meet you there.</h3>
-				<button onClick={() => proceed(name, chosenStarter)}>Continue</button>
+				<button onClick={() => proceed()}>Continue</button>
 			</Stack>
 		</Page>
 	) : (
@@ -61,11 +99,11 @@ export const StarterSelection = ({
 				</Stack>
 				<h3 style={{ margin: 0 }}>Which starter will you choose:</h3>
 				<Stack mode="row" justifyContent="center" alignItems="center">
-					{options.map((o) => (
+					{fullStarters.map((o) => (
 						<img
 							role="button"
 							tabIndex={0}
-							key={o}
+							key={o.id}
 							onKeyDown={(e) => {
 								if (e.key === 'Enter') {
 									setChosenStarter(o);
@@ -82,7 +120,7 @@ export const StarterSelection = ({
 							width={battleSpriteSize * (o === chosenStarter ? 3 : 1.5)}
 							src={
 								o === chosenStarter
-									? getPokemonSprite(o)
+									? getPokemonSprite(o.name)
 									: getItemUrl('poke-ball')
 							}
 							onClick={() => setChosenStarter(o)}
