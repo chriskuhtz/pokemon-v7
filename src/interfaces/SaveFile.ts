@@ -86,6 +86,7 @@ export interface SaveFile {
 		hasCaughtAPokemonWithHoney: boolean;
 		hasCraftedApricorn: boolean;
 		hasGrownABerry: boolean;
+		hasGrownAnApricorn: boolean;
 	};
 	farm: {
 		plants: BerryBush[];

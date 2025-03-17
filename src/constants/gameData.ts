@@ -70,6 +70,7 @@ export const testState: SaveFile = {
 		hasCaughtAPokemonWithHoney: false,
 		hasCraftedApricorn: false,
 		hasGrownABerry: false,
+		hasGrownAnApricorn: false,
 	},
 	farm: { plants: [] },
 	campUpgrades: baseCampUpgrades,

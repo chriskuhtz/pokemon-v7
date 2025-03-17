@@ -52,6 +52,9 @@ export const useFarm = () => {
 			}
 			const hasGrownABerry =
 				saveFile.mileStones.hasGrownABerry || isBerry(bush.type);
+			const hasGrownAnApricorn =
+				saveFile.mileStones.hasGrownAnApricorn || isApricorn(bush.type);
+
 			if (bush.successful) {
 				addMessage({ message: `harvested ${bush.yield} ${bush.type}` });
 				putSaveFileReducer({
@@ -63,7 +66,11 @@ export const useFarm = () => {
 						...saveFile.farm,
 						plants: saveFile.farm.plants.filter((p) => p.id !== id),
 					},
-					mileStones: { ...saveFile.mileStones, hasGrownABerry },
+					mileStones: {
+						...saveFile.mileStones,
+						hasGrownABerry,
+						hasGrownAnApricorn,
+					},
 				});
 			}
 		},
