@@ -193,21 +193,21 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 			happiness: pokemon.happiness + (HappinessChangeTable[item] ?? 0),
 		};
 	}
-	if (item === 'yellow-flute') {
+	if (
+		(item === 'yellow-flute' || item === 'persim-berry') &&
+		isBattlePokemon(pokemon) &&
+		pokemon.secondaryAilments.some((ail) => ail.type === 'confusion')
+	) {
 		if (addMessage) {
 			addMessage({ message: `confusion healed` });
 		}
-		if (isBattlePokemon(pokemon)) {
-			return {
-				...pokemon,
-				primaryAilment: undefined,
-				secondaryAilments: pokemon.secondaryAilments.filter(
-					(ailment) => !['confusion'].includes(ailment.type)
-				),
-			};
-		}
 
-		return { ...pokemon, primaryAilment: undefined };
+		return {
+			...pokemon,
+			secondaryAilments: pokemon.secondaryAilments.filter(
+				(ailment) => !['confusion'].includes(ailment.type)
+			),
+		};
 	}
 	if (item === 'red-flute') {
 		if (addMessage) {

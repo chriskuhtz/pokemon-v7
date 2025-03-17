@@ -83,6 +83,18 @@ export const applyEndOfTurnHeldItem = (
 			heldItemName: undefined,
 		};
 	}
+	if (
+		pokemon.heldItemName === 'persim-berry' &&
+		pokemon.secondaryAilments.some((ail) => ail.type === 'confusion')
+	) {
+		addMessage(
+			`${pokemon.data.name} cured its confusion with ${pokemon.heldItemName}`
+		);
+		return {
+			...applyItemToPokemon(pokemon, pokemon.heldItemName),
+			heldItemName: undefined,
+		};
+	}
 	if (pokemon.heldItemName === 'leppa-berry') {
 		const depletedMove = getMovesArray(pokemon).find(
 			(m) => m.data.pp - m.usedPP <= 0

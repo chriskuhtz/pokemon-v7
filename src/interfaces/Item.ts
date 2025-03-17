@@ -37,6 +37,7 @@ export const healingItemTypes = [
 	'rawst-berry',
 	'aspear-berry',
 	'oran-berry',
+	'persim-berry',
 ] as const;
 
 export const ppRestorationItemTypes = [
@@ -162,6 +163,7 @@ export const berries = [
 	'aspear-berry',
 	'leppa-berry',
 	'oran-berry',
+	'persim-berry',
 ] as const;
 
 export const fossils = [

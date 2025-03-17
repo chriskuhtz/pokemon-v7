@@ -107,7 +107,10 @@ export const extraFeatureCheckList: {
 	{ name: 'assign actual ability if possible', handled: true },
 	{ name: 'defeating trainers gives 1 research point', handled: true },
 	{ name: 'increase encounter rate', handled: true },
-	{ name: 'make fulfilled quests more recognizable and sort them to the top' },
+	{
+		name: 'make fulfilled quests more recognizable and sort them to the top',
+		handled: true,
+	},
 	{ name: 'limit amount of bulletin quests active at the same time' },
 	{ name: 'distinct double/single battle definition' },
 	{ name: 'earthquake etc hit all participants' },
