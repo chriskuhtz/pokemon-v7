@@ -107,6 +107,8 @@ export const Overworld = ({
 				settings: saveFile.settings,
 				goToTrainingField: () =>
 					navigateAwayFromOverworldReducer('TRAINING_FIELD', stepsTaken),
+				goToBerryFarm: () =>
+					navigateAwayFromOverworldReducer('FARM', stepsTaken),
 			}),
 		[
 			addMultipleMessages,

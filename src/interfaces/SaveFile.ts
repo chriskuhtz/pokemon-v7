@@ -4,7 +4,7 @@ import { MapId } from '../constants/maps/mapsRecord';
 import { BadgeName } from './Badge';
 import { Challenger } from './Challenger';
 import { Inventory } from './Inventory';
-import { BerryType, MulchType } from './Item';
+import { ApricornType, BerryType, MulchType } from './Item';
 import { OwnedPokemon } from './OwnedPokemon';
 import { QuestStatus } from './Quest';
 import { RoutesType } from './Routing';
@@ -41,17 +41,17 @@ export interface SettingsObject {
 }
 
 export type BerryBushStatus =
+	| 'WITHERED'
 	| 'READY'
 	| 'SAPLING'
 	| 'FLOWERING'
-	| 'WITHERED'
-	| 'SEED'
-	| 'SPROUT';
+	| 'SPROUT'
+	| 'SEED';
 export interface BerryBush {
-	status: BerryBushStatus;
+	readyAt: number;
+	successful: boolean;
 	yield: number;
-	type: BerryType;
-	nextGrowthAt: number; //date in milliseconds
+	type: BerryType | ApricornType;
 	mulch?: MulchType;
 	id: string;
 }

@@ -4,6 +4,7 @@ export const campUpgradeNames = [
 	'market_2',
 	'market_3',
 	'battle_item_market',
+	'berry_farm',
 	'invite ghost expert morty',
 	'invite professor rowan',
 	'invite apricorn smith kurt',
@@ -24,6 +25,7 @@ export const campUpgradePrices: Record<CampUpgrade, number> = {
 	'invite apricorn smith kurt': 50,
 	'access routeS1': 50,
 	'training field 1': 50,
+	berry_farm: 50,
 };
 export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	bulletin_board: [],
@@ -36,4 +38,5 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'invite apricorn smith kurt': ['bulletin_board'],
 	'access routeS1': ['bulletin_board'],
 	'training field 1': ['bulletin_board'],
+	berry_farm: ['bulletin_board'],
 };

@@ -86,6 +86,7 @@ const drawOccupant = (
 			case 'MERCHANT':
 			case 'CAMP_MANAGER':
 			case 'APRICORN_SMITH':
+			case 'BERRY_FARMER':
 			case 'NURSE':
 			case 'NPC':
 			case 'TRAINING_FIELD_MASTER':
@@ -159,6 +160,7 @@ const getSource = (occ: Occupant) => {
 		case 'NURSE':
 		case 'NPC':
 		case 'TRAINING_FIELD_MASTER':
+		case 'BERRY_FARMER':
 		case 'TRAINER':
 			return `/npcs/NPC_${occ.sprite}.png`;
 		case 'PC':

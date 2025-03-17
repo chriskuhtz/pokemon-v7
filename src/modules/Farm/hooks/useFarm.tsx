@@ -1,16 +1,16 @@
-import { isEqual } from 'lodash';
-import { useCallback, useContext, useEffect, useMemo } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
 import { v4 } from 'uuid';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { joinInventories } from '../../../interfaces/Inventory';
 import {
+	ApricornType,
 	BerryType,
+	isApricorn,
 	isBerry,
 	isMulch,
 	MulchType,
 } from '../../../interfaces/Item';
-import { BerryBush, BerryBushStatus } from '../../../interfaces/SaveFile';
 
 /**
  * mulches
@@ -34,7 +34,7 @@ export const useFarm = () => {
 			if (!bush) {
 				return;
 			}
-			if (bush.status === 'WITHERED') {
+			if (!bush.successful) {
 				addMessage({ message: `removed the withered  ${bush.type}` });
 				putSaveFileReducer({
 					...saveFile,
@@ -46,7 +46,7 @@ export const useFarm = () => {
 
 				return;
 			}
-			if (bush.status === 'READY') {
+			if (bush.successful) {
 				addMessage({ message: `harvested ${bush.yield} ${bush.type}` });
 				putSaveFileReducer({
 					...saveFile,
@@ -64,7 +64,7 @@ export const useFarm = () => {
 	);
 
 	const getGrowingTime = (mulch?: MulchType) => {
-		const base = new Date().getTime() + 600000;
+		const base = new Date().getTime() + 3600000;
 
 		if (mulch === 'growth-mulch') {
 			return base * 0.75;
@@ -74,22 +74,7 @@ export const useFarm = () => {
 		}
 		return base;
 	};
-	const getNextGrowthStage = (current: BerryBushStatus): BerryBushStatus => {
-		if (current === 'SEED') {
-			return 'SPROUT';
-		}
-		if (current === 'SPROUT') {
-			return 'SAPLING';
-		}
-		if (current === 'SAPLING') {
-			return 'FLOWERING';
-		}
-		if (current === 'FLOWERING') {
-			return 'READY';
-		}
-		return 'SEED';
-	};
-	const plant = (type: BerryType, mulch?: MulchType) => {
+	const plant = (type: BerryType | ApricornType, mulch?: MulchType) => {
 		if (!hasEmptySlots) {
 			return;
 		}
@@ -103,6 +88,8 @@ export const useFarm = () => {
 			3 +
 			(mulch === 'gooey-mulch' ? 1 : 0) +
 			(mulch === 'stable-mulch' ? 3 : 0);
+
+		const successful = Math.random() > (mulch === 'damp-mulch' ? 0.15 : 0.3);
 
 		putSaveFileReducer({
 			...saveFile,
@@ -121,53 +108,14 @@ export const useFarm = () => {
 						id: v4(),
 						type,
 						mulch,
-						status: 'SEED',
+						successful,
 						yield: berryYield,
-						nextGrowthAt: getGrowingTime(mulch),
+						readyAt: getGrowingTime(mulch),
 					},
 				],
 			},
 		});
 	};
-	const grow = useCallback((bush: BerryBush): BerryBush => {
-		const now = new Date().getTime();
-		if (bush.status === 'READY') {
-			return bush;
-		}
-		if (bush.status === 'WITHERED') {
-			return bush;
-		}
-
-		if (now > bush.nextGrowthAt) {
-			const witherChance = bush.mulch === 'damp-mulch' ? 0.2 : 0.3;
-
-			if (Math.random() < witherChance) {
-				return { ...bush, status: 'WITHERED' };
-			} else
-				return {
-					...bush,
-					status: getNextGrowthStage(bush.status),
-					nextGrowthAt: getGrowingTime(bush.mulch),
-				};
-		}
-
-		return bush;
-	}, []);
-
-	useEffect(() => {
-		const grownBerries = saveFile.farm.plants.map(grow);
-
-		if (!isEqual(grownBerries, saveFile.farm.plants)) {
-			putSaveFileReducer({
-				...saveFile,
-
-				farm: {
-					...saveFile.farm,
-					plants: grownBerries,
-				},
-			});
-		}
-	}, [grow, putSaveFileReducer, saveFile]);
 
 	return {
 		hasEmptySlots,
@@ -175,7 +123,7 @@ export const useFarm = () => {
 		plant,
 		farm: saveFile.farm,
 		plantables: Object.entries(saveFile.inventory).filter(
-			([item, amount]) => isBerry(item) && amount > 0
+			([item, amount]) => (isBerry(item) || isApricorn(item)) && amount > 0
 		) as [BerryType, number][],
 
 		mulches: Object.entries(saveFile.inventory).filter(

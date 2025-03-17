@@ -19,15 +19,15 @@ export const Farm = (): JSX.Element => {
 					content={
 						<div>
 							<strong>
-								Berries take 10 minutes to progress to the next growth stage,
-								but they have a chance to wither between each step
+								Plants take 1 hour to grow, but they dont always grow
+								successfully
 							</strong>
 							<ul>
 								<li>growth mulch: makes berries grow faster</li>
 								<li>damp mulch: makes berries less likely to wither</li>
-								<li>growth mulch: produces 25% more berries</li>
+								<li>gooey mulch: produces 25% more berries</li>
 								<li>
-									growth mulch: berries grow 25% slower, but yield 50% more
+									stable mulch: berries grow 25% slower, but yield 50% more
 								</li>
 							</ul>
 						</div>
@@ -37,18 +37,18 @@ export const Farm = (): JSX.Element => {
 				{farm.plants.map((bush) => (
 					<Card
 						key={bush.id}
-						icon={<BerryBushIcon status={bush.status} />}
+						icon={<BerryBushIcon bush={bush} />}
 						content={
 							<div>
 								<h5>{bush.type}</h5>
-								<p>
-									<strong>{bush.status}</strong>
-								</p>
-								<p>Status: {bush.status}</p>
+
+								<strong>
+									Ready at {new Date(bush.readyAt).toLocaleTimeString()}
+								</strong>
 							</div>
 						}
 						actionElements={
-							bush.status === 'READY' || bush.status === 'WITHERED'
+							bush.readyAt < new Date().getTime()
 								? [<strong onClick={() => harvest(bush.id)}>harvest</strong>]
 								: []
 						}

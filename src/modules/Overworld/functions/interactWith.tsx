@@ -18,6 +18,7 @@ export const shouldRotate = (t: OccupantType) =>
 		'TRAINER',
 		'APRICORN_SMITH',
 		'TRAINING_FIELD_MASTER',
+		'BERRY_FARMER',
 	].includes(t);
 export const interactWithFunction = ({
 	occ,
@@ -38,6 +39,7 @@ export const interactWithFunction = ({
 	goToBulletinBoard,
 	goToApricornSmith,
 	goToTrainingField,
+	goToBerryFarm,
 	settings,
 }: {
 	occ: Occupant | undefined;
@@ -58,6 +60,7 @@ export const interactWithFunction = ({
 	goToBulletinBoard: () => void;
 	goToApricornSmith: () => void;
 	goToTrainingField: () => void;
+	goToBerryFarm: () => void;
 	settings?: SettingsObject;
 }) => {
 	if (!occ) {
@@ -140,6 +143,18 @@ export const interactWithFunction = ({
 				message: d,
 				onRemoval:
 					i === data.dialogue.length - 1 ? () => goToCampMenu() : undefined,
+				needsNoConfirmation: true,
+			}))
+		);
+
+		return;
+	}
+	if (data.type === 'BERRY_FARMER') {
+		addMultipleMessages(
+			data.dialogue.map((d, i) => ({
+				message: d,
+				onRemoval:
+					i === data.dialogue.length - 1 ? () => goToBerryFarm() : undefined,
 				needsNoConfirmation: true,
 			}))
 		);

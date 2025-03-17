@@ -419,6 +419,16 @@ export const campOccupants: OverworldMap['occupants'] = [
 		conditionFunction: () => true,
 	},
 	{
+		type: 'BERRY_FARMER',
+		id: 'berry_farmer',
+		x: 17,
+		y: 10,
+		orientation: 'LEFT',
+		dialogue: ['We can grow all types of berries and apricorns'],
+		sprite: SpriteEnum.farmer,
+		conditionFunction: (s) => s.campUpgrades.berry_farm,
+	},
+	{
 		type: 'ON_STEP_PORTAL',
 		x: 10,
 		y: 0,
