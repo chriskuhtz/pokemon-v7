@@ -71,7 +71,7 @@ export const testState: SaveFile = {
 		hasCraftedApricorn: false,
 		hasGrownABerry: false,
 	},
-	farm: { unlockedPlots: 1, plants: [] },
+	farm: { plants: [] },
 	campUpgrades: baseCampUpgrades,
 };
 

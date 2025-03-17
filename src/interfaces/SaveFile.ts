@@ -88,7 +88,6 @@ export interface SaveFile {
 		hasGrownABerry: boolean;
 	};
 	farm: {
-		unlockedPlots: number;
 		plants: BerryBush[];
 	};
 	campUpgrades: Record<CampUpgrade, boolean>;

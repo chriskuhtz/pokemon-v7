@@ -25,7 +25,11 @@ export const useFarm = () => {
 	const { saveFile, putSaveFileReducer } = useContext(SaveFileContext);
 
 	const hasEmptySlots = useMemo(() => {
-		return saveFile.farm.unlockedPlots > saveFile.farm.plants.length;
+		const slots = [
+			saveFile.campUpgrades.berry_farm,
+			saveFile.campUpgrades['second slot for farm'],
+		].filter((s) => s === true).length;
+		return slots > saveFile.farm.plants.length;
 	}, [saveFile]);
 
 	const harvest = useCallback(
