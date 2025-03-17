@@ -63,3 +63,6 @@ export const POISON_POINT_CHANCE = 0.3;
 export const FLAME_BODY_CHANCE = 0.3;
 export const CUTE_CHARM_CHANCE = 0.3;
 export const EFFECT_SPORE_CHANCE = 0.1;
+
+//shed skin
+export const SHED_SKIN_CHANCE = 0.3;

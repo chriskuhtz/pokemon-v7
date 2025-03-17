@@ -332,9 +332,12 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/58/',
 		handled: true,
 	},
-	{ name: 'forecast', url: 'https://pokeapi.co/api/v2/ability/59/' },
-	{ name: 'sticky-hold', url: 'https://pokeapi.co/api/v2/ability/60/' },
-	{ name: 'shed-skin', url: 'https://pokeapi.co/api/v2/ability/61/' },
+
+	{
+		name: 'shed-skin',
+		url: 'https://pokeapi.co/api/v2/ability/61/',
+		handled: true,
+	},
 	{ name: 'guts', url: 'https://pokeapi.co/api/v2/ability/62/' },
 	{ name: 'marvel-scale', url: 'https://pokeapi.co/api/v2/ability/63/' },
 	{ name: 'liquid-ooze', url: 'https://pokeapi.co/api/v2/ability/64/' },
@@ -633,6 +636,14 @@ export const abilityCheckList: {
 	{ name: 'shackle', url: 'https://pokeapi.co/api/v2/ability/10058/' },
 	{ name: 'decoy', url: 'https://pokeapi.co/api/v2/ability/10059/' },
 	{ name: 'shield', url: 'https://pokeapi.co/api/v2/ability/10060/' },
+	{
+		name: 'forecast',
+		url: 'https://pokeapi.co/api/v2/ability/59/',
+	},
+	{
+		name: 'sticky-hold',
+		url: 'https://pokeapi.co/api/v2/ability/60/',
+	},
 ];
 
 export const abilityNames = [
@@ -701,6 +712,7 @@ export const abilityNames = [
 	'cute-charm',
 	'plus',
 	'minus',
+	'shed-skin',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

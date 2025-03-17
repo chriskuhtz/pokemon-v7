@@ -1,5 +1,5 @@
 import { Message } from '../hooks/useMessageQueue';
-import { RAIN_DISH_FACTOR } from '../interfaces/Ailment';
+import { RAIN_DISH_FACTOR, SHED_SKIN_CHANCE } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
@@ -44,6 +44,16 @@ export const applyEndOfTurnAbility = ({
 				pokemon.damage - pokemon.stats.hp * RAIN_DISH_FACTOR,
 			]),
 		};
+	}
+	if (
+		pokemon.ability === 'shed-skin' &&
+		pokemon.primaryAilment &&
+		Math.random() < SHED_SKIN_CHANCE
+	) {
+		addMessage({
+			message: `${pokemon.data.name} shed its skin to cure itself`,
+		});
+		return { ...pokemon, primaryAilment: undefined };
 	}
 	return pokemon;
 };
