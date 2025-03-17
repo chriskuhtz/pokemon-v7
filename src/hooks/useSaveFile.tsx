@@ -42,6 +42,7 @@ export interface LeaveBattlePayload {
 	team: BattlePokemon[];
 	outcome: 'WIN' | 'LOSS' | 'DRAW';
 	defeatedPokemon: BattlePokemon[];
+	defeatedChallengerId?: string;
 }
 
 export interface UseSaveFile {
@@ -366,6 +367,7 @@ const useSaveFile = (
 			caughtPokemon,
 			scatteredCoins,
 			outcome,
+			defeatedChallengerId,
 		}: LeaveBattlePayload) => {
 			let updatedLocation = saveFile.location;
 
@@ -426,6 +428,12 @@ const useSaveFile = (
 				money: saveFile.money + scatteredCoins,
 				pokemon: updatedPokemon,
 				meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
+				handledOccupants: defeatedChallengerId
+					? [
+							...saveFile.handledOccupants,
+							{ id: defeatedChallengerId, resetAt: -1 },
+					  ]
+					: saveFile.handledOccupants,
 			});
 		},
 		[putSaveFileReducer, reset, saveFile, team]

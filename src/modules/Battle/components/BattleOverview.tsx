@@ -105,6 +105,7 @@ export const BattleOverview = ({
 			latestMessage={latestMessage}
 			addMessage={addMessage}
 			addMultipleMessages={addMultipleMessages}
+			challengerId={trainer?.name}
 		/>
 	);
 };

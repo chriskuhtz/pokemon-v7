@@ -1,4 +1,5 @@
 import { calculateLevelData } from '../../functions/calculateLevelData';
+import { trainers } from '../../functions/makeRandomTrainer';
 import { Quest } from '../../interfaces/Quest';
 import { routeN1 } from '../maps/routeN1';
 import { routeS1 } from '../maps/routeS1';
@@ -46,6 +47,7 @@ export const questNames = [
 	'train a pokemon to level 10',
 	'train a pokemon to level 20',
 	'train a pokemon to level 30',
+	'defeat a training field trainer',
 ] as const;
 /**
  * Ideas:
@@ -489,5 +491,25 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		kind: 'BULLETIN',
 		availableAfter: 'train a pokemon to level 20',
+	},
+	'defeat a training field trainer': {
+		rewardItems: {
+			'dire-hit': 1,
+			'x-accuracy': 1,
+			'x-attack': 1,
+			'x-defense': 1,
+			'x-sp-atk': 1,
+			'x-sp-def': 1,
+			'x-speed': 1,
+			'guard-spec': 1,
+		},
+		researchPoints: 5,
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) =>
+				trainers.some((t) => t.id === h.id)
+			);
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 1',
 	},
 };

@@ -55,6 +55,7 @@ export const BattleField = ({
 	latestMessage,
 	addMessage,
 	addMultipleMessages,
+	challengerId,
 }: {
 	leave: (x: LeaveBattlePayload) => void;
 	initOpponents: BattlePokemon[];
@@ -64,6 +65,7 @@ export const BattleField = ({
 	latestMessage: Message | undefined;
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
+	challengerId?: string;
 }) => {
 	const {
 		battleFieldEffects,
@@ -271,9 +273,10 @@ export const BattleField = ({
 				team: leveledUpTeam ?? team,
 				defeatedPokemon: defeatedPokemon ?? [],
 				outcome,
+				defeatedChallengerId: challengerId,
 			});
 		},
-		[battleInventory, leave, pokemon, scatteredCoins, team]
+		[battleInventory, challengerId, leave, pokemon, scatteredCoins, team]
 	);
 	const putPokemonOnField = useCallback(
 		(id: string) =>
