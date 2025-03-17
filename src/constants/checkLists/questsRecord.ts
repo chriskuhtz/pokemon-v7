@@ -1,5 +1,6 @@
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { trainers } from '../../functions/makeRandomTrainer';
+import { apricornTable } from '../../interfaces/Item';
 import { Quest } from '../../interfaces/Quest';
 import { routeN1 } from '../maps/routeN1';
 import { routeS1 } from '../maps/routeS1';
@@ -51,12 +52,12 @@ export const questNames = [
 	'defeat five training field trainers',
 	'grow a berry',
 	'grow a apricorn',
+	'catch a pokemon in an apricorn ball',
 ] as const;
 /**
  * Ideas:
  * catch Baby Pokemon
  * weight/height based
- * catch a pokemon in a apricorn ball
  * defeat morty
  */
 export type QuestName = (typeof questNames)[number];
@@ -562,5 +563,21 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => s.mileStones.hasGrownAnApricorn,
 		kind: 'BULLETIN',
 		requiredUpgrade: 'berry_farm',
+	},
+	'catch a pokemon in an apricorn ball': {
+		kind: 'BULLETIN',
+		rewardItems: {
+			'black-apricorn': 1,
+			'blue-apricorn': 1,
+			'green-apricorn': 1,
+			'pink-apricorn': 1,
+			'red-apricorn': 1,
+			'white-apricorn': 1,
+			'yellow-apricorn': 1,
+		},
+		researchPoints: 10,
+		availableAfter: 'craft a apricorn ball',
+		conditionFunction: (s) =>
+			s.pokemon.some((p) => Object.values(apricornTable).includes(p.ball)),
 	},
 };
