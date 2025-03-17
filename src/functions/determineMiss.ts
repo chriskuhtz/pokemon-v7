@@ -5,7 +5,10 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { calculateLevelData } from './calculateLevelData';
 import { calculateModifiedStat } from './calculateModifiedStat';
-import { getCompoundEyesFactor } from './getCompoundEyesFactor';
+import {
+	getCompoundEyesFactor,
+	getHustleFactor,
+} from './getCompoundEyesFactor';
 import { isSelfTargeting } from './isSelfTargeting';
 
 export type MissReason = 'SOUNDPROOF';
@@ -58,12 +61,15 @@ export const determineMiss = (
 		tangledFeetFactor;
 
 	const compoundEyesFactor = getCompoundEyesFactor(attacker, attack);
+	const hustleFactor = getHustleFactor(attacker, attack);
 
 	const attackerAccuracy =
 		calculateModifiedStat(
 			attacker.stats.accuracy,
 			attacker.statBoosts.accuracy
-		) * compoundEyesFactor;
+		) *
+		compoundEyesFactor *
+		hustleFactor;
 
 	const ratio = attackerAccuracy / targetEvasion;
 

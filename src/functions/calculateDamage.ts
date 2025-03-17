@@ -216,6 +216,8 @@ export const calculateDamage = (
 			? 0.66
 			: 1;
 	const rivalryFactor = getRivalryFactor(attacker, target.gender);
+	const hustleFactor =
+		attacker.ability === 'hustle' && damageClass === 'physical' ? 1.5 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -239,7 +241,8 @@ export const calculateDamage = (
 				heldItemFactor *
 				lightScreenFactor *
 				reflectFactor *
-				rivalryFactor
+				rivalryFactor *
+				hustleFactor
 		),
 		1
 	);
