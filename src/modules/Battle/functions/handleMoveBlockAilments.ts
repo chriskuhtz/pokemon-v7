@@ -1,6 +1,7 @@
 import { Message } from '../../../hooks/useMessageQueue';
 import {
 	CONFUSION_HURT_CHANCE,
+	INFATUATION_CHANCE,
 	PARA_CHANCE,
 	UNFREEZE_CHANCE,
 } from '../../../interfaces/Ailment';
@@ -9,15 +10,18 @@ import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { handleAsleep } from './handleAsleep';
 import { handleConfused } from './handleConfused';
 import { handleFrozen } from './handleFrozen';
+import { handleInfatuated } from './handleInfatuated';
 import { handleParalyzed } from './handleParalyzed';
 
 export const handleMoveBlockAilments = ({
 	attacker,
 	attack,
 	addMessage,
+	targetId,
 }: {
 	attacker: BattlePokemon;
 	attack: BattleAttack | ChargeUp;
+	targetId?: string;
 	addMessage: (x: Message) => void;
 }): { canAttack: boolean; updatedAttacker: BattlePokemon } => {
 	let updatedAttacker = { ...attacker };
@@ -49,6 +53,15 @@ export const handleMoveBlockAilments = ({
 		Math.random() <= PARA_CHANCE
 	) {
 		updatedAttacker = handleParalyzed(attacker, addMessage);
+		return { canAttack: false, updatedAttacker };
+	}
+	if (
+		updatedAttacker.secondaryAilments.some(
+			(ail) => ail.type == 'infatuation' && ail.targetId == targetId
+		) &&
+		Math.random() <= INFATUATION_CHANCE
+	) {
+		updatedAttacker = handleInfatuated(attacker, addMessage);
 		return { canAttack: false, updatedAttacker };
 	}
 

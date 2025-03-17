@@ -1,6 +1,15 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { PokemonGender } from '../interfaces/OwnedPokemon';
 
+export const arePokemonOfOppositeGenders = (
+	a: PokemonGender,
+	b: PokemonGender
+): 'YES' | 'NO' | 'GENDERLESS' => {
+	if (a === 'GENDERLESS' || b === 'GENDERLESS') {
+		return 'GENDERLESS';
+	}
+	return a === b ? 'NO' : 'YES';
+};
 export const getRivalryFactor = (
 	attacker: BattlePokemon,
 	targetGender: PokemonGender
@@ -8,10 +17,15 @@ export const getRivalryFactor = (
 	if (attacker.ability !== 'rivalry') {
 		return 1;
 	}
-	if (attacker.gender === 'GENDERLESS' || targetGender === 'GENDERLESS') {
+	const oppositeGenders = arePokemonOfOppositeGenders(
+		attacker.gender,
+		targetGender
+	);
+
+	if (oppositeGenders === 'GENDERLESS') {
 		return 1;
 	}
-	if (attacker.gender !== targetGender) {
+	if (oppositeGenders === 'YES') {
 		return 0.75;
 	}
 

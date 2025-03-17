@@ -12,7 +12,8 @@ export const applySecondaryAilmentToPokemon = (
 	addMessage: (x: Message) => void,
 	newType?: PokemonType,
 	move?: MoveName,
-	healAmount?: number
+	healAmount?: number,
+	targetId?: string
 ): BattlePokemon => {
 	if (pokemon.secondaryAilments.some((t) => t.type === ailment)) {
 		return pokemon;
@@ -174,6 +175,20 @@ export const applySecondaryAilmentToPokemon = (
 				{
 					type: 'focused',
 					duration: 9000,
+				},
+			],
+		};
+	}
+	if (ailment === 'infatuation' && targetId) {
+		addMessage({ message: `${pokemon.data.name} became infatuated` });
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'infatuation',
+					duration: 9000,
+					targetId,
 				},
 			],
 		};

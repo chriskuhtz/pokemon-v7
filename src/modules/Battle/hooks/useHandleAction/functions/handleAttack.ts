@@ -12,10 +12,12 @@ import { determineMiss } from '../../../../../functions/determineMiss';
 import { getRandomIndex } from '../../../../../functions/filterTargets';
 import { getActualTargetId } from '../../../../../functions/getActualTargetId';
 import { getMiddleOfThree } from '../../../../../functions/getMiddleOfThree';
+import { arePokemonOfOppositeGenders } from '../../../../../functions/getRivalryFactor';
 import { handleFlinching } from '../../../../../functions/handleFlinching';
 import { isKO } from '../../../../../functions/isKo';
 import { Message } from '../../../../../hooks/useMessageQueue';
 import {
+	CUTE_CHARM_CHANCE,
 	EFFECT_SPORE_CHANCE,
 	FLAME_BODY_CHANCE,
 	LEECH_DAMAGE_FACTOR,
@@ -79,6 +81,7 @@ export const handleAttack = ({
 			attacker,
 			attack: move,
 			addMessage,
+			targetId: realTargetId,
 		}
 	);
 	updatedAttacker = afterBlockers;
@@ -311,6 +314,24 @@ export const handleAttack = ({
 			`by ${target.data.name}'s flame body`
 		);
 		updatedAttacker = b;
+	}
+	//check for cute charm
+	if (
+		target.ability === 'cute-charm' &&
+		arePokemonOfOppositeGenders(attacker.gender, updatedTarget.gender) ===
+			'YES' &&
+		contactMoves.includes(move.name) &&
+		Math.random() < CUTE_CHARM_CHANCE
+	) {
+		updatedAttacker = applySecondaryAilmentToPokemon(
+			updatedAttacker,
+			'infatuation',
+			addMessage,
+			undefined,
+			undefined,
+			undefined,
+			updatedTarget.id
+		);
 	}
 	//check for poison-point
 	if (

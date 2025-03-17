@@ -34,6 +34,7 @@ export interface SecondaryAilment {
 	newType?: PokemonType; // for color change
 	move?: MoveName; // For Disable
 	healAmount?: number; // for leech seed
+	targetId?: string;
 }
 
 export function isSecondaryAilment(x: { type: string }): x is SecondaryAilment {
@@ -41,6 +42,7 @@ export function isSecondaryAilment(x: { type: string }): x is SecondaryAilment {
 }
 
 export const PARA_CHANCE = 0.25;
+export const INFATUATION_CHANCE = 0.5;
 export const PARA_SPEED_FACTOR = 0.5;
 export const BURN_DAMAGE_FACTOR = 1 / 8;
 export const BURN_ATTACK_REDUCTION_FACTOR = 0.5;
@@ -59,4 +61,5 @@ export const RAIN_DISH_FACTOR = 1 / 16;
 export const STATIC_CHANCE = 0.3;
 export const POISON_POINT_CHANCE = 0.3;
 export const FLAME_BODY_CHANCE = 0.3;
+export const CUTE_CHARM_CHANCE = 0.3;
 export const EFFECT_SPORE_CHANCE = 0.1;
