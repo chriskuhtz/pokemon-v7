@@ -29,6 +29,48 @@ const HONEY_ENCOUNTER_OPTIONS: OwnedPokemon[] = [
 		xp: 200,
 		caughtOnMap: 'routeN1',
 	}),
+	makeChallengerPokemon({
+		nature: getRandomNature(),
+		name: 'exeggcute',
+		xp: 200,
+		caughtOnMap: 'routeN1',
+	}),
+	makeChallengerPokemon({
+		nature: getRandomNature(),
+		name: 'aipom',
+		xp: 200,
+		caughtOnMap: 'routeN1',
+	}),
+	makeChallengerPokemon({
+		nature: getRandomNature(),
+		name: 'pinsir',
+		xp: 200,
+		caughtOnMap: 'routeN1',
+	}),
+	makeChallengerPokemon({
+		nature: getRandomNature(),
+		name: 'slakoth',
+		xp: 200,
+		caughtOnMap: 'routeN1',
+	}),
+	makeChallengerPokemon({
+		nature: getRandomNature(),
+		name: 'rowlet',
+		xp: 200,
+		caughtOnMap: 'routeN1',
+	}),
+	makeChallengerPokemon({
+		nature: getRandomNature(),
+		name: 'treecko',
+		xp: 200,
+		caughtOnMap: 'routeN1',
+	}),
+	makeChallengerPokemon({
+		nature: getRandomNature(),
+		name: 'passimian',
+		xp: 200,
+		caughtOnMap: 'routeN1',
+	}),
 ];
 
 export const useHoneyTree = () => {

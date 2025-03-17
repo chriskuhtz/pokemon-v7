@@ -102,6 +102,67 @@ export const routeS1Occupants: OverworldMap['occupants'] = [
 		id: 'hallowed_tower',
 		conditionFunction: () => true,
 	},
+	{
+		type: 'ITEM',
+		x: 15,
+		y: 25,
+		item: 'super-potion',
+		amount: 3,
+		id: 'routeS1_super_potion',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'routeS1_super_potion'),
+	},
+	{
+		type: 'ITEM',
+		x: 31,
+		y: 20,
+		item: 'pink-apricorn',
+		amount: 5,
+		id: 'routeS1_pink_apricorn',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'routeS1_pink_apricorn'),
+	},
+	{
+		type: 'ITEM',
+		x: 33,
+		y: 7,
+		item: 'red-apricorn',
+		amount: 5,
+		id: 'routeS1_red_apricorn',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'routeS1_red_apricorn'),
+	},
+	{
+		type: 'ITEM',
+		x: 17,
+		y: 15,
+		item: 'blue-apricorn',
+		amount: 5,
+		id: 'routeS1_blue_apricorn',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'routeS1_blue_apricorn'),
+	},
+	{
+		type: 'HONEY_TREE',
+		x: 10,
+		y: 5,
+		id: 'routeS1_honey_tree_1',
+		conditionFunction: () => true,
+	},
+	{
+		type: 'HONEY_TREE',
+		x: 8,
+		y: 7,
+		id: 'routeS1_honey_tree_2',
+		conditionFunction: () => true,
+	},
+	{
+		type: 'HONEY_TREE',
+		x: 12,
+		y: 6,
+		id: 'routeS1_honey_tree_3',
+		conditionFunction: () => true,
+	},
 ];
 
 const market1Inventory: Partial<Inventory> = {
