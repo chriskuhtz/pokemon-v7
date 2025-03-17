@@ -58,5 +58,17 @@ export const applyEndOfTurnHeldItem = (
 			heldItemName: undefined,
 		};
 	}
+	if (
+		pokemon.heldItemName === 'rawst-berry' &&
+		pokemon.primaryAilment?.type === 'burn'
+	) {
+		addMessage(
+			`${pokemon.data.name} cured its burn with ${pokemon.heldItemName}`
+		);
+		return {
+			...applyItemToPokemon(pokemon, pokemon.heldItemName),
+			heldItemName: undefined,
+		};
+	}
 	return pokemon;
 };

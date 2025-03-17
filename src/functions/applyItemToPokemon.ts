@@ -136,7 +136,10 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 			happiness: pokemon.happiness + (HappinessChangeTable[item] ?? 0),
 		};
 	}
-	if (item === 'burn-heal' && pokemon.primaryAilment?.type === 'burn') {
+	if (
+		(item === 'burn-heal' || item === 'rawst-berry') &&
+		pokemon.primaryAilment?.type === 'burn'
+	) {
 		if (addMessage) {
 			addMessage({ message: `Burn cured` });
 		}
