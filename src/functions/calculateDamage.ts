@@ -29,6 +29,21 @@ export const getLowKickDamage = (weight: number): number => {
 	return 20;
 };
 
+export const getPower = (
+	attack: BattleAttack,
+	targetWeight: number,
+	attackerLevel: number
+) => {
+	if (attack.name === 'low-kick') {
+		return getLowKickDamage(targetWeight);
+	}
+	if (attack.name === 'psywave') {
+		const factor = 0.5 + Math.random();
+		return attackerLevel * factor;
+	}
+	return attack.data.power ?? 0;
+};
+
 export const DamageAbsorbAbilityMap: Partial<Record<AbilityName, PokemonType>> =
 	{
 		'volt-absorb': 'electric',
@@ -117,10 +132,11 @@ export const calculateDamage = (
 	const { level } = calculateLevelData(attacker.xp);
 
 	const levelFactor = (2 * level) / 5 + 2;
-	const power =
-		attack.name === 'low-kick'
-			? getLowKickDamage(target.data.weight)
-			: attack.data.power ?? 0;
+	const power = getPower(
+		attack,
+		target.data.weight,
+		calculateLevelData(attacker.xp).level
+	);
 
 	const critRate =
 		attack.data.meta.crit_rate +

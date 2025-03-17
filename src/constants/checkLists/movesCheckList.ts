@@ -569,7 +569,11 @@ export const movesCheckList: {
 	},
 	{ name: 'spore', url: 'https://pokeapi.co/api/v2/move/147/', handled: true },
 	{ name: 'flash', url: 'https://pokeapi.co/api/v2/move/148/', handled: true },
-	{ name: 'psywave', url: 'https://pokeapi.co/api/v2/move/149/' },
+	{
+		name: 'psywave',
+		url: 'https://pokeapi.co/api/v2/move/149/',
+		handled: true,
+	},
 	{ name: 'splash', url: 'https://pokeapi.co/api/v2/move/150/' },
 	{
 		name: 'acid-armor',
@@ -1704,6 +1708,7 @@ export const handledMoves = [
 	'soft-boiled',
 	'dream-eater',
 	'sky-attack',
+	'psywave',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
