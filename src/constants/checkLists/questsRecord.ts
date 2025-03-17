@@ -48,6 +48,7 @@ export const questNames = [
 	'train a pokemon to level 20',
 	'train a pokemon to level 30',
 	'defeat a training field trainer',
+	'defeat five training field trainers',
 ] as const;
 /**
  * Ideas:
@@ -505,11 +506,34 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 5,
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) =>
+			const defeatedTrainers = s.handledOccupants.filter((h) =>
 				trainers.some((t) => t.id === h.id)
-			);
+			).length;
+			return defeatedTrainers > 0;
 		},
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 1',
+	},
+	'defeat five training field trainers': {
+		rewardItems: {
+			'dire-hit': 2,
+			'x-accuracy': 2,
+			'x-attack': 2,
+			'x-defense': 2,
+			'x-sp-atk': 2,
+			'x-sp-def': 2,
+			'x-speed': 2,
+			'guard-spec': 2,
+		},
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			const defeatedTrainers = s.handledOccupants.filter((h) =>
+				trainers.some((t) => t.id === h.id)
+			).length;
+			return defeatedTrainers > 4;
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'defeat a training field trainer',
 	},
 };
