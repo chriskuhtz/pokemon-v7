@@ -110,6 +110,8 @@ const useSaveFile = (
 		s({
 			...update,
 			lastEdited: newTime,
+			//migrate inventory
+			inventory: joinInventories(EmptyInventory, update.inventory),
 			handledOccupants: update.handledOccupants.filter(
 				(h) => h.resetAt < 0 || h.resetAt > newTime
 			),
