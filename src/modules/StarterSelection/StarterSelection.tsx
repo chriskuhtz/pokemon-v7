@@ -49,7 +49,10 @@ export const StarterSelection = (): JSX.Element => {
 		if (!name || !chosenStarter) {
 			return;
 		}
-		const mon = reduceBattlePokemonToOwnedPokemon(chosenStarter);
+		const mon = reduceBattlePokemonToOwnedPokemon({
+			...chosenStarter,
+			ownerId: name,
+		});
 		console.log(
 			getMovesArray(chosenStarter).map((m) => m.name),
 			getMovesArray(mon).map((m) => m.name)

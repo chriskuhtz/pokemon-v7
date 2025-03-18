@@ -15,7 +15,7 @@ export const useQuests = (): {
 				const status = saveFile.quests[name as QuestName];
 
 				const fulfilled =
-					quest.conditionFunction(saveFile) && status !== 'COLLECTED';
+					quest.conditionFunction(saveFile) && status === 'ACTIVE';
 				if (fulfilled) {
 					return { name, status: 'FULFILLED' };
 				}
