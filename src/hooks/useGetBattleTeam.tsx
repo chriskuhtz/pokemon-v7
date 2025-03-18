@@ -70,9 +70,18 @@ export const useGetBattleTeam = (
 					fourthMoveName
 				);
 
-				const speciesData = await fetch(
+				const speciesData: Promise<PokemonSpeciesData> = await fetch(
 					`https://pokeapi.co/api/v2/pokemon-species/${name}`
-				);
+				)
+					.then((res) => {
+						return res.json();
+					})
+					.catch(() => {
+						return {
+							capture_rate: 100,
+							base_happiness: 70,
+						};
+					});
 				const firstMoveData: Promise<MoveDto> = (
 					await fetch(`https://pokeapi.co/api/v2/move/${firstMoveName}`)
 				).json();
@@ -94,10 +103,7 @@ export const useGetBattleTeam = (
 
 				const spd = await speciesData;
 
-				const { capture_rate, base_happiness } =
-					spd.status === 200
-						? (spd.json() as unknown as PokemonSpeciesData)
-						: { capture_rate: 100, base_happiness: 70 };
+				const { capture_rate, base_happiness } = spd;
 
 				const first = await firstMoveData;
 				const s = await secondMoveData;
