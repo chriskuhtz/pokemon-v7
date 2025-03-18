@@ -436,7 +436,7 @@ const useSaveFile = (
 				pokemon: updatedPokemon,
 				meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
 				researchPoints:
-					saveFile.researchPoints + (hasBeenDefeatedBefore ? 1 : 0),
+					saveFile.researchPoints + (hasBeenDefeatedBefore ? 0 : 1),
 				handledOccupants:
 					hasBeenDefeatedBefore && defeatedChallengerId
 						? [
