@@ -1,4 +1,6 @@
 import { useMemo, useState } from 'react';
+import { FaTrash } from 'react-icons/fa';
+import { battleSpriteSize } from '../../constants/gameData';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
@@ -27,6 +29,13 @@ export const PokemonStorage = ({
 		}
 		if (sortBy === 'HAPPINESS') {
 			return (a: OwnedPokemon, b: OwnedPokemon) => b.happiness - a.happiness;
+		}
+		if (sortBy === 'NAME') {
+			return (a: OwnedPokemon, b: OwnedPokemon) => {
+				if (a.name < b.name) return -1;
+				if (a.name > b.name) return 1;
+				return 0;
+			};
 		}
 	}, [sortBy]);
 	const team = useMemo(() => allPokemon.filter((p) => p.onTeam), [allPokemon]);
@@ -58,6 +67,11 @@ export const PokemonStorage = ({
 							</Chip>
 						}
 						secondPlanetUrl={getItemUrl(pokemon.ball)}
+						thirdPlanetUrl={
+							pokemon.heldItemName
+								? getItemUrl(pokemon.heldItemName)
+								: undefined
+						}
 						key={pokemon.id}
 						onClick={() => {
 							if (team.length === 1) {
@@ -115,25 +129,38 @@ export const PokemonStorage = ({
 
 			<Stack mode="row">
 				{stored.sort(sortFunction).map((pokemon) => (
-					<IconSolarSystem
-						sun={{ url: getPokemonSprite(pokemon.name) }}
-						firstPlanet={
-							<Chip>
-								<strong>Lvl {calculateLevelData(pokemon.xp).level}</strong>
-							</Chip>
-						}
-						secondPlanetUrl={getItemUrl(pokemon.ball)}
-						key={pokemon.id}
-						onClick={() => {
-							if (team.length === 6) {
-								addMessage({
-									message: 'You can only take 6 Pokemon on the team!',
-								});
-								return;
+					<div style={{ display: 'flex' }}>
+						<IconSolarSystem
+							sun={{ url: getPokemonSprite(pokemon.name) }}
+							firstPlanet={
+								<Chip>
+									<strong>Lvl {calculateLevelData(pokemon.xp).level}</strong>
+								</Chip>
 							}
-							togglePokemonOnTeam(pokemon.id);
-						}}
-					/>
+							secondPlanetUrl={getItemUrl(pokemon.ball)}
+							thirdPlanetUrl={
+								pokemon.heldItemName
+									? getItemUrl(pokemon.heldItemName)
+									: undefined
+							}
+							key={pokemon.id}
+							onClick={() => {
+								if (team.length === 6) {
+									addMessage({
+										message: 'You can only take 6 Pokemon on the team!',
+									});
+									return;
+								}
+								togglePokemonOnTeam(pokemon.id);
+							}}
+						/>
+						<FaTrash
+							size={battleSpriteSize / 1.5}
+							onClick={() =>
+								setPokemon(allPokemon.filter((p) => p.id !== pokemon.id))
+							}
+						/>
+					</div>
 				))}
 			</Stack>
 		</Page>
