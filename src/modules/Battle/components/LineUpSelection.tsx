@@ -1,10 +1,12 @@
 import { useMemo } from 'react';
 import { Sprite } from '../../../components/Sprite/Sprite';
 import { battleSpriteSize } from '../../../constants/gameData';
+import { getItemUrl } from '../../../functions/getItemUrl';
 import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { isKO } from '../../../functions/isKo';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { TrainerInfo } from '../../../interfaces/Challenger';
+import { IconSolarSystem } from '../../../uiComponents/IconSolarSystem/IconSolarSystem';
 
 export const LineUpSelection = ({
 	leave,
@@ -76,7 +78,15 @@ export const LineUpSelection = ({
 				}}
 			>
 				{opponents.map((opponent) => (
-					<img key={opponent.id} src={getPokemonSprite(opponent.name)} />
+					<IconSolarSystem
+						key={opponent.id}
+						sun={{ url: getPokemonSprite(opponent.name) }}
+						secondPlanetUrl={
+							opponent.caughtBefore && !trainer
+								? getItemUrl('poke-ball')
+								: undefined
+						}
+					/>
 				))}
 			</div>
 			<div
