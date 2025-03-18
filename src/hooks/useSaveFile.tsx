@@ -90,6 +90,13 @@ export interface UseSaveFile {
 	evolvePokemonReducer: (x: EvolutionReducerPayload) => void;
 }
 
+const migratePokemon = (p: OwnedPokemon): OwnedPokemon => {
+	if (p.weightModifier) {
+		return p;
+	}
+	return { ...p, weightModifier: Math.random() };
+};
+
 const useSaveFile = (
 	init: SaveFile,
 	addMessage: (x: Message) => void
@@ -110,6 +117,8 @@ const useSaveFile = (
 		s({
 			...update,
 			lastEdited: newTime,
+			//migrate pokemon
+			pokemon: update.pokemon.map(migratePokemon),
 			//migrate inventory
 			inventory: joinInventories(EmptyInventory, update.inventory),
 			handledOccupants: update.handledOccupants.filter(
