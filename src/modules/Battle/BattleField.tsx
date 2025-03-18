@@ -538,17 +538,21 @@ export const BattleField = ({
 				})
 				.filter((m) => m !== undefined);
 
-			addMultipleMessages([
-				{
-					message: `Each Team Member gained ${xpPerTeamMember} XP`,
-				},
-				...levelUpMessages,
-				{
-					message: 'You won the battle',
-					onRemoval: () =>
-						leaveWithCurrentData('WIN', defeatedPokemon, leveledUpTeam),
-				},
-			]);
+			addMultipleMessages(
+				[
+					xpPerTeamMember > 0
+						? {
+								message: `Each Team Member gained ${xpPerTeamMember} XP`,
+						  }
+						: undefined,
+					...levelUpMessages,
+					{
+						message: 'You won the battle',
+						onRemoval: () =>
+							leaveWithCurrentData('WIN', defeatedPokemon, leveledUpTeam),
+					},
+				].filter((m) => m !== undefined)
+			);
 		}
 	}, [
 		addMessage,
