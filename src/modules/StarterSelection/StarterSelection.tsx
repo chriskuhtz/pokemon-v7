@@ -5,7 +5,6 @@ import { battleSpriteSize, testPokemon } from '../../constants/gameData';
 import { PokemonName } from '../../constants/pokemonNames';
 import { typeColors } from '../../constants/typeColors';
 import { getItemUrl } from '../../functions/getItemUrl';
-import { getMovesArray } from '../../functions/getMovesArray';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getRandomPokemonName } from '../../functions/getRandomPokemonId';
 import { reduceBattlePokemonToOwnedPokemon } from '../../functions/reduceBattlePokemonToOwnedPokemon';
@@ -53,10 +52,7 @@ export const StarterSelection = (): JSX.Element => {
 			...chosenStarter,
 			ownerId: name,
 		});
-		console.log(
-			getMovesArray(chosenStarter).map((m) => m.name),
-			getMovesArray(mon).map((m) => m.name)
-		);
+
 		patchSaveFileReducer({
 			...saveFile,
 			playerId: name,

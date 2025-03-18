@@ -63,13 +63,6 @@ export const useGetBattleTeam = (
 						? availableMoves[3].move.name
 						: pokemon.fourthMove?.name;
 
-				console.log(
-					firstMoveName,
-					secondMoveName,
-					thirdMoveName,
-					fourthMoveName
-				);
-
 				const speciesData: Promise<PokemonSpeciesData> = await fetch(
 					`https://pokeapi.co/api/v2/pokemon-species/${name}`
 				)

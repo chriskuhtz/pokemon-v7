@@ -129,7 +129,7 @@ export const PokemonStorage = ({
 
 			<Stack mode="row">
 				{stored.sort(sortFunction).map((pokemon) => (
-					<div style={{ display: 'flex' }}>
+					<div style={{ display: 'flex' }} key={pokemon.id}>
 						<IconSolarSystem
 							sun={{ url: getPokemonSprite(pokemon.name) }}
 							firstPlanet={
@@ -143,7 +143,6 @@ export const PokemonStorage = ({
 									? getItemUrl(pokemon.heldItemName)
 									: undefined
 							}
-							key={pokemon.id}
 							onClick={() => {
 								if (team.length === 6) {
 									addMessage({
