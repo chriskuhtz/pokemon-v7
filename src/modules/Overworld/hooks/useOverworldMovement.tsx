@@ -61,6 +61,8 @@ export const useOverworldMovement = (
 					const modifiedEncounterRate =
 						encounterChance * (encounterRateModifier ?? 1);
 					if (Math.random() < modifiedEncounterRate) {
+						setNextInput(undefined);
+						setEncounterChance(baseEncounterRate);
 						startEncounter();
 						return;
 					} else setEncounterChance(encounterChance + encounterRateStep);
