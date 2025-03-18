@@ -3,7 +3,7 @@ import { BerryBush, BerryBushStatus } from '../../../interfaces/SaveFile';
 
 export const BerryBushIcon = ({ bush }: { bush: BerryBush }) => {
 	const status: BerryBushStatus = useMemo(() => {
-		const timeUntilReady = new Date().getTime() - bush.readyAt;
+		const timeUntilReady = bush.readyAt - new Date().getTime();
 
 		if (timeUntilReady < 0 && bush.successful) {
 			return 'READY';
