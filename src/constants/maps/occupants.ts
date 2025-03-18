@@ -572,24 +572,4 @@ export const campOccupants: OverworldMap['occupants'] = [
 	...trainingField,
 	...mortyLine,
 	...rowanLine,
-	{
-		type: 'ITEM',
-		x: 4,
-		y: 1,
-		item: 'thunder-stone',
-		amount: 2,
-		id: 'camp_thunder_stone',
-		conditionFunction: (s) =>
-			!s.handledOccupants.some((h) => h.id === 'camp_thunder_stone'),
-	},
-	{
-		type: 'ITEM',
-		x: 3,
-		y: 1,
-		item: 'yellow-apricorn',
-		amount: 5,
-		id: 'camp_yellow_apricorn',
-		conditionFunction: (s) =>
-			!s.handledOccupants.some((h) => h.id === 'camp_yellow_apricorn'),
-	},
 ];
