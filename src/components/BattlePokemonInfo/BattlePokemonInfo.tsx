@@ -1,5 +1,7 @@
+import { battleSpriteSize } from '../../constants/gameData';
 import { secondTurnMoves } from '../../constants/secondTurnMoves';
 import { calculateLevelData } from '../../functions/calculateLevelData';
+import { getItemUrl } from '../../functions/getItemUrl';
 import { getPlayerId } from '../../functions/getPlayerId';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Chip } from '../../uiComponents/Chip/Chip';
@@ -18,8 +20,15 @@ export const BattlePokemonInfo = ({ pokemon }: { pokemon: BattlePokemon }) => {
 			}}
 			key={pokemon.id}
 		>
-			<strong>
-				{pokemon.data.name} | Lvl {level}
+			<strong style={{ display: 'flex', alignItems: 'center' }}>
+				{pokemon.caughtBefore && pokemon.ownerId !== getPlayerId() && (
+					<img
+						height={battleSpriteSize / 2}
+						width={battleSpriteSize / 2}
+						src={getItemUrl('poke-ball')}
+					/>
+				)}
+				{pokemon.data.name} | Lvl {level}{' '}
 			</strong>
 			{Object.entries(pokemon.statBoosts).map(([stat, boost]) => {
 				if (boost !== 0) {
