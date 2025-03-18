@@ -12,10 +12,11 @@ import { useGetBattleTeam } from '../../hooks/useGetBattleTeam';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
+import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
-const defaultStarters: PokemonName[] = ['bulbasaur', 'charmander', 'squirtle'];
+const defaultStarters: PokemonName[] = ['skiddo', 'charmander', 'squirtle'];
 const randomStarterOptions = [
 	getRandomPokemonName(),
 	getRandomPokemonName(),
@@ -62,7 +63,7 @@ export const StarterSelection = (): JSX.Element => {
 	}, [chosenStarter, name, patchSaveFileReducer, saveFile]);
 
 	if (!fullStarters) {
-		return <></>;
+		return <LoadingScreen />;
 	}
 
 	return finished && name && chosenStarter ? (

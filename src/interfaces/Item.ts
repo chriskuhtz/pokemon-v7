@@ -291,8 +291,8 @@ export const EvBoostTable: Record<
 	{ stat: Stat; change: number }
 > = {
 	'hp-up': { change: 10, stat: 'hp' },
-	calcium: { change: 10, stat: 'spatk' },
-	zinc: { change: 10, stat: 'spdef' },
+	calcium: { change: 10, stat: 'special-attack' },
+	zinc: { change: 10, stat: 'special-defense' },
 	iron: { change: 10, stat: 'defense' },
 	protein: { change: 10, stat: 'attack' },
 	carbos: { change: 10, stat: 'speed' },
@@ -317,8 +317,8 @@ export const HPHealTable: Partial<Record<ItemType, number>> = {
 export const XItemTable: Partial<Record<XItemType, Stat>> = {
 	'x-accuracy': 'accuracy',
 	'x-attack': 'attack',
-	'x-sp-def': 'spdef',
-	'x-sp-atk': 'spatk',
+	'x-sp-def': 'special-defense',
+	'x-sp-atk': 'special-attack',
 	'x-defense': 'defense',
 	'x-speed': 'speed',
 };

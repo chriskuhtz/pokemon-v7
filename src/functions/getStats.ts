@@ -14,10 +14,11 @@ export const getStats = (
 	const baseAttack =
 		stats.find((s) => s.stat.name === 'attack')?.base_stat ?? 100;
 	const baseSpatk =
-		stats.find((s) => s.stat.name === 'spatk')?.base_stat ?? 100;
+		stats.find((s) => s.stat.name === 'special-attack')?.base_stat ?? 100;
 	const baseSpDef =
-		stats.find((s) => s.stat.name === 'spdef')?.base_stat ?? 100;
-	const baseDef = stats.find((s) => s.stat.name === 'spdef')?.base_stat ?? 100;
+		stats.find((s) => s.stat.name === 'special-defense')?.base_stat ?? 100;
+	const baseDef =
+		stats.find((s) => s.stat.name === 'special-defense')?.base_stat ?? 100;
 	const baseSpeed =
 		stats.find((s) => s.stat.name === 'speed')?.base_stat ?? 100;
 
@@ -33,21 +34,21 @@ export const getStats = (
 			level,
 			'attack'
 		),
-		spatk: calculateStat(
+		'special-attack': calculateStat(
 			baseSpatk,
 			0,
-			evs?.['spatk'] ?? 0,
+			evs?.['special-attack'] ?? 0,
 			nature,
 			level,
-			'spatk'
+			'special-attack'
 		),
-		spdef: calculateStat(
+		'special-defense': calculateStat(
 			baseSpDef,
 			0,
-			evs?.['spdef'] ?? 0,
+			evs?.['special-defense'] ?? 0,
 			nature,
 			level,
-			'spdef'
+			'special-defense'
 		),
 		speed: calculateStat(
 			baseSpeed,

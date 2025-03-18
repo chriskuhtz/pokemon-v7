@@ -33,6 +33,7 @@ import { Occupant } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { RoutesType } from '../interfaces/Routing';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
+import { StatObject } from '../interfaces/StatObject';
 import { Message } from './useMessageQueue';
 
 export interface LeaveBattlePayload {
@@ -90,12 +91,20 @@ export interface UseSaveFile {
 	evolvePokemonReducer: (x: EvolutionReducerPayload) => void;
 }
 
-// const migratePokemon = (p: OwnedPokemon): OwnedPokemon => {
-// 	if (p.weightModifier) {
-// 		return p;
-// 	}
-// 	return { ...p, weightModifier: Math.random() };
-// };
+const migratePokemon = (p: OwnedPokemon): OwnedPokemon => {
+	const updatedEvs: StatObject & { spatk?: number; spdef?: number } = {
+		...p.effortValues,
+	};
+	if (updatedEvs['spatk']) {
+		updatedEvs['special-attack'] = updatedEvs['spatk'];
+		delete updatedEvs.spatk;
+	}
+	if (updatedEvs['spdef']) {
+		updatedEvs['special-defense'] = updatedEvs['spdef'];
+		delete updatedEvs.spdef;
+	}
+	return { ...p, effortValues: updatedEvs };
+};
 
 const useSaveFile = (
 	init: SaveFile,
@@ -118,7 +127,7 @@ const useSaveFile = (
 			...update,
 			lastEdited: newTime,
 			//migrate pokemon
-			//pokemon: update.pokemon.map(migratePokemon),
+			pokemon: update.pokemon.map(migratePokemon),
 			//migrate inventory
 			inventory: joinInventories(EmptyInventory, update.inventory),
 			handledOccupants: update.handledOccupants.filter(

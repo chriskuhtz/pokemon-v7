@@ -399,153 +399,153 @@ export const handleAttack = ({
 	}
 
 	//TARGET
-
-	// apply damage
-	const calculatedDamage = calculateDamage(
-		updatedAttacker,
-		target,
-		move,
-		battleWeather,
-		battleFieldEffects,
-		true,
-		isFlying,
-		isUnderground,
-		addMessage
-	);
-	const damage = getMiddleOfThree([
-		0,
-		calculatedDamage,
-		updatedTarget.stats.hp - updatedTarget.damage,
-	]);
-	updatedTarget = {
-		...updatedTarget,
-		damage: updatedTarget.damage + damage,
-		//setLastReceivedDamage
-		lastReceivedDamage: {
-			damageClass: move.data.damage_class.name,
-			damage: damage,
-			applicatorId: attacker.id,
-		},
-	};
-	// check attacker  drain/recoil
-	const drain = move.data.meta.drain;
-	if (drain) {
-		const drained = getMiddleOfThree([
-			1,
-			Math.round((damage * drain) / 100),
-			attacker.stats.hp,
+	if (!selfTargeting) {
+		// apply damage
+		const calculatedDamage = calculateDamage(
+			updatedAttacker,
+			target,
+			move,
+			battleWeather,
+			battleFieldEffects,
+			true,
+			isFlying,
+			isUnderground,
+			addMessage
+		);
+		const damage = getMiddleOfThree([
+			0,
+			calculatedDamage,
+			updatedTarget.stats.hp - updatedTarget.damage,
 		]);
-		updatedAttacker = {
-			...updatedAttacker,
-			damage: getMiddleOfThree([
-				0,
-				updatedAttacker.damage - drained,
-				updatedAttacker.stats.hp,
-			]),
+		updatedTarget = {
+			...updatedTarget,
+			damage: updatedTarget.damage + damage,
+			//setLastReceivedDamage
+			lastReceivedDamage: {
+				damageClass: move.data.damage_class.name,
+				damage: damage,
+				applicatorId: attacker.id,
+			},
 		};
-		if (drain > 0) {
-			addMessage({
-				message: `${updatedAttacker.data.name} restored ${drained} HP`,
-			});
+		// check attacker  drain/recoil
+		const drain = move.data.meta.drain;
+		if (drain) {
+			const drained = getMiddleOfThree([
+				1,
+				Math.round((damage * drain) / 100),
+				attacker.stats.hp,
+			]);
+			updatedAttacker = {
+				...updatedAttacker,
+				damage: getMiddleOfThree([
+					0,
+					updatedAttacker.damage - drained,
+					updatedAttacker.stats.hp,
+				]),
+			};
+			if (drain > 0) {
+				addMessage({
+					message: `${updatedAttacker.data.name} restored ${drained} HP`,
+				});
+			}
+			if (drain < 0) {
+				addMessage({
+					message: `${updatedAttacker.data.name} took ${drained} HP recoil damage`,
+				});
+			}
+			if (isKO(updatedAttacker)) {
+				updatedAttacker = handleFainting(updatedAttacker, addMessage);
+			}
 		}
-		if (drain < 0) {
-			addMessage({
-				message: `${updatedAttacker.data.name} took ${drained} HP recoil damage`,
-			});
+		//check for fainting
+		if (isKO(updatedTarget)) {
+			updatedTarget = handleFainting(updatedTarget, addMessage);
 		}
-		if (isKO(updatedAttacker)) {
-			updatedAttacker = handleFainting(updatedAttacker, addMessage);
-		}
-	}
-	//check for fainting
-	if (isKO(updatedTarget)) {
-		updatedTarget = handleFainting(updatedTarget, addMessage);
-	}
-	//apply ailments
-	const { updatedApplicator: a, updatedTarget: b } =
-		applyAttackAilmentsToPokemon(
-			updatedTarget,
-			updatedAttacker,
-			move,
-			addMessage
-		);
-	updatedAttacker = a;
-	updatedTarget = b;
-	// apply stat changes
-	updatedTarget = applyAttackStatChanges(
-		updatedTarget,
-		move,
-		addMessage,
-		false,
-		battleFieldEffects
-	);
-
-	// apply rage boost
-	if (
-		calculatedDamage > 0 &&
-		target.secondaryAilments.some((a) => a.type === 'raging')
-	) {
-		updatedTarget = applyStatChangeToPokemon(
-			updatedTarget,
-			'attack',
-			1,
-			true,
-			battleFieldEffects,
-			addMessage,
-			' by rage'
-		);
-	}
-	// apply motor drive boost
-	if (
-		move.data.type.name === 'electric' &&
-		['physical', 'special'].includes(move.data.damage_class.name) &&
-		target.ability === 'motor-drive'
-	) {
-		updatedTarget = applyStatChangeToPokemon(
-			updatedTarget,
-			'speed',
-			1,
-			true,
-			battleFieldEffects,
-			addMessage,
-			' by motor drive'
-		);
-	}
-	//check for flinch
-	if (!isKO(updatedTarget)) {
-		updatedTarget = handleFlinching(
-			updatedAttacker,
+		//apply ailments
+		const { updatedApplicator: a, updatedTarget: b } =
+			applyAttackAilmentsToPokemon(
+				updatedTarget,
+				updatedAttacker,
+				move,
+				addMessage
+			);
+		updatedAttacker = a;
+		updatedTarget = b;
+		// apply stat changes
+		updatedTarget = applyAttackStatChanges(
 			updatedTarget,
 			move,
-			addMessage
-		);
-	}
-	//check flash fire
-	if (
-		!isKO(updatedTarget) &&
-		target.ability === 'flash-fire' &&
-		move.data.type.name === 'fire'
-	) {
-		updatedTarget = applySecondaryAilmentToPokemon(
-			updatedTarget,
-			'flash-fire',
-			addMessage
-		);
-	}
-	//check color change
-	if (
-		!isKO(updatedTarget) &&
-		updatedTarget.damage > target.damage &&
-		updatedTarget.ability === 'color-change'
-	) {
-		updatedTarget = applySecondaryAilmentToPokemon(
-			updatedTarget,
-			'color-changed',
 			addMessage,
-			move.data.type.name
+			false,
+			battleFieldEffects
 		);
-	}
 
+		// apply rage boost
+		if (
+			calculatedDamage > 0 &&
+			target.secondaryAilments.some((a) => a.type === 'raging')
+		) {
+			updatedTarget = applyStatChangeToPokemon(
+				updatedTarget,
+				'attack',
+				1,
+				true,
+				battleFieldEffects,
+				addMessage,
+				' by rage'
+			);
+		}
+		// apply motor drive boost
+		if (
+			move.data.type.name === 'electric' &&
+			['physical', 'special'].includes(move.data.damage_class.name) &&
+			target.ability === 'motor-drive'
+		) {
+			updatedTarget = applyStatChangeToPokemon(
+				updatedTarget,
+				'speed',
+				1,
+				true,
+				battleFieldEffects,
+				addMessage,
+				' by motor drive'
+			);
+		}
+		//check for flinch
+		if (!isKO(updatedTarget)) {
+			updatedTarget = handleFlinching(
+				updatedAttacker,
+				updatedTarget,
+				move,
+				addMessage
+			);
+		}
+		//check flash fire
+		if (
+			!isKO(updatedTarget) &&
+			target.ability === 'flash-fire' &&
+			move.data.type.name === 'fire'
+		) {
+			updatedTarget = applySecondaryAilmentToPokemon(
+				updatedTarget,
+				'flash-fire',
+				addMessage
+			);
+		}
+		//check color change
+		if (
+			!isKO(updatedTarget) &&
+			updatedTarget.damage > target.damage &&
+			updatedTarget.ability === 'color-change'
+		) {
+			updatedTarget = applySecondaryAilmentToPokemon(
+				updatedTarget,
+				'color-changed',
+				addMessage,
+				move.data.type.name
+			);
+		}
+	}
 	setPokemon((pokemon) =>
 		pokemon.map((p) => {
 			if (
