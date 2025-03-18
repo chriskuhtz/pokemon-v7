@@ -34,26 +34,36 @@ export const Farm = (): JSX.Element => {
 					}
 					actionElements={[]}
 				/>
-				{farm.plants.map((bush) => (
-					<Card
-						key={bush.id}
-						icon={<BerryBushIcon bush={bush} />}
-						content={
-							<div>
-								<h5>{bush.type}</h5>
+				{farm.plants.map((bush) => {
+					const ready = bush.readyAt < new Date().getTime();
 
-								<strong>
-									Ready at {new Date(bush.readyAt).toLocaleTimeString()}
-								</strong>
-							</div>
-						}
-						actionElements={
-							bush.readyAt < new Date().getTime()
-								? [<strong onClick={() => harvest(bush.id)}>harvest</strong>]
-								: []
-						}
-					/>
-				))}
+					return (
+						<Card
+							key={bush.id}
+							icon={<BerryBushIcon bush={bush} />}
+							content={
+								<div>
+									<h5>{bush.type}</h5>
+
+									{!ready && (
+										<strong>
+											Ready at {new Date(bush.readyAt).toLocaleTimeString()}
+										</strong>
+									)}
+								</div>
+							}
+							actionElements={
+								ready
+									? [
+											<strong onClick={() => harvest(bush.id)}>
+												{bush.successful ? 'harvest' : 'remove'}
+											</strong>,
+									  ]
+									: []
+							}
+						/>
+					);
+				})}
 				{hasEmptySlots ? (
 					plantables.map(([berry]) => (
 						<Card
