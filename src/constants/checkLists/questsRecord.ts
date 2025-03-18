@@ -75,6 +75,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'catch a pikachu': {
 		rewardItems: { 'thunder-stone': 1 },
 		researchPoints: 10,
+		targetPokemon: ['pikachu'],
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) => p.name === 'pikachu');
 		},
@@ -86,6 +87,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) => p.name === 'spiritomb');
 		},
+		targetPokemon: ['spiritomb'],
 		kind: 'QUEST_LINE',
 	},
 	'catch Haunter and Mightyena': {
@@ -97,6 +99,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				s.pokemon.some((p) => p.name === 'mightyena')
 			);
 		},
+		targetPokemon: ['haunter', 'mightyena'],
 		kind: 'QUEST_LINE',
 	},
 	'catch a morning pokemon from routeN1': {
@@ -107,6 +110,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				routeN1.possibleEncounters.MORNING.some((e) => e.name === p.name)
 			);
 		},
+		targetPokemon: [
+			...new Set(routeN1.possibleEncounters.MORNING.map((p) => p.name)),
+		],
 		kind: 'BULLETIN',
 	},
 	'catch a daytime pokemon from routeN1': {
@@ -117,6 +123,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				routeN1.possibleEncounters.DAY.some((e) => e.name === p.name)
 			);
 		},
+		targetPokemon: [
+			...new Set(routeN1.possibleEncounters.DAY.map((p) => p.name)),
+		],
 		kind: 'BULLETIN',
 	},
 	'catch a evening pokemon from routeN1': {
@@ -127,6 +136,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				routeN1.possibleEncounters.EVENING.some((e) => e.name === p.name)
 			);
 		},
+		targetPokemon: [
+			...new Set(routeN1.possibleEncounters.EVENING.map((p) => p.name)),
+		],
 		kind: 'BULLETIN',
 	},
 	'catch a nighttime pokemon from routeN1': {
@@ -137,6 +149,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				routeN1.possibleEncounters.NIGHT.some((e) => e.name === p.name)
 			);
 		},
+		targetPokemon: [
+			...new Set(routeN1.possibleEncounters.NIGHT.map((p) => p.name)),
+		],
 		kind: 'BULLETIN',
 	},
 	'catch a ultra rare pokemon on routeN1': {
@@ -152,6 +167,18 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				].some((e) => e.rarity === 'ultra-rare' && e.name === p.name)
 			);
 		},
+		targetPokemon: [
+			...new Set(
+				[
+					...routeN1.possibleEncounters.NIGHT,
+					...routeN1.possibleEncounters.MORNING,
+					...routeN1.possibleEncounters.DAY,
+					...routeN1.possibleEncounters.EVENING,
+				]
+					.filter((p) => p.rarity === 'ultra-rare')
+					.map((p) => p.name)
+			),
+		],
 		kind: 'BULLETIN',
 	},
 	'catch all morning pokemon from routeN1': {
@@ -162,6 +189,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				s.pokemon.some((p) => p.name === e.name)
 			);
 		},
+		targetPokemon: [
+			...new Set(routeN1.possibleEncounters.MORNING.map((p) => p.name)),
+		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a morning pokemon from routeN1',
 	},
@@ -173,6 +203,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				s.pokemon.some((p) => p.name === e.name)
 			);
 		},
+		targetPokemon: [
+			...new Set(routeN1.possibleEncounters.DAY.map((p) => p.name)),
+		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a daytime pokemon from routeN1',
 	},
@@ -184,6 +217,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				s.pokemon.some((p) => p.name === e.name)
 			);
 		},
+		targetPokemon: [
+			...new Set(routeN1.possibleEncounters.EVENING.map((p) => p.name)),
+		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a evening pokemon from routeN1',
 	},
@@ -195,6 +231,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				s.pokemon.some((p) => p.name === e.name)
 			);
 		},
+		targetPokemon: [
+			...new Set(routeN1.possibleEncounters.NIGHT.map((p) => p.name)),
+		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a nighttime pokemon from routeN1',
 	},
@@ -206,6 +245,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				routeS1.possibleEncounters.MORNING.some((e) => e.name === p.name)
 			);
 		},
+		targetPokemon: [
+			...new Set(routeS1.possibleEncounters.MORNING.map((p) => p.name)),
+		],
 		kind: 'BULLETIN',
 		requiredUpgrade: 'access routeS1',
 	},
@@ -217,6 +259,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				routeS1.possibleEncounters.DAY.some((e) => e.name === p.name)
 			);
 		},
+		targetPokemon: [
+			...new Set(routeS1.possibleEncounters.DAY.map((p) => p.name)),
+		],
 		kind: 'BULLETIN',
 		requiredUpgrade: 'access routeS1',
 	},
@@ -228,6 +273,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				routeS1.possibleEncounters.EVENING.some((e) => e.name === p.name)
 			);
 		},
+		targetPokemon: [
+			...new Set(routeS1.possibleEncounters.EVENING.map((p) => p.name)),
+		],
 		kind: 'BULLETIN',
 		requiredUpgrade: 'access routeS1',
 	},
@@ -239,6 +287,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				routeS1.possibleEncounters.NIGHT.some((e) => e.name === p.name)
 			);
 		},
+		targetPokemon: [
+			...new Set(routeS1.possibleEncounters.NIGHT.map((p) => p.name)),
+		],
 		kind: 'BULLETIN',
 		requiredUpgrade: 'access routeS1',
 	},
@@ -255,6 +306,18 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				].some((e) => e.rarity === 'ultra-rare' && e.name === p.name)
 			);
 		},
+		targetPokemon: [
+			...new Set(
+				[
+					...routeS1.possibleEncounters.NIGHT,
+					...routeS1.possibleEncounters.MORNING,
+					...routeS1.possibleEncounters.DAY,
+					...routeS1.possibleEncounters.EVENING,
+				]
+					.filter((p) => p.rarity === 'ultra-rare')
+					.map((p) => p.name)
+			),
+		],
 		kind: 'BULLETIN',
 		requiredUpgrade: 'access routeS1',
 	},
@@ -266,6 +329,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				s.pokemon.some((p) => p.name === e.name)
 			);
 		},
+		targetPokemon: [
+			...new Set(routeS1.possibleEncounters.MORNING.map((p) => p.name)),
+		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a morning pokemon from routeS1',
 		requiredUpgrade: 'access routeS1',
@@ -278,6 +344,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				s.pokemon.some((p) => p.name === e.name)
 			);
 		},
+		targetPokemon: [
+			...new Set(routeS1.possibleEncounters.DAY.map((p) => p.name)),
+		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a daytime pokemon from routeS1',
 		requiredUpgrade: 'access routeS1',
@@ -290,6 +359,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				s.pokemon.some((p) => p.name === e.name)
 			);
 		},
+		targetPokemon: [
+			...new Set(routeS1.possibleEncounters.EVENING.map((p) => p.name)),
+		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a evening pokemon from routeS1',
 		requiredUpgrade: 'access routeS1',
@@ -302,6 +374,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				s.pokemon.some((p) => p.name === e.name)
 			);
 		},
+		targetPokemon: [
+			...new Set(routeS1.possibleEncounters.NIGHT.map((p) => p.name)),
+		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a nighttime pokemon from routeS1',
 		requiredUpgrade: 'access routeS1',

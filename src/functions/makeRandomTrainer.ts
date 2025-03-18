@@ -135,7 +135,7 @@ export const trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'skarmory', xp: 125 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'steely stannis', sprite: SpriteEnum.mechanic },
+		trainer: { name: 'steely stannis', sprite: SpriteEnum.builder },
 	},
 	{
 		type: 'TRAINER',

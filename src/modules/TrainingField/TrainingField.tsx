@@ -61,12 +61,15 @@ export const TrainingField = () => {
 										>
 											{t.trainer?.name}{' '}
 											{t.team.map((p) => (
-												<img src={getPokemonSprite(p.name)} />
+												<img
+													key={t.id + p.name}
+													src={getPokemonSprite(p.name)}
+												/>
 											))}
 										</h3>
 										<div style={{ display: 'flex', gap: '1rem' }}>
 											{t.team.map((p) => (
-												<strong>
+												<strong key={t.id + p.name + 'LVL'}>
 													Lvl {calculateLevelData(p.xp).level} {p.name},
 												</strong>
 											))}

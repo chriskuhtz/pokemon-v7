@@ -1,5 +1,6 @@
 import { CampUpgrade } from '../constants/checkLists/campUpgrades';
 import { QuestName } from '../constants/checkLists/questsRecord';
+import { PokemonName } from '../constants/pokemonNames';
 import { Inventory } from './Inventory';
 import { SaveFile } from './SaveFile';
 
@@ -14,4 +15,5 @@ export interface Quest {
 	kind: QuestKind;
 	availableAfter?: QuestName;
 	requiredUpgrade?: CampUpgrade;
+	targetPokemon?: PokemonName[];
 }
