@@ -14,6 +14,7 @@ export const MoveCard = ({
 	note?: string;
 }) => {
 	const currentPP = move.data.pp - move.usedPP;
+
 	return (
 		<Card
 			highlighted={highlighted}

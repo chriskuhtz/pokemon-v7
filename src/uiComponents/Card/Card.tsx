@@ -22,6 +22,9 @@ export const Card = ({
 			role={onClick && !disabled ? 'button' : 'none'}
 			onClick={disabled ? undefined : onClick}
 			className={`card ${highlighted ? 'highlightedCard' : ''}`}
+			style={
+				disabled ? { backgroundColor: 'lightgray', color: 'white' } : undefined
+			}
 			onKeyDown={(e) => {
 				e.stopPropagation();
 				if (!disabled && e.key === 'Enter' && onClick) {
