@@ -44,6 +44,13 @@ export interface LeaveBattlePayload {
 	defeatedPokemon: BattlePokemon[];
 	defeatedChallengerId?: string;
 }
+export interface EvolutionReducerPayload {
+	id: string;
+	newName: PokemonName;
+	name: PokemonName;
+	consumeHeldItem: boolean;
+	consumedItem?: ItemType;
+}
 
 export interface UseSaveFile {
 	saveFile: SaveFile;
@@ -80,13 +87,7 @@ export interface UseSaveFile {
 	reset: () => void;
 	leaveBattleReducer: (x: LeaveBattlePayload) => void;
 	applyEncounterRateModifierItem: (item: EncounterChanceItem) => void;
-	evolvePokemonReducer: (
-		id: string,
-		newName: PokemonName,
-		name: PokemonName,
-		consumeHeldItem: boolean,
-		consumedItem?: ItemType
-	) => void;
+	evolvePokemonReducer: (x: EvolutionReducerPayload) => void;
 }
 
 const useSaveFile = (
@@ -475,13 +476,13 @@ const useSaveFile = (
 			inventory: joinInventories(saveFile.inventory, { [item]: 1 }, true),
 		});
 	};
-	const evolvePokemonReducer = (
-		id: string,
-		newName: PokemonName,
-		name: PokemonName,
-		consumeHeldItem: boolean,
-		consumedItem?: ItemType
-	) => {
+	const evolvePokemonReducer = ({
+		id,
+		name,
+		newName,
+		consumeHeldItem,
+		consumedItem,
+	}: EvolutionReducerPayload) => {
 		const updatedInventory = consumedItem
 			? joinInventories(
 					saveFile.inventory,

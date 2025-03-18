@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { OwnedPokemonCard } from '../../components/OwnedPokemonCard/OwnedPokemonCard';
 import { battleSpriteSize } from '../../constants/gameData';
@@ -8,6 +8,7 @@ import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getTypeNames } from '../../functions/getTypeNames';
 import { isOwnedPokemonKO } from '../../functions/isKo';
 import { useGetBattleTeam } from '../../hooks/useGetBattleTeam';
+import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
@@ -22,7 +23,6 @@ export const Team = ({
 	setTeam,
 	changeHeldItem,
 	inventory,
-	evolve,
 	initialFocus,
 }: {
 	team: OwnedPokemon[];
@@ -31,14 +31,8 @@ export const Team = ({
 	setTeam: (newTeam: OwnedPokemon[]) => void;
 	inventory: Inventory;
 	changeHeldItem: (pokemonId: string, newItem?: ItemType) => void;
-	evolve: (
-		id: string,
-		newName: PokemonName,
-		name: PokemonName,
-		consumeHeldItem: boolean,
-		consumedItem?: ItemType
-	) => void;
 }): JSX.Element => {
+	const { evolvePokemonReducer: evolve } = useContext(SaveFileContext);
 	const { res, invalidate } = useGetBattleTeam(
 		team.map((t) => ({ ...t, caughtBefore: true }))
 	);
@@ -230,7 +224,13 @@ export const Team = ({
 						consumeHeldItem: boolean,
 						item?: ItemType
 					) => {
-						evolve(focusedId, focusedData.name, newName, consumeHeldItem, item);
+						evolve({
+							id: focusedId,
+							name: focusedData.name,
+							newName,
+							consumeHeldItem,
+							consumedItem: item,
+						});
 						invalidate();
 					}}
 					data={focusedData}

@@ -82,7 +82,6 @@ export const App = (): JSX.Element => {
 		reset,
 		leaveBattleReducer,
 		addItemReducer,
-		evolvePokemonReducer,
 	} = useContext(SaveFileContext);
 
 	const {
@@ -181,7 +180,6 @@ export const App = (): JSX.Element => {
 		return (
 			<Team
 				initialFocus={team[0].id}
-				evolve={evolvePokemonReducer}
 				team={team}
 				goBack={() => setActiveTabReducer('MAIN')}
 				setTeam={(newTeam: OwnedPokemon[]) =>
