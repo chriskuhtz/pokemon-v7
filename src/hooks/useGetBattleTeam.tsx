@@ -47,9 +47,10 @@ export const useGetBattleTeam = (
 					.filter((m) => moveIsAvailable(m, level))
 					.reverse();
 
-				const firstMoveName = assignLearnsetMoves
-					? availableMoves[0].move.name
-					: pokemon.firstMove.name;
+				const firstMoveName =
+					assignLearnsetMoves && availableMoves.length > 0
+						? availableMoves[0].move.name
+						: pokemon.firstMove.name;
 				const secondMoveName =
 					assignLearnsetMoves && availableMoves.length > 1
 						? availableMoves[1].move.name
