@@ -261,7 +261,17 @@ export const calculateDamage = (
 			? 1.5
 			: 1;
 	const gutsFactor =
-		attacker.primaryAilment && attacker.ability === 'guts' ? 1.5 : 1;
+		attacker.primaryAilment &&
+		attacker.ability === 'guts' &&
+		damageClass === 'physical'
+			? 1.5
+			: 1;
+	const marvelScaleFactor =
+		target.primaryAilment &&
+		target.ability === 'marvel-scale' &&
+		damageClass === 'physical'
+			? 0.66
+			: 1;
 
 	const res = Math.max(
 		Math.floor(
@@ -291,7 +301,8 @@ export const calculateDamage = (
 				selfDestructFactor *
 				plusFactor *
 				minusFactor *
-				gutsFactor
+				gutsFactor *
+				marvelScaleFactor
 		),
 		1
 	);
