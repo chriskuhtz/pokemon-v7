@@ -185,7 +185,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'hyper-potion': 2 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return routeN1.possibleEncounters.EVENING.every((e) =>
+			return routeN1.possibleEncounters.MORNING.every((e) =>
 				s.pokemon.some((p) => p.name === e.name)
 			);
 		},
@@ -213,7 +213,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'full-heal': 5 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return routeN1.possibleEncounters.MORNING.every((e) =>
+			return routeN1.possibleEncounters.EVENING.every((e) =>
 				s.pokemon.some((p) => p.name === e.name)
 			);
 		},
