@@ -1,9 +1,10 @@
 import { TimeOfDay } from '../../functions/getTimeOfDay';
 import { OverworldEncounter } from '../../interfaces/OverworldMap';
 
-export const routeN1Encounters: Record<TimeOfDay, OverworldEncounter[]> = {
+export type EncounterMap = Record<TimeOfDay | 'BASE', OverworldEncounter[]>;
+export const routeN1Encounters: EncounterMap = {
+	BASE: [{ name: 'pikachu', xp: 125, rarity: 'rare' }],
 	MORNING: [
-		{ name: 'pikachu', xp: 125, rarity: 'rare' },
 		{ name: 'starly', xp: 50, rarity: 'common' },
 		{ name: 'starly', xp: 100, rarity: 'common' },
 		{ name: 'starly', xp: 125, rarity: 'medium' },
@@ -27,11 +28,10 @@ export const routeN1Encounters: Record<TimeOfDay, OverworldEncounter[]> = {
 		{ name: 'taillow', xp: 100, rarity: 'common' },
 		{ name: 'taillow', xp: 125, rarity: 'medium' },
 		{ name: 'lotad', xp: 125, rarity: 'rare' },
-		{ name: 'pikachu', xp: 125, rarity: 'rare' },
+
 		{ name: 'zangoose', xp: 125, rarity: 'ultra-rare' },
 	],
 	EVENING: [
-		{ name: 'pikachu', xp: 125, rarity: 'rare' },
 		{ name: 'rattata', xp: 50, rarity: 'common' },
 		{ name: 'rattata', xp: 100, rarity: 'common' },
 		{ name: 'rattata', xp: 125, rarity: 'medium' },
@@ -45,7 +45,6 @@ export const routeN1Encounters: Record<TimeOfDay, OverworldEncounter[]> = {
 		{ name: 'eevee', xp: 125, rarity: 'ultra-rare' },
 	],
 	NIGHT: [
-		{ name: 'pikachu', xp: 125, rarity: 'rare' },
 		{ name: 'hoothoot', xp: 100, rarity: 'common' },
 		{ name: 'hoothoot', xp: 50, rarity: 'common' },
 		{ name: 'hoothoot', xp: 125, rarity: 'medium' },
@@ -59,7 +58,8 @@ export const routeN1Encounters: Record<TimeOfDay, OverworldEncounter[]> = {
 		{ name: 'houndour', xp: 125, rarity: 'ultra-rare' },
 	],
 };
-export const routeS1Encounters: Record<TimeOfDay, OverworldEncounter[]> = {
+export const routeS1Encounters: EncounterMap = {
+	BASE: [],
 	MORNING: [
 		{ name: 'patrat', xp: 1000, rarity: 'common' },
 		{ name: 'patrat', xp: 800, rarity: 'common' },
@@ -113,7 +113,8 @@ export const routeS1Encounters: Record<TimeOfDay, OverworldEncounter[]> = {
 		{ name: 'toxel', xp: 1500, rarity: 'ultra-rare' },
 	],
 };
-export const routeN1E1Encounters: Record<TimeOfDay, OverworldEncounter[]> = {
+export const routeN1E1Encounters: EncounterMap = {
+	BASE: [],
 	MORNING: [
 		{ name: 'patrat', xp: 1000, rarity: 'common' },
 		{ name: 'patrat', xp: 800, rarity: 'common' },

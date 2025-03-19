@@ -1,7 +1,7 @@
 import { QuestName } from '../constants/checkLists/questsRecord';
+import { EncounterMap } from '../constants/maps/encounters';
 import { MapId } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
-import { TimeOfDay } from '../functions/getTimeOfDay';
 import { Inventory } from './Inventory';
 import { ItemType } from './Item';
 import { OwnedPokemon } from './OwnedPokemon';
@@ -174,7 +174,7 @@ export interface OverworldEncounter {
 }
 export interface OverworldMap {
 	id: MapId;
-	possibleEncounters: Record<TimeOfDay, OverworldEncounter[]>;
+	possibleEncounters: EncounterMap;
 	tileMap: GameMap;
 	occupants: Occupant[];
 	weather?: WeatherType;
