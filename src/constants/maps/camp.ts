@@ -4,6 +4,7 @@ import { campOccupants } from './occupants';
 export const camp: OverworldMap = {
 	id: 'camp',
 	possibleEncounters: {
+		BASE: [],
 		MORNING: [],
 		DAY: [],
 		EVENING: [],
