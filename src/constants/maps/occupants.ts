@@ -164,7 +164,7 @@ export const routeS1Occupants: OverworldMap['occupants'] = [
 		conditionFunction: () => true,
 	},
 ];
-
+export const routeN1E1Occupants: OverworldMap['occupants'] = [];
 const market1Inventory: Partial<Inventory> = {
 	'poke-ball': 1,
 	potion: 1,
