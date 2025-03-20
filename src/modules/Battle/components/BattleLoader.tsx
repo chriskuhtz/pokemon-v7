@@ -65,7 +65,11 @@ export const BattleLoader = ({
 				leave={leave}
 				opponents={battleOpponents}
 				team={battleTeam}
-				fightersPerSide={getMiddleOfThree([1, battleOpponents.length, 2])}
+				fightersPerSide={getMiddleOfThree([
+					1,
+					Math.min(battleOpponents.length, battleTeam.length),
+					2,
+				])}
 				inventory={inventory}
 				trainer={challenger.trainer}
 				latestMessage={latestMessage}

@@ -207,4 +207,6 @@ export const extraFeatureCheckList: {
 	{ name: 'escape rope only in cave' },
 	{ name: 'berry bushes' },
 	{ name: 'refactor quest limit' },
+	{ name: 'Changing moves messes with pp' },
+	{ name: 'Trainers should give money' },
 ];
