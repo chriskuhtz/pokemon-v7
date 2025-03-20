@@ -430,27 +430,28 @@ export const handleAttack = ({
 		// check attacker  drain/recoil
 		const drain = move.data.meta.drain;
 		if (drain) {
-			const drained = getMiddleOfThree([
+			const absDrainValue = getMiddleOfThree([
 				1,
-				Math.round((damage * drain) / 100),
+				Math.round((damage * Math.abs(drain)) / 100),
 				attacker.stats.hp,
 			]);
+			const drainValue = drain < 0 ? -absDrainValue : absDrainValue;
 			updatedAttacker = {
 				...updatedAttacker,
 				damage: getMiddleOfThree([
 					0,
-					updatedAttacker.damage - drained,
+					updatedAttacker.damage - drainValue,
 					updatedAttacker.stats.hp,
 				]),
 			};
 			if (drain > 0) {
 				addMessage({
-					message: `${updatedAttacker.data.name} restored ${drained} HP`,
+					message: `${updatedAttacker.data.name} restored ${absDrainValue} HP`,
 				});
 			}
 			if (drain < 0) {
 				addMessage({
-					message: `${updatedAttacker.data.name} took ${drained} HP recoil damage`,
+					message: `${updatedAttacker.data.name} took ${absDrainValue} HP recoil damage`,
 				});
 			}
 			if (isKO(updatedAttacker)) {
