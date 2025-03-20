@@ -68,6 +68,7 @@ export const BattleField = ({
 	addMultipleMessages: (newMessages: Message[]) => void;
 	challengerId?: string;
 }) => {
+	const isTrainerBattle = useMemo(() => !!challengerId, [challengerId]);
 	const {
 		battleFieldEffects: bf,
 		addBattleFieldEffect,
@@ -509,11 +510,14 @@ export const BattleField = ({
 			const defeatedPokemon = getOpponentPokemon(pokemon).filter(
 				(p) => p.status === 'FAINTED'
 			);
-			const gainedXp = defeatedPokemon.reduce((sum, d) => {
+			let gainedXp = defeatedPokemon.reduce((sum, d) => {
 				const { level } = calculateLevelData(d.xp);
 
 				return sum + Math.floor((d.data.base_experience * level) / 7);
 			}, 0);
+			if (isTrainerBattle) {
+				gainedXp *= 1.5;
+			}
 
 			const xpPerTeamMember = Math.round(gainedXp / team.length);
 
@@ -560,6 +564,7 @@ export const BattleField = ({
 		battleInventory,
 		battleLost,
 		battleWon,
+		isTrainerBattle,
 		latestMessage,
 		leaveWithCurrentData,
 		pokemon,
