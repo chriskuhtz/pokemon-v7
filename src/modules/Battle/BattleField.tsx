@@ -635,6 +635,7 @@ export const BattleField = ({
 						targets={pokemon}
 						chooseAction={chooseAction}
 						playerInventory={battleInventory}
+						catchingAllowed={!isTrainerBattle}
 					/>
 				</div>
 			)}

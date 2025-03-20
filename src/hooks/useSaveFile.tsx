@@ -443,9 +443,21 @@ const useSaveFile = (
 				...saveFile.pokemon.filter((p) => !team.some((t) => t.id === p.id)),
 			];
 
-			const hasBeenDefeatedBefore = defeatedChallengerId
-				? saveFile.handledOccupants.some((h) => h.id === defeatedChallengerId)
-				: true;
+			const gainedResearchPoints = () => {
+				if (outcome !== 'WIN') {
+					return 0;
+				}
+				if (!defeatedChallengerId) {
+					return 0;
+				}
+				if (
+					saveFile.handledOccupants.some((h) => h.id === defeatedChallengerId)
+				) {
+					return 0;
+				}
+
+				return 1;
+			};
 
 			putSaveFileReducer({
 				...saveFile,
@@ -453,15 +465,13 @@ const useSaveFile = (
 				money: saveFile.money + scatteredCoins,
 				pokemon: updatedPokemon,
 				meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
-				researchPoints:
-					saveFile.researchPoints + (hasBeenDefeatedBefore ? 0 : 1),
-				handledOccupants:
-					hasBeenDefeatedBefore && defeatedChallengerId
-						? [
-								...saveFile.handledOccupants,
-								{ id: defeatedChallengerId, resetAt: -1 },
-						  ]
-						: saveFile.handledOccupants,
+				researchPoints: saveFile.researchPoints + gainedResearchPoints(),
+				handledOccupants: defeatedChallengerId
+					? [
+							...saveFile.handledOccupants,
+							{ id: defeatedChallengerId, resetAt: -1 },
+					  ]
+					: saveFile.handledOccupants,
 			});
 		},
 		[putSaveFileReducer, reset, saveFile, team]

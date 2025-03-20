@@ -22,12 +22,14 @@ export function ActionSelection({
 	setChosenAction,
 	chooseAction,
 	allTargets,
+	catchingAllowed,
 }: {
 	controlled: BattlePokemon;
 	inventory: Inventory;
 	setChosenAction: (x: ActionType) => void;
 	chooseAction: (x: ChooseActionPayload) => void;
 	allTargets: BattlePokemon[];
+	catchingAllowed: boolean;
 }) {
 	const runAwayer = controlled.ability === 'run-away';
 	const trapped = !runAwayer && isTrapped(controlled);
@@ -84,7 +86,7 @@ export function ActionSelection({
 					if (
 						amount > 0 &&
 						(isRunawayItem(item) ||
-							isPokeball(item) ||
+							(isPokeball(item) && catchingAllowed) ||
 							((isHealingItem(item) ||
 								isPPRestorationItem(item) ||
 								isXItem(item)) &&
