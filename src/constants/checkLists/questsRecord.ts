@@ -1,5 +1,6 @@
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { trainers } from '../../functions/makeRandomTrainer';
+import { honeyPokemon } from '../../hooks/useHoneyTree';
 import { apricornTable } from '../../interfaces/Item';
 import { Quest } from '../../interfaces/Quest';
 import { routeN1 } from '../maps/routeN1';
@@ -44,6 +45,7 @@ export const questNames = [
 	'catch a pokemon and its paldea variant',
 	'craft a apricorn ball',
 	'lure a pokemon with honey',
+	'catch all honeytree pokemon',
 	'evolve a pokemon',
 	'train a pokemon to level 10',
 	'train a pokemon to level 20',
@@ -224,7 +226,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'catch a evening pokemon from routeN1',
 	},
 	'catch all nighttime pokemon from routeN1': {
-		rewardItems: { 'odd-keystone': 1 },
+		rewardItems: { 'moon-stone': 1 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return routeN1.possibleEncounters.NIGHT.every((e) =>
@@ -380,6 +382,17 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		availableAfter: 'catch a nighttime pokemon from routeS1',
 		requiredUpgrade: 'access routeS1',
+	},
+	'catch all honeytree pokemon': {
+		rewardItems: { 'sun-stone': 2, 'leaf-stone': 2, 'berry-juice': 5 },
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			return honeyPokemon.every((e) => s.pokemon.some((p) => p.name === e));
+		},
+		targetPokemon: honeyPokemon,
+		kind: 'BULLETIN',
+		availableAfter: 'lure a pokemon with honey',
+		requiredUpgrade: 'build combee hive',
 	},
 	'catch a pokemon orginally found in kanto': {
 		rewardItems: { protein: 2 },

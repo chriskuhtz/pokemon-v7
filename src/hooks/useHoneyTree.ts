@@ -1,4 +1,5 @@
 import { useCallback, useContext } from 'react';
+import { PokemonName } from '../constants/pokemonNames';
 import { getRandomIndex } from '../functions/filterTargets';
 import {
 	makeChallengerPokemon,
@@ -10,68 +11,27 @@ import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
-const HONEY_ENCOUNTER_OPTIONS: OwnedPokemon[] = [
-	makeChallengerPokemon({
-		nature: getRandomNature(),
-		name: 'burmy',
-		xp: 200,
-		caughtOnMap: 'routeN1',
-	}),
-	makeChallengerPokemon({
-		nature: getRandomNature(),
-		name: 'mankey',
-		xp: 200,
-		caughtOnMap: 'routeN1',
-	}),
-	makeChallengerPokemon({
-		nature: getRandomNature(),
-		name: 'heracross',
-		xp: 200,
-		caughtOnMap: 'routeN1',
-	}),
-	makeChallengerPokemon({
-		nature: getRandomNature(),
-		name: 'exeggcute',
-		xp: 200,
-		caughtOnMap: 'routeN1',
-	}),
-	makeChallengerPokemon({
-		nature: getRandomNature(),
-		name: 'aipom',
-		xp: 200,
-		caughtOnMap: 'routeN1',
-	}),
-	makeChallengerPokemon({
-		nature: getRandomNature(),
-		name: 'pinsir',
-		xp: 200,
-		caughtOnMap: 'routeN1',
-	}),
-	makeChallengerPokemon({
-		nature: getRandomNature(),
-		name: 'slakoth',
-		xp: 200,
-		caughtOnMap: 'routeN1',
-	}),
-	makeChallengerPokemon({
-		nature: getRandomNature(),
-		name: 'rowlet',
-		xp: 200,
-		caughtOnMap: 'routeN1',
-	}),
-	makeChallengerPokemon({
-		nature: getRandomNature(),
-		name: 'treecko',
-		xp: 200,
-		caughtOnMap: 'routeN1',
-	}),
-	makeChallengerPokemon({
-		nature: getRandomNature(),
-		name: 'passimian',
-		xp: 200,
-		caughtOnMap: 'routeN1',
-	}),
+export const honeyPokemon: PokemonName[] = [
+	'burmy',
+	'mankey',
+	'heracross',
+	'pinsir',
+	'oddish',
+	'weedle',
+	'munchlax',
+	'petilil',
+	'combee',
+	'aipom',
 ];
+
+const HONEY_ENCOUNTER_OPTIONS: OwnedPokemon[] = honeyPokemon.map((h) =>
+	makeChallengerPokemon({
+		nature: getRandomNature(),
+		name: h,
+		xp: 200,
+		caughtOnMap: 'routeN1',
+	})
+);
 
 export const useHoneyTree = () => {
 	const { putSaveFileReducer, saveFile } = useContext(SaveFileContext);
