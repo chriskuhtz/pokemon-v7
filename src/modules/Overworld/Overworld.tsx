@@ -26,6 +26,7 @@ import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOccupants } from './hooks/useOccupants';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
 import { useStartEncounter } from './hooks/useStartEncounter';
+import { useCombeeHive } from './hooks/useCombeeHive';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -61,6 +62,7 @@ export const Overworld = ({
 		useContext(SaveFileContext);
 	const interactWithHoneyTree = useHoneyTree();
 	const interactWithHallowedTower = useHallowedTower();
+	const interactWithCombeeHive = useCombeeHive();
 	const addEncounterMessage = useStartEncounter();
 	const map = useMemo(
 		() => mapsRecord[saveFile.location.mapId],
@@ -98,6 +100,7 @@ export const Overworld = ({
 				goToPosition: setCharacterLocation,
 				interactWithHoneyTree,
 				interactWithHallowedTower,
+				interactWithCombeeHive,
 				goToCampMenu: () =>
 					navigateAwayFromOverworldReducer('CAMP_UPGRADES', stepsTaken),
 				goToBulletinBoard: () =>
@@ -116,6 +119,7 @@ export const Overworld = ({
 			goToMarket,
 			handleOccupantReducer,
 			handledOccupants,
+			interactWithCombeeHive,
 			interactWithHallowedTower,
 			interactWithHoneyTree,
 			navigateAwayFromOverworldReducer,

@@ -92,4 +92,5 @@ export interface SaveFile {
 		plants: BerryBush[];
 	};
 	campUpgrades: Record<CampUpgrade, boolean>;
+	honeyReadyAt?: number;
 }

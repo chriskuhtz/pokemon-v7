@@ -114,6 +114,7 @@ const drawOccupant = (
 				break;
 			case 'HONEY_TREE':
 			case 'HALLOWED_TOWER':
+			case 'COMBEE_HIVE':
 				ctx?.drawImage(
 					img,
 					baseSize * occ.x + baseSize * 0.125,
@@ -177,6 +178,8 @@ const getSource = (occ: Occupant) => {
 			return '/mapObjects/honeyTree.png';
 		case 'HALLOWED_TOWER':
 			return '/mapObjects/hallowedTower.png';
+		case 'COMBEE_HIVE':
+			return '/mapObjects/combeeHive.png';
 		case 'OBSTACLE':
 			return occ.src;
 		case 'ITEM':

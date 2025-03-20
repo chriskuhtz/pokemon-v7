@@ -34,6 +34,7 @@ export const interactWithFunction = ({
 	cutterPokemon,
 	goToPosition,
 	interactWithHoneyTree,
+	interactWithCombeeHive,
 	interactWithHallowedTower,
 	goToCampMenu,
 	goToBulletinBoard,
@@ -56,6 +57,7 @@ export const interactWithFunction = ({
 	goToPosition: (x: CharacterLocationData) => void;
 	interactWithHoneyTree: () => void;
 	interactWithHallowedTower: () => void;
+	interactWithCombeeHive: () => void;
 	goToCampMenu: () => void;
 	goToBulletinBoard: () => void;
 	goToApricornSmith: () => void;
@@ -270,6 +272,10 @@ export const interactWithFunction = ({
 	}
 	if (data.type === 'HALLOWED_TOWER') {
 		interactWithHallowedTower();
+		return;
+	}
+	if (data.type === 'COMBEE_HIVE') {
+		interactWithCombeeHive();
 		return;
 	}
 

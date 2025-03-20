@@ -490,6 +490,13 @@ export const campOccupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) => s.campUpgrades.berry_farm,
 	},
 	{
+		type: 'COMBEE_HIVE',
+		x: 17,
+		y: 11,
+		id: 'combee_hive',
+		conditionFunction: (s) => s.campUpgrades['build combee hive'],
+	},
+	{
 		type: 'ON_STEP_PORTAL',
 		x: 10,
 		y: 0,
@@ -543,7 +550,6 @@ export const campOccupants: OverworldMap['occupants'] = [
 		id: 'camp_pc',
 		conditionFunction: () => true,
 	},
-
 	{
 		type: 'BULLETIN_BOARD',
 		id: 'camp_bulletin_board',

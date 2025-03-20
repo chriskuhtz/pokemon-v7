@@ -212,4 +212,5 @@ export const extraFeatureCheckList: {
 	{
 		name: 'Held Item & Pickup Bug',
 	},
+	{ name: 'icons for quests' },
 ];
