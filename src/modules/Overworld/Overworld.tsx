@@ -20,13 +20,13 @@ import { ClickerGrid } from './components/ClickerGrid';
 import { OverworldMenus } from './components/OverworldMenus';
 import { interactWithFunction } from './functions/interactWith';
 import { useClickTarget } from './hooks/useClickTarget';
+import { useCombeeHive } from './hooks/useCombeeHive';
 import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useOccupants } from './hooks/useOccupants';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
 import { useStartEncounter } from './hooks/useStartEncounter';
-import { useCombeeHive } from './hooks/useCombeeHive';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -112,6 +112,8 @@ export const Overworld = ({
 					navigateAwayFromOverworldReducer('TRAINING_FIELD', stepsTaken),
 				goToBerryFarm: () =>
 					navigateAwayFromOverworldReducer('FARM', stepsTaken),
+				goToMiltankFarm: () =>
+					navigateAwayFromOverworldReducer('MILTANK_FARM', stepsTaken),
 			}),
 		[
 			addMultipleMessages,

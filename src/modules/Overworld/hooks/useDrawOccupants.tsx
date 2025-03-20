@@ -91,6 +91,8 @@ const drawOccupant = (
 			case 'NPC':
 			case 'TRAINING_FIELD_MASTER':
 			case 'TRAINER':
+			case 'POKEMON':
+			case 'MILTANK_FARMER':
 				ctx?.drawImage(
 					img,
 					0,
@@ -163,7 +165,10 @@ const getSource = (occ: Occupant) => {
 		case 'TRAINING_FIELD_MASTER':
 		case 'BERRY_FARMER':
 		case 'TRAINER':
+		case 'MILTANK_FARMER':
 			return `/npcs/NPC_${occ.sprite}.png`;
+		case 'POKEMON':
+			return `/overworldPokemonSprites/${threeDigitString(occ.dexId)}.png`;
 		case 'PC':
 			return '/mapObjects/pc.png';
 		case 'SIGN':
@@ -187,4 +192,18 @@ const getSource = (occ: Occupant) => {
 		default:
 			return '/mapObjects/pokeball.png';
 	}
+};
+
+export const threeDigitString = (input: number) => {
+	if (input > 999) {
+		throw new Error('This number is too long');
+	}
+	if (input >= 100) {
+		return `${Math.floor(input)}`;
+	}
+	if (input >= 10) {
+		return `0${Math.floor(input)}`;
+	}
+
+	return `00${Math.floor(input)}`;
 };

@@ -515,6 +515,32 @@ const trainingField: Occupant[] = [
 		conditionFunction: (s) => s.campUpgrades['training field 1'],
 	},
 ];
+const miltankFarm: Occupant[] = [
+	{
+		type: 'MILTANK_FARMER',
+		dialogue: [
+			'All Pokemon seem to enjoy Miltank milk',
+			'And miltank love to eat berries',
+			'we can trade',
+		],
+		x: 4,
+		y: 1,
+		orientation: 'DOWN',
+		sprite: SpriteEnum.cowgirl,
+		id: 'miltank_farmer',
+		conditionFunction: (s) => s.campUpgrades['build miltank farm'],
+	},
+	{
+		type: 'POKEMON',
+		dexId: 241,
+		dialogue: ['Muuh'],
+		x: 5,
+		y: 1,
+		orientation: 'DOWN',
+		id: 'miltank',
+		conditionFunction: (s) => s.campUpgrades['build miltank farm'],
+	},
+];
 
 export const campOccupants: OverworldMap['occupants'] = [
 	{
@@ -668,4 +694,5 @@ export const campOccupants: OverworldMap['occupants'] = [
 	...trainingField,
 	...mortyLine,
 	...rowanLine,
+	...miltankFarm,
 ];

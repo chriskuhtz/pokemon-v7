@@ -19,6 +19,7 @@ export const shouldRotate = (t: OccupantType) =>
 		'APRICORN_SMITH',
 		'TRAINING_FIELD_MASTER',
 		'BERRY_FARMER',
+		'MILTANK_FARMER',
 	].includes(t);
 export const interactWithFunction = ({
 	occ,
@@ -41,6 +42,7 @@ export const interactWithFunction = ({
 	goToApricornSmith,
 	goToTrainingField,
 	goToBerryFarm,
+	goToMiltankFarm,
 	settings,
 }: {
 	occ: Occupant | undefined;
@@ -63,6 +65,7 @@ export const interactWithFunction = ({
 	goToApricornSmith: () => void;
 	goToTrainingField: () => void;
 	goToBerryFarm: () => void;
+	goToMiltankFarm: () => void;
 	settings?: SettingsObject;
 }) => {
 	if (!occ) {
@@ -163,6 +166,18 @@ export const interactWithFunction = ({
 
 		return;
 	}
+	if (data.type === 'MILTANK_FARMER') {
+		addMultipleMessages(
+			data.dialogue.map((d, i) => ({
+				message: d,
+				onRemoval:
+					i === data.dialogue.length - 1 ? () => goToMiltankFarm() : undefined,
+				needsNoConfirmation: true,
+			}))
+		);
+
+		return;
+	}
 	if (data.type === 'APRICORN_SMITH') {
 		addMultipleMessages(
 			data.dialogue.map((d, i) => ({
@@ -230,6 +245,15 @@ export const interactWithFunction = ({
 				}))
 			);
 		}
+
+		return;
+	}
+	if (data.type === 'POKEMON') {
+		addMultipleMessages([
+			...data.dialogue.map((d) => ({
+				message: d,
+			})),
+		]);
 
 		return;
 	}

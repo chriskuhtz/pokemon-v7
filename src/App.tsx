@@ -16,6 +16,7 @@ import { MapMaker } from './modules/MapMaker/MapMaker';
 import { BuyMarket } from './modules/Market/BuyMarket';
 import { Market } from './modules/Market/Market';
 import { SellMarket } from './modules/Market/SellMarket';
+import { MiltankFarm } from './modules/MiltankFarm/MiltankFarm';
 import { Overworld } from './modules/Overworld/Overworld';
 import { PokemonStorage } from './modules/PokemonStorage/PokemonStorage';
 import { Quests } from './modules/Quests/Quests';
@@ -222,6 +223,9 @@ export const App = (): JSX.Element => {
 	}
 	if (activeTab === 'FARM') {
 		return <Farm />;
+	}
+	if (activeTab === 'MILTANK_FARM') {
+		return <MiltankFarm />;
 	}
 	if (activeTab === 'FOSSIL_REVIVER') {
 		return <FossilReviver />;
