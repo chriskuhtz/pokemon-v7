@@ -272,6 +272,11 @@ export const calculateDamage = (
 		damageClass === 'physical'
 			? 0.66
 			: 1;
+	const overgrowFactor =
+		attacker.ability === 'overgrow' &&
+		attacker.damage > attacker.stats.hp * 0.66
+			? 1.5
+			: 1;
 
 	const res = Math.max(
 		Math.floor(
@@ -302,7 +307,8 @@ export const calculateDamage = (
 				plusFactor *
 				minusFactor *
 				gutsFactor *
-				marvelScaleFactor
+				marvelScaleFactor *
+				overgrowFactor
 		),
 		1
 	);
