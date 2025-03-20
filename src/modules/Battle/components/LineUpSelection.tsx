@@ -140,7 +140,7 @@ export const LineUpSelection = ({
 				>
 					{battleButtonMessage}
 				</button>
-				<button onClick={leave}>Try to escape</button>
+				{!trainer && <button onClick={leave}>Try to escape</button>}
 			</div>
 		</div>
 	);

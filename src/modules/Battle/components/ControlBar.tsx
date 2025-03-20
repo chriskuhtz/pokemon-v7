@@ -17,12 +17,14 @@ export function ControlBar({
 	chooseAction,
 	playerInventory,
 	catchingAllowed,
+	runningAllowed,
 }: {
 	controlled: BattlePokemon | undefined;
 	targets: BattlePokemon[];
 	chooseAction: (x: ChooseActionPayload) => void;
 	playerInventory: Inventory;
 	catchingAllowed: boolean;
+	runningAllowed: boolean;
 }) {
 	const [chosenAction, setChosenAction] = useState<ActionType | undefined>();
 
@@ -94,6 +96,7 @@ export function ControlBar({
 				inventory={playerInventory}
 				allTargets={targets}
 				catchingAllowed={catchingAllowed}
+				runningAllowed={runningAllowed}
 			/>
 		);
 	}

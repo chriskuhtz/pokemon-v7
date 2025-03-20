@@ -23,6 +23,7 @@ export function ActionSelection({
 	chooseAction,
 	allTargets,
 	catchingAllowed,
+	runningAllowed,
 }: {
 	controlled: BattlePokemon;
 	inventory: Inventory;
@@ -30,6 +31,7 @@ export function ActionSelection({
 	chooseAction: (x: ChooseActionPayload) => void;
 	allTargets: BattlePokemon[];
 	catchingAllowed: boolean;
+	runningAllowed: boolean;
 }) {
 	const runAwayer = controlled.ability === 'run-away';
 	const trapped = !runAwayer && isTrapped(controlled);
@@ -107,18 +109,20 @@ export function ActionSelection({
 					}
 				})}
 
-				<button
-					disabled={trapped || shadowTagged || magnetPulled}
-					onClick={() =>
-						chooseAction({
-							userId: controlled.id,
-							actionName: 'RUN_AWAY',
-							targetId: '',
-						})
-					}
-				>
-					{runButtonMessage()}
-				</button>
+				{runningAllowed && (
+					<button
+						disabled={trapped || shadowTagged || magnetPulled}
+						onClick={() =>
+							chooseAction({
+								userId: controlled.id,
+								actionName: 'RUN_AWAY',
+								targetId: '',
+							})
+						}
+					>
+						{runButtonMessage()}
+					</button>
+				)}
 			</div>
 		</div>
 	);

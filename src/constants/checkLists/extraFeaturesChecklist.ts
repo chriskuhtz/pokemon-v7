@@ -213,4 +213,5 @@ export const extraFeatureCheckList: {
 		name: 'Held Item & Pickup Bug',
 	},
 	{ name: 'icons for quests' },
+	{ name: 'setting: no items in battle' },
 ];
