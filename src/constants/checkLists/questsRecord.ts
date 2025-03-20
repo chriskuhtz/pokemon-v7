@@ -56,6 +56,7 @@ export const questNames = [
 	'grow a apricorn',
 	'catch a pokemon in an apricorn ball',
 	'catch a very heavy specimen',
+	'catch a pokemon in every type of apricorn ball',
 ] as const;
 /**
  * Ideas:
@@ -463,7 +464,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch a pokemon orginally found in galar': {
-		rewardItems: { 'pp-max': 1 },
+		rewardItems: { 'ultra-ball': 10 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
@@ -656,18 +657,36 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'catch a pokemon in an apricorn ball': {
 		kind: 'BULLETIN',
 		rewardItems: {
-			'black-apricorn': 1,
-			'blue-apricorn': 1,
-			'green-apricorn': 1,
-			'pink-apricorn': 1,
-			'red-apricorn': 1,
-			'white-apricorn': 1,
-			'yellow-apricorn': 1,
+			'black-apricorn': 5,
+			'blue-apricorn': 5,
+			'green-apricorn': 5,
+			'pink-apricorn': 5,
+			'red-apricorn': 5,
+			'white-apricorn': 5,
+			'yellow-apricorn': 5,
 		},
 		researchPoints: 10,
 		availableAfter: 'craft a apricorn ball',
 		conditionFunction: (s) =>
 			s.pokemon.some((p) => Object.values(apricornTable).includes(p.ball)),
+	},
+	'catch a pokemon in every type of apricorn ball': {
+		kind: 'BULLETIN',
+		rewardItems: {
+			'black-apricorn': 5,
+			'blue-apricorn': 5,
+			'green-apricorn': 5,
+			'pink-apricorn': 5,
+			'red-apricorn': 5,
+			'white-apricorn': 5,
+			'yellow-apricorn': 5,
+		},
+		researchPoints: 30,
+		availableAfter: 'catch a pokemon in an apricorn ball',
+		conditionFunction: (s) =>
+			Object.values(apricornTable).every((apricornBall) =>
+				s.pokemon.some((p) => p.ball === apricornBall)
+			),
 	},
 	'catch a very heavy specimen': {
 		kind: 'BULLETIN',

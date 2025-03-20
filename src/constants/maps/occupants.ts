@@ -327,6 +327,96 @@ const rowanLine: Occupant[] = [
 		orientation: 'DOWN',
 		sprite: SpriteEnum.rowan,
 	},
+	{
+		type: 'NPC',
+		id: 'rowan_5',
+		x: 5,
+		y: 15,
+		unhandledMessage: [
+			'Even though most of Unova is one big city',
+			'there are still interesting pokemon to be found',
+		],
+		handledMessage: ['How is the catching going'],
+		quest: 'catch a pokemon orginally found in unova',
+		conditionFunction: (s) =>
+			s.campUpgrades['invite professor rowan'] &&
+			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in hoenn'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in sinnoh'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in unova'] !== 'COLLECTED',
+		orientation: 'DOWN',
+		sprite: SpriteEnum.rowan,
+	},
+	{
+		type: 'NPC',
+		id: 'rowan_6',
+		x: 5,
+		y: 15,
+		unhandledMessage: [
+			'In Kalos, trainers use special stones',
+			'To make their pokemon even stronger',
+		],
+		handledMessage: ['How is the catching going'],
+		quest: 'catch a pokemon orginally found in kalos',
+		conditionFunction: (s) =>
+			s.campUpgrades['invite professor rowan'] &&
+			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in hoenn'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in sinnoh'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in unova'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in kalos'] !== 'COLLECTED',
+		orientation: 'DOWN',
+		sprite: SpriteEnum.rowan,
+	},
+	{
+		type: 'NPC',
+		id: 'rowan_7',
+		x: 5,
+		y: 15,
+		unhandledMessage: [
+			'The alola region is always worth a visit',
+			'So many fascinating pokemon',
+		],
+		handledMessage: ['How is the catching going'],
+		quest: 'catch a pokemon orginally found in alola',
+		conditionFunction: (s) =>
+			s.campUpgrades['invite professor rowan'] &&
+			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in hoenn'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in sinnoh'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in unova'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in kalos'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in alola'] !== 'COLLECTED',
+		orientation: 'DOWN',
+		sprite: SpriteEnum.rowan,
+	},
+	{
+		type: 'NPC',
+		id: 'rowan_8',
+		x: 5,
+		y: 15,
+		unhandledMessage: [
+			'The best tea comes from galar',
+			'They even have a pokemon that resembles a teacup',
+		],
+		handledMessage: ['How is the catching going'],
+		quest: 'catch a pokemon orginally found in galar',
+		conditionFunction: (s) =>
+			s.campUpgrades['invite professor rowan'] &&
+			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in hoenn'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in sinnoh'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in unova'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in kalos'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in alola'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in galar'] === 'COLLECTED',
+		orientation: 'DOWN',
+		sprite: SpriteEnum.rowan,
+	},
 ];
 const mortyLine: Occupant[] = [
 	{
