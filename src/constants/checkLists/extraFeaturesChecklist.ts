@@ -209,4 +209,7 @@ export const extraFeatureCheckList: {
 	{ name: 'refactor quest limit' },
 	{ name: 'Changing moves messes with pp' },
 	{ name: 'Trainers should give money' },
+	{
+		name: 'Held Item & Pickup Bug',
+	},
 ];
