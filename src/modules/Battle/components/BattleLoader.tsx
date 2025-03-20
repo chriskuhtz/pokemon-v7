@@ -1,3 +1,4 @@
+import { getMiddleOfThree } from '../../../functions/getMiddleOfThree';
 import {
 	OverworldShaderMap,
 	getTimeOfDay,
@@ -64,7 +65,7 @@ export const BattleLoader = ({
 				leave={leave}
 				opponents={battleOpponents}
 				team={battleTeam}
-				fightersPerSide={Math.min(team.length, challenger.team.length)}
+				fightersPerSide={getMiddleOfThree([1, battleOpponents.length, 2])}
 				inventory={inventory}
 				trainer={challenger.trainer}
 				latestMessage={latestMessage}
