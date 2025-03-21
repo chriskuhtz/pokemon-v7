@@ -21,15 +21,18 @@ export const PokemonSprite = ({
 	style,
 	back,
 	onClick,
+	className,
 }: {
 	name: PokemonName;
 	sizeFactor?: number;
 	style?: CSSProperties;
 	back?: boolean;
 	onClick?: () => void;
+	className?: string;
 }) => {
 	return (
 		<img
+			className={className}
 			onClick={onClick}
 			onKeyDown={(e) => {
 				if (onClick && e.key === 'Enter') {

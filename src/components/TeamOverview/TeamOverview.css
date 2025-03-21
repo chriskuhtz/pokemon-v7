@@ -1,0 +1,16 @@
+.readyToEvolve {
+	animation-duration: 0.25s;
+	animation-name: hop;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+}
+
+@keyframes hop {
+	from {
+		transform: translateY(4px);
+	}
+
+	to {
+		transform: translateY(-8px);
+	}
+}

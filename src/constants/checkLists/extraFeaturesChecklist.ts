@@ -124,8 +124,7 @@ export const extraFeatureCheckList: {
 	{ name: 'display names for routes (Japanese colors)', handled: true },
 	{ name: 'pokemonSprite component', handled: true },
 	{ name: 'proper runaway calculation', handled: true },
-	{ name: 'itemsprite component' },
-	{ name: 'show evo readyness in overworld' },
+	{ name: 'show evo readyness in overworld', handled: true },
 	{ name: 'apricorn trees' },
 	{ name: 'ivs' },
 	{ name: 'separate name selection and starter selection' },
@@ -214,4 +213,5 @@ export const extraFeatureCheckList: {
 	{ name: 'fallback sprites (offical artwork)' },
 	{ name: 'switching (dont forget spider-web, magnet-pull etc)' },
 	{ name: 'trade evos' },
+	{ name: 'itemsprite component' },
 ];
