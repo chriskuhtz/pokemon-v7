@@ -214,4 +214,5 @@ export const extraFeatureCheckList: {
 	{ name: 'switching (dont forget spider-web, magnet-pull etc)' },
 	{ name: 'trade evos' },
 	{ name: 'itemsprite component' },
+	{ name: 'growth rates' },
 ];

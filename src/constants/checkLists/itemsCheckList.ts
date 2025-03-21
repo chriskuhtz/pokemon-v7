@@ -593,7 +593,11 @@ export const itemsCheckList: {
 		handled: true,
 	},
 
-	{ name: 'nanab-berry', url: 'https://pokeapi.co/api/v2/item/143/' },
+	{
+		name: 'nanab-berry',
+		url: 'https://pokeapi.co/api/v2/item/143/',
+		handled: true,
+	},
 	{ name: 'aguav-berry', url: 'https://pokeapi.co/api/v2/item/139/' },
 	{ name: 'wiki-berry', url: 'https://pokeapi.co/api/v2/item/137/' },
 	{ name: 'razz-berry', url: 'https://pokeapi.co/api/v2/item/141/' },

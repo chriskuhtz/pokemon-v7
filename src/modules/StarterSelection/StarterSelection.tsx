@@ -15,8 +15,7 @@ import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-//remove bulbasaur until pokeapi issue is resolved
-const defaultStarters: PokemonName[] = ['charmander', 'squirtle'];
+const defaultStarters: PokemonName[] = ['bulbasaur', 'charmander', 'squirtle'];
 const randomStarterOptions = [
 	getRandomPokemonName(),
 	getRandomPokemonName(),

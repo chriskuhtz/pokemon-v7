@@ -45,8 +45,6 @@ export const useGetBattleTeam = (
 
 				const availableMoves = fetchedData.moves
 					.filter((m) => moveIsAvailable(m, level))
-					//disable tail whip until pokeapi issue is resolved
-					.filter((m) => m.move.name !== 'tail-whip')
 					.reverse();
 
 				const firstMoveName =
