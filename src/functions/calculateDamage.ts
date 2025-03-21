@@ -107,6 +107,15 @@ export const calculateDamage = (
 	if (levelDamageMoves.includes(attack.name)) {
 		return calculateLevelData(attacker.xp).level;
 	}
+	if (attack.name === 'super-fang') {
+		return Math.floor(
+			getMiddleOfThree([
+				1,
+				(attacker.stats.hp - attacker.damage) / 2,
+				attacker.stats.hp,
+			])
+		);
+	}
 
 	if (target.ability === 'flash-fire' && attack.data.type.name === 'fire') {
 		return 0;
