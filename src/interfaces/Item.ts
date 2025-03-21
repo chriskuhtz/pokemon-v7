@@ -1,5 +1,6 @@
 import { PokemonName } from '../constants/pokemonNames';
 import { getRandomIndex } from '../functions/filterTargets';
+import { AilmentType, primaryAilments } from './Ailment';
 import { Stat } from './StatObject';
 
 export const healingItemTypes = [
@@ -312,6 +313,19 @@ export const HPHealTable: Partial<Record<ItemType, number>> = {
 	'energy-root': 200,
 	'hyper-potion': 200,
 	'max-potion': 10000,
+};
+export const AilmentHealTable: Partial<Record<ItemType, AilmentType[]>> = {
+	'full-heal': [...primaryAilments, 'confusion'],
+	'full-restore': [...primaryAilments, 'confusion'],
+	'old-gateau': [...primaryAilments, 'confusion'],
+	'lava-cookie': [...primaryAilments, 'confusion'],
+	'lum-berry': [...primaryAilments, 'confusion'],
+	antidote: ['poison', 'toxic'],
+	'pecha-berry': ['poison', 'toxic'],
+	'burn-heal': ['burn'],
+	'rawst-berry': ['burn'],
+	'paralyze-heal': ['paralysis'],
+	'cheri-berry': ['paralysis'],
 };
 
 export const XItemTable: Partial<Record<XItemType, Stat>> = {

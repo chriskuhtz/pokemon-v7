@@ -17,6 +17,14 @@ export const campUpgradeNames = [
 	'build combee hive',
 	'build miltank farm',
 ] as const;
+/**
+ * ideas
+ * drilbur item digger
+ * outbreak radio
+ * fossil maniac
+ * more gym leaders
+ * stronger training field
+ */
 
 export type CampUpgrade = (typeof campUpgradeNames)[number];
 

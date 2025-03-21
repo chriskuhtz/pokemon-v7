@@ -1,8 +1,18 @@
 import { MoveName } from '../constants/checkLists/movesCheckList';
 import { PokemonType } from './PokemonType';
 
+export const primaryAilments = [
+	'paralysis',
+	'burn',
+	'freeze',
+	'poison',
+	'toxic',
+	'sleep',
+] as const;
+
+export type PrimaryAilmentType = (typeof primaryAilments)[number];
 export interface PrimaryAilment {
-	type: 'paralysis' | 'burn' | 'freeze' | 'poison' | 'toxic' | 'sleep';
+	type: PrimaryAilmentType;
 	duration?: number;
 }
 
@@ -40,6 +50,8 @@ export interface SecondaryAilment {
 export function isSecondaryAilment(x: { type: string }): x is SecondaryAilment {
 	return secondaryAilments.some((s) => s === x.type);
 }
+
+export type AilmentType = PrimaryAilmentType | SecondaryAilmentType;
 
 export const PARA_CHANCE = 0.25;
 export const INFATUATION_CHANCE = 0.5;
