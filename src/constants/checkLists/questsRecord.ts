@@ -52,6 +52,7 @@ export const questNames = [
 	'train a pokemon to level 30',
 	'defeat a training field trainer',
 	'defeat five training field trainers',
+	'defeat ten training field trainers',
 	'grow a berry',
 	'grow a apricorn',
 	'catch a pokemon in an apricorn ball',
@@ -609,6 +610,26 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 1',
 		availableAfter: 'defeat a training field trainer',
+	},
+	'defeat ten training field trainers': {
+		rewardItems: {
+			calcium: 1,
+			zinc: 1,
+			iron: 1,
+			carbos: 1,
+			protein: 1,
+			'hp-up': 1,
+		},
+		researchPoints: 30,
+		conditionFunction: (s) => {
+			const defeatedTrainers = s.handledOccupants.filter((h) =>
+				trainers.some((t) => t.id === h.id)
+			).length;
+			return defeatedTrainers > 9;
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'defeat five training field trainers',
 	},
 	'grow a berry': {
 		rewardItems: {
