@@ -186,6 +186,34 @@ export const routeS1E1Occupants: OverworldMap['occupants'] = [
 ];
 export const routeS1Occupants: OverworldMap['occupants'] = [
 	{
+		type: 'ON_STEP_PORTAL',
+		x: 50,
+		y: 25,
+		portal: {
+			mapId: 'routeS1E1',
+			x: 1,
+			y: 25,
+			orientation: 'RIGHT',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+		id: 'routeS1_to_routeS1E1',
+	},
+	{
+		type: 'ON_STEP_PORTAL',
+		x: 0,
+		y: 25,
+		portal: {
+			mapId: 'routeS1W1',
+			y: 25,
+			x: 49,
+			orientation: 'LEFT',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+		id: 'routeS1_to_routeS1W1',
+	},
+	{
 		type: 'HALLOWED_TOWER',
 		x: 47,
 		y: 40,
