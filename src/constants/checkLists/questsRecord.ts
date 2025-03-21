@@ -57,6 +57,7 @@ export const questNames = [
 	'catch a pokemon in an apricorn ball',
 	'catch a very heavy specimen',
 	'catch a pokemon in every type of apricorn ball',
+	'defeat morty',
 ] as const;
 /**
  * Ideas:
@@ -83,27 +84,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			return s.pokemon.some((p) => p.name === 'pikachu');
 		},
 		kind: 'BULLETIN',
-	},
-	'catch a spiritomb': {
-		rewardItems: { 'rare-candy': 3 },
-		researchPoints: 50,
-		conditionFunction: (s) => {
-			return s.pokemon.some((p) => p.name === 'spiritomb');
-		},
-		targetPokemon: ['spiritomb'],
-		kind: 'QUEST_LINE',
-	},
-	'catch Haunter and Mightyena': {
-		rewardItems: { 'rare-bone': 2 },
-		researchPoints: 20,
-		conditionFunction: (s) => {
-			return (
-				s.pokemon.some((p) => p.name === 'haunter') &&
-				s.pokemon.some((p) => p.name === 'mightyena')
-			);
-		},
-		targetPokemon: ['haunter', 'mightyena'],
-		kind: 'QUEST_LINE',
 	},
 	'catch a morning pokemon from routeN1': {
 		rewardItems: { 'sun-stone': 1 },
@@ -696,5 +676,39 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 10,
 		conditionFunction: (s) =>
 			s.pokemon.some((p) => p.weightModifier && p.weightModifier > 0.9),
+	},
+	'catch Haunter and Mightyena': {
+		rewardItems: { 'rare-bone': 2 },
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			return (
+				s.pokemon.some((p) => p.name === 'haunter') &&
+				s.pokemon.some((p) => p.name === 'mightyena')
+			);
+		},
+		targetPokemon: ['haunter', 'mightyena'],
+		kind: 'QUEST_LINE',
+	},
+	'catch a spiritomb': {
+		rewardItems: { 'rare-candy': 3 },
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) => p.name === 'spiritomb');
+		},
+		targetPokemon: ['spiritomb'],
+		kind: 'QUEST_LINE',
+	},
+	'defeat morty': {
+		rewardItems: {
+			'ultra-ball': 10,
+			'full-restore': 5,
+		},
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'Gym Leader Morty');
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'catch Haunter and Mightyena',
 	},
 };

@@ -202,4 +202,5 @@ export const extraFeatureCheckList: {
 	{ name: 'setting: no items in battle' },
 	{ name: 'limit moomoo milk amounts' },
 	{ name: 'refactor primaryAilment healing table' },
+	{ name: 'refactor all `routing` npcs into the same type' },
 ];
