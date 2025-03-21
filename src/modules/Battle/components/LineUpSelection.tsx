@@ -4,13 +4,13 @@ import {
 	PokemonSprite,
 } from '../../../components/PokemonSprite/PokemonSprite';
 import { Sprite } from '../../../components/Sprite/Sprite';
+import { determineRunawaySuccess } from '../../../functions/determineRunAwaySuccess';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { isKO } from '../../../functions/isKo';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { TrainerInfo } from '../../../interfaces/Challenger';
 import { IconSolarSystem } from '../../../uiComponents/IconSolarSystem/IconSolarSystem';
-import { determineRunawaySuccess } from '../../../functions/determineRunAwaySuccess';
 
 export const LineUpSelection = ({
 	leave,
@@ -43,15 +43,6 @@ export const LineUpSelection = ({
 	}, [fightersPerSide, selectedTeam.length]);
 
 	const tryToLeave = useCallback(() => {
-		const runAwayer = team.find((t) => t.ability === 'run-away');
-
-		if (runAwayer) {
-			addMessage({
-				message: `escaped with ${runAwayer.name}´s ability runaway `,
-				onRemoval: () => leave(),
-			});
-		}
-
 		const canEscape = determineRunawaySuccess(team, opponents);
 
 		if (canEscape) {
