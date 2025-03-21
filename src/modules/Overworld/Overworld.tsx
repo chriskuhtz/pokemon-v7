@@ -34,6 +34,36 @@ const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
 const occupantsCanvasId = 'occs';
 
+export const useEncounterRateModifier = () => {
+	const { saveFile } = useContext(SaveFileContext);
+
+	const team = useMemo(
+		() => saveFile.pokemon.filter((p) => p.onTeam),
+		[saveFile.pokemon]
+	);
+
+	const firstTeamMember = useMemo(
+		() => (team.length > 0 ? team[0] : undefined),
+		[team]
+	);
+
+	return useMemo(() => {
+		const stenchFactor = firstTeamMember?.ability === 'stench' ? 0.5 : 1;
+		const illumFactor = firstTeamMember?.ability === 'illuminate' ? 2 : 1;
+		const swarmFactor = firstTeamMember?.ability === 'swarm' ? 2 : 1;
+		const itemFactor = saveFile.encounterRateModifier?.factor ?? 1;
+		const weatherFactor =
+			firstTeamMember?.ability === 'sand-veil' &&
+			mapsRecord[saveFile.location.mapId].weather === 'sandstorm'
+				? 0.5
+				: 1;
+
+		return (
+			1 * stenchFactor * itemFactor * weatherFactor * illumFactor * swarmFactor
+		);
+	}, [firstTeamMember, saveFile]);
+};
+
 export const Overworld = ({
 	playerLocation,
 	setCharacterLocation,
@@ -42,12 +72,10 @@ export const Overworld = ({
 	playerSprite,
 	handledOccupants,
 	latestMessage,
-	encounterRateModifier,
 	addMultipleMessages,
 }: {
 	playerLocation: CharacterLocationData;
 	setCharacterLocation: (update: CharacterLocationData) => void;
-	encounterRateModifier?: number;
 	goToMarket: (marketInventory: Partial<Inventory>, stepsTaken: number) => void;
 	talkToNurse: (id: string) => void;
 	playerSprite: string;
@@ -66,6 +94,7 @@ export const Overworld = ({
 	const interactWithBush = useMachete();
 	const interactWithLedge = useJumpDownLedge();
 	const addEncounterMessage = useStartEncounter();
+	const encounterRateModifier = useEncounterRateModifier();
 
 	const map = useMemo(
 		() => mapsRecord[saveFile.location.mapId],

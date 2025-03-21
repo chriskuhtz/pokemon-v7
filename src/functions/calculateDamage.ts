@@ -290,6 +290,12 @@ export const calculateDamage = (
 		attack.data.type.name === 'water'
 			? 1.5
 			: 1;
+	const swarmFactor =
+		attacker.ability === 'swarm' &&
+		attacker.damage > attacker.stats.hp * 0.66 &&
+		attack.data.type.name === 'bug'
+			? 1.5
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -322,7 +328,8 @@ export const calculateDamage = (
 				marvelScaleFactor *
 				overgrowFactor *
 				blazeFactor *
-				torrentFactor
+				torrentFactor *
+				swarmFactor
 		),
 		1
 	);

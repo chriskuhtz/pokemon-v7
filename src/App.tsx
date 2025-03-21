@@ -1,5 +1,5 @@
 import { useContext, useMemo, useState } from 'react';
-import { MapId, mapsRecord } from './constants/maps/mapsRecord';
+import { MapId } from './constants/maps/mapsRecord';
 import { MessageQueueContext } from './hooks/useMessageQueue';
 import { SaveFileContext } from './hooks/useSaveFile';
 import { generateInventory, Inventory } from './interfaces/Inventory';
@@ -96,24 +96,6 @@ export const App = (): JSX.Element => {
 	} = saveFile;
 
 	const team = useMemo(() => pokemon.filter((p) => p.onTeam), [pokemon]);
-
-	const firstTeamMember = useMemo(
-		() => (team.length > 0 ? team[0] : undefined),
-		[team]
-	);
-
-	const encounterRateModifier = useMemo(() => {
-		const stenchFactor = firstTeamMember?.ability === 'stench' ? 0.5 : 1;
-		const illumFactor = firstTeamMember?.ability === 'illuminate' ? 2 : 1;
-		const itemFactor = saveFile.encounterRateModifier?.factor ?? 1;
-		const weatherFactor =
-			firstTeamMember?.ability === 'sand-veil' &&
-			mapsRecord[saveFile.location.mapId].weather === 'sandstorm'
-				? 0.5
-				: 1;
-
-		return 1 * stenchFactor * itemFactor * weatherFactor * illumFactor;
-	}, [firstTeamMember, saveFile]);
 
 	// const fishingEncounterRateModifier = useMemo(() => {
 	// 	if (firstTeamMember.ability === 'suction-cups') {
@@ -272,7 +254,6 @@ export const App = (): JSX.Element => {
 			handledOccupants={handledOccupants.map((h) => h.id)}
 			latestMessage={latestMessage}
 			addMultipleMessages={addMultipleMessages}
-			encounterRateModifier={encounterRateModifier}
 		/>
 	);
 };
