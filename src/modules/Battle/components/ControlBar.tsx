@@ -7,7 +7,11 @@ import { getMovesArray } from '../../../functions/getMovesArray';
 import { OPPO_ID } from '../../../functions/makeChallengerPokemon';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
-import { ActionType, ChooseActionPayload } from '../BattleField';
+import {
+	ActionType,
+	BattleFieldEffect,
+	ChooseActionPayload,
+} from '../BattleField';
 import { ActionSelection } from './ActionSelection';
 import { TargetSelection } from './TargetSelection';
 
@@ -18,6 +22,7 @@ export function ControlBar({
 	playerInventory,
 	catchingAllowed,
 	runningAllowed,
+	battleFieldEffects,
 }: {
 	controlled: BattlePokemon | undefined;
 	targets: BattlePokemon[];
@@ -25,6 +30,7 @@ export function ControlBar({
 	playerInventory: Inventory;
 	catchingAllowed: boolean;
 	runningAllowed: boolean;
+	battleFieldEffects: BattleFieldEffect[];
 }) {
 	const [chosenAction, setChosenAction] = useState<ActionType | undefined>();
 
@@ -97,6 +103,7 @@ export function ControlBar({
 				allTargets={targets}
 				catchingAllowed={catchingAllowed}
 				runningAllowed={runningAllowed}
+				battleFieldEffects={battleFieldEffects}
 			/>
 		);
 	}

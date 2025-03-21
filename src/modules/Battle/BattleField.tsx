@@ -49,7 +49,10 @@ export interface BattleFieldEffect {
 		| 'reflect'
 		| 'plus'
 		| 'minus'
-		| 'spider-web';
+		| 'spider-web'
+		| 'arena-trap'
+		| 'shadow-tag'
+		| 'magnet-pull';
 	ownerId: string;
 	duration: number;
 }
@@ -143,6 +146,24 @@ export const BattleField = ({
 		}
 		if (onFieldTeam.some((p) => p.ability === 'minus')) {
 			res.push({ type: 'minus', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldOpponents.some((p) => p.ability === 'shadow-tag')) {
+			res.push({ type: 'shadow-tag', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'shadow-tag')) {
+			res.push({ type: 'shadow-tag', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldOpponents.some((p) => p.ability === 'magnet-pull')) {
+			res.push({ type: 'magnet-pull', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'magnet-pull')) {
+			res.push({ type: 'magnet-pull', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldOpponents.some((p) => p.ability === 'magnet-pull')) {
+			res.push({ type: 'magnet-pull', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'magnet-pull')) {
+			res.push({ type: 'magnet-pull', ownerId: OPPO_ID, duration: 9000 });
 		}
 		return res;
 	}, [bf, onFieldOpponents, onFieldTeam]);
@@ -646,6 +667,7 @@ export const BattleField = ({
 						playerInventory={battleInventory}
 						catchingAllowed={!isTrainerBattle}
 						runningAllowed={!isTrainerBattle}
+						battleFieldEffects={battleFieldEffects}
 					/>
 				</div>
 			)}

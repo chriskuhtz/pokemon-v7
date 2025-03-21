@@ -14,7 +14,11 @@ import {
 	isRunawayItem,
 	isXItem,
 } from '../../../interfaces/Item';
-import { ActionType, ChooseActionPayload } from '../BattleField';
+import {
+	ActionType,
+	BattleFieldEffect,
+	ChooseActionPayload,
+} from '../BattleField';
 
 export function ActionSelection({
 	controlled,
@@ -24,6 +28,7 @@ export function ActionSelection({
 	allTargets,
 	catchingAllowed,
 	runningAllowed,
+	battleFieldEffects,
 }: {
 	controlled: BattlePokemon;
 	inventory: Inventory;
@@ -32,22 +37,28 @@ export function ActionSelection({
 	allTargets: BattlePokemon[];
 	catchingAllowed: boolean;
 	runningAllowed: boolean;
+	battleFieldEffects: BattleFieldEffect[];
 }) {
 	const runAwayer = controlled.ability === 'run-away';
 	const trapped = !runAwayer && isTrapped(controlled);
 	const shadowTagged =
 		!runAwayer &&
-		allTargets.some(
-			(p) => p.ownerId !== controlled.ownerId && p.ability === 'shadow-tag'
-		) &&
-		controlled.ability !== 'shadow-tag';
+		controlled.ability !== 'shadow-tag' &&
+		battleFieldEffects.some(
+			(b) => b.type === 'shadow-tag' && b.ownerId !== controlled.ownerId
+		);
+	const arenaTrapped =
+		!runAwayer &&
+		controlled.ability !== 'levitate' &&
+		!getTypeNames(controlled).includes('flying') &&
+		battleFieldEffects.some(
+			(b) => b.type === 'arena-trap' && b.ownerId !== controlled.ownerId
+		);
 	const magnetPulled =
 		!runAwayer &&
-		allTargets.some(
-			(p) =>
-				p.ownerId !== controlled.ownerId &&
-				p.ability === 'magnet-pull' &&
-				getTypeNames(controlled).includes('steel')
+		getTypeNames(controlled).includes('steel') &&
+		battleFieldEffects.some(
+			(b) => b.type === 'shadow-tag' && b.ownerId !== controlled.ownerId
 		);
 
 	const runButtonMessage = () => {
@@ -59,6 +70,9 @@ export function ActionSelection({
 		}
 		if (magnetPulled) {
 			return 'Magnet Pull in Effect';
+		}
+		if (arenaTrapped) {
+			return 'Arena Trap in Effect';
 		}
 		return 'Run Away';
 	};
@@ -111,7 +125,7 @@ export function ActionSelection({
 
 				{runningAllowed && (
 					<button
-						disabled={trapped || shadowTagged || magnetPulled}
+						disabled={trapped || shadowTagged || magnetPulled || arenaTrapped}
 						onClick={() =>
 							chooseAction({
 								userId: controlled.id,
