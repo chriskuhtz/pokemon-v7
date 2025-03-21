@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
 import {
 	getPokemonSprite,
 	PokemonSprite,
@@ -6,9 +6,11 @@ import {
 import { Sprite } from '../../../components/Sprite/Sprite';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { isKO } from '../../../functions/isKo';
+import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { TrainerInfo } from '../../../interfaces/Challenger';
 import { IconSolarSystem } from '../../../uiComponents/IconSolarSystem/IconSolarSystem';
+import { determineRunawaySuccess } from '../../../functions/determineRunAwaySuccess';
 
 export const LineUpSelection = ({
 	leave,
@@ -29,6 +31,7 @@ export const LineUpSelection = ({
 	startBattle: () => void;
 	trainer?: TrainerInfo;
 }) => {
+	const { addMessage } = useContext(MessageQueueContext);
 	const battleButtonMessage = useMemo(() => {
 		if (selectedTeam.length < fightersPerSide)
 			return `select ${fightersPerSide - selectedTeam.length} more`;
@@ -38,6 +41,31 @@ export const LineUpSelection = ({
 
 		return 'Battle';
 	}, [fightersPerSide, selectedTeam.length]);
+
+	const tryToLeave = useCallback(() => {
+		const runAwayer = team.find((t) => t.ability === 'run-away');
+
+		if (runAwayer) {
+			addMessage({
+				message: `escaped with ${runAwayer.name}´s ability runaway `,
+				onRemoval: () => leave(),
+			});
+		}
+
+		const canEscape = determineRunawaySuccess(team, opponents);
+
+		if (canEscape) {
+			addMessage({
+				message: `escaped successfully`,
+				onRemoval: () => leave(),
+			});
+		} else {
+			addMessage({
+				message: `could not escape, battle starts`,
+				onRemoval: () => startBattle(),
+			});
+		}
+	}, [addMessage, leave, opponents, startBattle, team]);
 
 	return (
 		<div
@@ -142,7 +170,14 @@ export const LineUpSelection = ({
 				>
 					{battleButtonMessage}
 				</button>
-				{!trainer && <button onClick={leave}>Try to escape</button>}
+				{!trainer && (
+					<button
+						disabled={selectedTeam.length !== fightersPerSide}
+						onClick={tryToLeave}
+					>
+						Try to escape
+					</button>
+				)}
 			</div>
 		</div>
 	);

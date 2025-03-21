@@ -123,6 +123,7 @@ export const extraFeatureCheckList: {
 	{ name: 'MakePokemon function', handled: true },
 	{ name: 'display names for routes (Japanese colors)', handled: true },
 	{ name: 'pokemonSprite component', handled: true },
+	{ name: 'proper runaway calculation', handled: true },
 	{ name: 'itemsprite component' },
 	{ name: 'show evo readyness in overworld' },
 	{ name: 'apricorn trees' },

@@ -4,7 +4,9 @@ import { forceSwitchMoves } from '../../../../constants/forceSwitchMoves';
 import { applyItemToPokemon } from '../../../../functions/applyItemToPokemon';
 import { applyStatChangeToPokemon } from '../../../../functions/applyStatChangeToPokemon';
 import { BattleLocation } from '../../../../functions/determineCaptureSuccess';
+import { determineRunawaySuccess } from '../../../../functions/determineRunAwaySuccess';
 import { getChargeUpMessage } from '../../../../functions/getChargeUpMessage';
+import { getPlayerId } from '../../../../functions/getPlayerId';
 import { Message } from '../../../../hooks/useMessageQueue';
 import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
 import { ItemType } from '../../../../interfaces/Item';
@@ -46,10 +48,20 @@ export const useHandleAction = (
 				throw new Error('cant handle this yet');
 			}
 			if (move.type === 'RunAway') {
-				addMessage({
-					message: `You ran away`,
-					onRemoval: () => leave('DRAW'),
-				});
+				const canRun = determineRunawaySuccess(
+					pokemon.filter((p) => p.ownerId === getPlayerId()),
+					pokemon.filter((p) => p.ownerId !== getPlayerId())
+				);
+				if (canRun) {
+					addMessage({
+						message: `You ran away`,
+						onRemoval: () => leave('DRAW'),
+					});
+				} else {
+					addMessage({
+						message: `Could not escape`,
+					});
+				}
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
 						if (p.id === attacker.id) {
