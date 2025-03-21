@@ -1,6 +1,7 @@
 import { PokemonName } from '../constants/pokemonNames';
 import { getRandomIndex } from '../functions/filterTargets';
 import { AilmentType, primaryAilments } from './Ailment';
+import { Nature } from './Natures';
 import { Stat } from './StatObject';
 
 export const healingItemTypes = [
@@ -168,6 +169,7 @@ export const berries = [
 	'oran-berry',
 	'persim-berry',
 	'lum-berry',
+	'figy-berry',
 ] as const;
 
 export const fossils = [
@@ -314,6 +316,9 @@ export const HPHealTable: Partial<Record<ItemType, number>> = {
 	'energy-root': 200,
 	'hyper-potion': 200,
 	'max-potion': 10000,
+};
+export const FlavourfullBerriesTable: Partial<Record<ItemType, Nature[]>> = {
+	'figy-berry': ['bold', 'modest', 'calm', 'timid'],
 };
 export const AilmentHealTable: Partial<Record<ItemType, AilmentType[]>> = {
 	'full-heal': [...primaryAilments, 'confusion'],

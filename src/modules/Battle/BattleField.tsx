@@ -428,8 +428,10 @@ export const BattleField = ({
 						pokemon: p,
 						addMessage: (x) => collectedMessages.push(x.message),
 					});
-					updated = applyEndOfTurnHeldItem(updated, (x) =>
-						collectedMessages.push(x)
+					updated = applyEndOfTurnHeldItem(
+						updated,
+						(x) => collectedMessages.push(x),
+						(x) => collectedMessages.push(...x)
 					);
 					updated = applyPrimaryAilmentDamage(updated, (x) =>
 						collectedMessages.push(x)

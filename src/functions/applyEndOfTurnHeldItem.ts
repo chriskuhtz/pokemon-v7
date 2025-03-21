@@ -1,14 +1,50 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { hasEndOfTurnEffect, HPHealTable } from '../interfaces/Item';
+import {
+	FlavourfullBerriesTable,
+	hasEndOfTurnEffect,
+	HPHealTable,
+} from '../interfaces/Item';
 import { applyItemToPokemon } from './applyItemToPokemon';
+import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
 import { getMovesArray } from './getMovesArray';
 
 export const applyEndOfTurnHeldItem = (
 	pokemon: BattlePokemon,
-	addMessage: (x: string) => void
+	addMessage: (x: string) => void,
+	addMultipleMessages: (x: string[]) => void
 ): BattlePokemon => {
 	if (!pokemon.heldItemName || !hasEndOfTurnEffect(pokemon.heldItemName)) {
 		return pokemon;
+	}
+
+	if (
+		FlavourfullBerriesTable[pokemon.heldItemName] &&
+		pokemon.damage / pokemon.stats.hp > 0.5
+	) {
+		if (
+			FlavourfullBerriesTable[pokemon.heldItemName]?.includes(pokemon.nature)
+		) {
+			addMultipleMessages([
+				`${pokemon.data.name} healed itself with ${pokemon.heldItemName}`,
+				'But did not like the flavor',
+			]);
+			return applySecondaryAilmentToPokemon(
+				{
+					...applyItemToPokemon(pokemon, pokemon.heldItemName),
+					heldItemName: undefined,
+				},
+				'confusion',
+				(message) => addMessage(message.message)
+			);
+		} else {
+			addMessage(
+				`${pokemon.data.name} healed itself with ${pokemon.heldItemName}`
+			);
+			return {
+				...applyItemToPokemon(pokemon, pokemon.heldItemName),
+				heldItemName: undefined,
+			};
+		}
 	}
 	if (
 		HPHealTable[pokemon.heldItemName] &&
