@@ -15,13 +15,6 @@ export const applySecondaryAilmentToPokemon = (
 	healAmount?: number,
 	targetId?: string
 ): BattlePokemon => {
-	if (pokemon.secondaryAilments.some((t) => t.type === ailment)) {
-		return pokemon;
-	}
-	if (isKO(pokemon)) {
-		//already knocked out, no need to add ailments
-		return pokemon;
-	}
 	if (
 		ailment !== 'color-changed' &&
 		pokemon.secondaryAilments.some((s) => s.type === ailment)
@@ -29,6 +22,11 @@ export const applySecondaryAilmentToPokemon = (
 		//already has this ailment
 		return pokemon;
 	}
+	if (isKO(pokemon)) {
+		//already knocked out, no need to add ailments
+		return pokemon;
+	}
+
 	if (pokemon.ability === 'own-tempo' && ailment === 'confusion') {
 		addMessage({
 			message: `${pokemon.data.name} prevents confusion with own tempo`,

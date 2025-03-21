@@ -9,9 +9,13 @@ import { applyStatChangeToPokemon } from '../../../../../functions/applyStatChan
 import { calculateDamage } from '../../../../../functions/calculateDamage';
 import { changeMovePP } from '../../../../../functions/changeMovePP';
 import { determineMiss } from '../../../../../functions/determineMiss';
-import { getRandomIndex } from '../../../../../functions/filterTargets';
+import {
+	getRandomEntry,
+	getRandomIndex,
+} from '../../../../../functions/filterTargets';
 import { getActualTargetId } from '../../../../../functions/getActualTargetId';
 import { getMiddleOfThree } from '../../../../../functions/getMiddleOfThree';
+import { getMovesArray } from '../../../../../functions/getMovesArray';
 import { arePokemonOfOppositeGenders } from '../../../../../functions/getRivalryFactor';
 import { handleFlinching } from '../../../../../functions/handleFlinching';
 import { isKO } from '../../../../../functions/isKo';
@@ -159,6 +163,16 @@ export const handleAttack = ({
 			})
 		);
 		return;
+	}
+	if (move.name === 'conversion') {
+		const newType = getRandomEntry(getMovesArray(updatedAttacker)).data.type
+			.name;
+		updatedAttacker = applySecondaryAilmentToPokemon(
+			updatedAttacker,
+			'color-changed',
+			addMessage,
+			newType
+		);
 	}
 
 	//updated Target
