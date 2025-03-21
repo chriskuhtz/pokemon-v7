@@ -5,6 +5,8 @@ export const determineRunawaySuccess = (
 	team: BattlePokemon[],
 	opponents: BattlePokemon[]
 ) => {
+	const runAwayer = team.find((t) => t.ability === 'run-away');
+
 	const avgteamLevel =
 		team.reduce(
 			(sum, summand) => sum + calculateLevelData(summand.xp).level,
@@ -17,7 +19,7 @@ export const determineRunawaySuccess = (
 			0
 		) / opponents.length;
 
-	if (avgteamLevel > avgOpsLevel) {
+	if (runAwayer || avgteamLevel > avgOpsLevel) {
 		return true;
 	}
 	return (
