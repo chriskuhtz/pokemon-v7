@@ -122,7 +122,7 @@ export const extraFeatureCheckList: {
 	{ name: 'setting: faster days', handled: true },
 	{ name: 'MakePokemon function', handled: true },
 	{ name: 'display names for routes (Japanese colors)', handled: true },
-	{ name: 'pokemonSprite component' },
+	{ name: 'pokemonSprite component', handled: true },
 	{ name: 'itemsprite component' },
 	{ name: 'show evo readyness in overworld' },
 	{ name: 'apricorn trees' },
@@ -210,4 +210,5 @@ export const extraFeatureCheckList: {
 	{ name: 'animation state for flying pokemon' },
 	{ name: 'eggs?' },
 	{ name: 'opponent "learns" about volt-absorb etc ' },
+	{ name: 'fallback sprites (offical artwork)' },
 ];
