@@ -1,10 +1,10 @@
 export const campUpgradeNames = [
 	'bulletin_board',
-	'berry_farm',
 	'invite ghost expert morty',
 	'invite professor rowan',
 	'invite apricorn smith kurt',
 	'training field 1',
+	'berry_farm',
 	'second slot for farm',
 	'third slot for farm',
 	'fourth slot for farm',

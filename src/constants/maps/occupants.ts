@@ -88,6 +88,27 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		conditionFunction: () => true,
 	},
 	{
+		type: 'HONEY_TREE',
+		x: 23,
+		y: 25,
+		id: 'routeN1_honey_tree_1',
+		conditionFunction: () => true,
+	},
+	{
+		type: 'HONEY_TREE',
+		x: 27,
+		y: 27,
+		id: 'routeN1_honey_tree_2',
+		conditionFunction: () => true,
+	},
+	{
+		type: 'HONEY_TREE',
+		x: 25,
+		y: 22,
+		id: 'routeN1_honey_tree_3',
+		conditionFunction: () => true,
+	},
+	{
 		type: 'BUSH',
 		x: 49,
 		y: 25,
@@ -180,27 +201,6 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 		id: 'routeS1_blue_apricorn',
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'routeS1_blue_apricorn'),
-	},
-	{
-		type: 'HONEY_TREE',
-		x: 23,
-		y: 25,
-		id: 'routeS1_honey_tree_1',
-		conditionFunction: () => true,
-	},
-	{
-		type: 'HONEY_TREE',
-		x: 27,
-		y: 27,
-		id: 'routeS1_honey_tree_2',
-		conditionFunction: () => true,
-	},
-	{
-		type: 'HONEY_TREE',
-		x: 25,
-		y: 22,
-		id: 'routeS1_honey_tree_3',
-		conditionFunction: () => true,
 	},
 ];
 export const routeE1Occupants: OverworldMap['occupants'] = [
