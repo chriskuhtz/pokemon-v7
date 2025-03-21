@@ -284,7 +284,12 @@ export const calculateDamage = (
 		attack.data.type.name === 'fire'
 			? 1.5
 			: 1;
-
+	const torrentFactor =
+		attacker.ability === 'torrent' &&
+		attacker.damage > attacker.stats.hp * 0.66 &&
+		attack.data.type.name === 'water'
+			? 1.5
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -316,7 +321,8 @@ export const calculateDamage = (
 				gutsFactor *
 				marvelScaleFactor *
 				overgrowFactor *
-				blazeFactor
+				blazeFactor *
+				torrentFactor
 		),
 		1
 	);

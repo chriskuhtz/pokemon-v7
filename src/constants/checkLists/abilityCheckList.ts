@@ -358,7 +358,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/66/',
 		handled: true,
 	},
-	{ name: 'torrent', url: 'https://pokeapi.co/api/v2/ability/67/' },
+	{
+		name: 'torrent',
+		url: 'https://pokeapi.co/api/v2/ability/67/',
+		handled: true,
+	},
 	{ name: 'swarm', url: 'https://pokeapi.co/api/v2/ability/68/' },
 	{ name: 'rock-head', url: 'https://pokeapi.co/api/v2/ability/69/' },
 	{ name: 'drought', url: 'https://pokeapi.co/api/v2/ability/70/' },
@@ -733,6 +737,7 @@ export const abilityNames = [
 	'liquid-ooze',
 	'overgrow',
 	'blaze',
+	'torrent',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
