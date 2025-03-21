@@ -213,4 +213,5 @@ export const extraFeatureCheckList: {
 	{ name: 'opponent "learns" about volt-absorb etc ' },
 	{ name: 'fallback sprites (offical artwork)' },
 	{ name: 'switching (dont forget spider-web, magnet-pull etc)' },
+	{ name: 'trade evos' },
 ];

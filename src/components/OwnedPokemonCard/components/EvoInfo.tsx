@@ -68,15 +68,18 @@ const EvoButton = ({
 	ownedPokemon: OwnedPokemon;
 }) => {
 	const deets = evo.evolution_details[evo.evolution_details.length - 1];
-	const { min_happiness, item, min_level, time_of_day, held_item } = deets;
+	const { min_happiness, item, min_level, time_of_day, held_item, trigger } =
+		deets;
 	const itemName = item?.name as ItemType | undefined;
 	const { level } = calculateLevelData(ownedPokemon.xp);
 
+	const minLevelIncludingTrade =
+		min_level ?? trigger.name === 'trade' ? 30 : null;
 	const checks: string[] = useMemo(() => {
 		const res = [];
 
-		if (min_level && min_level > level) {
-			res.push(`Level ${min_level}`);
+		if (minLevelIncludingTrade && minLevelIncludingTrade > level) {
+			res.push(`Level ${minLevelIncludingTrade}`);
 		}
 		if (itemName && !inventory[itemName]) {
 			res.push(itemName);
@@ -97,8 +100,8 @@ const EvoButton = ({
 		inventory,
 		itemName,
 		level,
+		minLevelIncludingTrade,
 		min_happiness,
-		min_level,
 		ownedPokemon.happiness,
 		ownedPokemon.heldItemName,
 		time_of_day,

@@ -1,5 +1,6 @@
 import { useCallback, useContext, useState } from 'react';
 import { v4 } from 'uuid';
+import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { Sprite } from '../../components/Sprite/Sprite';
 import { battleSpriteSize, testPokemon } from '../../constants/gameData';
 import { PokemonName } from '../../constants/pokemonNames';
@@ -14,9 +15,8 @@ import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 
-const defaultStarters: PokemonName[] = ['skiddo', 'charmander', 'squirtle'];
+const defaultStarters: PokemonName[] = ['bulbasaur', 'charmander', 'squirtle'];
 const randomStarterOptions = [
 	getRandomPokemonName(),
 	getRandomPokemonName(),
