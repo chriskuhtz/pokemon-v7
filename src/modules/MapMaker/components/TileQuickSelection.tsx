@@ -23,6 +23,7 @@ export const TileQuickSelection = ({
 					}}
 				></div>
 			))}
+			<button onClick={() => setSelected({ type: 'eraser' })}>Eraser</button>
 		</div>
 	);
 };

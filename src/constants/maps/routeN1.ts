@@ -6740,7 +6740,7 @@ export const routeN1: OverworldMap = {
 				null,
 				null,
 				null,
-				{ yOffset: -384, xOffset: -112 },
+				{ yOffset: -32, xOffset: -96 },
 			],
 			[
 				{ yOffset: -384, xOffset: -112 },
@@ -6793,7 +6793,7 @@ export const routeN1: OverworldMap = {
 				null,
 				null,
 				null,
-				{ yOffset: -384, xOffset: -112 },
+				null,
 			],
 			[
 				{ yOffset: -384, xOffset: -112 },
@@ -6846,7 +6846,7 @@ export const routeN1: OverworldMap = {
 				null,
 				null,
 				null,
-				{ yOffset: -384, xOffset: -112 },
+				{ yOffset: -16, xOffset: -96 },
 			],
 			[
 				{ yOffset: -384, xOffset: -112 },

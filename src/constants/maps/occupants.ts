@@ -23,6 +23,20 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		id: 'routeN1_to_camp',
 	},
 	{
+		type: 'ON_STEP_PORTAL',
+		x: 50,
+		y: 25,
+		portal: {
+			mapId: 'routeN1E1',
+			y: 25,
+			x: 1,
+			orientation: 'RIGHT',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+		id: 'routeN1_to_routeN1E1',
+	},
+	{
 		type: 'ITEM',
 		x: 20,
 		y: 20,
