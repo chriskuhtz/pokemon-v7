@@ -94,6 +94,37 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		conditionFunction: () => true,
 	},
 ];
+export const routeN1E1Occupants: OverworldMap['occupants'] = [
+	{
+		type: 'ON_STEP_PORTAL',
+		x: 0,
+		y: 25,
+		portal: {
+			mapId: 'routeN1',
+			x: 49,
+			y: 25,
+			orientation: 'LEFT',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+		id: 'routeN1E1_to_routeE1',
+	},
+	{
+		type: 'ON_STEP_PORTAL',
+		x: 25,
+		y: 50,
+		portal: {
+			mapId: 'routeE1',
+			y: 0,
+			x: 25,
+			orientation: 'DOWN',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+		id: 'routeN1E1_to_routeE1',
+	},
+];
+
 export const routeS1Occupants: OverworldMap['occupants'] = [
 	{
 		type: 'HALLOWED_TOWER',
@@ -164,7 +195,7 @@ export const routeS1Occupants: OverworldMap['occupants'] = [
 		conditionFunction: () => true,
 	},
 ];
-export const routeN1E1Occupants: OverworldMap['occupants'] = [];
+
 const market1Inventory: Partial<Inventory> = {
 	'poke-ball': 1,
 	potion: 1,

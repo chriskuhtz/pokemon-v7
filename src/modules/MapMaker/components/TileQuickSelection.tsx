@@ -9,7 +9,14 @@ export const TileQuickSelection = ({
 	setSelected: (x: Tool) => void;
 }) => {
 	return (
-		<div style={{ display: 'flex', gap: '1rem', padding: '1rem' }}>
+		<div
+			style={{
+				display: 'flex',
+				gap: '1rem',
+				padding: '1rem',
+				alignItems: 'center',
+			}}
+		>
 			{' '}
 			<h4>Quick select:</h4>
 			{usedTiles.map((ut, i) => (
@@ -23,7 +30,12 @@ export const TileQuickSelection = ({
 					}}
 				></div>
 			))}
-			<button onClick={() => setSelected({ type: 'eraser' })}>Eraser</button>
+			<button
+				style={{ color: 'white', borderColor: 'white' }}
+				onClick={() => setSelected({ type: 'eraser' })}
+			>
+				Eraser
+			</button>
 		</div>
 	);
 };
