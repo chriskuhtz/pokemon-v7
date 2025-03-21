@@ -621,7 +621,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/160/',
 		handled: true,
 	},
-	{ name: 'tri-attack', url: 'https://pokeapi.co/api/v2/move/161/' },
+	{
+		name: 'tri-attack',
+		url: 'https://pokeapi.co/api/v2/move/161/',
+		handled: true,
+	},
 	{ name: 'super-fang', url: 'https://pokeapi.co/api/v2/move/162/' },
 	{ name: 'slash', url: 'https://pokeapi.co/api/v2/move/163/', handled: true },
 	{ name: 'substitute', url: 'https://pokeapi.co/api/v2/move/164/' },
@@ -656,7 +660,11 @@ export const movesCheckList: {
 	{ name: 'feint-attack', url: 'https://pokeapi.co/api/v2/move/185/' },
 	{ name: 'sweet-kiss', url: 'https://pokeapi.co/api/v2/move/186/' },
 	{ name: 'belly-drum', url: 'https://pokeapi.co/api/v2/move/187/' },
-	{ name: 'sludge-bomb', url: 'https://pokeapi.co/api/v2/move/188/' },
+	{
+		name: 'sludge-bomb',
+		url: 'https://pokeapi.co/api/v2/move/188/',
+		handled: true,
+	},
 	{ name: 'mud-slap', url: 'https://pokeapi.co/api/v2/move/189/' },
 	{ name: 'octazooka', url: 'https://pokeapi.co/api/v2/move/190/' },
 	{ name: 'spikes', url: 'https://pokeapi.co/api/v2/move/191/' },
@@ -1721,6 +1729,8 @@ export const handledMoves = [
 	'explosion',
 	'rest',
 	'conversion',
+	'sludge-bomb',
+	'tri-attack',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

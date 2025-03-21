@@ -1,5 +1,6 @@
 import { Message } from '../hooks/useMessageQueue';
 import {
+	AilmentType,
 	isPrimaryAilment,
 	isSecondaryAilment,
 	PrimaryAilment,
@@ -9,8 +10,28 @@ import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { applyPrimaryAilmentToPokemon } from './applyPrimaryAilmentToPokemon';
 import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
-import { getRandomIndex } from './filterTargets';
+import { getRandomEntry, getRandomIndex } from './filterTargets';
 import { getMovesArray } from './getMovesArray';
+
+export const getAilmentName = (
+	attack: BattleAttack
+): AilmentType | undefined => {
+	if (attack.name === 'toxic') {
+		return 'toxic';
+	}
+	if (attack.name === 'tri-attack') {
+		return getRandomEntry(['paralysis', 'freeze', 'burn']);
+	}
+
+	if (
+		isPrimaryAilment({ type: attack.data.meta.ailment.name }) ||
+		isSecondaryAilment({ type: attack.data.meta.ailment.name })
+	) {
+		return attack.data.meta.ailment.name as AilmentType;
+	}
+
+	return undefined;
+};
 
 export const applyAttackAilmentsToPokemon = (
 	target: BattlePokemon,
@@ -26,15 +47,14 @@ export const applyAttackAilmentsToPokemon = (
 		return { updatedTarget: target, updatedApplicator: applicator };
 	}
 	const random = Math.random() * 100;
-	const ailment =
-		attack.name === 'toxic' ? 'toxic' : attack.data.meta.ailment.name;
+	const ailment = getAilmentName(attack);
 	const sereneGraceFactor = applicator.ability === 'serene-grace' ? 2 : 1;
 	const chance =
 		attack.data.damage_class.name === 'status'
 			? 100
 			: attack.data.meta.ailment_chance * sereneGraceFactor;
 
-	if (random < chance) {
+	if (ailment && random < chance) {
 		if (isPrimaryAilment({ type: ailment })) {
 			return applyPrimaryAilmentToPokemon(
 				target,
