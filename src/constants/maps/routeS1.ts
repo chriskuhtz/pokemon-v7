@@ -1,10 +1,10 @@
 import { OverworldMap } from '../../interfaces/OverworldMap';
-import { routeS1Encounters } from './encounters';
+import { routeN1Encounters } from './encounters';
 import { routeS1Occupants } from './occupants';
 
 export const routeS1: OverworldMap = {
 	id: 'routeS1',
-	possibleEncounters: routeS1Encounters,
+	possibleEncounters: routeN1Encounters,
 	tileMap: {
 		baseLayer: [
 			[

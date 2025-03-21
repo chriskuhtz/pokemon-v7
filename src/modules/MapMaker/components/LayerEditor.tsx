@@ -10,6 +10,7 @@ export const LayerEditor = ({
 	changeRow,
 	changeColumn,
 	randomFill,
+	clear,
 }: {
 	layerName: LayerName;
 	layer: (TileIdentifier | null)[][];
@@ -25,6 +26,14 @@ export const LayerEditor = ({
 		<>
 			<h3>
 				{' '}
+				{layerName !== 'Base' && (
+					<button
+						style={{ color: 'white', marginRight: '1rem' }}
+						onClick={() => clear()}
+					>
+						clear
+					</button>
+				)}
 				<button
 					style={{ color: 'white', marginRight: '1rem' }}
 					onClick={() => randomFill(layerName, 0.1)}

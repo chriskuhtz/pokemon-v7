@@ -50,12 +50,12 @@ export const campUpgradePrices: Record<CampUpgrade, number> = {
 	'build combee hive': 20,
 	'build miltank farm': 50,
 	'access routeN1E1': 50,
-	'access routeE1': 75,
-	'access routeS1E1': 100,
-	'access routeS1': 125,
-	'access routeS1W1': 150,
-	'access routeW1': 175,
-	'access routeN1W1': 200,
+	'access routeE1': -1, //75,
+	'access routeS1E1': -1, //100,
+	'access routeS1': -1, //125,
+	'access routeS1W1': -1, //150,
+	'access routeW1': -1, //175,
+	'access routeN1W1': -1, //200,
 };
 export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	bulletin_board: [],

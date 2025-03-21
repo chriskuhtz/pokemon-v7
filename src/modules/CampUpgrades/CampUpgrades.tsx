@@ -44,7 +44,8 @@ export const CampUpgrades = ({
 		() =>
 			campUpgradeNames.filter(
 				(name) =>
-					campUpgradeConditions[name].length === 0 ||
+					(campUpgradePrices[name] > 0 &&
+						campUpgradeConditions[name].length === 0) ||
 					campUpgradeConditions[name].every(
 						(condition) => campUpgrades[condition]
 					)

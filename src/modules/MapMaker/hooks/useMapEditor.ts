@@ -308,44 +308,43 @@ export const useMapEditor = ({
 	};
 
 	const clearLayer = (layer: LayerName) => {
-		if (layer === 'Base') {
-			return;
-		}
-
 		setNewMap((newMap) => ({
 			...newMap,
-			encounterLayer:
-				layer === 'Encounter'
-					? newMap.tileMap.encounterLayer.map((row) => {
-							return row.map(() => {
-								return null;
-							});
-					  })
-					: newMap.tileMap.encounterLayer,
-			obstacleLayer:
-				layer === 'Obstacle'
-					? newMap.tileMap.obstacleLayer.map((row) => {
-							return row.map(() => {
-								return null;
-							});
-					  })
-					: newMap.tileMap.obstacleLayer,
-			decorationLayer:
-				layer === 'Decoration'
-					? newMap.tileMap.decorationLayer.map((row) => {
-							return row.map(() => {
-								return null;
-							});
-					  })
-					: newMap.tileMap.decorationLayer,
-			foregroundLayer:
-				layer === 'Decoration'
-					? newMap.tileMap.foregroundLayer.map((row) => {
-							return row.map(() => {
-								return null;
-							});
-					  })
-					: newMap.tileMap.foregroundLayer,
+			tileMap: {
+				baseLayer: newMap.tileMap.baseLayer,
+				encounterLayer:
+					layer === 'Encounter'
+						? newMap.tileMap.encounterLayer.map((row) => {
+								return row.map(() => {
+									return null;
+								});
+						  })
+						: newMap.tileMap.encounterLayer,
+				obstacleLayer:
+					layer === 'Obstacle'
+						? newMap.tileMap.obstacleLayer.map((row) => {
+								return row.map(() => {
+									return null;
+								});
+						  })
+						: newMap.tileMap.obstacleLayer,
+				decorationLayer:
+					layer === 'Decoration'
+						? newMap.tileMap.decorationLayer.map((row) => {
+								return row.map(() => {
+									return null;
+								});
+						  })
+						: newMap.tileMap.decorationLayer,
+				foregroundLayer:
+					layer === 'Decoration'
+						? newMap.tileMap.foregroundLayer.map((row) => {
+								return row.map(() => {
+									return null;
+								});
+						  })
+						: newMap.tileMap.foregroundLayer,
+			},
 		}));
 	};
 	const randomFill = (layer: LayerName, percentage: number) => {

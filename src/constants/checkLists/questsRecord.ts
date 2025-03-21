@@ -4,7 +4,7 @@ import { honeyPokemon } from '../../hooks/useHoneyTree';
 import { apricornTable } from '../../interfaces/Item';
 import { Quest } from '../../interfaces/Quest';
 import { routeN1 } from '../maps/routeN1';
-import { routeS1 } from '../maps/routeS1';
+import { routeN1E1 } from '../maps/routeN1E1';
 import { pokemonNames } from '../pokemonNames';
 
 export const questNames = [
@@ -21,15 +21,15 @@ export const questNames = [
 	'catch all evening pokemon from routeN1',
 	'catch all nighttime pokemon from routeN1',
 	'catch a ultra rare pokemon on routeN1',
-	'catch a morning pokemon from routeS1',
-	'catch a daytime pokemon from routeS1',
-	'catch a evening pokemon from routeS1',
-	'catch a nighttime pokemon from routeS1',
-	'catch all morning pokemon from routeS1',
-	'catch all daytime pokemon from routeS1',
-	'catch all evening pokemon from routeS1',
-	'catch all nighttime pokemon from routeS1',
-	'catch a ultra rare pokemon on routeS1',
+	'catch a morning pokemon from routeN1E1',
+	'catch a daytime pokemon from routeN1E1',
+	'catch a evening pokemon from routeN1E1',
+	'catch a nighttime pokemon from routeN1E1',
+	'catch all morning pokemon from routeN1E1',
+	'catch all daytime pokemon from routeN1E1',
+	'catch all evening pokemon from routeN1E1',
+	'catch all nighttime pokemon from routeN1E1',
+	'catch a ultra rare pokemon on routeN1E1',
 	'catch a pokemon orginally found in kanto',
 	'catch a pokemon orginally found in johto',
 	'catch a pokemon orginally found in hoenn',
@@ -220,149 +220,149 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		availableAfter: 'catch a nighttime pokemon from routeN1',
 	},
-	'catch a morning pokemon from routeS1': {
+	'catch a morning pokemon from routeN1E1': {
 		rewardItems: { 'sun-stone': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
-				routeS1.possibleEncounters.MORNING.some((e) => e.name === p.name)
+				routeN1E1.possibleEncounters.MORNING.some((e) => e.name === p.name)
 			);
 		},
 		targetPokemon: [
-			...new Set(routeS1.possibleEncounters.MORNING.map((p) => p.name)),
+			...new Set(routeN1E1.possibleEncounters.MORNING.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		requiredUpgrade: 'access routeS1',
+		requiredUpgrade: 'access routeN1E1',
 	},
-	'catch a daytime pokemon from routeS1': {
+	'catch a daytime pokemon from routeN1E1': {
 		rewardItems: { 'fire-stone': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
-				routeS1.possibleEncounters.DAY.some((e) => e.name === p.name)
+				routeN1E1.possibleEncounters.DAY.some((e) => e.name === p.name)
 			);
 		},
 		targetPokemon: [
-			...new Set(routeS1.possibleEncounters.DAY.map((p) => p.name)),
+			...new Set(routeN1E1.possibleEncounters.DAY.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		requiredUpgrade: 'access routeS1',
+		requiredUpgrade: 'access routeN1E1',
 	},
-	'catch a evening pokemon from routeS1': {
+	'catch a evening pokemon from routeN1E1': {
 		rewardItems: { 'dusk-stone': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
-				routeS1.possibleEncounters.EVENING.some((e) => e.name === p.name)
+				routeN1E1.possibleEncounters.EVENING.some((e) => e.name === p.name)
 			);
 		},
 		targetPokemon: [
-			...new Set(routeS1.possibleEncounters.EVENING.map((p) => p.name)),
+			...new Set(routeN1E1.possibleEncounters.EVENING.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		requiredUpgrade: 'access routeS1',
+		requiredUpgrade: 'access routeN1E1',
 	},
-	'catch a nighttime pokemon from routeS1': {
+	'catch a nighttime pokemon from routeN1E1': {
 		rewardItems: { 'moon-stone': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
-				routeS1.possibleEncounters.NIGHT.some((e) => e.name === p.name)
+				routeN1E1.possibleEncounters.NIGHT.some((e) => e.name === p.name)
 			);
 		},
 		targetPokemon: [
-			...new Set(routeS1.possibleEncounters.NIGHT.map((p) => p.name)),
+			...new Set(routeN1E1.possibleEncounters.NIGHT.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		requiredUpgrade: 'access routeS1',
+		requiredUpgrade: 'access routeN1E1',
 	},
-	'catch a ultra rare pokemon on routeS1': {
+	'catch a ultra rare pokemon on routeN1E1': {
 		rewardItems: { 'berry-juice': 5 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
 				[
-					...routeS1.possibleEncounters.NIGHT,
-					...routeS1.possibleEncounters.MORNING,
-					...routeS1.possibleEncounters.DAY,
-					...routeS1.possibleEncounters.EVENING,
+					...routeN1E1.possibleEncounters.NIGHT,
+					...routeN1E1.possibleEncounters.MORNING,
+					...routeN1E1.possibleEncounters.DAY,
+					...routeN1E1.possibleEncounters.EVENING,
 				].some((e) => e.rarity === 'ultra-rare' && e.name === p.name)
 			);
 		},
 		targetPokemon: [
 			...new Set(
 				[
-					...routeS1.possibleEncounters.NIGHT,
-					...routeS1.possibleEncounters.MORNING,
-					...routeS1.possibleEncounters.DAY,
-					...routeS1.possibleEncounters.EVENING,
+					...routeN1E1.possibleEncounters.NIGHT,
+					...routeN1E1.possibleEncounters.MORNING,
+					...routeN1E1.possibleEncounters.DAY,
+					...routeN1E1.possibleEncounters.EVENING,
 				]
 					.filter((p) => p.rarity === 'ultra-rare')
 					.map((p) => p.name)
 			),
 		],
 		kind: 'BULLETIN',
-		requiredUpgrade: 'access routeS1',
+		requiredUpgrade: 'access routeN1E1',
 	},
-	'catch all morning pokemon from routeS1': {
+	'catch all morning pokemon from routeN1E1': {
 		rewardItems: { 'hyper-potion': 2 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return routeS1.possibleEncounters.EVENING.every((e) =>
+			return routeN1E1.possibleEncounters.EVENING.every((e) =>
 				s.pokemon.some((p) => p.name === e.name)
 			);
 		},
 		targetPokemon: [
-			...new Set(routeS1.possibleEncounters.MORNING.map((p) => p.name)),
+			...new Set(routeN1E1.possibleEncounters.MORNING.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		availableAfter: 'catch a morning pokemon from routeS1',
-		requiredUpgrade: 'access routeS1',
+		availableAfter: 'catch a morning pokemon from routeN1E1',
+		requiredUpgrade: 'access routeN1E1',
 	},
-	'catch all daytime pokemon from routeS1': {
+	'catch all daytime pokemon from routeN1E1': {
 		rewardItems: { honey: 10 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return routeS1.possibleEncounters.DAY.every((e) =>
+			return routeN1E1.possibleEncounters.DAY.every((e) =>
 				s.pokemon.some((p) => p.name === e.name)
 			);
 		},
 		targetPokemon: [
-			...new Set(routeS1.possibleEncounters.DAY.map((p) => p.name)),
+			...new Set(routeN1E1.possibleEncounters.DAY.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		availableAfter: 'catch a daytime pokemon from routeS1',
-		requiredUpgrade: 'access routeS1',
+		availableAfter: 'catch a daytime pokemon from routeN1E1',
+		requiredUpgrade: 'access routeN1E1',
 	},
-	'catch all evening pokemon from routeS1': {
+	'catch all evening pokemon from routeN1E1': {
 		rewardItems: { 'full-heal': 5 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return routeS1.possibleEncounters.MORNING.every((e) =>
+			return routeN1E1.possibleEncounters.MORNING.every((e) =>
 				s.pokemon.some((p) => p.name === e.name)
 			);
 		},
 		targetPokemon: [
-			...new Set(routeS1.possibleEncounters.EVENING.map((p) => p.name)),
+			...new Set(routeN1E1.possibleEncounters.EVENING.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		availableAfter: 'catch a evening pokemon from routeS1',
-		requiredUpgrade: 'access routeS1',
+		availableAfter: 'catch a evening pokemon from routeN1E1',
+		requiredUpgrade: 'access routeN1E1',
 	},
-	'catch all nighttime pokemon from routeS1': {
+	'catch all nighttime pokemon from routeN1E1': {
 		rewardItems: { 'odd-keystone': 1 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return routeS1.possibleEncounters.NIGHT.every((e) =>
+			return routeN1E1.possibleEncounters.NIGHT.every((e) =>
 				s.pokemon.some((p) => p.name === e.name)
 			);
 		},
 		targetPokemon: [
-			...new Set(routeS1.possibleEncounters.NIGHT.map((p) => p.name)),
+			...new Set(routeN1E1.possibleEncounters.NIGHT.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		availableAfter: 'catch a nighttime pokemon from routeS1',
-		requiredUpgrade: 'access routeS1',
+		availableAfter: 'catch a nighttime pokemon from routeN1E1',
+		requiredUpgrade: 'access routeN1E1',
 	},
 	'catch all honeytree pokemon': {
 		rewardItems: { 'sun-stone': 2, 'leaf-stone': 2, 'berry-juice': 5 },
