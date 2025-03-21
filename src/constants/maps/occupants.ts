@@ -33,7 +33,7 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 			orientation: 'RIGHT',
 			forwardFoot: 'CENTER1',
 		},
-		conditionFunction: () => true,
+		conditionFunction: (s) => s.campUpgrades['access routeN1E1'],
 		id: 'routeN1_to_routeN1E1',
 	},
 	{
@@ -93,6 +93,15 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		id: 'routeN1_honey_tree',
 		conditionFunction: () => true,
 	},
+	{
+		type: 'SIGN',
+		dialogue: ['Route N1 E1', 'No Access for inexperienced Researchers'],
+		x: 50,
+		y: 25,
+		approachDirection: 'RIGHT',
+		id: 'routeN1E1_blocker',
+		conditionFunction: (s) => !s.campUpgrades['access routeN1E1'],
+	},
 ];
 export const routeN1E1Occupants: OverworldMap['occupants'] = [
 	{
@@ -134,8 +143,8 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 	},
 	{
 		type: 'HALLOWED_TOWER',
-		x: 47,
-		y: 40,
+		x: 2,
+		y: 31,
 		id: 'hallowed_tower',
 		conditionFunction: () => true,
 	},
@@ -162,7 +171,7 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 	{
 		type: 'ITEM',
 		x: 33,
-		y: 7,
+		y: 5,
 		item: 'red-apricorn',
 		amount: 5,
 		id: 'routeS1_red_apricorn',
@@ -181,22 +190,22 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 	},
 	{
 		type: 'HONEY_TREE',
-		x: 10,
-		y: 5,
+		x: 23,
+		y: 25,
 		id: 'routeS1_honey_tree_1',
 		conditionFunction: () => true,
 	},
 	{
 		type: 'HONEY_TREE',
-		x: 8,
-		y: 7,
+		x: 27,
+		y: 27,
 		id: 'routeS1_honey_tree_2',
 		conditionFunction: () => true,
 	},
 	{
 		type: 'HONEY_TREE',
-		x: 12,
-		y: 6,
+		x: 25,
+		y: 22,
 		id: 'routeS1_honey_tree_3',
 		conditionFunction: () => true,
 	},
