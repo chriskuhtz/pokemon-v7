@@ -6,15 +6,25 @@ import { PokemonType } from '../interfaces/PokemonType';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { isKO } from './isKo';
 
-export const applySecondaryAilmentToPokemon = (
-	pokemon: BattlePokemon,
-	ailment: SecondaryAilment['type'],
-	addMessage: (x: Message) => void,
-	newType?: PokemonType,
-	move?: MoveName,
-	healAmount?: number,
-	targetId?: string
-): BattlePokemon => {
+export const applySecondaryAilmentToPokemon = ({
+	pokemon,
+	addMessage,
+	ailment,
+	newType,
+	move,
+	healAmount,
+	targetId,
+	by,
+}: {
+	pokemon: BattlePokemon;
+	ailment: SecondaryAilment['type'];
+	addMessage: (x: Message) => void;
+	newType?: PokemonType;
+	move?: MoveName;
+	healAmount?: number;
+	targetId?: string;
+	by?: string;
+}): BattlePokemon => {
 	if (
 		ailment !== 'color-changed' &&
 		pokemon.secondaryAilments.some((s) => s.type === ailment)
@@ -186,6 +196,19 @@ export const applySecondaryAilmentToPokemon = (
 				{
 					type: 'infatuation',
 					duration: 9000,
+					targetId,
+				},
+			],
+		};
+	}
+	if (ailment === 'mind-read' && by) {
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'mind-read',
+					duration: 2,
 					targetId,
 				},
 			],

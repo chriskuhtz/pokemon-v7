@@ -165,6 +165,7 @@ export const handleAttack = ({
 		);
 		return;
 	}
+
 	if (move.name === 'haze') {
 		addMessage({
 			message: `${attacker.name} removed all stat changes with haze`,
@@ -187,12 +188,12 @@ export const handleAttack = ({
 	if (move.name === 'conversion') {
 		const newType = getRandomEntry(getMovesArray(updatedAttacker)).data.type
 			.name;
-		updatedAttacker = applySecondaryAilmentToPokemon(
-			updatedAttacker,
-			'color-changed',
+		updatedAttacker = applySecondaryAilmentToPokemon({
+			pokemon: updatedAttacker,
+			ailment: 'color-changed',
 			addMessage,
-			newType
-		);
+			newType,
+		});
 	}
 
 	//updated Target
@@ -240,24 +241,33 @@ export const handleAttack = ({
 		updatedTarget = { ...updatedTarget, heldItemName: undefined };
 	}
 
+	if (move.name === 'mind-reader') {
+		updatedTarget = applySecondaryAilmentToPokemon({
+			pokemon: updatedTarget,
+			addMessage,
+			ailment: 'mind-read',
+			by: updatedAttacker.id,
+		});
+	}
+
 	//UPDATES
 
 	//ATTACKER
 	//apply rage
 	if (move.name === 'rage') {
-		updatedAttacker = applySecondaryAilmentToPokemon(
-			updatedAttacker,
-			'raging',
-			addMessage
-		);
+		updatedAttacker = applySecondaryAilmentToPokemon({
+			pokemon: updatedAttacker,
+			ailment: 'raging',
+			addMessage,
+		});
 	}
 	//apply focus
 	if (move.name === 'focus-energy') {
-		updatedAttacker = applySecondaryAilmentToPokemon(
-			updatedAttacker,
-			'focused',
-			addMessage
-		);
+		updatedAttacker = applySecondaryAilmentToPokemon({
+			pokemon: updatedAttacker,
+			ailment: 'focused',
+			addMessage,
+		});
 	}
 	//rest
 	if (move.name === 'rest') {
@@ -282,11 +292,11 @@ export const handleAttack = ({
 		updatedAttacker.moveQueue.length === 1
 	) {
 		addMessage({ message: `${updatedAttacker.data.name} stopped thrashing` });
-		updatedAttacker = applySecondaryAilmentToPokemon(
-			updatedAttacker,
-			'confusion',
-			addMessage
-		);
+		updatedAttacker = applySecondaryAilmentToPokemon({
+			pokemon: updatedAttacker,
+			ailment: 'confusion',
+			addMessage,
+		});
 	}
 
 	//update moveQueue
@@ -312,14 +322,12 @@ export const handleAttack = ({
 	}
 	//leech on
 	if (move.name === 'leech-seed') {
-		updatedAttacker = applySecondaryAilmentToPokemon(
-			updatedAttacker,
-			'leeching-on',
+		updatedAttacker = applySecondaryAilmentToPokemon({
+			pokemon: updatedAttacker,
+			ailment: 'leeching-on',
 			addMessage,
-			undefined,
-			undefined,
-			updatedTarget.stats.hp * LEECH_DAMAGE_FACTOR
-		);
+			healAmount: updatedTarget.stats.hp * LEECH_DAMAGE_FACTOR,
+		});
 	}
 	//apply stat changes
 	if (selfTargeting) {
@@ -382,15 +390,12 @@ export const handleAttack = ({
 		contactMoves.includes(move.name) &&
 		Math.random() < CUTE_CHARM_CHANCE
 	) {
-		updatedAttacker = applySecondaryAilmentToPokemon(
-			updatedAttacker,
-			'infatuation',
+		updatedAttacker = applySecondaryAilmentToPokemon({
+			pokemon: updatedAttacker,
+			ailment: 'infatuation',
 			addMessage,
-			undefined,
-			undefined,
-			undefined,
-			updatedTarget.id
-		);
+			targetId: updatedTarget.id,
+		});
 	}
 	//check for poison-point
 	if (
@@ -587,11 +592,11 @@ export const handleAttack = ({
 			target.ability === 'flash-fire' &&
 			move.data.type.name === 'fire'
 		) {
-			updatedTarget = applySecondaryAilmentToPokemon(
-				updatedTarget,
-				'flash-fire',
-				addMessage
-			);
+			updatedTarget = applySecondaryAilmentToPokemon({
+				pokemon: updatedTarget,
+				ailment: 'flash-fire',
+				addMessage,
+			});
 		}
 		//check color change
 		if (
@@ -599,12 +604,12 @@ export const handleAttack = ({
 			updatedTarget.damage > target.damage &&
 			updatedTarget.ability === 'color-change'
 		) {
-			updatedTarget = applySecondaryAilmentToPokemon(
-				updatedTarget,
-				'color-changed',
+			updatedTarget = applySecondaryAilmentToPokemon({
+				pokemon: updatedTarget,
+				ailment: 'color-changed',
 				addMessage,
-				move.data.type.name
-			);
+				newType: move.data.type.name,
+			});
 		}
 	}
 	setPokemon((pokemon) =>

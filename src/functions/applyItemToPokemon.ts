@@ -260,18 +260,18 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 			) as T;
 		}
 		if (item === 'guard-spec') {
-			return applySecondaryAilmentToPokemon(
-				pokemon,
-				'guard-spec',
-				addMessage ? addMessage : () => {}
-			) as T;
+			return applySecondaryAilmentToPokemon({
+				pokemon: pokemon,
+				ailment: 'guard-spec',
+				addMessage: addMessage ? addMessage : () => {},
+			}) as T;
 		}
 		if (item === 'dire-hit') {
-			return applySecondaryAilmentToPokemon(
-				pokemon,
-				'dire-hit',
-				addMessage ? addMessage : () => {}
-			) as T;
+			return applySecondaryAilmentToPokemon({
+				pokemon: pokemon,
+				ailment: 'dire-hit',
+				addMessage: addMessage ? addMessage : () => {},
+			}) as T;
 		}
 	}
 

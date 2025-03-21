@@ -71,23 +71,22 @@ export const applyAttackAilmentsToPokemon = (
 				return { updatedApplicator: applicator, updatedTarget: target };
 			}
 			return {
-				updatedTarget: applySecondaryAilmentToPokemon(
-					target,
-					ailment as SecondaryAilment['type'],
+				updatedTarget: applySecondaryAilmentToPokemon({
+					pokemon: target,
+					ailment: ailment as SecondaryAilment['type'],
 					addMessage,
-					undefined,
-					randomMoveName
-				),
+					move: randomMoveName,
+				}),
 				updatedApplicator: applicator,
 			};
 		}
 		if (isSecondaryAilment({ type: ailment })) {
 			return {
-				updatedTarget: applySecondaryAilmentToPokemon(
-					target,
-					ailment as SecondaryAilment['type'],
-					addMessage
-				),
+				updatedTarget: applySecondaryAilmentToPokemon({
+					pokemon: target,
+					ailment: ailment as SecondaryAilment['type'],
+					addMessage,
+				}),
 				updatedApplicator: applicator,
 			};
 		}

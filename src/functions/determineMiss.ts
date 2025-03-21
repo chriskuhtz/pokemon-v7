@@ -32,6 +32,16 @@ export const determineMiss = (
 	}
 
 	if (
+		target.secondaryAilments.some(
+			(ail) => ail.type === 'mind-read' && ail.by === attacker.id
+		) &&
+		!ohkoMoves.includes(attack.name) &&
+		!targetIsFlying &&
+		!targetIsUnderground
+	) {
+		return { miss: false };
+	}
+	if (
 		target.ability === 'soundproof' &&
 		soundBasedMoves.includes(attack.name)
 	) {

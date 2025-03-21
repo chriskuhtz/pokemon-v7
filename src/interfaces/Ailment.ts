@@ -35,6 +35,7 @@ const secondaryAilments = [
 	'disable',
 	'raging',
 	'focused',
+	'mind-read',
 ] as const;
 
 export type SecondaryAilmentType = (typeof secondaryAilments)[number];
@@ -45,6 +46,7 @@ export interface SecondaryAilment {
 	move?: MoveName; // For Disable
 	healAmount?: number; // for leech seed
 	targetId?: string;
+	by?: string; // for mind read
 }
 
 export function isSecondaryAilment(x: { type: string }): x is SecondaryAilment {

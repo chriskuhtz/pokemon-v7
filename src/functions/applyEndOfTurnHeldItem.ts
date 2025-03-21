@@ -28,14 +28,14 @@ export const applyEndOfTurnHeldItem = (
 				`${pokemon.data.name} healed itself with ${pokemon.heldItemName}`,
 				'But did not like the flavor',
 			]);
-			return applySecondaryAilmentToPokemon(
-				{
+			return applySecondaryAilmentToPokemon({
+				pokemon: {
 					...applyItemToPokemon(pokemon, pokemon.heldItemName),
 					heldItemName: undefined,
 				},
-				'confusion',
-				(message) => addMessage(message.message)
-			);
+				ailment: 'confusion',
+				addMessage: (message) => addMessage(message.message),
+			});
 		} else {
 			addMessage(
 				`${pokemon.data.name} healed itself with ${pokemon.heldItemName}`
