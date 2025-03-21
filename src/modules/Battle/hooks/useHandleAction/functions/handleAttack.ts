@@ -204,6 +204,21 @@ export const handleAttack = ({
 		addMessage({ message: `Coins scattered everywhere` });
 		scatterCoins();
 	}
+	if (
+		move.name === 'thief' &&
+		updatedTarget.heldItemName &&
+		!updatedAttacker.heldItemName
+	) {
+		addMessage({
+			message: `${updatedAttacker.name} stole a ${updatedTarget.heldItemName} from ${updatedTarget.name}`,
+		});
+
+		updatedAttacker = {
+			...updatedAttacker,
+			heldItemName: updatedTarget.heldItemName,
+		};
+		updatedTarget = { ...updatedTarget, heldItemName: undefined };
+	}
 
 	//UPDATES
 
