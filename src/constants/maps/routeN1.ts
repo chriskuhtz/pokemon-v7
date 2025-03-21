@@ -9497,7 +9497,7 @@ export const routeN1: OverworldMap = {
 				null,
 				null,
 				null,
-				{ yOffset: 0, xOffset: -64 },
+				null,
 				null,
 			],
 			[
