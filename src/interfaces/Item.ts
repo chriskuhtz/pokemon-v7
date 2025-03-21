@@ -129,6 +129,7 @@ export const heldItems = [
 	'oval-stone',
 	'adamant-orb',
 	'lustrous-orb',
+	'bright-powder',
 ] as const;
 
 export const valuables = [

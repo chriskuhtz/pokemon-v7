@@ -62,6 +62,7 @@ export const determineMiss = (
 
 	const compoundEyesFactor = getCompoundEyesFactor(attacker, attack);
 	const hustleFactor = getHustleFactor(attacker, attack);
+	const brightPowderFactor = target.heldItemName === 'bright-powder' ? 0.9 : 1;
 
 	const attackerAccuracy =
 		calculateModifiedStat(
@@ -69,7 +70,8 @@ export const determineMiss = (
 			attacker.statBoosts.accuracy
 		) *
 		compoundEyesFactor *
-		hustleFactor;
+		hustleFactor *
+		brightPowderFactor;
 
 	const ratio = attackerAccuracy / targetEvasion;
 

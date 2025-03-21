@@ -191,6 +191,7 @@ const battleItemMarket: Partial<Inventory> = {
 	...Object.fromEntries(xItemTypes.map((item) => [item, 1])),
 	...Object.fromEntries(evBoostItemTypes.map((item) => [item, 1])),
 	...Object.fromEntries(ppRestorationItemTypes.map((item) => [item, 1])),
+	'bright-powder': 1,
 };
 
 const merchants: Occupant[] = [
