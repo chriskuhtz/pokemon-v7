@@ -209,4 +209,5 @@ export const extraFeatureCheckList: {
 	{ name: 'animation state for flying pokemon' },
 	{ name: 'eggs?' },
 	{ name: 'opponent "learns" about volt-absorb etc ' },
+	{ name: 'display names for routes (Japanese colors)' },
 ];
