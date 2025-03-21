@@ -1,9 +1,3 @@
-import { Inventory } from '../../interfaces/Inventory';
-import {
-	evBoostItemTypes,
-	ppRestorationItemTypes,
-	xItemTypes,
-} from '../../interfaces/Item';
 import { Occupant, OverworldMap } from '../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
 
@@ -376,93 +370,6 @@ export const routeN1W1Occupants: OverworldMap['occupants'] = [
 	},
 ];
 
-const market1Inventory: Partial<Inventory> = {
-	'poke-ball': 1,
-	potion: 1,
-	antidote: 1,
-	repel: 1,
-};
-const market2Inventory: Partial<Inventory> = {
-	...market1Inventory,
-	'great-ball': 1,
-	'paralyze-heal': 1,
-	'burn-heal': 1,
-	'super-potion': 1,
-	'ice-heal': 1,
-	awakening: 1,
-};
-const market3Inventory: Partial<Inventory> = {
-	...market2Inventory,
-	'ultra-ball': 1,
-	'full-heal': 1,
-	'hyper-potion': 1,
-	'super-repel': 1,
-};
-const battleItemMarket: Partial<Inventory> = {
-	...Object.fromEntries(xItemTypes.map((item) => [item, 1])),
-	...Object.fromEntries(evBoostItemTypes.map((item) => [item, 1])),
-	...Object.fromEntries(ppRestorationItemTypes.map((item) => [item, 1])),
-	'bright-powder': 1,
-};
-
-const merchants: Occupant[] = [
-	{
-		type: 'MERCHANT',
-		id: 'market_1',
-		x: 13,
-		y: 1,
-		orientation: 'DOWN',
-		sprite: SpriteEnum.clerkMale,
-		dialogue: ['If we get more famous, we can get more items delivered'],
-		inventory: { 'poke-ball': 1, potion: 1, antidote: 1, repel: 1 },
-		conditionFunction: (s) =>
-			s.campUpgrades.market_1 &&
-			!s.campUpgrades.market_2 &&
-			!s.campUpgrades.market_3,
-	},
-	{
-		type: 'MERCHANT',
-		id: 'market_2',
-		x: 13,
-		y: 1,
-		orientation: 'DOWN',
-		sprite: SpriteEnum.clerkMale,
-		dialogue: ['Thanks to your hard work, we get better deliveries'],
-		inventory: market2Inventory,
-		conditionFunction: (s) =>
-			s.campUpgrades.market_1 &&
-			s.campUpgrades.market_2 &&
-			!s.campUpgrades.market_3,
-	},
-	{
-		type: 'MERCHANT',
-		id: 'market_3',
-		x: 13,
-		y: 1,
-		orientation: 'DOWN',
-		sprite: SpriteEnum.clerkMale,
-		dialogue: [
-			'Keep it up and we will have a better selection than celadon city',
-		],
-		inventory: market3Inventory,
-		conditionFunction: (s) =>
-			s.campUpgrades.market_1 &&
-			s.campUpgrades.market_2 &&
-			s.campUpgrades.market_3,
-	},
-	{
-		type: 'MERCHANT',
-		id: 'battle_item_market',
-		x: 14,
-		y: 1,
-		orientation: 'DOWN',
-		sprite: SpriteEnum.clerkFemale,
-		dialogue: ['My Market specialises in battle items'],
-		inventory: battleItemMarket,
-		conditionFunction: (s) => s.campUpgrades.battle_item_market,
-	},
-];
-
 const rowanLine: Occupant[] = [
 	{
 		type: 'NPC',
@@ -753,6 +660,35 @@ const miltankFarm: Occupant[] = [
 		conditionFunction: (s) => s.campUpgrades['build miltank farm'],
 	},
 ];
+const zigzagoonForagers: Occupant[] = [
+	{
+		type: 'NPC',
+		unhandledMessage: [
+			'My zigzagoon loves moomoo milk',
+			'if you give him some',
+			'He will zoom off',
+			'and come back with an item',
+			'I dont ask where he finds them',
+		],
+		gifts: { 'moomoo-milk': 3 },
+		x: 14,
+		y: 1,
+		orientation: 'DOWN',
+		sprite: SpriteEnum.bugCatcher,
+		id: 'zigzagoon trainer',
+		conditionFunction: (s) => s.campUpgrades['train zigzagoon foragers'],
+	},
+	{
+		type: 'ZIGZAGOON_FORAGER',
+		dexId: 263,
+		dialogue: ['Zig Zig'],
+		x: 13,
+		y: 1,
+		orientation: 'DOWN',
+		id: 'ziggie',
+		conditionFunction: (s) => s.campUpgrades['train zigzagoon foragers'],
+	},
+];
 
 export const campOccupants: OverworldMap['occupants'] = [
 	{
@@ -879,9 +815,9 @@ export const campOccupants: OverworldMap['occupants'] = [
 		],
 		conditionFunction: (s) => s.campUpgrades['invite apricorn smith kurt'],
 	},
-	...merchants,
 	...trainingField,
 	...mortyLine,
 	...rowanLine,
 	...miltankFarm,
+	...zigzagoonForagers,
 ];

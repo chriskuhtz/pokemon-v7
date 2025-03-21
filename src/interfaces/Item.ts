@@ -371,11 +371,12 @@ export const getRandomItem = () => {
 
 export const pickupTable: ItemType[] = [
 	...berries,
-	...berries,
-	...berries,
-	'berry-juice',
-	'berry-juice',
 	...apricorns,
-	...apricorns,
+	'berry-juice',
+	'old-gateau',
+	'energy-powder',
+	'energy-root',
+	'lava-cookie',
+	'revival-herb',
 	'rare-candy',
 ];

@@ -209,4 +209,5 @@ export const extraFeatureCheckList: {
 	{ name: 'Pokemon Flyer Certification' },
 	{ name: 'standard isHandled conditionFunction' },
 	{ name: 'github issue reporting' },
+	{ name: 'limit zigzagoon foraging' },
 ];

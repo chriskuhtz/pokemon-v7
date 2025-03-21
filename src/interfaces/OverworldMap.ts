@@ -36,6 +36,7 @@ export const OCCUPANT_TYPES = [
 	'COMBEE_HIVE',
 	'POKEMON',
 	'LEDGE',
+	'ZIGZAGOON_FORAGER',
 ] as const;
 export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
@@ -165,8 +166,8 @@ export interface OverworldPokemon extends BaseOccupant {
 	dialogue: string[];
 	orientation: CharacterOrientation;
 }
-export interface OverworldPokemon extends BaseOccupant {
-	type: 'POKEMON';
+export interface ZigzagoonForager extends BaseOccupant {
+	type: 'ZIGZAGOON_FORAGER';
 	dexId: number;
 	dialogue: string[];
 	orientation: CharacterOrientation;
@@ -200,7 +201,8 @@ export type Occupant =
 	| CombeeHive
 	| OverworldPokemon
 	| MiltankFarmer
-	| Ledge;
+	| Ledge
+	| ZigzagoonForager;
 
 export interface OverworldEncounter {
 	name: PokemonName;

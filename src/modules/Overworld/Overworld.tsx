@@ -11,6 +11,7 @@ import { useHallowedTower } from '../../hooks/useHallowedTower';
 import { useHoneyTree } from '../../hooks/useHoneyTree';
 import { Message } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
+import { useZigzagoonForagers } from '../../hooks/useZigzagoonForagers';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
 import { Occupant } from '../../interfaces/OverworldMap';
@@ -93,6 +94,7 @@ export const Overworld = ({
 	const interactWithCombeeHive = useCombeeHive();
 	const interactWithBush = useMachete();
 	const interactWithLedge = useJumpDownLedge();
+	const interactWithZigzagoonForager = useZigzagoonForagers();
 	const addEncounterMessage = useStartEncounter();
 	const encounterRateModifier = useEncounterRateModifier();
 
@@ -134,6 +136,7 @@ export const Overworld = ({
 				interactWithCombeeHive,
 				interactWithBush,
 				interactWithLedge,
+				interactWithZigzagoonForager,
 				goToCampMenu: () =>
 					navigateAwayFromOverworldReducer('CAMP_UPGRADES', stepsTaken),
 				goToBulletinBoard: () =>
@@ -158,6 +161,7 @@ export const Overworld = ({
 			interactWithHallowedTower,
 			interactWithHoneyTree,
 			interactWithLedge,
+			interactWithZigzagoonForager,
 			navigateAwayFromOverworldReducer,
 			playerLocation,
 			rotateOccupant,

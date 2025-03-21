@@ -25,6 +25,8 @@ export const shouldRotate = (t: OccupantType) =>
 		'TRAINING_FIELD_MASTER',
 		'BERRY_FARMER',
 		'MILTANK_FARMER',
+		'POKEMON',
+		'ZIGZAGOON_FORAGER',
 	].includes(t);
 export const interactWithFunction = ({
 	occ,
@@ -43,6 +45,7 @@ export const interactWithFunction = ({
 	interactWithHallowedTower,
 	interactWithBush,
 	interactWithLedge,
+	interactWithZigzagoonForager,
 	goToCampMenu,
 	goToBulletinBoard,
 	goToApricornSmith,
@@ -67,6 +70,7 @@ export const interactWithFunction = ({
 	interactWithCombeeHive: () => void;
 	interactWithBush: (x: OverworldBush) => void;
 	interactWithLedge: (x: Ledge) => void;
+	interactWithZigzagoonForager: () => void;
 	goToCampMenu: () => void;
 	goToBulletinBoard: () => void;
 	goToApricornSmith: () => void;
@@ -259,6 +263,10 @@ export const interactWithFunction = ({
 			})),
 		]);
 
+		return;
+	}
+	if (data.type === 'ZIGZAGOON_FORAGER') {
+		interactWithZigzagoonForager();
 		return;
 	}
 	if (data.type === 'TRAINER') {

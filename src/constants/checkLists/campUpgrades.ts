@@ -1,9 +1,5 @@
 export const campUpgradeNames = [
 	'bulletin_board',
-	'market_1',
-	'market_2',
-	'market_3',
-	'battle_item_market',
 	'berry_farm',
 	'invite ghost expert morty',
 	'invite professor rowan',
@@ -15,10 +11,11 @@ export const campUpgradeNames = [
 	'build combee hive',
 	'build miltank farm',
 	'machete certification',
+	'train zigzagoon foragers',
 ] as const;
 /**
- * ideas
- * drilbur item digger
+ * ideas:
+ * dugtrio item digger
  * outbreak radio
  * fossil maniac
  * more gym leaders
@@ -44,10 +41,6 @@ export const campUpgradeNames = [
 export type CampUpgrade = (typeof campUpgradeNames)[number];
 
 export const campUpgradePrices: Record<CampUpgrade, number> = {
-	market_1: 10,
-	market_2: 50,
-	market_3: 100,
-	battle_item_market: 100,
 	bulletin_board: 10,
 	'invite ghost expert morty': 50,
 	'invite professor rowan': 50,
@@ -59,14 +52,11 @@ export const campUpgradePrices: Record<CampUpgrade, number> = {
 	'fourth slot for farm': 20,
 	'build combee hive': 20,
 	'build miltank farm': 50,
+	'train zigzagoon foragers': 50,
 	'machete certification': 50,
 };
 export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	bulletin_board: [],
-	market_1: ['bulletin_board'],
-	market_2: ['market_1'],
-	market_3: ['market_1', 'market_2'],
-	battle_item_market: ['market_1'],
 	'invite ghost expert morty': ['bulletin_board'],
 	'invite professor rowan': ['bulletin_board'],
 	'invite apricorn smith kurt': ['bulletin_board'],
@@ -78,4 +68,5 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'fourth slot for farm': ['third slot for farm'],
 	'build combee hive': ['bulletin_board'],
 	'build miltank farm': ['bulletin_board', 'berry_farm'],
+	'train zigzagoon foragers': ['build miltank farm'],
 };
