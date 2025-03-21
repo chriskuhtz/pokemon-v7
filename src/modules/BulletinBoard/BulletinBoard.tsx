@@ -7,6 +7,7 @@ import {
 import { battleSpriteSize } from '../../constants/gameData';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getRewardForQuest } from '../../functions/getRewardForQuest';
+import { replaceRouteName } from '../../functions/replaceRouteName';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { ItemType } from '../../interfaces/Item';
@@ -94,7 +95,7 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 							icon={<MdCatchingPokemon size={battleSpriteSize} />}
 							content={
 								<div>
-									<h3>{name}</h3>
+									<h3>{replaceRouteName(name)}</h3>
 
 									<h5 style={{ display: 'flex', alignItems: 'center' }}>
 										Reward:

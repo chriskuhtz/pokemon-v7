@@ -5,7 +5,10 @@ import { TeamOverview } from '../../../components/TeamOverview/TeamOverview';
 import { TimeOfDayIcon } from '../../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../../components/WeatherIcon/WeatherIcon';
 import { battleSpriteSize } from '../../../constants/gameData';
-import { mapsRecord } from '../../../constants/maps/mapsRecord';
+import {
+	mapDisplayNames,
+	mapsRecord,
+} from '../../../constants/maps/mapsRecord';
 import { BaseSizeContext } from '../../../hooks/useBaseSize';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { UncollectedQuestsBadge } from './UncollectedQuestsBadge';
@@ -92,7 +95,7 @@ export const OverworldMenus = ({ stepsTaken }: { stepsTaken: number }) => {
 					backgroundColor: 'rgba(255,255,255,.6)',
 				}}
 			>
-				<strong>{map.id}</strong>
+				<strong>{mapDisplayNames[map.id]}</strong>
 				<WeatherIcon weather={map.weather} />
 				<TimeOfDayIcon />
 			</div>

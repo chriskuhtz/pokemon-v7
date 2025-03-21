@@ -9,6 +9,7 @@ import { battleSpriteSize } from '../../constants/gameData';
 import { typeColors } from '../../constants/typeColors';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getRewardForQuest } from '../../functions/getRewardForQuest';
+import { replaceRouteName } from '../../functions/replaceRouteName';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useQuests } from '../../hooks/useQuests';
 import { SaveFileContext } from '../../hooks/useSaveFile';
@@ -70,7 +71,7 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 							icon={<MdCatchingPokemon size={battleSpriteSize} />}
 							content={
 								<div>
-									<h3>{name}</h3>
+									<h3>{replaceRouteName(name)}</h3>
 									{status === 'FULFILLED' && <h4>ready to collect</h4>}
 									<h5 style={{ display: 'flex', alignItems: 'center' }}>
 										Reward:

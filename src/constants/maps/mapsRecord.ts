@@ -9,16 +9,18 @@ import { routeS1E1 } from './routeS1E1';
 import { routeS1W1 } from './routeS1W1';
 import { routeW1 } from './routeW1';
 
-export type MapId =
-	| 'camp'
-	| 'routeN1'
-	| 'routeN1E1'
-	| 'routeE1'
-	| 'routeS1E1'
-	| 'routeS1'
-	| 'routeS1W1'
-	| 'routeW1'
-	| 'routeN1W1';
+export const mapIds = [
+	'camp',
+	'routeN1',
+	'routeN1E1',
+	'routeE1',
+	'routeS1E1',
+	'routeS1',
+	'routeS1W1',
+	'routeW1',
+	'routeN1W1',
+] as const;
+export type MapId = (typeof mapIds)[number];
 
 export const mapsRecord: Record<MapId, OverworldMap> = {
 	camp: camp,
@@ -30,4 +32,16 @@ export const mapsRecord: Record<MapId, OverworldMap> = {
 	routeS1W1: routeS1W1,
 	routeW1: routeW1,
 	routeN1W1: routeN1W1,
+};
+
+export const mapDisplayNames: Record<MapId, string> = {
+	routeN1: 'akai route',
+	routeN1E1: 'orenji route',
+	routeE1: 'kiiro route',
+	routeS1E1: 'midori route',
+	routeS1: 'murasaki route',
+	routeS1W1: 'kuro route',
+	routeW1: 'shiro route',
+	routeN1W1: 'koniro route',
+	camp: 'kuma camp',
 };
