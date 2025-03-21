@@ -586,10 +586,15 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/140/',
 		handled: true,
 	},
+
+	{
+		name: 'bluk-berry',
+		url: 'https://pokeapi.co/api/v2/item/142/',
+		handled: true,
+	},
 	{ name: 'aguav-berry', url: 'https://pokeapi.co/api/v2/item/139/' },
 	{ name: 'wiki-berry', url: 'https://pokeapi.co/api/v2/item/137/' },
 	{ name: 'razz-berry', url: 'https://pokeapi.co/api/v2/item/141/' },
-	{ name: 'bluk-berry', url: 'https://pokeapi.co/api/v2/item/142/' },
 	{ name: 'nanab-berry', url: 'https://pokeapi.co/api/v2/item/143/' },
 	{ name: 'wepear-berry', url: 'https://pokeapi.co/api/v2/item/144/' },
 	{ name: 'pinap-berry', url: 'https://pokeapi.co/api/v2/item/145/' },

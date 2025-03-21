@@ -21,6 +21,7 @@ export const campUpgradeNames = [
  * more gym leaders
  * stronger training field
  * berry lure stations
+ * berry cooking grandma
  */
 
 /**
