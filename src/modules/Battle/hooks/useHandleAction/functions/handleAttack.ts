@@ -454,24 +454,27 @@ export const handleAttack = ({
 				target.ability === 'liquid-ooze' && drain > 0
 					? -drainValue
 					: drainValue;
+			const rockHeadChecked =
+				attacker.ability === 'rock-head' && drain < 0 ? 0 : liquidOozedChecked;
+
 			updatedAttacker = {
 				...updatedAttacker,
 				damage: getMiddleOfThree([
 					0,
-					updatedAttacker.damage - liquidOozedChecked,
+					updatedAttacker.damage - rockHeadChecked,
 					updatedAttacker.stats.hp,
 				]),
 			};
 
-			if (drain > 0 && target.ability === 'liquid-ooze') {
+			if (rockHeadChecked > 0 && target.ability === 'liquid-ooze') {
 				addMessage({
 					message: `${updatedAttacker.data.name} took ${absDrainValue} HP damage from liquid ooze`,
 				});
-			} else if (drain > 0) {
+			} else if (rockHeadChecked > 0) {
 				addMessage({
 					message: `${updatedAttacker.data.name} restored ${absDrainValue} HP`,
 				});
-			} else if (drain < 0) {
+			} else if (rockHeadChecked < 0) {
 				addMessage({
 					message: `${updatedAttacker.data.name} took ${absDrainValue} HP recoil damage`,
 				});
