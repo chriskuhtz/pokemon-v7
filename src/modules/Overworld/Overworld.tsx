@@ -23,6 +23,7 @@ import { useClickTarget } from './hooks/useClickTarget';
 import { useCombeeHive } from './hooks/useCombeeHive';
 import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
+import { useJumpDownLedge } from './hooks/useJumpDownLedge';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useMachete } from './hooks/useMachete';
 import { useOccupants } from './hooks/useOccupants';
@@ -63,6 +64,7 @@ export const Overworld = ({
 	const interactWithHallowedTower = useHallowedTower();
 	const interactWithCombeeHive = useCombeeHive();
 	const interactWithBush = useMachete();
+	const interactWithLedge = useJumpDownLedge();
 	const addEncounterMessage = useStartEncounter();
 
 	const map = useMemo(
@@ -102,6 +104,7 @@ export const Overworld = ({
 				interactWithHallowedTower,
 				interactWithCombeeHive,
 				interactWithBush,
+				interactWithLedge,
 				goToCampMenu: () =>
 					navigateAwayFromOverworldReducer('CAMP_UPGRADES', stepsTaken),
 				goToBulletinBoard: () =>
@@ -125,6 +128,7 @@ export const Overworld = ({
 			interactWithCombeeHive,
 			interactWithHallowedTower,
 			interactWithHoneyTree,
+			interactWithLedge,
 			navigateAwayFromOverworldReducer,
 			playerLocation,
 			rotateOccupant,

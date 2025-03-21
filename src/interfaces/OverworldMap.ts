@@ -35,6 +35,7 @@ export const OCCUPANT_TYPES = [
 	'MILTANK_FARMER',
 	'COMBEE_HIVE',
 	'POKEMON',
+	'LEDGE',
 ] as const;
 export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
@@ -164,6 +165,17 @@ export interface OverworldPokemon extends BaseOccupant {
 	dialogue: string[];
 	orientation: CharacterOrientation;
 }
+export interface OverworldPokemon extends BaseOccupant {
+	type: 'POKEMON';
+	dexId: number;
+	dialogue: string[];
+	orientation: CharacterOrientation;
+}
+export interface Ledge extends BaseOccupant {
+	type: 'LEDGE';
+	sprite: string;
+	passableFrom?: 'UP' | 'LEFT' | 'RIGHT';
+}
 
 export type Occupant =
 	| OverworldItem
@@ -187,7 +199,8 @@ export type Occupant =
 	| BerryFarmer
 	| CombeeHive
 	| OverworldPokemon
-	| MiltankFarmer;
+	| MiltankFarmer
+	| Ledge;
 
 export interface OverworldEncounter {
 	name: PokemonName;

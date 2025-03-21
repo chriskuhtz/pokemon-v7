@@ -83,6 +83,16 @@ const drawOccupant = (
 				}
 
 				break;
+			case 'LEDGE':
+				ctx?.drawImage(
+					img,
+					baseSize * occ.x,
+					baseSize * occ.y,
+					baseSize,
+					baseSize
+				);
+
+				break;
 			case 'MERCHANT':
 			case 'CAMP_MANAGER':
 			case 'APRICORN_SMITH':
@@ -156,7 +166,9 @@ const drawOccupant = (
 const getSource = (occ: Occupant) => {
 	switch (occ.type) {
 		case 'PORTAL':
+		case 'LEDGE':
 			return occ.sprite;
+
 		case 'MERCHANT':
 		case 'CAMP_MANAGER':
 		case 'APRICORN_SMITH':

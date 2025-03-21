@@ -1,5 +1,6 @@
 import { useCallback, useContext, useMemo } from 'react';
 import { v4 } from 'uuid';
+import { ONE_HOUR } from '../../../constants/gameData';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { joinInventories } from '../../../interfaces/Inventory';
@@ -80,7 +81,7 @@ export const useFarm = () => {
 	);
 
 	const getGrowingTime = (mulch?: MulchType) => {
-		const base = new Date().getTime() + 3600000;
+		const base = new Date().getTime() + ONE_HOUR;
 
 		if (mulch === 'growth-mulch') {
 			return base * 0.75;

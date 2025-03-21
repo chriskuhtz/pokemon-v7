@@ -8,7 +8,7 @@ import React, {
 import { MoveName } from '../constants/checkLists/movesCheckList';
 
 import { QuestName, QuestsRecord } from '../constants/checkLists/questsRecord';
-import { localStorageId, testState } from '../constants/gameData';
+import { localStorageId, ONE_DAY, testState } from '../constants/gameData';
 import { mapsRecord } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
@@ -291,7 +291,7 @@ const useSaveFile = (
 	};
 
 	const handleOccupantReducer = (occ: Occupant) => {
-		const timer = occ.type === 'BUSH' ? new Date().getTime() + 900000 : -1;
+		const timer = occ.type === 'BUSH' ? new Date().getTime() + ONE_DAY : -1;
 		let newInventory = { ...saveFile.inventory };
 		if (occ.type === 'NPC' && occ.gifts) {
 			newInventory = joinInventories(newInventory, occ.gifts);

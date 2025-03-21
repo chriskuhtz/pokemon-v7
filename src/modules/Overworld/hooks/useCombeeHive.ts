@@ -1,4 +1,5 @@
 import { useCallback, useContext } from 'react';
+import { ONE_HOUR } from '../../../constants/gameData';
 import { getMiddleOfThree } from '../../../functions/getMiddleOfThree';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
@@ -22,7 +23,7 @@ export const useCombeeHive = () => {
 
 			patchSaveFileReducer({
 				inventory: joinInventories(saveFile.inventory, { honey: honeyAmounts }),
-				honeyReadyAt: now + Math.random() * 3600000,
+				honeyReadyAt: now + Math.random() * ONE_HOUR,
 			});
 		} else {
 			addMessage({ message: 'The Combee are busy producing new honey' });

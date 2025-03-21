@@ -3,6 +3,7 @@ import { Message } from '../../../hooks/useMessageQueue';
 import { Inventory } from '../../../interfaces/Inventory';
 import { getRandomItem } from '../../../interfaces/Item';
 import {
+	Ledge,
 	Occupant,
 	OccupantType,
 	OverworldBush,
@@ -41,6 +42,7 @@ export const interactWithFunction = ({
 	interactWithCombeeHive,
 	interactWithHallowedTower,
 	interactWithBush,
+	interactWithLedge,
 	goToCampMenu,
 	goToBulletinBoard,
 	goToApricornSmith,
@@ -64,6 +66,7 @@ export const interactWithFunction = ({
 	interactWithHallowedTower: () => void;
 	interactWithCombeeHive: () => void;
 	interactWithBush: (x: OverworldBush) => void;
+	interactWithLedge: (x: Ledge) => void;
 	goToCampMenu: () => void;
 	goToBulletinBoard: () => void;
 	goToApricornSmith: () => void;
@@ -100,6 +103,10 @@ export const interactWithFunction = ({
 	}
 	if (data.type === 'BUSH') {
 		interactWithBush(data);
+		return;
+	}
+	if (data.type === 'LEDGE') {
+		interactWithLedge(data);
 		return;
 	}
 	if (

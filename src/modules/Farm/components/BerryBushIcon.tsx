@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { ONE_HOUR } from '../../../constants/gameData';
 import { BerryBush, BerryBushStatus } from '../../../interfaces/SaveFile';
 
 export const BerryBushIcon = ({ bush }: { bush: BerryBush }) => {
@@ -11,13 +12,13 @@ export const BerryBushIcon = ({ bush }: { bush: BerryBush }) => {
 		if (timeUntilReady < 0 && !bush.successful) {
 			return 'WITHERED';
 		}
-		if (timeUntilReady < 900000) {
+		if (timeUntilReady < ONE_HOUR * 0.25) {
 			return 'FLOWERING';
 		}
-		if (timeUntilReady < 1800000) {
+		if (timeUntilReady < ONE_HOUR * 0.5) {
 			return 'SAPLING';
 		}
-		if (timeUntilReady < 2700000) {
+		if (timeUntilReady < ONE_HOUR * 0.75) {
 			return 'SPROUT';
 		}
 		return 'SEED';

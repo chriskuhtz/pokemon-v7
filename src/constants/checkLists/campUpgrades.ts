@@ -25,6 +25,22 @@ export const campUpgradeNames = [
  * stronger training field
  */
 
+/**
+ * Camp Economy:
+ * Outside inputs: through quest Rewards, found items
+ * Infinite: Produce Honey from Combee Hive
+ * Infinite: Produce Repel from Oddish,Gloom,VilePlume repel manufacture
+ * Infinite: Produce Mulch from Amoongus Composter
+ *
+ * Trade Honey for Random foraged items with zigzagoon forager
+ * Plant Berries and Apricorns at Farm
+ * Trade Berries for Moomoo Milk
+ * Craft Balls from Apricorns
+ * Trade Moomoo Milk for underground items from Dugtrio explorer
+ *
+ * Prevent Softlock: get more balls from oak
+ */
+
 export type CampUpgrade = (typeof campUpgradeNames)[number];
 
 export const campUpgradePrices: Record<CampUpgrade, number> = {
