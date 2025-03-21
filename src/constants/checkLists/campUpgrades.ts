@@ -11,12 +11,12 @@ export const campUpgradeNames = [
 	'build combee hive',
 	'build miltank farm',
 	'machete certification',
-	'hire zigzagoon foragers',
-	'hire dugtrio explorers',
+	'invite zigzagoon foragers',
+	'invite dugtrio explorers',
+	'invite fossil expert',
 ] as const;
 /**
  * ideas:
- * dugtrio item digger
  * outbreak radio
  * fossil maniac
  * more gym leaders
@@ -55,9 +55,10 @@ export const campUpgradePrices: Record<CampUpgrade, number> = {
 	'fourth slot for farm': 20,
 	'build combee hive': 20,
 	'build miltank farm': 50,
-	'hire zigzagoon foragers': 50,
-	'hire dugtrio explorers': 50,
+	'invite zigzagoon foragers': 50,
+	'invite dugtrio explorers': 50,
 	'machete certification': 50,
+	'invite fossil expert': 50,
 };
 export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	bulletin_board: [],
@@ -72,6 +73,10 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'fourth slot for farm': ['third slot for farm'],
 	'build combee hive': ['bulletin_board'],
 	'build miltank farm': ['bulletin_board', 'berry_farm'],
-	'hire zigzagoon foragers': ['build miltank farm'],
-	'hire dugtrio explorers': ['build miltank farm', 'hire zigzagoon foragers'],
+	'invite zigzagoon foragers': ['build miltank farm'],
+	'invite dugtrio explorers': [
+		'build miltank farm',
+		'invite zigzagoon foragers',
+	],
+	'invite fossil expert': ['invite dugtrio explorers'],
 };

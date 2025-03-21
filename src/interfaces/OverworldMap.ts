@@ -5,6 +5,7 @@ import { PokemonName } from '../constants/pokemonNames';
 import { Inventory } from './Inventory';
 import { ItemType } from './Item';
 import { OwnedPokemon } from './OwnedPokemon';
+import { RoutesType } from './Routing';
 import {
 	CharacterLocationData,
 	CharacterOrientation,
@@ -38,6 +39,7 @@ export const OCCUPANT_TYPES = [
 	'LEDGE',
 	'ZIGZAGOON_FORAGER',
 	'DUGTRIO_EXPLORER',
+	'ROUTER_NPC',
 ] as const;
 export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
@@ -47,6 +49,7 @@ export interface BaseOccupant {
 	y: number;
 	conditionFunction: (saveFile: SaveFile) => boolean;
 }
+
 export interface OverworldItem extends BaseOccupant {
 	type: 'ITEM';
 	item: ItemType;
@@ -68,36 +71,12 @@ export interface OverworldMerchant extends BaseOccupant {
 	dialogue: string[];
 	sprite: string;
 }
-export interface OverworldCampManager extends BaseOccupant {
-	type: 'CAMP_MANAGER';
+export interface RouterNpc extends BaseOccupant {
+	type: 'ROUTER_NPC';
 	orientation: CharacterOrientation;
 	dialogue: string[];
 	sprite: string;
-}
-export interface TrainingFieldMaster extends BaseOccupant {
-	type: 'TRAINING_FIELD_MASTER';
-	orientation: CharacterOrientation;
-	dialogue: string[];
-	sprite: string;
-}
-export interface BerryFarmer extends BaseOccupant {
-	type: 'BERRY_FARMER';
-	orientation: CharacterOrientation;
-	dialogue: string[];
-	sprite: string;
-}
-export interface MiltankFarmer extends BaseOccupant {
-	type: 'MILTANK_FARMER';
-	orientation: CharacterOrientation;
-	dialogue: string[];
-	sprite: string;
-}
-
-export interface OverworldApricornSmith extends BaseOccupant {
-	type: 'APRICORN_SMITH';
-	orientation: CharacterOrientation;
-	dialogue: string[];
-	sprite: string;
+	to: RoutesType;
 }
 export interface OverworldNurse extends BaseOccupant {
 	type: 'NURSE';
@@ -196,19 +175,15 @@ export type Occupant =
 	| OverworldSign
 	| OverworldHoneyTree
 	| OnStepPortal
-	| OverworldCampManager
 	| OverworldBulletinBoard
 	| OverworldHallowedTower
-	| OverworldApricornSmith
 	| Obstacle
-	| TrainingFieldMaster
-	| BerryFarmer
 	| CombeeHive
 	| OverworldPokemon
-	| MiltankFarmer
 	| Ledge
 	| ZigzagoonForager
-	| DugtrioExplorer;
+	| DugtrioExplorer
+	| RouterNpc;
 
 export interface OverworldEncounter {
 	name: PokemonName;

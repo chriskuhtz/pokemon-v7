@@ -619,7 +619,8 @@ const trainingField: Occupant[] = [
 		conditionFunction: (s) => s.campUpgrades['training field 1'],
 	},
 	{
-		type: 'TRAINING_FIELD_MASTER',
+		type: 'ROUTER_NPC',
+		to: 'TRAINING_FIELD',
 		x: 16,
 		y: 1,
 		orientation: 'DOWN',
@@ -635,7 +636,8 @@ const trainingField: Occupant[] = [
 ];
 const miltankFarm: Occupant[] = [
 	{
-		type: 'MILTANK_FARMER',
+		type: 'ROUTER_NPC',
+		to: 'MILTANK_FARM',
 		dialogue: [
 			'All Pokemon seem to enjoy Miltank milk',
 			'And miltank love to eat berries',
@@ -675,7 +677,7 @@ const zigzagoonForagers: Occupant[] = [
 		orientation: 'DOWN',
 		sprite: SpriteEnum.bugCatcher,
 		id: 'zigzagoon trainer',
-		conditionFunction: (s) => s.campUpgrades['hire zigzagoon foragers'],
+		conditionFunction: (s) => s.campUpgrades['invite zigzagoon foragers'],
 	},
 	{
 		type: 'ZIGZAGOON_FORAGER',
@@ -684,7 +686,7 @@ const zigzagoonForagers: Occupant[] = [
 		y: 1,
 		orientation: 'DOWN',
 		id: 'ziggie',
-		conditionFunction: (s) => s.campUpgrades['hire zigzagoon foragers'],
+		conditionFunction: (s) => s.campUpgrades['invite zigzagoon foragers'],
 	},
 ];
 const dugtrioExplorers: Occupant[] = [
@@ -702,7 +704,7 @@ const dugtrioExplorers: Occupant[] = [
 		orientation: 'LEFT',
 		sprite: SpriteEnum.explorer,
 		id: 'dugtrio trainer',
-		conditionFunction: (s) => s.campUpgrades['hire dugtrio explorers'],
+		conditionFunction: (s) => s.campUpgrades['invite dugtrio explorers'],
 	},
 	{
 		type: 'DUGTRIO_EXPLORER',
@@ -711,7 +713,7 @@ const dugtrioExplorers: Occupant[] = [
 		y: 6,
 		orientation: 'LEFT',
 		id: 'triotrio',
-		conditionFunction: (s) => s.campUpgrades['hire dugtrio explorers'],
+		conditionFunction: (s) => s.campUpgrades['invite dugtrio explorers'],
 	},
 ];
 
@@ -769,7 +771,8 @@ export const campOccupants: OverworldMap['occupants'] = [
 		conditionFunction: () => true,
 	},
 	{
-		type: 'CAMP_MANAGER',
+		type: 'ROUTER_NPC',
+		to: 'CAMP_UPGRADES',
 		id: 'camp_manager',
 		x: 4,
 		y: 4,
@@ -779,7 +782,8 @@ export const campOccupants: OverworldMap['occupants'] = [
 		conditionFunction: () => true,
 	},
 	{
-		type: 'BERRY_FARMER',
+		type: 'ROUTER_NPC',
+		to: 'FARM',
 		id: 'berry_farmer',
 		x: 17,
 		y: 10,
@@ -836,7 +840,8 @@ export const campOccupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) => s.campUpgrades.bulletin_board,
 	},
 	{
-		type: 'APRICORN_SMITH',
+		type: 'ROUTER_NPC',
+		to: 'APRICORN_SMITHY',
 		sprite: SpriteEnum.kurt,
 		x: 8,
 		y: 13,
@@ -849,6 +854,17 @@ export const campOccupants: OverworldMap['occupants'] = [
 			'of turning apricorns into pokeballs',
 		],
 		conditionFunction: (s) => s.campUpgrades['invite apricorn smith kurt'],
+	},
+	{
+		type: 'ROUTER_NPC',
+		to: 'FOSSIL_REVIVER',
+		orientation: 'UP',
+		y: 18,
+		x: 3,
+		dialogue: ['Fossils are fascinating', 'These Pokemon lived aeons ago'],
+		sprite: SpriteEnum.grandFather,
+		conditionFunction: (s) => s.campUpgrades['invite fossil expert'],
+		id: 'fossil expert',
 	},
 	...trainingField,
 	...mortyLine,

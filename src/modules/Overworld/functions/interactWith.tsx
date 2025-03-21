@@ -8,6 +8,7 @@ import {
 	OccupantType,
 	OverworldBush,
 } from '../../../interfaces/OverworldMap';
+import { RoutesType } from '../../../interfaces/Routing';
 import {
 	CharacterLocationData,
 	CharacterOrientation,
@@ -28,11 +29,11 @@ export const shouldRotate = (t: OccupantType) =>
 		'POKEMON',
 		'ZIGZAGOON_FORAGER',
 		'DUGTRIO_EXPLORER',
+		'ROUTER_NPC',
 	].includes(t);
 export const interactWithFunction = ({
 	occ,
 	addMultipleMessages,
-	openStorage,
 	stepsTaken,
 	rotateOccupant,
 	playerLocation,
@@ -48,17 +49,12 @@ export const interactWithFunction = ({
 	interactWithLedge,
 	interactWithZigzagoonForager,
 	interactWithDugtrioExplorer,
-	goToCampMenu,
-	goToBulletinBoard,
-	goToApricornSmith,
-	goToTrainingField,
-	goToBerryFarm,
-	goToMiltankFarm,
+
 	settings,
+	goTo,
 }: {
 	occ: Occupant | undefined;
 	addMultipleMessages: (x: Message[]) => void;
-	openStorage: (stepsTaken: number) => void;
 	stepsTaken: number;
 	rotateOccupant: (id: string, newOrientation: CharacterOrientation) => void;
 	playerLocation: CharacterLocationData;
@@ -74,12 +70,7 @@ export const interactWithFunction = ({
 	interactWithLedge: (x: Ledge) => void;
 	interactWithZigzagoonForager: () => void;
 	interactWithDugtrioExplorer: () => void;
-	goToCampMenu: () => void;
-	goToBulletinBoard: () => void;
-	goToApricornSmith: () => void;
-	goToTrainingField: () => void;
-	goToBerryFarm: () => void;
-	goToMiltankFarm: () => void;
+	goTo: (route: RoutesType) => void;
 	settings?: SettingsObject;
 }) => {
 	if (!occ) {
@@ -124,7 +115,7 @@ export const interactWithFunction = ({
 			{
 				message: 'Accessing Pokemon Storage',
 				needsNoConfirmation: true,
-				onRemoval: () => openStorage(stepsTaken),
+				onRemoval: () => goTo('STORAGE'),
 			},
 		]);
 		return;
@@ -153,63 +144,26 @@ export const interactWithFunction = ({
 
 		return;
 	}
-	if (data.type === 'CAMP_MANAGER') {
+	if (data.type === 'ROUTER_NPC') {
 		addMultipleMessages(
 			data.dialogue.map((d, i) => ({
 				message: d,
 				onRemoval:
-					i === data.dialogue.length - 1 ? () => goToCampMenu() : undefined,
+					i === data.dialogue.length - 1 ? () => goTo(data.to) : undefined,
 				needsNoConfirmation: true,
 			}))
 		);
 
 		return;
 	}
-	if (data.type === 'BERRY_FARMER') {
-		addMultipleMessages(
-			data.dialogue.map((d, i) => ({
-				message: d,
-				onRemoval:
-					i === data.dialogue.length - 1 ? () => goToBerryFarm() : undefined,
-				needsNoConfirmation: true,
-			}))
-		);
 
-		return;
-	}
-	if (data.type === 'MILTANK_FARMER') {
-		addMultipleMessages(
-			data.dialogue.map((d, i) => ({
-				message: d,
-				onRemoval:
-					i === data.dialogue.length - 1 ? () => goToMiltankFarm() : undefined,
-				needsNoConfirmation: true,
-			}))
-		);
-
-		return;
-	}
-	if (data.type === 'APRICORN_SMITH') {
-		addMultipleMessages(
-			data.dialogue.map((d, i) => ({
-				message: d,
-				onRemoval:
-					i === data.dialogue.length - 1
-						? () => goToApricornSmith()
-						: undefined,
-				needsNoConfirmation: true,
-			}))
-		);
-
-		return;
-	}
 	if (data.type === 'BULLETIN_BOARD') {
 		addMultipleMessages(
 			data.dialogue.map((d, i) => ({
 				message: d,
 				onRemoval:
 					i === data.dialogue.length - 1
-						? () => goToBulletinBoard()
+						? () => goTo('BULLETIN_BOARD')
 						: undefined,
 				needsNoConfirmation: true,
 			}))
@@ -297,18 +251,7 @@ export const interactWithFunction = ({
 
 		return;
 	}
-	if (data.type === 'TRAINING_FIELD_MASTER') {
-		addMultipleMessages(
-			data.dialogue.map((d, i) => ({
-				message: d,
-				onRemoval:
-					i === data.dialogue.length - 1
-						? () => goToTrainingField()
-						: undefined,
-			}))
-		);
-		return;
-	}
+
 	if (data.type === 'HONEY_TREE') {
 		interactWithHoneyTree();
 		return;

@@ -123,8 +123,7 @@ export const Overworld = ({
 			interactWithFunction({
 				occ,
 				addMultipleMessages,
-				openStorage: () =>
-					navigateAwayFromOverworldReducer('STORAGE', stepsTaken),
+
 				stepsTaken,
 				rotateOccupant,
 				playerLocation,
@@ -140,19 +139,8 @@ export const Overworld = ({
 				interactWithLedge,
 				interactWithZigzagoonForager,
 				interactWithDugtrioExplorer,
-				goToCampMenu: () =>
-					navigateAwayFromOverworldReducer('CAMP_UPGRADES', stepsTaken),
-				goToBulletinBoard: () =>
-					navigateAwayFromOverworldReducer('BULLETIN_BOARD', stepsTaken),
-				goToApricornSmith: () =>
-					navigateAwayFromOverworldReducer('APRICORN_SMITHY', stepsTaken),
+				goTo: (route) => navigateAwayFromOverworldReducer(route, stepsTaken),
 				settings: saveFile.settings,
-				goToTrainingField: () =>
-					navigateAwayFromOverworldReducer('TRAINING_FIELD', stepsTaken),
-				goToBerryFarm: () =>
-					navigateAwayFromOverworldReducer('FARM', stepsTaken),
-				goToMiltankFarm: () =>
-					navigateAwayFromOverworldReducer('MILTANK_FARM', stepsTaken),
 			}),
 		[
 			addMultipleMessages,

@@ -94,17 +94,13 @@ const drawOccupant = (
 
 				break;
 			case 'MERCHANT':
-			case 'CAMP_MANAGER':
-			case 'APRICORN_SMITH':
-			case 'BERRY_FARMER':
 			case 'NURSE':
 			case 'NPC':
-			case 'TRAINING_FIELD_MASTER':
 			case 'TRAINER':
 			case 'POKEMON':
 			case 'ZIGZAGOON_FORAGER':
 			case 'DUGTRIO_EXPLORER':
-			case 'MILTANK_FARMER':
+			case 'ROUTER_NPC':
 				ctx?.drawImage(
 					img,
 					0,
@@ -172,14 +168,10 @@ const getSource = (occ: Occupant) => {
 			return occ.sprite;
 
 		case 'MERCHANT':
-		case 'CAMP_MANAGER':
-		case 'APRICORN_SMITH':
 		case 'NURSE':
 		case 'NPC':
-		case 'TRAINING_FIELD_MASTER':
-		case 'BERRY_FARMER':
 		case 'TRAINER':
-		case 'MILTANK_FARMER':
+		case 'ROUTER_NPC':
 			return `/npcs/NPC_${occ.sprite}.png`;
 		case 'POKEMON':
 		case 'DUGTRIO_EXPLORER':
