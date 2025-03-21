@@ -1,6 +1,6 @@
 import { OverworldMap } from '../../interfaces/OverworldMap';
 import { routeN1Encounters } from './encounters';
-import { routeN1Occupants } from './occupants';
+import { routeW1Occupants } from './occupants';
 
 export const routeW1: OverworldMap = {
 	id: 'routeW1',
@@ -2738,7 +2738,7 @@ export const routeW1: OverworldMap = {
 				{ yOffset: -16, xOffset: -80 },
 				null,
 				{ yOffset: -16, xOffset: -80 },
-				{ yOffset: -16, xOffset: -80 },
+				null,
 				null,
 				null,
 				{ yOffset: -16, xOffset: -80 },
@@ -5443,7 +5443,7 @@ export const routeW1: OverworldMap = {
 				{ yOffset: -16, xOffset: -96 },
 				{ yOffset: -16, xOffset: -96 },
 				{ yOffset: -16, xOffset: -96 },
-				{ yOffset: -16, xOffset: -96 },
+				null,
 				{ yOffset: -16, xOffset: -96 },
 				{ yOffset: -16, xOffset: -96 },
 				{ yOffset: -16, xOffset: -96 },
@@ -5496,7 +5496,7 @@ export const routeW1: OverworldMap = {
 				{ yOffset: -32, xOffset: -96 },
 				{ yOffset: -32, xOffset: -96 },
 				{ yOffset: -32, xOffset: -96 },
-				{ yOffset: -32, xOffset: -96 },
+				null,
 				{ yOffset: -32, xOffset: -96 },
 				{ yOffset: -32, xOffset: -96 },
 				{ yOffset: -32, xOffset: -96 },
@@ -13532,5 +13532,5 @@ export const routeW1: OverworldMap = {
 			],
 		],
 	},
-	occupants: routeN1Occupants,
+	occupants: routeW1Occupants,
 };
