@@ -1,6 +1,7 @@
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { determineTypeFactor } from './determineTypeFactor';
 import { targetFlinched } from './targetFlinched';
 
@@ -24,7 +25,17 @@ export const handleFlinching = (
 
 	if (willFlinch) {
 		addMessage({ message: `${target.data.name} flinched!` });
-		return { ...target, moveQueue: [] };
+		if (target.ability === 'steadfast') {
+			return applyStatChangeToPokemon(
+				{ ...target, moveQueue: [] },
+				'speed',
+				1,
+				true,
+				[],
+				addMessage,
+				'with steadfast'
+			);
+		} else return { ...target, moveQueue: [] };
 	}
 
 	return target;
