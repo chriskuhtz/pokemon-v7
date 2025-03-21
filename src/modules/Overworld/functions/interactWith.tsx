@@ -2,7 +2,11 @@ import { getOppositeDirection } from '../../../functions/getOppositeDirection';
 import { Message } from '../../../hooks/useMessageQueue';
 import { Inventory } from '../../../interfaces/Inventory';
 import { getRandomItem } from '../../../interfaces/Item';
-import { Occupant, OccupantType } from '../../../interfaces/OverworldMap';
+import {
+	Occupant,
+	OccupantType,
+	OverworldBush,
+} from '../../../interfaces/OverworldMap';
 import {
 	CharacterLocationData,
 	CharacterOrientation,
@@ -32,11 +36,11 @@ export const interactWithFunction = ({
 	talkToNurse,
 	handledOccupants,
 	handleThisOccupant,
-	cutterPokemon,
 	goToPosition,
 	interactWithHoneyTree,
 	interactWithCombeeHive,
 	interactWithHallowedTower,
+	interactWithBush,
 	goToCampMenu,
 	goToBulletinBoard,
 	goToApricornSmith,
@@ -47,7 +51,6 @@ export const interactWithFunction = ({
 }: {
 	occ: Occupant | undefined;
 	addMultipleMessages: (x: Message[]) => void;
-	cutterPokemon?: { name: string };
 	openStorage: (stepsTaken: number) => void;
 	stepsTaken: number;
 	rotateOccupant: (id: string, newOrientation: CharacterOrientation) => void;
@@ -60,6 +63,7 @@ export const interactWithFunction = ({
 	interactWithHoneyTree: () => void;
 	interactWithHallowedTower: () => void;
 	interactWithCombeeHive: () => void;
+	interactWithBush: (x: OverworldBush) => void;
 	goToCampMenu: () => void;
 	goToBulletinBoard: () => void;
 	goToApricornSmith: () => void;
@@ -94,15 +98,8 @@ export const interactWithFunction = ({
 		]);
 		return;
 	}
-	if (data.type === 'BUSH' && !handledOccupants.includes(occ.id)) {
-		if (cutterPokemon) {
-			addMultipleMessages([
-				{
-					message: `Your Pokemon used cut`,
-					onRemoval: () => handleThisOccupant(occ),
-				},
-			]);
-		} else addMultipleMessages([{ message: 'Maybe a Pokemon can cut this' }]);
+	if (data.type === 'BUSH') {
+		interactWithBush(data);
 		return;
 	}
 	if (

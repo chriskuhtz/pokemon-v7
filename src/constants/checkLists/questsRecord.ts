@@ -232,7 +232,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...new Set(routeN1E1.possibleEncounters.MORNING.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		requiredUpgrade: 'access routeN1E1',
+		requiredUpgrade: 'machete certification',
 	},
 	'catch a daytime pokemon from routeN1E1': {
 		rewardItems: { 'fire-stone': 1 },
@@ -246,7 +246,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...new Set(routeN1E1.possibleEncounters.DAY.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		requiredUpgrade: 'access routeN1E1',
+		requiredUpgrade: 'machete certification',
 	},
 	'catch a evening pokemon from routeN1E1': {
 		rewardItems: { 'dusk-stone': 1 },
@@ -260,7 +260,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...new Set(routeN1E1.possibleEncounters.EVENING.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		requiredUpgrade: 'access routeN1E1',
+		requiredUpgrade: 'machete certification',
 	},
 	'catch a nighttime pokemon from routeN1E1': {
 		rewardItems: { 'moon-stone': 1 },
@@ -274,7 +274,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...new Set(routeN1E1.possibleEncounters.NIGHT.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		requiredUpgrade: 'access routeN1E1',
+		requiredUpgrade: 'machete certification',
 	},
 	'catch a ultra rare pokemon on routeN1E1': {
 		rewardItems: { 'berry-juice': 5 },
@@ -302,7 +302,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			),
 		],
 		kind: 'BULLETIN',
-		requiredUpgrade: 'access routeN1E1',
+		requiredUpgrade: 'machete certification',
 	},
 	'catch all morning pokemon from routeN1E1': {
 		rewardItems: { 'hyper-potion': 2 },
@@ -317,7 +317,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a morning pokemon from routeN1E1',
-		requiredUpgrade: 'access routeN1E1',
+		requiredUpgrade: 'machete certification',
 	},
 	'catch all daytime pokemon from routeN1E1': {
 		rewardItems: { honey: 10 },
@@ -332,7 +332,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a daytime pokemon from routeN1E1',
-		requiredUpgrade: 'access routeN1E1',
+		requiredUpgrade: 'machete certification',
 	},
 	'catch all evening pokemon from routeN1E1': {
 		rewardItems: { 'full-heal': 5 },
@@ -347,7 +347,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a evening pokemon from routeN1E1',
-		requiredUpgrade: 'access routeN1E1',
+		requiredUpgrade: 'machete certification',
 	},
 	'catch all nighttime pokemon from routeN1E1': {
 		rewardItems: { 'odd-keystone': 1 },
@@ -362,7 +362,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a nighttime pokemon from routeN1E1',
-		requiredUpgrade: 'access routeN1E1',
+		requiredUpgrade: 'machete certification',
 	},
 	'catch all honeytree pokemon': {
 		rewardItems: { 'sun-stone': 2, 'leaf-stone': 2, 'berry-juice': 5 },

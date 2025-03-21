@@ -33,7 +33,7 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 			orientation: 'RIGHT',
 			forwardFoot: 'CENTER1',
 		},
-		conditionFunction: (s) => s.campUpgrades['access routeN1E1'],
+		conditionFunction: () => true,
 		id: 'routeN1_to_routeN1E1',
 	},
 	{
@@ -94,13 +94,12 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		conditionFunction: () => true,
 	},
 	{
-		type: 'SIGN',
-		dialogue: ['Route N1 E1', 'No Access for inexperienced Researchers'],
-		x: 50,
+		type: 'BUSH',
+		x: 49,
 		y: 25,
-		approachDirection: 'RIGHT',
-		id: 'routeN1E1_blocker',
-		conditionFunction: (s) => !s.campUpgrades['access routeN1E1'],
+		id: 'routeN1E1_blocker_bush',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'routeN1E1_blocker_bush'),
 	},
 ];
 export const routeN1E1Occupants: OverworldMap['occupants'] = [
@@ -129,7 +128,7 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 			orientation: 'DOWN',
 			forwardFoot: 'CENTER1',
 		},
-		conditionFunction: (s) => s.campUpgrades['access routeE1'],
+		conditionFunction: () => true,
 		id: 'routeN1E1_to_routeE1',
 	},
 	{
@@ -138,7 +137,7 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 		y: 50,
 		dialogue: ['No Access', 'Ongoing development'],
 		approachDirection: 'UP',
-		conditionFunction: (s) => !s.campUpgrades['access routeE1'],
+		conditionFunction: () => true,
 		id: 'development stopper',
 	},
 	{

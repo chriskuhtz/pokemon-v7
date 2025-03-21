@@ -24,6 +24,7 @@ import { useCombeeHive } from './hooks/useCombeeHive';
 import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
+import { useMachete } from './hooks/useMachete';
 import { useOccupants } from './hooks/useOccupants';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
 import { useStartEncounter } from './hooks/useStartEncounter';
@@ -39,7 +40,6 @@ export const Overworld = ({
 	talkToNurse,
 	playerSprite,
 	handledOccupants,
-	cutterPokemon,
 	latestMessage,
 	encounterRateModifier,
 	addMultipleMessages,
@@ -52,7 +52,6 @@ export const Overworld = ({
 	playerSprite: string;
 	receiveItems: (item: ItemType, amount: number) => void;
 	handledOccupants: string[];
-	cutterPokemon?: { name: string };
 	saveFile: SaveFile;
 	latestMessage: Message | undefined;
 	addMultipleMessages: (newMessages: Message[]) => void;
@@ -63,7 +62,9 @@ export const Overworld = ({
 	const interactWithHoneyTree = useHoneyTree();
 	const interactWithHallowedTower = useHallowedTower();
 	const interactWithCombeeHive = useCombeeHive();
+	const interactWithBush = useMachete();
 	const addEncounterMessage = useStartEncounter();
+
 	const map = useMemo(
 		() => mapsRecord[saveFile.location.mapId],
 		[saveFile.location.mapId]
@@ -96,11 +97,11 @@ export const Overworld = ({
 				talkToNurse,
 				handledOccupants,
 				handleThisOccupant: handleOccupantReducer,
-				cutterPokemon,
 				goToPosition: setCharacterLocation,
 				interactWithHoneyTree,
 				interactWithHallowedTower,
 				interactWithCombeeHive,
+				interactWithBush,
 				goToCampMenu: () =>
 					navigateAwayFromOverworldReducer('CAMP_UPGRADES', stepsTaken),
 				goToBulletinBoard: () =>
@@ -117,10 +118,10 @@ export const Overworld = ({
 			}),
 		[
 			addMultipleMessages,
-			cutterPokemon,
 			goToMarket,
 			handleOccupantReducer,
 			handledOccupants,
+			interactWithBush,
 			interactWithCombeeHive,
 			interactWithHallowedTower,
 			interactWithHoneyTree,

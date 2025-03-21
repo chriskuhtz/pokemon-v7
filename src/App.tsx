@@ -267,7 +267,6 @@ export const App = (): JSX.Element => {
 				setCurrentMarketInventory(i);
 			}}
 			talkToNurse={talkToNurseReducer}
-			cutterPokemon={{ name: team[0].name }}
 			playerSprite={saveFile.sprite}
 			receiveItems={addItemReducer}
 			handledOccupants={handledOccupants.map((h) => h.id)}
