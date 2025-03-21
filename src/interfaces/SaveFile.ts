@@ -82,7 +82,8 @@ export interface SaveFile {
 	sprite: string;
 	encounterRateModifier?: { factor: number; steps: number };
 	mileStones: {
-		hasEvolvedAPokemon: boolean;
+		hasEvolvedAPokemonThroughLevelUp: boolean;
+		hasEvolvedAPokemonWithAStone: boolean;
 		hasCaughtAPokemonWithHoney: boolean;
 		hasCraftedApricorn: boolean;
 		hasGrownABerry: boolean;

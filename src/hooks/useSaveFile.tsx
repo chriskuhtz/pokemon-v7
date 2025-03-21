@@ -529,6 +529,13 @@ const useSaveFile = (
 			needsNoConfirmation: true,
 		});
 
+		const hasEvolvedAPokemonThroughLevelUp =
+			saveFile.mileStones.hasEvolvedAPokemonThroughLevelUp ??
+			(!consumeHeldItem && !consumedItem);
+
+		const hasEvolvedAPokemonWithAStone =
+			saveFile.mileStones.hasEvolvedAPokemonWithAStone ?? !!consumedItem;
+
 		patchSaveFileReducer({
 			pokemon: saveFile.pokemon.map((p) => {
 				if (p.id === id) {
@@ -540,7 +547,11 @@ const useSaveFile = (
 				}
 				return p;
 			}),
-			mileStones: { ...saveFile.mileStones, hasEvolvedAPokemon: true },
+			mileStones: {
+				...saveFile.mileStones,
+				hasEvolvedAPokemonThroughLevelUp,
+				hasEvolvedAPokemonWithAStone,
+			},
 			inventory: updatedInventory,
 		});
 	};

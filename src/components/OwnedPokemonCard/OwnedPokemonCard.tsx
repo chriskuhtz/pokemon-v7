@@ -8,7 +8,6 @@ import { OwnedPokemonCardContent } from './components/OwnedPokemonCardContent';
 
 export const OwnedPokemonCard = ({
 	pokemon,
-
 	giveHeldItem,
 	takeHeldItem,
 	inventory,

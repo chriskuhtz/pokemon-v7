@@ -46,7 +46,8 @@ export const questNames = [
 	'craft a apricorn ball',
 	'lure a pokemon with honey',
 	'catch all honeytree pokemon',
-	'evolve a pokemon',
+	'evolve a pokemon through level up',
+	'evolve a pokemon with a stone',
 	'train a pokemon to level 10',
 	'train a pokemon to level 20',
 	'train a pokemon to level 30',
@@ -534,13 +535,22 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		kind: 'BULLETIN',
 	},
-	'evolve a pokemon': {
+	'evolve a pokemon through level up': {
 		rewardItems: { 'rare-candy': 1 },
 		researchPoints: 10,
 		conditionFunction: (s) => {
-			return s.mileStones.hasEvolvedAPokemon;
+			return s.mileStones.hasEvolvedAPokemonThroughLevelUp;
 		},
 		kind: 'BULLETIN',
+	},
+	'evolve a pokemon with a stone': {
+		rewardItems: { 'rare-candy': 1 },
+		researchPoints: 10,
+		conditionFunction: (s) => {
+			return s.mileStones.hasEvolvedAPokemonWithAStone;
+		},
+		kind: 'BULLETIN',
+		availableAfter: 'evolve a pokemon through level up',
 	},
 	'train a pokemon to level 10': {
 		rewardItems: { 'rare-candy': 1 },
