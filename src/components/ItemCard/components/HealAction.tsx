@@ -4,10 +4,10 @@ import { MoveName } from '../../../constants/checkLists/movesCheckList';
 import { battleSpriteSize } from '../../../constants/gameData';
 import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
 import { getMovesArray } from '../../../functions/getMovesArray';
-import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { isPPBoostItem, ItemType } from '../../../interfaces/Item';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { Banner } from '../../../uiComponents/Banner/Banner';
+import { getPokemonSprite } from '../../PokemonSprite/PokemonSprite';
 
 export const HealAction = ({
 	item,

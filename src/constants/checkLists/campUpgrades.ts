@@ -20,6 +20,7 @@ export const campUpgradeNames = [
  * fossil maniac
  * more gym leaders
  * stronger training field
+ * berry lure stations
  */
 
 /**

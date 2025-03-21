@@ -1,6 +1,5 @@
 import { BattlePokemonInfo } from '../../../components/BattlePokemonInfo/BattlePokemonInfo';
-import { battleSpriteSize } from '../../../constants/gameData';
-import { getPokemonSprite } from '../../../functions/getPokemonSprite';
+import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
 export function PlayerLane(props: { onFieldTeam: BattlePokemon[] }) {
@@ -24,11 +23,11 @@ export function PlayerLane(props: { onFieldTeam: BattlePokemon[] }) {
 				}}
 			>
 				{props.onFieldTeam.map((t) => (
-					<img
-						height={battleSpriteSize}
-						style={{ margin: '2rem 1rem' }}
+					<PokemonSprite
 						key={t.id}
-						src={getPokemonSprite(t.name, 'back')}
+						back
+						name={t.name}
+						style={{ margin: '2rem 1rem' }}
 					/>
 				))}
 			</div>

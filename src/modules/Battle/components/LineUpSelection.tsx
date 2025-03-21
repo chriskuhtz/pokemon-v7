@@ -1,8 +1,10 @@
 import { useMemo } from 'react';
+import {
+	getPokemonSprite,
+	PokemonSprite,
+} from '../../../components/PokemonSprite/PokemonSprite';
 import { Sprite } from '../../../components/Sprite/Sprite';
-import { battleSpriteSize } from '../../../constants/gameData';
 import { getItemUrl } from '../../../functions/getItemUrl';
-import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { isKO } from '../../../functions/isKo';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { TrainerInfo } from '../../../interfaces/Challenger';
@@ -121,12 +123,12 @@ export const LineUpSelection = ({
 								padding: '1rem',
 							}}
 						>
-							<img
+							<PokemonSprite
+								back
+								name={teamMember.name}
 								style={{
 									filter: isKO(teamMember) ? 'grayscale(1)' : undefined,
 								}}
-								height={battleSpriteSize}
-								src={getPokemonSprite(teamMember.name, 'back')}
 							/>
 						</div>
 					))}

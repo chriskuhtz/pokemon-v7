@@ -3,13 +3,13 @@ import { FaTrash } from 'react-icons/fa';
 import { battleSpriteSize } from '../../constants/gameData';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getItemUrl } from '../../functions/getItemUrl';
-import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { Message } from '../../hooks/useMessageQueue';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { Chip } from '../../uiComponents/Chip/Chip';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 
 export const PokemonStorage = ({
 	allPokemon,

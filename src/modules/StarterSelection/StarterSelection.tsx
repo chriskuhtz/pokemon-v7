@@ -5,7 +5,6 @@ import { battleSpriteSize, testPokemon } from '../../constants/gameData';
 import { PokemonName } from '../../constants/pokemonNames';
 import { typeColors } from '../../constants/typeColors';
 import { getItemUrl } from '../../functions/getItemUrl';
-import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getRandomPokemonName } from '../../functions/getRandomPokemonId';
 import { reduceBattlePokemonToOwnedPokemon } from '../../functions/reduceBattlePokemonToOwnedPokemon';
 import { useGetBattleTeam } from '../../hooks/useGetBattleTeam';
@@ -15,6 +14,7 @@ import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 
 const defaultStarters: PokemonName[] = ['skiddo', 'charmander', 'squirtle'];
 const randomStarterOptions = [

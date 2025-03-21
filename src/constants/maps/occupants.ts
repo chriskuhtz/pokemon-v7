@@ -369,7 +369,6 @@ export const routeN1W1Occupants: OverworldMap['occupants'] = [
 		id: 'routeN1W1_to_routeW1',
 	},
 ];
-
 const rowanLine: Occupant[] = [
 	{
 		type: 'NPC',

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { MdCatchingPokemon } from 'react-icons/md';
+import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import {
 	QuestName,
 	QuestsRecord,
@@ -7,7 +8,6 @@ import {
 import { battleSpriteSize } from '../../constants/gameData';
 import { typeColors } from '../../constants/typeColors';
 import { getItemUrl } from '../../functions/getItemUrl';
-import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getRewardForQuest } from '../../functions/getRewardForQuest';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useQuests } from '../../hooks/useQuests';
@@ -88,7 +88,7 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 											Targets:
 											{quest.targetPokemon.map((p) => {
 												return saveFile.pokemon.some((sp) => sp.name === p) ? (
-													<img key={p + name} src={getPokemonSprite(p)} />
+													<PokemonSprite key={p + name} name={p} />
 												) : (
 													<img key={p + name} src={getItemUrl('poke-ball')} />
 												);

@@ -1,5 +1,5 @@
+import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
 import { PokemonName } from '../../../constants/pokemonNames';
-import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { Banner } from '../../../uiComponents/Banner/Banner';
 
 export const IntroBanner = ({
@@ -26,7 +26,7 @@ export const IntroBanner = ({
 				>
 					Lets go!{' '}
 					{names.map((t) => (
-						<img key={t} src={getPokemonSprite(t, 'back')} />
+						<PokemonSprite back name={t} key={t} />
 					))}
 				</div>
 			</Banner>

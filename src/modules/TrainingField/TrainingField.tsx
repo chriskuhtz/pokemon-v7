@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { FaRandom } from 'react-icons/fa';
+import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { Sprite } from '../../components/Sprite/Sprite';
 import { calculateLevelData } from '../../functions/calculateLevelData';
-import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { trainers } from '../../functions/makeRandomTrainer';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Card } from '../../uiComponents/Card/Card';
@@ -61,10 +61,7 @@ export const TrainingField = () => {
 										>
 											{t.trainer?.name}{' '}
 											{t.team.map((p) => (
-												<img
-													key={t.id + p.name}
-													src={getPokemonSprite(p.name)}
-												/>
+												<PokemonSprite key={t.id + p.name} name={p.name} />
 											))}
 										</h3>
 										<div style={{ display: 'flex', gap: '1rem' }}>

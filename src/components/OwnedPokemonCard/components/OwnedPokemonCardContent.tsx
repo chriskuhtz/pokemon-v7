@@ -5,7 +5,6 @@ import { battleSpriteSize } from '../../../constants/gameData';
 import { PokemonName } from '../../../constants/pokemonNames';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
 import { getItemUrl } from '../../../functions/getItemUrl';
-import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { getStats } from '../../../functions/getStats';
 import { getTypeNames } from '../../../functions/getTypeNames';
 import { isOwnedPokemonKO } from '../../../functions/isKo';
@@ -18,6 +17,7 @@ import { SelectionListModal } from '../../../uiComponents/SelectionListModal/Sel
 import { Stack } from '../../../uiComponents/Stack/Stack';
 import { HappinessIcon } from '../../HappinessIcon/HappinessIcon';
 import { HpBar } from '../../HpBar/HpBar';
+import { getPokemonSprite } from '../../PokemonSprite/PokemonSprite';
 import { PrimaryAilmentIcon } from '../../PrimaryAilmentIcon/PrimaryAilmentIcon';
 import { XpBar } from '../../XpBar/XpBar';
 import { EvoInfo } from './EvoInfo';

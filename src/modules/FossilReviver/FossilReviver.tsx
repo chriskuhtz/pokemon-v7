@@ -1,6 +1,5 @@
-import { battleSpriteSize } from '../../constants/gameData';
+import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { getItemUrl } from '../../functions/getItemUrl';
-import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { useNavigate } from '../../hooks/useNavigate';
 import { fossilTable } from '../../interfaces/Item';
 import { Card } from '../../uiComponents/Card/Card';
@@ -29,12 +28,7 @@ export const FossilReviver = (): JSX.Element => {
 											revive(f);
 										}}
 									>
-										Revive{' '}
-										<img
-											height={battleSpriteSize}
-											width={battleSpriteSize}
-											src={getPokemonSprite(fossilTable[f])}
-										/>
+										Revive <PokemonSprite name={fossilTable[f]} />
 									</button>,
 								]}
 							/>

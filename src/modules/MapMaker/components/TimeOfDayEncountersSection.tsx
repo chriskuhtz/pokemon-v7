@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
-import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { TimeOfDay } from '../../../functions/getTimeOfDay';
 import { OverworldEncounter } from '../../../interfaces/OverworldMap';
 import { Card } from '../../../uiComponents/Card/Card';
+import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
 
 export const TimeOfDayEncountersSection = ({
 	time,
@@ -25,9 +25,7 @@ export const TimeOfDayEncountersSection = ({
 			{encounters.map((p) => (
 				<Card
 					key={p.name + time + xp}
-					icon={
-						<img style={{ padding: '0.5rem' }} src={getPokemonSprite(p.name)} />
-					}
+					icon={<PokemonSprite style={{ padding: '0.5rem' }} name={p.name} />}
 					content={<strong>Level: {calculateLevelData(p.xp).level} </strong>}
 					actionElements={[
 						<FaTrash onClick={() => removeEncounter(p.name, p.xp, time)} />,

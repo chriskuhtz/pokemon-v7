@@ -1,10 +1,10 @@
 import React, { useContext, useMemo, useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { OwnedPokemonCard } from '../../components/OwnedPokemonCard/OwnedPokemonCard';
+import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { battleSpriteSize } from '../../constants/gameData';
 import { PokemonName } from '../../constants/pokemonNames';
 import { getItemUrl } from '../../functions/getItemUrl';
-import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { getTypeNames } from '../../functions/getTypeNames';
 import { isOwnedPokemonKO } from '../../functions/isKo';
 import { useGetBattleTeam } from '../../hooks/useGetBattleTeam';

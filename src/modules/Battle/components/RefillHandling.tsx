@@ -1,5 +1,5 @@
+import { getPokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
 import { battleSpriteSize } from '../../../constants/gameData';
-import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { isKO } from '../../../functions/isKo';
 import { Message } from '../../../hooks/useMessageQueue';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';

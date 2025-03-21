@@ -1,7 +1,7 @@
 import { BattlePokemonInfo } from '../../../components/BattlePokemonInfo/BattlePokemonInfo';
+import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
 import { battleSpriteSize } from '../../../constants/gameData';
 import { getItemUrl } from '../../../functions/getItemUrl';
-import { getPokemonSprite } from '../../../functions/getPokemonSprite';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
 export function EnemyLane({
@@ -81,11 +81,10 @@ export function EnemyLane({
 					}
 
 					return (
-						<img
+						<PokemonSprite
 							style={{ margin: '2rem 1rem' }}
-							height={battleSpriteSize}
 							key={t.id}
-							src={getPokemonSprite(t.name)}
+							name={t.name}
 						/>
 					);
 				})}

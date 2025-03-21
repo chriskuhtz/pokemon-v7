@@ -1,8 +1,7 @@
 import { CSSProperties } from 'react';
-import { battleSpriteSize } from '../../constants/gameData';
-import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Banner } from '../../uiComponents/Banner/Banner';
+import { PokemonSprite } from '../PokemonSprite/PokemonSprite';
 
 export const PokemonIconBanner = ({
 	message,
@@ -18,11 +17,8 @@ export const PokemonIconBanner = ({
 	return (
 		<Banner backgroundColor={backgroundColor} flexDirection={flexDirection}>
 			{message}
-			<img
-				height={battleSpriteSize}
-				width={battleSpriteSize}
-				src={getPokemonSprite(pokemon.name)}
-			/>
+
+			<PokemonSprite name={pokemon.name} />
 		</Banner>
 	);
 };

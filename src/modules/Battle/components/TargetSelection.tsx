@@ -1,10 +1,9 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
+import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
 import { battleSpriteSize } from '../../../constants/gameData';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { isPlayerPokemon } from '../../../functions/getPlayerPokemon';
-import { getPokemonSprite } from '../../../functions/getPokemonSprite';
-import { BaseSizeContext } from '../../../hooks/useBaseSize';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Card } from '../../../uiComponents/Card/Card';
 import { ActionType, ChooseActionPayload } from '../BattleField';
@@ -24,7 +23,6 @@ export function TargetSelection({
 	chooseAction: (x: ChooseActionPayload) => void;
 	setChosenAction: (x: ActionType | undefined) => void;
 }) {
-	const { baseSize } = useContext(BaseSizeContext);
 	useEffect(() => {
 		//choose the only available option, skip menu
 		if (targets.length === 1) {
@@ -67,12 +65,10 @@ export function TargetSelection({
 					targets.map((t) => (
 						<Card
 							icon={
-								<img
-									height={baseSize * 0.8}
-									src={getPokemonSprite(
-										t.name,
-										isPlayerPokemon(t) ? 'back' : undefined
-									)}
+								<PokemonSprite
+									sizeFactor={0.8}
+									name={t.name}
+									back={isPlayerPokemon(t)}
 								/>
 							}
 							content={t.data.name}

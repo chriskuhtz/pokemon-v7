@@ -6,10 +6,10 @@ import { Stack } from '../../uiComponents/Stack/Stack';
 
 import { useContext, useState } from 'react';
 import { GoTasklist } from 'react-icons/go';
+import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { TrainerCard } from '../../components/TrainerCard/TrainerCard';
 import { battleSpriteSize } from '../../constants/gameData';
 import { mapsRecord } from '../../constants/maps/mapsRecord';
-import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { useQuests } from '../../hooks/useQuests';
@@ -36,13 +36,7 @@ export const MainMenu = ({
 					<Card
 						onClick={() => teleportHome()}
 						content={<h4>Teleport back to camp</h4>}
-						icon={
-							<img
-								src={getPokemonSprite(teleporter.name)}
-								height={battleSpriteSize}
-								width={battleSpriteSize}
-							/>
-						}
+						icon={<PokemonSprite name={teleporter.name} />}
 						actionElements={[]}
 					/>
 				)}

@@ -64,7 +64,6 @@ export const questNames = [
  * Ideas:
  * catch Baby Pokemon
  * height based
-
  */
 export type QuestName = (typeof questNames)[number];
 
