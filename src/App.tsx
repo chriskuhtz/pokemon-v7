@@ -1,9 +1,10 @@
 import { useContext, useMemo, useState } from 'react';
-import { mapsRecord } from './constants/maps/mapsRecord';
+import { MapId, mapsRecord } from './constants/maps/mapsRecord';
 import { MessageQueueContext } from './hooks/useMessageQueue';
 import { SaveFileContext } from './hooks/useSaveFile';
 import { generateInventory, Inventory } from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
+import { mapMakerRoutes } from './interfaces/Routing';
 import { ApricornSmithy } from './modules/ApricornSmithy/ApricornSmithy';
 import { Bag } from './modules/Bag/Bag';
 import { BattleLoader } from './modules/Battle/components/BattleLoader';
@@ -247,17 +248,12 @@ export const App = (): JSX.Element => {
 			/>
 		);
 	}
-	if (activeTab === 'MAP_MAKER_CAMP') {
-		return <MapMaker mapId="camp" goBack={() => setActiveTabReducer('MAIN')} />;
-	}
-	if (activeTab === 'MAP_MAKER_ROUTEN1') {
+	if (mapMakerRoutes.includes(activeTab)) {
 		return (
-			<MapMaker mapId="routeN1" goBack={() => setActiveTabReducer('MAIN')} />
-		);
-	}
-	if (activeTab === 'MAP_MAKER_ROUTES1') {
-		return (
-			<MapMaker mapId="routeS1" goBack={() => setActiveTabReducer('MAIN')} />
+			<MapMaker
+				mapId={activeTab.slice(10) as MapId}
+				goBack={() => setActiveTabReducer('MAIN')}
+			/>
 		);
 	}
 

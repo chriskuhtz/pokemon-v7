@@ -82,20 +82,6 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 ];
 export const routeS1Occupants: OverworldMap['occupants'] = [
 	{
-		type: 'ON_STEP_PORTAL',
-		x: 25,
-		y: 0,
-		portal: {
-			mapId: 'camp',
-			y: 18,
-			x: 10,
-			orientation: 'UP',
-			forwardFoot: 'CENTER1',
-		},
-		conditionFunction: () => true,
-		id: 'routeS1_to_camp',
-	},
-	{
 		type: 'HALLOWED_TOWER',
 		x: 47,
 		y: 40,
@@ -627,20 +613,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 		id: 'camp_to_routeN1',
 		conditionFunction: () => true,
 	},
-	{
-		type: 'ON_STEP_PORTAL',
-		x: 10,
-		y: 19,
-		portal: {
-			mapId: 'routeS1',
-			x: 25,
-			y: 1,
-			orientation: 'DOWN',
-			forwardFoot: 'CENTER1',
-		},
-		id: 'camp_to_routeS1',
-		conditionFunction: (s) => s.campUpgrades['access routeS1'],
-	},
+
 	{
 		type: 'SIGN',
 		x: 10,

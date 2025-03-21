@@ -1,3 +1,15 @@
+export const mapMakerRoutes = [
+	'MAP_MAKER_camp',
+	'MAP_MAKER_routeN1',
+	'MAP_MAKER_routeN1E1',
+	'MAP_MAKER_routeE1',
+	'MAP_MAKER_routeS1E1',
+	'MAP_MAKER_routeS1',
+	'MAP_MAKER_routeS1W1',
+	'MAP_MAKER_routeW1',
+	'MAP_MAKER_routeN1W1',
+];
+
 export const routes = [
 	'OVERWORLD',
 	'MAIN',
@@ -12,9 +24,6 @@ export const routes = [
 	'SPRITE_SELECTION',
 	'SETTINGS',
 	'QUESTS',
-	'MAP_MAKER_CAMP',
-	'MAP_MAKER_ROUTEN1',
-	'MAP_MAKER_ROUTES1',
 	'FARM',
 	'FOSSIL_REVIVER',
 	'CAMP_UPGRADES',
@@ -22,5 +31,6 @@ export const routes = [
 	'APRICORN_SMITHY',
 	'TRAINING_FIELD',
 	'MILTANK_FARM',
+	...mapMakerRoutes,
 ] as const;
 export type RoutesType = (typeof routes)[number];

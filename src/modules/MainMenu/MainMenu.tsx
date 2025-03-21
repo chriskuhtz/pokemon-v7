@@ -8,6 +8,7 @@ import { useContext, useState } from 'react';
 import { GoTasklist } from 'react-icons/go';
 import { TrainerCard } from '../../components/TrainerCard/TrainerCard';
 import { battleSpriteSize } from '../../constants/gameData';
+import { mapsRecord } from '../../constants/maps/mapsRecord';
 import { getPokemonSprite } from '../../functions/getPokemonSprite';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
@@ -89,30 +90,16 @@ export const MainMenu = ({
 					</button>
 				)}
 
-				{window.localStorage.getItem('devmode') && (
-					<Card
-						onClick={() => navigate('MAIN', 'MAP_MAKER_CAMP')}
-						content={<h4>Map Maker Camp</h4>}
-						icon={<GoTasklist size={battleSpriteSize} />}
-						actionElements={[]}
-					/>
-				)}
-				{window.localStorage.getItem('devmode') && (
-					<Card
-						onClick={() => navigate('MAIN', 'MAP_MAKER_ROUTEN1')}
-						content={<h4>Map Maker RouteN1</h4>}
-						icon={<GoTasklist size={battleSpriteSize} />}
-						actionElements={[]}
-					/>
-				)}
-				{window.localStorage.getItem('devmode') && (
-					<Card
-						onClick={() => navigate('MAIN', 'MAP_MAKER_ROUTES1')}
-						content={<h4>Map Maker RouteS1</h4>}
-						icon={<GoTasklist size={battleSpriteSize} />}
-						actionElements={[]}
-					/>
-				)}
+				{window.localStorage.getItem('devmode') &&
+					Object.keys(mapsRecord).map((m) => (
+						<Card
+							key={m}
+							onClick={() => navigate('MAIN', `MAP_MAKER_${m}`)}
+							content={<h4>Map Maker {m}</h4>}
+							icon={<GoTasklist size={battleSpriteSize} />}
+							actionElements={[]}
+						/>
+					))}
 			</Stack>
 		</Page>
 	);
