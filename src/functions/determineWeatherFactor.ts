@@ -20,5 +20,11 @@ export const determineWeatherFactor = (
 	if (weather === 'rain' && attack.data.type.name === 'fire') {
 		return 0.5;
 	}
+	if (weather === 'sun' && attack.data.type.name === 'fire') {
+		return 1.5;
+	}
+	if (weather === 'sun' && attack.data.type.name === 'water') {
+		return 0.5;
+	}
 	return 1;
 };
