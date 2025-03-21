@@ -638,7 +638,11 @@ export const movesCheckList: {
 		handled: true,
 	},
 	{ name: 'thief', url: 'https://pokeapi.co/api/v2/move/168/', handled: true },
-	{ name: 'spider-web', url: 'https://pokeapi.co/api/v2/move/169/' },
+	{
+		name: 'spider-web',
+		url: 'https://pokeapi.co/api/v2/move/169/',
+		handled: true,
+	},
 	{ name: 'mind-reader', url: 'https://pokeapi.co/api/v2/move/170/' },
 	{ name: 'nightmare', url: 'https://pokeapi.co/api/v2/move/171/' },
 	{
@@ -1737,6 +1741,7 @@ export const handledMoves = [
 	'tri-attack',
 	'super-fang',
 	'thief',
+	'spider-web',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

@@ -42,7 +42,14 @@ export interface ChooseActionPayload {
 }
 
 export interface BattleFieldEffect {
-	type: 'mist' | 'pressure' | 'light-screen' | 'reflect' | 'plus' | 'minus';
+	type:
+		| 'mist'
+		| 'pressure'
+		| 'light-screen'
+		| 'reflect'
+		| 'plus'
+		| 'minus'
+		| 'spider-web';
 	ownerId: string;
 	duration: number;
 }

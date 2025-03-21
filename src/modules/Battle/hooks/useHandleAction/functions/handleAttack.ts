@@ -145,6 +145,26 @@ export const handleAttack = ({
 		);
 		return;
 	}
+	if (move.name === 'spider-web') {
+		addBattleFieldEffect({
+			type: move.name as BattleFieldEffect['type'],
+			ownerId: target.ownerId,
+			duration: 9000,
+		});
+		setPokemon((pokemon) =>
+			pokemon.map((p) => {
+				if (p.id === updatedAttacker.id) {
+					return {
+						...changeMovePP(updatedAttacker, move.name, -1),
+						moveQueue: [],
+					};
+				}
+
+				return p;
+			})
+		);
+		return;
+	}
 	if (move.name === 'haze') {
 		addMessage({
 			message: `${attacker.name} removed all stat changes with haze`,
