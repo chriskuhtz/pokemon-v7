@@ -1,6 +1,6 @@
-import { OverworldMap } from "../../interfaces/OverworldMap";
-import { routeN1Encounters } from "./encounters";
-import { routeN1Occupants } from "./occupants";
+import { OverworldMap } from '../../interfaces/OverworldMap';
+import { routeN1Encounters } from './encounters';
+import { routeN1W1Occupants } from './occupants';
 
 export const routeN1W1: OverworldMap = {
 	id: 'routeN1W1',
@@ -13532,5 +13532,5 @@ export const routeN1W1: OverworldMap = {
 			],
 		],
 	},
-	occupants: routeN1Occupants,
+	occupants: routeN1W1Occupants,
 };

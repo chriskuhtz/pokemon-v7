@@ -342,6 +342,22 @@ export const routeW1Occupants: OverworldMap['occupants'] = [
 		id: 'routeN1W1_to_routeS1W1',
 	},
 ];
+export const routeN1W1Occupants: OverworldMap['occupants'] = [
+	{
+		type: 'ON_STEP_PORTAL',
+		x: 25,
+		y: 50,
+		portal: {
+			mapId: 'routeW1',
+			x: 25,
+			y: 1,
+			orientation: 'DOWN',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+		id: 'routeN1W1_to_routeW1',
+	},
+];
 
 const market1Inventory: Partial<Inventory> = {
 	'poke-ball': 1,
