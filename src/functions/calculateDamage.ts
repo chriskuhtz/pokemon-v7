@@ -274,7 +274,14 @@ export const calculateDamage = (
 			: 1;
 	const overgrowFactor =
 		attacker.ability === 'overgrow' &&
-		attacker.damage > attacker.stats.hp * 0.66
+		attacker.damage > attacker.stats.hp * 0.66 &&
+		attack.data.type.name === 'grass'
+			? 1.5
+			: 1;
+	const blazeFactor =
+		attacker.ability === 'blaze' &&
+		attacker.damage > attacker.stats.hp * 0.66 &&
+		attack.data.type.name === 'fire'
 			? 1.5
 			: 1;
 
@@ -308,7 +315,8 @@ export const calculateDamage = (
 				minusFactor *
 				gutsFactor *
 				marvelScaleFactor *
-				overgrowFactor
+				overgrowFactor *
+				blazeFactor
 		),
 		1
 	);
