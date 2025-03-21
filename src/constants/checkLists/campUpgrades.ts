@@ -11,7 +11,8 @@ export const campUpgradeNames = [
 	'build combee hive',
 	'build miltank farm',
 	'machete certification',
-	'train zigzagoon foragers',
+	'hire zigzagoon foragers',
+	'hire dugtrio explorers',
 ] as const;
 /**
  * ideas:
@@ -54,7 +55,8 @@ export const campUpgradePrices: Record<CampUpgrade, number> = {
 	'fourth slot for farm': 20,
 	'build combee hive': 20,
 	'build miltank farm': 50,
-	'train zigzagoon foragers': 50,
+	'hire zigzagoon foragers': 50,
+	'hire dugtrio explorers': 50,
 	'machete certification': 50,
 };
 export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
@@ -70,5 +72,6 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'fourth slot for farm': ['third slot for farm'],
 	'build combee hive': ['bulletin_board'],
 	'build miltank farm': ['bulletin_board', 'berry_farm'],
-	'train zigzagoon foragers': ['build miltank farm'],
+	'hire zigzagoon foragers': ['build miltank farm'],
+	'hire dugtrio explorers': ['build miltank farm', 'hire zigzagoon foragers'],
 };

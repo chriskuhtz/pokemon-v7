@@ -675,17 +675,43 @@ const zigzagoonForagers: Occupant[] = [
 		orientation: 'DOWN',
 		sprite: SpriteEnum.bugCatcher,
 		id: 'zigzagoon trainer',
-		conditionFunction: (s) => s.campUpgrades['train zigzagoon foragers'],
+		conditionFunction: (s) => s.campUpgrades['hire zigzagoon foragers'],
 	},
 	{
 		type: 'ZIGZAGOON_FORAGER',
 		dexId: 263,
-		dialogue: ['Zig Zig'],
 		x: 13,
 		y: 1,
 		orientation: 'DOWN',
 		id: 'ziggie',
-		conditionFunction: (s) => s.campUpgrades['train zigzagoon foragers'],
+		conditionFunction: (s) => s.campUpgrades['hire zigzagoon foragers'],
+	},
+];
+const dugtrioExplorers: Occupant[] = [
+	{
+		type: 'NPC',
+		unhandledMessage: [
+			'Dugtrio is lightning fast underground',
+			'and finds really rare items',
+			'just feed each head some honey',
+			'and watch them dig',
+		],
+		gifts: { honey: 3 },
+		x: 18,
+		y: 5,
+		orientation: 'LEFT',
+		sprite: SpriteEnum.explorer,
+		id: 'dugtrio trainer',
+		conditionFunction: (s) => s.campUpgrades['hire dugtrio explorers'],
+	},
+	{
+		type: 'DUGTRIO_EXPLORER',
+		dexId: 51,
+		x: 18,
+		y: 6,
+		orientation: 'LEFT',
+		id: 'triotrio',
+		conditionFunction: (s) => s.campUpgrades['hire dugtrio explorers'],
 	},
 ];
 
@@ -829,4 +855,5 @@ export const campOccupants: OverworldMap['occupants'] = [
 	...rowanLine,
 	...miltankFarm,
 	...zigzagoonForagers,
+	...dugtrioExplorers,
 ];

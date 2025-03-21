@@ -7,6 +7,7 @@ import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { BaseSizeContext } from '../../hooks/useBaseSize';
 import { useDrawForeground } from '../../hooks/useDrawBackground';
+import { useDugtrioExplorers } from '../../hooks/useDugtrioExplorers';
 import { useHallowedTower } from '../../hooks/useHallowedTower';
 import { useHoneyTree } from '../../hooks/useHoneyTree';
 import { Message } from '../../hooks/useMessageQueue';
@@ -95,6 +96,7 @@ export const Overworld = ({
 	const interactWithBush = useMachete();
 	const interactWithLedge = useJumpDownLedge();
 	const interactWithZigzagoonForager = useZigzagoonForagers();
+	const interactWithDugtrioExplorer = useDugtrioExplorers();
 	const addEncounterMessage = useStartEncounter();
 	const encounterRateModifier = useEncounterRateModifier();
 
@@ -137,6 +139,7 @@ export const Overworld = ({
 				interactWithBush,
 				interactWithLedge,
 				interactWithZigzagoonForager,
+				interactWithDugtrioExplorer,
 				goToCampMenu: () =>
 					navigateAwayFromOverworldReducer('CAMP_UPGRADES', stepsTaken),
 				goToBulletinBoard: () =>
@@ -158,6 +161,7 @@ export const Overworld = ({
 			handledOccupants,
 			interactWithBush,
 			interactWithCombeeHive,
+			interactWithDugtrioExplorer,
 			interactWithHallowedTower,
 			interactWithHoneyTree,
 			interactWithLedge,

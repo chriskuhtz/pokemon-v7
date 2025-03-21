@@ -103,6 +103,7 @@ const drawOccupant = (
 			case 'TRAINER':
 			case 'POKEMON':
 			case 'ZIGZAGOON_FORAGER':
+			case 'DUGTRIO_EXPLORER':
 			case 'MILTANK_FARMER':
 				ctx?.drawImage(
 					img,
@@ -181,6 +182,7 @@ const getSource = (occ: Occupant) => {
 		case 'MILTANK_FARMER':
 			return `/npcs/NPC_${occ.sprite}.png`;
 		case 'POKEMON':
+		case 'DUGTRIO_EXPLORER':
 		case 'ZIGZAGOON_FORAGER':
 			return `/overworldPokemonSprites/${threeDigitString(occ.dexId)}.png`;
 		case 'PC':
