@@ -1,5 +1,5 @@
 import { MoveName } from '../../constants/checkLists/movesCheckList';
-import { PokemonName } from '../../constants/pokemonNames';
+import { EvolutionReducerPayload } from '../../hooks/useSaveFile';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
@@ -23,11 +23,7 @@ export const OwnedPokemonCard = ({
 	inventory: Inventory;
 	data: PokemonData;
 	setNickName: (id: string, newNick: string | undefined) => void;
-	evolve: (
-		newName: PokemonName,
-		consumeHeldItem: boolean,
-		item?: ItemType
-	) => void;
+	evolve: (x: EvolutionReducerPayload) => void;
 }) => {
 	return (
 		<div

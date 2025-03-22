@@ -50,6 +50,7 @@ export interface EvolutionReducerPayload {
 	name: PokemonName;
 	consumeHeldItem: boolean;
 	consumedItem?: ItemType;
+	evoRequirement: 'LEVEL_UP' | 'FRIENDSHIP' | 'HELD_ITEM' | 'ITEM';
 }
 
 export interface UseSaveFile {
@@ -513,6 +514,7 @@ const useSaveFile = (
 		newName,
 		consumeHeldItem,
 		consumedItem,
+		evoRequirement,
 	}: EvolutionReducerPayload) => {
 		const updatedInventory = consumedItem
 			? joinInventories(
@@ -531,13 +533,18 @@ const useSaveFile = (
 
 		const hasEvolvedAPokemonThroughLevelUp =
 			saveFile.mileStones.hasEvolvedAPokemonThroughLevelUp ||
-			(!consumeHeldItem && !consumedItem);
+			evoRequirement === 'LEVEL_UP';
 
 		const hasEvolvedAPokemonWithAStone =
-			saveFile.mileStones.hasEvolvedAPokemonWithAStone || !!consumedItem;
+			saveFile.mileStones.hasEvolvedAPokemonWithAStone ||
+			evoRequirement === 'ITEM';
 
 		const hasEvolvedAPokemonWithAHeldItem =
-			saveFile.mileStones.hasEvolvedAPokemonWithAHeldItem || consumeHeldItem;
+			saveFile.mileStones.hasEvolvedAPokemonWithAHeldItem ||
+			evoRequirement === 'HELD_ITEM';
+		const hasEvolvedAPokemonThroughFriendship =
+			saveFile.mileStones.hasEvolvedAPokemonThroughFriendship ||
+			evoRequirement === 'FRIENDSHIP';
 
 		patchSaveFileReducer({
 			pokemon: saveFile.pokemon.map((p) => {
@@ -555,6 +562,7 @@ const useSaveFile = (
 				hasEvolvedAPokemonThroughLevelUp,
 				hasEvolvedAPokemonWithAStone,
 				hasEvolvedAPokemonWithAHeldItem,
+				hasEvolvedAPokemonThroughFriendship,
 			},
 			inventory: updatedInventory,
 		});

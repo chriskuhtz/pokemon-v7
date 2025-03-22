@@ -49,6 +49,7 @@ export const questNames = [
 	'evolve a pokemon through level up',
 	'evolve a pokemon with a stone',
 	'evolve a pokemon with a held item',
+	'evolve a pokemon through friendship',
 	'train a pokemon to level 10',
 	'train a pokemon to level 20',
 	'train a pokemon to level 30',
@@ -561,6 +562,15 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		kind: 'BULLETIN',
 		availableAfter: 'evolve a pokemon with a stone',
+	},
+	'evolve a pokemon through friendship': {
+		rewardItems: { 'rare-candy': 1 },
+		researchPoints: 10,
+		conditionFunction: (s) => {
+			return s.mileStones.hasEvolvedAPokemonWithAHeldItem;
+		},
+		kind: 'BULLETIN',
+		availableAfter: 'evolve a pokemon with a held item',
 	},
 	'train a pokemon to level 10': {
 		rewardItems: { 'rare-candy': 1 },

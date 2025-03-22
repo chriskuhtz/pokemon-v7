@@ -23,6 +23,7 @@ export const campUpgradeNames = [
  * stronger training field
  * berry lure stations
  * berry cooking grandma
+ * elm the evolution expert
  */
 
 /**

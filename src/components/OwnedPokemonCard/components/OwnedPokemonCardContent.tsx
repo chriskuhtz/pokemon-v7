@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { MdEdit } from 'react-icons/md';
 import { MoveName } from '../../../constants/checkLists/movesCheckList';
 import { battleSpriteSize } from '../../../constants/gameData';
-import { PokemonName } from '../../../constants/pokemonNames';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getStats } from '../../../functions/getStats';
@@ -24,6 +23,7 @@ import { EvoInfo } from './EvoInfo';
 import { MovesDisplay } from './MovesDisplay';
 import { NickNameModal } from './NickNameModal';
 import { StatDisplay } from './StatDisplay';
+import { EvolutionReducerPayload } from '../../../hooks/useSaveFile';
 
 export const HIDDEN_STATS = ['accuracy', 'evasion', 'hp'];
 
@@ -44,11 +44,7 @@ export const OwnedPokemonCardContent = ({
 	inventory: Inventory;
 	setMoves: (id: string, moves: MoveName[]) => void;
 	setNickName: (x: string | undefined) => void;
-	evolve: (
-		newName: PokemonName,
-		consumeHeldItem: boolean,
-		item?: ItemType
-	) => void;
+	evolve: (x: EvolutionReducerPayload) => void;
 }) => {
 	const [heldItemMenuOpen, setHeldItemMenuOpen] = useState<boolean>(false);
 	const [nickNameMenuOpen, setNickNameMenuOpen] = useState<boolean>(false);

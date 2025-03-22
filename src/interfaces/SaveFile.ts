@@ -85,6 +85,7 @@ export interface SaveFile {
 		hasEvolvedAPokemonThroughLevelUp: boolean;
 		hasEvolvedAPokemonWithAStone: boolean;
 		hasEvolvedAPokemonWithAHeldItem: boolean;
+		hasEvolvedAPokemonThroughFriendship: boolean;
 		hasCaughtAPokemonWithHoney: boolean;
 		hasCraftedApricorn: boolean;
 		hasGrownABerry: boolean;

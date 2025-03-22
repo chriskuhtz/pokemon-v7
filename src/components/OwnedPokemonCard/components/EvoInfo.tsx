@@ -1,9 +1,9 @@
-import { PokemonName } from '../../../constants/pokemonNames';
+import { useMemo } from 'react';
 import { determineEvoChecks } from '../../../functions/determineEvoChecks';
 import { useGetEvolution } from '../../../hooks/useGetEvolution';
+import { EvolutionReducerPayload } from '../../../hooks/useSaveFile';
 import { EvolutionChainLink } from '../../../interfaces/EvolutionChainData';
 import { Inventory } from '../../../interfaces/Inventory';
-import { ItemType } from '../../../interfaces/Item';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { PokemonData } from '../../../interfaces/PokemonData';
 import { Stack } from '../../../uiComponents/Stack/Stack';
@@ -17,11 +17,7 @@ export const EvoInfo = ({
 	ownedPokemon: OwnedPokemon;
 	data: PokemonData;
 	inventory: Inventory;
-	evolve: (
-		newName: PokemonName,
-		consumeHeldItem: boolean,
-		item?: ItemType
-	) => void;
+	evolve: (x: EvolutionReducerPayload) => void;
 }) => {
 	const { evos, invalidate } = useGetEvolution(data);
 
@@ -38,8 +34,8 @@ export const EvoInfo = ({
 					name={data.name}
 					evo={evo}
 					inventory={inventory}
-					evolve={(newName, consumeHeldItem, item) => {
-						evolve(newName, consumeHeldItem, item);
+					evolve={(payload) => {
+						evolve(payload);
 						invalidate();
 					}}
 				/>
@@ -57,20 +53,30 @@ const EvoButton = ({
 }: {
 	evo: EvolutionChainLink;
 	inventory: Inventory;
-	evolve: (
-		newName: PokemonName,
-		consumeHeldItem: boolean,
-		item?: ItemType
-	) => void;
+	evolve: (x: EvolutionReducerPayload) => void;
 	name: string;
 	ownedPokemon: OwnedPokemon;
 }) => {
-	const { checks, itemName, held_item } = determineEvoChecks(
+	const { checks, itemName, held_item, deets } = determineEvoChecks(
 		ownedPokemon,
 		inventory,
 		evo
 	);
 
+	const evoRequirement =
+		useMemo((): EvolutionReducerPayload['evoRequirement'] => {
+			if (deets.min_happiness) {
+				return 'FRIENDSHIP';
+			}
+			if (held_item) {
+				return 'HELD_ITEM';
+			}
+			if (itemName) {
+				return 'ITEM';
+			}
+
+			return 'LEVEL_UP';
+		}, [deets.min_happiness, held_item, itemName]);
 	return (
 		<button
 			disabled={checks.length > 0}
@@ -79,7 +85,16 @@ const EvoButton = ({
 				border: '1px solid black',
 				borderRadius: '1rem',
 			}}
-			onClick={() => evolve(evo.species.name, !!held_item, itemName)}
+			onClick={() =>
+				evolve({
+					name: ownedPokemon.name,
+					id: ownedPokemon.id,
+					newName: evo.species.name,
+					consumeHeldItem: !!held_item,
+					consumedItem: itemName,
+					evoRequirement,
+				})
+			}
 		>
 			{checks.length > 0
 				? `${checks.join(' & ')} required for evolution`

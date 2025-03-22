@@ -5,6 +5,7 @@ import { MoveName } from '../../constants/checkLists/movesCheckList';
 import { applyEndOfTurnAbility } from '../../functions/applyEndOfTurnAbility';
 import { applyEndOfTurnHeldItem } from '../../functions/applyEndOfTurnHeldItem';
 import { applyEndOfTurnWeatherDamage } from '../../functions/applyEndOfTurnWeatherDamage';
+import { applyHappinessChange } from '../../functions/applyHappinessChange';
 import { applyOnBattleEnterAbility } from '../../functions/applyOnBattleEnterAbility';
 import { applyPrimaryAilmentDamage } from '../../functions/applyPrimaryAilmentDamage';
 import { applySecondaryAilmentDamage } from '../../functions/applySecondaryAilmentDamage';
@@ -572,6 +573,10 @@ export const BattleField = ({
 				})
 				.filter((m) => m !== undefined);
 
+			const friendshipIncreasedTeam = leveledUpTeam.map((p) =>
+				applyHappinessChange(p, 1)
+			);
+
 			addMultipleMessages(
 				[
 					xpPerTeamMember > 0
@@ -583,7 +588,11 @@ export const BattleField = ({
 					{
 						message: 'You won the battle',
 						onRemoval: () =>
-							leaveWithCurrentData('WIN', defeatedPokemon, leveledUpTeam),
+							leaveWithCurrentData(
+								'WIN',
+								defeatedPokemon,
+								friendshipIncreasedTeam
+							),
 					},
 				].filter((m) => m !== undefined)
 			);

@@ -40,5 +40,5 @@ export const determineEvoChecks = (
 		return res;
 	}
 
-	return { checks: checks(), itemName, held_item };
+	return { checks: checks(), itemName, held_item, deets };
 };

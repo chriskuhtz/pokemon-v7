@@ -3,7 +3,6 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { OwnedPokemonCard } from '../../components/OwnedPokemonCard/OwnedPokemonCard';
 import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { battleSpriteSize } from '../../constants/gameData';
-import { PokemonName } from '../../constants/pokemonNames';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getTypeNames } from '../../functions/getTypeNames';
 import { isOwnedPokemonKO } from '../../functions/isKo';
@@ -219,18 +218,8 @@ export const Team = ({
 							})
 						);
 					}}
-					evolve={(
-						newName: PokemonName,
-						consumeHeldItem: boolean,
-						item?: ItemType
-					) => {
-						evolve({
-							id: focusedId,
-							name: focusedData.name,
-							newName,
-							consumeHeldItem,
-							consumedItem: item,
-						});
+					evolve={(payload) => {
+						evolve(payload);
 						invalidate();
 					}}
 					data={focusedData}
