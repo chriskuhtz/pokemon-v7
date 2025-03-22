@@ -113,7 +113,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 	},
 	'catch a morning pokemon from routeN1': {
-		rewardItems: { 'sun-stone': 1 },
+		rewardItems: { 'nest-ball': 10 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
@@ -126,7 +126,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 	},
 	'catch a daytime pokemon from routeN1': {
-		rewardItems: { 'fire-stone': 1 },
+		rewardItems: { 'quick-ball': 10 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
@@ -139,7 +139,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 	},
 	'catch a evening pokemon from routeN1': {
-		rewardItems: { 'dusk-stone': 1 },
+		rewardItems: { 'net-ball': 10 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
@@ -152,7 +152,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 	},
 	'catch a nighttime pokemon from routeN1': {
-		rewardItems: { 'moon-stone': 1 },
+		rewardItems: { 'dusk-ball': 10 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
