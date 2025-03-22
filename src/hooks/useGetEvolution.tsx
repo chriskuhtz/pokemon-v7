@@ -29,6 +29,7 @@ export const getEvoChainForPokemon = async (data: PokemonData) => {
 
 		if (evoChainRequest.status === 200) {
 			const data = evoChainRequest.json();
+
 			return data;
 		}
 	}
@@ -65,7 +66,9 @@ export const useGetEvolution = (
 
 	const evos = useMemo(() => {
 		const correctLink = flattenedChain.find(
-			(link) => link.species.name === data.name && link.evolves_to.length > 0
+			(link) =>
+				link.species.name === deAlternate(data.name) &&
+				link.evolves_to.length > 0
 		);
 
 		if (!correctLink || correctLink.evolves_to.length === 0) {

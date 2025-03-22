@@ -1,3 +1,4 @@
+import { pokemonNames } from '../constants/pokemonNames';
 import { EvolutionChainLink } from '../interfaces/EvolutionChainData';
 import { Inventory } from '../interfaces/Inventory';
 import { ItemType } from '../interfaces/Item';
@@ -10,19 +11,32 @@ export const determineEvoChecks = (
 	inventory: Inventory,
 	evo: EvolutionChainLink
 ) => {
-	const deets = evo.evolution_details[evo.evolution_details.length - 1];
+	const alternateFormOffset = () => {
+		if (pokemonNames.some((pn) => pn === ownedPokemon.name + '-alola')) {
+			return 2;
+		}
+		return 1;
+	};
+	const deets =
+		evo.evolution_details[evo.evolution_details.length - alternateFormOffset()];
 	const { min_happiness, item, min_level, time_of_day, held_item, trigger } =
 		deets;
 	const itemName = item?.name as ItemType | undefined;
 	const { level } = calculateLevelData(ownedPokemon.xp);
 
-	const minLevelIncludingTrade =
-		min_level ?? trigger.name === 'trade' ? 30 : null;
+	const minLevelIncludingTrade = () => {
+		if (trigger.name === 'trade') {
+			return 30;
+		}
+		return min_level;
+	};
+	const minLevel = minLevelIncludingTrade();
+
 	function checks() {
 		const res = [];
 
-		if (minLevelIncludingTrade && minLevelIncludingTrade > level) {
-			res.push(`Level ${minLevelIncludingTrade}`);
+		if (minLevel && minLevel > level) {
+			res.push(`Level ${minLevel}`);
 		}
 		if (itemName && !inventory[itemName]) {
 			res.push(itemName);

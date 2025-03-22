@@ -15,7 +15,7 @@ import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-const defaultStarters: PokemonName[] = ['bulbasaur', 'charmander', 'squirtle'];
+const defaultStarters: PokemonName[] = ['rattata-alola', 'rattata', 'squirtle'];
 const randomStarterOptions = [
 	getRandomPokemonName(),
 	getRandomPokemonName(),
