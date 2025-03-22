@@ -1,12 +1,42 @@
 import { useCallback, useContext } from 'react';
 import { ONE_HOUR } from '../../../constants/gameData';
+import { PokemonName } from '../../../constants/pokemonNames';
 import { getRandomEntry } from '../../../functions/filterTargets';
-import { MessageQueueContext } from '../../../hooks/useMessageQueue';
+import {
+	makeChallengerPokemon,
+	OPPO_ID,
+} from '../../../functions/makeChallengerPokemon';
+import { honeyPokemon } from '../../../hooks/useHoneyTree';
+import { Message, MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
-import { joinInventories } from '../../../interfaces/Inventory';
+import { EmptyInventory, joinInventories } from '../../../interfaces/Inventory';
 import { undergroundTable } from '../../../interfaces/Item';
+import { getRandomNature } from '../../../interfaces/Natures';
 import { OverworldRock } from '../../../interfaces/OverworldMap';
+import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
+import { SaveFile } from '../../../interfaces/SaveFile';
 
+export const sledgeHammerPokemon: PokemonName[] = [
+	'geodude',
+	'geodude-alola',
+	'shuckle',
+	'roggenrola',
+	'nacli',
+	'nosepass',
+	'dwebble',
+	'larvitar',
+	'klawf',
+	'glimmet',
+];
+
+const SLEDGEHAMMER_ENCOUNTER_OPTIONS: OwnedPokemon[] = honeyPokemon.map((h) =>
+	makeChallengerPokemon({
+		nature: getRandomNature(),
+		name: h,
+		xp: 200,
+		caughtOnMap: 'routeN1',
+	})
+);
 export const useSledgeHammer = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { addMultipleMessages } = useContext(MessageQueueContext);
@@ -19,26 +49,59 @@ export const useSledgeHammer = () => {
 			if (saveFile.campUpgrades['sledge hammer certification']) {
 				const foundItem =
 					Math.random() > 0.9 ? getRandomEntry(undergroundTable) : undefined;
+				const encounter =
+					Math.random() > 0.9
+						? getRandomEntry(SLEDGEHAMMER_ENCOUNTER_OPTIONS)
+						: undefined;
 
 				const updatedInventory = foundItem
 					? joinInventories(saveFile.inventory, {
 							[foundItem]: 1,
 					  })
 					: saveFile.inventory;
-				addMultipleMessages([
+				const meta: SaveFile['meta'] = encounter
+					? {
+							activeTab: 'BATTLE',
+							currentChallenger: {
+								team: [encounter],
+								type: 'WILD',
+								inventory: EmptyInventory,
+								id: OPPO_ID,
+							},
+					  }
+					: saveFile.meta;
+
+				const messages: Message[] = [
 					{
 						message: 'You use your certified sledge hammer skills',
-						onRemoval: () =>
-							patchSaveFileReducer({
-								handledOccupants: [
-									...saveFile.handledOccupants,
-									{ id: rock.id, resetAt: new Date().getTime() + ONE_HOUR },
-								],
-								inventory: updatedInventory,
-							}),
 					},
-					{ message: `found 1 ${foundItem} in the rubble` },
-				]);
+					foundItem
+						? { message: `found 1 ${foundItem} in the rubble` }
+						: undefined,
+					encounter
+						? { message: 'You startled a pokemon under the rock' }
+						: undefined,
+				].filter((m) => m !== undefined);
+
+				addMultipleMessages(
+					messages.map((m, i) => {
+						if (i === messages.length - 1) {
+							return {
+								...m,
+								onRemoval: () =>
+									patchSaveFileReducer({
+										handledOccupants: [
+											...saveFile.handledOccupants,
+											{ id: rock.id, resetAt: new Date().getTime() + ONE_HOUR },
+										],
+										inventory: updatedInventory,
+										meta,
+									}),
+							};
+						}
+						return m;
+					})
+				);
 			} else
 				addMultipleMessages([
 					{
@@ -54,6 +117,7 @@ export const useSledgeHammer = () => {
 			saveFile.campUpgrades,
 			saveFile.handledOccupants,
 			saveFile.inventory,
+			saveFile.meta,
 		]
 	);
 };

@@ -22,7 +22,6 @@ export const campUpgradeNames = [
 /**
  * ideas:
  * valuables trader
- * encounters from sledgehammering
  * more gym leaders
  * stronger training field
  * berry lure stations
