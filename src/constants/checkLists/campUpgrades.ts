@@ -23,6 +23,10 @@ export const campUpgradeNames = [
  * more gym leaders
  * stronger training field
  * berry lure stations
+ * 'Sledge hammer certification'
+ * 'Shovel certification'
+ * 'Pokemon Surfer Certification'
+ * 'Pokemon Flyer Certification'
  */
 
 /**

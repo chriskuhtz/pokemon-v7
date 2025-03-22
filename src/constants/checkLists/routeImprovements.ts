@@ -10,4 +10,5 @@ export const routeimprovementsCheckList: {
 	{ name: 'cave' },
 	{ name: 'water' },
 	{ name: 'wild apricorn trees' },
+	{ name: 'shortcuts to later routes' },
 ];
