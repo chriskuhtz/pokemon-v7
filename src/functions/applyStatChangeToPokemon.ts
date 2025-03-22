@@ -7,16 +7,25 @@ import { getMiddleOfThree } from './getMiddleOfThree';
 export const applyStatChangeToPokemon = (
 	pokemon: BattlePokemon,
 	stat: Stat,
-	modifier: number,
+	initialModifier: number,
 	selfInflicted: boolean,
 	battleFieldEffects: BattleFieldEffect[],
 	addMessage?: (x: Message) => void,
 	suffix?: string
 ) => {
-	if (modifier > 6 || modifier < -6 || stat === 'hp' || modifier === 0) {
-		console.error('invalid modifier', stat, modifier);
+	if (
+		initialModifier > 6 ||
+		initialModifier < -6 ||
+		stat === 'hp' ||
+		initialModifier === 0
+	) {
+		console.error('invalid modifier', stat, initialModifier);
 		return pokemon;
 	}
+	const simpleFactor = pokemon.ability === 'simple' ? 2 : 1;
+
+	const modifier = initialModifier * simpleFactor;
+
 	const existingStat = pokemon.statBoosts[stat];
 
 	const guardSpecced = pokemon.secondaryAilments.some(
