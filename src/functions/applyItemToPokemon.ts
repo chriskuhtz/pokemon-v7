@@ -2,6 +2,7 @@ import { MoveName } from '../constants/checkLists/movesCheckList';
 import { Message } from '../hooks/useMessageQueue';
 import { BattlePokemon, isBattlePokemon } from '../interfaces/BattlePokemon';
 import {
+	happinessBerries,
 	HappinessChangeTable,
 	HPHealTable,
 	isEvBoostItem,
@@ -18,6 +19,7 @@ import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { calculateLevelData } from './calculateLevelData';
 import { changeMovePP } from './changeMovePP';
+import { getMiddleOfThree } from './getMiddleOfThree';
 import { removeHealableAilments } from './removeHealableAilments';
 
 export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
@@ -272,6 +274,28 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 				ailment: 'dire-hit',
 				addMessage: addMessage ? addMessage : () => {},
 			}) as T;
+		}
+	}
+	if (happinessBerries[item]) {
+		const stat = happinessBerries[item];
+		if (addMessage) {
+			addMessage({
+				message: `Happiness raised, ${stat} Effort value lowered`,
+			});
+			return applyHappinessChange(
+				{
+					...pokemon,
+					effortValues: {
+						...pokemon.effortValues,
+						[stat]: getMiddleOfThree([
+							0,
+							pokemon.effortValues[stat],
+							pokemon.effortValues[stat] - 10,
+						]),
+					},
+				},
+				10
+			);
 		}
 	}
 

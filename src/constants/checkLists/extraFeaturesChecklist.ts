@@ -135,7 +135,7 @@ export const extraFeatureCheckList: {
 	{ name: 'refactor all `routing` npcs into the same type', handled: true },
 	{ name: 'determine pokemon genders', handled: true },
 	{ name: 'Banner Confirmation needs keyboard control', handled: true },
-	{ name: 'ivs' },
+	{ name: 'ivs', handled: true },
 	{ name: 'trainers give rewards' },
 	{ name: 'trainers spot you' },
 	{ name: 'trainers can move and still spot you' },

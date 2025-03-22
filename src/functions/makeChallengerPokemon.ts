@@ -19,6 +19,7 @@ export const testOpponent: OwnedPokemon = {
 	stepsWalked: 0,
 	maxHp: 50,
 	effortValues: EmptyStatObject,
+	intrinsicValues: EmptyStatObject,
 	ppBoostedMoves: [],
 	caughtOnMap: 'camp',
 	weightModifier: 1,

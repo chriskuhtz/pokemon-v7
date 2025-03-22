@@ -152,6 +152,7 @@ export const EmptyInventory: Inventory = {
 	'razz-berry': 0,
 	'wepear-berry': 0,
 	'pinap-berry': 0,
+	'pomeg-berry': 0,
 };
 export const generateInventory = (wanted: Partial<Inventory>): Inventory => {
 	return joinInventories(EmptyInventory, wanted);

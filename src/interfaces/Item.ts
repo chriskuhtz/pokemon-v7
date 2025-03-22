@@ -179,6 +179,7 @@ export const berries = [
 	'razz-berry',
 	'wepear-berry',
 	'pinap-berry',
+	'pomeg-berry',
 ] as const;
 
 export const fossils = [
@@ -332,6 +333,12 @@ export const FlavourfullBerriesTable: Partial<Record<ItemType, Nature[]>> = {
 	'iapapa-berry': ['lonely', 'mild', 'gentle', 'hasty'],
 	'aguav-berry': ['naughty', 'rash', 'lax', 'naive'],
 	'wiki-berry': ['adamant', 'impish', 'careful', 'jolly'],
+};
+/**
+ * These berries make pokemon happier, but reduce their evs
+ */
+export const happinessBerries: Partial<Record<ItemType, Stat>> = {
+	'pomeg-berry': 'hp',
 };
 export const cookingBerries: BerryType[] = [
 	'bluk-berry',

@@ -33,6 +33,7 @@ import { Occupant } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { RoutesType } from '../interfaces/Routing';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
+import { generateRandomStatObject } from '../interfaces/StatObject';
 import { Message } from './useMessageQueue';
 
 export interface LeaveBattlePayload {
@@ -91,27 +92,23 @@ export interface UseSaveFile {
 	evolvePokemonReducer: (x: EvolutionReducerPayload) => void;
 }
 
-// const migratePokemon = (p: OwnedPokemon): OwnedPokemon => {
-// 	const updatedEvs: StatObject & { spatk?: number; spdef?: number } = {
-// 		...p.effortValues,
-// 	};
-// 	if (updatedEvs['spatk']) {
-// 		updatedEvs['special-attack'] = updatedEvs['spatk'];
-// 		delete updatedEvs.spatk;
-// 	}
-// 	if (updatedEvs['spdef']) {
-// 		updatedEvs['special-defense'] = updatedEvs['spdef'];
-// 		delete updatedEvs.spdef;
-// 	}
-// 	return { ...p, effortValues: updatedEvs };
-// };
+const migratePokemon = (p: OwnedPokemon): OwnedPokemon => {
+	if (!p['intrinsicValues']) {
+		return { ...p, intrinsicValues: generateRandomStatObject(31) };
+	}
+
+	return p;
+};
+const migrateSaveFile = (input: SaveFile): SaveFile => {
+	return { ...input, pokemon: input.pokemon.map(migratePokemon) };
+};
 
 const useSaveFile = (
 	init: SaveFile,
 	addMessage: (x: Message) => void
 ): UseSaveFile => {
 	const local = window.localStorage.getItem(localStorageId);
-	const loaded = local ? (JSON.parse(local) as SaveFile) : init;
+	const loaded = local ? migrateSaveFile(JSON.parse(local) as SaveFile) : init;
 
 	const [saveFile, s] = useState<SaveFile>(loaded);
 
