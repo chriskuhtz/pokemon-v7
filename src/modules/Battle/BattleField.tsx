@@ -510,6 +510,8 @@ export const BattleField = ({
 		addMultipleMessages,
 		battleStep,
 		battleWeather,
+		initOpponents,
+		initTeam,
 		latestMessage,
 		nextPokemonWithoutMove,
 		pokemon,
