@@ -6,10 +6,12 @@ import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { getMiddleOfThree } from './getMiddleOfThree';
 
 export const applyEndOfTurnAbility = ({
+	initialPokemon,
 	pokemon,
 	addMessage,
 	weather,
 }: {
+	initialPokemon?: BattlePokemon;
 	pokemon: BattlePokemon;
 	addMessage: (x: Message) => void;
 	weather?: WeatherType;
@@ -54,6 +56,30 @@ export const applyEndOfTurnAbility = ({
 			message: `${pokemon.data.name} shed its skin to cure itself`,
 		});
 		return { ...pokemon, primaryAilment: undefined };
+	}
+	if (
+		pokemon.ability === 'unburden' &&
+		!pokemon.heldItemName &&
+		initialPokemon?.heldItemName
+	) {
+		addMessage({
+			message: `${pokemon.data.name} doubled its speed with unburden`,
+		});
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{ type: 'unburdened', duration: 9000 },
+			],
+		};
+	}
+	if (pokemon.ability === 'unburden' && pokemon.heldItemName) {
+		return {
+			...pokemon,
+			secondaryAilments: pokemon.secondaryAilments.filter(
+				(ail) => ail.type !== 'unburdened'
+			),
+		};
 	}
 	return pokemon;
 };

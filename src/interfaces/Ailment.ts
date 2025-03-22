@@ -38,6 +38,7 @@ const secondaryAilments = [
 	'mind-read',
 	'nightmare',
 	'cursed',
+	'unburdened',
 ] as const;
 
 export type SecondaryAilmentType = (typeof secondaryAilments)[number];

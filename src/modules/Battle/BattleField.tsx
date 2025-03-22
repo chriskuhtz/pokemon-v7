@@ -454,6 +454,9 @@ export const BattleField = ({
 			const updatedPokemon = pokemon.map((p) => {
 				if (p.status === 'ONFIELD') {
 					let updated = applyEndOfTurnAbility({
+						initialPokemon: [...initOpponents, ...initTeam].find(
+							(initPok) => initPok.id === p.id
+						),
 						pokemon: p,
 						addMessage: (x) => collectedMessages.push(x.message),
 					});

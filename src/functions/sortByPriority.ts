@@ -4,6 +4,30 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { calculateModifiedStat } from './calculateModifiedStat';
 
+const calculateTotalSpeed = (
+	a: BattlePokemon,
+	battleWeather: WeatherType | undefined
+): number => {
+	const paraFactorA =
+		a.primaryAilment?.type === 'paralysis' ? PARA_SPEED_FACTOR : 1;
+	const swiftSwimFactorA =
+		a.ability === 'swift-swim' && battleWeather === 'rain' ? 2 : 1;
+	const chlorophyllFactorA =
+		a.ability === 'chlorophyll' && battleWeather === 'sun' ? 2 : 1;
+	const unburdenFactorA = a.secondaryAilments.some(
+		(ail) => ail.type === 'unburdened'
+	)
+		? 2
+		: 1;
+
+	return (
+		calculateModifiedStat(a.stats.speed, a.statBoosts.speed) *
+		paraFactorA *
+		swiftSwimFactorA *
+		chlorophyllFactorA *
+		unburdenFactorA
+	);
+};
 export const sortByPriority = (
 	a: BattlePokemon,
 	b: BattlePokemon,
@@ -44,29 +68,8 @@ export const sortByPriority = (
 		return 1;
 	}
 
-	const paraFactorA =
-		a.primaryAilment?.type === 'paralysis' ? PARA_SPEED_FACTOR : 1;
-	const swiftSwimFactorA =
-		a.ability === 'swift-swim' && battleWeather === 'rain' ? 2 : 1;
-	const chlorophyllFactorA =
-		a.ability === 'chlorophyll' && battleWeather === 'sun' ? 2 : 1;
-	const aSpeed =
-		calculateModifiedStat(a.stats.speed, a.statBoosts.speed) *
-		paraFactorA *
-		swiftSwimFactorA *
-		chlorophyllFactorA;
-
-	const paraFactorB =
-		b.primaryAilment?.type === 'paralysis' ? PARA_SPEED_FACTOR : 1;
-	const swiftSwimFactorB =
-		b.ability === 'swift-swim' && battleWeather === 'rain' ? 2 : 1;
-	const chlorophyllFactorB =
-		b.ability === 'chlorophyll' && battleWeather === 'sun' ? 2 : 1;
-	const bSpeed =
-		calculateModifiedStat(b.stats.speed, b.statBoosts.speed) *
-		paraFactorB *
-		swiftSwimFactorB *
-		chlorophyllFactorB;
+	const aSpeed = calculateTotalSpeed(a, battleWeather);
+	const bSpeed = calculateTotalSpeed(b, battleWeather);
 
 	if (bSpeed > aSpeed) {
 		return 1;
