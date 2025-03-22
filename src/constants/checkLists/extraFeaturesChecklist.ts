@@ -214,5 +214,6 @@ export const extraFeatureCheckList: {
 		name: 'swarms increase shiny chance',
 	},
 	{ name: 'moving background (water,flowers)' },
-	{ name: 'randomized swarms' },
+	{ name: 'setting: randomized swarms' },
+	{ name: 'apply migrations on localstorage load' },
 ];

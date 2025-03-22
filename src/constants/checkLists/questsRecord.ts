@@ -6,6 +6,7 @@ import { Quest } from '../../interfaces/Quest';
 import { routeN1 } from '../maps/routeN1';
 import { routeN1E1 } from '../maps/routeN1E1';
 import { pokemonNames } from '../pokemonNames';
+import { campUpgradePrices } from './campUpgrades';
 
 export const questNames = [
 	'catch a pikachu',
@@ -819,3 +820,13 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'catch Haunter and Mightyena',
 	},
 };
+
+console.log(
+	'total research points',
+	Object.values(QuestsRecord).reduce(
+		(sum, summand) => sum + summand.researchPoints,
+		0
+	),
+	'total costs',
+	Object.values(campUpgradePrices).reduce((sum, summand) => sum + summand, 0)
+);
