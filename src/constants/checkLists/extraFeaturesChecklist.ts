@@ -218,4 +218,5 @@ export const extraFeatureCheckList: {
 	{ name: 'apply migrations on localstorage load' },
 	{ name: 'data collection module (name, nCaught,nDefeated)' },
 	{ name: 'award evs after battle' },
+	{ name: 'evs should not just be random' },
 ];

@@ -180,6 +180,7 @@ export const berries = [
 	'wepear-berry',
 	'pinap-berry',
 	'pomeg-berry',
+	'kelpsy-berry',
 ] as const;
 
 export const fossils = [
@@ -339,6 +340,7 @@ export const FlavourfullBerriesTable: Partial<Record<ItemType, Nature[]>> = {
  */
 export const happinessBerries: Partial<Record<ItemType, Stat>> = {
 	'pomeg-berry': 'hp',
+	'kelpsy-berry': 'attack',
 };
 export const cookingBerries: BerryType[] = [
 	'bluk-berry',

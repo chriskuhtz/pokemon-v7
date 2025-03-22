@@ -282,21 +282,21 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 			addMessage({
 				message: `Happiness raised, ${stat} Effort value lowered`,
 			});
-			return applyHappinessChange(
-				{
-					...pokemon,
-					effortValues: {
-						...pokemon.effortValues,
-						[stat]: getMiddleOfThree([
-							0,
-							pokemon.effortValues[stat],
-							pokemon.effortValues[stat] - 10,
-						]),
-					},
-				},
-				10
-			);
 		}
+		return applyHappinessChange(
+			{
+				...pokemon,
+				effortValues: {
+					...pokemon.effortValues,
+					[stat]: getMiddleOfThree([
+						0,
+						pokemon.effortValues[stat],
+						pokemon.effortValues[stat] - 10,
+					]),
+				},
+			},
+			10
+		);
 	}
 
 	return pokemon;

@@ -628,7 +628,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/146/',
 		handled: true,
 	},
-	{ name: 'kelpsy-berry', url: 'https://pokeapi.co/api/v2/item/147/' },
+	{
+		name: 'kelpsy-berry',
+		url: 'https://pokeapi.co/api/v2/item/147/',
+		handled: true,
+	},
 	{ name: 'qualot-berry', url: 'https://pokeapi.co/api/v2/item/148/' },
 	{ name: 'hondew-berry', url: 'https://pokeapi.co/api/v2/item/149/' },
 	{ name: 'grepa-berry', url: 'https://pokeapi.co/api/v2/item/150/' },
