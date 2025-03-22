@@ -1,5 +1,6 @@
 import { Message } from '../hooks/useMessageQueue';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { Stat } from '../interfaces/StatObject';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
@@ -64,6 +65,47 @@ export const applyOnBattleEnterAbility = ({
 				}
 				if (p.id === user.id) {
 					return { ...user, roundsInBattle: p.roundsInBattle + 1 };
+				}
+				if (p.ownerId === user.ownerId) {
+					return p;
+				}
+				return applyStatChangeToPokemon(
+					p,
+					'attack',
+					-1,
+					false,
+					battleFieldEffects,
+					addMessage,
+					`${user.data.name}'s intimidate`
+				);
+			})
+		);
+		return;
+	}
+	if (user.ability === 'download') {
+		setPokemon((pokemon) =>
+			pokemon.map((p) => {
+				if (p.status !== 'ONFIELD') {
+					return p;
+				}
+				if (p.id === user.id) {
+					const target = pokemon.find((p) => p.ownerId !== user.ownerId);
+					if (!target) {
+						return p;
+					}
+					const stat: Stat =
+						target?.stats.defense > target?.stats['special-defense']
+							? 'special-attack'
+							: 'attack';
+					return applyStatChangeToPokemon(
+						p,
+						stat,
+						1,
+						true,
+						[],
+						addMessage,
+						'with download'
+					);
 				}
 				if (p.ownerId === user.ownerId) {
 					return p;
