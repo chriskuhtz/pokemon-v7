@@ -9,7 +9,7 @@ export const routeimprovementsCheckList: {
 	{ name: 'conditionally unlock route E1', handled: true },
 	{ name: 'adjust route N1E1 encounters', handled: true },
 	{ name: 'make alola quests possible', handled: true },
-	{ name: 'design route E1' },
+	{ name: 'design route E1', handled: true },
 	{ name: 'make galar quests possible' },
 	{ name: 'make hisui quests possible' },
 	{ name: 'make paldea quest possible' },

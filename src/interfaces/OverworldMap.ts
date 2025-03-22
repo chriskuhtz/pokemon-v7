@@ -162,7 +162,7 @@ export interface DugtrioExplorer extends BaseOccupant {
 export interface Ledge extends BaseOccupant {
 	type: 'LEDGE';
 	sprite: string;
-	passableFrom?: 'UP' | 'LEFT' | 'RIGHT';
+	passableFrom?: CharacterOrientation;
 }
 
 export type Occupant =

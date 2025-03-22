@@ -26,6 +26,9 @@ export const useJumpDownLedge = () => {
 					if (ledge.passableFrom === 'UP') {
 						return { ...saveFile.location, y: saveFile.location.y + 2 };
 					}
+					if (ledge.passableFrom === 'DOWN') {
+						return { ...saveFile.location, y: saveFile.location.y - 2 };
+					}
 					if (ledge.passableFrom === 'RIGHT') {
 						return { ...saveFile.location, x: saveFile.location.x - 2 };
 					}

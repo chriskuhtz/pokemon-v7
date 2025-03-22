@@ -19,6 +19,14 @@ import {
 	generateRandomStatObject,
 } from '../interfaces/StatObject';
 
+export const deAlternate = (name: string) => {
+	return name
+		.replace('-alola', '')
+		.replace('-hisui', '')
+		.replace('-paldea', '')
+		.replace('-galar', '');
+};
+
 export const useGetBattleTeam = (
 	initTeam: (OwnedPokemon & { caughtBefore: boolean })[],
 	config: {
@@ -81,7 +89,7 @@ export const useGetBattleTeam = (
 						: pokemon.fourthMove?.name;
 
 				const speciesData: Promise<PokemonSpeciesData> = await fetch(
-					`https://pokeapi.co/api/v2/pokemon-species/${name}`
+					`https://pokeapi.co/api/v2/pokemon-species/${deAlternate(name)}`
 				)
 					.then((res) => {
 						return res.json();

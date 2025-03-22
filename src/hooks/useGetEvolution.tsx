@@ -6,11 +6,14 @@ import {
 } from '../interfaces/EvolutionChainData';
 import { PokemonData } from '../interfaces/PokemonData';
 import { PokemonSpeciesData } from '../interfaces/PokemonSpeciesData';
+import { deAlternate } from './useGetBattleTeam';
 
 export const getSpeciesForPokemon = async (
 	data: PokemonData
 ): Promise<PokemonSpeciesData | undefined> => {
-	const speciesRequest = await fetch(data.species.url);
+	const speciesRequest = await fetch(
+		`https://pokeapi.co/api/v2/pokemon-species/${deAlternate(data.name)}`
+	);
 
 	if (speciesRequest.status === 200) {
 		const data = speciesRequest.json();

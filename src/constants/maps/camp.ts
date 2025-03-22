@@ -1,5 +1,5 @@
 import { OverworldMap } from '../../interfaces/OverworldMap';
-import { campOccupants } from './occupants';
+import { campOccupants } from './occupants/camp';
 
 export const camp: OverworldMap = {
 	id: 'camp',
@@ -1114,7 +1114,7 @@ export const camp: OverworldMap = {
 				null,
 				null,
 				null,
-				{ yOffset: -272, xOffset: -1056 },
+				{ yOffset: -352, xOffset: -1040 },
 			],
 			[
 				{ yOffset: -272, xOffset: -1024 },
@@ -1136,7 +1136,7 @@ export const camp: OverworldMap = {
 				null,
 				null,
 				null,
-				{ yOffset: -272, xOffset: -1056 },
+				null,
 			],
 			[
 				{ yOffset: -272, xOffset: -1024 },
@@ -1158,7 +1158,7 @@ export const camp: OverworldMap = {
 				null,
 				null,
 				null,
-				{ yOffset: -272, xOffset: -1056 },
+				{ yOffset: -368, xOffset: -1040 },
 			],
 			[
 				{ yOffset: -272, xOffset: -1024 },
