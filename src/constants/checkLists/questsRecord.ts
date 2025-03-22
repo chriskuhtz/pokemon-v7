@@ -1,7 +1,7 @@
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { trainers } from '../../functions/makeRandomTrainer';
 import { honeyPokemon } from '../../hooks/useHoneyTree';
-import { apricornTable } from '../../interfaces/Item';
+import { apricornTable, fossilTable } from '../../interfaces/Item';
 import { Quest } from '../../interfaces/Quest';
 import { routeN1 } from '../maps/routeN1';
 import { routeN1E1 } from '../maps/routeN1E1';
@@ -67,10 +67,10 @@ export const questNames = [
 	'catch a gigantic specimen',
 	'catch a pokemon in every type of apricorn ball',
 	'defeat morty',
+	'revive a fossil',
 ] as const;
 /**
  * Ideas:
- * height based (big)
  * elm line (night and day,all eeveelutions)
  * add elm and rowan to training field
  * shiny Pokemon
@@ -818,6 +818,18 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 1',
 		availableAfter: 'catch Haunter and Mightyena',
+	},
+	'revive a fossil': {
+		kind: 'BULLETIN',
+		rewardItems: {
+			honey: 6,
+			'great-ball': 10,
+		},
+		researchPoints: 10,
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) => Object.values(fossilTable).includes(p.name));
+		},
+		requiredUpgrade: 'invite fossil expert',
 	},
 };
 

@@ -216,4 +216,5 @@ export const extraFeatureCheckList: {
 	{ name: 'moving background (water,flowers)' },
 	{ name: 'setting: randomized swarms' },
 	{ name: 'apply migrations on localstorage load' },
+	{ name: 'data collection module (name, nCaught,nDefeated)' },
 ];
