@@ -16,7 +16,7 @@ const oakLine: Occupant[] = [
 			'I have a first request for you and some equipment to get you started',
 		],
 		handledMessage: ['Check the Bulletin board for more quests'],
-		gifts: { 'poke-ball': 20 },
+		gifts: { 'poke-ball': 100 },
 		quest: 'catch a pokemon',
 		sprite: SpriteEnum.oak,
 		conditionFunction: (s) => s.quests['catch a pokemon'] !== 'COLLECTED',
