@@ -568,7 +568,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 		to: 'FARM',
 		id: 'berry_farmer',
 		x: 17,
-		y: 10,
+		y: 14,
 		orientation: 'LEFT',
 		dialogue: ['We can grow all types of berries and apricorns'],
 		sprite: SpriteEnum.farmer,

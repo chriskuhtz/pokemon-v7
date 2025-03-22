@@ -694,6 +694,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'yellow-apricorn': 1,
 		},
 		researchPoints: 10,
+		requiredUpgrade: 'invite apricorn smith kurt',
 		conditionFunction: (s) => s.mileStones.hasCraftedApricorn,
 	},
 	'lure a pokemon with honey': {
