@@ -4,6 +4,7 @@ import { BattleAction } from './BattleActions';
 import { DamageClass, MoveDto } from './Move';
 import { OwnedPokemon, OwnedPokemonMove } from './OwnedPokemon';
 import { PokemonData } from './PokemonData';
+import { PokemonType } from './PokemonType';
 import { StatObject } from './StatObject';
 
 export interface BattleMove extends OwnedPokemonMove {
@@ -34,6 +35,7 @@ export interface BattlePokemon extends OwnedPokemon {
 		damageClass: DamageClass['name'];
 		damage: number;
 		applicatorId: string;
+		attackType: PokemonType;
 	};
 	initAbility: AbilityName;
 }

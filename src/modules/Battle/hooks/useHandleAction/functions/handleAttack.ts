@@ -33,6 +33,7 @@ import {
 } from '../../../../../interfaces/Ailment';
 import { BattleAttack } from '../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
+import { typeEffectivenessChart } from '../../../../../interfaces/PokemonType';
 import { EmptyStatObject } from '../../../../../interfaces/StatObject';
 import { WeatherType } from '../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../BattleField';
@@ -194,6 +195,20 @@ export const handleAttack = ({
 			addMessage,
 			newType,
 		});
+	}
+	if (move.name === 'conversion-2') {
+		if (updatedAttacker.lastReceivedDamage) {
+			const newType = getRandomEntry(
+				typeEffectivenessChart[updatedAttacker.lastReceivedDamage.attackType]
+					.isNotVeryEffectiveAgainst
+			);
+			updatedAttacker = applySecondaryAilmentToPokemon({
+				pokemon: updatedAttacker,
+				ailment: 'color-changed',
+				addMessage,
+				newType,
+			});
+		} else addMessage({ message: `It failed to convert to a new type` });
 	}
 
 	//updated Target
@@ -499,6 +514,7 @@ export const handleAttack = ({
 				damageClass: move.data.damage_class.name,
 				damage: damage,
 				applicatorId: attacker.id,
+				attackType: move.data.type.name,
 			},
 		};
 		// check attacker  drain/recoil
