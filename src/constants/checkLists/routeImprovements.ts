@@ -8,4 +8,5 @@ export const routeimprovementsCheckList: {
 	{ name: 'make alola,hisui,galar, paldea quests possible' },
 	{ name: 'cave' },
 	{ name: 'water' },
+	{ name: 'wild apricorn trees' },
 ];
