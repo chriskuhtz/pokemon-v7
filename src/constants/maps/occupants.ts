@@ -565,7 +565,56 @@ const rowanLine: Occupant[] = [
 			s.quests['catch a pokemon orginally found in unova'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in kalos'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in alola'] === 'COLLECTED' &&
-			s.quests['catch a pokemon orginally found in galar'] === 'COLLECTED',
+			s.quests['catch a pokemon orginally found in galar'] !== 'COLLECTED',
+		orientation: 'DOWN',
+		sprite: SpriteEnum.rowan,
+	},
+	{
+		type: 'NPC',
+		id: 'rowan_9',
+		x: 5,
+		y: 15,
+		unhandledMessage: ['Paldea Region uniquely combines future and past'],
+		handledMessage: ['How is the catching going'],
+		quest: 'catch a pokemon orginally found in paldea',
+		conditionFunction: (s) =>
+			s.campUpgrades['invite professor rowan'] &&
+			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in hoenn'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in sinnoh'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in unova'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in kalos'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in alola'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in galar'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in paldea'] !== 'COLLECTED',
+		orientation: 'DOWN',
+		sprite: SpriteEnum.rowan,
+	},
+	{
+		type: 'NPC',
+		id: 'rowan_10',
+		x: 5,
+		y: 15,
+		unhandledMessage: [
+			'Some pokemon have evolved over time',
+			'in order to adjust to their environment',
+			'The Alolan Isles have many examples of this',
+		],
+		handledMessage: ['How is the catching going'],
+		quest: 'catch a pokemon and its alolan variant',
+		conditionFunction: (s) =>
+			s.campUpgrades['invite professor rowan'] &&
+			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in hoenn'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in sinnoh'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in unova'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in kalos'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in alola'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in galar'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in paldea'] === 'COLLECTED' &&
+			s.quests['catch a pokemon and its alolan variant'] !== 'COLLECTED',
 		orientation: 'DOWN',
 		sprite: SpriteEnum.rowan,
 	},
