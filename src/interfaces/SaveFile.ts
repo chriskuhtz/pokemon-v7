@@ -1,6 +1,7 @@
 import { CampUpgrade } from '../constants/checkLists/campUpgrades';
 import { QuestName } from '../constants/checkLists/questsRecord';
 import { MapId } from '../constants/maps/mapsRecord';
+import { PokemonName } from '../constants/pokemonNames';
 import { BadgeName } from './Badge';
 import { Challenger } from './Challenger';
 import { Inventory } from './Inventory';
@@ -56,6 +57,14 @@ export interface BerryBush {
 	id: string;
 }
 
+export interface PokemonSwarm {
+	pokemon: PokemonName;
+	leavesAt: number;
+	route: MapId;
+	xpMin: number;
+	xpMax: number;
+}
+
 export interface SaveFile {
 	badges: BadgeName[];
 	playerId: string;
@@ -96,4 +105,6 @@ export interface SaveFile {
 	};
 	campUpgrades: Record<CampUpgrade, boolean>;
 	honeyReadyAt?: number;
+	currentSwarm?: PokemonSwarm;
+	nextSwarmReadyAt?: number;
 }

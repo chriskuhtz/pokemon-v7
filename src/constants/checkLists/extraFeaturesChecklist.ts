@@ -211,4 +211,9 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'pokemon as quest rewards' },
 	{ name: 'consider weightMod for low kick damage' },
+	{
+		name: 'swarms increase shiny chance',
+	},
+	{ name: 'moving background (water,flowers)' },
+	{ name: 'randomized swarms' },
 ];

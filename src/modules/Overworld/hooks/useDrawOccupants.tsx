@@ -113,6 +113,8 @@ const drawOccupant = (
 					baseSize
 				);
 				break;
+			case 'HALLOWED_TOWER':
+			case 'SWARM_RADAR':
 			case 'BUSH':
 				ctx?.drawImage(
 					img,
@@ -123,7 +125,6 @@ const drawOccupant = (
 				);
 				break;
 			case 'HONEY_TREE':
-			case 'HALLOWED_TOWER':
 			case 'COMBEE_HIVE':
 				ctx?.drawImage(
 					img,
@@ -191,6 +192,8 @@ const getSource = (occ: Occupant) => {
 			return '/mapObjects/honeyTree.png';
 		case 'HALLOWED_TOWER':
 			return '/mapObjects/hallowedTower.png';
+		case 'SWARM_RADAR':
+			return '/mapObjects/radar.png';
 		case 'COMBEE_HIVE':
 			return '/mapObjects/combeeHive.png';
 		case 'OBSTACLE':

@@ -77,6 +77,8 @@ export const questNames = [
  * cook a recipe
  * cook all recipes
  * catch Baby Pokemon
+ * catch x different pokemon
+ * catch x swarm pokemon
  */
 export type QuestName = (typeof questNames)[number];
 

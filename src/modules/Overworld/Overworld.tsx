@@ -12,6 +12,7 @@ import { useHallowedTower } from '../../hooks/useHallowedTower';
 import { useHoneyTree } from '../../hooks/useHoneyTree';
 import { Message } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
+import { useSwarmRadar } from '../../hooks/useSwarmRadar';
 import { useZigzagoonForagers } from '../../hooks/useZigzagoonForagers';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
@@ -25,13 +26,13 @@ import { useClickTarget } from './hooks/useClickTarget';
 import { useCombeeHive } from './hooks/useCombeeHive';
 import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
+import { useEncounterRateModifier } from './hooks/useEncounterRateModifier';
 import { useJumpDownLedge } from './hooks/useJumpDownLedge';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useMachete } from './hooks/useMachete';
 import { useOccupants } from './hooks/useOccupants';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
 import { useStartEncounter } from './hooks/useStartEncounter';
-import { useEncounterRateModifier } from './hooks/useEncounterRateModifier';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -68,6 +69,7 @@ export const Overworld = ({
 	const interactWithLedge = useJumpDownLedge();
 	const interactWithZigzagoonForager = useZigzagoonForagers();
 	const interactWithDugtrioExplorer = useDugtrioExplorers();
+	const interactWithSwarmRadar = useSwarmRadar();
 	const addEncounterMessage = useStartEncounter();
 	const encounterRateModifier = useEncounterRateModifier();
 
@@ -94,7 +96,6 @@ export const Overworld = ({
 			interactWithFunction({
 				occ,
 				addMultipleMessages,
-
 				stepsTaken,
 				rotateOccupant,
 				playerLocation,
@@ -110,6 +111,7 @@ export const Overworld = ({
 				interactWithLedge,
 				interactWithZigzagoonForager,
 				interactWithDugtrioExplorer,
+				interactWithSwarmRadar,
 				goTo: (route) => navigateAwayFromOverworldReducer(route, stepsTaken),
 				settings: saveFile.settings,
 			}),
@@ -124,6 +126,7 @@ export const Overworld = ({
 			interactWithHallowedTower,
 			interactWithHoneyTree,
 			interactWithLedge,
+			interactWithSwarmRadar,
 			interactWithZigzagoonForager,
 			navigateAwayFromOverworldReducer,
 			playerLocation,

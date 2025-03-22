@@ -133,6 +133,10 @@ const useSaveFile = (
 			handledOccupants: update.handledOccupants.filter(
 				(h) => h.resetAt < 0 || h.resetAt > newTime
 			),
+			currentSwarm:
+				update.currentSwarm && newTime > update.currentSwarm?.leavesAt
+					? undefined
+					: update.currentSwarm,
 		});
 	}, []);
 	const discardItemReducer = (item: ItemType, number: number) => {
@@ -255,7 +259,8 @@ const useSaveFile = (
 								inventory: EmptyInventory,
 								team: determineWildPokemon(
 									team,
-									mapsRecord[saveFile.location.mapId]
+									mapsRecord[saveFile.location.mapId],
+									saveFile.currentSwarm
 								),
 						  }
 						: undefined,

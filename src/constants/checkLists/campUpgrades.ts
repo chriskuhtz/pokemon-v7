@@ -16,17 +16,20 @@ export const campUpgradeNames = [
 	'invite dugtrio explorers',
 	'invite fossil expert',
 	'invite chef grandma',
+	'pokemon swarm radar',
 ] as const;
 /**
  * ideas:
- * outbreak radio
  * more gym leaders
  * stronger training field
  * berry lure stations
  * 'Sledge hammer certification'
  * 'Shovel certification'
+ * "Pokeflute certification"
  * 'Pokemon Surfer Certification'
  * 'Pokemon Flyer Certification'
+ * 	Fishing?
+ * define more swarms
  */
 
 /**
@@ -65,6 +68,7 @@ export const campUpgradePrices: Record<CampUpgrade, number> = {
 	'machete certification': 50,
 	'invite fossil expert': 50,
 	'invite chef grandma': 50,
+	'pokemon swarm radar': 50,
 };
 export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	bulletin_board: [],
@@ -87,4 +91,5 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	],
 	'invite fossil expert': ['invite dugtrio explorers'],
 	'invite chef grandma': ['berry_farm'],
+	'pokemon swarm radar': ['bulletin_board'],
 };

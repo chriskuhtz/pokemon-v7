@@ -976,6 +976,13 @@ export const campOccupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) => s.campUpgrades['invite chef grandma'],
 		id: 'chef grandma',
 	},
+	{
+		type: 'SWARM_RADAR',
+		y: 10,
+		x: 11,
+		conditionFunction: (s) => s.campUpgrades['pokemon swarm radar'],
+		id: 'swarm radar',
+	},
 	...oakLine,
 	...trainingField,
 	...mortyLine,

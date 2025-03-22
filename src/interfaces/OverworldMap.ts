@@ -27,16 +27,12 @@ export const OCCUPANT_TYPES = [
 	'HONEY_TREE',
 	'HALLOWED_TOWER',
 	'ON_STEP_PORTAL',
-	'CAMP_MANAGER',
 	'BULLETIN_BOARD',
-	'APRICORN_SMITH',
 	'OBSTACLE',
-	'TRAINING_FIELD_MASTER',
-	'BERRY_FARMER',
-	'MILTANK_FARMER',
 	'COMBEE_HIVE',
 	'POKEMON',
 	'LEDGE',
+	'SWARM_RADAR',
 	'ZIGZAGOON_FORAGER',
 	'DUGTRIO_EXPLORER',
 	'ROUTER_NPC',
@@ -108,6 +104,9 @@ export interface OverworldHoneyTree extends BaseOccupant {
 }
 export interface OverworldHallowedTower extends BaseOccupant {
 	type: 'HALLOWED_TOWER';
+}
+export interface SwarmRadar extends BaseOccupant {
+	type: 'SWARM_RADAR';
 }
 export interface OverworldTrainer extends BaseOccupant {
 	type: 'TRAINER';
@@ -183,7 +182,8 @@ export type Occupant =
 	| Ledge
 	| ZigzagoonForager
 	| DugtrioExplorer
-	| RouterNpc;
+	| RouterNpc
+	| SwarmRadar;
 
 export interface OverworldEncounter {
 	name: PokemonName;
