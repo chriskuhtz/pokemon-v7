@@ -165,7 +165,6 @@ export const handleAttack = ({
 		);
 		return;
 	}
-
 	if (move.name === 'haze') {
 		addMessage({
 			message: `${attacker.name} removed all stat changes with haze`,
@@ -221,13 +220,11 @@ export const handleAttack = ({
 		return;
 	}
 	if (move.name === 'nightmare') {
-		if (updatedTarget.primaryAilment?.type === 'sleep') {
-			updatedTarget = applySecondaryAilmentToPokemon({
-				pokemon: updatedTarget,
-				ailment: 'nightmare',
-				addMessage,
-			});
-		} else addMessage({ message: `But ${updatedTarget.name} is awake` });
+		updatedTarget = applySecondaryAilmentToPokemon({
+			pokemon: updatedTarget,
+			ailment: 'nightmare',
+			addMessage,
+		});
 	}
 
 	if (move.name === 'pay-day') {

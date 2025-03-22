@@ -11,7 +11,10 @@ import {
 } from './getCompoundEyesFactor';
 import { isSelfTargeting } from './isSelfTargeting';
 
-export type MissReason = 'SOUNDPROOF';
+export type MissReason =
+	| 'SOUNDPROOF'
+	| 'ATTACKER_NOT_ASLEEP'
+	| 'TARGET_NOT_ASLEEP';
 
 export const getWeatherAccuracyFactor = (
 	target: BattlePokemon,
@@ -44,7 +47,18 @@ export const determineMiss = (
 	if (selfTargeting) {
 		return { miss: false };
 	}
-
+	if (
+		target.ability === 'soundproof' &&
+		soundBasedMoves.includes(attack.name)
+	) {
+		return { miss: true, reason: 'SOUNDPROOF' };
+	}
+	if (attack.name === 'nightmare' && target.primaryAilment?.type !== 'sleep') {
+		return { miss: true, reason: 'TARGET_NOT_ASLEEP' };
+	}
+	if (attack.name === 'snore' && attacker.primaryAilment?.type !== 'sleep') {
+		return { miss: true, reason: 'ATTACKER_NOT_ASLEEP' };
+	}
 	if (
 		target.secondaryAilments.some(
 			(ail) => ail.type === 'mind-read' && ail.by === attacker.id
@@ -55,12 +69,7 @@ export const determineMiss = (
 	) {
 		return { miss: false };
 	}
-	if (
-		target.ability === 'soundproof' &&
-		soundBasedMoves.includes(attack.name)
-	) {
-		return { miss: true, reason: 'SOUNDPROOF' };
-	}
+
 	if (targetIsFlying && !flyHitMoves.includes(attack.name)) {
 		return { miss: true };
 	}

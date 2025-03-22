@@ -15,6 +15,12 @@ export const handleMiss = (
 ) => {
 	if (reason === 'SOUNDPROOF') {
 		addMessage({ message: 'The Target has soundproof' });
+	}
+	if (reason === 'TARGET_NOT_ASLEEP') {
+		addMessage({ message: 'But The Target is awake' });
+	}
+	if (reason === 'SOUNDPROOF') {
+		addMessage({ message: `But ${attacker.name} is not asleep` });
 	} else addMessage({ message: 'It Missed' });
 
 	//UPDATES
