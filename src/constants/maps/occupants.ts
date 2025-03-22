@@ -641,6 +641,28 @@ const elmLine: Occupant[] = [
 		orientation: 'DOWN',
 		sprite: SpriteEnum.elm,
 	},
+	{
+		type: 'NPC',
+		id: 'elm_5',
+		x: 6,
+		y: 15,
+		unhandledMessage: [
+			'Some Pokemon can evolve into different options',
+			'Oddish, for example, evolves into gloom',
+			'but gloom can take different paths',
+		],
+		handledMessage: ['Pokemon have different evolution methods'],
+		quest: 'catch vileplume and bellosom',
+		conditionFunction: (s) =>
+			s.campUpgrades['invite professor elm'] &&
+			s.quests['evolve a pokemon through level up'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon with a stone'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon with a held item'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon through friendship'] === 'COLLECTED' &&
+			s.quests['catch vileplume and bellosom'] !== 'COLLECTED',
+		orientation: 'DOWN',
+		sprite: SpriteEnum.elm,
+	},
 ];
 const mortyLine: Occupant[] = [
 	{

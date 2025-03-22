@@ -50,6 +50,7 @@ export const questNames = [
 	'evolve a pokemon with a stone',
 	'evolve a pokemon with a held item',
 	'evolve a pokemon through friendship',
+	'catch vileplume and bellosom',
 	'train a pokemon to level 10',
 	'train a pokemon to level 20',
 	'train a pokemon to level 30',
@@ -68,7 +69,7 @@ export const questNames = [
  * Ideas:
  * catch Baby Pokemon
  * height based
- * elm line (night and day,split evos(gloom), all eeveelutions)
+ * elm line (night and day,all eeveelutions)
  * add elm and rowan to training field
  * shiny Pokemon
  */
@@ -541,7 +542,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 	},
 	'evolve a pokemon through level up': {
-		rewardItems: { 'rare-candy': 1 },
+		rewardItems: { 'thunder-stone': 1 },
 		researchPoints: 10,
 		conditionFunction: (s) => {
 			return s.mileStones.hasEvolvedAPokemonThroughLevelUp;
@@ -550,7 +551,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'evolve a pokemon with a stone': {
 		rewardItems: { 'metal-coat': 1 },
-		researchPoints: 10,
+		researchPoints: 15,
 		conditionFunction: (s) => {
 			return s.mileStones.hasEvolvedAPokemonWithAStone;
 		},
@@ -559,7 +560,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'evolve a pokemon with a held item': {
 		rewardItems: { 'rare-candy': 1 },
-		researchPoints: 10,
+		researchPoints: 20,
 		conditionFunction: (s) => {
 			return s.mileStones.hasEvolvedAPokemonWithAHeldItem;
 		},
@@ -567,13 +568,26 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'evolve a pokemon with a stone',
 	},
 	'evolve a pokemon through friendship': {
-		rewardItems: { 'rare-candy': 1 },
-		researchPoints: 10,
+		rewardItems: { 'leaf-stone': 1, 'sun-stone': 1 },
+		researchPoints: 25,
 		conditionFunction: (s) => {
 			return s.mileStones.hasEvolvedAPokemonWithAHeldItem;
 		},
 		kind: 'QUEST_LINE',
 		availableAfter: 'evolve a pokemon with a held item',
+	},
+	'catch vileplume and bellosom': {
+		rewardItems: { 'rare-candy': 5 },
+		researchPoints: 30,
+		targetPokemon: ['bellossom', 'vileplume'],
+		conditionFunction: (s) => {
+			return (
+				s.pokemon.some((p) => p.name === 'bellossom') &&
+				s.pokemon.some((p) => p.name === 'vileplume')
+			);
+		},
+		kind: 'QUEST_LINE',
+		availableAfter: 'evolve a pokemon through friendship',
 	},
 	'train a pokemon to level 10': {
 		rewardItems: { 'rare-candy': 1 },
