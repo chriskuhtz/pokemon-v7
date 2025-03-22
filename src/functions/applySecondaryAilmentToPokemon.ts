@@ -221,9 +221,21 @@ export const applySecondaryAilmentToPokemon = ({
 			secondaryAilments: [
 				...pokemon.secondaryAilments,
 				{
-					type: 'infatuation',
+					type: 'nightmare',
 					duration: 9000,
-					targetId,
+				},
+			],
+		};
+	}
+	if (ailment === 'cursed') {
+		addMessage({ message: `${pokemon.data.name} was cursed` });
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'cursed',
+					duration: 9000,
 				},
 			],
 		};

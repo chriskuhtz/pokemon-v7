@@ -1,4 +1,5 @@
 import {
+	CURSE_DAMAGE_FACTOR,
 	LEECH_DAMAGE_FACTOR,
 	NIGHTMARE_DAMAGE_FACTOR,
 	TRAP_DAMAGE_FACTOR,
@@ -35,6 +36,14 @@ export const applySecondaryAilmentDamage = (
 		const nightmareDamage = Math.round(
 			NIGHTMARE_DAMAGE_FACTOR * updated.stats.hp
 		);
+		updated = {
+			...updated,
+			damage: updated.damage + nightmareDamage,
+		};
+	}
+	if (updated.secondaryAilments.some((ail) => ail.type === 'cursed')) {
+		addMessage(`${pokemon.data.name} is damaged by curse`);
+		const nightmareDamage = Math.round(CURSE_DAMAGE_FACTOR * updated.stats.hp);
 		updated = {
 			...updated,
 			damage: updated.damage + nightmareDamage,

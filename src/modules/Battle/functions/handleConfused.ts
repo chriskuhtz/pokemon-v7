@@ -1,11 +1,9 @@
 import { calculateDamage } from '../../../functions/calculateDamage';
-import { isKO } from '../../../functions/isKo';
 import { Message } from '../../../hooks/useMessageQueue';
 import { CONFUSION_POWER } from '../../../interfaces/Ailment';
 import { BattleAttack } from '../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { MoveDto } from '../../../interfaces/Move';
-import { handleFainting } from './handleFainting';
 
 export const handleConfused = (
 	attacker: BattlePokemon,
@@ -47,10 +45,6 @@ export const handleConfused = (
 					false
 				).damage,
 		};
-
-		if (isKO(updatedAttacker)) {
-			handleFainting(updatedAttacker, addMessage);
-		}
 	}
 
 	//1. update moveQueue

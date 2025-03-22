@@ -17,6 +17,7 @@ import { getActualTargetId } from '../../../../../functions/getActualTargetId';
 import { getMiddleOfThree } from '../../../../../functions/getMiddleOfThree';
 import { getMovesArray } from '../../../../../functions/getMovesArray';
 import { arePokemonOfOppositeGenders } from '../../../../../functions/getRivalryFactor';
+import { getTypeNames } from '../../../../../functions/getTypeNames';
 import { handleFlinching } from '../../../../../functions/handleFlinching';
 import { isKO } from '../../../../../functions/isKo';
 import { Message } from '../../../../../hooks/useMessageQueue';
@@ -36,7 +37,7 @@ import { EmptyStatObject } from '../../../../../interfaces/StatObject';
 import { WeatherType } from '../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../BattleField';
 import { handleDampy } from '../../../functions/handleDampy';
-import { handleFainting } from '../../../functions/handleFainting';
+import { checkAndHandleFainting } from '../../../functions/handleFainting';
 import { handleMiss } from '../../../functions/handleMiss';
 import { handleMoveBlockAilments } from '../../../functions/handleMoveBlockAilments';
 import { handleNoTarget } from '../../../functions/handleNoTarget';
@@ -226,6 +227,23 @@ export const handleAttack = ({
 			addMessage,
 		});
 	}
+	if (
+		move.name === 'curse' &&
+		getTypeNames(updatedAttacker).includes('ghost')
+	) {
+		updatedTarget = applySecondaryAilmentToPokemon({
+			pokemon: updatedTarget,
+			ailment: 'cursed',
+			addMessage,
+		});
+		updatedAttacker = {
+			...updatedAttacker,
+			damage: updatedAttacker.damage + Math.floor(updatedAttacker.stats.hp / 2),
+		};
+		addMessage({
+			message: `${updatedAttacker.name} cut its own hp to curse ${updatedTarget}`,
+		});
+	}
 
 	if (move.name === 'pay-day') {
 		addMessage({ message: `Coins scattered everywhere` });
@@ -289,7 +307,7 @@ export const handleAttack = ({
 	//self destruct
 	if (SELF_DESTRUCTING_MOVES.includes(move.name)) {
 		addMessage({ message: `${updatedAttacker.name} self destructed` });
-		updatedAttacker = handleFainting(updatedAttacker, addMessage);
+		updatedAttacker = { ...updatedAttacker, damage: updatedAttacker.stats.hp };
 	}
 
 	//apply confusion on lock in end
@@ -448,10 +466,6 @@ export const handleAttack = ({
 		addMessage({
 			message: `${updatedAttacker.data.name} was hurt by rough skin`,
 		});
-
-		if (isKO(updatedAttacker)) {
-			updatedAttacker = handleFainting(updatedAttacker, addMessage);
-		}
 	}
 	//handle splash
 	if (move.name === 'splash') {
@@ -525,13 +539,6 @@ export const handleAttack = ({
 					message: `${updatedAttacker.data.name} took ${absDrainValue} HP recoil damage`,
 				});
 			}
-			if (isKO(updatedAttacker)) {
-				updatedAttacker = handleFainting(updatedAttacker, addMessage);
-			}
-		}
-		//check for fainting
-		if (isKO(updatedTarget)) {
-			updatedTarget = handleFainting(updatedTarget, addMessage);
 		}
 		//apply ailments
 		const { updatedApplicator: a, updatedTarget: b } =
@@ -633,19 +640,20 @@ export const handleAttack = ({
 			});
 		}
 	}
+
 	setPokemon((pokemon) =>
 		pokemon.map((p) => {
 			if (
 				updatedAttacker.id === updatedTarget.id &&
 				p.id === updatedAttacker.id
 			) {
-				return updatedAttacker;
+				return checkAndHandleFainting(updatedAttacker, addMessage);
 			}
 			if (p.id === updatedAttacker.id) {
-				return updatedAttacker;
+				return checkAndHandleFainting(updatedAttacker, addMessage);
 			}
 			if (p.id === updatedTarget.id) {
-				return updatedTarget;
+				return checkAndHandleFainting(updatedTarget, addMessage);
 			}
 			return p;
 		})
