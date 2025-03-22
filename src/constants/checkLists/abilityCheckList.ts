@@ -336,6 +336,7 @@ export const abilityCheckList: {
 	{
 		name: 'shed-skin',
 		url: 'https://pokeapi.co/api/v2/ability/61/',
+		handled: true,
 	},
 	{ name: 'guts', url: 'https://pokeapi.co/api/v2/ability/62/', handled: true },
 	{
@@ -393,7 +394,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/81/',
 		handled: true,
 	},
-	{ name: 'gluttony', url: 'https://pokeapi.co/api/v2/ability/82/' },
+	{
+		name: 'gluttony',
+		url: 'https://pokeapi.co/api/v2/ability/82/',
+		handled: true,
+	},
 	{ name: 'anger-point', url: 'https://pokeapi.co/api/v2/ability/83/' },
 	{ name: 'unburden', url: 'https://pokeapi.co/api/v2/ability/84/' },
 	{ name: 'heatproof', url: 'https://pokeapi.co/api/v2/ability/85/' },
@@ -768,6 +773,7 @@ export const abilityNames = [
 	'arena-trap',
 	'steadfast',
 	'snow-cloak',
+	'gluttony',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

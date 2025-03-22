@@ -161,5 +161,7 @@ export const applyEndOfTurnHeldItem = (
 			};
 		}
 	}
+
+	//remember gluttony for 1/4 trigger berries
 	return pokemon;
 };

@@ -219,4 +219,5 @@ export const extraFeatureCheckList: {
 	{
 		name: 'setting: level scaling',
 	},
+	{ name: 'pokemon as quest rewards' },
 ];
