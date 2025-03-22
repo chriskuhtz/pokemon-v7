@@ -72,7 +72,7 @@ export const getPower = (
 	if (attack.name === 'low-kick') {
 		return getLowKickPower(targetWeight);
 	}
-	if (attack.name === 'flail') {
+	if (attack.name === 'flail' || attack.name === 'reversal') {
 		return getFlailPower(attacker.stats.hp, attacker.damage);
 	}
 	if (attack.name === 'psywave') {
