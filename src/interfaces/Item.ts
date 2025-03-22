@@ -177,6 +177,7 @@ export const berries = [
 	'aguav-berry',
 	'wiki-berry',
 	'razz-berry',
+	'wepear-berry',
 ] as const;
 
 export const fossils = [
@@ -335,6 +336,7 @@ export const cookingBerries: BerryType[] = [
 	'bluk-berry',
 	'nanab-berry',
 	'razz-berry',
+	'wepear-berry',
 ];
 
 export const AilmentHealTable: Partial<Record<ItemType, AilmentType[]>> = {
