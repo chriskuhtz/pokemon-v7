@@ -7,6 +7,7 @@ import { getItemUrl } from '../../../functions/getItemUrl';
 import { getStats } from '../../../functions/getStats';
 import { getTypeNames } from '../../../functions/getTypeNames';
 import { isOwnedPokemonKO } from '../../../functions/isKo';
+import { EvolutionReducerPayload } from '../../../hooks/useSaveFile';
 import { Inventory } from '../../../interfaces/Inventory';
 import { ItemType } from '../../../interfaces/Item';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
@@ -23,7 +24,6 @@ import { EvoInfo } from './EvoInfo';
 import { MovesDisplay } from './MovesDisplay';
 import { NickNameModal } from './NickNameModal';
 import { StatDisplay } from './StatDisplay';
-import { EvolutionReducerPayload } from '../../../hooks/useSaveFile';
 
 export const HIDDEN_STATS = ['accuracy', 'evasion', 'hp'];
 
@@ -169,6 +169,9 @@ export const OwnedPokemonCardContent = ({
 						<h5>ability: {ownedPokemon.ability}</h5>
 						{ownedPokemon.weightModifier && (
 							<h5>rel. Weight: {ownedPokemon.weightModifier.toFixed(2)}</h5>
+						)}
+						{ownedPokemon.heightModifier && (
+							<h5>rel. Height: {ownedPokemon.heightModifier.toFixed(2)}</h5>
 						)}
 					</div>
 					<div>

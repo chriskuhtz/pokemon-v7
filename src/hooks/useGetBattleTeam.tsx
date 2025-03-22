@@ -147,9 +147,7 @@ export const useGetBattleTeam = (
 					moveQueue: [],
 					firstMove,
 					secondMove,
-
 					thirdMove,
-
 					fourthMove,
 					data: fetchedData,
 					stats: getStats(

@@ -47,4 +47,5 @@ export interface OwnedPokemon {
 	nickname?: string;
 	gender: PokemonGender;
 	weightModifier?: number;
+	heightModifier?: number;
 }

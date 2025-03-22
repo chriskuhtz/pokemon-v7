@@ -38,7 +38,8 @@ export const reduceBattlePokemonToOwnedPokemon = (
 		effortValues: newMon.effortValues,
 		ppBoostedMoves: newMon.ppBoostedMoves,
 		caughtOnMap: newMon.caughtOnMap,
-		weightModifier: newMon.weightModifier,
+		weightModifier: newMon.weightModifier ?? Math.random(),
+		heightModifier: newMon.heightModifier ?? Math.random(),
 	};
 
 	if (heal) {

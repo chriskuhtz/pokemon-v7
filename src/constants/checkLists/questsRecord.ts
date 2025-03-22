@@ -62,13 +62,13 @@ export const questNames = [
 	'catch a pokemon in an apricorn ball',
 	'catch a very heavy specimen',
 	'catch a very light specimen',
+	'catch a tiny specimen',
 	'catch a pokemon in every type of apricorn ball',
 	'defeat morty',
 ] as const;
 /**
  * Ideas:
- * catch Baby Pokemon
- * height based
+ * height based (big)
  * elm line (night and day,all eeveelutions)
  * add elm and rowan to training field
  * shiny Pokemon
@@ -76,6 +76,7 @@ export const questNames = [
  * revive all fossils
  * cook a recipe
  * cook all recipes
+ * catch Baby Pokemon
  */
 export type QuestName = (typeof questNames)[number];
 
@@ -749,14 +750,26 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) =>
 			s.pokemon.some((p) => p.weightModifier && p.weightModifier > 0.9),
 	},
+
 	'catch a very light specimen': {
 		kind: 'BULLETIN',
 		rewardItems: {
 			'sitrus-berry': 5,
 		},
 		researchPoints: 10,
+		availableAfter: 'catch a very heavy specimen',
 		conditionFunction: (s) =>
 			s.pokemon.some((p) => p.weightModifier && p.weightModifier < 0.1),
+	},
+	'catch a tiny specimen': {
+		kind: 'BULLETIN',
+		rewardItems: {
+			'yellow-apricorn': 5,
+		},
+		researchPoints: 10,
+		availableAfter: 'catch a very light specimen',
+		conditionFunction: (s) =>
+			s.pokemon.some((p) => p.heightModifier && p.heightModifier < 0.1),
 	},
 	'catch Haunter and Mightyena': {
 		rewardItems: { 'rare-bone': 2 },

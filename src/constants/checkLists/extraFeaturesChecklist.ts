@@ -210,4 +210,5 @@ export const extraFeatureCheckList: {
 		name: 'setting: level scaling',
 	},
 	{ name: 'pokemon as quest rewards' },
+	{ name: 'consider weightMod for low kick damage' },
 ];
