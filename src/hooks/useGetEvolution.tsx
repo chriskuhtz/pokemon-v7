@@ -6,7 +6,7 @@ import {
 } from '../interfaces/EvolutionChainData';
 import { PokemonData } from '../interfaces/PokemonData';
 import { PokemonSpeciesData } from '../interfaces/PokemonSpeciesData';
-import { deAlternate } from './useGetBattleTeam';
+import { deAlternate } from '../functions/handleAlternateForms';
 
 export const getSpeciesForPokemon = async (
 	data: PokemonData

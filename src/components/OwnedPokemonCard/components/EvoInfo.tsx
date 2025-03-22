@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { determineEvoChecks } from '../../../functions/determineEvoChecks';
+import { keepAlternateFormThroughEvolution } from '../../../functions/handleAlternateForms';
 import { useGetEvolution } from '../../../hooks/useGetEvolution';
 import { EvolutionReducerPayload } from '../../../hooks/useSaveFile';
 import { EvolutionChainLink } from '../../../interfaces/EvolutionChainData';
@@ -89,7 +90,10 @@ const EvoButton = ({
 				evolve({
 					name: ownedPokemon.name,
 					id: ownedPokemon.id,
-					newName: evo.species.name,
+					newName: keepAlternateFormThroughEvolution({
+						newName: evo.species.name,
+						currentName: ownedPokemon.name,
+					}).newName,
 					consumeHeldItem: !!held_item,
 					consumedItem: itemName,
 					evoRequirement,

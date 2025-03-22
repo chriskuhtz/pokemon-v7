@@ -18,14 +18,7 @@ import {
 	EmptyStatObject,
 	generateRandomStatObject,
 } from '../interfaces/StatObject';
-
-export const deAlternate = (name: string) => {
-	return name
-		.replace('-alola', '')
-		.replace('-hisui', '')
-		.replace('-paldea', '')
-		.replace('-galar', '');
-};
+import { deAlternate } from '../functions/handleAlternateForms';
 
 export const useGetBattleTeam = (
 	initTeam: (OwnedPokemon & { caughtBefore: boolean })[],
