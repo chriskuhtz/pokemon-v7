@@ -68,6 +68,7 @@ export const questNames = [
 	'catch a pokemon in every type of apricorn ball',
 	'defeat morty',
 	'revive a fossil',
+	'revive all different fossils',
 ] as const;
 /**
  * Ideas:
@@ -827,9 +828,26 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 10,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) => Object.values(fossilTable).includes(p.name));
+			return Object.values(fossilTable).every((fossil) =>
+				s.pokemon.some((p) => fossil === p.name)
+			);
 		},
 		requiredUpgrade: 'invite fossil expert',
+	},
+	'revive all different fossils': {
+		kind: 'BULLETIN',
+		rewardItems: {
+			'rare-candy': 5,
+			'ultra-ball': 20,
+		},
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return Object.values(fossilTable).every((fossil) =>
+				s.pokemon.some((p) => fossil === p.name)
+			);
+		},
+		requiredUpgrade: 'invite fossil expert',
+		availableAfter: 'revive a fossil',
 	},
 };
 

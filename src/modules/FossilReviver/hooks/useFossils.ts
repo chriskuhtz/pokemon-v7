@@ -21,11 +21,12 @@ export const useFossils = () => {
 	const revive = useCallback(
 		(fossil: FossilType) => {
 			addMessage({
-				message: `Revived the ${fossil} `,
+				message: `Revived the ${fossil} for 5 research points`,
 			});
 			putSaveFileReducer({
 				...saveFile,
 				inventory: joinInventories(saveFile.inventory, { [fossil]: 1 }, true),
+				researchPoints: saveFile.researchPoints - 5,
 				pokemon: [
 					...saveFile.pokemon,
 					makeChallengerPokemon({

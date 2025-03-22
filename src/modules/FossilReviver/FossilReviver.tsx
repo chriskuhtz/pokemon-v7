@@ -21,16 +21,16 @@ export const FossilReviver = (): JSX.Element => {
 							<Card
 								key={f}
 								icon={<img src={getItemUrl(f)} />}
-								content={f}
-								actionElements={[
-									<button
-										onClick={() => {
-											revive(f);
-										}}
-									>
-										Revive <PokemonSprite name={fossilTable[f]} />
-									</button>,
-								]}
+								onClick={() => {
+									revive(f);
+								}}
+								content={
+									<h3>
+										Revive <PokemonSprite name={fossilTable[f]} /> for 5
+										Research Points
+									</h3>
+								}
+								actionElements={[]}
 							/>
 					  ))
 					: [
