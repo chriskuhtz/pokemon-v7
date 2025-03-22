@@ -7,6 +7,7 @@ import { MoveName } from '../constants/checkLists/movesCheckList';
 import { calculateLevelData } from '../functions/calculateLevelData';
 import { getRandomEntry } from '../functions/filterTargets';
 import { getStats } from '../functions/getStats';
+import { deAlternate } from '../functions/handleAlternateForms';
 import { maybeGetHeldItemFromData } from '../functions/maybeGetHeldItemFromData';
 import { moveIsAvailable } from '../functions/moveIsAvailable';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -18,7 +19,6 @@ import {
 	EmptyStatObject,
 	generateRandomStatObject,
 } from '../interfaces/StatObject';
-import { deAlternate } from '../functions/handleAlternateForms';
 
 export const useGetBattleTeam = (
 	initTeam: (OwnedPokemon & { caughtBefore: boolean })[],
@@ -28,6 +28,7 @@ export const useGetBattleTeam = (
 		assignGender?: boolean;
 		generateIvs?: boolean;
 		generateEvs?: boolean;
+		assignHeldItem?: boolean;
 	}
 ) => {
 	const {
@@ -36,6 +37,7 @@ export const useGetBattleTeam = (
 		assignNaturalAbility,
 		generateIvs,
 		generateEvs,
+		assignHeldItem,
 	} = config;
 	return useFetch<BattlePokemon[]>(() =>
 		Promise.all(
@@ -157,13 +159,17 @@ export const useGetBattleTeam = (
 				const gender = assignGender
 					? determineGender(spd.gender_rate)
 					: pokemon.gender;
+
+				const heldItemName = assignHeldItem
+					? maybeGetHeldItemFromData(fetchedData)
+					: pokemon.heldItemName;
 				const battleMon: BattlePokemon = {
 					...pokemon,
 					gender,
 					ability: ability,
 					initAbility: ability,
-					heldItemName:
-						pokemon.heldItemName ?? maybeGetHeldItemFromData(fetchedData),
+					heldItemName,
+
 					roundsInBattle: 0,
 					secondaryAilments: [],
 					moveQueue: [],

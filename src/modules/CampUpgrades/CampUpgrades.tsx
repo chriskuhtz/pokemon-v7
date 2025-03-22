@@ -73,7 +73,13 @@ export const CampUpgrades = ({
 						actionElements={
 							campUpgrades[upgrade]
 								? [<FaCheckCircle size={battleSpriteSize} />]
-								: [<button>Unlock</button>]
+								: [
+										<button>
+											{campUpgradePrices[upgrade] <= researchPoints
+												? 'Unlock'
+												: 'More Research Points needed'}
+										</button>,
+								  ]
 						}
 						icon={<LuHousePlus size={battleSpriteSize} />}
 					/>

@@ -26,7 +26,10 @@ export const useCombeeHive = () => {
 				honeyReadyAt: now + Math.random() * ONE_HOUR,
 			});
 		} else {
-			addMessage({ message: 'The Combee are busy producing new honey' });
+			addMessage({
+				message: 'The Combee are busy producing new honey',
+				needsNoConfirmation: true,
+			});
 		}
 	}, [
 		addMessage,

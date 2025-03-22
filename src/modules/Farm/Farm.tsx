@@ -43,7 +43,10 @@ export const Farm = (): JSX.Element => {
 							icon={<BerryBushIcon bush={bush} />}
 							content={
 								<div>
-									<h5>{bush.type}</h5>
+									<h5>
+										{bush.type}
+										{ready && !bush.successful && `  (withered)`}
+									</h5>
 
 									{!ready && (
 										<strong>

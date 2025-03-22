@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
+import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { battleSpriteSize } from '../../constants/gameData';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getItemUrl } from '../../functions/getItemUrl';
@@ -9,7 +10,6 @@ import { Chip } from '../../uiComponents/Chip/Chip';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 
 export const PokemonStorage = ({
 	allPokemon,
@@ -22,13 +22,22 @@ export const PokemonStorage = ({
 	setPokemon: (x: OwnedPokemon[]) => void;
 	addMessage: (x: Message) => void;
 }): JSX.Element => {
-	const [sortBy, setSortBy] = useState<'HAPPINESS' | 'XP' | 'NAME'>('NAME');
+	const [sortBy, setSortBy] = useState<'HAPPINESS' | 'XP' | 'NAME' | 'BALL'>(
+		'NAME'
+	);
 	const sortFunction = useMemo(() => {
 		if (sortBy === 'XP') {
 			return (a: OwnedPokemon, b: OwnedPokemon) => b.xp - a.xp;
 		}
 		if (sortBy === 'HAPPINESS') {
 			return (a: OwnedPokemon, b: OwnedPokemon) => b.happiness - a.happiness;
+		}
+		if (sortBy === 'BALL') {
+			return (a: OwnedPokemon, b: OwnedPokemon) => {
+				if (a.ball < b.ball) return -1;
+				if (a.ball > b.ball) return 1;
+				return 0;
+			};
 		}
 		if (sortBy === 'NAME') {
 			return (a: OwnedPokemon, b: OwnedPokemon) => {
@@ -123,6 +132,16 @@ export const PokemonStorage = ({
 						onClick={() => setSortBy('XP')}
 					>
 						Level
+					</button>
+					<button
+						style={
+							sortBy === 'BALL'
+								? { backgroundColor: 'black', color: 'white' }
+								: undefined
+						}
+						onClick={() => setSortBy('BALL')}
+					>
+						Ball
 					</button>
 				</div>
 			</h2>

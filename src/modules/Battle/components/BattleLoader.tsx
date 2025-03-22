@@ -42,6 +42,7 @@ export const BattleLoader = ({
 			assignNaturalAbility: true,
 			generateIvs: true,
 			generateEvs: true,
+			assignHeldItem: true,
 		}
 	);
 	const { res: battleTeam } = useGetBattleTeam(
