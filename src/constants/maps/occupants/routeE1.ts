@@ -111,4 +111,14 @@ export const routeE1Occupants: OverworldMap['occupants'] = [
 		id: 'ledge8',
 		sprite: '/ledges/ledgeEndBottomRight.png',
 	},
+	{
+		y: 49,
+		x: 25,
+		type: 'POKEMON',
+		orientation: 'DOWN',
+		id: 'snorlax-blocker',
+		dexId: 143,
+		conditionFunction: () => true,
+		dialogue: ['..ZZ..', '.ZZZ...', '...ZZZ.'],
+	},
 ];
