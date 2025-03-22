@@ -30,6 +30,7 @@ export const testPokemon: OwnedPokemon = {
 	heldItemName: 'berry-juice',
 	maxHp: 20,
 	effortValues: EmptyStatObject,
+	intrinsicValues: EmptyStatObject,
 	ppBoostedMoves: [],
 	caughtOnMap: 'camp',
 	weightModifier: Math.random(),

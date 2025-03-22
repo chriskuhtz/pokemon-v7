@@ -14,16 +14,28 @@ import { MoveDto } from '../interfaces/Move';
 import { OwnedPokemon, PokemonGender } from '../interfaces/OwnedPokemon';
 import { PokemonData } from '../interfaces/PokemonData';
 import { PokemonSpeciesData } from '../interfaces/PokemonSpeciesData';
-import { EmptyStatObject } from '../interfaces/StatObject';
+import {
+	EmptyStatObject,
+	generateRandomStatObject,
+} from '../interfaces/StatObject';
+
 export const useGetBattleTeam = (
 	initTeam: (OwnedPokemon & { caughtBefore: boolean })[],
 	config: {
 		assignLearnsetMoves?: boolean;
 		assignNaturalAbility?: boolean;
 		assignGender?: boolean;
+		generateIvs?: boolean;
+		generateEvs?: boolean;
 	}
 ) => {
-	const { assignGender, assignLearnsetMoves, assignNaturalAbility } = config;
+	const {
+		assignGender,
+		assignLearnsetMoves,
+		assignNaturalAbility,
+		generateIvs,
+		generateEvs,
+	} = config;
 	return useFetch<BattlePokemon[]>(() =>
 		Promise.all(
 			initTeam.map(async (pokemon) => {
@@ -169,6 +181,12 @@ export const useGetBattleTeam = (
 					capture_rate: capture_rate,
 					happiness: pokemon.happiness < 0 ? base_happiness : pokemon.happiness,
 					status: 'BENCH',
+					intrinsicValues: generateIvs
+						? generateRandomStatObject(31)
+						: pokemon.intrinsicValues,
+					effortValues: generateEvs
+						? generateRandomStatObject(255)
+						: pokemon.effortValues,
 				};
 
 				return battleMon;

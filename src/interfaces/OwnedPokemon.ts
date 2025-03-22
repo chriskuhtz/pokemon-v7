@@ -41,7 +41,7 @@ export interface OwnedPokemon {
 	heldItemName?: ItemType;
 	maxHp: number;
 	effortValues: StatObject;
-	//intrinsicValues: StatObject;
+	intrinsicValues: StatObject;
 	ppBoostedMoves: PPBoostedMove[];
 	caughtOnMap: MapId;
 	nickname?: string;

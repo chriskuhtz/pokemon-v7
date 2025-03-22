@@ -40,6 +40,8 @@ export const BattleLoader = ({
 			assignLearnsetMoves: true,
 			assignGender: true,
 			assignNaturalAbility: true,
+			generateIvs: true,
+			generateEvs: true,
 		}
 	);
 	const { res: battleTeam } = useGetBattleTeam(
