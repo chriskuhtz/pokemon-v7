@@ -1,4 +1,8 @@
-import { LEECH_DAMAGE_FACTOR, TRAP_DAMAGE_FACTOR } from '../interfaces/Ailment';
+import {
+	LEECH_DAMAGE_FACTOR,
+	NIGHTMARE_DAMAGE_FACTOR,
+	TRAP_DAMAGE_FACTOR,
+} from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { isLeechSeeded, isTrapped, leechingOn } from './isTrapped';
@@ -24,6 +28,16 @@ export const applySecondaryAilmentDamage = (
 		updated = {
 			...updated,
 			damage: updated.damage + leechDamage,
+		};
+	}
+	if (updated.secondaryAilments.some((ail) => ail.type === 'nightmare')) {
+		addMessage(`${pokemon.data.name} is damaged by nightmares`);
+		const nightmareDamage = Math.round(
+			NIGHTMARE_DAMAGE_FACTOR * updated.stats.hp
+		);
+		updated = {
+			...updated,
+			damage: updated.damage + nightmareDamage,
 		};
 	}
 

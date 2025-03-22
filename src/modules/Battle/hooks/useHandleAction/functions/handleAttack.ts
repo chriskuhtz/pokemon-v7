@@ -220,6 +220,15 @@ export const handleAttack = ({
 		handleMiss(attacker, move, setPokemon, addMessage, underPressure, reason);
 		return;
 	}
+	if (move.name === 'nightmare') {
+		if (updatedTarget.primaryAilment?.type === 'sleep') {
+			updatedTarget = applySecondaryAilmentToPokemon({
+				pokemon: updatedTarget,
+				ailment: 'nightmare',
+				addMessage,
+			});
+		} else addMessage({ message: `But ${updatedTarget.name} is awake` });
+	}
 
 	if (move.name === 'pay-day') {
 		addMessage({ message: `Coins scattered everywhere` });

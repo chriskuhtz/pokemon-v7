@@ -214,5 +214,19 @@ export const applySecondaryAilmentToPokemon = ({
 			],
 		};
 	}
+	if (ailment === 'nightmare' && pokemon.primaryAilment?.type === 'sleep') {
+		addMessage({ message: `${pokemon.data.name} got nightmares` });
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'infatuation',
+					duration: 9000,
+					targetId,
+				},
+			],
+		};
+	}
 	return pokemon;
 };
