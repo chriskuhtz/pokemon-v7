@@ -453,18 +453,18 @@ export const BattleField = ({
 			const collectedMessages: string[] = [];
 			const updatedPokemon = pokemon.map((p) => {
 				if (p.status === 'ONFIELD') {
-					let updated = applyEndOfTurnAbility({
-						initialPokemon: [...initOpponents, ...initTeam].find(
-							(initPok) => initPok.id === p.id
-						),
-						pokemon: p,
-						addMessage: (x) => collectedMessages.push(x.message),
-					});
-					updated = applyEndOfTurnHeldItem(
-						updated,
+					let updated = applyEndOfTurnHeldItem(
+						p,
 						(x) => collectedMessages.push(x),
 						(x) => collectedMessages.push(...x)
 					);
+					updated = applyEndOfTurnAbility({
+						initialPokemon: [...initOpponents, ...initTeam].find(
+							(initPok) => initPok.id === p.id
+						),
+						pokemon: updated,
+						addMessage: (x) => collectedMessages.push(x.message),
+					});
 					updated = applyPrimaryAilmentDamage(updated, (x) =>
 						collectedMessages.push(x)
 					);
