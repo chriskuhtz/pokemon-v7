@@ -5,8 +5,9 @@ export const routeimprovementsCheckList: {
 }[] = [
 	{ name: 'add scyther encounter', handled: true },
 	{ name: 'add oddish encounter', handled: true },
-	{ name: 'adjust route N1 encounters' },
+	{ name: 'adjust route N1 encounters', handled: true },
 	{ name: 'adjust route N1E1 encounters' },
+	{ name: 'conditionally unlock route E1' },
 	{ name: 'make alola,hisui,galar, paldea quests possible' },
 	{ name: 'cave' },
 	{ name: 'water' },
