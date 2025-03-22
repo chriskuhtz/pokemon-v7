@@ -219,4 +219,7 @@ export const extraFeatureCheckList: {
 	{ name: 'data collection module (name, nCaught,nDefeated)' },
 	{ name: 'award evs after battle' },
 	{ name: 'evs should not just be random' },
+	{
+		name: 'filter bulletin quests by time of day',
+	},
 ];

@@ -30,6 +30,7 @@ import { ControlBar } from './components/ControlBar';
 import { EnemyLane } from './components/EnemyLane';
 import { PlayerLane } from './components/PlayerLane';
 import { RefillHandling } from './components/RefillHandling';
+import { checkAndHandleFainting } from './functions/handleFainting';
 import { useBattleFieldEffects } from './hooks/useBattleFieldEffects';
 import { useChooseAction } from './hooks/useChooseAction';
 import { useHandleAction } from './hooks/useHandleAction/useHandleAction';
@@ -482,6 +483,9 @@ export const BattleField = ({
 					//resets at end of turn
 					updated = { ...updated, lastReceivedDamage: undefined };
 
+					updated = checkAndHandleFainting(updated, (x) =>
+						collectedMessages.push(x.message)
+					);
 					return updated;
 				}
 
