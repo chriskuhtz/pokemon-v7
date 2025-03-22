@@ -63,6 +63,7 @@ export const questNames = [
 	'catch a very heavy specimen',
 	'catch a very light specimen',
 	'catch a tiny specimen',
+	'catch a gigantic specimen',
 	'catch a pokemon in every type of apricorn ball',
 	'defeat morty',
 ] as const;
@@ -772,6 +773,16 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'catch a very light specimen',
 		conditionFunction: (s) =>
 			s.pokemon.some((p) => p.heightModifier && p.heightModifier < 0.1),
+	},
+	'catch a gigantic specimen': {
+		kind: 'BULLETIN',
+		rewardItems: {
+			'green-apricorn': 5,
+		},
+		researchPoints: 10,
+		availableAfter: 'catch a tiny specimen',
+		conditionFunction: (s) =>
+			s.pokemon.some((p) => p.heightModifier && p.heightModifier > 0.9),
 	},
 	'catch Haunter and Mightyena': {
 		rewardItems: { 'rare-bone': 2 },
