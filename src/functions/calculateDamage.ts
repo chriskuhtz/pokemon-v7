@@ -60,23 +60,14 @@ export const calculateDamage = (
 	targetIsFlying: boolean,
 	targetIsUnderground: boolean,
 	addMessage?: (x: Message) => void
-): number => {
+): { damage: number; criticalHit?: boolean } => {
 	const damageClass = attack.data.damage_class.name;
 	if (damageClass === 'status') {
-		return 0;
+		return { damage: 0 };
 	}
 	const typeFactor = determineTypeFactor(target, attack, addMessage);
 	if (typeFactor === 0) {
-		return 0;
-	}
-	if (
-		attack.name === 'dream-eater' &&
-		target.primaryAilment?.type !== 'sleep'
-	) {
-		if (addMessage) {
-			addMessage({ message: 'It failed' });
-		}
-		return 0;
+		return { damage: 0 };
 	}
 
 	if (attack.name === 'counter') {
@@ -84,12 +75,12 @@ export const calculateDamage = (
 			attacker.lastReceivedDamage?.damageClass === 'physical' &&
 			attacker.lastReceivedDamage.applicatorId === target.id
 		) {
-			return attacker.lastReceivedDamage.damage * 2;
+			return { damage: attacker.lastReceivedDamage.damage * 2 };
 		} else {
 			if (addMessage) {
 				addMessage({ message: 'Counter failed' });
 			}
-			return 0;
+			return { damage: 0 };
 		}
 	}
 	if (ohkoMoves.includes(attack.name)) {
@@ -97,34 +88,36 @@ export const calculateDamage = (
 			if (addMessage) {
 				addMessage({ message: 'sturdy prevents One Hit K.O moves' });
 			}
-			return 0;
+			return { damage: 0 };
 		}
-		return target.stats.hp;
+		return { damage: target.stats.hp };
 	}
 	if (fixedDamageMoves[attack.name]) {
-		return fixedDamageMoves[attack.name];
+		return { damage: fixedDamageMoves[attack.name] };
 	}
 	if (levelDamageMoves.includes(attack.name)) {
-		return calculateLevelData(attacker.xp).level;
+		return { damage: calculateLevelData(attacker.xp).level };
 	}
 	if (attack.name === 'super-fang') {
-		return Math.floor(
-			getMiddleOfThree([
-				1,
-				(attacker.stats.hp - attacker.damage) / 2,
-				attacker.stats.hp,
-			])
-		);
+		return {
+			damage: Math.floor(
+				getMiddleOfThree([
+					1,
+					(attacker.stats.hp - attacker.damage) / 2,
+					attacker.stats.hp,
+				])
+			),
+		};
 	}
 
 	if (target.ability === 'flash-fire' && attack.data.type.name === 'fire') {
-		return 0;
+		return { damage: 0 };
 	}
 	if (
 		target.ability === 'motor-drive' &&
 		attack.data.type.name === 'electric'
 	) {
-		return 0;
+		return { damage: 0 };
 	}
 
 	const absorbAbility = DamageAbsorbAbilityMap[target.ability];
@@ -135,7 +128,7 @@ export const calculateDamage = (
 				message: `${target.data.name} was healed by ${target.ability}`,
 			});
 		}
-		return res;
+		return { damage: res };
 	}
 
 	const { level } = calculateLevelData(attacker.xp);
@@ -352,8 +345,8 @@ export const calculateDamage = (
 		if (addMessage) {
 			addMessage({ message: `${target.data.name} hung on with sturdy` });
 		}
-		return target.stats.hp - 1;
+		return { damage: target.stats.hp - 1, criticalHit: critFactor === 2 };
 	}
 
-	return res;
+	return { damage: res, criticalHit: critFactor === 2 };
 };

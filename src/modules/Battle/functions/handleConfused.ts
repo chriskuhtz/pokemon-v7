@@ -45,7 +45,7 @@ export const handleConfused = (
 					false,
 					false,
 					false
-				),
+				).damage,
 		};
 
 		if (isKO(updatedAttacker)) {

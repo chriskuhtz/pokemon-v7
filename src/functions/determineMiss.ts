@@ -53,7 +53,10 @@ export const determineMiss = (
 	) {
 		return { miss: true, reason: 'SOUNDPROOF' };
 	}
-	if (attack.name === 'nightmare' && target.primaryAilment?.type !== 'sleep') {
+	if (
+		(attack.name === 'nightmare' || attack.name === 'dream-eater') &&
+		target.primaryAilment?.type !== 'sleep'
+	) {
 		return { miss: true, reason: 'TARGET_NOT_ASLEEP' };
 	}
 	if (attack.name === 'snore' && attacker.primaryAilment?.type !== 'sleep') {

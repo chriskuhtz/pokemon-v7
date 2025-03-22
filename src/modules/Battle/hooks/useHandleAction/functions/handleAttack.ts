@@ -474,7 +474,7 @@ export const handleAttack = ({
 		);
 		const damage = getMiddleOfThree([
 			0,
-			calculatedDamage,
+			calculatedDamage.damage,
 			updatedTarget.stats.hp - updatedTarget.damage,
 		]);
 		updatedTarget = {
@@ -551,10 +551,25 @@ export const handleAttack = ({
 			false,
 			battleFieldEffects
 		);
+		// check anger point
+		if (
+			calculatedDamage.criticalHit &&
+			updatedTarget.ability === 'anger-point'
+		) {
+			updatedTarget = applyStatChangeToPokemon(
+				updatedTarget,
+				'attack',
+				6,
+				true,
+				battleFieldEffects,
+				addMessage,
+				'with anger point'
+			);
+		}
 
 		// apply rage boost
 		if (
-			calculatedDamage > 0 &&
+			calculatedDamage.damage > 0 &&
 			target.secondaryAilments.some((a) => a.type === 'raging')
 		) {
 			updatedTarget = applyStatChangeToPokemon(
