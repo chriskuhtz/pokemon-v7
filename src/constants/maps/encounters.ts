@@ -38,9 +38,9 @@ export const routeN1Encounters: EncounterMap = {
 		{ name: 'pidgey', xp: 50, rarity: 'common' },
 		{ name: 'pidgey', xp: 100, rarity: 'common' },
 		{ name: 'pidgey', xp: 125, rarity: 'medium' },
-		{ name: 'caterpie', xp: 50, rarity: 'common' },
-		{ name: 'caterpie', xp: 100, rarity: 'common' },
-		{ name: 'caterpie', xp: 125, rarity: 'medium' },
+		{ name: 'oddish', xp: 50, rarity: 'common' },
+		{ name: 'oddish', xp: 100, rarity: 'common' },
+		{ name: 'oddish', xp: 125, rarity: 'medium' },
 		{ name: 'gastly', xp: 125, rarity: 'rare' },
 		{ name: 'eevee', xp: 125, rarity: 'ultra-rare' },
 	],
@@ -59,7 +59,7 @@ export const routeN1Encounters: EncounterMap = {
 	],
 };
 export const routeN1E1Encounters: EncounterMap = {
-	BASE: [],
+	BASE: [{ name: 'scyther', xp: 1500, rarity: 'rare' }],
 	MORNING: [
 		{ name: 'patrat', xp: 1000, rarity: 'common' },
 		{ name: 'patrat', xp: 800, rarity: 'common' },
