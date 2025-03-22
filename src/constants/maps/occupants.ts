@@ -762,7 +762,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 	},
 	{
 		type: 'POKEMON',
-		id: 'camp_nurse',
+		id: 'camp_nurse_blissey',
 		x: 7,
 		y: 4,
 		orientation: 'DOWN',
