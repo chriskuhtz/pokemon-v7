@@ -21,6 +21,7 @@ export const OCCUPANT_TYPES = [
 	'NURSE',
 	'TRAINER',
 	'BUSH',
+	'ROCK',
 	'NPC',
 	'PORTAL',
 	'SIGN',
@@ -98,6 +99,9 @@ export interface OverworldSign extends BaseOccupant {
 }
 export interface OverworldBush extends BaseOccupant {
 	type: 'BUSH';
+}
+export interface OverworldRock extends BaseOccupant {
+	type: 'ROCK';
 }
 export interface OverworldHoneyTree extends BaseOccupant {
 	type: 'HONEY_TREE';
@@ -183,7 +187,8 @@ export type Occupant =
 	| ZigzagoonForager
 	| DugtrioExplorer
 	| RouterNpc
-	| SwarmRadar;
+	| SwarmRadar
+	| OverworldRock;
 
 export interface OverworldEncounter {
 	name: PokemonName;

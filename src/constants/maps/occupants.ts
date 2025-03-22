@@ -147,13 +147,12 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 		id: 'routeN1E1_to_routeE1',
 	},
 	{
-		type: 'SIGN',
+		type: 'ROCK',
+		y: 49,
 		x: 25,
-		y: 50,
-		dialogue: ['No Access', 'Ongoing development'],
-		approachDirection: 'UP',
-		conditionFunction: () => true,
-		id: 'development stopper',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'rock_routeN1E1'),
+		id: 'rock_routeN1E1',
 	},
 	{
 		type: 'HALLOWED_TOWER',

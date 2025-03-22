@@ -32,6 +32,7 @@ import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useMachete } from './hooks/useMachete';
 import { useOccupants } from './hooks/useOccupants';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
+import { useSledgeHammer } from './hooks/useSledgeHammer';
 import { useStartEncounter } from './hooks/useStartEncounter';
 
 const playerCanvasId = 'playerCanvas';
@@ -70,6 +71,7 @@ export const Overworld = ({
 	const interactWithZigzagoonForager = useZigzagoonForagers();
 	const interactWithDugtrioExplorer = useDugtrioExplorers();
 	const interactWithSwarmRadar = useSwarmRadar();
+	const interactWithRock = useSledgeHammer();
 	const addEncounterMessage = useStartEncounter();
 	const encounterRateModifier = useEncounterRateModifier();
 
@@ -108,6 +110,7 @@ export const Overworld = ({
 				interactWithHallowedTower,
 				interactWithCombeeHive,
 				interactWithBush,
+				interactWithRock,
 				interactWithLedge,
 				interactWithZigzagoonForager,
 				interactWithDugtrioExplorer,
@@ -126,6 +129,7 @@ export const Overworld = ({
 			interactWithHallowedTower,
 			interactWithHoneyTree,
 			interactWithLedge,
+			interactWithRock,
 			interactWithSwarmRadar,
 			interactWithZigzagoonForager,
 			navigateAwayFromOverworldReducer,

@@ -7,6 +7,7 @@ import {
 	Occupant,
 	OccupantType,
 	OverworldBush,
+	OverworldRock,
 } from '../../../interfaces/OverworldMap';
 import { RoutesType } from '../../../interfaces/Routing';
 import {
@@ -46,6 +47,7 @@ export const interactWithFunction = ({
 	interactWithCombeeHive,
 	interactWithHallowedTower,
 	interactWithBush,
+	interactWithRock,
 	interactWithLedge,
 	interactWithZigzagoonForager,
 	interactWithDugtrioExplorer,
@@ -67,6 +69,7 @@ export const interactWithFunction = ({
 	interactWithHallowedTower: () => void;
 	interactWithCombeeHive: () => void;
 	interactWithBush: (x: OverworldBush) => void;
+	interactWithRock: (x: OverworldRock) => void;
 	interactWithLedge: (x: Ledge) => void;
 	interactWithZigzagoonForager: () => void;
 	interactWithDugtrioExplorer: () => void;
@@ -103,6 +106,10 @@ export const interactWithFunction = ({
 	}
 	if (data.type === 'BUSH') {
 		interactWithBush(data);
+		return;
+	}
+	if (data.type === 'ROCK') {
+		interactWithRock(data);
 		return;
 	}
 	if (data.type === 'LEDGE') {
