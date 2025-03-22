@@ -15,6 +15,7 @@ export const campUpgradeNames = [
 	'invite zigzagoon foragers',
 	'invite dugtrio explorers',
 	'invite fossil expert',
+	'invite chef grandma',
 ] as const;
 /**
  * ideas:
@@ -22,8 +23,6 @@ export const campUpgradeNames = [
  * more gym leaders
  * stronger training field
  * berry lure stations
- * berry cooking grandma
- * elm the evolution expert
  */
 
 /**
@@ -61,6 +60,7 @@ export const campUpgradePrices: Record<CampUpgrade, number> = {
 	'invite dugtrio explorers': 50,
 	'machete certification': 50,
 	'invite fossil expert': 50,
+	'invite chef grandma': 50,
 };
 export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	bulletin_board: [],
@@ -82,4 +82,5 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 		'invite zigzagoon foragers',
 	],
 	'invite fossil expert': ['invite dugtrio explorers'],
+	'invite chef grandma': ['berry_farm'],
 };

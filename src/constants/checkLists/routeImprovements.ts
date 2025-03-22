@@ -5,6 +5,7 @@ export const routeimprovementsCheckList: {
 }[] = [
 	{ name: 'training field route' },
 	{ name: 'add scyther encounter' },
+	{ name: 'add oddish encounter' },
 	{ name: 'make alola,hisui,galar, paldea quests possible' },
 	{ name: 'cave' },
 	{ name: 'water' },

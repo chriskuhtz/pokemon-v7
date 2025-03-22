@@ -10,6 +10,7 @@ import { Bag } from './modules/Bag/Bag';
 import { BattleLoader } from './modules/Battle/components/BattleLoader';
 import { BulletinBoard } from './modules/BulletinBoard/BulletinBoard';
 import { CampUpgrades } from './modules/CampUpgrades/CampUpgrades';
+import { CookingGradma } from './modules/CookingGrandma/CookingGrandma';
 import { Farm } from './modules/Farm/Farm';
 import { FossilReviver } from './modules/FossilReviver/FossilReviver';
 import { MainMenu } from './modules/MainMenu/MainMenu';
@@ -212,6 +213,9 @@ export const App = (): JSX.Element => {
 	}
 	if (activeTab === 'FOSSIL_REVIVER') {
 		return <FossilReviver />;
+	}
+	if (activeTab === 'CHEF_GRANDMA') {
+		return <CookingGradma />;
 	}
 	if (activeTab === 'APRICORN_SMITHY') {
 		return <ApricornSmithy goBack={() => setActiveTabReducer('OVERWORLD')} />;

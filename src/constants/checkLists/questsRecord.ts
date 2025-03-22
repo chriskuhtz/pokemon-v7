@@ -72,6 +72,10 @@ export const questNames = [
  * elm line (night and day,all eeveelutions)
  * add elm and rowan to training field
  * shiny Pokemon
+ * revive a fossil
+ * revive all fossils
+ * cook a recipe
+ * cook all recipes
  */
 export type QuestName = (typeof questNames)[number];
 

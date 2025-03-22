@@ -31,6 +31,7 @@ export const routes = [
 	'APRICORN_SMITHY',
 	'TRAINING_FIELD',
 	'MILTANK_FARM',
+	'CHEF_GRANDMA',
 	...mapMakerRoutes,
 ] as const;
 export type RoutesType = (typeof routes)[number];
