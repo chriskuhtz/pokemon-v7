@@ -216,4 +216,7 @@ export const extraFeatureCheckList: {
 	{ name: 'itemsprite component' },
 	{ name: 'growth rates' },
 	{ name: 'play button for pokemon lofi' },
+	{
+		name: 'setting: level scaling',
+	},
 ];

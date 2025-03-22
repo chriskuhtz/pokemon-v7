@@ -536,6 +536,77 @@ const rowanLine: Occupant[] = [
 		sprite: SpriteEnum.rowan,
 	},
 ];
+const elmLine: Occupant[] = [
+	{
+		type: 'NPC',
+		id: 'elm_1',
+		x: 6,
+		y: 15,
+		unhandledMessage: [
+			'I am Professor Elm',
+			'Professor Oak was my Teacher',
+			'I have always been fascinated by pokemon evolution',
+			'can you help me find out more',
+		],
+		handledMessage: ['Pokemon have different evolution methods'],
+		quest: 'evolve a pokemon through level up',
+		conditionFunction: (s) =>
+			s.campUpgrades['invite professor elm'] &&
+			s.quests['evolve a pokemon through level up'] !== 'COLLECTED',
+		orientation: 'DOWN',
+		sprite: SpriteEnum.elm,
+	},
+	{
+		type: 'NPC',
+		id: 'elm_2',
+		x: 6,
+		y: 15,
+		unhandledMessage: ['Some Pokemon evolve when exposed to rare stones'],
+		handledMessage: ['Pokemon have different evolution methods'],
+		quest: 'evolve a pokemon with a stone',
+		conditionFunction: (s) =>
+			s.campUpgrades['invite professor elm'] &&
+			s.quests['evolve a pokemon through level up'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon with a stone'] !== 'COLLECTED',
+		orientation: 'DOWN',
+		sprite: SpriteEnum.elm,
+	},
+	{
+		type: 'NPC',
+		id: 'elm_3',
+		x: 6,
+		y: 15,
+		unhandledMessage: ['Some Pokemon need to hold an item to evolve'],
+		handledMessage: ['Pokemon have different evolution methods'],
+		quest: 'evolve a pokemon with a held item',
+		conditionFunction: (s) =>
+			s.campUpgrades['invite professor elm'] &&
+			s.quests['evolve a pokemon through level up'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon with a stone'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon with a held item'] !== 'COLLECTED',
+		orientation: 'DOWN',
+		sprite: SpriteEnum.elm,
+	},
+	{
+		type: 'NPC',
+		id: 'elm_4',
+		x: 6,
+		y: 15,
+		unhandledMessage: [
+			'Some Pokemon only evolve if you become good friends with them',
+		],
+		handledMessage: ['Pokemon have different evolution methods'],
+		quest: 'evolve a pokemon through friendship',
+		conditionFunction: (s) =>
+			s.campUpgrades['invite professor elm'] &&
+			s.quests['evolve a pokemon through level up'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon with a stone'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon with a held item'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon through friendship'] !== 'COLLECTED',
+		orientation: 'DOWN',
+		sprite: SpriteEnum.elm,
+	},
+];
 const mortyLine: Occupant[] = [
 	{
 		type: 'NPC',
@@ -869,6 +940,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 	...trainingField,
 	...mortyLine,
 	...rowanLine,
+	...elmLine,
 	...miltankFarm,
 	...zigzagoonForagers,
 	...dugtrioExplorers,

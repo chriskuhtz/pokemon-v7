@@ -68,6 +68,8 @@ export const questNames = [
  * Ideas:
  * catch Baby Pokemon
  * height based
+ * elm line (night and day,split evos(gloom), all eeveelutions)
+ * add elm and rowan to training field
  */
 export type QuestName = (typeof questNames)[number];
 
@@ -543,7 +545,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => {
 			return s.mileStones.hasEvolvedAPokemonThroughLevelUp;
 		},
-		kind: 'BULLETIN',
+		kind: 'QUEST_LINE',
 	},
 	'evolve a pokemon with a stone': {
 		rewardItems: { 'metal-coat': 1 },
@@ -551,7 +553,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => {
 			return s.mileStones.hasEvolvedAPokemonWithAStone;
 		},
-		kind: 'BULLETIN',
+		kind: 'QUEST_LINE',
 		availableAfter: 'evolve a pokemon through level up',
 	},
 	'evolve a pokemon with a held item': {
@@ -560,7 +562,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => {
 			return s.mileStones.hasEvolvedAPokemonWithAHeldItem;
 		},
-		kind: 'BULLETIN',
+		kind: 'QUEST_LINE',
 		availableAfter: 'evolve a pokemon with a stone',
 	},
 	'evolve a pokemon through friendship': {
@@ -569,7 +571,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => {
 			return s.mileStones.hasEvolvedAPokemonWithAHeldItem;
 		},
-		kind: 'BULLETIN',
+		kind: 'QUEST_LINE',
 		availableAfter: 'evolve a pokemon with a held item',
 	},
 	'train a pokemon to level 10': {

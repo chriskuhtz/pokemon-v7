@@ -2,6 +2,7 @@ export const campUpgradeNames = [
 	'bulletin_board',
 	'invite ghost expert morty',
 	'invite professor rowan',
+	'invite professor elm',
 	'invite apricorn smith kurt',
 	'training field 1',
 	'berry_farm',
@@ -18,7 +19,6 @@ export const campUpgradeNames = [
 /**
  * ideas:
  * outbreak radio
- * fossil maniac
  * more gym leaders
  * stronger training field
  * berry lure stations
@@ -48,6 +48,7 @@ export const campUpgradePrices: Record<CampUpgrade, number> = {
 	bulletin_board: 10,
 	'invite ghost expert morty': 50,
 	'invite professor rowan': 50,
+	'invite professor elm': 50,
 	'invite apricorn smith kurt': 50,
 	'training field 1': 50,
 	berry_farm: 50,
@@ -65,6 +66,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	bulletin_board: [],
 	'invite ghost expert morty': ['bulletin_board'],
 	'invite professor rowan': ['bulletin_board'],
+	'invite professor elm': ['bulletin_board'],
 	'invite apricorn smith kurt': ['bulletin_board'],
 	'machete certification': ['bulletin_board'],
 	'training field 1': ['bulletin_board'],
