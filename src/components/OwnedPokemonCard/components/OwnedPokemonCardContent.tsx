@@ -173,6 +173,7 @@ export const OwnedPokemonCardContent = ({
 						{ownedPokemon.heightModifier && (
 							<h5>rel. Height: {ownedPokemon.heightModifier.toFixed(2)}</h5>
 						)}
+						<h5>Gender: {ownedPokemon.gender}</h5>
 					</div>
 					<div>
 						<HappinessIcon value={ownedPokemon.happiness} />

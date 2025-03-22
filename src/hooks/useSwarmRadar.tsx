@@ -40,6 +40,7 @@ export const useSwarmRadar = () => {
 				message: `The radar detects swarms of ${
 					saveFile.currentSwarm.pokemon
 				} on ${mapDisplayNames[saveFile.currentSwarm.route]}`,
+				needsNoConfirmation: true,
 			});
 		} else if (!saveFile.nextSwarmReadyAt || now > saveFile.nextSwarmReadyAt) {
 			const randomSwarm = getRandomEntry(swarms);
@@ -47,6 +48,7 @@ export const useSwarmRadar = () => {
 				message: `The radar detects swarms of ${randomSwarm.pokemon} on ${
 					mapDisplayNames[randomSwarm.route]
 				}`,
+				needsNoConfirmation: true,
 			});
 
 			patchSaveFileReducer({
@@ -54,7 +56,10 @@ export const useSwarmRadar = () => {
 				nextSwarmReadyAt: now + ONE_HOUR * 6,
 			});
 		} else {
-			addMessage({ message: 'No Swarms detected, check back later' });
+			addMessage({
+				message: 'No Swarms detected, check back later',
+				needsNoConfirmation: true,
+			});
 		}
 	}, [addMessage, patchSaveFileReducer, saveFile]);
 };

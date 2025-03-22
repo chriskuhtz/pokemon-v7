@@ -17,4 +17,8 @@ export interface PokemonSpeciesData {
 	};
 	base_happiness: number;
 	capture_rate: number;
+	gender_rate: number;
+	is_baby: boolean;
+	is_legendary: boolean;
+	is_mythical: boolean;
 }

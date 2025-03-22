@@ -11,15 +11,19 @@ import { maybeGetHeldItemFromData } from '../functions/maybeGetHeldItemFromData'
 import { moveIsAvailable } from '../functions/moveIsAvailable';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { MoveDto } from '../interfaces/Move';
-import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { OwnedPokemon, PokemonGender } from '../interfaces/OwnedPokemon';
 import { PokemonData } from '../interfaces/PokemonData';
 import { PokemonSpeciesData } from '../interfaces/PokemonSpeciesData';
 import { EmptyStatObject } from '../interfaces/StatObject';
 export const useGetBattleTeam = (
 	initTeam: (OwnedPokemon & { caughtBefore: boolean })[],
-	assignLearnsetMoves?: boolean,
-	assignNaturalAbility?: boolean
+	config: {
+		assignLearnsetMoves?: boolean;
+		assignNaturalAbility?: boolean;
+		assignGender?: boolean;
+	}
 ) => {
+	const { assignGender, assignLearnsetMoves, assignNaturalAbility } = config;
 	return useFetch<BattlePokemon[]>(() =>
 		Promise.all(
 			initTeam.map(async (pokemon) => {
@@ -136,8 +140,13 @@ export const useGetBattleTeam = (
 								usedPP: pokemon.fourthMove?.usedPP ?? 0,
 						  }
 						: undefined;
+
+				const gender = assignGender
+					? determineGender(spd.gender_rate)
+					: pokemon.gender;
 				const battleMon: BattlePokemon = {
 					...pokemon,
+					gender,
 					ability: ability,
 					initAbility: ability,
 					heldItemName:
@@ -166,4 +175,15 @@ export const useGetBattleTeam = (
 			})
 		)
 	);
+};
+
+const determineGender = (gender_rate: number): PokemonGender => {
+	if (gender_rate === -1) {
+		return 'GENDERLESS';
+	}
+	if (Math.random() < gender_rate / 8) {
+		return 'FEMALE';
+	}
+
+	return 'MALE';
 };

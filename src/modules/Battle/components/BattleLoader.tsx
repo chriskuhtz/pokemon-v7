@@ -36,11 +36,15 @@ export const BattleLoader = ({
 			...o,
 			caughtBefore: ownedPokemonNames.includes(o.name),
 		})),
-		true,
-		true
+		{
+			assignLearnsetMoves: true,
+			assignGender: true,
+			assignNaturalAbility: true,
+		}
 	);
 	const { res: battleTeam } = useGetBattleTeam(
-		team.map((t) => ({ ...t, caughtBefore: true }))
+		team.map((t) => ({ ...t, caughtBefore: true })),
+		{}
 	);
 
 	if (!battleOpponents || !battleTeam) {

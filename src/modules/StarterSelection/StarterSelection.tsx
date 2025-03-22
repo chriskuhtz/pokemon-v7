@@ -35,8 +35,11 @@ export const StarterSelection = (): JSX.Element => {
 			id: v4(),
 			caughtBefore: false,
 		})),
-		true,
-		true
+		{
+			assignLearnsetMoves: true,
+			assignGender: true,
+			assignNaturalAbility: true,
+		}
 	);
 	const [chosenStarter, setChosenStarter] = useState<
 		BattlePokemon | undefined

@@ -17,7 +17,8 @@ export const TeamOverview = ({ steps }: { steps: number }) => {
 		[saveFile]
 	);
 	const { res: battleTeam } = useGetBattleTeam(
-		team.map((t) => ({ ...t, caughtBefore: true }))
+		team.map((t) => ({ ...t, caughtBefore: true })),
+		{}
 	);
 
 	if (!battleTeam) {

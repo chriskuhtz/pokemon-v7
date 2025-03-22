@@ -33,7 +33,8 @@ export const Team = ({
 }): JSX.Element => {
 	const { evolvePokemonReducer: evolve } = useContext(SaveFileContext);
 	const { res, invalidate } = useGetBattleTeam(
-		team.map((t) => ({ ...t, caughtBefore: true }))
+		team.map((t) => ({ ...t, caughtBefore: true })),
+		{}
 	);
 
 	const [focusedId, setFocusedId] = useState<string>(initialFocus);
