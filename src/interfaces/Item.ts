@@ -402,6 +402,7 @@ export const pickupTable: ItemType[] = [
 	'rare-candy',
 ];
 export const undergroundTable: ItemType[] = [
+	...valuables,
 	...evoStones,
 	...evBoostItemTypes,
 	...fossils,

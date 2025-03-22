@@ -21,7 +21,7 @@ export const campUpgradeNames = [
 ] as const;
 /**
  * ideas:
- * items from sledgehammering
+ * valuables trader
  * encounters from sledgehammering
  * more gym leaders
  * stronger training field
@@ -47,7 +47,7 @@ export const campUpgradeNames = [
  * Trade Berries for Moomoo Milk
  * Craft Balls from Apricorns
  * Trade Moomoo Milk for underground items from Dugtrio explorer
- *
+
  * Prevent Softlock: get more balls from oak
  */
 

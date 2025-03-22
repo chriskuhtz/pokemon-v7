@@ -1,7 +1,10 @@
-import { useContext, useCallback } from 'react';
+import { useCallback, useContext } from 'react';
 import { ONE_HOUR } from '../../../constants/gameData';
+import { getRandomEntry } from '../../../functions/filterTargets';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
+import { joinInventories } from '../../../interfaces/Inventory';
+import { undergroundTable } from '../../../interfaces/Item';
 import { OverworldRock } from '../../../interfaces/OverworldMap';
 
 export const useSledgeHammer = () => {
@@ -14,6 +17,14 @@ export const useSledgeHammer = () => {
 				return;
 			}
 			if (saveFile.campUpgrades['sledge hammer certification']) {
+				const foundItem =
+					Math.random() > 0.9 ? getRandomEntry(undergroundTable) : undefined;
+
+				const updatedInventory = foundItem
+					? joinInventories(saveFile.inventory, {
+							[foundItem]: 1,
+					  })
+					: saveFile.inventory;
 				addMultipleMessages([
 					{
 						message: 'You use your certified sledge hammer skills',
@@ -23,8 +34,10 @@ export const useSledgeHammer = () => {
 									...saveFile.handledOccupants,
 									{ id: rock.id, resetAt: new Date().getTime() + ONE_HOUR },
 								],
+								inventory: updatedInventory,
 							}),
 					},
+					{ message: `found 1 ${foundItem} in the rubble` },
 				]);
 			} else
 				addMultipleMessages([
@@ -40,6 +53,7 @@ export const useSledgeHammer = () => {
 			patchSaveFileReducer,
 			saveFile.campUpgrades,
 			saveFile.handledOccupants,
+			saveFile.inventory,
 		]
 	);
 };
