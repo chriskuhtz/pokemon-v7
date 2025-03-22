@@ -166,7 +166,6 @@ export const extraFeatureCheckList: {
 	{ name: 'berry bushes' },
 	{ name: 'refactor quest limit' },
 	{ name: 'Changing moves messes with pp' },
-	{ name: 'Trainers should give money' },
 	{ name: 'Held Item & Pickup Bug' },
 	{ name: 'icons for quests' },
 	{ name: 'setting: no items in battle' },
@@ -216,4 +215,5 @@ export const extraFeatureCheckList: {
 	{ name: 'trade evos' },
 	{ name: 'itemsprite component' },
 	{ name: 'growth rates' },
+	{ name: 'play button for pokemon lofi' },
 ];
