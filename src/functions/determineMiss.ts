@@ -12,6 +12,20 @@ import {
 import { isSelfTargeting } from './isSelfTargeting';
 
 export type MissReason = 'SOUNDPROOF';
+
+export const getWeatherAccuracyFactor = (
+	target: BattlePokemon,
+	weather?: WeatherType
+) => {
+	if (weather === 'sandstorm' && target.ability === 'sand-veil') {
+		return 0.8;
+	}
+	if (weather === 'hail' && target.ability === 'snow-cloak') {
+		return 0.8;
+	}
+
+	return 1;
+};
 /**
  *
  * @param attack
@@ -88,8 +102,7 @@ export const determineMiss = (
 
 	const ratio = attackerAccuracy / targetEvasion;
 
-	const weatherFactor =
-		weather === 'sandstorm' && target.ability === 'sand-veil' ? 0.8 : 1;
+	const weatherFactor = getWeatherAccuracyFactor(target, weather);
 
 	const attackerlevel = calculateLevelData(attacker.xp).level;
 	const targetlevel = calculateLevelData(target.xp).level;

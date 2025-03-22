@@ -61,6 +61,7 @@ export const PARA_SPEED_FACTOR = 0.5;
 export const BURN_DAMAGE_FACTOR = 1 / 8;
 export const BURN_ATTACK_REDUCTION_FACTOR = 0.5;
 export const SANDSTORM_DAMAGE_FACTOR = 1 / 16;
+export const HAIL_DAMAGE_FACTOR = 1 / 16;
 export const POISON_DAMAGE_FACTOR = 1 / 16;
 export const UNFREEZE_CHANCE = 0.1;
 export const WAKEUP_CHANCE = 0.2;
