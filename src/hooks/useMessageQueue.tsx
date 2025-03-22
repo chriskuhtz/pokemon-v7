@@ -49,7 +49,7 @@ export const useMessageQueue = (speed?: number): UseMessageQueue => {
 		}
 		const t = setTimeout(() => {
 			confirmLatestMessage();
-		}, speed ?? animationTimer * 2);
+		}, speed ?? animationTimer);
 
 		return () => clearTimeout(t);
 	}, [confirmLatestMessage, messages, speed]);
