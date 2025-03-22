@@ -369,6 +369,41 @@ export const routeN1W1Occupants: OverworldMap['occupants'] = [
 		id: 'routeN1W1_to_routeW1',
 	},
 ];
+
+const oakLine: Occupant[] = [
+	{
+		type: 'NPC',
+		id: 'oak_1',
+		x: 5,
+		y: 4,
+		orientation: 'DOWN',
+		unhandledMessage: [
+			'Ah, you made it',
+			'Outside of the fence, the wild Kuma Region awaits',
+			'If your Pokemon are hurt, talk to nurse joy on my right',
+			'For camp related issues, Camp Manager Kevin can help you',
+			'I have a first request for you and some equipment to get you started',
+		],
+		handledMessage: ['Check the Bulletin board for more quests'],
+		gifts: { 'poke-ball': 20 },
+		quest: 'catch a pokemon',
+		sprite: SpriteEnum.oak,
+		conditionFunction: (s) => s.quests['catch a pokemon'] !== 'COLLECTED',
+	},
+	{
+		type: 'NPC',
+		id: 'oak_2',
+		x: 5,
+		y: 4,
+		orientation: 'DOWN',
+		unhandledMessage: [
+			'Great work',
+			'Check the Bulletin board for more quests',
+		],
+		sprite: SpriteEnum.oak,
+		conditionFunction: (s) => s.quests['catch a pokemon'] === 'COLLECTED',
+	},
+];
 const rowanLine: Occupant[] = [
 	{
 		type: 'NPC',
@@ -790,38 +825,6 @@ const dugtrioExplorers: Occupant[] = [
 
 export const campOccupants: OverworldMap['occupants'] = [
 	{
-		type: 'NPC',
-		id: 'oak_1',
-		x: 5,
-		y: 4,
-		orientation: 'DOWN',
-		unhandledMessage: [
-			'Ah, you made it',
-			'Outside of the fence, the wild Kuma Region awaits',
-			'If your Pokemon are hurt, talk to nurse joy on my right',
-			'For camp related issues, Camp Manager Kevin can help you',
-			'I have a first request for you and some equipment to get you started',
-		],
-		handledMessage: ['Check the Bulletin board for more quests'],
-		gifts: { 'poke-ball': 20 },
-		quest: 'catch a pokemon',
-		sprite: SpriteEnum.oak,
-		conditionFunction: (s) => s.quests['catch a pokemon'] !== 'COLLECTED',
-	},
-	{
-		type: 'NPC',
-		id: 'oak_2',
-		x: 5,
-		y: 4,
-		orientation: 'DOWN',
-		unhandledMessage: [
-			'Great work',
-			'Check the Bulletin board for more quests',
-		],
-		sprite: SpriteEnum.oak,
-		conditionFunction: (s) => s.quests['catch a pokemon'] === 'COLLECTED',
-	},
-	{
 		type: 'NURSE',
 		id: 'camp_nurse',
 		x: 6,
@@ -937,6 +940,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) => s.campUpgrades['invite fossil expert'],
 		id: 'fossil expert',
 	},
+	...oakLine,
 	...trainingField,
 	...mortyLine,
 	...rowanLine,

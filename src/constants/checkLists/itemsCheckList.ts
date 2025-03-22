@@ -603,7 +603,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/139/',
 		handled: true,
 	},
-	{ name: 'wiki-berry', url: 'https://pokeapi.co/api/v2/item/137/' },
+	{
+		name: 'wiki-berry',
+		url: 'https://pokeapi.co/api/v2/item/137/',
+		handled: true,
+	},
 	{ name: 'razz-berry', url: 'https://pokeapi.co/api/v2/item/141/' },
 	{ name: 'wepear-berry', url: 'https://pokeapi.co/api/v2/item/144/' },
 	{ name: 'pinap-berry', url: 'https://pokeapi.co/api/v2/item/145/' },

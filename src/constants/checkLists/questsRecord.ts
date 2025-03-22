@@ -70,6 +70,7 @@ export const questNames = [
  * height based
  * elm line (night and day,split evos(gloom), all eeveelutions)
  * add elm and rowan to training field
+ * shiny Pokemon
  */
 export type QuestName = (typeof questNames)[number];
 

@@ -175,6 +175,7 @@ export const berries = [
 	'bluk-berry',
 	'nanab-berry',
 	'aguav-berry',
+	'wiki-berry',
 ] as const;
 
 export const fossils = [
@@ -327,6 +328,7 @@ export const FlavourfullBerriesTable: Partial<Record<ItemType, Nature[]>> = {
 	'mago-berry': ['brave', 'relaxed', 'quiet', 'sassy'],
 	'iapapa-berry': ['lonely', 'mild', 'gentle', 'hasty'],
 	'aguav-berry': ['naughty', 'rash', 'lax', 'naive'],
+	'wiki-berry': ['adamant', 'impish', 'careful', 'jolly'],
 };
 export const cookingBerries: BerryType[] = ['bluk-berry', 'nanab-berry'];
 
