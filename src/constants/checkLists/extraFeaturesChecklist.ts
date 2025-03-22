@@ -222,4 +222,7 @@ export const extraFeatureCheckList: {
 	{
 		name: 'filter bulletin quests by time of day',
 	},
+	{
+		name: 'prettier mulch buttons',
+	},
 ];

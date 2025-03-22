@@ -87,7 +87,7 @@ export const useFarm = () => {
 			return base * 0.75;
 		}
 		if (mulch === 'stable-mulch') {
-			return base * 0.125;
+			return base * 1.125;
 		}
 		return base;
 	};
