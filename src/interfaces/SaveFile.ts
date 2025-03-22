@@ -105,6 +105,8 @@ export interface SaveFile {
 	};
 	campUpgrades: Record<CampUpgrade, boolean>;
 	honeyReadyAt?: number;
+	dugtrioReadyAt?: number;
+	zigzagoonReadyAt?: number;
 	currentSwarm?: PokemonSwarm;
 	nextSwarmReadyAt?: number;
 }
