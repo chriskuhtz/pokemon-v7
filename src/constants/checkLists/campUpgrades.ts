@@ -29,7 +29,6 @@ export const campUpgradeNames = [
  * 'Pokemon Surfer Certification'
  * 'Pokemon Flyer Certification'
  * 	Fishing?
- * define more swarms
  */
 
 /**

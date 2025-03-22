@@ -1,34 +1,39 @@
 import { useCallback, useContext } from 'react';
 import { ONE_HOUR } from '../constants/gameData';
 import { mapDisplayNames } from '../constants/maps/mapsRecord';
+import { PokemonName } from '../constants/pokemonNames';
 import { getRandomEntry } from '../functions/filterTargets';
 import { PokemonSwarm } from '../interfaces/SaveFile';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
-export const swarms: PokemonSwarm[] = [
-	{
-		pokemon: 'mudkip',
-		route: 'routeN1',
-		leavesAt: 0,
-		xpMax: 1000,
-		xpMin: 125,
-	},
-	{
-		pokemon: 'treecko',
-		route: 'routeN1',
-		leavesAt: 0,
-		xpMax: 1000,
-		xpMin: 125,
-	},
-	{
-		pokemon: 'torchic',
-		route: 'routeN1',
-		leavesAt: 0,
-		xpMax: 1000,
-		xpMin: 125,
-	},
+const swarmMons: PokemonName[] = [
+	'mudkip',
+	'treecko',
+	'torchic',
+	'snivy',
+	'tepig',
+	'oshawott',
+	'chespin',
+	'fennekin',
+	'froakie',
+	'popplio',
+	'rowlet',
+	'litten',
+	'grookey',
+	'scorbunny',
+	'sobble',
+	'fuecoco',
+	'quaxly',
+	'sprigatito',
 ];
+export const swarms: PokemonSwarm[] = swarmMons.map((p) => ({
+	pokemon: p,
+	route: 'routeN1',
+	leavesAt: 0,
+	xpMax: 1000,
+	xpMin: 125,
+}));
 export const useSwarmRadar = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { addMessage } = useContext(MessageQueueContext);
