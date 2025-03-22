@@ -13,7 +13,8 @@ export const targetFlinched = (
 	}
 
 	const { flinch_chance } = attack.data.meta;
-	const modified = flinch_chance + stenchModifier;
+	console.log(flinch_chance);
+	const modified = flinch_chance / 100 + stenchModifier;
 
 	return Math.random() < modified;
 };
