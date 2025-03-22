@@ -1,5 +1,16 @@
-import { CSSProperties, ReactNode } from 'react';
+import { CSSProperties, ReactNode, useEffect, useRef } from 'react';
 
+export const useAutoFocus = () => {
+	const ref = useRef<HTMLDivElement | null>(null);
+
+	useEffect(() => {
+		if (ref.current) {
+			ref.current.focus();
+		}
+	}, []);
+
+	return ref;
+};
 export const Banner = ({
 	children,
 	flexDirection,
@@ -11,6 +22,7 @@ export const Banner = ({
 	backgroundColor?: string;
 	onClick?: () => void;
 }) => {
+	const ref = useAutoFocus();
 	return (
 		<div
 			style={{
@@ -27,7 +39,9 @@ export const Banner = ({
 			}}
 		>
 			<div
+				ref={ref}
 				role="button"
+				autoFocus
 				tabIndex={0}
 				onClick={onClick}
 				onKeyDown={(e) => {
