@@ -1,9 +1,11 @@
 import {
+	DRY_SKIN_DAMAGE_FACTOR,
 	HAIL_DAMAGE_FACTOR,
 	SANDSTORM_DAMAGE_FACTOR,
 } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
+import { getMiddleOfThree } from './getMiddleOfThree';
 import { getTypeNames } from './getTypeNames';
 
 export const applyEndOfTurnWeatherDamage = (
@@ -39,6 +41,25 @@ export const applyEndOfTurnWeatherDamage = (
 			...pokemon,
 			damage:
 				pokemon.damage + Math.round(pokemon.stats.hp * HAIL_DAMAGE_FACTOR),
+		};
+	}
+	if (weather === 'sun' && pokemon.ability === 'dry-skin') {
+		addMessage(`${pokemon.data.name}'s dry skin is damaged by the sun `);
+		return {
+			...pokemon,
+			damage:
+				pokemon.damage + Math.round(pokemon.stats.hp * DRY_SKIN_DAMAGE_FACTOR),
+		};
+	}
+	if (weather === 'rain' && pokemon.ability === 'dry-skin') {
+		addMessage(`${pokemon.data.name}'s dry skin recovered in the rain`);
+		return {
+			...pokemon,
+			damage: getMiddleOfThree([
+				0,
+				pokemon.damage - Math.round(pokemon.stats.hp * DRY_SKIN_DAMAGE_FACTOR),
+				pokemon.stats.hp,
+			]),
 		};
 	}
 	return pokemon;

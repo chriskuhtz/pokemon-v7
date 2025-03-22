@@ -794,6 +794,7 @@ export const abilityNames = [
 	'unburden',
 	'heatproof',
 	'simple',
+	'dry-skin',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
