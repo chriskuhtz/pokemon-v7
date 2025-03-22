@@ -20,7 +20,7 @@ import { getHeldItemFactor } from './getHeldItemFactor';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getRivalryFactor } from './getRivalryFactor';
 
-export const getLowKickDamage = (weight: number): number => {
+export const getLowKickPower = (weight: number): number => {
 	if (weight > 200) return 120;
 	if (weight > 100) return 100;
 	if (weight > 50) return 80;
@@ -29,13 +29,51 @@ export const getLowKickDamage = (weight: number): number => {
 	return 20;
 };
 
+export const getFlailPower = (hp: number, damage: number): number => {
+	const remainingHp = hp - damage;
+	const percentage = remainingHp / hp;
+
+	if (percentage < 0.03) {
+		return 200;
+	}
+	if (percentage < 0.1) {
+		return 150;
+	}
+	if (percentage < 0.2) {
+		return 100;
+	}
+	if (percentage < 0.33) {
+		return 80;
+	}
+	if (percentage < 0.66) {
+		return 40;
+	}
+
+	return 20;
+
+	// {
+	// 	"effect": "Inflicts regular damage.
+	// 	Power varies inversely with the user's
+	// 	proportional remaining HP.\n\n64 * current HP / max HP | Power\n-----------------------: | ----:\n 0– 1                    |  200\n 2– 5                    |  150\n 6–12                    |  100\n13–21                    |   80\n22–42                    |   40\n43–64                    |   20\n",
+	// 	"language": {
+	// 		"name": "en",
+	// 		"url": "https://pokeapi.co/api/v2/language/9/"
+	// 	},
+	// 	"short_effect": "Inflicts more damage when the user has less HP remaining, with a maximum of 200 power."
+	// }
+};
+
 export const getPower = (
+	attacker: BattlePokemon,
 	attack: BattleAttack,
 	targetWeight: number,
 	attackerLevel: number
 ) => {
 	if (attack.name === 'low-kick') {
-		return getLowKickDamage(targetWeight);
+		return getLowKickPower(targetWeight);
+	}
+	if (attack.name === 'flail') {
+		return getFlailPower(attacker.stats.hp, attacker.damage);
 	}
 	if (attack.name === 'psywave') {
 		const factor = 0.5 + Math.random();
@@ -135,6 +173,7 @@ export const calculateDamage = (
 
 	const levelFactor = (2 * level) / 5 + 2;
 	const power = getPower(
+		attacker,
 		attack,
 		target.data.weight,
 		calculateLevelData(attacker.xp).level

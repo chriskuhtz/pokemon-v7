@@ -2,7 +2,7 @@ import { useCallback, useContext, useMemo } from 'react';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { joinInventories } from '../../../interfaces/Inventory';
-import { ItemType } from '../../../interfaces/Item';
+import { cookingBerries, ItemType } from '../../../interfaces/Item';
 
 export interface Recipe {
 	result: ItemType;
@@ -17,21 +17,6 @@ const BASE_RECIPES: Recipe[] = [
 		difficulty: 'EASY',
 	},
 	{
-		result: 'berry-juice',
-		ingredients: ['nanab-berry', 'oran-berry'],
-		difficulty: 'EASY',
-	},
-	{
-		result: 'berry-juice',
-		ingredients: ['bluk-berry', 'oran-berry'],
-		difficulty: 'EASY',
-	},
-	{
-		result: 'berry-juice',
-		ingredients: ['razz-berry', 'oran-berry'],
-		difficulty: 'EASY',
-	},
-	{
 		result: 'rare-candy',
 		ingredients: [
 			'sitrus-berry',
@@ -42,6 +27,14 @@ const BASE_RECIPES: Recipe[] = [
 		],
 		difficulty: 'TRICKY',
 	},
+	...cookingBerries.map(
+		(c) =>
+			({
+				result: 'lava-cookie',
+				ingredients: ['oran-berry', c],
+				difficulty: 'EASY',
+			} as Recipe)
+	),
 ];
 
 export const useCookingGrandma = (): {
