@@ -298,6 +298,10 @@ export const calculateDamage = (
 		attack.data.type.name === 'bug'
 			? 1.5
 			: 1;
+	const heatProofFactor =
+		target.ability === 'heatproof' && attack.data.type.name === 'fire'
+			? 0.5
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -331,7 +335,8 @@ export const calculateDamage = (
 				overgrowFactor *
 				blazeFactor *
 				torrentFactor *
-				swarmFactor
+				swarmFactor *
+				heatProofFactor
 		),
 		1
 	);

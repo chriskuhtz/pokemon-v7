@@ -11,7 +11,9 @@ export const applyPrimaryAilmentDamage = (
 	if (pokemon.primaryAilment?.type === 'burn') {
 		addMessage(`${pokemon.data.name} is hurt by burn`);
 
-		const burnDamage = Math.round(BURN_DAMAGE_FACTOR * pokemon.stats.hp);
+		const heatProofFactor = pokemon.ability === 'heatproof' ? 0.5 : 1;
+		const burnDamage =
+			Math.round(BURN_DAMAGE_FACTOR * pokemon.stats.hp) * heatProofFactor;
 		return {
 			...pokemon,
 			damage: pokemon.damage + burnDamage,
