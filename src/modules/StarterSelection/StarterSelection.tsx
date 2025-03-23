@@ -63,6 +63,7 @@ export const StarterSelection = (): JSX.Element => {
 			playerId: name,
 			pokemon: [mon],
 			meta: { activeTab: 'OVERWORLD' },
+			starterPokemon: mon.name,
 		});
 	}, [chosenStarter, name, patchSaveFileReducer, saveFile]);
 

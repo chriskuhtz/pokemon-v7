@@ -87,8 +87,11 @@ export const questNames = [
 	'defeat morty',
 	'revive a fossil',
 	'revive all different fossils',
+	'evolve your starter pokemon',
+	'evolve your starter pokemon to its final form',
 ] as const;
 /**
+ 
  * Ideas:
  * shiny Pokemon
  * cook a recipe
@@ -97,7 +100,6 @@ export const questNames = [
  * catch x different pokemon
  * catch x swarm pokemon
  * catch x pokemon by smashing rocks
- * evolve your starter
  */
 export type QuestName = (typeof questNames)[number];
 
@@ -1162,6 +1164,56 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			return Object.values(fossilTable).every((fossil) =>
 				s.pokemon.some((p) => fossil === p.name)
 			);
+		},
+		requiredUpgrade: 'invite fossil expert',
+		availableAfter: 'revive a fossil',
+	},
+	'evolve your starter pokemon': {
+		kind: 'QUEST_LINE',
+		rewardItems: {
+			'rare-candy': 2,
+		},
+		researchPoints: 10,
+		conditionFunction: (s) => {
+			if (s.starterPokemon === 'bulbasaur') {
+				return s.pokemon.some(
+					(p) => p.name === 'ivysaur' || p.name === 'venusaur'
+				);
+			}
+			if (s.starterPokemon === 'squirtle') {
+				return s.pokemon.some(
+					(p) => p.name === 'wartortle' || p.name === 'blastoise'
+				);
+			}
+			if (s.starterPokemon === 'charmander') {
+				return s.pokemon.some(
+					(p) => p.name === 'charmeleon' || p.name === 'charizard'
+				);
+			}
+
+			return false;
+		},
+		requiredUpgrade: 'invite fossil expert',
+		availableAfter: 'revive a fossil',
+	},
+	'evolve your starter pokemon to its final form': {
+		kind: 'QUEST_LINE',
+		rewardItems: {
+			'rare-candy': 5,
+		},
+		researchPoints: 25,
+		conditionFunction: (s) => {
+			if (s.starterPokemon === 'bulbasaur') {
+				return s.pokemon.some((p) => p.name === 'venusaur');
+			}
+			if (s.starterPokemon === 'squirtle') {
+				return s.pokemon.some((p) => p.name === 'blastoise');
+			}
+			if (s.starterPokemon === 'charmander') {
+				return s.pokemon.some((p) => p.name === 'charizard');
+			}
+
+			return false;
 		},
 		requiredUpgrade: 'invite fossil expert',
 		availableAfter: 'revive a fossil',

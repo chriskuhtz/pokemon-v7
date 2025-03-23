@@ -39,11 +39,50 @@ const oakLine: Occupant[] = [
 		y: 4,
 		orientation: 'DOWN',
 		unhandledMessage: [
+			'Well done',
+			'To navigate the wilderness successfully',
+			'It is important to train your pokemon',
+		],
+		handledMessage: ['Battle wild pokemon to grow stronger'],
+		quest: 'evolve your starter pokemon',
+		sprite: SpriteEnum.oak,
+		conditionFunction: (s) =>
+			s.quests['catch a pokemon'] === 'COLLECTED' &&
+			s.quests['evolve your starter pokemon'] !== 'COLLECTED',
+	},
+	{
+		type: 'NPC',
+		id: 'oak_3',
+		x: 5,
+		y: 4,
+		orientation: 'DOWN',
+		unhandledMessage: [
+			'Very impressive',
+			'Your Pokemon should be able to evolve one more time',
+		],
+		handledMessage: ['Battle wild pokemon to grow stronger'],
+		quest: 'evolve your starter pokemon to its final form',
+		sprite: SpriteEnum.oak,
+		conditionFunction: (s) =>
+			s.quests['catch a pokemon'] === 'COLLECTED' &&
+			s.quests['evolve your starter pokemon'] === 'COLLECTED' &&
+			s.quests['evolve your starter pokemon to its final form'] !== 'COLLECTED',
+	},
+	{
+		type: 'NPC',
+		id: 'oak_4',
+		x: 5,
+		y: 4,
+		orientation: 'DOWN',
+		unhandledMessage: [
 			'Great work',
 			'Check the Bulletin board for more quests',
 		],
 		sprite: SpriteEnum.oak,
-		conditionFunction: (s) => s.quests['catch a pokemon'] === 'COLLECTED',
+		conditionFunction: (s) =>
+			s.quests['catch a pokemon'] === 'COLLECTED' &&
+			s.quests['evolve your starter pokemon'] === 'COLLECTED' &&
+			s.quests['evolve your starter pokemon to its final form'] === 'COLLECTED',
 	},
 ];
 const rowanLine: Occupant[] = [

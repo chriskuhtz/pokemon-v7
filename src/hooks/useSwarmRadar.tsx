@@ -8,9 +8,15 @@ import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
 const swarmMons: PokemonName[] = [
+	'cyndaquil',
+	'chikorita',
+	'totodile',
 	'mudkip',
 	'treecko',
 	'torchic',
+	'chimchar',
+	'piplup',
+	'turtwig',
 	'snivy',
 	'tepig',
 	'oshawott',
@@ -29,7 +35,7 @@ const swarmMons: PokemonName[] = [
 ];
 export const swarms: PokemonSwarm[] = swarmMons.map((p) => ({
 	pokemon: p,
-	route: 'routeN1',
+	route: getRandomEntry(['routeE1', 'routeN1E1', 'routeN1']),
 	leavesAt: 0,
 	xpMax: 1000,
 	xpMin: 125,

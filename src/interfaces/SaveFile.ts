@@ -111,4 +111,5 @@ export interface SaveFile {
 	zigzagoonReadyAt?: number;
 	currentSwarm?: PokemonSwarm;
 	nextSwarmReadyAt?: number;
+	starterPokemon?: PokemonName;
 }
