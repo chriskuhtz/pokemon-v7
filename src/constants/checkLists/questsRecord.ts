@@ -224,7 +224,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			);
 		},
 		targetPokemon: [
-			...new Set(routeN1.possibleEncounters.MORNING.map((p) => p.name)),
+			...new Set(
+				[
+					...routeN1.possibleEncounters.MORNING,
+					...routeN1.possibleEncounters.BASE,
+				].map((p) => p.name)
+			),
 		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a morning exclusive pokemon from routeN1',
@@ -241,7 +246,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			);
 		},
 		targetPokemon: [
-			...new Set(routeN1.possibleEncounters.DAY.map((p) => p.name)),
+			...new Set(
+				[
+					...routeN1.possibleEncounters.DAY,
+					...routeN1.possibleEncounters.BASE,
+				].map((p) => p.name)
+			),
 		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a daytime exclusive pokemon from routeN1',
@@ -258,7 +268,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			);
 		},
 		targetPokemon: [
-			...new Set(routeN1.possibleEncounters.EVENING.map((p) => p.name)),
+			...new Set(
+				[
+					...routeN1.possibleEncounters.EVENING,
+					...routeN1.possibleEncounters.BASE,
+				].map((p) => p.name)
+			),
 		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a evening exclusive pokemon from routeN1',
@@ -275,7 +290,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			);
 		},
 		targetPokemon: [
-			...new Set(routeN1.possibleEncounters.NIGHT.map((p) => p.name)),
+			...new Set(
+				[
+					...routeN1.possibleEncounters.NIGHT,
+					...routeN1.possibleEncounters.BASE,
+				].map((p) => p.name)
+			),
 		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a nighttime exclusive pokemon from routeN1',
@@ -388,7 +408,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			);
 		},
 		targetPokemon: [
-			...new Set(routeN1E1.possibleEncounters.MORNING.map((p) => p.name)),
+			...new Set(
+				[
+					...routeN1E1.possibleEncounters.MORNING,
+					...routeN1E1.possibleEncounters.BASE,
+				].map((p) => p.name)
+			),
 		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a morning exclusive pokemon from routeN1E1',
@@ -408,7 +433,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			);
 		},
 		targetPokemon: [
-			...new Set(routeN1E1.possibleEncounters.DAY.map((p) => p.name)),
+			...new Set(
+				[
+					...routeN1E1.possibleEncounters.DAY,
+					...routeN1E1.possibleEncounters.BASE,
+				].map((p) => p.name)
+			),
 		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a daytime exclusive pokemon from routeN1E1',
@@ -428,7 +458,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			);
 		},
 		targetPokemon: [
-			...new Set(routeN1E1.possibleEncounters.EVENING.map((p) => p.name)),
+			...new Set(
+				[
+					...routeN1E1.possibleEncounters.EVENING,
+					...routeN1E1.possibleEncounters.BASE,
+				].map((p) => p.name)
+			),
 		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a evening exclusive pokemon from routeN1E1',
@@ -448,7 +483,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			);
 		},
 		targetPokemon: [
-			...new Set(routeN1E1.possibleEncounters.NIGHT.map((p) => p.name)),
+			...new Set(
+				[
+					...routeN1E1.possibleEncounters.NIGHT,
+					...routeN1E1.possibleEncounters.BASE,
+				].map((p) => p.name)
+			),
 		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a nighttime exclusive pokemon from routeN1E1',
@@ -560,7 +600,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			);
 		},
 		targetPokemon: [
-			...new Set(routeE1.possibleEncounters.MORNING.map((p) => p.name)),
+			...new Set(
+				[
+					...routeE1.possibleEncounters.MORNING,
+					...routeE1.possibleEncounters.BASE,
+				].map((p) => p.name)
+			),
 		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a morning exclusive pokemon from routeE1',
@@ -578,7 +623,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			);
 		},
 		targetPokemon: [
-			...new Set(routeE1.possibleEncounters.DAY.map((p) => p.name)),
+			...new Set(
+				[
+					...routeE1.possibleEncounters.MORNING,
+					...routeE1.possibleEncounters.BASE,
+				].map((p) => p.name)
+			),
 		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a daytime exclusive pokemon from routeE1',
@@ -596,7 +646,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			);
 		},
 		targetPokemon: [
-			...new Set(routeE1.possibleEncounters.EVENING.map((p) => p.name)),
+			...new Set(
+				[
+					...routeE1.possibleEncounters.MORNING,
+					...routeE1.possibleEncounters.BASE,
+				].map((p) => p.name)
+			),
 		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a evening exclusive pokemon from routeE1',
@@ -614,7 +669,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			);
 		},
 		targetPokemon: [
-			...new Set(routeE1.possibleEncounters.NIGHT.map((p) => p.name)),
+			...new Set(
+				[
+					...routeE1.possibleEncounters.MORNING,
+					...routeE1.possibleEncounters.BASE,
+				].map((p) => p.name)
+			),
 		],
 		kind: 'BULLETIN',
 		availableAfter: 'catch a nighttime exclusive pokemon from routeE1',
