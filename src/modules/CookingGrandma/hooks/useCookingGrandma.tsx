@@ -12,7 +12,7 @@ export interface Recipe {
 
 const BASE_RECIPES: Recipe[] = [
 	{
-		result: 'lava-cookie',
+		result: 'old-gateau',
 		ingredients: ['nanab-berry', 'bluk-berry', 'razz-berry'],
 		difficulty: 'MEDIUM',
 	},
