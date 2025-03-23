@@ -82,6 +82,8 @@ export const questNames = [
 ] as const;
 /**
  * Ideas:
+ * also check "caught on" for catch quests
+ * include base in "catch all" quests
  * elm line (night and day,all eeveelutions)
  * add elm and rowan to training field
  * shiny Pokemon
