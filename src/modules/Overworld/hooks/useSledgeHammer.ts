@@ -100,6 +100,12 @@ export const useSledgeHammer = () => {
 										],
 										inventory: updatedInventory,
 										meta,
+										mileStones: {
+											...saveFile.mileStones,
+											hasfoundAPokemonBySmashingRocks: encounter
+												? true
+												: saveFile.mileStones.hasfoundAPokemonBySmashingRocks,
+										},
 									}),
 							};
 						}
@@ -115,13 +121,6 @@ export const useSledgeHammer = () => {
 				]);
 			return;
 		},
-		[
-			addMultipleMessages,
-			patchSaveFileReducer,
-			saveFile.campUpgrades,
-			saveFile.handledOccupants,
-			saveFile.inventory,
-			saveFile.meta,
-		]
+		[addMultipleMessages, patchSaveFileReducer, saveFile]
 	);
 };

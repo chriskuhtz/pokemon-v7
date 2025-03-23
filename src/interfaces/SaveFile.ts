@@ -98,6 +98,8 @@ export interface SaveFile {
 		hasEvolvedAPokemonThatNeedsDaytime?: boolean;
 		hasEvolvedAPokemonThatNeedsNighttime?: boolean;
 		hasCaughtAPokemonWithHoney?: boolean;
+		hasCaughtASwarmPokemon?: boolean;
+		hasfoundAPokemonBySmashingRocks?: boolean;
 		hasCraftedApricorn?: boolean;
 		hasGrownABerry?: boolean;
 		hasGrownAnApricorn?: boolean;

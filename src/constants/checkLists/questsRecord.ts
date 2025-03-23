@@ -96,13 +96,12 @@ export const questNames = [
 	'catch 10 different species',
 	'catch 20 different species',
 	'catch 50 different species',
+	'catch a swarm pokemon',
+	'find a pokemon under a smashed rock',
 ] as const;
 /**
  
  * Ideas:
-
- * catch x swarm pokemon
- * catch x pokemon by smashing rocks
  */
 export type QuestName = (typeof questNames)[number];
 
@@ -1289,6 +1288,24 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		availableAfter: 'catch 50 different species',
 		conditionFunction: (s) => new Set(s.pokemon.map((p) => p.name)).size >= 50,
+	},
+	'catch a swarm pokemon': {
+		kind: 'BULLETIN',
+		researchPoints: 20,
+		rewardItems: {
+			'sitrus-berry': 5,
+		},
+		requiredUpgrade: 'pokemon swarm radar',
+		conditionFunction: (s) => !!s.mileStones.hasCaughtASwarmPokemon,
+	},
+	'find a pokemon under a smashed rock': {
+		kind: 'BULLETIN',
+		researchPoints: 20,
+		rewardItems: {
+			'sitrus-berry': 5,
+		},
+		requiredUpgrade: 'sledge hammer certification',
+		conditionFunction: (s) => !!s.mileStones.hasfoundAPokemonBySmashingRocks,
 	},
 };
 

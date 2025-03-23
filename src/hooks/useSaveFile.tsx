@@ -493,6 +493,14 @@ const useSaveFile = (
 								{ id: defeatedChallengerId, resetAt: -1 },
 						  ]
 						: saveFile.handledOccupants,
+				mileStones: {
+					...saveFile.mileStones,
+					hasCaughtASwarmPokemon:
+						saveFile.currentSwarm &&
+						caughtPokemon.some((c) => c.name === saveFile.currentSwarm?.pokemon)
+							? true
+							: saveFile.mileStones.hasCaughtASwarmPokemon,
+				},
 			});
 		},
 		[putSaveFileReducer, reset, saveFile, team]
