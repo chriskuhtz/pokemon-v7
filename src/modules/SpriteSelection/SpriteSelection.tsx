@@ -13,6 +13,7 @@ export const SpriteSelection = ({
 			<Stack mode="row" justifyContent="stretch">
 				{Object.values(SpriteEnum).map((s) => (
 					<Sprite
+						canvasKey={s}
 						rotating={true}
 						key={s}
 						id={s}

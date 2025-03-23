@@ -6,6 +6,7 @@ export const campUpgradeNames = [
 	'invite professor rowan',
 	'invite professor elm',
 	'training field 1',
+	'training field 2',
 	'second slot for farm',
 	'third slot for farm',
 	'fourth slot for farm',
@@ -24,11 +25,10 @@ export const campUpgradeNames = [
 ] as const;
 /**
  * ideas:
+ * 'Shovel certification'
  * berries visible in overworld
  * more gym leaders
- * stronger training field
  * berry lure stations
- * 'Shovel certification'
  * "Pokeflute certification"
  * 'Pokemon Surfer Certification'
  * 'Pokemon Flyer Certification'
@@ -61,6 +61,7 @@ export const campUpgradePrices: Record<CampUpgrade, number> = {
 	'invite professor rowan': 50,
 	'invite professor elm': 50,
 	'training field 1': 50,
+	'training field 2': 50,
 	'second slot for farm': 10,
 	'third slot for farm': 15,
 	'fourth slot for farm': 20,
@@ -92,13 +93,14 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'invite professor elm': baseRequirements,
 	'machete certification': baseRequirements,
 	'training field 1': baseRequirements,
+	'training field 2': ['training field 1'],
 	'build combee hive': baseRequirements,
 	'build miltank farm': baseRequirements,
 	'invite chef grandma': baseRequirements,
 	'pokemon swarm radar': baseRequirements,
 	'second slot for farm': baseRequirements,
-	'third slot for farm': [...baseRequirements, 'second slot for farm'],
-	'fourth slot for farm': [...baseRequirements, 'third slot for farm'],
+	'third slot for farm': ['second slot for farm'],
+	'fourth slot for farm': ['third slot for farm'],
 	'invite zigzagoon foragers': ['build miltank farm'],
 	'invite dugtrio explorers': ['invite zigzagoon foragers'],
 	'invite amoongus compost researcher': ['invite dugtrio explorers'],

@@ -73,7 +73,7 @@ export const StarterSelection = (): JSX.Element => {
 	return finished && name && chosenStarter ? (
 		<Page headline="">
 			<Stack mode="column" alignItems="center">
-				<Sprite id={SpriteEnum['oak']} rotating={false} />
+				<Sprite canvasKey={'oak'} id={SpriteEnum['oak']} rotating={false} />
 				<h3>I see, so you are {name}.</h3>
 				<h3>Thank you for accepting the position as my research assistant.</h3>
 				<h3>My Name is Samuel Oak.</h3>

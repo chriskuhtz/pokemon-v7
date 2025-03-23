@@ -35,8 +35,9 @@ export const TrainingField = () => {
 							res = saveFile.quests[t.availableAfter] === 'COLLECTED';
 						}
 						if (t.requiredUpgrade) {
-							res = saveFile.campUpgrades[t.requiredUpgrade];
+							res = !!saveFile.campUpgrades[t.requiredUpgrade];
 						}
+
 						return res;
 					})
 					.map((t) => {
@@ -47,7 +48,12 @@ export const TrainingField = () => {
 							<Card
 								key={t.id}
 								icon={
-									<Sprite id={t.trainer?.sprite ?? '136'} rotating={false} />
+									<Sprite
+										canvasKey={t.id}
+										key={t.id}
+										id={t.trainer?.sprite ?? '136'}
+										rotating={false}
+									/>
 								}
 								content={
 									<div>

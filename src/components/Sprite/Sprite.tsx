@@ -7,15 +7,17 @@ export const Sprite = ({
 	id,
 	onClick,
 	rotating,
+	canvasKey,
 }: {
 	id: string;
 	onClick?: () => void;
 	rotating: boolean;
+	canvasKey: string;
 }) => {
 	const { baseSize } = useContext(BaseSizeContext);
 	const orientation = useRotate();
 	useDrawCharacter(
-		id,
+		canvasKey,
 		{
 			x: 0,
 			y: 0,
@@ -38,7 +40,7 @@ export const Sprite = ({
 			width={baseSize}
 			height={baseSize}
 			onClick={onClick}
-			id={id}
+			id={canvasKey}
 		></canvas>
 	);
 };
