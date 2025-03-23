@@ -119,8 +119,10 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'nest-ball': 10 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) =>
-				routeN1.possibleEncounters.MORNING.some((e) => e.name === p.name)
+			return s.pokemon.some(
+				(p) =>
+					routeN1.possibleEncounters.MORNING.some((e) => e.name === p.name) &&
+					p.caughtOnMap === 'routeN1'
 			);
 		},
 		targetPokemon: [
@@ -132,8 +134,10 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'quick-ball': 10 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) =>
-				routeN1.possibleEncounters.DAY.some((e) => e.name === p.name)
+			return s.pokemon.some(
+				(p) =>
+					routeN1.possibleEncounters.DAY.some((e) => e.name === p.name) &&
+					p.caughtOnMap === 'routeN1'
 			);
 		},
 		targetPokemon: [
@@ -145,8 +149,10 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'net-ball': 10 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) =>
-				routeN1.possibleEncounters.EVENING.some((e) => e.name === p.name)
+			return s.pokemon.some(
+				(p) =>
+					routeN1.possibleEncounters.EVENING.some((e) => e.name === p.name) &&
+					p.caughtOnMap === 'routeN1'
 			);
 		},
 		targetPokemon: [
@@ -158,8 +164,10 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'dusk-ball': 10 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) =>
-				routeN1.possibleEncounters.NIGHT.some((e) => e.name === p.name)
+			return s.pokemon.some(
+				(p) =>
+					routeN1.possibleEncounters.NIGHT.some((e) => e.name === p.name) &&
+					p.caughtOnMap === 'routeN1'
 			);
 		},
 		targetPokemon: [
@@ -171,13 +179,15 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'berry-juice': 5 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) =>
-				[
-					...routeN1.possibleEncounters.NIGHT,
-					...routeN1.possibleEncounters.MORNING,
-					...routeN1.possibleEncounters.DAY,
-					...routeN1.possibleEncounters.EVENING,
-				].some((e) => e.rarity === 'ultra-rare' && e.name === p.name)
+			return s.pokemon.some(
+				(p) =>
+					[
+						...routeN1.possibleEncounters.NIGHT,
+						...routeN1.possibleEncounters.MORNING,
+						...routeN1.possibleEncounters.DAY,
+						...routeN1.possibleEncounters.EVENING,
+					].some((e) => e.rarity === 'ultra-rare' && e.name === p.name) &&
+					p.caughtOnMap === 'routeN1'
 			);
 		},
 		targetPokemon: [
@@ -199,7 +209,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return routeN1.possibleEncounters.MORNING.every((e) =>
-				s.pokemon.some((p) => p.name === e.name)
+				s.pokemon.some((p) => p.name === e.name && p.caughtOnMap === 'routeN1')
 			);
 		},
 		targetPokemon: [
@@ -213,7 +223,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return routeN1.possibleEncounters.DAY.every((e) =>
-				s.pokemon.some((p) => p.name === e.name)
+				s.pokemon.some((p) => p.name === e.name && p.caughtOnMap === 'routeN1')
 			);
 		},
 		targetPokemon: [
@@ -227,7 +237,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return routeN1.possibleEncounters.EVENING.every((e) =>
-				s.pokemon.some((p) => p.name === e.name)
+				s.pokemon.some((p) => p.name === e.name && p.caughtOnMap === 'routeN1')
 			);
 		},
 		targetPokemon: [
@@ -241,7 +251,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return routeN1.possibleEncounters.NIGHT.every((e) =>
-				s.pokemon.some((p) => p.name === e.name)
+				s.pokemon.some((p) => p.name === e.name && p.caughtOnMap === 'routeN1')
 			);
 		},
 		targetPokemon: [
@@ -254,8 +264,10 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'sun-stone': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) =>
-				routeN1E1.possibleEncounters.MORNING.some((e) => e.name === p.name)
+			return s.pokemon.some(
+				(p) =>
+					routeN1E1.possibleEncounters.MORNING.some((e) => e.name === p.name) &&
+					p.caughtOnMap === 'routeN1E1'
 			);
 		},
 		targetPokemon: [
@@ -268,8 +280,10 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'fire-stone': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) =>
-				routeN1E1.possibleEncounters.DAY.some((e) => e.name === p.name)
+			return s.pokemon.some(
+				(p) =>
+					routeN1E1.possibleEncounters.DAY.some((e) => e.name === p.name) &&
+					p.caughtOnMap === 'routeN1E1'
 			);
 		},
 		targetPokemon: [
@@ -282,8 +296,10 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'dusk-stone': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) =>
-				routeN1E1.possibleEncounters.EVENING.some((e) => e.name === p.name)
+			return s.pokemon.some(
+				(p) =>
+					routeN1E1.possibleEncounters.EVENING.some((e) => e.name === p.name) &&
+					p.caughtOnMap === 'routeN1E1'
 			);
 		},
 		targetPokemon: [
@@ -296,8 +312,10 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'moon-stone': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) =>
-				routeN1E1.possibleEncounters.NIGHT.some((e) => e.name === p.name)
+			return s.pokemon.some(
+				(p) =>
+					routeN1E1.possibleEncounters.NIGHT.some((e) => e.name === p.name) &&
+					p.caughtOnMap === 'routeN1E1'
 			);
 		},
 		targetPokemon: [
@@ -310,13 +328,15 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'berry-juice': 5 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) =>
-				[
-					...routeN1E1.possibleEncounters.NIGHT,
-					...routeN1E1.possibleEncounters.MORNING,
-					...routeN1E1.possibleEncounters.DAY,
-					...routeN1E1.possibleEncounters.EVENING,
-				].some((e) => e.rarity === 'ultra-rare' && e.name === p.name)
+			return s.pokemon.some(
+				(p) =>
+					[
+						...routeN1E1.possibleEncounters.NIGHT,
+						...routeN1E1.possibleEncounters.MORNING,
+						...routeN1E1.possibleEncounters.DAY,
+						...routeN1E1.possibleEncounters.EVENING,
+					].some((e) => e.rarity === 'ultra-rare' && e.name === p.name) &&
+					p.caughtOnMap === 'routeN1E1'
 			);
 		},
 		targetPokemon: [
@@ -339,7 +359,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return routeN1E1.possibleEncounters.EVENING.every((e) =>
-				s.pokemon.some((p) => p.name === e.name)
+				s.pokemon.some(
+					(p) => p.name === e.name && p.caughtOnMap === 'routeN1E1'
+				)
 			);
 		},
 		targetPokemon: [
@@ -354,7 +376,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return routeN1E1.possibleEncounters.DAY.every((e) =>
-				s.pokemon.some((p) => p.name === e.name)
+				s.pokemon.some(
+					(p) => p.name === e.name && p.caughtOnMap === 'routeN1E1'
+				)
 			);
 		},
 		targetPokemon: [
@@ -369,7 +393,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return routeN1E1.possibleEncounters.MORNING.every((e) =>
-				s.pokemon.some((p) => p.name === e.name)
+				s.pokemon.some(
+					(p) => p.name === e.name && p.caughtOnMap === 'routeN1E1'
+				)
 			);
 		},
 		targetPokemon: [
@@ -384,7 +410,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return routeN1E1.possibleEncounters.NIGHT.every((e) =>
-				s.pokemon.some((p) => p.name === e.name)
+				s.pokemon.some(
+					(p) => p.name === e.name && p.caughtOnMap === 'routeN1E1'
+				)
 			);
 		},
 		targetPokemon: [
@@ -398,8 +426,10 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'sun-stone': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) =>
-				routeE1.possibleEncounters.MORNING.some((e) => e.name === p.name)
+			return s.pokemon.some(
+				(p) =>
+					routeE1.possibleEncounters.MORNING.some((e) => e.name === p.name) &&
+					p.caughtOnMap === 'routeE1'
 			);
 		},
 		targetPokemon: [
@@ -412,8 +442,10 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'fire-stone': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) =>
-				routeE1.possibleEncounters.DAY.some((e) => e.name === p.name)
+			return s.pokemon.some(
+				(p) =>
+					routeE1.possibleEncounters.DAY.some((e) => e.name === p.name) &&
+					p.caughtOnMap === 'routeE1'
 			);
 		},
 		targetPokemon: [
@@ -426,8 +458,10 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'dusk-stone': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) =>
-				routeE1.possibleEncounters.EVENING.some((e) => e.name === p.name)
+			return s.pokemon.some(
+				(p) =>
+					routeE1.possibleEncounters.EVENING.some((e) => e.name === p.name) &&
+					p.caughtOnMap === 'routeE1'
 			);
 		},
 		targetPokemon: [
@@ -440,8 +474,10 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'moon-stone': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) =>
-				routeE1.possibleEncounters.NIGHT.some((e) => e.name === p.name)
+			return s.pokemon.some(
+				(p) =>
+					routeE1.possibleEncounters.NIGHT.some((e) => e.name === p.name) &&
+					p.caughtOnMap === 'routeE1'
 			);
 		},
 		targetPokemon: [
@@ -454,13 +490,15 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'berry-juice': 5 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) =>
-				[
-					...routeE1.possibleEncounters.NIGHT,
-					...routeE1.possibleEncounters.MORNING,
-					...routeE1.possibleEncounters.DAY,
-					...routeE1.possibleEncounters.EVENING,
-				].some((e) => e.rarity === 'ultra-rare' && e.name === p.name)
+			return s.pokemon.some(
+				(p) =>
+					[
+						...routeE1.possibleEncounters.NIGHT,
+						...routeE1.possibleEncounters.MORNING,
+						...routeE1.possibleEncounters.DAY,
+						...routeE1.possibleEncounters.EVENING,
+					].some((e) => e.rarity === 'ultra-rare' && e.name === p.name) &&
+					p.caughtOnMap === 'routeE1'
 			);
 		},
 		targetPokemon: [
@@ -483,7 +521,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return routeE1.possibleEncounters.EVENING.every((e) =>
-				s.pokemon.some((p) => p.name === e.name)
+				s.pokemon.some((p) => p.name === e.name && p.caughtOnMap === 'routeE1')
 			);
 		},
 		targetPokemon: [
@@ -498,7 +536,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return routeE1.possibleEncounters.DAY.every((e) =>
-				s.pokemon.some((p) => p.name === e.name)
+				s.pokemon.some((p) => p.name === e.name && p.caughtOnMap === 'routeE1')
 			);
 		},
 		targetPokemon: [
@@ -513,7 +551,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return routeE1.possibleEncounters.MORNING.every((e) =>
-				s.pokemon.some((p) => p.name === e.name)
+				s.pokemon.some((p) => p.name === e.name && p.caughtOnMap === 'routeE1')
 			);
 		},
 		targetPokemon: [
@@ -528,7 +566,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return routeE1.possibleEncounters.NIGHT.every((e) =>
-				s.pokemon.some((p) => p.name === e.name)
+				s.pokemon.some((p) => p.name === e.name && p.caughtOnMap === 'routeE1')
 			);
 		},
 		targetPokemon: [
