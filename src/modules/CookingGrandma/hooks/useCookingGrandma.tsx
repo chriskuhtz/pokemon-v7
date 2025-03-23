@@ -14,7 +14,7 @@ const BASE_RECIPES: Recipe[] = [
 	{
 		result: 'lava-cookie',
 		ingredients: ['nanab-berry', 'bluk-berry', 'razz-berry'],
-		difficulty: 'EASY',
+		difficulty: 'MEDIUM',
 	},
 	{
 		result: 'rare-candy',
@@ -91,10 +91,31 @@ export const useCookingGrandma = (): {
 						...usedIngredients,
 						[recipe.result]: 1,
 					}),
+					mileStones: {
+						...saveFile.mileStones,
+						cookedEasyRecipe:
+							recipe.difficulty === 'EASY'
+								? true
+								: saveFile.mileStones.cookedEasyRecipe,
+						cookedMediumRecipe:
+							recipe.difficulty === 'MEDIUM'
+								? true
+								: saveFile.mileStones.cookedMediumRecipe,
+						cookedTrickyRecipe:
+							recipe.difficulty === 'TRICKY'
+								? true
+								: saveFile.mileStones.cookedTrickyRecipe,
+					},
 				});
 			}
 		},
-		[addMessage, addMultipleMessages, patchSaveFileReducer, saveFile.inventory]
+		[
+			addMessage,
+			addMultipleMessages,
+			patchSaveFileReducer,
+			saveFile.inventory,
+			saveFile.mileStones,
+		]
 	);
 
 	return { enabledRecipes, disabledRecipes, cook };

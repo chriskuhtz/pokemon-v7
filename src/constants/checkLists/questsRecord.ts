@@ -90,12 +90,13 @@ export const questNames = [
 	'evolve your starter pokemon',
 	'evolve your starter pokemon to its final form',
 	'catch a shiny pokemon',
+	'cook an easy recipe',
+	'cook a medium recipe',
+	'cook a tricky recipe',
 ] as const;
 /**
  
  * Ideas:
- * cook a recipe
- * cook all recipes
  * catch x different pokemon
  * catch x swarm pokemon
  * catch x pokemon by smashing rocks
@@ -777,13 +778,13 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 10,
 		requiredUpgrade: 'invite apricorn smith kurt',
-		conditionFunction: (s) => s.mileStones.hasCraftedApricorn,
+		conditionFunction: (s) => !!s.mileStones.hasCraftedApricorn,
 	},
 	'lure a pokemon with honey': {
 		rewardItems: { 'sitrus-berry': 3 },
 		researchPoints: 10,
 		conditionFunction: (s) => {
-			return s.mileStones.hasCaughtAPokemonWithHoney;
+			return !!s.mileStones.hasCaughtAPokemonWithHoney;
 		},
 		kind: 'BULLETIN',
 	},
@@ -791,7 +792,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'thunder-stone': 1 },
 		researchPoints: 10,
 		conditionFunction: (s) => {
-			return s.mileStones.hasEvolvedAPokemonThroughLevelUp;
+			return !!s.mileStones.hasEvolvedAPokemonThroughLevelUp;
 		},
 		kind: 'QUEST_LINE',
 	},
@@ -799,7 +800,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'metal-coat': 1 },
 		researchPoints: 15,
 		conditionFunction: (s) => {
-			return s.mileStones.hasEvolvedAPokemonWithAStone;
+			return !!s.mileStones.hasEvolvedAPokemonWithAStone;
 		},
 		kind: 'QUEST_LINE',
 		availableAfter: 'evolve a pokemon through level up',
@@ -808,7 +809,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'rare-candy': 1 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return s.mileStones.hasEvolvedAPokemonWithAHeldItem;
+			return !!s.mileStones.hasEvolvedAPokemonWithAHeldItem;
 		},
 		kind: 'QUEST_LINE',
 		availableAfter: 'evolve a pokemon with a stone',
@@ -817,7 +818,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'leaf-stone': 1, 'sun-stone': 1 },
 		researchPoints: 25,
 		conditionFunction: (s) => {
-			return s.mileStones.hasEvolvedAPokemonWithAHeldItem;
+			return !!s.mileStones.hasEvolvedAPokemonWithAHeldItem;
 		},
 		kind: 'QUEST_LINE',
 		availableAfter: 'evolve a pokemon with a held item',
@@ -840,7 +841,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'ultra-ball': 20 },
 		researchPoints: 25,
 		conditionFunction: (s) => {
-			return s.mileStones.hasEvolvedAPokemonThatNeedsDaytime;
+			return !!s.mileStones.hasEvolvedAPokemonThatNeedsDaytime;
 		},
 		kind: 'QUEST_LINE',
 		availableAfter: 'catch vileplume and bellosom',
@@ -849,7 +850,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'ultra-ball': 20 },
 		researchPoints: 25,
 		conditionFunction: (s) => {
-			return s.mileStones.hasEvolvedAPokemonThatNeedsNighttime;
+			return !!s.mileStones.hasEvolvedAPokemonThatNeedsNighttime;
 		},
 		kind: 'QUEST_LINE',
 		availableAfter: 'evolve a pokemon that only evolves during the day',
@@ -951,7 +952,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'stable-mulch': 2,
 		},
 		researchPoints: 10,
-		conditionFunction: (s) => s.mileStones.hasGrownABerry,
+		conditionFunction: (s) => !!s.mileStones.hasGrownABerry,
 		kind: 'BULLETIN',
 		requiredUpgrade: 'berry_farm',
 	},
@@ -963,7 +964,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'stable-mulch': 2,
 		},
 		researchPoints: 10,
-		conditionFunction: (s) => s.mileStones.hasGrownAnApricorn,
+		conditionFunction: (s) => !!s.mileStones.hasGrownAnApricorn,
 		kind: 'BULLETIN',
 		requiredUpgrade: 'berry_farm',
 	},
@@ -1226,6 +1227,38 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => s.pokemon.some((p) => p.shiny),
+	},
+	'cook an easy recipe': {
+		kind: 'BULLETIN',
+		researchPoints: 10,
+		rewardItems: {
+			'nanab-berry': 1,
+			'bluk-berry': 1,
+			'kelpsy-berry': 1,
+			'pomeg-berry': 1,
+			'oran-berry': 1,
+		},
+		conditionFunction: (s) => !!s.mileStones.cookedEasyRecipe,
+	},
+	'cook a medium recipe': {
+		kind: 'BULLETIN',
+		researchPoints: 15,
+		rewardItems: {
+			'pecha-berry': 1,
+			'chesto-berry': 1,
+			'cheri-berry': 1,
+		},
+		conditionFunction: (s) => !!s.mileStones.cookedMediumRecipe,
+	},
+	'cook a tricky recipe': {
+		kind: 'BULLETIN',
+		researchPoints: 25,
+		rewardItems: {
+			'sitrus-berry': 1,
+			'leppa-berry': 1,
+			'lum-berry': 1,
+		},
+		conditionFunction: (s) => !!s.mileStones.cookedTrickyRecipe,
 	},
 };
 

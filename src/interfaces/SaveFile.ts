@@ -91,16 +91,19 @@ export interface SaveFile {
 	sprite: string;
 	encounterRateModifier?: { factor: number; steps: number };
 	mileStones: {
-		hasEvolvedAPokemonThroughLevelUp: boolean;
-		hasEvolvedAPokemonWithAStone: boolean;
-		hasEvolvedAPokemonWithAHeldItem: boolean;
-		hasEvolvedAPokemonThroughFriendship: boolean;
-		hasEvolvedAPokemonThatNeedsDaytime: boolean;
-		hasEvolvedAPokemonThatNeedsNighttime: boolean;
-		hasCaughtAPokemonWithHoney: boolean;
-		hasCraftedApricorn: boolean;
-		hasGrownABerry: boolean;
-		hasGrownAnApricorn: boolean;
+		hasEvolvedAPokemonThroughLevelUp?: boolean;
+		hasEvolvedAPokemonWithAStone?: boolean;
+		hasEvolvedAPokemonWithAHeldItem?: boolean;
+		hasEvolvedAPokemonThroughFriendship?: boolean;
+		hasEvolvedAPokemonThatNeedsDaytime?: boolean;
+		hasEvolvedAPokemonThatNeedsNighttime?: boolean;
+		hasCaughtAPokemonWithHoney?: boolean;
+		hasCraftedApricorn?: boolean;
+		hasGrownABerry?: boolean;
+		hasGrownAnApricorn?: boolean;
+		cookedEasyRecipe?: boolean;
+		cookedMediumRecipe?: boolean;
+		cookedTrickyRecipe?: boolean;
 	};
 	farm: {
 		plants: BerryBush[];

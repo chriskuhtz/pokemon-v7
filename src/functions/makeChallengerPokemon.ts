@@ -1,10 +1,9 @@
 import { v4 } from 'uuid';
-import { shinyChance } from '../constants/gameData';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { EmptyStatObject } from '../interfaces/StatObject';
 
 export const OPPO_ID = 'oppo';
-
+export const shinyChance = 1 / 2000;
 export const testOpponent: OwnedPokemon = {
 	name: 'bulbasaur',
 	gender: 'MALE',
