@@ -108,15 +108,15 @@ export const useFarm = () => {
 
 		const successful = Math.random() > (mulch === 'damp-mulch' ? 0.15 : 0.3);
 
+		const usedItems = mulch
+			? {
+					[type]: 1,
+					[mulch]: 1,
+			  }
+			: { [type]: 1 };
 		putSaveFileReducer({
 			...saveFile,
-			inventory: joinInventories(
-				saveFile.inventory,
-				{
-					[type]: 1,
-				},
-				true
-			),
+			inventory: joinInventories(saveFile.inventory, usedItems, true),
 			farm: {
 				...saveFile.farm,
 				plants: [
