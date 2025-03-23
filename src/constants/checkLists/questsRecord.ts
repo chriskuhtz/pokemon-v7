@@ -91,6 +91,7 @@ export const questNames = [
  * catch x different pokemon
  * catch x swarm pokemon
  * catch x pokemon by smashing rocks
+ * evolve your starter
  */
 export type QuestName = (typeof questNames)[number];
 
