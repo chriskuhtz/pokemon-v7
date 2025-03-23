@@ -3,10 +3,10 @@ import { ONE_HOUR } from '../constants/gameData';
 import { getRandomEntry } from '../functions/filterTargets';
 import { joinInventories } from '../interfaces/Inventory';
 import { pickupTable } from '../interfaces/Item';
-import { MessageQueueContext } from './useMessageQueue';
-import { SaveFileContext } from './useSaveFile';
 import { Occupant } from '../interfaces/OverworldMap';
 import { SpriteEnum } from '../interfaces/SpriteEnum';
+import { MessageQueueContext } from './useMessageQueue';
+import { SaveFileContext } from './useSaveFile';
 
 export const useZigzagoonForagers = () => {
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);

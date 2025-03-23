@@ -48,6 +48,7 @@ export const LineUpSelection = ({
 		if (canEscape) {
 			addMessage({
 				message: `escaped successfully`,
+				needsNoConfirmation: true,
 				onRemoval: () => leave(),
 			});
 		} else {
