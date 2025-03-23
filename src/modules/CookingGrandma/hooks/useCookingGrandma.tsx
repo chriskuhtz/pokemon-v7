@@ -30,7 +30,7 @@ const BASE_RECIPES: Recipe[] = [
 	...cookingBerries.map(
 		(c) =>
 			({
-				result: 'lava-cookie',
+				result: 'berry-juice',
 				ingredients: ['oran-berry', c],
 				difficulty: 'EASY',
 			} as Recipe)
