@@ -24,7 +24,6 @@ export const campUpgradeNames = [
 ] as const;
 /**
  * ideas:
- * mulch production
  * berries visible in overworld
  * more gym leaders
  * stronger training field

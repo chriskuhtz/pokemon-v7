@@ -102,9 +102,9 @@ export const useFarm = () => {
 		});
 
 		const berryYield =
-			3 +
-			(mulch === 'gooey-mulch' ? 1 : 0) +
-			(mulch === 'stable-mulch' ? 3 : 0);
+			6 +
+			(mulch === 'gooey-mulch' ? 2 : 0) +
+			(mulch === 'stable-mulch' ? 6 : 0);
 
 		const successful = Math.random() > (mulch === 'damp-mulch' ? 0.15 : 0.3);
 
