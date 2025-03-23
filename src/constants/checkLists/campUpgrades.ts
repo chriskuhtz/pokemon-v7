@@ -5,6 +5,7 @@ export const campUpgradeNames = [
 	'third slot for farm',
 	'fourth slot for farm',
 	'invite apricorn smith kurt',
+	'create seed vault',
 	'invite ghost expert morty',
 	'invite professor rowan',
 	'invite professor elm',
@@ -26,6 +27,7 @@ export const campUpgradeNames = [
 ] as const;
 /**
  * ideas:
+ * seed vault
  * berries visible in overworld
  * more gym leaders
  * berry lure stations
@@ -57,6 +59,7 @@ export const campUpgradePrices: Record<CampUpgrade, number> = {
 	bulletin_board: 10,
 	berry_farm: 25,
 	'invite apricorn smith kurt': 25,
+	'create seed vault': 10,
 	'invite ghost expert morty': 50,
 	'invite professor rowan': 50,
 	'invite professor elm': 50,
@@ -110,4 +113,5 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'sledge hammer certification': ['machete certification'],
 	'shovel certification': ['sledge hammer certification'],
 	'invite museum curator': ['invite dugtrio explorers'],
+	'create seed vault': ['bulletin_board'],
 };

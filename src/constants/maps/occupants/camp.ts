@@ -4,6 +4,7 @@ import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { amoongussCompostResearchers } from '../../../modules/AmoongussResearcher/AmoongussResearcher';
 import { miltankFarm } from '../../../modules/MiltankFarm/MiltankFarm';
+import { seedvaultResearcher } from '../../../modules/SeedVault/SeedVault';
 import { vileplumeResearchers } from '../../../modules/VilePlumeScentResearcher/VilePlumeScentResearcher';
 
 const oakLine: Occupant[] = [
@@ -790,4 +791,5 @@ export const campOccupants: OverworldMap['occupants'] = [
 	...dugtrioExplorers,
 	...vileplumeResearchers,
 	...amoongussCompostResearchers,
+	...seedvaultResearcher,
 ];

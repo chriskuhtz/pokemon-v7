@@ -24,6 +24,7 @@ import { MiltankFarm } from './modules/MiltankFarm/MiltankFarm';
 import { Overworld } from './modules/Overworld/Overworld';
 import { PokemonStorage } from './modules/PokemonStorage/PokemonStorage';
 import { Quests } from './modules/Quests/Quests';
+import { SeedVault } from './modules/SeedVault/SeedVault';
 import { Settings } from './modules/Settings/Settings';
 import { SpriteSelection } from './modules/SpriteSelection/SpriteSelection';
 import { StarterSelection } from './modules/StarterSelection/StarterSelection';
@@ -228,6 +229,9 @@ export const App = (): JSX.Element => {
 	}
 	if (activeTab === 'AMOONGUSS') {
 		return <AmoongussCompostResearcher />;
+	}
+	if (activeTab === 'SEED_VAULT') {
+		return <SeedVault />;
 	}
 	if (activeTab === 'APRICORN_SMITHY') {
 		return <ApricornSmithy goBack={() => setActiveTabReducer('OVERWORLD')} />;

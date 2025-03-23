@@ -5,7 +5,7 @@ import { PokemonName } from '../constants/pokemonNames';
 import { BadgeName } from './Badge';
 import { Challenger } from './Challenger';
 import { Inventory } from './Inventory';
-import { ApricornType, BerryType, MulchType } from './Item';
+import { ApricornType, BerryType, ItemType, MulchType } from './Item';
 import { OwnedPokemon } from './OwnedPokemon';
 import { QuestStatus } from './Quest';
 import { RoutesType } from './Routing';
@@ -117,4 +117,5 @@ export interface SaveFile {
 	currentSwarm?: PokemonSwarm;
 	nextSwarmReadyAt?: number;
 	starterPokemon?: PokemonName;
+	seedVault?: ItemType[];
 }
