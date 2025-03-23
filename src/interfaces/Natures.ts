@@ -1,4 +1,4 @@
-import { getRandomIndex } from '../functions/filterTargets';
+import { getRandomEntry } from '../functions/filterTargets';
 import { Stat } from './StatObject';
 
 export const natureNames = [
@@ -62,5 +62,5 @@ export const natures: Record<Nature, { buff?: Stat; debuff?: Stat }> = {
 export type NatureFactor = 0.9 | 1 | 1.1;
 
 export const getRandomNature = () => {
-	return natureNames[getRandomIndex(natureNames.length)];
+	return getRandomEntry([...natureNames]);
 };

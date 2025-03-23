@@ -1,11 +1,14 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import {
+	emergencyBoostBerriesTable,
 	FlavourfullBerriesTable,
 	hasEndOfTurnEffect,
 	HPHealTable,
 } from '../interfaces/Item';
+import { getRandomBoostableStat } from '../interfaces/StatObject';
 import { applyItemToPokemon } from './applyItemToPokemon';
 import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
+import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { getMovesArray } from './getMovesArray';
 
 export const applyEndOfTurnHeldItem = (
@@ -45,6 +48,96 @@ export const applyEndOfTurnHeldItem = (
 				heldItemName: undefined,
 			};
 		}
+	}
+
+	const booster = emergencyBoostBerriesTable[pokemon.heldItemName];
+	if (booster && pokemon.damage / pokemon.stats.hp >= 0.75) {
+		addMultipleMessages([
+			`${pokemon.data.name} gave itself a boost with ${pokemon.heldItemName}`,
+		]);
+		return applyStatChangeToPokemon(
+			{ ...pokemon, heldItemName: undefined },
+			booster,
+			1,
+			true,
+			[],
+			(x) => addMessage(x.message)
+		);
+	}
+	if (
+		pokemon.heldItemName === 'starf-berry' &&
+		pokemon.damage / pokemon.stats.hp >= 0.75
+	) {
+		addMultipleMessages([
+			`${pokemon.data.name} gave itself a boost with ${pokemon.heldItemName}`,
+		]);
+		return applyStatChangeToPokemon(
+			{ ...pokemon, heldItemName: undefined },
+			getRandomBoostableStat(),
+			1,
+			true,
+			[],
+			(x) => addMessage(x.message)
+		);
+	}
+	if (
+		pokemon.heldItemName === 'lansat-berry' &&
+		pokemon.damage / pokemon.stats.hp >= 0.75
+	) {
+		addMultipleMessages([
+			`${pokemon.data.name} gave itself a boost with ${pokemon.heldItemName}`,
+		]);
+		return applySecondaryAilmentToPokemon({
+			pokemon: { ...pokemon, heldItemName: undefined },
+			ailment: 'focused',
+			addMessage: (x) => addMessage(x.message),
+		});
+	}
+
+	if (
+		pokemon.heldItemName === 'enigma-berry' &&
+		pokemon.lastReceivedDamage?.wasSuperEffective
+	) {
+		addMultipleMessages([
+			`${pokemon.data.name} recovered hp with ${pokemon.heldItemName}`,
+		]);
+		return {
+			...pokemon,
+			heldItemName: undefined,
+			damage: Math.max(0, pokemon.damage - pokemon.stats.hp / 4),
+		};
+	}
+	if (
+		pokemon.heldItemName === 'kee-berry' &&
+		pokemon.lastReceivedDamage?.wasPhysical
+	) {
+		addMultipleMessages([
+			`${pokemon.data.name} gave itself a boost with ${pokemon.heldItemName}`,
+		]);
+		return applyStatChangeToPokemon(
+			{ ...pokemon, heldItemName: undefined },
+			'defense',
+			1,
+			true,
+			[],
+			(x) => addMessage(x.message)
+		);
+	}
+	if (
+		pokemon.heldItemName === 'maranga-berry' &&
+		pokemon.lastReceivedDamage?.wasSpecial
+	) {
+		addMultipleMessages([
+			`${pokemon.data.name} gave itself a boost with ${pokemon.heldItemName}`,
+		]);
+		return applyStatChangeToPokemon(
+			{ ...pokemon, heldItemName: undefined },
+			'defense',
+			1,
+			true,
+			[],
+			(x) => addMessage(x.message)
+		);
 	}
 	if (
 		HPHealTable[pokemon.heldItemName] &&

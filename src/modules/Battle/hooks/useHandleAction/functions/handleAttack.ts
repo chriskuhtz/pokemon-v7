@@ -490,35 +490,71 @@ export const handleAttack = ({
 	//TARGET
 	if (!selfTargeting) {
 		// apply damage
-		const calculatedDamage = calculateDamage(
-			updatedAttacker,
-			target,
-			move,
-			battleWeather,
-			battleFieldEffects,
-			true,
-			isFlying,
-			isUnderground,
-			addMessage
-		);
-		const damage = getMiddleOfThree([
+		const { consumedHeldItem, damage, criticalHit, wasSuperEffective } =
+			calculateDamage(
+				updatedAttacker,
+				target,
+				move,
+				battleWeather,
+				battleFieldEffects,
+				true,
+				isFlying,
+				isUnderground,
+				addMessage
+			);
+		const actualDamage = getMiddleOfThree([
 			0,
-			calculatedDamage.damage,
+			damage,
 			updatedTarget.stats.hp - updatedTarget.damage,
 		]);
+		if (consumedHeldItem) {
+			addMessage({
+				message: `${updatedTarget.name} consumed its ${updatedTarget.heldItemName} to reduce the damage`,
+			});
+		}
 		updatedTarget = {
 			...updatedTarget,
-			damage: updatedTarget.damage + damage,
+			damage: updatedTarget.damage + actualDamage,
 			//setLastReceivedDamage
 			lastReceivedDamage: {
 				damageClass: move.data.damage_class.name,
-				damage: damage,
+				damage: actualDamage,
 				applicatorId: attacker.id,
 				attackType: move.data.type.name,
+				wasSuperEffective: !!wasSuperEffective,
+				wasPhysical: move.data.damage_class.name === 'physical',
+				wasSpecial: move.data.damage_class.name === 'special',
 			},
+			heldItemName: consumedHeldItem ? undefined : updatedTarget.heldItemName,
 		};
 		// check attacker  drain/recoil
-		const drain = move.data.meta.drain;
+
+		const getDrain = () => {
+			if (move.data.meta.drain) {
+				return move.data.meta.drain;
+			}
+			if (
+				updatedTarget.heldItemName === 'jaboca-berry' &&
+				move.data.damage_class.name === 'physical'
+			) {
+				updatedTarget = { ...updatedTarget, heldItemName: undefined };
+				addMessage({
+					message: `${updatedTarget.name} somehow used its ${updatedTarget.heldItemName} to damage ${updatedAttacker.name}`,
+				});
+				return -12.5;
+			}
+			if (
+				updatedTarget.heldItemName === 'rowap-berry' &&
+				move.data.damage_class.name === 'special'
+			) {
+				updatedTarget = { ...updatedTarget, heldItemName: undefined };
+				addMessage({
+					message: `${updatedTarget.name} somehow used its ${updatedTarget.heldItemName} to damage ${updatedAttacker.name}`,
+				});
+				return -12.5;
+			}
+		};
+		const drain = getDrain();
 		if (drain) {
 			const absDrainValue = getMiddleOfThree([
 				1,
@@ -575,10 +611,7 @@ export const handleAttack = ({
 			battleFieldEffects
 		);
 		// check anger point
-		if (
-			calculatedDamage.criticalHit &&
-			updatedTarget.ability === 'anger-point'
-		) {
+		if (criticalHit && updatedTarget.ability === 'anger-point') {
 			updatedTarget = applyStatChangeToPokemon(
 				updatedTarget,
 				'attack',
@@ -592,7 +625,7 @@ export const handleAttack = ({
 
 		// apply rage boost
 		if (
-			calculatedDamage.damage > 0 &&
+			damage > 0 &&
 			target.secondaryAilments.some((a) => a.type === 'raging')
 		) {
 			updatedTarget = applyStatChangeToPokemon(

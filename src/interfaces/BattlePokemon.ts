@@ -36,6 +36,9 @@ export interface BattlePokemon extends OwnedPokemon {
 		damage: number;
 		applicatorId: string;
 		attackType: PokemonType;
+		wasSuperEffective: boolean;
+		wasSpecial: boolean;
+		wasPhysical: boolean;
 	};
 	initAbility: AbilityName;
 }

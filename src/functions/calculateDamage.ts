@@ -7,6 +7,7 @@ import { flyDoubleDamageMoves, ohkoMoves } from '../constants/ohkoMoves';
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { superEffectiveSaveTable } from '../interfaces/Item';
 import { PokemonType } from '../interfaces/PokemonType';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
@@ -99,8 +100,14 @@ export const calculateDamage = (
 	targetIsFlying: boolean,
 	targetIsUnderground: boolean,
 	addMessage?: (x: Message) => void
-): { damage: number; criticalHit?: boolean } => {
+): {
+	damage: number;
+	criticalHit?: boolean;
+	consumedHeldItem?: boolean;
+	wasSuperEffective?: boolean;
+} => {
 	const damageClass = attack.data.damage_class.name;
+	const attackType = attack.data.type.name;
 	if (damageClass === 'status') {
 		return { damage: 0 };
 	}
@@ -149,18 +156,15 @@ export const calculateDamage = (
 		};
 	}
 
-	if (target.ability === 'flash-fire' && attack.data.type.name === 'fire') {
+	if (target.ability === 'flash-fire' && attackType === 'fire') {
 		return { damage: 0 };
 	}
-	if (
-		target.ability === 'motor-drive' &&
-		attack.data.type.name === 'electric'
-	) {
+	if (target.ability === 'motor-drive' && attackType === 'electric') {
 		return { damage: 0 };
 	}
 
 	const absorbAbility = DamageAbsorbAbilityMap[target.ability];
-	if (absorbAbility === attack.data.type.name) {
+	if (absorbAbility === attackType) {
 		const res = Math.max(-Math.floor(target.stats.hp / 4), -target.damage);
 
 		if (addMessage && res < 0) {
@@ -249,7 +253,7 @@ export const calculateDamage = (
 		targetIsUnderground && attack.name === 'earthquake' ? 2 : 1;
 	const flashFireFactor =
 		attacker.secondaryAilments.some((a) => a.type === 'flash-fire') &&
-		attack.data.type.name === 'fire'
+		attackType === 'fire'
 			? 1.5
 			: 1;
 	const hugePowerFactor =
@@ -262,7 +266,7 @@ export const calculateDamage = (
 			: 1;
 	const heldItemFactor = getHeldItemFactor(
 		attacker.name,
-		attack.data.type.name,
+		attackType,
 		attacker.heldItemName
 	);
 	const lightScreenFactor =
@@ -318,35 +322,38 @@ export const calculateDamage = (
 	const overgrowFactor =
 		attacker.ability === 'overgrow' &&
 		attacker.damage > attacker.stats.hp * 0.66 &&
-		attack.data.type.name === 'grass'
+		attackType === 'grass'
 			? 1.5
 			: 1;
 	const blazeFactor =
 		attacker.ability === 'blaze' &&
 		attacker.damage > attacker.stats.hp * 0.66 &&
-		attack.data.type.name === 'fire'
+		attackType === 'fire'
 			? 1.5
 			: 1;
 	const torrentFactor =
 		attacker.ability === 'torrent' &&
 		attacker.damage > attacker.stats.hp * 0.66 &&
-		attack.data.type.name === 'water'
+		attackType === 'water'
 			? 1.5
 			: 1;
 	const swarmFactor =
 		attacker.ability === 'swarm' &&
 		attacker.damage > attacker.stats.hp * 0.66 &&
-		attack.data.type.name === 'bug'
+		attackType === 'bug'
 			? 1.5
 			: 1;
 	const heatProofFactor =
-		target.ability === 'heatproof' && attack.data.type.name === 'fire'
+		target.ability === 'heatproof' && attackType === 'fire' ? 0.5 : 1;
+	const drySkinFactor =
+		target.ability === 'dry-skin' && attackType === 'fire' ? 1.25 : 1;
+	const savingBerryFactor =
+		(typeFactor > 1 || attackType === 'normal') &&
+		superEffectiveSaveTable[attackType] &&
+		superEffectiveSaveTable[attackType] === target.heldItemName
 			? 0.5
 			: 1;
-	const drySkinFactor =
-		target.ability === 'dry-skin' && attack.data.type.name === 'fire'
-			? 1.25
-			: 1;
+	const consumedHeldItem = savingBerryFactor === 0.5;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -382,7 +389,8 @@ export const calculateDamage = (
 				torrentFactor *
 				swarmFactor *
 				heatProofFactor *
-				drySkinFactor
+				drySkinFactor *
+				savingBerryFactor
 		),
 		1
 	);
@@ -396,8 +404,18 @@ export const calculateDamage = (
 		if (addMessage) {
 			addMessage({ message: `${target.data.name} hung on with sturdy` });
 		}
-		return { damage: target.stats.hp - 1, criticalHit: critFactor === 2 };
+		return {
+			damage: target.stats.hp - 1,
+			criticalHit: critFactor === 2,
+			consumedHeldItem,
+			wasSuperEffective: typeFactor > 1,
+		};
 	}
 
-	return { damage: res, criticalHit: critFactor === 2 };
+	return {
+		damage: res,
+		criticalHit: critFactor === 2,
+		consumedHeldItem,
+		wasSuperEffective: typeFactor > 1,
+	};
 };

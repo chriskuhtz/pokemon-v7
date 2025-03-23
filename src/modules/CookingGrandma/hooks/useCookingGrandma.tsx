@@ -17,6 +17,31 @@ const BASE_RECIPES: Recipe[] = [
 		difficulty: 'MEDIUM',
 	},
 	{
+		result: 'energy-powder',
+		ingredients: ['wepear-berry', 'pinap-berry'],
+		difficulty: 'EASY',
+	},
+	{
+		result: 'energy-powder',
+		ingredients: ['cornn-berry', 'rabuta-berry'],
+		difficulty: 'EASY',
+	},
+	{
+		result: 'energy-powder',
+		ingredients: ['nomel-berry', 'magost-berry'],
+		difficulty: 'EASY',
+	},
+	{
+		result: 'heal-powder',
+		ingredients: ['spelon-berry', 'durin-berry'],
+		difficulty: 'MEDIUM',
+	},
+	{
+		result: 'heal-powder',
+		ingredients: ['watmel-berry', 'pamtre-berry', 'belue-berry'],
+		difficulty: 'EASY',
+	},
+	{
 		result: 'rare-candy',
 		ingredients: [
 			'sitrus-berry',
@@ -26,6 +51,24 @@ const BASE_RECIPES: Recipe[] = [
 			'bluk-berry',
 		],
 		difficulty: 'TRICKY',
+	},
+	{
+		result: 'rare-candy',
+		ingredients: [
+			'silver-razz-berry',
+			'silver-nanab-berry',
+			'silver-pinap-berry',
+		],
+		difficulty: 'MEDIUM',
+	},
+	{
+		result: 'rare-candy',
+		ingredients: [
+			'golden-razz-berry',
+			'golden-nanab-berry',
+			'golden-pinap-berry',
+		],
+		difficulty: 'EASY',
 	},
 	...cookingBerries.map(
 		(c) =>

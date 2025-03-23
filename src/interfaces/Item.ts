@@ -2,6 +2,7 @@ import { PokemonName } from '../constants/pokemonNames';
 import { getRandomIndex } from '../functions/filterTargets';
 import { AilmentType, primaryAilments } from './Ailment';
 import { Nature } from './Natures';
+import { PokemonType } from './PokemonType';
 import { Stat } from './StatObject';
 
 export const healingItemTypes = [
@@ -42,7 +43,6 @@ export const healingItemTypes = [
 	'persim-berry',
 	'lum-berry',
 ] as const;
-
 export const ppRestorationItemTypes = [
 	'ether',
 	'max-ether',
@@ -50,7 +50,6 @@ export const ppRestorationItemTypes = [
 	'max-elixir',
 	'leppa-berry',
 ] as const;
-
 export const evBoostItemTypes = [
 	'hp-up',
 	'calcium',
@@ -59,7 +58,6 @@ export const evBoostItemTypes = [
 	'protein',
 	'carbos',
 ] as const;
-
 export const balltypes = [
 	'master-ball',
 	'poke-ball',
@@ -78,9 +76,7 @@ export const balltypes = [
 	'cherish-ball',
 	'premier-ball',
 ] as const;
-
 export const ppBoostItemTypes = ['pp-up', 'pp-max'] as const;
-
 export const xItemTypes = [
 	'x-attack',
 	'x-defense',
@@ -91,9 +87,7 @@ export const xItemTypes = [
 	'dire-hit',
 	'guard-spec',
 ] as const;
-
 export const runawayItemTypes = ['poke-doll', 'fluffy-tail'] as const;
-
 export const apricorns = [
 	'red-apricorn',
 	'blue-apricorn',
@@ -110,7 +104,6 @@ export const encounterChanceItems = [
 	'max-repel',
 	'super-repel',
 ] as const;
-
 export const evoStones = [
 	'sun-stone',
 	'thunder-stone',
@@ -132,7 +125,6 @@ export const heldItems = [
 	'lustrous-orb',
 	'bright-powder',
 ] as const;
-
 export const valuables = [
 	'shoal-salt',
 	'shoal-shell',
@@ -157,7 +149,6 @@ export const mulches = [
 	'stable-mulch',
 	'gooey-mulch',
 ] as const;
-
 export const berries = [
 	'sitrus-berry',
 	'cheri-berry',
@@ -181,8 +172,57 @@ export const berries = [
 	'pinap-berry',
 	'pomeg-berry',
 	'kelpsy-berry',
+	'qualot-berry',
+	'hondew-berry',
+	'grepa-berry',
+	'tamato-berry',
+	'cornn-berry',
+	'rabuta-berry',
+	'nomel-berry',
+	'magost-berry',
+	'spelon-berry',
+	'durin-berry',
+	'watmel-berry',
+	'pamtre-berry',
+	'belue-berry',
+	'occa-berry',
+	'pasho-berry',
+	'wacan-berry',
+	'rindo-berry',
+	'yache-berry',
+	'chople-berry',
+	'kebia-berry',
+	'shuca-berry',
+	'coba-berry',
+	'payapa-berry',
+	'tanga-berry',
+	'charti-berry',
+	'kasib-berry',
+	'haban-berry',
+	'colbur-berry',
+	'babiri-berry',
+	'chilan-berry',
+	'liechi-berry',
+	'ganlon-berry',
+	'petaya-berry',
+	'apicot-berry',
+	'lansat-berry',
+	'starf-berry',
+	'enigma-berry',
+	'micle-berry',
+	'custap-berry',
+	'roseli-berry',
+	'kee-berry',
+	'maranga-berry',
+	'silver-razz-berry',
+	'golden-razz-berry',
+	'silver-nanab-berry',
+	'golden-nanab-berry',
+	'silver-pinap-berry',
+	'golden-pinap-berry',
+	'jaboca-berry',
+	'rowap-berry',
 ] as const;
-
 export const fossils = [
 	'old-amber',
 	'root-fossil',
@@ -196,7 +236,6 @@ export const fossils = [
 	'jaw-fossil',
 	'sail-fossil',
 ] as const;
-
 export const itemTypes = [
 	...apricorns,
 	...balltypes,
@@ -220,9 +259,7 @@ export const itemTypes = [
 ] as const;
 
 export type ItemType = (typeof itemTypes)[number];
-
 export type PokeballType = (typeof balltypes)[number];
-
 export type HealingItemType = (typeof healingItemTypes)[number];
 export type PPRestoringItemType = (typeof ppRestorationItemTypes)[number];
 export type PPBoostItemType = (typeof ppBoostItemTypes)[number];
@@ -262,7 +299,6 @@ export function isPPRestorationItem(
 ): x is PPRestoringItemType {
 	return (ppRestorationItemTypes as unknown as string[]).includes(x ?? '');
 }
-
 export function isEvBoostItem(x: string | undefined): x is EvBoostItemType {
 	return (evBoostItemTypes as unknown as string[]).includes(x ?? '');
 }
@@ -283,14 +319,12 @@ export function isEncounterChanceItem(
 export function isItem(x: string | undefined): x is ItemType {
 	return (itemTypes as unknown as string[]).includes(x ?? '');
 }
-
 export const hasEndOfTurnEffect = (item: ItemType): boolean => {
 	if (isBerry(item) || item === 'berry-juice') {
 		return true;
 	}
 	return false;
 };
-
 //TODO: implement limits, e.g. hp up cant improve over 100
 export const HappinessChangeTable: Partial<Record<ItemType, number>> = {
 	'heal-powder': -10,
@@ -316,7 +350,6 @@ export const EvBoostTable: Record<
 	protein: { change: 10, stat: 'attack' },
 	carbos: { change: 10, stat: 'speed' },
 };
-
 export const HPHealTable: Partial<Record<ItemType, number>> = {
 	'oran-berry': 10,
 	potion: 20,
@@ -339,12 +372,24 @@ export const FlavourfullBerriesTable: Partial<Record<ItemType, Nature[]>> = {
 	'aguav-berry': ['naughty', 'rash', 'lax', 'naive'],
 	'wiki-berry': ['adamant', 'impish', 'careful', 'jolly'],
 };
+export const emergencyBoostBerriesTable: Partial<Record<ItemType, Stat>> = {
+	'liechi-berry': 'attack',
+	'ganlon-berry': 'defense',
+	'petaya-berry': 'special-attack',
+	'apicot-berry': 'special-defense',
+	'micle-berry': 'accuracy',
+	'custap-berry': 'speed',
+};
 /**
  * These berries make pokemon happier, but reduce their evs
  */
 export const happinessBerries: Partial<Record<ItemType, Stat>> = {
 	'pomeg-berry': 'hp',
 	'kelpsy-berry': 'attack',
+	'qualot-berry': 'defense',
+	'hondew-berry': 'special-attack',
+	'grepa-berry': 'special-defense',
+	'tamato-berry': 'speed',
 };
 export const cookingBerries: BerryType[] = [
 	'bluk-berry',
@@ -352,8 +397,22 @@ export const cookingBerries: BerryType[] = [
 	'razz-berry',
 	'wepear-berry',
 	'pinap-berry',
+	'cornn-berry',
+	'rabuta-berry',
+	'nomel-berry',
+	'magost-berry',
+	'spelon-berry',
+	'durin-berry',
+	'watmel-berry',
+	'pamtre-berry',
+	'belue-berry',
+	'silver-razz-berry',
+	'golden-razz-berry',
+	'silver-nanab-berry',
+	'golden-nanab-berry',
+	'silver-pinap-berry',
+	'golden-pinap-berry',
 ];
-
 export const AilmentHealTable: Partial<Record<ItemType, AilmentType[]>> = {
 	'full-heal': [...primaryAilments, 'confusion'],
 	'full-restore': [...primaryAilments, 'confusion'],
@@ -367,7 +426,6 @@ export const AilmentHealTable: Partial<Record<ItemType, AilmentType[]>> = {
 	'paralyze-heal': ['paralysis'],
 	'cheri-berry': ['paralysis'],
 };
-
 export const XItemTable: Partial<Record<XItemType, Stat>> = {
 	'x-accuracy': 'accuracy',
 	'x-attack': 'attack',
@@ -391,18 +449,16 @@ export const fossilTable: Record<FossilType, PokemonName> = {
 };
 export const apricornTable: Record<ApricornType, PokeballType> = {
 	'black-apricorn': 'dusk-ball',
-	'blue-apricorn': 'dive-ball',
+	'blue-apricorn': 'net-ball',
 	'green-apricorn': 'nest-ball',
 	'pink-apricorn': 'luxury-ball',
 	'red-apricorn': 'heal-ball',
 	'white-apricorn': 'timer-ball',
 	'yellow-apricorn': 'quick-ball',
 };
-
 export const getRandomItem = () => {
 	return itemTypes[getRandomIndex(itemTypes.length)];
 };
-
 export const pickupTable: ItemType[] = [
 	...berries,
 	...apricorns,
@@ -420,3 +476,24 @@ export const undergroundTable: ItemType[] = [
 	...evBoostItemTypes,
 	...fossils,
 ];
+export const superEffectiveSaveTable: Record<PokemonType, ItemType> = {
+	fire: 'occa-berry',
+	water: 'pasho-berry',
+	electric: 'wacan-berry',
+	grass: 'rindo-berry',
+	ice: 'yache-berry',
+	fighting: 'chople-berry',
+	poison: 'kebia-berry',
+	ground: 'shuca-berry',
+	flying: 'coba-berry',
+	psychic: 'payapa-berry',
+	bug: 'tanga-berry',
+	rock: 'charti-berry',
+	ghost: 'kasib-berry',
+	dragon: 'haban-berry',
+	dark: 'colbur-berry',
+	steel: 'babiri-berry',
+	normal: 'chilan-berry',
+	fairy: 'roseli-berry',
+	typeless: 'odd-keystone',
+};

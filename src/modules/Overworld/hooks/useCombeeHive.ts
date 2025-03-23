@@ -13,9 +13,9 @@ export const useCombeeHive = () => {
 		const now = new Date().getTime();
 		if (!saveFile.honeyReadyAt || now > saveFile.honeyReadyAt) {
 			const honeyAmounts = getMiddleOfThree([
-				1,
-				5,
-				Math.floor(Math.random() * 6),
+				2,
+				10,
+				Math.floor(Math.random() * 11),
 			]);
 			addMessage({
 				message: `Gathered ${honeyAmounts} Portions of honey from the hive  `,

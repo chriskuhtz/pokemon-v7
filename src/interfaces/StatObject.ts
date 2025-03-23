@@ -1,3 +1,5 @@
+import { getRandomEntry } from '../functions/filterTargets';
+
 export const stats = [
 	'hp',
 	'attack',
@@ -33,3 +35,9 @@ export const generateRandomStatObject = (max: number): StatObject => ({
 	accuracy: Math.floor(Math.random() * max),
 	evasion: Math.floor(Math.random() * max),
 });
+
+export const getRandomBoostableStat = () => {
+	return getRandomEntry(
+		stats.filter((s) => s !== 'hp' && s !== 'evasion' && s !== 'accuracy')
+	);
+};
