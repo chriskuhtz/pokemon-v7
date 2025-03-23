@@ -11,7 +11,7 @@ export const determineWildPokemon = (
 	map: OverworldMap,
 	swarm?: PokemonSwarm
 ) => {
-	if (swarm && Math.random() > 0.5) {
+	if (swarm && swarm.route === map.id && Math.random() > 0.5) {
 		return [
 			makeChallengerPokemon({
 				nature: getRandomNature(),
