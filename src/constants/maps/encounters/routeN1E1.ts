@@ -1,7 +1,10 @@
 import { EncounterMap } from '../encounters';
 
 export const routeN1E1Encounters: EncounterMap = {
-	BASE: [{ name: 'scyther', xp: 1500, rarity: 'rare' }],
+	BASE: [
+		{ name: 'scyther', xp: 1500, rarity: 'rare' },
+		{ name: 'meowth', xp: 1000, rarity: 'common' },
+	],
 	MORNING: [
 		{ name: 'wurmple', xp: 1000, rarity: 'common' },
 		{ name: 'wurmple', xp: 800, rarity: 'common' },
@@ -13,7 +16,7 @@ export const routeN1E1Encounters: EncounterMap = {
 		{ name: 'smoliv', xp: 800, rarity: 'common' },
 		{ name: 'smoliv', xp: 1500, rarity: 'medium' },
 		{ name: 'pinsir', xp: 1500, rarity: 'rare' },
-		{ name: 'meowth', xp: 1000, rarity: 'rare' },
+		{ name: 'shroomish', xp: 1000, rarity: 'rare' },
 		{ name: 'emolga', xp: 1000, rarity: 'ultra-rare' },
 	],
 	DAY: [
@@ -27,7 +30,6 @@ export const routeN1E1Encounters: EncounterMap = {
 		{ name: 'skiddo', xp: 800, rarity: 'common' },
 		{ name: 'skiddo', xp: 1500, rarity: 'medium' },
 		{ name: 'pancham', xp: 1500, rarity: 'rare' },
-
 		{ name: 'toxel', xp: 1500, rarity: 'ultra-rare' },
 	],
 	EVENING: [

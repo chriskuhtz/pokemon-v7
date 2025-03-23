@@ -2,13 +2,14 @@ import { EncounterMap } from '../encounters';
 
 export const routeN1Encounters: EncounterMap = {
 	BASE: [
-		{ name: 'pikachu', xp: 125, rarity: 'rare' },
-		{ name: 'eevee', xp: 125, rarity: 'rare' },
+		{ name: 'pikachu', xp: 125, rarity: 'common' },
+		{ name: 'eevee', xp: 125, rarity: 'common' },
+		{ name: 'rattata', xp: 125, rarity: 'common' },
 	],
 	MORNING: [
-		{ name: 'rattata', xp: 50, rarity: 'common' },
-		{ name: 'rattata', xp: 100, rarity: 'common' },
-		{ name: 'rattata', xp: 125, rarity: 'medium' },
+		{ name: 'sunkern', xp: 50, rarity: 'common' },
+		{ name: 'sunkern', xp: 100, rarity: 'common' },
+		{ name: 'sunkern', xp: 125, rarity: 'medium' },
 		{ name: 'spearow', xp: 50, rarity: 'common' },
 		{ name: 'spearow', xp: 100, rarity: 'common' },
 		{ name: 'spearow', xp: 125, rarity: 'medium' },

@@ -50,10 +50,11 @@ export const questNames = [
 	'catch a pokemon orginally found in alola',
 	'catch a pokemon orginally found in galar',
 	'catch a pokemon orginally found in paldea',
-	'catch a pokemon and its galarian variant',
 	'catch a pokemon and its alolan variant',
+	'catch a pokemon and its galarian variant',
 	'catch a pokemon and its hisui variant',
 	'catch a pokemon and its paldea variant',
+	'defeat rowan',
 	'craft a apricorn ball',
 	'lure a pokemon with honey',
 	'catch all honeytree pokemon',
@@ -1048,6 +1049,19 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 1',
 		availableAfter: 'catch Haunter and Mightyena',
+	},
+	'defeat rowan': {
+		rewardItems: {
+			'ultra-ball': 10,
+			'full-restore': 5,
+		},
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'Professor Rowan');
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'catch a pokemon and its paldea variant',
 	},
 	'revive a fossil': {
 		kind: 'BULLETIN',

@@ -8,10 +8,10 @@ export const getRandomEncounter = (map: OverworldMap): OverworldEncounter => {
 		...map.possibleEncounters.BASE,
 	].flatMap((p) => {
 		if (p.rarity === 'common') {
-			return [p, p, p, p, p, p, p];
+			return [p, p, p, p];
 		}
 		if (p.rarity === 'medium') {
-			return [p, p, p, p, p];
+			return [p, p, p];
 		}
 		if (p.rarity === 'rare') {
 			return [p, p];

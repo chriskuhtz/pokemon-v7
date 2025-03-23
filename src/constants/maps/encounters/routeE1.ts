@@ -2,8 +2,8 @@ import { EncounterMap } from '../encounters';
 
 export const routeE1Encounters: EncounterMap = {
 	BASE: [
-		{ name: 'growlithe', xp: 3000, rarity: 'rare' },
-		{ name: 'growlithe-hisui', xp: 3000, rarity: 'rare' },
+		{ name: 'growlithe', xp: 3000, rarity: 'medium' },
+		{ name: 'growlithe-hisui', xp: 3000, rarity: 'medium' },
 	],
 	MORNING: [
 		{ name: 'aron', xp: 1500, rarity: 'common' },
