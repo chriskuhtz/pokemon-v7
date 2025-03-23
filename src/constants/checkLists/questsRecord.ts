@@ -14,28 +14,28 @@ export const questNames = [
 	'catch a pokemon',
 	'catch a spiritomb',
 	'catch Haunter and Mightyena',
-	'catch a morning pokemon from routeN1',
-	'catch a daytime pokemon from routeN1',
-	'catch a evening pokemon from routeN1',
-	'catch a nighttime pokemon from routeN1',
+	'catch a morning exclusive pokemon from routeN1',
+	'catch a daytime exclusive pokemon from routeN1',
+	'catch a evening exclusive pokemon from routeN1',
+	'catch a nighttime exclusive pokemon from routeN1',
 	'catch all morning pokemon from routeN1',
 	'catch all daytime pokemon from routeN1',
 	'catch all evening pokemon from routeN1',
 	'catch all nighttime pokemon from routeN1',
 	'catch a ultra rare pokemon on routeN1',
-	'catch a morning pokemon from routeN1E1',
-	'catch a daytime pokemon from routeN1E1',
-	'catch a evening pokemon from routeN1E1',
-	'catch a nighttime pokemon from routeN1E1',
+	'catch a morning exclusive pokemon from routeN1E1',
+	'catch a daytime exclusive pokemon from routeN1E1',
+	'catch a evening exclusive pokemon from routeN1E1',
+	'catch a nighttime exclusive pokemon from routeN1E1',
 	'catch all morning pokemon from routeN1E1',
 	'catch all daytime pokemon from routeN1E1',
 	'catch all evening pokemon from routeN1E1',
 	'catch all nighttime pokemon from routeN1E1',
 	'catch a ultra rare pokemon on routeN1E1',
-	'catch a morning pokemon from routeE1',
-	'catch a daytime pokemon from routeE1',
-	'catch a evening pokemon from routeE1',
-	'catch a nighttime pokemon from routeE1',
+	'catch a morning exclusive pokemon from routeE1',
+	'catch a daytime exclusive pokemon from routeE1',
+	'catch a evening exclusive pokemon from routeE1',
+	'catch a nighttime exclusive pokemon from routeE1',
 	'catch all morning pokemon from routeE1',
 	'catch all daytime pokemon from routeE1',
 	'catch all evening pokemon from routeE1',
@@ -82,8 +82,6 @@ export const questNames = [
 ] as const;
 /**
  * Ideas:
- * also check "caught on" for catch quests
- * include base in "catch all" quests
  * elm line (night and day,all eeveelutions)
  * add elm and rowan to training field
  * shiny Pokemon
@@ -115,7 +113,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		kind: 'BULLETIN',
 	},
-	'catch a morning pokemon from routeN1': {
+	'catch a morning exclusive pokemon from routeN1': {
 		rewardItems: { 'nest-ball': 10 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
@@ -130,7 +128,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		],
 		kind: 'BULLETIN',
 	},
-	'catch a daytime pokemon from routeN1': {
+	'catch a daytime exclusive pokemon from routeN1': {
 		rewardItems: { 'quick-ball': 10 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
@@ -145,7 +143,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		],
 		kind: 'BULLETIN',
 	},
-	'catch a evening pokemon from routeN1': {
+	'catch a evening exclusive pokemon from routeN1': {
 		rewardItems: { 'net-ball': 10 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
@@ -160,7 +158,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		],
 		kind: 'BULLETIN',
 	},
-	'catch a nighttime pokemon from routeN1': {
+	'catch a nighttime exclusive pokemon from routeN1': {
 		rewardItems: { 'dusk-ball': 10 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
@@ -208,7 +206,10 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'hyper-potion': 2 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return routeN1.possibleEncounters.MORNING.every((e) =>
+			return [
+				...routeN1.possibleEncounters.MORNING,
+				...routeN1.possibleEncounters.BASE,
+			].every((e) =>
 				s.pokemon.some((p) => p.name === e.name && p.caughtOnMap === 'routeN1')
 			);
 		},
@@ -216,13 +217,16 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...new Set(routeN1.possibleEncounters.MORNING.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		availableAfter: 'catch a morning pokemon from routeN1',
+		availableAfter: 'catch a morning exclusive pokemon from routeN1',
 	},
 	'catch all daytime pokemon from routeN1': {
 		rewardItems: { honey: 10 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return routeN1.possibleEncounters.DAY.every((e) =>
+			return [
+				...routeN1.possibleEncounters.DAY,
+				...routeN1.possibleEncounters.BASE,
+			].every((e) =>
 				s.pokemon.some((p) => p.name === e.name && p.caughtOnMap === 'routeN1')
 			);
 		},
@@ -230,13 +234,16 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...new Set(routeN1.possibleEncounters.DAY.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		availableAfter: 'catch a daytime pokemon from routeN1',
+		availableAfter: 'catch a daytime exclusive pokemon from routeN1',
 	},
 	'catch all evening pokemon from routeN1': {
 		rewardItems: { 'full-heal': 5 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return routeN1.possibleEncounters.EVENING.every((e) =>
+			return [
+				...routeN1.possibleEncounters.EVENING,
+				...routeN1.possibleEncounters.BASE,
+			].every((e) =>
 				s.pokemon.some((p) => p.name === e.name && p.caughtOnMap === 'routeN1')
 			);
 		},
@@ -244,13 +251,16 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...new Set(routeN1.possibleEncounters.EVENING.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		availableAfter: 'catch a evening pokemon from routeN1',
+		availableAfter: 'catch a evening exclusive pokemon from routeN1',
 	},
 	'catch all nighttime pokemon from routeN1': {
 		rewardItems: { 'moon-stone': 1 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return routeN1.possibleEncounters.NIGHT.every((e) =>
+			return [
+				...routeN1.possibleEncounters.NIGHT,
+				...routeN1.possibleEncounters.BASE,
+			].every((e) =>
 				s.pokemon.some((p) => p.name === e.name && p.caughtOnMap === 'routeN1')
 			);
 		},
@@ -258,9 +268,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...new Set(routeN1.possibleEncounters.NIGHT.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		availableAfter: 'catch a nighttime pokemon from routeN1',
+		availableAfter: 'catch a nighttime exclusive pokemon from routeN1',
 	},
-	'catch a morning pokemon from routeN1E1': {
+	'catch a morning exclusive pokemon from routeN1E1': {
 		rewardItems: { 'sun-stone': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
@@ -276,7 +286,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'machete certification',
 	},
-	'catch a daytime pokemon from routeN1E1': {
+	'catch a daytime exclusive pokemon from routeN1E1': {
 		rewardItems: { 'fire-stone': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
@@ -292,7 +302,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'machete certification',
 	},
-	'catch a evening pokemon from routeN1E1': {
+	'catch a evening exclusive pokemon from routeN1E1': {
 		rewardItems: { 'dusk-stone': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
@@ -308,7 +318,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'machete certification',
 	},
-	'catch a nighttime pokemon from routeN1E1': {
+	'catch a nighttime exclusive pokemon from routeN1E1': {
 		rewardItems: { 'moon-stone': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
@@ -358,7 +368,10 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'hyper-potion': 2 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return routeN1E1.possibleEncounters.EVENING.every((e) =>
+			return [
+				...routeN1E1.possibleEncounters.MORNING,
+				...routeN1E1.possibleEncounters.BASE,
+			].every((e) =>
 				s.pokemon.some(
 					(p) => p.name === e.name && p.caughtOnMap === 'routeN1E1'
 				)
@@ -368,14 +381,17 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...new Set(routeN1E1.possibleEncounters.MORNING.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		availableAfter: 'catch a morning pokemon from routeN1E1',
+		availableAfter: 'catch a morning exclusive pokemon from routeN1E1',
 		requiredUpgrade: 'machete certification',
 	},
 	'catch all daytime pokemon from routeN1E1': {
 		rewardItems: { honey: 10 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return routeN1E1.possibleEncounters.DAY.every((e) =>
+			return [
+				...routeN1E1.possibleEncounters.DAY,
+				...routeN1E1.possibleEncounters.BASE,
+			].every((e) =>
 				s.pokemon.some(
 					(p) => p.name === e.name && p.caughtOnMap === 'routeN1E1'
 				)
@@ -385,14 +401,17 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...new Set(routeN1E1.possibleEncounters.DAY.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		availableAfter: 'catch a daytime pokemon from routeN1E1',
+		availableAfter: 'catch a daytime exclusive pokemon from routeN1E1',
 		requiredUpgrade: 'machete certification',
 	},
 	'catch all evening pokemon from routeN1E1': {
 		rewardItems: { 'full-heal': 5 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return routeN1E1.possibleEncounters.MORNING.every((e) =>
+			return [
+				...routeN1E1.possibleEncounters.EVENING,
+				...routeN1E1.possibleEncounters.BASE,
+			].every((e) =>
 				s.pokemon.some(
 					(p) => p.name === e.name && p.caughtOnMap === 'routeN1E1'
 				)
@@ -402,14 +421,17 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...new Set(routeN1E1.possibleEncounters.EVENING.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		availableAfter: 'catch a evening pokemon from routeN1E1',
+		availableAfter: 'catch a evening exclusive pokemon from routeN1E1',
 		requiredUpgrade: 'machete certification',
 	},
 	'catch all nighttime pokemon from routeN1E1': {
 		rewardItems: { 'odd-keystone': 1 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return routeN1E1.possibleEncounters.NIGHT.every((e) =>
+			return [
+				...routeN1E1.possibleEncounters.NIGHT,
+				...routeN1E1.possibleEncounters.BASE,
+			].every((e) =>
 				s.pokemon.some(
 					(p) => p.name === e.name && p.caughtOnMap === 'routeN1E1'
 				)
@@ -419,10 +441,10 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...new Set(routeN1E1.possibleEncounters.NIGHT.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		availableAfter: 'catch a nighttime pokemon from routeN1E1',
+		availableAfter: 'catch a nighttime exclusive pokemon from routeN1E1',
 		requiredUpgrade: 'machete certification',
 	},
-	'catch a morning pokemon from routeE1': {
+	'catch a morning exclusive pokemon from routeE1': {
 		rewardItems: { 'sun-stone': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
@@ -438,7 +460,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'sledge hammer certification',
 	},
-	'catch a daytime pokemon from routeE1': {
+	'catch a daytime exclusive pokemon from routeE1': {
 		rewardItems: { 'fire-stone': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
@@ -454,7 +476,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'sledge hammer certification',
 	},
-	'catch a evening pokemon from routeE1': {
+	'catch a evening exclusive pokemon from routeE1': {
 		rewardItems: { 'dusk-stone': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
@@ -470,7 +492,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'sledge hammer certification',
 	},
-	'catch a nighttime pokemon from routeE1': {
+	'catch a nighttime exclusive pokemon from routeE1': {
 		rewardItems: { 'moon-stone': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
@@ -520,7 +542,10 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'hyper-potion': 2 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return routeE1.possibleEncounters.EVENING.every((e) =>
+			return [
+				...routeE1.possibleEncounters.MORNING,
+				...routeE1.possibleEncounters.BASE,
+			].every((e) =>
 				s.pokemon.some((p) => p.name === e.name && p.caughtOnMap === 'routeE1')
 			);
 		},
@@ -528,14 +553,17 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...new Set(routeE1.possibleEncounters.MORNING.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		availableAfter: 'catch a morning pokemon from routeE1',
+		availableAfter: 'catch a morning exclusive pokemon from routeE1',
 		requiredUpgrade: 'sledge hammer certification',
 	},
 	'catch all daytime pokemon from routeE1': {
 		rewardItems: { honey: 10 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return routeE1.possibleEncounters.DAY.every((e) =>
+			return [
+				...routeE1.possibleEncounters.DAY,
+				...routeE1.possibleEncounters.BASE,
+			].every((e) =>
 				s.pokemon.some((p) => p.name === e.name && p.caughtOnMap === 'routeE1')
 			);
 		},
@@ -543,14 +571,17 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...new Set(routeE1.possibleEncounters.DAY.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		availableAfter: 'catch a daytime pokemon from routeE1',
+		availableAfter: 'catch a daytime exclusive pokemon from routeE1',
 		requiredUpgrade: 'sledge hammer certification',
 	},
 	'catch all evening pokemon from routeE1': {
 		rewardItems: { 'full-heal': 5 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return routeE1.possibleEncounters.MORNING.every((e) =>
+			return [
+				...routeE1.possibleEncounters.EVENING,
+				...routeE1.possibleEncounters.BASE,
+			].every((e) =>
 				s.pokemon.some((p) => p.name === e.name && p.caughtOnMap === 'routeE1')
 			);
 		},
@@ -558,14 +589,17 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...new Set(routeE1.possibleEncounters.EVENING.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		availableAfter: 'catch a evening pokemon from routeE1',
+		availableAfter: 'catch a evening exclusive pokemon from routeE1',
 		requiredUpgrade: 'sledge hammer certification',
 	},
 	'catch all nighttime pokemon from routeE1': {
 		rewardItems: { 'ultra-ball': 10 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return routeE1.possibleEncounters.NIGHT.every((e) =>
+			return [
+				...routeE1.possibleEncounters.NIGHT,
+				...routeE1.possibleEncounters.BASE,
+			].every((e) =>
 				s.pokemon.some((p) => p.name === e.name && p.caughtOnMap === 'routeE1')
 			);
 		},
@@ -573,7 +607,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...new Set(routeE1.possibleEncounters.NIGHT.map((p) => p.name)),
 		],
 		kind: 'BULLETIN',
-		availableAfter: 'catch a nighttime pokemon from routeE1',
+		availableAfter: 'catch a nighttime exclusive pokemon from routeE1',
 		requiredUpgrade: 'sledge hammer certification',
 	},
 	'catch all honeytree pokemon': {
