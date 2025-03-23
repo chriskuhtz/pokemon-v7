@@ -1,7 +1,12 @@
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { trainers } from '../../functions/makeRandomTrainer';
 import { honeyPokemon } from '../../hooks/useHoneyTree';
-import { apricornTable, fossilTable } from '../../interfaces/Item';
+import {
+	apricorns,
+	apricornTable,
+	berries,
+	fossilTable,
+} from '../../interfaces/Item';
 import { Quest } from '../../interfaces/Quest';
 import {
 	EmptyStatObject,
@@ -98,6 +103,10 @@ export const questNames = [
 	'catch 50 different species',
 	'catch a swarm pokemon',
 	'find a pokemon under a smashed rock',
+	'donate 1 plant to the seed vault',
+	'donate 20 plants to the seed vault',
+	'donate 50 plants to the seed vault',
+	'donate all different plants to the seed vault',
 ] as const;
 /**
  
@@ -885,7 +894,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 		availableAfter: 'evolve a pokemon with a held item',
 	},
-
 	'catch vileplume and bellosom': {
 		rewardItems: { 'metal-coat': 1, 'black-augurite': 1 },
 		researchPoints: 30,
@@ -1366,6 +1374,38 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		requiredUpgrade: 'sledge hammer certification',
 		conditionFunction: (s) => !!s.mileStones.hasfoundAPokemonBySmashingRocks,
+	},
+	'donate 1 plant to the seed vault': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'create seed vault',
+		researchPoints: 5,
+		rewardItems: { 'moomoo-milk': 3 },
+		conditionFunction: (s) => !!(s.seedVault && s.seedVault.length > 0),
+	},
+	'donate 20 plants to the seed vault': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'create seed vault',
+		availableAfter: 'donate 1 plant to the seed vault',
+		researchPoints: 10,
+		rewardItems: { 'moomoo-milk': 10 },
+		conditionFunction: (s) => !!(s.seedVault && s.seedVault.length >= 20),
+	},
+	'donate 50 plants to the seed vault': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'create seed vault',
+		availableAfter: 'donate 20 plants to the seed vault',
+		researchPoints: 50,
+		rewardItems: { 'moomoo-milk': 10, 'ultra-ball': 20 },
+		conditionFunction: (s) => !!(s.seedVault && s.seedVault.length >= 50),
+	},
+	'donate all different plants to the seed vault': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'create seed vault',
+		availableAfter: 'donate 50 plants to the seed vault',
+		researchPoints: 200,
+		rewardItems: { 'master-ball': 1 },
+		conditionFunction: (s) =>
+			[...berries, ...apricorns].every((item) => s.seedVault?.includes(item)),
 	},
 };
 

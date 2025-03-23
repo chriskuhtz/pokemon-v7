@@ -3,10 +3,10 @@ import { ONE_HOUR } from '../constants/gameData';
 import { getRandomEntry } from '../functions/filterTargets';
 import { joinInventories } from '../interfaces/Inventory';
 import { undergroundTable } from '../interfaces/Item';
-import { MessageQueueContext } from './useMessageQueue';
-import { SaveFileContext } from './useSaveFile';
 import { Occupant } from '../interfaces/OverworldMap';
 import { SpriteEnum } from '../interfaces/SpriteEnum';
+import { MessageQueueContext } from './useMessageQueue';
+import { SaveFileContext } from './useSaveFile';
 
 export const useDugtrioExplorers = () => {
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
@@ -36,7 +36,7 @@ export const useDugtrioExplorers = () => {
 					[foragedItem]: amount,
 					honey: -3,
 				}),
-				dugtrioReadyAt: now + (Math.random() * ONE_HOUR) / 2,
+				dugtrioReadyAt: Math.random() > 0.66 ? now + ONE_HOUR / 4 : undefined,
 			});
 		} else {
 			addMessage({ message: 'Dugtrio seems to need a little break' });

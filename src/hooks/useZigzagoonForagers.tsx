@@ -37,7 +37,7 @@ export const useZigzagoonForagers = () => {
 					[foragedItem]: amount,
 					'moomoo-milk': -1,
 				}),
-				zigzagoonReadyAt: now + (Math.random() * ONE_HOUR) / 2,
+				zigzagoonReadyAt: Math.random() > 0.75 ? now + ONE_HOUR / 4 : undefined,
 			});
 		} else {
 			addMessage({ message: 'Zigzagoon seems to need a little break' });
