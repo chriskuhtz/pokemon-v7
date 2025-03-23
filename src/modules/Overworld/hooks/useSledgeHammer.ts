@@ -92,7 +92,11 @@ export const useSledgeHammer = () => {
 									patchSaveFileReducer({
 										handledOccupants: [
 											...saveFile.handledOccupants,
-											{ id: rock.id, resetAt: new Date().getTime() + ONE_HOUR },
+											{
+												id: rock.id,
+												resetAt:
+													new Date().getTime() + ONE_HOUR * Math.random(),
+											},
 										],
 										inventory: updatedInventory,
 										meta,
