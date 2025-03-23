@@ -80,6 +80,36 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 			!s.handledOccupants.some((h) => h.id === 'routeN1_yellow_apricorn'),
 	},
 	{
+		type: 'ITEM',
+		x: 27,
+		y: 20,
+		item: 'bluk-berry',
+		amount: 5,
+		id: 'routeN1_bluk_berry',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'routeN1_bluk_berry'),
+	},
+	{
+		type: 'ITEM',
+		x: 2,
+		y: 4,
+		item: 'kelpsy-berry',
+		amount: 5,
+		id: 'routeN1_kelpsy_berry',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'routeN1_kelpsy_berry'),
+	},
+	{
+		type: 'ITEM',
+		x: 45,
+		y: 40,
+		item: 'aguav-berry',
+		amount: 5,
+		id: 'routeN1_aguav_berry',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'routeN1_aguav_berry'),
+	},
+	{
 		type: 'HONEY_TREE',
 		x: 25,
 		y: 25,
