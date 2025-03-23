@@ -34,7 +34,7 @@ export interface OwnedPokemon {
 	nature: Nature;
 	xp: number;
 	ability: AbilityName;
-	//shiny?: boolean;
+	shiny?: boolean;
 	happiness: number;
 	//Overflows between 0 and 255, adds happiness at 255
 	stepsWalked: number;

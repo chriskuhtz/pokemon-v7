@@ -106,7 +106,9 @@ export const LineUpSelection = ({
 				{opponents.map((opponent) => (
 					<IconSolarSystem
 						key={opponent.id}
-						sun={{ url: getPokemonSprite(opponent.name) }}
+						sun={{
+							url: getPokemonSprite(opponent.name, { shiny: opponent.shiny }),
+						}}
 						secondPlanetUrl={
 							opponent.caughtBefore && !trainer
 								? getItemUrl('poke-ball')

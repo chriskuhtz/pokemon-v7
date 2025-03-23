@@ -36,7 +36,9 @@ export const MainMenu = ({
 					<Card
 						onClick={() => teleportHome()}
 						content={<h4>Teleport back to camp</h4>}
-						icon={<PokemonSprite name={teleporter.name} />}
+						icon={
+							<PokemonSprite name={teleporter.name} shiny={teleporter.shiny} />
+						}
 						actionElements={[]}
 					/>
 				)}

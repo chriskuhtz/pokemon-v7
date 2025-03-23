@@ -1,4 +1,5 @@
 import { v4 } from 'uuid';
+import { shinyChance } from '../constants/gameData';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { EmptyStatObject } from '../interfaces/StatObject';
 
@@ -28,5 +29,11 @@ export const testOpponent: OwnedPokemon = {
 export const makeChallengerPokemon = (
 	data: Partial<Omit<OwnedPokemon, 'id'>>
 ): OwnedPokemon => {
-	return { ...testOpponent, weightModifier: Math.random(), ...data, id: v4() };
+	return {
+		...testOpponent,
+		weightModifier: Math.random(),
+		...data,
+		id: v4(),
+		shiny: Math.random() < shinyChance,
+	};
 };

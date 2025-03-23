@@ -89,14 +89,13 @@ export const questNames = [
 	'revive all different fossils',
 	'evolve your starter pokemon',
 	'evolve your starter pokemon to its final form',
+	'catch a shiny pokemon',
 ] as const;
 /**
  
  * Ideas:
- * shiny Pokemon
  * cook a recipe
  * cook all recipes
- * catch Baby Pokemon
  * catch x different pokemon
  * catch x swarm pokemon
  * catch x pokemon by smashing rocks
@@ -1081,6 +1080,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'full-restore': 5,
 		},
 		rewardPokemon: {
+			shiny: true,
 			maxHp: 30,
 			effortValues: EmptyStatObject,
 			ppBoostedMoves: [],
@@ -1113,6 +1113,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'full-restore': 5,
 		},
 		rewardPokemon: {
+			shiny: true,
 			maxHp: 30,
 			effortValues: EmptyStatObject,
 			ppBoostedMoves: [],
@@ -1217,6 +1218,14 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		requiredUpgrade: 'invite fossil expert',
 		availableAfter: 'revive a fossil',
+	},
+	'catch a shiny pokemon': {
+		kind: 'BULLETIN',
+		rewardItems: {
+			'master-ball': 1,
+		},
+		researchPoints: 50,
+		conditionFunction: (s) => s.pokemon.some((p) => p.shiny),
 	},
 };
 

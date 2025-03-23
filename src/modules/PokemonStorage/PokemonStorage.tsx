@@ -69,7 +69,9 @@ export const PokemonStorage = ({
 			<Stack mode="row">
 				{team.map((pokemon) => (
 					<IconSolarSystem
-						sun={{ url: getPokemonSprite(pokemon.name) }}
+						sun={{
+							url: getPokemonSprite(pokemon.name, { shiny: pokemon.shiny }),
+						}}
 						firstPlanet={
 							<Chip>
 								<strong>Lvl {calculateLevelData(pokemon.xp).level}</strong>
@@ -150,7 +152,9 @@ export const PokemonStorage = ({
 				{stored.sort(sortFunction).map((pokemon) => (
 					<div style={{ display: 'flex' }} key={pokemon.id}>
 						<IconSolarSystem
-							sun={{ url: getPokemonSprite(pokemon.name) }}
+							sun={{
+								url: getPokemonSprite(pokemon.name, { shiny: pokemon.shiny }),
+							}}
 							firstPlanet={
 								<Chip>
 									<strong>Lvl {calculateLevelData(pokemon.xp).level}</strong>

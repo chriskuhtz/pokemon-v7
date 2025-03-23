@@ -127,7 +127,9 @@ export const Team = ({
 									<IconSolarSystem
 										onClick={() => setFocusedId(pokemon.id)}
 										sun={{
-											url: getPokemonSprite(pokemon.name),
+											url: getPokemonSprite(pokemon.name, {
+												shiny: pokemon.shiny,
+											}),
 											styles: isOwnedPokemonKO(pokemon)
 												? { filter: 'grayscale(1)' }
 												: undefined,

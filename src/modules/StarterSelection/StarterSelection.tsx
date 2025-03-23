@@ -2,7 +2,11 @@ import { useCallback, useContext, useState } from 'react';
 import { v4 } from 'uuid';
 import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { Sprite } from '../../components/Sprite/Sprite';
-import { battleSpriteSize, testPokemon } from '../../constants/gameData';
+import {
+	battleSpriteSize,
+	shinyChance,
+	testPokemon,
+} from '../../constants/gameData';
 import { PokemonName } from '../../constants/pokemonNames';
 import { typeColors } from '../../constants/typeColors';
 import { getItemUrl } from '../../functions/getItemUrl';
@@ -56,6 +60,7 @@ export const StarterSelection = (): JSX.Element => {
 		const mon = reduceBattlePokemonToOwnedPokemon({
 			...chosenStarter,
 			ownerId: name,
+			shiny: Math.random() < shinyChance,
 		});
 
 		patchSaveFileReducer({
@@ -125,7 +130,7 @@ export const StarterSelection = (): JSX.Element => {
 							width={battleSpriteSize * (o === chosenStarter ? 3 : 1.5)}
 							src={
 								o === chosenStarter
-									? getPokemonSprite(o.name)
+									? getPokemonSprite(o.name, { shiny: o.shiny })
 									: getItemUrl('poke-ball')
 							}
 							onClick={() => setChosenStarter(o)}

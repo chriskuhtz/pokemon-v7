@@ -12,6 +12,7 @@ export const battleSpriteSize = 32;
 export const animationTimer = 16000 / frames;
 export const ONE_HOUR = 3600000;
 export const ONE_DAY = ONE_HOUR * 24;
+export const shinyChance = 1 / 2000;
 
 export const testPokemon: OwnedPokemon = {
 	name: 'teddiursa',

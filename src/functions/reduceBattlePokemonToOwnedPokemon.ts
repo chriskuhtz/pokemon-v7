@@ -41,6 +41,7 @@ export const reduceBattlePokemonToOwnedPokemon = (
 		weightModifier: newMon.weightModifier ?? Math.random(),
 		heightModifier: newMon.heightModifier ?? Math.random(),
 		intrinsicValues: newMon.intrinsicValues,
+		shiny: newMon.shiny,
 	};
 
 	if (heal) {

@@ -96,7 +96,9 @@ export const OwnedPokemonCardContent = ({
 				>
 					<IconSolarSystem
 						sun={{
-							url: getPokemonSprite(ownedPokemon.name),
+							url: getPokemonSprite(ownedPokemon.name, {
+								shiny: ownedPokemon.shiny,
+							}),
 							styles: isOwnedPokemonKO(ownedPokemon)
 								? { filter: 'grayscale(1)' }
 								: undefined,

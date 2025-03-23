@@ -64,7 +64,9 @@ export const RefillHandling = ({
 										}}
 										key={teamMember.id}
 										height={battleSpriteSize}
-										src={getPokemonSprite(teamMember.name)}
+										src={getPokemonSprite(teamMember.name, {
+											shiny: teamMember.shiny,
+										})}
 									/>
 								);
 							}

@@ -83,7 +83,10 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 											</React.Fragment>
 										))}
 										{quest.rewardPokemon && (
-											<PokemonSprite name={quest.rewardPokemon.name} />
+											<PokemonSprite
+												name={quest.rewardPokemon.name}
+												shiny={quest.rewardPokemon.shiny}
+											/>
 										)}
 									</h5>
 									<h5>Research Points: {quest.researchPoints}</h5>

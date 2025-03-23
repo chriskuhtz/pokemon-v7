@@ -60,7 +60,7 @@ export const HealAction = ({
 									<strong>{calculateLevelData(p.xp).level}</strong>
 								</Chip>
 							}
-							sun={{ url: getPokemonSprite(p.name) }}
+							sun={{ url: getPokemonSprite(p.name, { shiny: p.shiny }) }}
 						/>
 					))}
 				</Banner>
