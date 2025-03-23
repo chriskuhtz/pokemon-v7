@@ -5,6 +5,8 @@ import { joinInventories } from '../interfaces/Inventory';
 import { pickupTable } from '../interfaces/Item';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
+import { Occupant } from '../interfaces/OverworldMap';
+import { SpriteEnum } from '../interfaces/SpriteEnum';
 
 export const useZigzagoonForagers = () => {
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
@@ -50,3 +52,31 @@ export const useZigzagoonForagers = () => {
 
 	return trade;
 };
+export const zigzagoonForagers: Occupant[] = [
+	{
+		type: 'NPC',
+		unhandledMessage: [
+			'My zigzagoon loves moomoo milk',
+			'if you give him some',
+			'He will zoom off',
+			'and come back with an item',
+			'I dont ask where he finds them',
+		],
+		gifts: { 'moomoo-milk': 3 },
+		x: 14,
+		y: 1,
+		orientation: 'DOWN',
+		sprite: SpriteEnum.bugCatcher,
+		id: 'zigzagoon trainer',
+		conditionFunction: (s) => s.campUpgrades['invite zigzagoon foragers'],
+	},
+	{
+		type: 'ZIGZAGOON_FORAGER',
+		dexId: 263,
+		x: 13,
+		y: 1,
+		orientation: 'DOWN',
+		id: 'ziggie',
+		conditionFunction: (s) => s.campUpgrades['invite zigzagoon foragers'],
+	},
+];

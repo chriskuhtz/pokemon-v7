@@ -5,6 +5,8 @@ import { joinInventories } from '../interfaces/Inventory';
 import { undergroundTable } from '../interfaces/Item';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
+import { Occupant } from '../interfaces/OverworldMap';
+import { SpriteEnum } from '../interfaces/SpriteEnum';
 
 export const useDugtrioExplorers = () => {
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
@@ -49,3 +51,31 @@ export const useDugtrioExplorers = () => {
 
 	return trade;
 };
+
+export const dugtrioExplorers: Occupant[] = [
+	{
+		type: 'NPC',
+		unhandledMessage: [
+			'Dugtrio is lightning fast underground',
+			'and finds really rare items',
+			'just feed each head some honey',
+			'and watch them dig',
+		],
+		gifts: { honey: 3 },
+		x: 18,
+		y: 5,
+		orientation: 'LEFT',
+		sprite: SpriteEnum.explorer,
+		id: 'dugtrio trainer',
+		conditionFunction: (s) => s.campUpgrades['invite dugtrio explorers'],
+	},
+	{
+		type: 'DUGTRIO_EXPLORER',
+		dexId: 51,
+		x: 18,
+		y: 6,
+		orientation: 'LEFT',
+		id: 'triotrio',
+		conditionFunction: (s) => s.campUpgrades['invite dugtrio explorers'],
+	},
+];

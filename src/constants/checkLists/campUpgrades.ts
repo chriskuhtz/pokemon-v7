@@ -14,6 +14,8 @@ export const campUpgradeNames = [
 	'machete certification',
 	'invite zigzagoon foragers',
 	'invite dugtrio explorers',
+	'invite amoongus compost researcher',
+	'invite vileplume scent researcher',
 	'invite fossil expert',
 	'invite chef grandma',
 	'pokemon swarm radar',
@@ -22,12 +24,11 @@ export const campUpgradeNames = [
 ] as const;
 /**
  * ideas:
+ * mulch production
  * berries visible in overworld
  * more gym leaders
  * stronger training field
  * berry lure stations
- * mulch production
- * repel production
  * 'Shovel certification'
  * "Pokeflute certification"
  * 'Pokemon Surfer Certification'
@@ -74,6 +75,8 @@ export const campUpgradePrices: Record<CampUpgrade, number> = {
 	'pokemon swarm radar': 50,
 	'sledge hammer certification': 50,
 	'invite museum curator': 50,
+	'invite amoongus compost researcher': 50,
+	'invite vileplume scent researcher': 50,
 };
 
 export const baseRequirements: CampUpgrade[] = [
@@ -94,14 +97,13 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'build miltank farm': baseRequirements,
 	'invite chef grandma': baseRequirements,
 	'pokemon swarm radar': baseRequirements,
-	'second slot for farm': [...baseRequirements, 'berry_farm'],
+	'second slot for farm': baseRequirements,
 	'third slot for farm': [...baseRequirements, 'second slot for farm'],
 	'fourth slot for farm': [...baseRequirements, 'third slot for farm'],
 	'invite zigzagoon foragers': ['build miltank farm'],
-	'invite dugtrio explorers': [
-		'build miltank farm',
-		'invite zigzagoon foragers',
-	],
+	'invite dugtrio explorers': ['invite zigzagoon foragers'],
+	'invite amoongus compost researcher': ['invite dugtrio explorers'],
+	'invite vileplume scent researcher': ['invite zigzagoon foragers'],
 	'invite fossil expert': ['invite dugtrio explorers'],
 	'sledge hammer certification': ['machete certification'],
 	'invite museum curator': ['invite dugtrio explorers'],

@@ -5,6 +5,7 @@ import { SaveFileContext } from './hooks/useSaveFile';
 import { generateInventory, Inventory } from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
 import { mapMakerRoutes } from './interfaces/Routing';
+import { AmoongussCompostResearcher } from './modules/AmoongussResearcher/AmoongussResearcher';
 import { ApricornSmithy } from './modules/ApricornSmithy/ApricornSmithy';
 import { Bag } from './modules/Bag/Bag';
 import { BattleLoader } from './modules/Battle/components/BattleLoader';
@@ -28,6 +29,7 @@ import { SpriteSelection } from './modules/SpriteSelection/SpriteSelection';
 import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { Team } from './modules/Team/Team';
 import { TrainingField } from './modules/TrainingField/TrainingField';
+import { VilePlumeScentResearcher } from './modules/VilePlumeScentResearcher/VilePlumeScentResearcher';
 
 export const FullScreenToggle = () => {
 	const [f, setF] = useState<boolean>(!!document.fullscreenElement);
@@ -220,6 +222,12 @@ export const App = (): JSX.Element => {
 	}
 	if (activeTab === 'CURATOR') {
 		return <Curator />;
+	}
+	if (activeTab === 'VILEPLUME') {
+		return <VilePlumeScentResearcher />;
+	}
+	if (activeTab === 'AMOONGUSS') {
+		return <AmoongussCompostResearcher />;
 	}
 	if (activeTab === 'APRICORN_SMITHY') {
 		return <ApricornSmithy goBack={() => setActiveTabReducer('OVERWORLD')} />;

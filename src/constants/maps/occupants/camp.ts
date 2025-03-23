@@ -1,5 +1,10 @@
+import { dugtrioExplorers } from '../../../hooks/useDugtrioExplorers';
+import { zigzagoonForagers } from '../../../hooks/useZigzagoonForagers';
 import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
+import { amoongussCompostResearchers } from '../../../modules/AmoongussResearcher/AmoongussResearcher';
+import { miltankFarm } from '../../../modules/MiltankFarm/MiltankFarm';
+import { vileplumeResearchers } from '../../../modules/VilePlumeScentResearcher/VilePlumeScentResearcher';
 
 const oakLine: Occupant[] = [
 	{
@@ -448,88 +453,6 @@ const trainingField: Occupant[] = [
 		conditionFunction: (s) => s.campUpgrades['training field 1'],
 	},
 ];
-const miltankFarm: Occupant[] = [
-	{
-		type: 'ROUTER_NPC',
-		to: 'MILTANK_FARM',
-		dialogue: [
-			'All Pokemon seem to enjoy Miltank milk',
-			'And miltank love to eat berries',
-			'we can trade',
-		],
-		x: 4,
-		y: 1,
-		orientation: 'DOWN',
-		sprite: SpriteEnum.cowgirl,
-		id: 'miltank_farmer',
-		conditionFunction: (s) => s.campUpgrades['build miltank farm'],
-	},
-	{
-		type: 'POKEMON',
-		dexId: 241,
-		dialogue: ['Muuh'],
-		x: 5,
-		y: 1,
-		orientation: 'DOWN',
-		id: 'miltank',
-		conditionFunction: (s) => s.campUpgrades['build miltank farm'],
-	},
-];
-const zigzagoonForagers: Occupant[] = [
-	{
-		type: 'NPC',
-		unhandledMessage: [
-			'My zigzagoon loves moomoo milk',
-			'if you give him some',
-			'He will zoom off',
-			'and come back with an item',
-			'I dont ask where he finds them',
-		],
-		gifts: { 'moomoo-milk': 3 },
-		x: 14,
-		y: 1,
-		orientation: 'DOWN',
-		sprite: SpriteEnum.bugCatcher,
-		id: 'zigzagoon trainer',
-		conditionFunction: (s) => s.campUpgrades['invite zigzagoon foragers'],
-	},
-	{
-		type: 'ZIGZAGOON_FORAGER',
-		dexId: 263,
-		x: 13,
-		y: 1,
-		orientation: 'DOWN',
-		id: 'ziggie',
-		conditionFunction: (s) => s.campUpgrades['invite zigzagoon foragers'],
-	},
-];
-const dugtrioExplorers: Occupant[] = [
-	{
-		type: 'NPC',
-		unhandledMessage: [
-			'Dugtrio is lightning fast underground',
-			'and finds really rare items',
-			'just feed each head some honey',
-			'and watch them dig',
-		],
-		gifts: { honey: 3 },
-		x: 18,
-		y: 5,
-		orientation: 'LEFT',
-		sprite: SpriteEnum.explorer,
-		id: 'dugtrio trainer',
-		conditionFunction: (s) => s.campUpgrades['invite dugtrio explorers'],
-	},
-	{
-		type: 'DUGTRIO_EXPLORER',
-		dexId: 51,
-		x: 18,
-		y: 6,
-		orientation: 'LEFT',
-		id: 'triotrio',
-		conditionFunction: (s) => s.campUpgrades['invite dugtrio explorers'],
-	},
-];
 
 export const campOccupants: OverworldMap['occupants'] = [
 	{
@@ -706,4 +629,6 @@ export const campOccupants: OverworldMap['occupants'] = [
 	...miltankFarm,
 	...zigzagoonForagers,
 	...dugtrioExplorers,
+	...vileplumeResearchers,
+	...amoongussCompostResearchers,
 ];
