@@ -14,7 +14,7 @@ export const ToggleRow = ({
 			<div>
 				<h3 style={{ margin: 0 }}>{label}</h3>
 				{description && (
-					<strong style={{ color: 'red' }}>({description})</strong>
+					<strong style={{ color: 'crimson' }}>({description})</strong>
 				)}
 			</div>
 			<button
