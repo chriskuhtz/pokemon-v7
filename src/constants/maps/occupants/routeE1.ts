@@ -47,7 +47,8 @@ export const routeE1Occupants: OverworldMap['occupants'] = [
 		type: 'LEDGE',
 		x: 1,
 		y: 24,
-		conditionFunction: () => true,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'ledge1'),
 		id: 'ledge1',
 		sprite: '/ledges/ledgeDown.png',
 		passableFrom: 'UP',
@@ -56,7 +57,8 @@ export const routeE1Occupants: OverworldMap['occupants'] = [
 		type: 'LEDGE',
 		x: 2,
 		y: 24,
-		conditionFunction: () => true,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'ledge2'),
 		id: 'ledge2',
 		sprite: '/ledges/ledgeInnerCornerLeft.png',
 	},
@@ -64,7 +66,8 @@ export const routeE1Occupants: OverworldMap['occupants'] = [
 		type: 'LEDGE',
 		x: 2,
 		y: 25,
-		conditionFunction: () => true,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'ledge3'),
 		id: 'ledge3',
 		sprite: '/ledges/ledgeLeft.png',
 		passableFrom: 'RIGHT',
@@ -73,7 +76,8 @@ export const routeE1Occupants: OverworldMap['occupants'] = [
 		type: 'LEDGE',
 		x: 2,
 		y: 26,
-		conditionFunction: () => true,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'ledge4'),
 		id: 'ledge4',
 		sprite: '/ledges/ledgeInnerCornerLeftBottom.png',
 	},
@@ -81,7 +85,8 @@ export const routeE1Occupants: OverworldMap['occupants'] = [
 		type: 'LEDGE',
 		x: 1,
 		y: 26,
-		conditionFunction: () => true,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'ledge5'),
 		id: 'ledge5',
 		sprite: '/ledges/ledgeUp.png',
 		passableFrom: 'DOWN',
@@ -90,7 +95,8 @@ export const routeE1Occupants: OverworldMap['occupants'] = [
 		type: 'LEDGE',
 		x: 24,
 		y: 2,
-		conditionFunction: () => true,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'ledge6'),
 		id: 'ledge6',
 		sprite: '/ledges/ledgeEndBottomLeft.png',
 	},
@@ -98,7 +104,8 @@ export const routeE1Occupants: OverworldMap['occupants'] = [
 		type: 'LEDGE',
 		x: 25,
 		y: 2,
-		conditionFunction: () => true,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'ledge7'),
 		id: 'ledge7',
 		sprite: '/ledges/ledgeDown.png',
 		passableFrom: 'UP',
@@ -107,7 +114,8 @@ export const routeE1Occupants: OverworldMap['occupants'] = [
 		type: 'LEDGE',
 		x: 26,
 		y: 2,
-		conditionFunction: () => true,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'ledge8'),
 		id: 'ledge8',
 		sprite: '/ledges/ledgeEndBottomRight.png',
 	},

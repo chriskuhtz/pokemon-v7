@@ -1,5 +1,5 @@
 import { OverworldMap } from '../../interfaces/OverworldMap';
-import { routeN1Encounters } from './encounters';
+import { routeN1Encounters } from './encounters/routeN1';
 import { routeN1W1Occupants } from './occupants';
 
 export const routeN1W1: OverworldMap = {

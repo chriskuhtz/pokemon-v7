@@ -10,7 +10,8 @@ export const useChallengeTrainer = () => {
 
 	return useCallback(
 		(id?: string) => {
-			const trainer = trainers.find((t) => t.id === id) ?? makeRandomTrainer();
+			const trainer =
+				trainers.find((t) => t.id === id) ?? makeRandomTrainer(saveFile);
 			patchSaveFileReducer({
 				meta: {
 					...saveFile.meta,

@@ -4,14 +4,19 @@ import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { Ledge } from '../../../interfaces/OverworldMap';
 import { CharacterLocationData } from '../../../interfaces/SaveFile';
+import { useShovel } from './useShovel';
 
-export const useJumpDownLedge = () => {
+export const useInteractWithLedge = () => {
 	const { saveFile, setCharacterLocationReducer } = useContext(SaveFileContext);
 	const { addMessage, addMultipleMessages } = useContext(MessageQueueContext);
-
+	const shovel = useShovel();
 	return useCallback(
 		(ledge: Ledge) => {
 			if (saveFile.handledOccupants.some((occ) => occ.id === ledge.id)) {
+				return;
+			}
+			if (saveFile.campUpgrades['shovel certification']) {
+				shovel(ledge);
 				return;
 			}
 			if (
@@ -62,9 +67,11 @@ export const useJumpDownLedge = () => {
 		[
 			addMessage,
 			addMultipleMessages,
+			saveFile.campUpgrades,
 			saveFile.handledOccupants,
 			saveFile.location,
 			setCharacterLocationReducer,
+			shovel,
 		]
 	);
 };

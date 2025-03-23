@@ -27,7 +27,7 @@ import { useCombeeHive } from './hooks/useCombeeHive';
 import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useEncounterRateModifier } from './hooks/useEncounterRateModifier';
-import { useJumpDownLedge } from './hooks/useJumpDownLedge';
+import { useInteractWithLedge } from './hooks/useInteractWithLedge';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useMachete } from './hooks/useMachete';
 import { useOccupants } from './hooks/useOccupants';
@@ -67,7 +67,7 @@ export const Overworld = ({
 	const interactWithHallowedTower = useHallowedTower();
 	const interactWithCombeeHive = useCombeeHive();
 	const interactWithBush = useMachete();
-	const interactWithLedge = useJumpDownLedge();
+	const interactWithLedge = useInteractWithLedge();
 	const interactWithZigzagoonForager = useZigzagoonForagers();
 	const interactWithDugtrioExplorer = useDugtrioExplorers();
 	const interactWithSwarmRadar = useSwarmRadar();
