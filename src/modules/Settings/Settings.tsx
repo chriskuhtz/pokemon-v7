@@ -16,6 +16,7 @@ export const Settings = (): JSX.Element => {
 		randomOverworldItems: false,
 		randomQuestRewards: false,
 		fasterDays: false,
+		noItemsInBattle: false,
 		//disqualifyFaintedPokemon: false,
 		//randomHeldItems: false,
 	});
@@ -60,17 +61,30 @@ export const Settings = (): JSX.Element => {
 					alignItems: 'center',
 				}}
 			>
+				<h3>Quality of life:</h3>
 				<ToggleRow
-					value={state.randomStarters}
-					setValue={(x) => setState({ ...state, randomStarters: x })}
-					label={'Do you want random starter pokemon choices:'}
-					description={'makes 1 questline impossible'}
+					value={state.fasterDays}
+					setValue={(x) => setState({ ...state, fasterDays: x })}
+					label={'Should Days take 4 hours instead of 24?'}
 				/>
+				<h3>Difficulty:</h3>
 				<ToggleRow
 					value={state.rogueLike}
 					setValue={(x) => setState({ ...state, rogueLike: x })}
 					label={'Roguelike mode:'}
 					description="Losing a battle completely resets your save file"
+				/>
+				<ToggleRow
+					value={state.noItemsInBattle}
+					setValue={(x) => setState({ ...state, noItemsInBattle: x })}
+					label={'No Healing Items allowed in Battle:'}
+				/>
+				<h3>Randomization:</h3>
+				<ToggleRow
+					value={state.randomStarters}
+					setValue={(x) => setState({ ...state, randomStarters: x })}
+					label={'Do you want random starter pokemon choices:'}
+					description={'makes 1 questline impossible'}
 				/>
 				<ToggleRow
 					value={state.randomOverworldItems}
@@ -84,11 +98,7 @@ export const Settings = (): JSX.Element => {
 					label={'Random Quest Rewards:'}
 					description="increases Risk of Softlock"
 				/>
-				<ToggleRow
-					value={state.fasterDays}
-					setValue={(x) => setState({ ...state, fasterDays: x })}
-					label={'Should Days take 4 hours instead of 24?'}
-				/>
+
 				{/* <ToggleRow
 					value={state.randomHeldItems}
 					setValue={(x) => setState({ ...state, randomHeldItems: x })}

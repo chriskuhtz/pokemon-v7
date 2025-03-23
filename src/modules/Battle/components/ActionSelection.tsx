@@ -1,3 +1,4 @@
+import { useContext, useMemo } from 'react';
 import { MoveCard } from '../../../components/MoveCard/MoveCard';
 import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
 import { getItemUrl } from '../../../functions/getItemUrl';
@@ -5,6 +6,7 @@ import { getMovesArray } from '../../../functions/getMovesArray';
 import { getPlayerPokemon } from '../../../functions/getPlayerPokemon';
 import { getTypeNames } from '../../../functions/getTypeNames';
 import { isTrapped } from '../../../functions/isTrapped';
+import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import {
@@ -13,6 +15,7 @@ import {
 	isPPRestorationItem,
 	isRunawayItem,
 	isXItem,
+	ItemType,
 } from '../../../interfaces/Item';
 import {
 	ActionType,
@@ -39,6 +42,10 @@ export function ActionSelection({
 	runningAllowed: boolean;
 	battleFieldEffects: BattleFieldEffect[];
 }) {
+	const {
+		saveFile: { settings },
+	} = useContext(SaveFileContext);
+
 	const runAwayer = controlled.ability === 'run-away';
 	const trapped = !runAwayer && isTrapped(controlled);
 	const shadowTagged =
@@ -77,6 +84,32 @@ export function ActionSelection({
 		return 'Run Away';
 	};
 
+	const allowedItems: [ItemType, number][] = useMemo(
+		() =>
+			Object.entries(inventory).filter(([item, amount]) => {
+				if (amount <= 0) {
+					return false;
+				}
+				if (isPokeball(item) && catchingAllowed) {
+					return true;
+				}
+				if (settings?.noItemsInBattle) {
+					return false;
+				}
+
+				return (
+					isRunawayItem(item) ||
+					((isHealingItem(item) ||
+						isPPRestorationItem(item) ||
+						isXItem(item)) &&
+						getPlayerPokemon(allTargets).some((t) =>
+							canBenefitFromItem(t, item)
+						))
+				);
+			}) as [ItemType, number][],
+		[allTargets, catchingAllowed, inventory, settings?.noItemsInBattle]
+	);
+
 	return (
 		<div
 			style={{
@@ -98,29 +131,17 @@ export function ActionSelection({
 					/>
 				))}
 
-				{Object.entries(inventory).map(([item, amount]) => {
-					if (
-						amount > 0 &&
-						(isRunawayItem(item) ||
-							(isPokeball(item) && catchingAllowed) ||
-							((isHealingItem(item) ||
-								isPPRestorationItem(item) ||
-								isXItem(item)) &&
-								getPlayerPokemon(allTargets).some((t) =>
-									canBenefitFromItem(t, item)
-								)))
-					) {
-						return (
-							<button
-								style={{ display: 'flex', alignItems: 'center' }}
-								onClick={() => setChosenAction(item)}
-								key={item}
-							>
-								<img src={getItemUrl(item)} />
-								{item} ({amount})
-							</button>
-						);
-					}
+				{allowedItems.map(([item, amount]) => {
+					return (
+						<button
+							style={{ display: 'flex', alignItems: 'center' }}
+							onClick={() => setChosenAction(item)}
+							key={item}
+						>
+							<img src={getItemUrl(item)} />
+							{item} ({amount})
+						</button>
+					);
 				})}
 
 				{runningAllowed && (

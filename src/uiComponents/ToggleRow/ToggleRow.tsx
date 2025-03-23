@@ -25,7 +25,7 @@ export const ToggleRow = ({
 				}}
 				onClick={() => setValue(false)}
 			>
-				No
+				Off
 			</button>
 			<button
 				style={{
@@ -35,7 +35,7 @@ export const ToggleRow = ({
 				}}
 				onClick={() => setValue(true)}
 			>
-				Yes
+				On
 			</button>
 		</>
 	);

@@ -39,6 +39,7 @@ export interface SettingsObject {
 	randomOverworldItems: boolean;
 	randomQuestRewards: boolean;
 	fasterDays: boolean;
+	noItemsInBattle: boolean;
 }
 
 export type BerryBushStatus =
