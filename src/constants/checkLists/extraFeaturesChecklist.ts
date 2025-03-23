@@ -228,4 +228,5 @@ export const extraFeatureCheckList: {
 	{
 		name: 'Info Pill Background color indicates primary ailment',
 	},
+	{ name: 'make actual gold/silver berry sprites' },
 ];

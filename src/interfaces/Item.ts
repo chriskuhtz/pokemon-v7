@@ -186,7 +186,7 @@ export const berries = [
 	'pamtre-berry',
 	'belue-berry',
 	'occa-berry',
-	'pasho-berry',
+	'passho-berry',
 	'wacan-berry',
 	'rindo-berry',
 	'yache-berry',
@@ -478,7 +478,7 @@ export const undergroundTable: ItemType[] = [
 ];
 export const superEffectiveSaveTable: Record<PokemonType, ItemType> = {
 	fire: 'occa-berry',
-	water: 'pasho-berry',
+	water: 'passho-berry',
 	electric: 'wacan-berry',
 	grass: 'rindo-berry',
 	ice: 'yache-berry',
