@@ -93,11 +93,14 @@ export const questNames = [
 	'cook an easy recipe',
 	'cook a medium recipe',
 	'cook a tricky recipe',
+	'catch 10 different species',
+	'catch 20 different species',
+	'catch 50 different species',
 ] as const;
 /**
  
  * Ideas:
- * catch x different pokemon
+
  * catch x swarm pokemon
  * catch x pokemon by smashing rocks
  */
@@ -1195,8 +1198,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 
 			return false;
 		},
-		requiredUpgrade: 'invite fossil expert',
-		availableAfter: 'revive a fossil',
 	},
 	'evolve your starter pokemon to its final form': {
 		kind: 'QUEST_LINE',
@@ -1217,8 +1218,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 
 			return false;
 		},
-		requiredUpgrade: 'invite fossil expert',
-		availableAfter: 'revive a fossil',
 	},
 	'catch a shiny pokemon': {
 		kind: 'BULLETIN',
@@ -1238,6 +1237,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'pomeg-berry': 1,
 			'oran-berry': 1,
 		},
+		requiredUpgrade: 'invite chef grandma',
 		conditionFunction: (s) => !!s.mileStones.cookedEasyRecipe,
 	},
 	'cook a medium recipe': {
@@ -1248,6 +1248,8 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'chesto-berry': 1,
 			'cheri-berry': 1,
 		},
+		requiredUpgrade: 'invite chef grandma',
+		availableAfter: 'cook an easy recipe',
 		conditionFunction: (s) => !!s.mileStones.cookedMediumRecipe,
 	},
 	'cook a tricky recipe': {
@@ -1258,7 +1260,35 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'leppa-berry': 1,
 			'lum-berry': 1,
 		},
+		requiredUpgrade: 'invite chef grandma',
+		availableAfter: 'cook a medium recipe',
 		conditionFunction: (s) => !!s.mileStones.cookedTrickyRecipe,
+	},
+	'catch 10 different species': {
+		kind: 'BULLETIN',
+		researchPoints: 10,
+		rewardItems: {
+			'poke-ball': 20,
+		},
+		conditionFunction: (s) => new Set(s.pokemon.map((p) => p.name)).size >= 10,
+	},
+	'catch 20 different species': {
+		kind: 'BULLETIN',
+		researchPoints: 25,
+		rewardItems: {
+			'great-ball': 20,
+		},
+		availableAfter: 'catch 10 different species',
+		conditionFunction: (s) => new Set(s.pokemon.map((p) => p.name)).size >= 20,
+	},
+	'catch 50 different species': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		rewardItems: {
+			'master-ball': 1,
+		},
+		availableAfter: 'catch 50 different species',
+		conditionFunction: (s) => new Set(s.pokemon.map((p) => p.name)).size >= 50,
 	},
 };
 
