@@ -1,12 +1,23 @@
 import { useCallback, useContext } from 'react';
 import { ONE_HOUR } from '../constants/gameData';
-import { mapDisplayNames } from '../constants/maps/mapsRecord';
+import { mapDisplayNames, MapId } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { getRandomEntry } from '../functions/filterTargets';
-import { PokemonSwarm } from '../interfaces/SaveFile';
+import { PokemonSwarm, SaveFile } from '../interfaces/SaveFile';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
+export const getRandomAccesibleRoute = (s: SaveFile): MapId => {
+	const options: MapId[] = ['routeN1'];
+
+	if (s.campUpgrades['machete certification']) {
+		options.push('routeN1E1');
+	}
+	if (s.campUpgrades['sledge hammer certification']) {
+		options.push('routeE1');
+	}
+	return getRandomEntry(options);
+};
 const swarmMons: PokemonName[] = [
 	'cyndaquil',
 	'chikorita',
@@ -33,9 +44,10 @@ const swarmMons: PokemonName[] = [
 	'quaxly',
 	'sprigatito',
 ];
+
 export const swarms: PokemonSwarm[] = swarmMons.map((p) => ({
 	pokemon: p,
-	route: getRandomEntry(['routeE1', 'routeN1E1', 'routeN1']),
+	route: 'camp',
 	leavesAt: 0,
 	xpMax: 1000,
 	xpMin: 125,
@@ -54,9 +66,12 @@ export const useSwarmRadar = () => {
 				needsNoConfirmation: true,
 			});
 		} else if (!saveFile.nextSwarmReadyAt || now > saveFile.nextSwarmReadyAt) {
-			const randomSwarm = getRandomEntry(swarms);
+			const randomSwarm = {
+				...getRandomEntry(swarms),
+				route: getRandomAccesibleRoute(saveFile),
+			};
 			addMessage({
-				message: `The radar detects swarms of ${randomSwarm.pokemon} on ${
+				message: `The radar detects swarms of ${randomSwarm.pokemon} at ${
 					mapDisplayNames[randomSwarm.route]
 				}`,
 				needsNoConfirmation: true,
