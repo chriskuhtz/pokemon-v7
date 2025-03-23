@@ -42,7 +42,7 @@ export const routeN1E1Encounters: EncounterMap = {
 		{ name: 'grubbin', xp: 1000, rarity: 'common' },
 		{ name: 'grubbin', xp: 800, rarity: 'common' },
 		{ name: 'grubbin', xp: 1500, rarity: 'medium' },
-		{ name: 'rockruff', xp: 1500, rarity: 'rare' },
+		{ name: 'pansage', xp: 1500, rarity: 'rare' },
 		{ name: 'meowth-galar', xp: 1000, rarity: 'rare' },
 		{ name: 'oranguru', xp: 1500, rarity: 'ultra-rare' },
 	],

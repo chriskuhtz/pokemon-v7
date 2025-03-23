@@ -46,7 +46,7 @@ export const routeN1Encounters: EncounterMap = {
 		{ name: 'oddish', xp: 100, rarity: 'common' },
 		{ name: 'oddish', xp: 125, rarity: 'medium' },
 		{ name: 'swablu', xp: 125, rarity: 'rare' },
-		{ name: 'rockruff', xp: 125, rarity: 'ultra-rare' },
+		{ name: 'murkrow', xp: 125, rarity: 'ultra-rare' },
 	],
 	NIGHT: [
 		{ name: 'hoothoot', xp: 100, rarity: 'common' },

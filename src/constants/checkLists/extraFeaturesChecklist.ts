@@ -226,4 +226,7 @@ export const extraFeatureCheckList: {
 		name: 'prettier mulch buttons',
 	},
 	{ name: 'setting: double xp rates' },
+	{
+		name: 'Info Pill Background color indicates primary ailment',
+	},
 ];
