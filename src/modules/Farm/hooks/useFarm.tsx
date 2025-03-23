@@ -81,15 +81,15 @@ export const useFarm = () => {
 	);
 
 	const getGrowingTime = (mulch?: MulchType) => {
-		const base = new Date().getTime() + ONE_HOUR;
+		const now = new Date().getTime();
 
 		if (mulch === 'growth-mulch') {
-			return base * 0.75;
+			return now + ONE_HOUR * 0.75;
 		}
 		if (mulch === 'stable-mulch') {
-			return base * 1.125;
+			return now + ONE_HOUR * 1.125;
 		}
-		return base;
+		return now + ONE_HOUR;
 	};
 	const plant = (type: BerryType | ApricornType, mulch?: MulchType) => {
 		if (!hasEmptySlots) {
