@@ -137,6 +137,11 @@ export const extraFeatureCheckList: {
 	{ name: 'Banner Confirmation needs keyboard control', handled: true },
 	{ name: 'ivs', handled: true },
 	{ name: 'limit miltank,zigzagoon,dugtrio intervals', handled: true },
+	{ name: 'setting: no items in battle', handled: true },
+	{ name: 'Held Item & Pickup Bug', handled: true },
+	{ name: 'apply migrations on localstorage load', handled: true },
+	{ name: 'setting: randomized swarms', handled: true },
+	{ name: 'setting: double xp rates' },
 	{ name: 'trainers give rewards' },
 	{ name: 'trainers spot you' },
 	{ name: 'trainers can move and still spot you' },
@@ -163,9 +168,8 @@ export const extraFeatureCheckList: {
 	{ name: 'berry bushes' },
 	{ name: 'refactor quest limit' },
 	{ name: 'Changing moves messes with pp' },
-	{ name: 'Held Item & Pickup Bug' },
 	{ name: 'icons for quests' },
-	{ name: 'setting: no items in battle' },
+
 	{ name: 'refactor primaryAilment healing table' },
 	{ name: 'stop strange spinning of npcs when click navigating' },
 	{ name: 'accurate house sizes' },
@@ -205,17 +209,13 @@ export const extraFeatureCheckList: {
 	{ name: 'itemsprite component' },
 	{ name: 'growth rates' },
 	{ name: 'play button for pokemon lofi' },
-	{
-		name: 'setting: level scaling',
-	},
 	{ name: 'pokemon as quest rewards' },
 	{ name: 'consider weightMod for low kick damage' },
 	{
 		name: 'swarms increase shiny chance',
 	},
 	{ name: 'moving background (water,flowers)' },
-	{ name: 'setting: randomized swarms' },
-	{ name: 'apply migrations on localstorage load' },
+
 	{ name: 'data collection module (name, nCaught,nDefeated)' },
 	{ name: 'award evs after battle' },
 	{ name: 'evs should not just be random' },
@@ -225,7 +225,6 @@ export const extraFeatureCheckList: {
 	{
 		name: 'prettier mulch buttons',
 	},
-	{ name: 'setting: double xp rates' },
 	{
 		name: 'Info Pill Background color indicates primary ailment',
 	},

@@ -17,6 +17,7 @@ export const Settings = (): JSX.Element => {
 		randomQuestRewards: false,
 		fasterDays: false,
 		noItemsInBattle: false,
+		randomSwarms: false,
 		//disqualifyFaintedPokemon: false,
 		//randomHeldItems: false,
 	});
@@ -97,6 +98,12 @@ export const Settings = (): JSX.Element => {
 					setValue={(x) => setState({ ...state, randomQuestRewards: x })}
 					label={'Random Quest Rewards:'}
 					description="increases Risk of Softlock"
+				/>
+				<ToggleRow
+					value={state.randomSwarms}
+					setValue={(x) => setState({ ...state, randomSwarms: x })}
+					label={'Random Pokemon Swarms:'}
+					description="can be weird: e.g. swarms of mewtwo"
 				/>
 
 				{/* <ToggleRow

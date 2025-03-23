@@ -1,7 +1,7 @@
 import { useCallback, useContext } from 'react';
 import { ONE_HOUR } from '../constants/gameData';
 import { mapDisplayNames, MapId } from '../constants/maps/mapsRecord';
-import { PokemonName } from '../constants/pokemonNames';
+import { PokemonName, pokemonNames } from '../constants/pokemonNames';
 import { getRandomEntry } from '../functions/filterTargets';
 import { PokemonSwarm, SaveFile } from '../interfaces/SaveFile';
 import { MessageQueueContext } from './useMessageQueue';
@@ -66,19 +66,23 @@ export const useSwarmRadar = () => {
 				needsNoConfirmation: true,
 			});
 		} else if (!saveFile.nextSwarmReadyAt || now > saveFile.nextSwarmReadyAt) {
-			const randomSwarm = {
+			let swarm = {
 				...getRandomEntry(swarms),
 				route: getRandomAccesibleRoute(saveFile),
 			};
+
+			if (saveFile.settings?.randomSwarms) {
+				swarm = { ...swarm, pokemon: getRandomEntry([...pokemonNames]) };
+			}
 			addMessage({
-				message: `The radar detects swarms of ${randomSwarm.pokemon} at ${
-					mapDisplayNames[randomSwarm.route]
+				message: `The radar detects swarms of ${swarm.pokemon} at ${
+					mapDisplayNames[swarm.route]
 				}`,
 				needsNoConfirmation: true,
 			});
 
 			patchSaveFileReducer({
-				currentSwarm: { ...randomSwarm, leavesAt: now + ONE_HOUR },
+				currentSwarm: { ...swarm, leavesAt: now + ONE_HOUR },
 				nextSwarmReadyAt: now + ONE_HOUR * 6,
 			});
 		} else {
