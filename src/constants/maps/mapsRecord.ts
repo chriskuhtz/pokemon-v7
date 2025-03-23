@@ -35,9 +35,9 @@ export const mapsRecord: Record<MapId, OverworldMap> = {
 };
 
 export const mapDisplayNames: Record<MapId, string> = {
-	routeN1: 'akai route',
-	routeN1E1: 'orenji route',
-	routeE1: 'kiiro route',
+	routeN1: 'akai meadow',
+	routeN1E1: 'orenji forest',
+	routeE1: 'kiiro highlands',
 	routeS1E1: 'midori route',
 	routeS1: 'murasaki route',
 	routeS1W1: 'kuro route',
