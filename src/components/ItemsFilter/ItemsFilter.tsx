@@ -1,8 +1,21 @@
 import { useMemo, useState } from 'react';
 import { Inventory } from '../../interfaces/Inventory';
-import { ItemType, isHealingItem, isPokeball } from '../../interfaces/Item';
+import {
+	ItemType,
+	isApricorn,
+	isBerry,
+	isHealingItem,
+	isPokeball,
+} from '../../interfaces/Item';
 
-export type ItemsFilterType = 'poke-balls' | 'heal-items' | 'other';
+export const itemfilterNames = [
+	'poke-balls',
+	'heal-items',
+	'berries',
+	'apricorns',
+	'other',
+] as const;
+export type ItemsFilterType = (typeof itemfilterNames)[number];
 
 const filterItemsByType = (
 	item: ItemType,
@@ -14,8 +27,19 @@ const filterItemsByType = (
 	if (itemsFilter === 'heal-items') {
 		return isHealingItem(item);
 	}
+	if (itemsFilter === 'berries') {
+		return isBerry(item);
+	}
+	if (itemsFilter === 'apricorns') {
+		return isApricorn(item);
+	}
 	if (itemsFilter === 'other') {
-		return !isPokeball(item) && !isHealingItem(item);
+		return (
+			!isPokeball(item) &&
+			!isHealingItem(item) &&
+			!isBerry(item) &&
+			!isApricorn(item)
+		);
 	}
 	return true;
 };
@@ -28,51 +52,23 @@ const ItemsFilterButtons = ({
 }) => {
 	return (
 		<div style={{ display: 'flex', gap: '.5rem' }}>
-			<button
-				style={{
-					backgroundColor: itemsFilter === 'poke-balls' ? 'black' : 'white',
-					color: itemsFilter === 'poke-balls' ? 'white' : 'black',
-				}}
-				onClick={() => {
-					if (itemsFilter === 'poke-balls') {
-						setFilter(undefined);
-						return;
-					}
-					setFilter('poke-balls');
-				}}
-			>
-				Poke Balls
-			</button>
-			<button
-				style={{
-					backgroundColor: itemsFilter === 'heal-items' ? 'black' : 'white',
-					color: itemsFilter === 'heal-items' ? 'white' : 'black',
-				}}
-				onClick={() => {
-					if (itemsFilter === 'heal-items') {
-						setFilter(undefined);
-						return;
-					}
-					setFilter('heal-items');
-				}}
-			>
-				Healing Items
-			</button>
-			<button
-				style={{
-					backgroundColor: itemsFilter === 'other' ? 'black' : 'white',
-					color: itemsFilter === 'other' ? 'white' : 'black',
-				}}
-				onClick={() => {
-					if (itemsFilter === 'other') {
-						setFilter(undefined);
-						return;
-					}
-					setFilter('other');
-				}}
-			>
-				Other
-			</button>
+			{itemfilterNames.map((f) => (
+				<button
+					style={{
+						backgroundColor: itemsFilter === f ? 'black' : 'white',
+						color: itemsFilter === f ? 'white' : 'black',
+					}}
+					onClick={() => {
+						if (itemsFilter === f) {
+							setFilter(undefined);
+							return;
+						}
+						setFilter(f);
+					}}
+				>
+					{f}
+				</button>
+			))}
 		</div>
 	);
 };
