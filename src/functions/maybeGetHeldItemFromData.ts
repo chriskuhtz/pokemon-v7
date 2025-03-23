@@ -1,4 +1,4 @@
-import { ItemType } from '../interfaces/Item';
+import { isItem, ItemType } from '../interfaces/Item';
 import { PokemonData } from '../interfaces/PokemonData';
 import { getRandomIndex } from './filterTargets';
 
@@ -14,5 +14,9 @@ export const maybeGetHeldItemFromData = (
 	if (held_items.length === 0) {
 		return undefined;
 	}
-	return held_items[getRandomIndex(held_items.length)].item.name as ItemType;
+	const randomItem = held_items[getRandomIndex(held_items.length)].item.name;
+
+	if (isItem(randomItem)) {
+		return randomItem;
+	}
 };
