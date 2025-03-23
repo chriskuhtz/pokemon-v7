@@ -456,6 +456,21 @@ const specialTrainers: Challenger[] = [
 		availableAfter: 'catch Haunter and Mightyena',
 		trainer: { name: 'Gym Leader Morty', sprite: SpriteEnum.morty },
 	},
+	{
+		type: 'TRAINER',
+		id: 'Professor Rowan',
+		team: [
+			makeChallengerPokemon({ name: 'infernape', xp: 12000 }),
+			makeChallengerPokemon({ name: 'empoleon', xp: 12000 }),
+			makeChallengerPokemon({ name: 'torterra', xp: 12000 }),
+			makeChallengerPokemon({ name: 'luxray', xp: 12000 }),
+			makeChallengerPokemon({ name: 'staraptor', xp: 12000 }),
+			makeChallengerPokemon({ name: 'lucario', xp: 12000 }),
+		],
+		inventory: EmptyInventory,
+		availableAfter: 'catch a pokemon orginally found in paldea',
+		trainer: { name: 'Professor Rowan', sprite: SpriteEnum.rowan },
+	},
 ];
 
 export const trainers = [

@@ -3,7 +3,7 @@ import { Inventory } from '../interfaces/Inventory';
 import { Quest } from '../interfaces/Quest';
 import { randomQuestRewards } from '../modules/Settings/Settings';
 
-export const getRewardForQuest = (q: QuestName): Partial<Inventory> => {
+export const getRewardItemsForQuest = (q: QuestName): Partial<Inventory> => {
 	const quest = QuestsRecord[q];
 	const randomizedRewards = window.localStorage.getItem(randomQuestRewards);
 	const parsed = (

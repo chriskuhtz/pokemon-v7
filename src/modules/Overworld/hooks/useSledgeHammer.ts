@@ -24,7 +24,7 @@ export const sledgeHammerPokemon: PokemonName[] = [
 	'nacli',
 	'nosepass',
 	'dwebble',
-	'larvitar',
+	'bonsly',
 	'klawf',
 	'glimmet',
 ];

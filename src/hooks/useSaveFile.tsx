@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 import { MoveName } from '../constants/checkLists/movesCheckList';
 
+import { v4 } from 'uuid';
 import { QuestName, QuestsRecord } from '../constants/checkLists/questsRecord';
 import { localStorageId, ONE_DAY, testState } from '../constants/gameData';
 import { mapsRecord } from '../constants/maps/mapsRecord';
@@ -16,7 +17,7 @@ import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 import { determineWildPokemon } from '../functions/determineWildPokemon';
 import { getRandomEntry } from '../functions/filterTargets';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
-import { getRewardForQuest } from '../functions/getRewardForQuest';
+import { getRewardItemsForQuest } from '../functions/getRewardForQuest';
 import { OPPO_ID } from '../functions/makeChallengerPokemon';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { reduceBattlePokemonToOwnedPokemon } from '../functions/reduceBattlePokemonToOwnedPokemon';
@@ -346,13 +347,27 @@ const useSaveFile = (
 	const fulfillQuestReducer = (q: QuestName) => {
 		const quest = QuestsRecord[q];
 
-		const reward = getRewardForQuest(q);
+		const reward = getRewardItemsForQuest(q);
 		const updatedInventory = joinInventories(saveFile.inventory, reward);
+
+		const pokemon = quest.rewardPokemon
+			? [
+					...saveFile.pokemon,
+					{
+						...quest.rewardPokemon,
+						id: v4(),
+						ownerId: saveFile.playerId,
+						onTeam: team.length < 6,
+					},
+			  ]
+			: saveFile.pokemon;
+
 		setSaveFile({
 			...saveFile,
 			inventory: updatedInventory,
 			quests: { ...saveFile.quests, [q]: 'COLLECTED' },
 			researchPoints: saveFile.researchPoints + quest.researchPoints,
+			pokemon,
 		});
 	};
 	const changeHeldItemReducer = (pokemonId: string, newItem?: ItemType) => {

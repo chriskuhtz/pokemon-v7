@@ -3,6 +3,10 @@ import { trainers } from '../../functions/makeRandomTrainer';
 import { honeyPokemon } from '../../hooks/useHoneyTree';
 import { apricornTable, fossilTable } from '../../interfaces/Item';
 import { Quest } from '../../interfaces/Quest';
+import {
+	EmptyStatObject,
+	generateRandomStatObject,
+} from '../../interfaces/StatObject';
 import { routeE1 } from '../maps/routeE1';
 import { routeN1 } from '../maps/routeN1';
 import { routeN1E1 } from '../maps/routeN1E1';
@@ -1054,6 +1058,25 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: {
 			'ultra-ball': 10,
 			'full-restore': 5,
+		},
+		rewardPokemon: {
+			maxHp: 30,
+			effortValues: EmptyStatObject,
+			ppBoostedMoves: [],
+			caughtOnMap: 'camp',
+			gender: 'MALE',
+			stepsWalked: 0,
+			ownerId: '',
+			damage: 0,
+			id: '',
+			ball: 'poke-ball',
+			ability: 'huge-power',
+			name: 'larvitar',
+			xp: 125,
+			nature: 'adamant',
+			intrinsicValues: generateRandomStatObject(31),
+			happiness: 70,
+			firstMove: { name: 'earthquake', usedPP: 0 },
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {

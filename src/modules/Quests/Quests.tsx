@@ -8,7 +8,7 @@ import {
 import { battleSpriteSize } from '../../constants/gameData';
 import { typeColors } from '../../constants/typeColors';
 import { getItemUrl } from '../../functions/getItemUrl';
-import { getRewardForQuest } from '../../functions/getRewardForQuest';
+import { getRewardItemsForQuest } from '../../functions/getRewardForQuest';
 import { replaceRouteName } from '../../functions/replaceRouteName';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useQuests } from '../../hooks/useQuests';
@@ -75,12 +75,15 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 									{status === 'FULFILLED' && <h4>ready to collect</h4>}
 									<h5 style={{ display: 'flex', alignItems: 'center' }}>
 										Reward:
-										{Object.entries(getRewardForQuest(name as QuestName)).map(
-											([item, amount]) => (
-												<React.Fragment key={item}>
-													{amount} x <img src={getItemUrl(item as ItemType)} />
-												</React.Fragment>
-											)
+										{Object.entries(
+											getRewardItemsForQuest(name as QuestName)
+										).map(([item, amount]) => (
+											<React.Fragment key={item}>
+												{amount} x <img src={getItemUrl(item as ItemType)} />
+											</React.Fragment>
+										))}
+										{quest.rewardPokemon && (
+											<PokemonSprite name={quest.rewardPokemon.name} />
 										)}
 									</h5>
 									<h5>Research Points: {quest.researchPoints}</h5>

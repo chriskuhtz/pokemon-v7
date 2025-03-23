@@ -6,7 +6,7 @@ import {
 } from '../../constants/checkLists/questsRecord';
 import { battleSpriteSize } from '../../constants/gameData';
 import { getItemUrl } from '../../functions/getItemUrl';
-import { getRewardForQuest } from '../../functions/getRewardForQuest';
+import { getRewardItemsForQuest } from '../../functions/getRewardForQuest';
 import { replaceRouteName } from '../../functions/replaceRouteName';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
@@ -15,6 +15,7 @@ import { Quest } from '../../interfaces/Quest';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 
 export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 	const { addMessage } = useContext(MessageQueueContext);
@@ -99,12 +100,15 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 
 									<h5 style={{ display: 'flex', alignItems: 'center' }}>
 										Reward:
-										{Object.entries(getRewardForQuest(name)).map(
+										{Object.entries(getRewardItemsForQuest(name)).map(
 											([item, amount]) => (
 												<React.Fragment key={item}>
 													{amount} x <img src={getItemUrl(item as ItemType)} />
 												</React.Fragment>
 											)
+										)}{' '}
+										{quest.rewardPokemon && (
+											<PokemonSprite name={quest.rewardPokemon.name} />
 										)}
 									</h5>
 									<h5>Research Points: {quest.researchPoints}</h5>
