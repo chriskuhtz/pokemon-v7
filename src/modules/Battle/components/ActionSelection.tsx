@@ -117,7 +117,7 @@ export function ActionSelection({
 								key={item}
 							>
 								<img src={getItemUrl(item)} />
-								{item}
+								{item} ({amount})
 							</button>
 						);
 					}
