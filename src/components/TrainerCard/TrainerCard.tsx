@@ -39,7 +39,7 @@ export const TrainerCard = () => {
 					/>
 					<div>
 						<h4>{playerId}</h4>
-						<h4>Money: {money}$</h4>
+						{/* <h4>Money: {money}$</h4> */}
 						<h4>Reseach Points: {researchPoints}</h4>
 					</div>
 				</div>
