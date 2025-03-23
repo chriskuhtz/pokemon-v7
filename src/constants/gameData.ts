@@ -75,6 +75,8 @@ export const testState: SaveFile = {
 		hasEvolvedAPokemonWithAStone: false,
 		hasCaughtAPokemonWithHoney: false,
 		hasEvolvedAPokemonThroughFriendship: false,
+		hasEvolvedAPokemonThatNeedsDaytime: false,
+		hasEvolvedAPokemonThatNeedsNighttime: false,
 		hasCraftedApricorn: false,
 		hasGrownABerry: false,
 		hasGrownAnApricorn: false,

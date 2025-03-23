@@ -417,7 +417,7 @@ const elmLine: Occupant[] = [
 		x: 6,
 		y: 15,
 		unhandledMessage: [
-			'Some Pokemon can evolve into different options',
+			'Some Pokemon can evolve into different species',
 			'Oddish, for example, evolves into gloom',
 			'but gloom can take different paths',
 		],
@@ -430,6 +430,47 @@ const elmLine: Occupant[] = [
 			s.quests['evolve a pokemon with a held item'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon through friendship'] === 'COLLECTED' &&
 			s.quests['catch vileplume and bellosom'] !== 'COLLECTED',
+		orientation: 'DOWN',
+		sprite: SpriteEnum.elm,
+	},
+	{
+		type: 'NPC',
+		id: 'elm_6',
+		x: 6,
+		y: 15,
+		unhandledMessage: ['Some Pokemon only evolve in the day time'],
+		handledMessage: ['Pokemon have different evolution methods'],
+		quest: 'evolve a pokemon that only evolves during the day',
+		conditionFunction: (s) =>
+			s.campUpgrades['invite professor elm'] &&
+			s.quests['evolve a pokemon through level up'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon with a stone'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon with a held item'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon through friendship'] === 'COLLECTED' &&
+			s.quests['catch vileplume and bellosom'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon that only evolves during the day'] !==
+				'COLLECTED',
+		orientation: 'DOWN',
+		sprite: SpriteEnum.elm,
+	},
+	{
+		type: 'NPC',
+		id: 'elm_7',
+		x: 6,
+		y: 15,
+		unhandledMessage: ['Some Pokemon only evolve at night'],
+		handledMessage: ['Pokemon have different evolution methods'],
+		quest: 'evolve a pokemon that only evolves at night',
+		conditionFunction: (s) =>
+			s.campUpgrades['invite professor elm'] &&
+			s.quests['evolve a pokemon through level up'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon with a stone'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon with a held item'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon through friendship'] === 'COLLECTED' &&
+			s.quests['catch vileplume and bellosom'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon that only evolves during the day'] ===
+				'COLLECTED' &&
+			s.quests['evolve a pokemon that only evolves at night'] !== 'COLLECTED',
 		orientation: 'DOWN',
 		sprite: SpriteEnum.elm,
 	},

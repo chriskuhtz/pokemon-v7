@@ -67,6 +67,9 @@ export const questNames = [
 	'evolve a pokemon with a held item',
 	'evolve a pokemon through friendship',
 	'catch vileplume and bellosom',
+	'evolve a pokemon that only evolves during the day',
+	'evolve a pokemon that only evolves at night',
+	'defeat elm',
 	'train a pokemon to level 10',
 	'train a pokemon to level 20',
 	'train a pokemon to level 30',
@@ -87,8 +90,6 @@ export const questNames = [
 ] as const;
 /**
  * Ideas:
- * elm line (night and day,all eeveelutions)
- * add elm and rowan to training field
  * shiny Pokemon
  * cook a recipe
  * cook all recipes
@@ -820,8 +821,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 		availableAfter: 'evolve a pokemon with a held item',
 	},
+
 	'catch vileplume and bellosom': {
-		rewardItems: { 'rare-candy': 5 },
+		rewardItems: { 'metal-coat': 1, 'black-augurite': 1 },
 		researchPoints: 30,
 		targetPokemon: ['bellossom', 'vileplume'],
 		conditionFunction: (s) => {
@@ -832,6 +834,24 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		kind: 'QUEST_LINE',
 		availableAfter: 'evolve a pokemon through friendship',
+	},
+	'evolve a pokemon that only evolves during the day': {
+		rewardItems: { 'ultra-ball': 20 },
+		researchPoints: 25,
+		conditionFunction: (s) => {
+			return s.mileStones.hasEvolvedAPokemonThatNeedsDaytime;
+		},
+		kind: 'QUEST_LINE',
+		availableAfter: 'catch vileplume and bellosom',
+	},
+	'evolve a pokemon that only evolves at night': {
+		rewardItems: { 'ultra-ball': 20 },
+		researchPoints: 25,
+		conditionFunction: (s) => {
+			return s.mileStones.hasEvolvedAPokemonThatNeedsNighttime;
+		},
+		kind: 'QUEST_LINE',
+		availableAfter: 'evolve a pokemon that only evolves during the day',
 	},
 	'train a pokemon to level 10': {
 		rewardItems: { 'rare-candy': 1 },
@@ -989,7 +1009,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) =>
 			s.pokemon.some((p) => p.weightModifier && p.weightModifier > 0.9),
 	},
-
 	'catch a very light specimen': {
 		kind: 'BULLETIN',
 		rewardItems: {
@@ -1071,7 +1090,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			id: '',
 			ball: 'poke-ball',
 			ability: 'huge-power',
-			name: 'larvitar',
+			name: 'gible',
 			xp: 125,
 			nature: 'adamant',
 			intrinsicValues: generateRandomStatObject(31),
@@ -1081,6 +1100,38 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 50,
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'Professor Rowan');
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'catch a pokemon and its paldea variant',
+	},
+	'defeat elm': {
+		rewardItems: {
+			'ultra-ball': 10,
+			'full-restore': 5,
+		},
+		rewardPokemon: {
+			maxHp: 30,
+			effortValues: EmptyStatObject,
+			ppBoostedMoves: [],
+			caughtOnMap: 'camp',
+			gender: 'MALE',
+			stepsWalked: 0,
+			ownerId: '',
+			damage: 0,
+			id: '',
+			ball: 'poke-ball',
+			ability: 'speed-boost',
+			name: 'larvitar',
+			xp: 125,
+			nature: 'adamant',
+			intrinsicValues: generateRandomStatObject(31),
+			happiness: 70,
+			firstMove: { name: 'earthquake', usedPP: 0 },
+		},
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'Professor Elm');
 		},
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 1',

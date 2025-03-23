@@ -18,6 +18,7 @@ import { determineWildPokemon } from '../functions/determineWildPokemon';
 import { getRandomEntry } from '../functions/filterTargets';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getRewardItemsForQuest } from '../functions/getRewardForQuest';
+import { TimeOfDay } from '../functions/getTimeOfDay';
 import { OPPO_ID } from '../functions/makeChallengerPokemon';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { reduceBattlePokemonToOwnedPokemon } from '../functions/reduceBattlePokemonToOwnedPokemon';
@@ -53,6 +54,7 @@ export interface EvolutionReducerPayload {
 	consumeHeldItem: boolean;
 	consumedItem?: ItemType;
 	evoRequirement: 'LEVEL_UP' | 'FRIENDSHIP' | 'HELD_ITEM' | 'ITEM';
+	timeOfDayRequirement?: TimeOfDay;
 }
 
 export interface UseSaveFile {
@@ -532,6 +534,7 @@ const useSaveFile = (
 		consumeHeldItem,
 		consumedItem,
 		evoRequirement,
+		timeOfDayRequirement,
 	}: EvolutionReducerPayload) => {
 		const updatedInventory = consumedItem
 			? joinInventories(
@@ -563,6 +566,13 @@ const useSaveFile = (
 			saveFile.mileStones.hasEvolvedAPokemonThroughFriendship ||
 			evoRequirement === 'FRIENDSHIP';
 
+		const hasEvolvedAPokemonThatNeedsDaytime =
+			saveFile.mileStones.hasEvolvedAPokemonThatNeedsDaytime ||
+			timeOfDayRequirement === 'DAY';
+		const hasEvolvedAPokemonThatNeedsNighttime =
+			saveFile.mileStones.hasEvolvedAPokemonThatNeedsNighttime ||
+			timeOfDayRequirement === 'NIGHT';
+
 		patchSaveFileReducer({
 			pokemon: saveFile.pokemon.map((p) => {
 				if (p.id === id) {
@@ -580,6 +590,8 @@ const useSaveFile = (
 				hasEvolvedAPokemonWithAStone,
 				hasEvolvedAPokemonWithAHeldItem,
 				hasEvolvedAPokemonThroughFriendship,
+				hasEvolvedAPokemonThatNeedsDaytime,
+				hasEvolvedAPokemonThatNeedsNighttime,
 			},
 			inventory: updatedInventory,
 		});

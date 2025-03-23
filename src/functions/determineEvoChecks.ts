@@ -19,8 +19,16 @@ export const determineEvoChecks = (
 	};
 	const deets =
 		evo.evolution_details[evo.evolution_details.length - alternateFormOffset()];
-	const { min_happiness, item, min_level, time_of_day, held_item, trigger } =
-		deets;
+	const {
+		min_happiness,
+		min_affection,
+		min_beauty,
+		item,
+		min_level,
+		time_of_day,
+		held_item,
+		trigger,
+	} = deets;
 	const itemName = item?.name as ItemType | undefined;
 	const { level } = calculateLevelData(ownedPokemon.xp);
 
@@ -41,7 +49,9 @@ export const determineEvoChecks = (
 		if (itemName && !inventory[itemName]) {
 			res.push(itemName);
 		}
-		if (min_happiness && ownedPokemon.happiness <= min_happiness) {
+
+		const happiness = min_happiness ?? min_affection ?? min_beauty ?? 0;
+		if (ownedPokemon.happiness <= happiness) {
 			res.push(`${min_happiness} Happiness`);
 		}
 		if (time_of_day && getTimeOfDay().toLowerCase() !== time_of_day) {

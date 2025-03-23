@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { determineEvoChecks } from '../../../functions/determineEvoChecks';
+import { isTimeOfDay, TimeOfDay } from '../../../functions/getTimeOfDay';
 import { keepAlternateFormThroughEvolution } from '../../../functions/handleAlternateForms';
 import { useGetEvolution } from '../../../hooks/useGetEvolution';
 import { EvolutionReducerPayload } from '../../../hooks/useSaveFile';
@@ -66,7 +67,7 @@ const EvoButton = ({
 
 	const evoRequirement =
 		useMemo((): EvolutionReducerPayload['evoRequirement'] => {
-			if (deets.min_happiness) {
+			if (deets.min_happiness || deets.min_affection || deets.min_beauty) {
 				return 'FRIENDSHIP';
 			}
 			if (held_item) {
@@ -77,7 +78,13 @@ const EvoButton = ({
 			}
 
 			return 'LEVEL_UP';
-		}, [deets.min_happiness, held_item, itemName]);
+		}, [deets, held_item, itemName]);
+
+	const timeOfDayRequirement: TimeOfDay | undefined = useMemo(() => {
+		if (isTimeOfDay(deets.time_of_day)) {
+			return deets.time_of_day;
+		}
+	}, [deets.time_of_day]);
 	return (
 		<button
 			disabled={checks.length > 0}
@@ -97,6 +104,7 @@ const EvoButton = ({
 					consumeHeldItem: !!held_item,
 					consumedItem: itemName,
 					evoRequirement,
+					timeOfDayRequirement,
 				})
 			}
 		>
