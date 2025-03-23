@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
@@ -20,7 +20,7 @@ import { OPPO_ID } from '../../functions/makeChallengerPokemon';
 import { reduceSecondaryAilmentDurations } from '../../functions/reduceSecondaryAilmentDurations';
 import { sortByPriority } from '../../functions/sortByPriority';
 import { Message } from '../../hooks/useMessageQueue';
-import { LeaveBattlePayload } from '../../hooks/useSaveFile';
+import { LeaveBattlePayload, SaveFileContext } from '../../hooks/useSaveFile';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Inventory, joinInventories } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
@@ -80,6 +80,9 @@ export const BattleField = ({
 	addMultipleMessages: (newMessages: Message[]) => void;
 	challengerId?: string;
 }) => {
+	const {
+		saveFile: { settings },
+	} = useContext(SaveFileContext);
 	const isTrainerBattle = useMemo(() => !!challengerId, [challengerId]);
 	const {
 		battleFieldEffects: bf,
@@ -558,6 +561,9 @@ export const BattleField = ({
 			if (isTrainerBattle) {
 				gainedXp *= 1.5;
 			}
+			if (settings?.doubleXpRates) {
+				gainedXp *= 2;
+			}
 
 			const xpPerTeamMember = Math.round(gainedXp / team.length);
 
@@ -617,6 +623,7 @@ export const BattleField = ({
 		leaveWithCurrentData,
 		pokemon,
 		scatteredCoins,
+		settings?.doubleXpRates,
 		team,
 	]);
 

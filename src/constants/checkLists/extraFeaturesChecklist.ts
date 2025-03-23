@@ -141,7 +141,7 @@ export const extraFeatureCheckList: {
 	{ name: 'Held Item & Pickup Bug', handled: true },
 	{ name: 'apply migrations on localstorage load', handled: true },
 	{ name: 'setting: randomized swarms', handled: true },
-	{ name: 'setting: double xp rates' },
+	{ name: 'setting: double xp rates', handled: true },
 	{ name: 'trainers give rewards' },
 	{ name: 'trainers spot you' },
 	{ name: 'trainers can move and still spot you' },

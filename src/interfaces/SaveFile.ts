@@ -35,6 +35,7 @@ export interface SettingsObject {
 	//disqualifyFaintedPokemon: boolean;
 	//randomHeldItems: boolean;
 	fasterDays: boolean;
+	doubleXpRates: boolean;
 	rogueLike: boolean;
 	noItemsInBattle: boolean;
 	randomStarters: boolean;

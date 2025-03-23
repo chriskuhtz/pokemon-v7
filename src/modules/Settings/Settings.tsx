@@ -11,12 +11,13 @@ export const Settings = (): JSX.Element => {
 	const { patchSaveFileReducer } = useContext(SaveFileContext);
 
 	const [state, setState] = useState<SettingsObject>({
-		randomStarters: false,
+		fasterDays: false,
+		doubleXpRates: false,
 		rogueLike: false,
+		noItemsInBattle: false,
+		randomStarters: false,
 		randomOverworldItems: false,
 		randomQuestRewards: false,
-		fasterDays: false,
-		noItemsInBattle: false,
 		randomSwarms: false,
 		//disqualifyFaintedPokemon: false,
 		//randomHeldItems: false,
@@ -62,13 +63,22 @@ export const Settings = (): JSX.Element => {
 					alignItems: 'center',
 				}}
 			>
-				<h3>Quality of life:</h3>
+				<h2>Quality of life:</h2>
+				<span />
+				<span />
 				<ToggleRow
 					value={state.fasterDays}
 					setValue={(x) => setState({ ...state, fasterDays: x })}
 					label={'Should Days take 4 hours instead of 24?'}
+					description="Does not reduce growing etc. times, just changes time of day more often "
 				/>
-				<h3>Difficulty:</h3>
+				<ToggleRow
+					value={state.doubleXpRates}
+					setValue={(x) => setState({ ...state, doubleXpRates: x })}
+					label={'Double Xp Rates'}
+				/>
+				<h2>Difficulty:</h2> <span />
+				<span />
 				<ToggleRow
 					value={state.rogueLike}
 					setValue={(x) => setState({ ...state, rogueLike: x })}
@@ -80,7 +90,8 @@ export const Settings = (): JSX.Element => {
 					setValue={(x) => setState({ ...state, noItemsInBattle: x })}
 					label={'No Healing Items allowed in Battle:'}
 				/>
-				<h3>Randomization:</h3>
+				<h2>Randomization:</h2> <span />
+				<span />
 				<ToggleRow
 					value={state.randomStarters}
 					setValue={(x) => setState({ ...state, randomStarters: x })}
@@ -105,7 +116,6 @@ export const Settings = (): JSX.Element => {
 					label={'Random Pokemon Swarms:'}
 					description="can be weird: e.g. swarms of mewtwo"
 				/>
-
 				{/* <ToggleRow
 					value={state.randomHeldItems}
 					setValue={(x) => setState({ ...state, randomHeldItems: x })}
