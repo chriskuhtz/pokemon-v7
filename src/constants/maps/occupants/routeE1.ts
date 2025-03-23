@@ -121,4 +121,76 @@ export const routeE1Occupants: OverworldMap['occupants'] = [
 		conditionFunction: () => true,
 		dialogue: ['..ZZ..', '.ZZZ...', '...ZZZ.'],
 	},
+	{
+		type: 'ROCK',
+		y: 33,
+		x: 22,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'rock_routeE1_1'),
+		id: 'rock_routeE1_1',
+	},
+	{
+		type: 'ROCK',
+		y: 24,
+		x: 40,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'rock_routeE1_2'),
+		id: 'rock_routeE1_2',
+	},
+	{
+		type: 'ROCK',
+		y: 10,
+		x: 5,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'rock_routeE1_1'),
+		id: 'rock_routeE1_1',
+	},
+	{
+		type: 'ROCK',
+		y: 5,
+		x: 27,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'rock_routeE1_4'),
+		id: 'rock_routeE1_4',
+	},
+	{
+		type: 'ROCK',
+		y: 40,
+		x: 46,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'rock_routeE1_5'),
+		id: 'rock_routeE1_5',
+	},
+	{
+		type: 'ROCK',
+		y: 30,
+		x: 10,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'rock_routeE1_6'),
+		id: 'rock_routeE1_6',
+	},
+	{
+		type: 'ROCK',
+		y: 42,
+		x: 4,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'rock_routeE1_7'),
+		id: 'rock_routeE1_7',
+	},
+	{
+		type: 'ROCK',
+		y: 7,
+		x: 46,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'rock_routeE1_8'),
+		id: 'rock_routeE1_8',
+	},
+	{
+		type: 'ROCK',
+		y: 13,
+		x: 25,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'rock_routeE1_9'),
+		id: 'rock_routeE1_9',
+	},
 ];
