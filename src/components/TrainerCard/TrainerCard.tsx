@@ -7,7 +7,7 @@ import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSys
 
 export const TrainerCard = () => {
 	const {
-		saveFile: { sprite, money, badges, playerId, researchPoints },
+		saveFile: { sprite, badges, playerId, researchPoints },
 	} = useContext(SaveFileContext);
 
 	return (
