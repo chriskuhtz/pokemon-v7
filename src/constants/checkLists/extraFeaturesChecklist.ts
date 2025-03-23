@@ -225,4 +225,5 @@ export const extraFeatureCheckList: {
 	{
 		name: 'prettier mulch buttons',
 	},
+	{ name: 'setting: double xp rates' },
 ];

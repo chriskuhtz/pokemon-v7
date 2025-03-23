@@ -18,10 +18,11 @@ export const campUpgradeNames = [
 	'invite chef grandma',
 	'pokemon swarm radar',
 	'sledge hammer certification',
+	'invite museum curator',
 ] as const;
 /**
  * ideas:
- * valuables trader
+ * berries visible in overworld
  * more gym leaders
  * stronger training field
  * berry lure stations
@@ -72,6 +73,7 @@ export const campUpgradePrices: Record<CampUpgrade, number> = {
 	'invite chef grandma': 50,
 	'pokemon swarm radar': 50,
 	'sledge hammer certification': 50,
+	'invite museum curator': 50,
 };
 
 export const baseRequirements: CampUpgrade[] = [
@@ -88,19 +90,19 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'invite professor elm': baseRequirements,
 	'machete certification': baseRequirements,
 	'training field 1': baseRequirements,
+	'build combee hive': baseRequirements,
+	'build miltank farm': baseRequirements,
+	'invite chef grandma': baseRequirements,
+	'pokemon swarm radar': baseRequirements,
 	'second slot for farm': [...baseRequirements, 'berry_farm'],
 	'third slot for farm': [...baseRequirements, 'second slot for farm'],
 	'fourth slot for farm': [...baseRequirements, 'third slot for farm'],
-	'build combee hive': baseRequirements,
-	'build miltank farm': baseRequirements,
-	'invite zigzagoon foragers': [...baseRequirements, 'build miltank farm'],
+	'invite zigzagoon foragers': ['build miltank farm'],
 	'invite dugtrio explorers': [
-		...baseRequirements,
 		'build miltank farm',
 		'invite zigzagoon foragers',
 	],
-	'invite fossil expert': [...baseRequirements, 'invite dugtrio explorers'],
-	'invite chef grandma': baseRequirements,
-	'pokemon swarm radar': baseRequirements,
+	'invite fossil expert': ['invite dugtrio explorers'],
 	'sledge hammer certification': ['machete certification'],
+	'invite museum curator': ['invite dugtrio explorers'],
 };

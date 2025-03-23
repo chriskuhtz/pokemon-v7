@@ -233,6 +233,7 @@ export type EncounterChanceItem = (typeof encounterChanceItems)[number];
 export type BerryType = (typeof berries)[number];
 export type MulchType = (typeof mulches)[number];
 export type FossilType = (typeof fossils)[number];
+export type ValuableType = (typeof valuables)[number];
 export type ApricornType = (typeof apricorns)[number];
 
 export function isPokeball(x: string | undefined): x is PokeballType {
@@ -249,6 +250,9 @@ export function isMulch(x: string | undefined): x is MulchType {
 }
 export function isFossil(x: string | undefined): x is FossilType {
 	return (fossils as unknown as string[]).includes(x ?? '');
+}
+export function isValuable(x: string | undefined): x is ValuableType {
+	return (valuables as unknown as string[]).includes(x ?? '');
 }
 export function isHealingItem(x: string | undefined): x is HealingItemType {
 	return (healingItemTypes as unknown as string[]).includes(x ?? '');

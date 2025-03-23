@@ -677,6 +677,21 @@ export const campOccupants: OverworldMap['occupants'] = [
 		id: 'chef grandma',
 	},
 	{
+		type: 'ROUTER_NPC',
+		to: 'CURATOR',
+		orientation: 'UP',
+		y: 18,
+		x: 6,
+		dialogue: [
+			'I am from the pewter city museum',
+			'i heard you discovered some items',
+			'that might be worth displaying',
+		],
+		sprite: SpriteEnum.gentleman,
+		conditionFunction: (s) => s.campUpgrades['invite museum curator'],
+		id: 'curator',
+	},
+	{
 		type: 'SWARM_RADAR',
 		y: 10,
 		x: 11,
