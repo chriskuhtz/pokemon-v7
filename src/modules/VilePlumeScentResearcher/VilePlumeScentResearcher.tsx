@@ -44,7 +44,7 @@ export const VilePlumeScentResearcher = (): JSX.Element => {
 				<Card
 					onClick={() => trade()}
 					icon={<img src={getItemUrl('pecha-berry')} />}
-					content={<h3>Trade Honey for Max Repel</h3>}
+					content={<h3>Trade Pecha Berry for Max Repel</h3>}
 					actionElements={[<img src={getItemUrl('max-repel')} />]}
 				/>
 			) : (
