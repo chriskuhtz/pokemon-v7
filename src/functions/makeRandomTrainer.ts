@@ -522,9 +522,9 @@ const specialTrainers: Challenger[] = [
 ];
 
 export const trainers = [
-	...tier1trainers,
-	...tier2trainers,
 	...specialTrainers,
+	...tier2trainers,
+	...tier1trainers,
 ];
 export const makeRandomTrainer = (saveFile: SaveFile): Challenger => {
 	return getRandomEntry(

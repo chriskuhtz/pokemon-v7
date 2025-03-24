@@ -239,4 +239,6 @@ export const extraFeatureCheckList: {
 	{ name: 'item storage chest' },
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'In double battle both pokemon can throw single last poke ball' },
+	{ name: 'make pokemon less tiny, experiment with relative size' },
+	{ name: 'nudge player to get rowan earlier' },
 ];
