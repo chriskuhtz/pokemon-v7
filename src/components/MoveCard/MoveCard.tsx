@@ -29,14 +29,13 @@ export const MoveCard = ({
 			content={
 				<div>
 					<h4>{move.name}</h4>
-					{note && <h6>{note}</h6>}
+					<strong>
+						PP: {currentPP}/{move.data.pp}
+					</strong>
+					,{note && <h6>{note}</h6>}
 				</div>
 			}
-			actionElements={[
-				<strong>
-					PP: {currentPP}/{move.data.pp}
-				</strong>,
-			]}
+			actionElements={[]}
 		/>
 	);
 };
