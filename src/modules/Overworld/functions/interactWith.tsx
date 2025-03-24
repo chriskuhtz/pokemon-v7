@@ -86,7 +86,9 @@ export const interactWithFunction = ({
 	if (shouldRotate(data.type)) {
 		rotateOccupant(occ.id, getOppositeDirection(playerLocation.orientation));
 	}
-
+	if (data.type === 'ON_STEP_PORTAL') {
+		return;
+	}
 	if (data.type === 'PORTAL') {
 		goToPosition(data.portal);
 		return;
