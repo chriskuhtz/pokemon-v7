@@ -1,3 +1,4 @@
+import { RiSparkling2Line } from 'react-icons/ri';
 import { battleSpriteSize } from '../../constants/gameData';
 import { secondTurnMoves } from '../../constants/secondTurnMoves';
 import { calculateLevelData } from '../../functions/calculateLevelData';
@@ -28,6 +29,7 @@ export const BattlePokemonInfo = ({ pokemon }: { pokemon: BattlePokemon }) => {
 						src={getItemUrl('poke-ball')}
 					/>
 				)}
+				{pokemon.shiny && <RiSparkling2Line size={battleSpriteSize / 2} />}{' '}
 				{pokemon.data.name} | Lvl {level}{' '}
 			</strong>
 			{Object.entries(pokemon.statBoosts).map(([stat, boost]) => {

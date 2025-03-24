@@ -365,7 +365,7 @@ export const handleAttack = ({
 			pokemon: updatedAttacker,
 			ailment: 'leeching-on',
 			addMessage,
-			healAmount: updatedTarget.stats.hp * LEECH_DAMAGE_FACTOR,
+			healAmount: Math.floor(updatedTarget.stats.hp * LEECH_DAMAGE_FACTOR),
 		});
 	}
 	//apply stat changes
