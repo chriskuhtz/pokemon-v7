@@ -58,6 +58,6 @@ export const routeE1Encounters: EncounterMap = {
 		{ name: 'rattata-alola', xp: 1500, rarity: 'common' },
 		{ name: 'rattata-alola', xp: 3000, rarity: 'medium' },
 		{ name: 'golett', xp: 3000, rarity: 'rare' },
-		{ name: 'growlithe-hisui', xp: 3000, rarity: 'ultra-rare' },
+		{ name: 'abra', xp: 3000, rarity: 'ultra-rare' },
 	],
 };
