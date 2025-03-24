@@ -68,11 +68,11 @@ export const Farm = (): JSX.Element => {
 					);
 				})}
 				{hasEmptySlots ? (
-					plantables.map(([berry]) => (
+					plantables.map(([berry, amount]) => (
 						<Card
 							key={berry}
 							icon={<img src={getItemUrl(berry)} />}
-							content={`plant a ${berry}`}
+							content={`plant a ${berry} (${amount} in bag)`}
 							actionElements={[
 								<strong
 									style={{

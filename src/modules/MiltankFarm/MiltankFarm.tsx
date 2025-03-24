@@ -31,10 +31,10 @@ export const MiltankFarm = (): JSX.Element => {
 						actionElements={[]}
 					/>
 				)}
-				{tradeOptions.map((b) => (
+				{tradeOptions.map(([b, amount]) => (
 					<Card
 						key={b}
-						content={`Trade 1 ${b} for 1 moomoo-milk`}
+						content={`Trade 1 ${b} for 1 moomoo-milk  (${amount} in bag)`}
 						icon={<img src={getItemUrl(b)} />}
 						onClick={() => trade(b)}
 						actionElements={[<img src={getItemUrl('moomoo-milk')} />]}

@@ -83,7 +83,7 @@ export const useSwarmRadar = () => {
 
 			patchSaveFileReducer({
 				currentSwarm: { ...swarm, leavesAt: now + ONE_HOUR },
-				nextSwarmReadyAt: now + ONE_HOUR * 2,
+				nextSwarmReadyAt: now + ONE_HOUR * 3,
 			});
 		} else {
 			addMessage({

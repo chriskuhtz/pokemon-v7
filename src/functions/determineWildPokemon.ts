@@ -13,15 +13,18 @@ export const determineWildPokemon = (
 ) => {
 	if (swarm && swarm.route === map.id && Math.random() > 0.5) {
 		return [
-			makeChallengerPokemon({
-				nature: getRandomNature(),
-				name: swarm.pokemon,
-				xp: getMiddleOfThree([
-					swarm.xpMin,
-					swarm.xpMax,
-					Math.floor(swarm.xpMax * Math.random()),
-				]),
-			}),
+			makeChallengerPokemon(
+				{
+					nature: getRandomNature(),
+					name: swarm.pokemon,
+					xp: getMiddleOfThree([
+						swarm.xpMin,
+						swarm.xpMax,
+						Math.floor(swarm.xpMax * Math.random()),
+					]),
+				},
+				{ increasedShinyFactor: 8 }
+			),
 		];
 	}
 	return team.filter((p) => p.damage < p.maxHp).length > 1

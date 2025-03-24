@@ -756,7 +756,11 @@ export const movesCheckList: {
 	{ name: 'psych-up', url: 'https://pokeapi.co/api/v2/move/244/' },
 	{ name: 'extreme-speed', url: 'https://pokeapi.co/api/v2/move/245/' },
 	{ name: 'ancient-power', url: 'https://pokeapi.co/api/v2/move/246/' },
-	{ name: 'shadow-ball', url: 'https://pokeapi.co/api/v2/move/247/' },
+	{
+		name: 'shadow-ball',
+		url: 'https://pokeapi.co/api/v2/move/247/',
+		handled: true,
+	},
 	{ name: 'future-sight', url: 'https://pokeapi.co/api/v2/move/248/' },
 	{ name: 'rock-smash', url: 'https://pokeapi.co/api/v2/move/249/' },
 	{ name: 'whirlpool', url: 'https://pokeapi.co/api/v2/move/250/' },
@@ -987,7 +991,11 @@ export const movesCheckList: {
 	{ name: 'magma-storm', url: 'https://pokeapi.co/api/v2/move/463/' },
 	{ name: 'dark-void', url: 'https://pokeapi.co/api/v2/move/464/' },
 	{ name: 'seed-flare', url: 'https://pokeapi.co/api/v2/move/465/' },
-	{ name: 'ominous-wind', url: 'https://pokeapi.co/api/v2/move/466/' },
+	{
+		name: 'ominous-wind',
+		url: 'https://pokeapi.co/api/v2/move/466/',
+		handled: true,
+	},
 	{ name: 'shadow-force', url: 'https://pokeapi.co/api/v2/move/467/' },
 	{ name: 'hone-claws', url: 'https://pokeapi.co/api/v2/move/468/' },
 	{ name: 'wide-guard', url: 'https://pokeapi.co/api/v2/move/469/' },
@@ -1775,6 +1783,8 @@ export const handledMoves = [
 	'aeroblast',
 	'cotton-spore',
 	'reversal',
+	'shadow-ball',
+	'ominous-wind',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

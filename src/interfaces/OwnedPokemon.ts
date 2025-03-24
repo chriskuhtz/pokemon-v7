@@ -48,4 +48,5 @@ export interface OwnedPokemon {
 	gender: PokemonGender;
 	weightModifier?: number;
 	heightModifier?: number;
+	fixedAbility?: boolean;
 }

@@ -57,10 +57,20 @@ export const useGetBattleTeam = (
 						.filter((name) => abilityNames.includes(name as AbilityName)),
 				] as AbilityName[];
 
-				const ability: AbilityName =
-					assignNaturalAbility && possibleAbilities.length > 0
-						? getRandomEntry(possibleAbilities)
-						: pokemon.ability;
+				const chooseAbility = (): AbilityName => {
+					if (
+						possibleAbilities.includes(pokemon.ability) ||
+						pokemon.fixedAbility
+					) {
+						return pokemon.ability;
+					}
+					if (assignNaturalAbility && possibleAbilities.length > 0) {
+						return getRandomEntry(possibleAbilities);
+					}
+					return getRandomEntry(possibleAbilities);
+				};
+
+				const ability = chooseAbility();
 
 				const availableMoves = fetchedData.moves
 					.filter((m) => moveIsAvailable(m, level))

@@ -3,7 +3,7 @@ import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { EmptyStatObject } from '../interfaces/StatObject';
 
 export const OPPO_ID = 'oppo';
-export const shinyChance = 1 / 2000;
+export const shinyChance = 1 / 4000;
 export const testOpponent: OwnedPokemon = {
 	name: 'bulbasaur',
 	gender: 'MALE',
@@ -26,13 +26,14 @@ export const testOpponent: OwnedPokemon = {
 };
 
 export const makeChallengerPokemon = (
-	data: Partial<Omit<OwnedPokemon, 'id'>>
+	data: Partial<Omit<OwnedPokemon, 'id'>>,
+	config?: { increasedShinyFactor?: number }
 ): OwnedPokemon => {
 	return {
 		...testOpponent,
 		weightModifier: Math.random(),
 		...data,
 		id: v4(),
-		shiny: Math.random() < shinyChance,
+		shiny: Math.random() * (config?.increasedShinyFactor ?? 1) < shinyChance,
 	};
 };

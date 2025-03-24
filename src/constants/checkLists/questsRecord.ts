@@ -1137,6 +1137,27 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'ultra-ball': 10,
 			'full-restore': 5,
 		},
+		rewardPokemon: {
+			fixedAbility: true,
+			shiny: true,
+			maxHp: 30,
+			effortValues: EmptyStatObject,
+			ppBoostedMoves: [],
+			caughtOnMap: 'camp',
+			gender: 'MALE',
+			stepsWalked: 0,
+			ownerId: '',
+			damage: 0,
+			id: '',
+			ball: 'poke-ball',
+			ability: 'serene-grace',
+			name: 'dreepy',
+			xp: 125,
+			nature: 'adamant',
+			intrinsicValues: generateRandomStatObject(31),
+			happiness: 70,
+			firstMove: { name: 'ominous-wind', usedPP: 0 },
+		},
 		researchPoints: 50,
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'Gym Leader Morty');
@@ -1151,6 +1172,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'full-restore': 5,
 		},
 		rewardPokemon: {
+			fixedAbility: true,
 			shiny: true,
 			maxHp: 30,
 			effortValues: EmptyStatObject,
@@ -1184,6 +1206,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'full-restore': 5,
 		},
 		rewardPokemon: {
+			fixedAbility: true,
 			shiny: true,
 			maxHp: 30,
 			effortValues: EmptyStatObject,

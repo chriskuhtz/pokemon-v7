@@ -21,11 +21,12 @@ export const useMiltankFarm = () => {
 		[addMessage, patchSaveFileReducer, saveFile.inventory]
 	);
 
-	const tradeOptions: BerryType[] = useMemo(
+	const tradeOptions: [BerryType, number][] = useMemo(
 		() =>
-			Object.entries(saveFile.inventory)
-				.filter(([item, amount]) => amount > 0 && isBerry(item))
-				.map(([b]) => b as BerryType),
+			Object.entries(saveFile.inventory).filter(
+				([item, amount]) => amount > 0 && isBerry(item)
+			) as [BerryType, number][],
+
 		[saveFile.inventory]
 	);
 	return {
