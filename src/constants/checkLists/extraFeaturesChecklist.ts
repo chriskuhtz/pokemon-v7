@@ -229,4 +229,14 @@ export const extraFeatureCheckList: {
 		name: 'Info Pill Background color indicates primary ailment',
 	},
 	{ name: 'make actual gold/silver berry sprites' },
+	{ name: 'investigate encounter rate function' },
+	{
+		name: 'xp all and xp share as options, otherwise only battle participants get exp',
+	},
+	{ name: 'only choosing run away once for entire team' },
+	{ name: 'sort completed quests to the top' },
+	{ name: 'overworld overview pokemon still appear gray after healing' },
+	{ name: 'item storage chest' },
+	{ name: 'fix pathing algorithm for walking around obstacles' },
+	{ name: 'In double battle both pokemon can throw single last poke ball' },
 ];

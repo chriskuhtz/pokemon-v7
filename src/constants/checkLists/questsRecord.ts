@@ -81,6 +81,9 @@ export const questNames = [
 	'defeat a training field trainer',
 	'defeat five training field trainers',
 	'defeat ten training field trainers',
+	'defeat twenty training field trainers',
+	'defeat thirty training field trainers',
+	'defeat forty training field trainers',
 	'grow a berry',
 	'grow a apricorn',
 	'catch a pokemon in an apricorn ball',
@@ -1010,7 +1013,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'x-speed': 2,
 			'guard-spec': 2,
 		},
-		researchPoints: 20,
+		researchPoints: 10,
 		conditionFunction: (s) => {
 			const defeatedTrainers = s.handledOccupants.filter((h) =>
 				trainers.some((t) => t.id === h.id)
@@ -1030,7 +1033,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			protein: 1,
 			'hp-up': 1,
 		},
-		researchPoints: 30,
+		researchPoints: 15,
 		conditionFunction: (s) => {
 			const defeatedTrainers = s.handledOccupants.filter((h) =>
 				trainers.some((t) => t.id === h.id)
@@ -1040,6 +1043,66 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 1',
 		availableAfter: 'defeat five training field trainers',
+	},
+	'defeat twenty training field trainers': {
+		rewardItems: {
+			calcium: 1,
+			zinc: 1,
+			iron: 1,
+			carbos: 1,
+			protein: 1,
+			'hp-up': 1,
+		},
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			const defeatedTrainers = s.handledOccupants.filter((h) =>
+				trainers.some((t) => t.id === h.id)
+			).length;
+			return defeatedTrainers > 19;
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 2',
+		availableAfter: 'defeat ten training field trainers',
+	},
+	'defeat thirty training field trainers': {
+		rewardItems: {
+			calcium: 1,
+			zinc: 1,
+			iron: 1,
+			carbos: 1,
+			protein: 1,
+			'hp-up': 1,
+		},
+		researchPoints: 25,
+		conditionFunction: (s) => {
+			const defeatedTrainers = s.handledOccupants.filter((h) =>
+				trainers.some((t) => t.id === h.id)
+			).length;
+			return defeatedTrainers > 29;
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 2',
+		availableAfter: 'defeat twenty training field trainers',
+	},
+	'defeat forty training field trainers': {
+		rewardItems: {
+			calcium: 1,
+			zinc: 1,
+			iron: 1,
+			carbos: 1,
+			protein: 1,
+			'hp-up': 1,
+		},
+		researchPoints: 30,
+		conditionFunction: (s) => {
+			const defeatedTrainers = s.handledOccupants.filter((h) =>
+				trainers.some((t) => t.id === h.id)
+			).length;
+			return defeatedTrainers > 39;
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 2',
+		availableAfter: 'defeat thirty training field trainers',
 	},
 	'grow a berry': {
 		rewardItems: {

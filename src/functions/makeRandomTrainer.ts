@@ -461,6 +461,18 @@ const tier2trainers: Challenger[] = [
 		trainer: { name: 'Hoenn Hannah', sprite: SpriteEnum.aceFemale },
 		requiredUpgrade: 'training field 2',
 	},
+	{
+		type: 'TRAINER',
+		id: 'Sinnoh Simone',
+		team: [
+			makeChallengerPokemon({ name: 'monferno', xp: 3375 }),
+			makeChallengerPokemon({ name: 'prinplup', xp: 3375 }),
+			makeChallengerPokemon({ name: 'grovyle', xp: 3375 }),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'Hoenn Hannah', sprite: SpriteEnum.aceFemale },
+		requiredUpgrade: 'training field 2',
+	},
 ];
 const specialTrainers: Challenger[] = [
 	{
