@@ -94,7 +94,11 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 										<h5 style={{ display: 'flex', alignItems: 'center' }}>
 											Targets:
 											{quest.targetPokemon.map((p) => {
-												return saveFile.pokemon.some((sp) => sp.name === p) ? (
+												return saveFile.pokemon.some((sp) =>
+													sp.name === p && quest.targetRoute
+														? sp.caughtOnMap === quest.targetRoute
+														: true
+												) ? (
 													<PokemonSprite key={p + name} name={p} />
 												) : (
 													<img key={p + name} src={getItemUrl('poke-ball')} />

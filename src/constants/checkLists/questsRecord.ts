@@ -145,6 +145,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: [
 			...new Set(routeN1.possibleEncounters.MORNING.map((p) => p.name)),
 		],
+		targetRoute: 'routeN1',
 		kind: 'BULLETIN',
 	},
 	'catch a daytime exclusive pokemon from routeN1': {
@@ -160,6 +161,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: [
 			...new Set(routeN1.possibleEncounters.DAY.map((p) => p.name)),
 		],
+		targetRoute: 'routeN1',
 		kind: 'BULLETIN',
 	},
 	'catch a evening exclusive pokemon from routeN1': {
@@ -175,6 +177,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: [
 			...new Set(routeN1.possibleEncounters.EVENING.map((p) => p.name)),
 		],
+		targetRoute: 'routeN1',
 		kind: 'BULLETIN',
 	},
 	'catch a nighttime exclusive pokemon from routeN1': {
@@ -190,6 +193,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: [
 			...new Set(routeN1.possibleEncounters.NIGHT.map((p) => p.name)),
 		],
+		targetRoute: 'routeN1',
 		kind: 'BULLETIN',
 	},
 	'catch a ultra rare pokemon on routeN1': {
@@ -219,6 +223,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 					.map((p) => p.name)
 			),
 		],
+		targetRoute: 'routeN1',
 		kind: 'BULLETIN',
 	},
 	'catch all morning pokemon from routeN1': {
@@ -240,6 +245,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				].map((p) => p.name)
 			),
 		],
+		targetRoute: 'routeN1',
 		kind: 'BULLETIN',
 		availableAfter: 'catch a morning exclusive pokemon from routeN1',
 	},
@@ -262,6 +268,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				].map((p) => p.name)
 			),
 		],
+		targetRoute: 'routeN1',
 		kind: 'BULLETIN',
 		availableAfter: 'catch a daytime exclusive pokemon from routeN1',
 	},
@@ -284,6 +291,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				].map((p) => p.name)
 			),
 		],
+		targetRoute: 'routeN1',
 		kind: 'BULLETIN',
 		availableAfter: 'catch a evening exclusive pokemon from routeN1',
 	},
@@ -306,6 +314,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				].map((p) => p.name)
 			),
 		],
+		targetRoute: 'routeN1',
 		kind: 'BULLETIN',
 		availableAfter: 'catch a nighttime exclusive pokemon from routeN1',
 	},
@@ -322,6 +331,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: [
 			...new Set(routeN1E1.possibleEncounters.MORNING.map((p) => p.name)),
 		],
+		targetRoute: 'routeN1E1',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'machete certification',
 	},
@@ -338,6 +348,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: [
 			...new Set(routeN1E1.possibleEncounters.DAY.map((p) => p.name)),
 		],
+		targetRoute: 'routeN1E1',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'machete certification',
 	},
@@ -354,6 +365,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: [
 			...new Set(routeN1E1.possibleEncounters.EVENING.map((p) => p.name)),
 		],
+		targetRoute: 'routeN1E1',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'machete certification',
 	},
@@ -370,6 +382,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: [
 			...new Set(routeN1E1.possibleEncounters.NIGHT.map((p) => p.name)),
 		],
+		targetRoute: 'routeN1E1',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'machete certification',
 	},
@@ -400,6 +413,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 					.map((p) => p.name)
 			),
 		],
+		targetRoute: 'routeN1E1',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'machete certification',
 	},
@@ -424,6 +438,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				].map((p) => p.name)
 			),
 		],
+		targetRoute: 'routeN1E1',
 		kind: 'BULLETIN',
 		availableAfter: 'catch a morning exclusive pokemon from routeN1E1',
 		requiredUpgrade: 'machete certification',
@@ -449,6 +464,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				].map((p) => p.name)
 			),
 		],
+		targetRoute: 'routeN1E1',
 		kind: 'BULLETIN',
 		availableAfter: 'catch a daytime exclusive pokemon from routeN1E1',
 		requiredUpgrade: 'machete certification',
@@ -474,6 +490,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				].map((p) => p.name)
 			),
 		],
+		targetRoute: 'routeN1E1',
 		kind: 'BULLETIN',
 		availableAfter: 'catch a evening exclusive pokemon from routeN1E1',
 		requiredUpgrade: 'machete certification',
@@ -499,6 +516,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				].map((p) => p.name)
 			),
 		],
+		targetRoute: 'routeN1E1',
 		kind: 'BULLETIN',
 		availableAfter: 'catch a nighttime exclusive pokemon from routeN1E1',
 		requiredUpgrade: 'machete certification',
@@ -516,6 +534,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: [
 			...new Set(routeE1.possibleEncounters.MORNING.map((p) => p.name)),
 		],
+		targetRoute: 'routeE1',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'sledge hammer certification',
 	},
@@ -532,6 +551,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: [
 			...new Set(routeE1.possibleEncounters.DAY.map((p) => p.name)),
 		],
+		targetRoute: 'routeE1',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'sledge hammer certification',
 	},
@@ -548,6 +568,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: [
 			...new Set(routeE1.possibleEncounters.EVENING.map((p) => p.name)),
 		],
+		targetRoute: 'routeE1',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'sledge hammer certification',
 	},
@@ -564,6 +585,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: [
 			...new Set(routeE1.possibleEncounters.NIGHT.map((p) => p.name)),
 		],
+		targetRoute: 'routeE1',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'sledge hammer certification',
 	},
@@ -594,6 +616,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 					.map((p) => p.name)
 			),
 		],
+		targetRoute: 'routeE1',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'sledge hammer certification',
 	},
@@ -616,6 +639,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				].map((p) => p.name)
 			),
 		],
+		targetRoute: 'routeE1',
 		kind: 'BULLETIN',
 		availableAfter: 'catch a morning exclusive pokemon from routeE1',
 		requiredUpgrade: 'sledge hammer certification',
@@ -639,6 +663,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				].map((p) => p.name)
 			),
 		],
+		targetRoute: 'routeE1',
 		kind: 'BULLETIN',
 		availableAfter: 'catch a daytime exclusive pokemon from routeE1',
 		requiredUpgrade: 'sledge hammer certification',
@@ -662,6 +687,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				].map((p) => p.name)
 			),
 		],
+		targetRoute: 'routeE1',
 		kind: 'BULLETIN',
 		availableAfter: 'catch a evening exclusive pokemon from routeE1',
 		requiredUpgrade: 'sledge hammer certification',
@@ -685,6 +711,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				].map((p) => p.name)
 			),
 		],
+		targetRoute: 'routeE1',
 		kind: 'BULLETIN',
 		availableAfter: 'catch a nighttime exclusive pokemon from routeE1',
 		requiredUpgrade: 'sledge hammer certification',

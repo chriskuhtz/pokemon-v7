@@ -1,5 +1,6 @@
 import { CampUpgrade } from '../constants/checkLists/campUpgrades';
 import { QuestName } from '../constants/checkLists/questsRecord';
+import { MapId } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { Inventory } from './Inventory';
 import { OwnedPokemon } from './OwnedPokemon';
@@ -18,4 +19,5 @@ export interface Quest {
 	availableAfter?: QuestName;
 	requiredUpgrade?: CampUpgrade;
 	targetPokemon?: PokemonName[];
+	targetRoute?: MapId;
 }
