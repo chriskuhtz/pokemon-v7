@@ -7,6 +7,7 @@ const customSprites: Partial<Record<ItemType, string>> = {
 	'silver-razz-berry': '/mapObjects/pokeball.png',
 	'silver-pinap-berry': '/mapObjects/pokeball.png',
 	'silver-nanab-berry': '/mapObjects/pokeball.png',
+	'black-augurite': '/customItems/black-augurite.png',
 };
 export const getItemUrl = (item: ItemType): string => {
 	if (customSprites[item]) {

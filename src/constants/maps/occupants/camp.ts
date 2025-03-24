@@ -354,7 +354,7 @@ const rowanLine: Occupant[] = [
 	},
 	{
 		type: 'NPC',
-		id: 'rowan_12',
+		id: 'rowan_13',
 		x: 5,
 		y: 15,
 		unhandledMessage: [
