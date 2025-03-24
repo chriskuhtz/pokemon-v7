@@ -41,6 +41,17 @@ export const determineTypeFactor = (
 		}
 		return 0;
 	}
+	if (
+		target.ability === 'lightning-rod' &&
+		attack.data.type.name === 'electric'
+	) {
+		if (addMessage) {
+			addMessage({
+				message: `${target.data.name} prevents damage with wonder guard`,
+			});
+		}
+		return 0;
+	}
 
 	if (res === 0) {
 		if (addMessage) {

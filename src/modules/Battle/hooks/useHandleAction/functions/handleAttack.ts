@@ -675,6 +675,22 @@ export const handleAttack = ({
 				addMessage,
 			});
 		}
+		//check flash fire
+		if (
+			!isKO(updatedTarget) &&
+			target.ability === 'lightning-rod' &&
+			move.data.type.name === 'electric'
+		) {
+			updatedTarget = applyStatChangeToPokemon(
+				updatedTarget,
+				'special-attack',
+				1,
+				true,
+				battleFieldEffects,
+				addMessage,
+				'by lightning-rod'
+			);
+		}
 		//check color change
 		if (
 			!isKO(updatedTarget) &&
