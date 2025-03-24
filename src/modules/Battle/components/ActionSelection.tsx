@@ -114,6 +114,7 @@ export function ActionSelection({
 		<div
 			style={{
 				padding: '.5rem',
+				textWrap: 'nowrap',
 			}}
 		>
 			<strong>What should {controlled.data.name} do?</strong>
