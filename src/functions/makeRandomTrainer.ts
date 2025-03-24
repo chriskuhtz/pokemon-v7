@@ -216,6 +216,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: { name: 'Fiery Fred 2', sprite: SpriteEnum.pyro },
+		requiredUpgrade: 'training field 2',
 	},
 	{
 		type: 'TRAINER',
@@ -227,6 +228,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: { name: 'Adrian Agua 2', sprite: SpriteEnum.sailor },
+		requiredUpgrade: 'training field 2',
 	},
 	{
 		type: 'TRAINER',
@@ -238,6 +240,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: { name: 'Planter Paul 2', sprite: SpriteEnum.farmer },
+		requiredUpgrade: 'training field 2',
 	},
 	{
 		type: 'TRAINER',
@@ -249,6 +252,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: { name: 'Electric Erik 2', sprite: SpriteEnum.mechanic },
+		requiredUpgrade: 'training field 2',
 	},
 	{
 		type: 'TRAINER',
@@ -260,6 +264,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: { name: 'Haunted Hilda 2', sprite: SpriteEnum.possessed },
+		requiredUpgrade: 'training field 2',
 	},
 	{
 		type: 'TRAINER',
@@ -271,6 +276,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: { name: 'Dark Dave 2', sprite: SpriteEnum.gangster },
+		requiredUpgrade: 'training field 2',
 	},
 	{
 		type: 'TRAINER',
@@ -282,6 +288,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: { name: 'Psycho Pete 2', sprite: SpriteEnum.psychic },
+		requiredUpgrade: 'training field 2',
 	},
 	{
 		type: 'TRAINER',
@@ -293,6 +300,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: { name: 'Fairy Frida 2', sprite: SpriteEnum.maid },
+		requiredUpgrade: 'training field 2',
 	},
 	{
 		type: 'TRAINER',
@@ -304,6 +312,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: { name: 'Normal Norman 2', sprite: SpriteEnum.uncle },
+		requiredUpgrade: 'training field 2',
 	},
 	{
 		type: 'TRAINER',
@@ -315,6 +324,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: { name: 'Rick the Rock 2', sprite: SpriteEnum.hiker },
+		requiredUpgrade: 'training field 2',
 	},
 	{
 		type: 'TRAINER',
@@ -326,6 +336,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: { name: 'grounded gunther 2', sprite: SpriteEnum.explorer },
+		requiredUpgrade: 'training field 2',
 	},
 	{
 		type: 'TRAINER',
@@ -337,6 +348,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: { name: 'steely stannis 2', sprite: SpriteEnum.builder },
+		requiredUpgrade: 'training field 2',
 	},
 	{
 		type: 'TRAINER',
@@ -348,6 +360,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: { name: 'icy irmgard 2', sprite: SpriteEnum.grandma },
+		requiredUpgrade: 'training field 2',
 	},
 	{
 		type: 'TRAINER',
@@ -362,6 +375,7 @@ const tier2trainers: Challenger[] = [
 			name: 'drake (still not the pedo)',
 			sprite: SpriteEnum.ace2Male,
 		},
+		requiredUpgrade: 'training field 2',
 	},
 	{
 		type: 'TRAINER',
@@ -373,6 +387,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: { name: 'fighting frank 2', sprite: SpriteEnum.karateMale },
+		requiredUpgrade: 'training field 2',
 	},
 	{
 		type: 'TRAINER',
@@ -384,6 +399,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: { name: 'flying fernanda 2', sprite: SpriteEnum.beauty1 },
+		requiredUpgrade: 'training field 2',
 	},
 	{
 		type: 'TRAINER',
@@ -395,6 +411,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: { name: 'poisonous pedro 2', sprite: SpriteEnum.biker },
+		requiredUpgrade: 'training field 2',
 	},
 	{
 		type: 'TRAINER',
@@ -406,6 +423,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: { name: 'Buggin Bob 2', sprite: SpriteEnum.bugCatcher },
+		requiredUpgrade: 'training field 2',
 	},
 	{
 		type: 'TRAINER',
@@ -417,6 +435,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: { name: 'Kanto Ken', sprite: SpriteEnum.aceMale },
+		requiredUpgrade: 'training field 2',
 	},
 	{
 		type: 'TRAINER',
@@ -428,6 +447,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: { name: 'Johto John', sprite: SpriteEnum.aceMale },
+		requiredUpgrade: 'training field 2',
 	},
 	{
 		type: 'TRAINER',
@@ -439,6 +459,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: { name: 'Hoenn Hannah', sprite: SpriteEnum.aceFemale },
+		requiredUpgrade: 'training field 2',
 	},
 ];
 const specialTrainers: Challenger[] = [
