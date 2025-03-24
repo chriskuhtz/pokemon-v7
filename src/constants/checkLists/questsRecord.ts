@@ -634,7 +634,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: [
 			...new Set(
 				[
-					...routeE1.possibleEncounters.MORNING,
+					...routeE1.possibleEncounters.DAY,
 					...routeE1.possibleEncounters.BASE,
 				].map((p) => p.name)
 			),
@@ -657,7 +657,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: [
 			...new Set(
 				[
-					...routeE1.possibleEncounters.MORNING,
+					...routeE1.possibleEncounters.EVENING,
 					...routeE1.possibleEncounters.BASE,
 				].map((p) => p.name)
 			),
@@ -680,7 +680,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: [
 			...new Set(
 				[
-					...routeE1.possibleEncounters.MORNING,
+					...routeE1.possibleEncounters.NIGHT,
 					...routeE1.possibleEncounters.BASE,
 				].map((p) => p.name)
 			),
