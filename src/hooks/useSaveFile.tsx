@@ -100,29 +100,12 @@ export interface UseSaveFile {
 	evolvePokemonReducer: (x: EvolutionReducerPayload) => void;
 }
 
-// const migratePokemon = (p: OwnedPokemon): OwnedPokemon => {
-// 	if (!p['intrinsicValues']) {
-// 		return { ...p, intrinsicValues: generateRandomStatObject(31) };
-// 	}
-
-// 	return p;
-// };
-const migrateSaveFile = (input: SaveFile): SaveFile => {
-	let pokedex = emptyPokedex;
-
-	input.pokemon.forEach((p) => {
-		pokedex = addPokemonToDex(pokedex, p.name, p.caughtOnMap, true);
-	});
-
-	return { ...input, pokedex };
-};
-
 const useSaveFile = (
 	init: SaveFile,
 	addMessage: (x: Message) => void
 ): UseSaveFile => {
 	const local = window.localStorage.getItem(localStorageId);
-	const loaded = local ? migrateSaveFile(JSON.parse(local) as SaveFile) : init;
+	const loaded = local ? (JSON.parse(local) as SaveFile) : init;
 
 	const [saveFile, s] = useState<SaveFile>(loaded);
 
@@ -134,9 +117,15 @@ const useSaveFile = (
 	const setSaveFile = useCallback((update: SaveFile) => {
 		const newTime = new Date().getTime();
 
+		let pokedex = update.pokedex ?? emptyPokedex;
+
+		update.pokemon.forEach((p) => {
+			pokedex = addPokemonToDex(pokedex, p.name, p.caughtOnMap, true);
+		});
 		s({
 			...update,
 			lastEdited: newTime,
+			pokedex,
 			//migrate pokemon
 			//pokemon: update.pokemon.map(migratePokemon),
 			//migrate inventory
@@ -490,6 +479,11 @@ const useSaveFile = (
 				return 1;
 			};
 
+			const pokedex = { ...saveFile.pokedex };
+			caughtPokemon.forEach((p) =>
+				addPokemonToDex(pokedex, p.name, p.caughtOnMap, true)
+			);
+
 			putSaveFileReducer({
 				...saveFile,
 				inventory: updatedInventory,
@@ -512,6 +506,7 @@ const useSaveFile = (
 							? true
 							: saveFile.mileStones.hasCaughtASwarmPokemon,
 				},
+				pokedex,
 			});
 		},
 		[putSaveFileReducer, reset, saveFile, team]
@@ -592,6 +587,13 @@ const useSaveFile = (
 			saveFile.mileStones.hasEvolvedAPokemonThatNeedsNighttime ||
 			timeOfDayRequirement === 'NIGHT';
 
+		const pokedex = addPokemonToDex(
+			saveFile.pokedex,
+			newName,
+			saveFile.location.mapId,
+			true
+		);
+
 		patchSaveFileReducer({
 			pokemon: saveFile.pokemon.map((p) => {
 				if (p.id === id) {
@@ -603,6 +605,7 @@ const useSaveFile = (
 				}
 				return p;
 			}),
+			pokedex,
 			mileStones: {
 				...saveFile.mileStones,
 				hasEvolvedAPokemonThroughLevelUp,

@@ -61,7 +61,6 @@ export const BattleLoader = ({
 	useEffect(() => {
 		if (battleOpponents && !registered) {
 			let updatedDex = { ...saveFile.pokedex };
-			console.log('see pokemon');
 			battleOpponents.forEach((b) => {
 				updatedDex = addPokemonToDex(
 					updatedDex,

@@ -94,21 +94,21 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 										<h5 style={{ display: 'flex', alignItems: 'center' }}>
 											Targets:
 											{quest.targetPokemon.map((p) => {
-												return saveFile.pokemon.some((sp) => {
-													if (sp.name !== p) {
-														return false;
-													}
-													if (
-														quest.targetRoute &&
-														sp.caughtOnMap !== quest.targetRoute
-													) {
-														return false;
-													}
-
-													return true;
-												}) ? (
-													<PokemonSprite key={p + name} name={p} />
-												) : (
+												if (
+													quest.targetRoute &&
+													saveFile.pokedex[p].caughtOnRoutes.includes(
+														quest.targetRoute
+													)
+												) {
+													return <PokemonSprite key={p + name} name={p} />;
+												}
+												if (
+													!quest.targetRoute &&
+													saveFile.pokedex[p].caughtOnRoutes.length > 0
+												) {
+													return <PokemonSprite key={p + name} name={p} />;
+												}
+												return (
 													<img key={p + name} src={getItemUrl('poke-ball')} />
 												);
 											})}

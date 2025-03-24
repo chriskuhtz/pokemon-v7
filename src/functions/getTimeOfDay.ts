@@ -1,4 +1,6 @@
-export type TimeOfDay = 'MORNING' | 'DAY' | 'EVENING' | 'NIGHT';
+export const timesOfDay = ['MORNING', 'DAY', 'EVENING', 'NIGHT'] as const;
+
+export type TimeOfDay = (typeof timesOfDay)[number];
 
 export const getTimeOfDay = (): TimeOfDay => {
 	const hours = new Date().getHours();
