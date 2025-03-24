@@ -7,15 +7,16 @@ export const getPokemonSprite = (
 	config: { back?: boolean; shiny?: boolean }
 ): string => {
 	const id = nameToIdMap[name];
-	//if (gif) {
+
+	if (id > 905) {
+		return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
+			config.shiny ? `shiny/` : ''
+		}${id}.png`;
+	}
+
 	return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${
 		config.back ? `back/` : ''
 	}${config.shiny ? `shiny/` : ''}${id}.gif`;
-	// }
-	// if (mode === 'back') {
-	// 	return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${id}.png`;
-	// }
-	// return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 };
 
 export const PokemonSprite = ({
