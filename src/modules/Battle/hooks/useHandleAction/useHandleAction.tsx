@@ -90,7 +90,7 @@ export const useHandleAction = (
 			}
 			if (move.type === 'BattleAttack' && move.name === 'teleport') {
 				addMessage({
-					message: `${attacker} escaped the battle with teleport`,
+					message: `${attacker.name} escaped the battle with teleport`,
 					onRemoval: () => leave('DRAW'),
 				});
 				setPokemon((pokemon) =>
