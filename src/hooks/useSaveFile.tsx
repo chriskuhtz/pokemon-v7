@@ -9,9 +9,15 @@ import { MoveName } from '../constants/checkLists/movesCheckList';
 
 import { v4 } from 'uuid';
 import { QuestName, QuestsRecord } from '../constants/checkLists/questsRecord';
-import { localStorageId, ONE_DAY, testState } from '../constants/gameData';
+import {
+	emptyPokedex,
+	localStorageId,
+	ONE_DAY,
+	testState,
+} from '../constants/gameData';
 import { mapsRecord } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
+import { addPokemonToDex } from '../functions/addPokemonToDex';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 import { determineWildPokemon } from '../functions/determineWildPokemon';
@@ -35,7 +41,6 @@ import { Occupant } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { RoutesType } from '../interfaces/Routing';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
-import { generateRandomStatObject } from '../interfaces/StatObject';
 import { Message } from './useMessageQueue';
 
 export interface LeaveBattlePayload {
@@ -95,15 +100,21 @@ export interface UseSaveFile {
 	evolvePokemonReducer: (x: EvolutionReducerPayload) => void;
 }
 
-const migratePokemon = (p: OwnedPokemon): OwnedPokemon => {
-	if (!p['intrinsicValues']) {
-		return { ...p, intrinsicValues: generateRandomStatObject(31) };
-	}
+// const migratePokemon = (p: OwnedPokemon): OwnedPokemon => {
+// 	if (!p['intrinsicValues']) {
+// 		return { ...p, intrinsicValues: generateRandomStatObject(31) };
+// 	}
 
-	return p;
-};
+// 	return p;
+// };
 const migrateSaveFile = (input: SaveFile): SaveFile => {
-	return { ...input, pokemon: input.pokemon.map(migratePokemon) };
+	let pokedex = emptyPokedex;
+
+	input.pokemon.forEach((p) => {
+		pokedex = addPokemonToDex(pokedex, p.name, p.caughtOnMap, true);
+	});
+
+	return { ...input, pokedex };
 };
 
 const useSaveFile = (

@@ -68,6 +68,10 @@ export interface PokemonSwarm {
 	xpMax: number;
 }
 
+export type Pokedex = Record<
+	PokemonName,
+	{ seenOnRoutes: MapId[]; caughtOnRoutes: MapId[] }
+>;
 export interface SaveFile {
 	badges: BadgeName[];
 	playerId: string;
@@ -121,4 +125,5 @@ export interface SaveFile {
 	nextSwarmReadyAt?: number;
 	starterPokemon?: PokemonName;
 	seedVault?: ItemType[];
+	pokedex: Pokedex;
 }

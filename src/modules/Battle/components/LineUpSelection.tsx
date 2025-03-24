@@ -151,11 +151,12 @@ export const LineUpSelection = ({
 							}}
 						>
 							<PokemonSprite
-								back
-								name={teamMember.name}
-								style={{
-									filter: isKO(teamMember) ? 'grayscale(1)' : undefined,
+								config={{
+									shiny: teamMember.shiny,
+									back: true,
+									grayscale: isKO(teamMember),
 								}}
+								name={teamMember.name}
 							/>
 						</div>
 					))}

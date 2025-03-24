@@ -8,21 +8,11 @@ export const reduceSecondaryAilmentDurations = (
 	//reduce ailment duration
 	updated.secondaryAilments = updated.secondaryAilments
 		.map((a) => {
-			if (['trap', 'guard-spec'].includes(a.type)) {
-				if (a.duration === 0) {
-					if (a.type === 'trap') {
-						addMessage(`${p.data.name} is no longer trapped`);
-					}
-					if (a.type === 'guard-spec') {
-						addMessage(`${p.data.name}'s guard spec effect ended`);
-					}
-					if (a.type === 'disable') {
-						addMessage(`${p.data.name} is no longer disabled`);
-					}
-					return undefined;
-				} else {
-					return { ...a, duration: a.duration - 1 };
-				}
+			if (a.duration === 0) {
+				addMessage(`${p.data.name} is no longer affected by ${a}`);
+				return undefined;
+			} else {
+				return { ...a, duration: a.duration - 1 };
 			}
 		})
 		.filter((a) => a !== undefined);

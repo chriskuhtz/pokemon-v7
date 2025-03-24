@@ -92,7 +92,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	bulletin_board: [],
 	berry_farm: ['bulletin_board'],
 	'invite apricorn smith kurt': ['bulletin_board', 'berry_farm'],
-	'invite ghost expert morty': baseRequirements,
+	'invite ghost expert morty': ['machete certification'],
 	'invite professor rowan': baseRequirements,
 	'invite professor elm': baseRequirements,
 	'machete certification': baseRequirements,

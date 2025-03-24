@@ -54,7 +54,7 @@ export const routeN1E1Encounters: EncounterMap = {
 		{ name: 'impidimp', xp: 1000, rarity: 'common' },
 		{ name: 'impidimp', xp: 1500, rarity: 'medium' },
 		{ name: 'zubat', xp: 800, rarity: 'common' },
-		{ name: 'zubat', xp: 8000, rarity: 'common' },
+		{ name: 'zubat', xp: 1000, rarity: 'common' },
 		{ name: 'zubat', xp: 1500, rarity: 'medium' },
 		{ name: 'tarountula', xp: 1500, rarity: 'rare' },
 		{ name: 'meowth-alola', xp: 1000, rarity: 'rare' },

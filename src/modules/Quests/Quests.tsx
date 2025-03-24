@@ -85,7 +85,7 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 										{quest.rewardPokemon && (
 											<PokemonSprite
 												name={quest.rewardPokemon.name}
-												shiny={quest.rewardPokemon.shiny}
+												config={{ shiny: quest.rewardPokemon.shiny }}
 											/>
 										)}
 									</h5>

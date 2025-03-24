@@ -1,10 +1,15 @@
 import { generateInventory } from '../interfaces/Inventory';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { QuestStatus } from '../interfaces/Quest';
-import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
+import {
+	CharacterLocationData,
+	Pokedex,
+	SaveFile,
+} from '../interfaces/SaveFile';
 import { EmptyStatObject } from '../interfaces/StatObject';
 import { CampUpgrade, campUpgradeNames } from './checkLists/campUpgrades';
 import { QuestName, QuestsRecord } from './checkLists/questsRecord';
+import { pokemonNames } from './pokemonNames';
 
 export const frames = 16;
 export const fps = 1000 / 16;
@@ -54,6 +59,10 @@ const baseCampUpgrades: Record<CampUpgrade, boolean> = Object.fromEntries(
 	//campUpgradeNames.map((key) => [key, true])
 ) as Record<CampUpgrade, boolean>;
 
+export const emptyPokedex: Pokedex = Object.fromEntries(
+	pokemonNames.map((a) => [a, { seenOnRoutes: [], caughtOnRoutes: [] }])
+) as unknown as Pokedex;
+
 export const testState: SaveFile = {
 	sprite: '',
 	badges: [],
@@ -84,6 +93,7 @@ export const testState: SaveFile = {
 	},
 	farm: { plants: [] },
 	campUpgrades: baseCampUpgrades,
+	pokedex: emptyPokedex,
 };
 
 export const localStorageId = 'pokemonv7SaveFile';

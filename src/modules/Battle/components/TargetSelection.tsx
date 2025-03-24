@@ -68,8 +68,7 @@ export function TargetSelection({
 								<PokemonSprite
 									sizeFactor={0.8}
 									name={t.name}
-									back={isPlayerPokemon(t)}
-									shiny={t.shiny}
+									config={{ shiny: t.shiny, back: isPlayerPokemon(t) }}
 								/>
 							}
 							content={t.data.name}

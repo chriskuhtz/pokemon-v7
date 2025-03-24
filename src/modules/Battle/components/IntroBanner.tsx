@@ -26,7 +26,7 @@ export const IntroBanner = ({
 				>
 					Lets go!{' '}
 					{names.map((t) => (
-						<PokemonSprite back name={t} key={t} />
+						<PokemonSprite config={{ back: true }} name={t} key={t} />
 					))}
 				</div>
 			</Banner>

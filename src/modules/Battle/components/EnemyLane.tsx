@@ -85,7 +85,7 @@ export function EnemyLane({
 							style={{ margin: '2rem 1rem' }}
 							key={t.id}
 							name={t.name}
-							shiny={t.shiny}
+							config={{ shiny: t.shiny }}
 						/>
 					);
 				})}

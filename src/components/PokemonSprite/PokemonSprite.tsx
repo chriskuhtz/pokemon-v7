@@ -4,35 +4,44 @@ import { nameToIdMap, PokemonName } from '../../constants/pokemonNames';
 
 export const getPokemonSprite = (
 	name: PokemonName,
-	config: { back?: boolean; shiny?: boolean }
+	config?: {
+		back?: boolean;
+		shiny?: boolean;
+		grayscale?: boolean;
+		officalArtwork?: boolean;
+	}
 ): string => {
 	const id = nameToIdMap[name];
 
-	if (id > 905) {
+	if (id > 905 || config?.officalArtwork) {
 		return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
-			config.shiny ? `shiny/` : ''
+			config?.shiny ? `shiny/` : ''
 		}${id}.png`;
 	}
 
 	return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/${
-		config.back ? `back/` : ''
-	}${config.shiny ? `shiny/` : ''}${id}.gif`;
+		config?.back ? `back/` : ''
+	}${config?.shiny ? `shiny/` : ''}${id}.gif`;
 };
 
 export const PokemonSprite = ({
 	name,
 	sizeFactor,
 	style,
-	back,
+
 	onClick,
 	className,
-	shiny,
+	config,
 }: {
 	name: PokemonName;
 	sizeFactor?: number;
 	style?: CSSProperties;
-	back?: boolean;
-	shiny?: boolean;
+	config?: {
+		back?: boolean;
+		shiny?: boolean;
+		grayscale?: boolean;
+		officalArtwork?: boolean;
+	};
 	onClick?: () => void;
 	className?: string;
 }) => {
@@ -45,10 +54,16 @@ export const PokemonSprite = ({
 					onClick();
 				}
 			}}
-			src={getPokemonSprite(name, { back: back, shiny: shiny })}
+			src={getPokemonSprite(name, config)}
 			height={battleSpriteSize * (sizeFactor ?? 1)}
 			width={battleSpriteSize * (sizeFactor ?? 1)}
-			style={style}
+			style={
+				style
+					? style
+					: config?.grayscale
+					? { filter: 'grayscale(1)' }
+					: undefined
+			}
 		/>
 	);
 };

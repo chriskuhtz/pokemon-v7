@@ -1,3 +1,5 @@
+import { useContext, useEffect, useState } from 'react';
+import { addPokemonToDex } from '../../../functions/addPokemonToDex';
 import { getMiddleOfThree } from '../../../functions/getMiddleOfThree';
 import {
 	OverworldShaderMap,
@@ -5,7 +7,10 @@ import {
 } from '../../../functions/getTimeOfDay';
 import { useGetBattleTeam } from '../../../hooks/useGetBattleTeam';
 import { Message } from '../../../hooks/useMessageQueue';
-import { LeaveBattlePayload } from '../../../hooks/useSaveFile';
+import {
+	LeaveBattlePayload,
+	SaveFileContext,
+} from '../../../hooks/useSaveFile';
 import { Challenger } from '../../../interfaces/Challenger';
 import { Inventory } from '../../../interfaces/Inventory';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
@@ -49,6 +54,25 @@ export const BattleLoader = ({
 		team.map((t) => ({ ...t, caughtBefore: true })),
 		{}
 	);
+
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+
+	const [registered, setRegistered] = useState<boolean>(false);
+	useEffect(() => {
+		if (battleOpponents && !registered) {
+			let updatedDex = { ...saveFile.pokedex };
+			console.log('see pokemon');
+			battleOpponents.forEach((b) => {
+				updatedDex = addPokemonToDex(
+					updatedDex,
+					b.name,
+					saveFile.location.mapId
+				);
+			});
+			setRegistered(true);
+			patchSaveFileReducer({ ...saveFile, pokedex: updatedDex });
+		}
+	}, [battleOpponents, patchSaveFileReducer, registered, saveFile]);
 
 	if (!battleOpponents || !battleTeam) {
 		return <LoadingScreen />;

@@ -9,6 +9,7 @@ import {
 } from '../../constants/gameData';
 import { PokemonName } from '../../constants/pokemonNames';
 import { typeColors } from '../../constants/typeColors';
+import { addPokemonToDex } from '../../functions/addPokemonToDex';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getRandomPokemonName } from '../../functions/getRandomPokemonId';
 import { reduceBattlePokemonToOwnedPokemon } from '../../functions/reduceBattlePokemonToOwnedPokemon';
@@ -63,12 +64,15 @@ export const StarterSelection = (): JSX.Element => {
 			shiny: Math.random() < shinyChance,
 		});
 
+		const pokedex = addPokemonToDex(saveFile.pokedex, mon.name, 'camp', true);
+
 		patchSaveFileReducer({
 			...saveFile,
 			playerId: name,
 			pokemon: [mon],
 			meta: { activeTab: 'OVERWORLD' },
 			starterPokemon: mon.name,
+			pokedex,
 		});
 	}, [chosenStarter, name, patchSaveFileReducer, saveFile]);
 

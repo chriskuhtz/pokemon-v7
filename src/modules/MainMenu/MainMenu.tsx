@@ -6,6 +6,7 @@ import { Stack } from '../../uiComponents/Stack/Stack';
 
 import { useContext, useState } from 'react';
 import { GoTasklist } from 'react-icons/go';
+import { RiBookShelfLine } from 'react-icons/ri';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { TrainerCard } from '../../components/TrainerCard/TrainerCard';
 import { battleSpriteSize } from '../../constants/gameData';
@@ -37,7 +38,10 @@ export const MainMenu = ({
 						onClick={() => teleportHome()}
 						content={<h4>Teleport back to camp</h4>}
 						icon={
-							<PokemonSprite name={teleporter.name} shiny={teleporter.shiny} />
+							<PokemonSprite
+								name={teleporter.name}
+								config={{ officalArtwork: true, shiny: teleporter.shiny }}
+							/>
 						}
 						actionElements={[]}
 					/>
@@ -63,6 +67,12 @@ export const MainMenu = ({
 							? [<strong>Uncollected: {numberOfUncollected}</strong>]
 							: []
 					}
+				/>
+				<Card
+					onClick={() => navigate('MAIN', 'POKEDEX')}
+					content={<h4>Pokedex</h4>}
+					icon={<RiBookShelfLine size={battleSpriteSize} />}
+					actionElements={[]}
 				/>
 				{resetConfirmationInProgress ? (
 					<button

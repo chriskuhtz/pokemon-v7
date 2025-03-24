@@ -22,6 +22,7 @@ import { Market } from './modules/Market/Market';
 import { SellMarket } from './modules/Market/SellMarket';
 import { MiltankFarm } from './modules/MiltankFarm/MiltankFarm';
 import { Overworld } from './modules/Overworld/Overworld';
+import { Pokedex } from './modules/Pokedex/Pokedex';
 import { PokemonStorage } from './modules/PokemonStorage/PokemonStorage';
 import { Quests } from './modules/Quests/Quests';
 import { SeedVault } from './modules/SeedVault/SeedVault';
@@ -232,6 +233,9 @@ export const App = (): JSX.Element => {
 	}
 	if (activeTab === 'SEED_VAULT') {
 		return <SeedVault />;
+	}
+	if (activeTab === 'POKEDEX') {
+		return <Pokedex />;
 	}
 	if (activeTab === 'APRICORN_SMITHY') {
 		return <ApricornSmithy goBack={() => setActiveTabReducer('OVERWORLD')} />;

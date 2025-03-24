@@ -18,7 +18,7 @@ export const PokemonIconBanner = ({
 		<Banner backgroundColor={backgroundColor} flexDirection={flexDirection}>
 			{message}
 
-			<PokemonSprite name={pokemon.name} shiny={pokemon.shiny} />
+			<PokemonSprite name={pokemon.name} config={{ shiny: pokemon.shiny }} />
 		</Banner>
 	);
 };

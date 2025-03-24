@@ -256,7 +256,7 @@ export const handleAttack = ({
 			damage: updatedAttacker.damage + Math.floor(updatedAttacker.stats.hp / 2),
 		};
 		addMessage({
-			message: `${updatedAttacker.name} cut its own hp to curse ${updatedTarget}`,
+			message: `${updatedAttacker.name} cut its own hp to curse ${updatedTarget.name}`,
 		});
 	}
 

@@ -25,9 +25,8 @@ export function PlayerLane(props: { onFieldTeam: BattlePokemon[] }) {
 				{props.onFieldTeam.map((t) => (
 					<PokemonSprite
 						key={t.id}
-						back
 						name={t.name}
-						shiny={t.shiny}
+						config={{ shiny: t.shiny, back: true }}
 						style={{ margin: '2rem 1rem' }}
 					/>
 				))}

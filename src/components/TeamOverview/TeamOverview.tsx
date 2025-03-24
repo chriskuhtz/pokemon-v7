@@ -55,8 +55,7 @@ export const TeamMemberInOverview = ({
 			className={readyToEvolve ? 'readyToEvolve' : undefined}
 			onClick={onClick}
 			name={pokemon.name}
-			shiny={pokemon.shiny}
-			style={isOwnedPokemonKO(pokemon) ? { filter: 'grayscale(1)' } : undefined}
+			config={{ shiny: pokemon.shiny, grayscale: isOwnedPokemonKO(pokemon) }}
 		/>
 	);
 };
