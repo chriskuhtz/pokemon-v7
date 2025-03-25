@@ -111,10 +111,10 @@ export const useCookingGrandma = (): {
 				if (recipe.difficulty === 'EASY' && Math.random() > 0.9) {
 					return true;
 				}
-				if (recipe.difficulty === 'MEDIUM' && Math.random() > 0.66) {
+				if (recipe.difficulty === 'MEDIUM' && Math.random() > 0.75) {
 					return true;
 				}
-				if (recipe.difficulty === 'TRICKY' && Math.random() > 0.33) {
+				if (recipe.difficulty === 'TRICKY' && Math.random() > 0.6) {
 					return true;
 				}
 				return false;
