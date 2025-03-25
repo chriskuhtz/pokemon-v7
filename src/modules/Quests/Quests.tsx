@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { MdCatchingPokemon } from 'react-icons/md';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import {
@@ -29,11 +29,12 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 
 	const { all } = useQuests();
 
-	const [migrated, setMigrated] = useState<boolean>(false);
-
 	useEffect(() => {
 		//Migrate new quests
-		if (!migrated) {
+		if (
+			Object.entries(QuestsRecord).length >
+			Object.entries(saveFile.quests).length
+		) {
 			const migratedQuests = Object.fromEntries(
 				Object.entries(QuestsRecord).map(([qn]) => {
 					const q = qn as QuestName;
@@ -44,9 +45,8 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 			patchSaveFileReducer({
 				quests: migratedQuests,
 			});
-			setMigrated(true);
 		}
-	}, [migrated, patchSaveFileReducer, saveFile.quests]);
+	}, [patchSaveFileReducer, saveFile.quests]);
 
 	if (Object.values(all).filter((v) => v.status !== 'INACTIVE').length === 0) {
 		return (
@@ -147,9 +147,6 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 									</button>
 								),
 								status === 'ACTIVE' && <strong>Active</strong>,
-								status !== 'FULFILLED' && status !== 'ACTIVE' && (
-									<strong color="red">{status}</strong>
-								),
 							].filter((x) => !!x)}
 						/>
 					);
