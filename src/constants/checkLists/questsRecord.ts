@@ -325,7 +325,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'sun-stone': 2, 'leaf-stone': 2, 'berry-juice': 5 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return honeyPokemon.every((e) => s.pokemon.some((p) => p.name === e));
+			return honeyPokemon.every((e) => s.pokedex[e].caughtOnRoutes.length > 0);
 		},
 		targetPokemon: honeyPokemon,
 		kind: 'BULLETIN',
@@ -532,8 +532,8 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: ['bellossom', 'vileplume'],
 		conditionFunction: (s) => {
 			return (
-				s.pokemon.some((p) => p.name === 'bellossom') &&
-				s.pokemon.some((p) => p.name === 'vileplume')
+				s.pokedex['bellossom'].caughtOnRoutes.length > 0 &&
+				s.pokedex['vileplume'].caughtOnRoutes.length > 0
 			);
 		},
 		kind: 'QUEST_LINE',
@@ -808,8 +808,8 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return (
-				s.pokemon.some((p) => p.name === 'haunter') &&
-				s.pokemon.some((p) => p.name === 'mightyena')
+				s.pokedex['haunter'].caughtOnRoutes.length > 0 &&
+				s.pokedex['mightyena'].caughtOnRoutes.length > 0
 			);
 		},
 		targetPokemon: ['haunter', 'mightyena'],
@@ -819,7 +819,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'rare-candy': 3 },
 		researchPoints: 50,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) => p.name === 'spiritomb');
+			return s.pokedex['spiritomb'].caughtOnRoutes.length > 0;
 		},
 		targetPokemon: ['spiritomb'],
 		kind: 'QUEST_LINE',
@@ -934,8 +934,8 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 10,
 		conditionFunction: (s) => {
-			return Object.values(fossilTable).every((fossil) =>
-				s.pokemon.some((p) => fossil === p.name)
+			return Object.values(fossilTable).some(
+				(fossil) => s.pokedex[fossil].caughtOnRoutes.length > 0
 			);
 		},
 		requiredUpgrade: 'invite fossil expert',
@@ -948,8 +948,8 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {
-			return Object.values(fossilTable).every((fossil) =>
-				s.pokemon.some((p) => fossil === p.name)
+			return Object.values(fossilTable).every(
+				(fossil) => s.pokedex[fossil].caughtOnRoutes.length > 0
 			);
 		},
 		requiredUpgrade: 'invite fossil expert',
@@ -1052,7 +1052,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: {
 			'poke-ball': 20,
 		},
-		conditionFunction: (s) => new Set(s.pokemon.map((p) => p.name)).size >= 10,
+		conditionFunction: (s) =>
+			Object.values(s.pokedex).filter((p) => p.caughtOnRoutes.length > 0)
+				.length >= 10,
 	},
 	'catch 20 different species': {
 		kind: 'BULLETIN',
@@ -1061,7 +1063,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'great-ball': 20,
 		},
 		availableAfter: 'catch 10 different species',
-		conditionFunction: (s) => new Set(s.pokemon.map((p) => p.name)).size >= 20,
+		conditionFunction: (s) =>
+			Object.values(s.pokedex).filter((p) => p.caughtOnRoutes.length > 0)
+				.length >= 20,
 	},
 	'catch 50 different species': {
 		kind: 'BULLETIN',
@@ -1070,7 +1074,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'master-ball': 1,
 		},
 		availableAfter: 'catch 50 different species',
-		conditionFunction: (s) => new Set(s.pokemon.map((p) => p.name)).size >= 50,
+		conditionFunction: (s) =>
+			Object.values(s.pokedex).filter((p) => p.caughtOnRoutes.length > 0)
+				.length >= 50,
 	},
 	'catch a swarm pokemon': {
 		kind: 'BULLETIN',

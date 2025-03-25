@@ -10,7 +10,8 @@ export const determineCaptureSuccess = (
 	ball: PokeballType,
 	target: BattlePokemon,
 	battleRound: number,
-	location: BattleLocation
+	location: BattleLocation,
+	caughtBefore: boolean
 ): boolean => {
 	//master ball always catches
 	if (ball === 'master-ball') {
@@ -40,7 +41,7 @@ export const determineCaptureSuccess = (
 	if (ball === 'nest-ball') {
 		ballfactor = 0.5 + 0.033 * Math.max(0, 30 - level);
 	}
-	if (ball === 'repeat-ball' && target.caughtBefore) {
+	if (ball === 'repeat-ball' && caughtBefore) {
 		ballfactor = 1.5;
 	}
 	//max after 10 rounds

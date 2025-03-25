@@ -30,7 +30,6 @@ export interface BattlePokemon extends OwnedPokemon {
 		| 'CAUGHT'
 		| 'FAINTED';
 	roundsInBattle: number;
-	caughtBefore: boolean;
 	lastReceivedDamage?: {
 		damageClass: DamageClass['name'];
 		damage: number;

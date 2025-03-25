@@ -38,7 +38,6 @@ export const StarterSelection = (): JSX.Element => {
 			...testPokemon,
 			name: o,
 			id: v4(),
-			caughtBefore: false,
 		})),
 		{
 			assignLearnsetMoves: true,

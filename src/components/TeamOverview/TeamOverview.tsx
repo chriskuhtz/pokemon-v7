@@ -16,10 +16,7 @@ export const TeamOverview = ({ steps }: { steps: number }) => {
 		() => saveFile.pokemon.filter((p) => p.onTeam),
 		[saveFile]
 	);
-	const { res: battleTeam } = useGetBattleTeam(
-		team.map((t) => ({ ...t, caughtBefore: true })),
-		{}
-	);
+	const { res: battleTeam } = useGetBattleTeam(team, {});
 
 	if (!battleTeam) {
 		return <></>;

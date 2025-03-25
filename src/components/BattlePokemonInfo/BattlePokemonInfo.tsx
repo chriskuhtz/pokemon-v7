@@ -9,9 +9,14 @@ import { Chip } from '../../uiComponents/Chip/Chip';
 import { HpBar } from '../HpBar/HpBar';
 import { PrimaryAilmentIcon } from '../PrimaryAilmentIcon/PrimaryAilmentIcon';
 import { XpBar } from '../XpBar/XpBar';
+import { useContext } from 'react';
+import { SaveFileContext } from '../../hooks/useSaveFile';
 
 export const BattlePokemonInfo = ({ pokemon }: { pokemon: BattlePokemon }) => {
 	const { level } = calculateLevelData(pokemon.xp);
+	const {
+		saveFile: { pokedex },
+	} = useContext(SaveFileContext);
 	return (
 		<div
 			style={{
@@ -22,13 +27,14 @@ export const BattlePokemonInfo = ({ pokemon }: { pokemon: BattlePokemon }) => {
 			key={pokemon.id}
 		>
 			<strong style={{ display: 'flex', alignItems: 'center' }}>
-				{pokemon.caughtBefore && pokemon.ownerId !== getPlayerId() && (
-					<img
-						height={battleSpriteSize / 2}
-						width={battleSpriteSize / 2}
-						src={getItemUrl('poke-ball')}
-					/>
-				)}
+				{pokedex[pokemon.name].caughtOnRoutes.length > 0 &&
+					pokemon.ownerId !== getPlayerId() && (
+						<img
+							height={battleSpriteSize / 2}
+							width={battleSpriteSize / 2}
+							src={getItemUrl('poke-ball')}
+						/>
+					)}
 				{pokemon.shiny && <RiSparkling2Line size={battleSpriteSize / 2} />}{' '}
 				{pokemon.data.name} | Lvl {level}{' '}
 			</strong>

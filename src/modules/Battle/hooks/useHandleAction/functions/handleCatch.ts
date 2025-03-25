@@ -6,6 +6,7 @@ import { Message } from '../../../../../hooks/useMessageQueue';
 import { CatchProcessInfo } from '../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
 import { ItemType } from '../../../../../interfaces/Item';
+import { Pokedex } from '../../../../../interfaces/SaveFile';
 
 export const handleCatch = (
 	pokemon: BattlePokemon[],
@@ -15,11 +16,13 @@ export const handleCatch = (
 	addMultipleMessages: (x: Message[]) => void,
 	battleRound: number,
 	battleLocation: BattleLocation,
-	addUsedItem: (x: ItemType) => void
+	addUsedItem: (x: ItemType) => void,
+	pokedex: Pokedex
 ) => {
 	const target = pokemon.find(
 		(p) => p.id === move.targetId && p.status === 'ONFIELD'
 	);
+
 	addUsedItem(move.ball);
 	if (!target) {
 		addMultipleMessages([
@@ -43,24 +46,27 @@ export const handleCatch = (
 
 		return;
 	}
-
+	const caughtBefore = pokedex[target.name].caughtOnRoutes.length > 0;
 	const check1 = determineCaptureSuccess(
 		move.ball,
 		target,
 		battleRound,
-		battleLocation
+		battleLocation,
+		caughtBefore
 	);
 	const check2 = determineCaptureSuccess(
 		move.ball,
 		target,
 		battleRound,
-		battleLocation
+		battleLocation,
+		caughtBefore
 	);
 	const check3 = determineCaptureSuccess(
 		move.ball,
 		target,
 		battleRound,
-		battleLocation
+		battleLocation,
+		caughtBefore
 	);
 
 	const getCatchStepMessage = (step: 1 | 2 | 3): Message => {

@@ -32,7 +32,7 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 	useEffect(() => {
 		//Migrate new quests
 		if (
-			Object.entries(QuestsRecord).length >
+			Object.entries(QuestsRecord).length !==
 			Object.entries(saveFile.quests).length
 		) {
 			const migratedQuests = Object.fromEntries(

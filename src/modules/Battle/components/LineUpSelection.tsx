@@ -8,6 +8,7 @@ import { determineRunawaySuccess } from '../../../functions/determineRunAwaySucc
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { isKO } from '../../../functions/isKo';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
+import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { TrainerInfo } from '../../../interfaces/Challenger';
 import { IconSolarSystem } from '../../../uiComponents/IconSolarSystem/IconSolarSystem';
@@ -31,6 +32,9 @@ export const LineUpSelection = ({
 	startBattle: () => void;
 	trainer?: TrainerInfo;
 }) => {
+	const {
+		saveFile: { pokedex },
+	} = useContext(SaveFileContext);
 	const { addMessage } = useContext(MessageQueueContext);
 	const battleButtonMessage = useMemo(() => {
 		if (selectedTeam.length < fightersPerSide)
@@ -111,7 +115,7 @@ export const LineUpSelection = ({
 							url: getPokemonSprite(opponent.name, { shiny: opponent.shiny }),
 						}}
 						secondPlanetUrl={
-							opponent.caughtBefore && !trainer
+							pokedex[opponent.name].caughtOnRoutes.length > 0 && !trainer
 								? getItemUrl('poke-ball')
 								: undefined
 						}

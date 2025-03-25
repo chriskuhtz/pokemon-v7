@@ -17,7 +17,6 @@ export const BattleLoader = ({
 	team,
 	challenger,
 	inventory,
-	ownedPokemonNames,
 	latestMessage,
 	addMessage,
 	addMultipleMessages,
@@ -25,29 +24,19 @@ export const BattleLoader = ({
 	challenger: Challenger;
 	team: OwnedPokemon[];
 	inventory: Inventory;
-	ownedPokemonNames: string[];
 	latestMessage: Message | undefined;
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
 }): JSX.Element => {
-	const { res: battleOpponents } = useGetBattleTeam(
-		challenger.team.map((o) => ({
-			...o,
-			caughtBefore: ownedPokemonNames.includes(o.name),
-		})),
-		{
-			assignLearnsetMoves: true,
-			assignGender: true,
-			assignNaturalAbility: true,
-			generateIvs: true,
-			generateEvs: true,
-			assignHeldItem: true,
-		}
-	);
-	const { res: battleTeam } = useGetBattleTeam(
-		team.map((t) => ({ ...t, caughtBefore: true })),
-		{}
-	);
+	const { res: battleOpponents } = useGetBattleTeam(challenger.team, {
+		assignLearnsetMoves: true,
+		assignGender: true,
+		assignNaturalAbility: true,
+		generateIvs: true,
+		generateEvs: true,
+		assignHeldItem: true,
+	});
+	const { res: battleTeam } = useGetBattleTeam(team, {});
 
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { timeOfDayShadersMap } = mapsRecord[saveFile.location.mapId];

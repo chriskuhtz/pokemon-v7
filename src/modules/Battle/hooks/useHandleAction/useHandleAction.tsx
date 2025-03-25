@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useContext } from 'react';
 import { MoveName } from '../../../../constants/checkLists/movesCheckList';
 import { forceSwitchMoves } from '../../../../constants/forceSwitchMoves';
 import { applyItemToPokemon } from '../../../../functions/applyItemToPokemon';
@@ -8,6 +8,7 @@ import { determineRunawaySuccess } from '../../../../functions/determineRunAwayS
 import { getChargeUpMessage } from '../../../../functions/getChargeUpMessage';
 import { getPlayerId } from '../../../../functions/getPlayerId';
 import { Message } from '../../../../hooks/useMessageQueue';
+import { SaveFileContext } from '../../../../hooks/useSaveFile';
 import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
 import { ItemType } from '../../../../interfaces/Item';
 import { WeatherType } from '../../../../interfaces/Weather';
@@ -32,6 +33,10 @@ export const useHandleAction = (
 	addBattleFieldEffect: (x: BattleFieldEffect) => void,
 	battleFieldEffects: BattleFieldEffect[]
 ) => {
+	const {
+		saveFile: { pokedex },
+	} = useContext(SaveFileContext);
+
 	return useCallback(
 		(attacker: BattlePokemon) => {
 			//CHECKS
@@ -113,7 +118,8 @@ export const useHandleAction = (
 					addMultipleMessages,
 					battleRound,
 					battleLocation,
-					addUsedItem
+					addUsedItem,
+					pokedex
 				);
 			}
 			if (move.type === 'InBattleItem') {
@@ -234,6 +240,7 @@ export const useHandleAction = (
 			dampy,
 			handleForceSwitch,
 			leave,
+			pokedex,
 			pokemon,
 			scatterCoins,
 			setPokemon,

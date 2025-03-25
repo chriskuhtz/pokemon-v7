@@ -116,7 +116,6 @@ export const App = (): JSX.Element => {
 				challenger={currentChallenger}
 				team={team}
 				inventory={inventory}
-				ownedPokemonNames={saveFile.pokemon.map((p) => p.name)}
 				latestMessage={latestMessage}
 				addMessage={addMessage}
 				addMultipleMessages={addMultipleMessages}

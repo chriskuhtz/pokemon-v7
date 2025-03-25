@@ -21,7 +21,7 @@ import {
 } from '../interfaces/StatObject';
 
 export const useGetBattleTeam = (
-	initTeam: (OwnedPokemon & { caughtBefore: boolean })[],
+	initTeam: OwnedPokemon[],
 	config: {
 		assignLearnsetMoves?: boolean;
 		assignNaturalAbility?: boolean;

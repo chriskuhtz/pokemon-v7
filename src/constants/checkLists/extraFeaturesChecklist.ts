@@ -145,6 +145,7 @@ export const extraFeatureCheckList: {
 	{ name: 'trainers can give rewards', handled: true },
 	{ name: 'shaders per map (no daytimes in caves, buildings)', handled: true },
 	{ name: 'consider rarity of held items', handled: true },
+	{ name: 'swarms increase shiny chance', handled: true },
 	{ name: 'algorithmic fences' },
 	{ name: 'fence w/o background' },
 	{ name: 'poison step damage' },
@@ -164,7 +165,6 @@ export const extraFeatureCheckList: {
 	{ name: 'refactor quest limit' },
 	{ name: 'Changing moves messes with pp' },
 	{ name: 'icons for quests' },
-
 	{ name: 'refactor primaryAilment healing table' },
 	{ name: 'stop strange spinning of npcs when click navigating' },
 	{ name: 'accurate house sizes' },
