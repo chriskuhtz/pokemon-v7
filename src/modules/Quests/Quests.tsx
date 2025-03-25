@@ -61,7 +61,7 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 			<Stack mode="column">
 				{all.map(({ name, status }) => {
 					const quest = QuestsRecord[name];
-					if (status === 'INACTIVE' || status === 'COLLECTED' || !quest) {
+					if (status === 'INACTIVE' || status === 'COLLECTED') {
 						return <React.Fragment key={name}></React.Fragment>;
 					}
 
@@ -147,6 +147,9 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 									</button>
 								),
 								status === 'ACTIVE' && <strong>Active</strong>,
+								status !== 'FULFILLED' && status !== 'ACTIVE' && (
+									<strong color="red">{status}</strong>
+								),
 							].filter((x) => !!x)}
 						/>
 					);
