@@ -21,7 +21,210 @@ import { routeN1E1 } from '../maps/routeN1E1';
 import { pokemonNames } from '../pokemonNames';
 import { CampUpgrade, campUpgradePrices } from './campUpgrades';
 
+const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
+	//routeN1
+	'catch a MORNING-time exclusive pokemon from routeN1': {
+		'nest-ball': 5,
+		'sitrus-berry': 2,
+	},
+	'catch a DAY-time exclusive pokemon from routeN1': {
+		'nest-ball': 5,
+		'cheri-berry': 2,
+	},
+	'catch a EVENING-time exclusive pokemon from routeN1': {
+		'nest-ball': 5,
+		'chesto-berry': 2,
+	},
+	'catch a NIGHT-time exclusive pokemon from routeN1': {
+		'nest-ball': 5,
+		'pecha-berry': 2,
+	},
+	'catch all MORNING-time pokemon from routeN1': {
+		'nest-ball': 10,
+		'rawst-berry': 2,
+	},
+	'catch all DAY-time pokemon from routeN1': {
+		'nest-ball': 10,
+		'aspear-berry': 2,
+	},
+	'catch all EVENING-time pokemon from routeN1': {
+		'nest-ball': 10,
+		'leppa-berry': 2,
+	},
+	'catch all NIGHT-time pokemon from routeN1': {
+		'nest-ball': 10,
+		'oran-berry': 2,
+	},
+	//routeN1E1
+	'catch a MORNING-time exclusive pokemon from routeN1E1': {
+		'net-ball': 5,
+		'persim-berry': 2,
+	},
+	'catch a DAY-time exclusive pokemon from routeN1E1': {
+		'net-ball': 5,
+		'lum-berry': 2,
+	},
+	'catch a EVENING-time exclusive pokemon from routeN1E1': {
+		'net-ball': 5,
+		'figy-berry': 2,
+	},
+	'catch a NIGHT-time exclusive pokemon from routeN1E1': {
+		'net-ball': 5,
+		'mago-berry': 2,
+	},
+	'catch all MORNING-time pokemon from routeN1E1': {
+		'net-ball': 10,
+		'iapapa-berry': 2,
+	},
+	'catch all DAY-time pokemon from routeN1E1': {
+		'net-ball': 10,
+		'bluk-berry': 2,
+	},
+	'catch all EVENING-time pokemon from routeN1E1': {
+		'net-ball': 10,
+		'nanab-berry': 2,
+	},
+	'catch all NIGHT-time pokemon from routeN1E1': {
+		'net-ball': 10,
+		'odd-keystone': 1,
+	},
+	//routeE1
+	'catch a MORNING-time exclusive pokemon from routeE1': {
+		'quick-ball': 5,
+		'aguav-berry': 2,
+	},
+	'catch a DAY-time exclusive pokemon from routeE1': {
+		'quick-ball': 5,
+		'wiki-berry': 2,
+	},
+	'catch a EVENING-time exclusive pokemon from routeE1': {
+		'quick-ball': 5,
+		'razz-berry': 2,
+	},
+	'catch a NIGHT-time exclusive pokemon from routeE1': {
+		'quick-ball': 5,
+		'wepear-berry': 2,
+	},
+	'catch all MORNING-time pokemon from routeE1': {
+		'quick-ball': 10,
+		'pinap-berry': 2,
+	},
+	'catch all DAY-time pokemon from routeE1': {
+		'quick-ball': 10,
+		'pomeg-berry': 2,
+	},
+	'catch all EVENING-time pokemon from routeE1': {
+		'quick-ball': 10,
+		'kelpsy-berry': 2,
+	},
+	'catch all NIGHT-time pokemon from routeE1': {
+		'quick-ball': 10,
+		'qualot-berry': 1,
+	},
+};
+
+const catchQuestsForRoute = (
+	route: OverworldMap,
+	requiredUpgrade?: CampUpgrade
+): Partial<Record<string, Quest>> => {
+	return {
+		...Object.fromEntries(
+			timesOfDay.map((time) => {
+				const id = `catch a ${time}-time exclusive pokemon from ${route.id}`;
+				return [
+					id,
+					{
+						rewardItems: rewardsMap[id] ?? { 'poke-ball': 10 },
+						researchPoints: 5,
+						conditionFunction: (s) => {
+							return route.possibleEncounters[time].some((e) =>
+								s.pokedex[e.name].caughtOnRoutes.includes(route.id)
+							);
+						},
+						targetPokemon: [
+							...new Set(route.possibleEncounters[time].map((p) => p.name)),
+						],
+						targetRoute: route.id,
+						kind: 'BULLETIN',
+						requiredUpgrade: requiredUpgrade,
+					},
+				] as [QuestName, Quest];
+			})
+		),
+		...Object.fromEntries(
+			timesOfDay.map((time) => {
+				const id: QuestName = `catch all ${time}-time pokemon from ${route.id}`;
+				return [
+					id,
+					{
+						rewardItems: rewardsMap[id] ?? { 'poke-ball': 10 },
+						availableAfter: `catch a ${time}-time exclusive pokemon from ${route.id}`,
+						researchPoints: 20,
+						conditionFunction: (s) => {
+							return [
+								...route.possibleEncounters.BASE,
+								...route.possibleEncounters[time],
+							].every((e) =>
+								s.pokedex[e.name].caughtOnRoutes.includes(route.id)
+							);
+						},
+						targetPokemon: [
+							...new Set(
+								[
+									...route.possibleEncounters.BASE,
+									...route.possibleEncounters[time],
+								].map((p) => p.name)
+							),
+						],
+						targetRoute: route.id,
+						kind: 'BULLETIN',
+						requiredUpgrade: requiredUpgrade,
+					},
+				] as [QuestName, Quest];
+			})
+		),
+		[`catch a ultra-rare pokemon from ${route.id}`]: {
+			rewardItems: { 'rare-candy': 1 },
+			researchPoints: 20,
+			conditionFunction: (s) => {
+				return [
+					...routeN1.possibleEncounters.NIGHT,
+					...routeN1.possibleEncounters.MORNING,
+					...routeN1.possibleEncounters.DAY,
+					...routeN1.possibleEncounters.EVENING,
+				].some(
+					(e) =>
+						e.rarity === 'ultra-rare' &&
+						s.pokedex[e.name].caughtOnRoutes.includes('routeN1')
+				);
+			},
+			targetPokemon: [
+				...new Set(
+					[
+						...routeN1.possibleEncounters.NIGHT,
+						...routeN1.possibleEncounters.MORNING,
+						...routeN1.possibleEncounters.DAY,
+						...routeN1.possibleEncounters.EVENING,
+					]
+						.filter((p) => p.rarity === 'ultra-rare')
+						.map((p) => p.name)
+				),
+			],
+			targetRoute: 'routeN1',
+			kind: 'BULLETIN',
+			requiredUpgrade: requiredUpgrade,
+		},
+	};
+};
+
+const catchQuests = {
+	...catchQuestsForRoute(routeN1),
+	...catchQuestsForRoute(routeN1E1, 'machete certification'),
+	...catchQuestsForRoute(routeE1, 'sledge hammer certification'),
+};
+
 export const questNames = [
+	...Object.keys(catchQuests),
 	'catch a pikachu',
 	'catch a pokemon',
 	'catch a spiritomb',
@@ -99,111 +302,8 @@ export const questNames = [
  */
 export type QuestName = (typeof questNames)[number];
 
-const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
-	'catch a NIGHT-time exclusive pokemon from routeN1': { 'nest-ball': 5 },
-	'catch all NIGHT-time exclusive pokemon from routeN1E1': {
-		'odd-keystone': 1,
-	},
-};
-
-const catchQuestsForRoute = (
-	route: OverworldMap,
-	requiredUpgrade?: CampUpgrade
-): Partial<Record<QuestName, Quest>> => {
-	return {
-		...Object.fromEntries(
-			timesOfDay.map((time) => {
-				const id: QuestName = `catch a ${time}-time exclusive pokemon from ${route.id}`;
-				return [
-					id,
-					{
-						rewardItems: rewardsMap[id] ?? { 'poke-ball': 10 },
-						researchPoints: 5,
-						conditionFunction: (s) => {
-							return route.possibleEncounters[time].some((e) =>
-								s.pokedex[e.name].caughtOnRoutes.includes(route.id)
-							);
-						},
-						targetPokemon: [
-							...new Set(route.possibleEncounters[time].map((p) => p.name)),
-						],
-						targetRoute: route.id,
-						kind: 'BULLETIN',
-						requiredUpgrade,
-					},
-				] as [QuestName, Quest];
-			})
-		),
-		...Object.fromEntries(
-			timesOfDay.map((time) => {
-				const id: QuestName = `catch all ${time}-time exclusive pokemon from ${route.id}`;
-				return [
-					id,
-					{
-						rewardItems: rewardsMap[id] ?? { 'poke-ball': 10 },
-						availableAfter: `catch a ${time}-time exclusive pokemon from ${route.id}`,
-						researchPoints: 20,
-						conditionFunction: (s) => {
-							return [
-								...route.possibleEncounters.BASE,
-								...route.possibleEncounters[time],
-							].every((e) =>
-								s.pokedex[e.name].caughtOnRoutes.includes(route.id)
-							);
-						},
-						targetPokemon: [
-							...new Set(
-								[
-									...route.possibleEncounters.BASE,
-									...route.possibleEncounters[time],
-								].map((p) => p.name)
-							),
-						],
-						targetRoute: route.id,
-						kind: 'BULLETIN',
-						requiredUpgrade,
-					},
-				] as [QuestName, Quest];
-			})
-		),
-		[`catch a ultra-rare pokemon from ${route.id}`]: {
-			rewardItems: { 'rare-candy': 1 },
-			researchPoints: 20,
-			conditionFunction: (s) => {
-				return [
-					...routeN1.possibleEncounters.NIGHT,
-					...routeN1.possibleEncounters.MORNING,
-					...routeN1.possibleEncounters.DAY,
-					...routeN1.possibleEncounters.EVENING,
-				].some(
-					(e) =>
-						e.rarity === 'ultra-rare' &&
-						s.pokedex[e.name].caughtOnRoutes.includes('routeN1')
-				);
-			},
-			targetPokemon: [
-				...new Set(
-					[
-						...routeN1.possibleEncounters.NIGHT,
-						...routeN1.possibleEncounters.MORNING,
-						...routeN1.possibleEncounters.DAY,
-						...routeN1.possibleEncounters.EVENING,
-					]
-						.filter((p) => p.rarity === 'ultra-rare')
-						.map((p) => p.name)
-				),
-			],
-			targetRoute: 'routeN1',
-			kind: 'BULLETIN',
-			requiredUpgrade,
-		},
-	};
-};
-
 export const QuestsRecord: Record<QuestName, Quest> = {
-	...catchQuestsForRoute(routeN1),
-	...catchQuestsForRoute(routeN1E1, 'machete certification'),
-	...catchQuestsForRoute(routeE1, 'sledge hammer certification'),
+	...catchQuests,
 	'catch a pokemon': {
 		rewardItems: { 'poke-ball': 20 },
 		researchPoints: 10,
