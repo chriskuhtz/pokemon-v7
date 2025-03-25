@@ -82,13 +82,19 @@ export interface UseSaveFile {
 	applyEncounterRateModifierItem: (item: EncounterChanceItem) => void;
 	evolvePokemonReducer: (x: EvolutionReducerPayload) => void;
 }
-
+const migrateSavefile = (input: SaveFile) => {
+	if (!input.bag) {
+		//@ts-expect-error this is a migration
+		return { ...input, bag: input.inventory, inventory: undefined };
+	}
+	return input;
+};
 const useSaveFile = (
 	init: SaveFile,
 	addMessage: (x: Message) => void
 ): UseSaveFile => {
 	const local = window.localStorage.getItem(localStorageId);
-	const loaded = local ? (JSON.parse(local) as SaveFile) : init;
+	const loaded = local ? migrateSavefile(JSON.parse(local) as SaveFile) : init;
 
 	const [saveFile, s] = useState<SaveFile>(loaded);
 
@@ -112,7 +118,7 @@ const useSaveFile = (
 			//migrate pokemon
 			//pokemon: update.pokemon.map(migratePokemon),
 			//migrate inventory
-			inventory: joinInventories(EmptyInventory, update.inventory),
+			bag: joinInventories(EmptyInventory, update.bag),
 			handledOccupants: update.handledOccupants.filter(
 				(h) => h.resetAt < 0 || h.resetAt > newTime
 			),
@@ -123,28 +129,20 @@ const useSaveFile = (
 		});
 	}, []);
 	const discardItemReducer = (item: ItemType, number: number) => {
-		const updatedInventory = updateItemFunction(
-			item,
-			-number,
-			saveFile.inventory
-		);
-		setSaveFile({ ...saveFile, inventory: updatedInventory });
+		const updatedInventory = updateItemFunction(item, -number, saveFile.bag);
+		setSaveFile({ ...saveFile, bag: updatedInventory });
 	};
 	const sellItemReducer = (
 		item: ItemType,
 		number: number,
 		pricePerItem: number
 	) => {
-		const updatedInventory = updateItemFunction(
-			item,
-			-number,
-			saveFile.inventory
-		);
+		const updatedInventory = updateItemFunction(item, -number, saveFile.bag);
 		const updatedMoney = saveFile.money + number * pricePerItem;
 
 		setSaveFile({
 			...saveFile,
-			inventory: updatedInventory,
+			bag: updatedInventory,
 			money: updatedMoney,
 		});
 	};
@@ -153,26 +151,18 @@ const useSaveFile = (
 		number: number,
 		pricePerItem: number
 	) => {
-		const updatedInventory = updateItemFunction(
-			item,
-			number,
-			saveFile.inventory
-		);
+		const updatedInventory = updateItemFunction(item, number, saveFile.bag);
 		const updatedMoney = saveFile.money - number * pricePerItem;
 
 		setSaveFile({
 			...saveFile,
-			inventory: updatedInventory,
+			bag: updatedInventory,
 			money: updatedMoney,
 		});
 	};
 	const addItemReducer = (item: ItemType, number: number) => {
-		const updatedInventory = updateItemFunction(
-			item,
-			number,
-			saveFile.inventory
-		);
-		setSaveFile({ ...saveFile, inventory: updatedInventory });
+		const updatedInventory = updateItemFunction(item, number, saveFile.bag);
+		setSaveFile({ ...saveFile, bag: updatedInventory });
 	};
 	const receiveNewPokemonReducer = (newMon: Omit<OwnedPokemon, 'onTeam'>) => {
 		const updatedPokemon = receiveNewPokemonFunction(newMon, saveFile.pokemon);
@@ -267,7 +257,7 @@ const useSaveFile = (
 	const useSacredAshReducer = () => {
 		setSaveFile({
 			...saveFile,
-			inventory: joinInventories(saveFile.inventory, { 'sacred-ash': 1 }, true),
+			bag: joinInventories(saveFile.bag, { 'sacred-ash': 1 }, true),
 			pokemon: saveFile.pokemon.map((p) => {
 				if (!p.onTeam) {
 					return p;
@@ -281,7 +271,7 @@ const useSaveFile = (
 
 	const handleOccupantReducer = (occ: Occupant) => {
 		const timer = occ.type === 'BUSH' ? new Date().getTime() + ONE_DAY : -1;
-		let newInventory = { ...saveFile.inventory };
+		let newInventory = { ...saveFile.bag };
 		if (occ.type === 'NPC' && occ.gifts) {
 			newInventory = joinInventories(newInventory, occ.gifts);
 		}
@@ -298,7 +288,7 @@ const useSaveFile = (
 		}
 		setSaveFile({
 			...saveFile,
-			inventory: newInventory,
+			bag: newInventory,
 			quests: updatedQuests,
 			handledOccupants: [
 				...saveFile.handledOccupants,
@@ -312,11 +302,7 @@ const useSaveFile = (
 		move?: MoveName
 	) => {
 		const updatedPokemon = applyItemToPokemon(pokemon, item, addMessage, move);
-		const updatedInventory = joinInventories(
-			saveFile.inventory,
-			{ [item]: 1 },
-			true
-		);
+		const updatedInventory = joinInventories(saveFile.bag, { [item]: 1 }, true);
 		setSaveFile({
 			...saveFile,
 			pokemon: saveFile.pokemon.map((p) => {
@@ -325,7 +311,7 @@ const useSaveFile = (
 				}
 				return p;
 			}),
-			inventory: updatedInventory,
+			bag: updatedInventory,
 		});
 	};
 
@@ -333,7 +319,7 @@ const useSaveFile = (
 		const quest = QuestsRecord[q];
 
 		const reward = getRewardItemsForQuest(q);
-		const updatedInventory = joinInventories(saveFile.inventory, reward);
+		const updatedInventory = joinInventories(saveFile.bag, reward);
 
 		const pokemon = quest.rewardPokemon
 			? [
@@ -349,7 +335,7 @@ const useSaveFile = (
 
 		setSaveFile({
 			...saveFile,
-			inventory: updatedInventory,
+			bag: updatedInventory,
 			quests: { ...saveFile.quests, [q]: 'COLLECTED' },
 			researchPoints: saveFile.researchPoints + quest.researchPoints,
 			pokemon,
@@ -360,7 +346,7 @@ const useSaveFile = (
 			(p) => p.id === pokemonId
 		)?.heldItemName;
 
-		let updatedInventory = { ...saveFile.inventory };
+		let updatedInventory = { ...saveFile.bag };
 
 		if (heldItem) {
 			updatedInventory = joinInventories(updatedInventory, { [heldItem]: 1 });
@@ -376,7 +362,7 @@ const useSaveFile = (
 				}
 				return p;
 			}),
-			inventory: updatedInventory,
+			bag: updatedInventory,
 		});
 	};
 	const reset = useCallback(() => {
@@ -409,7 +395,7 @@ const useSaveFile = (
 		setSaveFile({
 			...saveFile,
 			encounterRateModifier: modifier,
-			inventory: joinInventories(saveFile.inventory, { [item]: 1 }, true),
+			bag: joinInventories(saveFile.bag, { [item]: 1 }, true),
 		});
 	};
 	const evolvePokemonReducer = ({
@@ -423,13 +409,13 @@ const useSaveFile = (
 	}: EvolutionReducerPayload) => {
 		const updatedInventory = consumedItem
 			? joinInventories(
-					saveFile.inventory,
+					saveFile.bag,
 					{
 						[consumedItem]: 1,
 					},
 					true
 			  )
-			: saveFile.inventory;
+			: saveFile.bag;
 
 		addMessage({
 			message: `Your ${name} evolved into ${newName}`,
@@ -486,7 +472,7 @@ const useSaveFile = (
 				hasEvolvedAPokemonThatNeedsDaytime,
 				hasEvolvedAPokemonThatNeedsNighttime,
 			},
-			inventory: updatedInventory,
+			bag: updatedInventory,
 		});
 	};
 

@@ -1,4 +1,4 @@
-import { useContext, useMemo, useCallback } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
 import { getRandomEntry } from '../../functions/filterTargets';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
@@ -7,9 +7,9 @@ import { SaveFileContext } from '../../hooks/useSaveFile';
 import { joinInventories } from '../../interfaces/Inventory';
 import {
 	ItemType,
+	MulchType,
 	isApricorn,
 	isBerry,
-	MulchType,
 	mulches,
 } from '../../interfaces/Item';
 import { Occupant } from '../../interfaces/OverworldMap';
@@ -23,10 +23,10 @@ export const useAmoongussResearcher = () => {
 	const { addMessage } = useContext(MessageQueueContext);
 
 	const options: [ItemType, number][] = useMemo(() => {
-		return Object.entries(saveFile.inventory).filter(
+		return Object.entries(saveFile.bag).filter(
 			([item, amount]) => (isApricorn(item) || isBerry(item)) && amount > 0
 		) as [ItemType, number][];
-	}, [saveFile.inventory]);
+	}, [saveFile.bag]);
 
 	const trade = useCallback(
 		(item: ItemType, mulch: MulchType) => {
@@ -36,13 +36,13 @@ export const useAmoongussResearcher = () => {
 
 			addMessage({ message: `Traded 1 ${item} for 1 ${mulch}` });
 			patchSaveFileReducer({
-				inventory: joinInventories(saveFile.inventory, {
+				bag: joinInventories(saveFile.bag, {
 					[mulch]: 1,
 					[item]: -1,
 				}),
 			});
 		},
-		[addMessage, patchSaveFileReducer, saveFile.inventory]
+		[addMessage, patchSaveFileReducer, saveFile.bag]
 	);
 
 	return { options, trade };

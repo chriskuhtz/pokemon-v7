@@ -8,7 +8,7 @@ export const useEscapeRope = (): {
 	const { saveFile } = useContext(SaveFileContext);
 
 	const disabled = useMemo(() => {
-		if (saveFile.inventory['escape-rope'] <= 0) {
+		if (saveFile.bag['escape-rope'] <= 0) {
 			return true;
 		}
 		if (!saveFile.lastNurse) {

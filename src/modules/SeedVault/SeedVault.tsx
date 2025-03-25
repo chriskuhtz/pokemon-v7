@@ -16,7 +16,7 @@ export const SeedVault = () => {
 	const { addMessage } = useContext(MessageQueueContext);
 
 	const possibleDonations: ItemType[] = useMemo(() => {
-		return Object.entries(saveFile.inventory)
+		return Object.entries(saveFile.bag)
 			.filter(([item, amount]) => {
 				return (
 					amount > 0 &&
@@ -35,7 +35,7 @@ export const SeedVault = () => {
 				needsNoConfirmation: true,
 			});
 			patchSaveFileReducer({
-				inventory: joinInventories(saveFile.inventory, { [item]: -1 }),
+				bag: joinInventories(saveFile.bag, { [item]: -1 }),
 				researchPoints: saveFile.researchPoints + 1,
 				seedVault: [...(saveFile.seedVault ?? []), item],
 			});
@@ -47,7 +47,7 @@ export const SeedVault = () => {
 			return [];
 		}
 
-		return saveFile.seedVault.filter((s) => saveFile.inventory[s] === 0);
+		return saveFile.seedVault.filter((s) => saveFile.bag[s] === 0);
 	}, [saveFile]);
 
 	const collect = useCallback(
@@ -57,16 +57,11 @@ export const SeedVault = () => {
 				needsNoConfirmation: true,
 			});
 			patchSaveFileReducer({
-				inventory: joinInventories(saveFile.inventory, { [item]: 1 }),
+				bag: joinInventories(saveFile.bag, { [item]: 1 }),
 				researchPoints: saveFile.researchPoints - 1,
 			});
 		},
-		[
-			addMessage,
-			patchSaveFileReducer,
-			saveFile.inventory,
-			saveFile.researchPoints,
-		]
+		[addMessage, patchSaveFileReducer, saveFile.bag, saveFile.researchPoints]
 	);
 	const navigate = useNavigate();
 	return (

@@ -17,7 +17,7 @@ export const useIsReadyToEvolve = (
 		evos.length > 0 &&
 		evos?.some(
 			(evo) =>
-				determineEvoChecks(pokemon, saveFile.inventory, evo).checks.length === 0
+				determineEvoChecks(pokemon, saveFile.bag, evo).checks.length === 0
 		)
 	);
 };

@@ -47,7 +47,7 @@ export const CookingGradma = (): JSX.Element => {
 							<img
 								src={getItemUrl(ing)}
 								style={
-									saveFile.inventory[ing] <= 0
+									saveFile.bag[ing] <= 0
 										? { filter: 'grayscale(1)' }
 										: undefined
 								}

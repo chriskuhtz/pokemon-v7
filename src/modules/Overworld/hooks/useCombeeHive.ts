@@ -22,7 +22,7 @@ export const useCombeeHive = () => {
 			});
 
 			patchSaveFileReducer({
-				inventory: joinInventories(saveFile.inventory, { honey: honeyAmounts }),
+				bag: joinInventories(saveFile.bag, { honey: honeyAmounts }),
 				honeyReadyAt: now + Math.random() * ONE_HOUR,
 			});
 		} else {
@@ -31,10 +31,5 @@ export const useCombeeHive = () => {
 				needsNoConfirmation: true,
 			});
 		}
-	}, [
-		addMessage,
-		patchSaveFileReducer,
-		saveFile.honeyReadyAt,
-		saveFile.inventory,
-	]);
+	}, [addMessage, patchSaveFileReducer, saveFile.honeyReadyAt, saveFile.bag]);
 };

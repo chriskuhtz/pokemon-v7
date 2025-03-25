@@ -38,7 +38,7 @@ export const useHoneyTree = () => {
 	const { addMultipleMessages, addMessage } = useContext(MessageQueueContext);
 
 	return useCallback(() => {
-		if (saveFile.inventory.honey < 1) {
+		if (saveFile.bag.honey < 1) {
 			addMessage({ message: 'You can see some leftover honey on this tree' });
 			return;
 		}
@@ -57,11 +57,7 @@ export const useHoneyTree = () => {
 						//Start encounter
 						putSaveFileReducer({
 							...saveFile,
-							inventory: joinInventories(
-								saveFile.inventory,
-								{ honey: 1 },
-								true
-							),
+							bag: joinInventories(saveFile.bag, { honey: 1 }, true),
 							meta: {
 								activeTab: 'BATTLE',
 								currentChallenger: {
@@ -97,11 +93,7 @@ export const useHoneyTree = () => {
 					onRemoval: () => {
 						putSaveFileReducer({
 							...saveFile,
-							inventory: joinInventories(
-								saveFile.inventory,
-								{ honey: 1 },
-								true
-							),
+							bag: joinInventories(saveFile.bag, { honey: 1 }, true),
 						});
 					},
 				},

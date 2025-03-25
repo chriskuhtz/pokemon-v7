@@ -91,16 +91,16 @@ export const useCookingGrandma = (): {
 	const enabledRecipes = useMemo(
 		() =>
 			BASE_RECIPES.filter((b) =>
-				b.ingredients.every((ing) => saveFile.inventory[ing] > 0)
+				b.ingredients.every((ing) => saveFile.bag[ing] > 0)
 			),
-		[saveFile.inventory]
+		[saveFile.bag]
 	);
 	const disabledRecipes = useMemo(
 		() =>
 			BASE_RECIPES.filter((b) =>
-				b.ingredients.some((ing) => saveFile.inventory[ing] <= 0)
+				b.ingredients.some((ing) => saveFile.bag[ing] <= 0)
 			),
-		[saveFile.inventory]
+		[saveFile.bag]
 	);
 	const cook = useCallback(
 		(recipe: Recipe) => {
@@ -122,7 +122,7 @@ export const useCookingGrandma = (): {
 			if (failed()) {
 				addMessage({ message: 'Oh no, these ingredients got burned' });
 				patchSaveFileReducer({
-					inventory: joinInventories(saveFile.inventory, usedIngredients),
+					bag: joinInventories(saveFile.bag, usedIngredients),
 				});
 			} else {
 				addMultipleMessages([
@@ -130,7 +130,7 @@ export const useCookingGrandma = (): {
 					{ message: `received 1 ${recipe.result}` },
 				]);
 				patchSaveFileReducer({
-					inventory: joinInventories(saveFile.inventory, {
+					bag: joinInventories(saveFile.bag, {
 						...usedIngredients,
 						[recipe.result]: 1,
 					}),
@@ -156,7 +156,7 @@ export const useCookingGrandma = (): {
 			addMessage,
 			addMultipleMessages,
 			patchSaveFileReducer,
-			saveFile.inventory,
+			saveFile.bag,
 			saveFile.mileStones,
 		]
 	);

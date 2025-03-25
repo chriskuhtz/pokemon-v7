@@ -14,7 +14,7 @@ export const useHallowedTower = () => {
 	const { addMultipleMessages } = useContext(MessageQueueContext);
 
 	return useCallback(() => {
-		if (saveFile.inventory['odd-keystone'] < 1) {
+		if (saveFile.bag['odd-keystone'] < 1) {
 			addMultipleMessages([
 				{ message: 'The Keystone seems to be missing from this broken tower' },
 				{ message: 'How Odd...' },
@@ -42,11 +42,7 @@ export const useHallowedTower = () => {
 					//Start encounter
 					putSaveFileReducer({
 						...saveFile,
-						inventory: joinInventories(
-							saveFile.inventory,
-							{ 'odd-keystone': 1 },
-							true
-						),
+						bag: joinInventories(saveFile.bag, { 'odd-keystone': 1 }, true),
 						meta: {
 							activeTab: 'BATTLE',
 							currentChallenger: {

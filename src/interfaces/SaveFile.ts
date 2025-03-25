@@ -75,7 +75,7 @@ export type Pokedex = Record<
 export interface SaveFile {
 	badges: BadgeName[];
 	playerId: string;
-	inventory: Inventory;
+	bag: Inventory;
 	pokemon: OwnedPokemon[];
 	money: number;
 	researchPoints: number;

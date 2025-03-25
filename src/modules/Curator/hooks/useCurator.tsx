@@ -17,13 +17,13 @@ export const useCurator = (): {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
 	const possibleTradeIns = useMemo(() => {
-		return Object.entries(saveFile.inventory)
+		return Object.entries(saveFile.bag)
 			.filter(([item, amount]) => {
 				return amount > 0 && (isValuable(item) || isFossil(item));
 			})
 			.map(([item]) => item)
 			.filter(isItem);
-	}, [saveFile.inventory]);
+	}, [saveFile.bag]);
 
 	const trade = useCallback(
 		(tradeIn: ItemType) => {
@@ -36,7 +36,7 @@ export const useCurator = (): {
 				},
 			]);
 			patchSaveFileReducer({
-				inventory: joinInventories(saveFile.inventory, {
+				bag: joinInventories(saveFile.bag, {
 					[tradeIn]: -1,
 				}),
 				researchPoints: saveFile.researchPoints + 1,
@@ -45,7 +45,7 @@ export const useCurator = (): {
 		[
 			addMultipleMessages,
 			patchSaveFileReducer,
-			saveFile.inventory,
+			saveFile.bag,
 			saveFile.researchPoints,
 		]
 	);

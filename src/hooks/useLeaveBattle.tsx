@@ -110,7 +110,7 @@ export const useLeaveBattle = () => {
 			);
 
 			patchSaveFileReducer({
-				inventory: joinInventories(updatedInventory, rewardItems ?? {}),
+				bag: joinInventories(updatedInventory, rewardItems ?? {}),
 				money: saveFile.money + scatteredCoins,
 				pokemon: updatedPokemon,
 				meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },

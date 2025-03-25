@@ -13,20 +13,20 @@ export const useVileplumeScentResearcher = () => {
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
 	const { addMessage } = useContext(MessageQueueContext);
 
-	const enabled = saveFile.inventory['pecha-berry'] > 0;
+	const enabled = saveFile.bag['pecha-berry'] > 0;
 	const trade = useCallback(() => {
-		if (saveFile.inventory['pecha-berry'] <= 0) {
+		if (saveFile.bag['pecha-berry'] <= 0) {
 			return;
 		}
 
 		addMessage({ message: 'Traded 1 Pecha Berry for 1 Max Repel' });
 		patchSaveFileReducer({
-			inventory: joinInventories(saveFile.inventory, {
+			bag: joinInventories(saveFile.bag, {
 				'max-repel': 1,
 				'pecha-berry': -1,
 			}),
 		});
-	}, [addMessage, patchSaveFileReducer, saveFile.inventory]);
+	}, [addMessage, patchSaveFileReducer, saveFile.bag]);
 
 	return { enabled, trade };
 };

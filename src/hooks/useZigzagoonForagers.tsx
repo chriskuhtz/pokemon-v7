@@ -13,7 +13,7 @@ export const useZigzagoonForagers = () => {
 	const { addMultipleMessages, addMessage } = useContext(MessageQueueContext);
 
 	const trade = useCallback(() => {
-		if (saveFile.inventory['moomoo-milk'] <= 0) {
+		if (saveFile.bag['moomoo-milk'] <= 0) {
 			addMultipleMessages([
 				{ message: 'Zigzagoon looks ready to forage' },
 				{ message: 'But You dont have any moomoo milk' },
@@ -33,7 +33,7 @@ export const useZigzagoonForagers = () => {
 				{ message: `And returns with ${amount} ${foragedItem}` },
 			]);
 			patchSaveFileReducer({
-				inventory: joinInventories(saveFile.inventory, {
+				bag: joinInventories(saveFile.bag, {
 					[foragedItem]: amount,
 					'moomoo-milk': -1,
 				}),
@@ -46,7 +46,7 @@ export const useZigzagoonForagers = () => {
 		addMessage,
 		addMultipleMessages,
 		patchSaveFileReducer,
-		saveFile.inventory,
+		saveFile.bag,
 		saveFile.zigzagoonReadyAt,
 	]);
 

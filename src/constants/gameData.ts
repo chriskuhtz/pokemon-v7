@@ -68,7 +68,7 @@ export const testState: SaveFile = {
 	badges: [],
 	researchPoints: 0,
 	quests: baseQuestState,
-	inventory: generateInventory({}),
+	bag: generateInventory({}),
 	playerId: '',
 	money: 5000,
 	pokemon: [],

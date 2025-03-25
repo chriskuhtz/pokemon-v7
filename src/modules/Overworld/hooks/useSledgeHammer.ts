@@ -55,10 +55,10 @@ export const useSledgeHammer = () => {
 						: undefined;
 
 				const updatedInventory = foundItem
-					? joinInventories(saveFile.inventory, {
+					? joinInventories(saveFile.bag, {
 							[foundItem]: 1,
 					  })
-					: saveFile.inventory;
+					: saveFile.bag;
 				const meta: SaveFile['meta'] = encounter
 					? {
 							activeTab: 'BATTLE',
@@ -98,7 +98,7 @@ export const useSledgeHammer = () => {
 													new Date().getTime() + ONE_HOUR * Math.random(),
 											},
 										],
-										inventory: updatedInventory,
+										bag: updatedInventory,
 										meta,
 										mileStones: {
 											...saveFile.mileStones,

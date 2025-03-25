@@ -62,7 +62,7 @@ export const useFarm = () => {
 				addMessage({ message: `harvested ${bush.yield} ${bush.type}` });
 				putSaveFileReducer({
 					...saveFile,
-					inventory: joinInventories(saveFile.inventory, {
+					bag: joinInventories(saveFile.bag, {
 						[bush.type]: bush.yield,
 					}),
 					farm: {
@@ -116,7 +116,7 @@ export const useFarm = () => {
 			: { [type]: 1 };
 		putSaveFileReducer({
 			...saveFile,
-			inventory: joinInventories(saveFile.inventory, usedItems, true),
+			bag: joinInventories(saveFile.bag, usedItems, true),
 			farm: {
 				...saveFile.farm,
 				plants: [
@@ -139,11 +139,11 @@ export const useFarm = () => {
 		harvest,
 		plant,
 		farm: saveFile.farm,
-		plantables: Object.entries(saveFile.inventory).filter(
+		plantables: Object.entries(saveFile.bag).filter(
 			([item, amount]) => (isBerry(item) || isApricorn(item)) && amount > 0
 		) as [BerryType, number][],
 
-		mulches: Object.entries(saveFile.inventory).filter(
+		mulches: Object.entries(saveFile.bag).filter(
 			([item, amount]) => isMulch(item) && amount > 0
 		) as [MulchType, number][],
 	};

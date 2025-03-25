@@ -21,10 +21,10 @@ export const useShovel = () => {
 					Math.random() > 0.9 ? getRandomEntry(undergroundTable) : undefined;
 
 				const updatedInventory = foundItem
-					? joinInventories(saveFile.inventory, {
+					? joinInventories(saveFile.bag, {
 							[foundItem]: 1,
 					  })
-					: saveFile.inventory;
+					: saveFile.bag;
 
 				const messages: Message[] = [
 					{
@@ -50,7 +50,7 @@ export const useShovel = () => {
 													new Date().getTime() + ONE_HOUR * Math.random(),
 											},
 										],
-										inventory: updatedInventory,
+										bag: updatedInventory,
 									}),
 							};
 						}
@@ -71,7 +71,7 @@ export const useShovel = () => {
 			patchSaveFileReducer,
 			saveFile.campUpgrades,
 			saveFile.handledOccupants,
-			saveFile.inventory,
+			saveFile.bag,
 		]
 	);
 };

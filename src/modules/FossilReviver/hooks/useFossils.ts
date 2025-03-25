@@ -12,7 +12,7 @@ export const useFossils = () => {
 
 	const fossils = useMemo(
 		() =>
-			Object.entries(saveFile.inventory).filter(
+			Object.entries(saveFile.bag).filter(
 				([item, amount]) => amount > 0 && isFossil(item)
 			) as [FossilType, number][],
 		[saveFile]
@@ -25,7 +25,7 @@ export const useFossils = () => {
 			});
 			putSaveFileReducer({
 				...saveFile,
-				inventory: joinInventories(saveFile.inventory, { [fossil]: 1 }, true),
+				bag: joinInventories(saveFile.bag, { [fossil]: 1 }, true),
 				researchPoints: saveFile.researchPoints - 5,
 				pokemon: [
 					...saveFile.pokemon,

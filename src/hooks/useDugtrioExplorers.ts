@@ -13,7 +13,7 @@ export const useDugtrioExplorers = () => {
 	const { addMultipleMessages, addMessage } = useContext(MessageQueueContext);
 
 	const trade = useCallback(() => {
-		if (saveFile.inventory['honey'] < 3) {
+		if (saveFile.bag['honey'] < 3) {
 			addMultipleMessages([
 				{ message: 'Dugtrio looks ready to dig around' },
 				{ message: 'But You dont have enough honey for all three heads' },
@@ -32,7 +32,7 @@ export const useDugtrioExplorers = () => {
 				{ message: `And returns with ${amount} ${foragedItem}` },
 			]);
 			patchSaveFileReducer({
-				inventory: joinInventories(saveFile.inventory, {
+				bag: joinInventories(saveFile.bag, {
 					[foragedItem]: amount,
 					honey: -3,
 				}),
@@ -46,7 +46,7 @@ export const useDugtrioExplorers = () => {
 		addMultipleMessages,
 		patchSaveFileReducer,
 		saveFile.dugtrioReadyAt,
-		saveFile.inventory,
+		saveFile.bag,
 	]);
 
 	return trade;

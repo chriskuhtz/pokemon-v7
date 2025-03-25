@@ -15,10 +15,10 @@ export const ApricornSmithy = ({ goBack }: { goBack: () => void }) => {
 
 	const apricorns: [ApricornType, number][] = useMemo(
 		() =>
-			Object.entries(saveFile.inventory)
+			Object.entries(saveFile.bag)
 				.filter(([, amount]) => amount > 0)
 				.filter(([item]) => isApricorn(item)) as [ApricornType, number][],
-		[saveFile.inventory]
+		[saveFile.bag]
 	);
 
 	const craftBall = useCallback(
@@ -29,7 +29,7 @@ export const ApricornSmithy = ({ goBack }: { goBack: () => void }) => {
 			});
 			putSaveFileReducer({
 				...saveFile,
-				inventory: joinInventories(saveFile.inventory, {
+				bag: joinInventories(saveFile.bag, {
 					[apricorn]: -1,
 					[apricornTable[apricorn]]: 1,
 				}),

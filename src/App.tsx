@@ -93,7 +93,7 @@ export const App = (): JSX.Element => {
 
 	const {
 		meta: { activeTab, currentChallenger },
-		inventory,
+		bag: inventory,
 		pokemon,
 		money,
 		location,
@@ -153,7 +153,7 @@ export const App = (): JSX.Element => {
 	if (activeTab === 'BAG') {
 		return (
 			<Bag
-				inventory={saveFile.inventory}
+				inventory={saveFile.bag}
 				discardItem={discardItemReducer}
 				goBack={() => setActiveTabReducer('MAIN')}
 				team={team}
