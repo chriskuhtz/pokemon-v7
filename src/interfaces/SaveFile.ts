@@ -77,7 +77,7 @@ export interface SaveFile {
 	playerId: string;
 	bag: Inventory;
 	bagLimit: number;
-	storage?: Inventory;
+	storage: Inventory;
 	pokemon: OwnedPokemon[];
 	money: number;
 	researchPoints: number;
