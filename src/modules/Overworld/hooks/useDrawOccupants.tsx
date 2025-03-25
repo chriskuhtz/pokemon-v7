@@ -1,13 +1,10 @@
 import { isEqual } from 'lodash';
 import { useContext, useEffect, useState } from 'react';
 import { getItemUrl } from '../../../functions/getItemUrl';
-import {
-	OverworldShaderMap,
-	getTimeOfDay,
-} from '../../../functions/getTimeOfDay';
+import { getTimeOfDay } from '../../../functions/getTimeOfDay';
 import { getYOffsetFromOrientation } from '../../../functions/getYOffsetFromOrientation';
 import { BaseSizeContext } from '../../../hooks/useBaseSize';
-import { Occupant } from '../../../interfaces/OverworldMap';
+import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
 
 export const overflow = (current: number, excludedMax: number) => {
 	if (current < excludedMax - 1) {
@@ -18,7 +15,8 @@ export const overflow = (current: number, excludedMax: number) => {
 
 export const useDrawOccupants = (
 	canvasId: string,
-	statefulOccupants: Occupant[]
+	statefulOccupants: Occupant[],
+	shaders: OverworldMap['timeOfDayShadersMap']
 ) => {
 	const { baseSize } = useContext(BaseSizeContext);
 	const [lastDrawnOccupants, setLastDrawnOccupants] = useState<Occupant[]>([]);
@@ -41,18 +39,19 @@ export const useDrawOccupants = (
 			ctx?.clearRect(0, 0, 9000, 9000);
 
 			statefulOccupants.forEach((occ) => {
-				drawOccupant(occ, ctx, baseSize);
+				drawOccupant(occ, ctx, baseSize, shaders);
 				return;
 			});
 			setLastDrawnOccupants(statefulOccupants);
 		}
-	}, [baseSize, canvasId, lastDrawnOccupants, statefulOccupants]);
+	}, [baseSize, canvasId, lastDrawnOccupants, shaders, statefulOccupants]);
 };
 
 const drawOccupant = (
 	occ: Occupant,
 	ctx: CanvasRenderingContext2D | null | undefined,
-	baseSize: number
+	baseSize: number,
+	shaders: OverworldMap['timeOfDayShadersMap']
 ) => {
 	const img = new Image();
 
@@ -144,7 +143,7 @@ const drawOccupant = (
 					baseSize,
 					baseSize
 				);
-				ctx.fillStyle = OverworldShaderMap[getTimeOfDay()];
+				ctx.fillStyle = shaders[getTimeOfDay()];
 				ctx?.fillRect(baseSize * occ.x, baseSize * occ.y, baseSize, baseSize);
 				break;
 			case 'ITEM':

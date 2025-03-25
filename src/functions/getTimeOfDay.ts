@@ -36,7 +36,7 @@ export const getTimeOfDay = (): TimeOfDay => {
 export function isTimeOfDay(x: string | undefined | null): x is TimeOfDay {
 	return !!x && ['MORNING', 'DAY', 'EVENING', 'NIGHT'].includes(x);
 }
-export const OverworldShaderMap: Record<TimeOfDay, string> = {
+export const defaultShaderMap: Record<TimeOfDay, string> = {
 	MORNING: 'rgba(156, 98, 0,.2)',
 	DAY: 'rgba(0,0,0,0)',
 	EVENING: 'rgba(156, 98, 0,.2)',

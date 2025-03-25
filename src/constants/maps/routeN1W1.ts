@@ -1,9 +1,11 @@
+import { defaultShaderMap } from '../../functions/getTimeOfDay';
 import { OverworldMap } from '../../interfaces/OverworldMap';
 import { routeN1Encounters } from './encounters/routeN1';
 import { routeN1W1Occupants } from './occupants';
 
 export const routeN1W1: OverworldMap = {
 	id: 'routeN1W1',
+	timeOfDayShadersMap: defaultShaderMap,
 	possibleEncounters: routeN1Encounters,
 	tileMap: {
 		baseLayer: [

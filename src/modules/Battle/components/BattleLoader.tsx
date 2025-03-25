@@ -1,10 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
+import { mapsRecord } from '../../../constants/maps/mapsRecord';
 import { addPokemonToDex } from '../../../functions/addPokemonToDex';
 import { getMiddleOfThree } from '../../../functions/getMiddleOfThree';
-import {
-	OverworldShaderMap,
-	getTimeOfDay,
-} from '../../../functions/getTimeOfDay';
+import { getTimeOfDay } from '../../../functions/getTimeOfDay';
 import { useGetBattleTeam } from '../../../hooks/useGetBattleTeam';
 import { useLeaveBattle } from '../../../hooks/useLeaveBattle';
 import { Message } from '../../../hooks/useMessageQueue';
@@ -52,6 +50,7 @@ export const BattleLoader = ({
 	);
 
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+	const { timeOfDayShadersMap } = mapsRecord[saveFile.location.mapId];
 	const leave = useLeaveBattle();
 
 	const [registered, setRegistered] = useState<boolean>(false);
@@ -84,7 +83,7 @@ export const BattleLoader = ({
 					top: 0,
 					left: 0,
 					position: 'absolute',
-					backgroundColor: OverworldShaderMap[getTimeOfDay()],
+					backgroundColor: timeOfDayShadersMap[getTimeOfDay()],
 					zIndex: 1,
 				}}
 			/>

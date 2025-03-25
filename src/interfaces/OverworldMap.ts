@@ -2,6 +2,7 @@ import { QuestName } from '../constants/checkLists/questsRecord';
 import { EncounterMap } from '../constants/maps/encounters';
 import { MapId } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
+import { TimeOfDay } from '../functions/getTimeOfDay';
 import { Inventory } from './Inventory';
 import { ItemType } from './Item';
 import { OwnedPokemon } from './OwnedPokemon';
@@ -201,6 +202,7 @@ export interface OverworldMap {
 	tileMap: GameMap;
 	occupants: Occupant[];
 	weather?: WeatherType;
+	timeOfDayShadersMap: Record<TimeOfDay, string>;
 }
 
 export interface GameMap {

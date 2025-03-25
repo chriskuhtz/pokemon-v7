@@ -143,11 +143,7 @@ export const extraFeatureCheckList: {
 	{ name: 'setting: randomized swarms', handled: true },
 	{ name: 'setting: double xp rates', handled: true },
 	{ name: 'trainers can give rewards', handled: true },
-	{ name: 'trainers spot you' },
-	{ name: 'trainers can move and still spot you' },
-	{ name: 'scripted npcs' },
-	{ name: 'play pokecenter sound on visit' },
-	{ name: 'shaders per map (no daytimes in caves, buildings)' },
+	{ name: 'shaders per map (no daytimes in caves, buildings)', handled: true },
 	{ name: 'Opponents can use items' },
 	{ name: 'consider rarity of held items' },
 	{ name: 'algorithmic fences' },
@@ -253,4 +249,5 @@ export const extraFeatureCheckList: {
 	{ name: "'caught before' indicators need to be determined by pokedex" },
 	{ name: 'sort unlocked upgrades to bottom' },
 	{ name: 'move selection for opponents' },
+	{ name: 'tilemap should be only tuples' },
 ];

@@ -3,7 +3,7 @@ import { useCallback, useContext, useMemo, useState } from 'react';
 import { CombinedCanvas } from '../../components/CombinedCanvas/CombinedCanvas';
 import { fps } from '../../constants/gameData';
 import { mapsRecord } from '../../constants/maps/mapsRecord';
-import { getTimeOfDay, OverworldShaderMap } from '../../functions/getTimeOfDay';
+import { getTimeOfDay } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { BaseSizeContext } from '../../hooks/useBaseSize';
 import { useDrawForeground } from '../../hooks/useDrawBackground';
@@ -90,7 +90,7 @@ export const Overworld = ({
 
 	//DRAWING
 	useDrawCharacter(playerCanvasId, playerLocation, playerSprite);
-	useDrawOccupants(occupantsCanvasId, occupants);
+	useDrawOccupants(occupantsCanvasId, occupants, map.timeOfDayShadersMap);
 	//INTERACTION
 	useDrawForeground('foreground', map.tileMap, baseSize);
 	const interactWith = useCallback(
@@ -199,7 +199,7 @@ export const Overworld = ({
 							top: -playerLocation.y * baseSize,
 							left: -playerLocation.x * baseSize,
 							position: 'absolute',
-							backgroundColor: OverworldShaderMap[getTimeOfDay()],
+							backgroundColor: map.timeOfDayShadersMap[getTimeOfDay()],
 							zIndex: 1,
 						}}
 					/>
@@ -241,7 +241,7 @@ export const Overworld = ({
 							transitionProperty: 'top,left',
 							transition: `${fps} ease 0s`,
 							position: 'absolute',
-							backgroundColor: OverworldShaderMap[getTimeOfDay()],
+							backgroundColor: map.timeOfDayShadersMap[getTimeOfDay()],
 							zIndex: -2,
 						}}
 					/>
@@ -265,7 +265,7 @@ export const Overworld = ({
 						top: 0,
 						left: 0,
 						position: 'absolute',
-						backgroundColor: OverworldShaderMap[getTimeOfDay()],
+						backgroundColor: map.timeOfDayShadersMap[getTimeOfDay()],
 						zIndex: -4,
 					}}
 				/>

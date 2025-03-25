@@ -1,8 +1,10 @@
+import { defaultShaderMap } from '../../functions/getTimeOfDay';
 import { OverworldMap } from '../../interfaces/OverworldMap';
 import { campOccupants } from './occupants/camp';
 
 export const camp: OverworldMap = {
 	id: 'camp',
+	timeOfDayShadersMap: defaultShaderMap,
 	possibleEncounters: {
 		BASE: [],
 		MORNING: [],
