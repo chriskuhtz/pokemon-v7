@@ -85,7 +85,7 @@ export interface UseSaveFile {
 const migrateSavefile = (input: SaveFile) => {
 	if (!input.bag) {
 		//@ts-expect-error this is a migration
-		return { ...input, bag: input.inventory, inventory: undefined };
+		return { ...input, bag: input.inventory };
 	}
 	return input;
 };
