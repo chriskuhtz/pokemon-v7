@@ -4,6 +4,7 @@ import {
 	levelDamageMoves,
 } from '../constants/fixedDamageMoves';
 import { flyDoubleDamageMoves, ohkoMoves } from '../constants/ohkoMoves';
+import { punchBasedMoves } from '../constants/punchBasedMoves';
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -347,13 +348,17 @@ export const calculateDamage = (
 		target.ability === 'heatproof' && attackType === 'fire' ? 0.5 : 1;
 	const drySkinFactor =
 		target.ability === 'dry-skin' && attackType === 'fire' ? 1.25 : 1;
+	const ironfistFactor =
+		attacker.ability === 'iron-fist' && punchBasedMoves.includes(attack.name)
+			? 1.2
+			: 1;
 	const savingBerryFactor =
 		(typeFactor > 1 || attackType === 'normal') &&
 		superEffectiveSaveTable[attackType] &&
 		superEffectiveSaveTable[attackType] === target.heldItemName
 			? 0.5
 			: 1;
-	const consumedHeldItem = savingBerryFactor === 0.5;
+
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -390,10 +395,13 @@ export const calculateDamage = (
 				swarmFactor *
 				heatProofFactor *
 				drySkinFactor *
-				savingBerryFactor
+				savingBerryFactor *
+				ironfistFactor
 		),
 		1
 	);
+
+	const consumedHeldItem = savingBerryFactor === 0.5;
 
 	//hanging on
 	if (
