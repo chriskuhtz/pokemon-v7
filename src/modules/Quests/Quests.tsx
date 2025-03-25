@@ -61,7 +61,7 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 			<Stack mode="column">
 				{all.map(({ name, status }) => {
 					const quest = QuestsRecord[name];
-					if (status === 'INACTIVE' || status === 'COLLECTED') {
+					if (status === 'INACTIVE' || status === 'COLLECTED' || !quest) {
 						return <React.Fragment key={name}></React.Fragment>;
 					}
 
