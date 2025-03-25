@@ -100,12 +100,20 @@ export interface UseSaveFile {
 	evolvePokemonReducer: (x: EvolutionReducerPayload) => void;
 }
 
+const ensurePokedex = (input: SaveFile) => {
+	if (!input.pokedex) {
+		return { ...input, pokedex: emptyPokedex };
+	}
+
+	return input;
+};
+
 const useSaveFile = (
 	init: SaveFile,
 	addMessage: (x: Message) => void
 ): UseSaveFile => {
 	const local = window.localStorage.getItem(localStorageId);
-	const loaded = local ? (JSON.parse(local) as SaveFile) : init;
+	const loaded = local ? ensurePokedex(JSON.parse(local) as SaveFile) : init;
 
 	const [saveFile, s] = useState<SaveFile>(loaded);
 
