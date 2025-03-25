@@ -76,6 +76,8 @@ export interface SaveFile {
 	badges: BadgeName[];
 	playerId: string;
 	bag: Inventory;
+	bagLimit: number;
+	storage?: Inventory;
 	pokemon: OwnedPokemon[];
 	money: number;
 	researchPoints: number;
@@ -124,6 +126,6 @@ export interface SaveFile {
 	currentSwarm?: PokemonSwarm;
 	nextSwarmReadyAt?: number;
 	starterPokemon?: PokemonName;
-	seedVault?: ItemType[];
+	seedVault: ItemType[];
 	pokedex: Pokedex;
 }

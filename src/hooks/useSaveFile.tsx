@@ -83,11 +83,14 @@ export interface UseSaveFile {
 	evolvePokemonReducer: (x: EvolutionReducerPayload) => void;
 }
 const migrateSavefile = (input: SaveFile) => {
-	if (!input.bag) {
-		//@ts-expect-error this is a migration
-		return { ...input, bag: input.inventory };
+	const updatedInput = { ...input };
+	if (!updatedInput.storage) {
+		updatedInput.storage = EmptyInventory;
 	}
-	return input;
+	if (!input.bagLimit) {
+		updatedInput.bagLimit = 30;
+	}
+	return updatedInput;
 };
 const useSaveFile = (
 	init: SaveFile,

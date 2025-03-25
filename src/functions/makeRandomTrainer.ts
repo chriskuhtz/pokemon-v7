@@ -467,10 +467,10 @@ const tier2trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({ name: 'monferno', xp: 3375 }),
 			makeChallengerPokemon({ name: 'prinplup', xp: 3375 }),
-			makeChallengerPokemon({ name: 'grovyle', xp: 3375 }),
+			makeChallengerPokemon({ name: 'grotle', xp: 3375 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Hoenn Hannah', sprite: SpriteEnum.aceFemale },
+		trainer: { name: 'Sinnoh Simone', sprite: SpriteEnum.aceFemale },
 		requiredUpgrade: 'training field 2',
 	},
 ];
