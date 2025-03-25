@@ -1,6 +1,8 @@
+import { useContext } from 'react';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { useNavigate } from '../../hooks/useNavigate';
+import { SaveFileContext } from '../../hooks/useSaveFile';
 import { fossilTable } from '../../interfaces/Item';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
@@ -10,6 +12,9 @@ import { useFossils } from './hooks/useFossils';
 export const FossilReviver = (): JSX.Element => {
 	const navigate = useNavigate();
 	const { fossils, revive } = useFossils();
+	const {
+		saveFile: { pokedex },
+	} = useContext(SaveFileContext);
 	return (
 		<Page
 			headline="Fossil Reviver"
@@ -26,8 +31,13 @@ export const FossilReviver = (): JSX.Element => {
 								}}
 								content={
 									<h3>
-										Revive <PokemonSprite name={fossilTable[f]} /> for 5
-										Research Points
+										Revive{' '}
+										{pokedex[fossilTable[f]].caughtOnRoutes.length > 0 ? (
+											<PokemonSprite name={fossilTable[f]} />
+										) : (
+											f
+										)}
+										for 5 Research Points
 									</h3>
 								}
 								actionElements={[]}
