@@ -9,7 +9,7 @@ export const reduceSecondaryAilmentDurations = (
 	updated.secondaryAilments = updated.secondaryAilments
 		.map((a) => {
 			if (a.duration === 0) {
-				addMessage(`${p.data.name} is no longer affected by ${a}`);
+				addMessage(`${p.data.name} is no longer affected by ${a.type}`);
 				return undefined;
 			} else {
 				return { ...a, duration: a.duration - 1 };
