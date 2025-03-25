@@ -27,7 +27,7 @@ export const campUpgradeNames = [
 ] as const;
 /**
  * ideas:
- * seed vault
+ * storage chest and bag limit
  * berries visible in overworld
  * more gym leaders
  * berry lure stations

@@ -1,7 +1,6 @@
 import { useCallback, useState } from 'react';
 import { isKO } from '../../../functions/isKo';
 import { Message } from '../../../hooks/useMessageQueue';
-import { LeaveBattlePayload } from '../../../hooks/useSaveFile';
 import { useScreenTransition } from '../../../hooks/useScreenTransition';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { TrainerInfo } from '../../../interfaces/Challenger';
@@ -9,6 +8,7 @@ import { Inventory } from '../../../interfaces/Inventory';
 import { BattleField } from '../BattleField';
 import { IntroBanner } from './IntroBanner';
 import { LineUpSelection } from './LineUpSelection';
+import { LeaveBattlePayload } from '../../../hooks/useLeaveBattle';
 
 export const BattleOverview = ({
 	leave,

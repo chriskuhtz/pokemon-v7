@@ -16,6 +16,7 @@ export interface Challenger {
 	trainer?: TrainerInfo;
 	availableAfter?: QuestName;
 	requiredUpgrade?: CampUpgrade;
+	rewardItems?: Partial<Inventory>;
 }
 
 export interface BattleChallenger {

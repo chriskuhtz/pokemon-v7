@@ -6,11 +6,9 @@ import {
 	getTimeOfDay,
 } from '../../../functions/getTimeOfDay';
 import { useGetBattleTeam } from '../../../hooks/useGetBattleTeam';
+import { useLeaveBattle } from '../../../hooks/useLeaveBattle';
 import { Message } from '../../../hooks/useMessageQueue';
-import {
-	LeaveBattlePayload,
-	SaveFileContext,
-} from '../../../hooks/useSaveFile';
+import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { Challenger } from '../../../interfaces/Challenger';
 import { Inventory } from '../../../interfaces/Inventory';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
@@ -18,7 +16,6 @@ import { LoadingScreen } from '../../../uiComponents/LoadingScreen/LoadingScreen
 import { BattleOverview } from './BattleOverview';
 
 export const BattleLoader = ({
-	leave,
 	team,
 	challenger,
 	inventory,
@@ -27,7 +24,6 @@ export const BattleLoader = ({
 	addMessage,
 	addMultipleMessages,
 }: {
-	leave: (x: LeaveBattlePayload) => void;
 	challenger: Challenger;
 	team: OwnedPokemon[];
 	inventory: Inventory;
@@ -56,6 +52,7 @@ export const BattleLoader = ({
 	);
 
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+	const leave = useLeaveBattle();
 
 	const [registered, setRegistered] = useState<boolean>(false);
 	useEffect(() => {

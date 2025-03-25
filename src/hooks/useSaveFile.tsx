@@ -21,37 +21,21 @@ import { addPokemonToDex } from '../functions/addPokemonToDex';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 import { determineWildPokemon } from '../functions/determineWildPokemon';
-import { getRandomEntry } from '../functions/filterTargets';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getRewardItemsForQuest } from '../functions/getRewardForQuest';
 import { TimeOfDay } from '../functions/getTimeOfDay';
 import { OPPO_ID } from '../functions/makeChallengerPokemon';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
-import { reduceBattlePokemonToOwnedPokemon } from '../functions/reduceBattlePokemonToOwnedPokemon';
 import { reduceEncounterRateModifier } from '../functions/reduceEncounterRateModifier';
 import { updateItemFunction } from '../functions/updateItemFunction';
-import { BattlePokemon } from '../interfaces/BattlePokemon';
-import {
-	EmptyInventory,
-	Inventory,
-	joinInventories,
-} from '../interfaces/Inventory';
-import { EncounterChanceItem, ItemType, pickupTable } from '../interfaces/Item';
+import { EmptyInventory, joinInventories } from '../interfaces/Inventory';
+import { EncounterChanceItem, ItemType } from '../interfaces/Item';
 import { Occupant } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { RoutesType } from '../interfaces/Routing';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
 import { Message } from './useMessageQueue';
 
-export interface LeaveBattlePayload {
-	caughtPokemon: BattlePokemon[];
-	updatedInventory: Inventory;
-	scatteredCoins: number;
-	team: BattlePokemon[];
-	outcome: 'WIN' | 'LOSS' | 'DRAW';
-	defeatedPokemon: BattlePokemon[];
-	defeatedChallengerId?: string;
-}
 export interface EvolutionReducerPayload {
 	id: string;
 	newName: PokemonName;
@@ -95,7 +79,6 @@ export interface UseSaveFile {
 	changeHeldItemReducer: (pokemonId: string, newItem?: ItemType) => void;
 	useSacredAshReducer: () => void;
 	reset: () => void;
-	leaveBattleReducer: (x: LeaveBattlePayload) => void;
 	applyEncounterRateModifierItem: (item: EncounterChanceItem) => void;
 	evolvePokemonReducer: (x: EvolutionReducerPayload) => void;
 }
@@ -408,118 +391,6 @@ const useSaveFile = (
 		setSaveFile(testState);
 	}, [setSaveFile]);
 
-	const leaveBattleReducer = useCallback(
-		({
-			team: updatedTeam,
-			updatedInventory,
-			caughtPokemon,
-			scatteredCoins,
-			outcome,
-			defeatedChallengerId,
-		}: LeaveBattlePayload) => {
-			let updatedLocation = saveFile.location;
-
-			if (outcome === 'LOSS') {
-				if (saveFile.settings?.rogueLike) {
-					reset();
-					return;
-				} else {
-					updatedLocation = {
-						mapId: 'camp',
-						x: 6,
-						y: 5,
-						orientation: 'DOWN',
-						forwardFoot: 'CENTER1',
-					};
-
-					putSaveFileReducer({
-						...saveFile,
-						meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
-						location: updatedLocation,
-					});
-					return;
-				}
-			}
-
-			const ownedTeam = updatedTeam.map((p) =>
-				reduceBattlePokemonToOwnedPokemon(p)
-			);
-
-			//check pickup
-			const pickUpCheckedTeam = ownedTeam.map((p) => {
-				if (p.ability === 'pickup' && !p.heldItemName && Math.random() < 0.1) {
-					return { ...p, heldItemName: getRandomEntry(pickupTable) };
-				}
-
-				return p;
-			});
-
-			const teamAndCaught = [
-				...pickUpCheckedTeam,
-				...caughtPokemon.map((c) => ({
-					...reduceBattlePokemonToOwnedPokemon(
-						{ ...c, ownerId: saveFile.playerId },
-						c.ball === 'heal-ball'
-					),
-					caughtOnMap: saveFile.location.mapId,
-				})),
-			].map((t, i) => ({ ...t, onTeam: i < 6 }));
-
-			const updatedPokemon = [
-				...teamAndCaught,
-				...saveFile.pokemon.filter((p) => !team.some((t) => t.id === p.id)),
-			];
-
-			const alreadyDefeated = saveFile.handledOccupants.some(
-				(h) => h.id === defeatedChallengerId
-			);
-			const gainedResearchPoints = () => {
-				if (outcome !== 'WIN') {
-					return 0;
-				}
-				if (!defeatedChallengerId) {
-					return 0;
-				}
-				if (alreadyDefeated) {
-					return 0;
-				}
-
-				return 1;
-			};
-
-			const pokedex = { ...saveFile.pokedex };
-			caughtPokemon.forEach((p) =>
-				addPokemonToDex(pokedex, p.name, p.caughtOnMap, true)
-			);
-
-			putSaveFileReducer({
-				...saveFile,
-				inventory: updatedInventory,
-				money: saveFile.money + scatteredCoins,
-				pokemon: updatedPokemon,
-				meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
-				researchPoints: saveFile.researchPoints + gainedResearchPoints(),
-				handledOccupants:
-					defeatedChallengerId && !alreadyDefeated
-						? [
-								...saveFile.handledOccupants,
-								{ id: defeatedChallengerId, resetAt: -1 },
-						  ]
-						: saveFile.handledOccupants,
-				mileStones: {
-					...saveFile.mileStones,
-					hasCaughtASwarmPokemon:
-						saveFile.currentSwarm &&
-						caughtPokemon.some((c) => c.name === saveFile.currentSwarm?.pokemon)
-							? true
-							: saveFile.mileStones.hasCaughtASwarmPokemon,
-				},
-				pokedex,
-			});
-		},
-		[putSaveFileReducer, reset, saveFile, team]
-	);
-
 	const applyEncounterRateModifierItem = (item: EncounterChanceItem) => {
 		let modifier: { factor: number; steps: number } = { factor: 0, steps: 0 };
 		if (saveFile.encounterRateModifier) {
@@ -676,7 +547,6 @@ const useSaveFile = (
 		fulfillQuestReducer,
 		changeHeldItemReducer,
 		useSacredAshReducer,
-		leaveBattleReducer,
 		applyEncounterRateModifierItem,
 	};
 };

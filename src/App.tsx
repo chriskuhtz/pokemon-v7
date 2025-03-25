@@ -88,7 +88,6 @@ export const App = (): JSX.Element => {
 		useSacredAshReducer,
 		applyEncounterRateModifierItem,
 		reset,
-		leaveBattleReducer,
 		addItemReducer,
 	} = useContext(SaveFileContext);
 
@@ -116,7 +115,6 @@ export const App = (): JSX.Element => {
 			<BattleLoader
 				challenger={currentChallenger}
 				team={team}
-				leave={leaveBattleReducer}
 				inventory={inventory}
 				ownedPokemonNames={saveFile.pokemon.map((p) => p.name)}
 				latestMessage={latestMessage}

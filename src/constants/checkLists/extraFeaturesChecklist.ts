@@ -142,7 +142,7 @@ export const extraFeatureCheckList: {
 	{ name: 'apply migrations on localstorage load', handled: true },
 	{ name: 'setting: randomized swarms', handled: true },
 	{ name: 'setting: double xp rates', handled: true },
-	{ name: 'trainers give rewards' },
+	{ name: 'trainers can give rewards', handled: true },
 	{ name: 'trainers spot you' },
 	{ name: 'trainers can move and still spot you' },
 	{ name: 'scripted npcs' },
@@ -248,4 +248,9 @@ export const extraFeatureCheckList: {
 	{ name: 'inform about quest rewards' },
 	{ name: 'improve held-item+trade evo condition' },
 	{ name: 'refine battle end' },
+	{ name: 'berries should not be rewards' },
+	{ name: 'Catch x different species needs to listen to dex' },
+	{ name: "'caught before' indicators need to be determined by pokedex" },
+	{ name: 'sort unlocked upgrades to bottom' },
+	{ name: 'move selection for opponents' },
 ];

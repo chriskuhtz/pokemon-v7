@@ -19,8 +19,9 @@ import { isKO } from '../../functions/isKo';
 import { OPPO_ID } from '../../functions/makeChallengerPokemon';
 import { reduceSecondaryAilmentDurations } from '../../functions/reduceSecondaryAilmentDurations';
 import { sortByPriority } from '../../functions/sortByPriority';
+import { LeaveBattlePayload } from '../../hooks/useLeaveBattle';
 import { Message } from '../../hooks/useMessageQueue';
-import { LeaveBattlePayload, SaveFileContext } from '../../hooks/useSaveFile';
+import { SaveFileContext } from '../../hooks/useSaveFile';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Inventory, joinInventories } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
@@ -69,6 +70,7 @@ export const BattleField = ({
 	addMessage,
 	addMultipleMessages,
 	challengerId,
+	rewardItems,
 }: {
 	leave: (x: LeaveBattlePayload) => void;
 	initOpponents: BattlePokemon[];
@@ -79,6 +81,7 @@ export const BattleField = ({
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
 	challengerId?: string;
+	rewardItems?: Partial<Inventory>;
 }) => {
 	const {
 		saveFile: { settings },
@@ -259,9 +262,18 @@ export const BattleField = ({
 				defeatedPokemon: defeatedPokemon ?? [],
 				outcome,
 				defeatedChallengerId: challengerId,
+				rewardItems,
 			});
 		},
-		[battleInventory, challengerId, leave, pokemon, scatteredCoins, team]
+		[
+			battleInventory,
+			challengerId,
+			leave,
+			pokemon,
+			rewardItems,
+			scatteredCoins,
+			team,
+		]
 	);
 	const putPokemonOnField = useCallback(
 		(id: string) =>
