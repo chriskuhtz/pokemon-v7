@@ -328,29 +328,6 @@ export const BattleField = ({
 		[addMessage, battleFieldEffects, battleWeather]
 	);
 
-	// const switchPokemon = useCallback(
-	// 	(leavesBattle: BattlePokemon, entersBattle: BattlePokemon) => {
-	// 		setPokemon((pokemon) =>
-	// 			pokemon.map((p) => {
-	// 				if (p.id === leavesBattle.id) {
-	// 					addMessage({ message: `withdrew ${leavesBattle.data.name}` });
-	// 					return { ...leavesBattle, status: 'BENCH', primaryAilment:persistentPrimaryAilment(leavesBattle.primaryAilment) };
-	// 				}
-	// 				if (p.id === entersBattle.id) {
-	// 					addMessage({
-	// 						message: `Lets go ${entersBattle.data.name}`,
-	// 					});
-
-	// 					return { ...entersBattle, status: 'ONFIELD' };
-	// 				}
-	// 				//TODO: remap moves if "leavesBattle" is the target
-	// 				//TODO: consider shadow tag and magnet pull
-	// 				return p;
-	// 			})
-	// 		);
-	// 	},
-	// 	[addMessage]
-	// );
 	const handleForceSwitch = useCallback(
 		(user: BattlePokemon, moveName: MoveName) => {
 			const otherSideHasSuctionCups = pokemon.find(
@@ -359,7 +336,20 @@ export const BattleField = ({
 					p.ownerId !== user.ownerId &&
 					p.status === 'ONFIELD'
 			);
-
+			if (isTrainerBattle) {
+				addMessage({
+					message: `it failed`,
+				});
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.id === user.id) {
+							return { ...p, moveQueue: [] };
+						}
+						return p;
+					})
+				);
+				return;
+			}
 			if (otherSideHasSuctionCups) {
 				addMessage({
 					message: `${otherSideHasSuctionCups.data.name} prevents force switching with suction cups`,
@@ -384,7 +374,7 @@ export const BattleField = ({
 				onRemoval: () => leaveWithCurrentData('DRAW'),
 			});
 		},
-		[addMessage, leaveWithCurrentData, pokemon]
+		[addMessage, isTrainerBattle, leaveWithCurrentData, pokemon]
 	);
 	const chooseAction = useChooseAction(
 		allOnField,

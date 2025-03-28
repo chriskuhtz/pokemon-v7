@@ -7,12 +7,12 @@ export const launchReadyCheckList: {
 	{ name: 'no net balls before quest', handled: true },
 
 	{ name: 'switching out', handled: true },
-	{ name: 'roar should fail in trainer battles' },
+	{ name: 'roar should fail in trainer battles', handled: true },
 	{ name: 'steadily increasing pricing' },
+	{ name: 'increasable bag limit and storage chest' },
+	{ name: 'basic oppo decision tree' },
+	{ name: 'overwold farm' },
 	{
 		name: 'complete keyboard control',
 	},
-	{ name: 'basic oppo decision tree' },
-	{ name: 'overwold farm' },
-	{ name: 'increasable bag limit' },
 ];
