@@ -38,6 +38,13 @@ export const campUpgradeNames = [
  */
 
 /**
+ * Cooking revamp:
+ * every succesful increases your chances
+ * show chances
+ * filter bar (juice, gateau, rare candy, pokeblock)
+ */
+
+/**
  * Camp Economy:
  * Outside inputs: through quest Rewards, found items
  * Infinite: Produce Honey from Combee Hive

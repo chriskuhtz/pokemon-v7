@@ -38,6 +38,7 @@ export const OCCUPANT_TYPES = [
 	'ZIGZAGOON_FORAGER',
 	'DUGTRIO_EXPLORER',
 	'ROUTER_NPC',
+	'STORAGE_CHEST',
 ] as const;
 export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
@@ -165,6 +166,9 @@ export interface Ledge extends BaseOccupant {
 	sprite: string;
 	passableFrom?: CharacterOrientation;
 }
+export interface StorageChest extends BaseOccupant {
+	type: 'STORAGE_CHEST';
+}
 
 export type Occupant =
 	| OverworldItem
@@ -189,7 +193,8 @@ export type Occupant =
 	| DugtrioExplorer
 	| RouterNpc
 	| SwarmRadar
-	| OverworldRock;
+	| OverworldRock
+	| StorageChest;
 
 export interface OverworldEncounter {
 	name: PokemonName;

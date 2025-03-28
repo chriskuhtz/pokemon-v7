@@ -4,7 +4,9 @@ import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
+import { Octokit } from 'octokit';
 import { useContext, useState } from 'react';
+import { FaBug } from 'react-icons/fa';
 import { GoTasklist } from 'react-icons/go';
 import { RiBookShelfLine } from 'react-icons/ri';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
@@ -14,6 +16,7 @@ import { mapsRecord } from '../../constants/maps/mapsRecord';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { useQuests } from '../../hooks/useQuests';
+import { SaveFileContext } from '../../hooks/useSaveFile';
 import { useTeleport } from '../../hooks/useTeleport';
 
 export const MainMenu = ({
@@ -28,6 +31,33 @@ export const MainMenu = ({
 	const navigate = useNavigate();
 	const { addMessage } = useContext(MessageQueueContext);
 	const { teleporter, teleportHome } = useTeleport();
+	const { saveFile } = useContext(SaveFileContext);
+	const [bugReport, setBugReport] = useState<string>('');
+
+	const reportBug = async (body: string) => {
+		const octokit = new Octokit({
+			//@ts-expect-error fu ts
+			auth: import.meta.env.VITE_BUGREPORT_TOKEN,
+		});
+
+		await octokit
+			.request('POST /repos/chriskuhtz/pokemon-v7/issues', {
+				owner: 'OWNER',
+				repo: 'REPO',
+				title: `Bug found by ${saveFile.playerId}`,
+				body: `${body}`,
+				labels: ['bug'],
+				headers: {
+					'X-GitHub-Api-Version': '2022-11-28',
+				},
+			})
+			.then(() =>
+				addMessage({
+					message: 'Thank you for reporting this',
+					needsNoConfirmation: true,
+				})
+			);
+	};
 
 	return (
 		<Page headline="Main Menu:" goBack={goBack}>
@@ -46,6 +76,7 @@ export const MainMenu = ({
 						actionElements={[]}
 					/>
 				)}
+
 				<Card
 					onClick={() => navigate('MAIN', 'BAG')}
 					content={<h4>Bag</h4>}
@@ -95,6 +126,23 @@ export const MainMenu = ({
 						Delete Savefile and reset
 					</button>
 				)}
+				<Card
+					icon={<FaBug size={battleSpriteSize} />}
+					content={
+						<div>
+							<h4>Report a bug</h4>
+							<textarea
+								cols={70}
+								rows={10}
+								value={bugReport}
+								onChange={(e) => setBugReport(e.target.value)}
+							/>
+						</div>
+					}
+					actionElements={[
+						<button onClick={() => void reportBug(bugReport)}>Submit</button>,
+					]}
+				/>
 
 				{window.localStorage.getItem('devmode') &&
 					Object.keys(mapsRecord).map((m) => (
