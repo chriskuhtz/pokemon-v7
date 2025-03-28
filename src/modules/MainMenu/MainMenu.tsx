@@ -39,8 +39,7 @@ export const MainMenu = ({
 			//@ts-expect-error fu ts
 			auth: import.meta.env.VITE_BUGREPORT_TOKEN,
 		});
-		//@ts-expect-error fu ts
-		console.log(import.meta.env.VITE_BUGREPORT_TOKEN);
+
 		await octokit
 			.request('POST /repos/chriskuhtz/pokemon-v7/issues', {
 				owner: 'OWNER',
