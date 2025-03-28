@@ -24,35 +24,35 @@ import { CampUpgrade, campUpgradePrices } from './campUpgrades';
 const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 	//routeN1
 	'catch a MORNING-time exclusive pokemon from routeN1': {
-		'nest-ball': 5,
+		'poke-ball': 5,
 		'sitrus-berry': 2,
 	},
 	'catch a DAY-time exclusive pokemon from routeN1': {
-		'nest-ball': 5,
+		'poke-ball': 5,
 		'cheri-berry': 2,
 	},
 	'catch a EVENING-time exclusive pokemon from routeN1': {
-		'nest-ball': 5,
+		'poke-ball': 5,
 		'chesto-berry': 2,
 	},
 	'catch a NIGHT-time exclusive pokemon from routeN1': {
-		'nest-ball': 5,
+		'poke-ball': 5,
 		'pecha-berry': 2,
 	},
 	'catch all MORNING-time pokemon from routeN1': {
-		'nest-ball': 10,
+		'poke-ball': 10,
 		'rawst-berry': 2,
 	},
 	'catch all DAY-time pokemon from routeN1': {
-		'nest-ball': 10,
+		'poke-ball': 10,
 		'aspear-berry': 2,
 	},
 	'catch all EVENING-time pokemon from routeN1': {
-		'nest-ball': 10,
+		'poke-ball': 10,
 		'leppa-berry': 2,
 	},
 	'catch all NIGHT-time pokemon from routeN1': {
-		'nest-ball': 10,
+		'poke-ball': 10,
 		'oran-berry': 2,
 	},
 	//routeN1E1
