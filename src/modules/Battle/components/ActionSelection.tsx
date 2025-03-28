@@ -1,5 +1,8 @@
 import { useContext, useMemo } from 'react';
+import { FaRunning } from 'react-icons/fa';
+import { FaArrowsRotate } from 'react-icons/fa6';
 import { MoveCard } from '../../../components/MoveCard/MoveCard';
+import { battleSpriteSize } from '../../../constants/gameData';
 import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getMovesArray } from '../../../functions/getMovesArray';
@@ -17,6 +20,7 @@ import {
 	isXItem,
 	ItemType,
 } from '../../../interfaces/Item';
+import { Card } from '../../../uiComponents/Card/Card';
 import {
 	ActionType,
 	BattleFieldEffect,
@@ -131,6 +135,13 @@ export function ActionSelection({
 						onClick={() => setChosenAction(m.name)}
 					/>
 				))}
+				<Card
+					disabled={trapped || shadowTagged || magnetPulled || arenaTrapped}
+					onClick={() => setChosenAction('SWITCH')}
+					content={'Switch Pokemon'}
+					actionElements={[]}
+					icon={<FaArrowsRotate height={battleSpriteSize} />}
+				/>
 
 				{allowedItems.map(([item, amount]) => {
 					return (
@@ -146,7 +157,7 @@ export function ActionSelection({
 				})}
 
 				{runningAllowed && (
-					<button
+					<Card
 						disabled={trapped || shadowTagged || magnetPulled || arenaTrapped}
 						onClick={() =>
 							chooseAction({
@@ -155,9 +166,10 @@ export function ActionSelection({
 								targetId: '',
 							})
 						}
-					>
-						{runButtonMessage()}
-					</button>
+						content={runButtonMessage()}
+						actionElements={[]}
+						icon={<FaRunning height={battleSpriteSize} />}
+					/>
 				)}
 			</div>
 		</div>

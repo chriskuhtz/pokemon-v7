@@ -46,14 +46,16 @@ export const sortByPriority = (
 	if (
 		aMove?.type === 'CatchProcessInfo' ||
 		aMove?.type === 'InBattleItem' ||
-		aMove?.type === 'RunAway'
+		aMove?.type === 'RunAway' ||
+		aMove?.type === 'Switch'
 	) {
 		return -1;
 	}
 	if (
 		bMove?.type === 'CatchProcessInfo' ||
 		bMove?.type === 'InBattleItem' ||
-		bMove?.type === 'RunAway'
+		bMove?.type === 'RunAway' ||
+		bMove?.type === 'Switch'
 	) {
 		return 1;
 	}

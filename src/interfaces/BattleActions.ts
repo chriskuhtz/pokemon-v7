@@ -34,7 +34,6 @@ export interface InBattleItem {
 	targetId: string;
 	moveToRestore?: MoveName;
 }
-
 export interface RunAway {
 	type: 'RunAway';
 	round: number;
@@ -44,6 +43,11 @@ export interface Slacking {
 	round: number;
 	data: { priority: 0 };
 }
+export interface SwitchPokemon {
+	type: 'Switch';
+	round: number;
+	targetId: string;
+}
 
 export type BattleAction =
 	| CatchProcessInfo
@@ -51,4 +55,5 @@ export type BattleAction =
 	| ChargeUp
 	| InBattleItem
 	| RunAway
-	| Slacking;
+	| Slacking
+	| SwitchPokemon;

@@ -48,9 +48,52 @@ export const useHandleAction = (
 					'RunAway',
 					'InBattleItem',
 					'ChargeUp',
+					'Switch',
 				].includes(move.type)
 			) {
 				throw new Error('cant handle this yet');
+			}
+			if (move.type === 'Switch') {
+				const target = pokemon.find((p) => p.id === move.targetId);
+				if (!target) {
+					throw new Error('how is there no target for switching');
+				}
+				addMessage({
+					message: `switched in ${target.name} for ${attacker.name} `,
+				});
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.id === attacker.id) {
+							return {
+								...attacker,
+								moveQueue: [],
+								status: 'BENCH',
+								secondaryAilments: [],
+							};
+						}
+						if (p.id === target.id) {
+							return {
+								...p,
+								moveQueue: [],
+								status: 'ONFIELD',
+								secondaryAilments: [],
+							};
+						}
+
+						return {
+							...p,
+							moveQueue: p.moveQueue.map((move) => {
+								if (
+									move.type === 'BattleAttack' &&
+									move.targetId === attacker.id
+								) {
+									return { ...move, targetId: target.id };
+								}
+								return move;
+							}),
+						};
+					})
+				);
 			}
 			if (move.type === 'RunAway') {
 				const canRun = determineRunawaySuccess(

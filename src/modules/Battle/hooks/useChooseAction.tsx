@@ -51,6 +51,20 @@ export const useChooseAction = (
 			if (targetId && !target) {
 				throw new Error('could not find target');
 			}
+			if (actionName === 'SWITCH') {
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.id === user.id) {
+							return {
+								...user,
+								moveQueue: [{ type: 'Switch', round: battleRound, targetId }],
+							};
+						}
+						return p;
+					})
+				);
+				return;
+			}
 			if (actionName === 'RUN_AWAY' || isRunawayItem(actionName)) {
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {

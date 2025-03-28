@@ -36,7 +36,12 @@ import { useBattleFieldEffects } from './hooks/useBattleFieldEffects';
 import { useChooseAction } from './hooks/useChooseAction';
 import { useHandleAction } from './hooks/useHandleAction/useHandleAction';
 
-export type ActionType = MoveName | ItemType | 'RUN_AWAY' | 'SLACKING';
+export type ActionType =
+	| MoveName
+	| ItemType
+	| 'RUN_AWAY'
+	| 'SLACKING'
+	| 'SWITCH';
 export interface ChooseActionPayload {
 	userId: string;
 	actionName: ActionType;

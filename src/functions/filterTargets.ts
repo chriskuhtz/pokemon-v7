@@ -12,6 +12,7 @@ import { getMovesArray } from './getMovesArray';
 import { getOpponentPokemon } from './getOpponentPokemon';
 import { getPlayerId } from './getPlayerId';
 import { getPlayerPokemon } from './getPlayerPokemon';
+import { isKO } from './isKo';
 import { isSelfTargeting } from './isSelfTargeting';
 
 export interface FilterTargetsPayload {
@@ -59,6 +60,20 @@ export const filterTargets = ({
 
 		return preFiltered.filter(
 			(t) => t.status === 'ONFIELD' && t.id !== user.id
+		);
+	}
+	if (chosenAction === 'SWITCH') {
+		const allMoveQueues = targets.flatMap((t) => t.moveQueue);
+		return targets.filter(
+			(t) =>
+				t.ownerId === user.ownerId &&
+				t.status === 'BENCH' &&
+				!isKO(t) &&
+				allMoveQueues.every(
+					(move) =>
+						move.type !== 'Switch' ||
+						(move.type === 'Switch' && move.targetId !== t.id)
+				)
 		);
 	}
 
