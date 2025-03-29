@@ -34,7 +34,7 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		x: 20,
 		y: 20,
 		item: 'antidote',
-		amount: 2,
+		amount: 1,
 		id: 'routeN1_antidote',
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'routeN1_antidote'),
@@ -44,7 +44,7 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		x: 40,
 		y: 30,
 		item: 'great-ball',
-		amount: 2,
+		amount: 1,
 		id: 'routeN1_great_ball',
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'routeN1_great_ball'),
@@ -54,7 +54,7 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		x: 13,
 		y: 44,
 		item: 'black-apricorn',
-		amount: 5,
+		amount: 1,
 		id: 'routeN1_black_apricorn',
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'routeN1_black_apricorn'),
@@ -64,7 +64,7 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		x: 20,
 		y: 3,
 		item: 'green-apricorn',
-		amount: 5,
+		amount: 1,
 		id: 'routeN1_green_apricorn',
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'routeN1_green_apricorn'),
@@ -74,7 +74,7 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		x: 37,
 		y: 15,
 		item: 'yellow-apricorn',
-		amount: 5,
+		amount: 1,
 		id: 'routeN1_yellow_apricorn',
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'routeN1_yellow_apricorn'),
@@ -84,7 +84,7 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		x: 27,
 		y: 20,
 		item: 'bluk-berry',
-		amount: 5,
+		amount: 1,
 		id: 'routeN1_bluk_berry',
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'routeN1_bluk_berry'),
@@ -94,7 +94,7 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		x: 2,
 		y: 4,
 		item: 'kelpsy-berry',
-		amount: 5,
+		amount: 1,
 		id: 'routeN1_kelpsy_berry',
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'routeN1_kelpsy_berry'),
@@ -104,7 +104,7 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		x: 45,
 		y: 40,
 		item: 'aguav-berry',
-		amount: 5,
+		amount: 1,
 		id: 'routeN1_aguav_berry',
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'routeN1_aguav_berry'),

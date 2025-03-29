@@ -49,7 +49,7 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 		x: 15,
 		y: 25,
 		item: 'super-potion',
-		amount: 3,
+		amount: 1,
 		id: 'routeS1_super_potion',
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'routeS1_super_potion'),
@@ -59,7 +59,7 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 		x: 31,
 		y: 20,
 		item: 'pink-apricorn',
-		amount: 5,
+		amount: 1,
 		id: 'routeS1_pink_apricorn',
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'routeS1_pink_apricorn'),
@@ -69,7 +69,7 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 		x: 33,
 		y: 5,
 		item: 'red-apricorn',
-		amount: 5,
+		amount: 1,
 		id: 'routeS1_red_apricorn',
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'routeS1_red_apricorn'),
@@ -79,7 +79,7 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 		x: 17,
 		y: 15,
 		item: 'blue-apricorn',
-		amount: 5,
+		amount: 1,
 		id: 'routeS1_blue_apricorn',
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'routeS1_blue_apricorn'),

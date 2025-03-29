@@ -25,7 +25,7 @@ export const useZigzagoonForagers = () => {
 
 		if (!saveFile.zigzagoonReadyAt || now > saveFile.zigzagoonReadyAt) {
 			const foragedItem = getRandomEntry(pickupTable);
-			const amount = getRandomEntry([1, 2, 3, 4, 5]);
+			const amount = 1; // getRandomEntry([1, 2, 3, 4, 5]);
 			addMultipleMessages([
 				{ message: 'Zig Zig' },
 				{ message: `You give Zigzagoon some moomoo-milk` },
