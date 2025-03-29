@@ -1,4 +1,4 @@
-import { EmptyInventory, generateInventory } from '../interfaces/Inventory';
+import { generateInventory } from '../interfaces/Inventory';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { QuestStatus } from '../interfaces/Quest';
 import {
@@ -69,7 +69,7 @@ export const testState: SaveFile = {
 	researchPoints: 0,
 	quests: baseQuestState,
 	bag: generateInventory({}),
-	storage: EmptyInventory,
+	storage: generateInventory({ potion: 3, 'poke-ball': 20 }),
 	seedVault: [],
 	playerId: '',
 	money: 5000,

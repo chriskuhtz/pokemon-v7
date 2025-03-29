@@ -29,9 +29,9 @@ const oakLine: Occupant[] = [
 		unhandledMessage: [
 			'Ah, you made it',
 			'Outside of the fence, the wild Kuma Region awaits',
-			'If your Pokemon are hurt, talk to nurse joy on my right',
+			'If your Pokemon are hurt, talk to nurse joy',
 
-			'Here are some pokeballs to get you started',
+			'There is some equipment for you in the storage chest',
 			'but we cant rely on our limited supplies',
 			'we must establish a self sufficient camp',
 			'Camp Manager Kevin can help you with that',
@@ -40,7 +40,7 @@ const oakLine: Occupant[] = [
 			'Start exploring the area',
 			'and prepare the camp for self sufficiency',
 		],
-		gifts: { 'poke-ball': 20 },
+
 		quest: 'catch a pokemon',
 		conditionFunction: (s) => s.quests['catch a pokemon'] !== 'COLLECTED',
 	},
