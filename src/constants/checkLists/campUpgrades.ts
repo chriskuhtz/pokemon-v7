@@ -128,6 +128,6 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'invite museum curator': ['invite dugtrio explorers'],
 	'create seed vault': ['bulletin_board'],
 	'bag size upgrade 1': baseRequirements,
-	'bag size upgrade 2': baseRequirements,
-	'bag size upgrade 3': baseRequirements,
+	'bag size upgrade 2': [...baseRequirements, 'bag size upgrade 1'],
+	'bag size upgrade 3': [...baseRequirements, 'bag size upgrade 2'],
 };
