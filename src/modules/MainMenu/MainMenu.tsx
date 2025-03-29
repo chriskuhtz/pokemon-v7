@@ -51,12 +51,13 @@ export const MainMenu = ({
 					'X-GitHub-Api-Version': '2022-11-28',
 				},
 			})
-			.then(() =>
+			.then(() => {
 				addMessage({
 					message: 'Thank you for reporting this',
 					needsNoConfirmation: true,
-				})
-			);
+				});
+				setBugReport('');
+			});
 	};
 
 	return (
