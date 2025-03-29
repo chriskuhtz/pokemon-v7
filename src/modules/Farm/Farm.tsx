@@ -23,11 +23,21 @@ export const Farm = (): JSX.Element => {
 								successfully
 							</strong>
 							<ul>
-								<li>growth mulch: makes berries grow faster</li>
-								<li>damp mulch: makes berries less likely to wither</li>
-								<li>gooey mulch: produces 25% more berries</li>
 								<li>
-									stable mulch: berries grow 25% slower, but yield 50% more
+									<strong>growth mulch: makes berries grow faster</strong>
+								</li>
+								<li>
+									<strong>
+										damp mulch: makes berries less likely to wither
+									</strong>
+								</li>
+								<li>
+									<strong>gooey mulch: produces 25% more berries</strong>
+								</li>
+								<li>
+									<strong>
+										stable mulch: berries grow 25% slower, but yield 50% more
+									</strong>
 								</li>
 							</ul>
 						</div>
@@ -58,9 +68,9 @@ export const Farm = (): JSX.Element => {
 							actionElements={
 								ready
 									? [
-											<strong onClick={() => harvest(bush.id)}>
+											<button onClick={() => harvest(bush.id)}>
 												{bush.successful ? 'harvest' : 'remove'}
-											</strong>,
+											</button>,
 									  ]
 									: []
 							}
@@ -72,28 +82,14 @@ export const Farm = (): JSX.Element => {
 						<Card
 							key={berry}
 							icon={<img src={getItemUrl(berry)} />}
-							content={`plant a ${berry} (${amount} in bag)`}
+							content={<strong>{`plant a ${berry} (${amount} in bag)`}</strong>}
 							actionElements={[
-								<strong
-									style={{
-										border: '1px solid',
-										borderRadius: '.5rem',
-									}}
-									onClick={() => plant(berry)}
-								>
-									{`no mulch`}
-								</strong>,
+								<button onClick={() => plant(berry)}>{`no mulch`}</button>,
 								...mulches.map(([m]) => (
-									<strong
-										style={{
-											border: '1px solid',
-											borderRadius: '.5rem',
-										}}
-										onClick={() => plant(berry, m)}
-									>
+									<button onClick={() => plant(berry, m)}>
 										{`with ${m}`}
 										<img src={getItemUrl(m)} />
-									</strong>
+									</button>
 								)),
 							]}
 						/>

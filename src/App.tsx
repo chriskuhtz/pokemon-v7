@@ -32,6 +32,7 @@ import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { Team } from './modules/Team/Team';
 import { TrainingField } from './modules/TrainingField/TrainingField';
 import { VilePlumeScentResearcher } from './modules/VilePlumeScentResearcher/VilePlumeScentResearcher';
+import { StorageChest } from './modules/StorageChest/StorageChest';
 
 export const FullScreenToggle = () => {
 	const [f, setF] = useState<boolean>(!!document.fullscreenElement);
@@ -74,21 +75,14 @@ export const App = (): JSX.Element => {
 	>({});
 	const {
 		saveFile,
-		discardItemReducer,
 		setActiveTabReducer,
 		sellItemReducer,
 		buyItemReducer,
-		setCharacterLocationReducer,
 		setPokemonReducer,
-		talkToNurseReducer,
 		patchSaveFileReducer,
 		navigateAwayFromOverworldReducer,
-		applyItemToPokemonReducer,
 		changeHeldItemReducer,
-		useSacredAshReducer,
-		applyEncounterRateModifierItem,
 		reset,
-		addItemReducer,
 	} = useContext(SaveFileContext);
 
 	const {
@@ -96,8 +90,6 @@ export const App = (): JSX.Element => {
 		bag: inventory,
 		pokemon,
 		money,
-		location,
-		handledOccupants,
 	} = saveFile;
 
 	const team = useMemo(() => pokemon.filter((p) => p.onTeam), [pokemon]);
@@ -151,17 +143,7 @@ export const App = (): JSX.Element => {
 		return <BulletinBoard goBack={() => setActiveTabReducer('MAIN')} />;
 	}
 	if (activeTab === 'BAG') {
-		return (
-			<Bag
-				inventory={saveFile.bag}
-				discardItem={discardItemReducer}
-				goBack={() => setActiveTabReducer('MAIN')}
-				team={team}
-				applyItem={applyItemToPokemonReducer}
-				applySacredAsh={useSacredAshReducer}
-				applyEncounterRateModifierItem={applyEncounterRateModifierItem}
-			/>
-		);
+		return <Bag goBack={() => setActiveTabReducer('MAIN')} />;
 	}
 	if (activeTab === 'TEAM') {
 		return (
@@ -243,6 +225,9 @@ export const App = (): JSX.Element => {
 	if (activeTab === 'TRAINING_FIELD') {
 		return <TrainingField />;
 	}
+	if (activeTab === 'STORAGE_CHEST') {
+		return <StorageChest />;
+	}
 	if (activeTab === 'MARKET') {
 		return (
 			<Market
@@ -262,19 +247,10 @@ export const App = (): JSX.Element => {
 
 	return (
 		<Overworld
-			setCharacterLocation={setCharacterLocationReducer}
-			playerLocation={location}
-			saveFile={saveFile}
 			goToMarket={(i, steps) => {
 				navigateAwayFromOverworldReducer('MARKET', steps);
 				setCurrentMarketInventory(i);
 			}}
-			talkToNurse={talkToNurseReducer}
-			playerSprite={saveFile.sprite}
-			receiveItems={addItemReducer}
-			handledOccupants={handledOccupants.map((h) => h.id)}
-			latestMessage={latestMessage}
-			addMultipleMessages={addMultipleMessages}
 		/>
 	);
 };

@@ -24,20 +24,32 @@ export const CampUpgrades = ({
 
 	const { campUpgrades, researchPoints } = saveFile;
 
+	const currentPrice =
+		Object.values(campUpgrades).filter((c) => !!c).length * 5 + 5;
+
 	const unlock = useCallback(
 		(id: CampUpgrade) => {
-			if (researchPoints < campUpgradePrices[id]) {
+			//if (researchPoints < campUpgradePrices[id]) {
+			if (researchPoints < currentPrice) {
 				addMessage({ message: 'Earn more research points' });
 				return;
 			}
 			addMessage({ message: `Unlocked ${id}`, needsNoConfirmation: true });
 			putSaveFileReducer({
 				...saveFile,
-				researchPoints: researchPoints - campUpgradePrices[id],
+				//researchPoints: researchPoints - campUpgradePrices[id],
+				researchPoints: researchPoints - currentPrice,
 				campUpgrades: { ...campUpgrades, [id]: true },
 			});
 		},
-		[addMessage, campUpgrades, putSaveFileReducer, researchPoints, saveFile]
+		[
+			addMessage,
+			campUpgrades,
+			currentPrice,
+			putSaveFileReducer,
+			researchPoints,
+			saveFile,
+		]
 	);
 
 	const availableUpgrades: CampUpgrade[] = useMemo(
@@ -52,6 +64,16 @@ export const CampUpgrades = ({
 			),
 		[campUpgrades]
 	);
+
+	const sortedUpgrades = availableUpgrades.sort((a, b) => {
+		if (campUpgrades[a]) {
+			return 1;
+		}
+		if (campUpgrades[b]) {
+			return -1;
+		}
+		return 0;
+	});
 	return (
 		<Page headline="Main Menu:" goBack={goBack}>
 			<Stack mode="column">
@@ -59,23 +81,27 @@ export const CampUpgrades = ({
 					We can use the research points earned from quests to expand our camp
 				</h2>
 				<h2>Research Points: {researchPoints}</h2>
-				{availableUpgrades.map((upgrade) => (
+				{sortedUpgrades.map((upgrade) => (
 					<Card
 						key={upgrade}
 						disabled={campUpgrades[upgrade]}
-						onClick={() => unlock(upgrade)}
 						content={
 							<div>
 								<h3>{upgrade}</h3>
-								<h4>Research Points: {campUpgradePrices[upgrade] || 'FREE'}</h4>
+								{/* <h4>Research Points: {campUpgradePrices[upgrade] || 'FREE'}</h4> */}
+								<h4>Research Points: {currentPrice || 'FREE'}</h4>
 							</div>
 						}
 						actionElements={
 							campUpgrades[upgrade]
 								? [<FaCheckCircle size={battleSpriteSize} />]
 								: [
-										<button>
-											{campUpgradePrices[upgrade] <= researchPoints
+										<button
+											disabled={currentPrice > researchPoints}
+											onClick={() => unlock(upgrade)}
+										>
+											{/* {campUpgradePrices[upgrade] <= researchPoints */}
+											{currentPrice <= researchPoints
 												? 'Unlock'
 												: 'More Research Points needed'}
 										</button>,

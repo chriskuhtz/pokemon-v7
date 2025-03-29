@@ -1,47 +1,41 @@
-import React from 'react';
+import React, { useContext, useMemo } from 'react';
 import { FaRunning, FaSprayCan } from 'react-icons/fa';
 import { MdHealing } from 'react-icons/md';
+import { BagLimitBar } from '../../components/BagLimitBar/BagLimitBar';
 import { HealAction } from '../../components/ItemCard/components/HealAction';
 import { ThrowAwayAction } from '../../components/ItemCard/components/ThrowAwayAction';
 import { ItemCard } from '../../components/ItemCard/ItemCard';
 import { useFilteredInventory } from '../../components/ItemsFilter/ItemsFilter';
-import { MoveName } from '../../constants/checkLists/movesCheckList';
 import { battleSpriteSize } from '../../constants/gameData';
 import { canBenefitFromItem } from '../../functions/canBenefitFromItem';
 import { useEscapeRope } from '../../hooks/useEscapeRope';
-import { Inventory } from '../../interfaces/Inventory';
-import {
-	EncounterChanceItem,
-	isEncounterChanceItem,
-	isItem,
-	ItemType,
-} from '../../interfaces/Item';
-import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
+import { SaveFileContext } from '../../hooks/useSaveFile';
+import { isEncounterChanceItem, isItem, ItemType } from '../../interfaces/Item';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
-export const Bag = ({
-	inventory,
-	discardItem,
-	goBack,
-	applyItem,
-	team,
-	applySacredAsh,
-	applyEncounterRateModifierItem,
-}: {
-	inventory: Inventory;
-	discardItem: (item: ItemType, number: number) => void;
-	goBack: () => void;
-	team: OwnedPokemon[];
-	applySacredAsh: () => void;
-	applyEncounterRateModifierItem: (x: EncounterChanceItem) => void;
-	applyItem: (pokemon: OwnedPokemon, item: ItemType, move?: MoveName) => void;
-}): JSX.Element => {
-	const { filteredInventory, buttons } = useFilteredInventory(inventory);
+export const Bag = ({ goBack }: { goBack: () => void }): JSX.Element => {
 	const { applyEscapeRope, disabled } = useEscapeRope();
+	const {
+		saveFile,
+		applyEncounterRateModifierItem,
+		applyItemToPokemonReducer: applyItem,
+		useSacredAshReducer: applySacredAsh,
+		discardItemReducer: discardItem,
+	} = useContext(SaveFileContext);
+
+	const { bag: inventory } = saveFile;
+	const team = useMemo(
+		() => saveFile.pokemon.filter((p) => p.onTeam),
+		[saveFile.pokemon]
+	);
+
+	const { filteredInventory, buttons } = useFilteredInventory(inventory);
 	return (
 		<Page goBack={goBack} headline="Inventory:">
 			<Stack mode="column">
+				<h4>Bag Capacity:</h4>
+				<BagLimitBar />
 				{buttons}
 				{Object.entries(filteredInventory).map(([item, amount]) => {
 					if (amount <= 0) {

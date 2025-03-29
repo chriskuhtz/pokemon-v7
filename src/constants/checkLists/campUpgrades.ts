@@ -1,11 +1,14 @@
 export const campUpgradeNames = [
 	'bulletin_board',
 	'berry_farm',
+	'invite apricorn smith kurt',
+	'create seed vault',
 	'second slot for farm',
 	'third slot for farm',
 	'fourth slot for farm',
-	'invite apricorn smith kurt',
-	'create seed vault',
+	'bag size upgrade 1',
+	'bag size upgrade 2',
+	'bag size upgrade 3',
 	'invite ghost expert morty',
 	'invite professor rowan',
 	'invite professor elm',
@@ -88,6 +91,9 @@ export const campUpgradePrices: Record<CampUpgrade, number> = {
 	'invite museum curator': 50,
 	'invite amoongus compost researcher': 50,
 	'invite vileplume scent researcher': 50,
+	'bag size upgrade 1': 10,
+	'bag size upgrade 2': 10,
+	'bag size upgrade 3': 10,
 };
 
 export const baseRequirements: CampUpgrade[] = [
@@ -121,4 +127,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'shovel certification': ['sledge hammer certification'],
 	'invite museum curator': ['invite dugtrio explorers'],
 	'create seed vault': ['bulletin_board'],
+	'bag size upgrade 1': baseRequirements,
+	'bag size upgrade 2': baseRequirements,
+	'bag size upgrade 3': baseRequirements,
 };

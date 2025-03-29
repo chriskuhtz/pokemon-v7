@@ -76,7 +76,6 @@ export interface SaveFile {
 	badges: BadgeName[];
 	playerId: string;
 	bag: Inventory;
-	bagLimit: number;
 	storage: Inventory;
 	pokemon: OwnedPokemon[];
 	money: number;

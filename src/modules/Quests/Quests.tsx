@@ -56,10 +56,19 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 		);
 	}
 
+	const sortedQuests = [...all].sort((a, b) => {
+		if (a.status === 'FULFILLED') {
+			return -1;
+		}
+		if (b.status === 'FULFILLED') {
+			return 1;
+		}
+		return 0;
+	});
 	return (
 		<Page headline={'Quests:'} goBack={goBack}>
 			<Stack mode="column">
-				{all.map(({ name, status }) => {
+				{sortedQuests.map(({ name, status }) => {
 					const quest = QuestsRecord[name];
 					if (status === 'INACTIVE' || status === 'COLLECTED') {
 						return <React.Fragment key={name}></React.Fragment>;

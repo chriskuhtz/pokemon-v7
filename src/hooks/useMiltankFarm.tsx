@@ -10,7 +10,10 @@ export const useMiltankFarm = () => {
 
 	const trade = useCallback(
 		(berry: BerryType) => {
-			addMessage({ message: `Traded 1 ${berry} for 1 moomoo-milk` });
+			addMessage({
+				message: `Traded 1 ${berry} for 1 moomoo-milk`,
+				needsNoConfirmation: true,
+			});
 			patchSaveFileReducer({
 				bag: joinInventories(saveFile.bag, {
 					[berry]: -1,

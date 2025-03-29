@@ -1,3 +1,4 @@
+import { isBagOverloaded } from '../../../components/BagLimitBar/BagLimitBar';
 import { dugtrioExplorers } from '../../../hooks/useDugtrioExplorers';
 import { zigzagoonForagers } from '../../../hooks/useZigzagoonForagers';
 import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
@@ -676,8 +677,22 @@ export const campOccupants: OverworldMap['occupants'] = [
 			forwardFoot: 'CENTER1',
 		},
 		id: 'camp_to_routeN1',
-		conditionFunction: () => true,
+		conditionFunction: (s) => !isBagOverloaded(s),
 	},
+	{
+		type: 'NPC',
+		x: 10,
+		y: 0,
+		unhandledMessage: [
+			'You cant go out carrying this much stuff',
+			'Store some items in your chest',
+		],
+		id: 'bag_blocker_1',
+		sprite: SpriteEnum.scientistMale,
+		orientation: 'DOWN',
+		conditionFunction: (s) => isBagOverloaded(s),
+	},
+
 	{
 		type: 'ON_STEP_PORTAL',
 		x: 19,
@@ -690,7 +705,20 @@ export const campOccupants: OverworldMap['occupants'] = [
 			forwardFoot: 'CENTER1',
 		},
 		id: 'camp_to_routeE1',
-		conditionFunction: () => true,
+		conditionFunction: (s) => !isBagOverloaded(s),
+	},
+	{
+		type: 'NPC',
+		x: 19,
+		y: 10,
+		unhandledMessage: [
+			'You cant go out carrying this much stuff',
+			'Store some items in your chest',
+		],
+		id: 'bag_blocker_E1',
+		sprite: SpriteEnum.scientistFemale,
+		orientation: 'LEFT',
+		conditionFunction: (s) => isBagOverloaded(s),
 	},
 	{
 		type: 'SIGN',
@@ -707,6 +735,13 @@ export const campOccupants: OverworldMap['occupants'] = [
 		y: 1,
 		approachDirection: 'UP',
 		id: 'camp_pc',
+		conditionFunction: () => true,
+	},
+	{
+		type: 'STORAGE_CHEST',
+		x: 3,
+		y: 1,
+		id: 'camp_storage',
 		conditionFunction: () => true,
 	},
 	{
@@ -728,9 +763,9 @@ export const campOccupants: OverworldMap['occupants'] = [
 		id: 'campUpgrade_kurt',
 		dialogue: [
 			'My name is kurt',
-			'Professor Oak and I started out together',
 			'I practice the ancient art',
 			'of turning apricorns into pokeballs',
+			'Each type of ball has a different specialty',
 		],
 		conditionFunction: (s) => s.campUpgrades['invite apricorn smith kurt'],
 	},

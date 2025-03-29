@@ -35,6 +35,10 @@ import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { RoutesType } from '../interfaces/Routing';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
 import { Message } from './useMessageQueue';
+import {
+	getTotalInventoryAmount,
+	getBagLimit,
+} from '../components/BagLimitBar/BagLimitBar';
 
 export interface EvolutionReducerPayload {
 	id: string;
@@ -86,9 +90,6 @@ const migrateSavefile = (input: SaveFile) => {
 	const updatedInput = { ...input };
 	if (!updatedInput.storage) {
 		updatedInput.storage = EmptyInventory;
-	}
-	if (!input.bagLimit) {
-		updatedInput.bagLimit = 30;
 	}
 	return updatedInput;
 };
@@ -281,6 +282,21 @@ const useSaveFile = (
 		if (occ.type === 'ITEM' || occ.type === 'HIDDEN_ITEM') {
 			const { item, amount } = occ;
 			newInventory = joinInventories(newInventory, { [item]: amount });
+
+			if (
+				getTotalInventoryAmount(newInventory) >
+				getBagLimit(saveFile.campUpgrades)
+			) {
+				addMessage({
+					message: 'Your Bag is full,  cant carry more items',
+					needsNoConfirmation: true,
+				});
+				return;
+			} else
+				addMessage({
+					message: `Found ${amount} ${item}`,
+					needsNoConfirmation: true,
+				});
 		}
 		const updatedQuests = saveFile.quests;
 		if (occ.type === 'NPC' && occ.quest) {

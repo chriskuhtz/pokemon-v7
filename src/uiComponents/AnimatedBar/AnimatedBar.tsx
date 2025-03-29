@@ -1,17 +1,20 @@
 import { useEffect, useState } from 'react';
 import { animationTimer } from '../../constants/gameData';
 import { percentageBasedColor } from '../../constants/typeColors';
+import { getMiddleOfThree } from '../../functions/getMiddleOfThree';
 
 export const AnimatedBar = ({
 	max,
 	offset,
 	color,
 	textColor,
+	inversedColor,
 }: {
 	max: number;
 	offset: number;
 	color?: string;
 	textColor?: string;
+	inversedColor?: boolean;
 }) => {
 	const [current, setCurrent] = useState<number>(max - offset);
 
@@ -62,7 +65,7 @@ export const AnimatedBar = ({
 		return () => clearTimeout(t);
 	}, [current, max, offset]);
 
-	const percentage = current / max;
+	const percentage = getMiddleOfThree([0, current / max, 1]);
 
 	return (
 		<div
@@ -90,7 +93,10 @@ export const AnimatedBar = ({
 			</div>
 			<div
 				style={{
-					backgroundColor: color ?? percentageBasedColor(percentage).color,
+					backgroundColor:
+						color ??
+						percentageBasedColor(inversedColor ? 1 - percentage : percentage)
+							.color,
 					zIndex: 1,
 					position: 'absolute',
 					height: '1rem',

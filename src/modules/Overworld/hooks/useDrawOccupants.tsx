@@ -180,6 +180,8 @@ const getSource = (occ: Occupant) => {
 			return `/overworldPokemonSprites/${threeDigitString(occ.dexId)}.png`;
 		case 'PC':
 			return '/mapObjects/pc.png';
+		case 'STORAGE_CHEST':
+			return '/mapObjects/chest.png';
 		case 'SIGN':
 			return '/mapObjects/sign.png';
 		case 'BULLETIN_BOARD':

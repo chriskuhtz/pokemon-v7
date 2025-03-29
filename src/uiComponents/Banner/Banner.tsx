@@ -47,6 +47,7 @@ export const Banner = ({
 				onKeyDown={(e) => {
 					if (onClick && e.key === 'Enter') {
 						onClick();
+						e.stopPropagation();
 					}
 				}}
 				style={{

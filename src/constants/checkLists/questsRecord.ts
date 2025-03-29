@@ -305,7 +305,7 @@ export type QuestName = (typeof questNames)[number];
 export const QuestsRecord: Record<QuestName, Quest> = {
 	...catchQuests,
 	'catch a pokemon': {
-		rewardItems: { 'poke-ball': 20 },
+		rewardItems: { 'poke-ball': 5 },
 		researchPoints: 10,
 		conditionFunction: (s) => {
 			return s.pokemon.length > 1;
@@ -313,7 +313,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch a pikachu': {
-		rewardItems: { 'thunder-stone': 1 },
+		rewardItems: { 'berry-juice': 2 },
 		researchPoints: 10,
 		targetPokemon: ['pikachu'],
 		conditionFunction: (s) => {

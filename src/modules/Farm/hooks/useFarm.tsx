@@ -99,6 +99,7 @@ export const useFarm = () => {
 			message: `planted a ${type} ${
 				mulch ? `and fertilized with ${mulch}` : ''
 			}`,
+			needsNoConfirmation: true,
 		});
 
 		const berryYield =

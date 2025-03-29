@@ -249,4 +249,5 @@ export const extraFeatureCheckList: {
 	{ name: 'sort unlocked upgrades to bottom' },
 	{ name: 'move selection for opponents' },
 	{ name: 'tilemap should be only tuples' },
+	{ name: 'infatuation needs to be removed if target leaves field' },
 ];

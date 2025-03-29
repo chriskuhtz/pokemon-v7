@@ -33,6 +33,7 @@ export const shouldRotate = (t: OccupantType) =>
 		'ROUTER_NPC',
 	].includes(t);
 export const interactWithFunction = ({
+	activeMessage,
 	occ,
 	addMultipleMessages,
 	stepsTaken,
@@ -55,6 +56,7 @@ export const interactWithFunction = ({
 	settings,
 	goTo,
 }: {
+	activeMessage: boolean;
 	occ: Occupant | undefined;
 	addMultipleMessages: (x: Message[]) => void;
 	stepsTaken: number;
@@ -74,11 +76,10 @@ export const interactWithFunction = ({
 	interactWithZigzagoonForager: () => void;
 	interactWithDugtrioExplorer: () => void;
 	interactWithSwarmRadar: () => void;
-
 	goTo: (route: RoutesType) => void;
 	settings?: SettingsObject;
 }) => {
-	if (!occ) {
+	if (!occ || activeMessage) {
 		return;
 	}
 	const data = occ;
@@ -97,13 +98,9 @@ export const interactWithFunction = ({
 		const checkedData = settings?.randomOverworldItems
 			? { ...data, item: getRandomItem() }
 			: data;
-		addMultipleMessages([
-			{
-				message: `Found ${data.amount} ${checkedData.item}`,
-				onRemoval: () => handleThisOccupant(checkedData),
-				needsNoConfirmation: true,
-			},
-		]);
+
+		handleThisOccupant(checkedData);
+
 		return;
 	}
 	if (data.type === 'BUSH') {
@@ -127,6 +124,16 @@ export const interactWithFunction = ({
 				message: 'Accessing Pokemon Storage',
 				needsNoConfirmation: true,
 				onRemoval: () => goTo('STORAGE'),
+			},
+		]);
+		return;
+	}
+	if (data.type === 'STORAGE_CHEST') {
+		addMultipleMessages([
+			{
+				message: 'Opening Your Storage Chest',
+				needsNoConfirmation: true,
+				onRemoval: () => goTo('STORAGE_CHEST'),
 			},
 		]);
 		return;
