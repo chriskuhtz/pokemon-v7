@@ -665,7 +665,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 		type: 'PC',
 		x: 8,
 		y: 7,
-		approachDirection: 'UP',
+
 		id: 'camp_pc',
 		conditionFunction: () => true,
 	},

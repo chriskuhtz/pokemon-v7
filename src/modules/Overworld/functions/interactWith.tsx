@@ -115,10 +115,7 @@ export const interactWithFunction = ({
 		interactWithLedge(data);
 		return;
 	}
-	if (
-		data.type === 'PC' &&
-		playerLocation.orientation === data.approachDirection
-	) {
+	if (data.type === 'PC') {
 		addMultipleMessages([
 			{
 				message: 'Accessing Pokemon Storage',

@@ -61,7 +61,6 @@ export interface OverworldHiddenItem extends BaseOccupant {
 }
 export interface OverworldPC extends BaseOccupant {
 	type: 'PC';
-	approachDirection: CharacterOrientation;
 }
 export interface OverworldMerchant extends BaseOccupant {
 	type: 'MERCHANT';
