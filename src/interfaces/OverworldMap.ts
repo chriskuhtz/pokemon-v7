@@ -4,7 +4,7 @@ import { MapId } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { TimeOfDay } from '../functions/getTimeOfDay';
 import { Inventory } from './Inventory';
-import { ItemType } from './Item';
+import { BerryType, ItemType } from './Item';
 import { OwnedPokemon } from './OwnedPokemon';
 import { RoutesType } from './Routing';
 import {
@@ -39,6 +39,7 @@ export const OCCUPANT_TYPES = [
 	'DUGTRIO_EXPLORER',
 	'ROUTER_NPC',
 	'STORAGE_CHEST',
+	'BERRY_TREE',
 ] as const;
 export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
@@ -160,6 +161,11 @@ export interface DugtrioExplorer extends BaseOccupant {
 	dexId: number;
 	orientation: CharacterOrientation;
 }
+export interface BerryTree extends BaseOccupant {
+	type: 'BERRY_TREE';
+	berry: BerryType;
+	sprite: string;
+}
 export interface Ledge extends BaseOccupant {
 	type: 'LEDGE';
 	sprite: string;
@@ -193,7 +199,8 @@ export type Occupant =
 	| RouterNpc
 	| SwarmRadar
 	| OverworldRock
-	| StorageChest;
+	| StorageChest
+	| BerryTree;
 
 export interface OverworldEncounter {
 	name: PokemonName;

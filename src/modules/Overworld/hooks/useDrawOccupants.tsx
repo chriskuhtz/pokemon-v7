@@ -167,7 +167,8 @@ const getSource = (occ: Occupant) => {
 		case 'PORTAL':
 		case 'LEDGE':
 			return occ.sprite;
-
+		case 'BERRY_TREE':
+			return `/berryTrees/${occ.sprite}.png`;
 		case 'MERCHANT':
 		case 'NURSE':
 		case 'NPC':
