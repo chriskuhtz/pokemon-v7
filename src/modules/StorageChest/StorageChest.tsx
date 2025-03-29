@@ -1,13 +1,14 @@
 import { useContext } from 'react';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { BagLimitBar } from '../../components/BagLimitBar/BagLimitBar';
+import { useFilteredInventory } from '../../components/ItemsFilter/ItemsFilter';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { SaveFileContext } from '../../hooks/useSaveFile';
-import { joinInventories } from '../../interfaces/Inventory';
+import { EmptyInventory, joinInventories } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { FaArrowRight, FaArrowLeft } from 'react-icons/fa';
 
 export const StorageChest = () => {
 	const { setActiveTabReducer, saveFile, patchSaveFileReducer } =
@@ -25,6 +26,15 @@ export const StorageChest = () => {
 			storage: joinInventories(saveFile.storage, { [item]: 1 }, true),
 		});
 	};
+	const storeEverything = () => {
+		patchSaveFileReducer({
+			bag: EmptyInventory,
+			storage: joinInventories(saveFile.storage, saveFile.bag),
+		});
+	};
+
+	const { filteredInventory: filteredStorage, buttons: buttonsForStorage } =
+		useFilteredInventory(saveFile.storage);
 
 	return (
 		<Page
@@ -32,6 +42,7 @@ export const StorageChest = () => {
 			headline="Storage Chest:"
 		>
 			<BagLimitBar />
+
 			<div
 				style={{
 					display: 'flex',
@@ -40,6 +51,7 @@ export const StorageChest = () => {
 			>
 				<Stack mode="column">
 					<h3>Bag:</h3>
+					<button onClick={storeEverything}>Store Everything</button>
 					{Object.entries(saveFile.bag)
 						.filter(([, amount]) => amount > 0)
 						.map(([item, amount]) => (
@@ -54,7 +66,8 @@ export const StorageChest = () => {
 				</Stack>
 				<Stack mode="column">
 					<h3>Storage:</h3>
-					{Object.entries(saveFile.storage)
+					{buttonsForStorage}
+					{Object.entries(filteredStorage)
 						.filter(([, amount]) => amount > 0)
 						.map(([item, amount]) => (
 							<Card
