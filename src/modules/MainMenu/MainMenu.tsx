@@ -46,7 +46,7 @@ export const MainMenu = ({
 				repo: 'REPO',
 				title: `Bug found by ${saveFile.playerId}`,
 				body: `${body}`,
-				labels: ['bug'],
+				labels: [],
 				headers: {
 					'X-GitHub-Api-Version': '2022-11-28',
 				},

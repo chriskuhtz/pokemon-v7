@@ -47,7 +47,7 @@ export const determineTypeFactor = (
 	) {
 		if (addMessage) {
 			addMessage({
-				message: `${target.data.name} prevents damage with wonder guard`,
+				message: `${target.data.name} prevents damage with lightning rod`,
 			});
 		}
 		return 0;

@@ -250,4 +250,5 @@ export const extraFeatureCheckList: {
 	{ name: 'move selection for opponents' },
 	{ name: 'tilemap should be only tuples' },
 	{ name: 'infatuation needs to be removed if target leaves field' },
+	{ name: 'label selection for github issues' },
 ];
