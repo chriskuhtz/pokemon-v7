@@ -16,8 +16,8 @@ export const launchReadyCheckList: {
 		handled: true,
 	},
 	{ name: 'increasable bag limit and storage chest', handled: true },
+	{ name: 'redesign camp', handled: true },
 	{ name: 'basic oppo decision tree' },
 	{ name: 'overwold farm' },
-	{ name: 'redesign camp' },
 	{ name: 'handle move.meta.category through switch case' },
 ];

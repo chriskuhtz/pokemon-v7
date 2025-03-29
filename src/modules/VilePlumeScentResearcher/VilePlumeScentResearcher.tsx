@@ -65,9 +65,9 @@ export const vileplumeResearchers: Occupant[] = [
 			'would you like to trade some for my spray',
 		],
 		to: 'VILEPLUME',
-		x: 1,
-		y: 3,
-		orientation: 'RIGHT',
+		x: 15,
+		y: 11,
+		orientation: 'DOWN',
 		sprite: SpriteEnum.scientistMale,
 		id: 'vileplume researcher',
 		conditionFunction: (s) =>
@@ -76,9 +76,9 @@ export const vileplumeResearchers: Occupant[] = [
 	{
 		type: 'POKEMON',
 		dexId: 45,
-		x: 1,
-		y: 4,
-		orientation: 'RIGHT',
+		x: 16,
+		y: 11,
+		orientation: 'DOWN',
 		id: 'vileplume',
 		dialogue: ["It really smells 'fascinating'"],
 		conditionFunction: (s) =>

@@ -44,10 +44,10 @@ export const testPokemon: OwnedPokemon = {
 
 export const startingLocation: CharacterLocationData = {
 	mapId: 'camp',
-	orientation: 'UP',
+	orientation: 'RIGHT',
 	forwardFoot: 'CENTER1',
-	x: 5,
-	y: 6,
+	x: 2,
+	y: 4,
 };
 
 const baseQuestState: Record<QuestName, QuestStatus> = Object.fromEntries(
