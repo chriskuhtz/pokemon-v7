@@ -75,7 +75,11 @@ export const AmoongussCompostResearcher = (): JSX.Element => {
 								/>
 							);
 					  })
-					: [<h3>Amoongus can break down berries or apricorns into mulch</h3>]}
+					: [
+							<h3 key="empty">
+								Amoongus can break down berries or apricorns into mulch
+							</h3>,
+					  ]}
 			</Stack>
 		</Page>
 	);
