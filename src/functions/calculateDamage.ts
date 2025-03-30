@@ -362,6 +362,12 @@ export const calculateDamage = (
 		superEffectiveSaveTable[attackType] === target.heldItemName
 			? 0.5
 			: 1;
+	const solarPowerFactor =
+		damageClass === 'special' &&
+		attacker.ability === 'solar-power' &&
+		weather === 'sun'
+			? 1.5
+			: 1;
 
 	const res = Math.max(
 		Math.floor(
@@ -400,7 +406,8 @@ export const calculateDamage = (
 				heatProofFactor *
 				drySkinFactor *
 				savingBerryFactor *
-				ironfistFactor
+				ironfistFactor *
+				solarPowerFactor
 		),
 		1
 	);
