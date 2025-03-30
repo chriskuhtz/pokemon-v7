@@ -491,6 +491,19 @@ const specialTrainers: Challenger[] = [
 	},
 	{
 		type: 'TRAINER',
+		id: 'Gym Leader Falkner',
+		team: [
+			makeChallengerPokemon({ name: 'noctowl', xp: 91125 }),
+			makeChallengerPokemon({ name: 'pidgeot', xp: 91125 }),
+			makeChallengerPokemon({ name: 'braviary', xp: 91125 }),
+			makeChallengerPokemon({ name: 'skarmory', xp: 91125 }),
+		],
+		inventory: EmptyInventory,
+		availableAfter: 'catch the legendary bird of ice',
+		trainer: { name: 'Gym Leader Falkner', sprite: SpriteEnum.falkner },
+	},
+	{
+		type: 'TRAINER',
 		id: 'Professor Rowan',
 		team: [
 			makeChallengerPokemon({ name: 'infernape', xp: 15625 }),

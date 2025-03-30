@@ -296,8 +296,7 @@ export const questNames = [
 ] as const;
 /**
  * Ideas:
- * falkner roaming arcticuno quest
- * defeat falkner
+
  * all eeveelutions as final elm quest
  * onix cave some
  * onix cave all
@@ -862,6 +861,40 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 1',
 		availableAfter: 'catch Haunter and Mightyena',
+	},
+	'defeat falkner': {
+		rewardItems: {
+			'ultra-ball': 10,
+			'full-restore': 5,
+		},
+		rewardPokemon: {
+			fixedAbility: true,
+			shiny: true,
+			maxHp: 30,
+			effortValues: EmptyStatObject,
+			ppBoostedMoves: [],
+			caughtOnMap: 'camp',
+			gender: 'MALE',
+			stepsWalked: 0,
+			ownerId: '',
+			damage: 0,
+			id: '',
+			ball: 'poke-ball',
+			ability: 'adaptability',
+			name: 'rufflet',
+			xp: 125,
+			nature: 'adamant',
+			intrinsicValues: generateRandomStatObject(31),
+			happiness: 70,
+			firstMove: { name: 'drill-peck', usedPP: 0 },
+		},
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'Gym Leader Falkner');
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'catch the legendary bird of ice',
 	},
 	'catch some local flying pokemon': {
 		rewardItems: { 'yache-berry': 2 },
