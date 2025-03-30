@@ -37,8 +37,8 @@ export const routeS1E1Occupants: OverworldMap['occupants'] = [
 		y: 3,
 		portal: {
 			mapId: 'onixCave',
-			x: 49,
-			y: 47,
+			x: 48,
+			y: 48,
 			orientation: 'DOWN',
 			forwardFoot: 'CENTER1',
 		},

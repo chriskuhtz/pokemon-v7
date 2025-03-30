@@ -3,6 +3,7 @@ import { EncounterMap } from '../encounters';
 export const onixCaveEncounters: EncounterMap = {
 	BASE: [
 		{ name: 'zubat', xp: 5000, rarity: 'common' },
+		{ name: 'zubat', xp: 4000, rarity: 'common' },
 		{ name: 'rhyhorn', xp: 5000, rarity: 'common' },
 		{ name: 'glimmet', xp: 5000, rarity: 'rare' },
 		{ name: 'nacli', xp: 5000, rarity: 'medium' },
@@ -12,7 +13,7 @@ export const onixCaveEncounters: EncounterMap = {
 		{ name: 'onix', xp: 4000, rarity: 'common' },
 		{ name: 'onix', xp: 5000, rarity: 'common' },
 		{ name: 'onix', xp: 6000, rarity: 'medium' },
-		{ name: 'steelix', xp: 6000, rarity: 'ultra-rare' },
+		{ name: 'steelix', xp: 8000, rarity: 'ultra-rare' },
 	],
 	MORNING: [],
 	DAY: [],
