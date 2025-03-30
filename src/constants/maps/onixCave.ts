@@ -1,11 +1,13 @@
 import { caveShaderMap } from '../../functions/getTimeOfDay';
 import { OverworldMap } from '../../interfaces/OverworldMap';
 import { onixCaveEncounters } from './encounters/onixCave';
+import { onixCaveOccupants } from './occupants/onixCave';
 
 export const onixCave: OverworldMap = {
 	id: 'onixCave',
 	timeOfDayShadersMap: caveShaderMap,
 	possibleEncounters: onixCaveEncounters,
+	occupants: onixCaveOccupants,
 	tileMap: {
 		baseLayer: [
 			[
@@ -493,22 +495,4 @@ export const onixCave: OverworldMap = {
 			[null, null, null, null, null, null, null, null, null, null, null],
 		],
 	},
-
-	occupants: [
-		{
-			type: 'ON_STEP_PORTAL',
-			id: 'cave exit',
-			conditionFunction: () => true,
-			x: 1,
-			y: 1,
-			portal: {
-				mapId: 'routeN1',
-				x: 3,
-				y: 3,
-				orientation: 'RIGHT',
-				forwardFoot: 'CENTER1',
-			},
-			sprite: '/mapObjects/ladderUp.png',
-		},
-	],
 };
