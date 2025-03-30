@@ -40,6 +40,7 @@ export const OCCUPANT_TYPES = [
 	'ROUTER_NPC',
 	'STORAGE_CHEST',
 	'BERRY_TREE',
+	'BERRY_LURE',
 ] as const;
 export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
@@ -175,6 +176,9 @@ export interface Ledge extends BaseOccupant {
 export interface StorageChest extends BaseOccupant {
 	type: 'STORAGE_CHEST';
 }
+export interface BerryLure extends BaseOccupant {
+	type: 'BERRY_LURE';
+}
 
 export type Occupant =
 	| OverworldItem
@@ -201,7 +205,8 @@ export type Occupant =
 	| SwarmRadar
 	| OverworldRock
 	| StorageChest
-	| BerryTree;
+	| BerryTree
+	| BerryLure;
 
 export interface OverworldEncounter {
 	name: PokemonName;

@@ -9,6 +9,7 @@ import { AmoongussCompostResearcher } from './modules/AmoongussResearcher/Amoong
 import { ApricornSmithy } from './modules/ApricornSmithy/ApricornSmithy';
 import { Bag } from './modules/Bag/Bag';
 import { BattleLoader } from './modules/Battle/components/BattleLoader';
+import { BerryLure } from './modules/BerryLure/BerryLure';
 import { BulletinBoard } from './modules/BulletinBoard/BulletinBoard';
 import { CampUpgrades } from './modules/CampUpgrades/CampUpgrades';
 import { CookingGrandma } from './modules/CookingGrandma/CookingGrandma';
@@ -227,6 +228,9 @@ export const App = (): JSX.Element => {
 	}
 	if (activeTab === 'STORAGE_CHEST') {
 		return <StorageChest />;
+	}
+	if (activeTab === 'BERRY_LURE') {
+		return <BerryLure />;
 	}
 	if (activeTab === 'MARKET') {
 		return (

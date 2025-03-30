@@ -39,6 +39,7 @@ export const routes = [
 	'SEED_VAULT',
 	'POKEDEX',
 	'STORAGE_CHEST',
+	'BERRY_LURE',
 	...mapMakerRoutes,
 ] as const;
 export type RoutesType = (typeof routes)[number];

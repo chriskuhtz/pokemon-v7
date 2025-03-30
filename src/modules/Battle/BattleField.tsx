@@ -604,17 +604,17 @@ export const BattleField = ({
 					return;
 				})
 				.filter((m) => m !== undefined);
-			//FRIENDSHIP REWARD
+			//FRIENDSHIP REWARD, only for participants
 			const friendshipIncreasedTeam = leveledUpTeam.map((p) => {
-				if (getsRewards(p)) {
+				if (p.participatedInBattle) {
 					applyHappinessChange(p, 1);
 				}
 				return p;
 			});
-			//EV REWARD
+			//EV REWARD, only for participants
 			const evGainedTeam = friendshipIncreasedTeam.map((p) => {
 				{
-					if (getsRewards(p)) {
+					if (p.participatedInBattle) {
 						const updated = { ...p };
 						defeatedPokemon.forEach((defeated) => {
 							Object.entries(defeated.evAwards).forEach(([stat, award]) => {

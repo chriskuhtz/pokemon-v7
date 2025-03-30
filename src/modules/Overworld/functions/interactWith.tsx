@@ -87,6 +87,16 @@ export const interactWithFunction = ({
 	if (shouldRotate(data.type)) {
 		rotateOccupant(occ.id, getOppositeDirection(playerLocation.orientation));
 	}
+	if (data.type === 'BERRY_LURE') {
+		addMultipleMessages([
+			{
+				message: 'Inspecting the berry lure',
+				needsNoConfirmation: true,
+				onRemoval: () => goTo('BERRY_LURE'),
+			},
+		]);
+		return;
+	}
 	if (data.type === 'ON_STEP_PORTAL') {
 		return;
 	}

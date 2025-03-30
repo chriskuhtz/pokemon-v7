@@ -6,7 +6,6 @@ import {
 	campUpgradeConditions,
 	campUpgradeExplanations,
 	campUpgradeNames,
-	campUpgradePrices,
 } from '../../constants/checkLists/campUpgrades';
 import { battleSpriteSize } from '../../constants/gameData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
@@ -55,13 +54,10 @@ export const CampUpgrades = ({
 
 	const availableUpgrades: CampUpgrade[] = useMemo(
 		() =>
-			campUpgradeNames.filter(
-				(name) =>
-					(campUpgradePrices[name] > 0 &&
-						campUpgradeConditions[name].length === 0) ||
-					campUpgradeConditions[name].every(
-						(condition) => campUpgrades[condition]
-					)
+			campUpgradeNames.filter((name) =>
+				campUpgradeConditions[name].every(
+					(condition) => campUpgrades[condition]
+				)
 			),
 		[campUpgrades]
 	);

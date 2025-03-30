@@ -19,7 +19,7 @@ import { routeE1 } from '../maps/routeE1';
 import { routeN1 } from '../maps/routeN1';
 import { routeN1E1 } from '../maps/routeN1E1';
 import { pokemonNames } from '../pokemonNames';
-import { CampUpgrade, campUpgradePrices } from './campUpgrades';
+import { CampUpgrade, campUpgradeNames } from './campUpgrades';
 
 const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 	//routeN1
@@ -302,6 +302,7 @@ export const questNames = [
  * onix cave all
  * achieve cooking level x
  * retrieve item from wild pokemon (special encounter)
+ * lure x pokemon
  */
 export type QuestName = (typeof questNames)[number];
 
@@ -1179,5 +1180,8 @@ console.log(
 		0
 	),
 	'total costs',
-	Object.values(campUpgradePrices).reduce((sum, summand) => sum + summand, 0)
+	5 +
+		campUpgradeNames
+			.map((_, i) => 5 * i)
+			.reduce((sum, summand) => sum + summand, 0)
 );

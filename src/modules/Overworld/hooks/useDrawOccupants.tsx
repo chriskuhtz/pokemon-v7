@@ -157,6 +157,7 @@ const drawOccupant = (
 				break;
 			case 'ITEM':
 			case 'PC':
+			case 'BERRY_LURE':
 			default:
 				ctx?.drawImage(
 					img,
@@ -173,9 +174,11 @@ const drawOccupant = (
 
 const getSource = (occ: Occupant) => {
 	switch (occ.type) {
-		case 'ON_STEP_PORTAL': {
+		case 'BERRY_LURE':
+			return '/mapObjects/berry_lure.png';
+		case 'ON_STEP_PORTAL':
 			return occ.sprite ?? '';
-		}
+
 		case 'PORTAL':
 		case 'LEDGE':
 			return occ.sprite;
