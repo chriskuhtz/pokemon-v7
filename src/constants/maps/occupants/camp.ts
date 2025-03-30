@@ -321,4 +321,13 @@ export const campOccupants: OverworldMap['occupants'] = [
 	...vileplumeResearchers,
 	...amoongussCompostResearchers,
 	...seedvaultResearcher,
+	{
+		type: 'ITEM',
+		x: 18,
+		y: 18,
+		item: 'exp-share',
+		amount: 1,
+		conditionFunction: () => true,
+		id: 'cheated-exp-share',
+	},
 ];
