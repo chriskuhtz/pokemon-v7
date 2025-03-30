@@ -211,6 +211,20 @@ export const handleAttack = ({
 			});
 		} else addMessage({ message: `It failed to convert to a new type` });
 	}
+	if (move.name === 'bide') {
+		if (!updatedAttacker.biding) {
+			addMessage({ message: `${updatedAttacker.name} is biding its time` });
+			updatedAttacker = { ...updatedAttacker, biding: { turn: 1, damage: 0 } };
+		} else if (updatedAttacker.biding?.turn === 1) {
+			addMessage({ message: `${updatedAttacker.name} is biding its time` });
+			updatedAttacker = {
+				...updatedAttacker,
+				biding: { ...updatedAttacker.biding, turn: 2 },
+			};
+		} else if (updatedAttacker.biding?.turn === 2) {
+			addMessage({ message: `${updatedAttacker.name} released energy` });
+		}
+	}
 
 	//updated Target
 	let updatedTarget = { ...target };
@@ -538,6 +552,12 @@ export const handleAttack = ({
 				wasSpecial: move.data.damage_class.name === 'special',
 			},
 			heldItemName: consumedHeldItem ? undefined : updatedTarget.heldItemName,
+			biding: updatedTarget.biding
+				? {
+						...updatedTarget.biding,
+						damage: updatedTarget.biding.damage + damage,
+				  }
+				: undefined,
 		};
 		// check attacker  drain/recoil
 
@@ -730,12 +750,14 @@ export const handleAttack = ({
 				return {
 					...checkAndHandleFainting(updatedAttacker, addMessage),
 					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
+					biding: updatedAttacker.moveQueue.length > 0 ? p.biding : undefined,
 				};
 			}
 			if (p.id === updatedAttacker.id) {
 				return {
 					...checkAndHandleFainting(updatedAttacker, addMessage),
 					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
+					biding: updatedAttacker.moveQueue.length > 0 ? p.biding : undefined,
 				};
 			}
 			if (p.id === updatedTarget.id) {

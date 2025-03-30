@@ -44,6 +44,10 @@ export interface BattlePokemon extends OwnedPokemon {
 	lastUsedMove?: BattleMove;
 	putMimicbacktoSlot?: number;
 	initAbility: AbilityName;
+	biding?: {
+		turn: number;
+		damage: number;
+	};
 }
 
 export function isBattlePokemon(

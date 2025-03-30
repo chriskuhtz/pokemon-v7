@@ -107,6 +107,9 @@ export const calculateDamage = (
 	consumedHeldItem?: boolean;
 	wasSuperEffective?: boolean;
 } => {
+	if (attack.name === 'bide' && attacker.biding?.turn === 2) {
+		return { damage: attacker.biding.damage * 2 };
+	}
 	const damageClass = attack.data.damage_class.name;
 	const attackType = attack.data.type.name;
 	if (damageClass === 'status') {

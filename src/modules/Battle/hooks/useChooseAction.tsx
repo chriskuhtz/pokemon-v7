@@ -212,6 +212,45 @@ export const useChooseAction = (
 				);
 				return;
 			}
+			if (actionName === 'bide') {
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.id === user.id) {
+							return {
+								...user,
+								moveQueue: [
+									{
+										type: 'BattleAttack',
+										data: move.data,
+										name: actionName as MoveName,
+										round: battleRound,
+										targetId,
+										multiHits: 0,
+									},
+									{
+										type: 'BattleAttack',
+										data: move.data,
+										name: actionName as MoveName,
+										round: battleRound + 1,
+										targetId,
+										multiHits: 0,
+									},
+									{
+										type: 'BattleAttack',
+										data: move.data,
+										name: actionName as MoveName,
+										round: battleRound + 2,
+										targetId,
+										multiHits: 0,
+									},
+								] as BattleAction[],
+							};
+						}
+						return p;
+					})
+				);
+				return;
+			}
 
 			setPokemon((pokemon) =>
 				pokemon.map((p) => {
