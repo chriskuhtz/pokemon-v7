@@ -6,6 +6,7 @@ import {
 import { MoveName } from '../constants/checkLists/movesCheckList';
 import { calculateLevelData } from '../functions/calculateLevelData';
 import { getRandomEntry } from '../functions/filterTargets';
+import { getEvAwards } from '../functions/getEvAwards';
 import { getStats } from '../functions/getStats';
 import { deAlternate } from '../functions/handleAlternateForms';
 import { maybeGetHeldItemFromData } from '../functions/maybeGetHeldItemFromData';
@@ -204,6 +205,8 @@ export const useGetBattleTeam = (
 					effortValues: generateEvs
 						? generateRandomStatObject(255)
 						: pokemon.effortValues,
+					evAwards: getEvAwards(fetchedData.stats),
+					participatedInBattle: false,
 				};
 
 				return battleMon;

@@ -120,14 +120,13 @@ export const routeE1Occupants: OverworldMap['occupants'] = [
 		sprite: '/ledges/ledgeEndBottomRight.png',
 	},
 	{
-		y: 49,
+		y: 48,
 		x: 25,
-		type: 'POKEMON',
-		orientation: 'DOWN',
-		id: 'snorlax-blocker',
-		dexId: 143,
-		conditionFunction: () => true,
-		dialogue: ['..ZZ..', '.ZZZ...', '...ZZZ.'],
+		type: 'SNORLAX',
+		orientation: 'LEFT',
+		id: 'snorlax-blocker-routeE1',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'snorlax-blocker-routeE1'),
 	},
 	{
 		type: 'ROCK',

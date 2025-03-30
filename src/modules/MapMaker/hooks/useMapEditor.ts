@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useDeferredValue, useMemo, useState } from 'react';
 import { TimeOfDay } from '../../../functions/getTimeOfDay';
 import {
 	Occupant,
@@ -20,17 +20,18 @@ export const useMapEditor = ({
 	tool: Tool | undefined;
 	initialMap: OverworldMap;
 }) => {
-	const [newMap, setNewMap] = useState<OverworldMap>(initialMap);
+	const [newMapState, setNewMap] = useState<OverworldMap>(initialMap);
 
+	const newMap = useDeferredValue(newMapState);
 	const usedTiles = useMemo(() => {
 		const used: TileIdentifier[] = [];
 
 		const all = [
-			...newMap.tileMap.baseLayer.flat(),
-			...newMap.tileMap.encounterLayer.flat(),
-			...newMap.tileMap.obstacleLayer.flat(),
-			...newMap.tileMap.decorationLayer.flat(),
-			...newMap.tileMap.foregroundLayer.flat(),
+			...newMapState.tileMap.baseLayer.flat(),
+			...newMapState.tileMap.encounterLayer.flat(),
+			...newMapState.tileMap.obstacleLayer.flat(),
+			...newMapState.tileMap.decorationLayer.flat(),
+			...newMapState.tileMap.foregroundLayer.flat(),
 		];
 
 		all.forEach((t) => {
@@ -45,7 +46,7 @@ export const useMapEditor = ({
 		});
 
 		return used;
-	}, [newMap]);
+	}, [newMapState]);
 
 	const addColumn = () =>
 		setNewMap((newMap) => ({
@@ -353,44 +354,44 @@ export const useMapEditor = ({
 		}
 
 		const updatedMap = {
-			...newMap,
+			...newMapState,
 			tileMap: {
 				baseLayer:
 					layer === 'Base'
-						? newMap.tileMap.baseLayer.map((row) =>
+						? newMapState.tileMap.baseLayer.map((row) =>
 								row.map((c) => (Math.random() < percentage ? tool.tile : c))
 						  )
-						: newMap.tileMap.baseLayer,
+						: newMapState.tileMap.baseLayer,
 				encounterLayer:
 					layer === 'Encounter'
-						? newMap.tileMap.encounterLayer.map((row) =>
+						? newMapState.tileMap.encounterLayer.map((row) =>
 								row.map((c) => (Math.random() < percentage ? tool.tile : c))
 						  )
-						: newMap.tileMap.encounterLayer,
+						: newMapState.tileMap.encounterLayer,
 				obstacleLayer:
 					layer === 'Obstacle'
-						? newMap.tileMap.obstacleLayer.map((row) => {
+						? newMapState.tileMap.obstacleLayer.map((row) => {
 								return row.map((c) => {
 									return Math.random() < percentage ? tool.tile : c;
 								});
 						  })
-						: newMap.tileMap.obstacleLayer,
+						: newMapState.tileMap.obstacleLayer,
 				decorationLayer:
 					layer === 'Decoration'
-						? newMap.tileMap.decorationLayer.map((row) => {
+						? newMapState.tileMap.decorationLayer.map((row) => {
 								return row.map((c) => {
 									return Math.random() < percentage ? tool.tile : c;
 								});
 						  })
-						: newMap.tileMap.decorationLayer,
+						: newMapState.tileMap.decorationLayer,
 				foregroundLayer:
 					layer === 'Foreground'
-						? newMap.tileMap.foregroundLayer.map((row) => {
+						? newMapState.tileMap.foregroundLayer.map((row) => {
 								return row.map((c) => {
 									return Math.random() < percentage ? tool.tile : c;
 								});
 						  })
-						: newMap.tileMap.foregroundLayer,
+						: newMapState.tileMap.foregroundLayer,
 			},
 		};
 		setNewMap(updatedMap);
@@ -398,20 +399,23 @@ export const useMapEditor = ({
 
 	const addEncounter = (name: string, xp: number, timeOfDay: TimeOfDay) => {
 		setNewMap({
-			...newMap,
+			...newMapState,
 			possibleEncounters: {
-				...newMap.possibleEncounters,
-				[timeOfDay]: [...newMap.possibleEncounters[timeOfDay], { name, xp }],
+				...newMapState.possibleEncounters,
+				[timeOfDay]: [
+					...newMapState.possibleEncounters[timeOfDay],
+					{ name, xp },
+				],
 			},
 		});
 	};
 	const removeEncounter = (name: string, xp: number, timeOfDay: TimeOfDay) => {
 		setNewMap({
-			...newMap,
+			...newMapState,
 			possibleEncounters: {
-				...newMap.possibleEncounters,
+				...newMapState.possibleEncounters,
 				[timeOfDay]: [
-					...newMap.possibleEncounters[timeOfDay].filter(
+					...newMapState.possibleEncounters[timeOfDay].filter(
 						(e) => e.name !== name && e.xp !== xp
 					),
 				],
@@ -419,12 +423,12 @@ export const useMapEditor = ({
 		});
 	};
 	const addOccupant = (x: Occupant) => {
-		setNewMap({ ...newMap, occupants: [...newMap.occupants, x] });
+		setNewMap({ ...newMapState, occupants: [...newMapState.occupants, x] });
 	};
 	const removeOccupant = (id: string) => {
 		setNewMap({
-			...newMap,
-			occupants: newMap.occupants.filter((o) => o.id !== id),
+			...newMapState,
+			occupants: newMapState.occupants.filter((o) => o.id !== id),
 		});
 	};
 

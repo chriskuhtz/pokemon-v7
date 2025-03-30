@@ -9,7 +9,10 @@ export function applyHappinessChange<T extends OwnedPokemon | BattlePokemon>(
 	change: number
 ): T {
 	const ballSummand = pokemon.ball === 'luxury-ball' && change > 0 ? 1 : 0;
-	const updatedHappiness = pokemon.happiness + change + ballSummand;
+	const heldItemSummand =
+		pokemon.heldItemName === 'soothe-bell' && change > 0 ? 1 : 0;
+	const updatedHappiness =
+		pokemon.happiness + change + ballSummand + heldItemSummand;
 	const res = getMiddleOfThree([0, updatedHappiness, 255]);
 
 	return { ...pokemon, happiness: res };

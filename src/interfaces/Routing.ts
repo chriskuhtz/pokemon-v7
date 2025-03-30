@@ -8,6 +8,7 @@ export const mapMakerRoutes = [
 	'MAP_MAKER_routeS1W1',
 	'MAP_MAKER_routeW1',
 	'MAP_MAKER_routeN1W1',
+	'MAP_MAKER_onixCave',
 ];
 
 export const routes = [
@@ -38,6 +39,7 @@ export const routes = [
 	'SEED_VAULT',
 	'POKEDEX',
 	'STORAGE_CHEST',
+	'BERRY_LURE',
 	...mapMakerRoutes,
 ] as const;
 export type RoutesType = (typeof routes)[number];

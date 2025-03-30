@@ -97,6 +97,8 @@ export const apricorns = [
 	'white-apricorn',
 	'black-apricorn',
 ] as const;
+
+export const herbs = ['white-herb'] as const;
 export const encounterChanceItems = [
 	'white-flute',
 	'black-flute',
@@ -119,11 +121,14 @@ export const evoStones = [
 	'peat-block',
 ] as const;
 export const heldItems = [
+	'quick-claw',
 	'metal-coat',
 	'oval-stone',
 	'adamant-orb',
 	'lustrous-orb',
 	'bright-powder',
+	'macho-brace',
+	'soothe-bell',
 ] as const;
 export const valuables = [
 	'shoal-salt',
@@ -236,6 +241,7 @@ export const fossils = [
 	'jaw-fossil',
 	'sail-fossil',
 ] as const;
+export const keyItems = ['exp-share', 'poke-flute'] as const;
 export const itemTypes = [
 	...apricorns,
 	...balltypes,
@@ -252,6 +258,8 @@ export const itemTypes = [
 	...mulches,
 	...berries,
 	...fossils,
+	...herbs,
+	...keyItems,
 	'sacred-ash',
 	'rare-candy',
 	'escape-rope',
@@ -272,12 +280,20 @@ export type MulchType = (typeof mulches)[number];
 export type FossilType = (typeof fossils)[number];
 export type ValuableType = (typeof valuables)[number];
 export type ApricornType = (typeof apricorns)[number];
+export type HerbType = (typeof herbs)[number];
+export type KeyItemType = (typeof keyItems)[number];
 
 export function isPokeball(x: string | undefined): x is PokeballType {
 	return (balltypes as unknown as string[]).includes(x ?? '');
 }
 export function isApricorn(x: string | undefined): x is ApricornType {
 	return (apricorns as unknown as string[]).includes(x ?? '');
+}
+export function isKeyItem(x: string | undefined): x is KeyItemType {
+	return (keyItems as unknown as string[]).includes(x ?? '');
+}
+export function isHerb(x: string | undefined): x is HerbType {
+	return (herbs as unknown as string[]).includes(x ?? '');
 }
 export function isBerry(x: string | undefined): x is BerryType {
 	return (berries as unknown as string[]).includes(x ?? '');
@@ -320,7 +336,7 @@ export function isItem(x: string | undefined): x is ItemType {
 	return (itemTypes as unknown as string[]).includes(x ?? '');
 }
 export const hasEndOfTurnEffect = (item: ItemType): boolean => {
-	if (isBerry(item) || item === 'berry-juice') {
+	if (isBerry(item) || item === 'berry-juice' || isHerb(item)) {
 		return true;
 	}
 	return false;
@@ -462,6 +478,7 @@ export const getRandomItem = () => {
 export const pickupTable: ItemType[] = [
 	...berries,
 	...apricorns,
+	...herbs,
 	'berry-juice',
 	'old-gateau',
 	'energy-powder',
@@ -469,6 +486,7 @@ export const pickupTable: ItemType[] = [
 	'lava-cookie',
 	'revival-herb',
 	'rare-candy',
+	'soothe-bell',
 ];
 export const undergroundTable: ItemType[] = [
 	...valuables,

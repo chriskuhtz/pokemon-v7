@@ -4,8 +4,8 @@ import { LuHousePlus } from 'react-icons/lu';
 import {
 	CampUpgrade,
 	campUpgradeConditions,
+	campUpgradeExplanations,
 	campUpgradeNames,
-	campUpgradePrices,
 } from '../../constants/checkLists/campUpgrades';
 import { battleSpriteSize } from '../../constants/gameData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
@@ -24,8 +24,10 @@ export const CampUpgrades = ({
 
 	const { campUpgrades, researchPoints } = saveFile;
 
-	const currentPrice =
-		Object.values(campUpgrades).filter((c) => !!c).length * 5 + 5;
+	const currentPrice = Math.min(
+		Object.values(campUpgrades).filter((c) => !!c).length * 5 + 5,
+		100
+	);
 
 	const unlock = useCallback(
 		(id: CampUpgrade) => {
@@ -54,13 +56,10 @@ export const CampUpgrades = ({
 
 	const availableUpgrades: CampUpgrade[] = useMemo(
 		() =>
-			campUpgradeNames.filter(
-				(name) =>
-					(campUpgradePrices[name] > 0 &&
-						campUpgradeConditions[name].length === 0) ||
-					campUpgradeConditions[name].every(
-						(condition) => campUpgrades[condition]
-					)
+			campUpgradeNames.filter((name) =>
+				campUpgradeConditions[name].every(
+					(condition) => campUpgrades[condition]
+				)
 			),
 		[campUpgrades]
 	);
@@ -89,6 +88,8 @@ export const CampUpgrades = ({
 							<div>
 								<h3>{upgrade}</h3>
 								{/* <h4>Research Points: {campUpgradePrices[upgrade] || 'FREE'}</h4> */}
+								<h4>{campUpgradeExplanations[upgrade]}</h4>
+								<br />
 								<h4>Research Points: {currentPrice || 'FREE'}</h4>
 							</div>
 						}

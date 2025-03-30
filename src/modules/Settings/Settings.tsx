@@ -19,7 +19,7 @@ export const Settings = (): JSX.Element => {
 		randomOverworldItems: false,
 		randomQuestRewards: false,
 		randomSwarms: false,
-		//disqualifyFaintedPokemon: false,
+		releaseFaintedPokemon: false,
 		//randomHeldItems: false,
 	});
 
@@ -54,6 +54,9 @@ export const Settings = (): JSX.Element => {
 	};
 	return (
 		<Page headline="Settings:">
+			<button style={{ width: '100%' }} onClick={() => proceed()}>
+				I am not reading that, lets go
+			</button>
 			<div
 				style={{
 					display: 'grid',
@@ -67,51 +70,57 @@ export const Settings = (): JSX.Element => {
 				<span />
 				<span />
 				<ToggleRow
-					value={state.fasterDays}
+					value={!!state.fasterDays}
 					setValue={(x) => setState({ ...state, fasterDays: x })}
 					label={'Should Days take 4 hours instead of 24?'}
 					description="Does not reduce growing etc. times, just changes time of day more often "
 				/>
 				<ToggleRow
-					value={state.doubleXpRates}
+					value={!!state.doubleXpRates}
 					setValue={(x) => setState({ ...state, doubleXpRates: x })}
 					label={'Double Xp Rates'}
 				/>
 				<h2>Difficulty:</h2> <span />
 				<span />
 				<ToggleRow
-					value={state.rogueLike}
+					value={!!state.rogueLike}
 					setValue={(x) => setState({ ...state, rogueLike: x })}
 					label={'Roguelike mode:'}
 					description="Losing a battle completely resets your save file"
 				/>
 				<ToggleRow
-					value={state.noItemsInBattle}
+					value={!!state.releaseFaintedPokemon}
+					setValue={(x) => setState({ ...state, releaseFaintedPokemon: x })}
+					label={'Defeated Pokemon are released into the wild:'}
+					description="Losing a battle also completely resets your save file"
+				/>
+				<ToggleRow
+					value={!!state.noItemsInBattle}
 					setValue={(x) => setState({ ...state, noItemsInBattle: x })}
 					label={'No Healing Items allowed in Battle:'}
 				/>
 				<h2>Randomization:</h2> <span />
 				<span />
 				<ToggleRow
-					value={state.randomStarters}
+					value={!!state.randomStarters}
 					setValue={(x) => setState({ ...state, randomStarters: x })}
 					label={'Do you want random starter pokemon choices:'}
 					description={'makes 1 questline impossible'}
 				/>
 				<ToggleRow
-					value={state.randomOverworldItems}
+					value={!!state.randomOverworldItems}
 					setValue={(x) => setState({ ...state, randomOverworldItems: x })}
 					label={'Random Overworld Items:'}
 					description="increases Risk of Softlock"
 				/>
 				<ToggleRow
-					value={state.randomQuestRewards}
+					value={!!state.randomQuestRewards}
 					setValue={(x) => setState({ ...state, randomQuestRewards: x })}
 					label={'Random Quest Rewards:'}
 					description="increases Risk of Softlock"
 				/>
 				<ToggleRow
-					value={state.randomSwarms}
+					value={!!state.randomSwarms}
 					setValue={(x) => setState({ ...state, randomSwarms: x })}
 					label={'Random Pokemon Swarms:'}
 					description="can be weird: e.g. swarms of mewtwo"

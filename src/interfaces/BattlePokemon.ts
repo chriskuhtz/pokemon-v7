@@ -1,10 +1,9 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
 import { SecondaryAilment } from './Ailment';
-import { BattleAction } from './BattleActions';
-import { DamageClass, MoveDto } from './Move';
+import { BattleAction, BattleAttack } from './BattleActions';
+import { MoveDto } from './Move';
 import { OwnedPokemon, OwnedPokemonMove } from './OwnedPokemon';
 import { PokemonData } from './PokemonData';
-import { PokemonType } from './PokemonType';
 import { StatObject } from './StatObject';
 
 export interface BattleMove extends OwnedPokemonMove {
@@ -12,6 +11,7 @@ export interface BattleMove extends OwnedPokemonMove {
 }
 export interface BattlePokemon extends OwnedPokemon {
 	stats: StatObject;
+	evAwards: StatObject;
 	firstMove: BattleMove;
 	secondMove?: BattleMove;
 	thirdMove?: BattleMove;
@@ -31,15 +31,22 @@ export interface BattlePokemon extends OwnedPokemon {
 		| 'FAINTED';
 	roundsInBattle: number;
 	lastReceivedDamage?: {
-		damageClass: DamageClass['name'];
 		damage: number;
 		applicatorId: string;
-		attackType: PokemonType;
 		wasSuperEffective: boolean;
 		wasSpecial: boolean;
 		wasPhysical: boolean;
+		attack: BattleAttack;
 	};
+
+	lastUsedMove?: BattleMove;
+	putMimicbacktoSlot?: number;
 	initAbility: AbilityName;
+	biding?: {
+		turn: number;
+		damage: number;
+	};
+	participatedInBattle: boolean;
 }
 
 export function isBattlePokemon(

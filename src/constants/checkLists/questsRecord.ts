@@ -15,11 +15,12 @@ import {
 	EmptyStatObject,
 	generateRandomStatObject,
 } from '../../interfaces/StatObject';
+import { onixCaveEncounters } from '../maps/encounters/onixCave';
 import { routeE1 } from '../maps/routeE1';
 import { routeN1 } from '../maps/routeN1';
 import { routeN1E1 } from '../maps/routeN1E1';
 import { pokemonNames } from '../pokemonNames';
-import { CampUpgrade, campUpgradePrices } from './campUpgrades';
+import { CampUpgrade, campUpgradeNames } from './campUpgrades';
 
 const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 	//routeN1
@@ -229,6 +230,10 @@ export const questNames = [
 	'catch a pokemon',
 	'catch a spiritomb',
 	'catch Haunter and Mightyena',
+	'catch some local flying pokemon',
+	'evolve some local flying pokemon',
+	'evolve a flying pokemon to its final stage',
+	'catch the legendary bird of ice',
 	'catch a pokemon orginally found in kanto',
 	'catch a pokemon orginally found in johto',
 	'catch a pokemon orginally found in hoenn',
@@ -289,16 +294,19 @@ export const questNames = [
 	'donate 20 plants to the seed vault',
 	'donate 50 plants to the seed vault',
 	'donate all different plants to the seed vault',
-
-	...[routeN1, routeN1E1, routeE1].flatMap((route) =>
-		timesOfDay.map(
-			(time) => `catch a ${time}-time exclusive pokemon from ${route.id}`
-		)
-	),
+	'catch a pokemon from onix cave',
+	'catch all pokemon from onix cave',
+	'defeat falkner',
 ] as const;
 /**
- 
  * Ideas:
+
+ * all eeveelutions as final elm quest
+ * onix cave some
+ * onix cave all
+ * achieve cooking level x
+ * retrieve item from wild pokemon (special encounter)
+ * lure x pokemon
  */
 export type QuestName = (typeof questNames)[number];
 
@@ -509,7 +517,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'evolve a pokemon through level up',
 	},
 	'evolve a pokemon with a held item': {
-		rewardItems: { 'rare-candy': 1 },
+		rewardItems: { 'soothe-bell': 1 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return !!s.mileStones.hasEvolvedAPokemonWithAHeldItem;
@@ -558,7 +566,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'evolve a pokemon that only evolves during the day',
 	},
 	'train a pokemon to level 10': {
-		rewardItems: { 'rare-candy': 1 },
+		rewardItems: { 'exp-share': 1 },
 		researchPoints: 10,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 10);
@@ -858,6 +866,88 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'training field 1',
 		availableAfter: 'catch Haunter and Mightyena',
 	},
+	'defeat falkner': {
+		rewardItems: {
+			'ultra-ball': 10,
+			'full-restore': 5,
+		},
+		rewardPokemon: {
+			fixedAbility: true,
+			shiny: true,
+			maxHp: 30,
+			effortValues: EmptyStatObject,
+			ppBoostedMoves: [],
+			caughtOnMap: 'camp',
+			gender: 'MALE',
+			stepsWalked: 0,
+			ownerId: '',
+			damage: 0,
+			id: '',
+			ball: 'poke-ball',
+			ability: 'adaptability',
+			name: 'rufflet',
+			xp: 125,
+			nature: 'adamant',
+			intrinsicValues: generateRandomStatObject(31),
+			happiness: 70,
+			firstMove: { name: 'drill-peck', usedPP: 0 },
+		},
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'Gym Leader Falkner');
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'catch the legendary bird of ice',
+	},
+	'catch some local flying pokemon': {
+		rewardItems: { 'yache-berry': 2 },
+		researchPoints: 10,
+		conditionFunction: (s) => {
+			return (
+				s.pokedex['pidgey'].caughtOnRoutes.length > 0 &&
+				s.pokedex['spearow'].caughtOnRoutes.length > 0 &&
+				s.pokedex['taillow'].caughtOnRoutes.length > 0 &&
+				s.pokedex['murkrow'].caughtOnRoutes.length > 0 &&
+				s.pokedex['starly'].caughtOnRoutes.length > 0
+			);
+		},
+		targetPokemon: ['pidgey', 'spearow', 'taillow', 'murkrow'],
+		kind: 'QUEST_LINE',
+	},
+	'evolve some local flying pokemon': {
+		rewardItems: { 'charti-berry': 2 },
+		researchPoints: 15,
+		conditionFunction: (s) => {
+			return (
+				s.pokedex['pidgeotto'].caughtOnRoutes.length > 0 &&
+				s.pokedex['staravia'].caughtOnRoutes.length > 0
+			);
+		},
+		targetPokemon: ['pidgeotto', 'staravia'],
+		kind: 'QUEST_LINE',
+	},
+	'evolve a flying pokemon to its final stage': {
+		rewardItems: { 'wacan-berry': 5 },
+		researchPoints: 25,
+		conditionFunction: (s) => {
+			return (
+				s.pokedex['pidgeot'].caughtOnRoutes.length > 0 ||
+				s.pokedex['staraptor'].caughtOnRoutes.length > 0
+			);
+		},
+		targetPokemon: ['pidgeot', 'staraptor'],
+		kind: 'QUEST_LINE',
+	},
+	'catch the legendary bird of ice': {
+		rewardItems: { 'rare-candy': 10 },
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.pokedex['articuno'].caughtOnRoutes.length > 0;
+		},
+		targetPokemon: [],
+		kind: 'QUEST_LINE',
+	},
 	'defeat rowan': {
 		rewardItems: {
 			'ultra-ball': 10,
@@ -1128,6 +1218,31 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) =>
 			[...berries, ...apricorns].every((item) => s.seedVault?.includes(item)),
 	},
+	'catch a pokemon from onix cave': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'shovel certification',
+		researchPoints: 10,
+		rewardItems: { 'babiri-berry': 2, 'kee-berry': 2 },
+		conditionFunction: (s) =>
+			onixCaveEncounters.BASE.some((o) =>
+				s.pokedex[o.name].caughtOnRoutes.includes('onixCave')
+			),
+	},
+	'catch all pokemon from onix cave': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'shovel certification',
+		availableAfter: 'catch a pokemon from onix cave',
+		researchPoints: 25,
+		rewardItems: {
+			'yellow-apricorn': 10,
+			'black-apricorn': 10,
+			'moon-stone': 2,
+		},
+		conditionFunction: (s) =>
+			onixCaveEncounters.BASE.every((o) =>
+				s.pokedex[o.name].caughtOnRoutes.includes('onixCave')
+			),
+	},
 };
 
 console.log(
@@ -1137,5 +1252,12 @@ console.log(
 		0
 	),
 	'total costs',
-	Object.values(campUpgradePrices).reduce((sum, summand) => sum + summand, 0)
+	5 +
+		campUpgradeNames
+			.map((_, i) => Math.min(5 * i, 100))
+			.reduce((sum, summand) => sum + summand, 0),
+	'quests w/o questName',
+	Object.keys(QuestsRecord).filter((key) => !questNames.includes(key)),
+	'questNames w/o quest',
+	questNames.filter((name) => !Object.keys(QuestsRecord).includes(name))
 );

@@ -2,6 +2,7 @@ import { BattlePokemonInfo } from '../../../components/BattlePokemonInfo/BattleP
 import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
 import { battleSpriteSize } from '../../../constants/gameData';
 import { getItemUrl } from '../../../functions/getItemUrl';
+import { getSizeFactor } from '../../../functions/getSizeFactor';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
 export function EnemyLane({
@@ -83,6 +84,7 @@ export function EnemyLane({
 					return (
 						<PokemonSprite
 							style={{ margin: '2rem 1rem' }}
+							sizeFactor={getSizeFactor(t.data.height)}
 							key={t.id}
 							name={t.name}
 							config={{ shiny: t.shiny }}

@@ -107,6 +107,9 @@ export const calculateDamage = (
 	consumedHeldItem?: boolean;
 	wasSuperEffective?: boolean;
 } => {
+	if (attack.name === 'bide' && attacker.biding?.turn === 2) {
+		return { damage: attacker.biding.damage * 2 };
+	}
 	const damageClass = attack.data.damage_class.name;
 	const attackType = attack.data.type.name;
 	if (damageClass === 'status') {
@@ -119,7 +122,8 @@ export const calculateDamage = (
 
 	if (attack.name === 'counter') {
 		if (
-			attacker.lastReceivedDamage?.damageClass === 'physical' &&
+			attacker.lastReceivedDamage?.attack.data.damage_class.name ===
+				'physical' &&
 			attacker.lastReceivedDamage.applicatorId === target.id
 		) {
 			return { damage: attacker.lastReceivedDamage.damage * 2 };
@@ -358,6 +362,12 @@ export const calculateDamage = (
 		superEffectiveSaveTable[attackType] === target.heldItemName
 			? 0.5
 			: 1;
+	const solarPowerFactor =
+		damageClass === 'special' &&
+		attacker.ability === 'solar-power' &&
+		weather === 'sun'
+			? 1.5
+			: 1;
 
 	const res = Math.max(
 		Math.floor(
@@ -396,7 +406,8 @@ export const calculateDamage = (
 				heatProofFactor *
 				drySkinFactor *
 				savingBerryFactor *
-				ironfistFactor
+				ironfistFactor *
+				solarPowerFactor
 		),
 		1
 	);

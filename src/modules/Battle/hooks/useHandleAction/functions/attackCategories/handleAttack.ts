@@ -19,6 +19,7 @@ import { getMovesArray } from '../../../../../../functions/getMovesArray';
 import { arePokemonOfOppositeGenders } from '../../../../../../functions/getRivalryFactor';
 import { getTypeNames } from '../../../../../../functions/getTypeNames';
 import { handleFlinching } from '../../../../../../functions/handleFlinching';
+import { handleMimicOrSketch } from '../../../../../../functions/handleMimic';
 import { isKO } from '../../../../../../functions/isKo';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import {
@@ -48,7 +49,7 @@ export const handleAttack = ({
 	pokemon,
 	setPokemon,
 	addMessage,
-	move,
+	move: m,
 	battleWeather,
 	scatterCoins,
 	dampy,
@@ -66,6 +67,7 @@ export const handleAttack = ({
 	addBattleFieldEffect: (x: BattleFieldEffect) => void;
 	battleFieldEffects: BattleFieldEffect[];
 }): void => {
+	let move = m;
 	const underPressure = battleFieldEffects.some(
 		(b) => b.type === 'pressure' && b.ownerId !== attacker.ownerId
 	);
@@ -199,8 +201,9 @@ export const handleAttack = ({
 	if (move.name === 'conversion-2') {
 		if (updatedAttacker.lastReceivedDamage) {
 			const newType = getRandomEntry(
-				typeEffectivenessChart[updatedAttacker.lastReceivedDamage.attackType]
-					.isNotVeryEffectiveAgainst
+				typeEffectivenessChart[
+					updatedAttacker.lastReceivedDamage.attack.data.type.name
+				].isNotVeryEffectiveAgainst
 			);
 			updatedAttacker = applySecondaryAilmentToPokemon({
 				pokemon: updatedAttacker,
@@ -210,9 +213,86 @@ export const handleAttack = ({
 			});
 		} else addMessage({ message: `It failed to convert to a new type` });
 	}
+	if (move.name === 'bide') {
+		if (!updatedAttacker.biding) {
+			addMessage({ message: `${updatedAttacker.name} is biding its time` });
+			updatedAttacker = { ...updatedAttacker, biding: { turn: 1, damage: 0 } };
+		} else if (updatedAttacker.biding?.turn === 1) {
+			addMessage({ message: `${updatedAttacker.name} is biding its time` });
+			updatedAttacker = {
+				...updatedAttacker,
+				biding: { ...updatedAttacker.biding, turn: 2 },
+			};
+		} else if (updatedAttacker.biding?.turn === 2) {
+			addMessage({ message: `${updatedAttacker.name} released energy` });
+		}
+	}
+	if (move.name === 'mirror-move') {
+		if (attacker.lastReceivedDamage) {
+			addMessage({
+				message: `${updatedAttacker.name} copied ${attacker.lastReceivedDamage.attack.name}`,
+			});
+			move = attacker.lastReceivedDamage.attack;
+		} else {
+			addMessage({ message: `It failed` });
+		}
+	}
 
 	//updated Target
 	let updatedTarget = { ...target };
+
+	if (move.name === 'spite') {
+		const targetMoves = getMovesArray(updatedTarget, { filterOutEmpty: true });
+
+		if (targetMoves.length === 0) {
+			addMessage({ message: 'It failed' });
+		} else {
+			const chosenMove = getRandomEntry(targetMoves);
+			addMessage({ message: `${chosenMove}'s PP was lowered` });
+
+			updatedTarget = {
+				...updatedTarget,
+				firstMove: {
+					...updatedTarget.firstMove,
+					usedPP:
+						updatedTarget.firstMove.name === chosenMove.name
+							? updatedTarget.firstMove.usedPP -
+							  getRandomEntry([1, 2, 3, 4, 5, 6])
+							: updatedTarget.firstMove.usedPP,
+				},
+				secondMove: updatedTarget.secondMove
+					? {
+							...updatedTarget.secondMove,
+							usedPP:
+								updatedTarget.secondMove.name === chosenMove.name
+									? updatedTarget.secondMove.usedPP -
+									  getRandomEntry([1, 2, 3, 4, 5, 6])
+									: updatedTarget.secondMove.usedPP,
+					  }
+					: undefined,
+				thirdMove: updatedTarget.thirdMove
+					? {
+							...updatedTarget.thirdMove,
+							usedPP:
+								updatedTarget.thirdMove.name === chosenMove.name
+									? updatedTarget.thirdMove.usedPP -
+									  getRandomEntry([1, 2, 3, 4, 5, 6])
+									: updatedTarget.thirdMove.usedPP,
+					  }
+					: undefined,
+				fourthMove: updatedTarget.fourthMove
+					? {
+							...updatedTarget.fourthMove,
+							usedPP:
+								updatedTarget.fourthMove.name === chosenMove.name
+									? updatedTarget.fourthMove.usedPP -
+									  getRandomEntry([1, 2, 3, 4, 5, 6])
+									: updatedTarget.fourthMove.usedPP,
+					  }
+					: undefined,
+			};
+		}
+	}
 
 	const isFlying =
 		updatedTarget.moveQueue.length > 0 &&
@@ -287,6 +367,36 @@ export const handleAttack = ({
 			ailment: 'mind-read',
 			by: updatedAttacker.id,
 		});
+	}
+	if (move.name === 'mimic') {
+		if (target.lastUsedMove) {
+			addMessage({
+				message: `${updatedAttacker.name} copied ${target.lastUsedMove.name}`,
+			});
+			updatedAttacker = handleMimicOrSketch(
+				updatedAttacker,
+				target.lastUsedMove,
+				'mimic'
+			);
+		} else
+			addMessage({
+				message: `It failed`,
+			});
+	}
+	if (move.name === 'sketch') {
+		if (target.lastUsedMove) {
+			addMessage({
+				message: `${updatedAttacker.name} copied ${target.lastUsedMove.name}`,
+			});
+			updatedAttacker = handleMimicOrSketch(
+				updatedAttacker,
+				target.lastUsedMove,
+				'sketch'
+			);
+		} else
+			addMessage({
+				message: `It failed`,
+			});
 	}
 
 	//UPDATES
@@ -517,15 +627,20 @@ export const handleAttack = ({
 			damage: updatedTarget.damage + actualDamage,
 			//setLastReceivedDamage
 			lastReceivedDamage: {
-				damageClass: move.data.damage_class.name,
+				attack: move,
 				damage: actualDamage,
 				applicatorId: attacker.id,
-				attackType: move.data.type.name,
 				wasSuperEffective: !!wasSuperEffective,
 				wasPhysical: move.data.damage_class.name === 'physical',
 				wasSpecial: move.data.damage_class.name === 'special',
 			},
 			heldItemName: consumedHeldItem ? undefined : updatedTarget.heldItemName,
+			biding: updatedTarget.biding
+				? {
+						...updatedTarget.biding,
+						damage: updatedTarget.biding.damage + damage,
+				  }
+				: undefined,
 		};
 		// check attacker  drain/recoil
 
@@ -715,10 +830,18 @@ export const handleAttack = ({
 				updatedAttacker.id === updatedTarget.id &&
 				p.id === updatedAttacker.id
 			) {
-				return checkAndHandleFainting(updatedAttacker, addMessage);
+				return {
+					...checkAndHandleFainting(updatedAttacker, addMessage),
+					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
+					biding: updatedAttacker.moveQueue.length > 0 ? p.biding : undefined,
+				};
 			}
 			if (p.id === updatedAttacker.id) {
-				return checkAndHandleFainting(updatedAttacker, addMessage);
+				return {
+					...checkAndHandleFainting(updatedAttacker, addMessage),
+					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
+					biding: updatedAttacker.moveQueue.length > 0 ? p.biding : undefined,
+				};
 			}
 			if (p.id === updatedTarget.id) {
 				return checkAndHandleFainting(updatedTarget, addMessage);

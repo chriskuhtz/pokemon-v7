@@ -6,9 +6,9 @@ export const routeN1E1Encounters: EncounterMap = {
 		{ name: 'meowth', xp: 1000, rarity: 'common' },
 	],
 	MORNING: [
-		{ name: 'wurmple', xp: 1000, rarity: 'common' },
-		{ name: 'wurmple', xp: 800, rarity: 'common' },
-		{ name: 'wurmple', xp: 1500, rarity: 'medium' },
+		{ name: 'stunky', xp: 1000, rarity: 'common' },
+		{ name: 'stunky', xp: 800, rarity: 'common' },
+		{ name: 'stunky', xp: 1500, rarity: 'medium' },
 		{ name: 'lillipup', xp: 1000, rarity: 'common' },
 		{ name: 'lillipup', xp: 800, rarity: 'common' },
 		{ name: 'lillipup', xp: 1500, rarity: 'medium' },
@@ -43,7 +43,7 @@ export const routeN1E1Encounters: EncounterMap = {
 		{ name: 'grubbin', xp: 800, rarity: 'common' },
 		{ name: 'grubbin', xp: 1500, rarity: 'medium' },
 		{ name: 'pansage', xp: 1500, rarity: 'rare' },
-		{ name: 'meowth-galar', xp: 1000, rarity: 'rare' },
+		{ name: 'venomoth', xp: 1000, rarity: 'rare' },
 		{ name: 'oranguru', xp: 1500, rarity: 'ultra-rare' },
 	],
 	NIGHT: [
@@ -57,7 +57,7 @@ export const routeN1E1Encounters: EncounterMap = {
 		{ name: 'zubat', xp: 1000, rarity: 'common' },
 		{ name: 'zubat', xp: 1500, rarity: 'medium' },
 		{ name: 'tarountula', xp: 1500, rarity: 'rare' },
-		{ name: 'meowth-alola', xp: 1000, rarity: 'rare' },
+		{ name: 'golbat', xp: 1000, rarity: 'rare' },
 		{ name: 'noibat', xp: 1000, rarity: 'ultra-rare' },
 	],
 };

@@ -1,7 +1,7 @@
 import { getRandomNature } from '../interfaces/Natures';
 import { OverworldMap } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
-import { PokemonSwarm } from '../interfaces/SaveFile';
+import { PokemonSwarm, SaveFile } from '../interfaces/SaveFile';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getRandomEncounter } from './getRandomEncounter';
 import { makeChallengerPokemon } from './makeChallengerPokemon';
@@ -9,8 +9,20 @@ import { makeChallengerPokemon } from './makeChallengerPokemon';
 export const determineWildPokemon = (
 	team: OwnedPokemon[],
 	map: OverworldMap,
+	quests: SaveFile['quests'],
 	swarm?: PokemonSwarm
-) => {
+): OwnedPokemon[] => {
+	if (
+		quests['catch the legendary bird of ice'] === 'ACTIVE' &&
+		Math.random() < 0.01
+	) {
+		return [
+			makeChallengerPokemon(
+				{ name: 'articuno', xp: 125000 },
+				{ increasedShinyFactor: 2 }
+			),
+		];
+	}
 	if (swarm && swarm.route === map.id && Math.random() > 0.5) {
 		return [
 			makeChallengerPokemon(

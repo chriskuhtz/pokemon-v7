@@ -52,6 +52,7 @@ export const useZigzagoonForagers = () => {
 
 	return trade;
 };
+
 export const zigzagoonForagers: Occupant[] = [
 	{
 		type: 'NPC',

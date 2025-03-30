@@ -5,7 +5,7 @@ import {
 	hasEndOfTurnEffect,
 	HPHealTable,
 } from '../interfaces/Item';
-import { getRandomBoostableStat } from '../interfaces/StatObject';
+import { getRandomBoostableStat, Stat } from '../interfaces/StatObject';
 import { applyItemToPokemon } from './applyItemToPokemon';
 import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
@@ -18,6 +18,23 @@ export const applyEndOfTurnHeldItem = (
 ): BattlePokemon => {
 	if (!pokemon.heldItemName || !hasEndOfTurnEffect(pokemon.heldItemName)) {
 		return pokemon;
+	}
+
+	if (pokemon.heldItemName === 'white-herb') {
+		const reducedStat = Object.entries(pokemon.statBoosts).find(
+			([, value]) => value < 0
+		) as [Stat, number] | undefined;
+
+		if (reducedStat) {
+			addMessage(
+				`${pokemon.name} cured its ${[reducedStat[0]]} with white herb`
+			);
+			return {
+				...pokemon,
+				heldItemName: undefined,
+				statBoosts: { ...pokemon.statBoosts, [reducedStat[0]]: 0 },
+			};
+		}
 	}
 
 	if (
@@ -255,6 +272,5 @@ export const applyEndOfTurnHeldItem = (
 		}
 	}
 
-	//remember gluttony for 1/4 trigger berries
 	return pokemon;
 };

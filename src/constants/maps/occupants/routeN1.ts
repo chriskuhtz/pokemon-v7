@@ -1,4 +1,5 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
+import { routeN1Lure } from '../../../modules/BerryLure/BerryLure';
 
 export const routeN1Occupants: OverworldMap['occupants'] = [
 	{
@@ -91,8 +92,8 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 	},
 	{
 		type: 'ITEM',
-		x: 2,
-		y: 4,
+		x: 5,
+		y: 7,
 		item: 'kelpsy-berry',
 		amount: 1,
 		id: 'routeN1_kelpsy_berry',
@@ -145,4 +146,80 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((occ) => occ.id === 'routeN1E1_blocker_bush'),
 	},
+	{
+		type: 'ON_STEP_PORTAL',
+		id: 'cave entry',
+		conditionFunction: () => true,
+		x: 2,
+		y: 3,
+		portal: {
+			mapId: 'onixCave',
+			x: 1,
+			y: 2,
+			orientation: 'DOWN',
+			forwardFoot: 'CENTER1',
+		},
+		sprite: '/mapObjects/ladderDown.png',
+	},
+	{
+		type: 'LEDGE',
+		x: 1,
+		y: 4,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'ledge1'),
+		id: 'ledge1',
+		sprite: '/ledges/ledgeDown.png',
+		passableFrom: 'UP',
+	},
+	{
+		type: 'LEDGE',
+		x: 2,
+		y: 4,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'ledge2'),
+		id: 'ledge2',
+		sprite: '/ledges/ledgeDown.png',
+		passableFrom: 'UP',
+	},
+	{
+		type: 'LEDGE',
+		x: 3,
+		y: 4,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'ledge3'),
+		id: 'ledge3',
+		sprite: '/ledges/ledgeDown.png',
+		passableFrom: 'UP',
+	},
+	{
+		type: 'LEDGE',
+		x: 4,
+		y: 4,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'ledge4'),
+		id: 'ledge4',
+		sprite: '/ledges/ledgeCornerRight.png',
+		passableFrom: 'UP',
+	},
+	{
+		type: 'LEDGE',
+		x: 4,
+		y: 3,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'ledge5'),
+		id: 'ledge5',
+		sprite: '/ledges/ledgeRight.png',
+		passableFrom: 'LEFT',
+	},
+	{
+		type: 'LEDGE',
+		x: 4,
+		y: 2,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'ledge6'),
+		id: 'ledge6',
+		sprite: '/ledges/ledgeRight.png',
+		passableFrom: 'LEFT',
+	},
+	routeN1Lure,
 ];

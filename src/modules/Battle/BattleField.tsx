@@ -5,6 +5,7 @@ import { MoveName } from '../../constants/checkLists/movesCheckList';
 import { applyEndOfTurnAbility } from '../../functions/applyEndOfTurnAbility';
 import { applyEndOfTurnHeldItem } from '../../functions/applyEndOfTurnHeldItem';
 import { applyEndOfTurnWeatherDamage } from '../../functions/applyEndOfTurnWeatherDamage';
+import { applyEVGain } from '../../functions/applyEVGain';
 import { applyHappinessChange } from '../../functions/applyHappinessChange';
 import { applyOnBattleEnterAbility } from '../../functions/applyOnBattleEnterAbility';
 import { applyPrimaryAilmentDamage } from '../../functions/applyPrimaryAilmentDamage';
@@ -25,7 +26,7 @@ import { SaveFileContext } from '../../hooks/useSaveFile';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Inventory, joinInventories } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
-import { EmptyStatObject } from '../../interfaces/StatObject';
+import { EmptyStatObject, Stat } from '../../interfaces/StatObject';
 import { WeatherType } from '../../interfaces/Weather';
 import { ControlBar } from './components/ControlBar';
 import { EnemyLane } from './components/EnemyLane';
@@ -327,7 +328,6 @@ export const BattleField = ({
 		},
 		[addMessage, battleFieldEffects, battleWeather]
 	);
-
 	const handleForceSwitch = useCallback(
 		(user: BattlePokemon, moveName: MoveName) => {
 			const otherSideHasSuctionCups = pokemon.find(
@@ -468,6 +468,8 @@ export const BattleField = ({
 						(x) => collectedMessages.push(x),
 						(x) => collectedMessages.push(...x)
 					);
+					updated.participatedInBattle = true;
+
 					updated = applyEndOfTurnAbility({
 						initialPokemon: [...initOpponents, ...initTeam].find(
 							(initPok) => initPok.id === p.id
@@ -559,6 +561,7 @@ export const BattleField = ({
 			const defeatedPokemon = getOpponentPokemon(pokemon).filter(
 				(p) => p.status === 'FAINTED'
 			);
+			//XP
 			let gainedXp = defeatedPokemon.reduce((sum, d) => {
 				const { level } = calculateLevelData(d.xp);
 
@@ -570,14 +573,22 @@ export const BattleField = ({
 			if (settings?.doubleXpRates) {
 				gainedXp *= 2;
 			}
+			const xpPerTeamMember = settings?.expShareActive
+				? Math.round(gainedXp / team.length)
+				: Math.round(
+						gainedXp / team.filter((t) => t.participatedInBattle).length
+				  );
 
-			const xpPerTeamMember = Math.round(gainedXp / team.length);
-
+			const getsRewards = (p: BattlePokemon) =>
+				settings?.expShareActive || p.participatedInBattle;
+			//XP REWARD
 			const leveledUpTeam = team.map((p) => {
-				const newXp = p.xp + xpPerTeamMember;
-				return { ...p, xp: newXp };
+				if (getsRewards(p)) {
+					const newXp = p.xp + xpPerTeamMember;
+					return { ...p, xp: newXp };
+				}
+				return p;
 			});
-
 			const levelUpMessages: Message[] = leveledUpTeam
 				.map((pokemon) => {
 					const prev = team.find((t) => t.id === pokemon.id);
@@ -593,10 +604,33 @@ export const BattleField = ({
 					return;
 				})
 				.filter((m) => m !== undefined);
-
-			const friendshipIncreasedTeam = leveledUpTeam.map((p) =>
-				applyHappinessChange(p, 1)
-			);
+			//FRIENDSHIP REWARD, only for participants
+			const friendshipIncreasedTeam = leveledUpTeam.map((p) => {
+				if (p.participatedInBattle) {
+					applyHappinessChange(p, 1);
+				}
+				return p;
+			});
+			//EV REWARD, only for participants
+			const evGainedTeam = friendshipIncreasedTeam.map((p) => {
+				{
+					if (p.participatedInBattle) {
+						const updated = { ...p };
+						defeatedPokemon.forEach((defeated) => {
+							Object.entries(defeated.evAwards).forEach(([stat, award]) => {
+								updated.effortValues = applyEVGain(
+									updated.effortValues,
+									stat as Stat,
+									award,
+									p.heldItemName
+								);
+							});
+						});
+						return updated;
+					}
+					return p;
+				}
+			});
 
 			addMultipleMessages(
 				[
@@ -609,11 +643,7 @@ export const BattleField = ({
 					{
 						message: 'You won the battle',
 						onRemoval: () =>
-							leaveWithCurrentData(
-								'WIN',
-								defeatedPokemon,
-								friendshipIncreasedTeam
-							),
+							leaveWithCurrentData('WIN', defeatedPokemon, evGainedTeam),
 					},
 				].filter((m) => m !== undefined)
 			);
@@ -629,7 +659,7 @@ export const BattleField = ({
 		leaveWithCurrentData,
 		pokemon,
 		scatteredCoins,
-		settings?.doubleXpRates,
+		settings,
 		team,
 	]);
 

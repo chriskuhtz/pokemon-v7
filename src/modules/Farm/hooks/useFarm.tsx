@@ -9,6 +9,7 @@ import {
 	BerryType,
 	isApricorn,
 	isBerry,
+	isHerb,
 	isMulch,
 	MulchType,
 } from '../../../interfaces/Item';
@@ -141,7 +142,8 @@ export const useFarm = () => {
 		plant,
 		farm: saveFile.farm,
 		plantables: Object.entries(saveFile.bag).filter(
-			([item, amount]) => (isBerry(item) || isApricorn(item)) && amount > 0
+			([item, amount]) =>
+				(isBerry(item) || isApricorn(item) || isHerb(item)) && amount > 0
 		) as [BerryType, number][],
 
 		mulches: Object.entries(saveFile.bag).filter(

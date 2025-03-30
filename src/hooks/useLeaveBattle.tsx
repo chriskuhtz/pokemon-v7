@@ -1,6 +1,7 @@
 import { useCallback, useContext, useMemo } from 'react';
 import { addPokemonToDex } from '../functions/addPokemonToDex';
 import { getRandomEntry } from '../functions/filterTargets';
+import { isKO } from '../functions/isKo';
 import { reduceBattlePokemonToOwnedPokemon } from '../functions/reduceBattlePokemonToOwnedPokemon';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { Inventory, joinInventories } from '../interfaces/Inventory';
@@ -38,14 +39,17 @@ export const useLeaveBattle = () => {
 			let updatedLocation = saveFile.location;
 
 			if (outcome === 'LOSS') {
-				if (saveFile.settings?.rogueLike) {
+				if (
+					saveFile.settings?.rogueLike ||
+					saveFile.settings?.releaseFaintedPokemon
+				) {
 					reset();
 					return;
 				} else {
 					updatedLocation = {
 						mapId: 'camp',
-						x: 6,
-						y: 5,
+						x: 1,
+						y: 1,
 						orientation: 'DOWN',
 						forwardFoot: 'CENTER1',
 					};
@@ -58,7 +62,15 @@ export const useLeaveBattle = () => {
 				}
 			}
 
-			const ownedTeam = updatedTeam.map((p) =>
+			const configCheckedTeam = updatedTeam.filter((p) => {
+				if (saveFile.settings?.releaseFaintedPokemon && isKO(p)) {
+					return false;
+				}
+
+				return true;
+			});
+
+			const ownedTeam = configCheckedTeam.map((p) =>
 				reduceBattlePokemonToOwnedPokemon(p)
 			);
 

@@ -1055,16 +1055,17 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/352/',
 		handled: true,
 	},
-	//marker
-	{ name: 'mimic', url: 'https://pokeapi.co/api/v2/move/102/' },
-	{ name: 'bide', url: 'https://pokeapi.co/api/v2/move/117/' },
-	{ name: 'metronome', url: 'https://pokeapi.co/api/v2/move/118/' },
-	{ name: 'mirror-move', url: 'https://pokeapi.co/api/v2/move/119/' },
-	{ name: 'transform', url: 'https://pokeapi.co/api/v2/move/144/' },
-	{ name: 'substitute', url: 'https://pokeapi.co/api/v2/move/164/' },
-	{ name: 'struggle', url: 'https://pokeapi.co/api/v2/move/165/' },
-	{ name: 'sketch', url: 'https://pokeapi.co/api/v2/move/166/' },
-	{ name: 'spite', url: 'https://pokeapi.co/api/v2/move/180/' },
+	{ name: 'mimic', url: 'https://pokeapi.co/api/v2/move/102/', handled: true },
+	{ name: 'bide', url: 'https://pokeapi.co/api/v2/move/117/', handled: true },
+
+	{
+		name: 'mirror-move',
+		url: 'https://pokeapi.co/api/v2/move/119/',
+		handled: true,
+	},
+
+	{ name: 'sketch', url: 'https://pokeapi.co/api/v2/move/166/', handled: true },
+	{ name: 'spite', url: 'https://pokeapi.co/api/v2/move/180/', handled: true },
 	{ name: 'protect', url: 'https://pokeapi.co/api/v2/move/182/' },
 	{ name: 'belly-drum', url: 'https://pokeapi.co/api/v2/move/187/' },
 	{ name: 'spikes', url: 'https://pokeapi.co/api/v2/move/191/' },
@@ -1874,6 +1875,17 @@ export const movesCheckList: {
 	{ name: 'shadow-panic', url: 'https://pokeapi.co/api/v2/move/10016/' },
 	{ name: 'shadow-shed', url: 'https://pokeapi.co/api/v2/move/10017/' },
 	{ name: 'shadow-sky', url: 'https://pokeapi.co/api/v2/move/10018/' },
+	{
+		name: 'metronome',
+		url: 'https://pokeapi.co/api/v2/move/118/',
+		todos: ['would require async loading of move data'],
+	},
+	{
+		name: 'transform',
+		url: 'https://pokeapi.co/api/v2/move/144/',
+	},
+	{ name: 'substitute', url: 'https://pokeapi.co/api/v2/move/164/' },
+	{ name: 'struggle', url: 'https://pokeapi.co/api/v2/move/165/' },
 ];
 
 export const handledMoves = [
@@ -2130,6 +2142,11 @@ export const handledMoves = [
 	'rock-blast',
 	'shock-wave',
 	'water-pulse',
+	'mimic',
+	'bide',
+	'mirror-move',
+	'sketch',
+	'spite',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

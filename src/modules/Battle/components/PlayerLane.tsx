@@ -1,5 +1,6 @@
 import { BattlePokemonInfo } from '../../../components/BattlePokemonInfo/BattlePokemonInfo';
 import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
+import { getSizeFactor } from '../../../functions/getSizeFactor';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
 export function PlayerLane(props: { onFieldTeam: BattlePokemon[] }) {
@@ -28,6 +29,7 @@ export function PlayerLane(props: { onFieldTeam: BattlePokemon[] }) {
 						name={t.name}
 						config={{ shiny: t.shiny, back: true }}
 						style={{ margin: '2rem 1rem' }}
+						sizeFactor={getSizeFactor(t.data.height)}
 					/>
 				))}
 			</div>

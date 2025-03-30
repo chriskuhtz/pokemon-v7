@@ -12,6 +12,7 @@ export const ThrowAwayAction = ({
 	useEffect(() => setNumberToDiscard(amount), [amount]);
 	return (
 		<div className="throwAwayAction">
+			<FaTrash onClick={() => discardItem(numberToDiscard)} />
 			<input
 				type="number"
 				value={numberToDiscard}
@@ -25,7 +26,6 @@ export const ThrowAwayAction = ({
 					}
 				}}
 			/>
-			<FaTrash onClick={() => discardItem(numberToDiscard)} />
 		</div>
 	);
 };

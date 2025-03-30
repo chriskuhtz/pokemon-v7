@@ -1,4 +1,5 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
+import { routeN1E1Lure } from '../../../modules/BerryLure/BerryLure';
 
 export const routeN1E1Occupants: OverworldMap['occupants'] = [
 	{
@@ -84,4 +85,5 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'routeS1_blue_apricorn'),
 	},
+	routeN1E1Lure,
 ];

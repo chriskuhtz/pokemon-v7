@@ -1,22 +1,32 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { fps } from '../../../constants/gameData';
 import { mapsRecord } from '../../../constants/maps/mapsRecord';
+import { determineWildPokemon } from '../../../functions/determineWildPokemon';
 import { getNextForwardFoot } from '../../../functions/getNextForwardFoot';
+import { OPPO_ID } from '../../../functions/makeChallengerPokemon';
 import { updatePosition } from '../../../functions/updatePosition';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
+import { Challenger } from '../../../interfaces/Challenger';
+import { EmptyInventory } from '../../../interfaces/Inventory';
 import { Occupant, OnStepPortal } from '../../../interfaces/OverworldMap';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
 
 const baseEncounterRate = 0;
 const encounterRateStep = 0.05;
 export const useOverworldMovement = (
-	startEncounter: () => void,
+	startEncounter: (encounter: Challenger) => void,
 	addStep: () => void,
 	currentOccupants: Occupant[],
-	encounterRateModifier?: number
+	encounterRateModifier: { factor: number; upToXp: number }
 ) => {
 	const {
-		saveFile: { location: playerLocation },
+		saveFile: {
+			pokemon,
+			quests,
+			location: playerLocation,
+			currentSwarm,
+			encounterRateModifier: repelFactor,
+		},
 		setCharacterLocationReducer: setCharacterLocation,
 	} = useContext(SaveFileContext);
 	const map = useMemo(() => mapsRecord[playerLocation.mapId], [playerLocation]);
@@ -58,12 +68,30 @@ export const useOverworldMovement = (
 
 			if (nextInput) {
 				if (map.tileMap.encounterLayer[playerLocation.y][playerLocation.x]) {
-					const modifiedEncounterRate =
-						encounterChance * (encounterRateModifier ?? 1);
-					if (Math.random() < modifiedEncounterRate) {
+					if (Math.random() < encounterChance * encounterRateModifier.factor) {
+						const challenger: Challenger = {
+							type: 'WILD',
+							id: OPPO_ID,
+							inventory: EmptyInventory,
+							team: determineWildPokemon(
+								pokemon.filter((p) => p.onTeam),
+								mapsRecord[playerLocation.mapId],
+								quests,
+								currentSwarm
+							),
+						};
+
+						if (
+							repelFactor?.factor &&
+							repelFactor.factor < 1 &&
+							challenger.team[0].xp < encounterRateModifier.upToXp
+						) {
+							//Only pokemon stronger than your team can "pass through" the repel filter
+							return;
+						}
 						setNextInput(undefined);
 						setEncounterChance(baseEncounterRate);
-						startEncounter();
+						startEncounter(challenger);
 						return;
 					} else setEncounterChance(encounterChance + encounterRateStep);
 				} else reduceEncounterRate();
@@ -95,11 +123,16 @@ export const useOverworldMovement = (
 	}, [
 		addStep,
 		currentOccupants,
+		currentSwarm,
 		encounterChance,
-		encounterRateModifier,
+		encounterRateModifier.factor,
+		encounterRateModifier.upToXp,
 		map,
 		nextInput,
 		playerLocation,
+		pokemon,
+		quests,
+		repelFactor,
 		setCharacterLocation,
 		startEncounter,
 	]);

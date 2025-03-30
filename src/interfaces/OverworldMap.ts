@@ -40,6 +40,8 @@ export const OCCUPANT_TYPES = [
 	'ROUTER_NPC',
 	'STORAGE_CHEST',
 	'BERRY_TREE',
+	'BERRY_LURE',
+	'SNORLAX',
 ] as const;
 export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
@@ -132,6 +134,7 @@ export interface Portal extends BaseOccupant {
 export interface OnStepPortal extends BaseOccupant {
 	type: 'ON_STEP_PORTAL';
 	portal: CharacterLocationData;
+	sprite?: string;
 }
 export interface OverworldBulletinBoard extends BaseOccupant {
 	type: 'BULLETIN_BOARD';
@@ -149,6 +152,10 @@ export interface OverworldPokemon extends BaseOccupant {
 	type: 'POKEMON';
 	dexId: number;
 	dialogue: string[];
+	orientation: CharacterOrientation;
+}
+export interface OverworldSnorlax extends BaseOccupant {
+	type: 'SNORLAX';
 	orientation: CharacterOrientation;
 }
 export interface ZigzagoonForager extends BaseOccupant {
@@ -173,6 +180,9 @@ export interface Ledge extends BaseOccupant {
 }
 export interface StorageChest extends BaseOccupant {
 	type: 'STORAGE_CHEST';
+}
+export interface BerryLure extends BaseOccupant {
+	type: 'BERRY_LURE';
 }
 
 export type Occupant =
@@ -200,7 +210,9 @@ export type Occupant =
 	| SwarmRadar
 	| OverworldRock
 	| StorageChest
-	| BerryTree;
+	| BerryTree
+	| BerryLure
+	| OverworldSnorlax;
 
 export interface OverworldEncounter {
 	name: PokemonName;

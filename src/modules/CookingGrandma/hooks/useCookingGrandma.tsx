@@ -80,6 +80,12 @@ const BASE_RECIPES: Recipe[] = [
 	),
 ];
 
+export const recipeChanceMap = {
+	EASY: 90,
+	MEDIUM: 75,
+	TRICKY: 60,
+};
+
 export const useCookingGrandma = (): {
 	enabledRecipes: Recipe[];
 	disabledRecipes: Recipe[];
@@ -107,14 +113,18 @@ export const useCookingGrandma = (): {
 			const usedIngredients = Object.fromEntries(
 				recipe.ingredients.map((ing) => [ing, -1])
 			);
+
+			const chance = Math.random() + (saveFile.cookingSkill ?? 0) / 100;
+
+			console.log(chance);
 			const failed = () => {
-				if (recipe.difficulty === 'EASY' && Math.random() > 0.9) {
+				if (recipe.difficulty === 'EASY' && chance < 0.1) {
 					return true;
 				}
-				if (recipe.difficulty === 'MEDIUM' && Math.random() > 0.75) {
+				if (recipe.difficulty === 'MEDIUM' && chance < 0.25) {
 					return true;
 				}
-				if (recipe.difficulty === 'TRICKY' && Math.random() > 0.6) {
+				if (recipe.difficulty === 'TRICKY' && chance < 0.4) {
 					return true;
 				}
 				return false;
@@ -134,6 +144,7 @@ export const useCookingGrandma = (): {
 						...usedIngredients,
 						[recipe.result]: 1,
 					}),
+					cookingSkill: (saveFile.cookingSkill ?? 0) + 1,
 					mileStones: {
 						...saveFile.mileStones,
 						cookedEasyRecipe:
@@ -157,6 +168,7 @@ export const useCookingGrandma = (): {
 			addMultipleMessages,
 			patchSaveFileReducer,
 			saveFile.bag,
+			saveFile.cookingSkill,
 			saveFile.mileStones,
 		]
 	);

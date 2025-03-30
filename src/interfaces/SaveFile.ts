@@ -32,16 +32,17 @@ export interface CharacterLocationData {
 }
 
 export interface SettingsObject {
-	//disqualifyFaintedPokemon: boolean;
 	//randomHeldItems: boolean;
-	fasterDays: boolean;
-	doubleXpRates: boolean;
-	rogueLike: boolean;
-	noItemsInBattle: boolean;
-	randomStarters: boolean;
-	randomOverworldItems: boolean;
-	randomQuestRewards: boolean;
-	randomSwarms: boolean;
+	fasterDays?: boolean;
+	doubleXpRates?: boolean;
+	rogueLike?: boolean;
+	noItemsInBattle?: boolean;
+	releaseFaintedPokemon?: boolean;
+	randomStarters?: boolean;
+	randomOverworldItems?: boolean;
+	randomQuestRewards?: boolean;
+	randomSwarms?: boolean;
+	expShareActive?: boolean;
 }
 
 export type BerryBushStatus =
@@ -127,4 +128,5 @@ export interface SaveFile {
 	starterPokemon?: PokemonName;
 	seedVault: ItemType[];
 	pokedex: Pokedex;
+	cookingSkill?: number;
 }

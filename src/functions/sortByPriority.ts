@@ -19,13 +19,15 @@ const calculateTotalSpeed = (
 	)
 		? 2
 		: 1;
+	const machoBraceFactor = a.heldItemName === 'macho-brace' ? 0.5 : 1;
 
 	return (
 		calculateModifiedStat(a.stats.speed, a.statBoosts.speed) *
 		paraFactorA *
 		swiftSwimFactorA *
 		chlorophyllFactorA *
-		unburdenFactorA
+		unburdenFactorA *
+		machoBraceFactor
 	);
 };
 export const sortByPriority = (
@@ -60,8 +62,14 @@ export const sortByPriority = (
 		return 1;
 	}
 
-	const aPriority = aMove?.data.priority ?? 0;
-	const bPriority = bMove?.data.priority ?? 0;
+	const aPriority =
+		a.heldItemName === 'quick-claw' && Math.random() > 0.5
+			? 10
+			: aMove?.data.priority ?? 0;
+	const bPriority =
+		b.heldItemName === 'quick-claw' && Math.random() > 0.5
+			? 10
+			: bMove?.data.priority ?? 0;
 
 	if (aPriority > bPriority) {
 		return -1;

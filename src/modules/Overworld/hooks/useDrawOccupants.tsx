@@ -61,6 +61,15 @@ const drawOccupant = (
 	img.addEventListener('load', () => {
 		switch (occ.type) {
 			case 'ON_STEP_PORTAL':
+				if (occ.sprite) {
+					ctx?.drawImage(
+						img,
+						baseSize * occ.x,
+						baseSize * occ.y,
+						baseSize,
+						baseSize
+					);
+				}
 				break;
 			case 'PORTAL':
 				if (occ.small) {
@@ -99,6 +108,7 @@ const drawOccupant = (
 			case 'POKEMON':
 			case 'ZIGZAGOON_FORAGER':
 			case 'DUGTRIO_EXPLORER':
+			case 'SNORLAX':
 			case 'ROUTER_NPC':
 				ctx?.drawImage(
 					img,
@@ -148,6 +158,7 @@ const drawOccupant = (
 				break;
 			case 'ITEM':
 			case 'PC':
+			case 'BERRY_LURE':
 			default:
 				ctx?.drawImage(
 					img,
@@ -164,6 +175,11 @@ const drawOccupant = (
 
 const getSource = (occ: Occupant) => {
 	switch (occ.type) {
+		case 'BERRY_LURE':
+			return '/mapObjects/berry_lure.png';
+		case 'ON_STEP_PORTAL':
+			return occ.sprite ?? '';
+
 		case 'PORTAL':
 		case 'LEDGE':
 			return occ.sprite;
@@ -179,6 +195,8 @@ const getSource = (occ: Occupant) => {
 		case 'DUGTRIO_EXPLORER':
 		case 'ZIGZAGOON_FORAGER':
 			return `/overworldPokemonSprites/${threeDigitString(occ.dexId)}.png`;
+		case 'SNORLAX':
+			return `/overworldPokemonSprites/143.png`;
 		case 'PC':
 			return '/mapObjects/pc.png';
 		case 'STORAGE_CHEST':

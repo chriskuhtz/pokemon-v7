@@ -3,6 +3,7 @@ import {
 	EvBoostItemType,
 	EvBoostTable,
 	HappinessChangeTable,
+	ItemType,
 } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { Stat, StatObject } from '../interfaces/StatObject';
@@ -25,10 +26,12 @@ export function applyEVBoostItem<T extends OwnedPokemon | BattlePokemon>(
 export const applyEVGain = (
 	initialEvs: StatObject,
 	stat: Stat,
-	change: number
+	change: number,
+	heldItem?: ItemType
 ): StatObject => {
+	const actualChange = heldItem === 'macho-brace' ? change * 2 : change;
 	const initial = initialEvs[stat];
-	const update = getMiddleOfThree([0, initial + change, 255]);
+	const update = getMiddleOfThree([0, initial + actualChange, 255]);
 
 	return { ...initialEvs, [stat]: update };
 };
