@@ -39,6 +39,9 @@ export interface BattlePokemon extends OwnedPokemon {
 		wasSpecial: boolean;
 		wasPhysical: boolean;
 	};
+
+	lastUsedMove?: BattleMove;
+	putMimicbacktoSlot?: number;
 	initAbility: AbilityName;
 }
 

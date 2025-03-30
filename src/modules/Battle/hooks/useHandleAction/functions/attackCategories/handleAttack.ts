@@ -19,6 +19,7 @@ import { getMovesArray } from '../../../../../../functions/getMovesArray';
 import { arePokemonOfOppositeGenders } from '../../../../../../functions/getRivalryFactor';
 import { getTypeNames } from '../../../../../../functions/getTypeNames';
 import { handleFlinching } from '../../../../../../functions/handleFlinching';
+import { handleMimic } from '../../../../../../functions/handleMimic';
 import { isKO } from '../../../../../../functions/isKo';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import {
@@ -287,6 +288,17 @@ export const handleAttack = ({
 			ailment: 'mind-read',
 			by: updatedAttacker.id,
 		});
+	}
+	if (move.name === 'mimic') {
+		if (target.lastUsedMove) {
+			addMessage({
+				message: `${updatedAttacker.name} copied ${target.lastUsedMove.name}`,
+			});
+			updatedAttacker = handleMimic(updatedAttacker, target.lastUsedMove);
+		} else
+			addMessage({
+				message: `It failed`,
+			});
 	}
 
 	//UPDATES
@@ -715,10 +727,16 @@ export const handleAttack = ({
 				updatedAttacker.id === updatedTarget.id &&
 				p.id === updatedAttacker.id
 			) {
-				return checkAndHandleFainting(updatedAttacker, addMessage);
+				return {
+					...checkAndHandleFainting(updatedAttacker, addMessage),
+					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
+				};
 			}
 			if (p.id === updatedAttacker.id) {
-				return checkAndHandleFainting(updatedAttacker, addMessage);
+				return {
+					...checkAndHandleFainting(updatedAttacker, addMessage),
+					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
+				};
 			}
 			if (p.id === updatedTarget.id) {
 				return checkAndHandleFainting(updatedTarget, addMessage);

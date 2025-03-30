@@ -10,15 +10,30 @@ export const reduceBattlePokemonToOwnedPokemon = (
 	const res = {
 		name: newMon.name,
 		gender: newMon.gender,
-		firstMove: { name: newMon.firstMove.name, usedPP: newMon.firstMove.usedPP },
+		firstMove: {
+			name: newMon.putMimicbacktoSlot === 0 ? 'mimic' : newMon.firstMove.name,
+			usedPP: newMon.firstMove.usedPP,
+		},
 		secondMove: newMon.secondMove
-			? { name: newMon.secondMove.name, usedPP: newMon.secondMove.usedPP }
+			? {
+					name:
+						newMon.putMimicbacktoSlot === 1 ? 'mimic' : newMon.secondMove.name,
+					usedPP: newMon.secondMove.usedPP,
+			  }
 			: undefined,
 		thirdMove: newMon.thirdMove
-			? { name: newMon.thirdMove.name, usedPP: newMon.thirdMove.usedPP }
+			? {
+					name:
+						newMon.putMimicbacktoSlot === 2 ? 'mimic' : newMon.thirdMove.name,
+					usedPP: newMon.thirdMove.usedPP,
+			  }
 			: undefined,
 		fourthMove: newMon.fourthMove
-			? { name: newMon.fourthMove.name, usedPP: newMon.fourthMove.usedPP }
+			? {
+					name:
+						newMon.putMimicbacktoSlot === 3 ? 'mimic' : newMon.fourthMove.name,
+					usedPP: newMon.fourthMove.usedPP,
+			  }
 			: undefined,
 
 		id: newMon.id,
