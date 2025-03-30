@@ -1,9 +1,16 @@
+import { AbilityName } from '../constants/checkLists/abilityCheckList';
 import { MoveDto } from '../interfaces/Move';
 import { getMiddleOfThree } from './getMiddleOfThree';
 
-export const determineMultiHits = (attack: MoveDto): number => {
+export const determineMultiHits = (
+	attack: MoveDto,
+	userAbility: AbilityName
+): number => {
 	if (!attack.meta.min_hits || !attack.meta.max_hits) {
 		return 0;
+	}
+	if (userAbility === 'skill-link') {
+		return attack.meta.max_hits;
 	}
 	const random = Math.random();
 

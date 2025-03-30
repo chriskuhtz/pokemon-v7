@@ -1,4 +1,4 @@
-import { BattlePokemon, BattleMove } from '../interfaces/BattlePokemon';
+import { BattleMove, BattlePokemon } from '../interfaces/BattlePokemon';
 import { ActionType, ChooseActionPayload } from '../modules/Battle/BattleField';
 import { calculateDamage } from './calculateDamage';
 import { determineMultiHits } from './determineMultiHits';
@@ -31,7 +31,7 @@ export const determineBestMoveAndTarget = (
 						round: 0,
 						data: move.data,
 						targetId: target.id,
-						multiHits: determineMultiHits(move.data),
+						multiHits: determineMultiHits(move.data, attacker.ability),
 					},
 					undefined,
 					[],
