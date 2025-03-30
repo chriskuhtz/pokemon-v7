@@ -1065,7 +1065,7 @@ export const movesCheckList: {
 	},
 
 	{ name: 'sketch', url: 'https://pokeapi.co/api/v2/move/166/', handled: true },
-	{ name: 'spite', url: 'https://pokeapi.co/api/v2/move/180/' },
+	{ name: 'spite', url: 'https://pokeapi.co/api/v2/move/180/', handled: true },
 	{ name: 'protect', url: 'https://pokeapi.co/api/v2/move/182/' },
 	{ name: 'belly-drum', url: 'https://pokeapi.co/api/v2/move/187/' },
 	{ name: 'spikes', url: 'https://pokeapi.co/api/v2/move/191/' },
@@ -2146,6 +2146,7 @@ export const handledMoves = [
 	'bide',
 	'mirror-move',
 	'sketch',
+	'spite',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

@@ -241,6 +241,59 @@ export const handleAttack = ({
 	//updated Target
 	let updatedTarget = { ...target };
 
+	if (move.name === 'spite') {
+		const targetMoves = getMovesArray(updatedTarget, { filterOutEmpty: true });
+
+		if (targetMoves.length === 0) {
+			addMessage({ message: 'It failed' });
+		} else {
+			const chosenMove = getRandomEntry(targetMoves);
+			addMessage({ message: `${chosenMove}'s PP was lowered` });
+
+			updatedTarget = {
+				...updatedTarget,
+				firstMove: {
+					...updatedTarget.firstMove,
+					usedPP:
+						updatedTarget.firstMove.name === chosenMove.name
+							? updatedTarget.firstMove.usedPP -
+							  getRandomEntry([1, 2, 3, 4, 5, 6])
+							: updatedTarget.firstMove.usedPP,
+				},
+				secondMove: updatedTarget.secondMove
+					? {
+							...updatedTarget.secondMove,
+							usedPP:
+								updatedTarget.secondMove.name === chosenMove.name
+									? updatedTarget.secondMove.usedPP -
+									  getRandomEntry([1, 2, 3, 4, 5, 6])
+									: updatedTarget.secondMove.usedPP,
+					  }
+					: undefined,
+				thirdMove: updatedTarget.thirdMove
+					? {
+							...updatedTarget.thirdMove,
+							usedPP:
+								updatedTarget.thirdMove.name === chosenMove.name
+									? updatedTarget.thirdMove.usedPP -
+									  getRandomEntry([1, 2, 3, 4, 5, 6])
+									: updatedTarget.thirdMove.usedPP,
+					  }
+					: undefined,
+				fourthMove: updatedTarget.fourthMove
+					? {
+							...updatedTarget.fourthMove,
+							usedPP:
+								updatedTarget.fourthMove.name === chosenMove.name
+									? updatedTarget.fourthMove.usedPP -
+									  getRandomEntry([1, 2, 3, 4, 5, 6])
+									: updatedTarget.fourthMove.usedPP,
+					  }
+					: undefined,
+			};
+		}
+	}
+
 	const isFlying =
 		updatedTarget.moveQueue.length > 0 &&
 		updatedTarget.moveQueue[0].type === 'BattleAttack' &&
