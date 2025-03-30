@@ -128,7 +128,7 @@ export function ActionSelection({
 					gap: '1rem',
 				}}
 			>
-				{getMovesArray(controlled, true).map((m) => (
+				{getMovesArray(controlled, { filterOutDisabled: true }).map((m) => (
 					<MoveCard
 						move={m}
 						key={m.name}

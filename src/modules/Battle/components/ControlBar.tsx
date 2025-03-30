@@ -1,11 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
-import {
-	filterTargets,
-	getRandomIndex,
-} from '../../../functions/filterTargets';
+import { calculateDamage } from '../../../functions/calculateDamage';
+import { determineMultiHits } from '../../../functions/determineMultiHits';
+import { filterTargets } from '../../../functions/filterTargets';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { OPPO_ID } from '../../../functions/makeChallengerPokemon';
-import { BattlePokemon } from '../../../interfaces/BattlePokemon';
+import { BattleMove, BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import {
 	ActionType,
@@ -60,21 +59,8 @@ export function ControlBar({
 			return;
 		}
 		if (controlled?.ownerId === OPPO_ID) {
-			const moves = getMovesArray(controlled, true);
-			const actionName = moves[getRandomIndex(moves.length)].name;
-			const filtered = filterTargets({
-				targets,
-				user: controlled,
-				chosenAction: actionName,
-				onlyOpponents: true,
-			});
-			const targetId = filtered[Math.floor(Math.random() * filtered.length)].id;
-
-			chooseAction({
-				userId: controlled.id,
-				actionName: actionName,
-				targetId,
-			});
+			const action = chooseOpponentAction({ controlled, targets });
+			chooseAction(action);
 		}
 	}, [chooseAction, controlled, targets]);
 
@@ -118,3 +104,86 @@ export function ControlBar({
 		/>
 	);
 }
+
+export type PokemonProfile = 'AGGRESSIVE';
+
+export const determinePokemonProfile = (): PokemonProfile => {
+	//always try to do the most damage immediately
+	return 'AGGRESSIVE';
+};
+
+export const determineBestMoveAndTarget = (
+	attacker: BattlePokemon,
+	moves: BattleMove[],
+	targets: BattlePokemon[]
+): { actionName: ActionType; targetId: string } => {
+	const mapped: { actionName: ActionType; targetId: string; damage: number }[] =
+		moves.flatMap((move) =>
+			targets.map((target) => ({
+				actionName: move.name,
+				targetId: target.id,
+				//TODO: consider weather/effects etc
+				damage: calculateDamage(
+					attacker,
+					target,
+					{
+						name: move.name,
+						type: 'BattleAttack',
+						round: 0,
+						data: move.data,
+						targetId: target.id,
+						multiHits: determineMultiHits(move.data),
+					},
+					undefined,
+					[],
+					false,
+					false,
+					false,
+					() => {}
+				).damage,
+			}))
+		);
+
+	const sorted = mapped.sort((a, b) => b.damage - a.damage);
+
+	return sorted[0];
+};
+
+export const chooseOpponentAction = ({
+	controlled,
+	targets,
+}: {
+	controlled: BattlePokemon;
+	targets: BattlePokemon[];
+}): ChooseActionPayload => {
+	//const profile = determinePokemonProfile();
+
+	//IF PROFILE AGGRESSIVE
+	const moves = getMovesArray(controlled, {
+		filterOutDisabled: true,
+		filterOutEmpty: true,
+	});
+
+	const filtered = filterTargets({
+		targets,
+		user: controlled,
+		chosenAction: 'tackle', //just assume its an attacking move
+		onlyOpponents: true,
+	});
+
+	if (moves.length === 0) {
+		return {
+			userId: controlled.id,
+			actionName: 'splash',
+			targetId: filtered[0].id,
+		};
+	}
+
+	const { targetId, actionName } = determineBestMoveAndTarget(
+		controlled,
+		moves,
+		filtered
+	);
+
+	return { userId: controlled.id, actionName, targetId };
+};

@@ -64,7 +64,7 @@ export const applyAttackAilmentsToPokemon = (
 			);
 		}
 		if (ailment === 'disable') {
-			const moves = getMovesArray(target, false);
+			const moves = getMovesArray(target, { filterOutDisabled: false });
 			const randomMoveName = moves[getRandomIndex(moves.length)].name;
 			if (moves.length === 1) {
 				addMessage({ message: `cant disable ${target.data.name}'s only move` });

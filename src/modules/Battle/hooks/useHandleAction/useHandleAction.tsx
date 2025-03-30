@@ -14,7 +14,6 @@ import { ItemType } from '../../../../interfaces/Item';
 import { WeatherType } from '../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../BattleField';
 import { handleMoveBlockAilments } from '../../functions/handleMoveBlockAilments';
-import { handleAilmentAttack } from './functions/attackCategories/handleAilmentAttack';
 import { handleAttack } from './functions/attackCategories/handleAttack';
 import { handleCatch } from './functions/handleCatch';
 
@@ -317,17 +316,6 @@ export const handleAllAttackCategories = ({
 	switch (move.data.meta.category.name) {
 		case 'force-switch':
 			handleForceSwitch(attacker, move.name);
-			break;
-		case 'ailment':
-			handleAilmentAttack({
-				attacker,
-				pokemon,
-				setPokemon,
-				addMessage,
-				move,
-				battleWeather,
-				battleFieldEffects,
-			});
 			break;
 		default:
 			handleAttack({

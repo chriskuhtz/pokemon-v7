@@ -3,7 +3,10 @@ import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 
 export function getMovesArray<T extends BattlePokemon | OwnedPokemon>(
 	pokemon: T,
-	filterOutDisabled?: boolean
+	config?: {
+		filterOutDisabled?: boolean;
+		filterOutEmpty?: boolean;
+	}
 ): T['firstMove'][] {
 	const disabledMove = isBattlePokemon(pokemon)
 		? pokemon.secondaryAilments.find((a) => a.type === 'disable')?.move
@@ -15,11 +18,16 @@ export function getMovesArray<T extends BattlePokemon | OwnedPokemon>(
 		pokemon.thirdMove,
 		pokemon.fourthMove,
 	]
+		.filter((m) => m !== undefined)
 		.filter((m) => {
-			if (filterOutDisabled && disabledMove === m?.name) {
+			if (config?.filterOutDisabled && disabledMove === m?.name) {
 				return false;
 			}
+			if (isBattlePokemon(pokemon) && config?.filterOutEmpty) {
+				const battleMove = m as BattlePokemon['firstMove'];
+
+				return battleMove.usedPP < battleMove.data.pp;
+			}
 			return true;
-		})
-		.filter((m) => m !== undefined);
+		});
 }

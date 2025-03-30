@@ -54,6 +54,7 @@ const ItemsFilterButtons = ({
 		<div style={{ display: 'flex', gap: '.5rem' }}>
 			{itemfilterNames.map((f) => (
 				<button
+					key={f}
 					style={{
 						backgroundColor: itemsFilter === f ? 'black' : 'white',
 						color: itemsFilter === f ? 'white' : 'black',
