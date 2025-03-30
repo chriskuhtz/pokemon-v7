@@ -8,7 +8,7 @@ export const determineStabFactor = (
 ): number => {
 	const attackerTypes = getTypeNames(attacker);
 	if (attackerTypes.includes(attack.data.type.name)) {
-		return 1.5;
+		return attacker.ability === 'adaptability' ? 2 : 1.5;
 	}
 
 	return 1;
