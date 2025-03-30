@@ -1,11 +1,11 @@
-import { OverworldNpc, Occupant } from '../../../interfaces/OverworldMap';
+import { Occupant, OverworldNpc } from '../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 
 const mortyBase: Omit<
 	OverworldNpc,
 	'unhandledMessage' | 'conditionFunction' | 'id'
 > = {
-	x: 8,
+	x: 10,
 	y: 3,
 	orientation: 'DOWN',
 	type: 'NPC',

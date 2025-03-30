@@ -5,7 +5,7 @@ const elmBase: Omit<
 	OverworldNpc,
 	'unhandledMessage' | 'conditionFunction' | 'id'
 > = {
-	x: 6,
+	x: 12,
 	y: 3,
 	orientation: 'DOWN',
 	type: 'NPC',

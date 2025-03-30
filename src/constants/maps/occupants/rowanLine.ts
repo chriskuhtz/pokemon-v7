@@ -5,7 +5,7 @@ const rowanBase: Omit<
 	OverworldNpc,
 	'unhandledMessage' | 'conditionFunction' | 'id'
 > = {
-	x: 4,
+	x: 13,
 	y: 3,
 	orientation: 'DOWN',
 	type: 'NPC',
