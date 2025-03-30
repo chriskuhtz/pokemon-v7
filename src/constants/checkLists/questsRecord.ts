@@ -189,10 +189,10 @@ const catchQuestsForRoute = (
 			researchPoints: 20,
 			conditionFunction: (s) => {
 				return [
-					...routeN1.possibleEncounters.NIGHT,
-					...routeN1.possibleEncounters.MORNING,
-					...routeN1.possibleEncounters.DAY,
-					...routeN1.possibleEncounters.EVENING,
+					...route.possibleEncounters.NIGHT,
+					...route.possibleEncounters.MORNING,
+					...route.possibleEncounters.DAY,
+					...route.possibleEncounters.EVENING,
 				].some(
 					(e) =>
 						e.rarity === 'ultra-rare' &&
@@ -202,10 +202,10 @@ const catchQuestsForRoute = (
 			targetPokemon: [
 				...new Set(
 					[
-						...routeN1.possibleEncounters.NIGHT,
-						...routeN1.possibleEncounters.MORNING,
-						...routeN1.possibleEncounters.DAY,
-						...routeN1.possibleEncounters.EVENING,
+						...route.possibleEncounters.NIGHT,
+						...route.possibleEncounters.MORNING,
+						...route.possibleEncounters.DAY,
+						...route.possibleEncounters.EVENING,
 					]
 						.filter((p) => p.rarity === 'ultra-rare')
 						.map((p) => p.name)
