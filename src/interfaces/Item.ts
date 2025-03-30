@@ -481,6 +481,7 @@ export const pickupTable: ItemType[] = [
 	'lava-cookie',
 	'revival-herb',
 	'rare-candy',
+	'soothe-bell',
 ];
 export const undergroundTable: ItemType[] = [
 	...valuables,
