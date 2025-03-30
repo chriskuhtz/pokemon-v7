@@ -113,7 +113,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 	{
 		type: 'NURSE',
 		id: 'camp_nurse',
-		x: 5,
+		x: 4,
 		y: 5,
 		orientation: 'UP',
 		sprite: SpriteEnum.nurse,
@@ -123,7 +123,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 	{
 		type: 'POKEMON',
 		id: 'camp_nurse_blissey',
-		x: 6,
+		x: 5,
 		y: 5,
 		orientation: 'UP',
 		dexId: 242,
@@ -134,7 +134,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 		type: 'ROUTER_NPC',
 		to: 'CAMP_UPGRADES',
 		id: 'camp_manager',
-		x: 4,
+		x: 6,
 		y: 5,
 		orientation: 'UP',
 		dialogue: ['How should we expand our camp?'],
