@@ -30,14 +30,14 @@ export const campUpgradeNames = [
 ] as const;
 /**
  * ideas:
- * storage chest and bag limit
- * berries visible in overworld
  * more gym leaders
+ * shovel spots
  * berry lure stations
- * "Pokeflute certification"
- * 'Pokemon Surfer Certification'
- * 'Pokemon Flyer Certification'
+ * "Pokeflute certification" : requires new route first
+ * 'Pokemon Surfer Certification' : requires new route first
+ * 'Pokemon Flyer Certification' : requires new route first
  * 	Fishing?
+ * berries visible in overworld
  */
 
 /**
