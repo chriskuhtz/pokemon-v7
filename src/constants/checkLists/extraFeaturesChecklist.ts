@@ -258,4 +258,5 @@ export const extraFeatureCheckList: {
 	{ name: 'fly outside of battle' },
 	{ name: 'cant throw away key items like exp share' },
 	{ name: 'peat block needs sprite' },
+	{ name: 'nicer ladder up sprite' },
 ];
