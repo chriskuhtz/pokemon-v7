@@ -22,8 +22,22 @@ export const falknerLine: Occupant[] = [
 			'they soar through the air with complete freedom',
 			'lets find out more about them',
 		],
+		handledMessage: ['Weaker flying pokemon can be shy'],
 		quest: 'catch some local bird pokemon',
 		conditionFunction: (s) =>
 			s.campUpgrades['invite flying pokemon expert falkner'],
+	},
+	{
+		...falknerBase,
+		id: 'falkner_2',
+
+		unhandledMessage: [
+			'Great work',
+			'I think some of these pokemon can evolve',
+		],
+		handledMessage: ['I wish i could fly'],
+		quest: 'evolve some local flying pokemon',
+		conditionFunction: (s) =>
+			s.quests['catch some local bird pokemon'] === 'FULFILLED',
 	},
 ];

@@ -293,8 +293,7 @@ export const questNames = [
 ] as const;
 /**
  * Ideas:
- *
- * falkner evolve birds
+ * falkner evolve single stage birds
  * falkner evolve stronger birds
  * falkner roaming arcticuno quest
  * defeat falkner
@@ -302,6 +301,7 @@ export const questNames = [
  * onix cave some
  * onix cave all
  * achieve cooking level x
+ * retrieve item from wild pokemon (special encounter)
  */
 export type QuestName = (typeof questNames)[number];
 
@@ -861,7 +861,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'training field 1',
 		availableAfter: 'catch Haunter and Mightyena',
 	},
-	'catch some local bird pokemon': {
+	'catch some local flying pokemon': {
 		rewardItems: { 'white-herb': 2 },
 		researchPoints: 10,
 		conditionFunction: (s) => {
@@ -869,10 +869,23 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				s.pokedex['pidgey'].caughtOnRoutes.length > 0 &&
 				s.pokedex['spearow'].caughtOnRoutes.length > 0 &&
 				s.pokedex['taillow'].caughtOnRoutes.length > 0 &&
-				s.pokedex['murkrow'].caughtOnRoutes.length > 0
+				s.pokedex['murkrow'].caughtOnRoutes.length > 0 &&
+				s.pokedex['starly'].caughtOnRoutes.length > 0
 			);
 		},
 		targetPokemon: ['pidgey', 'spearow', 'taillow', 'murkrow'],
+		kind: 'QUEST_LINE',
+	},
+	'evolve some local flying pokemon': {
+		rewardItems: { 'coba-berry': 2 },
+		researchPoints: 15,
+		conditionFunction: (s) => {
+			return (
+				s.pokedex['pidgeotto'].caughtOnRoutes.length > 0 &&
+				s.pokedex['staravia'].caughtOnRoutes.length > 0
+			);
+		},
+		targetPokemon: ['pidgeotto', 'staravia'],
 		kind: 'QUEST_LINE',
 	},
 	'defeat rowan': {
