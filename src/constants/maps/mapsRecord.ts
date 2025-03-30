@@ -41,7 +41,7 @@ export const mapDisplayNames: Record<MapId, string> = {
 	routeN1: 'akai meadow',
 	routeN1E1: 'orenji forest',
 	routeE1: 'kiiro highlands',
-	routeS1E1: 'midori route',
+	routeS1E1: 'midori plains',
 	routeS1: 'murasaki route',
 	routeS1W1: 'kuro route',
 	routeW1: 'shiro route',
