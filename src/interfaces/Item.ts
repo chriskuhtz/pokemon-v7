@@ -128,6 +128,7 @@ export const heldItems = [
 	'lustrous-orb',
 	'bright-powder',
 	'macho-brace',
+	'soothe-bell',
 ] as const;
 export const valuables = [
 	'shoal-salt',

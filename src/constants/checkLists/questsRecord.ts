@@ -514,7 +514,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'evolve a pokemon through level up',
 	},
 	'evolve a pokemon with a held item': {
-		rewardItems: { 'rare-candy': 1 },
+		rewardItems: { 'soothe-bell': 1 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return !!s.mileStones.hasEvolvedAPokemonWithAHeldItem;

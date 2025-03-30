@@ -909,7 +909,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/194/',
 		handled: true,
 	},
-	{ name: 'soothe-bell', url: 'https://pokeapi.co/api/v2/item/195/' },
+	{
+		name: 'soothe-bell',
+		url: 'https://pokeapi.co/api/v2/item/195/',
+		handled: true,
+	},
 	{ name: 'mental-herb', url: 'https://pokeapi.co/api/v2/item/196/' },
 	{ name: 'choice-band', url: 'https://pokeapi.co/api/v2/item/197/' },
 	{ name: 'kings-rock', url: 'https://pokeapi.co/api/v2/item/198/' },
