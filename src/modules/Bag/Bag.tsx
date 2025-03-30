@@ -10,7 +10,12 @@ import { battleSpriteSize } from '../../constants/gameData';
 import { canBenefitFromItem } from '../../functions/canBenefitFromItem';
 import { useEscapeRope } from '../../hooks/useEscapeRope';
 import { SaveFileContext } from '../../hooks/useSaveFile';
-import { isEncounterChanceItem, isItem, ItemType } from '../../interfaces/Item';
+import {
+	isEncounterChanceItem,
+	isItem,
+	isKeyItem,
+	ItemType,
+} from '../../interfaces/Item';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
@@ -79,10 +84,16 @@ export const Bag = ({ goBack }: { goBack: () => void }): JSX.Element => {
 							item={item as ItemType}
 							amount={amount}
 							actionElements={[
-								<ThrowAwayAction
-									amount={amount}
-									discardItem={(x: number) => discardItem(item as ItemType, x)}
-								/>,
+								isKeyItem(item) ? (
+									<></>
+								) : (
+									<ThrowAwayAction
+										amount={amount}
+										discardItem={(x: number) =>
+											discardItem(item as ItemType, x)
+										}
+									/>
+								),
 								isItem(item) &&
 								team.filter((t) => canBenefitFromItem(t, item)).length > 0 ? (
 									<HealAction
