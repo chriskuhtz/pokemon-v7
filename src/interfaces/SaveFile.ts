@@ -127,4 +127,5 @@ export interface SaveFile {
 	starterPokemon?: PokemonName;
 	seedVault: ItemType[];
 	pokedex: Pokedex;
+	cookingSkill?: number;
 }

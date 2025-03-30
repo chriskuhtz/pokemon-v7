@@ -15,6 +15,7 @@ export const routeimprovementsCheckList: {
 	{ name: 'make paldea quest possible', handled: true },
 	{ name: 'shortcut to route E1', handled: true },
 	{ name: 'mini cave', handled: true },
+	{ name: 'find fossil in cave' },
 	{ name: 'larger cave' },
 	{ name: 'cave as tunnel' },
 	{ name: 'cave teaser on meadow, behind ledges' },

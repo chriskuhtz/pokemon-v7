@@ -32,9 +32,11 @@ export const campUpgradeNames = [
 /**
  * ideas:
  * Cooking revamp
- * more gym leaders
+ * cook pokeblocks
+ * pokeblock lure station
+ * brock
+ * fossil guy should be roark
  * shovel spots
- * berry lure stations
  * "Pokeflute certification" : requires new route first
  * 'Pokemon Surfer Certification' : requires new route first
  * 'Pokemon Flyer Certification' : requires new route first
@@ -44,8 +46,6 @@ export const campUpgradeNames = [
 
 /**
  * Cooking revamp:
- * every succesful increases your chances
- * show chances
  * filter bar (juice, gateau, rare candy, pokeblock)
  */
 

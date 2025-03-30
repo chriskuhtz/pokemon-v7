@@ -2,10 +2,11 @@ import { useContext } from 'react';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
+import { AnimatedBar } from '../../uiComponents/AnimatedBar/AnimatedBar';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { useCookingGrandma } from './hooks/useCookingGrandma';
+import { recipeChanceMap, useCookingGrandma } from './hooks/useCookingGrandma';
 
 export const CookingGradma = (): JSX.Element => {
 	const { enabledRecipes, disabledRecipes, cook } = useCookingGrandma();
@@ -17,15 +18,34 @@ export const CookingGradma = (): JSX.Element => {
 			goBack={() => navigate('CHEF_GRANDMA', 'OVERWORLD')}
 		>
 			<Stack mode="column">
+				<strong>Cooking Skill:</strong>
+				<AnimatedBar
+					max={100}
+					offset={Math.max(0, 100 - (saveFile.cookingSkill ?? 0))}
+				/>
 				{enabledRecipes.map((recipe, index) => (
 					<Card
 						onClick={() => cook(recipe)}
 						key={recipe.result + index}
 						icon={<img src={getItemUrl(recipe.result)} />}
 						content={
-							<h3>
-								Cook {recipe.result} ({recipe.difficulty} Recipe)
-							</h3>
+							<div>
+								<h3>
+									Cook {recipe.result} ({recipe.difficulty} Recipe)
+								</h3>
+								<strong>
+									Chance of Success:{' '}
+									<AnimatedBar
+										max={100}
+										offset={Math.max(
+											0,
+											100 -
+												recipeChanceMap[recipe.difficulty] -
+												(saveFile.cookingSkill ?? 0)
+										)}
+									/>
+								</strong>
+							</div>
 						}
 						actionElements={recipe.ingredients.map((ing) => (
 							<img src={getItemUrl(ing)} />
