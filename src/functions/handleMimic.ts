@@ -1,18 +1,22 @@
 import { BattleMove, BattlePokemon } from '../interfaces/BattlePokemon';
 import { getMovesArray } from './getMovesArray';
 
-export const handleMimic = (
+export const handleMimicOrSketch = (
 	pokemon: BattlePokemon,
-	moveToCopy: BattleMove
+	moveToCopy: BattleMove,
+	type: 'mimic' | 'sketch'
 ): BattlePokemon => {
-	const mimicSlot = getMovesArray(pokemon).findIndex((m) => m.name === 'mimic');
+	const mimicSlot = getMovesArray(pokemon).findIndex((m) => m.name === type);
 
 	if (mimicSlot < 0) {
 		throw new Error('How can he mimic');
 	}
 
 	const updated = { ...pokemon };
-	updated.putMimicbacktoSlot = mimicSlot;
+	if (type === 'mimic') {
+		updated.putMimicbacktoSlot = mimicSlot;
+	}
+
 	if (mimicSlot === 0) {
 		updated.firstMove = moveToCopy;
 	}

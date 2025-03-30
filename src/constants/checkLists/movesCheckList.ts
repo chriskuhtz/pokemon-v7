@@ -1063,10 +1063,8 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/119/',
 		handled: true,
 	},
-	{ name: 'transform', url: 'https://pokeapi.co/api/v2/move/144/' },
-	{ name: 'substitute', url: 'https://pokeapi.co/api/v2/move/164/' },
-	{ name: 'struggle', url: 'https://pokeapi.co/api/v2/move/165/' },
-	{ name: 'sketch', url: 'https://pokeapi.co/api/v2/move/166/' },
+
+	{ name: 'sketch', url: 'https://pokeapi.co/api/v2/move/166/', handled: true },
 	{ name: 'spite', url: 'https://pokeapi.co/api/v2/move/180/' },
 	{ name: 'protect', url: 'https://pokeapi.co/api/v2/move/182/' },
 	{ name: 'belly-drum', url: 'https://pokeapi.co/api/v2/move/187/' },
@@ -1882,6 +1880,12 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/118/',
 		todos: ['would require async loading of move data'],
 	},
+	{
+		name: 'transform',
+		url: 'https://pokeapi.co/api/v2/move/144/',
+	},
+	{ name: 'substitute', url: 'https://pokeapi.co/api/v2/move/164/' },
+	{ name: 'struggle', url: 'https://pokeapi.co/api/v2/move/165/' },
 ];
 
 export const handledMoves = [
@@ -2141,6 +2145,7 @@ export const handledMoves = [
 	'mimic',
 	'bide',
 	'mirror-move',
+	'sketch',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

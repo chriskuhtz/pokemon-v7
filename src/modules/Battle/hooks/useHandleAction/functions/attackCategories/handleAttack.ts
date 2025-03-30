@@ -19,7 +19,7 @@ import { getMovesArray } from '../../../../../../functions/getMovesArray';
 import { arePokemonOfOppositeGenders } from '../../../../../../functions/getRivalryFactor';
 import { getTypeNames } from '../../../../../../functions/getTypeNames';
 import { handleFlinching } from '../../../../../../functions/handleFlinching';
-import { handleMimic } from '../../../../../../functions/handleMimic';
+import { handleMimicOrSketch } from '../../../../../../functions/handleMimic';
 import { isKO } from '../../../../../../functions/isKo';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import {
@@ -320,7 +320,26 @@ export const handleAttack = ({
 			addMessage({
 				message: `${updatedAttacker.name} copied ${target.lastUsedMove.name}`,
 			});
-			updatedAttacker = handleMimic(updatedAttacker, target.lastUsedMove);
+			updatedAttacker = handleMimicOrSketch(
+				updatedAttacker,
+				target.lastUsedMove,
+				'mimic'
+			);
+		} else
+			addMessage({
+				message: `It failed`,
+			});
+	}
+	if (move.name === 'sketch') {
+		if (target.lastUsedMove) {
+			addMessage({
+				message: `${updatedAttacker.name} copied ${target.lastUsedMove.name}`,
+			});
+			updatedAttacker = handleMimicOrSketch(
+				updatedAttacker,
+				target.lastUsedMove,
+				'sketch'
+			);
 		} else
 			addMessage({
 				message: `It failed`,
