@@ -34,7 +34,7 @@ export const BagLimitBar = () => {
 			max={getBagLimit(saveFile.campUpgrades)}
 			offset={getBagLimit(saveFile.campUpgrades) - totalAmount}
 			inversedColor
-			textColor="white"
+			textColor="black"
 		/>
 	);
 };

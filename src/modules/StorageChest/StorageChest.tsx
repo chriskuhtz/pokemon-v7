@@ -48,6 +48,7 @@ export const StorageChest = () => {
 				style={{
 					display: 'flex',
 					justifyContent: 'space-evenly',
+					gap: '.5rem',
 				}}
 			>
 				<Stack mode="column">
