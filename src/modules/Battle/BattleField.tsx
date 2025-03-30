@@ -368,7 +368,6 @@ export const BattleField = ({
 				return;
 			}
 
-			//TODO: consider trainer battles
 			addMessage({
 				message: `${user.data.name} separated the fighters with ${moveName}`,
 				onRemoval: () => leaveWithCurrentData('DRAW'),

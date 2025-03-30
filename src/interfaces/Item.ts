@@ -325,7 +325,7 @@ export const hasEndOfTurnEffect = (item: ItemType): boolean => {
 	}
 	return false;
 };
-//TODO: implement limits, e.g. hp up cant improve over 100
+
 export const HappinessChangeTable: Partial<Record<ItemType, number>> = {
 	'heal-powder': -10,
 	'energy-powder': -10,

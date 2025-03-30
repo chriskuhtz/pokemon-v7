@@ -122,7 +122,6 @@ export const determineBestMoveAndTarget = (
 			targets.map((target) => ({
 				actionName: move.name,
 				targetId: target.id,
-				//TODO: consider weather/effects etc
 				damage: calculateDamage(
 					attacker,
 					target,

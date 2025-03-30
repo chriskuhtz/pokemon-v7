@@ -22,7 +22,6 @@ export function applyEVBoostItem<T extends OwnedPokemon | BattlePokemon>(
 		),
 	};
 }
-//TODO: what else gives you evs
 export const applyEVGain = (
 	initialEvs: StatObject,
 	stat: Stat,
