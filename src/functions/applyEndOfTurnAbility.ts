@@ -57,6 +57,12 @@ export const applyEndOfTurnAbility = ({
 		});
 		return { ...pokemon, primaryAilment: undefined };
 	}
+	if (pokemon.ability === 'hydration' && pokemon.primaryAilment) {
+		addMessage({
+			message: `${pokemon.data.name} washed its status problems away`,
+		});
+		return { ...pokemon, primaryAilment: undefined };
+	}
 	if (
 		pokemon.ability === 'unburden' &&
 		!pokemon.heldItemName &&
