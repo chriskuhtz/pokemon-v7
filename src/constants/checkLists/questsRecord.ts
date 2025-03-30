@@ -229,7 +229,9 @@ export const questNames = [
 	'catch a pokemon',
 	'catch a spiritomb',
 	'catch Haunter and Mightyena',
-	'catch some local bird pokemon',
+	'catch some local flying pokemon',
+	'evolve some local flying pokemon',
+	'evolve a flying pokemon to its final stage',
 	'catch a pokemon orginally found in kanto',
 	'catch a pokemon orginally found in johto',
 	'catch a pokemon orginally found in hoenn',
@@ -293,8 +295,6 @@ export const questNames = [
 ] as const;
 /**
  * Ideas:
- * falkner evolve single stage birds
- * falkner evolve stronger birds
  * falkner roaming arcticuno quest
  * defeat falkner
  * all eeveelutions as final elm quest
@@ -862,7 +862,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'catch Haunter and Mightyena',
 	},
 	'catch some local flying pokemon': {
-		rewardItems: { 'white-herb': 2 },
+		rewardItems: { 'yache-berry': 2 },
 		researchPoints: 10,
 		conditionFunction: (s) => {
 			return (
@@ -877,7 +877,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'evolve some local flying pokemon': {
-		rewardItems: { 'coba-berry': 2 },
+		rewardItems: { 'charti-berry': 2 },
 		researchPoints: 15,
 		conditionFunction: (s) => {
 			return (
@@ -886,6 +886,18 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			);
 		},
 		targetPokemon: ['pidgeotto', 'staravia'],
+		kind: 'QUEST_LINE',
+	},
+	'evolve a flying pokemon to its final stage': {
+		rewardItems: { 'wacan-berry': 5 },
+		researchPoints: 25,
+		conditionFunction: (s) => {
+			return (
+				s.pokedex['pidgeot'].caughtOnRoutes.length > 0 ||
+				s.pokedex['staraptor'].caughtOnRoutes.length > 0
+			);
+		},
+		targetPokemon: ['pidgeot', 'staraptor'],
 		kind: 'QUEST_LINE',
 	},
 	'defeat rowan': {

@@ -23,7 +23,7 @@ export const falknerLine: Occupant[] = [
 			'lets find out more about them',
 		],
 		handledMessage: ['Weaker flying pokemon can be shy'],
-		quest: 'catch some local bird pokemon',
+		quest: 'catch some local flying pokemon',
 		conditionFunction: (s) =>
 			s.campUpgrades['invite flying pokemon expert falkner'],
 	},
@@ -38,6 +38,19 @@ export const falknerLine: Occupant[] = [
 		handledMessage: ['I wish i could fly'],
 		quest: 'evolve some local flying pokemon',
 		conditionFunction: (s) =>
-			s.quests['catch some local bird pokemon'] === 'FULFILLED',
+			s.quests['catch some local flying pokemon'] === 'FULFILLED',
+	},
+	{
+		...falknerBase,
+		id: 'falkner_3',
+
+		unhandledMessage: [
+			'Pidgeotto and Staravia can both evolve one more time',
+			'can you train one of them to their final form?',
+		],
+		handledMessage: ['I wish i could fly'],
+		quest: 'evolve a flying pokemon to its final stage',
+		conditionFunction: (s) =>
+			s.quests['evolve some local flying pokemon'] === 'FULFILLED',
 	},
 ];
