@@ -25,6 +25,20 @@ export const applyPrimaryAilmentDamage = (
 		const toxicDamage =
 			Math.round(POISON_DAMAGE_FACTOR * pokemon.stats.hp) *
 			(pokemon.primaryAilment.duration ?? 1);
+
+		if (pokemon.ability === 'poison-heal') {
+			addMessage(`${pokemon.data.name} healed itself with poison heal`);
+			return {
+				...pokemon,
+				damage: Math.max(0, pokemon.damage - toxicDamage),
+				primaryAilment: {
+					type: 'toxic',
+					duration: (pokemon.primaryAilment.duration ?? 1) + 1,
+				},
+			};
+		}
+
+		addMessage(`${pokemon.data.name} is hurt by poison`);
 		return {
 			...pokemon,
 			damage: pokemon.damage + toxicDamage,
@@ -35,9 +49,20 @@ export const applyPrimaryAilmentDamage = (
 		};
 	}
 	if (pokemon.primaryAilment?.type === 'poison') {
-		addMessage(`${pokemon.data.name} is hurt by poison`);
-
 		const poisonDamage = Math.round(POISON_DAMAGE_FACTOR * pokemon.stats.hp);
+
+		if (pokemon.ability === 'poison-heal') {
+			addMessage(`${pokemon.data.name} healed itself with poison heal`);
+			return {
+				...pokemon,
+				damage: Math.max(0, pokemon.damage - poisonDamage),
+				primaryAilment: {
+					type: 'toxic',
+					duration: (pokemon.primaryAilment.duration ?? 1) + 1,
+				},
+			};
+		}
+		addMessage(`${pokemon.data.name} is hurt by poison`);
 		return {
 			...pokemon,
 			damage: pokemon.damage + poisonDamage,
