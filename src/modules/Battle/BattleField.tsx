@@ -468,7 +468,6 @@ export const BattleField = ({
 						(x) => collectedMessages.push(x),
 						(x) => collectedMessages.push(...x)
 					);
-					updated.participatedInBattle = true;
 
 					updated = applyEndOfTurnAbility({
 						initialPokemon: [...initOpponents, ...initTeam].find(

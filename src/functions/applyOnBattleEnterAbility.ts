@@ -64,7 +64,11 @@ export const applyOnBattleEnterAbility = ({
 					return p;
 				}
 				if (p.id === user.id) {
-					return { ...user, roundsInBattle: p.roundsInBattle + 1 };
+					return {
+						...user,
+						roundsInBattle: p.roundsInBattle + 1,
+						participatedInBattle: true,
+					};
 				}
 				if (p.ownerId === user.ownerId) {
 					return p;
@@ -91,7 +95,7 @@ export const applyOnBattleEnterAbility = ({
 				if (p.id === user.id) {
 					const target = pokemon.find((p) => p.ownerId !== user.ownerId);
 					if (!target) {
-						return p;
+						return { ...p, participatedInBattle: true };
 					}
 					const stat: Stat =
 						target?.stats.defense > target?.stats['special-defense']
@@ -130,7 +134,11 @@ export const applyOnBattleEnterAbility = ({
 				return p;
 			}
 			if (p.id === user.id) {
-				return { ...user, roundsInBattle: p.roundsInBattle + 1 };
+				return {
+					...user,
+					roundsInBattle: p.roundsInBattle + 1,
+					participatedInBattle: true,
+				};
 			}
 			if (
 				p.initAbility === 'trace' &&
@@ -140,7 +148,7 @@ export const applyOnBattleEnterAbility = ({
 				addMessage({
 					message: `${p.data.name} traced ${user.ability}`,
 				});
-				return { ...p, ability: user.ability };
+				return { ...p, ability: user.ability, participatedInBattle: true };
 			}
 			return p;
 		})
