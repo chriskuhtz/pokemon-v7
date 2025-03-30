@@ -246,7 +246,9 @@ export const calculateDamage = (
 	const randomFactor = 0.85 + Math.random() * 0.15;
 	const stabFactor = determineStabFactor(attacker, attack);
 	const burnFactor =
-		attacker.primaryAilment?.type === 'burn' && attacker.ability !== 'guts'
+		damageClass === 'physical' &&
+		attacker.primaryAilment?.type === 'burn' &&
+		attacker.ability !== 'guts'
 			? 0.5
 			: 1;
 	const otherFactor = 1;
