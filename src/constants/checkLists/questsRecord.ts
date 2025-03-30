@@ -299,6 +299,11 @@ export const questNames = [
 /**
  
  * Ideas:
+*	falkner 1
+* falkner 2
+* falkner 3
+* defeat falkner
+* all eeveelutions as final elm quest
  */
 export type QuestName = (typeof questNames)[number];
 

@@ -252,4 +252,5 @@ export const extraFeatureCheckList: {
 	{ name: 'infatuation needs to be removed if target leaves field' },
 	{ name: 'label selection for github issues' },
 	{ name: 'consider weather/effects etc for opponent decisions' },
+	{ name: 'restructure encounters to make rowan quest better' },
 ];
