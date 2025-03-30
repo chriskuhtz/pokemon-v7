@@ -31,6 +31,7 @@ export const campUpgradeNames = [
 ] as const;
 /**
  * ideas:
+ * Cooking revamp
  * more gym leaders
  * shovel spots
  * berry lure stations

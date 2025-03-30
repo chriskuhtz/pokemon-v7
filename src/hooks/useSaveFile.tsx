@@ -8,6 +8,10 @@ import React, {
 import { MoveName } from '../constants/checkLists/movesCheckList';
 
 import { v4 } from 'uuid';
+import {
+	getBagLimit,
+	getTotalInventoryAmount,
+} from '../components/BagLimitBar/BagLimitBar';
 import { QuestName, QuestsRecord } from '../constants/checkLists/questsRecord';
 import {
 	emptyPokedex,
@@ -35,10 +39,6 @@ import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { RoutesType } from '../interfaces/Routing';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
 import { Message } from './useMessageQueue';
-import {
-	getTotalInventoryAmount,
-	getBagLimit,
-} from '../components/BagLimitBar/BagLimitBar';
 
 export interface EvolutionReducerPayload {
 	id: string;

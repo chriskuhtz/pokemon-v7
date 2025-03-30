@@ -19,7 +19,7 @@ export const Settings = (): JSX.Element => {
 		randomOverworldItems: false,
 		randomQuestRewards: false,
 		randomSwarms: false,
-		//disqualifyFaintedPokemon: false,
+		releaseFaintedPokemon: false,
 		//randomHeldItems: false,
 	});
 
@@ -54,6 +54,9 @@ export const Settings = (): JSX.Element => {
 	};
 	return (
 		<Page headline="Settings:">
+			<button style={{ width: '100%' }} onClick={() => proceed()}>
+				I am not reading that, lets go
+			</button>
 			<div
 				style={{
 					display: 'grid',
@@ -84,6 +87,12 @@ export const Settings = (): JSX.Element => {
 					setValue={(x) => setState({ ...state, rogueLike: x })}
 					label={'Roguelike mode:'}
 					description="Losing a battle completely resets your save file"
+				/>
+				<ToggleRow
+					value={state.releaseFaintedPokemon}
+					setValue={(x) => setState({ ...state, releaseFaintedPokemon: x })}
+					label={'Defeated Pokemon are released into the wild:'}
+					description="Losing a battle also completely resets your save file"
 				/>
 				<ToggleRow
 					value={state.noItemsInBattle}

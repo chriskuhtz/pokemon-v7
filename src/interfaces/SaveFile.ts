@@ -32,12 +32,12 @@ export interface CharacterLocationData {
 }
 
 export interface SettingsObject {
-	//disqualifyFaintedPokemon: boolean;
 	//randomHeldItems: boolean;
 	fasterDays: boolean;
 	doubleXpRates: boolean;
 	rogueLike: boolean;
 	noItemsInBattle: boolean;
+	releaseFaintedPokemon: boolean;
 	randomStarters: boolean;
 	randomOverworldItems: boolean;
 	randomQuestRewards: boolean;
