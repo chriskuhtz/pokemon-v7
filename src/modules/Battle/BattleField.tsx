@@ -573,13 +573,14 @@ export const BattleField = ({
 				gainedXp *= 2;
 			}
 			const xpPerTeamMember = settings?.expShareActive
-				? Math.round(gainedXp / team.length)
+				? Math.round(gainedXp / team.filter((t) => !isKO(t)).length)
 				: Math.round(
-						gainedXp / team.filter((t) => t.participatedInBattle).length
+						gainedXp /
+							team.filter((t) => t.participatedInBattle && !isKO(t)).length
 				  );
 
 			const getsRewards = (p: BattlePokemon) =>
-				settings?.expShareActive || p.participatedInBattle;
+				(settings?.expShareActive || p.participatedInBattle) && !isKO(p);
 			//XP REWARD
 			const leveledUpTeam = team.map((p) => {
 				if (getsRewards(p)) {
