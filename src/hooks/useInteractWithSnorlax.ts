@@ -43,6 +43,7 @@ export const useInteractWithSnorlax = () => {
 						message: 'and attacks',
 						onRemoval: () => {
 							patchSaveFileReducer({
+								mileStones: { ...saveFile.mileStones, hasWokenASnorlax: true },
 								meta: { currentChallenger: challenger, activeTab: 'BATTLE' },
 								handledOccupants: [
 									...saveFile.handledOccupants,
@@ -59,6 +60,7 @@ export const useInteractWithSnorlax = () => {
 			patchSaveFileReducer,
 			saveFile.bag,
 			saveFile.handledOccupants,
+			saveFile.mileStones,
 		]
 	);
 

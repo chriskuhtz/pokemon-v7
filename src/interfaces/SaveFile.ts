@@ -115,6 +115,7 @@ export interface SaveFile {
 		cookedEasyRecipe?: boolean;
 		cookedMediumRecipe?: boolean;
 		cookedTrickyRecipe?: boolean;
+		hasWokenASnorlax?: boolean;
 	};
 	farm: {
 		plants: BerryBush[];

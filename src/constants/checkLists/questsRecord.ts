@@ -297,6 +297,7 @@ export const questNames = [
 	'catch a pokemon from onix cave',
 	'catch all pokemon from onix cave',
 	'defeat falkner',
+	'wake a snorlax',
 ] as const;
 /**
  * Ideas:
@@ -1242,6 +1243,15 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			onixCaveEncounters.BASE.every((o) =>
 				s.pokedex[o.name].caughtOnRoutes.includes('onixCave')
 			),
+	},
+	'wake a snorlax': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'shovel certification',
+		researchPoints: 25,
+		rewardItems: {
+			'enigma-berry': 2,
+		},
+		conditionFunction: (s) => !!s.mileStones.hasWokenASnorlax,
 	},
 };
 

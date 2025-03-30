@@ -476,7 +476,7 @@ export const getRandomItem = () => {
 	return itemTypes[getRandomIndex(itemTypes.length)];
 };
 export const pickupTable: ItemType[] = [
-	...berries,
+	...berries.filter((b) => b !== 'enigma-berry'),
 	...apricorns,
 	...herbs,
 	'berry-juice',
