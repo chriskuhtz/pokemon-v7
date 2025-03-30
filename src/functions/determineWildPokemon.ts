@@ -11,15 +11,17 @@ export const determineWildPokemon = (
 	map: OverworldMap,
 	quests: SaveFile['quests'],
 	swarm?: PokemonSwarm
-) => {
+): OwnedPokemon[] => {
 	if (
 		quests['catch the legendary bird of ice'] === 'ACTIVE' &&
 		Math.random() < 0.01
 	) {
-		makeChallengerPokemon(
-			{ name: 'articuno', xp: 125000 },
-			{ increasedShinyFactor: 2 }
-		);
+		return [
+			makeChallengerPokemon(
+				{ name: 'articuno', xp: 125000 },
+				{ increasedShinyFactor: 2 }
+			),
+		];
 	}
 	if (swarm && swarm.route === map.id && Math.random() > 0.5) {
 		return [
