@@ -26,4 +26,24 @@ export const onixCaveOccupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'onixCave_fossil'),
 	},
+	{
+		type: 'ITEM',
+		item: 'black-augurite',
+		amount: 1,
+		x: 20,
+		y: 27,
+		id: 'onixCave_fossil',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'onixCave_fossil'),
+	},
+	{
+		type: 'ITEM',
+		item: 'dawn-stone',
+		amount: 1,
+		x: 43,
+		y: 15,
+		id: 'onixCave_fossil',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'onixCave_fossil'),
+	},
 ];
