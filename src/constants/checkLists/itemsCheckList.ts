@@ -889,7 +889,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/189/',
 		handled: true,
 	},
-	{ name: 'white-herb', url: 'https://pokeapi.co/api/v2/item/191/' },
+	{
+		name: 'white-herb',
+		url: 'https://pokeapi.co/api/v2/item/191/',
+		handled: true,
+	},
 	{ name: 'macho-brace', url: 'https://pokeapi.co/api/v2/item/192/' },
 	{ name: 'exp-share', url: 'https://pokeapi.co/api/v2/item/193/' },
 	{ name: 'quick-claw', url: 'https://pokeapi.co/api/v2/item/194/' },
