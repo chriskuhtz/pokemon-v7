@@ -14,7 +14,8 @@ import { ItemType } from '../../../../interfaces/Item';
 import { WeatherType } from '../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../BattleField';
 import { handleMoveBlockAilments } from '../../functions/handleMoveBlockAilments';
-import { handleAttack } from './functions/handleAttack';
+import { handleAilmentAttack } from './functions/attackCategories/handleAilmentAttack';
+import { handleAttack } from './functions/attackCategories/handleAttack';
 import { handleCatch } from './functions/handleCatch';
 
 export const useHandleAction = (
@@ -256,18 +257,33 @@ export const useHandleAction = (
 					return;
 				}
 
-				handleAttack({
-					attacker,
-					pokemon,
-					setPokemon,
-					addMessage,
-					move,
-					battleWeather,
-					scatterCoins,
-					dampy,
-					addBattleFieldEffect,
-					battleFieldEffects,
-				});
+				switch (move.data.meta.category.name) {
+					case 'ailment':
+						handleAilmentAttack({
+							attacker,
+							pokemon,
+							setPokemon,
+							addMessage,
+							move,
+							battleWeather,
+							battleFieldEffects,
+						});
+						break;
+					default:
+						handleAttack({
+							attacker,
+							pokemon,
+							setPokemon,
+							addMessage,
+							move,
+							battleWeather,
+							scatterCoins,
+							dampy,
+							addBattleFieldEffect,
+							battleFieldEffects,
+						});
+				}
+
 				return;
 			}
 		},

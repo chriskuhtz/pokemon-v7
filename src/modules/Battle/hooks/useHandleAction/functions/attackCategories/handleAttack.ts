@@ -1,26 +1,26 @@
-import { contactMoves } from '../../../../../constants/contactMoves';
-import { lockInMoves } from '../../../../../constants/forceSwitchMoves';
-import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/selfDestructingMoves';
-import { applyAttackAilmentsToPokemon } from '../../../../../functions/applyAttackAilmentsToPokemon';
-import { applyAttackStatChanges } from '../../../../../functions/applyAttackStatChanges';
-import { applyPrimaryAilmentToPokemon } from '../../../../../functions/applyPrimaryAilmentToPokemon';
-import { applySecondaryAilmentToPokemon } from '../../../../../functions/applySecondaryAilmentToPokemon';
-import { applyStatChangeToPokemon } from '../../../../../functions/applyStatChangeToPokemon';
-import { calculateDamage } from '../../../../../functions/calculateDamage';
-import { changeMovePP } from '../../../../../functions/changeMovePP';
-import { determineMiss } from '../../../../../functions/determineMiss';
+import { contactMoves } from '../../../../../../constants/contactMoves';
+import { lockInMoves } from '../../../../../../constants/forceSwitchMoves';
+import { SELF_DESTRUCTING_MOVES } from '../../../../../../constants/selfDestructingMoves';
+import { applyAttackAilmentsToPokemon } from '../../../../../../functions/applyAttackAilmentsToPokemon';
+import { applyAttackStatChanges } from '../../../../../../functions/applyAttackStatChanges';
+import { applyPrimaryAilmentToPokemon } from '../../../../../../functions/applyPrimaryAilmentToPokemon';
+import { applySecondaryAilmentToPokemon } from '../../../../../../functions/applySecondaryAilmentToPokemon';
+import { applyStatChangeToPokemon } from '../../../../../../functions/applyStatChangeToPokemon';
+import { calculateDamage } from '../../../../../../functions/calculateDamage';
+import { changeMovePP } from '../../../../../../functions/changeMovePP';
+import { determineMiss } from '../../../../../../functions/determineMiss';
 import {
 	getRandomEntry,
 	getRandomIndex,
-} from '../../../../../functions/filterTargets';
-import { getActualTargetId } from '../../../../../functions/getActualTargetId';
-import { getMiddleOfThree } from '../../../../../functions/getMiddleOfThree';
-import { getMovesArray } from '../../../../../functions/getMovesArray';
-import { arePokemonOfOppositeGenders } from '../../../../../functions/getRivalryFactor';
-import { getTypeNames } from '../../../../../functions/getTypeNames';
-import { handleFlinching } from '../../../../../functions/handleFlinching';
-import { isKO } from '../../../../../functions/isKo';
-import { Message } from '../../../../../hooks/useMessageQueue';
+} from '../../../../../../functions/filterTargets';
+import { getActualTargetId } from '../../../../../../functions/getActualTargetId';
+import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
+import { getMovesArray } from '../../../../../../functions/getMovesArray';
+import { arePokemonOfOppositeGenders } from '../../../../../../functions/getRivalryFactor';
+import { getTypeNames } from '../../../../../../functions/getTypeNames';
+import { handleFlinching } from '../../../../../../functions/handleFlinching';
+import { isKO } from '../../../../../../functions/isKo';
+import { Message } from '../../../../../../hooks/useMessageQueue';
 import {
 	CUTE_CHARM_CHANCE,
 	EFFECT_SPORE_CHANCE,
@@ -30,18 +30,18 @@ import {
 	PrimaryAilment,
 	ROUGH_SKIN_FACTOR,
 	STATIC_CHANCE,
-} from '../../../../../interfaces/Ailment';
-import { BattleAttack } from '../../../../../interfaces/BattleActions';
-import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
-import { typeEffectivenessChart } from '../../../../../interfaces/PokemonType';
-import { EmptyStatObject } from '../../../../../interfaces/StatObject';
-import { WeatherType } from '../../../../../interfaces/Weather';
-import { BattleFieldEffect } from '../../../BattleField';
-import { handleDampy } from '../../../functions/handleDampy';
-import { checkAndHandleFainting } from '../../../functions/handleFainting';
-import { handleMiss } from '../../../functions/handleMiss';
-import { handleMoveBlockAilments } from '../../../functions/handleMoveBlockAilments';
-import { handleNoTarget } from '../../../functions/handleNoTarget';
+} from '../../../../../../interfaces/Ailment';
+import { BattleAttack } from '../../../../../../interfaces/BattleActions';
+import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
+import { typeEffectivenessChart } from '../../../../../../interfaces/PokemonType';
+import { EmptyStatObject } from '../../../../../../interfaces/StatObject';
+import { WeatherType } from '../../../../../../interfaces/Weather';
+import { BattleFieldEffect } from '../../../../BattleField';
+import { handleDampy } from '../../../../functions/handleDampy';
+import { checkAndHandleFainting } from '../../../../functions/handleFainting';
+import { handleMiss } from '../../../../functions/handleMiss';
+import { handleMoveBlockAilments } from '../../../../functions/handleMoveBlockAilments';
+import { handleNoTarget } from '../../../../functions/handleNoTarget';
 
 export const handleAttack = ({
 	attacker,
@@ -675,7 +675,7 @@ export const handleAttack = ({
 				addMessage,
 			});
 		}
-		//check flash fire
+		//check lightning rod
 		if (
 			!isKO(updatedTarget) &&
 			target.ability === 'lightning-rod' &&

@@ -106,7 +106,7 @@ export const applyPrimaryAilmentToPokemon = (
 	) {
 		const duration = getMiddleOfThree([1, Math.round(Math.random() * 5), 4]);
 		addMessage({
-			message: `${target.data.name} was put to sleep for ${duration} turns ${
+			message: `${target.data.name} was put to sleep ${
 				suffix ? 'by ' + suffix : ''
 			}`,
 		});
