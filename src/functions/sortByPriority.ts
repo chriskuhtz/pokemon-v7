@@ -19,13 +19,15 @@ const calculateTotalSpeed = (
 	)
 		? 2
 		: 1;
+	const machoBraceFactor = a.heldItemName === 'macho-brace' ? 0.5 : 1;
 
 	return (
 		calculateModifiedStat(a.stats.speed, a.statBoosts.speed) *
 		paraFactorA *
 		swiftSwimFactorA *
 		chlorophyllFactorA *
-		unburdenFactorA
+		unburdenFactorA *
+		machoBraceFactor
 	);
 };
 export const sortByPriority = (

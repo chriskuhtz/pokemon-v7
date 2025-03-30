@@ -12,6 +12,7 @@ export interface BattleMove extends OwnedPokemonMove {
 }
 export interface BattlePokemon extends OwnedPokemon {
 	stats: StatObject;
+	evAwards: StatObject;
 	firstMove: BattleMove;
 	secondMove?: BattleMove;
 	thirdMove?: BattleMove;
