@@ -121,6 +121,7 @@ export const evoStones = [
 	'peat-block',
 ] as const;
 export const heldItems = [
+	'quick-claw',
 	'metal-coat',
 	'oval-stone',
 	'adamant-orb',

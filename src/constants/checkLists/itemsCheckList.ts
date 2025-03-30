@@ -904,7 +904,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/193/',
 		handled: true,
 	},
-	{ name: 'quick-claw', url: 'https://pokeapi.co/api/v2/item/194/' },
+	{
+		name: 'quick-claw',
+		url: 'https://pokeapi.co/api/v2/item/194/',
+		handled: true,
+	},
 	{ name: 'soothe-bell', url: 'https://pokeapi.co/api/v2/item/195/' },
 	{ name: 'mental-herb', url: 'https://pokeapi.co/api/v2/item/196/' },
 	{ name: 'choice-band', url: 'https://pokeapi.co/api/v2/item/197/' },
