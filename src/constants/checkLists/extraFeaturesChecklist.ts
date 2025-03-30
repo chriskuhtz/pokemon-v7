@@ -147,9 +147,7 @@ export const extraFeatureCheckList: {
 	{ name: 'consider rarity of held items', handled: true },
 	{ name: 'swarms increase shiny chance', handled: true },
 	{ name: 'setting: defeated pokemon get released', handled: true },
-	{ name: 'poison step damage' },
-	{ name: 'fly outside of battle' },
-	{ name: 'camp upgrade explanations' },
+	{ name: 'camp upgrade explanations', handled: true },
 	{ name: 'higher level pokemon ignore repel' },
 	{ name: 'trainer builder' },
 	{ name: 'Edit and Collapse Buttons in pokemoncard need keyboard controls' },
@@ -252,4 +250,6 @@ export const extraFeatureCheckList: {
 	{ name: 'label selection for github issues' },
 	{ name: 'consider weather/effects etc for opponent decisions' },
 	{ name: 'restructure encounters to make rowan quest better' },
+	{ name: 'poison step damage' },
+	{ name: 'fly outside of battle' },
 ];

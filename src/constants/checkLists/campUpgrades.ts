@@ -135,3 +135,38 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'bag size upgrade 2': [...baseRequirements, 'bag size upgrade 1'],
 	'bag size upgrade 3': [...baseRequirements, 'bag size upgrade 2'],
 };
+export const campUpgradeExplanations: Record<CampUpgrade, string> = {
+	bulletin_board: 'A place for people to post quests',
+	berry_farm: 'Berries and Apricorns are our main resources',
+	'invite apricorn smith kurt': 'Pokeballs can be made from apricorns',
+	'invite ghost expert morty':
+		'The Gym Leader from Ecruteak studies ghost pokemon',
+	'invite flying pokemon expert falkner':
+		'The Gym Leader from Violet city studies flying pokemon',
+	'invite professor rowan':
+		'professor rowan collects pokemon from all over the world',
+	'invite professor elm': 'professor elm studies pokemon evolution',
+	'machete certification': 'Safety Training for bush cutting',
+	'training field 1': 'Train your Pokemon against other trainers',
+	'training field 2': 'Invite Stronger Trainers',
+	'build combee hive': 'Gathering our own honey would be useful',
+	'build miltank farm': 'All Pokemon like to drink miltank milk',
+	'invite chef grandma': 'Raw Ingredients can be improved through cooking',
+	'pokemon swarm radar': 'Detects Pokemon that migrate in swarms',
+	'second slot for farm': 'more space at the berry farm',
+	'third slot for farm': 'more space at the berry farm',
+	'fourth slot for farm': 'more space at the berry farm',
+	'invite zigzagoon foragers': 'zigzagoon can find berries and other items',
+	'invite dugtrio explorers': 'dugtrio can find rare items underground',
+	'invite amoongus compost researcher': 'amoongus can produce mulch',
+	'invite vileplume scent researcher':
+		'vileplume can produce repel and other scent based items',
+	'invite fossil expert': 'maybe we can revive fossilized pokemon',
+	'sledge hammer certification': 'Safety Training for rock smashing',
+	'shovel certification': 'Safety Training for digging into ledges',
+	'invite museum curator': 'Some items we find might be valuable',
+	'create seed vault': 'Safely stores seeds so we never run out',
+	'bag size upgrade 1': 'More space in your field bag',
+	'bag size upgrade 2': 'More space in your field bag',
+	'bag size upgrade 3': 'More space in your field bag',
+};

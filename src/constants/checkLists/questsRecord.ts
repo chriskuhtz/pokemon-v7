@@ -301,6 +301,7 @@ export const questNames = [
  * all eeveelutions as final elm quest
  * onix cave some
  * onix cave all
+ * achieve cooking level x
  */
 export type QuestName = (typeof questNames)[number];
 
