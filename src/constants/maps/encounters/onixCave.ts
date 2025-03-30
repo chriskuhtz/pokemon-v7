@@ -13,6 +13,7 @@ export const onixCaveEncounters: EncounterMap = {
 		{ name: 'onix', xp: 4000, rarity: 'common' },
 		{ name: 'onix', xp: 5000, rarity: 'common' },
 		{ name: 'onix', xp: 6000, rarity: 'medium' },
+		{ name: 'diglett-alola', xp: 6000, rarity: 'medium' },
 		{ name: 'steelix', xp: 8000, rarity: 'ultra-rare' },
 	],
 	MORNING: [],

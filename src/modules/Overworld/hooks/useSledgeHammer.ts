@@ -26,7 +26,7 @@ export const sledgeHammerPokemon: PokemonName[] = [
 	'dwebble',
 	'bonsly',
 	'klawf',
-	'glimmet',
+	'riolu',
 ];
 
 const SLEDGEHAMMER_ENCOUNTER_OPTIONS: OwnedPokemon[] = honeyPokemon.map((h) =>

@@ -8,6 +8,6 @@ export const routeimprovementsCheckList: {
 	{ name: 'Onix cave ready (designs)', handled: true },
 	{ name: 'more research available than costs again', handled: true },
 	{ name: 'snorlax wake up method', handled: true },
+	{ name: 'better encounter distro for rowan quests', handled: true },
 	{ name: 'training field 3' },
-	{ name: 'better encounter distro for rowan quests' },
 ];
