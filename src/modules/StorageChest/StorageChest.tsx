@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { BagLimitBar } from '../../components/BagLimitBar/BagLimitBar';
 import { useFilteredInventory } from '../../components/ItemsFilter/ItemsFilter';
+import { battleSpriteSize } from '../../constants/gameData';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { EmptyInventory, joinInventories } from '../../interfaces/Inventory';
@@ -57,7 +58,12 @@ export const StorageChest = () => {
 						.map(([item, amount]) => (
 							<Card
 								actionElements={[<FaArrowRight />]}
-								icon={<img src={getItemUrl(item as ItemType)} />}
+								icon={
+									<img
+										height={battleSpriteSize}
+										src={getItemUrl(item as ItemType)}
+									/>
+								}
 								content={`	${item}(${amount})`}
 								key={'bag' + item + amount}
 								onClick={() => putItemInStorage(item as ItemType)}
@@ -73,7 +79,12 @@ export const StorageChest = () => {
 							<Card
 								key={'storage' + item + amount}
 								onClick={() => putItemInBag(item as ItemType)}
-								actionElements={[<img src={getItemUrl(item as ItemType)} />]}
+								actionElements={[
+									<img
+										height={battleSpriteSize}
+										src={getItemUrl(item as ItemType)}
+									/>,
+								]}
 								icon={<FaArrowLeft />}
 								content={`	${item}(${amount})`}
 							/>

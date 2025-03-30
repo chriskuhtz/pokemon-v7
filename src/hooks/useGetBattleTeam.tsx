@@ -206,6 +206,7 @@ export const useGetBattleTeam = (
 						? generateRandomStatObject(255)
 						: pokemon.effortValues,
 					evAwards: getEvAwards(fetchedData.stats),
+					participatedInBattle: false,
 				};
 
 				return battleMon;

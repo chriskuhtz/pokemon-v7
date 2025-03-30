@@ -13,6 +13,7 @@ import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { TrainerCard } from '../../components/TrainerCard/TrainerCard';
 import { battleSpriteSize } from '../../constants/gameData';
 import { mapsRecord } from '../../constants/maps/mapsRecord';
+import { getItemUrl } from '../../functions/getItemUrl';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { useQuests } from '../../hooks/useQuests';
@@ -31,34 +32,6 @@ export const MainMenu = ({
 	const navigate = useNavigate();
 	const { addMessage } = useContext(MessageQueueContext);
 	const { teleporter, teleportHome } = useTeleport();
-	const { saveFile } = useContext(SaveFileContext);
-	const [bugReport, setBugReport] = useState<string>('');
-
-	const reportBug = async (body: string) => {
-		const octokit = new Octokit({
-			//@ts-expect-error fu ts
-			auth: import.meta.env.VITE_BUGREPORT_TOKEN,
-		});
-
-		await octokit
-			.request('POST /repos/chriskuhtz/pokemon-v7/issues', {
-				owner: 'OWNER',
-				repo: 'REPO',
-				title: `Bug found by ${saveFile.playerId}`,
-				body: `${body}`,
-				labels: [],
-				headers: {
-					'X-GitHub-Api-Version': '2022-11-28',
-				},
-			})
-			.then(() => {
-				addMessage({
-					message: 'Thank you for reporting this',
-					needsNoConfirmation: true,
-				});
-				setBugReport('');
-			});
-	};
 
 	return (
 		<Page headline="Main Menu:" goBack={goBack}>
@@ -77,7 +50,7 @@ export const MainMenu = ({
 						actionElements={[]}
 					/>
 				)}
-
+				<ExpShareButton />
 				<Card
 					onClick={() => navigate('MAIN', 'BAG')}
 					content={<h4>Bag</h4>}
@@ -127,23 +100,7 @@ export const MainMenu = ({
 						Delete Savefile and reset
 					</button>
 				)}
-				<Card
-					icon={<FaBug size={battleSpriteSize} />}
-					content={
-						<div>
-							<h4>Report a bug</h4>
-							<textarea
-								cols={70}
-								rows={10}
-								value={bugReport}
-								onChange={(e) => setBugReport(e.target.value)}
-							/>
-						</div>
-					}
-					actionElements={[
-						<button onClick={() => void reportBug(bugReport)}>Submit</button>,
-					]}
-				/>
+				<BugReportButton />
 
 				{window.localStorage.getItem('devmode') &&
 					Object.keys(mapsRecord).map((m) => (
@@ -157,5 +114,90 @@ export const MainMenu = ({
 					))}
 			</Stack>
 		</Page>
+	);
+};
+
+export const ExpShareButton = () => {
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+
+	if (saveFile.bag['exp-share'] <= 0 && saveFile.storage['exp-share'] <= 0) {
+		return <></>;
+	}
+	return (
+		<Card
+			icon={<img height={battleSpriteSize} src={getItemUrl('exp-share')} />}
+			onClick={() => {
+				patchSaveFileReducer({
+					settings: {
+						...saveFile.settings,
+						expShareActive: !saveFile.settings?.expShareActive,
+					},
+				});
+			}}
+			content={
+				<h3>
+					{saveFile.settings?.expShareActive
+						? 'Every Pokemon on team gets Xp'
+						: 'Only pokemon that battled get Xp'}
+				</h3>
+			}
+			actionElements={[
+				<strong>
+					{saveFile.settings?.expShareActive ? 'Xp Share ON' : 'Xp Share Off'}
+				</strong>,
+			]}
+		/>
+	);
+};
+
+export const BugReportButton = () => {
+	const { addMessage } = useContext(MessageQueueContext);
+	const { saveFile } = useContext(SaveFileContext);
+	const [bugReport, setBugReport] = useState<string>('');
+
+	const reportBug = async (body: string) => {
+		const octokit = new Octokit({
+			//@ts-expect-error fu ts
+			auth: import.meta.env.VITE_BUGREPORT_TOKEN,
+		});
+
+		await octokit
+			.request('POST /repos/chriskuhtz/pokemon-v7/issues', {
+				owner: 'OWNER',
+				repo: 'REPO',
+				title: `Bug found by ${saveFile.playerId}`,
+				body: `${body}`,
+				labels: [],
+				headers: {
+					'X-GitHub-Api-Version': '2022-11-28',
+				},
+			})
+			.then(() => {
+				addMessage({
+					message: 'Thank you for reporting this',
+					needsNoConfirmation: true,
+				});
+				setBugReport('');
+			});
+	};
+
+	return (
+		<Card
+			icon={<FaBug size={battleSpriteSize} />}
+			content={
+				<div>
+					<h4>Report a bug</h4>
+					<textarea
+						cols={70}
+						rows={10}
+						value={bugReport}
+						onChange={(e) => setBugReport(e.target.value)}
+					/>
+				</div>
+			}
+			actionElements={[
+				<button onClick={() => void reportBug(bugReport)}>Submit</button>,
+			]}
+		/>
 	);
 };

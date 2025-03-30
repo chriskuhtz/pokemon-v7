@@ -561,7 +561,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'evolve a pokemon that only evolves during the day',
 	},
 	'train a pokemon to level 10': {
-		rewardItems: { 'rare-candy': 1 },
+		rewardItems: { 'exp-share': 1 },
 		researchPoints: 10,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 10);

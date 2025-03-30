@@ -328,7 +328,6 @@ export const BattleField = ({
 		},
 		[addMessage, battleFieldEffects, battleWeather]
 	);
-
 	const handleForceSwitch = useCallback(
 		(user: BattlePokemon, moveName: MoveName) => {
 			const otherSideHasSuctionCups = pokemon.find(
@@ -469,6 +468,8 @@ export const BattleField = ({
 						(x) => collectedMessages.push(x),
 						(x) => collectedMessages.push(...x)
 					);
+					updated.participatedInBattle = true;
+
 					updated = applyEndOfTurnAbility({
 						initialPokemon: [...initOpponents, ...initTeam].find(
 							(initPok) => initPok.id === p.id
@@ -572,10 +573,21 @@ export const BattleField = ({
 			if (settings?.doubleXpRates) {
 				gainedXp *= 2;
 			}
-			const xpPerTeamMember = Math.round(gainedXp / team.length);
+			const xpPerTeamMember = settings?.expShareActive
+				? Math.round(gainedXp / team.length)
+				: Math.round(
+						gainedXp / team.filter((t) => t.participatedInBattle).length
+				  );
+
+			const getsRewards = (p: BattlePokemon) =>
+				settings?.expShareActive || p.participatedInBattle;
+			//XP REWARD
 			const leveledUpTeam = team.map((p) => {
-				const newXp = p.xp + xpPerTeamMember;
-				return { ...p, xp: newXp };
+				if (getsRewards(p)) {
+					const newXp = p.xp + xpPerTeamMember;
+					return { ...p, xp: newXp };
+				}
+				return p;
 			});
 			const levelUpMessages: Message[] = leveledUpTeam
 				.map((pokemon) => {
@@ -592,25 +604,32 @@ export const BattleField = ({
 					return;
 				})
 				.filter((m) => m !== undefined);
-			//FRIENDSHIP
-			const friendshipIncreasedTeam = leveledUpTeam.map((p) =>
-				applyHappinessChange(p, 1)
-			);
+			//FRIENDSHIP REWARD
+			const friendshipIncreasedTeam = leveledUpTeam.map((p) => {
+				if (getsRewards(p)) {
+					applyHappinessChange(p, 1);
+				}
+				return p;
+			});
+			//EV REWARD
 			const evGainedTeam = friendshipIncreasedTeam.map((p) => {
-				const updated = { ...p };
-				console.log(updated.effortValues);
-				defeatedPokemon.forEach((defeated) => {
-					Object.entries(defeated.evAwards).forEach(([stat, award]) => {
-						updated.effortValues = applyEVGain(
-							updated.effortValues,
-							stat as Stat,
-							award,
-							p.heldItemName
-						);
-					});
-				});
-				console.log(updated.effortValues);
-				return updated;
+				{
+					if (getsRewards(p)) {
+						const updated = { ...p };
+						defeatedPokemon.forEach((defeated) => {
+							Object.entries(defeated.evAwards).forEach(([stat, award]) => {
+								updated.effortValues = applyEVGain(
+									updated.effortValues,
+									stat as Stat,
+									award,
+									p.heldItemName
+								);
+							});
+						});
+						return updated;
+					}
+					return p;
+				}
 			});
 
 			addMultipleMessages(
@@ -640,7 +659,7 @@ export const BattleField = ({
 		leaveWithCurrentData,
 		pokemon,
 		scatteredCoins,
-		settings?.doubleXpRates,
+		settings,
 		team,
 	]);
 

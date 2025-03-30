@@ -48,6 +48,7 @@ export interface BattlePokemon extends OwnedPokemon {
 		turn: number;
 		damage: number;
 	};
+	participatedInBattle: boolean;
 }
 
 export function isBattlePokemon(

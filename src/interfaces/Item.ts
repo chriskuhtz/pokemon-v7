@@ -260,6 +260,7 @@ export const itemTypes = [
 	'rare-candy',
 	'escape-rope',
 	'honey',
+	'exp-share',
 ] as const;
 
 export type ItemType = (typeof itemTypes)[number];

@@ -252,4 +252,6 @@ export const extraFeatureCheckList: {
 	{ name: 'restructure encounters to make rowan quest better' },
 	{ name: 'poison step damage' },
 	{ name: 'fly outside of battle' },
+	{ name: 'cant throw away key items like exp share' },
+	{ name: 'peat block needs sprite' },
 ];
