@@ -5,6 +5,10 @@ export type Inventory = Record<ItemType, number>;
 export const EmptyInventory: Inventory = Object.fromEntries(
 	itemTypes.map((item: ItemType) => [item, 0])
 ) as Inventory;
+
+export const CompleteInventory: Inventory = Object.fromEntries(
+	itemTypes.map((item: ItemType) => [item, 10])
+) as Inventory;
 export const generateInventory = (wanted: Partial<Inventory>): Inventory => {
 	return joinInventories(EmptyInventory, wanted);
 };

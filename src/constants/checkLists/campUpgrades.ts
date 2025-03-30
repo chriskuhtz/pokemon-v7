@@ -31,7 +31,6 @@ export const campUpgradeNames = [
 ] as const;
 /**
  * ideas:
- * Cooking revamp
  * cook pokeblocks
  * pokeblock lure station
  * brock
@@ -42,11 +41,6 @@ export const campUpgradeNames = [
  * 'Pokemon Flyer Certification' : requires new route first
  * 	Fishing?
  * berries visible in overworld
- */
-
-/**
- * Cooking revamp:
- * filter bar (juice, gateau, rare candy, pokeblock)
  */
 
 /**

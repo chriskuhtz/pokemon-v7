@@ -11,7 +11,7 @@ import { Bag } from './modules/Bag/Bag';
 import { BattleLoader } from './modules/Battle/components/BattleLoader';
 import { BulletinBoard } from './modules/BulletinBoard/BulletinBoard';
 import { CampUpgrades } from './modules/CampUpgrades/CampUpgrades';
-import { CookingGradma } from './modules/CookingGrandma/CookingGrandma';
+import { CookingGrandma } from './modules/CookingGrandma/CookingGrandma';
 import { Curator } from './modules/Curator/Curator';
 import { Farm } from './modules/Farm/Farm';
 import { FossilReviver } from './modules/FossilReviver/FossilReviver';
@@ -29,10 +29,10 @@ import { SeedVault } from './modules/SeedVault/SeedVault';
 import { Settings } from './modules/Settings/Settings';
 import { SpriteSelection } from './modules/SpriteSelection/SpriteSelection';
 import { StarterSelection } from './modules/StarterSelection/StarterSelection';
+import { StorageChest } from './modules/StorageChest/StorageChest';
 import { Team } from './modules/Team/Team';
 import { TrainingField } from './modules/TrainingField/TrainingField';
 import { VilePlumeScentResearcher } from './modules/VilePlumeScentResearcher/VilePlumeScentResearcher';
-import { StorageChest } from './modules/StorageChest/StorageChest';
 
 export const FullScreenToggle = () => {
 	const [f, setF] = useState<boolean>(!!document.fullscreenElement);
@@ -199,7 +199,7 @@ export const App = (): JSX.Element => {
 		return <FossilReviver />;
 	}
 	if (activeTab === 'CHEF_GRANDMA') {
-		return <CookingGradma />;
+		return <CookingGrandma />;
 	}
 	if (activeTab === 'CURATOR') {
 		return <Curator />;
