@@ -15,6 +15,7 @@ import {
 	EmptyStatObject,
 	generateRandomStatObject,
 } from '../../interfaces/StatObject';
+import { onixCaveEncounters } from '../maps/encounters/onixCave';
 import { routeE1 } from '../maps/routeE1';
 import { routeN1 } from '../maps/routeN1';
 import { routeN1E1 } from '../maps/routeN1E1';
@@ -293,6 +294,9 @@ export const questNames = [
 	'donate 20 plants to the seed vault',
 	'donate 50 plants to the seed vault',
 	'donate all different plants to the seed vault',
+	'catch a pokemon from onix cave',
+	'catch all pokemon from onix cave',
+	'defeat falkner',
 ] as const;
 /**
  * Ideas:
@@ -1214,6 +1218,31 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) =>
 			[...berries, ...apricorns].every((item) => s.seedVault?.includes(item)),
 	},
+	'catch a pokemon from onix cave': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'shovel certification',
+		researchPoints: 10,
+		rewardItems: { 'babiri-berry': 2, 'kee-berry': 2 },
+		conditionFunction: (s) =>
+			onixCaveEncounters.BASE.some((o) =>
+				s.pokedex[o.name].caughtOnRoutes.includes('onixCave')
+			),
+	},
+	'catch all pokemon from onix cave': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'shovel certification',
+		availableAfter: 'catch a pokemon from onix cave',
+		researchPoints: 25,
+		rewardItems: {
+			'yellow-apricorn': 10,
+			'black-apricorn': 10,
+			'moon-stone': 2,
+		},
+		conditionFunction: (s) =>
+			onixCaveEncounters.BASE.every((o) =>
+				s.pokedex[o.name].caughtOnRoutes.includes('onixCave')
+			),
+	},
 };
 
 console.log(
@@ -1226,5 +1255,9 @@ console.log(
 	5 +
 		campUpgradeNames
 			.map((_, i) => Math.min(5 * i, 100))
-			.reduce((sum, summand) => sum + summand, 0)
+			.reduce((sum, summand) => sum + summand, 0),
+	'quests w/o questName',
+	Object.keys(QuestsRecord).filter((key) => !questNames.includes(key)),
+	'questNames w/o quest',
+	questNames.filter((name) => !Object.keys(QuestsRecord).includes(name))
 );
