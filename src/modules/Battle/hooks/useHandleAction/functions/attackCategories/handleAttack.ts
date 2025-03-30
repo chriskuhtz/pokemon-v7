@@ -49,7 +49,7 @@ export const handleAttack = ({
 	pokemon,
 	setPokemon,
 	addMessage,
-	move,
+	move: m,
 	battleWeather,
 	scatterCoins,
 	dampy,
@@ -67,6 +67,7 @@ export const handleAttack = ({
 	addBattleFieldEffect: (x: BattleFieldEffect) => void;
 	battleFieldEffects: BattleFieldEffect[];
 }): void => {
+	let move = m;
 	const underPressure = battleFieldEffects.some(
 		(b) => b.type === 'pressure' && b.ownerId !== attacker.ownerId
 	);
@@ -200,8 +201,9 @@ export const handleAttack = ({
 	if (move.name === 'conversion-2') {
 		if (updatedAttacker.lastReceivedDamage) {
 			const newType = getRandomEntry(
-				typeEffectivenessChart[updatedAttacker.lastReceivedDamage.attackType]
-					.isNotVeryEffectiveAgainst
+				typeEffectivenessChart[
+					updatedAttacker.lastReceivedDamage.attack.data.type.name
+				].isNotVeryEffectiveAgainst
 			);
 			updatedAttacker = applySecondaryAilmentToPokemon({
 				pokemon: updatedAttacker,
@@ -223,6 +225,16 @@ export const handleAttack = ({
 			};
 		} else if (updatedAttacker.biding?.turn === 2) {
 			addMessage({ message: `${updatedAttacker.name} released energy` });
+		}
+	}
+	if (move.name === 'mirror-move') {
+		if (attacker.lastReceivedDamage) {
+			addMessage({
+				message: `${updatedAttacker.name} copied ${attacker.lastReceivedDamage.attack.name}`,
+			});
+			move = attacker.lastReceivedDamage.attack;
+		} else {
+			addMessage({ message: `It failed` });
 		}
 	}
 
@@ -543,10 +555,9 @@ export const handleAttack = ({
 			damage: updatedTarget.damage + actualDamage,
 			//setLastReceivedDamage
 			lastReceivedDamage: {
-				damageClass: move.data.damage_class.name,
+				attack: move,
 				damage: actualDamage,
 				applicatorId: attacker.id,
-				attackType: move.data.type.name,
 				wasSuperEffective: !!wasSuperEffective,
 				wasPhysical: move.data.damage_class.name === 'physical',
 				wasSpecial: move.data.damage_class.name === 'special',

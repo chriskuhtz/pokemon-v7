@@ -122,7 +122,8 @@ export const calculateDamage = (
 
 	if (attack.name === 'counter') {
 		if (
-			attacker.lastReceivedDamage?.damageClass === 'physical' &&
+			attacker.lastReceivedDamage?.attack.data.damage_class.name ===
+				'physical' &&
 			attacker.lastReceivedDamage.applicatorId === target.id
 		) {
 			return { damage: attacker.lastReceivedDamage.damage * 2 };
