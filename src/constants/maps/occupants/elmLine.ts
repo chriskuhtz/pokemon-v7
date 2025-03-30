@@ -124,4 +124,23 @@ export const elmLine: Occupant[] = [
 				'COLLECTED' &&
 			s.quests['evolve a pokemon that only evolves at night'] !== 'COLLECTED',
 	},
+	{
+		...elmBase,
+		id: 'elm_8',
+
+		unhandledMessage: ['Eevee is the master of branched evolutions'],
+		handledMessage: ['Pokemon have different evolution methods'],
+		quest: 'catch all evolutions of eevee',
+		conditionFunction: (s) =>
+			s.campUpgrades['invite professor elm'] &&
+			s.quests['evolve a pokemon through level up'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon with a stone'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon with a held item'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon through friendship'] === 'COLLECTED' &&
+			s.quests['catch vileplume and bellosom'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon that only evolves during the day'] ===
+				'COLLECTED' &&
+			s.quests['evolve a pokemon that only evolves at night'] === 'COLLECTED' &&
+			s.quests['catch all evolutions of eevee'] !== 'COLLECTED',
+	},
 ];

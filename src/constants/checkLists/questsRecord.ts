@@ -268,6 +268,8 @@ export const questNames = [
 	'defeat twenty training field trainers',
 	'defeat thirty training field trainers',
 	'defeat forty training field trainers',
+	'defeat fifty training field trainers',
+	'defeat sixty training field trainers',
 	'grow a berry',
 	'grow a apricorn',
 	'catch a pokemon in an apricorn ball',
@@ -288,6 +290,7 @@ export const questNames = [
 	'catch 10 different species',
 	'catch 20 different species',
 	'catch 50 different species',
+	'catch 100 different species',
 	'catch a swarm pokemon',
 	'find a pokemon under a smashed rock',
 	'donate 1 plant to the seed vault',
@@ -298,6 +301,7 @@ export const questNames = [
 	'catch all pokemon from onix cave',
 	'defeat falkner',
 	'wake a snorlax',
+	'catch all evolutions of eevee',
 ] as const;
 /**
  * Ideas:
@@ -644,7 +648,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			protein: 1,
 			'hp-up': 1,
 		},
-		researchPoints: 15,
+		researchPoints: 10,
 		conditionFunction: (s) => {
 			const defeatedTrainers = s.handledOccupants.filter((h) =>
 				trainers.some((t) => t.id === h.id)
@@ -684,7 +688,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			protein: 1,
 			'hp-up': 1,
 		},
-		researchPoints: 25,
+		researchPoints: 30,
 		conditionFunction: (s) => {
 			const defeatedTrainers = s.handledOccupants.filter((h) =>
 				trainers.some((t) => t.id === h.id)
@@ -704,7 +708,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			protein: 1,
 			'hp-up': 1,
 		},
-		researchPoints: 30,
+		researchPoints: 40,
 		conditionFunction: (s) => {
 			const defeatedTrainers = s.handledOccupants.filter((h) =>
 				trainers.some((t) => t.id === h.id)
@@ -714,6 +718,46 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 2',
 		availableAfter: 'defeat thirty training field trainers',
+	},
+	'defeat fifty training field trainers': {
+		rewardItems: {
+			calcium: 2,
+			zinc: 2,
+			iron: 2,
+			carbos: 2,
+			protein: 2,
+			'hp-up': 2,
+		},
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			const defeatedTrainers = s.handledOccupants.filter((h) =>
+				trainers.some((t) => t.id === h.id)
+			).length;
+			return defeatedTrainers > 49;
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 3',
+		availableAfter: 'defeat forty training field trainers',
+	},
+	'defeat sixty training field trainers': {
+		rewardItems: {
+			calcium: 3,
+			zinc: 3,
+			iron: 3,
+			carbos: 3,
+			protein: 3,
+			'hp-up': 3,
+		},
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			const defeatedTrainers = s.handledOccupants.filter((h) =>
+				trainers.some((t) => t.id === h.id)
+			).length;
+			return defeatedTrainers > 59;
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 3',
+		availableAfter: 'defeat fifty training field trainers',
 	},
 	'grow a berry': {
 		rewardItems: {
@@ -1162,12 +1206,23 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		researchPoints: 100,
 		rewardItems: {
-			'master-ball': 1,
+			'ultra-ball': 20,
 		},
 		availableAfter: 'catch 50 different species',
 		conditionFunction: (s) =>
 			Object.values(s.pokedex).filter((p) => p.caughtOnRoutes.length > 0)
 				.length >= 50,
+	},
+	'catch 100 different species': {
+		kind: 'BULLETIN',
+		researchPoints: 150,
+		rewardItems: {
+			'master-ball': 1,
+		},
+		availableAfter: 'catch 100 different species',
+		conditionFunction: (s) =>
+			Object.values(s.pokedex).filter((p) => p.caughtOnRoutes.length > 0)
+				.length >= 100,
 	},
 	'catch a swarm pokemon': {
 		kind: 'BULLETIN',
@@ -1252,6 +1307,33 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'enigma-berry': 2,
 		},
 		conditionFunction: (s) => !!s.mileStones.hasWokenASnorlax,
+	},
+	'catch all evolutions of eevee': {
+		rewardItems: {},
+		researchPoints: 100,
+		conditionFunction: (s) => {
+			return (
+				s.pokedex['vaporeon'].caughtOnRoutes.length > 0 &&
+				s.pokedex['jolteon'].caughtOnRoutes.length > 0 &&
+				s.pokedex['leafeon'].caughtOnRoutes.length > 0 &&
+				s.pokedex['flareon'].caughtOnRoutes.length > 0 &&
+				s.pokedex['umbreon'].caughtOnRoutes.length > 0 &&
+				s.pokedex['espeon'].caughtOnRoutes.length > 0 &&
+				s.pokedex['glaceon'].caughtOnRoutes.length > 0 &&
+				s.pokedex['sylveon'].caughtOnRoutes.length > 0
+			);
+		},
+		targetPokemon: [
+			'vaporeon',
+			'jolteon',
+			'flareon',
+			'leafeon',
+			'glaceon',
+			'umbreon',
+			'espeon',
+			'sylveon',
+		],
+		kind: 'QUEST_LINE',
 	},
 };
 

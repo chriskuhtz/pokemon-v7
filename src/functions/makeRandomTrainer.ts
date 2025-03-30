@@ -785,10 +785,10 @@ const specialTrainers: Challenger[] = [
 		type: 'TRAINER',
 		id: 'Gym Leader Falkner',
 		team: [
-			makeChallengerPokemon({ name: 'noctowl', xp: 91125 }),
-			makeChallengerPokemon({ name: 'pidgeot', xp: 91125 }),
-			makeChallengerPokemon({ name: 'braviary', xp: 91125 }),
-			makeChallengerPokemon({ name: 'skarmory', xp: 91125 }),
+			makeChallengerPokemon({ name: 'noctowl', xp: 64000 }),
+			makeChallengerPokemon({ name: 'pidgeot', xp: 64000 }),
+			makeChallengerPokemon({ name: 'braviary', xp: 64000 }),
+			makeChallengerPokemon({ name: 'skarmory', xp: 64000 }),
 		],
 		inventory: EmptyInventory,
 		availableAfter: 'catch the legendary bird of ice',
@@ -798,12 +798,12 @@ const specialTrainers: Challenger[] = [
 		type: 'TRAINER',
 		id: 'Professor Rowan',
 		team: [
-			makeChallengerPokemon({ name: 'infernape', xp: 15625 }),
-			makeChallengerPokemon({ name: 'empoleon', xp: 15625 }),
-			makeChallengerPokemon({ name: 'torterra', xp: 15625 }),
-			makeChallengerPokemon({ name: 'luxray', xp: 15625 }),
-			makeChallengerPokemon({ name: 'staraptor', xp: 15625 }),
-			makeChallengerPokemon({ name: 'lucario', xp: 15625 }),
+			makeChallengerPokemon({ name: 'infernape', xp: 27000 }),
+			makeChallengerPokemon({ name: 'empoleon', xp: 27000 }),
+			makeChallengerPokemon({ name: 'torterra', xp: 27000 }),
+			makeChallengerPokemon({ name: 'luxray', xp: 27000 }),
+			makeChallengerPokemon({ name: 'staraptor', xp: 27000 }),
+			makeChallengerPokemon({ name: 'lucario', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
 		availableAfter: 'catch a pokemon orginally found in paldea',
@@ -813,15 +813,15 @@ const specialTrainers: Challenger[] = [
 		type: 'TRAINER',
 		id: 'Professor Elm',
 		team: [
-			makeChallengerPokemon({ name: 'typhlosion', xp: 15625 }),
-			makeChallengerPokemon({ name: 'feraligatr', xp: 15625 }),
-			makeChallengerPokemon({ name: 'meganium', xp: 15625 }),
-			makeChallengerPokemon({ name: 'ampharos', xp: 15625 }),
-			makeChallengerPokemon({ name: 'noctowl', xp: 15625 }),
-			makeChallengerPokemon({ name: 'kingdra', xp: 15625 }),
+			makeChallengerPokemon({ name: 'typhlosion', xp: 27000 }),
+			makeChallengerPokemon({ name: 'feraligatr', xp: 27000 }),
+			makeChallengerPokemon({ name: 'meganium', xp: 27000 }),
+			makeChallengerPokemon({ name: 'ampharos', xp: 27000 }),
+			makeChallengerPokemon({ name: 'noctowl', xp: 27000 }),
+			makeChallengerPokemon({ name: 'kingdra', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		availableAfter: 'evolve a pokemon that only evolves at night',
+		availableAfter: 'catch all evolutions of eevee',
 		trainer: { name: 'Professor Elm', sprite: SpriteEnum.rowan },
 	},
 ];
@@ -832,6 +832,8 @@ export const trainers = [
 	...tier2trainers,
 	...tier1trainers,
 ];
+
+console.log('trainers', trainers.length);
 export const makeRandomTrainer = (saveFile: SaveFile): Challenger => {
 	return getRandomEntry(
 		trainers.filter((t) => {
