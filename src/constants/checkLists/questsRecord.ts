@@ -229,6 +229,7 @@ export const questNames = [
 	'catch a pokemon',
 	'catch a spiritomb',
 	'catch Haunter and Mightyena',
+	'catch some local bird pokemon',
 	'catch a pokemon orginally found in kanto',
 	'catch a pokemon orginally found in johto',
 	'catch a pokemon orginally found in hoenn',
@@ -289,21 +290,15 @@ export const questNames = [
 	'donate 20 plants to the seed vault',
 	'donate 50 plants to the seed vault',
 	'donate all different plants to the seed vault',
-
-	...[routeN1, routeN1E1, routeE1].flatMap((route) =>
-		timesOfDay.map(
-			(time) => `catch a ${time}-time exclusive pokemon from ${route.id}`
-		)
-	),
 ] as const;
 /**
- 
  * Ideas:
-*	falkner 1
-* falkner 2
-* falkner 3
-* defeat falkner
-* all eeveelutions as final elm quest
+ *
+ * falkner evolve birds
+ * falkner evolve stronger birds
+ * falkner roaming arcticuno quest
+ * defeat falkner
+ * all eeveelutions as final elm quest
  */
 export type QuestName = (typeof questNames)[number];
 
@@ -862,6 +857,20 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 1',
 		availableAfter: 'catch Haunter and Mightyena',
+	},
+	'catch some local bird pokemon': {
+		rewardItems: { 'white-herb': 2 },
+		researchPoints: 10,
+		conditionFunction: (s) => {
+			return (
+				s.pokedex['pidgey'].caughtOnRoutes.length > 0 &&
+				s.pokedex['spearow'].caughtOnRoutes.length > 0 &&
+				s.pokedex['taillow'].caughtOnRoutes.length > 0 &&
+				s.pokedex['murkrow'].caughtOnRoutes.length > 0
+			);
+		},
+		targetPokemon: ['pidgey', 'spearow', 'taillow', 'murkrow'],
+		kind: 'QUEST_LINE',
 	},
 	'defeat rowan': {
 		rewardItems: {
