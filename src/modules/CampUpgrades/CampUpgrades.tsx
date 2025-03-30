@@ -24,8 +24,10 @@ export const CampUpgrades = ({
 
 	const { campUpgrades, researchPoints } = saveFile;
 
-	const currentPrice =
-		Object.values(campUpgrades).filter((c) => !!c).length * 5 + 5;
+	const currentPrice = Math.min(
+		Object.values(campUpgrades).filter((c) => !!c).length * 5 + 5,
+		100
+	);
 
 	const unlock = useCallback(
 		(id: CampUpgrade) => {

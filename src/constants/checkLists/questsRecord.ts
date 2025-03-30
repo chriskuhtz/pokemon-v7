@@ -1225,6 +1225,6 @@ console.log(
 	'total costs',
 	5 +
 		campUpgradeNames
-			.map((_, i) => 5 * i)
+			.map((_, i) => Math.min(5 * i, 100))
 			.reduce((sum, summand) => sum + summand, 0)
 );

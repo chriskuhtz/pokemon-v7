@@ -3,10 +3,10 @@ export const routeimprovementsCheckList: {
 	todos?: string[];
 	handled?: boolean;
 }[] = [
+	{ name: 'defeat falkner quest', handled: true },
 	{ name: 'Onix cave ready (quests, encounters, designs)' },
 	{ name: 'first half of Midori plains ready (quests, encounters, design' },
 	{ name: 'snorlax wake up method' },
-	{ name: 'defeat falkner quest' },
 	{ name: 'training field 3' },
 	{ name: 'better encounter distro for rowan quests' },
 	{ name: 'more research available than costs again' },
