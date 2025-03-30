@@ -1,6 +1,5 @@
 import { useCallback, useContext } from 'react';
 import { MoveName } from '../../../../constants/checkLists/movesCheckList';
-import { forceSwitchMoves } from '../../../../constants/forceSwitchMoves';
 import { applyItemToPokemon } from '../../../../functions/applyItemToPokemon';
 import { applyStatChangeToPokemon } from '../../../../functions/applyStatChangeToPokemon';
 import { BattleLocation } from '../../../../functions/determineCaptureSuccess';
@@ -9,6 +8,7 @@ import { getChargeUpMessage } from '../../../../functions/getChargeUpMessage';
 import { getPlayerId } from '../../../../functions/getPlayerId';
 import { Message } from '../../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../../hooks/useSaveFile';
+import { BattleAttack } from '../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
 import { ItemType } from '../../../../interfaces/Item';
 import { WeatherType } from '../../../../interfaces/Weather';
@@ -252,37 +252,19 @@ export const useHandleAction = (
 			}
 
 			if (move.type === 'BattleAttack') {
-				if (forceSwitchMoves.includes(move.name)) {
-					handleForceSwitch(attacker, move.name);
-					return;
-				}
-
-				switch (move.data.meta.category.name) {
-					case 'ailment':
-						handleAilmentAttack({
-							attacker,
-							pokemon,
-							setPokemon,
-							addMessage,
-							move,
-							battleWeather,
-							battleFieldEffects,
-						});
-						break;
-					default:
-						handleAttack({
-							attacker,
-							pokemon,
-							setPokemon,
-							addMessage,
-							move,
-							battleWeather,
-							scatterCoins,
-							dampy,
-							addBattleFieldEffect,
-							battleFieldEffects,
-						});
-				}
+				handleAllAttackCategories({
+					attacker,
+					pokemon,
+					setPokemon,
+					addMessage,
+					move,
+					battleWeather,
+					scatterCoins,
+					dampy,
+					addBattleFieldEffect,
+					battleFieldEffects,
+					handleForceSwitch,
+				});
 
 				return;
 			}
@@ -305,4 +287,60 @@ export const useHandleAction = (
 			setPokemon,
 		]
 	);
+};
+
+export const handleAllAttackCategories = ({
+	attacker,
+	pokemon,
+	setPokemon,
+	addMessage,
+	move,
+	battleWeather,
+	scatterCoins,
+	dampy,
+	addBattleFieldEffect,
+	battleFieldEffects,
+	handleForceSwitch,
+}: {
+	attacker: BattlePokemon;
+	pokemon: BattlePokemon[];
+	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>;
+	addMessage: (x: Message) => void;
+	move: BattleAttack;
+	battleWeather: WeatherType | undefined;
+	scatterCoins: () => void;
+	dampy?: { name: string };
+	addBattleFieldEffect: (x: BattleFieldEffect) => void;
+	battleFieldEffects: BattleFieldEffect[];
+	handleForceSwitch: (x: BattlePokemon, moveName: MoveName) => void;
+}) => {
+	switch (move.data.meta.category.name) {
+		case 'force-switch':
+			handleForceSwitch(attacker, move.name);
+			break;
+		case 'ailment':
+			handleAilmentAttack({
+				attacker,
+				pokemon,
+				setPokemon,
+				addMessage,
+				move,
+				battleWeather,
+				battleFieldEffects,
+			});
+			break;
+		default:
+			handleAttack({
+				attacker,
+				pokemon,
+				setPokemon,
+				addMessage,
+				move,
+				battleWeather,
+				scatterCoins,
+				dampy,
+				addBattleFieldEffect,
+				battleFieldEffects,
+			});
+	}
 };

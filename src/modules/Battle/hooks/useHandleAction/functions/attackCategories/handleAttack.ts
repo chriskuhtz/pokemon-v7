@@ -369,7 +369,7 @@ export const handleAttack = ({
 		});
 	}
 	//apply stat changes
-	if (selfTargeting) {
+	if (selfTargeting || move.data.meta.category.name === 'damage+raise') {
 		updatedAttacker = applyAttackStatChanges(
 			updatedAttacker,
 			move,
@@ -603,13 +603,16 @@ export const handleAttack = ({
 		updatedAttacker = a;
 		updatedTarget = b;
 		// apply stat changes
-		updatedTarget = applyAttackStatChanges(
-			updatedTarget,
-			move,
-			addMessage,
-			false,
-			battleFieldEffects
-		);
+		if (move.data.meta.category.name === 'damage+lower') {
+			updatedTarget = applyAttackStatChanges(
+				updatedTarget,
+				move,
+				addMessage,
+				false,
+				battleFieldEffects
+			);
+		}
+
 		// check anger point
 		if (criticalHit && updatedTarget.ability === 'anger-point') {
 			updatedTarget = applyStatChangeToPokemon(
