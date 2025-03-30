@@ -7,7 +7,7 @@ export const routeimprovementsCheckList: {
 	{ name: 'first half of Midori plains ready (design)', handled: true },
 	{ name: 'Onix cave ready (designs)', handled: true },
 	{ name: 'more research available than costs again', handled: true },
-	{ name: 'snorlax wake up method' },
+	{ name: 'snorlax wake up method', handled: true },
 	{ name: 'training field 3' },
 	{ name: 'better encounter distro for rowan quests' },
 ];

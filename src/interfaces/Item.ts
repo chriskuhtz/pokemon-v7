@@ -241,6 +241,7 @@ export const fossils = [
 	'jaw-fossil',
 	'sail-fossil',
 ] as const;
+export const keyItems = ['exp-share', 'poke-flute'] as const;
 export const itemTypes = [
 	...apricorns,
 	...balltypes,
@@ -258,11 +259,11 @@ export const itemTypes = [
 	...berries,
 	...fossils,
 	...herbs,
+	...keyItems,
 	'sacred-ash',
 	'rare-candy',
 	'escape-rope',
 	'honey',
-	'exp-share',
 ] as const;
 
 export type ItemType = (typeof itemTypes)[number];
@@ -280,12 +281,16 @@ export type FossilType = (typeof fossils)[number];
 export type ValuableType = (typeof valuables)[number];
 export type ApricornType = (typeof apricorns)[number];
 export type HerbType = (typeof herbs)[number];
+export type KeyItemType = (typeof keyItems)[number];
 
 export function isPokeball(x: string | undefined): x is PokeballType {
 	return (balltypes as unknown as string[]).includes(x ?? '');
 }
 export function isApricorn(x: string | undefined): x is ApricornType {
 	return (apricorns as unknown as string[]).includes(x ?? '');
+}
+export function isKeyItem(x: string | undefined): x is KeyItemType {
+	return (keyItems as unknown as string[]).includes(x ?? '');
 }
 export function isHerb(x: string | undefined): x is HerbType {
 	return (herbs as unknown as string[]).includes(x ?? '');

@@ -8,6 +8,7 @@ import {
 	OccupantType,
 	OverworldBush,
 	OverworldRock,
+	OverworldSnorlax,
 } from '../../../interfaces/OverworldMap';
 import { RoutesType } from '../../../interfaces/Routing';
 import {
@@ -53,6 +54,7 @@ export const interactWithFunction = ({
 	interactWithZigzagoonForager,
 	interactWithDugtrioExplorer,
 	interactWithSwarmRadar,
+	interactWithSnorlax,
 	settings,
 	goTo,
 }: {
@@ -73,6 +75,7 @@ export const interactWithFunction = ({
 	interactWithBush: (x: OverworldBush) => void;
 	interactWithRock: (x: OverworldRock) => void;
 	interactWithLedge: (x: Ledge) => void;
+	interactWithSnorlax: (x: OverworldSnorlax) => void;
 	interactWithZigzagoonForager: () => void;
 	interactWithDugtrioExplorer: () => void;
 	interactWithSwarmRadar: () => void;
@@ -86,6 +89,9 @@ export const interactWithFunction = ({
 
 	if (shouldRotate(data.type)) {
 		rotateOccupant(occ.id, getOppositeDirection(playerLocation.orientation));
+	}
+	if (data.type === 'SNORLAX') {
+		interactWithSnorlax(data);
 	}
 	if (data.type === 'BERRY_LURE') {
 		addMultipleMessages([

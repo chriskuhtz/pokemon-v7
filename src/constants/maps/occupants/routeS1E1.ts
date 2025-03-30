@@ -44,4 +44,14 @@ export const routeS1E1Occupants: OverworldMap['occupants'] = [
 		},
 		sprite: '/mapObjects/ladderDown.png',
 	},
+	{
+		type: 'ITEM',
+		id: 'poke-flute',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'poke-flute'),
+		x: 45,
+		y: 3,
+		item: 'poke-flute',
+		amount: 1,
+	},
 ];

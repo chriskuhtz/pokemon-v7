@@ -41,6 +41,7 @@ export const OCCUPANT_TYPES = [
 	'STORAGE_CHEST',
 	'BERRY_TREE',
 	'BERRY_LURE',
+	'SNORLAX',
 ] as const;
 export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
@@ -153,6 +154,10 @@ export interface OverworldPokemon extends BaseOccupant {
 	dialogue: string[];
 	orientation: CharacterOrientation;
 }
+export interface OverworldSnorlax extends BaseOccupant {
+	type: 'SNORLAX';
+	orientation: CharacterOrientation;
+}
 export interface ZigzagoonForager extends BaseOccupant {
 	type: 'ZIGZAGOON_FORAGER';
 	dexId: number;
@@ -206,7 +211,8 @@ export type Occupant =
 	| OverworldRock
 	| StorageChest
 	| BerryTree
-	| BerryLure;
+	| BerryLure
+	| OverworldSnorlax;
 
 export interface OverworldEncounter {
 	name: PokemonName;

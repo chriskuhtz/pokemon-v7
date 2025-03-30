@@ -122,12 +122,11 @@ export const routeE1Occupants: OverworldMap['occupants'] = [
 	{
 		y: 48,
 		x: 25,
-		type: 'POKEMON',
+		type: 'SNORLAX',
 		orientation: 'LEFT',
-		id: 'snorlax-blocker',
-		dexId: 143,
-		conditionFunction: () => true,
-		dialogue: ['..ZZ..', '.ZZZ...', '...ZZZ.'],
+		id: 'snorlax-blocker-routeE1',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'snorlax-blocker-routeE1'),
 	},
 	{
 		type: 'ROCK',
