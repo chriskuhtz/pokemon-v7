@@ -29,18 +29,19 @@ export const campUpgradeNames = [
 	'shovel certification',
 	'invite museum curator',
 	'berry lure station routeN1',
+	'berry lure station routeN1E1',
 ] as const;
 /**
  * ideas:
+ * training field 3
+ * berry lures on other routes(N1E1,E1,S1E1)
  * brock
  * fossil guy should be roark
  * shovel spots
  * 'Pokemon Surfer Certification' : requires new route first
  * 'Pokemon Flyer Certification' : requires new route first
  * 	Fishing?
- * berries visible in overworld
  * more vileplume products
- * training field 3
  */
 
 /**
@@ -97,6 +98,10 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'bag size upgrade 2': [...baseRequirements, 'bag size upgrade 1'],
 	'bag size upgrade 3': [...baseRequirements, 'bag size upgrade 2'],
 	'berry lure station routeN1': baseRequirements,
+	'berry lure station routeN1E1': [
+		...baseRequirements,
+		'machete certification',
+	],
 };
 export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	bulletin_board: 'A place for people to post quests',
@@ -133,4 +138,5 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	'bag size upgrade 2': 'More space in your field bag',
 	'bag size upgrade 3': 'More space in your field bag',
 	'berry lure station routeN1': 'Place berries inside to attract pokemon',
+	'berry lure station routeN1E1': 'Place berries inside to attract pokemon',
 };

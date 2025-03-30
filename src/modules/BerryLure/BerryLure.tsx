@@ -9,6 +9,7 @@ import {
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
+import { Challenger } from '../../interfaces/Challenger';
 import { EmptyInventory } from '../../interfaces/Inventory';
 import { BerryType, superEffectiveSaveTable } from '../../interfaces/Item';
 import { Occupant } from '../../interfaces/OverworldMap';
@@ -18,7 +19,7 @@ import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 import { useStartEncounter } from '../Overworld/hooks/useStartEncounter';
 
-export const lureBerryEncounters: Record<PokemonType, PokemonName> = {
+export const lureBerryEncountersN1: Record<PokemonType, PokemonName> = {
 	fire: 'vulpix',
 	water: 'buizel',
 	electric: 'morpeko-full-belly',
@@ -37,6 +38,27 @@ export const lureBerryEncounters: Record<PokemonType, PokemonName> = {
 	steel: 'cufant',
 	normal: 'dunsparce',
 	fairy: 'marill',
+	typeless: 'spiritomb',
+};
+export const lureBerryEncountersN1E1: Record<PokemonType, PokemonName> = {
+	fire: 'sizzlipede',
+	water: 'dewpider',
+	electric: 'charjabug',
+	grass: 'sewaddle',
+	ice: 'snom',
+	fighting: 'shroomish',
+	poison: 'venonat',
+	ground: 'nincada',
+	flying: 'butterfree',
+	psychic: 'abra',
+	bug: 'kricketot',
+	rock: 'bonsly',
+	ghost: 'shedinja',
+	dragon: 'jangmo-o',
+	dark: 'nymble',
+	steel: 'ferroseed',
+	normal: 'miltank',
+	fairy: 'cottonee',
 	typeless: 'spiritomb',
 };
 
@@ -66,7 +88,25 @@ export const BerryLure = () => {
 				throw new Error('What did you put in the lure');
 			}
 
-			const succeded = Math.random() > 0.6;
+			const succeded = Math.random() > 0.5;
+
+			const getRouteBasedLureEncounter = (): PokemonName => {
+				if (saveFile.location.mapId === 'routeN1E1') {
+					return lureBerryEncountersN1E1[lureType[0] as PokemonType];
+				}
+				return lureBerryEncountersN1[lureType[0] as PokemonType];
+			};
+			const challenger: Challenger = {
+				type: 'WILD',
+				id: OPPO_ID,
+				inventory: EmptyInventory,
+				team: [
+					makeChallengerPokemon({
+						name: getRouteBasedLureEncounter(),
+						xp: getMiddleOfThree([125, 1000, Math.floor(Math.random() * 3375)]),
+					}),
+				],
+			};
 
 			if (succeded) {
 				addMultipleMessages([
@@ -88,22 +128,7 @@ export const BerryLure = () => {
 					},
 					{
 						message: `A Pokemon tries to snatch the berry`,
-						onRemoval: () =>
-							startEncounter(0, {
-								type: 'WILD',
-								id: OPPO_ID,
-								inventory: EmptyInventory,
-								team: [
-									makeChallengerPokemon({
-										name: lureBerryEncounters[lureType[0] as PokemonType],
-										xp: getMiddleOfThree([
-											125,
-											1000,
-											Math.floor(Math.random() * 3375),
-										]),
-									}),
-								],
-							}),
+						onRemoval: () => startEncounter(0, challenger),
 					},
 				]);
 			} else {
@@ -131,7 +156,7 @@ export const BerryLure = () => {
 				]);
 			}
 		},
-		[addMultipleMessages, navigate, startEncounter]
+		[addMultipleMessages, navigate, saveFile.location.mapId, startEncounter]
 	);
 	return (
 		<Page
@@ -180,6 +205,12 @@ export const routeN1Lure: Occupant = {
 	type: 'BERRY_LURE',
 	x: 25,
 	y: 44,
-	//conditionFunction: (s) => s.campUpgrades['berry lure station routeN1']
-	conditionFunction: () => true,
+	conditionFunction: (s) => s.campUpgrades['berry lure station routeN1'],
+};
+export const routeN1E1Lure: Occupant = {
+	id: 'routeN1E1_berryLure',
+	type: 'BERRY_LURE',
+	x: 4,
+	y: 22,
+	conditionFunction: (s) => s.campUpgrades['berry lure station routeN1E1'],
 };
