@@ -15,7 +15,7 @@ export const useEncounterRateModifier = () => {
 		[team]
 	);
 
-	return useMemo(() => {
+	const res = () => {
 		const stenchFactor = firstTeamMember?.ability === 'stench' ? 0.5 : 1;
 		const illumFactor = firstTeamMember?.ability === 'illuminate' ? 2 : 1;
 		const swarmFactor = firstTeamMember?.ability === 'swarm' ? 2 : 1;
@@ -31,14 +31,19 @@ export const useEncounterRateModifier = () => {
 				? 0.5
 				: 1;
 
-		return (
-			1 *
-			stenchFactor *
-			itemFactor *
-			sandstormFactor *
-			snowCloakFactor *
-			illumFactor *
-			swarmFactor
-		);
-	}, [firstTeamMember, saveFile]);
+		return {
+			upToXp:
+				team.map((t) => t.xp).reduce((sum, summand) => sum + summand) /
+				team.length,
+			factor:
+				1 *
+				stenchFactor *
+				itemFactor *
+				sandstormFactor *
+				snowCloakFactor *
+				illumFactor *
+				swarmFactor,
+		};
+	};
+	return res();
 };

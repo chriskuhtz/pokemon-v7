@@ -134,7 +134,7 @@ export const Overworld = ({
 	);
 	//MOVEMENT
 	const setNextInput = useOverworldMovement(
-		() => addEncounterMessage(stepsTaken),
+		(challenger) => addEncounterMessage(stepsTaken, challenger),
 		() => setStepsTaken((s) => s + 1),
 		occupants,
 		encounterRateModifier

@@ -41,6 +41,7 @@ export const campUpgradeNames = [
  * 'Pokemon Flyer Certification' : requires new route first
  * 	Fishing?
  * berries visible in overworld
+ * more vileplume products
  */
 
 /**

@@ -19,19 +19,17 @@ import {
 	ONE_DAY,
 	testState,
 } from '../constants/gameData';
-import { mapsRecord } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { addPokemonToDex } from '../functions/addPokemonToDex';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
-import { determineWildPokemon } from '../functions/determineWildPokemon';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getRewardItemsForQuest } from '../functions/getRewardForQuest';
 import { TimeOfDay } from '../functions/getTimeOfDay';
-import { OPPO_ID } from '../functions/makeChallengerPokemon';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { reduceEncounterRateModifier } from '../functions/reduceEncounterRateModifier';
 import { updateItemFunction } from '../functions/updateItemFunction';
+import { Challenger } from '../interfaces/Challenger';
 import { EmptyInventory, joinInventories } from '../interfaces/Inventory';
 import { EncounterChanceItem, ItemType } from '../interfaces/Item';
 import { Occupant } from '../interfaces/OverworldMap';
@@ -73,7 +71,11 @@ export interface UseSaveFile {
 
 	talkToNurseReducer: (id: string) => void;
 	handleOccupantReducer: (occ: Occupant) => void;
-	navigateAwayFromOverworldReducer: (to: RoutesType, steps: number) => void;
+	navigateAwayFromOverworldReducer: (
+		to: RoutesType,
+		steps: number,
+		challenger?: Challenger
+	) => void;
 	applyItemToPokemonReducer: (
 		pokemon: OwnedPokemon,
 		item: ItemType,
@@ -213,9 +215,14 @@ const useSaveFile = (
 	};
 	const navigateAwayFromOverworldReducer = (
 		route: RoutesType,
-		stepsTaken: number
+		stepsTaken: number,
+		challenger?: Challenger
 	) => {
 		console.log('navigate away');
+
+		if (route === 'BATLLE' && !challenger) {
+			throw new Error('cant route to battle without challenger');
+		}
 
 		setSaveFile({
 			...saveFile,
@@ -229,18 +236,7 @@ const useSaveFile = (
 			meta: {
 				activeTab: route,
 				currentChallenger:
-					route === 'BATTLE'
-						? {
-								type: 'WILD',
-								id: OPPO_ID,
-								inventory: EmptyInventory,
-								team: determineWildPokemon(
-									team,
-									mapsRecord[saveFile.location.mapId],
-									saveFile.currentSwarm
-								),
-						  }
-						: undefined,
+					route === 'BATTLE' && challenger ? challenger : undefined,
 			},
 		});
 	};

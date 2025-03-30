@@ -148,7 +148,7 @@ export const extraFeatureCheckList: {
 	{ name: 'swarms increase shiny chance', handled: true },
 	{ name: 'setting: defeated pokemon get released', handled: true },
 	{ name: 'camp upgrade explanations', handled: true },
-	{ name: 'higher level pokemon ignore repel' },
+	{ name: 'higher level pokemon ignore repel', handled: true },
 	{ name: 'trainer builder' },
 	{ name: 'Edit and Collapse Buttons in pokemoncard need keyboard controls' },
 	{ name: 'walk through grass animation' },
