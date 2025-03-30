@@ -22,6 +22,7 @@ export const useOverworldMovement = (
 	const {
 		saveFile: {
 			pokemon,
+			quests,
 			location: playerLocation,
 			currentSwarm,
 			encounterRateModifier: repelFactor,
@@ -75,6 +76,7 @@ export const useOverworldMovement = (
 							team: determineWildPokemon(
 								pokemon.filter((p) => p.onTeam),
 								mapsRecord[playerLocation.mapId],
+								quests,
 								currentSwarm
 							),
 						};
@@ -129,6 +131,7 @@ export const useOverworldMovement = (
 		nextInput,
 		playerLocation,
 		pokemon,
+		quests,
 		repelFactor,
 		setCharacterLocation,
 		startEncounter,

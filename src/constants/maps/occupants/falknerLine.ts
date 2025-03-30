@@ -25,7 +25,8 @@ export const falknerLine: Occupant[] = [
 		handledMessage: ['Weaker flying pokemon can be shy'],
 		quest: 'catch some local flying pokemon',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite flying pokemon expert falkner'],
+			s.campUpgrades['invite flying pokemon expert falkner'] &&
+			s.quests['catch some local flying pokemon'] !== 'FULFILLED',
 	},
 	{
 		...falknerBase,
@@ -43,7 +44,6 @@ export const falknerLine: Occupant[] = [
 	{
 		...falknerBase,
 		id: 'falkner_3',
-
 		unhandledMessage: [
 			'Pidgeotto and Staravia can both evolve one more time',
 			'can you train one of them to their final form?',
@@ -51,6 +51,24 @@ export const falknerLine: Occupant[] = [
 		handledMessage: ['I wish i could fly'],
 		quest: 'evolve a flying pokemon to its final stage',
 		conditionFunction: (s) =>
-			s.quests['evolve some local flying pokemon'] === 'FULFILLED',
+			s.quests['evolve some local flying pokemon'] === 'FULFILLED' &&
+			s.quests['evolve a flying pokemon to its final stage'] !== 'FULFILLED',
+	},
+	{
+		...falknerBase,
+		id: 'falkner_4',
+		unhandledMessage: [
+			'Now I believe you are strong enough for a secret',
+			'I came here to find a legendary flying pokemon',
+			'The myths refer to it as the bird of ice',
+			'More modern sources say,',
+			'That it sometimes reveals itself to strong flying trainers',
+		],
+		handledMessage: ['The legendary pokemon will be very rare to encounter'],
+		quest: 'catch the legendary bird of ice',
+		conditionFunction: (s) =>
+			s.quests['evolve some local flying pokemon'] === 'FULFILLED' &&
+			s.quests['evolve a flying pokemon to its final stage'] === 'FULFILLED' &&
+			s.quests['catch the legendary bird of ice'] !== 'FULFILLED',
 	},
 ];

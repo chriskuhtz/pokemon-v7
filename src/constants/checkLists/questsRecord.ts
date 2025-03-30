@@ -232,6 +232,7 @@ export const questNames = [
 	'catch some local flying pokemon',
 	'evolve some local flying pokemon',
 	'evolve a flying pokemon to its final stage',
+	'catch the legendary bird of ice',
 	'catch a pokemon orginally found in kanto',
 	'catch a pokemon orginally found in johto',
 	'catch a pokemon orginally found in hoenn',
@@ -899,6 +900,15 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			);
 		},
 		targetPokemon: ['pidgeot', 'staraptor'],
+		kind: 'QUEST_LINE',
+	},
+	'catch the legendary bird of ice': {
+		rewardItems: { 'rare-candy': 10 },
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.pokedex['articuno'].caughtOnRoutes.length > 0;
+		},
+		targetPokemon: [],
 		kind: 'QUEST_LINE',
 	},
 	'defeat rowan': {
