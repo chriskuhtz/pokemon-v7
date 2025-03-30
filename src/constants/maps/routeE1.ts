@@ -7,6 +7,7 @@ export const routeE1: OverworldMap = {
 	id: 'routeE1',
 	timeOfDayShadersMap: defaultShaderMap,
 	possibleEncounters: routeE1Encounters,
+	occupants: routeE1Occupants,
 	tileMap: {
 		baseLayer: [
 			[
@@ -13534,5 +13535,5 @@ export const routeE1: OverworldMap = {
 			],
 		],
 	},
-	occupants: routeE1Occupants,
+	
 };

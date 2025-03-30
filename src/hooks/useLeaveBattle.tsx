@@ -48,8 +48,8 @@ export const useLeaveBattle = () => {
 				} else {
 					updatedLocation = {
 						mapId: 'camp',
-						x: 6,
-						y: 5,
+						x: 1,
+						y: 1,
 						orientation: 'DOWN',
 						forwardFoot: 'CENTER1',
 					};

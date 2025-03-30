@@ -61,6 +61,15 @@ const drawOccupant = (
 	img.addEventListener('load', () => {
 		switch (occ.type) {
 			case 'ON_STEP_PORTAL':
+				if (occ.sprite) {
+					ctx?.drawImage(
+						img,
+						baseSize * occ.x,
+						baseSize * occ.y,
+						baseSize,
+						baseSize
+					);
+				}
 				break;
 			case 'PORTAL':
 				if (occ.small) {
@@ -164,6 +173,9 @@ const drawOccupant = (
 
 const getSource = (occ: Occupant) => {
 	switch (occ.type) {
+		case 'ON_STEP_PORTAL': {
+			return occ.sprite ?? '';
+		}
 		case 'PORTAL':
 		case 'LEDGE':
 			return occ.sprite;

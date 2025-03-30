@@ -1,5 +1,6 @@
 import { OverworldMap } from '../../interfaces/OverworldMap';
 import { camp } from './camp';
+import { onixCave } from './onixCave';
 import { routeE1 } from './routeE1';
 import { routeN1 } from './routeN1';
 import { routeN1E1 } from './routeN1E1';
@@ -19,6 +20,7 @@ export const mapIds = [
 	'routeS1W1',
 	'routeW1',
 	'routeN1W1',
+	'onixCave',
 ] as const;
 export type MapId = (typeof mapIds)[number];
 
@@ -32,6 +34,7 @@ export const mapsRecord: Record<MapId, OverworldMap> = {
 	routeS1W1: routeS1W1,
 	routeW1: routeW1,
 	routeN1W1: routeN1W1,
+	onixCave: onixCave,
 };
 
 export const mapDisplayNames: Record<MapId, string> = {
@@ -44,4 +47,5 @@ export const mapDisplayNames: Record<MapId, string> = {
 	routeW1: 'shiro route',
 	routeN1W1: 'koniro route',
 	camp: 'kuma camp',
+	onixCave: 'onix cave',
 };

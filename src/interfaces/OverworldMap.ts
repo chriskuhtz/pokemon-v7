@@ -132,6 +132,7 @@ export interface Portal extends BaseOccupant {
 export interface OnStepPortal extends BaseOccupant {
 	type: 'ON_STEP_PORTAL';
 	portal: CharacterLocationData;
+	sprite?: string;
 }
 export interface OverworldBulletinBoard extends BaseOccupant {
 	type: 'BULLETIN_BOARD';

@@ -299,6 +299,8 @@ export const questNames = [
  * falkner roaming arcticuno quest
  * defeat falkner
  * all eeveelutions as final elm quest
+ * onix cave some
+ * onix cave all
  */
 export type QuestName = (typeof questNames)[number];
 
