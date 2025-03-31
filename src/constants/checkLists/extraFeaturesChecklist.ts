@@ -259,4 +259,6 @@ export const extraFeatureCheckList: {
 	{ name: 'cant throw away key items like exp share' },
 	{ name: 'peat block needs sprite' },
 	{ name: 'nicer ladder up sprite' },
+	{ name: 'use Move.target as a switch case for attack handling' },
+	{ name: 'use Move.meta.category as a switch case for attack handling' },
 ];

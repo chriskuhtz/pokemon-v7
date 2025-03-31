@@ -720,7 +720,12 @@ export const handleAttack = ({
 		updatedAttacker = a;
 		updatedTarget = b;
 		// apply stat changes
-		if (move.data.meta.category.name === 'damage+lower') {
+		if (
+			move.data.meta.category.name === 'damage+lower' ||
+			move.data.target.name === 'all-opponents' ||
+			move.data.target.name === 'selected-pokemon' ||
+			move.data.target.name === 'opponents-field'
+		) {
 			updatedTarget = applyAttackStatChanges(
 				updatedTarget,
 				move,
