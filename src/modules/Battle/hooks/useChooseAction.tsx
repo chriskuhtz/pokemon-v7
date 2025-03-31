@@ -162,6 +162,7 @@ export const useChooseAction = (
 										round: battleRound + 1,
 										targetId,
 										multiHits: 0,
+										isAMultiHit: false,
 									},
 								],
 							};
@@ -267,6 +268,7 @@ export const useChooseAction = (
 									round: battleRound,
 									targetId,
 									multiHits: m,
+									isAMultiHit: false,
 								},
 							],
 						};

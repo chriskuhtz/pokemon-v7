@@ -44,6 +44,9 @@ export const determineMiss = (
 ): { miss: boolean; reason?: MissReason } => {
 	const selfTargeting = isSelfTargeting(attack.data);
 
+	if (attack.isAMultiHit) {
+		return { miss: false };
+	}
 	if (selfTargeting) {
 		return { miss: false };
 	}

@@ -453,7 +453,9 @@ export const handleAttack = ({
 		addMessage({ message: 'Multi hit!' });
 		updatedAttacker = {
 			...updatedAttacker,
-			moveQueue: [{ ...move, multiHits: move.multiHits - 1 }],
+			moveQueue: [
+				{ ...move, multiHits: move.multiHits - 1, isAMultiHit: true },
+			],
 		};
 	} else
 		updatedAttacker = {
@@ -462,7 +464,7 @@ export const handleAttack = ({
 		};
 
 	//reduce pp after all multihits are done
-	if (move.multiHits === 0) {
+	if (!move.isAMultiHit) {
 		updatedAttacker = changeMovePP(
 			updatedAttacker,
 			move.name,

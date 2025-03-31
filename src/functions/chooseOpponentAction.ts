@@ -32,6 +32,7 @@ export const determineBestMoveAndTarget = (
 						data: move.data,
 						targetId: target.id,
 						multiHits: determineMultiHits(move.data, attacker.ability),
+						isAMultiHit: false,
 					},
 					undefined,
 					[],
