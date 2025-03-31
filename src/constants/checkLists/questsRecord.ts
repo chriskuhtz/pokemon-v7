@@ -305,10 +305,7 @@ export const questNames = [
 ] as const;
 /**
  * Ideas:
-
- * all eeveelutions as final elm quest
- * onix cave some
- * onix cave all
+ * elm: gender based evo
  * achieve cooking level x
  * retrieve item from wild pokemon (special encounter)
  * lure x pokemon

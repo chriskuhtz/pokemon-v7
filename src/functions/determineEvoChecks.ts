@@ -28,6 +28,7 @@ export const determineEvoChecks = (
 		time_of_day,
 		held_item,
 		trigger,
+		gender,
 	} = deets;
 	const itemName = item?.name as ItemType | undefined;
 	const { level } = calculateLevelData(ownedPokemon.xp);
@@ -43,6 +44,14 @@ export const determineEvoChecks = (
 	function checks() {
 		const res = [];
 
+		if (gender) {
+			if (ownedPokemon.gender === 'MALE' && gender === 1) {
+				res.push('Gender Female ');
+			}
+			if (ownedPokemon.gender === 'FEMALE' && gender === 2) {
+				res.push('Gender Male ');
+			}
+		}
 		if (minLevel && minLevel > level) {
 			res.push(`Level ${minLevel}`);
 		}

@@ -16,7 +16,7 @@ export interface EvolutionChainLink {
 }
 
 export interface EvolutionDetails {
-	gender: string | null;
+	gender: number | null;
 	held_item: { name: string } | null;
 	item: { name: string } | null;
 	known_move: string | null;
