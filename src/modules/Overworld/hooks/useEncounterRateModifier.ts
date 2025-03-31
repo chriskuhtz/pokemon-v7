@@ -19,6 +19,7 @@ export const useEncounterRateModifier = () => {
 		const stenchFactor = firstTeamMember?.ability === 'stench' ? 0.5 : 1;
 		const illumFactor = firstTeamMember?.ability === 'illuminate' ? 2 : 1;
 		const swarmFactor = firstTeamMember?.ability === 'swarm' ? 2 : 1;
+		const quickfeetFactor = firstTeamMember?.ability === 'quick-feet' ? 0.5 : 1;
 		const itemFactor = saveFile.encounterRateModifier?.factor ?? 1;
 		const snowCloakFactor =
 			firstTeamMember?.ability === 'snow-cloak' &&
@@ -42,7 +43,8 @@ export const useEncounterRateModifier = () => {
 				sandstormFactor *
 				snowCloakFactor *
 				illumFactor *
-				swarmFactor,
+				swarmFactor *
+				quickfeetFactor,
 		};
 	};
 	return res();
