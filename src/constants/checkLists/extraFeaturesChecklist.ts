@@ -261,4 +261,7 @@ export const extraFeatureCheckList: {
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'use Move.target as a switch case for attack handling' },
 	{ name: 'use Move.meta.category as a switch case for attack handling' },
+	{
+		name: 'different page that only loads the savefile and lets the user copy it',
+	},
 ];
