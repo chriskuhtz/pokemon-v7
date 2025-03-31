@@ -34,31 +34,19 @@ export const campUpgradeNames = [
 ] as const;
 /**
  * ideas:
- * training field 3
- * berry lures on other routes(N1E1,E1,S1E1)
- * brock
+ * more cookable items
+ * way to cross the river
+ * berry lures on other routes(E1,S1E1)
+ * other gym leaders
  * fossil guy should be roark
  * shovel spots
- * 'Pokemon Surfer Certification' : requires new route first
+ * 'Pokemon Surfer Certification'
  * 'Pokemon Flyer Certification' : requires new route first
  * 	Fishing?
  * more vileplume products
- */
-
-/**
- * Camp Economy:
- * Outside inputs: through quest Rewards, found items
- * Infinite: Produce Honey from Combee Hive
- * Infinite: Produce Repel from Oddish,Gloom,VilePlume repel manufacture
- * Infinite: Produce Mulch from Amoongus Composter
- *
- * Trade Honey for Random foraged items with zigzagoon forager
- * Plant Berries and Apricorns at Farm
- * Trade Berries for Moomoo Milk
- * Craft Balls from Apricorns
- * Trade Moomoo Milk for underground items from Dugtrio explorer
-
- * Prevent Softlock: get more balls from oak
+ * training field challenge mode
+ * team rocket
+ * blissey trainer
  */
 
 export type CampUpgrade = (typeof campUpgradeNames)[number];
@@ -118,8 +106,8 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	'invite professor elm': 'professor elm studies pokemon evolution',
 	'machete certification': 'Safety Training for bush cutting',
 	'training field 1': 'Train your Pokemon against other trainers',
-	'training field 2': 'Invite Stronger Trainers',
-	'training field 3': 'Invite Even Stronger Trainers',
+	'training field 2': 'Invite Stronger Trainers (Lvl 15)',
+	'training field 3': 'Invite Even Stronger Trainers (Lvl 25)',
 	'build combee hive': 'Gathering our own honey would be useful',
 	'build miltank farm': 'All Pokemon like to drink miltank milk',
 	'invite chef grandma': 'Raw Ingredients can be improved through cooking',
