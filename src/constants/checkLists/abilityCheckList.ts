@@ -839,6 +839,7 @@ export const abilityNames = [
 	'hydration',
 	'solar-power',
 	'quick-feet',
+	'normalize',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
