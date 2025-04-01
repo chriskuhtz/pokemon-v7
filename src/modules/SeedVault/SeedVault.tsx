@@ -4,7 +4,13 @@ import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { joinInventories } from '../../interfaces/Inventory';
-import { isApricorn, isBerry, isItem, ItemType } from '../../interfaces/Item';
+import {
+	isApricorn,
+	isBerry,
+	isHerb,
+	isItem,
+	ItemType,
+} from '../../interfaces/Item';
 import { Occupant } from '../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { Card } from '../../uiComponents/Card/Card';
@@ -20,7 +26,7 @@ export const SeedVault = () => {
 			.filter(([item, amount]) => {
 				return (
 					amount > 0 &&
-					(isBerry(item) || isApricorn(item)) &&
+					(isBerry(item) || isApricorn(item) || isHerb(item)) &&
 					!(saveFile.seedVault ?? []).includes(item)
 				);
 			})

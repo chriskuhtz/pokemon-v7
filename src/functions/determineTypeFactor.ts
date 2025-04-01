@@ -7,12 +7,14 @@ import { getTypeNames } from './getTypeNames';
 export const determineTypeFactor = (
 	target: BattlePokemon,
 	attack: BattleAttack,
+	normalized?: boolean,
 	addMessage?: (x: Message) => void
 ): number => {
 	let res = 1;
 	const targetTypes = getTypeNames(target);
 
-	const effectiveness = typeEffectivenessChart[attack.data.type.name];
+	const effectiveness =
+		typeEffectivenessChart[normalized ? 'normal' : attack.data.type.name];
 
 	targetTypes.forEach((t) => {
 		if (effectiveness.isNotVeryEffectiveAgainst.includes(t)) {

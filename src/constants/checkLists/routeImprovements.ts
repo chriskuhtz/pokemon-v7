@@ -22,7 +22,8 @@ export const routeimprovementsCheckList: {
 	{ name: 'river in midori plains', handled: true },
 	{ name: 'encounters for midori plains' },
 	{ name: 'pokeflute for waking up snorlax can be found in midori plains' },
-	{ name: 'water' },
+	{ name: 'water as distinct from obstacles' },
 	{ name: 'wild apricorn trees' },
 	{ name: 'training field route' },
+	{ name: 'shortcut ledge in oreji forest maze' },
 ];

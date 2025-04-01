@@ -8,7 +8,7 @@ import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
 export const MiltankFarm = (): JSX.Element => {
-	const { trade, tradeOptions } = useMiltankFarm();
+	const { trade, tradeOptions, ready } = useMiltankFarm();
 
 	const navigate = useNavigate();
 	return (
@@ -31,15 +31,25 @@ export const MiltankFarm = (): JSX.Element => {
 						actionElements={[]}
 					/>
 				)}
-				{tradeOptions.map(([b, amount]) => (
+				{ready ? (
+					tradeOptions.map(([b, amount]) => (
+						<Card
+							key={b}
+							content={`Trade 1 ${b} for 1 moomoo-milk  (${amount} in bag)`}
+							icon={<img src={getItemUrl(b)} />}
+							onClick={() => trade(b)}
+							actionElements={[<img src={getItemUrl('moomoo-milk')} />]}
+						/>
+					))
+				) : (
 					<Card
-						key={b}
-						content={`Trade 1 ${b} for 1 moomoo-milk  (${amount} in bag)`}
-						icon={<img src={getItemUrl(b)} />}
-						onClick={() => trade(b)}
-						actionElements={[<img src={getItemUrl('moomoo-milk')} />]}
+						icon={<img src={getItemUrl('moomoo-milk')} />}
+						content={
+							<strong>Miltank needs some more time to produce new Milk</strong>
+						}
+						actionElements={[]}
 					/>
-				))}
+				)}
 			</Stack>
 		</Page>
 	);

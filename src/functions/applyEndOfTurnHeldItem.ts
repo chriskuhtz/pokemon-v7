@@ -19,6 +19,25 @@ export const applyEndOfTurnHeldItem = (
 	if (!pokemon.heldItemName || !hasEndOfTurnEffect(pokemon.heldItemName)) {
 		return pokemon;
 	}
+	if (pokemon.heldItemName === 'mental-herb') {
+		const filteredAilments = pokemon.secondaryAilments.filter((s) => {
+			//Held: Consumed to cure infatuation. Gen V: Also removes Taunt, Encore, Torment, Disable, and Cursed Body.
+			return !(
+				s.type === 'cursed' ||
+				s.type === 'infatuation' ||
+				s.type === 'disable'
+			);
+		});
+
+		if (filteredAilments.length < pokemon.secondaryAilments.length) {
+			addMessage(`${pokemon.name} cured its ailments with mental herb`);
+			return {
+				...pokemon,
+				heldItemName: undefined,
+				secondaryAilments: filteredAilments,
+			};
+		}
+	}
 
 	if (pokemon.heldItemName === 'white-herb') {
 		const reducedStat = Object.entries(pokemon.statBoosts).find(

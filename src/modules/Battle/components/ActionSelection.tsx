@@ -133,6 +133,11 @@ export function ActionSelection({
 						move={m}
 						key={m.name}
 						onClick={() => setChosenAction(m.name)}
+						boostedBy={
+							controlled.ppBoostedMoves.find(
+								(boosted) => boosted.name === m.name
+							)?.stage
+						}
 					/>
 				))}
 				<Card

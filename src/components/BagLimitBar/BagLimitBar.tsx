@@ -9,15 +9,15 @@ export const getTotalInventoryAmount = (inventory: Inventory): number => {
 };
 export const getBagLimit = (campUpgrades: SaveFile['campUpgrades']): number => {
 	if (campUpgrades['bag size upgrade 3']) {
-		return 60;
-	}
-	if (campUpgrades['bag size upgrade 2']) {
 		return 50;
 	}
-	if (campUpgrades['bag size upgrade 1']) {
+	if (campUpgrades['bag size upgrade 2']) {
 		return 40;
 	}
-	return 30;
+	if (campUpgrades['bag size upgrade 1']) {
+		return 30;
+	}
+	return 20;
 };
 export const isBagOverloaded = (s: SaveFile): boolean => {
 	return getTotalInventoryAmount(s.bag) > getBagLimit(s.campUpgrades);

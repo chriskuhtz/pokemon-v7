@@ -7,13 +7,27 @@ export const MoveCard = ({
 	onClick,
 	highlighted,
 	note,
+	boostedBy,
 }: {
 	move: BattleMove;
 	onClick: () => void;
 	highlighted?: boolean;
 	note?: string;
+	boostedBy?: number;
 }) => {
-	const currentPP = move.data.pp - move.usedPP;
+	const boostfactor = () => {
+		if (boostedBy === 1) {
+			return 1.2;
+		}
+		if (boostedBy === 2) {
+			return 1.4;
+		}
+		if (boostedBy === 3) {
+			return 1.6;
+		}
+		return 1;
+	};
+	const currentPP = move.data.pp * boostfactor() - move.usedPP;
 
 	return (
 		<Card

@@ -98,7 +98,7 @@ export const apricorns = [
 	'black-apricorn',
 ] as const;
 
-export const herbs = ['white-herb'] as const;
+export const herbs = ['white-herb', 'mental-herb'] as const;
 export const encounterChanceItems = [
 	'white-flute',
 	'black-flute',

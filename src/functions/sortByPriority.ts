@@ -9,7 +9,9 @@ const calculateTotalSpeed = (
 	battleWeather: WeatherType | undefined
 ): number => {
 	const paraFactorA =
-		a.primaryAilment?.type === 'paralysis' ? PARA_SPEED_FACTOR : 1;
+		a.primaryAilment?.type === 'paralysis' && a.ability !== 'quick-feet'
+			? PARA_SPEED_FACTOR
+			: 1;
 	const swiftSwimFactorA =
 		a.ability === 'swift-swim' && battleWeather === 'rain' ? 2 : 1;
 	const chlorophyllFactorA =
@@ -21,13 +23,16 @@ const calculateTotalSpeed = (
 		: 1;
 	const machoBraceFactor = a.heldItemName === 'macho-brace' ? 0.5 : 1;
 
+	const quickfeetFactor = a.primaryAilment ? 1.5 : 1;
+
 	return (
 		calculateModifiedStat(a.stats.speed, a.statBoosts.speed) *
 		paraFactorA *
 		swiftSwimFactorA *
 		chlorophyllFactorA *
 		unburdenFactorA *
-		machoBraceFactor
+		machoBraceFactor *
+		quickfeetFactor
 	);
 };
 export const sortByPriority = (

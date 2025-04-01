@@ -124,6 +124,7 @@ export interface SaveFile {
 	honeyReadyAt?: number;
 	dugtrioReadyAt?: number;
 	zigzagoonReadyAt?: number;
+	miltankReadyAt?: number;
 	currentSwarm?: PokemonSwarm;
 	nextSwarmReadyAt?: number;
 	starterPokemon?: PokemonName;

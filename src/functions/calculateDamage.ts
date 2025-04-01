@@ -115,7 +115,12 @@ export const calculateDamage = (
 	if (damageClass === 'status') {
 		return { damage: 0 };
 	}
-	const typeFactor = determineTypeFactor(target, attack, addMessage);
+	const typeFactor = determineTypeFactor(
+		target,
+		attack,
+		attacker.ability === 'normalize',
+		addMessage
+	);
 	if (typeFactor === 0) {
 		return { damage: 0 };
 	}
