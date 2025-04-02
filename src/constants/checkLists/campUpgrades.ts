@@ -59,6 +59,7 @@ export const baseRequirements: CampUpgrade[] = [
 export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	bulletin_board: [],
 	berry_farm: ['bulletin_board'],
+	'create seed vault': ['bulletin_board', 'berry_farm'],
 	'invite apricorn smith kurt': ['bulletin_board', 'berry_farm'],
 	'invite ghost expert morty': ['machete certification'],
 	'invite flying pokemon expert falkner': ['machete certification'],
@@ -83,7 +84,6 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'sledge hammer certification': ['machete certification'],
 	'shovel certification': ['sledge hammer certification'],
 	'invite museum curator': ['invite dugtrio explorers'],
-	'create seed vault': ['bulletin_board'],
 	'bag size upgrade 1': baseRequirements,
 	'bag size upgrade 2': [...baseRequirements, 'bag size upgrade 1'],
 	'bag size upgrade 3': [...baseRequirements, 'bag size upgrade 2'],
