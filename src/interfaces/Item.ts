@@ -129,6 +129,7 @@ export const heldItems = [
 	'bright-powder',
 	'macho-brace',
 	'soothe-bell',
+	'choice-band',
 ] as const;
 export const valuables = [
 	'shoal-salt',

@@ -15,6 +15,19 @@ import {
 import { WeatherType } from '../../../interfaces/Weather';
 import { ChooseActionPayload } from '../BattleField';
 
+const determineChoiceBandedMove = (
+	pokemon: BattlePokemon,
+	chosenMove: MoveName
+): MoveName | undefined => {
+	if (pokemon.choiceBandedMove) {
+		return pokemon.choiceBandedMove;
+	}
+	if (pokemon.heldItemName === 'choice-band' && !pokemon.choiceBandedMove) {
+		return chosenMove;
+	}
+
+	return;
+};
 export const useChooseAction = (
 	allOnField: BattlePokemon[],
 	pokemon: BattlePokemon[],
@@ -148,6 +161,7 @@ export const useChooseAction = (
 						if (p.id === user.id) {
 							return {
 								...user,
+								choiceBandedMove: determineChoiceBandedMove(p, move.name),
 								moveQueue: [
 									{
 										type: 'ChargeUp',
@@ -178,6 +192,7 @@ export const useChooseAction = (
 						if (p.id === user.id) {
 							return {
 								...user,
+								choiceBandedMove: determineChoiceBandedMove(p, move.name),
 								moveQueue: [
 									{
 										type: 'BattleAttack',
@@ -219,6 +234,7 @@ export const useChooseAction = (
 						if (p.id === user.id) {
 							return {
 								...user,
+								choiceBandedMove: determineChoiceBandedMove(p, move.name),
 								moveQueue: [
 									{
 										type: 'BattleAttack',
@@ -260,6 +276,7 @@ export const useChooseAction = (
 
 						return {
 							...user,
+							choiceBandedMove: determineChoiceBandedMove(p, move.name),
 							moveQueue: [
 								{
 									type: 'BattleAttack',

@@ -28,6 +28,11 @@ export function getMovesArray<T extends BattlePokemon | OwnedPokemon>(
 
 				return battleMove.usedPP < battleMove.data.pp;
 			}
+			if (isBattlePokemon(pokemon) && pokemon.choiceBandedMove) {
+				const battleMove = m as BattlePokemon['firstMove'];
+
+				return battleMove.name === pokemon.choiceBandedMove;
+			}
 			return true;
 		});
 }

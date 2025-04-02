@@ -919,7 +919,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/196/',
 		handled: true,
 	},
-	{ name: 'choice-band', url: 'https://pokeapi.co/api/v2/item/197/' },
+	{
+		name: 'choice-band',
+		url: 'https://pokeapi.co/api/v2/item/197/',
+		handled: true,
+	},
 	{ name: 'kings-rock', url: 'https://pokeapi.co/api/v2/item/198/' },
 	{ name: 'silver-powder', url: 'https://pokeapi.co/api/v2/item/199/' },
 	{ name: 'amulet-coin', url: 'https://pokeapi.co/api/v2/item/200/' },

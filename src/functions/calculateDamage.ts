@@ -377,6 +377,7 @@ export const calculateDamage = (
 		weather === 'sun'
 			? 1.5
 			: 1;
+	const choiceBandFactor = attack.name === attacker.choiceBandedMove ? 1.5 : 1;
 
 	const res = Math.max(
 		Math.floor(
@@ -416,7 +417,8 @@ export const calculateDamage = (
 				drySkinFactor *
 				savingBerryFactor *
 				ironfistFactor *
-				solarPowerFactor
+				solarPowerFactor *
+				choiceBandFactor
 		),
 		1
 	);
