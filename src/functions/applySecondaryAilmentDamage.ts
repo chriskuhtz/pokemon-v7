@@ -13,7 +13,10 @@ export const applySecondaryAilmentDamage = (
 	addMessage: (x: string) => void
 ): BattlePokemon => {
 	let updated = { ...pokemon };
-
+	if (pokemon.ability === 'magic-guard') {
+		addMessage(`${pokemon.name} prevents damage with magic-guard`);
+		return pokemon;
+	}
 	//apply ailment damage
 	if (isTrapped(updated)) {
 		addMessage(`${pokemon.data.name} is hurt by its trap`);
