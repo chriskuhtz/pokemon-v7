@@ -206,7 +206,9 @@ export const calculateDamage = (
 			target.ability,
 			attacker.secondaryAilments.some((s) => s.type === 'focused')
 		)
-			? 2
+			? attacker.ability === 'sniper'
+				? 3
+				: 2
 			: 1;
 	if (critFactor === 2 && addMessage) {
 		addMessage({ message: 'critical hit!' });
