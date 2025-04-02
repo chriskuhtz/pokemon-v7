@@ -303,13 +303,7 @@ export const questNames = [
 	'wake a snorlax',
 	'catch all evolutions of eevee',
 ] as const;
-/**
- * Ideas:
- * elm: gender based evo
- * achieve cooking level x
- * retrieve item from wild pokemon (special encounter)
- * lure x pokemon
- */
+
 export type QuestName = (typeof questNames)[number];
 
 export const QuestsRecord: Record<QuestName, Quest> = {

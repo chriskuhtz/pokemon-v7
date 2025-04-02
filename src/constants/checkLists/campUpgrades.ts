@@ -32,22 +32,6 @@ export const campUpgradeNames = [
 	'berry lure station routeN1',
 	'berry lure station routeN1E1',
 ] as const;
-/**
- * ideas:
- * more cookable items
- * way to cross the river
- * berry lures on other routes(E1,S1E1)
- * other gym leaders
- * fossil guy should be roark
- * shovel spots
- * 'Pokemon Surfer Certification'
- * 'Pokemon Flyer Certification' : requires new route first
- * 	Fishing?
- * more vileplume products
- * training field challenge mode
- * team rocket
- * blissey trainer
- */
 
 export type CampUpgrade = (typeof campUpgradeNames)[number];
 
