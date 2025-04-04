@@ -652,12 +652,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat twenty training field trainers': {
 		rewardItems: {
-			calcium: 1,
-			zinc: 1,
-			iron: 1,
-			carbos: 1,
-			protein: 1,
-			'hp-up': 1,
+			'choice-band': 1,
 		},
 		researchPoints: 20,
 		conditionFunction: (s) => {
