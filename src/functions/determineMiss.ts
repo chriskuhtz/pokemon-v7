@@ -43,7 +43,9 @@ export const determineMiss = (
 	targetIsUnderground?: boolean
 ): { miss: boolean; reason?: MissReason } => {
 	const selfTargeting = isSelfTargeting(attack.data);
-
+	if (attacker.ability === 'no-guard' || target.ability === 'no-guard') {
+		return { miss: false };
+	}
 	if (attack.isAMultiHit) {
 		return { miss: false };
 	}
