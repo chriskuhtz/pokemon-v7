@@ -32,6 +32,9 @@ export const useFarm = () => {
 			saveFile.campUpgrades['second slot for farm'],
 			saveFile.campUpgrades['third slot for farm'],
 			saveFile.campUpgrades['fourth slot for farm'],
+			saveFile.campUpgrades['fifth slot for farm'],
+			saveFile.campUpgrades['sixth slot for farm'],
+			saveFile.campUpgrades['seventh slot for farm'],
 		].filter((s) => s === true).length;
 		return slots > saveFile.farm.plants.length;
 	}, [saveFile]);

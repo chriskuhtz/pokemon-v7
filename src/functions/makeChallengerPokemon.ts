@@ -23,6 +23,8 @@ export const testOpponent: OwnedPokemon = {
 	ppBoostedMoves: [],
 	caughtOnMap: 'camp',
 	weightModifier: 1,
+	unlockedMoves: [],
+	growthRate: 'medium',
 };
 
 export const makeChallengerPokemon = (

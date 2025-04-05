@@ -1,5 +1,5 @@
 import { PokemonName } from '../constants/pokemonNames';
-import { ItemType } from '../interfaces/Item';
+import { ItemType, typeBoostItemTable } from '../interfaces/Item';
 import { PokemonType } from '../interfaces/PokemonType';
 
 export const getHeldItemFactor = (
@@ -10,7 +10,7 @@ export const getHeldItemFactor = (
 	if (!heldItem) {
 		return 1;
 	}
-	if (heldItem === 'metal-coat' && attackType === 'steel') {
+	if (typeBoostItemTable[attackType] === heldItem) {
 		return 1.2;
 	}
 	if (
@@ -26,6 +26,9 @@ export const getHeldItemFactor = (
 		(attackType === 'water' || attackType === 'dragon')
 	) {
 		return 1.2;
+	}
+	if (heldItem === 'light-ball' && attackerName.includes('pikachu')) {
+		return 2;
 	}
 	return 1;
 };

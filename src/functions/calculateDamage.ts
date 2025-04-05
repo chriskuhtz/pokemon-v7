@@ -18,6 +18,7 @@ import { determineCrit } from './determineCrit';
 import { determineStabFactor } from './determineStabFactor';
 import { determineTypeFactor } from './determineTypeFactor';
 import { determineWeatherFactor } from './determineWeatherFactor';
+import { getHeldItem } from './getHeldItem';
 import { getHeldItemFactor } from './getHeldItemFactor';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getRivalryFactor } from './getRivalryFactor';
@@ -204,9 +205,12 @@ export const calculateDamage = (
 			attack.name,
 			critRate,
 			target.ability,
+			attacker.ability,
 			attacker.secondaryAilments.some((s) => s.type === 'focused')
 		)
-			? 2
+			? attacker.ability === 'sniper'
+				? 3
+				: 2
 			: 1;
 	if (critFactor === 2 && addMessage) {
 		addMessage({ message: 'critical hit!' });
@@ -279,7 +283,7 @@ export const calculateDamage = (
 	const heldItemFactor = getHeldItemFactor(
 		attacker.name,
 		attackType,
-		attacker.heldItemName
+		getHeldItem(attacker)
 	);
 	const lightScreenFactor =
 		damageClass === 'special' &&
@@ -366,7 +370,7 @@ export const calculateDamage = (
 	const savingBerryFactor =
 		(typeFactor > 1 || attackType === 'normal') &&
 		superEffectiveSaveTable[attackType] &&
-		superEffectiveSaveTable[attackType] === target.heldItemName
+		superEffectiveSaveTable[attackType] === getHeldItem(target)
 			? 0.5
 			: 1;
 	const solarPowerFactor =
@@ -375,6 +379,9 @@ export const calculateDamage = (
 		weather === 'sun'
 			? 1.5
 			: 1;
+	const choiceBandFactor = attack.name === attacker.choiceBandedMove ? 1.5 : 1;
+	const technicianFactor =
+		attacker.ability === 'technician' && power <= 60 ? 1.5 : 1;
 
 	const res = Math.max(
 		Math.floor(
@@ -414,7 +421,9 @@ export const calculateDamage = (
 				drySkinFactor *
 				savingBerryFactor *
 				ironfistFactor *
-				solarPowerFactor
+				solarPowerFactor *
+				choiceBandFactor *
+				technicianFactor
 		),
 		1
 	);

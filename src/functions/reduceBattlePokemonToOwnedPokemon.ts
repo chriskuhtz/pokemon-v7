@@ -1,6 +1,7 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { fullyHealPokemon } from './fullyHealPokemon';
+import { getHeldItem } from './getHeldItem';
 import { persistentPrimaryAilment } from './persistentPrimaryAilment';
 
 export const reduceBattlePokemonToOwnedPokemon = (
@@ -48,7 +49,7 @@ export const reduceBattlePokemonToOwnedPokemon = (
 		ability: newMon.initAbility,
 		happiness: newMon.happiness,
 		stepsWalked: newMon.stepsWalked,
-		heldItemName: newMon.heldItemName,
+		heldItemName: getHeldItem(newMon, false),
 		maxHp: newMon.stats.hp,
 		effortValues: newMon.effortValues,
 		ppBoostedMoves: newMon.ppBoostedMoves,
@@ -57,6 +58,8 @@ export const reduceBattlePokemonToOwnedPokemon = (
 		heightModifier: newMon.heightModifier ?? Math.random(),
 		intrinsicValues: newMon.intrinsicValues,
 		shiny: newMon.shiny,
+		unlockedMoves: newMon.unlockedMoves,
+		growthRate: newMon.growthRate,
 	};
 
 	if (heal) {

@@ -9,6 +9,7 @@ import { getRandomBoostableStat, Stat } from '../interfaces/StatObject';
 import { applyItemToPokemon } from './applyItemToPokemon';
 import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
+import { getHeldItem } from './getHeldItem';
 import { getMovesArray } from './getMovesArray';
 
 export const applyEndOfTurnHeldItem = (
@@ -16,10 +17,18 @@ export const applyEndOfTurnHeldItem = (
 	addMessage: (x: string) => void,
 	addMultipleMessages: (x: string[]) => void
 ): BattlePokemon => {
-	if (!pokemon.heldItemName || !hasEndOfTurnEffect(pokemon.heldItemName)) {
+	const heldItem = getHeldItem(pokemon);
+	if (!heldItem || !hasEndOfTurnEffect(heldItem)) {
 		return pokemon;
 	}
-	if (pokemon.heldItemName === 'mental-herb') {
+	if (heldItem === 'leftovers' && pokemon.damage > 0) {
+		addMultipleMessages([`${pokemon.data.name} recovered hp with ${heldItem}`]);
+		return {
+			...pokemon,
+			damage: Math.floor(Math.max(0, pokemon.damage - pokemon.stats.hp / 16)),
+		};
+	}
+	if (heldItem === 'mental-herb') {
 		const filteredAilments = pokemon.secondaryAilments.filter((s) => {
 			//Held: Consumed to cure infatuation. Gen V: Also removes Taunt, Encore, Torment, Disable, and Cursed Body.
 			return !(
@@ -39,7 +48,7 @@ export const applyEndOfTurnHeldItem = (
 		}
 	}
 
-	if (pokemon.heldItemName === 'white-herb') {
+	if (heldItem === 'white-herb') {
 		const reducedStat = Object.entries(pokemon.statBoosts).find(
 			([, value]) => value < 0
 		) as [Stat, number] | undefined;
@@ -57,39 +66,35 @@ export const applyEndOfTurnHeldItem = (
 	}
 
 	if (
-		FlavourfullBerriesTable[pokemon.heldItemName] &&
+		FlavourfullBerriesTable[heldItem] &&
 		pokemon.damage / pokemon.stats.hp > 0.5
 	) {
-		if (
-			FlavourfullBerriesTable[pokemon.heldItemName]?.includes(pokemon.nature)
-		) {
+		if (FlavourfullBerriesTable[heldItem]?.includes(pokemon.nature)) {
 			addMultipleMessages([
-				`${pokemon.data.name} healed itself with ${pokemon.heldItemName}`,
+				`${pokemon.data.name} healed itself with ${heldItem}`,
 				'But did not like the flavor',
 			]);
 			return applySecondaryAilmentToPokemon({
 				pokemon: {
-					...applyItemToPokemon(pokemon, pokemon.heldItemName),
+					...applyItemToPokemon(pokemon, heldItem),
 					heldItemName: undefined,
 				},
 				ailment: 'confusion',
 				addMessage: (message) => addMessage(message.message),
 			});
 		} else {
-			addMessage(
-				`${pokemon.data.name} healed itself with ${pokemon.heldItemName}`
-			);
+			addMessage(`${pokemon.data.name} healed itself with ${heldItem}`);
 			return {
-				...applyItemToPokemon(pokemon, pokemon.heldItemName),
+				...applyItemToPokemon(pokemon, heldItem),
 				heldItemName: undefined,
 			};
 		}
 	}
 
-	const booster = emergencyBoostBerriesTable[pokemon.heldItemName];
+	const booster = emergencyBoostBerriesTable[heldItem];
 	if (booster && pokemon.damage / pokemon.stats.hp >= 0.75) {
 		addMultipleMessages([
-			`${pokemon.data.name} gave itself a boost with ${pokemon.heldItemName}`,
+			`${pokemon.data.name} gave itself a boost with ${heldItem}`,
 		]);
 		return applyStatChangeToPokemon(
 			{ ...pokemon, heldItemName: undefined },
@@ -100,12 +105,9 @@ export const applyEndOfTurnHeldItem = (
 			(x) => addMessage(x.message)
 		);
 	}
-	if (
-		pokemon.heldItemName === 'starf-berry' &&
-		pokemon.damage / pokemon.stats.hp >= 0.75
-	) {
+	if (heldItem === 'starf-berry' && pokemon.damage / pokemon.stats.hp >= 0.75) {
 		addMultipleMessages([
-			`${pokemon.data.name} gave itself a boost with ${pokemon.heldItemName}`,
+			`${pokemon.data.name} gave itself a boost with ${heldItem}`,
 		]);
 		return applyStatChangeToPokemon(
 			{ ...pokemon, heldItemName: undefined },
@@ -117,11 +119,11 @@ export const applyEndOfTurnHeldItem = (
 		);
 	}
 	if (
-		pokemon.heldItemName === 'lansat-berry' &&
+		heldItem === 'lansat-berry' &&
 		pokemon.damage / pokemon.stats.hp >= 0.75
 	) {
 		addMultipleMessages([
-			`${pokemon.data.name} gave itself a boost with ${pokemon.heldItemName}`,
+			`${pokemon.data.name} gave itself a boost with ${heldItem}`,
 		]);
 		return applySecondaryAilmentToPokemon({
 			pokemon: { ...pokemon, heldItemName: undefined },
@@ -131,24 +133,19 @@ export const applyEndOfTurnHeldItem = (
 	}
 
 	if (
-		pokemon.heldItemName === 'enigma-berry' &&
+		heldItem === 'enigma-berry' &&
 		pokemon.lastReceivedDamage?.wasSuperEffective
 	) {
-		addMultipleMessages([
-			`${pokemon.data.name} recovered hp with ${pokemon.heldItemName}`,
-		]);
+		addMultipleMessages([`${pokemon.data.name} recovered hp with ${heldItem}`]);
 		return {
 			...pokemon,
 			heldItemName: undefined,
-			damage: Math.max(0, pokemon.damage - pokemon.stats.hp / 4),
+			damage: Math.floor(Math.max(0, pokemon.damage - pokemon.stats.hp / 4)),
 		};
 	}
-	if (
-		pokemon.heldItemName === 'kee-berry' &&
-		pokemon.lastReceivedDamage?.wasPhysical
-	) {
+	if (heldItem === 'kee-berry' && pokemon.lastReceivedDamage?.wasPhysical) {
 		addMultipleMessages([
-			`${pokemon.data.name} gave itself a boost with ${pokemon.heldItemName}`,
+			`${pokemon.data.name} gave itself a boost with ${heldItem}`,
 		]);
 		return applyStatChangeToPokemon(
 			{ ...pokemon, heldItemName: undefined },
@@ -159,133 +156,100 @@ export const applyEndOfTurnHeldItem = (
 			(x) => addMessage(x.message)
 		);
 	}
-	if (
-		pokemon.heldItemName === 'maranga-berry' &&
-		pokemon.lastReceivedDamage?.wasSpecial
-	) {
+	if (heldItem === 'maranga-berry' && pokemon.lastReceivedDamage?.wasSpecial) {
 		addMultipleMessages([
-			`${pokemon.data.name} gave itself a boost with ${pokemon.heldItemName}`,
+			`${pokemon.data.name} gave itself a boost with ${heldItem}`,
 		]);
 		return applyStatChangeToPokemon(
 			{ ...pokemon, heldItemName: undefined },
-			'defense',
+			'special-defense',
 			1,
 			true,
 			[],
 			(x) => addMessage(x.message)
 		);
 	}
-	if (
-		HPHealTable[pokemon.heldItemName] &&
-		pokemon.damage / pokemon.stats.hp > 0.5
-	) {
-		addMessage(
-			`${pokemon.data.name} healed itself with ${pokemon.heldItemName}`
-		);
+	if (HPHealTable[heldItem] && pokemon.damage / pokemon.stats.hp > 0.5) {
+		addMessage(`${pokemon.data.name} healed itself with ${heldItem}`);
 		return {
-			...applyItemToPokemon(pokemon, pokemon.heldItemName),
+			...applyItemToPokemon(pokemon, heldItem),
 			heldItemName: undefined,
 		};
 	}
 	if (
-		pokemon.heldItemName === 'cheri-berry' &&
+		heldItem === 'cheri-berry' &&
 		pokemon.primaryAilment?.type === 'paralysis'
 	) {
-		addMessage(
-			`${pokemon.data.name} cured its paralysis with ${pokemon.heldItemName}`
-		);
+		addMessage(`${pokemon.data.name} cured its paralysis with ${heldItem}`);
 		return {
-			...applyItemToPokemon(pokemon, pokemon.heldItemName),
+			...applyItemToPokemon(pokemon, heldItem),
+			heldItemName: undefined,
+		};
+	}
+	if (heldItem === 'chesto-berry' && pokemon.primaryAilment?.type === 'sleep') {
+		addMessage(`${pokemon.data.name} cured its sleep with ${heldItem}`);
+		return {
+			...applyItemToPokemon(pokemon, heldItem),
 			heldItemName: undefined,
 		};
 	}
 	if (
-		pokemon.heldItemName === 'chesto-berry' &&
-		pokemon.primaryAilment?.type === 'sleep'
-	) {
-		addMessage(
-			`${pokemon.data.name} cured its sleep with ${pokemon.heldItemName}`
-		);
-		return {
-			...applyItemToPokemon(pokemon, pokemon.heldItemName),
-			heldItemName: undefined,
-		};
-	}
-	if (
-		pokemon.heldItemName === 'pecha-berry' &&
+		heldItem === 'pecha-berry' &&
 		(pokemon.primaryAilment?.type === 'poison' ||
 			pokemon.primaryAilment?.type === 'toxic')
 	) {
-		addMessage(
-			`${pokemon.data.name} cured its poison with ${pokemon.heldItemName}`
-		);
+		addMessage(`${pokemon.data.name} cured its poison with ${heldItem}`);
 		return {
-			...applyItemToPokemon(pokemon, pokemon.heldItemName),
+			...applyItemToPokemon(pokemon, heldItem),
+			heldItemName: undefined,
+		};
+	}
+	if (heldItem === 'rawst-berry' && pokemon.primaryAilment?.type === 'burn') {
+		addMessage(`${pokemon.data.name} cured its burn with ${heldItem}`);
+		return {
+			...applyItemToPokemon(pokemon, heldItem),
 			heldItemName: undefined,
 		};
 	}
 	if (
-		pokemon.heldItemName === 'rawst-berry' &&
-		pokemon.primaryAilment?.type === 'burn'
-	) {
-		addMessage(
-			`${pokemon.data.name} cured its burn with ${pokemon.heldItemName}`
-		);
-		return {
-			...applyItemToPokemon(pokemon, pokemon.heldItemName),
-			heldItemName: undefined,
-		};
-	}
-	if (
-		pokemon.heldItemName === 'aspear-berry' &&
+		heldItem === 'aspear-berry' &&
 		pokemon.primaryAilment?.type === 'freeze'
 	) {
-		addMessage(
-			`${pokemon.data.name} cured its freeze with ${pokemon.heldItemName}`
-		);
+		addMessage(`${pokemon.data.name} cured its freeze with ${heldItem}`);
 		return {
-			...applyItemToPokemon(pokemon, pokemon.heldItemName),
+			...applyItemToPokemon(pokemon, heldItem),
 			heldItemName: undefined,
 		};
 	}
 	if (
-		pokemon.heldItemName === 'persim-berry' &&
+		heldItem === 'persim-berry' &&
 		pokemon.secondaryAilments.some((ail) => ail.type === 'confusion')
 	) {
-		addMessage(
-			`${pokemon.data.name} cured its confusion with ${pokemon.heldItemName}`
-		);
+		addMessage(`${pokemon.data.name} cured its confusion with ${heldItem}`);
 		return {
-			...applyItemToPokemon(pokemon, pokemon.heldItemName),
+			...applyItemToPokemon(pokemon, heldItem),
 			heldItemName: undefined,
 		};
 	}
 	if (
-		pokemon.heldItemName === 'lum-berry' &&
+		heldItem === 'lum-berry' &&
 		(pokemon.secondaryAilments.some((ail) => ail.type === 'confusion') ||
 			pokemon.primaryAilment)
 	) {
-		addMessage(
-			`${pokemon.data.name} cured itself with ${pokemon.heldItemName}`
-		);
+		addMessage(`${pokemon.data.name} cured itself with ${heldItem}`);
 		return {
-			...applyItemToPokemon(pokemon, pokemon.heldItemName),
+			...applyItemToPokemon(pokemon, heldItem),
 			heldItemName: undefined,
 		};
 	}
-	if (pokemon.heldItemName === 'leppa-berry') {
+	if (heldItem === 'leppa-berry') {
 		const depletedMove = getMovesArray(pokemon).find(
 			(m) => m.data.pp - m.usedPP <= 0
 		);
 		if (depletedMove) {
-			addMessage(`${pokemon.data.name} used its ${pokemon.heldItemName}`);
+			addMessage(`${pokemon.data.name} used its ${heldItem}`);
 			return {
-				...applyItemToPokemon(
-					pokemon,
-					pokemon.heldItemName,
-					undefined,
-					depletedMove.name
-				),
+				...applyItemToPokemon(pokemon, heldItem, undefined, depletedMove.name),
 				heldItemName: undefined,
 			};
 		}

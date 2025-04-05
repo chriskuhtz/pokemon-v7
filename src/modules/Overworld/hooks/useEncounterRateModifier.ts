@@ -1,5 +1,6 @@
 import { useContext, useMemo } from 'react';
 import { mapsRecord } from '../../../constants/maps/mapsRecord';
+import { getHeldItem } from '../../../functions/getHeldItem';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 
 export const useEncounterRateModifier = () => {
@@ -31,6 +32,8 @@ export const useEncounterRateModifier = () => {
 			mapsRecord[saveFile.location.mapId].weather === 'sandstorm'
 				? 0.5
 				: 1;
+		const cleanseTagFactor =
+			firstTeamMember && getHeldItem(firstTeamMember) === 'cleanse-tag' ? 0 : 1;
 
 		return {
 			upToXp:
@@ -44,7 +47,8 @@ export const useEncounterRateModifier = () => {
 				snowCloakFactor *
 				illumFactor *
 				swarmFactor *
-				quickfeetFactor,
+				quickfeetFactor *
+				cleanseTagFactor,
 		};
 	};
 	return res();

@@ -27,100 +27,124 @@ const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 	'catch a MORNING-time exclusive pokemon from routeN1': {
 		'poke-ball': 5,
 		'sitrus-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch a DAY-time exclusive pokemon from routeN1': {
 		'poke-ball': 5,
 		'cheri-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch a EVENING-time exclusive pokemon from routeN1': {
 		'poke-ball': 5,
 		'chesto-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch a NIGHT-time exclusive pokemon from routeN1': {
 		'poke-ball': 5,
 		'pecha-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch all MORNING-time pokemon from routeN1': {
 		'poke-ball': 10,
 		'rawst-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch all DAY-time pokemon from routeN1': {
 		'poke-ball': 10,
 		'aspear-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch all EVENING-time pokemon from routeN1': {
 		'poke-ball': 10,
 		'leppa-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch all NIGHT-time pokemon from routeN1': {
 		'poke-ball': 10,
 		'oran-berry': 2,
+		'berry-juice': 1,
 	},
 	//routeN1E1
 	'catch a MORNING-time exclusive pokemon from routeN1E1': {
 		'net-ball': 5,
 		'persim-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch a DAY-time exclusive pokemon from routeN1E1': {
 		'net-ball': 5,
 		'lum-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch a EVENING-time exclusive pokemon from routeN1E1': {
 		'net-ball': 5,
 		'figy-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch a NIGHT-time exclusive pokemon from routeN1E1': {
 		'net-ball': 5,
 		'mago-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch all MORNING-time pokemon from routeN1E1': {
 		'net-ball': 10,
 		'iapapa-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch all DAY-time pokemon from routeN1E1': {
 		'net-ball': 10,
 		'bluk-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch all EVENING-time pokemon from routeN1E1': {
 		'net-ball': 10,
 		'nanab-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch all NIGHT-time pokemon from routeN1E1': {
 		'net-ball': 10,
 		'odd-keystone': 1,
+		'berry-juice': 1,
 	},
 	//routeE1
 	'catch a MORNING-time exclusive pokemon from routeE1': {
 		'quick-ball': 5,
 		'aguav-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch a DAY-time exclusive pokemon from routeE1': {
 		'quick-ball': 5,
 		'wiki-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch a EVENING-time exclusive pokemon from routeE1': {
 		'quick-ball': 5,
 		'razz-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch a NIGHT-time exclusive pokemon from routeE1': {
 		'quick-ball': 5,
 		'wepear-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch all MORNING-time pokemon from routeE1': {
 		'quick-ball': 10,
 		'pinap-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch all DAY-time pokemon from routeE1': {
 		'quick-ball': 10,
 		'pomeg-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch all EVENING-time pokemon from routeE1': {
 		'quick-ball': 10,
 		'kelpsy-berry': 2,
+		'berry-juice': 1,
 	},
 	'catch all NIGHT-time pokemon from routeE1': {
 		'quick-ball': 10,
 		'qualot-berry': 1,
+		'berry-juice': 1,
 	},
 };
 
@@ -303,13 +327,7 @@ export const questNames = [
 	'wake a snorlax',
 	'catch all evolutions of eevee',
 ] as const;
-/**
- * Ideas:
- * elm: gender based evo
- * achieve cooking level x
- * retrieve item from wild pokemon (special encounter)
- * lure x pokemon
- */
+
 export type QuestName = (typeof questNames)[number];
 
 export const QuestsRecord: Record<QuestName, Quest> = {
@@ -658,12 +676,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat twenty training field trainers': {
 		rewardItems: {
-			calcium: 1,
-			zinc: 1,
-			iron: 1,
-			carbos: 1,
-			protein: 1,
-			'hp-up': 1,
+			'choice-band': 1,
 		},
 		researchPoints: 20,
 		conditionFunction: (s) => {
@@ -880,6 +893,8 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'full-restore': 5,
 		},
 		rewardPokemon: {
+			growthRate: 'medium',
+			unlockedMoves: ['ominous-wind'],
 			fixedAbility: true,
 			shiny: true,
 			maxHp: 30,
@@ -914,6 +929,8 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'full-restore': 5,
 		},
 		rewardPokemon: {
+			growthRate: 'medium',
+			unlockedMoves: ['drill-peck'],
 			fixedAbility: true,
 			shiny: true,
 			maxHp: 30,
@@ -996,6 +1013,8 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'full-restore': 5,
 		},
 		rewardPokemon: {
+			growthRate: 'medium',
+			unlockedMoves: ['earthquake'],
 			fixedAbility: true,
 			shiny: true,
 			maxHp: 30,
@@ -1049,6 +1068,8 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			intrinsicValues: generateRandomStatObject(31),
 			happiness: 70,
 			firstMove: { name: 'earthquake', usedPP: 0 },
+			unlockedMoves: [],
+			growthRate: 'medium',
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {

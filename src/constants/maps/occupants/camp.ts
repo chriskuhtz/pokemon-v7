@@ -107,6 +107,20 @@ const trainingField: Occupant[] = [
 		],
 		conditionFunction: (s) => s.campUpgrades['training field 1'],
 	},
+	{
+		type: 'ROUTER_NPC',
+		to: 'MOVE_TUTOR',
+		x: 3,
+		y: 15,
+		orientation: 'DOWN',
+		sprite: SpriteEnum.aceMale,
+		id: 'move_tutor',
+		dialogue: [
+			'I can teach your Pokemon new moves',
+			'But I expect some snacks as payment',
+		],
+		conditionFunction: (s) => s.campUpgrades['training field 1'],
+	},
 ];
 
 export const campOccupants: OverworldMap['occupants'] = [

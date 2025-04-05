@@ -464,17 +464,61 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/95/',
 		handled: true,
 	},
-	{ name: 'normalize', url: 'https://pokeapi.co/api/v2/ability/96/' },
-	{ name: 'sniper', url: 'https://pokeapi.co/api/v2/ability/97/' },
-	{ name: 'magic-guard', url: 'https://pokeapi.co/api/v2/ability/98/' },
-	{ name: 'no-guard', url: 'https://pokeapi.co/api/v2/ability/99/' },
-	{ name: 'stall', url: 'https://pokeapi.co/api/v2/ability/100/' },
-	{ name: 'technician', url: 'https://pokeapi.co/api/v2/ability/101/' },
-	{ name: 'leaf-guard', url: 'https://pokeapi.co/api/v2/ability/102/' },
-	{ name: 'klutz', url: 'https://pokeapi.co/api/v2/ability/103/' },
-	{ name: 'mold-breaker', url: 'https://pokeapi.co/api/v2/ability/104/' },
-	{ name: 'super-luck', url: 'https://pokeapi.co/api/v2/ability/105/' },
-	{ name: 'aftermath', url: 'https://pokeapi.co/api/v2/ability/106/' },
+	{
+		name: 'normalize',
+		url: 'https://pokeapi.co/api/v2/ability/96/',
+		handled: true,
+	},
+	{
+		name: 'sniper',
+		url: 'https://pokeapi.co/api/v2/ability/97/',
+		handled: true,
+	},
+	{
+		name: 'magic-guard',
+		url: 'https://pokeapi.co/api/v2/ability/98/',
+		handled: true,
+	},
+	{
+		name: 'no-guard',
+		url: 'https://pokeapi.co/api/v2/ability/99/',
+		handled: true,
+	},
+	{
+		name: 'stall',
+		url: 'https://pokeapi.co/api/v2/ability/100/',
+		handled: true,
+	},
+	{
+		name: 'technician',
+		url: 'https://pokeapi.co/api/v2/ability/101/',
+		handled: true,
+	},
+	{
+		name: 'leaf-guard',
+		url: 'https://pokeapi.co/api/v2/ability/102/',
+		handled: true,
+	},
+	{
+		name: 'klutz',
+		url: 'https://pokeapi.co/api/v2/ability/103/',
+		handled: true,
+	},
+	{
+		name: 'sticky-hold',
+		url: 'https://pokeapi.co/api/v2/ability/60/',
+		handled: true,
+	},
+	{
+		name: 'super-luck',
+		url: 'https://pokeapi.co/api/v2/ability/105/',
+		handled: true,
+	},
+	{
+		name: 'aftermath',
+		url: 'https://pokeapi.co/api/v2/ability/106/',
+		handled: true,
+	},
 	{ name: 'anticipation', url: 'https://pokeapi.co/api/v2/ability/107/' },
 	{ name: 'forewarn', url: 'https://pokeapi.co/api/v2/ability/108/' },
 	{ name: 'unaware', url: 'https://pokeapi.co/api/v2/ability/109/' },
@@ -740,10 +784,8 @@ export const abilityCheckList: {
 		name: 'forecast',
 		url: 'https://pokeapi.co/api/v2/ability/59/',
 	},
-	{
-		name: 'sticky-hold',
-		url: 'https://pokeapi.co/api/v2/ability/60/',
-	},
+
+	{ name: 'mold-breaker', url: 'https://pokeapi.co/api/v2/ability/104/' },
 ];
 
 export const abilityNames = [
@@ -840,6 +882,16 @@ export const abilityNames = [
 	'solar-power',
 	'quick-feet',
 	'normalize',
+	'sniper',
+	'magic-guard',
+	'no-guard',
+	'stall',
+	'technician',
+	'leaf-guard',
+	'klutz',
+	'sticky-hold',
+	'super-luck',
+	'aftermath',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

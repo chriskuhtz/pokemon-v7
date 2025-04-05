@@ -3,6 +3,7 @@ import { FaTrash } from 'react-icons/fa';
 import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { battleSpriteSize } from '../../constants/gameData';
 import { calculateLevelData } from '../../functions/calculateLevelData';
+import { getHeldItem } from '../../functions/getHeldItem';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { Message } from '../../hooks/useMessageQueue';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
@@ -67,32 +68,33 @@ export const PokemonStorage = ({
 		<Page goBack={goBack} headline="Your Pokemon:">
 			<h2>Team:</h2>
 			<Stack mode="row">
-				{team.map((pokemon) => (
-					<IconSolarSystem
-						sun={{
-							url: getPokemonSprite(pokemon.name, { shiny: pokemon.shiny }),
-						}}
-						firstPlanet={
-							<Chip>
-								<strong>Lvl {calculateLevelData(pokemon.xp).level}</strong>
-							</Chip>
-						}
-						secondPlanetUrl={getItemUrl(pokemon.ball)}
-						thirdPlanetUrl={
-							pokemon.heldItemName
-								? getItemUrl(pokemon.heldItemName)
-								: undefined
-						}
-						key={pokemon.id}
-						onClick={() => {
-							if (team.length === 1) {
-								addMessage({ message: 'One Pokemon must remain on the team!' });
-								return;
+				{team.map((pokemon) => {
+					const heldItem = getHeldItem(pokemon);
+					return (
+						<IconSolarSystem
+							sun={{
+								url: getPokemonSprite(pokemon.name, { shiny: pokemon.shiny }),
+							}}
+							firstPlanet={
+								<Chip>
+									<strong>Lvl {calculateLevelData(pokemon.xp).level}</strong>
+								</Chip>
 							}
-							togglePokemonOnTeam(pokemon.id);
-						}}
-					/>
-				))}
+							secondPlanetUrl={getItemUrl(pokemon.ball)}
+							thirdPlanetUrl={heldItem ? getItemUrl(heldItem) : undefined}
+							key={pokemon.id}
+							onClick={() => {
+								if (team.length === 1) {
+									addMessage({
+										message: 'One Pokemon must remain on the team!',
+									});
+									return;
+								}
+								togglePokemonOnTeam(pokemon.id);
+							}}
+						/>
+					);
+				})}
 			</Stack>
 
 			<h2
@@ -149,41 +151,43 @@ export const PokemonStorage = ({
 			</h2>
 
 			<Stack mode="row">
-				{stored.sort(sortFunction).map((pokemon) => (
-					<div style={{ display: 'flex' }} key={pokemon.id}>
-						<IconSolarSystem
-							sun={{
-								url: getPokemonSprite(pokemon.name, { shiny: pokemon.shiny }),
-							}}
-							firstPlanet={
-								<Chip>
-									<strong>Lvl {calculateLevelData(pokemon.xp).level}</strong>
-								</Chip>
-							}
-							secondPlanetUrl={getItemUrl(pokemon.ball)}
-							thirdPlanetUrl={
-								pokemon.heldItemName
-									? getItemUrl(pokemon.heldItemName)
-									: undefined
-							}
-							onClick={() => {
-								if (team.length === 6) {
-									addMessage({
-										message: 'You can only take 6 Pokemon on the team!',
-									});
-									return;
+				{stored.sort(sortFunction).map((pokemon) => {
+					return (
+						<div style={{ display: 'flex' }} key={pokemon.id}>
+							<IconSolarSystem
+								sun={{
+									url: getPokemonSprite(pokemon.name, { shiny: pokemon.shiny }),
+								}}
+								firstPlanet={
+									<Chip>
+										<strong>Lvl {calculateLevelData(pokemon.xp).level}</strong>
+									</Chip>
 								}
-								togglePokemonOnTeam(pokemon.id);
-							}}
-						/>
-						<FaTrash
-							size={battleSpriteSize / 1.5}
-							onClick={() =>
-								setPokemon(allPokemon.filter((p) => p.id !== pokemon.id))
-							}
-						/>
-					</div>
-				))}
+								secondPlanetUrl={getItemUrl(pokemon.ball)}
+								thirdPlanetUrl={
+									pokemon.heldItemName
+										? getItemUrl(pokemon.heldItemName)
+										: undefined
+								}
+								onClick={() => {
+									if (team.length === 6) {
+										addMessage({
+											message: 'You can only take 6 Pokemon on the team!',
+										});
+										return;
+									}
+									togglePokemonOnTeam(pokemon.id);
+								}}
+							/>
+							<FaTrash
+								size={battleSpriteSize / 1.5}
+								onClick={() =>
+									setPokemon(allPokemon.filter((p) => p.id !== pokemon.id))
+								}
+							/>
+						</div>
+					);
+				})}
 			</Stack>
 		</Page>
 	);

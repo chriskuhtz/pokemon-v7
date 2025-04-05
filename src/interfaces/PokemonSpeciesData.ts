@@ -1,3 +1,11 @@
+export type GrowthRateName =
+	| 'slow'
+	| 'medium'
+	| 'fast'
+	| 'medium slow'
+	| 'erratic'
+	| 'fluctuating';
+
 export interface PokemonSpeciesData {
 	flavor_text_entries: [
 		{
@@ -21,4 +29,7 @@ export interface PokemonSpeciesData {
 	is_baby: boolean;
 	is_legendary: boolean;
 	is_mythical: boolean;
+	growth_rate: {
+		name: GrowthRateName;
+	};
 }

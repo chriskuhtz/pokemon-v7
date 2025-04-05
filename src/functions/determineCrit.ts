@@ -5,9 +5,13 @@ export const determineCrit = (
 	moveName: string,
 	critRate: number,
 	targetAbility: AbilityName,
+	attackerAbilty: AbilityName,
 	attackerFocused: boolean
 ): boolean => {
-	const boostedCritRate = critRate + (attackerFocused ? 2 : 0);
+	const boostedCritRate =
+		critRate +
+		(attackerFocused ? 2 : 0) +
+		(attackerAbilty === 'super-luck' ? 1 : 0);
 	if (ohkoMoves.includes(moveName)) {
 		return false;
 	}

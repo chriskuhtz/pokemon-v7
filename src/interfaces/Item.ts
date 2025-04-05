@@ -1,6 +1,5 @@
 import { PokemonName } from '../constants/pokemonNames';
 import { getRandomIndex } from '../functions/filterTargets';
-import { AilmentType, primaryAilments } from './Ailment';
 import { Nature } from './Natures';
 import { PokemonType } from './PokemonType';
 import { Stat } from './StatObject';
@@ -30,6 +29,7 @@ export const healingItemTypes = [
 	'lava-cookie',
 	'berry-juice',
 	'old-gateau',
+	'big-malasada',
 	'blue-flute',
 	'red-flute',
 	'yellow-flute',
@@ -129,6 +129,13 @@ export const heldItems = [
 	'bright-powder',
 	'macho-brace',
 	'soothe-bell',
+	'choice-band',
+	'kings-rock',
+	'silver-powder',
+	'dragon-scale',
+	'leftovers',
+	'light-ball',
+	'cleanse-tag',
 ] as const;
 export const valuables = [
 	'shoal-salt',
@@ -429,19 +436,7 @@ export const cookingBerries: BerryType[] = [
 	'silver-pinap-berry',
 	'golden-pinap-berry',
 ];
-export const AilmentHealTable: Partial<Record<ItemType, AilmentType[]>> = {
-	'full-heal': [...primaryAilments, 'confusion'],
-	'full-restore': [...primaryAilments, 'confusion'],
-	'old-gateau': [...primaryAilments, 'confusion'],
-	'lava-cookie': [...primaryAilments, 'confusion'],
-	'lum-berry': [...primaryAilments, 'confusion'],
-	antidote: ['poison', 'toxic'],
-	'pecha-berry': ['poison', 'toxic'],
-	'burn-heal': ['burn'],
-	'rawst-berry': ['burn'],
-	'paralyze-heal': ['paralysis'],
-	'cheri-berry': ['paralysis'],
-};
+
 export const XItemTable: Partial<Record<XItemType, Stat>> = {
 	'x-accuracy': 'accuracy',
 	'x-attack': 'attack',
@@ -487,6 +482,8 @@ export const pickupTable: ItemType[] = [
 	'revival-herb',
 	'rare-candy',
 	'soothe-bell',
+	'cleanse-tag',
+	'big-malasada',
 ];
 export const undergroundTable: ItemType[] = [
 	...valuables,
@@ -514,4 +511,25 @@ export const superEffectiveSaveTable: Record<PokemonType, ItemType> = {
 	normal: 'chilan-berry',
 	fairy: 'roseli-berry',
 	typeless: 'odd-keystone',
+};
+export const typeBoostItemTable: Record<PokemonType, ItemType> = {
+	fire: 'cherish-ball',
+	water: 'cherish-ball',
+	electric: 'cherish-ball',
+	grass: 'cherish-ball',
+	ice: 'cherish-ball',
+	fighting: 'cherish-ball',
+	poison: 'cherish-ball',
+	ground: 'cherish-ball',
+	flying: 'cherish-ball',
+	psychic: 'cherish-ball',
+	bug: 'silver-powder',
+	rock: 'cherish-ball',
+	ghost: 'cherish-ball',
+	dragon: 'cherish-ball',
+	dark: 'cherish-ball',
+	steel: 'metal-coat',
+	normal: 'cherish-ball',
+	fairy: 'cherish-ball',
+	typeless: 'cherish-ball',
 };

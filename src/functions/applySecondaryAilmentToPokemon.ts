@@ -240,5 +240,44 @@ export const applySecondaryAilmentToPokemon = ({
 			],
 		};
 	}
+	if (ailment === 'foresighted') {
+		addMessage({ message: `${pokemon.data.name} was inspected` });
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'foresighted',
+					duration: 9000,
+				},
+			],
+		};
+	}
+	if (ailment === 'destiny-bonded' && targetId) {
+		addMessage({ message: `${pokemon.data.name} is destiny bonded` });
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'destiny-bonded',
+					duration: 1,
+				},
+			],
+		};
+	}
+	if (ailment === 'perish-songed') {
+		addMessage({ message: `${pokemon.data.name} heard the perish song` });
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'perish-songed',
+					duration: 3,
+				},
+			],
+		};
+	}
 	return pokemon;
 };

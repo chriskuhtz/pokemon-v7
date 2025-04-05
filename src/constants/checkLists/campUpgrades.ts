@@ -6,9 +6,13 @@ export const campUpgradeNames = [
 	'second slot for farm',
 	'third slot for farm',
 	'fourth slot for farm',
+	'fifth slot for farm',
+	'sixth slot for farm',
+	'seventh slot for farm',
 	'bag size upgrade 1',
 	'bag size upgrade 2',
 	'bag size upgrade 3',
+	'invite move tutor',
 	'invite ghost expert morty',
 	'invite flying pokemon expert falkner',
 	'invite professor rowan',
@@ -32,22 +36,6 @@ export const campUpgradeNames = [
 	'berry lure station routeN1',
 	'berry lure station routeN1E1',
 ] as const;
-/**
- * ideas:
- * more cookable items
- * way to cross the river
- * berry lures on other routes(E1,S1E1)
- * other gym leaders
- * fossil guy should be roark
- * shovel spots
- * 'Pokemon Surfer Certification'
- * 'Pokemon Flyer Certification' : requires new route first
- * 	Fishing?
- * more vileplume products
- * training field challenge mode
- * team rocket
- * blissey trainer
- */
 
 export type CampUpgrade = (typeof campUpgradeNames)[number];
 
@@ -59,7 +47,9 @@ export const baseRequirements: CampUpgrade[] = [
 export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	bulletin_board: [],
 	berry_farm: ['bulletin_board'],
+	'create seed vault': ['bulletin_board', 'berry_farm'],
 	'invite apricorn smith kurt': ['bulletin_board', 'berry_farm'],
+	'invite move tutor': baseRequirements,
 	'invite ghost expert morty': ['machete certification'],
 	'invite flying pokemon expert falkner': ['machete certification'],
 	'invite professor rowan': baseRequirements,
@@ -75,6 +65,9 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'second slot for farm': baseRequirements,
 	'third slot for farm': ['second slot for farm'],
 	'fourth slot for farm': ['third slot for farm'],
+	'fifth slot for farm': ['fourth slot for farm'],
+	'sixth slot for farm': ['sixth slot for farm'],
+	'seventh slot for farm': ['seventh slot for farm'],
 	'invite zigzagoon foragers': baseRequirements,
 	'invite dugtrio explorers': ['invite zigzagoon foragers'],
 	'invite amoongus compost researcher': baseRequirements,
@@ -83,7 +76,6 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'sledge hammer certification': ['machete certification'],
 	'shovel certification': ['sledge hammer certification'],
 	'invite museum curator': ['invite dugtrio explorers'],
-	'create seed vault': ['bulletin_board'],
 	'bag size upgrade 1': baseRequirements,
 	'bag size upgrade 2': [...baseRequirements, 'bag size upgrade 1'],
 	'bag size upgrade 3': [...baseRequirements, 'bag size upgrade 2'],
@@ -97,6 +89,7 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	bulletin_board: 'A place for people to post quests',
 	berry_farm: 'Berries and Apricorns are our main resources',
 	'invite apricorn smith kurt': 'Pokeballs can be made from apricorns',
+	'invite move tutor': 'Teaches your Pokemon new moves',
 	'invite ghost expert morty':
 		'The Gym Leader from Ecruteak studies ghost pokemon',
 	'invite flying pokemon expert falkner':
@@ -130,4 +123,7 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	'bag size upgrade 3': 'More space in your field bag',
 	'berry lure station routeN1': 'Place berries inside to attract pokemon',
 	'berry lure station routeN1E1': 'Place berries inside to attract pokemon',
+	'fifth slot for farm': 'more space at the berry farm',
+	'sixth slot for farm': 'more space at the berry farm',
+	'seventh slot for farm': 'more space at the berry farm',
 };

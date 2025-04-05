@@ -1,6 +1,7 @@
 import { useCallback, useContext, useMemo } from 'react';
 import { addPokemonToDex } from '../functions/addPokemonToDex';
 import { getRandomEntry } from '../functions/filterTargets';
+import { getHeldItem } from '../functions/getHeldItem';
 import { isKO } from '../functions/isKo';
 import { reduceBattlePokemonToOwnedPokemon } from '../functions/reduceBattlePokemonToOwnedPokemon';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -76,7 +77,7 @@ export const useLeaveBattle = () => {
 
 			//check pickup
 			const pickUpCheckedTeam = ownedTeam.map((p) => {
-				if (p.ability === 'pickup' && !p.heldItemName && Math.random() < 0.1) {
+				if (p.ability === 'pickup' && !getHeldItem(p) && Math.random() < 0.1) {
 					return { ...p, heldItemName: getRandomEntry(pickupTable) };
 				}
 

@@ -1,4 +1,5 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
+import { MoveName } from '../constants/checkLists/movesCheckList';
 import { SecondaryAilment } from './Ailment';
 import { BattleAction, BattleAttack } from './BattleActions';
 import { MoveDto } from './Move';
@@ -38,7 +39,7 @@ export interface BattlePokemon extends OwnedPokemon {
 		wasPhysical: boolean;
 		attack: BattleAttack;
 	};
-
+	protected: boolean;
 	lastUsedMove?: BattleMove;
 	putMimicbacktoSlot?: number;
 	initAbility: AbilityName;
@@ -47,6 +48,7 @@ export interface BattlePokemon extends OwnedPokemon {
 		damage: number;
 	};
 	participatedInBattle: boolean;
+	choiceBandedMove?: MoveName;
 }
 
 export function isBattlePokemon(

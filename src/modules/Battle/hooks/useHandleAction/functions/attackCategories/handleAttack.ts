@@ -14,6 +14,7 @@ import {
 	getRandomIndex,
 } from '../../../../../../functions/filterTargets';
 import { getActualTargetId } from '../../../../../../functions/getActualTargetId';
+import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
 import { getMovesArray } from '../../../../../../functions/getMovesArray';
 import { arePokemonOfOppositeGenders } from '../../../../../../functions/getRivalryFactor';
@@ -169,6 +170,26 @@ export const handleAttack = ({
 		);
 		return;
 	}
+	if (move.name === 'spikes') {
+		addBattleFieldEffect({
+			type: move.name as BattleFieldEffect['type'],
+			ownerId: target.ownerId,
+			duration: 9000,
+		});
+		setPokemon((pokemon) =>
+			pokemon.map((p) => {
+				if (p.id === updatedAttacker.id) {
+					return {
+						...changeMovePP(updatedAttacker, move.name, -1),
+						moveQueue: [],
+					};
+				}
+
+				return p;
+			})
+		);
+		return;
+	}
 	if (move.name === 'haze') {
 		addMessage({
 			message: `${attacker.name} removed all stat changes with haze`,
@@ -237,6 +258,40 @@ export const handleAttack = ({
 			addMessage({ message: `It failed` });
 		}
 	}
+	if (move.name === 'belly-drum') {
+		if (updatedAttacker.damage / updatedAttacker.stats.hp > 0.5) {
+			addMessage({
+				message: `It failed`,
+			});
+		} else {
+			addMessage({
+				message: `${updatedAttacker.name} maximised Attack by drumming on its belly too hard`,
+			});
+			updatedAttacker = applyStatChangeToPokemon(
+				{
+					...updatedAttacker,
+					damage: updatedAttacker.damage + updatedAttacker.stats.hp / 2,
+				},
+				'attack',
+				6,
+				true,
+				battleFieldEffects,
+				addMessage
+			);
+		}
+	}
+	if (move.name === 'protect') {
+		if (
+			updatedAttacker.lastUsedMove?.name === 'protect' &&
+			Math.random() > 0.5
+		) {
+			addMessage({
+				message: `It failed`,
+			});
+		} else {
+			updatedAttacker = { ...updatedAttacker, protected: true };
+		}
+	}
 
 	//updated Target
 	let updatedTarget = { ...target };
@@ -293,6 +348,13 @@ export const handleAttack = ({
 			};
 		}
 	}
+	if (move.name === 'foresight') {
+		updatedTarget = applySecondaryAilmentToPokemon({
+			pokemon: updatedTarget,
+			addMessage,
+			ailment: 'foresighted',
+		});
+	}
 
 	const isFlying =
 		updatedTarget.moveQueue.length > 0 &&
@@ -346,16 +408,20 @@ export const handleAttack = ({
 	}
 	if (
 		move.name === 'thief' &&
-		updatedTarget.heldItemName &&
-		!updatedAttacker.heldItemName
+		updatedTarget.ability !== 'sticky-hold' &&
+		getHeldItem(updatedTarget, false) &&
+		!getHeldItem(updatedAttacker, false)
 	) {
 		addMessage({
-			message: `${updatedAttacker.name} stole a ${updatedTarget.heldItemName} from ${updatedTarget.name}`,
+			message: `${updatedAttacker.name} stole a ${getHeldItem(
+				updatedTarget,
+				false
+			)} from ${updatedTarget.name}`,
 		});
 
 		updatedAttacker = {
 			...updatedAttacker,
-			heldItemName: updatedTarget.heldItemName,
+			heldItemName: getHeldItem(updatedTarget, false),
 		};
 		updatedTarget = { ...updatedTarget, heldItemName: undefined };
 	}
@@ -480,6 +546,7 @@ export const handleAttack = ({
 			healAmount: Math.floor(updatedTarget.stats.hp * LEECH_DAMAGE_FACTOR),
 		});
 	}
+
 	//apply stat changes
 	if (selfTargeting || move.data.meta.category.name === 'damage+raise') {
 		updatedAttacker = applyAttackStatChanges(
@@ -514,6 +581,7 @@ export const handleAttack = ({
 			updatedAttacker,
 			'paralysis',
 			addMessage,
+			battleWeather,
 			`by ${target.data.name}'s static`
 		);
 		updatedAttacker = b;
@@ -529,6 +597,7 @@ export const handleAttack = ({
 			updatedAttacker,
 			'burn',
 			addMessage,
+			battleWeather,
 			`by ${target.data.name}'s flame body`
 		);
 		updatedAttacker = b;
@@ -559,6 +628,7 @@ export const handleAttack = ({
 			updatedAttacker,
 			'poison',
 			addMessage,
+			battleWeather,
 			`by ${target.data.name}'s poison point`
 		);
 		updatedAttacker = b;
@@ -578,6 +648,7 @@ export const handleAttack = ({
 				getRandomIndex(possibleAilments.length)
 			] as PrimaryAilment['type'],
 			addMessage,
+			battleWeather,
 			`by ${target.data.name}'s effect spore`
 		);
 		updatedAttacker = b;
@@ -621,7 +692,10 @@ export const handleAttack = ({
 		]);
 		if (consumedHeldItem) {
 			addMessage({
-				message: `${updatedTarget.name} consumed its ${updatedTarget.heldItemName} to reduce the damage`,
+				message: `${updatedTarget.name} consumed its ${getHeldItem(
+					updatedTarget,
+					false
+				)} to reduce the damage`,
 			});
 		}
 		updatedTarget = {
@@ -636,7 +710,9 @@ export const handleAttack = ({
 				wasPhysical: move.data.damage_class.name === 'physical',
 				wasSpecial: move.data.damage_class.name === 'special',
 			},
-			heldItemName: consumedHeldItem ? undefined : updatedTarget.heldItemName,
+			heldItemName: consumedHeldItem
+				? undefined
+				: getHeldItem(updatedTarget, false),
 			biding: updatedTarget.biding
 				? {
 						...updatedTarget.biding,
@@ -651,23 +727,29 @@ export const handleAttack = ({
 				return move.data.meta.drain;
 			}
 			if (
-				updatedTarget.heldItemName === 'jaboca-berry' &&
+				getHeldItem(updatedTarget) === 'jaboca-berry' &&
 				move.data.damage_class.name === 'physical'
 			) {
-				updatedTarget = { ...updatedTarget, heldItemName: undefined };
 				addMessage({
-					message: `${updatedTarget.name} somehow used its ${updatedTarget.heldItemName} to damage ${updatedAttacker.name}`,
+					message: `${updatedTarget.name} somehow used its ${getHeldItem(
+						updatedTarget,
+						false
+					)} to damage ${updatedAttacker.name}`,
 				});
+				updatedTarget = { ...updatedTarget, heldItemName: undefined };
 				return -12.5;
 			}
 			if (
-				updatedTarget.heldItemName === 'rowap-berry' &&
+				getHeldItem(updatedTarget) === 'rowap-berry' &&
 				move.data.damage_class.name === 'special'
 			) {
-				updatedTarget = { ...updatedTarget, heldItemName: undefined };
 				addMessage({
-					message: `${updatedTarget.name} somehow used its ${updatedTarget.heldItemName} to damage ${updatedAttacker.name}`,
+					message: `${updatedTarget.name} somehow used its ${getHeldItem(
+						updatedTarget,
+						false
+					)} to damage ${updatedAttacker.name}`,
 				});
+				updatedTarget = { ...updatedTarget, heldItemName: undefined };
 				return -12.5;
 			}
 		};
@@ -715,7 +797,8 @@ export const handleAttack = ({
 				updatedTarget,
 				updatedAttacker,
 				move,
-				addMessage
+				addMessage,
+				battleWeather
 			);
 		updatedAttacker = a;
 		updatedTarget = b;
@@ -829,6 +912,35 @@ export const handleAttack = ({
 				newType: move.data.type.name,
 			});
 		}
+
+		if (move.name === 'destiny-bond') {
+			updatedTarget = applySecondaryAilmentToPokemon({
+				pokemon: updatedTarget,
+				ailment: 'destiny-bonded',
+				addMessage,
+				targetId: updatedAttacker.id,
+			});
+		}
+		if (move.name === 'perish-song') {
+			updatedTarget = applySecondaryAilmentToPokemon({
+				pokemon: updatedTarget,
+				ailment: 'perish-songed',
+				addMessage,
+			});
+		}
+	}
+
+	//Aftermath
+	if (
+		isKO(updatedTarget) &&
+		updatedTarget.ability === 'aftermath' &&
+		contactMoves.includes(move.name)
+	) {
+		addMessage({ message: `${updatedAttacker.name} is hurt by aftermath` });
+		updatedAttacker = {
+			...updatedAttacker,
+			damage: Math.floor(updatedAttacker.damage + updatedAttacker.stats.hp / 4),
+		};
 	}
 
 	setPokemon((pokemon) =>
@@ -838,20 +950,20 @@ export const handleAttack = ({
 				p.id === updatedAttacker.id
 			) {
 				return {
-					...checkAndHandleFainting(updatedAttacker, addMessage),
+					...checkAndHandleFainting(updatedAttacker, pokemon, addMessage),
 					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
 					biding: updatedAttacker.moveQueue.length > 0 ? p.biding : undefined,
 				};
 			}
 			if (p.id === updatedAttacker.id) {
 				return {
-					...checkAndHandleFainting(updatedAttacker, addMessage),
+					...checkAndHandleFainting(updatedAttacker, pokemon, addMessage),
 					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
 					biding: updatedAttacker.moveQueue.length > 0 ? p.biding : undefined,
 				};
 			}
 			if (p.id === updatedTarget.id) {
-				return checkAndHandleFainting(updatedTarget, addMessage);
+				return checkAndHandleFainting(updatedTarget, pokemon, addMessage);
 			}
 			return p;
 		})

@@ -3,6 +3,7 @@ import { PARA_SPEED_FACTOR } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { calculateModifiedStat } from './calculateModifiedStat';
+import { getHeldItem } from './getHeldItem';
 
 const calculateTotalSpeed = (
 	a: BattlePokemon,
@@ -21,9 +22,12 @@ const calculateTotalSpeed = (
 	)
 		? 2
 		: 1;
-	const machoBraceFactor = a.heldItemName === 'macho-brace' ? 0.5 : 1;
+	const machoBraceFactor = getHeldItem(a) === 'macho-brace' ? 0.5 : 1;
 
-	const quickfeetFactor = a.primaryAilment ? 1.5 : 1;
+	const quickfeetFactor =
+		a.primaryAilment && a.ability === 'quick-feet' ? 1.5 : 1;
+
+	const stallFactor = a.ability === 'stall' ? 0 : 1;
 
 	return (
 		calculateModifiedStat(a.stats.speed, a.statBoosts.speed) *
@@ -32,7 +36,8 @@ const calculateTotalSpeed = (
 		chlorophyllFactorA *
 		unburdenFactorA *
 		machoBraceFactor *
-		quickfeetFactor
+		quickfeetFactor *
+		stallFactor
 	);
 };
 export const sortByPriority = (
@@ -68,11 +73,11 @@ export const sortByPriority = (
 	}
 
 	const aPriority =
-		a.heldItemName === 'quick-claw' && Math.random() > 0.5
+		getHeldItem(a) === 'quick-claw' && Math.random() > 0.5
 			? 10
 			: aMove?.data.priority ?? 0;
 	const bPriority =
-		b.heldItemName === 'quick-claw' && Math.random() > 0.5
+		getHeldItem(b) === 'quick-claw' && Math.random() > 0.5
 			? 10
 			: bMove?.data.priority ?? 0;
 

@@ -3,6 +3,7 @@ import { MdEdit } from 'react-icons/md';
 import { MoveName } from '../../../constants/checkLists/movesCheckList';
 import { battleSpriteSize } from '../../../constants/gameData';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
+import { getHeldItem } from '../../../functions/getHeldItem';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getStats } from '../../../functions/getStats';
 import { getTypeNames } from '../../../functions/getTypeNames';
@@ -52,6 +53,8 @@ export const OwnedPokemonCardContent = ({
 	const typeNames = getTypeNames({ ...ownedPokemon, data });
 	const { level } = calculateLevelData(ownedPokemon.xp);
 
+	const heldItem = getHeldItem(ownedPokemon);
+
 	return (
 		<div>
 			<NickNameModal
@@ -61,11 +64,11 @@ export const OwnedPokemonCardContent = ({
 				setNickName={setNickName}
 			/>
 			<SelectionListModal
-				selected={ownedPokemon.heldItemName ? [ownedPokemon.heldItemName] : []}
+				selected={heldItem ? [heldItem] : []}
 				open={heldItemMenuOpen}
 				close={() => setHeldItemMenuOpen(false)}
 				options={[
-					ownedPokemon.heldItemName,
+					getHeldItem(ownedPokemon),
 					...Object.entries(inventory)
 						.filter(([, amount]) => amount > 0)
 						.map(([item]) => item),
@@ -73,10 +76,10 @@ export const OwnedPokemonCardContent = ({
 				min={1}
 				max={1}
 				toggle={(item) => {
-					if (ownedPokemon.heldItemName) {
+					if (getHeldItem(ownedPokemon)) {
 						takeHeldItem();
 					}
-					if (item !== ownedPokemon.heldItemName) {
+					if (item !== getHeldItem(ownedPokemon)) {
 						giveHeldItem(item as ItemType);
 					}
 
@@ -110,11 +113,7 @@ export const OwnedPokemonCardContent = ({
 								: undefined
 						}
 						thirdPlanetUrl={getItemUrl(ownedPokemon.ball)}
-						fourthPlanetUrl={
-							ownedPokemon.heldItemName
-								? getItemUrl(ownedPokemon.heldItemName)
-								: undefined
-						}
+						fourthPlanetUrl={heldItem ? getItemUrl(heldItem) : undefined}
 					/>
 					<div>
 						<HpBar
@@ -133,7 +132,7 @@ export const OwnedPokemonCardContent = ({
 						<PrimaryAilmentIcon primaryAilment={ownedPokemon.primaryAilment} />
 
 						<h5 style={{ display: 'flex', gap: '.5rem' }}>
-							Held Item: {ownedPokemon.heldItemName ?? 'none'}{' '}
+							Held Item: {heldItem ?? '-'}{' '}
 							<MdEdit
 								size={battleSpriteSize / 2}
 								onClick={() => setHeldItemMenuOpen(true)}
@@ -181,11 +180,7 @@ export const OwnedPokemonCardContent = ({
 						<HappinessIcon value={ownedPokemon.happiness} />
 					</div>
 				</div>
-				<MovesDisplay
-					ownedPokemon={ownedPokemon}
-					data={data}
-					setMoves={setMoves}
-				/>
+				<MovesDisplay ownedPokemon={ownedPokemon} setMoves={setMoves} />
 				<StatDisplay ownedPokemon={ownedPokemon} data={data} />{' '}
 				<EvoInfo
 					ownedPokemon={ownedPokemon}

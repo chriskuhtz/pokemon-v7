@@ -7,6 +7,7 @@ import { MoveName } from '../constants/checkLists/movesCheckList';
 import { calculateLevelData } from '../functions/calculateLevelData';
 import { getRandomEntry } from '../functions/filterTargets';
 import { getEvAwards } from '../functions/getEvAwards';
+import { getHeldItem } from '../functions/getHeldItem';
 import { getStats } from '../functions/getStats';
 import { deAlternate } from '../functions/handleAlternateForms';
 import { maybeGetHeldItemFromData } from '../functions/maybeGetHeldItemFromData';
@@ -49,6 +50,20 @@ export const useGetBattleTeam = (
 				).json();
 
 				const fetchedData = await data;
+
+				const speciesData: Promise<PokemonSpeciesData> = await fetch(
+					`https://pokeapi.co/api/v2/pokemon-species/${deAlternate(name)}`
+				)
+					.then((res) => {
+						return res.json();
+					})
+					.catch(() => {
+						return {
+							capture_rate: 100,
+							base_happiness: 70,
+							growth_rate: { name: 'medium' },
+						};
+					});
 
 				const { level } = calculateLevelData(xp);
 
@@ -94,18 +109,6 @@ export const useGetBattleTeam = (
 						? availableMoves[3].move.name
 						: pokemon.fourthMove?.name;
 
-				const speciesData: Promise<PokemonSpeciesData> = await fetch(
-					`https://pokeapi.co/api/v2/pokemon-species/${deAlternate(name)}`
-				)
-					.then((res) => {
-						return res.json();
-					})
-					.catch(() => {
-						return {
-							capture_rate: 100,
-							base_happiness: 70,
-						};
-					});
 				const firstMoveData: Promise<MoveDto> = (
 					await fetch(`https://pokeapi.co/api/v2/move/${firstMoveName}`)
 				).json();
@@ -173,14 +176,14 @@ export const useGetBattleTeam = (
 
 				const heldItemName = assignHeldItem
 					? maybeGetHeldItemFromData(fetchedData)
-					: pokemon.heldItemName;
+					: getHeldItem(pokemon);
 				const battleMon: BattlePokemon = {
 					...pokemon,
+					growthRate: (await speciesData).growth_rate.name,
 					gender,
 					ability: ability,
 					initAbility: ability,
 					heldItemName,
-
 					roundsInBattle: 0,
 					secondaryAilments: [],
 					moveQueue: [],
@@ -207,6 +210,7 @@ export const useGetBattleTeam = (
 						: pokemon.effortValues,
 					evAwards: getEvAwards(fetchedData.stats),
 					participatedInBattle: false,
+					protected: false,
 				};
 
 				return battleMon;

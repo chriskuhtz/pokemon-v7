@@ -14,6 +14,10 @@ export const applyEndOfTurnWeatherDamage = (
 	addMessage: (x: string) => void,
 	weather: WeatherType | undefined
 ): BattlePokemon => {
+	if (pokemon.ability === 'magic-guard') {
+		addMessage(`${pokemon.name} prevents damage with magic-guard`);
+		return pokemon;
+	}
 	if (weather === 'sandstorm') {
 		if (
 			getTypeNames(pokemon).some((t) =>

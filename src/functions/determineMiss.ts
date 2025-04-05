@@ -1,4 +1,5 @@
 import { flyHitMoves, ohkoMoves } from '../constants/ohkoMoves';
+import { passThroughProtectMoves } from '../constants/passThroughProtectMoves';
 import { soundBasedMoves } from '../constants/soundBasedMoves';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -9,12 +10,14 @@ import {
 	getCompoundEyesFactor,
 	getHustleFactor,
 } from './getCompoundEyesFactor';
+import { getHeldItem } from './getHeldItem';
 import { isSelfTargeting } from './isSelfTargeting';
 
 export type MissReason =
 	| 'SOUNDPROOF'
 	| 'ATTACKER_NOT_ASLEEP'
-	| 'TARGET_NOT_ASLEEP';
+	| 'TARGET_NOT_ASLEEP'
+	| 'PROTECTED';
 
 export const getWeatherAccuracyFactor = (
 	target: BattlePokemon,
@@ -43,7 +46,12 @@ export const determineMiss = (
 	targetIsUnderground?: boolean
 ): { miss: boolean; reason?: MissReason } => {
 	const selfTargeting = isSelfTargeting(attack.data);
-
+	if (target.protected && !passThroughProtectMoves.includes(attack.name)) {
+		return { miss: true, reason: 'PROTECTED' };
+	}
+	if (attacker.ability === 'no-guard' || target.ability === 'no-guard') {
+		return { miss: false };
+	}
 	if (attack.isAMultiHit) {
 		return { miss: false };
 	}
@@ -101,7 +109,7 @@ export const determineMiss = (
 
 	const compoundEyesFactor = getCompoundEyesFactor(attacker, attack);
 	const hustleFactor = getHustleFactor(attacker, attack);
-	const brightPowderFactor = target.heldItemName === 'bright-powder' ? 0.9 : 1;
+	const brightPowderFactor = getHeldItem(target) === 'bright-powder' ? 0.9 : 1;
 	const thunderWeatherFactor =
 		attack.name === 'thunder' && weather === 'sun' ? 0.5 : 1;
 

@@ -1066,12 +1066,32 @@ export const movesCheckList: {
 
 	{ name: 'sketch', url: 'https://pokeapi.co/api/v2/move/166/', handled: true },
 	{ name: 'spite', url: 'https://pokeapi.co/api/v2/move/180/', handled: true },
-	{ name: 'protect', url: 'https://pokeapi.co/api/v2/move/182/' },
-	{ name: 'belly-drum', url: 'https://pokeapi.co/api/v2/move/187/' },
-	{ name: 'spikes', url: 'https://pokeapi.co/api/v2/move/191/' },
-	{ name: 'foresight', url: 'https://pokeapi.co/api/v2/move/193/' },
-	{ name: 'destiny-bond', url: 'https://pokeapi.co/api/v2/move/194/' },
-	{ name: 'perish-song', url: 'https://pokeapi.co/api/v2/move/195/' },
+	{
+		name: 'belly-drum',
+		url: 'https://pokeapi.co/api/v2/move/187/',
+		handled: true,
+	},
+	{ name: 'spikes', url: 'https://pokeapi.co/api/v2/move/191/', handled: true },
+	{
+		name: 'protect',
+		url: 'https://pokeapi.co/api/v2/move/182/',
+		handled: true,
+	},
+	{
+		name: 'foresight',
+		url: 'https://pokeapi.co/api/v2/move/193/',
+		handled: true,
+	},
+	{
+		name: 'destiny-bond',
+		url: 'https://pokeapi.co/api/v2/move/194/',
+		handled: true,
+	},
+	{
+		name: 'perish-song',
+		url: 'https://pokeapi.co/api/v2/move/195/',
+		handled: true,
+	},
 	{ name: 'detect', url: 'https://pokeapi.co/api/v2/move/197/' },
 	{ name: 'lock-on', url: 'https://pokeapi.co/api/v2/move/199/' },
 	{ name: 'sandstorm', url: 'https://pokeapi.co/api/v2/move/201/' },
@@ -2147,6 +2167,12 @@ export const handledMoves = [
 	'mirror-move',
 	'sketch',
 	'spite',
+	'belly-drum',
+	'spikes',
+	'protect',
+	'foresight',
+	'destiny-bond',
+	'perish-song',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

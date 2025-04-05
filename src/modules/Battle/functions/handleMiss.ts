@@ -13,6 +13,9 @@ export const handleMiss = (
 	underPressure: boolean,
 	reason?: MissReason
 ) => {
+	if (reason === 'PROTECTED') {
+		addMessage({ message: 'The Target protected itself' });
+	}
 	if (reason === 'SOUNDPROOF') {
 		addMessage({ message: 'The Target has soundproof' });
 	}
