@@ -27,5 +27,8 @@ export const getHeldItemFactor = (
 	) {
 		return 1.2;
 	}
+	if (heldItem === 'light-ball' && attackerName.includes('pikachu')) {
+		return 2;
+	}
 	return 1;
 };

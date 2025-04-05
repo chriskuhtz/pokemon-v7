@@ -134,6 +134,7 @@ export const heldItems = [
 	'silver-powder',
 	'dragon-scale',
 	'leftovers',
+	'light-ball',
 ] as const;
 export const valuables = [
 	'shoal-salt',

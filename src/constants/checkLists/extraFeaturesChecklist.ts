@@ -307,4 +307,7 @@ export const extraFeatureCheckList: {
 	{ name: 'play button for pokemon lofi' },
 	{ name: 'moving background (water,flowers)' },
 	{ name: 'data collection module (name, nCaught,nDefeated)' },
+	{ name: 'quest: light ball pikachu' },
+	{ name: 'quest: different pikachus' },
+	{ name: 'non regional to regional evos, pikachu => alola raichu' },
 ];

@@ -958,7 +958,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/212/',
 		handled: true,
 	},
-	{ name: 'light-ball', url: 'https://pokeapi.co/api/v2/item/213/' },
+	{
+		name: 'light-ball',
+		url: 'https://pokeapi.co/api/v2/item/213/',
+		handled: true,
+	},
 	{ name: 'soft-sand', url: 'https://pokeapi.co/api/v2/item/214/' },
 	{ name: 'hard-stone', url: 'https://pokeapi.co/api/v2/item/215/' },
 	{ name: 'miracle-seed', url: 'https://pokeapi.co/api/v2/item/216/' },
