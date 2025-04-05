@@ -348,6 +348,15 @@ const useSaveFile = (
 			  ]
 			: saveFile.pokemon;
 
+		const rewardStrings: string[] = [
+			`${quest.researchPoints} Research Points`,
+			...Object.entries(reward).map(([item, amount]) => `${amount} ${item}`),
+			quest.rewardPokemon ? `a ${quest.rewardPokemon.name}` : undefined,
+		].filter((s) => s !== undefined);
+
+		addMessage({
+			message: `Received ${rewardStrings.join('+ ')} `,
+		});
 		setSaveFile({
 			...saveFile,
 			bag: updatedInventory,
