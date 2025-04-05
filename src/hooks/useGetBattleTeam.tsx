@@ -209,6 +209,7 @@ export const useGetBattleTeam = (
 						: pokemon.effortValues,
 					evAwards: getEvAwards(fetchedData.stats),
 					participatedInBattle: false,
+					protected: false,
 				};
 
 				return battleMon;

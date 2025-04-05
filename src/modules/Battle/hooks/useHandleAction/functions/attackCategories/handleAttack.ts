@@ -279,6 +279,18 @@ export const handleAttack = ({
 			);
 		}
 	}
+	if (move.name === 'protect') {
+		if (
+			updatedAttacker.lastUsedMove?.name === 'protect' &&
+			Math.random() > 0.5
+		) {
+			addMessage({
+				message: `It failed`,
+			});
+		} else {
+			updatedAttacker = { ...updatedAttacker, protected: true };
+		}
+	}
 
 	//updated Target
 	let updatedTarget = { ...target };

@@ -1,4 +1,5 @@
 import { flyHitMoves, ohkoMoves } from '../constants/ohkoMoves';
+import { passThroughProtectMoves } from '../constants/passThroughProtectMoves';
 import { soundBasedMoves } from '../constants/soundBasedMoves';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -14,7 +15,8 @@ import { isSelfTargeting } from './isSelfTargeting';
 export type MissReason =
 	| 'SOUNDPROOF'
 	| 'ATTACKER_NOT_ASLEEP'
-	| 'TARGET_NOT_ASLEEP';
+	| 'TARGET_NOT_ASLEEP'
+	| 'PROTECTED';
 
 export const getWeatherAccuracyFactor = (
 	target: BattlePokemon,
@@ -43,6 +45,9 @@ export const determineMiss = (
 	targetIsUnderground?: boolean
 ): { miss: boolean; reason?: MissReason } => {
 	const selfTargeting = isSelfTargeting(attack.data);
+	if (target.protected && !passThroughProtectMoves.includes(attack.name)) {
+		return { miss: true, reason: 'PROTECTED' };
+	}
 	if (attacker.ability === 'no-guard' || target.ability === 'no-guard') {
 		return { miss: false };
 	}
