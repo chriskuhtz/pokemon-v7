@@ -427,6 +427,8 @@ export const calculateDamage = (
 		typeFactor > 1
 			? 0.75
 			: 1;
+	const recklessFactor =
+		attacker.ability === 'reckless' && attack.data.meta.drain < 0 ? 1.2 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -469,7 +471,8 @@ export const calculateDamage = (
 				choiceBandFactor *
 				technicianFactor *
 				tintedLensFactor *
-				filterFactor
+				filterFactor *
+				recklessFactor
 		),
 		1
 	);
