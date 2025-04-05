@@ -38,6 +38,10 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 		setWeather('sandstorm');
 		addMessage({ message: `${user.data.name} summoned a sand storm` });
 	}
+	if (user.ability === 'snow-warning' && currentWeather !== 'hail') {
+		setWeather('hail');
+		addMessage({ message: `${user.data.name} summoned a hail storm` });
+	}
 	if (
 		currentWeather &&
 		(user.ability === 'air-lock' || user.ability === 'cloud-nine')
