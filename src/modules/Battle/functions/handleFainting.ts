@@ -15,8 +15,19 @@ export const checkAndHandleFainting = (
 		(p) => p.id === destinyBondPartnerId
 	);
 
-	if (isKO(p) || (destinyBondPartner && isKO(destinyBondPartner))) {
+	if (isKO(p)) {
+		if (p.endured) {
+			addMessage({ message: `${p.data.name} endured the attack` });
+			return { ...p, damage: p.stats.hp - 1, endured: false };
+		}
 		addMessage({ message: `${p.data.name} fainted` });
+
+		return { ...p, status: 'FAINTED', moveQueue: [], roundsInBattle: 0 };
+	}
+	if (destinyBondPartner && isKO(destinyBondPartner)) {
+		addMessage({
+			message: `${p.data.name} fainted because of destiny bond with ${destinyBondPartner.name}`,
+		});
 
 		return { ...p, status: 'FAINTED', moveQueue: [], roundsInBattle: 0 };
 	}

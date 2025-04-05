@@ -298,7 +298,8 @@ export const handleAttack = ({
 	if (move.name === 'protect' || move.name === 'detect') {
 		if (
 			(updatedAttacker.lastUsedMove?.name === 'protect' ||
-				updatedAttacker.lastUsedMove?.name === 'detect') &&
+				updatedAttacker.lastUsedMove?.name === 'detect' ||
+				updatedAttacker.lastUsedMove?.name === 'endure') &&
 			Math.random() > 0.5
 		) {
 			addMessage({
@@ -306,6 +307,20 @@ export const handleAttack = ({
 			});
 		} else {
 			updatedAttacker = { ...updatedAttacker, protected: true };
+		}
+	}
+	if (move.name === 'endure') {
+		if (
+			(updatedAttacker.lastUsedMove?.name === 'protect' ||
+				updatedAttacker.lastUsedMove?.name === 'detect' ||
+				updatedAttacker.lastUsedMove?.name === 'endure') &&
+			Math.random() > 0.5
+		) {
+			addMessage({
+				message: `It failed`,
+			});
+		} else {
+			updatedAttacker = { ...updatedAttacker, endured: true };
 		}
 	}
 

@@ -27,6 +27,7 @@ export const reduceSecondaryAilmentDurations = (
 		})
 		.filter((a) => a !== undefined);
 	updated.protected = false;
+	updated.endured = false;
 
 	return updated;
 };

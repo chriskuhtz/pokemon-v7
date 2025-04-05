@@ -1114,7 +1114,7 @@ export const movesCheckList: {
 		handled: true,
 	},
 	{ name: 'hail', url: 'https://pokeapi.co/api/v2/move/258/', handled: true },
-	{ name: 'endure', url: 'https://pokeapi.co/api/v2/move/203/' },
+	{ name: 'endure', url: 'https://pokeapi.co/api/v2/move/203/', handled: true },
 	{ name: 'rollout', url: 'https://pokeapi.co/api/v2/move/205/' },
 	{ name: 'false-swipe', url: 'https://pokeapi.co/api/v2/move/206/' },
 	{ name: 'milk-drink', url: 'https://pokeapi.co/api/v2/move/208/' },
@@ -2195,6 +2195,7 @@ export const handledMoves = [
 	'sunny-day',
 	'rain-dance',
 	'hail',
+	'endure',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

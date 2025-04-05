@@ -40,6 +40,7 @@ export interface BattlePokemon extends OwnedPokemon {
 		attack: BattleAttack;
 	};
 	protected: boolean;
+	endured: boolean;
 	lastUsedMove?: BattleMove;
 	putMimicbacktoSlot?: number;
 	initAbility: AbilityName;

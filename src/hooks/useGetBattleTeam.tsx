@@ -211,6 +211,7 @@ export const useGetBattleTeam = (
 					evAwards: getEvAwards(fetchedData.stats),
 					participatedInBattle: false,
 					protected: false,
+					endured: false,
 				};
 
 				return battleMon;
