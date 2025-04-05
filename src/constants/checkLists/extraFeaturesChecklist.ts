@@ -236,6 +236,7 @@ export const extraFeatureCheckList: {
 	{ name: 'achieve cooking level x quest', handled: true },
 	{ name: 'quest: nidoking and nidoqueen', handled: true },
 	{ name: 'tileset per map', handled: true },
+	{ name: 'fix camp map' },
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'In double battle both pokemon can throw single last poke ball' },
 	{ name: 'improve held-item+trade evo condition' },
