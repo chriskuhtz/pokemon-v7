@@ -16,8 +16,15 @@ const palletTown: TileMap = {
 	width: 24,
 	gap: 0,
 };
+const route1base: TileMap = {
+	src: "url('/tilesets/route1base.png')",
+	height: 7,
+	width: 24,
+	gap: 0,
+};
 
 export const tileMapsRecord: Record<string, TileMap> = {
 	'/tilesets/masterSheet.png': masterSheet,
 	'/tilesets/palletTown.png': palletTown,
+	'/tilesets/route1base.png': route1base,
 };
