@@ -237,6 +237,28 @@ export const handleAttack = ({
 			addMessage({ message: `It failed` });
 		}
 	}
+	if (move.name === 'belly-drum') {
+		if (updatedAttacker.damage / updatedAttacker.stats.hp > 0.5) {
+			addMessage({
+				message: `It failed`,
+			});
+		} else {
+			addMessage({
+				message: `${updatedAttacker.name} maximised Attack by drumming on its belly too hard`,
+			});
+			updatedAttacker = applyStatChangeToPokemon(
+				{
+					...updatedAttacker,
+					damage: updatedAttacker.damage + updatedAttacker.stats.hp / 2,
+				},
+				'attack',
+				6,
+				true,
+				battleFieldEffects,
+				addMessage
+			);
+		}
+	}
 
 	//updated Target
 	let updatedTarget = { ...target };
