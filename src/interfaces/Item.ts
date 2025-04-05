@@ -146,6 +146,9 @@ export const heldItems = [
 	'soft-sand',
 	'hard-stone',
 	'miracle-seed',
+	'black-glasses',
+	'black-belt',
+	'magnet',
 ] as const;
 export const valuables = [
 	'shoal-salt',
@@ -528,10 +531,10 @@ export const superEffectiveSaveTable: Record<PokemonType, ItemType> = {
 export const typeBoostItemTable: Record<PokemonType, ItemType> = {
 	fire: 'cherish-ball',
 	water: 'cherish-ball',
-	electric: 'cherish-ball',
+	electric: 'magnet',
 	grass: 'miracle-seed',
 	ice: 'cherish-ball',
-	fighting: 'cherish-ball',
+	fighting: 'black-belt',
 	poison: 'cherish-ball',
 	ground: 'soft-sand',
 	flying: 'cherish-ball',
@@ -540,7 +543,7 @@ export const typeBoostItemTable: Record<PokemonType, ItemType> = {
 	rock: 'hard-stone',
 	ghost: 'cherish-ball',
 	dragon: 'cherish-ball',
-	dark: 'cherish-ball',
+	dark: 'black-glasses',
 	steel: 'metal-coat',
 	normal: 'cherish-ball',
 	fairy: 'cherish-ball',
