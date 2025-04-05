@@ -58,6 +58,7 @@ export const reduceBattlePokemonToOwnedPokemon = (
 		intrinsicValues: newMon.intrinsicValues,
 		shiny: newMon.shiny,
 		unlockedMoves: newMon.unlockedMoves,
+		growthRate: newMon.growthRate,
 	};
 
 	if (heal) {

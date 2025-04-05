@@ -6,6 +6,7 @@ import { PokemonName } from '../constants/pokemonNames';
 import { PrimaryAilment } from './Ailment';
 import { ItemType, PokeballType } from './Item';
 import { Nature } from './Natures';
+import { GrowthRateName } from './PokemonSpeciesData';
 import { StatObject } from './StatObject';
 
 export interface OwnedPokemonMove {
@@ -50,4 +51,5 @@ export interface OwnedPokemon {
 	heightModifier?: number;
 	fixedAbility?: boolean;
 	unlockedMoves: MoveName[];
+	growthRate: GrowthRateName;
 }

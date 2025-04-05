@@ -50,6 +50,20 @@ export const useGetBattleTeam = (
 
 				const fetchedData = await data;
 
+				const speciesData: Promise<PokemonSpeciesData> = await fetch(
+					`https://pokeapi.co/api/v2/pokemon-species/${deAlternate(name)}`
+				)
+					.then((res) => {
+						return res.json();
+					})
+					.catch(() => {
+						return {
+							capture_rate: 100,
+							base_happiness: 70,
+							growth_rate: { name: 'medium' },
+						};
+					});
+
 				const { level } = calculateLevelData(xp);
 
 				const possibleAbilities = [
@@ -94,18 +108,6 @@ export const useGetBattleTeam = (
 						? availableMoves[3].move.name
 						: pokemon.fourthMove?.name;
 
-				const speciesData: Promise<PokemonSpeciesData> = await fetch(
-					`https://pokeapi.co/api/v2/pokemon-species/${deAlternate(name)}`
-				)
-					.then((res) => {
-						return res.json();
-					})
-					.catch(() => {
-						return {
-							capture_rate: 100,
-							base_happiness: 70,
-						};
-					});
 				const firstMoveData: Promise<MoveDto> = (
 					await fetch(`https://pokeapi.co/api/v2/move/${firstMoveName}`)
 				).json();
@@ -176,11 +178,11 @@ export const useGetBattleTeam = (
 					: pokemon.heldItemName;
 				const battleMon: BattlePokemon = {
 					...pokemon,
+					growthRate: (await speciesData).growth_rate.name,
 					gender,
 					ability: ability,
 					initAbility: ability,
 					heldItemName,
-
 					roundsInBattle: 0,
 					secondaryAilments: [],
 					moveQueue: [],
