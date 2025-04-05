@@ -327,6 +327,10 @@ export const handleAttack = ({
 	if (move.name === 'defense-curl') {
 		updatedAttacker.defenseCurled = true;
 	}
+	if (move.name === 'fury-cutter') {
+		updatedAttacker.furyCutterStack =
+			(updatedAttacker.furyCutterStack ?? 0) + 1;
+	} else updatedAttacker.furyCutterStack = 0;
 
 	//updated Target
 	let updatedTarget = { ...target };

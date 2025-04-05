@@ -76,6 +76,9 @@ export const getPower = (
 	targetWeight: number,
 	attackerLevel: number
 ) => {
+	if (attack.name === 'fury-cutter') {
+		return (attack.data.power ?? 0) * (attacker.furyCutterStack ?? 1);
+	}
 	if (attack.name === 'low-kick') {
 		return getLowKickPower(targetWeight);
 	}
