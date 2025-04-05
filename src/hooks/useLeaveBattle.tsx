@@ -1,5 +1,6 @@
 import { useCallback, useContext, useMemo } from 'react';
 import { addPokemonToDex } from '../functions/addPokemonToDex';
+import { calculateLevelData } from '../functions/calculateLevelData';
 import { getRandomEntry } from '../functions/filterTargets';
 import { getHeldItem } from '../functions/getHeldItem';
 import { isKO } from '../functions/isKo';
@@ -7,6 +8,7 @@ import { reduceBattlePokemonToOwnedPokemon } from '../functions/reduceBattlePoke
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { Inventory, joinInventories } from '../interfaces/Inventory';
 import { pickupTable } from '../interfaces/Item';
+import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { SaveFileContext } from './useSaveFile';
 
 export interface LeaveBattlePayload {
@@ -76,9 +78,16 @@ export const useLeaveBattle = () => {
 			);
 
 			//check pickup
-			const pickUpCheckedTeam = ownedTeam.map((p) => {
+			const pickUpCheckedTeam: OwnedPokemon[] = ownedTeam.map((p) => {
 				if (p.ability === 'pickup' && !getHeldItem(p) && Math.random() < 0.1) {
 					return { ...p, heldItemName: getRandomEntry(pickupTable) };
+				}
+				if (p.ability === 'honey-gather' && !getHeldItem(p)) {
+					const lvl = calculateLevelData(p.xp).level;
+					const chance = 0.05 + lvl * 0.0045;
+					if (Math.random() < chance) {
+						return { ...p, heldItemName: 'honey' };
+					}
 				}
 
 				return p;
