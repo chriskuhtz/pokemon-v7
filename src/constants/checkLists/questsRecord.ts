@@ -328,6 +328,9 @@ export const questNames = [
 	'defeat falkner',
 	'wake a snorlax',
 	'catch all evolutions of eevee',
+	'reach cooking skill 20',
+	'reach cooking skill 50',
+	'reach cooking skill 100',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -1384,6 +1387,45 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'sylveon',
 		],
 		kind: 'QUEST_LINE',
+	},
+	'reach cooking skill 20': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'invite chef grandma',
+		researchPoints: 20,
+		rewardItems: {
+			'aguav-berry': 1,
+			'babiri-berry': 1,
+			'charti-berry': 1,
+			'mago-berry': 1,
+			'grepa-berry': 1,
+		},
+		conditionFunction: (s) => !!s.cookingSkill && s.cookingSkill >= 20,
+	},
+	'reach cooking skill 50': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'invite chef grandma',
+		availableAfter: 'reach cooking skill 20',
+		researchPoints: 50,
+		rewardItems: {
+			'figy-berry': 1,
+			'leppa-berry': 1,
+			'pomeg-berry': 1,
+			'chople-berry': 1,
+			'maranga-berry': 1,
+		},
+		conditionFunction: (s) => !!s.cookingSkill && s.cookingSkill >= 50,
+	},
+	'reach cooking skill 100': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'invite chef grandma',
+		availableAfter: 'reach cooking skill 50',
+		researchPoints: 100,
+		rewardItems: {
+			'enigma-berry': 1,
+			'kee-berry': 1,
+			'magost-berry': 1,
+		},
+		conditionFunction: (s) => !!s.cookingSkill && s.cookingSkill >= 100,
 	},
 };
 

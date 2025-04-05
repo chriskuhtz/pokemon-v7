@@ -233,6 +233,7 @@ export const extraFeatureCheckList: {
 	{ name: 'inform about quest rewards', handled: true },
 	{ name: 'peat block needs sprite', handled: true },
 	{ name: 'elm: gender based evo', handled: true },
+	{ name: 'achieve cooking level x quest', handled: true },
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'In double battle both pokemon can throw single last poke ball' },
 	{ name: 'improve held-item+trade evo condition' },
@@ -243,7 +244,6 @@ export const extraFeatureCheckList: {
 	{ name: 'poison step damage' },
 	{ name: 'fly outside of battle' },
 	{ name: 'cant throw away key items like exp share' },
-
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'use Move.target as a switch case for attack handling' },
 	{ name: 'use Move.meta.category as a switch case for attack handling' },
@@ -266,9 +266,7 @@ export const extraFeatureCheckList: {
 	{ name: 'water as distinct from obstacles' },
 	{ name: 'wild apricorn trees' },
 	{ name: 'training field route' },
-	{ name: 'shortcut ledge in oreji forest maze' },
-
-	{ name: 'achieve cooking level x' },
+	{ name: 'shortcut ledge in orenji forest maze' },
 	{ name: 'retrieve item from wild pokemon (special encounter)' },
 	{ name: 'lure x pokemon' },
 	{ name: 'improve performance of mapmaker' },
