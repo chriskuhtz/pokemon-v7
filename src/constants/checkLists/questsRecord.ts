@@ -274,12 +274,14 @@ export const questNames = [
 	'defeat rowan',
 	'craft a apricorn ball',
 	'lure a pokemon with honey',
+	'evolve a combee',
 	'catch all honeytree pokemon',
 	'evolve a pokemon through level up',
 	'evolve a pokemon with a stone',
 	'evolve a pokemon with a held item',
 	'evolve a pokemon through friendship',
-	'catch vileplume and bellosom',
+	'evolve gloom into vileplume and bellosom',
+	'evolve male and female nidoran into their final form',
 	'evolve a pokemon that only evolves during the day',
 	'evolve a pokemon that only evolves at night',
 	'defeat elm',
@@ -519,6 +521,22 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		kind: 'BULLETIN',
 	},
+	'evolve a combee': {
+		rewardItems: {
+			'golden-nanab-berry': 3,
+			'golden-razz-berry': 3,
+			'golden-pinap-berry': 3,
+			'silver-nanab-berry': 3,
+			'silver-razz-berry': 3,
+			'silver-pinap-berry': 3,
+		},
+		researchPoints: 30,
+		availableAfter: 'lure a pokemon with honey',
+		conditionFunction: (s) => {
+			return s.pokedex.vespiquen.caughtOnRoutes.length > 0;
+		},
+		kind: 'BULLETIN',
+	},
 	'evolve a pokemon through level up': {
 		rewardItems: { 'thunder-stone': 1 },
 		researchPoints: 10,
@@ -546,7 +564,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'evolve a pokemon with a stone',
 	},
 	'evolve a pokemon through friendship': {
-		rewardItems: { 'leaf-stone': 1, 'sun-stone': 1 },
+		rewardItems: { 'moon-stone': 2 },
 		researchPoints: 25,
 		conditionFunction: (s) => {
 			return !!s.mileStones.hasEvolvedAPokemonWithAHeldItem;
@@ -554,7 +572,20 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 		availableAfter: 'evolve a pokemon with a held item',
 	},
-	'catch vileplume and bellosom': {
+	'evolve male and female nidoran into their final form': {
+		rewardItems: { 'leaf-stone': 1, 'sun-stone': 1 },
+		researchPoints: 30,
+		targetPokemon: ['nidoking', 'nidoqueen'],
+		conditionFunction: (s) => {
+			return (
+				s.pokedex['nidoking'].caughtOnRoutes.length > 0 &&
+				s.pokedex['nidoqueen'].caughtOnRoutes.length > 0
+			);
+		},
+		kind: 'QUEST_LINE',
+		availableAfter: 'evolve a pokemon through friendship',
+	},
+	'evolve gloom into vileplume and bellosom': {
 		rewardItems: { 'metal-coat': 1, 'black-augurite': 1 },
 		researchPoints: 30,
 		targetPokemon: ['bellossom', 'vileplume'],
@@ -567,6 +598,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 		availableAfter: 'evolve a pokemon through friendship',
 	},
+
 	'evolve a pokemon that only evolves during the day': {
 		rewardItems: { 'ultra-ball': 20 },
 		researchPoints: 25,
@@ -574,7 +606,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			return !!s.mileStones.hasEvolvedAPokemonThatNeedsDaytime;
 		},
 		kind: 'QUEST_LINE',
-		availableAfter: 'catch vileplume and bellosom',
+		availableAfter: 'evolve gloom into vileplume and bellosom',
 	},
 	'evolve a pokemon that only evolves at night': {
 		rewardItems: { 'ultra-ball': 20 },

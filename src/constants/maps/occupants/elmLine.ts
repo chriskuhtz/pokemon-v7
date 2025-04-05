@@ -72,22 +72,41 @@ export const elmLine: Occupant[] = [
 	},
 	{
 		...elmBase,
-		id: 'elm_5',
-
+		id: 'elm_3824',
 		unhandledMessage: [
-			'Some Pokemon can evolve into different species',
-			'Oddish, for example, evolves into gloom',
-			'but gloom can take different paths',
+			'Nidoran has very distinct gender differences',
+			'they only become more pronounced in its evolutions',
 		],
 		handledMessage: ['Pokemon have different evolution methods'],
-		quest: 'catch vileplume and bellosom',
+		quest: 'evolve male and female nidoran into their final form',
 		conditionFunction: (s) =>
 			s.campUpgrades['invite professor elm'] &&
 			s.quests['evolve a pokemon through level up'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon with a stone'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon with a held item'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon through friendship'] === 'COLLECTED' &&
-			s.quests['catch vileplume and bellosom'] !== 'COLLECTED',
+			s.quests['evolve male and female nidoran into their final form'] !==
+				'COLLECTED',
+	},
+	{
+		...elmBase,
+		id: 'elm_5',
+		unhandledMessage: [
+			'Some Pokemon can evolve into different species',
+			'Oddish, for example, evolves into gloom',
+			'but gloom can take different paths',
+		],
+		handledMessage: ['Pokemon have different evolution methods'],
+		quest: 'evolve gloom into vileplume and bellosom',
+		conditionFunction: (s) =>
+			s.campUpgrades['invite professor elm'] &&
+			s.quests['evolve a pokemon through level up'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon with a stone'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon with a held item'] === 'COLLECTED' &&
+			s.quests['evolve a pokemon through friendship'] === 'COLLECTED' &&
+			s.quests['evolve male and female nidoran into their final form'] ===
+				'COLLECTED' &&
+			s.quests['evolve gloom into vileplume and bellosom'] !== 'COLLECTED',
 	},
 	{
 		...elmBase,
@@ -102,7 +121,9 @@ export const elmLine: Occupant[] = [
 			s.quests['evolve a pokemon with a stone'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon with a held item'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon through friendship'] === 'COLLECTED' &&
-			s.quests['catch vileplume and bellosom'] === 'COLLECTED' &&
+			s.quests['evolve male and female nidoran into their final form'] ===
+				'COLLECTED' &&
+			s.quests['evolve gloom into vileplume and bellosom'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon that only evolves during the day'] !==
 				'COLLECTED',
 	},
@@ -119,7 +140,9 @@ export const elmLine: Occupant[] = [
 			s.quests['evolve a pokemon with a stone'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon with a held item'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon through friendship'] === 'COLLECTED' &&
-			s.quests['catch vileplume and bellosom'] === 'COLLECTED' &&
+			s.quests['evolve male and female nidoran into their final form'] ===
+				'COLLECTED' &&
+			s.quests['evolve gloom into vileplume and bellosom'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon that only evolves during the day'] ===
 				'COLLECTED' &&
 			s.quests['evolve a pokemon that only evolves at night'] !== 'COLLECTED',
@@ -128,7 +151,11 @@ export const elmLine: Occupant[] = [
 		...elmBase,
 		id: 'elm_8',
 
-		unhandledMessage: ['Eevee is the master of branched evolutions'],
+		unhandledMessage: [
+			'Eevee is the master of branched evolutions',
+			'In Johto, we know of five different evolution paths',
+			'Can you find out how many different forms it can take here',
+		],
 		handledMessage: ['Pokemon have different evolution methods'],
 		quest: 'catch all evolutions of eevee',
 		conditionFunction: (s) =>
@@ -137,7 +164,9 @@ export const elmLine: Occupant[] = [
 			s.quests['evolve a pokemon with a stone'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon with a held item'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon through friendship'] === 'COLLECTED' &&
-			s.quests['catch vileplume and bellosom'] === 'COLLECTED' &&
+			s.quests['evolve male and female nidoran into their final form'] ===
+				'COLLECTED' &&
+			s.quests['evolve gloom into vileplume and bellosom'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon that only evolves during the day'] ===
 				'COLLECTED' &&
 			s.quests['evolve a pokemon that only evolves at night'] === 'COLLECTED' &&

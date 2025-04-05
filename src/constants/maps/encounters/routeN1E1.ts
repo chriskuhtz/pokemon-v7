@@ -4,6 +4,8 @@ export const routeN1E1Encounters: EncounterMap = {
 	BASE: [
 		{ name: 'scyther', xp: 1500, rarity: 'rare' },
 		{ name: 'meowth', xp: 1000, rarity: 'common' },
+		{ name: 'nidoran-f', xp: 1000, rarity: 'medium' },
+		{ name: 'nidoran-m', xp: 1000, rarity: 'medium' },
 	],
 	MORNING: [
 		{ name: 'stunky', xp: 1000, rarity: 'common' },

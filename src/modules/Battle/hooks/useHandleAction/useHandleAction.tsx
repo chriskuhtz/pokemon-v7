@@ -31,7 +31,8 @@ export const useHandleAction = (
 	dampy: { name: string } | undefined,
 	handleForceSwitch: (x: BattlePokemon, moveName: MoveName) => void,
 	addBattleFieldEffect: (x: BattleFieldEffect) => void,
-	battleFieldEffects: BattleFieldEffect[]
+	battleFieldEffects: BattleFieldEffect[],
+	setBattleWeather: (w: WeatherType | undefined) => void
 ) => {
 	const {
 		saveFile: { pokedex },
@@ -263,6 +264,7 @@ export const useHandleAction = (
 					addBattleFieldEffect,
 					battleFieldEffects,
 					handleForceSwitch,
+					setBattleWeather,
 				});
 
 				return;
@@ -283,6 +285,7 @@ export const useHandleAction = (
 			pokedex,
 			pokemon,
 			scatterCoins,
+			setBattleWeather,
 			setPokemon,
 		]
 	);
@@ -300,6 +303,7 @@ export const handleAllAttackCategories = ({
 	addBattleFieldEffect,
 	battleFieldEffects,
 	handleForceSwitch,
+	setBattleWeather,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
@@ -312,6 +316,7 @@ export const handleAllAttackCategories = ({
 	addBattleFieldEffect: (x: BattleFieldEffect) => void;
 	battleFieldEffects: BattleFieldEffect[];
 	handleForceSwitch: (x: BattlePokemon, moveName: MoveName) => void;
+	setBattleWeather: (w: WeatherType | undefined) => void;
 }) => {
 	switch (move.data.meta.category.name) {
 		case 'force-switch':
@@ -326,6 +331,7 @@ export const handleAllAttackCategories = ({
 				move,
 				battleWeather,
 				scatterCoins,
+				setBattleWeather,
 				dampy,
 				addBattleFieldEffect,
 				battleFieldEffects,

@@ -400,7 +400,8 @@ export const BattleField = ({
 		dampy,
 		handleForceSwitch,
 		addBattleFieldEffect,
-		battleFieldEffects
+		battleFieldEffects,
+		setBattleWeather
 	);
 
 	//Steps:
