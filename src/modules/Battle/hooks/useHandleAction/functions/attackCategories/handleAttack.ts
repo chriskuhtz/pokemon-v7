@@ -967,6 +967,19 @@ export const handleAttack = ({
 				addMessage,
 			});
 		}
+		if (
+			!isKO(updatedTarget) &&
+			contactMoves.includes(move.name) &&
+			updatedTarget.ability === 'pickpocket' &&
+			!getHeldItem(updatedTarget) &&
+			getHeldItem(updatedAttacker, false)
+		) {
+			updatedTarget.heldItemName = getHeldItem(updatedAttacker, false);
+			updatedAttacker.heldItemName = undefined;
+			addMessage({
+				message: `${updatedTarget.name} stole ${updatedAttacker.name}'s held item with pickpocket`,
+			});
+		}
 	}
 
 	//Aftermath
