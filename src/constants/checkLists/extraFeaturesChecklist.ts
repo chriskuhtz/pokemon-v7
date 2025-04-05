@@ -202,15 +202,17 @@ export const extraFeatureCheckList: {
 		name: 'Info Pill Background color indicates primary ailment',
 		handled: true,
 	},
+	{
+		name: 'proper solution: somehow indicate if a pokemon is required for a quest',
+		handled: true,
+	},
+	{ name: 'improve encounters for rowan quest', handled: true },
 	{ name: 'make actual gold/silver berry sprites', handled: true },
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'In double battle both pokemon can throw single last poke ball' },
 	{ name: 'make pokemon less tiny, experiment with relative size' },
-	{ name: 'nudge player to get rowan earlier' },
 	{ name: 'quick solution: make pokemon route/method exclusive' },
-	{
-		name: 'proper solution: somehow indicate if a pokemon is required for a quest',
-	},
+
 	{ name: 'inform about quest rewards' },
 	{ name: 'improve held-item+trade evo condition' },
 	{ name: 'refine battle end' },
