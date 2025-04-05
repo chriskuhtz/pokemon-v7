@@ -1,11 +1,11 @@
 import { localStorageId } from '../constants/gameData';
 import { SaveFile, SettingsObject } from '../interfaces/SaveFile';
 
-export const getPlayerId = (): string | undefined => {
+export const getPlayerId = (): string => {
 	const local = window.localStorage.getItem(localStorageId);
 	const { playerId } = local ? (JSON.parse(local) as SaveFile) : {};
 
-	return playerId;
+	return playerId ?? '';
 };
 
 export const getSettings = (): SettingsObject | undefined => {

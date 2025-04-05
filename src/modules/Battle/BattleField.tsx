@@ -15,7 +15,7 @@ import { changeMovePP } from '../../functions/changeMovePP';
 import { BattleLocation } from '../../functions/determineCaptureSuccess';
 import { getHeldItem } from '../../functions/getHeldItem';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
-import { getSettings } from '../../functions/getPlayerId';
+import { getPlayerId, getSettings } from '../../functions/getPlayerId';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
 import { isKO } from '../../functions/isKo';
 import { OPPO_ID } from '../../functions/makeChallengerPokemon';
@@ -63,7 +63,8 @@ export interface BattleFieldEffect {
 		| 'arena-trap'
 		| 'shadow-tag'
 		| 'magnet-pull'
-		| 'spikes';
+		| 'spikes'
+		| 'flower-gift';
 	ownerId: string;
 	duration: number;
 }
@@ -143,47 +144,6 @@ export const BattleField = ({
 		[team]
 	);
 
-	const battleFieldEffects = useMemo(() => {
-		const res = [...bf];
-		if (onFieldOpponents.some((p) => p.ability === 'pressure')) {
-			res.push({ type: 'pressure', ownerId: OPPO_ID, duration: 9000 });
-		}
-		if (onFieldTeam.some((p) => p.ability === 'pressure')) {
-			res.push({ type: 'pressure', ownerId: OPPO_ID, duration: 9000 });
-		}
-		if (onFieldOpponents.some((p) => p.ability === 'plus')) {
-			res.push({ type: 'plus', ownerId: OPPO_ID, duration: 9000 });
-		}
-		if (onFieldTeam.some((p) => p.ability === 'plus')) {
-			res.push({ type: 'plus', ownerId: OPPO_ID, duration: 9000 });
-		}
-		if (onFieldOpponents.some((p) => p.ability === 'minus')) {
-			res.push({ type: 'minus', ownerId: OPPO_ID, duration: 9000 });
-		}
-		if (onFieldTeam.some((p) => p.ability === 'minus')) {
-			res.push({ type: 'minus', ownerId: OPPO_ID, duration: 9000 });
-		}
-		if (onFieldOpponents.some((p) => p.ability === 'shadow-tag')) {
-			res.push({ type: 'shadow-tag', ownerId: OPPO_ID, duration: 9000 });
-		}
-		if (onFieldTeam.some((p) => p.ability === 'shadow-tag')) {
-			res.push({ type: 'shadow-tag', ownerId: OPPO_ID, duration: 9000 });
-		}
-		if (onFieldOpponents.some((p) => p.ability === 'magnet-pull')) {
-			res.push({ type: 'magnet-pull', ownerId: OPPO_ID, duration: 9000 });
-		}
-		if (onFieldTeam.some((p) => p.ability === 'magnet-pull')) {
-			res.push({ type: 'magnet-pull', ownerId: OPPO_ID, duration: 9000 });
-		}
-		if (onFieldOpponents.some((p) => p.ability === 'magnet-pull')) {
-			res.push({ type: 'magnet-pull', ownerId: OPPO_ID, duration: 9000 });
-		}
-		if (onFieldTeam.some((p) => p.ability === 'magnet-pull')) {
-			res.push({ type: 'magnet-pull', ownerId: OPPO_ID, duration: 9000 });
-		}
-		return res;
-	}, [bf, onFieldOpponents, onFieldTeam]);
-
 	const allOnField = useMemo(
 		() => [...onFieldTeam, ...onFieldOpponents],
 		[onFieldOpponents, onFieldTeam]
@@ -199,6 +159,55 @@ export const BattleField = ({
 		}
 		return bW;
 	}, [allOnField, bW]);
+	const battleFieldEffects = useMemo(() => {
+		const res = [...bf];
+		if (onFieldOpponents.some((p) => p.ability === 'pressure')) {
+			res.push({ type: 'pressure', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'pressure')) {
+			res.push({ type: 'pressure', ownerId: getPlayerId(), duration: 9000 });
+		}
+		if (onFieldOpponents.some((p) => p.ability === 'plus')) {
+			res.push({ type: 'plus', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'plus')) {
+			res.push({ type: 'plus', ownerId: getPlayerId(), duration: 9000 });
+		}
+		if (onFieldOpponents.some((p) => p.ability === 'minus')) {
+			res.push({ type: 'minus', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'minus')) {
+			res.push({ type: 'minus', ownerId: getPlayerId(), duration: 9000 });
+		}
+		if (onFieldOpponents.some((p) => p.ability === 'shadow-tag')) {
+			res.push({ type: 'shadow-tag', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'shadow-tag')) {
+			res.push({ type: 'shadow-tag', ownerId: getPlayerId(), duration: 9000 });
+		}
+		if (onFieldOpponents.some((p) => p.ability === 'magnet-pull')) {
+			res.push({ type: 'magnet-pull', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'magnet-pull')) {
+			res.push({ type: 'magnet-pull', ownerId: getPlayerId(), duration: 9000 });
+		}
+		if (
+			onFieldOpponents.some(
+				(p) => p.ability === 'flower-gift' && battleWeather === 'sun'
+			)
+		) {
+			res.push({ type: 'flower-gift', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (
+			onFieldTeam.some(
+				(p) => p.ability === 'flower-gift' && battleWeather === 'sun'
+			)
+		) {
+			res.push({ type: 'flower-gift', ownerId: getPlayerId(), duration: 9000 });
+		}
+		return res;
+	}, [battleWeather, bf, onFieldOpponents, onFieldTeam]);
+
 	const nextPokemonWithoutMove = useMemo(() => {
 		if (battleStep !== 'COLLECTING') {
 			return;

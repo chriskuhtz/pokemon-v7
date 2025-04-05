@@ -144,6 +144,11 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 			);
 		});
 	}
+	if (user.ability === 'flower-gift' && currentWeather === 'sun') {
+		addMessage({
+			message: `${user.name} boosts itself and its allies with flower-gift`,
+		});
+	}
 
 	if (
 		battleFieldEffects.some(

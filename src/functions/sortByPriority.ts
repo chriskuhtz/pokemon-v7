@@ -30,7 +30,13 @@ const calculateTotalSpeed = (
 	const stallFactor = a.ability === 'stall' ? 0 : 1;
 
 	return (
-		calculateModifiedStat(a.stats.speed, a.statBoosts.speed, 'speed', a.name) *
+		calculateModifiedStat(
+			a.stats.speed,
+			a.statBoosts.speed,
+			'speed',
+			a.name,
+			false
+		) *
 		paraFactorA *
 		swiftSwimFactorA *
 		chlorophyllFactorA *

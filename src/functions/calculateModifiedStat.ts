@@ -7,6 +7,7 @@ export const calculateModifiedStat = (
 	modifier: number,
 	statName: Stat,
 	pokemonName: PokemonName,
+	flowerGiftActive: boolean,
 	heldItem?: ItemType
 ): number => {
 	let res = unmodified;
@@ -45,6 +46,12 @@ export const calculateModifiedStat = (
 		heldItem === 'deep-sea-tooth' &&
 		pokemonName === 'clamperl' &&
 		statName === 'special-attack'
+	) {
+		res = res * 1.5;
+	}
+	if (
+		flowerGiftActive &&
+		(statName === 'attack' || statName === 'special-defense')
 	) {
 		res = res * 1.5;
 	}

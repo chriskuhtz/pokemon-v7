@@ -234,6 +234,9 @@ export const calculateDamage = (
 					attacker.statBoosts.attack,
 					'attack',
 					attacker.name,
+					battleFieldEffects.some(
+						(e) => e.type === 'flower-gift' && e.ownerId === attacker.ownerId
+					),
 					getHeldItem(attacker)
 			  )
 			: calculateModifiedStat(
@@ -241,6 +244,9 @@ export const calculateDamage = (
 					attacker.statBoosts['special-attack'],
 					'special-attack',
 					attacker.name,
+					battleFieldEffects.some(
+						(e) => e.type === 'flower-gift' && e.ownerId === attacker.ownerId
+					),
 					getHeldItem(attacker)
 			  );
 
@@ -267,6 +273,9 @@ export const calculateDamage = (
 					defBoost(),
 					'defense',
 					target.name,
+					battleFieldEffects.some(
+						(e) => e.type === 'flower-gift' && e.ownerId === target.ownerId
+					),
 					getHeldItem(target)
 			  )
 			: calculateModifiedStat(
@@ -274,6 +283,9 @@ export const calculateDamage = (
 					spdefBoost(),
 					'special-defense',
 					target.name,
+					battleFieldEffects.some(
+						(e) => e.type === 'flower-gift' && e.ownerId === target.ownerId
+					),
 					getHeldItem(target)
 			  );
 
