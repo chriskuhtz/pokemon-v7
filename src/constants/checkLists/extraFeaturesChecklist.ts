@@ -307,4 +307,5 @@ export const extraFeatureCheckList: {
 	{ name: 'improve performance of mapmaker' },
 	{ name: 'tileset per map' },
 	{ name: 'quest: nidoking and nidoqueen' },
+	{ name: 'check battlefield effect functions' },
 ];

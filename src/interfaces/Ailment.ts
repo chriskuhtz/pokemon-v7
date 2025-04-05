@@ -88,3 +88,6 @@ export const EFFECT_SPORE_CHANCE = 0.1;
 
 //shed skin
 export const SHED_SKIN_CHANCE = 0.3;
+
+//effect factors
+export const SPIKES_FACTOR = 1 / 8;

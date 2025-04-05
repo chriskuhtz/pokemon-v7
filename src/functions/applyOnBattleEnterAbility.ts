@@ -1,25 +1,29 @@
 import { Message } from '../hooks/useMessageQueue';
+import { SPIKES_FACTOR } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { Stat } from '../interfaces/StatObject';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
+import { getTypeNames } from './getTypeNames';
 
-export const applyOnBattleEnterAbility = ({
+export const applyOnBattleEnterAbilityAndEffects = ({
 	user,
 	setWeather,
 	currentWeather,
-	setPokemon,
+	pokemon,
 	addMessage,
 	battleFieldEffects,
 }: {
 	user: BattlePokemon;
 	setWeather: (x: WeatherType) => void;
-	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>;
+	pokemon: BattlePokemon[];
 	currentWeather: WeatherType | undefined;
 	addMessage: (x: Message) => void;
 	battleFieldEffects: BattleFieldEffect[];
-}) => {
+}): BattlePokemon[] => {
+	let updatedPokemon = [...pokemon];
+
 	if (user.ability === 'drizzle' && currentWeather !== 'rain') {
 		setWeather('rain');
 		addMessage({ message: `${user.data.name} made it rain with drizzle` });
@@ -58,78 +62,7 @@ export const applyOnBattleEnterAbility = ({
 		});
 	}
 	if (user.ability === 'intimidate') {
-		setPokemon((pokemon) =>
-			pokemon.map((p) => {
-				if (p.status !== 'ONFIELD') {
-					return p;
-				}
-				if (p.id === user.id) {
-					return {
-						...user,
-						roundsInBattle: p.roundsInBattle + 1,
-						participatedInBattle: true,
-					};
-				}
-				if (p.ownerId === user.ownerId) {
-					return p;
-				}
-				return applyStatChangeToPokemon(
-					p,
-					'attack',
-					-1,
-					false,
-					battleFieldEffects,
-					addMessage,
-					`${user.data.name}'s intimidate`
-				);
-			})
-		);
-		return;
-	}
-	if (user.ability === 'download') {
-		setPokemon((pokemon) =>
-			pokemon.map((p) => {
-				if (p.status !== 'ONFIELD') {
-					return p;
-				}
-				if (p.id === user.id) {
-					const target = pokemon.find((p) => p.ownerId !== user.ownerId);
-					if (!target) {
-						return { ...p, participatedInBattle: true };
-					}
-					const stat: Stat =
-						target?.stats.defense > target?.stats['special-defense']
-							? 'special-attack'
-							: 'attack';
-					return applyStatChangeToPokemon(
-						p,
-						stat,
-						1,
-						true,
-						[],
-						addMessage,
-						'with download'
-					);
-				}
-				if (p.ownerId === user.ownerId) {
-					return p;
-				}
-				return applyStatChangeToPokemon(
-					p,
-					'attack',
-					-1,
-					false,
-					battleFieldEffects,
-					addMessage,
-					`${user.data.name}'s intimidate`
-				);
-			})
-		);
-		return;
-	}
-
-	setPokemon((pokemon) =>
-		pokemon.map((p) => {
+		updatedPokemon = updatedPokemon.map((p) => {
 			if (p.status !== 'ONFIELD') {
 				return p;
 			}
@@ -140,17 +73,99 @@ export const applyOnBattleEnterAbility = ({
 					participatedInBattle: true,
 				};
 			}
-			if (
-				p.initAbility === 'trace' &&
-				p.ability === 'trace' &&
-				p.ownerId !== user.ownerId
-			) {
-				addMessage({
-					message: `${p.data.name} traced ${user.ability}`,
-				});
-				return { ...p, ability: user.ability, participatedInBattle: true };
+			if (p.ownerId === user.ownerId) {
+				return p;
+			}
+			return applyStatChangeToPokemon(
+				p,
+				'attack',
+				-1,
+				false,
+				battleFieldEffects,
+				addMessage,
+				`${user.data.name}'s intimidate`
+			);
+		});
+	}
+	if (user.ability === 'download') {
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.status !== 'ONFIELD') {
+				return p;
+			}
+			if (p.id === user.id) {
+				const target = pokemon.find((p) => p.ownerId !== user.ownerId);
+				if (!target) {
+					return { ...p, participatedInBattle: true };
+				}
+				const stat: Stat =
+					target?.stats.defense > target?.stats['special-defense']
+						? 'special-attack'
+						: 'attack';
+				return applyStatChangeToPokemon(
+					p,
+					stat,
+					1,
+					true,
+					[],
+					addMessage,
+					'with download'
+				);
+			}
+			if (p.ownerId === user.ownerId) {
+				return p;
+			}
+			return applyStatChangeToPokemon(
+				p,
+				'attack',
+				-1,
+				false,
+				battleFieldEffects,
+				addMessage,
+				`${user.data.name}'s intimidate`
+			);
+		});
+	}
+
+	if (
+		battleFieldEffects.some(
+			(b) => b.type === 'spikes' && b.ownerId !== user.ownerId
+		)
+	) {
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.id === user.id) {
+				if (getTypeNames(p).includes('flying') || p.ability === 'levitate') {
+					return p;
+				} else {
+					addMessage({ message: `${user.name} is hurt by spikes` });
+					return { ...p, damage: Math.floor(p.stats.hp * SPIKES_FACTOR) };
+				}
 			}
 			return p;
-		})
-	);
+		});
+	}
+	updatedPokemon = updatedPokemon.map((p) => {
+		if (p.status !== 'ONFIELD') {
+			return p;
+		}
+		if (p.id === user.id) {
+			return {
+				...user,
+				roundsInBattle: p.roundsInBattle + 1,
+				participatedInBattle: true,
+			};
+		}
+		if (
+			p.initAbility === 'trace' &&
+			p.ability === 'trace' &&
+			p.ownerId !== user.ownerId
+		) {
+			addMessage({
+				message: `${p.data.name} traced ${user.ability}`,
+			});
+			return { ...p, ability: user.ability, participatedInBattle: true };
+		}
+		return p;
+	});
+
+	return updatedPokemon;
 };

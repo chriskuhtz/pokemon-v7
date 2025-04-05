@@ -7,7 +7,7 @@ import { applyEndOfTurnHeldItem } from '../../functions/applyEndOfTurnHeldItem';
 import { applyEndOfTurnWeatherDamage } from '../../functions/applyEndOfTurnWeatherDamage';
 import { applyEVGain } from '../../functions/applyEVGain';
 import { applyHappinessChange } from '../../functions/applyHappinessChange';
-import { applyOnBattleEnterAbility } from '../../functions/applyOnBattleEnterAbility';
+import { applyOnBattleEnterAbilityAndEffects } from '../../functions/applyOnBattleEnterAbility';
 import { applyPrimaryAilmentDamage } from '../../functions/applyPrimaryAilmentDamage';
 import { applySecondaryAilmentDamage } from '../../functions/applySecondaryAilmentDamage';
 import { calculateLevelData } from '../../functions/calculateLevelData';
@@ -61,7 +61,8 @@ export interface BattleFieldEffect {
 		| 'spider-web'
 		| 'arena-trap'
 		| 'shadow-tag'
-		| 'magnet-pull';
+		| 'magnet-pull'
+		| 'spikes';
 	ownerId: string;
 	duration: number;
 }
@@ -315,18 +316,20 @@ export const BattleField = ({
 			),
 		[addMessage]
 	);
-	const handleDeploymentAbility = useCallback(
+	const handleDeploymentAbilityAndEffects = useCallback(
 		(p: BattlePokemon) => {
-			applyOnBattleEnterAbility({
-				user: p,
-				setPokemon,
-				addMessage,
-				currentWeather: battleWeather,
-				setWeather: setBattleWeather,
-				battleFieldEffects,
-			});
+			setPokemon(
+				applyOnBattleEnterAbilityAndEffects({
+					user: p,
+					pokemon,
+					addMessage,
+					currentWeather: battleWeather,
+					setWeather: setBattleWeather,
+					battleFieldEffects,
+				})
+			);
 		},
-		[addMessage, battleFieldEffects, battleWeather]
+		[addMessage, battleFieldEffects, battleWeather, pokemon]
 	);
 	const handleForceSwitch = useCallback(
 		(user: BattlePokemon, moveName: MoveName) => {
@@ -413,12 +416,12 @@ export const BattleField = ({
 				return;
 			}
 			if (newlyDeployedPokemon && !latestMessage) {
-				handleDeploymentAbility(newlyDeployedPokemon);
+				handleDeploymentAbilityAndEffects(newlyDeployedPokemon);
 			}
 		}
 	}, [
 		battleStep,
-		handleDeploymentAbility,
+		handleDeploymentAbilityAndEffects,
 		latestMessage,
 		newlyDeployedPokemon,
 		nextPokemonWithoutMove,
