@@ -949,8 +949,16 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/203/',
 		handled: true,
 	},
-	{ name: 'deep-sea-scale', url: 'https://pokeapi.co/api/v2/item/204/' },
-	{ name: 'smoke-ball', url: 'https://pokeapi.co/api/v2/item/205/' },
+	{
+		name: 'deep-sea-scale',
+		url: 'https://pokeapi.co/api/v2/item/204/',
+		handled: true,
+	},
+	{
+		name: 'smoke-ball',
+		url: 'https://pokeapi.co/api/v2/item/205/',
+		handled: true,
+	},
 	{ name: 'everstone', url: 'https://pokeapi.co/api/v2/item/206/' },
 	{ name: 'focus-band', url: 'https://pokeapi.co/api/v2/item/207/' },
 	{ name: 'lucky-egg', url: 'https://pokeapi.co/api/v2/item/208/' },

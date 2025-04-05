@@ -139,6 +139,7 @@ export const heldItems = [
 	'soul-dew',
 	'deep-sea-tooth',
 	'deep-sea-scale',
+	'smoke-ball',
 ] as const;
 export const valuables = [
 	'shoal-salt',

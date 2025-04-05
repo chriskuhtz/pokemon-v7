@@ -4,6 +4,7 @@ import { FaArrowsRotate } from 'react-icons/fa6';
 import { MoveCard } from '../../../components/MoveCard/MoveCard';
 import { battleSpriteSize } from '../../../constants/gameData';
 import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
+import { getHeldItem } from '../../../functions/getHeldItem';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { getPlayerPokemon } from '../../../functions/getPlayerPokemon';
@@ -50,7 +51,9 @@ export function ActionSelection({
 		saveFile: { settings },
 	} = useContext(SaveFileContext);
 
-	const runAwayer = controlled.ability === 'run-away';
+	const runAwayer =
+		controlled.ability === 'run-away' ||
+		getHeldItem(controlled) === 'smoke-ball';
 	const trapped = !runAwayer && isTrapped(controlled);
 	const shadowTagged =
 		!runAwayer &&
