@@ -556,6 +556,7 @@ export const handleAttack = ({
 			updatedAttacker,
 			'paralysis',
 			addMessage,
+			battleWeather,
 			`by ${target.data.name}'s static`
 		);
 		updatedAttacker = b;
@@ -571,6 +572,7 @@ export const handleAttack = ({
 			updatedAttacker,
 			'burn',
 			addMessage,
+			battleWeather,
 			`by ${target.data.name}'s flame body`
 		);
 		updatedAttacker = b;
@@ -601,6 +603,7 @@ export const handleAttack = ({
 			updatedAttacker,
 			'poison',
 			addMessage,
+			battleWeather,
 			`by ${target.data.name}'s poison point`
 		);
 		updatedAttacker = b;
@@ -620,6 +623,7 @@ export const handleAttack = ({
 				getRandomIndex(possibleAilments.length)
 			] as PrimaryAilment['type'],
 			addMessage,
+			battleWeather,
 			`by ${target.data.name}'s effect spore`
 		);
 		updatedAttacker = b;
@@ -757,7 +761,8 @@ export const handleAttack = ({
 				updatedTarget,
 				updatedAttacker,
 				move,
-				addMessage
+				addMessage,
+				battleWeather
 			);
 		updatedAttacker = a;
 		updatedTarget = b;

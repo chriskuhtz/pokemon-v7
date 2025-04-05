@@ -8,6 +8,7 @@ import {
 } from '../interfaces/Ailment';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { WeatherType } from '../interfaces/Weather';
 import { applyPrimaryAilmentToPokemon } from './applyPrimaryAilmentToPokemon';
 import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
 import { getRandomEntry, getRandomIndex } from './filterTargets';
@@ -37,7 +38,8 @@ export const applyAttackAilmentsToPokemon = (
 	target: BattlePokemon,
 	applicator: BattlePokemon,
 	attack: BattleAttack,
-	addMessage: (x: Message) => void
+	addMessage: (x: Message) => void,
+	battleWeather: WeatherType | undefined
 ): { updatedTarget: BattlePokemon; updatedApplicator: BattlePokemon } => {
 	if (
 		//shield dust prevents all side effects
@@ -60,7 +62,8 @@ export const applyAttackAilmentsToPokemon = (
 				target,
 				applicator,
 				ailment as PrimaryAilment['type'],
-				addMessage
+				addMessage,
+				battleWeather
 			);
 		}
 		if (ailment === 'disable') {

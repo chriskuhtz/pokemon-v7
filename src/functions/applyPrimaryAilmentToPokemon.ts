@@ -1,6 +1,7 @@
 import { Message } from '../hooks/useMessageQueue';
 import { PrimaryAilment } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { WeatherType } from '../interfaces/Weather';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getTypeNames } from './getTypeNames';
 import { isKO } from './isKo';
@@ -10,8 +11,15 @@ export const applyPrimaryAilmentToPokemon = (
 	applicator: BattlePokemon,
 	ailment: PrimaryAilment['type'],
 	addMessage: (x: Message) => void,
+	weather: WeatherType | undefined,
 	suffix?: string
 ): { updatedTarget: BattlePokemon; updatedApplicator: BattlePokemon } => {
+	if (target.ability === 'leaf-guard' && weather === 'sun') {
+		addMessage({
+			message: `${target.name} protects itself from ${ailment} with leaf guard`,
+		});
+		return { updatedTarget: target, updatedApplicator: applicator };
+	}
 	if (isKO(target)) {
 		//already knocked out, no need to add ailments
 		return { updatedTarget: target, updatedApplicator: applicator };
