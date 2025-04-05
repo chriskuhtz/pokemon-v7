@@ -530,12 +530,20 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/110/',
 		handled: true,
 	},
-	{ name: 'filter', url: 'https://pokeapi.co/api/v2/ability/111/' },
+	{
+		name: 'filter',
+		url: 'https://pokeapi.co/api/v2/ability/111/',
+		handled: true,
+	},
 	{ name: 'slow-start', url: 'https://pokeapi.co/api/v2/ability/112/' },
 	{ name: 'scrappy', url: 'https://pokeapi.co/api/v2/ability/113/' },
 	{ name: 'storm-drain', url: 'https://pokeapi.co/api/v2/ability/114/' },
 	{ name: 'ice-body', url: 'https://pokeapi.co/api/v2/ability/115/' },
-	{ name: 'solid-rock', url: 'https://pokeapi.co/api/v2/ability/116/' },
+	{
+		name: 'solid-rock',
+		url: 'https://pokeapi.co/api/v2/ability/116/',
+		handled: true,
+	},
 	{ name: 'snow-warning', url: 'https://pokeapi.co/api/v2/ability/117/' },
 	{ name: 'honey-gather', url: 'https://pokeapi.co/api/v2/ability/118/' },
 	{ name: 'frisk', url: 'https://pokeapi.co/api/v2/ability/119/' },
@@ -906,6 +914,8 @@ export const abilityNames = [
 	'aftermath',
 	'unaware',
 	'tinted-lens',
+	'filter',
+	'solid-rock',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

@@ -412,7 +412,11 @@ export const calculateDamage = (
 		attacker.ability === 'technician' && power <= 60 ? 1.5 : 1;
 	const tintedLensFactor =
 		attacker.ability === 'tinted-lens' && typeFactor < 1 ? 2 : 1;
-
+	const filterFactor =
+		(target.ability === 'filter' || target.ability === 'solid-rock') &&
+		typeFactor > 1
+			? 0.75
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -454,7 +458,8 @@ export const calculateDamage = (
 				solarPowerFactor *
 				choiceBandFactor *
 				technicianFactor *
-				tintedLensFactor
+				tintedLensFactor *
+				filterFactor
 		),
 		1
 	);
