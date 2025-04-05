@@ -135,6 +135,7 @@ export const heldItems = [
 	'dragon-scale',
 	'leftovers',
 	'light-ball',
+	'cleanse-tag',
 ] as const;
 export const valuables = [
 	'shoal-salt',
@@ -481,6 +482,8 @@ export const pickupTable: ItemType[] = [
 	'revival-herb',
 	'rare-candy',
 	'soothe-bell',
+	'cleanse-tag',
+	'big-malasada',
 ];
 export const undergroundTable: ItemType[] = [
 	...valuables,

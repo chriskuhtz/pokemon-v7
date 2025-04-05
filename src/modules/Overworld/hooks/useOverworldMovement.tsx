@@ -20,13 +20,7 @@ export const useOverworldMovement = (
 	encounterRateModifier: { factor: number; upToXp: number }
 ) => {
 	const {
-		saveFile: {
-			pokemon,
-			quests,
-			location: playerLocation,
-			currentSwarm,
-			encounterRateModifier: repelFactor,
-		},
+		saveFile: { pokemon, quests, location: playerLocation, currentSwarm },
 		setCharacterLocationReducer: setCharacterLocation,
 	} = useContext(SaveFileContext);
 	const map = useMemo(() => mapsRecord[playerLocation.mapId], [playerLocation]);
@@ -81,14 +75,6 @@ export const useOverworldMovement = (
 							),
 						};
 
-						if (
-							repelFactor?.factor &&
-							repelFactor.factor < 1 &&
-							challenger.team[0].xp < encounterRateModifier.upToXp
-						) {
-							//Only pokemon stronger than your team can "pass through" the repel filter
-							return;
-						}
 						setNextInput(undefined);
 						setEncounterChance(baseEncounterRate);
 						startEncounter(challenger);
@@ -132,7 +118,6 @@ export const useOverworldMovement = (
 		playerLocation,
 		pokemon,
 		quests,
-		repelFactor,
 		setCharacterLocation,
 		startEncounter,
 	]);

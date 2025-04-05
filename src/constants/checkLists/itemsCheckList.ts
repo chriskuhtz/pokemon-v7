@@ -934,7 +934,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/199/',
 		handled: true,
 	},
-	{ name: 'cleanse-tag', url: 'https://pokeapi.co/api/v2/item/201/' },
+	{
+		name: 'cleanse-tag',
+		url: 'https://pokeapi.co/api/v2/item/201/',
+		handled: true,
+	},
 	{ name: 'soul-dew', url: 'https://pokeapi.co/api/v2/item/202/' },
 	{ name: 'deep-sea-tooth', url: 'https://pokeapi.co/api/v2/item/203/' },
 	{ name: 'deep-sea-scale', url: 'https://pokeapi.co/api/v2/item/204/' },
