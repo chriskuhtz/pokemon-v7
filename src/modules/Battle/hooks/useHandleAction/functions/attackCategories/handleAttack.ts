@@ -280,9 +280,10 @@ export const handleAttack = ({
 			);
 		}
 	}
-	if (move.name === 'protect') {
+	if (move.name === 'protect' || move.name === 'detect') {
 		if (
-			updatedAttacker.lastUsedMove?.name === 'protect' &&
+			(updatedAttacker.lastUsedMove?.name === 'protect' ||
+				updatedAttacker.lastUsedMove?.name === 'detect') &&
 			Math.random() > 0.5
 		) {
 			addMessage({
