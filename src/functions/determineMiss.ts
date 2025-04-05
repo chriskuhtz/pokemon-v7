@@ -79,7 +79,8 @@ export const determineMiss = (
 		) &&
 		!ohkoMoves.includes(attack.name) &&
 		!targetIsFlying &&
-		!targetIsUnderground
+		!targetIsUnderground &&
+		!target.protected
 	) {
 		return { miss: false };
 	}

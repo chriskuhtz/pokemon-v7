@@ -427,7 +427,7 @@ export const handleAttack = ({
 		updatedTarget = { ...updatedTarget, heldItemName: undefined };
 	}
 
-	if (move.name === 'mind-reader') {
+	if (move.name === 'mind-reader' || move.name === 'lock-on') {
 		updatedTarget = applySecondaryAilmentToPokemon({
 			pokemon: updatedTarget,
 			addMessage,
