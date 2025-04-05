@@ -1,3 +1,4 @@
+import { AbilityName } from '../constants/checkLists/abilityCheckList';
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -7,16 +8,17 @@ import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { getTypeNames } from './getTypeNames';
 
 export const applyAttackStatChanges = (
-	pokemon: BattlePokemon,
+	target: BattlePokemon,
+	attackerAbility: AbilityName,
 	attack: BattleAttack,
 	addMessage: (x: Message) => void,
 	selfInflicted: boolean,
 	battleFieldEffects: BattleFieldEffect[]
 ): BattlePokemon => {
-	let updatedMon = { ...pokemon };
+	let updatedMon = { ...target };
 
 	if (attack.name === 'curse') {
-		if (getTypeNames(pokemon).includes('ghost')) {
+		if (getTypeNames(updatedMon).includes('ghost')) {
 			return updatedMon;
 		} else {
 			[
@@ -37,6 +39,14 @@ export const applyAttackStatChanges = (
 	}
 
 	attack.data.stat_changes.forEach((s) => {
+		if (
+			attackerAbility === 'sheer-force' &&
+			((selfInflicted && s.change > 0) || (!selfInflicted && s.change < 0))
+		) {
+			//sheer force prevents positive side effects
+			return updatedMon;
+		}
+
 		updatedMon = applyStatChangeToPokemon(
 			updatedMon,
 			s.stat.name,

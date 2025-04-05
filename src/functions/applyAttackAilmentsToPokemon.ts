@@ -42,6 +42,13 @@ export const applyAttackAilmentsToPokemon = (
 	battleWeather: WeatherType | undefined
 ): { updatedTarget: BattlePokemon; updatedApplicator: BattlePokemon } => {
 	if (
+		applicator.ability === 'sheer-force' &&
+		attack.data.meta.category.name === 'damage+ailment'
+	) {
+		//sheer force prevents positive side effects
+		return { updatedTarget: target, updatedApplicator: applicator };
+	}
+	if (
 		//shield dust prevents all side effects
 		target.ability === 'shield-dust' &&
 		attack.data.damage_class.name !== 'status'

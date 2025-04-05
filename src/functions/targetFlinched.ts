@@ -14,7 +14,12 @@ export const targetFlinched = (
 		return false;
 	}
 
-	const { flinch_chance } = attack.data.meta;
+	let flinch_chance = attack.data.meta.flinch_chance;
+
+	if (attacker.ability === 'sheer-force') {
+		//sheer force prevents positive side effects
+		flinch_chance = 0;
+	}
 
 	const modified = (flinch_chance + stenchFactor + kingsRockFactor) / 100;
 

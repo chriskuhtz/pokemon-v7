@@ -590,6 +590,7 @@ export const handleAttack = ({
 	if (selfTargeting || move.data.meta.category.name === 'damage+raise') {
 		updatedAttacker = applyAttackStatChanges(
 			updatedAttacker,
+			updatedAttacker.ability,
 			move,
 			addMessage,
 			true,
@@ -850,6 +851,7 @@ export const handleAttack = ({
 		) {
 			updatedTarget = applyAttackStatChanges(
 				updatedTarget,
+				updatedAttacker.ability,
 				move,
 				addMessage,
 				false,
