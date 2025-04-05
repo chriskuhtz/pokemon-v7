@@ -511,6 +511,15 @@ export const calculateDamage = (
 			wasSuperEffective: typeFactor > 1,
 		};
 	}
+	//false swipe never defeats
+	if (attack.name === 'false-swipe' && res > target.stats.hp - target.damage) {
+		return {
+			damage: target.stats.hp - 1,
+			criticalHit: critFactor === 2,
+			consumedHeldItem,
+			wasSuperEffective: typeFactor > 1,
+		};
+	}
 
 	return {
 		damage: res,
