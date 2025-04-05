@@ -23,7 +23,10 @@ const calculateTotalSpeed = (
 		: 1;
 	const machoBraceFactor = a.heldItemName === 'macho-brace' ? 0.5 : 1;
 
-	const quickfeetFactor = a.primaryAilment ? 1.5 : 1;
+	const quickfeetFactor =
+		a.primaryAilment && a.ability === 'quick-feet' ? 1.5 : 1;
+
+	const stallFactor = a.ability === 'stall' ? 0 : 1;
 
 	return (
 		calculateModifiedStat(a.stats.speed, a.statBoosts.speed) *
@@ -32,7 +35,8 @@ const calculateTotalSpeed = (
 		chlorophyllFactorA *
 		unburdenFactorA *
 		machoBraceFactor *
-		quickfeetFactor
+		quickfeetFactor *
+		stallFactor
 	);
 };
 export const sortByPriority = (
