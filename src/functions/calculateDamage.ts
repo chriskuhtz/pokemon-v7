@@ -216,7 +216,8 @@ export const calculateDamage = (
 			critRate,
 			target.ability,
 			attacker.ability,
-			attacker.secondaryAilments.some((s) => s.type === 'focused')
+			attacker.secondaryAilments.some((s) => s.type === 'focused'),
+			getHeldItem(attacker)
 		)
 			? attacker.ability === 'sniper'
 				? 3

@@ -677,6 +677,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'x-sp-def': 2,
 			'x-speed': 2,
 			'guard-spec': 2,
+			'focus-band': 1,
 		},
 		researchPoints: 10,
 		conditionFunction: (s) => {
@@ -697,6 +698,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			carbos: 1,
 			protein: 1,
 			'hp-up': 1,
+			'lucky-egg': 1,
 		},
 		researchPoints: 10,
 		conditionFunction: (s) => {
@@ -732,6 +734,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			carbos: 1,
 			protein: 1,
 			'hp-up': 1,
+			'scope-lens': 1,
 		},
 		researchPoints: 30,
 		conditionFunction: (s) => {

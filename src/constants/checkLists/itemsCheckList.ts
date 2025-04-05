@@ -969,7 +969,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/208/',
 		handled: true,
 	},
-	{ name: 'scope-lens', url: 'https://pokeapi.co/api/v2/item/209/' },
+	{
+		name: 'scope-lens',
+		url: 'https://pokeapi.co/api/v2/item/209/',
+		handled: true,
+	},
 	{
 		name: 'metal-coat',
 		url: 'https://pokeapi.co/api/v2/item/210/',

@@ -1,17 +1,20 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
 import { ohkoMoves } from '../constants/ohkoMoves';
+import { ItemType } from '../interfaces/Item';
 
 export const determineCrit = (
 	moveName: string,
 	critRate: number,
 	targetAbility: AbilityName,
 	attackerAbilty: AbilityName,
-	attackerFocused: boolean
+	attackerFocused: boolean,
+	attackerHeldItem: ItemType | undefined
 ): boolean => {
 	const boostedCritRate =
 		critRate +
 		(attackerFocused ? 2 : 0) +
-		(attackerAbilty === 'super-luck' ? 1 : 0);
+		(attackerAbilty === 'super-luck' ? 1 : 0) +
+		(attackerHeldItem === 'scope-lens' ? 1 : 0);
 	if (ohkoMoves.includes(moveName)) {
 		return false;
 	}

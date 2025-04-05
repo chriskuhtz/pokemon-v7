@@ -142,6 +142,7 @@ export const heldItems = [
 	'smoke-ball',
 	'focus-band',
 	'lucky-egg',
+	'scope-lens',
 ] as const;
 export const valuables = [
 	'shoal-salt',
