@@ -445,7 +445,13 @@ export const calculateDamage = (
 			: 1;
 	const recklessFactor =
 		attacker.ability === 'reckless' && attack.data.meta.drain < 0 ? 1.2 : 1;
-	const sheerForceFactor = attacker.ability === 'sheer-force' ? 1.3 : 1;
+	const sheerForceFactor =
+		attacker.ability === 'sheer-force' &&
+		(attack.data.meta.flinch_chance > 0 ||
+			attack.data.stat_changes.length > 0 ||
+			attack.data.meta.ailment)
+			? 1.3
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
