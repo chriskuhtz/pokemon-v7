@@ -967,6 +967,13 @@ export const handleAttack = ({
 				addMessage,
 			});
 		}
+		if (move.name === 'mean-look') {
+			updatedTarget = applySecondaryAilmentToPokemon({
+				pokemon: updatedTarget,
+				ailment: 'mean-looked',
+				addMessage,
+			});
+		}
 		if (
 			!isKO(updatedTarget) &&
 			contactMoves.includes(move.name) &&

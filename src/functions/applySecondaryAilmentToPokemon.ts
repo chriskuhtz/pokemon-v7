@@ -279,5 +279,18 @@ export const applySecondaryAilmentToPokemon = ({
 			],
 		};
 	}
+	if (ailment === 'mean-looked') {
+		addMessage({ message: `${pokemon.data.name} is trapped by fear` });
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'mean-looked',
+					duration: 9000,
+				},
+			],
+		};
+	}
 	return pokemon;
 };

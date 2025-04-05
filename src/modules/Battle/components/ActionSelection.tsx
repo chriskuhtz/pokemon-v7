@@ -28,6 +28,49 @@ import {
 	ChooseActionPayload,
 } from '../BattleField';
 
+export const canRunOrSwitch = (
+	controlled: BattlePokemon,
+	battleFieldEffects: BattleFieldEffect[]
+): boolean => {
+	const runAwayer =
+		controlled.ability === 'run-away' ||
+		getHeldItem(controlled) === 'smoke-ball';
+
+	if (runAwayer) {
+		return true;
+	}
+	const trapped = isTrapped(controlled);
+	const shadowTagged =
+		controlled.ability !== 'shadow-tag' &&
+		battleFieldEffects.some(
+			(b) => b.type === 'shadow-tag' && b.ownerId !== controlled.ownerId
+		);
+	const arenaTrapped =
+		controlled.ability !== 'levitate' &&
+		!getTypeNames(controlled).includes('flying') &&
+		battleFieldEffects.some(
+			(b) => b.type === 'arena-trap' && b.ownerId !== controlled.ownerId
+		);
+	const magnetPulled =
+		getTypeNames(controlled).includes('steel') &&
+		battleFieldEffects.some(
+			(b) => b.type === 'magnet-pull' && b.ownerId !== controlled.ownerId
+		);
+	const spiderWebbed = battleFieldEffects.some(
+		(b) => b.type === 'spider-web' && b.ownerId !== controlled.ownerId
+	);
+	const meanLooked = controlled.secondaryAilments.some(
+		(b) => b.type === 'mean-looked'
+	);
+	return !(
+		trapped ||
+		shadowTagged ||
+		arenaTrapped ||
+		magnetPulled ||
+		spiderWebbed ||
+		meanLooked
+	);
+};
 export function ActionSelection({
 	controlled,
 	inventory,
@@ -50,46 +93,6 @@ export function ActionSelection({
 	const {
 		saveFile: { settings },
 	} = useContext(SaveFileContext);
-
-	const runAwayer =
-		controlled.ability === 'run-away' ||
-		getHeldItem(controlled) === 'smoke-ball';
-	const trapped = !runAwayer && isTrapped(controlled);
-	const shadowTagged =
-		!runAwayer &&
-		controlled.ability !== 'shadow-tag' &&
-		battleFieldEffects.some(
-			(b) => b.type === 'shadow-tag' && b.ownerId !== controlled.ownerId
-		);
-	const arenaTrapped =
-		!runAwayer &&
-		controlled.ability !== 'levitate' &&
-		!getTypeNames(controlled).includes('flying') &&
-		battleFieldEffects.some(
-			(b) => b.type === 'arena-trap' && b.ownerId !== controlled.ownerId
-		);
-	const magnetPulled =
-		!runAwayer &&
-		getTypeNames(controlled).includes('steel') &&
-		battleFieldEffects.some(
-			(b) => b.type === 'shadow-tag' && b.ownerId !== controlled.ownerId
-		);
-
-	const runButtonMessage = () => {
-		if (trapped) {
-			return 'Trapped';
-		}
-		if (shadowTagged) {
-			return 'Shadow Tag in Effect';
-		}
-		if (magnetPulled) {
-			return 'Magnet Pull in Effect';
-		}
-		if (arenaTrapped) {
-			return 'Arena Trap in Effect';
-		}
-		return 'Run Away';
-	};
 
 	const allowedItems: [ItemType, number][] = useMemo(
 		() =>
@@ -115,6 +118,11 @@ export function ActionSelection({
 				);
 			}) as [ItemType, number][],
 		[allTargets, catchingAllowed, inventory, settings?.noItemsInBattle]
+	);
+
+	const canSwitch = useMemo(
+		() => canRunOrSwitch(controlled, battleFieldEffects),
+		[battleFieldEffects, controlled]
 	);
 
 	return (
@@ -144,7 +152,7 @@ export function ActionSelection({
 					/>
 				))}
 				<Card
-					disabled={trapped || shadowTagged || magnetPulled || arenaTrapped}
+					disabled={!canSwitch}
 					onClick={() => setChosenAction('SWITCH')}
 					content={'Switch Pokemon'}
 					actionElements={[]}
@@ -166,7 +174,7 @@ export function ActionSelection({
 
 				{runningAllowed && (
 					<Card
-						disabled={trapped || shadowTagged || magnetPulled || arenaTrapped}
+						disabled={!canSwitch}
 						onClick={() =>
 							chooseAction({
 								userId: controlled.id,
@@ -174,7 +182,7 @@ export function ActionSelection({
 								targetId: '',
 							})
 						}
-						content={runButtonMessage()}
+						content={'Run Away'}
 						actionElements={[]}
 						icon={<FaRunning height={battleSpriteSize} />}
 					/>
