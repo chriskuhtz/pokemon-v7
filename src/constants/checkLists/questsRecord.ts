@@ -1109,7 +1109,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 1',
-		availableAfter: 'catch a pokemon and its paldea variant',
+		availableAfter: 'catch all evolutions of eevee',
 	},
 	'revive a fossil': {
 		kind: 'BULLETIN',
