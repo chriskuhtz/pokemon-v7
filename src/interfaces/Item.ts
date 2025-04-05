@@ -130,6 +130,7 @@ export const heldItems = [
 	'macho-brace',
 	'soothe-bell',
 	'choice-band',
+	'kings-rock',
 ] as const;
 export const valuables = [
 	'shoal-salt',

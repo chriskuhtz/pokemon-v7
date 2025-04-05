@@ -6,7 +6,8 @@ export const targetFlinched = (
 	target: BattlePokemon,
 	attack: BattleAttack
 ): boolean => {
-	const stenchModifier = attacker.ability === 'stench' ? 0.1 : 0;
+	const stenchFactor = attacker.ability === 'stench' ? 10 : 0;
+	const kingsRockFactor = attacker.heldItemName === 'kings-rock' ? 10 : 0;
 
 	if (target.ability === 'inner-focus') {
 		return false;
@@ -14,7 +15,7 @@ export const targetFlinched = (
 
 	const { flinch_chance } = attack.data.meta;
 
-	const modified = flinch_chance / 100 + stenchModifier;
+	const modified = (flinch_chance + stenchFactor + kingsRockFactor) / 100;
 
 	return Math.random() < modified;
 };
