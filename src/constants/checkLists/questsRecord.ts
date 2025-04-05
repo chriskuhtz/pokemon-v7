@@ -893,6 +893,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'full-restore': 5,
 		},
 		rewardPokemon: {
+			growthRate: 'medium',
 			unlockedMoves: ['ominous-wind'],
 			fixedAbility: true,
 			shiny: true,
@@ -928,6 +929,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'full-restore': 5,
 		},
 		rewardPokemon: {
+			growthRate: 'medium',
 			unlockedMoves: ['drill-peck'],
 			fixedAbility: true,
 			shiny: true,
@@ -1011,6 +1013,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'full-restore': 5,
 		},
 		rewardPokemon: {
+			growthRate: 'medium',
 			unlockedMoves: ['earthquake'],
 			fixedAbility: true,
 			shiny: true,
@@ -1066,6 +1069,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			happiness: 70,
 			firstMove: { name: 'earthquake', usedPP: 0 },
 			unlockedMoves: [],
+			growthRate: 'medium',
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {

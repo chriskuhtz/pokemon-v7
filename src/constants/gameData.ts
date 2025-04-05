@@ -41,6 +41,7 @@ export const testPokemon: OwnedPokemon = {
 	caughtOnMap: 'camp',
 	weightModifier: Math.random(),
 	unlockedMoves: [],
+	growthRate: 'medium',
 };
 
 export const startingLocation: CharacterLocationData = {
