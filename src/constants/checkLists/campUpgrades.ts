@@ -9,6 +9,7 @@ export const campUpgradeNames = [
 	'bag size upgrade 1',
 	'bag size upgrade 2',
 	'bag size upgrade 3',
+	'invite move tutor',
 	'invite ghost expert morty',
 	'invite flying pokemon expert falkner',
 	'invite professor rowan',
@@ -45,6 +46,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	berry_farm: ['bulletin_board'],
 	'create seed vault': ['bulletin_board', 'berry_farm'],
 	'invite apricorn smith kurt': ['bulletin_board', 'berry_farm'],
+	'invite move tutor': baseRequirements,
 	'invite ghost expert morty': ['machete certification'],
 	'invite flying pokemon expert falkner': ['machete certification'],
 	'invite professor rowan': baseRequirements,
@@ -81,6 +83,7 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	bulletin_board: 'A place for people to post quests',
 	berry_farm: 'Berries and Apricorns are our main resources',
 	'invite apricorn smith kurt': 'Pokeballs can be made from apricorns',
+	'invite move tutor': 'Teaches your Pokemon new moves',
 	'invite ghost expert morty':
 		'The Gym Leader from Ecruteak studies ghost pokemon',
 	'invite flying pokemon expert falkner':

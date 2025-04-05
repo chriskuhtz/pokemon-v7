@@ -49,4 +49,5 @@ export interface OwnedPokemon {
 	weightModifier?: number;
 	heightModifier?: number;
 	fixedAbility?: boolean;
+	unlockedMoves: MoveName[];
 }

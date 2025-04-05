@@ -186,7 +186,8 @@ export const extraFeatureCheckList: {
 	{ name: 'investigate encounter rate function', handled: true },
 	{ name: 'sort completed quests to the top', handled: true },
 	{ name: 'item storage chest', handled: true },
-	{ name: 'Changing moves messes with pp' },
+	{ name: 'move tutor', handled: true },
+	{ name: 'more farm slots' },
 	{ name: 'refactor quest limit' },
 	{ name: 'trainer builder' },
 	{ name: 'walk through grass animation' },
@@ -299,4 +300,7 @@ export const extraFeatureCheckList: {
 	{ name: 'achieve cooking level x' },
 	{ name: 'retrieve item from wild pokemon (special encounter)' },
 	{ name: 'lure x pokemon' },
+	{ name: 'improve performance of mapmaker' },
+	{ name: 'tileset per map' },
+	{ name: 'quest: nidoking and nidoqueen' },
 ];

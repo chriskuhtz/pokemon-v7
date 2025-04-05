@@ -103,6 +103,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		item === 'heal-powder' ||
 		item === 'lava-cookie' ||
 		item === 'old-gateau' ||
+		item === 'big-malasada' ||
 		item === 'lum-berry'
 	) {
 		if (addMessage) {

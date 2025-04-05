@@ -22,6 +22,7 @@ import { BuyMarket } from './modules/Market/BuyMarket';
 import { Market } from './modules/Market/Market';
 import { SellMarket } from './modules/Market/SellMarket';
 import { MiltankFarm } from './modules/MiltankFarm/MiltankFarm';
+import { MoveTutor } from './modules/MoveTutor/MoveTutor';
 import { Overworld } from './modules/Overworld/Overworld';
 import { Pokedex } from './modules/Pokedex/Pokedex';
 import { PokemonStorage } from './modules/PokemonStorage/PokemonStorage';
@@ -231,6 +232,9 @@ export const App = (): JSX.Element => {
 	}
 	if (activeTab === 'BERRY_LURE') {
 		return <BerryLure />;
+	}
+	if (activeTab === 'MOVE_TUTOR') {
+		return <MoveTutor />;
 	}
 	if (activeTab === 'MARKET') {
 		return (

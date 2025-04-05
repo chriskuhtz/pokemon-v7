@@ -40,6 +40,7 @@ export const testPokemon: OwnedPokemon = {
 	ppBoostedMoves: [],
 	caughtOnMap: 'camp',
 	weightModifier: Math.random(),
+	unlockedMoves: [],
 };
 
 export const startingLocation: CharacterLocationData = {
@@ -70,7 +71,10 @@ export const testState: SaveFile = {
 	quests: baseQuestState,
 
 	bag: EmptyInventory,
-	storage: generateInventory({ potion: 3, 'poke-ball': 20 }),
+	storage: generateInventory({
+		'berry-juice': 5,
+		'poke-ball': 20,
+	}),
 
 	seedVault: [],
 	playerId: '',

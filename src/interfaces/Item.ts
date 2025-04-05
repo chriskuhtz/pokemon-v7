@@ -1,6 +1,5 @@
 import { PokemonName } from '../constants/pokemonNames';
 import { getRandomIndex } from '../functions/filterTargets';
-import { AilmentType, primaryAilments } from './Ailment';
 import { Nature } from './Natures';
 import { PokemonType } from './PokemonType';
 import { Stat } from './StatObject';
@@ -30,6 +29,7 @@ export const healingItemTypes = [
 	'lava-cookie',
 	'berry-juice',
 	'old-gateau',
+	'big-malasada',
 	'blue-flute',
 	'red-flute',
 	'yellow-flute',
@@ -430,19 +430,7 @@ export const cookingBerries: BerryType[] = [
 	'silver-pinap-berry',
 	'golden-pinap-berry',
 ];
-export const AilmentHealTable: Partial<Record<ItemType, AilmentType[]>> = {
-	'full-heal': [...primaryAilments, 'confusion'],
-	'full-restore': [...primaryAilments, 'confusion'],
-	'old-gateau': [...primaryAilments, 'confusion'],
-	'lava-cookie': [...primaryAilments, 'confusion'],
-	'lum-berry': [...primaryAilments, 'confusion'],
-	antidote: ['poison', 'toxic'],
-	'pecha-berry': ['poison', 'toxic'],
-	'burn-heal': ['burn'],
-	'rawst-berry': ['burn'],
-	'paralyze-heal': ['paralysis'],
-	'cheri-berry': ['paralysis'],
-};
+
 export const XItemTable: Partial<Record<XItemType, Stat>> = {
 	'x-accuracy': 'accuracy',
 	'x-attack': 'attack',
