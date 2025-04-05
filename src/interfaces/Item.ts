@@ -137,6 +137,8 @@ export const heldItems = [
 	'light-ball',
 	'cleanse-tag',
 	'soul-dew',
+	'deep-sea-tooth',
+	'deep-sea-scale',
 ] as const;
 export const valuables = [
 	'shoal-salt',
@@ -155,6 +157,8 @@ export const valuables = [
 	'heart-scale',
 	'rare-bone',
 	'odd-keystone',
+	'deep-sea-tooth',
+	'deep-sea-scale',
 ] as const;
 export const mulches = [
 	'growth-mulch',

@@ -944,7 +944,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/202/',
 		handled: true,
 	},
-	{ name: 'deep-sea-tooth', url: 'https://pokeapi.co/api/v2/item/203/' },
+	{
+		name: 'deep-sea-tooth',
+		url: 'https://pokeapi.co/api/v2/item/203/',
+		handled: true,
+	},
 	{ name: 'deep-sea-scale', url: 'https://pokeapi.co/api/v2/item/204/' },
 	{ name: 'smoke-ball', url: 'https://pokeapi.co/api/v2/item/205/' },
 	{ name: 'everstone', url: 'https://pokeapi.co/api/v2/item/206/' },

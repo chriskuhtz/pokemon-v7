@@ -34,6 +34,20 @@ export const calculateModifiedStat = (
 	) {
 		res = res * 1.5;
 	}
+	if (
+		heldItem === 'deep-sea-scale' &&
+		pokemonName === 'clamperl' &&
+		statName === 'special-defense'
+	) {
+		res = res * 1.5;
+	}
+	if (
+		heldItem === 'deep-sea-tooth' &&
+		pokemonName === 'clamperl' &&
+		statName === 'special-attack'
+	) {
+		res = res * 1.5;
+	}
 
 	return res;
 };
