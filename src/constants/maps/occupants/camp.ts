@@ -110,9 +110,9 @@ const trainingField: Occupant[] = [
 	{
 		type: 'ROUTER_NPC',
 		to: 'MOVE_TUTOR',
-		x: 3,
-		y: 15,
-		orientation: 'DOWN',
+		x: 2,
+		y: 17,
+		orientation: 'RIGHT',
 		sprite: SpriteEnum.aceMale,
 		id: 'move_tutor',
 		dialogue: [
