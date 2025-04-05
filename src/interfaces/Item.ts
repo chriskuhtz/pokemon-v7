@@ -132,6 +132,7 @@ export const heldItems = [
 	'choice-band',
 	'kings-rock',
 	'silver-powder',
+	'dragon-scale',
 	'leftovers',
 ] as const;
 export const valuables = [

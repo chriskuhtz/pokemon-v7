@@ -953,7 +953,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/211/',
 		handled: true,
 	},
-	{ name: 'dragon-scale', url: 'https://pokeapi.co/api/v2/item/212/' },
+	{
+		name: 'dragon-scale',
+		url: 'https://pokeapi.co/api/v2/item/212/',
+		handled: true,
+	},
 	{ name: 'light-ball', url: 'https://pokeapi.co/api/v2/item/213/' },
 	{ name: 'soft-sand', url: 'https://pokeapi.co/api/v2/item/214/' },
 	{ name: 'hard-stone', url: 'https://pokeapi.co/api/v2/item/215/' },
