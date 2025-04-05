@@ -64,7 +64,8 @@ export interface BattleFieldEffect {
 		| 'shadow-tag'
 		| 'magnet-pull'
 		| 'spikes'
-		| 'flower-gift';
+		| 'flower-gift'
+		| 'bad-dreams';
 	ownerId: string;
 	duration: number;
 }
@@ -204,6 +205,12 @@ export const BattleField = ({
 			)
 		) {
 			res.push({ type: 'flower-gift', ownerId: getPlayerId(), duration: 9000 });
+		}
+		if (onFieldOpponents.some((p) => p.ability === 'bad-dreams')) {
+			res.push({ type: 'bad-dreams', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'bad-dreams')) {
+			res.push({ type: 'bad-dreams', ownerId: getPlayerId(), duration: 9000 });
 		}
 		return res;
 	}, [battleWeather, bf, onFieldOpponents, onFieldTeam]);

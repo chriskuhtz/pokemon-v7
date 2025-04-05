@@ -93,6 +93,7 @@ export const handleAttack = ({
 			attack: move,
 			addMessage,
 			targetId: realTargetId,
+			battleFieldEffects,
 		}
 	);
 	updatedAttacker = afterBlockers;

@@ -209,6 +209,7 @@ export const useHandleAction = (
 					attacker,
 					attack: move,
 					addMessage,
+					battleFieldEffects,
 				});
 
 				if (!canAttack) {

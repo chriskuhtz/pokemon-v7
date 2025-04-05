@@ -3,7 +3,8 @@ import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
 export const handleAsleep = (
 	attacker: BattlePokemon,
-	addMessage: (x: Message) => void
+	addMessage: (x: Message) => void,
+	badDreams: boolean
 ) => {
 	addMessage({ message: `${attacker.data.name} is deeply asleep ` });
 
@@ -21,6 +22,13 @@ export const handleAsleep = (
 	//1. update moveQueue
 	updatedAttacker = { ...updatedAttacker, moveQueue: [] };
 	//Dont reduce pp, didnt attack
+
+	if (badDreams) {
+		addMessage({
+			message: `${attacker.data.name} is suffering from bad dreams `,
+		});
+		updatedAttacker.damage += Math.floor(updatedAttacker.stats.hp / 8);
+	}
 
 	return updatedAttacker;
 };

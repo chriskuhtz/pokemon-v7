@@ -7,6 +7,7 @@ import {
 } from '../../../interfaces/Ailment';
 import { BattleAttack, ChargeUp } from '../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
+import { BattleFieldEffect } from '../BattleField';
 import { handleAsleep } from './handleAsleep';
 import { handleConfused } from './handleConfused';
 import { handleFrozen } from './handleFrozen';
@@ -18,11 +19,13 @@ export const handleMoveBlockAilments = ({
 	attack,
 	addMessage,
 	targetId,
+	battleFieldEffects,
 }: {
 	attacker: BattlePokemon;
 	attack: BattleAttack | ChargeUp;
 	targetId?: string;
 	addMessage: (x: Message) => void;
+	battleFieldEffects: BattleFieldEffect[];
 }): { canAttack: boolean; updatedAttacker: BattlePokemon } => {
 	let updatedAttacker = { ...attacker };
 
@@ -47,7 +50,13 @@ export const handleMoveBlockAilments = ({
 				updatedAttacker.secondaryAilments ?? []
 			).filter((a) => a.type !== 'nightmare');
 		} else {
-			updatedAttacker = handleAsleep(attacker, addMessage);
+			updatedAttacker = handleAsleep(
+				attacker,
+				addMessage,
+				battleFieldEffects.some(
+					(b) => b.type === 'bad-dreams' && b.ownerId !== attacker.ownerId
+				)
+			);
 			return { canAttack: false, updatedAttacker };
 		}
 	}
