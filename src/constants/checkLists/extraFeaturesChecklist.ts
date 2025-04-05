@@ -195,6 +195,7 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'put growth rates on pokemon', handled: true },
+	{ name: 'swarms increase shiny chance', handled: true },
 	{ name: 'actually use growth rates' },
 	{ name: 'refactor quest limit' },
 	{ name: 'trainer builder' },
@@ -236,9 +237,8 @@ export const extraFeatureCheckList: {
 	{ name: 'opponent "learns" about volt-absorb etc ' },
 	{ name: 'trade evos' },
 	{ name: 'itemsprite component' },
-
 	{ name: 'play button for pokemon lofi' },
-	{ name: 'swarms increase shiny chance' },
+
 	{ name: 'moving background (water,flowers)' },
 	{ name: 'data collection module (name, nCaught,nDefeated)' },
 	{ name: 'award evs after battle' },

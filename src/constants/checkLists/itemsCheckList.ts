@@ -934,7 +934,6 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/199/',
 		handled: true,
 	},
-	{ name: 'amulet-coin', url: 'https://pokeapi.co/api/v2/item/200/' },
 	{ name: 'cleanse-tag', url: 'https://pokeapi.co/api/v2/item/201/' },
 	{ name: 'soul-dew', url: 'https://pokeapi.co/api/v2/item/202/' },
 	{ name: 'deep-sea-tooth', url: 'https://pokeapi.co/api/v2/item/203/' },
@@ -949,7 +948,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/210/',
 		handled: true,
 	},
-	{ name: 'leftovers', url: 'https://pokeapi.co/api/v2/item/211/' },
+	{
+		name: 'leftovers',
+		url: 'https://pokeapi.co/api/v2/item/211/',
+		handled: true,
+	},
 	{ name: 'dragon-scale', url: 'https://pokeapi.co/api/v2/item/212/' },
 	{ name: 'light-ball', url: 'https://pokeapi.co/api/v2/item/213/' },
 	{ name: 'soft-sand', url: 'https://pokeapi.co/api/v2/item/214/' },
@@ -3847,4 +3850,5 @@ export const itemsCheckList: {
 	{ name: 'mosaic-mail', url: 'https://pokeapi.co/api/v2/item/124/' },
 	{ name: 'brick-mail', url: 'https://pokeapi.co/api/v2/item/125/' },
 	{ name: 'dowsing-machine', url: 'https://pokeapi.co/api/v2/item/465/' },
+	{ name: 'amulet-coin', url: 'https://pokeapi.co/api/v2/item/200/' },
 ];
