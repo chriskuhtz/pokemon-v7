@@ -348,6 +348,13 @@ export const handleAttack = ({
 			};
 		}
 	}
+	if (move.name === 'foresight') {
+		updatedTarget = applySecondaryAilmentToPokemon({
+			pokemon: updatedTarget,
+			addMessage,
+			ailment: 'foresighted',
+		});
+	}
 
 	const isFlying =
 		updatedTarget.moveQueue.length > 0 &&

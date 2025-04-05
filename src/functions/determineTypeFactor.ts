@@ -13,8 +13,9 @@ export const determineTypeFactor = (
 	let res = 1;
 	const targetTypes = getTypeNames(target);
 
-	const effectiveness =
-		typeEffectivenessChart[normalized ? 'normal' : attack.data.type.name];
+	const attackType = normalized ? 'normal' : attack.data.type.name;
+
+	const effectiveness = typeEffectivenessChart[attackType];
 
 	targetTypes.forEach((t) => {
 		if (effectiveness.isNotVeryEffectiveAgainst.includes(t)) {
@@ -26,6 +27,13 @@ export const determineTypeFactor = (
 		}
 	});
 
+	if (
+		targetTypes.includes('ghost') &&
+		target.secondaryAilments.some((s) => s.type === 'foresighted') &&
+		(attackType === 'normal' || attackType == 'fighting')
+	) {
+		res = 1;
+	}
 	if (target.ability === 'levitate' && attack.data.type.name === 'ground') {
 		if (addMessage) {
 			addMessage({
@@ -43,6 +51,7 @@ export const determineTypeFactor = (
 		}
 		return 0;
 	}
+
 	if (
 		target.ability === 'lightning-rod' &&
 		attack.data.type.name === 'electric'

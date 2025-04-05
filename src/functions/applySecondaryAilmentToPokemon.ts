@@ -240,5 +240,18 @@ export const applySecondaryAilmentToPokemon = ({
 			],
 		};
 	}
+	if (ailment === 'foresighted') {
+		addMessage({ message: `${pokemon.data.name} was inspected` });
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'foresighted',
+					duration: 9000,
+				},
+			],
+		};
+	}
 	return pokemon;
 };
