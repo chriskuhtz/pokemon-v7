@@ -60,6 +60,7 @@ export const BattlePokemonInfo = ({ pokemon }: { pokemon: BattlePokemon }) => {
 						/>
 					)}
 				{pokemon.shiny && <RiSparkling2Line size={battleSpriteSize / 2} />}{' '}
+				<PrimaryAilmentIcon primaryAilment={pokemon.primaryAilment} />
 				{pokemon.data.name} | Lvl {level}{' '}
 			</strong>
 			{Object.entries(pokemon.statBoosts).map(([stat, boost]) => {
@@ -74,7 +75,7 @@ export const BattlePokemonInfo = ({ pokemon }: { pokemon: BattlePokemon }) => {
 					);
 				}
 			})}
-			<PrimaryAilmentIcon primaryAilment={pokemon.primaryAilment} />
+
 			{pokemon.moveQueue.length > 0 &&
 				pokemon.moveQueue[0].type === 'BattleAttack' &&
 				secondTurnMoves.includes(pokemon.moveQueue[0].name) && (

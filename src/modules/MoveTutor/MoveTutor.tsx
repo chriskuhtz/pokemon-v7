@@ -7,6 +7,7 @@ import {
 import { nameToIdMap } from '../../constants/pokemonNames';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getItemUrl } from '../../functions/getItemUrl';
+import { moveIsTeachable } from '../../functions/moveIsAvailable';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
@@ -17,7 +18,21 @@ import { LearnMethod } from '../../interfaces/PokemonData';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { moveIsTeachable } from '../../functions/moveIsAvailable';
+
+const learnMethodOrder: Record<LearnMethod, number> = {
+	'level-up': 1,
+	egg: 2,
+	tutor: 3,
+	machine: 4,
+	'form-change': 5,
+	'light-ball-egg': 6,
+	'stadium-surfing-pikachu': 7,
+	'colosseum-shadow': 8,
+	'xd-purification': 9,
+	'colosseum-purification': 10,
+	'xd-shadow': 11,
+	'zygarde-cube': 12,
+};
 
 export const MoveTutor = () => {
 	const { saveFile } = useContext(SaveFileContext);
@@ -44,10 +59,9 @@ export const MoveTutor = () => {
 				<div
 					style={{
 						display: 'grid',
-						gridTemplateColumns: '1fr 1fr 1fr',
+						gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr',
 						padding: '2rem',
 						columnGap: '1rem',
-						rowGap: '4rem',
 					}}
 				>
 					{team.map((t) => (
@@ -72,7 +86,6 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 	const unlockMove = useCallback(
 		(move: MoveName, payment: ItemType) => {
 			if (saveFile.bag[payment] < 1) {
-				console.log('yaya', payment, move);
 				return;
 			}
 			patchSaveFileReducer({
@@ -102,15 +115,38 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 	}, [data, invalidate, ownedPokemon]);
 
 	const options = useMemo(() => {
-		console.log(ownedPokemon.unlockedMoves);
 		if (!data) {
 			return [];
 		}
-		return data.moves.filter(
-			(m) =>
-				handledMoves.includes(m.move.name as MoveName) &&
-				!ownedPokemon.unlockedMoves.includes(m.move.name as MoveName)
-		);
+		return data.moves
+			.filter(
+				(m) =>
+					handledMoves.includes(m.move.name as MoveName) &&
+					!ownedPokemon.unlockedMoves.includes(m.move.name as MoveName)
+			)
+			.sort((a, b) => {
+				if (ownedPokemon.unlockedMoves.includes(a.move.name as MoveName)) {
+					return -1;
+				}
+				if (ownedPokemon.unlockedMoves.includes(b.move.name as MoveName)) {
+					return 1;
+				}
+
+				if (
+					a.version_group_details[0].move_learn_method.name === 'level-up' &&
+					b.version_group_details[0].move_learn_method.name === 'level-up'
+				) {
+					return (
+						a.version_group_details[0].level_learned_at -
+						b.version_group_details[0].level_learned_at
+					);
+				}
+
+				return (
+					learnMethodOrder[a.version_group_details[0].move_learn_method.name] -
+					learnMethodOrder[b.version_group_details[0].move_learn_method.name]
+				);
+			});
 	}, [data, ownedPokemon]);
 
 	const getCostForLearnMethod = (learnMethod: LearnMethod): ItemType => {

@@ -2,6 +2,7 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { fullyHealPokemon } from './fullyHealPokemon';
 import { getHeldItem } from './getHeldItem';
+import { getMovesArray } from './getMovesArray';
 import { persistentPrimaryAilment } from './persistentPrimaryAilment';
 
 export const reduceBattlePokemonToOwnedPokemon = (
@@ -66,5 +67,13 @@ export const reduceBattlePokemonToOwnedPokemon = (
 		return fullyHealPokemon(res);
 	}
 
-	return res;
+	return {
+		...res,
+		unlockedMoves: [
+			...new Set([
+				...newMon.unlockedMoves,
+				...getMovesArray(res).map((m) => m.name),
+			]),
+		],
+	};
 };

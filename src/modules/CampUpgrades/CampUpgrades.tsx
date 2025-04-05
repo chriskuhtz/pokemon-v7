@@ -87,10 +87,12 @@ export const CampUpgrades = ({
 						content={
 							<div>
 								<h3>{upgrade}</h3>
-								{/* <h4>Research Points: {campUpgradePrices[upgrade] || 'FREE'}</h4> */}
+
 								<h4>{campUpgradeExplanations[upgrade]}</h4>
 								<br />
-								<h4>Research Points: {currentPrice || 'FREE'}</h4>
+								{!campUpgrades[upgrade] && (
+									<h4>Research Points: {currentPrice || 'FREE'}</h4>
+								)}
 							</div>
 						}
 						actionElements={

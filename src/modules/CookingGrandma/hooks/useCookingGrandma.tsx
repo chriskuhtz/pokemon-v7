@@ -136,7 +136,6 @@ export const useCookingGrandma = (): {
 
 			const chance = Math.random() + (saveFile.cookingSkill ?? 0) / 100;
 
-			console.log(chance);
 			const failed = () => {
 				if (recipe.difficulty === 'EASY' && chance < 0.1) {
 					return true;

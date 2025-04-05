@@ -119,7 +119,7 @@ const trainingField: Occupant[] = [
 			'I can teach your Pokemon new moves',
 			'But I expect some snacks as payment',
 		],
-		conditionFunction: (s) => s.campUpgrades['training field 1'],
+		conditionFunction: (s) => s.campUpgrades['invite move tutor'],
 	},
 ];
 
