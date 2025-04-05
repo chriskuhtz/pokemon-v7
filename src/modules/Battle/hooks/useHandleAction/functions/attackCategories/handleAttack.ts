@@ -930,6 +930,19 @@ export const handleAttack = ({
 		}
 	}
 
+	//Aftermath
+	if (
+		isKO(updatedTarget) &&
+		updatedTarget.ability === 'aftermath' &&
+		contactMoves.includes(move.name)
+	) {
+		addMessage({ message: `${updatedAttacker.name} is hurt by aftermath` });
+		updatedAttacker = {
+			...updatedAttacker,
+			damage: Math.floor(updatedAttacker.damage + updatedAttacker.stats.hp / 4),
+		};
+	}
+
 	setPokemon((pokemon) =>
 		pokemon.map((p) => {
 			if (
