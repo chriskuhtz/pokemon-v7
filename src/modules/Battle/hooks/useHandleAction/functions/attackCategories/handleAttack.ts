@@ -912,13 +912,20 @@ export const handleAttack = ({
 				newType: move.data.type.name,
 			});
 		}
-		//check color change
+
 		if (move.name === 'destiny-bond') {
 			updatedTarget = applySecondaryAilmentToPokemon({
 				pokemon: updatedTarget,
 				ailment: 'destiny-bonded',
 				addMessage,
 				targetId: updatedAttacker.id,
+			});
+		}
+		if (move.name === 'perish-song') {
+			updatedTarget = applySecondaryAilmentToPokemon({
+				pokemon: updatedTarget,
+				ailment: 'perish-songed',
+				addMessage,
 			});
 		}
 	}

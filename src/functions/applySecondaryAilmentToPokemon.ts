@@ -266,5 +266,18 @@ export const applySecondaryAilmentToPokemon = ({
 			],
 		};
 	}
+	if (ailment === 'perish-songed') {
+		addMessage({ message: `${pokemon.data.name} heard the perish song` });
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'perish-songed',
+					duration: 3,
+				},
+			],
+		};
+	}
 	return pokemon;
 };
