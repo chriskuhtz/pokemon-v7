@@ -28,7 +28,7 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 		setWeather('rain');
 		addMessage({ message: `${user.data.name} made it rain with drizzle` });
 	}
-	if (user.ability === 'drizzle' && currentWeather !== 'sun') {
+	if (user.ability === 'drought' && currentWeather !== 'sun') {
 		setWeather('sun');
 		addMessage({
 			message: `${user.data.name} intensified the sun with drought`,

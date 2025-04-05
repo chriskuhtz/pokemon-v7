@@ -320,4 +320,5 @@ export const extraFeatureCheckList: {
 	{ name: 'quest: light ball pikachu' },
 	{ name: 'quest: different pikachus' },
 	{ name: 'non regional to regional evos, pikachu => alola raichu' },
+	{ name: 'battleweather duration' },
 ];

@@ -1098,7 +1098,22 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/199/',
 		handled: true,
 	},
-	{ name: 'sandstorm', url: 'https://pokeapi.co/api/v2/move/201/' },
+	{
+		name: 'sandstorm',
+		url: 'https://pokeapi.co/api/v2/move/201/',
+		handled: true,
+	},
+	{
+		name: 'rain-dance',
+		url: 'https://pokeapi.co/api/v2/move/240/',
+		handled: true,
+	},
+	{
+		name: 'sunny-day',
+		url: 'https://pokeapi.co/api/v2/move/241/',
+		handled: true,
+	},
+	{ name: 'hail', url: 'https://pokeapi.co/api/v2/move/258/', handled: true },
 	{ name: 'endure', url: 'https://pokeapi.co/api/v2/move/203/' },
 	{ name: 'rollout', url: 'https://pokeapi.co/api/v2/move/205/' },
 	{ name: 'false-swipe', url: 'https://pokeapi.co/api/v2/move/206/' },
@@ -1123,8 +1138,6 @@ export const movesCheckList: {
 	{ name: 'synthesis', url: 'https://pokeapi.co/api/v2/move/235/' },
 	{ name: 'moonlight', url: 'https://pokeapi.co/api/v2/move/236/' },
 	{ name: 'hidden-power', url: 'https://pokeapi.co/api/v2/move/237/' },
-	{ name: 'rain-dance', url: 'https://pokeapi.co/api/v2/move/240/' },
-	{ name: 'sunny-day', url: 'https://pokeapi.co/api/v2/move/241/' },
 	{ name: 'mirror-coat', url: 'https://pokeapi.co/api/v2/move/243/' },
 	{ name: 'psych-up', url: 'https://pokeapi.co/api/v2/move/244/' },
 	{ name: 'future-sight', url: 'https://pokeapi.co/api/v2/move/248/' },
@@ -1135,7 +1148,6 @@ export const movesCheckList: {
 	{ name: 'stockpile', url: 'https://pokeapi.co/api/v2/move/254/' },
 	{ name: 'spit-up', url: 'https://pokeapi.co/api/v2/move/255/' },
 	{ name: 'swallow', url: 'https://pokeapi.co/api/v2/move/256/' },
-	{ name: 'hail', url: 'https://pokeapi.co/api/v2/move/258/' },
 	{ name: 'torment', url: 'https://pokeapi.co/api/v2/move/259/' },
 	{ name: 'memento', url: 'https://pokeapi.co/api/v2/move/262/' },
 	{ name: 'facade', url: 'https://pokeapi.co/api/v2/move/263/' },
@@ -2179,6 +2191,10 @@ export const handledMoves = [
 	'perish-song',
 	'detect',
 	'lock-on',
+	'sand-storm',
+	'sunny-day',
+	'rain-dance',
+	'hail',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

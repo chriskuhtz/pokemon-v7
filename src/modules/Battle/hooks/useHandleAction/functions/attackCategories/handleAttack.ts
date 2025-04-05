@@ -56,6 +56,7 @@ export const handleAttack = ({
 	dampy,
 	addBattleFieldEffect,
 	battleFieldEffects,
+	setBattleWeather,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
@@ -63,6 +64,7 @@ export const handleAttack = ({
 	addMessage: (x: Message) => void;
 	move: BattleAttack;
 	battleWeather: WeatherType | undefined;
+	setBattleWeather: (x: WeatherType) => void;
 	scatterCoins: () => void;
 	dampy?: { name: string };
 	addBattleFieldEffect: (x: BattleFieldEffect) => void;
@@ -129,6 +131,19 @@ export const handleAttack = ({
 		});
 	}
 
+	//WEATHER MOVES
+	if (move.name === 'sunny-day') {
+		setBattleWeather('sun');
+	}
+	if (move.name === 'hail') {
+		setBattleWeather('hail');
+	}
+	if (move.name === 'sand-storm') {
+		setBattleWeather('sandstorm');
+	}
+	if (move.name === 'rain-dance') {
+		setBattleWeather('rain');
+	}
 	//MIST, LIGHT-SCREEN, REFLECT
 	if (['mist', 'light-screen', 'reflect'].includes(move.name)) {
 		addBattleFieldEffect({
