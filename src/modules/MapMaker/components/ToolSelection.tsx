@@ -1,12 +1,14 @@
 import { JSX } from 'react';
-import { masterSheet } from '../constants/tileMaps';
+import { tileMapsRecord } from '../constants/tileMaps';
 import { Tool } from '../MapMaker';
 import { TileMapViewer } from './TileMapViewer';
 
 export const ToolSelection = ({
 	setSelected,
+	tileSetUrl,
 }: {
 	setSelected: (x: Tool) => void;
+	tileSetUrl: string;
 }): JSX.Element => {
 	return (
 		<div>
@@ -18,8 +20,8 @@ export const ToolSelection = ({
 			</button>
 			<div style={{ maxHeight: '80dvh', overflowY: 'scroll' }}>
 				<TileMapViewer
-					name={'mastersheet'}
-					t={masterSheet}
+					name={tileSetUrl}
+					t={tileMapsRecord[tileSetUrl]}
 					onClick={(tile) => setSelected({ type: 'tileplacer', tile })}
 				/>
 			</div>

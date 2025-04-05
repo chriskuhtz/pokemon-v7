@@ -226,6 +226,7 @@ export interface OverworldMap {
 	occupants: Occupant[];
 	weather?: WeatherType;
 	timeOfDayShadersMap: Record<TimeOfDay, string>;
+	tilesetUrl: string;
 }
 
 export interface GameMap {

@@ -26,6 +26,7 @@ export const TileMapTab = ({
 		<div>
 			<div style={{ maxHeight: '80dvh', overflowY: 'scroll' }}>
 				<LayerEditor
+					tileSetUrl={newMap.tilesetUrl}
 					addColumn={addColumn}
 					addRow={addRow}
 					changeTile={changeTile}
@@ -37,6 +38,7 @@ export const TileMapTab = ({
 					randomFill={randomFill}
 				/>
 				<LayerEditor
+					tileSetUrl={newMap.tilesetUrl}
 					addColumn={addColumn}
 					addRow={addRow}
 					changeTile={changeTile}
@@ -48,6 +50,7 @@ export const TileMapTab = ({
 					randomFill={randomFill}
 				/>
 				<LayerEditor
+					tileSetUrl={newMap.tilesetUrl}
 					addColumn={addColumn}
 					addRow={addRow}
 					changeTile={changeTile}
@@ -59,6 +62,7 @@ export const TileMapTab = ({
 					randomFill={randomFill}
 				/>
 				<LayerEditor
+					tileSetUrl={newMap.tilesetUrl}
 					addColumn={addColumn}
 					addRow={addRow}
 					changeTile={changeTile}
@@ -70,6 +74,7 @@ export const TileMapTab = ({
 					randomFill={randomFill}
 				/>
 				<LayerEditor
+					tileSetUrl={newMap.tilesetUrl}
 					addColumn={addColumn}
 					addRow={addRow}
 					changeTile={changeTile}
@@ -80,7 +85,11 @@ export const TileMapTab = ({
 					changeColumn={(index) => changeColumn(index, 'Foreground')}
 					randomFill={randomFill}
 				/>
-				<CombinedCanvas map={newMap.tileMap} tileSize={16} />
+				<CombinedCanvas
+					map={newMap.tileMap}
+					tileSize={16}
+					tileSetUrl={newMap.tilesetUrl}
+				/>
 				<br />
 			</div>
 		</div>

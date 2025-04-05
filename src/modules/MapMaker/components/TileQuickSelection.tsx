@@ -4,9 +4,11 @@ import { Tool } from '../MapMaker';
 export const TileQuickSelection = ({
 	usedTiles,
 	setSelected,
+	tileSetUrl,
 }: {
 	usedTiles: TileIdentifier[];
 	setSelected: (x: Tool) => void;
+	tileSetUrl: string;
 }) => {
 	return (
 		<div
@@ -26,7 +28,7 @@ export const TileQuickSelection = ({
 					style={{
 						height: 16,
 						width: 16,
-						background: `url('/tilesets/masterSheet.png') ${ut.xOffset}px ${ut.yOffset}px`,
+						background: `url(${tileSetUrl}) ${ut.xOffset}px ${ut.yOffset}px`,
 					}}
 				></div>
 			))}

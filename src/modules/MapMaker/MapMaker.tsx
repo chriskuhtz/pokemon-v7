@@ -18,9 +18,11 @@ export type Tab = 'TileMap' | 'Encounters' | 'Occupants' | 'ToolSelection';
 export const MapMaker = ({
 	goBack,
 	mapId,
+	tileSetUrl,
 }: {
 	goBack: () => void;
 	mapId: MapId;
+	tileSetUrl: string;
 }) => {
 	const [selected, setSelected] = useState<Tool | undefined>();
 
@@ -51,7 +53,7 @@ export const MapMaker = ({
 							scale: 2,
 							height: 16,
 							width: 16,
-							background: `url(/tilesets/masterSheet.png) ${selected.tile.xOffset}px ${selected.tile.yOffset}px`,
+							background: `url(${tileSetUrl}) ${selected.tile.xOffset}px ${selected.tile.yOffset}px`,
 						}}
 					></div>
 				)}

@@ -5,6 +5,7 @@ import { routeN1Occupants } from './occupants/routeN1';
 
 export const routeN1: OverworldMap = {
 	id: 'routeN1',
+	tilesetUrl: '/tilesets/masterSheet.png',
 	timeOfDayShadersMap: defaultShaderMap,
 	possibleEncounters: routeN1Encounters,
 	tileMap: {

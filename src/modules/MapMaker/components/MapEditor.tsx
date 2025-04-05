@@ -57,7 +57,11 @@ export const MapEditor = ({
 
 			{activeTab === 'TileMap' && (
 				<>
-					<TileQuickSelection usedTiles={usedTiles} setSelected={setSelected} />
+					<TileQuickSelection
+						usedTiles={usedTiles}
+						setSelected={setSelected}
+						tileSetUrl={newMap.tilesetUrl}
+					/>
 					<TileMapTab
 						newMap={newMap}
 						changeColumn={changeColumn}
@@ -86,7 +90,10 @@ export const MapEditor = ({
 			)}
 			{activeTab === 'ToolSelection' && (
 				<>
-					<ToolSelection setSelected={setSelected} />
+					<ToolSelection
+						setSelected={setSelected}
+						tileSetUrl={newMap.tilesetUrl}
+					/>
 				</>
 			)}
 			<a

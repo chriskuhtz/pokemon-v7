@@ -11,6 +11,7 @@ export const LayerEditor = ({
 	changeColumn,
 	randomFill,
 	clear,
+	tileSetUrl,
 }: {
 	layerName: LayerName;
 	layer: (TileIdentifier | null)[][];
@@ -21,6 +22,7 @@ export const LayerEditor = ({
 	changeTile: (i: number, j: number, layer: LayerName) => void;
 	clear: () => void;
 	randomFill: (layer: LayerName, percentage: number) => void;
+	tileSetUrl: string;
 }) => {
 	return (
 		<>
@@ -70,6 +72,7 @@ export const LayerEditor = ({
 					layerName={layerName}
 					changeTile={changeTile}
 					changeColumn={changeColumn}
+					tileSetUrl={tileSetUrl}
 				/>
 				<div style={{ border: '1px solid white' }} onClick={addColumn}>
 					add Column
@@ -88,11 +91,13 @@ export const LayerDisplay = ({
 	layer,
 	changeTile,
 	changeColumn,
+	tileSetUrl,
 }: {
 	layerName: LayerName;
 	layer: (TileIdentifier | null)[][];
 	changeTile: (i: number, j: number, layer: LayerName) => void;
 	changeColumn: (i: number, layer: LayerName) => void;
+	tileSetUrl: string;
 }) => {
 	return (
 		<div
@@ -133,7 +138,7 @@ export const LayerDisplay = ({
 								height: 16,
 								width: 16,
 								border: '1px solid red',
-								background: `url(/tilesets/masterSheet.png) ${xOffset}px ${yOffset}px`,
+								background: `url(${tileSetUrl}) ${xOffset}px ${yOffset}px`,
 							}}
 						></div>
 					);

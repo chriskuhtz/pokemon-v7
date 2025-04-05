@@ -4,8 +4,10 @@ import { GameMap } from '../interfaces/OverworldMap';
 export const useDrawBackground = (
 	canvasId: string,
 	map: GameMap,
+	tileSetSource: string,
 	tileSize: number
 ) => {
+	console.log(tileSetSource);
 	useEffect(() => {
 		const el: HTMLCanvasElement | null = document.getElementById(
 			canvasId
@@ -102,13 +104,14 @@ export const useDrawBackground = (
 			});
 		});
 
-		spriteSheet.src = '/tilesets/masterSheet.png';
-	}, [canvasId, map, tileSize]);
+		spriteSheet.src = tileSetSource;
+	}, [canvasId, map, tileSetSource, tileSize]);
 };
 
 export const useDrawForeground = (
 	canvasId: string,
 	map: GameMap,
+	tileSetSource: string,
 	tileSize: number
 ) => {
 	useEffect(() => {
@@ -146,6 +149,6 @@ export const useDrawForeground = (
 			});
 		});
 
-		spriteSheet.src = '/tilesets/masterSheet.png';
-	}, [canvasId, map, tileSize]);
+		spriteSheet.src = tileSetSource;
+	}, [canvasId, map, tileSetSource, tileSize]);
 };

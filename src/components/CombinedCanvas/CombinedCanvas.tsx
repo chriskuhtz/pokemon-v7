@@ -3,12 +3,14 @@ import { useDrawBackground } from '../../hooks/useDrawBackground';
 import { GameMap } from '../../interfaces/OverworldMap';
 export const CombinedCanvas = ({
 	map,
+	tileSetUrl,
 	tileSize,
 }: {
 	map: GameMap;
+	tileSetUrl: string;
 	tileSize: number;
 }): JSX.Element => {
-	useDrawBackground('assembled', map, tileSize);
+	useDrawBackground('assembled', map, tileSetUrl, tileSize);
 
 	return (
 		<canvas

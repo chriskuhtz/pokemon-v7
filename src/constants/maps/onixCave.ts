@@ -5,6 +5,7 @@ import { onixCaveOccupants } from './occupants/onixCave';
 
 export const onixCave: OverworldMap = {
 	id: 'onixCave',
+	tilesetUrl: '/tilesets/masterSheet.png',
 	timeOfDayShadersMap: caveShaderMap,
 	possibleEncounters: onixCaveEncounters,
 	occupants: onixCaveOccupants,

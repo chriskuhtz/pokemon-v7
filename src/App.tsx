@@ -1,5 +1,5 @@
 import { useContext, useMemo, useState } from 'react';
-import { MapId } from './constants/maps/mapsRecord';
+import { MapId, mapsRecord } from './constants/maps/mapsRecord';
 import { MessageQueueContext } from './hooks/useMessageQueue';
 import { SaveFileContext } from './hooks/useSaveFile';
 import { generateInventory, Inventory } from './interfaces/Inventory';
@@ -245,9 +245,11 @@ export const App = (): JSX.Element => {
 		);
 	}
 	if (mapMakerRoutes.includes(activeTab)) {
+		const mapId = activeTab.slice(10) as MapId;
 		return (
 			<MapMaker
-				mapId={activeTab.slice(10) as MapId}
+				mapId={mapId}
+				tileSetUrl={mapsRecord[mapId].tilesetUrl}
 				goBack={() => setActiveTabReducer('MAIN')}
 			/>
 		);

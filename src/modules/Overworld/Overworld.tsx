@@ -83,7 +83,7 @@ export const Overworld = ({
 	useDrawCharacter(playerCanvasId, saveFile.location, saveFile.sprite);
 	useDrawOccupants(occupantsCanvasId, occupants, map.timeOfDayShadersMap);
 	//INTERACTION
-	useDrawForeground('foreground', map.tileMap, baseSize);
+	useDrawForeground('foreground', map.tileMap, map.tilesetUrl, baseSize);
 	const interactWith = useCallback(
 		(occ: Occupant | undefined) =>
 			interactWithFunction({
@@ -249,7 +249,11 @@ export const Overworld = ({
 						}}
 						id={backgroundCanvasId}
 					>
-						<CombinedCanvas map={map.tileMap} tileSize={baseSize} />
+						<CombinedCanvas
+							map={map.tileMap}
+							tileSize={baseSize}
+							tileSetUrl={map.tilesetUrl}
+						/>
 					</div>
 				</div>
 				<div
