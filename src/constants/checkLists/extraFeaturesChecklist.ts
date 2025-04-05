@@ -203,7 +203,6 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'make actual gold/silver berry sprites', handled: true },
-	{ name: 'run away prio is lower than pokeball throwing' },
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'In double battle both pokemon can throw single last poke ball' },
 	{ name: 'make pokemon less tiny, experiment with relative size' },
