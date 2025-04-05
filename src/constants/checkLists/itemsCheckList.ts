@@ -929,7 +929,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/198/',
 		handled: true,
 	},
-	{ name: 'silver-powder', url: 'https://pokeapi.co/api/v2/item/199/' },
+	{
+		name: 'silver-powder',
+		url: 'https://pokeapi.co/api/v2/item/199/',
+		handled: true,
+	},
 	{ name: 'amulet-coin', url: 'https://pokeapi.co/api/v2/item/200/' },
 	{ name: 'cleanse-tag', url: 'https://pokeapi.co/api/v2/item/201/' },
 	{ name: 'soul-dew', url: 'https://pokeapi.co/api/v2/item/202/' },

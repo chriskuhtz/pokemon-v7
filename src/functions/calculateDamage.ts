@@ -380,6 +380,7 @@ export const calculateDamage = (
 	const choiceBandFactor = attack.name === attacker.choiceBandedMove ? 1.5 : 1;
 	const technicianFactor =
 		attacker.ability === 'technician' && power <= 60 ? 1.5 : 1;
+
 	const res = Math.max(
 		Math.floor(
 			pureDamage *

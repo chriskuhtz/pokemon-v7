@@ -131,6 +131,7 @@ export const heldItems = [
 	'soothe-bell',
 	'choice-band',
 	'kings-rock',
+	'silver-powder',
 ] as const;
 export const valuables = [
 	'shoal-salt',
@@ -504,4 +505,25 @@ export const superEffectiveSaveTable: Record<PokemonType, ItemType> = {
 	normal: 'chilan-berry',
 	fairy: 'roseli-berry',
 	typeless: 'odd-keystone',
+};
+export const typeBoostItemTable: Record<PokemonType, ItemType> = {
+	fire: 'cherish-ball',
+	water: 'cherish-ball',
+	electric: 'cherish-ball',
+	grass: 'cherish-ball',
+	ice: 'cherish-ball',
+	fighting: 'cherish-ball',
+	poison: 'cherish-ball',
+	ground: 'cherish-ball',
+	flying: 'cherish-ball',
+	psychic: 'cherish-ball',
+	bug: 'silver-powder',
+	rock: 'cherish-ball',
+	ghost: 'cherish-ball',
+	dragon: 'cherish-ball',
+	dark: 'cherish-ball',
+	steel: 'metal-coat',
+	normal: 'cherish-ball',
+	fairy: 'cherish-ball',
+	typeless: 'cherish-ball',
 };
