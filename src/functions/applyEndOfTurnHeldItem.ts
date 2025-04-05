@@ -9,6 +9,7 @@ import { getRandomBoostableStat, Stat } from '../interfaces/StatObject';
 import { applyItemToPokemon } from './applyItemToPokemon';
 import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
+import { getHeldItemInBattle } from './getHeldItem';
 import { getMovesArray } from './getMovesArray';
 
 export const applyEndOfTurnHeldItem = (
@@ -16,7 +17,8 @@ export const applyEndOfTurnHeldItem = (
 	addMessage: (x: string) => void,
 	addMultipleMessages: (x: string[]) => void
 ): BattlePokemon => {
-	if (!pokemon.heldItemName || !hasEndOfTurnEffect(pokemon.heldItemName)) {
+	const heldItem = getHeldItemInBattle(pokemon);
+	if (!heldItem || !hasEndOfTurnEffect(heldItem)) {
 		return pokemon;
 	}
 	if (pokemon.heldItemName === 'leftovers' && pokemon.damage > 0) {
@@ -66,19 +68,17 @@ export const applyEndOfTurnHeldItem = (
 	}
 
 	if (
-		FlavourfullBerriesTable[pokemon.heldItemName] &&
+		FlavourfullBerriesTable[heldItem] &&
 		pokemon.damage / pokemon.stats.hp > 0.5
 	) {
-		if (
-			FlavourfullBerriesTable[pokemon.heldItemName]?.includes(pokemon.nature)
-		) {
+		if (FlavourfullBerriesTable[heldItem]?.includes(pokemon.nature)) {
 			addMultipleMessages([
 				`${pokemon.data.name} healed itself with ${pokemon.heldItemName}`,
 				'But did not like the flavor',
 			]);
 			return applySecondaryAilmentToPokemon({
 				pokemon: {
-					...applyItemToPokemon(pokemon, pokemon.heldItemName),
+					...applyItemToPokemon(pokemon, heldItem),
 					heldItemName: undefined,
 				},
 				ailment: 'confusion',
@@ -89,13 +89,13 @@ export const applyEndOfTurnHeldItem = (
 				`${pokemon.data.name} healed itself with ${pokemon.heldItemName}`
 			);
 			return {
-				...applyItemToPokemon(pokemon, pokemon.heldItemName),
+				...applyItemToPokemon(pokemon, heldItem),
 				heldItemName: undefined,
 			};
 		}
 	}
 
-	const booster = emergencyBoostBerriesTable[pokemon.heldItemName];
+	const booster = emergencyBoostBerriesTable[heldItem];
 	if (booster && pokemon.damage / pokemon.stats.hp >= 0.75) {
 		addMultipleMessages([
 			`${pokemon.data.name} gave itself a boost with ${pokemon.heldItemName}`,
@@ -184,15 +184,12 @@ export const applyEndOfTurnHeldItem = (
 			(x) => addMessage(x.message)
 		);
 	}
-	if (
-		HPHealTable[pokemon.heldItemName] &&
-		pokemon.damage / pokemon.stats.hp > 0.5
-	) {
+	if (HPHealTable[heldItem] && pokemon.damage / pokemon.stats.hp > 0.5) {
 		addMessage(
 			`${pokemon.data.name} healed itself with ${pokemon.heldItemName}`
 		);
 		return {
-			...applyItemToPokemon(pokemon, pokemon.heldItemName),
+			...applyItemToPokemon(pokemon, heldItem),
 			heldItemName: undefined,
 		};
 	}

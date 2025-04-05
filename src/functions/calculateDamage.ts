@@ -18,6 +18,7 @@ import { determineCrit } from './determineCrit';
 import { determineStabFactor } from './determineStabFactor';
 import { determineTypeFactor } from './determineTypeFactor';
 import { determineWeatherFactor } from './determineWeatherFactor';
+import { getHeldItemInBattle } from './getHeldItem';
 import { getHeldItemFactor } from './getHeldItemFactor';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getRivalryFactor } from './getRivalryFactor';
@@ -281,7 +282,7 @@ export const calculateDamage = (
 	const heldItemFactor = getHeldItemFactor(
 		attacker.name,
 		attackType,
-		attacker.heldItemName
+		getHeldItemInBattle(attacker)
 	);
 	const lightScreenFactor =
 		damageClass === 'special' &&
@@ -368,7 +369,7 @@ export const calculateDamage = (
 	const savingBerryFactor =
 		(typeFactor > 1 || attackType === 'normal') &&
 		superEffectiveSaveTable[attackType] &&
-		superEffectiveSaveTable[attackType] === target.heldItemName
+		superEffectiveSaveTable[attackType] === getHeldItemInBattle(target)
 			? 0.5
 			: 1;
 	const solarPowerFactor =

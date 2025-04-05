@@ -1,5 +1,6 @@
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { getHeldItemInBattle } from './getHeldItem';
 
 export const targetFlinched = (
 	attacker: BattlePokemon,
@@ -7,7 +8,8 @@ export const targetFlinched = (
 	attack: BattleAttack
 ): boolean => {
 	const stenchFactor = attacker.ability === 'stench' ? 10 : 0;
-	const kingsRockFactor = attacker.heldItemName === 'kings-rock' ? 10 : 0;
+	const kingsRockFactor =
+		getHeldItemInBattle(attacker) === 'kings-rock' ? 10 : 0;
 
 	if (target.ability === 'inner-focus') {
 		return false;

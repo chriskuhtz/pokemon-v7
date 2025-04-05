@@ -14,6 +14,7 @@ import {
 } from '../../../interfaces/Item';
 import { WeatherType } from '../../../interfaces/Weather';
 import { ChooseActionPayload } from '../BattleField';
+import { getHeldItemInBattle } from '../../../functions/getHeldItem';
 
 const determineChoiceBandedMove = (
 	pokemon: BattlePokemon,
@@ -22,7 +23,10 @@ const determineChoiceBandedMove = (
 	if (pokemon.choiceBandedMove) {
 		return pokemon.choiceBandedMove;
 	}
-	if (pokemon.heldItemName === 'choice-band' && !pokemon.choiceBandedMove) {
+	if (
+		getHeldItemInBattle(pokemon) === 'choice-band' &&
+		!pokemon.choiceBandedMove
+	) {
 		return chosenMove;
 	}
 

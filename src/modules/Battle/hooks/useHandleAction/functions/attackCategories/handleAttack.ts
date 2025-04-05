@@ -14,6 +14,7 @@ import {
 	getRandomIndex,
 } from '../../../../../../functions/filterTargets';
 import { getActualTargetId } from '../../../../../../functions/getActualTargetId';
+import { getHeldItemInBattle } from '../../../../../../functions/getHeldItem';
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
 import { getMovesArray } from '../../../../../../functions/getMovesArray';
 import { arePokemonOfOppositeGenders } from '../../../../../../functions/getRivalryFactor';
@@ -709,7 +710,7 @@ export const handleAttack = ({
 				return move.data.meta.drain;
 			}
 			if (
-				updatedTarget.heldItemName === 'jaboca-berry' &&
+				getHeldItemInBattle(updatedTarget) === 'jaboca-berry' &&
 				move.data.damage_class.name === 'physical'
 			) {
 				updatedTarget = { ...updatedTarget, heldItemName: undefined };
@@ -719,7 +720,7 @@ export const handleAttack = ({
 				return -12.5;
 			}
 			if (
-				updatedTarget.heldItemName === 'rowap-berry' &&
+				getHeldItemInBattle(updatedTarget) === 'rowap-berry' &&
 				move.data.damage_class.name === 'special'
 			) {
 				updatedTarget = { ...updatedTarget, heldItemName: undefined };

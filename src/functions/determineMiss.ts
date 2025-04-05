@@ -10,6 +10,7 @@ import {
 	getCompoundEyesFactor,
 	getHustleFactor,
 } from './getCompoundEyesFactor';
+import { getHeldItemInBattle } from './getHeldItem';
 import { isSelfTargeting } from './isSelfTargeting';
 
 export type MissReason =
@@ -108,7 +109,8 @@ export const determineMiss = (
 
 	const compoundEyesFactor = getCompoundEyesFactor(attacker, attack);
 	const hustleFactor = getHustleFactor(attacker, attack);
-	const brightPowderFactor = target.heldItemName === 'bright-powder' ? 0.9 : 1;
+	const brightPowderFactor =
+		getHeldItemInBattle(target) === 'bright-powder' ? 0.9 : 1;
 	const thunderWeatherFactor =
 		attack.name === 'thunder' && weather === 'sun' ? 0.5 : 1;
 
