@@ -253,5 +253,18 @@ export const applySecondaryAilmentToPokemon = ({
 			],
 		};
 	}
+	if (ailment === 'destiny-bonded' && targetId) {
+		addMessage({ message: `${pokemon.data.name} is destiny bonded` });
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'destiny-bonded',
+					duration: 1,
+				},
+			],
+		};
+	}
 	return pokemon;
 };

@@ -497,7 +497,7 @@ export const BattleField = ({
 					//resets at end of turn
 					updated = { ...updated, lastReceivedDamage: undefined };
 
-					updated = checkAndHandleFainting(updated, (x) =>
+					updated = checkAndHandleFainting(updated, pokemon, (x) =>
 						collectedMessages.push(x.message)
 					);
 					return updated;

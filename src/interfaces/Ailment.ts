@@ -40,6 +40,7 @@ const secondaryAilments = [
 	'cursed',
 	'unburdened',
 	'foresighted',
+	'destiny-bonded',
 ] as const;
 
 export type SecondaryAilmentType = (typeof secondaryAilments)[number];

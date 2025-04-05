@@ -546,6 +546,7 @@ export const handleAttack = ({
 			healAmount: Math.floor(updatedTarget.stats.hp * LEECH_DAMAGE_FACTOR),
 		});
 	}
+
 	//apply stat changes
 	if (selfTargeting || move.data.meta.category.name === 'damage+raise') {
 		updatedAttacker = applyAttackStatChanges(
@@ -911,6 +912,15 @@ export const handleAttack = ({
 				newType: move.data.type.name,
 			});
 		}
+		//check color change
+		if (move.name === 'destiny-bond') {
+			updatedTarget = applySecondaryAilmentToPokemon({
+				pokemon: updatedTarget,
+				ailment: 'destiny-bonded',
+				addMessage,
+				targetId: updatedAttacker.id,
+			});
+		}
 	}
 
 	setPokemon((pokemon) =>
@@ -920,20 +930,20 @@ export const handleAttack = ({
 				p.id === updatedAttacker.id
 			) {
 				return {
-					...checkAndHandleFainting(updatedAttacker, addMessage),
+					...checkAndHandleFainting(updatedAttacker, pokemon, addMessage),
 					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
 					biding: updatedAttacker.moveQueue.length > 0 ? p.biding : undefined,
 				};
 			}
 			if (p.id === updatedAttacker.id) {
 				return {
-					...checkAndHandleFainting(updatedAttacker, addMessage),
+					...checkAndHandleFainting(updatedAttacker, pokemon, addMessage),
 					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
 					biding: updatedAttacker.moveQueue.length > 0 ? p.biding : undefined,
 				};
 			}
 			if (p.id === updatedTarget.id) {
-				return checkAndHandleFainting(updatedTarget, addMessage);
+				return checkAndHandleFainting(updatedTarget, pokemon, addMessage);
 			}
 			return p;
 		})
