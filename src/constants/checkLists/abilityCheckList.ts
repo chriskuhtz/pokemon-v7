@@ -554,7 +554,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/118/',
 		handled: true,
 	},
-	{ name: 'frisk', url: 'https://pokeapi.co/api/v2/ability/119/' },
+	{
+		name: 'frisk',
+		url: 'https://pokeapi.co/api/v2/ability/119/',
+		handled: true,
+	},
 	{ name: 'reckless', url: 'https://pokeapi.co/api/v2/ability/120/' },
 	{ name: 'multitype', url: 'https://pokeapi.co/api/v2/ability/121/' },
 	{ name: 'flower-gift', url: 'https://pokeapi.co/api/v2/ability/122/' },
@@ -926,6 +930,7 @@ export const abilityNames = [
 	'solid-rock',
 	'snow-warning',
 	'honey-gather',
+	'frisk',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

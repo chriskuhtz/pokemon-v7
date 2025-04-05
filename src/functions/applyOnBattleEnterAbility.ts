@@ -5,6 +5,7 @@ import { Stat } from '../interfaces/StatObject';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
+import { getHeldItem } from './getHeldItem';
 import { getTypeNames } from './getTypeNames';
 
 export const applyOnBattleEnterAbilityAndEffects = ({
@@ -23,6 +24,20 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 	battleFieldEffects: BattleFieldEffect[];
 }): BattlePokemon[] => {
 	let updatedPokemon = [...pokemon];
+
+	if (user.ability == 'frisk') {
+		const firstOppo = pokemon.find(
+			(p) => p.ownerId !== user.ownerId && p.status === 'ONFIELD'
+		);
+
+		if (firstOppo && getHeldItem(firstOppo, false)) {
+			addMessage({
+				message: `${user.name} detects that ${
+					firstOppo.name
+				} is holding a ${getHeldItem(firstOppo, false)}`,
+			});
+		}
+	}
 
 	if (user.ability === 'drizzle' && currentWeather !== 'rain') {
 		setWeather('rain');
