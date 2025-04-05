@@ -408,6 +408,7 @@ export const handleAttack = ({
 	}
 	if (
 		move.name === 'thief' &&
+		updatedTarget.ability !== 'sticky-hold' &&
 		getHeldItem(updatedTarget, false) &&
 		!getHeldItem(updatedAttacker, false)
 	) {
