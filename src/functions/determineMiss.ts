@@ -104,8 +104,12 @@ export const determineMiss = (
 			: 1;
 
 	const targetEvasion =
-		calculateModifiedStat(target.stats.evasion, target.statBoosts.evasion) *
-		tangledFeetFactor;
+		calculateModifiedStat(
+			target.stats.evasion,
+			target.statBoosts.evasion,
+			'evasion',
+			target.name
+		) * tangledFeetFactor;
 
 	const compoundEyesFactor = getCompoundEyesFactor(attacker, attack);
 	const hustleFactor = getHustleFactor(attacker, attack);
@@ -116,7 +120,9 @@ export const determineMiss = (
 	const attackerAccuracy =
 		calculateModifiedStat(
 			attacker.stats.accuracy,
-			attacker.statBoosts.accuracy
+			attacker.statBoosts.accuracy,
+			'accuracy',
+			attacker.name
 		) *
 		compoundEyesFactor *
 		hustleFactor *

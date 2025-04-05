@@ -218,10 +218,19 @@ export const calculateDamage = (
 
 	const atk =
 		damageClass === 'physical'
-			? calculateModifiedStat(attacker.stats.attack, attacker.statBoosts.attack)
+			? calculateModifiedStat(
+					attacker.stats.attack,
+					attacker.statBoosts.attack,
+					'attack',
+					attacker.name,
+					getHeldItem(attacker)
+			  )
 			: calculateModifiedStat(
 					attacker.stats['special-attack'],
-					attacker.statBoosts['special-attack']
+					attacker.statBoosts['special-attack'],
+					'special-attack',
+					attacker.name,
+					getHeldItem(attacker)
 			  );
 
 	//Crits ignore boosted defense
@@ -242,8 +251,20 @@ export const calculateDamage = (
 
 	const def =
 		damageClass === 'physical'
-			? calculateModifiedStat(target.stats.defense, defBoost())
-			: calculateModifiedStat(target.stats['special-defense'], spdefBoost());
+			? calculateModifiedStat(
+					target.stats.defense,
+					defBoost(),
+					'defense',
+					target.name,
+					getHeldItem(target)
+			  )
+			: calculateModifiedStat(
+					target.stats['special-defense'],
+					spdefBoost(),
+					'special-defense',
+					target.name,
+					getHeldItem(target)
+			  );
 
 	const statFactor = atk / def;
 
