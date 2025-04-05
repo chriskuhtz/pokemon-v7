@@ -187,7 +187,7 @@ export const extraFeatureCheckList: {
 	{ name: 'sort completed quests to the top', handled: true },
 	{ name: 'item storage chest', handled: true },
 	{ name: 'move tutor', handled: true },
-	{ name: 'more farm slots' },
+	{ name: 'more farm slots', handled: true },
 	{ name: 'refactor quest limit' },
 	{ name: 'trainer builder' },
 	{ name: 'walk through grass animation' },
