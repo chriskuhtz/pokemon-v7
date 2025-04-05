@@ -323,6 +323,9 @@ export const handleAttack = ({
 			updatedAttacker = { ...updatedAttacker, endured: true };
 		}
 	}
+	if (move.name === 'defense-curl') {
+		updatedAttacker.defenseCurled = true;
+	}
 
 	//updated Target
 	let updatedTarget = { ...target };

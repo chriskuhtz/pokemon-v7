@@ -15,6 +15,7 @@ export type BattleAttack = {
 	targetId: string;
 	multiHits: number;
 	isAMultiHit: boolean;
+	multiTurn?: number;
 };
 export interface CatchProcessInfo {
 	ball: PokeballType;

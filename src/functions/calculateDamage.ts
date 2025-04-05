@@ -66,6 +66,10 @@ export const getFlailPower = (hp: number, damage: number): number => {
 	// }
 };
 
+export const getRolloutFactor = (turn: number, defenseCurled: boolean) => {
+	return turn * (defenseCurled ? 2 : 1);
+};
+
 export const getPower = (
 	attacker: BattlePokemon,
 	attack: BattleAttack,
@@ -81,6 +85,12 @@ export const getPower = (
 	if (attack.name === 'psywave') {
 		const factor = 0.5 + Math.random();
 		return attackerLevel * factor;
+	}
+	if (attack.name == 'rollout') {
+		return (
+			attack.data.power ??
+			0 * getRolloutFactor(attack.multiTurn ?? 1, !!attacker.defenseCurled)
+		);
 	}
 	return attack.data.power ?? 0;
 };

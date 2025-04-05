@@ -229,6 +229,67 @@ export const useChooseAction = (
 				);
 				return;
 			}
+			if (actionName === 'rollout') {
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.id === user.id) {
+							return {
+								...user,
+								choiceBandedMove: determineChoiceBandedMove(p, move.name),
+								moveQueue: [
+									{
+										type: 'BattleAttack',
+										data: move.data,
+										name: actionName as MoveName,
+										round: battleRound,
+										targetId,
+										multiHits: 0,
+										multiTurn: 1,
+									},
+									{
+										type: 'BattleAttack',
+										data: move.data,
+										name: actionName as MoveName,
+										round: battleRound + 1,
+										targetId,
+										multiHits: 0,
+										multiTurn: 2,
+									},
+									{
+										type: 'BattleAttack',
+										data: move.data,
+										name: actionName as MoveName,
+										round: battleRound + 2,
+										targetId,
+										multiHits: 0,
+										multiTurn: 3,
+									},
+									{
+										type: 'BattleAttack',
+										data: move.data,
+										name: actionName as MoveName,
+										round: battleRound + 3,
+										targetId,
+										multiHits: 0,
+										multiTurn: 4,
+									},
+									{
+										type: 'BattleAttack',
+										data: move.data,
+										name: actionName as MoveName,
+										round: battleRound + 4,
+										targetId,
+										multiHits: 0,
+										multiTurn: 5,
+									},
+								] as BattleAction[],
+							};
+						}
+						return p;
+					})
+				);
+				return;
+			}
 			if (actionName === 'bide') {
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
