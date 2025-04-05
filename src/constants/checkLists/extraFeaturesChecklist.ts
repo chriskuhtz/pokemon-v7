@@ -197,10 +197,10 @@ export const extraFeatureCheckList: {
 	{ name: 'put growth rates on pokemon', handled: true },
 	{ name: 'swarms increase shiny chance', handled: true },
 	{ name: 'award evs after battle', handled: true },
-	{ name: 'evs should not just be random' },
-	{ name: 'filter bulletin quests by time of day' },
+	{ name: 'evs should not just be random', handled: true },
 	{
 		name: 'Info Pill Background color indicates primary ailment',
+		handled: true,
 	},
 	{ name: 'make actual gold/silver berry sprites' },
 	{ name: 'only choosing run away once for entire team' },

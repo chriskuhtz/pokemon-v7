@@ -1,28 +1,52 @@
+import { useContext, useMemo } from 'react';
 import { RiSparkling2Line } from 'react-icons/ri';
 import { battleSpriteSize } from '../../constants/gameData';
 import { secondTurnMoves } from '../../constants/secondTurnMoves';
+import { typeColors } from '../../constants/typeColors';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getPlayerId } from '../../functions/getPlayerId';
+import { SaveFileContext } from '../../hooks/useSaveFile';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Chip } from '../../uiComponents/Chip/Chip';
 import { HpBar } from '../HpBar/HpBar';
 import { PrimaryAilmentIcon } from '../PrimaryAilmentIcon/PrimaryAilmentIcon';
 import { XpBar } from '../XpBar/XpBar';
-import { useContext } from 'react';
-import { SaveFileContext } from '../../hooks/useSaveFile';
 
 export const BattlePokemonInfo = ({ pokemon }: { pokemon: BattlePokemon }) => {
 	const { level } = calculateLevelData(pokemon.xp);
 	const {
 		saveFile: { pokedex },
 	} = useContext(SaveFileContext);
+
+	const backgroundColor = useMemo(() => {
+		if (pokemon.primaryAilment?.type === 'burn') {
+			return typeColors['fire'];
+		}
+		if (pokemon.primaryAilment?.type === 'paralysis') {
+			return typeColors['electric'];
+		}
+		if (pokemon.primaryAilment?.type === 'sleep') {
+			return typeColors['normal'];
+		}
+		if (pokemon.primaryAilment?.type === 'freeze') {
+			return typeColors['ice'];
+		}
+		if (
+			pokemon.primaryAilment?.type === 'poison' ||
+			pokemon.primaryAilment?.type === 'toxic'
+		) {
+			return typeColors['poison'];
+		}
+		return 'white';
+	}, [pokemon]);
 	return (
 		<div
 			style={{
 				border: '1px solid black',
 				padding: '0 2rem',
 				borderRadius: 9000,
+				backgroundColor,
 			}}
 			key={pokemon.id}
 		>
