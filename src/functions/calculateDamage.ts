@@ -225,18 +225,25 @@ export const calculateDamage = (
 			  );
 
 	//Crits ignore boosted defense
-	const defBoost =
-		critFactor === 2
-			? getMiddleOfThree([0, 0, target.statBoosts.defense])
-			: target.statBoosts.defense;
-	const spdefBoost =
-		critFactor === 2
-			? getMiddleOfThree([0, 0, target.statBoosts['special-attack']])
-			: target.statBoosts['special-defense'];
+	const defBoost = () => {
+		if (critFactor === 2 || attacker.ability === 'unaware') {
+			return 0;
+		}
+
+		return target.statBoosts.defense;
+	};
+	const spdefBoost = () => {
+		if (critFactor === 2 || attacker.ability === 'unaware') {
+			return 0;
+		}
+
+		return target.statBoosts['special-defense'];
+	};
+
 	const def =
 		damageClass === 'physical'
-			? calculateModifiedStat(target.stats.defense, defBoost)
-			: calculateModifiedStat(target.stats['special-defense'], spdefBoost);
+			? calculateModifiedStat(target.stats.defense, defBoost())
+			: calculateModifiedStat(target.stats['special-defense'], spdefBoost());
 
 	const statFactor = atk / def;
 
