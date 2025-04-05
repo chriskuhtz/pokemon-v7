@@ -208,10 +208,16 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'improve encounters for rowan quest', handled: true },
 	{ name: 'make actual gold/silver berry sprites', handled: true },
+	{
+		name: 'make pokemon less tiny, experiment with relative size',
+		handled: true,
+	},
+	{
+		name: 'quick solution: make pokemon route/method exclusive',
+		handled: true,
+	},
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'In double battle both pokemon can throw single last poke ball' },
-	{ name: 'make pokemon less tiny, experiment with relative size' },
-	{ name: 'quick solution: make pokemon route/method exclusive' },
 
 	{ name: 'inform about quest rewards' },
 	{ name: 'improve held-item+trade evo condition' },
