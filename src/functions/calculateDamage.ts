@@ -482,6 +482,21 @@ export const calculateDamage = (
 			wasSuperEffective: typeFactor > 1,
 		};
 	}
+	if (
+		getHeldItem(target) === 'focus-band' &&
+		Math.random() < 0.1 &&
+		res > target.stats.hp - target.damage
+	) {
+		if (addMessage) {
+			addMessage({ message: `${target.data.name} hung on with focus band` });
+		}
+		return {
+			damage: target.stats.hp - 1,
+			criticalHit: critFactor === 2,
+			consumedHeldItem,
+			wasSuperEffective: typeFactor > 1,
+		};
+	}
 
 	return {
 		damage: res,

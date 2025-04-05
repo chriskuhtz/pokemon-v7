@@ -959,8 +959,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/205/',
 		handled: true,
 	},
-	{ name: 'everstone', url: 'https://pokeapi.co/api/v2/item/206/' },
-	{ name: 'focus-band', url: 'https://pokeapi.co/api/v2/item/207/' },
+	{
+		name: 'focus-band',
+		url: 'https://pokeapi.co/api/v2/item/207/',
+		handled: true,
+	},
 	{ name: 'lucky-egg', url: 'https://pokeapi.co/api/v2/item/208/' },
 	{ name: 'scope-lens', url: 'https://pokeapi.co/api/v2/item/209/' },
 	{
@@ -3879,4 +3882,5 @@ export const itemsCheckList: {
 	{ name: 'brick-mail', url: 'https://pokeapi.co/api/v2/item/125/' },
 	{ name: 'dowsing-machine', url: 'https://pokeapi.co/api/v2/item/465/' },
 	{ name: 'amulet-coin', url: 'https://pokeapi.co/api/v2/item/200/' },
+	{ name: 'everstone', url: 'https://pokeapi.co/api/v2/item/206/' },
 ];
