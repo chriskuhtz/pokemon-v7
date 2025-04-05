@@ -964,7 +964,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/207/',
 		handled: true,
 	},
-	{ name: 'lucky-egg', url: 'https://pokeapi.co/api/v2/item/208/' },
+	{
+		name: 'lucky-egg',
+		url: 'https://pokeapi.co/api/v2/item/208/',
+		handled: true,
+	},
 	{ name: 'scope-lens', url: 'https://pokeapi.co/api/v2/item/209/' },
 	{
 		name: 'metal-coat',

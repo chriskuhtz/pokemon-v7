@@ -141,6 +141,7 @@ export const heldItems = [
 	'deep-sea-scale',
 	'smoke-ball',
 	'focus-band',
+	'lucky-egg',
 ] as const;
 export const valuables = [
 	'shoal-salt',
@@ -491,6 +492,7 @@ export const pickupTable: ItemType[] = [
 	'soothe-bell',
 	'cleanse-tag',
 	'big-malasada',
+	'lucky-egg',
 ];
 export const undergroundTable: ItemType[] = [
 	...valuables,

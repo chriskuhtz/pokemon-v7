@@ -577,19 +577,26 @@ export const BattleField = ({
 			if (settings?.doubleXpRates) {
 				gainedXp *= 2;
 			}
-			const xpPerTeamMember = settings?.expShareActive
-				? Math.round(gainedXp / team.filter((t) => !isKO(t)).length)
-				: Math.round(
-						gainedXp /
-							team.filter((t) => t.participatedInBattle && !isKO(t)).length
-				  );
+			const xpPerTeamMember = () => {
+				if (settings?.expShareActive) {
+					return Math.round(gainedXp / team.filter((t) => !isKO(t)).length);
+				}
+
+				return Math.round(
+					gainedXp /
+						team.filter((t) => t.participatedInBattle && !isKO(t)).length
+				);
+			};
 
 			const getsRewards = (p: BattlePokemon) =>
 				(settings?.expShareActive || p.participatedInBattle) && !isKO(p);
 			//XP REWARD
 			const leveledUpTeam = team.map((p) => {
 				if (getsRewards(p)) {
-					const newXp = p.xp + xpPerTeamMember;
+					const luckyEggfactor =
+						getHeldItem(p, false) === 'lucky-egg' ? 1.5 : 1;
+					const gained = xpPerTeamMember() * luckyEggfactor;
+					const newXp = p.xp + gained;
 					return { ...p, xp: newXp };
 				}
 				return p;
@@ -639,7 +646,7 @@ export const BattleField = ({
 
 			addMultipleMessages(
 				[
-					xpPerTeamMember > 0
+					xpPerTeamMember() > 0
 						? {
 								message: `Each Team Member gained ${xpPerTeamMember} XP`,
 						  }
