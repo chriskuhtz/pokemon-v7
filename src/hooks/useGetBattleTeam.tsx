@@ -7,6 +7,7 @@ import { MoveName } from '../constants/checkLists/movesCheckList';
 import { calculateLevelData } from '../functions/calculateLevelData';
 import { getRandomEntry } from '../functions/filterTargets';
 import { getEvAwards } from '../functions/getEvAwards';
+import { getHeldItem } from '../functions/getHeldItem';
 import { getStats } from '../functions/getStats';
 import { deAlternate } from '../functions/handleAlternateForms';
 import { maybeGetHeldItemFromData } from '../functions/maybeGetHeldItemFromData';
@@ -175,7 +176,7 @@ export const useGetBattleTeam = (
 
 				const heldItemName = assignHeldItem
 					? maybeGetHeldItemFromData(fetchedData)
-					: pokemon.heldItemName;
+					: getHeldItem(pokemon);
 				const battleMon: BattlePokemon = {
 					...pokemon,
 					growthRate: (await speciesData).growth_rate.name,

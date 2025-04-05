@@ -13,6 +13,7 @@ import { applySecondaryAilmentDamage } from '../../functions/applySecondaryAilme
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { changeMovePP } from '../../functions/changeMovePP';
 import { BattleLocation } from '../../functions/determineCaptureSuccess';
+import { getHeldItem } from '../../functions/getHeldItem';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getSettings } from '../../functions/getPlayerId';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
@@ -625,7 +626,7 @@ export const BattleField = ({
 									updated.effortValues,
 									stat as Stat,
 									award,
-									p.heldItemName
+									getHeldItem(p, false)
 								);
 							});
 						});

@@ -3,6 +3,7 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { OwnedPokemonCard } from '../../components/OwnedPokemonCard/OwnedPokemonCard';
 import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { battleSpriteSize } from '../../constants/gameData';
+import { getHeldItem } from '../../functions/getHeldItem';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getTypeNames } from '../../functions/getTypeNames';
 import { isOwnedPokemonKO } from '../../functions/isKo';
@@ -98,6 +99,8 @@ export const Team = ({
 								data: d,
 							});
 
+							const heldItem = getHeldItem(pokemon);
+
 							return (
 								<div
 									style={{
@@ -139,9 +142,7 @@ export const Team = ({
 										}
 										thirdPlanetUrl={getItemUrl(pokemon.ball)}
 										fourthPlanetUrl={
-											pokemon.heldItemName
-												? getItemUrl(pokemon.heldItemName)
-												: undefined
+											heldItem ? getItemUrl(heldItem) : undefined
 										}
 									/>
 									{pokemon.id === focusedId && index !== team.length - 1 && (

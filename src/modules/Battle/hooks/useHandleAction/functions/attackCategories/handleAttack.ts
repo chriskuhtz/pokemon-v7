@@ -14,7 +14,7 @@ import {
 	getRandomIndex,
 } from '../../../../../../functions/filterTargets';
 import { getActualTargetId } from '../../../../../../functions/getActualTargetId';
-import { getHeldItemInBattle } from '../../../../../../functions/getHeldItem';
+import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
 import { getMovesArray } from '../../../../../../functions/getMovesArray';
 import { arePokemonOfOppositeGenders } from '../../../../../../functions/getRivalryFactor';
@@ -401,16 +401,19 @@ export const handleAttack = ({
 	}
 	if (
 		move.name === 'thief' &&
-		updatedTarget.heldItemName &&
-		!updatedAttacker.heldItemName
+		getHeldItem(updatedTarget, false) &&
+		!getHeldItem(updatedAttacker, false)
 	) {
 		addMessage({
-			message: `${updatedAttacker.name} stole a ${updatedTarget.heldItemName} from ${updatedTarget.name}`,
+			message: `${updatedAttacker.name} stole a ${getHeldItem(
+				updatedTarget,
+				false
+			)} from ${updatedTarget.name}`,
 		});
 
 		updatedAttacker = {
 			...updatedAttacker,
-			heldItemName: updatedTarget.heldItemName,
+			heldItemName: getHeldItem(updatedTarget, false),
 		};
 		updatedTarget = { ...updatedTarget, heldItemName: undefined };
 	}
@@ -680,7 +683,10 @@ export const handleAttack = ({
 		]);
 		if (consumedHeldItem) {
 			addMessage({
-				message: `${updatedTarget.name} consumed its ${updatedTarget.heldItemName} to reduce the damage`,
+				message: `${updatedTarget.name} consumed its ${getHeldItem(
+					updatedTarget,
+					false
+				)} to reduce the damage`,
 			});
 		}
 		updatedTarget = {
@@ -695,7 +701,9 @@ export const handleAttack = ({
 				wasPhysical: move.data.damage_class.name === 'physical',
 				wasSpecial: move.data.damage_class.name === 'special',
 			},
-			heldItemName: consumedHeldItem ? undefined : updatedTarget.heldItemName,
+			heldItemName: consumedHeldItem
+				? undefined
+				: getHeldItem(updatedTarget, false),
 			biding: updatedTarget.biding
 				? {
 						...updatedTarget.biding,
@@ -710,23 +718,29 @@ export const handleAttack = ({
 				return move.data.meta.drain;
 			}
 			if (
-				getHeldItemInBattle(updatedTarget) === 'jaboca-berry' &&
+				getHeldItem(updatedTarget) === 'jaboca-berry' &&
 				move.data.damage_class.name === 'physical'
 			) {
-				updatedTarget = { ...updatedTarget, heldItemName: undefined };
 				addMessage({
-					message: `${updatedTarget.name} somehow used its ${updatedTarget.heldItemName} to damage ${updatedAttacker.name}`,
+					message: `${updatedTarget.name} somehow used its ${getHeldItem(
+						updatedTarget,
+						false
+					)} to damage ${updatedAttacker.name}`,
 				});
+				updatedTarget = { ...updatedTarget, heldItemName: undefined };
 				return -12.5;
 			}
 			if (
-				getHeldItemInBattle(updatedTarget) === 'rowap-berry' &&
+				getHeldItem(updatedTarget) === 'rowap-berry' &&
 				move.data.damage_class.name === 'special'
 			) {
-				updatedTarget = { ...updatedTarget, heldItemName: undefined };
 				addMessage({
-					message: `${updatedTarget.name} somehow used its ${updatedTarget.heldItemName} to damage ${updatedAttacker.name}`,
+					message: `${updatedTarget.name} somehow used its ${getHeldItem(
+						updatedTarget,
+						false
+					)} to damage ${updatedAttacker.name}`,
 				});
+				updatedTarget = { ...updatedTarget, heldItemName: undefined };
 				return -12.5;
 			}
 		};

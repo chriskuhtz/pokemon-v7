@@ -3,6 +3,7 @@ import { RAIN_DISH_FACTOR, SHED_SKIN_CHANCE } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
+import { getHeldItem } from './getHeldItem';
 import { getMiddleOfThree } from './getMiddleOfThree';
 
 export const applyEndOfTurnAbility = ({
@@ -65,8 +66,9 @@ export const applyEndOfTurnAbility = ({
 	}
 	if (
 		pokemon.ability === 'unburden' &&
-		!pokemon.heldItemName &&
-		initialPokemon?.heldItemName
+		initialPokemon &&
+		!getHeldItem(pokemon) &&
+		getHeldItem(initialPokemon)
 	) {
 		addMessage({
 			message: `${pokemon.data.name} doubled its speed with unburden`,
@@ -79,7 +81,7 @@ export const applyEndOfTurnAbility = ({
 			],
 		};
 	}
-	if (pokemon.ability === 'unburden' && pokemon.heldItemName) {
+	if (pokemon.ability === 'unburden' && getHeldItem(pokemon, false)) {
 		return {
 			...pokemon,
 			secondaryAilments: pokemon.secondaryAilments.filter(

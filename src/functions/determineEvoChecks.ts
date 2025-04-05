@@ -4,6 +4,7 @@ import { Inventory } from '../interfaces/Inventory';
 import { ItemType } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { calculateLevelData } from './calculateLevelData';
+import { getHeldItem } from './getHeldItem';
 import { getTimeOfDay } from './getTimeOfDay';
 
 export const determineEvoChecks = (
@@ -66,7 +67,7 @@ export const determineEvoChecks = (
 		if (time_of_day && getTimeOfDay().toLowerCase() !== time_of_day) {
 			res.push(`${time_of_day}-time`);
 		}
-		if (held_item && ownedPokemon.heldItemName !== held_item.name) {
+		if (held_item && getHeldItem(ownedPokemon) !== held_item.name) {
 			res.push(`held item ${held_item.name}`);
 		}
 

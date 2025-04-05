@@ -3,7 +3,7 @@ import { PARA_SPEED_FACTOR } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { calculateModifiedStat } from './calculateModifiedStat';
-import { getHeldItemInBattle } from './getHeldItem';
+import { getHeldItem } from './getHeldItem';
 
 const calculateTotalSpeed = (
 	a: BattlePokemon,
@@ -22,7 +22,7 @@ const calculateTotalSpeed = (
 	)
 		? 2
 		: 1;
-	const machoBraceFactor = getHeldItemInBattle(a) === 'macho-brace' ? 0.5 : 1;
+	const machoBraceFactor = getHeldItem(a) === 'macho-brace' ? 0.5 : 1;
 
 	const quickfeetFactor =
 		a.primaryAilment && a.ability === 'quick-feet' ? 1.5 : 1;
@@ -73,11 +73,11 @@ export const sortByPriority = (
 	}
 
 	const aPriority =
-		getHeldItemInBattle(a) === 'quick-claw' && Math.random() > 0.5
+		getHeldItem(a) === 'quick-claw' && Math.random() > 0.5
 			? 10
 			: aMove?.data.priority ?? 0;
 	const bPriority =
-		getHeldItemInBattle(b) === 'quick-claw' && Math.random() > 0.5
+		getHeldItem(b) === 'quick-claw' && Math.random() > 0.5
 			? 10
 			: bMove?.data.priority ?? 0;
 

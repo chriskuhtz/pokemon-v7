@@ -3,6 +3,7 @@ import { MoveName } from '../../../constants/checkLists/movesCheckList';
 import { lockInMoves } from '../../../constants/forceSwitchMoves';
 import { secondTurnMoves } from '../../../constants/secondTurnMoves';
 import { determineMultiHits } from '../../../functions/determineMultiHits';
+import { getHeldItem } from '../../../functions/getHeldItem';
 import { BattleAction } from '../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import {
@@ -14,7 +15,6 @@ import {
 } from '../../../interfaces/Item';
 import { WeatherType } from '../../../interfaces/Weather';
 import { ChooseActionPayload } from '../BattleField';
-import { getHeldItemInBattle } from '../../../functions/getHeldItem';
 
 const determineChoiceBandedMove = (
 	pokemon: BattlePokemon,
@@ -23,10 +23,7 @@ const determineChoiceBandedMove = (
 	if (pokemon.choiceBandedMove) {
 		return pokemon.choiceBandedMove;
 	}
-	if (
-		getHeldItemInBattle(pokemon) === 'choice-band' &&
-		!pokemon.choiceBandedMove
-	) {
+	if (getHeldItem(pokemon) === 'choice-band' && !pokemon.choiceBandedMove) {
 		return chosenMove;
 	}
 
