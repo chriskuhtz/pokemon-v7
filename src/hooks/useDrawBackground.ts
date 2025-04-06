@@ -57,6 +57,20 @@ export const useDrawBackground = (
 							tileSize
 						);
 					}
+					const water = waterLayer[h][w];
+					if (water) {
+						ctx?.drawImage(
+							spriteSheet,
+							-water.xOffset,
+							-water.yOffset,
+							16,
+							16,
+							tileSize * w,
+							tileSize * h,
+							tileSize,
+							tileSize
+						);
+					}
 					const deco = decorationLayer[h][w];
 					if (deco) {
 						ctx?.drawImage(
@@ -86,20 +100,7 @@ export const useDrawBackground = (
 							tileSize
 						);
 					}
-					const water = waterLayer[h][w];
-					if (water) {
-						ctx?.drawImage(
-							spriteSheet,
-							-water.xOffset,
-							-water.yOffset,
-							16,
-							16,
-							tileSize * w,
-							tileSize * h,
-							tileSize,
-							tileSize
-						);
-					}
+
 					const fore = foregroundLayer[h][w];
 					if (fore) {
 						ctx?.drawImage(

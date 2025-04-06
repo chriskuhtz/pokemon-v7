@@ -188,6 +188,20 @@ export const campOccupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) => !isBagOverloaded(s),
 	},
 	{
+		type: 'ON_STEP_PORTAL',
+		x: 10,
+		y: 19,
+		portal: {
+			mapId: 'routeS1',
+			x: 25,
+			y: 1,
+			orientation: 'DOWN',
+			forwardFoot: 'CENTER1',
+		},
+		id: 'camp_to_routeS1',
+		conditionFunction: (s) => !isBagOverloaded(s),
+	},
+	{
 		type: 'NPC',
 		x: 10,
 		y: 0,

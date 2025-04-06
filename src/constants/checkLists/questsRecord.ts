@@ -19,6 +19,7 @@ import { onixCaveEncounters } from '../maps/encounters/onixCave';
 import { routeE1 } from '../maps/routeE1';
 import { routeN1 } from '../maps/routeN1';
 import { routeN1E1 } from '../maps/routeN1E1';
+import { routeS1 } from '../maps/routeS1';
 import { routeS1E1 } from '../maps/routeS1E1';
 import { pokemonNames } from '../pokemonNames';
 import { CampUpgrade, campUpgradeNames } from './campUpgrades';
@@ -300,6 +301,7 @@ const catchQuests = {
 export const questNames = [
 	...Object.keys(catchQuests),
 	'catch a pikachu',
+	'catch a feebas',
 	'catch a pokemon',
 	'catch a spiritomb',
 	'catch Haunter and Mightyena',
@@ -403,6 +405,16 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		kind: 'BULLETIN',
 	},
+	'catch a feebas': {
+		rewardItems: { 'master-ball': 1 },
+		researchPoints: 100,
+		targetPokemon: ['feebas'],
+		conditionFunction: (s) => {
+			return s.pokedex.feebas.caughtOnRoutes.length > 0;
+		},
+		availableAfter: 'catch a pikachu',
+		kind: 'BULLETIN',
+	},
 	'catch all honeytree pokemon': {
 		rewardItems: { 'sun-stone': 2, 'leaf-stone': 2, 'berry-juice': 5 },
 		researchPoints: 20,
@@ -413,6 +425,32 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		availableAfter: 'lure a pokemon with honey',
 		requiredUpgrade: 'build combee hive',
+	},
+	'catch all different pokemon on routeS1': {
+		rewardItems: {
+			'dragon-scale': 1,
+			'water-stone': 1,
+			'belue-berry': 5,
+			'razz-berry': 5,
+			'rindo-berry': 5,
+		},
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return [
+				...routeS1.possibleEncounters.BASE,
+				...routeS1.possibleEncounters.WATER,
+			].every((e) => s.pokedex[e.name].caughtOnRoutes.includes(routeS1.id));
+		},
+		targetPokemon: [
+			...new Set(
+				[
+					...routeS1.possibleEncounters.BASE,
+					...routeS1.possibleEncounters.WATER,
+				].map((p) => p.name)
+			),
+		],
+		kind: 'BULLETIN',
+		requiredUpgrade: 'swimming certification',
 	},
 	'catch a pokemon orginally found in kanto': {
 		rewardItems: { protein: 2 },

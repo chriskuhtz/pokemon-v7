@@ -43,6 +43,12 @@ const unmemoedLayerEditor = ({
 				>
 					Random 10%
 				</button>
+				<button
+					style={{ color: 'white', marginRight: '1rem' }}
+					onClick={() => randomFill(layerName, 1)}
+				>
+					100%
+				</button>
 				{layerName}:
 			</h3>
 			<div
