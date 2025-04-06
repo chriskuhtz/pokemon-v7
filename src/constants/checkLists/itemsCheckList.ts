@@ -1070,7 +1070,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/229/',
 		handled: true,
 	},
-	{ name: 'shell-bell', url: 'https://pokeapi.co/api/v2/item/230/' },
+	{
+		name: 'shell-bell',
+		url: 'https://pokeapi.co/api/v2/item/230/',
+		handled: true,
+	},
 	{ name: 'sea-incense', url: 'https://pokeapi.co/api/v2/item/231/' },
 	{ name: 'lax-incense', url: 'https://pokeapi.co/api/v2/item/232/' },
 	{ name: 'lucky-punch', url: 'https://pokeapi.co/api/v2/item/233/' },

@@ -773,6 +773,21 @@ export const handleAttack = ({
 				)} to reduce the damage`,
 			});
 		}
+		if (
+			getHeldItem(updatedAttacker) === 'shell-bell' &&
+			damage !== 0 &&
+			updatedAttacker.damage !== 0
+		) {
+			addMessage({
+				message: `${updatedAttacker.name} healed itself with shell bell`,
+			});
+
+			const restored = getMiddleOfThree([Math.floor(damage / 8), 1, 1]);
+			updatedAttacker = {
+				...updatedAttacker,
+				damage: getMiddleOfThree([0, 0, updatedAttacker.damage - restored]),
+			};
+		}
 		updatedTarget = {
 			...updatedTarget,
 			damage: updatedTarget.damage + actualDamage,

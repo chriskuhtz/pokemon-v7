@@ -335,4 +335,5 @@ export const extraFeatureCheckList: {
 	{ name: 'move routeW1 to custom sheet' },
 	{ name: 'move routeN1W1 to custom sheet' },
 	{ name: 'more overworld items' },
+	{ name: 'x quests completed bars' },
 ];

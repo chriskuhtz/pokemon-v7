@@ -159,6 +159,7 @@ export const heldItems = [
 	'dragon-fang',
 	'silk-scarf',
 	'up-grade',
+	'shell-bell',
 ] as const;
 export const valuables = [
 	'shoal-salt',
