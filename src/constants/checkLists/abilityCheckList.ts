@@ -535,10 +535,6 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/111/',
 		handled: true,
 	},
-	{ name: 'slow-start', url: 'https://pokeapi.co/api/v2/ability/112/' },
-	{ name: 'scrappy', url: 'https://pokeapi.co/api/v2/ability/113/' },
-	{ name: 'storm-drain', url: 'https://pokeapi.co/api/v2/ability/114/' },
-	{ name: 'ice-body', url: 'https://pokeapi.co/api/v2/ability/115/' },
 	{
 		name: 'solid-rock',
 		url: 'https://pokeapi.co/api/v2/ability/116/',
@@ -594,7 +590,15 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/127/',
 		handled: true,
 	},
-	{ name: 'defiant', url: 'https://pokeapi.co/api/v2/ability/128/' },
+	{
+		name: 'defiant',
+		url: 'https://pokeapi.co/api/v2/ability/128/',
+		handled: true,
+	},
+	{ name: 'slow-start', url: 'https://pokeapi.co/api/v2/ability/112/' },
+	{ name: 'scrappy', url: 'https://pokeapi.co/api/v2/ability/113/' },
+	{ name: 'storm-drain', url: 'https://pokeapi.co/api/v2/ability/114/' },
+	{ name: 'ice-body', url: 'https://pokeapi.co/api/v2/ability/115/' },
 	{ name: 'defeatist', url: 'https://pokeapi.co/api/v2/ability/129/' },
 	{ name: 'cursed-body', url: 'https://pokeapi.co/api/v2/ability/130/' },
 	{ name: 'healer', url: 'https://pokeapi.co/api/v2/ability/131/' },
@@ -969,6 +973,7 @@ export const abilityNames = [
 	'sheer-force',
 	'contrary',
 	'unnerve',
+	'defiant',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

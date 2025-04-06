@@ -110,6 +110,25 @@ export const applyStatChangeToPokemon = (
 		});
 	}
 
+	if (
+		pokemon.ability === 'defiant' &&
+		modifier < 0 &&
+		pokemon.statBoosts.attack < 6
+	) {
+		applyStatChangeToPokemon(
+			{
+				...pokemon,
+				statBoosts: { ...pokemon.statBoosts, [stat]: limitedStat },
+			},
+			'attack',
+			2,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'with defiant'
+		);
+	}
+
 	return {
 		...pokemon,
 		statBoosts: { ...pokemon.statBoosts, [stat]: limitedStat },
