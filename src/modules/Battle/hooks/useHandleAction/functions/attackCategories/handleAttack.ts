@@ -132,6 +132,30 @@ export const handleAttack = ({
 		});
 	}
 
+	//HEAL-BELL
+	if (move.name === 'heal-bell') {
+		addMessage({ message: 'All major Status Problems are healed' });
+		setPokemon((pokemon) =>
+			pokemon.map((p) => {
+				if (p.id === updatedAttacker.id) {
+					return {
+						...changeMovePP(
+							updatedAttacker,
+							move.name,
+							underPressure ? -2 : -1
+						),
+						primaryAilment: undefined,
+						lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
+					};
+				}
+				if (p.ownerId === updatedAttacker.ownerId && p.status === 'ONFIELD') {
+					return { ...p, primaryAilment: undefined };
+				}
+
+				return p;
+			})
+		);
+	}
 	//WEATHER MOVES
 	if (move.name === 'sunny-day') {
 		setBattleWeather('sun');

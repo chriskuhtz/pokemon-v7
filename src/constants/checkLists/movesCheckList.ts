@@ -1145,8 +1145,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/213/',
 		handled: true,
 	},
-	{ name: 'sleep-talk', url: 'https://pokeapi.co/api/v2/move/214/' },
-	{ name: 'heal-bell', url: 'https://pokeapi.co/api/v2/move/215/' },
+	{
+		name: 'heal-bell',
+		url: 'https://pokeapi.co/api/v2/move/215/',
+		handled: true,
+	},
 	{ name: 'return', url: 'https://pokeapi.co/api/v2/move/216/' },
 	{ name: 'present', url: 'https://pokeapi.co/api/v2/move/217/' },
 	{ name: 'frustration', url: 'https://pokeapi.co/api/v2/move/218/' },
@@ -1946,6 +1949,10 @@ export const movesCheckList: {
 	},
 	{ name: 'substitute', url: 'https://pokeapi.co/api/v2/move/164/' },
 	{ name: 'struggle', url: 'https://pokeapi.co/api/v2/move/165/' },
+	{
+		name: 'sleep-talk',
+		url: 'https://pokeapi.co/api/v2/move/214/',
+	},
 ];
 
 export const handledMoves = [
@@ -2226,6 +2233,7 @@ export const handledMoves = [
 	'fury-cutter',
 	'mean-look',
 	'attract',
+	'heal-bell',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

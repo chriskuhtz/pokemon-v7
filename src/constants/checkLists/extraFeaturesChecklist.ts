@@ -243,6 +243,7 @@ export const extraFeatureCheckList: {
 	{ name: 'improve performance of mapmaker', handled: true },
 
 	{ name: 'water as distinct from obstacles' },
+	{ name: 'extract category:unique moves' },
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'improve held-item+trade evo condition' },
 	{ name: 'refine battle end' },
