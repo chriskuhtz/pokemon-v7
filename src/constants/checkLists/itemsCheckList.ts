@@ -1090,7 +1090,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/233/',
 		handled: true,
 	},
-	{ name: 'metal-powder', url: 'https://pokeapi.co/api/v2/item/234/' },
+	{
+		name: 'metal-powder',
+		url: 'https://pokeapi.co/api/v2/item/234/',
+		handled: true,
+	},
 	{ name: 'thick-club', url: 'https://pokeapi.co/api/v2/item/235/' },
 	{ name: 'stick', url: 'https://pokeapi.co/api/v2/item/236/' },
 	{ name: 'red-scarf', url: 'https://pokeapi.co/api/v2/item/237/' },

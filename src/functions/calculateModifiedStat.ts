@@ -26,6 +26,13 @@ export const calculateModifiedStat = (
 		res = res * 2;
 	}
 	if (
+		heldItem === 'metal-powder' &&
+		pokemon.name.includes('ditto') &&
+		(statName === 'defense' || statName === 'special-defense')
+	) {
+		res = res * 1.5;
+	}
+	if (
 		heldItem === 'soul-dew' &&
 		(pokemon.name === 'latias' ||
 			pokemon.name === 'latios' ||

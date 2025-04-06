@@ -163,6 +163,7 @@ export const heldItems = [
 	'sea-incense',
 	'lax-incense',
 	'lucky-punch',
+	'metal-powder',
 ] as const;
 export const valuables = [
 	'shoal-salt',
