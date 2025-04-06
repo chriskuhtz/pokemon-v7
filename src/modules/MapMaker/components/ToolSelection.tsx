@@ -11,9 +11,14 @@ export const ToolSelection = ({
 	tileSetUrl: string;
 }): JSX.Element => {
 	return (
-		<div>
+		<div style={{ display: 'flex', padding: '1rem' }}>
 			<button
-				style={{ margin: '1rem', padding: '1rem', color: 'white' }}
+				style={{
+					margin: '1rem',
+					padding: '1rem',
+					color: 'white',
+					height: 'min-content',
+				}}
 				onClick={() => setSelected({ type: 'eraser' })}
 			>
 				Eraser

@@ -7,7 +7,6 @@ export const useDrawBackground = (
 	tileSetSource: string,
 	tileSize: number
 ) => {
-	console.log(tileSetSource);
 	useEffect(() => {
 		const el: HTMLCanvasElement | null = document.getElementById(
 			canvasId

@@ -1,4 +1,4 @@
-import { useDeferredValue, useMemo, useState } from 'react';
+import { useDeferredValue, useState } from 'react';
 import { OverworldMap, TileIdentifier } from '../../../interfaces/OverworldMap';
 import { Tool } from '../MapMaker';
 
@@ -34,39 +34,6 @@ export const useMapEditor = ({
 	const [waterLayer, setwaterLayer] = useState<(TileIdentifier | null)[][]>(
 		initialMap.tileMap.waterLayer
 	);
-
-	const usedTiles = useMemo(() => {
-		const used: TileIdentifier[] = [];
-
-		const all = [
-			...baseLayer.flat(),
-			...encounterLayer.flat(),
-			...obstacleLayer.flat(),
-			...decorationLayer.flat(),
-			...foregroundLayer.flat(),
-			...waterLayer.flat(),
-		];
-
-		all.forEach((t) => {
-			if (
-				t &&
-				!used.find(
-					(entry) => entry.yOffset === t.yOffset && entry.xOffset === t.xOffset
-				)
-			) {
-				used.push(t);
-			}
-		});
-
-		return used;
-	}, [
-		baseLayer,
-		decorationLayer,
-		encounterLayer,
-		foregroundLayer,
-		obstacleLayer,
-		waterLayer,
-	]);
 
 	const addColumn = () => {
 		setBaseLayer(baseLayer.map((row) => [...row, row[row.length - 1]]));
@@ -432,7 +399,6 @@ export const useMapEditor = ({
 		clearLayer,
 		changeRow,
 		changeColumn,
-		usedTiles,
 		randomFill,
 		baseLayer: b,
 		encounterLayer: e,

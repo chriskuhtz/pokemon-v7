@@ -1,9 +1,9 @@
-import { JSX } from 'react';
+import { JSX, useMemo } from 'react';
+import { CombinedCanvas } from '../../../components/CombinedCanvas/CombinedCanvas';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
-import { Tab, Tool } from '../MapMaker';
-import { useMapEditor } from '../hooks/useMapEditor';
-import { TileMapTab } from './TileMapTab';
-import { TileQuickSelection } from './TileQuickSelection';
+import { Tool } from '../MapMaker';
+import { LayerName, useMapEditor } from '../hooks/useMapEditor';
+import { LayerEditor } from './LayerEditor';
 import { ToolSelection } from './ToolSelection';
 
 export const MapEditor = ({
@@ -15,8 +15,8 @@ export const MapEditor = ({
 }: {
 	tool: Tool | undefined;
 	initialMap: OverworldMap;
-	activeTab: Tab;
-	setActiveTab: (x: Tab) => void;
+	activeTab: LayerName;
+	setActiveTab: (x: LayerName) => void;
 	setSelected: (x: Tool) => void;
 }): JSX.Element => {
 	const {
@@ -32,62 +32,100 @@ export const MapEditor = ({
 		foregroundLayer,
 		obstacleLayer,
 		waterLayer,
-		usedTiles,
 		randomFill,
 	} = useMapEditor({
 		tool,
 		initialMap,
 	});
 
+	const layer = useMemo(() => {
+		if (activeTab === 'Decoration') {
+			return decorationLayer;
+		}
+		if (activeTab === 'Water') {
+			return waterLayer;
+		}
+		if (activeTab === 'Encounter') {
+			return encounterLayer;
+		}
+		if (activeTab === 'Obstacle') {
+			return obstacleLayer;
+		}
+		if (activeTab === 'Foreground') {
+			return foregroundLayer;
+		}
+
+		return baseLayer;
+	}, [
+		activeTab,
+		baseLayer,
+		decorationLayer,
+		encounterLayer,
+		foregroundLayer,
+		obstacleLayer,
+		waterLayer,
+	]);
+
 	return (
 		<div>
 			<h2>{initialMap.id}</h2>
 			<div style={{ display: 'flex', gap: '1rem' }}>
-				{['TileMap', 'ToolSelection'].map((t) => (
+				{[
+					'Base',
+					'Obstacle',
+					'Decoration',
+					'Encounter',
+					'Foreground',
+					'Water',
+				].map((t) => (
 					<button
 						key={t}
 						style={{ color: t === activeTab ? 'wheat' : 'lightgray' }}
-						onClick={() => setActiveTab(t as Tab)}
+						onClick={() => setActiveTab(t as LayerName)}
 					>
 						{t}
 					</button>
 				))}
 			</div>
+			<div
+				style={{
+					display: 'flex',
+					justifyContent: 'space-between',
+					padding: '1rem',
+				}}
+			>
+				<ToolSelection
+					setSelected={setSelected}
+					tileSetUrl={initialMap.tilesetUrl}
+				/>
+				<CombinedCanvas
+					map={{
+						baseLayer,
+						encounterLayer,
+						obstacleLayer,
+						decorationLayer,
+						foregroundLayer,
+						waterLayer,
+					}}
+					tileSize={8}
+					tileSetUrl={initialMap.tilesetUrl}
+				/>
+			</div>
+			<div>
+				<LayerEditor
+					tileSetUrl={initialMap.tilesetUrl}
+					addColumn={addColumn}
+					addRow={addRow}
+					changeTile={changeTile}
+					layer={layer}
+					layerName={activeTab}
+					clear={() => clearLayer(activeTab)}
+					changeRow={(index) => changeRow(index, activeTab)}
+					changeColumn={(index) => changeColumn(index, activeTab)}
+					randomFill={randomFill}
+				/>
+			</div>
 
-			{activeTab === 'TileMap' && (
-				<>
-					<TileQuickSelection
-						usedTiles={usedTiles}
-						setSelected={setSelected}
-						tileSetUrl={initialMap.tilesetUrl}
-					/>
-					<TileMapTab
-						tileSetUrl={initialMap.tilesetUrl}
-						baseLayer={baseLayer}
-						encounterLayer={encounterLayer}
-						obstacleLayer={obstacleLayer}
-						decorationLayer={decorationLayer}
-						foregroundLayer={foregroundLayer}
-						waterLayer={waterLayer}
-						changeColumn={changeColumn}
-						changeRow={changeRow}
-						addColumn={addColumn}
-						addRow={addRow}
-						clearLayer={clearLayer}
-						changeTile={changeTile}
-						randomFill={randomFill}
-					/>
-				</>
-			)}
-
-			{activeTab === 'ToolSelection' && (
-				<>
-					<ToolSelection
-						setSelected={setSelected}
-						tileSetUrl={initialMap.tilesetUrl}
-					/>
-				</>
-			)}
 			<a
 				style={{ color: 'white' }}
 				href={
@@ -101,17 +139,7 @@ export const MapEditor = ({
 			<a
 				style={{ color: 'white', paddingLeft: '2rem' }}
 				onClick={() => {
-					if (activeTab === 'TileMap') {
-						navigator.clipboard.writeText(JSON.stringify(initialMap.tileMap));
-					}
-					if (activeTab === 'Occupants') {
-						navigator.clipboard.writeText(JSON.stringify(initialMap.occupants));
-					}
-					if (activeTab === 'Encounters') {
-						navigator.clipboard.writeText(
-							JSON.stringify(initialMap.possibleEncounters)
-						);
-					}
+					navigator.clipboard.writeText(JSON.stringify(initialMap.tileMap));
 				}}
 			>
 				Copy to Clipboard
