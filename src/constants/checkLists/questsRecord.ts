@@ -19,6 +19,7 @@ import { onixCaveEncounters } from '../maps/encounters/onixCave';
 import { routeE1 } from '../maps/routeE1';
 import { routeN1 } from '../maps/routeN1';
 import { routeN1E1 } from '../maps/routeN1E1';
+import { routeS1E1 } from '../maps/routeS1E1';
 import { pokemonNames } from '../pokemonNames';
 import { CampUpgrade, campUpgradeNames } from './campUpgrades';
 
@@ -146,6 +147,47 @@ const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 		'qualot-berry': 1,
 		'berry-juice': 1,
 	},
+	//routeS1E1
+	'catch a MORNING-time exclusive pokemon from routeS1E1': {
+		'great-ball': 5,
+		'kee-berry': 2,
+		'berry-juice': 1,
+	},
+	'catch a DAY-time exclusive pokemon from routeS1E1': {
+		'great-ball': 5,
+		'belue-berry': 2,
+		'berry-juice': 1,
+	},
+	'catch a EVENING-time exclusive pokemon from routeS1E1': {
+		'great-ball': 5,
+		'rabuta-berry': 2,
+		'berry-juice': 1,
+	},
+	'catch a NIGHT-time exclusive pokemon from routeS1E1': {
+		'great-ball': 5,
+		'pinap-berry': 2,
+		'berry-juice': 1,
+	},
+	'catch all MORNING-time pokemon from routeS1E1': {
+		'great-ball': 10,
+		'qualot-berry': 2,
+		'berry-juice': 1,
+	},
+	'catch all DAY-time pokemon from routeS1E1': {
+		'great-ball': 10,
+		'payapa-berry': 2,
+		'berry-juice': 1,
+	},
+	'catch all EVENING-time pokemon from routeS1E1': {
+		'great-ball': 10,
+		'magost-berry': 2,
+		'berry-juice': 1,
+	},
+	'catch all NIGHT-time pokemon from routeS1E1': {
+		'great-ball': 10,
+		'tamato-berry': 1,
+		'berry-juice': 1,
+	},
 };
 
 const catchQuestsForRoute = (
@@ -188,6 +230,7 @@ const catchQuestsForRoute = (
 						conditionFunction: (s) => {
 							return [
 								...route.possibleEncounters.BASE,
+								...route.possibleEncounters.WATER,
 								...route.possibleEncounters[time],
 							].every((e) =>
 								s.pokedex[e.name].caughtOnRoutes.includes(route.id)
@@ -197,6 +240,7 @@ const catchQuestsForRoute = (
 							...new Set(
 								[
 									...route.possibleEncounters.BASE,
+									...route.possibleEncounters.WATER,
 									...route.possibleEncounters[time],
 								].map((p) => p.name)
 							),
@@ -213,6 +257,8 @@ const catchQuestsForRoute = (
 			researchPoints: 20,
 			conditionFunction: (s) => {
 				return [
+					...route.possibleEncounters.BASE,
+					...route.possibleEncounters.WATER,
 					...route.possibleEncounters.NIGHT,
 					...route.possibleEncounters.MORNING,
 					...route.possibleEncounters.DAY,
@@ -226,6 +272,8 @@ const catchQuestsForRoute = (
 			targetPokemon: [
 				...new Set(
 					[
+						...route.possibleEncounters.BASE,
+						...route.possibleEncounters.WATER,
 						...route.possibleEncounters.NIGHT,
 						...route.possibleEncounters.MORNING,
 						...route.possibleEncounters.DAY,
@@ -246,6 +294,7 @@ const catchQuests = {
 	...catchQuestsForRoute(routeN1),
 	...catchQuestsForRoute(routeN1E1, 'machete certification'),
 	...catchQuestsForRoute(routeE1, 'sledge hammer certification'),
+	...catchQuestsForRoute(routeS1E1, 'swimming certification'),
 };
 
 export const questNames = [
