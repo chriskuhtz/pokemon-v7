@@ -32,12 +32,24 @@ export const getActualTargetId = ({
 			p.ability === 'lightning-rod' &&
 			p.ownerId !== attacker.ownerId
 	);
+	const stormDrain = pokemon.find(
+		(p) =>
+			p.status === 'ONFIELD' &&
+			p.ability === 'storm-drain' &&
+			p.ownerId !== attacker.ownerId
+	);
 
 	if (lightningRod && move.data.type.name === 'electric') {
 		addMessage({
 			message: `${lightningRod.data.name} redirected the electric attack with lightning rod`,
 		});
 		return lightningRod.id;
+	}
+	if (stormDrain && move.data.type.name === 'water') {
+		addMessage({
+			message: `${stormDrain.data.name} redirected the water type attack with storm drain`,
+		});
+		return stormDrain.id;
 	}
 	return move.targetId;
 };

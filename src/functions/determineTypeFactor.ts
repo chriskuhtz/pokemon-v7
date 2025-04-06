@@ -67,6 +67,14 @@ export const determineTypeFactor = (
 		}
 		return 0;
 	}
+	if (target.ability === 'storm-drain' && attack.data.type.name === 'water') {
+		if (addMessage) {
+			addMessage({
+				message: `${target.data.name} prevents damage with storm drain`,
+			});
+		}
+		return 0;
+	}
 
 	if (res === 0) {
 		if (addMessage) {

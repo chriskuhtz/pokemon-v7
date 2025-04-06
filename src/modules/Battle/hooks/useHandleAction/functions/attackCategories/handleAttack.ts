@@ -763,6 +763,22 @@ export const handleAttack = ({
 				'by lightning-rod'
 			);
 		}
+		//check storm drain
+		if (
+			!isKO(updatedTarget) &&
+			target.ability === 'storm-drain' &&
+			move.data.type.name === 'water'
+		) {
+			updatedTarget = applyStatChangeToPokemon(
+				updatedTarget,
+				'special-attack',
+				1,
+				true,
+				battleFieldEffects,
+				addMessage,
+				'by storm-drain'
+			);
+		}
 		//check color change
 		if (
 			!isKO(updatedTarget) &&
