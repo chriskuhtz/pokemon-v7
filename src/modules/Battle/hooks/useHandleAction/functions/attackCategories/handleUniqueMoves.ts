@@ -83,7 +83,18 @@ export const handleUniqueMoves = ({
 		return;
 	}
 	let updatedTarget = { ...target };
-	//const selfTargeting = move.data.target.name === 'user';
+	const selfTargeting = move.data.target.name === 'user';
+
+	//MESSAGES
+	if (!selfTargeting) {
+		addMessage({
+			message: `${attacker.data.name} used ${move.name} against ${target.data.name}`,
+		});
+	} else {
+		addMessage({
+			message: `${attacker.data.name} used ${move.name} `,
+		});
+	}
 
 	if (move.name === 'disable') {
 		const moves = getMovesArray(target, { filterOutDisabled: false });
