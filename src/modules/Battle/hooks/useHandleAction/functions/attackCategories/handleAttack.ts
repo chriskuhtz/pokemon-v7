@@ -394,6 +394,17 @@ export const handleAttack = ({
 			ailment: 'foresighted',
 		});
 	}
+	if (move.name === 'attract') {
+		if (updatedTarget.gender === 'GENDERLESS') {
+			addMessage({ message: 'It failed' });
+		} else
+			updatedTarget = applySecondaryAilmentToPokemon({
+				pokemon: updatedTarget,
+				addMessage,
+				ailment: 'infatuation',
+				targetId: updatedAttacker.id,
+			});
+	}
 
 	const isFlying =
 		updatedTarget.moveQueue.length > 0 &&
