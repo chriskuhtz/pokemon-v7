@@ -1,10 +1,5 @@
 import { useDeferredValue, useMemo, useState } from 'react';
-import { TimeOfDay } from '../../../functions/getTimeOfDay';
-import {
-	Occupant,
-	OverworldMap,
-	TileIdentifier,
-} from '../../../interfaces/OverworldMap';
+import { OverworldMap, TileIdentifier } from '../../../interfaces/OverworldMap';
 import { Tool } from '../MapMaker';
 
 export type LayerName =
@@ -20,18 +15,31 @@ export const useMapEditor = ({
 	tool: Tool | undefined;
 	initialMap: OverworldMap;
 }) => {
-	const [newMapState, setNewMap] = useState<OverworldMap>(initialMap);
+	const [baseLayer, setBaseLayer] = useState<TileIdentifier[][]>(
+		initialMap.tileMap.baseLayer
+	);
+	const [encounterLayer, setencounterLayer] = useState<
+		(TileIdentifier | null)[][]
+	>(initialMap.tileMap.encounterLayer);
+	const [decorationLayer, setdecorationLayer] = useState<
+		(TileIdentifier | null)[][]
+	>(initialMap.tileMap.decorationLayer);
+	const [obstacleLayer, setobstacleLayer] = useState<
+		(TileIdentifier | null)[][]
+	>(initialMap.tileMap.obstacleLayer);
+	const [foregroundLayer, setforegroundLayer] = useState<
+		(TileIdentifier | null)[][]
+	>(initialMap.tileMap.foregroundLayer);
 
-	const newMap = useDeferredValue(newMapState);
 	const usedTiles = useMemo(() => {
 		const used: TileIdentifier[] = [];
 
 		const all = [
-			...newMapState.tileMap.baseLayer.flat(),
-			...newMapState.tileMap.encounterLayer.flat(),
-			...newMapState.tileMap.obstacleLayer.flat(),
-			...newMapState.tileMap.decorationLayer.flat(),
-			...newMapState.tileMap.foregroundLayer.flat(),
+			...baseLayer.flat(),
+			...encounterLayer.flat(),
+			...obstacleLayer.flat(),
+			...decorationLayer.flat(),
+			...foregroundLayer.flat(),
 		];
 
 		all.forEach((t) => {
@@ -46,405 +54,328 @@ export const useMapEditor = ({
 		});
 
 		return used;
-	}, [newMapState]);
+	}, [
+		baseLayer,
+		decorationLayer,
+		encounterLayer,
+		foregroundLayer,
+		obstacleLayer,
+	]);
 
-	const addColumn = () =>
-		setNewMap((newMap) => ({
-			...newMap,
-			tileMap: {
-				baseLayer: newMap.tileMap.baseLayer.map((row) => [
-					...row,
-					row[row.length - 1],
-				]),
-				encounterLayer: newMap.tileMap.encounterLayer.map((row) => [
-					...row,
-					null,
-				]),
-				obstacleLayer: newMap.tileMap.obstacleLayer.map((row) => [
-					...row,
-					null,
-				]),
-				decorationLayer: newMap.tileMap.decorationLayer.map((row) => [
-					...row,
-					null,
-				]),
-				foregroundLayer: newMap.tileMap.foregroundLayer.map((row) => [
-					...row,
-					null,
-				]),
-			},
-		}));
-	const addRow = () =>
-		setNewMap((newMap) => ({
-			...newMap,
-			tileMap: {
-				baseLayer: [
-					...newMap.tileMap.baseLayer,
-					newMap.tileMap.baseLayer[newMap.tileMap.baseLayer.length - 1],
-				],
-				encounterLayer: [
-					...newMap.tileMap.encounterLayer,
-					Array.from({ length: newMap.tileMap.encounterLayer[0].length }).map(
-						() => null
-					),
-				],
-				obstacleLayer: [
-					...newMap.tileMap.obstacleLayer,
-					Array.from({ length: newMap.tileMap.obstacleLayer[0].length }).map(
-						() => null
-					),
-				],
-				decorationLayer: [
-					...newMap.tileMap.decorationLayer,
-					Array.from({ length: newMap.tileMap.decorationLayer[0].length }).map(
-						() => null
-					),
-				],
-				foregroundLayer: [
-					...newMap.tileMap.foregroundLayer,
-					Array.from({ length: newMap.tileMap.foregroundLayer[0].length }).map(
-						() => null
-					),
-				],
-			},
-		}));
+	const addColumn = () => {
+		setBaseLayer(baseLayer.map((row) => [...row, row[row.length - 1]]));
+		setencounterLayer(encounterLayer.map((row) => [...row, null]));
+		setobstacleLayer(obstacleLayer.map((row) => [...row, null]));
+		setdecorationLayer(decorationLayer.map((row) => [...row, null]));
+		setforegroundLayer(foregroundLayer.map((row) => [...row, null]));
+	};
+	const addRow = () => {
+		setBaseLayer([...baseLayer, baseLayer[baseLayer.length - 1]]);
+		setencounterLayer([
+			...encounterLayer,
+			Array.from({ length: encounterLayer[0].length }).map(() => null),
+		]);
+		setobstacleLayer([
+			...obstacleLayer,
+			Array.from({ length: obstacleLayer[0].length }).map(() => null),
+		]);
+		setdecorationLayer([
+			...decorationLayer,
+			Array.from({ length: decorationLayer[0].length }).map(() => null),
+		]);
+		setforegroundLayer([
+			...foregroundLayer,
+			Array.from({ length: foregroundLayer[0].length }).map(() => null),
+		]);
+	};
 
 	const changeTile = (i: number, j: number, layer: LayerName) => {
 		if (!tool) {
 			return;
 		}
 
-		setNewMap((newMap) => ({
-			...newMap,
-			tileMap: {
-				baseLayer:
-					layer === 'Base'
-						? newMap.tileMap.baseLayer.map((row, h) => {
-								return row.map((el, k) => {
-									if (h === i && k === j) {
-										return tool.type === 'eraser' ? el : tool.tile;
-									}
-									return el;
-								});
-						  })
-						: newMap.tileMap.baseLayer,
-				encounterLayer:
-					layer === 'Encounter'
-						? newMap.tileMap.encounterLayer.map((row, h) => {
-								return row.map((el, k) => {
-									if (h === i && k === j) {
-										return tool.type === 'eraser' ? null : tool.tile;
-									}
-									return el;
-								});
-						  })
-						: newMap.tileMap.encounterLayer,
-				obstacleLayer:
-					layer === 'Obstacle'
-						? newMap.tileMap.obstacleLayer.map((row, h) => {
-								return row.map((el, k) => {
-									if (h === i && k === j) {
-										return tool.type === 'eraser' ? null : tool.tile;
-									}
-									return el;
-								});
-						  })
-						: newMap.tileMap.obstacleLayer,
-				decorationLayer:
-					layer === 'Decoration'
-						? newMap.tileMap.decorationLayer.map((row, h) => {
-								return row.map((el, k) => {
-									if (h === i && k === j) {
-										return tool.type === 'eraser' ? null : tool.tile;
-									}
-									return el;
-								});
-						  })
-						: newMap.tileMap.decorationLayer,
-				foregroundLayer:
-					layer === 'Foreground'
-						? newMap.tileMap.foregroundLayer.map((row, h) => {
-								return row.map((el, k) => {
-									if (h === i && k === j) {
-										return tool.type === 'eraser' ? null : tool.tile;
-									}
-									return el;
-								});
-						  })
-						: newMap.tileMap.foregroundLayer,
-			},
-		}));
+		if (layer === 'Base') {
+			setBaseLayer(
+				baseLayer.map((row, h) => {
+					return row.map((el, k) => {
+						if (h === i && k === j) {
+							return tool.type === 'eraser' ? el : tool.tile;
+						}
+						return el;
+					});
+				})
+			);
+		}
+		if (layer === 'Decoration') {
+			setdecorationLayer(
+				decorationLayer.map((row, h) => {
+					return row.map((el, k) => {
+						if (h === i && k === j) {
+							return tool.type === 'eraser' ? el : tool.tile;
+						}
+						return el;
+					});
+				})
+			);
+		}
+		if (layer === 'Encounter') {
+			setencounterLayer(
+				encounterLayer.map((row, h) => {
+					return row.map((el, k) => {
+						if (h === i && k === j) {
+							return tool.type === 'eraser' ? el : tool.tile;
+						}
+						return el;
+					});
+				})
+			);
+		}
+		if (layer === 'Obstacle') {
+			setobstacleLayer(
+				obstacleLayer.map((row, h) => {
+					return row.map((el, k) => {
+						if (h === i && k === j) {
+							return tool.type === 'eraser' ? el : tool.tile;
+						}
+						return el;
+					});
+				})
+			);
+		}
+		if (layer === 'Foreground') {
+			setforegroundLayer(
+				foregroundLayer.map((row, h) => {
+					return row.map((el, k) => {
+						if (h === i && k === j) {
+							return tool.type === 'eraser' ? el : tool.tile;
+						}
+						return el;
+					});
+				})
+			);
+		}
 	};
 	const changeRow = (i: number, layer: LayerName) => {
 		if (!tool) {
 			return;
 		}
 
-		setNewMap((newMap) => ({
-			...newMap,
-			tileMap: {
-				baseLayer:
-					layer === 'Base'
-						? newMap.tileMap.baseLayer.map((row, h) => {
-								if (h === i) {
-									return row.map((el) =>
-										tool.type === 'eraser' ? el : tool.tile
-									);
-								}
-								return row;
-						  })
-						: newMap.tileMap.baseLayer,
-				encounterLayer:
-					layer === 'Encounter'
-						? newMap.tileMap.encounterLayer.map((row, h) => {
-								if (h === i) {
-									return row.map(() =>
-										tool.type === 'eraser' ? null : tool.tile
-									);
-								}
-								return row;
-						  })
-						: newMap.tileMap.encounterLayer,
-				obstacleLayer:
-					layer === 'Obstacle'
-						? newMap.tileMap.obstacleLayer.map((row, h) => {
-								if (h === i) {
-									return row.map(() =>
-										tool.type === 'eraser' ? null : tool.tile
-									);
-								}
-								return row;
-						  })
-						: newMap.tileMap.obstacleLayer,
-				decorationLayer:
-					layer === 'Decoration'
-						? newMap.tileMap.decorationLayer.map((row, h) => {
-								if (h === i) {
-									return row.map(() =>
-										tool.type === 'eraser' ? null : tool.tile
-									);
-								}
-								return row;
-						  })
-						: newMap.tileMap.decorationLayer,
-				foregroundLayer:
-					layer === 'Foreground'
-						? newMap.tileMap.foregroundLayer.map((row, h) => {
-								if (h === i) {
-									return row.map(() =>
-										tool.type === 'eraser' ? null : tool.tile
-									);
-								}
-								return row;
-						  })
-						: newMap.tileMap.foregroundLayer,
-			},
-		}));
+		if (layer === 'Base') {
+			setBaseLayer(
+				baseLayer.map((row, h) => {
+					if (h === i) {
+						return row.map((el) => (tool.type === 'eraser' ? el : tool.tile));
+					}
+					return row;
+				})
+			);
+		}
+		if (layer === 'Encounter') {
+			setencounterLayer(
+				encounterLayer.map((row, h) => {
+					if (h === i) {
+						return row.map(() => (tool.type === 'eraser' ? null : tool.tile));
+					}
+					return row;
+				})
+			);
+		}
+		if (layer === 'Decoration') {
+			setdecorationLayer(
+				decorationLayer.map((row, h) => {
+					if (h === i) {
+						return row.map(() => (tool.type === 'eraser' ? null : tool.tile));
+					}
+					return row;
+				})
+			);
+		}
+		if (layer === 'Obstacle') {
+			setobstacleLayer(
+				obstacleLayer.map((row, h) => {
+					if (h === i) {
+						return row.map(() => (tool.type === 'eraser' ? null : tool.tile));
+					}
+					return row;
+				})
+			);
+		}
+		if (layer === 'Foreground') {
+			setforegroundLayer(
+				foregroundLayer.map((row, h) => {
+					if (h === i) {
+						return row.map(() => (tool.type === 'eraser' ? null : tool.tile));
+					}
+					return row;
+				})
+			);
+		}
 	};
-
 	const changeColumn = (j: number, layer: LayerName) => {
 		if (!tool) {
 			return;
 		}
-		setNewMap((newMap) => ({
-			...newMap,
-			tileMap: {
-				baseLayer:
-					layer === 'Base'
-						? newMap.tileMap.baseLayer.map((row) => {
-								return row.map((el, k) => {
-									if (k === j) {
-										return tool.type === 'eraser' ? el : tool.tile;
-									}
-									return el;
-								});
-						  })
-						: newMap.tileMap.baseLayer,
-				encounterLayer:
-					layer === 'Encounter'
-						? newMap.tileMap.encounterLayer.map((row) => {
-								return row.map((el, k) => {
-									if (k === j) {
-										return tool.type === 'eraser' ? null : tool.tile;
-									}
-									return el;
-								});
-						  })
-						: newMap.tileMap.encounterLayer,
-				obstacleLayer:
-					layer === 'Obstacle'
-						? newMap.tileMap.obstacleLayer.map((row) => {
-								return row.map((el, k) => {
-									if (k === j) {
-										return tool.type === 'eraser' ? null : tool.tile;
-									}
-									return el;
-								});
-						  })
-						: newMap.tileMap.obstacleLayer,
-				decorationLayer:
-					layer === 'Decoration'
-						? newMap.tileMap.decorationLayer.map((row) => {
-								return row.map((el, k) => {
-									if (k === j) {
-										return tool.type === 'eraser' ? null : tool.tile;
-									}
-									return el;
-								});
-						  })
-						: newMap.tileMap.decorationLayer,
-				foregroundLayer:
-					layer === 'Foreground'
-						? newMap.tileMap.foregroundLayer.map((row) => {
-								return row.map((el, k) => {
-									if (k === j) {
-										return tool.type === 'eraser' ? null : tool.tile;
-									}
-									return el;
-								});
-						  })
-						: newMap.tileMap.foregroundLayer,
-			},
-		}));
-	};
 
+		if (layer === 'Base') {
+			setBaseLayer(
+				baseLayer.map((row) => {
+					return row.map((el, k) => {
+						if (k === j) {
+							return tool.type === 'eraser' ? el : tool.tile;
+						}
+						return el;
+					});
+				})
+			);
+		}
+		if (layer === 'Encounter') {
+			setencounterLayer(
+				encounterLayer.map((row) => {
+					return row.map((el, k) => {
+						if (k === j) {
+							return tool.type === 'eraser' ? null : tool.tile;
+						}
+						return el;
+					});
+				})
+			);
+		}
+		if (layer === 'Obstacle') {
+			setobstacleLayer(
+				obstacleLayer.map((row) => {
+					return row.map((el, k) => {
+						if (k === j) {
+							return tool.type === 'eraser' ? null : tool.tile;
+						}
+						return el;
+					});
+				})
+			);
+		}
+		if (layer === 'Decoration') {
+			setdecorationLayer(
+				decorationLayer.map((row) => {
+					return row.map((el, k) => {
+						if (k === j) {
+							return tool.type === 'eraser' ? null : tool.tile;
+						}
+						return el;
+					});
+				})
+			);
+		}
+		if (layer === 'Foreground') {
+			setforegroundLayer(
+				foregroundLayer.map((row) => {
+					return row.map((el, k) => {
+						if (k === j) {
+							return tool.type === 'eraser' ? null : tool.tile;
+						}
+						return el;
+					});
+				})
+			);
+		}
+	};
 	const clearLayer = (layer: LayerName) => {
-		setNewMap((newMap) => ({
-			...newMap,
-			tileMap: {
-				baseLayer: newMap.tileMap.baseLayer,
-				encounterLayer:
-					layer === 'Encounter'
-						? newMap.tileMap.encounterLayer.map((row) => {
-								return row.map(() => {
-									return null;
-								});
-						  })
-						: newMap.tileMap.encounterLayer,
-				obstacleLayer:
-					layer === 'Obstacle'
-						? newMap.tileMap.obstacleLayer.map((row) => {
-								return row.map(() => {
-									return null;
-								});
-						  })
-						: newMap.tileMap.obstacleLayer,
-				decorationLayer:
-					layer === 'Decoration'
-						? newMap.tileMap.decorationLayer.map((row) => {
-								return row.map(() => {
-									return null;
-								});
-						  })
-						: newMap.tileMap.decorationLayer,
-				foregroundLayer:
-					layer === 'Decoration'
-						? newMap.tileMap.foregroundLayer.map((row) => {
-								return row.map(() => {
-									return null;
-								});
-						  })
-						: newMap.tileMap.foregroundLayer,
-			},
-		}));
+		if (layer === 'Encounter') {
+			setencounterLayer(
+				encounterLayer.map((row) => {
+					return row.map(() => {
+						return null;
+					});
+				})
+			);
+		}
+		if (layer === 'Obstacle') {
+			setobstacleLayer(
+				obstacleLayer.map((row) => {
+					return row.map(() => {
+						return null;
+					});
+				})
+			);
+		}
+		if (layer === 'Decoration') {
+			setdecorationLayer(
+				decorationLayer.map((row) => {
+					return row.map(() => {
+						return null;
+					});
+				})
+			);
+		}
+		if (layer === 'Foreground') {
+			setforegroundLayer(
+				foregroundLayer.map((row) => {
+					return row.map(() => {
+						return null;
+					});
+				})
+			);
+		}
 	};
 	const randomFill = (layer: LayerName, percentage: number) => {
 		if (tool?.type !== 'tileplacer') {
 			return;
 		}
 
-		const updatedMap = {
-			...newMapState,
-			tileMap: {
-				baseLayer:
-					layer === 'Base'
-						? newMapState.tileMap.baseLayer.map((row) =>
-								row.map((c) => (Math.random() < percentage ? tool.tile : c))
-						  )
-						: newMapState.tileMap.baseLayer,
-				encounterLayer:
-					layer === 'Encounter'
-						? newMapState.tileMap.encounterLayer.map((row) =>
-								row.map((c) => (Math.random() < percentage ? tool.tile : c))
-						  )
-						: newMapState.tileMap.encounterLayer,
-				obstacleLayer:
-					layer === 'Obstacle'
-						? newMapState.tileMap.obstacleLayer.map((row) => {
-								return row.map((c) => {
-									return Math.random() < percentage ? tool.tile : c;
-								});
-						  })
-						: newMapState.tileMap.obstacleLayer,
-				decorationLayer:
-					layer === 'Decoration'
-						? newMapState.tileMap.decorationLayer.map((row) => {
-								return row.map((c) => {
-									return Math.random() < percentage ? tool.tile : c;
-								});
-						  })
-						: newMapState.tileMap.decorationLayer,
-				foregroundLayer:
-					layer === 'Foreground'
-						? newMapState.tileMap.foregroundLayer.map((row) => {
-								return row.map((c) => {
-									return Math.random() < percentage ? tool.tile : c;
-								});
-						  })
-						: newMapState.tileMap.foregroundLayer,
-			},
-		};
-		setNewMap(updatedMap);
+		if (layer === 'Base') {
+			setBaseLayer(
+				baseLayer.map((row) =>
+					row.map((c) => (Math.random() < percentage ? tool.tile : c))
+				)
+			);
+		}
+		if (layer === 'Encounter') {
+			setencounterLayer(
+				encounterLayer.map((row) =>
+					row.map((c) => (Math.random() < percentage ? tool.tile : c))
+				)
+			);
+		}
+		if (layer === 'Obstacle') {
+			setobstacleLayer(
+				obstacleLayer.map((row) =>
+					row.map((c) => (Math.random() < percentage ? tool.tile : c))
+				)
+			);
+		}
+		if (layer === 'Decoration') {
+			setdecorationLayer(
+				decorationLayer.map((row) =>
+					row.map((c) => (Math.random() < percentage ? tool.tile : c))
+				)
+			);
+		}
+		if (layer === 'Foreground') {
+			setforegroundLayer(
+				foregroundLayer.map((row) =>
+					row.map((c) => (Math.random() < percentage ? tool.tile : c))
+				)
+			);
+		}
 	};
 
-	const addEncounter = (name: string, xp: number, timeOfDay: TimeOfDay) => {
-		setNewMap({
-			...newMapState,
-			possibleEncounters: {
-				...newMapState.possibleEncounters,
-				[timeOfDay]: [
-					...newMapState.possibleEncounters[timeOfDay],
-					{ name, xp },
-				],
-			},
-		});
-	};
-	const removeEncounter = (name: string, xp: number, timeOfDay: TimeOfDay) => {
-		setNewMap({
-			...newMapState,
-			possibleEncounters: {
-				...newMapState.possibleEncounters,
-				[timeOfDay]: [
-					...newMapState.possibleEncounters[timeOfDay].filter(
-						(e) => e.name !== name && e.xp !== xp
-					),
-				],
-			},
-		});
-	};
-	const addOccupant = (x: Occupant) => {
-		setNewMap({ ...newMapState, occupants: [...newMapState.occupants, x] });
-	};
-	const removeOccupant = (id: string) => {
-		setNewMap({
-			...newMapState,
-			occupants: newMapState.occupants.filter((o) => o.id !== id),
-		});
-	};
+	const b = useDeferredValue(baseLayer);
+	const e = useDeferredValue(encounterLayer);
+	const o = useDeferredValue(obstacleLayer);
+	const d = useDeferredValue(decorationLayer);
+	const f = useDeferredValue(foregroundLayer);
 
 	return {
-		newMap,
 		addColumn,
 		addRow,
 		changeTile,
 		clearLayer,
 		changeRow,
 		changeColumn,
-		addEncounter,
-		removeEncounter,
-		addOccupant,
-		removeOccupant,
 		usedTiles,
 		randomFill,
+		baseLayer: b,
+		encounterLayer: e,
+		decorationLayer: d,
+		foregroundLayer: f,
+		obstacleLayer: o,
 	};
 };

@@ -1,7 +1,8 @@
+import React from 'react';
 import { TileIdentifier } from '../../../interfaces/OverworldMap';
 import { LayerName } from '../hooks/useMapEditor';
 
-export const LayerEditor = ({
+const unmemoedLayerEditor = ({
 	layerName,
 	layer,
 	changeTile,
@@ -85,6 +86,8 @@ export const LayerEditor = ({
 		</>
 	);
 };
+
+export const LayerEditor = React.memo(unmemoedLayerEditor);
 
 export const LayerDisplay = ({
 	layerName,

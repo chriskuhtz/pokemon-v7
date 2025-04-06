@@ -2,8 +2,6 @@ import { JSX } from 'react';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { Tab, Tool } from '../MapMaker';
 import { useMapEditor } from '../hooks/useMapEditor';
-import { EncountersTab } from './EncountersTab';
-import { OccupantsTab } from './OccupantsTab';
 import { TileMapTab } from './TileMapTab';
 import { TileQuickSelection } from './TileQuickSelection';
 import { ToolSelection } from './ToolSelection';
@@ -22,17 +20,17 @@ export const MapEditor = ({
 	setSelected: (x: Tool) => void;
 }): JSX.Element => {
 	const {
-		newMap,
 		addColumn,
 		addRow,
 		changeTile,
 		clearLayer,
 		changeRow,
 		changeColumn,
-		addEncounter,
-		removeEncounter,
-		addOccupant,
-		removeOccupant,
+		baseLayer,
+		encounterLayer,
+		decorationLayer,
+		foregroundLayer,
+		obstacleLayer,
 		usedTiles,
 		randomFill,
 	} = useMapEditor({
@@ -42,9 +40,9 @@ export const MapEditor = ({
 
 	return (
 		<div>
-			<h2>{newMap.id}</h2>
+			<h2>{initialMap.id}</h2>
 			<div style={{ display: 'flex', gap: '1rem' }}>
-				{['TileMap', 'ToolSelection', 'Encounters', 'Occupants'].map((t) => (
+				{['TileMap', 'ToolSelection'].map((t) => (
 					<button
 						key={t}
 						style={{ color: t === activeTab ? 'wheat' : 'lightgray' }}
@@ -60,10 +58,15 @@ export const MapEditor = ({
 					<TileQuickSelection
 						usedTiles={usedTiles}
 						setSelected={setSelected}
-						tileSetUrl={newMap.tilesetUrl}
+						tileSetUrl={initialMap.tilesetUrl}
 					/>
 					<TileMapTab
-						newMap={newMap}
+						tileSetUrl={initialMap.tilesetUrl}
+						baseLayer={baseLayer}
+						encounterLayer={encounterLayer}
+						obstacleLayer={obstacleLayer}
+						decorationLayer={decorationLayer}
+						foregroundLayer={foregroundLayer}
 						changeColumn={changeColumn}
 						changeRow={changeRow}
 						addColumn={addColumn}
@@ -74,25 +77,12 @@ export const MapEditor = ({
 					/>
 				</>
 			)}
-			{activeTab === 'Encounters' && (
-				<EncountersTab
-					removeEncounter={removeEncounter}
-					addEncounter={addEncounter}
-					newMap={newMap}
-				/>
-			)}
-			{activeTab === 'Occupants' && (
-				<OccupantsTab
-					addOccupant={addOccupant}
-					removeOccupant={removeOccupant}
-					newMap={newMap}
-				/>
-			)}
+
 			{activeTab === 'ToolSelection' && (
 				<>
 					<ToolSelection
 						setSelected={setSelected}
-						tileSetUrl={newMap.tilesetUrl}
+						tileSetUrl={initialMap.tilesetUrl}
 					/>
 				</>
 			)}
@@ -100,7 +90,7 @@ export const MapEditor = ({
 				style={{ color: 'white' }}
 				href={
 					'data:text/json;charset=utf-8,' +
-					encodeURIComponent(JSON.stringify(newMap))
+					encodeURIComponent(JSON.stringify(initialMap))
 				}
 				download={`map_${new Date().getTime()}.json`}
 			>
@@ -110,14 +100,14 @@ export const MapEditor = ({
 				style={{ color: 'white', paddingLeft: '2rem' }}
 				onClick={() => {
 					if (activeTab === 'TileMap') {
-						navigator.clipboard.writeText(JSON.stringify(newMap.tileMap));
+						navigator.clipboard.writeText(JSON.stringify(initialMap.tileMap));
 					}
 					if (activeTab === 'Occupants') {
-						navigator.clipboard.writeText(JSON.stringify(newMap.occupants));
+						navigator.clipboard.writeText(JSON.stringify(initialMap.occupants));
 					}
 					if (activeTab === 'Encounters') {
 						navigator.clipboard.writeText(
-							JSON.stringify(newMap.possibleEncounters)
+							JSON.stringify(initialMap.possibleEncounters)
 						);
 					}
 				}}
