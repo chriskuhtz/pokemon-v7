@@ -41,7 +41,7 @@ export const MoveTutor = () => {
 		[saveFile]
 	);
 
-	const [id, setId] = useState<string | undefined>();
+	const [id, setId] = useState<string>(team[0].id);
 
 	const pokemonWithId = useMemo(
 		() => team.find((t) => t.id === id),

@@ -341,4 +341,6 @@ export const extraFeatureCheckList: {
 	{
 		name: 'attack handler should not get setter function, just return BattlePokemon[]',
 	},
+	{ name: 'item ability move wiki' },
+	{ name: 'battleinfo stack for switch in screen' },
 ];
