@@ -15,6 +15,7 @@ import { WeatherType } from '../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../BattleField';
 import { handleMoveBlockAilments } from '../../functions/handleMoveBlockAilments';
 import { handleAttack } from './functions/attackCategories/handleAttack';
+import { handleUniqueMoves } from './functions/attackCategories/handleUniqueMoves';
 import { handleCatch } from './functions/handleCatch';
 
 export const useHandleAction = (
@@ -137,22 +138,7 @@ export const useHandleAction = (
 				);
 				return;
 			}
-			if (move.type === 'BattleAttack' && move.name === 'teleport') {
-				addMessage({
-					message: `${attacker.name} escaped the battle with teleport`,
-					onRemoval: () => leave('DRAW'),
-				});
-				setPokemon((pokemon) =>
-					pokemon.map((p) => {
-						if (p.id === attacker.id) {
-							return { ...p, moveQueue: [] };
-						}
 
-						return p;
-					})
-				);
-				return;
-			}
 			if (move.type === 'CatchProcessInfo') {
 				handleCatch(
 					pokemon,
@@ -266,6 +252,7 @@ export const useHandleAction = (
 					battleFieldEffects,
 					handleForceSwitch,
 					setBattleWeather,
+					leave,
 				});
 
 				return;
@@ -305,6 +292,7 @@ export const handleAllAttackCategories = ({
 	battleFieldEffects,
 	handleForceSwitch,
 	setBattleWeather,
+	leave,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
@@ -318,10 +306,27 @@ export const handleAllAttackCategories = ({
 	battleFieldEffects: BattleFieldEffect[];
 	handleForceSwitch: (x: BattlePokemon, moveName: MoveName) => void;
 	setBattleWeather: (w: WeatherType | undefined) => void;
+	leave: (outcome: 'WIN' | 'LOSS' | 'DRAW') => void;
 }) => {
 	switch (move.data.meta.category.name) {
 		case 'force-switch':
 			handleForceSwitch(attacker, move.name);
+			break;
+		case 'unique':
+			handleUniqueMoves({
+				attacker,
+				pokemon,
+				setPokemon,
+				addMessage,
+				move,
+				battleWeather,
+				scatterCoins,
+				setBattleWeather,
+				dampy,
+				addBattleFieldEffect,
+				battleFieldEffects,
+				leave,
+			});
 			break;
 		default:
 			handleAttack({

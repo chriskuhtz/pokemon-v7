@@ -11,8 +11,7 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { applyPrimaryAilmentToPokemon } from './applyPrimaryAilmentToPokemon';
 import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
-import { getRandomEntry, getRandomIndex } from './filterTargets';
-import { getMovesArray } from './getMovesArray';
+import { getRandomEntry } from './filterTargets';
 
 export const getAilmentName = (
 	attack: BattleAttack
@@ -73,23 +72,7 @@ export const applyAttackAilmentsToPokemon = (
 				battleWeather
 			);
 		}
-		if (ailment === 'disable') {
-			const moves = getMovesArray(target, { filterOutDisabled: false });
-			const randomMoveName = moves[getRandomIndex(moves.length)].name;
-			if (moves.length === 1) {
-				addMessage({ message: `cant disable ${target.data.name}'s only move` });
-				return { updatedApplicator: applicator, updatedTarget: target };
-			}
-			return {
-				updatedTarget: applySecondaryAilmentToPokemon({
-					pokemon: target,
-					ailment: ailment as SecondaryAilment['type'],
-					addMessage,
-					move: randomMoveName,
-				}),
-				updatedApplicator: applicator,
-			};
-		}
+
 		if (isSecondaryAilment({ type: ailment })) {
 			return {
 				updatedTarget: applySecondaryAilmentToPokemon({

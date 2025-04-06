@@ -9,18 +9,13 @@ import { applyStatChangeToPokemon } from '../../../../../../functions/applyStatC
 import { calculateDamage } from '../../../../../../functions/calculateDamage';
 import { changeMovePP } from '../../../../../../functions/changeMovePP';
 import { determineMiss } from '../../../../../../functions/determineMiss';
-import {
-	getRandomEntry,
-	getRandomIndex,
-} from '../../../../../../functions/filterTargets';
+import { getRandomIndex } from '../../../../../../functions/filterTargets';
 import { getActualTargetId } from '../../../../../../functions/getActualTargetId';
 import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
-import { getMovesArray } from '../../../../../../functions/getMovesArray';
 import { arePokemonOfOppositeGenders } from '../../../../../../functions/getRivalryFactor';
 import { getTypeNames } from '../../../../../../functions/getTypeNames';
 import { handleFlinching } from '../../../../../../functions/handleFlinching';
-import { handleMimicOrSketch } from '../../../../../../functions/handleMimic';
 import { isKO } from '../../../../../../functions/isKo';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import {
@@ -35,7 +30,6 @@ import {
 } from '../../../../../../interfaces/Ailment';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
-import { typeEffectivenessChart } from '../../../../../../interfaces/PokemonType';
 import { EmptyStatObject } from '../../../../../../interfaces/StatObject';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
@@ -70,7 +64,7 @@ export const handleAttack = ({
 	addBattleFieldEffect: (x: BattleFieldEffect) => void;
 	battleFieldEffects: BattleFieldEffect[];
 }): void => {
-	let move = m;
+	const move = m;
 	const underPressure = battleFieldEffects.some(
 		(b) => b.type === 'pressure' && b.ownerId !== attacker.ownerId
 	);
@@ -113,13 +107,12 @@ export const handleAttack = ({
 		handleNoTarget(attacker, move, setPokemon, addMessage, underPressure);
 		return;
 	}
+	const selfTargeting = move.data.target.name === 'user';
 
 	if (dampy && SELF_DESTRUCTING_MOVES.includes(move.name)) {
 		handleDampy(attacker, move, setPokemon, addMessage, dampy, underPressure);
 		return;
 	}
-
-	const selfTargeting = move.data.target.name === 'user';
 
 	//MESSAGES
 	if (!selfTargeting) {
@@ -132,30 +125,6 @@ export const handleAttack = ({
 		});
 	}
 
-	//HEAL-BELL
-	if (move.name === 'heal-bell') {
-		addMessage({ message: 'All major Status Problems are healed' });
-		setPokemon((pokemon) =>
-			pokemon.map((p) => {
-				if (p.id === updatedAttacker.id) {
-					return {
-						...changeMovePP(
-							updatedAttacker,
-							move.name,
-							underPressure ? -2 : -1
-						),
-						primaryAilment: undefined,
-						lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
-					};
-				}
-				if (p.ownerId === updatedAttacker.ownerId && p.status === 'ONFIELD') {
-					return { ...p, primaryAilment: undefined };
-				}
-
-				return p;
-			})
-		);
-	}
 	//WEATHER MOVES
 	if (move.name === 'sunny-day') {
 		setBattleWeather('sun');
@@ -249,31 +218,7 @@ export const handleAttack = ({
 		);
 		return;
 	}
-	if (move.name === 'conversion') {
-		const newType = getRandomEntry(getMovesArray(updatedAttacker)).data.type
-			.name;
-		updatedAttacker = applySecondaryAilmentToPokemon({
-			pokemon: updatedAttacker,
-			ailment: 'color-changed',
-			addMessage,
-			newType,
-		});
-	}
-	if (move.name === 'conversion-2') {
-		if (updatedAttacker.lastReceivedDamage) {
-			const newType = getRandomEntry(
-				typeEffectivenessChart[
-					updatedAttacker.lastReceivedDamage.attack.data.type.name
-				].isNotVeryEffectiveAgainst
-			);
-			updatedAttacker = applySecondaryAilmentToPokemon({
-				pokemon: updatedAttacker,
-				ailment: 'color-changed',
-				addMessage,
-				newType,
-			});
-		} else addMessage({ message: `It failed to convert to a new type` });
-	}
+
 	if (move.name === 'bide') {
 		if (!updatedAttacker.biding) {
 			addMessage({ message: `${updatedAttacker.name} is biding its time` });
@@ -288,66 +233,7 @@ export const handleAttack = ({
 			addMessage({ message: `${updatedAttacker.name} released energy` });
 		}
 	}
-	if (move.name === 'mirror-move') {
-		if (attacker.lastReceivedDamage) {
-			addMessage({
-				message: `${updatedAttacker.name} copied ${attacker.lastReceivedDamage.attack.name}`,
-			});
-			move = attacker.lastReceivedDamage.attack;
-		} else {
-			addMessage({ message: `It failed` });
-		}
-	}
-	if (move.name === 'belly-drum') {
-		if (updatedAttacker.damage / updatedAttacker.stats.hp > 0.5) {
-			addMessage({
-				message: `It failed`,
-			});
-		} else {
-			addMessage({
-				message: `${updatedAttacker.name} maximised Attack by drumming on its belly too hard`,
-			});
-			updatedAttacker = applyStatChangeToPokemon(
-				{
-					...updatedAttacker,
-					damage: updatedAttacker.damage + updatedAttacker.stats.hp / 2,
-				},
-				'attack',
-				6,
-				true,
-				battleFieldEffects,
-				addMessage
-			);
-		}
-	}
-	if (move.name === 'protect' || move.name === 'detect') {
-		if (
-			(updatedAttacker.lastUsedMove?.name === 'protect' ||
-				updatedAttacker.lastUsedMove?.name === 'detect' ||
-				updatedAttacker.lastUsedMove?.name === 'endure') &&
-			Math.random() > 0.5
-		) {
-			addMessage({
-				message: `It failed`,
-			});
-		} else {
-			updatedAttacker = { ...updatedAttacker, protected: true };
-		}
-	}
-	if (move.name === 'endure') {
-		if (
-			(updatedAttacker.lastUsedMove?.name === 'protect' ||
-				updatedAttacker.lastUsedMove?.name === 'detect' ||
-				updatedAttacker.lastUsedMove?.name === 'endure') &&
-			Math.random() > 0.5
-		) {
-			addMessage({
-				message: `It failed`,
-			});
-		} else {
-			updatedAttacker = { ...updatedAttacker, endured: true };
-		}
-	}
+
 	if (move.name === 'defense-curl') {
 		updatedAttacker.defenseCurled = true;
 	}
@@ -359,58 +245,6 @@ export const handleAttack = ({
 	//updated Target
 	let updatedTarget = { ...target };
 
-	if (move.name === 'spite') {
-		const targetMoves = getMovesArray(updatedTarget, { filterOutEmpty: true });
-
-		if (targetMoves.length === 0) {
-			addMessage({ message: 'It failed' });
-		} else {
-			const chosenMove = getRandomEntry(targetMoves);
-			addMessage({ message: `${chosenMove}'s PP was lowered` });
-
-			updatedTarget = {
-				...updatedTarget,
-				firstMove: {
-					...updatedTarget.firstMove,
-					usedPP:
-						updatedTarget.firstMove.name === chosenMove.name
-							? updatedTarget.firstMove.usedPP -
-							  getRandomEntry([1, 2, 3, 4, 5, 6])
-							: updatedTarget.firstMove.usedPP,
-				},
-				secondMove: updatedTarget.secondMove
-					? {
-							...updatedTarget.secondMove,
-							usedPP:
-								updatedTarget.secondMove.name === chosenMove.name
-									? updatedTarget.secondMove.usedPP -
-									  getRandomEntry([1, 2, 3, 4, 5, 6])
-									: updatedTarget.secondMove.usedPP,
-					  }
-					: undefined,
-				thirdMove: updatedTarget.thirdMove
-					? {
-							...updatedTarget.thirdMove,
-							usedPP:
-								updatedTarget.thirdMove.name === chosenMove.name
-									? updatedTarget.thirdMove.usedPP -
-									  getRandomEntry([1, 2, 3, 4, 5, 6])
-									: updatedTarget.thirdMove.usedPP,
-					  }
-					: undefined,
-				fourthMove: updatedTarget.fourthMove
-					? {
-							...updatedTarget.fourthMove,
-							usedPP:
-								updatedTarget.fourthMove.name === chosenMove.name
-									? updatedTarget.fourthMove.usedPP -
-									  getRandomEntry([1, 2, 3, 4, 5, 6])
-									: updatedTarget.fourthMove.usedPP,
-					  }
-					: undefined,
-			};
-		}
-	}
 	if (move.name === 'foresight') {
 		updatedTarget = applySecondaryAilmentToPokemon({
 			pokemon: updatedTarget,
@@ -500,45 +334,6 @@ export const handleAttack = ({
 		updatedTarget = { ...updatedTarget, heldItemName: undefined };
 	}
 
-	if (move.name === 'mind-reader' || move.name === 'lock-on') {
-		updatedTarget = applySecondaryAilmentToPokemon({
-			pokemon: updatedTarget,
-			addMessage,
-			ailment: 'mind-read',
-			by: updatedAttacker.id,
-		});
-	}
-	if (move.name === 'mimic') {
-		if (target.lastUsedMove) {
-			addMessage({
-				message: `${updatedAttacker.name} copied ${target.lastUsedMove.name}`,
-			});
-			updatedAttacker = handleMimicOrSketch(
-				updatedAttacker,
-				target.lastUsedMove,
-				'mimic'
-			);
-		} else
-			addMessage({
-				message: `It failed`,
-			});
-	}
-	if (move.name === 'sketch') {
-		if (target.lastUsedMove) {
-			addMessage({
-				message: `${updatedAttacker.name} copied ${target.lastUsedMove.name}`,
-			});
-			updatedAttacker = handleMimicOrSketch(
-				updatedAttacker,
-				target.lastUsedMove,
-				'sketch'
-			);
-		} else
-			addMessage({
-				message: `It failed`,
-			});
-	}
-
 	//UPDATES
 
 	//ATTACKER
@@ -550,25 +345,7 @@ export const handleAttack = ({
 			addMessage,
 		});
 	}
-	//apply focus
-	if (move.name === 'focus-energy') {
-		updatedAttacker = applySecondaryAilmentToPokemon({
-			pokemon: updatedAttacker,
-			ailment: 'focused',
-			addMessage,
-		});
-	}
-	//rest
-	if (move.name === 'rest') {
-		addMessage({
-			message: `${updatedAttacker.data.name} went to sleep and became healthy`,
-		});
-		updatedAttacker = {
-			...updatedAttacker,
-			damage: 0,
-			primaryAilment: { type: 'sleep', duration: 2 },
-		};
-	}
+
 	//self destruct
 	if (SELF_DESTRUCTING_MOVES.includes(move.name)) {
 		addMessage({ message: `${updatedAttacker.name} self destructed` });
@@ -739,10 +516,6 @@ export const handleAttack = ({
 		addMessage({
 			message: `${updatedAttacker.data.name} was hurt by rough skin`,
 		});
-	}
-	//handle splash
-	if (move.name === 'splash') {
-		addMessage({ message: 'Nothing happened' });
 	}
 
 	//TARGET
@@ -1004,14 +777,6 @@ export const handleAttack = ({
 			});
 		}
 
-		if (move.name === 'destiny-bond') {
-			updatedTarget = applySecondaryAilmentToPokemon({
-				pokemon: updatedTarget,
-				ailment: 'destiny-bonded',
-				addMessage,
-				targetId: updatedAttacker.id,
-			});
-		}
 		if (move.name === 'perish-song') {
 			updatedTarget = applySecondaryAilmentToPokemon({
 				pokemon: updatedTarget,
@@ -1019,13 +784,7 @@ export const handleAttack = ({
 				addMessage,
 			});
 		}
-		if (move.name === 'mean-look') {
-			updatedTarget = applySecondaryAilmentToPokemon({
-				pokemon: updatedTarget,
-				ailment: 'mean-looked',
-				addMessage,
-			});
-		}
+
 		if (
 			!isKO(updatedTarget) &&
 			contactMoves.includes(move.name) &&

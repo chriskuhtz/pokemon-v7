@@ -242,7 +242,7 @@ export const extraFeatureCheckList: {
 	{ name: 'cant throw away key items like exp share', handled: true },
 	{ name: 'improve performance of mapmaker', handled: true },
 	{ name: 'water as distinct from obstacles', handled: true },
-	{ name: 'extract category:unique moves' },
+	{ name: 'extract category:unique moves', handled: true },
 	{
 		name: '3 column layout for map editor (Tool Selection, current Layer, CombinedCanvas)',
 	},
@@ -335,5 +335,9 @@ export const extraFeatureCheckList: {
 	{ name: 'move routeW1 to custom sheet' },
 	{ name: 'move routeN1W1 to custom sheet' },
 	{ name: 'more overworld items' },
-	{ name: 'x quests completed bars' },
+	{ name: 'x of n quests completed bar' },
+	{ name: 'extract handleAttack start and end' },
+	{
+		name: 'attack handler should not get setter function, just return BattlePokemon[]',
+	},
 ];
