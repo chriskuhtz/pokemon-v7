@@ -23,8 +23,9 @@ export const applyStatChangeToPokemon = (
 		return pokemon;
 	}
 	const simpleFactor = pokemon.ability === 'simple' ? 2 : 1;
+	const contraryFactor = pokemon.ability === 'contrary' ? -1 : 1;
 
-	const modifier = initialModifier * simpleFactor;
+	const modifier = initialModifier * simpleFactor * contraryFactor;
 
 	const existingStat = pokemon.statBoosts[stat];
 
