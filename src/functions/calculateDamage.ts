@@ -98,6 +98,19 @@ export const getPower = (
 	if (attack.name === 'return') {
 		return (attacker.happiness * 2) / 5;
 	}
+	if (attack.name === 'present') {
+		const random = Math.random();
+		if (random < 0.1) {
+			return 120;
+		}
+		if (random < 0.3) {
+			return -1;
+		}
+		if (random < 0.6) {
+			return 80;
+		}
+		return 40;
+	}
 	return attack.data.power ?? 0;
 };
 
@@ -212,6 +225,11 @@ export const calculateDamage = (
 		calculateLevelData(attacker.xp).level
 	);
 
+	if (attack.name === 'present' && power < 0) {
+		return {
+			damage: -Math.floor(target.stats.hp / 4),
+		};
+	}
 	const critRate =
 		attack.data.meta.crit_rate +
 		(attacker.secondaryAilments.some((a) => a.type === 'dire-hit') ? 1 : 0);
