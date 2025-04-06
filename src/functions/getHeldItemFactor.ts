@@ -10,7 +10,7 @@ export const getHeldItemFactor = (
 	if (!heldItem) {
 		return 1;
 	}
-	if (typeBoostItemTable[attackType] === heldItem) {
+	if (typeBoostItemTable[attackType].includes(heldItem)) {
 		return 1.2;
 	}
 	if (
