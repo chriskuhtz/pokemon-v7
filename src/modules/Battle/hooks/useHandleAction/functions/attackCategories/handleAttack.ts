@@ -132,54 +132,14 @@ export const handleAttack = ({
 	if (move.name === 'hail') {
 		setBattleWeather('hail');
 	}
-	if (move.name === 'sand-storm') {
+	if (move.name === 'sandstorm') {
 		setBattleWeather('sandstorm');
 	}
 	if (move.name === 'rain-dance') {
 		setBattleWeather('rain');
 	}
-	//MIST, LIGHT-SCREEN, REFLECT
-	if (['mist', 'light-screen', 'reflect'].includes(move.name)) {
-		addBattleFieldEffect({
-			type: move.name as BattleFieldEffect['type'],
-			ownerId: updatedAttacker.ownerId,
-			duration: 5,
-		});
-		setPokemon((pokemon) =>
-			pokemon.map((p) => {
-				if (p.id === updatedAttacker.id) {
-					return {
-						...changeMovePP(updatedAttacker, move.name, -1),
-						moveQueue: [],
-					};
-				}
 
-				return p;
-			})
-		);
-		return;
-	}
 	if (move.name === 'spider-web') {
-		addBattleFieldEffect({
-			type: move.name as BattleFieldEffect['type'],
-			ownerId: target.ownerId,
-			duration: 9000,
-		});
-		setPokemon((pokemon) =>
-			pokemon.map((p) => {
-				if (p.id === updatedAttacker.id) {
-					return {
-						...changeMovePP(updatedAttacker, move.name, -1),
-						moveQueue: [],
-					};
-				}
-
-				return p;
-			})
-		);
-		return;
-	}
-	if (move.name === 'spikes') {
 		addBattleFieldEffect({
 			type: move.name as BattleFieldEffect['type'],
 			ownerId: target.ownerId,
@@ -422,11 +382,15 @@ export const handleAttack = ({
 			};
 		}
 	}
+	const targetIsSafeguarded = battleFieldEffects.some(
+		(b) => b.type === 'safeguard' && b.ownerId === updatedTarget.ownerId
+	);
 	//check for static
 	if (
 		target.ability === 'static' &&
 		contactMoves.includes(move.name) &&
-		Math.random() < STATIC_CHANCE
+		Math.random() < STATIC_CHANCE &&
+		!targetIsSafeguarded
 	) {
 		const { updatedTarget: b } = applyPrimaryAilmentToPokemon(
 			updatedAttacker,
@@ -442,7 +406,8 @@ export const handleAttack = ({
 	if (
 		target.ability === 'flame-body' &&
 		contactMoves.includes(move.name) &&
-		Math.random() < FLAME_BODY_CHANCE
+		Math.random() < FLAME_BODY_CHANCE &&
+		!targetIsSafeguarded
 	) {
 		const { updatedTarget: b } = applyPrimaryAilmentToPokemon(
 			updatedAttacker,
@@ -473,7 +438,8 @@ export const handleAttack = ({
 	if (
 		target.ability === 'poison-point' &&
 		contactMoves.includes(move.name) &&
-		Math.random() < POISON_POINT_CHANCE
+		Math.random() < POISON_POINT_CHANCE &&
+		!targetIsSafeguarded
 	) {
 		const { updatedTarget: b } = applyPrimaryAilmentToPokemon(
 			updatedAttacker,
@@ -490,7 +456,8 @@ export const handleAttack = ({
 	if (
 		target.ability === 'effect-spore' &&
 		contactMoves.includes(move.name) &&
-		Math.random() < EFFECT_SPORE_CHANCE
+		Math.random() < EFFECT_SPORE_CHANCE &&
+		!targetIsSafeguarded
 	) {
 		const possibleAilments = ['paralysis', 'poison', 'sleep'];
 		const { updatedTarget: b } = applyPrimaryAilmentToPokemon(
@@ -661,7 +628,8 @@ export const handleAttack = ({
 				updatedAttacker,
 				move,
 				addMessage,
-				battleWeather
+				battleWeather,
+				targetIsSafeguarded
 			);
 		updatedAttacker = a;
 		updatedTarget = b;

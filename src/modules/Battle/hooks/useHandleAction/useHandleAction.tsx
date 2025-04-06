@@ -15,6 +15,7 @@ import { WeatherType } from '../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../BattleField';
 import { handleMoveBlockAilments } from '../../functions/handleMoveBlockAilments';
 import { handleAttack } from './functions/attackCategories/handleAttack';
+import { handleFieldEffectMoves } from './functions/attackCategories/handleFieldEffectMoves';
 import { handleUniqueMoves } from './functions/attackCategories/handleUniqueMoves';
 import { handleCatch } from './functions/handleCatch';
 
@@ -314,6 +315,22 @@ export const handleAllAttackCategories = ({
 			break;
 		case 'unique':
 			handleUniqueMoves({
+				attacker,
+				pokemon,
+				setPokemon,
+				addMessage,
+				move,
+				battleWeather,
+				scatterCoins,
+				setBattleWeather,
+				dampy,
+				addBattleFieldEffect,
+				battleFieldEffects,
+				leave,
+			});
+			break;
+		case 'field-effect':
+			handleFieldEffectMoves({
 				attacker,
 				pokemon,
 				setPokemon,

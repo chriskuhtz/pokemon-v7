@@ -66,7 +66,8 @@ export interface BattleFieldEffect {
 		| 'spikes'
 		| 'flower-gift'
 		| 'bad-dreams'
-		| 'unnerve';
+		| 'unnerve'
+		| 'safeguard';
 	ownerId: string;
 	duration: number;
 }

@@ -38,7 +38,8 @@ export const applyAttackAilmentsToPokemon = (
 	applicator: BattlePokemon,
 	attack: BattleAttack,
 	addMessage: (x: Message) => void,
-	battleWeather: WeatherType | undefined
+	battleWeather: WeatherType | undefined,
+	safeGuarded: boolean
 ): { updatedTarget: BattlePokemon; updatedApplicator: BattlePokemon } => {
 	if (
 		applicator.ability === 'sheer-force' &&
@@ -62,6 +63,10 @@ export const applyAttackAilmentsToPokemon = (
 			? 100
 			: attack.data.meta.ailment_chance * sereneGraceFactor;
 
+	if (safeGuarded) {
+		addMessage({ message: 'Target is protected by safeguard' });
+		return { updatedTarget: target, updatedApplicator: applicator };
+	}
 	if (ailment && random < chance) {
 		if (isPrimaryAilment({ type: ailment })) {
 			return applyPrimaryAilmentToPokemon(
