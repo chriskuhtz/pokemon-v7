@@ -45,7 +45,7 @@ export const testPokemon: OwnedPokemon = {
 };
 
 export const startingLocation: CharacterLocationData = {
-	mapId: 'routeS1E1',
+	mapId: 'camp',
 	orientation: 'RIGHT',
 	forwardFoot: 'CENTER1',
 	x: 2,

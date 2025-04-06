@@ -355,7 +355,7 @@ const useSaveFile = (
 		].filter((s) => s !== undefined);
 
 		addMessage({
-			message: `Received ${rewardStrings.join('+ ')} `,
+			message: `Received ${rewardStrings.join(' + ')} `,
 		});
 		setSaveFile({
 			...saveFile,

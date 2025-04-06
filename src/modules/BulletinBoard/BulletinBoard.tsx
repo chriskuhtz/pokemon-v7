@@ -1,7 +1,9 @@
 import React, { useCallback, useContext, useMemo } from 'react';
 import { MdCatchingPokemon } from 'react-icons/md';
+import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import {
 	QuestName,
+	questNames,
 	QuestsRecord,
 } from '../../constants/checkLists/questsRecord';
 import { battleSpriteSize } from '../../constants/gameData';
@@ -12,33 +14,32 @@ import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { ItemType } from '../../interfaces/Item';
 import { Quest } from '../../interfaces/Quest';
+import { AnimatedBar } from '../../uiComponents/AnimatedBar/AnimatedBar';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 
 export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 	const { addMessage } = useContext(MessageQueueContext);
 	const { saveFile, putSaveFileReducer } = useContext(SaveFileContext);
 	const { quests, campUpgrades } = saveFile;
 
-	// const activeQuests = useMemo(
-	// 	() =>
-	// 		Object.keys(QuestsRecord).filter(
-	// 			(q) => quests[q as QuestName] === 'ACTIVE'
-	// 		),
-	// 	[quests]
-	// );
+	const activeQuests = useMemo(
+		() =>
+			Object.keys(QuestsRecord).filter(
+				(q) => quests[q as QuestName] === 'ACTIVE'
+			),
+		[quests]
+	);
 	const acceptQuest = useCallback(
 		(name: QuestName) => {
-			//refactor quest limit
-			// if (activeQuests.length >= 3) {
-			// 	addMessage({
-			// 		message: 'You can only have 3 active Quests at the same time',
-			// 	});
+			if (activeQuests.length >= 5) {
+				addMessage({
+					message: 'You can only have 5 active Quests at the same time',
+				});
 
-			// 	return;
-			// }
+				return;
+			}
 			addMessage({
 				message: `Accepted Quest: ${name}`,
 				needsNoConfirmation: true,
@@ -48,7 +49,7 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 				quests: { ...saveFile.quests, [name]: 'ACTIVE' },
 			});
 		},
-		[addMessage, putSaveFileReducer, saveFile]
+		[activeQuests.length, addMessage, putSaveFileReducer, saveFile]
 	);
 
 	const availableQuests: { name: QuestName; quest: Quest }[] = useMemo(
@@ -78,6 +79,12 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 		[campUpgrades, quests]
 	);
 
+	const total = questNames.length;
+
+	const numberOfCompletedQuests = useMemo(() => {
+		return questNames.filter((q) => saveFile.quests[q] === 'COLLECTED').length;
+	}, [saveFile.quests]);
+
 	if (availableQuests.length === 0) {
 		return (
 			<Page headline={'Bulletin Board:'} goBack={goBack}>
@@ -89,6 +96,18 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 	return (
 		<Page headline={'Bulletin Board:'} goBack={goBack}>
 			<Stack mode="column">
+				<div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+					<strong style={{ textWrap: 'nowrap' }}>Completed Quests:</strong>
+					<AnimatedBar
+						max={total}
+						offset={total - numberOfCompletedQuests}
+						color={'blue'}
+					/>
+				</div>
+				<div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+					<strong style={{ textWrap: 'nowrap' }}>Active Quests:</strong>
+					<AnimatedBar max={5} offset={5 - activeQuests.length} inversedColor />
+				</div>
 				{availableQuests.map(({ name, quest }) => {
 					return (
 						<Card
