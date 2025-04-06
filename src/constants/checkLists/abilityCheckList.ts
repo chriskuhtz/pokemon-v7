@@ -974,6 +974,7 @@ export const abilityNames = [
 	'contrary',
 	'unnerve',
 	'defiant',
+	'slow-start',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

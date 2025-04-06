@@ -1,15 +1,15 @@
-import { PokemonName } from '../constants/pokemonNames';
-import { ItemType } from '../interfaces/Item';
+import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { Stat } from '../interfaces/StatObject';
+import { getHeldItem } from './getHeldItem';
 
 export const calculateModifiedStat = (
 	unmodified: number,
 	modifier: number,
 	statName: Stat,
-	pokemonName: PokemonName,
-	flowerGiftActive: boolean,
-	heldItem?: ItemType
+	pokemon: BattlePokemon,
+	flowerGiftActive: boolean
 ): number => {
+	const heldItem = getHeldItem(pokemon);
 	let res = unmodified;
 	if (modifier > 0) {
 		res = unmodified + modifier * unmodified * 0.5;
@@ -20,31 +20,31 @@ export const calculateModifiedStat = (
 
 	if (
 		heldItem === 'light-ball' &&
-		pokemonName.includes('pikachu') &&
+		pokemon.name.includes('pikachu') &&
 		statName === 'special-attack'
 	) {
 		res = res * 2;
 	}
 	if (
 		heldItem === 'soul-dew' &&
-		(pokemonName === 'latias' ||
-			pokemonName === 'latios' ||
-			pokemonName === 'latios-mega' ||
-			pokemonName === 'latias-mega') &&
+		(pokemon.name === 'latias' ||
+			pokemon.name === 'latios' ||
+			pokemon.name === 'latios-mega' ||
+			pokemon.name === 'latias-mega') &&
 		(statName === 'special-attack' || statName === 'special-defense')
 	) {
 		res = res * 1.5;
 	}
 	if (
 		heldItem === 'deep-sea-scale' &&
-		pokemonName === 'clamperl' &&
+		pokemon.name === 'clamperl' &&
 		statName === 'special-defense'
 	) {
 		res = res * 1.5;
 	}
 	if (
 		heldItem === 'deep-sea-tooth' &&
-		pokemonName === 'clamperl' &&
+		pokemon.name === 'clamperl' &&
 		statName === 'special-attack'
 	) {
 		res = res * 1.5;
@@ -54,6 +54,13 @@ export const calculateModifiedStat = (
 		(statName === 'attack' || statName === 'special-defense')
 	) {
 		res = res * 1.5;
+	}
+	if (
+		pokemon.ability === 'slow-start' &&
+		pokemon.roundsInBattle < 5 &&
+		(statName === 'attack' || statName === 'speed')
+	) {
+		res /= 2;
 	}
 
 	return res;

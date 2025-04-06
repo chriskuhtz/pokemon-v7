@@ -34,7 +34,7 @@ const calculateTotalSpeed = (
 			a.stats.speed,
 			a.statBoosts.speed,
 			'speed',
-			a.name,
+			a,
 			false
 		) *
 		paraFactorA *

@@ -257,21 +257,19 @@ export const calculateDamage = (
 					attacker.stats.attack,
 					attacker.statBoosts.attack,
 					'attack',
-					attacker.name,
+					attacker,
 					battleFieldEffects.some(
 						(e) => e.type === 'flower-gift' && e.ownerId === attacker.ownerId
-					),
-					getHeldItem(attacker)
+					)
 			  )
 			: calculateModifiedStat(
 					attacker.stats['special-attack'],
 					attacker.statBoosts['special-attack'],
 					'special-attack',
-					attacker.name,
+					attacker,
 					battleFieldEffects.some(
 						(e) => e.type === 'flower-gift' && e.ownerId === attacker.ownerId
-					),
-					getHeldItem(attacker)
+					)
 			  );
 
 	//Crits ignore boosted defense
@@ -296,21 +294,19 @@ export const calculateDamage = (
 					target.stats.defense,
 					defBoost(),
 					'defense',
-					target.name,
+					target,
 					battleFieldEffects.some(
 						(e) => e.type === 'flower-gift' && e.ownerId === target.ownerId
-					),
-					getHeldItem(target)
+					)
 			  )
 			: calculateModifiedStat(
 					target.stats['special-defense'],
 					spdefBoost(),
 					'special-defense',
-					target.name,
+					target,
 					battleFieldEffects.some(
 						(e) => e.type === 'flower-gift' && e.ownerId === target.ownerId
-					),
-					getHeldItem(target)
+					)
 			  );
 
 	const statFactor = atk / def;

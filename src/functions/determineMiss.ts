@@ -109,7 +109,7 @@ export const determineMiss = (
 			target.stats.evasion,
 			target.statBoosts.evasion,
 			'evasion',
-			target.name,
+			target,
 			false
 		) * tangledFeetFactor;
 
@@ -124,7 +124,7 @@ export const determineMiss = (
 			attacker.stats.accuracy,
 			attacker.statBoosts.accuracy,
 			'accuracy',
-			attacker.name,
+			attacker,
 			false
 		) *
 		compoundEyesFactor *
