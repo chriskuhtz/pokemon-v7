@@ -245,6 +245,7 @@ export const calculateDamage = (
 			target.ability,
 			attacker.ability,
 			attacker.secondaryAilments.some((s) => s.type === 'focused'),
+			attacker.name,
 			getHeldItem(attacker)
 		)
 			? attacker.ability === 'sniper'

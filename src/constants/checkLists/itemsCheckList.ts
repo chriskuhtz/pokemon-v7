@@ -1085,7 +1085,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/232/',
 		handled: true,
 	},
-	{ name: 'lucky-punch', url: 'https://pokeapi.co/api/v2/item/233/' },
+	{
+		name: 'lucky-punch',
+		url: 'https://pokeapi.co/api/v2/item/233/',
+		handled: true,
+	},
 	{ name: 'metal-powder', url: 'https://pokeapi.co/api/v2/item/234/' },
 	{ name: 'thick-club', url: 'https://pokeapi.co/api/v2/item/235/' },
 	{ name: 'stick', url: 'https://pokeapi.co/api/v2/item/236/' },

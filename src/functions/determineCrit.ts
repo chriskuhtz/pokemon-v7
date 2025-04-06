@@ -1,5 +1,6 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
 import { ohkoMoves } from '../constants/ohkoMoves';
+import { PokemonName } from '../constants/pokemonNames';
 import { ItemType } from '../interfaces/Item';
 
 export const determineCrit = (
@@ -8,13 +9,15 @@ export const determineCrit = (
 	targetAbility: AbilityName,
 	attackerAbilty: AbilityName,
 	attackerFocused: boolean,
+	attackerName: PokemonName,
 	attackerHeldItem: ItemType | undefined
 ): boolean => {
 	const boostedCritRate =
 		critRate +
 		(attackerFocused ? 2 : 0) +
 		(attackerAbilty === 'super-luck' ? 1 : 0) +
-		(attackerHeldItem === 'scope-lens' ? 1 : 0);
+		(attackerHeldItem === 'scope-lens' ? 1 : 0) +
+		(attackerName === 'chansey' && attackerHeldItem === 'lucky-punch' ? 2 : 0);
 	if (ohkoMoves.includes(moveName)) {
 		return false;
 	}

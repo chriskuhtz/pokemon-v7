@@ -1481,6 +1481,8 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 };
 
+console.log('number of quests', questNames.length);
+
 console.log(
 	'total research points',
 	Object.values(QuestsRecord).reduce(
