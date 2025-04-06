@@ -19,6 +19,7 @@ export const useDrawBackground = (
 			decorationLayer,
 			encounterLayer,
 			foregroundLayer,
+			waterLayer,
 		} = map;
 		const spriteSheet = new Image();
 		ctx?.clearRect(
@@ -77,6 +78,20 @@ export const useDrawBackground = (
 							spriteSheet,
 							-ob.xOffset,
 							-ob.yOffset,
+							16,
+							16,
+							tileSize * w,
+							tileSize * h,
+							tileSize,
+							tileSize
+						);
+					}
+					const water = waterLayer[h][w];
+					if (water) {
+						ctx?.drawImage(
+							spriteSheet,
+							-water.xOffset,
+							-water.yOffset,
 							16,
 							16,
 							tileSize * w,

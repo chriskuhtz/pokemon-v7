@@ -139,7 +139,16 @@ export const MapEditor = ({
 			<a
 				style={{ color: 'white', paddingLeft: '2rem' }}
 				onClick={() => {
-					navigator.clipboard.writeText(JSON.stringify(initialMap.tileMap));
+					navigator.clipboard.writeText(
+						JSON.stringify({
+							baseLayer,
+							encounterLayer,
+							obstacleLayer,
+							decorationLayer,
+							foregroundLayer,
+							waterLayer,
+						})
+					);
 				}}
 			>
 				Copy to Clipboard

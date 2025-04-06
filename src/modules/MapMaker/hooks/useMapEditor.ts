@@ -89,7 +89,7 @@ export const useMapEditor = ({
 				decorationLayer.map((row, h) => {
 					return row.map((el, k) => {
 						if (h === i && k === j) {
-							return tool.type === 'eraser' ? el : tool.tile;
+							return tool.type === 'eraser' ? null : tool.tile;
 						}
 						return el;
 					});
@@ -101,7 +101,7 @@ export const useMapEditor = ({
 				encounterLayer.map((row, h) => {
 					return row.map((el, k) => {
 						if (h === i && k === j) {
-							return tool.type === 'eraser' ? el : tool.tile;
+							return tool.type === 'eraser' ? null : tool.tile;
 						}
 						return el;
 					});
@@ -113,7 +113,7 @@ export const useMapEditor = ({
 				obstacleLayer.map((row, h) => {
 					return row.map((el, k) => {
 						if (h === i && k === j) {
-							return tool.type === 'eraser' ? el : tool.tile;
+							return tool.type === 'eraser' ? null : tool.tile;
 						}
 						return el;
 					});
@@ -125,7 +125,7 @@ export const useMapEditor = ({
 				foregroundLayer.map((row, h) => {
 					return row.map((el, k) => {
 						if (h === i && k === j) {
-							return tool.type === 'eraser' ? el : tool.tile;
+							return tool.type === 'eraser' ? null : tool.tile;
 						}
 						return el;
 					});
@@ -137,7 +137,7 @@ export const useMapEditor = ({
 				waterLayer.map((row, h) => {
 					return row.map((el, k) => {
 						if (h === i && k === j) {
-							return tool.type === 'eraser' ? el : tool.tile;
+							return tool.type === 'eraser' ? null : tool.tile;
 						}
 						return el;
 					});

@@ -22,9 +22,16 @@ const route1base: TileMap = {
 	width: 24,
 	gap: 0,
 };
+const slateport: TileMap = {
+	src: "url('/tilesets/slateport.png')",
+	height: 8,
+	width: 40,
+	gap: 0,
+};
 
 export const tileMapsRecord: Record<string, TileMap> = {
 	'/tilesets/masterSheet.png': masterSheet,
 	'/tilesets/palletTown.png': palletTown,
 	'/tilesets/route1base.png': route1base,
+	'/tilesets/slateport.png': slateport,
 };
