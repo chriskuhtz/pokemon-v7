@@ -56,8 +56,18 @@ export const MovesDisplay = ({
 				<Card
 					key={o}
 					actionElements={[
-						<FaArrowUp onClick={() => reorder('UP', o)} />,
-						<FaArrowDown onClick={() => reorder('DOWN', o)} />,
+						<FaArrowUp
+							onClick={(e) => {
+								e.stopPropagation();
+								reorder('UP', o);
+							}}
+						/>,
+						<FaArrowDown
+							onClick={(e) => {
+								e.stopPropagation();
+								reorder('DOWN', o);
+							}}
+						/>,
 					]}
 					disabled={!currentMoves.includes(o) && currentMoves.length === 4}
 					icon={<MdOutlineRadioButtonChecked />}
