@@ -38,15 +38,16 @@ export const BattlePokemonInfo = ({ pokemon }: { pokemon: BattlePokemon }) => {
 		) {
 			return typeColors['poison'];
 		}
-		return 'white';
+		return 'black';
 	}, [pokemon]);
 	return (
 		<div
 			style={{
-				border: '1px solid black',
+				border: 'solid',
+				borderWidth: backgroundColor === 'black' ? '1px' : '3px',
 				padding: '0 2rem',
 				borderRadius: 9000,
-				backgroundColor,
+				borderColor: backgroundColor,
 			}}
 			key={pokemon.id}
 		>
