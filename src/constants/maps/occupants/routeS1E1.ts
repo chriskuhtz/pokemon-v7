@@ -1,4 +1,5 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
+import { routeS1E1Lure } from '../../../modules/BerryLure/BerryLure';
 
 export const routeS1E1Occupants: OverworldMap['occupants'] = [
 	{
@@ -54,4 +55,5 @@ export const routeS1E1Occupants: OverworldMap['occupants'] = [
 		item: 'poke-flute',
 		amount: 1,
 	},
+	routeS1E1Lure,
 ];

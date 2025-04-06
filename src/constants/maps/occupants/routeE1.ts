@@ -1,4 +1,5 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
+import { routeE1Lure } from '../../../modules/BerryLure/BerryLure';
 
 export const routeE1Occupants: OverworldMap['occupants'] = [
 	{
@@ -200,4 +201,5 @@ export const routeE1Occupants: OverworldMap['occupants'] = [
 			!s.handledOccupants.some((occ) => occ.id === 'rock_routeE1_9'),
 		id: 'rock_routeE1_9',
 	},
+	routeE1Lure,
 ];

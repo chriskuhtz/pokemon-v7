@@ -61,7 +61,48 @@ export const lureBerryEncountersN1E1: Record<PokemonType, PokemonName> = {
 	fairy: 'cottonee',
 	typeless: 'spiritomb',
 };
-
+export const lureBerryEncountersE1: Record<PokemonType, PokemonName> = {
+	fire: 'slugma',
+	water: 'quagsire',
+	electric: 'tadbulb',
+	grass: 'bellsprout',
+	ice: 'bergmite',
+	fighting: 'tyrogue',
+	poison: 'grimer',
+	ground: 'trapinch',
+	flying: 'hawlucha',
+	psychic: 'girafarig',
+	bug: 'dwebble',
+	rock: 'nosepass',
+	ghost: 'haunter',
+	dragon: 'vibrava',
+	dark: 'absol',
+	steel: 'orthworm',
+	normal: 'furfrou',
+	fairy: 'slurpuff',
+	typeless: 'spiritomb',
+};
+export const lureBerryEncountersS1E1: Record<PokemonType, PokemonName> = {
+	fire: 'litleo',
+	water: 'panpour',
+	electric: 'pachirisu',
+	grass: 'gogoat',
+	ice: 'vulpix-alola',
+	fighting: 'makuhita',
+	poison: 'venipede',
+	ground: 'bunnelby',
+	flying: 'vivillon',
+	psychic: 'natu',
+	bug: 'paras',
+	rock: 'rhyhorn',
+	ghost: 'shedinja',
+	dragon: 'dratini',
+	dark: 'grimer-alola',
+	steel: 'togedemaru',
+	normal: 'doduo',
+	fairy: 'snubbull',
+	typeless: 'spiritomb',
+};
 export const BerryLure = () => {
 	const navigate = useNavigate();
 	const { saveFile } = useContext(SaveFileContext);
@@ -213,4 +254,18 @@ export const routeN1E1Lure: Occupant = {
 	x: 4,
 	y: 22,
 	conditionFunction: (s) => s.campUpgrades['berry lure station routeN1E1'],
+};
+export const routeE1Lure: Occupant = {
+	id: 'routeE1_berryLure',
+	type: 'BERRY_LURE',
+	x: 24,
+	y: 25,
+	conditionFunction: (s) => s.campUpgrades['berry lure station routeE1'],
+};
+export const routeS1E1Lure: Occupant = {
+	id: 'routeS1E1_berryLure',
+	type: 'BERRY_LURE',
+	x: 24,
+	y: 25,
+	conditionFunction: (s) => s.campUpgrades['berry lure station routeS1E1'],
 };

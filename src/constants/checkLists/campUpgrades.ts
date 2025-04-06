@@ -36,6 +36,8 @@ export const campUpgradeNames = [
 	'invite museum curator',
 	'berry lure station routeN1',
 	'berry lure station routeN1E1',
+	'berry lure station routeE1',
+	'berry lure station routeS1E1',
 ] as const;
 
 export type CampUpgrade = (typeof campUpgradeNames)[number];
@@ -82,10 +84,9 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'bag size upgrade 2': [...baseRequirements, 'bag size upgrade 1'],
 	'bag size upgrade 3': [...baseRequirements, 'bag size upgrade 2'],
 	'berry lure station routeN1': baseRequirements,
-	'berry lure station routeN1E1': [
-		...baseRequirements,
-		'machete certification',
-	],
+	'berry lure station routeN1E1': ['machete certification'],
+	'berry lure station routeE1': ['shovel certification'],
+	'berry lure station routeS1E1': ['swimming certification'],
 };
 export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	bulletin_board: 'A place for people to post quests',
@@ -127,6 +128,8 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	'bag size upgrade 3': 'More space in your field bag',
 	'berry lure station routeN1': 'Place berries inside to attract pokemon',
 	'berry lure station routeN1E1': 'Place berries inside to attract pokemon',
+	'berry lure station routeE1': 'Place berries inside to attract pokemon',
+	'berry lure station routeS1E1': 'Place berries inside to attract pokemon',
 	'fifth slot for farm': 'more space at the berry farm',
 	'sixth slot for farm': 'more space at the berry farm',
 	'seventh slot for farm': 'more space at the berry farm',

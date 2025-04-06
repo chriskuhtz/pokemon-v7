@@ -2,7 +2,7 @@ import { EncounterMap } from '../encounters';
 
 export const routeS1E1Encounters: EncounterMap = {
 	WATER: [
-		{ name: 'wingull', xp: 8000, rarity: 'common' },
+		{ name: 'psyduck', xp: 8000, rarity: 'common' },
 		{ name: 'buizel', xp: 7000, rarity: 'common' },
 		{ name: 'pelipper', xp: 12000, rarity: 'rare' },
 		{ name: 'remoraid', xp: 7000, rarity: 'medium' },
