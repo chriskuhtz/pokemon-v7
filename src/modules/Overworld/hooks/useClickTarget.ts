@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { getNextFieldOccupant } from '../../../functions/getNextFieldOccupant';
 import { getOverworldDistance } from '../../../functions/getOverworldDistance';
 import { isPassable } from '../../../functions/isPassable';
+import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
 import {
 	CharacterLocationData,
@@ -27,6 +28,7 @@ export const useClickTarget = (
 		| undefined
 	>
 > => {
+	const { saveFile } = useContext(SaveFileContext);
 	const [clickTarget, setClickTarget] = useState<
 		{ x: number; y: number } | undefined
 	>();
@@ -50,7 +52,8 @@ export const useClickTarget = (
 			isPassable(
 				{ x: playerLocation.x + 1, y: playerLocation.y },
 				assembledMap,
-				currentOccupants
+				currentOccupants,
+				saveFile.campUpgrades['swimming certification']
 			)
 		) {
 			setNextInput('RIGHT');
@@ -61,7 +64,8 @@ export const useClickTarget = (
 			isPassable(
 				{ x: playerLocation.x - 1, y: playerLocation.y },
 				assembledMap,
-				currentOccupants
+				currentOccupants,
+				saveFile.campUpgrades['swimming certification']
 			)
 		) {
 			setNextInput('LEFT');
@@ -72,7 +76,8 @@ export const useClickTarget = (
 			isPassable(
 				{ x: playerLocation.x, y: playerLocation.y + 1 },
 				assembledMap,
-				currentOccupants
+				currentOccupants,
+				saveFile.campUpgrades['swimming certification']
 			)
 		) {
 			setNextInput('DOWN');
@@ -83,7 +88,8 @@ export const useClickTarget = (
 			isPassable(
 				{ x: playerLocation.x, y: playerLocation.y - 1 },
 				assembledMap,
-				currentOccupants
+				currentOccupants,
+				saveFile.campUpgrades['swimming certification']
 			)
 		) {
 			setNextInput('UP');
@@ -93,7 +99,12 @@ export const useClickTarget = (
 		if (
 			(clickTarget.x === playerLocation.x &&
 				clickTarget.y === playerLocation.y) ||
-			(!isPassable(clickTarget, assembledMap, currentOccupants) &&
+			(!isPassable(
+				clickTarget,
+				assembledMap,
+				currentOccupants,
+				saveFile.campUpgrades['swimming certification']
+			) &&
 				getOverworldDistance(clickTarget, playerLocation) === 1)
 		) {
 			if (playerLocation.x > clickTarget.x) {
@@ -122,6 +133,7 @@ export const useClickTarget = (
 		playerLocation,
 		setNextInput,
 		currentOccupants,
+		saveFile.campUpgrades,
 	]);
 
 	return setClickTarget;

@@ -9,6 +9,7 @@ export const useDrawCharacter = (
 	playerSprite: string
 ) => {
 	const { baseSize } = useContext(BaseSizeContext);
+
 	const yOffset = useMemo(
 		() => getYOffsetFromOrientation(playerLocation.orientation),
 		[playerLocation.orientation]

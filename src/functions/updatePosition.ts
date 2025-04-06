@@ -11,11 +11,12 @@ export const updatePosition = (
 	nextInput: CharacterOrientation,
 	map: OverworldMap,
 	addStep: () => void,
-	currentOccupants: Occupant[]
+	currentOccupants: Occupant[],
+	canSwim: boolean
 ): { x: number; y: number } => {
 	const nextLocation = getNextLocation(playerLocation, nextInput);
 
-	if (isPassable(nextLocation, map, currentOccupants)) {
+	if (isPassable(nextLocation, map, currentOccupants, canSwim)) {
 		addStep();
 		return nextLocation;
 	}

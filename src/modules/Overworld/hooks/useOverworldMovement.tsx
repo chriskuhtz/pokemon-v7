@@ -20,7 +20,13 @@ export const useOverworldMovement = (
 	encounterRateModifier: { factor: number; upToXp: number }
 ) => {
 	const {
-		saveFile: { pokemon, quests, location: playerLocation, currentSwarm },
+		saveFile: {
+			pokemon,
+			quests,
+			location: playerLocation,
+			currentSwarm,
+			campUpgrades,
+		},
 		setCharacterLocationReducer: setCharacterLocation,
 	} = useContext(SaveFileContext);
 	const map = useMemo(() => mapsRecord[playerLocation.mapId], [playerLocation]);
@@ -90,7 +96,8 @@ export const useOverworldMovement = (
 						nextInput,
 						map,
 						addStep,
-						currentOccupants
+						currentOccupants,
+						campUpgrades['swimming certification']
 					),
 					forwardFoot: getNextForwardFoot(playerLocation.forwardFoot),
 				});
@@ -108,6 +115,7 @@ export const useOverworldMovement = (
 		return () => clearTimeout(int);
 	}, [
 		addStep,
+		campUpgrades,
 		currentOccupants,
 		currentSwarm,
 		encounterChance,

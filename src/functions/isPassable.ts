@@ -12,7 +12,8 @@ export const getMapDimensions = (
 export const isPassable = (
 	field: { x: number; y: number },
 	map: OverworldMap,
-	currentOccupants: Occupant[]
+	currentOccupants: Occupant[],
+	canSwim: boolean
 ): boolean => {
 	const { width, height } = getMapDimensions(map);
 	if (field.y >= height) {
@@ -29,6 +30,11 @@ export const isPassable = (
 	}
 	const nextFieldObstacle = map.tileMap.obstacleLayer[field.y][field.x];
 
+	const nextFieldWater = map.tileMap.waterLayer[field.y][field.x];
+
+	if (nextFieldWater) {
+		return canSwim;
+	}
 	if (nextFieldObstacle) {
 		return false;
 	}

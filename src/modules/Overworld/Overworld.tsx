@@ -79,8 +79,22 @@ export const Overworld = ({
 	const [stepsTaken, setStepsTaken] = useState<number>(0);
 	const { rotateOccupant, occupants } = useOccupants();
 
+	const sprite = useMemo(() => {
+		const onWater =
+			map.tileMap.waterLayer[saveFile.location.y][saveFile.location.x];
+		if (onWater) {
+			return 'NPC_027';
+		}
+
+		return saveFile.sprite;
+	}, [
+		map.tileMap.waterLayer,
+		saveFile.location.x,
+		saveFile.location.y,
+		saveFile.sprite,
+	]);
 	//DRAWING
-	useDrawCharacter(playerCanvasId, saveFile.location, saveFile.sprite);
+	useDrawCharacter(playerCanvasId, saveFile.location, sprite);
 	useDrawOccupants(occupantsCanvasId, occupants, map.timeOfDayShadersMap);
 	//INTERACTION
 	useDrawForeground('foreground', map.tileMap, map.tilesetUrl, baseSize);
