@@ -673,7 +673,7 @@ export const BattleField = ({
 				[
 					xpPerTeamMember() > 0
 						? {
-								message: `Each Team Member gained ${xpPerTeamMember} XP`,
+								message: `Each Team Member gained ${xpPerTeamMember()} XP`,
 						  }
 						: undefined,
 					...levelUpMessages,

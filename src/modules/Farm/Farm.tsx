@@ -84,7 +84,7 @@ export const Farm = (): JSX.Element => {
 							icon={<img src={getItemUrl(berry)} />}
 							content={<strong>{`plant a ${berry} (${amount} in bag)`}</strong>}
 							actionElements={[
-								<button onClick={() => plant(berry)}>{`no mulch`}</button>,
+								<button onClick={() => plant(berry)}>{`plant`}</button>,
 								...mulches.map(([m]) => (
 									<button onClick={() => plant(berry, m)}>
 										{`with ${m}`}
