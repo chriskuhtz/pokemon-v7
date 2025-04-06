@@ -5,6 +5,7 @@ import { ItemType } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { calculateLevelData } from './calculateLevelData';
 import { getHeldItem } from './getHeldItem';
+import { getMovesArray } from './getMovesArray';
 import { getTimeOfDay } from './getTimeOfDay';
 
 export const determineEvoChecks = (
@@ -13,13 +14,26 @@ export const determineEvoChecks = (
 	evo: EvolutionChainLink
 ) => {
 	const alternateFormOffset = () => {
+		let res = 1;
 		if (pokemonNames.some((pn) => pn === ownedPokemon.name + '-alola')) {
-			return 2;
+			res += 1;
 		}
-		return 1;
+		if (pokemonNames.some((pn) => pn === ownedPokemon.name + '-galar')) {
+			res += 1;
+		}
+		if (pokemonNames.some((pn) => pn === ownedPokemon.name + '-hisui')) {
+			res += 1;
+		}
+		if (pokemonNames.some((pn) => pn === ownedPokemon.name + '-paldea')) {
+			res += 1;
+		}
+		return res;
 	};
 	const deets =
-		evo.evolution_details[evo.evolution_details.length - alternateFormOffset()];
+		evo.evolution_details[
+			Math.max(0, evo.evolution_details.length - alternateFormOffset())
+		];
+
 	const {
 		min_happiness,
 		min_affection,
@@ -30,6 +44,7 @@ export const determineEvoChecks = (
 		held_item,
 		trigger,
 		gender,
+		known_move,
 	} = deets;
 	const itemName = item?.name as ItemType | undefined;
 	const { level } = calculateLevelData(ownedPokemon.xp);
@@ -44,7 +59,13 @@ export const determineEvoChecks = (
 
 	function checks() {
 		const res = [];
-
+		if (known_move) {
+			if (
+				getMovesArray(ownedPokemon).every((m) => m.name !== known_move.name)
+			) {
+				res.push(`Move ${known_move.name}`);
+			}
+		}
 		if (gender) {
 			if (ownedPokemon.gender === 'MALE' && gender === 1) {
 				res.push('Gender Female ');

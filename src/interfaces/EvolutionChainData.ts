@@ -19,7 +19,7 @@ export interface EvolutionDetails {
 	gender: number | null;
 	held_item: { name: string } | null;
 	item: { name: string } | null;
-	known_move: string | null;
+	known_move: { name: string } | null;
 	known_move_type: string | null;
 	location: string | null;
 	min_affection: number | null;
