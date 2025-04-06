@@ -474,6 +474,10 @@ export const calculateDamage = (
 			attack.data.meta.ailment)
 			? 1.3
 			: 1;
+	const defeatistFactor =
+		attacker.ability === 'defeatist' && attacker.damage > attacker.stats.hp / 2
+			? 0.5
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -518,7 +522,8 @@ export const calculateDamage = (
 				tintedLensFactor *
 				filterFactor *
 				recklessFactor *
-				sheerForceFactor
+				sheerForceFactor *
+				defeatistFactor
 		),
 		1
 	);
