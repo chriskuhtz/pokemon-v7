@@ -161,6 +161,7 @@ export const heldItems = [
 	'up-grade',
 	'shell-bell',
 	'sea-incense',
+	'lax-incense',
 ] as const;
 export const valuables = [
 	'shoal-salt',

@@ -1080,7 +1080,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/231/',
 		handled: true,
 	},
-	{ name: 'lax-incense', url: 'https://pokeapi.co/api/v2/item/232/' },
+	{
+		name: 'lax-incense',
+		url: 'https://pokeapi.co/api/v2/item/232/',
+		handled: true,
+	},
 	{ name: 'lucky-punch', url: 'https://pokeapi.co/api/v2/item/233/' },
 	{ name: 'metal-powder', url: 'https://pokeapi.co/api/v2/item/234/' },
 	{ name: 'thick-club', url: 'https://pokeapi.co/api/v2/item/235/' },

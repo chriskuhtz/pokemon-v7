@@ -97,7 +97,7 @@ export const determineMiss = (
 	if (attack.name === 'thunder' && weather === 'rain') {
 		return { miss: false };
 	}
-
+	const laxIncenseFactor = getHeldItem(target) === 'lax-incense' ? 1.05 : 1;
 	const tangledFeetFactor =
 		target.ability === 'tangled-feet' &&
 		target.secondaryAilments.some((a) => a.type === 'confusion')
@@ -111,11 +111,14 @@ export const determineMiss = (
 			'evasion',
 			target,
 			false
-		) * tangledFeetFactor;
+		) *
+		tangledFeetFactor *
+		laxIncenseFactor;
 
 	const compoundEyesFactor = getCompoundEyesFactor(attacker, attack);
 	const hustleFactor = getHustleFactor(attacker, attack);
 	const brightPowderFactor = getHeldItem(target) === 'bright-powder' ? 0.9 : 1;
+
 	const thunderWeatherFactor =
 		attack.name === 'thunder' && weather === 'sun' ? 0.5 : 1;
 
