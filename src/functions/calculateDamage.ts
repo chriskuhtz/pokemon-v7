@@ -98,6 +98,10 @@ export const getPower = (
 	if (attack.name === 'return') {
 		return (attacker.happiness * 2) / 5;
 	}
+
+	if (attack.name === 'frustration') {
+		return ((255 - attacker.happiness) * 2) / 5;
+	}
 	if (attack.name === 'present') {
 		const random = Math.random();
 		if (random < 0.1) {
