@@ -26,6 +26,13 @@ export const calculateModifiedStat = (
 		res = res * 2;
 	}
 	if (
+		heldItem === 'thick-club' &&
+		(pokemon.name.includes('marowak') || pokemon.name === 'cubone') &&
+		statName === 'attack'
+	) {
+		res = res * 2;
+	}
+	if (
 		heldItem === 'metal-powder' &&
 		pokemon.name.includes('ditto') &&
 		(statName === 'defense' || statName === 'special-defense')

@@ -358,6 +358,19 @@ export const handleUniqueMoves = ({
 			})
 		);
 	}
+	if (move.name === 'pain-split') {
+		const totalRemaining =
+			updatedAttacker.stats.hp -
+			updatedAttacker.damage +
+			updatedTarget.stats.hp -
+			updatedTarget.damage;
+		const remainingForEach = Math.floor(totalRemaining / 2);
+
+		updatedAttacker.damage =
+			updatedAttacker.stats.hp - (updatedAttacker.stats.hp - remainingForEach);
+		updatedTarget.damage =
+			updatedTarget.stats.hp - (updatedTarget.stats.hp - remainingForEach);
+	}
 
 	setPokemon((pokemon) =>
 		pokemon.map((p) => {

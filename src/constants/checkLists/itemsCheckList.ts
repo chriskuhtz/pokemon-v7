@@ -1095,7 +1095,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/234/',
 		handled: true,
 	},
-	{ name: 'thick-club', url: 'https://pokeapi.co/api/v2/item/235/' },
+	{
+		name: 'thick-club',
+		url: 'https://pokeapi.co/api/v2/item/235/',
+		handled: true,
+	},
 	{ name: 'stick', url: 'https://pokeapi.co/api/v2/item/236/' },
 	{ name: 'red-scarf', url: 'https://pokeapi.co/api/v2/item/237/' },
 	{ name: 'blue-scarf', url: 'https://pokeapi.co/api/v2/item/238/' },
