@@ -610,7 +610,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/114/',
 		handled: true,
 	},
-	{ name: 'ice-body', url: 'https://pokeapi.co/api/v2/ability/115/' },
+	{
+		name: 'ice-body',
+		url: 'https://pokeapi.co/api/v2/ability/115/',
+		handled: true,
+	},
 	{ name: 'defeatist', url: 'https://pokeapi.co/api/v2/ability/129/' },
 	{ name: 'cursed-body', url: 'https://pokeapi.co/api/v2/ability/130/' },
 	{ name: 'healer', url: 'https://pokeapi.co/api/v2/ability/131/' },
@@ -989,6 +993,7 @@ export const abilityNames = [
 	'slow-start',
 	'scrappy',
 	'storm-drain',
+	'ice-body',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

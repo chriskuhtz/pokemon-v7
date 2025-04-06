@@ -70,6 +70,7 @@ export const BURN_ATTACK_REDUCTION_FACTOR = 0.5;
 export const SANDSTORM_DAMAGE_FACTOR = 1 / 16;
 export const HAIL_DAMAGE_FACTOR = 1 / 16;
 export const DRY_SKIN_DAMAGE_FACTOR = 1 / 8;
+export const ICE_BODY_HEAL_FACTOR = 1 / 16;
 export const SOLAR_POWER_DAMAGE_FACTOR = 1 / 8;
 export const POISON_DAMAGE_FACTOR = 1 / 16;
 export const UNFREEZE_CHANCE = 0.1;

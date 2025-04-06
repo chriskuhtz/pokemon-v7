@@ -1,6 +1,7 @@
 import {
 	DRY_SKIN_DAMAGE_FACTOR,
 	HAIL_DAMAGE_FACTOR,
+	ICE_BODY_HEAL_FACTOR,
 	SANDSTORM_DAMAGE_FACTOR,
 	SOLAR_POWER_DAMAGE_FACTOR,
 } from '../interfaces/Ailment';
@@ -41,6 +42,17 @@ export const applyEndOfTurnWeatherDamage = (
 		) {
 			return pokemon;
 		}
+		if (pokemon.ability === 'ice-body') {
+			addMessage(`${pokemon.data.name} recovered hp from the hail`);
+			return {
+				...pokemon,
+				damage: getMiddleOfThree([
+					0,
+					pokemon.damage - Math.round(pokemon.stats.hp * ICE_BODY_HEAL_FACTOR),
+					pokemon.stats.hp,
+				]),
+			};
+		}
 		addMessage(`${pokemon.data.name} takes damage from the hail`);
 		return {
 			...pokemon,
@@ -78,5 +90,6 @@ export const applyEndOfTurnWeatherDamage = (
 			]),
 		};
 	}
+
 	return pokemon;
 };
