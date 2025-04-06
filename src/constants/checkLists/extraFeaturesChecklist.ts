@@ -245,6 +245,7 @@ export const extraFeatureCheckList: {
 	{ name: 'extract category:unique moves', handled: true },
 	{
 		name: '3 column layout for map editor (Tool Selection, current Layer, CombinedCanvas)',
+		handled: true,
 	},
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'improve held-item+trade evo condition' },

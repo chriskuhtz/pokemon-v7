@@ -55,5 +55,35 @@ export const routeS1E1Occupants: OverworldMap['occupants'] = [
 		item: 'poke-flute',
 		amount: 1,
 	},
+	{
+		type: 'ITEM',
+		id: 'miracle-seed',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'miracle-seed'),
+		x: 40,
+		y: 20,
+		item: 'miracle-seed',
+		amount: 1,
+	},
+	{
+		type: 'ITEM',
+		id: 'twisted-spoon',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'twisted-spoon'),
+		x: 23,
+		y: 40,
+		item: 'twisted-spoon',
+		amount: 1,
+	},
+	{
+		type: 'ITEM',
+		id: 'lucky-egg',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'lucky-egg'),
+		x: 9,
+		y: 23,
+		item: 'lucky-egg',
+		amount: 1,
+	},
 	routeS1E1Lure,
 ];

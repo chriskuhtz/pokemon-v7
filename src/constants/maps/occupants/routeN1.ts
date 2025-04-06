@@ -111,6 +111,26 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 			!s.handledOccupants.some((h) => h.id === 'routeN1_aguav_berry'),
 	},
 	{
+		type: 'ITEM',
+		x: 30,
+		y: 40,
+		item: 'kee-berry',
+		amount: 1,
+		id: 'routeN1_kee_berry',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'routeN1_kee_berry'),
+	},
+	{
+		type: 'ITEM',
+		x: 17,
+		y: 42,
+		item: 'silk-scarf',
+		amount: 1,
+		id: 'routeN1_silk_scarf',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'routeN1_silk_scarf'),
+	},
+	{
 		type: 'HONEY_TREE',
 		x: 25,
 		y: 25,

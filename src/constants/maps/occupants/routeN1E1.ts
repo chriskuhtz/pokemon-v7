@@ -85,5 +85,25 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'routeS1_blue_apricorn'),
 	},
+	{
+		type: 'ITEM',
+		x: 17,
+		y: 30,
+		item: 'silver-powder',
+		amount: 1,
+		id: 'routeS1_silver-powder',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'routeS1_silver-powder'),
+	},
+	{
+		type: 'ITEM',
+		x: 40,
+		y: 9,
+		item: 'poison-barb',
+		amount: 1,
+		id: 'routeS1_poison-barb',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'routeS1_poison-barb'),
+	},
 	routeN1E1Lure,
 ];
