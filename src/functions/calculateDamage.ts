@@ -95,6 +95,9 @@ export const getPower = (
 			0 * getRolloutFactor(attack.multiTurn ?? 1, !!attacker.defenseCurled)
 		);
 	}
+	if (attack.name === 'return') {
+		return (attacker.happiness * 2) / 5;
+	}
 	return attack.data.power ?? 0;
 };
 
