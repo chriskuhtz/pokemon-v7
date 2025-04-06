@@ -65,7 +65,8 @@ export interface BattleFieldEffect {
 		| 'magnet-pull'
 		| 'spikes'
 		| 'flower-gift'
-		| 'bad-dreams';
+		| 'bad-dreams'
+		| 'unnerve';
 	ownerId: string;
 	duration: number;
 }
@@ -211,6 +212,12 @@ export const BattleField = ({
 		}
 		if (onFieldTeam.some((p) => p.ability === 'bad-dreams')) {
 			res.push({ type: 'bad-dreams', ownerId: getPlayerId(), duration: 9000 });
+		}
+		if (onFieldOpponents.some((p) => p.ability === 'unnerve')) {
+			res.push({ type: 'unnerve', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'unnerve')) {
+			res.push({ type: 'unnerve', ownerId: getPlayerId(), duration: 9000 });
 		}
 		return res;
 	}, [battleWeather, bf, onFieldOpponents, onFieldTeam]);
@@ -487,7 +494,8 @@ export const BattleField = ({
 					let updated = applyEndOfTurnHeldItem(
 						p,
 						(x) => collectedMessages.push(x),
-						(x) => collectedMessages.push(...x)
+						(x) => collectedMessages.push(...x),
+						battleFieldEffects
 					);
 
 					updated = applyEndOfTurnAbility({
@@ -543,6 +551,7 @@ export const BattleField = ({
 		}
 	}, [
 		addMultipleMessages,
+		battleFieldEffects,
 		battleStep,
 		battleWeather,
 		initOpponents,

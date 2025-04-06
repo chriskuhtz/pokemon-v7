@@ -4,8 +4,10 @@ import {
 	FlavourfullBerriesTable,
 	hasEndOfTurnEffect,
 	HPHealTable,
+	isBerry,
 } from '../interfaces/Item';
 import { getRandomBoostableStat, Stat } from '../interfaces/StatObject';
+import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { applyItemToPokemon } from './applyItemToPokemon';
 import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
@@ -15,8 +17,16 @@ import { getMovesArray } from './getMovesArray';
 export const applyEndOfTurnHeldItem = (
 	pokemon: BattlePokemon,
 	addMessage: (x: string) => void,
-	addMultipleMessages: (x: string[]) => void
+	addMultipleMessages: (x: string[]) => void,
+	battleFieldEffects: BattleFieldEffect[]
 ): BattlePokemon => {
+	const unnerved = battleFieldEffects.some(
+		(b) => b.type === 'unnerve' && b.ownerId !== pokemon.ownerId
+	);
+
+	if (unnerved && isBerry(getHeldItem(pokemon))) {
+		return pokemon;
+	}
 	const heldItem = getHeldItem(pokemon);
 	if (!heldItem || !hasEndOfTurnEffect(heldItem)) {
 		return pokemon;
