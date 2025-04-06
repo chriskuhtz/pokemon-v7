@@ -1,3 +1,4 @@
+import { AbilityName } from '../constants/checkLists/abilityCheckList';
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -6,11 +7,13 @@ import { getTypeNames } from './getTypeNames';
 
 export const determineTypeFactor = (
 	target: BattlePokemon,
+	attackerAbility: AbilityName,
 	attack: BattleAttack,
-	normalized?: boolean,
+
 	addMessage?: (x: Message) => void
 ): number => {
 	let res = 1;
+	const normalized = attackerAbility === 'normalize';
 	const targetTypes = getTypeNames(target);
 
 	const attackType = normalized ? 'normal' : attack.data.type.name;
@@ -29,7 +32,8 @@ export const determineTypeFactor = (
 
 	if (
 		targetTypes.includes('ghost') &&
-		target.secondaryAilments.some((s) => s.type === 'foresighted') &&
+		(target.secondaryAilments.some((s) => s.type === 'foresighted') ||
+			attackerAbility === 'scrappy') &&
 		(attackType === 'normal' || attackType == 'fighting')
 	) {
 		res = 1;

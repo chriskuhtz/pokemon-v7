@@ -151,8 +151,8 @@ export const calculateDamage = (
 	}
 	const typeFactor = determineTypeFactor(
 		target,
+		attacker.ability,
 		attack,
-		attacker.ability === 'normalize',
 		addMessage
 	);
 	if (typeFactor === 0) {
