@@ -17,12 +17,14 @@ export const TileMapTab = ({
 	foregroundLayer,
 	obstacleLayer,
 	tileSetUrl,
+	waterLayer,
 }: {
 	baseLayer: TileIdentifier[][];
 	encounterLayer: (TileIdentifier | null)[][];
 	decorationLayer: (TileIdentifier | null)[][];
 	foregroundLayer: (TileIdentifier | null)[][];
 	obstacleLayer: (TileIdentifier | null)[][];
+	waterLayer: (TileIdentifier | null)[][];
 	tileSetUrl: string;
 	addColumn: () => void;
 	addRow: () => void;
@@ -88,6 +90,18 @@ export const TileMapTab = ({
 					addColumn={addColumn}
 					addRow={addRow}
 					changeTile={changeTile}
+					layer={waterLayer}
+					layerName="Water"
+					clear={() => clearLayer('Water')}
+					changeRow={(index) => changeRow(index, 'Water')}
+					changeColumn={(index) => changeColumn(index, 'Water')}
+					randomFill={randomFill}
+				/>
+				<LayerEditor
+					tileSetUrl={tileSetUrl}
+					addColumn={addColumn}
+					addRow={addRow}
+					changeTile={changeTile}
 					layer={foregroundLayer}
 					layerName="Foreground"
 					clear={() => clearLayer('Foreground')}
@@ -102,6 +116,7 @@ export const TileMapTab = ({
 						obstacleLayer,
 						decorationLayer,
 						foregroundLayer,
+						waterLayer,
 					}}
 					tileSize={16}
 					tileSetUrl={tileSetUrl}

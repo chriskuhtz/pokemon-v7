@@ -7,7 +7,8 @@ export type LayerName =
 	| 'Obstacle'
 	| 'Decoration'
 	| 'Encounter'
-	| 'Foreground';
+	| 'Foreground'
+	| 'Water';
 export const useMapEditor = ({
 	tool,
 	initialMap,
@@ -30,6 +31,9 @@ export const useMapEditor = ({
 	const [foregroundLayer, setforegroundLayer] = useState<
 		(TileIdentifier | null)[][]
 	>(initialMap.tileMap.foregroundLayer);
+	const [waterLayer, setwaterLayer] = useState<(TileIdentifier | null)[][]>(
+		initialMap.tileMap.waterLayer
+	);
 
 	const usedTiles = useMemo(() => {
 		const used: TileIdentifier[] = [];
@@ -40,6 +44,7 @@ export const useMapEditor = ({
 			...obstacleLayer.flat(),
 			...decorationLayer.flat(),
 			...foregroundLayer.flat(),
+			...waterLayer.flat(),
 		];
 
 		all.forEach((t) => {
@@ -60,6 +65,7 @@ export const useMapEditor = ({
 		encounterLayer,
 		foregroundLayer,
 		obstacleLayer,
+		waterLayer,
 	]);
 
 	const addColumn = () => {
@@ -68,6 +74,7 @@ export const useMapEditor = ({
 		setobstacleLayer(obstacleLayer.map((row) => [...row, null]));
 		setdecorationLayer(decorationLayer.map((row) => [...row, null]));
 		setforegroundLayer(foregroundLayer.map((row) => [...row, null]));
+		setwaterLayer(waterLayer.map((row) => [...row, null]));
 	};
 	const addRow = () => {
 		setBaseLayer([...baseLayer, baseLayer[baseLayer.length - 1]]);
@@ -86,6 +93,10 @@ export const useMapEditor = ({
 		setforegroundLayer([
 			...foregroundLayer,
 			Array.from({ length: foregroundLayer[0].length }).map(() => null),
+		]);
+		setwaterLayer([
+			...waterLayer,
+			Array.from({ length: waterLayer[0].length }).map(() => null),
 		]);
 	};
 
@@ -154,6 +165,18 @@ export const useMapEditor = ({
 				})
 			);
 		}
+		if (layer === 'Water') {
+			setwaterLayer(
+				waterLayer.map((row, h) => {
+					return row.map((el, k) => {
+						if (h === i && k === j) {
+							return tool.type === 'eraser' ? el : tool.tile;
+						}
+						return el;
+					});
+				})
+			);
+		}
 	};
 	const changeRow = (i: number, layer: LayerName) => {
 		if (!tool) {
@@ -203,6 +226,16 @@ export const useMapEditor = ({
 		if (layer === 'Foreground') {
 			setforegroundLayer(
 				foregroundLayer.map((row, h) => {
+					if (h === i) {
+						return row.map(() => (tool.type === 'eraser' ? null : tool.tile));
+					}
+					return row;
+				})
+			);
+		}
+		if (layer === 'Water') {
+			setwaterLayer(
+				waterLayer.map((row, h) => {
 					if (h === i) {
 						return row.map(() => (tool.type === 'eraser' ? null : tool.tile));
 					}
@@ -276,6 +309,18 @@ export const useMapEditor = ({
 				})
 			);
 		}
+		if (layer === 'Water') {
+			setwaterLayer(
+				waterLayer.map((row) => {
+					return row.map((el, k) => {
+						if (k === j) {
+							return tool.type === 'eraser' ? null : tool.tile;
+						}
+						return el;
+					});
+				})
+			);
+		}
 	};
 	const clearLayer = (layer: LayerName) => {
 		if (layer === 'Encounter') {
@@ -308,6 +353,15 @@ export const useMapEditor = ({
 		if (layer === 'Foreground') {
 			setforegroundLayer(
 				foregroundLayer.map((row) => {
+					return row.map(() => {
+						return null;
+					});
+				})
+			);
+		}
+		if (layer === 'Water') {
+			setwaterLayer(
+				waterLayer.map((row) => {
 					return row.map(() => {
 						return null;
 					});
@@ -355,6 +409,13 @@ export const useMapEditor = ({
 				)
 			);
 		}
+		if (layer === 'Water') {
+			setwaterLayer(
+				waterLayer.map((row) =>
+					row.map((c) => (Math.random() < percentage ? tool.tile : c))
+				)
+			);
+		}
 	};
 
 	const b = useDeferredValue(baseLayer);
@@ -362,6 +423,7 @@ export const useMapEditor = ({
 	const o = useDeferredValue(obstacleLayer);
 	const d = useDeferredValue(decorationLayer);
 	const f = useDeferredValue(foregroundLayer);
+	const w = useDeferredValue(waterLayer);
 
 	return {
 		addColumn,
@@ -377,5 +439,6 @@ export const useMapEditor = ({
 		decorationLayer: d,
 		foregroundLayer: f,
 		obstacleLayer: o,
+		waterLayer: w,
 	};
 };

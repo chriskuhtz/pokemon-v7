@@ -31,6 +31,7 @@ export const MapEditor = ({
 		decorationLayer,
 		foregroundLayer,
 		obstacleLayer,
+		waterLayer,
 		usedTiles,
 		randomFill,
 	} = useMapEditor({
@@ -67,6 +68,7 @@ export const MapEditor = ({
 						obstacleLayer={obstacleLayer}
 						decorationLayer={decorationLayer}
 						foregroundLayer={foregroundLayer}
+						waterLayer={waterLayer}
 						changeColumn={changeColumn}
 						changeRow={changeRow}
 						addColumn={addColumn}

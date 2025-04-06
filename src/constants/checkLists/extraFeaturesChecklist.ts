@@ -241,9 +241,11 @@ export const extraFeatureCheckList: {
 	{ name: 'move routeN1 to custom sheet', handled: true },
 	{ name: 'cant throw away key items like exp share', handled: true },
 	{ name: 'improve performance of mapmaker', handled: true },
-
-	{ name: 'water as distinct from obstacles' },
+	{ name: 'water as distinct from obstacles', handled: true },
 	{ name: 'extract category:unique moves' },
+	{
+		name: '3 column layout for map editor (Tool Selection, current Layer, CombinedCanvas)',
+	},
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'improve held-item+trade evo condition' },
 	{ name: 'refine battle end' },

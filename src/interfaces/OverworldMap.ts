@@ -235,6 +235,7 @@ export interface GameMap {
 	decorationLayer: (TileIdentifier | null)[][];
 	obstacleLayer: (TileIdentifier | null)[][];
 	foregroundLayer: (TileIdentifier | null)[][];
+	waterLayer: (TileIdentifier | null)[][];
 }
 export interface TileIdentifier {
 	yOffset: number;
