@@ -10,6 +10,7 @@ export const determineWildPokemon = (
 	team: OwnedPokemon[],
 	map: OverworldMap,
 	quests: SaveFile['quests'],
+	waterEncounter: boolean,
 	swarm?: PokemonSwarm
 ): OwnedPokemon[] => {
 	if (
@@ -23,7 +24,12 @@ export const determineWildPokemon = (
 			),
 		];
 	}
-	if (swarm && swarm.route === map.id && Math.random() > 0.5) {
+	if (
+		!waterEncounter &&
+		swarm &&
+		swarm.route === map.id &&
+		Math.random() > 0.5
+	) {
 		return [
 			makeChallengerPokemon(
 				{
@@ -43,17 +49,17 @@ export const determineWildPokemon = (
 		? [
 				makeChallengerPokemon({
 					nature: getRandomNature(),
-					...getRandomEncounter(map),
+					...getRandomEncounter(map, waterEncounter),
 				}),
 				makeChallengerPokemon({
 					nature: getRandomNature(),
-					...getRandomEncounter(map),
+					...getRandomEncounter(map, waterEncounter),
 				}),
 		  ]
 		: [
 				makeChallengerPokemon({
 					nature: getRandomNature(),
-					...getRandomEncounter(map),
+					...getRandomEncounter(map, waterEncounter),
 				}),
 		  ];
 };

@@ -1,6 +1,7 @@
 import { EncounterMap } from '../encounters';
 
 export const routeN1E1Encounters: EncounterMap = {
+	WATER: [],
 	BASE: [
 		{ name: 'scyther', xp: 1500, rarity: 'rare' },
 		{ name: 'meowth', xp: 1000, rarity: 'common' },

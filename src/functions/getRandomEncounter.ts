@@ -2,11 +2,17 @@ import { OverworldEncounter, OverworldMap } from '../interfaces/OverworldMap';
 import { getRandomIndex } from './filterTargets';
 import { getTimeOfDay } from './getTimeOfDay';
 
-export const getRandomEncounter = (map: OverworldMap): OverworldEncounter => {
-	const flatMapped = [
-		...map.possibleEncounters[getTimeOfDay()],
-		...map.possibleEncounters.BASE,
-	].flatMap((p) => {
+export const getRandomEncounter = (
+	map: OverworldMap,
+	water?: boolean
+): OverworldEncounter => {
+	const options = water
+		? [...map.possibleEncounters.WATER]
+		: [
+				...map.possibleEncounters[getTimeOfDay()],
+				...map.possibleEncounters.BASE,
+		  ];
+	const flatMapped = options.flatMap((p) => {
 		if (p.rarity === 'common') {
 			return [p, p, p, p];
 		}

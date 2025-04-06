@@ -1,6 +1,7 @@
 import { EncounterMap } from '../encounters';
 
 export const onixCaveEncounters: EncounterMap = {
+	WATER: [],
 	BASE: [
 		{ name: 'zubat', xp: 5000, rarity: 'common' },
 		{ name: 'zubat', xp: 4000, rarity: 'common' },

@@ -67,8 +67,13 @@ export const useOverworldMovement = (
 			}
 
 			if (nextInput) {
-				if (map.tileMap.encounterLayer[playerLocation.y][playerLocation.x]) {
+				if (
+					map.tileMap.encounterLayer[playerLocation.y][playerLocation.x] ||
+					map.tileMap.waterLayer[playerLocation.y][playerLocation.x]
+				) {
 					if (Math.random() < encounterChance * encounterRateModifier.factor) {
+						const waterEncounter =
+							!!map.tileMap.waterLayer[playerLocation.y][playerLocation.x];
 						const challenger: Challenger = {
 							type: 'WILD',
 							id: OPPO_ID,
@@ -77,6 +82,7 @@ export const useOverworldMovement = (
 								pokemon.filter((p) => p.onTeam),
 								mapsRecord[playerLocation.mapId],
 								quests,
+								waterEncounter,
 								currentSwarm
 							),
 						};

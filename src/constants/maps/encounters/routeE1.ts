@@ -1,6 +1,7 @@
 import { EncounterMap } from '../encounters';
 
 export const routeE1Encounters: EncounterMap = {
+	WATER: [],
 	BASE: [
 		{ name: 'growlithe', xp: 3000, rarity: 'medium' },
 		{ name: 'growlithe-hisui', xp: 3000, rarity: 'medium' },
@@ -22,9 +23,9 @@ export const routeE1Encounters: EncounterMap = {
 		{ name: 'bidoof', xp: 1500, rarity: 'common' },
 		{ name: 'bidoof', xp: 2000, rarity: 'common' },
 		{ name: 'bidoof', xp: 3000, rarity: 'medium' },
-		{ name: 'tauros', xp: 1500, rarity: 'common' },
-		{ name: 'tauros', xp: 2000, rarity: 'common' },
-		{ name: 'tauros', xp: 3000, rarity: 'medium' },
+		{ name: 'bunnelby', xp: 1500, rarity: 'common' },
+		{ name: 'bunnelby', xp: 2000, rarity: 'common' },
+		{ name: 'bunnelby', xp: 3000, rarity: 'medium' },
 		{ name: 'toedscool', xp: 1500, rarity: 'common' },
 		{ name: 'toedscool', xp: 2000, rarity: 'common' },
 		{ name: 'toedscool', xp: 3000, rarity: 'medium' },
