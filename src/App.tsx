@@ -35,6 +35,7 @@ import { StorageChest } from './modules/StorageChest/StorageChest';
 import { Team } from './modules/Team/Team';
 import { TrainingField } from './modules/TrainingField/TrainingField';
 import { VilePlumeScentResearcher } from './modules/VilePlumeScentResearcher/VilePlumeScentResearcher';
+import { Wiki } from './modules/Wiki/Wiki';
 
 export const FullScreenToggle = () => {
 	const [f, setF] = useState<boolean>(!!document.fullscreenElement);
@@ -214,6 +215,9 @@ export const App = (): JSX.Element => {
 	}
 	if (activeTab === 'SEED_VAULT') {
 		return <SeedVault />;
+	}
+	if (activeTab === 'WIKI') {
+		return <Wiki />;
 	}
 	if (activeTab === 'POKEDEX') {
 		return <Pokedex />;

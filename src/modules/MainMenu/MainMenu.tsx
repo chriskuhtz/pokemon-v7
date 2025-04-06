@@ -6,7 +6,7 @@ import { Stack } from '../../uiComponents/Stack/Stack';
 
 import { Octokit } from 'octokit';
 import { useContext, useState } from 'react';
-import { FaBug } from 'react-icons/fa';
+import { FaBug, FaSearch } from 'react-icons/fa';
 import { GoTasklist } from 'react-icons/go';
 import { RiBookShelfLine } from 'react-icons/ri';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
@@ -77,6 +77,12 @@ export const MainMenu = ({
 					onClick={() => navigate('MAIN', 'POKEDEX')}
 					content={<h4>Pokedex</h4>}
 					icon={<RiBookShelfLine size={battleSpriteSize} />}
+					actionElements={[]}
+				/>
+				<Card
+					onClick={() => navigate('MAIN', 'WIKI')}
+					content={<h4>Wiki</h4>}
+					icon={<FaSearch size={battleSpriteSize} />}
 					actionElements={[]}
 				/>
 				{resetConfirmationInProgress ? (

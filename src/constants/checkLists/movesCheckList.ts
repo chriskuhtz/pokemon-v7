@@ -2230,7 +2230,7 @@ export const handledMoves = [
 	'perish-song',
 	'detect',
 	'lock-on',
-	'sand-storm',
+	'sandstorm',
 	'sunny-day',
 	'rain-dance',
 	'hail',
