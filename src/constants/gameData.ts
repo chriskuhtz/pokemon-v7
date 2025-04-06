@@ -29,7 +29,7 @@ export const testPokemon: OwnedPokemon = {
 	firstMove: { name: 'tackle', usedPP: 0 },
 	damage: 0,
 	nature: 'adamant',
-	xp: 1250000,
+	xp: 125,
 	ability: 'air-lock',
 	happiness: 70,
 	stepsWalked: 0,
@@ -57,8 +57,8 @@ const baseQuestState: Record<QuestName, QuestStatus> = Object.fromEntries(
 ) as Record<QuestName, QuestStatus>;
 
 const baseCampUpgrades: Record<CampUpgrade, boolean> = Object.fromEntries(
-	//campUpgradeNames.map((key) => [key, false])
-	campUpgradeNames.map((key) => [key, true])
+	campUpgradeNames.map((key) => [key, false])
+	//campUpgradeNames.map((key) => [key, true])
 ) as Record<CampUpgrade, boolean>;
 
 export const emptyPokedex: Pokedex = Object.fromEntries(
