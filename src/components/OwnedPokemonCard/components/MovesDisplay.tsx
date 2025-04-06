@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
 import {
 	MdOutlineRadioButtonChecked,
 	MdRadioButtonUnchecked,
@@ -21,28 +22,45 @@ export const MovesDisplay = ({
 		[ownedPokemon]
 	);
 
-	const options = useMemo(
-		() => [
-			...currentMoves,
-			...ownedPokemon.unlockedMoves.filter((u) => !currentMoves.includes(u)),
-		],
-		[currentMoves, ownedPokemon.unlockedMoves]
-	);
+	const reorder = (dir: 'UP' | 'DOWN', name: MoveName) => {
+		const focused = currentMoves.find((m) => m === name);
+		const index = currentMoves.findIndex((m) => m === name);
+		if (!focused) {
+			return;
+		}
 
+		if (index === 0 && dir == 'UP') {
+			return;
+		}
+		if (index === currentMoves.length - 1 && dir == 'DOWN') {
+			return;
+		}
+		const displaced =
+			dir === 'UP' ? currentMoves[index - 1] : currentMoves[index + 1];
+
+		const newMoves = currentMoves.map((p) => {
+			if (p === displaced) {
+				return focused;
+			}
+			if (p === focused) {
+				return displaced;
+			}
+			return p;
+		});
+
+		setMoves(ownedPokemon.id, newMoves);
+	};
 	return (
 		<Stack mode="column">
-			{options.map((o) => (
+			{currentMoves.map((o) => (
 				<Card
 					key={o}
-					actionElements={[]}
+					actionElements={[
+						<FaArrowUp onClick={() => reorder('UP', o)} />,
+						<FaArrowDown onClick={() => reorder('DOWN', o)} />,
+					]}
 					disabled={!currentMoves.includes(o) && currentMoves.length === 4}
-					icon={
-						currentMoves.includes(o) ? (
-							<MdOutlineRadioButtonChecked />
-						) : (
-							<MdRadioButtonUnchecked />
-						)
-					}
+					icon={<MdOutlineRadioButtonChecked />}
 					onClick={() => {
 						if (currentMoves.includes(o)) {
 							if (currentMoves.length === 1) {
@@ -62,6 +80,33 @@ export const MovesDisplay = ({
 					content={<strong>{o}</strong>}
 				/>
 			))}
+			{ownedPokemon.unlockedMoves
+				.filter((u) => !currentMoves.includes(u))
+				.map((o) => (
+					<Card
+						key={o}
+						actionElements={[]}
+						disabled={!currentMoves.includes(o) && currentMoves.length === 4}
+						icon={<MdRadioButtonUnchecked />}
+						onClick={() => {
+							if (currentMoves.includes(o)) {
+								if (currentMoves.length === 1) {
+									return;
+								} else
+									setMoves(
+										ownedPokemon.id,
+										currentMoves.filter((c) => c !== o)
+									);
+							}
+							if (!currentMoves.includes(o)) {
+								if (currentMoves.length === 4) {
+									return;
+								} else setMoves(ownedPokemon.id, [...currentMoves, o]);
+							}
+						}}
+						content={<strong>{o}</strong>}
+					/>
+				))}
 		</Stack>
 	);
 };
