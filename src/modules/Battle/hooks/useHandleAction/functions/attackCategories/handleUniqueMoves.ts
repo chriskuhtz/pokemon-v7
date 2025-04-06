@@ -358,6 +358,7 @@ export const handleUniqueMoves = ({
 					...checkAndHandleFainting(updatedAttacker, pokemon, addMessage),
 					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
 					biding: updatedAttacker.moveQueue.length > 0 ? p.biding : undefined,
+					moveQueue: [],
 				};
 			}
 			if (p.id === updatedAttacker.id) {
@@ -365,6 +366,7 @@ export const handleUniqueMoves = ({
 					...checkAndHandleFainting(updatedAttacker, pokemon, addMessage),
 					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
 					biding: updatedAttacker.moveQueue.length > 0 ? p.biding : undefined,
+					moveQueue: [],
 				};
 			}
 			if (p.id === updatedTarget.id) {
