@@ -267,7 +267,7 @@ const catchQuestsForRoute = (
 				].some(
 					(e) =>
 						e.rarity === 'ultra-rare' &&
-						s.pokedex[e.name].caughtOnRoutes.includes('routeN1')
+						s.pokedex[e.name].caughtOnRoutes.includes(route.id)
 				);
 			},
 			targetPokemon: [
