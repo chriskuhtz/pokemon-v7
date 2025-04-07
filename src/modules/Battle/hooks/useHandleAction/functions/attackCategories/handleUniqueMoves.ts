@@ -24,6 +24,7 @@ export const handleUniqueMoves = ({
 	move,
 	battleFieldEffects,
 	leave,
+	addBattleFieldEffect,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
@@ -377,6 +378,26 @@ export const handleUniqueMoves = ({
 			updatedAttacker.stats.hp - (updatedAttacker.stats.hp - remainingForEach);
 		updatedTarget.damage =
 			updatedTarget.stats.hp - (updatedTarget.stats.hp - remainingForEach);
+	}
+	if (move.name === 'spider-web') {
+		addBattleFieldEffect({
+			type: move.name as BattleFieldEffect['type'],
+			ownerId: target.ownerId,
+			duration: 9000,
+		});
+		setPokemon(
+			updatedPokemon.map((p) => {
+				if (p.id === updatedAttacker.id) {
+					return {
+						...changeMovePP(updatedAttacker, move.name, -1),
+						moveQueue: [],
+					};
+				}
+
+				return p;
+			})
+		);
+		return updatedPokemon;
 	}
 
 	return updatedPokemon.map((p) => {

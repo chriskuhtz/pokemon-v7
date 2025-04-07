@@ -12,6 +12,7 @@ import { handleFieldEffectMoves } from './attackCategories/handleFieldEffectMove
 import { handleHealAttack } from './attackCategories/handleHealAttack';
 import { handleNetGoodStatsAttack } from './attackCategories/handleNetGoodStatsAttack';
 import { handleUniqueMoves } from './attackCategories/handleUniqueMoves';
+import { handleWholeFieldEffectAttack } from './attackCategories/handleWholeFieldEffectAttack';
 
 export const handleAllAttackCategories = ({
 	attacker,
@@ -50,6 +51,7 @@ export const handleAllAttackCategories = ({
 			case 'damage+heal':
 			case 'damage+lower':
 			case 'damage+raise':
+			case 'ohko':
 				return handleDamageAttack({
 					attacker,
 					pokemon,
@@ -119,9 +121,16 @@ export const handleAllAttackCategories = ({
 					battleWeather,
 					battleFieldEffects,
 				});
-			case 'ohko':
-			case 'swagger':
 			case 'whole-field-effect':
+				return handleWholeFieldEffectAttack({
+					attacker,
+					pokemon,
+					addMessage,
+					move,
+					setBattleWeather,
+					battleFieldEffects,
+				});
+			case 'swagger':
 				return handleAttack({
 					attacker,
 					pokemon,
