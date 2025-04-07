@@ -284,7 +284,7 @@ const catchQuestsForRoute = (
 						.map((p) => p.name)
 				),
 			],
-			targetRoute: 'routeN1',
+			targetRoute: route.id,
 			kind: 'BULLETIN',
 			requiredUpgrade: requiredUpgrade,
 		},
