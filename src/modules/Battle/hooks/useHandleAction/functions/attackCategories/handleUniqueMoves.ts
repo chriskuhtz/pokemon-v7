@@ -14,14 +14,12 @@ import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import { typeEffectivenessChart } from '../../../../../../interfaces/PokemonType';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
-import { checkAndHandleFainting } from '../../../../functions/handleFainting';
 import { handleMoveBlockAilments } from '../../../../functions/handleMoveBlockAilments';
 import { handleNoTarget } from '../../../../functions/handleNoTarget';
 
 export const handleUniqueMoves = ({
 	attacker,
 	pokemon,
-	setPokemon,
 	addMessage,
 	move,
 	battleFieldEffects,
@@ -29,7 +27,6 @@ export const handleUniqueMoves = ({
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
-	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>;
 	addMessage: (x: Message) => void;
 	move: BattleAttack;
 	battleWeather: WeatherType | undefined;
@@ -39,7 +36,10 @@ export const handleUniqueMoves = ({
 	addBattleFieldEffect: (x: BattleFieldEffect) => void;
 	battleFieldEffects: BattleFieldEffect[];
 	leave: (outcome: 'WIN' | 'LOSS' | 'DRAW') => void;
-}) => {
+}): BattlePokemon[] => {
+	let updatedPokemon: BattlePokemon[] = [...pokemon];
+	const setPokemon = (input: BattlePokemon[]) => (updatedPokemon = input);
+
 	const underPressure = battleFieldEffects.some(
 		(b) => b.type === 'pressure' && b.ownerId !== attacker.ownerId
 	);
@@ -68,19 +68,26 @@ export const handleUniqueMoves = ({
 	updatedAttacker = afterBlockers;
 
 	if (!canAttack) {
-		setPokemon((pokemon) =>
-			pokemon.map((p) => {
+		setPokemon(
+			updatedPokemon.map((p) => {
 				if (p.id === updatedAttacker.id) {
 					return updatedAttacker;
 				}
 				return p;
 			})
 		);
-		return;
+		return updatedPokemon;
 	}
 	if (!target) {
-		handleNoTarget(attacker, move, setPokemon, addMessage, underPressure);
-		return;
+		handleNoTarget(
+			attacker,
+			move,
+			updatedPokemon,
+			setPokemon,
+			addMessage,
+			underPressure
+		);
+		return updatedPokemon;
 	}
 	let updatedTarget = { ...target };
 	const selfTargeting = move.data.target.name === 'user';
@@ -114,8 +121,8 @@ export const handleUniqueMoves = ({
 			message: `${attacker.name} escaped the battle with teleport`,
 			onRemoval: () => leave('DRAW'),
 		});
-		setPokemon((pokemon) =>
-			pokemon.map((p) => {
+		setPokemon(
+			updatedPokemon.map((p) => {
 				if (p.id === attacker.id) {
 					return { ...p, moveQueue: [] };
 				}
@@ -123,7 +130,7 @@ export const handleUniqueMoves = ({
 				return p;
 			})
 		);
-		return;
+		return updatedPokemon;
 	}
 	if (move.name === 'mimic') {
 		if (target.lastUsedMove) {
@@ -337,8 +344,8 @@ export const handleUniqueMoves = ({
 	}
 	if (move.name === 'heal-bell') {
 		addMessage({ message: 'All major Status Problems are healed' });
-		setPokemon((pokemon) =>
-			pokemon.map((p) => {
+		setPokemon(
+			updatedPokemon.map((p) => {
 				if (p.id === updatedAttacker.id) {
 					return {
 						...changeMovePP(
@@ -372,31 +379,13 @@ export const handleUniqueMoves = ({
 			updatedTarget.stats.hp - (updatedTarget.stats.hp - remainingForEach);
 	}
 
-	setPokemon((pokemon) =>
-		pokemon.map((p) => {
-			if (
-				updatedAttacker.id === updatedTarget.id &&
-				p.id === updatedAttacker.id
-			) {
-				return {
-					...checkAndHandleFainting(updatedAttacker, pokemon, addMessage),
-					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
-					biding: updatedAttacker.moveQueue.length > 0 ? p.biding : undefined,
-					moveQueue: [],
-				};
-			}
-			if (p.id === updatedAttacker.id) {
-				return {
-					...checkAndHandleFainting(updatedAttacker, pokemon, addMessage),
-					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
-					biding: updatedAttacker.moveQueue.length > 0 ? p.biding : undefined,
-					moveQueue: [],
-				};
-			}
-			if (p.id === updatedTarget.id) {
-				return checkAndHandleFainting(updatedTarget, pokemon, addMessage);
-			}
-			return p;
-		})
-	);
+	return updatedPokemon.map((p) => {
+		if (p.id === updatedAttacker.id) {
+			return updatedAttacker;
+		}
+		if (p.id === updatedTarget.id) {
+			return updatedTarget;
+		}
+		return p;
+	});
 };

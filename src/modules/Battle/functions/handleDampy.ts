@@ -6,7 +6,8 @@ import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 export const handleDampy = (
 	attacker: BattlePokemon,
 	attack: BattleAttack,
-	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
+	pokemon: BattlePokemon[],
+	setPokemon: (x: BattlePokemon[]) => void,
 	addMessage: (x: Message) => void,
 	dampy: { name: string },
 	underPressure: boolean
@@ -28,7 +29,7 @@ export const handleDampy = (
 		underPressure ? -2 : -1
 	);
 
-	setPokemon((pokemon) =>
+	setPokemon(
 		pokemon.map((p) => {
 			if (p.id === updatedAttacker.id) {
 				return updatedAttacker;

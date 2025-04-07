@@ -28,7 +28,7 @@ export const useHandleAction = (
 	addUsedItem: (x: ItemType) => void,
 	scatterCoins: () => void,
 	dampy: { name: string } | undefined,
-	handleForceSwitch: (x: BattlePokemon, moveName: MoveName) => void,
+	handleForceSwitch: (x: BattlePokemon, moveName: MoveName) => BattlePokemon[],
 	addBattleFieldEffect: (x: BattleFieldEffect) => void,
 	battleFieldEffects: BattleFieldEffect[],
 	setBattleWeather: (w: WeatherType | undefined) => void

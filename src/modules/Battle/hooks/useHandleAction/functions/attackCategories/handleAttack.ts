@@ -18,7 +18,6 @@ import { EmptyStatObject } from '../../../../../../interfaces/StatObject';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
 import { handleDampy } from '../../../../functions/handleDampy';
-import { checkAndHandleFainting } from '../../../../functions/handleFainting';
 import { handleMiss } from '../../../../functions/handleMiss';
 import { handleMoveBlockAilments } from '../../../../functions/handleMoveBlockAilments';
 import { handleNoTarget } from '../../../../functions/handleNoTarget';
@@ -27,7 +26,6 @@ import { handleAbilitiesAfterAttack } from '../handleAbilitiesAfterAttack';
 export const handleAttack = ({
 	attacker,
 	pokemon,
-	setPokemon,
 	addMessage,
 	move: m,
 	battleWeather,
@@ -39,7 +37,6 @@ export const handleAttack = ({
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
-	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>;
 	addMessage: (x: Message) => void;
 	move: BattleAttack;
 	battleWeather: WeatherType | undefined;
@@ -48,7 +45,10 @@ export const handleAttack = ({
 	dampy?: { name: string };
 	addBattleFieldEffect: (x: BattleFieldEffect) => void;
 	battleFieldEffects: BattleFieldEffect[];
-}): void => {
+}): BattlePokemon[] => {
+	let updatedPokemon: BattlePokemon[] = [...pokemon];
+	const setPokemon = (input: BattlePokemon[]) => (updatedPokemon = input);
+
 	const move = m;
 	const underPressure = battleFieldEffects.some(
 		(b) => b.type === 'pressure' && b.ownerId !== attacker.ownerId
@@ -78,25 +78,40 @@ export const handleAttack = ({
 	updatedAttacker = afterBlockers;
 
 	if (!canAttack) {
-		setPokemon((pokemon) =>
-			pokemon.map((p) => {
+		setPokemon(
+			updatedPokemon.map((p) => {
 				if (p.id === updatedAttacker.id) {
 					return updatedAttacker;
 				}
 				return p;
 			})
 		);
-		return;
+		return updatedPokemon;
 	}
 	if (!target) {
-		handleNoTarget(attacker, move, setPokemon, addMessage, underPressure);
-		return;
+		handleNoTarget(
+			attacker,
+			move,
+			updatedPokemon,
+			setPokemon,
+			addMessage,
+			underPressure
+		);
+		return updatedPokemon;
 	}
 	const selfTargeting = move.data.target.name === 'user';
 
 	if (dampy && SELF_DESTRUCTING_MOVES.includes(move.name)) {
-		handleDampy(attacker, move, setPokemon, addMessage, dampy, underPressure);
-		return;
+		handleDampy(
+			attacker,
+			move,
+			pokemon,
+			setPokemon,
+			addMessage,
+			dampy,
+			underPressure
+		);
+		return updatedPokemon;
 	}
 
 	//MESSAGES
@@ -130,8 +145,8 @@ export const handleAttack = ({
 			ownerId: target.ownerId,
 			duration: 9000,
 		});
-		setPokemon((pokemon) =>
-			pokemon.map((p) => {
+		setPokemon(
+			updatedPokemon.map((p) => {
 				if (p.id === updatedAttacker.id) {
 					return {
 						...changeMovePP(updatedAttacker, move.name, -1),
@@ -142,14 +157,14 @@ export const handleAttack = ({
 				return p;
 			})
 		);
-		return;
+		return updatedPokemon;
 	}
 	if (move.name === 'haze') {
 		addMessage({
 			message: `${attacker.name} removed all stat changes with haze`,
 		});
-		setPokemon((pokemon) =>
-			pokemon.map((p) => {
+		setPokemon(
+			updatedPokemon.map((p) => {
 				if (p.id === updatedAttacker.id) {
 					return {
 						...changeMovePP(updatedAttacker, move.name, -1),
@@ -161,7 +176,7 @@ export const handleAttack = ({
 				return { ...p, statBoosts: EmptyStatObject };
 			})
 		);
-		return;
+		return updatedPokemon;
 	}
 
 	if (move.name === 'bide') {
@@ -227,8 +242,16 @@ export const handleAttack = ({
 	);
 
 	if (miss) {
-		handleMiss(attacker, move, setPokemon, addMessage, underPressure, reason);
-		return;
+		handleMiss(
+			attacker,
+			move,
+			updatedPokemon,
+			setPokemon,
+			addMessage,
+			underPressure,
+			reason
+		);
+		return updatedPokemon;
 	}
 	if (move.name === 'nightmare') {
 		updatedTarget = applySecondaryAilmentToPokemon({
@@ -563,29 +586,13 @@ export const handleAttack = ({
 		updatedTarget = { ...t };
 	}
 
-	setPokemon((pokemon) =>
-		pokemon.map((p) => {
-			if (
-				updatedAttacker.id === updatedTarget.id &&
-				p.id === updatedAttacker.id
-			) {
-				return {
-					...checkAndHandleFainting(updatedAttacker, pokemon, addMessage),
-					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
-					biding: updatedAttacker.moveQueue.length > 0 ? p.biding : undefined,
-				};
-			}
-			if (p.id === updatedAttacker.id) {
-				return {
-					...checkAndHandleFainting(updatedAttacker, pokemon, addMessage),
-					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
-					biding: updatedAttacker.moveQueue.length > 0 ? p.biding : undefined,
-				};
-			}
-			if (p.id === updatedTarget.id) {
-				return checkAndHandleFainting(updatedTarget, pokemon, addMessage);
-			}
-			return p;
-		})
-	);
+	return updatedPokemon.map((p) => {
+		if (p.id === updatedAttacker.id) {
+			return updatedAttacker;
+		}
+		if (p.id === updatedTarget.id) {
+			return updatedTarget;
+		}
+		return p;
+	});
 };

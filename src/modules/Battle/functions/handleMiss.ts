@@ -8,7 +8,8 @@ import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 export const handleMiss = (
 	attacker: BattlePokemon,
 	attack: BattleAttack,
-	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
+	pokemon: BattlePokemon[],
+	setPokemon: (x: BattlePokemon[]) => void,
 	addMessage: (x: Message) => void,
 	underPressure: boolean,
 	reason?: MissReason
@@ -39,7 +40,7 @@ export const handleMiss = (
 		underPressure ? -2 : -1
 	);
 
-	setPokemon((pokemon) =>
+	setPokemon(
 		pokemon.map((p) => {
 			if (p.id === updatedAttacker.id) {
 				return applyCrashDamage(updatedAttacker, attack.name, addMessage);

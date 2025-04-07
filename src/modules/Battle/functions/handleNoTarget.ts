@@ -6,7 +6,8 @@ import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 export const handleNoTarget = (
 	attacker: BattlePokemon,
 	attack: BattleAttack,
-	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>,
+	pokemon: BattlePokemon[],
+	setPokemon: (x: BattlePokemon[]) => void,
 	addMessage: (x: Message) => void,
 	underPressure: boolean
 ) => {
@@ -25,7 +26,7 @@ export const handleNoTarget = (
 		underPressure ? -2 : -1
 	);
 
-	setPokemon((pokemon) =>
+	setPokemon(
 		pokemon.map((p) => {
 			if (p.id === updatedAttacker.id) {
 				return updatedAttacker;

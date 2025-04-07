@@ -5,14 +5,12 @@ import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
-import { checkAndHandleFainting } from '../../../../functions/handleFainting';
 import { handleMoveBlockAilments } from '../../../../functions/handleMoveBlockAilments';
 import { handleNoTarget } from '../../../../functions/handleNoTarget';
 
 export const handleFieldEffectMoves = ({
 	attacker,
 	pokemon,
-	setPokemon,
 	addMessage,
 	move,
 	battleFieldEffects,
@@ -20,7 +18,6 @@ export const handleFieldEffectMoves = ({
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
-	setPokemon: React.Dispatch<React.SetStateAction<BattlePokemon[]>>;
 	addMessage: (x: Message) => void;
 	move: BattleAttack;
 	battleWeather: WeatherType | undefined;
@@ -30,7 +27,10 @@ export const handleFieldEffectMoves = ({
 	addBattleFieldEffect: (x: BattleFieldEffect) => void;
 	battleFieldEffects: BattleFieldEffect[];
 	leave: (outcome: 'WIN' | 'LOSS' | 'DRAW') => void;
-}) => {
+}): BattlePokemon[] => {
+	let updatedPokemon: BattlePokemon[] = [...pokemon];
+	const setPokemon = (input: BattlePokemon[]) => (updatedPokemon = input);
+
 	const underPressure = battleFieldEffects.some(
 		(b) => b.type === 'pressure' && b.ownerId !== attacker.ownerId
 	);
@@ -59,19 +59,26 @@ export const handleFieldEffectMoves = ({
 	updatedAttacker = afterBlockers;
 
 	if (!canAttack) {
-		setPokemon((pokemon) =>
-			pokemon.map((p) => {
+		setPokemon(
+			updatedPokemon.map((p) => {
 				if (p.id === updatedAttacker.id) {
 					return updatedAttacker;
 				}
 				return p;
 			})
 		);
-		return;
+		return updatedPokemon;
 	}
 	if (!target) {
-		handleNoTarget(attacker, move, setPokemon, addMessage, underPressure);
-		return;
+		handleNoTarget(
+			attacker,
+			move,
+			updatedPokemon,
+			setPokemon,
+			addMessage,
+			underPressure
+		);
+		return updatedPokemon;
 	}
 	const updatedTarget = { ...target };
 	const selfTargeting = move.data.target.name === 'user';
@@ -93,8 +100,8 @@ export const handleFieldEffectMoves = ({
 			ownerId: updatedAttacker.ownerId,
 			duration: 5,
 		});
-		setPokemon((pokemon) =>
-			pokemon.map((p) => {
+		setPokemon(
+			updatedPokemon.map((p) => {
 				if (p.id === updatedAttacker.id) {
 					return {
 						...changeMovePP(updatedAttacker, move.name, -1),
@@ -105,7 +112,7 @@ export const handleFieldEffectMoves = ({
 				return p;
 			})
 		);
-		return;
+		return updatedPokemon;
 	}
 	if (move.name === 'spikes') {
 		addBattleFieldEffect({
@@ -113,8 +120,8 @@ export const handleFieldEffectMoves = ({
 			ownerId: target.ownerId,
 			duration: 9000,
 		});
-		setPokemon((pokemon) =>
-			pokemon.map((p) => {
+		setPokemon(
+			updatedPokemon.map((p) => {
 				if (p.id === updatedAttacker.id) {
 					return {
 						...changeMovePP(updatedAttacker, move.name, -1),
@@ -125,7 +132,7 @@ export const handleFieldEffectMoves = ({
 				return p;
 			})
 		);
-		return;
+		return updatedPokemon;
 	}
 	if (move.name === 'safeguard') {
 		addBattleFieldEffect({
@@ -133,7 +140,7 @@ export const handleFieldEffectMoves = ({
 			ownerId: target.ownerId,
 			duration: 5,
 		});
-		setPokemon((pokemon) =>
+		setPokemon(
 			pokemon.map((p) => {
 				if (p.id === updatedAttacker.id) {
 					return {
@@ -145,33 +152,14 @@ export const handleFieldEffectMoves = ({
 				return p;
 			})
 		);
-		return;
 	}
-	setPokemon((pokemon) =>
-		pokemon.map((p) => {
-			if (
-				updatedAttacker.id === updatedTarget.id &&
-				p.id === updatedAttacker.id
-			) {
-				return {
-					...checkAndHandleFainting(updatedAttacker, pokemon, addMessage),
-					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
-					biding: updatedAttacker.moveQueue.length > 0 ? p.biding : undefined,
-					moveQueue: [],
-				};
-			}
-			if (p.id === updatedAttacker.id) {
-				return {
-					...checkAndHandleFainting(updatedAttacker, pokemon, addMessage),
-					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
-					biding: updatedAttacker.moveQueue.length > 0 ? p.biding : undefined,
-					moveQueue: [],
-				};
-			}
-			if (p.id === updatedTarget.id) {
-				return checkAndHandleFainting(updatedTarget, pokemon, addMessage);
-			}
-			return p;
-		})
-	);
+	return updatedPokemon.map((p) => {
+		if (p.id === updatedAttacker.id) {
+			return updatedAttacker;
+		}
+		if (p.id === updatedTarget.id) {
+			return updatedTarget;
+		}
+		return p;
+	});
 };

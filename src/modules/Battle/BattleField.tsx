@@ -357,7 +357,7 @@ export const BattleField = ({
 		[addMessage, battleFieldEffects, battleWeather, pokemon]
 	);
 	const handleForceSwitch = useCallback(
-		(user: BattlePokemon, moveName: MoveName) => {
+		(user: BattlePokemon, moveName: MoveName): BattlePokemon[] => {
 			const otherSideHasSuctionCups = pokemon.find(
 				(p) =>
 					p.ability === 'suction-cups' &&
@@ -376,7 +376,7 @@ export const BattleField = ({
 						return p;
 					})
 				);
-				return;
+				return pokemon;
 			}
 			if (otherSideHasSuctionCups) {
 				addMessage({
@@ -393,13 +393,14 @@ export const BattleField = ({
 						return p;
 					})
 				);
-				return;
+				return pokemon;
 			}
 
 			addMessage({
 				message: `${user.data.name} separated the fighters with ${moveName}`,
 				onRemoval: () => leaveWithCurrentData('DRAW'),
 			});
+			return pokemon;
 		},
 		[addMessage, isTrainerBattle, leaveWithCurrentData, pokemon]
 	);
