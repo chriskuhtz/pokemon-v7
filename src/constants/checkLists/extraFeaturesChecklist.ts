@@ -351,4 +351,9 @@ export const extraFeatureCheckList: {
 	{ name: 'battlepoint shop' },
 	{ name: 'pikachu fan questline' },
 	{ name: 'dugtrio should not deliver fossils' },
+	{ name: 'show physical special attack type somewhere' },
+	{ name: 'make game playable in portrait mode' },
+	{
+		name: 'collecting quests only at bulletin board, otherwise you can bypass the bag limit',
+	},
 ];
