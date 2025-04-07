@@ -357,4 +357,7 @@ export const extraFeatureCheckList: {
 		name: 'collecting quests only at bulletin board, otherwise you can bypass the bag limit',
 	},
 	{ name: 'sometimes target pokemon need to be revealed' },
+	{
+		name: 'quest: catch a pokemon of each type',
+	},
 ];

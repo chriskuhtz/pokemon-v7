@@ -9,9 +9,9 @@ export const routeN1E1Encounters: EncounterMap = {
 		{ name: 'nidoran-m', xp: 1000, rarity: 'medium' },
 	],
 	MORNING: [
-		{ name: 'stunky', xp: 1000, rarity: 'common' },
-		{ name: 'stunky', xp: 800, rarity: 'common' },
-		{ name: 'stunky', xp: 1500, rarity: 'medium' },
+		{ name: 'starly', xp: 1000, rarity: 'common' },
+		{ name: 'starly', xp: 800, rarity: 'common' },
+		{ name: 'starly', xp: 1500, rarity: 'medium' },
 		{ name: 'lillipup', xp: 1000, rarity: 'common' },
 		{ name: 'lillipup', xp: 800, rarity: 'common' },
 		{ name: 'lillipup', xp: 1500, rarity: 'medium' },
