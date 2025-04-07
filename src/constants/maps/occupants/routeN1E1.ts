@@ -105,5 +105,46 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'routeS1_poison-barb'),
 	},
+	{
+		type: 'LEDGE',
+		passableFrom: 'DOWN',
+		x: 1,
+		y: 28,
+		id: 'ledge_n1e1_1',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'ledge_n1e1_1'),
+		sprite: '/ledges/ledgeUp.png',
+	},
+	{
+		type: 'LEDGE',
+		passableFrom: 'DOWN',
+		x: 2,
+		y: 28,
+		id: 'ledge_n1e1_2',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'ledge_n1e1_2'),
+		sprite: '/ledges/ledgeUp.png',
+	},
+	{
+		type: 'LEDGE',
+		passableFrom: 'DOWN',
+		x: 3,
+		y: 28,
+		id: 'ledge_n1e1_3',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'ledge_n1e1_3'),
+		sprite: '/ledges/ledgeUp.png',
+	},
+	{
+		type: 'LEDGE',
+		passableFrom: 'DOWN',
+		x: 4,
+		y: 28,
+		id: 'ledge_n1e1_4',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((occ) => occ.id === 'ledge_n1e1_4'),
+		sprite: '/ledges/ledgeUp.png',
+	},
+
 	routeN1E1Lure,
 ];
