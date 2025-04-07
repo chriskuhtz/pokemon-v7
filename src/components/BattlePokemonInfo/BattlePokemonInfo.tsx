@@ -4,12 +4,12 @@ import { battleSpriteSize } from '../../constants/gameData';
 import { secondTurnMoves } from '../../constants/secondTurnMoves';
 import { typeColors } from '../../constants/typeColors';
 import { calculateLevelData } from '../../functions/calculateLevelData';
-import { getItemUrl } from '../../functions/getItemUrl';
 import { getPlayerId } from '../../functions/getPlayerId';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Chip } from '../../uiComponents/Chip/Chip';
 import { HpBar } from '../HpBar/HpBar';
+import { ItemSprite } from '../ItemSprite/ItemSprite';
 import { PrimaryAilmentIcon } from '../PrimaryAilmentIcon/PrimaryAilmentIcon';
 import { XpBar } from '../XpBar/XpBar';
 
@@ -54,11 +54,7 @@ export const BattlePokemonInfo = ({ pokemon }: { pokemon: BattlePokemon }) => {
 			<strong style={{ display: 'flex', alignItems: 'center' }}>
 				{pokedex[pokemon.name].caughtOnRoutes.length > 0 &&
 					pokemon.ownerId !== getPlayerId() && (
-						<img
-							height={battleSpriteSize / 2}
-							width={battleSpriteSize / 2}
-							src={getItemUrl('poke-ball')}
-						/>
+						<ItemSprite item={'poke-ball'} sizeFactor={0.5} />
 					)}
 				{pokemon.shiny && <RiSparkling2Line size={battleSpriteSize / 2} />}{' '}
 				<PrimaryAilmentIcon primaryAilment={pokemon.primaryAilment} />

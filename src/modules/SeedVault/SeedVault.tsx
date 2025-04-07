@@ -1,5 +1,5 @@
 import { useCallback, useContext, useMemo } from 'react';
-import { getItemUrl } from '../../functions/getItemUrl';
+import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
@@ -89,7 +89,7 @@ export const SeedVault = () => {
 					<Stack mode="column">
 						{possibleDonations.map((s) => (
 							<Card
-								icon={<img src={getItemUrl(s)} />}
+								icon={<ItemSprite item={s} />}
 								content={
 									<strong>{`donate ${s} and receive 1 research point`}</strong>
 								}
@@ -106,7 +106,7 @@ export const SeedVault = () => {
 					<Stack mode="column">
 						{collectibles.map((s) => (
 							<Card
-								icon={<img src={getItemUrl(s)} />}
+								icon={<ItemSprite item={s} />}
 								content={<strong>{`collect ${s} for 1 research point`}</strong>}
 								onClick={() => collect(s)}
 								actionElements={[]}

@@ -350,4 +350,5 @@ export const extraFeatureCheckList: {
 	{ name: 'path to next route (S1W1)' },
 	{ name: 'battlepoint shop' },
 	{ name: 'pikachu fan questline' },
+	{ name: 'dugtrio should not deliver fossils' },
 ];

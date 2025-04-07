@@ -1,6 +1,5 @@
 import { useCallback, useContext, useMemo } from 'react';
 import { getRandomEntry } from '../../functions/filterTargets';
-import { getItemUrl } from '../../functions/getItemUrl';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
@@ -17,6 +16,7 @@ import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 
 export const useAmoongussResearcher = () => {
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
@@ -65,13 +65,13 @@ export const AmoongussCompostResearcher = (): JSX.Element => {
 								<Card
 									key={item}
 									onClick={() => trade(item, randomMulch)}
-									icon={<img src={getItemUrl(item)} />}
+									icon={<ItemSprite item={item} />}
 									content={
 										<h3>
 											Trade {item} for {randomMulch}
 										</h3>
 									}
-									actionElements={[<img src={getItemUrl(randomMulch)} />]}
+									actionElements={[<ItemSprite item={randomMulch} />]}
 								/>
 							);
 					  })

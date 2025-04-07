@@ -1,4 +1,4 @@
-import { getItemUrl } from '../../functions/getItemUrl';
+import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { useNavigate } from '../../hooks/useNavigate';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
@@ -15,7 +15,7 @@ export const Farm = (): JSX.Element => {
 		<Page headline="Farm" goBack={() => navigate('FARM', 'OVERWORLD')}>
 			<Stack mode="column">
 				<Card
-					icon={<img src={getItemUrl('sitrus-berry')} />}
+					icon={<ItemSprite item={'sitrus-berry'} />}
 					content={
 						<div>
 							<strong>
@@ -81,14 +81,14 @@ export const Farm = (): JSX.Element => {
 					plantables.map(([berry, amount]) => (
 						<Card
 							key={berry}
-							icon={<img src={getItemUrl(berry)} />}
+							icon={<ItemSprite item={berry} />}
 							content={<strong>{`plant a ${berry} (${amount} in bag)`}</strong>}
 							actionElements={[
 								<button onClick={() => plant(berry)}>{`plant`}</button>,
 								...mulches.map(([m]) => (
 									<button onClick={() => plant(berry, m)}>
 										{`with ${m}`}
-										<img src={getItemUrl(m)} />
+										<ItemSprite item={m} />
 									</button>
 								)),
 							]}
@@ -96,7 +96,7 @@ export const Farm = (): JSX.Element => {
 					))
 				) : (
 					<Card
-						icon={<img src={getItemUrl('sitrus-berry')} />}
+						icon={<ItemSprite item={'sitrus-berry'} />}
 						content={`No more empty slots`}
 						actionElements={[]}
 					/>

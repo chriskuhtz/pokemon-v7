@@ -13,12 +13,12 @@ import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { TrainerCard } from '../../components/TrainerCard/TrainerCard';
 import { battleSpriteSize } from '../../constants/gameData';
 import { mapsRecord } from '../../constants/maps/mapsRecord';
-import { getItemUrl } from '../../functions/getItemUrl';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { useQuests } from '../../hooks/useQuests';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { useTeleport } from '../../hooks/useTeleport';
+import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 
 export const MainMenu = ({
 	goBack,
@@ -131,7 +131,7 @@ export const ExpShareButton = () => {
 	}
 	return (
 		<Card
-			icon={<img height={battleSpriteSize} src={getItemUrl('exp-share')} />}
+			icon={<ItemSprite item={'exp-share'} />}
 			onClick={() => {
 				patchSaveFileReducer({
 					settings: {

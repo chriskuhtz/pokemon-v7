@@ -1,8 +1,7 @@
 import React, { ReactNode } from 'react';
-import { getItemUrl } from '../../functions/getItemUrl';
 import { ItemType } from '../../interfaces/Item';
 import { Card } from '../../uiComponents/Card/Card';
-import { battleSpriteSize } from '../../constants/gameData';
+import { ItemSprite } from '../ItemSprite/ItemSprite';
 
 export const ItemCard = ({
 	item,
@@ -17,7 +16,7 @@ export const ItemCard = ({
 }): JSX.Element => {
 	return (
 		<Card
-			icon={<img height={battleSpriteSize} src={getItemUrl(item)} />}
+			icon={<ItemSprite item={item} />}
 			content={
 				<h4>
 					{item} : {amount}

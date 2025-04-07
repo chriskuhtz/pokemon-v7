@@ -1,6 +1,6 @@
 import { useCallback, useContext, useMemo } from 'react';
+import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonName } from '../../constants/pokemonNames';
-import { getItemUrl } from '../../functions/getItemUrl';
 import { getMiddleOfThree } from '../../functions/getMiddleOfThree';
 import {
 	makeChallengerPokemon,
@@ -214,7 +214,7 @@ export const BerryLure = () => {
 							return (
 								<Card
 									key={berry}
-									icon={<img src={getItemUrl(berry)} />}
+									icon={<ItemSprite item={berry} />}
 									onClick={() => lure(berry)}
 									content={
 										<h3>
@@ -229,7 +229,7 @@ export const BerryLure = () => {
 					: [
 							<Card
 								key="no-berries"
-								icon={<img src={getItemUrl('sitrus-berry')} />}
+								icon={<ItemSprite item={'sitrus-berry'} grayscale />}
 								content={
 									'You dont have any berries that could be used as lures'
 								}

@@ -1,4 +1,4 @@
-import { getItemUrl } from '../../functions/getItemUrl';
+import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { useMiltankFarm } from '../../hooks/useMiltankFarm';
 import { useNavigate } from '../../hooks/useNavigate';
 import { Occupant } from '../../interfaces/OverworldMap';
@@ -22,12 +22,7 @@ export const MiltankFarm = (): JSX.Element => {
 						content={
 							<h3>Gather Berries in the wild or plant them at the farm</h3>
 						}
-						icon={
-							<img
-								src={getItemUrl('sitrus-berry')}
-								style={{ filter: 'grayScale(1)' }}
-							/>
-						}
+						icon={<ItemSprite item={'sitrus-berry'} grayscale />}
 						actionElements={[]}
 					/>
 				)}
@@ -36,14 +31,14 @@ export const MiltankFarm = (): JSX.Element => {
 						<Card
 							key={b}
 							content={`Trade 1 ${b} for 1 moomoo-milk  (${amount} in bag)`}
-							icon={<img src={getItemUrl(b)} />}
+							icon={<ItemSprite item={b} />}
 							onClick={() => trade(b)}
-							actionElements={[<img src={getItemUrl('moomoo-milk')} />]}
+							actionElements={[<ItemSprite item={'moomoo-milk'} />]}
 						/>
 					))
 				) : (
 					<Card
-						icon={<img src={getItemUrl('moomoo-milk')} />}
+						icon={<ItemSprite item={'moomoo-milk'} grayscale />}
 						content={
 							<strong>Miltank needs some more time to produce new Milk</strong>
 						}

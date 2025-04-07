@@ -1,6 +1,5 @@
 import { useCallback, useContext, useMemo } from 'react';
-import { battleSpriteSize } from '../../constants/gameData';
-import { getItemUrl } from '../../functions/getItemUrl';
+import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { joinInventories } from '../../interfaces/Inventory';
@@ -48,10 +47,7 @@ export const ApricornSmithy = ({ goBack }: { goBack: () => void }) => {
 						<Card
 							onClick={() => craftBall(apricorn)}
 							icon={
-								<img
-									height={battleSpriteSize * 1.5}
-									src={getItemUrl(apricornTable[apricorn])}
-								/>
+								<ItemSprite item={apricornTable[apricorn]} sizeFactor={1.5} />
 							}
 							content={
 								<h3>
@@ -60,11 +56,7 @@ export const ApricornSmithy = ({ goBack }: { goBack: () => void }) => {
 							}
 							actionElements={[
 								<strong style={{ display: 'flex', alignItems: 'center' }}>
-									<img
-										height={battleSpriteSize * 1.5}
-										src={getItemUrl(apricorn)}
-									/>
-									({amount})
+									<ItemSprite item={apricorn} sizeFactor={1.5} />({amount})
 								</strong>,
 							]}
 						/>

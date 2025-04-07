@@ -5,7 +5,6 @@ import { MoveCard } from '../../../components/MoveCard/MoveCard';
 import { battleSpriteSize } from '../../../constants/gameData';
 import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
 import { getHeldItem } from '../../../functions/getHeldItem';
-import { getItemUrl } from '../../../functions/getItemUrl';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { getPlayerPokemon } from '../../../functions/getPlayerPokemon';
 import { getTypeNames } from '../../../functions/getTypeNames';
@@ -27,6 +26,7 @@ import {
 	BattleFieldEffect,
 	ChooseActionPayload,
 } from '../BattleField';
+import { ItemSprite } from '../../../components/ItemSprite/ItemSprite';
 
 export const canRunOrSwitch = (
 	controlled: BattlePokemon,
@@ -166,7 +166,7 @@ export function ActionSelection({
 							onClick={() => setChosenAction(item)}
 							key={item}
 						>
-							<img src={getItemUrl(item)} />
+							<ItemSprite item={item} />
 							{item} ({amount})
 						</button>
 					);

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { MdCatchingPokemon } from 'react-icons/md';
+import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import {
 	QuestName,
@@ -7,7 +8,6 @@ import {
 } from '../../constants/checkLists/questsRecord';
 import { battleSpriteSize } from '../../constants/gameData';
 import { typeColors } from '../../constants/typeColors';
-import { getItemUrl } from '../../functions/getItemUrl';
 import { getRewardItemsForQuest } from '../../functions/getRewardForQuest';
 import { replaceRouteName } from '../../functions/replaceRouteName';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
@@ -88,7 +88,7 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 											getRewardItemsForQuest(name as QuestName)
 										).map(([item, amount]) => (
 											<React.Fragment key={item}>
-												{amount} x <img src={getItemUrl(item as ItemType)} />
+												{amount} x <ItemSprite item={item as ItemType} />
 											</React.Fragment>
 										))}
 										{quest.rewardPokemon && (
@@ -117,9 +117,7 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 												) {
 													return <PokemonSprite key={p + name} name={p} />;
 												}
-												return (
-													<img key={p + name} src={getItemUrl('poke-ball')} />
-												);
+												return <ItemSprite key={p + name} item={'poke-ball'} />;
 											})}
 										</h5>
 									)}

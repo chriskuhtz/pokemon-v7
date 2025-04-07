@@ -1,6 +1,6 @@
 import { useContext } from 'react';
+import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
-import { getItemUrl } from '../../functions/getItemUrl';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { fossilTable } from '../../interfaces/Item';
@@ -25,7 +25,7 @@ export const FossilReviver = (): JSX.Element => {
 					? fossils.map(([f]) => (
 							<Card
 								key={f}
-								icon={<img src={getItemUrl(f)} />}
+								icon={<ItemSprite item={f} />}
 								onClick={() => {
 									revive(f);
 								}}
@@ -46,7 +46,7 @@ export const FossilReviver = (): JSX.Element => {
 					: [
 							<Card
 								key="no-fossils"
-								icon={<img src={getItemUrl('helix-fossil')} />}
+								icon={<ItemSprite item={'helix-fossil'} />}
 								content={'Try to find some fossils in caves'}
 								actionElements={[]}
 							/>,

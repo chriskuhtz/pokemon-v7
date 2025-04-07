@@ -7,7 +7,6 @@ import {
 	QuestsRecord,
 } from '../../constants/checkLists/questsRecord';
 import { battleSpriteSize } from '../../constants/gameData';
-import { getItemUrl } from '../../functions/getItemUrl';
 import { getRewardItemsForQuest } from '../../functions/getRewardForQuest';
 import { replaceRouteName } from '../../functions/replaceRouteName';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
@@ -18,6 +17,7 @@ import { AnimatedBar } from '../../uiComponents/AnimatedBar/AnimatedBar';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 
 export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 	const { addMessage } = useContext(MessageQueueContext);
@@ -122,7 +122,7 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 										{Object.entries(getRewardItemsForQuest(name)).map(
 											([item, amount]) => (
 												<React.Fragment key={item}>
-													{amount} x <img src={getItemUrl(item as ItemType)} />
+													{amount} x <ItemSprite item={item as ItemType} />
 												</React.Fragment>
 											)
 										)}{' '}

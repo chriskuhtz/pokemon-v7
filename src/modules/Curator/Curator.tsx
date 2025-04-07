@@ -1,4 +1,4 @@
-import { getItemUrl } from '../../functions/getItemUrl';
+import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { useNavigate } from '../../hooks/useNavigate';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
@@ -25,7 +25,7 @@ export const Curator = (): JSX.Element => {
 					<Card
 						onClick={() => trade(item)}
 						key={item}
-						icon={<img src={getItemUrl(item)} />}
+						icon={<ItemSprite item={item} />}
 						content={<h3>Donate {item}</h3>}
 						actionElements={[]}
 					/>

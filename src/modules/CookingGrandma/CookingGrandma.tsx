@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { getItemUrl } from '../../functions/getItemUrl';
+import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { AnimatedBar } from '../../uiComponents/AnimatedBar/AnimatedBar';
@@ -50,7 +50,7 @@ export const CookingGrandma = (): JSX.Element => {
 						<Card
 							onClick={() => cook(recipe)}
 							key={recipe.result + index}
-							icon={<img src={getItemUrl(recipe.result)} />}
+							icon={<ItemSprite item={recipe.result} />}
 							content={
 								<div>
 									<h3>
@@ -71,30 +71,18 @@ export const CookingGrandma = (): JSX.Element => {
 								</div>
 							}
 							actionElements={recipe.ingredients.map((ing) => (
-								<img src={getItemUrl(ing)} />
+								<ItemSprite item={ing} />
 							))}
 						/>
 					))}
 				{disabledRecipes.map((recipe, index) => (
 					<Card
 						disabled
-						icon={
-							<img
-								src={getItemUrl(recipe.result)}
-								style={{ filter: 'grayscale(1)' }}
-							/>
-						}
+						icon={<ItemSprite item={recipe.result} grayscale />}
 						key={recipe.result + index}
 						content={<h3>Missing ingredients for {recipe.result}</h3>}
 						actionElements={recipe.ingredients.map((ing) => (
-							<img
-								src={getItemUrl(ing)}
-								style={
-									saveFile.bag[ing] <= 0
-										? { filter: 'grayscale(1)' }
-										: undefined
-								}
-							/>
+							<ItemSprite item={ing} grayscale={saveFile.bag[ing] <= 0} />
 						))}
 					/>
 				))}

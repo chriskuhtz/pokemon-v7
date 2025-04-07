@@ -1,5 +1,5 @@
 import { useCallback, useContext } from 'react';
-import { getItemUrl } from '../../functions/getItemUrl';
+import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
@@ -43,9 +43,9 @@ export const VilePlumeScentResearcher = (): JSX.Element => {
 			{enabled ? (
 				<Card
 					onClick={() => trade()}
-					icon={<img src={getItemUrl('pecha-berry')} />}
+					icon={<ItemSprite item={'pecha-berry'} />}
 					content={<h3>Trade Pecha Berry for Max Repel</h3>}
-					actionElements={[<img src={getItemUrl('max-repel')} />]}
+					actionElements={[<ItemSprite item={'max-repel'} />]}
 				/>
 			) : (
 				<h3>If you bring me Pecha Berries, vileplume can produce more repel</h3>

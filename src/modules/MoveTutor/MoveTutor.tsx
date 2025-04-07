@@ -6,7 +6,6 @@ import {
 } from '../../constants/checkLists/movesCheckList';
 import { nameToIdMap } from '../../constants/pokemonNames';
 import { calculateLevelData } from '../../functions/calculateLevelData';
-import { getItemUrl } from '../../functions/getItemUrl';
 import { moveIsTeachable } from '../../functions/moveIsAvailable';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
 import { useNavigate } from '../../hooks/useNavigate';
@@ -18,6 +17,7 @@ import { LearnMethod } from '../../interfaces/PokemonData';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 
 const learnMethodOrder: Record<LearnMethod, number> = {
 	'level-up': 1,
@@ -174,7 +174,7 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 						key={m.move.name}
 						onClick={() => unlockMove(m.move.name as MoveName, payment)}
 						actionElements={[]}
-						icon={<img src={getItemUrl(payment)} />}
+						icon={<ItemSprite item={payment} />}
 						disabled={saveFile.bag[payment] < 1 || !available}
 						content={
 							<strong>
