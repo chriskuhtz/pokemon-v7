@@ -1092,8 +1092,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				s.pokedex['pidgey'].caughtOnRoutes.length > 0 &&
 				s.pokedex['spearow'].caughtOnRoutes.length > 0 &&
 				s.pokedex['taillow'].caughtOnRoutes.length > 0 &&
-				s.pokedex['murkrow'].caughtOnRoutes.length > 0 &&
-				s.pokedex['starly'].caughtOnRoutes.length > 0
+				s.pokedex['murkrow'].caughtOnRoutes.length > 0
 			);
 		},
 		targetPokemon: ['pidgey', 'spearow', 'taillow', 'murkrow'],

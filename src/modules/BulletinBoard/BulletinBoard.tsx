@@ -1,5 +1,6 @@
 import React, { useCallback, useContext, useMemo } from 'react';
 import { MdCatchingPokemon } from 'react-icons/md';
+import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import {
 	QuestName,
@@ -17,8 +18,8 @@ import { AnimatedBar } from '../../uiComponents/AnimatedBar/AnimatedBar';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 
+const ACTIVE_QUEST_LIMIT = 10;
 export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 	const { addMessage } = useContext(MessageQueueContext);
 	const { saveFile, putSaveFileReducer } = useContext(SaveFileContext);
@@ -33,7 +34,7 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 	);
 	const acceptQuest = useCallback(
 		(name: QuestName) => {
-			if (activeQuests.length >= 5) {
+			if (activeQuests.length >= ACTIVE_QUEST_LIMIT) {
 				addMessage({
 					message: 'You can only have 5 active Quests at the same time',
 				});
@@ -106,7 +107,11 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 				</div>
 				<div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
 					<strong style={{ textWrap: 'nowrap' }}>Active Quests:</strong>
-					<AnimatedBar max={5} offset={5 - activeQuests.length} inversedColor />
+					<AnimatedBar
+						max={ACTIVE_QUEST_LIMIT}
+						offset={ACTIVE_QUEST_LIMIT - activeQuests.length}
+						inversedColor
+					/>
 				</div>
 				{availableQuests.map(({ name, quest }) => {
 					return (
