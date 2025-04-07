@@ -89,6 +89,7 @@ export const handleAllAttackCategories = ({
 			case 'damage':
 			case 'damage+ailment':
 			case 'damage+heal':
+			case 'damage+lower':
 			case 'damage+raise':
 				return handleDamageAttack({
 					attacker,
@@ -99,7 +100,7 @@ export const handleAllAttackCategories = ({
 					battleFieldEffects,
 					dampy,
 				});
-			case 'damage+lower':
+
 			case 'heal':
 			case 'net-good-stats':
 			case 'ohko':

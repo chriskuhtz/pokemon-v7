@@ -321,11 +321,26 @@ export const handleDamageAttack = ({
 		return updatedPokemon.map((p) => {
 			if (p.id === attacker.id) {
 				return applyAttackStatChanges(
-					p,
-					p.ability,
-					m,
+					updatedAttacker,
+					updatedAttacker.ability,
+					move,
 					addMessage,
 					true,
+					battleFieldEffects
+				);
+			}
+			return p;
+		});
+	}
+	if (category === 'damage+lower') {
+		return updatedPokemon.map((p) => {
+			if (p.id === updatedTarget.id) {
+				return applyAttackStatChanges(
+					updatedTarget,
+					updatedTarget.ability,
+					move,
+					addMessage,
+					false,
 					battleFieldEffects
 				);
 			}
