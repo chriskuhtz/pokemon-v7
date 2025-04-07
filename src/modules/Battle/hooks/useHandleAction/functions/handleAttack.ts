@@ -5,6 +5,7 @@ import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../BattleField';
 import { checkAndHandleFainting } from '../../../functions/handleFainting';
+import { handleAilmentAttack } from './attackCategories/handleAilmentAttack';
 import { handleAttack } from './attackCategories/handleAttack';
 import { handleDamageRaiseAttack } from './attackCategories/handleDamageRaiseAttack';
 import { handleFieldEffectMoves } from './attackCategories/handleFieldEffectMoves';
@@ -72,7 +73,6 @@ export const handleAllAttackCategories = ({
 					battleFieldEffects,
 					leave,
 				});
-
 			case 'damage+raise':
 				return handleDamageRaiseAttack({
 					attacker,
@@ -86,8 +86,28 @@ export const handleAllAttackCategories = ({
 					addBattleFieldEffect,
 					battleFieldEffects,
 				});
-
-			default:
+			case 'ailment':
+				return handleAilmentAttack({
+					attacker,
+					pokemon,
+					addMessage,
+					move,
+					battleWeather,
+					scatterCoins,
+					setBattleWeather,
+					dampy,
+					addBattleFieldEffect,
+					battleFieldEffects,
+				});
+			case 'damage':
+			case 'damage+ailment':
+			case 'damage+heal':
+			case 'damage+lower':
+			case 'heal':
+			case 'net-good-stats':
+			case 'ohko':
+			case 'swagger':
+			case 'whole-field-effect':
 				return handleAttack({
 					attacker,
 					pokemon,

@@ -11,7 +11,6 @@ import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
 import { getTypeNames } from '../../../../../../functions/getTypeNames';
 import { Message } from '../../../../../../hooks/useMessageQueue';
-import { LEECH_DAMAGE_FACTOR } from '../../../../../../interfaces/Ailment';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import { EmptyStatObject } from '../../../../../../interfaces/StatObject';
@@ -205,25 +204,6 @@ export const handleAttack = ({
 	//updated Target
 	let updatedTarget = { ...target };
 
-	if (move.name === 'foresight') {
-		updatedTarget = applySecondaryAilmentToPokemon({
-			pokemon: updatedTarget,
-			addMessage,
-			ailment: 'foresighted',
-		});
-	}
-	if (move.name === 'attract') {
-		if (updatedTarget.gender === 'GENDERLESS') {
-			addMessage({ message: 'It failed' });
-		} else
-			updatedTarget = applySecondaryAilmentToPokemon({
-				pokemon: updatedTarget,
-				addMessage,
-				ailment: 'infatuation',
-				targetId: updatedAttacker.id,
-			});
-	}
-
 	const isFlying =
 		updatedTarget.moveQueue.length > 0 &&
 		updatedTarget.moveQueue[0].type === 'BattleAttack' &&
@@ -253,13 +233,7 @@ export const handleAttack = ({
 		);
 		return updatedPokemon;
 	}
-	if (move.name === 'nightmare') {
-		updatedTarget = applySecondaryAilmentToPokemon({
-			pokemon: updatedTarget,
-			ailment: 'nightmare',
-			addMessage,
-		});
-	}
+
 	if (
 		move.name === 'curse' &&
 		getTypeNames(updatedAttacker).includes('ghost')
@@ -355,15 +329,6 @@ export const handleAttack = ({
 			move.name,
 			underPressure ? -2 : -1
 		);
-	}
-	//leech on
-	if (move.name === 'leech-seed') {
-		updatedAttacker = applySecondaryAilmentToPokemon({
-			pokemon: updatedAttacker,
-			ailment: 'leeching-on',
-			addMessage,
-			healAmount: Math.floor(updatedTarget.stats.hp * LEECH_DAMAGE_FACTOR),
-		});
 	}
 
 	//apply stat changes
@@ -560,14 +525,6 @@ export const handleAttack = ({
 				false,
 				battleFieldEffects
 			);
-		}
-
-		if (move.name === 'perish-song') {
-			updatedTarget = applySecondaryAilmentToPokemon({
-				pokemon: updatedTarget,
-				ailment: 'perish-songed',
-				addMessage,
-			});
 		}
 
 		const { updatedAttacker: afterAbilityCheck, updatedTarget: t } =
