@@ -7,7 +7,7 @@ import { BattleFieldEffect } from '../../../BattleField';
 import { checkAndHandleFainting } from '../../../functions/handleFainting';
 import { handleAilmentAttack } from './attackCategories/handleAilmentAttack';
 import { handleAttack } from './attackCategories/handleAttack';
-import { handleDamageRaiseAttack } from './attackCategories/handleDamageRaiseAttack';
+import { handleDamageAttack } from './attackCategories/handleDamageAttack';
 import { handleFieldEffectMoves } from './attackCategories/handleFieldEffectMoves';
 import { handleUniqueMoves } from './attackCategories/handleUniqueMoves';
 
@@ -73,19 +73,6 @@ export const handleAllAttackCategories = ({
 					battleFieldEffects,
 					leave,
 				});
-			case 'damage+raise':
-				return handleDamageRaiseAttack({
-					attacker,
-					pokemon,
-					addMessage,
-					move,
-					battleWeather,
-					scatterCoins,
-					setBattleWeather,
-					dampy,
-					addBattleFieldEffect,
-					battleFieldEffects,
-				});
 			case 'ailment':
 				return handleAilmentAttack({
 					attacker,
@@ -100,9 +87,43 @@ export const handleAllAttackCategories = ({
 					battleFieldEffects,
 				});
 			case 'damage':
+				return handleDamageAttack({
+					attacker,
+					pokemon,
+					addMessage,
+					move,
+					battleWeather,
+					battleFieldEffects,
+					dampy,
+					plusRaise: false,
+					plusAilment: false,
+				});
 			case 'damage+ailment':
+				return handleDamageAttack({
+					attacker,
+					pokemon,
+					addMessage,
+					move,
+					battleWeather,
+					battleFieldEffects,
+					dampy,
+					plusRaise: false,
+					plusAilment: true,
+				});
 			case 'damage+heal':
 			case 'damage+lower':
+			case 'damage+raise':
+				return handleDamageAttack({
+					attacker,
+					pokemon,
+					addMessage,
+					move,
+					battleWeather,
+					battleFieldEffects,
+					dampy,
+					plusRaise: true,
+					plusAilment: false,
+				});
 			case 'heal':
 			case 'net-good-stats':
 			case 'ohko':
@@ -116,7 +137,7 @@ export const handleAllAttackCategories = ({
 					battleWeather,
 					scatterCoins,
 					setBattleWeather,
-					dampy,
+
 					addBattleFieldEffect,
 					battleFieldEffects,
 				});

@@ -1,3 +1,5 @@
+import { SELF_DESTRUCTING_MOVES } from '../../../../../../constants/selfDestructingMoves';
+import { applyAttackAilmentsToPokemon } from '../../../../../../functions/applyAttackAilmentsToPokemon';
 import { applyAttackStatChanges } from '../../../../../../functions/applyAttackStatChanges';
 import { calculateDamage } from '../../../../../../functions/calculateDamage';
 import { changeMovePP } from '../../../../../../functions/changeMovePP';
@@ -10,6 +12,7 @@ import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
+import { handleDampy } from '../../../../functions/handleDampy';
 import { handleMiss } from '../../../../functions/handleMiss';
 import { handleMoveBlockAilments } from '../../../../functions/handleMoveBlockAilments';
 import { handleNoTarget } from '../../../../functions/handleNoTarget';
@@ -17,26 +20,28 @@ import { handleAbilitiesAfterAttack } from '../handleAbilitiesAfterAttack';
 
 /**
  *
- * Damage+Raise Attacks damage the target and change (not necessarily raise) the stats of the attacker
+ * Damage Attacks damage the target w/o side effects
  */
-export const handleDamageRaiseAttack = ({
+export const handleDamageAttack = ({
 	attacker,
 	pokemon,
 	addMessage,
 	move: m,
 	battleWeather,
 	battleFieldEffects,
+	dampy,
+	plusRaise,
+	plusAilment,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
 	addMessage: (x: Message) => void;
 	move: BattleAttack;
 	battleWeather: WeatherType | undefined;
-	setBattleWeather: (x: WeatherType) => void;
-	scatterCoins: () => void;
-	dampy?: { name: string };
-	addBattleFieldEffect: (x: BattleFieldEffect) => void;
 	battleFieldEffects: BattleFieldEffect[];
+	dampy: { name: string } | undefined;
+	plusRaise: boolean;
+	plusAilment: boolean;
 }): BattlePokemon[] => {
 	let updatedPokemon: BattlePokemon[] = [...pokemon];
 	const setPokemon = (input: BattlePokemon[]) => (updatedPokemon = input);
@@ -87,6 +92,19 @@ export const handleDamageRaiseAttack = ({
 			updatedPokemon,
 			setPokemon,
 			addMessage,
+			underPressure
+		);
+		return updatedPokemon;
+	}
+
+	if (dampy && SELF_DESTRUCTING_MOVES.includes(move.name)) {
+		handleDampy(
+			attacker,
+			move,
+			pokemon,
+			setPokemon,
+			addMessage,
+			dampy,
 			underPressure
 		);
 		return updatedPokemon;
@@ -143,21 +161,17 @@ export const handleDamageRaiseAttack = ({
 		underPressure ? -2 : -1
 	);
 
-	//apply stat changes
-	updatedAttacker = applyAttackStatChanges(
-		updatedAttacker,
-		updatedAttacker.ability,
-		move,
-		addMessage,
-		true,
-		battleFieldEffects
-	);
-
 	const attackerIsSafeguarded = battleFieldEffects.some(
 		(b) => b.type === 'safeguard' && b.ownerId === updatedAttacker.ownerId
 	);
 
 	//TARGET
+
+	//self destruct
+	if (SELF_DESTRUCTING_MOVES.includes(move.name)) {
+		addMessage({ message: `${updatedAttacker.name} self destructed` });
+		updatedAttacker = { ...updatedAttacker, damage: updatedAttacker.stats.hp };
+	}
 
 	// apply damage
 	const { consumedHeldItem, damage, criticalHit, wasSuperEffective } =
@@ -237,6 +251,38 @@ export const handleDamageRaiseAttack = ({
 	);
 	updatedAttacker = { ...a };
 	updatedTarget = { ...t };
+
+	if (plusRaise) {
+		return updatedPokemon.map((p) => {
+			if (p.id === attacker.id) {
+				return applyAttackStatChanges(
+					p,
+					p.ability,
+					m,
+					addMessage,
+					true,
+					battleFieldEffects
+				);
+			}
+			return p;
+		});
+	}
+	if (plusAilment) {
+		const targetIsSafeguarded = battleFieldEffects.some(
+			(b) => b.type === 'safeguard' && b.ownerId === updatedTarget.ownerId
+		);
+		const { updatedApplicator: a, updatedTarget: b } =
+			applyAttackAilmentsToPokemon(
+				updatedTarget,
+				updatedAttacker,
+				move,
+				addMessage,
+				battleWeather,
+				targetIsSafeguarded
+			);
+		updatedAttacker = a;
+		updatedTarget = b;
+	}
 
 	return updatedPokemon.map((p) => {
 		if (p.id === updatedAttacker.id) {

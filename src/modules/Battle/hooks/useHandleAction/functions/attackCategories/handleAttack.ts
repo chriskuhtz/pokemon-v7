@@ -1,5 +1,4 @@
 import { lockInMoves } from '../../../../../../constants/forceSwitchMoves';
-import { SELF_DESTRUCTING_MOVES } from '../../../../../../constants/selfDestructingMoves';
 import { applyAttackAilmentsToPokemon } from '../../../../../../functions/applyAttackAilmentsToPokemon';
 import { applyAttackStatChanges } from '../../../../../../functions/applyAttackStatChanges';
 import { applySecondaryAilmentToPokemon } from '../../../../../../functions/applySecondaryAilmentToPokemon';
@@ -16,7 +15,6 @@ import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import { EmptyStatObject } from '../../../../../../interfaces/StatObject';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
-import { handleDampy } from '../../../../functions/handleDampy';
 import { handleMiss } from '../../../../functions/handleMiss';
 import { handleMoveBlockAilments } from '../../../../functions/handleMoveBlockAilments';
 import { handleNoTarget } from '../../../../functions/handleNoTarget';
@@ -29,7 +27,7 @@ export const handleAttack = ({
 	move: m,
 	battleWeather,
 	scatterCoins,
-	dampy,
+
 	addBattleFieldEffect,
 	battleFieldEffects,
 	setBattleWeather,
@@ -41,7 +39,6 @@ export const handleAttack = ({
 	battleWeather: WeatherType | undefined;
 	setBattleWeather: (x: WeatherType) => void;
 	scatterCoins: () => void;
-	dampy?: { name: string };
 	addBattleFieldEffect: (x: BattleFieldEffect) => void;
 	battleFieldEffects: BattleFieldEffect[];
 }): BattlePokemon[] => {
@@ -99,19 +96,6 @@ export const handleAttack = ({
 		return updatedPokemon;
 	}
 	const selfTargeting = move.data.target.name === 'user';
-
-	if (dampy && SELF_DESTRUCTING_MOVES.includes(move.name)) {
-		handleDampy(
-			attacker,
-			move,
-			pokemon,
-			setPokemon,
-			addMessage,
-			dampy,
-			underPressure
-		);
-		return updatedPokemon;
-	}
 
 	//MESSAGES
 	if (!selfTargeting) {
@@ -286,12 +270,6 @@ export const handleAttack = ({
 			ailment: 'raging',
 			addMessage,
 		});
-	}
-
-	//self destruct
-	if (SELF_DESTRUCTING_MOVES.includes(move.name)) {
-		addMessage({ message: `${updatedAttacker.name} self destructed` });
-		updatedAttacker = { ...updatedAttacker, damage: updatedAttacker.stats.hp };
 	}
 
 	//apply confusion on lock in end
