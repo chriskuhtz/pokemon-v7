@@ -319,19 +319,6 @@ export const handleAttack = ({
 			true,
 			battleFieldEffects
 		);
-		//healing
-		if (move.data.meta.healing) {
-			addMessage({ message: `${updatedAttacker.name} healed itself` });
-			updatedAttacker = {
-				...updatedAttacker,
-				damage: getMiddleOfThree([
-					0,
-					updatedAttacker.damage -
-						updatedAttacker.stats.hp * (100 / move.data.meta.healing),
-					updatedAttacker.stats.hp,
-				]),
-			};
-		}
 	}
 	const targetIsSafeguarded = battleFieldEffects.some(
 		(b) => b.type === 'safeguard' && b.ownerId === updatedTarget.ownerId

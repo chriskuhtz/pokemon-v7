@@ -9,6 +9,8 @@ import { handleAilmentAttack } from './attackCategories/handleAilmentAttack';
 import { handleAttack } from './attackCategories/handleAttack';
 import { handleDamageAttack } from './attackCategories/handleDamageAttack';
 import { handleFieldEffectMoves } from './attackCategories/handleFieldEffectMoves';
+import { handleHealAttack } from './attackCategories/handleHealAttack';
+import { handleNetGoodStatsAttack } from './attackCategories/handleNetGoodStatsAttack';
 import { handleUniqueMoves } from './attackCategories/handleUniqueMoves';
 
 export const handleAllAttackCategories = ({
@@ -43,6 +45,28 @@ export const handleAllAttackCategories = ({
 	//determine attacker and target
 	const handleMoveCategories = (): BattlePokemon[] => {
 		switch (move.data.meta.category.name) {
+			case 'damage':
+			case 'damage+ailment':
+			case 'damage+heal':
+			case 'damage+lower':
+			case 'damage+raise':
+				return handleDamageAttack({
+					attacker,
+					pokemon,
+					addMessage,
+					move,
+					battleWeather,
+					battleFieldEffects,
+					dampy,
+				});
+			case 'heal':
+				return handleHealAttack({
+					attacker,
+					pokemon,
+					addMessage,
+					move,
+					battleFieldEffects,
+				});
 			case 'force-switch':
 				return handleForceSwitch(attacker, move.name);
 			case 'unique':
@@ -86,23 +110,15 @@ export const handleAllAttackCategories = ({
 					addBattleFieldEffect,
 					battleFieldEffects,
 				});
-			case 'damage':
-			case 'damage+ailment':
-			case 'damage+heal':
-			case 'damage+lower':
-			case 'damage+raise':
-				return handleDamageAttack({
+			case 'net-good-stats':
+				return handleNetGoodStatsAttack({
 					attacker,
 					pokemon,
 					addMessage,
 					move,
 					battleWeather,
 					battleFieldEffects,
-					dampy,
 				});
-
-			case 'heal':
-			case 'net-good-stats':
 			case 'ohko':
 			case 'swagger':
 			case 'whole-field-effect':
