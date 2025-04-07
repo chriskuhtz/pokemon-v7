@@ -87,31 +87,8 @@ export const handleAllAttackCategories = ({
 					battleFieldEffects,
 				});
 			case 'damage':
-				return handleDamageAttack({
-					attacker,
-					pokemon,
-					addMessage,
-					move,
-					battleWeather,
-					battleFieldEffects,
-					dampy,
-					plusRaise: false,
-					plusAilment: false,
-				});
 			case 'damage+ailment':
-				return handleDamageAttack({
-					attacker,
-					pokemon,
-					addMessage,
-					move,
-					battleWeather,
-					battleFieldEffects,
-					dampy,
-					plusRaise: false,
-					plusAilment: true,
-				});
 			case 'damage+heal':
-			case 'damage+lower':
 			case 'damage+raise':
 				return handleDamageAttack({
 					attacker,
@@ -121,9 +98,8 @@ export const handleAllAttackCategories = ({
 					battleWeather,
 					battleFieldEffects,
 					dampy,
-					plusRaise: true,
-					plusAilment: false,
 				});
+			case 'damage+lower':
 			case 'heal':
 			case 'net-good-stats':
 			case 'ohko':

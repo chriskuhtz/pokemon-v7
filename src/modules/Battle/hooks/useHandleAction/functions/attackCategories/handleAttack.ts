@@ -405,77 +405,7 @@ export const handleAttack = ({
 				  }
 				: undefined,
 		};
-		// check attacker  drain/recoil
 
-		const getDrain = () => {
-			if (move.data.meta.drain) {
-				return move.data.meta.drain;
-			}
-			if (
-				getHeldItem(updatedTarget) === 'jaboca-berry' &&
-				move.data.damage_class.name === 'physical'
-			) {
-				addMessage({
-					message: `${updatedTarget.name} somehow used its ${getHeldItem(
-						updatedTarget,
-						false
-					)} to damage ${updatedAttacker.name}`,
-				});
-				updatedTarget = { ...updatedTarget, heldItemName: undefined };
-				return -12.5;
-			}
-			if (
-				getHeldItem(updatedTarget) === 'rowap-berry' &&
-				move.data.damage_class.name === 'special'
-			) {
-				addMessage({
-					message: `${updatedTarget.name} somehow used its ${getHeldItem(
-						updatedTarget,
-						false
-					)} to damage ${updatedAttacker.name}`,
-				});
-				updatedTarget = { ...updatedTarget, heldItemName: undefined };
-				return -12.5;
-			}
-		};
-		const drain = getDrain();
-		if (drain) {
-			const absDrainValue = getMiddleOfThree([
-				1,
-				Math.round((damage * Math.abs(drain)) / 100),
-				attacker.stats.hp,
-			]);
-			const drainValue = drain < 0 ? -absDrainValue : absDrainValue;
-			const liquidOozedChecked =
-				target.ability === 'liquid-ooze' && drain > 0
-					? -drainValue
-					: drainValue;
-			const rockHeadChecked =
-				attacker.ability === 'rock-head' && drain < 0 ? 0 : liquidOozedChecked;
-
-			updatedAttacker = {
-				...updatedAttacker,
-				damage: getMiddleOfThree([
-					0,
-					updatedAttacker.damage - rockHeadChecked,
-					updatedAttacker.stats.hp,
-				]),
-			};
-
-			if (rockHeadChecked > 0 && target.ability === 'liquid-ooze') {
-				addMessage({
-					message: `${updatedAttacker.data.name} took ${absDrainValue} HP damage from liquid ooze`,
-				});
-			} else if (rockHeadChecked > 0) {
-				addMessage({
-					message: `${updatedAttacker.data.name} restored ${absDrainValue} HP`,
-				});
-			} else if (rockHeadChecked < 0) {
-				addMessage({
-					message: `${updatedAttacker.data.name} took ${absDrainValue} HP recoil damage`,
-				});
-			}
-		}
 		//apply ailments
 		const { updatedApplicator: a, updatedTarget: b } =
 			applyAttackAilmentsToPokemon(
