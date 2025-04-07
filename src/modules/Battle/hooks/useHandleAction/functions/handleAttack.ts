@@ -74,6 +74,21 @@ export const handleAllAttackCategories = ({
 				leave,
 			});
 			break;
+		case 'damage+raise':
+			handleAttack({
+				attacker,
+				pokemon,
+				setPokemon,
+				addMessage,
+				move,
+				battleWeather,
+				scatterCoins,
+				setBattleWeather,
+				dampy,
+				addBattleFieldEffect,
+				battleFieldEffects,
+			});
+			break;
 		default:
 			handleAttack({
 				attacker,

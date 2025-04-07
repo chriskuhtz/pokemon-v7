@@ -16,6 +16,9 @@ export const applyAttackStatChanges = (
 	battleFieldEffects: BattleFieldEffect[]
 ): BattlePokemon => {
 	let updatedMon = { ...target };
+	const sereneGraceFactor = attackerAbility === 'serene-grace' ? 2 : 1;
+
+	const chance = attack.data.meta.stat_chance * sereneGraceFactor;
 
 	if (attack.name === 'curse') {
 		if (getTypeNames(updatedMon).includes('ghost')) {
@@ -37,25 +40,26 @@ export const applyAttackStatChanges = (
 			});
 		}
 	}
+	if (Math.random() < chance) {
+		attack.data.stat_changes.forEach((s) => {
+			if (
+				attackerAbility === 'sheer-force' &&
+				((selfInflicted && s.change > 0) || (!selfInflicted && s.change < 0))
+			) {
+				//sheer force prevents positive side effects
+				return updatedMon;
+			}
 
-	attack.data.stat_changes.forEach((s) => {
-		if (
-			attackerAbility === 'sheer-force' &&
-			((selfInflicted && s.change > 0) || (!selfInflicted && s.change < 0))
-		) {
-			//sheer force prevents positive side effects
-			return updatedMon;
-		}
-
-		updatedMon = applyStatChangeToPokemon(
-			updatedMon,
-			s.stat.name,
-			s.change,
-			selfInflicted,
-			battleFieldEffects,
-			addMessage
-		);
-	});
+			updatedMon = applyStatChangeToPokemon(
+				updatedMon,
+				s.stat.name,
+				s.change,
+				selfInflicted,
+				battleFieldEffects,
+				addMessage
+			);
+		});
+	}
 
 	return updatedMon;
 };
