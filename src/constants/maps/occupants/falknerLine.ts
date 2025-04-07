@@ -26,7 +26,7 @@ export const falknerLine: Occupant[] = [
 		quest: 'catch some local flying pokemon',
 		conditionFunction: (s) =>
 			s.campUpgrades['invite flying pokemon expert falkner'] &&
-			s.quests['catch some local flying pokemon'] !== 'FULFILLED',
+			s.quests['catch some local flying pokemon'] !== 'COLLECTED',
 	},
 	{
 		...falknerBase,
@@ -39,7 +39,7 @@ export const falknerLine: Occupant[] = [
 		handledMessage: ['I wish i could fly'],
 		quest: 'evolve some local flying pokemon',
 		conditionFunction: (s) =>
-			s.quests['catch some local flying pokemon'] === 'FULFILLED',
+			s.quests['catch some local flying pokemon'] === 'COLLECTED',
 	},
 	{
 		...falknerBase,
@@ -51,8 +51,8 @@ export const falknerLine: Occupant[] = [
 		handledMessage: ['I wish i could fly'],
 		quest: 'evolve a flying pokemon to its final stage',
 		conditionFunction: (s) =>
-			s.quests['evolve some local flying pokemon'] === 'FULFILLED' &&
-			s.quests['evolve a flying pokemon to its final stage'] !== 'FULFILLED',
+			s.quests['evolve some local flying pokemon'] === 'COLLECTED' &&
+			s.quests['evolve a flying pokemon to its final stage'] !== 'COLLECTED',
 	},
 	{
 		...falknerBase,
@@ -67,8 +67,8 @@ export const falknerLine: Occupant[] = [
 		handledMessage: ['The legendary pokemon will be very rare to encounter'],
 		quest: 'catch the legendary bird of ice',
 		conditionFunction: (s) =>
-			s.quests['evolve some local flying pokemon'] === 'FULFILLED' &&
-			s.quests['evolve a flying pokemon to its final stage'] === 'FULFILLED' &&
-			s.quests['catch the legendary bird of ice'] !== 'FULFILLED',
+			s.quests['evolve some local flying pokemon'] === 'COLLECTED' &&
+			s.quests['evolve a flying pokemon to its final stage'] === 'COLLECTED' &&
+			s.quests['catch the legendary bird of ice'] !== 'COLLECTED',
 	},
 ];
