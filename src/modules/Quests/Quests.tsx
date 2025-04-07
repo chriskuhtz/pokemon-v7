@@ -10,7 +10,6 @@ import { battleSpriteSize } from '../../constants/gameData';
 import { typeColors } from '../../constants/typeColors';
 import { getRewardItemsForQuest } from '../../functions/getRewardForQuest';
 import { replaceRouteName } from '../../functions/replaceRouteName';
-import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useQuests } from '../../hooks/useQuests';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { ItemType } from '../../interfaces/Item';
@@ -20,7 +19,6 @@ import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
 export const Quests = ({ goBack }: { goBack: () => void }) => {
-	const { addMessage } = useContext(MessageQueueContext);
 	const {
 		saveFile,
 		fulfillQuestReducer: fulfillQuest,
@@ -131,10 +129,6 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 											backgroundColor: typeColors['grass'],
 										}}
 										onClick={() => {
-											addMessage({
-												message: `Earned ${quest.researchPoints} Research Points`,
-												needsNoConfirmation: true,
-											});
 											fulfillQuest(name);
 										}}
 										role="button"
@@ -142,11 +136,7 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 										onKeyDown={(e) => {
 											e.stopPropagation();
 											if (e.key === 'Enter') {
-												addMessage({
-													message: `Earned ${quest.researchPoints} Research Points`,
-													needsNoConfirmation: true,
-												});
-												fulfillQuest(name as QuestName);
+												fulfillQuest(name);
 											}
 										}}
 									>
