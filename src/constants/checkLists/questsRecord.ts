@@ -382,6 +382,7 @@ export const questNames = [
 	'reach cooking skill 20',
 	'reach cooking skill 50',
 	'reach cooking skill 100',
+	'catch all different pokemon on routeS1',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];

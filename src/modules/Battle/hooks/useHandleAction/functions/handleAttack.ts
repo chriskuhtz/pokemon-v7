@@ -45,6 +45,7 @@ export const handleAllAttackCategories = ({
 }) => {
 	//determine attacker and target
 	const handleMoveCategories = (): BattlePokemon[] => {
+		console.log('CATEGORY', move.data.meta.category.name);
 		switch (move.data.meta.category.name) {
 			case 'damage':
 			case 'damage+ailment':

@@ -124,7 +124,7 @@ export const handleNetGoodStatsAttack = ({
 		return updatedPokemon;
 	}
 
-	if (!selfTargeting) {
+	if (selfTargeting) {
 		if (move.name === 'defense-curl') {
 			updatedAttacker.defenseCurled = true;
 		}

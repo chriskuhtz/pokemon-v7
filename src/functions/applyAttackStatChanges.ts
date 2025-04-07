@@ -18,7 +18,11 @@ export const applyAttackStatChanges = (
 	let updatedMon = { ...target };
 	const sereneGraceFactor = attackerAbility === 'serene-grace' ? 2 : 1;
 
-	const chance = attack.data.meta.stat_chance * sereneGraceFactor;
+	const category = attack.data.meta.category.name;
+	const chance =
+		category === 'net-good-stats'
+			? 100
+			: attack.data.meta.stat_chance * sereneGraceFactor;
 
 	if (attack.name === 'curse') {
 		if (getTypeNames(updatedMon).includes('ghost')) {
@@ -40,7 +44,7 @@ export const applyAttackStatChanges = (
 			});
 		}
 	}
-	if (Math.random() < chance) {
+	if (Math.random() * 100 < chance) {
 		attack.data.stat_changes.forEach((s) => {
 			if (
 				attackerAbility === 'sheer-force' &&
