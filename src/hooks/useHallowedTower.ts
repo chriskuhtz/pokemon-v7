@@ -53,7 +53,7 @@ export const useHallowedTower = () => {
 									makeChallengerPokemon({
 										nature: getRandomNature(),
 										name: 'spiritomb',
-										xp: 2000,
+										xp: 8000,
 										caughtOnMap: saveFile.location.mapId,
 									}),
 								],

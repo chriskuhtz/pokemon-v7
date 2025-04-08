@@ -15,21 +15,21 @@ export const honeyPokemon: PokemonName[] = [
 	'burmy',
 	'mankey',
 	'heracross',
-	'pinsir',
-	'oddish',
-	'weedle',
 	'munchlax',
 	'petilil',
 	'combee',
 	'aipom',
+	'pineco',
+	'exeggcute',
+	'budew',
 ];
 
 const HONEY_ENCOUNTER_OPTIONS: OwnedPokemon[] = honeyPokemon.map((h) =>
 	makeChallengerPokemon({
 		nature: getRandomNature(),
 		name: h,
-		xp: 200,
-		caughtOnMap: 'routeN1',
+		xp: 1000,
+		caughtOnMap: 'camp',
 	})
 );
 
