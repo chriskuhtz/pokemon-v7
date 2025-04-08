@@ -77,7 +77,9 @@ export const TrainingField = () => {
 												</strong>
 											))}
 										</div>
-										{defeatedBefore && <strong>Defeated before</strong>}
+										{defeatedBefore && (
+											<strong color={'green'}>Defeated before</strong>
+										)}
 									</div>
 								}
 								actionElements={[

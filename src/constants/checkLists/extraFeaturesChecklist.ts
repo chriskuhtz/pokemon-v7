@@ -259,6 +259,12 @@ export const extraFeatureCheckList: {
 	{ name: 'item ability move wiki', handled: true },
 	{ name: 'more overworld items', handled: true },
 	{ name: 'x of n quests completed bar', handled: true },
+	{ name: 'morty needs to be way stronger', handled: true },
+	{
+		name: 'trainers should increase by 10 levels between tiers',
+		handled: true,
+	},
+	{ name: 'defeated before should be green', handled: true },
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'improve held-item+trade evo condition' },
 	{ name: 'refine battle end' },
@@ -362,8 +368,5 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'trainers need cooldown timers' },
 	{ name: 'gender needs to be visible in battle' },
-	{ name: 'morty needs to be way stronger' },
-	{ name: 'trainers should increase by 10 levels between tiers' },
-	{ name: 'defeated before should be green' },
 	{ name: 'training field: random from tier x' },
 ];

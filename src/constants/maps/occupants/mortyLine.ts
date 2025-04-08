@@ -52,6 +52,7 @@ export const mortyLine: Occupant[] = [
 		gifts: { 'dusk-ball': 5 },
 		conditionFunction: (s) =>
 			s.campUpgrades['invite ghost expert morty'] &&
-			s.quests['catch a spiritomb'] === 'COLLECTED',
+			s.quests['catch a spiritomb'] === 'COLLECTED' &&
+			s.quests['catch Haunter and Mightyena'] !== 'COLLECTED',
 	},
 ];
