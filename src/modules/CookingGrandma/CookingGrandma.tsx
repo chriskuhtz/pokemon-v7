@@ -68,6 +68,7 @@ export const CookingGrandma = (): JSX.Element => {
 											)}
 										/>
 									</strong>
+									<p>Ingredients: {recipe.ingredients.join(', ')}</p>
 								</div>
 							}
 							actionElements={recipe.ingredients.map((ing) => (
@@ -80,7 +81,12 @@ export const CookingGrandma = (): JSX.Element => {
 						disabled
 						icon={<ItemSprite item={recipe.result} grayscale />}
 						key={recipe.result + index}
-						content={<h3>Missing ingredients for {recipe.result}</h3>}
+						content={
+							<div>
+								<h3>{recipe.result}</h3>
+								<p>Ingredients: {recipe.ingredients.join(', ')}</p>
+							</div>
+						}
 						actionElements={recipe.ingredients.map((ing) => (
 							<ItemSprite item={ing} grayscale={saveFile.bag[ing] <= 0} />
 						))}

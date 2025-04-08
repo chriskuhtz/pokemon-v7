@@ -365,4 +365,5 @@ export const extraFeatureCheckList: {
 	{ name: 'morty needs to be way stronger' },
 	{ name: 'trainers should increase by 10 levels between tiers' },
 	{ name: 'defeated before should be green' },
+	{ name: 'training field: random from tier x' },
 ];
