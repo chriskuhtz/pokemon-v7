@@ -6,13 +6,11 @@ export const MoveCard = ({
 	move,
 	onClick,
 	highlighted,
-	note,
 	boostedBy,
 }: {
 	move: BattleMove;
 	onClick: () => void;
 	highlighted?: boolean;
-	note?: string;
 	boostedBy?: number;
 }) => {
 	const boostfactor = () => {
@@ -42,11 +40,12 @@ export const MoveCard = ({
 			}
 			content={
 				<div>
-					<h4>{move.name}</h4>
+					<h4>
+						{move.name} ({move.data.damage_class.name.slice(0, 4)})
+					</h4>
 					<strong>
 						PP: {currentPP}/{move.data.pp}
 					</strong>
-					,{note && <h6>{note}</h6>}
 				</div>
 			}
 			actionElements={[]}

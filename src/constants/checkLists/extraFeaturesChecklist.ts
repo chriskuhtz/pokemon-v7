@@ -265,6 +265,16 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'defeated before should be green', handled: true },
+	{
+		name: 'use Move.meta.category as a switch case for attack handling',
+		handled: true,
+	},
+	{ name: 'refactor quest limit', handled: true },
+	{
+		name: 'attack handler should not get setter function, just return BattlePokemon[]',
+		handled: true,
+	},
+	{ name: 'show physical special attack type somewhere', handled: true },
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'improve held-item+trade evo condition' },
 	{ name: 'refine battle end' },
@@ -274,7 +284,6 @@ export const extraFeatureCheckList: {
 	{ name: 'poison step damage' },
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'use Move.target as a switch case for attack handling' },
-	{ name: 'use Move.meta.category as a switch case for attack handling' },
 	{
 		name: 'different page that only loads the savefile and lets the user copy it',
 	},
@@ -293,7 +302,6 @@ export const extraFeatureCheckList: {
 	{ name: 'lure x pokemon' },
 	{ name: 'check battlefield effect functions' },
 	{ name: 'actually use growth rates' },
-	{ name: 'refactor quest limit' },
 	{ name: 'trainer builder' },
 	{ name: 'walk through grass animation' },
 	{ name: 'improved keyboard control, interpret direction buttons' },
@@ -348,16 +356,13 @@ export const extraFeatureCheckList: {
 	{ name: 'move routeW1 to custom sheet' },
 	{ name: 'move routeN1W1 to custom sheet' },
 	{ name: 'extract handleAttack start and end' },
-	{
-		name: 'attack handler should not get setter function, just return BattlePokemon[]',
-	},
 	{ name: 'battleinfo stack for switch in screen' },
 	{ name: 'water on routeN1' },
 	{ name: 'path to next route (S1W1)' },
 	{ name: 'battlepoint shop' },
 	{ name: 'pikachu fan questline' },
 	{ name: 'dugtrio should not deliver fossils' },
-	{ name: 'show physical special attack type somewhere' },
+
 	{ name: 'make game playable in portrait mode' },
 	{
 		name: 'collecting quests only at bulletin board, otherwise you can bypass the bag limit',
