@@ -318,34 +318,24 @@ export const handleDamageAttack = ({
 
 	const category = move.data.meta.category.name;
 	if (category === 'damage+raise') {
-		return updatedPokemon.map((p) => {
-			if (p.id === attacker.id) {
-				return applyAttackStatChanges(
-					updatedAttacker,
-					updatedAttacker.ability,
-					move,
-					addMessage,
-					true,
-					battleFieldEffects
-				);
-			}
-			return p;
-		});
+		updatedAttacker = applyAttackStatChanges(
+			updatedAttacker,
+			updatedAttacker.ability,
+			move,
+			addMessage,
+			true,
+			battleFieldEffects
+		);
 	}
 	if (category === 'damage+lower') {
-		return updatedPokemon.map((p) => {
-			if (p.id === updatedTarget.id) {
-				return applyAttackStatChanges(
-					updatedTarget,
-					updatedTarget.ability,
-					move,
-					addMessage,
-					false,
-					battleFieldEffects
-				);
-			}
-			return p;
-		});
+		updatedTarget = applyAttackStatChanges(
+			updatedTarget,
+			updatedTarget.ability,
+			move,
+			addMessage,
+			false,
+			battleFieldEffects
+		);
 	}
 	if (category === 'damage+ailment') {
 		const targetIsSafeguarded = battleFieldEffects.some(

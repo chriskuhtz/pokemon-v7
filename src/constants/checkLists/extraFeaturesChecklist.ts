@@ -360,4 +360,9 @@ export const extraFeatureCheckList: {
 	{
 		name: 'quest: catch a pokemon of each type',
 	},
+	{ name: 'trainers need cooldown timers' },
+	{ name: 'gender needs to be visible in battle' },
+	{ name: 'morty needs to be way stronger' },
+	{ name: 'trainers should increase by 10 levels between tiers' },
+	{ name: 'defeated before should be green' },
 ];
