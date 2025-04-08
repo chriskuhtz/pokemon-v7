@@ -13,7 +13,6 @@ export const RefillHandling = ({
 }: {
 	teamCanRefill: boolean;
 	team: BattlePokemon[];
-
 	addMessage: (x: Message) => void;
 	putPokemonOnField: (id: string) => void;
 }) => {

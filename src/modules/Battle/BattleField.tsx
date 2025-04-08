@@ -262,13 +262,13 @@ export const BattleField = ({
 	const teamCanRefill = useMemo(() => {
 		return (
 			onFieldTeam.length < fightersPerSide &&
-			team.some((t) => t.status === 'BENCH')
+			team.some((t) => !isKO(t) && t.status === 'BENCH')
 		);
 	}, [fightersPerSide, onFieldTeam, team]);
 	const opponentCanRefill = useMemo(() => {
 		return (
 			onFieldOpponents.length < fightersPerSide &&
-			opponents.some((t) => t.status === 'BENCH')
+			opponents.some((t) => !isKO(t) && t.status === 'BENCH')
 		);
 	}, [fightersPerSide, onFieldOpponents, opponents]);
 	const dampy: { name: string } | undefined = useMemo(() => {
