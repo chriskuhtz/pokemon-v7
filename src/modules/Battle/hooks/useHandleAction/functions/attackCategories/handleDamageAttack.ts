@@ -145,17 +145,28 @@ export const handleDamageAttack = ({
 	}
 
 	//update moveQueue
-	updatedAttacker = {
-		...updatedAttacker,
-		moveQueue: updatedAttacker.moveQueue.slice(1),
-	};
+	if (move.multiHits > 1) {
+		addMessage({ message: 'Multi hit!' });
+		updatedAttacker = {
+			...updatedAttacker,
+			moveQueue: [
+				{ ...move, multiHits: move.multiHits - 1, isAMultiHit: true },
+			],
+		};
+	} else
+		updatedAttacker = {
+			...updatedAttacker,
+			moveQueue: updatedAttacker.moveQueue.slice(1),
+		};
 
 	//reduce pp after all multihits are done
-	updatedAttacker = changeMovePP(
-		updatedAttacker,
-		move.name,
-		underPressure ? -2 : -1
-	);
+	if (!move.isAMultiHit) {
+		updatedAttacker = changeMovePP(
+			updatedAttacker,
+			move.name,
+			underPressure ? -2 : -1
+		);
+	}
 
 	const attackerIsSafeguarded = battleFieldEffects.some(
 		(b) => b.type === 'safeguard' && b.ownerId === updatedAttacker.ownerId
