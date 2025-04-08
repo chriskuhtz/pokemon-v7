@@ -39,7 +39,8 @@ export const falknerLine: Occupant[] = [
 		handledMessage: ['I wish i could fly'],
 		quest: 'evolve some local flying pokemon',
 		conditionFunction: (s) =>
-			s.quests['catch some local flying pokemon'] === 'COLLECTED',
+			s.quests['catch some local flying pokemon'] === 'COLLECTED' &&
+			s.quests['evolve some local flying pokemon'] !== 'COLLECTED',
 	},
 	{
 		...falknerBase,
@@ -64,7 +65,13 @@ export const falknerLine: Occupant[] = [
 			'More modern sources say,',
 			'That it sometimes reveals itself to strong flying trainers',
 		],
-		handledMessage: ['The legendary pokemon will be very rare to encounter'],
+		handledMessage: [
+			'Now I believe you are strong enough for a secret',
+			'I came here to find a legendary flying pokemon',
+			'The myths refer to it as the bird of ice',
+			'More modern sources say,',
+			'That it sometimes reveals itself to strong flying trainers',
+		],
 		quest: 'catch the legendary bird of ice',
 		conditionFunction: (s) =>
 			s.quests['evolve some local flying pokemon'] === 'COLLECTED' &&
