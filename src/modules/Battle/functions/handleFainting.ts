@@ -15,7 +15,7 @@ export const checkAndHandleFainting = (
 		(p) => p.id === destinyBondPartnerId
 	);
 
-	if (isKO(p)) {
+	if (isKO(p) && p.status === 'ONFIELD') {
 		if (p.endured) {
 			addMessage({ message: `${p.data.name} endured the attack` });
 			return { ...p, damage: p.stats.hp - 1, endured: false };
