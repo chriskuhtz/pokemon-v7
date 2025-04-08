@@ -9,6 +9,7 @@ import { handleFlinching } from '../../../../../functions/handleFlinching';
 import { isKO } from '../../../../../functions/isKo';
 import { Message } from '../../../../../hooks/useMessageQueue';
 import {
+	CURSED_BODY_CHANCE,
 	CUTE_CHARM_CHANCE,
 	EFFECT_SPORE_CHANCE,
 	FLAME_BODY_CHANCE,
@@ -104,6 +105,20 @@ export const handleAbilitiesAfterAttack = (
 			`by ${target.data.name}'s poison point`
 		);
 		updatedAttacker = b;
+	}
+	//check for cursed body
+	if (
+		target.ability === 'cursed-body' &&
+		Math.random() < CURSED_BODY_CHANCE &&
+		!attackerIsSafeguarded
+	) {
+		updatedAttacker = applySecondaryAilmentToPokemon({
+			pokemon: updatedAttacker,
+			ailment: 'disable',
+			addMessage,
+			move: move.name,
+			by: 'cursed-body',
+		});
 	}
 
 	//check for effect spore
