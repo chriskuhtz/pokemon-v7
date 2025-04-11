@@ -170,6 +170,7 @@ export const heldItems = [
 	'muscle-band',
 	'wise-glasses',
 	'expert-belt',
+	'light-clay',
 ] as const;
 export const valuables = [
 	'shoal-salt',

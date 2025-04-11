@@ -1,3 +1,4 @@
+import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import { BattleFieldEffect } from '../../../../BattleField';
@@ -17,10 +18,11 @@ export const handleFieldEffectMoves = ({
 }): BattlePokemon[] => {
 	//MIST, LIGHT-SCREEN, REFLECT
 	if (['mist', 'light-screen', 'reflect'].includes(move.name)) {
+		const duration = getHeldItem(attacker) === 'light-clay' ? 8 : 5;
 		addBattleFieldEffect({
 			type: move.name as BattleFieldEffect['type'],
 			ownerId: attacker.ownerId,
-			duration: 5,
+			duration,
 		});
 	}
 	if (move.name === 'spikes') {
