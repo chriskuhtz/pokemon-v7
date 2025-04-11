@@ -807,7 +807,7 @@ const specialTrainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'lucario', xp: 125000 }),
 		],
 		inventory: EmptyInventory,
-		availableAfter: 'catch a pokemon and its paldea variant',
+		availableAfter: 'catch all forms of tauros',
 		trainer: { name: 'Professor Rowan', sprite: SpriteEnum.rowan },
 	},
 	{
