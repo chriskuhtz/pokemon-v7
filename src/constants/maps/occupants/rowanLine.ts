@@ -246,7 +246,7 @@ export const rowanLine: Occupant[] = [
 		id: 'rowan_13',
 
 		unhandledMessage: [
-			'In Paldea, tauros has even split into multiple different species',
+			'The Paldea region also has some interesting regional variants',
 		],
 		handledMessage: ['How is the catching going'],
 		quest: 'catch a pokemon and its paldea variant',
@@ -265,5 +265,31 @@ export const rowanLine: Occupant[] = [
 			s.quests['catch a pokemon and its galarian variant'] === 'COLLECTED' &&
 			s.quests['catch a pokemon and its hisui variant'] === 'COLLECTED' &&
 			s.quests['catch a pokemon and its paldea variant'] !== 'COLLECTED',
+	},
+	{
+		...rowanBase,
+		id: 'rowan_14',
+
+		unhandledMessage: [
+			'In Paldea, tauros has even split into multiple different species',
+		],
+		handledMessage: ['How is the catching going'],
+		quest: 'catch all forms of tauros',
+		conditionFunction: (s) =>
+			s.campUpgrades['invite professor rowan'] &&
+			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in hoenn'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in sinnoh'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in unova'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in kalos'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in alola'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in galar'] === 'COLLECTED' &&
+			s.quests['catch a pokemon orginally found in paldea'] === 'COLLECTED' &&
+			s.quests['catch a pokemon and its alolan variant'] === 'COLLECTED' &&
+			s.quests['catch a pokemon and its galarian variant'] === 'COLLECTED' &&
+			s.quests['catch a pokemon and its hisui variant'] === 'COLLECTED' &&
+			s.quests['catch a pokemon and its paldea variant'] == 'COLLECTED' &&
+			s.quests['catch all forms of tauros'] !== 'COLLECTED',
 	},
 ];

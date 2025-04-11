@@ -21,7 +21,7 @@ import { routeN1 } from '../maps/routeN1';
 import { routeN1E1 } from '../maps/routeN1E1';
 import { routeS1 } from '../maps/routeS1';
 import { routeS1E1 } from '../maps/routeS1E1';
-import { pokemonNames } from '../pokemonNames';
+import { PokemonName, pokemonNames } from '../pokemonNames';
 import { CampUpgrade, campUpgradeNames } from './campUpgrades';
 
 const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
@@ -322,6 +322,7 @@ export const questNames = [
 	'catch a pokemon and its galarian variant',
 	'catch a pokemon and its hisui variant',
 	'catch a pokemon and its paldea variant',
+	'catch all forms of tauros',
 	'defeat rowan',
 	'craft a apricorn ball',
 	'lure a pokemon with honey',
@@ -585,6 +586,28 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				s.pokemon.some((result) =>
 					[search.name + '-paldea'].includes(result.name)
 				)
+			);
+		},
+		kind: 'QUEST_LINE',
+	},
+	'catch all forms of tauros': {
+		rewardItems: { 'big-malasada': 2 },
+		researchPoints: 20,
+		targetPokemon: [
+			'tauros',
+			'tauros-paldea-aqua-breed',
+			'tauros-paldea-blaze-breed',
+			'tauros-paldea-combat-breed',
+		],
+		conditionFunction: (s) => {
+			const alltauros: PokemonName[] = [
+				'tauros',
+				'tauros-paldea-aqua-breed',
+				'tauros-paldea-blaze-breed',
+				'tauros-paldea-combat-breed',
+			];
+			return alltauros.every(
+				(name) => s.pokedex[name].caughtOnRoutes.length > 0
 			);
 		},
 		kind: 'QUEST_LINE',
@@ -1177,7 +1200,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 1',
-		availableAfter: 'catch a pokemon and its paldea variant',
+		availableAfter: 'catch all forms of tauros',
 	},
 	'defeat elm': {
 		rewardItems: {
