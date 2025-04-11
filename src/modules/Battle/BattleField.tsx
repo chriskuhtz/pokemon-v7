@@ -500,7 +500,16 @@ export const BattleField = ({
 						battleFieldEffects
 					);
 
+					const allyIsHealer = !!pokemon.find(
+						(ally) =>
+							ally.id !== p.id &&
+							ally.ownerId === p.ownerId &&
+							ally.status === 'ONFIELD' &&
+							ally.ability === 'healer'
+					);
+
 					updated = applyEndOfTurnAbility({
+						allyIsHealer,
 						initialPokemon: [...initOpponents, ...initTeam].find(
 							(initPok) => initPok.id === p.id
 						),

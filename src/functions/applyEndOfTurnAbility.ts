@@ -1,5 +1,9 @@
 import { Message } from '../hooks/useMessageQueue';
-import { RAIN_DISH_FACTOR, SHED_SKIN_CHANCE } from '../interfaces/Ailment';
+import {
+	HEALER_CHANCE,
+	RAIN_DISH_FACTOR,
+	SHED_SKIN_CHANCE,
+} from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
@@ -11,11 +15,13 @@ export const applyEndOfTurnAbility = ({
 	pokemon,
 	addMessage,
 	weather,
+	allyIsHealer,
 }: {
 	initialPokemon?: BattlePokemon;
 	pokemon: BattlePokemon;
 	addMessage: (x: Message) => void;
 	weather?: WeatherType;
+	allyIsHealer: boolean;
 }): BattlePokemon => {
 	if (pokemon.ability === 'speed-boost') {
 		return applyStatChangeToPokemon(
@@ -87,6 +93,15 @@ export const applyEndOfTurnAbility = ({
 			secondaryAilments: pokemon.secondaryAilments.filter(
 				(ail) => ail.type !== 'unburdened'
 			),
+		};
+	}
+	if (allyIsHealer && pokemon.primaryAilment && Math.random() < HEALER_CHANCE) {
+		addMessage({
+			message: `${pokemon.data.name} was healed by its partner`,
+		});
+		return {
+			...pokemon,
+			primaryAilment: undefined,
 		};
 	}
 	return pokemon;
