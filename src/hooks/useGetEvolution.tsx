@@ -1,12 +1,12 @@
 import { useFetch } from '@potfisch-industries-npm/usefetch';
 import { useEffect, useMemo, useState } from 'react';
+import { deAlternate } from '../functions/handleAlternateForms';
 import {
 	EvolutionChainData,
 	EvolutionChainLink,
 } from '../interfaces/EvolutionChainData';
 import { PokemonData } from '../interfaces/PokemonData';
 import { PokemonSpeciesData } from '../interfaces/PokemonSpeciesData';
-import { deAlternate } from '../functions/handleAlternateForms';
 
 export const getSpeciesForPokemon = async (
 	data: PokemonData
@@ -78,5 +78,13 @@ export const useGetEvolution = (
 		return correctLink.evolves_to;
 	}, [data.name, flattenedChain]);
 
-	return { evos, invalidate };
+	const exceptionCheckedEvos = evos?.map((e) => {
+		//@ts-expect-error this is an error in the api
+		if (e.species.name === 'oinkologne') {
+			return { ...e, species: { ...e.species, name: 'oinkologne-male' } };
+		}
+		return e;
+	});
+	//@ts-expect-error this is an error in the api
+	return { evos: exceptionCheckedEvos, invalidate };
 };
