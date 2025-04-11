@@ -658,7 +658,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'moon-stone': 2 },
 		researchPoints: 25,
 		conditionFunction: (s) => {
-			return !!s.mileStones.hasEvolvedAPokemonWithAHeldItem;
+			return !!s.mileStones.hasEvolvedAPokemonThroughFriendship;
 		},
 		kind: 'QUEST_LINE',
 		availableAfter: 'evolve a pokemon with a held item',

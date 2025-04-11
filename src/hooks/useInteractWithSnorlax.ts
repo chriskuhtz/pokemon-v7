@@ -30,7 +30,7 @@ export const useInteractWithSnorlax = () => {
 					team: [
 						makeChallengerPokemon({
 							name: 'snorlax',
-							xp: 8000,
+							xp: 64000,
 						}),
 					],
 				};
