@@ -275,6 +275,7 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'show physical special attack type somewhere', handled: true },
+	{ name: 'refactor cooking', handled: true },
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'improve held-item+trade evo condition' },
 	{ name: 'refine battle end' },
@@ -374,5 +375,6 @@ export const extraFeatureCheckList: {
 	{ name: 'trainers need cooldown timers' },
 	{ name: 'gender needs to be visible in battle' },
 	{ name: 'training field: random from tier x' },
-	{ name: 'refactor cooking' },
+	{ name: 'rowan: diglett wiglett, alolan diglett' },
+	{ name: 'defeat x trainer should give malasada as reward' },
 ];

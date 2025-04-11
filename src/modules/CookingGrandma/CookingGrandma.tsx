@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
+import { ItemType } from '../../interfaces/Item';
 import { AnimatedBar } from '../../uiComponents/AnimatedBar/AnimatedBar';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
@@ -12,7 +13,7 @@ export const CookingGrandma = (): JSX.Element => {
 	const { enabledRecipes, disabledRecipes, cook } = useCookingGrandma();
 	const { saveFile } = useContext(SaveFileContext);
 	const navigate = useNavigate();
-	const [filter, setFilter] = useState<string | undefined>();
+	const [filter, setFilter] = useState<ItemType | undefined>('berry-juice');
 	return (
 		<Page
 			headline="Cooking with Chef Grandma"
@@ -25,8 +26,13 @@ export const CookingGrandma = (): JSX.Element => {
 					offset={Math.max(0, 100 - (saveFile.cookingSkill ?? 0))}
 				/>
 				<div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-					<strong>Filter:</strong>
-					{[...new Set(enabledRecipes.map((e) => e.result))].map((result) => (
+					<strong>What should we cook:</strong>
+					{[
+						...new Set([
+							...enabledRecipes.map((e) => e.result),
+							...disabledRecipes.map((e) => e.result),
+						]),
+					].map((result) => (
 						<button
 							key={result}
 							style={{
@@ -76,22 +82,34 @@ export const CookingGrandma = (): JSX.Element => {
 							))}
 						/>
 					))}
-				{disabledRecipes.map((recipe, index) => (
-					<Card
-						disabled
-						icon={<ItemSprite item={recipe.result} grayscale />}
-						key={recipe.result + index}
-						content={
-							<div>
-								<h3>{recipe.result}</h3>
-								<p>Ingredients: {recipe.ingredients.join(', ')}</p>
-							</div>
+				{disabledRecipes
+					.filter((recipe) => {
+						if (!filter) {
+							return true;
 						}
-						actionElements={recipe.ingredients.map((ing) => (
-							<ItemSprite item={ing} grayscale={saveFile.bag[ing] <= 0} />
-						))}
-					/>
-				))}
+						return recipe.result === filter;
+					})
+					.map((recipe, index) => (
+						<Card
+							disabled
+							icon={<ItemSprite item={recipe.result} grayscale />}
+							key={recipe.result + index}
+							content={
+								<div>
+									<h3>{recipe.result}</h3>
+									<p>
+										Missing Ingredients:{' '}
+										{recipe.ingredients
+											.filter((ing) => saveFile.bag[ing] <= 0)
+											.join(', ')}
+									</p>
+								</div>
+							}
+							actionElements={recipe.ingredients.map((ing) => (
+								<ItemSprite item={ing} grayscale={saveFile.bag[ing] <= 0} />
+							))}
+						/>
+					))}
 			</Stack>
 		</Page>
 	);

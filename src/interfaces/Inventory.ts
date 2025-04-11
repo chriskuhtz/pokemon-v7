@@ -7,7 +7,7 @@ export const EmptyInventory: Inventory = Object.fromEntries(
 ) as Inventory;
 
 export const CompleteInventory: Inventory = Object.fromEntries(
-	itemTypes.map((item: ItemType) => [item, 10])
+	itemTypes.map((item: ItemType) => [item, 100])
 ) as Inventory;
 export const generateInventory = (wanted: Partial<Inventory>): Inventory => {
 	return joinInventories(EmptyInventory, wanted);

@@ -2,7 +2,7 @@ import { useCallback, useContext, useMemo } from 'react';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { joinInventories } from '../../../interfaces/Inventory';
-import { cookingBerries, ItemType } from '../../../interfaces/Item';
+import { berries, ItemType } from '../../../interfaces/Item';
 
 export interface Recipe {
 	result: ItemType;
@@ -11,6 +11,14 @@ export interface Recipe {
 }
 
 const BASE_RECIPES: Recipe[] = [
+	...berries.map(
+		(c) =>
+			({
+				result: 'berry-juice',
+				ingredients: ['oran-berry', c],
+				difficulty: 'EASY',
+			} as Recipe)
+	),
 	{
 		result: 'old-gateau',
 		ingredients: ['nanab-berry', 'bluk-berry', 'razz-berry'],
@@ -100,14 +108,6 @@ const BASE_RECIPES: Recipe[] = [
 		],
 		difficulty: 'EASY',
 	},
-	...cookingBerries.map(
-		(c) =>
-			({
-				result: 'berry-juice',
-				ingredients: ['oran-berry', c],
-				difficulty: 'EASY',
-			} as Recipe)
-	),
 ];
 
 export const recipeChanceMap = {
