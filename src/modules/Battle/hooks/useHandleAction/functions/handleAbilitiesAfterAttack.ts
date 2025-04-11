@@ -276,6 +276,31 @@ export const handleAbilitiesAfterAttack = (
 			message: `${updatedTarget.name} stole ${updatedAttacker.name}'s held item with pickpocket`,
 		});
 	}
+	//weak armor
+	if (
+		!isKO(updatedTarget) &&
+		updatedTarget.ability === 'weak-armor' &&
+		move.data.damage_class.name == 'physical'
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'speed',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'weak armor'
+		);
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'defense',
+			-1,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'weak armor'
+		);
+	}
 
 	//Aftermath
 	if (
@@ -289,5 +314,6 @@ export const handleAbilitiesAfterAttack = (
 			damage: Math.floor(updatedAttacker.damage + updatedAttacker.stats.hp / 4),
 		};
 	}
+
 	return { updatedAttacker, updatedTarget };
 };
