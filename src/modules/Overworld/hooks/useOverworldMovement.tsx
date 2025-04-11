@@ -19,16 +19,15 @@ export const useOverworldMovement = (
 	currentOccupants: Occupant[],
 	encounterRateModifier: { factor: number; upToXp: number }
 ) => {
+	const { saveFile, setCharacterLocationReducer: setCharacterLocation } =
+		useContext(SaveFileContext);
 	const {
-		saveFile: {
-			pokemon,
-			quests,
-			location: playerLocation,
-			currentSwarm,
-			campUpgrades,
-		},
-		setCharacterLocationReducer: setCharacterLocation,
-	} = useContext(SaveFileContext);
+		pokemon,
+		quests,
+		location: playerLocation,
+		currentSwarm,
+		campUpgrades,
+	} = saveFile;
 	const map = useMemo(() => mapsRecord[playerLocation.mapId], [playerLocation]);
 	const [encounterChance, setEncounterChance] =
 		useState<number>(baseEncounterRate);
@@ -41,6 +40,7 @@ export const useOverworldMovement = (
 		const stepOnPortal: OnStepPortal | undefined = map.occupants.find(
 			(o) =>
 				o.type === 'ON_STEP_PORTAL' &&
+				o.conditionFunction(saveFile) === true &&
 				o.x === playerLocation.x &&
 				o.y === playerLocation.y
 		) as OnStepPortal | undefined;
@@ -132,6 +132,7 @@ export const useOverworldMovement = (
 		playerLocation,
 		pokemon,
 		quests,
+		saveFile,
 		setCharacterLocation,
 		startEncounter,
 	]);
