@@ -660,7 +660,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/137/',
 		handled: true,
 	},
-	{ name: 'flare-boost', url: 'https://pokeapi.co/api/v2/ability/138/' },
+	{
+		name: 'flare-boost',
+		url: 'https://pokeapi.co/api/v2/ability/138/',
+		handled: true,
+	},
 	{ name: 'harvest', url: 'https://pokeapi.co/api/v2/ability/139/' },
 	{ name: 'telepathy', url: 'https://pokeapi.co/api/v2/ability/140/' },
 	{ name: 'moody', url: 'https://pokeapi.co/api/v2/ability/141/' },
@@ -890,6 +894,7 @@ export const abilityCheckList: {
 	{ name: 'shackle', url: 'https://pokeapi.co/api/v2/ability/10058/' },
 	{ name: 'decoy', url: 'https://pokeapi.co/api/v2/ability/10059/' },
 	{ name: 'shield', url: 'https://pokeapi.co/api/v2/ability/10060/' },
+	//banished
 	{
 		name: 'forecast',
 		url: 'https://pokeapi.co/api/v2/ability/59/',
@@ -1039,6 +1044,7 @@ export const abilityNames = [
 	'light-metal',
 	'multiscale',
 	'toxic-boost',
+	'flare-boost',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

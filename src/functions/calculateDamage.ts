@@ -552,6 +552,12 @@ export const calculateDamage = (
 		damageClass === 'physical'
 			? 1.5
 			: 1;
+	const flareBoostFactor =
+		attacker.primaryAilment?.type === 'burn' &&
+		attacker.ability === 'flare-boost' &&
+		damageClass === 'special'
+			? 1.5
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -604,7 +610,8 @@ export const calculateDamage = (
 				wiseGlassesFactor *
 				multiscaleFactor *
 				expertBeltFactor *
-				toxicBoostFactor
+				toxicBoostFactor *
+				flareBoostFactor
 		),
 		1
 	);
