@@ -13,6 +13,12 @@ export const routeS1E1Encounters: EncounterMap = {
 		{ name: 'ponyta-galar', minXp: 3375, maxXp: 15625, rarity: 'rare' },
 		{ name: 'tauros', minXp: 3375, maxXp: 15625, rarity: 'common' },
 		{ name: 'herdier', minXp: 3375, maxXp: 15625, rarity: 'medium' },
+		{
+			name: 'pikachu-libre',
+			minXp: 1000,
+			maxXp: 1000,
+			rarity: 'ultra-rare',
+		},
 	],
 	MORNING: [
 		{

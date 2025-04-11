@@ -22,6 +22,7 @@ export const honeyPokemon: PokemonName[] = [
 	'pineco',
 	'exeggcute',
 	'budew',
+	'pikachu-unova-cap',
 ];
 
 const HONEY_ENCOUNTER_OPTIONS: OwnedPokemon[] = honeyPokemon.map((h) =>

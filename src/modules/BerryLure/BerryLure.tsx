@@ -22,7 +22,7 @@ import { useStartEncounter } from '../Overworld/hooks/useStartEncounter';
 export const lureBerryEncountersN1: Record<PokemonType, PokemonName> = {
 	fire: 'tauros-paldea-blaze-breed',
 	water: 'tauros-paldea-aqua-breed',
-	electric: 'morpeko-full-belly',
+	electric: 'pikachu-cosplay',
 	grass: 'deerling',
 	ice: 'vulpix-alola',
 	fighting: 'tauros-paldea-combat-breed',
@@ -43,7 +43,7 @@ export const lureBerryEncountersN1: Record<PokemonType, PokemonName> = {
 export const lureBerryEncountersN1E1: Record<PokemonType, PokemonName> = {
 	fire: 'sizzlipede',
 	water: 'dewpider',
-	electric: 'charjabug',
+	electric: 'pikachu-original-cap',
 	grass: 'sewaddle',
 	ice: 'snom',
 	fighting: 'shroomish',
@@ -64,7 +64,7 @@ export const lureBerryEncountersN1E1: Record<PokemonType, PokemonName> = {
 export const lureBerryEncountersE1: Record<PokemonType, PokemonName> = {
 	fire: 'slugma',
 	water: 'quagsire',
-	electric: 'tadbulb',
+	electric: 'pikachu-hoenn-cap',
 	grass: 'bellsprout',
 	ice: 'bergmite',
 	fighting: 'tyrogue',
@@ -85,7 +85,7 @@ export const lureBerryEncountersE1: Record<PokemonType, PokemonName> = {
 export const lureBerryEncountersS1E1: Record<PokemonType, PokemonName> = {
 	fire: 'litleo',
 	water: 'panpour',
-	electric: 'pachirisu',
+	electric: 'pikachu-sinnoh-cap',
 	grass: 'gogoat',
 	ice: 'vulpix-alola',
 	fighting: 'makuhita',

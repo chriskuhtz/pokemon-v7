@@ -6,6 +6,12 @@ export const routeN1Encounters: EncounterMap = {
 		{ name: 'pikachu', minXp: 8, maxXp: 216, rarity: 'common' },
 		{ name: 'eevee', minXp: 8, maxXp: 216, rarity: 'common' },
 		{ name: 'rattata', minXp: 8, maxXp: 216, rarity: 'common' },
+		{
+			name: 'pikachu-pop-star',
+			minXp: 1000,
+			maxXp: 1000,
+			rarity: 'ultra-rare',
+		},
 	],
 	MORNING: [
 		{ name: 'sunkern', minXp: 8, maxXp: 216, rarity: 'common' },

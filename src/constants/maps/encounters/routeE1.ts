@@ -3,6 +3,12 @@ import { EncounterMap } from '../encounters';
 export const routeE1Encounters: EncounterMap = {
 	WATER: [],
 	BASE: [
+		{
+			name: 'pikachu-belle',
+			minXp: 1000,
+			maxXp: 1000,
+			rarity: 'ultra-rare',
+		},
 		{ name: 'growlithe', minXp: 3375, maxXp: 8000, rarity: 'medium' },
 		{ name: 'growlithe-hisui', minXp: 3375, maxXp: 8000, rarity: 'medium' },
 	],
