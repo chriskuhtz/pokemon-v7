@@ -66,6 +66,30 @@ export const getFlailPower = (hp: number, damage: number): number => {
 	// }
 };
 
+export const getMagnitudePower = () => {
+	const random = Math.random();
+
+	if (random > 0.95) {
+		return 10;
+	}
+	if (random > 0.85) {
+		return 30;
+	}
+	if (random > 0.65) {
+		return 50;
+	}
+	if (random > 0.35) {
+		return 70;
+	}
+	if (random > 0.15) {
+		return 90;
+	}
+	if (random > 0.05) {
+		return 110;
+	}
+	return 150;
+};
+
 export const getRolloutFactor = (turn: number, defenseCurled: boolean) => {
 	return turn * (defenseCurled ? 2 : 1);
 };
@@ -84,6 +108,9 @@ export const getPower = (
 	}
 	if (attack.name === 'flail' || attack.name === 'reversal') {
 		return getFlailPower(attacker.stats.hp, attacker.damage);
+	}
+	if (attack.name === 'magnitude') {
+		return getMagnitudePower();
 	}
 	if (attack.name === 'psywave') {
 		const factor = 0.5 + Math.random();
@@ -342,7 +369,10 @@ export const calculateDamage = (
 	const flyingFactor =
 		targetIsFlying && flyDoubleDamageMoves.includes(attack.name) ? 2 : 1;
 	const undergroundFactor =
-		targetIsUnderground && attack.name === 'earthquake' ? 2 : 1;
+		targetIsUnderground &&
+		(attack.name === 'earthquake' || attack.name === 'magnitude')
+			? 2
+			: 1;
 	const flashFireFactor =
 		attacker.secondaryAilments.some((a) => a.type === 'flash-fire') &&
 		attackType === 'fire'
