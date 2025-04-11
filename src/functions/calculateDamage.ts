@@ -522,6 +522,10 @@ export const calculateDamage = (
 		getHeldItem(attacker) === 'muscle-band' && damageClass === 'physical'
 			? 1.1
 			: 1;
+	const wiseGlassesFactor =
+		getHeldItem(attacker) === 'wise-glasses' && damageClass === 'special'
+			? 1.1
+			: 1;
 	const pursuitFactor =
 		target.moveQueue.length > 0 && target.moveQueue[0].type === 'Switch'
 			? 2
@@ -574,7 +578,8 @@ export const calculateDamage = (
 				defeatistFactor *
 				friendGuardFactor *
 				muscleBandFactor *
-				pursuitFactor
+				pursuitFactor *
+				wiseGlassesFactor
 		),
 		1
 	);

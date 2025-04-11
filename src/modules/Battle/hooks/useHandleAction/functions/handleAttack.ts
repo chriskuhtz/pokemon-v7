@@ -31,6 +31,7 @@ export const handleAllAttackCategories = ({
 	handleForceSwitch,
 	setBattleWeather,
 	leave,
+	removeSpikes,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
@@ -45,6 +46,7 @@ export const handleAllAttackCategories = ({
 	handleForceSwitch: (x: BattlePokemon, moveName: MoveName) => BattlePokemon[];
 	setBattleWeather: (w: WeatherType | undefined) => void;
 	leave: (outcome: 'WIN' | 'LOSS' | 'DRAW') => void;
+	removeSpikes: (ownerId: string) => void;
 }) => {
 	let updatedPokemon = [...pokemon];
 	const {
@@ -80,6 +82,7 @@ export const handleAllAttackCategories = ({
 					battleFieldEffects,
 					dampy,
 					target,
+					removeSpikes,
 				});
 			case 'heal':
 				return handleHealAttack({

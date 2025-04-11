@@ -10,7 +10,6 @@ export const handleMiss = (
 	pokemon: BattlePokemon[],
 	setPokemon: (x: BattlePokemon[]) => void,
 	addMessage: (x: Message) => void,
-	underPressure: boolean,
 	reason?: MissReason
 ) => {
 	if (reason === 'PROTECTED') {

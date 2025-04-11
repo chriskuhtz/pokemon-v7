@@ -5,6 +5,7 @@ import { calculateDamage } from '../../../../../../functions/calculateDamage';
 import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
 import { Message } from '../../../../../../hooks/useMessageQueue';
+import { isRemovedByRapidSpin } from '../../../../../../interfaces/Ailment';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../../../../interfaces/Weather';
@@ -23,6 +24,7 @@ export const handleDamageAttack = ({
 	battleFieldEffects,
 	target,
 	pokemon,
+	removeSpikes,
 }: {
 	attacker: BattlePokemon;
 	target: BattlePokemon;
@@ -32,6 +34,7 @@ export const handleDamageAttack = ({
 	battleWeather: WeatherType | undefined;
 	battleFieldEffects: BattleFieldEffect[];
 	dampy: { name: string } | undefined;
+	removeSpikes: (ownerId: string) => void;
 }): BattlePokemon[] => {
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
@@ -188,6 +191,19 @@ export const handleDamageAttack = ({
 				message: `${updatedAttacker.data.name} took ${absDrainValue} HP recoil damage`,
 			});
 		}
+	}
+
+	if (move.name === 'rapid-spin') {
+		addMessage({
+			message: `${updatedAttacker.name} blew away traps and other effects`,
+		});
+		updatedAttacker = {
+			...updatedAttacker,
+			secondaryAilments: (updatedAttacker.secondaryAilments ?? []).filter(
+				isRemovedByRapidSpin
+			),
+		};
+		removeSpikes(updatedTarget.ownerId);
 	}
 
 	//ABILITYCHECK

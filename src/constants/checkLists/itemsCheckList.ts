@@ -1111,7 +1111,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/243/',
 		handled: true,
 	},
-	{ name: 'wise-glasses', url: 'https://pokeapi.co/api/v2/item/244/' },
+	{
+		name: 'wise-glasses',
+		url: 'https://pokeapi.co/api/v2/item/244/',
+		handled: true,
+	},
 	{ name: 'expert-belt', url: 'https://pokeapi.co/api/v2/item/245/' },
 	{ name: 'light-clay', url: 'https://pokeapi.co/api/v2/item/246/' },
 	{ name: 'life-orb', url: 'https://pokeapi.co/api/v2/item/247/' },

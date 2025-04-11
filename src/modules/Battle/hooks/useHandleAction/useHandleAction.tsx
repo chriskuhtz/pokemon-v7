@@ -31,7 +31,8 @@ export const useHandleAction = (
 	handleForceSwitch: (x: BattlePokemon, moveName: MoveName) => BattlePokemon[],
 	addBattleFieldEffect: (x: BattleFieldEffect) => void,
 	battleFieldEffects: BattleFieldEffect[],
-	setBattleWeather: (w: WeatherType | undefined) => void
+	setBattleWeather: (w: WeatherType | undefined) => void,
+	removeSpikes: (ownerId: string) => void
 ) => {
 	const {
 		saveFile: { pokedex },
@@ -251,6 +252,7 @@ export const useHandleAction = (
 					handleForceSwitch,
 					setBattleWeather,
 					leave,
+					removeSpikes,
 				});
 
 				return;
@@ -270,6 +272,7 @@ export const useHandleAction = (
 			leave,
 			pokedex,
 			pokemon,
+			removeSpikes,
 			scatterCoins,
 			setBattleWeather,
 			setPokemon,

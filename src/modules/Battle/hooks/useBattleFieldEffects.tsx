@@ -36,6 +36,14 @@ export const useBattleFieldEffects = (
 		[addMessage]
 	);
 
+	const removeSpikes = useCallback((ownerId: string) => {
+		setBattleFieldEffects((bf) =>
+			bf.filter(
+				(effect) => effect.ownerId !== ownerId || effect.type !== 'spikes'
+			)
+		);
+	}, []);
+
 	const battleFieldEffects = useMemo(() => {
 		const res = [...bf];
 		if (onFieldOpponents.some((p) => p.ability === 'pressure')) {
@@ -125,5 +133,6 @@ export const useBattleFieldEffects = (
 		setBattleFieldEffects,
 		addBattleFieldEffect,
 		reduceBatttleFieldEffectDurations,
+		removeSpikes,
 	};
 };

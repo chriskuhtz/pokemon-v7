@@ -36,9 +36,6 @@ export const handleAttackStart = ({
 	const setPokemon = (input: BattlePokemon[]) => (updatedPokemon = input);
 
 	const move = m;
-	const underPressure = battleFieldEffects.some(
-		(b) => b.type === 'pressure' && b.ownerId !== attacker.ownerId
-	);
 	//lock in moves choose a random target at execution
 	const realTargetId = getActualTargetId({
 		pokemon,
@@ -75,27 +72,12 @@ export const handleAttackStart = ({
 		return { updatedPokemon, canAttack, target: undefined };
 	}
 	if (!target) {
-		handleNoTarget(
-			attacker,
-			move,
-			updatedPokemon,
-			setPokemon,
-			addMessage,
-			underPressure
-		);
+		handleNoTarget(attacker, move, updatedPokemon, setPokemon, addMessage);
 		return { updatedPokemon, canAttack: false, target: undefined };
 	}
 
 	if (dampy && SELF_DESTRUCTING_MOVES.includes(move.name)) {
-		handleDampy(
-			attacker,
-			move,
-			pokemon,
-			setPokemon,
-			addMessage,
-			dampy,
-			underPressure
-		);
+		handleDampy(attacker, move, pokemon, setPokemon, addMessage, dampy);
 		return { updatedPokemon, canAttack: false, target: undefined };
 	}
 
@@ -125,15 +107,7 @@ export const handleAttackStart = ({
 	);
 
 	if (miss) {
-		handleMiss(
-			attacker,
-			move,
-			pokemon,
-			setPokemon,
-			addMessage,
-			underPressure,
-			reason
-		);
+		handleMiss(attacker, move, pokemon, setPokemon, addMessage, reason);
 		return { updatedPokemon, canAttack: false, target: updatedTarget };
 	}
 

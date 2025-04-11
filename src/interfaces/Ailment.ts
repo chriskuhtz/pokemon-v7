@@ -60,6 +60,9 @@ export interface SecondaryAilment {
 export function isSecondaryAilment(x: { type: string }): x is SecondaryAilment {
 	return secondaryAilments.some((s) => s === x.type);
 }
+export const isRemovedByRapidSpin = (x: SecondaryAilment): boolean => {
+	return ['trap', 'leech-seed'].includes(x.type);
+};
 
 export type AilmentType = PrimaryAilmentType | SecondaryAilmentType;
 
