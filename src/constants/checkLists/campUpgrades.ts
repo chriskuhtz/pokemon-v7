@@ -17,6 +17,7 @@ export const campUpgradeNames = [
 	'invite flying pokemon expert falkner',
 	'invite professor rowan',
 	'invite professor elm',
+	'invite pikachu fan',
 	'training field 1',
 	'training field 2',
 	'training field 3',
@@ -57,6 +58,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'invite flying pokemon expert falkner': ['machete certification'],
 	'invite professor rowan': baseRequirements,
 	'invite professor elm': baseRequirements,
+	'invite pikachu fan': baseRequirements,
 	'machete certification': baseRequirements,
 	'training field 1': baseRequirements,
 	'training field 2': ['training field 1'],
@@ -100,6 +102,7 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	'invite professor rowan':
 		'professor rowan collects pokemon from all over the world',
 	'invite professor elm': 'professor elm studies pokemon evolution',
+	'invite pikachu fan': 'Tell me, are you a fan of the pikachu',
 	'machete certification': 'Safety Training for bush cutting',
 	'training field 1': 'Train your Pokemon against other trainers',
 	'training field 2': 'Invite Stronger Trainers (Lvl 20)',

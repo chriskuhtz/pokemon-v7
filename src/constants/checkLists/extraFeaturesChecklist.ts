@@ -286,6 +286,10 @@ export const extraFeatureCheckList: {
 		name: 'use Move.target as a switch case for attack handling',
 		handled: true,
 	},
+	{ name: 'itemsprite component', handled: true },
+	{ name: 'pikachu fan questline', handled: true },
+	{ name: 'quest: light ball pikachu' },
+	{ name: 'quest: different pikachus' },
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'refine battle end' },
 	{ name: 'tilemap should be only tuples' },
@@ -293,7 +297,6 @@ export const extraFeatureCheckList: {
 	{ name: 'consider weather/effects etc for opponent decisions' },
 	{ name: 'poison step damage' },
 	{ name: 'nicer ladder up sprite' },
-
 	{
 		name: 'different page that only loads the savefile and lets the user copy it',
 	},
@@ -345,12 +348,9 @@ export const extraFeatureCheckList: {
 	{ name: 'animation state for flying pokemon' },
 	{ name: 'eggs?' },
 	{ name: 'opponent "learns" about volt-absorb etc ' },
-	{ name: 'itemsprite component' },
 	{ name: 'play button for pokemon lofi' },
 	{ name: 'moving background (water,flowers)' },
 	{ name: 'data collection module (name, nCaught,nDefeated)' },
-	{ name: 'quest: light ball pikachu' },
-	{ name: 'quest: different pikachus' },
 	{ name: 'non regional to regional evos, pikachu => alola raichu' },
 	{ name: 'battleweather duration' },
 	{ name: 'show battle effects somewhere' },
@@ -364,7 +364,6 @@ export const extraFeatureCheckList: {
 	{ name: 'water on routeN1' },
 	{ name: 'path to next route (S1W1)' },
 	{ name: 'battlepoint shop' },
-	{ name: 'pikachu fan questline' },
 	{ name: 'dugtrio should not deliver fossils' },
 	{ name: 'make game playable in portrait mode' },
 	{
@@ -373,6 +372,7 @@ export const extraFeatureCheckList: {
 	{ name: 'trainers need cooldown timers' },
 	{ name: 'gender needs to be visible in battle' },
 	{ name: 'training field: random from tier x' },
+	{ name: 'training field 4' },
 	{ name: 'rowan: diglett wiglett, alolan diglett' },
 	{ name: 'defeat x trainer should give malasada as reward' },
 ];

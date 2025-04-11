@@ -14,6 +14,7 @@ import { vileplumeResearchers } from '../../../modules/VilePlumeScentResearcher/
 import { elmLine } from './elmLine';
 import { falknerLine } from './falknerLine';
 import { mortyLine } from './mortyLine';
+import { pikachuFanLine } from './pikachuFanLine';
 import { rowanLine } from './rowanLine';
 
 const oakBase: Omit<
@@ -337,6 +338,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) => s.campUpgrades['pokemon swarm radar'],
 		id: 'swarm radar',
 	},
+	...pikachuFanLine,
 	...falknerLine,
 	...oakLine,
 	...trainingField,

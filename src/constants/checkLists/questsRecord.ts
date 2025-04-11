@@ -405,7 +405,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => {
 			return s.pokedex.pikachu.caughtOnRoutes.length > 0;
 		},
-		kind: 'BULLETIN',
+		kind: 'QUEST_LINE',
 	},
 	'catch a feebas': {
 		rewardItems: { 'master-ball': 1 },
