@@ -545,6 +545,13 @@ export const calculateDamage = (
 		target.ability === 'multiscale' && target.damage === 0 ? 0.5 : 1;
 	const expertBeltFactor =
 		getHeldItem(attacker) === 'expert-belt' && typeFactor > 1 ? 1.2 : 1;
+	const toxicBoostFactor =
+		(attacker.primaryAilment?.type === 'poison' ||
+			attacker.primaryAilment?.type === 'toxic') &&
+		attacker.ability === 'toxic-boost' &&
+		damageClass === 'physical'
+			? 1.5
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -596,7 +603,8 @@ export const calculateDamage = (
 				pursuitFactor *
 				wiseGlassesFactor *
 				multiscaleFactor *
-				expertBeltFactor
+				expertBeltFactor *
+				toxicBoostFactor
 		),
 		1
 	);
