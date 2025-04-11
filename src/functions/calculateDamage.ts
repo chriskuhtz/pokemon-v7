@@ -23,6 +23,17 @@ import { getHeldItemFactor } from './getHeldItemFactor';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getRivalryFactor } from './getRivalryFactor';
 
+const getActualWeight = (weight: number, ability: AbilityName) => {
+	if (ability === 'heavy-metal') {
+		return weight * 2;
+	}
+	if (ability === 'light-metal') {
+		return weight * 0.5;
+	}
+
+	return weight;
+};
+
 export const getLowKickPower = (weight: number): number => {
 	if (weight > 200) return 120;
 	if (weight > 100) return 100;
@@ -249,8 +260,8 @@ export const calculateDamage = (
 	const { level } = calculateLevelData(attacker.xp);
 
 	const levelFactor = (2 * level) / 5 + 2;
-	const actualWeight =
-		target.data.weight * (target.ability === 'heavy-metal' ? 2 : 1);
+	const actualWeight = getActualWeight(target.data.weight, target.ability);
+
 	const power = getPower(
 		attacker,
 		attack,
