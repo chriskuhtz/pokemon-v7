@@ -1126,7 +1126,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/246/',
 		handled: true,
 	},
-	{ name: 'life-orb', url: 'https://pokeapi.co/api/v2/item/247/' },
+	{
+		name: 'life-orb',
+		url: 'https://pokeapi.co/api/v2/item/247/',
+		handled: true,
+	},
 	{ name: 'power-herb', url: 'https://pokeapi.co/api/v2/item/248/' },
 	{ name: 'toxic-orb', url: 'https://pokeapi.co/api/v2/item/249/' },
 	{ name: 'flame-orb', url: 'https://pokeapi.co/api/v2/item/250/' },

@@ -545,6 +545,7 @@ export const calculateDamage = (
 		target.ability === 'multiscale' && target.damage === 0 ? 0.5 : 1;
 	const expertBeltFactor =
 		getHeldItem(attacker) === 'expert-belt' && typeFactor > 1 ? 1.2 : 1;
+	const lifeOrbFactor = getHeldItem(attacker) === 'life-orb' ? 1.3 : 1;
 	const toxicBoostFactor =
 		(attacker.primaryAilment?.type === 'poison' ||
 			attacker.primaryAilment?.type === 'toxic') &&
@@ -611,7 +612,8 @@ export const calculateDamage = (
 				multiscaleFactor *
 				expertBeltFactor *
 				toxicBoostFactor *
-				flareBoostFactor
+				flareBoostFactor *
+				lifeOrbFactor
 		),
 		1
 	);

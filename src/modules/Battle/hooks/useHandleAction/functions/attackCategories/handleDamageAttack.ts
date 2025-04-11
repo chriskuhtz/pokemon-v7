@@ -193,6 +193,15 @@ export const handleDamageAttack = ({
 		}
 	}
 
+	if (getHeldItem(updatedAttacker) === 'life-orb' && actualDamage > 0) {
+		addMessage({ message: `${updatedAttacker.name} is hurt by life-orb` });
+		updatedAttacker = {
+			...updatedAttacker,
+			damage:
+				updatedAttacker.damage + Math.floor(updatedAttacker.stats.hp / 10),
+		};
+	}
+
 	if (move.name === 'rapid-spin') {
 		addMessage({
 			message: `${updatedAttacker.name} blew away traps and other effects`,
