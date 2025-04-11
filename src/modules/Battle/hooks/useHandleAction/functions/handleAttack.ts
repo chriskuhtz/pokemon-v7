@@ -154,11 +154,16 @@ export const handleAllAttackCategories = ({
 	setPokemon(
 		updatedPokemon.map((p) => {
 			if (p.id === attacker.id) {
+				const moveQueue =
+					move.multiHits > 1
+						? [{ ...move, multiHits: move.multiHits - 1, isAMultiHit: true }]
+						: p.moveQueue.slice(1);
+
 				return {
 					...checkAndHandleFainting(p, pokemon, addMessage),
 					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
-					biding: attacker.moveQueue.length > 0 ? p.biding : undefined,
-					moveQueue: [],
+					biding: p.moveQueue.length > 0 ? p.biding : undefined,
+					moveQueue,
 				};
 			}
 			return {

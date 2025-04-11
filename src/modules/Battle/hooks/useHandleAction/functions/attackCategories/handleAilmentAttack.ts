@@ -176,11 +176,6 @@ export const handleAilmentAttack = ({
 
 	//ATTACKER UPDATES
 
-	//update moveQueue
-	updatedAttacker = {
-		...updatedAttacker,
-		moveQueue: updatedAttacker.moveQueue.slice(1),
-	};
 	//reduce pp after all multihits are done
 	updatedAttacker = changeMovePP(
 		updatedAttacker,

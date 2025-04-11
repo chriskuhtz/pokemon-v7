@@ -125,13 +125,6 @@ export const handleWholeFieldEffectAttack = ({
 	//updated Target
 	const updatedTarget = { ...target };
 
-	//update moveQueue
-
-	updatedAttacker = {
-		...updatedAttacker,
-		moveQueue: updatedAttacker.moveQueue.slice(1),
-	};
-
 	updatedAttacker = changeMovePP(
 		updatedAttacker,
 		move.name,
