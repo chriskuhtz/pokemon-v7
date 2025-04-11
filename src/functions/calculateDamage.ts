@@ -249,10 +249,12 @@ export const calculateDamage = (
 	const { level } = calculateLevelData(attacker.xp);
 
 	const levelFactor = (2 * level) / 5 + 2;
+	const actualWeight =
+		target.data.weight * (target.ability === 'heavy-metal' ? 2 : 1);
 	const power = getPower(
 		attacker,
 		attack,
-		target.data.weight,
+		actualWeight,
 		calculateLevelData(attacker.xp).level
 	);
 
