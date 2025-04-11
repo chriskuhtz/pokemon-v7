@@ -3,21 +3,14 @@ import { applyAttackAilmentsToPokemon } from '../../../../../../functions/applyA
 import { applyAttackStatChanges } from '../../../../../../functions/applyAttackStatChanges';
 import { applySecondaryAilmentToPokemon } from '../../../../../../functions/applySecondaryAilmentToPokemon';
 import { calculateDamage } from '../../../../../../functions/calculateDamage';
-import { changeMovePP } from '../../../../../../functions/changeMovePP';
-import { determineMiss } from '../../../../../../functions/determineMiss';
-import { getActualTargetId } from '../../../../../../functions/getActualTargetId';
 import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
 import { getTypeNames } from '../../../../../../functions/getTypeNames';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
-import { EmptyStatObject } from '../../../../../../interfaces/StatObject';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
-import { handleMiss } from '../../../../functions/handleMiss';
-import { handleMoveBlockAilments } from '../../../../functions/handleMoveBlockAilments';
-import { handleNoTarget } from '../../../../functions/handleNoTarget';
 import { handleAbilitiesAfterAttack } from '../handleAbilitiesAfterAttack';
 
 export const handleAttack = ({
@@ -27,140 +20,31 @@ export const handleAttack = ({
 	move: m,
 	battleWeather,
 	scatterCoins,
-
-	addBattleFieldEffect,
 	battleFieldEffects,
-	setBattleWeather,
+	target,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
 	addMessage: (x: Message) => void;
 	move: BattleAttack;
 	battleWeather: WeatherType | undefined;
-	setBattleWeather: (x: WeatherType) => void;
 	scatterCoins: () => void;
-	addBattleFieldEffect: (x: BattleFieldEffect) => void;
 	battleFieldEffects: BattleFieldEffect[];
+	target: BattlePokemon;
 }): BattlePokemon[] => {
-	let updatedPokemon: BattlePokemon[] = [...pokemon];
-	const setPokemon = (input: BattlePokemon[]) => (updatedPokemon = input);
+	let updatedAttacker = { ...attacker };
+	let updatedTarget = { ...target };
+
+	const isFlying =
+		updatedTarget.moveQueue.length > 0 &&
+		updatedTarget.moveQueue[0].type === 'BattleAttack' &&
+		updatedTarget.moveQueue[0].name === 'fly';
+	const isUnderground =
+		updatedTarget.moveQueue.length > 0 &&
+		updatedTarget.moveQueue[0].type === 'BattleAttack' &&
+		updatedTarget.moveQueue[0].name === 'dig';
 
 	const move = m;
-	const underPressure = battleFieldEffects.some(
-		(b) => b.type === 'pressure' && b.ownerId !== attacker.ownerId
-	);
-	//lock in moves choose a random target at execution
-	const realTargetId = getActualTargetId({
-		pokemon,
-		attacker,
-		move,
-		addMessage,
-	});
-	const target = pokemon.find(
-		(p) => p.id === realTargetId && p.status === 'ONFIELD'
-	);
-
-	let updatedAttacker = { ...attacker };
-
-	const { canAttack, updatedAttacker: afterBlockers } = handleMoveBlockAilments(
-		{
-			attacker,
-			attack: move,
-			addMessage,
-			targetId: realTargetId,
-			battleFieldEffects,
-		}
-	);
-	updatedAttacker = afterBlockers;
-
-	if (!canAttack) {
-		setPokemon(
-			updatedPokemon.map((p) => {
-				if (p.id === updatedAttacker.id) {
-					return updatedAttacker;
-				}
-				return p;
-			})
-		);
-		return updatedPokemon;
-	}
-	if (!target) {
-		handleNoTarget(
-			attacker,
-			move,
-			updatedPokemon,
-			setPokemon,
-			addMessage,
-			underPressure
-		);
-		return updatedPokemon;
-	}
-	const selfTargeting = move.data.target.name === 'user';
-
-	//MESSAGES
-	if (!selfTargeting) {
-		addMessage({
-			message: `${attacker.data.name} used ${move.name} against ${target.data.name}`,
-		});
-	} else {
-		addMessage({
-			message: `${attacker.data.name} used ${move.name} `,
-		});
-	}
-
-	//WEATHER MOVES
-	if (move.name === 'sunny-day') {
-		setBattleWeather('sun');
-	}
-	if (move.name === 'hail') {
-		setBattleWeather('hail');
-	}
-	if (move.name === 'sandstorm') {
-		setBattleWeather('sandstorm');
-	}
-	if (move.name === 'rain-dance') {
-		setBattleWeather('rain');
-	}
-
-	if (move.name === 'spider-web') {
-		addBattleFieldEffect({
-			type: move.name as BattleFieldEffect['type'],
-			ownerId: target.ownerId,
-			duration: 9000,
-		});
-		setPokemon(
-			updatedPokemon.map((p) => {
-				if (p.id === updatedAttacker.id) {
-					return {
-						...changeMovePP(updatedAttacker, move.name, -1),
-						moveQueue: [],
-					};
-				}
-
-				return p;
-			})
-		);
-		return updatedPokemon;
-	}
-	if (move.name === 'haze') {
-		addMessage({
-			message: `${attacker.name} removed all stat changes with haze`,
-		});
-		setPokemon(
-			updatedPokemon.map((p) => {
-				if (p.id === updatedAttacker.id) {
-					return {
-						...changeMovePP(updatedAttacker, move.name, -1),
-						moveQueue: [],
-						statBoosts: EmptyStatObject,
-					};
-				}
-
-				return { ...p, statBoosts: EmptyStatObject };
-			})
-		);
-		return updatedPokemon;
-	}
 
 	if (move.name === 'bide') {
 		if (!updatedAttacker.biding) {
@@ -184,39 +68,6 @@ export const handleAttack = ({
 		updatedAttacker.furyCutterStack =
 			(updatedAttacker.furyCutterStack ?? 0) + 1;
 	} else updatedAttacker.furyCutterStack = 0;
-
-	//updated Target
-	let updatedTarget = { ...target };
-
-	const isFlying =
-		updatedTarget.moveQueue.length > 0 &&
-		updatedTarget.moveQueue[0].type === 'BattleAttack' &&
-		updatedTarget.moveQueue[0].name === 'fly';
-	const isUnderground =
-		updatedTarget.moveQueue.length > 0 &&
-		updatedTarget.moveQueue[0].type === 'BattleAttack' &&
-		updatedTarget.moveQueue[0].name === 'dig';
-	const { miss, reason } = determineMiss(
-		move,
-		attacker,
-		target,
-		battleWeather,
-		isFlying,
-		isUnderground
-	);
-
-	if (miss) {
-		handleMiss(
-			attacker,
-			move,
-			updatedPokemon,
-			setPokemon,
-			addMessage,
-			underPressure,
-			reason
-		);
-		return updatedPokemon;
-	}
 
 	if (
 		move.name === 'curse' &&
@@ -285,26 +136,6 @@ export const handleAttack = ({
 		});
 	}
 
-	//reduce pp after all multihits are done
-	if (!move.isAMultiHit) {
-		updatedAttacker = changeMovePP(
-			updatedAttacker,
-			move.name,
-			underPressure ? -2 : -1
-		);
-	}
-
-	//apply stat changes
-	if (selfTargeting) {
-		updatedAttacker = applyAttackStatChanges(
-			updatedAttacker,
-			updatedAttacker.ability,
-			move,
-			addMessage,
-			true,
-			battleFieldEffects
-		);
-	}
 	const targetIsSafeguarded = battleFieldEffects.some(
 		(b) => b.type === 'safeguard' && b.ownerId === updatedTarget.ownerId
 	);
@@ -313,117 +144,116 @@ export const handleAttack = ({
 	);
 
 	//TARGET
-	if (!selfTargeting) {
-		// apply damage
-		const { consumedHeldItem, damage, criticalHit, wasSuperEffective } =
-			calculateDamage(
-				updatedAttacker,
-				target,
-				move,
-				battleWeather,
-				battleFieldEffects,
-				true,
-				isFlying,
-				isUnderground,
-				addMessage
-			);
-		const actualDamage = getMiddleOfThree([
-			0,
-			damage,
-			updatedTarget.stats.hp - updatedTarget.damage,
-		]);
-		if (consumedHeldItem) {
-			addMessage({
-				message: `${updatedTarget.name} consumed its ${getHeldItem(
-					updatedTarget,
-					false
-				)} to reduce the damage`,
-			});
-		}
-		if (
-			getHeldItem(updatedAttacker) === 'shell-bell' &&
-			damage !== 0 &&
-			updatedAttacker.damage !== 0
-		) {
-			addMessage({
-				message: `${updatedAttacker.name} healed itself with shell bell`,
-			});
 
-			const restored = getMiddleOfThree([Math.floor(damage / 8), 1, 1]);
-			updatedAttacker = {
-				...updatedAttacker,
-				damage: getMiddleOfThree([0, 0, updatedAttacker.damage - restored]),
-			};
-		}
-		updatedTarget = {
-			...updatedTarget,
-			damage: updatedTarget.damage + actualDamage,
-			//setLastReceivedDamage
-			lastReceivedDamage: {
-				attack: move,
-				damage: actualDamage,
-				applicatorId: attacker.id,
-				wasSuperEffective: !!wasSuperEffective,
-				wasPhysical: move.data.damage_class.name === 'physical',
-				wasSpecial: move.data.damage_class.name === 'special',
-			},
-			heldItemName: consumedHeldItem
-				? undefined
-				: getHeldItem(updatedTarget, false),
-			biding: updatedTarget.biding
-				? {
-						...updatedTarget.biding,
-						damage: updatedTarget.biding.damage + damage,
-				  }
-				: undefined,
+	// apply damage
+	const { consumedHeldItem, damage, criticalHit, wasSuperEffective } =
+		calculateDamage(
+			updatedAttacker,
+			target,
+			move,
+			battleWeather,
+			battleFieldEffects,
+			true,
+			isFlying,
+			isUnderground,
+			addMessage
+		);
+	const actualDamage = getMiddleOfThree([
+		0,
+		damage,
+		updatedTarget.stats.hp - updatedTarget.damage,
+	]);
+	if (consumedHeldItem) {
+		addMessage({
+			message: `${updatedTarget.name} consumed its ${getHeldItem(
+				updatedTarget,
+				false
+			)} to reduce the damage`,
+		});
+	}
+	if (
+		getHeldItem(updatedAttacker) === 'shell-bell' &&
+		damage !== 0 &&
+		updatedAttacker.damage !== 0
+	) {
+		addMessage({
+			message: `${updatedAttacker.name} healed itself with shell bell`,
+		});
+
+		const restored = getMiddleOfThree([Math.floor(damage / 8), 1, 1]);
+		updatedAttacker = {
+			...updatedAttacker,
+			damage: getMiddleOfThree([0, 0, updatedAttacker.damage - restored]),
 		};
+	}
+	updatedTarget = {
+		...updatedTarget,
+		damage: updatedTarget.damage + actualDamage,
+		//setLastReceivedDamage
+		lastReceivedDamage: {
+			attack: move,
+			damage: actualDamage,
+			applicatorId: attacker.id,
+			wasSuperEffective: !!wasSuperEffective,
+			wasPhysical: move.data.damage_class.name === 'physical',
+			wasSpecial: move.data.damage_class.name === 'special',
+		},
+		heldItemName: consumedHeldItem
+			? undefined
+			: getHeldItem(updatedTarget, false),
+		biding: updatedTarget.biding
+			? {
+					...updatedTarget.biding,
+					damage: updatedTarget.biding.damage + damage,
+			  }
+			: undefined,
+	};
 
-		//apply ailments
-		const { updatedApplicator: a, updatedTarget: b } =
-			applyAttackAilmentsToPokemon(
-				updatedTarget,
-				updatedAttacker,
-				move,
-				addMessage,
-				battleWeather,
-				targetIsSafeguarded
-			);
-		updatedAttacker = a;
-		updatedTarget = b;
-		// apply stat changes
-		if (
-			move.data.meta.category.name === 'damage+lower' ||
-			move.data.target.name === 'all-opponents' ||
-			move.data.target.name === 'selected-pokemon' ||
-			move.data.target.name === 'opponents-field'
-		) {
-			updatedTarget = applyAttackStatChanges(
-				updatedTarget,
-				updatedAttacker.ability,
-				move,
-				addMessage,
-				false,
-				battleFieldEffects
-			);
-		}
-
-		const { updatedAttacker: afterAbilityCheck, updatedTarget: t } =
-			handleAbilitiesAfterAttack(
-				updatedAttacker,
-				updatedTarget,
-				move,
-				addMessage,
-				attackerIsSafeguarded,
-				battleWeather,
-				criticalHit,
-				damage,
-				battleFieldEffects
-			);
-		updatedAttacker = { ...afterAbilityCheck };
-		updatedTarget = { ...t };
+	//apply ailments
+	const { updatedApplicator: a, updatedTarget: b } =
+		applyAttackAilmentsToPokemon(
+			updatedTarget,
+			updatedAttacker,
+			move,
+			addMessage,
+			battleWeather,
+			targetIsSafeguarded
+		);
+	updatedAttacker = a;
+	updatedTarget = b;
+	// apply stat changes
+	if (
+		move.data.meta.category.name === 'damage+lower' ||
+		move.data.target.name === 'all-opponents' ||
+		move.data.target.name === 'selected-pokemon' ||
+		move.data.target.name === 'opponents-field'
+	) {
+		updatedTarget = applyAttackStatChanges(
+			updatedTarget,
+			updatedAttacker.ability,
+			move,
+			addMessage,
+			false,
+			battleFieldEffects
+		);
 	}
 
-	return updatedPokemon.map((p) => {
+	const { updatedAttacker: afterAbilityCheck, updatedTarget: t } =
+		handleAbilitiesAfterAttack(
+			updatedAttacker,
+			updatedTarget,
+			move,
+			addMessage,
+			attackerIsSafeguarded,
+			battleWeather,
+			criticalHit,
+			damage,
+			battleFieldEffects
+		);
+	updatedAttacker = { ...afterAbilityCheck };
+	updatedTarget = { ...t };
+
+	return pokemon.map((p) => {
 		if (p.id === updatedAttacker.id) {
 			return updatedAttacker;
 		}

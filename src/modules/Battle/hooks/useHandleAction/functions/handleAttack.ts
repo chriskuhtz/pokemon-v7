@@ -13,6 +13,9 @@ import { handleHealAttack } from './attackCategories/handleHealAttack';
 import { handleNetGoodStatsAttack } from './attackCategories/handleNetGoodStatsAttack';
 import { handleUniqueMoves } from './attackCategories/handleUniqueMoves';
 import { handleWholeFieldEffectAttack } from './attackCategories/handleWholeFieldEffectAttack';
+import { handleAttackStart } from './handleAttackStart';
+
+import { changeMovePP } from '../../../../../functions/changeMovePP';
 
 export const handleAllAttackCategories = ({
 	attacker,
@@ -43,8 +46,23 @@ export const handleAllAttackCategories = ({
 	setBattleWeather: (w: WeatherType | undefined) => void;
 	leave: (outcome: 'WIN' | 'LOSS' | 'DRAW') => void;
 }) => {
+	let updatedPokemon = [...pokemon];
+	const {
+		updatedPokemon: ua,
+		canAttack,
+		target,
+	} = handleAttackStart({
+		attacker,
+		pokemon,
+		addMessage,
+		move,
+		battleWeather,
+		battleFieldEffects,
+		dampy,
+	});
+	updatedPokemon = ua;
 	//determine attacker and target
-	const handleMoveCategories = (): BattlePokemon[] => {
+	const handleMoveCategories = (target: BattlePokemon): BattlePokemon[] => {
 		console.log('CATEGORY', move.data.meta.category.name);
 		switch (move.data.meta.category.name) {
 			case 'damage':
@@ -61,6 +79,7 @@ export const handleAllAttackCategories = ({
 					battleWeather,
 					battleFieldEffects,
 					dampy,
+					target,
 				});
 			case 'heal':
 				return handleHealAttack({
@@ -68,7 +87,6 @@ export const handleAllAttackCategories = ({
 					pokemon,
 					addMessage,
 					move,
-					battleFieldEffects,
 				});
 			case 'force-switch':
 				return handleForceSwitch(attacker, move.name);
@@ -78,27 +96,18 @@ export const handleAllAttackCategories = ({
 					pokemon,
 					addMessage,
 					move,
-					battleWeather,
-					scatterCoins,
-					setBattleWeather,
-					dampy,
 					addBattleFieldEffect,
 					battleFieldEffects,
 					leave,
+					target,
 				});
 			case 'field-effect':
 				return handleFieldEffectMoves({
 					attacker,
 					pokemon,
-					addMessage,
 					move,
-					battleWeather,
-					scatterCoins,
-					setBattleWeather,
-					dampy,
 					addBattleFieldEffect,
-					battleFieldEffects,
-					leave,
+					target,
 				});
 			case 'ailment':
 				return handleAilmentAttack({
@@ -112,6 +121,7 @@ export const handleAllAttackCategories = ({
 					dampy,
 					addBattleFieldEffect,
 					battleFieldEffects,
+					target,
 				});
 			case 'net-good-stats':
 				return handleNetGoodStatsAttack({
@@ -119,8 +129,8 @@ export const handleAllAttackCategories = ({
 					pokemon,
 					addMessage,
 					move,
-					battleWeather,
 					battleFieldEffects,
+					target,
 				});
 			case 'whole-field-effect':
 				return handleWholeFieldEffectAttack({
@@ -129,7 +139,7 @@ export const handleAllAttackCategories = ({
 					addMessage,
 					move,
 					setBattleWeather,
-					battleFieldEffects,
+					target,
 				});
 			case 'swagger':
 				return handleAttack({
@@ -139,30 +149,42 @@ export const handleAllAttackCategories = ({
 					move,
 					battleWeather,
 					scatterCoins,
-					setBattleWeather,
-
-					addBattleFieldEffect,
 					battleFieldEffects,
+					target,
 				});
 		}
 	};
-
-	const updatedPokemon = handleMoveCategories();
+	if (canAttack && target) {
+		updatedPokemon = handleMoveCategories(target);
+	}
 
 	//SetPokemon
 
 	setPokemon(
 		updatedPokemon.map((p) => {
 			if (p.id === attacker.id) {
+				const underPressure = battleFieldEffects.some(
+					(b) => b.type === 'pressure' && b.ownerId !== attacker.ownerId
+				);
+				let updatedAttacker = { ...p };
 				const moveQueue =
 					move.multiHits > 1
 						? [{ ...move, multiHits: move.multiHits - 1, isAMultiHit: true }]
 						: p.moveQueue.slice(1);
 
+				updatedAttacker = changeMovePP(
+					updatedAttacker,
+					move.name,
+					underPressure ? -2 : -1
+				);
+
 				return {
-					...checkAndHandleFainting(p, pokemon, addMessage),
+					...checkAndHandleFainting(updatedAttacker, pokemon, addMessage),
 					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
-					biding: p.moveQueue.length > 0 ? p.biding : undefined,
+					biding:
+						updatedAttacker.moveQueue.length > 0
+							? updatedAttacker.biding
+							: undefined,
 					moveQueue,
 				};
 			}

@@ -2,9 +2,6 @@ import { SELF_DESTRUCTING_MOVES } from '../../../../../../constants/selfDestruct
 import { applyAttackAilmentsToPokemon } from '../../../../../../functions/applyAttackAilmentsToPokemon';
 import { applyAttackStatChanges } from '../../../../../../functions/applyAttackStatChanges';
 import { calculateDamage } from '../../../../../../functions/calculateDamage';
-import { changeMovePP } from '../../../../../../functions/changeMovePP';
-import { determineMiss } from '../../../../../../functions/determineMiss';
-import { getActualTargetId } from '../../../../../../functions/getActualTargetId';
 import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
 import { Message } from '../../../../../../hooks/useMessageQueue';
@@ -12,10 +9,6 @@ import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
-import { handleDampy } from '../../../../functions/handleDampy';
-import { handleMiss } from '../../../../functions/handleMiss';
-import { handleMoveBlockAilments } from '../../../../functions/handleMoveBlockAilments';
-import { handleNoTarget } from '../../../../functions/handleNoTarget';
 import { handleAbilitiesAfterAttack } from '../handleAbilitiesAfterAttack';
 
 /**
@@ -24,14 +17,15 @@ import { handleAbilitiesAfterAttack } from '../handleAbilitiesAfterAttack';
  */
 export const handleDamageAttack = ({
 	attacker,
-	pokemon,
 	addMessage,
 	move: m,
 	battleWeather,
 	battleFieldEffects,
-	dampy,
+	target,
+	pokemon,
 }: {
 	attacker: BattlePokemon;
+	target: BattlePokemon;
 	pokemon: BattlePokemon[];
 	addMessage: (x: Message) => void;
 	move: BattleAttack;
@@ -39,80 +33,9 @@ export const handleDamageAttack = ({
 	battleFieldEffects: BattleFieldEffect[];
 	dampy: { name: string } | undefined;
 }): BattlePokemon[] => {
-	let updatedPokemon: BattlePokemon[] = [...pokemon];
-	const setPokemon = (input: BattlePokemon[]) => (updatedPokemon = input);
-
-	const move = m;
-	const underPressure = battleFieldEffects.some(
-		(b) => b.type === 'pressure' && b.ownerId !== attacker.ownerId
-	);
-	//lock in moves choose a random target at execution
-	const realTargetId = getActualTargetId({
-		pokemon,
-		attacker,
-		move,
-		addMessage,
-	});
-	const target = pokemon.find(
-		(p) => p.id === realTargetId && p.status === 'ONFIELD'
-	);
-
 	let updatedAttacker = { ...attacker };
-
-	const { canAttack, updatedAttacker: afterBlockers } = handleMoveBlockAilments(
-		{
-			attacker,
-			attack: move,
-			addMessage,
-			targetId: realTargetId,
-			battleFieldEffects,
-		}
-	);
-	updatedAttacker = afterBlockers;
-
-	if (!canAttack) {
-		setPokemon(
-			updatedPokemon.map((p) => {
-				if (p.id === updatedAttacker.id) {
-					return updatedAttacker;
-				}
-				return p;
-			})
-		);
-		return updatedPokemon;
-	}
-	if (!target) {
-		handleNoTarget(
-			attacker,
-			move,
-			updatedPokemon,
-			setPokemon,
-			addMessage,
-			underPressure
-		);
-		return updatedPokemon;
-	}
-
-	if (dampy && SELF_DESTRUCTING_MOVES.includes(move.name)) {
-		handleDampy(
-			attacker,
-			move,
-			pokemon,
-			setPokemon,
-			addMessage,
-			dampy,
-			underPressure
-		);
-		return updatedPokemon;
-	}
-
-	//MESSAGES
-	addMessage({
-		message: `${attacker.data.name} used ${move.name} against ${target.data.name}`,
-	});
-
-	//UPDATED TARGET
 	let updatedTarget = { ...target };
+	const move = m;
 
 	const isFlying =
 		updatedTarget.moveQueue.length > 0 &&
@@ -122,36 +45,6 @@ export const handleDamageAttack = ({
 		updatedTarget.moveQueue.length > 0 &&
 		updatedTarget.moveQueue[0].type === 'BattleAttack' &&
 		updatedTarget.moveQueue[0].name === 'dig';
-	const { miss, reason } = determineMiss(
-		move,
-		attacker,
-		target,
-		battleWeather,
-		isFlying,
-		isUnderground
-	);
-
-	if (miss) {
-		handleMiss(
-			attacker,
-			move,
-			pokemon,
-			setPokemon,
-			addMessage,
-			underPressure,
-			reason
-		);
-		return updatedPokemon;
-	}
-
-	//reduce pp after all multihits are done
-	if (!move.isAMultiHit) {
-		updatedAttacker = changeMovePP(
-			updatedAttacker,
-			move.name,
-			underPressure ? -2 : -1
-		);
-	}
 
 	const attackerIsSafeguarded = battleFieldEffects.some(
 		(b) => b.type === 'safeguard' && b.ownerId === updatedAttacker.ownerId
@@ -350,7 +243,7 @@ export const handleDamageAttack = ({
 		updatedTarget = b;
 	}
 
-	return updatedPokemon.map((p) => {
+	return pokemon.map((p) => {
 		if (p.id === updatedAttacker.id) {
 			return updatedAttacker;
 		}

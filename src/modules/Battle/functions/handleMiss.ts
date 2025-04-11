@@ -1,5 +1,4 @@
 import { applyCrashDamage } from '../../../functions/applyCrashDamage';
-import { changeMovePP } from '../../../functions/changeMovePP';
 import { MissReason } from '../../../functions/determineMiss';
 import { Message } from '../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../interfaces/BattleActions';
@@ -33,12 +32,6 @@ export const handleMiss = (
 	let updatedAttacker = { ...attacker };
 	//1. update moveQueue
 	updatedAttacker = { ...updatedAttacker, moveQueue: [] };
-	//2. reduce pp
-	updatedAttacker = changeMovePP(
-		updatedAttacker,
-		attack.name,
-		underPressure ? -2 : -1
-	);
 
 	setPokemon(
 		pokemon.map((p) => {

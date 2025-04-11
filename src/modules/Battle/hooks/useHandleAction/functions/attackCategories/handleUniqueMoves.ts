@@ -5,17 +5,13 @@ import {
 	getRandomEntry,
 	getRandomIndex,
 } from '../../../../../../functions/filterTargets';
-import { getActualTargetId } from '../../../../../../functions/getActualTargetId';
 import { getMovesArray } from '../../../../../../functions/getMovesArray';
 import { handleMimicOrSketch } from '../../../../../../functions/handleMimic';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import { typeEffectivenessChart } from '../../../../../../interfaces/PokemonType';
-import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
-import { handleMoveBlockAilments } from '../../../../functions/handleMoveBlockAilments';
-import { handleNoTarget } from '../../../../functions/handleNoTarget';
 
 export const handleUniqueMoves = ({
 	attacker,
@@ -25,84 +21,25 @@ export const handleUniqueMoves = ({
 	battleFieldEffects,
 	leave,
 	addBattleFieldEffect,
+	target,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
 	addMessage: (x: Message) => void;
 	move: BattleAttack;
-	battleWeather: WeatherType | undefined;
-	setBattleWeather: (x: WeatherType) => void;
-	scatterCoins: () => void;
-	dampy?: { name: string };
 	addBattleFieldEffect: (x: BattleFieldEffect) => void;
 	battleFieldEffects: BattleFieldEffect[];
 	leave: (outcome: 'WIN' | 'LOSS' | 'DRAW') => void;
+	target: BattlePokemon;
 }): BattlePokemon[] => {
+	let updatedAttacker = { ...attacker };
+	let updatedTarget = { ...target };
 	let updatedPokemon: BattlePokemon[] = [...pokemon];
 	const setPokemon = (input: BattlePokemon[]) => (updatedPokemon = input);
 
 	const underPressure = battleFieldEffects.some(
 		(b) => b.type === 'pressure' && b.ownerId !== attacker.ownerId
 	);
-	//lock in moves choose a random target at execution
-	const realTargetId = getActualTargetId({
-		pokemon,
-		attacker,
-		move,
-		addMessage,
-	});
-	const target = pokemon.find(
-		(p) => p.id === realTargetId && p.status === 'ONFIELD'
-	);
-
-	let updatedAttacker = { ...attacker };
-
-	const { canAttack, updatedAttacker: afterBlockers } = handleMoveBlockAilments(
-		{
-			attacker,
-			attack: move,
-			addMessage,
-			targetId: realTargetId,
-			battleFieldEffects,
-		}
-	);
-	updatedAttacker = afterBlockers;
-
-	if (!canAttack) {
-		setPokemon(
-			updatedPokemon.map((p) => {
-				if (p.id === updatedAttacker.id) {
-					return updatedAttacker;
-				}
-				return p;
-			})
-		);
-		return updatedPokemon;
-	}
-	if (!target) {
-		handleNoTarget(
-			attacker,
-			move,
-			updatedPokemon,
-			setPokemon,
-			addMessage,
-			underPressure
-		);
-		return updatedPokemon;
-	}
-	let updatedTarget = { ...target };
-	const selfTargeting = move.data.target.name === 'user';
-
-	//MESSAGES
-	if (!selfTargeting) {
-		addMessage({
-			message: `${attacker.data.name} used ${move.name} against ${target.data.name}`,
-		});
-	} else {
-		addMessage({
-			message: `${attacker.data.name} used ${move.name} `,
-		});
-	}
 
 	if (move.name === 'disable') {
 		const moves = getMovesArray(target, { filterOutDisabled: false });
@@ -397,19 +334,6 @@ export const handleUniqueMoves = ({
 			ownerId: target.ownerId,
 			duration: 9000,
 		});
-		setPokemon(
-			updatedPokemon.map((p) => {
-				if (p.id === updatedAttacker.id) {
-					return {
-						...changeMovePP(updatedAttacker, move.name, -1),
-						moveQueue: [],
-					};
-				}
-
-				return p;
-			})
-		);
-		return updatedPokemon;
 	}
 
 	return updatedPokemon.map((p) => {
