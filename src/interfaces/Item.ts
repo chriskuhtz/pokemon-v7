@@ -374,7 +374,12 @@ export function isItem(x: string | undefined): x is ItemType {
 	return (itemTypes as unknown as string[]).includes(x ?? '');
 }
 export const hasEndOfTurnEffect = (item: ItemType): boolean => {
-	if (isBerry(item) || item === 'berry-juice' || isHerb(item)) {
+	if (
+		isBerry(item) ||
+		item === 'berry-juice' ||
+		item === 'leftovers' ||
+		isHerb(item)
+	) {
 		return true;
 	}
 	return false;
