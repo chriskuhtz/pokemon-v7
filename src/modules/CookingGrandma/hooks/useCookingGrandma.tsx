@@ -27,6 +27,16 @@ const BASE_RECIPES: Recipe[] = [
 		difficulty: 'TRICKY',
 	},
 	{
+		result: 'big-malasada',
+		ingredients: ['sitrus-berry', 'apicot-berry', 'grepa-berry'],
+		difficulty: 'TRICKY',
+	},
+	{
+		result: 'big-malasada',
+		ingredients: ['lum-berry', 'kebia-berry', 'pomeg-berry'],
+		difficulty: 'TRICKY',
+	},
+	{
 		result: 'lava-cookie',
 		ingredients: ['yache-berry', 'chilan-berry', 'pecha-berry'],
 		difficulty: 'MEDIUM',
