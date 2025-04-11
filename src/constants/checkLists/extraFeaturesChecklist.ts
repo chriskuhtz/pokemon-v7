@@ -288,7 +288,7 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'itemsprite component', handled: true },
 	{ name: 'pikachu fan questline', handled: true },
-	{ name: 'quest: light ball pikachu' },
+	{ name: 'quest: light ball pikachu', handled: true },
 	{ name: 'quest: different pikachus' },
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'refine battle end' },

@@ -28,4 +28,24 @@ export const pikachuFanLine: Occupant[] = [
 			s.campUpgrades['invite pikachu fan'] &&
 			s.quests['catch a pikachu'] !== 'COLLECTED',
 	},
+	{
+		...pikachuFanBase,
+		id: 'pikachuFan_2',
+
+		unhandledMessage: [
+			'sometimes',
+			'pikachu holds a rare item',
+			'that makes it much stronger',
+		],
+		handledMessage: [
+			'sometimes',
+			'pikachu holds a rare item',
+			'that makes it much stronger',
+		],
+		quest: 'find a lightball',
+		conditionFunction: (s) =>
+			s.campUpgrades['invite pikachu fan'] &&
+			s.quests['catch a pikachu'] === 'COLLECTED' &&
+			s.quests['find a lightball'] !== 'COLLECTED',
+	},
 ];

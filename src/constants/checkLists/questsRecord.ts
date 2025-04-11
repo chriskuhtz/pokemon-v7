@@ -301,6 +301,7 @@ const catchQuests = {
 export const questNames = [
 	...Object.keys(catchQuests),
 	'catch a pikachu',
+	'find a lightball',
 	'catch a feebas',
 	'catch a pokemon',
 	'catch a spiritomb',
@@ -404,6 +405,14 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: ['pikachu'],
 		conditionFunction: (s) => {
 			return s.pokedex.pikachu.caughtOnRoutes.length > 0;
+		},
+		kind: 'QUEST_LINE',
+	},
+	'find a lightball': {
+		rewardItems: { 'thunder-stone': 1 },
+		researchPoints: 30,
+		conditionFunction: (s) => {
+			return s.bag['light-ball'] > 0;
 		},
 		kind: 'QUEST_LINE',
 	},
