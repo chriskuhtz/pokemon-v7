@@ -13,17 +13,12 @@ export const useZigzagoonForagers = () => {
 	const { addMultipleMessages, addMessage } = useContext(MessageQueueContext);
 
 	const trade = useCallback(() => {
-		if (saveFile.bag['moomoo-milk'] <= 0) {
-			addMultipleMessages([
-				{ message: 'Zigzagoon looks ready to forage' },
-				{ message: 'But You dont have any moomoo milk' },
-			]);
-			return;
-		}
-
 		const now = new Date().getTime();
 
-		if (!saveFile.zigzagoonReadyAt || now > saveFile.zigzagoonReadyAt) {
+		if (
+			(!saveFile.zigzagoonReadyAt || now > saveFile.zigzagoonReadyAt) &&
+			saveFile.bag['moomoo-milk'] > 0
+		) {
 			const foragedItem = getRandomEntry(pickupTable);
 			const amount = 1; // getRandomEntry([1, 2, 3, 4, 5]);
 			addMultipleMessages([
@@ -39,6 +34,12 @@ export const useZigzagoonForagers = () => {
 				}),
 				zigzagoonReadyAt: Math.random() > 0.75 ? now + ONE_HOUR / 4 : undefined,
 			});
+		} else if (saveFile.bag['moomoo-milk'] <= 0) {
+			addMultipleMessages([
+				{ message: 'Zigzagoon looks ready to forage' },
+				{ message: 'But You dont have any moomoo milk' },
+			]);
+			return;
 		} else {
 			addMessage({ message: 'Zigzagoon seems to need a little break' });
 		}
