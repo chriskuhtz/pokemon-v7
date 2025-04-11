@@ -86,6 +86,7 @@ export const handleAllAttackCategories = ({
 					pokemon,
 					addMessage,
 					move,
+					battleWeather,
 				});
 			case 'force-switch':
 				return handleForceSwitch(attacker, move.name);
