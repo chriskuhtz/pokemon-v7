@@ -8,6 +8,7 @@ import {
 	campUpgradeNames,
 } from '../../constants/checkLists/campUpgrades';
 import { battleSpriteSize } from '../../constants/gameData';
+import { replaceRouteName } from '../../functions/replaceRouteName';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Card } from '../../uiComponents/Card/Card';
@@ -86,7 +87,7 @@ export const CampUpgrades = ({
 						disabled={campUpgrades[upgrade]}
 						content={
 							<div>
-								<h3>{upgrade}</h3>
+								<h3>{replaceRouteName(upgrade)}</h3>
 
 								<h4>{campUpgradeExplanations[upgrade]}</h4>
 								<br />
