@@ -76,6 +76,7 @@ export const applyEndOfTurnHeldItem = (
 	}
 
 	if (
+		isBerry(heldItem) &&
 		FlavourfullBerriesTable[heldItem] &&
 		pokemon.damage / pokemon.stats.hp > 0.5
 	) {
@@ -88,6 +89,7 @@ export const applyEndOfTurnHeldItem = (
 				pokemon: {
 					...applyItemToPokemon(pokemon, heldItem),
 					heldItemName: undefined,
+					consumedBerry: heldItem,
 				},
 				ailment: 'confusion',
 				addMessage: (message) => addMessage(message.message),
@@ -97,17 +99,22 @@ export const applyEndOfTurnHeldItem = (
 			return {
 				...applyItemToPokemon(pokemon, heldItem),
 				heldItemName: undefined,
+				consumedBerry: heldItem,
 			};
 		}
 	}
 
 	const booster = emergencyBoostBerriesTable[heldItem];
-	if (booster && pokemon.damage / pokemon.stats.hp >= 0.75) {
+	if (
+		isBerry(heldItem) &&
+		booster &&
+		pokemon.damage / pokemon.stats.hp >= 0.75
+	) {
 		addMultipleMessages([
 			`${pokemon.data.name} gave itself a boost with ${heldItem}`,
 		]);
 		return applyStatChangeToPokemon(
-			{ ...pokemon, heldItemName: undefined },
+			{ ...pokemon, heldItemName: undefined, consumedBerry: heldItem },
 			booster,
 			1,
 			true,
@@ -120,7 +127,7 @@ export const applyEndOfTurnHeldItem = (
 			`${pokemon.data.name} gave itself a boost with ${heldItem}`,
 		]);
 		return applyStatChangeToPokemon(
-			{ ...pokemon, heldItemName: undefined },
+			{ ...pokemon, heldItemName: undefined, consumedBerry: heldItem },
 			getRandomBoostableStat(),
 			1,
 			true,
@@ -136,7 +143,7 @@ export const applyEndOfTurnHeldItem = (
 			`${pokemon.data.name} gave itself a boost with ${heldItem}`,
 		]);
 		return applySecondaryAilmentToPokemon({
-			pokemon: { ...pokemon, heldItemName: undefined },
+			pokemon: { ...pokemon, heldItemName: undefined, consumedBerry: heldItem },
 			ailment: 'focused',
 			addMessage: (x) => addMessage(x.message),
 		});
@@ -150,6 +157,7 @@ export const applyEndOfTurnHeldItem = (
 		return {
 			...pokemon,
 			heldItemName: undefined,
+			consumedBerry: heldItem,
 			damage: Math.floor(Math.max(0, pokemon.damage - pokemon.stats.hp / 4)),
 		};
 	}
@@ -158,7 +166,7 @@ export const applyEndOfTurnHeldItem = (
 			`${pokemon.data.name} gave itself a boost with ${heldItem}`,
 		]);
 		return applyStatChangeToPokemon(
-			{ ...pokemon, heldItemName: undefined },
+			{ ...pokemon, heldItemName: undefined, consumedBerry: heldItem },
 			'defense',
 			1,
 			true,
@@ -171,7 +179,7 @@ export const applyEndOfTurnHeldItem = (
 			`${pokemon.data.name} gave itself a boost with ${heldItem}`,
 		]);
 		return applyStatChangeToPokemon(
-			{ ...pokemon, heldItemName: undefined },
+			{ ...pokemon, heldItemName: undefined, consumedBerry: heldItem },
 			'special-defense',
 			1,
 			true,
@@ -184,6 +192,7 @@ export const applyEndOfTurnHeldItem = (
 		return {
 			...applyItemToPokemon(pokemon, heldItem),
 			heldItemName: undefined,
+			consumedBerry: isBerry(heldItem) ? heldItem : undefined,
 		};
 	}
 	if (
@@ -194,6 +203,7 @@ export const applyEndOfTurnHeldItem = (
 		return {
 			...applyItemToPokemon(pokemon, heldItem),
 			heldItemName: undefined,
+			consumedBerry: heldItem,
 		};
 	}
 	if (heldItem === 'chesto-berry' && pokemon.primaryAilment?.type === 'sleep') {
@@ -201,6 +211,7 @@ export const applyEndOfTurnHeldItem = (
 		return {
 			...applyItemToPokemon(pokemon, heldItem),
 			heldItemName: undefined,
+			consumedBerry: heldItem,
 		};
 	}
 	if (
@@ -212,6 +223,7 @@ export const applyEndOfTurnHeldItem = (
 		return {
 			...applyItemToPokemon(pokemon, heldItem),
 			heldItemName: undefined,
+			consumedBerry: heldItem,
 		};
 	}
 	if (heldItem === 'rawst-berry' && pokemon.primaryAilment?.type === 'burn') {
@@ -219,6 +231,7 @@ export const applyEndOfTurnHeldItem = (
 		return {
 			...applyItemToPokemon(pokemon, heldItem),
 			heldItemName: undefined,
+			consumedBerry: heldItem,
 		};
 	}
 	if (
@@ -229,6 +242,7 @@ export const applyEndOfTurnHeldItem = (
 		return {
 			...applyItemToPokemon(pokemon, heldItem),
 			heldItemName: undefined,
+			consumedBerry: heldItem,
 		};
 	}
 	if (
@@ -239,6 +253,7 @@ export const applyEndOfTurnHeldItem = (
 		return {
 			...applyItemToPokemon(pokemon, heldItem),
 			heldItemName: undefined,
+			consumedBerry: heldItem,
 		};
 	}
 	if (
@@ -250,6 +265,7 @@ export const applyEndOfTurnHeldItem = (
 		return {
 			...applyItemToPokemon(pokemon, heldItem),
 			heldItemName: undefined,
+			consumedBerry: heldItem,
 		};
 	}
 	if (heldItem === 'leppa-berry') {
@@ -261,6 +277,7 @@ export const applyEndOfTurnHeldItem = (
 			return {
 				...applyItemToPokemon(pokemon, heldItem, undefined, depletedMove.name),
 				heldItemName: undefined,
+				consumedBerry: heldItem,
 			};
 		}
 	}

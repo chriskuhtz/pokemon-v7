@@ -2,6 +2,7 @@ import { AbilityName } from '../constants/checkLists/abilityCheckList';
 import { MoveName } from '../constants/checkLists/movesCheckList';
 import { SecondaryAilment } from './Ailment';
 import { BattleAction, BattleAttack } from './BattleActions';
+import { BerryType } from './Item';
 import { MoveDto } from './Move';
 import { OwnedPokemon, OwnedPokemonMove } from './OwnedPokemon';
 import { PokemonData } from './PokemonData';
@@ -52,6 +53,7 @@ export interface BattlePokemon extends OwnedPokemon {
 	participatedInBattle: boolean;
 	choiceBandedMove?: MoveName;
 	furyCutterStack?: number;
+	consumedBerry?: BerryType;
 }
 
 export function isBattlePokemon(

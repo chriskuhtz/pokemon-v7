@@ -104,5 +104,17 @@ export const applyEndOfTurnAbility = ({
 			primaryAilment: undefined,
 		};
 	}
+	if (
+		pokemon.ability === 'harvest' &&
+		pokemon.consumedBerry &&
+		!pokemon.heldItemName
+	) {
+		if (Math.random() > 0.5 || weather === 'sun') {
+			addMessage({
+				message: `${pokemon.data.name} harvested a new ${pokemon.consumedBerry}`,
+			});
+			return { ...pokemon, heldItemName: pokemon.consumedBerry };
+		}
+	}
 	return pokemon;
 };
