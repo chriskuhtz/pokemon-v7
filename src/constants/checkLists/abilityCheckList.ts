@@ -630,7 +630,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/131/',
 		handled: true,
 	},
-	{ name: 'friend-guard', url: 'https://pokeapi.co/api/v2/ability/132/' },
+	{
+		name: 'friend-guard',
+		url: 'https://pokeapi.co/api/v2/ability/132/',
+		handled: true,
+	},
 	{ name: 'weak-armor', url: 'https://pokeapi.co/api/v2/ability/133/' },
 	{ name: 'heavy-metal', url: 'https://pokeapi.co/api/v2/ability/134/' },
 	{ name: 'light-metal', url: 'https://pokeapi.co/api/v2/ability/135/' },
@@ -1009,6 +1013,7 @@ export const abilityNames = [
 	'defeatist',
 	'cursed-body',
 	'healer',
+	'friend-guard',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

@@ -508,6 +508,14 @@ export const calculateDamage = (
 		attacker.ability === 'defeatist' && attacker.damage > attacker.stats.hp / 2
 			? 0.5
 			: 1;
+	const friendGuardFactor = battleFieldEffects.some(
+		(b) =>
+			b.type === 'friend-guard' &&
+			b.ownerId === target.ownerId &&
+			b.applicatorId !== target.id
+	)
+		? 0.75
+		: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -553,7 +561,8 @@ export const calculateDamage = (
 				filterFactor *
 				recklessFactor *
 				sheerForceFactor *
-				defeatistFactor
+				defeatistFactor *
+				friendGuardFactor
 		),
 		1
 	);

@@ -1,23 +1,25 @@
-import { useCallback, useContext, useState } from 'react';
+import { useCallback, useContext, useMemo, useState } from 'react';
+import { getPlayerId } from '../../../functions/getPlayerId';
+import { OPPO_ID } from '../../../functions/makeChallengerPokemon';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
+import { BattlePokemon } from '../../../interfaces/BattlePokemon';
+import { WeatherType } from '../../../interfaces/Weather';
 import { BattleFieldEffect } from '../BattleField';
 
-export const useBattleFieldEffects = () => {
+export const useBattleFieldEffects = (
+	onFieldOpponents: BattlePokemon[],
+	onFieldTeam: BattlePokemon[],
+	battleWeather: WeatherType | undefined
+) => {
 	const { addMessage } = useContext(MessageQueueContext);
-	const [battleFieldEffects, setBattleFieldEffects] = useState<
-		BattleFieldEffect[]
-	>([]);
+	const [bf, setBattleFieldEffects] = useState<BattleFieldEffect[]>([]);
 
 	const addBattleFieldEffect = (x: BattleFieldEffect) => {
-		if (
-			battleFieldEffects.some(
-				(b) => b.type === x.type && b.ownerId === x.ownerId
-			)
-		) {
+		if (bf.some((b) => b.type === x.type && b.ownerId === x.ownerId)) {
 			addMessage({ message: `${x.type} is already in effect for this side` });
 			return;
 		}
-		setBattleFieldEffects([...battleFieldEffects, x]);
+		setBattleFieldEffects([...bf, x]);
 	};
 	const reduceBatttleFieldEffectDurations = useCallback(
 		() =>
@@ -33,6 +35,90 @@ export const useBattleFieldEffects = () => {
 			),
 		[addMessage]
 	);
+
+	const battleFieldEffects = useMemo(() => {
+		const res = [...bf];
+		if (onFieldOpponents.some((p) => p.ability === 'pressure')) {
+			res.push({ type: 'pressure', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'pressure')) {
+			res.push({ type: 'pressure', ownerId: getPlayerId(), duration: 9000 });
+		}
+		if (onFieldOpponents.some((p) => p.ability === 'plus')) {
+			res.push({ type: 'plus', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'plus')) {
+			res.push({ type: 'plus', ownerId: getPlayerId(), duration: 9000 });
+		}
+		if (onFieldOpponents.some((p) => p.ability === 'minus')) {
+			res.push({ type: 'minus', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'minus')) {
+			res.push({ type: 'minus', ownerId: getPlayerId(), duration: 9000 });
+		}
+		if (onFieldOpponents.some((p) => p.ability === 'shadow-tag')) {
+			res.push({ type: 'shadow-tag', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'shadow-tag')) {
+			res.push({ type: 'shadow-tag', ownerId: getPlayerId(), duration: 9000 });
+		}
+		if (onFieldOpponents.some((p) => p.ability === 'magnet-pull')) {
+			res.push({ type: 'magnet-pull', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'magnet-pull')) {
+			res.push({ type: 'magnet-pull', ownerId: getPlayerId(), duration: 9000 });
+		}
+		if (
+			onFieldOpponents.some(
+				(p) => p.ability === 'flower-gift' && battleWeather === 'sun'
+			)
+		) {
+			res.push({ type: 'flower-gift', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (
+			onFieldTeam.some(
+				(p) => p.ability === 'flower-gift' && battleWeather === 'sun'
+			)
+		) {
+			res.push({ type: 'flower-gift', ownerId: getPlayerId(), duration: 9000 });
+		}
+		if (onFieldOpponents.some((p) => p.ability === 'bad-dreams')) {
+			res.push({ type: 'bad-dreams', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'bad-dreams')) {
+			res.push({ type: 'bad-dreams', ownerId: getPlayerId(), duration: 9000 });
+		}
+		if (onFieldOpponents.some((p) => p.ability === 'unnerve')) {
+			res.push({ type: 'unnerve', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'unnerve')) {
+			res.push({ type: 'unnerve', ownerId: getPlayerId(), duration: 9000 });
+		}
+
+		const friendGuardOppo = onFieldOpponents.find(
+			(p) => p.ability === 'friend-guard'
+		);
+		if (friendGuardOppo) {
+			res.push({
+				type: 'friend-guard',
+				ownerId: OPPO_ID,
+				duration: 9000,
+				applicatorId: friendGuardOppo.id,
+			});
+		}
+		const friendGuardPlayer = onFieldTeam.find(
+			(p) => p.ability === 'friend-guard'
+		);
+		if (friendGuardPlayer) {
+			res.push({
+				type: 'friend-guard',
+				ownerId: getPlayerId(),
+				duration: 9000,
+				applicatorId: friendGuardPlayer.id,
+			});
+		}
+		return res;
+	}, [battleWeather, bf, onFieldOpponents, onFieldTeam]);
 
 	return {
 		battleFieldEffects,

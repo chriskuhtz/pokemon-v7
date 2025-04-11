@@ -15,10 +15,9 @@ import { changeMovePP } from '../../functions/changeMovePP';
 import { BattleLocation } from '../../functions/determineCaptureSuccess';
 import { getHeldItem } from '../../functions/getHeldItem';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
-import { getPlayerId, getSettings } from '../../functions/getPlayerId';
+import { getSettings } from '../../functions/getPlayerId';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
 import { isKO } from '../../functions/isKo';
-import { OPPO_ID } from '../../functions/makeChallengerPokemon';
 import { reduceSecondaryAilmentDurations } from '../../functions/reduceSecondaryAilmentDurations';
 import { sortByPriority } from '../../functions/sortByPriority';
 import { LeaveBattlePayload } from '../../hooks/useLeaveBattle';
@@ -67,8 +66,10 @@ export interface BattleFieldEffect {
 		| 'flower-gift'
 		| 'bad-dreams'
 		| 'unnerve'
-		| 'safeguard';
+		| 'safeguard'
+		| 'friend-guard';
 	ownerId: string;
+	applicatorId?: string;
 	duration: number;
 }
 
@@ -99,11 +100,7 @@ export const BattleField = ({
 		saveFile: { settings },
 	} = useContext(SaveFileContext);
 	const isTrainerBattle = useMemo(() => !!challengerId, [challengerId]);
-	const {
-		battleFieldEffects: bf,
-		addBattleFieldEffect,
-		reduceBatttleFieldEffectDurations,
-	} = useBattleFieldEffects();
+
 	const [battleRound, setBattleRound] = useState<number>(0);
 	const [bW, setBattleWeather] = useState<WeatherType | undefined>();
 	const [battleLocation] = useState<BattleLocation>('STANDARD');
@@ -162,66 +159,12 @@ export const BattleField = ({
 		}
 		return bW;
 	}, [allOnField, bW]);
-	const battleFieldEffects = useMemo(() => {
-		const res = [...bf];
-		if (onFieldOpponents.some((p) => p.ability === 'pressure')) {
-			res.push({ type: 'pressure', ownerId: OPPO_ID, duration: 9000 });
-		}
-		if (onFieldTeam.some((p) => p.ability === 'pressure')) {
-			res.push({ type: 'pressure', ownerId: getPlayerId(), duration: 9000 });
-		}
-		if (onFieldOpponents.some((p) => p.ability === 'plus')) {
-			res.push({ type: 'plus', ownerId: OPPO_ID, duration: 9000 });
-		}
-		if (onFieldTeam.some((p) => p.ability === 'plus')) {
-			res.push({ type: 'plus', ownerId: getPlayerId(), duration: 9000 });
-		}
-		if (onFieldOpponents.some((p) => p.ability === 'minus')) {
-			res.push({ type: 'minus', ownerId: OPPO_ID, duration: 9000 });
-		}
-		if (onFieldTeam.some((p) => p.ability === 'minus')) {
-			res.push({ type: 'minus', ownerId: getPlayerId(), duration: 9000 });
-		}
-		if (onFieldOpponents.some((p) => p.ability === 'shadow-tag')) {
-			res.push({ type: 'shadow-tag', ownerId: OPPO_ID, duration: 9000 });
-		}
-		if (onFieldTeam.some((p) => p.ability === 'shadow-tag')) {
-			res.push({ type: 'shadow-tag', ownerId: getPlayerId(), duration: 9000 });
-		}
-		if (onFieldOpponents.some((p) => p.ability === 'magnet-pull')) {
-			res.push({ type: 'magnet-pull', ownerId: OPPO_ID, duration: 9000 });
-		}
-		if (onFieldTeam.some((p) => p.ability === 'magnet-pull')) {
-			res.push({ type: 'magnet-pull', ownerId: getPlayerId(), duration: 9000 });
-		}
-		if (
-			onFieldOpponents.some(
-				(p) => p.ability === 'flower-gift' && battleWeather === 'sun'
-			)
-		) {
-			res.push({ type: 'flower-gift', ownerId: OPPO_ID, duration: 9000 });
-		}
-		if (
-			onFieldTeam.some(
-				(p) => p.ability === 'flower-gift' && battleWeather === 'sun'
-			)
-		) {
-			res.push({ type: 'flower-gift', ownerId: getPlayerId(), duration: 9000 });
-		}
-		if (onFieldOpponents.some((p) => p.ability === 'bad-dreams')) {
-			res.push({ type: 'bad-dreams', ownerId: OPPO_ID, duration: 9000 });
-		}
-		if (onFieldTeam.some((p) => p.ability === 'bad-dreams')) {
-			res.push({ type: 'bad-dreams', ownerId: getPlayerId(), duration: 9000 });
-		}
-		if (onFieldOpponents.some((p) => p.ability === 'unnerve')) {
-			res.push({ type: 'unnerve', ownerId: OPPO_ID, duration: 9000 });
-		}
-		if (onFieldTeam.some((p) => p.ability === 'unnerve')) {
-			res.push({ type: 'unnerve', ownerId: getPlayerId(), duration: 9000 });
-		}
-		return res;
-	}, [battleWeather, bf, onFieldOpponents, onFieldTeam]);
+
+	const {
+		battleFieldEffects,
+		addBattleFieldEffect,
+		reduceBatttleFieldEffectDurations,
+	} = useBattleFieldEffects(onFieldOpponents, onFieldTeam, battleWeather);
 
 	const nextPokemonWithoutMove = useMemo(() => {
 		if (battleStep !== 'COLLECTING') {
