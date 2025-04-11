@@ -541,6 +541,8 @@ export const calculateDamage = (
 		target.moveQueue.length > 0 && target.moveQueue[0].type === 'Switch'
 			? 2
 			: 1;
+	const multiscaleFactor =
+		target.ability === 'multiscale' && target.damage === 0 ? 0.5 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -590,7 +592,8 @@ export const calculateDamage = (
 				friendGuardFactor *
 				muscleBandFactor *
 				pursuitFactor *
-				wiseGlassesFactor
+				wiseGlassesFactor *
+				multiscaleFactor
 		),
 		1
 	);
