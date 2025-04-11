@@ -1,4 +1,5 @@
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
+import { getTimeOfDay } from '../../../../../../functions/getTimeOfDay';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
@@ -24,17 +25,34 @@ export const handleHealAttack = ({
 	addMessage({ message: `${updatedAttacker.name} healed itself` });
 
 	const actualHealing = () => {
-		if (move.name === 'morning-sun' && battleWeather === 'sun') {
-			return 66;
-		}
-		if (
-			move.name === 'morning-sun' &&
-			(battleWeather === 'hail' ||
+		if (move.name === 'morning-sun') {
+			if (getTimeOfDay() === 'MORNING') {
+				return 66;
+			}
+			if (battleWeather === 'sun') {
+				return 66;
+			}
+			if (
+				battleWeather === 'hail' ||
 				battleWeather === 'rain' ||
-				battleWeather === 'sandstorm')
-		) {
-			return 25;
+				battleWeather === 'sandstorm'
+			) {
+				return 25;
+			}
 		}
+		if (move.name === 'synthesis') {
+			if (battleWeather === 'sun') {
+				return 66;
+			}
+			if (
+				battleWeather === 'hail' ||
+				battleWeather === 'rain' ||
+				battleWeather === 'sandstorm'
+			) {
+				return 25;
+			}
+		}
+
 		return move.data.meta.healing;
 	};
 	updatedAttacker = {
