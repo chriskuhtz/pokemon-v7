@@ -56,8 +56,6 @@ export const elmLine: Occupant[] = [
 	{
 		...elmBase,
 		id: 'elm_4',
-		x: 6,
-		y: 15,
 		unhandledMessage: [
 			'Some Pokemon only evolve if you become good friends with them',
 		],
