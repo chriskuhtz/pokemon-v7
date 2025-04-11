@@ -1106,7 +1106,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/242/',
 		handled: true,
 	},
-	{ name: 'muscle-band', url: 'https://pokeapi.co/api/v2/item/243/' },
+	{
+		name: 'muscle-band',
+		url: 'https://pokeapi.co/api/v2/item/243/',
+		handled: true,
+	},
 	{ name: 'wise-glasses', url: 'https://pokeapi.co/api/v2/item/244/' },
 	{ name: 'expert-belt', url: 'https://pokeapi.co/api/v2/item/245/' },
 	{ name: 'light-clay', url: 'https://pokeapi.co/api/v2/item/246/' },

@@ -516,6 +516,10 @@ export const calculateDamage = (
 	)
 		? 0.75
 		: 1;
+	const muscleBandFactor =
+		getHeldItem(attacker) === 'muscle-band' && damageClass === 'physical'
+			? 1.1
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -562,7 +566,8 @@ export const calculateDamage = (
 				recklessFactor *
 				sheerForceFactor *
 				defeatistFactor *
-				friendGuardFactor
+				friendGuardFactor *
+				muscleBandFactor
 		),
 		1
 	);
