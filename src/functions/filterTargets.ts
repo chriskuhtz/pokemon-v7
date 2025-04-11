@@ -87,8 +87,8 @@ export function getRandomEntry<T>(array: T[]) {
 	return array[getRandomIndex(array.length)];
 }
 
-export const getRandomTargetId = (x: FilterTargetsPayload): string => {
+export const getRandomTarget = (x: FilterTargetsPayload): BattlePokemon => {
 	const possibleTargets = filterTargets(x);
 
-	return getRandomEntry(possibleTargets).id;
+	return getRandomEntry(possibleTargets);
 };

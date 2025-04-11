@@ -49,11 +49,7 @@ export const handleAllAttackCategories = ({
 	removeSpikes: (ownerId: string) => void;
 }) => {
 	let updatedPokemon = [...pokemon];
-	const {
-		updatedPokemon: ua,
-		canAttack,
-		target,
-	} = handleAttackStart({
+	const { updatedPokemon: ua, targets } = handleAttackStart({
 		attacker,
 		pokemon,
 		addMessage,
@@ -157,8 +153,10 @@ export const handleAllAttackCategories = ({
 				});
 		}
 	};
-	if (canAttack && target) {
-		updatedPokemon = handleMoveCategories(target);
+	if (targets.length > 0) {
+		targets.forEach((target) => {
+			updatedPokemon = handleMoveCategories(target);
+		});
 	}
 
 	//SetPokemon

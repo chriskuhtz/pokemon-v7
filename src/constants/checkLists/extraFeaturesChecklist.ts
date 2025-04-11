@@ -281,7 +281,11 @@ export const extraFeatureCheckList: {
 	{ name: 'item descriptions somewhere', handled: true },
 	{ name: 'move descriptions somewhere', handled: true },
 	{ name: 'extract handleAttack start and end', handled: true },
-	{ name: 'battleinfo stack for switch in screen' },
+	{ name: 'battleinfo stack for switch in screen', handled: true },
+	{
+		name: 'use Move.target as a switch case for attack handling',
+		handled: true,
+	},
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'refine battle end' },
 	{ name: 'tilemap should be only tuples' },
@@ -289,7 +293,7 @@ export const extraFeatureCheckList: {
 	{ name: 'consider weather/effects etc for opponent decisions' },
 	{ name: 'poison step damage' },
 	{ name: 'nicer ladder up sprite' },
-	{ name: 'use Move.target as a switch case for attack handling' },
+
 	{
 		name: 'different page that only loads the savefile and lets the user copy it',
 	},

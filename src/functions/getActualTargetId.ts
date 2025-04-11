@@ -1,10 +1,8 @@
-import { lockInMoves } from '../constants/forceSwitchMoves';
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { getRandomTargetId } from './filterTargets';
 
-export const getActualTargetId = ({
+export const getActualTarget = ({
 	pokemon,
 	attacker,
 	move,
@@ -14,18 +12,15 @@ export const getActualTargetId = ({
 	attacker: BattlePokemon;
 	move: BattleAttack;
 	addMessage: (x: Message) => void;
-}): string => {
+}): BattlePokemon | undefined => {
 	if (move.name === 'counter' && attacker.lastReceivedDamage) {
-		return attacker.lastReceivedDamage.applicatorId;
+		return pokemon.find(
+			(p) =>
+				p.id === attacker.lastReceivedDamage?.applicatorId &&
+				p.status === 'ONFIELD'
+		);
 	}
-	if (lockInMoves.includes(move.name)) {
-		return getRandomTargetId({
-			targets: pokemon,
-			user: attacker,
-			chosenAction: move.name,
-			onlyOpponents: false,
-		});
-	}
+
 	const lightningRod = pokemon.find(
 		(p) =>
 			p.status === 'ONFIELD' &&
@@ -43,13 +38,13 @@ export const getActualTargetId = ({
 		addMessage({
 			message: `${lightningRod.data.name} redirected the electric attack with lightning rod`,
 		});
-		return lightningRod.id;
+		return lightningRod;
 	}
 	if (stormDrain && move.data.type.name === 'water') {
 		addMessage({
 			message: `${stormDrain.data.name} redirected the water type attack with storm drain`,
 		});
-		return stormDrain.id;
+		return stormDrain;
 	}
-	return move.targetId;
+	return pokemon.find((p) => p.id === move.targetId && p.status === 'ONFIELD');
 };
