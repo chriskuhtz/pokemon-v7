@@ -216,7 +216,8 @@ export type Occupant =
 
 export interface OverworldEncounter {
 	name: PokemonName;
-	xp: number;
+	minXp: number;
+	maxXp: number;
 	rarity: 'common' | 'medium' | 'rare' | 'ultra-rare';
 }
 export interface OverworldMap {

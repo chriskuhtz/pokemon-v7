@@ -7,7 +7,7 @@ export const camp: OverworldMap = {
 	tilesetUrl: '/tilesets/palletTown.png',
 	timeOfDayShadersMap: defaultShaderMap,
 	possibleEncounters: {
-		WATER: [{ name: 'feebas', xp: 125, rarity: 'common' }],
+		WATER: [{ name: 'feebas', minXp: 125, maxXp: 125, rarity: 'common' }],
 		BASE: [],
 		MORNING: [],
 		DAY: [],

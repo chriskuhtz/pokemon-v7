@@ -374,4 +374,5 @@ export const extraFeatureCheckList: {
 	{ name: 'trainers need cooldown timers' },
 	{ name: 'gender needs to be visible in battle' },
 	{ name: 'training field: random from tier x' },
+	{ name: 'refactor cooking' },
 ];
