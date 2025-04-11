@@ -17,7 +17,13 @@ export const determineCrit = (
 		(attackerFocused ? 2 : 0) +
 		(attackerAbilty === 'super-luck' ? 1 : 0) +
 		(attackerHeldItem === 'scope-lens' ? 1 : 0) +
-		(attackerName === 'chansey' && attackerHeldItem === 'lucky-punch' ? 2 : 0);
+		(attackerName === 'chansey' && attackerHeldItem === 'lucky-punch' ? 2 : 0) +
+		((attackerName === 'farfetchd' ||
+			attackerName === 'farfetchd-galar' ||
+			attackerName === 'sirfetchd') &&
+		attackerHeldItem === 'stick'
+			? 2
+			: 0);
 	if (ohkoMoves.includes(moveName)) {
 		return false;
 	}

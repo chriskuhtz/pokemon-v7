@@ -163,6 +163,7 @@ export const heldItems = [
 	'sea-incense',
 	'lax-incense',
 	'lucky-punch',
+	'stick',
 	'metal-powder',
 	'thick-club',
 ] as const;

@@ -1100,7 +1100,7 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/235/',
 		handled: true,
 	},
-	{ name: 'stick', url: 'https://pokeapi.co/api/v2/item/236/' },
+	{ name: 'stick', url: 'https://pokeapi.co/api/v2/item/236/', handled: true },
 	{ name: 'red-scarf', url: 'https://pokeapi.co/api/v2/item/237/' },
 	{ name: 'blue-scarf', url: 'https://pokeapi.co/api/v2/item/238/' },
 	{ name: 'pink-scarf', url: 'https://pokeapi.co/api/v2/item/239/' },
