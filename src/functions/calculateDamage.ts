@@ -520,6 +520,10 @@ export const calculateDamage = (
 		getHeldItem(attacker) === 'muscle-band' && damageClass === 'physical'
 			? 1.1
 			: 1;
+	const pursuitFactor =
+		target.moveQueue.length > 0 && target.moveQueue[0].type === 'Switch'
+			? 2
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -567,7 +571,8 @@ export const calculateDamage = (
 				sheerForceFactor *
 				defeatistFactor *
 				friendGuardFactor *
-				muscleBandFactor
+				muscleBandFactor *
+				pursuitFactor
 		),
 		1
 	);

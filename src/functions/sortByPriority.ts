@@ -61,6 +61,14 @@ export const sortByPriority = (
 	if (bMove && !aMove) {
 		return 1;
 	}
+	//Pursuit goes before switch
+	if (
+		aMove?.type === 'BattleAttack' &&
+		aMove.name === 'pursuit' &&
+		bMove?.type === 'Switch'
+	) {
+		return -1;
+	}
 	if (
 		aMove?.type === 'CatchProcessInfo' ||
 		aMove?.type === 'InBattleItem' ||
