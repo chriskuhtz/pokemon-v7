@@ -1,5 +1,4 @@
-import { getPokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
-import { battleSpriteSize } from '../../../constants/gameData';
+import { BattlePokemonInfo } from '../../../components/BattlePokemonInfo/BattlePokemonInfo';
 import { isKO } from '../../../functions/isKo';
 import { Message } from '../../../hooks/useMessageQueue';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
@@ -32,40 +31,21 @@ export const RefillHandling = ({
 					<div
 						style={{
 							display: 'grid',
-							gridTemplateColumns: '1fr 1fr 1fr',
+							gridTemplateColumns: '1fr 1fr',
 							rowGap: '1rem',
 						}}
 					>
 						{team.map((teamMember) => {
 							if (teamMember.status === 'BENCH' && !isKO(teamMember)) {
 								return (
-									<img
-										style={{
-											borderRadius: 9000,
-											padding: '1rem',
-											filter: isKO(teamMember) ? 'grayscale(1)' : undefined,
-										}}
-										role="button"
-										onClick={() =>
+									<BattlePokemonInfo
+										onClick={() => {
 											addMessage({
 												message: `Lets go ${teamMember.data.name}`,
 												onRemoval: () => putPokemonOnField(teamMember.id),
-											})
-										}
-										tabIndex={0}
-										onKeyDown={(e) => {
-											if (e.key === 'Enter') {
-												addMessage({
-													message: `Lets go ${teamMember.data.name}`,
-													onRemoval: () => putPokemonOnField(teamMember.id),
-												});
-											}
+											});
 										}}
-										key={teamMember.id}
-										height={battleSpriteSize}
-										src={getPokemonSprite(teamMember.name, {
-											shiny: teamMember.shiny,
-										})}
+										pokemon={teamMember}
 									/>
 								);
 							}

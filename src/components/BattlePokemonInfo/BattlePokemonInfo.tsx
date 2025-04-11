@@ -13,7 +13,13 @@ import { ItemSprite } from '../ItemSprite/ItemSprite';
 import { PrimaryAilmentIcon } from '../PrimaryAilmentIcon/PrimaryAilmentIcon';
 import { XpBar } from '../XpBar/XpBar';
 
-export const BattlePokemonInfo = ({ pokemon }: { pokemon: BattlePokemon }) => {
+export const BattlePokemonInfo = ({
+	pokemon,
+	onClick,
+}: {
+	pokemon: BattlePokemon;
+	onClick?: () => void;
+}) => {
 	const { level } = calculateLevelData(pokemon.xp);
 	const {
 		saveFile: { pokedex },
@@ -42,6 +48,14 @@ export const BattlePokemonInfo = ({ pokemon }: { pokemon: BattlePokemon }) => {
 	}, [pokemon]);
 	return (
 		<div
+			onClick={onClick}
+			role={onClick ? 'button' : undefined}
+			tabIndex={onClick ? 0 : undefined}
+			onKeyDown={(e) => {
+				if (e.key === 'Enter' && onClick) {
+					onClick();
+				}
+			}}
 			style={{
 				border: 'solid',
 				borderWidth: backgroundColor === 'black' ? '1px' : '3px',
