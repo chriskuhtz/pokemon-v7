@@ -531,7 +531,7 @@ export const undergroundTable: ItemType[] = [
 	...valuables,
 	...evoStones,
 	...evBoostItemTypes,
-	...fossils,
+	...heldItems,
 ];
 export const superEffectiveSaveTable: Record<PokemonType, ItemType> = {
 	fire: 'occa-berry',
