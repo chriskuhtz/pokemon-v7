@@ -134,6 +134,24 @@ export const applySecondaryAilmentToPokemon = ({
 			};
 		}
 	}
+	if (ailment === 'encore') {
+		if (!move) {
+			throw new Error('encore has to be applied with move');
+		} else {
+			addMessage({ message: `${pokemon.data.name} receiced an encore` });
+			return {
+				...pokemon,
+				secondaryAilments: [
+					...pokemon.secondaryAilments,
+					{
+						type: 'encore',
+						duration: getMiddleOfThree([4, Math.floor(Math.random() * 7), 7]),
+						move,
+					},
+				],
+			};
+		}
+	}
 	if (ailment === 'leech-seed') {
 		addMessage({ message: `${pokemon.data.name} was seeded` });
 		return {

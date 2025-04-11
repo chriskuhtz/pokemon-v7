@@ -61,6 +61,7 @@ export const chooseOpponentAction = ({
 	//IF PROFILE AGGRESSIVE
 	const moves = getMovesArray(controlled, {
 		filterOutDisabled: true,
+		considerEncore: true,
 		filterOutEmpty: true,
 	});
 

@@ -1,6 +1,7 @@
 import { useContext, useMemo } from 'react';
 import { FaRunning } from 'react-icons/fa';
 import { FaArrowsRotate } from 'react-icons/fa6';
+import { ItemSprite } from '../../../components/ItemSprite/ItemSprite';
 import { MoveCard } from '../../../components/MoveCard/MoveCard';
 import { battleSpriteSize } from '../../../constants/gameData';
 import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
@@ -26,7 +27,6 @@ import {
 	BattleFieldEffect,
 	ChooseActionPayload,
 } from '../BattleField';
-import { ItemSprite } from '../../../components/ItemSprite/ItemSprite';
 
 export const canRunOrSwitch = (
 	controlled: BattlePokemon,
@@ -139,7 +139,10 @@ export function ActionSelection({
 					gap: '1rem',
 				}}
 			>
-				{getMovesArray(controlled, { filterOutDisabled: true }).map((m) => (
+				{getMovesArray(controlled, {
+					filterOutDisabled: true,
+					considerEncore: true,
+				}).map((m) => (
 					<MoveCard
 						move={m}
 						key={m.name}

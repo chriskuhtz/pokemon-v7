@@ -1176,8 +1176,7 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/222/',
 		handled: true,
 	},
-	{ name: 'baton-pass', url: 'https://pokeapi.co/api/v2/move/226/' },
-	{ name: 'encore', url: 'https://pokeapi.co/api/v2/move/227/' },
+	{ name: 'encore', url: 'https://pokeapi.co/api/v2/move/227/', handled: true },
 	{ name: 'pursuit', url: 'https://pokeapi.co/api/v2/move/228/' },
 	{ name: 'rapid-spin', url: 'https://pokeapi.co/api/v2/move/229/' },
 	{ name: 'sweet-scent', url: 'https://pokeapi.co/api/v2/move/230/' },
@@ -1958,6 +1957,7 @@ export const movesCheckList: {
 	{ name: 'shadow-panic', url: 'https://pokeapi.co/api/v2/move/10016/' },
 	{ name: 'shadow-shed', url: 'https://pokeapi.co/api/v2/move/10017/' },
 	{ name: 'shadow-sky', url: 'https://pokeapi.co/api/v2/move/10018/' },
+	//banished
 	{
 		name: 'metronome',
 		url: 'https://pokeapi.co/api/v2/move/118/',
@@ -1972,6 +1972,10 @@ export const movesCheckList: {
 	{
 		name: 'sleep-talk',
 		url: 'https://pokeapi.co/api/v2/move/214/',
+	},
+	{
+		name: 'baton-pass',
+		url: 'https://pokeapi.co/api/v2/move/226/',
 	},
 ];
 
@@ -2260,6 +2264,7 @@ export const handledMoves = [
 	'safeguard',
 	'pain-split',
 	'magnitude',
+	'encore',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

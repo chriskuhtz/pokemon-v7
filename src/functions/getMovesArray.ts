@@ -5,11 +5,15 @@ export function getMovesArray<T extends BattlePokemon | OwnedPokemon>(
 	pokemon: T,
 	config?: {
 		filterOutDisabled?: boolean;
+		considerEncore?: boolean;
 		filterOutEmpty?: boolean;
 	}
 ): T['firstMove'][] {
 	const disabledMove = isBattlePokemon(pokemon)
 		? pokemon.secondaryAilments.find((a) => a.type === 'disable')?.move
+		: undefined;
+	const encoredMove = isBattlePokemon(pokemon)
+		? pokemon.secondaryAilments.find((a) => a.type === 'encore')?.move
 		: undefined;
 
 	return [
@@ -22,6 +26,9 @@ export function getMovesArray<T extends BattlePokemon | OwnedPokemon>(
 		.filter((m) => {
 			if (config?.filterOutDisabled && disabledMove === m?.name) {
 				return false;
+			}
+			if (encoredMove && config?.considerEncore) {
+				return m.name === encoredMove;
 			}
 			if (isBattlePokemon(pokemon) && config?.filterOutEmpty) {
 				const battleMove = m as BattlePokemon['firstMove'];

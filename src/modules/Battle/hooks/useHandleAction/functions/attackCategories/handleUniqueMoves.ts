@@ -117,6 +117,18 @@ export const handleUniqueMoves = ({
 				move: randomMoveName,
 			});
 	}
+	if (move.name === 'encore') {
+		const moveName = target.lastUsedMove?.name;
+		if (!moveName) {
+			addMessage({ message: `it failed` });
+		} else
+			updatedTarget = applySecondaryAilmentToPokemon({
+				pokemon: target,
+				ailment: 'encore',
+				addMessage,
+				move: moveName,
+			});
+	}
 	if (move.name === 'teleport') {
 		addMessage({
 			message: `${attacker.name} escaped the battle with teleport`,

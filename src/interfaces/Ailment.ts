@@ -33,6 +33,7 @@ const secondaryAilments = [
 	'guard-spec',
 	'dire-hit',
 	'disable',
+	'encore',
 	'raging',
 	'focused',
 	'mind-read',
@@ -50,7 +51,7 @@ export interface SecondaryAilment {
 	type: SecondaryAilmentType;
 	duration: number;
 	newType?: PokemonType; // for color change
-	move?: MoveName; // For Disable
+	move?: MoveName; // For Disable|Encore
 	healAmount?: number; // for leech seed
 	targetId?: string;
 	by?: string; // for mind read
