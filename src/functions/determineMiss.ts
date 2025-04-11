@@ -118,6 +118,7 @@ export const determineMiss = (
 	const compoundEyesFactor = getCompoundEyesFactor(attacker, attack);
 	const hustleFactor = getHustleFactor(attacker, attack);
 	const brightPowderFactor = getHeldItem(target) === 'bright-powder' ? 0.9 : 1;
+	const wideLensFactor = getHeldItem(attacker) === 'wide-lens' ? 1.1 : 1;
 
 	const thunderWeatherFactor =
 		attack.name === 'thunder' && weather === 'sun' ? 0.5 : 1;
@@ -133,7 +134,8 @@ export const determineMiss = (
 		compoundEyesFactor *
 		hustleFactor *
 		brightPowderFactor *
-		thunderWeatherFactor;
+		thunderWeatherFactor *
+		wideLensFactor;
 
 	const ratio = attackerAccuracy / targetEvasion;
 
