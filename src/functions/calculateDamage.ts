@@ -543,6 +543,8 @@ export const calculateDamage = (
 			: 1;
 	const multiscaleFactor =
 		target.ability === 'multiscale' && target.damage === 0 ? 0.5 : 1;
+	const expertBeltFactor =
+		getHeldItem(attacker) === 'expert-belt' && typeFactor > 1 ? 1.2 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -593,7 +595,8 @@ export const calculateDamage = (
 				muscleBandFactor *
 				pursuitFactor *
 				wiseGlassesFactor *
-				multiscaleFactor
+				multiscaleFactor *
+				expertBeltFactor
 		),
 		1
 	);

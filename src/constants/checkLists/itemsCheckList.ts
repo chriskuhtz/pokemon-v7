@@ -1116,7 +1116,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/244/',
 		handled: true,
 	},
-	{ name: 'expert-belt', url: 'https://pokeapi.co/api/v2/item/245/' },
+	{
+		name: 'expert-belt',
+		url: 'https://pokeapi.co/api/v2/item/245/',
+		handled: true,
+	},
 	{ name: 'light-clay', url: 'https://pokeapi.co/api/v2/item/246/' },
 	{ name: 'life-orb', url: 'https://pokeapi.co/api/v2/item/247/' },
 	{ name: 'power-herb', url: 'https://pokeapi.co/api/v2/item/248/' },
