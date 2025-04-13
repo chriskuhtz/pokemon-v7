@@ -241,6 +241,15 @@ export const handleUniqueMoves = ({
 			);
 		}
 	}
+	if (move.name === 'psych-up') {
+		addMessage({
+			message: `${updatedAttacker.name} copied ${updatedTarget.name}'s stat changes`,
+		});
+		updatedAttacker = {
+			...updatedAttacker,
+			statBoosts: updatedTarget.statBoosts,
+		};
+	}
 	if (move.name === 'protect' || move.name === 'detect') {
 		if (
 			(updatedAttacker.lastUsedMove?.name === 'protect' ||

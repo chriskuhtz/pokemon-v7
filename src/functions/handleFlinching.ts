@@ -11,7 +11,7 @@ export const handleFlinching = (
 	attack: BattleAttack,
 	addMessage: (x: Message) => void
 ): BattlePokemon => {
-	const typeFactor = determineTypeFactor(target, attacker.ability, attack);
+	const typeFactor = determineTypeFactor(target, attacker, attack);
 
 	if (typeFactor === 0) {
 		//moves that dont do damge cant flinch
