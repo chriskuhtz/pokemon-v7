@@ -99,6 +99,7 @@ export const testState: SaveFile = {
 		hasCraftedApricorn: false,
 		hasGrownABerry: false,
 		hasGrownAnApricorn: false,
+		luredWithBerries: [],
 	},
 	farm: { plants: [] },
 	campUpgrades: baseCampUpgrades,
