@@ -241,6 +241,25 @@ export const handleUniqueMoves = ({
 			);
 		}
 	}
+	if (move.name === 'memento') {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'attack',
+			-2,
+			false,
+			battleFieldEffects,
+			addMessage
+		);
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'special-attack',
+			-2,
+			false,
+			battleFieldEffects,
+			addMessage
+		);
+		updatedAttacker = { ...updatedAttacker, damage: updatedAttacker.stats.hp };
+	}
 	if (move.name === 'psych-up') {
 		addMessage({
 			message: `${updatedAttacker.name} copied ${updatedTarget.name}'s stat changes`,
