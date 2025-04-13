@@ -677,6 +677,21 @@ export const calculateDamage = (
 			wasSuperEffective: typeFactor > 1,
 		};
 	}
+	if (
+		getHeldItem(target) === 'focus-sash' &&
+		target.damage === 0 &&
+		res > target.stats.hp - target.damage
+	) {
+		if (addMessage) {
+			addMessage({ message: `${target.data.name} hung on with focus sash` });
+		}
+		return {
+			damage: target.stats.hp - 1,
+			criticalHit: critFactor === 2,
+			consumedHeldItem: true,
+			wasSuperEffective: typeFactor > 1,
+		};
+	}
 	//false swipe never defeats
 	if (attack.name === 'false-swipe' && res > target.stats.hp - target.damage) {
 		return {
