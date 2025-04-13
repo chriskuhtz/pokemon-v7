@@ -545,8 +545,6 @@ export const undergroundTable: ItemType[] = [
 	...evoStones,
 	...evBoostItemTypes,
 	...heldItems,
-	'armor-fossil',
-	'skull-fossil',
 	'cover-fossil',
 	'plume-fossil',
 	'jaw-fossil',

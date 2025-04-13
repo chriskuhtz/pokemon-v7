@@ -1,11 +1,12 @@
 import { defaultShaderMap } from '../../functions/getTimeOfDay';
 import { OverworldMap } from '../../interfaces/OverworldMap';
 import { routeS1W1Encounters } from './encounters/routeS1W1';
-import { routeS1W1Occupants } from './occupants';
+import { routeS1W1Occupants } from './occupants/routeS1W1';
 
 export const routeS1W1: OverworldMap = {
 	id: 'routeS1W1',
 	tilesetUrl: '/tilesets/hills.png',
+	occupants: routeS1W1Occupants,
 	timeOfDayShadersMap: defaultShaderMap,
 	possibleEncounters: routeS1W1Encounters,
 	tileMap: {
@@ -16240,5 +16241,5 @@ export const routeS1W1: OverworldMap = {
 			],
 		],
 	},
-	occupants: routeS1W1Occupants,
+	
 };
