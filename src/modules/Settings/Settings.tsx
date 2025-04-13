@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { QuestsRecord } from '../../constants/checkLists/questsRecord';
 import { SaveFileContext } from '../../hooks/useSaveFile';
-import { getRandomItem } from '../../interfaces/Item';
+import { getRandomBall, getRandomItem } from '../../interfaces/Item';
 import { SettingsObject } from '../../interfaces/SaveFile';
 import { Page } from '../../uiComponents/Page/Page';
 import { ToggleRow } from '../../uiComponents/ToggleRow/ToggleRow';
@@ -36,6 +36,7 @@ export const Settings = (): JSX.Element => {
 									...quest,
 									rewardItems: {
 										[getRandomItem()]: Math.floor(1 + Math.random() * 9),
+										[getRandomBall()]: Math.floor(1 + Math.random() * 4),
 									},
 								},
 							];
