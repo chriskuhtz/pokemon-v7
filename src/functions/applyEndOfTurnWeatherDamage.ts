@@ -24,7 +24,7 @@ export const applyEndOfTurnWeatherDamage = (
 			getTypeNames(pokemon).some((t) =>
 				['ground', 'steel', 'rock'].includes(t)
 			) ||
-			['sand-veil'].includes(pokemon.ability)
+			['sand-veil', 'overcoat'].includes(pokemon.ability)
 		) {
 			return pokemon;
 		}
@@ -38,7 +38,7 @@ export const applyEndOfTurnWeatherDamage = (
 	if (weather === 'hail') {
 		if (
 			getTypeNames(pokemon).some((t) => ['ice'].includes(t)) ||
-			['snow-cloak'].includes(pokemon.ability)
+			['snow-cloak', 'overcoat'].includes(pokemon.ability)
 		) {
 			return pokemon;
 		}
@@ -90,6 +90,5 @@ export const applyEndOfTurnWeatherDamage = (
 			]),
 		};
 	}
-
 	return pokemon;
 };
