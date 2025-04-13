@@ -766,6 +766,654 @@ const tier3trainers: Challenger[] = [
 		requiredUpgrade: 'training field 3',
 	},
 ];
+const tier4trainers: Challenger[] = [
+	{
+		type: 'TRAINER',
+		id: 'Fiery Fred 4',
+		team: [
+			makeChallengerPokemon({
+				name: 'magmortar',
+				xp: 40000,
+				heldItemName: 'charcoal',
+			}),
+			makeChallengerPokemon({
+				name: 'magcargo',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'pyroar',
+				xp: 40000,
+				heldItemName: 'silk-scarf',
+			}),
+			makeChallengerPokemon({
+				name: 'heatmor',
+				xp: 40000,
+				heldItemName: 'scope-lens',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'Fiery Fred 4', sprite: SpriteEnum.pyro },
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'Adrian Agua 4',
+		team: [
+			makeChallengerPokemon({
+				name: 'sealeo',
+				xp: 40000,
+				heldItemName: 'never-melt-ice',
+			}),
+			makeChallengerPokemon({
+				name: 'floatzel',
+				xp: 40000,
+				heldItemName: 'mystic-water',
+			}),
+			makeChallengerPokemon({
+				name: 'poliwrath',
+				xp: 40000,
+				heldItemName: 'black-belt',
+			}),
+			makeChallengerPokemon({
+				name: 'crawdaunt',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'Adrian Agua 4', sprite: SpriteEnum.sailor },
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'Planter Paul 4',
+		team: [
+			makeChallengerPokemon({
+				name: 'gogoat',
+				xp: 40000,
+				heldItemName: 'silk-scarf',
+			}),
+			makeChallengerPokemon({
+				name: 'vileplume',
+				xp: 40000,
+				heldItemName: 'miracle-seed',
+			}),
+			makeChallengerPokemon({
+				name: 'breloom',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'arboliva',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'Planter Paul 4', sprite: SpriteEnum.farmer },
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'Electric Erik 4',
+		team: [
+			makeChallengerPokemon({
+				name: 'electivire',
+				xp: 40000,
+				heldItemName: 'magnet',
+			}),
+			makeChallengerPokemon({
+				name: 'pikachu',
+				xp: 40000,
+				heldItemName: 'light-ball',
+			}),
+			makeChallengerPokemon({
+				name: 'boltund',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'pawmo',
+				xp: 40000,
+				heldItemName: 'lum-berry',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'Electric Erik 4', sprite: SpriteEnum.mechanic },
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'Haunted Hilda 4',
+		team: [
+			makeChallengerPokemon({
+				name: 'gengar',
+				xp: 40000,
+				heldItemName: 'poison-barb',
+			}),
+			makeChallengerPokemon({
+				name: 'trevenant',
+				xp: 40000,
+				heldItemName: 'miracle-seed',
+			}),
+			makeChallengerPokemon({
+				name: 'dusknoir',
+				xp: 40000,
+				heldItemName: 'spell-tag',
+			}),
+			makeChallengerPokemon({
+				name: 'banette',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'Haunted Hilda 4', sprite: SpriteEnum.possessed },
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'Dark Dave 4',
+		team: [
+			makeChallengerPokemon({
+				name: 'houndoom',
+				xp: 40000,
+				heldItemName: 'charcoal',
+			}),
+			makeChallengerPokemon({
+				name: 'honchkrow',
+				xp: 40000,
+				heldItemName: 'sharp-beak',
+			}),
+			makeChallengerPokemon({
+				name: 'shiftry',
+				xp: 40000,
+				heldItemName: 'miracle-seed',
+			}),
+			makeChallengerPokemon({
+				name: 'cacturne',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'Dark Dave 4', sprite: SpriteEnum.gangster },
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'Psycho Pete 4',
+		team: [
+			makeChallengerPokemon({
+				name: 'hypno',
+				xp: 40000,
+				heldItemName: 'twisted-spoon',
+			}),
+			makeChallengerPokemon({
+				name: 'gardevoir',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'espurr',
+				xp: 40000,
+				heldItemName: 'scope-lens',
+			}),
+			makeChallengerPokemon({
+				name: 'indeedee-male',
+				xp: 40000,
+				heldItemName: 'lum-berry',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'Psycho Pete 4', sprite: SpriteEnum.psychic },
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'Fairy Frida 4',
+		team: [
+			makeChallengerPokemon({
+				name: 'clefable',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'azumarill',
+				xp: 40000,
+				heldItemName: 'mystic-water',
+			}),
+			makeChallengerPokemon({
+				name: 'slurpuff',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'gardevoir',
+				xp: 40000,
+				heldItemName: 'twisted-spoon',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'Fairy Frida 4', sprite: SpriteEnum.maid },
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'Normal Norman 4',
+		team: [
+			makeChallengerPokemon({
+				name: 'stoutland',
+				xp: 40000,
+				heldItemName: 'silk-scarf',
+			}),
+			makeChallengerPokemon({
+				name: 'persian',
+				xp: 40000,
+				heldItemName: 'silk-scarf',
+			}),
+			makeChallengerPokemon({
+				name: 'tauros',
+				xp: 40000,
+				heldItemName: 'silk-scarf',
+			}),
+			makeChallengerPokemon({
+				name: 'zangoose',
+				xp: 40000,
+				heldItemName: 'silk-scarf',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'Normal Norman 4', sprite: SpriteEnum.uncle },
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'Rick the Rock 4',
+		team: [
+			makeChallengerPokemon({
+				name: 'probopass',
+				xp: 40000,
+				heldItemName: 'hard-stone',
+			}),
+			makeChallengerPokemon({
+				name: 'relicanth',
+				xp: 40000,
+				heldItemName: 'mystic-water',
+			}),
+			makeChallengerPokemon({
+				name: 'gigalith',
+				xp: 40000,
+				heldItemName: 'lum-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'golem',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'Rick the Rock 4', sprite: SpriteEnum.hiker },
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'grounded gunther 4',
+		team: [
+			makeChallengerPokemon({
+				name: 'sandslash',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'sandaconda',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'flygon',
+				xp: 40000,
+				heldItemName: 'dragon-fang',
+			}),
+			makeChallengerPokemon({
+				name: 'donphan',
+				xp: 40000,
+				heldItemName: 'soft-sand',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'grounded gunther 4', sprite: SpriteEnum.explorer },
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'steely stannis 4',
+		team: [
+			makeChallengerPokemon({
+				name: 'aggron',
+				xp: 40000,
+				heldItemName: 'metal-coat',
+			}),
+			makeChallengerPokemon({
+				name: 'magneton',
+				xp: 40000,
+				heldItemName: 'magnet',
+			}),
+			makeChallengerPokemon({
+				name: 'skarmory',
+				xp: 40000,
+				heldItemName: 'sharp-beak',
+			}),
+			makeChallengerPokemon({
+				name: 'mawile',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'steely stannis 4', sprite: SpriteEnum.builder },
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'icy irmgard 4',
+		team: [
+			makeChallengerPokemon({
+				name: 'sandslash-alola',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'vanilluxe',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'walrein',
+				xp: 40000,
+				heldItemName: 'never-melt-ice',
+			}),
+			makeChallengerPokemon({
+				name: 'jynx',
+				xp: 40000,
+				heldItemName: 'twisted-spoon',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'icy irmgard 4', sprite: SpriteEnum.grandma },
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'dragan 2',
+		team: [
+			makeChallengerPokemon({
+				name: 'dragonair',
+				xp: 40000,
+				heldItemName: 'dragon-fang',
+			}),
+			makeChallengerPokemon({
+				name: 'hakamo-o',
+				xp: 40000,
+				heldItemName: 'dragon-fang',
+			}),
+			makeChallengerPokemon({
+				name: 'shelgon',
+				xp: 40000,
+				heldItemName: 'dragon-fang',
+			}),
+			makeChallengerPokemon({
+				name: 'druddigon',
+				xp: 40000,
+				heldItemName: 'dragon-fang',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: {
+			name: 'dragan 2',
+			sprite: SpriteEnum.ace2Male,
+		},
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'fighting frank 4',
+		team: [
+			makeChallengerPokemon({
+				name: 'hitmonlee',
+				xp: 40000,
+				heldItemName: 'black-belt',
+			}),
+			makeChallengerPokemon({
+				name: 'machamp',
+				xp: 40000,
+				heldItemName: 'black-belt',
+			}),
+			makeChallengerPokemon({
+				name: 'conkeldurr',
+				xp: 40000,
+				heldItemName: 'black-belt',
+			}),
+			makeChallengerPokemon({
+				name: 'hitmonchan',
+				xp: 40000,
+				heldItemName: 'black-belt',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'fighting frank 4', sprite: SpriteEnum.karateMale },
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'flying fernanda 4',
+		team: [
+			makeChallengerPokemon({
+				name: 'pidgeot',
+				xp: 40000,
+				heldItemName: 'sharp-beak',
+			}),
+			makeChallengerPokemon({
+				name: 'sirfetchd',
+				xp: 40000,
+				heldItemName: 'sharp-beak',
+			}),
+			makeChallengerPokemon({
+				name: 'fearow',
+				xp: 40000,
+				heldItemName: 'sharp-beak',
+			}),
+			makeChallengerPokemon({
+				name: 'honchkrow',
+				xp: 40000,
+				heldItemName: 'sharp-beak',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'flying fernanda 4', sprite: SpriteEnum.beauty1 },
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'poisonous pedro 4',
+		team: [
+			makeChallengerPokemon({
+				name: 'weezing',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'swalot',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'toxtricity-amped',
+				xp: 40000,
+				heldItemName: 'poison-barb',
+			}),
+			makeChallengerPokemon({
+				name: 'ariados',
+				xp: 40000,
+				heldItemName: 'silver-powder',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'poisonous pedro 4', sprite: SpriteEnum.biker },
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'Buggin Bob 3',
+		team: [
+			makeChallengerPokemon({
+				name: 'scolipede',
+				xp: 40000,
+				heldItemName: 'silver-powder',
+			}),
+			makeChallengerPokemon({
+				name: 'beedrill',
+				xp: 40000,
+				heldItemName: 'silver-powder',
+			}),
+			makeChallengerPokemon({
+				name: 'pinsir',
+				xp: 40000,
+				heldItemName: 'silver-powder',
+			}),
+			makeChallengerPokemon({
+				name: 'heracross',
+				xp: 40000,
+				heldItemName: 'silver-powder',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'Buggin Bob 4', sprite: SpriteEnum.bugCatcher },
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'Kanto Ken 3',
+		team: [
+			makeChallengerPokemon({
+				name: 'charizard',
+				xp: 40000,
+				heldItemName: 'charcoal',
+			}),
+			makeChallengerPokemon({
+				name: 'blastoise',
+				xp: 40000,
+				heldItemName: 'mystic-water',
+			}),
+			makeChallengerPokemon({
+				name: 'venusaur',
+				xp: 40000,
+				heldItemName: 'miracle-seed',
+			}),
+			makeChallengerPokemon({
+				name: 'raichu',
+				xp: 40000,
+				heldItemName: 'magnet',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'Kanto Ken 3', sprite: SpriteEnum.aceMale },
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'Johto John 3',
+		team: [
+			makeChallengerPokemon({
+				name: 'typhlosion',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'feraligatr',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'meganium',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'azumarill',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'Johto John 3', sprite: SpriteEnum.aceMale },
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'Hoenn Hannah 2',
+		team: [
+			makeChallengerPokemon({
+				name: 'blaziken',
+				xp: 40000,
+				heldItemName: 'charcoal',
+			}),
+			makeChallengerPokemon({
+				name: 'swampert',
+				xp: 40000,
+				heldItemName: 'mystic-water',
+			}),
+			makeChallengerPokemon({
+				name: 'sceptile',
+				xp: 40000,
+				heldItemName: 'miracle-seed',
+			}),
+			makeChallengerPokemon({
+				name: 'plusle',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'minun',
+				xp: 40000,
+				heldItemName: 'sitrus-berry',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'Hoenn Hannah 3', sprite: SpriteEnum.aceFemale },
+		requiredUpgrade: 'training field 4',
+	},
+	{
+		type: 'TRAINER',
+		id: 'Sinnoh Simone 3',
+		team: [
+			makeChallengerPokemon({
+				name: 'infernape',
+				xp: 40000,
+				heldItemName: 'charcoal',
+			}),
+			makeChallengerPokemon({
+				name: 'empoleon',
+				xp: 40000,
+				heldItemName: 'mystic-water',
+			}),
+			makeChallengerPokemon({
+				name: 'torterra',
+				xp: 40000,
+				heldItemName: 'miracle-seed',
+			}),
+			makeChallengerPokemon({
+				name: 'pachirisu',
+				xp: 40000,
+				heldItemName: 'magnet',
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'Sinnoh Simone 3', sprite: SpriteEnum.aceFemale },
+		requiredUpgrade: 'training field 4',
+	},
+];
 const specialTrainers: Challenger[] = [
 	{
 		type: 'TRAINER',
@@ -829,6 +1477,7 @@ const specialTrainers: Challenger[] = [
 
 export const trainers = [
 	...specialTrainers,
+	...tier4trainers,
 	...tier3trainers,
 	...tier2trainers,
 	...tier1trainers,
@@ -837,7 +1486,7 @@ export const trainers = [
 console.log('trainers', trainers.length);
 export const makeRandomTrainer = (
 	saveFile: SaveFile,
-	tier?: 1 | 2 | 3
+	tier?: 1 | 2 | 3 | 4
 ): Challenger => {
 	let all = trainers;
 
@@ -848,7 +1497,10 @@ export const makeRandomTrainer = (
 		all = tier2trainers;
 	}
 	if (tier === 3) {
-		all = tier2trainers;
+		all = tier3trainers;
+	}
+	if (tier === 3) {
+		all = tier4trainers;
 	}
 	return getRandomEntry(
 		all.filter((t) => {

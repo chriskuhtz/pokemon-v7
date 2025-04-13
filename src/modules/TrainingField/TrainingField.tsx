@@ -38,13 +38,23 @@ export const TrainingField = () => {
 						]}
 					/>
 				)}
-				{saveFile.campUpgrades['training field 2'] && (
+				{saveFile.campUpgrades['training field 3'] && (
 					<Card
 						key={'random3'}
 						icon={<FaRandom />}
 						content={<h3>Random Opponent (Tier 3)</h3>}
 						actionElements={[
 							<button onClick={() => challenge({ tier: 3 })}>Challenge</button>,
+						]}
+					/>
+				)}
+				{saveFile.campUpgrades['training field 4'] && (
+					<Card
+						key={'random4'}
+						icon={<FaRandom />}
+						content={<h3>Random Opponent (Tier 4)</h3>}
+						actionElements={[
+							<button onClick={() => challenge({ tier: 4 })}>Challenge</button>,
 						]}
 					/>
 				)}

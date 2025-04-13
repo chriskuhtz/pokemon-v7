@@ -9,7 +9,7 @@ export const useChallengeTrainer = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
 	return useCallback(
-		({ id, tier }: { id?: string; tier?: 1 | 2 | 3 }) => {
+		({ id, tier }: { id?: string; tier?: 1 | 2 | 3 | 4 }) => {
 			const trainer =
 				trainers.find((t) => t.id === id) ?? makeRandomTrainer(saveFile, tier);
 			patchSaveFileReducer({
