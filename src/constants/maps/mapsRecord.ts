@@ -43,7 +43,7 @@ export const mapDisplayNames: Record<MapId, string> = {
 	routeE1: 'kiiro highlands',
 	routeS1E1: 'midori plains',
 	routeS1: 'aoi lake',
-	routeS1W1: 'kuro route',
+	routeS1W1: 'kuro hills',
 	routeW1: 'shiro route',
 	routeN1W1: 'koniro route',
 	camp: 'kuma camp',
