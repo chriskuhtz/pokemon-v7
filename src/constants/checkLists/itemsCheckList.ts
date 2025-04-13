@@ -1141,7 +1141,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/249/',
 		handled: true,
 	},
-	{ name: 'flame-orb', url: 'https://pokeapi.co/api/v2/item/250/' },
+	{
+		name: 'flame-orb',
+		url: 'https://pokeapi.co/api/v2/item/250/',
+		handled: true,
+	},
 	{ name: 'quick-powder', url: 'https://pokeapi.co/api/v2/item/251/' },
 	{ name: 'focus-sash', url: 'https://pokeapi.co/api/v2/item/252/' },
 	{ name: 'zoom-lens', url: 'https://pokeapi.co/api/v2/item/253/' },

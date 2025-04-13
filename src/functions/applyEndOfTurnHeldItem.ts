@@ -285,6 +285,10 @@ export const applyEndOfTurnHeldItem = (
 		addMessage(`${pokemon.name} badly poisoned itself with toxic orb`);
 		return { ...pokemon, primaryAilment: { type: 'toxic' } };
 	}
+	if (heldItem === 'flame-orb' && !pokemon.primaryAilment) {
+		addMessage(`${pokemon.name} burned itself with toxic orb`);
+		return { ...pokemon, primaryAilment: { type: 'burn' } };
+	}
 
 	return pokemon;
 };
