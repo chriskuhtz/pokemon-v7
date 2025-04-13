@@ -34,8 +34,8 @@ export const routeN1E1Encounters: EncounterMap = {
 		{ name: 'bounsweet', minXp: 1000, maxXp: 3375, rarity: 'common' },
 		{ name: 'grubbin', minXp: 1000, maxXp: 3375, rarity: 'common' },
 		{ name: 'pansage', minXp: 1000, maxXp: 3375, rarity: 'rare' },
-		{ name: 'venomoth', minXp: 1000, maxXp: 3375, rarity: 'rare' },
 		{ name: 'oranguru', minXp: 1000, maxXp: 3375, rarity: 'ultra-rare' },
+		{ name: 'pachirisu', minXp: 1000, maxXp: 3375, rarity: 'rare' },
 	],
 	NIGHT: [
 		{ name: 'drifloon', minXp: 1000, maxXp: 3375, rarity: 'common' },

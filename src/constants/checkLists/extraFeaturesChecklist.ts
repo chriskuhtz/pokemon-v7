@@ -290,7 +290,7 @@ export const extraFeatureCheckList: {
 	{ name: 'pikachu fan questline', handled: true },
 	{ name: 'quest: light ball pikachu', handled: true },
 	{ name: 'quest: different pikachus', handled: true },
-	{ name: 'quest: pikachu clones' },
+	{ name: 'quest: pikachu clones', handled: true },
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'refine battle end' },
 	{ name: 'tilemap should be only tuples' },

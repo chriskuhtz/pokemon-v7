@@ -9,6 +9,7 @@ export const routeE1Encounters: EncounterMap = {
 			maxXp: 1000,
 			rarity: 'ultra-rare',
 		},
+
 		{ name: 'growlithe', minXp: 3375, maxXp: 8000, rarity: 'medium' },
 		{ name: 'growlithe-hisui', minXp: 3375, maxXp: 8000, rarity: 'medium' },
 	],
@@ -17,6 +18,7 @@ export const routeE1Encounters: EncounterMap = {
 		{ name: 'sandshrew', minXp: 3375, maxXp: 8000, rarity: 'common' },
 		{ name: 'rolycoly', minXp: 3375, maxXp: 8000, rarity: 'common' },
 		{ name: 'sandslash', minXp: 8000, maxXp: 15625, rarity: 'rare' },
+		{ name: 'dedenne', minXp: 1000, maxXp: 1000, rarity: 'rare' },
 		{ name: 'riolu', minXp: 3375, maxXp: 8000, rarity: 'ultra-rare' },
 	],
 	DAY: [
@@ -24,6 +26,7 @@ export const routeE1Encounters: EncounterMap = {
 		{ name: 'bunnelby', minXp: 3375, maxXp: 8000, rarity: 'common' },
 		{ name: 'toedscool', minXp: 3375, maxXp: 8000, rarity: 'common' },
 		{ name: 'gligar', minXp: 3375, maxXp: 8000, rarity: 'rare' },
+		{ name: 'pawmi', minXp: 1000, maxXp: 1000, rarity: 'rare' },
 		{ name: 'sandslash', minXp: 3375, maxXp: 8000, rarity: 'ultra-rare' },
 	],
 	EVENING: [

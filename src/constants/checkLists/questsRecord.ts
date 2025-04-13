@@ -302,6 +302,7 @@ export const questNames = [
 	...Object.keys(catchQuests),
 	'catch a pikachu',
 	'find a lightball',
+	'catch all mouselike electric pokemon',
 	'catch all costumed pikachus',
 	'catch a feebas',
 	'catch a pokemon',
@@ -414,6 +415,47 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 30,
 		conditionFunction: (s) => {
 			return s.bag['light-ball'] > 0;
+		},
+		kind: 'QUEST_LINE',
+	},
+	'catch all mouselike electric pokemon': {
+		rewardItems: {
+			'big-malasada': 5,
+			'belue-berry': 1,
+			'occa-berry': 1,
+			'wepear-berry': 1,
+			'watmel-berry': 1,
+			'nanab-berry': 1,
+		},
+		targetPokemon: [
+			'pikachu',
+			'plusle',
+			'minun',
+			'emolga',
+			'pachirisu',
+			'pachirisu',
+			'dedenne',
+			'togedemaru',
+			'pawmi',
+			'morpeko-full-belly',
+			'morpeko-hangry',
+		],
+		researchPoints: 100,
+		conditionFunction: (s) => {
+			const pikas: PokemonName[] = [
+				'pikachu',
+				'plusle',
+				'minun',
+				'emolga',
+				'pachirisu',
+				'pachirisu',
+				'dedenne',
+				'togedemaru',
+				'pawmi',
+				'morpeko-full-belly',
+				'morpeko-hangry',
+			];
+			return pikas.every((pika) => s.pokedex[pika].caughtOnRoutes.length > 0);
 		},
 		kind: 'QUEST_LINE',
 	},

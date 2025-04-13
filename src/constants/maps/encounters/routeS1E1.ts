@@ -29,11 +29,13 @@ export const routeS1E1Encounters: EncounterMap = {
 		},
 		{ name: 'wooloo', minXp: 3375, maxXp: 15625, rarity: 'common' },
 		{ name: 'skitty', minXp: 3375, maxXp: 15625, rarity: 'medium' },
+		{ name: 'plusle', minXp: 3375, maxXp: 15625, rarity: 'rare' },
 	],
 	DAY: [
 		{ name: 'bouffalant', minXp: 3375, maxXp: 15625, rarity: 'ultra-rare' },
 		{ name: 'miltank', minXp: 3375, maxXp: 15625, rarity: 'common' },
 		{ name: 'purrloin', minXp: 3375, maxXp: 15625, rarity: 'medium' },
+		{ name: 'minun', minXp: 3375, maxXp: 15625, rarity: 'medium' },
 	],
 	EVENING: [
 		{
@@ -44,6 +46,7 @@ export const routeS1E1Encounters: EncounterMap = {
 		},
 		{ name: 'lechonk', minXp: 3375, maxXp: 15625, rarity: 'common' },
 		{ name: 'electrike', minXp: 3375, maxXp: 15625, rarity: 'medium' },
+		{ name: 'morpeko-full-belly', minXp: 3375, maxXp: 15625, rarity: 'rare' },
 	],
 	NIGHT: [
 		{
@@ -54,5 +57,6 @@ export const routeS1E1Encounters: EncounterMap = {
 		},
 		{ name: 'greavard', minXp: 3375, maxXp: 15625, rarity: 'common' },
 		{ name: 'pawniard', minXp: 3375, maxXp: 15625, rarity: 'medium' },
+		{ name: 'morpeko-full-belly', minXp: 3375, maxXp: 15625, rarity: 'rare' },
 	],
 };

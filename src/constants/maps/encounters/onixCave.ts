@@ -9,6 +9,7 @@ export const onixCaveEncounters: EncounterMap = {
 			maxXp: 1000,
 			rarity: 'ultra-rare',
 		},
+		{ name: 'togedemaru', minXp: 3375, maxXp: 15625, rarity: 'rare' },
 		{ name: 'zubat', minXp: 3375, maxXp: 15625, rarity: 'common' },
 		{ name: 'rhyhorn', minXp: 3375, maxXp: 15625, rarity: 'common' },
 		{ name: 'glimmet', minXp: 3375, maxXp: 15625, rarity: 'rare' },
