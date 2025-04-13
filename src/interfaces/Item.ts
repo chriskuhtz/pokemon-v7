@@ -174,6 +174,7 @@ export const heldItems = [
 	'life-orb',
 	'toxic-orb',
 	'flame-orb',
+	'quick-powder',
 ] as const;
 export const valuables = [
 	'shoal-salt',

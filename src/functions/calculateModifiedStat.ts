@@ -40,6 +40,13 @@ export const calculateModifiedStat = (
 		res = res * 1.5;
 	}
 	if (
+		heldItem === 'quick-powder' &&
+		pokemon.name.includes('ditto') &&
+		statName === 'speed'
+	) {
+		res = res * 2;
+	}
+	if (
 		heldItem === 'soul-dew' &&
 		(pokemon.name === 'latias' ||
 			pokemon.name === 'latios' ||

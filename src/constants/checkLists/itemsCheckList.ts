@@ -1146,7 +1146,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/250/',
 		handled: true,
 	},
-	{ name: 'quick-powder', url: 'https://pokeapi.co/api/v2/item/251/' },
+	{
+		name: 'quick-powder',
+		url: 'https://pokeapi.co/api/v2/item/251/',
+		handled: true,
+	},
 	{ name: 'focus-sash', url: 'https://pokeapi.co/api/v2/item/252/' },
 	{ name: 'zoom-lens', url: 'https://pokeapi.co/api/v2/item/253/' },
 	{ name: 'metronome', url: 'https://pokeapi.co/api/v2/item/254/' },
