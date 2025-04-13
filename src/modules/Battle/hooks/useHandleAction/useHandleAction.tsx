@@ -65,11 +65,16 @@ export const useHandleAction = (
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
 						if (p.id === attacker.id) {
+							const updatedDamage =
+								attacker.ability === 'regenerator'
+									? Math.max(0, attacker.damage - attacker.stats.hp / 4)
+									: attacker.damage;
 							return {
 								...attacker,
 								moveQueue: [],
 								status: 'BENCH',
 								secondaryAilments: [],
+								damage: updatedDamage,
 							};
 						}
 						if (p.id === target.id) {
