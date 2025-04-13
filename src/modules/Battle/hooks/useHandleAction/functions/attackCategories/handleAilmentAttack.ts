@@ -1,5 +1,6 @@
 import { applyAttackAilmentsToPokemon } from '../../../../../../functions/applyAttackAilmentsToPokemon';
 import { applySecondaryAilmentToPokemon } from '../../../../../../functions/applySecondaryAilmentToPokemon';
+import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import { LEECH_DAMAGE_FACTOR } from '../../../../../../interfaces/Ailment';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
@@ -72,6 +73,17 @@ export const handleAilmentAttack = ({
 				ailment: 'infatuation',
 				targetId: updatedAttacker.id,
 			});
+
+		if (getHeldItem(updatedTarget) === 'destiny-knot') {
+			addMessage({ message: 'destiny knot, biatch' });
+
+			updatedAttacker = applySecondaryAilmentToPokemon({
+				pokemon: updatedAttacker,
+				addMessage,
+				ailment: 'infatuation',
+				targetId: updatedTarget.id,
+			});
+		}
 	}
 	if (move.name === 'nightmare') {
 		updatedTarget = applySecondaryAilmentToPokemon({

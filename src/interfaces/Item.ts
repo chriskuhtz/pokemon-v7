@@ -179,6 +179,7 @@ export const heldItems = [
 	'metronome',
 	'iron-ball',
 	'lagging-tail',
+	'destiny-knot',
 ] as const;
 export const valuables = [
 	'shoal-salt',
