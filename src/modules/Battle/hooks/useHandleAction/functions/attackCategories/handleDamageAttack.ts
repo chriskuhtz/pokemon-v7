@@ -214,6 +214,16 @@ export const handleDamageAttack = ({
 		};
 		removeSpikes(updatedTarget.ownerId);
 	}
+	if (move.name === 'fury-cutter') {
+		updatedAttacker.furyCutterStack =
+			(updatedAttacker.furyCutterStack ?? 0) + 1;
+	} else updatedAttacker.furyCutterStack = 0;
+	if (
+		getHeldItem(updatedAttacker) === 'metronome' &&
+		updatedAttacker.lastUsedMove?.name === move.name
+	) {
+		updatedAttacker.metronomeStack = (updatedAttacker.metronomeStack ?? 0) + 1;
+	} else updatedAttacker.metronomeStack = 0;
 
 	//ABILITYCHECK
 	const { updatedAttacker: a, updatedTarget: t } = handleAbilitiesAfterAttack(

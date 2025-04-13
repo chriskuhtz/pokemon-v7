@@ -152,7 +152,6 @@ export const handleAllAttackCategories = ({
 					addMessage,
 					move,
 					battleWeather,
-					scatterCoins,
 					battleFieldEffects,
 					target,
 				});

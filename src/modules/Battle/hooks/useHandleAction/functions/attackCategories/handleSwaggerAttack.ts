@@ -5,7 +5,6 @@ import { applySecondaryAilmentToPokemon } from '../../../../../../functions/appl
 import { calculateDamage } from '../../../../../../functions/calculateDamage';
 import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
-import { getTypeNames } from '../../../../../../functions/getTypeNames';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
@@ -19,7 +18,6 @@ export const handleSwaggerAttack = ({
 	addMessage,
 	move: m,
 	battleWeather,
-	scatterCoins,
 	battleFieldEffects,
 	target,
 }: {
@@ -28,7 +26,6 @@ export const handleSwaggerAttack = ({
 	addMessage: (x: Message) => void;
 	move: BattleAttack;
 	battleWeather: WeatherType | undefined;
-	scatterCoins: () => void;
 	battleFieldEffects: BattleFieldEffect[];
 	target: BattlePokemon;
 }): BattlePokemon[] => {
@@ -45,71 +42,6 @@ export const handleSwaggerAttack = ({
 		updatedTarget.moveQueue[0].name === 'dig';
 
 	const move = m;
-
-	if (move.name === 'bide') {
-		if (!updatedAttacker.biding) {
-			addMessage({ message: `${updatedAttacker.name} is biding its time` });
-			updatedAttacker = { ...updatedAttacker, biding: { turn: 1, damage: 0 } };
-		} else if (updatedAttacker.biding?.turn === 1) {
-			addMessage({ message: `${updatedAttacker.name} is biding its time` });
-			updatedAttacker = {
-				...updatedAttacker,
-				biding: { ...updatedAttacker.biding, turn: 2 },
-			};
-		} else if (updatedAttacker.biding?.turn === 2) {
-			addMessage({ message: `${updatedAttacker.name} released energy` });
-		}
-	}
-
-	if (move.name === 'defense-curl') {
-		updatedAttacker.defenseCurled = true;
-	}
-	if (move.name === 'fury-cutter') {
-		updatedAttacker.furyCutterStack =
-			(updatedAttacker.furyCutterStack ?? 0) + 1;
-	} else updatedAttacker.furyCutterStack = 0;
-
-	if (
-		move.name === 'curse' &&
-		getTypeNames(updatedAttacker).includes('ghost')
-	) {
-		updatedTarget = applySecondaryAilmentToPokemon({
-			pokemon: updatedTarget,
-			ailment: 'cursed',
-			addMessage,
-		});
-		updatedAttacker = {
-			...updatedAttacker,
-			damage: updatedAttacker.damage + Math.floor(updatedAttacker.stats.hp / 2),
-		};
-		addMessage({
-			message: `${updatedAttacker.name} cut its own hp to curse ${updatedTarget.name}`,
-		});
-	}
-
-	if (move.name === 'pay-day') {
-		addMessage({ message: `Coins scattered everywhere` });
-		scatterCoins();
-	}
-	if (
-		move.name === 'thief' &&
-		updatedTarget.ability !== 'sticky-hold' &&
-		getHeldItem(updatedTarget, false) &&
-		!getHeldItem(updatedAttacker, false)
-	) {
-		addMessage({
-			message: `${updatedAttacker.name} stole a ${getHeldItem(
-				updatedTarget,
-				false
-			)} from ${updatedTarget.name}`,
-		});
-
-		updatedAttacker = {
-			...updatedAttacker,
-			heldItemName: getHeldItem(updatedTarget, false),
-		};
-		updatedTarget = { ...updatedTarget, heldItemName: undefined };
-	}
 
 	//UPDATES
 

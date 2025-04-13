@@ -584,6 +584,7 @@ export const calculateDamage = (
 		target.ownerId === attacker.ownerId && target.ability === 'telepathy'
 			? 0
 			: 1;
+	const metronomeFactor = Math.min(2, 1 + (attacker.metronomeStack ?? 0 * 0.1));
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -639,7 +640,8 @@ export const calculateDamage = (
 				toxicBoostFactor *
 				flareBoostFactor *
 				lifeOrbFactor *
-				telepathyFactor
+				telepathyFactor *
+				metronomeFactor
 		),
 		1
 	);

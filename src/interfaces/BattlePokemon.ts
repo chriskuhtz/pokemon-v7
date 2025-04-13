@@ -53,6 +53,7 @@ export interface BattlePokemon extends OwnedPokemon {
 	participatedInBattle: boolean;
 	choiceBandedMove?: MoveName;
 	furyCutterStack?: number;
+	metronomeStack?: number;
 	consumedBerry?: BerryType;
 }
 
