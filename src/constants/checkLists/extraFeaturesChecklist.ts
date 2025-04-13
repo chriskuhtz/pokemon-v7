@@ -381,4 +381,5 @@ export const extraFeatureCheckList: {
 	{ name: 'dugtrio should not deliver fossils' },
 	{ name: 'randomized-moves' },
 	{ name: 'battle item shop' },
+	{ name: 'devmode gives complete inventory and unlocks, lvl 100' },
 ];
