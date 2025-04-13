@@ -380,4 +380,5 @@ export const extraFeatureCheckList: {
 	{ name: 'defeat x trainer should give malasada as reward' },
 	{ name: 'evolve starter could work with every pokemon' },
 	{ name: 'Movement buttons' },
+	{ name: 'show move power' },
 ];

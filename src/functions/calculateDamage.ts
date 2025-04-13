@@ -10,6 +10,7 @@ import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { superEffectiveSaveTable } from '../interfaces/Item';
 import { PokemonType } from '../interfaces/PokemonType';
+import { StatObject } from '../interfaces/StatObject';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { calculateLevelData } from './calculateLevelData';
@@ -100,6 +101,14 @@ export const getMagnitudePower = () => {
 	}
 	return 150;
 };
+export const getHiddenPowerPower = (ivs: StatObject) => {
+	const v = ivs['special-defense'] > 8 ? 1 : 0;
+	const w = ivs['speed'] > 8 ? 1 : 0;
+	const x = ivs['defense'] > 8 ? 1 : 0;
+	const y = ivs['attack'] > 8 ? 1 : 0;
+	const z = ivs['special-defense'] % 4;
+	return 31 + (5 * (v + 2 * w + 4 * x + 8 * y) + z) / 2;
+};
 
 export const getRolloutFactor = (turn: number, defenseCurled: boolean) => {
 	return turn * (defenseCurled ? 2 : 1);
@@ -153,6 +162,9 @@ export const getPower = (
 		}
 		return 40;
 	}
+	if (attack.name === 'hidden-power') {
+		return getHiddenPowerPower(attacker.intrinsicValues);
+	}
 	return attack.data.power ?? 0;
 };
 
@@ -187,12 +199,7 @@ export const calculateDamage = (
 	if (damageClass === 'status') {
 		return { damage: 0 };
 	}
-	const typeFactor = determineTypeFactor(
-		target,
-		attacker.ability,
-		attack,
-		addMessage
-	);
+	const typeFactor = determineTypeFactor(target, attacker, attack, addMessage);
 	if (typeFactor === 0) {
 		return { damage: 0 };
 	}

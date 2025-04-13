@@ -1,23 +1,25 @@
-export type PokemonType =
-	| 'fire'
-	| 'water'
-	| 'grass'
-	| 'electric'
-	| 'ghost'
-	| 'dark'
-	| 'psychic'
-	| 'fairy'
-	| 'normal'
-	| 'rock'
-	| 'ground'
-	| 'steel'
-	| 'ice'
-	| 'dragon'
-	| 'fighting'
-	| 'flying'
-	| 'poison'
-	| 'bug'
-	| 'typeless';
+export const pokemonTypes = [
+	'fire',
+	'water',
+	'grass',
+	'electric',
+	'ghost',
+	'dark',
+	'psychic',
+	'rock',
+	'ground',
+	'steel',
+	'ice',
+	'dragon',
+	'fighting',
+	'flying',
+	'poison',
+	'bug',
+	'fairy',
+	'normal',
+	'typeless',
+] as const;
+export type PokemonType = (typeof pokemonTypes)[number];
 
 //key : MoveType, values: Target Types
 export const typeEffectivenessChart: Record<

@@ -1,22 +1,44 @@
-import { AbilityName } from '../constants/checkLists/abilityCheckList';
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { typeEffectivenessChart } from '../interfaces/PokemonType';
+import {
+	PokemonType,
+	pokemonTypes,
+	typeEffectivenessChart,
+} from '../interfaces/PokemonType';
+import { StatObject } from '../interfaces/StatObject';
 import { getTypeNames } from './getTypeNames';
 
+const getHiddenPowerType = (ivs: StatObject): PokemonType => {
+	const a = ivs.hp % 2;
+	const b = ivs.defense % 2;
+	const c = ivs.attack % 2;
+	const d = ivs.speed % 2;
+	const e = ivs['special-attack'] % 2;
+	const f = ivs['special-defense'] % 2;
+
+	const factor = (a + 2 * b + 4 * c + 8 * d + 16 * e + 32 * f) * 15;
+
+	return pokemonTypes[Math.floor(factor / 63)];
+};
 export const determineTypeFactor = (
 	target: BattlePokemon,
-	attackerAbility: AbilityName,
+	attacker: BattlePokemon,
 	attack: BattleAttack,
 
 	addMessage?: (x: Message) => void
 ): number => {
 	let res = 1;
-	const normalized = attackerAbility === 'normalize';
+	const normalized = attacker.ability === 'normalize';
 	const targetTypes = getTypeNames(target);
 
-	const attackType = normalized ? 'normal' : attack.data.type.name;
+	let attackType = attack.data.type.name;
+	if (normalized) {
+		attackType = 'normal';
+	}
+	if (attack.name === 'hidden-power') {
+		attackType = getHiddenPowerType(attacker.intrinsicValues);
+	}
 
 	const effectiveness = typeEffectivenessChart[attackType];
 
@@ -33,7 +55,7 @@ export const determineTypeFactor = (
 	if (
 		targetTypes.includes('ghost') &&
 		(target.secondaryAilments.some((s) => s.type === 'foresighted') ||
-			attackerAbility === 'scrappy') &&
+			attacker.ability === 'scrappy') &&
 		(attackType === 'normal' || attackType == 'fighting')
 	) {
 		res = 1;
