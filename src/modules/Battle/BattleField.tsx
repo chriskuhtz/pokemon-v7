@@ -438,11 +438,14 @@ export const BattleField = ({
 			const collectedMessages: string[] = [];
 			const updatedPokemon = pokemon.map((p) => {
 				if (p.status === 'ONFIELD') {
-					let updated = applyEndOfTurnHeldItem(
-						p,
-						(x) => collectedMessages.push(x),
-						(x) => collectedMessages.push(...x),
-						battleFieldEffects
+					let updated = applyPrimaryAilmentDamage(p, (x) =>
+						collectedMessages.push(x)
+					);
+					updated = applySecondaryAilmentDamage(updated, (x) =>
+						collectedMessages.push(x)
+					);
+					updated = reduceSecondaryAilmentDurations(updated, (x) =>
+						collectedMessages.push(x)
 					);
 
 					const allyIsHealer = !!pokemon.find(
@@ -461,15 +464,13 @@ export const BattleField = ({
 						pokemon: updated,
 						addMessage: (x) => collectedMessages.push(x.message),
 					});
-					updated = applyPrimaryAilmentDamage(updated, (x) =>
-						collectedMessages.push(x)
+					updated = updated = applyEndOfTurnHeldItem(
+						updated,
+						(x) => collectedMessages.push(x),
+						(x) => collectedMessages.push(...x),
+						battleFieldEffects
 					);
-					updated = applySecondaryAilmentDamage(updated, (x) =>
-						collectedMessages.push(x)
-					);
-					updated = reduceSecondaryAilmentDurations(updated, (x) =>
-						collectedMessages.push(x)
-					);
+
 					updated = applyEndOfTurnWeatherDamage(
 						updated,
 						(x) => collectedMessages.push(x),
