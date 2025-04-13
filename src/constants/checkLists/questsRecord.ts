@@ -424,6 +424,11 @@ export const questNames = [
 	'reach cooking skill 50',
 	'reach cooking skill 100',
 	'catch all different pokemon on routeS1',
+	'lure a pokemon with a berry',
+	'lure 10 different pokemon with berries',
+	'lure 20 different pokemon with berries',
+	'lure 30 different pokemon with berries',
+	'lure 40 different pokemon with berries',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -1690,6 +1695,69 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'magost-berry': 1,
 		},
 		conditionFunction: (s) => !!s.cookingSkill && s.cookingSkill >= 100,
+	},
+	'lure a pokemon with a berry': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'berry lure station routeN1',
+		researchPoints: 20,
+		rewardItems: {
+			'occa-berry': 1,
+			'passho-berry': 1,
+			'wacan-berry': 1,
+			'rindo-berry': 1,
+			'yache-berry': 1,
+		},
+		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 0,
+	},
+	'lure 10 different pokemon with berries': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'berry lure station routeN1E1',
+		availableAfter: 'lure a pokemon with a berry',
+		researchPoints: 30,
+		rewardItems: {
+			'chople-berry': 1,
+			'kebia-berry': 1,
+			'shuca-berry': 1,
+			'coba-berry': 1,
+			'payapa-berry': 1,
+		},
+		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 9,
+	},
+	'lure 20 different pokemon with berries': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'berry lure station routeE1',
+		availableAfter: 'lure 10 different pokemon with berries',
+		researchPoints: 40,
+		rewardItems: {
+			'tanga-berry': 1,
+			'charti-berry': 1,
+			'kasib-berry': 1,
+			'colbur-berry': 1,
+			'babiri-berry': 1,
+		},
+		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 19,
+	},
+	'lure 30 different pokemon with berries': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'berry lure station routeS1E1',
+		availableAfter: 'lure 20 different pokemon with berries',
+		researchPoints: 50,
+		rewardItems: {
+			'golden-nanab-berry': 3,
+			'golden-pinap-berry': 3,
+			'golden-razz-berry': 3,
+		},
+		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 29,
+	},
+	'lure 40 different pokemon with berries': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'berry lure station routeS1E1',
+		availableAfter: 'lure 30 different pokemon with berries',
+		researchPoints: 60,
+		rewardItems: {
+			'rare-candy': 10,
+		},
+		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 39,
 	},
 };
 

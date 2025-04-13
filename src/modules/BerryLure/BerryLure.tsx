@@ -17,7 +17,6 @@ import { PokemonType } from '../../interfaces/PokemonType';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { useStartEncounter } from '../Overworld/hooks/useStartEncounter';
 
 export const lureBerryEncountersN1: Record<PokemonType, PokemonName> = {
 	fire: 'tauros-paldea-blaze-breed',
@@ -105,9 +104,8 @@ export const lureBerryEncountersS1E1: Record<PokemonType, PokemonName> = {
 };
 export const BerryLure = () => {
 	const navigate = useNavigate();
-	const { saveFile } = useContext(SaveFileContext);
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { addMultipleMessages } = useContext(MessageQueueContext);
-	const startEncounter = useStartEncounter();
 
 	const availableBerries: BerryType[] = useMemo(() => {
 		return Object.values(superEffectiveSaveTable).filter((b) => {
@@ -169,7 +167,24 @@ export const BerryLure = () => {
 					},
 					{
 						message: `A Pokemon tries to snatch the berry`,
-						onRemoval: () => startEncounter(0, challenger),
+						onRemoval: () => {
+							patchSaveFileReducer({
+								meta: {
+									...saveFile.meta,
+									activeTab: 'BATTLE',
+									currentChallenger: challenger,
+								},
+								mileStones: {
+									...saveFile.mileStones,
+									luredWithBerries: [
+										...new Set([
+											...saveFile.mileStones.luredWithBerries,
+											challenger.team[0].name,
+										]),
+									],
+								},
+							});
+						},
 					},
 				]);
 			} else {
@@ -197,7 +212,14 @@ export const BerryLure = () => {
 				]);
 			}
 		},
-		[addMultipleMessages, navigate, saveFile.location.mapId, startEncounter]
+		[
+			addMultipleMessages,
+			navigate,
+			patchSaveFileReducer,
+			saveFile.location.mapId,
+			saveFile.meta,
+			saveFile.mileStones,
+		]
 	);
 	return (
 		<Page

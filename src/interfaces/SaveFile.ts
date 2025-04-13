@@ -116,6 +116,7 @@ export interface SaveFile {
 		cookedMediumRecipe?: boolean;
 		cookedTrickyRecipe?: boolean;
 		hasWokenASnorlax?: boolean;
+		luredWithBerries: PokemonName[];
 	};
 	farm: {
 		plants: BerryBush[];
