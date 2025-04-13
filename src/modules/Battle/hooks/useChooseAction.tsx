@@ -12,6 +12,7 @@ import {
 	isPPRestorationItem,
 	isRunawayItem,
 	isXItem,
+	ItemType,
 } from '../../../interfaces/Item';
 import { WeatherType } from '../../../interfaces/Weather';
 import { ChooseActionPayload } from '../BattleField';
@@ -28,6 +29,18 @@ const determineChoiceBandedMove = (
 	}
 
 	return;
+};
+const removePowerHerb = (
+	pokemon: BattlePokemon,
+	chosenMove: MoveName
+): ItemType | undefined => {
+	if (
+		secondTurnMoves.includes(chosenMove) &&
+		getHeldItem(pokemon) === 'power-herb'
+	) {
+		return undefined;
+	}
+	return pokemon.heldItemName;
 };
 export const useChooseAction = (
 	allOnField: BattlePokemon[],
@@ -152,11 +165,16 @@ export const useChooseAction = (
 				throw new Error('user does not know the selected move');
 			}
 
-			if (
-				secondTurnMoves.includes(actionName) &&
-				//solar beam doesnt need charge up in sunlight
-				!(battleWeather === 'sun' && actionName === 'solar-beam')
-			) {
+			const canSkipCharge = () => {
+				if (battleWeather === 'sun' && actionName === 'solar-beam') {
+					return true;
+				}
+				if (getHeldItem(user) === 'power-herb') {
+					return true;
+				}
+				return false;
+			};
+			if (secondTurnMoves.includes(actionName) && !canSkipCharge()) {
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
 						if (p.id === user.id) {
@@ -339,6 +357,7 @@ export const useChooseAction = (
 						return {
 							...user,
 							choiceBandedMove: determineChoiceBandedMove(p, move.name),
+							heldItemName: removePowerHerb(p, move.name),
 							moveQueue: [
 								{
 									type: 'BattleAttack',
