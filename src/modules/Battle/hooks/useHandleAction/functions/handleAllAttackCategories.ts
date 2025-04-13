@@ -6,11 +6,11 @@ import { WeatherType } from '../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../BattleField';
 import { checkAndHandleFainting } from '../../../functions/handleFainting';
 import { handleAilmentAttack } from './attackCategories/handleAilmentAttack';
-import { handleAttack } from './attackCategories/handleAttack';
 import { handleDamageAttack } from './attackCategories/handleDamageAttack';
 import { handleFieldEffectMoves } from './attackCategories/handleFieldEffectMoves';
 import { handleHealAttack } from './attackCategories/handleHealAttack';
 import { handleNetGoodStatsAttack } from './attackCategories/handleNetGoodStatsAttack';
+import { handleSwaggerAttack } from './attackCategories/handleSwaggerAttack';
 import { handleUniqueMoves } from './attackCategories/handleUniqueMoves';
 import { handleWholeFieldEffectAttack } from './attackCategories/handleWholeFieldEffectAttack';
 import { handleAttackStart } from './handleAttackStart';
@@ -58,9 +58,13 @@ export const handleAllAttackCategories = ({
 		battleFieldEffects,
 		dampy,
 	});
+
 	updatedPokemon = ua;
 	//determine attacker and target
-	const handleMoveCategories = (target: BattlePokemon): BattlePokemon[] => {
+	const handleMoveCategories = (
+		target: BattlePokemon,
+		allPokemon: BattlePokemon[]
+	): BattlePokemon[] => {
 		console.log('CATEGORY', move.data.meta.category.name);
 		switch (move.data.meta.category.name) {
 			case 'damage':
@@ -71,7 +75,7 @@ export const handleAllAttackCategories = ({
 			case 'ohko':
 				return handleDamageAttack({
 					attacker,
-					pokemon,
+					pokemon: allPokemon,
 					addMessage,
 					move,
 					battleWeather,
@@ -83,7 +87,7 @@ export const handleAllAttackCategories = ({
 			case 'heal':
 				return handleHealAttack({
 					attacker,
-					pokemon,
+					pokemon: allPokemon,
 					addMessage,
 					move,
 					battleWeather,
@@ -93,7 +97,7 @@ export const handleAllAttackCategories = ({
 			case 'unique':
 				return handleUniqueMoves({
 					attacker,
-					pokemon,
+					pokemon: allPokemon,
 					addMessage,
 					move,
 					addBattleFieldEffect,
@@ -104,7 +108,7 @@ export const handleAllAttackCategories = ({
 			case 'field-effect':
 				return handleFieldEffectMoves({
 					attacker,
-					pokemon,
+					pokemon: allPokemon,
 					move,
 					addBattleFieldEffect,
 					target,
@@ -112,7 +116,7 @@ export const handleAllAttackCategories = ({
 			case 'ailment':
 				return handleAilmentAttack({
 					attacker,
-					pokemon,
+					pokemon: allPokemon,
 					addMessage,
 					move,
 					battleWeather,
@@ -126,7 +130,7 @@ export const handleAllAttackCategories = ({
 			case 'net-good-stats':
 				return handleNetGoodStatsAttack({
 					attacker,
-					pokemon,
+					pokemon: allPokemon,
 					addMessage,
 					move,
 					battleFieldEffects,
@@ -135,16 +139,16 @@ export const handleAllAttackCategories = ({
 			case 'whole-field-effect':
 				return handleWholeFieldEffectAttack({
 					attacker,
-					pokemon,
+					pokemon: allPokemon,
 					addMessage,
 					move,
 					setBattleWeather,
 					target,
 				});
 			case 'swagger':
-				return handleAttack({
+				return handleSwaggerAttack({
 					attacker,
-					pokemon,
+					pokemon: allPokemon,
 					addMessage,
 					move,
 					battleWeather,
@@ -154,9 +158,10 @@ export const handleAllAttackCategories = ({
 				});
 		}
 	};
+
 	if (targets.length > 0) {
 		targets.forEach((target) => {
-			updatedPokemon = handleMoveCategories(target);
+			updatedPokemon = handleMoveCategories(target, updatedPokemon);
 		});
 	}
 

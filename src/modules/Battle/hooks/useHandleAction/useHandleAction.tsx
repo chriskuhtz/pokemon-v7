@@ -13,7 +13,7 @@ import { ItemType } from '../../../../interfaces/Item';
 import { WeatherType } from '../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../BattleField';
 import { handleMoveBlockAilments } from '../../functions/handleMoveBlockAilments';
-import { handleAllAttackCategories } from './functions/handleAttack';
+import { handleAllAttackCategories } from './functions/handleAllAttackCategories';
 import { handleCatch } from './functions/handleCatch';
 
 export const useHandleAction = (

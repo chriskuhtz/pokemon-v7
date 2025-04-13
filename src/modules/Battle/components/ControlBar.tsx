@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { chooseOpponentAction } from '../../../functions/chooseOpponentAction';
 import { filterTargets } from '../../../functions/filterTargets';
+import { getMovesArray } from '../../../functions/getMovesArray';
 import { OPPO_ID } from '../../../functions/makeChallengerPokemon';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
@@ -99,6 +100,9 @@ export function ControlBar({
 			chooseAction={chooseAction}
 			chosenAction={chosenAction}
 			setChosenAction={setChosenAction}
+			moveData={
+				getMovesArray(controlled).find((m) => m.name === chosenAction)?.data
+			}
 		/>
 	);
 }

@@ -5,6 +5,7 @@ import { battleSpriteSize } from '../../../constants/gameData';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { isPlayerPokemon } from '../../../functions/getPlayerPokemon';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
+import { MoveDto } from '../../../interfaces/Move';
 import { Card } from '../../../uiComponents/Card/Card';
 import { ActionType, ChooseActionPayload } from '../BattleField';
 
@@ -15,6 +16,7 @@ export function TargetSelection({
 	chooseAction,
 	chosenAction,
 	setChosenAction,
+	moveData,
 }: {
 	name: string;
 	id: string;
@@ -22,6 +24,7 @@ export function TargetSelection({
 	chosenAction: ActionType;
 	chooseAction: (x: ChooseActionPayload) => void;
 	setChosenAction: (x: ActionType | undefined) => void;
+	moveData?: MoveDto;
 }) {
 	useEffect(() => {
 		//choose the only available option, skip menu
@@ -33,7 +36,33 @@ export function TargetSelection({
 			});
 			setChosenAction(undefined);
 		}
-	}, [chooseAction, chosenAction, id, setChosenAction, targets]);
+		switch (moveData?.target.name) {
+			case 'all-allies':
+			case 'user-and-allies':
+			case 'users-field':
+			case 'all-opponents':
+			case 'opponents-field':
+			case 'all-other-pokemon':
+			case 'all-pokemon':
+			case 'random-opponent':
+			case 'user':
+			case 'fainting-pokemon':
+			case 'entire-field':
+				chooseAction({
+					userId: id,
+					actionName: chosenAction,
+					targetId: targets[0].id,
+				});
+				setChosenAction(undefined);
+		}
+	}, [
+		chooseAction,
+		chosenAction,
+		id,
+		moveData?.target.name,
+		setChosenAction,
+		targets,
+	]);
 	return (
 		<div
 			style={{

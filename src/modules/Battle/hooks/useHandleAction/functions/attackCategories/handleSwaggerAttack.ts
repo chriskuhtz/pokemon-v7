@@ -13,7 +13,7 @@ import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
 import { handleAbilitiesAfterAttack } from '../handleAbilitiesAfterAttack';
 
-export const handleAttack = ({
+export const handleSwaggerAttack = ({
 	attacker,
 	pokemon,
 	addMessage,
