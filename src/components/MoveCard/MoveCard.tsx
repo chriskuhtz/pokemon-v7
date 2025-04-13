@@ -41,11 +41,15 @@ export const MoveCard = ({
 			content={
 				<div>
 					<h4>
-						{move.name} ({move.data.damage_class.name.slice(0, 4)})
+						{move.name} ({move.data.power ? `${move.data.power} ` : ''}
+						{move.data.damage_class.name.slice(0, 4)})
 					</h4>
-					<strong>
-						PP: {currentPP}/{move.data.pp}
-					</strong>
+
+					<div>
+						<strong>
+							PP: {currentPP}/{move.data.pp}
+						</strong>
+					</div>
 				</div>
 			}
 			actionElements={[]}

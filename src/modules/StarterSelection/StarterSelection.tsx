@@ -77,7 +77,7 @@ export const StarterSelection = (): JSX.Element => {
 				...saveFile,
 				playerId: name,
 				pokemon: [{ ...mon, xp: 1250000 }],
-				bag: CompleteInventory,
+				storage: CompleteInventory,
 				campUpgrades: Object.fromEntries(
 					campUpgradeNames.map((key) => [key, true])
 				) as Record<CampUpgrade, boolean>,

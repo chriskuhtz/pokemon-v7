@@ -21,4 +21,10 @@ export const overworldCheckList: {
 	{ name: 'entry to prodcedural cave on route s1w1' },
 	{ name: 'prodcedural cave with fossils/legendaries' },
 	{ name: 'water on route N1' },
+	{ name: 'move onixCave to custom sheet' },
+	{ name: 'move routeN1E1 to custom sheet' },
+	{ name: 'move routeE1 to custom sheet' },
+	{ name: 'move routeS1 to custom sheet' },
+	{ name: 'move routeW1 to custom sheet' },
+	{ name: 'move routeN1W1 to custom sheet' },
 ];
