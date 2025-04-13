@@ -710,10 +710,12 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/147/',
 		handled: true,
 	},
-	{ name: 'analytic', url: 'https://pokeapi.co/api/v2/ability/148/' },
-	{ name: 'illusion', url: 'https://pokeapi.co/api/v2/ability/149/' },
-	{ name: 'imposter', url: 'https://pokeapi.co/api/v2/ability/150/' },
-	{ name: 'infiltrator', url: 'https://pokeapi.co/api/v2/ability/151/' },
+
+	{
+		name: 'infiltrator',
+		url: 'https://pokeapi.co/api/v2/ability/151/',
+		handled: true,
+	},
 	{ name: 'mummy', url: 'https://pokeapi.co/api/v2/ability/152/' },
 	{ name: 'moxie', url: 'https://pokeapi.co/api/v2/ability/153/' },
 	{ name: 'justified', url: 'https://pokeapi.co/api/v2/ability/154/' },
@@ -946,6 +948,9 @@ export const abilityCheckList: {
 		name: 'multitype',
 		url: 'https://pokeapi.co/api/v2/ability/121/',
 	},
+	{ name: 'analytic', url: 'https://pokeapi.co/api/v2/ability/148/' },
+	{ name: 'illusion', url: 'https://pokeapi.co/api/v2/ability/149/' },
+	{ name: 'imposter', url: 'https://pokeapi.co/api/v2/ability/150/' },
 ];
 
 export const abilityNames = [
@@ -1090,6 +1095,7 @@ export const abilityNames = [
 	'big-pecks',
 	'sand-rush',
 	'wonder-skin',
+	'infiltrator',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

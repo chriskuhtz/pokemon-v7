@@ -33,9 +33,10 @@ export const handleAilmentAttack = ({
 	let updatedTarget = { ...target };
 	const move = m;
 
-	const targetIsSafeguarded = battleFieldEffects.some(
-		(b) => b.type === 'safeguard' && b.ownerId === updatedTarget.ownerId
-	);
+	const targetIsSafeguarded =
+		battleFieldEffects.some(
+			(b) => b.type === 'safeguard' && b.ownerId === updatedTarget.ownerId
+		) && attacker.ability !== 'infiltrator';
 	const attackerIsSafeguarded = battleFieldEffects.some(
 		(b) => b.type === 'safeguard' && b.ownerId === updatedAttacker.ownerId
 	);

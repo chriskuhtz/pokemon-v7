@@ -426,6 +426,7 @@ export const calculateDamage = (
 		getHeldItem(attacker)
 	);
 	const lightScreenFactor =
+		attacker.ability !== 'infiltrator' &&
 		damageClass === 'special' &&
 		battleFieldEffects.some(
 			(b) => b.type == 'light-screen' && b.ownerId !== attacker.ownerId
@@ -433,6 +434,7 @@ export const calculateDamage = (
 			? 0.66
 			: 1;
 	const reflectFactor =
+		attacker.ability !== 'infiltrator' &&
 		damageClass === 'physical' &&
 		battleFieldEffects.some(
 			(b) => b.type == 'reflect' && b.ownerId !== attacker.ownerId

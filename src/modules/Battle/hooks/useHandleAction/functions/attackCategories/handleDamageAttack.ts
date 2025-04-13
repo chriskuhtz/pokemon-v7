@@ -290,9 +290,10 @@ export const handleDamageAttack = ({
 			};
 		}
 
-		const targetIsSafeguarded = battleFieldEffects.some(
-			(b) => b.type === 'safeguard' && b.ownerId === updatedTarget.ownerId
-		);
+		const targetIsSafeguarded =
+			battleFieldEffects.some(
+				(b) => b.type === 'safeguard' && b.ownerId === updatedTarget.ownerId
+			) && attacker.ability !== 'infiltrator';
 		const { updatedApplicator: a, updatedTarget: b } =
 			applyAttackAilmentsToPokemon(
 				updatedTarget,
