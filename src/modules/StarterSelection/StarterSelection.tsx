@@ -3,6 +3,10 @@ import { v4 } from 'uuid';
 import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { Sprite } from '../../components/Sprite/Sprite';
 import {
+	CampUpgrade,
+	campUpgradeNames,
+} from '../../constants/checkLists/campUpgrades';
+import {
 	battleSpriteSize,
 	shinyChance,
 	testPokemon,
@@ -16,6 +20,7 @@ import { reduceBattlePokemonToOwnedPokemon } from '../../functions/reduceBattleP
 import { useGetBattleTeam } from '../../hooks/useGetBattleTeam';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
+import { CompleteInventory } from '../../interfaces/Inventory';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 import { Page } from '../../uiComponents/Page/Page';
@@ -65,14 +70,30 @@ export const StarterSelection = (): JSX.Element => {
 
 		const pokedex = addPokemonToDex(saveFile.pokedex, mon.name, 'camp', true);
 
-		patchSaveFileReducer({
-			...saveFile,
-			playerId: name,
-			pokemon: [mon],
-			meta: { activeTab: 'OVERWORLD' },
-			starterPokemon: mon.name,
-			pokedex,
-		});
+		const devmode = !!window.localStorage.getItem('devmode');
+
+		if (devmode) {
+			patchSaveFileReducer({
+				...saveFile,
+				playerId: name,
+				pokemon: [{ ...mon, xp: 1250000 }],
+				bag: CompleteInventory,
+				campUpgrades: Object.fromEntries(
+					campUpgradeNames.map((key) => [key, true])
+				) as Record<CampUpgrade, boolean>,
+				meta: { activeTab: 'OVERWORLD' },
+				starterPokemon: mon.name,
+				pokedex,
+			});
+		} else
+			patchSaveFileReducer({
+				...saveFile,
+				playerId: name,
+				pokemon: [mon],
+				meta: { activeTab: 'OVERWORLD' },
+				starterPokemon: mon.name,
+				pokedex,
+			});
 	}, [chosenStarter, name, patchSaveFileReducer, saveFile]);
 
 	if (!fullStarters) {
