@@ -5,7 +5,7 @@ export const overworldCheckList: {
 }[] = [
 	{ name: 'access route s1w1', handled: true },
 	{ name: 'design route s1w1', handled: true },
-	{ name: 'design route s1w1 encounters' },
+	{ name: 'design route s1w1 encounters', handled: true },
 	{ name: 'design route s1w1 hidden items' },
 	{ name: 'design route s1w1 berry lure' },
 	{ name: 'access route w1' },

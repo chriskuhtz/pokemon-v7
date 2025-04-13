@@ -21,6 +21,7 @@ import { routeN1 } from '../maps/routeN1';
 import { routeN1E1 } from '../maps/routeN1E1';
 import { routeS1 } from '../maps/routeS1';
 import { routeS1E1 } from '../maps/routeS1E1';
+import { routeS1W1 } from '../maps/routeS1W1';
 import { PokemonName, pokemonNames } from '../pokemonNames';
 import { CampUpgrade, campUpgradeNames } from './campUpgrades';
 
@@ -47,22 +48,22 @@ const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 		'berry-juice': 1,
 	},
 	'catch all MORNING-time pokemon from routeN1': {
-		'poke-ball': 10,
+		'poke-ball': 5,
 		'rawst-berry': 2,
 		'berry-juice': 1,
 	},
 	'catch all DAY-time pokemon from routeN1': {
-		'poke-ball': 10,
+		'poke-ball': 5,
 		'aspear-berry': 2,
 		'berry-juice': 1,
 	},
 	'catch all EVENING-time pokemon from routeN1': {
-		'poke-ball': 10,
+		'poke-ball': 5,
 		'leppa-berry': 2,
 		'berry-juice': 1,
 	},
 	'catch all NIGHT-time pokemon from routeN1': {
-		'poke-ball': 10,
+		'poke-ball': 5,
 		'oran-berry': 2,
 		'berry-juice': 1,
 	},
@@ -88,22 +89,22 @@ const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 		'berry-juice': 1,
 	},
 	'catch all MORNING-time pokemon from routeN1E1': {
-		'net-ball': 10,
+		'net-ball': 5,
 		'iapapa-berry': 2,
 		'berry-juice': 1,
 	},
 	'catch all DAY-time pokemon from routeN1E1': {
-		'net-ball': 10,
+		'net-ball': 5,
 		'bluk-berry': 2,
 		'berry-juice': 1,
 	},
 	'catch all EVENING-time pokemon from routeN1E1': {
-		'net-ball': 10,
+		'net-ball': 5,
 		'nanab-berry': 2,
 		'berry-juice': 1,
 	},
 	'catch all NIGHT-time pokemon from routeN1E1': {
-		'net-ball': 10,
+		'net-ball': 5,
 		'odd-keystone': 1,
 		'berry-juice': 1,
 	},
@@ -129,22 +130,22 @@ const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 		'berry-juice': 1,
 	},
 	'catch all MORNING-time pokemon from routeE1': {
-		'quick-ball': 10,
+		'quick-ball': 5,
 		'pinap-berry': 2,
 		'berry-juice': 1,
 	},
 	'catch all DAY-time pokemon from routeE1': {
-		'quick-ball': 10,
+		'quick-ball': 5,
 		'pomeg-berry': 2,
 		'berry-juice': 1,
 	},
 	'catch all EVENING-time pokemon from routeE1': {
-		'quick-ball': 10,
+		'quick-ball': 5,
 		'kelpsy-berry': 2,
 		'berry-juice': 1,
 	},
 	'catch all NIGHT-time pokemon from routeE1': {
-		'quick-ball': 10,
+		'quick-ball': 5,
 		'qualot-berry': 1,
 		'berry-juice': 1,
 	},
@@ -170,24 +171,57 @@ const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 		'berry-juice': 1,
 	},
 	'catch all MORNING-time pokemon from routeS1E1': {
-		'great-ball': 10,
+		'great-ball': 5,
 		'qualot-berry': 2,
 		'berry-juice': 1,
 	},
 	'catch all DAY-time pokemon from routeS1E1': {
-		'great-ball': 10,
+		'great-ball': 5,
 		'payapa-berry': 2,
 		'berry-juice': 1,
 	},
 	'catch all EVENING-time pokemon from routeS1E1': {
-		'great-ball': 10,
+		'great-ball': 5,
 		'magost-berry': 2,
 		'berry-juice': 1,
 	},
 	'catch all NIGHT-time pokemon from routeS1E1': {
-		'great-ball': 10,
+		'great-ball': 5,
 		'tamato-berry': 1,
 		'berry-juice': 1,
+	},
+	//routeS1W1
+	'catch a MORNING-time exclusive pokemon from routeS1W1': {
+		'great-ball': 5,
+		'big-malasada': 1,
+	},
+	'catch a DAY-time exclusive pokemon from routeS1W1': {
+		'great-ball': 5,
+		'big-malasada': 1,
+	},
+	'catch a EVENING-time exclusive pokemon from routeS1W1': {
+		'great-ball': 5,
+		'big-malasada': 1,
+	},
+	'catch a NIGHT-time exclusive pokemon from routeS1W1': {
+		'great-ball': 5,
+		'big-malasada': 1,
+	},
+	'catch all MORNING-time pokemon from routeS1W1': {
+		'great-ball': 5,
+		'rare-candy': 1,
+	},
+	'catch all DAY-time pokemon from routeS1W1': {
+		'great-ball': 5,
+		'rare-candy': 1,
+	},
+	'catch all EVENING-time pokemon from routeS1W1': {
+		'great-ball': 5,
+		'rare-candy': 1,
+	},
+	'catch all NIGHT-time pokemon from routeS1W1': {
+		'great-ball': 5,
+		'rare-candy': 1,
 	},
 };
 
@@ -296,6 +330,7 @@ const catchQuests = {
 	...catchQuestsForRoute(routeN1E1, 'machete certification'),
 	...catchQuestsForRoute(routeE1, 'sledge hammer certification'),
 	...catchQuestsForRoute(routeS1E1, 'swimming certification'),
+	...catchQuestsForRoute(routeS1W1, 'swimming certification'),
 };
 
 export const questNames = [
