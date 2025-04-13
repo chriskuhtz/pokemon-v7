@@ -157,7 +157,10 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 	) {
 		updatedPokemon = updatedPokemon.map((p) => {
 			if (p.id === user.id) {
-				if (getTypeNames(p).includes('flying') || p.ability === 'levitate') {
+				if (
+					(getTypeNames(p).includes('flying') || p.ability === 'levitate') &&
+					getHeldItem(p) !== 'iron-ball'
+				) {
 					return p;
 				} else {
 					addMessage({ message: `${user.name} is hurt by spikes` });
