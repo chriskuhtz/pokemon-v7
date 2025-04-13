@@ -31,6 +31,8 @@ const calculateTotalSpeed = (
 
 	const stallFactor = a.ability === 'stall' ? 0 : 1;
 
+	const ironBallFactor = getHeldItem(a) === 'iron-ball' ? 0.5 : 1;
+
 	return (
 		calculateModifiedStat(
 			a.stats.speed,
@@ -46,7 +48,8 @@ const calculateTotalSpeed = (
 		machoBraceFactor *
 		quickfeetFactor *
 		stallFactor *
-		sandrushFactor
+		sandrushFactor *
+		ironBallFactor
 	);
 };
 export const sortByPriority = (

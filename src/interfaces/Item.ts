@@ -177,6 +177,7 @@ export const heldItems = [
 	'quick-powder',
 	'focus-sash',
 	'metronome',
+	'iron-ball',
 ] as const;
 export const valuables = [
 	'shoal-salt',

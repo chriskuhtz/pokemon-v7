@@ -7,6 +7,7 @@ import {
 	typeEffectivenessChart,
 } from '../interfaces/PokemonType';
 import { StatObject } from '../interfaces/StatObject';
+import { getHeldItem } from './getHeldItem';
 import { getTypeNames } from './getTypeNames';
 
 const getHiddenPowerType = (ivs: StatObject): PokemonType => {
@@ -60,7 +61,11 @@ export const determineTypeFactor = (
 	) {
 		res = 1;
 	}
-	if (target.ability === 'levitate' && attack.data.type.name === 'ground') {
+	if (
+		target.ability === 'levitate' &&
+		attack.data.type.name === 'ground' &&
+		getHeldItem(target) !== 'iron-ball'
+	) {
 		if (addMessage) {
 			addMessage({
 				message: `${target.data.name} prevents damage with levitate`,
@@ -96,6 +101,13 @@ export const determineTypeFactor = (
 			});
 		}
 		return 0;
+	}
+	if (
+		getHeldItem(target) === 'iron-ball' &&
+		attack.data.type.name === 'ground' &&
+		targetTypes.includes('flying')
+	) {
+		return 1;
 	}
 
 	if (res === 0) {
