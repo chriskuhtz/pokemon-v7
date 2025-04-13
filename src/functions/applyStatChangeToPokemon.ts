@@ -60,6 +60,20 @@ export const applyStatChangeToPokemon = (
 
 		return pokemon;
 	}
+	if (
+		!selfInflicted &&
+		pokemon.ability === 'big-pecks' &&
+		stat === 'defense' &&
+		modifier < 0
+	) {
+		if (addMessage) {
+			addMessage({
+				message: `${pokemon.data.name} prevents stat reduction with ${pokemon.ability}`,
+			});
+		}
+
+		return pokemon;
+	}
 	if (pokemon.ability === 'keen-eye' && stat === 'accuracy' && modifier < 1) {
 		if (addMessage) {
 			addMessage({
