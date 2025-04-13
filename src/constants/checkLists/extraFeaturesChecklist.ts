@@ -300,6 +300,7 @@ export const extraFeatureCheckList: {
 		name: 'devmode gives complete inventory and unlocks, lvl 100',
 		handled: true,
 	},
+	{ name: 'more defeat x trainers quests' },
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'consider weather/effects etc for opponent decisions' },
 	{ name: 'poison step damage' },

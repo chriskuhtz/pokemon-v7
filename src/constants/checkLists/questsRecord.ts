@@ -351,6 +351,8 @@ export const questNames = [
 	'defeat forty training field trainers',
 	'defeat fifty training field trainers',
 	'defeat sixty training field trainers',
+	'defeat seventy training field trainers',
+	'defeat eighty training field trainers',
 	'grow a berry',
 	'grow a apricorn',
 	'catch a pokemon in an apricorn ball',
@@ -990,6 +992,36 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 3',
 		availableAfter: 'defeat fifty training field trainers',
+	},
+	'defeat seventy training field trainers': {
+		rewardItems: {
+			'big-malasada': 9,
+		},
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			const defeatedTrainers = s.handledOccupants.filter((h) =>
+				trainers.some((t) => t.id === h.id)
+			).length;
+			return defeatedTrainers > 69;
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 4',
+		availableAfter: 'defeat sixty training field trainers',
+	},
+	'defeat eighty training field trainers': {
+		rewardItems: {
+			'big-malasada': 10,
+		},
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			const defeatedTrainers = s.handledOccupants.filter((h) =>
+				trainers.some((t) => t.id === h.id)
+			).length;
+			return defeatedTrainers > 79;
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 4',
+		availableAfter: 'defeat seventy training field trainers',
 	},
 	'grow a berry': {
 		rewardItems: {
