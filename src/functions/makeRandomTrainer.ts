@@ -835,9 +835,23 @@ export const trainers = [
 ];
 
 console.log('trainers', trainers.length);
-export const makeRandomTrainer = (saveFile: SaveFile): Challenger => {
+export const makeRandomTrainer = (
+	saveFile: SaveFile,
+	tier?: 1 | 2 | 3
+): Challenger => {
+	let all = trainers;
+
+	if (tier === 1) {
+		all = tier1trainers;
+	}
+	if (tier === 2) {
+		all = tier2trainers;
+	}
+	if (tier === 3) {
+		all = tier2trainers;
+	}
 	return getRandomEntry(
-		trainers.filter((t) => {
+		all.filter((t) => {
 			let res = true;
 			if (t.availableAfter) {
 				res = saveFile.quests[t.availableAfter] === 'COLLECTED';

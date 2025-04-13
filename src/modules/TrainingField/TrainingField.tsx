@@ -21,13 +21,33 @@ export const TrainingField = () => {
 		>
 			<Stack mode="column">
 				<Card
-					key={'random'}
+					key={'random1'}
 					icon={<FaRandom />}
-					content={<h3>Random Opponent</h3>}
+					content={<h3>Random Opponent (Tier 2)</h3>}
 					actionElements={[
-						<button onClick={() => challenge()}>Challenge</button>,
+						<button onClick={() => challenge({ tier: 1 })}>Challenge</button>,
 					]}
 				/>
+				{saveFile.campUpgrades['training field 2'] && (
+					<Card
+						key={'random2'}
+						icon={<FaRandom />}
+						content={<h3>Random Opponent (Tier 2)</h3>}
+						actionElements={[
+							<button onClick={() => challenge({ tier: 2 })}>Challenge</button>,
+						]}
+					/>
+				)}
+				{saveFile.campUpgrades['training field 2'] && (
+					<Card
+						key={'random3'}
+						icon={<FaRandom />}
+						content={<h3>Random Opponent (Tier 3)</h3>}
+						actionElements={[
+							<button onClick={() => challenge({ tier: 3 })}>Challenge</button>,
+						]}
+					/>
+				)}
 				{trainers
 					.filter((t) => {
 						let res = true;
@@ -83,7 +103,9 @@ export const TrainingField = () => {
 									</div>
 								}
 								actionElements={[
-									<button onClick={() => challenge(t.id)}>Challenge</button>,
+									<button onClick={() => challenge({ id: t.id })}>
+										Challenge
+									</button>,
 								]}
 							/>
 						);
