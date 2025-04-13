@@ -103,6 +103,11 @@ export const determineMiss = (
 		target.secondaryAilments.some((a) => a.type === 'confusion')
 			? 2
 			: 1;
+	const wonderSkinFactor =
+		target.ability === 'wonder-skin' &&
+		attack.data.damage_class.name === 'status'
+			? 0.5
+			: 1;
 
 	const targetEvasion =
 		calculateModifiedStat(
@@ -113,7 +118,8 @@ export const determineMiss = (
 			false
 		) *
 		tangledFeetFactor *
-		laxIncenseFactor;
+		laxIncenseFactor *
+		wonderSkinFactor;
 
 	const compoundEyesFactor = getCompoundEyesFactor(attacker, attack);
 	const hustleFactor = getHustleFactor(attacker, attack);
