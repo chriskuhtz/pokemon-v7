@@ -24,7 +24,7 @@ export const applyEndOfTurnWeatherDamage = (
 			getTypeNames(pokemon).some((t) =>
 				['ground', 'steel', 'rock'].includes(t)
 			) ||
-			['sand-veil', 'overcoat'].includes(pokemon.ability)
+			['sand-veil', 'overcoat', 'sand-rush'].includes(pokemon.ability)
 		) {
 			return pokemon;
 		}

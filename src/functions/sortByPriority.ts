@@ -9,14 +9,16 @@ const calculateTotalSpeed = (
 	a: BattlePokemon,
 	battleWeather: WeatherType | undefined
 ): number => {
-	const paraFactorA =
+	const paraFactor =
 		a.primaryAilment?.type === 'paralysis' && a.ability !== 'quick-feet'
 			? PARA_SPEED_FACTOR
 			: 1;
-	const swiftSwimFactorA =
+	const swiftSwimFactor =
 		a.ability === 'swift-swim' && battleWeather === 'rain' ? 2 : 1;
-	const chlorophyllFactorA =
+	const chlorophyllFactor =
 		a.ability === 'chlorophyll' && battleWeather === 'sun' ? 2 : 1;
+	const sandrushFactor =
+		a.ability === 'sand-rush' && battleWeather === 'sandstorm' ? 2 : 1;
 	const unburdenFactorA = a.secondaryAilments.some(
 		(ail) => ail.type === 'unburdened'
 	)
@@ -37,13 +39,14 @@ const calculateTotalSpeed = (
 			a,
 			false
 		) *
-		paraFactorA *
-		swiftSwimFactorA *
-		chlorophyllFactorA *
+		paraFactor *
+		swiftSwimFactor *
+		chlorophyllFactor *
 		unburdenFactorA *
 		machoBraceFactor *
 		quickfeetFactor *
-		stallFactor
+		stallFactor *
+		sandrushFactor
 	);
 };
 export const sortByPriority = (
