@@ -61,6 +61,20 @@ export const handleDamageAttack = ({
 		updatedAttacker = { ...updatedAttacker, damage: updatedAttacker.stats.hp };
 	}
 
+	//fake out
+	if (move.name === 'fake-out' && updatedAttacker.roundsInBattle !== 0) {
+		addMessage({ message: 'It failed' });
+		return pokemon.map((p) => {
+			if (p.id === updatedAttacker.id) {
+				return updatedAttacker;
+			}
+			if (p.id === updatedTarget.id) {
+				return updatedTarget;
+			}
+			return p;
+		});
+	}
+
 	// apply damage
 	const { consumedHeldItem, damage, criticalHit, wasSuperEffective } =
 		calculateDamage(
