@@ -218,6 +218,20 @@ export const calculateDamage = (
 			return { damage: 0 };
 		}
 	}
+	if (attack.name === 'mirror-coat') {
+		if (
+			attacker.lastReceivedDamage?.attack.data.damage_class.name ===
+				'special' &&
+			attacker.lastReceivedDamage.applicatorId === target.id
+		) {
+			return { damage: attacker.lastReceivedDamage.damage * 2 };
+		} else {
+			if (addMessage) {
+				addMessage({ message: 'Mirror Coat failed' });
+			}
+			return { damage: 0 };
+		}
+	}
 	if (ohkoMoves.includes(attack.name)) {
 		if (target.ability === 'sturdy') {
 			if (addMessage) {

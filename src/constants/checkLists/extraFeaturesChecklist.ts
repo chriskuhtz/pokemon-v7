@@ -380,4 +380,5 @@ export const extraFeatureCheckList: {
 	{ name: 'gen 8 fossils' },
 	{ name: 'all fossils need to be findable' },
 	{ name: 'dugtrio should not deliver fossils' },
+	{ name: 'randomized-moves' },
 ];
