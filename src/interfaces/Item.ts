@@ -276,10 +276,10 @@ export const berries = [
 ] as const;
 export const fossils = [
 	'old-amber',
-	'root-fossil',
-	'claw-fossil',
 	'helix-fossil',
 	'dome-fossil',
+	'root-fossil',
+	'claw-fossil',
 	'armor-fossil',
 	'skull-fossil',
 	'cover-fossil',
@@ -538,6 +538,12 @@ export const undergroundTable: ItemType[] = [
 	...evoStones,
 	...evBoostItemTypes,
 	...heldItems,
+	'armor-fossil',
+	'skull-fossil',
+	'cover-fossil',
+	'plume-fossil',
+	'jaw-fossil',
+	'sail-fossil',
 ];
 export const superEffectiveSaveTable: Record<PokemonType, ItemType> = {
 	fire: 'occa-berry',

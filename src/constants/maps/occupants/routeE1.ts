@@ -201,5 +201,25 @@ export const routeE1Occupants: OverworldMap['occupants'] = [
 			!s.handledOccupants.some((occ) => occ.id === 'rock_routeE1_9'),
 		id: 'rock_routeE1_9',
 	},
+	{
+		type: 'ITEM',
+		item: 'root-fossil',
+		amount: 1,
+		x: 32,
+		y: 20,
+		id: 'routeE1_root-fossil',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'routeE1_root-fossil'),
+	},
+	{
+		type: 'ITEM',
+		item: 'claw-fossil',
+		amount: 1,
+		x: 33,
+		y: 20,
+		id: 'routeE1_claw-fossil',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'routeE1_claw-fossil'),
+	},
 	routeE1Lure,
 ];

@@ -295,8 +295,6 @@ export const extraFeatureCheckList: {
 	{ name: 'make battle responsive to portrait mode', handled: true },
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'refine battle end' },
-	{ name: 'tilemap should be only tuples' },
-	{ name: 'label selection for github issues' },
 	{ name: 'consider weather/effects etc for opponent decisions' },
 	{ name: 'poison step damage' },
 	{ name: 'nicer ladder up sprite' },
@@ -315,7 +313,6 @@ export const extraFeatureCheckList: {
 	{ name: 'training field route' },
 	{ name: 'retrieve item from wild pokemon quest (special encounter)' },
 	{ name: 'lure x pokemon quest' },
-	{ name: 'check battlefield effect functions' },
 	{ name: 'actually use growth rates' },
 	{ name: 'trainer builder' },
 	{ name: 'walk through grass animation' },
@@ -347,7 +344,6 @@ export const extraFeatureCheckList: {
 	{ name: 'battle backgrounds' },
 	{ name: 'prettier weather display' },
 	{ name: 'Battle Attack animation' },
-	{ name: 'xtract subcomponents from healaction' },
 	{ name: 'animation state for flying pokemon' },
 	{ name: 'eggs?' },
 	{ name: 'opponent "learns" about volt-absorb etc ' },
@@ -367,7 +363,7 @@ export const extraFeatureCheckList: {
 	{ name: 'water on routeN1' },
 	{ name: 'path to next route (S1W1)' },
 	{ name: 'battlepoint shop' },
-	{ name: 'dugtrio should not deliver fossils' },
+
 	{ name: 'make game playable in portrait mode' },
 	{
 		name: 'quest: catch a pokemon of each type',
@@ -381,4 +377,7 @@ export const extraFeatureCheckList: {
 	{ name: 'evolve starter could work with every pokemon' },
 	{ name: 'Movement buttons' },
 	{ name: 'show move power' },
+	{ name: 'gen 8 fossils' },
+	{ name: 'all fossils need to be findable' },
+	{ name: 'dugtrio should not deliver fossils' },
 ];
