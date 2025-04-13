@@ -291,6 +291,8 @@ export const extraFeatureCheckList: {
 	{ name: 'quest: light ball pikachu', handled: true },
 	{ name: 'quest: different pikachus', handled: true },
 	{ name: 'quest: pikachu clones', handled: true },
+	{ name: 'make card responsive to portrait mode', handled: true },
+	{ name: 'make battle responsive to portrait mode', handled: true },
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'refine battle end' },
 	{ name: 'tilemap should be only tuples' },

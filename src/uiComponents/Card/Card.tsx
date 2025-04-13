@@ -38,8 +38,8 @@ export const Card = ({
 				}
 			}}
 		>
-			{icon}
-			{content}
+			<div>{icon}</div>
+			<div>{content}</div>
 			<div className="actionElements">
 				{actionElements.map((a, i) => (
 					<React.Fragment key={i}>{a}</React.Fragment>

@@ -51,7 +51,14 @@ const ItemsFilterButtons = ({
 	setFilter: React.Dispatch<React.SetStateAction<ItemsFilterType | undefined>>;
 }) => {
 	return (
-		<div style={{ display: 'flex', gap: '.5rem' }}>
+		<div
+			style={{
+				display: 'flex',
+				gap: '.5rem',
+				maxWidth: '96dvw',
+				flexWrap: 'wrap',
+			}}
+		>
 			{itemfilterNames.map((f) => (
 				<button
 					key={f}

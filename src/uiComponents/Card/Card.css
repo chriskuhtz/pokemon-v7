@@ -1,13 +1,28 @@
-.card {
-	display: grid;
-	grid-template-columns: 1fr 7fr 1fr;
-	align-items: center;
-	gap: 0.5rem;
-	padding: 0.5rem;
-	border: 2px solid black;
-	border-radius: 9000px;
-	background-color: white;
-	color: black;
+@media (orientation: landscape) {
+	.card {
+		display: grid;
+		grid-template-columns: 1fr 7fr 1fr;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.5rem;
+		border: 2px solid black;
+		border-radius: 9000px;
+		background-color: white;
+		color: black;
+	}
+}
+@media (orientation: portrait) {
+	.card {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.5rem;
+		border: 2px solid black;
+		border-radius: 16px;
+		background-color: white;
+		color: black;
+		width: calc(100% - 24px);
+	}
 }
 .actionElements {
 	display: flex;

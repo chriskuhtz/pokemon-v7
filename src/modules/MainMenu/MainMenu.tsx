@@ -9,6 +9,7 @@ import { useContext, useState } from 'react';
 import { FaBug, FaSearch } from 'react-icons/fa';
 import { GoTasklist } from 'react-icons/go';
 import { RiBookShelfLine } from 'react-icons/ri';
+import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { TrainerCard } from '../../components/TrainerCard/TrainerCard';
 import { battleSpriteSize } from '../../constants/gameData';
@@ -18,7 +19,6 @@ import { useNavigate } from '../../hooks/useNavigate';
 import { useQuests } from '../../hooks/useQuests';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { useTeleport } from '../../hooks/useTeleport';
-import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 
 export const MainMenu = ({
 	goBack,
@@ -194,6 +194,7 @@ export const BugReportButton = () => {
 				<div>
 					<h4>Report a bug</h4>
 					<textarea
+						style={{ width: '90%' }}
 						cols={70}
 						rows={10}
 						value={bugReport}
