@@ -874,14 +874,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat a training field trainer': {
 		rewardItems: {
-			'dire-hit': 1,
-			'x-accuracy': 1,
-			'x-attack': 1,
-			'x-defense': 1,
-			'x-sp-atk': 1,
-			'x-sp-def': 1,
-			'x-speed': 1,
-			'guard-spec': 1,
+			'big-malasada': 1,
 		},
 		researchPoints: 5,
 		conditionFunction: (s) => {
@@ -895,15 +888,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat five training field trainers': {
 		rewardItems: {
-			'dire-hit': 2,
-			'x-accuracy': 2,
-			'x-attack': 2,
-			'x-defense': 2,
-			'x-sp-atk': 2,
-			'x-sp-def': 2,
-			'x-speed': 2,
-			'guard-spec': 2,
-			'focus-band': 1,
+			'big-malasada': 2,
 		},
 		researchPoints: 10,
 		conditionFunction: (s) => {
@@ -918,13 +903,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat ten training field trainers': {
 		rewardItems: {
-			calcium: 1,
-			zinc: 1,
-			iron: 1,
-			carbos: 1,
-			protein: 1,
-			'hp-up': 1,
-			'lucky-egg': 1,
+			'big-malasada': 3,
 		},
 		researchPoints: 10,
 		conditionFunction: (s) => {
@@ -939,7 +918,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat twenty training field trainers': {
 		rewardItems: {
-			'choice-band': 1,
+			'big-malasada': 4,
 		},
 		researchPoints: 20,
 		conditionFunction: (s) => {
@@ -954,13 +933,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat thirty training field trainers': {
 		rewardItems: {
-			calcium: 1,
-			zinc: 1,
-			iron: 1,
-			carbos: 1,
-			protein: 1,
-			'hp-up': 1,
-			'scope-lens': 1,
+			'big-malasada': 5,
 		},
 		researchPoints: 30,
 		conditionFunction: (s) => {
@@ -975,12 +948,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat forty training field trainers': {
 		rewardItems: {
-			calcium: 1,
-			zinc: 1,
-			iron: 1,
-			carbos: 1,
-			protein: 1,
-			'hp-up': 1,
+			'big-malasada': 6,
 		},
 		researchPoints: 40,
 		conditionFunction: (s) => {
@@ -995,12 +963,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat fifty training field trainers': {
 		rewardItems: {
-			calcium: 2,
-			zinc: 2,
-			iron: 2,
-			carbos: 2,
-			protein: 2,
-			'hp-up': 2,
+			'big-malasada': 7,
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {
@@ -1015,12 +978,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat sixty training field trainers': {
 		rewardItems: {
-			calcium: 3,
-			zinc: 3,
-			iron: 3,
-			carbos: 3,
-			protein: 3,
-			'hp-up': 3,
+			'big-malasada': 8,
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {

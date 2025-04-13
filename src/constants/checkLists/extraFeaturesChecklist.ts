@@ -294,6 +294,7 @@ export const extraFeatureCheckList: {
 	{ name: 'make card responsive to portrait mode', handled: true },
 	{ name: 'make battle responsive to portrait mode', handled: true },
 	{ name: 'training field: random from tier x', handled: true },
+	{ name: 'defeat x trainer should give malasada as reward', handled: true },
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'refine battle end' },
 	{ name: 'consider weather/effects etc for opponent decisions' },
@@ -373,7 +374,6 @@ export const extraFeatureCheckList: {
 	{ name: 'gender needs to be visible in battle' },
 	{ name: 'training field 4' },
 	{ name: 'rowan: diglett wiglett, alolan diglett' },
-	{ name: 'defeat x trainer should give malasada as reward' },
 	{ name: 'evolve starter could work with every pokemon' },
 	{ name: 'Movement buttons' },
 	{ name: 'show move power' },
@@ -381,4 +381,5 @@ export const extraFeatureCheckList: {
 	{ name: 'all fossils need to be findable' },
 	{ name: 'dugtrio should not deliver fossils' },
 	{ name: 'randomized-moves' },
+	{ name: 'battle item shop' },
 ];
