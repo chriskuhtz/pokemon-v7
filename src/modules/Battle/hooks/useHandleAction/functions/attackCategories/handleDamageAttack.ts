@@ -38,7 +38,7 @@ export const handleDamageAttack = ({
 }): BattlePokemon[] => {
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
-	const move = m;
+	let move = m;
 
 	const isFlying =
 		updatedTarget.moveQueue.length > 0 &&
@@ -251,7 +251,21 @@ export const handleDamageAttack = ({
 			battleFieldEffects
 		);
 	}
-	if (category === 'damage+ailment') {
+	if (category === 'damage+ailment' || attacker.ability === 'poison-touch') {
+		if (attacker.ability === 'poison-touch') {
+			move = {
+				...move,
+				data: {
+					...move.data,
+					meta: {
+						...move.data.meta,
+						ailment_chance: 30,
+						ailment: { name: 'poison', url: '' },
+					},
+				},
+			};
+		}
+
 		const targetIsSafeguarded = battleFieldEffects.some(
 			(b) => b.type === 'safeguard' && b.ownerId === updatedTarget.ownerId
 		);
