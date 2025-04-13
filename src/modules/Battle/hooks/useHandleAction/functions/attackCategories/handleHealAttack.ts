@@ -29,7 +29,16 @@ export const handleHealAttack = ({
 			if (getTimeOfDay() === 'MORNING') {
 				return 66;
 			}
-			if (battleWeather === 'sun') {
+			if (
+				battleWeather === 'hail' ||
+				battleWeather === 'rain' ||
+				battleWeather === 'sandstorm'
+			) {
+				return 25;
+			}
+		}
+		if (move.name === 'moonlight') {
+			if (getTimeOfDay() === 'NIGHT') {
 				return 66;
 			}
 			if (
