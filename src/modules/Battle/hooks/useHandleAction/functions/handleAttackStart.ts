@@ -88,9 +88,19 @@ export const handleAttackStart = ({
 				].filter((p) => !!p);
 		}
 	};
-	//lock in moves choose a random target at execution
 
-	const targets = getInitialTargets();
+	let targets = getInitialTargets();
+
+	if (move.name === 'rollout' && targets.length === 0) {
+		targets = [
+			getRandomTarget({
+				targets: pokemon,
+				user: attacker,
+				chosenAction: move.name,
+				onlyOpponents: false,
+			}),
+		];
+	}
 
 	let updatedAttacker = { ...attacker };
 
