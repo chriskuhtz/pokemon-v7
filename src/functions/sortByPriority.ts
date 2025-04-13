@@ -30,6 +30,7 @@ const calculateTotalSpeed = (
 		a.primaryAilment && a.ability === 'quick-feet' ? 1.5 : 1;
 
 	const stallFactor = a.ability === 'stall' ? 0 : 1;
+	const laggingTailFactor = getHeldItem(a) === 'lagging-tail' ? -1 : 1;
 
 	const ironBallFactor = getHeldItem(a) === 'iron-ball' ? 0.5 : 1;
 
@@ -49,7 +50,8 @@ const calculateTotalSpeed = (
 		quickfeetFactor *
 		stallFactor *
 		sandrushFactor *
-		ironBallFactor
+		ironBallFactor *
+		laggingTailFactor
 	);
 };
 export const sortByPriority = (

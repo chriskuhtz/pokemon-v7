@@ -1166,7 +1166,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/255/',
 		handled: true,
 	},
-	{ name: 'lagging-tail', url: 'https://pokeapi.co/api/v2/item/256/' },
+	{
+		name: 'lagging-tail',
+		url: 'https://pokeapi.co/api/v2/item/256/',
+		handled: true,
+	},
 	{ name: 'destiny-knot', url: 'https://pokeapi.co/api/v2/item/257/' },
 	{ name: 'black-sludge', url: 'https://pokeapi.co/api/v2/item/258/' },
 	{ name: 'icy-rock', url: 'https://pokeapi.co/api/v2/item/259/' },
