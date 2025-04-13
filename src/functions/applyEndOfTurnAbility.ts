@@ -5,6 +5,7 @@ import {
 	SHED_SKIN_CHANCE,
 } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { getRandomBoostableStat } from '../interfaces/StatObject';
 import { WeatherType } from '../interfaces/Weather';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { getHeldItem } from './getHeldItem';
@@ -23,6 +24,34 @@ export const applyEndOfTurnAbility = ({
 	weather?: WeatherType;
 	allyIsHealer: boolean;
 }): BattlePokemon => {
+	if (pokemon.ability === 'moody') {
+		const boostStat = getRandomBoostableStat();
+		let debuffStat = getRandomBoostableStat();
+
+		while (debuffStat === boostStat) {
+			debuffStat = getRandomBoostableStat();
+		}
+
+		let moodyApplied = applyStatChangeToPokemon(
+			pokemon,
+			boostStat,
+			2,
+			true,
+			[],
+			addMessage,
+			'by moody'
+		);
+		moodyApplied = applyStatChangeToPokemon(
+			pokemon,
+			debuffStat,
+			-1,
+			true,
+			[],
+			addMessage,
+			'by moody'
+		);
+		return moodyApplied;
+	}
 	if (pokemon.ability === 'speed-boost') {
 		return applyStatChangeToPokemon(
 			pokemon,
