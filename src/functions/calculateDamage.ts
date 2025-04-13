@@ -559,6 +559,10 @@ export const calculateDamage = (
 		damageClass === 'special'
 			? 1.5
 			: 1;
+	const telepathyFactor =
+		target.ownerId === attacker.ownerId && target.ability === 'telepathy'
+			? 0
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -613,7 +617,8 @@ export const calculateDamage = (
 				expertBeltFactor *
 				toxicBoostFactor *
 				flareBoostFactor *
-				lifeOrbFactor
+				lifeOrbFactor *
+				telepathyFactor
 		),
 		1
 	);
