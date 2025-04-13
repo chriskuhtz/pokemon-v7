@@ -47,6 +47,13 @@ export const handleAilmentAttack = ({
 			ailment: 'foresighted',
 		});
 	}
+	if (move.name === 'torment') {
+		updatedTarget = applySecondaryAilmentToPokemon({
+			pokemon: updatedTarget,
+			addMessage,
+			ailment: 'torment',
+		});
+	}
 	if (move.name === 'perish-song') {
 		updatedTarget = applySecondaryAilmentToPokemon({
 			pokemon: updatedTarget,

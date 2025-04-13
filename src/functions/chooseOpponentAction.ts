@@ -62,6 +62,7 @@ export const chooseOpponentAction = ({
 	const moves = getMovesArray(controlled, {
 		filterOutDisabled: true,
 		considerEncore: true,
+		considerTorment: true,
 		filterOutEmpty: true,
 	});
 

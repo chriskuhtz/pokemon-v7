@@ -271,6 +271,21 @@ export const applySecondaryAilmentToPokemon = ({
 			],
 		};
 	}
+	if (ailment === 'torment') {
+		addMessage({
+			message: `${pokemon.data.name} cant use the same move twice in a row now`,
+		});
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'torment',
+					duration: 9000,
+				},
+			],
+		};
+	}
 	if (ailment === 'destiny-bonded' && targetId) {
 		addMessage({ message: `${pokemon.data.name} is destiny bonded` });
 		return {

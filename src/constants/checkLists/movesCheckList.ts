@@ -1234,7 +1234,11 @@ export const movesCheckList: {
 		handled: true,
 	},
 
-	{ name: 'torment', url: 'https://pokeapi.co/api/v2/move/259/' },
+	{
+		name: 'torment',
+		url: 'https://pokeapi.co/api/v2/move/259/',
+		handled: true,
+	},
 	{ name: 'memento', url: 'https://pokeapi.co/api/v2/move/262/' },
 	{ name: 'facade', url: 'https://pokeapi.co/api/v2/move/263/' },
 	{ name: 'focus-punch', url: 'https://pokeapi.co/api/v2/move/264/' },
@@ -2322,6 +2326,7 @@ export const handledMoves = [
 	'psych-up',
 	'whirlpool',
 	'fake-out',
+	'torment',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
