@@ -1413,6 +1413,39 @@ const tier4trainers: Challenger[] = [
 		trainer: { name: 'Sinnoh Simone 3', sprite: SpriteEnum.aceFemale },
 		requiredUpgrade: 'training field 4',
 	},
+	{
+		type: 'TRAINER',
+		id: 'Blissful Beatrice',
+		team: [
+			makeChallengerPokemon({
+				name: 'blissey',
+				xp: 40000,
+			}),
+			makeChallengerPokemon({
+				name: 'blissey',
+				xp: 40000,
+			}),
+			makeChallengerPokemon({
+				name: 'blissey',
+				xp: 40000,
+			}),
+			makeChallengerPokemon({
+				name: 'blissey',
+				xp: 40000,
+			}),
+			makeChallengerPokemon({
+				name: 'blissey',
+				xp: 40000,
+			}),
+			makeChallengerPokemon({
+				name: 'blissey',
+				xp: 40000,
+			}),
+		],
+		inventory: EmptyInventory,
+		trainer: { name: 'Blissful Beatrice', sprite: SpriteEnum.grandma },
+		requiredUpgrade: 'training field 4',
+	},
 ];
 const specialTrainers: Challenger[] = [
 	{
