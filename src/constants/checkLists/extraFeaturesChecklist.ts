@@ -360,4 +360,5 @@ export const extraFeatureCheckList: {
 	{ name: 'battle screen portrait mode' },
 	{ name: 'take all (berries/balls/etc) button' },
 	{ name: 'catch n swarm pokemon quests' },
+	{ name: 'improve the release pokemon button, it is accident prone' },
 ];

@@ -45,7 +45,7 @@ export const routeS1E1Encounters: EncounterMap = {
 			rarity: 'ultra-rare',
 		},
 		{ name: 'lechonk', minXp: 3375, maxXp: 15625, rarity: 'common' },
-		{ name: 'electrike', minXp: 3375, maxXp: 15625, rarity: 'medium' },
+		{ name: 'blitzle', minXp: 3375, maxXp: 15625, rarity: 'medium' },
 		{ name: 'morpeko-full-belly', minXp: 3375, maxXp: 15625, rarity: 'rare' },
 	],
 	NIGHT: [
@@ -56,7 +56,7 @@ export const routeS1E1Encounters: EncounterMap = {
 			rarity: 'ultra-rare',
 		},
 		{ name: 'greavard', minXp: 3375, maxXp: 15625, rarity: 'common' },
-		{ name: 'pawniard', minXp: 3375, maxXp: 15625, rarity: 'medium' },
-		{ name: 'morpeko-full-belly', minXp: 3375, maxXp: 15625, rarity: 'rare' },
+		{ name: 'mudbray', minXp: 3375, maxXp: 15625, rarity: 'medium' },
+		{ name: 'morpeko-hangry', minXp: 3375, maxXp: 15625, rarity: 'rare' },
 	],
 };
