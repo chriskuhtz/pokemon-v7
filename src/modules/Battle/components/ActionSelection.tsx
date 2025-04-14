@@ -1,5 +1,6 @@
-import { useContext, useMemo } from 'react';
-import { FaRunning } from 'react-icons/fa';
+import { useContext, useMemo, useState } from 'react';
+import { BsBackpack4 } from 'react-icons/bs';
+import { FaFistRaised, FaRunning } from 'react-icons/fa';
 import { FaArrowsRotate } from 'react-icons/fa6';
 import { ItemSprite } from '../../../components/ItemSprite/ItemSprite';
 import { MoveCard } from '../../../components/MoveCard/MoveCard';
@@ -90,6 +91,7 @@ export function ActionSelection({
 	runningAllowed: boolean;
 	battleFieldEffects: BattleFieldEffect[];
 }) {
+	const [subgroup, setSubGroup] = useState<'MOVES' | 'ITEMS' | undefined>();
 	const {
 		saveFile: { settings },
 	} = useContext(SaveFileContext);
@@ -139,22 +141,31 @@ export function ActionSelection({
 					gap: '1rem',
 				}}
 			>
-				{getMovesArray(controlled, {
-					filterOutDisabled: true,
-					considerTorment: true,
-					considerEncore: true,
-				}).map((m) => (
-					<MoveCard
-						move={m}
-						key={m.name}
-						onClick={() => setChosenAction(m.name)}
-						boostedBy={
-							controlled.ppBoostedMoves.find(
-								(boosted) => boosted.name === m.name
-							)?.stage
-						}
+				{subgroup === 'MOVES' ? (
+					getMovesArray(controlled, {
+						filterOutDisabled: true,
+						considerTorment: true,
+						considerEncore: true,
+					}).map((m) => (
+						<MoveCard
+							move={m}
+							key={m.name}
+							onClick={() => setChosenAction(m.name)}
+							boostedBy={
+								controlled.ppBoostedMoves.find(
+									(boosted) => boosted.name === m.name
+								)?.stage
+							}
+						/>
+					))
+				) : (
+					<Card
+						onClick={() => setSubGroup('MOVES')}
+						content={'Attack'}
+						actionElements={[]}
+						icon={<FaFistRaised height={battleSpriteSize} />}
 					/>
-				))}
+				)}
 				<Card
 					disabled={!canSwitch}
 					onClick={() => setChosenAction('SWITCH')}
@@ -163,18 +174,28 @@ export function ActionSelection({
 					icon={<FaArrowsRotate height={battleSpriteSize} />}
 				/>
 
-				{allowedItems.map(([item, amount]) => {
-					return (
-						<button
-							style={{ display: 'flex', alignItems: 'center' }}
-							onClick={() => setChosenAction(item)}
-							key={item}
-						>
-							<ItemSprite item={item} />
-							{item} ({amount})
-						</button>
-					);
-				})}
+				{subgroup === 'ITEMS' ? (
+					allowedItems.map(([item, amount]) => {
+						return (
+							<button
+								style={{ display: 'flex', alignItems: 'center' }}
+								onClick={() => setChosenAction(item)}
+								key={item}
+							>
+								<ItemSprite item={item} />
+								{item} ({amount})
+							</button>
+						);
+					})
+				) : (
+					<Card
+						disabled={allowedItems.length === 0}
+						onClick={() => setSubGroup('ITEMS')}
+						content={'ITEMS'}
+						actionElements={[]}
+						icon={<BsBackpack4 height={battleSpriteSize} />}
+					/>
+				)}
 
 				{runningAllowed && (
 					<Card

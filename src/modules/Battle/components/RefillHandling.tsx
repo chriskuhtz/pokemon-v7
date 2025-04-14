@@ -1,8 +1,11 @@
-import { BattlePokemonInfo } from '../../../components/BattlePokemonInfo/BattlePokemonInfo';
+import { HpBar } from '../../../components/HpBar/HpBar';
+import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
 import { isKO } from '../../../functions/isKo';
 import { Message } from '../../../hooks/useMessageQueue';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
+import { Card } from '../../../uiComponents/Card/Card';
 import { Page } from '../../../uiComponents/Page/Page';
+import { Stack } from '../../../uiComponents/Stack/Stack';
 
 export const RefillHandling = ({
 	team,
@@ -18,40 +21,42 @@ export const RefillHandling = ({
 	if (teamCanRefill) {
 		return (
 			<Page headline="">
-				<div
-					style={{
-						border: '2px solid black',
-						margin: '4rem',
-						maxHeight: 'calc(100dvh - 8rem)',
-						padding: '2rem',
-						borderRadius: '1rem',
-					}}
-				>
+				<Stack mode="column">
 					Who will you send out next:
-					<div
-						style={{
-							display: 'grid',
-							gridTemplateColumns: '1fr 1fr',
-							rowGap: '1rem',
-						}}
-					>
-						{team.map((teamMember) => {
-							if (teamMember.status === 'BENCH' && !isKO(teamMember)) {
-								return (
-									<BattlePokemonInfo
-										onClick={() => {
-											addMessage({
-												message: `Lets go ${teamMember.data.name}`,
-												onRemoval: () => putPokemonOnField(teamMember.id),
-											});
-										}}
-										pokemon={teamMember}
-									/>
-								);
-							}
-						})}
-					</div>
-				</div>
+					{team.map((teamMember) => {
+						if (teamMember.status === 'BENCH' && !isKO(teamMember)) {
+							return (
+								<Card
+									onClick={() => {
+										addMessage({
+											message: `Lets go ${teamMember.data.name}`,
+											onRemoval: () => putPokemonOnField(teamMember.id),
+										});
+									}}
+									content={
+										<div>
+											<h4>{teamMember.name}</h4>
+											<HpBar
+												max={teamMember.statBoosts.hp}
+												damage={teamMember.damage}
+											/>
+										</div>
+									}
+									actionElements={[]}
+									icon={
+										<PokemonSprite
+											name={teamMember.name}
+											config={{
+												grayscale: isKO(teamMember),
+												shiny: teamMember.shiny,
+											}}
+										/>
+									}
+								/>
+							);
+						}
+					})}
+				</Stack>
 			</Page>
 		);
 	}
