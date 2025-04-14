@@ -5,6 +5,7 @@ import {
 	isApricorn,
 	isBerry,
 	isHealingItem,
+	isMulch,
 	isPokeball,
 } from '../../interfaces/Item';
 
@@ -13,6 +14,7 @@ export const itemfilterNames = [
 	'heal-items',
 	'berries',
 	'apricorns',
+	'mulch',
 	'other',
 ] as const;
 export type ItemsFilterType = (typeof itemfilterNames)[number];
@@ -32,6 +34,9 @@ const filterItemsByType = (
 	}
 	if (itemsFilter === 'apricorns') {
 		return isApricorn(item);
+	}
+	if (itemsFilter === 'mulch') {
+		return isMulch(item);
 	}
 	if (itemsFilter === 'other') {
 		return (
