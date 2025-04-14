@@ -182,6 +182,9 @@ export const heldItems = [
 	'destiny-knot',
 	'black-sludge',
 	'icy-rock',
+	'smooth-rock',
+	'heat-rock',
+	'damp-rock',
 ] as const;
 export const valuables = [
 	'shoal-salt',

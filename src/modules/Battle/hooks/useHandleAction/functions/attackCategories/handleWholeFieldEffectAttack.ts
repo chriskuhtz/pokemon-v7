@@ -29,7 +29,10 @@ export const handleWholeFieldEffectAttack = ({
 	const move = m;
 
 	if (move.name === 'sunny-day') {
-		setBattleWeather({ type: 'sun', duration: 5 });
+		setBattleWeather({
+			type: 'sun',
+			duration: getHeldItem(attacker) === 'heat-rock' ? 8 : 5,
+		});
 	}
 	if (move.name === 'hail') {
 		setBattleWeather({
@@ -38,10 +41,16 @@ export const handleWholeFieldEffectAttack = ({
 		});
 	}
 	if (move.name === 'sandstorm') {
-		setBattleWeather({ type: 'sandstorm', duration: 5 });
+		setBattleWeather({
+			type: 'sandstorm',
+			duration: getHeldItem(attacker) === 'smooth-rock' ? 8 : 5,
+		});
 	}
 	if (move.name === 'rain-dance') {
-		setBattleWeather({ type: 'rain', duration: 5 });
+		setBattleWeather({
+			type: 'rain',
+			duration: getHeldItem(attacker) === 'damp-rock' ? 8 : 5,
+		});
 	}
 	if (move.name === 'haze') {
 		addMessage({
