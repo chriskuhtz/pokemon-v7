@@ -7,7 +7,7 @@ export const overworldCheckList: {
 	{ name: 'design route s1w1', handled: true },
 	{ name: 'design route s1w1 encounters', handled: true },
 	{ name: 'design route s1w1 items', handled: true },
-	{ name: 'design route s1w1 berry lure' },
+	{ name: 'design route s1w1 berry lure', handled: true },
 	{ name: 'access route w1' },
 	{ name: 'design route w1' },
 	{ name: 'design route w1 encounters' },

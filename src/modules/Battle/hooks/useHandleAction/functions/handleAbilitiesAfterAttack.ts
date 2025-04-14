@@ -305,6 +305,23 @@ export const handleAbilitiesAfterAttack = (
 			'weak armor'
 		);
 	}
+	//justified
+
+	if (
+		!isKO(updatedTarget) &&
+		updatedTarget.ability === 'justified' &&
+		move.data.type.name === 'dark'
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'attack',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'justified'
+		);
+	}
 
 	//Aftermath
 	if (
