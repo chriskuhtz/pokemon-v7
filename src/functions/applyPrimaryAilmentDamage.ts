@@ -8,7 +8,7 @@ export const applyPrimaryAilmentDamage = (
 	pokemon: BattlePokemon,
 	addMessage: (x: string) => void
 ): BattlePokemon => {
-	if (pokemon.ability === 'magic-guard') {
+	if (pokemon.primaryAilment && pokemon.ability === 'magic-guard') {
 		addMessage(`${pokemon.name} prevents damage with magic-guard`);
 		return pokemon;
 	}

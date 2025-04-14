@@ -409,6 +409,7 @@ export const questNames = [
 	'catch 20 different species',
 	'catch 50 different species',
 	'catch 100 different species',
+	'catch 150 different species',
 	'catch a swarm pokemon',
 	'find a pokemon under a smashed rock',
 	'donate 1 plant to the seed vault',
@@ -1515,7 +1516,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch 20 different species': {
 		kind: 'BULLETIN',
-		researchPoints: 25,
+		researchPoints: 20,
 		rewardItems: {
 			'great-ball': 20,
 		},
@@ -1526,25 +1527,36 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch 50 different species': {
 		kind: 'BULLETIN',
-		researchPoints: 100,
+		researchPoints: 50,
 		rewardItems: {
 			'ultra-ball': 20,
 		},
-		availableAfter: 'catch 50 different species',
+		availableAfter: 'catch 20 different species',
 		conditionFunction: (s) =>
 			Object.values(s.pokedex).filter((p) => p.caughtOnRoutes.length > 0)
 				.length >= 50,
 	},
 	'catch 100 different species': {
 		kind: 'BULLETIN',
-		researchPoints: 150,
+		researchPoints: 100,
+		rewardItems: {
+			'master-ball': 1,
+		},
+		availableAfter: 'catch 50 different species',
+		conditionFunction: (s) =>
+			Object.values(s.pokedex).filter((p) => p.caughtOnRoutes.length > 0)
+				.length >= 100,
+	},
+	'catch 150 different species': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
 		rewardItems: {
 			'master-ball': 1,
 		},
 		availableAfter: 'catch 100 different species',
 		conditionFunction: (s) =>
 			Object.values(s.pokedex).filter((p) => p.caughtOnRoutes.length > 0)
-				.length >= 100,
+				.length >= 150,
 	},
 	'catch a swarm pokemon': {
 		kind: 'BULLETIN',

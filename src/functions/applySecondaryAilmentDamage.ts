@@ -13,12 +13,13 @@ export const applySecondaryAilmentDamage = (
 	addMessage: (x: string) => void
 ): BattlePokemon => {
 	let updated = { ...pokemon };
-	if (pokemon.ability === 'magic-guard') {
-		addMessage(`${pokemon.name} prevents damage with magic-guard`);
-		return pokemon;
-	}
+
 	//apply ailment damage
 	if (isTrapped(updated)) {
+		if (pokemon.ability === 'magic-guard') {
+			addMessage(`${pokemon.name} prevents damage with magic-guard`);
+			return pokemon;
+		}
 		addMessage(`${pokemon.data.name} is hurt by its trap`);
 		const trapDamage = Math.round(TRAP_DAMAGE_FACTOR * updated.stats.hp);
 		updated = {
@@ -27,6 +28,10 @@ export const applySecondaryAilmentDamage = (
 		};
 	}
 	if (isLeechSeeded(updated)) {
+		if (pokemon.ability === 'magic-guard') {
+			addMessage(`${pokemon.name} prevents damage with magic-guard`);
+			return pokemon;
+		}
 		addMessage(`${pokemon.data.name} had its energy drained`);
 		const leechDamage = Math.round(LEECH_DAMAGE_FACTOR * updated.stats.hp);
 		updated = {
@@ -35,6 +40,10 @@ export const applySecondaryAilmentDamage = (
 		};
 	}
 	if (updated.secondaryAilments.some((ail) => ail.type === 'nightmare')) {
+		if (pokemon.ability === 'magic-guard') {
+			addMessage(`${pokemon.name} prevents damage with magic-guard`);
+			return pokemon;
+		}
 		addMessage(`${pokemon.data.name} is damaged by nightmares`);
 		const nightmareDamage = Math.round(
 			NIGHTMARE_DAMAGE_FACTOR * updated.stats.hp
@@ -45,6 +54,10 @@ export const applySecondaryAilmentDamage = (
 		};
 	}
 	if (updated.secondaryAilments.some((ail) => ail.type === 'cursed')) {
+		if (pokemon.ability === 'magic-guard') {
+			addMessage(`${pokemon.name} prevents damage with magic-guard`);
+			return pokemon;
+		}
 		addMessage(`${pokemon.data.name} is damaged by curse`);
 		const nightmareDamage = Math.round(CURSE_DAMAGE_FACTOR * updated.stats.hp);
 		updated = {

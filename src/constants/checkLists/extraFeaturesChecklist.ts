@@ -358,4 +358,6 @@ export const extraFeatureCheckList: {
 	{ name: 'randomized-moves' },
 	{ name: 'team screen portrait mode' },
 	{ name: 'battle screen portrait mode' },
+	{ name: 'take all (berries/balls/etc) button' },
+	{ name: 'catch n swarm pokemon quests' },
 ];
