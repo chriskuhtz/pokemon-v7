@@ -1,4 +1,5 @@
 import { useContext, useMemo } from 'react';
+import { IoMdFemale, IoMdMale } from 'react-icons/io';
 import { RiSparkling2Line } from 'react-icons/ri';
 import { battleSpriteSize } from '../../constants/gameData';
 import { secondTurnMoves } from '../../constants/secondTurnMoves';
@@ -70,7 +71,11 @@ export const BattlePokemonInfo = ({
 					pokemon.ownerId !== getPlayerId() && (
 						<ItemSprite item={'poke-ball'} sizeFactor={0.5} />
 					)}
-				{pokemon.shiny && <RiSparkling2Line size={battleSpriteSize / 2} />}{' '}
+				{pokemon.shiny && <RiSparkling2Line size={battleSpriteSize / 2} />}
+				{pokemon.gender === 'MALE' && <IoMdMale size={battleSpriteSize / 2} />}
+				{pokemon.gender === 'FEMALE' && (
+					<IoMdFemale size={battleSpriteSize / 2} />
+				)}
 				<PrimaryAilmentIcon primaryAilment={pokemon.primaryAilment} />
 				{pokemon.data.name} | Lvl {level}{' '}
 			</strong>
