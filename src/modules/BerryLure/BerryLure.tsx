@@ -1,7 +1,6 @@
 import { useCallback, useContext, useMemo } from 'react';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonName } from '../../constants/pokemonNames';
-import { getMiddleOfThree } from '../../functions/getMiddleOfThree';
 import {
 	makeChallengerPokemon,
 	OPPO_ID,
@@ -102,6 +101,27 @@ export const lureBerryEncountersS1E1: Record<PokemonType, PokemonName> = {
 	fairy: 'snubbull',
 	typeless: 'spiritomb',
 };
+export const lureBerryEncountersS1W1: Record<PokemonType, PokemonName> = {
+	fire: 'heatmor',
+	water: 'simipour',
+	electric: 'pikachu-alola-cap',
+	grass: 'nuzleaf',
+	ice: 'avalugg',
+	fighting: 'hawlucha',
+	poison: 'weezing',
+	ground: 'marowak',
+	flying: 'corvisquire',
+	psychic: 'mr-mime',
+	bug: 'accelgor',
+	rock: 'rhydon',
+	ghost: 'yamask',
+	dragon: 'shelgon',
+	dark: 'deino',
+	steel: 'mawile',
+	normal: 'bouffalant',
+	fairy: 'granbull',
+	typeless: 'spiritomb',
+};
 export const BerryLure = () => {
 	const navigate = useNavigate();
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
@@ -133,7 +153,32 @@ export const BerryLure = () => {
 				if (saveFile.location.mapId === 'routeN1E1') {
 					return lureBerryEncountersN1E1[lureType[0] as PokemonType];
 				}
+				if (saveFile.location.mapId === 'routeE1') {
+					return lureBerryEncountersE1[lureType[0] as PokemonType];
+				}
+				if (saveFile.location.mapId === 'routeS1E1') {
+					return lureBerryEncountersS1E1[lureType[0] as PokemonType];
+				}
+				if (saveFile.location.mapId === 'routeS1W1') {
+					return lureBerryEncountersS1W1[lureType[0] as PokemonType];
+				}
 				return lureBerryEncountersN1[lureType[0] as PokemonType];
+			};
+
+			const xp = () => {
+				if (saveFile.location.mapId === 'routeN1E1') {
+					return 3375;
+				}
+				if (saveFile.location.mapId === 'routeE1') {
+					return 8000;
+				}
+				if (saveFile.location.mapId === 'routeS1E1') {
+					return 15625;
+				}
+				if (saveFile.location.mapId === 'routeS1W1') {
+					return 27000;
+				}
+				return 1000;
 			};
 			const challenger: Challenger = {
 				type: 'WILD',
@@ -142,7 +187,7 @@ export const BerryLure = () => {
 				team: [
 					makeChallengerPokemon({
 						name: getRouteBasedLureEncounter(),
-						xp: getMiddleOfThree([125, 1000, Math.floor(Math.random() * 3375)]),
+						xp: xp(),
 					}),
 				],
 			};
@@ -290,4 +335,11 @@ export const routeS1E1Lure: Occupant = {
 	x: 24,
 	y: 25,
 	conditionFunction: (s) => s.campUpgrades['berry lure station routeS1E1'],
+};
+export const routeS1W1Lure: Occupant = {
+	id: 'routeS1W1_berryLure',
+	type: 'BERRY_LURE',
+	x: 47,
+	y: 26,
+	conditionFunction: (s) => s.campUpgrades['berry lure station routeS1W1'],
 };

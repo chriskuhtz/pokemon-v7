@@ -378,6 +378,13 @@ export const questNames = [
 	'train a pokemon to level 10',
 	'train a pokemon to level 20',
 	'train a pokemon to level 30',
+	'train a pokemon to level 40',
+	'train a pokemon to level 50',
+	'train a pokemon to level 60',
+	'train a pokemon to level 70',
+	'train a pokemon to level 80',
+	'train a pokemon to level 90',
+	'train a pokemon to level 100',
 	'defeat a training field trainer',
 	'defeat five training field trainers',
 	'defeat ten training field trainers',
@@ -410,6 +417,8 @@ export const questNames = [
 	'catch 50 different species',
 	'catch 100 different species',
 	'catch 150 different species',
+	'catch 250 different species',
+	'catch 350 different species',
 	'catch a swarm pokemon',
 	'find a pokemon under a smashed rock',
 	'donate 1 plant to the seed vault',
@@ -430,6 +439,8 @@ export const questNames = [
 	'lure 20 different pokemon with berries',
 	'lure 30 different pokemon with berries',
 	'lure 40 different pokemon with berries',
+	'lure 50 different pokemon with berries',
+	'lure 60 different pokemon with berries',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -890,7 +901,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'evolve a pokemon that only evolves during the day',
 	},
 	'train a pokemon to level 10': {
-		rewardItems: { 'exp-share': 1 },
+		rewardItems: { 'exp-share': 1, 'big-malasada': 1 },
 		researchPoints: 10,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 10);
@@ -898,8 +909,8 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 	},
 	'train a pokemon to level 20': {
-		rewardItems: { 'rare-candy': 2 },
-		researchPoints: 10,
+		rewardItems: { 'rare-candy': 2, 'big-malasada': 2 },
+		researchPoints: 20,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 20);
 		},
@@ -907,13 +918,76 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'train a pokemon to level 10',
 	},
 	'train a pokemon to level 30': {
-		rewardItems: { 'rare-candy': 3 },
-		researchPoints: 10,
+		rewardItems: { 'rare-candy': 3, 'big-malasada': 3 },
+		researchPoints: 30,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 30);
 		},
 		kind: 'BULLETIN',
 		availableAfter: 'train a pokemon to level 20',
+	},
+	'train a pokemon to level 40': {
+		rewardItems: { 'rare-candy': 4, 'big-malasada': 4 },
+		researchPoints: 40,
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 40);
+		},
+		kind: 'BULLETIN',
+		availableAfter: 'train a pokemon to level 30',
+	},
+	'train a pokemon to level 50': {
+		rewardItems: { 'rare-candy': 5, 'big-malasada': 5 },
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 50);
+		},
+		kind: 'BULLETIN',
+		availableAfter: 'train a pokemon to level 40',
+	},
+	'train a pokemon to level 60': {
+		rewardItems: { 'rare-candy': 6, 'big-malasada': 6 },
+		researchPoints: 60,
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 60);
+		},
+		kind: 'BULLETIN',
+		availableAfter: 'train a pokemon to level 50',
+	},
+	'train a pokemon to level 70': {
+		rewardItems: { 'rare-candy': 7, 'big-malasada': 7 },
+		researchPoints: 70,
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 70);
+		},
+		kind: 'BULLETIN',
+		availableAfter: 'train a pokemon to level 60',
+	},
+	'train a pokemon to level 80': {
+		rewardItems: { 'rare-candy': 8, 'big-malasada': 8 },
+		researchPoints: 80,
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 80);
+		},
+		kind: 'BULLETIN',
+		availableAfter: 'train a pokemon to level 70',
+	},
+	'train a pokemon to level 90': {
+		rewardItems: { 'rare-candy': 9, 'big-malasada': 9 },
+		researchPoints: 90,
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 90);
+		},
+		kind: 'BULLETIN',
+		availableAfter: 'train a pokemon to level 90',
+	},
+	'train a pokemon to level 100': {
+		rewardItems: { 'rare-candy': 10, 'big-malasada': 10 },
+		researchPoints: 100,
+		conditionFunction: (s) => {
+			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 100);
+		},
+		kind: 'BULLETIN',
+		availableAfter: 'train a pokemon to level 100',
 	},
 	'defeat a training field trainer': {
 		rewardItems: {
@@ -1558,6 +1632,28 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			Object.values(s.pokedex).filter((p) => p.caughtOnRoutes.length > 0)
 				.length >= 150,
 	},
+	'catch 250 different species': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		rewardItems: {
+			'master-ball': 1,
+		},
+		availableAfter: 'catch 150 different species',
+		conditionFunction: (s) =>
+			Object.values(s.pokedex).filter((p) => p.caughtOnRoutes.length > 0)
+				.length >= 250,
+	},
+	'catch 350 different species': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		rewardItems: {
+			'master-ball': 1,
+		},
+		availableAfter: 'catch 250 different species',
+		conditionFunction: (s) =>
+			Object.values(s.pokedex).filter((p) => p.caughtOnRoutes.length > 0)
+				.length >= 350,
+	},
 	'catch a swarm pokemon': {
 		kind: 'BULLETIN',
 		researchPoints: 20,
@@ -1770,6 +1866,26 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'rare-candy': 10,
 		},
 		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 39,
+	},
+	'lure 50 different pokemon with berries': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'berry lure station routeS1W1',
+		availableAfter: 'lure 40 different pokemon with berries',
+		researchPoints: 70,
+		rewardItems: {
+			'rare-candy': 10,
+		},
+		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 49,
+	},
+	'lure 60 different pokemon with berries': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'berry lure station routeS1W1',
+		availableAfter: 'lure 50 different pokemon with berries',
+		researchPoints: 80,
+		rewardItems: {
+			'rare-candy': 10,
+		},
+		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 59,
 	},
 };
 

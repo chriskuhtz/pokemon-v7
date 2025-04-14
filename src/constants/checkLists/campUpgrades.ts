@@ -40,6 +40,7 @@ export const campUpgradeNames = [
 	'berry lure station routeN1E1',
 	'berry lure station routeE1',
 	'berry lure station routeS1E1',
+	'berry lure station routeS1W1',
 ] as const;
 
 export type CampUpgrade = (typeof campUpgradeNames)[number];
@@ -91,6 +92,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'berry lure station routeN1E1': ['machete certification'],
 	'berry lure station routeE1': ['shovel certification'],
 	'berry lure station routeS1E1': ['swimming certification'],
+	'berry lure station routeS1W1': ['swimming certification'],
 };
 export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	bulletin_board: 'A place for people to post quests',
@@ -136,6 +138,7 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	'berry lure station routeN1E1': 'Place berries inside to attract pokemon',
 	'berry lure station routeE1': 'Place berries inside to attract pokemon',
 	'berry lure station routeS1E1': 'Place berries inside to attract pokemon',
+	'berry lure station routeS1W1': 'Place berries inside to attract pokemon',
 	'fifth slot for farm': 'more space at the berry farm',
 	'sixth slot for farm': 'more space at the berry farm',
 	'seventh slot for farm': 'more space at the berry farm',
