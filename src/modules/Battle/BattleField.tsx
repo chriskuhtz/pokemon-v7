@@ -601,7 +601,7 @@ export const BattleField = ({
 			//FRIENDSHIP REWARD, only for participants
 			const friendshipIncreasedTeam = leveledUpTeam.map((p) => {
 				if (p.participatedInBattle) {
-					applyHappinessChange(p, 1);
+					return applyHappinessChange(p, 1);
 				}
 				return p;
 			});
