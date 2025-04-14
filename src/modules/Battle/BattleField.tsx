@@ -289,7 +289,7 @@ export const BattleField = ({
 				})
 			);
 		},
-		[addMessage, battleFieldEffects, battleWeather, pokemon]
+		[addMessage, battleFieldEffects, battleWeather, pokemon, setBattleWeather]
 	);
 	const handleForceSwitch = useCallback(
 		(user: BattlePokemon, moveName: MoveName): BattlePokemon[] => {
