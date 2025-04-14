@@ -13,6 +13,7 @@ import { ItemType } from '../../../../interfaces/Item';
 import { WeatherType } from '../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../BattleField';
 import { handleMoveBlockAilments } from '../../functions/handleMoveBlockAilments';
+import { WeatherObject } from '../useBattleWeather';
 import { handleAllAttackCategories } from './functions/handleAllAttackCategories';
 import { handleCatch } from './functions/handleCatch';
 
@@ -31,7 +32,7 @@ export const useHandleAction = (
 	handleForceSwitch: (x: BattlePokemon, moveName: MoveName) => BattlePokemon[],
 	addBattleFieldEffect: (x: BattleFieldEffect) => void,
 	battleFieldEffects: BattleFieldEffect[],
-	setBattleWeather: (w: WeatherType | undefined) => void,
+	setBattleWeather: (w: WeatherObject | undefined) => void,
 	removeSpikes: (ownerId: string) => void
 ) => {
 	const {

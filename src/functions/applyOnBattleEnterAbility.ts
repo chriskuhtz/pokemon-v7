@@ -4,6 +4,7 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { Stat } from '../interfaces/StatObject';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
+import { WeatherObject } from '../modules/Battle/hooks/useBattleWeather';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { getHeldItem } from './getHeldItem';
 import { getTypeNames } from './getTypeNames';
@@ -17,7 +18,7 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 	battleFieldEffects,
 }: {
 	user: BattlePokemon;
-	setWeather: (x: WeatherType) => void;
+	setWeather: (x: WeatherObject) => void;
 	pokemon: BattlePokemon[];
 	currentWeather: WeatherType | undefined;
 	addMessage: (x: Message) => void;
@@ -40,21 +41,21 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 	}
 
 	if (user.ability === 'drizzle' && currentWeather !== 'rain') {
-		setWeather('rain');
+		setWeather({ duration: 9000, type: 'rain' });
 		addMessage({ message: `${user.data.name} made it rain with drizzle` });
 	}
 	if (user.ability === 'drought' && currentWeather !== 'sun') {
-		setWeather('sun');
+		setWeather({ duration: 9000, type: 'sun' });
 		addMessage({
 			message: `${user.data.name} intensified the sun with drought`,
 		});
 	}
 	if (user.ability === 'sand-stream' && currentWeather !== 'sandstorm') {
-		setWeather('sandstorm');
+		setWeather({ duration: 9000, type: 'sandstorm' });
 		addMessage({ message: `${user.data.name} summoned a sand storm` });
 	}
 	if (user.ability === 'snow-warning' && currentWeather !== 'hail') {
-		setWeather('hail');
+		setWeather({ duration: 9000, type: 'hail' });
 		addMessage({ message: `${user.data.name} summoned a hail storm` });
 	}
 	if (

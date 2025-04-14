@@ -23,10 +23,6 @@ export const handleAilmentAttack = ({
 	addMessage: (x: Message) => void;
 	move: BattleAttack;
 	battleWeather: WeatherType | undefined;
-	setBattleWeather: (x: WeatherType) => void;
-	scatterCoins: () => void;
-	dampy?: { name: string };
-	addBattleFieldEffect: (x: BattleFieldEffect) => void;
 	battleFieldEffects: BattleFieldEffect[];
 	target: BattlePokemon;
 }): BattlePokemon[] => {

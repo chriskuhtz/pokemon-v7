@@ -27,13 +27,13 @@ import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Inventory, joinInventories } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
 import { EmptyStatObject, Stat } from '../../interfaces/StatObject';
-import { WeatherType } from '../../interfaces/Weather';
 import { ControlBar } from './components/ControlBar';
 import { EnemyLane } from './components/EnemyLane';
 import { PlayerLane } from './components/PlayerLane';
 import { RefillHandling } from './components/RefillHandling';
 import { checkAndHandleFainting } from './functions/handleFainting';
 import { useBattleFieldEffects } from './hooks/useBattleFieldEffects';
+import { useBattleWeather } from './hooks/useBattleWeather';
 import { useChooseAction } from './hooks/useChooseAction';
 import { useHandleAction } from './hooks/useHandleAction/useHandleAction';
 
@@ -102,7 +102,6 @@ export const BattleField = ({
 	const isTrainerBattle = useMemo(() => !!challengerId, [challengerId]);
 
 	const [battleRound, setBattleRound] = useState<number>(0);
-	const [bW, setBattleWeather] = useState<WeatherType | undefined>();
 	const [battleLocation] = useState<BattleLocation>('STANDARD');
 
 	const [scatteredCoins, setScatteredCoins] = useState<number>(0);
@@ -148,22 +147,14 @@ export const BattleField = ({
 		() => [...onFieldTeam, ...onFieldOpponents],
 		[onFieldOpponents, onFieldTeam]
 	);
-	const battleWeather: WeatherType | undefined = useMemo(() => {
-		if (
-			bW &&
-			allOnField.some(
-				(p) => p.ability === 'air-lock' || p.ability === 'cloud-nine'
-			)
-		) {
-			return `${bW}_effectless` as WeatherType;
-		}
-		return bW;
-	}, [allOnField, bW]);
+
+	const { battleWeather, setBattleWeather, reduceWeatherDuration } =
+		useBattleWeather(allOnField);
 
 	const {
 		battleFieldEffects,
 		addBattleFieldEffect,
-		reduceBatttleFieldEffectDurations,
+		reduceBattleFieldEffectDurations,
 		removeSpikes,
 	} = useBattleFieldEffects(onFieldOpponents, onFieldTeam, battleWeather);
 
@@ -410,7 +401,8 @@ export const BattleField = ({
 			if (!latestMessage && !nextMover) {
 				setBattleStep('END_OF_TURN');
 				setBattleRound((battleRound) => battleRound + 1);
-				reduceBatttleFieldEffectDurations();
+				reduceBattleFieldEffectDurations();
+				reduceWeatherDuration();
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
 						if (p.status === 'ONFIELD') {
@@ -430,7 +422,8 @@ export const BattleField = ({
 		handleAction,
 		latestMessage,
 		nextMover,
-		reduceBatttleFieldEffectDurations,
+		reduceBattleFieldEffectDurations,
+		reduceWeatherDuration,
 	]);
 	// End Of Turn
 	useEffect(() => {

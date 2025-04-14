@@ -25,6 +25,7 @@ export const handleDamageAttack = ({
 	target,
 	pokemon,
 	removeSpikes,
+	scatterCoins,
 }: {
 	attacker: BattlePokemon;
 	target: BattlePokemon;
@@ -35,6 +36,7 @@ export const handleDamageAttack = ({
 	battleFieldEffects: BattleFieldEffect[];
 	dampy: { name: string } | undefined;
 	removeSpikes: (ownerId: string) => void;
+	scatterCoins: () => void;
 }): BattlePokemon[] => {
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
@@ -73,6 +75,9 @@ export const handleDamageAttack = ({
 			}
 			return p;
 		});
+	}
+	if (move.name === 'pay-day') {
+		scatterCoins();
 	}
 
 	// apply damage

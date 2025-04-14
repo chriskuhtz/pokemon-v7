@@ -1181,7 +1181,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/258/',
 		handled: true,
 	},
-	{ name: 'icy-rock', url: 'https://pokeapi.co/api/v2/item/259/' },
+	{
+		name: 'icy-rock',
+		url: 'https://pokeapi.co/api/v2/item/259/',
+		handled: true,
+	},
 	{ name: 'smooth-rock', url: 'https://pokeapi.co/api/v2/item/260/' },
 	{ name: 'heat-rock', url: 'https://pokeapi.co/api/v2/item/261/' },
 	{ name: 'damp-rock', url: 'https://pokeapi.co/api/v2/item/262/' },

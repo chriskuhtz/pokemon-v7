@@ -21,7 +21,7 @@ export const useBattleFieldEffects = (
 		}
 		setBattleFieldEffects([...bf, x]);
 	};
-	const reduceBatttleFieldEffectDurations = useCallback(
+	const reduceBattleFieldEffectDurations = useCallback(
 		() =>
 			setBattleFieldEffects((effects) =>
 				effects
@@ -132,7 +132,7 @@ export const useBattleFieldEffects = (
 		battleFieldEffects,
 		setBattleFieldEffects,
 		addBattleFieldEffect,
-		reduceBatttleFieldEffectDurations,
+		reduceBattleFieldEffectDurations,
 		removeSpikes,
 	};
 };

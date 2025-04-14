@@ -1,9 +1,10 @@
 import { changeMovePP } from '../../../../../../functions/changeMovePP';
+import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import { EmptyStatObject } from '../../../../../../interfaces/StatObject';
-import { WeatherType } from '../../../../../../interfaces/Weather';
+import { WeatherObject } from '../../../useBattleWeather';
 
 export const handleWholeFieldEffectAttack = ({
 	attacker,
@@ -17,7 +18,7 @@ export const handleWholeFieldEffectAttack = ({
 	pokemon: BattlePokemon[];
 	addMessage: (x: Message) => void;
 	move: BattleAttack;
-	setBattleWeather: (x: WeatherType) => void;
+	setBattleWeather: (x: WeatherObject) => void;
 	target: BattlePokemon;
 }): BattlePokemon[] => {
 	let updatedPokemon: BattlePokemon[] = [...pokemon];
@@ -28,16 +29,19 @@ export const handleWholeFieldEffectAttack = ({
 	const move = m;
 
 	if (move.name === 'sunny-day') {
-		setBattleWeather('sun');
+		setBattleWeather({ type: 'sun', duration: 5 });
 	}
 	if (move.name === 'hail') {
-		setBattleWeather('hail');
+		setBattleWeather({
+			type: 'hail',
+			duration: getHeldItem(attacker) === 'icy-rock' ? 8 : 5,
+		});
 	}
 	if (move.name === 'sandstorm') {
-		setBattleWeather('sandstorm');
+		setBattleWeather({ type: 'sandstorm', duration: 5 });
 	}
 	if (move.name === 'rain-dance') {
-		setBattleWeather('rain');
+		setBattleWeather({ type: 'rain', duration: 5 });
 	}
 	if (move.name === 'haze') {
 		addMessage({
