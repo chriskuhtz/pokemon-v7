@@ -145,6 +145,15 @@ export const getPower = (
 	if (attack.name === 'return') {
 		return (attacker.happiness * 2) / 5;
 	}
+	if (attack.name === 'facade') {
+		if (attacker.primaryAilment?.type === 'burn') {
+			return 280;
+		}
+		if (attacker.primaryAilment) {
+			return 140;
+		}
+		return attack.data.power ?? 0;
+	}
 
 	if (attack.name === 'frustration') {
 		return ((255 - attacker.happiness) * 2) / 5;
