@@ -39,7 +39,11 @@ export const handleAbilitiesAfterAttack = (
 } => {
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
-
+	//check for mummy
+	if (target.ability === 'mummy' && contactMoves.includes(move.name)) {
+		addMessage({ message: `${updatedAttacker.name}'s ability became mummy` });
+		updatedAttacker.ability = 'mummy';
+	}
 	//check for static
 	if (
 		target.ability === 'static' &&
