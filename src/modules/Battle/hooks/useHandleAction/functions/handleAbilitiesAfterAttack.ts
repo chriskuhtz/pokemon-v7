@@ -318,6 +318,18 @@ export const handleAbilitiesAfterAttack = (
 			damage: Math.floor(updatedAttacker.damage + updatedAttacker.stats.hp / 4),
 		};
 	}
+	//Moxie
+	if (isKO(updatedTarget) && updatedAttacker.ability === 'moxie') {
+		updatedAttacker = applyStatChangeToPokemon(
+			updatedAttacker,
+			'attack',
+			1,
+			true,
+			[],
+			addMessage,
+			'moxie'
+		);
+	}
 
 	return { updatedAttacker, updatedTarget };
 };

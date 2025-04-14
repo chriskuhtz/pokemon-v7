@@ -31,7 +31,7 @@ export const routeS1W1Occupants: OverworldMap['occupants'] = [
 	},
 	{
 		x: 2,
-		y: 48,
+		y: 49,
 		type: 'ITEM',
 		item: 'armor-fossil',
 		amount: 1,
@@ -40,13 +40,53 @@ export const routeS1W1Occupants: OverworldMap['occupants'] = [
 		id: 'routeS1W1_armor_fossil',
 	},
 	{
-		x: 2,
-		y: 47,
+		x: 1,
+		y: 49,
 		type: 'ITEM',
 		item: 'skull-fossil',
 		amount: 1,
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id == 'routeS1W1_skull_fossil'),
 		id: 'routeS1W1_skull_fossil',
+	},
+	{
+		x: 49,
+		y: 30,
+		type: 'ITEM',
+		item: 'belue-berry',
+		amount: 5,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id == 'routeS1W1_belue_berry'),
+		id: 'routeS1W1_belue_berry',
+	},
+	{
+		x: 49,
+		y: 1,
+		type: 'ITEM',
+		item: 'razz-berry',
+		amount: 5,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id == 'routeS1W1_razz_berry'),
+		id: 'routeS1W1_razz_berry',
+	},
+	{
+		x: 6,
+		y: 7,
+		type: 'ITEM',
+		item: 'rindo-berry',
+		amount: 5,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id == 'routeS1W1_rindo_berry'),
+		id: 'routeS1W1_rindo_berry',
+	},
+	{
+		x: 2,
+		y: 39,
+		type: 'ITEM',
+		item: 'grepa-berry',
+		amount: 5,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id == 'routeS1W1_grepa_berry'),
+		id: 'routeS1W1_grepa_berry',
 	},
 ];
