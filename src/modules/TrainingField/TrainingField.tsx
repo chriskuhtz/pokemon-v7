@@ -23,7 +23,7 @@ export const TrainingField = () => {
 				<Card
 					key={'random1'}
 					icon={<FaRandom />}
-					content={<h3>Random Opponent (Tier 2)</h3>}
+					content={<h3>Random Opponent (Tier 1)</h3>}
 					actionElements={[
 						<button onClick={() => challenge({ tier: 1 })}>Challenge</button>,
 					]}
