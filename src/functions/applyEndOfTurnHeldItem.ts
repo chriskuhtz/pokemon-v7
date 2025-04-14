@@ -13,6 +13,7 @@ import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { getHeldItem } from './getHeldItem';
 import { getMovesArray } from './getMovesArray';
+import { getTypeNames } from './getTypeNames';
 
 export const applyEndOfTurnHeldItem = (
 	pokemon: BattlePokemon,
@@ -37,6 +38,23 @@ export const applyEndOfTurnHeldItem = (
 			...pokemon,
 			damage: Math.floor(Math.max(0, pokemon.damage - pokemon.stats.hp / 16)),
 		};
+	}
+	if (heldItem === 'black-sludge') {
+		if (getTypeNames(pokemon).includes('poison') && pokemon.damage > 0) {
+			addMultipleMessages([
+				`${pokemon.data.name} recovered hp with ${heldItem}`,
+			]);
+			return {
+				...pokemon,
+				damage: Math.floor(Math.max(0, pokemon.damage - pokemon.stats.hp / 16)),
+			};
+		} else if (!getTypeNames(pokemon).includes('poison')) {
+			addMultipleMessages([`${pokemon.data.name} is damaged by ${heldItem}`]);
+			return {
+				...pokemon,
+				damage: Math.floor(pokemon.damage + pokemon.stats.hp / 16),
+			};
+		}
 	}
 	if (heldItem === 'mental-herb') {
 		const filteredAilments = pokemon.secondaryAilments.filter((s) => {

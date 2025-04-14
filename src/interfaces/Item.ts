@@ -180,6 +180,7 @@ export const heldItems = [
 	'iron-ball',
 	'lagging-tail',
 	'destiny-knot',
+	'black-sludge',
 ] as const;
 export const valuables = [
 	'shoal-salt',
@@ -393,6 +394,7 @@ export const hasEndOfTurnEffect = (item: ItemType): boolean => {
 		isBerry(item) ||
 		item === 'berry-juice' ||
 		item === 'leftovers' ||
+		item === 'black-sludge' ||
 		isHerb(item)
 	) {
 		return true;
