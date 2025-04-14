@@ -117,14 +117,16 @@ export const getRolloutFactor = (turn: number, defenseCurled: boolean) => {
 export const getPower = (
 	attacker: BattlePokemon,
 	attack: BattleAttack,
-	targetWeight: number,
+	target: BattlePokemon,
 	attackerLevel: number
 ) => {
 	if (attack.name === 'fury-cutter') {
 		return (attack.data.power ?? 0) * (attacker.furyCutterStack ?? 1);
 	}
 	if (attack.name === 'low-kick') {
-		return getLowKickPower(targetWeight);
+		const actualWeight = getActualWeight(target.data.weight, target.ability);
+
+		return getLowKickPower(actualWeight);
 	}
 	if (attack.name === 'flail' || attack.name === 'reversal') {
 		return getFlailPower(attacker.stats.hp, attacker.damage);
@@ -154,7 +156,13 @@ export const getPower = (
 		}
 		return attack.data.power ?? 0;
 	}
-
+	if (
+		attack.name === 'smelling-salts' &&
+		attack.data.power &&
+		target.primaryAilment?.type === 'paralysis'
+	) {
+		return attack.data.power * 2;
+	}
 	if (attack.name === 'frustration') {
 		return ((255 - attacker.happiness) * 2) / 5;
 	}
@@ -290,12 +298,11 @@ export const calculateDamage = (
 	const { level } = calculateLevelData(attacker.xp);
 
 	const levelFactor = (2 * level) / 5 + 2;
-	const actualWeight = getActualWeight(target.data.weight, target.ability);
 
 	const power = getPower(
 		attacker,
 		attack,
-		actualWeight,
+		target,
 		calculateLevelData(attacker.xp).level
 	);
 

@@ -124,7 +124,6 @@ export const handleAbilitiesAfterAttack = (
 			by: 'cursed-body',
 		});
 	}
-
 	//check for effect spore
 	if (
 		target.ability === 'effect-spore' &&
@@ -157,7 +156,6 @@ export const handleAbilitiesAfterAttack = (
 			message: `${updatedAttacker.data.name} was hurt by rough skin`,
 		});
 	}
-
 	// check anger point
 	if (criticalHit && updatedTarget.ability === 'anger-point') {
 		updatedTarget = applyStatChangeToPokemon(
@@ -170,7 +168,6 @@ export const handleAbilitiesAfterAttack = (
 			'with anger point'
 		);
 	}
-
 	// apply rage boost
 	if (damage > 0 && target.secondaryAilments.some((a) => a.type === 'raging')) {
 		updatedTarget = applyStatChangeToPokemon(
@@ -306,7 +303,6 @@ export const handleAbilitiesAfterAttack = (
 		);
 	}
 	//justified
-
 	if (
 		!isKO(updatedTarget) &&
 		updatedTarget.ability === 'justified' &&
@@ -321,6 +317,15 @@ export const handleAbilitiesAfterAttack = (
 			addMessage,
 			'justified'
 		);
+	}
+	//smelling salts para heal
+	if (
+		!isKO(updatedTarget) &&
+		updatedTarget.lastReceivedDamage?.attack.name === 'smelling-salts' &&
+		updatedTarget.primaryAilment?.type === 'paralysis'
+	) {
+		addMessage({ message: `${updatedTarget.name}'s paralysis was cured` });
+		updatedTarget = { ...updatedTarget, primaryAilment: undefined };
 	}
 
 	//Aftermath
