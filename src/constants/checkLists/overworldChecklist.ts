@@ -14,7 +14,7 @@ export const overworldCheckList: {
 	{
 		name: 'design return shortcut for W1 (waterfall (can go down, but not up))',
 	},
-	{ name: 'design route w1 encounters' },
+	{ name: 'design route w1 encounters', handled: true },
 	{ name: 'design route w1 berry lure' },
 	{ name: 'design route w1 items' },
 	{ name: 'access route n1w1' },
@@ -28,7 +28,5 @@ export const overworldCheckList: {
 	{ name: 'move onixCave to custom sheet' },
 	{ name: 'move routeN1E1 to custom sheet' },
 	{ name: 'move routeE1 to custom sheet' },
-	{ name: 'move routeS1 to custom sheet' },
-	{ name: 'move routeW1 to custom sheet' },
 	{ name: 'move routeN1W1 to custom sheet' },
 ];

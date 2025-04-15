@@ -1,7 +1,7 @@
 import { EncounterMap } from '../encounters';
 
 export const routeW1Encounters: EncounterMap = {
-	WATER: [],
+	WATER: [{ name: 'gyarados', minXp: 64000, maxXp: 125000, rarity: 'rare' }],
 	BASE: [
 		{
 			name: 'pikachu-partner-cap',
