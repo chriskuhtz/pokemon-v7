@@ -41,6 +41,13 @@ const hills: TileMap = {
 	gap: 0,
 };
 
+const hillsWithWaterfall: TileMap = {
+	src: "url('/tilesets/hillsWithWaterfall.png')",
+	height: 9,
+	width: 12,
+	gap: 0,
+};
+
 export const tileMapsRecord: Record<string, TileMap> = {
 	'/tilesets/masterSheet.png': masterSheet,
 	'/tilesets/palletTown.png': palletTown,
@@ -48,4 +55,5 @@ export const tileMapsRecord: Record<string, TileMap> = {
 	'/tilesets/slateport.png': slateport,
 	'/tilesets/waterAndSand.png': waterAndSand,
 	'/tilesets/hills.png': hills,
+	'/tilesets/hillsWithWaterfall.png': hillsWithWaterfall,
 };

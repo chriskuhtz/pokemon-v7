@@ -1,0 +1,32 @@
+import { OverworldMap } from '../../../interfaces/OverworldMap';
+
+export const routeW1Occupants: OverworldMap['occupants'] = [
+	{
+		type: 'ON_STEP_PORTAL',
+		x: 25,
+		y: 0,
+		portal: {
+			mapId: 'routeN1W1',
+			x: 25,
+			y: 49,
+			orientation: 'UP',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+		id: 'routeW1_to_routeN1W1',
+	},
+	{
+		type: 'ON_STEP_PORTAL',
+		x: 25,
+		y: 50,
+		portal: {
+			mapId: 'routeS1W1',
+			y: 1,
+			x: 25,
+			orientation: 'DOWN',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+		id: 'routeN1W1_to_routeS1W1',
+	},
+];

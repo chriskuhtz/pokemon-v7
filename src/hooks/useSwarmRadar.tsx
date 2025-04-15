@@ -43,8 +43,6 @@ const swarmMons: PokemonName[] = [
 	'fuecoco',
 	'quaxly',
 	'sprigatito',
-
-	'pikachu-partner-cap',
 	'pikachu-world-cap',
 ];
 
