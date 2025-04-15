@@ -22,6 +22,7 @@ import { routeN1E1 } from '../maps/routeN1E1';
 import { routeS1 } from '../maps/routeS1';
 import { routeS1E1 } from '../maps/routeS1E1';
 import { routeS1W1 } from '../maps/routeS1W1';
+import { routeW1 } from '../maps/routeW1';
 import { PokemonName, pokemonNames } from '../pokemonNames';
 import { CampUpgrade, campUpgradeNames } from './campUpgrades';
 
@@ -153,22 +154,18 @@ const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 	'catch a MORNING-time exclusive pokemon from routeS1E1': {
 		'great-ball': 5,
 		'kee-berry': 2,
-		'berry-juice': 1,
 	},
 	'catch a DAY-time exclusive pokemon from routeS1E1': {
 		'great-ball': 5,
 		'belue-berry': 2,
-		'berry-juice': 1,
 	},
 	'catch a EVENING-time exclusive pokemon from routeS1E1': {
 		'great-ball': 5,
 		'rabuta-berry': 2,
-		'berry-juice': 1,
 	},
 	'catch a NIGHT-time exclusive pokemon from routeS1E1': {
 		'great-ball': 5,
 		'pinap-berry': 2,
-		'berry-juice': 1,
 	},
 	'catch all MORNING-time pokemon from routeS1E1': {
 		'great-ball': 5,
@@ -194,18 +191,22 @@ const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 	'catch a MORNING-time exclusive pokemon from routeS1W1': {
 		'great-ball': 5,
 		'big-malasada': 1,
+		'escape-rope': 1,
 	},
 	'catch a DAY-time exclusive pokemon from routeS1W1': {
 		'great-ball': 5,
 		'big-malasada': 1,
+		'escape-rope': 1,
 	},
 	'catch a EVENING-time exclusive pokemon from routeS1W1': {
 		'great-ball': 5,
 		'big-malasada': 1,
+		'escape-rope': 1,
 	},
 	'catch a NIGHT-time exclusive pokemon from routeS1W1': {
 		'great-ball': 5,
 		'big-malasada': 1,
+		'escape-rope': 1,
 	},
 	'catch all MORNING-time pokemon from routeS1W1': {
 		'great-ball': 5,
@@ -221,6 +222,43 @@ const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 	},
 	'catch all NIGHT-time pokemon from routeS1W1': {
 		'great-ball': 5,
+		'rare-candy': 1,
+	},
+	//routeW1
+	'catch a MORNING-time exclusive pokemon from routeW1': {
+		'quick-ball': 5,
+		'big-malasada': 1,
+		'escape-rope': 1,
+	},
+	'catch a DAY-time exclusive pokemon from routeW1': {
+		'quick-ball': 5,
+		'big-malasada': 1,
+		'escape-rope': 1,
+	},
+	'catch a EVENING-time exclusive pokemon from routeW1': {
+		'quick-ball': 5,
+		'big-malasada': 1,
+		'escape-rope': 1,
+	},
+	'catch a NIGHT-time exclusive pokemon from routeW1': {
+		'quick-ball': 5,
+		'big-malasada': 1,
+		'escape-rope': 1,
+	},
+	'catch all MORNING-time pokemon from routeW1': {
+		'quick-ball': 5,
+		'rare-candy': 1,
+	},
+	'catch all DAY-time pokemon from routeW1': {
+		'great-ball': 5,
+		'rare-candy': 1,
+	},
+	'catch all EVENING-time pokemon from routeW1': {
+		'quick-ball': 5,
+		'rare-candy': 1,
+	},
+	'catch all NIGHT-time pokemon from routeW1': {
+		'quick-ball': 5,
 		'rare-candy': 1,
 	},
 };
@@ -331,6 +369,7 @@ const catchQuests = {
 	...catchQuestsForRoute(routeE1, 'sledge hammer certification'),
 	...catchQuestsForRoute(routeS1E1, 'swimming certification'),
 	...catchQuestsForRoute(routeS1W1, 'swimming certification'),
+	...catchQuestsForRoute(routeW1, 'swimming certification'),
 };
 
 export const questNames = [
