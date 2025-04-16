@@ -187,6 +187,12 @@ export const heldItems = [
 	'damp-rock',
 	'grip-claw',
 	'choice-scarf',
+	'power-bracer',
+	'power-belt',
+	'power-lens',
+	'power-band',
+	'power-anklet',
+	'power-weight',
 ] as const;
 export const valuables = [
 	'shoal-salt',

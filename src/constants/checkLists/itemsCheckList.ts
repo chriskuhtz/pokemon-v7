@@ -1211,13 +1211,37 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/264/',
 		handled: true,
 	},
-	{ name: 'sticky-barb', url: 'https://pokeapi.co/api/v2/item/265/' },
-	{ name: 'power-bracer', url: 'https://pokeapi.co/api/v2/item/266/' },
-	{ name: 'power-belt', url: 'https://pokeapi.co/api/v2/item/267/' },
-	{ name: 'power-lens', url: 'https://pokeapi.co/api/v2/item/268/' },
-	{ name: 'power-band', url: 'https://pokeapi.co/api/v2/item/269/' },
-	{ name: 'power-anklet', url: 'https://pokeapi.co/api/v2/item/270/' },
-	{ name: 'power-weight', url: 'https://pokeapi.co/api/v2/item/271/' },
+
+	{
+		name: 'power-bracer',
+		url: 'https://pokeapi.co/api/v2/item/266/',
+		handled: true,
+	},
+	{
+		name: 'power-belt',
+		url: 'https://pokeapi.co/api/v2/item/267/',
+		handled: true,
+	},
+	{
+		name: 'power-lens',
+		url: 'https://pokeapi.co/api/v2/item/268/',
+		handled: true,
+	},
+	{
+		name: 'power-band',
+		url: 'https://pokeapi.co/api/v2/item/269/',
+		handled: true,
+	},
+	{
+		name: 'power-anklet',
+		url: 'https://pokeapi.co/api/v2/item/270/',
+		handled: true,
+	},
+	{
+		name: 'power-weight',
+		url: 'https://pokeapi.co/api/v2/item/271/',
+		handled: true,
+	},
 	{ name: 'shed-shell', url: 'https://pokeapi.co/api/v2/item/272/' },
 	{ name: 'big-root', url: 'https://pokeapi.co/api/v2/item/273/' },
 	{ name: 'choice-specs', url: 'https://pokeapi.co/api/v2/item/274/' },
@@ -4030,6 +4054,7 @@ export const itemsCheckList: {
 		handled: true,
 	},
 	//banished, wont do
+	{ name: 'sticky-barb', url: 'https://pokeapi.co/api/v2/item/265/' },
 	{ name: 'grass-mail', url: 'https://pokeapi.co/api/v2/item/114/' },
 	{ name: 'flame-mail', url: 'https://pokeapi.co/api/v2/item/115/' },
 	{ name: 'bubble-mail', url: 'https://pokeapi.co/api/v2/item/116/' },

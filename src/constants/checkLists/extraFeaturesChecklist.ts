@@ -366,4 +366,5 @@ export const extraFeatureCheckList: {
 	{ name: 'randomized-moves' },
 	{ name: 'team screen portrait mode' },
 	{ name: 'battle screen portrait mode' },
+	{ name: 'pokedex: show number of caught/seen' },
 ];

@@ -29,7 +29,29 @@ export const applyEVGain = (
 	change: number,
 	heldItem?: ItemType
 ): StatObject => {
-	const actualChange = heldItem === 'macho-brace' ? change * 2 : change;
+	let actualChange = change;
+	if (heldItem === 'macho-brace') {
+		actualChange *= 2;
+	}
+	if (heldItem === 'power-bracer' && stat === 'attack') {
+		actualChange *= 4;
+	}
+	if (heldItem === 'power-belt' && stat === 'defense') {
+		actualChange *= 4;
+	}
+	if (heldItem === 'power-lens' && stat === 'special-attack') {
+		actualChange *= 4;
+	}
+	if (heldItem === 'power-band' && stat === 'special-defense') {
+		actualChange *= 4;
+	}
+	if (heldItem === 'power-anklet' && stat === 'speed') {
+		actualChange *= 4;
+	}
+	if (heldItem === 'power-weight' && stat === 'hp') {
+		actualChange *= 4;
+	}
+
 	const initial = initialEvs[stat];
 	const update = getMiddleOfThree([0, initial + actualChange, 255]);
 
