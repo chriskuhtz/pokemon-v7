@@ -1,7 +1,11 @@
 import { useContext } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { BagLimitBar } from '../../components/BagLimitBar/BagLimitBar';
-import { useFilteredInventory } from '../../components/ItemsFilter/ItemsFilter';
+import {
+	filterItemsByType,
+	ItemsFilterType,
+	useFilteredInventory,
+} from '../../components/ItemsFilter/ItemsFilter';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { EmptyInventory, joinInventories } from '../../interfaces/Inventory';
@@ -32,9 +36,32 @@ export const StorageChest = () => {
 			storage: joinInventories(saveFile.storage, saveFile.bag),
 		});
 	};
+	const takeEverythingFromCategory = (category: ItemsFilterType) => {
+		patchSaveFileReducer({
+			bag: joinInventories(
+				saveFile.bag,
+				Object.fromEntries(
+					Object.entries(saveFile.storage).filter(([item]) =>
+						filterItemsByType(item as ItemType, category)
+					)
+				)
+			),
+			storage: joinInventories(
+				EmptyInventory,
+				Object.fromEntries(
+					Object.entries(saveFile.storage).filter(
+						([item]) => !filterItemsByType(item as ItemType, category)
+					)
+				)
+			),
+		});
+	};
 
-	const { filteredInventory: filteredStorage, buttons: buttonsForStorage } =
-		useFilteredInventory(saveFile.storage);
+	const {
+		filteredInventory: filteredStorage,
+		buttons: buttonsForStorage,
+		currentFilter,
+	} = useFilteredInventory(saveFile.storage);
 
 	return (
 		<Page
@@ -68,6 +95,17 @@ export const StorageChest = () => {
 				<Stack mode="column">
 					<h3>Storage:</h3>
 					{buttonsForStorage}
+					{Object.entries(filteredStorage).filter(([, amount]) => amount > 0)
+						.length > 0 &&
+						currentFilter && (
+							<Card
+								key={'storage' + 'take all'}
+								onClick={() => takeEverythingFromCategory(currentFilter)}
+								actionElements={[]}
+								icon={<FaArrowLeft />}
+								content={`Take all ${currentFilter}`}
+							/>
+						)}
 					{Object.entries(filteredStorage)
 						.filter(([, amount]) => amount > 0)
 						.map(([item, amount]) => (

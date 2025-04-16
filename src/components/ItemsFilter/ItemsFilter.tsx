@@ -19,7 +19,7 @@ export const itemfilterNames = [
 ] as const;
 export type ItemsFilterType = (typeof itemfilterNames)[number];
 
-const filterItemsByType = (
+export const filterItemsByType = (
 	item: ItemType,
 	itemsFilter: ItemsFilterType | undefined
 ): boolean => {
@@ -88,7 +88,11 @@ const ItemsFilterButtons = ({
 
 export const useFilteredInventory = (
 	inventory: Inventory
-): { filteredInventory: Partial<Inventory>; buttons: React.JSX.Element } => {
+): {
+	filteredInventory: Partial<Inventory>;
+	buttons: React.JSX.Element;
+	currentFilter: ItemsFilterType | undefined;
+} => {
 	const [itemsFilter, setFilter] = useState<ItemsFilterType | undefined>();
 
 	const filteredInventory: Partial<Inventory> = useMemo(
@@ -108,5 +112,5 @@ export const useFilteredInventory = (
 		[itemsFilter]
 	);
 
-	return { filteredInventory, buttons };
+	return { filteredInventory, buttons, currentFilter: itemsFilter };
 };
