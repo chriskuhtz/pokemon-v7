@@ -37,7 +37,7 @@ export const RefillHandling = ({
 										<div>
 											<h4>{teamMember.name}</h4>
 											<HpBar
-												max={teamMember.statBoosts.hp}
+												max={teamMember.stats.hp}
 												damage={teamMember.damage}
 											/>
 										</div>
