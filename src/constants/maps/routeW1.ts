@@ -1,13 +1,13 @@
 import { defaultShaderMap } from '../../functions/getTimeOfDay';
 import { OverworldMap } from '../../interfaces/OverworldMap';
-import { routeN1Encounters } from './encounters/routeN1';
+import { routeW1Encounters } from './encounters/routeW1';
 import { routeW1Occupants } from './occupants/routeW1';
 
 export const routeW1: OverworldMap = {
 	id: 'routeW1',
 	tilesetUrl: '/tilesets/hillsWithWaterfall.png',
 	timeOfDayShadersMap: defaultShaderMap,
-	possibleEncounters: routeN1Encounters,
+	possibleEncounters: routeW1Encounters,
 	occupants: routeW1Occupants,
 	tileMap: {
 		baseLayer: [
@@ -5550,7 +5550,7 @@ export const routeW1: OverworldMap = {
 				{ yOffset: -128, xOffset: -96 },
 				{ yOffset: -128, xOffset: -96 },
 				{ yOffset: -128, xOffset: -96 },
-				{ yOffset: -128, xOffset: -96 },
+				{ yOffset: -64, xOffset: -160 },
 				null,
 				null,
 				null,
@@ -5603,7 +5603,7 @@ export const routeW1: OverworldMap = {
 				{ yOffset: -128, xOffset: -96 },
 				{ yOffset: -128, xOffset: -96 },
 				{ yOffset: -128, xOffset: -96 },
-				{ yOffset: -128, xOffset: -96 },
+				{ yOffset: -64, xOffset: -160 },
 				null,
 				null,
 				null,
@@ -7935,7 +7935,7 @@ export const routeW1: OverworldMap = {
 				{ yOffset: -128, xOffset: -96 },
 				{ yOffset: -128, xOffset: -96 },
 				{ yOffset: -128, xOffset: -96 },
-				{ yOffset: -128, xOffset: -96 },
+				{ yOffset: -64, xOffset: -160 },
 				null,
 				null,
 				null,
@@ -7988,7 +7988,7 @@ export const routeW1: OverworldMap = {
 				{ yOffset: -128, xOffset: -96 },
 				{ yOffset: -128, xOffset: -96 },
 				{ yOffset: -128, xOffset: -96 },
-				{ yOffset: -128, xOffset: -96 },
+				{ yOffset: -64, xOffset: -160 },
 				null,
 				null,
 				null,
@@ -8041,7 +8041,7 @@ export const routeW1: OverworldMap = {
 				{ yOffset: -128, xOffset: -96 },
 				{ yOffset: -128, xOffset: -96 },
 				{ yOffset: -128, xOffset: -96 },
-				{ yOffset: -128, xOffset: -96 },
+				{ yOffset: -64, xOffset: -160 },
 				null,
 				null,
 				null,

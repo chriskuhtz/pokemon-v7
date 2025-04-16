@@ -9,6 +9,17 @@ export const getMapDimensions = (
 	};
 };
 
+export const isWaterFall = (
+	map: OverworldMap,
+	location: { x: number; y: number }
+) => {
+	return (
+		map.tilesetUrl === '/tilesets/hillsWithWaterfall.png' &&
+		map.tileMap.waterLayer[location.y][location.x]?.xOffset === -112 &&
+		map.tileMap.waterLayer[location.y][location.x]?.yOffset === -96
+	);
+};
+
 export const isPassable = (
 	field: { x: number; y: number },
 	map: OverworldMap,
