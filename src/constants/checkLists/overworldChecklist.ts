@@ -23,6 +23,7 @@ export const overworldCheckList: {
 	{ name: 'design route n1w1 encounters' },
 	{ name: 'design route n1w1 berry lure' },
 	{ name: 'design route n1w1 items' },
+	{ name: 'champ chris on route n1w1' },
 	{ name: 'entry to prodcedural cave on route s1w1' },
 	{ name: 'prodcedural cave with fossils/legendaries' },
 	{ name: 'water on route N1' },

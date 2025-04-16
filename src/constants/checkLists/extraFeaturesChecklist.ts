@@ -310,7 +310,10 @@ export const extraFeatureCheckList: {
 	{ name: 'gender needs to be visible in battle', handled: true },
 	{ name: 'catch n swarm pokemon quests', handled: true },
 	{ name: 'take all (berries/balls/etc) button', handled: true },
-	{ name: 'improve the release pokemon button, it is accident prone' },
+	{
+		name: 'improve the release pokemon button, it is accident prone',
+		handled: true,
+	},
 	{ name: 'fix pathing algorithm for walking around obstacles' },
 	{ name: 'consider weather/effects etc for opponent decisions' },
 	{ name: 'poison step damage' },

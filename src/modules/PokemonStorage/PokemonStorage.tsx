@@ -64,6 +64,17 @@ export const PokemonStorage = ({
 		);
 	};
 
+	const startReleaseProcess = (id: string) => {
+		const pokemon = allPokemon.find((p) => p.id === id);
+
+		if (!pokemon) {
+			return;
+		}
+		if (window.confirm(`Do you really want to release ${pokemon.name}`)) {
+			setPokemon(allPokemon.filter((p) => p.id !== id));
+		}
+	};
+
 	return (
 		<Page goBack={goBack} headline="Your Pokemon:">
 			<h2>Team:</h2>
@@ -181,9 +192,7 @@ export const PokemonStorage = ({
 							/>
 							<FaTrash
 								size={battleSpriteSize / 1.5}
-								onClick={() =>
-									setPokemon(allPokemon.filter((p) => p.id !== pokemon.id))
-								}
+								onClick={() => startReleaseProcess(pokemon.id)}
 							/>
 						</div>
 					);
