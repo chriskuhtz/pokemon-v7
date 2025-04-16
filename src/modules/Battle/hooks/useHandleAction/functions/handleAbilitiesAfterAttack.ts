@@ -318,6 +318,24 @@ export const handleAbilitiesAfterAttack = (
 			'justified'
 		);
 	}
+	//rattled
+	if (
+		!isKO(updatedTarget) &&
+		updatedTarget.ability === 'rattled' &&
+		(move.data.type.name === 'dark' ||
+			move.data.type.name === 'bug' ||
+			move.data.type.name === 'ghost')
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'speed',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'rattled'
+		);
+	}
 	//smelling salts para heal
 	if (
 		!isKO(updatedTarget) &&

@@ -361,4 +361,5 @@ export const extraFeatureCheckList: {
 		name: 'quest: catch a pokemon of each type',
 	},
 	{ name: 'trainers need cooldown timers' },
+	{ name: 'random abilities' },
 ];
