@@ -96,14 +96,31 @@ export const sortByPriority = (
 		return 1;
 	}
 
-	const aPriority =
-		getHeldItem(a) === 'quick-claw' && Math.random() > 0.5
-			? 10
-			: aMove?.data.priority ?? 0;
-	const bPriority =
-		getHeldItem(b) === 'quick-claw' && Math.random() > 0.5
-			? 10
-			: bMove?.data.priority ?? 0;
+	let aPriority = aMove?.data.priority ?? 0;
+
+	if (getHeldItem(a) === 'quick-claw' && Math.random() > 0.5) {
+		aPriority = 10;
+	}
+	if (
+		a.ability === 'prankster' &&
+		aMove?.type === 'BattleAttack' &&
+		aMove.data.damage_class.name === 'status'
+	) {
+		aPriority += 1;
+	}
+
+	let bPriority = bMove?.data.priority ?? 0;
+
+	if (getHeldItem(b) === 'quick-claw' && Math.random() > 0.5) {
+		bPriority = 10;
+	}
+	if (
+		b.ability === 'prankster' &&
+		bMove?.type === 'BattleAttack' &&
+		bMove.data.damage_class.name === 'status'
+	) {
+		bPriority += 1;
+	}
 
 	if (aPriority > bPriority) {
 		return -1;

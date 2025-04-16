@@ -1122,6 +1122,7 @@ export const abilityNames = [
 	'justified',
 	'rattled',
 	'sap-sipper',
+	'prankster',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
