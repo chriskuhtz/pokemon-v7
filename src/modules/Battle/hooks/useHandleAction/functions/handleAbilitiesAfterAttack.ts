@@ -91,6 +91,7 @@ export const handleAbilitiesAfterAttack = (
 			ailment: 'infatuation',
 			addMessage,
 			targetId: updatedTarget.id,
+			applicator: updatedTarget,
 		});
 	}
 	//check for poison-point
@@ -122,6 +123,7 @@ export const handleAbilitiesAfterAttack = (
 			addMessage,
 			move: move.name,
 			by: 'cursed-body',
+			applicator: updatedTarget,
 		});
 	}
 	//check for effect spore
@@ -215,6 +217,7 @@ export const handleAbilitiesAfterAttack = (
 			pokemon: updatedTarget,
 			ailment: 'flash-fire',
 			addMessage,
+			applicator: updatedTarget,
 		});
 	}
 	//check lightning rod
@@ -260,6 +263,7 @@ export const handleAbilitiesAfterAttack = (
 			ailment: 'color-changed',
 			addMessage,
 			newType: move.data.type.name,
+			applicator: updatedTarget,
 		});
 	}
 

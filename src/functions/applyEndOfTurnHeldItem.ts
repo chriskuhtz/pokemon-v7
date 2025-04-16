@@ -111,6 +111,7 @@ export const applyEndOfTurnHeldItem = (
 				},
 				ailment: 'confusion',
 				addMessage: (message) => addMessage(message.message),
+				applicator: pokemon,
 			});
 		} else {
 			addMessage(`${pokemon.data.name} healed itself with ${heldItem}`);
@@ -164,6 +165,7 @@ export const applyEndOfTurnHeldItem = (
 			pokemon: { ...pokemon, heldItemName: undefined, consumedBerry: heldItem },
 			ailment: 'focused',
 			addMessage: (x) => addMessage(x.message),
+			applicator: pokemon,
 		});
 	}
 

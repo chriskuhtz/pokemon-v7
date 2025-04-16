@@ -52,6 +52,7 @@ export const handleSwaggerAttack = ({
 			pokemon: updatedAttacker,
 			ailment: 'raging',
 			addMessage,
+			applicator: updatedAttacker,
 		});
 	}
 
@@ -65,6 +66,7 @@ export const handleSwaggerAttack = ({
 			pokemon: updatedAttacker,
 			ailment: 'confusion',
 			addMessage,
+			applicator: updatedAttacker,
 		});
 	}
 

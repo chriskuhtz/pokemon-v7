@@ -43,6 +43,7 @@ export const handleAilmentAttack = ({
 			pokemon: updatedTarget,
 			addMessage,
 			ailment: 'foresighted',
+			applicator: updatedAttacker,
 		});
 	}
 	if (move.name === 'torment') {
@@ -50,6 +51,7 @@ export const handleAilmentAttack = ({
 			pokemon: updatedTarget,
 			addMessage,
 			ailment: 'torment',
+			applicator: updatedAttacker,
 		});
 	}
 	if (move.name === 'perish-song') {
@@ -57,6 +59,7 @@ export const handleAilmentAttack = ({
 			pokemon: updatedTarget,
 			ailment: 'perish-songed',
 			addMessage,
+			applicator: updatedAttacker,
 		});
 	}
 	if (move.name === 'attract') {
@@ -68,6 +71,7 @@ export const handleAilmentAttack = ({
 				addMessage,
 				ailment: 'infatuation',
 				targetId: updatedAttacker.id,
+				applicator: updatedTarget,
 			});
 
 		if (getHeldItem(updatedTarget) === 'destiny-knot') {
@@ -78,6 +82,7 @@ export const handleAilmentAttack = ({
 				addMessage,
 				ailment: 'infatuation',
 				targetId: updatedTarget.id,
+				applicator: updatedTarget,
 			});
 		}
 	}
@@ -86,6 +91,7 @@ export const handleAilmentAttack = ({
 			pokemon: updatedTarget,
 			ailment: 'nightmare',
 			addMessage,
+			applicator: updatedTarget,
 		});
 	}
 	if (move.name === 'leech-seed') {
@@ -94,6 +100,7 @@ export const handleAilmentAttack = ({
 			ailment: 'leeching-on',
 			addMessage,
 			healAmount: Math.floor(updatedTarget.stats.hp * LEECH_DAMAGE_FACTOR),
+			applicator: updatedTarget,
 		});
 	}
 

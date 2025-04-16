@@ -84,6 +84,7 @@ export const applyAttackAilmentsToPokemon = (
 					pokemon: target,
 					ailment: ailment as SecondaryAilment['type'],
 					addMessage,
+					applicator: applicator,
 				}),
 				updatedApplicator: applicator,
 			};

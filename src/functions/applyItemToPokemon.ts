@@ -267,6 +267,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 				pokemon: pokemon,
 				ailment: 'guard-spec',
 				addMessage: addMessage ? addMessage : () => {},
+				applicator: pokemon,
 			}) as T;
 		}
 		if (item === 'dire-hit') {
@@ -274,6 +275,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 				pokemon: pokemon,
 				ailment: 'dire-hit',
 				addMessage: addMessage ? addMessage : () => {},
+				applicator: pokemon,
 			}) as T;
 		}
 	}

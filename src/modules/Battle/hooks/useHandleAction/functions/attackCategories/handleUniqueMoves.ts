@@ -52,6 +52,7 @@ export const handleUniqueMoves = ({
 				ailment: 'disable',
 				addMessage,
 				move: randomMoveName,
+				applicator: updatedAttacker,
 			});
 	}
 	if (move.name === 'encore') {
@@ -64,6 +65,7 @@ export const handleUniqueMoves = ({
 				ailment: 'encore',
 				addMessage,
 				move: moveName,
+				applicator: updatedAttacker,
 			});
 	}
 	if (move.name === 'teleport') {
@@ -117,6 +119,7 @@ export const handleUniqueMoves = ({
 			pokemon: updatedAttacker,
 			ailment: 'focused',
 			addMessage,
+			applicator: updatedAttacker,
 		});
 	}
 	if (move.name === 'mirror-move') {
@@ -150,6 +153,7 @@ export const handleUniqueMoves = ({
 			ailment: 'color-changed',
 			addMessage,
 			newType,
+			applicator: updatedAttacker,
 		});
 	}
 	if (move.name === 'conversion-2') {
@@ -164,6 +168,7 @@ export const handleUniqueMoves = ({
 				ailment: 'color-changed',
 				addMessage,
 				newType,
+				applicator: updatedAttacker,
 			});
 		} else addMessage({ message: `It failed to convert to a new type` });
 	}
@@ -303,6 +308,7 @@ export const handleUniqueMoves = ({
 			ailment: 'destiny-bonded',
 			addMessage,
 			targetId: updatedAttacker.id,
+			applicator: updatedAttacker,
 		});
 	}
 	if (move.name === 'mind-reader' || move.name === 'lock-on') {
@@ -311,6 +317,7 @@ export const handleUniqueMoves = ({
 			addMessage,
 			ailment: 'mind-read',
 			by: updatedAttacker.id,
+			applicator: updatedAttacker,
 		});
 	}
 	if (move.name === 'mean-look') {
@@ -318,6 +325,7 @@ export const handleUniqueMoves = ({
 			pokemon: updatedTarget,
 			ailment: 'mean-looked',
 			addMessage,
+			applicator: updatedAttacker,
 		});
 	}
 	if (move.name === 'heal-bell') {

@@ -3,6 +3,7 @@ import { Message } from '../hooks/useMessageQueue';
 import { SecondaryAilment } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { PokemonType } from '../interfaces/PokemonType';
+import { getHeldItem } from './getHeldItem';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { isKO } from './isKo';
 
@@ -15,6 +16,7 @@ export const applySecondaryAilmentToPokemon = ({
 	healAmount,
 	targetId,
 	by,
+	applicator,
 }: {
 	pokemon: BattlePokemon;
 	ailment: SecondaryAilment['type'];
@@ -24,6 +26,7 @@ export const applySecondaryAilmentToPokemon = ({
 	healAmount?: number;
 	targetId?: string;
 	by?: string;
+	applicator: BattlePokemon;
 }): BattlePokemon => {
 	if (
 		ailment !== 'color-changed' &&
@@ -49,7 +52,10 @@ export const applySecondaryAilmentToPokemon = ({
 	}
 	if (ailment === 'trap') {
 		addMessage({ message: `${pokemon.data.name} became trapped` });
-		const duration = 2 + Math.round(Math.random() * 3);
+		let duration = 2 + Math.round(Math.random() * 3);
+		if (getHeldItem(applicator) === 'grip-claw') {
+			duration += 3;
+		}
 		return {
 			...pokemon,
 			secondaryAilments: [
