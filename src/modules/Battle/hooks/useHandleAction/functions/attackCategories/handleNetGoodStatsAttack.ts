@@ -1,4 +1,5 @@
 import { applyAttackStatChanges } from '../../../../../../functions/applyAttackStatChanges';
+import { applySecondaryAilmentToPokemon } from '../../../../../../functions/applySecondaryAilmentToPokemon';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
@@ -19,7 +20,7 @@ export const handleNetGoodStatsAttack = ({
 	battleFieldEffects: BattleFieldEffect[];
 	target: BattlePokemon;
 }): BattlePokemon[] => {
-	const updatedAttacker = { ...attacker };
+	let updatedAttacker = { ...attacker };
 	const updatedTarget = { ...target };
 	const move = m;
 	const selfTargeting = move.data.target.name === 'user';
@@ -27,6 +28,14 @@ export const handleNetGoodStatsAttack = ({
 	if (selfTargeting) {
 		if (move.name === 'defense-curl') {
 			updatedAttacker.defenseCurled = true;
+		}
+		if (move.name === 'charge') {
+			updatedAttacker = applySecondaryAilmentToPokemon({
+				pokemon: updatedAttacker,
+				ailment: 'charge',
+				applicator: updatedAttacker,
+				addMessage,
+			});
 		}
 		return pokemon.map((p) => {
 			if (p.id === attacker.id) {

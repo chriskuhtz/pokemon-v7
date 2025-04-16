@@ -1255,9 +1255,8 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/265/',
 		handled: true,
 	},
-	{ name: 'follow-me', url: 'https://pokeapi.co/api/v2/move/266/' },
-	{ name: 'nature-power', url: 'https://pokeapi.co/api/v2/move/267/' },
-	{ name: 'charge', url: 'https://pokeapi.co/api/v2/move/268/' },
+
+	{ name: 'charge', url: 'https://pokeapi.co/api/v2/move/268/', handled: true },
 	{ name: 'taunt', url: 'https://pokeapi.co/api/v2/move/269/' },
 	{ name: 'helping-hand', url: 'https://pokeapi.co/api/v2/move/270/' },
 	{ name: 'trick', url: 'https://pokeapi.co/api/v2/move/271/' },
@@ -2039,6 +2038,11 @@ export const movesCheckList: {
 	{ name: 'shadow-panic', url: 'https://pokeapi.co/api/v2/move/10016/' },
 	{ name: 'shadow-shed', url: 'https://pokeapi.co/api/v2/move/10017/' },
 	{ name: 'shadow-sky', url: 'https://pokeapi.co/api/v2/move/10018/' },
+	{
+		name: 'follow-me',
+		url: 'https://pokeapi.co/api/v2/move/266/',
+	},
+	{ name: 'nature-power', url: 'https://pokeapi.co/api/v2/move/267/' },
 ];
 
 export const handledMoves = [
@@ -2343,6 +2347,7 @@ export const handledMoves = [
 	'facade',
 	'focus-punch',
 	'smelling-salts',
+	'charge',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

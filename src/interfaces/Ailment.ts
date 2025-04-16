@@ -45,6 +45,7 @@ const secondaryAilments = [
 	'perish-songed',
 	'mean-looked',
 	'torment',
+	'charge',
 ] as const;
 
 export type SecondaryAilmentType = (typeof secondaryAilments)[number];

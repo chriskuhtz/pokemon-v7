@@ -603,6 +603,11 @@ export const calculateDamage = (
 			? 0
 			: 1;
 	const metronomeFactor = Math.min(2, 1 + (attacker.metronomeStack ?? 0 * 0.1));
+	const chargeFactor =
+		attacker.secondaryAilments.some((s) => s.type === 'charge') &&
+		attackType === 'electric'
+			? 2
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -659,7 +664,8 @@ export const calculateDamage = (
 				flareBoostFactor *
 				lifeOrbFactor *
 				telepathyFactor *
-				metronomeFactor
+				metronomeFactor *
+				chargeFactor
 		),
 		1
 	);

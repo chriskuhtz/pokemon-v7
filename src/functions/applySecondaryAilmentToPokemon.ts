@@ -331,5 +331,18 @@ export const applySecondaryAilmentToPokemon = ({
 			],
 		};
 	}
+	if (ailment === 'charge') {
+		addMessage({ message: `${pokemon.data.name} became charged` });
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'charge',
+					duration: 2,
+				},
+			],
+		};
+	}
 	return pokemon;
 };
