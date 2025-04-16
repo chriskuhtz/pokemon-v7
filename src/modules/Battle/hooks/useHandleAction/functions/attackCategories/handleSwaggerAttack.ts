@@ -89,6 +89,7 @@ export const handleSwaggerAttack = ({
 			true,
 			isFlying,
 			isUnderground,
+			1,
 			addMessage
 		);
 	const actualDamage = getMiddleOfThree([

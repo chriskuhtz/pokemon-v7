@@ -201,6 +201,7 @@ export const calculateDamage = (
 	calculateCrits: boolean,
 	targetIsFlying: boolean,
 	targetIsUnderground: boolean,
+	targetsFactor: number,
 	addMessage?: (x: Message) => void
 ): {
 	damage: number;
@@ -395,7 +396,6 @@ export const calculateDamage = (
 
 	const pureDamage = (levelFactor * power * statFactor) / 50 + 2;
 
-	const targetsFactor = 1;
 	const parentalBondFactor = 1;
 	const weatherFactor = determineWeatherFactor(
 		attack,

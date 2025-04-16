@@ -42,7 +42,8 @@ export const handleConfused = (
 					[],
 					false,
 					false,
-					false
+					false,
+					1
 				).damage,
 		};
 	}

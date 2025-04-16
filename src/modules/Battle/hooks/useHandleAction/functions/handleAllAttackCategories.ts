@@ -64,9 +64,9 @@ export const handleAllAttackCategories = ({
 	//determine attacker and target
 	const handleMoveCategories = (
 		target: BattlePokemon,
-		allPokemon: BattlePokemon[]
+		allPokemon: BattlePokemon[],
+		targetsFactor: number
 	): BattlePokemon[] => {
-		console.log('CATEGORY', move.data.meta.category.name);
 		switch (move.data.meta.category.name) {
 			case 'damage':
 			case 'damage+ailment':
@@ -85,6 +85,7 @@ export const handleAllAttackCategories = ({
 					target,
 					removeSpikes,
 					scatterCoins,
+					targetsFactor,
 				});
 			case 'heal':
 				return handleHealAttack({
@@ -158,7 +159,11 @@ export const handleAllAttackCategories = ({
 
 	if (targets.length > 0) {
 		targets.forEach((target) => {
-			updatedPokemon = handleMoveCategories(target, updatedPokemon);
+			updatedPokemon = handleMoveCategories(
+				target,
+				updatedPokemon,
+				1 / targets.length
+			);
 		});
 	}
 

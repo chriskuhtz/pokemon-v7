@@ -39,6 +39,7 @@ export const determineBestMoveAndTarget = (
 					false,
 					false,
 					false,
+					1,
 					() => {}
 				).damage,
 			}))

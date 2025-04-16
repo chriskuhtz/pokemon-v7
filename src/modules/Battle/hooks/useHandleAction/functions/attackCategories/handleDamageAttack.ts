@@ -26,6 +26,7 @@ export const handleDamageAttack = ({
 	pokemon,
 	removeSpikes,
 	scatterCoins,
+	targetsFactor,
 }: {
 	attacker: BattlePokemon;
 	target: BattlePokemon;
@@ -37,6 +38,7 @@ export const handleDamageAttack = ({
 	dampy: { name: string } | undefined;
 	removeSpikes: (ownerId: string) => void;
 	scatterCoins: () => void;
+	targetsFactor: number;
 }): BattlePokemon[] => {
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
@@ -104,6 +106,7 @@ export const handleDamageAttack = ({
 			true,
 			isFlying,
 			isUnderground,
+			targetsFactor,
 			addMessage
 		);
 	const actualDamage = getMiddleOfThree([
