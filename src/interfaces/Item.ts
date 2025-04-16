@@ -186,6 +186,7 @@ export const heldItems = [
 	'heat-rock',
 	'damp-rock',
 	'grip-claw',
+	'choice-scarf',
 ] as const;
 export const valuables = [
 	'shoal-salt',

@@ -1206,7 +1206,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/263/',
 		handled: true,
 	},
-	{ name: 'choice-scarf', url: 'https://pokeapi.co/api/v2/item/264/' },
+	{
+		name: 'choice-scarf',
+		url: 'https://pokeapi.co/api/v2/item/264/',
+		handled: true,
+	},
 	{ name: 'sticky-barb', url: 'https://pokeapi.co/api/v2/item/265/' },
 	{ name: 'power-bracer', url: 'https://pokeapi.co/api/v2/item/266/' },
 	{ name: 'power-belt', url: 'https://pokeapi.co/api/v2/item/267/' },

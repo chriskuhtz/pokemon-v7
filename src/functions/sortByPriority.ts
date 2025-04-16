@@ -25,6 +25,7 @@ const calculateTotalSpeed = (
 		? 2
 		: 1;
 	const machoBraceFactor = getHeldItem(a) === 'macho-brace' ? 0.5 : 1;
+	const choiceScarfFactor = getHeldItem(a) === 'choice-scarf' ? 2 : 1;
 
 	const quickfeetFactor =
 		a.primaryAilment && a.ability === 'quick-feet' ? 1.5 : 1;
@@ -51,7 +52,8 @@ const calculateTotalSpeed = (
 		stallFactor *
 		sandrushFactor *
 		ironBallFactor *
-		laggingTailFactor
+		laggingTailFactor *
+		choiceScarfFactor
 	);
 };
 export const sortByPriority = (

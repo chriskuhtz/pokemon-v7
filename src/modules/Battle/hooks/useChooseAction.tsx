@@ -24,7 +24,11 @@ const determineChoiceBandedMove = (
 	if (pokemon.choiceBandedMove) {
 		return pokemon.choiceBandedMove;
 	}
-	if (getHeldItem(pokemon) === 'choice-band' && !pokemon.choiceBandedMove) {
+	if (
+		(getHeldItem(pokemon) === 'choice-band' ||
+			getHeldItem(pokemon) === 'choice-scarf') &&
+		!pokemon.choiceBandedMove
+	) {
 		return chosenMove;
 	}
 
