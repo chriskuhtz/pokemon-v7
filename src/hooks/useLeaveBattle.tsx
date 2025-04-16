@@ -126,6 +126,18 @@ export const useLeaveBattle = () => {
 				return 1;
 			};
 
+			let updatedSwarmRecord = [...saveFile.mileStones.caughtFromSwarms];
+
+			caughtPokemon.forEach((c) => {
+				if (
+					saveFile.currentSwarm &&
+					c.name === saveFile.currentSwarm?.pokemon
+				) {
+					updatedSwarmRecord.push(c.name);
+				}
+			});
+			updatedSwarmRecord = [...new Set(updatedSwarmRecord)];
+
 			const pokedex = { ...saveFile.pokedex };
 			caughtPokemon.forEach((p) =>
 				addPokemonToDex(pokedex, p.name, p.caughtOnMap, true)
@@ -146,11 +158,7 @@ export const useLeaveBattle = () => {
 						: saveFile.handledOccupants,
 				mileStones: {
 					...saveFile.mileStones,
-					hasCaughtASwarmPokemon:
-						saveFile.currentSwarm &&
-						caughtPokemon.some((c) => c.name === saveFile.currentSwarm?.pokemon)
-							? true
-							: saveFile.mileStones.hasCaughtASwarmPokemon,
+					caughtFromSwarms: updatedSwarmRecord,
 				},
 				pokedex,
 			});

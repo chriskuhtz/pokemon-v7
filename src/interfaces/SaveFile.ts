@@ -107,7 +107,6 @@ export interface SaveFile {
 		hasEvolvedAPokemonThatNeedsDaytime?: boolean;
 		hasEvolvedAPokemonThatNeedsNighttime?: boolean;
 		hasCaughtAPokemonWithHoney?: boolean;
-		hasCaughtASwarmPokemon?: boolean;
 		hasfoundAPokemonBySmashingRocks?: boolean;
 		hasCraftedApricorn?: boolean;
 		hasGrownABerry?: boolean;
@@ -116,6 +115,7 @@ export interface SaveFile {
 		cookedMediumRecipe?: boolean;
 		cookedTrickyRecipe?: boolean;
 		hasWokenASnorlax?: boolean;
+		caughtFromSwarms: PokemonName[];
 		luredWithBerries: PokemonName[];
 	};
 	farm: {

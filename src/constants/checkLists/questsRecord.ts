@@ -458,7 +458,6 @@ export const questNames = [
 	'catch 150 different species',
 	'catch 250 different species',
 	'catch 350 different species',
-	'catch a swarm pokemon',
 	'find a pokemon under a smashed rock',
 	'donate 1 plant to the seed vault',
 	'donate 20 plants to the seed vault',
@@ -480,6 +479,10 @@ export const questNames = [
 	'lure 40 different pokemon with berries',
 	'lure 50 different pokemon with berries',
 	'lure 60 different pokemon with berries',
+	'catch a pokemon from a swarm',
+	'catch 3 different pokemon from swarms',
+	'catch 10 different pokemon from swarms',
+	'catch 20 different pokemon from swarms',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -1693,15 +1696,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			Object.values(s.pokedex).filter((p) => p.caughtOnRoutes.length > 0)
 				.length >= 350,
 	},
-	'catch a swarm pokemon': {
-		kind: 'BULLETIN',
-		researchPoints: 20,
-		rewardItems: {
-			'sitrus-berry': 5,
-		},
-		requiredUpgrade: 'pokemon swarm radar',
-		conditionFunction: (s) => !!s.mileStones.hasCaughtASwarmPokemon,
-	},
 	'find a pokemon under a smashed rock': {
 		kind: 'BULLETIN',
 		researchPoints: 20,
@@ -1925,6 +1919,41 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'rare-candy': 10,
 		},
 		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 59,
+	},
+	'catch a pokemon from a swarm': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'pokemon swarm radar',
+		researchPoints: 20,
+		rewardItems: { 'nest-ball': 20 },
+		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length > 0,
+	},
+	'catch 3 different pokemon from swarms': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'pokemon swarm radar',
+		availableAfter: 'catch a pokemon from a swarm',
+		researchPoints: 50,
+		rewardItems: { 'dusk-ball': 20 },
+		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length > 0,
+	},
+	'catch 10 different pokemon from swarms': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'pokemon swarm radar',
+		availableAfter: 'catch 3 different pokemon from swarms',
+		researchPoints: 100,
+		rewardItems: {
+			'quick-ball': 20,
+		},
+		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length > 0,
+	},
+	'catch 20 different pokemon from swarms': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'pokemon swarm radar',
+		availableAfter: 'catch 10 different pokemon from swarms',
+		researchPoints: 200,
+		rewardItems: {
+			'ultra-ball': 20,
+		},
+		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length > 0,
 	},
 };
 
