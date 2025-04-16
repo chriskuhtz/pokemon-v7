@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { FaTrash } from 'react-icons/fa';
+import { GiBreakingChain } from 'react-icons/gi';
 import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { battleSpriteSize } from '../../constants/gameData';
 import { calculateLevelData } from '../../functions/calculateLevelData';
@@ -190,7 +190,7 @@ export const PokemonStorage = ({
 									togglePokemonOnTeam(pokemon.id);
 								}}
 							/>
-							<FaTrash
+							<GiBreakingChain
 								size={battleSpriteSize / 1.5}
 								onClick={() => startReleaseProcess(pokemon.id)}
 							/>
