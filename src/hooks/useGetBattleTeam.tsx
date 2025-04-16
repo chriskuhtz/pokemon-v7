@@ -212,6 +212,7 @@ export const useGetBattleTeam = (
 					participatedInBattle: false,
 					protected: false,
 					endured: false,
+					charged: false,
 				};
 
 				return battleMon;

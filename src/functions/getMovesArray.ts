@@ -7,6 +7,7 @@ export function getMovesArray<T extends BattlePokemon | OwnedPokemon>(
 		filterOutDisabled?: boolean;
 		considerTorment?: boolean;
 		considerEncore?: boolean;
+		considerTaunt?: boolean;
 		filterOutEmpty?: boolean;
 	}
 ): T['firstMove'][] {
@@ -39,6 +40,7 @@ export function getMovesArray<T extends BattlePokemon | OwnedPokemon>(
 			if (tormentedMove && config?.considerTorment) {
 				return m.name === tormentedMove;
 			}
+
 			if (isBattlePokemon(pokemon) && config?.filterOutEmpty) {
 				const battleMove = m as BattlePokemon['firstMove'];
 
@@ -49,6 +51,17 @@ export function getMovesArray<T extends BattlePokemon | OwnedPokemon>(
 
 				return battleMove.name === pokemon.choiceBandedMove;
 			}
+			return true;
+		})
+		.filter((m) => {
+			if (config?.considerTaunt && isBattlePokemon(pokemon)) {
+				const move = m as BattlePokemon['firstMove'];
+				return (
+					move.data.damage_class.name === 'physical' ||
+					move.data.damage_class.name === 'special'
+				);
+			}
+
 			return true;
 		});
 }

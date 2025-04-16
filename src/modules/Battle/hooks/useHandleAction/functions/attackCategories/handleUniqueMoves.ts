@@ -68,6 +68,14 @@ export const handleUniqueMoves = ({
 				applicator: updatedAttacker,
 			});
 	}
+	if (move.name === 'taunt') {
+		updatedTarget = applySecondaryAilmentToPokemon({
+			pokemon: target,
+			ailment: 'taunt',
+			addMessage,
+			applicator: updatedAttacker,
+		});
+	}
 	if (move.name === 'teleport') {
 		addMessage({
 			message: `${attacker.name} escaped the battle with teleport`,

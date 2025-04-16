@@ -145,6 +145,7 @@ export function ActionSelection({
 					getMovesArray(controlled, {
 						filterOutDisabled: true,
 						considerTorment: true,
+						considerTaunt: true,
 						considerEncore: true,
 					}).map((m) => (
 						<MoveCard

@@ -64,6 +64,7 @@ export const chooseOpponentAction = ({
 		filterOutDisabled: true,
 		considerEncore: true,
 		considerTorment: true,
+		considerTaunt: true,
 		filterOutEmpty: true,
 	});
 

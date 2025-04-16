@@ -344,5 +344,18 @@ export const applySecondaryAilmentToPokemon = ({
 			],
 		};
 	}
+	if (ailment === 'taunt') {
+		addMessage({ message: `${pokemon.data.name} fell for the taunt` });
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'taunt',
+					duration: 3 + Math.round(Math.random() * 2),
+				},
+			],
+		};
+	}
 	return pokemon;
 };
