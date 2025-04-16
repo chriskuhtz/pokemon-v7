@@ -68,6 +68,9 @@ export const handleUniqueMoves = ({
 				applicator: updatedAttacker,
 			});
 	}
+	if (move.name === 'helping-hand') {
+		updatedTarget = { ...updatedTarget, helpingHanded: true };
+	}
 	if (move.name === 'taunt') {
 		updatedTarget = applySecondaryAilmentToPokemon({
 			pokemon: target,

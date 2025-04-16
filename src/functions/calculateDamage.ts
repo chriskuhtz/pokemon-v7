@@ -608,6 +608,7 @@ export const calculateDamage = (
 		attackType === 'electric'
 			? 2
 			: 1;
+	const helpingHandFactor = attacker.helpingHanded ? 1.5 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -665,7 +666,8 @@ export const calculateDamage = (
 				lifeOrbFactor *
 				telepathyFactor *
 				metronomeFactor *
-				chargeFactor
+				chargeFactor *
+				helpingHandFactor
 		),
 		1
 	);

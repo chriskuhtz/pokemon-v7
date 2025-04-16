@@ -28,6 +28,7 @@ export const reduceSecondaryAilmentDurations = (
 		.filter((a) => a !== undefined);
 	updated.protected = false;
 	updated.endured = false;
+	updated.helpingHanded = false;
 
 	return updated;
 };

@@ -42,6 +42,7 @@ export interface BattlePokemon extends OwnedPokemon {
 	};
 	protected: boolean;
 	endured: boolean;
+	helpingHanded: boolean;
 	defenseCurled?: boolean;
 	charged: boolean;
 	lastUsedMove?: BattleMove;
