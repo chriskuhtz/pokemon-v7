@@ -233,7 +233,23 @@ export const handleAbilitiesAfterAttack = (
 			true,
 			battleFieldEffects,
 			addMessage,
-			'by lightning-rod'
+			'lightning-rod'
+		);
+	}
+	//check lightning rod
+	if (
+		!isKO(updatedTarget) &&
+		target.ability === 'sap-sipper' &&
+		move.data.type.name === 'grass'
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'attack',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'sap sipper'
 		);
 	}
 	//check storm drain

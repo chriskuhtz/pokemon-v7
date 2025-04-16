@@ -94,6 +94,14 @@ export const determineTypeFactor = (
 		}
 		return 0;
 	}
+	if (target.ability === 'sap-sipper' && attack.data.type.name === 'grass') {
+		if (addMessage) {
+			addMessage({
+				message: `${target.data.name} prevents damage with sap sipper`,
+			});
+		}
+		return 0;
+	}
 	if (target.ability === 'storm-drain' && attack.data.type.name === 'water') {
 		if (addMessage) {
 			addMessage({
