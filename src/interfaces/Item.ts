@@ -42,6 +42,7 @@ export const healingItemTypes = [
 	'oran-berry',
 	'persim-berry',
 	'lum-berry',
+	'sweet-heart',
 ] as const;
 export const ppRestorationItemTypes = [
 	'ether',
@@ -478,6 +479,7 @@ export const EvBoostTable: Record<
 export const HPHealTable: Partial<Record<ItemType, number>> = {
 	'oran-berry': 10,
 	potion: 20,
+	'sweet-heart': 20,
 	'berry-juice': 20,
 	'sitrus-berry': 30,
 	'energy-powder': 50,
