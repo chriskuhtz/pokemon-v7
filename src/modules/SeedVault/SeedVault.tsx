@@ -10,9 +10,11 @@ import {
 	isHerb,
 	isItem,
 	ItemType,
+	itemTypes,
 } from '../../interfaces/Item';
 import { Occupant } from '../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
+import { AnimatedBar } from '../../uiComponents/AnimatedBar/AnimatedBar';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
@@ -70,6 +72,7 @@ export const SeedVault = () => {
 		[addMessage, patchSaveFileReducer, saveFile.bag, saveFile.researchPoints]
 	);
 	const navigate = useNavigate();
+
 	return (
 		<Page
 			headline="Seed Vault"
@@ -83,6 +86,15 @@ export const SeedVault = () => {
 				If you run out of a donated species later, you can buy it again for 1
 				research point
 			</h3>
+			<h3>Species registered:</h3>
+			<AnimatedBar
+				max={
+					itemTypes.filter(
+						(item) => isBerry(item) || isApricorn(item) || isHerb(item)
+					).length
+				}
+				offset={saveFile.seedVault.length}
+			/>
 			{possibleDonations.length > 0 && (
 				<>
 					<h3>Donate:</h3>
