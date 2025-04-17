@@ -626,6 +626,8 @@ export const calculateDamage = (
 		['ground', 'rock', 'steel'].includes(attackType)
 			? 1.3
 			: 1;
+	const furCoatFactor =
+		target.ability === 'fur-coat' && damageClass === 'physical' ? 0.5 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -686,7 +688,8 @@ export const calculateDamage = (
 				chargeFactor *
 				helpingHandFactor *
 				sandForceFactor *
-				choiceSpecsFactor
+				choiceSpecsFactor *
+				furCoatFactor
 		),
 		1
 	);
