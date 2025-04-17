@@ -1337,13 +1337,32 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/290/',
 		handled: true,
 	},
-	{ name: 'odd-incense', url: 'https://pokeapi.co/api/v2/item/291/' },
-	{ name: 'rock-incense', url: 'https://pokeapi.co/api/v2/item/292/' },
-	{ name: 'full-incense', url: 'https://pokeapi.co/api/v2/item/293/' },
-	{ name: 'wave-incense', url: 'https://pokeapi.co/api/v2/item/294/' },
-	{ name: 'rose-incense', url: 'https://pokeapi.co/api/v2/item/295/' },
-	{ name: 'luck-incense', url: 'https://pokeapi.co/api/v2/item/296/' },
-	{ name: 'pure-incense', url: 'https://pokeapi.co/api/v2/item/297/' },
+	{
+		name: 'odd-incense',
+		url: 'https://pokeapi.co/api/v2/item/291/',
+		handled: true,
+	},
+	{
+		name: 'rock-incense',
+		url: 'https://pokeapi.co/api/v2/item/292/',
+		handled: true,
+	},
+	{
+		name: 'full-incense',
+		url: 'https://pokeapi.co/api/v2/item/293/',
+		handled: true,
+	},
+	{
+		name: 'wave-incense',
+		url: 'https://pokeapi.co/api/v2/item/294/',
+		handled: true,
+	},
+	{
+		name: 'rose-incense',
+		url: 'https://pokeapi.co/api/v2/item/295/',
+		handled: true,
+	},
+
 	{ name: 'protector', url: 'https://pokeapi.co/api/v2/item/298/' },
 	{ name: 'electirizer', url: 'https://pokeapi.co/api/v2/item/299/' },
 	{ name: 'magmarizer', url: 'https://pokeapi.co/api/v2/item/300/' },
@@ -4173,4 +4192,12 @@ export const itemsCheckList: {
 	{ name: 'dream-mail', url: 'https://pokeapi.co/api/v2/item/524/' },
 	{ name: 'fab-mail', url: 'https://pokeapi.co/api/v2/item/525/' },
 	{ name: 'retro-mail', url: 'https://pokeapi.co/api/v2/item/526/' },
+	{
+		name: 'luck-incense',
+		url: 'https://pokeapi.co/api/v2/item/296/',
+	},
+	{
+		name: 'pure-incense',
+		url: 'https://pokeapi.co/api/v2/item/297/',
+	},
 ];

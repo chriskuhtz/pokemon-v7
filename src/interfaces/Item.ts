@@ -212,6 +212,11 @@ export const heldItems = [
 	'draco-plate',
 	'dread-plate',
 	'iron-plate',
+	'odd-incense',
+	'rock-incense',
+	'full-incense',
+	'wave-incense',
+	'rose-incense',
 ] as const;
 export const valuables = [
 	'shoal-salt',
@@ -599,17 +604,17 @@ export const superEffectiveSaveTable: Record<PokemonType, ItemType> = {
 };
 export const typeBoostItemTable: Record<PokemonType, ItemType[]> = {
 	fire: ['charcoal', 'flame-plate'],
-	water: ['sea-incense', 'mystic-water', 'splash-plate'],
+	water: ['sea-incense', 'mystic-water', 'splash-plate', 'wave-incense'],
 	electric: ['magnet', 'zap-plate'],
-	grass: ['miracle-seed', 'meadow-plate'],
+	grass: ['miracle-seed', 'meadow-plate', 'rose-incense'],
 	ice: ['never-melt-ice', 'icicle-plate'],
 	fighting: ['black-belt', 'fist-plate'],
 	poison: ['poison-barb', 'toxic-plate'],
 	ground: ['soft-sand', 'earth-plate'],
 	flying: ['sharp-beak', 'sky-plate'],
-	psychic: ['twisted-spoon', 'mind-plate'],
+	psychic: ['twisted-spoon', 'mind-plate', 'odd-incense'],
 	bug: ['silver-powder', 'insect-plate'],
-	rock: ['hard-stone', 'stone-plate'],
+	rock: ['hard-stone', 'stone-plate', 'rock-incense'],
 	ghost: ['spell-tag', 'spooky-plate'],
 	dragon: ['dragon-fang', 'draco-plate'],
 	dark: ['black-glasses', 'dread-plate'],
