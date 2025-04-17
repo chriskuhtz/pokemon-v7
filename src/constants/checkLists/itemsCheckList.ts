@@ -1388,8 +1388,16 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/302/',
 		handled: true,
 	},
-	{ name: 'razor-claw', url: 'https://pokeapi.co/api/v2/item/303/' },
-	{ name: 'razor-fang', url: 'https://pokeapi.co/api/v2/item/304/' },
+	{
+		name: 'razor-claw',
+		url: 'https://pokeapi.co/api/v2/item/303/',
+		handled: true,
+	},
+	{
+		name: 'razor-fang',
+		url: 'https://pokeapi.co/api/v2/item/304/',
+		handled: true,
+	},
 	{ name: 'tm01', url: 'https://pokeapi.co/api/v2/item/305/' },
 	{ name: 'tm02', url: 'https://pokeapi.co/api/v2/item/306/' },
 	{ name: 'tm03', url: 'https://pokeapi.co/api/v2/item/307/' },

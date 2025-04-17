@@ -222,6 +222,8 @@ export const heldItems = [
 	'magmarizer',
 	'dubious-disc',
 	'reaper-cloth',
+	'razor-fang',
+	'razor-claw',
 ] as const;
 export const valuables = [
 	'shoal-salt',
