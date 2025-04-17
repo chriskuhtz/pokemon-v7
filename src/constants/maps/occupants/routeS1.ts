@@ -99,7 +99,7 @@ export const routeS1Occupants: OverworldMap['occupants'] = [
 		type: 'ITEM',
 		x: 17,
 		y: 22,
-		item: 'old-amber',
+		item: 'cover-fossil',
 		amount: 1,
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'lake-fossil'),

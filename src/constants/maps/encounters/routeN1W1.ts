@@ -1,6 +1,6 @@
 import { EncounterMap } from '../encounters';
 
-export const routeN1Encounters: EncounterMap = {
+export const routeN1W1Encounters: EncounterMap = {
 	WATER: [],
 	BASE: [
 		{

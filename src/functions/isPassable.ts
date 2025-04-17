@@ -20,6 +20,8 @@ export const isWaterFall = (
 	);
 };
 
+const devmode = !!window.localStorage.getItem('devmode');
+
 export const isPassable = (
 	field: { x: number; y: number },
 	map: OverworldMap,
@@ -38,6 +40,9 @@ export const isPassable = (
 	}
 	if (field.x >= width) {
 		return false;
+	}
+	if (devmode) {
+		return true;
 	}
 	const nextFieldObstacle = map.tileMap.obstacleLayer[field.y][field.x];
 
