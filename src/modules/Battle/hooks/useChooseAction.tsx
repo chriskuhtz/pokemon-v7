@@ -3,7 +3,9 @@ import { MoveName } from '../../../constants/checkLists/movesCheckList';
 import { lockInMoves } from '../../../constants/forceSwitchMoves';
 import { secondTurnMoves } from '../../../constants/secondTurnMoves';
 import { determineMultiHits } from '../../../functions/determineMultiHits';
+import { getRandomEntry } from '../../../functions/filterTargets';
 import { getHeldItem } from '../../../functions/getHeldItem';
+import { getMovesArray } from '../../../functions/getMovesArray';
 import { BattleAction } from '../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import {
@@ -160,12 +162,21 @@ export const useChooseAction = (
 				return;
 			}
 
-			const move = [
+			let move = [
 				user.firstMove,
 				user.secondMove,
 				user.thirdMove,
 				user.fourthMove,
 			].find((m) => m?.name === actionName);
+
+			if (move?.name === 'assist') {
+				move = getRandomEntry(
+					pokemon
+						.filter((p) => p.id !== user.id && p.ownerId === user.ownerId)
+						.map((p) => getMovesArray(p))
+						.flat()
+				);
+			}
 			if (!move) {
 				throw new Error('user does not know the selected move');
 			}
