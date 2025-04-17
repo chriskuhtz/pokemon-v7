@@ -609,6 +609,12 @@ export const calculateDamage = (
 			? 2
 			: 1;
 	const helpingHandFactor = attacker.helpingHanded ? 1.5 : 1;
+	const sandForceFactor =
+		attacker.ability === 'sand-force' &&
+		weather === 'sandstorm' &&
+		['ground', 'rock', 'steel'].includes(attackType)
+			? 1.3
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -667,7 +673,8 @@ export const calculateDamage = (
 				telepathyFactor *
 				metronomeFactor *
 				chargeFactor *
-				helpingHandFactor
+				helpingHandFactor *
+				sandForceFactor
 		),
 		1
 	);

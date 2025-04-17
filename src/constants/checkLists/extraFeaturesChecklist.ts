@@ -367,4 +367,6 @@ export const extraFeatureCheckList: {
 	{ name: 'team screen portrait mode' },
 	{ name: 'battle screen portrait mode' },
 	{ name: 'pokedex: show number of caught/seen' },
+	{ name: 'quest: do x damage' },
+	{ name: 'quest: catch all cave W1 encounters' },
 ];

@@ -742,8 +742,16 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/157/',
 		handled: true,
 	},
-	{ name: 'prankster', url: 'https://pokeapi.co/api/v2/ability/158/' },
-	{ name: 'sand-force', url: 'https://pokeapi.co/api/v2/ability/159/' },
+	{
+		name: 'prankster',
+		url: 'https://pokeapi.co/api/v2/ability/158/',
+		handled: true,
+	},
+	{
+		name: 'sand-force',
+		url: 'https://pokeapi.co/api/v2/ability/159/',
+		handled: true,
+	},
 	{ name: 'iron-barbs', url: 'https://pokeapi.co/api/v2/ability/160/' },
 	{ name: 'zen-mode', url: 'https://pokeapi.co/api/v2/ability/161/' },
 	{ name: 'victory-star', url: 'https://pokeapi.co/api/v2/ability/162/' },
@@ -1123,6 +1131,7 @@ export const abilityNames = [
 	'rattled',
 	'sap-sipper',
 	'prankster',
+	'sand-force',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
