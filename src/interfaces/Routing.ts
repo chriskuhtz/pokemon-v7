@@ -37,6 +37,7 @@ export const routes = [
 	'CURATOR',
 	'VILEPLUME',
 	'AMOONGUSS',
+	'DRAGONITE_TAXI',
 	'SEED_VAULT',
 	'POKEDEX',
 	'STORAGE_CHEST',

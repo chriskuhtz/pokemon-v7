@@ -41,6 +41,7 @@ export const campUpgradeNames = [
 	'berry lure station routeE1',
 	'berry lure station routeS1E1',
 	'berry lure station routeS1W1',
+	'dragonite taxi',
 ] as const;
 
 export type CampUpgrade = (typeof campUpgradeNames)[number];
@@ -93,6 +94,10 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'berry lure station routeE1': ['shovel certification'],
 	'berry lure station routeS1E1': ['swimming certification'],
 	'berry lure station routeS1W1': ['swimming certification'],
+	//the last upgrade
+	'dragonite taxi': campUpgradeNames.filter(
+		(name) => name !== 'dragonite taxi'
+	),
 };
 export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	bulletin_board: 'A place for people to post quests',
@@ -142,4 +147,5 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	'fifth slot for farm': 'more space at the berry farm',
 	'sixth slot for farm': 'more space at the berry farm',
 	'seventh slot for farm': 'more space at the berry farm',
+	'dragonite taxi': 'dragonite can fly you to remote places',
 };

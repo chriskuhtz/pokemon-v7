@@ -8,6 +8,7 @@ import {
 } from '../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { amoongussCompostResearchers } from '../../../modules/AmoongussResearcher/AmoongussResearcher';
+import { dragoniteTaxi } from '../../../modules/DragoniteTaxi/DragoniteTaxi';
 import { miltankFarm } from '../../../modules/MiltankFarm/MiltankFarm';
 import { seedvaultResearcher } from '../../../modules/SeedVault/SeedVault';
 import { vileplumeResearchers } from '../../../modules/VilePlumeScentResearcher/VilePlumeScentResearcher';
@@ -378,4 +379,5 @@ export const campOccupants: OverworldMap['occupants'] = [
 	...vileplumeResearchers,
 	...amoongussCompostResearchers,
 	...seedvaultResearcher,
+	...dragoniteTaxi,
 ];

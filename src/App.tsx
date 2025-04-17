@@ -14,6 +14,7 @@ import { BulletinBoard } from './modules/BulletinBoard/BulletinBoard';
 import { CampUpgrades } from './modules/CampUpgrades/CampUpgrades';
 import { CookingGrandma } from './modules/CookingGrandma/CookingGrandma';
 import { Curator } from './modules/Curator/Curator';
+import { DragoniteTaxi } from './modules/DragoniteTaxi/DragoniteTaxi';
 import { Farm } from './modules/Farm/Farm';
 import { FossilReviver } from './modules/FossilReviver/FossilReviver';
 import { MainMenu } from './modules/MainMenu/MainMenu';
@@ -239,6 +240,9 @@ export const App = (): JSX.Element => {
 	}
 	if (activeTab === 'MOVE_TUTOR') {
 		return <MoveTutor />;
+	}
+	if (activeTab === 'DRAGONITE_TAXI') {
+		return <DragoniteTaxi />;
 	}
 	if (activeTab === 'MARKET') {
 		return (
