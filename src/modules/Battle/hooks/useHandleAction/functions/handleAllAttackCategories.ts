@@ -33,6 +33,7 @@ export const handleAllAttackCategories = ({
 	setBattleWeather,
 	leave,
 	removeSpikes,
+	logDamage,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
@@ -48,6 +49,7 @@ export const handleAllAttackCategories = ({
 	setBattleWeather: (w: WeatherObject | undefined) => void;
 	leave: (outcome: 'WIN' | 'LOSS' | 'DRAW') => void;
 	removeSpikes: (ownerId: string) => void;
+	logDamage: (x: number) => void;
 }) => {
 	let updatedPokemon = [...pokemon];
 	const { updatedPokemon: ua, targets } = handleAttackStart({
@@ -86,6 +88,7 @@ export const handleAllAttackCategories = ({
 					removeSpikes,
 					scatterCoins,
 					targetsFactor,
+					logDamage,
 				});
 			case 'heal':
 				return handleHealAttack({

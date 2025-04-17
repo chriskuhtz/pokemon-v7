@@ -323,7 +323,7 @@ export const extraFeatureCheckList: {
 		name: 'quest: retrieve item from wild pokemon quest (special encounter)',
 		handled: true,
 	},
-	{ name: 'quest: do x damage' },
+	{ name: 'quest: do x damage', handled: true },
 	{ name: 'wild apricorn trees' },
 	{ name: 'training field route' },
 	{ name: 'actually use growth rates' },

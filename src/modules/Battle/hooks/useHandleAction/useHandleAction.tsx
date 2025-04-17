@@ -36,9 +36,20 @@ export const useHandleAction = (
 	removeSpikes: (ownerId: string) => void
 ) => {
 	const {
-		saveFile: { pokedex },
+		saveFile: { pokedex, mileStones },
+		patchSaveFileReducer,
 	} = useContext(SaveFileContext);
 
+	const logDamage = useCallback(
+		(damage: number) => {
+			if (damage > mileStones.damageRecord) {
+				patchSaveFileReducer({
+					mileStones: { ...mileStones, damageRecord: damage },
+				});
+			}
+		},
+		[mileStones, patchSaveFileReducer]
+	);
 	return useCallback(
 		(attacker: BattlePokemon) => {
 			//CHECKS
@@ -259,6 +270,7 @@ export const useHandleAction = (
 					setBattleWeather,
 					leave,
 					removeSpikes,
+					logDamage,
 				});
 
 				return;
@@ -282,6 +294,7 @@ export const useHandleAction = (
 			scatterCoins,
 			setBattleWeather,
 			setPokemon,
+			logDamage,
 		]
 	);
 };

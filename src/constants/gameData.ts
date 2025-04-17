@@ -101,6 +101,7 @@ export const testState: SaveFile = {
 		hasGrownAnApricorn: false,
 		caughtFromSwarms: [],
 		luredWithBerries: [],
+		damageRecord: 0,
 	},
 	farm: { plants: [] },
 	campUpgrades: baseCampUpgrades,

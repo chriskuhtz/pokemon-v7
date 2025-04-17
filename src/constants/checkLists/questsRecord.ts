@@ -486,6 +486,15 @@ export const questNames = [
 	'catch 10 different pokemon from swarms',
 	'catch 20 different pokemon from swarms',
 	'retrieve oaks parcel from raticate',
+	'deal 20 damage with one attack',
+	'deal 50 damage with one attack',
+	'deal 100 damage with one attack',
+	'deal 200 damage with one attack',
+	'deal 500 damage with one attack',
+	'deal 1000 damage with one attack',
+	'deal 2000 damage with one attack',
+	'deal 5000 damage with one attack',
+	'deal 10000 damage with one attack',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -1980,6 +1989,68 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length > 0,
 	},
+	'deal 20 damage with one attack': {
+		kind: 'BULLETIN',
+		researchPoints: 10,
+		conditionFunction: (s) => s.mileStones.damageRecord >= 20,
+		rewardItems: { 'big-malasada': 1 },
+	},
+	'deal 50 damage with one attack': {
+		kind: 'BULLETIN',
+		researchPoints: 20,
+		conditionFunction: (s) => s.mileStones.damageRecord >= 50,
+		rewardItems: { 'big-malasada': 1, 'x-attack': 1 },
+		availableAfter: 'deal 20 damage with one attack',
+	},
+	'deal 100 damage with one attack': {
+		kind: 'BULLETIN',
+		researchPoints: 50,
+		conditionFunction: (s) => s.mileStones.damageRecord >= 100,
+		rewardItems: { 'big-malasada': 1, 'wise-glasses': 1 },
+		availableAfter: 'deal 50 damage with one attack',
+	},
+	'deal 200 damage with one attack': {
+		kind: 'BULLETIN',
+		researchPoints: 50,
+		conditionFunction: (s) => s.mileStones.damageRecord >= 200,
+		rewardItems: { 'big-malasada': 1, 'scope-lens': 1 },
+		availableAfter: 'deal 100 damage with one attack',
+	},
+	'deal 500 damage with one attack': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		conditionFunction: (s) => s.mileStones.damageRecord >= 500,
+		rewardItems: { 'big-malasada': 1, 'choice-band': 1 },
+		availableAfter: 'deal 200 damage with one attack',
+	},
+	'deal 1000 damage with one attack': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		conditionFunction: (s) => s.mileStones.damageRecord >= 1000,
+		rewardItems: { 'big-malasada': 1, 'choice-band': 1 },
+		availableAfter: 'deal 500 damage with one attack',
+	},
+	'deal 2000 damage with one attack': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		conditionFunction: (s) => s.mileStones.damageRecord >= 2000,
+		rewardItems: { 'big-malasada': 1, 'choice-specs': 1 },
+		availableAfter: 'deal 1000 damage with one attack',
+	},
+	'deal 5000 damage with one attack': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		conditionFunction: (s) => s.mileStones.damageRecord >= 5000,
+		rewardItems: { 'big-malasada': 1 },
+		availableAfter: 'deal 2000 damage with one attack',
+	},
+	'deal 10000 damage with one attack': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		conditionFunction: (s) => s.mileStones.damageRecord >= 10000,
+		rewardItems: { 'big-malasada': 1 },
+		availableAfter: 'deal 5000 damage with one attack',
+	},
 };
 
 console.log('number of quests', questNames.length);
@@ -1993,7 +2064,7 @@ console.log(
 	'total costs',
 	5 +
 		campUpgradeNames
-			.map((_, i) => Math.min(5 * i, 100))
+			.map((_, i) => 5 * i)
 			.reduce((sum, summand) => sum + summand, 0),
 	'quests w/o questName',
 	Object.keys(QuestsRecord).filter((key) => !questNames.includes(key)),

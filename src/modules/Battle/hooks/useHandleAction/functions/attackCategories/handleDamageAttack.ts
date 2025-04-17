@@ -27,6 +27,7 @@ export const handleDamageAttack = ({
 	removeSpikes,
 	scatterCoins,
 	targetsFactor,
+	logDamage,
 }: {
 	attacker: BattlePokemon;
 	target: BattlePokemon;
@@ -39,6 +40,7 @@ export const handleDamageAttack = ({
 	removeSpikes: (ownerId: string) => void;
 	scatterCoins: () => void;
 	targetsFactor: number;
+	logDamage: (x: number) => void;
 }): BattlePokemon[] => {
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
@@ -109,6 +111,12 @@ export const handleDamageAttack = ({
 			targetsFactor,
 			addMessage
 		);
+
+	if (damage > 0) {
+		logDamage(damage);
+		addMessage({ message: `${damage} Damage` });
+	}
+
 	const actualDamage = getMiddleOfThree([
 		0,
 		damage,

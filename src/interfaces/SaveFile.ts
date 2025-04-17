@@ -100,6 +100,7 @@ export interface SaveFile {
 	sprite: string;
 	encounterRateModifier?: { factor: number; steps: number };
 	mileStones: {
+		damageRecord: number;
 		hasEvolvedAPokemonThroughLevelUp?: boolean;
 		hasEvolvedAPokemonWithAStone?: boolean;
 		hasEvolvedAPokemonWithAHeldItem?: boolean;
