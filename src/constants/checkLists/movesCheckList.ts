@@ -1264,7 +1264,11 @@ export const movesCheckList: {
 		handled: true,
 	},
 	{ name: 'trick', url: 'https://pokeapi.co/api/v2/move/271/', handled: true },
-	{ name: 'role-play', url: 'https://pokeapi.co/api/v2/move/272/' },
+	{
+		name: 'role-play',
+		url: 'https://pokeapi.co/api/v2/move/272/',
+		handled: true,
+	},
 	{ name: 'wish', url: 'https://pokeapi.co/api/v2/move/273/' },
 	{ name: 'assist', url: 'https://pokeapi.co/api/v2/move/274/' },
 	{ name: 'ingrain', url: 'https://pokeapi.co/api/v2/move/275/' },
@@ -2355,6 +2359,7 @@ export const handledMoves = [
 	'taunt',
 	'helping-hand',
 	'trick',
+	'role-play',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

@@ -391,6 +391,13 @@ export const handleUniqueMoves = ({
 		updatedAttacker = { ...updatedAttacker, heldItemName: targetItem };
 		updatedTarget = { ...updatedTarget, heldItemName: attackerItem };
 	}
+	if (move.name === 'role-play') {
+		addMessage({
+			message: `${updatedAttacker.name} copied ${updatedTarget.name}´s ability ${updatedTarget.ability}`,
+		});
+
+		updatedAttacker = { ...updatedAttacker, ability: updatedTarget.ability };
+	}
 
 	return updatedPokemon.map((p) => {
 		if (p.id === updatedAttacker.id) {
