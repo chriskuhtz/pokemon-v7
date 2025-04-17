@@ -122,7 +122,16 @@ export const useBattleFieldEffects = (
 				duration: 9000,
 			});
 		}
-
+		if (onFieldOpponents.some((p) => p.ability === 'flower-veil')) {
+			res.push({ type: 'flower-veil', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'flower-veil')) {
+			res.push({
+				type: 'flower-veil',
+				ownerId: getPlayerId(),
+				duration: 9000,
+			});
+		}
 		const friendGuardOppo = onFieldOpponents.find(
 			(p) => p.ability === 'friend-guard'
 		);

@@ -3,6 +3,7 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { Stat } from '../interfaces/StatObject';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { getMiddleOfThree } from './getMiddleOfThree';
+import { getTypeNames } from './getTypeNames';
 
 export const applyStatChangeToPokemon = (
 	pokemon: BattlePokemon,
@@ -32,16 +33,23 @@ export const applyStatChangeToPokemon = (
 	const guardSpecced = pokemon.secondaryAilments.some(
 		(a) => a.type === 'guard-spec'
 	);
+	const flowerVeiled =
+		getTypeNames(pokemon).includes('grass') &&
+		battleFieldEffects.some(
+			(b) => b.ownerId === pokemon.ownerId && b.type === 'flower-veil'
+		);
 	const misted = battleFieldEffects.some(
 		(b) => b.type === 'mist' && b.ownerId === pokemon.ownerId
 	);
 
-	if (!selfInflicted && (guardSpecced || misted) && modifier < 0) {
+	if (
+		!selfInflicted &&
+		(guardSpecced || misted || flowerVeiled) &&
+		modifier < 0
+	) {
 		if (addMessage) {
 			addMessage({
-				message: `${pokemon.data.name}'s ${
-					misted ? 'mist' : 'guard spec'
-				} prevents stat reduction`,
+				message: `${pokemon.data.name} stats cant be lowered`,
 			});
 		}
 
