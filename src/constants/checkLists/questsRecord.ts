@@ -192,22 +192,22 @@ const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 	//routeS1W1
 	'catch a MORNING-time exclusive pokemon from routeS1W1': {
 		'great-ball': 5,
-		'big-malasada': 1,
+		'rage-candy-bar': 1,
 		'escape-rope': 1,
 	},
 	'catch a DAY-time exclusive pokemon from routeS1W1': {
 		'great-ball': 5,
-		'big-malasada': 1,
+		'rage-candy-bar': 1,
 		'escape-rope': 1,
 	},
 	'catch a EVENING-time exclusive pokemon from routeS1W1': {
 		'great-ball': 5,
-		'big-malasada': 1,
+		'rage-candy-bar': 1,
 		'escape-rope': 1,
 	},
 	'catch a NIGHT-time exclusive pokemon from routeS1W1': {
 		'great-ball': 5,
-		'big-malasada': 1,
+		'rage-candy-bar': 1,
 		'escape-rope': 1,
 	},
 	'catch all MORNING-time pokemon from routeS1W1': {
@@ -229,22 +229,22 @@ const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 	//routeW1
 	'catch a MORNING-time exclusive pokemon from routeW1': {
 		'quick-ball': 5,
-		'big-malasada': 1,
+		'lumiose-galette': 1,
 		'escape-rope': 1,
 	},
 	'catch a DAY-time exclusive pokemon from routeW1': {
 		'quick-ball': 5,
-		'big-malasada': 1,
+		'lumiose-galette': 1,
 		'escape-rope': 1,
 	},
 	'catch a EVENING-time exclusive pokemon from routeW1': {
 		'quick-ball': 5,
-		'big-malasada': 1,
+		'lumiose-galette': 1,
 		'escape-rope': 1,
 	},
 	'catch a NIGHT-time exclusive pokemon from routeW1': {
 		'quick-ball': 5,
-		'big-malasada': 1,
+		'lumiose-galette': 1,
 		'escape-rope': 1,
 	},
 	'catch all MORNING-time pokemon from routeW1': {
@@ -266,22 +266,22 @@ const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 	//routeN1W1
 	'catch a MORNING-time exclusive pokemon from routeN1W1': {
 		'dusk-ball': 5,
-		'big-malasada': 1,
+		'pewter-crunchies': 1,
 		'escape-rope': 1,
 	},
 	'catch a DAY-time exclusive pokemon from routeN1W1': {
 		'dusk-ball': 5,
-		'big-malasada': 1,
+		'pewter-crunchies': 1,
 		'escape-rope': 1,
 	},
 	'catch a EVENING-time exclusive pokemon from routeN1W1': {
 		'dusk-ball': 5,
-		'big-malasada': 1,
+		'pewter-crunchies': 1,
 		'escape-rope': 1,
 	},
 	'catch a NIGHT-time exclusive pokemon from routeN1W1': {
 		'dusk-ball': 5,
-		'big-malasada': 1,
+		'pewter-crunchies': 1,
 		'escape-rope': 1,
 	},
 	'catch all MORNING-time pokemon from routeN1W1': {
@@ -1010,7 +1010,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 	},
 	'train a pokemon to level 20': {
-		rewardItems: { 'rare-candy': 2, 'big-malasada': 2 },
+		rewardItems: { 'rare-candy': 2, 'pewter-crunchies': 2 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 20);
@@ -1019,7 +1019,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'train a pokemon to level 10',
 	},
 	'train a pokemon to level 30': {
-		rewardItems: { 'rare-candy': 3, 'big-malasada': 3 },
+		rewardItems: { 'rare-candy': 3, 'moomoo-cheese': 3 },
 		researchPoints: 30,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 30);
@@ -1028,7 +1028,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'train a pokemon to level 20',
 	},
 	'train a pokemon to level 40': {
-		rewardItems: { 'rare-candy': 4, 'big-malasada': 4 },
+		rewardItems: { 'rare-candy': 4, 'lumiose-galette': 4 },
 		researchPoints: 40,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 40);
@@ -1037,7 +1037,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'train a pokemon to level 30',
 	},
 	'train a pokemon to level 50': {
-		rewardItems: { 'rare-candy': 5, 'big-malasada': 5 },
+		rewardItems: { 'rare-candy': 5, casteliacone: 5 },
 		researchPoints: 50,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 50);
@@ -1046,7 +1046,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'train a pokemon to level 40',
 	},
 	'train a pokemon to level 60': {
-		rewardItems: { 'rare-candy': 6, 'big-malasada': 6 },
+		rewardItems: { 'rare-candy': 6, 'rage-candy-bar': 6 },
 		researchPoints: 60,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 60);
@@ -1064,7 +1064,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'train a pokemon to level 60',
 	},
 	'train a pokemon to level 80': {
-		rewardItems: { 'rare-candy': 8, 'big-malasada': 8 },
+		rewardItems: { 'rare-candy': 8, 'pewter-crunchies': 8 },
 		researchPoints: 80,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 80);
@@ -1073,7 +1073,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'train a pokemon to level 70',
 	},
 	'train a pokemon to level 90': {
-		rewardItems: { 'rare-candy': 9, 'big-malasada': 9 },
+		rewardItems: { 'rare-candy': 9, casteliacone: 9 },
 		researchPoints: 90,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 90);
@@ -1082,7 +1082,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'train a pokemon to level 90',
 	},
 	'train a pokemon to level 100': {
-		rewardItems: { 'rare-candy': 10, 'big-malasada': 10 },
+		rewardItems: { 'rare-candy': 10, 'lumiose-galette': 10 },
 		researchPoints: 100,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 100);
@@ -1106,7 +1106,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat five training field trainers': {
 		rewardItems: {
-			'big-malasada': 2,
+			casteliacone: 2,
 		},
 		researchPoints: 10,
 		conditionFunction: (s) => {
@@ -1121,7 +1121,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat ten training field trainers': {
 		rewardItems: {
-			'big-malasada': 3,
+			'pewter-crunchies': 3,
 		},
 		researchPoints: 10,
 		conditionFunction: (s) => {
@@ -1136,7 +1136,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat twenty training field trainers': {
 		rewardItems: {
-			'big-malasada': 4,
+			'rage-candy-bar': 4,
 		},
 		researchPoints: 20,
 		conditionFunction: (s) => {
@@ -1151,7 +1151,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat thirty training field trainers': {
 		rewardItems: {
-			'big-malasada': 5,
+			'lumiose-galette': 5,
 		},
 		researchPoints: 30,
 		conditionFunction: (s) => {
@@ -1166,7 +1166,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat forty training field trainers': {
 		rewardItems: {
-			'big-malasada': 6,
+			'old-gateau': 6,
 		},
 		researchPoints: 40,
 		conditionFunction: (s) => {
@@ -1181,7 +1181,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat fifty training field trainers': {
 		rewardItems: {
-			'big-malasada': 7,
+			'lava-cookie': 7,
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {
@@ -1211,7 +1211,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat seventy training field trainers': {
 		rewardItems: {
-			'big-malasada': 9,
+			casteliacone: 9,
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {
@@ -1226,7 +1226,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat eighty training field trainers': {
 		rewardItems: {
-			'big-malasada': 10,
+			'moomoo-cheese': 10,
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {

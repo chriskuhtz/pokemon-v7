@@ -1,4 +1,5 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import {
 	handledMoves,
@@ -17,7 +18,6 @@ import { LearnMethod } from '../../interfaces/PokemonData';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 
 const learnMethodOrder: Record<LearnMethod, number> = {
 	'level-up': 1,
@@ -149,20 +149,31 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 			});
 	}, [data, ownedPokemon]);
 
-	const getCostForLearnMethod = (learnMethod: LearnMethod): ItemType => {
+	const getCostForLearnMethod = (
+		moveName: MoveName,
+		learnMethod: LearnMethod
+	): ItemType => {
+		const options: ItemType[] = [
+			'big-malasada',
+			'moomoo-cheese',
+			'casteliacone',
+			'pewter-crunchies',
+			'lumiose-galette',
+			'rage-candy-bar',
+			'lava-cookie',
+			'old-gateau',
+		];
 		if (learnMethod === 'level-up') {
 			return 'berry-juice';
 		}
-		if (learnMethod === 'egg' || learnMethod === 'tutor') {
-			return 'lava-cookie';
-		}
-		return 'big-malasada';
+		return options[(moveName.length * 5) % options.length];
 	};
 
 	return (
 		<Stack mode={'column'}>
 			{options.map((m) => {
 				const payment = getCostForLearnMethod(
+					m.move.name as MoveName,
 					m.version_group_details[0].move_learn_method.name
 				);
 				const available = moveIsTeachable(
