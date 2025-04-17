@@ -1,4 +1,5 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
+import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 
 export const routeW1Occupants: OverworldMap['occupants'] = [
 	{
@@ -14,6 +15,20 @@ export const routeW1Occupants: OverworldMap['occupants'] = [
 		},
 		conditionFunction: () => true,
 		id: 'routeW1_to_routeN1W1',
+	},
+	{
+		type: 'NPC',
+		x: 25,
+		y: 1,
+		orientation: 'DOWN',
+		unhandledMessage: [
+			'Not so fast, big dog',
+			'Cant let anyone through without proper equipment',
+			"Shit's gnarly up there, brother",
+		],
+		sprite: SpriteEnum.snowboarder,
+		conditionFunction: (s) => !s.campUpgrades['buy skiing equipment'],
+		id: 'ski-blocker',
 	},
 	{
 		type: 'ON_STEP_PORTAL',

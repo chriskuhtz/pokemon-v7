@@ -85,9 +85,13 @@ export const Overworld = ({
 		if (onWater) {
 			return 'NPC_027';
 		}
+		if (map.id === 'routeN1W1') {
+			return 'NPC_011';
+		}
 
 		return saveFile.sprite;
 	}, [
+		map.id,
 		map.tileMap.waterLayer,
 		saveFile.location.x,
 		saveFile.location.y,

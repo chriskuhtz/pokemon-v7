@@ -325,7 +325,7 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'quest: do x damage', handled: true },
 	{ name: 'campupgrade: dragonite taxi', handled: true },
-	{ name: 'campupgrade: skiing equipment' },
+	{ name: 'campupgrade: skiing equipment', handled: true },
 	{ name: 'training field 5' },
 	{ name: 'wild apricorn trees' },
 	{ name: 'training field route' },

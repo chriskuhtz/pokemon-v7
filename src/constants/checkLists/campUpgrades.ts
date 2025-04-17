@@ -41,6 +41,7 @@ export const campUpgradeNames = [
 	'berry lure station routeE1',
 	'berry lure station routeS1E1',
 	'berry lure station routeS1W1',
+	'buy skiing equipment',
 	'dragonite taxi',
 ] as const;
 
@@ -85,6 +86,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'sledge hammer certification': ['machete certification'],
 	'shovel certification': ['sledge hammer certification'],
 	'swimming certification': ['shovel certification'],
+	'buy skiing equipment': ['swimming certification'],
 	'invite museum curator': ['invite dugtrio explorers'],
 	'bag size upgrade 1': baseRequirements,
 	'bag size upgrade 2': [...baseRequirements, 'bag size upgrade 1'],
@@ -134,6 +136,8 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	'shovel certification': 'Safety Training for digging into ledges',
 	'swimming certification':
 		'The Research center is not responsible if you drown',
+	'buy skiing equipment':
+		'Unfortunately, all research assistants must provide their own skiing equipment',
 	'invite museum curator': 'Some items we find might be valuable',
 	'create seed vault': 'Safely stores seeds so we never run out',
 	'bag size upgrade 1': 'More space in your field bag',
