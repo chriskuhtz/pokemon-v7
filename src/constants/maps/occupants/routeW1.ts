@@ -31,6 +31,20 @@ export const routeW1Occupants: OverworldMap['occupants'] = [
 	},
 	{
 		type: 'ON_STEP_PORTAL',
+		x: 50,
+		y: 25,
+		portal: {
+			mapId: 'camp',
+			y: 10,
+			x: 1,
+			orientation: 'RIGHT',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+		id: 'routeW1_camp',
+	},
+	{
+		type: 'ON_STEP_PORTAL',
 		id: 'cave entry bottom',
 		conditionFunction: () => true,
 		x: 28,

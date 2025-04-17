@@ -190,6 +190,33 @@ export const campOccupants: OverworldMap['occupants'] = [
 	},
 	{
 		type: 'ON_STEP_PORTAL',
+		x: 0,
+		y: 10,
+		portal: {
+			mapId: 'routeW1',
+			x: 49,
+			y: 25,
+			orientation: 'LEFT',
+			forwardFoot: 'CENTER1',
+		},
+		id: 'camp_to_routeW1',
+		conditionFunction: (s) => !isBagOverloaded(s),
+	},
+	{
+		type: 'NPC',
+		x: 0,
+		y: 10,
+		unhandledMessage: [
+			'You cant go out carrying this much stuff',
+			'Store some items in your chest',
+		],
+		id: 'bag_blocker_W1',
+		sprite: SpriteEnum.scientistMale,
+		orientation: 'RIGHT',
+		conditionFunction: (s) => isBagOverloaded(s),
+	},
+	{
+		type: 'ON_STEP_PORTAL',
 		x: 10,
 		y: 19,
 		portal: {

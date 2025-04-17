@@ -5,6 +5,7 @@ import { campOccupants } from './occupants/camp';
 export const camp: OverworldMap = {
 	id: 'camp',
 	tilesetUrl: '/tilesets/palletTown.png',
+	occupants: campOccupants,
 	timeOfDayShadersMap: defaultShaderMap,
 	possibleEncounters: {
 		WATER: [{ name: 'feebas', minXp: 125, maxXp: 125, rarity: 'common' }],
@@ -1121,7 +1122,7 @@ export const camp: OverworldMap = {
 				{ yOffset: -16, xOffset: -16 },
 			],
 			[
-				{ yOffset: -16, xOffset: 0 },
+				null,
 				null,
 				null,
 				null,
@@ -2668,6 +2669,4 @@ export const camp: OverworldMap = {
 			],
 		],
 	},
-
-	occupants: campOccupants,
 };
