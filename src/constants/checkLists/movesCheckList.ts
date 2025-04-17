@@ -1310,8 +1310,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/424/',
 		handled: true,
 	},
-	{ name: 'yawn', url: 'https://pokeapi.co/api/v2/move/281/' },
-	{ name: 'knock-off', url: 'https://pokeapi.co/api/v2/move/282/' },
+	{
+		name: 'knock-off',
+		url: 'https://pokeapi.co/api/v2/move/282/',
+		handled: true,
+	},
 	{ name: 'endeavor', url: 'https://pokeapi.co/api/v2/move/283/' },
 	{ name: 'eruption', url: 'https://pokeapi.co/api/v2/move/284/' },
 	{ name: 'skill-swap', url: 'https://pokeapi.co/api/v2/move/285/' },
@@ -2065,6 +2068,7 @@ export const movesCheckList: {
 	{ name: 'nature-power', url: 'https://pokeapi.co/api/v2/move/267/' },
 	{ name: 'wish', url: 'https://pokeapi.co/api/v2/move/273/' },
 	{ name: 'magic-coat', url: 'https://pokeapi.co/api/v2/move/277/' },
+	{ name: 'yawn', url: 'https://pokeapi.co/api/v2/move/281/' },
 	{ name: 'shadow-rush', url: 'https://pokeapi.co/api/v2/move/10001/' },
 	{ name: 'shadow-blast', url: 'https://pokeapi.co/api/v2/move/10002/' },
 	{ name: 'shadow-blitz', url: 'https://pokeapi.co/api/v2/move/10003/' },
@@ -2401,6 +2405,7 @@ export const handledMoves = [
 	'zen-headbutt',
 	'bullet-punch',
 	'fire-fang',
+	'knock-off',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

@@ -99,6 +99,31 @@ export const handleDamageAttack = ({
 	if (move.name === 'pay-day') {
 		scatterCoins();
 	}
+	if (
+		move.name === 'knock-off' &&
+		updatedTarget.ability !== 'sticky-hold' &&
+		updatedTarget.heldItemName
+	) {
+		addMessage({
+			message: `${updatedAttacker.name} knocks away ${updatedTarget.name}'s ${updatedTarget.name}`,
+		});
+		updatedTarget = { ...updatedTarget, heldItemName: undefined };
+	}
+	if (
+		move.name === 'thief' &&
+		updatedTarget.ability !== 'sticky-hold' &&
+		updatedTarget.heldItemName &&
+		!updatedAttacker.heldItemName
+	) {
+		addMessage({
+			message: `${updatedAttacker.name} steals ${updatedTarget.name}'s ${updatedTarget.name}`,
+		});
+		updatedAttacker = {
+			...updatedAttacker,
+			heldItemName: updatedTarget.heldItemName,
+		};
+		updatedTarget = { ...updatedTarget, heldItemName: undefined };
+	}
 
 	// apply damage
 	const { consumedHeldItem, damage, criticalHit, wasSuperEffective } =
