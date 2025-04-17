@@ -25,8 +25,17 @@ export const CookingGrandma = (): JSX.Element => {
 					max={100}
 					offset={Math.max(0, 100 - (saveFile.cookingSkill ?? 0))}
 				/>
-				<div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+				<p>
 					<strong>What should we cook:</strong>
+				</p>
+				<div
+					style={{
+						display: 'flex',
+						gap: '1rem',
+						alignItems: 'center',
+						flexWrap: 'wrap',
+					}}
+				>
 					{[
 						...new Set([
 							...enabledRecipes.map((e) => e.result),

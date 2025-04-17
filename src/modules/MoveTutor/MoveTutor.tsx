@@ -188,11 +188,16 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 						icon={<ItemSprite item={payment} />}
 						disabled={saveFile.bag[payment] < 1 || !available}
 						content={
-							<strong>
-								{available
-									? m.move.name
-									: `${m.move.name} available at Lvl ${m.version_group_details[0].level_learned_at}`}
-							</strong>
+							<>
+								<strong>
+									{available
+										? m.move.name
+										: `${m.move.name} available at Lvl ${m.version_group_details[0].level_learned_at}`}
+								</strong>
+								<strong>
+									{saveFile.bag[payment] < 1 && ` : ${payment} required`}
+								</strong>
+							</>
 						}
 					/>
 				);
