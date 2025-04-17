@@ -357,5 +357,20 @@ export const applySecondaryAilmentToPokemon = ({
 			],
 		};
 	}
+	if (ailment === 'ingrained') {
+		addMessage({
+			message: `${pokemon.data.name} ingrained itself into the ground`,
+		});
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'ingrained',
+					duration: 9000,
+				},
+			],
+		};
+	}
 	return pokemon;
 };

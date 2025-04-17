@@ -64,13 +64,17 @@ export const canRunOrSwitch = (
 	const meanLooked = controlled.secondaryAilments.some(
 		(b) => b.type === 'mean-looked'
 	);
+	const ingrained = controlled.secondaryAilments.some(
+		(b) => b.type === 'ingrained'
+	);
 	return !(
 		trapped ||
 		shadowTagged ||
 		arenaTrapped ||
 		magnetPulled ||
 		spiderWebbed ||
-		meanLooked
+		meanLooked ||
+		ingrained
 	);
 };
 export function ActionSelection({

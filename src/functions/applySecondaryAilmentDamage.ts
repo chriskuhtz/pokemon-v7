@@ -1,10 +1,12 @@
 import {
 	CURSE_DAMAGE_FACTOR,
+	INGRAIN_FACTOR,
 	LEECH_DAMAGE_FACTOR,
 	NIGHTMARE_DAMAGE_FACTOR,
 	TRAP_DAMAGE_FACTOR,
 } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { getHeldItem } from './getHeldItem';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { isLeechSeeded, isTrapped, leechingOn } from './isTrapped';
 
@@ -59,10 +61,26 @@ export const applySecondaryAilmentDamage = (
 			return pokemon;
 		}
 		addMessage(`${pokemon.data.name} is damaged by curse`);
-		const nightmareDamage = Math.round(CURSE_DAMAGE_FACTOR * updated.stats.hp);
+		const nightmareDamage = Math.floor(
+			Math.round(CURSE_DAMAGE_FACTOR * updated.stats.hp)
+		);
 		updated = {
 			...updated,
 			damage: updated.damage + nightmareDamage,
+		};
+	}
+
+	if (updated.secondaryAilments.some((ail) => ail.type === 'ingrained')) {
+		addMessage(`${pokemon.data.name} absorbs nutrients from the ground`);
+		const bigRootFactor = getHeldItem(updated) === 'big-root' ? 1.3 : 1;
+
+		const ingrainHeal = Math.floor(
+			Math.round(INGRAIN_FACTOR * bigRootFactor * updated.stats.hp)
+		);
+
+		updated = {
+			...updated,
+			damage: Math.max(0, updated.damage - ingrainHeal),
 		};
 	}
 

@@ -47,6 +47,7 @@ const secondaryAilments = [
 	'torment',
 	'charge',
 	'taunt',
+	'ingrained',
 ] as const;
 
 export type SecondaryAilmentType = (typeof secondaryAilments)[number];
@@ -88,6 +89,7 @@ export const TRAP_DAMAGE_FACTOR = 1 / 8;
 export const LEECH_DAMAGE_FACTOR = 1 / 8;
 export const ROUGH_SKIN_FACTOR = 1 / 16;
 export const RAIN_DISH_FACTOR = 1 / 16;
+export const INGRAIN_FACTOR = 1 / 16;
 export const NIGHTMARE_DAMAGE_FACTOR = 1 / 4;
 export const CURSE_DAMAGE_FACTOR = 1 / 4;
 
