@@ -102,6 +102,16 @@ export const useBattleFieldEffects = (
 		if (onFieldTeam.some((p) => p.ability === 'unnerve')) {
 			res.push({ type: 'unnerve', ownerId: getPlayerId(), duration: 9000 });
 		}
+		if (onFieldOpponents.some((p) => p.ability === 'victory-star')) {
+			res.push({ type: 'victory-star', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'victory-star')) {
+			res.push({
+				type: 'victory-star',
+				ownerId: getPlayerId(),
+				duration: 9000,
+			});
+		}
 
 		const friendGuardOppo = onFieldOpponents.find(
 			(p) => p.ability === 'friend-guard'

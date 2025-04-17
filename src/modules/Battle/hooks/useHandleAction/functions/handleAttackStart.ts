@@ -161,6 +161,7 @@ export const handleAttackStart = ({
 			move,
 			attacker,
 			target,
+			battleFieldEffects,
 			battleWeather,
 			isFlying,
 			isUnderground

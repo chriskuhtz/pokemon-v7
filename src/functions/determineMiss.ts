@@ -4,6 +4,7 @@ import { soundBasedMoves } from '../constants/soundBasedMoves';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
+import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { calculateLevelData } from './calculateLevelData';
 import { calculateModifiedStat } from './calculateModifiedStat';
 import {
@@ -41,6 +42,7 @@ export const determineMiss = (
 	attack: BattleAttack,
 	attacker: BattlePokemon,
 	target: BattlePokemon,
+	battleFieldEffects: BattleFieldEffect[],
 	weather?: WeatherType,
 	targetIsFlying?: boolean,
 	targetIsUnderground?: boolean
@@ -97,6 +99,8 @@ export const determineMiss = (
 	if (attack.name === 'thunder' && weather === 'rain') {
 		return { miss: false };
 	}
+
+	//EVASION
 	const laxIncenseFactor = getHeldItem(target) === 'lax-incense' ? 1.05 : 1;
 	const tangledFeetFactor =
 		target.ability === 'tangled-feet' &&
@@ -121,6 +125,12 @@ export const determineMiss = (
 		laxIncenseFactor *
 		wonderSkinFactor;
 
+	//ACCURACY
+	const victoryStarFactor = battleFieldEffects.some(
+		(b) => b.type === 'victory-star' && b.ownerId === attacker.ownerId
+	)
+		? 1.1
+		: 1;
 	const compoundEyesFactor = getCompoundEyesFactor(attacker, attack);
 	const hustleFactor = getHustleFactor(attacker, attack);
 	const brightPowderFactor = getHeldItem(target) === 'bright-powder' ? 0.9 : 1;
@@ -141,8 +151,10 @@ export const determineMiss = (
 		hustleFactor *
 		brightPowderFactor *
 		thunderWeatherFactor *
-		wideLensFactor;
+		wideLensFactor *
+		victoryStarFactor;
 
+	//RESULT
 	const ratio = attackerAccuracy / targetEvasion;
 
 	const weatherFactor = getWeatherAccuracyFactor(target, weather);

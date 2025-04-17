@@ -67,7 +67,8 @@ export interface BattleFieldEffect {
 		| 'bad-dreams'
 		| 'unnerve'
 		| 'safeguard'
-		| 'friend-guard';
+		| 'friend-guard'
+		| 'victory-star';
 	ownerId: string;
 	applicatorId?: string;
 	duration: number;
