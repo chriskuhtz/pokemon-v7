@@ -374,4 +374,5 @@ export const extraFeatureCheckList: {
 	{ name: 'training field challenge mode' },
 	{ name: 'team rocket' },
 	{ name: 'catch x pokemon should be oaks quest line' },
+	{ name: 'miltank milk as cooking ingredient' },
 ];
