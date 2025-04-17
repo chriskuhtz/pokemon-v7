@@ -54,7 +54,11 @@ export function getMovesArray<T extends BattlePokemon | OwnedPokemon>(
 			return true;
 		})
 		.filter((m) => {
-			if (config?.considerTaunt && isBattlePokemon(pokemon)) {
+			if (
+				config?.considerTaunt &&
+				isBattlePokemon(pokemon) &&
+				pokemon.secondaryAilments.some((s) => s.type === 'taunt')
+			) {
 				const move = m as BattlePokemon['firstMove'];
 				return (
 					move.data.damage_class.name === 'physical' ||

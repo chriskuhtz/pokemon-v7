@@ -5,13 +5,6 @@ import { determineMultiHits } from './determineMultiHits';
 import { filterTargets } from './filterTargets';
 import { getMovesArray } from './getMovesArray';
 
-export type PokemonProfile = 'AGGRESSIVE';
-
-export const determinePokemonProfile = (): PokemonProfile => {
-	//always try to do the most damage immediately
-	return 'AGGRESSIVE';
-};
-
 export const determineBestMoveAndTarget = (
 	attacker: BattlePokemon,
 	moves: BattleMove[],
@@ -57,9 +50,6 @@ export const chooseOpponentAction = ({
 	controlled: BattlePokemon;
 	targets: BattlePokemon[];
 }): ChooseActionPayload => {
-	//const profile = determinePokemonProfile();
-
-	//IF PROFILE AGGRESSIVE
 	const moves = getMovesArray(controlled, {
 		filterOutDisabled: true,
 		considerEncore: true,
@@ -67,19 +57,51 @@ export const chooseOpponentAction = ({
 		considerTaunt: true,
 		filterOutEmpty: true,
 	});
-
+	//determine the best damage move
 	const filtered = filterTargets({
 		targets,
 		user: controlled,
-		chosenAction: 'tackle', //just assume its an attacking move
+		chosenAction: 'tackle',
 		onlyOpponents: true,
 	});
 
+	const random = Math.random() > 0.9;
+
+	console.log(moves, controlled.roundsInBattle, filtered, random);
+
+	//splash if nothing else
 	if (moves.length === 0) {
 		return {
 			userId: controlled.id,
 			actionName: 'splash',
 			targetId: filtered[0].id,
+		};
+	}
+
+	//use heal move if low
+	const healMove = moves.find(
+		(m) => m.data.meta.category.name === 'heal' && m.data.target.name === 'user'
+	);
+
+	if (healMove && controlled.damage > controlled.stats.hp * 0.33 && !random) {
+		return {
+			userId: controlled.id,
+			actionName: healMove.name,
+			targetId: controlled.id,
+		};
+	}
+	//use setup on first turn
+	const setupMove = moves.find(
+		(m) =>
+			m.data.meta.category.name === 'net-good-stats' &&
+			m.data.target.name === 'user'
+	);
+
+	if (setupMove && controlled.roundsInBattle === 1 && !random) {
+		return {
+			userId: controlled.id,
+			actionName: setupMove.name,
+			targetId: controlled.id,
 		};
 	}
 

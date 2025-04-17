@@ -16,6 +16,15 @@ export const getRandomAccesibleRoute = (s: SaveFile): MapId => {
 	if (s.campUpgrades['sledge hammer certification']) {
 		options.push('routeE1');
 	}
+	if (s.campUpgrades['shovel certification']) {
+		options.push('onixCave');
+	}
+	if (s.campUpgrades['swimming certification']) {
+		options.push('routeS1E1', 'routeS1W1', 'routeW1', 'caveW1');
+	}
+	if (s.campUpgrades['buy skiing equipment']) {
+		options.push('routeN1W1');
+	}
 	return getRandomEntry(options);
 };
 const swarmMons: PokemonName[] = [

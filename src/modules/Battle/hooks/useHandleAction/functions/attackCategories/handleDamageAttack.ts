@@ -70,7 +70,7 @@ export const handleDamageAttack = ({
 	}
 
 	//fake out
-	if (move.name === 'fake-out' && updatedAttacker.roundsInBattle !== 0) {
+	if (move.name === 'fake-out' && updatedAttacker.roundsInBattle !== 1) {
 		addMessage({ message: 'It failed' });
 		return pokemon.map((p) => {
 			if (p.id === updatedAttacker.id) {

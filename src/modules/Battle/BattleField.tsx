@@ -141,7 +141,7 @@ export const BattleField = ({
 			opponents.filter((p) => p.status !== 'BENCH' && p.status !== 'FAINTED'),
 		[opponents]
 	);
-	useEffect(() => console.log(onFieldOpponents), [onFieldOpponents]);
+
 	const onFieldTeam = useMemo(
 		() => team.filter((p) => p.status !== 'BENCH' && p.status !== 'FAINTED'),
 		[team]
