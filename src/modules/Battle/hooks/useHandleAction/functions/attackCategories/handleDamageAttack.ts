@@ -162,7 +162,9 @@ export const handleDamageAttack = ({
 	//DRAIN
 	const getDrain = () => {
 		if (move.data.meta.drain) {
-			return move.data.meta.drain;
+			const bigRootFactor =
+				getHeldItem(updatedAttacker) === 'big-root' ? 1.3 : 1;
+			return move.data.meta.drain * bigRootFactor;
 		}
 		if (
 			getHeldItem(updatedTarget) === 'jaboca-berry' &&

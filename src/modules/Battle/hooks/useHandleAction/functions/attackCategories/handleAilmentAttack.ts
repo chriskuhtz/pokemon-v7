@@ -95,11 +95,14 @@ export const handleAilmentAttack = ({
 		});
 	}
 	if (move.name === 'leech-seed') {
+		const bigRootFactor = getHeldItem(updatedAttacker) === 'big-root' ? 1.3 : 1;
 		updatedAttacker = applySecondaryAilmentToPokemon({
 			pokemon: updatedAttacker,
 			ailment: 'leeching-on',
 			addMessage,
-			healAmount: Math.floor(updatedTarget.stats.hp * LEECH_DAMAGE_FACTOR),
+			healAmount: Math.floor(
+				updatedTarget.stats.hp * LEECH_DAMAGE_FACTOR * bigRootFactor
+			),
 			applicator: updatedTarget,
 		});
 	}

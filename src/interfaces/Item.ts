@@ -194,6 +194,7 @@ export const heldItems = [
 	'power-anklet',
 	'power-weight',
 	'shed-shell',
+	'big-root',
 ] as const;
 export const valuables = [
 	'shoal-salt',
