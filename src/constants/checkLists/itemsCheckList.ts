@@ -1242,7 +1242,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/271/',
 		handled: true,
 	},
-	{ name: 'shed-shell', url: 'https://pokeapi.co/api/v2/item/272/' },
+	{
+		name: 'shed-shell',
+		url: 'https://pokeapi.co/api/v2/item/272/',
+		handled: true,
+	},
 	{ name: 'big-root', url: 'https://pokeapi.co/api/v2/item/273/' },
 	{ name: 'choice-specs', url: 'https://pokeapi.co/api/v2/item/274/' },
 	{ name: 'flame-plate', url: 'https://pokeapi.co/api/v2/item/275/' },

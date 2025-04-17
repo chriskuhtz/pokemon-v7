@@ -35,7 +35,8 @@ export const canRunOrSwitch = (
 ): boolean => {
 	const runAwayer =
 		controlled.ability === 'run-away' ||
-		getHeldItem(controlled) === 'smoke-ball';
+		getHeldItem(controlled) === 'smoke-ball' ||
+		getHeldItem(controlled) === 'shed-shell';
 
 	if (runAwayer) {
 		return true;
