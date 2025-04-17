@@ -21,6 +21,14 @@ export const getHeldItemFactor = (
 		return 1.2;
 	}
 	if (
+		heldItem === 'griseous-orb' &&
+		(attackerName === 'giratina-altered' ||
+			attackerName === 'giratina-origin') &&
+		(attackType === 'ghost' || attackType === 'dragon')
+	) {
+		return 1.2;
+	}
+	if (
 		heldItem === 'lustrous-orb' &&
 		(attackerName === 'palkia' || attackerName === 'palkia-origin') &&
 		(attackType === 'water' || attackType === 'dragon')

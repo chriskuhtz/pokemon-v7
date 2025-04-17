@@ -224,6 +224,7 @@ export const heldItems = [
 	'reaper-cloth',
 	'razor-fang',
 	'razor-claw',
+	'griseous-orb',
 ] as const;
 export const valuables = [
 	'shoal-salt',
