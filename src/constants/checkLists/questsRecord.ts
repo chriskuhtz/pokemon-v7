@@ -15,6 +15,7 @@ import {
 	EmptyStatObject,
 	generateRandomStatObject,
 } from '../../interfaces/StatObject';
+import { caveW1Encounters } from '../maps/encounters/caveW1';
 import { onixCaveEncounters } from '../maps/encounters/onixCave';
 import { routeE1 } from '../maps/routeE1';
 import { routeN1 } from '../maps/routeN1';
@@ -465,6 +466,7 @@ export const questNames = [
 	'donate all different plants to the seed vault',
 	'catch a pokemon from onix cave',
 	'catch all pokemon from onix cave',
+	'catch all pokemon from caveW1',
 	'defeat falkner',
 	'wake a snorlax',
 	'catch all evolutions of eevee',
@@ -1760,6 +1762,21 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) =>
 			onixCaveEncounters.BASE.every((o) =>
 				s.pokedex[o.name].caughtOnRoutes.includes('onixCave')
+			),
+	},
+	'catch all pokemon from caveW1': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'swimming certification',
+		researchPoints: 50,
+		rewardItems: {
+			'power-herb': 2,
+			'white-herb': 2,
+			'mental-herb': 2,
+			'big-malasada': 2,
+		},
+		conditionFunction: (s) =>
+			caveW1Encounters.BASE.every((o) =>
+				s.pokedex[o.name].caughtOnRoutes.includes('caveW1')
 			),
 	},
 	'wake a snorlax': {

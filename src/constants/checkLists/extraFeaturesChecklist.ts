@@ -316,7 +316,7 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'Seed vault progress bar', handled: true },
 	{ name: 'pokedex: show number of caught/seen', handled: true },
-	{ name: 'quest: catch all cave W1 encounters' },
+	{ name: 'quest: catch all cave W1 encounters', handled: true },
 	{ name: 'quest: retrieve item from wild pokemon quest (special encounter)' },
 	{ name: 'quest: do x damage' },
 	{ name: 'wild apricorn trees' },
