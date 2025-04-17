@@ -157,6 +157,17 @@ export const handleAbilitiesAfterAttack = (
 		addMessage({
 			message: `${updatedAttacker.data.name} was hurt by rough skin`,
 		});
+	} //check for iron barbs
+	if (target.ability === 'iron-barbs' && contactMoves.includes(move.name)) {
+		updatedAttacker = {
+			...updatedAttacker,
+			damage:
+				updatedAttacker.damage +
+				Math.round(updatedAttacker.stats.hp * ROUGH_SKIN_FACTOR),
+		};
+		addMessage({
+			message: `${updatedAttacker.data.name} was hurt by iron barbs`,
+		});
 	}
 	// check anger point
 	if (criticalHit && updatedTarget.ability === 'anger-point') {
