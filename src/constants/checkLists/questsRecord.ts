@@ -485,6 +485,7 @@ export const questNames = [
 	'catch 3 different pokemon from swarms',
 	'catch 10 different pokemon from swarms',
 	'catch 20 different pokemon from swarms',
+	'retrieve oaks parcel from raticate',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -513,6 +514,14 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 30,
 		conditionFunction: (s) => {
 			return s.bag['light-ball'] > 0;
+		},
+		kind: 'QUEST_LINE',
+	},
+	'retrieve oaks parcel from raticate': {
+		rewardItems: { 'big-malasada': 1, 'ultra-ball': 5 },
+		researchPoints: 25,
+		conditionFunction: (s) => {
+			return s.bag['oaks-parcel'] > 0;
 		},
 		kind: 'QUEST_LINE',
 	},
@@ -925,7 +934,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 		availableAfter: 'evolve a pokemon through friendship',
 	},
-
 	'evolve a pokemon that only evolves during the day': {
 		rewardItems: { 'ultra-ball': 20 },
 		researchPoints: 25,

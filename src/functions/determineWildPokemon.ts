@@ -25,6 +25,18 @@ export const determineWildPokemon = (
 		];
 	}
 	if (
+		quests['retrieve oaks parcel from raticate'] === 'ACTIVE' &&
+		map.id === 'routeS1E1' &&
+		Math.random() < 0.1
+	) {
+		return [
+			makeChallengerPokemon(
+				{ name: 'raticate', xp: 27000, heldItemName: 'oaks-parcel' },
+				{ increasedShinyFactor: 16 }
+			),
+		];
+	}
+	if (
 		!waterEncounter &&
 		swarm &&
 		swarm.route === map.id &&

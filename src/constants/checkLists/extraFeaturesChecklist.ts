@@ -319,7 +319,10 @@ export const extraFeatureCheckList: {
 	{ name: 'quest: catch all cave W1 encounters', handled: true },
 	{ name: 'all fossils need to be findable', handled: true },
 	{ name: 'dugtrio should not deliver fossils', handled: true },
-	{ name: 'quest: retrieve item from wild pokemon quest (special encounter)' },
+	{
+		name: 'quest: retrieve item from wild pokemon quest (special encounter)',
+		handled: true,
+	},
 	{ name: 'quest: do x damage' },
 	{ name: 'wild apricorn trees' },
 	{ name: 'training field route' },
@@ -370,4 +373,5 @@ export const extraFeatureCheckList: {
 	{ name: 'more vileplume products' },
 	{ name: 'training field challenge mode' },
 	{ name: 'team rocket' },
+	{ name: 'catch x pokemon should be oaks quest line' },
 ];

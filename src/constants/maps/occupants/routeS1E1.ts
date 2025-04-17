@@ -1,4 +1,5 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
+import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { routeS1E1Lure } from '../../../modules/BerryLure/BerryLure';
 
 export const routeS1E1Occupants: OverworldMap['occupants'] = [
@@ -112,6 +113,23 @@ export const routeS1E1Occupants: OverworldMap['occupants'] = [
 		y: 23,
 		item: 'lucky-egg',
 		amount: 1,
+	},
+	{
+		type: 'NPC',
+		id: 'delivery_assistant',
+		quest: 'retrieve oaks parcel from raticate',
+		x: 20,
+		y: 20,
+		orientation: 'UP',
+		sprite: SpriteEnum.scientistMale,
+		unhandledMessage: [
+			'I was supposed to deliver a package for professor oak',
+			'but a wild raticate stole it',
+			'Can you catch the raticate and get the package back',
+		],
+		handledMessage: ['Please find the raticate'],
+		conditionFunction: (s) =>
+			s.quests['retrieve oaks parcel from raticate'] !== 'COLLECTED',
 	},
 	routeS1E1Lure,
 ];

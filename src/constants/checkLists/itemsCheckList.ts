@@ -1539,8 +1539,16 @@ export const itemsCheckList: {
 	{ name: 'rm-4-key', url: 'https://pokeapi.co/api/v2/item/540/' },
 	{ name: 'rm-6-key', url: 'https://pokeapi.co/api/v2/item/541/' },
 	{ name: 'devon-scope', url: 'https://pokeapi.co/api/v2/item/542/' },
-	{ name: 'oaks-parcel', url: 'https://pokeapi.co/api/v2/item/543/' },
-	{ name: 'poke-flute', url: 'https://pokeapi.co/api/v2/item/544/' },
+	{
+		name: 'oaks-parcel',
+		url: 'https://pokeapi.co/api/v2/item/543/',
+		handled: true,
+	},
+	{
+		name: 'poke-flute',
+		url: 'https://pokeapi.co/api/v2/item/544/',
+		handled: true,
+	},
 	{ name: 'bike-voucher', url: 'https://pokeapi.co/api/v2/item/545/' },
 	{ name: 'gold-teeth', url: 'https://pokeapi.co/api/v2/item/546/' },
 	{ name: 'lift-key', url: 'https://pokeapi.co/api/v2/item/547/' },
