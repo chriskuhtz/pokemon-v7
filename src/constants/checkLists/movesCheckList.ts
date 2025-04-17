@@ -1263,7 +1263,7 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/270/',
 		handled: true,
 	},
-	{ name: 'trick', url: 'https://pokeapi.co/api/v2/move/271/' },
+	{ name: 'trick', url: 'https://pokeapi.co/api/v2/move/271/', handled: true },
 	{ name: 'role-play', url: 'https://pokeapi.co/api/v2/move/272/' },
 	{ name: 'wish', url: 'https://pokeapi.co/api/v2/move/273/' },
 	{ name: 'assist', url: 'https://pokeapi.co/api/v2/move/274/' },
@@ -2354,6 +2354,7 @@ export const handledMoves = [
 	'charge',
 	'taunt',
 	'helping-hand',
+	'trick',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

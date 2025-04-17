@@ -382,6 +382,15 @@ export const handleUniqueMoves = ({
 			duration: 9000,
 		});
 	}
+	if (move.name === 'trick') {
+		addMessage({
+			message: `${updatedAttacker.name} tricked ${updatedTarget.name} into swapping held items`,
+		});
+		const attackerItem = updatedAttacker.heldItemName;
+		const targetItem = updatedTarget.heldItemName;
+		updatedAttacker = { ...updatedAttacker, heldItemName: targetItem };
+		updatedTarget = { ...updatedTarget, heldItemName: attackerItem };
+	}
 
 	return updatedPokemon.map((p) => {
 		if (p.id === updatedAttacker.id) {
