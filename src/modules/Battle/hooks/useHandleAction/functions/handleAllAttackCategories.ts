@@ -33,6 +33,7 @@ export const handleAllAttackCategories = ({
 	setBattleWeather,
 	leave,
 	removeSpikes,
+	removeScreens,
 	logDamage,
 }: {
 	attacker: BattlePokemon;
@@ -49,6 +50,7 @@ export const handleAllAttackCategories = ({
 	setBattleWeather: (w: WeatherObject | undefined) => void;
 	leave: (outcome: 'WIN' | 'LOSS' | 'DRAW') => void;
 	removeSpikes: (ownerId: string) => void;
+	removeScreens: (ownerId: string) => void;
 	logDamage: (x: number) => void;
 }) => {
 	let updatedPokemon = [...pokemon];
@@ -86,6 +88,7 @@ export const handleAllAttackCategories = ({
 					dampy,
 					target,
 					removeSpikes,
+					removeScreens,
 					scatterCoins,
 					targetsFactor,
 					logDamage,

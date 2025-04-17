@@ -25,6 +25,7 @@ export const handleDamageAttack = ({
 	target,
 	pokemon,
 	removeSpikes,
+	removeScreens,
 	scatterCoins,
 	targetsFactor,
 	logDamage,
@@ -38,6 +39,7 @@ export const handleDamageAttack = ({
 	battleFieldEffects: BattleFieldEffect[];
 	dampy: { name: string } | undefined;
 	removeSpikes: (ownerId: string) => void;
+	removeScreens: (ownerId: string) => void;
 	scatterCoins: () => void;
 	targetsFactor: number;
 	logDamage: (x: number) => void;
@@ -258,6 +260,12 @@ export const handleDamageAttack = ({
 			),
 		};
 		removeSpikes(updatedTarget.ownerId);
+	}
+	if (move.name === 'brick-break') {
+		addMessage({
+			message: `${updatedAttacker.name} breaks through any protective screens`,
+		});
+		removeScreens(updatedTarget.ownerId);
 	}
 	if (move.name === 'fury-cutter') {
 		updatedAttacker.furyCutterStack =

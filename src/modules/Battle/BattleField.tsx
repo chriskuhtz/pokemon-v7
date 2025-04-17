@@ -159,6 +159,7 @@ export const BattleField = ({
 		addBattleFieldEffect,
 		reduceBattleFieldEffectDurations,
 		removeSpikes,
+		removeScreens,
 	} = useBattleFieldEffects(onFieldOpponents, onFieldTeam, battleWeather);
 
 	const nextPokemonWithoutMove = useMemo(() => {
@@ -365,7 +366,8 @@ export const BattleField = ({
 		addBattleFieldEffect,
 		battleFieldEffects,
 		setBattleWeather,
-		removeSpikes
+		removeSpikes,
+		removeScreens
 	);
 
 	//Steps:

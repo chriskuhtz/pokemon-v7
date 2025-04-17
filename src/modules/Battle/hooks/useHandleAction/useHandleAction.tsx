@@ -33,7 +33,8 @@ export const useHandleAction = (
 	addBattleFieldEffect: (x: BattleFieldEffect) => void,
 	battleFieldEffects: BattleFieldEffect[],
 	setBattleWeather: (w: WeatherObject | undefined) => void,
-	removeSpikes: (ownerId: string) => void
+	removeSpikes: (ownerId: string) => void,
+	removeScreens: (ownerId: string) => void
 ) => {
 	const {
 		saveFile: { pokedex, mileStones },
@@ -270,6 +271,7 @@ export const useHandleAction = (
 					setBattleWeather,
 					leave,
 					removeSpikes,
+					removeScreens,
 					logDamage,
 				});
 
@@ -277,23 +279,24 @@ export const useHandleAction = (
 			}
 		},
 		[
-			addBattleFieldEffect,
-			addMessage,
-			addMultipleMessages,
-			addUsedItem,
-			battleFieldEffects,
-			battleLocation,
-			battleRound,
-			battleWeather,
-			dampy,
-			handleForceSwitch,
-			leave,
-			pokedex,
 			pokemon,
-			removeSpikes,
-			scatterCoins,
-			setBattleWeather,
+			addMessage,
 			setPokemon,
+			leave,
+			addMultipleMessages,
+			battleRound,
+			battleLocation,
+			addUsedItem,
+			pokedex,
+			battleFieldEffects,
+			battleWeather,
+			scatterCoins,
+			dampy,
+			addBattleFieldEffect,
+			handleForceSwitch,
+			setBattleWeather,
+			removeSpikes,
+			removeScreens,
 			logDamage,
 		]
 	);

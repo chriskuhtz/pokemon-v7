@@ -43,6 +43,15 @@ export const useBattleFieldEffects = (
 			)
 		);
 	}, []);
+	const removeScreens = useCallback((ownerId: string) => {
+		setBattleFieldEffects((bf) =>
+			bf.filter(
+				(effect) =>
+					effect.ownerId !== ownerId ||
+					!['light-screen', 'reflect'].includes(effect.type)
+			)
+		);
+	}, []);
 
 	const battleFieldEffects = useMemo(() => {
 		const res = [...bf];
@@ -163,5 +172,6 @@ export const useBattleFieldEffects = (
 		addBattleFieldEffect,
 		reduceBattleFieldEffectDurations,
 		removeSpikes,
+		removeScreens,
 	};
 };

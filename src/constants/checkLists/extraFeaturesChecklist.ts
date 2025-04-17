@@ -328,6 +328,7 @@ export const extraFeatureCheckList: {
 	{ name: 'campupgrade: skiing equipment', handled: true },
 	{ name: 'more vileplume products', handled: true },
 	{ name: 'damage record should be chucks quest line', handled: true },
+	{ name: 'trainer AI' },
 	{ name: 'catch x pokemon should be oaks quest line' },
 	{ name: 'training field 5' },
 	{ name: 'wild apricorn trees' },
