@@ -1,3 +1,4 @@
+import { ballAndBombMoves } from '../constants/punchBasedMoves';
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -78,6 +79,17 @@ export const determineTypeFactor = (
 		if (addMessage) {
 			addMessage({
 				message: `${target.data.name} prevents damage with wonder guard`,
+			});
+		}
+		return 0;
+	}
+	if (
+		target.ability === 'bulletproof' &&
+		ballAndBombMoves.includes(attack.name)
+	) {
+		if (addMessage) {
+			addMessage({
+				message: `${target.data.name} prevents damage with bulletproof`,
 			});
 		}
 		return 0;
