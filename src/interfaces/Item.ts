@@ -217,6 +217,11 @@ export const heldItems = [
 	'full-incense',
 	'wave-incense',
 	'rose-incense',
+	'protector',
+	'electirizer',
+	'magmarizer',
+	'dubious-disc',
+	'reaper-cloth',
 ] as const;
 export const valuables = [
 	'shoal-salt',

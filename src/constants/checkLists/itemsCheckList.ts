@@ -1363,11 +1363,31 @@ export const itemsCheckList: {
 		handled: true,
 	},
 
-	{ name: 'protector', url: 'https://pokeapi.co/api/v2/item/298/' },
-	{ name: 'electirizer', url: 'https://pokeapi.co/api/v2/item/299/' },
-	{ name: 'magmarizer', url: 'https://pokeapi.co/api/v2/item/300/' },
-	{ name: 'dubious-disc', url: 'https://pokeapi.co/api/v2/item/301/' },
-	{ name: 'reaper-cloth', url: 'https://pokeapi.co/api/v2/item/302/' },
+	{
+		name: 'protector',
+		url: 'https://pokeapi.co/api/v2/item/298/',
+		handled: true,
+	},
+	{
+		name: 'electirizer',
+		url: 'https://pokeapi.co/api/v2/item/299/',
+		handled: true,
+	},
+	{
+		name: 'magmarizer',
+		url: 'https://pokeapi.co/api/v2/item/300/',
+		handled: true,
+	},
+	{
+		name: 'dubious-disc',
+		url: 'https://pokeapi.co/api/v2/item/301/',
+		handled: true,
+	},
+	{
+		name: 'reaper-cloth',
+		url: 'https://pokeapi.co/api/v2/item/302/',
+		handled: true,
+	},
 	{ name: 'razor-claw', url: 'https://pokeapi.co/api/v2/item/303/' },
 	{ name: 'razor-fang', url: 'https://pokeapi.co/api/v2/item/304/' },
 	{ name: 'tm01', url: 'https://pokeapi.co/api/v2/item/305/' },
