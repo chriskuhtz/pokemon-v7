@@ -49,7 +49,7 @@ export const startingLocation: CharacterLocationData = {
 	orientation: 'RIGHT',
 	forwardFoot: 'CENTER1',
 	x: 25,
-	y: 4,
+	y: 49,
 };
 
 const baseQuestState: Record<QuestName, QuestStatus> = Object.fromEntries(

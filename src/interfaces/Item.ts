@@ -544,6 +544,7 @@ export const pickupTable: ItemType[] = [
 	...berries.filter((b) => b !== 'enigma-berry'),
 	...apricorns,
 	...herbs,
+	...heldItems,
 	'berry-juice',
 	'old-gateau',
 	'energy-powder',
@@ -551,10 +552,7 @@ export const pickupTable: ItemType[] = [
 	'lava-cookie',
 	'revival-herb',
 	'rare-candy',
-	'soothe-bell',
-	'cleanse-tag',
 	'big-malasada',
-	'lucky-egg',
 ];
 export const undergroundTable: ItemType[] = [
 	...valuables,
@@ -562,7 +560,6 @@ export const undergroundTable: ItemType[] = [
 	...evBoostItemTypes,
 	...heldItems,
 	'cover-fossil',
-	'plume-fossil',
 	'jaw-fossil',
 	'sail-fossil',
 ];

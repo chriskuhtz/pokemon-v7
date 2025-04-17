@@ -17,7 +17,7 @@ export const overworldCheckList: {
 	},
 	{ name: 'design cave part of route W1', handled: true },
 	{ name: 'design cave part encounters', handled: true },
-	{ name: 'design route w1 items' },
+	{ name: 'design route w1 items', handled: true },
 	{ name: 'design cave w1 items' },
 	{ name: 'access route n1w1' },
 	{ name: 'design route n1w1' },
