@@ -773,22 +773,22 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'magmortar',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'charcoal',
 			}),
 			makeChallengerPokemon({
 				name: 'magcargo',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 			makeChallengerPokemon({
 				name: 'pyroar',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'silk-scarf',
 			}),
 			makeChallengerPokemon({
 				name: 'heatmor',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'scope-lens',
 			}),
 		],
@@ -802,22 +802,22 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'sealeo',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'never-melt-ice',
 			}),
 			makeChallengerPokemon({
 				name: 'floatzel',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'mystic-water',
 			}),
 			makeChallengerPokemon({
 				name: 'poliwrath',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'black-belt',
 			}),
 			makeChallengerPokemon({
 				name: 'crawdaunt',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 		],
@@ -831,22 +831,22 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'gogoat',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'silk-scarf',
 			}),
 			makeChallengerPokemon({
 				name: 'vileplume',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'miracle-seed',
 			}),
 			makeChallengerPokemon({
 				name: 'breloom',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 			makeChallengerPokemon({
 				name: 'arboliva',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 		],
@@ -860,22 +860,22 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'electivire',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'magnet',
 			}),
 			makeChallengerPokemon({
 				name: 'pikachu',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'light-ball',
 			}),
 			makeChallengerPokemon({
 				name: 'boltund',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 			makeChallengerPokemon({
 				name: 'pawmo',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'lum-berry',
 			}),
 		],
@@ -889,22 +889,22 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'gengar',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'poison-barb',
 			}),
 			makeChallengerPokemon({
 				name: 'trevenant',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'miracle-seed',
 			}),
 			makeChallengerPokemon({
 				name: 'dusknoir',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'spell-tag',
 			}),
 			makeChallengerPokemon({
 				name: 'banette',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 		],
@@ -918,22 +918,22 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'houndoom',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'charcoal',
 			}),
 			makeChallengerPokemon({
 				name: 'honchkrow',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sharp-beak',
 			}),
 			makeChallengerPokemon({
 				name: 'shiftry',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'miracle-seed',
 			}),
 			makeChallengerPokemon({
 				name: 'cacturne',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 		],
@@ -947,22 +947,22 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'hypno',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'twisted-spoon',
 			}),
 			makeChallengerPokemon({
 				name: 'gardevoir',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 			makeChallengerPokemon({
 				name: 'espurr',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'scope-lens',
 			}),
 			makeChallengerPokemon({
 				name: 'indeedee-male',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'lum-berry',
 			}),
 		],
@@ -976,22 +976,22 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'clefable',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 			makeChallengerPokemon({
 				name: 'azumarill',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'mystic-water',
 			}),
 			makeChallengerPokemon({
 				name: 'slurpuff',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 			makeChallengerPokemon({
 				name: 'gardevoir',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'twisted-spoon',
 			}),
 		],
@@ -1005,22 +1005,22 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'stoutland',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'silk-scarf',
 			}),
 			makeChallengerPokemon({
 				name: 'persian',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'silk-scarf',
 			}),
 			makeChallengerPokemon({
 				name: 'tauros',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'silk-scarf',
 			}),
 			makeChallengerPokemon({
 				name: 'zangoose',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'silk-scarf',
 			}),
 		],
@@ -1034,22 +1034,22 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'probopass',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'hard-stone',
 			}),
 			makeChallengerPokemon({
 				name: 'relicanth',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'mystic-water',
 			}),
 			makeChallengerPokemon({
 				name: 'gigalith',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'lum-berry',
 			}),
 			makeChallengerPokemon({
 				name: 'golem',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 		],
@@ -1063,22 +1063,22 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'sandslash',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 			makeChallengerPokemon({
 				name: 'sandaconda',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 			makeChallengerPokemon({
 				name: 'flygon',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'dragon-fang',
 			}),
 			makeChallengerPokemon({
 				name: 'donphan',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'soft-sand',
 			}),
 		],
@@ -1092,22 +1092,22 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'aggron',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'metal-coat',
 			}),
 			makeChallengerPokemon({
 				name: 'magneton',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'magnet',
 			}),
 			makeChallengerPokemon({
 				name: 'skarmory',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sharp-beak',
 			}),
 			makeChallengerPokemon({
 				name: 'mawile',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 		],
@@ -1121,22 +1121,22 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'sandslash-alola',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 			makeChallengerPokemon({
 				name: 'vanilluxe',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 			makeChallengerPokemon({
 				name: 'walrein',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'never-melt-ice',
 			}),
 			makeChallengerPokemon({
 				name: 'jynx',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'twisted-spoon',
 			}),
 		],
@@ -1150,22 +1150,22 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'dragonair',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'dragon-fang',
 			}),
 			makeChallengerPokemon({
 				name: 'hakamo-o',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'dragon-fang',
 			}),
 			makeChallengerPokemon({
 				name: 'shelgon',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'dragon-fang',
 			}),
 			makeChallengerPokemon({
 				name: 'druddigon',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'dragon-fang',
 			}),
 		],
@@ -1182,22 +1182,22 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'hitmonlee',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'black-belt',
 			}),
 			makeChallengerPokemon({
 				name: 'machamp',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'black-belt',
 			}),
 			makeChallengerPokemon({
 				name: 'conkeldurr',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'black-belt',
 			}),
 			makeChallengerPokemon({
 				name: 'hitmonchan',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'black-belt',
 			}),
 		],
@@ -1211,22 +1211,22 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'pidgeot',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sharp-beak',
 			}),
 			makeChallengerPokemon({
 				name: 'sirfetchd',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sharp-beak',
 			}),
 			makeChallengerPokemon({
 				name: 'fearow',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sharp-beak',
 			}),
 			makeChallengerPokemon({
 				name: 'honchkrow',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sharp-beak',
 			}),
 		],
@@ -1240,22 +1240,22 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'weezing',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 			makeChallengerPokemon({
 				name: 'swalot',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 			makeChallengerPokemon({
 				name: 'toxtricity-amped',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'poison-barb',
 			}),
 			makeChallengerPokemon({
 				name: 'ariados',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'silver-powder',
 			}),
 		],
@@ -1265,26 +1265,26 @@ const tier4trainers: Challenger[] = [
 	},
 	{
 		type: 'TRAINER',
-		id: 'Buggin Bob 3',
+		id: 'Buggin Bob 4',
 		team: [
 			makeChallengerPokemon({
 				name: 'scolipede',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'silver-powder',
 			}),
 			makeChallengerPokemon({
 				name: 'beedrill',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'silver-powder',
 			}),
 			makeChallengerPokemon({
 				name: 'pinsir',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'silver-powder',
 			}),
 			makeChallengerPokemon({
 				name: 'heracross',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'silver-powder',
 			}),
 		],
@@ -1298,22 +1298,22 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'charizard',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'charcoal',
 			}),
 			makeChallengerPokemon({
 				name: 'blastoise',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'mystic-water',
 			}),
 			makeChallengerPokemon({
 				name: 'venusaur',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'miracle-seed',
 			}),
 			makeChallengerPokemon({
 				name: 'raichu',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'magnet',
 			}),
 		],
@@ -1327,22 +1327,22 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'typhlosion',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 			makeChallengerPokemon({
 				name: 'feraligatr',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 			makeChallengerPokemon({
 				name: 'meganium',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 			makeChallengerPokemon({
 				name: 'azumarill',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 		],
@@ -1356,27 +1356,27 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'blaziken',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'charcoal',
 			}),
 			makeChallengerPokemon({
 				name: 'swampert',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'mystic-water',
 			}),
 			makeChallengerPokemon({
 				name: 'sceptile',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'miracle-seed',
 			}),
 			makeChallengerPokemon({
 				name: 'plusle',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 			makeChallengerPokemon({
 				name: 'minun',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'sitrus-berry',
 			}),
 		],
@@ -1390,22 +1390,22 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'infernape',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'charcoal',
 			}),
 			makeChallengerPokemon({
 				name: 'empoleon',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'mystic-water',
 			}),
 			makeChallengerPokemon({
 				name: 'torterra',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'miracle-seed',
 			}),
 			makeChallengerPokemon({
 				name: 'pachirisu',
-				xp: 40000,
+				xp: 64000,
 				heldItemName: 'magnet',
 			}),
 		],
@@ -1419,27 +1419,27 @@ const tier4trainers: Challenger[] = [
 		team: [
 			makeChallengerPokemon({
 				name: 'blissey',
-				xp: 40000,
+				xp: 64000,
 			}),
 			makeChallengerPokemon({
 				name: 'blissey',
-				xp: 40000,
+				xp: 64000,
 			}),
 			makeChallengerPokemon({
 				name: 'blissey',
-				xp: 40000,
+				xp: 64000,
 			}),
 			makeChallengerPokemon({
 				name: 'blissey',
-				xp: 40000,
+				xp: 64000,
 			}),
 			makeChallengerPokemon({
 				name: 'blissey',
-				xp: 40000,
+				xp: 64000,
 			}),
 			makeChallengerPokemon({
 				name: 'blissey',
-				xp: 40000,
+				xp: 64000,
 			}),
 		],
 		inventory: EmptyInventory,
