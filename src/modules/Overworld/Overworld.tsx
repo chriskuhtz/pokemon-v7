@@ -33,6 +33,7 @@ import { useOccupants } from './hooks/useOccupants';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
 import { useSledgeHammer } from './hooks/useSledgeHammer';
 import { useStartEncounter } from './hooks/useStartEncounter';
+import { useInteractWithTrainer } from './hooks/useInteractWithTrainer';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -54,6 +55,7 @@ export const Overworld = ({
 		talkToNurseReducer: talkToNurse,
 	} = useContext(SaveFileContext);
 	const interactWithHoneyTree = useHoneyTree();
+	const interactWithTrainer = useInteractWithTrainer();
 	const interactWithHallowedTower = useHallowedTower();
 	const interactWithCombeeHive = useCombeeHive();
 	const interactWithBush = useMachete();
@@ -126,6 +128,7 @@ export const Overworld = ({
 				interactWithDugtrioExplorer,
 				interactWithSwarmRadar,
 				interactWithSnorlax,
+				interactWithTrainer,
 				goTo: (route) => navigateAwayFromOverworldReducer(route, stepsTaken),
 				settings: saveFile.settings,
 			}),
@@ -142,6 +145,7 @@ export const Overworld = ({
 			interactWithRock,
 			interactWithSnorlax,
 			interactWithSwarmRadar,
+			interactWithTrainer,
 			interactWithZigzagoonForager,
 			latestMessage,
 			navigateAwayFromOverworldReducer,

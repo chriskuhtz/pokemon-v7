@@ -9,6 +9,7 @@ import {
 	OverworldBush,
 	OverworldRock,
 	OverworldSnorlax,
+	OverworldTrainer,
 } from '../../../interfaces/OverworldMap';
 import { RoutesType } from '../../../interfaces/Routing';
 import {
@@ -55,6 +56,7 @@ export const interactWithFunction = ({
 	interactWithDugtrioExplorer,
 	interactWithSwarmRadar,
 	interactWithSnorlax,
+	interactWithTrainer,
 	settings,
 	goTo,
 }: {
@@ -74,6 +76,7 @@ export const interactWithFunction = ({
 	interactWithCombeeHive: () => void;
 	interactWithBush: (x: OverworldBush) => void;
 	interactWithRock: (x: OverworldRock) => void;
+	interactWithTrainer: (x: OverworldTrainer) => void;
 	interactWithLedge: (x: Ledge) => void;
 	interactWithSnorlax: (x: OverworldSnorlax) => void;
 	interactWithZigzagoonForager: () => void;
@@ -266,24 +269,7 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'TRAINER') {
-		if (!handledOccupants.includes(occ.id)) {
-			addMultipleMessages(
-				data.unhandledMessage.map((d, i) => ({
-					message: d,
-					onRemoval:
-						i === data.unhandledMessage.length - 1
-							? () => handleThisOccupant(occ)
-							: undefined,
-				}))
-			);
-		} else {
-			addMultipleMessages(
-				(data.handledMessage ?? data.unhandledMessage).map((d) => ({
-					message: d,
-				}))
-			);
-		}
-
+		interactWithTrainer(data);
 		return;
 	}
 

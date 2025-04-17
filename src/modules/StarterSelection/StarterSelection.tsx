@@ -22,6 +22,7 @@ import { SaveFileContext } from '../../hooks/useSaveFile';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { CompleteInventory } from '../../interfaces/Inventory';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
+import { EmptyStatObject } from '../../interfaces/StatObject';
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
@@ -43,13 +44,13 @@ export const StarterSelection = (): JSX.Element => {
 			...testPokemon,
 			name: o,
 			id: v4(),
+			effortValues: EmptyStatObject,
 		})),
 		{
 			assignLearnsetMoves: true,
 			assignGender: true,
 			assignNaturalAbility: true,
 			generateIvs: true,
-			generateEvs: true,
 		}
 	);
 	const [chosenStarter, setChosenStarter] = useState<

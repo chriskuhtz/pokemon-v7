@@ -102,17 +102,19 @@ export const LineUpSelection = ({
 
 			<div
 				style={{
-					display: 'flex',
+					display: 'grid',
 					alignItems: 'center',
 					gap: '1rem',
-					justifyContent: 'flex-end',
+					gridTemplateColumns: '1fr 1fr 1fr',
 				}}
 			>
 				{opponents.map((opponent) => (
 					<IconSolarSystem
 						key={opponent.id}
 						sun={{
-							url: getPokemonSprite(opponent.name, { shiny: opponent.shiny }),
+							url: trainer
+								? getItemUrl('poke-ball')
+								: getPokemonSprite(opponent.name, { shiny: opponent.shiny }),
 						}}
 						secondPlanetUrl={
 							pokedex[opponent.name].caughtOnRoutes.length > 0 && !trainer

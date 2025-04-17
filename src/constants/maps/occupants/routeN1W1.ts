@@ -1,4 +1,5 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
+import { champChris } from './champChris';
 
 export const routeN1W1Occupants: OverworldMap['occupants'] = [
 	{
@@ -55,4 +56,5 @@ export const routeN1W1Occupants: OverworldMap['occupants'] = [
 			!s.handledOccupants.some((h) => h.id === 'ice-stone-routeN1W1'),
 		id: 'ice-stone-routeN1W1',
 	},
+	champChris,
 ];

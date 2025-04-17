@@ -1295,6 +1295,21 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/280/',
 		handled: true,
 	},
+	{
+		name: 'zen-headbutt',
+		url: 'https://pokeapi.co/api/v2/move/428/',
+		handled: true,
+	},
+	{
+		name: 'bullet-punch',
+		url: 'https://pokeapi.co/api/v2/move/418/',
+		handled: true,
+	},
+	{
+		name: 'fire-fang',
+		url: 'https://pokeapi.co/api/v2/move/424/',
+		handled: true,
+	},
 	{ name: 'yawn', url: 'https://pokeapi.co/api/v2/move/281/' },
 	{ name: 'knock-off', url: 'https://pokeapi.co/api/v2/move/282/' },
 	{ name: 'endeavor', url: 'https://pokeapi.co/api/v2/move/283/' },
@@ -1389,16 +1404,13 @@ export const movesCheckList: {
 	{ name: 'switcheroo', url: 'https://pokeapi.co/api/v2/move/415/' },
 	{ name: 'giga-impact', url: 'https://pokeapi.co/api/v2/move/416/' },
 	{ name: 'nasty-plot', url: 'https://pokeapi.co/api/v2/move/417/' },
-	{ name: 'bullet-punch', url: 'https://pokeapi.co/api/v2/move/418/' },
 	{ name: 'avalanche', url: 'https://pokeapi.co/api/v2/move/419/' },
 	{ name: 'ice-shard', url: 'https://pokeapi.co/api/v2/move/420/' },
 	{ name: 'shadow-claw', url: 'https://pokeapi.co/api/v2/move/421/' },
 	{ name: 'ice-fang', url: 'https://pokeapi.co/api/v2/move/423/' },
-	{ name: 'fire-fang', url: 'https://pokeapi.co/api/v2/move/424/' },
 	{ name: 'shadow-sneak', url: 'https://pokeapi.co/api/v2/move/425/' },
 	{ name: 'mud-bomb', url: 'https://pokeapi.co/api/v2/move/426/' },
 	{ name: 'psycho-cut', url: 'https://pokeapi.co/api/v2/move/427/' },
-	{ name: 'zen-headbutt', url: 'https://pokeapi.co/api/v2/move/428/' },
 	{ name: 'mirror-shot', url: 'https://pokeapi.co/api/v2/move/429/' },
 	{ name: 'flash-cannon', url: 'https://pokeapi.co/api/v2/move/430/' },
 	{ name: 'rock-climb', url: 'https://pokeapi.co/api/v2/move/431/' },
@@ -2386,6 +2398,9 @@ export const handledMoves = [
 	'recycle',
 	'revenge',
 	'brick-break',
+	'zen-headbutt',
+	'bullet-punch',
+	'fire-fang',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

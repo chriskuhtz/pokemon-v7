@@ -329,6 +329,8 @@ export const extraFeatureCheckList: {
 	{ name: 'more vileplume products', handled: true },
 	{ name: 'damage record should be chucks quest line', handled: true },
 	{ name: 'trainer AI' },
+	{ name: 'more cooking recipes' },
+	{ name: 'cost for move learning depends on name length chiffre' },
 	{ name: 'catch x pokemon should be oaks quest line' },
 	{ name: 'training field 5' },
 	{ name: 'wild apricorn trees' },

@@ -22,23 +22,23 @@ import {
 	generateRandomStatObject,
 } from '../interfaces/StatObject';
 
+export interface BattleTeamConfig {
+	assignLearnsetMoves?: boolean;
+	assignNaturalAbility?: boolean;
+	assignGender?: boolean;
+	generateIvs?: boolean;
+	assignHeldItem?: boolean;
+}
+
 export const useGetBattleTeam = (
 	initTeam: OwnedPokemon[],
-	config: {
-		assignLearnsetMoves?: boolean;
-		assignNaturalAbility?: boolean;
-		assignGender?: boolean;
-		generateIvs?: boolean;
-		generateEvs?: boolean;
-		assignHeldItem?: boolean;
-	}
+	config: BattleTeamConfig
 ) => {
 	const {
 		assignGender,
 		assignLearnsetMoves,
 		assignNaturalAbility,
 		generateIvs,
-		generateEvs,
 		assignHeldItem,
 	} = config;
 	return useFetch<BattlePokemon[]>(() =>
@@ -205,9 +205,7 @@ export const useGetBattleTeam = (
 					intrinsicValues: generateIvs
 						? generateRandomStatObject(31)
 						: pokemon.intrinsicValues,
-					effortValues: generateEvs
-						? generateRandomStatObject(255)
-						: pokemon.effortValues,
+					effortValues: pokemon.effortValues,
 					evAwards: getEvAwards(fetchedData.stats),
 					participatedInBattle: false,
 					protected: false,

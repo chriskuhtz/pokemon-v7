@@ -20,6 +20,7 @@ import { onixCaveEncounters } from '../maps/encounters/onixCave';
 import { routeE1 } from '../maps/routeE1';
 import { routeN1 } from '../maps/routeN1';
 import { routeN1E1 } from '../maps/routeN1E1';
+import { routeN1W1 } from '../maps/routeN1W1';
 import { routeS1 } from '../maps/routeS1';
 import { routeS1E1 } from '../maps/routeS1E1';
 import { routeS1W1 } from '../maps/routeS1W1';
@@ -251,7 +252,7 @@ const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 		'rare-candy': 1,
 	},
 	'catch all DAY-time pokemon from routeW1': {
-		'great-ball': 5,
+		'quick-ball': 5,
 		'rare-candy': 1,
 	},
 	'catch all EVENING-time pokemon from routeW1': {
@@ -260,6 +261,43 @@ const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 	},
 	'catch all NIGHT-time pokemon from routeW1': {
 		'quick-ball': 5,
+		'rare-candy': 1,
+	},
+	//routeN1W1
+	'catch a MORNING-time exclusive pokemon from routeN1W1': {
+		'dusk-ball': 5,
+		'big-malasada': 1,
+		'escape-rope': 1,
+	},
+	'catch a DAY-time exclusive pokemon from routeN1W1': {
+		'dusk-ball': 5,
+		'big-malasada': 1,
+		'escape-rope': 1,
+	},
+	'catch a EVENING-time exclusive pokemon from routeN1W1': {
+		'dusk-ball': 5,
+		'big-malasada': 1,
+		'escape-rope': 1,
+	},
+	'catch a NIGHT-time exclusive pokemon from routeN1W1': {
+		'dusk-ball': 5,
+		'big-malasada': 1,
+		'escape-rope': 1,
+	},
+	'catch all MORNING-time pokemon from routeN1W1': {
+		'dusk-ball': 5,
+		'rare-candy': 1,
+	},
+	'catch all DAY-time pokemon from routeN1W1': {
+		'dusk-ball': 5,
+		'rare-candy': 1,
+	},
+	'catch all EVENING-time pokemon from routeN1W1': {
+		'dusk-ball': 5,
+		'rare-candy': 1,
+	},
+	'catch all NIGHT-time pokemon from routeN1W1': {
+		'dusk-ball': 5,
 		'rare-candy': 1,
 	},
 };
@@ -371,6 +409,7 @@ const catchQuests = {
 	...catchQuestsForRoute(routeS1E1, 'swimming certification'),
 	...catchQuestsForRoute(routeS1W1, 'swimming certification'),
 	...catchQuestsForRoute(routeW1, 'swimming certification'),
+	...catchQuestsForRoute(routeN1W1, 'buy skiing equipment'),
 };
 
 export const questNames = [
@@ -495,6 +534,7 @@ export const questNames = [
 	'deal 2000 damage with one attack',
 	'deal 5000 damage with one attack',
 	'deal 10000 damage with one attack',
+	'defeat chuck',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];

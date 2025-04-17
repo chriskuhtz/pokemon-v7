@@ -28,14 +28,16 @@ export const BattleLoader = ({
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
 }): JSX.Element => {
-	const { res: battleOpponents } = useGetBattleTeam(challenger.team, {
-		assignLearnsetMoves: true,
-		assignGender: true,
-		assignNaturalAbility: true,
-		generateIvs: true,
-		generateEvs: true,
-		assignHeldItem: true,
-	});
+	const { res: battleOpponents } = useGetBattleTeam(
+		challenger.team,
+		challenger.battleTeamConfig ?? {
+			assignLearnsetMoves: true,
+			assignGender: true,
+			assignNaturalAbility: true,
+			generateIvs: true,
+			assignHeldItem: true,
+		}
+	);
 	const { res: battleTeam } = useGetBattleTeam(team, {});
 
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
