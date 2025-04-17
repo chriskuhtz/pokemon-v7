@@ -173,8 +173,28 @@ export const handleAttackStart = ({
 		return miss;
 	});
 
+	if (updatedAttacker.ability === 'protean') {
+		addMessage({
+			message: `${attacker.name} became a ${move.data.type.name} type`,
+		});
+
+		updatedAttacker = {
+			...updatedAttacker,
+			secondaryAilments: [
+				...updatedAttacker.secondaryAilments,
+				{ type: 'color-changed', duration: 9000, newType: move.data.type.name },
+			],
+		};
+	}
+
 	return {
-		updatedPokemon,
+		updatedPokemon: updatedPokemon.map((u) => {
+			if (u.id === attacker.id) {
+				return updatedAttacker;
+			}
+
+			return u;
+		}),
 		targets: targets.filter((_, index) => misses[index] === false),
 	};
 };
