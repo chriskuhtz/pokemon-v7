@@ -195,6 +195,7 @@ export const heldItems = [
 	'power-weight',
 	'shed-shell',
 	'big-root',
+	'choice-specs',
 ] as const;
 export const valuables = [
 	'shoal-salt',

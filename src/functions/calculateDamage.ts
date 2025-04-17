@@ -537,7 +537,18 @@ export const calculateDamage = (
 		weather === 'sun'
 			? 1.5
 			: 1;
-	const choiceBandFactor = attack.name === attacker.choiceBandedMove ? 1.5 : 1;
+	const choiceBandFactor =
+		attack.name === attacker.choiceBandedMove &&
+		getHeldItem(attacker) === 'choice-band' &&
+		damageClass === 'physical'
+			? 1.5
+			: 1;
+	const choiceSpecsFactor =
+		attack.name === attacker.choiceBandedMove &&
+		getHeldItem(attacker) === 'choice-specs' &&
+		damageClass === 'special'
+			? 1.5
+			: 1;
 	const technicianFactor =
 		attacker.ability === 'technician' && power <= 60 ? 1.5 : 1;
 	const tintedLensFactor =
@@ -674,7 +685,8 @@ export const calculateDamage = (
 				metronomeFactor *
 				chargeFactor *
 				helpingHandFactor *
-				sandForceFactor
+				sandForceFactor *
+				choiceSpecsFactor
 		),
 		1
 	);

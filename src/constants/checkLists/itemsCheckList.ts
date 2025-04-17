@@ -1252,7 +1252,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/273/',
 		handled: true,
 	},
-	{ name: 'choice-specs', url: 'https://pokeapi.co/api/v2/item/274/' },
+	{
+		name: 'choice-specs',
+		url: 'https://pokeapi.co/api/v2/item/274/',
+		handled: true,
+	},
 	{ name: 'flame-plate', url: 'https://pokeapi.co/api/v2/item/275/' },
 	{ name: 'splash-plate', url: 'https://pokeapi.co/api/v2/item/276/' },
 	{ name: 'zap-plate', url: 'https://pokeapi.co/api/v2/item/277/' },
