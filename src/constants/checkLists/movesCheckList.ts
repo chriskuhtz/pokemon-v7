@@ -1275,8 +1275,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/275/',
 		handled: true,
 	},
-	{ name: 'superpower', url: 'https://pokeapi.co/api/v2/move/276/' },
-	{ name: 'magic-coat', url: 'https://pokeapi.co/api/v2/move/277/' },
+	{
+		name: 'superpower',
+		url: 'https://pokeapi.co/api/v2/move/276/',
+		handled: true,
+	},
 	{ name: 'recycle', url: 'https://pokeapi.co/api/v2/move/278/' },
 	{ name: 'revenge', url: 'https://pokeapi.co/api/v2/move/279/' },
 	{ name: 'brick-break', url: 'https://pokeapi.co/api/v2/move/280/' },
@@ -2031,6 +2034,13 @@ export const movesCheckList: {
 	{ name: 'stockpile', url: 'https://pokeapi.co/api/v2/move/254/' },
 	{ name: 'spit-up', url: 'https://pokeapi.co/api/v2/move/255/' },
 	{ name: 'swallow', url: 'https://pokeapi.co/api/v2/move/256/' },
+	{
+		name: 'follow-me',
+		url: 'https://pokeapi.co/api/v2/move/266/',
+	},
+	{ name: 'nature-power', url: 'https://pokeapi.co/api/v2/move/267/' },
+	{ name: 'wish', url: 'https://pokeapi.co/api/v2/move/273/' },
+	{ name: 'magic-coat', url: 'https://pokeapi.co/api/v2/move/277/' },
 	{ name: 'shadow-rush', url: 'https://pokeapi.co/api/v2/move/10001/' },
 	{ name: 'shadow-blast', url: 'https://pokeapi.co/api/v2/move/10002/' },
 	{ name: 'shadow-blitz', url: 'https://pokeapi.co/api/v2/move/10003/' },
@@ -2049,12 +2059,6 @@ export const movesCheckList: {
 	{ name: 'shadow-panic', url: 'https://pokeapi.co/api/v2/move/10016/' },
 	{ name: 'shadow-shed', url: 'https://pokeapi.co/api/v2/move/10017/' },
 	{ name: 'shadow-sky', url: 'https://pokeapi.co/api/v2/move/10018/' },
-	{
-		name: 'follow-me',
-		url: 'https://pokeapi.co/api/v2/move/266/',
-	},
-	{ name: 'nature-power', url: 'https://pokeapi.co/api/v2/move/267/' },
-	{ name: 'wish', url: 'https://pokeapi.co/api/v2/move/273/' },
 ];
 
 export const handledMoves = [
@@ -2366,6 +2370,8 @@ export const handledMoves = [
 	'role-play',
 	'assist',
 	'ingrain',
+	'super-power',
+	'recycle',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

@@ -5,6 +5,7 @@ import {
 	getRandomEntry,
 	getRandomIndex,
 } from '../../../../../../functions/filterTargets';
+import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMovesArray } from '../../../../../../functions/getMovesArray';
 import { handleMimicOrSketch } from '../../../../../../functions/handleMimic';
 import { Message } from '../../../../../../hooks/useMessageQueue';
@@ -407,6 +408,28 @@ export const handleUniqueMoves = ({
 		});
 
 		updatedAttacker = { ...updatedAttacker, ability: updatedTarget.ability };
+	}
+	if (move.name === 'trick') {
+		addMessage({
+			message: `${updatedAttacker.name} copied ${updatedTarget.name}´s ability ${updatedTarget.ability}`,
+		});
+		updatedAttacker = { ...updatedAttacker, ability: updatedTarget.ability };
+	}
+	if (move.name === 'recycle') {
+		if (!updatedAttacker.consumedBerry || !!getHeldItem(updatedAttacker)) {
+			addMessage({
+				message: `It failed`,
+			});
+		}
+
+		addMessage({
+			message: `${updatedAttacker.name} recycled its ${updatedAttacker.consumedBerry}`,
+		});
+		updatedAttacker = {
+			...updatedAttacker,
+			heldItemName: updatedAttacker.consumedBerry,
+			consumedBerry: undefined,
+		};
 	}
 
 	return updatedPokemon.map((p) => {
