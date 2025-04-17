@@ -628,6 +628,11 @@ export const calculateDamage = (
 			: 1;
 	const furCoatFactor =
 		target.ability === 'fur-coat' && damageClass === 'physical' ? 0.5 : 1;
+	const revengeFactor =
+		attack.name === 'revenge' &&
+		attacker.lastReceivedDamage?.applicatorId === target.id
+			? 2
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -689,7 +694,8 @@ export const calculateDamage = (
 				helpingHandFactor *
 				sandForceFactor *
 				choiceSpecsFactor *
-				furCoatFactor
+				furCoatFactor *
+				revengeFactor
 		),
 		1
 	);
