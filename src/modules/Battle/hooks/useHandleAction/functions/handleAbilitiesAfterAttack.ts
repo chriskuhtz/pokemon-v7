@@ -64,7 +64,7 @@ export const handleAbilitiesAfterAttack = (
 	//check for magician
 	if (
 		target.ability === 'magician' &&
-		contactMoves.includes(move.name) &&
+		move.data.damage_class.name !== 'status' &&
 		updatedAttacker.heldItemName &&
 		!target.heldItemName
 	) {
