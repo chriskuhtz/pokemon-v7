@@ -68,7 +68,8 @@ export interface BattleFieldEffect {
 		| 'unnerve'
 		| 'safeguard'
 		| 'friend-guard'
-		| 'victory-star';
+		| 'victory-star'
+		| 'aroma-veil';
 	ownerId: string;
 	applicatorId?: string;
 	duration: number;

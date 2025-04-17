@@ -40,8 +40,18 @@ export const handleUniqueMoves = ({
 	const underPressure = battleFieldEffects.some(
 		(b) => b.type === 'pressure' && b.ownerId !== attacker.ownerId
 	);
+	const targetIsAromaVeiled = battleFieldEffects.some(
+		(b) => b.type === 'aroma-veil' && b.ownerId !== target.ownerId
+	);
 
-	if (move.name === 'disable') {
+	if (
+		['disable', 'encore', 'taunt'].includes(move.name) &&
+		targetIsAromaVeiled
+	) {
+		addMessage({ message: `${updatedTarget.name} is protected by aroma veil` });
+	}
+
+	if (move.name === 'disable' && !targetIsAromaVeiled) {
 		const moves = getMovesArray(target, { filterOutDisabled: false });
 		const randomMoveName = moves[getRandomIndex(moves.length)].name;
 		if (moves.length === 1) {
@@ -55,7 +65,7 @@ export const handleUniqueMoves = ({
 				applicator: updatedAttacker,
 			});
 	}
-	if (move.name === 'encore') {
+	if (move.name === 'encore' && !targetIsAromaVeiled) {
 		const moveName = target.lastUsedMove?.name;
 		if (!moveName) {
 			addMessage({ message: `it failed` });
@@ -71,7 +81,7 @@ export const handleUniqueMoves = ({
 	if (move.name === 'helping-hand') {
 		updatedTarget = { ...updatedTarget, helpingHanded: true };
 	}
-	if (move.name === 'taunt') {
+	if (move.name === 'taunt' && !targetIsAromaVeiled) {
 		updatedTarget = applySecondaryAilmentToPokemon({
 			pokemon: target,
 			ailment: 'taunt',

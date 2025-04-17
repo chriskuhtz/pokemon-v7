@@ -545,7 +545,6 @@ export const pickupTable: ItemType[] = [
 	...berries.filter((b) => b !== 'enigma-berry'),
 	...apricorns,
 	...herbs,
-	...heldItems,
 	'berry-juice',
 	'old-gateau',
 	'energy-powder',

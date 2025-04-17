@@ -34,6 +34,14 @@ export const handleAilmentAttack = ({
 		battleFieldEffects.some(
 			(b) => b.type === 'safeguard' && b.ownerId === updatedTarget.ownerId
 		) && attacker.ability !== 'infiltrator';
+
+	const targetIsAromaVeiled = battleFieldEffects.some(
+		(b) => b.type === 'aroma-veil' && b.ownerId !== target.ownerId
+	);
+
+	if (['attract', 'nightmare'].includes(move.name) && targetIsAromaVeiled) {
+		addMessage({ message: `${updatedTarget.name} is protected by aroma veil` });
+	}
 	const attackerIsSafeguarded = battleFieldEffects.some(
 		(b) => b.type === 'safeguard' && b.ownerId === updatedAttacker.ownerId
 	);
@@ -62,7 +70,7 @@ export const handleAilmentAttack = ({
 			applicator: updatedAttacker,
 		});
 	}
-	if (move.name === 'attract') {
+	if (move.name === 'attract' && !targetIsAromaVeiled) {
 		if (updatedTarget.gender === 'GENDERLESS') {
 			addMessage({ message: 'It failed' });
 		} else
@@ -86,7 +94,7 @@ export const handleAilmentAttack = ({
 			});
 		}
 	}
-	if (move.name === 'nightmare') {
+	if (move.name === 'nightmare' && !targetIsAromaVeiled) {
 		updatedTarget = applySecondaryAilmentToPokemon({
 			pokemon: updatedTarget,
 			ailment: 'nightmare',
