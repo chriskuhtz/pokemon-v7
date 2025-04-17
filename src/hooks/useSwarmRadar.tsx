@@ -43,7 +43,6 @@ const swarmMons: PokemonName[] = [
 	'fuecoco',
 	'quaxly',
 	'sprigatito',
-	'pikachu-world-cap',
 ];
 
 export const swarms: PokemonSwarm[] = swarmMons.map((p) => ({
