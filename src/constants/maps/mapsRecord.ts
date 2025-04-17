@@ -49,7 +49,7 @@ export const mapDisplayNames: Record<MapId, string> = {
 	routeS1W1: 'kuro hills',
 	routeW1: 'shiro route',
 	caveW1: 'shiro cave',
-	routeN1W1: 'koniro route',
+	routeN1W1: 'koniro plateau',
 	camp: 'kuma camp',
 	onixCave: 'onix cave',
 };
