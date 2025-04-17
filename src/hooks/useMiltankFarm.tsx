@@ -28,7 +28,7 @@ export const useMiltankFarm = () => {
 					[berry]: -1,
 					'moomoo-milk': 1,
 				}),
-				miltankReadyAt: Math.random() > 0.75 ? now + ONE_HOUR : undefined,
+				miltankReadyAt: Math.random() > 0.85 ? now + ONE_HOUR : undefined,
 			});
 		},
 		[addMessage, patchSaveFileReducer, saveFile.bag]
