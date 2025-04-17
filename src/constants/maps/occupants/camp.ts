@@ -1,97 +1,20 @@
 import { isBagOverloaded } from '../../../components/BagLimitBar/BagLimitBar';
 import { dugtrioExplorers } from '../../../hooks/useDugtrioExplorers';
 import { zigzagoonForagers } from '../../../hooks/useZigzagoonForagers';
-import {
-	Occupant,
-	OverworldMap,
-	OverworldNpc,
-} from '../../../interfaces/OverworldMap';
+import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { amoongussCompostResearchers } from '../../../modules/AmoongussResearcher/AmoongussResearcher';
 import { dragoniteTaxi } from '../../../modules/DragoniteTaxi/DragoniteTaxi';
 import { miltankFarm } from '../../../modules/MiltankFarm/MiltankFarm';
 import { seedvaultResearcher } from '../../../modules/SeedVault/SeedVault';
 import { vileplumeResearchers } from '../../../modules/VilePlumeScentResearcher/VilePlumeScentResearcher';
+import { chuckLine } from './chuckLine';
 import { elmLine } from './elmLine';
 import { falknerLine } from './falknerLine';
 import { mortyLine } from './mortyLine';
+import { oakLine } from './oakLine';
 import { pikachuFanLine } from './pikachuFanLine';
 import { rowanLine } from './rowanLine';
-
-const oakBase: Omit<
-	OverworldNpc,
-	'unhandledMessage' | 'conditionFunction' | 'id'
-> = {
-	x: 5,
-	y: 3,
-	orientation: 'DOWN',
-	type: 'NPC',
-	sprite: SpriteEnum.oak,
-};
-const oakLine: Occupant[] = [
-	{
-		...oakBase,
-		id: 'oak_1',
-		unhandledMessage: [
-			'Ah, you made it',
-			'Outside of the fence, the wild Kuma Region awaits',
-			'If your Pokemon are hurt, talk to nurse joy',
-
-			'There is some equipment for you in the storage chest',
-			'but we cant rely on our limited supplies',
-			'we must establish a self sufficient camp',
-			'Camp Manager Kevin can help you with that',
-		],
-		handledMessage: [
-			'Start exploring the area',
-			'and prepare the camp for self sufficiency',
-		],
-
-		quest: 'catch a pokemon',
-		conditionFunction: (s) => s.quests['catch a pokemon'] !== 'COLLECTED',
-	},
-	{
-		...oakBase,
-		id: 'oak_2',
-		unhandledMessage: [
-			'Well done',
-			'To navigate the wilderness successfully',
-			'It is important to train your pokemon',
-		],
-		handledMessage: ['Battle wild pokemon to grow stronger'],
-		quest: 'evolve your starter pokemon',
-
-		conditionFunction: (s) =>
-			s.quests['catch a pokemon'] === 'COLLECTED' &&
-			s.quests['evolve your starter pokemon'] !== 'COLLECTED',
-	},
-	{
-		...oakBase,
-		id: 'oak_3',
-		unhandledMessage: [
-			'Very impressive',
-			'Your Pokemon should be able to evolve one more time',
-		],
-		handledMessage: ['Battle wild pokemon to grow stronger'],
-		quest: 'evolve your starter pokemon to its final form',
-		conditionFunction: (s) =>
-			s.quests['catch a pokemon'] === 'COLLECTED' &&
-			s.quests['evolve your starter pokemon'] === 'COLLECTED' &&
-			s.quests['evolve your starter pokemon to its final form'] !== 'COLLECTED',
-	},
-	{
-		...oakBase,
-		id: 'oak_4',
-		unhandledMessage: [
-			'Great work',
-			'Check the Bulletin board for more quests',
-		],
-		conditionFunction: (s) =>
-			s.quests['catch a pokemon'] === 'COLLECTED' &&
-			s.quests['evolve your starter pokemon'] === 'COLLECTED' &&
-			s.quests['evolve your starter pokemon to its final form'] === 'COLLECTED',
-	},
-];
 
 const trainingField: Occupant[] = [
 	{
@@ -380,4 +303,5 @@ export const campOccupants: OverworldMap['occupants'] = [
 	...amoongussCompostResearchers,
 	...seedvaultResearcher,
 	...dragoniteTaxi,
+	...chuckLine,
 ];

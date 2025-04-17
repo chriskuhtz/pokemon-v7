@@ -1452,11 +1452,27 @@ const specialTrainers: Challenger[] = [
 		type: 'TRAINER',
 		id: 'Gym Leader Morty',
 		team: [
-			makeChallengerPokemon({ name: 'trevenant', xp: 125000 }),
+			makeChallengerPokemon({
+				name: 'trevenant',
+				xp: 125000,
+				heldItemName: 'sitrus-berry',
+			}),
 			makeChallengerPokemon({ name: 'shedinja', xp: 125000 }),
-			makeChallengerPokemon({ name: 'gengar', xp: 125000 }),
-			makeChallengerPokemon({ name: 'misdreavus', xp: 125000 }),
-			makeChallengerPokemon({ name: 'aegislash-blade', xp: 125000 }),
+			makeChallengerPokemon({
+				name: 'gengar',
+				xp: 125000,
+				heldItemName: 'black-sludge',
+			}),
+			makeChallengerPokemon({
+				name: 'mismagius',
+				xp: 125000,
+				heldItemName: 'twisted-spoon',
+			}),
+			makeChallengerPokemon({
+				name: 'aegislash-blade',
+				xp: 125000,
+				heldItemName: 'sitrus-berry',
+			}),
 		],
 		inventory: EmptyInventory,
 		availableAfter: 'catch Haunter and Mightyena',
@@ -1466,15 +1482,74 @@ const specialTrainers: Challenger[] = [
 		type: 'TRAINER',
 		id: 'Gym Leader Falkner',
 		team: [
-			makeChallengerPokemon({ name: 'noctowl', xp: 125000 }),
-			makeChallengerPokemon({ name: 'pidgeot', xp: 125000 }),
-			makeChallengerPokemon({ name: 'braviary', xp: 125000 }),
-			makeChallengerPokemon({ name: 'skarmory', xp: 125000 }),
-			makeChallengerPokemon({ name: 'gliscor', xp: 125000 }),
+			makeChallengerPokemon({
+				name: 'noctowl',
+				xp: 125000,
+				heldItemName: 'sitrus-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'pidgeot',
+				xp: 125000,
+				heldItemName: 'leftovers',
+			}),
+			makeChallengerPokemon({
+				name: 'braviary',
+				xp: 125000,
+				heldItemName: 'sharp-beak',
+			}),
+			makeChallengerPokemon({
+				name: 'skarmory',
+				xp: 125000,
+				heldItemName: 'metal-coat',
+			}),
+			makeChallengerPokemon({
+				name: 'gliscor',
+				xp: 125000,
+				heldItemName: 'razor-fang',
+			}),
 		],
 		inventory: EmptyInventory,
 		availableAfter: 'catch the legendary bird of ice',
 		trainer: { name: 'Gym Leader Falkner', sprite: SpriteEnum.falkner },
+	},
+	{
+		type: 'TRAINER',
+		id: 'Gym Leader Chuck',
+		team: [
+			makeChallengerPokemon({
+				name: 'machamp',
+				xp: 125000,
+				heldItemName: 'black-belt',
+			}),
+			makeChallengerPokemon({
+				name: 'hitmonlee',
+				xp: 125000,
+				heldItemName: 'leftovers',
+			}),
+			makeChallengerPokemon({
+				name: 'emboar',
+				xp: 125000,
+				heldItemName: 'charcoal',
+			}),
+			makeChallengerPokemon({
+				name: 'poliwrath',
+				xp: 125000,
+				heldItemName: 'mystic-water',
+			}),
+			makeChallengerPokemon({
+				name: 'hawlucha',
+				xp: 125000,
+				heldItemName: 'sharp-beak',
+			}),
+			makeChallengerPokemon({
+				name: 'kommo-o',
+				xp: 125000,
+				heldItemName: 'dragon-fang',
+			}),
+		],
+		inventory: EmptyInventory,
+		availableAfter: 'deal 10000 damage with one attack',
+		trainer: { name: 'Gym Leader Chuck', sprite: SpriteEnum.chuck },
 	},
 	{
 		type: 'TRAINER',
