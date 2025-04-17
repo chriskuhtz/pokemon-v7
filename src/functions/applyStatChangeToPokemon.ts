@@ -13,7 +13,7 @@ export const applyStatChangeToPokemon = (
 	battleFieldEffects: BattleFieldEffect[],
 	addMessage?: (x: Message) => void,
 	suffix?: string
-) => {
+): BattlePokemon => {
 	if (
 		initialModifier > 6 ||
 		initialModifier < -6 ||
@@ -94,7 +94,7 @@ export const applyStatChangeToPokemon = (
 	if (pokemon.ability === 'hyper-cutter' && stat === 'attack' && modifier < 1) {
 		if (addMessage) {
 			addMessage({
-				message: `${pokemon.data.name} prevents attackreduction with ${pokemon.ability}`,
+				message: `${pokemon.data.name} prevents attack reduction with ${pokemon.ability}`,
 			});
 		}
 
@@ -137,7 +137,7 @@ export const applyStatChangeToPokemon = (
 		modifier < 0 &&
 		pokemon.statBoosts.attack < 6
 	) {
-		applyStatChangeToPokemon(
+		return applyStatChangeToPokemon(
 			{
 				...pokemon,
 				statBoosts: { ...pokemon.statBoosts, [stat]: limitedStat },
@@ -148,6 +148,24 @@ export const applyStatChangeToPokemon = (
 			battleFieldEffects,
 			addMessage,
 			'with defiant'
+		);
+	}
+	if (
+		pokemon.ability === 'competitive' &&
+		modifier < 0 &&
+		pokemon.statBoosts['special-attack'] < 6
+	) {
+		return applyStatChangeToPokemon(
+			{
+				...pokemon,
+				statBoosts: { ...pokemon.statBoosts, [stat]: limitedStat },
+			},
+			'special-attack',
+			2,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'with competitive'
 		);
 	}
 
