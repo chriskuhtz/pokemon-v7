@@ -304,6 +304,7 @@ const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 
 const catchQuestsForRoute = (
 	route: OverworldMap,
+	includeWater: boolean,
 	requiredUpgrade?: CampUpgrade
 ): Partial<Record<string, Quest>> => {
 	return {
@@ -342,7 +343,7 @@ const catchQuestsForRoute = (
 						conditionFunction: (s) => {
 							return [
 								...route.possibleEncounters.BASE,
-								...route.possibleEncounters.WATER,
+								...(includeWater ? route.possibleEncounters.WATER : []),
 								...route.possibleEncounters[time],
 							].every((e) =>
 								s.pokedex[e.name].caughtOnRoutes.includes(route.id)
@@ -352,7 +353,7 @@ const catchQuestsForRoute = (
 							...new Set(
 								[
 									...route.possibleEncounters.BASE,
-									...route.possibleEncounters.WATER,
+									...(includeWater ? route.possibleEncounters.WATER : []),
 									...route.possibleEncounters[time],
 								].map((p) => p.name)
 							),
@@ -403,13 +404,13 @@ const catchQuestsForRoute = (
 };
 
 const catchQuests = {
-	...catchQuestsForRoute(routeN1),
-	...catchQuestsForRoute(routeN1E1, 'machete certification'),
-	...catchQuestsForRoute(routeE1, 'sledge hammer certification'),
-	...catchQuestsForRoute(routeS1E1, 'swimming certification'),
-	...catchQuestsForRoute(routeS1W1, 'swimming certification'),
-	...catchQuestsForRoute(routeW1, 'swimming certification'),
-	...catchQuestsForRoute(routeN1W1, 'buy skiing equipment'),
+	...catchQuestsForRoute(routeN1, false),
+	...catchQuestsForRoute(routeN1E1, false, 'machete certification'),
+	...catchQuestsForRoute(routeE1, false, 'sledge hammer certification'),
+	...catchQuestsForRoute(routeS1E1, true, 'swimming certification'),
+	...catchQuestsForRoute(routeS1W1, true, 'swimming certification'),
+	...catchQuestsForRoute(routeW1, true, 'swimming certification'),
+	...catchQuestsForRoute(routeN1W1, true, 'buy skiing equipment'),
 };
 
 export const questNames = [
