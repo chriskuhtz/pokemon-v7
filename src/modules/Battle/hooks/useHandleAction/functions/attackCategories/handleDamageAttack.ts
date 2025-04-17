@@ -4,6 +4,7 @@ import { applyAttackStatChanges } from '../../../../../../functions/applyAttackS
 import { calculateDamage } from '../../../../../../functions/calculateDamage';
 import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
+import { getPlayerId } from '../../../../../../functions/getPlayerId';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import { isRemovedByRapidSpin } from '../../../../../../interfaces/Ailment';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
@@ -114,7 +115,7 @@ export const handleDamageAttack = ({
 			addMessage
 		);
 
-	if (damage > 0) {
+	if (damage > 0 && updatedAttacker.ownerId === getPlayerId()) {
 		logDamage(damage);
 		addMessage({ message: `${damage} Damage` });
 	}

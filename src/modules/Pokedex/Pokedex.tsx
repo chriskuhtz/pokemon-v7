@@ -20,6 +20,7 @@ export const Pokedex = () => {
 				<AnimatedBar
 					max={pokemonNames.length}
 					offset={
+						pokemonNames.length -
 						Object.values(saveFile.pokedex).filter(
 							(val) => val.seenOnRoutes.length > 0
 						).length

@@ -73,6 +73,10 @@ export const SeedVault = () => {
 	);
 	const navigate = useNavigate();
 
+	const max = itemTypes.filter(
+		(item) => isBerry(item) || isApricorn(item) || isHerb(item)
+	).length;
+
 	return (
 		<Page
 			headline="Seed Vault"
@@ -87,14 +91,7 @@ export const SeedVault = () => {
 				research point
 			</h3>
 			<h3>Species registered:</h3>
-			<AnimatedBar
-				max={
-					itemTypes.filter(
-						(item) => isBerry(item) || isApricorn(item) || isHerb(item)
-					).length
-				}
-				offset={saveFile.seedVault.length}
-			/>
+			<AnimatedBar max={max} offset={max - saveFile.seedVault.length} />
 			{possibleDonations.length > 0 && (
 				<>
 					<h3>Donate:</h3>

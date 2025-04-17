@@ -328,7 +328,7 @@ export const extraFeatureCheckList: {
 	{ name: 'campupgrade: skiing equipment', handled: true },
 	{ name: 'more vileplume products', handled: true },
 	{ name: 'damage record should be chucks quest line', handled: true },
-	{ name: 'trainer AI' },
+	{ name: 'trainer AI', handled: true },
 	{ name: 'more cooking recipes' },
 	{ name: 'cost for move learning depends on name length chiffre' },
 	{ name: 'catch x pokemon should be oaks quest line' },
@@ -380,4 +380,8 @@ export const extraFeatureCheckList: {
 	{ name: 'team rocket' },
 	{ name: 'miltank milk as cooking ingredient' },
 	{ name: 'moltres and zapdos' },
+	{ name: 'releasing pokemon ends fullscreen mode' },
+	{
+		name: 'even more trainer ai',
+	},
 ];
