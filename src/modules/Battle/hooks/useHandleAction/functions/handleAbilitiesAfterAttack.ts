@@ -61,6 +61,22 @@ export const handleAbilitiesAfterAttack = (
 		);
 		updatedAttacker = b;
 	}
+	//check for magician
+	if (
+		target.ability === 'magician' &&
+		contactMoves.includes(move.name) &&
+		updatedAttacker.heldItemName &&
+		!target.heldItemName
+	) {
+		addMessage({
+			message: `${updatedTarget.name} stole ${updatedAttacker.name}'s ${updatedAttacker.heldItemName} with magician`,
+		});
+		updatedTarget = {
+			...updatedTarget,
+			heldItemName: updatedAttacker.heldItemName,
+		};
+		updatedAttacker = { ...updatedAttacker, heldItemName: undefined };
+	}
 	//check for flame-body
 	if (
 		target.ability === 'flame-body' &&
