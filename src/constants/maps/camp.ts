@@ -8,7 +8,7 @@ export const camp: OverworldMap = {
 	occupants: campOccupants,
 	timeOfDayShadersMap: defaultShaderMap,
 	possibleEncounters: {
-		WATER: [{ name: 'feebas', minXp: 125, maxXp: 125, rarity: 'common' }],
+		WATER: [],
 		BASE: [],
 		MORNING: [],
 		DAY: [],

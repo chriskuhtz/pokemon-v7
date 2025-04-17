@@ -1,7 +1,7 @@
 import { EncounterMap } from '../encounters';
 
 export const routeN1Encounters: EncounterMap = {
-	WATER: [],
+	WATER: [{ name: 'feebas', minXp: 125, maxXp: 125, rarity: 'common' }],
 	BASE: [
 		{ name: 'pikachu', minXp: 8, maxXp: 216, rarity: 'common' },
 		{ name: 'eevee', minXp: 8, maxXp: 216, rarity: 'common' },

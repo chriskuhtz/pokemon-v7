@@ -24,7 +24,7 @@ export const overworldCheckList: {
 	{ name: 'design route n1w1 encounters', handled: true },
 	{ name: 'design route n1w1 items', handled: true },
 	{ name: 'champ chris on route n1w1', handled: true },
-	{ name: 'water on route N1' },
+	{ name: 'water on route N1', handled: true },
 	{ name: 'move onixCave to custom sheet' },
 	{ name: 'move routeN1E1 to custom sheet' },
 	{ name: 'move routeE1 to custom sheet' },

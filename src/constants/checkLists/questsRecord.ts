@@ -679,8 +679,8 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch a feebas': {
-		rewardItems: { 'master-ball': 1 },
-		researchPoints: 100,
+		rewardItems: { 'net-ball': 10, 'old-gateau': 2 },
+		researchPoints: 25,
 		targetPokemon: ['feebas'],
 		conditionFunction: (s) => {
 			return s.pokedex.feebas.caughtOnRoutes.length > 0;

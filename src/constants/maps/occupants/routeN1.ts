@@ -52,6 +52,16 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 	},
 	{
 		type: 'ITEM',
+		x: 46,
+		y: 4,
+		item: 'lucky-egg',
+		amount: 1,
+		id: 'routeN1_lucky-egg',
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'routeN1_lucky-egg'),
+	},
+	{
+		type: 'ITEM',
 		x: 13,
 		y: 44,
 		item: 'black-apricorn',
