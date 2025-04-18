@@ -27,13 +27,13 @@ import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useEncounterRateModifier } from './hooks/useEncounterRateModifier';
 import { useInteractWithLedge } from './hooks/useInteractWithLedge';
+import { useInteractWithTrainer } from './hooks/useInteractWithTrainer';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useMachete } from './hooks/useMachete';
 import { useOccupants } from './hooks/useOccupants';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
 import { useSledgeHammer } from './hooks/useSledgeHammer';
 import { useStartEncounter } from './hooks/useStartEncounter';
-import { useInteractWithTrainer } from './hooks/useInteractWithTrainer';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -186,7 +186,7 @@ export const Overworld = ({
 
 	return (
 		<div>
-			<OverworldMenus stepsTaken={stepsTaken} />
+			<OverworldMenus stepsTaken={stepsTaken} setNextInput={setNextInput} />
 
 			<div className="overworldPage">
 				<div id="canvassesAndShaders" style={{ position: 'relative' }}>

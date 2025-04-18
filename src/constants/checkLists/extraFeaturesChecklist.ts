@@ -335,7 +335,7 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'miltank milk as cooking ingredient', handled: true },
-	{ name: 'movement buttons' },
+	{ name: 'movement buttons', handled: true },
 	{ name: 'catch x pokemon should be oaks quest line' },
 	{ name: 'training field 5' },
 	{ name: 'wild apricorn trees' },
