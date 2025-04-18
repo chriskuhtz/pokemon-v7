@@ -56,7 +56,9 @@ export const applyDrainOrRecoil = (
 				damage: updatedAttacker.damage + totalDrain,
 			};
 		} else {
-			const totalDrain = getMiddleOfThree([0, drain, attacker.damage]);
+			const totalDrain = Math.round(
+				getMiddleOfThree([0, drain, attacker.damage])
+			);
 			if (totalDrain !== 0) {
 				addMessage({
 					message: `${updatedAttacker.data.name} restored ${totalDrain} HP`,
