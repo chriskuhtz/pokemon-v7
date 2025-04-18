@@ -19,11 +19,10 @@ export const determineRunawaySuccess = (
 			0
 		) / opponents.length;
 
-	if (runAwayer || avgteamLevel > avgOpsLevel) {
+	if (runAwayer) {
 		return true;
 	}
-	return (
-		avgOpsLevel >= avgteamLevel &&
-		Math.random() + (avgOpsLevel - avgteamLevel) * 0.05 < 0.5
-	);
+	const advantage = (avgteamLevel - avgOpsLevel) / 100;
+
+	return Math.random() + advantage > 0.5;
 };
