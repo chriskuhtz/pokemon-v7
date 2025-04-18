@@ -390,4 +390,5 @@ export const extraFeatureCheckList: {
 		name: 'conditional trainers (only x pokemon, no overlevelling,etc)',
 	},
 	{ name: 'gym leaders on routes, earn all badges' },
+	{ name: 'categories for upgrades' },
 ];
