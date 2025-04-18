@@ -1,8 +1,8 @@
 export type GrowthRateName =
 	| 'slow'
+	| 'medium slow'
 	| 'medium'
 	| 'fast'
-	| 'medium slow'
 	| 'erratic'
 	| 'fluctuating';
 
