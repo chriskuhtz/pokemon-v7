@@ -5,7 +5,7 @@ const pikachuFanBase: Omit<
 	OverworldNpc,
 	'unhandledMessage' | 'conditionFunction' | 'id'
 > = {
-	x: 11,
+	x: 14,
 	y: 3,
 	orientation: 'DOWN',
 	type: 'NPC',
