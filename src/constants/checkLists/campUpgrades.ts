@@ -48,6 +48,12 @@ export const campUpgradeNames = [
 
 export type CampUpgrade = (typeof campUpgradeNames)[number];
 
+export type CampUpgradeCategory =
+	| 'Sustainability'
+	| 'Exploration'
+	| 'Research'
+	| 'Training';
+
 export const baseRequirements: CampUpgrade[] = [
 	'bulletin_board',
 	'berry_farm',
@@ -103,6 +109,54 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 		(name) => name !== 'dragonite taxi'
 	),
 };
+export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
+	bulletin_board: 'Research',
+	berry_farm: 'Sustainability',
+	'create seed vault': 'Sustainability',
+	'invite apricorn smith kurt': 'Sustainability',
+	'invite move tutor': 'Training',
+	'invite ghost expert morty': 'Research',
+	'invite fighting expert chuck': 'Research',
+	'invite flying pokemon expert falkner': 'Research',
+	'invite professor rowan': 'Research',
+	'invite professor elm': 'Research',
+	'invite pikachu fan': 'Research',
+	'machete certification': 'Exploration',
+	'training field 1': 'Training',
+	'training field 2': 'Training',
+	'training field 3': 'Training',
+	'training field 4': 'Training',
+	'build combee hive': 'Sustainability',
+	'build miltank farm': 'Sustainability',
+	'invite chef grandma': 'Sustainability',
+	'pokemon swarm radar': 'Research',
+	'second slot for farm': 'Sustainability',
+	'third slot for farm': 'Sustainability',
+	'fourth slot for farm': 'Sustainability',
+	'fifth slot for farm': 'Sustainability',
+	'sixth slot for farm': 'Sustainability',
+	'seventh slot for farm': 'Sustainability',
+	'invite zigzagoon foragers': 'Sustainability',
+	'invite dugtrio explorers': 'Sustainability',
+	'invite amoongus compost researcher': 'Sustainability',
+	'invite vileplume scent researcher': 'Sustainability',
+	'invite museum curator': 'Sustainability',
+	'sledge hammer certification': 'Exploration',
+	'shovel certification': 'Exploration',
+	'swimming certification': 'Exploration',
+	'buy skiing equipment': 'Exploration',
+	'bag size upgrade 1': 'Exploration',
+	'bag size upgrade 2': 'Exploration',
+	'bag size upgrade 3': 'Exploration',
+	'invite fossil expert': 'Research',
+	'berry lure station routeN1': 'Research',
+	'berry lure station routeN1E1': 'Research',
+	'berry lure station routeE1': 'Research',
+	'berry lure station routeS1E1': 'Research',
+	'berry lure station routeS1W1': 'Research',
+	'dragonite taxi': 'Exploration',
+};
+
 export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	bulletin_board: 'A place for people to post quests',
 	berry_farm: 'Berries and Apricorns are our main resources',

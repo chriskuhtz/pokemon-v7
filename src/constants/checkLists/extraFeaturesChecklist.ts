@@ -336,8 +336,10 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'miltank milk as cooking ingredient', handled: true },
 	{ name: 'movement buttons', handled: true },
+	{ name: 'categories for upgrades', handled: true },
 	{ name: 'catch x pokemon should be oaks quest line' },
 	{ name: 'training field 5' },
+	{ name: 'training field 6' },
 	{ name: 'wild apricorn trees' },
 	{ name: 'training field route' },
 	{ name: 'actually use growth rates' },
@@ -390,6 +392,5 @@ export const extraFeatureCheckList: {
 		name: 'conditional trainers (only x pokemon, no overlevelling,etc)',
 	},
 	{ name: 'gym leaders on routes, earn all badges' },
-	{ name: 'categories for upgrades' },
 	{ name: 'split hat pikachu and costume pikachu quests' },
 ];

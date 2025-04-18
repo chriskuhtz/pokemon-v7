@@ -1,8 +1,12 @@
 import { useCallback, useContext, useMemo } from 'react';
-import { FaCheckCircle } from 'react-icons/fa';
-import { LuHousePlus } from 'react-icons/lu';
+import { FaCheckCircle, FaFistRaised } from 'react-icons/fa';
+import { GiMountainRoad } from 'react-icons/gi';
+import { HiBeaker } from 'react-icons/hi';
+import { PiFarm } from 'react-icons/pi';
 import {
 	CampUpgrade,
+	campUpgradeCategories,
+	CampUpgradeCategory,
 	campUpgradeConditions,
 	campUpgradeExplanations,
 	campUpgradeNames,
@@ -85,12 +89,14 @@ export const CampUpgrades = ({
 						disabled={campUpgrades[upgrade]}
 						content={
 							<div>
-								<h3>{replaceRouteName(upgrade)}</h3>
+								<h3>
+									{campUpgradeCategories[upgrade]}: {replaceRouteName(upgrade)}
+								</h3>
 
 								<h4>{campUpgradeExplanations[upgrade]}</h4>
 								<br />
 								{!campUpgrades[upgrade] && (
-									<h4>Research Points: {currentPrice || 'FREE'}</h4>
+									<h4>Research Points: {currentPrice}</h4>
 								)}
 							</div>
 						}
@@ -109,10 +115,23 @@ export const CampUpgrades = ({
 										</button>,
 								  ]
 						}
-						icon={<LuHousePlus size={battleSpriteSize} />}
+						icon={<CampUpgradeIcon category={campUpgradeCategories[upgrade]} />}
 					/>
 				))}
 			</Stack>
 		</Page>
 	);
+};
+
+const CampUpgradeIcon = ({ category }: { category: CampUpgradeCategory }) => {
+	if (category === 'Training') {
+		return <FaFistRaised size={battleSpriteSize} />;
+	}
+	if (category === 'Research') {
+		return <HiBeaker size={battleSpriteSize} />;
+	}
+	if (category === 'Exploration') {
+		return <GiMountainRoad size={battleSpriteSize} />;
+	}
+	return <PiFarm size={battleSpriteSize} />;
 };
