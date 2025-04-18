@@ -222,6 +222,13 @@ export const calculateDamage = (
 		return { damage: 0 };
 	}
 
+	if (attack.name === 'endeavor') {
+		const attackerRemainingHp = attacker.stats.hp - attacker.damage;
+		const targetRemainingHp = target.stats.hp - target.damage;
+		const inflicted = targetRemainingHp - attackerRemainingHp;
+		return { damage: inflicted };
+	}
+
 	if (attack.name === 'counter') {
 		if (
 			attacker.lastReceivedDamage?.attack.data.damage_class.name ===

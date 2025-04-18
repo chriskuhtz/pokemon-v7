@@ -70,7 +70,23 @@ export const handleDamageAttack = ({
 		addMessage({ message: `${updatedAttacker.name} self destructed` });
 		updatedAttacker = { ...updatedAttacker, damage: updatedAttacker.stats.hp };
 	}
-
+	//endeavor
+	if (
+		move.name === 'endeavor' &&
+		updatedTarget.stats.hp - updatedTarget.damage <=
+			updatedAttacker.stats.hp - updatedAttacker.damage
+	) {
+		addMessage({ message: 'It failed' });
+		return pokemon.map((p) => {
+			if (p.id === updatedAttacker.id) {
+				return updatedAttacker;
+			}
+			if (p.id === updatedTarget.id) {
+				return updatedTarget;
+			}
+			return p;
+		});
+	}
 	//fake out
 	if (move.name === 'fake-out' && updatedAttacker.roundsInBattle !== 1) {
 		addMessage({ message: 'It failed' });
