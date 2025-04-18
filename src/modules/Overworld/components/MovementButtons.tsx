@@ -20,7 +20,6 @@ export const MovementButtons = ({
 	const [pressed, setPressed] = useState<CharacterOrientation | undefined>();
 
 	useEffect(() => {
-		console.log('pressed', pressed);
 		const int = setInterval(() => {
 			if (pressed && !latestMessage) {
 				setNextInput(pressed);
@@ -49,8 +48,6 @@ export const MovementButtons = ({
 		>
 			<span />
 			<FaArrowUp
-				role="button"
-				style={{ userSelect: 'none' }}
 				onPointerDown={() => setPressed('UP')}
 				onPointerOut={() => setPressed(undefined)}
 				onPointerLeave={() => setPressed(undefined)}
@@ -61,7 +58,6 @@ export const MovementButtons = ({
 			/>
 			<span />{' '}
 			<FaArrowLeft
-				style={{ userSelect: 'none' }}
 				onPointerDown={() => setPressed('LEFT')}
 				onPointerOut={() => setPressed(undefined)}
 				onPointerLeave={() => setPressed(undefined)}
@@ -72,7 +68,6 @@ export const MovementButtons = ({
 			/>
 			<span />{' '}
 			<FaArrowRight
-				style={{ userSelect: 'none' }}
 				onPointerDown={() => setPressed('RIGHT')}
 				onPointerOut={() => setPressed(undefined)}
 				onPointerLeave={() => setPressed(undefined)}
@@ -83,7 +78,6 @@ export const MovementButtons = ({
 			/>
 			<span />
 			<FaArrowDown
-				style={{ userSelect: 'none' }}
 				onPointerDown={() => setPressed('DOWN')}
 				onPointerOut={() => setPressed(undefined)}
 				onPointerLeave={() => setPressed(undefined)}
