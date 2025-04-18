@@ -6,7 +6,11 @@ import { getHeldItem } from '../functions/getHeldItem';
 import { isKO } from '../functions/isKo';
 import { reduceBattlePokemonToOwnedPokemon } from '../functions/reduceBattlePokemonToOwnedPokemon';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { Inventory, joinInventories } from '../interfaces/Inventory';
+import {
+	EmptyInventory,
+	Inventory,
+	joinInventories,
+} from '../interfaces/Inventory';
 import { pickupTable } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { SaveFileContext } from './useSaveFile';
@@ -43,8 +47,9 @@ export const useLeaveBattle = () => {
 
 			if (outcome === 'LOSS') {
 				if (
-					saveFile.settings?.rogueLike ||
-					saveFile.settings?.releaseFaintedPokemon
+					saveFile.location.mapId !== 'camp' &&
+					(saveFile.settings?.rogueLike ||
+						saveFile.settings?.releaseFaintedPokemon)
 				) {
 					reset();
 					return;
@@ -60,13 +65,22 @@ export const useLeaveBattle = () => {
 					patchSaveFileReducer({
 						meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
 						location: updatedLocation,
+						bag:
+							saveFile.location.mapId === 'camp'
+								? saveFile.bag
+								: EmptyInventory,
 					});
 					return;
 				}
 			}
 
 			const configCheckedTeam = updatedTeam.filter((p) => {
-				if (saveFile.settings?.releaseFaintedPokemon && isKO(p)) {
+				//pokemon that faint on training field are not released
+				if (
+					saveFile.settings?.releaseFaintedPokemon &&
+					isKO(p) &&
+					saveFile.location.mapId !== 'camp'
+				) {
 					return false;
 				}
 

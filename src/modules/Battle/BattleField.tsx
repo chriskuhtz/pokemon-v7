@@ -101,7 +101,7 @@ export const BattleField = ({
 	rewardItems?: Partial<Inventory>;
 }) => {
 	const {
-		saveFile: { settings },
+		saveFile: { settings, location },
 	} = useContext(SaveFileContext);
 	const isTrainerBattle = useMemo(() => !!challengerId, [challengerId]);
 
@@ -534,10 +534,19 @@ export const BattleField = ({
 		if (battleLost && !latestMessage) {
 			const { rogueLike } = getSettings() ?? {};
 			console.log('effect battlelost');
+
+			const message = () => {
+				if (location.mapId === 'camp') {
+					return 'luckily this was only a training battle';
+				}
+				if (rogueLike) {
+					return 'You lost the battle and have to reset';
+				}
+
+				return 'You lost the battle and rushed back to camp, loosing your item on the way';
+			};
 			addMessage({
-				message: rogueLike
-					? 'You lost the battle and have to reset'
-					: 'You lost the battle and rushed back home',
+				message: message(),
 				onRemoval: () => leaveWithCurrentData('LOSS'),
 			});
 		}
@@ -654,6 +663,7 @@ export const BattleField = ({
 		isTrainerBattle,
 		latestMessage,
 		leaveWithCurrentData,
+		location.mapId,
 		pokemon,
 		scatteredCoins,
 		settings,
