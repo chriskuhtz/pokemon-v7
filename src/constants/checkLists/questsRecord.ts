@@ -686,7 +686,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => {
 			return s.pokedex.feebas.caughtOnRoutes.length > 0;
 		},
-		availableAfter: 'catch a pikachu',
+		requiredUpgrade: 'swimming certification',
 		kind: 'BULLETIN',
 	},
 	'catch all honeytree pokemon': {
