@@ -14,6 +14,7 @@ import { getMiddleOfThree } from './getMiddleOfThree';
  */
 export const calculateLevelData = (
 	xp: number,
+
 	growthRate: GrowthRateName
 ): {
 	level: number;
@@ -21,20 +22,14 @@ export const calculateLevelData = (
 	progressToNextLevel: number;
 	xpForThisLevel: number;
 } => {
-	if (growthRate === 'slow') {
-		//slow growth rate 5*n^3/4
-		const calculated = Math.floor((5 * Math.cbrt(xp)) / 4);
-		//level must be between 1 and 100
-		const level = getMiddleOfThree([1, calculated, 100]);
-
-		const xpAtNextLevel = (4 * Math.pow(level + 1, 3)) / 5;
-		const xpForThisLevel = (4 * Math.pow(level, 3)) / 5;
-		const totalXpToNextLevel = xpAtNextLevel - xpForThisLevel;
-		const progressToNextLevel = (xp - xpForThisLevel) / totalXpToNextLevel;
-
-		return { level, progressToNextLevel, xpAtNextLevel, xpForThisLevel };
+	if (!growthRate) {
+		return {
+			level: 1,
+			progressToNextLevel: 1,
+			xpAtNextLevel: 1,
+			xpForThisLevel: 1,
+		};
 	}
-
 	//medium growth rate: n*n*n
 	const calculated = Math.floor(Math.cbrt(xp));
 	//level must be between 1 and 100
