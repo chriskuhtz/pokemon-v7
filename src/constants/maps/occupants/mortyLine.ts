@@ -19,6 +19,20 @@ export const mortyLine: Occupant[] = [
 
 		unhandledMessage: [
 			'I am Morty, a Gym Leader from Johto',
+			'I came here to investigate the paranormal',
+			'can you help me',
+		],
+		handledMessage: ['Ghosts are spooky, but also cool'],
+		quest: 'catch local dark and ghost pokemon',
+		conditionFunction: (s) =>
+			s.campUpgrades['invite ghost expert morty'] &&
+			s.quests['catch local dark and ghost pokemon'] !== 'COLLECTED',
+	},
+	{
+		...mortyBase,
+		id: 'morty_2',
+
+		unhandledMessage: [
 			'I have heard rumours',
 			'about a very rare ghost pokemon,',
 			'that is trapped in a ruin south of here',
@@ -27,19 +41,19 @@ export const mortyLine: Occupant[] = [
 		],
 		handledMessage: ['Did you find the rare ghost pokemon?'],
 		quest: 'catch a spiritomb',
-		gifts: { 'dusk-ball': 5 },
 		conditionFunction: (s) =>
 			s.campUpgrades['invite ghost expert morty'] &&
+			s.quests['catch local dark and ghost pokemon'] === 'COLLECTED' &&
 			s.quests['catch a spiritomb'] !== 'COLLECTED',
 	},
 	{
 		...mortyBase,
-		id: 'morty_2',
+		id: 'morty_3',
 
 		unhandledMessage: [
 			'Great work with spiritomb',
 			'Can i ask you to find out more',
-			'about the ghost and dark pokemon of this region',
+			'about the stronger ghost and dark pokemon of this region',
 		],
 		handledMessage: [
 			'If you complete this quest',
@@ -49,7 +63,6 @@ export const mortyLine: Occupant[] = [
 			'So dont feel too bad if you loose',
 		],
 		quest: 'catch Haunter and Mightyena',
-		gifts: { 'dusk-ball': 5 },
 		conditionFunction: (s) =>
 			s.campUpgrades['invite ghost expert morty'] &&
 			s.quests['catch a spiritomb'] === 'COLLECTED' &&

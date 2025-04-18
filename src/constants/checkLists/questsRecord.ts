@@ -108,7 +108,7 @@ const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 	},
 	'catch all NIGHT-time pokemon from routeN1E1': {
 		'net-ball': 5,
-		'odd-keystone': 1,
+		'pinap-berry': 2,
 		'berry-juice': 1,
 	},
 	//routeE1
@@ -423,6 +423,7 @@ export const questNames = [
 	'catch a pokemon',
 	'catch a spiritomb',
 	'catch Haunter and Mightyena',
+	'catch local dark and ghost pokemon',
 	'catch some local flying pokemon',
 	'evolve some local flying pokemon',
 	'evolve a flying pokemon to its final stage',
@@ -1337,8 +1338,23 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) =>
 			s.pokemon.some((p) => p.heightModifier && p.heightModifier > 0.9),
 	},
+	'catch local dark and ghost pokemon': {
+		rewardItems: { 'odd-keystone': 1 },
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			return (
+				s.pokedex['gastly'].caughtOnRoutes.length > 0 &&
+				s.pokedex['poochyena'].caughtOnRoutes.length > 0 &&
+				s.pokedex['murkrow'].caughtOnRoutes.length > 0 &&
+				s.pokedex['houndour'].caughtOnRoutes.length > 0 &&
+				s.pokedex['drifloon'].caughtOnRoutes.length > 0
+			);
+		},
+		targetPokemon: ['gastly', 'poochyena', 'murkrow', 'drifloon', 'houndour'],
+		kind: 'QUEST_LINE',
+	},
 	'catch Haunter and Mightyena': {
-		rewardItems: { 'rare-bone': 2 },
+		rewardItems: { 'dusk-ball': 5, 'dusk-stone': 1 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return (
