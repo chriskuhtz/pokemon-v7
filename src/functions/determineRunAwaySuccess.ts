@@ -24,7 +24,9 @@ export const determineRunawaySuccess = (
 	if (runAwayer) {
 		return true;
 	}
-	const advantage = (avgteamLevel - avgOpsLevel) / 100;
+
+	//ten levels higher, guaranteed escape
+	const advantage = (avgteamLevel - avgOpsLevel) / 20;
 
 	return Math.random() + advantage > 0.5;
 };
