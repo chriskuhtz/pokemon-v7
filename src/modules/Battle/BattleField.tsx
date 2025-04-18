@@ -444,8 +444,10 @@ export const BattleField = ({
 					updated = applySecondaryAilmentDamage(updated, (x) =>
 						collectedMessages.push(x)
 					);
-					updated = reduceSecondaryAilmentDurations(updated, (x) =>
-						collectedMessages.push(x)
+					updated = reduceSecondaryAilmentDurations(
+						updated,
+						(x) => collectedMessages.push(x),
+						allOnField
 					);
 
 					const allyIsHealer = !!pokemon.find(
@@ -508,6 +510,7 @@ export const BattleField = ({
 		}
 	}, [
 		addMultipleMessages,
+		allOnField,
 		battleFieldEffects,
 		battleStep,
 		battleWeather,

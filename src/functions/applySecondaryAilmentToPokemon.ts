@@ -60,7 +60,7 @@ export const applySecondaryAilmentToPokemon = ({
 			...pokemon,
 			secondaryAilments: [
 				...pokemon.secondaryAilments,
-				{ type: ailment, duration },
+				{ type: ailment, duration, by: applicator.id },
 			],
 		};
 	}
