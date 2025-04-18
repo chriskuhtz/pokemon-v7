@@ -26,7 +26,9 @@ export const applyDrainOrRecoil = (
 			return updatedAttacker;
 		} else {
 			const recoil = damage * (baseDrain / 100) * -1;
-			const totalRecoil = getMiddleOfThree([0, recoil, attacker.stats.hp]);
+			const totalRecoil = Math.round(
+				getMiddleOfThree([0, recoil, attacker.stats.hp])
+			);
 
 			addMessage({
 				message: `${updatedAttacker.data.name} took ${totalRecoil} HP recoil damage`,
@@ -43,11 +45,9 @@ export const applyDrainOrRecoil = (
 		const drain = damage * (baseDrain / 100) * bigRootFactor;
 
 		if (target.ability === 'liquid-ooze') {
-			const totalDrain = getMiddleOfThree([
-				0,
-				drain,
-				attacker.stats.hp - attacker.damage,
-			]);
+			const totalDrain = Math.round(
+				getMiddleOfThree([0, drain, attacker.stats.hp - attacker.damage])
+			);
 			addMessage({
 				message: `${updatedAttacker.data.name} took ${totalDrain} HP damage from liquid ooze`,
 			});
