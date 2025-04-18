@@ -72,8 +72,8 @@ export const StorageChest = () => {
 
 			<div
 				style={{
-					display: 'flex',
-					justifyContent: 'space-evenly',
+					display: 'grid',
+					gridTemplateColumns: '1fr 1fr',
 					gap: '.5rem',
 				}}
 			>
