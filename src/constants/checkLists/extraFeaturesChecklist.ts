@@ -334,6 +334,8 @@ export const extraFeatureCheckList: {
 		name: 'cost for move learning depends on name length modulo',
 		handled: true,
 	},
+	{ name: 'miltank milk as cooking ingredient', handled: true },
+	{ name: 'movement buttons' },
 	{ name: 'catch x pokemon should be oaks quest line' },
 	{ name: 'training field 5' },
 	{ name: 'wild apricorn trees' },
@@ -379,10 +381,12 @@ export const extraFeatureCheckList: {
 	{ name: 'Fishing?' },
 	{ name: 'training field challenge mode' },
 	{ name: 'team rocket' },
-	{ name: 'miltank milk as cooking ingredient' },
 	{ name: 'moltres and zapdos' },
-	{ name: 'releasing pokemon ends fullscreen mode' },
+	{ name: 'releasing pokemon should not end fullscreen mode' },
 	{
 		name: 'even more trainer ai',
+	},
+	{
+		name: 'conditional trainers (only x pokemon, no overlevelling,etc)',
 	},
 ];

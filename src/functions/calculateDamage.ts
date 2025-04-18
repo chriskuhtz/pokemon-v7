@@ -4,7 +4,7 @@ import {
 	levelDamageMoves,
 } from '../constants/fixedDamageMoves';
 import { flyDoubleDamageMoves, ohkoMoves } from '../constants/ohkoMoves';
-import { punchBasedMoves } from '../constants/punchBasedMoves';
+import { bitingMoves, punchBasedMoves } from '../constants/punchBasedMoves';
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -633,6 +633,10 @@ export const calculateDamage = (
 		attacker.lastReceivedDamage?.applicatorId === target.id
 			? 2
 			: 1;
+	const strongJawFactor =
+		attacker.ability === 'strong-jaw' && bitingMoves.includes(attack.name)
+			? 1.5
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -695,7 +699,8 @@ export const calculateDamage = (
 				sandForceFactor *
 				choiceSpecsFactor *
 				furCoatFactor *
-				revengeFactor
+				revengeFactor *
+				strongJawFactor
 		),
 		1
 	);
