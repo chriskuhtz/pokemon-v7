@@ -111,6 +111,13 @@ export const sortByPriority = (
 	) {
 		aPriority += 1;
 	}
+	if (
+		a.ability === 'gale-wings' &&
+		aMove?.type === 'BattleAttack' &&
+		aMove.data.type.name === 'flying'
+	) {
+		aPriority += 1;
+	}
 
 	let bPriority = bMove?.data.priority ?? 0;
 
