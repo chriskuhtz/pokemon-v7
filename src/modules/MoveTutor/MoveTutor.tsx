@@ -9,6 +9,7 @@ import { nameToIdMap } from '../../constants/pokemonNames';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { moveIsTeachable } from '../../functions/moveIsAvailable';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
+import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { joinInventories } from '../../interfaces/Inventory';
@@ -82,6 +83,9 @@ export const MoveTutor = () => {
 
 const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+	const { addMessage } = useContext(MessageQueueContext);
+
+	const [moveToConfirm, setMoveToConfirm] = useState<MoveName | undefined>();
 
 	const unlockMove = useCallback(
 		(move: MoveName, payment: ItemType) => {
@@ -101,8 +105,19 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 					return p;
 				}),
 			});
+			addMessage({
+				message: `${ownedPokemon.name} learned ${move}`,
+				needsNoConfirmation: true,
+			});
+			setMoveToConfirm(undefined);
 		},
-		[ownedPokemon, patchSaveFileReducer, saveFile.bag, saveFile.pokemon]
+		[
+			addMessage,
+			ownedPokemon,
+			patchSaveFileReducer,
+			saveFile.bag,
+			saveFile.pokemon,
+		]
 	);
 	const { res: data, invalidate } = useGetPokemonData(
 		nameToIdMap[ownedPokemon.name]
@@ -180,13 +195,26 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 					m,
 					calculateLevelData(ownedPokemon.xp, ownedPokemon.growthRate).level
 				);
+				const disabled = saveFile.bag[payment] < 1 || !available;
 				return (
 					<Card
 						key={m.move.name}
-						onClick={() => unlockMove(m.move.name as MoveName, payment)}
-						actionElements={[]}
+						onClick={() => setMoveToConfirm(m.move.name as MoveName)}
+						actionElements={
+							!disabled && moveToConfirm === m.move.name
+								? [
+										<strong
+											onClick={() =>
+												unlockMove(m.move.name as MoveName, payment)
+											}
+										>
+											Confirm
+										</strong>,
+								  ]
+								: []
+						}
 						icon={<ItemSprite item={payment} />}
-						disabled={saveFile.bag[payment] < 1 || !available}
+						disabled={disabled}
 						content={
 							<>
 								<strong>
