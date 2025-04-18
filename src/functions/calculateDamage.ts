@@ -630,6 +630,8 @@ export const calculateDamage = (
 		attacker.ability === 'strong-jaw' && bitingMoves.includes(attack.name)
 			? 1.5
 			: 1;
+	const refrigerateFactor =
+		attacker.ability === 'refrigerate' && attackType === 'normal' ? 1.3 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -693,7 +695,8 @@ export const calculateDamage = (
 				choiceSpecsFactor *
 				furCoatFactor *
 				revengeFactor *
-				strongJawFactor
+				strongJawFactor *
+				refrigerateFactor
 		),
 		1
 	);
