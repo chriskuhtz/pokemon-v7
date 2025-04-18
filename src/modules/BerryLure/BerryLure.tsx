@@ -9,7 +9,7 @@ import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Challenger } from '../../interfaces/Challenger';
-import { EmptyInventory } from '../../interfaces/Inventory';
+import { EmptyInventory, joinInventories } from '../../interfaces/Inventory';
 import { BerryType, superEffectiveSaveTable } from '../../interfaces/Item';
 import { Occupant } from '../../interfaces/OverworldMap';
 import { PokemonType } from '../../interfaces/PokemonType';
@@ -147,7 +147,7 @@ export const BerryLure = () => {
 				throw new Error('What did you put in the lure');
 			}
 
-			const succeded = Math.random() > 0.5;
+			const succeded = Math.random() > 0.25;
 
 			const getRouteBasedLureEncounter = (): PokemonName => {
 				if (saveFile.location.mapId === 'routeN1E1') {
@@ -219,6 +219,7 @@ export const BerryLure = () => {
 									activeTab: 'BATTLE',
 									currentChallenger: challenger,
 								},
+								bag: joinInventories(saveFile.bag, { [berry]: 1 }, true),
 								mileStones: {
 									...saveFile.mileStones,
 									luredWithBerries: [
@@ -251,20 +252,24 @@ export const BerryLure = () => {
 						needsNoConfirmation: true,
 					},
 					{
-						message: 'No Pokemon seem interested right now',
-						onRemoval: () => navigate('OVERWORLD', 'BERRY_LURE'),
+						message: 'A nimble pokemon must have snatched the berry',
+					},
+					{
+						message: 'while you looked away',
+						onRemoval: () => {
+							patchSaveFileReducer({
+								meta: {
+									...saveFile.meta,
+									activeTab: 'OVERWORLD',
+								},
+								bag: joinInventories(saveFile.bag, { [berry]: 1 }, true),
+							});
+						},
 					},
 				]);
 			}
 		},
-		[
-			addMultipleMessages,
-			navigate,
-			patchSaveFileReducer,
-			saveFile.location.mapId,
-			saveFile.meta,
-			saveFile.mileStones,
-		]
+		[addMultipleMessages, patchSaveFileReducer, saveFile]
 	);
 	return (
 		<Page
@@ -285,7 +290,7 @@ export const BerryLure = () => {
 									onClick={() => lure(berry)}
 									content={
 										<h3>
-											Put a {berry} into the lure to attract {lureType?.[0]}
+											Put a {berry} into the lure to attract {lureType?.[0]}{' '}
 											pokemon
 										</h3>
 									}

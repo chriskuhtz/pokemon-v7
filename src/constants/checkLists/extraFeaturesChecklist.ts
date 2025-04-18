@@ -391,4 +391,5 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'gym leaders on routes, earn all badges' },
 	{ name: 'categories for upgrades' },
+	{ name: 'split hat pikachu and costume pikachu quests' },
 ];
