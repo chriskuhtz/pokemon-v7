@@ -121,6 +121,12 @@ export const getPower = (
 	target: BattlePokemon,
 	attackerLevel: number
 ) => {
+	if (attack.name === 'eruption') {
+		const remainingHp = attacker.stats.hp - attacker.damage;
+		const percentage = remainingHp / attacker.stats.hp;
+
+		return (attack.data.power ?? 0) * percentage;
+	}
 	if (attack.name === 'fury-cutter') {
 		return (attack.data.power ?? 0) * (attacker.furyCutterStack ?? 1);
 	}
