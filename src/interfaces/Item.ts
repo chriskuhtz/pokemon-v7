@@ -246,6 +246,7 @@ export const valuables = [
 	'odd-keystone',
 	'deep-sea-tooth',
 	'deep-sea-scale',
+	'prism-scale',
 ] as const;
 export const mulches = [
 	'growth-mulch',

@@ -82,8 +82,9 @@ export const determineEvoChecks = (
 		}
 
 		const happiness = min_happiness ?? min_affection ?? min_beauty ?? 0;
+
 		if (ownedPokemon.happiness <= happiness) {
-			res.push(`${min_happiness} Happiness`);
+			res.push(`${happiness} Happiness`);
 		}
 		if (time_of_day && getTimeOfDay().toLowerCase() !== time_of_day) {
 			res.push(`${time_of_day}-time`);
