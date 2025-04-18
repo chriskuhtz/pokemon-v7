@@ -12,7 +12,11 @@ import {
 	getBagLimit,
 	getTotalInventoryAmount,
 } from '../components/BagLimitBar/BagLimitBar';
-import { QuestName, QuestsRecord } from '../constants/checkLists/questsRecord';
+import {
+	QuestName,
+	questNames,
+	QuestsRecord,
+} from '../constants/checkLists/questsRecord';
 import {
 	emptyPokedex,
 	localStorageId,
@@ -90,9 +94,12 @@ export interface UseSaveFile {
 }
 const migrateSavefile = (input: SaveFile) => {
 	const updatedInput = { ...input };
-	if (!updatedInput.storage) {
-		updatedInput.storage = EmptyInventory;
-	}
+
+	questNames.forEach((name) => {
+		if (updatedInput.quests[name] === undefined) {
+			updatedInput.quests[name] = 'INACTIVE';
+		}
+	});
 	return updatedInput;
 };
 const useSaveFile = (
