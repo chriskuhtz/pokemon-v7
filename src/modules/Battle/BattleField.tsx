@@ -549,7 +549,7 @@ export const BattleField = ({
 			);
 			//XP
 			let gainedXp = defeatedPokemon.reduce((sum, d) => {
-				const { level } = calculateLevelData(d.xp);
+				const { level } = calculateLevelData(d.xp, d.growthRate);
 
 				return sum + Math.floor((d.data.base_experience * level) / 7);
 			}, 0);
@@ -589,8 +589,11 @@ export const BattleField = ({
 					if (!prev) {
 						return;
 					}
-					const prevLevel = calculateLevelData(prev.xp).level;
-					const level = calculateLevelData(pokemon.xp).level;
+					const prevLevel = calculateLevelData(prev.xp, prev.growthRate).level;
+					const level = calculateLevelData(
+						pokemon.xp,
+						pokemon.growthRate
+					).level;
 
 					if (prevLevel !== level) {
 						return { message: `${pokemon.name} reached level ${level}` };

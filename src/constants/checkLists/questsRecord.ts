@@ -1004,7 +1004,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'exp-share': 1, 'big-malasada': 1 },
 		researchPoints: 10,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 10);
+			return s.pokemon.some(
+				(p) => calculateLevelData(p.xp, p.growthRate).level >= 10
+			);
 		},
 		kind: 'BULLETIN',
 	},
@@ -1012,7 +1014,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'rare-candy': 2, 'pewter-crunchies': 2 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 20);
+			return s.pokemon.some(
+				(p) => calculateLevelData(p.xp, p.growthRate).level >= 20
+			);
 		},
 		kind: 'BULLETIN',
 		availableAfter: 'train a pokemon to level 10',
@@ -1021,7 +1025,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'rare-candy': 3, 'moomoo-cheese': 3 },
 		researchPoints: 30,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 30);
+			return s.pokemon.some(
+				(p) => calculateLevelData(p.xp, p.growthRate).level >= 30
+			);
 		},
 		kind: 'BULLETIN',
 		availableAfter: 'train a pokemon to level 20',
@@ -1030,7 +1036,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'rare-candy': 4, 'lumiose-galette': 4 },
 		researchPoints: 40,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 40);
+			return s.pokemon.some(
+				(p) => calculateLevelData(p.xp, p.growthRate).level >= 40
+			);
 		},
 		kind: 'BULLETIN',
 		availableAfter: 'train a pokemon to level 30',
@@ -1039,7 +1047,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'rare-candy': 5, casteliacone: 5 },
 		researchPoints: 50,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 50);
+			return s.pokemon.some(
+				(p) => calculateLevelData(p.xp, p.growthRate).level >= 50
+			);
 		},
 		kind: 'BULLETIN',
 		availableAfter: 'train a pokemon to level 40',
@@ -1048,7 +1058,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'rare-candy': 6, 'rage-candy-bar': 6 },
 		researchPoints: 60,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 60);
+			return s.pokemon.some(
+				(p) => calculateLevelData(p.xp, p.growthRate).level >= 60
+			);
 		},
 		kind: 'BULLETIN',
 		availableAfter: 'train a pokemon to level 50',
@@ -1057,7 +1069,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'rare-candy': 7, 'big-malasada': 7 },
 		researchPoints: 70,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 70);
+			return s.pokemon.some(
+				(p) => calculateLevelData(p.xp, p.growthRate).level >= 70
+			);
 		},
 		kind: 'BULLETIN',
 		availableAfter: 'train a pokemon to level 60',
@@ -1066,7 +1080,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'rare-candy': 8, 'pewter-crunchies': 8 },
 		researchPoints: 80,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 80);
+			return s.pokemon.some(
+				(p) => calculateLevelData(p.xp, p.growthRate).level >= 80
+			);
 		},
 		kind: 'BULLETIN',
 		availableAfter: 'train a pokemon to level 70',
@@ -1075,7 +1091,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'rare-candy': 9, casteliacone: 9 },
 		researchPoints: 90,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 90);
+			return s.pokemon.some(
+				(p) => calculateLevelData(p.xp, p.growthRate).level >= 90
+			);
 		},
 		kind: 'BULLETIN',
 		availableAfter: 'train a pokemon to level 90',
@@ -1084,7 +1102,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'rare-candy': 10, 'lumiose-galette': 10 },
 		researchPoints: 100,
 		conditionFunction: (s) => {
-			return s.pokemon.some((p) => calculateLevelData(p.xp).level >= 100);
+			return s.pokemon.some(
+				(p) => calculateLevelData(p.xp, p.growthRate).level >= 100
+			);
 		},
 		kind: 'BULLETIN',
 		availableAfter: 'train a pokemon to level 100',

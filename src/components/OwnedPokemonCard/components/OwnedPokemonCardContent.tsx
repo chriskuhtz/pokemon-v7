@@ -51,7 +51,10 @@ export const OwnedPokemonCardContent = ({
 	const [nickNameMenuOpen, setNickNameMenuOpen] = useState<boolean>(false);
 
 	const typeNames = getTypeNames({ ...ownedPokemon, data });
-	const { level } = calculateLevelData(ownedPokemon.xp);
+	const { level } = calculateLevelData(
+		ownedPokemon.xp,
+		ownedPokemon.growthRate
+	);
 
 	const heldItem = getHeldItem(ownedPokemon);
 
@@ -121,13 +124,14 @@ export const OwnedPokemonCardContent = ({
 								getStats(
 									data.stats,
 									ownedPokemon.xp,
+									ownedPokemon.growthRate,
 									ownedPokemon.nature,
 									ownedPokemon.effortValues
 								).hp
 							}
 							damage={ownedPokemon.damage}
 						/>
-						<XpBar xp={ownedPokemon.xp} />
+						<XpBar xp={ownedPokemon.xp} growthRate={ownedPokemon.growthRate} />
 
 						<PrimaryAilmentIcon primaryAilment={ownedPokemon.primaryAilment} />
 

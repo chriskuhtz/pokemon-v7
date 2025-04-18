@@ -1,5 +1,6 @@
 import { Nature } from '../interfaces/Natures';
 import { StatInfo } from '../interfaces/PokemonData';
+import { GrowthRateName } from '../interfaces/PokemonSpeciesData';
 import { StatObject } from '../interfaces/StatObject';
 import { calculateLevelData } from './calculateLevelData';
 import { calculateStat } from './calculateStat';
@@ -7,6 +8,7 @@ import { calculateStat } from './calculateStat';
 export const getStats = (
 	stats: StatInfo[],
 	xp: number,
+	growthRate: GrowthRateName,
 	nature: Nature,
 	evs: StatObject
 ): StatObject => {
@@ -22,7 +24,7 @@ export const getStats = (
 	const baseSpeed =
 		stats.find((s) => s.stat.name === 'speed')?.base_stat ?? 100;
 
-	const { level } = calculateLevelData(xp);
+	const { level } = calculateLevelData(xp, growthRate);
 
 	return {
 		hp: calculateStat(baseHp, 0, evs?.hp ?? 0, nature, level, 'hp'),

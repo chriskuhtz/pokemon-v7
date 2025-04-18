@@ -17,7 +17,7 @@ export const determineCaptureSuccess = (
 	if (ball === 'master-ball') {
 		return true;
 	}
-	const { level } = calculateLevelData(target.xp);
+	const { level } = calculateLevelData(target.xp, target.growthRate);
 	const targetTypes = getTypeNames(target);
 
 	let ballfactor = 0.5; // base: poke-ball, luxury-ball, heal-ball, cherish-ball

@@ -21,7 +21,7 @@ export const BattlePokemonInfo = ({
 	pokemon: BattlePokemon;
 	onClick?: () => void;
 }) => {
-	const { level } = calculateLevelData(pokemon.xp);
+	const { level } = calculateLevelData(pokemon.xp, pokemon.growthRate);
 	const {
 		saveFile: { pokedex },
 	} = useContext(SaveFileContext);
@@ -119,7 +119,9 @@ export const BattlePokemonInfo = ({
 				</Chip>
 			)}
 			<HpBar max={pokemon.stats.hp} damage={pokemon.damage} />
-			{pokemon.ownerId === getPlayerId() && <XpBar xp={pokemon.xp} />}
+			{pokemon.ownerId === getPlayerId() && (
+				<XpBar xp={pokemon.xp} growthRate={pokemon.growthRate} />
+			)}
 		</div>
 	);
 };

@@ -47,7 +47,10 @@ export const determineEvoChecks = (
 		known_move,
 	} = deets;
 	const itemName = item?.name as ItemType | undefined;
-	const { level } = calculateLevelData(ownedPokemon.xp);
+	const { level } = calculateLevelData(
+		ownedPokemon.xp,
+		ownedPokemon.growthRate
+	);
 
 	const minLevelIncludingTrade = () => {
 		if (trigger.name === 'trade') {

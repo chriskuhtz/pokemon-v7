@@ -65,7 +65,9 @@ export const useGetBattleTeam = (
 						};
 					});
 
-				const { level } = calculateLevelData(xp);
+				const spd = await speciesData;
+
+				const { level } = calculateLevelData(xp, spd.growth_rate.name);
 
 				const possibleAbilities = [
 					...fetchedData.abilities
@@ -128,8 +130,6 @@ export const useGetBattleTeam = (
 					  ).json()
 					: undefined;
 
-				const spd = await speciesData;
-
 				const { capture_rate, base_happiness } = spd;
 
 				const first = await firstMoveData;
@@ -179,7 +179,7 @@ export const useGetBattleTeam = (
 					: getHeldItem(pokemon);
 				const battleMon: BattlePokemon = {
 					...pokemon,
-					growthRate: (await speciesData).growth_rate.name,
+					growthRate: spd.growth_rate.name,
 					gender,
 					ability: ability,
 					initAbility: ability,
@@ -195,6 +195,7 @@ export const useGetBattleTeam = (
 					stats: getStats(
 						fetchedData.stats,
 						pokemon.xp,
+						pokemon.growthRate,
 						pokemon.nature,
 						pokemon.effortValues
 					),

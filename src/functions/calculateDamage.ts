@@ -270,7 +270,9 @@ export const calculateDamage = (
 		return { damage: fixedDamageMoves[attack.name] };
 	}
 	if (levelDamageMoves.includes(attack.name)) {
-		return { damage: calculateLevelData(attacker.xp).level };
+		return {
+			damage: calculateLevelData(attacker.xp, attacker.growthRate).level,
+		};
 	}
 	if (attack.name === 'super-fang') {
 		return {
@@ -296,7 +298,7 @@ export const calculateDamage = (
 		return { damage: 0 };
 	}
 
-	const { level } = calculateLevelData(attacker.xp);
+	const { level } = calculateLevelData(attacker.xp, attacker.growthRate);
 
 	const levelFactor = (2 * level) / 5 + 2;
 
@@ -304,7 +306,7 @@ export const calculateDamage = (
 		attacker,
 		attack,
 		target,
-		calculateLevelData(attacker.xp).level
+		calculateLevelData(attacker.xp, attacker.growthRate).level
 	);
 
 	if (attack.name === 'present' && power < 0) {

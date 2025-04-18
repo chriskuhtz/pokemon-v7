@@ -103,7 +103,8 @@ export const TrainingField = () => {
 										<div style={{ display: 'flex', gap: '1rem' }}>
 											{t.team.map((p) => (
 												<strong key={t.id + p.name + 'LVL'}>
-													Lvl {calculateLevelData(p.xp).level} {p.name},
+													Lvl {calculateLevelData(p.xp, p.growthRate).level}{' '}
+													{p.name},
 												</strong>
 											))}
 										</div>

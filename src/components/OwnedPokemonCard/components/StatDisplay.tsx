@@ -42,6 +42,7 @@ export const StatDisplay = ({
 						getStats(
 							data.stats,
 							ownedPokemon.xp,
+							ownedPokemon.growthRate,
 							ownedPokemon.nature,
 							ownedPokemon.effortValues
 						)
@@ -50,6 +51,7 @@ export const StatDisplay = ({
 							getStats(
 								data.stats,
 								ownedPokemon.xp,
+								ownedPokemon.growthRate,
 								ownedPokemon.nature,
 								ownedPokemon.effortValues
 							)

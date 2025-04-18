@@ -83,7 +83,7 @@ export const useLeaveBattle = () => {
 					return { ...p, heldItemName: getRandomEntry(pickupTable) };
 				}
 				if (p.ability === 'honey-gather' && !getHeldItem(p)) {
-					const lvl = calculateLevelData(p.xp).level;
+					const lvl = calculateLevelData(p.xp, p.growthRate).level;
 					const chance = 0.05 + lvl * 0.0045;
 					if (Math.random() < chance) {
 						return { ...p, heldItemName: 'honey' };

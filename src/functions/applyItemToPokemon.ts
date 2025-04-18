@@ -233,7 +233,10 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		return applyEVBoostItem(pokemon, item);
 	}
 	if (item === 'rare-candy') {
-		const { xpAtNextLevel, level } = calculateLevelData(pokemon.xp);
+		const { xpAtNextLevel, level } = calculateLevelData(
+			pokemon.xp,
+			pokemon.growthRate
+		);
 
 		if (level === 100) {
 			return pokemon;

@@ -178,7 +178,7 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 				);
 				const available = moveIsTeachable(
 					m,
-					calculateLevelData(ownedPokemon.xp).level
+					calculateLevelData(ownedPokemon.xp, ownedPokemon.growthRate).level
 				);
 				return (
 					<Card

@@ -159,8 +159,11 @@ export const determineMiss = (
 
 	const weatherFactor = getWeatherAccuracyFactor(target, weather);
 
-	const attackerlevel = calculateLevelData(attacker.xp).level;
-	const targetlevel = calculateLevelData(target.xp).level;
+	const attackerlevel = calculateLevelData(
+		attacker.xp,
+		attacker.growthRate
+	).level;
+	const targetlevel = calculateLevelData(target.xp, target.growthRate).level;
 	//+ 1% per level for ohko moves, negative if target level is higher => always miss against higher level opponent
 	const levelDifferenceSummand =
 		ohkoMoves.includes(attack.name) && attackerlevel - targetlevel >= 0

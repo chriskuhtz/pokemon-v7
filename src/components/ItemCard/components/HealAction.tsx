@@ -57,7 +57,9 @@ export const HealAction = ({
 							key={p.id}
 							firstPlanet={
 								<Chip>
-									<strong>{calculateLevelData(p.xp).level}</strong>
+									<strong>
+										{calculateLevelData(p.xp, p.growthRate).level}
+									</strong>
 								</Chip>
 							}
 							sun={{ url: getPokemonSprite(p.name, { shiny: p.shiny }) }}

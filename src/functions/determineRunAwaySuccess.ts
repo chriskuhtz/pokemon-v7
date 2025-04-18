@@ -9,13 +9,15 @@ export const determineRunawaySuccess = (
 
 	const avgteamLevel =
 		team.reduce(
-			(sum, summand) => sum + calculateLevelData(summand.xp).level,
+			(sum, summand) =>
+				sum + calculateLevelData(summand.xp, summand.growthRate).level,
 			0
 		) / team.length;
 
 	const avgOpsLevel =
 		opponents.reduce(
-			(sum, summand) => sum + calculateLevelData(summand.xp).level,
+			(sum, summand) =>
+				sum + calculateLevelData(summand.xp, summand.growthRate).level,
 			0
 		) / opponents.length;
 

@@ -88,7 +88,10 @@ export const PokemonStorage = ({
 							}}
 							firstPlanet={
 								<Chip>
-									<strong>Lvl {calculateLevelData(pokemon.xp).level}</strong>
+									<strong>
+										Lvl{' '}
+										{calculateLevelData(pokemon.xp, pokemon.growthRate).level}
+									</strong>
 								</Chip>
 							}
 							secondPlanetUrl={getItemUrl(pokemon.ball)}
@@ -171,7 +174,10 @@ export const PokemonStorage = ({
 								}}
 								firstPlanet={
 									<Chip>
-										<strong>Lvl {calculateLevelData(pokemon.xp).level}</strong>
+										<strong>
+											Lvl{' '}
+											{calculateLevelData(pokemon.xp, pokemon.growthRate).level}
+										</strong>
 									</Chip>
 								}
 								secondPlanetUrl={getItemUrl(pokemon.ball)}
