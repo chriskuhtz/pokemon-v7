@@ -19,28 +19,13 @@ import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
-const ACTIVE_QUEST_LIMIT = 10;
 export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 	const { addMessage } = useContext(MessageQueueContext);
 	const { saveFile, putSaveFileReducer } = useContext(SaveFileContext);
 	const { quests, campUpgrades } = saveFile;
 
-	const activeQuests = useMemo(
-		() =>
-			Object.keys(QuestsRecord).filter(
-				(q) => quests[q as QuestName] === 'ACTIVE'
-			),
-		[quests]
-	);
 	const acceptQuest = useCallback(
 		(name: QuestName) => {
-			if (activeQuests.length >= ACTIVE_QUEST_LIMIT) {
-				addMessage({
-					message: 'You can only have 5 active Quests at the same time',
-				});
-
-				return;
-			}
 			addMessage({
 				message: `Accepted Quest: ${name}`,
 				needsNoConfirmation: true,
@@ -50,7 +35,7 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 				quests: { ...saveFile.quests, [name]: 'ACTIVE' },
 			});
 		},
-		[activeQuests.length, addMessage, putSaveFileReducer, saveFile]
+		[addMessage, putSaveFileReducer, saveFile]
 	);
 
 	const availableQuests: { name: QuestName; quest: Quest }[] = useMemo(
@@ -105,14 +90,7 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 						color={'blue'}
 					/>
 				</div>
-				<div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-					<strong style={{ textWrap: 'nowrap' }}>Active Quests:</strong>
-					<AnimatedBar
-						max={ACTIVE_QUEST_LIMIT}
-						offset={ACTIVE_QUEST_LIMIT - activeQuests.length}
-						inversedColor
-					/>
-				</div>
+
 				{availableQuests.map(({ name, quest }) => {
 					return (
 						<Card
