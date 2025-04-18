@@ -95,6 +95,7 @@ export interface UseSaveFile {
 const migrateSavefile = (input: SaveFile) => {
 	const updatedInput = { ...input };
 
+	//migrate new quests
 	questNames.forEach((name) => {
 		if (updatedInput.quests[name] === undefined) {
 			updatedInput.quests[name] = 'INACTIVE';
