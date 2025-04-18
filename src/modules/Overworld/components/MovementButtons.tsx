@@ -5,16 +5,19 @@ import {
 	FaArrowRight,
 	FaArrowUp,
 } from 'react-icons/fa';
+import { TbCircleLetterA } from 'react-icons/tb';
 import { battleSpriteSize, fps } from '../../../constants/gameData';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
 
 export const MovementButtons = ({
 	setNextInput,
+	handleEnterPress,
 }: {
 	setNextInput: React.Dispatch<
 		React.SetStateAction<CharacterOrientation | undefined>
 	>;
+	handleEnterPress: () => void;
 }) => {
 	const { latestMessage } = useContext(MessageQueueContext);
 	const [pressed, setPressed] = useState<CharacterOrientation | undefined>();
@@ -66,7 +69,7 @@ export const MovementButtons = ({
 				onMouseDown={() => setPressed('LEFT')}
 				size={battleSpriteSize}
 			/>
-			<span />{' '}
+			<TbCircleLetterA size={battleSpriteSize} onClick={handleEnterPress} />
 			<FaArrowRight
 				onPointerDown={() => setPressed('RIGHT')}
 				onPointerOut={() => setPressed(undefined)}

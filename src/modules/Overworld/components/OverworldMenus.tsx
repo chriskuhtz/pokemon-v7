@@ -12,17 +12,19 @@ import {
 import { BaseSizeContext } from '../../../hooks/useBaseSize';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
-import { UncollectedQuestsBadge } from './UncollectedQuestsBadge';
 import { MovementButtons } from './MovementButtons';
+import { UncollectedQuestsBadge } from './UncollectedQuestsBadge';
 
 export const OverworldMenus = ({
 	stepsTaken,
 	setNextInput,
+	handleEnterPress,
 }: {
 	stepsTaken: number;
 	setNextInput: React.Dispatch<
 		React.SetStateAction<CharacterOrientation | undefined>
 	>;
+	handleEnterPress: () => void;
 }) => {
 	const { baseSize, setBaseSize } = useContext(BaseSizeContext);
 	const { saveFile, navigateAwayFromOverworldReducer } =
@@ -109,7 +111,10 @@ export const OverworldMenus = ({
 				<WeatherIcon weather={map.weather} />
 				<TimeOfDayIcon />
 			</div>
-			<MovementButtons setNextInput={setNextInput} />
+			<MovementButtons
+				setNextInput={setNextInput}
+				handleEnterPress={handleEnterPress}
+			/>
 		</>
 	);
 };

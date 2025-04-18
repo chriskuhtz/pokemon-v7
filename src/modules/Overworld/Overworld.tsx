@@ -186,7 +186,13 @@ export const Overworld = ({
 
 	return (
 		<div>
-			<OverworldMenus stepsTaken={stepsTaken} setNextInput={setNextInput} />
+			<OverworldMenus
+				stepsTaken={stepsTaken}
+				setNextInput={setNextInput}
+				handleEnterPress={() =>
+					handleEnterPress(saveFile.location, interactWith, occupants)
+				}
+			/>
 
 			<div className="overworldPage">
 				<div id="canvassesAndShaders" style={{ position: 'relative' }}>
