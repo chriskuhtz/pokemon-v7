@@ -1,6 +1,7 @@
 import { SELF_DESTRUCTING_MOVES } from '../../../../../../constants/selfDestructingMoves';
 import { applyAttackAilmentsToPokemon } from '../../../../../../functions/applyAttackAilmentsToPokemon';
 import { applyAttackStatChanges } from '../../../../../../functions/applyAttackStatChanges';
+import { applyDrainOrRecoil } from '../../../../../../functions/applyDrainOrRecoil';
 import { calculateDamage } from '../../../../../../functions/calculateDamage';
 import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
@@ -196,74 +197,47 @@ export const handleDamageAttack = ({
 			: undefined,
 	};
 	//DRAIN
-	const getDrain = () => {
-		if (move.data.meta.drain) {
-			const bigRootFactor =
-				getHeldItem(updatedAttacker) === 'big-root' ? 1.3 : 1;
-			return move.data.meta.drain * bigRootFactor;
-		}
-		if (
-			getHeldItem(updatedTarget) === 'jaboca-berry' &&
-			move.data.damage_class.name === 'physical'
-		) {
-			addMessage({
-				message: `${updatedTarget.name} somehow used its ${getHeldItem(
-					updatedTarget,
-					false
-				)} to damage ${updatedAttacker.name}`,
-			});
-			updatedTarget = { ...updatedTarget, heldItemName: undefined };
-			return -12.5;
-		}
-		if (
-			getHeldItem(updatedTarget) === 'rowap-berry' &&
-			move.data.damage_class.name === 'special'
-		) {
-			addMessage({
-				message: `${updatedTarget.name} somehow used its ${getHeldItem(
-					updatedTarget,
-					false
-				)} to damage ${updatedAttacker.name}`,
-			});
-			updatedTarget = { ...updatedTarget, heldItemName: undefined };
-			return -12.5;
-		}
-	};
-	const drain = getDrain();
-	if (drain) {
-		const absDrainValue = getMiddleOfThree([
-			1,
-			Math.round((damage * Math.abs(drain)) / 100),
-			attacker.stats.hp,
-		]);
-		const drainValue = drain < 0 ? -absDrainValue : absDrainValue;
-		const liquidOozedChecked =
-			target.ability === 'liquid-ooze' && drain > 0 ? -drainValue : drainValue;
-		const rockHeadChecked =
-			attacker.ability === 'rock-head' && drain < 0 ? 0 : liquidOozedChecked;
+	updatedAttacker = applyDrainOrRecoil(
+		updatedAttacker,
+		updatedTarget,
+		move,
+		actualDamage,
+		addMessage
+	);
 
+	if (
+		getHeldItem(updatedTarget) === 'jaboca-berry' &&
+		move.data.damage_class.name === 'physical'
+	) {
+		addMessage({
+			message: `${updatedTarget.name} somehow used its ${getHeldItem(
+				updatedTarget,
+				false
+			)} to damage ${updatedAttacker.name}`,
+		});
+		updatedTarget = { ...updatedTarget, heldItemName: undefined };
 		updatedAttacker = {
 			...updatedAttacker,
-			damage: getMiddleOfThree([
-				0,
-				updatedAttacker.damage - rockHeadChecked,
-				updatedAttacker.stats.hp,
-			]),
+			damage:
+				updatedAttacker.damage + Math.floor(updatedAttacker.stats.hp * 0.125),
 		};
-
-		if (rockHeadChecked > 0 && target.ability === 'liquid-ooze') {
-			addMessage({
-				message: `${updatedAttacker.data.name} took ${absDrainValue} HP damage from liquid ooze`,
-			});
-		} else if (rockHeadChecked > 0) {
-			addMessage({
-				message: `${updatedAttacker.data.name} restored ${absDrainValue} HP`,
-			});
-		} else if (rockHeadChecked < 0) {
-			addMessage({
-				message: `${updatedAttacker.data.name} took ${absDrainValue} HP recoil damage`,
-			});
-		}
+	}
+	if (
+		getHeldItem(updatedTarget) === 'rowap-berry' &&
+		move.data.damage_class.name === 'special'
+	) {
+		addMessage({
+			message: `${updatedTarget.name} somehow used its ${getHeldItem(
+				updatedTarget,
+				false
+			)} to damage ${updatedAttacker.name}`,
+		});
+		updatedTarget = { ...updatedTarget, heldItemName: undefined };
+		updatedAttacker = {
+			...updatedAttacker,
+			damage:
+				updatedAttacker.damage + Math.floor(updatedAttacker.stats.hp * 0.125),
+		};
 	}
 
 	if (getHeldItem(updatedAttacker) === 'life-orb' && actualDamage > 0) {
