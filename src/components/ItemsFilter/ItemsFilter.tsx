@@ -4,7 +4,9 @@ import {
 	ItemType,
 	isApricorn,
 	isBerry,
+	isCooked,
 	isHealingItem,
+	isIngredient,
 	isMulch,
 	isPokeball,
 } from '../../interfaces/Item';
@@ -15,6 +17,8 @@ export const itemfilterNames = [
 	'berries',
 	'apricorns',
 	'mulch',
+	'ingredient',
+	'cooked',
 	'other',
 ] as const;
 export type ItemsFilterType = (typeof itemfilterNames)[number];
@@ -38,12 +42,21 @@ export const filterItemsByType = (
 	if (itemsFilter === 'mulch') {
 		return isMulch(item);
 	}
+	if (itemsFilter === 'ingredient') {
+		return isIngredient(item);
+	}
+	if (itemsFilter === 'cooked') {
+		return isCooked(item);
+	}
 	if (itemsFilter === 'other') {
 		return (
 			!isPokeball(item) &&
 			!isHealingItem(item) &&
 			!isBerry(item) &&
-			!isApricorn(item)
+			!isApricorn(item) &&
+			!isMulch(item) &&
+			!isIngredient(item) &&
+			!isCooked(item)
 		);
 	}
 	return true;

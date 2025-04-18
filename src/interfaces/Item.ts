@@ -405,6 +405,28 @@ export function isBerry(x: string | undefined): x is BerryType {
 export function isMulch(x: string | undefined): x is MulchType {
 	return (mulches as unknown as string[]).includes(x ?? '');
 }
+export function isIngredient(x: string | undefined): boolean {
+	return !!x && [...berries, ...herbs, 'moomoo-milk', 'honey'].includes(x);
+}
+export function isCooked(x: string | undefined): boolean {
+	return (
+		!!x &&
+		[
+			'berry-juice',
+			'rare-candy',
+			'big-malasada',
+			'moomoo-cheese',
+			'casteliacone',
+			'pewter-crunchies',
+			'lumiose-galette',
+			'rage-candy-bar',
+			'lava-cookie',
+			'old-gateau',
+			'energy-powder',
+			'heal-powder',
+		].includes(x)
+	);
+}
 export function isFossil(x: string | undefined): x is FossilType {
 	return (fossils as unknown as string[]).includes(x ?? '');
 }
