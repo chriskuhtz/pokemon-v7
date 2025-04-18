@@ -186,7 +186,11 @@ export const handleAbilitiesAfterAttack = (
 		});
 	}
 	// check anger point
-	if (criticalHit && updatedTarget.ability === 'anger-point') {
+	if (
+		!isKO(updatedTarget) &&
+		criticalHit &&
+		updatedTarget.ability === 'anger-point'
+	) {
 		updatedTarget = applyStatChangeToPokemon(
 			updatedTarget,
 			'attack',
@@ -198,7 +202,11 @@ export const handleAbilitiesAfterAttack = (
 		);
 	}
 	// apply rage boost
-	if (damage > 0 && target.secondaryAilments.some((a) => a.type === 'raging')) {
+	if (
+		!isKO(updatedTarget) &&
+		damage > 0 &&
+		target.secondaryAilments.some((a) => a.type === 'raging')
+	) {
 		updatedTarget = applyStatChangeToPokemon(
 			updatedTarget,
 			'attack',
@@ -211,6 +219,7 @@ export const handleAbilitiesAfterAttack = (
 	}
 	// apply motor drive boost
 	if (
+		!isKO(updatedTarget) &&
 		move.data.type.name === 'electric' &&
 		['physical', 'special'].includes(move.data.damage_class.name) &&
 		target.ability === 'motor-drive'
