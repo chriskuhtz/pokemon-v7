@@ -15,28 +15,16 @@ const chuckBase: Omit<
 export const chuckLine: Occupant[] = [
 	{
 		...chuckBase,
-		id: 'chuck_1',
-
+		id: 'chuck_2',
 		unhandledMessage: [
 			'My Name is Chuck',
 			'My Pokemon and I eat 7000 calories per day',
 			'Then we hit the gym together',
 		],
 		handledMessage: ['Do you even lift?'],
-		quest: 'deal 20 damage with one attack',
-		conditionFunction: (s) =>
-			s.campUpgrades['invite fighting expert chuck'] &&
-			s.quests['deal 20 damage with one attack'] !== 'COLLECTED',
-	},
-	{
-		...chuckBase,
-		id: 'chuck_2',
-		unhandledMessage: ['Nice start, keep increasing your PB'],
-		handledMessage: ['Do you even lift?'],
 		quest: 'deal 50 damage with one attack',
 		conditionFunction: (s) =>
 			s.campUpgrades['invite fighting expert chuck'] &&
-			s.quests['deal 20 damage with one attack'] === 'COLLECTED' &&
 			s.quests['deal 50 damage with one attack'] !== 'COLLECTED',
 	},
 	{
