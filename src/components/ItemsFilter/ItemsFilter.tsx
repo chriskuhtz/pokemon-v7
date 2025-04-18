@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { Inventory } from '../../interfaces/Inventory';
 import {
 	ItemType,
+	canCauseEvolution,
 	isApricorn,
 	isBerry,
 	isCooked,
@@ -13,12 +14,14 @@ import {
 
 export const itemfilterNames = [
 	'poke-balls',
+	'repel+escape',
 	'heal-items',
 	'berries',
 	'apricorns',
 	'mulch',
 	'ingredient',
 	'cooked',
+	'evolution',
 	'other',
 ] as const;
 export type ItemsFilterType = (typeof itemfilterNames)[number];
@@ -29,6 +32,9 @@ export const filterItemsByType = (
 ): boolean => {
 	if (itemsFilter === 'poke-balls') {
 		return isPokeball(item);
+	}
+	if (itemsFilter === 'repel+escape') {
+		return item.includes('repel') || item === 'escape-rope';
 	}
 	if (itemsFilter === 'heal-items') {
 		return isHealingItem(item);
@@ -48,6 +54,9 @@ export const filterItemsByType = (
 	if (itemsFilter === 'cooked') {
 		return isCooked(item);
 	}
+	if (itemsFilter === 'evolution') {
+		return canCauseEvolution(item);
+	}
 	if (itemsFilter === 'other') {
 		return (
 			!isPokeball(item) &&
@@ -56,7 +65,8 @@ export const filterItemsByType = (
 			!isApricorn(item) &&
 			!isMulch(item) &&
 			!isIngredient(item) &&
-			!isCooked(item)
+			!isCooked(item) &&
+			!canCauseEvolution(item)
 		);
 	}
 	return true;

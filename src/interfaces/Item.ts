@@ -427,6 +427,28 @@ export function isCooked(x: string | undefined): boolean {
 		].includes(x)
 	);
 }
+export function canCauseEvolution(x: string | undefined): boolean {
+	return (
+		!!x &&
+		[
+			...evoStones,
+			'metal-coat',
+			'oval-stone',
+			'kings-rock',
+			'dragon-scale',
+			'deep-sea-tooth',
+			'deep-sea-scale',
+			'up-grade',
+			'protector',
+			'electirizer',
+			'magmarizer',
+			'dubious-disc',
+			'reaper-cloth',
+			'razor-fang',
+			'razor-claw',
+		].includes(x)
+	);
+}
 export function isFossil(x: string | undefined): x is FossilType {
 	return (fossils as unknown as string[]).includes(x ?? '');
 }
