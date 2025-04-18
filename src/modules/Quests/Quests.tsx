@@ -115,6 +115,32 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 												) {
 													return <PokemonSprite key={p + name} name={p} />;
 												}
+												if (
+													quest.targetRoute &&
+													saveFile.pokedex[p].seenOnRoutes.includes(
+														quest.targetRoute
+													)
+												) {
+													return (
+														<PokemonSprite
+															config={{ grayscale: true }}
+															key={p + name}
+															name={p}
+														/>
+													);
+												}
+												if (
+													!quest.targetRoute &&
+													saveFile.pokedex[p].seenOnRoutes.length > 0
+												) {
+													return (
+														<PokemonSprite
+															config={{ grayscale: true }}
+															key={p + name}
+															name={p}
+														/>
+													);
+												}
 												return <ItemSprite key={p + name} item={'poke-ball'} />;
 											})}
 										</h5>
