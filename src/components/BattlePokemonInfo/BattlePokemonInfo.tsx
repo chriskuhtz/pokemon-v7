@@ -91,7 +91,6 @@ export const BattlePokemonInfo = ({
 					);
 				}
 			})}
-
 			{pokemon.moveQueue.length > 0 &&
 				pokemon.moveQueue[0].type === 'BattleAttack' &&
 				secondTurnMoves.includes(pokemon.moveQueue[0].name) && (
@@ -104,6 +103,21 @@ export const BattlePokemonInfo = ({
 					<span>{s.type}</span>
 				</Chip>
 			))}
+			{pokemon.protected && (
+				<Chip>
+					<span>Protected</span>
+				</Chip>
+			)}{' '}
+			{pokemon.endured && (
+				<Chip>
+					<span>endured</span>
+				</Chip>
+			)}{' '}
+			{pokemon.helpingHanded && (
+				<Chip>
+					<span>helping Hand</span>
+				</Chip>
+			)}
 			<HpBar max={pokemon.stats.hp} damage={pokemon.damage} />
 			{pokemon.ownerId === getPlayerId() && <XpBar xp={pokemon.xp} />}
 		</div>
