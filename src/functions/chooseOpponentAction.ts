@@ -67,8 +67,6 @@ export const chooseOpponentAction = ({
 
 	const random = Math.random() > 0.9;
 
-	console.log(moves, controlled.roundsInBattle, filtered, random);
-
 	//splash if nothing else
 	if (moves.length === 0) {
 		return {
@@ -77,7 +75,18 @@ export const chooseOpponentAction = ({
 			targetId: filtered[0].id,
 		};
 	}
+	//ingrain if possible
+	const canIngrain =
+		moves.find((m) => m.name === 'ingrain') &&
+		controlled.secondaryAilments.every((s) => s.type !== 'ingrained');
 
+	if (canIngrain) {
+		return {
+			userId: controlled.id,
+			actionName: 'ingrain',
+			targetId: controlled.id,
+		};
+	}
 	//use heal move if low
 	const healMove = moves.find(
 		(m) => m.data.meta.category.name === 'heal' && m.data.target.name === 'user'
