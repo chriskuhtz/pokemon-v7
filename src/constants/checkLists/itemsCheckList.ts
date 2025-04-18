@@ -1523,8 +1523,12 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/580/',
 		handled: true,
 	},
-	{ name: 'eviolite', url: 'https://pokeapi.co/api/v2/item/581/' },
-	{ name: 'float-stone', url: 'https://pokeapi.co/api/v2/item/582/' },
+
+	{
+		name: 'float-stone',
+		url: 'https://pokeapi.co/api/v2/item/582/',
+		handled: true,
+	},
 	{ name: 'rocky-helmet', url: 'https://pokeapi.co/api/v2/item/583/' },
 	{ name: 'air-balloon', url: 'https://pokeapi.co/api/v2/item/584/' },
 	{ name: 'red-card', url: 'https://pokeapi.co/api/v2/item/585/' },
@@ -1557,7 +1561,6 @@ export const itemsCheckList: {
 	{ name: 'pretty-wing', url: 'https://pokeapi.co/api/v2/item/612/' },
 	{ name: 'liberty-pass', url: 'https://pokeapi.co/api/v2/item/615/' },
 	{ name: 'pass-orb', url: 'https://pokeapi.co/api/v2/item/616/' },
-	{ name: 'dream-ball', url: 'https://pokeapi.co/api/v2/item/617/' },
 	{ name: 'poke-toy', url: 'https://pokeapi.co/api/v2/item/618/' },
 	{ name: 'prop-case', url: 'https://pokeapi.co/api/v2/item/619/' },
 	{ name: 'dragon-skull', url: 'https://pokeapi.co/api/v2/item/620/' },
@@ -1771,7 +1774,6 @@ export const itemsCheckList: {
 	{ name: 'adrenaline-orb', url: 'https://pokeapi.co/api/v2/item/883/' },
 	{ name: 'zygarde-cube', url: 'https://pokeapi.co/api/v2/item/884/' },
 	{ name: 'ride-pager', url: 'https://pokeapi.co/api/v2/item/886/' },
-	{ name: 'beast-ball', url: 'https://pokeapi.co/api/v2/item/887/' },
 	{ name: 'red-nectar', url: 'https://pokeapi.co/api/v2/item/889/' },
 	{ name: 'yellow-nectar', url: 'https://pokeapi.co/api/v2/item/890/' },
 	{ name: 'pink-nectar', url: 'https://pokeapi.co/api/v2/item/891/' },
@@ -2519,6 +2521,14 @@ export const itemsCheckList: {
 	{ name: 'cramorant-down', url: 'https://pokeapi.co/api/v2/item/2157/' },
 	{ name: 'morpeko-snack', url: 'https://pokeapi.co/api/v2/item/2158/' },
 	{ name: 'poltchageist-powder', url: 'https://pokeapi.co/api/v2/item/2159/' },
+	{ name: 'douse-drive', url: 'https://pokeapi.co/api/v2/item/563/' },
+	{ name: 'shock-drive', url: 'https://pokeapi.co/api/v2/item/564/' },
+	{ name: 'burn-drive', url: 'https://pokeapi.co/api/v2/item/565/' },
+	{ name: 'chill-drive', url: 'https://pokeapi.co/api/v2/item/566/' },
+	{ name: 'eviolite', url: 'https://pokeapi.co/api/v2/item/581/' },
+	/**
+	 * UNUSED POKE BALLS
+	 */
 	{ name: 'lure-ball', url: 'https://pokeapi.co/api/v2/item/449/' },
 	{ name: 'level-ball', url: 'https://pokeapi.co/api/v2/item/450/' },
 	{ name: 'moon-ball', url: 'https://pokeapi.co/api/v2/item/451/' },
@@ -2528,10 +2538,8 @@ export const itemsCheckList: {
 	{ name: 'love-ball', url: 'https://pokeapi.co/api/v2/item/455/' },
 	{ name: 'park-ball', url: 'https://pokeapi.co/api/v2/item/456/' },
 	{ name: 'sport-ball', url: 'https://pokeapi.co/api/v2/item/457/' },
-	{ name: 'douse-drive', url: 'https://pokeapi.co/api/v2/item/563/' },
-	{ name: 'shock-drive', url: 'https://pokeapi.co/api/v2/item/564/' },
-	{ name: 'burn-drive', url: 'https://pokeapi.co/api/v2/item/565/' },
-	{ name: 'chill-drive', url: 'https://pokeapi.co/api/v2/item/566/' },
+	{ name: 'beast-ball', url: 'https://pokeapi.co/api/v2/item/887/' },
+	{ name: 'dream-ball', url: 'https://pokeapi.co/api/v2/item/617/' },
 	/**
 	 *
 	 *

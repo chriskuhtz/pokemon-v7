@@ -226,6 +226,7 @@ export const heldItems = [
 	'razor-fang',
 	'razor-claw',
 	'griseous-orb',
+	'float-stone',
 ] as const;
 export const valuables = [
 	'shoal-salt',

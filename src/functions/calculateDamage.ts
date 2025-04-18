@@ -8,7 +8,7 @@ import { bitingMoves, punchBasedMoves } from '../constants/punchBasedMoves';
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { superEffectiveSaveTable } from '../interfaces/Item';
+import { ItemType, superEffectiveSaveTable } from '../interfaces/Item';
 import { PokemonType } from '../interfaces/PokemonType';
 import { StatObject } from '../interfaces/StatObject';
 import { WeatherType } from '../interfaces/Weather';
@@ -24,15 +24,16 @@ import { getHeldItemFactor } from './getHeldItemFactor';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getRivalryFactor } from './getRivalryFactor';
 
-const getActualWeight = (weight: number, ability: AbilityName) => {
-	if (ability === 'heavy-metal') {
-		return weight * 2;
-	}
-	if (ability === 'light-metal') {
-		return weight * 0.5;
-	}
+const getActualWeight = (
+	weight: number,
+	ability: AbilityName,
+	heldItem?: ItemType
+) => {
+	const floatStoneFactor = heldItem === 'float-stone' ? 0.5 : 1;
+	const lightMetalFactor = ability === 'heavy-metal' ? 2 : 1;
+	const heavyMetalFactor = ability === 'light-metal' ? 0.5 : 1;
 
-	return weight;
+	return weight * floatStoneFactor * lightMetalFactor * heavyMetalFactor;
 };
 
 export const getLowKickPower = (weight: number): number => {
@@ -124,7 +125,11 @@ export const getPower = (
 		return (attack.data.power ?? 0) * (attacker.furyCutterStack ?? 1);
 	}
 	if (attack.name === 'low-kick') {
-		const actualWeight = getActualWeight(target.data.weight, target.ability);
+		const actualWeight = getActualWeight(
+			target.data.weight,
+			target.ability,
+			getHeldItem(target)
+		);
 
 		return getLowKickPower(actualWeight);
 	}
