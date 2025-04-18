@@ -356,6 +356,7 @@ export const handleDamageAttack = ({
 				move,
 				addMessage,
 				battleWeather,
+				battleFieldEffects,
 				targetIsSafeguarded
 			);
 		updatedAttacker = a;

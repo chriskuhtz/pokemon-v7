@@ -134,6 +134,7 @@ export const handleAilmentAttack = ({
 			move,
 			addMessage,
 			battleWeather,
+			battleFieldEffects,
 			targetIsSafeguarded
 		);
 	updatedAttacker = a;

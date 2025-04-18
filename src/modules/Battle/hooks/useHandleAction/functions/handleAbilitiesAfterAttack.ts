@@ -78,6 +78,7 @@ export const handleAbilitiesAfterAttack = (
 			'paralysis',
 			addMessage,
 			battleWeather,
+			battleFieldEffects,
 			`by ${target.data.name}'s static`
 		);
 		updatedAttacker = b;
@@ -111,6 +112,7 @@ export const handleAbilitiesAfterAttack = (
 			'burn',
 			addMessage,
 			battleWeather,
+			battleFieldEffects,
 			`by ${target.data.name}'s flame body`
 		);
 		updatedAttacker = b;
@@ -144,6 +146,7 @@ export const handleAbilitiesAfterAttack = (
 			'poison',
 			addMessage,
 			battleWeather,
+			battleFieldEffects,
 			`by ${target.data.name}'s poison point`
 		);
 		updatedAttacker = b;
@@ -179,6 +182,7 @@ export const handleAbilitiesAfterAttack = (
 			] as PrimaryAilment['type'],
 			addMessage,
 			battleWeather,
+			battleFieldEffects,
 			`by ${target.data.name}'s effect spore`
 		);
 		updatedAttacker = b;

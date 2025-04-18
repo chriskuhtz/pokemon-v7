@@ -9,6 +9,7 @@ import {
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
+import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { applyPrimaryAilmentToPokemon } from './applyPrimaryAilmentToPokemon';
 import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
 import { getRandomEntry } from './filterTargets';
@@ -39,6 +40,7 @@ export const applyAttackAilmentsToPokemon = (
 	attack: BattleAttack,
 	addMessage: (x: Message) => void,
 	battleWeather: WeatherType | undefined,
+	battleFieldEffects: BattleFieldEffect[],
 	safeGuarded: boolean
 ): { updatedTarget: BattlePokemon; updatedApplicator: BattlePokemon } => {
 	if (
@@ -74,7 +76,8 @@ export const applyAttackAilmentsToPokemon = (
 				applicator,
 				ailment as PrimaryAilment['type'],
 				addMessage,
-				battleWeather
+				battleWeather,
+				battleFieldEffects
 			);
 		}
 

@@ -70,7 +70,8 @@ export interface BattleFieldEffect {
 		| 'friend-guard'
 		| 'victory-star'
 		| 'aroma-veil'
-		| 'flower-veil';
+		| 'flower-veil'
+		| 'sweet-veil';
 	ownerId: string;
 	applicatorId?: string;
 	duration: number;

@@ -153,6 +153,7 @@ export const handleSwaggerAttack = ({
 			move,
 			addMessage,
 			battleWeather,
+			battleFieldEffects,
 			targetIsSafeguarded
 		);
 	updatedAttacker = a;

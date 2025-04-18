@@ -808,7 +808,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/174/',
 		handled: true,
 	},
-	{ name: 'sweet-veil', url: 'https://pokeapi.co/api/v2/ability/175/' },
+	{
+		name: 'sweet-veil',
+		url: 'https://pokeapi.co/api/v2/ability/175/',
+		handled: true,
+	},
 	{ name: 'stance-change', url: 'https://pokeapi.co/api/v2/ability/176/' },
 	{ name: 'gale-wings', url: 'https://pokeapi.co/api/v2/ability/177/' },
 	{ name: 'mega-launcher', url: 'https://pokeapi.co/api/v2/ability/178/' },
@@ -1188,6 +1192,7 @@ export const abilityNames = [
 	'competitive',
 	'strong-jaw',
 	'refrigerate',
+	'sweet-veil',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

@@ -2,6 +2,7 @@ import { Message } from '../hooks/useMessageQueue';
 import { PrimaryAilment } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
+import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getTypeNames } from './getTypeNames';
 import { isKO } from './isKo';
@@ -12,6 +13,7 @@ export const applyPrimaryAilmentToPokemon = (
 	ailment: PrimaryAilment['type'],
 	addMessage: (x: Message) => void,
 	weather: WeatherType | undefined,
+	battleFieldEffects: BattleFieldEffect[],
 	suffix?: string
 ): { updatedTarget: BattlePokemon; updatedApplicator: BattlePokemon } => {
 	if (target.ability === 'leaf-guard' && weather === 'sun') {
@@ -112,6 +114,19 @@ export const applyPrimaryAilmentToPokemon = (
 		ailment === 'sleep' &&
 		!['vital-spirit', 'insomnia'].includes(target.ability)
 	) {
+		if (
+			battleFieldEffects.some(
+				(b) => b.type === 'sweet-veil' && b.ownerId === target.ownerId
+			)
+		) {
+			addMessage({
+				message: `${target.data.name} prevents sleep with sweet veil`,
+			});
+			return {
+				updatedTarget: target,
+				updatedApplicator: applicator,
+			};
+		}
 		const duration = getMiddleOfThree([1, Math.round(Math.random() * 5), 4]);
 		addMessage({
 			message: `${target.data.name} was put to sleep ${
