@@ -201,7 +201,7 @@ export const handleUniqueMoves = ({
 			addMessage({ message: 'It failed' });
 		} else {
 			const chosenMove = getRandomEntry(targetMoves);
-			addMessage({ message: `${chosenMove}'s PP was lowered` });
+			addMessage({ message: `${chosenMove.name}'s PP was lowered` });
 
 			updatedTarget = {
 				...updatedTarget,
