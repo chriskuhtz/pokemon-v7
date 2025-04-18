@@ -15,34 +15,35 @@ export const useZigzagoonForagers = () => {
 	const trade = useCallback(() => {
 		const now = new Date().getTime();
 
-		if (
-			(!saveFile.zigzagoonReadyAt || now > saveFile.zigzagoonReadyAt) &&
-			saveFile.bag['moomoo-milk'] > 0
-		) {
-			const foragedItem = getRandomEntry(pickupTable);
-			const amount = 1; // getRandomEntry([1, 2, 3, 4, 5]);
-			addMultipleMessages([
-				{ message: 'Zig Zig' },
-				{ message: `You give Zigzagoon some moomoo-milk` },
-				{ message: 'Zigzagoon runs off sniffing' },
-				{ message: `And returns with ${amount} ${foragedItem}` },
-			]);
-			patchSaveFileReducer({
-				bag: joinInventories(saveFile.bag, {
-					[foragedItem]: amount,
-					'moomoo-milk': -1,
-				}),
-				zigzagoonReadyAt: Math.random() > 0.75 ? now + ONE_HOUR / 4 : undefined,
-			});
-		} else if (saveFile.bag['moomoo-milk'] <= 0) {
+		const ready = !saveFile.zigzagoonReadyAt || now > saveFile.zigzagoonReadyAt;
+
+		if (!ready) {
+			addMessage({ message: 'Zigzagoon seems to need a little break' });
+			return;
+		}
+		if (saveFile.bag['moomoo-milk'] <= 0) {
 			addMultipleMessages([
 				{ message: 'Zigzagoon looks ready to forage' },
 				{ message: 'But You dont have any moomoo milk' },
 			]);
 			return;
-		} else {
-			addMessage({ message: 'Zigzagoon seems to need a little break' });
 		}
+
+		const foragedItem = getRandomEntry(pickupTable);
+		const amount = 1;
+		addMultipleMessages([
+			{ message: 'Zig Zig' },
+			{ message: `You give Zigzagoon some moomoo-milk` },
+			{ message: 'Zigzagoon runs off sniffing' },
+			{ message: `And returns with ${amount} ${foragedItem}` },
+		]);
+		patchSaveFileReducer({
+			bag: joinInventories(saveFile.bag, {
+				[foragedItem]: amount,
+				'moomoo-milk': -1,
+			}),
+			zigzagoonReadyAt: Math.random() > 0.75 ? now + ONE_HOUR / 4 : undefined,
+		});
 	}, [
 		addMessage,
 		addMultipleMessages,

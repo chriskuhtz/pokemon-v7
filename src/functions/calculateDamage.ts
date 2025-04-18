@@ -286,14 +286,7 @@ export const calculateDamage = (
 
 	const absorbAbility = DamageAbsorbAbilityMap[target.ability];
 	if (absorbAbility === attackType) {
-		const res = Math.max(-Math.floor(target.stats.hp / 4), -target.damage);
-
-		if (addMessage && res < 0) {
-			addMessage({
-				message: `${target.data.name} was healed by ${target.ability}`,
-			});
-		}
-		return { damage: res };
+		return { damage: 0 };
 	}
 
 	const { level } = calculateLevelData(attacker.xp);

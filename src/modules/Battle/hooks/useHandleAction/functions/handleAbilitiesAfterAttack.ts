@@ -2,6 +2,7 @@ import { contactMoves } from '../../../../../constants/contactMoves';
 import { applyPrimaryAilmentToPokemon } from '../../../../../functions/applyPrimaryAilmentToPokemon';
 import { applySecondaryAilmentToPokemon } from '../../../../../functions/applySecondaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from '../../../../../functions/applyStatChangeToPokemon';
+import { DamageAbsorbAbilityMap } from '../../../../../functions/calculateDamage';
 import { getRandomIndex } from '../../../../../functions/filterTargets';
 import { getHeldItem } from '../../../../../functions/getHeldItem';
 import { arePokemonOfOppositeGenders } from '../../../../../functions/getRivalryFactor';
@@ -39,6 +40,26 @@ export const handleAbilitiesAfterAttack = (
 } => {
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
+
+	//volt-absorb, water-absorb, dry-skin
+	const absorbAbility = DamageAbsorbAbilityMap[target.ability];
+	if (
+		absorbAbility === move.data.type.name &&
+		move.data.damage_class.name !== 'status' &&
+		updatedTarget.damage > 0
+	) {
+		addMessage({
+			message: `${target.data.name} was healed by ${target.ability}`,
+		});
+
+		updatedTarget = {
+			...updatedTarget,
+			damage: Math.min(
+				0,
+				updatedTarget.damage - Math.floor(target.stats.hp / 4)
+			),
+		};
+	}
 	//check for mummy
 	if (target.ability === 'mummy' && contactMoves.includes(move.name)) {
 		addMessage({ message: `${updatedAttacker.name}'s ability became mummy` });
