@@ -1534,7 +1534,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/583/',
 		handled: true,
 	},
-	{ name: 'air-balloon', url: 'https://pokeapi.co/api/v2/item/584/' },
+	{
+		name: 'air-balloon',
+		url: 'https://pokeapi.co/api/v2/item/584/',
+		handled: true,
+	},
 	{ name: 'red-card', url: 'https://pokeapi.co/api/v2/item/585/' },
 	{ name: 'ring-target', url: 'https://pokeapi.co/api/v2/item/586/' },
 	{ name: 'binding-band', url: 'https://pokeapi.co/api/v2/item/587/' },

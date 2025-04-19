@@ -77,6 +77,17 @@ export const determineTypeFactor = (
 		}
 		res = 0;
 	}
+	if (
+		attack.data.type.name === 'ground' &&
+		getHeldItem(target) === 'air-balloon'
+	) {
+		if (addMessage) {
+			addMessage({
+				message: `${target.data.name} prevents damage with air-balloon`,
+			});
+		}
+		res = 0;
+	}
 
 	if (target.ability === 'wonder-guard' && res <= 1) {
 		if (addMessage) {

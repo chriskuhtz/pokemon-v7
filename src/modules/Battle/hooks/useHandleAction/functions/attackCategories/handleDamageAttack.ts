@@ -269,6 +269,13 @@ export const handleDamageAttack = ({
 				updatedAttacker.damage + Math.floor(updatedAttacker.stats.hp / 10),
 		};
 	}
+	if (getHeldItem(updatedTarget) === 'air-balloon' && actualDamage > 0) {
+		addMessage({ message: `${updatedTarget}´s air balloon popped` });
+		updatedTarget = {
+			...updatedTarget,
+			heldItemName: undefined,
+		};
+	}
 
 	if (move.name === 'rapid-spin') {
 		addMessage({

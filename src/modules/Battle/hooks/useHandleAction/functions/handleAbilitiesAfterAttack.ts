@@ -187,6 +187,7 @@ export const handleAbilitiesAfterAttack = (
 		);
 		updatedAttacker = b;
 	}
+
 	//check for rocky-helmet
 	if (
 		getHeldItem(target) === 'rocky-helmet' &&
