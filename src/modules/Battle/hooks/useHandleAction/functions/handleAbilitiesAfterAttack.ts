@@ -83,6 +83,18 @@ export const handleAbilitiesAfterAttack = (
 		);
 		updatedAttacker = b;
 	}
+	//check for gooey
+	if (target.ability === 'gooey' && contactMoves.includes(move.name)) {
+		updatedAttacker = applyStatChangeToPokemon(
+			updatedAttacker,
+			'speed',
+			-1,
+			false,
+			battleFieldEffects,
+			addMessage,
+			'gooey'
+		);
+	}
 	//check for magician
 	if (
 		target.ability === 'magician' &&

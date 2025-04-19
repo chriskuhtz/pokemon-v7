@@ -381,4 +381,8 @@ export const extraFeatureCheckList: {
 	{ name: 'team rocket' },
 	{ name: 'cooler loading screen' },
 	{ name: 'movement buttons feel flaky' },
+	{ name: 'show amount of pokeballs in bag in quickmenu' },
+	{
+		name: 'forager army quest: have 6 zigzagoon with pick up in your prty. Given by zigzagoon guy',
+	},
 ];
