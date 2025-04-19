@@ -3,7 +3,7 @@ import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
-export const newestChangeLog = '0.6';
+export const newestChangeLog = '0.7';
 
 export const ChangeLog = ({
 	setHasReadIntro,
@@ -23,10 +23,6 @@ export const ChangeLog = ({
 						/>
 					</div>
 					<h3>Changelog:</h3>
-					<ChangeLogV06 />
-					<ChangeLogV05 />
-					<ChangeLogV04 />
-
 					<button
 						onClick={() => {
 							setHasReadIntro(true);
@@ -35,9 +31,25 @@ export const ChangeLog = ({
 					>
 						Got it, lets go
 					</button>
+					<ChangeLogV07 />
+					<ChangeLogV06 />
+					<ChangeLogV05 />
+					<ChangeLogV04 />
 				</Stack>
 			</div>
 		</Page>
+	);
+};
+export const ChangeLogV07 = (): JSX.Element => {
+	return (
+		<>
+			<h3>V 0.7:</h3>
+
+			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>Repair Hyper Beam</li>
+				<li>Take all/Store all by clicking on arrow</li>
+			</ol>
+		</>
 	);
 };
 export const ChangeLogV06 = (): JSX.Element => {

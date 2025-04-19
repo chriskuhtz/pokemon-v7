@@ -46,36 +46,38 @@ export const StatDisplay = ({
 							ownedPokemon.nature,
 							ownedPokemon.effortValues
 						)
-					).map(([stat, value]) => {
-						const highestStat = Object.entries(
-							getStats(
-								data.stats,
-								ownedPokemon.xp,
-								ownedPokemon.growthRate,
-								ownedPokemon.nature,
-								ownedPokemon.effortValues
+					)
+						.sort()
+						.map(([stat, value]) => {
+							const highestStat = Object.entries(
+								getStats(
+									data.stats,
+									ownedPokemon.xp,
+									ownedPokemon.growthRate,
+									ownedPokemon.nature,
+									ownedPokemon.effortValues
+								)
 							)
-						)
-							.filter(([stat]) => !HIDDEN_STATS.includes(stat))
-							.sort((a, b) => b[1] - a[1])[0][1];
+								.filter(([stat]) => !HIDDEN_STATS.includes(stat))
+								.sort((a, b) => b[1] - a[1])[0][1];
 
-						if (!HIDDEN_STATS.includes(stat)) {
-							return (
-								<Chip
-									key={stat}
-									style={{
-										width: `calc(100% / ${highestStat} * ${value})`,
-										backgroundColor: typeColors[data.types[0].type.name],
-										color: typeContrastColors[data.types[0].type.name],
-									}}
-								>
-									<>
-										{stat}: {value}
-									</>
-								</Chip>
-							);
-						}
-					})}
+							if (!HIDDEN_STATS.includes(stat)) {
+								return (
+									<Chip
+										key={stat}
+										style={{
+											width: `calc(100% / ${highestStat} * ${value})`,
+											backgroundColor: typeColors[data.types[0].type.name],
+											color: typeContrastColors[data.types[0].type.name],
+										}}
+									>
+										<>
+											{stat}: {value}
+										</>
+									</Chip>
+								);
+							}
+						})}
 				</div>
 			</div>
 			<div
@@ -101,26 +103,28 @@ export const StatDisplay = ({
 						alignItems: 'center',
 					}}
 				>
-					{Object.entries(ownedPokemon.effortValues).map(([stat, value]) => {
-						const highestStat = 255;
+					{Object.entries(ownedPokemon.effortValues)
+						.sort()
+						.map(([stat, value]) => {
+							const highestStat = 255;
 
-						if (!HIDDEN_STATS.includes(stat)) {
-							return (
-								<Chip
-									key={stat}
-									style={{
-										width: `calc(100% / ${highestStat} * ${value})`,
-										backgroundColor: typeColors[data.types[0].type.name],
-										color: typeContrastColors[data.types[0].type.name],
-									}}
-								>
-									<>
-										{stat}: {value}
-									</>
-								</Chip>
-							);
-						}
-					})}
+							if (!HIDDEN_STATS.includes(stat)) {
+								return (
+									<Chip
+										key={stat}
+										style={{
+											width: `calc(100% / ${highestStat} * ${value})`,
+											backgroundColor: typeColors[data.types[0].type.name],
+											color: typeContrastColors[data.types[0].type.name],
+										}}
+									>
+										<>
+											{stat}: {value}
+										</>
+									</Chip>
+								);
+							}
+						})}
 				</div>
 			</div>
 			<div
@@ -146,26 +150,28 @@ export const StatDisplay = ({
 						alignItems: 'center',
 					}}
 				>
-					{Object.entries(ownedPokemon.intrinsicValues).map(([stat, value]) => {
-						const highestStat = 31;
+					{Object.entries(ownedPokemon.intrinsicValues)
+						.sort()
+						.map(([stat, value]) => {
+							const highestStat = 31;
 
-						if (!HIDDEN_STATS.includes(stat)) {
-							return (
-								<Chip
-									key={stat}
-									style={{
-										width: `calc(100% / ${highestStat} * ${value})`,
-										backgroundColor: typeColors[data.types[0].type.name],
-										color: typeContrastColors[data.types[0].type.name],
-									}}
-								>
-									<>
-										{stat}: {value}
-									</>
-								</Chip>
-							);
-						}
-					})}
+							if (!HIDDEN_STATS.includes(stat)) {
+								return (
+									<Chip
+										key={stat}
+										style={{
+											width: `calc(100% / ${highestStat} * ${value})`,
+											backgroundColor: typeColors[data.types[0].type.name],
+											color: typeContrastColors[data.types[0].type.name],
+										}}
+									>
+										<>
+											{stat}: {value}
+										</>
+									</Chip>
+								);
+							}
+						})}
 				</div>
 			</div>
 		</Stack>

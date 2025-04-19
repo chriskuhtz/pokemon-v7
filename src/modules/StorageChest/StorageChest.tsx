@@ -24,10 +24,28 @@ export const StorageChest = () => {
 			storage: joinInventories(saveFile.storage, { [item]: 1 }),
 		});
 	};
+	const putAllOfItemInStorage = (item: ItemType) => {
+		patchSaveFileReducer({
+			bag: joinInventories(saveFile.bag, { [item]: saveFile.bag[item] }, true),
+			storage: joinInventories(saveFile.storage, {
+				[item]: saveFile.bag[item],
+			}),
+		});
+	};
 	const putItemInBag = (item: ItemType) => {
 		patchSaveFileReducer({
 			bag: joinInventories(saveFile.bag, { [item]: 1 }),
 			storage: joinInventories(saveFile.storage, { [item]: 1 }, true),
+		});
+	};
+	const putAllOfItemInBag = (item: ItemType) => {
+		patchSaveFileReducer({
+			bag: joinInventories(saveFile.bag, { [item]: saveFile.storage[item] }),
+			storage: joinInventories(
+				saveFile.storage,
+				{ [item]: saveFile.storage[item] },
+				true
+			),
 		});
 	};
 	const storeEverything = () => {
@@ -84,7 +102,15 @@ export const StorageChest = () => {
 						.filter(([, amount]) => amount > 0)
 						.map(([item, amount]) => (
 							<Card
-								actionElements={[<FaArrowRight />]}
+								actionElements={[
+									<FaArrowRight
+										style={{ zIndex: 1 }}
+										onClick={(e) => {
+											putAllOfItemInStorage(item as ItemType);
+											e.stopPropagation();
+										}}
+									/>,
+								]}
 								icon={<ItemSprite item={item as ItemType} />}
 								content={`	${item}(${amount})`}
 								key={'bag' + item + amount}
@@ -113,7 +139,15 @@ export const StorageChest = () => {
 								key={'storage' + item + amount}
 								onClick={() => putItemInBag(item as ItemType)}
 								actionElements={[<ItemSprite item={item as ItemType} />]}
-								icon={<FaArrowLeft />}
+								icon={
+									<FaArrowLeft
+										style={{ zIndex: 1 }}
+										onClick={(e) => {
+											putAllOfItemInBag(item as ItemType);
+											e.stopPropagation();
+										}}
+									/>
+								}
 								content={`	${item}(${amount})`}
 							/>
 						))}
