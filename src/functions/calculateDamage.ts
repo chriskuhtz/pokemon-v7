@@ -659,6 +659,8 @@ export const calculateDamage = (
 			: 1;
 	const refrigerateFactor =
 		attacker.ability === 'refrigerate' && attackType === 'normal' ? 1.3 : 1;
+	const pixilateFactor =
+		attacker.ability === 'pixilate' && attackType === 'normal' ? 1.3 : 1;
 	const megaLauncherFactor =
 		attacker.ability === 'mega-launcher' &&
 		auraAndPulseMoves.includes(attack.name)
@@ -741,7 +743,8 @@ export const calculateDamage = (
 				refrigerateFactor *
 				megaLauncherFactor *
 				grassPeltFactor *
-				toughClawsFactor
+				toughClawsFactor *
+				pixilateFactor
 		),
 		1
 	);

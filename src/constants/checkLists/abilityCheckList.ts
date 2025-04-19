@@ -835,7 +835,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/181/',
 		handled: true,
 	},
-	{ name: 'pixilate', url: 'https://pokeapi.co/api/v2/ability/182/' },
+	{
+		name: 'pixilate',
+		url: 'https://pokeapi.co/api/v2/ability/182/',
+		handled: true,
+	},
 	{ name: 'gooey', url: 'https://pokeapi.co/api/v2/ability/183/' },
 	{ name: 'aerilate', url: 'https://pokeapi.co/api/v2/ability/184/' },
 	{ name: 'parental-bond', url: 'https://pokeapi.co/api/v2/ability/185/' },
@@ -1205,6 +1209,7 @@ export const abilityNames = [
 	'mega-launcher',
 	'grass-pelt',
 	'tough-claws',
+	'pixilate',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

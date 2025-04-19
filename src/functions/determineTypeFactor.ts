@@ -41,6 +41,9 @@ export const determineTypeFactor = (
 	if (attackType === 'normal' && attacker.ability === 'refrigerate') {
 		attackType = 'ice';
 	}
+	if (attackType === 'normal' && attacker.ability === 'pixilate') {
+		attackType = 'fairy';
+	}
 	if (attack.name === 'hidden-power') {
 		attackType = getHiddenPowerType(attacker.intrinsicValues);
 	}
