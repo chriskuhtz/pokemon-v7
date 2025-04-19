@@ -41,7 +41,7 @@ export const typeEffectivenessChart: Record<
 		doesntEffect: [],
 	},
 	water: {
-		isSuperEffectiveAgainst: ['fire', 'rock'],
+		isSuperEffectiveAgainst: ['fire', 'rock', 'ground'],
 		isNotVeryEffectiveAgainst: ['grass', 'water', 'dragon'],
 		doesntEffect: [],
 	},
