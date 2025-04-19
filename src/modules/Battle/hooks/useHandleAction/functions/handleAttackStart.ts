@@ -69,6 +69,7 @@ export const handleAttackStart = ({
 					}),
 				];
 			case 'user':
+			case 'entire-field':
 				return [attacker];
 
 			case 'user-or-ally':
@@ -76,7 +77,6 @@ export const handleAttackStart = ({
 			case 'selected-pokemon-me-first':
 			case 'selected-pokemon':
 			case 'fainting-pokemon':
-			case 'entire-field':
 			case 'ally':
 				return [
 					getActualTarget({
