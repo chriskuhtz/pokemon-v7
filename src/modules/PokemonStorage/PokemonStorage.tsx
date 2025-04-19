@@ -22,7 +22,7 @@ export const PokemonStorage = ({
 	const { addMessage } = useContext(MessageQueueContext);
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
-	const allPokemon = useMemo(() => saveFile.pokemon, [saveFile.pokemon]);
+	const allPokemon = useMemo(() => saveFile.pokemon, [saveFile]);
 	const [sortBy, setSortBy] = useState<'HAPPINESS' | 'XP' | 'NAME' | 'BALL'>(
 		'NAME'
 	);
@@ -87,7 +87,7 @@ export const PokemonStorage = ({
 		patchSaveFileReducer({
 			bag: joinInventories(saveFile.bag, collected),
 			pokemon: allPokemon.map((p) => {
-				if (!p.onTeam) {
+				if (p.onTeam) {
 					return p;
 				}
 
