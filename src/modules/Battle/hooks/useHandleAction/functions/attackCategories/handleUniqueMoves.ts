@@ -440,6 +440,21 @@ export const handleUniqueMoves = ({
 			consumedBerry: undefined,
 		};
 	}
+	if (move.name === 'refresh') {
+		if (!updatedAttacker.primaryAilment) {
+			addMessage({
+				message: `It failed`,
+			});
+		}
+
+		addMessage({
+			message: `${updatedAttacker.name} cured its ${updatedAttacker.primaryAilment?.type}`,
+		});
+		updatedAttacker = {
+			...updatedAttacker,
+			primaryAilment: undefined,
+		};
+	}
 
 	return updatedPokemon.map((p) => {
 		if (p.id === updatedAttacker.id) {
