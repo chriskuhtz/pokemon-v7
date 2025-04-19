@@ -48,6 +48,7 @@ export const ChangeLogV04 = (): JSX.Element => {
 				<li>Improved Amoongus Trades</li>
 				<li>Setting: Random Held Items</li>
 				<li>Setting: Random Abilities</li>
+				<li>Fixed Weather Display and Message</li>
 			</ol>
 		</>
 	);

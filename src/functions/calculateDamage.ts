@@ -17,6 +17,7 @@ import { PokemonType } from '../interfaces/PokemonType';
 import { StatObject } from '../interfaces/StatObject';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
+import { BattleTerrain } from '../modules/Battle/hooks/useBattleWeather';
 import { calculateLevelData } from './calculateLevelData';
 import { calculateModifiedStat } from './calculateModifiedStat';
 import { determineCrit } from './determineCrit';
@@ -213,6 +214,7 @@ export const calculateDamage = (
 	attack: BattleAttack,
 	weather: WeatherType | undefined,
 	battleFieldEffects: BattleFieldEffect[],
+	terrain: BattleTerrain | undefined,
 	calculateCrits: boolean,
 	targetIsFlying: boolean,
 	targetIsUnderground: boolean,
@@ -661,6 +663,12 @@ export const calculateDamage = (
 		auraAndPulseMoves.includes(attack.name)
 			? 1.5
 			: 1;
+	const grassPeltFactor =
+		terrain === 'grassy' &&
+		target.ability === 'grass-pelt' &&
+		damageClass === 'physical'
+			? 0.66
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -726,7 +734,8 @@ export const calculateDamage = (
 				revengeFactor *
 				strongJawFactor *
 				refrigerateFactor *
-				megaLauncherFactor
+				megaLauncherFactor *
+				grassPeltFactor
 		),
 		1
 	);

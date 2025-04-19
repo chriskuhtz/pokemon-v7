@@ -10,6 +10,7 @@ import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
+import { BattleTerrain } from '../../../useBattleWeather';
 import { handleAbilitiesAfterAttack } from '../handleAbilitiesAfterAttack';
 
 export const handleSwaggerAttack = ({
@@ -18,6 +19,7 @@ export const handleSwaggerAttack = ({
 	addMessage,
 	move: m,
 	battleWeather,
+	terrain,
 	battleFieldEffects,
 	target,
 }: {
@@ -26,6 +28,7 @@ export const handleSwaggerAttack = ({
 	addMessage: (x: Message) => void;
 	move: BattleAttack;
 	battleWeather: WeatherType | undefined;
+	terrain: BattleTerrain | undefined;
 	battleFieldEffects: BattleFieldEffect[];
 	target: BattlePokemon;
 }): BattlePokemon[] => {
@@ -88,6 +91,7 @@ export const handleSwaggerAttack = ({
 			move,
 			battleWeather,
 			battleFieldEffects,
+			terrain,
 			true,
 			isFlying,
 			isUnderground,

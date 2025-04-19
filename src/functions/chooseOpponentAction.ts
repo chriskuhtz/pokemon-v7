@@ -29,6 +29,7 @@ export const determineBestMoveAndTarget = (
 					},
 					undefined,
 					[],
+					undefined,
 					false,
 					false,
 					false,

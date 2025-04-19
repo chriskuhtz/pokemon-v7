@@ -33,7 +33,7 @@ import { PlayerLane } from './components/PlayerLane';
 import { RefillHandling } from './components/RefillHandling';
 import { checkAndHandleFainting } from './functions/handleFainting';
 import { useBattleFieldEffects } from './hooks/useBattleFieldEffects';
-import { useBattleWeather } from './hooks/useBattleWeather';
+import { useBattleTerrain, useBattleWeather } from './hooks/useBattleWeather';
 import { useChooseAction } from './hooks/useChooseAction';
 import { useHandleAction } from './hooks/useHandleAction/useHandleAction';
 
@@ -155,6 +155,7 @@ export const BattleField = ({
 
 	const { battleWeather, setBattleWeather, reduceWeatherDuration } =
 		useBattleWeather(allOnField);
+	const { battleTerrain } = useBattleTerrain();
 
 	const {
 		battleFieldEffects,
@@ -358,6 +359,7 @@ export const BattleField = ({
 		addMessage,
 		leaveWithCurrentData,
 		battleWeather,
+		battleTerrain,
 		addMultipleMessages,
 		battleRound,
 		battleLocation,
