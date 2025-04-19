@@ -43,10 +43,7 @@ export const handleAttackStart = ({
 			case 'user-and-allies':
 			case 'users-field':
 				return pokemon.filter(
-					(p) =>
-						p.status === 'ONFIELD' &&
-						p.ownerId === attacker.ownerId &&
-						p.id !== attacker.id
+					(p) => p.status === 'ONFIELD' && p.ownerId === attacker.ownerId
 				);
 			case 'all-opponents':
 			case 'opponents-field':
