@@ -33,7 +33,7 @@ const SLEDGEHAMMER_ENCOUNTER_OPTIONS: OwnedPokemon[] = sledgeHammerPokemon.map(
 		makeChallengerPokemon({
 			nature: getRandomNature(),
 			name: h,
-			xp: 200,
+			xp: 3375,
 			caughtOnMap: 'routeN1',
 		})
 );
