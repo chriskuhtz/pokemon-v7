@@ -29,6 +29,12 @@ export type ChargeUp = {
 	name: MoveName;
 	round: number;
 };
+export type Recover = {
+	type: 'Recover';
+	data: MoveDto;
+	name: MoveName;
+	round: number;
+};
 export interface InBattleItem {
 	item: HealingItemType | PPRestoringItemType | XItemType;
 	type: 'InBattleItem';
@@ -40,8 +46,8 @@ export interface RunAway {
 	type: 'RunAway';
 	round: number;
 }
-export interface Slacking {
-	type: 'Slacking';
+export interface Loafing {
+	type: 'Loafing';
 	round: number;
 	data: { priority: 0 };
 }
@@ -55,7 +61,8 @@ export type BattleAction =
 	| CatchProcessInfo
 	| BattleAttack
 	| ChargeUp
+	| Recover
 	| InBattleItem
 	| RunAway
-	| Slacking
+	| Loafing
 	| SwitchPokemon;

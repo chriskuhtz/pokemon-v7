@@ -13,7 +13,7 @@ import { ItemType } from '../../../../interfaces/Item';
 import { WeatherType } from '../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../BattleField';
 import { handleMoveBlockAilments } from '../../functions/handleMoveBlockAilments';
-import { WeatherObject } from '../useBattleWeather';
+import { BattleTerrain, WeatherObject } from '../useBattleWeather';
 import { handleAllAttackCategories } from './functions/handleAllAttackCategories';
 import { handleCatch } from './functions/handleCatch';
 
@@ -23,6 +23,7 @@ export const useHandleAction = (
 	addMessage: (x: Message) => void,
 	leave: (outcome: 'WIN' | 'LOSS' | 'DRAW') => void,
 	battleWeather: WeatherType | undefined,
+	terrain: BattleTerrain | undefined,
 	addMultipleMessages: (x: Message[]) => void,
 	battleRound: number,
 	battleLocation: BattleLocation,
@@ -140,9 +141,9 @@ export const useHandleAction = (
 				);
 				return;
 			}
-			if (move.type === 'Slacking') {
+			if (move.type === 'Loafing') {
 				addMessage({
-					message: `${attacker.name} is slacking off`,
+					message: `${attacker.name} is loafing around`,
 				});
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
@@ -254,6 +255,22 @@ export const useHandleAction = (
 					})
 				);
 			}
+			if (move.type === 'Recover') {
+				addMessage({
+					message: `${attacker.name} has to recover`,
+				});
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.id === attacker.id) {
+							return {
+								...attacker,
+								moveQueue: attacker.moveQueue.slice(1),
+							};
+						}
+						return p;
+					})
+				);
+			}
 
 			if (move.type === 'BattleAttack') {
 				handleAllAttackCategories({
@@ -273,6 +290,7 @@ export const useHandleAction = (
 					removeSpikes,
 					removeScreens,
 					logDamage,
+					terrain,
 				});
 
 				return;
@@ -298,6 +316,7 @@ export const useHandleAction = (
 			removeSpikes,
 			removeScreens,
 			logDamage,
+			terrain,
 		]
 	);
 };

@@ -12,6 +12,7 @@ import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
+import { BattleTerrain } from '../../../useBattleWeather';
 import { handleAbilitiesAfterAttack } from '../handleAbilitiesAfterAttack';
 
 /**
@@ -31,6 +32,7 @@ export const handleDamageAttack = ({
 	scatterCoins,
 	targetsFactor,
 	logDamage,
+	terrain,
 }: {
 	attacker: BattlePokemon;
 	target: BattlePokemon;
@@ -45,6 +47,7 @@ export const handleDamageAttack = ({
 	scatterCoins: () => void;
 	targetsFactor: number;
 	logDamage: (x: number) => void;
+	terrain: BattleTerrain | undefined;
 }): BattlePokemon[] => {
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
@@ -150,7 +153,9 @@ export const handleDamageAttack = ({
 			move,
 			battleWeather,
 			battleFieldEffects,
+			terrain,
 			true,
+
 			isFlying,
 			isUnderground,
 			targetsFactor,
@@ -262,6 +267,13 @@ export const handleDamageAttack = ({
 			...updatedAttacker,
 			damage:
 				updatedAttacker.damage + Math.floor(updatedAttacker.stats.hp / 10),
+		};
+	}
+	if (getHeldItem(updatedTarget) === 'air-balloon' && actualDamage > 0) {
+		addMessage({ message: `${updatedTarget}´s air balloon popped` });
+		updatedTarget = {
+			...updatedTarget,
+			heldItemName: undefined,
 		};
 	}
 

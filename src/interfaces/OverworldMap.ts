@@ -153,6 +153,7 @@ export interface OverworldPokemon extends BaseOccupant {
 	dexId: number;
 	dialogue: string[];
 	orientation: CharacterOrientation;
+	encounter?: OverworldEncounter;
 }
 export interface OverworldSnorlax extends BaseOccupant {
 	type: 'SNORLAX';

@@ -60,7 +60,12 @@ export const applySecondaryAilmentToPokemon = ({
 			...pokemon,
 			secondaryAilments: [
 				...pokemon.secondaryAilments,
-				{ type: ailment, duration, by: applicator.id },
+				{
+					type: ailment,
+					duration,
+					by: applicator.id,
+					bindingBanded: getHeldItem(applicator) === 'binding-band',
+				},
 			],
 		};
 	}

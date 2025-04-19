@@ -402,6 +402,15 @@ export const handleUniqueMoves = ({
 		updatedAttacker = { ...updatedAttacker, heldItemName: targetItem };
 		updatedTarget = { ...updatedTarget, heldItemName: attackerItem };
 	}
+	if (move.name === 'skill-swap') {
+		addMessage({
+			message: `${updatedAttacker.name} swapped ${updatedAttacker.ability} with ${updatedTarget.ability}`,
+		});
+		const attackerAbility = updatedAttacker.ability;
+		const targetAbility = updatedTarget.ability;
+		updatedAttacker = { ...updatedAttacker, ability: targetAbility };
+		updatedTarget = { ...updatedTarget, ability: attackerAbility };
+	}
 	if (move.name === 'role-play') {
 		addMessage({
 			message: `${updatedAttacker.name} copied ${updatedTarget.name}´s ability ${updatedTarget.ability}`,
@@ -429,6 +438,21 @@ export const handleUniqueMoves = ({
 			...updatedAttacker,
 			heldItemName: updatedAttacker.consumedBerry,
 			consumedBerry: undefined,
+		};
+	}
+	if (move.name === 'refresh') {
+		if (!updatedAttacker.primaryAilment) {
+			addMessage({
+				message: `It failed`,
+			});
+		}
+
+		addMessage({
+			message: `${updatedAttacker.name} cured its ${updatedAttacker.primaryAilment?.type}`,
+		});
+		updatedAttacker = {
+			...updatedAttacker,
+			primaryAilment: undefined,
 		};
 	}
 

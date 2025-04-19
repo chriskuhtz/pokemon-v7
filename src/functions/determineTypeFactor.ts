@@ -41,6 +41,9 @@ export const determineTypeFactor = (
 	if (attackType === 'normal' && attacker.ability === 'refrigerate') {
 		attackType = 'ice';
 	}
+	if (attackType === 'normal' && attacker.ability === 'pixilate') {
+		attackType = 'fairy';
+	}
 	if (attack.name === 'hidden-power') {
 		attackType = getHiddenPowerType(attacker.intrinsicValues);
 	}
@@ -73,6 +76,17 @@ export const determineTypeFactor = (
 		if (addMessage) {
 			addMessage({
 				message: `${target.data.name} prevents damage with levitate`,
+			});
+		}
+		res = 0;
+	}
+	if (
+		attack.data.type.name === 'ground' &&
+		getHeldItem(target) === 'air-balloon'
+	) {
+		if (addMessage) {
+			addMessage({
+				message: `${target.data.name} prevents damage with air-balloon`,
 			});
 		}
 		res = 0;

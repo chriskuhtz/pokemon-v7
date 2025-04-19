@@ -429,6 +429,8 @@ export const questNames = [
 	'evolve some local flying pokemon',
 	'evolve a flying pokemon to its final stage',
 	'catch the legendary bird of ice',
+	'catch the legendary bird of fire',
+	'catch the legendary bird of thunder',
 	'catch a pokemon orginally found in kanto',
 	'catch a pokemon orginally found in johto',
 	'catch a pokemon orginally found in hoenn',
@@ -1572,6 +1574,26 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			return s.pokedex['articuno'].caughtOnRoutes.length > 0;
 		},
 		targetPokemon: [],
+		kind: 'QUEST_LINE',
+	},
+	'catch the legendary bird of fire': {
+		rewardItems: { 'rare-candy': 10 },
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.pokedex['moltres'].caughtOnRoutes.length > 0;
+		},
+		targetPokemon: [],
+		requiredUpgrade: 'invite historian',
+		kind: 'QUEST_LINE',
+	},
+	'catch the legendary bird of thunder': {
+		rewardItems: { 'rare-candy': 10 },
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.pokedex['zapdos'].caughtOnRoutes.length > 0;
+		},
+		targetPokemon: [],
+		requiredUpgrade: 'invite historian',
 		kind: 'QUEST_LINE',
 	},
 	'defeat rowan': {

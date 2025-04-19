@@ -47,7 +47,7 @@ export const mapDisplayNames: Record<MapId, string> = {
 	routeS1E1: 'midori plains',
 	routeS1: 'aoi lake',
 	routeS1W1: 'kuro hills',
-	routeW1: 'shiro route',
+	routeW1: 'shiro cliffs',
 	caveW1: 'shiro cave',
 	routeN1W1: 'koniro plateau',
 	camp: 'kuma camp',

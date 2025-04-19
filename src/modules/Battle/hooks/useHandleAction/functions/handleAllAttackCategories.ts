@@ -16,7 +16,7 @@ import { handleWholeFieldEffectAttack } from './attackCategories/handleWholeFiel
 import { handleAttackStart } from './handleAttackStart';
 
 import { changeMovePP } from '../../../../../functions/changeMovePP';
-import { WeatherObject } from '../../useBattleWeather';
+import { BattleTerrain, WeatherObject } from '../../useBattleWeather';
 
 export const handleAllAttackCategories = ({
 	attacker,
@@ -29,6 +29,7 @@ export const handleAllAttackCategories = ({
 	dampy,
 	addBattleFieldEffect,
 	battleFieldEffects,
+	terrain,
 	handleForceSwitch,
 	setBattleWeather,
 	leave,
@@ -46,6 +47,7 @@ export const handleAllAttackCategories = ({
 	dampy?: { name: string };
 	addBattleFieldEffect: (x: BattleFieldEffect) => void;
 	battleFieldEffects: BattleFieldEffect[];
+	terrain: BattleTerrain | undefined;
 	handleForceSwitch: (x: BattlePokemon, moveName: MoveName) => BattlePokemon[];
 	setBattleWeather: (w: WeatherObject | undefined) => void;
 	leave: (outcome: 'WIN' | 'LOSS' | 'DRAW') => void;
@@ -92,6 +94,7 @@ export const handleAllAttackCategories = ({
 					scatterCoins,
 					targetsFactor,
 					logDamage,
+					terrain,
 				});
 			case 'heal':
 				return handleHealAttack({
@@ -158,6 +161,7 @@ export const handleAllAttackCategories = ({
 					move,
 					battleWeather,
 					battleFieldEffects,
+					terrain,
 					target,
 				});
 		}

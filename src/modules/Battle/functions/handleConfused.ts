@@ -40,6 +40,7 @@ export const handleConfused = (
 					} as BattleAttack,
 					undefined,
 					[],
+					undefined,
 					false,
 					false,
 					false,

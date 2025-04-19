@@ -1,4 +1,5 @@
 import { isBagOverloaded } from '../../../components/BagLimitBar/BagLimitBar';
+import { getHistorianMessage } from '../../../functions/getHistorianMessage';
 import { dugtrioExplorers } from '../../../hooks/useDugtrioExplorers';
 import { zigzagoonForagers } from '../../../hooks/useZigzagoonForagers';
 import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
@@ -281,6 +282,17 @@ export const campOccupants: OverworldMap['occupants'] = [
 		sprite: SpriteEnum.gentleman,
 		conditionFunction: (s) => s.campUpgrades['invite museum curator'],
 		id: 'curator',
+	},
+	{
+		type: 'NPC',
+		orientation: 'UP',
+		y: 13,
+		x: 12,
+		handledMessage: getHistorianMessage(),
+		unhandledMessage: getHistorianMessage(),
+		sprite: SpriteEnum.grandFather3,
+		conditionFunction: (s) => s.campUpgrades['invite museum curator'],
+		id: 'historian',
 	},
 	{
 		type: 'SWARM_RADAR',

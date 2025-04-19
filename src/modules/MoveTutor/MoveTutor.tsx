@@ -7,6 +7,7 @@ import {
 } from '../../constants/checkLists/movesCheckList';
 import { nameToIdMap } from '../../constants/pokemonNames';
 import { calculateLevelData } from '../../functions/calculateLevelData';
+import { getEntryWithOverflow } from '../../functions/filterTargets';
 import { moveIsTeachable } from '../../functions/moveIsAvailable';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
@@ -139,6 +140,23 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 					handledMoves.includes(m.move.name as MoveName) &&
 					!ownedPokemon.unlockedMoves.includes(m.move.name as MoveName)
 			)
+			.map((m) => {
+				if (saveFile.settings?.randomLearnSets) {
+					const index =
+						handledMoves.findIndex((handled) => handled === m.move.name) +
+						ownedPokemon.name.length * 5;
+					const randomizedMove = getEntryWithOverflow([...handledMoves], index);
+					console.log(m.move.name, randomizedMove);
+					return {
+						...m,
+						move: {
+							...m.move,
+							name: randomizedMove,
+						},
+					};
+				}
+				return m;
+			})
 			.sort((a, b) => {
 				if (ownedPokemon.unlockedMoves.includes(a.move.name as MoveName)) {
 					return -1;
@@ -162,7 +180,12 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 					learnMethodOrder[b.version_group_details[0].move_learn_method.name]
 				);
 			});
-	}, [data, ownedPokemon]);
+	}, [
+		data,
+		ownedPokemon.name.length,
+		ownedPokemon.unlockedMoves,
+		saveFile.settings?.randomLearnSets,
+	]);
 
 	const getCostForLearnMethod = (
 		moveName: MoveName,

@@ -159,7 +159,9 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 		updatedPokemon = updatedPokemon.map((p) => {
 			if (p.id === user.id) {
 				if (
-					(getTypeNames(p).includes('flying') || p.ability === 'levitate') &&
+					(getTypeNames(p).includes('flying') ||
+						p.ability === 'levitate' ||
+						getHeldItem(p) === 'air-balloon') &&
 					getHeldItem(p) !== 'iron-ball'
 				) {
 					return p;

@@ -824,10 +824,22 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/178/',
 		handled: true,
 	},
-	{ name: 'grass-pelt', url: 'https://pokeapi.co/api/v2/ability/179/' },
-	{ name: 'symbiosis', url: 'https://pokeapi.co/api/v2/ability/180/' },
-	{ name: 'tough-claws', url: 'https://pokeapi.co/api/v2/ability/181/' },
-	{ name: 'pixilate', url: 'https://pokeapi.co/api/v2/ability/182/' },
+	{
+		name: 'grass-pelt',
+		url: 'https://pokeapi.co/api/v2/ability/179/',
+		handled: true,
+	},
+
+	{
+		name: 'tough-claws',
+		url: 'https://pokeapi.co/api/v2/ability/181/',
+		handled: true,
+	},
+	{
+		name: 'pixilate',
+		url: 'https://pokeapi.co/api/v2/ability/182/',
+		handled: true,
+	},
 	{ name: 'gooey', url: 'https://pokeapi.co/api/v2/ability/183/' },
 	{ name: 'aerilate', url: 'https://pokeapi.co/api/v2/ability/184/' },
 	{ name: 'parental-bond', url: 'https://pokeapi.co/api/v2/ability/185/' },
@@ -1014,21 +1026,11 @@ export const abilityCheckList: {
 	{ name: 'decoy', url: 'https://pokeapi.co/api/v2/ability/10059/' },
 	{ name: 'shield', url: 'https://pokeapi.co/api/v2/ability/10060/' },
 	//banished
-	{
-		name: 'forecast',
-		url: 'https://pokeapi.co/api/v2/ability/59/',
-	},
-
+	{ name: 'forecast', url: 'https://pokeapi.co/api/v2/ability/59/' },
 	{ name: 'mold-breaker', url: 'https://pokeapi.co/api/v2/ability/104/' },
-	{
-		name: 'anticipation',
-		url: 'https://pokeapi.co/api/v2/ability/107/',
-	},
+	{ name: 'anticipation', url: 'https://pokeapi.co/api/v2/ability/107/' },
 	{ name: 'forewarn', url: 'https://pokeapi.co/api/v2/ability/108/' },
-	{
-		name: 'multitype',
-		url: 'https://pokeapi.co/api/v2/ability/121/',
-	},
+	{ name: 'multitype', url: 'https://pokeapi.co/api/v2/ability/121/' },
 	{ name: 'analytic', url: 'https://pokeapi.co/api/v2/ability/148/' },
 	{ name: 'illusion', url: 'https://pokeapi.co/api/v2/ability/149/' },
 	{ name: 'imposter', url: 'https://pokeapi.co/api/v2/ability/150/' },
@@ -1038,6 +1040,7 @@ export const abilityCheckList: {
 	{ name: 'teravolt', url: 'https://pokeapi.co/api/v2/ability/164/' },
 	{ name: 'cheek-pouch', url: 'https://pokeapi.co/api/v2/ability/167/' },
 	{ name: 'stance-change', url: 'https://pokeapi.co/api/v2/ability/176/' },
+	{ name: 'symbiosis', url: 'https://pokeapi.co/api/v2/ability/180/' },
 ];
 
 export const abilityNames = [
@@ -1204,6 +1207,9 @@ export const abilityNames = [
 	'sweet-veil',
 	'gale-wings',
 	'mega-launcher',
+	'grass-pelt',
+	'tough-claws',
+	'pixilate',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

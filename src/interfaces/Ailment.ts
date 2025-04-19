@@ -58,7 +58,8 @@ export interface SecondaryAilment {
 	move?: MoveName; // For Disable|Encore
 	healAmount?: number; // for leech seed
 	targetId?: string;
-	by?: string; // for mind read
+	by?: string; // for mind read and trap
+	bindingBanded?: boolean; // for trap
 }
 
 export function isSecondaryAilment(x: { type: string }): x is SecondaryAilment {

@@ -1529,11 +1529,21 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/582/',
 		handled: true,
 	},
-	{ name: 'rocky-helmet', url: 'https://pokeapi.co/api/v2/item/583/' },
-	{ name: 'air-balloon', url: 'https://pokeapi.co/api/v2/item/584/' },
-	{ name: 'red-card', url: 'https://pokeapi.co/api/v2/item/585/' },
-	{ name: 'ring-target', url: 'https://pokeapi.co/api/v2/item/586/' },
-	{ name: 'binding-band', url: 'https://pokeapi.co/api/v2/item/587/' },
+	{
+		name: 'rocky-helmet',
+		url: 'https://pokeapi.co/api/v2/item/583/',
+		handled: true,
+	},
+	{
+		name: 'air-balloon',
+		url: 'https://pokeapi.co/api/v2/item/584/',
+		handled: true,
+	},
+	{
+		name: 'binding-band',
+		url: 'https://pokeapi.co/api/v2/item/587/',
+		handled: true,
+	},
 	{ name: 'absorb-bulb', url: 'https://pokeapi.co/api/v2/item/588/' },
 	{ name: 'cell-battery', url: 'https://pokeapi.co/api/v2/item/589/' },
 	{ name: 'eject-button', url: 'https://pokeapi.co/api/v2/item/590/' },
@@ -2677,6 +2687,8 @@ export const itemsCheckList: {
 	 *
 	 *
 	 */
+	{ name: 'ring-target', url: 'https://pokeapi.co/api/v2/item/586/' },
+	{ name: 'red-card', url: 'https://pokeapi.co/api/v2/item/585/' },
 	{ name: 'sticky-barb', url: 'https://pokeapi.co/api/v2/item/265/' },
 	{ name: 'grass-mail', url: 'https://pokeapi.co/api/v2/item/114/' },
 	{ name: 'flame-mail', url: 'https://pokeapi.co/api/v2/item/115/' },

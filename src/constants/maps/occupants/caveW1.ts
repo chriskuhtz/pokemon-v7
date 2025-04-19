@@ -1,3 +1,4 @@
+import { getTimeOfDay } from '../../../functions/getTimeOfDay';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 
 export const caveW1Occupants: OverworldMap['occupants'] = [
@@ -105,5 +106,25 @@ export const caveW1Occupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'caveW1-revive'),
 		id: 'caveW1-revive',
+	},
+	{
+		type: 'POKEMON',
+		x: 46,
+		y: 21,
+		orientation: 'DOWN',
+		dexId: 146,
+		encounter: {
+			name: 'moltres',
+			maxXp: 125000,
+			minXp: 125000,
+			rarity: 'common',
+		},
+		dialogue: ['Kyaaah'],
+		conditionFunction: (s) =>
+			s.pokedex.moltres.caughtOnRoutes.length === 0 &&
+			s.bag['fire-stone'] > 0 &&
+			getTimeOfDay() === 'NIGHT' &&
+			s.campUpgrades['invite historian'],
+		id: 'routeW1_moltres',
 	},
 ];

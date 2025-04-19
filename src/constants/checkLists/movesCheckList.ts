@@ -248,11 +248,6 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/62/',
 		handled: true,
 	},
-	{
-		name: 'hyper-beam',
-		url: 'https://pokeapi.co/api/v2/move/63/',
-		handled: true,
-	},
 	{ name: 'peck', url: 'https://pokeapi.co/api/v2/move/64/', handled: true },
 	{
 		name: 'drill-peck',
@@ -1325,11 +1320,37 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/284/',
 		handled: true,
 	},
-	{ name: 'skill-swap', url: 'https://pokeapi.co/api/v2/move/285/' },
-	{ name: 'imprison', url: 'https://pokeapi.co/api/v2/move/286/' },
-	{ name: 'refresh', url: 'https://pokeapi.co/api/v2/move/287/' },
-	{ name: 'grudge', url: 'https://pokeapi.co/api/v2/move/288/' },
-	{ name: 'snatch', url: 'https://pokeapi.co/api/v2/move/289/' },
+	{
+		name: 'skill-swap',
+		url: 'https://pokeapi.co/api/v2/move/285/',
+		handled: true,
+	},
+	{
+		name: 'refresh',
+		url: 'https://pokeapi.co/api/v2/move/287/',
+		handled: true,
+	},
+
+	{
+		name: 'hyper-beam',
+		url: 'https://pokeapi.co/api/v2/move/63/',
+		handled: true,
+	},
+	{
+		name: 'blast-burn',
+		url: 'https://pokeapi.co/api/v2/move/307/',
+		handled: true,
+	},
+	{
+		name: 'hydro-cannon',
+		url: 'https://pokeapi.co/api/v2/move/308/',
+		handled: true,
+	},
+	{
+		name: 'frenzy-plant',
+		url: 'https://pokeapi.co/api/v2/move/338/',
+		handled: true,
+	},
 	{ name: 'secret-power', url: 'https://pokeapi.co/api/v2/move/290/' },
 	{ name: 'dive', url: 'https://pokeapi.co/api/v2/move/291/' },
 	{ name: 'camouflage', url: 'https://pokeapi.co/api/v2/move/293/' },
@@ -1338,8 +1359,6 @@ export const movesCheckList: {
 	{ name: 'ice-ball', url: 'https://pokeapi.co/api/v2/move/301/' },
 	{ name: 'slack-off', url: 'https://pokeapi.co/api/v2/move/303/' },
 	{ name: 'crush-claw', url: 'https://pokeapi.co/api/v2/move/306/' },
-	{ name: 'blast-burn', url: 'https://pokeapi.co/api/v2/move/307/' },
-	{ name: 'hydro-cannon', url: 'https://pokeapi.co/api/v2/move/308/' },
 	{ name: 'weather-ball', url: 'https://pokeapi.co/api/v2/move/311/' },
 	{ name: 'aromatherapy', url: 'https://pokeapi.co/api/v2/move/312/' },
 	{ name: 'odor-sleuth', url: 'https://pokeapi.co/api/v2/move/316/' },
@@ -1347,7 +1366,6 @@ export const movesCheckList: {
 	{ name: 'sky-uppercut', url: 'https://pokeapi.co/api/v2/move/327/' },
 	{ name: 'sand-tomb', url: 'https://pokeapi.co/api/v2/move/328/' },
 	{ name: 'block', url: 'https://pokeapi.co/api/v2/move/335/' },
-	{ name: 'frenzy-plant', url: 'https://pokeapi.co/api/v2/move/338/' },
 	{ name: 'bounce', url: 'https://pokeapi.co/api/v2/move/340/' },
 	{ name: 'covet', url: 'https://pokeapi.co/api/v2/move/343/' },
 	{ name: 'water-sport', url: 'https://pokeapi.co/api/v2/move/346/' },
@@ -2044,6 +2062,9 @@ export const movesCheckList: {
 	{ name: 'upper-hand', url: 'https://pokeapi.co/api/v2/move/918/' },
 	{ name: 'malignant-chain', url: 'https://pokeapi.co/api/v2/move/919/' },
 	//banished
+	{ name: 'grudge', url: 'https://pokeapi.co/api/v2/move/288/' },
+	{ name: 'snatch', url: 'https://pokeapi.co/api/v2/move/289/' },
+	{ name: 'imprison', url: 'https://pokeapi.co/api/v2/move/286/' },
 	{
 		name: 'metronome',
 		url: 'https://pokeapi.co/api/v2/move/118/',
@@ -2166,7 +2187,6 @@ export const handledMoves = [
 	'hydro-pump',
 	'ice-beam',
 	'blizzard',
-	'hyper-beam',
 	'bubble-beam',
 	'psybeam',
 	'aurora-beam',
@@ -2416,6 +2436,12 @@ export const handledMoves = [
 	'knock-off',
 	'endeavor',
 	'eruption',
+	'skill-swap',
+	'refresh',
+	'hyper-beam',
+	'blast-burn',
+	'frenzy-plant',
+	'hydro-cannon',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

@@ -5,11 +5,13 @@ import { getMovesArray } from '../../../functions/getMovesArray';
 import { OPPO_ID } from '../../../functions/makeChallengerPokemon';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
+import { WeatherType } from '../../../interfaces/Weather';
 import {
 	ActionType,
 	BattleFieldEffect,
 	ChooseActionPayload,
 } from '../BattleField';
+import { BattleTerrain } from '../hooks/useBattleWeather';
 import { ActionSelection } from './ActionSelection';
 import { TargetSelection } from './TargetSelection';
 
@@ -21,6 +23,8 @@ export function ControlBar({
 	catchingAllowed,
 	runningAllowed,
 	battleFieldEffects,
+	weather,
+	terrain,
 }: {
 	controlled: BattlePokemon | undefined;
 	targets: BattlePokemon[];
@@ -29,6 +33,8 @@ export function ControlBar({
 	catchingAllowed: boolean;
 	runningAllowed: boolean;
 	battleFieldEffects: BattleFieldEffect[];
+	weather: WeatherType | undefined;
+	terrain: BattleTerrain | undefined;
 }) {
 	const [chosenAction, setChosenAction] = useState<ActionType | undefined>();
 
@@ -52,16 +58,22 @@ export function ControlBar({
 		) {
 			chooseAction({
 				userId: controlled.id,
-				actionName: 'SLACKING',
+				actionName: 'LOAFING',
 				targetId: controlled.id,
 			});
 			return;
 		}
 		if (controlled?.ownerId === OPPO_ID) {
-			const action = chooseOpponentAction({ controlled, targets });
+			const action = chooseOpponentAction({
+				controlled,
+				targets,
+				effects: battleFieldEffects,
+				weather,
+				terrain,
+			});
 			chooseAction(action);
 		}
-	}, [chooseAction, controlled, targets]);
+	}, [battleFieldEffects, chooseAction, controlled, targets, terrain, weather]);
 
 	if (!controlled) {
 		return (

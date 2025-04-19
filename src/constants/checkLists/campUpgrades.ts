@@ -43,6 +43,7 @@ export const campUpgradeNames = [
 	'berry lure station routeS1E1',
 	'berry lure station routeS1W1',
 	'buy skiing equipment',
+	'invite historian',
 	'dragonite taxi',
 ] as const;
 
@@ -96,6 +97,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'swimming certification': ['shovel certification'],
 	'buy skiing equipment': ['swimming certification'],
 	'invite museum curator': ['invite dugtrio explorers'],
+	'invite historian': ['invite dugtrio explorers'],
 	'bag size upgrade 1': baseRequirements,
 	'bag size upgrade 2': [...baseRequirements, 'bag size upgrade 1'],
 	'bag size upgrade 3': [...baseRequirements, 'bag size upgrade 2'],
@@ -154,6 +156,7 @@ export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
 	'berry lure station routeE1': 'Research',
 	'berry lure station routeS1E1': 'Research',
 	'berry lure station routeS1W1': 'Research',
+	'invite historian': 'Research',
 	'dragonite taxi': 'Exploration',
 };
 
@@ -209,5 +212,6 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	'fifth slot for farm': 'more space at the berry farm',
 	'sixth slot for farm': 'more space at the berry farm',
 	'seventh slot for farm': 'more space at the berry farm',
+	'invite historian': 'It might not all be true, but it sounds interesting',
 	'dragonite taxi': 'dragonite can fly you to remote places',
 };

@@ -14,13 +14,15 @@ export const Settings = (): JSX.Element => {
 		fasterDays: false,
 		doubleXpRates: false,
 		rogueLike: false,
+		releaseFaintedPokemon: false,
 		noItemsInBattle: false,
 		randomStarters: false,
 		randomOverworldItems: false,
 		randomQuestRewards: false,
 		randomSwarms: false,
-		releaseFaintedPokemon: false,
-		//randomHeldItems: false,
+		randomAbilities: false,
+		randomHeldItems: false,
+		randomLearnSets: false,
 	});
 
 	const proceed = () => {
@@ -126,17 +128,21 @@ export const Settings = (): JSX.Element => {
 					label={'Random Pokemon Swarms:'}
 					description="can be weird: e.g. swarms of mewtwo"
 				/>
-				{/* <ToggleRow
-					value={state.randomHeldItems}
-					setValue={(x) => setState({ ...state, randomHeldItems: x })}
-					label={'Do you want to randomize the held items of wild pokemon:'}
-				/>{' '}
 				<ToggleRow
-					value={state.disqualifyFaintedPokemon}
-					setValue={(x) => setState({ ...state, disqualifyFaintedPokemon: x })}
-					label={'	Should your defeated Pokemon be released back into the wild:'}
-					description={'Losing a battle = complete reset'}
-				/> */}
+					value={!!state.randomHeldItems}
+					setValue={(x) => setState({ ...state, randomHeldItems: x })}
+					label={'Random Held Items:'}
+				/>
+				<ToggleRow
+					value={!!state.randomAbilities}
+					setValue={(x) => setState({ ...state, randomAbilities: x })}
+					label={'Random Abilities:'}
+				/>
+				<ToggleRow
+					value={!!state.randomLearnSets}
+					setValue={(x) => setState({ ...state, randomLearnSets: x })}
+					label={'Random Learnable Moves:'}
+				/>
 			</div>
 			<br />
 			<br />

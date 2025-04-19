@@ -10,7 +10,10 @@ import { useDrawForeground } from '../../hooks/useDrawBackground';
 import { useDugtrioExplorers } from '../../hooks/useDugtrioExplorers';
 import { useHallowedTower } from '../../hooks/useHallowedTower';
 import { useHoneyTree } from '../../hooks/useHoneyTree';
-import { useInteractWithSnorlax } from '../../hooks/useInteractWithSnorlax';
+import {
+	useInteractWithSnorlax,
+	useStaticEncounter,
+} from '../../hooks/useInteractWithSnorlax';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { useSwarmRadar } from '../../hooks/useSwarmRadar';
@@ -62,6 +65,7 @@ export const Overworld = ({
 	const interactWithLedge = useInteractWithLedge();
 	const interactWithZigzagoonForager = useZigzagoonForagers();
 	const interactWithSnorlax = useInteractWithSnorlax();
+	const interactWithStaticEncounter = useStaticEncounter();
 	const interactWithDugtrioExplorer = useDugtrioExplorers();
 	const interactWithSwarmRadar = useSwarmRadar();
 	const interactWithRock = useSledgeHammer();
@@ -128,6 +132,7 @@ export const Overworld = ({
 				interactWithDugtrioExplorer,
 				interactWithSwarmRadar,
 				interactWithSnorlax,
+				interactWithStaticEncounter,
 				interactWithTrainer,
 				goTo: (route) => navigateAwayFromOverworldReducer(route, stepsTaken),
 				settings: saveFile.settings,
@@ -144,6 +149,7 @@ export const Overworld = ({
 			interactWithLedge,
 			interactWithRock,
 			interactWithSnorlax,
+			interactWithStaticEncounter,
 			interactWithSwarmRadar,
 			interactWithTrainer,
 			interactWithZigzagoonForager,
