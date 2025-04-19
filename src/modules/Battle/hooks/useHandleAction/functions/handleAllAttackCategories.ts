@@ -191,11 +191,11 @@ export const handleAllAttackCategories = ({
 						? [{ ...move, multiHits: move.multiHits - 1, isAMultiHit: true }]
 						: p.moveQueue.slice(1);
 
-				updatedAttacker = changeMovePP(
-					updatedAttacker,
-					move.name,
-					underPressure ? -2 : -1
-				);
+				updatedAttacker =
+					//only reduce pp on last multi hit
+					move.isAMultiHit
+						? updatedAttacker
+						: changeMovePP(updatedAttacker, move.name, underPressure ? -2 : -1);
 
 				return {
 					...checkAndHandleFainting(updatedAttacker, pokemon, addMessage),
