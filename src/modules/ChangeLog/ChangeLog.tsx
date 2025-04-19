@@ -46,7 +46,10 @@ export const ChangeLogV08 = (): JSX.Element => {
 		<>
 			<h3>V 0.8:</h3>
 
-			<ol style={{ lineHeight: '1.5rem' }}></ol>
+			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>Opponents set up screens</li>
+				<li>New Abilities, Items and Attacks</li>
+			</ol>
 		</>
 	);
 };
