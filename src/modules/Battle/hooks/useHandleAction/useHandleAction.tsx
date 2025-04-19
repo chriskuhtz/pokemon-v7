@@ -56,18 +56,7 @@ export const useHandleAction = (
 		(attacker: BattlePokemon) => {
 			//CHECKS
 			const move = attacker.moveQueue[0];
-			if (
-				![
-					'BattleAttack',
-					'CatchProcessInfo',
-					'RunAway',
-					'InBattleItem',
-					'ChargeUp',
-					'Switch',
-				].includes(move.type)
-			) {
-				throw new Error('cant handle this yet');
-			}
+
 			if (move.type === 'Switch') {
 				const target = pokemon.find((p) => p.id === move.targetId);
 				if (!target) {

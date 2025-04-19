@@ -45,7 +45,10 @@ export const ChangeLogV07 = (): JSX.Element => {
 		<>
 			<h3>V 0.7:</h3>
 
-			<ol style={{ lineHeight: '1.5rem' }}></ol>
+			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>Repair Hyper Beam</li>
+				<li>Take all/Store all by clicking on arrow</li>
+			</ol>
 		</>
 	);
 };
