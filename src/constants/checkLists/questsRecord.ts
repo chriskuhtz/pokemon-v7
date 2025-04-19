@@ -710,7 +710,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		targetPokemon: sledgeHammerPokemon,
 		kind: 'BULLETIN',
-		availableAfter: 'lure a pokemon with honey',
+		availableAfter: 'find a pokemon under a smashed rock',
 		requiredUpgrade: 'sledge hammer certification',
 	},
 	'catch all different pokemon on routeS1': {
@@ -2013,7 +2013,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'lure 10 different pokemon with berries': {
 		kind: 'BULLETIN',
-		requiredUpgrade: 'berry lure station routeN1E1',
+		requiredUpgrade: 'berry lure station routeN1',
 		availableAfter: 'lure a pokemon with a berry',
 		researchPoints: 30,
 		rewardItems: {
@@ -2027,7 +2027,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'lure 20 different pokemon with berries': {
 		kind: 'BULLETIN',
-		requiredUpgrade: 'berry lure station routeE1',
+		requiredUpgrade: 'berry lure station routeN1',
 		availableAfter: 'lure 10 different pokemon with berries',
 		researchPoints: 40,
 		rewardItems: {
@@ -2041,7 +2041,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'lure 30 different pokemon with berries': {
 		kind: 'BULLETIN',
-		requiredUpgrade: 'berry lure station routeS1E1',
+		requiredUpgrade: 'berry lure station routeN1',
 		availableAfter: 'lure 20 different pokemon with berries',
 		researchPoints: 50,
 		rewardItems: {
@@ -2053,7 +2053,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'lure 40 different pokemon with berries': {
 		kind: 'BULLETIN',
-		requiredUpgrade: 'berry lure station routeS1E1',
+		requiredUpgrade: 'berry lure station routeN1',
 		availableAfter: 'lure 30 different pokemon with berries',
 		researchPoints: 60,
 		rewardItems: {
@@ -2063,7 +2063,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'lure 50 different pokemon with berries': {
 		kind: 'BULLETIN',
-		requiredUpgrade: 'berry lure station routeS1W1',
+		requiredUpgrade: 'berry lure station routeN1',
 		availableAfter: 'lure 40 different pokemon with berries',
 		researchPoints: 70,
 		rewardItems: {
@@ -2073,7 +2073,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'lure 60 different pokemon with berries': {
 		kind: 'BULLETIN',
-		requiredUpgrade: 'berry lure station routeS1W1',
+		requiredUpgrade: 'berry lure station routeN1',
 		availableAfter: 'lure 50 different pokemon with berries',
 		researchPoints: 80,
 		rewardItems: {
