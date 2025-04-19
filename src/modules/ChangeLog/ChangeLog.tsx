@@ -45,7 +45,11 @@ export const ChangeLogV05 = (): JSX.Element => {
 		<>
 			<h3>V 0.5:</h3>
 
-			<ol style={{ lineHeight: '1.5rem' }}></ol>
+			<ol style={{ lineHeight: '1.5rem' }}>
+				{' '}
+				<li>Fixed Ability: Moody</li>
+				<li>Fixed Setting: Random Abilities</li>
+			</ol>
 		</>
 	);
 };

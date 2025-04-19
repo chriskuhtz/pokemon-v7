@@ -379,4 +379,6 @@ export const extraFeatureCheckList: {
 	{ name: 'Fishing?' },
 	{ name: 'training field challenge mode' },
 	{ name: 'team rocket' },
+	{ name: 'cooler loading screen' },
+	{ name: 'movement buttons feel flaky' },
 ];
