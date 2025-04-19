@@ -1,11 +1,13 @@
-import { useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { GiBreakingChain } from 'react-icons/gi';
 import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { battleSpriteSize } from '../../constants/gameData';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getHeldItem } from '../../functions/getHeldItem';
 import { getItemUrl } from '../../functions/getItemUrl';
-import { Message } from '../../hooks/useMessageQueue';
+import { MessageQueueContext } from '../../hooks/useMessageQueue';
+import { SaveFileContext } from '../../hooks/useSaveFile';
+import { Inventory, joinInventories } from '../../interfaces/Inventory';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { Chip } from '../../uiComponents/Chip/Chip';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
@@ -13,16 +15,14 @@ import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
 export const PokemonStorage = ({
-	allPokemon,
 	goBack,
-	setPokemon,
-	addMessage,
 }: {
-	allPokemon: OwnedPokemon[];
 	goBack: () => void;
-	setPokemon: (x: OwnedPokemon[]) => void;
-	addMessage: (x: Message) => void;
 }): JSX.Element => {
+	const { addMessage } = useContext(MessageQueueContext);
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+
+	const allPokemon = useMemo(() => saveFile.pokemon, [saveFile.pokemon]);
 	const [sortBy, setSortBy] = useState<'HAPPINESS' | 'XP' | 'NAME' | 'BALL'>(
 		'NAME'
 	);
@@ -54,14 +54,14 @@ export const PokemonStorage = ({
 		[allPokemon]
 	);
 	const togglePokemonOnTeam = (id: string) => {
-		setPokemon(
-			allPokemon.map((p) => {
+		patchSaveFileReducer({
+			pokemon: allPokemon.map((p) => {
 				if (p.id === id) {
 					return { ...p, onTeam: !p.onTeam };
 				}
 				return p;
-			})
-		);
+			}),
+		});
 	};
 
 	const startReleaseProcess = (id: string) => {
@@ -71,8 +71,29 @@ export const PokemonStorage = ({
 			return;
 		}
 		if (window.confirm(`Do you really want to release ${pokemon.name}`)) {
-			setPokemon(allPokemon.filter((p) => p.id !== id));
+			patchSaveFileReducer({
+				pokemon: allPokemon.filter((p) => p.id !== id),
+			});
 		}
+	};
+	const collectAllHeldItemsFromStored = () => {
+		const allHeldItemKeys = allPokemon
+			.filter((p) => !p.onTeam && p.heldItemName)
+			.map((p) => p.heldItemName);
+		const collected: Partial<Inventory> = Object.fromEntries(
+			allHeldItemKeys.map((key) => [key, 1])
+		);
+
+		patchSaveFileReducer({
+			bag: joinInventories(saveFile.bag, collected),
+			pokemon: allPokemon.map((p) => {
+				if (!p.onTeam) {
+					return p;
+				}
+
+				return { ...p, heldItemName: undefined };
+			}),
+		});
 	};
 
 	return (
@@ -119,50 +140,53 @@ export const PokemonStorage = ({
 				}}
 			>
 				Storage:
-				<div style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
-					Sort By
-					<button
-						style={
-							sortBy === 'NAME'
-								? { backgroundColor: 'black', color: 'white' }
-								: undefined
-						}
-						onClick={() => setSortBy('NAME')}
-					>
-						NAME
-					</button>
-					<button
-						style={
-							sortBy === 'HAPPINESS'
-								? { backgroundColor: 'black', color: 'white' }
-								: undefined
-						}
-						onClick={() => setSortBy('HAPPINESS')}
-					>
-						Happiness
-					</button>
-					<button
-						style={
-							sortBy === 'XP'
-								? { backgroundColor: 'black', color: 'white' }
-								: undefined
-						}
-						onClick={() => setSortBy('XP')}
-					>
-						Level
-					</button>
-					<button
-						style={
-							sortBy === 'BALL'
-								? { backgroundColor: 'black', color: 'white' }
-								: undefined
-						}
-						onClick={() => setSortBy('BALL')}
-					>
-						Ball
-					</button>
-				</div>
 			</h2>
+			<div style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
+				Sort By
+				<button
+					style={
+						sortBy === 'NAME'
+							? { backgroundColor: 'black', color: 'white' }
+							: undefined
+					}
+					onClick={() => setSortBy('NAME')}
+				>
+					NAME
+				</button>
+				<button
+					style={
+						sortBy === 'HAPPINESS'
+							? { backgroundColor: 'black', color: 'white' }
+							: undefined
+					}
+					onClick={() => setSortBy('HAPPINESS')}
+				>
+					Happiness
+				</button>
+				<button
+					style={
+						sortBy === 'XP'
+							? { backgroundColor: 'black', color: 'white' }
+							: undefined
+					}
+					onClick={() => setSortBy('XP')}
+				>
+					Level
+				</button>
+				<button
+					style={
+						sortBy === 'BALL'
+							? { backgroundColor: 'black', color: 'white' }
+							: undefined
+					}
+					onClick={() => setSortBy('BALL')}
+				>
+					Ball
+				</button>
+			</div>
+			<button onClick={collectAllHeldItemsFromStored}>
+				Collect all held items from stored Pokemon
+			</button>
 
 			<Stack mode="row">
 				{stored.sort(sortFunction).map((pokemon) => {
