@@ -385,4 +385,5 @@ export const extraFeatureCheckList: {
 		name: 'forager army quest: have 6 zigzagoon with pick up in your prty. Given by zigzagoon guy',
 	},
 	{ name: 'releasing pokemon should not end fullscreen mode' },
+	{ name: 'trainer ai should consider flying,dig, diving' },
 ];

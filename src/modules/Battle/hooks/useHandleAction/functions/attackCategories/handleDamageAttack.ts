@@ -62,6 +62,10 @@ export const handleDamageAttack = ({
 		updatedTarget.moveQueue.length > 0 &&
 		updatedTarget.moveQueue[0].type === 'BattleAttack' &&
 		updatedTarget.moveQueue[0].name === 'dig';
+	const isDiving =
+		updatedTarget.moveQueue.length > 0 &&
+		updatedTarget.moveQueue[0].type === 'BattleAttack' &&
+		updatedTarget.moveQueue[0].name === 'dive';
 
 	const attackerIsSafeguarded = battleFieldEffects.some(
 		(b) => b.type === 'safeguard' && b.ownerId === updatedAttacker.ownerId
@@ -159,6 +163,7 @@ export const handleDamageAttack = ({
 
 			isFlying,
 			isUnderground,
+			isDiving,
 			targetsFactor,
 			addMessage
 		);

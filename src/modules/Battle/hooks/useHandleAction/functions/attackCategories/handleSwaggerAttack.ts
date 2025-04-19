@@ -44,6 +44,11 @@ export const handleSwaggerAttack = ({
 		updatedTarget.moveQueue[0].type === 'BattleAttack' &&
 		updatedTarget.moveQueue[0].name === 'dig';
 
+	const isDiving =
+		updatedTarget.moveQueue.length > 0 &&
+		updatedTarget.moveQueue[0].type === 'BattleAttack' &&
+		updatedTarget.moveQueue[0].name === 'dive';
+
 	const move = m;
 
 	//UPDATES
@@ -95,6 +100,7 @@ export const handleSwaggerAttack = ({
 			true,
 			isFlying,
 			isUnderground,
+			isDiving,
 			1,
 			addMessage
 		);
