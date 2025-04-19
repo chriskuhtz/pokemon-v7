@@ -62,7 +62,7 @@ export const useChooseAction = (
 			if (!user) {
 				throw new Error('the user is not on the field');
 			}
-			if (actionName === 'SLACKING') {
+			if (actionName === 'LOAFING') {
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
 						if (p.id === user.id) {
@@ -70,7 +70,7 @@ export const useChooseAction = (
 								...user,
 								moveQueue: [
 									{
-										type: 'Slacking',
+										type: 'Loafing',
 										round: battleRound,
 										data: { priority: 0 },
 									},

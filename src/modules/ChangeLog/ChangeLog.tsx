@@ -46,6 +46,8 @@ export const ChangeLogV04 = (): JSX.Element => {
 
 			<ol style={{ lineHeight: '1.5rem' }}>
 				<li>Improved Amoongus Trades</li>
+				<li>Setting: Random Held Items</li>
+				<li>Setting: Random Abilities</li>
 			</ol>
 		</>
 	);

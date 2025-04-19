@@ -52,7 +52,7 @@ export function ControlBar({
 		) {
 			chooseAction({
 				userId: controlled.id,
-				actionName: 'SLACKING',
+				actionName: 'LOAFING',
 				targetId: controlled.id,
 			});
 			return;

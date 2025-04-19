@@ -40,8 +40,8 @@ export interface RunAway {
 	type: 'RunAway';
 	round: number;
 }
-export interface Slacking {
-	type: 'Slacking';
+export interface Loafing {
+	type: 'Loafing';
 	round: number;
 	data: { priority: 0 };
 }
@@ -57,5 +57,5 @@ export type BattleAction =
 	| ChargeUp
 	| InBattleItem
 	| RunAway
-	| Slacking
+	| Loafing
 	| SwitchPokemon;

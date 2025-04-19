@@ -8,6 +8,7 @@ import { calculateLevelData } from '../functions/calculateLevelData';
 import { getRandomEntry } from '../functions/filterTargets';
 import { getEvAwards } from '../functions/getEvAwards';
 import { getHeldItem } from '../functions/getHeldItem';
+import { getSettings } from '../functions/getPlayerId';
 import { getStats } from '../functions/getStats';
 import { deAlternate } from '../functions/handleAlternateForms';
 import { maybeGetHeldItemFromData } from '../functions/maybeGetHeldItemFromData';
@@ -44,6 +45,7 @@ export const useGetBattleTeam = (
 	return useFetch<BattlePokemon[]>(() =>
 		Promise.all(
 			initTeam.map(async (pokemon) => {
+				const { randomAbilities } = getSettings() ?? {};
 				const { name, xp } = pokemon;
 				const data: Promise<PokemonData> = (
 					await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
@@ -76,16 +78,21 @@ export const useGetBattleTeam = (
 				] as AbilityName[];
 
 				const chooseAbility = (): AbilityName => {
-					if (
-						possibleAbilities.includes(pokemon.ability) ||
-						pokemon.fixedAbility
-					) {
+					if (pokemon.fixedAbility) {
+						return pokemon.ability;
+					}
+
+					if (possibleAbilities.includes(pokemon.ability)) {
 						return pokemon.ability;
 					}
 					if (assignNaturalAbility && possibleAbilities.length > 0) {
+						if (randomAbilities) {
+							return getRandomEntry([...abilityNames]);
+						}
 						return getRandomEntry(possibleAbilities);
 					}
-					return getRandomEntry(possibleAbilities);
+
+					return getRandomEntry([...abilityNames]);
 				};
 
 				const ability = chooseAbility();
@@ -179,6 +186,7 @@ export const useGetBattleTeam = (
 					: getHeldItem(pokemon);
 				const battleMon: BattlePokemon = {
 					...pokemon,
+					fixedAbility: pokemon.fixedAbility || randomAbilities,
 					growthRate: spd.growth_rate.name,
 					gender,
 					ability: ability,

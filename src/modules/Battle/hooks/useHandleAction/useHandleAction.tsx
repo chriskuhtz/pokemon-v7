@@ -140,9 +140,9 @@ export const useHandleAction = (
 				);
 				return;
 			}
-			if (move.type === 'Slacking') {
+			if (move.type === 'Loafing') {
 				addMessage({
-					message: `${attacker.name} is slacking off`,
+					message: `${attacker.name} is loafing around`,
 				});
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {

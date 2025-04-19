@@ -337,9 +337,6 @@ export const extraFeatureCheckList: {
 	{ name: 'miltank milk as cooking ingredient', handled: true },
 	{ name: 'movement buttons', handled: true },
 	{ name: 'categories for upgrades', handled: true },
-	{ name: 'battle backgrounds' },
-	{ name: 'prettier weather display' },
-	{ name: 'eggs?' },
 	{ name: 'random abilities' },
 	{ name: 'gen 8 fossils' },
 	{ name: 'randomized-moves' },
@@ -365,4 +362,8 @@ export const extraFeatureCheckList: {
 	{ name: 'training field 5' },
 	{ name: 'training field 6' },
 	{ name: 'random location items that respawn' },
+	{ name: 'ev reset guy' },
+	{ name: 'battle backgrounds' },
+	{ name: 'prettier weather display' },
+	{ name: 'eggs?' },
 ];

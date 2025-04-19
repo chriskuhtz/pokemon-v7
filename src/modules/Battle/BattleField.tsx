@@ -41,7 +41,7 @@ export type ActionType =
 	| MoveName
 	| ItemType
 	| 'RUN_AWAY'
-	| 'SLACKING'
+	| 'LOAFING'
 	| 'SWITCH';
 export interface ChooseActionPayload {
 	userId: string;

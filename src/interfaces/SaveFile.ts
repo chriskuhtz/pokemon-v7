@@ -32,17 +32,18 @@ export interface CharacterLocationData {
 }
 
 export interface SettingsObject {
-	//randomHeldItems: boolean;
 	fasterDays?: boolean;
 	doubleXpRates?: boolean;
 	rogueLike?: boolean;
 	noItemsInBattle?: boolean;
 	releaseFaintedPokemon?: boolean;
+	expShareActive?: boolean;
 	randomStarters?: boolean;
 	randomOverworldItems?: boolean;
 	randomQuestRewards?: boolean;
 	randomSwarms?: boolean;
-	expShareActive?: boolean;
+	randomAbilities?: boolean;
+	randomHeldItems?: boolean;
 }
 
 export type BerryBushStatus =
