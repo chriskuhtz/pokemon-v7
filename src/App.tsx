@@ -334,8 +334,8 @@ const Intro = ({
 						<li>
 							<strong>
 								The Game is in active development, but i dont expect breaking
-								changes anymore, so you should never have to reset your savefile
-								because of updates.
+								changes anymore. <br /> so you should never have to reset your
+								savefile because of updates.
 							</strong>
 						</li>
 					</ol>
