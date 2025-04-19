@@ -187,6 +187,21 @@ export const handleAbilitiesAfterAttack = (
 		);
 		updatedAttacker = b;
 	}
+	//check for rocky-helmet
+	if (
+		getHeldItem(target) === 'rocky-helmet' &&
+		contactMoves.includes(move.name)
+	) {
+		updatedAttacker = {
+			...updatedAttacker,
+			damage:
+				updatedAttacker.damage +
+				Math.round(updatedAttacker.stats.hp * ROUGH_SKIN_FACTOR),
+		};
+		addMessage({
+			message: `${updatedAttacker.data.name} was hurt by ${updatedTarget.name}'s rocky helmet`,
+		});
+	}
 	//check for rough-skin
 	if (target.ability === 'rough-skin' && contactMoves.includes(move.name)) {
 		updatedAttacker = {

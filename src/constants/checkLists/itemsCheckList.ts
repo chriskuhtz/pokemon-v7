@@ -1529,7 +1529,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/582/',
 		handled: true,
 	},
-	{ name: 'rocky-helmet', url: 'https://pokeapi.co/api/v2/item/583/' },
+	{
+		name: 'rocky-helmet',
+		url: 'https://pokeapi.co/api/v2/item/583/',
+		handled: true,
+	},
 	{ name: 'air-balloon', url: 'https://pokeapi.co/api/v2/item/584/' },
 	{ name: 'red-card', url: 'https://pokeapi.co/api/v2/item/585/' },
 	{ name: 'ring-target', url: 'https://pokeapi.co/api/v2/item/586/' },

@@ -50,6 +50,7 @@ export const ChangeLogV04 = (): JSX.Element => {
 				<li>Setting: Random Abilities</li>
 				<li>Setting: Random Learnable Moves</li>
 				<li>Fixed Weather Display and Message</li>
+				<li>New Abilities, Items and Attacks</li>
 			</ol>
 		</>
 	);
