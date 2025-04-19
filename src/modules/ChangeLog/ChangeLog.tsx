@@ -23,6 +23,7 @@ export const ChangeLog = ({
 						/>
 					</div>
 					<h3>Changelog:</h3>
+					<ChangeLogV07 />
 					<ChangeLogV06 />
 					<ChangeLogV05 />
 					<ChangeLogV04 />
