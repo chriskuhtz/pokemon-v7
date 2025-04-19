@@ -22,6 +22,7 @@ export const Settings = (): JSX.Element => {
 		randomSwarms: false,
 		randomAbilities: false,
 		randomHeldItems: false,
+		randomLearnSets: false,
 	});
 
 	const proceed = () => {
@@ -133,9 +134,14 @@ export const Settings = (): JSX.Element => {
 					label={'Random Held Items:'}
 				/>
 				<ToggleRow
-					value={!!state.randomHeldItems}
+					value={!!state.randomAbilities}
 					setValue={(x) => setState({ ...state, randomAbilities: x })}
 					label={'Random Abilities:'}
+				/>
+				<ToggleRow
+					value={!!state.randomLearnSets}
+					setValue={(x) => setState({ ...state, randomLearnSets: x })}
+					label={'Random Learnable Moves:'}
 				/>
 			</div>
 			<br />

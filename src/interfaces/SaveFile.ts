@@ -44,6 +44,7 @@ export interface SettingsObject {
 	randomSwarms?: boolean;
 	randomAbilities?: boolean;
 	randomHeldItems?: boolean;
+	randomLearnSets?: boolean;
 }
 
 export type BerryBushStatus =

@@ -337,9 +337,8 @@ export const extraFeatureCheckList: {
 	{ name: 'miltank milk as cooking ingredient', handled: true },
 	{ name: 'movement buttons', handled: true },
 	{ name: 'categories for upgrades', handled: true },
-	{ name: 'random abilities' },
-	{ name: 'gen 8 fossils' },
-	{ name: 'randomized-moves' },
+	{ name: 'random abilities', handled: true },
+	{ name: 'randomized-moves', handled: true },
 	{ name: 'consider weather/effects etc for opponent decisions' },
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'other gym leaders' },
@@ -366,4 +365,5 @@ export const extraFeatureCheckList: {
 	{ name: 'battle backgrounds' },
 	{ name: 'prettier weather display' },
 	{ name: 'eggs?' },
+	{ name: 'gen 8 fossils' },
 ];
