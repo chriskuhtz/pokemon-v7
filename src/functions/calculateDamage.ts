@@ -1,4 +1,5 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
+import { contactMoves } from '../constants/contactMoves';
 import {
 	fixedDamageMoves,
 	levelDamageMoves,
@@ -669,6 +670,10 @@ export const calculateDamage = (
 		damageClass === 'physical'
 			? 0.66
 			: 1;
+	const toughClawsFactor =
+		attacker.ability === 'tough-claws' && contactMoves.includes(attack.name)
+			? 1.33
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -735,7 +740,8 @@ export const calculateDamage = (
 				strongJawFactor *
 				refrigerateFactor *
 				megaLauncherFactor *
-				grassPeltFactor
+				grassPeltFactor *
+				toughClawsFactor
 		),
 		1
 	);
