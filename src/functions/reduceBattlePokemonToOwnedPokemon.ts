@@ -61,6 +61,7 @@ export const reduceBattlePokemonToOwnedPokemon = (
 		shiny: newMon.shiny,
 		unlockedMoves: newMon.unlockedMoves,
 		growthRate: newMon.growthRate,
+		fixedAbility: newMon.fixedAbility,
 	};
 
 	if (heal) {

@@ -26,11 +26,7 @@ export const applyEndOfTurnAbility = ({
 }): BattlePokemon => {
 	if (pokemon.ability === 'moody') {
 		const boostStat = getRandomBoostableStat();
-		let debuffStat = getRandomBoostableStat();
-
-		while (debuffStat === boostStat) {
-			debuffStat = getRandomBoostableStat();
-		}
+		const debuffStat = getRandomBoostableStat([boostStat]);
 
 		let moodyApplied = applyStatChangeToPokemon(
 			pokemon,
