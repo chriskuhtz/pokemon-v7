@@ -1,5 +1,5 @@
 import { useCallback, useContext, useMemo } from 'react';
-import { getRandomEntry } from '../../functions/filterTargets';
+import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
@@ -16,7 +16,6 @@ import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 
 export const useAmoongussResearcher = () => {
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
@@ -59,8 +58,9 @@ export const AmoongussCompostResearcher = (): JSX.Element => {
 		>
 			<Stack mode="column">
 				{options.length > 0
-					? options.map(([item]) => {
-							const randomMulch = getRandomEntry([...mulches]);
+					? options.map(([item, amount]) => {
+							const index = (item.length * 5) % mulches.length;
+							const randomMulch = mulches[index];
 							return (
 								<Card
 									key={item}
@@ -68,7 +68,7 @@ export const AmoongussCompostResearcher = (): JSX.Element => {
 									icon={<ItemSprite item={item} />}
 									content={
 										<h3>
-											Trade {item} for {randomMulch}
+											Trade {item}({amount} in Bag) for {randomMulch}
 										</h3>
 									}
 									actionElements={[<ItemSprite item={randomMulch} />]}

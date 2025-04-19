@@ -13,6 +13,7 @@ import { BattleLoader } from './modules/Battle/components/BattleLoader';
 import { BerryLure } from './modules/BerryLure/BerryLure';
 import { BulletinBoard } from './modules/BulletinBoard/BulletinBoard';
 import { CampUpgrades } from './modules/CampUpgrades/CampUpgrades';
+import { ChangeLog, newestChangeLog } from './modules/ChangeLog/ChangeLog';
 import { CookingGrandma } from './modules/CookingGrandma/CookingGrandma';
 import { Curator } from './modules/Curator/Curator';
 import { DragoniteTaxi } from './modules/DragoniteTaxi/DragoniteTaxi';
@@ -112,11 +113,16 @@ export const App = (): JSX.Element => {
 	const [hasReadIntro, setHasReadIntro] = useState<boolean>(
 		!!window.localStorage.getItem('hasReadIntro')
 	);
+	const [hasReadNewestChangeLog, setHasReadNewestChangeLog] = useState<boolean>(
+		!!window.localStorage.getItem(newestChangeLog)
+	);
 
 	if (!hasReadIntro) {
 		return <Intro setHasReadIntro={setHasReadIntro} />;
 	}
-
+	if (!hasReadNewestChangeLog) {
+		return <ChangeLog setHasReadIntro={setHasReadNewestChangeLog} />;
+	}
 	if (activeTab === 'BATTLE' && currentChallenger) {
 		return (
 			<BattleLoader
@@ -336,6 +342,12 @@ const Intro = ({
 								The Game is in active development, but i dont expect breaking
 								changes anymore. <br /> so you should never have to reset your
 								savefile because of updates.
+							</strong>
+						</li>
+						<li>
+							<strong>
+								To receive the latest updates, refresh your Page when you come
+								back to the game
 							</strong>
 						</li>
 					</ol>
