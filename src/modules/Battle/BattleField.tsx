@@ -491,6 +491,7 @@ export const BattleField = ({
 			});
 
 			if (!latestMessage && collectedMessages.length === 0) {
+				setPokemon(updatedPokemon);
 				setBattleStep('REFILLING');
 				return;
 			} else {
