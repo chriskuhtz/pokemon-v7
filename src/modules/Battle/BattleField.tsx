@@ -742,6 +742,8 @@ export const BattleField = ({
 						catchingAllowed={!isTrainerBattle}
 						runningAllowed={!isTrainerBattle}
 						battleFieldEffects={battleFieldEffects}
+						weather={battleWeather}
+						terrain={battleTerrain}
 					/>
 				</div>
 			)}

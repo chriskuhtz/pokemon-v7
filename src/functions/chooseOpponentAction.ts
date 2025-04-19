@@ -1,5 +1,11 @@
 import { BattleMove, BattlePokemon } from '../interfaces/BattlePokemon';
-import { ActionType, ChooseActionPayload } from '../modules/Battle/BattleField';
+import { WeatherType } from '../interfaces/Weather';
+import {
+	ActionType,
+	BattleFieldEffect,
+	ChooseActionPayload,
+} from '../modules/Battle/BattleField';
+import { BattleTerrain } from '../modules/Battle/hooks/useBattleWeather';
 import { calculateDamage } from './calculateDamage';
 import { determineMultiHits } from './determineMultiHits';
 import { filterTargets } from './filterTargets';
@@ -8,7 +14,10 @@ import { getMovesArray } from './getMovesArray';
 export const determineBestMoveAndTarget = (
 	attacker: BattlePokemon,
 	moves: BattleMove[],
-	targets: BattlePokemon[]
+	targets: BattlePokemon[],
+	weather: WeatherType | undefined,
+	terrain: BattleTerrain | undefined,
+	effects: BattleFieldEffect[]
 ): { actionName: ActionType; targetId: string } => {
 	const mapped: { actionName: ActionType; targetId: string; damage: number }[] =
 		moves.flatMap((move) =>
@@ -27,9 +36,9 @@ export const determineBestMoveAndTarget = (
 						multiHits: determineMultiHits(move.data, attacker.ability),
 						isAMultiHit: false,
 					},
-					undefined,
-					[],
-					undefined,
+					weather,
+					effects,
+					terrain,
 					false,
 					false,
 					false,
@@ -47,9 +56,15 @@ export const determineBestMoveAndTarget = (
 export const chooseOpponentAction = ({
 	controlled,
 	targets,
+	weather,
+	terrain,
+	effects,
 }: {
 	controlled: BattlePokemon;
 	targets: BattlePokemon[];
+	weather: WeatherType | undefined;
+	terrain: BattleTerrain | undefined;
+	effects: BattleFieldEffect[];
 }): ChooseActionPayload => {
 	const moves = getMovesArray(controlled, {
 		filterOutDisabled: true,
@@ -118,7 +133,10 @@ export const chooseOpponentAction = ({
 	const { targetId, actionName } = determineBestMoveAndTarget(
 		controlled,
 		moves,
-		filtered
+		filtered,
+		weather,
+		terrain,
+		effects
 	);
 
 	return { userId: controlled.id, actionName, targetId };
