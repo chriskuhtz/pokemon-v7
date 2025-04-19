@@ -51,6 +51,7 @@ export const ChangeLogV04 = (): JSX.Element => {
 				<li>Setting: Random Learnable Moves</li>
 				<li>Opponent decisions consider weather & effects </li>
 				<li>Fixed Weather Display and Message</li>
+				<li>Zapdos and Moltres</li>
 				<li>New Abilities, Items and Attacks</li>
 			</ol>
 		</>

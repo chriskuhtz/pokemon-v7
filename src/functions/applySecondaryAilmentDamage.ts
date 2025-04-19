@@ -8,7 +8,12 @@ import {
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { getHeldItem } from './getHeldItem';
 import { getMiddleOfThree } from './getMiddleOfThree';
-import { isLeechSeeded, isTrapped, leechingOn } from './isTrapped';
+import {
+	isBindingBanded,
+	isLeechSeeded,
+	isTrapped,
+	leechingOn,
+} from './isTrapped';
 
 export const applySecondaryAilmentDamage = (
 	pokemon: BattlePokemon,
@@ -23,7 +28,9 @@ export const applySecondaryAilmentDamage = (
 			return pokemon;
 		}
 		addMessage(`${pokemon.data.name} is hurt by its trap`);
-		const trapDamage = Math.round(TRAP_DAMAGE_FACTOR * updated.stats.hp);
+		const bindingBandFactor = isBindingBanded(updated) ? 2 : 1;
+		const trapDamage =
+			Math.round(TRAP_DAMAGE_FACTOR * updated.stats.hp) * bindingBandFactor;
 		updated = {
 			...updated,
 			damage: updated.damage + trapDamage,

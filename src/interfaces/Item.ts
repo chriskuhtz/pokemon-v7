@@ -229,6 +229,7 @@ export const heldItems = [
 	'float-stone',
 	'rocky-helmet',
 	'air-balloon',
+	'binding-band',
 ] as const;
 export const valuables = [
 	'shoal-salt',
