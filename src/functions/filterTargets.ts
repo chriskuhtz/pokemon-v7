@@ -87,8 +87,8 @@ export function getRandomEntry<T>(array: T[]) {
 	return array[getRandomIndex(array.length)];
 }
 export function getEntryWithOverflow<T>(array: T[], index: number) {
-	const modulo = index % array.length;
-	const reducedIndex = index - modulo * array.length;
+	const divider = Math.floor(index / array.length);
+	const reducedIndex = index - divider * array.length;
 	return array[reducedIndex];
 }
 

@@ -143,14 +143,15 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 			.map((m) => {
 				if (saveFile.settings?.randomLearnSets) {
 					const index =
-						//@ts-expect-error this is a moveName
-						handledMoves.findIndex(m.move.name as MoveName) +
+						handledMoves.findIndex((handled) => handled === m.move.name) +
 						ownedPokemon.name.length * 5;
+					const randomizedMove = getEntryWithOverflow([...handledMoves], index);
+					console.log(m.move.name, randomizedMove);
 					return {
 						...m,
 						move: {
 							...m.move,
-							name: getEntryWithOverflow([...handledMoves], index),
+							name: randomizedMove,
 						},
 					};
 				}
