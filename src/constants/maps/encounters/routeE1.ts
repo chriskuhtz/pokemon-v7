@@ -31,7 +31,6 @@ export const routeE1Encounters: EncounterMap = {
 	],
 	EVENING: [
 		{ name: 'wooper', minXp: 3375, maxXp: 8000, rarity: 'common' },
-		{ name: 'pidgey', minXp: 3375, maxXp: 8000, rarity: 'common' },
 		{ name: 'machop', minXp: 3375, maxXp: 8000, rarity: 'common' },
 		{ name: 'diglett', minXp: 3375, maxXp: 8000, rarity: 'common' },
 		{ name: 'baltoy', minXp: 3375, maxXp: 8000, rarity: 'rare' },
