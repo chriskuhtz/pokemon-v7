@@ -47,6 +47,7 @@ export const ChangeLogV06 = (): JSX.Element => {
 
 			<ol style={{ lineHeight: '1.5rem' }}>
 				<li>Better Iv and Ev display</li>
+				<li>Fix Multihit PP Usage</li>
 			</ol>
 		</>
 	);
