@@ -164,14 +164,7 @@ export const App = (): JSX.Element => {
 		);
 	}
 	if (activeTab === 'STORAGE') {
-		return (
-			<PokemonStorage
-				allPokemon={pokemon}
-				goBack={() => setActiveTabReducer('OVERWORLD')}
-				setPokemon={setPokemonReducer}
-				addMessage={addMessage}
-			/>
-		);
+		return <PokemonStorage goBack={() => setActiveTabReducer('OVERWORLD')} />;
 	}
 	if (activeTab === 'BUY_MARKET') {
 		return (
