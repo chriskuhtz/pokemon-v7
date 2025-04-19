@@ -23,11 +23,6 @@ export const ChangeLog = ({
 						/>
 					</div>
 					<h3>Changelog:</h3>
-					<ChangeLogV07 />
-					<ChangeLogV06 />
-					<ChangeLogV05 />
-					<ChangeLogV04 />
-
 					<button
 						onClick={() => {
 							setHasReadIntro(true);
@@ -36,6 +31,10 @@ export const ChangeLog = ({
 					>
 						Got it, lets go
 					</button>
+					<ChangeLogV07 />
+					<ChangeLogV06 />
+					<ChangeLogV05 />
+					<ChangeLogV04 />
 				</Stack>
 			</div>
 		</Page>
