@@ -151,14 +151,14 @@ const tier1trainers: Challenger[] = [
 	},
 	{
 		type: 'TRAINER',
-		id: 'drake (not the pedo)',
+		id: 'drake',
 		team: [
 			makeChallengerPokemon({ name: 'dratini', xp: 1000 }),
 			makeChallengerPokemon({ name: 'jangmo-o', xp: 1000 }),
 			makeChallengerPokemon({ name: 'bagon', xp: 1000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'drake (not the pedo)', sprite: SpriteEnum.ace2Male },
+		trainer: { name: 'drake', sprite: SpriteEnum.ace2Male },
 	},
 	{
 		type: 'TRAINER',
@@ -364,7 +364,7 @@ const tier2trainers: Challenger[] = [
 	},
 	{
 		type: 'TRAINER',
-		id: 'drake (still not the pedo)',
+		id: 'drake 2',
 		team: [
 			makeChallengerPokemon({ name: 'dragonair', xp: 8000 }),
 			makeChallengerPokemon({ name: 'jangmo-o', xp: 8000 }),
@@ -372,7 +372,7 @@ const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: {
-			name: 'drake (still not the pedo)',
+			name: 'drake 2',
 			sprite: SpriteEnum.ace2Male,
 		},
 		requiredUpgrade: 'training field 2',
@@ -646,7 +646,7 @@ const tier3trainers: Challenger[] = [
 	},
 	{
 		type: 'TRAINER',
-		id: 'dragan (formerly known as drake)',
+		id: 'drake 3',
 		team: [
 			makeChallengerPokemon({ name: 'dragonair', xp: 27000 }),
 			makeChallengerPokemon({ name: 'jangmo-o', xp: 27000 }),
@@ -655,7 +655,7 @@ const tier3trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: {
-			name: 'dragan (formerly known as drake)',
+			name: 'drake 3',
 			sprite: SpriteEnum.ace2Male,
 		},
 		requiredUpgrade: 'training field 3',
@@ -1146,7 +1146,7 @@ const tier4trainers: Challenger[] = [
 	},
 	{
 		type: 'TRAINER',
-		id: 'dragan 2',
+		id: 'drake 4',
 		team: [
 			makeChallengerPokemon({
 				name: 'dragonair',
@@ -1171,7 +1171,7 @@ const tier4trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: {
-			name: 'dragan 2',
+			name: 'drake 4',
 			sprite: SpriteEnum.ace2Male,
 		},
 		requiredUpgrade: 'training field 4',
