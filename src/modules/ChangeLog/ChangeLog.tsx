@@ -23,6 +23,7 @@ export const ChangeLog = ({
 						/>
 					</div>
 					<h3>Changelog:</h3>
+					<ChangeLogV05 />
 					<ChangeLogV04 />
 
 					<button
@@ -36,6 +37,16 @@ export const ChangeLog = ({
 				</Stack>
 			</div>
 		</Page>
+	);
+};
+
+export const ChangeLogV05 = (): JSX.Element => {
+	return (
+		<>
+			<h3>V 0.5:</h3>
+
+			<ol style={{ lineHeight: '1.5rem' }}></ol>
+		</>
 	);
 };
 
