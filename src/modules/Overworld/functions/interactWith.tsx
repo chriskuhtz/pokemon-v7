@@ -7,6 +7,7 @@ import {
 	Occupant,
 	OccupantType,
 	OverworldBush,
+	OverworldPokemon,
 	OverworldRock,
 	OverworldSnorlax,
 	OverworldTrainer,
@@ -57,6 +58,7 @@ export const interactWithFunction = ({
 	interactWithSwarmRadar,
 	interactWithSnorlax,
 	interactWithTrainer,
+	interactWithStaticEncounter,
 	settings,
 	goTo,
 }: {
@@ -79,6 +81,7 @@ export const interactWithFunction = ({
 	interactWithTrainer: (x: OverworldTrainer) => void;
 	interactWithLedge: (x: Ledge) => void;
 	interactWithSnorlax: (x: OverworldSnorlax) => void;
+	interactWithStaticEncounter: (x: OverworldPokemon) => void;
 	interactWithZigzagoonForager: () => void;
 	interactWithDugtrioExplorer: () => void;
 	interactWithSwarmRadar: () => void;
@@ -248,11 +251,14 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'POKEMON') {
-		addMultipleMessages([
-			...data.dialogue.map((d) => ({
-				message: d,
-			})),
-		]);
+		if (data.encounter) {
+			interactWithStaticEncounter(data);
+		} else
+			addMultipleMessages([
+				...data.dialogue.map((d) => ({
+					message: d,
+				})),
+			]);
 
 		return;
 	}

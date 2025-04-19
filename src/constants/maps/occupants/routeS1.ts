@@ -1,3 +1,4 @@
+import { getTimeOfDay } from '../../../functions/getTimeOfDay';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 
 export const routeS1Occupants: OverworldMap['occupants'] = [
@@ -124,5 +125,24 @@ export const routeS1Occupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'lake-full-restore'),
 		id: 'lake-full-restore',
+	},
+	{
+		type: 'POKEMON',
+		x: 35,
+		y: 33,
+		orientation: 'DOWN',
+		dexId: 145,
+		encounter: {
+			name: 'zapdos',
+			maxXp: 125000,
+			minXp: 125000,
+			rarity: 'common',
+		},
+		dialogue: ['Kyoohh'],
+		conditionFunction: (s) =>
+			s.pokedex.zapdos.caughtOnRoutes.length === 0 &&
+			s.bag['thunder-stone'] > 0 &&
+			getTimeOfDay() === 'MORNING',
+		id: 'routeS1_zapdos',
 	},
 ];
