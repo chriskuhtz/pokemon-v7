@@ -6,7 +6,6 @@ import {
 	makeChallengerPokemon,
 	OPPO_ID,
 } from '../../../functions/makeChallengerPokemon';
-import { honeyPokemon } from '../../../hooks/useHoneyTree';
 import { Message, MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { EmptyInventory, joinInventories } from '../../../interfaces/Inventory';
@@ -26,16 +25,17 @@ export const sledgeHammerPokemon: PokemonName[] = [
 	'dwebble',
 	'bonsly',
 	'klawf',
-	'riolu',
+	'stunfisk',
 ];
 
-const SLEDGEHAMMER_ENCOUNTER_OPTIONS: OwnedPokemon[] = honeyPokemon.map((h) =>
-	makeChallengerPokemon({
-		nature: getRandomNature(),
-		name: h,
-		xp: 200,
-		caughtOnMap: 'routeN1',
-	})
+const SLEDGEHAMMER_ENCOUNTER_OPTIONS: OwnedPokemon[] = sledgeHammerPokemon.map(
+	(h) =>
+		makeChallengerPokemon({
+			nature: getRandomNature(),
+			name: h,
+			xp: 200,
+			caughtOnMap: 'routeN1',
+		})
 );
 export const useSledgeHammer = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);

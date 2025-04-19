@@ -15,6 +15,7 @@ import {
 	EmptyStatObject,
 	generateRandomStatObject,
 } from '../../interfaces/StatObject';
+import { sledgeHammerPokemon } from '../../modules/Overworld/hooks/useSledgeHammer';
 import { caveW1Encounters } from '../maps/encounters/caveW1';
 import { onixCaveEncounters } from '../maps/encounters/onixCave';
 import { routeE1 } from '../maps/routeE1';
@@ -536,6 +537,7 @@ export const questNames = [
 	'deal 5000 damage with one attack',
 	'deal 10000 damage with one attack',
 	'defeat chuck',
+	'catch all pokemon that live under rocks',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -697,6 +699,19 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		availableAfter: 'lure a pokemon with honey',
 		requiredUpgrade: 'build combee hive',
+	},
+	'catch all pokemon that live under rocks': {
+		rewardItems: { 'black-augurite': 1, 'peat-block': 1, 'lumiose-galette': 5 },
+		researchPoints: 20,
+		conditionFunction: (s) => {
+			return sledgeHammerPokemon.every(
+				(e) => s.pokedex[e].caughtOnRoutes.length > 0
+			);
+		},
+		targetPokemon: sledgeHammerPokemon,
+		kind: 'BULLETIN',
+		availableAfter: 'lure a pokemon with honey',
+		requiredUpgrade: 'sledge hammer certification',
 	},
 	'catch all different pokemon on routeS1': {
 		rewardItems: {
