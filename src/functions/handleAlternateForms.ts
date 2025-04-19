@@ -26,6 +26,9 @@ export const keepAlternateFormThroughEvolution = ({
 	currentName: PokemonName;
 	newName: PokemonName;
 } => {
+	if (currentName === 'wooper-paldea') {
+		return { currentName, newName };
+	}
 	if (isAlternateForm(currentName)) {
 		const alternateSuffix = currentName.split('-')[1];
 
