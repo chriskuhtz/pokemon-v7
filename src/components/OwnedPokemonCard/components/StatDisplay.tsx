@@ -102,9 +102,7 @@ export const StatDisplay = ({
 					}}
 				>
 					{Object.entries(ownedPokemon.effortValues).map(([stat, value]) => {
-						const highestStat = Object.entries(ownedPokemon.effortValues)
-							.filter(([stat]) => !HIDDEN_STATS.includes(stat))
-							.sort((a, b) => b[1] - a[1])[0][1];
+						const highestStat = 255;
 
 						if (!HIDDEN_STATS.includes(stat)) {
 							return (
@@ -149,9 +147,7 @@ export const StatDisplay = ({
 					}}
 				>
 					{Object.entries(ownedPokemon.intrinsicValues).map(([stat, value]) => {
-						const highestStat = Object.entries(ownedPokemon.intrinsicValues)
-							.filter(([stat]) => !HIDDEN_STATS.includes(stat))
-							.sort((a, b) => b[1] - a[1])[0][1];
+						const highestStat = 31;
 
 						if (!HIDDEN_STATS.includes(stat)) {
 							return (

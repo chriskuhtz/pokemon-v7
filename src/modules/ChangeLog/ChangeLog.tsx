@@ -45,7 +45,9 @@ export const ChangeLogV06 = (): JSX.Element => {
 		<>
 			<h3>V 0.6:</h3>
 
-			<ol style={{ lineHeight: '1.5rem' }}></ol>
+			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>Better Iv and Ev display</li>
+			</ol>
 		</>
 	);
 };
