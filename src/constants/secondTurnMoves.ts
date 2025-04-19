@@ -8,3 +8,10 @@ export const secondTurnMoves = [
 	'bounce',
 	'sky-attack',
 ];
+
+export const recoveryMoves = [
+	'hyper-beam',
+	'blast-burn',
+	'hydro-cannon',
+	'frenzy-plant',
+];

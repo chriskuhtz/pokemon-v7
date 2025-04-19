@@ -255,6 +255,22 @@ export const useHandleAction = (
 					})
 				);
 			}
+			if (move.type === 'Recover') {
+				addMessage({
+					message: `${attacker.name} has to recover`,
+				});
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.id === attacker.id) {
+							return {
+								...attacker,
+								moveQueue: attacker.moveQueue.slice(1),
+							};
+						}
+						return p;
+					})
+				);
+			}
 
 			if (move.type === 'BattleAttack') {
 				handleAllAttackCategories({

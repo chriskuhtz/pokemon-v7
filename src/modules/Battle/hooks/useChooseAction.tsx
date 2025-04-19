@@ -1,7 +1,10 @@
 import { useCallback } from 'react';
 import { MoveName } from '../../../constants/checkLists/movesCheckList';
 import { lockInMoves } from '../../../constants/forceSwitchMoves';
-import { secondTurnMoves } from '../../../constants/secondTurnMoves';
+import {
+	recoveryMoves,
+	secondTurnMoves,
+} from '../../../constants/secondTurnMoves';
 import { determineMultiHits } from '../../../functions/determineMultiHits';
 import { getRandomEntry } from '../../../functions/filterTargets';
 import { getHeldItem } from '../../../functions/getHeldItem';
@@ -212,6 +215,37 @@ export const useChooseAction = (
 										targetId,
 										multiHits: 0,
 										isAMultiHit: false,
+									},
+								],
+							};
+						}
+						return p;
+					})
+				);
+				return;
+			}
+			if (recoveryMoves.includes(actionName)) {
+				setPokemon((pokemon) =>
+					pokemon.map((p) => {
+						if (p.id === user.id) {
+							return {
+								...user,
+								choiceBandedMove: determineChoiceBandedMove(p, move.name),
+								moveQueue: [
+									{
+										type: 'BattleAttack',
+										data: move.data,
+										name: actionName as MoveName,
+										round: battleRound,
+										targetId,
+										multiHits: 0,
+										isAMultiHit: false,
+									},
+									{
+										type: 'Recover',
+										data: move.data,
+										name: actionName as MoveName,
+										round: battleRound + 1,
 									},
 								],
 							};

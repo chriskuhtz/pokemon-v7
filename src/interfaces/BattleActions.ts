@@ -29,6 +29,12 @@ export type ChargeUp = {
 	name: MoveName;
 	round: number;
 };
+export type Recover = {
+	type: 'Recover';
+	data: MoveDto;
+	name: MoveName;
+	round: number;
+};
 export interface InBattleItem {
 	item: HealingItemType | PPRestoringItemType | XItemType;
 	type: 'InBattleItem';
@@ -55,6 +61,7 @@ export type BattleAction =
 	| CatchProcessInfo
 	| BattleAttack
 	| ChargeUp
+	| Recover
 	| InBattleItem
 	| RunAway
 	| Loafing
