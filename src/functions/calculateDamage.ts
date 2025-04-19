@@ -4,7 +4,11 @@ import {
 	levelDamageMoves,
 } from '../constants/fixedDamageMoves';
 import { flyDoubleDamageMoves, ohkoMoves } from '../constants/ohkoMoves';
-import { bitingMoves, punchBasedMoves } from '../constants/punchBasedMoves';
+import {
+	auraAndPulseMoves,
+	bitingMoves,
+	punchBasedMoves,
+} from '../constants/punchBasedMoves';
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -652,6 +656,11 @@ export const calculateDamage = (
 			: 1;
 	const refrigerateFactor =
 		attacker.ability === 'refrigerate' && attackType === 'normal' ? 1.3 : 1;
+	const megaLauncherFactor =
+		attacker.ability === 'mega-launcher' &&
+		auraAndPulseMoves.includes(attack.name)
+			? 1.5
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -716,7 +725,8 @@ export const calculateDamage = (
 				furCoatFactor *
 				revengeFactor *
 				strongJawFactor *
-				refrigerateFactor
+				refrigerateFactor *
+				megaLauncherFactor
 		),
 		1
 	);

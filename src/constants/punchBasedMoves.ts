@@ -66,3 +66,12 @@ export const bitingMoves = [
 	'jaw-lock',
 	'fishious-rend',
 ];
+export const auraAndPulseMoves = [
+	'aura-sphere',
+	'dark-pulse',
+	'dragon-pulse',
+	'heal-pulse',
+	'terrain-pulse',
+	'water-pulse',
+	'heal-pulse',
+];

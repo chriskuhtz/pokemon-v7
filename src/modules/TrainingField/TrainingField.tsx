@@ -20,6 +20,13 @@ export const TrainingField = () => {
 			headline="Training Field:"
 		>
 			<Stack mode="column">
+				{saveFile.settings?.releaseFaintedPokemon ||
+					(saveFile.settings?.rogueLike && (
+						<h3>
+							If you lose a training battle, your Pokemon will not be released,
+							nor will the game reset
+						</h3>
+					))}
 				<Card
 					key={'random1'}
 					icon={<FaRandom />}
