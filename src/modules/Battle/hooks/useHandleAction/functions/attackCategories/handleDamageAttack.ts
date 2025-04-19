@@ -2,6 +2,7 @@ import { SELF_DESTRUCTING_MOVES } from '../../../../../../constants/selfDestruct
 import { applyAttackAilmentsToPokemon } from '../../../../../../functions/applyAttackAilmentsToPokemon';
 import { applyAttackStatChanges } from '../../../../../../functions/applyAttackStatChanges';
 import { applyDrainOrRecoil } from '../../../../../../functions/applyDrainOrRecoil';
+import { applyStatChangeToPokemon } from '../../../../../../functions/applyStatChangeToPokemon';
 import { calculateDamage } from '../../../../../../functions/calculateDamage';
 import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
@@ -271,6 +272,24 @@ export const handleDamageAttack = ({
 	}
 	if (getHeldItem(updatedTarget) === 'air-balloon' && actualDamage > 0) {
 		addMessage({ message: `${updatedTarget}´s air balloon popped` });
+		updatedTarget = {
+			...updatedTarget,
+			heldItemName: undefined,
+		};
+	}
+	if (
+		getHeldItem(updatedTarget) === 'absorb-bulb' &&
+		actualDamage > 0 &&
+		move.data.type.name === 'water'
+	) {
+		addMessage({ message: `${updatedTarget} consumed its absorb-bulb` });
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'special-attack',
+			1,
+			true,
+			battleFieldEffects
+		);
 		updatedTarget = {
 			...updatedTarget,
 			heldItemName: undefined,
