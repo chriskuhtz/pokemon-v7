@@ -74,6 +74,14 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 	if (availableQuests.length === 0) {
 		return (
 			<Page headline={'Bulletin Board:'} goBack={goBack}>
+				<div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+					<strong style={{ textWrap: 'nowrap' }}>Completed Quests:</strong>
+					<AnimatedBar
+						max={total}
+						offset={total - numberOfCompletedQuests}
+						color={'blue'}
+					/>
+				</div>
 				Talk to the people in the camp for more Quests
 			</Page>
 		);
