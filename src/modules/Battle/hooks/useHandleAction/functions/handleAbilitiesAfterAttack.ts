@@ -54,7 +54,7 @@ export const handleAbilitiesAfterAttack = (
 
 		updatedTarget = {
 			...updatedTarget,
-			damage: Math.min(
+			damage: Math.max(
 				0,
 				updatedTarget.damage - Math.floor(target.stats.hp / 4)
 			),
