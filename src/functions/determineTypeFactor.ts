@@ -44,6 +44,9 @@ export const determineTypeFactor = (
 	if (attackType === 'normal' && attacker.ability === 'pixilate') {
 		attackType = 'fairy';
 	}
+	if (attackType === 'normal' && attacker.ability === 'aerilate') {
+		attackType = 'flying';
+	}
 	if (attack.name === 'hidden-power') {
 		attackType = getHiddenPowerType(attacker.intrinsicValues);
 	}
