@@ -133,8 +133,21 @@ export const getPower = (
 	attacker: BattlePokemon,
 	attack: BattleAttack,
 	target: BattlePokemon,
-	attackerLevel: number
+	attackerLevel: number,
+	weather: WeatherType | undefined
 ) => {
+	if (attack.name === 'weather-ball' && attack.data.power) {
+		if (
+			weather === 'sun' ||
+			weather === 'rain' ||
+			weather === 'hail' ||
+			weather === 'sandstorm'
+		) {
+			return attack.data.power * 2;
+		}
+
+		return attack.data.power;
+	}
 	if (attack.name === 'eruption') {
 		const remainingHp = attacker.stats.hp - attacker.damage;
 		const percentage = remainingHp / attacker.stats.hp;
@@ -245,11 +258,33 @@ export const calculateDamage = (
 		return { damage: attacker.biding.damage * 2 };
 	}
 	const damageClass = attack.data.damage_class.name;
-	const attackType = attack.data.type.name;
+	let attackType = attack.data.type.name;
+
+	if (attack.name === 'weather-ball') {
+		if (weather === 'rain') {
+			attackType = 'water';
+		}
+		if (weather === 'sun') {
+			attackType = 'fire';
+		}
+		if (weather === 'hail') {
+			attackType = 'ice';
+		}
+		if (weather === 'sandstorm') {
+			attackType = 'rock';
+		}
+	}
+
 	if (damageClass === 'status') {
 		return { damage: 0 };
 	}
-	const typeFactor = determineTypeFactor(target, attacker, attack, addMessage);
+	const typeFactor = determineTypeFactor(
+		target,
+		attacker,
+		attack,
+		weather,
+		addMessage
+	);
 	if (typeFactor === 0) {
 		return { damage: 0 };
 	}
@@ -338,7 +373,8 @@ export const calculateDamage = (
 		attacker,
 		attack,
 		target,
-		calculateLevelData(attacker.xp, attacker.growthRate).level
+		calculateLevelData(attacker.xp, attacker.growthRate).level,
+		weather
 	);
 
 	if (attack.name === 'present' && power < 0) {

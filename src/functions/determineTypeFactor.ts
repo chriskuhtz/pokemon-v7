@@ -8,6 +8,7 @@ import {
 	typeEffectivenessChart,
 } from '../interfaces/PokemonType';
 import { StatObject } from '../interfaces/StatObject';
+import { WeatherType } from '../interfaces/Weather';
 import { getHeldItem } from './getHeldItem';
 import { getTypeNames } from './getTypeNames';
 
@@ -27,7 +28,7 @@ export const determineTypeFactor = (
 	target: BattlePokemon,
 	attacker: BattlePokemon,
 	attack: BattleAttack,
-
+	weather: WeatherType | undefined,
 	addMessage?: (x: Message) => void
 ): number => {
 	let res = 1;
@@ -49,6 +50,20 @@ export const determineTypeFactor = (
 	}
 	if (attack.name === 'hidden-power') {
 		attackType = getHiddenPowerType(attacker.intrinsicValues);
+	}
+	if (attack.name === 'weather-ball') {
+		if (weather === 'rain') {
+			attackType = 'water';
+		}
+		if (weather === 'sun') {
+			attackType = 'fire';
+		}
+		if (weather === 'hail') {
+			attackType = 'ice';
+		}
+		if (weather === 'sandstorm') {
+			attackType = 'rock';
+		}
 	}
 
 	const effectiveness = typeEffectivenessChart[attackType];

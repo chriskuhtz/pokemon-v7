@@ -1369,9 +1369,21 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/423/',
 		handled: true,
 	},
-	{ name: 'slack-off', url: 'https://pokeapi.co/api/v2/move/303/' },
-	{ name: 'crush-claw', url: 'https://pokeapi.co/api/v2/move/306/' },
-	{ name: 'weather-ball', url: 'https://pokeapi.co/api/v2/move/311/' },
+	{
+		name: 'slack-off',
+		url: 'https://pokeapi.co/api/v2/move/303/',
+		handled: true,
+	},
+	{
+		name: 'crush-claw',
+		url: 'https://pokeapi.co/api/v2/move/306/',
+		handled: true,
+	},
+	{
+		name: 'weather-ball',
+		url: 'https://pokeapi.co/api/v2/move/311/',
+		handled: true,
+	},
 	{ name: 'aromatherapy', url: 'https://pokeapi.co/api/v2/move/312/' },
 	{ name: 'odor-sleuth', url: 'https://pokeapi.co/api/v2/move/316/' },
 	{ name: 'water-spout', url: 'https://pokeapi.co/api/v2/move/323/' },
@@ -2450,6 +2462,9 @@ export const handledMoves = [
 	'hydro-cannon',
 	'dive',
 	'ice-fang',
+	'slack-off',
+	'crush-claw',
+	'weather-ball',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
