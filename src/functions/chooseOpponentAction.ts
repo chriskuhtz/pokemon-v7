@@ -104,6 +104,26 @@ export const chooseOpponentAction = ({
 			targetId: controlled.id,
 		};
 	}
+
+	const weatherMoves: Record<string, WeatherType> = {
+		'rain-dance': 'rain',
+		sandstorm: 'sandstorm',
+		hail: 'hail',
+		'sunny-day': 'sun',
+	};
+
+	//weather control
+	const weatherMove = moves.find((m) =>
+		Object.keys(weatherMoves).includes(m.name)
+	);
+	if (weatherMove && weather !== weatherMoves[weatherMove.data.name]) {
+		return {
+			userId: controlled.id,
+			actionName: weatherMove.name,
+			targetId: controlled.id,
+		};
+	}
+
 	//screens if possible
 	const reflect =
 		moves.find((m) => m.name === 'reflect') &&
