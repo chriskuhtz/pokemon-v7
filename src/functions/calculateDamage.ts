@@ -426,7 +426,7 @@ export const calculateDamage = (
 
 	const pureDamage = (levelFactor * power * statFactor) / 50 + 2;
 
-	const parentalBondFactor = 1;
+	const parentalBondFactor = attacker.ability === 'parental-bond' ? 1.5 : 1;
 	const weatherFactor = determineWeatherFactor(
 		attack,
 		weather,
@@ -690,6 +690,7 @@ export const calculateDamage = (
 		attacker.ability === 'tough-claws' && contactMoves.includes(attack.name)
 			? 1.33
 			: 1;
+
 	const res = Math.max(
 		Math.floor(
 			pureDamage *

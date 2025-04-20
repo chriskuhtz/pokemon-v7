@@ -331,6 +331,11 @@ export const handleDamageAttack = ({
 		};
 		removeSpikes(updatedTarget.ownerId);
 	}
+	if (updatedAttacker.ability === 'parental-bond') {
+		addMessage({
+			message: `${updatedAttacker.name} uses parental bond to hit twice`,
+		});
+	}
 	if (move.name === 'brick-break') {
 		addMessage({
 			message: `${updatedAttacker.name} breaks through any protective screens`,
