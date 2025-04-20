@@ -71,7 +71,7 @@ export const useSwarmRadar = () => {
 			addMessage({
 				message: `The radar detects swarms of ${
 					saveFile.currentSwarm.pokemon
-				} on ${mapDisplayNames[saveFile.currentSwarm.route]}`,
+				} at ${mapDisplayNames[saveFile.currentSwarm.route]}`,
 				needsNoConfirmation: true,
 			});
 		} else if (!saveFile.nextSwarmReadyAt || now > saveFile.nextSwarmReadyAt) {
