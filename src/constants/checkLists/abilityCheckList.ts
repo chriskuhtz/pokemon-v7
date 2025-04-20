@@ -870,10 +870,12 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/188/',
 		handled: true,
 	},
-	{ name: 'primordial-sea', url: 'https://pokeapi.co/api/v2/ability/189/' },
-	{ name: 'desolate-land', url: 'https://pokeapi.co/api/v2/ability/190/' },
-	{ name: 'delta-stream', url: 'https://pokeapi.co/api/v2/ability/191/' },
-	{ name: 'stamina', url: 'https://pokeapi.co/api/v2/ability/192/' },
+
+	{
+		name: 'stamina',
+		url: 'https://pokeapi.co/api/v2/ability/192/',
+		handled: true,
+	},
 	{ name: 'wimp-out', url: 'https://pokeapi.co/api/v2/ability/193/' },
 	{ name: 'emergency-exit', url: 'https://pokeapi.co/api/v2/ability/194/' },
 	{ name: 'water-compaction', url: 'https://pokeapi.co/api/v2/ability/195/' },
@@ -1050,6 +1052,9 @@ export const abilityCheckList: {
 	{ name: 'decoy', url: 'https://pokeapi.co/api/v2/ability/10059/' },
 	{ name: 'shield', url: 'https://pokeapi.co/api/v2/ability/10060/' },
 	//banished
+	{ name: 'primordial-sea', url: 'https://pokeapi.co/api/v2/ability/189/' },
+	{ name: 'desolate-land', url: 'https://pokeapi.co/api/v2/ability/190/' },
+	{ name: 'delta-stream', url: 'https://pokeapi.co/api/v2/ability/191/' },
 	{ name: 'forecast', url: 'https://pokeapi.co/api/v2/ability/59/' },
 	{ name: 'mold-breaker', url: 'https://pokeapi.co/api/v2/ability/104/' },
 	{ name: 'anticipation', url: 'https://pokeapi.co/api/v2/ability/107/' },
@@ -1240,6 +1245,7 @@ export const abilityNames = [
 	'dark-aura',
 	'fairy-aura',
 	'aura-break',
+	'stamina',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
