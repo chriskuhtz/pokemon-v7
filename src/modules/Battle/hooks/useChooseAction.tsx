@@ -297,7 +297,7 @@ export const useChooseAction = (
 				);
 				return;
 			}
-			if (actionName === 'rollout') {
+			if (actionName === 'rollout' || actionName === 'ice-ball') {
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
 						if (p.id === user.id) {
