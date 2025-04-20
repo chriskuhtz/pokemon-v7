@@ -351,7 +351,7 @@ export const extraFeatureCheckList: {
 	{ name: 'Erika on route 1', handled: true },
 	{ name: 'Janine on route 2', handled: true },
 	{ name: 'Blaine on route 3', handled: true },
-	{ name: 'Surge on route 4' },
+	{ name: 'Surge on route 4', handled: true },
 	{ name: 'misty on route 5' },
 	{ name: 'sabrina on route 6' },
 	{ name: 'brock in onix cave' },
