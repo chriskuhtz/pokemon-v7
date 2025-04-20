@@ -1704,12 +1704,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/675/',
 		handled: true,
 	},
-	{ name: 'plasma-card', url: 'https://pokeapi.co/api/v2/item/676/' },
-	{ name: 'grubby-hanky', url: 'https://pokeapi.co/api/v2/item/677/' },
-	{ name: 'colress-machine', url: 'https://pokeapi.co/api/v2/item/678/' },
-	{ name: 'dropped-item', url: 'https://pokeapi.co/api/v2/item/679/' },
-	{ name: 'reveal-glass', url: 'https://pokeapi.co/api/v2/item/681/' },
-	{ name: 'weakness-policy', url: 'https://pokeapi.co/api/v2/item/682/' },
+	{
+		name: 'weakness-policy',
+		url: 'https://pokeapi.co/api/v2/item/682/',
+		handled: true,
+	},
 	{ name: 'assault-vest', url: 'https://pokeapi.co/api/v2/item/683/' },
 	{ name: 'pixie-plate', url: 'https://pokeapi.co/api/v2/item/684/' },
 	{ name: 'ability-capsule', url: 'https://pokeapi.co/api/v2/item/685/' },
@@ -2634,6 +2633,11 @@ export const itemsCheckList: {
 	 * KEY ITEMS
 	 *
 	 */
+	{ name: 'plasma-card', url: 'https://pokeapi.co/api/v2/item/676/' },
+	{ name: 'grubby-hanky', url: 'https://pokeapi.co/api/v2/item/677/' },
+	{ name: 'colress-machine', url: 'https://pokeapi.co/api/v2/item/678/' },
+	{ name: 'dropped-item', url: 'https://pokeapi.co/api/v2/item/679/' },
+	{ name: 'reveal-glass', url: 'https://pokeapi.co/api/v2/item/681/' },
 	{ name: 'light-stone', url: 'https://pokeapi.co/api/v2/item/657/' },
 	{ name: 'dark-stone', url: 'https://pokeapi.co/api/v2/item/658/' },
 	{ name: 'god-stone', url: 'https://pokeapi.co/api/v2/item/663/' },

@@ -232,7 +232,6 @@ export const heldItems = [
 	'binding-band',
 	'absorb-bulb',
 	'cell-battery',
-
 	'fire-gem',
 	'water-gem',
 	'electric-gem',
@@ -251,6 +250,7 @@ export const heldItems = [
 	'dragon-gem',
 	'normal-gem',
 	'fairy-gem',
+	'weakness-policy',
 ] as const;
 export const valuables = [
 	'shoal-salt',

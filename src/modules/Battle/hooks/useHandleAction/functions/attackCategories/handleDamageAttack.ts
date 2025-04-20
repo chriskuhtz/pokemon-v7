@@ -7,6 +7,7 @@ import { calculateDamage } from '../../../../../../functions/calculateDamage';
 import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
 import { getPlayerId } from '../../../../../../functions/getPlayerId';
+import { isKO } from '../../../../../../functions/isKo';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import { isRemovedByRapidSpin } from '../../../../../../interfaces/Ailment';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
@@ -282,6 +283,30 @@ export const handleDamageAttack = ({
 			...updatedTarget,
 			heldItemName: undefined,
 		};
+	}
+	if (
+		!isKO(updatedTarget) &&
+		getHeldItem(updatedTarget) === 'weakness-policy' &&
+		wasSuperEffective
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'attack',
+			2,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'weakness policy'
+		);
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'special-attack',
+			2,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'weakness policy'
+		);
 	}
 	if (
 		getHeldItem(updatedTarget) === 'absorb-bulb' &&
