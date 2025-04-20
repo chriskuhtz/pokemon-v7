@@ -148,7 +148,7 @@ export const getPower = (
 
 		return attack.data.power;
 	}
-	if (attack.name === 'eruption') {
+	if (attack.name === 'eruption' || attack.name === 'water-spout') {
 		const remainingHp = attacker.stats.hp - attacker.damage;
 		const percentage = remainingHp / attacker.stats.hp;
 
