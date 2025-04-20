@@ -1384,6 +1384,16 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/311/',
 		handled: true,
 	},
+	{
+		name: 'energy-ball',
+		url: 'https://pokeapi.co/api/v2/move/412/',
+		handled: true,
+	},
+	{
+		name: 'seed-bomb',
+		url: 'https://pokeapi.co/api/v2/move/402/',
+		handled: true,
+	},
 	{ name: 'aromatherapy', url: 'https://pokeapi.co/api/v2/move/312/' },
 	{ name: 'odor-sleuth', url: 'https://pokeapi.co/api/v2/move/316/' },
 	{ name: 'water-spout', url: 'https://pokeapi.co/api/v2/move/323/' },
@@ -1442,7 +1452,6 @@ export const movesCheckList: {
 	{ name: 'dark-pulse', url: 'https://pokeapi.co/api/v2/move/399/' },
 	{ name: 'night-slash', url: 'https://pokeapi.co/api/v2/move/400/' },
 	{ name: 'aqua-tail', url: 'https://pokeapi.co/api/v2/move/401/' },
-	{ name: 'seed-bomb', url: 'https://pokeapi.co/api/v2/move/402/' },
 	{ name: 'air-slash', url: 'https://pokeapi.co/api/v2/move/403/' },
 	{ name: 'x-scissor', url: 'https://pokeapi.co/api/v2/move/404/' },
 	{ name: 'bug-buzz', url: 'https://pokeapi.co/api/v2/move/405/' },
@@ -1451,7 +1460,6 @@ export const movesCheckList: {
 	{ name: 'power-gem', url: 'https://pokeapi.co/api/v2/move/408/' },
 	{ name: 'drain-punch', url: 'https://pokeapi.co/api/v2/move/409/' },
 	{ name: 'focus-blast', url: 'https://pokeapi.co/api/v2/move/411/' },
-	{ name: 'energy-ball', url: 'https://pokeapi.co/api/v2/move/412/' },
 	{ name: 'brave-bird', url: 'https://pokeapi.co/api/v2/move/413/' },
 	{ name: 'earth-power', url: 'https://pokeapi.co/api/v2/move/414/' },
 	{ name: 'switcheroo', url: 'https://pokeapi.co/api/v2/move/415/' },
@@ -2465,6 +2473,8 @@ export const handledMoves = [
 	'slack-off',
 	'crush-claw',
 	'weather-ball',
+	'energy-ball',
+	'seed-bomb',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

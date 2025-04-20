@@ -542,6 +542,7 @@ export const questNames = [
 	'catch all pokemon that live under rocks',
 	'defeat erika',
 	'defeat janine',
+	'defeat blaine',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -2201,6 +2202,15 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'machete certification',
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'trainer_janine');
+		},
+	},
+	'defeat blaine': {
+		kind: 'BULLETIN',
+		researchPoints: 25,
+		rewardItems: { 'occa-berry': 5, charcoal: 1 },
+		requiredUpgrade: 'sledge hammer certification',
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'trainer_blaine');
 		},
 	},
 };

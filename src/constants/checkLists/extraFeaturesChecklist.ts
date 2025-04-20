@@ -350,7 +350,7 @@ export const extraFeatureCheckList: {
 	{ name: 'trainer ai sets up screens if possible', handled: true },
 	{ name: 'Erika on route 1', handled: true },
 	{ name: 'Janine on route 2', handled: true },
-	{ name: 'Blaine on route 3' },
+	{ name: 'Blaine on route 3', handled: true },
 	{ name: 'Surge on route 4' },
 	{ name: 'misty on route 5' },
 	{ name: 'sabrina on route 6' },
