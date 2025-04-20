@@ -26,7 +26,7 @@ import { EmptyStatObject } from '../../interfaces/StatObject';
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-const defaultStarters: PokemonName[] = ['wigglytuff', 'charmander', 'squirtle'];
+const defaultStarters: PokemonName[] = ['bulbasaur', 'charmander', 'squirtle'];
 const randomStarterOptions = [
 	getRandomPokemonName(),
 	getRandomPokemonName(),

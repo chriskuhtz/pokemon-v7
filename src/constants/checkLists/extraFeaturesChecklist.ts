@@ -386,4 +386,8 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'releasing pokemon should not end fullscreen mode' },
 	{ name: 'trainer ai should consider flying,dig, diving' },
+	{ name: 'iv quests guy' },
+	{ name: 'fill bag with balls button' },
+	{ name: 'higher damage quests' },
+	{ name: 'ev quests guy' },
 ];
