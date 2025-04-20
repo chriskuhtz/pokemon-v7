@@ -88,7 +88,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'sixth slot for farm': ['sixth slot for farm'],
 	'seventh slot for farm': ['seventh slot for farm'],
 	'invite zigzagoon foragers': baseRequirements,
-	'invite dugtrio explorers': ['invite zigzagoon foragers'],
+	'invite dugtrio explorers': ['build combee hive'],
 	'invite amoongus compost researcher': baseRequirements,
 	'invite vileplume scent researcher': baseRequirements,
 	'invite fossil expert': ['invite dugtrio explorers'],
