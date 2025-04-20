@@ -137,7 +137,7 @@ export const handleDamageAttack = ({
 		updatedTarget = { ...updatedTarget, heldItemName: undefined };
 	}
 	if (
-		move.name === 'thief' &&
+		(move.name === 'thief' || move.name === 'covet') &&
 		updatedTarget.ability !== 'sticky-hold' &&
 		updatedTarget.heldItemName &&
 		!updatedAttacker.heldItemName

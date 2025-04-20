@@ -1419,13 +1419,23 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/409/',
 		handled: true,
 	},
-	{ name: 'sand-tomb', url: 'https://pokeapi.co/api/v2/move/328/' },
-	{ name: 'block', url: 'https://pokeapi.co/api/v2/move/335/' },
-	{ name: 'bounce', url: 'https://pokeapi.co/api/v2/move/340/' },
-	{ name: 'covet', url: 'https://pokeapi.co/api/v2/move/343/' },
-	{ name: 'water-sport', url: 'https://pokeapi.co/api/v2/move/346/' },
-	{ name: 'doom-desire', url: 'https://pokeapi.co/api/v2/move/353/' },
-	{ name: 'psycho-boost', url: 'https://pokeapi.co/api/v2/move/354/' },
+	{
+		name: 'sand-tomb',
+		url: 'https://pokeapi.co/api/v2/move/328/',
+		handled: true,
+	},
+	{ name: 'bounce', url: 'https://pokeapi.co/api/v2/move/340/', handled: true },
+	{ name: 'covet', url: 'https://pokeapi.co/api/v2/move/343/', handled: true },
+	{
+		name: 'ominous-wind',
+		url: 'https://pokeapi.co/api/v2/move/466/',
+		handled: true,
+	},
+	{
+		name: 'psycho-boost',
+		url: 'https://pokeapi.co/api/v2/move/354/',
+		handled: true,
+	},
 	{ name: 'roost', url: 'https://pokeapi.co/api/v2/move/355/' },
 	{ name: 'gravity', url: 'https://pokeapi.co/api/v2/move/356/' },
 	{ name: 'miracle-eye', url: 'https://pokeapi.co/api/v2/move/357/' },
@@ -1528,11 +1538,6 @@ export const movesCheckList: {
 	{ name: 'magma-storm', url: 'https://pokeapi.co/api/v2/move/463/' },
 	{ name: 'dark-void', url: 'https://pokeapi.co/api/v2/move/464/' },
 	{ name: 'seed-flare', url: 'https://pokeapi.co/api/v2/move/465/' },
-	{
-		name: 'ominous-wind',
-		url: 'https://pokeapi.co/api/v2/move/466/',
-		handled: true,
-	},
 	{ name: 'shadow-force', url: 'https://pokeapi.co/api/v2/move/467/' },
 	{ name: 'hone-claws', url: 'https://pokeapi.co/api/v2/move/468/' },
 	{ name: 'wide-guard', url: 'https://pokeapi.co/api/v2/move/469/' },
@@ -2013,6 +2018,10 @@ export const movesCheckList: {
 	/*
 	 * BANISHED:
 	 */
+
+	{ name: 'block', url: 'https://pokeapi.co/api/v2/move/335/' },
+	{ name: 'water-sport', url: 'https://pokeapi.co/api/v2/move/346/' },
+	{ name: 'doom-desire', url: 'https://pokeapi.co/api/v2/move/353/' },
 	{ name: 'odor-sleuth', url: 'https://pokeapi.co/api/v2/move/316/' },
 	{ name: 'mud-sport', url: 'https://pokeapi.co/api/v2/move/300/' },
 	{ name: 'camouflage', url: 'https://pokeapi.co/api/v2/move/293/' },
@@ -2505,6 +2514,10 @@ export const handledMoves = [
 	'moonblast',
 	'sky-uppercut',
 	'drain-punch',
+	'sand-tomb',
+	'bounce',
+	'covet',
+	'psycho-boost',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
