@@ -1353,10 +1353,17 @@ export const movesCheckList: {
 	},
 
 	{ name: 'dive', url: 'https://pokeapi.co/api/v2/move/291/', handled: true },
-	{ name: 'camouflage', url: 'https://pokeapi.co/api/v2/move/293/' },
-	{ name: 'teeter-dance', url: 'https://pokeapi.co/api/v2/move/298/' },
-	{ name: 'mud-sport', url: 'https://pokeapi.co/api/v2/move/300/' },
-	{ name: 'ice-ball', url: 'https://pokeapi.co/api/v2/move/301/' },
+	{
+		name: 'teeter-dance',
+		url: 'https://pokeapi.co/api/v2/move/298/',
+		handled: true,
+	},
+
+	{
+		name: 'ice-ball',
+		url: 'https://pokeapi.co/api/v2/move/301/',
+		handled: true,
+	},
 	{ name: 'slack-off', url: 'https://pokeapi.co/api/v2/move/303/' },
 	{ name: 'crush-claw', url: 'https://pokeapi.co/api/v2/move/306/' },
 	{ name: 'weather-ball', url: 'https://pokeapi.co/api/v2/move/311/' },
@@ -2055,6 +2062,8 @@ export const movesCheckList: {
 	{ name: 'upper-hand', url: 'https://pokeapi.co/api/v2/move/918/' },
 	{ name: 'malignant-chain', url: 'https://pokeapi.co/api/v2/move/919/' },
 	//banished
+	{ name: 'mud-sport', url: 'https://pokeapi.co/api/v2/move/300/' },
+	{ name: 'camouflage', url: 'https://pokeapi.co/api/v2/move/293/' },
 	{ name: 'secret-power', url: 'https://pokeapi.co/api/v2/move/290/' },
 	{ name: 'grudge', url: 'https://pokeapi.co/api/v2/move/288/' },
 	{ name: 'snatch', url: 'https://pokeapi.co/api/v2/move/289/' },
@@ -2382,6 +2391,7 @@ export const handledMoves = [
 	'hail',
 	'endure',
 	'rollout',
+	'ice-ball',
 	'false-swipe',
 	'milk-drink',
 	'fury-cutter',

@@ -88,7 +88,10 @@ export const handleAttackStart = ({
 
 	let targets = getInitialTargets();
 
-	if (move.name === 'rollout' && targets.length === 0) {
+	if (
+		(move.name === 'rollout' || move.name === 'ice-ball') &&
+		targets.length === 0
+	) {
 		targets = [
 			getRandomTarget({
 				targets: pokemon,
