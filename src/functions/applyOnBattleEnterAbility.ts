@@ -81,6 +81,11 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 			message: `${user.data.name} pulls in steel pokemon with magnet pull`,
 		});
 	}
+	if (user.ability === 'dark-aura') {
+		addMessage({
+			message: `${user.data.name} spreads a dark aura around the field`,
+		});
+	}
 	if (user.ability === 'intimidate') {
 		updatedPokemon = updatedPokemon.map((p) => {
 			if (p.status !== 'ONFIELD') {

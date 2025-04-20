@@ -733,6 +733,11 @@ export const calculateDamage = (
 
 	const item = getHeldItem(attacker);
 	const gemFactor = item && gemTable[item] === attackType ? 1.5 : 1;
+	const darkAuraFactor =
+		battleFieldEffects.some((b) => b.type === 'dark-aura') &&
+		attackType === 'dark'
+			? 1.33
+			: 1;
 
 	const res = Math.max(
 		Math.floor(
@@ -805,7 +810,8 @@ export const calculateDamage = (
 				pixilateFactor *
 				diveFactor *
 				aerilateFactor *
-				gemFactor
+				gemFactor *
+				darkAuraFactor
 		),
 		1
 	);

@@ -71,7 +71,8 @@ export interface BattleFieldEffect {
 		| 'victory-star'
 		| 'aroma-veil'
 		| 'flower-veil'
-		| 'sweet-veil';
+		| 'sweet-veil'
+		| 'dark-aura';
 	ownerId: string;
 	applicatorId?: string;
 	duration: number;
