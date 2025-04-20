@@ -272,6 +272,17 @@ export const valuables = [
 	'deep-sea-tooth',
 	'deep-sea-scale',
 	'prism-scale',
+	'balm-mushroom',
+	'big-nugget',
+	'pearl-string',
+	'comet-shard',
+	'relic-copper',
+	'relic-silver',
+	'relic-gold',
+	'relic-vase',
+	'relic-band',
+	'relic-statue',
+	'relic-crown',
 ] as const;
 
 export const mulches = [
@@ -664,6 +675,7 @@ export const pickupTable: ItemType[] = [
 ];
 export const undergroundTable: ItemType[] = [
 	...valuables,
+	...evoStones,
 	...evoStones,
 	...evBoostItemTypes,
 	...heldItems,
