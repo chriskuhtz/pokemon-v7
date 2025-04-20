@@ -11,6 +11,7 @@ export const determineWildPokemon = (
 	map: OverworldMap,
 	quests: SaveFile['quests'],
 	waterEncounter: boolean,
+	shinyFactor: number,
 	swarm?: PokemonSwarm
 ): OwnedPokemon[] => {
 	if (
@@ -20,7 +21,7 @@ export const determineWildPokemon = (
 		return [
 			makeChallengerPokemon(
 				{ name: 'articuno', xp: 125000 },
-				{ increasedShinyFactor: 2 }
+				{ increasedShinyFactor: 2 * shinyFactor }
 			),
 		];
 	}
@@ -32,7 +33,7 @@ export const determineWildPokemon = (
 		return [
 			makeChallengerPokemon(
 				{ name: 'raticate', xp: 27000, heldItemName: 'oaks-parcel' },
-				{ increasedShinyFactor: 16 }
+				{ increasedShinyFactor: 16 * shinyFactor }
 			),
 		];
 	}
@@ -53,25 +54,34 @@ export const determineWildPokemon = (
 						Math.floor(swarm.xpMax * Math.random()),
 					]),
 				},
-				{ increasedShinyFactor: 8 }
+				{ increasedShinyFactor: 8 * shinyFactor }
 			),
 		];
 	}
 	return team.filter((p) => p.damage < p.maxHp).length > 1
 		? [
-				makeChallengerPokemon({
-					nature: getRandomNature(),
-					...getRandomEncounter(map, waterEncounter),
-				}),
-				makeChallengerPokemon({
-					nature: getRandomNature(),
-					...getRandomEncounter(map, waterEncounter),
-				}),
+				makeChallengerPokemon(
+					{
+						nature: getRandomNature(),
+						...getRandomEncounter(map, waterEncounter),
+					},
+					{ increasedShinyFactor: shinyFactor }
+				),
+				makeChallengerPokemon(
+					{
+						nature: getRandomNature(),
+						...getRandomEncounter(map, waterEncounter),
+					},
+					{ increasedShinyFactor: shinyFactor }
+				),
 		  ]
 		: [
-				makeChallengerPokemon({
-					nature: getRandomNature(),
-					...getRandomEncounter(map, waterEncounter),
-				}),
+				makeChallengerPokemon(
+					{
+						nature: getRandomNature(),
+						...getRandomEncounter(map, waterEncounter),
+					},
+					{ increasedShinyFactor: shinyFactor }
+				),
 		  ];
 };

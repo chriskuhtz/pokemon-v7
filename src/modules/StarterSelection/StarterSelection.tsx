@@ -66,7 +66,7 @@ export const StarterSelection = (): JSX.Element => {
 		const mon = reduceBattlePokemonToOwnedPokemon({
 			...chosenStarter,
 			ownerId: name,
-			shiny: Math.random() < shinyChance,
+			shiny: Math.random() / 10 < shinyChance,
 		});
 
 		const pokedex = addPokemonToDex(saveFile.pokedex, mon.name, 'camp', true);

@@ -1750,9 +1750,11 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		rewardItems: {
 			'master-ball': 1,
+			'shiny-charm': 1,
 		},
 		researchPoints: 50,
-		conditionFunction: (s) => s.pokemon.some((p) => p.shiny),
+		conditionFunction: (s) =>
+			s.pokemon.some((p) => p.shiny && p.caughtOnMap !== 'camp'),
 	},
 	'cook an easy recipe': {
 		kind: 'BULLETIN',

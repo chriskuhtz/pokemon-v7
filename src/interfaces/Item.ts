@@ -378,7 +378,12 @@ export const fossils = [
 	'jaw-fossil',
 	'sail-fossil',
 ] as const;
-export const keyItems = ['exp-share', 'poke-flute', 'oaks-parcel'] as const;
+export const keyItems = [
+	'exp-share',
+	'poke-flute',
+	'oaks-parcel',
+	'shiny-charm',
+] as const;
 
 export const itemTypes = [
 	...apricorns,
