@@ -299,7 +299,24 @@ export const handleAbilitiesAfterAttack = (
 			true,
 			battleFieldEffects,
 			addMessage,
-			' by motor drive'
+			'motor drive'
+		);
+	}
+	// apply water compaction boost
+	if (
+		!isKO(updatedTarget) &&
+		move.data.type.name === 'water' &&
+		['physical', 'special'].includes(move.data.damage_class.name) &&
+		target.ability === 'water-compaction'
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'defense',
+			2,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'water compaction'
 		);
 	}
 	//check for flinch

@@ -876,9 +876,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/192/',
 		handled: true,
 	},
-	{ name: 'wimp-out', url: 'https://pokeapi.co/api/v2/ability/193/' },
-	{ name: 'emergency-exit', url: 'https://pokeapi.co/api/v2/ability/194/' },
-	{ name: 'water-compaction', url: 'https://pokeapi.co/api/v2/ability/195/' },
+	{
+		name: 'water-compaction',
+		url: 'https://pokeapi.co/api/v2/ability/195/',
+		handled: true,
+	},
 	{ name: 'merciless', url: 'https://pokeapi.co/api/v2/ability/196/' },
 	{ name: 'shields-down', url: 'https://pokeapi.co/api/v2/ability/197/' },
 	{ name: 'stakeout', url: 'https://pokeapi.co/api/v2/ability/198/' },
@@ -1051,6 +1053,8 @@ export const abilityCheckList: {
 	{ name: 'shackle', url: 'https://pokeapi.co/api/v2/ability/10058/' },
 	{ name: 'decoy', url: 'https://pokeapi.co/api/v2/ability/10059/' },
 	{ name: 'shield', url: 'https://pokeapi.co/api/v2/ability/10060/' },
+	{ name: 'wimp-out', url: 'https://pokeapi.co/api/v2/ability/193/' },
+	{ name: 'emergency-exit', url: 'https://pokeapi.co/api/v2/ability/194/' },
 	//banished
 	{ name: 'primordial-sea', url: 'https://pokeapi.co/api/v2/ability/189/' },
 	{ name: 'desolate-land', url: 'https://pokeapi.co/api/v2/ability/190/' },
@@ -1246,6 +1250,7 @@ export const abilityNames = [
 	'fairy-aura',
 	'aura-break',
 	'stamina',
+	'water-compaction',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
