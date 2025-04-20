@@ -541,6 +541,7 @@ export const questNames = [
 	'defeat chuck',
 	'catch all pokemon that live under rocks',
 	'defeat erika',
+	'defeat janine',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -2028,7 +2029,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'roseli-berry': 1,
 			'passho-berry': 1,
 			'wacan-berry': 1,
-			'rindo-berry': 1,
 			'yache-berry': 1,
 		},
 		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 0,
@@ -2040,7 +2040,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 30,
 		rewardItems: {
 			'chople-berry': 1,
-			'kebia-berry': 1,
 			'shuca-berry': 1,
 			'coba-berry': 1,
 			'payapa-berry': 1,
@@ -2190,9 +2189,18 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'defeat erika': {
 		kind: 'BULLETIN',
 		researchPoints: 25,
-		rewardItems: { 'occa-berry': 5, 'miracle-seed': 1, 'big-root': 1 },
+		rewardItems: { 'rindo-berry': 5, 'miracle-seed': 1, 'big-root': 1 },
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'trainer_erika');
+		},
+	},
+	'defeat janine': {
+		kind: 'BULLETIN',
+		researchPoints: 25,
+		rewardItems: { 'kebia-berry': 5, 'black-sludge': 1 },
+		requiredUpgrade: 'machete certification',
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'trainer_janine');
 		},
 	},
 };
