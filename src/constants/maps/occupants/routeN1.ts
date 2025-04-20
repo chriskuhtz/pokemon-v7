@@ -1,5 +1,6 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { routeN1Lure } from '../../../modules/BerryLure/BerryLure';
+import { erika } from './erika';
 
 export const routeN1Occupants: OverworldMap['occupants'] = [
 	{
@@ -251,5 +252,6 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		sprite: '/ledges/ledgeRight.png',
 		passableFrom: 'LEFT',
 	},
+	...erika,
 	routeN1Lure,
 ];

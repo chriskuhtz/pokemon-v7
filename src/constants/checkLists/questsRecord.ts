@@ -540,6 +540,7 @@ export const questNames = [
 	'deal 10000 damage with one attack',
 	'defeat chuck',
 	'catch all pokemon that live under rocks',
+	'defeat erika',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -583,7 +584,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: {
 			'big-malasada': 5,
 			'belue-berry': 1,
-			'occa-berry': 1,
 			'wepear-berry': 1,
 			'watmel-berry': 1,
 			'nanab-berry': 1,
@@ -2025,7 +2025,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'berry lure station routeN1',
 		researchPoints: 20,
 		rewardItems: {
-			'occa-berry': 1,
+			'roseli-berry': 1,
 			'passho-berry': 1,
 			'wacan-berry': 1,
 			'rindo-berry': 1,
@@ -2186,6 +2186,14 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => s.mileStones.damageRecord >= 10000,
 		rewardItems: { 'big-malasada': 1 },
 		availableAfter: 'deal 5000 damage with one attack',
+	},
+	'defeat erika': {
+		kind: 'BULLETIN',
+		researchPoints: 25,
+		rewardItems: { 'occa-berry': 5 },
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'trainer_erika');
+		},
 	},
 };
 
