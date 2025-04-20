@@ -232,6 +232,25 @@ export const heldItems = [
 	'binding-band',
 	'absorb-bulb',
 	'cell-battery',
+
+	'fire-gem',
+	'water-gem',
+	'electric-gem',
+	'grass-gem',
+	'ice-gem',
+	'fighting-gem',
+	'poison-gem',
+	'ground-gem',
+	'flying-gem',
+	'psychic-gem',
+	'bug-gem',
+	'rock-gem',
+	'ghost-gem',
+	'dark-gem',
+	'steel-gem',
+	'dragon-gem',
+	'normal-gem',
+	'fairy-gem',
 ] as const;
 export const valuables = [
 	'shoal-salt',
@@ -254,6 +273,7 @@ export const valuables = [
 	'deep-sea-scale',
 	'prism-scale',
 ] as const;
+
 export const mulches = [
 	'growth-mulch',
 	'damp-mulch',
@@ -348,6 +368,7 @@ export const fossils = [
 	'sail-fossil',
 ] as const;
 export const keyItems = ['exp-share', 'poke-flute', 'oaks-parcel'] as const;
+
 export const itemTypes = [
 	...apricorns,
 	...balltypes,
@@ -688,4 +709,24 @@ export const typeBoostItemTable: Record<PokemonType, ItemType[]> = {
 	normal: ['silk-scarf'],
 	fairy: ['cherish-ball'],
 	typeless: ['cherish-ball'],
+};
+export const gemTable: Partial<Record<ItemType, PokemonType>> = {
+	'fire-gem': 'fire',
+	'water-gem': 'water',
+	'electric-gem': 'electric',
+	'grass-gem': 'grass',
+	'ice-gem': 'ice',
+	'fighting-gem': 'fighting',
+	'poison-gem': 'poison',
+	'ground-gem': 'ground',
+	'flying-gem': 'flying',
+	'psychic-gem': 'psychic',
+	'bug-gem': 'bug',
+	'rock-gem': 'rock',
+	'ghost-gem': 'ghost',
+	'dark-gem': 'dark',
+	'steel-gem': 'steel',
+	'dragon-gem': 'dragon',
+	'normal-gem': 'normal',
+	'fairy-gem': 'fairy',
 };

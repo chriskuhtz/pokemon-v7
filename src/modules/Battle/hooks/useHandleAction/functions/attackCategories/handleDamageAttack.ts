@@ -11,6 +11,7 @@ import { Message } from '../../../../../../hooks/useMessageQueue';
 import { isRemovedByRapidSpin } from '../../../../../../interfaces/Ailment';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
+import { gemTable } from '../../../../../../interfaces/Item';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
 import { BattleTerrain } from '../../../useBattleWeather';
@@ -317,6 +318,18 @@ export const handleDamageAttack = ({
 			...updatedTarget,
 			heldItemName: undefined,
 		};
+	}
+
+	const attackerItem = getHeldItem(updatedAttacker);
+	if (
+		attackerItem &&
+		gemTable[attackerItem] === move.data.type.name &&
+		actualDamage > 0
+	) {
+		addMessage({
+			message: `${updatedTarget} consumed its ${attackerItem} to increase the damage`,
+		});
+		updatedAttacker = { ...updatedAttacker, heldItemName: undefined };
 	}
 
 	if (move.name === 'rapid-spin') {

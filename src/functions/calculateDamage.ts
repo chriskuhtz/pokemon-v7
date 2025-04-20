@@ -17,7 +17,11 @@ import {
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { ItemType, superEffectiveSaveTable } from '../interfaces/Item';
+import {
+	gemTable,
+	ItemType,
+	superEffectiveSaveTable,
+} from '../interfaces/Item';
 import { PokemonType } from '../interfaces/PokemonType';
 import { StatObject } from '../interfaces/StatObject';
 import { WeatherType } from '../interfaces/Weather';
@@ -691,6 +695,9 @@ export const calculateDamage = (
 			? 1.33
 			: 1;
 
+	const item = getHeldItem(attacker);
+	const gemFactor = item && gemTable[item] === attackType ? 1.5 : 1;
+
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -761,7 +768,8 @@ export const calculateDamage = (
 				toughClawsFactor *
 				pixilateFactor *
 				diveFactor *
-				aerilateFactor
+				aerilateFactor *
+				gemFactor
 		),
 		1
 	);
