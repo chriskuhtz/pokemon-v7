@@ -26,7 +26,7 @@ export const Curator = (): JSX.Element => {
 						onClick={() => trade(item)}
 						key={item}
 						icon={<ItemSprite item={item} />}
-						content={<h3>Donate {item}</h3>}
+						content={<h3>Donate {item} and receive a berry as a thank you</h3>}
 						actionElements={[]}
 					/>
 				))}

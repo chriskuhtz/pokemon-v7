@@ -538,8 +538,17 @@ export const questNames = [
 	'deal 2000 damage with one attack',
 	'deal 5000 damage with one attack',
 	'deal 10000 damage with one attack',
+	'deal 20000 damage with one attack',
+	'deal 30000 damage with one attack',
 	'defeat chuck',
 	'catch all pokemon that live under rocks',
+	'defeat erika',
+	'defeat janine',
+	'defeat blaine',
+	'defeat surge',
+	'defeat misty',
+	'defeat sabrina',
+	'defeat brock',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -583,7 +592,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: {
 			'big-malasada': 5,
 			'belue-berry': 1,
-			'occa-berry': 1,
 			'wepear-berry': 1,
 			'watmel-berry': 1,
 			'nanab-berry': 1,
@@ -1747,9 +1755,11 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		rewardItems: {
 			'master-ball': 1,
+			'shiny-charm': 1,
 		},
 		researchPoints: 50,
-		conditionFunction: (s) => s.pokemon.some((p) => p.shiny),
+		conditionFunction: (s) =>
+			s.pokemon.some((p) => p.shiny && p.caughtOnMap !== 'camp'),
 	},
 	'cook an easy recipe': {
 		kind: 'BULLETIN',
@@ -2025,10 +2035,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'berry lure station routeN1',
 		researchPoints: 20,
 		rewardItems: {
-			'occa-berry': 1,
+			'roseli-berry': 1,
 			'passho-berry': 1,
 			'wacan-berry': 1,
-			'rindo-berry': 1,
 			'yache-berry': 1,
 		},
 		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 0,
@@ -2040,7 +2049,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 30,
 		rewardItems: {
 			'chople-berry': 1,
-			'kebia-berry': 1,
 			'shuca-berry': 1,
 			'coba-berry': 1,
 			'payapa-berry': 1,
@@ -2186,6 +2194,82 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => s.mileStones.damageRecord >= 10000,
 		rewardItems: { 'big-malasada': 1 },
 		availableAfter: 'deal 5000 damage with one attack',
+	},
+	'deal 20000 damage with one attack': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		conditionFunction: (s) => s.mileStones.damageRecord >= 20000,
+		rewardItems: { 'weakness-policy': 1 },
+		availableAfter: 'deal 10000 damage with one attack',
+	},
+	'deal 30000 damage with one attack': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		conditionFunction: (s) => s.mileStones.damageRecord >= 30000,
+		rewardItems: { 'master-ball': 1 },
+		availableAfter: 'deal 20000 damage with one attack',
+	},
+	'defeat erika': {
+		kind: 'BULLETIN',
+		researchPoints: 25,
+		rewardItems: { 'rindo-berry': 5, 'miracle-seed': 1, 'big-root': 1 },
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'trainer_erika');
+		},
+	},
+	'defeat janine': {
+		kind: 'BULLETIN',
+		researchPoints: 25,
+		rewardItems: { 'kebia-berry': 5, 'black-sludge': 1 },
+		requiredUpgrade: 'machete certification',
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'trainer_janine');
+		},
+	},
+	'defeat blaine': {
+		kind: 'BULLETIN',
+		researchPoints: 25,
+		rewardItems: { 'occa-berry': 5, charcoal: 1 },
+		requiredUpgrade: 'sledge hammer certification',
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'trainer_blaine');
+		},
+	},
+	'defeat surge': {
+		kind: 'BULLETIN',
+		researchPoints: 50,
+		rewardItems: { 'wacan-berry': 5, magnet: 1 },
+		requiredUpgrade: 'shovel certification',
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'trainer_surge');
+		},
+	},
+	'defeat misty': {
+		kind: 'BULLETIN',
+		researchPoints: 50,
+		rewardItems: { 'passho-berry': 5, 'mystic-water': 1 },
+		requiredUpgrade: 'swimming certification',
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'trainer_misty');
+		},
+	},
+	'defeat sabrina': {
+		kind: 'BULLETIN',
+		researchPoints: 50,
+		rewardItems: { 'payapa-berry': 5, 'twisted-spoon': 1 },
+		requiredUpgrade: 'swimming certification',
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'trainer_sabrina');
+		},
+	},
+	'defeat brock': {
+		kind: 'BULLETIN',
+		researchPoints: 50,
+		rewardItems: { 'charti-berry': 5, 'hard-stone': 1 },
+		requiredUpgrade: 'swimming certification',
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'trainer_brock');
+		},
 	},
 };
 

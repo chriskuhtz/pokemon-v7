@@ -1,4 +1,5 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
+import { brock } from './brock';
 
 export const onixCaveOccupants: OverworldMap['occupants'] = [
 	{
@@ -91,4 +92,5 @@ export const onixCaveOccupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'onixCave_fossil'),
 	},
+	...brock,
 ];

@@ -17,7 +17,11 @@ import {
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { ItemType, superEffectiveSaveTable } from '../interfaces/Item';
+import {
+	gemTable,
+	ItemType,
+	superEffectiveSaveTable,
+} from '../interfaces/Item';
 import { PokemonType } from '../interfaces/PokemonType';
 import { StatObject } from '../interfaces/StatObject';
 import { WeatherType } from '../interfaces/Weather';
@@ -129,9 +133,22 @@ export const getPower = (
 	attacker: BattlePokemon,
 	attack: BattleAttack,
 	target: BattlePokemon,
-	attackerLevel: number
+	attackerLevel: number,
+	weather: WeatherType | undefined
 ) => {
-	if (attack.name === 'eruption') {
+	if (attack.name === 'weather-ball' && attack.data.power) {
+		if (
+			weather === 'sun' ||
+			weather === 'rain' ||
+			weather === 'hail' ||
+			weather === 'sandstorm'
+		) {
+			return attack.data.power * 2;
+		}
+
+		return attack.data.power;
+	}
+	if (attack.name === 'eruption' || attack.name === 'water-spout') {
 		const remainingHp = attacker.stats.hp - attacker.damage;
 		const percentage = remainingHp / attacker.stats.hp;
 
@@ -163,6 +180,11 @@ export const getPower = (
 		return (
 			attack.data.power ??
 			0 * getRolloutFactor(attack.multiTurn ?? 1, !!attacker.defenseCurled)
+		);
+	}
+	if (attack.name == 'ice-ball') {
+		return (
+			attack.data.power ?? 0 * getRolloutFactor(attack.multiTurn ?? 1, false)
 		);
 	}
 	if (attack.name === 'return') {
@@ -236,11 +258,33 @@ export const calculateDamage = (
 		return { damage: attacker.biding.damage * 2 };
 	}
 	const damageClass = attack.data.damage_class.name;
-	const attackType = attack.data.type.name;
+	let attackType = attack.data.type.name;
+
+	if (attack.name === 'weather-ball') {
+		if (weather === 'rain') {
+			attackType = 'water';
+		}
+		if (weather === 'sun') {
+			attackType = 'fire';
+		}
+		if (weather === 'hail') {
+			attackType = 'ice';
+		}
+		if (weather === 'sandstorm') {
+			attackType = 'rock';
+		}
+	}
+
 	if (damageClass === 'status') {
 		return { damage: 0 };
 	}
-	const typeFactor = determineTypeFactor(target, attacker, attack, addMessage);
+	const typeFactor = determineTypeFactor(
+		target,
+		attacker,
+		attack,
+		weather,
+		addMessage
+	);
 	if (typeFactor === 0) {
 		return { damage: 0 };
 	}
@@ -329,7 +373,8 @@ export const calculateDamage = (
 		attacker,
 		attack,
 		target,
-		calculateLevelData(attacker.xp, attacker.growthRate).level
+		calculateLevelData(attacker.xp, attacker.growthRate).level,
+		weather
 	);
 
 	if (attack.name === 'present' && power < 0) {
@@ -421,7 +466,7 @@ export const calculateDamage = (
 
 	const pureDamage = (levelFactor * power * statFactor) / 50 + 2;
 
-	const parentalBondFactor = 1;
+	const parentalBondFactor = attacker.ability === 'parental-bond' ? 1.5 : 1;
 	const weatherFactor = determineWeatherFactor(
 		attack,
 		weather,
@@ -668,6 +713,8 @@ export const calculateDamage = (
 		attacker.ability === 'refrigerate' && attackType === 'normal' ? 1.3 : 1;
 	const pixilateFactor =
 		attacker.ability === 'pixilate' && attackType === 'normal' ? 1.3 : 1;
+	const aerilateFactor =
+		attacker.ability === 'aerilate' && attackType === 'normal' ? 1.3 : 1;
 	const megaLauncherFactor =
 		attacker.ability === 'mega-launcher' &&
 		auraAndPulseMoves.includes(attack.name)
@@ -683,6 +730,31 @@ export const calculateDamage = (
 		attacker.ability === 'tough-claws' && contactMoves.includes(attack.name)
 			? 1.33
 			: 1;
+
+	const item = getHeldItem(attacker);
+	const gemFactor = item && gemTable[item] === attackType ? 1.5 : 1;
+	const darkAuraFactor =
+		battleFieldEffects.some((b) => b.type === 'dark-aura') &&
+		!battleFieldEffects.some((b) => b.type === 'aura-break') &&
+		attackType === 'dark'
+			? 1.33
+			: 1;
+	const fairyAuraFactor =
+		battleFieldEffects.some((b) => b.type === 'fairy-aura') &&
+		!battleFieldEffects.some((b) => b.type === 'aura-break') &&
+		attackType === 'fairy'
+			? 1.33
+			: 1;
+
+	const aurabreakFactor =
+		battleFieldEffects.some(
+			(b) => b.type === 'fairy-aura' || b.type === 'dark-aura'
+		) &&
+		battleFieldEffects.some((b) => b.type === 'aura-break') &&
+		(attackType === 'fairy' || attackType == 'dark')
+			? 0.66
+			: 1;
+
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -752,7 +824,12 @@ export const calculateDamage = (
 				grassPeltFactor *
 				toughClawsFactor *
 				pixilateFactor *
-				diveFactor
+				diveFactor *
+				aerilateFactor *
+				gemFactor *
+				darkAuraFactor *
+				fairyAuraFactor *
+				aurabreakFactor
 		),
 		1
 	);

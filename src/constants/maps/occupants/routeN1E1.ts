@@ -1,5 +1,6 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { routeN1E1Lure } from '../../../modules/BerryLure/BerryLure';
+import { janine } from './janine';
 
 export const routeN1E1Occupants: OverworldMap['occupants'] = [
 	{
@@ -145,6 +146,6 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 			!s.handledOccupants.some((occ) => occ.id === 'ledge_n1e1_4'),
 		sprite: '/ledges/ledgeUp.png',
 	},
-
+	...janine,
 	routeN1E1Lure,
 ];

@@ -7,10 +7,12 @@ import { calculateDamage } from '../../../../../../functions/calculateDamage';
 import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
 import { getPlayerId } from '../../../../../../functions/getPlayerId';
+import { isKO } from '../../../../../../functions/isKo';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import { isRemovedByRapidSpin } from '../../../../../../interfaces/Ailment';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
+import { gemTable } from '../../../../../../interfaces/Item';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
 import { BattleTerrain } from '../../../useBattleWeather';
@@ -135,7 +137,7 @@ export const handleDamageAttack = ({
 		updatedTarget = { ...updatedTarget, heldItemName: undefined };
 	}
 	if (
-		move.name === 'thief' &&
+		(move.name === 'thief' || move.name === 'covet') &&
 		updatedTarget.ability !== 'sticky-hold' &&
 		updatedTarget.heldItemName &&
 		!updatedAttacker.heldItemName
@@ -283,6 +285,30 @@ export const handleDamageAttack = ({
 		};
 	}
 	if (
+		!isKO(updatedTarget) &&
+		getHeldItem(updatedTarget) === 'weakness-policy' &&
+		wasSuperEffective
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'attack',
+			2,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'weakness policy'
+		);
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'special-attack',
+			2,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'weakness policy'
+		);
+	}
+	if (
 		getHeldItem(updatedTarget) === 'absorb-bulb' &&
 		actualDamage > 0 &&
 		move.data.type.name === 'water'
@@ -300,6 +326,36 @@ export const handleDamageAttack = ({
 			heldItemName: undefined,
 		};
 	}
+	if (
+		getHeldItem(updatedTarget) === 'cell-battery' &&
+		actualDamage > 0 &&
+		move.data.type.name === 'electric'
+	) {
+		addMessage({ message: `${updatedTarget} consumed its cell-battery` });
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'attack',
+			1,
+			true,
+			battleFieldEffects
+		);
+		updatedTarget = {
+			...updatedTarget,
+			heldItemName: undefined,
+		};
+	}
+
+	const attackerItem = getHeldItem(updatedAttacker);
+	if (
+		attackerItem &&
+		gemTable[attackerItem] === move.data.type.name &&
+		actualDamage > 0
+	) {
+		addMessage({
+			message: `${updatedTarget} consumed its ${attackerItem} to increase the damage`,
+		});
+		updatedAttacker = { ...updatedAttacker, heldItemName: undefined };
+	}
 
 	if (move.name === 'rapid-spin') {
 		addMessage({
@@ -312,6 +368,11 @@ export const handleDamageAttack = ({
 			),
 		};
 		removeSpikes(updatedTarget.ownerId);
+	}
+	if (updatedAttacker.ability === 'parental-bond') {
+		addMessage({
+			message: `${updatedAttacker.name} uses parental bond to hit twice`,
+		});
 	}
 	if (move.name === 'brick-break') {
 		addMessage({

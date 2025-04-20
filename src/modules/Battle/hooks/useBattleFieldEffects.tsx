@@ -151,6 +151,42 @@ export const useBattleFieldEffects = (
 				duration: 9000,
 			});
 		}
+		if (
+			[...onFieldTeam, ...onFieldOpponents].some(
+				(p) => p.ability === 'dark-aura'
+			)
+		) {
+			res.push({
+				type: 'dark-aura',
+				ownerId: getPlayerId(),
+				duration: 9000,
+			});
+			res.push({ type: 'dark-aura', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (
+			[...onFieldTeam, ...onFieldOpponents].some(
+				(p) => p.ability === 'fairy-aura'
+			)
+		) {
+			res.push({
+				type: 'fairy-aura',
+				ownerId: getPlayerId(),
+				duration: 9000,
+			});
+			res.push({ type: 'fairy-aura', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (
+			[...onFieldTeam, ...onFieldOpponents].some(
+				(p) => p.ability === 'aura-break'
+			)
+		) {
+			res.push({
+				type: 'aura-break',
+				ownerId: getPlayerId(),
+				duration: 9000,
+			});
+			res.push({ type: 'aura-break', ownerId: OPPO_ID, duration: 9000 });
+		}
 		const friendGuardOppo = onFieldOpponents.find(
 			(p) => p.ability === 'friend-guard'
 		);

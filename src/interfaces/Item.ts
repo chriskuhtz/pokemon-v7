@@ -213,6 +213,7 @@ export const heldItems = [
 	'draco-plate',
 	'dread-plate',
 	'iron-plate',
+	'pixie-plate',
 	'odd-incense',
 	'rock-incense',
 	'full-incense',
@@ -231,6 +232,26 @@ export const heldItems = [
 	'air-balloon',
 	'binding-band',
 	'absorb-bulb',
+	'cell-battery',
+	'fire-gem',
+	'water-gem',
+	'electric-gem',
+	'grass-gem',
+	'ice-gem',
+	'fighting-gem',
+	'poison-gem',
+	'ground-gem',
+	'flying-gem',
+	'psychic-gem',
+	'bug-gem',
+	'rock-gem',
+	'ghost-gem',
+	'dark-gem',
+	'steel-gem',
+	'dragon-gem',
+	'normal-gem',
+	'fairy-gem',
+	'weakness-policy',
 ] as const;
 export const valuables = [
 	'shoal-salt',
@@ -252,7 +273,19 @@ export const valuables = [
 	'deep-sea-tooth',
 	'deep-sea-scale',
 	'prism-scale',
+	'balm-mushroom',
+	'big-nugget',
+	'pearl-string',
+	'comet-shard',
+	'relic-copper',
+	'relic-silver',
+	'relic-gold',
+	'relic-vase',
+	'relic-band',
+	'relic-statue',
+	'relic-crown',
 ] as const;
+
 export const mulches = [
 	'growth-mulch',
 	'damp-mulch',
@@ -346,7 +379,13 @@ export const fossils = [
 	'jaw-fossil',
 	'sail-fossil',
 ] as const;
-export const keyItems = ['exp-share', 'poke-flute', 'oaks-parcel'] as const;
+export const keyItems = [
+	'exp-share',
+	'poke-flute',
+	'oaks-parcel',
+	'shiny-charm',
+] as const;
+
 export const itemTypes = [
 	...apricorns,
 	...balltypes,
@@ -643,6 +682,7 @@ export const pickupTable: ItemType[] = [
 export const undergroundTable: ItemType[] = [
 	...valuables,
 	...evoStones,
+	...evoStones,
 	...evBoostItemTypes,
 	...heldItems,
 ];
@@ -685,6 +725,26 @@ export const typeBoostItemTable: Record<PokemonType, ItemType[]> = {
 	dark: ['black-glasses', 'dread-plate'],
 	steel: ['metal-coat', 'iron-plate'],
 	normal: ['silk-scarf'],
-	fairy: ['cherish-ball'],
+	fairy: ['cherish-ball', 'pixie-plate'],
 	typeless: ['cherish-ball'],
+};
+export const gemTable: Partial<Record<ItemType, PokemonType>> = {
+	'fire-gem': 'fire',
+	'water-gem': 'water',
+	'electric-gem': 'electric',
+	'grass-gem': 'grass',
+	'ice-gem': 'ice',
+	'fighting-gem': 'fighting',
+	'poison-gem': 'poison',
+	'ground-gem': 'ground',
+	'flying-gem': 'flying',
+	'psychic-gem': 'psychic',
+	'bug-gem': 'bug',
+	'rock-gem': 'rock',
+	'ghost-gem': 'ghost',
+	'dark-gem': 'dark',
+	'steel-gem': 'steel',
+	'dragon-gem': 'dragon',
+	'normal-gem': 'normal',
+	'fairy-gem': 'fairy',
 };

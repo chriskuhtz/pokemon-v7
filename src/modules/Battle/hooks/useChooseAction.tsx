@@ -83,6 +83,7 @@ export const useChooseAction = (
 						return p;
 					})
 				);
+				return;
 			}
 			const target = pokemon.find((p) => p.id === targetId);
 			if (targetId && !target) {
@@ -181,7 +182,7 @@ export const useChooseAction = (
 				);
 			}
 			if (!move) {
-				throw new Error('user does not know the selected move');
+				throw new Error(`user does not know the selected move, ${actionName}`);
 			}
 
 			const canSkipCharge = () => {
@@ -297,7 +298,7 @@ export const useChooseAction = (
 				);
 				return;
 			}
-			if (actionName === 'rollout') {
+			if (actionName === 'rollout' || actionName === 'ice-ball') {
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
 						if (p.id === user.id) {

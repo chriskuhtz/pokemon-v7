@@ -1,5 +1,6 @@
 import { getTimeOfDay } from '../../../functions/getTimeOfDay';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
+import { misty } from './misty';
 
 export const routeS1Occupants: OverworldMap['occupants'] = [
 	{
@@ -146,4 +147,5 @@ export const routeS1Occupants: OverworldMap['occupants'] = [
 			s.campUpgrades['invite historian'],
 		id: 'routeS1_zapdos',
 	},
+	...misty,
 ];

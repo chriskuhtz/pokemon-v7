@@ -330,8 +330,8 @@ export const routeN1E1Lure: Occupant = {
 export const routeE1Lure: Occupant = {
 	id: 'routeE1_berryLure',
 	type: 'BERRY_LURE',
-	x: 24,
-	y: 25,
+	x: 26,
+	y: 24,
 	conditionFunction: (s) => s.campUpgrades['berry lure station routeE1'],
 };
 export const routeS1E1Lure: Occupant = {

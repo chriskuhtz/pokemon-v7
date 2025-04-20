@@ -8,6 +8,7 @@ import {
 import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMovesArray } from '../../../../../../functions/getMovesArray';
 import { handleMimicOrSketch } from '../../../../../../functions/handleMimic';
+import { removeHealableAilments } from '../../../../../../functions/removeHealableAilments';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
@@ -454,6 +455,22 @@ export const handleUniqueMoves = ({
 			...updatedAttacker,
 			primaryAilment: undefined,
 		};
+	}
+	if (move.name === 'aromatherapy') {
+		addMessage({
+			message: `A soothing aroma cured the whole team of ailments`,
+		});
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.ownerId === updatedAttacker.ownerId) {
+				return {
+					...p,
+					primaryAilment: undefined,
+					secondaryAilments: removeHealableAilments(p.secondaryAilments),
+				};
+			}
+
+			return p;
+		});
 	}
 
 	return updatedPokemon.map((p) => {

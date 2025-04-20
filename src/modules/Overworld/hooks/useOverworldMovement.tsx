@@ -27,7 +27,10 @@ export const useOverworldMovement = (
 		location: playerLocation,
 		currentSwarm,
 		campUpgrades,
+		bag,
 	} = saveFile;
+
+	const shinyFactor = useMemo(() => (bag['shiny-charm'] > 1 ? 4 : 1), [bag]);
 	const map = useMemo(() => mapsRecord[playerLocation.mapId], [playerLocation]);
 	const [encounterChance, setEncounterChance] =
 		useState<number>(baseEncounterRate);
@@ -83,6 +86,7 @@ export const useOverworldMovement = (
 								mapsRecord[playerLocation.mapId],
 								quests,
 								waterEncounter,
+								shinyFactor,
 								currentSwarm
 							),
 						};
@@ -134,6 +138,7 @@ export const useOverworldMovement = (
 		quests,
 		saveFile,
 		setCharacterLocation,
+		shinyFactor,
 		startEncounter,
 	]);
 

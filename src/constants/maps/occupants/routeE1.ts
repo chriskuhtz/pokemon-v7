@@ -1,5 +1,6 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { routeE1Lure } from '../../../modules/BerryLure/BerryLure';
+import { blaine } from './blaine';
 
 export const routeE1Occupants: OverworldMap['occupants'] = [
 	{
@@ -221,5 +222,6 @@ export const routeE1Occupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'routeE1_claw-fossil'),
 	},
+	...blaine,
 	routeE1Lure,
 ];

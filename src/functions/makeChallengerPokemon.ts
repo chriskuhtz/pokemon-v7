@@ -3,7 +3,7 @@ import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { EmptyStatObject } from '../interfaces/StatObject';
 
 export const OPPO_ID = 'oppo';
-export const shinyChance = 1 / 8192;
+export const shinyChance = 1 / 4096;
 export const testOpponent: OwnedPokemon = {
 	name: 'bulbasaur',
 	gender: 'MALE',

@@ -111,6 +111,21 @@ export const handleAbilitiesAfterAttack = (
 		};
 		updatedAttacker = { ...updatedAttacker, heldItemName: undefined };
 	}
+	//check for stamina
+	if (
+		target.ability === 'stamina' &&
+		move.data.damage_class.name !== 'status'
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'defense',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'stamina'
+		);
+	}
 	//check for flame-body
 	if (
 		target.ability === 'flame-body' &&
@@ -284,7 +299,24 @@ export const handleAbilitiesAfterAttack = (
 			true,
 			battleFieldEffects,
 			addMessage,
-			' by motor drive'
+			'motor drive'
+		);
+	}
+	// apply water compaction boost
+	if (
+		!isKO(updatedTarget) &&
+		move.data.type.name === 'water' &&
+		['physical', 'special'].includes(move.data.damage_class.name) &&
+		target.ability === 'water-compaction'
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'defense',
+			2,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'water compaction'
 		);
 	}
 	//check for flinch

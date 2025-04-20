@@ -1,8 +1,10 @@
 import { useCallback, useContext, useMemo } from 'react';
+import { getRandomEntry } from '../../../functions/filterTargets';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { joinInventories } from '../../../interfaces/Inventory';
 import {
+	berries,
 	isFossil,
 	isItem,
 	isValuable,
@@ -27,8 +29,11 @@ export const useCurator = (): {
 
 	const trade = useCallback(
 		(tradeIn: ItemType) => {
+			const randomBerry = getRandomEntry([...berries]);
 			addMultipleMessages([
-				{ message: `Received 1 Research Point for donating a ${tradeIn}` },
+				{
+					message: `Received 1 Research Point and a ${randomBerry} for donating a ${tradeIn}`,
+				},
 				{ message: 'Thanks for your contribution', needsNoConfirmation: true },
 				{
 					message: 'I will put in a good word with the university director',
@@ -38,6 +43,7 @@ export const useCurator = (): {
 			patchSaveFileReducer({
 				bag: joinInventories(saveFile.bag, {
 					[tradeIn]: -1,
+					[randomBerry]: 1,
 				}),
 				researchPoints: saveFile.researchPoints + 1,
 			});
