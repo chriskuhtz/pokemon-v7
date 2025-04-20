@@ -123,6 +123,7 @@ export enum SpriteEnum {
 	misty = '149',
 	surge = '150',
 	erika = '151',
+	sabrina = '152',
 	janine = '153',
 	blaine = '154',
 	falkner = '155',

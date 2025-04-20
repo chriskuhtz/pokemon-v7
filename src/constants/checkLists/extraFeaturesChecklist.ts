@@ -353,7 +353,7 @@ export const extraFeatureCheckList: {
 	{ name: 'Blaine on route 3', handled: true },
 	{ name: 'Surge on route 4', handled: true },
 	{ name: 'misty on route 5', handled: true },
-	{ name: 'sabrina on route 6' },
+	{ name: 'sabrina on route 6', handled: true },
 	{ name: 'brock in onix cave' },
 	{ name: 'giovanni on route 7' },
 	{ name: 'nicer ladder up sprite' },

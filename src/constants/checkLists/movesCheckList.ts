@@ -1404,7 +1404,21 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/323/',
 		handled: true,
 	},
-	{ name: 'sky-uppercut', url: 'https://pokeapi.co/api/v2/move/327/' },
+	{
+		name: 'moonblast',
+		url: 'https://pokeapi.co/api/v2/move/585/',
+		handled: true,
+	},
+	{
+		name: 'sky-uppercut',
+		url: 'https://pokeapi.co/api/v2/move/327/',
+		handled: true,
+	},
+	{
+		name: 'drain-punch',
+		url: 'https://pokeapi.co/api/v2/move/409/',
+		handled: true,
+	},
 	{ name: 'sand-tomb', url: 'https://pokeapi.co/api/v2/move/328/' },
 	{ name: 'block', url: 'https://pokeapi.co/api/v2/move/335/' },
 	{ name: 'bounce', url: 'https://pokeapi.co/api/v2/move/340/' },
@@ -1465,7 +1479,6 @@ export const movesCheckList: {
 	{ name: 'dragon-pulse', url: 'https://pokeapi.co/api/v2/move/406/' },
 	{ name: 'dragon-rush', url: 'https://pokeapi.co/api/v2/move/407/' },
 	{ name: 'power-gem', url: 'https://pokeapi.co/api/v2/move/408/' },
-	{ name: 'drain-punch', url: 'https://pokeapi.co/api/v2/move/409/' },
 	{ name: 'focus-blast', url: 'https://pokeapi.co/api/v2/move/411/' },
 	{ name: 'brave-bird', url: 'https://pokeapi.co/api/v2/move/413/' },
 	{ name: 'earth-power', url: 'https://pokeapi.co/api/v2/move/414/' },
@@ -1638,7 +1651,6 @@ export const movesCheckList: {
 	{ name: 'electrify', url: 'https://pokeapi.co/api/v2/move/582/' },
 	{ name: 'play-rough', url: 'https://pokeapi.co/api/v2/move/583/' },
 	{ name: 'fairy-wind', url: 'https://pokeapi.co/api/v2/move/584/' },
-	{ name: 'moonblast', url: 'https://pokeapi.co/api/v2/move/585/' },
 	{ name: 'boomburst', url: 'https://pokeapi.co/api/v2/move/586/' },
 	{ name: 'fairy-lock', url: 'https://pokeapi.co/api/v2/move/587/' },
 	{ name: 'kings-shield', url: 'https://pokeapi.co/api/v2/move/588/' },
@@ -2490,6 +2502,9 @@ export const handledMoves = [
 	'seed-bomb',
 	'aromatherapy',
 	'water-spout',
+	'moonblast',
+	'sky-uppercut',
+	'drain-punch',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

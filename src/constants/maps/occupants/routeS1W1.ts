@@ -1,4 +1,5 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
+import { sabrina } from './sabrina';
 
 export const routeS1W1Occupants: OverworldMap['occupants'] = [
 	{
@@ -89,4 +90,5 @@ export const routeS1W1Occupants: OverworldMap['occupants'] = [
 			!s.handledOccupants.some((h) => h.id == 'routeS1W1_grepa_berry'),
 		id: 'routeS1W1_grepa_berry',
 	},
+	...sabrina,
 ];
