@@ -91,6 +91,11 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 			message: `${user.data.name} spreads a light aura around the field`,
 		});
 	}
+	if (user.ability === 'aura-break') {
+		addMessage({
+			message: `${user.data.name} destroys aura effects with aura-breaks`,
+		});
+	}
 	if (user.ability === 'intimidate') {
 		updatedPokemon = updatedPokemon.map((p) => {
 			if (p.status !== 'ONFIELD') {

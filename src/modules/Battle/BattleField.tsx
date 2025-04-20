@@ -73,6 +73,7 @@ export interface BattleFieldEffect {
 		| 'flower-veil'
 		| 'sweet-veil'
 		| 'dark-aura'
+		| 'aura-break'
 		| 'fairy-aura';
 	ownerId: string;
 	applicatorId?: string;

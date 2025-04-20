@@ -735,13 +735,24 @@ export const calculateDamage = (
 	const gemFactor = item && gemTable[item] === attackType ? 1.5 : 1;
 	const darkAuraFactor =
 		battleFieldEffects.some((b) => b.type === 'dark-aura') &&
+		!battleFieldEffects.some((b) => b.type === 'aura-break') &&
 		attackType === 'dark'
 			? 1.33
 			: 1;
 	const fairyAuraFactor =
 		battleFieldEffects.some((b) => b.type === 'fairy-aura') &&
+		!battleFieldEffects.some((b) => b.type === 'aura-break') &&
 		attackType === 'fairy'
 			? 1.33
+			: 1;
+
+	const aurabreakFactor =
+		battleFieldEffects.some(
+			(b) => b.type === 'fairy-aura' || b.type === 'dark-aura'
+		) &&
+		battleFieldEffects.some((b) => b.type === 'aura-break') &&
+		(attackType === 'fairy' || attackType == 'dark')
+			? 0.66
 			: 1;
 
 	const res = Math.max(
@@ -817,7 +828,8 @@ export const calculateDamage = (
 				aerilateFactor *
 				gemFactor *
 				darkAuraFactor *
-				fairyAuraFactor
+				fairyAuraFactor *
+				aurabreakFactor
 		),
 		1
 	);

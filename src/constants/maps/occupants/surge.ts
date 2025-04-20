@@ -17,7 +17,7 @@ const surgeTeam = [
 		ability: 'hustle',
 		fixedAbility: true,
 		happiness: 255,
-		heldItemName: 'muscle-band',
+		heldItemName: 'mago-berry',
 		firstMove: { name: 'slam', usedPP: 0 },
 		effortValues: {
 			...EmptyStatObject,
