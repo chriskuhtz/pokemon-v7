@@ -1709,8 +1709,12 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/682/',
 		handled: true,
 	},
-	{ name: 'assault-vest', url: 'https://pokeapi.co/api/v2/item/683/' },
-	{ name: 'pixie-plate', url: 'https://pokeapi.co/api/v2/item/684/' },
+
+	{
+		name: 'pixie-plate',
+		url: 'https://pokeapi.co/api/v2/item/684/',
+		handled: true,
+	},
 	{ name: 'ability-capsule', url: 'https://pokeapi.co/api/v2/item/685/' },
 	{ name: 'whipped-dream', url: 'https://pokeapi.co/api/v2/item/686/' },
 	{ name: 'sachet', url: 'https://pokeapi.co/api/v2/item/687/' },
@@ -2784,6 +2788,10 @@ export const itemsCheckList: {
 	 *
 	 *
 	 */
+	{
+		name: 'assault-vest',
+		url: 'https://pokeapi.co/api/v2/item/683/',
+	},
 	{ name: 'tm93', url: 'https://pokeapi.co/api/v2/item/659/' },
 	{ name: 'tm94', url: 'https://pokeapi.co/api/v2/item/660/' },
 	{ name: 'tm95', url: 'https://pokeapi.co/api/v2/item/661/' },

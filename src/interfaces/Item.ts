@@ -213,6 +213,7 @@ export const heldItems = [
 	'draco-plate',
 	'dread-plate',
 	'iron-plate',
+	'pixie-plate',
 	'odd-incense',
 	'rock-incense',
 	'full-incense',
@@ -724,7 +725,7 @@ export const typeBoostItemTable: Record<PokemonType, ItemType[]> = {
 	dark: ['black-glasses', 'dread-plate'],
 	steel: ['metal-coat', 'iron-plate'],
 	normal: ['silk-scarf'],
-	fairy: ['cherish-ball'],
+	fairy: ['cherish-ball', 'pixie-plate'],
 	typeless: ['cherish-ball'],
 };
 export const gemTable: Partial<Record<ItemType, PokemonType>> = {
