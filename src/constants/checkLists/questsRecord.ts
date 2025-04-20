@@ -538,6 +538,8 @@ export const questNames = [
 	'deal 2000 damage with one attack',
 	'deal 5000 damage with one attack',
 	'deal 10000 damage with one attack',
+	'deal 20000 damage with one attack',
+	'deal 30000 damage with one attack',
 	'defeat chuck',
 	'catch all pokemon that live under rocks',
 	'defeat erika',
@@ -546,6 +548,7 @@ export const questNames = [
 	'defeat surge',
 	'defeat misty',
 	'defeat sabrina',
+	'defeat brock',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -2192,6 +2195,20 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'big-malasada': 1 },
 		availableAfter: 'deal 5000 damage with one attack',
 	},
+	'deal 20000 damage with one attack': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		conditionFunction: (s) => s.mileStones.damageRecord >= 20000,
+		rewardItems: { 'weakness-policy': 1 },
+		availableAfter: 'deal 10000 damage with one attack',
+	},
+	'deal 30000 damage with one attack': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		conditionFunction: (s) => s.mileStones.damageRecord >= 30000,
+		rewardItems: { 'master-ball': 1 },
+		availableAfter: 'deal 20000 damage with one attack',
+	},
 	'defeat erika': {
 		kind: 'BULLETIN',
 		researchPoints: 25,
@@ -2243,6 +2260,15 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'trainer_sabrina');
+		},
+	},
+	'defeat brock': {
+		kind: 'BULLETIN',
+		researchPoints: 50,
+		rewardItems: { 'charti-berry': 5, 'hard-stone': 1 },
+		requiredUpgrade: 'swimming certification',
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'trainer_brock');
 		},
 	},
 };

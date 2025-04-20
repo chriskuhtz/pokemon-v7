@@ -74,6 +74,8 @@ export const chooseOpponentAction = ({
 		considerTaunt: true,
 		filterOutEmpty: true,
 	});
+
+	console.log(moves);
 	//determine the best damage move
 	const filtered = filterTargets({
 		targets,
@@ -86,9 +88,10 @@ export const chooseOpponentAction = ({
 
 	//splash if nothing else
 	if (moves.length === 0) {
+		console.log('yaya');
 		return {
 			userId: controlled.id,
-			actionName: 'splash',
+			actionName: 'LOAFING',
 			targetId: filtered[0].id,
 		};
 	}

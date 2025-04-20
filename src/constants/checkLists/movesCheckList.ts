@@ -1436,6 +1436,16 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/354/',
 		handled: true,
 	},
+	{
+		name: 'accelerock',
+		url: 'https://pokeapi.co/api/v2/move/709/',
+		handled: true,
+	},
+	{
+		name: 'aqua-jet',
+		url: 'https://pokeapi.co/api/v2/move/453/',
+		handled: true,
+	},
 	{ name: 'roost', url: 'https://pokeapi.co/api/v2/move/355/' },
 	{ name: 'gravity', url: 'https://pokeapi.co/api/v2/move/356/' },
 	{ name: 'miracle-eye', url: 'https://pokeapi.co/api/v2/move/357/' },
@@ -1525,7 +1535,6 @@ export const movesCheckList: {
 	{ name: 'bug-bite', url: 'https://pokeapi.co/api/v2/move/450/' },
 	{ name: 'charge-beam', url: 'https://pokeapi.co/api/v2/move/451/' },
 	{ name: 'wood-hammer', url: 'https://pokeapi.co/api/v2/move/452/' },
-	{ name: 'aqua-jet', url: 'https://pokeapi.co/api/v2/move/453/' },
 	{ name: 'attack-order', url: 'https://pokeapi.co/api/v2/move/454/' },
 	{ name: 'defend-order', url: 'https://pokeapi.co/api/v2/move/455/' },
 	{ name: 'heal-order', url: 'https://pokeapi.co/api/v2/move/456/' },
@@ -1885,7 +1894,6 @@ export const movesCheckList: {
 	{ name: 'psychic-fangs', url: 'https://pokeapi.co/api/v2/move/706/' },
 	{ name: 'stomping-tantrum', url: 'https://pokeapi.co/api/v2/move/707/' },
 	{ name: 'shadow-bone', url: 'https://pokeapi.co/api/v2/move/708/' },
-	{ name: 'accelerock', url: 'https://pokeapi.co/api/v2/move/709/' },
 	{ name: 'liquidation', url: 'https://pokeapi.co/api/v2/move/710/' },
 	{ name: 'prismatic-laser', url: 'https://pokeapi.co/api/v2/move/711/' },
 	{ name: 'spectral-thief', url: 'https://pokeapi.co/api/v2/move/712/' },
@@ -2518,6 +2526,8 @@ export const handledMoves = [
 	'bounce',
 	'covet',
 	'psycho-boost',
+	'accelerock',
+	'aqua-jet',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
