@@ -86,6 +86,11 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 			message: `${user.data.name} spreads a dark aura around the field`,
 		});
 	}
+	if (user.ability === 'fairy-aura') {
+		addMessage({
+			message: `${user.data.name} spreads a light aura around the field`,
+		});
+	}
 	if (user.ability === 'intimidate') {
 		updatedPokemon = updatedPokemon.map((p) => {
 			if (p.status !== 'ONFIELD') {

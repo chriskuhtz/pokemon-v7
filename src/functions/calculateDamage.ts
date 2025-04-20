@@ -738,6 +738,11 @@ export const calculateDamage = (
 		attackType === 'dark'
 			? 1.33
 			: 1;
+	const fairyAuraFactor =
+		battleFieldEffects.some((b) => b.type === 'fairy-aura') &&
+		attackType === 'fairy'
+			? 1.33
+			: 1;
 
 	const res = Math.max(
 		Math.floor(
@@ -811,7 +816,8 @@ export const calculateDamage = (
 				diveFactor *
 				aerilateFactor *
 				gemFactor *
-				darkAuraFactor
+				darkAuraFactor *
+				fairyAuraFactor
 		),
 		1
 	);
