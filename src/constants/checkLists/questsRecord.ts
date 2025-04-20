@@ -2190,7 +2190,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'defeat erika': {
 		kind: 'BULLETIN',
 		researchPoints: 25,
-		rewardItems: { 'occa-berry': 5 },
+		rewardItems: { 'occa-berry': 5, 'miracle-seed': 1, 'big-root': 1 },
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'trainer_erika');
 		},

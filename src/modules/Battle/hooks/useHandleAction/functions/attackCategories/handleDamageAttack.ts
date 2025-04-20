@@ -300,6 +300,24 @@ export const handleDamageAttack = ({
 			heldItemName: undefined,
 		};
 	}
+	if (
+		getHeldItem(updatedTarget) === 'cell-battery' &&
+		actualDamage > 0 &&
+		move.data.type.name === 'electric'
+	) {
+		addMessage({ message: `${updatedTarget} consumed its cell-battery` });
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'attack',
+			1,
+			true,
+			battleFieldEffects
+		);
+		updatedTarget = {
+			...updatedTarget,
+			heldItemName: undefined,
+		};
+	}
 
 	if (move.name === 'rapid-spin') {
 		addMessage({

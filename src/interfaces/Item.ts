@@ -231,6 +231,7 @@ export const heldItems = [
 	'air-balloon',
 	'binding-band',
 	'absorb-bulb',
+	'cell-battery',
 ] as const;
 export const valuables = [
 	'shoal-salt',

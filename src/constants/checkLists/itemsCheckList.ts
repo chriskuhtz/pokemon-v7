@@ -1549,7 +1549,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/588/',
 		handled: true,
 	},
-	{ name: 'cell-battery', url: 'https://pokeapi.co/api/v2/item/589/' },
+	{
+		name: 'cell-battery',
+		url: 'https://pokeapi.co/api/v2/item/589/',
+		handled: true,
+	},
 	{ name: 'eject-button', url: 'https://pokeapi.co/api/v2/item/590/' },
 	{ name: 'fire-gem', url: 'https://pokeapi.co/api/v2/item/591/' },
 	{ name: 'water-gem', url: 'https://pokeapi.co/api/v2/item/592/' },
