@@ -1544,7 +1544,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/587/',
 		handled: true,
 	},
-	{ name: 'absorb-bulb', url: 'https://pokeapi.co/api/v2/item/588/' },
+	{
+		name: 'absorb-bulb',
+		url: 'https://pokeapi.co/api/v2/item/588/',
+		handled: true,
+	},
 	{ name: 'cell-battery', url: 'https://pokeapi.co/api/v2/item/589/' },
 	{ name: 'eject-button', url: 'https://pokeapi.co/api/v2/item/590/' },
 	{ name: 'fire-gem', url: 'https://pokeapi.co/api/v2/item/591/' },

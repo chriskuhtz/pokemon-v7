@@ -347,8 +347,7 @@ export const extraFeatureCheckList: {
 	{ name: 'zapdos', handled: true },
 	{ name: 'campUpgrade: historian, daily new message', handled: true },
 	{ name: 'quests for zapdos and moltres', handled: true },
-	{ name: 'releasing pokemon should not end fullscreen mode' },
-	{ name: 'trainer ai sets up screens if possible' },
+	{ name: 'trainer ai sets up screens if possible', handled: true },
 	{ name: 'split hat pikachu and costume pikachu quests' },
 	{ name: 'trainingfield route' },
 	{ name: 'prodcedural infinite cave with legendaries' },
@@ -381,4 +380,10 @@ export const extraFeatureCheckList: {
 	{ name: 'team rocket' },
 	{ name: 'cooler loading screen' },
 	{ name: 'movement buttons feel flaky' },
+	{ name: 'show amount of pokeballs in bag in quickmenu' },
+	{
+		name: 'forager army quest: have 6 zigzagoon with pick up in your prty. Given by zigzagoon guy',
+	},
+	{ name: 'releasing pokemon should not end fullscreen mode' },
+	{ name: 'trainer ai should consider flying,dig, diving' },
 ];

@@ -42,6 +42,7 @@ export const determineBestMoveAndTarget = (
 					false,
 					false,
 					false,
+					false,
 					1,
 					() => {}
 				).damage,
@@ -100,6 +101,33 @@ export const chooseOpponentAction = ({
 		return {
 			userId: controlled.id,
 			actionName: 'ingrain',
+			targetId: controlled.id,
+		};
+	}
+	//screens if possible
+	const reflect =
+		moves.find((m) => m.name === 'reflect') &&
+		!effects.some(
+			(e) => e.type === 'reflect' && e.ownerId === controlled.ownerId
+		);
+
+	if (reflect) {
+		return {
+			userId: controlled.id,
+			actionName: 'reflect',
+			targetId: controlled.id,
+		};
+	}
+	const lightScreen =
+		moves.find((m) => m.name === 'light-screen') &&
+		!effects.some(
+			(e) => e.type === 'light-screen' && e.ownerId === controlled.ownerId
+		);
+
+	if (lightScreen) {
+		return {
+			userId: controlled.id,
+			actionName: 'light-screen',
 			targetId: controlled.id,
 		};
 	}

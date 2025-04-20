@@ -4,7 +4,11 @@ import {
 	fixedDamageMoves,
 	levelDamageMoves,
 } from '../constants/fixedDamageMoves';
-import { flyDoubleDamageMoves, ohkoMoves } from '../constants/ohkoMoves';
+import {
+	diveDoubleDamageMoves,
+	flyDoubleDamageMoves,
+	ohkoMoves,
+} from '../constants/ohkoMoves';
 import {
 	auraAndPulseMoves,
 	bitingMoves,
@@ -219,6 +223,7 @@ export const calculateDamage = (
 	calculateCrits: boolean,
 	targetIsFlying: boolean,
 	targetIsUnderground: boolean,
+	targetIsDiving: boolean,
 	targetsFactor: number,
 	addMessage?: (x: Message) => void
 ): {
@@ -438,6 +443,8 @@ export const calculateDamage = (
 	const teraShieldFactor = 1;
 	const flyingFactor =
 		targetIsFlying && flyDoubleDamageMoves.includes(attack.name) ? 2 : 1;
+	const diveFactor =
+		targetIsDiving && diveDoubleDamageMoves.includes(attack.name) ? 2 : 1;
 	const undergroundFactor =
 		targetIsUnderground &&
 		(attack.name === 'earthquake' || attack.name === 'magnitude')
@@ -744,7 +751,8 @@ export const calculateDamage = (
 				megaLauncherFactor *
 				grassPeltFactor *
 				toughClawsFactor *
-				pixilateFactor
+				pixilateFactor *
+				diveFactor
 		),
 		1
 	);

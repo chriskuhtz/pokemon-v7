@@ -8,3 +8,4 @@ export const flyHitMoves = [
 	'smack-down',
 ];
 export const flyDoubleDamageMoves = ['gust', 'twister'];
+export const diveDoubleDamageMoves = ['surf', 'whirlpool'];

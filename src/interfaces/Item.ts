@@ -230,6 +230,7 @@ export const heldItems = [
 	'rocky-helmet',
 	'air-balloon',
 	'binding-band',
+	'absorb-bulb',
 ] as const;
 export const valuables = [
 	'shoal-salt',

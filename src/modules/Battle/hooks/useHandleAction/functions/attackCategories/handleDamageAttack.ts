@@ -2,6 +2,7 @@ import { SELF_DESTRUCTING_MOVES } from '../../../../../../constants/selfDestruct
 import { applyAttackAilmentsToPokemon } from '../../../../../../functions/applyAttackAilmentsToPokemon';
 import { applyAttackStatChanges } from '../../../../../../functions/applyAttackStatChanges';
 import { applyDrainOrRecoil } from '../../../../../../functions/applyDrainOrRecoil';
+import { applyStatChangeToPokemon } from '../../../../../../functions/applyStatChangeToPokemon';
 import { calculateDamage } from '../../../../../../functions/calculateDamage';
 import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
@@ -61,6 +62,10 @@ export const handleDamageAttack = ({
 		updatedTarget.moveQueue.length > 0 &&
 		updatedTarget.moveQueue[0].type === 'BattleAttack' &&
 		updatedTarget.moveQueue[0].name === 'dig';
+	const isDiving =
+		updatedTarget.moveQueue.length > 0 &&
+		updatedTarget.moveQueue[0].type === 'BattleAttack' &&
+		updatedTarget.moveQueue[0].name === 'dive';
 
 	const attackerIsSafeguarded = battleFieldEffects.some(
 		(b) => b.type === 'safeguard' && b.ownerId === updatedAttacker.ownerId
@@ -158,6 +163,7 @@ export const handleDamageAttack = ({
 
 			isFlying,
 			isUnderground,
+			isDiving,
 			targetsFactor,
 			addMessage
 		);
@@ -271,6 +277,24 @@ export const handleDamageAttack = ({
 	}
 	if (getHeldItem(updatedTarget) === 'air-balloon' && actualDamage > 0) {
 		addMessage({ message: `${updatedTarget}´s air balloon popped` });
+		updatedTarget = {
+			...updatedTarget,
+			heldItemName: undefined,
+		};
+	}
+	if (
+		getHeldItem(updatedTarget) === 'absorb-bulb' &&
+		actualDamage > 0 &&
+		move.data.type.name === 'water'
+	) {
+		addMessage({ message: `${updatedTarget} consumed its absorb-bulb` });
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'special-attack',
+			1,
+			true,
+			battleFieldEffects
+		);
 		updatedTarget = {
 			...updatedTarget,
 			heldItemName: undefined,
