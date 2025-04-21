@@ -550,6 +550,11 @@ export const questNames = [
 	'defeat sabrina',
 	'defeat brock',
 	'defeat gary',
+	'reach challenge field rank 1',
+	'reach challenge field rank 18',
+	'reach challenge field rank 40',
+	'reach challenge field rank 62',
+	'reach challenge field rank 85',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -2279,6 +2284,70 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'trainer_gary');
+		},
+	},
+	'reach challenge field rank 1': {
+		kind: 'BULLETIN',
+		researchPoints: 10,
+		rewardItems: {},
+		requiredUpgrade: 'training field 1',
+		conditionFunction: (s) => {
+			return !!(
+				s.mileStones.challengeFieldRecord &&
+				s.mileStones.challengeFieldRecord >= 1
+			);
+		},
+	},
+	'reach challenge field rank 18': {
+		kind: 'BULLETIN',
+		researchPoints: 20,
+		rewardItems: {},
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'reach challenge field rank 1',
+		conditionFunction: (s) => {
+			return !!(
+				s.mileStones.challengeFieldRecord &&
+				s.mileStones.challengeFieldRecord >= 18
+			);
+		},
+	},
+	'reach challenge field rank 40': {
+		kind: 'BULLETIN',
+		researchPoints: 40,
+		rewardItems: {},
+		requiredUpgrade: 'training field 2',
+		availableAfter: 'reach challenge field rank 18',
+		conditionFunction: (s) => {
+			return !!(
+				s.mileStones.challengeFieldRecord &&
+				s.mileStones.challengeFieldRecord >= 40
+			);
+		},
+	},
+	'reach challenge field rank 62': {
+		kind: 'BULLETIN',
+		researchPoints: 60,
+		rewardItems: {},
+		requiredUpgrade: 'training field 3',
+		availableAfter: 'reach challenge field rank 62',
+		conditionFunction: (s) => {
+			return !!(
+				s.mileStones.challengeFieldRecord &&
+				s.mileStones.challengeFieldRecord >= 62
+			);
+		},
+	},
+	'reach challenge field rank 85': {
+		kind: 'BULLETIN',
+		researchPoints: 80,
+		rewardItems: {},
+		requiredUpgrade: 'training field 4',
+		availableAfter: 'reach challenge field rank 62',
+		conditionFunction: (s) => {
+			return !!(
+				s.mileStones.challengeFieldRecord &&
+				s.mileStones.challengeFieldRecord >= 85
+			);
 		},
 	},
 };

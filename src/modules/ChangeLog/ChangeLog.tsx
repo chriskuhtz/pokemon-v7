@@ -48,7 +48,10 @@ export const ChangeLogV10 = (): JSX.Element => {
 		<>
 			<h3>V 0.10:</h3>
 
-			<ol style={{ lineHeight: '1.5rem' }}></ol>
+			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>Challenge Field</li>
+				<li>New Abilities, Items and Attacks</li>
+			</ol>
 		</>
 	);
 };

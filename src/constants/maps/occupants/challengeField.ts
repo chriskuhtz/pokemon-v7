@@ -46,7 +46,9 @@ export const challengeFieldOccupants: OverworldMap['occupants'] = [
 			y: y(),
 			orientation: [2, 10, 18, 26, 34, 42].includes(x()) ? 'UP' : 'DOWN',
 			id,
-			conditionFunction: (s) => !s.handledOccupants.some((h) => h.id === id),
+			conditionFunction: (s) =>
+				!s.handledOccupants.some((h) => h.id === id) &&
+				(!t.requiredUpgrade || s.campUpgrades[t.requiredUpgrade]),
 			sprite: t.trainer?.sprite ?? SpriteEnum.aceMale,
 			name: id,
 			unhandledMessage: ['.', '..', '...'],
