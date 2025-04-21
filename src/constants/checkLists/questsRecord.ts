@@ -1160,9 +1160,13 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 10,
 		conditionFunction: (s) => {
-			const defeatedTrainers = s.handledOccupants.filter((h) =>
-				trainers.some((t) => t.id === h.id)
-			).length;
+			const defeatedTrainers = [
+				...new Set(
+					s.handledOccupants
+						.filter((h) => trainers.some((t) => t.id === h.id))
+						.map((d) => d.id)
+				),
+			].length;
 			return defeatedTrainers > 4;
 		},
 		kind: 'BULLETIN',
@@ -1175,9 +1179,13 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 10,
 		conditionFunction: (s) => {
-			const defeatedTrainers = s.handledOccupants.filter((h) =>
-				trainers.some((t) => t.id === h.id)
-			).length;
+			const defeatedTrainers = [
+				...new Set(
+					s.handledOccupants
+						.filter((h) => trainers.some((t) => t.id === h.id))
+						.map((d) => d.id)
+				),
+			].length;
 			return defeatedTrainers > 9;
 		},
 		kind: 'BULLETIN',
@@ -1190,9 +1198,13 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			const defeatedTrainers = s.handledOccupants.filter((h) =>
-				trainers.some((t) => t.id === h.id)
-			).length;
+			const defeatedTrainers = [
+				...new Set(
+					s.handledOccupants
+						.filter((h) => trainers.some((t) => t.id === h.id))
+						.map((d) => d.id)
+				),
+			].length;
 			return defeatedTrainers > 19;
 		},
 		kind: 'BULLETIN',
@@ -1205,9 +1217,13 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 30,
 		conditionFunction: (s) => {
-			const defeatedTrainers = s.handledOccupants.filter((h) =>
-				trainers.some((t) => t.id === h.id)
-			).length;
+			const defeatedTrainers = [
+				...new Set(
+					s.handledOccupants
+						.filter((h) => trainers.some((t) => t.id === h.id))
+						.map((d) => d.id)
+				),
+			].length;
 			return defeatedTrainers > 29;
 		},
 		kind: 'BULLETIN',
@@ -1220,9 +1236,13 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 40,
 		conditionFunction: (s) => {
-			const defeatedTrainers = s.handledOccupants.filter((h) =>
-				trainers.some((t) => t.id === h.id)
-			).length;
+			const defeatedTrainers = [
+				...new Set(
+					s.handledOccupants
+						.filter((h) => trainers.some((t) => t.id === h.id))
+						.map((d) => d.id)
+				),
+			].length;
 			return defeatedTrainers > 39;
 		},
 		kind: 'BULLETIN',
@@ -1235,9 +1255,13 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {
-			const defeatedTrainers = s.handledOccupants.filter((h) =>
-				trainers.some((t) => t.id === h.id)
-			).length;
+			const defeatedTrainers = [
+				...new Set(
+					s.handledOccupants
+						.filter((h) => trainers.some((t) => t.id === h.id))
+						.map((d) => d.id)
+				),
+			].length;
 			return defeatedTrainers > 49;
 		},
 		kind: 'BULLETIN',
@@ -1250,9 +1274,13 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {
-			const defeatedTrainers = s.handledOccupants.filter((h) =>
-				trainers.some((t) => t.id === h.id)
-			).length;
+			const defeatedTrainers = [
+				...new Set(
+					s.handledOccupants
+						.filter((h) => trainers.some((t) => t.id === h.id))
+						.map((d) => d.id)
+				),
+			].length;
 			return defeatedTrainers > 59;
 		},
 		kind: 'BULLETIN',
@@ -1265,9 +1293,13 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {
-			const defeatedTrainers = s.handledOccupants.filter((h) =>
-				trainers.some((t) => t.id === h.id)
-			).length;
+			const defeatedTrainers = [
+				...new Set(
+					s.handledOccupants
+						.filter((h) => trainers.some((t) => t.id === h.id))
+						.map((d) => d.id)
+				),
+			].length;
 			return defeatedTrainers > 69;
 		},
 		kind: 'BULLETIN',
@@ -1280,9 +1312,13 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {
-			const defeatedTrainers = s.handledOccupants.filter((h) =>
-				trainers.some((t) => t.id === h.id)
-			).length;
+			const defeatedTrainers = [
+				...new Set(
+					s.handledOccupants
+						.filter((h) => trainers.some((t) => t.id === h.id))
+						.map((d) => d.id)
+				),
+			].length;
 			return defeatedTrainers > 79;
 		},
 		kind: 'BULLETIN',
