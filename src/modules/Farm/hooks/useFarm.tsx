@@ -1,11 +1,13 @@
 import { useCallback, useContext, useMemo } from 'react';
 import { v4 } from 'uuid';
 import { ONE_HOUR } from '../../../constants/gameData';
+import { getRandomEntry } from '../../../functions/filterTargets';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { joinInventories } from '../../../interfaces/Inventory';
 import {
 	ApricornType,
+	berries,
 	BerryType,
 	isApricorn,
 	isBerry,
@@ -20,6 +22,7 @@ import {
  * damp-mulch: berries are less likely to wither
  * gooey-mulch: berries yield 25% more
  * stable-mulch: berries grow 25% slower, but yield 50% more
+ * rich mulch: guaranteed success, but fewer berries
  */
 
 export const useFarm = () => {
@@ -90,12 +93,16 @@ export const useFarm = () => {
 		if (mulch === 'growth-mulch') {
 			return now + ONE_HOUR * 0.75;
 		}
+		if (mulch === 'boost-mulch') {
+			return now + ONE_HOUR / 6;
+		}
 		if (mulch === 'stable-mulch') {
 			return now + ONE_HOUR * 1.125;
 		}
 		return now + ONE_HOUR;
 	};
-	const plant = (type: BerryType | ApricornType, mulch?: MulchType) => {
+	const plant = (t: BerryType | ApricornType, mulch?: MulchType) => {
+		let type = t;
 		if (!hasEmptySlots) {
 			return;
 		}
@@ -106,12 +113,33 @@ export const useFarm = () => {
 			needsNoConfirmation: true,
 		});
 
+		if (mulch === 'surprise-mulch' || mulch === 'amaze-mulch') {
+			type = getRandomEntry([...berries]);
+		}
+
 		const berryYield =
 			6 +
 			(mulch === 'gooey-mulch' ? 2 : 0) +
-			(mulch === 'stable-mulch' ? 6 : 0);
+			(mulch === 'stable-mulch' ? 6 : 0) +
+			(mulch === 'rich-mulch' ? -2 : 0) +
+			(mulch === 'amaze-mulch' ? 6 : 0) +
+			(mulch === 'boost-mulch' ? -3 : 0);
 
-		const successful = Math.random() > (mulch === 'damp-mulch' ? 0.15 : 0.3);
+		let failureChance = 0.3;
+		if (mulch === 'rich-mulch') {
+			failureChance = 0;
+		}
+		if (mulch === 'damp-mulch') {
+			failureChance = 0.15;
+		}
+		if (mulch === 'boost-mulch') {
+			failureChance = 0.15;
+		}
+		if (mulch === 'amaze-mulch') {
+			failureChance = 0.4;
+		}
+
+		const successful = Math.random() > failureChance;
 
 		const usedItems = mulch
 			? {
