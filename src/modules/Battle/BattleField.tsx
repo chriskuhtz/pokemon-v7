@@ -552,7 +552,7 @@ export const BattleField = ({
 					return 'You lost the battle and have to reset';
 				}
 
-				return 'You lost the battle and rushed back to camp, loosing your item on the way';
+				return 'You lost the battle and rushed back to camp, loosing your items on the way';
 			};
 			addMessage({
 				message: message(),
