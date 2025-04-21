@@ -39,6 +39,28 @@ export const Farm = (): JSX.Element => {
 										stable mulch: berries grow 25% slower, but yield 50% more
 									</strong>
 								</li>
+								<li>
+									<strong>
+										rich mulch: guaranteed success, but fewer berries
+									</strong>
+								</li>
+								<li>
+									<strong>
+										surprise mulch: will grow into a different berry than
+										planted
+									</strong>
+								</li>
+								<li>
+									<strong>
+										amaze mulch: same as surprise, but higher yield and higher
+										risk
+									</strong>
+								</li>
+								<li>
+									<strong>
+										boost mulch: grow a small amount of berries 6 times faster
+									</strong>
+								</li>
 							</ul>
 						</div>
 					}

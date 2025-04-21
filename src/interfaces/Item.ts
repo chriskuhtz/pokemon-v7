@@ -255,6 +255,7 @@ export const heldItems = [
 	'fairy-gem',
 	'weakness-policy',
 	'whipped-dream',
+	'sachet',
 ] as const;
 export const valuables = [
 	'shoal-salt',
@@ -294,6 +295,10 @@ export const mulches = [
 	'damp-mulch',
 	'stable-mulch',
 	'gooey-mulch',
+	'rich-mulch',
+	'surprise-mulch',
+	'amaze-mulch',
+	'boost-mulch',
 ] as const;
 export const berries = [
 	'sitrus-berry',
