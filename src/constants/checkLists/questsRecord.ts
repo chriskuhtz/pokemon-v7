@@ -549,6 +549,7 @@ export const questNames = [
 	'defeat misty',
 	'defeat sabrina',
 	'defeat brock',
+	'defeat gary',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -2269,6 +2270,15 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'trainer_brock');
+		},
+	},
+	'defeat gary': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		rewardItems: { electirizer: 1, magmarizer: 1, protector: 1 },
+		requiredUpgrade: 'swimming certification',
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'trainer_gary');
 		},
 	},
 };

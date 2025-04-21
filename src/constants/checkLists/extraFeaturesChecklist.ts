@@ -356,7 +356,7 @@ export const extraFeatureCheckList: {
 	{ name: 'sabrina on route 6', handled: true },
 	{ name: 'brock in onix cave', handled: true },
 	{ name: 'higher damage quests', handled: true },
-	{ name: 'giovanni on route 7' },
+	{ name: 'blue on route 7', handled: true },
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'shovel spots' },
 	{ name: 'Fishing?' },

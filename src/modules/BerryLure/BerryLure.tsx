@@ -81,7 +81,7 @@ export const lureBerryEncountersE1: Record<PokemonType, PokemonName> = {
 	typeless: 'spiritomb',
 };
 export const lureBerryEncountersS1E1: Record<PokemonType, PokemonName> = {
-	fire: 'litleo',
+	fire: 'magmar',
 	water: 'panpour',
 	electric: 'pikachu-sinnoh-cap',
 	grass: 'gogoat',
