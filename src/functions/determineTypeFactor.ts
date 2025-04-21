@@ -164,6 +164,13 @@ export const determineTypeFactor = (
 	) {
 		return 1;
 	}
+	if (
+		target.secondaryAilments.some((s) => s.type === 'landed') &&
+		attack.data.type.name === 'ground' &&
+		targetTypes.includes('flying')
+	) {
+		return 1;
+	}
 
 	if (res === 0) {
 		if (addMessage) {
