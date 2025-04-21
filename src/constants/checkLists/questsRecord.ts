@@ -2256,7 +2256,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 25,
 		rewardItems: { 'rindo-berry': 5, 'miracle-seed': 1, 'big-root': 1 },
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'trainer_erika');
+			return s.handledOccupants.some((h) => h.id === 'Gym Leader Erika');
 		},
 	},
 	'defeat janine': {
@@ -2265,7 +2265,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'kebia-berry': 5, 'black-sludge': 1 },
 		requiredUpgrade: 'machete certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'trainer_janine');
+			return s.handledOccupants.some((h) => h.id === 'Gym Leader Janine');
 		},
 	},
 	'defeat blaine': {
@@ -2274,7 +2274,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'occa-berry': 5, charcoal: 1 },
 		requiredUpgrade: 'sledge hammer certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'trainer_blaine');
+			return s.handledOccupants.some((h) => h.id === 'Gym Leader Blaine');
 		},
 	},
 	'defeat surge': {
@@ -2283,7 +2283,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'wacan-berry': 5, magnet: 1 },
 		requiredUpgrade: 'shovel certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'trainer_surge');
+			return s.handledOccupants.some((h) => h.id === 'Gym Leader Surge');
 		},
 	},
 	'defeat misty': {
@@ -2292,7 +2292,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'passho-berry': 5, 'mystic-water': 1 },
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'trainer_misty');
+			return s.handledOccupants.some((h) => h.id === 'Gym Leader Misty');
 		},
 	},
 	'defeat sabrina': {
@@ -2301,7 +2301,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'payapa-berry': 5, 'twisted-spoon': 1 },
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'trainer_sabrina');
+			return s.handledOccupants.some((h) => h.id === 'Gym Leader Sabrina');
 		},
 	},
 	'defeat brock': {
@@ -2310,7 +2310,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'charti-berry': 5, 'hard-stone': 1 },
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'trainer_brock');
+			return s.handledOccupants.some((h) => h.id === 'Gym Leader Brock');
 		},
 	},
 	'defeat gary': {
@@ -2319,7 +2319,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { electirizer: 1, magmarizer: 1, protector: 1 },
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'trainer_gary');
+			return s.handledOccupants.some((h) => h.id === 'Gym Leader Gary');
 		},
 	},
 	'reach challenge field rank 1': {
