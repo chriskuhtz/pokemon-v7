@@ -1,6 +1,7 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { PokeballType } from '../interfaces/Item';
 import { calculateLevelData } from './calculateLevelData';
+import { getMiddleOfThree } from './getMiddleOfThree';
 import { getTimeOfDay } from './getTimeOfDay';
 import { getTypeNames } from './getTypeNames';
 
@@ -48,8 +49,21 @@ export const determineCaptureSuccess = (
 	if (ball === 'timer-ball') {
 		ballfactor = Math.max(1.5, 0.5 + 0.1 * battleRound);
 	}
-	if (ball === 'quick-ball' && battleRound === 1) {
-		ballfactor = 1.5;
+	if (ball === 'quick-ball') {
+		ballfactor = Math.max(0.5, 1.5 - battleRound * 0.125);
+	}
+	//1.5 at a weight of 1000 or more
+	if (ball === 'heavy-ball') {
+		ballfactor = getMiddleOfThree([0.5, 1.5, target.data.weight / 666]);
+	}
+	//1.5 at a base speed of 75 or more
+	if (ball === 'fast-ball') {
+		ballfactor = getMiddleOfThree([
+			0.5,
+			1.5,
+			(target.data.stats.find((s) => s.stat.name === 'speed')?.base_stat ?? 1) /
+				50,
+		]);
 	}
 	if (
 		ball === 'dusk-ball' &&

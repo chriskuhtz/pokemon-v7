@@ -76,6 +76,8 @@ export const balltypes = [
 	'quick-ball',
 	'cherish-ball',
 	'premier-ball',
+	'heavy-ball',
+	'fast-ball',
 ] as const;
 export const ppBoostItemTypes = ['pp-up', 'pp-max'] as const;
 export const xItemTypes = [
@@ -657,8 +659,8 @@ export const apricornTable: Record<ApricornType, PokeballType> = {
 	'blue-apricorn': 'net-ball',
 	'green-apricorn': 'nest-ball',
 	'pink-apricorn': 'luxury-ball',
-	'red-apricorn': 'heal-ball',
-	'white-apricorn': 'timer-ball',
+	'red-apricorn': 'fast-ball',
+	'white-apricorn': 'heavy-ball',
 	'yellow-apricorn': 'quick-ball',
 };
 export const getRandomItem = () => {
