@@ -9,6 +9,7 @@ import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 import { useChallengeTrainer } from '../Overworld/hooks/useChallengeTrainer';
+import { TbSoccerField } from 'react-icons/tb';
 
 export const TrainingField = () => {
 	const { setActiveTabReducer, saveFile, patchSaveFileReducer } =
@@ -30,7 +31,7 @@ export const TrainingField = () => {
 				)}
 				<Card
 					key={'challengeField'}
-					icon={<FaRandom />}
+					icon={<TbSoccerField />}
 					content={<h3>Go to challenge field</h3>}
 					actionElements={[
 						<button

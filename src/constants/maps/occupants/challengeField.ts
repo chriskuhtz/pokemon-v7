@@ -57,4 +57,124 @@ export const challengeFieldOccupants: OverworldMap['occupants'] = [
 		};
 		return assembled;
 	}),
+	{
+		type: 'ITEM',
+		x: 1,
+		y: 39,
+		id: `${challengeFieldId}_item1`,
+		item: 'super-potion',
+		amount: 5,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === `${challengeFieldId}_item1`),
+	},
+	{
+		type: 'ITEM',
+		x: 2,
+		y: 39,
+		id: `${challengeFieldId}_item2`,
+		item: 'sitrus-berry',
+		amount: 5,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === `${challengeFieldId}_item2`),
+	},
+	{
+		type: 'ITEM',
+		x: 3,
+		y: 39,
+		id: `${challengeFieldId}_item3`,
+		item: 'lum-berry',
+		amount: 5,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === `${challengeFieldId}_item3`),
+	},
+	{
+		type: 'ITEM',
+		x: 9,
+		y: 39,
+		id: `${challengeFieldId}_item4`,
+		item: 'moomoo-milk',
+		amount: 5,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === `${challengeFieldId}_item4`),
+	},
+	{
+		type: 'ITEM',
+		x: 10,
+		y: 39,
+		id: `${challengeFieldId}_item5`,
+		item: 'elixir',
+		amount: 5,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === `${challengeFieldId}_item5`),
+	},
+	{
+		type: 'ITEM',
+		x: 11,
+		y: 39,
+		id: `${challengeFieldId}_item6`,
+		item: 'lum-berry',
+		amount: 5,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === `${challengeFieldId}_item6`),
+	},
+	{
+		type: 'ITEM',
+		x: 17,
+		y: 39,
+		id: `${challengeFieldId}_item7`,
+		item: 'full-restore',
+		amount: 3,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === `${challengeFieldId}_item7`),
+	},
+	{
+		type: 'ITEM',
+		x: 18,
+		y: 39,
+		id: `${challengeFieldId}_item8`,
+		item: 'sitrus-berry',
+		amount: 5,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === `${challengeFieldId}_item8`),
+	},
+	{
+		type: 'ITEM',
+		x: 19,
+		y: 39,
+		id: `${challengeFieldId}_item9`,
+		item: 'elixir',
+		amount: 5,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === `${challengeFieldId}_item9`),
+	},
+	{
+		type: 'ITEM',
+		x: 25,
+		y: 39,
+		id: `${challengeFieldId}_item10`,
+		item: 'full-restore',
+		amount: 5,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === `${challengeFieldId}_item10`),
+	},
+	{
+		type: 'ITEM',
+		x: 26,
+		y: 39,
+		id: `${challengeFieldId}_item11`,
+		item: 'sitrus-berry',
+		amount: 5,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === `${challengeFieldId}_item11`),
+	},
+	{
+		type: 'ITEM',
+		x: 27,
+		y: 39,
+		id: `${challengeFieldId}_item9`,
+		item: 'elixir',
+		amount: 5,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === `${challengeFieldId}_item12`),
+	},
 ];
