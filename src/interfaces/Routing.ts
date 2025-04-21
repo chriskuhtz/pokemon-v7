@@ -10,6 +10,7 @@ export const mapMakerRoutes = [
 	'MAP_MAKER_caveW1',
 	'MAP_MAKER_routeN1W1',
 	'MAP_MAKER_onixCave',
+	'MAP_MAKER_challengeField',
 ];
 
 export const routes = [

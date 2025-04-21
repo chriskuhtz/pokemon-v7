@@ -1,7 +1,9 @@
 import { useCallback, useContext, useMemo } from 'react';
+import { challengeFieldOccupants } from '../constants/maps/occupants/challengeField';
 import { addPokemonToDex } from '../functions/addPokemonToDex';
 import { calculateLevelData } from '../functions/calculateLevelData';
 import { getRandomEntry } from '../functions/filterTargets';
+import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getHeldItem } from '../functions/getHeldItem';
 import { isKO } from '../functions/isKo';
 import { reduceBattlePokemonToOwnedPokemon } from '../functions/reduceBattlePokemonToOwnedPokemon';
@@ -48,6 +50,7 @@ export const useLeaveBattle = () => {
 			if (outcome === 'LOSS') {
 				if (
 					saveFile.location.mapId !== 'camp' &&
+					saveFile.location.mapId !== 'challengeField' &&
 					(saveFile.settings?.rogueLike ||
 						saveFile.settings?.releaseFaintedPokemon)
 				) {
@@ -65,6 +68,12 @@ export const useLeaveBattle = () => {
 					patchSaveFileReducer({
 						meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
 						location: updatedLocation,
+						pokemon: saveFile.pokemon.map((p) => {
+							if (p.onTeam) {
+								return fullyHealPokemon(p);
+							}
+							return p;
+						}),
 						bag:
 							saveFile.location.mapId === 'camp'
 								? saveFile.bag
@@ -157,23 +166,35 @@ export const useLeaveBattle = () => {
 				addPokemonToDex(pokedex, p.name, p.caughtOnMap, true)
 			);
 
+			const challengeFieldRank = challengeFieldOccupants
+				.filter((t) => t.type === 'TRAINER')
+				.find((c) => c.id === defeatedChallengerId)?.challengeFieldRank;
+
+			const updatedMileStones = { ...saveFile.mileStones };
+
+			if (challengeFieldRank !== undefined) {
+				if (!updatedMileStones.challengeFieldRecord) {
+					updatedMileStones.challengeFieldRecord = challengeFieldRank;
+				}
+				if (challengeFieldRank > updatedMileStones.challengeFieldRecord) {
+					updatedMileStones.challengeFieldRecord = challengeFieldRank;
+				}
+			}
+			updatedMileStones.caughtFromSwarms = updatedSwarmRecord;
+
 			patchSaveFileReducer({
 				bag: joinInventories(updatedInventory, rewardItems ?? {}),
 				money: saveFile.money + scatteredCoins,
 				pokemon: updatedPokemon,
 				meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
 				researchPoints: saveFile.researchPoints + gainedResearchPoints(),
-				handledOccupants:
-					defeatedChallengerId && !alreadyDefeated
-						? [
-								...saveFile.handledOccupants,
-								{ id: defeatedChallengerId, resetAt: -1 },
-						  ]
-						: saveFile.handledOccupants,
-				mileStones: {
-					...saveFile.mileStones,
-					caughtFromSwarms: updatedSwarmRecord,
-				},
+				handledOccupants: defeatedChallengerId
+					? [
+							...saveFile.handledOccupants,
+							{ id: defeatedChallengerId, resetAt: -1 },
+					  ]
+					: saveFile.handledOccupants,
+				mileStones: updatedMileStones,
 				pokedex,
 			});
 		},

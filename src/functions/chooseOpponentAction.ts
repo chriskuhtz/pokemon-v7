@@ -75,7 +75,6 @@ export const chooseOpponentAction = ({
 		filterOutEmpty: true,
 	});
 
-	console.log(moves);
 	//determine the best damage move
 	const filtered = filterTargets({
 		targets,
@@ -86,9 +85,8 @@ export const chooseOpponentAction = ({
 
 	const random = Math.random() > 0.9;
 
-	//splash if nothing else
+	//loaf if nothing else
 	if (moves.length === 0) {
-		console.log('yaya');
 		return {
 			userId: controlled.id,
 			actionName: 'LOAFING',

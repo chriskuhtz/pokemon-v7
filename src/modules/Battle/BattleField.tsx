@@ -545,7 +545,7 @@ export const BattleField = ({
 			console.log('effect battlelost');
 
 			const message = () => {
-				if (location.mapId === 'camp') {
+				if (location.mapId === 'camp' || location.mapId === 'challengeField') {
 					return 'luckily this was only a training battle';
 				}
 				if (rogueLike) {

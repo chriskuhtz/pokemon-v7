@@ -1352,7 +1352,7 @@ const tier4trainers: Challenger[] = [
 	},
 	{
 		type: 'TRAINER',
-		id: 'Hoenn Hannah 2',
+		id: 'Hoenn Hannah 3',
 		team: [
 			makeChallengerPokemon({
 				name: 'blaziken',
@@ -1579,7 +1579,7 @@ const specialTrainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		availableAfter: 'catch all evolutions of eevee',
-		trainer: { name: 'Professor Elm', sprite: SpriteEnum.rowan },
+		trainer: { name: 'Professor Elm', sprite: SpriteEnum.elm },
 	},
 ];
 
@@ -1589,6 +1589,12 @@ export const trainers = [
 	...tier3trainers,
 	...tier2trainers,
 	...tier1trainers,
+];
+export const trainersWeakToStrong = [
+	...tier1trainers,
+	...tier2trainers,
+	...tier3trainers,
+	...tier4trainers,
 ];
 
 console.log('trainers', trainers.length);

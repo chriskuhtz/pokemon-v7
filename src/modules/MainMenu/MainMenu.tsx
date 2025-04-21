@@ -8,18 +8,20 @@ import { Octokit } from 'octokit';
 import { useContext, useState } from 'react';
 import { FaBug, FaSearch } from 'react-icons/fa';
 import { GoTasklist } from 'react-icons/go';
+import { IoMdExit } from 'react-icons/io';
 import { IoBulbOutline } from 'react-icons/io5';
 import { RiBookShelfLine } from 'react-icons/ri';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { TrainerCard } from '../../components/TrainerCard/TrainerCard';
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize, challengeFieldId } from '../../constants/gameData';
 import { mapsRecord } from '../../constants/maps/mapsRecord';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { useQuests } from '../../hooks/useQuests';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { useTeleport } from '../../hooks/useTeleport';
+import { EmptyInventory } from '../../interfaces/Inventory';
 
 export const MainMenu = ({
 	goBack,
@@ -28,6 +30,7 @@ export const MainMenu = ({
 	goBack: () => void;
 	reset: () => void;
 }): JSX.Element => {
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const [resetConfirmationInProgress, setRCIP] = useState<boolean>(false);
 	const { numberOfUncollected } = useQuests();
 	const navigate = useNavigate();
@@ -48,6 +51,29 @@ export const MainMenu = ({
 								config={{ officalArtwork: true, shiny: teleporter.shiny }}
 							/>
 						}
+						actionElements={[]}
+					/>
+				)}
+				{saveFile.location.mapId === challengeFieldId && (
+					<Card
+						onClick={() =>
+							patchSaveFileReducer({
+								location: {
+									mapId: 'camp',
+									x: 3,
+									y: 16,
+									orientation: 'LEFT',
+									forwardFoot: 'CENTER1',
+								},
+								bag: EmptyInventory,
+								meta: { ...saveFile.meta, activeTab: 'OVERWORLD' },
+								handledOccupants: saveFile.handledOccupants.filter(
+									(h) => !h.id.includes(challengeFieldId)
+								),
+							})
+						}
+						content={<h4>Leave the challenge field</h4>}
+						icon={<IoMdExit size={battleSpriteSize} />}
 						actionElements={[]}
 					/>
 				)}
