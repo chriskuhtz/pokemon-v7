@@ -881,7 +881,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/195/',
 		handled: true,
 	},
-	{ name: 'merciless', url: 'https://pokeapi.co/api/v2/ability/196/' },
+	{
+		name: 'merciless',
+		url: 'https://pokeapi.co/api/v2/ability/196/',
+		handled: true,
+	},
 	{ name: 'shields-down', url: 'https://pokeapi.co/api/v2/ability/197/' },
 	{ name: 'stakeout', url: 'https://pokeapi.co/api/v2/ability/198/' },
 	{ name: 'water-bubble', url: 'https://pokeapi.co/api/v2/ability/199/' },
@@ -1251,6 +1255,7 @@ export const abilityNames = [
 	'aura-break',
 	'stamina',
 	'water-compaction',
+	'merciless',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
