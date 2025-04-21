@@ -1715,8 +1715,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/684/',
 		handled: true,
 	},
-	{ name: 'ability-capsule', url: 'https://pokeapi.co/api/v2/item/685/' },
-	{ name: 'whipped-dream', url: 'https://pokeapi.co/api/v2/item/686/' },
+	{
+		name: 'whipped-dream',
+		url: 'https://pokeapi.co/api/v2/item/686/',
+		handled: true,
+	},
 	{ name: 'sachet', url: 'https://pokeapi.co/api/v2/item/687/' },
 	{ name: 'luminous-moss', url: 'https://pokeapi.co/api/v2/item/688/' },
 	{ name: 'snowball', url: 'https://pokeapi.co/api/v2/item/689/' },
@@ -2617,6 +2620,7 @@ export const itemsCheckList: {
 	{ name: 'chill-drive', url: 'https://pokeapi.co/api/v2/item/566/' },
 	{ name: 'eviolite', url: 'https://pokeapi.co/api/v2/item/581/' },
 	{ name: 'oval-charm', url: 'https://pokeapi.co/api/v2/item/674/' },
+	{ name: 'ability-capsule', url: 'https://pokeapi.co/api/v2/item/685/' },
 	/**
 	 * UNUSED POKE BALLS
 	 */

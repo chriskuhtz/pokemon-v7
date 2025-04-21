@@ -252,6 +252,7 @@ export const heldItems = [
 	'normal-gem',
 	'fairy-gem',
 	'weakness-policy',
+	'whipped-dream',
 ] as const;
 export const valuables = [
 	'shoal-salt',

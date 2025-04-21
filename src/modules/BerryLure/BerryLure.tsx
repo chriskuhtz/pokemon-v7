@@ -119,7 +119,7 @@ export const lureBerryEncountersS1W1: Record<PokemonType, PokemonName> = {
 	dark: 'deino',
 	steel: 'mawile',
 	normal: 'bouffalant',
-	fairy: 'granbull',
+	fairy: 'swirlix',
 	typeless: 'spiritomb',
 };
 export const BerryLure = () => {
