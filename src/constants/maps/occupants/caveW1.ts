@@ -71,11 +71,11 @@ export const caveW1Occupants: OverworldMap['occupants'] = [
 		type: 'ITEM',
 		x: 5,
 		y: 3,
-		item: 'protector',
+		item: 'rocky-helmet',
 		amount: 1,
 		conditionFunction: (s) =>
-			!s.handledOccupants.some((h) => h.id === 'caveW1-protector'),
-		id: 'caveW1-protector',
+			!s.handledOccupants.some((h) => h.id === 'caveW1-rocky-helmet'),
+		id: 'caveW1-rocky-helmet',
 	},
 	{
 		type: 'ITEM',

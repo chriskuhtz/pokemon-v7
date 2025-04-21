@@ -1,6 +1,7 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
 import { ohkoMoves } from '../constants/ohkoMoves';
 import { PokemonName } from '../constants/pokemonNames';
+import { PrimaryAilment } from '../interfaces/Ailment';
 import { ItemType } from '../interfaces/Item';
 
 export const determineCrit = (
@@ -10,7 +11,8 @@ export const determineCrit = (
 	attackerAbilty: AbilityName,
 	attackerFocused: boolean,
 	attackerName: PokemonName,
-	attackerHeldItem: ItemType | undefined
+	attackerHeldItem: ItemType | undefined,
+	targetPrimaryAilment: PrimaryAilment | undefined
 ): boolean => {
 	const boostedCritRate =
 		critRate +
@@ -30,6 +32,13 @@ export const determineCrit = (
 	}
 	if (targetAbility === 'battle-armor' || targetAbility === 'shell-armor') {
 		return false;
+	}
+	if (
+		attackerAbilty === 'merciless' &&
+		(targetPrimaryAilment?.type === 'poison' ||
+			targetPrimaryAilment?.type === 'toxic')
+	) {
+		return true;
 	}
 	if (boostedCritRate > 2) {
 		return true;

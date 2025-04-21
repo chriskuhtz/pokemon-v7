@@ -91,6 +91,7 @@ export const interactWithFunction = ({
 	if (!occ || activeMessage) {
 		return;
 	}
+
 	const data = occ;
 
 	if (shouldRotate(data.type)) {

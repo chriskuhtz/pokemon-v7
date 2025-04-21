@@ -9,9 +9,11 @@ import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 import { useChallengeTrainer } from '../Overworld/hooks/useChallengeTrainer';
+import { TbSoccerField } from 'react-icons/tb';
 
 export const TrainingField = () => {
-	const { setActiveTabReducer, saveFile } = useContext(SaveFileContext);
+	const { setActiveTabReducer, saveFile, patchSaveFileReducer } =
+		useContext(SaveFileContext);
 	const challenge = useChallengeTrainer();
 
 	return (
@@ -20,13 +22,39 @@ export const TrainingField = () => {
 			headline="Training Field:"
 		>
 			<Stack mode="column">
-				{saveFile.settings?.releaseFaintedPokemon ||
-					(saveFile.settings?.rogueLike && (
-						<h3>
-							If you lose a training battle, your Pokemon will not be released,
-							nor will the game reset
-						</h3>
-					))}
+				{(saveFile.settings?.releaseFaintedPokemon ||
+					saveFile.settings?.rogueLike) && (
+					<h3>
+						If you lose a training battle, your Pokemon will not be released,
+						nor will the game reset
+					</h3>
+				)}
+				<Card
+					key={'challengeField'}
+					icon={<TbSoccerField />}
+					content={<h3>Go to challenge field</h3>}
+					actionElements={[
+						<button
+							disabled={Object.values(saveFile.bag).some((v) => v > 0)}
+							onClick={() =>
+								patchSaveFileReducer({
+									meta: { activeTab: 'OVERWORLD' },
+									location: {
+										mapId: 'challengeField',
+										x: 2,
+										y: 1,
+										orientation: 'DOWN',
+										forwardFoot: 'CENTER1',
+									},
+								})
+							}
+						>
+							{Object.values(saveFile.bag).some((v) => v > 0)
+								? 'No outside items allowed'
+								: 'Start'}
+						</button>,
+					]}
+				/>
 				<Card
 					key={'random1'}
 					icon={<FaRandom />}
@@ -77,7 +105,7 @@ export const TrainingField = () => {
 
 						return res;
 					})
-					.map((t) => {
+					.map((t, i) => {
 						const defeatedBefore = saveFile.handledOccupants.some(
 							(h) => h.id === t.id
 						);
@@ -103,13 +131,16 @@ export const TrainingField = () => {
 											}}
 										>
 											{t.trainer?.name}{' '}
-											{t.team.map((p) => (
-												<PokemonSprite key={t.id + p.name} name={p.name} />
+											{t.team.map((p, j) => (
+												<PokemonSprite
+													key={t.id + p.name + i + j}
+													name={p.name}
+												/>
 											))}
 										</h3>
 										<div style={{ display: 'flex', gap: '1rem' }}>
-											{t.team.map((p) => (
-												<strong key={t.id + p.name + 'LVL'}>
+											{t.team.map((p, j) => (
+												<strong key={t.id + p.name + 'LVL' + i + j}>
 													Lvl {calculateLevelData(p.xp, p.growthRate).level}{' '}
 													{p.name},
 												</strong>

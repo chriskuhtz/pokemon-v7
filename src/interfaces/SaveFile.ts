@@ -103,6 +103,7 @@ export interface SaveFile {
 	encounterRateModifier?: { factor: number; steps: number };
 	mileStones: {
 		damageRecord: number;
+		challengeFieldRecord?: number;
 		hasEvolvedAPokemonThroughLevelUp?: boolean;
 		hasEvolvedAPokemonWithAStone?: boolean;
 		hasEvolvedAPokemonWithAHeldItem?: boolean;

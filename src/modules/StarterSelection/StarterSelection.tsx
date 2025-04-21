@@ -49,7 +49,6 @@ export const StarterSelection = (): JSX.Element => {
 		{
 			assignLearnsetMoves: true,
 			assignGender: true,
-			assignNaturalAbility: true,
 			generateIvs: true,
 		}
 	);

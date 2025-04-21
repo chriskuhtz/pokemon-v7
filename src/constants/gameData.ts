@@ -19,6 +19,8 @@ export const ONE_HOUR = 3600000;
 export const ONE_DAY = ONE_HOUR * 24;
 export const shinyChance = 1 / 4096;
 
+export const challengeFieldId = 'challengeField';
+
 export const testPokemon: OwnedPokemon = {
 	name: 'teddiursa',
 	gender: 'MALE',

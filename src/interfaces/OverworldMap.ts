@@ -124,6 +124,7 @@ export interface OverworldTrainer extends BaseOccupant {
 	sprite: string;
 	team: OwnedPokemon[];
 	name: string;
+	challengeFieldRank?: number;
 }
 export interface Portal extends BaseOccupant {
 	type: 'PORTAL';

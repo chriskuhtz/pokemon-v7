@@ -226,8 +226,6 @@ const useSaveFile = (
 		stepsTaken: number,
 		challenger?: Challenger
 	) => {
-		console.log('navigate away');
-
 		if (route === 'BATLLE' && !challenger) {
 			throw new Error('cant route to battle without challenger');
 		}
@@ -309,6 +307,7 @@ const useSaveFile = (
 				updatedQuests[quest] = 'ACTIVE';
 			}
 		}
+
 		setSaveFile({
 			...saveFile,
 			bag: newInventory,

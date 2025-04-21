@@ -33,7 +33,6 @@ export const BattleLoader = ({
 		challenger.battleTeamConfig ?? {
 			assignLearnsetMoves: true,
 			assignGender: true,
-			assignNaturalAbility: true,
 			generateIvs: true,
 			assignHeldItem: true,
 		}

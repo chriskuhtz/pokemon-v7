@@ -35,13 +35,8 @@ export const useGetBattleTeam = (
 	initTeam: OwnedPokemon[],
 	config: BattleTeamConfig
 ) => {
-	const {
-		assignGender,
-		assignLearnsetMoves,
-		assignNaturalAbility,
-		generateIvs,
-		assignHeldItem,
-	} = config;
+	const { assignGender, assignLearnsetMoves, generateIvs, assignHeldItem } =
+		config;
 	return useFetch<BattlePokemon[]>(() =>
 		Promise.all(
 			initTeam.map(async (pokemon) => {
@@ -85,14 +80,11 @@ export const useGetBattleTeam = (
 					if (possibleAbilities.includes(pokemon.ability)) {
 						return pokemon.ability;
 					}
-					if (assignNaturalAbility && possibleAbilities.length > 0) {
-						if (randomAbilities) {
-							return getRandomEntry([...abilityNames]);
-						}
+					if (possibleAbilities.length > 0) {
 						return getRandomEntry(possibleAbilities);
 					}
 
-					return getRandomEntry([...abilityNames]);
+					return pokemon.ability;
 				};
 
 				const ability = chooseAbility();

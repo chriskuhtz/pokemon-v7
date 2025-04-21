@@ -146,7 +146,6 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 						handledMoves.findIndex((handled) => handled === m.move.name) +
 						ownedPokemon.name.length * 5;
 					const randomizedMove = getEntryWithOverflow([...handledMoves], index);
-					console.log(m.move.name, randomizedMove);
 					return {
 						...m,
 						move: {

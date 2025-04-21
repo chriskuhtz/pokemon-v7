@@ -1,5 +1,6 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
+import { gary } from './gary';
 
 export const routeW1Occupants: OverworldMap['occupants'] = [
 	{
@@ -123,4 +124,5 @@ export const routeW1Occupants: OverworldMap['occupants'] = [
 			!s.handledOccupants.some((h) => h.id === 'routeW1-escape-ropes'),
 		id: 'routeW1-escape-ropes',
 	},
+	...gary,
 ];
