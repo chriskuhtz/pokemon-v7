@@ -755,6 +755,10 @@ export const calculateDamage = (
 		(attackType === 'fairy' || attackType == 'dark')
 			? 0.66
 			: 1;
+	const waterBubbleTargetFactor =
+		target.ability === 'water-bubble' && attackType === 'fire' ? 0.5 : 1;
+	const waterBubbleAttackerFactor =
+		target.ability === 'water-bubble' && attackType === 'water' ? 2 : 1;
 
 	const res = Math.max(
 		Math.floor(
@@ -830,7 +834,9 @@ export const calculateDamage = (
 				gemFactor *
 				darkAuraFactor *
 				fairyAuraFactor *
-				aurabreakFactor
+				aurabreakFactor *
+				waterBubbleAttackerFactor *
+				waterBubbleTargetFactor
 		),
 		1
 	);
