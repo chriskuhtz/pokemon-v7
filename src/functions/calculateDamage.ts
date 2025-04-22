@@ -759,6 +759,8 @@ export const calculateDamage = (
 		target.ability === 'water-bubble' && attackType === 'fire' ? 0.5 : 1;
 	const waterBubbleAttackerFactor =
 		target.ability === 'water-bubble' && attackType === 'water' ? 2 : 1;
+	const steelWorkerFactor =
+		target.ability === 'steelworker' && attackType === 'steel' ? 1.5 : 1;
 
 	const res = Math.max(
 		Math.floor(
@@ -836,7 +838,8 @@ export const calculateDamage = (
 				fairyAuraFactor *
 				aurabreakFactor *
 				waterBubbleAttackerFactor *
-				waterBubbleTargetFactor
+				waterBubbleTargetFactor *
+				steelWorkerFactor
 		),
 		1
 	);
