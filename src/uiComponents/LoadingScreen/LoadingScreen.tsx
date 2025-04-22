@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
+import { Sprite } from '../../components/Sprite/Sprite';
 import { SaveFileContext } from '../../hooks/useSaveFile';
+import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { Page } from '../Page/Page';
 
 export const LoadingScreen = () => {
@@ -26,11 +28,38 @@ export const LoadingScreen = () => {
 	};
 	return (
 		<Page headline="">
-			<h2>Loading lots of data</h2>
-
-			{showReturnButton && (
-				<button onClick={() => returnToWorldMap()}>Return to World Map</button>
-			)}
+			<div
+				style={{
+					display: 'flex',
+					height: '100%',
+					justifyContent: 'center',
+					alignItems: 'center',
+				}}
+			>
+				<h2>Loading lots of data</h2>
+				<div style={{ display: 'flex' }}>
+					<Sprite
+						canvasKey={SpriteEnum.elm}
+						id={SpriteEnum.elm}
+						rotating={true}
+					/>{' '}
+					<Sprite
+						canvasKey={SpriteEnum.oak}
+						id={SpriteEnum.oak}
+						rotating={true}
+					/>{' '}
+					<Sprite
+						canvasKey={SpriteEnum.oak}
+						id={SpriteEnum.oak}
+						rotating={true}
+					/>
+				</div>
+				{showReturnButton && (
+					<button onClick={() => returnToWorldMap()}>
+						Return to World Map
+					</button>
+				)}
+			</div>
 		</Page>
 	);
 };

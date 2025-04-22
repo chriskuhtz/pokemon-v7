@@ -359,11 +359,7 @@ export const extraFeatureCheckList: {
 	{ name: 'blue on route 7', handled: true },
 	{ name: 'training field challenge mode', handled: true },
 	{ name: 'quests for challenge mode', handled: true },
-	{ name: 'nicer ladder up sprite' },
-	{ name: 'shovel spots' },
-	{ name: 'Fishing?' },
-	{ name: 'team rocket' },
-	{ name: 'cooler loading screen' },
+	{ name: 'cooler loading screen', handled: true },
 	{ name: 'movement buttons feel flaky' },
 	{ name: 'show amount of pokeballs in bag in quickmenu' },
 	{
@@ -388,4 +384,8 @@ export const extraFeatureCheckList: {
 	{ name: 'gen 8 fossils' },
 	{ name: 'more historian events' },
 	{ name: 'fix random abilities' },
+	{ name: 'nicer ladder up sprite' },
+	{ name: 'shovel spots' },
+	{ name: 'Fishing?' },
+	{ name: 'team rocket' },
 ];
