@@ -77,7 +77,9 @@ export const determineMiss = (
 	}
 	if (
 		target.secondaryAilments.some(
-			(ail) => ail.type === 'mind-read' && ail.by === attacker.id
+			(ail) =>
+				(ail.type === 'mind-read' && ail.by === attacker.id) ||
+				(ail.type === 'miracle-eyed' && ail.by === attacker.id)
 		) &&
 		!ohkoMoves.includes(attack.name) &&
 		!targetIsFlying &&

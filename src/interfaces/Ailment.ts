@@ -37,6 +37,7 @@ const secondaryAilments = [
 	'raging',
 	'focused',
 	'mind-read',
+	'miracle-eyed',
 	'nightmare',
 	'cursed',
 	'unburdened',

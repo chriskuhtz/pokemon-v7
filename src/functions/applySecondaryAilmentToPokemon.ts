@@ -243,6 +243,19 @@ export const applySecondaryAilmentToPokemon = ({
 			],
 		};
 	}
+	if (ailment === 'miracle-eyed' && by) {
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'miracle-eyed',
+					duration: 9000,
+					targetId,
+				},
+			],
+		};
+	}
 	if (ailment === 'nightmare' && pokemon.primaryAilment?.type === 'sleep') {
 		addMessage({ message: `${pokemon.data.name} got nightmares` });
 		return {
