@@ -360,8 +360,7 @@ export const extraFeatureCheckList: {
 	{ name: 'training field challenge mode', handled: true },
 	{ name: 'quests for challenge mode', handled: true },
 	{ name: 'cooler loading screen', handled: true },
-	{ name: 'movement buttons feel flaky' },
-	{ name: 'show amount of pokeballs in bag in quickmenu' },
+	{ name: 'show amount of pokeballs in bag in quickmenu', handled: true },
 	{
 		name: 'forager army quest: have 6 zigzagoon with pick up in your prty. Given by zigzagoon guy',
 	},
@@ -388,4 +387,5 @@ export const extraFeatureCheckList: {
 	{ name: 'shovel spots' },
 	{ name: 'Fishing?' },
 	{ name: 'team rocket' },
+	{ name: 'movement buttons feel flaky' },
 ];

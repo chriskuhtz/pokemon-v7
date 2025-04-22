@@ -14,6 +14,7 @@ import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
 import { MovementButtons } from './MovementButtons';
 import { UncollectedQuestsBadge } from './UncollectedQuestsBadge';
+import { NumberOfBallsBadge } from './NumberOfBallsBadge';
 
 export const OverworldMenus = ({
 	stepsTaken,
@@ -73,6 +74,7 @@ export const OverworldMenus = ({
 					size={battleSpriteSize}
 				/>
 				<UncollectedQuestsBadge stepsWalked={stepsTaken} />
+				<NumberOfBallsBadge />
 
 				<CgZoomOut
 					size={battleSpriteSize}
