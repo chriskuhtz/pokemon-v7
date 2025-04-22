@@ -327,6 +327,20 @@ export const handleDamageAttack = ({
 		};
 	}
 	if (
+		updatedTarget.ability === 'berserk' &&
+		updatedTarget.stats.hp / target.damage < 0.5 &&
+		updatedTarget.stats.hp / updatedTarget.damage > 0.5
+	) {
+		addMessage({ message: `${updatedTarget} goes berserk` });
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'special-attack',
+			1,
+			true,
+			battleFieldEffects
+		);
+	}
+	if (
 		getHeldItem(updatedTarget) === 'luminous-moss' &&
 		actualDamage > 0 &&
 		move.data.type.name === 'water'
