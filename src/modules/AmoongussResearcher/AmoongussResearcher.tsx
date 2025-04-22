@@ -1,5 +1,6 @@
 import { useCallback, useContext, useMemo } from 'react';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
+import { lettersToNumbers } from '../../constants/lettersToNumbers';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
@@ -59,7 +60,11 @@ export const AmoongussCompostResearcher = (): JSX.Element => {
 			<Stack mode="column">
 				{options.length > 0
 					? options.map(([item, amount]) => {
-							const index = (item.length * 5) % mulches.length;
+							const nameToNumber = item
+								.split('')
+								.reduce((sum, summand) => sum + lettersToNumbers[summand], 0);
+
+							const index = nameToNumber % mulches.length;
 							const randomMulch = mulches[index];
 							return (
 								<Card
