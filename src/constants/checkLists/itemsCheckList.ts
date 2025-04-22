@@ -1752,7 +1752,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/694/',
 		handled: true,
 	},
-	{ name: 'luminous-moss', url: 'https://pokeapi.co/api/v2/item/688/' },
+	{
+		name: 'luminous-moss',
+		url: 'https://pokeapi.co/api/v2/item/688/',
+		handled: true,
+	},
 	{ name: 'snowball', url: 'https://pokeapi.co/api/v2/item/689/' },
 	{ name: 'safety-goggles', url: 'https://pokeapi.co/api/v2/item/690/' },
 	{ name: 'gengarite', url: 'https://pokeapi.co/api/v2/item/695/' },

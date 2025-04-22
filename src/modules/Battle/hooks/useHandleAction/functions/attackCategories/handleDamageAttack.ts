@@ -327,6 +327,24 @@ export const handleDamageAttack = ({
 		};
 	}
 	if (
+		getHeldItem(updatedTarget) === 'luminous-moss' &&
+		actualDamage > 0 &&
+		move.data.type.name === 'water'
+	) {
+		addMessage({ message: `${updatedTarget} consumed its luminous-moss` });
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'special-defense',
+			1,
+			true,
+			battleFieldEffects
+		);
+		updatedTarget = {
+			...updatedTarget,
+			heldItemName: undefined,
+		};
+	}
+	if (
 		getHeldItem(updatedTarget) === 'cell-battery' &&
 		actualDamage > 0 &&
 		move.data.type.name === 'electric'
