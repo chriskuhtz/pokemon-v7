@@ -358,6 +358,12 @@ export const handleDamageAttack = ({
 		);
 	}
 	if (
+		updatedTarget.primaryAilment?.type === 'sleep' &&
+		move.name === 'wake-up-slap'
+	) {
+		updatedTarget = { ...updatedTarget, primaryAilment: undefined };
+	}
+	if (
 		getHeldItem(updatedTarget) === 'luminous-moss' &&
 		actualDamage > 0 &&
 		move.data.type.name === 'water'

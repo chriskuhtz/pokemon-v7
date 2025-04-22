@@ -761,6 +761,10 @@ export const calculateDamage = (
 		target.ability === 'water-bubble' && attackType === 'water' ? 2 : 1;
 	const steelWorkerFactor =
 		target.ability === 'steelworker' && attackType === 'steel' ? 1.5 : 1;
+	const wakeUpSlapFactor =
+		target.primaryAilment?.type === 'sleep' && attack.name === 'wake-up-slap'
+			? 2
+			: 1;
 
 	const res = Math.max(
 		Math.floor(
@@ -839,7 +843,8 @@ export const calculateDamage = (
 				aurabreakFactor *
 				waterBubbleAttackerFactor *
 				waterBubbleTargetFactor *
-				steelWorkerFactor
+				steelWorkerFactor *
+				wakeUpSlapFactor
 		),
 		1
 	);
