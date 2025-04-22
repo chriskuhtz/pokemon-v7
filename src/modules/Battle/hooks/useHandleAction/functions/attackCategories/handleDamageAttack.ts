@@ -319,7 +319,8 @@ export const handleDamageAttack = ({
 			'special-attack',
 			1,
 			true,
-			battleFieldEffects
+			battleFieldEffects,
+			addMessage
 		);
 		updatedTarget = {
 			...updatedTarget,
@@ -327,17 +328,33 @@ export const handleDamageAttack = ({
 		};
 	}
 	if (
+		getHeldItem(updatedTarget) === 'snowball' &&
+		actualDamage > 0 &&
+		move.data.type.name === 'ice'
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'attack',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'snowball'
+		);
+	}
+	if (
 		updatedTarget.ability === 'berserk' &&
 		updatedTarget.stats.hp / target.damage < 0.5 &&
 		updatedTarget.stats.hp / updatedTarget.damage > 0.5
 	) {
-		addMessage({ message: `${updatedTarget} goes berserk` });
 		updatedTarget = applyStatChangeToPokemon(
 			updatedTarget,
 			'special-attack',
 			1,
 			true,
-			battleFieldEffects
+			battleFieldEffects,
+			addMessage,
+			'berserk'
 		);
 	}
 	if (
@@ -351,7 +368,8 @@ export const handleDamageAttack = ({
 			'special-defense',
 			1,
 			true,
-			battleFieldEffects
+			battleFieldEffects,
+			addMessage
 		);
 		updatedTarget = {
 			...updatedTarget,
@@ -369,7 +387,8 @@ export const handleDamageAttack = ({
 			'attack',
 			1,
 			true,
-			battleFieldEffects
+			battleFieldEffects,
+			addMessage
 		);
 		updatedTarget = {
 			...updatedTarget,

@@ -31,6 +31,7 @@ export const ChangeLog = ({
 					>
 						Got it, lets go
 					</button>
+					<ChangeLogV12 />
 					<ChangeLogV11 />
 					<ChangeLogV10 />
 					<ChangeLogV09 />
@@ -50,7 +51,7 @@ export const ChangeLogV12 = (): JSX.Element => {
 			<h3>V 0.12:</h3>
 
 			<ol style={{ lineHeight: '1.5rem' }}>
-				{' '}
+				<li>Pokeball Amount Indicator </li>
 				<li>New Abilities, Items and Attacks</li>
 			</ol>
 		</>

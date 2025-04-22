@@ -1757,7 +1757,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/688/',
 		handled: true,
 	},
-	{ name: 'snowball', url: 'https://pokeapi.co/api/v2/item/689/' },
+	{
+		name: 'snowball',
+		url: 'https://pokeapi.co/api/v2/item/689/',
+		handled: true,
+	},
 	{ name: 'safety-goggles', url: 'https://pokeapi.co/api/v2/item/690/' },
 	{ name: 'gengarite', url: 'https://pokeapi.co/api/v2/item/695/' },
 	{ name: 'gardevoirite', url: 'https://pokeapi.co/api/v2/item/696/' },
