@@ -19,6 +19,8 @@ const calculateTotalSpeed = (
 		a.ability === 'chlorophyll' && battleWeather === 'sun' ? 2 : 1;
 	const sandrushFactor =
 		a.ability === 'sand-rush' && battleWeather === 'sandstorm' ? 2 : 1;
+	const slushrushFactor =
+		a.ability === 'slush-rush' && battleWeather === 'hail' ? 2 : 1;
 	const unburdenFactorA = a.secondaryAilments.some(
 		(ail) => ail.type === 'unburdened'
 	)
@@ -54,6 +56,7 @@ const calculateTotalSpeed = (
 		quickfeetFactor *
 		stallFactor *
 		sandrushFactor *
+		slushrushFactor *
 		ironBallFactor *
 		laggingTailFactor *
 		choiceScarfFactor
