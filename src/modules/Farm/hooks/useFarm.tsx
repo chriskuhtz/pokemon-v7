@@ -143,10 +143,10 @@ export const useFarm = () => {
 
 		const usedItems = mulch
 			? {
-					[type]: 1,
+					[t]: 1,
 					[mulch]: 1,
 			  }
-			: { [type]: 1 };
+			: { [t]: 1 };
 		putSaveFileReducer({
 			...saveFile,
 			bag: joinInventories(saveFile.bag, usedItems, true),
