@@ -388,4 +388,8 @@ export const extraFeatureCheckList: {
 	{ name: 'Fishing?' },
 	{ name: 'team rocket' },
 	{ name: 'movement buttons feel flaky' },
+	{
+		name: 'pokemon helpers for producer upgrades (more zigzagoons for forager, etc)',
+	},
+	{ name: 'sableye gem producer' },
 ];
