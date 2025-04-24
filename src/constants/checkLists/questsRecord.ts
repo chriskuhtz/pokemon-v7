@@ -590,7 +590,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'big-malasada': 1, 'ultra-ball': 5 },
 		researchPoints: 25,
 		conditionFunction: (s) => {
-			return s.bag['oaks-parcel'] > 0;
+			return s.pokemon.some(
+				(p) => p.name === 'raticate' && p.caughtOnMap === 'routeS1E1'
+			);
 		},
 		kind: 'QUEST_LINE',
 	},
