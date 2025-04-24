@@ -1962,6 +1962,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'shovel certification',
 		researchPoints: 10,
 		rewardItems: { 'babiri-berry': 2, 'kee-berry': 2 },
+		targetPokemon: onixCaveEncounters.BASE.map((p) => p.name),
 		conditionFunction: (s) =>
 			onixCaveEncounters.BASE.some((o) =>
 				s.pokedex[o.name].caughtOnRoutes.includes('onixCave')
@@ -1977,6 +1978,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'black-apricorn': 10,
 			'moon-stone': 2,
 		},
+		targetPokemon: onixCaveEncounters.BASE.map((p) => p.name),
 		conditionFunction: (s) =>
 			onixCaveEncounters.BASE.every((o) =>
 				s.pokedex[o.name].caughtOnRoutes.includes('onixCave')
@@ -1992,6 +1994,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'mental-herb': 2,
 			'big-malasada': 2,
 		},
+		targetPokemon: caveW1Encounters.BASE.map((p) => p.name),
 		conditionFunction: (s) =>
 			caveW1Encounters.BASE.every((o) =>
 				s.pokedex[o.name].caughtOnRoutes.includes('caveW1')
