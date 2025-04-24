@@ -52,6 +52,7 @@ export const ChangeLogV12 = (): JSX.Element => {
 
 			<ol style={{ lineHeight: '1.5rem' }}>
 				<li>Pokeball Amount Indicator </li>
+				<li>Training field 5</li>
 				<li>New Abilities, Items and Attacks</li>
 			</ol>
 		</>
