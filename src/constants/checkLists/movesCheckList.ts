@@ -1447,9 +1447,16 @@ export const movesCheckList: {
 		handled: true,
 	},
 	{ name: 'roost', url: 'https://pokeapi.co/api/v2/move/355/', handled: true },
-	{ name: 'gravity', url: 'https://pokeapi.co/api/v2/move/356/' },
-	{ name: 'miracle-eye', url: 'https://pokeapi.co/api/v2/move/357/' },
-	{ name: 'wake-up-slap', url: 'https://pokeapi.co/api/v2/move/358/' },
+	{
+		name: 'miracle-eye',
+		url: 'https://pokeapi.co/api/v2/move/357/',
+		handled: true,
+	},
+	{
+		name: 'wake-up-slap',
+		url: 'https://pokeapi.co/api/v2/move/358/',
+		handled: true,
+	},
 	{ name: 'hammer-arm', url: 'https://pokeapi.co/api/v2/move/359/' },
 	{ name: 'gyro-ball', url: 'https://pokeapi.co/api/v2/move/360/' },
 	{ name: 'healing-wish', url: 'https://pokeapi.co/api/v2/move/361/' },
@@ -2027,6 +2034,7 @@ export const movesCheckList: {
 	 * BANISHED:
 	 */
 
+	{ name: 'gravity', url: 'https://pokeapi.co/api/v2/move/356/' },
 	{ name: 'block', url: 'https://pokeapi.co/api/v2/move/335/' },
 	{ name: 'water-sport', url: 'https://pokeapi.co/api/v2/move/346/' },
 	{ name: 'doom-desire', url: 'https://pokeapi.co/api/v2/move/353/' },
@@ -2529,6 +2537,8 @@ export const handledMoves = [
 	'accelerock',
 	'aqua-jet',
 	'roost',
+	'miracle-eye',
+	'wake-up-slap',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

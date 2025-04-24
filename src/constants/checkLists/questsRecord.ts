@@ -590,7 +590,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'big-malasada': 1, 'ultra-ball': 5 },
 		researchPoints: 25,
 		conditionFunction: (s) => {
-			return s.bag['oaks-parcel'] > 0;
+			return s.pokemon.some(
+				(p) => p.name === 'raticate' && p.caughtOnMap === 'routeS1E1'
+			);
 		},
 		kind: 'QUEST_LINE',
 	},
@@ -732,7 +734,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'catch all different pokemon on routeS1': {
 		rewardItems: {
 			'dragon-scale': 1,
-			'water-stone': 1,
+			'water-stone': 2,
 			'belue-berry': 5,
 			'razz-berry': 5,
 			'rindo-berry': 5,
@@ -1962,6 +1964,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'shovel certification',
 		researchPoints: 10,
 		rewardItems: { 'babiri-berry': 2, 'kee-berry': 2 },
+		targetPokemon: onixCaveEncounters.BASE.map((p) => p.name),
 		conditionFunction: (s) =>
 			onixCaveEncounters.BASE.some((o) =>
 				s.pokedex[o.name].caughtOnRoutes.includes('onixCave')
@@ -1977,6 +1980,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'black-apricorn': 10,
 			'moon-stone': 2,
 		},
+		targetPokemon: onixCaveEncounters.BASE.map((p) => p.name),
 		conditionFunction: (s) =>
 			onixCaveEncounters.BASE.every((o) =>
 				s.pokedex[o.name].caughtOnRoutes.includes('onixCave')
@@ -1992,6 +1996,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'mental-herb': 2,
 			'big-malasada': 2,
 		},
+		targetPokemon: caveW1Encounters.BASE.map((p) => p.name),
 		conditionFunction: (s) =>
 			caveW1Encounters.BASE.every((o) =>
 				s.pokedex[o.name].caughtOnRoutes.includes('caveW1')
@@ -2325,7 +2330,11 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'reach challenge field rank 1': {
 		kind: 'BULLETIN',
 		researchPoints: 10,
-		rewardItems: {},
+		rewardItems: {
+			'fire-gem': 5,
+			'water-gem': 5,
+			'electric-gem': 5,
+		},
 		requiredUpgrade: 'training field 1',
 		conditionFunction: (s) => {
 			return !!(
@@ -2337,7 +2346,11 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'reach challenge field rank 18': {
 		kind: 'BULLETIN',
 		researchPoints: 20,
-		rewardItems: {},
+		rewardItems: {
+			'grass-gem': 5,
+			'ice-gem': 5,
+			'fighting-gem': 5,
+		},
 		requiredUpgrade: 'training field 1',
 		availableAfter: 'reach challenge field rank 1',
 		conditionFunction: (s) => {
@@ -2350,7 +2363,11 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'reach challenge field rank 40': {
 		kind: 'BULLETIN',
 		researchPoints: 40,
-		rewardItems: {},
+		rewardItems: {
+			'poison-gem': 5,
+			'ground-gem': 5,
+			'flying-gem': 5,
+		},
 		requiredUpgrade: 'training field 2',
 		availableAfter: 'reach challenge field rank 18',
 		conditionFunction: (s) => {
@@ -2363,7 +2380,11 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'reach challenge field rank 62': {
 		kind: 'BULLETIN',
 		researchPoints: 60,
-		rewardItems: {},
+		rewardItems: {
+			'psychic-gem': 5,
+			'bug-gem': 5,
+			'rock-gem': 5,
+		},
 		requiredUpgrade: 'training field 3',
 		availableAfter: 'reach challenge field rank 62',
 		conditionFunction: (s) => {
@@ -2376,13 +2397,34 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'reach challenge field rank 85': {
 		kind: 'BULLETIN',
 		researchPoints: 80,
-		rewardItems: {},
+		rewardItems: {
+			'ghost-gem': 5,
+			'dark-gem': 5,
+			'steel-gem': 5,
+		},
 		requiredUpgrade: 'training field 4',
 		availableAfter: 'reach challenge field rank 62',
 		conditionFunction: (s) => {
 			return !!(
 				s.mileStones.challengeFieldRecord &&
 				s.mileStones.challengeFieldRecord >= 85
+			);
+		},
+	},
+	'reach challenge field rank 108': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		rewardItems: {
+			'dragon-gem': 5,
+			'normal-gem': 5,
+			'fairy-gem': 5,
+		},
+		requiredUpgrade: 'training field 5',
+		availableAfter: 'reach challenge field rank 85',
+		conditionFunction: (s) => {
+			return !!(
+				s.mileStones.challengeFieldRecord &&
+				s.mileStones.challengeFieldRecord >= 108
 			);
 		},
 	},

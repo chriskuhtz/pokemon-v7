@@ -343,6 +343,15 @@ export const handleUniqueMoves = ({
 			applicator: updatedAttacker,
 		});
 	}
+	if (move.name === 'miracle-eye') {
+		updatedTarget = applySecondaryAilmentToPokemon({
+			pokemon: updatedTarget,
+			addMessage,
+			ailment: 'miracle-eyed',
+			by: updatedAttacker.id,
+			applicator: updatedAttacker,
+		});
+	}
 	if (move.name === 'mean-look') {
 		updatedTarget = applySecondaryAilmentToPokemon({
 			pokemon: updatedTarget,

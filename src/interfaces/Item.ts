@@ -256,6 +256,8 @@ export const heldItems = [
 	'weakness-policy',
 	'whipped-dream',
 	'sachet',
+	'luminous-moss',
+	'snowball',
 ] as const;
 export const valuables = [
 	'shoal-salt',

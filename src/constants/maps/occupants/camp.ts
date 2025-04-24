@@ -291,7 +291,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 		handledMessage: getHistorianMessage(),
 		unhandledMessage: getHistorianMessage(),
 		sprite: SpriteEnum.grandFather3,
-		conditionFunction: (s) => s.campUpgrades['invite museum curator'],
+		conditionFunction: (s) => s.campUpgrades['invite historian'],
 		id: 'historian',
 	},
 	{

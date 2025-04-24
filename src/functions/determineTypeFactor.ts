@@ -87,6 +87,13 @@ export const determineTypeFactor = (
 		res = 1;
 	}
 	if (
+		targetTypes.includes('dark') &&
+		target.secondaryAilments.some((s) => s.type === 'miracle-eyed') &&
+		attackType === 'psychic'
+	) {
+		res = 1;
+	}
+	if (
 		target.ability === 'levitate' &&
 		attack.data.type.name === 'ground' &&
 		getHeldItem(target) !== 'iron-ball'

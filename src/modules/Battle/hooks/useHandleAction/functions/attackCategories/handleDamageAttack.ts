@@ -319,7 +319,63 @@ export const handleDamageAttack = ({
 			'special-attack',
 			1,
 			true,
-			battleFieldEffects
+			battleFieldEffects,
+			addMessage
+		);
+		updatedTarget = {
+			...updatedTarget,
+			heldItemName: undefined,
+		};
+	}
+	if (
+		getHeldItem(updatedTarget) === 'snowball' &&
+		actualDamage > 0 &&
+		move.data.type.name === 'ice'
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'attack',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'snowball'
+		);
+	}
+	if (
+		updatedTarget.ability === 'berserk' &&
+		updatedTarget.stats.hp / target.damage < 0.5 &&
+		updatedTarget.stats.hp / updatedTarget.damage > 0.5
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'special-attack',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'berserk'
+		);
+	}
+	if (
+		updatedTarget.primaryAilment?.type === 'sleep' &&
+		move.name === 'wake-up-slap'
+	) {
+		updatedTarget = { ...updatedTarget, primaryAilment: undefined };
+	}
+	if (
+		getHeldItem(updatedTarget) === 'luminous-moss' &&
+		actualDamage > 0 &&
+		move.data.type.name === 'water'
+	) {
+		addMessage({ message: `${updatedTarget} consumed its luminous-moss` });
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'special-defense',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage
 		);
 		updatedTarget = {
 			...updatedTarget,
@@ -337,7 +393,8 @@ export const handleDamageAttack = ({
 			'attack',
 			1,
 			true,
-			battleFieldEffects
+			battleFieldEffects,
+			addMessage
 		);
 		updatedTarget = {
 			...updatedTarget,

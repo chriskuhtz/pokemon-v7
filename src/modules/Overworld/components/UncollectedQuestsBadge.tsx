@@ -1,8 +1,8 @@
 import { GoTasklist } from 'react-icons/go';
+import { battleSpriteSize } from '../../../constants/gameData';
 import { useNavigate } from '../../../hooks/useNavigate';
 import { useQuests } from '../../../hooks/useQuests';
 import './UncollectedQuestsBadge.css';
-import { battleSpriteSize } from '../../../constants/gameData';
 
 export const UncollectedQuestsBadge = ({
 	stepsWalked,

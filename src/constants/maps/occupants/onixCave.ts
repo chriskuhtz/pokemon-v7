@@ -40,7 +40,7 @@ export const onixCaveOccupants: OverworldMap['occupants'] = [
 		y: 34,
 		id: 'onixCave_helix_fossil',
 		conditionFunction: (s) =>
-			!s.handledOccupants.some((h) => h.id === 'onixCave_fossil'),
+			!s.handledOccupants.some((h) => h.id === 'onixCave_helix_fossil'),
 	},
 	{
 		type: 'ITEM',
@@ -50,7 +50,7 @@ export const onixCaveOccupants: OverworldMap['occupants'] = [
 		y: 2,
 		id: 'onixCave_dome_fossil',
 		conditionFunction: (s) =>
-			!s.handledOccupants.some((h) => h.id === 'onixCave_fossil'),
+			!s.handledOccupants.some((h) => h.id === 'onixCave_dome_fossil'),
 	},
 	{
 		type: 'ITEM',
