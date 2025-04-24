@@ -2396,9 +2396,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'ghost-gem': 5,
 			'dark-gem': 5,
 			'steel-gem': 5,
-			'dragon-gem': 5,
-			'normal-gem': 5,
-			'fairy-gem': 5,
 		},
 		requiredUpgrade: 'training field 4',
 		availableAfter: 'reach challenge field rank 62',
@@ -2406,6 +2403,23 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			return !!(
 				s.mileStones.challengeFieldRecord &&
 				s.mileStones.challengeFieldRecord >= 85
+			);
+		},
+	},
+	'reach challenge field rank 108': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		rewardItems: {
+			'dragon-gem': 5,
+			'normal-gem': 5,
+			'fairy-gem': 5,
+		},
+		requiredUpgrade: 'training field 5',
+		availableAfter: 'reach challenge field rank 85',
+		conditionFunction: (s) => {
+			return !!(
+				s.mileStones.challengeFieldRecord &&
+				s.mileStones.challengeFieldRecord >= 108
 			);
 		},
 	},
