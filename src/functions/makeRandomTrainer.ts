@@ -2161,9 +2161,9 @@ const tier5trainers: Challenger[] = [
 				heldItemName: 'sitrus-berry',
 			}),
 			makeChallengerPokemon({
-				name: 'manectric',
+				name: 'altaria',
 				xp: 125000,
-				heldItemName: 'magnet',
+				heldItemName: 'sitrus-berry',
 			}),
 		],
 		inventory: EmptyInventory,

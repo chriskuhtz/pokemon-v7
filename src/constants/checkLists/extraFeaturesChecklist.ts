@@ -392,4 +392,5 @@ export const extraFeatureCheckList: {
 		name: 'forager army quest: have 6 zigzagoon with pick up in your prty. Given by zigzagoon guy',
 	},
 	{ name: 'more historian events' },
+	{ name: 'sudowoodo as optional blocker on route W1' },
 ];
