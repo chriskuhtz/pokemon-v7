@@ -33,7 +33,7 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 	},
 	{
 		type: 'ROCK',
-		y: 49,
+		y: 48,
 		x: 25,
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((occ) => occ.id === 'rock_routeN1E1'),

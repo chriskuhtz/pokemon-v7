@@ -69,6 +69,13 @@ const trainerSabrina: OverworldTrainer = {
 	unhandledMessage: ['Just as i foresaw'],
 	name: 'Gym Leader Sabrina',
 	team: sabrinaTeam,
+	battleTeamConfig: {
+		assignGender: false,
+		assignHeldItem: false,
+		assignLearnsetMoves: false,
+		assignNaturalAbility: false,
+		generateIvs: true,
+	},
 };
 const npcSabrina: OverworldNpc = {
 	type: 'NPC',

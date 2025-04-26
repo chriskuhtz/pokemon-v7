@@ -51,7 +51,7 @@ export const handleMoveBlockAilments = ({
 			).filter((a) => a.type !== 'nightmare');
 		} else {
 			updatedAttacker = handleAsleep(
-				attacker,
+				updatedAttacker,
 				addMessage,
 				battleFieldEffects.some(
 					(b) => b.type === 'bad-dreams' && b.ownerId !== attacker.ownerId

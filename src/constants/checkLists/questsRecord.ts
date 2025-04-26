@@ -637,6 +637,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'catch all costumed pikachus': {
 		rewardItems: {},
 		rewardPokemon: {
+			caughtAtDate: new Date().getTime(),
 			growthRate: 'medium',
 			unlockedMoves: ['extrasensory'],
 			fixedAbility: true,
@@ -1467,6 +1468,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'spell-tag': 1,
 		},
 		rewardPokemon: {
+			caughtAtDate: new Date().getTime(),
 			growthRate: 'medium',
 			unlockedMoves: ['ominous-wind'],
 			fixedAbility: true,
@@ -1503,6 +1505,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'black-belt': 1,
 		},
 		rewardPokemon: {
+			caughtAtDate: new Date().getTime(),
 			growthRate: 'medium',
 			unlockedMoves: ['drill-peck'],
 			fixedAbility: true,
@@ -1540,6 +1543,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'sharp-beak': 1,
 		},
 		rewardPokemon: {
+			caughtAtDate: new Date().getTime(),
 			growthRate: 'medium',
 			unlockedMoves: ['drill-peck'],
 			fixedAbility: true,
@@ -1654,6 +1658,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'full-restore': 5,
 		},
 		rewardPokemon: {
+			caughtAtDate: new Date().getTime(),
 			growthRate: 'medium',
 			unlockedMoves: ['earthquake'],
 			fixedAbility: true,
@@ -1711,6 +1716,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			firstMove: { name: 'earthquake', usedPP: 0 },
 			unlockedMoves: [],
 			growthRate: 'medium',
+			caughtAtDate: new Date().getTime(),
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {
@@ -1964,6 +1970,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'shovel certification',
 		researchPoints: 10,
 		rewardItems: { 'babiri-berry': 2, 'kee-berry': 2 },
+		targetRoute: 'onixCave',
 		targetPokemon: onixCaveEncounters.BASE.map((p) => p.name),
 		conditionFunction: (s) =>
 			onixCaveEncounters.BASE.some((o) =>
@@ -1974,6 +1981,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'shovel certification',
 		availableAfter: 'catch a pokemon from onix cave',
+		targetRoute: 'onixCave',
 		researchPoints: 25,
 		rewardItems: {
 			'yellow-apricorn': 10,
@@ -1989,6 +1997,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'catch all pokemon from caveW1': {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'swimming certification',
+		targetRoute: 'caveW1',
 		researchPoints: 50,
 		rewardItems: {
 			'power-herb': 2,

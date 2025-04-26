@@ -3,6 +3,7 @@ import { EncounterMap } from '../constants/maps/encounters';
 import { MapId } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { TimeOfDay } from '../functions/getTimeOfDay';
+import { BattleTeamConfig } from '../hooks/useGetBattleTeam';
 import { Inventory } from './Inventory';
 import { BerryType, ItemType } from './Item';
 import { OwnedPokemon } from './OwnedPokemon';
@@ -125,6 +126,7 @@ export interface OverworldTrainer extends BaseOccupant {
 	team: OwnedPokemon[];
 	name: string;
 	challengeFieldRank?: number;
+	battleTeamConfig: BattleTeamConfig;
 }
 export interface Portal extends BaseOccupant {
 	type: 'PORTAL';

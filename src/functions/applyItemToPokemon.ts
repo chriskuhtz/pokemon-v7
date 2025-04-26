@@ -82,6 +82,57 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 			happiness: pokemon.happiness + (HappinessChangeTable[item] ?? 0),
 		};
 	}
+	if (isEvBoostItem(item)) {
+		return applyEVBoostItem(pokemon, item);
+	}
+	if (item === 'rare-candy') {
+		const { xpAtNextLevel, level } = calculateLevelData(
+			pokemon.xp,
+			pokemon.growthRate
+		);
+
+		if (level === 100) {
+			return pokemon;
+		}
+
+		if (addMessage) {
+			addMessage({ message: `reached level ${level + 1}` });
+		}
+		return {
+			...applyHappinessChange(pokemon, HappinessChangeTable[item] ?? 0),
+			xp: xpAtNextLevel,
+		};
+	}
+	if (isPPBoostItem(item) && move) {
+		return applyPPMoveBooster(pokemon, move, item);
+	}
+	if (happinessBerries[item]) {
+		const stat = happinessBerries[item];
+		if (addMessage) {
+			addMessage({
+				message: `Happiness raised, ${stat} Effort value lowered`,
+			});
+		}
+		return applyHappinessChange(
+			{
+				...pokemon,
+				effortValues: {
+					...pokemon.effortValues,
+					[stat]: getMiddleOfThree([
+						0,
+						pokemon.effortValues[stat],
+						pokemon.effortValues[stat] - 10,
+					]),
+				},
+			},
+			10
+		);
+	}
+
+	//CANT BE USED IF K.O.
+	if (pokemon.damage >= pokemon.maxHp) {
+		return pokemon;
+	}
 	if (item === 'full-restore') {
 		if (addMessage) {
 			addMessage({ message: `fully healed` });
@@ -229,30 +280,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 
 		return { ...pokemon, primaryAilment: undefined };
 	}
-	if (isEvBoostItem(item)) {
-		return applyEVBoostItem(pokemon, item);
-	}
-	if (item === 'rare-candy') {
-		const { xpAtNextLevel, level } = calculateLevelData(
-			pokemon.xp,
-			pokemon.growthRate
-		);
 
-		if (level === 100) {
-			return pokemon;
-		}
-
-		if (addMessage) {
-			addMessage({ message: `reached level ${level + 1}` });
-		}
-		return {
-			...applyHappinessChange(pokemon, HappinessChangeTable[item] ?? 0),
-			xp: xpAtNextLevel,
-		};
-	}
-	if (isPPBoostItem(item) && move) {
-		return applyPPMoveBooster(pokemon, move, item);
-	}
 	if (isXItem(item) && isBattlePokemon(pokemon)) {
 		const stat = XItemTable[item];
 		if (stat) {
@@ -281,28 +309,6 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 				applicator: pokemon,
 			}) as T;
 		}
-	}
-	if (happinessBerries[item]) {
-		const stat = happinessBerries[item];
-		if (addMessage) {
-			addMessage({
-				message: `Happiness raised, ${stat} Effort value lowered`,
-			});
-		}
-		return applyHappinessChange(
-			{
-				...pokemon,
-				effortValues: {
-					...pokemon.effortValues,
-					[stat]: getMiddleOfThree([
-						0,
-						pokemon.effortValues[stat],
-						pokemon.effortValues[stat] - 10,
-					]),
-				},
-			},
-			10
-		);
 	}
 
 	return pokemon;

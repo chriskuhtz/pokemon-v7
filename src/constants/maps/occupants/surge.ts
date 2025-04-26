@@ -51,6 +51,13 @@ const trainerSurge: OverworldTrainer = {
 	],
 	name: 'Gym Leader Surge',
 	team: surgeTeam,
+	battleTeamConfig: {
+		assignGender: false,
+		assignHeldItem: false,
+		assignLearnsetMoves: false,
+		assignNaturalAbility: false,
+		generateIvs: true,
+	},
 };
 const npcSurge: OverworldNpc = {
 	type: 'NPC',

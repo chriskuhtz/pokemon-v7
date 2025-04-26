@@ -8,6 +8,7 @@ import { getItemUrl } from '../../../functions/getItemUrl';
 import { getStats } from '../../../functions/getStats';
 import { getTypeNames } from '../../../functions/getTypeNames';
 import { isOwnedPokemonKO } from '../../../functions/isKo';
+import { replaceRouteName } from '../../../functions/replaceRouteName';
 import { EvolutionReducerPayload } from '../../../hooks/useSaveFile';
 import { Inventory } from '../../../interfaces/Inventory';
 import { ItemType } from '../../../interfaces/Item';
@@ -179,6 +180,7 @@ export const OwnedPokemonCardContent = ({
 							<h5>rel. Height: {ownedPokemon.heightModifier.toFixed(2)}</h5>
 						)}
 						<h5>Gender: {ownedPokemon.gender}</h5>
+						<h5>Caught at: {replaceRouteName(ownedPokemon.caughtOnMap)}</h5>
 					</div>
 					<div>
 						<HappinessIcon value={ownedPokemon.happiness} />

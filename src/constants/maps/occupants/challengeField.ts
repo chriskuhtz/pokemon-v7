@@ -46,6 +46,13 @@ export const challengeFieldOccupants: OverworldMap['occupants'] = [
 			y: y(),
 			orientation: [2, 10, 18, 26, 34, 42].includes(x()) ? 'UP' : 'DOWN',
 			id,
+			battleTeamConfig: {
+				assignGender: true,
+				assignHeldItem: false,
+				assignLearnsetMoves: true,
+				assignNaturalAbility: true,
+				generateIvs: true,
+			},
 			conditionFunction: (s) =>
 				!s.handledOccupants.some((h) => h.id === id) &&
 				(!t.requiredUpgrade || s.campUpgrades[t.requiredUpgrade]),

@@ -51,6 +51,13 @@ const trainerBlaine: OverworldTrainer = {
 	unhandledMessage: ['Wahooo'],
 	name: 'Gym Leader Blaine',
 	team: blaineTeam,
+	battleTeamConfig: {
+		assignGender: false,
+		assignHeldItem: false,
+		assignLearnsetMoves: false,
+		assignNaturalAbility: false,
+		generateIvs: true,
+	},
 };
 const npcBlaine: OverworldNpc = {
 	type: 'NPC',

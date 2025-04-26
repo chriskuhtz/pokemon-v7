@@ -123,6 +123,7 @@ export const useLeaveBattle = () => {
 						{ ...c, ownerId: saveFile.playerId },
 						c.ball === 'heal-ball'
 					),
+					caughtAtDate: new Date().getTime(),
 					caughtOnMap: saveFile.location.mapId,
 				})),
 			].map((t, i) => ({ ...t, onTeam: i < 6 }));
@@ -136,6 +137,9 @@ export const useLeaveBattle = () => {
 				(h) => h.id === defeatedChallengerId
 			);
 			const gainedResearchPoints = () => {
+				if (saveFile.location.mapId === 'challengeField') {
+					return 0;
+				}
 				if (outcome !== 'WIN') {
 					return 0;
 				}

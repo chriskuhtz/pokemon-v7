@@ -101,6 +101,13 @@ const migrateSavefile = (input: SaveFile) => {
 			updatedInput.quests[name] = 'INACTIVE';
 		}
 	});
+	updatedInput.pokemon = input.pokemon.map((p) => {
+		if (!p.caughtAtDate) {
+			return { ...p, caughtAtDate: new Date().getTime() };
+		}
+
+		return p;
+	});
 	return updatedInput;
 };
 const useSaveFile = (

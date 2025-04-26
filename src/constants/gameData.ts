@@ -44,6 +44,7 @@ export const testPokemon: OwnedPokemon = {
 	weightModifier: Math.random(),
 	unlockedMoves: [],
 	growthRate: 'medium',
+	caughtAtDate: new Date().getTime(),
 };
 
 export const startingLocation: CharacterLocationData = {

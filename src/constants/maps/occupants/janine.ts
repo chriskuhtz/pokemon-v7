@@ -64,6 +64,13 @@ const trainerJanine: OverworldTrainer = {
 	unhandledMessage: ['Think you can beat me?'],
 	name: 'Gym Leader Janine',
 	team: janineTeam,
+	battleTeamConfig: {
+		assignGender: false,
+		assignHeldItem: false,
+		assignLearnsetMoves: false,
+		assignNaturalAbility: false,
+		generateIvs: true,
+	},
 };
 const npcJanine: OverworldNpc = {
 	type: 'NPC',

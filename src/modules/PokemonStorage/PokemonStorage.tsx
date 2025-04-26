@@ -14,6 +14,16 @@ import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSys
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
+export const sortByTypes = [
+	'HAPPINESS',
+	'XP',
+	'NAME',
+	'BALL',
+	'CATCHDATE',
+	'LOCATION',
+] as const;
+export type PokemonFilter = (typeof sortByTypes)[number];
+
 export const PokemonStorage = ({
 	goBack,
 }: {
@@ -23,10 +33,19 @@ export const PokemonStorage = ({
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
 	const allPokemon = useMemo(() => saveFile.pokemon, [saveFile]);
-	const [sortBy, setSortBy] = useState<'HAPPINESS' | 'XP' | 'NAME' | 'BALL'>(
-		'NAME'
-	);
+	const [sortBy, setSortBy] = useState<PokemonFilter>('NAME');
 	const sortFunction = useMemo(() => {
+		if (sortBy === 'LOCATION') {
+			return (a: OwnedPokemon, b: OwnedPokemon) => {
+				if (a.caughtOnMap < b.caughtOnMap) return -1;
+				if (a.caughtOnMap > b.caughtOnMap) return 1;
+				return 0;
+			};
+		}
+		if (sortBy === 'CATCHDATE') {
+			return (a: OwnedPokemon, b: OwnedPokemon) =>
+				b.caughtAtDate - a.caughtAtDate;
+		}
 		if (sortBy === 'XP') {
 			return (a: OwnedPokemon, b: OwnedPokemon) => b.xp - a.xp;
 		}
@@ -142,48 +161,21 @@ export const PokemonStorage = ({
 				>
 					Storage:
 				</h2>
+
 				<div style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
 					Sort By
-					<button
-						style={
-							sortBy === 'NAME'
-								? { backgroundColor: 'black', color: 'white' }
-								: undefined
-						}
-						onClick={() => setSortBy('NAME')}
-					>
-						NAME
-					</button>
-					<button
-						style={
-							sortBy === 'HAPPINESS'
-								? { backgroundColor: 'black', color: 'white' }
-								: undefined
-						}
-						onClick={() => setSortBy('HAPPINESS')}
-					>
-						Happiness
-					</button>
-					<button
-						style={
-							sortBy === 'XP'
-								? { backgroundColor: 'black', color: 'white' }
-								: undefined
-						}
-						onClick={() => setSortBy('XP')}
-					>
-						Level
-					</button>
-					<button
-						style={
-							sortBy === 'BALL'
-								? { backgroundColor: 'black', color: 'white' }
-								: undefined
-						}
-						onClick={() => setSortBy('BALL')}
-					>
-						Ball
-					</button>
+					{sortByTypes.map((filter) => (
+						<button
+							style={
+								sortBy === filter
+									? { backgroundColor: 'black', color: 'white' }
+									: undefined
+							}
+							onClick={() => setSortBy(filter)}
+						>
+							{filter}
+						</button>
+					))}
 				</div>
 				<button onClick={collectAllHeldItemsFromStored}>
 					Collect all held items from stored Pokemon
