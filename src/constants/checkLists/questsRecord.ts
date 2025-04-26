@@ -1970,6 +1970,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'shovel certification',
 		researchPoints: 10,
 		rewardItems: { 'babiri-berry': 2, 'kee-berry': 2 },
+		targetRoute: 'onixCave',
 		targetPokemon: onixCaveEncounters.BASE.map((p) => p.name),
 		conditionFunction: (s) =>
 			onixCaveEncounters.BASE.some((o) =>
@@ -1980,6 +1981,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'shovel certification',
 		availableAfter: 'catch a pokemon from onix cave',
+		targetRoute: 'onixCave',
 		researchPoints: 25,
 		rewardItems: {
 			'yellow-apricorn': 10,
@@ -1995,6 +1997,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'catch all pokemon from caveW1': {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'swimming certification',
+		targetRoute: 'caveW1',
 		researchPoints: 50,
 		rewardItems: {
 			'power-herb': 2,
