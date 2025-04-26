@@ -137,6 +137,9 @@ export const useLeaveBattle = () => {
 				(h) => h.id === defeatedChallengerId
 			);
 			const gainedResearchPoints = () => {
+				if (saveFile.location.mapId === 'challengeField') {
+					return 0;
+				}
 				if (outcome !== 'WIN') {
 					return 0;
 				}
