@@ -50,6 +50,13 @@ const trainerBrock: OverworldTrainer = {
 	unhandledMessage: ['Lets do this'],
 	name: 'Gym Leader Brock',
 	team: brockTeam,
+	battleTeamConfig: {
+		assignGender: false,
+		assignHeldItem: false,
+		assignLearnsetMoves: false,
+		assignNaturalAbility: false,
+		generateIvs: true,
+	},
 };
 const npcBrock: OverworldNpc = {
 	type: 'NPC',

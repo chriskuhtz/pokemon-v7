@@ -20,13 +20,7 @@ export const useInteractWithTrainer = () => {
 									...saveFile.meta,
 									activeTab: 'BATTLE',
 									currentChallenger: {
-										battleTeamConfig: {
-											assignGender: false,
-											assignHeldItem: false,
-											assignLearnsetMoves: false,
-											assignNaturalAbility: false,
-											generateIvs: true,
-										},
+										battleTeamConfig: trainer.battleTeamConfig,
 										team: trainer.team,
 										id: trainer.id,
 										inventory: EmptyInventory,

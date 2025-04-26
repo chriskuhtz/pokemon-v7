@@ -45,6 +45,13 @@ const trainerErika: OverworldTrainer = {
 	unhandledMessage: ['Lets see how good you are'],
 	name: 'Gym Leader Erika',
 	team: erikaTeam,
+	battleTeamConfig: {
+		assignGender: false,
+		assignHeldItem: false,
+		assignLearnsetMoves: false,
+		assignNaturalAbility: false,
+		generateIvs: true,
+	},
 };
 const npcErika: OverworldNpc = {
 	type: 'NPC',

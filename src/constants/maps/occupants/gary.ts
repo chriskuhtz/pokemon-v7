@@ -104,6 +104,13 @@ const trainerGary: OverworldTrainer = {
 	unhandledMessage: ['I am always looking for a challenge'],
 	name: 'Gym Leader Gary',
 	team: garyTeam,
+	battleTeamConfig: {
+		assignGender: false,
+		assignHeldItem: false,
+		assignLearnsetMoves: false,
+		assignNaturalAbility: false,
+		generateIvs: true,
+	},
 };
 const npcGary: OverworldNpc = {
 	type: 'NPC',

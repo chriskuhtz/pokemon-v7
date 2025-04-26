@@ -64,6 +64,13 @@ const trainerMisty: OverworldTrainer = {
 	unhandledMessage: ['lets see what you got'],
 	name: 'Gym Leader Misty',
 	team: mistyTeam,
+	battleTeamConfig: {
+		assignGender: false,
+		assignHeldItem: false,
+		assignLearnsetMoves: false,
+		assignNaturalAbility: false,
+		generateIvs: true,
+	},
 };
 const npcMisty: OverworldNpc = {
 	type: 'NPC',
