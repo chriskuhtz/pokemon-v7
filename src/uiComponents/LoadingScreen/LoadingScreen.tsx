@@ -49,8 +49,8 @@ export const LoadingScreen = () => {
 						rotating={true}
 					/>{' '}
 					<Sprite
-						canvasKey={SpriteEnum.oak}
-						id={SpriteEnum.oak}
+						canvasKey={SpriteEnum.rowan}
+						id={SpriteEnum.rowan}
 						rotating={true}
 					/>
 				</div>
