@@ -36,7 +36,7 @@ export const FossilReviver = (): JSX.Element => {
 											<PokemonSprite name={fossilTable[f]} />
 										) : (
 											f
-										)}
+										)}{' '}
 										for 5 Research Points
 									</h3>
 								}
