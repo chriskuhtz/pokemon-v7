@@ -52,8 +52,8 @@ export const ChangeLogV13 = (): JSX.Element => {
 			<h3>V 0.13:</h3>
 
 			<ol style={{ lineHeight: '1.5rem' }}>
-				<li>Pokeball Amount Indicator </li>
-				<li>Training field 5</li>
+				<li>New sorting options for pokemon</li>
+				<li>Various minor fixes</li>
 				<li>New Abilities, Items and Attacks</li>
 			</ol>
 		</>

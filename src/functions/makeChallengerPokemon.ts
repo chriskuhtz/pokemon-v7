@@ -25,6 +25,7 @@ export const testOpponent: OwnedPokemon = {
 	weightModifier: 1,
 	unlockedMoves: [],
 	growthRate: 'medium',
+	caughtAtDate: new Date().getTime(),
 };
 
 export const makeChallengerPokemon = (

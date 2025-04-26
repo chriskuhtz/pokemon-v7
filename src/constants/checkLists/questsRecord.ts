@@ -637,6 +637,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'catch all costumed pikachus': {
 		rewardItems: {},
 		rewardPokemon: {
+			caughtAtDate: new Date().getTime(),
 			growthRate: 'medium',
 			unlockedMoves: ['extrasensory'],
 			fixedAbility: true,
@@ -1467,6 +1468,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'spell-tag': 1,
 		},
 		rewardPokemon: {
+			caughtAtDate: new Date().getTime(),
 			growthRate: 'medium',
 			unlockedMoves: ['ominous-wind'],
 			fixedAbility: true,
@@ -1503,6 +1505,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'black-belt': 1,
 		},
 		rewardPokemon: {
+			caughtAtDate: new Date().getTime(),
 			growthRate: 'medium',
 			unlockedMoves: ['drill-peck'],
 			fixedAbility: true,
@@ -1540,6 +1543,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'sharp-beak': 1,
 		},
 		rewardPokemon: {
+			caughtAtDate: new Date().getTime(),
 			growthRate: 'medium',
 			unlockedMoves: ['drill-peck'],
 			fixedAbility: true,
@@ -1654,6 +1658,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'full-restore': 5,
 		},
 		rewardPokemon: {
+			caughtAtDate: new Date().getTime(),
 			growthRate: 'medium',
 			unlockedMoves: ['earthquake'],
 			fixedAbility: true,
@@ -1711,6 +1716,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			firstMove: { name: 'earthquake', usedPP: 0 },
 			unlockedMoves: [],
 			growthRate: 'medium',
+			caughtAtDate: new Date().getTime(),
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {

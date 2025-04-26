@@ -52,4 +52,5 @@ export interface OwnedPokemon {
 	fixedAbility?: boolean;
 	unlockedMoves: MoveName[];
 	growthRate: GrowthRateName;
+	caughtAtDate: number;
 }

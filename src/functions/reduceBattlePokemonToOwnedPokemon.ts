@@ -62,6 +62,7 @@ export const reduceBattlePokemonToOwnedPokemon = (
 		unlockedMoves: newMon.unlockedMoves,
 		growthRate: newMon.growthRate,
 		fixedAbility: newMon.fixedAbility,
+		caughtAtDate: newMon.caughtAtDate,
 	};
 
 	if (heal) {

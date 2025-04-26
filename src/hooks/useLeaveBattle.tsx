@@ -123,6 +123,7 @@ export const useLeaveBattle = () => {
 						{ ...c, ownerId: saveFile.playerId },
 						c.ball === 'heal-ball'
 					),
+					caughtAtDate: new Date().getTime(),
 					caughtOnMap: saveFile.location.mapId,
 				})),
 			].map((t, i) => ({ ...t, onTeam: i < 6 }));
