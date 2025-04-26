@@ -32,7 +32,7 @@ export const determineWildPokemon = (
 	) {
 		return [
 			makeChallengerPokemon(
-				{ name: 'raticate', xp: 27000, heldItemName: 'oaks-parcel' },
+				{ name: 'raticate', xp: 27000 },
 				{ increasedShinyFactor: 16 * shinyFactor }
 			),
 		];
