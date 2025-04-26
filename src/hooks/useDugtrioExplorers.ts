@@ -36,7 +36,7 @@ export const useDugtrioExplorers = () => {
 					[foragedItem]: amount,
 					honey: -3,
 				}),
-				dugtrioReadyAt: Math.random() > 0.66 ? now + ONE_HOUR / 4 : undefined,
+				dugtrioReadyAt: Math.random() > 0.8 ? now + ONE_HOUR / 4 : undefined,
 			});
 		} else {
 			addMessage({ message: 'Dugtrio seems to need a little break' });
