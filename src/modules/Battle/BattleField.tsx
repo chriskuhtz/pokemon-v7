@@ -74,7 +74,8 @@ export interface BattleFieldEffect {
 		| 'sweet-veil'
 		| 'dark-aura'
 		| 'aura-break'
-		| 'fairy-aura';
+		| 'fairy-aura'
+		| 'tailwind';
 	ownerId: string;
 	applicatorId?: string;
 	duration: number;
@@ -184,9 +185,18 @@ export const BattleField = ({
 		}
 
 		return [...onFieldOpponents, ...onFieldTeam]
-			.sort((a, b) => sortByPriority(a, b, battleRound, battleWeather))
+			.sort((a, b) =>
+				sortByPriority(a, b, battleRound, battleWeather, battleFieldEffects)
+			)
 			.find((p) => p.moveQueue.some((m) => m.round === battleRound));
-	}, [battleRound, battleStep, battleWeather, onFieldOpponents, onFieldTeam]);
+	}, [
+		battleFieldEffects,
+		battleRound,
+		battleStep,
+		battleWeather,
+		onFieldOpponents,
+		onFieldTeam,
+	]);
 	const newlyDeployedPokemon = useMemo(() => {
 		if (battleStep !== 'BATTLE_ENTRY') {
 			return;
