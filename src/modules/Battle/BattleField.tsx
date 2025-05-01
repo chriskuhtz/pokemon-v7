@@ -186,13 +186,21 @@ export const BattleField = ({
 
 		return [...onFieldOpponents, ...onFieldTeam]
 			.sort((a, b) =>
-				sortByPriority(a, b, battleRound, battleWeather, battleFieldEffects)
+				sortByPriority(
+					a,
+					b,
+					battleRound,
+					battleWeather,
+					battleFieldEffects,
+					battleTerrain
+				)
 			)
 			.find((p) => p.moveQueue.some((m) => m.round === battleRound));
 	}, [
 		battleFieldEffects,
 		battleRound,
 		battleStep,
+		battleTerrain,
 		battleWeather,
 		onFieldOpponents,
 		onFieldTeam,

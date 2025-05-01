@@ -927,7 +927,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/206/',
 		handled: true,
 	},
-	{ name: 'surge-surfer', url: 'https://pokeapi.co/api/v2/ability/207/' },
+	{
+		name: 'surge-surfer',
+		url: 'https://pokeapi.co/api/v2/ability/207/',
+		handled: true,
+	},
 	{ name: 'schooling', url: 'https://pokeapi.co/api/v2/ability/208/' },
 	{ name: 'disguise', url: 'https://pokeapi.co/api/v2/ability/209/' },
 	{ name: 'battle-bond', url: 'https://pokeapi.co/api/v2/ability/210/' },
@@ -1297,6 +1301,7 @@ export const abilityNames = [
 	'liquid-voice',
 	'triage',
 	'galvanize',
+	'surge-surfer',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
