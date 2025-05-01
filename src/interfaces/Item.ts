@@ -122,6 +122,7 @@ export const evoStones = [
 	'shiny-stone',
 	'black-augurite',
 	'peat-block',
+	'protective-pads',
 ] as const;
 export const heldItems = [
 	'quick-claw',

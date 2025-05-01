@@ -1,3 +1,4 @@
+import { isContactMove } from '../../../../../../constants/contactMoves';
 import { SELF_DESTRUCTING_MOVES } from '../../../../../../constants/selfDestructingMoves';
 import { applyAttackAilmentsToPokemon } from '../../../../../../functions/applyAttackAilmentsToPokemon';
 import { applyAttackStatChanges } from '../../../../../../functions/applyAttackStatChanges';
@@ -465,6 +466,10 @@ export const handleDamageAttack = ({
 	updatedAttacker = { ...a };
 	updatedTarget = { ...t };
 
+	const preventSideEffects =
+		isContactMove(move.name, updatedAttacker) &&
+		getHeldItem(updatedTarget) === 'protective-pads';
+
 	const category = move.data.meta.category.name;
 	if (category === 'damage+raise') {
 		updatedAttacker = applyAttackStatChanges(
@@ -476,7 +481,7 @@ export const handleDamageAttack = ({
 			battleFieldEffects
 		);
 	}
-	if (category === 'damage+lower') {
+	if (category === 'damage+lower' && !preventSideEffects) {
 		updatedTarget = applyAttackStatChanges(
 			updatedTarget,
 			updatedTarget.ability,
@@ -486,7 +491,11 @@ export const handleDamageAttack = ({
 			battleFieldEffects
 		);
 	}
-	if (category === 'damage+ailment' || attacker.ability === 'poison-touch') {
+
+	if (
+		(category === 'damage+ailment' || attacker.ability === 'poison-touch') &&
+		!preventSideEffects
+	) {
 		if (attacker.ability === 'poison-touch') {
 			move = {
 				...move,

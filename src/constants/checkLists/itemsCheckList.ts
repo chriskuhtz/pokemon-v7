@@ -1792,15 +1792,12 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/883/',
 		handled: true,
 	},
-	{ name: 'red-nectar', url: 'https://pokeapi.co/api/v2/item/889/' },
-	{ name: 'yellow-nectar', url: 'https://pokeapi.co/api/v2/item/890/' },
-	{ name: 'pink-nectar', url: 'https://pokeapi.co/api/v2/item/891/' },
-	{ name: 'purple-nectar', url: 'https://pokeapi.co/api/v2/item/892/' },
-	{ name: 'sun-flute', url: 'https://pokeapi.co/api/v2/item/893/' },
-	{ name: 'moon-flute', url: 'https://pokeapi.co/api/v2/item/894/' },
-	{ name: 'enigmatic-card', url: 'https://pokeapi.co/api/v2/item/895/' },
+	{
+		name: 'protective-pads',
+		url: 'https://pokeapi.co/api/v2/item/897/',
+		handled: true,
+	},
 	{ name: 'terrain-extender', url: 'https://pokeapi.co/api/v2/item/896/' },
-	{ name: 'protective-pads', url: 'https://pokeapi.co/api/v2/item/897/' },
 	{ name: 'electric-seed', url: 'https://pokeapi.co/api/v2/item/898/' },
 	{ name: 'psychic-seed', url: 'https://pokeapi.co/api/v2/item/899/' },
 	{ name: 'misty-seed', url: 'https://pokeapi.co/api/v2/item/900/' },
@@ -2643,6 +2640,9 @@ export const itemsCheckList: {
 	 * KEY ITEMS
 	 *
 	 */
+	{ name: 'sun-flute', url: 'https://pokeapi.co/api/v2/item/893/' },
+	{ name: 'moon-flute', url: 'https://pokeapi.co/api/v2/item/894/' },
+	{ name: 'enigmatic-card', url: 'https://pokeapi.co/api/v2/item/895/' },
 	{ name: 'z-ring', url: 'https://pokeapi.co/api/v2/item/838/' },
 	{ name: 'forage-bag', url: 'https://pokeapi.co/api/v2/item/878/' },
 	{ name: 'fishing-rod', url: 'https://pokeapi.co/api/v2/item/879/' },
@@ -2849,6 +2849,10 @@ export const itemsCheckList: {
 	 *
 	 *
 	 */
+	{ name: 'red-nectar', url: 'https://pokeapi.co/api/v2/item/889/' },
+	{ name: 'yellow-nectar', url: 'https://pokeapi.co/api/v2/item/890/' },
+	{ name: 'pink-nectar', url: 'https://pokeapi.co/api/v2/item/891/' },
+	{ name: 'purple-nectar', url: 'https://pokeapi.co/api/v2/item/892/' },
 	{ name: 'bottle-cap', url: 'https://pokeapi.co/api/v2/item/836/' },
 	{ name: 'gold-bottle-cap', url: 'https://pokeapi.co/api/v2/item/837/' },
 	{
