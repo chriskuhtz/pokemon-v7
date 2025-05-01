@@ -393,4 +393,6 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'more historian events' },
 	{ name: 'sudowoodo as optional blocker on route W1' },
+	{ name: 'insert breaker headlines into some sorting options' },
+	{ name: 'charcadet evo items' },
 ];

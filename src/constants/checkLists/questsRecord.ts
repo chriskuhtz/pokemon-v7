@@ -2180,7 +2180,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'catch a pokemon from a swarm',
 		researchPoints: 50,
 		rewardItems: { 'dusk-ball': 20 },
-		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length > 0,
+		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length >= 3,
 	},
 	'catch 10 different pokemon from swarms': {
 		kind: 'BULLETIN',
@@ -2190,7 +2190,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: {
 			'quick-ball': 20,
 		},
-		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length > 0,
+		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length >= 10,
 	},
 	'catch 20 different pokemon from swarms': {
 		kind: 'BULLETIN',
@@ -2200,7 +2200,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: {
 			'ultra-ball': 20,
 		},
-		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length > 0,
+		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length >= 20,
 	},
 	'deal 50 damage with one attack': {
 		kind: 'QUEST_LINE',

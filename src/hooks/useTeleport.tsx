@@ -1,6 +1,5 @@
 import { useCallback, useContext, useMemo } from 'react';
 import { startingLocation } from '../constants/gameData';
-import { getMovesArray } from '../functions/getMovesArray';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 export const useTeleport = () => {
@@ -9,7 +8,7 @@ export const useTeleport = () => {
 	const teleporter = useMemo(
 		() =>
 			saveFile.pokemon.find(
-				(p) => p.onTeam && getMovesArray(p).some((m) => m.name === 'teleport')
+				(p) => p.onTeam && p.unlockedMoves.some((m) => m === 'teleport')
 			),
 		[saveFile.pokemon]
 	);

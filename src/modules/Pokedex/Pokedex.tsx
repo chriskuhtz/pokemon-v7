@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { PokemonName, pokemonNames } from '../../constants/pokemonNames';
+import { replaceRouteName } from '../../functions/replaceRouteName';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { AnimatedBar } from '../../uiComponents/AnimatedBar/AnimatedBar';
@@ -55,9 +56,14 @@ export const Pokedex = () => {
 									content={
 										<div>
 											<h3>{name}</h3>
-											<strong>Seen at: {seenOnRoutes.join(', ')}</strong>
+											<strong>
+												Seen at: {seenOnRoutes.map(replaceRouteName).join(', ')}
+											</strong>
 											<br />
-											<strong>Caught at: {caughtOnRoutes.join(', ')}</strong>
+											<strong>
+												Caught at:{' '}
+												{caughtOnRoutes.map(replaceRouteName).join(', ')}
+											</strong>
 										</div>
 									}
 									actionElements={[]}
