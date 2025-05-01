@@ -128,6 +128,12 @@ export const getHiddenPowerPower = (ivs: StatObject) => {
 export const getRolloutFactor = (turn: number, defenseCurled: boolean) => {
 	return turn * (defenseCurled ? 2 : 1);
 };
+export const getGyroBallPower = (
+	targetSpeed: number,
+	attackerSpeed: number
+) => {
+	return 1 + 25 * (targetSpeed / attackerSpeed);
+};
 
 export const getPower = (
 	attacker: BattlePokemon,
@@ -136,6 +142,24 @@ export const getPower = (
 	attackerLevel: number,
 	weather: WeatherType | undefined
 ) => {
+	if (attack.name === 'gyro-ball') {
+		return getGyroBallPower(
+			calculateModifiedStat(
+				target.stats.speed,
+				target.statBoosts.speed,
+				'speed',
+				target,
+				false
+			),
+			calculateModifiedStat(
+				attacker.stats.speed,
+				attacker.statBoosts.speed,
+				'speed',
+				attacker,
+				false
+			)
+		);
+	}
 	if (attack.name === 'weather-ball' && attack.data.power) {
 		if (
 			weather === 'sun' ||
