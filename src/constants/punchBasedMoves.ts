@@ -75,3 +75,14 @@ export const auraAndPulseMoves = [
 	'water-pulse',
 	'heal-pulse',
 ];
+
+export const powderMoves = [
+	'Poison Powder',
+	'Stun Spore',
+	'Sleep Powder',
+	'Spore',
+	'Cotton Spore',
+	'Rage Powder',
+	'Powder',
+	'Magic Powder',
+];

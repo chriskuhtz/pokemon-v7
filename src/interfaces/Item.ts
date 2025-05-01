@@ -258,6 +258,7 @@ export const heldItems = [
 	'sachet',
 	'luminous-moss',
 	'snowball',
+	'safety-goggles',
 ] as const;
 export const valuables = [
 	'shoal-salt',

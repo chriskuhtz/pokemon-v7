@@ -7,6 +7,7 @@ import {
 } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
+import { getHeldItem } from './getHeldItem';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getTypeNames } from './getTypeNames';
 
@@ -30,7 +31,8 @@ export const applyEndOfTurnWeatherDamage = (
 			) ||
 			['sand-veil', 'overcoat', 'sand-rush', 'sand-force'].includes(
 				pokemon.ability
-			)
+			) ||
+			getHeldItem(pokemon) === 'safety-goggles'
 		) {
 			return pokemon;
 		}
@@ -44,7 +46,8 @@ export const applyEndOfTurnWeatherDamage = (
 	if (weather === 'hail') {
 		if (
 			getTypeNames(pokemon).some((t) => ['ice'].includes(t)) ||
-			['snow-cloak', 'overcoat'].includes(pokemon.ability)
+			['snow-cloak', 'overcoat'].includes(pokemon.ability) ||
+			getHeldItem(pokemon) === 'safety-goggles'
 		) {
 			return pokemon;
 		}
