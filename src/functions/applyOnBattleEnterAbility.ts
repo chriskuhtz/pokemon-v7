@@ -111,7 +111,7 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 			if (p.ownerId === user.ownerId) {
 				return p;
 			}
-			return applyStatChangeToPokemon(
+			const res = applyStatChangeToPokemon(
 				p,
 				'attack',
 				-1,
@@ -120,6 +120,18 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 				addMessage,
 				`${user.data.name}'s intimidate`
 			);
+			if (getHeldItem(p) === 'adrenaline-orb') {
+				return applyStatChangeToPokemon(
+					res,
+					'speed',
+					1,
+					true,
+					battleFieldEffects,
+					addMessage,
+					'adrenaline-orb'
+				);
+			}
+			return res;
 		});
 	}
 	if (user.ability === 'download') {
@@ -146,18 +158,8 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 					'with download'
 				);
 			}
-			if (p.ownerId === user.ownerId) {
-				return p;
-			}
-			return applyStatChangeToPokemon(
-				p,
-				'attack',
-				-1,
-				false,
-				battleFieldEffects,
-				addMessage,
-				`${user.data.name}'s intimidate`
-			);
+
+			return p;
 		});
 	}
 	if (user.ability === 'flower-gift' && currentWeather === 'sun') {

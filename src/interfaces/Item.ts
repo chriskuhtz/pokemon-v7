@@ -259,6 +259,7 @@ export const heldItems = [
 	'luminous-moss',
 	'snowball',
 	'safety-goggles',
+	'adrenaline-orb',
 ] as const;
 export const valuables = [
 	'shoal-salt',

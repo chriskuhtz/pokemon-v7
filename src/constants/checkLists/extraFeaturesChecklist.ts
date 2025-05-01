@@ -363,7 +363,7 @@ export const extraFeatureCheckList: {
 	{ name: 'show amount of pokeballs in bag in quickmenu', handled: true },
 	{ name: 'training field 5', handled: true },
 	{ name: 'split hat pikachu and costume pikachu quests', handled: true },
-	{ name: 'gen 8 fossils' },
+	{ name: 'gen 8 fossils', handled: true },
 	{ name: 'fix random abilities' },
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'shovel spots' },
