@@ -1,4 +1,7 @@
-export const contactMoves = [
+import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { MoveName } from './checkLists/movesCheckList';
+
+const contactMoves = [
 	'accelerock',
 	'acrobatics',
 	'aerial-ace',
@@ -277,3 +280,10 @@ export const contactMoves = [
 	'zing-zap',
 	'zippy-zap',
 ];
+
+export const isContactMove = (move: MoveName, pokemon: BattlePokemon) => {
+	if (pokemon.ability === 'long-reach') {
+		return false;
+	}
+	return contactMoves.includes(move);
+};

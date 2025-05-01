@@ -907,7 +907,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/202/',
 		handled: true,
 	},
-	{ name: 'long-reach', url: 'https://pokeapi.co/api/v2/ability/203/' },
+	{
+		name: 'long-reach',
+		url: 'https://pokeapi.co/api/v2/ability/203/',
+		handled: true,
+	},
 	{ name: 'liquid-voice', url: 'https://pokeapi.co/api/v2/ability/204/' },
 	{ name: 'triage', url: 'https://pokeapi.co/api/v2/ability/205/' },
 	{ name: 'galvanize', url: 'https://pokeapi.co/api/v2/ability/206/' },
@@ -1277,6 +1281,7 @@ export const abilityNames = [
 	'steelworker',
 	'berserk',
 	'slush-rush',
+	'long-reach',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

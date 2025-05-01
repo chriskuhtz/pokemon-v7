@@ -1,4 +1,4 @@
-import { contactMoves } from '../../../../../constants/contactMoves';
+import { isContactMove } from '../../../../../constants/contactMoves';
 import { applyPrimaryAilmentToPokemon } from '../../../../../functions/applyPrimaryAilmentToPokemon';
 import { applySecondaryAilmentToPokemon } from '../../../../../functions/applySecondaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from '../../../../../functions/applyStatChangeToPokemon';
@@ -61,14 +61,14 @@ export const handleAbilitiesAfterAttack = (
 		};
 	}
 	//check for mummy
-	if (target.ability === 'mummy' && contactMoves.includes(move.name)) {
+	if (target.ability === 'mummy' && isContactMove(move.name, attacker)) {
 		addMessage({ message: `${updatedAttacker.name}'s ability became mummy` });
 		updatedAttacker.ability = 'mummy';
 	}
 	//check for static
 	if (
 		target.ability === 'static' &&
-		contactMoves.includes(move.name) &&
+		isContactMove(move.name, attacker) &&
 		Math.random() < STATIC_CHANCE &&
 		!attackerIsSafeguarded
 	) {
@@ -84,7 +84,7 @@ export const handleAbilitiesAfterAttack = (
 		updatedAttacker = b;
 	}
 	//check for gooey
-	if (target.ability === 'gooey' && contactMoves.includes(move.name)) {
+	if (target.ability === 'gooey' && isContactMove(move.name, attacker)) {
 		updatedAttacker = applyStatChangeToPokemon(
 			updatedAttacker,
 			'speed',
@@ -129,7 +129,7 @@ export const handleAbilitiesAfterAttack = (
 	//check for flame-body
 	if (
 		target.ability === 'flame-body' &&
-		contactMoves.includes(move.name) &&
+		isContactMove(move.name, attacker) &&
 		Math.random() < FLAME_BODY_CHANCE &&
 		!attackerIsSafeguarded
 	) {
@@ -149,7 +149,7 @@ export const handleAbilitiesAfterAttack = (
 		target.ability === 'cute-charm' &&
 		arePokemonOfOppositeGenders(attacker.gender, updatedTarget.gender) ===
 			'YES' &&
-		contactMoves.includes(move.name) &&
+		isContactMove(move.name, attacker) &&
 		Math.random() < CUTE_CHARM_CHANCE
 	) {
 		updatedAttacker = applySecondaryAilmentToPokemon({
@@ -163,7 +163,7 @@ export const handleAbilitiesAfterAttack = (
 	//check for poison-point
 	if (
 		target.ability === 'poison-point' &&
-		contactMoves.includes(move.name) &&
+		isContactMove(move.name, attacker) &&
 		Math.random() < POISON_POINT_CHANCE &&
 		!attackerIsSafeguarded
 	) {
@@ -196,7 +196,7 @@ export const handleAbilitiesAfterAttack = (
 	//check for effect spore
 	if (
 		target.ability === 'effect-spore' &&
-		contactMoves.includes(move.name) &&
+		isContactMove(move.name, attacker) &&
 		Math.random() < EFFECT_SPORE_CHANCE &&
 		!attackerIsSafeguarded
 	) {
@@ -218,7 +218,7 @@ export const handleAbilitiesAfterAttack = (
 	//check for rocky-helmet
 	if (
 		getHeldItem(target) === 'rocky-helmet' &&
-		contactMoves.includes(move.name)
+		isContactMove(move.name, attacker)
 	) {
 		updatedAttacker = {
 			...updatedAttacker,
@@ -231,7 +231,7 @@ export const handleAbilitiesAfterAttack = (
 		});
 	}
 	//check for rough-skin
-	if (target.ability === 'rough-skin' && contactMoves.includes(move.name)) {
+	if (target.ability === 'rough-skin' && isContactMove(move.name, attacker)) {
 		updatedAttacker = {
 			...updatedAttacker,
 			damage:
@@ -242,7 +242,7 @@ export const handleAbilitiesAfterAttack = (
 			message: `${updatedAttacker.data.name} was hurt by rough skin`,
 		});
 	} //check for iron barbs
-	if (target.ability === 'iron-barbs' && contactMoves.includes(move.name)) {
+	if (target.ability === 'iron-barbs' && isContactMove(move.name, attacker)) {
 		updatedAttacker = {
 			...updatedAttacker,
 			damage:
@@ -407,7 +407,7 @@ export const handleAbilitiesAfterAttack = (
 	//pickpocket
 	if (
 		!isKO(updatedTarget) &&
-		contactMoves.includes(move.name) &&
+		isContactMove(move.name, attacker) &&
 		updatedTarget.ability === 'pickpocket' &&
 		!getHeldItem(updatedTarget) &&
 		getHeldItem(updatedAttacker, false)
@@ -491,7 +491,7 @@ export const handleAbilitiesAfterAttack = (
 	if (
 		isKO(updatedTarget) &&
 		updatedTarget.ability === 'aftermath' &&
-		contactMoves.includes(move.name)
+		isContactMove(move.name, attacker)
 	) {
 		addMessage({ message: `${updatedAttacker.name} is hurt by aftermath` });
 		updatedAttacker = {

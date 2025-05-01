@@ -1,5 +1,5 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
-import { contactMoves } from '../constants/contactMoves';
+import { isContactMove } from '../constants/contactMoves';
 import {
 	fixedDamageMoves,
 	levelDamageMoves,
@@ -728,7 +728,7 @@ export const calculateDamage = (
 			? 0.66
 			: 1;
 	const toughClawsFactor =
-		attacker.ability === 'tough-claws' && contactMoves.includes(attack.name)
+		attacker.ability === 'tough-claws' && isContactMove(attack.name, attacker)
 			? 1.33
 			: 1;
 
