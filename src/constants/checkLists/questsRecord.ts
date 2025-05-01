@@ -557,6 +557,7 @@ export const questNames = [
 	'reach challenge field rank 62',
 	'reach challenge field rank 85',
 	'reach challenge field rank 108',
+	'catch the mysterious pokemon in orenji forest',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -1665,7 +1666,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		targetPokemon: [],
 		requiredUpgrade: 'invite historian',
-		kind: 'QUEST_LINE',
+		kind: 'BULLETIN',
 	},
 	'catch the legendary bird of thunder': {
 		rewardItems: { 'rare-candy': 10 },
@@ -1675,7 +1676,17 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		targetPokemon: [],
 		requiredUpgrade: 'invite historian',
-		kind: 'QUEST_LINE',
+		kind: 'BULLETIN',
+	},
+	'catch the mysterious pokemon in orenji forest': {
+		rewardItems: { 'rare-candy': 10 },
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.pokedex['mew'].caughtOnRoutes.length > 0;
+		},
+		targetPokemon: [],
+		requiredUpgrade: 'invite historian',
+		kind: 'BULLETIN',
 	},
 	'defeat rowan': {
 		rewardItems: {
