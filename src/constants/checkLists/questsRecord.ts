@@ -556,6 +556,7 @@ export const questNames = [
 	'reach challenge field rank 40',
 	'reach challenge field rank 62',
 	'reach challenge field rank 85',
+	'reach challenge field rank 108',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -739,7 +740,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'build combee hive',
 	},
 	'catch all pokemon that live under rocks': {
-		rewardItems: { 'black-augurite': 1, 'peat-block': 1, 'lumiose-galette': 5 },
+		rewardItems: {
+			'black-augurite': 1,
+			'peat-block': 1,
+			'lumiose-galette': 5,
+			'fossilized-bird': 2,
+		},
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return sledgeHammerPokemon.every(
@@ -1753,8 +1759,8 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 10,
 		conditionFunction: (s) => {
-			return Object.values(fossilTable).some(
-				(fossil) => s.pokedex[fossil].caughtOnRoutes.length > 0
+			return Object.keys(fossilTable).some(
+				(fossil) => s.pokedex[fossil as PokemonName].caughtOnRoutes.length > 0
 			);
 		},
 		requiredUpgrade: 'invite fossil expert',
@@ -1765,10 +1771,10 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'rare-candy': 5,
 			'ultra-ball': 20,
 		},
-		researchPoints: 50,
+		researchPoints: 100,
 		conditionFunction: (s) => {
-			return Object.values(fossilTable).every(
-				(fossil) => s.pokedex[fossil].caughtOnRoutes.length > 0
+			return Object.keys(fossilTable).every(
+				(fossil) => s.pokedex[fossil as PokemonName].caughtOnRoutes.length > 0
 			);
 		},
 		requiredUpgrade: 'invite fossil expert',
@@ -1988,7 +1994,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'shovel certification',
 		researchPoints: 10,
-		rewardItems: { 'babiri-berry': 2, 'kee-berry': 2 },
+		rewardItems: { 'babiri-berry': 2, 'kee-berry': 2, 'fossilized-dino': 2 },
 		targetRoute: 'onixCave',
 		targetPokemon: onixCaveEncounters.BASE.map((p) => p.name),
 		conditionFunction: (s) =>
@@ -2006,6 +2012,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'yellow-apricorn': 10,
 			'black-apricorn': 10,
 			'moon-stone': 2,
+			'fossilized-drake': 2,
 		},
 		targetPokemon: onixCaveEncounters.BASE.map((p) => p.name),
 		conditionFunction: (s) =>
@@ -2023,6 +2030,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'white-herb': 2,
 			'mental-herb': 2,
 			'big-malasada': 2,
+			'fossilized-fish': 2,
 		},
 		targetPokemon: caveW1Encounters.BASE.map((p) => p.name),
 		conditionFunction: (s) =>
