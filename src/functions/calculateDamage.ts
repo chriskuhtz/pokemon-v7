@@ -741,6 +741,8 @@ export const calculateDamage = (
 		attacker.ability === 'pixilate' && attackType === 'normal' ? 1.3 : 1;
 	const aerilateFactor =
 		attacker.ability === 'aerilate' && attackType === 'normal' ? 1.3 : 1;
+	const galvanizeFactor =
+		attacker.ability === 'galvanize' && attackType === 'normal' ? 1.2 : 1;
 	const megaLauncherFactor =
 		attacker.ability === 'mega-launcher' &&
 		auraAndPulseMoves.includes(attack.name)
@@ -874,7 +876,8 @@ export const calculateDamage = (
 				steelWorkerFactor *
 				wakeUpSlapFactor *
 				brineFactor *
-				pluckFactor
+				pluckFactor *
+				galvanizeFactor
 		),
 		1
 	);

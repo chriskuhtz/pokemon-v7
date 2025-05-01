@@ -49,6 +49,9 @@ export const determineTypeFactor = (
 	if (attackType === 'normal' && attacker.ability === 'aerilate') {
 		attackType = 'flying';
 	}
+	if (attackType === 'normal' && attacker.ability === 'galvanize') {
+		attackType = 'flying';
+	}
 	if (
 		soundBasedMoves.includes(attack.name) &&
 		attacker.ability === 'liquid-voice'
