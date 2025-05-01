@@ -789,6 +789,8 @@ export const calculateDamage = (
 		target.primaryAilment?.type === 'sleep' && attack.name === 'wake-up-slap'
 			? 2
 			: 1;
+	const brineFactor =
+		attack.name === 'brine' && target.damage / target.stats.hp > 0.5 ? 2 : 1;
 
 	const res = Math.max(
 		Math.floor(
@@ -868,7 +870,8 @@ export const calculateDamage = (
 				waterBubbleAttackerFactor *
 				waterBubbleTargetFactor *
 				steelWorkerFactor *
-				wakeUpSlapFactor
+				wakeUpSlapFactor *
+				brineFactor
 		),
 		1
 	);
