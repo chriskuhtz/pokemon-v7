@@ -14,7 +14,7 @@ export const FossilReviver = (): JSX.Element => {
 	const navigate = useNavigate();
 	const { revive } = useFossils();
 	const {
-		saveFile: { pokedex, bag },
+		saveFile: { pokedex, bag, researchPoints },
 	} = useContext(SaveFileContext);
 	return (
 		<Page
@@ -23,9 +23,8 @@ export const FossilReviver = (): JSX.Element => {
 		>
 			<Stack mode="column">
 				{Object.values(fossilTable).map((requiredFossils) => {
-					const fossil = Object.entries(fossilTable).find(
-						([, requiredFossils]) =>
-							requiredFossils.every((rf) => requiredFossils.includes(rf))
+					const fossil = Object.entries(fossilTable).find(([, fossils]) =>
+						fossils.every((rf) => requiredFossils.includes(rf))
 					);
 
 					if (!fossil) {
@@ -48,7 +47,9 @@ export const FossilReviver = (): JSX.Element => {
 									}}
 								/>
 							}
-							disabled={!requiredFossils.every((f) => bag[f] > 0)}
+							disabled={
+								!requiredFossils.every((f) => bag[f] > 0) || researchPoints < 5
+							}
 							onClick={() => {
 								revive(requiredFossils);
 							}}

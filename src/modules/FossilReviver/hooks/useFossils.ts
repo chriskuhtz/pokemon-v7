@@ -23,7 +23,7 @@ export const useFossils = () => {
 			}
 			const pokemon = fossil[0] as PokemonName;
 			addMessage({
-				message: `Revived the ${fossil} for 5 research points`,
+				message: `Revived a ${pokemon} for 5 research points`,
 			});
 			putSaveFileReducer({
 				...saveFile,

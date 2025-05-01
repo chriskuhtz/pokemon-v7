@@ -11,6 +11,10 @@ const customSprites: Partial<Record<ItemType, string>> = {
 	'peat-block': '/customItems/peat-block.png',
 	'pewter-crunchies': '/customItems/pewter-crunchies.png',
 	'moomoo-cheese': '/customItems/moomoo-cheese.png',
+	'fossilized-bird': '/customItems/fossilized-bird.png',
+	'fossilized-drake': '/customItems/fossilized-drake.png',
+	'fossilized-dino': '/customItems/fossilized-dino.png',
+	'fossilized-fish': '/customItems/fossilized-fish.png',
 };
 export const getItemUrl = (item: ItemType): string => {
 	if (customSprites[item]) {
