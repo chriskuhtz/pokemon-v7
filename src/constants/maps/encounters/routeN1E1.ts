@@ -8,7 +8,7 @@ export const routeN1E1Encounters: EncounterMap = {
 		{ name: 'nidoran-f', minXp: 1000, maxXp: 3375, rarity: 'medium' },
 		{ name: 'nidoran-m', minXp: 1000, maxXp: 3375, rarity: 'medium' },
 		{
-			name: 'pikachu-phd',
+			name: 'pikachu-hoenn-cap',
 			minXp: 1000,
 			maxXp: 1000,
 			rarity: 'ultra-rare',

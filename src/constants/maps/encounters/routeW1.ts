@@ -4,7 +4,7 @@ export const routeW1Encounters: EncounterMap = {
 	WATER: [{ name: 'gyarados', minXp: 64000, maxXp: 125000, rarity: 'rare' }],
 	BASE: [
 		{
-			name: 'pikachu-partner-cap',
+			name: 'pikachu-alola-cap',
 			minXp: 1000,
 			maxXp: 1000,
 			rarity: 'ultra-rare',

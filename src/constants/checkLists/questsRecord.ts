@@ -419,6 +419,7 @@ export const questNames = [
 	'catch a pikachu',
 	'find a lightball',
 	'catch all mouselike electric pokemon',
+	'catch all pikachus with hats',
 	'catch all costumed pikachus',
 	'catch a feebas',
 	'catch a pokemon',
@@ -634,6 +635,40 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		kind: 'QUEST_LINE',
 	},
+	'catch all pikachus with hats': {
+		rewardItems: {
+			'electric-gem': 5,
+			'thunder-stone': 1,
+			magnet: 1,
+			'watmel-berry': 5,
+			'roseli-berry': 5,
+		},
+		targetPokemon: [
+			'pikachu-original-cap',
+			'pikachu-hoenn-cap',
+			'pikachu-sinnoh-cap',
+			'pikachu-unova-cap',
+			'pikachu-kalos-cap',
+			'pikachu-alola-cap',
+			'pikachu-world-cap',
+			'pikachu-partner-cap',
+		],
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			const pikas: PokemonName[] = [
+				'pikachu-original-cap',
+				'pikachu-hoenn-cap',
+				'pikachu-sinnoh-cap',
+				'pikachu-unova-cap',
+				'pikachu-kalos-cap',
+				'pikachu-alola-cap',
+				'pikachu-world-cap',
+				'pikachu-partner-cap',
+			];
+			return pikas.every((pika) => s.pokedex[pika].caughtOnRoutes.length > 0);
+		},
+		kind: 'QUEST_LINE',
+	},
 	'catch all costumed pikachus': {
 		rewardItems: {},
 		rewardPokemon: {
@@ -667,14 +702,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'pikachu-phd',
 			'pikachu-libre',
 			'pikachu-cosplay',
-			'pikachu-original-cap',
-			'pikachu-hoenn-cap',
-			'pikachu-sinnoh-cap',
-			'pikachu-unova-cap',
-			'pikachu-kalos-cap',
-			'pikachu-alola-cap',
-			'pikachu-partner-cap',
-			'pikachu-world-cap',
 		],
 		researchPoints: 200,
 		conditionFunction: (s) => {
@@ -685,14 +712,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				'pikachu-phd',
 				'pikachu-libre',
 				'pikachu-cosplay',
-				'pikachu-original-cap',
-				'pikachu-hoenn-cap',
-				'pikachu-sinnoh-cap',
-				'pikachu-unova-cap',
-				'pikachu-kalos-cap',
-				'pikachu-alola-cap',
-				'pikachu-partner-cap',
-				'pikachu-world-cap',
 			];
 			return pikas.every((pika) => s.pokedex[pika].caughtOnRoutes.length > 0);
 		},

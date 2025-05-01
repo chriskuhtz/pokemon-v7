@@ -87,8 +87,8 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 													return <PokemonSprite key={p + name} name={p} />;
 												}
 												if (
-													!quest.targetRoute &&
-													saveFile.pokedex[p].caughtOnRoutes.length > 0
+													saveFile.pokedex[p].caughtOnRoutes.length > 0 &&
+													!quest.targetRoute
 												) {
 													return <PokemonSprite key={p + name} name={p} />;
 												}
