@@ -367,7 +367,6 @@ export const extraFeatureCheckList: {
 	{ name: 'rocket outbreaks' },
 	{ name: 'wild apricorn trees' },
 	{ name: 'berry bushes' },
-	{ name: 'training field 6' },
 	{ name: 'random location items that respawn' },
 	{ name: 'battle backgrounds' },
 	{ name: 'prettier weather display' },
@@ -395,4 +394,5 @@ export const extraFeatureCheckList: {
 	{ name: 'iv quests guy' },
 	{ name: 'ev quests guy' },
 	{ name: 'fill bag with balls button' },
+	{ name: 'more kanto ken style trainers (dont forget quest limits)' },
 ];

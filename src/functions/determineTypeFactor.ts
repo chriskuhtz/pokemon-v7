@@ -1,4 +1,5 @@
 import { ballAndBombMoves, powderMoves } from '../constants/punchBasedMoves';
+import { soundBasedMoves } from '../constants/soundBasedMoves';
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -47,6 +48,12 @@ export const determineTypeFactor = (
 	}
 	if (attackType === 'normal' && attacker.ability === 'aerilate') {
 		attackType = 'flying';
+	}
+	if (
+		soundBasedMoves.includes(attack.name) &&
+		attacker.ability === 'liquid-voice'
+	) {
+		attackType = 'water';
 	}
 	if (attack.name === 'hidden-power') {
 		attackType = getHiddenPowerType(attacker.intrinsicValues);
