@@ -19,6 +19,7 @@ import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import {
 	gemTable,
+	isBerry,
 	ItemType,
 	superEffectiveSaveTable,
 } from '../interfaces/Item';
@@ -791,7 +792,8 @@ export const calculateDamage = (
 			: 1;
 	const brineFactor =
 		attack.name === 'brine' && target.damage / target.stats.hp > 0.5 ? 2 : 1;
-
+	const pluckFactor =
+		attack.name === 'pluck' && isBerry(target.heldItemName) ? 2 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -871,7 +873,8 @@ export const calculateDamage = (
 				waterBubbleTargetFactor *
 				steelWorkerFactor *
 				wakeUpSlapFactor *
-				brineFactor
+				brineFactor *
+				pluckFactor
 		),
 		1
 	);

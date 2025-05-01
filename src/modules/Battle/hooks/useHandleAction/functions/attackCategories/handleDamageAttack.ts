@@ -12,7 +12,7 @@ import { Message } from '../../../../../../hooks/useMessageQueue';
 import { isRemovedByRapidSpin } from '../../../../../../interfaces/Ailment';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
-import { gemTable } from '../../../../../../interfaces/Item';
+import { gemTable, isBerry } from '../../../../../../interfaces/Item';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
 import { BattleTerrain } from '../../../useBattleWeather';
@@ -137,7 +137,9 @@ export const handleDamageAttack = ({
 		updatedTarget = { ...updatedTarget, heldItemName: undefined };
 	}
 	if (
-		(move.name === 'thief' || move.name === 'covet') &&
+		(move.name === 'thief' ||
+			move.name === 'covet' ||
+			(move.name === 'pluck' && isBerry(updatedTarget.heldItemName))) &&
 		updatedTarget.ability !== 'sticky-hold' &&
 		updatedTarget.heldItemName &&
 		!updatedAttacker.heldItemName

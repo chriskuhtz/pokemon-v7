@@ -1473,9 +1473,7 @@ export const movesCheckList: {
 		handled: true,
 	},
 	{ name: 'brine', url: 'https://pokeapi.co/api/v2/move/362/', handled: true },
-	{ name: 'natural-gift', url: 'https://pokeapi.co/api/v2/move/363/' },
-	{ name: 'feint', url: 'https://pokeapi.co/api/v2/move/364/' },
-	{ name: 'pluck', url: 'https://pokeapi.co/api/v2/move/365/' },
+	{ name: 'pluck', url: 'https://pokeapi.co/api/v2/move/365/', handled: true },
 	{ name: 'tailwind', url: 'https://pokeapi.co/api/v2/move/366/' },
 	{ name: 'acupressure', url: 'https://pokeapi.co/api/v2/move/367/' },
 	{ name: 'metal-burst', url: 'https://pokeapi.co/api/v2/move/368/' },
@@ -2086,6 +2084,8 @@ export const movesCheckList: {
 	{ name: 'magic-coat', url: 'https://pokeapi.co/api/v2/move/277/' },
 	{ name: 'yawn', url: 'https://pokeapi.co/api/v2/move/281/' },
 	{ name: 'healing-wish', url: 'https://pokeapi.co/api/v2/move/361/' },
+	{ name: 'natural-gift', url: 'https://pokeapi.co/api/v2/move/363/' },
+	{ name: 'feint', url: 'https://pokeapi.co/api/v2/move/364/' },
 	/**
 	 * INCOMPLETE DATA:
 	 */
@@ -2549,6 +2549,7 @@ export const handledMoves = [
 	'wake-up-slap',
 	'gyro-ball',
 	'brine',
+	'pluck',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
