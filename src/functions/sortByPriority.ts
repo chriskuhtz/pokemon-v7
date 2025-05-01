@@ -85,6 +85,7 @@ export const sortByPriority = (
 	) {
 		return -1;
 	}
+
 	if (
 		aMove?.type === 'CatchProcessInfo' ||
 		aMove?.type === 'InBattleItem' ||
@@ -113,6 +114,13 @@ export const sortByPriority = (
 		aMove.data.damage_class.name === 'status'
 	) {
 		aPriority += 1;
+	}
+	if (
+		a.ability === 'triage' &&
+		aMove?.type === 'BattleAttack' &&
+		aMove.data.meta.category.name === 'heal'
+	) {
+		aPriority += 3;
 	}
 	if (
 		a.ability === 'gale-wings' &&
