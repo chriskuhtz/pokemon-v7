@@ -399,4 +399,5 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'historian event: lugia' },
 	{ name: 'historian event: ho oh' },
+	{ name: 'drake 5 should have full dragons' },
 ];

@@ -162,6 +162,19 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 			return p;
 		});
 	}
+	if (user.ability === 'download') {
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.status !== 'ONFIELD') {
+				return p;
+			}
+			if (p.id === user.id) {
+				addMessage({ message: `${p.name} is comatose and wont wake up` });
+				return { ...p, primaryAilment: { type: 'sleep', duration: 9000 } };
+			}
+
+			return p;
+		});
+	}
 	if (user.ability === 'flower-gift' && currentWeather === 'sun') {
 		addMessage({
 			message: `${user.name} boosts itself and its allies with flower-gift`,
