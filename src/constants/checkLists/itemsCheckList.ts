@@ -1827,6 +1827,13 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/1677/',
 		handled: true,
 	},
+	{
+		name: 'heavy-duty-boots',
+		url: 'https://pokeapi.co/api/v2/item/1178/',
+		handled: true,
+	},
+	{ name: 'blunder-policy', url: 'https://pokeapi.co/api/v2/item/1179/' },
+	{ name: 'throat-spray', url: 'https://pokeapi.co/api/v2/item/1176/' },
 	{ name: 'terrain-extender', url: 'https://pokeapi.co/api/v2/item/896/' },
 	{ name: 'electric-seed', url: 'https://pokeapi.co/api/v2/item/898/' },
 	{ name: 'psychic-seed', url: 'https://pokeapi.co/api/v2/item/899/' },
@@ -1835,10 +1842,6 @@ export const itemsCheckList: {
 	{ name: 'lure', url: 'https://pokeapi.co/api/v2/item/1036/' },
 	{ name: 'super-lure', url: 'https://pokeapi.co/api/v2/item/1037/' },
 	{ name: 'max-lure', url: 'https://pokeapi.co/api/v2/item/1038/' },
-	{ name: 'throat-spray', url: 'https://pokeapi.co/api/v2/item/1176/' },
-	{ name: 'eject-pack', url: 'https://pokeapi.co/api/v2/item/1177/' },
-	{ name: 'heavy-duty-boots', url: 'https://pokeapi.co/api/v2/item/1178/' },
-	{ name: 'blunder-policy', url: 'https://pokeapi.co/api/v2/item/1179/' },
 
 	{ name: 'sausages', url: 'https://pokeapi.co/api/v2/item/1144/' },
 	{ name: 'bobs-food-tin', url: 'https://pokeapi.co/api/v2/item/1145/' },
@@ -2859,6 +2862,7 @@ export const itemsCheckList: {
 	 *
 	 *
 	 */
+	{ name: 'eject-pack', url: 'https://pokeapi.co/api/v2/item/1177/' },
 	{ name: 'red-nectar', url: 'https://pokeapi.co/api/v2/item/889/' },
 	{ name: 'yellow-nectar', url: 'https://pokeapi.co/api/v2/item/890/' },
 	{ name: 'pink-nectar', url: 'https://pokeapi.co/api/v2/item/891/' },

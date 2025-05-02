@@ -178,7 +178,8 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 				if (
 					(getTypeNames(p).includes('flying') ||
 						p.ability === 'levitate' ||
-						getHeldItem(p) === 'air-balloon') &&
+						getHeldItem(p) === 'air-balloon' ||
+						getHeldItem(p) === 'heavy-duty-boots') &&
 					getHeldItem(p) !== 'iron-ball'
 				) {
 					return p;
