@@ -13,6 +13,7 @@ import { Message } from '../../../../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import { typeEffectivenessChart } from '../../../../../../interfaces/PokemonType';
+import { getRandomBoostableStat } from '../../../../../../interfaces/StatObject';
 import { BattleFieldEffect } from '../../../../BattleField';
 
 export const handleUniqueMoves = ({
@@ -480,6 +481,29 @@ export const handleUniqueMoves = ({
 
 			return p;
 		});
+	}
+	if (move.name === 'acupressure') {
+		const boostStat = getRandomBoostableStat();
+		const debuffStat = getRandomBoostableStat([boostStat]);
+
+		updatedAttacker = applyStatChangeToPokemon(
+			updatedAttacker,
+			boostStat,
+			2,
+			true,
+			[],
+			addMessage,
+			'acupressure'
+		);
+		updatedAttacker = applyStatChangeToPokemon(
+			updatedAttacker,
+			debuffStat,
+			-1,
+			true,
+			[],
+			addMessage,
+			'acupressure'
+		);
 	}
 
 	return updatedPokemon.map((p) => {

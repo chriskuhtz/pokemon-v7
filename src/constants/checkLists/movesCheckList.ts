@@ -1479,7 +1479,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/366/',
 		handled: true,
 	},
-	{ name: 'acupressure', url: 'https://pokeapi.co/api/v2/move/367/' },
+	{
+		name: 'acupressure',
+		url: 'https://pokeapi.co/api/v2/move/367/',
+		handled: true,
+	},
 	{ name: 'metal-burst', url: 'https://pokeapi.co/api/v2/move/368/' },
 	{ name: 'u-turn', url: 'https://pokeapi.co/api/v2/move/369/' },
 	{ name: 'close-combat', url: 'https://pokeapi.co/api/v2/move/370/' },
@@ -2555,6 +2559,7 @@ export const handledMoves = [
 	'brine',
 	'pluck',
 	'tailwind',
+	'acupressure',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
