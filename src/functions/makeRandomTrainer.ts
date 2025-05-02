@@ -2372,6 +2372,21 @@ const specialTrainers: Challenger[] = [
 		availableAfter: 'catch all evolutions of eevee',
 		trainer: { name: 'Professor Elm', sprite: SpriteEnum.elm },
 	},
+	{
+		type: 'TRAINER',
+		id: 'Gym Leader Roark',
+		team: [
+			makeChallengerPokemon({ name: 'rampardos', xp: 125000 }),
+			makeChallengerPokemon({ name: 'aerodactyl', xp: 125000 }),
+			makeChallengerPokemon({ name: 'bastiodon', xp: 125000 }),
+			makeChallengerPokemon({ name: 'omastar', xp: 125000 }),
+			makeChallengerPokemon({ name: 'kabutops', xp: 125000 }),
+			makeChallengerPokemon({ name: 'cradily', xp: 125000 }),
+		],
+		inventory: EmptyInventory,
+		availableAfter: 'revive all different fossils',
+		trainer: { name: 'Gym Leader Roark', sprite: SpriteEnum.roark },
+	},
 ];
 
 export const trainers = [
