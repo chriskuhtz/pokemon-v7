@@ -808,6 +808,8 @@ export const calculateDamage = (
 		attack.name === 'pluck' && isBerry(target.heldItemName) ? 2 : 1;
 	const paybackFactor =
 		attack.name === 'payback' && target.moveQueue.length === 0 ? 2 : 1;
+	const assuranceFactor =
+		attack.name === 'assurance' && target.lastReceivedDamage ? 2 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -890,7 +892,8 @@ export const calculateDamage = (
 				brineFactor *
 				pluckFactor *
 				galvanizeFactor *
-				paybackFactor
+				paybackFactor *
+				assuranceFactor
 		),
 		1
 	);
