@@ -1,13 +1,17 @@
 import { useContext, useMemo, useState } from 'react';
 import { GiBreakingChain } from 'react-icons/gi';
+import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { battleSpriteSize } from '../../constants/gameData';
+import { mapIds } from '../../constants/maps/mapsRecord';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getHeldItem } from '../../functions/getHeldItem';
 import { getItemUrl } from '../../functions/getItemUrl';
+import { replaceRouteName } from '../../functions/replaceRouteName';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Inventory, joinInventories } from '../../interfaces/Inventory';
+import { balltypes } from '../../interfaces/Item';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { Chip } from '../../uiComponents/Chip/Chip';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
@@ -15,11 +19,11 @@ import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
 export const sortByTypes = [
-	'HAPPINESS',
-	'XP',
 	'NAME',
-	'BALL',
 	'CATCHDATE',
+	'XP',
+	'HAPPINESS',
+	'BALL',
 	'LOCATION',
 ] as const;
 export type PokemonFilter = (typeof sortByTypes)[number];
@@ -182,46 +186,228 @@ export const PokemonStorage = ({
 				</button>
 			</Stack>
 
-			<Stack mode="row">
-				{stored.sort(sortFunction).map((pokemon) => {
+			<Sorted
+				pokemonFilter={sortBy}
+				stored={stored}
+				sortFunction={sortFunction}
+				teamIsFull={team.length === 6}
+				togglePokemonOnTeam={togglePokemonOnTeam}
+				startReleaseProcess={startReleaseProcess}
+			/>
+		</Page>
+	);
+};
+
+const Sorted = ({
+	pokemonFilter,
+	stored,
+	sortFunction,
+	teamIsFull,
+	togglePokemonOnTeam,
+	startReleaseProcess,
+}: {
+	pokemonFilter: PokemonFilter;
+	stored: OwnedPokemon[];
+	sortFunction: ((a: OwnedPokemon, b: OwnedPokemon) => number) | undefined;
+	teamIsFull: boolean;
+	togglePokemonOnTeam: (id: string) => void;
+	startReleaseProcess: (id: string) => void;
+}) => {
+	if (pokemonFilter === 'BALL') {
+		return (
+			<Stack mode={'column'}>
+				{[...balltypes].map((ball) => {
+					const filtered = stored.filter((s) => s.ball === ball);
+
+					if (filtered.length === 0) {
+						return <></>;
+					}
 					return (
-						<div style={{ display: 'flex' }} key={pokemon.id}>
-							<IconSolarSystem
-								sun={{
-									url: getPokemonSprite(pokemon.name, { shiny: pokemon.shiny }),
-								}}
-								firstPlanet={
-									<Chip>
-										<strong>
-											Lvl{' '}
-											{calculateLevelData(pokemon.xp, pokemon.growthRate).level}
-										</strong>
-									</Chip>
-								}
-								secondPlanetUrl={getItemUrl(pokemon.ball)}
-								thirdPlanetUrl={
-									pokemon.heldItemName
-										? getItemUrl(pokemon.heldItemName)
-										: undefined
-								}
-								onClick={() => {
-									if (team.length === 6) {
-										addMessage({
-											message: 'You can only take 6 Pokemon on the team!',
-										});
-										return;
-									}
-									togglePokemonOnTeam(pokemon.id);
-								}}
-							/>
-							<GiBreakingChain
-								size={battleSpriteSize / 1.5}
-								onClick={() => startReleaseProcess(pokemon.id)}
-							/>
-						</div>
+						<>
+							<h3 style={{ display: 'flex', alignItems: 'center' }}>
+								<ItemSprite item={ball} />
+								{ball}
+							</h3>
+							<Stack mode="row">
+								{filtered.sort(sortFunction).map((pokemon) => (
+									<Entry
+										pokemon={pokemon}
+										teamIsFull={teamIsFull}
+										togglePokemonOnTeam={togglePokemonOnTeam}
+										startReleaseProcess={startReleaseProcess}
+									/>
+								))}
+							</Stack>
+						</>
 					);
 				})}
 			</Stack>
-		</Page>
+		);
+	}
+	if (pokemonFilter === 'LOCATION') {
+		return (
+			<Stack mode={'column'}>
+				{[...mapIds].map((mapId) => {
+					const filtered = stored.filter((s) => s.caughtOnMap === mapId);
+
+					if (filtered.length === 0) {
+						return <></>;
+					}
+					return (
+						<>
+							<h3 style={{ display: 'flex', alignItems: 'center' }}>
+								{replaceRouteName(mapId)}
+							</h3>
+							<Stack mode="row">
+								{filtered.sort(sortFunction).map((pokemon) => (
+									<Entry
+										pokemon={pokemon}
+										teamIsFull={teamIsFull}
+										togglePokemonOnTeam={togglePokemonOnTeam}
+										startReleaseProcess={startReleaseProcess}
+									/>
+								))}
+							</Stack>
+						</>
+					);
+				})}
+			</Stack>
+		);
+	}
+
+	const happinessSteps = [200, 160, 120, 80, 40, 0];
+	if (pokemonFilter === 'HAPPINESS') {
+		return (
+			<Stack mode={'column'}>
+				{happinessSteps.map((happiness, index) => {
+					const filtered = stored.filter((s) => {
+						if (index === 0) {
+							return s.happiness > happiness;
+						} else
+							return (
+								s.happiness > happiness &&
+								s.happiness <= happinessSteps[index - 1]
+							);
+					});
+
+					if (filtered.length === 0) {
+						return <></>;
+					}
+					return (
+						<>
+							<h3 style={{ display: 'flex', alignItems: 'center' }}>
+								Happiness {happiness}+
+							</h3>
+							<Stack mode="row">
+								{filtered.sort(sortFunction).map((pokemon) => (
+									<Entry
+										pokemon={pokemon}
+										teamIsFull={teamIsFull}
+										togglePokemonOnTeam={togglePokemonOnTeam}
+										startReleaseProcess={startReleaseProcess}
+									/>
+								))}
+							</Stack>
+						</>
+					);
+				})}
+			</Stack>
+		);
+	}
+	const levelSteps = [90, 80, 70, 60, 50, 40, 30, 20, 10, 0];
+	if (pokemonFilter === 'XP') {
+		return (
+			<Stack mode={'column'}>
+				{levelSteps.map((level, index) => {
+					const filtered = stored.filter((s) => {
+						const l = calculateLevelData(s.xp, s.growthRate).level;
+						if (index === 0) {
+							return l > level;
+						} else return l > level && l <= levelSteps[index - 1];
+					});
+
+					if (filtered.length === 0) {
+						return <></>;
+					}
+					return (
+						<>
+							<h3 style={{ display: 'flex', alignItems: 'center' }}>
+								Level {level}+
+							</h3>
+							<Stack mode="row">
+								{filtered.sort(sortFunction).map((pokemon) => (
+									<Entry
+										pokemon={pokemon}
+										teamIsFull={teamIsFull}
+										togglePokemonOnTeam={togglePokemonOnTeam}
+										startReleaseProcess={startReleaseProcess}
+									/>
+								))}
+							</Stack>
+						</>
+					);
+				})}
+			</Stack>
+		);
+	}
+	return (
+		<Stack mode="row">
+			{stored.sort(sortFunction).map((pokemon) => (
+				<Entry
+					pokemon={pokemon}
+					teamIsFull={teamIsFull}
+					togglePokemonOnTeam={togglePokemonOnTeam}
+					startReleaseProcess={startReleaseProcess}
+				/>
+			))}
+		</Stack>
+	);
+};
+
+const Entry = ({
+	pokemon,
+	teamIsFull,
+	togglePokemonOnTeam,
+	startReleaseProcess,
+}: {
+	pokemon: OwnedPokemon;
+	teamIsFull: boolean;
+	togglePokemonOnTeam: (id: string) => void;
+	startReleaseProcess: (id: string) => void;
+}) => {
+	const { addMessage } = useContext(MessageQueueContext);
+
+	return (
+		<div style={{ display: 'flex' }} key={pokemon.id}>
+			<IconSolarSystem
+				sun={{
+					url: getPokemonSprite(pokemon.name, { shiny: pokemon.shiny }),
+				}}
+				firstPlanet={
+					<Chip>
+						<strong>
+							Lvl {calculateLevelData(pokemon.xp, pokemon.growthRate).level}
+						</strong>
+					</Chip>
+				}
+				secondPlanetUrl={getItemUrl(pokemon.ball)}
+				thirdPlanetUrl={
+					pokemon.heldItemName ? getItemUrl(pokemon.heldItemName) : undefined
+				}
+				onClick={() => {
+					if (teamIsFull) {
+						addMessage({
+							message: 'You can only take 6 Pokemon on the team!',
+						});
+						return;
+					}
+					togglePokemonOnTeam(pokemon.id);
+				}}
+			/>
+			<GiBreakingChain
+				size={battleSpriteSize / 1.5}
+				onClick={() => startReleaseProcess(pokemon.id)}
+			/>
+		</div>
 	);
 };
