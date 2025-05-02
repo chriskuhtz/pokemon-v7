@@ -1823,7 +1823,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/1178/',
 		handled: true,
 	},
-	{ name: 'blunder-policy', url: 'https://pokeapi.co/api/v2/item/1179/' },
+	{
+		name: 'blunder-policy',
+		url: 'https://pokeapi.co/api/v2/item/1179/',
+		handled: true,
+	},
 	{ name: 'throat-spray', url: 'https://pokeapi.co/api/v2/item/1176/' },
 	{ name: 'terrain-extender', url: 'https://pokeapi.co/api/v2/item/896/' },
 	{ name: 'electric-seed', url: 'https://pokeapi.co/api/v2/item/898/' },

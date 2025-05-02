@@ -260,6 +260,7 @@ export const heldItems = [
 	'adrenaline-orb',
 	'protective-pads',
 	'heavy-duty-boots',
+	'blunder-policy',
 ] as const;
 export const valuables = [
 	'shoal-salt',

@@ -1,5 +1,7 @@
 import { applyCrashDamage } from '../../../functions/applyCrashDamage';
+import { applyStatChangeToPokemon } from '../../../functions/applyStatChangeToPokemon';
 import { MissReason } from '../../../functions/determineMiss';
+import { getHeldItem } from '../../../functions/getHeldItem';
 import { Message } from '../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
@@ -35,7 +37,21 @@ export const handleMiss = (
 	setPokemon(
 		pokemon.map((p) => {
 			if (p.id === updatedAttacker.id) {
-				return applyCrashDamage(updatedAttacker, attack.name, addMessage);
+				let u = { ...updatedAttacker };
+				if (getHeldItem(u) === 'blunder-policy') {
+					u = applyStatChangeToPokemon(
+						u,
+						'speed',
+						2,
+						true,
+						[],
+						addMessage,
+						'blunder-policy'
+					);
+					u.heldItemName = undefined;
+				}
+
+				return applyCrashDamage(u, attack.name, addMessage);
 			}
 			return p;
 		})
