@@ -31,6 +31,7 @@ export const ChangeLog = ({
 					>
 						Got it, lets go
 					</button>
+					<ChangeLogV14 />
 					<ChangeLogV13 />
 					<ChangeLogV12 />
 					<ChangeLogV11 />
