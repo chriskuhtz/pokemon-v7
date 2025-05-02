@@ -56,6 +56,7 @@ export const ChangeLogV15 = (): JSX.Element => {
 			<ol style={{ lineHeight: '1.5rem' }}>
 				<li>Infinite Repel that can be toggled</li>
 				<li>Better Storage Sorting</li>
+				<li>New Training Field Trainer</li>
 				<li>New Abilities, Items and Attacks</li>
 			</ol>
 		</>

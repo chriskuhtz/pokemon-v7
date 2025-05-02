@@ -413,6 +413,14 @@ export const keyItems = [
 	'super-repel',
 ] as const;
 
+export const expCandies = [
+	'exp-candy-xs',
+	'exp-candy-s',
+	'exp-candy-m',
+	'exp-candy-l',
+	'exp-candy-xl',
+] as const;
+
 export const itemTypes = [
 	...apricorns,
 	...balltypes,
@@ -430,6 +438,7 @@ export const itemTypes = [
 	...fossils,
 	...herbs,
 	...keyItems,
+	...expCandies,
 	'sacred-ash',
 	'rare-candy',
 	'escape-rope',
@@ -711,6 +720,7 @@ export const undergroundTable: ItemType[] = [
 	...evoStones,
 	...evBoostItemTypes,
 	...heldItems,
+	...expCandies,
 ];
 export const superEffectiveSaveTable: Record<PokemonType, ItemType> = {
 	fire: 'occa-berry',
@@ -773,4 +783,12 @@ export const gemTable: Partial<Record<ItemType, PokemonType>> = {
 	'dragon-gem': 'dragon',
 	'normal-gem': 'normal',
 	'fairy-gem': 'fairy',
+};
+
+export const expCandyTable: Partial<Record<ItemType, number>> = {
+	'exp-candy-xs': 100,
+	'exp-candy-s': 800,
+	'exp-candy-m': 300,
+	'exp-candy-l': 10000,
+	'exp-candy-xl': 3000,
 };

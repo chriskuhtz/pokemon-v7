@@ -29,6 +29,13 @@ import { routeW1 } from '../maps/routeW1';
 import { PokemonName, pokemonNames } from '../pokemonNames';
 import { CampUpgrade, campUpgradeNames } from './campUpgrades';
 
+const expCandyPackage: Partial<Inventory> = {
+	'exp-candy-xs': 10,
+	'exp-candy-s': 10,
+	'exp-candy-m': 10,
+	'exp-candy-l': 5,
+	'exp-candy-xl': 2,
+};
 const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 	//routeN1
 	'catch a MORNING-time exclusive pokemon from routeN1': {
@@ -1492,6 +1499,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'ultra-ball': 10,
 			'full-restore': 5,
 			'spell-tag': 1,
+			...expCandyPackage,
 		},
 		rewardPokemon: {
 			caughtAtDate: new Date().getTime(),
@@ -1529,6 +1537,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: {
 			'full-restore': 5,
 			'black-belt': 1,
+			...expCandyPackage,
 		},
 		rewardPokemon: {
 			caughtAtDate: new Date().getTime(),
@@ -1567,6 +1576,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'full-restore': 5,
 			'rare-candy': 3,
 			'hard-stone': 1,
+			...expCandyPackage,
 		},
 		rewardPokemon: {
 			caughtAtDate: new Date().getTime(),
@@ -1605,6 +1615,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'ultra-ball': 10,
 			'full-restore': 5,
 			'sharp-beak': 1,
+			...expCandyPackage,
 		},
 		rewardPokemon: {
 			caughtAtDate: new Date().getTime(),
@@ -1637,6 +1648,82 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 1',
 		availableAfter: 'catch the legendary bird of ice',
+	},
+	'defeat rowan': {
+		rewardItems: {
+			'ultra-ball': 10,
+			'full-restore': 5,
+			...expCandyPackage,
+		},
+		rewardPokemon: {
+			caughtAtDate: new Date().getTime(),
+			growthRate: 'medium',
+			unlockedMoves: ['earthquake'],
+			fixedAbility: true,
+			shiny: true,
+			maxHp: 30,
+			effortValues: EmptyStatObject,
+			ppBoostedMoves: [],
+			caughtOnMap: 'camp',
+			gender: 'MALE',
+			stepsWalked: 0,
+			ownerId: '',
+			damage: 0,
+			id: '',
+			ball: 'poke-ball',
+			ability: 'huge-power',
+			name: 'gible',
+			xp: 125,
+			nature: 'adamant',
+			intrinsicValues: generateRandomStatObject(31),
+			happiness: 70,
+			firstMove: { name: 'earthquake', usedPP: 0 },
+		},
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'Professor Rowan');
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'catch all forms of tauros',
+	},
+	'defeat elm': {
+		rewardItems: {
+			'ultra-ball': 10,
+			'full-restore': 5,
+			...expCandyPackage,
+		},
+		rewardPokemon: {
+			fixedAbility: true,
+			shiny: true,
+			maxHp: 30,
+			effortValues: EmptyStatObject,
+			ppBoostedMoves: [],
+			caughtOnMap: 'camp',
+			gender: 'MALE',
+			stepsWalked: 0,
+			ownerId: '',
+			damage: 0,
+			id: '',
+			ball: 'poke-ball',
+			ability: 'speed-boost',
+			name: 'larvitar',
+			xp: 125,
+			nature: 'adamant',
+			intrinsicValues: generateRandomStatObject(31),
+			happiness: 70,
+			firstMove: { name: 'earthquake', usedPP: 0 },
+			unlockedMoves: [],
+			growthRate: 'medium',
+			caughtAtDate: new Date().getTime(),
+		},
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'Professor Elm');
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'catch all evolutions of eevee',
 	},
 	'catch some local flying pokemon': {
 		rewardItems: { 'yache-berry': 2 },
@@ -1725,80 +1812,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: [],
 		requiredUpgrade: 'invite historian',
 		kind: 'BULLETIN',
-	},
-	'defeat rowan': {
-		rewardItems: {
-			'ultra-ball': 10,
-			'full-restore': 5,
-		},
-		rewardPokemon: {
-			caughtAtDate: new Date().getTime(),
-			growthRate: 'medium',
-			unlockedMoves: ['earthquake'],
-			fixedAbility: true,
-			shiny: true,
-			maxHp: 30,
-			effortValues: EmptyStatObject,
-			ppBoostedMoves: [],
-			caughtOnMap: 'camp',
-			gender: 'MALE',
-			stepsWalked: 0,
-			ownerId: '',
-			damage: 0,
-			id: '',
-			ball: 'poke-ball',
-			ability: 'huge-power',
-			name: 'gible',
-			xp: 125,
-			nature: 'adamant',
-			intrinsicValues: generateRandomStatObject(31),
-			happiness: 70,
-			firstMove: { name: 'earthquake', usedPP: 0 },
-		},
-		researchPoints: 50,
-		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Professor Rowan');
-		},
-		kind: 'BULLETIN',
-		requiredUpgrade: 'training field 1',
-		availableAfter: 'catch all forms of tauros',
-	},
-	'defeat elm': {
-		rewardItems: {
-			'ultra-ball': 10,
-			'full-restore': 5,
-		},
-		rewardPokemon: {
-			fixedAbility: true,
-			shiny: true,
-			maxHp: 30,
-			effortValues: EmptyStatObject,
-			ppBoostedMoves: [],
-			caughtOnMap: 'camp',
-			gender: 'MALE',
-			stepsWalked: 0,
-			ownerId: '',
-			damage: 0,
-			id: '',
-			ball: 'poke-ball',
-			ability: 'speed-boost',
-			name: 'larvitar',
-			xp: 125,
-			nature: 'adamant',
-			intrinsicValues: generateRandomStatObject(31),
-			happiness: 70,
-			firstMove: { name: 'earthquake', usedPP: 0 },
-			unlockedMoves: [],
-			growthRate: 'medium',
-			caughtAtDate: new Date().getTime(),
-		},
-		researchPoints: 50,
-		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Professor Elm');
-		},
-		kind: 'BULLETIN',
-		requiredUpgrade: 'training field 1',
-		availableAfter: 'catch all evolutions of eevee',
 	},
 	'revive a fossil': {
 		kind: 'BULLETIN',
@@ -2344,7 +2357,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'defeat erika': {
 		kind: 'BULLETIN',
 		researchPoints: 25,
-		rewardItems: { 'rindo-berry': 5, 'miracle-seed': 1, 'big-root': 1 },
+		rewardItems: {
+			'rindo-berry': 5,
+			'miracle-seed': 1,
+			'big-root': 1,
+			...expCandyPackage,
+		},
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'Gym Leader Erika');
 		},
@@ -2352,7 +2370,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'defeat janine': {
 		kind: 'BULLETIN',
 		researchPoints: 25,
-		rewardItems: { 'kebia-berry': 5, 'black-sludge': 1 },
+		rewardItems: { 'kebia-berry': 5, 'black-sludge': 1, ...expCandyPackage },
 		requiredUpgrade: 'machete certification',
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'Gym Leader Janine');
@@ -2361,7 +2379,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'defeat blaine': {
 		kind: 'BULLETIN',
 		researchPoints: 25,
-		rewardItems: { 'occa-berry': 5, charcoal: 1 },
+		rewardItems: { 'occa-berry': 5, charcoal: 1, ...expCandyPackage },
 		requiredUpgrade: 'sledge hammer certification',
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'Gym Leader Blaine');
@@ -2370,7 +2388,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'defeat surge': {
 		kind: 'BULLETIN',
 		researchPoints: 50,
-		rewardItems: { 'wacan-berry': 5, magnet: 1 },
+		rewardItems: { 'wacan-berry': 5, magnet: 1, ...expCandyPackage },
 		requiredUpgrade: 'shovel certification',
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'Gym Leader Surge');
@@ -2379,7 +2397,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'defeat misty': {
 		kind: 'BULLETIN',
 		researchPoints: 50,
-		rewardItems: { 'passho-berry': 5, 'mystic-water': 1, sprayduck: 1 },
+		rewardItems: {
+			'passho-berry': 5,
+			'mystic-water': 1,
+			sprayduck: 1,
+			...expCandyPackage,
+		},
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'Gym Leader Misty');
@@ -2388,7 +2411,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'defeat sabrina': {
 		kind: 'BULLETIN',
 		researchPoints: 50,
-		rewardItems: { 'payapa-berry': 5, 'twisted-spoon': 1 },
+		rewardItems: { 'payapa-berry': 5, 'twisted-spoon': 1, ...expCandyPackage },
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'Gym Leader Sabrina');
@@ -2397,7 +2420,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'defeat brock': {
 		kind: 'BULLETIN',
 		researchPoints: 50,
-		rewardItems: { 'charti-berry': 5, 'hard-stone': 1 },
+		rewardItems: { 'charti-berry': 5, 'hard-stone': 1, ...expCandyPackage },
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'Gym Leader Brock');
@@ -2406,7 +2429,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'defeat gary': {
 		kind: 'BULLETIN',
 		researchPoints: 100,
-		rewardItems: { electirizer: 1, magmarizer: 1, protector: 1 },
+		rewardItems: {
+			electirizer: 1,
+			magmarizer: 1,
+			protector: 1,
+			...expCandyPackage,
+		},
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'Gym Leader Gary');
