@@ -932,11 +932,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/207/',
 		handled: true,
 	},
-	{ name: 'schooling', url: 'https://pokeapi.co/api/v2/ability/208/' },
-	{ name: 'disguise', url: 'https://pokeapi.co/api/v2/ability/209/' },
-	{ name: 'battle-bond', url: 'https://pokeapi.co/api/v2/ability/210/' },
-	{ name: 'power-construct', url: 'https://pokeapi.co/api/v2/ability/211/' },
-	{ name: 'corrosion', url: 'https://pokeapi.co/api/v2/ability/212/' },
+	{
+		name: 'corrosion',
+		url: 'https://pokeapi.co/api/v2/ability/212/',
+		handled: true,
+	},
 	{ name: 'comatose', url: 'https://pokeapi.co/api/v2/ability/213/' },
 	{ name: 'queenly-majesty', url: 'https://pokeapi.co/api/v2/ability/214/' },
 	{ name: 'innards-out', url: 'https://pokeapi.co/api/v2/ability/215/' },
@@ -1092,9 +1092,9 @@ export const abilityCheckList: {
 	{ name: 'shackle', url: 'https://pokeapi.co/api/v2/ability/10058/' },
 	{ name: 'decoy', url: 'https://pokeapi.co/api/v2/ability/10059/' },
 	{ name: 'shield', url: 'https://pokeapi.co/api/v2/ability/10060/' },
+	//banished
 	{ name: 'wimp-out', url: 'https://pokeapi.co/api/v2/ability/193/' },
 	{ name: 'emergency-exit', url: 'https://pokeapi.co/api/v2/ability/194/' },
-	//banished
 	{ name: 'primordial-sea', url: 'https://pokeapi.co/api/v2/ability/189/' },
 	{ name: 'desolate-land', url: 'https://pokeapi.co/api/v2/ability/190/' },
 	{ name: 'delta-stream', url: 'https://pokeapi.co/api/v2/ability/191/' },
@@ -1115,6 +1115,10 @@ export const abilityCheckList: {
 	{ name: 'symbiosis', url: 'https://pokeapi.co/api/v2/ability/180/' },
 	{ name: 'shields-down', url: 'https://pokeapi.co/api/v2/ability/197/' },
 	{ name: 'stakeout', url: 'https://pokeapi.co/api/v2/ability/198/' },
+	{ name: 'schooling', url: 'https://pokeapi.co/api/v2/ability/208/' },
+	{ name: 'disguise', url: 'https://pokeapi.co/api/v2/ability/209/' },
+	{ name: 'battle-bond', url: 'https://pokeapi.co/api/v2/ability/210/' },
+	{ name: 'power-construct', url: 'https://pokeapi.co/api/v2/ability/211/' },
 ];
 
 export const abilityNames = [
@@ -1302,6 +1306,7 @@ export const abilityNames = [
 	'triage',
 	'galvanize',
 	'surge-surfer',
+	'corrosion',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
