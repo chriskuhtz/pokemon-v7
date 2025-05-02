@@ -9,6 +9,7 @@ import { Occupant } from '../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
+import { Stack } from '../../uiComponents/Stack/Stack';
 
 const vilePlumeProducts: Partial<
 	Record<ItemType, { item: ItemType; amount: number }>
@@ -33,8 +34,6 @@ export const useVileplumeScentResearcher = () => {
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
 	const { addMessage } = useContext(MessageQueueContext);
 
-	const enabled = saveFile.bag['pecha-berry'] > 0;
-
 	const trade = useCallback(
 		(product: ItemType) => {
 			const price = vilePlumeProducts[product];
@@ -56,11 +55,12 @@ export const useVileplumeScentResearcher = () => {
 		[addMessage, patchSaveFileReducer, saveFile.bag]
 	);
 
-	return { enabled, trade };
+	return { trade };
 };
 
 export const VilePlumeScentResearcher = (): JSX.Element => {
-	const { trade, enabled } = useVileplumeScentResearcher();
+	const { saveFile } = useContext(SaveFileContext);
+	const { trade } = useVileplumeScentResearcher();
 
 	const navigate = useNavigate();
 	return (
@@ -68,27 +68,24 @@ export const VilePlumeScentResearcher = (): JSX.Element => {
 			headline="Trade Berries for Repels"
 			goBack={() => navigate('CURATOR', 'OVERWORLD')}
 		>
-			{enabled ? (
-				Object.entries(vilePlumeProducts).map(([product, price]) => (
+			<Stack mode={'column'}>
+				{Object.entries(vilePlumeProducts).map(([product, price]) => (
 					<Card
+						disabled={saveFile.bag[price.item] < price.amount}
 						onClick={() => trade(product as ItemType)}
 						icon={<ItemSprite item={price.item} />}
 						content={
 							<div>
 								<h3>
-									Trade ${price.amount} ${price.item} for {product}
+									Trade {price.amount} {price.item} for {product}
 								</h3>
 								<strong>{productDescriptions[product as ItemType]}</strong>
 							</div>
 						}
 						actionElements={[<ItemSprite item={product as ItemType} />]}
 					/>
-				))
-			) : (
-				<h3>
-					If you bring me Berries, vileplume can produce more scent based items
-				</h3>
-			)}
+				))}
+			</Stack>
 		</Page>
 	);
 };
