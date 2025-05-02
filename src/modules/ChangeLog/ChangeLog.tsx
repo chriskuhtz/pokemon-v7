@@ -54,6 +54,7 @@ export const ChangeLogV14 = (): JSX.Element => {
 			<ol style={{ lineHeight: '1.5rem' }}>
 				<li>New fossils</li>
 				<li>New historian quest</li>
+				<li>New static pokemon</li>
 				<li>Various minor fixes</li>
 				<li>New Abilities, Items and Attacks</li>
 			</ol>
