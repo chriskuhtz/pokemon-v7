@@ -33,7 +33,8 @@ export const handleAbilitiesAfterAttack = (
 	battleWeather: WeatherType | undefined,
 	criticalHit: boolean | undefined,
 	damage: number,
-	battleFieldEffects: BattleFieldEffect[]
+	battleFieldEffects: BattleFieldEffect[],
+	originalTargetHp: number
 ): {
 	updatedAttacker: BattlePokemon;
 	updatedTarget: BattlePokemon;
@@ -41,6 +42,15 @@ export const handleAbilitiesAfterAttack = (
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
 
+	if (target.ability === 'innards-out' && isKO(target)) {
+		addMessage({
+			message: `${updatedAttacker.name} is damaged by innards-out`,
+		});
+		updatedAttacker = {
+			...updatedAttacker,
+			damage: updatedAttacker.damage + originalTargetHp,
+		};
+	}
 	//volt-absorb, water-absorb, dry-skin
 	const absorbAbility = DamageAbsorbAbilityMap[target.ability];
 	if (

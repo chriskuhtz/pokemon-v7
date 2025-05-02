@@ -2,6 +2,7 @@ import { MoveName } from '../constants/checkLists/movesCheckList';
 import { Message } from '../hooks/useMessageQueue';
 import { BattlePokemon, isBattlePokemon } from '../interfaces/BattlePokemon';
 import {
+	expCandyTable,
 	happinessBerries,
 	HappinessChangeTable,
 	HPHealTable,
@@ -101,6 +102,21 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		return {
 			...applyHappinessChange(pokemon, HappinessChangeTable[item] ?? 0),
 			xp: xpAtNextLevel,
+		};
+	}
+	if (expCandyTable[item]) {
+		const { level } = calculateLevelData(pokemon.xp, pokemon.growthRate);
+
+		if (level === 100) {
+			return pokemon;
+		}
+
+		if (addMessage) {
+			addMessage({ message: `gained ${expCandyTable[item]} xp` });
+		}
+		return {
+			...pokemon,
+			xp: pokemon.xp + expCandyTable[item],
 		};
 	}
 	if (isPPBoostItem(item) && move) {

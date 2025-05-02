@@ -195,7 +195,8 @@ export const handleSwaggerAttack = ({
 			battleWeather,
 			criticalHit,
 			damage,
-			battleFieldEffects
+			battleFieldEffects,
+			target.stats.hp
 		);
 	updatedAttacker = { ...afterAbilityCheck };
 	updatedTarget = { ...t };

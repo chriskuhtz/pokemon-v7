@@ -60,24 +60,24 @@ export const evBoostItemTypes = [
 	'carbos',
 ] as const;
 export const balltypes = [
-	'master-ball',
 	'poke-ball',
-	'ultra-ball',
 	'great-ball',
-	'safari-ball',
+	'ultra-ball',
+	'fast-ball',
 	'net-ball',
-	'dive-ball',
+	'heavy-ball',
 	'nest-ball',
-	'repeat-ball',
-	'timer-ball',
-	'luxury-ball',
-	'dusk-ball',
 	'heal-ball',
 	'quick-ball',
+	'dusk-ball',
+	'timer-ball',
+	'luxury-ball',
+	'master-ball',
 	'cherish-ball',
+	'repeat-ball',
 	'premier-ball',
-	'heavy-ball',
-	'fast-ball',
+	'dive-ball',
+	'safari-ball',
 ] as const;
 export const ppBoostItemTypes = ['pp-up', 'pp-max'] as const;
 export const xItemTypes = [
@@ -102,13 +102,6 @@ export const apricorns = [
 ] as const;
 
 export const herbs = ['white-herb', 'mental-herb', 'power-herb'] as const;
-export const encounterChanceItems = [
-	'white-flute',
-	'black-flute',
-	'repel',
-	'max-repel',
-	'super-repel',
-] as const;
 export const evoStones = [
 	'sun-stone',
 	'thunder-stone',
@@ -127,6 +120,8 @@ export const evoStones = [
 	'sweet-apple',
 	'auspicious-armor',
 	'malicious-armor',
+	'chipped-pot',
+	'cracked-pot',
 ] as const;
 export const heldItems = [
 	'quick-claw',
@@ -267,8 +262,13 @@ export const heldItems = [
 	'adrenaline-orb',
 	'protective-pads',
 	'heavy-duty-boots',
+	'blunder-policy',
 ] as const;
 export const valuables = [
+	'auspicious-armor',
+	'malicious-armor',
+	'chipped-pot',
+	'cracked-pot',
 	'shoal-salt',
 	'shoal-shell',
 	'green-shard',
@@ -408,6 +408,17 @@ export const keyItems = [
 	'oaks-parcel',
 	'shiny-charm',
 	'sprayduck',
+	'repel',
+	'max-repel',
+	'super-repel',
+] as const;
+
+export const expCandies = [
+	'exp-candy-xs',
+	'exp-candy-s',
+	'exp-candy-m',
+	'exp-candy-l',
+	'exp-candy-xl',
 ] as const;
 
 export const itemTypes = [
@@ -419,7 +430,6 @@ export const itemTypes = [
 	...evBoostItemTypes,
 	...xItemTypes,
 	...runawayItemTypes,
-	...encounterChanceItems,
 	...evoStones,
 	...heldItems,
 	...valuables,
@@ -428,6 +438,7 @@ export const itemTypes = [
 	...fossils,
 	...herbs,
 	...keyItems,
+	...expCandies,
 	'sacred-ash',
 	'rare-candy',
 	'escape-rope',
@@ -447,7 +458,6 @@ export type PPBoostItemType = (typeof ppBoostItemTypes)[number];
 export type EvBoostItemType = (typeof evBoostItemTypes)[number];
 export type XItemType = (typeof xItemTypes)[number];
 export type RunawayItem = (typeof runawayItemTypes)[number];
-export type EncounterChanceItem = (typeof encounterChanceItems)[number];
 export type BerryType = (typeof berries)[number];
 export type MulchType = (typeof mulches)[number];
 export type FossilType = (typeof fossils)[number];
@@ -544,11 +554,7 @@ export function isXItem(x: string | undefined): x is XItemType {
 export function isRunawayItem(x: string | undefined): x is RunawayItem {
 	return (runawayItemTypes as unknown as string[]).includes(x ?? '');
 }
-export function isEncounterChanceItem(
-	x: string | undefined
-): x is EncounterChanceItem {
-	return (encounterChanceItems as unknown as string[]).includes(x ?? '');
-}
+
 export function isItem(x: string | undefined): x is ItemType {
 	return (itemTypes as unknown as string[]).includes(x ?? '');
 }
@@ -714,6 +720,7 @@ export const undergroundTable: ItemType[] = [
 	...evoStones,
 	...evBoostItemTypes,
 	...heldItems,
+	...expCandies,
 ];
 export const superEffectiveSaveTable: Record<PokemonType, ItemType> = {
 	fire: 'occa-berry',
@@ -776,4 +783,12 @@ export const gemTable: Partial<Record<ItemType, PokemonType>> = {
 	'dragon-gem': 'dragon',
 	'normal-gem': 'normal',
 	'fairy-gem': 'fairy',
+};
+
+export const expCandyTable: Partial<Record<ItemType, number>> = {
+	'exp-candy-xs': 100,
+	'exp-candy-s': 800,
+	'exp-candy-m': 300,
+	'exp-candy-l': 10000,
+	'exp-candy-xl': 3000,
 };

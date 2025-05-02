@@ -16,12 +16,11 @@ export const useEncounterRateModifier = () => {
 		[team]
 	);
 
-	const res = () => {
+	const res = useMemo(() => {
 		const stenchFactor = firstTeamMember?.ability === 'stench' ? 0.5 : 1;
 		const illumFactor = firstTeamMember?.ability === 'illuminate' ? 2 : 1;
 		const swarmFactor = firstTeamMember?.ability === 'swarm' ? 2 : 1;
 		const quickfeetFactor = firstTeamMember?.ability === 'quick-feet' ? 0.5 : 1;
-		const itemFactor = saveFile.encounterRateModifier?.factor ?? 1;
 		const snowCloakFactor =
 			firstTeamMember?.ability === 'snow-cloak' &&
 			mapsRecord[saveFile.location.mapId].weather === 'hail'
@@ -36,13 +35,9 @@ export const useEncounterRateModifier = () => {
 			firstTeamMember && getHeldItem(firstTeamMember) === 'cleanse-tag' ? 0 : 1;
 
 		return {
-			upToXp:
-				team.map((t) => t.xp).reduce((sum, summand) => sum + summand) /
-				team.length,
 			factor:
 				1 *
 				stenchFactor *
-				itemFactor *
 				sandstormFactor *
 				snowCloakFactor *
 				illumFactor *
@@ -50,6 +45,6 @@ export const useEncounterRateModifier = () => {
 				quickfeetFactor *
 				cleanseTagFactor,
 		};
-	};
-	return res();
+	}, [firstTeamMember, saveFile.location.mapId]);
+	return res;
 };

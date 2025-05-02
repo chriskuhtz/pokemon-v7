@@ -505,6 +505,17 @@ export const handleUniqueMoves = ({
 			'acupressure'
 		);
 	}
+	if (move.name === 'psycho-shift') {
+		if (updatedAttacker.primaryAilment || !updatedTarget.primaryAilment) {
+			updatedTarget = {
+				...updatedTarget,
+				primaryAilment: updatedAttacker.primaryAilment,
+			};
+			updatedAttacker = { ...updatedAttacker, primaryAilment: undefined };
+		} else {
+			addMessage({ message: 'it failed' });
+		}
+	}
 
 	return updatedPokemon.map((p) => {
 		if (p.id === updatedAttacker.id) {

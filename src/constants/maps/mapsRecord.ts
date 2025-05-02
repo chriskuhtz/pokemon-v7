@@ -17,12 +17,12 @@ export const mapIds = [
 	'routeN1',
 	'routeN1E1',
 	'routeE1',
+	'onixCave',
 	'routeS1E1',
 	'routeS1',
 	'routeS1W1',
 	'routeW1',
 	'routeN1W1',
-	'onixCave',
 	'caveW1',
 	'challengeField',
 ] as const;

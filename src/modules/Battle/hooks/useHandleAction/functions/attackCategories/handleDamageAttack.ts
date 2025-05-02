@@ -461,7 +461,8 @@ export const handleDamageAttack = ({
 		battleWeather,
 		criticalHit,
 		damage,
-		battleFieldEffects
+		battleFieldEffects,
+		target.stats.hp
 	);
 	updatedAttacker = { ...a };
 	updatedTarget = { ...t };

@@ -1489,13 +1489,27 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/368/',
 		handled: true,
 	},
-	{ name: 'u-turn', url: 'https://pokeapi.co/api/v2/move/369/' },
-	{ name: 'close-combat', url: 'https://pokeapi.co/api/v2/move/370/' },
-	{ name: 'payback', url: 'https://pokeapi.co/api/v2/move/371/' },
-	{ name: 'assurance', url: 'https://pokeapi.co/api/v2/move/372/' },
-	{ name: 'embargo', url: 'https://pokeapi.co/api/v2/move/373/' },
-	{ name: 'fling', url: 'https://pokeapi.co/api/v2/move/374/' },
-	{ name: 'psycho-shift', url: 'https://pokeapi.co/api/v2/move/375/' },
+
+	{
+		name: 'close-combat',
+		url: 'https://pokeapi.co/api/v2/move/370/',
+		handled: true,
+	},
+	{
+		name: 'payback',
+		url: 'https://pokeapi.co/api/v2/move/371/',
+		handled: true,
+	},
+	{
+		name: 'assurance',
+		url: 'https://pokeapi.co/api/v2/move/372/',
+		handled: true,
+	},
+	{
+		name: 'psycho-shift',
+		url: 'https://pokeapi.co/api/v2/move/375/',
+		handled: true,
+	},
 	{ name: 'trump-card', url: 'https://pokeapi.co/api/v2/move/376/' },
 	{ name: 'heal-block', url: 'https://pokeapi.co/api/v2/move/377/' },
 	{ name: 'wring-out', url: 'https://pokeapi.co/api/v2/move/378/' },
@@ -2050,7 +2064,8 @@ export const movesCheckList: {
 	/*
 	 * BANISHED:
 	 */
-
+	{ name: 'embargo', url: 'https://pokeapi.co/api/v2/move/373/' },
+	{ name: 'fling', url: 'https://pokeapi.co/api/v2/move/374/' },
 	{ name: 'gravity', url: 'https://pokeapi.co/api/v2/move/356/' },
 	{ name: 'block', url: 'https://pokeapi.co/api/v2/move/335/' },
 	{ name: 'water-sport', url: 'https://pokeapi.co/api/v2/move/346/' },
@@ -2098,6 +2113,7 @@ export const movesCheckList: {
 	{ name: 'healing-wish', url: 'https://pokeapi.co/api/v2/move/361/' },
 	{ name: 'natural-gift', url: 'https://pokeapi.co/api/v2/move/363/' },
 	{ name: 'feint', url: 'https://pokeapi.co/api/v2/move/364/' },
+	{ name: 'u-turn', url: 'https://pokeapi.co/api/v2/move/369/' },
 	/**
 	 * INCOMPLETE DATA:
 	 */
@@ -2565,6 +2581,9 @@ export const handledMoves = [
 	'tailwind',
 	'acupressure',
 	'metal-burst',
+	'payback',
+	'assurance',
+	'psycho-shift',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

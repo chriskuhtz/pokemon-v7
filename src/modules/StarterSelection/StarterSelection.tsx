@@ -76,7 +76,12 @@ export const StarterSelection = (): JSX.Element => {
 			patchSaveFileReducer({
 				...saveFile,
 				playerId: name,
-				pokemon: [{ ...mon, xp: 1250000 }],
+				pokemon: [
+					{
+						...mon,
+						xp: 125,
+					},
+				],
 				storage: CompleteInventory,
 				campUpgrades: Object.fromEntries(
 					campUpgradeNames.map((key) => [key, true])

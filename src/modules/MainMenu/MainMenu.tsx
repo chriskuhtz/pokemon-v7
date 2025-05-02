@@ -77,6 +77,7 @@ export const MainMenu = ({
 						actionElements={[]}
 					/>
 				)}
+				<RepelButton />
 				<ExpShareButton />
 				<Card
 					onClick={() => navigate('MAIN', 'BAG')}
@@ -182,6 +183,67 @@ export const ExpShareButton = () => {
 			]}
 		/>
 	);
+};
+export const RepelButton = () => {
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+
+	if (saveFile.activatedRepel) {
+		return (
+			<Card
+				icon={<ItemSprite item={'repel'} />}
+				onClick={() => {
+					patchSaveFileReducer({
+						activatedRepel: undefined,
+					});
+				}}
+				content={<h3>Deactivate Repel</h3>}
+				actionElements={[]}
+			/>
+		);
+	}
+	if (saveFile.bag['max-repel'] > 0 || saveFile.storage['max-repel'] > 0) {
+		return (
+			<Card
+				icon={<ItemSprite item={'max-repel'} />}
+				onClick={() => {
+					patchSaveFileReducer({
+						activatedRepel: 'max-repel',
+					});
+				}}
+				content={<h3>Repel all wild Pokemon</h3>}
+				actionElements={[]}
+			/>
+		);
+	}
+	if (saveFile.bag['super-repel'] > 0 || saveFile.storage['super-repel'] > 0) {
+		return (
+			<Card
+				icon={<ItemSprite item={'super-repel'} />}
+				onClick={() => {
+					patchSaveFileReducer({
+						activatedRepel: 'super-repel',
+					});
+				}}
+				content={<h3>Repel Pokemon up to level 40</h3>}
+				actionElements={[]}
+			/>
+		);
+	}
+	if (saveFile.bag['repel'] > 0 || saveFile.storage['repel'] > 0) {
+		return (
+			<Card
+				icon={<ItemSprite item={'repel'} />}
+				onClick={() => {
+					patchSaveFileReducer({
+						activatedRepel: 'repel',
+					});
+				}}
+				content={<h3>Repel Pokemon up to level 20</h3>}
+				actionElements={[]}
+			/>
+		);
+	}
+	return <></>;
 };
 
 export const BugReportButton = () => {
