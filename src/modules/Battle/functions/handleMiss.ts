@@ -14,6 +14,11 @@ export const handleMiss = (
 	addMessage: (x: Message) => void,
 	reason?: MissReason
 ) => {
+	if (reason === 'QUEENLY_MAJESTY') {
+		addMessage({
+			message: 'The Target prevents priority attacks with queenly majesty',
+		});
+	}
 	if (reason === 'PROTECTED') {
 		addMessage({ message: 'The Target protected itself' });
 	}

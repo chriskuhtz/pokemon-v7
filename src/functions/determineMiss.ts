@@ -18,7 +18,8 @@ export type MissReason =
 	| 'SOUNDPROOF'
 	| 'ATTACKER_NOT_ASLEEP'
 	| 'TARGET_NOT_ASLEEP'
-	| 'PROTECTED';
+	| 'PROTECTED'
+	| 'QUEENLY_MAJESTY';
 
 export const getWeatherAccuracyFactor = (
 	target: BattlePokemon,
@@ -48,6 +49,10 @@ export const determineMiss = (
 	targetIsUnderground?: boolean
 ): { miss: boolean; reason?: MissReason } => {
 	const selfTargeting = isSelfTargeting(attack.data);
+
+	if (attack.data.priority > 0 && target.ability === 'queenly-majesty') {
+		return { miss: true, reason: 'QUEENLY_MAJESTY' };
+	}
 	if (target.protected && !passThroughProtectMoves.includes(attack.name)) {
 		return { miss: true, reason: 'PROTECTED' };
 	}
