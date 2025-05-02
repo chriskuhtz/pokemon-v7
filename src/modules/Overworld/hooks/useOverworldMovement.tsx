@@ -1,6 +1,7 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { fps } from '../../../constants/gameData';
 import { mapsRecord } from '../../../constants/maps/mapsRecord';
+import { calculateLevelData } from '../../../functions/calculateLevelData';
 import { determineWildPokemon } from '../../../functions/determineWildPokemon';
 import { getNextForwardFoot } from '../../../functions/getNextForwardFoot';
 import { OPPO_ID } from '../../../functions/makeChallengerPokemon';
@@ -17,7 +18,7 @@ export const useOverworldMovement = (
 	startEncounter: (encounter: Challenger) => void,
 	addStep: () => void,
 	currentOccupants: Occupant[],
-	encounterRateModifier: { factor: number; upToXp: number }
+	encounterRateModifier: { factor: number }
 ) => {
 	const { saveFile, setCharacterLocationReducer: setCharacterLocation } =
 		useContext(SaveFileContext);
@@ -71,8 +72,9 @@ export const useOverworldMovement = (
 
 			if (nextInput) {
 				if (
-					map.tileMap.encounterLayer[playerLocation.y][playerLocation.x] ||
-					map.tileMap.waterLayer[playerLocation.y][playerLocation.x]
+					saveFile.activatedRepel !== 'max-repel' &&
+					(map.tileMap.encounterLayer[playerLocation.y][playerLocation.x] ||
+						map.tileMap.waterLayer[playerLocation.y][playerLocation.x])
 				) {
 					if (Math.random() < encounterChance * encounterRateModifier.factor) {
 						const waterEncounter =
@@ -90,6 +92,29 @@ export const useOverworldMovement = (
 								currentSwarm
 							),
 						};
+
+						const avgChallengerLevel =
+							challenger.team.reduce(
+								(sum, summand) =>
+									sum +
+									calculateLevelData(summand.xp, summand.growthRate).level,
+								0
+							) / challenger.team.length;
+
+						if (
+							saveFile.activatedRepel === 'repel' &&
+							avgChallengerLevel < 20
+						) {
+							setEncounterChance(baseEncounterRate);
+							return;
+						}
+						if (
+							saveFile.activatedRepel === 'super-repel' &&
+							avgChallengerLevel < 40
+						) {
+							setEncounterChance(baseEncounterRate);
+							return;
+						}
 
 						setNextInput(undefined);
 						setEncounterChance(baseEncounterRate);
@@ -130,7 +155,6 @@ export const useOverworldMovement = (
 		currentSwarm,
 		encounterChance,
 		encounterRateModifier.factor,
-		encounterRateModifier.upToXp,
 		map,
 		nextInput,
 		playerLocation,

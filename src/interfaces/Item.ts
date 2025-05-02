@@ -102,13 +102,6 @@ export const apricorns = [
 ] as const;
 
 export const herbs = ['white-herb', 'mental-herb', 'power-herb'] as const;
-export const encounterChanceItems = [
-	'white-flute',
-	'black-flute',
-	'repel',
-	'max-repel',
-	'super-repel',
-] as const;
 export const evoStones = [
 	'sun-stone',
 	'thunder-stone',
@@ -408,6 +401,9 @@ export const keyItems = [
 	'oaks-parcel',
 	'shiny-charm',
 	'sprayduck',
+	'repel',
+	'max-repel',
+	'super-repel',
 ] as const;
 
 export const itemTypes = [
@@ -419,7 +415,6 @@ export const itemTypes = [
 	...evBoostItemTypes,
 	...xItemTypes,
 	...runawayItemTypes,
-	...encounterChanceItems,
 	...evoStones,
 	...heldItems,
 	...valuables,
@@ -447,7 +442,6 @@ export type PPBoostItemType = (typeof ppBoostItemTypes)[number];
 export type EvBoostItemType = (typeof evBoostItemTypes)[number];
 export type XItemType = (typeof xItemTypes)[number];
 export type RunawayItem = (typeof runawayItemTypes)[number];
-export type EncounterChanceItem = (typeof encounterChanceItems)[number];
 export type BerryType = (typeof berries)[number];
 export type MulchType = (typeof mulches)[number];
 export type FossilType = (typeof fossils)[number];
@@ -544,11 +538,7 @@ export function isXItem(x: string | undefined): x is XItemType {
 export function isRunawayItem(x: string | undefined): x is RunawayItem {
 	return (runawayItemTypes as unknown as string[]).includes(x ?? '');
 }
-export function isEncounterChanceItem(
-	x: string | undefined
-): x is EncounterChanceItem {
-	return (encounterChanceItems as unknown as string[]).includes(x ?? '');
-}
+
 export function isItem(x: string | undefined): x is ItemType {
 	return (itemTypes as unknown as string[]).includes(x ?? '');
 }

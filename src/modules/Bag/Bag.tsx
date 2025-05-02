@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from 'react';
-import { FaRunning, FaSprayCan } from 'react-icons/fa';
+import { FaRunning } from 'react-icons/fa';
 import { MdHealing } from 'react-icons/md';
 import { BagLimitBar } from '../../components/BagLimitBar/BagLimitBar';
 import { HealAction } from '../../components/ItemCard/components/HealAction';
@@ -10,12 +10,7 @@ import { battleSpriteSize } from '../../constants/gameData';
 import { canBenefitFromItem } from '../../functions/canBenefitFromItem';
 import { useEscapeRope } from '../../hooks/useEscapeRope';
 import { SaveFileContext } from '../../hooks/useSaveFile';
-import {
-	isEncounterChanceItem,
-	isItem,
-	isKeyItem,
-	ItemType,
-} from '../../interfaces/Item';
+import { isItem, isKeyItem, ItemType } from '../../interfaces/Item';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
@@ -23,7 +18,6 @@ export const Bag = ({ goBack }: { goBack: () => void }): JSX.Element => {
 	const { applyEscapeRope, disabled } = useEscapeRope();
 	const {
 		saveFile,
-		applyEncounterRateModifierItem,
 		applyItemToPokemonReducer: applyItem,
 		useSacredAshReducer: applySacredAsh,
 		discardItemReducer: discardItem,
@@ -117,22 +111,6 @@ export const Bag = ({ goBack }: { goBack: () => void }): JSX.Element => {
 											}
 										}}
 										onClick={() => applySacredAsh()}
-										size={battleSpriteSize}
-									/>
-								) : (
-									<></>
-								),
-								isEncounterChanceItem(item) ? (
-									<FaSprayCan
-										tabIndex={0}
-										role="button"
-										onKeyDown={(e) => {
-											e.stopPropagation();
-											if (e.key === 'Enter') {
-												applyEncounterRateModifierItem(item);
-											}
-										}}
-										onClick={() => applyEncounterRateModifierItem(item)}
 										size={battleSpriteSize}
 									/>
 								) : (

@@ -31,11 +31,10 @@ import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getRewardItemsForQuest } from '../functions/getRewardForQuest';
 import { TimeOfDay } from '../functions/getTimeOfDay';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
-import { reduceEncounterRateModifier } from '../functions/reduceEncounterRateModifier';
 import { updateItemFunction } from '../functions/updateItemFunction';
 import { Challenger } from '../interfaces/Challenger';
 import { EmptyInventory, joinInventories } from '../interfaces/Inventory';
-import { EncounterChanceItem, ItemType } from '../interfaces/Item';
+import { ItemType } from '../interfaces/Item';
 import { Occupant } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { RoutesType } from '../interfaces/Routing';
@@ -89,7 +88,6 @@ export interface UseSaveFile {
 	changeHeldItemReducer: (pokemonId: string, newItem?: ItemType) => void;
 	useSacredAshReducer: () => void;
 	reset: () => void;
-	applyEncounterRateModifierItem: (item: EncounterChanceItem) => void;
 	evolvePokemonReducer: (x: EvolutionReducerPayload) => void;
 }
 const migrateSavefile = (input: SaveFile) => {
@@ -208,17 +206,9 @@ const useSaveFile = (
 		[saveFile, setSaveFile]
 	);
 	const setCharacterLocationReducer = (update: CharacterLocationData) => {
-		const updatedModifier = reduceEncounterRateModifier(
-			1,
-			saveFile.encounterRateModifier
-		);
-		if (saveFile.encounterRateModifier && !updatedModifier) {
-			addMessage({ message: `Encounter Rate Modifier ended` });
-		}
 		setSaveFile({
 			...saveFile,
 			location: update,
-			encounterRateModifier: updatedModifier,
 		});
 	};
 
@@ -407,35 +397,6 @@ const useSaveFile = (
 		setSaveFile(testState);
 	}, [setSaveFile]);
 
-	const applyEncounterRateModifierItem = (item: EncounterChanceItem) => {
-		let modifier: { factor: number; steps: number } = { factor: 0, steps: 0 };
-		if (saveFile.encounterRateModifier) {
-			addMessage({ message: 'There is already a encounter rate modifier' });
-			return;
-		}
-		if (item === 'white-flute') {
-			modifier = { factor: 2, steps: 250 };
-		}
-		if (item === 'black-flute') {
-			modifier = { factor: 0.5, steps: 250 };
-		}
-		if (item === 'repel') {
-			modifier = { factor: 0, steps: 100 };
-		}
-		if (item === 'super-repel') {
-			modifier = { factor: 0, steps: 200 };
-		}
-		if (item === 'max-repel') {
-			modifier = { factor: 0, steps: 500 };
-		}
-
-		addMessage({ message: `${item} applied` });
-		setSaveFile({
-			...saveFile,
-			encounterRateModifier: modifier,
-			bag: joinInventories(saveFile.bag, { [item]: 1 }, true),
-		});
-	};
 	const evolvePokemonReducer = ({
 		id,
 		name,
@@ -563,7 +524,6 @@ const useSaveFile = (
 		fulfillQuestReducer,
 		changeHeldItemReducer,
 		useSacredAshReducer,
-		applyEncounterRateModifierItem,
 	};
 };
 

@@ -100,7 +100,6 @@ export interface SaveFile {
 	settings?: SettingsObject;
 	quests: Record<QuestName, QuestStatus>;
 	sprite: string;
-	encounterRateModifier?: { factor: number; steps: number };
 	mileStones: {
 		damageRecord: number;
 		challengeFieldRecord?: number;
@@ -136,4 +135,5 @@ export interface SaveFile {
 	seedVault: ItemType[];
 	pokedex: Pokedex;
 	cookingSkill?: number;
+	activatedRepel?: 'repel' | 'super-repel' | 'max-repel';
 }

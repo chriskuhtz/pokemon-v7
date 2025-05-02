@@ -367,6 +367,10 @@ export const extraFeatureCheckList: {
 	{ name: 'historian event: mew', handled: true },
 	{ name: 'sudowoodo as optional blocker on route W1', handled: true },
 	{ name: 'charcadet evo items', handled: true },
+	{
+		name: 'refactor repel (infinite, level based upgrades, on/off switch)',
+		handled: true,
+	},
 	{ name: 'insert breaker headlines into some sorting options' },
 	{ name: 'releasing pokemon should not end fullscreen mode' },
 	{ name: 'trainer ai should consider flying,dig, diving' },
@@ -383,7 +387,6 @@ export const extraFeatureCheckList: {
 	{ name: 'prettier weather display' },
 	{ name: 'eggs?' },
 	{ name: 'Roark as special fossil trainer after quests' },
-	{ name: 'refactor repel (infinite, level based upgrades, on/off switch)' },
 	{ name: 'fix random abilities' },
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'shovel spots' },

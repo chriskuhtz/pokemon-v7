@@ -54,6 +54,7 @@ export const ChangeLogV15 = (): JSX.Element => {
 			<h3>V 0.15:</h3>
 
 			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>Infinite Repel that can be toggled</li>
 				<li>New Abilities, Items and Attacks</li>
 			</ol>
 		</>

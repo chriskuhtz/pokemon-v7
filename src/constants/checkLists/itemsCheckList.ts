@@ -308,16 +308,7 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/67/',
 		handled: true,
 	},
-	{
-		name: 'black-flute',
-		url: 'https://pokeapi.co/api/v2/item/68/',
-		handled: true,
-	},
-	{
-		name: 'white-flute',
-		url: 'https://pokeapi.co/api/v2/item/69/',
-		handled: true,
-	},
+
 	{
 		name: 'sun-stone',
 		url: 'https://pokeapi.co/api/v2/item/80/',
@@ -2862,6 +2853,16 @@ export const itemsCheckList: {
 	 *
 	 *
 	 */
+	{
+		name: 'black-flute',
+		url: 'https://pokeapi.co/api/v2/item/68/',
+		handled: true,
+	},
+	{
+		name: 'white-flute',
+		url: 'https://pokeapi.co/api/v2/item/69/',
+		handled: true,
+	},
 	{ name: 'eject-pack', url: 'https://pokeapi.co/api/v2/item/1177/' },
 	{ name: 'red-nectar', url: 'https://pokeapi.co/api/v2/item/889/' },
 	{ name: 'yellow-nectar', url: 'https://pokeapi.co/api/v2/item/890/' },
