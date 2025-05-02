@@ -29,6 +29,7 @@ export const OCCUPANT_TYPES = [
 	'SIGN',
 	'HONEY_TREE',
 	'HALLOWED_TOWER',
+	'STRANGE_TREE',
 	'ON_STEP_PORTAL',
 	'BULLETIN_BOARD',
 	'OBSTACLE',
@@ -114,6 +115,7 @@ export interface OverworldHoneyTree extends BaseOccupant {
 export interface OverworldHallowedTower extends BaseOccupant {
 	type: 'HALLOWED_TOWER';
 }
+
 export interface SwarmRadar extends BaseOccupant {
 	type: 'SWARM_RADAR';
 }
@@ -160,6 +162,10 @@ export interface OverworldPokemon extends BaseOccupant {
 }
 export interface OverworldSnorlax extends BaseOccupant {
 	type: 'SNORLAX';
+	orientation: CharacterOrientation;
+}
+export interface OverworldStrangeTree extends BaseOccupant {
+	type: 'STRANGE_TREE';
 	orientation: CharacterOrientation;
 }
 export interface ZigzagoonForager extends BaseOccupant {
@@ -216,7 +222,8 @@ export type Occupant =
 	| StorageChest
 	| BerryTree
 	| BerryLure
-	| OverworldSnorlax;
+	| OverworldSnorlax
+	| OverworldStrangeTree;
 
 export interface OverworldEncounter {
 	name: PokemonName;

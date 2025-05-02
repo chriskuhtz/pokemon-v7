@@ -365,9 +365,7 @@ export const extraFeatureCheckList: {
 	{ name: 'split hat pikachu and costume pikachu quests', handled: true },
 	{ name: 'gen 8 fossils', handled: true },
 	{ name: 'historian event: mew', handled: true },
-	{ name: 'historian event: lugia' },
-	{ name: 'historian event: ho oh' },
-	{ name: 'sudowoodo as optional blocker on route W1' },
+	{ name: 'sudowoodo as optional blocker on route W1', handled: true },
 	{ name: 'insert breaker headlines into some sorting options' },
 	{ name: 'charcadet evo items' },
 	{ name: 'releasing pokemon should not end fullscreen mode' },
@@ -399,4 +397,6 @@ export const extraFeatureCheckList: {
 	{
 		name: 'forager army quest: have 6 zigzagoon with pick up in your prty. Given by zigzagoon guy',
 	},
+	{ name: 'historian event: lugia' },
+	{ name: 'historian event: ho oh' },
 ];

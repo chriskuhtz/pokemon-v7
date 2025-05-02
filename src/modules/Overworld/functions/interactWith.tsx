@@ -10,6 +10,7 @@ import {
 	OverworldPokemon,
 	OverworldRock,
 	OverworldSnorlax,
+	OverworldStrangeTree,
 	OverworldTrainer,
 } from '../../../interfaces/OverworldMap';
 import { RoutesType } from '../../../interfaces/Routing';
@@ -49,6 +50,7 @@ export const interactWithFunction = ({
 	goToPosition,
 	interactWithHoneyTree,
 	interactWithCombeeHive,
+	interactWithStrangeTree,
 	interactWithHallowedTower,
 	interactWithBush,
 	interactWithRock,
@@ -75,6 +77,7 @@ export const interactWithFunction = ({
 	goToPosition: (x: CharacterLocationData) => void;
 	interactWithHoneyTree: () => void;
 	interactWithHallowedTower: () => void;
+	interactWithStrangeTree: (x: OverworldStrangeTree) => void;
 	interactWithCombeeHive: () => void;
 	interactWithBush: (x: OverworldBush) => void;
 	interactWithRock: (x: OverworldRock) => void;
@@ -286,6 +289,10 @@ export const interactWithFunction = ({
 	}
 	if (data.type === 'HALLOWED_TOWER') {
 		interactWithHallowedTower();
+		return;
+	}
+	if (data.type === 'STRANGE_TREE') {
+		interactWithStrangeTree(data);
 		return;
 	}
 	if (data.type === 'COMBEE_HIVE') {

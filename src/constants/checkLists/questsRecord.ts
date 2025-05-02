@@ -2341,7 +2341,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'defeat misty': {
 		kind: 'BULLETIN',
 		researchPoints: 50,
-		rewardItems: { 'passho-berry': 5, 'mystic-water': 1 },
+		rewardItems: { 'passho-berry': 5, 'mystic-water': 1, sprayduck: 1 },
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'Gym Leader Misty');

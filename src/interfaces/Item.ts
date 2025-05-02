@@ -401,6 +401,7 @@ export const keyItems = [
 	'poke-flute',
 	'oaks-parcel',
 	'shiny-charm',
+	'sprayduck',
 ] as const;
 
 export const itemTypes = [
