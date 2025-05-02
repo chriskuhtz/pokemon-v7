@@ -1489,9 +1489,17 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/368/',
 		handled: true,
 	},
-	{ name: 'u-turn', url: 'https://pokeapi.co/api/v2/move/369/' },
-	{ name: 'close-combat', url: 'https://pokeapi.co/api/v2/move/370/' },
-	{ name: 'payback', url: 'https://pokeapi.co/api/v2/move/371/' },
+
+	{
+		name: 'close-combat',
+		url: 'https://pokeapi.co/api/v2/move/370/',
+		handled: true,
+	},
+	{
+		name: 'payback',
+		url: 'https://pokeapi.co/api/v2/move/371/',
+		handled: true,
+	},
 	{ name: 'assurance', url: 'https://pokeapi.co/api/v2/move/372/' },
 	{ name: 'embargo', url: 'https://pokeapi.co/api/v2/move/373/' },
 	{ name: 'fling', url: 'https://pokeapi.co/api/v2/move/374/' },
@@ -2098,6 +2106,7 @@ export const movesCheckList: {
 	{ name: 'healing-wish', url: 'https://pokeapi.co/api/v2/move/361/' },
 	{ name: 'natural-gift', url: 'https://pokeapi.co/api/v2/move/363/' },
 	{ name: 'feint', url: 'https://pokeapi.co/api/v2/move/364/' },
+	{ name: 'u-turn', url: 'https://pokeapi.co/api/v2/move/369/' },
 	/**
 	 * INCOMPLETE DATA:
 	 */
@@ -2565,6 +2574,7 @@ export const handledMoves = [
 	'tailwind',
 	'acupressure',
 	'metal-burst',
+	'payback',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
