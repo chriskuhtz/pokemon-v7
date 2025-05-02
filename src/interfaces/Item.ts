@@ -125,6 +125,8 @@ export const evoStones = [
 	'tart-apple',
 	'syrupy-apple',
 	'sweet-apple',
+	'auspicious-armor',
+	'malicious-armor',
 ] as const;
 export const heldItems = [
 	'quick-claw',
