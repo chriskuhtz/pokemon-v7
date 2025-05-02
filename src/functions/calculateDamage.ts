@@ -335,6 +335,16 @@ export const calculateDamage = (
 			return { damage: 0 };
 		}
 	}
+	if (attack.name === 'metal-burst') {
+		if (attacker.lastReceivedDamage?.applicatorId === target.id) {
+			return { damage: attacker.lastReceivedDamage.damage * 1.5 };
+		} else {
+			if (addMessage) {
+				addMessage({ message: 'Metal Burst failed' });
+			}
+			return { damage: 0 };
+		}
+	}
 	if (attack.name === 'mirror-coat') {
 		if (
 			attacker.lastReceivedDamage?.attack.data.damage_class.name ===

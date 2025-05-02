@@ -13,7 +13,10 @@ export const getActualTarget = ({
 	move: BattleAttack;
 	addMessage: (x: Message) => void;
 }): BattlePokemon | undefined => {
-	if (move.name === 'counter' && attacker.lastReceivedDamage) {
+	if (
+		['counter', 'metal-burst', 'mirror-coat'].includes(move.name) &&
+		attacker.lastReceivedDamage
+	) {
 		return pokemon.find(
 			(p) =>
 				p.id === attacker.lastReceivedDamage?.applicatorId &&
