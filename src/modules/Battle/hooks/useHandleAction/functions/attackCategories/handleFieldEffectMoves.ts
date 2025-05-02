@@ -32,6 +32,13 @@ export const handleFieldEffectMoves = ({
 			duration: 9000,
 		});
 	}
+	if (move.name === 'tailwind') {
+		addBattleFieldEffect({
+			type: move.name as BattleFieldEffect['type'],
+			ownerId: target.ownerId,
+			duration: 3,
+		});
+	}
 	if (move.name === 'safeguard') {
 		addBattleFieldEffect({
 			type: move.name as BattleFieldEffect['type'],

@@ -4,7 +4,7 @@ export const onixCaveEncounters: EncounterMap = {
 	WATER: [],
 	BASE: [
 		{
-			name: 'pikachu-rock-star',
+			name: 'pikachu-partner-cap',
 			minXp: 1000,
 			maxXp: 1000,
 			rarity: 'ultra-rare',

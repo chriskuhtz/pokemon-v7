@@ -60,6 +60,14 @@ export const routeW1Occupants: OverworldMap['occupants'] = [
 		id: 'routeW1_camp',
 	},
 	{
+		type: 'STRANGE_TREE',
+		x: 48,
+		y: 25,
+		conditionFunction: () => true,
+		id: 'sudowoodo',
+		orientation: 'UP',
+	},
+	{
 		type: 'ON_STEP_PORTAL',
 		id: 'cave entry bottom',
 		conditionFunction: () => true,

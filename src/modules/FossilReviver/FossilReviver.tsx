@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
+import { PokemonName } from '../../constants/pokemonNames';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { fossilTable } from '../../interfaces/Item';
@@ -11,9 +12,9 @@ import { useFossils } from './hooks/useFossils';
 
 export const FossilReviver = (): JSX.Element => {
 	const navigate = useNavigate();
-	const { fossils, revive } = useFossils();
+	const { revive } = useFossils();
 	const {
-		saveFile: { pokedex },
+		saveFile: { pokedex, bag, researchPoints },
 	} = useContext(SaveFileContext);
 	return (
 		<Page
@@ -21,36 +22,44 @@ export const FossilReviver = (): JSX.Element => {
 			goBack={() => navigate('FOSSIL_REVIVER', 'OVERWORLD')}
 		>
 			<Stack mode="column">
-				{fossils.length > 0
-					? fossils.map(([f]) => (
-							<Card
-								key={f}
-								icon={<ItemSprite item={f} />}
-								onClick={() => {
-									revive(f);
-								}}
-								content={
-									<h3>
-										Revive{' '}
-										{pokedex[fossilTable[f]].caughtOnRoutes.length > 0 ? (
-											<PokemonSprite name={fossilTable[f]} />
-										) : (
-											f
-										)}{' '}
-										for 5 Research Points
-									</h3>
-								}
-								actionElements={[]}
-							/>
-					  ))
-					: [
-							<Card
-								key="no-fossils"
-								icon={<ItemSprite item={'helix-fossil'} />}
-								content={'Try to find some fossils in caves'}
-								actionElements={[]}
-							/>,
-					  ]}
+				{Object.values(fossilTable).map((requiredFossils) => {
+					const fossil = Object.entries(fossilTable).find(([, fossils]) =>
+						fossils.every((rf) => requiredFossils.includes(rf))
+					);
+
+					if (!fossil) {
+						console.error(
+							'what are these fossils supposed to yield?',
+							requiredFossils
+						);
+						return;
+					}
+					const pokemon = fossil[0] as PokemonName;
+
+					return (
+						<Card
+							key={requiredFossils.join()}
+							icon={
+								<PokemonSprite
+									name={pokemon}
+									config={{
+										grayscale: pokedex[pokemon].caughtOnRoutes.length === 0,
+									}}
+								/>
+							}
+							disabled={
+								!requiredFossils.every((f) => bag[f] > 0) || researchPoints < 5
+							}
+							onClick={() => {
+								revive(requiredFossils);
+							}}
+							content={<h3>Revive for 5 Research Points</h3>}
+							actionElements={requiredFossils.map((f) => (
+								<ItemSprite item={f} />
+							))}
+						/>
+					);
+				})}
 			</Stack>
 		</Page>
 	);

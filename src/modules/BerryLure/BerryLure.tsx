@@ -20,7 +20,7 @@ import { Stack } from '../../uiComponents/Stack/Stack';
 export const lureBerryEncountersN1: Record<PokemonType, PokemonName> = {
 	fire: 'tauros-paldea-blaze-breed',
 	water: 'tauros-paldea-aqua-breed',
-	electric: 'pikachu-cosplay',
+	electric: 'pikachu-rock-star',
 	grass: 'deerling',
 	ice: 'vulpix-alola',
 	fighting: 'tauros-paldea-combat-breed',
@@ -41,7 +41,7 @@ export const lureBerryEncountersN1: Record<PokemonType, PokemonName> = {
 export const lureBerryEncountersN1E1: Record<PokemonType, PokemonName> = {
 	fire: 'sizzlipede',
 	water: 'dewpider',
-	electric: 'pikachu-original-cap',
+	electric: 'pikachu-belle',
 	grass: 'sewaddle',
 	ice: 'snom',
 	fighting: 'shroomish',
@@ -62,7 +62,7 @@ export const lureBerryEncountersN1E1: Record<PokemonType, PokemonName> = {
 export const lureBerryEncountersE1: Record<PokemonType, PokemonName> = {
 	fire: 'slugma',
 	water: 'quagsire',
-	electric: 'pikachu-hoenn-cap',
+	electric: 'pikachu-pop-star',
 	grass: 'bellsprout',
 	ice: 'bergmite',
 	fighting: 'tyrogue',
@@ -83,7 +83,7 @@ export const lureBerryEncountersE1: Record<PokemonType, PokemonName> = {
 export const lureBerryEncountersS1E1: Record<PokemonType, PokemonName> = {
 	fire: 'magmar',
 	water: 'panpour',
-	electric: 'pikachu-sinnoh-cap',
+	electric: 'pikachu-phd',
 	grass: 'gogoat',
 	ice: 'vulpix-alola',
 	fighting: 'makuhita',
@@ -104,7 +104,7 @@ export const lureBerryEncountersS1E1: Record<PokemonType, PokemonName> = {
 export const lureBerryEncountersS1W1: Record<PokemonType, PokemonName> = {
 	fire: 'heatmor',
 	water: 'simipour',
-	electric: 'pikachu-alola-cap',
+	electric: 'pikachu-libre',
 	grass: 'nuzleaf',
 	ice: 'avalugg',
 	fighting: 'hawlucha',

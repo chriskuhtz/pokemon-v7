@@ -122,6 +122,11 @@ export const evoStones = [
 	'shiny-stone',
 	'black-augurite',
 	'peat-block',
+	'tart-apple',
+	'syrupy-apple',
+	'sweet-apple',
+	'auspicious-armor',
+	'malicious-armor',
 ] as const;
 export const heldItems = [
 	'quick-claw',
@@ -258,6 +263,10 @@ export const heldItems = [
 	'sachet',
 	'luminous-moss',
 	'snowball',
+	'safety-goggles',
+	'adrenaline-orb',
+	'protective-pads',
+	'heavy-duty-boots',
 ] as const;
 export const valuables = [
 	'shoal-salt',
@@ -388,12 +397,17 @@ export const fossils = [
 	'plume-fossil',
 	'jaw-fossil',
 	'sail-fossil',
+	'fossilized-bird',
+	'fossilized-fish',
+	'fossilized-drake',
+	'fossilized-dino',
 ] as const;
 export const keyItems = [
 	'exp-share',
 	'poke-flute',
 	'oaks-parcel',
 	'shiny-charm',
+	'sprayduck',
 ] as const;
 
 export const itemTypes = [
@@ -648,18 +662,23 @@ export const XItemTable: Partial<Record<XItemType, Stat>> = {
 	'x-defense': 'defense',
 	'x-speed': 'speed',
 };
-export const fossilTable: Record<FossilType, PokemonName> = {
-	'helix-fossil': 'omanyte',
-	'dome-fossil': 'kabuto',
-	'old-amber': 'aerodactyl',
-	'root-fossil': 'lileep',
-	'claw-fossil': 'anorith',
-	'skull-fossil': 'cranidos',
-	'armor-fossil': 'shieldon',
-	'cover-fossil': 'tirtouga',
-	'plume-fossil': 'archen',
-	'jaw-fossil': 'tyrunt',
-	'sail-fossil': 'amaura',
+
+export const fossilTable: Partial<Record<PokemonName, FossilType[]>> = {
+	omanyte: ['helix-fossil'],
+	kabuto: ['dome-fossil'],
+	aerodactyl: ['old-amber'],
+	lileep: ['root-fossil'],
+	anorith: ['claw-fossil'],
+	cranidos: ['skull-fossil'],
+	shieldon: ['armor-fossil'],
+	tirtouga: ['cover-fossil'],
+	archen: ['plume-fossil'],
+	tyrunt: ['jaw-fossil'],
+	amaura: ['sail-fossil'],
+	dracozolt: ['fossilized-bird', 'fossilized-drake'],
+	dracovish: ['fossilized-fish', 'fossilized-drake'],
+	arctozolt: ['fossilized-bird', 'fossilized-dino'],
+	arctovish: ['fossilized-fish', 'fossilized-dino'],
 };
 export const apricornTable: Record<ApricornType, PokeballType> = {
 	'black-apricorn': 'dusk-ball',

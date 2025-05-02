@@ -419,6 +419,7 @@ export const questNames = [
 	'catch a pikachu',
 	'find a lightball',
 	'catch all mouselike electric pokemon',
+	'catch all pikachus with hats',
 	'catch all costumed pikachus',
 	'catch a feebas',
 	'catch a pokemon',
@@ -555,6 +556,8 @@ export const questNames = [
 	'reach challenge field rank 40',
 	'reach challenge field rank 62',
 	'reach challenge field rank 85',
+	'reach challenge field rank 108',
+	'catch the mysterious pokemon in orenji forest',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -634,6 +637,40 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		kind: 'QUEST_LINE',
 	},
+	'catch all pikachus with hats': {
+		rewardItems: {
+			'electric-gem': 5,
+			'thunder-stone': 1,
+			magnet: 1,
+			'watmel-berry': 5,
+			'roseli-berry': 5,
+		},
+		targetPokemon: [
+			'pikachu-original-cap',
+			'pikachu-hoenn-cap',
+			'pikachu-sinnoh-cap',
+			'pikachu-unova-cap',
+			'pikachu-kalos-cap',
+			'pikachu-alola-cap',
+			'pikachu-world-cap',
+			'pikachu-partner-cap',
+		],
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			const pikas: PokemonName[] = [
+				'pikachu-original-cap',
+				'pikachu-hoenn-cap',
+				'pikachu-sinnoh-cap',
+				'pikachu-unova-cap',
+				'pikachu-kalos-cap',
+				'pikachu-alola-cap',
+				'pikachu-world-cap',
+				'pikachu-partner-cap',
+			];
+			return pikas.every((pika) => s.pokedex[pika].caughtOnRoutes.length > 0);
+		},
+		kind: 'QUEST_LINE',
+	},
 	'catch all costumed pikachus': {
 		rewardItems: {},
 		rewardPokemon: {
@@ -667,14 +704,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'pikachu-phd',
 			'pikachu-libre',
 			'pikachu-cosplay',
-			'pikachu-original-cap',
-			'pikachu-hoenn-cap',
-			'pikachu-sinnoh-cap',
-			'pikachu-unova-cap',
-			'pikachu-kalos-cap',
-			'pikachu-alola-cap',
-			'pikachu-partner-cap',
-			'pikachu-world-cap',
 		],
 		researchPoints: 200,
 		conditionFunction: (s) => {
@@ -685,14 +714,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				'pikachu-phd',
 				'pikachu-libre',
 				'pikachu-cosplay',
-				'pikachu-original-cap',
-				'pikachu-hoenn-cap',
-				'pikachu-sinnoh-cap',
-				'pikachu-unova-cap',
-				'pikachu-kalos-cap',
-				'pikachu-alola-cap',
-				'pikachu-partner-cap',
-				'pikachu-world-cap',
 			];
 			return pikas.every((pika) => s.pokedex[pika].caughtOnRoutes.length > 0);
 		},
@@ -720,7 +741,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'build combee hive',
 	},
 	'catch all pokemon that live under rocks': {
-		rewardItems: { 'black-augurite': 1, 'peat-block': 1, 'lumiose-galette': 5 },
+		rewardItems: {
+			'black-augurite': 1,
+			'peat-block': 1,
+			'lumiose-galette': 5,
+			'fossilized-bird': 2,
+		},
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return sledgeHammerPokemon.every(
@@ -1640,7 +1666,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		targetPokemon: [],
 		requiredUpgrade: 'invite historian',
-		kind: 'QUEST_LINE',
+		kind: 'BULLETIN',
 	},
 	'catch the legendary bird of thunder': {
 		rewardItems: { 'rare-candy': 10 },
@@ -1650,7 +1676,17 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		targetPokemon: [],
 		requiredUpgrade: 'invite historian',
-		kind: 'QUEST_LINE',
+		kind: 'BULLETIN',
+	},
+	'catch the mysterious pokemon in orenji forest': {
+		rewardItems: { 'rare-candy': 10 },
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.pokedex['mew'].caughtOnRoutes.length > 0;
+		},
+		targetPokemon: [],
+		requiredUpgrade: 'invite historian',
+		kind: 'BULLETIN',
 	},
 	'defeat rowan': {
 		rewardItems: {
@@ -1734,8 +1770,8 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 10,
 		conditionFunction: (s) => {
-			return Object.values(fossilTable).some(
-				(fossil) => s.pokedex[fossil].caughtOnRoutes.length > 0
+			return Object.keys(fossilTable).some(
+				(fossil) => s.pokedex[fossil as PokemonName].caughtOnRoutes.length > 0
 			);
 		},
 		requiredUpgrade: 'invite fossil expert',
@@ -1746,10 +1782,10 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'rare-candy': 5,
 			'ultra-ball': 20,
 		},
-		researchPoints: 50,
+		researchPoints: 100,
 		conditionFunction: (s) => {
-			return Object.values(fossilTable).every(
-				(fossil) => s.pokedex[fossil].caughtOnRoutes.length > 0
+			return Object.keys(fossilTable).every(
+				(fossil) => s.pokedex[fossil as PokemonName].caughtOnRoutes.length > 0
 			);
 		},
 		requiredUpgrade: 'invite fossil expert',
@@ -1969,7 +2005,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'shovel certification',
 		researchPoints: 10,
-		rewardItems: { 'babiri-berry': 2, 'kee-berry': 2 },
+		rewardItems: { 'babiri-berry': 2, 'kee-berry': 2, 'fossilized-dino': 2 },
 		targetRoute: 'onixCave',
 		targetPokemon: onixCaveEncounters.BASE.map((p) => p.name),
 		conditionFunction: (s) =>
@@ -1987,6 +2023,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'yellow-apricorn': 10,
 			'black-apricorn': 10,
 			'moon-stone': 2,
+			'fossilized-drake': 2,
 		},
 		targetPokemon: onixCaveEncounters.BASE.map((p) => p.name),
 		conditionFunction: (s) =>
@@ -2004,6 +2041,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'white-herb': 2,
 			'mental-herb': 2,
 			'big-malasada': 2,
+			'fossilized-fish': 2,
 		},
 		targetPokemon: caveW1Encounters.BASE.map((p) => p.name),
 		conditionFunction: (s) =>
@@ -2180,7 +2218,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'catch a pokemon from a swarm',
 		researchPoints: 50,
 		rewardItems: { 'dusk-ball': 20 },
-		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length > 0,
+		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length >= 3,
 	},
 	'catch 10 different pokemon from swarms': {
 		kind: 'BULLETIN',
@@ -2190,7 +2228,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: {
 			'quick-ball': 20,
 		},
-		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length > 0,
+		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length >= 10,
 	},
 	'catch 20 different pokemon from swarms': {
 		kind: 'BULLETIN',
@@ -2200,7 +2238,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: {
 			'ultra-ball': 20,
 		},
-		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length > 0,
+		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length >= 20,
 	},
 	'deal 50 damage with one attack': {
 		kind: 'QUEST_LINE',
@@ -2303,7 +2341,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'defeat misty': {
 		kind: 'BULLETIN',
 		researchPoints: 50,
-		rewardItems: { 'passho-berry': 5, 'mystic-water': 1 },
+		rewardItems: { 'passho-berry': 5, 'mystic-water': 1, sprayduck: 1 },
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'Gym Leader Misty');

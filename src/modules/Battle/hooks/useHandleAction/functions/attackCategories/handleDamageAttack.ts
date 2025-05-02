@@ -1,3 +1,4 @@
+import { isContactMove } from '../../../../../../constants/contactMoves';
 import { SELF_DESTRUCTING_MOVES } from '../../../../../../constants/selfDestructingMoves';
 import { applyAttackAilmentsToPokemon } from '../../../../../../functions/applyAttackAilmentsToPokemon';
 import { applyAttackStatChanges } from '../../../../../../functions/applyAttackStatChanges';
@@ -12,7 +13,7 @@ import { Message } from '../../../../../../hooks/useMessageQueue';
 import { isRemovedByRapidSpin } from '../../../../../../interfaces/Ailment';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
-import { gemTable } from '../../../../../../interfaces/Item';
+import { gemTable, isBerry } from '../../../../../../interfaces/Item';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
 import { BattleTerrain } from '../../../useBattleWeather';
@@ -137,7 +138,9 @@ export const handleDamageAttack = ({
 		updatedTarget = { ...updatedTarget, heldItemName: undefined };
 	}
 	if (
-		(move.name === 'thief' || move.name === 'covet') &&
+		(move.name === 'thief' ||
+			move.name === 'covet' ||
+			(move.name === 'pluck' && isBerry(updatedTarget.heldItemName))) &&
 		updatedTarget.ability !== 'sticky-hold' &&
 		updatedTarget.heldItemName &&
 		!updatedAttacker.heldItemName
@@ -463,6 +466,10 @@ export const handleDamageAttack = ({
 	updatedAttacker = { ...a };
 	updatedTarget = { ...t };
 
+	const preventSideEffects =
+		isContactMove(move.name, updatedAttacker) &&
+		getHeldItem(updatedTarget) === 'protective-pads';
+
 	const category = move.data.meta.category.name;
 	if (category === 'damage+raise') {
 		updatedAttacker = applyAttackStatChanges(
@@ -474,7 +481,7 @@ export const handleDamageAttack = ({
 			battleFieldEffects
 		);
 	}
-	if (category === 'damage+lower') {
+	if (category === 'damage+lower' && !preventSideEffects) {
 		updatedTarget = applyAttackStatChanges(
 			updatedTarget,
 			updatedTarget.ability,
@@ -484,7 +491,11 @@ export const handleDamageAttack = ({
 			battleFieldEffects
 		);
 	}
-	if (category === 'damage+ailment' || attacker.ability === 'poison-touch') {
+
+	if (
+		(category === 'damage+ailment' || attacker.ability === 'poison-touch') &&
+		!preventSideEffects
+	) {
 		if (attacker.ability === 'poison-touch') {
 			move = {
 				...move,

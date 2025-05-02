@@ -144,12 +144,16 @@ export const applyPrimaryAilmentToPokemon = (
 			updatedApplicator: applicator,
 		};
 	}
+
+	const blockPoisonWithType =
+		applicator.ability !== 'corrosion' &&
+		(getTypeNames(target).includes('poison') ||
+			getTypeNames(target).includes('steel'));
 	if (
 		(ailment === 'poison' || ailment === 'toxic') &&
 		!['immunity'].includes(target.ability) &&
 		//poison and steel pokemon cant get poisoned
-		!getTypeNames(target).includes('poison') &&
-		!getTypeNames(target).includes('steel')
+		!blockPoisonWithType
 	) {
 		addMessage({
 			message: `${target.data.name} was ${

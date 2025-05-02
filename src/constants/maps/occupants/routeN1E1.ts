@@ -1,3 +1,4 @@
+import { getTimeOfDay } from '../../../functions/getTimeOfDay';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { routeN1E1Lure } from '../../../modules/BerryLure/BerryLure';
 import { janine } from './janine';
@@ -145,6 +146,26 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((occ) => occ.id === 'ledge_n1e1_4'),
 		sprite: '/ledges/ledgeUp.png',
+	},
+	{
+		type: 'POKEMON',
+		x: 25,
+		y: 25,
+		orientation: 'DOWN',
+		dexId: 151,
+		encounter: {
+			name: 'mew',
+			maxXp: 125000,
+			minXp: 125000,
+			rarity: 'common',
+		},
+		dialogue: ['Mew Mew'],
+		conditionFunction: (s) =>
+			s.pokedex.mew.caughtOnRoutes.length === 0 &&
+			s.bag['payapa-berry'] > 0 &&
+			getTimeOfDay() === 'DAY' &&
+			s.campUpgrades['invite historian'],
+		id: 'routeN1E1_mew',
 	},
 	...janine,
 	routeN1E1Lure,

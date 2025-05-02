@@ -55,7 +55,7 @@ export const useBattleWeather = (allOnField: BattlePokemon[]) => {
 	};
 };
 
-export type BattleTerrain = 'grassy';
+export type BattleTerrain = 'grassy' | 'electric';
 export interface TerrainObject {
 	type: BattleTerrain;
 	duration: number;

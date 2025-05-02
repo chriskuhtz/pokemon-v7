@@ -4,7 +4,7 @@ export const routeE1Encounters: EncounterMap = {
 	WATER: [],
 	BASE: [
 		{
-			name: 'pikachu-belle',
+			name: 'pikachu-sinnoh-cap',
 			minXp: 1000,
 			maxXp: 1000,
 			rarity: 'ultra-rare',

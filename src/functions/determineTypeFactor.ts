@@ -1,4 +1,5 @@
-import { ballAndBombMoves } from '../constants/punchBasedMoves';
+import { ballAndBombMoves, powderMoves } from '../constants/punchBasedMoves';
+import { soundBasedMoves } from '../constants/soundBasedMoves';
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -47,6 +48,15 @@ export const determineTypeFactor = (
 	}
 	if (attackType === 'normal' && attacker.ability === 'aerilate') {
 		attackType = 'flying';
+	}
+	if (attackType === 'normal' && attacker.ability === 'galvanize') {
+		attackType = 'flying';
+	}
+	if (
+		soundBasedMoves.includes(attack.name) &&
+		attacker.ability === 'liquid-voice'
+	) {
+		attackType = 'water';
 	}
 	if (attack.name === 'hidden-power') {
 		attackType = getHiddenPowerType(attacker.intrinsicValues);
@@ -132,6 +142,17 @@ export const determineTypeFactor = (
 		if (addMessage) {
 			addMessage({
 				message: `${target.data.name} prevents damage with bulletproof`,
+			});
+		}
+		return 0;
+	}
+	if (
+		getHeldItem(target) === 'safety-goggles' &&
+		powderMoves.includes(attack.name)
+	) {
+		if (addMessage) {
+			addMessage({
+				message: `${target.data.name} prevents damage with safety goggles`,
 			});
 		}
 		return 0;

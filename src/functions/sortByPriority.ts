@@ -2,12 +2,16 @@ import { PARA_SPEED_FACTOR } from '../interfaces/Ailment';
 
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
+import { BattleFieldEffect } from '../modules/Battle/BattleField';
+import { BattleTerrain } from '../modules/Battle/hooks/useBattleWeather';
 import { calculateModifiedStat } from './calculateModifiedStat';
 import { getHeldItem } from './getHeldItem';
 
 const calculateTotalSpeed = (
 	a: BattlePokemon,
-	battleWeather: WeatherType | undefined
+	battleWeather: WeatherType | undefined,
+	battlefieldEffects: BattleFieldEffect[],
+	battleTerrain: BattleTerrain | undefined
 ): number => {
 	const paraFactor =
 		a.primaryAilment?.type === 'paralysis' && a.ability !== 'quick-feet'
@@ -28,6 +32,12 @@ const calculateTotalSpeed = (
 		: 1;
 	const machoBraceFactor = getHeldItem(a) === 'macho-brace' ? 0.5 : 1;
 	const choiceScarfFactor = getHeldItem(a) === 'choice-scarf' ? 2 : 1;
+	const tailwindFactor = battlefieldEffects.some(
+		(effect) => effect.ownerId === a.ownerId && effect.type === 'tailwind'
+	)
+		? 2
+		: 1;
+	const surgeSurferFactor = battleTerrain === 'electric' ? 2 : 1;
 
 	const quickfeetFactor =
 		a.primaryAilment && a.ability === 'quick-feet' ? 1.5 : 1;
@@ -59,14 +69,18 @@ const calculateTotalSpeed = (
 		slushrushFactor *
 		ironBallFactor *
 		laggingTailFactor *
-		choiceScarfFactor
+		choiceScarfFactor *
+		tailwindFactor *
+		surgeSurferFactor
 	);
 };
 export const sortByPriority = (
 	a: BattlePokemon,
 	b: BattlePokemon,
 	battleRound: number,
-	battleWeather: WeatherType | undefined
+	battleWeather: WeatherType | undefined,
+	battleFieldEffects: BattleFieldEffect[],
+	battleTerrain: BattleTerrain | undefined
 ): number => {
 	const aMove = a.moveQueue.find((m) => m.round === battleRound);
 	const bMove = b.moveQueue.find((m) => m.round === battleRound);
@@ -85,6 +99,7 @@ export const sortByPriority = (
 	) {
 		return -1;
 	}
+
 	if (
 		aMove?.type === 'CatchProcessInfo' ||
 		aMove?.type === 'InBattleItem' ||
@@ -115,6 +130,13 @@ export const sortByPriority = (
 		aPriority += 1;
 	}
 	if (
+		a.ability === 'triage' &&
+		aMove?.type === 'BattleAttack' &&
+		aMove.data.meta.category.name === 'heal'
+	) {
+		aPriority += 3;
+	}
+	if (
 		a.ability === 'gale-wings' &&
 		aMove?.type === 'BattleAttack' &&
 		aMove.data.type.name === 'flying'
@@ -142,8 +164,18 @@ export const sortByPriority = (
 		return 1;
 	}
 
-	const aSpeed = calculateTotalSpeed(a, battleWeather);
-	const bSpeed = calculateTotalSpeed(b, battleWeather);
+	const aSpeed = calculateTotalSpeed(
+		a,
+		battleWeather,
+		battleFieldEffects,
+		battleTerrain
+	);
+	const bSpeed = calculateTotalSpeed(
+		b,
+		battleWeather,
+		battleFieldEffects,
+		battleTerrain
+	);
 
 	if (bSpeed > aSpeed) {
 		return 1;

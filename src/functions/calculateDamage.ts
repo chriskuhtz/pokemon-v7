@@ -1,5 +1,5 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
-import { contactMoves } from '../constants/contactMoves';
+import { isContactMove } from '../constants/contactMoves';
 import {
 	fixedDamageMoves,
 	levelDamageMoves,
@@ -19,6 +19,7 @@ import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import {
 	gemTable,
+	isBerry,
 	ItemType,
 	superEffectiveSaveTable,
 } from '../interfaces/Item';
@@ -128,6 +129,12 @@ export const getHiddenPowerPower = (ivs: StatObject) => {
 export const getRolloutFactor = (turn: number, defenseCurled: boolean) => {
 	return turn * (defenseCurled ? 2 : 1);
 };
+export const getGyroBallPower = (
+	targetSpeed: number,
+	attackerSpeed: number
+) => {
+	return 1 + 25 * (targetSpeed / attackerSpeed);
+};
 
 export const getPower = (
 	attacker: BattlePokemon,
@@ -136,6 +143,24 @@ export const getPower = (
 	attackerLevel: number,
 	weather: WeatherType | undefined
 ) => {
+	if (attack.name === 'gyro-ball') {
+		return getGyroBallPower(
+			calculateModifiedStat(
+				target.stats.speed,
+				target.statBoosts.speed,
+				'speed',
+				target,
+				false
+			),
+			calculateModifiedStat(
+				attacker.stats.speed,
+				attacker.statBoosts.speed,
+				'speed',
+				attacker,
+				false
+			)
+		);
+	}
 	if (attack.name === 'weather-ball' && attack.data.power) {
 		if (
 			weather === 'sun' ||
@@ -306,6 +331,16 @@ export const calculateDamage = (
 		} else {
 			if (addMessage) {
 				addMessage({ message: 'Counter failed' });
+			}
+			return { damage: 0 };
+		}
+	}
+	if (attack.name === 'metal-burst') {
+		if (attacker.lastReceivedDamage?.applicatorId === target.id) {
+			return { damage: attacker.lastReceivedDamage.damage * 1.5 };
+		} else {
+			if (addMessage) {
+				addMessage({ message: 'Metal Burst failed' });
 			}
 			return { damage: 0 };
 		}
@@ -716,6 +751,8 @@ export const calculateDamage = (
 		attacker.ability === 'pixilate' && attackType === 'normal' ? 1.3 : 1;
 	const aerilateFactor =
 		attacker.ability === 'aerilate' && attackType === 'normal' ? 1.3 : 1;
+	const galvanizeFactor =
+		attacker.ability === 'galvanize' && attackType === 'normal' ? 1.2 : 1;
 	const megaLauncherFactor =
 		attacker.ability === 'mega-launcher' &&
 		auraAndPulseMoves.includes(attack.name)
@@ -728,7 +765,7 @@ export const calculateDamage = (
 			? 0.66
 			: 1;
 	const toughClawsFactor =
-		attacker.ability === 'tough-claws' && contactMoves.includes(attack.name)
+		attacker.ability === 'tough-claws' && isContactMove(attack.name, attacker)
 			? 1.33
 			: 1;
 
@@ -765,7 +802,10 @@ export const calculateDamage = (
 		target.primaryAilment?.type === 'sleep' && attack.name === 'wake-up-slap'
 			? 2
 			: 1;
-
+	const brineFactor =
+		attack.name === 'brine' && target.damage / target.stats.hp > 0.5 ? 2 : 1;
+	const pluckFactor =
+		attack.name === 'pluck' && isBerry(target.heldItemName) ? 2 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -844,7 +884,10 @@ export const calculateDamage = (
 				waterBubbleAttackerFactor *
 				waterBubbleTargetFactor *
 				steelWorkerFactor *
-				wakeUpSlapFactor
+				wakeUpSlapFactor *
+				brineFactor *
+				pluckFactor *
+				galvanizeFactor
 		),
 		1
 	);

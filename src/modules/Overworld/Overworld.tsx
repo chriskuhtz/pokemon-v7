@@ -16,6 +16,7 @@ import {
 } from '../../hooks/useInteractWithSnorlax';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
+import { useStrangeTree } from '../../hooks/useStrangeTree';
 import { useSwarmRadar } from '../../hooks/useSwarmRadar';
 import { useZigzagoonForagers } from '../../hooks/useZigzagoonForagers';
 import { Inventory } from '../../interfaces/Inventory';
@@ -60,6 +61,7 @@ export const Overworld = ({
 	const interactWithHoneyTree = useHoneyTree();
 	const interactWithTrainer = useInteractWithTrainer();
 	const interactWithHallowedTower = useHallowedTower();
+	const interactWithStrangeTree = useStrangeTree();
 	const interactWithCombeeHive = useCombeeHive();
 	const interactWithBush = useMachete();
 	const interactWithLedge = useInteractWithLedge();
@@ -124,6 +126,7 @@ export const Overworld = ({
 				goToPosition: setCharacterLocation,
 				interactWithHoneyTree,
 				interactWithHallowedTower,
+				interactWithStrangeTree,
 				interactWithCombeeHive,
 				interactWithBush,
 				interactWithRock,
@@ -145,6 +148,7 @@ export const Overworld = ({
 			interactWithCombeeHive,
 			interactWithDugtrioExplorer,
 			interactWithHallowedTower,
+			interactWithStrangeTree,
 			interactWithHoneyTree,
 			interactWithLedge,
 			interactWithRock,
