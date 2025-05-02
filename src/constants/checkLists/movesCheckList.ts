@@ -1505,9 +1505,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/372/',
 		handled: true,
 	},
-	{ name: 'embargo', url: 'https://pokeapi.co/api/v2/move/373/' },
-	{ name: 'fling', url: 'https://pokeapi.co/api/v2/move/374/' },
-	{ name: 'psycho-shift', url: 'https://pokeapi.co/api/v2/move/375/' },
+	{
+		name: 'psycho-shift',
+		url: 'https://pokeapi.co/api/v2/move/375/',
+		handled: true,
+	},
 	{ name: 'trump-card', url: 'https://pokeapi.co/api/v2/move/376/' },
 	{ name: 'heal-block', url: 'https://pokeapi.co/api/v2/move/377/' },
 	{ name: 'wring-out', url: 'https://pokeapi.co/api/v2/move/378/' },
@@ -2062,7 +2064,8 @@ export const movesCheckList: {
 	/*
 	 * BANISHED:
 	 */
-
+	{ name: 'embargo', url: 'https://pokeapi.co/api/v2/move/373/' },
+	{ name: 'fling', url: 'https://pokeapi.co/api/v2/move/374/' },
 	{ name: 'gravity', url: 'https://pokeapi.co/api/v2/move/356/' },
 	{ name: 'block', url: 'https://pokeapi.co/api/v2/move/335/' },
 	{ name: 'water-sport', url: 'https://pokeapi.co/api/v2/move/346/' },
@@ -2580,6 +2583,7 @@ export const handledMoves = [
 	'metal-burst',
 	'payback',
 	'assurance',
+	'psycho-shift',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
