@@ -558,6 +558,7 @@ export const questNames = [
 	'defeat sabrina',
 	'defeat brock',
 	'defeat gary',
+	'defeat roark',
 	'reach challenge field rank 1',
 	'reach challenge field rank 18',
 	'reach challenge field rank 40',

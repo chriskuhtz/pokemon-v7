@@ -86,3 +86,17 @@ export const powderMoves = [
 	'Powder',
 	'Magic Powder',
 ];
+export const danceMoves = [
+	'aqua-step',
+	'clangorous-soul',
+	'dragon-dance',
+	'feather-dance',
+	'fiery-dance',
+	'lunar-dance',
+	'petal-dance',
+	'revelation-dance',
+	'quiver-dance',
+	'swords-dance',
+	'teeter-dance',
+	'victory-dance',
+];
