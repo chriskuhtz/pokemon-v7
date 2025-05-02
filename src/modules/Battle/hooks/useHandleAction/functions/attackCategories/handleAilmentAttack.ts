@@ -150,7 +150,8 @@ export const handleAilmentAttack = ({
 			battleWeather,
 			undefined,
 			0,
-			battleFieldEffects
+			battleFieldEffects,
+			target.stats.hp
 		);
 	updatedAttacker = { ...afterAbilityCheck };
 	updatedTarget = { ...t };
