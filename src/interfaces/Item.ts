@@ -120,6 +120,8 @@ export const evoStones = [
 	'sweet-apple',
 	'auspicious-armor',
 	'malicious-armor',
+	'chipped-pot',
+	'cracked-pot',
 ] as const;
 export const heldItems = [
 	'quick-claw',
@@ -263,6 +265,10 @@ export const heldItems = [
 	'blunder-policy',
 ] as const;
 export const valuables = [
+	'auspicious-armor',
+	'malicious-armor',
+	'chipped-pot',
+	'cracked-pot',
 	'shoal-salt',
 	'shoal-shell',
 	'green-shard',
