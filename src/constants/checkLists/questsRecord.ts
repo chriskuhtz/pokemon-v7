@@ -1276,7 +1276,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'training field 5',
 		availableAfter: 'defeat all tier 4 field trainers',
 	},
-
 	'grow a berry': {
 		rewardItems: {
 			'damp-mulch': 2,
