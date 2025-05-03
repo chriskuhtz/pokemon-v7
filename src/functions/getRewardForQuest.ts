@@ -10,5 +10,9 @@ export const getRewardItemsForQuest = (q: QuestName): Partial<Inventory> => {
 		randomizedRewards ? JSON.parse(randomizedRewards) : {}
 	) as Record<QuestName, Quest>;
 
-	return randomizedRewards ? parsed[q].rewardItems : quest.rewardItems;
+	if (randomizedRewards && parsed[q]) {
+		return parsed[q].rewardItems;
+	}
+
+	return quest.rewardItems;
 };

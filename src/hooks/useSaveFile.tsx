@@ -34,13 +34,11 @@ import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunctio
 import { updateItemFunction } from '../functions/updateItemFunction';
 import { Challenger } from '../interfaces/Challenger';
 import { EmptyInventory, joinInventories } from '../interfaces/Inventory';
-import { getRandomBall, getRandomItem, ItemType } from '../interfaces/Item';
+import { ItemType } from '../interfaces/Item';
 import { Occupant } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
-import { Quest } from '../interfaces/Quest';
 import { RoutesType } from '../interfaces/Routing';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
-import { randomQuestRewards } from '../modules/Settings/Settings';
 import { Message } from './useMessageQueue';
 
 export interface EvolutionReducerPayload {
@@ -94,43 +92,6 @@ export interface UseSaveFile {
 }
 const migrateSavefile = (input: SaveFile) => {
 	const updatedInput = { ...input };
-
-	//add new random quest rewards
-	const randomizedRewards = window.localStorage.getItem(randomQuestRewards);
-
-	if (randomizedRewards) {
-		const parsed = (
-			randomizedRewards ? JSON.parse(randomizedRewards) : {}
-		) as Record<QuestName, Quest>;
-
-		if (
-			questNames.some((q) => !parsed[q]) ||
-			Object.keys(parsed).some((key) => !questNames.includes(key))
-		) {
-			window.localStorage.setItem(
-				randomQuestRewards,
-				JSON.stringify(
-					Object.fromEntries(
-						Object.entries(QuestsRecord).map(([name, quest]) => {
-							if (parsed[name]) {
-								return [name, parsed];
-							}
-							return [
-								name,
-								{
-									...quest,
-									rewardItems: {
-										[getRandomItem()]: Math.floor(1 + Math.random() * 9),
-										[getRandomBall()]: Math.floor(1 + Math.random() * 4),
-									},
-								},
-							];
-						})
-					)
-				)
-			);
-		}
-	}
 
 	//migrate new quests
 	updatedInput.quests = Object.fromEntries(
