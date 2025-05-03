@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import { FaRegCircleCheck } from 'react-icons/fa6';
 import { App, FullScreenToggle } from '../../App';
 import { battleSpriteSize } from '../../constants/gameData';
@@ -12,7 +13,10 @@ export const MessageContainer = () => {
 		useContext(MessageQueueContext);
 
 	return (
-		<>
+		<ErrorBoundary
+			onError={(e) => addMessage({ message: e.message })}
+			fallback={<div>{latestMessage?.message}</div>}
+		>
 			{latestMessage && (
 				<Banner onClick={confirmLatestMessage}>
 					<h2 style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
@@ -29,6 +33,6 @@ export const MessageContainer = () => {
 					<App />
 				</SaveFileProvider>
 			</BaseSizeProvider>
-		</>
+		</ErrorBoundary>
 	);
 };
