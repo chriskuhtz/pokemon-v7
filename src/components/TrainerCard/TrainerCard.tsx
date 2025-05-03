@@ -40,7 +40,7 @@ export const TrainerCard = () => {
 					<div>
 						<h4>{playerId}</h4>
 						{/* <h4>Money: {money}$</h4> */}
-						<h4>Reseach Points: {researchPoints}</h4>
+						<h4>Research Points: {researchPoints}</h4>
 						<h4>Damage Record: {mileStones.damageRecord}</h4>
 						{mileStones.challengeFieldRecord && (
 							<h4>Challenge Field Record: {mileStones.challengeFieldRecord}</h4>
