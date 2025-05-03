@@ -1,6 +1,13 @@
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { timesOfDay } from '../../functions/getTimeOfDay';
-import { trainers } from '../../functions/makeRandomTrainer';
+import {
+	tier1trainers,
+	tier2trainers,
+	tier3trainers,
+	tier4trainers,
+	tier5trainers,
+	trainers,
+} from '../../functions/makeRandomTrainer';
 import { honeyPokemon } from '../../hooks/useHoneyTree';
 import { Inventory } from '../../interfaces/Inventory';
 import {
@@ -478,15 +485,11 @@ export const questNames = [
 	'train a pokemon to level 90',
 	'train a pokemon to level 100',
 	'defeat a training field trainer',
-	'defeat five training field trainers',
-	'defeat ten training field trainers',
-	'defeat twenty training field trainers',
-	'defeat thirty training field trainers',
-	'defeat forty training field trainers',
-	'defeat fifty training field trainers',
-	'defeat sixty training field trainers',
-	'defeat seventy training field trainers',
-	'defeat eighty training field trainers',
+	'defeat all tier 1 field trainers',
+	'defeat all tier 2 field trainers',
+	'defeat all tier 3 field trainers',
+	'defeat all tier 4 field trainers',
+	'defeat all tier 5 field trainers',
 	'grow a berry',
 	'grow a apricorn',
 	'catch a pokemon in an apricorn ball',
@@ -1191,177 +1194,89 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 1',
 	},
-	'defeat five training field trainers': {
+	'defeat all tier 1 field trainers': {
 		rewardItems: {
-			casteliacone: 2,
+			'moomoo-cheese': 2,
+			'exp-candy-xs': 10,
 		},
-		researchPoints: 10,
+		researchPoints: 25,
 		conditionFunction: (s) => {
-			const defeatedTrainers = [
-				...new Set(
-					s.handledOccupants
-						.filter((h) => trainers.some((t) => t.id === h.id))
-						.map((d) => d.id)
-				),
-			].length;
-			return defeatedTrainers > 4;
+			return tier1trainers.every((trainer) =>
+				s.handledOccupants.some((h) => h.id === trainer.id)
+			);
 		},
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 1',
 		availableAfter: 'defeat a training field trainer',
 	},
-	'defeat ten training field trainers': {
+	'defeat all tier 2 field trainers': {
 		rewardItems: {
-			'pewter-crunchies': 3,
-		},
-		researchPoints: 10,
-		conditionFunction: (s) => {
-			const defeatedTrainers = [
-				...new Set(
-					s.handledOccupants
-						.filter((h) => trainers.some((t) => t.id === h.id))
-						.map((d) => d.id)
-				),
-			].length;
-			return defeatedTrainers > 9;
-		},
-		kind: 'BULLETIN',
-		requiredUpgrade: 'training field 1',
-		availableAfter: 'defeat five training field trainers',
-	},
-	'defeat twenty training field trainers': {
-		rewardItems: {
-			'rage-candy-bar': 4,
-		},
-		researchPoints: 20,
-		conditionFunction: (s) => {
-			const defeatedTrainers = [
-				...new Set(
-					s.handledOccupants
-						.filter((h) => trainers.some((t) => t.id === h.id))
-						.map((d) => d.id)
-				),
-			].length;
-			return defeatedTrainers > 19;
-		},
-		kind: 'BULLETIN',
-		requiredUpgrade: 'training field 2',
-		availableAfter: 'defeat ten training field trainers',
-	},
-	'defeat thirty training field trainers': {
-		rewardItems: {
-			'lumiose-galette': 5,
-		},
-		researchPoints: 30,
-		conditionFunction: (s) => {
-			const defeatedTrainers = [
-				...new Set(
-					s.handledOccupants
-						.filter((h) => trainers.some((t) => t.id === h.id))
-						.map((d) => d.id)
-				),
-			].length;
-			return defeatedTrainers > 29;
-		},
-		kind: 'BULLETIN',
-		requiredUpgrade: 'training field 2',
-		availableAfter: 'defeat twenty training field trainers',
-	},
-	'defeat forty training field trainers': {
-		rewardItems: {
-			'old-gateau': 6,
-		},
-		researchPoints: 40,
-		conditionFunction: (s) => {
-			const defeatedTrainers = [
-				...new Set(
-					s.handledOccupants
-						.filter((h) => trainers.some((t) => t.id === h.id))
-						.map((d) => d.id)
-				),
-			].length;
-			return defeatedTrainers > 39;
-		},
-		kind: 'BULLETIN',
-		requiredUpgrade: 'training field 2',
-		availableAfter: 'defeat thirty training field trainers',
-	},
-	'defeat fifty training field trainers': {
-		rewardItems: {
-			'lava-cookie': 7,
+			casteliacone: 2,
+			'exp-candy-s': 10,
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {
-			const defeatedTrainers = [
-				...new Set(
-					s.handledOccupants
-						.filter((h) => trainers.some((t) => t.id === h.id))
-						.map((d) => d.id)
-				),
-			].length;
-			return defeatedTrainers > 49;
+			return tier2trainers.every((trainer) =>
+				s.handledOccupants.some((h) => h.id === trainer.id)
+			);
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 2',
+		availableAfter: 'defeat all tier 1 field trainers',
+	},
+	'defeat all tier 3 field trainers': {
+		rewardItems: {
+			'pewter-crunchies': 2,
+			'exp-candy-m': 10,
+		},
+		researchPoints: 75,
+		conditionFunction: (s) => {
+			return tier3trainers.every((trainer) =>
+				s.handledOccupants.some((h) => h.id === trainer.id)
+			);
 		},
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 3',
-		availableAfter: 'defeat forty training field trainers',
+		availableAfter: 'defeat all tier 2 field trainers',
 	},
-	'defeat sixty training field trainers': {
+	'defeat all tier 4 field trainers': {
 		rewardItems: {
-			'big-malasada': 8,
+			'lumiose-galette': 2,
+			'exp-candy-l': 10,
 		},
-		researchPoints: 50,
+		researchPoints: 100,
 		conditionFunction: (s) => {
-			const defeatedTrainers = [
-				...new Set(
-					s.handledOccupants
-						.filter((h) => trainers.some((t) => t.id === h.id))
-						.map((d) => d.id)
-				),
-			].length;
-			return defeatedTrainers > 59;
-		},
-		kind: 'BULLETIN',
-		requiredUpgrade: 'training field 3',
-		availableAfter: 'defeat fifty training field trainers',
-	},
-	'defeat seventy training field trainers': {
-		rewardItems: {
-			casteliacone: 9,
-		},
-		researchPoints: 50,
-		conditionFunction: (s) => {
-			const defeatedTrainers = [
-				...new Set(
-					s.handledOccupants
-						.filter((h) => trainers.some((t) => t.id === h.id))
-						.map((d) => d.id)
-				),
-			].length;
-			return defeatedTrainers > 69;
+			return tier4trainers.every((trainer) =>
+				s.handledOccupants.some((h) => h.id === trainer.id)
+			);
 		},
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 4',
-		availableAfter: 'defeat sixty training field trainers',
+		availableAfter: 'defeat all tier 3 field trainers',
 	},
-	'defeat eighty training field trainers': {
+	'defeat all tier 5 field trainers': {
 		rewardItems: {
+			'big-malasada': 10,
 			'moomoo-cheese': 10,
+			casteliacone: 10,
+			'pewter-crunchies': 10,
+			'lumiose-galette': 10,
+			'rage-candy-bar': 10,
+			'lava-cookie': 10,
+			'old-gateau': 10,
+			'exp-candy-xl': 10,
 		},
-		researchPoints: 50,
+		researchPoints: 125,
 		conditionFunction: (s) => {
-			const defeatedTrainers = [
-				...new Set(
-					s.handledOccupants
-						.filter((h) => trainers.some((t) => t.id === h.id))
-						.map((d) => d.id)
-				),
-			].length;
-			return defeatedTrainers > 79;
+			return tier5trainers.every((trainer) =>
+				s.handledOccupants.some((h) => h.id === trainer.id)
+			);
 		},
 		kind: 'BULLETIN',
-		requiredUpgrade: 'training field 4',
-		availableAfter: 'defeat seventy training field trainers',
+		requiredUpgrade: 'training field 5',
+		availableAfter: 'defeat all tier 4 field trainers',
 	},
+
 	'grow a berry': {
 		rewardItems: {
 			'damp-mulch': 2,
@@ -2553,9 +2468,9 @@ console.log(
 		0
 	),
 	'total costs',
-	5 +
+	6 +
 		campUpgradeNames
-			.map((_, i) => 5 * i)
+			.map((_, i) => 6 * i)
 			.reduce((sum, summand) => sum + summand, 0),
 	'quests w/o questName',
 	Object.keys(QuestsRecord).filter((key) => !questNames.includes(key)),

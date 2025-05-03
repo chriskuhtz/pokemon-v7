@@ -135,11 +135,7 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 			return [];
 		}
 		return data.moves
-			.filter(
-				(m) =>
-					handledMoves.includes(m.move.name as MoveName) &&
-					!ownedPokemon.unlockedMoves.includes(m.move.name as MoveName)
-			)
+			.filter((m) => handledMoves.includes(m.move.name as MoveName))
 			.map((m) => {
 				if (saveFile.settings?.randomLearnSets) {
 					const index =
@@ -156,6 +152,9 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 				}
 				return m;
 			})
+			.filter(
+				(m) => !ownedPokemon.unlockedMoves.includes(m.move.name as MoveName)
+			)
 			.sort((a, b) => {
 				if (ownedPokemon.unlockedMoves.includes(a.move.name as MoveName)) {
 					return -1;

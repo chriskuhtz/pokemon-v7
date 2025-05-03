@@ -79,7 +79,7 @@ export const StarterSelection = (): JSX.Element => {
 				pokemon: [
 					{
 						...mon,
-						xp: 125,
+						xp: 1250000,
 					},
 				],
 				storage: CompleteInventory,

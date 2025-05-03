@@ -465,6 +465,7 @@ export type ValuableType = (typeof valuables)[number];
 export type ApricornType = (typeof apricorns)[number];
 export type HerbType = (typeof herbs)[number];
 export type KeyItemType = (typeof keyItems)[number];
+export type HeldItemType = (typeof heldItems)[number];
 
 export function isPokeball(x: string | undefined): x is PokeballType {
 	return (balltypes as unknown as string[]).includes(x ?? '');
@@ -553,6 +554,9 @@ export function isXItem(x: string | undefined): x is XItemType {
 }
 export function isRunawayItem(x: string | undefined): x is RunawayItem {
 	return (runawayItemTypes as unknown as string[]).includes(x ?? '');
+}
+export function isHeldItem(x: string | undefined): x is HeldItemType {
+	return (heldItems as unknown as string[]).includes(x ?? '');
 }
 
 export function isItem(x: string | undefined): x is ItemType {

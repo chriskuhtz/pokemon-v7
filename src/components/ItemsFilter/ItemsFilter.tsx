@@ -3,10 +3,13 @@ import { Inventory } from '../../interfaces/Inventory';
 import {
 	ItemType,
 	canCauseEvolution,
+	expCandyTable,
 	isApricorn,
 	isBerry,
 	isCooked,
+	isFossil,
 	isHealingItem,
+	isHeldItem,
 	isIngredient,
 	isMulch,
 	isPokeball,
@@ -15,13 +18,16 @@ import {
 export const itemfilterNames = [
 	'poke-balls',
 	'repel+escape',
-	'heal-items',
+	'healing',
 	'berries',
 	'apricorns',
 	'mulch',
 	'ingredient',
 	'cooked',
 	'evolution',
+	'fossil',
+	'exp',
+	'held item',
 	'other',
 ] as const;
 export type ItemsFilterType = (typeof itemfilterNames)[number];
@@ -30,13 +36,14 @@ export const filterItemsByType = (
 	item: ItemType,
 	itemsFilter: ItemsFilterType | undefined
 ): boolean => {
+	const isExp = !!expCandyTable[item] || item == 'rare-candy';
 	if (itemsFilter === 'poke-balls') {
 		return isPokeball(item);
 	}
 	if (itemsFilter === 'repel+escape') {
 		return item.includes('repel') || item === 'escape-rope';
 	}
-	if (itemsFilter === 'heal-items') {
+	if (itemsFilter === 'healing') {
 		return isHealingItem(item);
 	}
 	if (itemsFilter === 'berries') {
@@ -57,6 +64,15 @@ export const filterItemsByType = (
 	if (itemsFilter === 'evolution') {
 		return canCauseEvolution(item);
 	}
+	if (itemsFilter === 'exp') {
+		return isExp;
+	}
+	if (itemsFilter === 'fossil') {
+		return isFossil(item);
+	}
+	if (itemsFilter === 'held item') {
+		return isHeldItem(item);
+	}
 	if (itemsFilter === 'other') {
 		return (
 			!isPokeball(item) &&
@@ -66,7 +82,9 @@ export const filterItemsByType = (
 			!isMulch(item) &&
 			!isIngredient(item) &&
 			!isCooked(item) &&
-			!canCauseEvolution(item)
+			!canCauseEvolution(item) &&
+			!isExp &&
+			isFossil(item)
 		);
 	}
 	return true;
