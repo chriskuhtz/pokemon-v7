@@ -51,15 +51,6 @@ const trainingField: Occupant[] = [
 
 export const campOccupants: OverworldMap['occupants'] = [
 	{
-		type: 'ITEM',
-		item: 'exp-share',
-		amount: 1,
-		x: 2,
-		y: 1,
-		conditionFunction: () => true,
-		id: 'remove me',
-	},
-	{
 		type: 'NURSE',
 		id: 'camp_nurse',
 		x: 2,
