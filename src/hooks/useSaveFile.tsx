@@ -94,15 +94,8 @@ const migrateSavefile = (input: SaveFile) => {
 	const updatedInput = { ...input };
 
 	//migrate new quests
-	questNames.forEach((name) => {
-		if (updatedInput.quests[name] === undefined) {
-			updatedInput.quests[name] = 'INACTIVE';
-		}
-	});
 	updatedInput.quests = Object.fromEntries(
-		Object.entries(updatedInput.quests).filter(([quest]) =>
-			questNames.includes(quest)
-		)
+		questNames.map((q) => [q, updatedInput.quests[q] ?? 'INACTIVE'])
 	);
 
 	updatedInput.pokemon = input.pokemon.map((p) => {
@@ -114,6 +107,7 @@ const migrateSavefile = (input: SaveFile) => {
 	});
 	return updatedInput;
 };
+
 const useSaveFile = (
 	init: SaveFile,
 	addMessage: (x: Message) => void
