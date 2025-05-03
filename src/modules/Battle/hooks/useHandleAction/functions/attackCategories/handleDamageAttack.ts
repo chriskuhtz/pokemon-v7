@@ -146,7 +146,7 @@ export const handleDamageAttack = ({
 		!updatedAttacker.heldItemName
 	) {
 		addMessage({
-			message: `${updatedAttacker.name} steals ${updatedTarget.name}'s ${updatedTarget.name}`,
+			message: `${updatedAttacker.name} steals ${updatedTarget.name}'s ${updatedTarget.heldItemName}`,
 		});
 		updatedAttacker = {
 			...updatedAttacker,

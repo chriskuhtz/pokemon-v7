@@ -31,6 +31,7 @@ export const ChangeLog = ({
 					>
 						Got it, lets go
 					</button>
+					<ChangeLogV16 />
 					<ChangeLogV15 />
 					<ChangeLogV14 />
 					<ChangeLogV13 />
@@ -48,7 +49,18 @@ export const ChangeLog = ({
 		</Page>
 	);
 };
-export const ChangeLogV15 = (): JSX.Element => {
+const ChangeLogV16 = (): JSX.Element => {
+	return (
+		<>
+			<h3>V 0.16:</h3>
+
+			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>Various minor fixes</li>
+			</ol>
+		</>
+	);
+};
+const ChangeLogV15 = (): JSX.Element => {
 	return (
 		<>
 			<h3>V 0.15:</h3>
@@ -62,7 +74,7 @@ export const ChangeLogV15 = (): JSX.Element => {
 		</>
 	);
 };
-export const ChangeLogV14 = (): JSX.Element => {
+const ChangeLogV14 = (): JSX.Element => {
 	return (
 		<>
 			<h3>V 0.14:</h3>
@@ -77,7 +89,7 @@ export const ChangeLogV14 = (): JSX.Element => {
 		</>
 	);
 };
-export const ChangeLogV13 = (): JSX.Element => {
+const ChangeLogV13 = (): JSX.Element => {
 	return (
 		<>
 			<h3>V 0.13:</h3>
@@ -90,7 +102,7 @@ export const ChangeLogV13 = (): JSX.Element => {
 		</>
 	);
 };
-export const ChangeLogV12 = (): JSX.Element => {
+const ChangeLogV12 = (): JSX.Element => {
 	return (
 		<>
 			<h3>V 0.12:</h3>
@@ -103,7 +115,7 @@ export const ChangeLogV12 = (): JSX.Element => {
 		</>
 	);
 };
-export const ChangeLogV11 = (): JSX.Element => {
+const ChangeLogV11 = (): JSX.Element => {
 	return (
 		<>
 			<h3>V 0.11:</h3>
@@ -114,7 +126,7 @@ export const ChangeLogV11 = (): JSX.Element => {
 		</>
 	);
 };
-export const ChangeLogV10 = (): JSX.Element => {
+const ChangeLogV10 = (): JSX.Element => {
 	return (
 		<>
 			<h3>V 0.10:</h3>
@@ -126,7 +138,7 @@ export const ChangeLogV10 = (): JSX.Element => {
 		</>
 	);
 };
-export const ChangeLogV09 = (): JSX.Element => {
+const ChangeLogV09 = (): JSX.Element => {
 	return (
 		<>
 			<h3>V 0.9:</h3>
@@ -138,7 +150,7 @@ export const ChangeLogV09 = (): JSX.Element => {
 		</>
 	);
 };
-export const ChangeLogV08 = (): JSX.Element => {
+const ChangeLogV08 = (): JSX.Element => {
 	return (
 		<>
 			<h3>V 0.8:</h3>
@@ -150,7 +162,7 @@ export const ChangeLogV08 = (): JSX.Element => {
 		</>
 	);
 };
-export const ChangeLogV07 = (): JSX.Element => {
+const ChangeLogV07 = (): JSX.Element => {
 	return (
 		<>
 			<h3>V 0.7:</h3>
@@ -162,7 +174,7 @@ export const ChangeLogV07 = (): JSX.Element => {
 		</>
 	);
 };
-export const ChangeLogV06 = (): JSX.Element => {
+const ChangeLogV06 = (): JSX.Element => {
 	return (
 		<>
 			<h3>V 0.6:</h3>
@@ -175,7 +187,7 @@ export const ChangeLogV06 = (): JSX.Element => {
 	);
 };
 
-export const ChangeLogV05 = (): JSX.Element => {
+const ChangeLogV05 = (): JSX.Element => {
 	return (
 		<>
 			<h3>V 0.5:</h3>
@@ -189,7 +201,7 @@ export const ChangeLogV05 = (): JSX.Element => {
 	);
 };
 
-export const ChangeLogV04 = (): JSX.Element => {
+const ChangeLogV04 = (): JSX.Element => {
 	return (
 		<>
 			<h3>V 0.4:</h3>

@@ -5,7 +5,7 @@ import { SpriteEnum } from '../interfaces/SpriteEnum';
 import { getRandomEntry } from './filterTargets';
 import { makeChallengerPokemon } from './makeChallengerPokemon';
 
-const tier1trainers: Challenger[] = [
+export const tier1trainers: Challenger[] = [
 	{
 		type: 'TRAINER',
 		id: 'Fiery Fred',
@@ -205,7 +205,7 @@ const tier1trainers: Challenger[] = [
 		trainer: { name: 'Buggin Bob', sprite: SpriteEnum.bugCatcher },
 	},
 ];
-const tier2trainers: Challenger[] = [
+export const tier2trainers: Challenger[] = [
 	{
 		type: 'TRAINER',
 		id: 'Fiery Fred 2',
@@ -474,7 +474,7 @@ const tier2trainers: Challenger[] = [
 		requiredUpgrade: 'training field 2',
 	},
 ];
-const tier3trainers: Challenger[] = [
+export const tier3trainers: Challenger[] = [
 	{
 		type: 'TRAINER',
 		id: 'Fiery Fred 3',
@@ -766,7 +766,7 @@ const tier3trainers: Challenger[] = [
 		requiredUpgrade: 'training field 3',
 	},
 ];
-const tier4trainers: Challenger[] = [
+export const tier4trainers: Challenger[] = [
 	{
 		type: 'TRAINER',
 		id: 'Fiery Fred 4',
@@ -1447,7 +1447,7 @@ const tier4trainers: Challenger[] = [
 		requiredUpgrade: 'training field 4',
 	},
 ];
-const tier5trainers: Challenger[] = [
+export const tier5trainers: Challenger[] = [
 	{
 		type: 'TRAINER',
 		id: 'Fiery Fred 5',
@@ -2238,7 +2238,7 @@ const tier5trainers: Challenger[] = [
 		requiredUpgrade: 'training field 5',
 	},
 ];
-const specialTrainers: Challenger[] = [
+export const specialTrainers: Challenger[] = [
 	{
 		type: 'TRAINER',
 		id: 'Gym Leader Morty',
@@ -2406,6 +2406,11 @@ export const trainersWeakToStrong = [
 ];
 
 console.log('trainers', trainers.length);
+console.log('trainers tier 1', tier1trainers.length);
+console.log('trainers tier 2', tier2trainers.length);
+console.log('trainers tier 3', tier3trainers.length);
+console.log('trainers tier 4', tier4trainers.length);
+console.log('trainers tier 5', tier5trainers.length);
 export const makeRandomTrainer = (
 	saveFile: SaveFile,
 	tier?: 1 | 2 | 3 | 4
