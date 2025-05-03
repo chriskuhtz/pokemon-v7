@@ -13,8 +13,32 @@ export const useOccupants = () => {
 
 	const [statefulOccupants, setStatefulOccupants] = useState<Occupant[]>([]);
 	useEffect(() => {
+		if (
+			saveFile.currentRocketOperation &&
+			saveFile.currentRocketOperation.route === map.id
+		) {
+			const all = [
+				...map.occupants,
+				...saveFile.currentRocketOperation.trainers.map((t) => ({
+					...t,
+					conditionFunction: () =>
+						!saveFile.handledOccupants.some((h) => h.id === t.id),
+				})),
+			];
+			const length = all.length;
+			if (statefulOccupants.length !== length) {
+				setStatefulOccupants(all);
+			}
+
+			return;
+		}
 		setStatefulOccupants(map.occupants);
-	}, [map]);
+	}, [
+		map,
+		saveFile.currentRocketOperation,
+		saveFile.handledOccupants,
+		statefulOccupants.length,
+	]);
 
 	const conditionalOccupants = useMemo(() => {
 		return statefulOccupants.filter(

@@ -37,6 +37,7 @@ export const OCCUPANT_TYPES = [
 	'POKEMON',
 	'LEDGE',
 	'SWARM_RADAR',
+	'ROCKET_RADIO',
 	'ZIGZAGOON_FORAGER',
 	'DUGTRIO_EXPLORER',
 	'ROUTER_NPC',
@@ -118,6 +119,9 @@ export interface OverworldHallowedTower extends BaseOccupant {
 
 export interface SwarmRadar extends BaseOccupant {
 	type: 'SWARM_RADAR';
+}
+export interface RocketRadio extends BaseOccupant {
+	type: 'ROCKET_RADIO';
 }
 export interface OverworldTrainer extends BaseOccupant {
 	type: 'TRAINER';
@@ -218,6 +222,7 @@ export type Occupant =
 	| DugtrioExplorer
 	| RouterNpc
 	| SwarmRadar
+	| RocketRadio
 	| OverworldRock
 	| StorageChest
 	| BerryTree

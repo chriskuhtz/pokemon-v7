@@ -15,6 +15,7 @@ import {
 	useStaticEncounter,
 } from '../../hooks/useInteractWithSnorlax';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
+import { useRocketRadio } from '../../hooks/useRocketRadio';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { useStrangeTree } from '../../hooks/useStrangeTree';
 import { useSwarmRadar } from '../../hooks/useSwarmRadar';
@@ -70,6 +71,7 @@ export const Overworld = ({
 	const interactWithStaticEncounter = useStaticEncounter();
 	const interactWithDugtrioExplorer = useDugtrioExplorers();
 	const interactWithSwarmRadar = useSwarmRadar();
+	const interactWithRocketRadio = useRocketRadio();
 	const interactWithRock = useSledgeHammer();
 	const addEncounterMessage = useStartEncounter();
 	const encounterRateModifier = useEncounterRateModifier();
@@ -134,6 +136,7 @@ export const Overworld = ({
 				interactWithZigzagoonForager,
 				interactWithDugtrioExplorer,
 				interactWithSwarmRadar,
+				interactWithRocketRadio,
 				interactWithSnorlax,
 				interactWithStaticEncounter,
 				interactWithTrainer,
@@ -141,31 +144,32 @@ export const Overworld = ({
 				settings: saveFile.settings,
 			}),
 		[
+			latestMessage,
 			addMultipleMessages,
+			stepsTaken,
+			rotateOccupant,
+			saveFile.location,
+			saveFile.handledOccupants,
+			saveFile.settings,
 			goToMarket,
+			talkToNurse,
 			handleOccupantReducer,
-			interactWithBush,
-			interactWithCombeeHive,
-			interactWithDugtrioExplorer,
+			setCharacterLocation,
+			interactWithHoneyTree,
 			interactWithHallowedTower,
 			interactWithStrangeTree,
-			interactWithHoneyTree,
-			interactWithLedge,
+			interactWithCombeeHive,
+			interactWithBush,
 			interactWithRock,
+			interactWithLedge,
+			interactWithZigzagoonForager,
+			interactWithDugtrioExplorer,
+			interactWithSwarmRadar,
+			interactWithRocketRadio,
 			interactWithSnorlax,
 			interactWithStaticEncounter,
-			interactWithSwarmRadar,
 			interactWithTrainer,
-			interactWithZigzagoonForager,
-			latestMessage,
 			navigateAwayFromOverworldReducer,
-			rotateOccupant,
-			saveFile.handledOccupants,
-			saveFile.location,
-			saveFile.settings,
-			setCharacterLocation,
-			stepsTaken,
-			talkToNurse,
 		]
 	);
 	//MOVEMENT

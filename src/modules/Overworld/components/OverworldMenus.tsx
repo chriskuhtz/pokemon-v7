@@ -9,12 +9,13 @@ import {
 	mapDisplayNames,
 	mapsRecord,
 } from '../../../constants/maps/mapsRecord';
+import { areAllRocketsDefeated } from '../../../functions/areAllRocketsDefeated';
 import { BaseSizeContext } from '../../../hooks/useBaseSize';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
 import { MovementButtons } from './MovementButtons';
-import { UncollectedQuestsBadge } from './UncollectedQuestsBadge';
 import { NumberOfBallsBadge } from './NumberOfBallsBadge';
+import { UncollectedQuestsBadge } from './UncollectedQuestsBadge';
 
 export const OverworldMenus = ({
 	stepsTaken,
@@ -112,6 +113,7 @@ export const OverworldMenus = ({
 				<strong>{mapDisplayNames[map.id]}</strong>
 				<WeatherIcon weather={map.weather} />
 				<TimeOfDayIcon />
+				<RocketIcon />
 			</div>
 			<MovementButtons
 				setNextInput={setNextInput}
@@ -119,4 +121,17 @@ export const OverworldMenus = ({
 			/>
 		</>
 	);
+};
+
+const RocketIcon = () => {
+	const { saveFile } = useContext(SaveFileContext);
+
+	const rocketsActive = useMemo(
+		() => areAllRocketsDefeated(saveFile),
+		[saveFile]
+	);
+
+	if (!rocketsActive) {
+		return <></>;
+	}
 };

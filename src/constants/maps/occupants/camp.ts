@@ -301,6 +301,13 @@ export const campOccupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) => s.campUpgrades['pokemon swarm radar'],
 		id: 'swarm radar',
 	},
+	{
+		type: 'ROCKET_RADIO',
+		y: 7,
+		x: 12,
+		conditionFunction: (s) => s.campUpgrades['ranger certification'],
+		id: 'rocket radio',
+	},
 	...pikachuFanLine,
 	...falknerLine,
 	...oakLine,

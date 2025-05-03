@@ -7,7 +7,14 @@ import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSys
 
 export const TrainerCard = () => {
 	const {
-		saveFile: { sprite, badges, playerId, researchPoints, mileStones },
+		saveFile: {
+			sprite,
+			badges,
+			playerId,
+			researchPoints,
+			mileStones,
+			rangerLevel,
+		},
 	} = useContext(SaveFileContext);
 
 	return (
@@ -45,6 +52,7 @@ export const TrainerCard = () => {
 						{mileStones.challengeFieldRecord && (
 							<h4>Challenge Field Record: {mileStones.challengeFieldRecord}</h4>
 						)}
+						{rangerLevel && <h4>Ranger Level: {rangerLevel}</h4>}
 					</div>
 				</div>
 			}

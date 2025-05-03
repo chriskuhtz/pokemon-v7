@@ -34,7 +34,11 @@ import { routeS1E1 } from '../maps/routeS1E1';
 import { routeS1W1 } from '../maps/routeS1W1';
 import { routeW1 } from '../maps/routeW1';
 import { PokemonName, pokemonNames } from '../pokemonNames';
-import { CampUpgrade, campUpgradeNames } from './campUpgrades';
+import {
+	CampUpgrade,
+	campUpgradeCostScale,
+	campUpgradeNames,
+} from './campUpgrades';
 
 const expCandyPackage: Partial<Inventory> = {
 	'exp-candy-xs': 10,
@@ -2467,9 +2471,9 @@ console.log(
 		0
 	),
 	'total costs',
-	6 +
+	campUpgradeCostScale +
 		campUpgradeNames
-			.map((_, i) => 6 * i)
+			.map((_, i) => campUpgradeCostScale * i)
 			.reduce((sum, summand) => sum + summand, 0),
 	'quests w/o questName',
 	Object.keys(QuestsRecord).filter((key) => !questNames.includes(key)),

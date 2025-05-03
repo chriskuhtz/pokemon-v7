@@ -1,4 +1,4 @@
-import { useCallback, useContext, useMemo } from 'react';
+import { useCallback, useContext, useMemo, useState } from 'react';
 import { FaCheckCircle, FaFistRaised } from 'react-icons/fa';
 import { GiMountainRoad } from 'react-icons/gi';
 import { HiBeaker } from 'react-icons/hi';
@@ -8,6 +8,7 @@ import {
 	campUpgradeCategories,
 	CampUpgradeCategory,
 	campUpgradeConditions,
+	campUpgradeCostScale,
 	campUpgradeExplanations,
 	campUpgradeNames,
 } from '../../constants/checkLists/campUpgrades';
@@ -30,7 +31,9 @@ export const CampUpgrades = ({
 	const { campUpgrades, researchPoints } = saveFile;
 
 	const currentPrice =
-		Object.values(campUpgrades).filter((c) => !!c).length * 6 + 6;
+		Object.values(campUpgrades).filter((c) => !!c).length *
+			campUpgradeCostScale +
+		campUpgradeCostScale;
 
 	const unlock = useCallback(
 		(id: CampUpgrade) => {
@@ -76,6 +79,17 @@ export const CampUpgrades = ({
 		}
 		return 0;
 	});
+
+	const [filter, setFilter] = useState<CampUpgradeCategory>('Sustainability');
+	const categories: CampUpgradeCategory[] = [
+		'Sustainability',
+		'Exploration',
+		'Research',
+		'Training',
+	];
+	const filteredUpgrades = sortedUpgrades.filter(
+		(s) => campUpgradeCategories[s] === filter
+	);
 	return (
 		<Page headline="Main Menu:" goBack={goBack}>
 			<Stack mode="column">
@@ -83,7 +97,18 @@ export const CampUpgrades = ({
 					We can use the research points earned from quests to expand our camp
 				</h2>
 				<h2>Research Points: {researchPoints}</h2>
-				{sortedUpgrades.map((upgrade) => (
+				<Stack mode="row" gap={3} alignItems="center">
+					<h2>Category:</h2>{' '}
+					{categories.map((c) => (
+						<CampUpgradeIcon
+							highlighted={filter === c}
+							key={c}
+							category={c}
+							onClick={() => setFilter(c)}
+						/>
+					))}
+				</Stack>
+				{filteredUpgrades.map((upgrade) => (
 					<Card
 						key={upgrade}
 						disabled={campUpgrades[upgrade]}
@@ -123,15 +148,47 @@ export const CampUpgrades = ({
 	);
 };
 
-const CampUpgradeIcon = ({ category }: { category: CampUpgradeCategory }) => {
+const CampUpgradeIcon = ({
+	category,
+	onClick,
+	highlighted,
+}: {
+	category: CampUpgradeCategory;
+	onClick?: () => void;
+	highlighted?: boolean;
+}) => {
 	if (category === 'Training') {
-		return <FaFistRaised size={battleSpriteSize} />;
+		return (
+			<FaFistRaised
+				size={battleSpriteSize}
+				onClick={onClick}
+				color={highlighted ? 'green' : undefined}
+			/>
+		);
 	}
 	if (category === 'Research') {
-		return <HiBeaker size={battleSpriteSize} />;
+		return (
+			<HiBeaker
+				size={battleSpriteSize}
+				onClick={onClick}
+				color={highlighted ? 'green' : undefined}
+			/>
+		);
 	}
 	if (category === 'Exploration') {
-		return <GiMountainRoad size={battleSpriteSize} />;
+		return (
+			<GiMountainRoad
+				size={battleSpriteSize}
+				onClick={onClick}
+				color={highlighted ? 'green' : undefined}
+			/>
+		);
 	}
-	return <PiFarm size={battleSpriteSize} />;
+	return (
+		<PiFarm
+			size={battleSpriteSize}
+			onClick={onClick}
+			color={highlighted ? 'green' : undefined}
+		/>
+	);
 };

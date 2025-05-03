@@ -125,6 +125,7 @@ const drawOccupant = (
 				break;
 			case 'HALLOWED_TOWER':
 			case 'SWARM_RADAR':
+			case 'ROCKET_RADIO':
 			case 'ROCK':
 			case 'BUSH':
 				ctx?.drawImage(
@@ -220,6 +221,8 @@ const getSource = (occ: Occupant) => {
 			return '/mapObjects/hallowedTower.png';
 
 		case 'SWARM_RADAR':
+			return '/mapObjects/radar.png';
+		case 'ROCKET_RADIO':
 			return '/mapObjects/radar.png';
 		case 'COMBEE_HIVE':
 			return '/mapObjects/combeeHive.png';
