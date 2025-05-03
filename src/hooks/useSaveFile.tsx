@@ -102,28 +102,34 @@ const migrateSavefile = (input: SaveFile) => {
 		const parsed = (
 			randomizedRewards ? JSON.parse(randomizedRewards) : {}
 		) as Record<QuestName, Quest>;
-		window.localStorage.setItem(
-			randomQuestRewards,
-			JSON.stringify(
-				Object.fromEntries(
-					Object.entries(QuestsRecord).map(([name, quest]) => {
-						if (parsed[name]) {
-							return [name, parsed];
-						}
-						return [
-							name,
-							{
-								...quest,
-								rewardItems: {
-									[getRandomItem()]: Math.floor(1 + Math.random() * 9),
-									[getRandomBall()]: Math.floor(1 + Math.random() * 4),
+
+		if (
+			questNames.some((q) => !parsed[q]) ||
+			Object.keys(parsed).some((key) => !questNames.includes(key))
+		) {
+			window.localStorage.setItem(
+				randomQuestRewards,
+				JSON.stringify(
+					Object.fromEntries(
+						Object.entries(QuestsRecord).map(([name, quest]) => {
+							if (parsed[name]) {
+								return [name, parsed];
+							}
+							return [
+								name,
+								{
+									...quest,
+									rewardItems: {
+										[getRandomItem()]: Math.floor(1 + Math.random() * 9),
+										[getRandomBall()]: Math.floor(1 + Math.random() * 4),
+									},
 								},
-							},
-						];
-					})
+							];
+						})
+					)
 				)
-			)
-		);
+			);
+		}
 	}
 
 	//migrate new quests
