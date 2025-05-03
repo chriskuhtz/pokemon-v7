@@ -31,7 +31,7 @@ const erikaCondition = (s: SaveFile) => {
 	const team = s.pokemon.filter((p) => p.onTeam);
 	return (
 		team.length === 1 &&
-		calculateLevelData(team[0].xp, team[0].growthRate).level <= 15
+		calculateLevelData(team[0].xp, team[0].growthRate).level === 15
 	);
 };
 const trainerErika: OverworldTrainer = {
@@ -66,7 +66,7 @@ const npcErika: OverworldNpc = {
 		'my favorite pokemon are grass types',
 		'would you like to have a battle?',
 		'to make it more interesting',
-		'each of us will only use one pokemon at lvl 15 or lower',
+		'each of us will only use one pokemon at exactly lvl 15',
 		'come back with a team that fits these rules',
 	],
 };
