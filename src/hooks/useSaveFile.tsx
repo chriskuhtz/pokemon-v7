@@ -99,6 +99,12 @@ const migrateSavefile = (input: SaveFile) => {
 			updatedInput.quests[name] = 'INACTIVE';
 		}
 	});
+	updatedInput.quests = Object.fromEntries(
+		Object.entries(updatedInput.quests).filter(([quest]) =>
+			questNames.includes(quest)
+		)
+	);
+
 	updatedInput.pokemon = input.pokemon.map((p) => {
 		if (!p.caughtAtDate) {
 			return { ...p, caughtAtDate: new Date().getTime() };
