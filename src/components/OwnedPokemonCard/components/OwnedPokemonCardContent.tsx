@@ -17,6 +17,7 @@ import { PokemonData } from '../../../interfaces/PokemonData';
 import { IconSolarSystem } from '../../../uiComponents/IconSolarSystem/IconSolarSystem';
 import { SelectionListModal } from '../../../uiComponents/SelectionListModal/SelectionListModal';
 import { Stack } from '../../../uiComponents/Stack/Stack';
+import { AbilityInfoButton } from '../../AbilityInfoButton/AbilityInfoButton';
 import { HappinessIcon } from '../../HappinessIcon/HappinessIcon';
 import { HpBar } from '../../HpBar/HpBar';
 import { getPokemonSprite } from '../../PokemonSprite/PokemonSprite';
@@ -169,10 +170,13 @@ export const OwnedPokemonCardContent = ({
 								}}
 							/>
 						</h4>
-
+						<h5 style={{ display: 'flex', alignItems: 'center' }}>
+							ability: {ownedPokemon.ability}{' '}
+							<AbilityInfoButton small abilityName={ownedPokemon.ability} />
+						</h5>
 						<h5>type: {typeNames.join('/')} </h5>
 						<h5>nature: {ownedPokemon.nature}</h5>
-						<h5>ability: {ownedPokemon.ability}</h5>
+
 						{ownedPokemon.weightModifier && (
 							<h5>rel. Weight: {ownedPokemon.weightModifier.toFixed(2)}</h5>
 						)}
