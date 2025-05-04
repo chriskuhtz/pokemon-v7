@@ -107,12 +107,9 @@ const migrateSavefile = (input: SaveFile) => {
 		return p;
 	});
 
-	if (
-		updatedInput.pokemon.length > 0 &&
-		!updatedInput.pokemon.some((p) => p.starter)
-	) {
+	if (updatedInput.pokemon.length > 0) {
 		const lowestCatchDateId = [...updatedInput.pokemon].sort(
-			(a, b) => b.caughtAtDate - a.caughtAtDate
+			(a, b) => a.caughtAtDate - b.caughtAtDate
 		)[0].id;
 
 		updatedInput.pokemon = input.pokemon.map((p) => {
@@ -120,7 +117,7 @@ const migrateSavefile = (input: SaveFile) => {
 				return { ...p, starter: true };
 			}
 
-			return p;
+			return { ...p, starter: false };
 		});
 	}
 
