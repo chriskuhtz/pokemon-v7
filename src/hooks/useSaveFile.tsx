@@ -99,28 +99,6 @@ const migrateSavefile = (input: SaveFile) => {
 		questNames.map((q) => [q, updatedInput.quests[q] ?? 'INACTIVE'])
 	);
 
-	updatedInput.pokemon = input.pokemon.map((p) => {
-		if (!p.caughtAtDate) {
-			return { ...p, caughtAtDate: new Date().getTime() };
-		}
-
-		return p;
-	});
-
-	if (updatedInput.pokemon.length > 0) {
-		const lowestCatchDateId = [...updatedInput.pokemon].sort(
-			(a, b) => a.caughtAtDate - b.caughtAtDate
-		)[0].id;
-
-		updatedInput.pokemon = input.pokemon.map((p) => {
-			if (p.id === lowestCatchDateId) {
-				return { ...p, starter: true };
-			}
-
-			return { ...p, starter: false };
-		});
-	}
-
 	return updatedInput;
 };
 
