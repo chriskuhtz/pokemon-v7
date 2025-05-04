@@ -13,6 +13,7 @@ import {
 	campUpgradeNames,
 } from '../../constants/checkLists/campUpgrades';
 import { battleSpriteSize } from '../../constants/gameData';
+import { typeColors } from '../../constants/typeColors';
 import { replaceRouteName } from '../../functions/replaceRouteName';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
@@ -80,11 +81,11 @@ export const CampUpgrades = ({
 		return 0;
 	});
 
-	const [filter, setFilter] = useState<CampUpgradeCategory>('Sustainability');
+	const [filter, setFilter] = useState<CampUpgradeCategory>('Research');
 	const categories: CampUpgradeCategory[] = [
+		'Research',
 		'Sustainability',
 		'Exploration',
-		'Research',
 		'Training',
 	];
 	const filteredUpgrades = sortedUpgrades.filter(
@@ -93,12 +94,12 @@ export const CampUpgrades = ({
 	return (
 		<Page headline="Main Menu:" goBack={goBack}>
 			<Stack mode="column">
-				<h2>
+				<h3 style={{ margin: 0 }}>
 					We can use the research points earned from quests to expand our camp
-				</h2>
-				<h2>Research Points: {researchPoints}</h2>
+				</h3>
+				<h3 style={{ margin: 0 }}>Research Points: {researchPoints}</h3>
 				<Stack mode="row" gap={3} alignItems="center">
-					<h2>Category:</h2>{' '}
+					<h3 style={{ margin: 0 }}>Category:</h3>{' '}
 					{categories.map((c) => (
 						<CampUpgradeIcon
 							highlighted={filter === c}
@@ -162,7 +163,7 @@ const CampUpgradeIcon = ({
 			<FaFistRaised
 				size={battleSpriteSize}
 				onClick={onClick}
-				color={highlighted ? 'green' : undefined}
+				color={highlighted ? typeColors['grass'] : undefined}
 			/>
 		);
 	}
@@ -171,7 +172,7 @@ const CampUpgradeIcon = ({
 			<HiBeaker
 				size={battleSpriteSize}
 				onClick={onClick}
-				color={highlighted ? 'green' : undefined}
+				color={highlighted ? typeColors['grass'] : undefined}
 			/>
 		);
 	}
@@ -180,7 +181,7 @@ const CampUpgradeIcon = ({
 			<GiMountainRoad
 				size={battleSpriteSize}
 				onClick={onClick}
-				color={highlighted ? 'green' : undefined}
+				color={highlighted ? typeColors['grass'] : undefined}
 			/>
 		);
 	}
@@ -188,7 +189,7 @@ const CampUpgradeIcon = ({
 		<PiFarm
 			size={battleSpriteSize}
 			onClick={onClick}
-			color={highlighted ? 'green' : undefined}
+			color={highlighted ? typeColors['grass'] : undefined}
 		/>
 	);
 };
