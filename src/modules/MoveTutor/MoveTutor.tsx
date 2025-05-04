@@ -1,5 +1,6 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
+import { MoveInfoButton } from '../../components/MoveInfoButton/MoveInfoButton';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import {
 	handledMoves,
@@ -218,37 +219,45 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 				);
 				const disabled = saveFile.bag[payment] < 1 || !available;
 				return (
-					<Card
+					<div
 						key={m.move.name}
-						onClick={() => setMoveToConfirm(m.move.name as MoveName)}
-						actionElements={
-							!disabled && moveToConfirm === m.move.name
-								? [
-										<strong
-											onClick={() =>
-												unlockMove(m.move.name as MoveName, payment)
-											}
-										>
-											Confirm
-										</strong>,
-								  ]
-								: []
-						}
-						icon={<ItemSprite item={payment} />}
-						disabled={disabled}
-						content={
-							<>
-								<strong>
-									{available
-										? m.move.name
-										: `${m.move.name} available at Lvl ${m.version_group_details[0].level_learned_at}`}
-								</strong>
-								<strong>
-									{saveFile.bag[payment] < 1 && ` : ${payment} required`}
-								</strong>
-							</>
-						}
-					/>
+						style={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}
+					>
+						<div style={{ flexGrow: 1 }}>
+							<Card
+								key={m.move.name}
+								onClick={() => setMoveToConfirm(m.move.name as MoveName)}
+								actionElements={
+									!disabled && moveToConfirm === m.move.name
+										? [
+												<strong
+													onClick={() =>
+														unlockMove(m.move.name as MoveName, payment)
+													}
+												>
+													Confirm
+												</strong>,
+										  ]
+										: []
+								}
+								icon={<ItemSprite item={payment} />}
+								disabled={disabled}
+								content={
+									<>
+										<strong>
+											{available
+												? m.move.name
+												: `${m.move.name} available at Lvl ${m.version_group_details[0].level_learned_at}`}
+										</strong>
+										<strong>
+											{saveFile.bag[payment] < 1 && ` : ${payment} required`}
+										</strong>
+									</>
+								}
+							/>{' '}
+						</div>
+						<MoveInfoButton movename={m.move.name as MoveName} />
+					</div>
 				);
 			})}
 		</Stack>

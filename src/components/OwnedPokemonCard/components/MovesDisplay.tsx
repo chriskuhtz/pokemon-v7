@@ -9,6 +9,7 @@ import { getMovesArray } from '../../../functions/getMovesArray';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { Card } from '../../../uiComponents/Card/Card';
 import { Stack } from '../../../uiComponents/Stack/Stack';
+import { MoveInfoButton } from '../../MoveInfoButton/MoveInfoButton';
 
 export const MovesDisplay = ({
 	ownedPokemon,
@@ -53,69 +54,87 @@ export const MovesDisplay = ({
 	return (
 		<Stack mode="column">
 			{currentMoves.map((o) => (
-				<Card
+				<div
 					key={o}
-					actionElements={[
-						<FaArrowUp
-							onClick={(e) => {
-								e.stopPropagation();
-								reorder('UP', o);
+					style={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}
+				>
+					<div style={{ flexGrow: 1 }}>
+						<Card
+							key={o}
+							actionElements={[
+								<FaArrowUp
+									onClick={(e) => {
+										e.stopPropagation();
+										reorder('UP', o);
+									}}
+								/>,
+								<FaArrowDown
+									onClick={(e) => {
+										e.stopPropagation();
+										reorder('DOWN', o);
+									}}
+								/>,
+							]}
+							disabled={!currentMoves.includes(o) && currentMoves.length === 4}
+							icon={<MdOutlineRadioButtonChecked />}
+							onClick={() => {
+								if (currentMoves.includes(o)) {
+									if (currentMoves.length === 1) {
+										return;
+									} else
+										setMoves(
+											ownedPokemon.id,
+											currentMoves.filter((c) => c !== o)
+										);
+								}
+								if (!currentMoves.includes(o)) {
+									if (currentMoves.length === 4) {
+										return;
+									} else setMoves(ownedPokemon.id, [...currentMoves, o]);
+								}
 							}}
-						/>,
-						<FaArrowDown
-							onClick={(e) => {
-								e.stopPropagation();
-								reorder('DOWN', o);
-							}}
-						/>,
-					]}
-					disabled={!currentMoves.includes(o) && currentMoves.length === 4}
-					icon={<MdOutlineRadioButtonChecked />}
-					onClick={() => {
-						if (currentMoves.includes(o)) {
-							if (currentMoves.length === 1) {
-								return;
-							} else
-								setMoves(
-									ownedPokemon.id,
-									currentMoves.filter((c) => c !== o)
-								);
-						}
-						if (!currentMoves.includes(o)) {
-							if (currentMoves.length === 4) {
-								return;
-							} else setMoves(ownedPokemon.id, [...currentMoves, o]);
-						}
-					}}
-					content={<strong>{o}</strong>}
-				/>
+							content={<strong>{o}</strong>}
+						/>
+					</div>
+					<MoveInfoButton movename={o} />
+				</div>
 			))}
 			{ownedPokemon.unlockedMoves
 				.filter((u) => !currentMoves.includes(u))
 				.map((o) => (
-					<Card
+					<div
 						key={o}
-						actionElements={[]}
-						disabled={!currentMoves.includes(o) && currentMoves.length === 4}
-						icon={<MdRadioButtonUnchecked />}
-						onClick={() => {
-							if (currentMoves.includes(o)) {
-								if (currentMoves.length === 1) {
-									return;
-								} else
-									setMoves(
-										ownedPokemon.id,
-										currentMoves.filter((c) => c !== o)
-									);
-							}
-							if (!currentMoves.includes(o)) {
-								if (currentMoves.length === 4) {
-									return;
-								} else setMoves(ownedPokemon.id, [...currentMoves, o]);
-							}
-						}}
-						content={<strong>{o}</strong>}
-					/>
+						style={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}
+					>
+						<div style={{ flexGrow: 1 }}>
+							<Card
+								key={o}
+								actionElements={[]}
+								disabled={
+									!currentMoves.includes(o) && currentMoves.length === 4
+								}
+								icon={<MdRadioButtonUnchecked />}
+								onClick={() => {
+									if (currentMoves.includes(o)) {
+										if (currentMoves.length === 1) {
+											return;
+										} else
+											setMoves(
+												ownedPokemon.id,
+												currentMoves.filter((c) => c !== o)
+											);
+									}
+									if (!currentMoves.includes(o)) {
+										if (currentMoves.length === 4) {
+											return;
+										} else setMoves(ownedPokemon.id, [...currentMoves, o]);
+									}
+								}}
+								content={<strong>{o}</strong>}
+							/>
+						</div>
+						<MoveInfoButton movename={o} />
+					</div>
 				))}
 		</Stack>
 	);
