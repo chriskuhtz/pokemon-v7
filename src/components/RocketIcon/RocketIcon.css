@@ -1,0 +1,17 @@
+.rocketIcon {
+	animation-duration: 1s;
+	animation-name: rotate;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	color: #7ac74c;
+}
+
+@keyframes rotate {
+	from {
+		transform: scale(1.2, 1.2);
+	}
+
+	to {
+		transform: scale(0.8, 0.8);
+	}
+}

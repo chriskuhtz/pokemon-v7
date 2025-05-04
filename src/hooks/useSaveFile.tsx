@@ -1,6 +1,7 @@
 import React, {
 	ReactNode,
 	useCallback,
+	useContext,
 	useEffect,
 	useMemo,
 	useState,
@@ -39,7 +40,7 @@ import { Occupant } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { RoutesType } from '../interfaces/Routing';
 import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
-import { Message } from './useMessageQueue';
+import { MessageQueueContext } from './useMessageQueue';
 
 export interface EvolutionReducerPayload {
 	id: string;
@@ -108,10 +109,8 @@ const migrateSavefile = (input: SaveFile) => {
 	return updatedInput;
 };
 
-const useSaveFile = (
-	init: SaveFile,
-	addMessage: (x: Message) => void
-): UseSaveFile => {
+const useSaveFile = (init: SaveFile): UseSaveFile => {
+	const { addMessage } = useContext(MessageQueueContext);
 	const local = window.localStorage.getItem(localStorageId);
 	const loaded = local ? migrateSavefile(JSON.parse(local) as SaveFile) : init;
 
@@ -122,7 +121,8 @@ const useSaveFile = (
 		[saveFile]
 	);
 
-	const setSaveFile = useCallback((update: SaveFile) => {
+	const setSaveFile = useCallback((u: SaveFile) => {
+		const update = { ...u };
 		const newTime = new Date().getTime();
 
 		let pokedex = update.pokedex ?? emptyPokedex;
@@ -529,14 +529,8 @@ const useSaveFile = (
 
 export const SaveFileContext = React.createContext({} as UseSaveFile);
 
-export const SaveFileProvider = ({
-	children,
-	addMessage,
-}: {
-	children: ReactNode;
-	addMessage: (x: Message) => void;
-}) => {
-	const value = useSaveFile(testState, addMessage);
+export const SaveFileProvider = ({ children }: { children: ReactNode }) => {
+	const value = useSaveFile(testState);
 
 	return (
 		<SaveFileContext.Provider value={value}>

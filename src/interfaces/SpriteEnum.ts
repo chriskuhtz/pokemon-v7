@@ -132,5 +132,7 @@ export enum SpriteEnum {
 	roark = '163',
 	gary = '179',
 	red = '180',
+	rocketMale = '184',
+	rocketFemale = '185',
 	pikachuFan = '209',
 }

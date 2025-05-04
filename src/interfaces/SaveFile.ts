@@ -6,6 +6,7 @@ import { BadgeName } from './Badge';
 import { Challenger } from './Challenger';
 import { Inventory } from './Inventory';
 import { ApricornType, BerryType, ItemType, MulchType } from './Item';
+import { OverworldTrainer } from './OverworldMap';
 import { OwnedPokemon } from './OwnedPokemon';
 import { QuestStatus } from './Quest';
 import { RoutesType } from './Routing';
@@ -131,6 +132,9 @@ export interface SaveFile {
 	miltankReadyAt?: number;
 	currentSwarm?: PokemonSwarm;
 	nextSwarmReadyAt?: number;
+	rangerLevel?: number;
+	currentRocketOperation?: { route: MapId; trainers: OverworldTrainer[] };
+	nextRocketOperationAt?: number;
 	starterPokemon?: PokemonName;
 	seedVault: ItemType[];
 	pokedex: Pokedex;

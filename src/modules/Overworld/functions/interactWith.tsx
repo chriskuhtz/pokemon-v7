@@ -58,6 +58,7 @@ export const interactWithFunction = ({
 	interactWithZigzagoonForager,
 	interactWithDugtrioExplorer,
 	interactWithSwarmRadar,
+	interactWithRocketRadio,
 	interactWithSnorlax,
 	interactWithTrainer,
 	interactWithStaticEncounter,
@@ -88,6 +89,7 @@ export const interactWithFunction = ({
 	interactWithZigzagoonForager: () => void;
 	interactWithDugtrioExplorer: () => void;
 	interactWithSwarmRadar: () => void;
+	interactWithRocketRadio: () => void;
 	goTo: (route: RoutesType) => void;
 	settings?: SettingsObject;
 }) => {
@@ -276,6 +278,10 @@ export const interactWithFunction = ({
 	}
 	if (data.type === 'SWARM_RADAR') {
 		interactWithSwarmRadar();
+		return;
+	}
+	if (data.type === 'ROCKET_RADIO') {
+		interactWithRocketRadio();
 		return;
 	}
 	if (data.type === 'TRAINER') {

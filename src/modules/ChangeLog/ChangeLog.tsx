@@ -3,7 +3,7 @@ import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
-export const newestChangeLog = '0.15';
+export const newestChangeLog = '0.16';
 
 export const ChangeLog = ({
 	setHasReadIntro,
@@ -55,6 +55,8 @@ const ChangeLogV16 = (): JSX.Element => {
 			<h3>V 0.16:</h3>
 
 			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>Team Rocket</li>
+				<li>Improved Campupgrade screen</li>
 				<li>Various minor fixes</li>
 			</ol>
 		</>

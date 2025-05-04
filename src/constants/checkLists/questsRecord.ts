@@ -1,3 +1,4 @@
+import { v4 } from 'uuid';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { timesOfDay } from '../../functions/getTimeOfDay';
 import {
@@ -34,7 +35,11 @@ import { routeS1E1 } from '../maps/routeS1E1';
 import { routeS1W1 } from '../maps/routeS1W1';
 import { routeW1 } from '../maps/routeW1';
 import { PokemonName, pokemonNames } from '../pokemonNames';
-import { CampUpgrade, campUpgradeNames } from './campUpgrades';
+import {
+	CampUpgrade,
+	campUpgradeCostScale,
+	campUpgradeNames,
+} from './campUpgrades';
 
 const expCandyPackage: Partial<Inventory> = {
 	'exp-candy-xs': 10,
@@ -569,6 +574,11 @@ export const questNames = [
 	'reach challenge field rank 85',
 	'reach challenge field rank 108',
 	'catch the mysterious pokemon in orenji forest',
+	'reach ranger level 1',
+	'reach ranger level 5',
+	'reach ranger level 10',
+	'reach ranger level 20',
+	'reach ranger level 30',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -2456,6 +2466,76 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			);
 		},
 	},
+	'reach ranger level 1': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'ranger certification',
+		researchPoints: 25,
+		conditionFunction: (s) => (s.rangerLevel ?? 0) >= 1,
+		rewardItems: { 'big-malasada': 1, 'rare-candy': 1, 'moomoo-milk': 2 },
+	},
+	'reach ranger level 5': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'ranger certification',
+		availableAfter: 'reach ranger level 1',
+		researchPoints: 50,
+		conditionFunction: (s) => (s.rangerLevel ?? 0) >= 5,
+		rewardItems: { 'old-gateau': 3, 'rare-candy': 3, 'moomoo-milk': 6 },
+	},
+	'reach ranger level 10': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'ranger certification',
+		availableAfter: 'reach ranger level 5',
+		researchPoints: 100,
+		conditionFunction: (s) => (s.rangerLevel ?? 0) >= 10,
+		rewardItems: { 'lumiose-galette': 5, 'rare-candy': 5, 'moomoo-milk': 10 },
+	},
+	'reach ranger level 20': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'ranger certification',
+		availableAfter: 'reach ranger level 10',
+		researchPoints: 100,
+		conditionFunction: (s) => (s.rangerLevel ?? 0) >= 20,
+		rewardItems: {
+			casteliacone: 5,
+			'pewter-crunchies': 5,
+			...expCandyPackage,
+			'lucky-egg': 1,
+		},
+	},
+	'reach ranger level 30': {
+		kind: 'BULLETIN',
+		requiredUpgrade: 'ranger certification',
+		availableAfter: 'reach ranger level 20',
+		researchPoints: 100,
+		conditionFunction: (s) => (s.rangerLevel ?? 0) >= 30,
+		rewardItems: {},
+		rewardPokemon: {
+			caughtAtDate: new Date().getTime(),
+			gender: 'MALE',
+			intrinsicValues: generateRandomStatObject(31),
+			effortValues: EmptyStatObject,
+			ppBoostedMoves: [],
+			caughtOnMap: 'camp',
+			stepsWalked: 0,
+			maxHp: 30,
+			xp: 125,
+			happiness: 70,
+			heightModifier: 0.5,
+			weightModifier: 0.5,
+			nature: 'lonely',
+			unlockedMoves: ['flame-charge', 'swords-dance', 'sacred-fire'],
+			ability: 'dancer',
+			id: v4(),
+			damage: 0,
+			ownerId: '',
+			name: 'growlithe',
+			ball: 'poke-ball',
+			shiny: true,
+			growthRate: 'medium',
+			fixedAbility: true,
+			firstMove: { name: 'sacred-fire', usedPP: 0 },
+		},
+	},
 };
 
 console.log('number of quests', questNames.length);
@@ -2467,9 +2547,9 @@ console.log(
 		0
 	),
 	'total costs',
-	6 +
+	campUpgradeCostScale +
 		campUpgradeNames
-			.map((_, i) => 6 * i)
+			.map((_, i) => campUpgradeCostScale * i)
 			.reduce((sum, summand) => sum + summand, 0),
 	'quests w/o questName',
 	Object.keys(QuestsRecord).filter((key) => !questNames.includes(key)),

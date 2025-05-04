@@ -7,7 +7,7 @@ import { PokemonSwarm, SaveFile } from '../interfaces/SaveFile';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
-export const getRandomAccesibleRoute = (s: SaveFile): MapId => {
+const getRouteforSwarm = (s: SaveFile): MapId => {
 	const options: MapId[] = ['routeN1'];
 
 	if (s.campUpgrades['machete certification']) {
@@ -77,7 +77,7 @@ export const useSwarmRadar = () => {
 		} else if (!saveFile.nextSwarmReadyAt || now > saveFile.nextSwarmReadyAt) {
 			let swarm = {
 				...getRandomEntry(swarms),
-				route: getRandomAccesibleRoute(saveFile),
+				route: getRouteforSwarm(saveFile),
 			};
 
 			if (saveFile.settings?.randomSwarms) {
@@ -92,7 +92,7 @@ export const useSwarmRadar = () => {
 
 			patchSaveFileReducer({
 				currentSwarm: { ...swarm, leavesAt: now + ONE_HOUR },
-				nextSwarmReadyAt: now + ONE_HOUR * 3,
+				nextSwarmReadyAt: now + ONE_HOUR,
 			});
 		} else {
 			addMessage({

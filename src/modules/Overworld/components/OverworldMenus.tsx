@@ -1,6 +1,7 @@
 import { useContext, useMemo } from 'react';
 import { CgZoomIn, CgZoomOut } from 'react-icons/cg';
 import { IoMdMenu } from 'react-icons/io';
+import { RocketIcon } from '../../../components/RocketIcon/RocketIcon';
 import { TeamOverview } from '../../../components/TeamOverview/TeamOverview';
 import { TimeOfDayIcon } from '../../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../../components/WeatherIcon/WeatherIcon';
@@ -13,8 +14,8 @@ import { BaseSizeContext } from '../../../hooks/useBaseSize';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
 import { MovementButtons } from './MovementButtons';
-import { UncollectedQuestsBadge } from './UncollectedQuestsBadge';
 import { NumberOfBallsBadge } from './NumberOfBallsBadge';
+import { UncollectedQuestsBadge } from './UncollectedQuestsBadge';
 
 export const OverworldMenus = ({
 	stepsTaken,
@@ -109,6 +110,7 @@ export const OverworldMenus = ({
 					backgroundColor: 'rgba(255,255,255,.6)',
 				}}
 			>
+				<RocketIcon />
 				<strong>{mapDisplayNames[map.id]}</strong>
 				<WeatherIcon weather={map.weather} />
 				<TimeOfDayIcon />

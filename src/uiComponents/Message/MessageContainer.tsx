@@ -28,7 +28,7 @@ export const MessageContainer = () => {
 				</Banner>
 			)}
 			<BaseSizeProvider>
-				<SaveFileProvider addMessage={addMessage}>
+				<SaveFileProvider>
 					<FullScreenToggle />
 					<App />
 				</SaveFileProvider>

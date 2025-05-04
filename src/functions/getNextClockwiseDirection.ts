@@ -1,4 +1,5 @@
 import { CharacterOrientation } from '../interfaces/SaveFile';
+import { getRandomEntry } from './filterTargets';
 
 export const getNextClockWiseDirection = (
 	input: CharacterOrientation
@@ -8,4 +9,8 @@ export const getNextClockWiseDirection = (
 	if (input === 'RIGHT') return 'DOWN';
 
 	return 'LEFT';
+};
+
+export const getRandomOrientation = (): CharacterOrientation => {
+	return getRandomEntry(['DOWN', 'LEFT', 'RIGHT', 'UP']);
 };

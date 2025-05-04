@@ -403,4 +403,6 @@ export const extraFeatureCheckList: {
 	{ name: 'historian event: ho oh' },
 	{ name: 'drake 5 should have full dragons' },
 	{ name: 'releasing pokemon should not end fullscreen mode' },
+	{ name: 'refactor key items in milestones' },
+	{ name: 'Giovanni as special trainer at ranger level x' },
 ];
