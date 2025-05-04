@@ -13,7 +13,7 @@ import {
 	Inventory,
 	joinInventories,
 } from '../interfaces/Inventory';
-import { pickupTable } from '../interfaces/Item';
+import { isKeyItem, pickupTable } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { SaveFileContext } from './useSaveFile';
 
@@ -65,6 +65,14 @@ export const useLeaveBattle = () => {
 						forwardFoot: 'CENTER1',
 					};
 
+					//key items dont get lost
+					const bagWithOnlyKeyItems = joinInventories(
+						EmptyInventory,
+						Object.fromEntries(
+							Object.entries(saveFile.bag).filter(([item]) => isKeyItem(item))
+						)
+					);
+
 					patchSaveFileReducer({
 						meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
 						location: updatedLocation,
@@ -77,7 +85,7 @@ export const useLeaveBattle = () => {
 						bag:
 							saveFile.location.mapId === 'camp'
 								? saveFile.bag
-								: EmptyInventory,
+								: bagWithOnlyKeyItems,
 					});
 					return;
 				}

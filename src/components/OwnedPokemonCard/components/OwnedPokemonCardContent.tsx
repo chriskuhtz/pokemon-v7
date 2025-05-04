@@ -11,7 +11,7 @@ import { isOwnedPokemonKO } from '../../../functions/isKo';
 import { replaceRouteName } from '../../../functions/replaceRouteName';
 import { EvolutionReducerPayload } from '../../../hooks/useSaveFile';
 import { Inventory } from '../../../interfaces/Inventory';
-import { ItemType } from '../../../interfaces/Item';
+import { isKeyItem, ItemType } from '../../../interfaces/Item';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { PokemonData } from '../../../interfaces/PokemonData';
 import { IconSolarSystem } from '../../../uiComponents/IconSolarSystem/IconSolarSystem';
@@ -74,7 +74,7 @@ export const OwnedPokemonCardContent = ({
 				options={[
 					getHeldItem(ownedPokemon),
 					...Object.entries(inventory)
-						.filter(([, amount]) => amount > 0)
+						.filter(([item, amount]) => !isKeyItem(item) && amount > 0)
 						.map(([item]) => item),
 				].filter((s) => s !== undefined)}
 				min={1}
