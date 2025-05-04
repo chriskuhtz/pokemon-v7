@@ -10,12 +10,46 @@ import { makeChallengerPokemon } from './makeChallengerPokemon';
 
 const rocketPokemon: { name: PokemonName; minXp: number; maxXp: number }[] = [
 	{ name: 'rattata', minXp: 1000, maxXp: 8000 },
+	{ name: 'raticate', minXp: 8000, maxXp: 125000 },
+	{ name: 'rattata-alola', minXp: 1000, maxXp: 8000 },
+	{ name: 'raticate-alola', minXp: 8000, maxXp: 125000 },
+	{ name: 'voltorb', minXp: 1000, maxXp: 8000 },
+	{ name: 'electrode', minXp: 8000, maxXp: 125000 },
+	{ name: 'exeggcute', minXp: 1000, maxXp: 8000 },
+	{ name: 'exeggutor', minXp: 8000, maxXp: 125000 },
+	{ name: 'tauros', minXp: 8000, maxXp: 125000 },
+	{ name: 'magmar', minXp: 8000, maxXp: 125000 },
+	{ name: 'electabuzz', minXp: 8000, maxXp: 125000 },
 	{ name: 'grimer', minXp: 1000, maxXp: 8000 },
+	{ name: 'muk', minXp: 8000, maxXp: 125000 },
+	{ name: 'grimer-alola', minXp: 1000, maxXp: 8000 },
+	{ name: 'muk-alola', minXp: 8000, maxXp: 125000 },
 	{ name: 'houndour', minXp: 1000, maxXp: 8000 },
+	{ name: 'houndoom', minXp: 8000, maxXp: 125000 },
 	{ name: 'meowth', minXp: 1000, maxXp: 8000 },
+	{ name: 'persian', minXp: 8000, maxXp: 125000 },
+	{ name: 'meowth-alola', minXp: 1000, maxXp: 8000 },
+	{ name: 'persian-alola', minXp: 8000, maxXp: 125000 },
+	{ name: 'meowth-galar', minXp: 1000, maxXp: 8000 },
+	{ name: 'perrserker', minXp: 8000, maxXp: 125000 },
 	{ name: 'koffing', minXp: 1000, maxXp: 8000 },
+	{ name: 'weezing', minXp: 1000, maxXp: 125000 },
 	{ name: 'zubat', minXp: 1000, maxXp: 8000 },
+	{ name: 'golbat', minXp: 8000, maxXp: 64000 },
+	{ name: 'crobat', minXp: 8000, maxXp: 125000 },
 	{ name: 'drowzee', minXp: 1000, maxXp: 8000 },
+	{ name: 'hypno', minXp: 8000, maxXp: 125000 },
+	{ name: 'venonat', minXp: 1000, maxXp: 8000 },
+	{ name: 'venomoth', minXp: 8000, maxXp: 125000 },
+	{ name: 'murkrow', minXp: 1000, maxXp: 8000 },
+	{ name: 'honchkrow', minXp: 8000, maxXp: 125000 },
+	{ name: 'sneasel', minXp: 1000, maxXp: 125000 },
+	{ name: 'weavile', minXp: 27000, maxXp: 125000 },
+	{ name: 'gyarados', minXp: 27000, maxXp: 125000 },
+	{ name: 'magmortar', minXp: 27000, maxXp: 125000 },
+	{ name: 'electivire', minXp: 27000, maxXp: 125000 },
+	{ name: 'primeape', minXp: 8000, maxXp: 125000 },
+	{ name: 'mankey', minXp: 1000, maxXp: 8000 },
 ];
 
 const rocketNamesMale = [
@@ -59,14 +93,11 @@ const determineNumberOfMembers = (rangerLevel: number) => {
 	return 2;
 };
 const determineMinXp = (rangerLevel: number) => {
-	if (rangerLevel > 30) {
+	if (rangerLevel > 20) {
 		return 125000;
 	}
-	if (rangerLevel > 20) {
-		return 64000;
-	}
 	if (rangerLevel > 15) {
-		return 27000;
+		return 64000;
 	}
 	if (rangerLevel > 10) {
 		return 8000;
@@ -78,14 +109,11 @@ const determineMinXp = (rangerLevel: number) => {
 	return 0;
 };
 const determineMaxXp = (rangerLevel: number) => {
-	if (rangerLevel > 30) {
-		return 12500000;
-	}
 	if (rangerLevel > 20) {
-		return 125000;
+		return 1250000;
 	}
 	if (rangerLevel > 15) {
-		return 64000;
+		return 125000;
 	}
 	if (rangerLevel > 10) {
 		return 27000;
@@ -122,7 +150,14 @@ const getRocketMessage = (): string[] => {
 		return ['Team Rocket, faster than light'];
 	}
 	if (r > 0.2) {
-		return ['Lets battle'];
+		return ['You little Runt'];
+	}
+	if (r > 0.1) {
+		return [
+			'We are hardened Crimninals',
+			'But if you defeat our pokemon',
+			'We will stop ;)',
+		];
 	}
 	return ['I will squash you'];
 };
@@ -131,10 +166,9 @@ export const createRocketOutbreak = (
 	rangerLevel: number,
 	mapId: MapId
 ): OverworldTrainer[] => {
-	// const chosenNames = [...rocketNamesFemale, ...rocketNamesMale].filter(
-	// 	() => Math.random() < 0.5
-	// );
-	const chosenNames = [rocketNamesFemale[0]];
+	const chosenNames = [...rocketNamesFemale, ...rocketNamesMale].filter(
+		() => Math.random() < 0.5
+	);
 
 	const getTeam = (): OverworldTrainer['team'] => {
 		const numberOfMembers = determineNumberOfMembers(rangerLevel);

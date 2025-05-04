@@ -223,7 +223,7 @@ const getSource = (occ: Occupant) => {
 		case 'SWARM_RADAR':
 			return '/mapObjects/radar.png';
 		case 'ROCKET_RADIO':
-			return '/mapObjects/radar.png';
+			return '/mapObjects/rocketRadar.png';
 		case 'COMBEE_HIVE':
 			return '/mapObjects/combeeHive.png';
 		case 'OBSTACLE':

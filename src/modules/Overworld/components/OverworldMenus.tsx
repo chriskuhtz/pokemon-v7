@@ -1,6 +1,7 @@
 import { useContext, useMemo } from 'react';
 import { CgZoomIn, CgZoomOut } from 'react-icons/cg';
 import { IoMdMenu } from 'react-icons/io';
+import { RocketIcon } from '../../../components/RocketIcon/RocketIcon';
 import { TeamOverview } from '../../../components/TeamOverview/TeamOverview';
 import { TimeOfDayIcon } from '../../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../../components/WeatherIcon/WeatherIcon';
@@ -9,7 +10,6 @@ import {
 	mapDisplayNames,
 	mapsRecord,
 } from '../../../constants/maps/mapsRecord';
-import { areAllRocketsDefeated } from '../../../functions/areAllRocketsDefeated';
 import { BaseSizeContext } from '../../../hooks/useBaseSize';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
@@ -110,10 +110,10 @@ export const OverworldMenus = ({
 					backgroundColor: 'rgba(255,255,255,.6)',
 				}}
 			>
+				<RocketIcon />
 				<strong>{mapDisplayNames[map.id]}</strong>
 				<WeatherIcon weather={map.weather} />
 				<TimeOfDayIcon />
-				<RocketIcon />
 			</div>
 			<MovementButtons
 				setNextInput={setNextInput}
@@ -121,17 +121,4 @@ export const OverworldMenus = ({
 			/>
 		</>
 	);
-};
-
-const RocketIcon = () => {
-	const { saveFile } = useContext(SaveFileContext);
-
-	const rocketsActive = useMemo(
-		() => areAllRocketsDefeated(saveFile),
-		[saveFile]
-	);
-
-	if (!rocketsActive) {
-		return <></>;
-	}
 };

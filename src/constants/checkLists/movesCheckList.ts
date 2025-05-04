@@ -1510,6 +1510,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/375/',
 		handled: true,
 	},
+	{
+		name: 'flame-charge',
+		url: 'https://pokeapi.co/api/v2/move/488/',
+		handled: true,
+	},
 	{ name: 'trump-card', url: 'https://pokeapi.co/api/v2/move/376/' },
 	{ name: 'heal-block', url: 'https://pokeapi.co/api/v2/move/377/' },
 	{ name: 'wring-out', url: 'https://pokeapi.co/api/v2/move/378/' },
@@ -1611,7 +1616,6 @@ export const movesCheckList: {
 	{ name: 'synchronoise', url: 'https://pokeapi.co/api/v2/move/485/' },
 	{ name: 'electro-ball', url: 'https://pokeapi.co/api/v2/move/486/' },
 	{ name: 'soak', url: 'https://pokeapi.co/api/v2/move/487/' },
-	{ name: 'flame-charge', url: 'https://pokeapi.co/api/v2/move/488/' },
 	{ name: 'coil', url: 'https://pokeapi.co/api/v2/move/489/' },
 	{ name: 'low-sweep', url: 'https://pokeapi.co/api/v2/move/490/' },
 	{ name: 'acid-spray', url: 'https://pokeapi.co/api/v2/move/491/' },
@@ -2584,6 +2588,7 @@ export const handledMoves = [
 	'payback',
 	'assurance',
 	'psycho-shift',
+	'flame-charge',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

@@ -22,14 +22,12 @@ import {
 	emptyPokedex,
 	localStorageId,
 	ONE_DAY,
-	ONE_HOUR,
 	testState,
 } from '../constants/gameData';
 import { PokemonName } from '../constants/pokemonNames';
 import { addPokemonToDex } from '../functions/addPokemonToDex';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
-import { areAllRocketsDefeated } from '../functions/areAllRocketsDefeated';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getRewardItemsForQuest } from '../functions/getRewardForQuest';
 import { TimeOfDay } from '../functions/getTimeOfDay';
@@ -128,18 +126,6 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		const newTime = new Date().getTime();
 
 		let pokedex = update.pokedex ?? emptyPokedex;
-
-		//check if all rockets defeated
-
-		const allRocketsDefeated = areAllRocketsDefeated(update);
-
-		if (allRocketsDefeated) {
-			const now = new Date().getTime();
-
-			update.currentRocketOperation = undefined;
-			update.rangerLevel = (update.rangerLevel ?? 0) + 1;
-			update.nextRocketOperationAt = now + ONE_HOUR;
-		}
 
 		update.pokemon.forEach((p) => {
 			pokedex = addPokemonToDex(pokedex, p.name, p.caughtOnMap, true);
