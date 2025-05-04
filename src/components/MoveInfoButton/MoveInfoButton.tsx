@@ -25,10 +25,13 @@ export const MoveInfoButton = ({ movename }: { movename: MoveName }) => {
 				{
 					message: `${res.damage_class.name} Attack${
 						res.power ? `, Power: ${res.power}` : ''
-					}`,
+					}, Accuracy: ${res.accuracy}`,
 				},
 				{
 					message: `Target: ${res.target.name}`,
+				},
+				{
+					message: `Priority: ${res.priority}`,
 				},
 				{
 					message: res['effect_entries'][0]['short_effect'],
