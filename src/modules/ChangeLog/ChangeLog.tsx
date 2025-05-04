@@ -56,7 +56,8 @@ const ChangeLogV17 = (): JSX.Element => {
 			<h3>V 0.17:</h3>
 
 			<ol style={{ lineHeight: '1.5rem' }}>
-				<li>Various minor fixes</li>
+				<li>Fixed Uppercase/Lowercase inputs</li>
+				<li>Better Pokeball indicator</li>
 			</ol>
 		</>
 	);
