@@ -181,6 +181,7 @@ export const OwnedPokemonCardContent = ({
 						)}
 						<h5>Gender: {ownedPokemon.gender}</h5>
 						<h5>Caught at: {replaceRouteName(ownedPokemon.caughtOnMap)}</h5>
+						<h5>{ownedPokemon.starter ? 'Your first Pokemon' : ''}</h5>
 					</div>
 					<div>
 						<HappinessIcon value={ownedPokemon.happiness} />

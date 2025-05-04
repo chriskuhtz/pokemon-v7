@@ -1,13 +1,15 @@
+import { useContext, useMemo } from 'react';
 import { MdCatchingPokemon } from 'react-icons/md';
 import { getBagLimit } from '../../../components/BagLimitBar/BagLimitBar';
-import { percentageBasedColor } from '../../../constants/typeColors';
-import { isPokeball } from '../../../interfaces/Item';
-import { useContext, useMemo } from 'react';
 import { battleSpriteSize } from '../../../constants/gameData';
+import { percentageBasedColor } from '../../../constants/typeColors';
+import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
+import { isPokeball } from '../../../interfaces/Item';
 
 export const NumberOfBallsBadge = (): JSX.Element => {
 	const { saveFile } = useContext(SaveFileContext);
+	const { addMessage } = useContext(MessageQueueContext);
 	const numberOfBalls = useMemo(() => {
 		return Object.entries(saveFile.bag)
 			.filter(([item]) => isPokeball(item))
@@ -15,6 +17,9 @@ export const NumberOfBallsBadge = (): JSX.Element => {
 	}, [saveFile]);
 	return (
 		<MdCatchingPokemon
+			onClick={() =>
+				addMessage({ message: `${numberOfBalls} Pokeballs in Bag` })
+			}
 			size={battleSpriteSize}
 			color={
 				percentageBasedColor(numberOfBalls / getBagLimit(saveFile.campUpgrades))

@@ -106,6 +106,24 @@ const migrateSavefile = (input: SaveFile) => {
 
 		return p;
 	});
+
+	if (
+		updatedInput.pokemon.length > 0 &&
+		!updatedInput.pokemon.some((p) => p.starter)
+	) {
+		const lowestCatchDateId = [...updatedInput.pokemon].sort(
+			(a, b) => b.caughtAtDate - a.caughtAtDate
+		)[0].id;
+
+		updatedInput.pokemon = input.pokemon.map((p) => {
+			if (p.id === lowestCatchDateId) {
+				return { ...p, starter: true };
+			}
+
+			return p;
+		});
+	}
+
 	return updatedInput;
 };
 
@@ -443,6 +461,11 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 			saveFile.mileStones.hasEvolvedAPokemonThatNeedsNighttime ||
 			timeOfDayRequirement === 'NIGHT';
 
+		const isStarter = saveFile.pokemon.find((p) => p.id === id)?.starter;
+
+		const hasEvolvedStarter =
+			saveFile.mileStones.hasEvolvedStarter || isStarter;
+
 		const pokedex = addPokemonToDex(
 			saveFile.pokedex,
 			newName,
@@ -470,6 +493,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 				hasEvolvedAPokemonThroughFriendship,
 				hasEvolvedAPokemonThatNeedsDaytime,
 				hasEvolvedAPokemonThatNeedsNighttime,
+				hasEvolvedStarter,
 			},
 			bag: updatedInventory,
 		});

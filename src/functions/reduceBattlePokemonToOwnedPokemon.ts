@@ -10,6 +10,7 @@ export const reduceBattlePokemonToOwnedPokemon = (
 	heal?: boolean
 ): OwnedPokemon => {
 	const res = {
+		starter: newMon.starter,
 		name: newMon.name,
 		gender: newMon.gender,
 		firstMove: {

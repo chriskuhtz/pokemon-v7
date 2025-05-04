@@ -45,6 +45,7 @@ export const StarterSelection = (): JSX.Element => {
 			name: o,
 			id: v4(),
 			effortValues: EmptyStatObject,
+			starter: true,
 		})),
 		{
 			assignLearnsetMoves: true,
@@ -131,7 +132,10 @@ export const StarterSelection = (): JSX.Element => {
 				{' '}
 				<Stack mode="row" justifyContent="center">
 					<h3>What is your name:</h3>
-					<input value={name} onChange={(e) => setName(e.target.value)} />
+					<input
+						value={name}
+						onChange={(e) => setName(e.target.value.toLowerCase())}
+					/>
 				</Stack>
 				<h3 style={{ margin: 0 }}>Which starter will you choose:</h3>
 				<Stack mode="row" justifyContent="center" alignItems="center">

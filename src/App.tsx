@@ -406,7 +406,10 @@ export const Login = ({
 					/>
 				</div>
 				<h3>Password:</h3>
-				<input onChange={(e) => setPW(e.target.value)} value={pw} />
+				<input
+					onChange={(e) => setPW(e.target.value.toLowerCase())}
+					value={pw}
+				/>
 			</div>
 		</Page>
 	);
