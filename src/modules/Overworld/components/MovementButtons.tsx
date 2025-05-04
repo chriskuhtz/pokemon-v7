@@ -8,6 +8,7 @@ import {
 import { TbCircleLetterA } from 'react-icons/tb';
 import { battleSpriteSize, fps } from '../../../constants/gameData';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
+import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
 
 export const MovementButtons = ({
@@ -19,6 +20,7 @@ export const MovementButtons = ({
 	>;
 	handleEnterPress: () => void;
 }) => {
+	const { saveFile } = useContext(SaveFileContext);
 	const { latestMessage } = useContext(MessageQueueContext);
 	const [pressed, setPressed] = useState<CharacterOrientation | undefined>();
 
@@ -33,6 +35,10 @@ export const MovementButtons = ({
 
 		return () => clearInterval(int);
 	}, [latestMessage, pressed, setNextInput]);
+
+	if (saveFile.settings?.hideMovementButtons) {
+		return <></>;
+	}
 	return (
 		<div
 			style={{

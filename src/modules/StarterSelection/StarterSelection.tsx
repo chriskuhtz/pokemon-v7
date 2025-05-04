@@ -45,6 +45,7 @@ export const StarterSelection = (): JSX.Element => {
 			name: o,
 			id: v4(),
 			effortValues: EmptyStatObject,
+			starter: true,
 		})),
 		{
 			assignLearnsetMoves: true,

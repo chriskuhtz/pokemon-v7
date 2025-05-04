@@ -46,6 +46,7 @@ export interface SettingsObject {
 	randomAbilities?: boolean;
 	randomHeldItems?: boolean;
 	randomLearnSets?: boolean;
+	hideMovementButtons?: boolean;
 }
 
 export type BerryBushStatus =
@@ -121,6 +122,7 @@ export interface SaveFile {
 		hasWokenASnorlax?: boolean;
 		caughtFromSwarms: PokemonName[];
 		luredWithBerries: PokemonName[];
+		hasEvolvedStarter?: boolean;
 	};
 	farm: {
 		plants: BerryBush[];

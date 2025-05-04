@@ -113,6 +113,7 @@ export const MainMenu = ({
 					icon={<FaSearch size={battleSpriteSize} />}
 					actionElements={[]}
 				/>
+				<ToggleMovementButtons />
 				{resetConfirmationInProgress ? (
 					<button
 						onClick={() =>
@@ -152,6 +153,35 @@ export const MainMenu = ({
 	);
 };
 
+export const ToggleMovementButtons = () => {
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+
+	if (saveFile.settings?.hideMovementButtons) {
+		return (
+			<button
+				onClick={() =>
+					patchSaveFileReducer({
+						settings: { ...saveFile.settings, hideMovementButtons: false },
+					})
+				}
+			>
+				Show Movement Buttons
+			</button>
+		);
+	}
+
+	return (
+		<button
+			onClick={() =>
+				patchSaveFileReducer({
+					settings: { ...saveFile.settings, hideMovementButtons: true },
+				})
+			}
+		>
+			Hide Movement Buttons
+		</button>
+	);
+};
 export const ExpShareButton = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 

@@ -507,7 +507,6 @@ export const questNames = [
 	'revive a fossil',
 	'revive all different fossils',
 	'evolve your starter pokemon',
-	'evolve your starter pokemon to its final form',
 	'catch a shiny pokemon',
 	'cook an easy recipe',
 	'cook a medium recipe',
@@ -1772,47 +1771,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: {
 			'rare-candy': 2,
 		},
-		researchPoints: 10,
-		conditionFunction: (s) => {
-			if (s.starterPokemon === 'bulbasaur') {
-				return s.pokemon.some(
-					(p) => p.name === 'ivysaur' || p.name === 'venusaur'
-				);
-			}
-			if (s.starterPokemon === 'squirtle') {
-				return s.pokemon.some(
-					(p) => p.name === 'wartortle' || p.name === 'blastoise'
-				);
-			}
-			if (s.starterPokemon === 'charmander') {
-				return s.pokemon.some(
-					(p) => p.name === 'charmeleon' || p.name === 'charizard'
-				);
-			}
-
-			return false;
-		},
-	},
-	'evolve your starter pokemon to its final form': {
-		kind: 'QUEST_LINE',
-		rewardItems: {
-			'rare-candy': 5,
-		},
 		researchPoints: 25,
 		conditionFunction: (s) => {
-			if (s.starterPokemon === 'bulbasaur') {
-				return s.pokemon.some((p) => p.name === 'venusaur');
-			}
-			if (s.starterPokemon === 'squirtle') {
-				return s.pokemon.some((p) => p.name === 'blastoise');
-			}
-			if (s.starterPokemon === 'charmander') {
-				return s.pokemon.some((p) => p.name === 'charizard');
-			}
-
-			return false;
+			return !!s.mileStones.hasEvolvedStarter;
 		},
 	},
+
 	'catch a shiny pokemon': {
 		kind: 'BULLETIN',
 		rewardItems: {

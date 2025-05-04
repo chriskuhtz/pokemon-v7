@@ -53,4 +53,5 @@ export interface OwnedPokemon {
 	unlockedMoves: MoveName[];
 	growthRate: GrowthRateName;
 	caughtAtDate: number;
+	starter?: boolean;
 }

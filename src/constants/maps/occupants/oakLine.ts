@@ -48,20 +48,6 @@ export const oakLine: Occupant[] = [
 	},
 	{
 		...oakBase,
-		id: 'oak_3',
-		unhandledMessage: [
-			'Very impressive',
-			'Your Pokemon should be able to evolve one more time',
-		],
-		handledMessage: ['Battle wild pokemon to grow stronger'],
-		quest: 'evolve your starter pokemon to its final form',
-		conditionFunction: (s) =>
-			s.quests['catch a pokemon'] === 'COLLECTED' &&
-			s.quests['evolve your starter pokemon'] === 'COLLECTED' &&
-			s.quests['evolve your starter pokemon to its final form'] !== 'COLLECTED',
-	},
-	{
-		...oakBase,
 		id: 'oak_4',
 		unhandledMessage: [
 			'Great work',
