@@ -18,7 +18,7 @@ export const NickNameModal = ({
 				<input
 					placeholder={'nickname'}
 					value={nickname}
-					onChange={(e) => setNickName(e.target.value)}
+					onChange={(e) => setNickName(e.target.value.toLowerCase())}
 				/>
 			</div>
 		</Modal>

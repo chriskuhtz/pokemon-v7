@@ -38,7 +38,7 @@ export const Wiki = () => {
 					content={
 						<input
 							value={searchString}
-							onChange={(e) => setSearchString(e.target.value)}
+							onChange={(e) => setSearchString(e.target.value.toLowerCase())}
 						/>
 					}
 					actionElements={[]}
