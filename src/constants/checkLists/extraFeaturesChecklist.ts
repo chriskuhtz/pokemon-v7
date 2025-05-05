@@ -376,7 +376,8 @@ export const extraFeatureCheckList: {
 	{ name: 'error handling for wiki', handled: true },
 	{ name: 'Roark as special fossil trainer after quests', handled: true },
 	{ name: 'rocket outbreaks', handled: true },
-	{ name: 'drake 5 should have full dragons' },
+	{ name: 'Giovanni as special trainer at ranger level x', handled: true },
+	{ name: 'drake 5 should have full dragons', handled: true },
 	{
 		name: 'more kanto ken style trainers (dont forget to adjust quest limits)',
 	},
@@ -407,8 +408,6 @@ export const extraFeatureCheckList: {
 	{ name: 'historian event: lugia' },
 	{ name: 'historian event: ho oh' },
 	{ name: 'releasing pokemon should not end fullscreen mode' },
-	{ name: 'refactor key items in milestones' },
-	{ name: 'Giovanni as special trainer at ranger level x' },
 	{ name: 'hide quests tab on challenge field' },
 	{ name: 'random starters are not rerolled on reset' },
 	{ name: 'consider price caps for certain upgrades' },

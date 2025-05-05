@@ -17,6 +17,7 @@ import {
 	berries,
 	fossilTable,
 } from '../../interfaces/Item';
+import { getRandomNature } from '../../interfaces/Natures';
 import { OverworldMap } from '../../interfaces/OverworldMap';
 import { Quest } from '../../interfaces/Quest';
 import {
@@ -566,6 +567,7 @@ export const questNames = [
 	'defeat brock',
 	'defeat gary',
 	'defeat roark',
+	'defeat giovanni',
 	'reach challenge field rank 1',
 	'reach challenge field rank 18',
 	'reach challenge field rank 40',
@@ -577,7 +579,6 @@ export const questNames = [
 	'reach ranger level 5',
 	'reach ranger level 10',
 	'reach ranger level 20',
-	'reach ranger level 30',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -2465,14 +2466,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...expCandyPackage,
 			'lucky-egg': 1,
 		},
-	},
-	'reach ranger level 30': {
-		kind: 'BULLETIN',
-		requiredUpgrade: 'ranger certification',
-		availableAfter: 'reach ranger level 20',
-		researchPoints: 100,
-		conditionFunction: (s) => (s.rangerLevel ?? 0) >= 30,
-		rewardItems: {},
 		rewardPokemon: {
 			caughtAtDate: new Date().getTime(),
 			gender: 'MALE',
@@ -2499,6 +2492,38 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			fixedAbility: true,
 			firstMove: { name: 'sacred-fire', usedPP: 0 },
 		},
+	},
+	'defeat giovanni': {
+		rewardItems: {},
+		rewardPokemon: {
+			caughtAtDate: new Date().getTime(),
+			growthRate: 'medium',
+			unlockedMoves: ['calm-mind'],
+			shiny: true,
+			maxHp: 30,
+			effortValues: EmptyStatObject,
+			ppBoostedMoves: [],
+			caughtOnMap: 'camp',
+			gender: 'MALE',
+			stepsWalked: 0,
+			ownerId: '',
+			damage: 0,
+			id: '',
+			ball: 'master-ball',
+			ability: 'pressure',
+			name: 'mewtwo',
+			xp: 125,
+			nature: getRandomNature(),
+			intrinsicValues: generateRandomStatObject(31),
+			happiness: 70,
+			firstMove: { name: 'calm-mind', usedPP: 0 },
+		},
+		researchPoints: 100,
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'giovanni');
+		},
+		kind: 'BULLETIN',
+		availableAfter: 'reach ranger level 5',
 	},
 };
 
