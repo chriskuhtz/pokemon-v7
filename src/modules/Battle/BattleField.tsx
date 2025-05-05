@@ -75,7 +75,8 @@ export interface BattleFieldEffect {
 		| 'dark-aura'
 		| 'aura-break'
 		| 'fairy-aura'
-		| 'tailwind';
+		| 'tailwind'
+		| 'battery';
 	ownerId: string;
 	applicatorId?: string;
 	duration: number;

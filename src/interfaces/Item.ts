@@ -19,6 +19,8 @@ export const healingItemTypes = [
 	'awakening',
 	'revive',
 	'max-revive',
+	'max-honey',
+	'max-mushroom',
 	'soda-pop',
 	'lemonade',
 	'moomoo-milk',
@@ -58,6 +60,12 @@ export const evBoostItemTypes = [
 	'iron',
 	'protein',
 	'carbos',
+	'health-mochi',
+	'muscle-mochi',
+	'resist-mochi',
+	'genius-mochi',
+	'clever-mochi',
+	'swift-mochi',
 ] as const;
 export const balltypes = [
 	'poke-ball',
@@ -122,6 +130,9 @@ export const evoStones = [
 	'malicious-armor',
 	'chipped-pot',
 	'cracked-pot',
+	'scroll-of-waters',
+	'scroll-of-darkness',
+	'leaders-crest',
 ] as const;
 export const heldItems = [
 	'quick-claw',
@@ -411,6 +422,9 @@ export const keyItems = [
 	'repel',
 	'max-repel',
 	'super-repel',
+	'lure',
+	'super-lure',
+	'max-lure',
 ] as const;
 
 export const expCandies = [
@@ -448,6 +462,7 @@ export const itemTypes = [
 	'rage-candy-bar',
 	'pewter-crunchies',
 	'casteliacone',
+	'fresh-start-mochi',
 ] as const;
 
 export type ItemType = (typeof itemTypes)[number];
@@ -486,7 +501,10 @@ export function isMulch(x: string | undefined): x is MulchType {
 	return (mulches as unknown as string[]).includes(x ?? '');
 }
 export function isIngredient(x: string | undefined): boolean {
-	return !!x && [...berries, ...herbs, 'moomoo-milk', 'honey'].includes(x);
+	return (
+		!!x &&
+		[...berries, ...herbs, 'moomoo-milk', 'honey', 'tiny-mushroom'].includes(x)
+	);
 }
 export function isCooked(x: string | undefined): boolean {
 	return (
@@ -598,6 +616,12 @@ export const EvBoostTable: Record<
 	iron: { change: 10, stat: 'defense' },
 	protein: { change: 10, stat: 'attack' },
 	carbos: { change: 10, stat: 'speed' },
+	'health-mochi': { change: 10, stat: 'hp' },
+	'genius-mochi': { change: 10, stat: 'special-attack' },
+	'clever-mochi': { change: 10, stat: 'special-defense' },
+	'resist-mochi': { change: 10, stat: 'defense' },
+	'muscle-mochi': { change: 10, stat: 'attack' },
+	'swift-mochi': { change: 10, stat: 'speed' },
 };
 export const HPHealTable: Partial<Record<ItemType, number>> = {
 	'oran-berry': 10,

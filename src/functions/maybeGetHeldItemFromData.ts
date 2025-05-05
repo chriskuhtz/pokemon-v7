@@ -1,4 +1,4 @@
-import { isItem, ItemType, itemTypes } from '../interfaces/Item';
+import { isItem, isKeyItem, ItemType, itemTypes } from '../interfaces/Item';
 import { PokemonData } from '../interfaces/PokemonData';
 import { getRandomIndex } from './filterTargets';
 import { getSettings } from './getPlayerId';
@@ -10,7 +10,13 @@ export const maybeGetHeldItemFromData = (
 	const { held_items } = data;
 
 	if (randomHeldItems) {
-		return itemTypes[getRandomIndex(itemTypes.length)];
+		const r = itemTypes[getRandomIndex(itemTypes.length)];
+
+		if (isKeyItem(r)) {
+			return maybeGetHeldItemFromData(data);
+		}
+
+		return r;
 	}
 	if (held_items.length === 0) {
 		return undefined;

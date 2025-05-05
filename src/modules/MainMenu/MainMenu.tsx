@@ -78,6 +78,7 @@ export const MainMenu = ({
 					/>
 				)}
 				<RepelButton />
+				<LureButton />
 				<ExpShareButton />
 				<Card
 					onClick={() => navigate('MAIN', 'BAG')}
@@ -270,6 +271,78 @@ export const RepelButton = () => {
 				}}
 				content={<h3>Repel Pokemon up to level 20</h3>}
 				actionElements={[]}
+			/>
+		);
+	}
+	return <></>;
+};
+export const LureButton = () => {
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+
+	const hasLure = saveFile.bag['lure'] > 0 || saveFile.storage['lure'] > 0;
+
+	const hasSuperLure =
+		saveFile.bag['super-lure'] > 0 || saveFile.storage['super-lure'] > 0;
+
+	const hasMaxLure =
+		saveFile.bag['max-lure'] > 0 || saveFile.storage['max-lure'] > 0;
+	if (saveFile.activatedLure) {
+		return (
+			<Card
+				icon={<ItemSprite item={'lure'} />}
+				onClick={() => {
+					patchSaveFileReducer({
+						activatedLure: undefined,
+					});
+				}}
+				content={<h3>Deactivate {saveFile.activatedLure}</h3>}
+				actionElements={[]}
+			/>
+		);
+	}
+	if (hasLure || hasSuperLure || hasMaxLure) {
+		return (
+			<Card
+				icon={<ItemSprite item={'lure'} />}
+				content={<h3>Choose a Lure</h3>}
+				actionElements={[
+					hasLure ? (
+						<ItemSprite
+							item="lure"
+							onClick={() => {
+								patchSaveFileReducer({
+									activatedLure: 'lure',
+								});
+							}}
+						/>
+					) : (
+						<></>
+					),
+					hasSuperLure ? (
+						<ItemSprite
+							item="super-lure"
+							onClick={() => {
+								patchSaveFileReducer({
+									activatedLure: 'super-lure',
+								});
+							}}
+						/>
+					) : (
+						<></>
+					),
+					hasMaxLure ? (
+						<ItemSprite
+							item="max-lure"
+							onClick={() => {
+								patchSaveFileReducer({
+									activatedLure: 'max-lure',
+								});
+							}}
+						/>
+					) : (
+						<></>
+					),
+				]}
 			/>
 		);
 	}

@@ -29,6 +29,21 @@ const hasCustomSprite: ItemType[] = [
 	'fossilized-fish',
 	'heavy-duty-boots',
 	'blunder-policy',
+	'lure',
+	'super-lure',
+	'max-lure',
+	'scroll-of-waters',
+	'scroll-of-darkness',
+	'leaders-crest',
+	'health-mochi',
+	'muscle-mochi',
+	'resist-mochi',
+	'genius-mochi',
+	'clever-mochi',
+	'swift-mochi',
+	'fresh-start-mochi',
+	'max-honey',
+	'max-mushroom',
 ];
 
 export const getItemUrl = (item: ItemType): string => {

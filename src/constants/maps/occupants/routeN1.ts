@@ -1,6 +1,7 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { routeN1Lure } from '../../../modules/BerryLure/BerryLure';
 import { erika } from './erika';
+import { giovanni } from './giovanni';
 
 export const routeN1Occupants: OverworldMap['occupants'] = [
 	{
@@ -253,5 +254,6 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		passableFrom: 'LEFT',
 	},
 	...erika,
+	giovanni,
 	routeN1Lure,
 ];

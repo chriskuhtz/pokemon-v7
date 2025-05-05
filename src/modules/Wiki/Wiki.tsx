@@ -29,7 +29,13 @@ export const Wiki = () => {
 				{res && (
 					<Card
 						icon={<GoLightBulb size={battleSpriteSize} />}
-						content={<h3>{res['effect_entries'][0]['short_effect']}</h3>}
+						content={
+							<h3>
+								{res['effect_entries'].length > 0
+									? res['effect_entries'][0]['short_effect']
+									: 'No Description available'}
+							</h3>
+						}
 						actionElements={[]}
 					/>
 				)}

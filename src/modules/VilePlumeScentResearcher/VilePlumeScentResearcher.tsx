@@ -17,6 +17,9 @@ const vilePlumeProducts: Partial<
 	repel: { item: 'pecha-berry', amount: 20 },
 	'super-repel': { item: 'kebia-berry', amount: 40 },
 	'max-repel': { item: 'rindo-berry', amount: 60 },
+	lure: { item: 'chesto-berry', amount: 40 },
+	'super-lure': { item: 'coba-berry', amount: 80 },
+	'max-lure': { item: 'aguav-berry', amount: 120 },
 	'rock-incense': { item: 'charti-berry', amount: 5 },
 	'wave-incense': { item: 'passho-berry', amount: 5 },
 	'rose-incense': { item: 'payapa-berry', amount: 5 },
@@ -28,6 +31,9 @@ const productDescriptions: Partial<Record<ItemType, string>> = {
 	repel: 'repels pokemon under level 20 when active, lasts forever',
 	'super-repel': 'repels pokemon under level 40 when active, lasts forever',
 	'max-repel': 'repels all pokemon when active, lasts forever',
+	lure: 'random weak pokemon to attack you',
+	'super-lure': 'causes random medium strong pokemon to attack you',
+	'max-lure': 'causes random very strong pokemon to attack you',
 };
 
 export const useVileplumeScentResearcher = () => {

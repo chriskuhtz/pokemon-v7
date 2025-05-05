@@ -1,4 +1,4 @@
-import { useCallback, useContext, useState } from 'react';
+import { useCallback, useContext, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { Sprite } from '../../components/Sprite/Sprite';
@@ -26,8 +26,8 @@ import { EmptyStatObject } from '../../interfaces/StatObject';
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-const defaultStarters: PokemonName[] = ['bulbasaur', 'charmander', 'squirtle'];
-const randomStarterOptions = [
+const defaultStarters: PokemonName[] = ['bisharp', 'charmander', 'squirtle'];
+const getRandomStarterOptions = () => [
 	getRandomPokemonName(),
 	getRandomPokemonName(),
 	getRandomPokemonName(),
@@ -35,9 +35,13 @@ const randomStarterOptions = [
 export const StarterSelection = (): JSX.Element => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
-	const options = saveFile.settings?.randomStarters
-		? randomStarterOptions
-		: defaultStarters;
+	const options = useMemo(
+		() =>
+			saveFile.settings?.randomStarters
+				? getRandomStarterOptions()
+				: defaultStarters,
+		[saveFile]
+	);
 
 	const { res: fullStarters } = useGetBattleTeam(
 		options.map((o) => ({

@@ -105,6 +105,12 @@ export const useBattleFieldEffects = (
 		if (onFieldTeam.some((p) => p.ability === 'bad-dreams')) {
 			res.push({ type: 'bad-dreams', ownerId: getPlayerId(), duration: 9000 });
 		}
+		if (onFieldOpponents.some((p) => p.ability === 'battery')) {
+			res.push({ type: 'battery', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'battery')) {
+			res.push({ type: 'battery', ownerId: getPlayerId(), duration: 9000 });
+		}
 		if (onFieldOpponents.some((p) => p.ability === 'unnerve')) {
 			res.push({ type: 'unnerve', ownerId: OPPO_ID, duration: 9000 });
 		}

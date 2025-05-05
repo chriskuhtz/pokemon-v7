@@ -1895,17 +1895,17 @@ export const tier5trainers: Challenger[] = [
 		id: 'drake 5',
 		team: [
 			makeChallengerPokemon({
-				name: 'dragonair',
+				name: 'dragonite',
 				xp: 125000,
 				heldItemName: 'dragon-fang',
 			}),
 			makeChallengerPokemon({
-				name: 'hakamo-o',
+				name: 'kommo-o',
 				xp: 125000,
 				heldItemName: 'dragon-fang',
 			}),
 			makeChallengerPokemon({
-				name: 'shelgon',
+				name: 'salamence',
 				xp: 125000,
 				heldItemName: 'dragon-fang',
 			}),

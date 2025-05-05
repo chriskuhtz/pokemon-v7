@@ -13,6 +13,7 @@ import {
 	XItemTable,
 } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { EmptyStatObject } from '../interfaces/StatObject';
 import { applyEVBoostItem } from './applyEVGain';
 import { applyHappinessChange } from './applyHappinessChange';
 import { applyPPMoveBooster } from './applyPPBooster';
@@ -55,7 +56,10 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		return res;
 	}
 	if (
-		(item === 'revive' || item === 'max-revive' || item === 'revival-herb') &&
+		(item === 'revive' ||
+			item === 'max-revive' ||
+			item === 'revival-herb' ||
+			item === 'max-honey') &&
 		pokemon.damage >= pokemon.maxHp
 	) {
 		if (addMessage) {
@@ -85,6 +89,9 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	}
 	if (isEvBoostItem(item)) {
 		return applyEVBoostItem(pokemon, item);
+	}
+	if (item === 'fresh-start-mochi') {
+		return { ...pokemon, effortValues: EmptyStatObject };
 	}
 	if (item === 'rare-candy') {
 		const { xpAtNextLevel, level } = calculateLevelData(
@@ -171,6 +178,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		item === 'lava-cookie' ||
 		item === 'old-gateau' ||
 		item === 'big-malasada' ||
+		item === 'max-mushroom' ||
 		item === 'lum-berry'
 	) {
 		if (addMessage) {

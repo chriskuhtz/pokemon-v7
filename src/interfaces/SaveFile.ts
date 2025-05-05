@@ -142,4 +142,5 @@ export interface SaveFile {
 	pokedex: Pokedex;
 	cookingSkill?: number;
 	activatedRepel?: 'repel' | 'super-repel' | 'max-repel';
+	activatedLure?: 'lure' | 'super-lure' | 'max-lure';
 }

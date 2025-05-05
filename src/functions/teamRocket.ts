@@ -77,45 +77,45 @@ const rocketNamesFemale = [
 ];
 
 const determineNumberOfMembers = (rangerLevel: number) => {
-	if (rangerLevel > 20) {
+	if (rangerLevel > 15) {
 		return 6;
 	}
-	if (rangerLevel > 15) {
+	if (rangerLevel > 10) {
 		return 5;
 	}
-	if (rangerLevel > 10) {
+	if (rangerLevel > 5) {
 		return 4;
 	}
-	if (rangerLevel > 5) {
+	if (rangerLevel > 3) {
 		return 3;
 	}
 
 	return 2;
 };
 const determineMinXp = (rangerLevel: number) => {
-	if (rangerLevel > 20) {
+	if (rangerLevel > 15) {
 		return 125000;
 	}
-	if (rangerLevel > 15) {
+	if (rangerLevel > 10) {
 		return 64000;
 	}
-	if (rangerLevel > 10) {
+	if (rangerLevel > 5) {
 		return 8000;
 	}
-	if (rangerLevel > 5) {
+	if (rangerLevel > 3) {
 		return 3000;
 	}
 
 	return 0;
 };
 const determineMaxXp = (rangerLevel: number) => {
-	if (rangerLevel > 20) {
+	if (rangerLevel > 15) {
 		return 1250000;
 	}
-	if (rangerLevel > 15) {
+	if (rangerLevel > 10) {
 		return 125000;
 	}
-	if (rangerLevel > 10) {
+	if (rangerLevel > 5) {
 		return 27000;
 	}
 
