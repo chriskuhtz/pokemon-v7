@@ -10,10 +10,10 @@
 	max-height: 100dvh;
 	overflow: scroll;
 	min-height: 100dvh;
-	background: #7ac74c;
+	background: white;
 	background: linear-gradient(
 		218deg,
-		rgba(122, 199, 76, 0.5) 0%,
-		rgba(99, 144, 240, 0.5) 100%
+		rgba(122, 199, 76, 1) 0%,
+		rgba(99, 144, 240, 1) 100%
 	);
 }
