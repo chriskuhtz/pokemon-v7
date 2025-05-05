@@ -411,6 +411,9 @@ export const keyItems = [
 	'repel',
 	'max-repel',
 	'super-repel',
+	'lure',
+	'super-lure',
+	'max-lure',
 ] as const;
 
 export const expCandies = [

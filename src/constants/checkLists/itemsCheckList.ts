@@ -1869,15 +1869,18 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/1180/',
 		handled: true,
 	},
-	{ name: 'utility-umbrella', url: 'https://pokeapi.co/api/v2/item/1181/' },
-	{ name: 'terrain-extender', url: 'https://pokeapi.co/api/v2/item/896/' },
-	{ name: 'electric-seed', url: 'https://pokeapi.co/api/v2/item/898/' },
-	{ name: 'psychic-seed', url: 'https://pokeapi.co/api/v2/item/899/' },
-	{ name: 'misty-seed', url: 'https://pokeapi.co/api/v2/item/900/' },
-	{ name: 'grassy-seed', url: 'https://pokeapi.co/api/v2/item/901/' },
-	{ name: 'lure', url: 'https://pokeapi.co/api/v2/item/1036/' },
-	{ name: 'super-lure', url: 'https://pokeapi.co/api/v2/item/1037/' },
-	{ name: 'max-lure', url: 'https://pokeapi.co/api/v2/item/1038/' },
+
+	{ name: 'lure', url: 'https://pokeapi.co/api/v2/item/1036/', handled: true },
+	{
+		name: 'super-lure',
+		url: 'https://pokeapi.co/api/v2/item/1037/',
+		handled: true,
+	},
+	{
+		name: 'max-lure',
+		url: 'https://pokeapi.co/api/v2/item/1038/',
+		handled: true,
+	},
 	{ name: 'catching-charm', url: 'https://pokeapi.co/api/v2/item/1325/' },
 	{ name: 'max-honey', url: 'https://pokeapi.co/api/v2/item/1630/' },
 	{ name: 'max-mushrooms', url: 'https://pokeapi.co/api/v2/item/1631/' },
@@ -1928,14 +1931,16 @@ export const itemsCheckList: {
 	{ name: 'clever-mochi', url: 'https://pokeapi.co/api/v2/item/2116/' },
 	{ name: 'swift-mochi', url: 'https://pokeapi.co/api/v2/item/2117/' },
 	{ name: 'fresh-start-mochi', url: 'https://pokeapi.co/api/v2/item/2118/' },
-	{ name: 'douse-drive', url: 'https://pokeapi.co/api/v2/item/563/' },
-	{ name: 'shock-drive', url: 'https://pokeapi.co/api/v2/item/564/' },
-	{ name: 'burn-drive', url: 'https://pokeapi.co/api/v2/item/565/' },
-	{ name: 'chill-drive', url: 'https://pokeapi.co/api/v2/item/566/' },
+	{ name: 'terrain-extender', url: 'https://pokeapi.co/api/v2/item/896/' },
+	{ name: 'electric-seed', url: 'https://pokeapi.co/api/v2/item/898/' },
+	{ name: 'psychic-seed', url: 'https://pokeapi.co/api/v2/item/899/' },
+	{ name: 'misty-seed', url: 'https://pokeapi.co/api/v2/item/900/' },
+	{ name: 'grassy-seed', url: 'https://pokeapi.co/api/v2/item/901/' },
 	{ name: 'eviolite', url: 'https://pokeapi.co/api/v2/item/581/' },
 	{ name: 'oval-charm', url: 'https://pokeapi.co/api/v2/item/674/' },
 	{ name: 'ability-capsule', url: 'https://pokeapi.co/api/v2/item/685/' },
 	{ name: 'exp-charm', url: 'https://pokeapi.co/api/v2/item/1638/' },
+	{ name: 'utility-umbrella', url: 'https://pokeapi.co/api/v2/item/1181/' },
 	/**
 	 * FOODS AND FOOD RELATED
 	 */
@@ -2476,6 +2481,13 @@ export const itemsCheckList: {
 	{ name: 'garchompite', url: 'https://pokeapi.co/api/v2/item/722/' },
 	{ name: 'latiasite', url: 'https://pokeapi.co/api/v2/item/760/' },
 	{ name: 'latiosite', url: 'https://pokeapi.co/api/v2/item/761/' },
+	/**
+	 * GENESECT
+	 */
+	{ name: 'douse-drive', url: 'https://pokeapi.co/api/v2/item/563/' },
+	{ name: 'shock-drive', url: 'https://pokeapi.co/api/v2/item/564/' },
+	{ name: 'burn-drive', url: 'https://pokeapi.co/api/v2/item/565/' },
+	{ name: 'chill-drive', url: 'https://pokeapi.co/api/v2/item/566/' },
 	/**
 	 * SILVALLY
 	 */

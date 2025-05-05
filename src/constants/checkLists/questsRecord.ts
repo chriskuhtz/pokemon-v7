@@ -519,6 +519,8 @@ export const questNames = [
 	'catch 150 different species',
 	'catch 250 different species',
 	'catch 350 different species',
+	'catch 450 different species',
+	'catch 550 different species',
 	'find a pokemon under a smashed rock',
 	'donate 1 plant to the seed vault',
 	'donate 20 plants to the seed vault',
@@ -1900,6 +1902,30 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) =>
 			Object.values(s.pokedex).filter((p) => p.caughtOnRoutes.length > 0)
 				.length >= 350,
+	},
+	'catch 450 different species': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		rewardItems: {
+			'master-ball': 1,
+			...expCandyPackage,
+		},
+		availableAfter: 'catch 450 different species',
+		conditionFunction: (s) =>
+			Object.values(s.pokedex).filter((p) => p.caughtOnRoutes.length > 0)
+				.length >= 450,
+	},
+	'catch 550 different species': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		rewardItems: {
+			'master-ball': 1,
+			...expCandyPackage,
+		},
+		availableAfter: 'catch 450 different species',
+		conditionFunction: (s) =>
+			Object.values(s.pokedex).filter((p) => p.caughtOnRoutes.length > 0)
+				.length >= 550,
 	},
 	'find a pokemon under a smashed rock': {
 		kind: 'BULLETIN',

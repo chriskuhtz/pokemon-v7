@@ -29,6 +29,9 @@ const hasCustomSprite: ItemType[] = [
 	'fossilized-fish',
 	'heavy-duty-boots',
 	'blunder-policy',
+	'lure',
+	'super-lure',
+	'max-lure',
 ];
 
 export const getItemUrl = (item: ItemType): string => {

@@ -29,6 +29,7 @@ export const useOverworldMovement = (
 		currentSwarm,
 		campUpgrades,
 		bag,
+		activatedLure,
 	} = saveFile;
 
 	const shinyFactor = useMemo(() => (bag['shiny-charm'] > 1 ? 4 : 1), [bag]);
@@ -89,7 +90,8 @@ export const useOverworldMovement = (
 								quests,
 								waterEncounter,
 								shinyFactor,
-								currentSwarm
+								currentSwarm,
+								activatedLure
 							),
 						};
 
@@ -149,6 +151,7 @@ export const useOverworldMovement = (
 
 		return () => clearTimeout(int);
 	}, [
+		activatedLure,
 		addStep,
 		campUpgrades,
 		currentOccupants,

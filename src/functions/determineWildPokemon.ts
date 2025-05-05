@@ -1,7 +1,14 @@
+import {
+	highBstPokemon,
+	lowBstPokemon,
+	midBstPokemon,
+} from '../constants/baseStatRecord';
+import { PokemonName } from '../constants/pokemonNames';
 import { getRandomNature } from '../interfaces/Natures';
 import { OverworldMap } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { PokemonSwarm, SaveFile } from '../interfaces/SaveFile';
+import { getRandomEntry } from './filterTargets';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getRandomEncounter } from './getRandomEncounter';
 import { makeChallengerPokemon } from './makeChallengerPokemon';
@@ -12,8 +19,41 @@ export const determineWildPokemon = (
 	quests: SaveFile['quests'],
 	waterEncounter: boolean,
 	shinyFactor: number,
-	swarm?: PokemonSwarm
+	swarm?: PokemonSwarm,
+	lure?: 'lure' | 'super-lure' | 'max-lure'
 ): OwnedPokemon[] => {
+	if (lure === 'lure') {
+		return [
+			makeChallengerPokemon({
+				nature: getRandomNature(),
+				name: getRandomEntry(Object.entries(lowBstPokemon))[0] as PokemonName,
+				xp: getMiddleOfThree([1000, 8000, Math.floor(8000 * Math.random())]),
+			}),
+		];
+	}
+	if (lure === 'super-lure') {
+		return [
+			makeChallengerPokemon({
+				nature: getRandomNature(),
+				name: getRandomEntry(Object.entries(midBstPokemon))[0] as PokemonName,
+				xp: getMiddleOfThree([27000, 8000, Math.floor(27000 * Math.random())]),
+			}),
+		];
+	}
+	if (lure === 'max-lure') {
+		return [
+			makeChallengerPokemon({
+				nature: getRandomNature(),
+				name: getRandomEntry(Object.entries(highBstPokemon))[0] as PokemonName,
+				xp: getMiddleOfThree([
+					27000,
+					125000,
+					Math.floor(125000 * Math.random()),
+				]),
+			}),
+		];
+	}
+
 	if (
 		quests['catch the legendary bird of ice'] === 'ACTIVE' &&
 		Math.random() < 0.01
