@@ -373,15 +373,19 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'insert breaker headlines into some sorting options', handled: true },
 	{ name: 'dont give key items as randomized', handled: true },
-	{ name: 'trainer ai should consider flying,dig, diving' },
-	{ name: 'iv quests guy' },
-	{ name: 'ev quests guy' },
+	{ name: 'error handling for wiki', handled: true },
+	{ name: 'Roark as special fossil trainer after quests', handled: true },
+	{ name: 'rocket outbreaks', handled: true },
+	{ name: 'drake 5 should have full dragons' },
 	{
 		name: 'more kanto ken style trainers (dont forget to adjust quest limits)',
 	},
-	{ name: 'Roark as special fossil trainer after quests' },
+	{ name: 'trainer ai should consider flying,dig, diving' },
+	{ name: 'iv quests guy' },
+	{ name: 'ev quests guy' },
+
 	{ name: 'procedural infinite cave with legendaries' },
-	{ name: 'rocket outbreaks' },
+
 	{ name: 'wild apricorn trees' },
 	{ name: 'berry bushes' },
 	{ name: 'random location items that respawn' },
@@ -402,7 +406,6 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'historian event: lugia' },
 	{ name: 'historian event: ho oh' },
-	{ name: 'drake 5 should have full dragons' },
 	{ name: 'releasing pokemon should not end fullscreen mode' },
 	{ name: 'refactor key items in milestones' },
 	{ name: 'Giovanni as special trainer at ranger level x' },
@@ -410,5 +413,4 @@ export const extraFeatureCheckList: {
 	{ name: 'random starters are not rerolled on reset' },
 	{ name: 'consider price caps for certain upgrades' },
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
-	{ name: 'error handling for wiki' },
 ];
