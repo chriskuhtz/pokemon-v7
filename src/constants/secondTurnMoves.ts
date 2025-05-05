@@ -14,4 +14,6 @@ export const recoveryMoves = [
 	'blast-burn',
 	'hydro-cannon',
 	'frenzy-plant',
+	'giga-impact',
+	'rock-wrecker',
 ];

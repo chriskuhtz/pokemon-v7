@@ -1625,6 +1625,26 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/425/',
 		handled: true,
 	},
+	{
+		name: 'rock-wrecker',
+		url: 'https://pokeapi.co/api/v2/move/439/',
+		handled: true,
+	},
+	{
+		name: 'cross-poison',
+		url: 'https://pokeapi.co/api/v2/move/440/',
+		handled: true,
+	},
+	{
+		name: 'gunk-shot',
+		url: 'https://pokeapi.co/api/v2/move/441/',
+		handled: true,
+	},
+	{
+		name: 'iron-head',
+		url: 'https://pokeapi.co/api/v2/move/442/',
+		handled: true,
+	},
 	{ name: 'heal-block', url: 'https://pokeapi.co/api/v2/move/377/' },
 	{ name: 'wring-out', url: 'https://pokeapi.co/api/v2/move/378/' },
 	{ name: 'power-trick', url: 'https://pokeapi.co/api/v2/move/379/' },
@@ -1657,10 +1677,6 @@ export const movesCheckList: {
 	{ name: 'lava-plume', url: 'https://pokeapi.co/api/v2/move/436/' },
 	{ name: 'leaf-storm', url: 'https://pokeapi.co/api/v2/move/437/' },
 	{ name: 'power-whip', url: 'https://pokeapi.co/api/v2/move/438/' },
-	{ name: 'rock-wrecker', url: 'https://pokeapi.co/api/v2/move/439/' },
-	{ name: 'cross-poison', url: 'https://pokeapi.co/api/v2/move/440/' },
-	{ name: 'gunk-shot', url: 'https://pokeapi.co/api/v2/move/441/' },
-	{ name: 'iron-head', url: 'https://pokeapi.co/api/v2/move/442/' },
 	{ name: 'magnet-bomb', url: 'https://pokeapi.co/api/v2/move/443/' },
 	{ name: 'stone-edge', url: 'https://pokeapi.co/api/v2/move/444/' },
 	{ name: 'captivate', url: 'https://pokeapi.co/api/v2/move/445/' },
@@ -2699,6 +2715,10 @@ export const handledMoves = [
 	'ice-shard',
 	'shadow-claw',
 	'shadow-sneak',
+	'rock-wrecker',
+	'gunk-shot',
+	'cross-poison',
+	'iron-head',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
