@@ -105,6 +105,21 @@ export const handleAbilitiesAfterAttack = (
 			'gooey'
 		);
 	}
+	//check for tangling hair
+	if (
+		target.ability === 'tangling-hair' &&
+		isContactMove(move.name, attacker)
+	) {
+		updatedAttacker = applyStatChangeToPokemon(
+			updatedAttacker,
+			'speed',
+			-1,
+			false,
+			battleFieldEffects,
+			addMessage,
+			'tangling hair'
+		);
+	}
 	//check for magician
 	if (
 		target.ability === 'magician' &&

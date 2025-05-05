@@ -27,7 +27,11 @@ export const determineWildPokemon = (
 			makeChallengerPokemon({
 				nature: getRandomNature(),
 				name: getRandomEntry(Object.entries(lowBstPokemon))[0] as PokemonName,
-				xp: getMiddleOfThree([1000, 8000, Math.floor(8000 * Math.random())]),
+				xp: getMiddleOfThree([
+					1000,
+					8000,
+					1000 + Math.floor(7000 * Math.random()),
+				]),
 			}),
 		];
 	}
@@ -36,7 +40,11 @@ export const determineWildPokemon = (
 			makeChallengerPokemon({
 				nature: getRandomNature(),
 				name: getRandomEntry(Object.entries(midBstPokemon))[0] as PokemonName,
-				xp: getMiddleOfThree([27000, 8000, Math.floor(27000 * Math.random())]),
+				xp: getMiddleOfThree([
+					27000,
+					8000,
+					8000 + Math.floor(19000 * Math.random()),
+				]),
 			}),
 		];
 	}
@@ -48,7 +56,7 @@ export const determineWildPokemon = (
 				xp: getMiddleOfThree([
 					27000,
 					125000,
-					Math.floor(125000 * Math.random()),
+					27000 + Math.floor(98000 * Math.random()),
 				]),
 			}),
 		];
