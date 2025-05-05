@@ -55,7 +55,10 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		return res;
 	}
 	if (
-		(item === 'revive' || item === 'max-revive' || item === 'revival-herb') &&
+		(item === 'revive' ||
+			item === 'max-revive' ||
+			item === 'revival-herb' ||
+			item === 'max-honey') &&
 		pokemon.damage >= pokemon.maxHp
 	) {
 		if (addMessage) {
@@ -171,6 +174,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 		item === 'lava-cookie' ||
 		item === 'old-gateau' ||
 		item === 'big-malasada' ||
+		item === 'max-mushroom' ||
 		item === 'lum-berry'
 	) {
 		if (addMessage) {

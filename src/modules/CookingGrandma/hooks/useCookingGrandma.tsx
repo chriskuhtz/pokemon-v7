@@ -113,6 +113,16 @@ const BASE_RECIPES: Recipe[] = [
 		],
 		difficulty: 'EASY',
 	},
+	{
+		result: 'max-honey',
+		ingredients: ['honey', 'honey', 'honey', 'enigma-berry'],
+		difficulty: 'TRICKY',
+	},
+	{
+		result: 'max-mushroom',
+		ingredients: ['tiny-mushroom', 'enigma-berry'],
+		difficulty: 'MEDIUM',
+	},
 ];
 
 export const recipeChanceMap = {

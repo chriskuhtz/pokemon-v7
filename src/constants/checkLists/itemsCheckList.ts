@@ -1881,16 +1881,32 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/1038/',
 		handled: true,
 	},
-	{ name: 'catching-charm', url: 'https://pokeapi.co/api/v2/item/1325/' },
-	{ name: 'max-honey', url: 'https://pokeapi.co/api/v2/item/1630/' },
-	{ name: 'max-mushrooms', url: 'https://pokeapi.co/api/v2/item/1631/' },
-	{ name: 'mark-charm', url: 'https://pokeapi.co/api/v2/item/1640/' },
+
+	{
+		name: 'max-honey',
+		url: 'https://pokeapi.co/api/v2/item/1630/',
+		handled: true,
+	},
+	{
+		name: 'max-mushrooms',
+		url: 'https://pokeapi.co/api/v2/item/1631/',
+		handled: true,
+	},
+	{
+		name: 'scroll-of-darkness',
+		url: 'https://pokeapi.co/api/v2/item/1675/',
+		handled: true,
+	},
+	{
+		name: 'scroll-of-waters',
+		url: 'https://pokeapi.co/api/v2/item/1676/',
+		handled: true,
+	},
 	{ name: 'ability-patch', url: 'https://pokeapi.co/api/v2/item/1657/' },
 	{ name: 'blank-plate', url: 'https://pokeapi.co/api/v2/item/1662/' },
 	{ name: 'strange-ball', url: 'https://pokeapi.co/api/v2/item/1663/' },
 	{ name: 'legend-plate', url: 'https://pokeapi.co/api/v2/item/1664/' },
 	{ name: 'rotom-phone', url: 'https://pokeapi.co/api/v2/item/1665/' },
-	{ name: 'sandwich', url: 'https://pokeapi.co/api/v2/item/1666/' },
 	{ name: 'koraidon’s-poké-ball', url: 'https://pokeapi.co/api/v2/item/1667/' },
 	{ name: 'miraidon’s-poké-ball', url: 'https://pokeapi.co/api/v2/item/1668/' },
 	{ name: 'tera-orb', url: 'https://pokeapi.co/api/v2/item/1669/' },
@@ -1899,8 +1915,6 @@ export const itemsCheckList: {
 	{ name: 'kofu’s-wallet', url: 'https://pokeapi.co/api/v2/item/1672/' },
 	{ name: 'tiny-bamboo-shoot', url: 'https://pokeapi.co/api/v2/item/1673/' },
 	{ name: 'big-bamboo-shoot', url: 'https://pokeapi.co/api/v2/item/1674/' },
-	{ name: 'scroll-of-darkness', url: 'https://pokeapi.co/api/v2/item/1675/' },
-	{ name: 'scroll-of-waters', url: 'https://pokeapi.co/api/v2/item/1676/' },
 	{ name: 'booster-energy', url: 'https://pokeapi.co/api/v2/item/1696/' },
 	{ name: 'ability-shield', url: 'https://pokeapi.co/api/v2/item/1697/' },
 	{ name: 'clear-amulet', url: 'https://pokeapi.co/api/v2/item/1698/' },
@@ -1908,12 +1922,6 @@ export const itemsCheckList: {
 	{ name: 'punching-glove', url: 'https://pokeapi.co/api/v2/item/1700/' },
 	{ name: 'covert-cloak', url: 'https://pokeapi.co/api/v2/item/1701/' },
 	{ name: 'loaded-dice', url: 'https://pokeapi.co/api/v2/item/1702/' },
-	{ name: 'academy-ball', url: 'https://pokeapi.co/api/v2/item/2031/' },
-	{ name: 'academy-ball', url: 'https://pokeapi.co/api/v2/item/2032/' },
-	{ name: 'marill-ball', url: 'https://pokeapi.co/api/v2/item/2033/' },
-	{ name: 'yarn-ball', url: 'https://pokeapi.co/api/v2/item/2034/' },
-	{ name: 'cyber-ball', url: 'https://pokeapi.co/api/v2/item/2035/' },
-	{ name: 'exercise-ball', url: 'https://pokeapi.co/api/v2/item/2064/' },
 	{ name: 'leader’s-crest', url: 'https://pokeapi.co/api/v2/item/2046/' },
 	{ name: 'roto-stick', url: 'https://pokeapi.co/api/v2/item/2100/' },
 	{ name: 'teal-style-card', url: 'https://pokeapi.co/api/v2/item/2101/' },
@@ -1941,9 +1949,17 @@ export const itemsCheckList: {
 	{ name: 'ability-capsule', url: 'https://pokeapi.co/api/v2/item/685/' },
 	{ name: 'exp-charm', url: 'https://pokeapi.co/api/v2/item/1638/' },
 	{ name: 'utility-umbrella', url: 'https://pokeapi.co/api/v2/item/1181/' },
+	{ name: 'catching-charm', url: 'https://pokeapi.co/api/v2/item/1325/' },
 	/**
 	 * FOODS AND FOOD RELATED
 	 */
+	{ name: 'academy-ball', url: 'https://pokeapi.co/api/v2/item/2031/' },
+	{ name: 'academy-ball', url: 'https://pokeapi.co/api/v2/item/2032/' },
+	{ name: 'marill-ball', url: 'https://pokeapi.co/api/v2/item/2033/' },
+	{ name: 'yarn-ball', url: 'https://pokeapi.co/api/v2/item/2034/' },
+	{ name: 'cyber-ball', url: 'https://pokeapi.co/api/v2/item/2035/' },
+	{ name: 'exercise-ball', url: 'https://pokeapi.co/api/v2/item/2064/' },
+	{ name: 'sandwich', url: 'https://pokeapi.co/api/v2/item/1666/' },
 	{ name: 'unremarkable-teacup', url: 'https://pokeapi.co/api/v2/item/2110/' },
 	{ name: 'masterpiece-teacup', url: 'https://pokeapi.co/api/v2/item/2111/' },
 	{ name: 'gold-bottle', url: 'https://pokeapi.co/api/v2/item/2080/' },
@@ -2526,7 +2542,7 @@ export const itemsCheckList: {
 	 * KEY ITEMS
 	 *
 	 */
-
+	{ name: 'mark-charm', url: 'https://pokeapi.co/api/v2/item/1640/' },
 	{ name: 'carrot-seeds', url: 'https://pokeapi.co/api/v2/item/1656/' },
 	{ name: 'reins-of-unity', url: 'https://pokeapi.co/api/v2/item/1658/' },
 	{ name: 'adamant-crystal', url: 'https://pokeapi.co/api/v2/item/1659/' },

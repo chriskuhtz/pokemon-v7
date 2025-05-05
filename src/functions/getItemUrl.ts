@@ -32,6 +32,8 @@ const hasCustomSprite: ItemType[] = [
 	'lure',
 	'super-lure',
 	'max-lure',
+	'scroll-of-waters',
+	'scroll-of-darkness',
 ];
 
 export const getItemUrl = (item: ItemType): string => {

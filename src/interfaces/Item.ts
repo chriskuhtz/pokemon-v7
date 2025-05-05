@@ -19,6 +19,8 @@ export const healingItemTypes = [
 	'awakening',
 	'revive',
 	'max-revive',
+	'max-honey',
+	'max-mushroom',
 	'soda-pop',
 	'lemonade',
 	'moomoo-milk',
@@ -122,6 +124,8 @@ export const evoStones = [
 	'malicious-armor',
 	'chipped-pot',
 	'cracked-pot',
+	'scroll-of-waters',
+	'scroll-of-darkness',
 ] as const;
 export const heldItems = [
 	'quick-claw',
@@ -489,7 +493,10 @@ export function isMulch(x: string | undefined): x is MulchType {
 	return (mulches as unknown as string[]).includes(x ?? '');
 }
 export function isIngredient(x: string | undefined): boolean {
-	return !!x && [...berries, ...herbs, 'moomoo-milk', 'honey'].includes(x);
+	return (
+		!!x &&
+		[...berries, ...herbs, 'moomoo-milk', 'honey', 'tiny-mushroom'].includes(x)
+	);
 }
 export function isCooked(x: string | undefined): boolean {
 	return (
