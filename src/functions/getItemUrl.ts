@@ -42,6 +42,8 @@ const hasCustomSprite: ItemType[] = [
 	'clever-mochi',
 	'swift-mochi',
 	'fresh-start-mochi',
+	'max-honey',
+	'max-mushroom',
 ];
 
 export const getItemUrl = (item: ItemType): string => {
