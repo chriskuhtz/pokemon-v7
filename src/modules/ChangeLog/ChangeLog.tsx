@@ -58,6 +58,7 @@ const ChangeLogV19 = (): JSX.Element => {
 			<h3>0.19:</h3>
 
 			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>Make first Route Pokemon a little weaker</li>
 				<li>Giovanni</li>
 				<li>Lures at vileplume shop</li>
 				<li>Item Info Button in Bag</li>
