@@ -60,6 +60,12 @@ export const evBoostItemTypes = [
 	'iron',
 	'protein',
 	'carbos',
+	'health-mochi',
+	'muscle-mochi',
+	'resist-mochi',
+	'genius-mochi',
+	'clever-mochi',
+	'swift-mochi',
 ] as const;
 export const balltypes = [
 	'poke-ball',
@@ -126,6 +132,7 @@ export const evoStones = [
 	'cracked-pot',
 	'scroll-of-waters',
 	'scroll-of-darkness',
+	'leaders-crest',
 ] as const;
 export const heldItems = [
 	'quick-claw',
@@ -455,6 +462,7 @@ export const itemTypes = [
 	'rage-candy-bar',
 	'pewter-crunchies',
 	'casteliacone',
+	'fresh-start-mochi',
 ] as const;
 
 export type ItemType = (typeof itemTypes)[number];
@@ -608,6 +616,12 @@ export const EvBoostTable: Record<
 	iron: { change: 10, stat: 'defense' },
 	protein: { change: 10, stat: 'attack' },
 	carbos: { change: 10, stat: 'speed' },
+	'health-mochi': { change: 10, stat: 'hp' },
+	'genius-mochi': { change: 10, stat: 'special-attack' },
+	'clever-mochi': { change: 10, stat: 'special-defense' },
+	'resist-mochi': { change: 10, stat: 'defense' },
+	'muscle-mochi': { change: 10, stat: 'attack' },
+	'swift-mochi': { change: 10, stat: 'speed' },
 };
 export const HPHealTable: Partial<Record<ItemType, number>> = {
 	'oran-berry': 10,

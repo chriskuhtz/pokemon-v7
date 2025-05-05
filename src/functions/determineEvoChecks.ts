@@ -80,6 +80,9 @@ export const determineEvoChecks = (
 		if (minLevel && minLevel > level) {
 			res.push(`Level ${minLevel}`);
 		}
+		if (ownedPokemon.name === 'bisharp' && !inventory['leaders-crest']) {
+			res.push('leaders-crest');
+		}
 		if (itemName && !inventory[itemName]) {
 			res.push(itemName);
 		}

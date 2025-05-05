@@ -123,6 +123,41 @@ const BASE_RECIPES: Recipe[] = [
 		ingredients: ['tiny-mushroom', 'enigma-berry'],
 		difficulty: 'MEDIUM',
 	},
+	{
+		result: 'fresh-start-mochi',
+		ingredients: ['honey', 'golden-razz-berry'],
+		difficulty: 'MEDIUM',
+	},
+	{
+		result: 'swift-mochi',
+		ingredients: ['honey', 'occa-berry'],
+		difficulty: 'MEDIUM',
+	},
+	{
+		result: 'health-mochi',
+		ingredients: ['honey', 'sitrus-berry'],
+		difficulty: 'MEDIUM',
+	},
+	{
+		result: 'muscle-mochi',
+		ingredients: ['honey', 'jaboca-berry'],
+		difficulty: 'MEDIUM',
+	},
+	{
+		result: 'resist-mochi',
+		ingredients: ['honey', 'chesto-berry'],
+		difficulty: 'MEDIUM',
+	},
+	{
+		result: 'clever-mochi',
+		ingredients: ['honey', 'hondew-berry'],
+		difficulty: 'MEDIUM',
+	},
+	{
+		result: 'genius-mochi',
+		ingredients: ['honey', 'spelon-berry'],
+		difficulty: 'MEDIUM',
+	},
 ];
 
 export const recipeChanceMap = {

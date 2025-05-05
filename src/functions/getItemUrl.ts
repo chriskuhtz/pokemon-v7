@@ -34,6 +34,14 @@ const hasCustomSprite: ItemType[] = [
 	'max-lure',
 	'scroll-of-waters',
 	'scroll-of-darkness',
+	'leaders-crest',
+	'health-mochi',
+	'muscle-mochi',
+	'resist-mochi',
+	'genius-mochi',
+	'clever-mochi',
+	'swift-mochi',
+	'fresh-start-mochi',
 ];
 
 export const getItemUrl = (item: ItemType): string => {

@@ -1902,19 +1902,46 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/1676/',
 		handled: true,
 	},
-	{ name: 'ability-patch', url: 'https://pokeapi.co/api/v2/item/1657/' },
-	{ name: 'blank-plate', url: 'https://pokeapi.co/api/v2/item/1662/' },
-	{ name: 'strange-ball', url: 'https://pokeapi.co/api/v2/item/1663/' },
-	{ name: 'legend-plate', url: 'https://pokeapi.co/api/v2/item/1664/' },
-	{ name: 'rotom-phone', url: 'https://pokeapi.co/api/v2/item/1665/' },
-	{ name: 'koraidon’s-poké-ball', url: 'https://pokeapi.co/api/v2/item/1667/' },
-	{ name: 'miraidon’s-poké-ball', url: 'https://pokeapi.co/api/v2/item/1668/' },
-	{ name: 'tera-orb', url: 'https://pokeapi.co/api/v2/item/1669/' },
-	{ name: 'scarlet-book', url: 'https://pokeapi.co/api/v2/item/1670/' },
-	{ name: 'violet-book', url: 'https://pokeapi.co/api/v2/item/1671/' },
-	{ name: 'kofu’s-wallet', url: 'https://pokeapi.co/api/v2/item/1672/' },
-	{ name: 'tiny-bamboo-shoot', url: 'https://pokeapi.co/api/v2/item/1673/' },
-	{ name: 'big-bamboo-shoot', url: 'https://pokeapi.co/api/v2/item/1674/' },
+	{
+		name: 'leader’s-crest',
+		url: 'https://pokeapi.co/api/v2/item/2046/',
+		handled: true,
+	},
+	{
+		name: 'health-mochi',
+		url: 'https://pokeapi.co/api/v2/item/2112/',
+		handled: true,
+	},
+	{
+		name: 'muscle-mochi',
+		url: 'https://pokeapi.co/api/v2/item/2113/',
+		handled: true,
+	},
+	{
+		name: 'resist-mochi',
+		url: 'https://pokeapi.co/api/v2/item/2114/',
+		handled: true,
+	},
+	{
+		name: 'genius-mochi',
+		url: 'https://pokeapi.co/api/v2/item/2115/',
+		handled: true,
+	},
+	{
+		name: 'clever-mochi',
+		url: 'https://pokeapi.co/api/v2/item/2116/',
+		handled: true,
+	},
+	{
+		name: 'swift-mochi',
+		url: 'https://pokeapi.co/api/v2/item/2117/',
+		handled: true,
+	},
+	{
+		name: 'fresh-start-mochi',
+		url: 'https://pokeapi.co/api/v2/item/2118/',
+		handled: true,
+	},
 	{ name: 'booster-energy', url: 'https://pokeapi.co/api/v2/item/1696/' },
 	{ name: 'ability-shield', url: 'https://pokeapi.co/api/v2/item/1697/' },
 	{ name: 'clear-amulet', url: 'https://pokeapi.co/api/v2/item/1698/' },
@@ -1922,34 +1949,11 @@ export const itemsCheckList: {
 	{ name: 'punching-glove', url: 'https://pokeapi.co/api/v2/item/1700/' },
 	{ name: 'covert-cloak', url: 'https://pokeapi.co/api/v2/item/1701/' },
 	{ name: 'loaded-dice', url: 'https://pokeapi.co/api/v2/item/1702/' },
-	{ name: 'leader’s-crest', url: 'https://pokeapi.co/api/v2/item/2046/' },
-	{ name: 'roto-stick', url: 'https://pokeapi.co/api/v2/item/2100/' },
-	{ name: 'teal-style-card', url: 'https://pokeapi.co/api/v2/item/2101/' },
-	{ name: 'teak-mask', url: 'https://pokeapi.co/api/v2/item/2102/' },
-	{ name: 'glimmering-charm', url: 'https://pokeapi.co/api/v2/item/2103/' },
-	{ name: 'cyrstal-cluster', url: 'https://pokeapi.co/api/v2/item/2104/' },
-	{ name: 'fairy-feather', url: 'https://pokeapi.co/api/v2/item/2105/' },
-	{ name: 'wellspring-mask', url: 'https://pokeapi.co/api/v2/item/2106/' },
-	{ name: 'hearthflame-mask', url: 'https://pokeapi.co/api/v2/item/2107/' },
-	{ name: 'cornerstone-mask', url: 'https://pokeapi.co/api/v2/item/2108/' },
-	{ name: 'health-mochi', url: 'https://pokeapi.co/api/v2/item/2112/' },
-	{ name: 'muscle-mochi', url: 'https://pokeapi.co/api/v2/item/2113/' },
-	{ name: 'resist-mochi', url: 'https://pokeapi.co/api/v2/item/2114/' },
-	{ name: 'genius-mochi', url: 'https://pokeapi.co/api/v2/item/2115/' },
-	{ name: 'clever-mochi', url: 'https://pokeapi.co/api/v2/item/2116/' },
-	{ name: 'swift-mochi', url: 'https://pokeapi.co/api/v2/item/2117/' },
-	{ name: 'fresh-start-mochi', url: 'https://pokeapi.co/api/v2/item/2118/' },
 	{ name: 'terrain-extender', url: 'https://pokeapi.co/api/v2/item/896/' },
 	{ name: 'electric-seed', url: 'https://pokeapi.co/api/v2/item/898/' },
 	{ name: 'psychic-seed', url: 'https://pokeapi.co/api/v2/item/899/' },
 	{ name: 'misty-seed', url: 'https://pokeapi.co/api/v2/item/900/' },
 	{ name: 'grassy-seed', url: 'https://pokeapi.co/api/v2/item/901/' },
-	{ name: 'eviolite', url: 'https://pokeapi.co/api/v2/item/581/' },
-	{ name: 'oval-charm', url: 'https://pokeapi.co/api/v2/item/674/' },
-	{ name: 'ability-capsule', url: 'https://pokeapi.co/api/v2/item/685/' },
-	{ name: 'exp-charm', url: 'https://pokeapi.co/api/v2/item/1638/' },
-	{ name: 'utility-umbrella', url: 'https://pokeapi.co/api/v2/item/1181/' },
-	{ name: 'catching-charm', url: 'https://pokeapi.co/api/v2/item/1325/' },
 	/**
 	 * FOODS AND FOOD RELATED
 	 */
@@ -2542,6 +2546,21 @@ export const itemsCheckList: {
 	 * KEY ITEMS
 	 *
 	 */
+
+	{ name: 'roto-stick', url: 'https://pokeapi.co/api/v2/item/2100/' },
+	{ name: 'teal-style-card', url: 'https://pokeapi.co/api/v2/item/2101/' },
+	{ name: 'glimmering-charm', url: 'https://pokeapi.co/api/v2/item/2103/' },
+	{ name: 'cyrstal-cluster', url: 'https://pokeapi.co/api/v2/item/2104/' },
+	{ name: 'blank-plate', url: 'https://pokeapi.co/api/v2/item/1662/' },
+	{ name: 'strange-ball', url: 'https://pokeapi.co/api/v2/item/1663/' },
+	{ name: 'legend-plate', url: 'https://pokeapi.co/api/v2/item/1664/' },
+	{ name: 'rotom-phone', url: 'https://pokeapi.co/api/v2/item/1665/' },
+	{ name: 'koraidon’s-poké-ball', url: 'https://pokeapi.co/api/v2/item/1667/' },
+	{ name: 'miraidon’s-poké-ball', url: 'https://pokeapi.co/api/v2/item/1668/' },
+	{ name: 'tera-orb', url: 'https://pokeapi.co/api/v2/item/1669/' },
+	{ name: 'scarlet-book', url: 'https://pokeapi.co/api/v2/item/1670/' },
+	{ name: 'violet-book', url: 'https://pokeapi.co/api/v2/item/1671/' },
+	{ name: 'kofu’s-wallet', url: 'https://pokeapi.co/api/v2/item/1672/' },
 	{ name: 'mark-charm', url: 'https://pokeapi.co/api/v2/item/1640/' },
 	{ name: 'carrot-seeds', url: 'https://pokeapi.co/api/v2/item/1656/' },
 	{ name: 'reins-of-unity', url: 'https://pokeapi.co/api/v2/item/1658/' },
@@ -2893,12 +2912,30 @@ export const itemsCheckList: {
 	{ name: 'data-card-26', url: 'https://pokeapi.co/api/v2/item/511/' },
 	{ name: 'data-card-27', url: 'https://pokeapi.co/api/v2/item/512/' },
 	/**
+	 * OGERPON
+	 */
+	{ name: 'teal-mask', url: 'https://pokeapi.co/api/v2/item/2102/' },
+	{ name: 'fairy-feather', url: 'https://pokeapi.co/api/v2/item/2105/' },
+	{ name: 'wellspring-mask', url: 'https://pokeapi.co/api/v2/item/2106/' },
+	{ name: 'hearthflame-mask', url: 'https://pokeapi.co/api/v2/item/2107/' },
+	{ name: 'cornerstone-mask', url: 'https://pokeapi.co/api/v2/item/2108/' },
+	/**
 	 *
 	 *
 	 * BANISHED
 	 *
 	 *
 	 */
+
+	{ name: 'eviolite', url: 'https://pokeapi.co/api/v2/item/581/' },
+	{ name: 'oval-charm', url: 'https://pokeapi.co/api/v2/item/674/' },
+	{ name: 'ability-capsule', url: 'https://pokeapi.co/api/v2/item/685/' },
+	{ name: 'exp-charm', url: 'https://pokeapi.co/api/v2/item/1638/' },
+	{ name: 'utility-umbrella', url: 'https://pokeapi.co/api/v2/item/1181/' },
+	{ name: 'catching-charm', url: 'https://pokeapi.co/api/v2/item/1325/' },
+	{ name: 'ability-patch', url: 'https://pokeapi.co/api/v2/item/1657/' },
+	{ name: 'tiny-bamboo-shoot', url: 'https://pokeapi.co/api/v2/item/1673/' },
+	{ name: 'big-bamboo-shoot', url: 'https://pokeapi.co/api/v2/item/1674/' },
 	{ name: 'throat-spray', url: 'https://pokeapi.co/api/v2/item/1176/' },
 	{
 		name: 'black-flute',

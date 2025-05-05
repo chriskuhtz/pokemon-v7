@@ -13,6 +13,7 @@ import {
 	XItemTable,
 } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { EmptyStatObject } from '../interfaces/StatObject';
 import { applyEVBoostItem } from './applyEVGain';
 import { applyHappinessChange } from './applyHappinessChange';
 import { applyPPMoveBooster } from './applyPPBooster';
@@ -88,6 +89,9 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	}
 	if (isEvBoostItem(item)) {
 		return applyEVBoostItem(pokemon, item);
+	}
+	if (item === 'fresh-start-mochi') {
+		return { ...pokemon, effortValues: EmptyStatObject };
 	}
 	if (item === 'rare-candy') {
 		const { xpAtNextLevel, level } = calculateLevelData(
