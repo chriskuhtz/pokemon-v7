@@ -810,6 +810,14 @@ export const calculateDamage = (
 		attack.name === 'payback' && target.moveQueue.length === 0 ? 2 : 1;
 	const assuranceFactor =
 		attack.name === 'assurance' && target.lastReceivedDamage ? 2 : 1;
+	const batteryFactor =
+		battleFieldEffects.some(
+			(b) => b.type === 'battery' && b.ownerId === attacker.id
+		) &&
+		attacker.ability !== 'battery' &&
+		damageClass === 'special'
+			? 1.3
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -893,7 +901,8 @@ export const calculateDamage = (
 				pluckFactor *
 				galvanizeFactor *
 				paybackFactor *
-				assuranceFactor
+				assuranceFactor *
+				batteryFactor
 		),
 		1
 	);
