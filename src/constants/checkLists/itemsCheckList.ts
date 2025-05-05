@@ -1945,7 +1945,6 @@ export const itemsCheckList: {
 	{ name: 'booster-energy', url: 'https://pokeapi.co/api/v2/item/1696/' },
 	{ name: 'ability-shield', url: 'https://pokeapi.co/api/v2/item/1697/' },
 	{ name: 'clear-amulet', url: 'https://pokeapi.co/api/v2/item/1698/' },
-	{ name: 'mirror-herb', url: 'https://pokeapi.co/api/v2/item/1699/' },
 	{ name: 'punching-glove', url: 'https://pokeapi.co/api/v2/item/1700/' },
 	{ name: 'covert-cloak', url: 'https://pokeapi.co/api/v2/item/1701/' },
 	{ name: 'loaded-dice', url: 'https://pokeapi.co/api/v2/item/1702/' },
@@ -2927,6 +2926,7 @@ export const itemsCheckList: {
 	 *
 	 */
 
+	{ name: 'mirror-herb', url: 'https://pokeapi.co/api/v2/item/1699/' },
 	{ name: 'eviolite', url: 'https://pokeapi.co/api/v2/item/581/' },
 	{ name: 'oval-charm', url: 'https://pokeapi.co/api/v2/item/674/' },
 	{ name: 'ability-capsule', url: 'https://pokeapi.co/api/v2/item/685/' },
