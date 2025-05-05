@@ -599,6 +599,12 @@ export const calculateDamage = (
 		damageClass === 'special'
 			? 1.3
 			: 1;
+	const fluffyContactFactor =
+		target.ability === 'fluffy' && isContactMove(attack.name, attacker)
+			? 0.5
+			: 1;
+	const fluffyFireFactor =
+		target.ability === 'fluffy' && attackType === 'fire' ? 2 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -683,7 +689,9 @@ export const calculateDamage = (
 				galvanizeFactor *
 				paybackFactor *
 				assuranceFactor *
-				batteryFactor
+				batteryFactor *
+				fluffyFireFactor *
+				fluffyContactFactor
 		),
 		1
 	);
