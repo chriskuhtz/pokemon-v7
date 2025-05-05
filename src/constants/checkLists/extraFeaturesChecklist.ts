@@ -405,4 +405,6 @@ export const extraFeatureCheckList: {
 	{ name: 'releasing pokemon should not end fullscreen mode' },
 	{ name: 'refactor key items in milestones' },
 	{ name: 'Giovanni as special trainer at ranger level x' },
+	{ name: 'hide quests tab on challenge field' },
+	{ name: 'random starters are not rerolled on reset' },
 ];
