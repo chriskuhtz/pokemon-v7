@@ -108,19 +108,17 @@ export const Settings = (): JSX.Element => {
 					value={!!state.randomStarters}
 					setValue={(x) => setState({ ...state, randomStarters: x })}
 					label={'Do you want random starter pokemon choices:'}
-					description={'makes 1 questline impossible'}
+					description={'can make 1 questline impossible'}
 				/>
 				<ToggleRow
 					value={!!state.randomOverworldItems}
 					setValue={(x) => setState({ ...state, randomOverworldItems: x })}
 					label={'Random Overworld Items:'}
-					description="increases Risk of Softlock"
 				/>
 				<ToggleRow
 					value={!!state.randomQuestRewards}
 					setValue={(x) => setState({ ...state, randomQuestRewards: x })}
 					label={'Random Quest Rewards:'}
-					description="increases Risk of Softlock"
 				/>
 				<ToggleRow
 					value={!!state.randomSwarms}

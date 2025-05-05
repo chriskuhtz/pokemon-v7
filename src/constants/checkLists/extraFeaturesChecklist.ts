@@ -372,6 +372,7 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'insert breaker headlines into some sorting options', handled: true },
+	{ name: 'dont give key items as randomized', handled: true },
 	{ name: 'trainer ai should consider flying,dig, diving' },
 	{ name: 'iv quests guy' },
 	{ name: 'ev quests guy' },
@@ -407,4 +408,7 @@ export const extraFeatureCheckList: {
 	{ name: 'Giovanni as special trainer at ranger level x' },
 	{ name: 'hide quests tab on challenge field' },
 	{ name: 'random starters are not rerolled on reset' },
+	{ name: 'consider price caps for certain upgrades' },
+	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
+	{ name: 'error handling for wiki' },
 ];

@@ -1,6 +1,7 @@
 import React, { useContext, useMemo } from 'react';
 import { FaRunning } from 'react-icons/fa';
 import { MdHealing } from 'react-icons/md';
+import { ItemInfoButton } from '../../components/AbilityInfoButton/AbilityInfoButton';
 import { BagLimitBar } from '../../components/BagLimitBar/BagLimitBar';
 import { HealAction } from '../../components/ItemCard/components/HealAction';
 import { ThrowAwayAction } from '../../components/ItemCard/components/ThrowAwayAction';
@@ -78,6 +79,7 @@ export const Bag = ({ goBack }: { goBack: () => void }): JSX.Element => {
 							item={item as ItemType}
 							amount={amount}
 							actionElements={[
+								<ItemInfoButton itemName={item as ItemType} />,
 								isKeyItem(item) ? (
 									<></>
 								) : (
