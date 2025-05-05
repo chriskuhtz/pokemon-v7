@@ -80,16 +80,6 @@ export const Bag = ({ goBack }: { goBack: () => void }): JSX.Element => {
 							amount={amount}
 							actionElements={[
 								<ItemInfoButton itemName={item as ItemType} />,
-								isKeyItem(item) ? (
-									<></>
-								) : (
-									<ThrowAwayAction
-										amount={amount}
-										discardItem={(x: number) =>
-											discardItem(item as ItemType, x)
-										}
-									/>
-								),
 								isItem(item) &&
 								team.filter((t) => canBenefitFromItem(t, item)).length > 0 ? (
 									<HealAction
@@ -117,6 +107,16 @@ export const Bag = ({ goBack }: { goBack: () => void }): JSX.Element => {
 									/>
 								) : (
 									<></>
+								),
+								isKeyItem(item) ? (
+									<></>
+								) : (
+									<ThrowAwayAction
+										amount={amount}
+										discardItem={(x: number) =>
+											discardItem(item as ItemType, x)
+										}
+									/>
 								),
 							]}
 						/>

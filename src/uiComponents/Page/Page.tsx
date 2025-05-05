@@ -12,26 +12,28 @@ export const Page = ({
 	children: ReactNode;
 }) => {
 	return (
-		<div className="page">
-			<h2 className="headline">
-				{goBack ? (
-					<IoIosArrowBack
-						role="button"
-						tabIndex={0}
-						onClick={goBack}
-						onKeyDown={(e) => {
-							e.stopPropagation();
-							if (goBack && (e.key === 'Backspace' || e.key === 'Enter')) {
-								goBack();
-							}
-						}}
-					/>
-				) : (
-					<div className="placeholder"></div>
-				)}{' '}
-				{headline}
-			</h2>
-			{children}
+		<div className="pageWrapper">
+			<div className="page">
+				<h2 className="headline">
+					{goBack ? (
+						<IoIosArrowBack
+							role="button"
+							tabIndex={0}
+							onClick={goBack}
+							onKeyDown={(e) => {
+								e.stopPropagation();
+								if (goBack && (e.key === 'Backspace' || e.key === 'Enter')) {
+									goBack();
+								}
+							}}
+						/>
+					) : (
+						<div className="placeholder"></div>
+					)}{' '}
+					{headline}
+				</h2>
+				{children}
+			</div>
 		</div>
 	);
 };
