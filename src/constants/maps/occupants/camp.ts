@@ -19,20 +19,6 @@ import { rowanLine } from './rowanLine';
 
 const trainingField: Occupant[] = [
 	{
-		x: 2,
-		y: 1,
-		type: 'ITEM',
-		id: 'izs_lightball',
-		item: 'light-ball',
-		amount: 1,
-		conditionFunction: (s) => {
-			return !!(
-				s.playerId.toLowerCase() === 'iz' &&
-				!s.handledOccupants.some((h) => h.id === 'izs_lightball')
-			);
-		},
-	},
-	{
 		type: 'ROUTER_NPC',
 		to: 'TRAINING_FIELD',
 		x: 2,
