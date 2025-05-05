@@ -62,6 +62,7 @@ const ChangeLogV19 = (): JSX.Element => {
 				<li>Giovanni</li>
 				<li>Lures at vileplume shop</li>
 				<li>Item Info Button in Bag</li>
+				<li>New Cooking Recipes</li>
 				<li>No Key Items as Randomized Held Items</li>
 			</ol>
 		</>
