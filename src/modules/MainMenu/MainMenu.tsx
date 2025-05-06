@@ -16,6 +16,7 @@ import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { TrainerCard } from '../../components/TrainerCard/TrainerCard';
 import { battleSpriteSize, challengeFieldId } from '../../constants/gameData';
 import { mapsRecord } from '../../constants/maps/mapsRecord';
+import { fullyHealPokemon } from '../../functions/fullyHealPokemon';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { useQuests } from '../../hooks/useQuests';
@@ -70,6 +71,14 @@ export const MainMenu = ({
 								handledOccupants: saveFile.handledOccupants.filter(
 									(h) => !h.id.includes(challengeFieldId)
 								),
+
+								pokemon: saveFile.pokemon.map((p) => {
+									if (p.onTeam) {
+										return fullyHealPokemon(p);
+									}
+
+									return p;
+								}),
 							})
 						}
 						content={<h4>Leave the challenge field</h4>}
