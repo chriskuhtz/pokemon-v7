@@ -11,6 +11,7 @@ import {
 	isHealingItem,
 	isHeldItem,
 	isIngredient,
+	isKeyItem,
 	isMulch,
 	isPokeball,
 } from '../../interfaces/Item';
@@ -28,6 +29,7 @@ export const itemfilterNames = [
 	'fossil',
 	'exp',
 	'held item',
+	'key',
 	'other',
 ] as const;
 export type ItemsFilterType = (typeof itemfilterNames)[number];
@@ -73,6 +75,9 @@ export const filterItemsByType = (
 	if (itemsFilter === 'held item') {
 		return isHeldItem(item);
 	}
+	if (itemsFilter === 'key') {
+		return isKeyItem(item);
+	}
 	if (itemsFilter === 'other') {
 		return (
 			!isPokeball(item) &&
@@ -84,6 +89,8 @@ export const filterItemsByType = (
 			!isCooked(item) &&
 			!canCauseEvolution(item) &&
 			!isExp &&
+			!isHeldItem(item) &&
+			!isKeyItem(item) &&
 			!isFossil(item)
 		);
 	}
