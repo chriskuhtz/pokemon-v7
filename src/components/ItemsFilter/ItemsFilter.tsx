@@ -84,7 +84,7 @@ export const filterItemsByType = (
 			!isCooked(item) &&
 			!canCauseEvolution(item) &&
 			!isExp &&
-			isFossil(item)
+			!isFossil(item)
 		);
 	}
 	return true;
