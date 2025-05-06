@@ -357,7 +357,7 @@ export const applySecondaryAilmentToPokemon = ({
 				...pokemon.secondaryAilments,
 				{
 					type: 'charge',
-					duration: 2,
+					duration: 1,
 				},
 			],
 		};
