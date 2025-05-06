@@ -18,8 +18,8 @@ export const RocketIcon = () => {
 		const now = new Date().getTime();
 		patchSaveFileReducer({
 			currentRocketOperation: undefined,
-			rangerLevel: saveFile.rangerLevel ?? 0 + 1,
-			nextRocketOperationAt: now + ONE_HOUR,
+			rangerLevel: (saveFile.rangerLevel ?? 0) + 1,
+			nextRocketOperationAt: now + Math.floor(ONE_HOUR * Math.random()),
 			handledOccupants: saveFile.handledOccupants.filter(
 				(h) => !h.id.includes('Rocket Grunt')
 			),
