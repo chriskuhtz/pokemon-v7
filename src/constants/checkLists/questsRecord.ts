@@ -49,6 +49,12 @@ const expCandyPackage: Partial<Inventory> = {
 	'exp-candy-l': 5,
 	'exp-candy-xl': 2,
 };
+const smallExpCandyPackage: Partial<Inventory> = {
+	'exp-candy-xs': 10,
+	'exp-candy-s': 10,
+	'exp-candy-m': 5,
+	'exp-candy-l': 1,
+};
 const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
 	//routeN1
 	'catch a MORNING-time exclusive pokemon from routeN1': {
@@ -2277,7 +2283,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'rindo-berry': 5,
 			'miracle-seed': 1,
 			'big-root': 1,
-			...expCandyPackage,
+			...smallExpCandyPackage,
 		},
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'Gym Leader Erika');
@@ -2286,7 +2292,11 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'defeat janine': {
 		kind: 'BULLETIN',
 		researchPoints: 25,
-		rewardItems: { 'kebia-berry': 5, 'black-sludge': 1, ...expCandyPackage },
+		rewardItems: {
+			'kebia-berry': 5,
+			'black-sludge': 1,
+			...smallExpCandyPackage,
+		},
 		requiredUpgrade: 'machete certification',
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'Gym Leader Janine');
