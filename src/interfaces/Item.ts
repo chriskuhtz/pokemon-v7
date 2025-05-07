@@ -816,7 +816,7 @@ export const gemTable: Partial<Record<ItemType, PokemonType>> = {
 export const expCandyTable: Partial<Record<ItemType, number>> = {
 	'exp-candy-xs': 100,
 	'exp-candy-s': 800,
-	'exp-candy-m': 300,
+	'exp-candy-m': 3000,
 	'exp-candy-l': 10000,
-	'exp-candy-xl': 3000,
+	'exp-candy-xl': 30000,
 };
