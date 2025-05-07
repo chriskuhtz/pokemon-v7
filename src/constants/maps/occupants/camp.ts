@@ -9,6 +9,7 @@ import { dragoniteTaxi } from '../../../modules/DragoniteTaxi/DragoniteTaxi';
 import { miltankFarm } from '../../../modules/MiltankFarm/MiltankFarm';
 import { seedvaultResearcher } from '../../../modules/SeedVault/SeedVault';
 import { vileplumeResearchers } from '../../../modules/VilePlumeScentResearcher/VilePlumeScentResearcher';
+import { rewardChris } from './champChris';
 import { chuckLine } from './chuckLine';
 import { elmLine } from './elmLine';
 import { falknerLine } from './falknerLine';
@@ -323,4 +324,5 @@ export const campOccupants: OverworldMap['occupants'] = [
 	...seedvaultResearcher,
 	...dragoniteTaxi,
 	...chuckLine,
+	rewardChris,
 ];

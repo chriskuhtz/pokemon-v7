@@ -35,6 +35,13 @@ const taxiLocations: Record<string, CharacterLocationData> = {
 		orientation: 'DOWN',
 		forwardFoot: 'CENTER1',
 	},
+	'routeW1 lookout': {
+		mapId: 'routeW1',
+		x: 9,
+		y: 20,
+		orientation: 'DOWN',
+		forwardFoot: 'CENTER1',
+	},
 	routeN1W1: {
 		mapId: 'routeN1W1',
 		x: 25,

@@ -1,5 +1,8 @@
 import { makeChallengerPokemon } from '../../../functions/makeChallengerPokemon';
-import { OverworldTrainer } from '../../../interfaces/OverworldMap';
+import {
+	OverworldNpc,
+	OverworldTrainer,
+} from '../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
 
@@ -123,4 +126,21 @@ export const champChris: OverworldTrainer = {
 	},
 	conditionFunction: (s) =>
 		!s.handledOccupants.some((h) => h.id === 'champ-chris'),
+};
+
+export const rewardChris: OverworldNpc = {
+	type: 'NPC',
+	x: 10,
+	y: 8,
+	orientation: 'DOWN',
+	sprite: SpriteEnum.red,
+	id: 'reward-chris',
+	unhandledMessage: [
+		'Thank you so much for playing my game',
+		'if i know you, give me a call',
+		'and we will put you into the game',
+		'as a trainer with your victory team',
+	],
+	conditionFunction: (s) =>
+		s.handledOccupants.some((h) => h.id === 'champ-chris'),
 };
