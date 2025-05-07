@@ -40,12 +40,11 @@ export const FossilReviver = (): JSX.Element => {
 						<Card
 							key={requiredFossils.join()}
 							icon={
-								<PokemonSprite
-									name={pokemon}
-									config={{
-										grayscale: pokedex[pokemon].caughtOnRoutes.length === 0,
-									}}
-								/>
+								pokedex[pokemon].caughtOnRoutes.length === 0 ? (
+									<ItemSprite item="poke-ball" />
+								) : (
+									<PokemonSprite name={pokemon} />
+								)
 							}
 							disabled={
 								!requiredFossils.every((f) => bag[f] > 0) || researchPoints < 5

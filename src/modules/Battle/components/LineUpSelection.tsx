@@ -33,7 +33,7 @@ export const LineUpSelection = ({
 	trainer?: TrainerInfo;
 }) => {
 	const {
-		saveFile: { pokedex },
+		saveFile: { pokedex, location },
 	} = useContext(SaveFileContext);
 	const { addMessage } = useContext(MessageQueueContext);
 	const battleButtonMessage = useMemo(() => {
@@ -117,7 +117,8 @@ export const LineUpSelection = ({
 								: getPokemonSprite(opponent.name, { shiny: opponent.shiny }),
 						}}
 						secondPlanetUrl={
-							pokedex[opponent.name].caughtOnRoutes.length > 0 && !trainer
+							pokedex[opponent.name].caughtOnRoutes.includes(location.mapId) &&
+							!trainer
 								? getItemUrl('poke-ball')
 								: undefined
 						}

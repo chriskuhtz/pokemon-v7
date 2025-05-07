@@ -1713,7 +1713,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => {
 			return s.pokedex['articuno'].caughtOnRoutes.length > 0;
 		},
-		targetPokemon: [],
+		targetPokemon: ['articuno'],
 		kind: 'QUEST_LINE',
 	},
 	'catch the legendary bird of fire': {
@@ -1722,7 +1722,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => {
 			return s.pokedex['moltres'].caughtOnRoutes.length > 0;
 		},
-		targetPokemon: [],
+		targetPokemon: ['moltres'],
 		requiredUpgrade: 'invite historian',
 		kind: 'BULLETIN',
 	},
@@ -1732,7 +1732,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => {
 			return s.pokedex['zapdos'].caughtOnRoutes.length > 0;
 		},
-		targetPokemon: [],
+		targetPokemon: ['zapdos'],
 		requiredUpgrade: 'invite historian',
 		kind: 'BULLETIN',
 	},
@@ -1742,7 +1742,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => {
 			return s.pokedex['mew'].caughtOnRoutes.length > 0;
 		},
-		targetPokemon: [],
+		targetPokemon: ['mew'],
 		requiredUpgrade: 'invite historian',
 		kind: 'BULLETIN',
 	},
@@ -1752,6 +1752,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			honey: 6,
 			'great-ball': 10,
 		},
+		targetPokemon: Object.keys(fossilTable) as PokemonName[],
 		researchPoints: 10,
 		conditionFunction: (s) => {
 			return Object.keys(fossilTable).some(
@@ -1772,6 +1773,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				(fossil) => s.pokedex[fossil as PokemonName].caughtOnRoutes.length > 0
 			);
 		},
+		targetPokemon: Object.keys(fossilTable) as PokemonName[],
 		requiredUpgrade: 'invite fossil expert',
 		availableAfter: 'revive a fossil',
 	},

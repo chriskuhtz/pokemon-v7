@@ -4,6 +4,7 @@ export const routeS1E1Encounters: EncounterMap = {
 	WATER: [
 		{ name: 'psyduck', minXp: 3375, maxXp: 15625, rarity: 'common' },
 		{ name: 'buizel', minXp: 3375, maxXp: 15625, rarity: 'common' },
+		{ name: 'wingull', minXp: 3375, maxXp: 15625, rarity: 'common' },
 		{ name: 'pelipper', minXp: 8000, maxXp: 15625, rarity: 'rare' },
 		{ name: 'remoraid', minXp: 3375, maxXp: 15625, rarity: 'medium' },
 		{ name: 'magikarp', minXp: 125, maxXp: 125, rarity: 'rare' },
