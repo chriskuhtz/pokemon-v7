@@ -116,7 +116,7 @@ const ItemsFilterButtons = ({
 				<button
 					key={f}
 					style={{
-						backgroundColor: itemsFilter === f ? 'black' : 'white',
+						backgroundColor: itemsFilter === f ? 'black' : undefined,
 						color: itemsFilter === f ? 'white' : 'black',
 					}}
 					onClick={() => {
