@@ -8,7 +8,6 @@ import {
 	campUpgradeCategories,
 	CampUpgradeCategory,
 	campUpgradeConditions,
-	campUpgradeCostScale,
 	campUpgradeExplanations,
 	campUpgradeNames,
 } from '../../constants/checkLists/campUpgrades';
@@ -21,25 +20,41 @@ import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
+const categories: CampUpgradeCategory[] = [
+	'Research',
+	'Sustainability',
+	'Exploration',
+	'Training',
+];
+
 export const CampUpgrades = ({
 	goBack,
 }: {
 	goBack: () => void;
 }): JSX.Element => {
+	const [filter, setFilter] = useState<CampUpgradeCategory>('Research');
+
 	const { saveFile, putSaveFileReducer } = useContext(SaveFileContext);
 	const { addMessage } = useContext(MessageQueueContext);
 
 	const { campUpgrades, researchPoints } = saveFile;
 
-	const currentPrice =
-		Object.values(campUpgrades).filter((c) => !!c).length *
-			campUpgradeCostScale +
-		campUpgradeCostScale;
+	const currentPrices: Record<CampUpgradeCategory, number> = Object.fromEntries(
+		categories.map((cat) => [
+			cat,
+			10 +
+				Object.entries(campUpgrades).filter(
+					([key, unlocked]) =>
+						!!unlocked && campUpgradeCategories[key as CampUpgrade] === cat
+				).length *
+					10,
+		])
+	) as Record<CampUpgradeCategory, number>;
 
 	const unlock = useCallback(
 		(id: CampUpgrade) => {
 			//if (researchPoints < campUpgradePrices[id]) {
-			if (researchPoints < currentPrice) {
+			if (researchPoints < currentPrices[filter]) {
 				addMessage({ message: 'Earn more research points' });
 				return;
 			}
@@ -47,14 +62,15 @@ export const CampUpgrades = ({
 			putSaveFileReducer({
 				...saveFile,
 				//researchPoints: researchPoints - campUpgradePrices[id],
-				researchPoints: researchPoints - currentPrice,
+				researchPoints: researchPoints - currentPrices[filter],
 				campUpgrades: { ...campUpgrades, [id]: true },
 			});
 		},
 		[
 			addMessage,
 			campUpgrades,
-			currentPrice,
+			currentPrices,
+			filter,
 			putSaveFileReducer,
 			researchPoints,
 			saveFile,
@@ -81,13 +97,6 @@ export const CampUpgrades = ({
 		return 0;
 	});
 
-	const [filter, setFilter] = useState<CampUpgradeCategory>('Research');
-	const categories: CampUpgradeCategory[] = [
-		'Research',
-		'Sustainability',
-		'Exploration',
-		'Training',
-	];
 	const filteredUpgrades = sortedUpgrades.filter(
 		(s) => campUpgradeCategories[s] === filter
 	);
@@ -122,7 +131,7 @@ export const CampUpgrades = ({
 								<h4>{campUpgradeExplanations[upgrade]}</h4>
 								<br />
 								{!campUpgrades[upgrade] && (
-									<h4>Research Points: {currentPrice}</h4>
+									<h4>Research Points: {currentPrices[filter]}</h4>
 								)}
 							</div>
 						}
@@ -131,11 +140,10 @@ export const CampUpgrades = ({
 								? [<FaCheckCircle size={battleSpriteSize} />]
 								: [
 										<button
-											disabled={currentPrice > researchPoints}
+											disabled={currentPrices[filter] > researchPoints}
 											onClick={() => unlock(upgrade)}
 										>
-											{/* {campUpgradePrices[upgrade] <= researchPoints */}
-											{currentPrice <= researchPoints
+											{currentPrices[filter] <= researchPoints
 												? 'Unlock'
 												: 'More Research Points needed'}
 										</button>,

@@ -99,7 +99,7 @@ export const BattlePokemonInfo = ({
 					</Chip>
 				)}
 			{pokemon.secondaryAilments.map((s) => (
-				<Chip>
+				<Chip key={pokemon.id + s.type}>
 					<span>{s.type}</span>
 				</Chip>
 			))}
