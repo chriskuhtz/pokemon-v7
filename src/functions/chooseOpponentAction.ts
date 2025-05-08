@@ -96,7 +96,7 @@ export const chooseOpponentAction = ({
 	//ingrain if possible
 	const canIngrain =
 		moves.find((m) => m.name === 'ingrain') &&
-		controlled.secondaryAilments.every((s) => s.type !== 'ingrained');
+		!controlled.secondaryAilments.some((s) => s.type === 'ingrained');
 
 	if (canIngrain) {
 		return {

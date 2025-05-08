@@ -115,11 +115,11 @@ export const handleAilmentAttack = ({
 		});
 	}
 	if (move.name === 'ingrain') {
-		applySecondaryAilmentToPokemon({
-			pokemon: updatedTarget,
+		updatedAttacker = applySecondaryAilmentToPokemon({
+			pokemon: updatedAttacker,
 			ailment: 'ingrained',
 			addMessage,
-			applicator: updatedTarget,
+			applicator: updatedAttacker,
 		});
 	}
 
