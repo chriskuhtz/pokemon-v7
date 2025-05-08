@@ -35,16 +35,16 @@ export const applyEndOfTurnAbility = ({
 			true,
 			[],
 			addMessage,
-			'by moody'
+			'moody'
 		);
 		moodyApplied = applyStatChangeToPokemon(
-			pokemon,
+			moodyApplied,
 			debuffStat,
 			-1,
 			true,
 			[],
 			addMessage,
-			'by moody'
+			'moody'
 		);
 		return moodyApplied;
 	}

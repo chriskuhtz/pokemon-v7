@@ -36,11 +36,7 @@ export const generateRandomStatObject = (max: number): StatObject => ({
 	evasion: Math.floor(Math.random() * max),
 });
 
-export const getRandomBoostableStat = (omit?: Stat[]) => {
-	const o = omit ?? [];
-	return getRandomEntry(
-		stats.filter(
-			(s) => s !== 'hp' && s !== 'evasion' && s !== 'accuracy' && o.includes(s)
-		)
-	);
+export const getRandomBoostableStat = (omit?: Stat[]): Stat => {
+	const o = ['hp', 'evasion', 'accuracy', ...(omit ?? [])];
+	return getRandomEntry(stats.filter((s) => !o.includes(s)));
 };
