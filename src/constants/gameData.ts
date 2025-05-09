@@ -32,7 +32,7 @@ export const testPokemon: OwnedPokemon = {
 	damage: 0,
 	nature: 'adamant',
 	xp: 125,
-	ability: 'air-lock',
+	ability: 'shadow-tag',
 	happiness: 70,
 	stepsWalked: 0,
 	heldItemName: 'berry-juice',
