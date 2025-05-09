@@ -12,15 +12,15 @@ import { EmptyStatObject } from '../../../interfaces/StatObject';
 const mistyTeam = [
 	makeChallengerPokemon({
 		name: 'starmie',
-		xp: 50653,
+		xp: 46656,
 		nature: 'bold',
-		heldItemName: 'light-clay',
+		heldItemName: 'leftovers',
 		ability: 'water-absorb',
 		fixedAbility: true,
 		happiness: 255,
 		firstMove: { name: 'reflect', usedPP: 0 },
 		secondMove: { name: 'light-screen', usedPP: 0 },
-		thirdMove: { name: 'rain-dance', usedPP: 0 },
+		thirdMove: { name: 'recover', usedPP: 0 },
 		fourthMove: { name: 'psychic', usedPP: 0 },
 		effortValues: {
 			...EmptyStatObject,
@@ -29,11 +29,11 @@ const mistyTeam = [
 		},
 	}),
 	makeChallengerPokemon({
-		name: 'seadra',
+		name: 'starmie',
 		shiny: true,
-		xp: 50653,
+		xp: 46656,
 		nature: 'rash',
-		ability: 'dry-skin',
+		ability: 'drizzle',
 		fixedAbility: true,
 		happiness: 255,
 		heldItemName: 'choice-band',
@@ -49,8 +49,9 @@ const mistyTeam = [
 const mistyCondition = (s: SaveFile) => {
 	const team = s.pokemon.filter((p) => p.onTeam);
 	return (
-		team.length === 3 &&
-		team.every((t) => calculateLevelData(t.xp, t.growthRate).level <= 35)
+		team.length === 2 &&
+		team.every((t) => calculateLevelData(t.xp, t.growthRate).level <= 36) &&
+		team[0].name === team[1].name
 	);
 };
 const trainerMisty: OverworldTrainer = {
@@ -84,8 +85,9 @@ const npcMisty: OverworldNpc = {
 		'nice to meet you',
 		"i'm misty",
 		'if you want to battle me',
-		'you may bring 3 pokemon under level 36',
-		'I will only need my two favorite water pokemon',
+		'you may bring 2 of the same pokemon',
+		'Level 36 at the highest',
+		'I will use my two starmies',
 	],
 };
 
