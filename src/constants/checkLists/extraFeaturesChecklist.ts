@@ -412,4 +412,6 @@ export const extraFeatureCheckList: {
 	{ name: 'hide quests tab on challenge field' },
 	{ name: 'consider price caps for certain upgrades' },
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
+	{ name: 'quest for sudowoodo' },
+	{ name: 'loosing to wild mons is sometimes buggy' },
 ];

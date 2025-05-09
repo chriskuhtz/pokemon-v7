@@ -42,7 +42,6 @@ export const useStrangeTree = () => {
 						message: 'The Tree attacks',
 						onRemoval: () => {
 							patchSaveFileReducer({
-								mileStones: { ...saveFile.mileStones, hasWokenASnorlax: true },
 								meta: { currentChallenger: challenger, activeTab: 'BATTLE' },
 								handledOccupants: [
 									...saveFile.handledOccupants,
@@ -59,7 +58,6 @@ export const useStrangeTree = () => {
 			patchSaveFileReducer,
 			saveFile.bag,
 			saveFile.handledOccupants,
-			saveFile.mileStones,
 		]
 	);
 

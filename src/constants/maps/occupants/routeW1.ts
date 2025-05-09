@@ -63,7 +63,8 @@ export const routeW1Occupants: OverworldMap['occupants'] = [
 		type: 'STRANGE_TREE',
 		x: 48,
 		y: 25,
-		conditionFunction: () => true,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'sudowoodo'),
 		id: 'sudowoodo',
 		orientation: 'UP',
 	},
