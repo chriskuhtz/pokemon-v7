@@ -177,14 +177,7 @@ export const LineUpSelection = ({
 				>
 					{battleButtonMessage}
 				</button>
-				{!trainer && (
-					<button
-						disabled={selectedTeam.length !== fightersPerSide}
-						onClick={tryToLeave}
-					>
-						Try to escape
-					</button>
-				)}
+				{!trainer && <button onClick={tryToLeave}>Try to escape</button>}
 			</div>
 		</div>
 	);
