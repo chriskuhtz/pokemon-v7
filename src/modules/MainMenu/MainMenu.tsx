@@ -101,16 +101,20 @@ export const MainMenu = ({
 					icon={<MdCatchingPokemon size={battleSpriteSize} />}
 					actionElements={[]}
 				/>
-				<Card
-					onClick={() => navigate('MAIN', 'QUESTS')}
-					content={<h4>Quests</h4>}
-					icon={<GoTasklist size={battleSpriteSize} />}
-					actionElements={
-						numberOfUncollected > 0
-							? [<strong>Uncollected: {numberOfUncollected}</strong>]
-							: []
-					}
-				/>
+				{saveFile.location.mapId === 'challengeField' ? (
+					<></>
+				) : (
+					<Card
+						onClick={() => navigate('MAIN', 'QUESTS')}
+						content={<h4>Quests</h4>}
+						icon={<GoTasklist size={battleSpriteSize} />}
+						actionElements={
+							numberOfUncollected > 0
+								? [<strong>Uncollected: {numberOfUncollected}</strong>]
+								: []
+						}
+					/>
+				)}
 				<Card
 					onClick={() => navigate('MAIN', 'POKEDEX')}
 					content={<h4>Pokedex</h4>}

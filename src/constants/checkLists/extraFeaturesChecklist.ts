@@ -378,6 +378,8 @@ export const extraFeatureCheckList: {
 	{ name: 'rocket outbreaks', handled: true },
 	{ name: 'Giovanni as special trainer at ranger level x', handled: true },
 	{ name: 'drake 5 should have full dragons', handled: true },
+	{ name: 'hide quests tab on challenge field', handled: true },
+	{ name: 'consider price caps for certain upgrades', handled: true },
 	{ name: 'random starters are not rerolled on reset' },
 	{
 		name: 'more kanto ken style trainers (dont forget to adjust quest limits)',
@@ -409,9 +411,8 @@ export const extraFeatureCheckList: {
 	{ name: 'historian event: lugia' },
 	{ name: 'historian event: ho oh' },
 	{ name: 'releasing pokemon should not end fullscreen mode' },
-	{ name: 'hide quests tab on challenge field' },
-	{ name: 'consider price caps for certain upgrades' },
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
 	{ name: 'quest for sudowoodo' },
 	{ name: 'loosing to wild mons is sometimes buggy' },
+	{ name: 'snorlax used belly drum twice in a row' },
 ];
