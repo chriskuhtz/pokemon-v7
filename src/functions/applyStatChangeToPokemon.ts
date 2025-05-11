@@ -2,6 +2,7 @@ import { Message } from '../hooks/useMessageQueue';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { Stat } from '../interfaces/StatObject';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
+import { getHeldItem } from './getHeldItem';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getTypeNames } from './getTypeNames';
 
@@ -41,10 +42,11 @@ export const applyStatChangeToPokemon = (
 	const misted = battleFieldEffects.some(
 		(b) => b.type === 'mist' && b.ownerId === pokemon.ownerId
 	);
+	const clearAmuletted = getHeldItem(pokemon) === 'clear-amulet';
 
 	if (
 		!selfInflicted &&
-		(guardSpecced || misted || flowerVeiled) &&
+		(guardSpecced || misted || flowerVeiled || clearAmuletted) &&
 		modifier < 0
 	) {
 		if (addMessage) {
