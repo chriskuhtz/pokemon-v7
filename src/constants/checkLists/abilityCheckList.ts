@@ -973,9 +973,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/221/',
 		handled: true,
 	},
-	{ name: 'receiver', url: 'https://pokeapi.co/api/v2/ability/222/' },
-	{ name: 'power-of-alchemy', url: 'https://pokeapi.co/api/v2/ability/223/' },
-	{ name: 'beast-boost', url: 'https://pokeapi.co/api/v2/ability/224/' },
+	{
+		name: 'beast-boost',
+		url: 'https://pokeapi.co/api/v2/ability/224/',
+		handled: true,
+	},
 	{ name: 'rks-system', url: 'https://pokeapi.co/api/v2/ability/225/' },
 	{ name: 'electric-surge', url: 'https://pokeapi.co/api/v2/ability/226/' },
 	{ name: 'psychic-surge', url: 'https://pokeapi.co/api/v2/ability/227/' },
@@ -1119,7 +1121,9 @@ export const abilityCheckList: {
 	{ name: 'shackle', url: 'https://pokeapi.co/api/v2/ability/10058/' },
 	{ name: 'decoy', url: 'https://pokeapi.co/api/v2/ability/10059/' },
 	{ name: 'shield', url: 'https://pokeapi.co/api/v2/ability/10060/' },
-	//banished
+	/**
+	 * BANISHED
+	 */
 	{ name: 'wimp-out', url: 'https://pokeapi.co/api/v2/ability/193/' },
 	{ name: 'emergency-exit', url: 'https://pokeapi.co/api/v2/ability/194/' },
 	{ name: 'primordial-sea', url: 'https://pokeapi.co/api/v2/ability/189/' },
@@ -1148,6 +1152,8 @@ export const abilityCheckList: {
 	{ name: 'power-construct', url: 'https://pokeapi.co/api/v2/ability/211/' },
 	{ name: 'dazzling', url: 'https://pokeapi.co/api/v2/ability/219/' },
 	{ name: 'soul-heart', url: 'https://pokeapi.co/api/v2/ability/220/' },
+	{ name: 'receiver', url: 'https://pokeapi.co/api/v2/ability/222/' },
+	{ name: 'power-of-alchemy', url: 'https://pokeapi.co/api/v2/ability/223/' },
 ];
 
 export const abilityNames = [
@@ -1343,6 +1349,7 @@ export const abilityNames = [
 	'battery',
 	'fluffy',
 	'tangling-hair',
+	'beast-boost',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

@@ -21,6 +21,7 @@ import {
 } from '../../../../../interfaces/Ailment';
 import { BattleAttack } from '../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
+import { Stat } from '../../../../../interfaces/StatObject';
 import { WeatherType } from '../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../BattleField';
 
@@ -534,6 +535,21 @@ export const handleAbilitiesAfterAttack = (
 			[],
 			addMessage,
 			'moxie'
+		);
+	}
+	//Beast boost
+	if (isKO(updatedTarget) && updatedAttacker.ability === 'beast-boost') {
+		const highestStatName = Object.entries(updatedAttacker.stats).sort(
+			([, value], [, value2]) => value2 - value
+		)[0][0] as Stat;
+		updatedAttacker = applyStatChangeToPokemon(
+			updatedAttacker,
+			highestStatName,
+			1,
+			true,
+			[],
+			addMessage,
+			'beast-boost'
 		);
 	}
 
