@@ -23,7 +23,7 @@ export const BattlePokemonInfo = ({
 }) => {
 	const { level } = calculateLevelData(pokemon.xp, pokemon.growthRate);
 	const {
-		saveFile: { pokedex },
+		saveFile: { pokedex, location },
 	} = useContext(SaveFileContext);
 
 	const backgroundColor = useMemo(() => {
@@ -67,7 +67,7 @@ export const BattlePokemonInfo = ({
 			key={pokemon.id}
 		>
 			<strong style={{ display: 'flex', alignItems: 'center' }}>
-				{pokedex[pokemon.name].caughtOnRoutes.length > 0 &&
+				{pokedex[pokemon.name].caughtOnRoutes.includes(location.mapId) &&
 					pokemon.ownerId !== getPlayerId() && (
 						<ItemSprite item={'poke-ball'} sizeFactor={0.5} />
 					)}
