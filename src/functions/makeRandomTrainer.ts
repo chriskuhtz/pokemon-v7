@@ -2413,7 +2413,7 @@ console.log('trainers tier 4', tier4trainers.length);
 console.log('trainers tier 5', tier5trainers.length);
 export const makeRandomTrainer = (
 	saveFile: SaveFile,
-	tier?: 1 | 2 | 3 | 4
+	tier?: 1 | 2 | 3 | 4 | 5
 ): Challenger => {
 	let all = trainers;
 
@@ -2426,8 +2426,11 @@ export const makeRandomTrainer = (
 	if (tier === 3) {
 		all = tier3trainers;
 	}
-	if (tier === 3) {
+	if (tier === 4) {
 		all = tier4trainers;
+	}
+	if (tier === 5) {
+		all = tier5trainers;
 	}
 	return getRandomEntry(
 		all.filter((t) => {

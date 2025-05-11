@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { FaRandom } from 'react-icons/fa';
+import { TbSoccerField } from 'react-icons/tb';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { Sprite } from '../../components/Sprite/Sprite';
 import { calculateLevelData } from '../../functions/calculateLevelData';
@@ -9,7 +10,6 @@ import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 import { useChallengeTrainer } from '../Overworld/hooks/useChallengeTrainer';
-import { TbSoccerField } from 'react-icons/tb';
 
 export const TrainingField = () => {
 	const { setActiveTabReducer, saveFile, patchSaveFileReducer } =
@@ -90,6 +90,16 @@ export const TrainingField = () => {
 						content={<h3>Random Opponent (Tier 4)</h3>}
 						actionElements={[
 							<button onClick={() => challenge({ tier: 4 })}>Challenge</button>,
+						]}
+					/>
+				)}
+				{saveFile.campUpgrades['training field 5'] && (
+					<Card
+						key={'random5'}
+						icon={<FaRandom />}
+						content={<h3>Random Opponent (Tier 5)</h3>}
+						actionElements={[
+							<button onClick={() => challenge({ tier: 5 })}>Challenge</button>,
 						]}
 					/>
 				)}
