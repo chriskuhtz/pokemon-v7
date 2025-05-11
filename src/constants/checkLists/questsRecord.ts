@@ -758,6 +758,16 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'swimming certification',
 		kind: 'BULLETIN',
 	},
+	'catch a sudowoodo': {
+		rewardItems: { 'ultra-ball': 10, 'pewter-crunchies': 2 },
+		researchPoints: 25,
+		targetPokemon: ['sudowoodo'],
+		conditionFunction: (s) => {
+			return s.pokedex.sudowoodo.caughtOnRoutes.length > 0;
+		},
+		requiredUpgrade: 'swimming certification',
+		kind: 'BULLETIN',
+	},
 	'catch all honeytree pokemon': {
 		rewardItems: { 'sun-stone': 2, 'leaf-stone': 2, 'berry-juice': 5 },
 		researchPoints: 20,
