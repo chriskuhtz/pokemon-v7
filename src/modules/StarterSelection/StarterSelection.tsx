@@ -26,19 +26,18 @@ import { EmptyStatObject } from '../../interfaces/StatObject';
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-const defaultStarters: PokemonName[] = ['bisharp', 'charmander', 'squirtle'];
-const getRandomStarterOptions = () => [
-	getRandomPokemonName(),
-	getRandomPokemonName(),
-	getRandomPokemonName(),
-];
+const defaultStarters: PokemonName[] = ['bulbasaur', 'charmander', 'squirtle'];
 export const StarterSelection = (): JSX.Element => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
 	const options = useMemo(
 		() =>
 			saveFile.settings?.randomStarters
-				? getRandomStarterOptions()
+				? [
+						getRandomPokemonName(),
+						getRandomPokemonName(),
+						getRandomPokemonName(),
+				  ]
 				: defaultStarters,
 		[saveFile]
 	);
