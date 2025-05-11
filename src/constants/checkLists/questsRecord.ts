@@ -38,6 +38,7 @@ import { routeW1 } from '../maps/routeW1';
 import { PokemonName, pokemonNames } from '../pokemonNames';
 import {
 	CampUpgrade,
+	campUpgradeCategories,
 	campUpgradeCostScale,
 	campUpgradeNames,
 } from './campUpgrades';
@@ -342,7 +343,7 @@ const catchQuestsForRoute = (
 					id,
 					{
 						rewardItems: rewardsMap[id] ?? { 'poke-ball': 10 },
-						researchPoints: 5,
+						researchPoints: 10,
 						conditionFunction: (s) => {
 							return route.possibleEncounters[time].some((e) =>
 								s.pokedex[e.name].caughtOnRoutes.includes(route.id)
@@ -448,6 +449,7 @@ export const questNames = [
 	'catch all pikachus with hats',
 	'catch all costumed pikachus',
 	'catch a feebas',
+	'catch a sudowoodo',
 	'catch a pokemon',
 	'catch a spiritomb',
 	'catch Haunter and Mightyena',
@@ -2578,18 +2580,26 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 console.log('number of quests', questNames.length);
 
 console.log(
-	'total research points',
-	Object.values(QuestsRecord).reduce(
-		(sum, summand) => sum + summand.researchPoints,
-		0
-	),
-	'total costs',
-	campUpgradeCostScale +
-		campUpgradeNames
-			.map((_, i) => campUpgradeCostScale * i)
-			.reduce((sum, summand) => sum + summand, 0),
 	'quests w/o questName',
 	Object.keys(QuestsRecord).filter((key) => !questNames.includes(key)),
 	'questNames w/o quest',
 	questNames.filter((name) => !Object.keys(QuestsRecord).includes(name))
+);
+console.log(
+	'total research points',
+	Object.values(QuestsRecord).reduce(
+		(sum, summand) => sum + summand.researchPoints,
+		0
+	)
+);
+console.log(
+	'total costs',
+	['Sustainability', 'Exploration', 'Research', 'Training']
+		.map((cat) =>
+			campUpgradeNames
+				.filter((nam) => campUpgradeCategories[nam] === cat)
+				.map((_, i) => campUpgradeCostScale + campUpgradeCostScale * i)
+				.reduce((sum, summand) => sum + summand, 0)
+		)
+		.reduce((sum, summand) => sum + summand, 0)
 );

@@ -382,10 +382,6 @@ export const extraFeatureCheckList: {
 	{ name: 'consider price caps for certain upgrades', handled: true },
 	{ name: 'random starters are not rerolled on reset', handled: true },
 	{ name: 'quest for sudowoodo', handled: true },
-	{
-		name: 'more kanto ken style trainers (dont forget to adjust quest limits)',
-	},
-	{ name: 'trainer ai should consider flying,dig, diving' },
 	{ name: 'iv quests guy' },
 	{ name: 'ev quests guy' },
 	{ name: 'procedural infinite cave with legendaries' },
@@ -405,7 +401,7 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'sableye gem producer' },
 	{
-		name: 'forager army quest: have 6 zigzagoon with pick up in your prty. Given by zigzagoon guy',
+		name: 'forager army quest: have 6 zigzagoon with pick up in your party. Given by zigzagoon guy',
 	},
 	{ name: 'historian event: lugia' },
 	{ name: 'historian event: ho oh' },
@@ -414,4 +410,10 @@ export const extraFeatureCheckList: {
 
 	{ name: 'loosing to wild mons is sometimes buggy' },
 	{ name: 'snorlax used belly drum twice in a row' },
+	{
+		name: 'more kanto ken style trainers (dont forget to adjust quest limits)',
+	},
+	{ name: 'trainer ai should consider flying,dig, diving' },
+	{ name: 'research assistant trainers' },
+	{ name: 'travelling merchant' },
 ];

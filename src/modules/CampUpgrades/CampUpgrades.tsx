@@ -8,6 +8,7 @@ import {
 	campUpgradeCategories,
 	CampUpgradeCategory,
 	campUpgradeConditions,
+	campUpgradeCostScale,
 	campUpgradeExplanations,
 	campUpgradeNames,
 } from '../../constants/checkLists/campUpgrades';
@@ -42,12 +43,12 @@ export const CampUpgrades = ({
 	const currentPrices: Record<CampUpgradeCategory, number> = Object.fromEntries(
 		categories.map((cat) => [
 			cat,
-			10 +
+			campUpgradeCostScale +
 				Object.entries(campUpgrades).filter(
 					([key, unlocked]) =>
 						!!unlocked && campUpgradeCategories[key as CampUpgrade] === cat
 				).length *
-					10,
+					campUpgradeCostScale,
 		])
 	) as Record<CampUpgradeCategory, number>;
 
