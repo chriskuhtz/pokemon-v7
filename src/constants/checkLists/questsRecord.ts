@@ -596,8 +596,8 @@ export type QuestName = (typeof questNames)[number];
 export const QuestsRecord: Record<QuestName, Quest> = {
 	...catchQuests,
 	'catch a pokemon': {
-		rewardItems: { 'poke-ball': 5 },
-		researchPoints: 10,
+		rewardItems: { 'poke-ball': 10 },
+		researchPoints: 15,
 		conditionFunction: (s) => {
 			return s.pokemon.length > 1;
 		},
