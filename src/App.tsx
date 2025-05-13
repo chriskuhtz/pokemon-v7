@@ -38,6 +38,7 @@ import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { StorageChest } from './modules/StorageChest/StorageChest';
 import { Team } from './modules/Team/Team';
 import { TrainingField } from './modules/TrainingField/TrainingField';
+import { TravellingMerchant } from './modules/TravellingMerchant/TravellingMerchant';
 import { VilePlumeScentResearcher } from './modules/VilePlumeScentResearcher/VilePlumeScentResearcher';
 import { Wiki } from './modules/Wiki/Wiki';
 import { Page } from './uiComponents/Page/Page';
@@ -275,6 +276,9 @@ export const App = (): JSX.Element => {
 				navigate={setActiveTabReducer}
 			/>
 		);
+	}
+	if (activeTab === 'TRAVELLING_MERCHANT') {
+		return <TravellingMerchant />;
 	}
 	if (mapMakerRoutes.includes(activeTab)) {
 		const mapId = activeTab.slice(10) as MapId;

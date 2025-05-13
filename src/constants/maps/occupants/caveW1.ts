@@ -81,11 +81,11 @@ export const caveW1Occupants: OverworldMap['occupants'] = [
 		type: 'ITEM',
 		x: 35,
 		y: 45,
-		item: 'max-repel',
+		item: 'max-mushroom',
 		amount: 1,
 		conditionFunction: (s) =>
-			!s.handledOccupants.some((h) => h.id === 'caveW1-max-repel'),
-		id: 'caveW1-max-repel',
+			!s.handledOccupants.some((h) => h.id === 'caveW1-max-mushroom'),
+		id: 'caveW1-max-mushroom',
 	},
 	{
 		type: 'ITEM',

@@ -1,5 +1,6 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
+import { travellingMerchantRouteW1 } from '../../../modules/TravellingMerchant/TravellingMerchant';
 import { gary } from './gary';
 
 export const routeW1Occupants: OverworldMap['occupants'] = [
@@ -134,4 +135,5 @@ export const routeW1Occupants: OverworldMap['occupants'] = [
 		id: 'routeW1-escape-ropes',
 	},
 	...gary,
+	...travellingMerchantRouteW1,
 ];

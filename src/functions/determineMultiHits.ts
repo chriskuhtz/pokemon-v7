@@ -1,11 +1,13 @@
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
 import { danceMoves } from '../constants/punchBasedMoves';
+import { ItemType } from '../interfaces/Item';
 import { MoveDto } from '../interfaces/Move';
 import { getMiddleOfThree } from './getMiddleOfThree';
 
 export const determineMultiHits = (
 	attack: MoveDto,
-	userAbility: AbilityName
+	userAbility: AbilityName,
+	userHeldItem: ItemType | undefined
 ): number => {
 	if (userAbility === 'dancer' && danceMoves.includes(attack.name)) {
 		return 2;
@@ -13,7 +15,7 @@ export const determineMultiHits = (
 	if (!attack.meta.min_hits || !attack.meta.max_hits) {
 		return 0;
 	}
-	if (userAbility === 'skill-link') {
+	if (userAbility === 'skill-link' || userHeldItem === 'loaded-dice') {
 		return attack.meta.max_hits;
 	}
 	const random = Math.random();

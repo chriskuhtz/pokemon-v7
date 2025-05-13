@@ -11,14 +11,16 @@ export interface Recipe {
 }
 
 const BASE_RECIPES: Recipe[] = [
-	...berries.map(
-		(c) =>
-			({
-				result: 'berry-juice',
-				ingredients: ['oran-berry', c],
-				difficulty: 'EASY',
-			} as Recipe)
-	),
+	...berries
+		.filter((b) => b !== 'oran-berry')
+		.map(
+			(c) =>
+				({
+					result: 'berry-juice',
+					ingredients: ['oran-berry', c],
+					difficulty: 'EASY',
+				} as Recipe)
+		),
 	{
 		result: 'old-gateau',
 		ingredients: ['nanab-berry', 'leppa-berry', 'razz-berry'],
@@ -31,7 +33,7 @@ const BASE_RECIPES: Recipe[] = [
 	},
 	{
 		result: 'moomoo-cheese',
-		ingredients: ['moomoo-milk', 'moomoo-milk', 'sitrus-berry'],
+		ingredients: ['moomoo-milk', 'sitrus-berry'],
 		difficulty: 'MEDIUM',
 	},
 	{

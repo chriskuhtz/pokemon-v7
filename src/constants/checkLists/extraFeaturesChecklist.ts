@@ -383,7 +383,10 @@ export const extraFeatureCheckList: {
 	{ name: 'random starters are not rerolled on reset', handled: true },
 	{ name: 'quest for sudowoodo', handled: true },
 	{ name: 'Bonus for bug reporters', handled: true },
-	{ name: 'terrain indicator' },
+	{ name: 'terrain indicator', handled: true },
+	{ name: 'balls w/o target should not be lost', handled: true },
+	{ name: 'available items need to be reduced by selected', handled: true },
+	{ name: 'travelling merchant', handled: true },
 	{ name: 'iv quests guy' },
 	{ name: 'ev quests guy' },
 	{ name: 'procedural infinite cave with legendaries' },
@@ -409,14 +412,12 @@ export const extraFeatureCheckList: {
 	{ name: 'historian event: ho oh' },
 	{ name: 'releasing pokemon should not end fullscreen mode' },
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
-
 	{ name: 'loosing to wild mons is sometimes buggy' },
-	{ name: 'snorlax used belly drum twice in a row' },
 	{
 		name: 'more kanto ken style trainers (dont forget to adjust quest limits)',
 	},
 	{ name: 'trainer ai should consider flying,dig, diving' },
 	{ name: 'rangers spruce,fir and pine' },
-	{ name: 'travelling merchant' },
 	{ name: 'fix challenge field ranks' },
+	{ name: 'normalize data to prevent slow down' },
 ];

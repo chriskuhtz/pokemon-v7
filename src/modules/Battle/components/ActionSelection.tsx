@@ -104,7 +104,22 @@ export function ActionSelection({
 	const allowedItems: [ItemType, number][] = useMemo(
 		() =>
 			Object.entries(inventory).filter(([item, amount]) => {
-				if (amount <= 0) {
+				const realAmount =
+					amount -
+					allTargets.reduce(
+						(sum, summand) =>
+							sum +
+							(summand.moveQueue.some(
+								(m) =>
+									(m.type === 'InBattleItem' && m.item === item) ||
+									(m.type === 'CatchProcessInfo' && m.ball === item)
+							)
+								? 1
+								: 0),
+						0
+					);
+
+				if (realAmount <= 0) {
 					return false;
 				}
 				if (isPokeball(item) && catchingAllowed) {

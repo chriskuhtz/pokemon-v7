@@ -9,6 +9,7 @@ import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { calculateDamage } from './calculateDamage';
 import { determineMultiHits } from './determineMultiHits';
 import { filterTargets } from './filterTargets';
+import { getHeldItem } from './getHeldItem';
 import { getMovesArray } from './getMovesArray';
 
 export const determineBestMoveAndTarget = (
@@ -33,7 +34,11 @@ export const determineBestMoveAndTarget = (
 						round: 0,
 						data: move.data,
 						targetId: target.id,
-						multiHits: determineMultiHits(move.data, attacker.ability),
+						multiHits: determineMultiHits(
+							move.data,
+							attacker.ability,
+							getHeldItem(attacker)
+						),
 						isAMultiHit: false,
 					},
 					weather,
