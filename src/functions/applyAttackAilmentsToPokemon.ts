@@ -14,6 +14,7 @@ import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { applyPrimaryAilmentToPokemon } from './applyPrimaryAilmentToPokemon';
 import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
 import { getRandomEntry } from './filterTargets';
+import { getHeldItem } from './getHeldItem';
 
 export const getAilmentName = (
 	attack: BattleAttack
@@ -55,6 +56,13 @@ export const applyAttackAilmentsToPokemon = (
 	if (
 		//shield dust prevents all side effects
 		target.ability === 'shield-dust' &&
+		attack.data.damage_class.name !== 'status'
+	) {
+		return { updatedTarget: target, updatedApplicator: applicator };
+	}
+	if (
+		//covert cloak prevents all side effects
+		getHeldItem(target) === 'covert-cloak' &&
 		attack.data.damage_class.name !== 'status'
 	) {
 		return { updatedTarget: target, updatedApplicator: applicator };
