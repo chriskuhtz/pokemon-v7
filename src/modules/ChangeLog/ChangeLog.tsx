@@ -62,6 +62,7 @@ const ChangeLogV21 = (): JSX.Element => {
 			<ol style={{ lineHeight: '1.5rem' }}>
 				<li>Balls are no longer wasted if the target isnt there anymore</li>
 				<li>Cant select last Pokeball twice anymore</li>
+				<li>Fix Cooking Ingredient Requirements</li>
 			</ol>
 		</>
 	);
