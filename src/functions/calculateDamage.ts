@@ -523,7 +523,7 @@ export const calculateDamage = (
 	const furCoatFactor =
 		target.ability === 'fur-coat' && damageClass === 'physical' ? 0.5 : 1;
 	const revengeFactor =
-		attack.name === 'revenge' &&
+		(attack.name === 'revenge' || attack.name === 'avalanche') &&
 		attacker.lastReceivedDamage?.applicatorId === target.id
 			? 2
 			: 1;
