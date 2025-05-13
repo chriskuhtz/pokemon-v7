@@ -16,7 +16,7 @@ import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import { gemTable, isBerry } from '../../../../../../interfaces/Item';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
-import { BattleTerrain } from '../../../useBattleWeather';
+import { BattleTerrain } from '../../../useBattleTerrain';
 import { handleAbilitiesAfterAttack } from '../handleAbilitiesAfterAttack';
 
 /**
@@ -462,7 +462,8 @@ export const handleDamageAttack = ({
 		criticalHit,
 		damage,
 		battleFieldEffects,
-		target.stats.hp
+		target.stats.hp,
+		terrain
 	);
 	updatedAttacker = { ...a };
 	updatedTarget = { ...t };
@@ -523,7 +524,8 @@ export const handleDamageAttack = ({
 				addMessage,
 				battleWeather,
 				battleFieldEffects,
-				targetIsSafeguarded
+				targetIsSafeguarded,
+				terrain
 			);
 		updatedAttacker = a;
 		updatedTarget = b;

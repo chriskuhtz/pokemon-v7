@@ -4,6 +4,7 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { Stat } from '../interfaces/StatObject';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
+import { TerrainObject } from '../modules/Battle/hooks/useBattleTerrain';
 import { WeatherObject } from '../modules/Battle/hooks/useBattleWeather';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { getHeldItem } from './getHeldItem';
@@ -12,6 +13,7 @@ import { getTypeNames } from './getTypeNames';
 export const applyOnBattleEnterAbilityAndEffects = ({
 	user,
 	setWeather,
+	setBattleTerrain,
 	currentWeather,
 	pokemon,
 	addMessage,
@@ -19,6 +21,7 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 }: {
 	user: BattlePokemon;
 	setWeather: (x: WeatherObject) => void;
+	setBattleTerrain: (x: TerrainObject) => void;
 	pokemon: BattlePokemon[];
 	currentWeather: WeatherType | undefined;
 	addMessage: (x: Message) => void;
@@ -57,6 +60,10 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 	if (user.ability === 'snow-warning' && currentWeather !== 'hail') {
 		setWeather({ duration: 9000, type: 'hail' });
 		addMessage({ message: `${user.data.name} summoned a hail storm` });
+	}
+	if (user.ability === 'electric-surge') {
+		setBattleTerrain({ type: 'electric', duration: 9000 });
+		addMessage({ message: `${user.data.name} spreads electric terrain` });
 	}
 	if (
 		currentWeather &&

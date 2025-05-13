@@ -10,7 +10,7 @@ import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
-import { BattleTerrain } from '../../../useBattleWeather';
+import { BattleTerrain } from '../../../useBattleTerrain';
 import { handleAbilitiesAfterAttack } from '../handleAbilitiesAfterAttack';
 
 export const handleSwaggerAttack = ({
@@ -164,7 +164,8 @@ export const handleSwaggerAttack = ({
 			addMessage,
 			battleWeather,
 			battleFieldEffects,
-			targetIsSafeguarded
+			targetIsSafeguarded,
+			terrain
 		);
 	updatedAttacker = a;
 	updatedTarget = b;
@@ -196,7 +197,8 @@ export const handleSwaggerAttack = ({
 			criticalHit,
 			damage,
 			battleFieldEffects,
-			target.stats.hp
+			target.stats.hp,
+			terrain
 		);
 	updatedAttacker = { ...afterAbilityCheck };
 	updatedTarget = { ...t };

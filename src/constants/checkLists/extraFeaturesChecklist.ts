@@ -414,6 +414,8 @@ export const extraFeatureCheckList: {
 		name: 'more kanto ken style trainers (dont forget to adjust quest limits)',
 	},
 	{ name: 'trainer ai should consider flying,dig, diving' },
-	{ name: 'research assistant trainers' },
+	{ name: 'rangers spruce,fir and pine' },
 	{ name: 'travelling merchant' },
+	{ name: 'terrain indicator' },
+	{ name: 'Bonus for bug reporters' },
 ];

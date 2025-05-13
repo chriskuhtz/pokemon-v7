@@ -3,6 +3,7 @@ import { PrimaryAilment } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
+import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getTypeNames } from './getTypeNames';
 import { isKO } from './isKo';
@@ -14,8 +15,13 @@ export const applyPrimaryAilmentToPokemon = (
 	addMessage: (x: Message) => void,
 	weather: WeatherType | undefined,
 	battleFieldEffects: BattleFieldEffect[],
+	terrain: BattleTerrain | undefined,
 	suffix?: string
 ): { updatedTarget: BattlePokemon; updatedApplicator: BattlePokemon } => {
+	if (target.id !== applicator.id && terrain === 'electric') {
+		addMessage({ message: 'The electric terrain prevents sleep' });
+		return { updatedApplicator: applicator, updatedTarget: target };
+	}
 	if (target.ability === 'leaf-guard' && weather === 'sun') {
 		addMessage({
 			message: `${target.name} protects itself from ${ailment} with leaf guard`,

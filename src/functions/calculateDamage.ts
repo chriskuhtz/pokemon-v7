@@ -21,7 +21,7 @@ import { gemTable, isBerry, superEffectiveSaveTable } from '../interfaces/Item';
 import { PokemonType } from '../interfaces/PokemonType';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
-import { BattleTerrain } from '../modules/Battle/hooks/useBattleWeather';
+import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { calculateLevelData } from './calculateLevelData';
 import { calculateModifiedStat } from './calculateModifiedStat';
 import { determineCrit } from './determineCrit';
@@ -605,6 +605,9 @@ export const calculateDamage = (
 			: 1;
 	const fluffyFireFactor =
 		target.ability === 'fluffy' && attackType === 'fire' ? 2 : 1;
+
+	const electricTerrainFactor =
+		attackType === 'electric' && terrain === 'electric' ? 1.5 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -691,7 +694,8 @@ export const calculateDamage = (
 				assuranceFactor *
 				batteryFactor *
 				fluffyFireFactor *
-				fluffyContactFactor
+				fluffyContactFactor *
+				electricTerrainFactor
 		),
 		1
 	);

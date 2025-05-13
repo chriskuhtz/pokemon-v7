@@ -10,6 +10,7 @@ import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
+import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { applyPrimaryAilmentToPokemon } from './applyPrimaryAilmentToPokemon';
 import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
 import { getRandomEntry } from './filterTargets';
@@ -41,7 +42,8 @@ export const applyAttackAilmentsToPokemon = (
 	addMessage: (x: Message) => void,
 	battleWeather: WeatherType | undefined,
 	battleFieldEffects: BattleFieldEffect[],
-	safeGuarded: boolean
+	safeGuarded: boolean,
+	terrain: BattleTerrain | undefined
 ): { updatedTarget: BattlePokemon; updatedApplicator: BattlePokemon } => {
 	if (
 		applicator.ability === 'sheer-force' &&
@@ -77,7 +79,8 @@ export const applyAttackAilmentsToPokemon = (
 				ailment as PrimaryAilment['type'],
 				addMessage,
 				battleWeather,
-				battleFieldEffects
+				battleFieldEffects,
+				terrain
 			);
 		}
 

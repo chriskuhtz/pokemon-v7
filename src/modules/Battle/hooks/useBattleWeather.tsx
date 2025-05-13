@@ -54,33 +54,3 @@ export const useBattleWeather = (allOnField: BattlePokemon[]) => {
 		reduceWeatherDuration,
 	};
 };
-
-export type BattleTerrain = 'grassy' | 'electric';
-export interface TerrainObject {
-	type: BattleTerrain;
-	duration: number;
-}
-export const useBattleTerrain = () => {
-	const [bT, setBattleTerrain] = useState<TerrainObject | undefined>();
-
-	const battleTerrain: BattleTerrain | undefined = useMemo(() => {
-		return bT?.type;
-	}, [bT?.type]);
-
-	const reduceWeatherDuration = useCallback(() => {
-		if (!bT) {
-			return;
-		}
-		if (bT.duration === 1) {
-			setBattleTerrain(undefined);
-		}
-		if (bT.duration > 1) {
-			setBattleTerrain({ ...bT, duration: bT.duration - 1 });
-		}
-	}, [bT]);
-	return {
-		battleTerrain,
-		setBattleTerrain,
-		reduceWeatherDuration,
-	};
-};

@@ -33,7 +33,8 @@ import { PlayerLane } from './components/PlayerLane';
 import { RefillHandling } from './components/RefillHandling';
 import { checkAndHandleFainting } from './functions/handleFainting';
 import { useBattleFieldEffects } from './hooks/useBattleFieldEffects';
-import { useBattleTerrain, useBattleWeather } from './hooks/useBattleWeather';
+import { useBattleTerrain } from './hooks/useBattleTerrain';
+import { useBattleWeather } from './hooks/useBattleWeather';
 import { useChooseAction } from './hooks/useChooseAction';
 import { useHandleAction } from './hooks/useHandleAction/useHandleAction';
 
@@ -160,7 +161,7 @@ export const BattleField = ({
 
 	const { battleWeather, setBattleWeather, reduceWeatherDuration } =
 		useBattleWeather(allOnField);
-	const { battleTerrain } = useBattleTerrain();
+	const { battleTerrain, setBattleTerrain } = useBattleTerrain();
 
 	const {
 		battleFieldEffects,
@@ -315,10 +316,18 @@ export const BattleField = ({
 					currentWeather: battleWeather,
 					setWeather: setBattleWeather,
 					battleFieldEffects,
+					setBattleTerrain,
 				})
 			);
 		},
-		[addMessage, battleFieldEffects, battleWeather, pokemon, setBattleWeather]
+		[
+			addMessage,
+			battleFieldEffects,
+			battleWeather,
+			pokemon,
+			setBattleTerrain,
+			setBattleWeather,
+		]
 	);
 	const handleForceSwitch = useCallback(
 		(user: BattlePokemon, moveName: MoveName): BattlePokemon[] => {

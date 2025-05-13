@@ -13,7 +13,8 @@ import { ItemType } from '../../../../interfaces/Item';
 import { WeatherType } from '../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../BattleField';
 import { handleMoveBlockAilments } from '../../functions/handleMoveBlockAilments';
-import { BattleTerrain, WeatherObject } from '../useBattleWeather';
+import { BattleTerrain } from '../useBattleTerrain';
+import { WeatherObject } from '../useBattleWeather';
 import { handleAllAttackCategories } from './functions/handleAllAttackCategories';
 import { handleCatch } from './functions/handleCatch';
 
