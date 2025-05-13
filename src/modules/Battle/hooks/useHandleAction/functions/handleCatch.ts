@@ -23,14 +23,13 @@ export const handleCatch = (
 		(p) => p.id === move.targetId && p.status === 'ONFIELD'
 	);
 
-	addUsedItem(move.ball);
 	if (!target) {
 		addMultipleMessages([
 			{
-				message: `You throw a ${move.ball}`,
+				message: `You prepared a ${move.ball}`,
 			},
 			{
-				message: `but there is no target`,
+				message: `but the target is no longer there`,
 				onRemoval: () =>
 					setPokemon((pokemon) =>
 						pokemon.map((p) => {
@@ -46,6 +45,8 @@ export const handleCatch = (
 
 		return;
 	}
+
+	addUsedItem(move.ball);
 	const caughtBefore = pokedex[target.name].caughtOnRoutes.length > 0;
 	const check1 = determineCaptureSuccess(
 		move.ball,

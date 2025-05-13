@@ -3,7 +3,7 @@ import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
-export const newestChangeLog = '0.20';
+export const newestChangeLog = '0.21';
 
 export const ChangeLog = ({
 	setHasReadIntro,
@@ -31,6 +31,7 @@ export const ChangeLog = ({
 					>
 						Got it, lets go
 					</button>
+					<ChangeLogV21 />
 					<ChangeLogV20 />
 					<ChangeLogV19 />
 					<ChangeLogV18 />
@@ -51,6 +52,18 @@ export const ChangeLog = ({
 				</Stack>
 			</div>
 		</Page>
+	);
+};
+const ChangeLogV21 = (): JSX.Element => {
+	return (
+		<>
+			<h3>0.21:</h3>
+
+			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>Balls are no longer wasted if the target isnt there anymore</li>
+				<li>Cant select last Pokeball twice anymore</li>
+			</ol>
+		</>
 	);
 };
 const ChangeLogV20 = (): JSX.Element => {
