@@ -45,6 +45,8 @@ const hasCustomSprite: ItemType[] = [
 	'max-honey',
 	'max-mushroom',
 	'clear-amulet',
+	'punching-glove',
+	'covert-cloak',
 ];
 
 export const getItemUrl = (item: ItemType): string => {

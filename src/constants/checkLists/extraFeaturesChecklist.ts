@@ -382,6 +382,8 @@ export const extraFeatureCheckList: {
 	{ name: 'consider price caps for certain upgrades', handled: true },
 	{ name: 'random starters are not rerolled on reset', handled: true },
 	{ name: 'quest for sudowoodo', handled: true },
+	{ name: 'Bonus for bug reporters', handled: true },
+	{ name: 'terrain indicator' },
 	{ name: 'iv quests guy' },
 	{ name: 'ev quests guy' },
 	{ name: 'procedural infinite cave with legendaries' },
@@ -414,6 +416,7 @@ export const extraFeatureCheckList: {
 		name: 'more kanto ken style trainers (dont forget to adjust quest limits)',
 	},
 	{ name: 'trainer ai should consider flying,dig, diving' },
-	{ name: 'research assistant trainers' },
+	{ name: 'rangers spruce,fir and pine' },
 	{ name: 'travelling merchant' },
+	{ name: 'fix challenge field ranks' },
 ];

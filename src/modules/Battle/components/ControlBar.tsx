@@ -11,7 +11,7 @@ import {
 	BattleFieldEffect,
 	ChooseActionPayload,
 } from '../BattleField';
-import { BattleTerrain } from '../hooks/useBattleWeather';
+import { BattleTerrain } from '../hooks/useBattleTerrain';
 import { ActionSelection } from './ActionSelection';
 import { TargetSelection } from './TargetSelection';
 

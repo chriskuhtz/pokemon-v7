@@ -21,7 +21,7 @@ import { gemTable, isBerry, superEffectiveSaveTable } from '../interfaces/Item';
 import { PokemonType } from '../interfaces/PokemonType';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
-import { BattleTerrain } from '../modules/Battle/hooks/useBattleWeather';
+import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { calculateLevelData } from './calculateLevelData';
 import { calculateModifiedStat } from './calculateModifiedStat';
 import { determineCrit } from './determineCrit';
@@ -414,6 +414,11 @@ export const calculateDamage = (
 		attacker.ability === 'iron-fist' && punchBasedMoves.includes(attack.name)
 			? 1.2
 			: 1;
+	const punchingGloveFactor =
+		getHeldItem(attacker) === 'punching-glove' &&
+		punchBasedMoves.includes(attack.name)
+			? 1.1
+			: 1;
 	const savingBerryFactor =
 		(typeFactor > 1 || attackType === 'normal') &&
 		superEffectiveSaveTable[attackType] &&
@@ -518,7 +523,7 @@ export const calculateDamage = (
 	const furCoatFactor =
 		target.ability === 'fur-coat' && damageClass === 'physical' ? 0.5 : 1;
 	const revengeFactor =
-		attack.name === 'revenge' &&
+		(attack.name === 'revenge' || attack.name === 'avalanche') &&
 		attacker.lastReceivedDamage?.applicatorId === target.id
 			? 2
 			: 1;
@@ -605,6 +610,15 @@ export const calculateDamage = (
 			: 1;
 	const fluffyFireFactor =
 		target.ability === 'fluffy' && attackType === 'fire' ? 2 : 1;
+
+	const electricTerrainFactor =
+		attackType === 'electric' && terrain === 'electric' ? 1.3 : 1;
+	const psychicTerrainFactor =
+		attackType === 'psychic' && terrain === 'psychic' ? 1.3 : 1;
+	const grassyTerrainFactor =
+		attackType === 'grass' && terrain === 'grassy' ? 1.3 : 1;
+	const mistyTerrainFactor =
+		attackType === 'dragon' && terrain === 'misty' ? 0.5 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -691,7 +705,12 @@ export const calculateDamage = (
 				assuranceFactor *
 				batteryFactor *
 				fluffyFireFactor *
-				fluffyContactFactor
+				fluffyContactFactor *
+				electricTerrainFactor *
+				punchingGloveFactor *
+				psychicTerrainFactor *
+				grassyTerrainFactor *
+				mistyTerrainFactor
 		),
 		1
 	);

@@ -513,6 +513,7 @@ export const questNames = [
 	'catch a gigantic specimen',
 	'catch a pokemon in every type of apricorn ball',
 	'defeat morty',
+	'defeat bugsy',
 	'revive a fossil',
 	'revive all different fossils',
 	'evolve your starter pokemon',
@@ -589,6 +590,7 @@ export const questNames = [
 	'reach ranger level 5',
 	'reach ranger level 10',
 	'reach ranger level 20',
+	'report a bug',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -1477,6 +1479,45 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 1',
 		availableAfter: 'catch Haunter and Mightyena',
+	},
+	'defeat bugsy': {
+		rewardItems: {
+			'ultra-ball': 10,
+			'full-restore': 5,
+			'silver-powder': 1,
+			...expCandyPackage,
+		},
+		rewardPokemon: {
+			caughtAtDate: new Date().getTime(),
+			growthRate: 'medium',
+			unlockedMoves: ['tail-glow'],
+			fixedAbility: true,
+			shiny: true,
+			maxHp: 30,
+			effortValues: EmptyStatObject,
+			ppBoostedMoves: [],
+			caughtOnMap: 'camp',
+			gender: 'MALE',
+			stepsWalked: 0,
+			ownerId: '',
+			damage: 0,
+			id: '',
+			ball: 'poke-ball',
+			ability: 'drought',
+			name: 'larvesta',
+			xp: 125,
+			nature: 'adamant',
+			intrinsicValues: generateRandomStatObject(31),
+			happiness: 70,
+			firstMove: { name: 'tail-glow', usedPP: 0 },
+		},
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.handledOccupants.some((h) => h.id === 'Gym Leader Bugsy');
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'report a bug',
 	},
 	'defeat chuck': {
 		rewardItems: {
@@ -2574,6 +2615,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		kind: 'BULLETIN',
 		availableAfter: 'reach ranger level 5',
+	},
+	'report a bug': {
+		conditionFunction: (s) => !!s.mileStones.hasReportedBug,
+		kind: 'QUEST_LINE',
+		researchPoints: 20,
+		rewardItems: { 'great-ball': 10, 'lucky-egg': 1 },
 	},
 };
 

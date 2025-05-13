@@ -16,7 +16,8 @@ import { handleWholeFieldEffectAttack } from './attackCategories/handleWholeFiel
 import { handleAttackStart } from './handleAttackStart';
 
 import { changeMovePP } from '../../../../../functions/changeMovePP';
-import { BattleTerrain, WeatherObject } from '../../useBattleWeather';
+import { BattleTerrain } from '../../useBattleTerrain';
+import { WeatherObject } from '../../useBattleWeather';
 
 export const handleAllAttackCategories = ({
 	attacker,
@@ -64,6 +65,7 @@ export const handleAllAttackCategories = ({
 		battleWeather,
 		battleFieldEffects,
 		dampy,
+		terrain,
 	});
 
 	updatedPokemon = ua;
@@ -134,6 +136,7 @@ export const handleAllAttackCategories = ({
 					battleWeather,
 					battleFieldEffects,
 					target,
+					terrain,
 				});
 			case 'net-good-stats':
 				return handleNetGoodStatsAttack({

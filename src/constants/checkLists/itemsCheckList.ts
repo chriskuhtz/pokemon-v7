@@ -1948,7 +1948,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/1698/',
 		handled: true,
 	},
-	{ name: 'punching-glove', url: 'https://pokeapi.co/api/v2/item/1700/' },
+	{
+		name: 'punching-glove',
+		url: 'https://pokeapi.co/api/v2/item/1700/',
+		handled: true,
+	},
 	{ name: 'covert-cloak', url: 'https://pokeapi.co/api/v2/item/1701/' },
 	{ name: 'loaded-dice', url: 'https://pokeapi.co/api/v2/item/1702/' },
 	{ name: 'terrain-extender', url: 'https://pokeapi.co/api/v2/item/896/' },

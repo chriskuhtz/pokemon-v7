@@ -7,6 +7,7 @@ import {
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { getRandomBoostableStat } from '../interfaces/StatObject';
 import { WeatherType } from '../interfaces/Weather';
+import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { getHeldItem } from './getHeldItem';
 import { getMiddleOfThree } from './getMiddleOfThree';
@@ -140,6 +141,28 @@ export const applyEndOfTurnAbility = ({
 			});
 			return { ...pokemon, heldItemName: pokemon.consumedBerry };
 		}
+	}
+	return pokemon;
+};
+
+export const applyGrassyTerrainHeal = ({
+	terrain,
+	pokemon,
+	addMessage,
+}: {
+	pokemon: BattlePokemon;
+	addMessage: (x: Message) => void;
+	terrain: BattleTerrain | undefined;
+}): BattlePokemon => {
+	if (terrain === 'grassy' && pokemon.damage) {
+		addMessage({ message: `${pokemon.name} was healed by grassy terrain` });
+		return {
+			...pokemon,
+			damage: Math.max(
+				0,
+				pokemon.damage - Math.floor((pokemon.stats.hp * 1) / 16)
+			),
+		};
 	}
 	return pokemon;
 };

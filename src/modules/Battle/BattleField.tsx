@@ -2,7 +2,10 @@ import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
-import { applyEndOfTurnAbility } from '../../functions/applyEndOfTurnAbility';
+import {
+	applyEndOfTurnAbility,
+	applyGrassyTerrainHeal,
+} from '../../functions/applyEndOfTurnAbility';
 import { applyEndOfTurnHeldItem } from '../../functions/applyEndOfTurnHeldItem';
 import { applyEndOfTurnWeatherDamage } from '../../functions/applyEndOfTurnWeatherDamage';
 import { applyEVGain } from '../../functions/applyEVGain';
@@ -33,7 +36,8 @@ import { PlayerLane } from './components/PlayerLane';
 import { RefillHandling } from './components/RefillHandling';
 import { checkAndHandleFainting } from './functions/handleFainting';
 import { useBattleFieldEffects } from './hooks/useBattleFieldEffects';
-import { useBattleTerrain, useBattleWeather } from './hooks/useBattleWeather';
+import { useBattleTerrain } from './hooks/useBattleTerrain';
+import { useBattleWeather } from './hooks/useBattleWeather';
 import { useChooseAction } from './hooks/useChooseAction';
 import { useHandleAction } from './hooks/useHandleAction/useHandleAction';
 
@@ -160,7 +164,7 @@ export const BattleField = ({
 
 	const { battleWeather, setBattleWeather, reduceWeatherDuration } =
 		useBattleWeather(allOnField);
-	const { battleTerrain } = useBattleTerrain();
+	const { battleTerrain, setBattleTerrain } = useBattleTerrain();
 
 	const {
 		battleFieldEffects,
@@ -315,10 +319,18 @@ export const BattleField = ({
 					currentWeather: battleWeather,
 					setWeather: setBattleWeather,
 					battleFieldEffects,
+					setBattleTerrain,
 				})
 			);
 		},
-		[addMessage, battleFieldEffects, battleWeather, pokemon, setBattleWeather]
+		[
+			addMessage,
+			battleFieldEffects,
+			battleWeather,
+			pokemon,
+			setBattleTerrain,
+			setBattleWeather,
+		]
 	);
 	const handleForceSwitch = useCallback(
 		(user: BattlePokemon, moveName: MoveName): BattlePokemon[] => {
@@ -490,6 +502,11 @@ export const BattleField = ({
 						pokemon: updated,
 						addMessage: (x) => collectedMessages.push(x.message),
 					});
+					updated = applyGrassyTerrainHeal({
+						terrain: battleTerrain,
+						pokemon: updated,
+						addMessage,
+					});
 					updated = updated = applyEndOfTurnHeldItem(
 						updated,
 						(x) => collectedMessages.push(x),
@@ -534,10 +551,12 @@ export const BattleField = ({
 			}
 		}
 	}, [
+		addMessage,
 		addMultipleMessages,
 		allOnField,
 		battleFieldEffects,
 		battleStep,
+		battleTerrain,
 		battleWeather,
 		initOpponents,
 		initTeam,

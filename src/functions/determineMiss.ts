@@ -5,6 +5,7 @@ import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
+import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { calculateLevelData } from './calculateLevelData';
 import { calculateModifiedStat } from './calculateModifiedStat';
 import {
@@ -19,7 +20,8 @@ export type MissReason =
 	| 'ATTACKER_NOT_ASLEEP'
 	| 'TARGET_NOT_ASLEEP'
 	| 'PROTECTED'
-	| 'QUEENLY_MAJESTY';
+	| 'QUEENLY_MAJESTY'
+	| 'PSYCHIC_TERRAIN';
 
 export const getWeatherAccuracyFactor = (
 	target: BattlePokemon,
@@ -44,12 +46,15 @@ export const determineMiss = (
 	attacker: BattlePokemon,
 	target: BattlePokemon,
 	battleFieldEffects: BattleFieldEffect[],
-	weather?: WeatherType,
-	targetIsFlying?: boolean,
-	targetIsUnderground?: boolean
+	weather: WeatherType | undefined,
+	targetIsFlying: boolean | undefined,
+	targetIsUnderground: boolean | undefined,
+	terrain: BattleTerrain | undefined
 ): { miss: boolean; reason?: MissReason } => {
 	const selfTargeting = isSelfTargeting(attack.data);
-
+	if (attack.data.priority > 0 && terrain === 'psychic') {
+		return { miss: true, reason: 'PSYCHIC_TERRAIN' };
+	}
 	if (attack.data.priority > 0 && target.ability === 'queenly-majesty') {
 		return { miss: true, reason: 'QUEENLY_MAJESTY' };
 	}

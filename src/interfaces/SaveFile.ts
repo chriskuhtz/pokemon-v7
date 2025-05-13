@@ -123,6 +123,7 @@ export interface SaveFile {
 		caughtFromSwarms: PokemonName[];
 		luredWithBerries: PokemonName[];
 		hasEvolvedStarter?: boolean;
+		hasReportedBug?: boolean;
 	};
 	farm: {
 		plants: BerryBush[];

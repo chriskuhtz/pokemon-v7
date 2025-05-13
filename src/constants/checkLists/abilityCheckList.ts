@@ -978,11 +978,27 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/224/',
 		handled: true,
 	},
-	{ name: 'rks-system', url: 'https://pokeapi.co/api/v2/ability/225/' },
-	{ name: 'electric-surge', url: 'https://pokeapi.co/api/v2/ability/226/' },
-	{ name: 'psychic-surge', url: 'https://pokeapi.co/api/v2/ability/227/' },
-	{ name: 'misty-surge', url: 'https://pokeapi.co/api/v2/ability/228/' },
-	{ name: 'grassy-surge', url: 'https://pokeapi.co/api/v2/ability/229/' },
+
+	{
+		name: 'electric-surge',
+		url: 'https://pokeapi.co/api/v2/ability/226/',
+		handled: true,
+	},
+	{
+		name: 'psychic-surge',
+		url: 'https://pokeapi.co/api/v2/ability/227/',
+		handled: true,
+	},
+	{
+		name: 'grassy-surge',
+		url: 'https://pokeapi.co/api/v2/ability/229/',
+		handled: true,
+	},
+	{
+		name: 'misty-surge',
+		url: 'https://pokeapi.co/api/v2/ability/228/',
+		handled: true,
+	},
 	{ name: 'full-metal-body', url: 'https://pokeapi.co/api/v2/ability/230/' },
 	{ name: 'shadow-shield', url: 'https://pokeapi.co/api/v2/ability/231/' },
 	{ name: 'prism-armor', url: 'https://pokeapi.co/api/v2/ability/232/' },
@@ -1154,6 +1170,7 @@ export const abilityCheckList: {
 	{ name: 'soul-heart', url: 'https://pokeapi.co/api/v2/ability/220/' },
 	{ name: 'receiver', url: 'https://pokeapi.co/api/v2/ability/222/' },
 	{ name: 'power-of-alchemy', url: 'https://pokeapi.co/api/v2/ability/223/' },
+	{ name: 'rks-system', url: 'https://pokeapi.co/api/v2/ability/225/' },
 ];
 
 export const abilityNames = [
@@ -1350,6 +1367,10 @@ export const abilityNames = [
 	'fluffy',
 	'tangling-hair',
 	'beast-boost',
+	'electric-surge',
+	'psychic-surge',
+	'grassy-surge',
+	'misty-surge',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

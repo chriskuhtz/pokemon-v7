@@ -1,5 +1,7 @@
+import { getHeldItem } from '../functions/getHeldItem';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { MoveName } from './checkLists/movesCheckList';
+import { punchBasedMoves } from './punchBasedMoves';
 
 const contactMoves = [
 	'accelerock',
@@ -283,6 +285,12 @@ const contactMoves = [
 
 export const isContactMove = (move: MoveName, pokemon: BattlePokemon) => {
 	if (pokemon.ability === 'long-reach') {
+		return false;
+	}
+	if (
+		getHeldItem(pokemon) === 'punching-glove' &&
+		punchBasedMoves.includes(move)
+	) {
 		return false;
 	}
 	return contactMoves.includes(move);

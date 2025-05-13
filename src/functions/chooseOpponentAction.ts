@@ -5,7 +5,7 @@ import {
 	BattleFieldEffect,
 	ChooseActionPayload,
 } from '../modules/Battle/BattleField';
-import { BattleTerrain } from '../modules/Battle/hooks/useBattleWeather';
+import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { calculateDamage } from './calculateDamage';
 import { determineMultiHits } from './determineMultiHits';
 import { filterTargets } from './filterTargets';

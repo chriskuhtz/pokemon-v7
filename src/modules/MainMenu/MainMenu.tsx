@@ -4,13 +4,13 @@ import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
-import { Octokit } from 'octokit';
 import { useContext, useState } from 'react';
-import { FaBug, FaSearch } from 'react-icons/fa';
+import { FaSearch } from 'react-icons/fa';
 import { GoTasklist } from 'react-icons/go';
 import { IoMdExit } from 'react-icons/io';
-import { IoBulbOutline } from 'react-icons/io5';
 import { RiBookShelfLine } from 'react-icons/ri';
+import { BugReportButton } from '../../components/BugReport/BugReport';
+import { IdeaButton } from '../../components/IdeaReport/IdeaReport';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { TrainerCard } from '../../components/TrainerCard/TrainerCard';
@@ -302,7 +302,7 @@ export const LureButton = () => {
 	if (saveFile.activatedLure) {
 		return (
 			<Card
-				icon={<ItemSprite item={'lure'} />}
+				icon={<ItemSprite item={saveFile.activatedLure ?? 'lure'} />}
 				onClick={() => {
 					patchSaveFileReducer({
 						activatedLure: undefined,
@@ -360,109 +360,4 @@ export const LureButton = () => {
 		);
 	}
 	return <></>;
-};
-
-export const BugReportButton = () => {
-	const { addMessage } = useContext(MessageQueueContext);
-	const { saveFile } = useContext(SaveFileContext);
-	const [bugReport, setBugReport] = useState<string>('');
-
-	const reportBug = async (body: string) => {
-		const octokit = new Octokit({
-			//@ts-expect-error fu ts
-			auth: import.meta.env.VITE_BUGREPORT_TOKEN,
-		});
-
-		await octokit
-			.request('POST /repos/chriskuhtz/pokemon-v7/issues', {
-				owner: 'OWNER',
-				repo: 'REPO',
-				title: `Bug found by ${saveFile.playerId}`,
-				body: `${body}`,
-				labels: ['bug'],
-				headers: {
-					'X-GitHub-Api-Version': '2022-11-28',
-				},
-			})
-			.then(() => {
-				addMessage({
-					message: 'Thank you for reporting this',
-					needsNoConfirmation: true,
-				});
-				setBugReport('');
-			});
-	};
-
-	return (
-		<Card
-			icon={<FaBug size={battleSpriteSize} />}
-			content={
-				<div>
-					<h3>Report a bug:</h3>
-					<textarea
-						style={{ width: '90%' }}
-						cols={70}
-						rows={10}
-						value={bugReport}
-						onChange={(e) => setBugReport(e.target.value)}
-					/>
-				</div>
-			}
-			actionElements={[
-				<button onClick={() => void reportBug(bugReport)}>Submit</button>,
-			]}
-		/>
-	);
-};
-export const IdeaButton = () => {
-	const { addMessage } = useContext(MessageQueueContext);
-	const { saveFile } = useContext(SaveFileContext);
-	const [bugReport, setBugReport] = useState<string>('');
-
-	const reportIdea = async (body: string) => {
-		const octokit = new Octokit({
-			//@ts-expect-error fu ts
-			auth: import.meta.env.VITE_BUGREPORT_TOKEN,
-		});
-
-		await octokit
-			.request('POST /repos/chriskuhtz/pokemon-v7/issues', {
-				owner: 'OWNER',
-				repo: 'REPO',
-				title: `Idea from ${saveFile.playerId}`,
-				body: `${body}`,
-				labels: ['feedback'],
-				headers: {
-					'X-GitHub-Api-Version': '2022-11-28',
-				},
-			})
-			.then(() => {
-				addMessage({
-					message: 'Thank you for your feedback',
-					needsNoConfirmation: true,
-				});
-				setBugReport('');
-			});
-	};
-
-	return (
-		<Card
-			icon={<IoBulbOutline size={battleSpriteSize} />}
-			content={
-				<div>
-					<h3>What is your Feedback/Idea:</h3>
-					<textarea
-						style={{ width: '90%' }}
-						cols={70}
-						rows={10}
-						value={bugReport}
-						onChange={(e) => setBugReport(e.target.value)}
-					/>
-				</div>
-			}
-			actionElements={[
-				<button onClick={() => void reportIdea(bugReport)}>Submit</button>,
-			]}
-		/>
-	);
 };

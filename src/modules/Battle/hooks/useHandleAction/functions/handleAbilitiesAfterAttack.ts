@@ -24,6 +24,7 @@ import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
 import { Stat } from '../../../../../interfaces/StatObject';
 import { WeatherType } from '../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../BattleField';
+import { BattleTerrain } from '../../useBattleTerrain';
 
 export const handleAbilitiesAfterAttack = (
 	attacker: BattlePokemon,
@@ -35,7 +36,8 @@ export const handleAbilitiesAfterAttack = (
 	criticalHit: boolean | undefined,
 	damage: number,
 	battleFieldEffects: BattleFieldEffect[],
-	originalTargetHp: number
+	originalTargetHp: number,
+	terrain: BattleTerrain | undefined
 ): {
 	updatedAttacker: BattlePokemon;
 	updatedTarget: BattlePokemon;
@@ -90,6 +92,7 @@ export const handleAbilitiesAfterAttack = (
 			addMessage,
 			battleWeather,
 			battleFieldEffects,
+			terrain,
 			`by ${target.data.name}'s static`
 		);
 		updatedAttacker = b;
@@ -166,6 +169,7 @@ export const handleAbilitiesAfterAttack = (
 			addMessage,
 			battleWeather,
 			battleFieldEffects,
+			terrain,
 			`by ${target.data.name}'s flame body`
 		);
 		updatedAttacker = b;
@@ -200,6 +204,7 @@ export const handleAbilitiesAfterAttack = (
 			addMessage,
 			battleWeather,
 			battleFieldEffects,
+			terrain,
 			`by ${target.data.name}'s poison point`
 		);
 		updatedAttacker = b;
@@ -236,6 +241,7 @@ export const handleAbilitiesAfterAttack = (
 			addMessage,
 			battleWeather,
 			battleFieldEffects,
+			terrain,
 			`by ${target.data.name}'s effect spore`
 		);
 		updatedAttacker = b;

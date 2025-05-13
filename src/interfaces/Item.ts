@@ -275,6 +275,8 @@ export const heldItems = [
 	'heavy-duty-boots',
 	'blunder-policy',
 	'clear-amulet',
+	'punching-glove',
+	'covert-cloak',
 ] as const;
 export const valuables = [
 	'auspicious-armor',

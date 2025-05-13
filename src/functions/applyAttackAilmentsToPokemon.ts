@@ -10,9 +10,11 @@ import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
+import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { applyPrimaryAilmentToPokemon } from './applyPrimaryAilmentToPokemon';
 import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
 import { getRandomEntry } from './filterTargets';
+import { getHeldItem } from './getHeldItem';
 
 export const getAilmentName = (
 	attack: BattleAttack
@@ -41,7 +43,8 @@ export const applyAttackAilmentsToPokemon = (
 	addMessage: (x: Message) => void,
 	battleWeather: WeatherType | undefined,
 	battleFieldEffects: BattleFieldEffect[],
-	safeGuarded: boolean
+	safeGuarded: boolean,
+	terrain: BattleTerrain | undefined
 ): { updatedTarget: BattlePokemon; updatedApplicator: BattlePokemon } => {
 	if (
 		applicator.ability === 'sheer-force' &&
@@ -53,6 +56,13 @@ export const applyAttackAilmentsToPokemon = (
 	if (
 		//shield dust prevents all side effects
 		target.ability === 'shield-dust' &&
+		attack.data.damage_class.name !== 'status'
+	) {
+		return { updatedTarget: target, updatedApplicator: applicator };
+	}
+	if (
+		//covert cloak prevents all side effects
+		getHeldItem(target) === 'covert-cloak' &&
 		attack.data.damage_class.name !== 'status'
 	) {
 		return { updatedTarget: target, updatedApplicator: applicator };
@@ -77,7 +87,8 @@ export const applyAttackAilmentsToPokemon = (
 				ailment as PrimaryAilment['type'],
 				addMessage,
 				battleWeather,
-				battleFieldEffects
+				battleFieldEffects,
+				terrain
 			);
 		}
 

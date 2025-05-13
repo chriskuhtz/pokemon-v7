@@ -3,7 +3,7 @@ import { PARA_SPEED_FACTOR } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
-import { BattleTerrain } from '../modules/Battle/hooks/useBattleWeather';
+import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { calculateModifiedStat } from './calculateModifiedStat';
 import { getHeldItem } from './getHeldItem';
 

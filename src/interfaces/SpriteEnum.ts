@@ -127,6 +127,7 @@ export enum SpriteEnum {
 	janine = '153',
 	blaine = '154',
 	falkner = '155',
+	bugsy = '156',
 	morty = '158',
 	chuck = '159',
 	roark = '163',
