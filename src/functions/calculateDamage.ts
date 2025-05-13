@@ -414,6 +414,11 @@ export const calculateDamage = (
 		attacker.ability === 'iron-fist' && punchBasedMoves.includes(attack.name)
 			? 1.2
 			: 1;
+	const punchingGloveFactor =
+		getHeldItem(attacker) === 'punching-glove' &&
+		punchBasedMoves.includes(attack.name)
+			? 1.1
+			: 1;
 	const savingBerryFactor =
 		(typeFactor > 1 || attackType === 'normal') &&
 		superEffectiveSaveTable[attackType] &&
@@ -695,7 +700,8 @@ export const calculateDamage = (
 				batteryFactor *
 				fluffyFireFactor *
 				fluffyContactFactor *
-				electricTerrainFactor
+				electricTerrainFactor *
+				punchingGloveFactor
 		),
 		1
 	);
