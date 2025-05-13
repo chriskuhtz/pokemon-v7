@@ -63,6 +63,7 @@ const ChangeLogV21 = (): JSX.Element => {
 				<li>Balls are no longer wasted if the target isnt there anymore</li>
 				<li>Cant select last Pokeball twice anymore</li>
 				<li>Fix Cooking Ingredient Requirements</li>
+				<li>Travelling Merchant</li>
 				<li>New Abilities, Items and Attacks</li>
 			</ol>
 		</>
