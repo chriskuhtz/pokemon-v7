@@ -62,8 +62,12 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 		addMessage({ message: `${user.data.name} summoned a hail storm` });
 	}
 	if (user.ability === 'electric-surge') {
-		setBattleTerrain({ type: 'electric', duration: 9000 });
+		setBattleTerrain({ type: 'electric', duration: 5 });
 		addMessage({ message: `${user.data.name} spreads electric terrain` });
+	}
+	if (user.ability === 'psychic-surge') {
+		setBattleTerrain({ type: 'psychic', duration: 5 });
+		addMessage({ message: `${user.data.name} spreads psychic terrain` });
 	}
 	if (
 		currentWeather &&

@@ -14,6 +14,11 @@ export const handleMiss = (
 	addMessage: (x: Message) => void,
 	reason?: MissReason
 ) => {
+	if (reason === 'PSYCHIC_TERRAIN') {
+		addMessage({
+			message: 'Psychic Terrain prevents priority attacks',
+		});
+	}
 	if (reason === 'QUEENLY_MAJESTY') {
 		addMessage({
 			message: 'The Target prevents priority attacks with queenly majesty',

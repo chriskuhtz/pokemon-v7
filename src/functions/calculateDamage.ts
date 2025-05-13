@@ -612,7 +612,9 @@ export const calculateDamage = (
 		target.ability === 'fluffy' && attackType === 'fire' ? 2 : 1;
 
 	const electricTerrainFactor =
-		attackType === 'electric' && terrain === 'electric' ? 1.5 : 1;
+		attackType === 'electric' && terrain === 'electric' ? 1.3 : 1;
+	const psychicTerrainFactor =
+		attackType === 'psychic' && terrain === 'psychic' ? 1.3 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -701,7 +703,8 @@ export const calculateDamage = (
 				fluffyFireFactor *
 				fluffyContactFactor *
 				electricTerrainFactor *
-				punchingGloveFactor
+				punchingGloveFactor *
+				psychicTerrainFactor
 		),
 		1
 	);
