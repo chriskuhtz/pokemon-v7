@@ -69,6 +69,10 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 		setBattleTerrain({ type: 'psychic', duration: 5 });
 		addMessage({ message: `${user.data.name} spreads psychic terrain` });
 	}
+	if (user.ability === 'grassy-surge') {
+		setBattleTerrain({ type: 'grassy', duration: 5 });
+		addMessage({ message: `${user.data.name} spreads grassy terrain` });
+	}
 	if (
 		currentWeather &&
 		(user.ability === 'air-lock' || user.ability === 'cloud-nine')

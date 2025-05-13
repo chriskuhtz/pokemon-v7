@@ -2,7 +2,10 @@ import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
-import { applyEndOfTurnAbility } from '../../functions/applyEndOfTurnAbility';
+import {
+	applyEndOfTurnAbility,
+	applyGrassyTerrainHeal,
+} from '../../functions/applyEndOfTurnAbility';
 import { applyEndOfTurnHeldItem } from '../../functions/applyEndOfTurnHeldItem';
 import { applyEndOfTurnWeatherDamage } from '../../functions/applyEndOfTurnWeatherDamage';
 import { applyEVGain } from '../../functions/applyEVGain';
@@ -499,6 +502,11 @@ export const BattleField = ({
 						pokemon: updated,
 						addMessage: (x) => collectedMessages.push(x.message),
 					});
+					updated = applyGrassyTerrainHeal({
+						terrain: battleTerrain,
+						pokemon: updated,
+						addMessage,
+					});
 					updated = updated = applyEndOfTurnHeldItem(
 						updated,
 						(x) => collectedMessages.push(x),
@@ -543,10 +551,12 @@ export const BattleField = ({
 			}
 		}
 	}, [
+		addMessage,
 		addMultipleMessages,
 		allOnField,
 		battleFieldEffects,
 		battleStep,
+		battleTerrain,
 		battleWeather,
 		initOpponents,
 		initTeam,

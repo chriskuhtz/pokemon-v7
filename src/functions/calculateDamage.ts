@@ -615,6 +615,8 @@ export const calculateDamage = (
 		attackType === 'electric' && terrain === 'electric' ? 1.3 : 1;
 	const psychicTerrainFactor =
 		attackType === 'psychic' && terrain === 'psychic' ? 1.3 : 1;
+	const grassyTerrainFactor =
+		attackType === 'grass' && terrain === 'grassy' ? 1.3 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -704,7 +706,8 @@ export const calculateDamage = (
 				fluffyContactFactor *
 				electricTerrainFactor *
 				punchingGloveFactor *
-				psychicTerrainFactor
+				psychicTerrainFactor *
+				grassyTerrainFactor
 		),
 		1
 	);
