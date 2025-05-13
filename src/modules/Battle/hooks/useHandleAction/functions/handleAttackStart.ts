@@ -11,6 +11,7 @@ import { handleDampy } from '../../../functions/handleDampy';
 import { handleMiss } from '../../../functions/handleMiss';
 import { handleMoveBlockAilments } from '../../../functions/handleMoveBlockAilments';
 import { handleNoTarget } from '../../../functions/handleNoTarget';
+import { BattleTerrain } from '../../useBattleTerrain';
 
 export const handleAttackStart = ({
 	attacker,
@@ -20,6 +21,7 @@ export const handleAttackStart = ({
 	battleWeather,
 	battleFieldEffects,
 	dampy,
+	terrain,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
@@ -28,6 +30,7 @@ export const handleAttackStart = ({
 	battleWeather: WeatherType | undefined;
 	battleFieldEffects: BattleFieldEffect[];
 	dampy: { name: string } | undefined;
+	terrain: BattleTerrain | undefined;
 }): {
 	updatedPokemon: BattlePokemon[];
 	targets: BattlePokemon[];
@@ -164,7 +167,8 @@ export const handleAttackStart = ({
 			battleFieldEffects,
 			battleWeather,
 			isFlying,
-			isUnderground
+			isUnderground,
+			terrain
 		);
 		if (miss) {
 			handleMiss(attacker, move, pokemon, setPokemon, addMessage, reason);

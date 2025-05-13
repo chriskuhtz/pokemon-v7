@@ -32,12 +32,14 @@ const terrainTypeMap: Record<BattleTerrain, PokemonType> = {
 	grassy: 'grass',
 	electric: 'electric',
 	psychic: 'psychic',
+	misty: 'fairy',
 };
 const terrainExplanations: Record<BattleTerrain, string> = {
 	grassy:
 		'Grass Moves are boosted 30%, all fighters are healed 1/16th every turn',
 	electric: 'Electric Moves are boosted 30%, sleep attacks dont work',
 	psychic: 'Psychic Moves are boosted 30%, priority attacks dont work',
+	misty: 'Dragon Move Damage is halved, status conditions dont work',
 };
 
 export const TerrainIcon = ({ terrain }: { terrain?: BattleTerrain }) => {

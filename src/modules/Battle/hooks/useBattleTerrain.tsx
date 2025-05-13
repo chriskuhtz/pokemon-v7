@@ -1,7 +1,7 @@
 import { useCallback, useContext, useMemo, useState } from 'react';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 
-export type BattleTerrain = 'grassy' | 'electric' | 'psychic';
+export type BattleTerrain = 'grassy' | 'electric' | 'psychic' | 'misty';
 export interface TerrainObject {
 	type: BattleTerrain;
 	duration: number;

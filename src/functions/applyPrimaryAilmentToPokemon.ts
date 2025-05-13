@@ -18,10 +18,19 @@ export const applyPrimaryAilmentToPokemon = (
 	terrain: BattleTerrain | undefined,
 	suffix?: string
 ): { updatedTarget: BattlePokemon; updatedApplicator: BattlePokemon } => {
-	if (target.id !== applicator.id && terrain === 'electric') {
+	if (terrain === 'misty') {
+		addMessage({ message: 'The misty terrain prevents all status conditions' });
+		return { updatedApplicator: applicator, updatedTarget: target };
+	}
+	if (
+		target.id !== applicator.id &&
+		terrain === 'electric' &&
+		ailment === 'sleep'
+	) {
 		addMessage({ message: 'The electric terrain prevents sleep' });
 		return { updatedApplicator: applicator, updatedTarget: target };
 	}
+
 	if (target.ability === 'leaf-guard' && weather === 'sun') {
 		addMessage({
 			message: `${target.name} protects itself from ${ailment} with leaf guard`,

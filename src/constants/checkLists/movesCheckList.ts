@@ -1655,13 +1655,41 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/419/',
 		handled: true,
 	},
-	{ name: 'psycho-cut', url: 'https://pokeapi.co/api/v2/move/427/' },
-	{ name: 'mirror-shot', url: 'https://pokeapi.co/api/v2/move/429/' },
-	{ name: 'flash-cannon', url: 'https://pokeapi.co/api/v2/move/430/' },
-	{ name: 'rock-climb', url: 'https://pokeapi.co/api/v2/move/431/' },
-	{ name: 'draco-meteor', url: 'https://pokeapi.co/api/v2/move/434/' },
-	{ name: 'discharge', url: 'https://pokeapi.co/api/v2/move/435/' },
-	{ name: 'lava-plume', url: 'https://pokeapi.co/api/v2/move/436/' },
+	{
+		name: 'psycho-cut',
+		url: 'https://pokeapi.co/api/v2/move/427/',
+		handled: true,
+	},
+	{
+		name: 'mirror-shot',
+		url: 'https://pokeapi.co/api/v2/move/429/',
+		handled: true,
+	},
+	{
+		name: 'flash-cannon',
+		url: 'https://pokeapi.co/api/v2/move/430/',
+		handled: true,
+	},
+	{
+		name: 'rock-climb',
+		url: 'https://pokeapi.co/api/v2/move/431/',
+		handled: true,
+	},
+	{
+		name: 'draco-meteor',
+		url: 'https://pokeapi.co/api/v2/move/434/',
+		handled: true,
+	},
+	{
+		name: 'discharge',
+		url: 'https://pokeapi.co/api/v2/move/435/',
+		handled: true,
+	},
+	{
+		name: 'lava-plume',
+		url: 'https://pokeapi.co/api/v2/move/436/',
+		handled: true,
+	},
 	{ name: 'leaf-storm', url: 'https://pokeapi.co/api/v2/move/437/' },
 	{ name: 'power-whip', url: 'https://pokeapi.co/api/v2/move/438/' },
 	{ name: 'magnet-bomb', url: 'https://pokeapi.co/api/v2/move/443/' },
@@ -2729,6 +2757,13 @@ export const handledMoves = [
 	'iron-head',
 	'mud-bomb',
 	'avalanche',
+	'psycho-cut',
+	'mirror-shot',
+	'flash-cannon',
+	'rock-climb',
+	'draco-meteor',
+	'discharge',
+	'lava-plume',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

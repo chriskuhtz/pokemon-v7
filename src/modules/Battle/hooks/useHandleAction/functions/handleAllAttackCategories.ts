@@ -65,6 +65,7 @@ export const handleAllAttackCategories = ({
 		battleWeather,
 		battleFieldEffects,
 		dampy,
+		terrain,
 	});
 
 	updatedPokemon = ua;

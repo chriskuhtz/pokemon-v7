@@ -73,6 +73,10 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 		setBattleTerrain({ type: 'grassy', duration: 5 });
 		addMessage({ message: `${user.data.name} spreads grassy terrain` });
 	}
+	if (user.ability === 'misty-surge') {
+		setBattleTerrain({ type: 'misty', duration: 5 });
+		addMessage({ message: `${user.data.name} spreads misty terrain` });
+	}
 	if (
 		currentWeather &&
 		(user.ability === 'air-lock' || user.ability === 'cloud-nine')
