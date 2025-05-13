@@ -619,6 +619,8 @@ export const calculateDamage = (
 		attackType === 'grass' && terrain === 'grassy' ? 1.3 : 1;
 	const mistyTerrainFactor =
 		attackType === 'dragon' && terrain === 'misty' ? 0.5 : 1;
+	const shadowShieldFactor =
+		target.ability === 'shadow-shield' && target.damage === 0 ? 0.5 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -710,7 +712,8 @@ export const calculateDamage = (
 				punchingGloveFactor *
 				psychicTerrainFactor *
 				grassyTerrainFactor *
-				mistyTerrainFactor
+				mistyTerrainFactor *
+				shadowShieldFactor
 		),
 		1
 	);
