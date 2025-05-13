@@ -59,7 +59,9 @@ export const applyStatChangeToPokemon = (
 	}
 	if (
 		!selfInflicted &&
-		['white-smoke', 'clear-body'].includes(pokemon.ability) &&
+		['white-smoke', 'clear-body', 'full-metal-body'].includes(
+			pokemon.ability
+		) &&
 		modifier < 0
 	) {
 		if (addMessage) {

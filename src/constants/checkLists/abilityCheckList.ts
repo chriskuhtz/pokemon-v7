@@ -999,7 +999,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/228/',
 		handled: true,
 	},
-	{ name: 'full-metal-body', url: 'https://pokeapi.co/api/v2/ability/230/' },
+	{
+		name: 'full-metal-body',
+		url: 'https://pokeapi.co/api/v2/ability/230/',
+		handled: true,
+	},
 	{ name: 'shadow-shield', url: 'https://pokeapi.co/api/v2/ability/231/' },
 	{ name: 'prism-armor', url: 'https://pokeapi.co/api/v2/ability/232/' },
 	{ name: 'neuroforce', url: 'https://pokeapi.co/api/v2/ability/233/' },
@@ -1371,6 +1375,7 @@ export const abilityNames = [
 	'psychic-surge',
 	'grassy-surge',
 	'misty-surge',
+	'full-metal-body',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
