@@ -1,5 +1,6 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { routeN1Lure } from '../../../modules/BerryLure/BerryLure';
+import { travellingMerchantRouteN1 } from '../../../modules/TravellingMerchant/TravellingMerchant';
 import { erika } from './erika';
 import { giovanni } from './giovanni';
 
@@ -256,4 +257,5 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 	...erika,
 	giovanni,
 	routeN1Lure,
+	...travellingMerchantRouteN1,
 ];

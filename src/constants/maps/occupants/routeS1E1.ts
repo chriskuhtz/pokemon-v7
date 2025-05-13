@@ -1,6 +1,7 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { routeS1E1Lure } from '../../../modules/BerryLure/BerryLure';
+import { travellingMerchantRouteS1E1 } from '../../../modules/TravellingMerchant/TravellingMerchant';
 import { surge } from './surge';
 
 export const routeS1E1Occupants: OverworldMap['occupants'] = [
@@ -135,4 +136,5 @@ export const routeS1E1Occupants: OverworldMap['occupants'] = [
 
 	...surge,
 	routeS1E1Lure,
+	...travellingMerchantRouteS1E1,
 ];

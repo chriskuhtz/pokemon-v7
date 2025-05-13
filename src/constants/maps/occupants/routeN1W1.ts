@@ -1,4 +1,5 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
+import { travellingMerchantRouteN1W1 } from '../../../modules/TravellingMerchant/TravellingMerchant';
 import { champChris } from './champChris';
 
 export const routeN1W1Occupants: OverworldMap['occupants'] = [
@@ -40,11 +41,11 @@ export const routeN1W1Occupants: OverworldMap['occupants'] = [
 		type: 'ITEM',
 		x: 28,
 		y: 46,
-		item: 'max-repel',
+		item: 'damp-rock',
 		amount: 1,
 		conditionFunction: (s) =>
-			!s.handledOccupants.some((h) => h.id === 'max-repel-routeN1W1'),
-		id: 'max-repel-routeN1W1',
+			!s.handledOccupants.some((h) => h.id === 'damp-rock-routeN1W1'),
+		id: 'damp-rock-routeN1W1',
 	},
 	{
 		type: 'ITEM',
@@ -57,4 +58,5 @@ export const routeN1W1Occupants: OverworldMap['occupants'] = [
 		id: 'ice-stone-routeN1W1',
 	},
 	champChris,
+	...travellingMerchantRouteN1W1,
 ];
