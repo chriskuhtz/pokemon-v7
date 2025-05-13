@@ -403,7 +403,7 @@ export const useChooseAction = (
 			setPokemon((pokemon) =>
 				pokemon.map((p) => {
 					if (p.id === user.id) {
-						const m = determineMultiHits(move.data, p.ability);
+						const m = determineMultiHits(move.data, p.ability, getHeldItem(p));
 
 						return {
 							...user,

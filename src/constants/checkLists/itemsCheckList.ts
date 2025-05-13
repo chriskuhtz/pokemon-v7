@@ -1953,8 +1953,16 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/1700/',
 		handled: true,
 	},
-	{ name: 'covert-cloak', url: 'https://pokeapi.co/api/v2/item/1701/' },
-	{ name: 'loaded-dice', url: 'https://pokeapi.co/api/v2/item/1702/' },
+	{
+		name: 'covert-cloak',
+		url: 'https://pokeapi.co/api/v2/item/1701/',
+		handled: true,
+	},
+	{
+		name: 'loaded-dice',
+		url: 'https://pokeapi.co/api/v2/item/1702/',
+		handled: true,
+	},
 	{ name: 'terrain-extender', url: 'https://pokeapi.co/api/v2/item/896/' },
 	{ name: 'electric-seed', url: 'https://pokeapi.co/api/v2/item/898/' },
 	{ name: 'psychic-seed', url: 'https://pokeapi.co/api/v2/item/899/' },

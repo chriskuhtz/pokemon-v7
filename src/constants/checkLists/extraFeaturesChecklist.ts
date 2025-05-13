@@ -411,9 +411,7 @@ export const extraFeatureCheckList: {
 	{ name: 'historian event: ho oh' },
 	{ name: 'releasing pokemon should not end fullscreen mode' },
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
-
 	{ name: 'loosing to wild mons is sometimes buggy' },
-	{ name: 'snorlax used belly drum twice in a row' },
 	{
 		name: 'more kanto ken style trainers (dont forget to adjust quest limits)',
 	},
