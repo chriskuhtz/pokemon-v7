@@ -2271,6 +2271,45 @@ export const specialTrainers: Challenger[] = [
 	},
 	{
 		type: 'TRAINER',
+		id: 'Gym Leader Bugsy',
+		team: [
+			makeChallengerPokemon({
+				name: 'scizor',
+				xp: 125000,
+				heldItemName: 'quick-claw',
+				ability: 'technician',
+				fixedAbility: true,
+				firstMove: { name: 'swords-dance', usedPP: 0 },
+				secondMove: { name: 'bullet-punch', usedPP: 0 },
+			}),
+			makeChallengerPokemon({
+				name: 'pinsir',
+				xp: 125000,
+				firstMove: { name: 'x-scissor', usedPP: 0 },
+			}),
+			makeChallengerPokemon({
+				name: 'heracross',
+				xp: 125000,
+				heldItemName: 'hard-stone',
+				firstMove: { name: 'rock-slide', usedPP: 0 },
+			}),
+			makeChallengerPokemon({
+				name: 'volcarona',
+				xp: 125000,
+				heldItemName: 'charcoal',
+			}),
+			makeChallengerPokemon({
+				name: 'scolipede',
+				xp: 125000,
+				heldItemName: 'sitrus-berry',
+			}),
+		],
+		inventory: EmptyInventory,
+		availableAfter: 'report a bug',
+		trainer: { name: 'Gym Leader Bugsy', sprite: SpriteEnum.bugsy },
+	},
+	{
+		type: 'TRAINER',
 		id: 'Gym Leader Falkner',
 		team: [
 			makeChallengerPokemon({
