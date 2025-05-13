@@ -302,7 +302,7 @@ export const LureButton = () => {
 	if (saveFile.activatedLure) {
 		return (
 			<Card
-				icon={<ItemSprite item={'lure'} />}
+				icon={<ItemSprite item={saveFile.activatedLure ?? 'lure'} />}
 				onClick={() => {
 					patchSaveFileReducer({
 						activatedLure: undefined,

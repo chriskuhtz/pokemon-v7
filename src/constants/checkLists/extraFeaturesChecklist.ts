@@ -418,4 +418,5 @@ export const extraFeatureCheckList: {
 	{ name: 'rangers spruce,fir and pine' },
 	{ name: 'travelling merchant' },
 	{ name: 'terrain indicator' },
+	{ name: 'fix challenge field ranks' },
 ];
