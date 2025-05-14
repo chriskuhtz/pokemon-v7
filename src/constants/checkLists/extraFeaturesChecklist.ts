@@ -389,7 +389,7 @@ export const extraFeatureCheckList: {
 	{ name: 'travelling merchant', handled: true },
 	{ name: 'fix random abilities', handled: true },
 	{ name: 'fix challenge field ranks', handled: true },
-	{ name: 'ev quests guy' },
+	{ name: 'ev quests guy', handled: true },
 	{ name: 'procedural infinite cave with legendaries' },
 	{ name: 'wild apricorn trees' },
 	{ name: 'berry bushes' },

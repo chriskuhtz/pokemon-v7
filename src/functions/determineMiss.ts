@@ -1,4 +1,4 @@
-import { flyHitMoves, ohkoMoves } from '../constants/ohkoMoves';
+import { digHitMoves, flyHitMoves, ohkoMoves } from '../constants/ohkoMoves';
 import { passThroughProtectMoves } from '../constants/passThroughProtectMoves';
 import { soundBasedMoves } from '../constants/soundBasedMoves';
 import { BattleAttack } from '../interfaces/BattleActions';
@@ -102,7 +102,7 @@ export const determineMiss = (
 	if (targetIsFlying && !flyHitMoves.includes(attack.name)) {
 		return { miss: true };
 	}
-	if (targetIsUnderground && attack.name !== 'earthquake') {
+	if (targetIsUnderground && !digHitMoves.includes(attack.name)) {
 		return { miss: true };
 	}
 	if (attack.data.accuracy === null) {
