@@ -278,6 +278,11 @@ export const heldItems = [
 	'punching-glove',
 	'covert-cloak',
 	'loaded-dice',
+	'terrain-extender',
+	'electric-seed',
+	'grassy-seed',
+	'psychic-seed',
+	'misty-seed',
 ] as const;
 export const valuables = [
 	'auspicious-armor',
@@ -526,6 +531,12 @@ export function isCooked(x: string | undefined): boolean {
 			'old-gateau',
 			'energy-powder',
 			'heal-powder',
+			'health-mochi',
+			'muscle-mochi',
+			'resist-mochi',
+			'genius-mochi',
+			'clever-mochi',
+			'swift-mochi',
 		].includes(x)
 	);
 }

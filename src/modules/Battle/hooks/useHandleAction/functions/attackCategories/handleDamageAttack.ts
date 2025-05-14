@@ -138,12 +138,14 @@ export const handleDamageAttack = ({
 		updatedTarget = { ...updatedTarget, heldItemName: undefined };
 	}
 	if (
-		(move.name === 'thief' ||
-			move.name === 'covet' ||
-			(move.name === 'pluck' && isBerry(updatedTarget.heldItemName))) &&
-		updatedTarget.ability !== 'sticky-hold' &&
-		updatedTarget.heldItemName &&
-		!updatedAttacker.heldItemName
+		move.name === 'thief' ||
+		move.name === 'covet' ||
+		(move.name === 'pluck' && isBerry(updatedTarget.heldItemName)) ||
+		(move.name === 'bug-bite' &&
+			isBerry(updatedTarget.heldItemName) &&
+			updatedTarget.ability !== 'sticky-hold' &&
+			updatedTarget.heldItemName &&
+			!updatedAttacker.heldItemName)
 	) {
 		addMessage({
 			message: `${updatedAttacker.name} steals ${updatedTarget.name}'s ${updatedTarget.heldItemName}`,

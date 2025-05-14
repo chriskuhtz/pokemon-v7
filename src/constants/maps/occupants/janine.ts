@@ -54,6 +54,8 @@ const janineCondition = (s: SaveFile) => {
 	);
 };
 const trainerJanine: OverworldTrainer = {
+	profilePicture:
+		'https://archives.bulbagarden.net/media/upload/2/2d/VSJanine.png',
 	type: 'TRAINER',
 	x: 13,
 	y: 46,

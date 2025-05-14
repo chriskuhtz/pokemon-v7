@@ -29,6 +29,13 @@ export const applyEVGain = (
 	change: number,
 	heldItem?: ItemType
 ): StatObject => {
+	const totalEvs = Object.values(initialEvs).reduce(
+		(sum, summand) => sum + summand,
+		0
+	);
+	if (totalEvs >= 510) {
+		return initialEvs;
+	}
 	let actualChange = change;
 	if (heldItem === 'macho-brace') {
 		actualChange *= 2;

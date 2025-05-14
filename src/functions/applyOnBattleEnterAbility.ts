@@ -61,20 +61,22 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 		setWeather({ duration: 9000, type: 'hail' });
 		addMessage({ message: `${user.data.name} summoned a hail storm` });
 	}
+
+	const terrainDuration = getHeldItem(user) === 'terrain-extender' ? 8 : 5;
 	if (user.ability === 'electric-surge') {
-		setBattleTerrain({ type: 'electric', duration: 5 });
+		setBattleTerrain({ type: 'electric', duration: terrainDuration });
 		addMessage({ message: `${user.data.name} spreads electric terrain` });
 	}
 	if (user.ability === 'psychic-surge') {
-		setBattleTerrain({ type: 'psychic', duration: 5 });
+		setBattleTerrain({ type: 'psychic', duration: terrainDuration });
 		addMessage({ message: `${user.data.name} spreads psychic terrain` });
 	}
 	if (user.ability === 'grassy-surge') {
-		setBattleTerrain({ type: 'grassy', duration: 5 });
+		setBattleTerrain({ type: 'grassy', duration: terrainDuration });
 		addMessage({ message: `${user.data.name} spreads grassy terrain` });
 	}
 	if (user.ability === 'misty-surge') {
-		setBattleTerrain({ type: 'misty', duration: 5 });
+		setBattleTerrain({ type: 'misty', duration: terrainDuration });
 		addMessage({ message: `${user.data.name} spreads misty terrain` });
 	}
 	if (
@@ -174,14 +176,56 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 					true,
 					[],
 					addMessage,
-					'with download'
+					'download'
 				);
 			}
 
 			return p;
 		});
 	}
-	if (user.ability === 'download') {
+	if (user.ability === 'intrepid-sword') {
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.status !== 'ONFIELD') {
+				return p;
+			}
+			if (p.id === user.id) {
+				const stat: Stat = 'attack';
+				return applyStatChangeToPokemon(
+					p,
+					stat,
+					1,
+					true,
+					[],
+					addMessage,
+					'intrepid sword'
+				);
+			}
+
+			return p;
+		});
+	}
+	if (user.ability === 'dauntless-shield') {
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.status !== 'ONFIELD') {
+				return p;
+			}
+			if (p.id === user.id) {
+				const stat: Stat = 'defense';
+				return applyStatChangeToPokemon(
+					p,
+					stat,
+					1,
+					true,
+					[],
+					addMessage,
+					'dauntless shield'
+				);
+			}
+
+			return p;
+		});
+	}
+	if (user.ability === 'comatose') {
 		updatedPokemon = updatedPokemon.map((p) => {
 			if (p.status !== 'ONFIELD') {
 				return p;

@@ -511,7 +511,8 @@ export const BattleField = ({
 						updated,
 						(x) => collectedMessages.push(x),
 						(x) => collectedMessages.push(...x),
-						battleFieldEffects
+						battleFieldEffects,
+						battleTerrain
 					);
 
 					updated = applyEndOfTurnWeatherDamage(

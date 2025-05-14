@@ -86,11 +86,15 @@ export const LineUpSelection = ({
 					<h2 style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
 						{' '}
 						VS {trainer.name}{' '}
-						<Sprite
-							canvasKey={trainer.name}
-							id={trainer.sprite}
-							rotating={false}
-						/>
+						{trainer.profilePicture ? (
+							<img src={trainer.profilePicture} />
+						) : (
+							<Sprite
+								canvasKey={trainer.name}
+								id={trainer.sprite}
+								rotating={false}
+							/>
+						)}
 					</h2>
 				) : (
 					<h2>VS Wild Pokemon</h2>

@@ -591,7 +591,10 @@ export const calculateDamage = (
 	const brineFactor =
 		attack.name === 'brine' && target.damage / target.stats.hp > 0.5 ? 2 : 1;
 	const pluckFactor =
-		attack.name === 'pluck' && isBerry(target.heldItemName) ? 2 : 1;
+		(attack.name === 'pluck' || attack.name === 'bug-bite') &&
+		isBerry(target.heldItemName)
+			? 2
+			: 1;
 	const paybackFactor =
 		attack.name === 'payback' && target.moveQueue.length === 0 ? 2 : 1;
 	const assuranceFactor =
@@ -621,6 +624,10 @@ export const calculateDamage = (
 		attackType === 'dragon' && terrain === 'misty' ? 0.5 : 1;
 	const shadowShieldFactor =
 		target.ability === 'shadow-shield' && target.damage === 0 ? 0.5 : 1;
+	const neuroforceFactor =
+		attacker.ability === 'neuroforce' && typeFactor > 1 ? 1.25 : 1;
+	const prismArmorFactor =
+		attacker.ability === 'prism-armor' && typeFactor > 1 ? 0.75 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -713,7 +720,9 @@ export const calculateDamage = (
 				psychicTerrainFactor *
 				grassyTerrainFactor *
 				mistyTerrainFactor *
-				shadowShieldFactor
+				shadowShieldFactor *
+				neuroforceFactor *
+				prismArmorFactor
 		),
 		1
 	);

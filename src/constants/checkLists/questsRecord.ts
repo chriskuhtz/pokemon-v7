@@ -591,6 +591,14 @@ export const questNames = [
 	'reach ranger level 10',
 	'reach ranger level 20',
 	'report a bug',
+	'train a Pokemon to 200 Attack EV',
+	'train a Pokemon to 200 Special Attack EV',
+	'train a Pokemon to 200 Defense EV',
+	'train a Pokemon to 200 Special Defense EV',
+	'train a Pokemon to 200 Speed EV',
+	'train a Pokemon to 200 Hp EV',
+	'train the EV of two stats over 200 on a Pokemon',
+	'train a Pokemon to 510 EV',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -2621,6 +2629,131 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 		researchPoints: 20,
 		rewardItems: { 'great-ball': 10, 'lucky-egg': 1 },
+	},
+	'train a Pokemon to 200 Attack EV': {
+		conditionFunction: (s) =>
+			s.pokemon.some((p) => p.onTeam && p.effortValues.attack > 200),
+		kind: 'QUEST_LINE',
+		researchPoints: 25,
+		rewardItems: {
+			'power-anklet': 1,
+			'power-band': 1,
+			'power-belt': 1,
+			'power-bracer': 1,
+			'power-lens': 1,
+			'power-weight': 1,
+		},
+	},
+	'train a Pokemon to 200 Special Attack EV': {
+		conditionFunction: (s) =>
+			s.pokemon.some((p) => p.onTeam && p.effortValues['special-attack'] > 200),
+		kind: 'QUEST_LINE',
+		researchPoints: 25,
+		rewardItems: {
+			'health-mochi': 2,
+			'muscle-mochi': 2,
+			'resist-mochi': 2,
+			'genius-mochi': 2,
+			'clever-mochi': 2,
+			'swift-mochi': 2,
+		},
+	},
+	'train a Pokemon to 200 Defense EV': {
+		conditionFunction: (s) =>
+			s.pokemon.some((p) => p.onTeam && p.effortValues['defense'] > 200),
+		kind: 'QUEST_LINE',
+		researchPoints: 25,
+		rewardItems: {
+			'health-mochi': 2,
+			'muscle-mochi': 2,
+			'resist-mochi': 2,
+			'genius-mochi': 2,
+			'clever-mochi': 2,
+			'swift-mochi': 2,
+		},
+	},
+	'train a Pokemon to 200 Special Defense EV': {
+		conditionFunction: (s) =>
+			s.pokemon.some(
+				(p) => p.onTeam && p.effortValues['special-defense'] > 200
+			),
+		kind: 'QUEST_LINE',
+		researchPoints: 25,
+		rewardItems: {
+			'health-mochi': 2,
+			'muscle-mochi': 2,
+			'resist-mochi': 2,
+			'genius-mochi': 2,
+			'clever-mochi': 2,
+			'swift-mochi': 2,
+		},
+	},
+	'train a Pokemon to 200 Speed EV': {
+		conditionFunction: (s) =>
+			s.pokemon.some((p) => p.onTeam && p.effortValues['speed'] > 200),
+		kind: 'QUEST_LINE',
+		researchPoints: 25,
+		rewardItems: {
+			'health-mochi': 2,
+			'muscle-mochi': 2,
+			'resist-mochi': 2,
+			'genius-mochi': 2,
+			'clever-mochi': 2,
+			'swift-mochi': 2,
+		},
+	},
+	'train a Pokemon to 200 Hp EV': {
+		conditionFunction: (s) =>
+			s.pokemon.some((p) => p.onTeam && p.effortValues['hp'] > 200),
+		kind: 'QUEST_LINE',
+		researchPoints: 25,
+		rewardItems: {
+			'health-mochi': 2,
+			'muscle-mochi': 2,
+			'resist-mochi': 2,
+			'genius-mochi': 2,
+			'clever-mochi': 2,
+			'swift-mochi': 2,
+		},
+	},
+
+	'train the EV of two stats over 200 on a Pokemon': {
+		conditionFunction: (s) =>
+			s.pokemon.some(
+				(p) =>
+					p.onTeam &&
+					Object.values(p.effortValues).filter((e) => e > 200).length >= 2
+			),
+		kind: 'QUEST_LINE',
+		researchPoints: 50,
+		rewardItems: {
+			'health-mochi': 10,
+			'muscle-mochi': 10,
+			'resist-mochi': 10,
+			'genius-mochi': 10,
+			'clever-mochi': 10,
+			'swift-mochi': 10,
+		},
+	},
+	'train a Pokemon to 510 EV': {
+		conditionFunction: (s) =>
+			s.pokemon.some((p) => {
+				const totalEvs = Object.values(p.effortValues).reduce(
+					(sum, summand) => sum + summand,
+					0
+				);
+				return totalEvs >= 510;
+			}),
+		kind: 'QUEST_LINE',
+		researchPoints: 50,
+		rewardItems: {
+			'health-mochi': 20,
+			'muscle-mochi': 20,
+			'resist-mochi': 20,
+			'genius-mochi': 20,
+			'clever-mochi': 20,
+			'swift-mochi': 20,
+		},
 	},
 };
 

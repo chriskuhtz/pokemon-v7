@@ -40,6 +40,8 @@ const brockCondition = (s: SaveFile) => {
 	);
 };
 const trainerBrock: OverworldTrainer = {
+	profilePicture:
+		'https://archives.bulbagarden.net/media/upload/1/11/VSBrock.png',
 	type: 'TRAINER',
 	x: 8,
 	y: 28,

@@ -76,6 +76,9 @@ export const useGetBattleTeam = (
 					if (pokemon.fixedAbility) {
 						return pokemon.ability;
 					}
+					if (randomAbilities) {
+						return getRandomEntry([...abilityNames]);
+					}
 
 					if (possibleAbilities.includes(pokemon.ability)) {
 						return pokemon.ability;

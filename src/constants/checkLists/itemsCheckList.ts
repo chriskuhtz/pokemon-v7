@@ -1963,11 +1963,31 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/1702/',
 		handled: true,
 	},
-	{ name: 'terrain-extender', url: 'https://pokeapi.co/api/v2/item/896/' },
-	{ name: 'electric-seed', url: 'https://pokeapi.co/api/v2/item/898/' },
-	{ name: 'psychic-seed', url: 'https://pokeapi.co/api/v2/item/899/' },
-	{ name: 'misty-seed', url: 'https://pokeapi.co/api/v2/item/900/' },
-	{ name: 'grassy-seed', url: 'https://pokeapi.co/api/v2/item/901/' },
+	{
+		name: 'terrain-extender',
+		url: 'https://pokeapi.co/api/v2/item/896/',
+		handled: true,
+	},
+	{
+		name: 'electric-seed',
+		url: 'https://pokeapi.co/api/v2/item/898/',
+		handled: true,
+	},
+	{
+		name: 'psychic-seed',
+		url: 'https://pokeapi.co/api/v2/item/899/',
+		handled: true,
+	},
+	{
+		name: 'misty-seed',
+		url: 'https://pokeapi.co/api/v2/item/900/',
+		handled: true,
+	},
+	{
+		name: 'grassy-seed',
+		url: 'https://pokeapi.co/api/v2/item/901/',
+		handled: true,
+	},
 	/**
 	 * FOODS AND FOOD RELATED
 	 */

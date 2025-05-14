@@ -35,6 +35,8 @@ const erikaCondition = (s: SaveFile) => {
 	);
 };
 const trainerErika: OverworldTrainer = {
+	profilePicture:
+		'https://archives.bulbagarden.net/media/upload/5/5a/VSErika.png',
 	type: 'TRAINER',
 	x: 25,
 	y: 8,

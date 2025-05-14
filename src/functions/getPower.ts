@@ -169,7 +169,7 @@ export const getPower = (
 	if (attack.name === 'fury-cutter') {
 		return (attack.data.power ?? 0) * (attacker.furyCutterStack ?? 1);
 	}
-	if (attack.name === 'low-kick') {
+	if (attack.name === 'low-kick' || attack.name === 'grass-knot') {
 		const actualWeight = getActualWeight(
 			target.data.weight,
 			target.ability,

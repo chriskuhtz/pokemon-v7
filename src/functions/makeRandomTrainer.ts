@@ -2267,7 +2267,12 @@ export const specialTrainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		availableAfter: 'catch Haunter and Mightyena',
-		trainer: { name: 'Gym Leader Morty', sprite: SpriteEnum.morty },
+		trainer: {
+			name: 'Gym Leader Morty',
+			sprite: SpriteEnum.morty,
+			profilePicture:
+				'https://archives.bulbagarden.net/media/upload/0/04/VSMorty.png',
+		},
 	},
 	{
 		type: 'TRAINER',
@@ -2306,7 +2311,12 @@ export const specialTrainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		availableAfter: 'report a bug',
-		trainer: { name: 'Gym Leader Bugsy', sprite: SpriteEnum.bugsy },
+		trainer: {
+			name: 'Gym Leader Bugsy',
+			sprite: SpriteEnum.bugsy,
+			profilePicture:
+				'https://archives.bulbagarden.net/media/upload/2/2a/VSBugsy.png',
+		},
 	},
 	{
 		type: 'TRAINER',
@@ -2340,7 +2350,12 @@ export const specialTrainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		availableAfter: 'catch the legendary bird of ice',
-		trainer: { name: 'Gym Leader Falkner', sprite: SpriteEnum.falkner },
+		trainer: {
+			name: 'Gym Leader Falkner',
+			sprite: SpriteEnum.falkner,
+			profilePicture:
+				'https://archives.bulbagarden.net/media/upload/5/5a/VSFalkner.png',
+		},
 	},
 	{
 		type: 'TRAINER',
@@ -2379,7 +2394,12 @@ export const specialTrainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		availableAfter: 'deal 10000 damage with one attack',
-		trainer: { name: 'Gym Leader Chuck', sprite: SpriteEnum.chuck },
+		trainer: {
+			name: 'Gym Leader Chuck',
+			sprite: SpriteEnum.chuck,
+			profilePicture:
+				'https://archives.bulbagarden.net/media/upload/a/af/VSChuck.png',
+		},
 	},
 	{
 		type: 'TRAINER',
@@ -2424,7 +2444,12 @@ export const specialTrainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		availableAfter: 'revive all different fossils',
-		trainer: { name: 'Gym Leader Roark', sprite: SpriteEnum.roark },
+		trainer: {
+			name: 'Gym Leader Roark',
+			sprite: SpriteEnum.roark,
+			profilePicture:
+				'https://archives.bulbagarden.net/media/upload/6/62/VSRoark.png',
+		},
 	},
 ];
 

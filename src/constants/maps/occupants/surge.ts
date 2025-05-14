@@ -38,6 +38,8 @@ const surgeCondition = (s: SaveFile) => {
 	);
 };
 const trainerSurge: OverworldTrainer = {
+	profilePicture:
+		'https://archives.bulbagarden.net/media/upload/4/46/VSLt_Surge.png',
 	type: 'TRAINER',
 	x: 45,
 	y: 7,
