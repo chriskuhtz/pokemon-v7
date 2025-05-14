@@ -388,6 +388,7 @@ export const extraFeatureCheckList: {
 	{ name: 'available items need to be reduced by selected', handled: true },
 	{ name: 'travelling merchant', handled: true },
 	{ name: 'fix random abilities', handled: true },
+	{ name: 'fix challenge field ranks', handled: true },
 	{ name: 'iv quests guy' },
 	{ name: 'ev quests guy' },
 	{ name: 'procedural infinite cave with legendaries' },
@@ -418,6 +419,5 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'trainer ai should consider flying,dig, diving' },
 	{ name: 'rangers spruce,fir and pine' },
-	{ name: 'fix challenge field ranks' },
 	{ name: 'normalize data to prevent slow down' },
 ];

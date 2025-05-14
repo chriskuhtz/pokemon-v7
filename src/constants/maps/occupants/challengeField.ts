@@ -40,11 +40,16 @@ export const challengeFieldOccupants: OverworldMap['occupants'] = [
 			return 4 + 4 * factor;
 		};
 
+		const ori = [2, 10, 18, 26, 34, 42].includes(x()) ? 'UP' : 'DOWN';
+
+		const challengeFieldRank =
+			ori === 'UP' ? 1 + index : 10 + Math.floor((9 * (x() - 2)) / 4 - y() / 4);
+
 		const assembled: OverworldTrainer = {
 			type: 'TRAINER',
 			x: x(),
 			y: y(),
-			orientation: [2, 10, 18, 26, 34, 42].includes(x()) ? 'UP' : 'DOWN',
+			orientation: ori,
 			id,
 			battleTeamConfig: {
 				assignGender: true,
@@ -60,7 +65,7 @@ export const challengeFieldOccupants: OverworldMap['occupants'] = [
 			name: id,
 			unhandledMessage: ['.', '..', '...'],
 			team: t.team,
-			challengeFieldRank: 1 + index,
+			challengeFieldRank,
 		};
 		return assembled;
 	}),
