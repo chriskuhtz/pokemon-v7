@@ -131,11 +131,11 @@ export const Settings = (): JSX.Element => {
 					setValue={(x) => setState({ ...state, randomHeldItems: x })}
 					label={'Random Held Items:'}
 				/>
-				{/* <ToggleRow
+				<ToggleRow
 					value={!!state.randomAbilities}
 					setValue={(x) => setState({ ...state, randomAbilities: x })}
 					label={'Random Abilities:'}
-				/> */}
+				/>
 				<ToggleRow
 					value={!!state.randomLearnSets}
 					setValue={(x) => setState({ ...state, randomLearnSets: x })}
