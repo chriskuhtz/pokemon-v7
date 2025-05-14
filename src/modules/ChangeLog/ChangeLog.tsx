@@ -62,6 +62,8 @@ const ChangeLogV22 = (): JSX.Element => {
 
 			<ol style={{ lineHeight: '1.5rem' }}>
 				<li>Fixed Random Abilities</li>
+				<li>Fixed Challenge Field Ranks</li>
+				<li>Terrain Items</li>
 				<li>New Abilities, Items and Attacks</li>
 			</ol>
 		</>

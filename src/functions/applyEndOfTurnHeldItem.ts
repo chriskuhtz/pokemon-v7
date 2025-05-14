@@ -8,6 +8,7 @@ import {
 } from '../interfaces/Item';
 import { getRandomBoostableStat, Stat } from '../interfaces/StatObject';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
+import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { applyItemToPokemon } from './applyItemToPokemon';
 import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
@@ -19,7 +20,8 @@ export const applyEndOfTurnHeldItem = (
 	pokemon: BattlePokemon,
 	addMessage: (x: string) => void,
 	addMultipleMessages: (x: string[]) => void,
-	battleFieldEffects: BattleFieldEffect[]
+	battleFieldEffects: BattleFieldEffect[],
+	terrain: BattleTerrain | undefined
 ): BattlePokemon => {
 	const unnerved = battleFieldEffects.some(
 		(b) => b.type === 'unnerve' && b.ownerId !== pokemon.ownerId
@@ -308,6 +310,50 @@ export const applyEndOfTurnHeldItem = (
 	if (heldItem === 'flame-orb' && !pokemon.primaryAilment) {
 		addMessage(`${pokemon.name} burned itself with toxic orb`);
 		return { ...pokemon, primaryAilment: { type: 'burn' } };
+	}
+	if (heldItem === 'electric-seed' && terrain === 'electric') {
+		return applyStatChangeToPokemon(
+			{ ...pokemon, heldItemName: undefined },
+			'defense',
+			1,
+			true,
+			battleFieldEffects,
+			(x) => addMessage(x.message),
+			'electric seed'
+		);
+	}
+	if (heldItem === 'psychic-seed' && terrain === 'psychic') {
+		return applyStatChangeToPokemon(
+			{ ...pokemon, heldItemName: undefined },
+			'special-defense',
+			1,
+			true,
+			battleFieldEffects,
+			(x) => addMessage(x.message),
+			'psychic seed'
+		);
+	}
+	if (heldItem === 'grassy-seed' && terrain === 'grassy') {
+		return applyStatChangeToPokemon(
+			{ ...pokemon, heldItemName: undefined },
+			'defense',
+			1,
+			true,
+			battleFieldEffects,
+			(x) => addMessage(x.message),
+			'grassy seed'
+		);
+	}
+	if (heldItem === 'misty-seed' && terrain === 'misty') {
+		return applyStatChangeToPokemon(
+			{ ...pokemon, heldItemName: undefined },
+			'special-defense',
+			1,
+			true,
+			battleFieldEffects,
+			(x) => addMessage(x.message),
+			'misty seed'
+		);
 	}
 
 	return pokemon;
