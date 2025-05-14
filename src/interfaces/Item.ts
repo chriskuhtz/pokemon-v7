@@ -278,6 +278,7 @@ export const heldItems = [
 	'punching-glove',
 	'covert-cloak',
 	'loaded-dice',
+	'terrain-extender',
 ] as const;
 export const valuables = [
 	'auspicious-armor',

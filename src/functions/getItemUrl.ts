@@ -48,6 +48,7 @@ const hasCustomSprite: ItemType[] = [
 	'punching-glove',
 	'covert-cloak',
 	'loaded-dice',
+	'terrain-extender',
 ];
 
 export const getItemUrl = (item: ItemType): string => {

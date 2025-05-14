@@ -60,7 +60,10 @@ const ChangeLogV22 = (): JSX.Element => {
 		<>
 			<h3>0.22:</h3>
 
-			<ol style={{ lineHeight: '1.5rem' }}></ol>
+			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>Fixed Random Abilities</li>
+				<li>New Abilities, Items and Attacks</li>
+			</ol>
 		</>
 	);
 };
