@@ -200,6 +200,16 @@ export const determineTypeFactor = (
 		return 1;
 	}
 
+	if (res > 1 && target.ability === 'prism-armor') {
+		if (addMessage) {
+			addMessage({
+				message: `${target.name} reduces super effective damage with prism armor`,
+			});
+		}
+
+		return 0.75;
+	}
+
 	if (res === 0) {
 		if (addMessage) {
 			addMessage({ message: 'It has no effect' });
