@@ -189,10 +189,6 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 				return p;
 			}
 			if (p.id === user.id) {
-				const target = pokemon.find((p) => p.ownerId !== user.ownerId);
-				if (!target) {
-					return { ...p, participatedInBattle: true };
-				}
 				const stat: Stat = 'attack';
 				return applyStatChangeToPokemon(
 					p,
@@ -202,6 +198,27 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 					[],
 					addMessage,
 					'intrepid sword'
+				);
+			}
+
+			return p;
+		});
+	}
+	if (user.ability === 'dauntless-shield') {
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.status !== 'ONFIELD') {
+				return p;
+			}
+			if (p.id === user.id) {
+				const stat: Stat = 'defense';
+				return applyStatChangeToPokemon(
+					p,
+					stat,
+					1,
+					true,
+					[],
+					addMessage,
+					'dauntless shield'
 				);
 			}
 

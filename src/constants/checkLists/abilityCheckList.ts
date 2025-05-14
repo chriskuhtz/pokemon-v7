@@ -1024,7 +1024,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/234/',
 		handled: true,
 	},
-	{ name: 'dauntless-shield', url: 'https://pokeapi.co/api/v2/ability/235/' },
+	{
+		name: 'dauntless-shield',
+		url: 'https://pokeapi.co/api/v2/ability/235/',
+		handled: true,
+	},
 	{ name: 'libero', url: 'https://pokeapi.co/api/v2/ability/236/' },
 	{ name: 'ball-fetch', url: 'https://pokeapi.co/api/v2/ability/237/' },
 	{ name: 'cotton-down', url: 'https://pokeapi.co/api/v2/ability/238/' },
@@ -1396,6 +1400,7 @@ export const abilityNames = [
 	'prism-armor',
 	'neuroforce',
 	'intrepid-sword',
+	'dauntless-shield',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
