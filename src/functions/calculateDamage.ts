@@ -591,7 +591,10 @@ export const calculateDamage = (
 	const brineFactor =
 		attack.name === 'brine' && target.damage / target.stats.hp > 0.5 ? 2 : 1;
 	const pluckFactor =
-		attack.name === 'pluck' && isBerry(target.heldItemName) ? 2 : 1;
+		(attack.name === 'pluck' || attack.name === 'bug-bite') &&
+		isBerry(target.heldItemName)
+			? 2
+			: 1;
 	const paybackFactor =
 		attack.name === 'payback' && target.moveQueue.length === 0 ? 2 : 1;
 	const assuranceFactor =
