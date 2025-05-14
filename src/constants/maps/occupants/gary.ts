@@ -104,6 +104,8 @@ const trainerGary: OverworldTrainer = {
 	unhandledMessage: ['I am always looking for a challenge'],
 	name: 'Gym Leader Gary',
 	team: garyTeam,
+	profilePicture:
+		'https://archives.bulbagarden.net/media/upload/8/89/VSBlue.png',
 	battleTeamConfig: {
 		assignGender: false,
 		assignHeldItem: false,

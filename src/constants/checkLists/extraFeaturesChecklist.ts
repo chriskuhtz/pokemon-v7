@@ -390,6 +390,8 @@ export const extraFeatureCheckList: {
 	{ name: 'fix random abilities', handled: true },
 	{ name: 'fix challenge field ranks', handled: true },
 	{ name: 'ev quests guy', handled: true },
+	{ name: 'profile pictures for gym leaders', handled: true },
+	{ name: 'sableye gem producer' },
 	{ name: 'procedural infinite cave with legendaries' },
 	{ name: 'wild apricorn trees' },
 	{ name: 'berry bushes' },
@@ -404,7 +406,6 @@ export const extraFeatureCheckList: {
 	{
 		name: 'pokemon helpers for producer upgrades (more zigzagoons for forager, etc)',
 	},
-	{ name: 'sableye gem producer' },
 	{
 		name: 'forager army quest: have 6 zigzagoon with pick up in your party. Given by zigzagoon guy',
 	},

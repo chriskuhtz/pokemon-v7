@@ -107,6 +107,8 @@ const giovanniTeam = [
 ];
 
 export const giovanni: OverworldTrainer = {
+	profilePicture:
+		'https://archives.bulbagarden.net/media/upload/2/25/VSGiovanni.png',
 	type: 'TRAINER',
 	x: 25,
 	y: 30,

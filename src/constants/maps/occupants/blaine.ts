@@ -58,6 +58,8 @@ const trainerBlaine: OverworldTrainer = {
 		assignNaturalAbility: false,
 		generateIvs: true,
 	},
+	profilePicture:
+		'https://archives.bulbagarden.net/media/upload/3/32/VSBlaine.png',
 };
 const npcBlaine: OverworldNpc = {
 	type: 'NPC',

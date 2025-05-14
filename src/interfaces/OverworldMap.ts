@@ -133,6 +133,7 @@ export interface OverworldTrainer extends BaseOccupant {
 	name: string;
 	challengeFieldRank?: number;
 	battleTeamConfig: BattleTeamConfig;
+	profilePicture?: string;
 }
 export interface Portal extends BaseOccupant {
 	type: 'PORTAL';

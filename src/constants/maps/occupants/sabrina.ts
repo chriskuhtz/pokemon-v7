@@ -59,6 +59,8 @@ const sabrinaCondition = (s: SaveFile) => {
 	);
 };
 const trainerSabrina: OverworldTrainer = {
+	profilePicture:
+		'https://archives.bulbagarden.net/media/upload/5/58/VSSabrina.png',
 	type: 'TRAINER',
 	x: 3,
 	y: 3,

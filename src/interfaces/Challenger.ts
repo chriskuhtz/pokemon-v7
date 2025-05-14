@@ -8,6 +8,7 @@ import { OwnedPokemon } from './OwnedPokemon';
 export interface TrainerInfo {
 	name: string;
 	sprite: string;
+	profilePicture?: string;
 }
 export interface Challenger {
 	type: 'TRAINER' | 'WILD';
