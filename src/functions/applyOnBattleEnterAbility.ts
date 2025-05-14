@@ -176,14 +176,39 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 					true,
 					[],
 					addMessage,
-					'with download'
+					'download'
 				);
 			}
 
 			return p;
 		});
 	}
-	if (user.ability === 'download') {
+	if (user.ability === 'intrepid-sword') {
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.status !== 'ONFIELD') {
+				return p;
+			}
+			if (p.id === user.id) {
+				const target = pokemon.find((p) => p.ownerId !== user.ownerId);
+				if (!target) {
+					return { ...p, participatedInBattle: true };
+				}
+				const stat: Stat = 'attack';
+				return applyStatChangeToPokemon(
+					p,
+					stat,
+					1,
+					true,
+					[],
+					addMessage,
+					'intrepid sword'
+				);
+			}
+
+			return p;
+		});
+	}
+	if (user.ability === 'comatose') {
 		updatedPokemon = updatedPokemon.map((p) => {
 			if (p.status !== 'ONFIELD') {
 				return p;
