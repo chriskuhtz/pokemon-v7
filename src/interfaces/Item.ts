@@ -531,6 +531,12 @@ export function isCooked(x: string | undefined): boolean {
 			'old-gateau',
 			'energy-powder',
 			'heal-powder',
+			'health-mochi',
+			'muscle-mochi',
+			'resist-mochi',
+			'genius-mochi',
+			'clever-mochi',
+			'swift-mochi',
 		].includes(x)
 	);
 }

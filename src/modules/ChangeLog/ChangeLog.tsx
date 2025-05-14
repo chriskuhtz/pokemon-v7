@@ -64,6 +64,7 @@ const ChangeLogV22 = (): JSX.Element => {
 				<li>Fixed Random Abilities</li>
 				<li>Fixed Challenge Field Ranks</li>
 				<li>Terrain Items</li>
+				<li>New Quest line</li>
 				<li>New Abilities, Items and Attacks</li>
 			</ol>
 		</>

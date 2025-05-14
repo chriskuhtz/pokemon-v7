@@ -13,6 +13,7 @@ import { bugsy } from './bugsy';
 import { rewardChris } from './champChris';
 import { chuckLine } from './chuckLine';
 import { elmLine } from './elmLine';
+import { evExpertLine } from './evExpert';
 import { falknerLine } from './falknerLine';
 import { mortyLine } from './mortyLine';
 import { oakLine } from './oakLine';
@@ -325,6 +326,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 	...seedvaultResearcher,
 	...dragoniteTaxi,
 	...chuckLine,
+	...evExpertLine,
 	rewardChris,
 	bugsy,
 ];

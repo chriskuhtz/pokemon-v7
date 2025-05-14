@@ -24,6 +24,7 @@ export const campUpgradeNames = [
 	'training field 3',
 	'training field 4',
 	'training field 5',
+	'invite effort value expert',
 	'build combee hive',
 	'build miltank farm',
 	'machete certification',
@@ -68,6 +69,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'create seed vault': ['bulletin_board', 'berry_farm'],
 	'invite apricorn smith kurt': ['bulletin_board', 'berry_farm'],
 	'invite move tutor': baseRequirements,
+	'invite effort value expert': ['invite move tutor', 'training field 1'],
 	'invite ghost expert morty': ['machete certification'],
 	'invite fighting expert chuck': ['machete certification'],
 	'invite flying pokemon expert falkner': ['machete certification'],
@@ -149,6 +151,7 @@ export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
 	'berry lure station routeS1W1': 'Research',
 	'invite historian': 'Research',
 	'invite move tutor': 'Training',
+	'invite effort value expert': 'Training',
 	'training field 1': 'Training',
 	'training field 2': 'Training',
 	'training field 3': 'Training',
@@ -171,6 +174,7 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	berry_farm: 'Berries and Apricorns are our main resources',
 	'invite apricorn smith kurt': 'Pokeballs can be made from apricorns',
 	'invite move tutor': 'Teaches your Pokemon new moves',
+	'invite effort value expert': 'Explains those weird stat values',
 	'invite ghost expert morty':
 		'The Gym Leader from Ecruteak studies ghost pokemon',
 	'invite fighting expert chuck':

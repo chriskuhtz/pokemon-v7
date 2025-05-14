@@ -28,8 +28,6 @@ import { MovesDisplay } from './MovesDisplay';
 import { NickNameModal } from './NickNameModal';
 import { StatDisplay } from './StatDisplay';
 
-export const HIDDEN_STATS = ['accuracy', 'evasion', 'hp'];
-
 export const OwnedPokemonCardContent = ({
 	ownedPokemon,
 	data,

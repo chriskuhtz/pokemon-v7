@@ -4,7 +4,9 @@ import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { PokemonData } from '../../../interfaces/PokemonData';
 import { Chip } from '../../../uiComponents/Chip/Chip';
 import { Stack } from '../../../uiComponents/Stack/Stack';
-import { HIDDEN_STATS } from './OwnedPokemonCardContent';
+
+export const HIDDEN_STATS = ['accuracy', 'evasion'];
+export const HIDDEN_STATS_FOR_TOTAL = ['accuracy', 'evasion', 'hp'];
 
 export const StatDisplay = ({
 	ownedPokemon,
@@ -59,10 +61,10 @@ export const StatDisplay = ({
 									ownedPokemon.effortValues
 								)
 							)
-								.filter(([stat]) => !HIDDEN_STATS.includes(stat))
+								.filter(([stat]) => !HIDDEN_STATS_FOR_TOTAL.includes(stat))
 								.sort((a, b) => b[1] - a[1])[0][1];
 
-							if (!HIDDEN_STATS.includes(stat)) {
+							if (!HIDDEN_STATS_FOR_TOTAL.includes(stat)) {
 								return (
 									<Chip
 										key={stat}
