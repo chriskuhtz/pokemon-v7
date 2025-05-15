@@ -54,7 +54,6 @@ export interface BaseOccupant {
 	y: number;
 	conditionFunction: (saveFile: SaveFile) => boolean;
 }
-
 export interface OverworldItem extends BaseOccupant {
 	type: 'ITEM';
 	item: ItemType;
@@ -116,7 +115,6 @@ export interface OverworldHoneyTree extends BaseOccupant {
 export interface OverworldHallowedTower extends BaseOccupant {
 	type: 'HALLOWED_TOWER';
 }
-
 export interface SwarmRadar extends BaseOccupant {
 	type: 'SWARM_RADAR';
 }
@@ -240,14 +238,14 @@ export interface OverworldEncounter {
 export interface OverworldMap {
 	id: MapId;
 	possibleEncounters: EncounterMap;
-	tileMap: GameMap;
+	tileMap: TileMap;
 	occupants: Occupant[];
 	weather?: WeatherType;
 	timeOfDayShadersMap: Record<TimeOfDay, string>;
 	tilesetUrl: string;
 }
 
-export interface GameMap {
+export interface TileMap {
 	baseLayer: TileIdentifier[][];
 	encounterLayer: (TileIdentifier | null)[][];
 	decorationLayer: (TileIdentifier | null)[][];

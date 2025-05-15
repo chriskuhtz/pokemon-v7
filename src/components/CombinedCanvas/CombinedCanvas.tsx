@@ -1,12 +1,12 @@
 import { JSX } from 'react';
 import { useDrawBackground } from '../../hooks/useDrawBackground';
-import { GameMap } from '../../interfaces/OverworldMap';
+import { TileMap } from '../../interfaces/OverworldMap';
 export const CombinedCanvas = ({
 	map,
 	tileSetUrl,
 	tileSize,
 }: {
-	map: GameMap;
+	map: TileMap;
 	tileSetUrl: string;
 	tileSize: number;
 }): JSX.Element => {

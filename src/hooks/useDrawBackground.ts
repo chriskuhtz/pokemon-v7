@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { GameMap } from '../interfaces/OverworldMap';
+import { TileMap } from '../interfaces/OverworldMap';
 
 export const useDrawBackground = (
 	canvasId: string,
-	map: GameMap,
+	map: TileMap,
 	tileSetSource: string,
 	tileSize: number
 ) => {
@@ -125,7 +125,7 @@ export const useDrawBackground = (
 
 export const useDrawForeground = (
 	canvasId: string,
-	map: GameMap,
+	map: TileMap,
 	tileSetSource: string,
 	tileSize: number
 ) => {
