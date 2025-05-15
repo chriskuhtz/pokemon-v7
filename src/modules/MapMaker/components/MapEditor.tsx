@@ -69,6 +69,27 @@ export const MapEditor = ({
 	return (
 		<div>
 			<h2>{initialMap.id}</h2>
+			<button
+				style={{
+					color: 'white',
+					backgroundColor: 'rgba(0,0,0,0)',
+					marginBottom: '.5rem',
+				}}
+				onClick={() => {
+					navigator.clipboard.writeText(
+						JSON.stringify({
+							baseLayer,
+							encounterLayer,
+							obstacleLayer,
+							decorationLayer,
+							foregroundLayer,
+							waterLayer,
+						})
+					);
+				}}
+			>
+				Copy to Clipboard
+			</button>
 			<div style={{ display: 'flex', gap: '1rem' }}>
 				{[
 					'Base',
@@ -80,7 +101,10 @@ export const MapEditor = ({
 				].map((t) => (
 					<button
 						key={t}
-						style={{ color: t === activeTab ? 'wheat' : 'lightgray' }}
+						style={{
+							color: t === activeTab ? 'wheat' : 'lightgray',
+							backgroundColor: 'rgba(0,0,0,0)',
+						}}
 						onClick={() => setActiveTab(t as LayerName)}
 					>
 						{t}
@@ -125,34 +149,6 @@ export const MapEditor = ({
 					randomFill={randomFill}
 				/>
 			</div>
-
-			<a
-				style={{ color: 'white' }}
-				href={
-					'data:text/json;charset=utf-8,' +
-					encodeURIComponent(JSON.stringify(initialMap))
-				}
-				download={`map_${new Date().getTime()}.json`}
-			>
-				Download
-			</a>
-			<a
-				style={{ color: 'white', paddingLeft: '2rem' }}
-				onClick={() => {
-					navigator.clipboard.writeText(
-						JSON.stringify({
-							baseLayer,
-							encounterLayer,
-							obstacleLayer,
-							decorationLayer,
-							foregroundLayer,
-							waterLayer,
-						})
-					);
-				}}
-			>
-				Copy to Clipboard
-			</a>
 		</div>
 	);
 };
