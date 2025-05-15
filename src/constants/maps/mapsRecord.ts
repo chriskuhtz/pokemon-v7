@@ -1,3 +1,4 @@
+import { defaultShaderMap } from '../../functions/getTimeOfDay';
 import { OverworldMap } from '../../interfaces/OverworldMap';
 import { camp } from './camp';
 import { caveW1 } from './caveW1';
@@ -56,4 +57,27 @@ export const mapDisplayNames: Record<MapId, string> = {
 	camp: 'kuma camp',
 	onixCave: 'onix cave',
 	challengeField: 'challenge field',
+};
+
+export const Emptymap: OverworldMap = {
+	id: 'camp',
+	occupants: [],
+	possibleEncounters: {
+		BASE: [],
+		WATER: [],
+		MORNING: [],
+		EVENING: [],
+		DAY: [],
+		NIGHT: [],
+	},
+	timeOfDayShadersMap: defaultShaderMap,
+	tilesetUrl: '/tilesets/palletTown.png',
+	tileMap: {
+		baseLayer: [],
+		waterLayer: [],
+		foregroundLayer: [],
+		encounterLayer: [],
+		obstacleLayer: [],
+		decorationLayer: [],
+	},
 };

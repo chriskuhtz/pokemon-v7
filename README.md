@@ -1,50 +1,23 @@
-# React + TypeScript + Vite
+# Running the project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. create a new Branch
+2. npm install
+3. npm run dev
+4. put a devmode=true entry into your localstorage
 
-Currently, two official plugins are available:
+# Creating a new Map
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. create a new MapId in mapsRecord.ts
+2. create a new Map File with an export of type OverworldMap in /src/constants/maps (you can copy EmptyMap from mapsRecord.ts)
+3. link your mapId to the exported map in mapsRecord.ts
+4. add your mapId to mapMakerRoutes in Routing.ts
+5. start the project with devmode
+6. access the mapmaker through the main menu
 
-## Expanding the ESLint configuration
+# Adding a tileset
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. tilesets are png files in which 16x16px represent one tile for the game
+2. add a new tileset png in /public/tilesets
+3. define it in tileMaps.ts with its size
+4. add it to tileMapsRecord in tileMaps.ts
+5. now you can add it as tilesetUrl to your map
