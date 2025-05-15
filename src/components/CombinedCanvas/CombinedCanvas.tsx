@@ -5,15 +5,18 @@ export const CombinedCanvas = ({
 	map,
 	tileSetUrl,
 	tileSize,
+	style,
 }: {
 	map: TileMap;
 	tileSetUrl: string;
 	tileSize: number;
+	style?: React.CSSProperties;
 }): JSX.Element => {
 	useDrawBackground('assembled', map, tileSetUrl, tileSize);
 
 	return (
 		<canvas
+			style={style}
 			id="assembled"
 			height={map.baseLayer.length * tileSize}
 			width={map.baseLayer[0].length * tileSize}
