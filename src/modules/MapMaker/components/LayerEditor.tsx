@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import { CombinedCanvas } from '../../../components/CombinedCanvas/CombinedCanvas';
-import { TileIdentifier, TileMap } from '../../../interfaces/OverworldMap';
+import {
+	Occupant,
+	TileIdentifier,
+	TileMap,
+} from '../../../interfaces/OverworldMap';
 
+import { useDrawOccupants } from '../../Overworld/hooks/useDrawOccupants';
 import { LayerName } from '../hooks/useMapEditor';
 
 const unmemoedLayerEditor = ({
@@ -16,6 +21,7 @@ const unmemoedLayerEditor = ({
 	clear,
 	tileSetUrl,
 	tileMap,
+	occupants,
 }: {
 	layerName: LayerName;
 	layer: (TileIdentifier | null)[][];
@@ -28,6 +34,7 @@ const unmemoedLayerEditor = ({
 	randomFill: (layer: LayerName, percentage: number) => void;
 	tileSetUrl: string;
 	tileMap: TileMap;
+	occupants: Occupant[];
 }) => {
 	return (
 		<>
@@ -81,6 +88,7 @@ const unmemoedLayerEditor = ({
 					changeRow={changeRow}
 					tileSetUrl={tileSetUrl}
 					tileMap={tileMap}
+					occupants={occupants}
 				/>
 				<div style={{ border: '1px solid white' }} onClick={addColumn}>
 					add Column
@@ -104,6 +112,7 @@ export const LayerDisplay = ({
 	changeRow,
 	tileSetUrl,
 	tileMap,
+	occupants,
 }: {
 	layerName: LayerName;
 	layer: (TileIdentifier | null)[][];
@@ -112,7 +121,10 @@ export const LayerDisplay = ({
 	changeRow: (i: number, layer: LayerName) => void;
 	tileSetUrl: string;
 	tileMap: TileMap;
+	occupants: Occupant[];
 }) => {
+	useDrawOccupants('occs', occupants, 16);
+
 	const [opacity, setOpacity] = useState<number>(0.5);
 
 	return (
@@ -181,10 +193,24 @@ export const LayerDisplay = ({
 						})}
 					</>
 				))}
+
+				<canvas
+					style={{
+						top: 16,
+						left: 16,
+						zIndex: 1,
+						position: 'absolute',
+					}}
+					id={'occs'}
+					height={layer.length * 16}
+					width={layer[0].length * 16}
+				/>
+
 				<div
 					style={{
 						pointerEvents: 'none',
 						position: 'absolute',
+
 						top: 16,
 						left: 16,
 					}}

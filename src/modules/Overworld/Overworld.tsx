@@ -109,7 +109,7 @@ export const Overworld = ({
 	]);
 	//DRAWING
 	useDrawCharacter(playerCanvasId, saveFile.location, sprite);
-	useDrawOccupants(occupantsCanvasId, occupants);
+	useDrawOccupants(occupantsCanvasId, occupants, baseSize);
 	//INTERACTION
 	useDrawForeground('foreground', map.tileMap, map.tilesetUrl, baseSize);
 	const interactWith = useCallback(

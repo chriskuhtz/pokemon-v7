@@ -391,7 +391,7 @@ export const extraFeatureCheckList: {
 	{ name: 'fix challenge field ranks', handled: true },
 	{ name: 'ev quests guy', handled: true },
 	{ name: 'profile pictures for gym leaders', handled: true },
-	{ name: 'sableye gem producer' },
+	{ name: 'show occupants in map editor', handled: true },
 	{ name: 'procedural infinite cave with legendaries' },
 	{ name: 'wild apricorn trees' },
 	{ name: 'berry bushes' },
