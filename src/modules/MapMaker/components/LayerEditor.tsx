@@ -72,17 +72,13 @@ const unmemoedLayerEditor = ({
 					}}
 				>
 					<div>X</div>
-					{Array.from({ length: layer.length }).map((_, i) => (
-						<div key={'row' + i} role={'button'} onClick={() => changeRow(i)}>
-							{i}
-						</div>
-					))}
 				</div>
 				<LayerDisplay
 					layer={layer}
 					layerName={layerName}
 					changeTile={changeTile}
 					changeColumn={changeColumn}
+					changeRow={changeRow}
 					tileSetUrl={tileSetUrl}
 					tileMap={tileMap}
 				/>
@@ -105,6 +101,7 @@ export const LayerDisplay = ({
 	layer,
 	changeTile,
 	changeColumn,
+	changeRow,
 	tileSetUrl,
 	tileMap,
 }: {
@@ -112,6 +109,7 @@ export const LayerDisplay = ({
 	layer: (TileIdentifier | null)[][];
 	changeTile: (i: number, j: number, layer: LayerName) => void;
 	changeColumn: (i: number, layer: LayerName) => void;
+	changeRow: (i: number, layer: LayerName) => void;
 	tileSetUrl: string;
 	tileMap: TileMap;
 }) => {
@@ -133,19 +131,20 @@ export const LayerDisplay = ({
 					display: 'grid',
 					justifyItems: 'flex-start',
 					gridTemplateColumns: `${Array.from({
-						length: layer[0].length,
+						length: layer[0].length + 1,
 					})
 						.map(() => '1fr')
 						.join(' ')}`,
-					gap: '2px',
 				}}
 			>
+				<span />
 				{Array.from({ length: layer[0].length }).map((_, i) => (
 					<div
 						style={{
 							height: 16,
 							width: 16,
-							border: '1px solid orange',
+							outline: '1px solid orange',
+							fontSize: 'small',
 						}}
 						key={'column' + i}
 						role={'button'}
@@ -154,38 +153,49 @@ export const LayerDisplay = ({
 						{i}
 					</div>
 				))}
+
+				{layer.map((row, i) => (
+					<>
+						<div
+							style={{ height: 16, fontSize: 'small' }}
+							key={'row' + i}
+							role={'button'}
+							onClick={() => changeRow(i, layerName)}
+						>
+							{i}
+						</div>
+						{row.map((el, j) => {
+							const { yOffset, xOffset } = el ?? {};
+							return (
+								<div
+									onClick={() => changeTile(i, j, layerName)}
+									key={'newMap' + Math.random()}
+									style={{
+										height: 16,
+										width: 16,
+										outline: '1px solid red',
+										background: `url(${tileSetUrl}) ${xOffset}px ${yOffset}px`,
+									}}
+								></div>
+							);
+						})}
+					</>
+				))}
 				<div
 					style={{
 						pointerEvents: 'none',
 						position: 'absolute',
-						top: 18,
-						left: 2,
+						top: 16,
+						left: 16,
 					}}
 				>
 					<CombinedCanvas
 						style={{ opacity }}
 						map={tileMap}
-						tileSize={19}
+						tileSize={16}
 						tileSetUrl={tileSetUrl}
 					/>
 				</div>
-				{layer.map((row, i) =>
-					row.map((el, j) => {
-						const { yOffset, xOffset } = el ?? {};
-						return (
-							<div
-								onClick={() => changeTile(i, j, layerName)}
-								key={'newMap' + Math.random()}
-								style={{
-									height: 16,
-									width: 16,
-									border: '1px solid red',
-									background: `url(${tileSetUrl}) ${xOffset}px ${yOffset}px`,
-								}}
-							></div>
-						);
-					})
-				)}
 			</div>
 		</div>
 	);
