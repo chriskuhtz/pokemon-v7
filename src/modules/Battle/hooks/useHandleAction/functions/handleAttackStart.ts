@@ -190,6 +190,22 @@ export const handleAttackStart = ({
 			],
 		};
 	}
+	if (
+		updatedAttacker.ability === 'libero' &&
+		!updatedAttacker.secondaryAilments.some((a) => a.type === 'color-changed')
+	) {
+		addMessage({
+			message: `${attacker.name} became a ${move.data.type.name} type`,
+		});
+
+		updatedAttacker = {
+			...updatedAttacker,
+			secondaryAilments: [
+				...updatedAttacker.secondaryAilments,
+				{ type: 'color-changed', duration: 9000, newType: move.data.type.name },
+			],
+		};
+	}
 
 	return {
 		updatedPokemon: updatedPokemon.map((u) => {
