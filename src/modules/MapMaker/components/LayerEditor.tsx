@@ -1,5 +1,7 @@
-import React from 'react';
-import { TileIdentifier } from '../../../interfaces/OverworldMap';
+import React, { useState } from 'react';
+import { CombinedCanvas } from '../../../components/CombinedCanvas/CombinedCanvas';
+import { TileIdentifier, TileMap } from '../../../interfaces/OverworldMap';
+
 import { LayerName } from '../hooks/useMapEditor';
 
 const unmemoedLayerEditor = ({
@@ -13,6 +15,7 @@ const unmemoedLayerEditor = ({
 	randomFill,
 	clear,
 	tileSetUrl,
+	tileMap,
 }: {
 	layerName: LayerName;
 	layer: (TileIdentifier | null)[][];
@@ -24,6 +27,7 @@ const unmemoedLayerEditor = ({
 	clear: () => void;
 	randomFill: (layer: LayerName, percentage: number) => void;
 	tileSetUrl: string;
+	tileMap: TileMap;
 }) => {
 	return (
 		<>
@@ -80,6 +84,7 @@ const unmemoedLayerEditor = ({
 					changeTile={changeTile}
 					changeColumn={changeColumn}
 					tileSetUrl={tileSetUrl}
+					tileMap={tileMap}
 				/>
 				<div style={{ border: '1px solid white' }} onClick={addColumn}>
 					add Column
@@ -101,58 +106,87 @@ export const LayerDisplay = ({
 	changeTile,
 	changeColumn,
 	tileSetUrl,
+	tileMap,
 }: {
 	layerName: LayerName;
 	layer: (TileIdentifier | null)[][];
 	changeTile: (i: number, j: number, layer: LayerName) => void;
 	changeColumn: (i: number, layer: LayerName) => void;
 	tileSetUrl: string;
+	tileMap: TileMap;
 }) => {
+	const [opacity, setOpacity] = useState<number>(0.5);
+
 	return (
-		<div
-			style={{
-				width: 'min-content',
-				display: 'grid',
-				justifyItems: 'flex-start',
-				gridTemplateColumns: `${Array.from({
-					length: layer[0].length,
-				})
-					.map(() => '1fr')
-					.join(' ')}`,
-				gap: '2px',
-			}}
-		>
-			{Array.from({ length: layer[0].length }).map((_, i) => (
+		<div>
+			<div style={{ display: 'flex', alignItems: 'center' }}>
+				<strong>Overlay Opacity</strong>
+				<button onClick={() => setOpacity(0.25)}>30%</button>
+				<button onClick={() => setOpacity(0.6)}>60%</button>
+				<button onClick={() => setOpacity(0.75)}>75%</button>
+				<button onClick={() => setOpacity(1)}>100%</button>
+			</div>
+			<div
+				style={{
+					position: 'relative',
+					width: 'min-content',
+					display: 'grid',
+					justifyItems: 'flex-start',
+					gridTemplateColumns: `${Array.from({
+						length: layer[0].length,
+					})
+						.map(() => '1fr')
+						.join(' ')}`,
+					gap: '2px',
+				}}
+			>
+				{Array.from({ length: layer[0].length }).map((_, i) => (
+					<div
+						style={{
+							height: 16,
+							width: 16,
+							border: '1px solid orange',
+						}}
+						key={'column' + i}
+						role={'button'}
+						onClick={() => changeColumn(i, layerName)}
+					>
+						{i}
+					</div>
+				))}
 				<div
 					style={{
-						height: 16,
-						width: 16,
-						border: '1px solid orange',
+						pointerEvents: 'none',
+						position: 'absolute',
+						top: 18,
+						left: 2,
 					}}
-					key={'column' + i}
-					role={'button'}
-					onClick={() => changeColumn(i, layerName)}
 				>
-					{i}
+					<CombinedCanvas
+						style={{ opacity }}
+						map={tileMap}
+						tileSize={19}
+						tileSetUrl={tileSetUrl}
+					/>
 				</div>
-			))}
-			{layer.map((row, i) =>
-				row.map((el, j) => {
-					const { yOffset, xOffset } = el ?? {};
-					return (
-						<div
-							onClick={() => changeTile(i, j, layerName)}
-							key={'newMap' + Math.random()}
-							style={{
-								height: 16,
-								width: 16,
-								border: '1px solid red',
-								background: `url(${tileSetUrl}) ${xOffset}px ${yOffset}px`,
-							}}
-						></div>
-					);
-				})
-			)}
+				{layer.map((row, i) =>
+					row.map((el, j) => {
+						const { yOffset, xOffset } = el ?? {};
+						return (
+							<div
+								onClick={() => changeTile(i, j, layerName)}
+								key={'newMap' + Math.random()}
+								style={{
+									height: 16,
+									width: 16,
+									border: '1px solid red',
+									background: `url(${tileSetUrl}) ${xOffset}px ${yOffset}px`,
+								}}
+							></div>
+						);
+					})
+				)}
+			</div>
 		</div>
 	);
 };

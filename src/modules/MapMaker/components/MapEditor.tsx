@@ -1,5 +1,4 @@
-import { JSX, useMemo, useState } from 'react';
-import { CombinedCanvas } from '../../../components/CombinedCanvas/CombinedCanvas';
+import { JSX, useMemo } from 'react';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { Tool } from '../MapMaker';
 import { LayerName, useMapEditor } from '../hooks/useMapEditor';
@@ -66,8 +65,6 @@ export const MapEditor = ({
 		waterLayer,
 	]);
 
-	const [opacity, setOpacity] = useState<number>(0.5);
-
 	return (
 		<div>
 			<h2>{initialMap.id}</h2>
@@ -126,42 +123,22 @@ export const MapEditor = ({
 					tileSetUrl={initialMap.tilesetUrl}
 				/>
 			</div>
-			<div style={{ display: 'flex', alignItems: 'center' }}>
-				<strong>Overlay Opacity</strong>
-				<button onClick={() => setOpacity(0.25)}>30%</button>
-				<button onClick={() => setOpacity(0.6)}>60%</button>
-				<button onClick={() => setOpacity(0.75)}>75%</button>
-				<button onClick={() => setOpacity(1)}>100%</button>
-			</div>
+
 			<div
 				style={{
 					position: 'relative',
 				}}
 			>
-				<div
-					style={{
-						pointerEvents: 'none',
-						position: 'absolute',
-						top: 121,
-						left: 160,
-					}}
-				>
-					<CombinedCanvas
-						style={{ opacity }}
-						map={{
-							baseLayer,
-							encounterLayer,
-							obstacleLayer,
-							decorationLayer,
-							foregroundLayer,
-							waterLayer,
-						}}
-						tileSize={19}
-						tileSetUrl={initialMap.tilesetUrl}
-					/>
-				</div>
 				<LayerEditor
 					tileSetUrl={initialMap.tilesetUrl}
+					tileMap={{
+						baseLayer,
+						encounterLayer,
+						decorationLayer,
+						foregroundLayer,
+						obstacleLayer,
+						waterLayer,
+					}}
 					addColumn={addColumn}
 					addRow={addRow}
 					changeTile={changeTile}

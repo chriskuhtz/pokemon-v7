@@ -1,12 +1,12 @@
 import { TileIdentifier } from '../../../interfaces/OverworldMap';
-import { TileMap } from '../constants/tileMaps';
+import { TileSet } from '../constants/tileMaps';
 export const TileMapViewer = ({
 	name,
 	t,
 	onClick,
 }: {
 	name: string;
-	t: TileMap;
+	t: TileSet;
 	onClick: (x: TileIdentifier) => void;
 }) => {
 	return (
