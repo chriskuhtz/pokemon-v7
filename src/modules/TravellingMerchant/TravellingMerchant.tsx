@@ -62,21 +62,29 @@ export const TravellingMerchant = (): JSX.Element => {
 			<Stack mode="column">
 				{availableTrades.map(({ give, receive, disabled, amount }) => {
 					return (
-						<Card
+						<div
 							key={give + receive}
-							disabled={disabled}
-							onClick={() => trade(give, receive)}
-							icon={<ItemSprite item={give} />}
-							content={
-								<h3>
-									Trade {give}({amount} in Bag) for {receive}
-								</h3>
-							}
-							actionElements={[
-								<ItemSprite item={receive} />,
-								<ItemInfoButton itemName={receive} />,
-							]}
-						/>
+							style={{
+								display: 'flex',
+								gap: '.5rem',
+								alignItems: 'center',
+							}}
+						>
+							<div style={{ flexGrow: 1 }}>
+								<Card
+									disabled={disabled}
+									onClick={() => trade(give, receive)}
+									icon={<ItemSprite item={give} />}
+									content={
+										<h3>
+											Trade {give}({amount} in Bag) for {receive}
+										</h3>
+									}
+									actionElements={[<ItemSprite item={receive} />]}
+								/>
+							</div>
+							<ItemInfoButton itemName={receive} />
+						</div>
 					);
 				})}
 			</Stack>
