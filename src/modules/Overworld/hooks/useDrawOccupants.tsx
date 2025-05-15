@@ -1,8 +1,7 @@
 import { isEqual } from 'lodash';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getYOffsetFromOrientation } from '../../../functions/getYOffsetFromOrientation';
-import { BaseSizeContext } from '../../../hooks/useBaseSize';
 import { Occupant } from '../../../interfaces/OverworldMap';
 
 export const overflow = (current: number, excludedMax: number) => {
@@ -14,9 +13,9 @@ export const overflow = (current: number, excludedMax: number) => {
 
 export const useDrawOccupants = (
 	canvasId: string,
-	statefulOccupants: Occupant[]
+	statefulOccupants: Occupant[],
+	baseSize: number
 ) => {
-	const { baseSize } = useContext(BaseSizeContext);
 	const [lastDrawnOccupants, setLastDrawnOccupants] = useState<Occupant[]>([]);
 	useEffect(() => setLastDrawnOccupants([]), [baseSize]);
 	//draw the npcs

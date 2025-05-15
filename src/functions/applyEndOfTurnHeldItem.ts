@@ -1,10 +1,13 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { Inventory } from '../interfaces/Inventory';
 import {
 	emergencyBoostBerriesTable,
 	FlavourfullBerriesTable,
 	hasEndOfTurnEffect,
 	HPHealTable,
 	isBerry,
+	isPokeball,
+	ItemType,
 } from '../interfaces/Item';
 import { getRandomBoostableStat, Stat } from '../interfaces/StatObject';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
@@ -21,7 +24,8 @@ export const applyEndOfTurnHeldItem = (
 	addMessage: (x: string) => void,
 	addMultipleMessages: (x: string[]) => void,
 	battleFieldEffects: BattleFieldEffect[],
-	terrain: BattleTerrain | undefined
+	terrain: BattleTerrain | undefined,
+	battleInventory: Inventory
 ): BattlePokemon => {
 	const unnerved = battleFieldEffects.some(
 		(b) => b.type === 'unnerve' && b.ownerId !== pokemon.ownerId
@@ -354,6 +358,14 @@ export const applyEndOfTurnHeldItem = (
 			(x) => addMessage(x.message),
 			'misty seed'
 		);
+	}
+
+	const ball = Object.entries(battleInventory).find(
+		([item, amount]) => isPokeball(item) && amount > 0
+	);
+	if (pokemon.ability === 'ball-fetch' && ball && !pokemon.heldItemName) {
+		addMessage(`${pokemon.name} picked up the ${ball[0]}`);
+		return { ...pokemon, heldItemName: ball[0] as ItemType };
 	}
 
 	return pokemon;

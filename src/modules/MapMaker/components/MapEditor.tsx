@@ -139,6 +139,7 @@ export const MapEditor = ({
 						obstacleLayer,
 						waterLayer,
 					}}
+					occupants={initialMap.occupants}
 					addColumn={addColumn}
 					addRow={addRow}
 					changeTile={changeTile}
