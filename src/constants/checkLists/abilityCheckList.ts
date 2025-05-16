@@ -1044,10 +1044,7 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/238/',
 		handled: true,
 	},
-	{ name: 'propeller-tail', url: 'https://pokeapi.co/api/v2/ability/239/' },
-	{ name: 'mirror-armor', url: 'https://pokeapi.co/api/v2/ability/240/' },
-	{ name: 'gulp-missile', url: 'https://pokeapi.co/api/v2/ability/241/' },
-	{ name: 'stalwart', url: 'https://pokeapi.co/api/v2/ability/242/' },
+
 	{ name: 'steam-engine', url: 'https://pokeapi.co/api/v2/ability/243/' },
 	{ name: 'punk-rock', url: 'https://pokeapi.co/api/v2/ability/244/' },
 	{ name: 'sand-spit', url: 'https://pokeapi.co/api/v2/ability/245/' },
@@ -1207,6 +1204,10 @@ export const abilityCheckList: {
 	{ name: 'receiver', url: 'https://pokeapi.co/api/v2/ability/222/' },
 	{ name: 'power-of-alchemy', url: 'https://pokeapi.co/api/v2/ability/223/' },
 	{ name: 'rks-system', url: 'https://pokeapi.co/api/v2/ability/225/' },
+	{ name: 'propeller-tail', url: 'https://pokeapi.co/api/v2/ability/239/' },
+	{ name: 'mirror-armor', url: 'https://pokeapi.co/api/v2/ability/240/' },
+	{ name: 'gulp-missile', url: 'https://pokeapi.co/api/v2/ability/241/' },
+	{ name: 'stalwart', url: 'https://pokeapi.co/api/v2/ability/242/' },
 ];
 
 export const abilityNames = [
@@ -1416,6 +1417,7 @@ export const abilityNames = [
 	'libero',
 	'ball-fetch',
 	'cotton-down',
+	'steam-engine',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
