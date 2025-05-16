@@ -77,6 +77,7 @@ export type Pokedex = Record<
 	PokemonName,
 	{ seenOnRoutes: MapId[]; caughtOnRoutes: MapId[] }
 >;
+
 export interface SaveFile {
 	badges: BadgeName[];
 	playerId: string;
@@ -89,7 +90,6 @@ export interface SaveFile {
 		activeTab: RoutesType;
 		currentChallenger?: Challenger;
 	};
-	location: CharacterLocationData;
 
 	handledOccupants: {
 		id: string;

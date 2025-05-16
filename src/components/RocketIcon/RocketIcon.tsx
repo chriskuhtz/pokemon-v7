@@ -3,12 +3,14 @@ import { TbCircleLetterRFilled } from 'react-icons/tb';
 import { battleSpriteSize, ONE_HOUR } from '../../constants/gameData';
 import { typeColors } from '../../constants/typeColors';
 import { rocketsRemaining } from '../../functions/areAllRocketsDefeated';
+import { LocationContext } from '../../hooks/LocationProvider';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import './RocketIcon.css';
 
 export const RocketIcon = () => {
 	const { addMessage } = useContext(MessageQueueContext);
+	const { location } = useContext(LocationContext);
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
 	const remaining = useMemo(() => rocketsRemaining(saveFile), [saveFile]);
@@ -40,7 +42,7 @@ export const RocketIcon = () => {
 			/>
 		);
 	}
-	if (saveFile.location.mapId !== saveFile.currentRocketOperation.route) {
+	if (location.mapId !== saveFile.currentRocketOperation.route) {
 		return <></>;
 	}
 

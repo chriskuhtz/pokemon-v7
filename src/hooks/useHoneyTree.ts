@@ -8,6 +8,7 @@ import {
 import { EmptyInventory, joinInventories } from '../interfaces/Inventory';
 import { getRandomNature } from '../interfaces/Natures';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { LocationContext } from './LocationProvider';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
@@ -36,6 +37,7 @@ const HONEY_ENCOUNTER_OPTIONS: OwnedPokemon[] = honeyPokemon.map((h) =>
 
 export const useHoneyTree = () => {
 	const { putSaveFileReducer, saveFile } = useContext(SaveFileContext);
+	const { location } = useContext(LocationContext);
 	const { addMultipleMessages, addMessage } = useContext(MessageQueueContext);
 
 	return useCallback(() => {
@@ -70,7 +72,7 @@ export const useHoneyTree = () => {
 											...HONEY_ENCOUNTER_OPTIONS[
 												getRandomIndex(HONEY_ENCOUNTER_OPTIONS.length)
 											],
-											caughtOnMap: saveFile.location.mapId,
+											caughtOnMap: location.mapId,
 										},
 									],
 								},
@@ -100,5 +102,11 @@ export const useHoneyTree = () => {
 				},
 			]);
 		}
-	}, [addMessage, addMultipleMessages, putSaveFileReducer, saveFile]);
+	}, [
+		addMessage,
+		addMultipleMessages,
+		location.mapId,
+		putSaveFileReducer,
+		saveFile,
+	]);
 };

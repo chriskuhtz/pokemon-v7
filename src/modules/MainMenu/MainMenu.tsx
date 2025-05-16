@@ -17,6 +17,7 @@ import { TrainerCard } from '../../components/TrainerCard/TrainerCard';
 import { battleSpriteSize, challengeFieldId } from '../../constants/gameData';
 import { mapsRecord } from '../../constants/maps/mapsRecord';
 import { fullyHealPokemon } from '../../functions/fullyHealPokemon';
+import { LocationContext } from '../../hooks/LocationProvider';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { useQuests } from '../../hooks/useQuests';
@@ -32,6 +33,7 @@ export const MainMenu = ({
 	reset: () => void;
 }): JSX.Element => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+	const { location, setLocation } = useContext(LocationContext);
 	const [resetConfirmationInProgress, setRCIP] = useState<boolean>(false);
 	const { numberOfUncollected } = useQuests();
 	const navigate = useNavigate();
@@ -55,17 +57,17 @@ export const MainMenu = ({
 						actionElements={[]}
 					/>
 				)}
-				{saveFile.location.mapId === challengeFieldId && (
+				{location.mapId === challengeFieldId && (
 					<Card
-						onClick={() =>
+						onClick={() => {
+							setLocation({
+								mapId: 'camp',
+								x: 3,
+								y: 16,
+								orientation: 'LEFT',
+								forwardFoot: 'CENTER1',
+							});
 							patchSaveFileReducer({
-								location: {
-									mapId: 'camp',
-									x: 3,
-									y: 16,
-									orientation: 'LEFT',
-									forwardFoot: 'CENTER1',
-								},
 								bag: EmptyInventory,
 								meta: { ...saveFile.meta, activeTab: 'OVERWORLD' },
 								handledOccupants: saveFile.handledOccupants.filter(
@@ -79,8 +81,8 @@ export const MainMenu = ({
 
 									return p;
 								}),
-							})
-						}
+							});
+						}}
 						content={<h4>Leave the challenge field</h4>}
 						icon={<IoMdExit size={battleSpriteSize} />}
 						actionElements={[]}
@@ -101,7 +103,7 @@ export const MainMenu = ({
 					icon={<MdCatchingPokemon size={battleSpriteSize} />}
 					actionElements={[]}
 				/>
-				{saveFile.location.mapId === 'challengeField' ? (
+				{location.mapId === 'challengeField' ? (
 					<></>
 				) : (
 					<Card

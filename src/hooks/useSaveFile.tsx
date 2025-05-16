@@ -20,7 +20,7 @@ import {
 } from '../constants/checkLists/questsRecord';
 import {
 	emptyPokedex,
-	localStorageId,
+	localStorageSaveFileId,
 	ONE_DAY,
 	testState,
 } from '../constants/gameData';
@@ -39,7 +39,7 @@ import { ItemType } from '../interfaces/Item';
 import { Occupant } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { RoutesType } from '../interfaces/Routing';
-import { CharacterLocationData, SaveFile } from '../interfaces/SaveFile';
+import { SaveFile } from '../interfaces/SaveFile';
 import { MessageQueueContext } from './useMessageQueue';
 
 export interface EvolutionReducerPayload {
@@ -70,7 +70,7 @@ export interface UseSaveFile {
 		number: number,
 		pricePerItem: number
 	) => void;
-	setCharacterLocationReducer: (update: CharacterLocationData) => void;
+
 	setPokemonReducer: (update: OwnedPokemon[]) => void;
 
 	talkToNurseReducer: (id: string) => void;
@@ -104,7 +104,7 @@ const migrateSavefile = (input: SaveFile) => {
 
 const useSaveFile = (init: SaveFile): UseSaveFile => {
 	const { addMessage } = useContext(MessageQueueContext);
-	const local = window.localStorage.getItem(localStorageId);
+	const local = window.localStorage.getItem(localStorageSaveFileId);
 	const loaded = local ? migrateSavefile(JSON.parse(local) as SaveFile) : init;
 
 	const [saveFile, s] = useState<SaveFile>(loaded);
@@ -198,12 +198,6 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		},
 		[saveFile, setSaveFile]
 	);
-	const setCharacterLocationReducer = (update: CharacterLocationData) => {
-		setSaveFile({
-			...saveFile,
-			location: update,
-		});
-	};
 
 	const setPokemonReducer = (update: OwnedPokemon[]) => {
 		setSaveFile({
@@ -441,12 +435,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		const hasEvolvedStarter =
 			saveFile.mileStones.hasEvolvedStarter || isStarter;
 
-		const pokedex = addPokemonToDex(
-			saveFile.pokedex,
-			newName,
-			saveFile.location.mapId,
-			true
-		);
+		const pokedex = addPokemonToDex(saveFile.pokedex, newName, 'camp', true);
 
 		patchSaveFileReducer({
 			pokemon: saveFile.pokemon.map((p) => {
@@ -476,7 +465,10 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 
 	//SYNC WITH LOCAL STORAGE
 	useEffect(() => {
-		window.localStorage.setItem(localStorageId, JSON.stringify(saveFile));
+		window.localStorage.setItem(
+			localStorageSaveFileId,
+			JSON.stringify(saveFile)
+		);
 	}, [saveFile]);
 	//HANDLE START OF GAME
 	useEffect(() => {
@@ -514,7 +506,6 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		setActiveTabReducer,
 		sellItemReducer,
 		buyItemReducer,
-		setCharacterLocationReducer,
 		setPokemonReducer,
 		talkToNurseReducer,
 		navigateAwayFromOverworldReducer,

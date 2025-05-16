@@ -9,6 +9,7 @@ import { determineRunawaySuccess } from '../../../functions/determineRunAwaySucc
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { hexToRgb } from '../../../functions/hexToRGB';
 import { isKO } from '../../../functions/isKo';
+import { LocationContext } from '../../../hooks/LocationProvider';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
@@ -35,8 +36,9 @@ export const LineUpSelection = ({
 	trainer?: TrainerInfo;
 }) => {
 	const {
-		saveFile: { pokedex, location },
+		saveFile: { pokedex },
 	} = useContext(SaveFileContext);
+	const { location } = useContext(LocationContext);
 	const { addMessage } = useContext(MessageQueueContext);
 	const battleButtonMessage = useMemo(() => {
 		if (selectedTeam.length < fightersPerSide)

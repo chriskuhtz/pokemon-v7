@@ -6,6 +6,7 @@ import { secondTurnMoves } from '../../constants/secondTurnMoves';
 import { typeColors } from '../../constants/typeColors';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getPlayerId } from '../../functions/getPlayerId';
+import { LocationContext } from '../../hooks/LocationProvider';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Chip } from '../../uiComponents/Chip/Chip';
@@ -23,8 +24,9 @@ export const BattlePokemonInfo = ({
 }) => {
 	const { level } = calculateLevelData(pokemon.xp, pokemon.growthRate);
 	const {
-		saveFile: { pokedex, location },
+		saveFile: { pokedex },
 	} = useContext(SaveFileContext);
+	const { location } = useContext(LocationContext);
 
 	const backgroundColor = useMemo(() => {
 		if (pokemon.primaryAilment?.type === 'burn') {

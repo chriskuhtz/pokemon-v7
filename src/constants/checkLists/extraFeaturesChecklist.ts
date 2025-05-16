@@ -393,6 +393,9 @@ export const extraFeatureCheckList: {
 	{ name: 'profile pictures for gym leaders', handled: true },
 	{ name: 'show occupants in map editor', handled: true },
 	{ name: 'battle backgrounds', handled: true },
+	{ name: 'extract location from savefile object', handled: true },
+	{ name: 'extract pokemon from savefile object' },
+	{ name: 'extract pokedex from savefile object' },
 	{ name: 'rangers spruce,fir and pine' },
 	{ name: 'procedural infinite cave with legendaries' },
 	{ name: 'procedural random challenge' },
@@ -411,7 +414,7 @@ export const extraFeatureCheckList: {
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
 	{ name: 'loosing to wild mons is sometimes buggy' },
 	{ name: 'trainer ai should consider flying,dig, diving' },
-	{ name: 'normalize data to prevent slow down' },
+
 	{ name: 'fix pathing' },
 	{ name: 'whitney' },
 	{ name: 'pryce' },

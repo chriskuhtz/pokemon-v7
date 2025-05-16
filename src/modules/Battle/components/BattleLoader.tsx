@@ -3,6 +3,7 @@ import { mapsRecord } from '../../../constants/maps/mapsRecord';
 import { addPokemonToDex } from '../../../functions/addPokemonToDex';
 import { getMiddleOfThree } from '../../../functions/getMiddleOfThree';
 import { getTimeOfDay } from '../../../functions/getTimeOfDay';
+import { LocationContext } from '../../../hooks/LocationProvider';
 import { useGetBattleTeam } from '../../../hooks/useGetBattleTeam';
 import { useLeaveBattle } from '../../../hooks/useLeaveBattle';
 import { Message } from '../../../hooks/useMessageQueue';
@@ -40,7 +41,8 @@ export const BattleLoader = ({
 	const { res: battleTeam } = useGetBattleTeam(team, {});
 
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
-	const { timeOfDayShadersMap } = mapsRecord[saveFile.location.mapId];
+	const { location } = useContext(LocationContext);
+	const { timeOfDayShadersMap } = mapsRecord[location.mapId];
 	const leave = useLeaveBattle();
 
 	const [registered, setRegistered] = useState<boolean>(false);
@@ -48,16 +50,18 @@ export const BattleLoader = ({
 		if (battleOpponents && !registered) {
 			let updatedDex = { ...saveFile.pokedex };
 			battleOpponents.forEach((b) => {
-				updatedDex = addPokemonToDex(
-					updatedDex,
-					b.name,
-					saveFile.location.mapId
-				);
+				updatedDex = addPokemonToDex(updatedDex, b.name, location.mapId);
 			});
 			setRegistered(true);
 			patchSaveFileReducer({ ...saveFile, pokedex: updatedDex });
 		}
-	}, [battleOpponents, patchSaveFileReducer, registered, saveFile]);
+	}, [
+		battleOpponents,
+		location.mapId,
+		patchSaveFileReducer,
+		registered,
+		saveFile,
+	]);
 
 	if (!battleOpponents || !battleTeam) {
 		return <LoadingScreen />;

@@ -25,6 +25,7 @@ import { hexToRgb } from '../../functions/hexToRGB';
 import { isKO } from '../../functions/isKo';
 import { reduceSecondaryAilmentDurations } from '../../functions/reduceSecondaryAilmentDurations';
 import { sortByPriority } from '../../functions/sortByPriority';
+import { LocationContext } from '../../hooks/LocationProvider';
 import { LeaveBattlePayload } from '../../hooks/useLeaveBattle';
 import { Message } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
@@ -112,8 +113,9 @@ export const BattleField = ({
 	rewardItems?: Partial<Inventory>;
 }) => {
 	const {
-		saveFile: { settings, location },
+		saveFile: { settings },
 	} = useContext(SaveFileContext);
+	const { location } = useContext(LocationContext);
 	const isTrainerBattle = useMemo(() => !!challengerId, [challengerId]);
 
 	const [battleRound, setBattleRound] = useState<number>(0);

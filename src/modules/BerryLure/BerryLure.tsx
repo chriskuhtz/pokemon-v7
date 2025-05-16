@@ -5,6 +5,7 @@ import {
 	makeChallengerPokemon,
 	OPPO_ID,
 } from '../../functions/makeChallengerPokemon';
+import { LocationContext } from '../../hooks/LocationProvider';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
@@ -125,6 +126,7 @@ export const lureBerryEncountersS1W1: Record<PokemonType, PokemonName> = {
 export const BerryLure = () => {
 	const navigate = useNavigate();
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+	const { location } = useContext(LocationContext);
 	const { addMultipleMessages } = useContext(MessageQueueContext);
 
 	const availableBerries: BerryType[] = useMemo(() => {
@@ -150,32 +152,32 @@ export const BerryLure = () => {
 			const succeded = Math.random() > 0.25;
 
 			const getRouteBasedLureEncounter = (): PokemonName => {
-				if (saveFile.location.mapId === 'routeN1E1') {
+				if (location.mapId === 'routeN1E1') {
 					return lureBerryEncountersN1E1[lureType[0] as PokemonType];
 				}
-				if (saveFile.location.mapId === 'routeE1') {
+				if (location.mapId === 'routeE1') {
 					return lureBerryEncountersE1[lureType[0] as PokemonType];
 				}
-				if (saveFile.location.mapId === 'routeS1E1') {
+				if (location.mapId === 'routeS1E1') {
 					return lureBerryEncountersS1E1[lureType[0] as PokemonType];
 				}
-				if (saveFile.location.mapId === 'routeS1W1') {
+				if (location.mapId === 'routeS1W1') {
 					return lureBerryEncountersS1W1[lureType[0] as PokemonType];
 				}
 				return lureBerryEncountersN1[lureType[0] as PokemonType];
 			};
 
 			const xp = () => {
-				if (saveFile.location.mapId === 'routeN1E1') {
+				if (location.mapId === 'routeN1E1') {
 					return 3375;
 				}
-				if (saveFile.location.mapId === 'routeE1') {
+				if (location.mapId === 'routeE1') {
 					return 8000;
 				}
-				if (saveFile.location.mapId === 'routeS1E1') {
+				if (location.mapId === 'routeS1E1') {
 					return 15625;
 				}
-				if (saveFile.location.mapId === 'routeS1W1') {
+				if (location.mapId === 'routeS1W1') {
 					return 27000;
 				}
 				return 1000;
@@ -269,7 +271,14 @@ export const BerryLure = () => {
 				]);
 			}
 		},
-		[addMultipleMessages, patchSaveFileReducer, saveFile]
+		[
+			addMultipleMessages,
+			location.mapId,
+			patchSaveFileReducer,
+			saveFile.bag,
+			saveFile.meta,
+			saveFile.mileStones,
+		]
 	);
 	return (
 		<Page
