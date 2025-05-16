@@ -16,4 +16,5 @@ export const recoveryMoves = [
 	'frenzy-plant',
 	'giga-impact',
 	'rock-wrecker',
+	'roar-of-time',
 ];

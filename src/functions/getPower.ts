@@ -130,6 +130,9 @@ export const getPower = (
 	attackerLevel: number,
 	weather: WeatherType | undefined
 ) => {
+	if (attack.name === 'crush-grip') {
+		return 1 + 120 * ((target.stats.hp - target.damage) / target.stats.hp);
+	}
 	if (attack.name === 'gyro-ball') {
 		return getGyroBallPower(
 			calculateModifiedStat(
