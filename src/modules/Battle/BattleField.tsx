@@ -325,6 +325,7 @@ export const BattleField = ({
 					setWeather: setBattleWeather,
 					battleFieldEffects,
 					setBattleTerrain,
+					removeScreens,
 				})
 			);
 		},
@@ -333,6 +334,7 @@ export const BattleField = ({
 			battleFieldEffects,
 			battleWeather,
 			pokemon,
+			removeScreens,
 			setBattleTerrain,
 			setBattleWeather,
 		]

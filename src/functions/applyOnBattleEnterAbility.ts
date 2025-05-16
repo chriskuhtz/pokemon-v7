@@ -18,6 +18,7 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 	pokemon,
 	addMessage,
 	battleFieldEffects,
+	removeScreens,
 }: {
 	user: BattlePokemon;
 	setWeather: (x: WeatherObject) => void;
@@ -26,9 +27,22 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 	currentWeather: WeatherType | undefined;
 	addMessage: (x: Message) => void;
 	battleFieldEffects: BattleFieldEffect[];
+	removeScreens: (ownerId: string) => void;
 }): BattlePokemon[] => {
 	let updatedPokemon = [...pokemon];
 
+	if (user.ability == 'screen-cleaner') {
+		const firstOppo = pokemon.find(
+			(p) => p.ownerId !== user.ownerId && p.status === 'ONFIELD'
+		);
+		addMessage({
+			message: `${user.name} removes protective screen effects with screen cleaner`,
+		});
+		removeScreens(user.ownerId);
+		if (firstOppo) {
+			removeScreens(firstOppo.ownerId);
+		}
+	}
 	if (user.ability == 'frisk') {
 		const firstOppo = pokemon.find(
 			(p) => p.ownerId !== user.ownerId && p.status === 'ONFIELD'
