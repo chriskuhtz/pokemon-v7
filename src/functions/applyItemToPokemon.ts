@@ -6,6 +6,7 @@ import {
 	happinessBerries,
 	HappinessChangeTable,
 	HPHealTable,
+	isBerry,
 	isEvBoostItem,
 	isPPBoostItem,
 	isXItem,
@@ -197,7 +198,11 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	}
 
 	if (HPHealTable[item]) {
-		const updatedDamage = Math.max(pokemon.damage - HPHealTable[item], 0);
+		const healAmount =
+			isBerry(item) && pokemon.ability === 'ripen'
+				? HPHealTable[item] * 2
+				: HPHealTable[item];
+		const updatedDamage = Math.max(pokemon.damage - healAmount, 0);
 		if (addMessage) {
 			addMessage({ message: `healed ${pokemon.damage - updatedDamage} HP` });
 		}
