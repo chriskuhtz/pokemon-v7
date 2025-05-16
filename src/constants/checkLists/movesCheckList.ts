@@ -1776,9 +1776,21 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/462/',
 		handled: true,
 	},
-	{ name: 'magma-storm', url: 'https://pokeapi.co/api/v2/move/463/' },
-	{ name: 'dark-void', url: 'https://pokeapi.co/api/v2/move/464/' },
-	{ name: 'seed-flare', url: 'https://pokeapi.co/api/v2/move/465/' },
+	{
+		name: 'magma-storm',
+		url: 'https://pokeapi.co/api/v2/move/463/',
+		handled: true,
+	},
+	{
+		name: 'dark-void',
+		url: 'https://pokeapi.co/api/v2/move/464/',
+		handled: true,
+	},
+	{
+		name: 'seed-flare',
+		url: 'https://pokeapi.co/api/v2/move/465/',
+		handled: true,
+	},
 	{ name: 'shadow-force', url: 'https://pokeapi.co/api/v2/move/467/' },
 	{ name: 'hone-claws', url: 'https://pokeapi.co/api/v2/move/468/' },
 	{ name: 'psyshock', url: 'https://pokeapi.co/api/v2/move/473/' },
@@ -2851,6 +2863,9 @@ export const handledMoves = [
 	'roar-of-time',
 	'crush-grip',
 	'spacial-rend',
+	'magma-storm',
+	'dark-void',
+	'seed-flare',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
