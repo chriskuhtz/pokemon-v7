@@ -1082,7 +1082,7 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/252/',
 		handled: true,
 	},
-	{ name: 'perish-body', url: 'https://pokeapi.co/api/v2/ability/253/' },
+
 	{ name: 'wandering-spirit', url: 'https://pokeapi.co/api/v2/ability/254/' },
 	{ name: 'gorilla-tactics', url: 'https://pokeapi.co/api/v2/ability/255/' },
 	{ name: 'neutralizing-gas', url: 'https://pokeapi.co/api/v2/ability/256/' },
@@ -1238,6 +1238,7 @@ export const abilityCheckList: {
 	{ name: 'sand-spit', url: 'https://pokeapi.co/api/v2/ability/245/' },
 	{ name: 'ice-face', url: 'https://pokeapi.co/api/v2/ability/248/' },
 	{ name: 'mimicry', url: 'https://pokeapi.co/api/v2/ability/250/' },
+	{ name: 'perish-body', url: 'https://pokeapi.co/api/v2/ability/253/' },
 ];
 
 export const abilityNames = [

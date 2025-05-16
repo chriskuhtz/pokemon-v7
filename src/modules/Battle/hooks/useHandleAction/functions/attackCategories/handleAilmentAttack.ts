@@ -72,6 +72,12 @@ export const handleAilmentAttack = ({
 			addMessage,
 			applicator: updatedAttacker,
 		});
+		updatedAttacker = applySecondaryAilmentToPokemon({
+			pokemon: updatedAttacker,
+			ailment: 'perish-songed',
+			addMessage,
+			applicator: updatedAttacker,
+		});
 	}
 	if (move.name === 'attract' && !targetIsAromaVeiled) {
 		if (updatedTarget.gender === 'GENDERLESS') {
