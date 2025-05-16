@@ -1828,8 +1828,16 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/482/',
 		handled: true,
 	},
-	{ name: 'quiver-dance', url: 'https://pokeapi.co/api/v2/move/483/' },
-	{ name: 'heavy-slam', url: 'https://pokeapi.co/api/v2/move/484/' },
+	{
+		name: 'quiver-dance',
+		url: 'https://pokeapi.co/api/v2/move/483/',
+		handled: true,
+	},
+	{
+		name: 'heavy-slam',
+		url: 'https://pokeapi.co/api/v2/move/484/',
+		handled: true,
+	},
 	{ name: 'synchronoise', url: 'https://pokeapi.co/api/v2/move/485/' },
 	{ name: 'electro-ball', url: 'https://pokeapi.co/api/v2/move/486/' },
 
@@ -2903,6 +2911,8 @@ export const handledMoves = [
 	'autotomize',
 	'storm-throw',
 	'sludge-wave',
+	'quiver-dance',
+	'heavy-slam',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

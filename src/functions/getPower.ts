@@ -130,6 +130,30 @@ export const getPower = (
 	attackerLevel: number,
 	weather: WeatherType | undefined
 ): number => {
+	if (attack.name === 'heavy-slam') {
+		const factor =
+			getActualWeight(
+				attacker.data.weight,
+				attacker.ability,
+				getHeldItem(attacker)
+			) /
+			getActualWeight(target.data.weight, target.ability, getHeldItem(target));
+
+		if (factor >= 5) {
+			return 120;
+		}
+		if (factor >= 4) {
+			return 100;
+		}
+		if (factor >= 3) {
+			return 80;
+		}
+		if (factor >= 2) {
+			return 60;
+		}
+
+		return 40;
+	}
 	if (attack.name === 'venoshock' && attack.data.power) {
 		return target.primaryAilment?.type === 'poison'
 			? attack.data.power * 2

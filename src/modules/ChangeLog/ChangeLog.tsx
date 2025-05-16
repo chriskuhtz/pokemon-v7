@@ -65,6 +65,7 @@ const ChangeLogV24 = (): JSX.Element => {
 				<li>Performance Improvements</li>
 				<li>UI Improvements</li>
 				<li>Wild Apricorn Trees</li>
+				<li>Rocket Camp Raid</li>
 				<li>New Quests</li>
 				<li>New Abilities, Items and Attacks</li>
 			</ol>
