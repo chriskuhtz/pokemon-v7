@@ -2,6 +2,7 @@ import { typeColors, typeContrastColors } from '../../../constants/typeColors';
 import { getStats } from '../../../functions/getStats';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { PokemonData } from '../../../interfaces/PokemonData';
+import { AnimatedBar } from '../../../uiComponents/AnimatedBar/AnimatedBar';
 import { Chip } from '../../../uiComponents/Chip/Chip';
 import { Stack } from '../../../uiComponents/Stack/Stack';
 
@@ -146,6 +147,7 @@ export const StatDisplay = ({
 				>
 					Individual Values:
 				</strong>
+
 				<div
 					style={{
 						padding: '.5rem',
@@ -178,6 +180,18 @@ export const StatDisplay = ({
 							}
 						})}
 				</div>
+				<AnimatedBar
+					max={186}
+					offset={Object.entries(ownedPokemon.intrinsicValues).reduce(
+						(sum, summand) => {
+							if (HIDDEN_STATS.includes(summand[0])) {
+								return sum;
+							}
+							return sum + summand[1];
+						},
+						0
+					)}
+				/>
 			</div>
 		</Stack>
 	);
