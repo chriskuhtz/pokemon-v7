@@ -116,6 +116,7 @@ export enum SpriteEnum {
 	captain = '118',
 	//continue here
 	kurt = '129',
+	looker = '135',
 	oak = '136',
 	elm = '137',
 	rowan = '138',

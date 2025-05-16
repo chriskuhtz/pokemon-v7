@@ -28,6 +28,7 @@ import {
 import { sledgeHammerPokemon } from '../../modules/Overworld/hooks/useSledgeHammer';
 import { caveW1Encounters } from '../maps/encounters/caveW1';
 import { onixCaveEncounters } from '../maps/encounters/onixCave';
+import { allRocketCampTrainersDefeated } from '../maps/occupants/rocketCampOccupants';
 import { routeE1 } from '../maps/routeE1';
 import { routeN1 } from '../maps/routeN1';
 import { routeN1E1 } from '../maps/routeN1E1';
@@ -607,6 +608,7 @@ export const questNames = [
 	'train a Pokemon to 200 Hp EV',
 	'train the EV of two stats over 200 on a Pokemon',
 	'train a Pokemon to 510 EV',
+	'clear out the rocket camp',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -2837,6 +2839,13 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'clever-mochi': 20,
 			'swift-mochi': 20,
 		},
+	},
+	'clear out the rocket camp': {
+		researchPoints: 50,
+		rewardItems: { 'moomoo-milk': 5, 'big-malasada': 5 },
+		rangerLevels: 5,
+		kind: 'QUEST_LINE',
+		conditionFunction: allRocketCampTrainersDefeated,
 	},
 };
 

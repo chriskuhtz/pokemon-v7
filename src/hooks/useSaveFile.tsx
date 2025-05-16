@@ -341,6 +341,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 
 		const rewardStrings: string[] = [
 			`${quest.researchPoints} Research Points`,
+			quest.rangerLevels ? `${quest.rangerLevels} Ranger Levels` : undefined,
 			...Object.entries(reward).map(([item, amount]) => `${amount} ${item}`),
 			quest.rewardPokemon ? `a ${quest.rewardPokemon.name}` : undefined,
 		].filter((s) => s !== undefined);
@@ -353,6 +354,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 			bag: updatedInventory,
 			quests: { ...saveFile.quests, [q]: 'COLLECTED' },
 			researchPoints: saveFile.researchPoints + quest.researchPoints,
+			rangerLevel: (saveFile.rangerLevel ?? 0) + (quest.rangerLevels ?? 0),
 			pokemon,
 		});
 	};

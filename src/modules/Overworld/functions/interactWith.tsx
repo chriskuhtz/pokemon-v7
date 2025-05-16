@@ -36,6 +36,7 @@ export const shouldRotate = (t: OccupantType) =>
 		'ZIGZAGOON_FORAGER',
 		'DUGTRIO_EXPLORER',
 		'ROUTER_NPC',
+		'TELEPORTER_NPC',
 	].includes(t);
 export const interactWithFunction = ({
 	activeMessage,
@@ -105,9 +106,23 @@ export const interactWithFunction = ({
 	if (shouldRotate(data.type)) {
 		rotateOccupant(occ.id, getOppositeDirection(playerLocation.orientation));
 	}
+	if (data.type === 'TELEPORTER_NPC') {
+		addMultipleMessages([
+			...data.dialogue.map((d, i) => ({
+				message: d,
+				onRemoval:
+					i === data.dialogue.length - 1
+						? () => goToPosition(data.to)
+						: undefined,
+			})),
+		]);
+		return;
+	}
 	if (data.type === 'APRICORN_TREE') {
 		interactWithApricornTree(data);
+		return;
 	}
+
 	if (data.type === 'EMPTY_APRICORN_TREE') {
 		addMultipleMessages([
 			{ message: 'The Apricorns will need some time to grow' },

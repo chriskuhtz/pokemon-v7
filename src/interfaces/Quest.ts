@@ -14,6 +14,7 @@ export interface Quest {
 	rewardItems: Partial<Inventory>;
 	rewardPokemon?: OwnedPokemon;
 	researchPoints: number;
+	rangerLevels?: number;
 	conditionFunction: (saveFile: SaveFile) => boolean;
 	kind: QuestKind;
 	availableAfter?: QuestName;

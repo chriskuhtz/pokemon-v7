@@ -4,6 +4,7 @@ import { camp } from './camp';
 import { caveW1 } from './caveW1';
 import { challengeField } from './challengeField';
 import { onixCave } from './onixCave';
+import { rocketCamp } from './rocketCamp';
 import { routeE1 } from './routeE1';
 import { routeN1 } from './routeN1';
 import { routeN1E1 } from './routeN1E1';
@@ -26,6 +27,7 @@ export const mapIds = [
 	'routeN1W1',
 	'caveW1',
 	'challengeField',
+	'rocketCamp',
 ] as const;
 export type MapId = (typeof mapIds)[number];
 
@@ -42,6 +44,7 @@ export const mapsRecord: Record<MapId, OverworldMap> = {
 	onixCave: onixCave,
 	caveW1: caveW1,
 	challengeField: challengeField,
+	rocketCamp: rocketCamp,
 };
 
 export const mapDisplayNames: Record<MapId, string> = {
@@ -57,6 +60,7 @@ export const mapDisplayNames: Record<MapId, string> = {
 	camp: 'kuma camp',
 	onixCave: 'onix cave',
 	challengeField: 'challenge field',
+	rocketCamp: 'Rocket Camp',
 };
 
 export const Emptymap: OverworldMap = {
@@ -73,11 +77,11 @@ export const Emptymap: OverworldMap = {
 	timeOfDayShadersMap: defaultShaderMap,
 	tilesetUrl: '/tilesets/palletTown.png',
 	tileMap: {
-		baseLayer: [],
-		waterLayer: [],
-		foregroundLayer: [],
-		encounterLayer: [],
-		obstacleLayer: [],
-		decorationLayer: [],
+		baseLayer: [[]],
+		waterLayer: [[]],
+		foregroundLayer: [[]],
+		encounterLayer: [[]],
+		obstacleLayer: [[]],
+		decorationLayer: [[]],
 	},
 };

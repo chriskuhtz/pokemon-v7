@@ -59,6 +59,12 @@ const snow: TileSet = {
 	width: 8,
 	gap: 0,
 };
+const market: TileSet = {
+	src: "url('/tilesets/market.png')",
+	height: 16,
+	width: 16,
+	gap: 0,
+};
 
 export const tileMapsRecord: Record<string, TileSet> = {
 	'/tilesets/masterSheet.png': masterSheet,
@@ -70,4 +76,5 @@ export const tileMapsRecord: Record<string, TileSet> = {
 	'/tilesets/hillsWithWaterfall.png': hillsWithWaterfall,
 	'/tilesets/cave.png': cave,
 	'/tilesets/snow.png': snow,
+	'/tilesets/market.png': market,
 };

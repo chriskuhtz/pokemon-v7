@@ -11,6 +11,7 @@ export const mapMakerRoutes = [
 	'MAP_MAKER_routeN1W1',
 	'MAP_MAKER_onixCave',
 	'MAP_MAKER_challengeField',
+	'MAP_MAKER_rocketCamp',
 ];
 
 export const routes = [

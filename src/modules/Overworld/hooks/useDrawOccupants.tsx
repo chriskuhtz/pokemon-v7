@@ -107,6 +107,7 @@ const drawOccupant = (
 			case 'SNORLAX':
 			case 'STRANGE_TREE':
 			case 'ROUTER_NPC':
+			case 'TELEPORTER_NPC':
 				ctx?.drawImage(
 					img,
 					0,
@@ -185,13 +186,13 @@ const getSource = (occ: Occupant) => {
 		case 'PORTAL':
 		case 'LEDGE':
 			return occ.sprite;
-		case 'BERRY_TREE':
-			return `/berryTrees/${occ.sprite}.png`;
+
 		case 'MERCHANT':
 		case 'NURSE':
 		case 'NPC':
 		case 'TRAINER':
 		case 'ROUTER_NPC':
+		case 'TELEPORTER_NPC':
 			return `/npcs/NPC_${occ.sprite}.png`;
 		case 'POKEMON':
 		case 'DUGTRIO_EXPLORER':
