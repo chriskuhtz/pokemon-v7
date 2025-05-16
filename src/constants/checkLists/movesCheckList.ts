@@ -1806,7 +1806,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/473/',
 		handled: true,
 	},
-	{ name: 'venoshock', url: 'https://pokeapi.co/api/v2/move/474/' },
+	{
+		name: 'venoshock',
+		url: 'https://pokeapi.co/api/v2/move/474/',
+		handled: true,
+	},
 	{ name: 'autotomize', url: 'https://pokeapi.co/api/v2/move/475/' },
 	{ name: 'smack-down', url: 'https://pokeapi.co/api/v2/move/479/' },
 	{ name: 'storm-throw', url: 'https://pokeapi.co/api/v2/move/480/' },
@@ -2881,6 +2885,7 @@ export const handledMoves = [
 	'shadow-force',
 	'hone-claws',
 	'psyshock',
+	'venoshock',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

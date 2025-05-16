@@ -129,7 +129,12 @@ export const getPower = (
 	target: BattlePokemon,
 	attackerLevel: number,
 	weather: WeatherType | undefined
-) => {
+): number => {
+	if (attack.name === 'venoshock' && attack.data.power) {
+		return target.primaryAilment?.type === 'poison'
+			? attack.data.power * 2
+			: attack.data.power;
+	}
 	if (attack.name === 'crush-grip') {
 		return 1 + 120 * ((target.stats.hp - target.damage) / target.stats.hp);
 	}
