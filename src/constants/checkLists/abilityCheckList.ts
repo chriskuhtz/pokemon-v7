@@ -1066,8 +1066,12 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/247/',
 		handled: true,
 	},
-	{ name: 'ice-face', url: 'https://pokeapi.co/api/v2/ability/248/' },
-	{ name: 'power-spot', url: 'https://pokeapi.co/api/v2/ability/249/' },
+
+	{
+		name: 'power-spot',
+		url: 'https://pokeapi.co/api/v2/ability/249/',
+		handled: true,
+	},
 	{ name: 'mimicry', url: 'https://pokeapi.co/api/v2/ability/250/' },
 	{ name: 'screen-cleaner', url: 'https://pokeapi.co/api/v2/ability/251/' },
 	{ name: 'steely-spirit', url: 'https://pokeapi.co/api/v2/ability/252/' },
@@ -1225,6 +1229,7 @@ export const abilityCheckList: {
 	{ name: 'gulp-missile', url: 'https://pokeapi.co/api/v2/ability/241/' },
 	{ name: 'stalwart', url: 'https://pokeapi.co/api/v2/ability/242/' },
 	{ name: 'sand-spit', url: 'https://pokeapi.co/api/v2/ability/245/' },
+	{ name: 'ice-face', url: 'https://pokeapi.co/api/v2/ability/248/' },
 ];
 
 export const abilityNames = [
@@ -1438,6 +1443,7 @@ export const abilityNames = [
 	'punk-rock',
 	'ice-scales',
 	'ripen',
+	'power-spot',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

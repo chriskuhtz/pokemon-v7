@@ -474,6 +474,14 @@ export const calculateDamage = (
 	)
 		? 0.75
 		: 1;
+	const powerSpotFactor = battleFieldEffects.some(
+		(b) =>
+			b.type === 'power-spot' &&
+			b.ownerId === attacker.ownerId &&
+			b.applicatorId !== attacker.id
+	)
+		? 1.3
+		: 1;
 	const muscleBandFactor =
 		getHeldItem(attacker) === 'muscle-band' && damageClass === 'physical'
 			? 1.1
@@ -736,7 +744,8 @@ export const calculateDamage = (
 				prismArmorFactor *
 				punkRockAttacker *
 				punkRockDefender *
-				iceScalesFactor
+				iceScalesFactor *
+				powerSpotFactor
 		),
 		1
 	);

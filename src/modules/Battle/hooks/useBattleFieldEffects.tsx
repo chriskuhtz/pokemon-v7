@@ -215,6 +215,26 @@ export const useBattleFieldEffects = (
 				applicatorId: friendGuardPlayer.id,
 			});
 		}
+		const powerSpotOppo = onFieldOpponents.find(
+			(p) => p.ability === 'power-spot'
+		);
+		if (powerSpotOppo) {
+			res.push({
+				type: 'power-spot',
+				ownerId: OPPO_ID,
+				duration: 9000,
+				applicatorId: powerSpotOppo.id,
+			});
+		}
+		const powerSpotPlayer = onFieldTeam.find((p) => p.ability === 'power-spot');
+		if (powerSpotPlayer) {
+			res.push({
+				type: 'power-spot',
+				ownerId: getPlayerId(),
+				duration: 9000,
+				applicatorId: powerSpotPlayer.id,
+			});
+		}
 		return res;
 	}, [battleWeather, bf, onFieldOpponents, onFieldTeam]);
 

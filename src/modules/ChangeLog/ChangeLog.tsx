@@ -64,6 +64,8 @@ const ChangeLogV24 = (): JSX.Element => {
 
 			<ol style={{ lineHeight: '1.5rem' }}>
 				<li>Performance Improvements</li>
+				<li>UI Improvements</li>
+				<li>New Quests</li>
 				<li>New Abilities, Items and Attacks</li>
 			</ol>
 		</>
