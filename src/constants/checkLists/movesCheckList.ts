@@ -1816,15 +1816,25 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/475/',
 		handled: true,
 	},
-	{ name: 'smack-down', url: 'https://pokeapi.co/api/v2/move/479/' },
-	{ name: 'storm-throw', url: 'https://pokeapi.co/api/v2/move/480/' },
-	{ name: 'flame-burst', url: 'https://pokeapi.co/api/v2/move/481/' },
-	{ name: 'sludge-wave', url: 'https://pokeapi.co/api/v2/move/482/' },
+
+	{
+		name: 'storm-throw',
+		url: 'https://pokeapi.co/api/v2/move/480/',
+		handled: true,
+	},
+
+	{
+		name: 'sludge-wave',
+		url: 'https://pokeapi.co/api/v2/move/482/',
+		handled: true,
+	},
 	{ name: 'quiver-dance', url: 'https://pokeapi.co/api/v2/move/483/' },
 	{ name: 'heavy-slam', url: 'https://pokeapi.co/api/v2/move/484/' },
 	{ name: 'synchronoise', url: 'https://pokeapi.co/api/v2/move/485/' },
 	{ name: 'electro-ball', url: 'https://pokeapi.co/api/v2/move/486/' },
 
+	{ name: 'flame-burst', url: 'https://pokeapi.co/api/v2/move/481/' },
+	{ name: 'smack-down', url: 'https://pokeapi.co/api/v2/move/479/' },
 	{ name: 'heal-block', url: 'https://pokeapi.co/api/v2/move/377/' },
 	{ name: 'wring-out', url: 'https://pokeapi.co/api/v2/move/378/' },
 	{ name: 'power-trick', url: 'https://pokeapi.co/api/v2/move/379/' },
@@ -2891,6 +2901,8 @@ export const handledMoves = [
 	'psyshock',
 	'venoshock',
 	'autotomize',
+	'storm-throw',
+	'sludge-wave',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
