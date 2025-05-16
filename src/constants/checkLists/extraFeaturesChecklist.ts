@@ -398,7 +398,7 @@ export const extraFeatureCheckList: {
 	{ name: 'total ev marker', handled: true },
 	{ name: 'total iv sorting', handled: true },
 	{ name: 'wild apricorn trees', handled: true },
-	{ name: 'iv quests' },
+	{ name: 'iv quests', handled: true },
 	{ name: 'rangers spruce,fir and pine' },
 	{ name: 'procedural infinite cave with legendaries' },
 	{ name: 'procedural random challenge' },
