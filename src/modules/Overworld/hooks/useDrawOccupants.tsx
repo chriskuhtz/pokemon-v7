@@ -133,6 +133,8 @@ const drawOccupant = (
 				);
 				break;
 			case 'HONEY_TREE':
+			case 'APRICORN_TREE':
+			case 'EMPTY_APRICORN_TREE':
 			case 'COMBEE_HIVE':
 				ctx?.drawImage(
 					img,
@@ -171,6 +173,10 @@ const drawOccupant = (
 
 const getSource = (occ: Occupant) => {
 	switch (occ.type) {
+		case 'APRICORN_TREE':
+			return occ.sprite;
+		case 'EMPTY_APRICORN_TREE':
+			return '/mapObjects/apricornEmpty.png';
 		case 'BERRY_LURE':
 			return '/mapObjects/berry_lure.png';
 		case 'ON_STEP_PORTAL':

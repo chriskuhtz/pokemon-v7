@@ -6,6 +6,7 @@ import { mapsRecord } from '../../constants/maps/mapsRecord';
 import { getTimeOfDay } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { LocationContext } from '../../hooks/LocationProvider';
+import { useApricornTree } from '../../hooks/useApricornTree';
 import { BaseSizeContext } from '../../hooks/useBaseSize';
 import { useDrawForeground } from '../../hooks/useDrawBackground';
 import { useDugtrioExplorers } from '../../hooks/useDugtrioExplorers';
@@ -59,6 +60,7 @@ export const Overworld = ({
 	} = useContext(SaveFileContext);
 	const { location, setLocation: setCharacterLocation } =
 		useContext(LocationContext);
+	const interactWithApricornTree = useApricornTree();
 	const interactWithHoneyTree = useHoneyTree();
 	const interactWithTrainer = useInteractWithTrainer();
 	const interactWithHallowedTower = useHallowedTower();
@@ -116,6 +118,7 @@ export const Overworld = ({
 				handledOccupants: saveFile.handledOccupants.map((h) => h.id),
 				handleThisOccupant: handleOccupantReducer,
 				goToPosition: setCharacterLocation,
+				interactWithApricornTree,
 				interactWithHoneyTree,
 				interactWithHallowedTower,
 				interactWithStrangeTree,
@@ -139,12 +142,13 @@ export const Overworld = ({
 			stepsTaken,
 			rotateOccupant,
 			location,
-			saveFile.handledOccupants,
-			saveFile.settings,
 			goToMarket,
 			talkToNurse,
+			saveFile.handledOccupants,
+			saveFile.settings,
 			handleOccupantReducer,
 			setCharacterLocation,
+			interactWithApricornTree,
 			interactWithHoneyTree,
 			interactWithHallowedTower,
 			interactWithStrangeTree,

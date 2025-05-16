@@ -5,7 +5,7 @@ import { PokemonName } from '../constants/pokemonNames';
 import { TimeOfDay } from '../functions/getTimeOfDay';
 import { BattleTeamConfig } from '../hooks/useGetBattleTeam';
 import { Inventory } from './Inventory';
-import { BerryType, ItemType } from './Item';
+import { ApricornType, BerryType, ItemType } from './Item';
 import { OwnedPokemon } from './OwnedPokemon';
 import { RoutesType } from './Routing';
 import {
@@ -43,6 +43,8 @@ export const OCCUPANT_TYPES = [
 	'ROUTER_NPC',
 	'STORAGE_CHEST',
 	'BERRY_TREE',
+	'APRICORN_TREE',
+	'EMPTY_APRICORN_TREE',
 	'BERRY_LURE',
 	'SNORLAX',
 ] as const;
@@ -186,6 +188,14 @@ export interface BerryTree extends BaseOccupant {
 	berry: BerryType;
 	sprite: string;
 }
+export interface ApricornTree extends BaseOccupant {
+	type: 'APRICORN_TREE';
+	apricorn: ApricornType;
+	sprite: string;
+}
+export interface EmptyApricornTree extends BaseOccupant {
+	type: 'EMPTY_APRICORN_TREE';
+}
 export interface Ledge extends BaseOccupant {
 	type: 'LEDGE';
 	sprite: string;
@@ -227,7 +237,9 @@ export type Occupant =
 	| BerryTree
 	| BerryLure
 	| OverworldSnorlax
-	| OverworldStrangeTree;
+	| OverworldStrangeTree
+	| ApricornTree
+	| EmptyApricornTree;
 
 export interface OverworldEncounter {
 	name: PokemonName;
