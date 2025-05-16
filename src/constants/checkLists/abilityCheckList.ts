@@ -1045,8 +1045,16 @@ export const abilityCheckList: {
 		handled: true,
 	},
 
-	{ name: 'steam-engine', url: 'https://pokeapi.co/api/v2/ability/243/' },
-	{ name: 'punk-rock', url: 'https://pokeapi.co/api/v2/ability/244/' },
+	{
+		name: 'steam-engine',
+		url: 'https://pokeapi.co/api/v2/ability/243/',
+		handled: true,
+	},
+	{
+		name: 'punk-rock',
+		url: 'https://pokeapi.co/api/v2/ability/244/',
+		handled: true,
+	},
 	{ name: 'sand-spit', url: 'https://pokeapi.co/api/v2/ability/245/' },
 	{ name: 'ice-scales', url: 'https://pokeapi.co/api/v2/ability/246/' },
 	{ name: 'ripen', url: 'https://pokeapi.co/api/v2/ability/247/' },
@@ -1418,6 +1426,7 @@ export const abilityNames = [
 	'ball-fetch',
 	'cotton-down',
 	'steam-engine',
+	'punk-rock',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

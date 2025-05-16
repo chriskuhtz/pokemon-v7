@@ -14,6 +14,7 @@ import {
 	bitingMoves,
 	punchBasedMoves,
 } from '../constants/punchBasedMoves';
+import { soundBasedMoves } from '../constants/soundBasedMoves';
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -628,6 +629,14 @@ export const calculateDamage = (
 		attacker.ability === 'neuroforce' && typeFactor > 1 ? 1.25 : 1;
 	const prismArmorFactor =
 		attacker.ability === 'prism-armor' && typeFactor > 1 ? 0.75 : 1;
+	const punkRockAttacker =
+		attacker.ability === 'punk-rock' && soundBasedMoves.includes(attack.name)
+			? 2
+			: 1;
+	const punkRockDefender =
+		target.ability === 'punk-rock' && soundBasedMoves.includes(attack.name)
+			? 0.5
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -722,7 +731,9 @@ export const calculateDamage = (
 				mistyTerrainFactor *
 				shadowShieldFactor *
 				neuroforceFactor *
-				prismArmorFactor
+				prismArmorFactor *
+				punkRockAttacker *
+				punkRockDefender
 		),
 		1
 	);
