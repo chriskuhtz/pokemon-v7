@@ -637,6 +637,8 @@ export const calculateDamage = (
 		target.ability === 'punk-rock' && soundBasedMoves.includes(attack.name)
 			? 0.5
 			: 1;
+	const iceScalesFactor =
+		target.ability === 'ice-scales' && damageClass === 'special' ? 0.5 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -733,7 +735,8 @@ export const calculateDamage = (
 				neuroforceFactor *
 				prismArmorFactor *
 				punkRockAttacker *
-				punkRockDefender
+				punkRockDefender *
+				iceScalesFactor
 		),
 		1
 	);
