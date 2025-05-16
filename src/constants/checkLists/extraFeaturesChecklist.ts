@@ -395,7 +395,7 @@ export const extraFeatureCheckList: {
 	{ name: 'battle backgrounds', handled: true },
 	{ name: 'extract location from savefile object', handled: true },
 	{ name: 'total iv marker', handled: true },
-	{ name: 'total ev marker' },
+	{ name: 'total ev marker', handled: true },
 	{ name: 'total iv sorting' },
 	{ name: 'iv quests' },
 	{ name: 'rangers spruce,fir and pine' },
