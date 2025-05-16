@@ -647,6 +647,13 @@ export const calculateDamage = (
 			: 1;
 	const iceScalesFactor =
 		target.ability === 'ice-scales' && damageClass === 'special' ? 0.5 : 1;
+	const steelySpiritFactor =
+		attackType === 'steel' &&
+		battleFieldEffects.some(
+			(b) => b.type === 'steely-spirit' && b.ownerId === attacker.ownerId
+		)
+			? 1.5
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -745,7 +752,8 @@ export const calculateDamage = (
 				punkRockAttacker *
 				punkRockDefender *
 				iceScalesFactor *
-				powerSpotFactor
+				powerSpotFactor *
+				steelySpiritFactor
 		),
 		1
 	);

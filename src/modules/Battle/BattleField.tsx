@@ -84,7 +84,8 @@ export interface BattleFieldEffect {
 		| 'fairy-aura'
 		| 'tailwind'
 		| 'battery'
-		| 'power-spot';
+		| 'power-spot'
+		| 'steely-spirit';
 	ownerId: string;
 	applicatorId?: string;
 	duration: number;

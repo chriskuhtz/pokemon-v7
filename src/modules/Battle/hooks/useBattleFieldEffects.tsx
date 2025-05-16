@@ -157,6 +157,16 @@ export const useBattleFieldEffects = (
 				duration: 9000,
 			});
 		}
+		if (onFieldOpponents.some((p) => p.ability === 'steely-spirit')) {
+			res.push({ type: 'steely-spirit', ownerId: OPPO_ID, duration: 9000 });
+		}
+		if (onFieldTeam.some((p) => p.ability === 'steely-spirit')) {
+			res.push({
+				type: 'steely-spirit',
+				ownerId: getPlayerId(),
+				duration: 9000,
+			});
+		}
 		if (
 			[...onFieldTeam, ...onFieldOpponents].some(
 				(p) => p.ability === 'dark-aura'
@@ -235,6 +245,7 @@ export const useBattleFieldEffects = (
 				applicatorId: powerSpotPlayer.id,
 			});
 		}
+
 		return res;
 	}, [battleWeather, bf, onFieldOpponents, onFieldTeam]);
 
