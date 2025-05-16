@@ -396,7 +396,7 @@ export const extraFeatureCheckList: {
 	{ name: 'extract location from savefile object', handled: true },
 	{ name: 'total iv marker', handled: true },
 	{ name: 'total ev marker', handled: true },
-	{ name: 'total iv sorting' },
+	{ name: 'total iv sorting', handled: true },
 	{ name: 'iv quests' },
 	{ name: 'rangers spruce,fir and pine' },
 	{ name: 'procedural infinite cave with legendaries' },

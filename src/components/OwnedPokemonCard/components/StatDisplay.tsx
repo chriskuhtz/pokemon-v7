@@ -1,5 +1,6 @@
 import { typeColors, typeContrastColors } from '../../../constants/typeColors';
 import { getStats } from '../../../functions/getStats';
+import { sumOfIvs } from '../../../functions/sumOfIvs';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { PokemonData } from '../../../interfaces/PokemonData';
 import { PokemonType } from '../../../interfaces/PokemonType';
@@ -223,18 +224,7 @@ const IVsSection = ({
 						}
 					})}
 			</div>
-			<AnimatedBar
-				max={186}
-				offset={
-					186 -
-					Object.entries(intrinsicValues).reduce((sum, summand) => {
-						if (HIDDEN_STATS.includes(summand[0])) {
-							return sum;
-						}
-						return sum + summand[1];
-					}, 0)
-				}
-			/>
+			<AnimatedBar max={186} offset={186 - sumOfIvs(intrinsicValues)} />
 		</div>
 	);
 };
