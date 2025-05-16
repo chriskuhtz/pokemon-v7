@@ -3,6 +3,7 @@ import { isBagOverloaded } from '../../components/BagLimitBar/BagLimitBar';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { replaceRouteName } from '../../functions/replaceRouteName';
+import { LocationContext } from '../../hooks/LocationProvider';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { joinInventories } from '../../interfaces/Inventory';
@@ -52,19 +53,20 @@ const taxiLocations: Record<string, CharacterLocationData> = {
 };
 export const DragoniteTaxi = (): JSX.Element => {
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
+	const { setLocation } = useContext(LocationContext);
 
 	const fly = useCallback(
 		(location: CharacterLocationData) => {
 			if (saveFile.bag['charti-berry'] < 1) {
 				return;
 			}
+			setLocation(location);
 			patchSaveFileReducer({
-				location,
 				bag: joinInventories(saveFile.bag, { 'charti-berry': 1 }, true),
 				meta: { ...saveFile.meta, activeTab: 'OVERWORLD' },
 			});
 		},
-		[patchSaveFileReducer, saveFile.bag, saveFile.meta]
+		[patchSaveFileReducer, saveFile.bag, saveFile.meta, setLocation]
 	);
 
 	const navigate = useNavigate();

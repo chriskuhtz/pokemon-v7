@@ -109,6 +109,18 @@ export const handleAbilitiesAfterAttack = (
 			'gooey'
 		);
 	}
+	//check for gooey
+	if (target.ability === 'cotton-down' && isContactMove(move.name, attacker)) {
+		updatedAttacker = applyStatChangeToPokemon(
+			updatedAttacker,
+			'speed',
+			-1,
+			false,
+			battleFieldEffects,
+			addMessage,
+			'cotton-down'
+		);
+	}
 	//check for tangling hair
 	if (
 		target.ability === 'tangling-hair' &&
@@ -298,7 +310,26 @@ export const handleAbilitiesAfterAttack = (
 			true,
 			battleFieldEffects,
 			addMessage,
-			'with anger point'
+			'anger point'
+		);
+	}
+	// check steam engine
+	if (
+		!isKO(updatedTarget) &&
+		updatedTarget.ability === 'steam-engine' &&
+		updatedTarget.lastReceivedDamage &&
+		['fire', 'water'].includes(
+			updatedTarget.lastReceivedDamage.attack.data.type.name
+		)
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'speed',
+			3,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'steam engine'
 		);
 	}
 	// apply rage boost

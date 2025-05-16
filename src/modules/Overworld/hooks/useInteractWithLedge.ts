@@ -1,5 +1,6 @@
 import { useCallback, useContext } from 'react';
 import { getOppositeDirection } from '../../../functions/getOppositeDirection';
+import { LocationContext } from '../../../hooks/LocationProvider';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { Ledge } from '../../../interfaces/OverworldMap';
@@ -7,7 +8,8 @@ import { CharacterLocationData } from '../../../interfaces/SaveFile';
 import { useShovel } from './useShovel';
 
 export const useInteractWithLedge = () => {
-	const { saveFile, setCharacterLocationReducer } = useContext(SaveFileContext);
+	const { saveFile } = useContext(SaveFileContext);
+	const { location, setLocation } = useContext(LocationContext);
 	const { addMessage, addMultipleMessages } = useContext(MessageQueueContext);
 	const shovel = useShovel();
 	return useCallback(
@@ -19,30 +21,27 @@ export const useInteractWithLedge = () => {
 				shovel(ledge);
 				return;
 			}
-			if (
-				ledge.passableFrom ===
-				getOppositeDirection(saveFile.location.orientation)
-			) {
+			if (ledge.passableFrom === getOppositeDirection(location.orientation)) {
 				addMessage({
 					message: 'You hop down the ledge',
 					needsNoConfirmation: true,
 				});
 				const newPosition = (): CharacterLocationData => {
 					if (ledge.passableFrom === 'UP') {
-						return { ...saveFile.location, y: saveFile.location.y + 2 };
+						return { ...location, y: location.y + 2 };
 					}
 					if (ledge.passableFrom === 'DOWN') {
-						return { ...saveFile.location, y: saveFile.location.y - 2 };
+						return { ...location, y: location.y - 2 };
 					}
 					if (ledge.passableFrom === 'RIGHT') {
-						return { ...saveFile.location, x: saveFile.location.x - 2 };
+						return { ...location, x: location.x - 2 };
 					}
 					if (ledge.passableFrom === 'LEFT') {
-						return { ...saveFile.location, x: saveFile.location.x + 2 };
+						return { ...location, x: location.x + 2 };
 					}
-					return saveFile.location;
+					return location;
 				};
-				setCharacterLocationReducer(newPosition());
+				setLocation(newPosition());
 			} else
 				addMultipleMessages([
 					{
@@ -67,10 +66,10 @@ export const useInteractWithLedge = () => {
 		[
 			addMessage,
 			addMultipleMessages,
+			location,
 			saveFile.campUpgrades,
 			saveFile.handledOccupants,
-			saveFile.location,
-			setCharacterLocationReducer,
+			setLocation,
 			shovel,
 		]
 	);

@@ -1,15 +1,14 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { mapsRecord } from '../../../constants/maps/mapsRecord';
+import { LocationContext } from '../../../hooks/LocationProvider';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { Occupant } from '../../../interfaces/OverworldMap';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
 
 export const useOccupants = () => {
 	const { saveFile } = useContext(SaveFileContext);
-	const map = useMemo(
-		() => mapsRecord[saveFile.location.mapId],
-		[saveFile.location.mapId]
-	);
+	const { location } = useContext(LocationContext);
+	const map = useMemo(() => mapsRecord[location.mapId], [location.mapId]);
 
 	const [statefulOccupants, setStatefulOccupants] = useState<Occupant[]>([]);
 	useEffect(() => {

@@ -8,6 +8,7 @@ import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getHeldItem } from '../../functions/getHeldItem';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { replaceRouteName } from '../../functions/replaceRouteName';
+import { sumOfIvs } from '../../functions/sumOfIvs';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Inventory, joinInventories } from '../../interfaces/Inventory';
@@ -25,6 +26,7 @@ export const sortByTypes = [
 	'HAPPINESS',
 	'BALL',
 	'LOCATION',
+	'IVs',
 ] as const;
 export type PokemonFilter = (typeof sortByTypes)[number];
 
@@ -69,6 +71,10 @@ export const PokemonStorage = ({
 				if (a.name > b.name) return 1;
 				return 0;
 			};
+		}
+		if (sortBy === 'IVs') {
+			return (a: OwnedPokemon, b: OwnedPokemon) =>
+				sumOfIvs(b.intrinsicValues) - sumOfIvs(a.intrinsicValues);
 		}
 	}, [sortBy]);
 	const team = useMemo(() => allPokemon.filter((p) => p.onTeam), [allPokemon]);
@@ -170,6 +176,7 @@ export const PokemonStorage = ({
 					Sort By
 					{sortByTypes.map((filter) => (
 						<button
+							key={filter}
 							style={
 								sortBy === filter
 									? { backgroundColor: 'black', color: 'white' }
@@ -274,7 +281,6 @@ const Sorted = ({
 			</Stack>
 		);
 	}
-
 	const happinessSteps = [200, 160, 120, 80, 40, 0];
 	if (pokemonFilter === 'HAPPINESS') {
 		return (
@@ -350,10 +356,47 @@ const Sorted = ({
 			</Stack>
 		);
 	}
+	const ivSteps = [186, 155, 124, 93, 62, 31, 0];
+	if (pokemonFilter === 'IVs') {
+		return (
+			<Stack mode={'column'}>
+				{ivSteps.map((ivStep, index) => {
+					const filtered = stored.filter((s) => {
+						const sum = sumOfIvs(s.intrinsicValues);
+						if (index === 0) {
+							return sum > ivStep;
+						} else return sum > ivStep && sum <= ivSteps[index - 1];
+					});
+
+					if (filtered.length === 0) {
+						return <></>;
+					}
+					return (
+						<>
+							<h3 style={{ display: 'flex', alignItems: 'center' }}>
+								Total IVs {ivStep}+
+							</h3>
+							<Stack mode="row">
+								{filtered.sort(sortFunction).map((pokemon) => (
+									<Entry
+										pokemon={pokemon}
+										teamIsFull={teamIsFull}
+										togglePokemonOnTeam={togglePokemonOnTeam}
+										startReleaseProcess={startReleaseProcess}
+									/>
+								))}
+							</Stack>
+						</>
+					);
+				})}
+			</Stack>
+		);
+	}
 	return (
 		<Stack mode="row">
 			{stored.sort(sortFunction).map((pokemon) => (
 				<Entry
+					key={pokemon.id}
 					pokemon={pokemon}
 					teamIsFull={teamIsFull}
 					togglePokemonOnTeam={togglePokemonOnTeam}

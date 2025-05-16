@@ -1,11 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import { Sprite } from '../../components/Sprite/Sprite';
+import { LocationContext } from '../../hooks/LocationProvider';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { Page } from '../Page/Page';
 
 export const LoadingScreen = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+	const { setLocation } = useContext(LocationContext);
 	const [showReturnButton, setShowReturnButton] = useState<boolean>(false);
 
 	useEffect(() => {
@@ -17,13 +19,13 @@ export const LoadingScreen = () => {
 		patchSaveFileReducer({
 			...saveFile,
 			meta: { activeTab: 'OVERWORLD' },
-			location: {
-				mapId: 'camp',
-				x: 1,
-				y: 1,
-				orientation: 'DOWN',
-				forwardFoot: 'CENTER1',
-			},
+		});
+		setLocation({
+			mapId: 'camp',
+			x: 1,
+			y: 1,
+			orientation: 'DOWN',
+			forwardFoot: 'CENTER1',
 		});
 	};
 	return (

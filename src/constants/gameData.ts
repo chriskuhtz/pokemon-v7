@@ -87,7 +87,6 @@ export const testState: SaveFile = {
 	meta: {
 		activeTab: 'MAIN',
 	},
-	location: startingLocation,
 	handledOccupants: [],
 	lastEdited: new Date().getTime(),
 	lastNurse: 'nurse_Pokecenter_Camp',
@@ -111,4 +110,5 @@ export const testState: SaveFile = {
 	pokedex: emptyPokedex,
 };
 
-export const localStorageId = 'pokemonv7SaveFile';
+export const localStorageSaveFileId = 'pokemonv7SaveFile';
+export const localStorageLocationId = 'pokemonv7Location';

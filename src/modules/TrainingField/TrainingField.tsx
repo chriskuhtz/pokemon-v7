@@ -5,6 +5,7 @@ import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { Sprite } from '../../components/Sprite/Sprite';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { trainers } from '../../functions/makeRandomTrainer';
+import { LocationContext } from '../../hooks/LocationProvider';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
@@ -14,6 +15,7 @@ import { useChallengeTrainer } from '../Overworld/hooks/useChallengeTrainer';
 export const TrainingField = () => {
 	const { setActiveTabReducer, saveFile, patchSaveFileReducer } =
 		useContext(SaveFileContext);
+	const { setLocation } = useContext(LocationContext);
 	const challenge = useChallengeTrainer();
 
 	return (
@@ -36,18 +38,18 @@ export const TrainingField = () => {
 					actionElements={[
 						<button
 							disabled={Object.values(saveFile.bag).some((v) => v > 0)}
-							onClick={() =>
+							onClick={() => {
 								patchSaveFileReducer({
 									meta: { activeTab: 'OVERWORLD' },
-									location: {
-										mapId: 'challengeField',
-										x: 2,
-										y: 1,
-										orientation: 'DOWN',
-										forwardFoot: 'CENTER1',
-									},
-								})
-							}
+								});
+								setLocation({
+									mapId: 'challengeField',
+									x: 2,
+									y: 1,
+									orientation: 'DOWN',
+									forwardFoot: 'CENTER1',
+								});
+							}}
 						>
 							{Object.values(saveFile.bag).some((v) => v > 0)
 								? 'No outside items allowed'

@@ -3,6 +3,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { FaRegCircleCheck } from 'react-icons/fa6';
 import { App, FullScreenToggle } from '../../App';
 import { battleSpriteSize } from '../../constants/gameData';
+import { LocationProvider } from '../../hooks/LocationProvider';
 import { BaseSizeProvider } from '../../hooks/useBaseSize';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileProvider } from '../../hooks/useSaveFile';
@@ -29,8 +30,10 @@ export const MessageContainer = () => {
 			)}
 			<BaseSizeProvider>
 				<SaveFileProvider>
-					<FullScreenToggle />
-					<App />
+					<LocationProvider>
+						<FullScreenToggle />
+						<App />
+					</LocationProvider>
 				</SaveFileProvider>
 			</BaseSizeProvider>
 		</ErrorBoundary>

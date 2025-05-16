@@ -5,18 +5,18 @@ import { fps } from '../../constants/gameData';
 import { mapsRecord } from '../../constants/maps/mapsRecord';
 import { getTimeOfDay } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
+import { LocationContext } from '../../hooks/LocationProvider';
+import { useApricornTree } from '../../hooks/useApricornTree';
 import { BaseSizeContext } from '../../hooks/useBaseSize';
 import { useDrawForeground } from '../../hooks/useDrawBackground';
 import { useDugtrioExplorers } from '../../hooks/useDugtrioExplorers';
 import { useHallowedTower } from '../../hooks/useHallowedTower';
 import { useHoneyTree } from '../../hooks/useHoneyTree';
-import {
-	useInteractWithSnorlax,
-	useStaticEncounter,
-} from '../../hooks/useInteractWithSnorlax';
+import { useInteractWithSnorlax } from '../../hooks/useInteractWithSnorlax';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useRocketRadio } from '../../hooks/useRocketRadio';
 import { SaveFileContext } from '../../hooks/useSaveFile';
+import { useStaticEncounter } from '../../hooks/useStaticEncounter';
 import { useStrangeTree } from '../../hooks/useStrangeTree';
 import { useSwarmRadar } from '../../hooks/useSwarmRadar';
 import { useZigzagoonForagers } from '../../hooks/useZigzagoonForagers';
@@ -56,9 +56,11 @@ export const Overworld = ({
 		saveFile,
 		handleOccupantReducer,
 		navigateAwayFromOverworldReducer,
-		setCharacterLocationReducer: setCharacterLocation,
 		talkToNurseReducer: talkToNurse,
 	} = useContext(SaveFileContext);
+	const { location, setLocation: setCharacterLocation } =
+		useContext(LocationContext);
+	const interactWithApricornTree = useApricornTree();
 	const interactWithHoneyTree = useHoneyTree();
 	const interactWithTrainer = useInteractWithTrainer();
 	const interactWithHallowedTower = useHallowedTower();
@@ -76,10 +78,7 @@ export const Overworld = ({
 	const addEncounterMessage = useStartEncounter();
 	const encounterRateModifier = useEncounterRateModifier();
 
-	const map = useMemo(
-		() => mapsRecord[saveFile.location.mapId],
-		[saveFile.location.mapId]
-	);
+	const map = useMemo(() => mapsRecord[location.mapId], [location.mapId]);
 
 	const { width, height } = {
 		width: map.tileMap.baseLayer[0].length,
@@ -90,8 +89,7 @@ export const Overworld = ({
 	const { rotateOccupant, occupants } = useOccupants();
 
 	const sprite = useMemo(() => {
-		const onWater =
-			map.tileMap.waterLayer[saveFile.location.y][saveFile.location.x];
+		const onWater = map.tileMap.waterLayer[location.y][location.x];
 		if (onWater) {
 			return 'NPC_027';
 		}
@@ -100,15 +98,9 @@ export const Overworld = ({
 		}
 
 		return saveFile.sprite;
-	}, [
-		map.id,
-		map.tileMap.waterLayer,
-		saveFile.location.x,
-		saveFile.location.y,
-		saveFile.sprite,
-	]);
+	}, [map.id, map.tileMap.waterLayer, location.x, location.y, saveFile.sprite]);
 	//DRAWING
-	useDrawCharacter(playerCanvasId, saveFile.location, sprite);
+	useDrawCharacter(playerCanvasId, location, sprite);
 	useDrawOccupants(occupantsCanvasId, occupants, baseSize);
 	//INTERACTION
 	useDrawForeground('foreground', map.tileMap, map.tilesetUrl, baseSize);
@@ -120,12 +112,13 @@ export const Overworld = ({
 				addMultipleMessages,
 				stepsTaken,
 				rotateOccupant,
-				playerLocation: saveFile.location,
+				playerLocation: location,
 				goToMarket,
 				talkToNurse,
 				handledOccupants: saveFile.handledOccupants.map((h) => h.id),
 				handleThisOccupant: handleOccupantReducer,
 				goToPosition: setCharacterLocation,
+				interactWithApricornTree,
 				interactWithHoneyTree,
 				interactWithHallowedTower,
 				interactWithStrangeTree,
@@ -148,13 +141,14 @@ export const Overworld = ({
 			addMultipleMessages,
 			stepsTaken,
 			rotateOccupant,
-			saveFile.location,
-			saveFile.handledOccupants,
-			saveFile.settings,
+			location,
 			goToMarket,
 			talkToNurse,
+			saveFile.handledOccupants,
+			saveFile.settings,
 			handleOccupantReducer,
 			setCharacterLocation,
+			interactWithApricornTree,
 			interactWithHoneyTree,
 			interactWithHallowedTower,
 			interactWithStrangeTree,
@@ -181,7 +175,7 @@ export const Overworld = ({
 	);
 	const setClickTarget = useClickTarget(
 		map,
-		saveFile.location,
+		location,
 		setNextInput,
 		interactWith,
 		[],
@@ -190,7 +184,7 @@ export const Overworld = ({
 	);
 	useKeyboardControl(
 		setNextInput,
-		() => handleEnterPress(saveFile.location, interactWith, occupants),
+		() => handleEnterPress(location, interactWith, occupants),
 		() => navigateAwayFromOverworldReducer('MAIN', stepsTaken),
 		() => navigateAwayFromOverworldReducer('QUESTS', stepsTaken),
 		() => navigateAwayFromOverworldReducer('TEAM', stepsTaken),
@@ -204,7 +198,7 @@ export const Overworld = ({
 				stepsTaken={stepsTaken}
 				setNextInput={setNextInput}
 				handleEnterPress={() =>
-					handleEnterPress(saveFile.location, interactWith, occupants)
+					handleEnterPress(location, interactWith, occupants)
 				}
 			/>
 
@@ -215,8 +209,8 @@ export const Overworld = ({
 						style={{
 							width: width * baseSize,
 							height: height * baseSize,
-							top: -saveFile.location.y * baseSize,
-							left: -saveFile.location.x * baseSize,
+							top: -location.y * baseSize,
+							left: -location.x * baseSize,
 							position: 'absolute',
 							zIndex: 2,
 						}}
@@ -233,8 +227,8 @@ export const Overworld = ({
 						style={{
 							width: width * baseSize,
 							height: height * baseSize,
-							top: -saveFile.location.y * baseSize,
-							left: -saveFile.location.x * baseSize,
+							top: -location.y * baseSize,
+							left: -location.x * baseSize,
 							position: 'absolute',
 							backgroundColor: map.timeOfDayShadersMap[getTimeOfDay()],
 							zIndex: 1,
@@ -242,8 +236,8 @@ export const Overworld = ({
 					/>
 					<canvas
 						style={{
-							top: -saveFile.location.y * baseSize,
-							left: -saveFile.location.x * baseSize,
+							top: -location.y * baseSize,
+							left: -location.x * baseSize,
 							transitionProperty: 'top,left',
 							transition: `${fps} ease 0s`,
 							zIndex: 0,
@@ -257,8 +251,8 @@ export const Overworld = ({
 
 					<canvas
 						style={{
-							top: -saveFile.location.y * baseSize,
-							left: -saveFile.location.x * baseSize,
+							top: -location.y * baseSize,
+							left: -location.x * baseSize,
 							transitionProperty: 'top,left',
 							transition: `${fps} ease 0s`,
 							zIndex: -1,
@@ -273,8 +267,8 @@ export const Overworld = ({
 						style={{
 							width: width * baseSize,
 							height: height * baseSize,
-							top: -saveFile.location.y * baseSize,
-							left: -saveFile.location.x * baseSize,
+							top: -location.y * baseSize,
+							left: -location.x * baseSize,
 							transitionProperty: 'top,left',
 							transition: `${fps} ease 0s`,
 							position: 'absolute',
@@ -284,8 +278,8 @@ export const Overworld = ({
 					/>
 					<div
 						style={{
-							top: -saveFile.location.y * baseSize,
-							left: -saveFile.location.x * baseSize,
+							top: -location.y * baseSize,
+							left: -location.x * baseSize,
 							zIndex: -3,
 							position: 'absolute',
 						}}

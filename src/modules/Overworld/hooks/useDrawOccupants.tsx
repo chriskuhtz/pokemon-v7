@@ -107,6 +107,7 @@ const drawOccupant = (
 			case 'SNORLAX':
 			case 'STRANGE_TREE':
 			case 'ROUTER_NPC':
+			case 'TELEPORTER_NPC':
 				ctx?.drawImage(
 					img,
 					0,
@@ -133,6 +134,8 @@ const drawOccupant = (
 				);
 				break;
 			case 'HONEY_TREE':
+			case 'APRICORN_TREE':
+			case 'EMPTY_APRICORN_TREE':
 			case 'COMBEE_HIVE':
 				ctx?.drawImage(
 					img,
@@ -171,6 +174,10 @@ const drawOccupant = (
 
 const getSource = (occ: Occupant) => {
 	switch (occ.type) {
+		case 'APRICORN_TREE':
+			return occ.sprite;
+		case 'EMPTY_APRICORN_TREE':
+			return '/mapObjects/apricornEmpty.png';
 		case 'BERRY_LURE':
 			return '/mapObjects/berry_lure.png';
 		case 'ON_STEP_PORTAL':
@@ -179,13 +186,13 @@ const getSource = (occ: Occupant) => {
 		case 'PORTAL':
 		case 'LEDGE':
 			return occ.sprite;
-		case 'BERRY_TREE':
-			return `/berryTrees/${occ.sprite}.png`;
+
 		case 'MERCHANT':
 		case 'NURSE':
 		case 'NPC':
 		case 'TRAINER':
 		case 'ROUTER_NPC':
+		case 'TELEPORTER_NPC':
 			return `/npcs/NPC_${occ.sprite}.png`;
 		case 'POKEMON':
 		case 'DUGTRIO_EXPLORER':

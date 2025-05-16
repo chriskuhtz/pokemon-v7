@@ -1,3 +1,4 @@
+import { makeApricornTree } from '../../../functions/makeApricornTree';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { routeN1Lure } from '../../../modules/BerryLure/BerryLure';
 import { travellingMerchantRouteN1 } from '../../../modules/TravellingMerchant/TravellingMerchant';
@@ -65,33 +66,23 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 	},
 	{
 		type: 'ITEM',
-		x: 13,
-		y: 44,
-		item: 'black-apricorn',
-		amount: 1,
-		id: 'routeN1_black_apricorn',
-		conditionFunction: (s) =>
-			!s.handledOccupants.some((h) => h.id === 'routeN1_black_apricorn'),
-	},
-	{
-		type: 'ITEM',
 		x: 20,
 		y: 3,
-		item: 'green-apricorn',
+		item: 'lumiose-galette',
 		amount: 1,
-		id: 'routeN1_green_apricorn',
+		id: 'routeN1_lumi_galette',
 		conditionFunction: (s) =>
-			!s.handledOccupants.some((h) => h.id === 'routeN1_green_apricorn'),
+			!s.handledOccupants.some((h) => h.id === 'routeN1_lumi_galette'),
 	},
 	{
 		type: 'ITEM',
 		x: 37,
 		y: 15,
-		item: 'yellow-apricorn',
+		item: 'nest-ball',
 		amount: 1,
-		id: 'routeN1_yellow_apricorn',
+		id: 'routeN1_nest_ball',
 		conditionFunction: (s) =>
-			!s.handledOccupants.some((h) => h.id === 'routeN1_yellow_apricorn'),
+			!s.handledOccupants.some((h) => h.id === 'routeN1_nest_ball'),
 	},
 	{
 		type: 'ITEM',
@@ -258,4 +249,22 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 	giovanni,
 	routeN1Lure,
 	...travellingMerchantRouteN1,
+	...makeApricornTree({
+		x: 4,
+		y: 30,
+		apricorn: 'black-apricorn',
+		id: 'routeN1_black_tree',
+	}),
+	...makeApricornTree({
+		x: 6,
+		y: 28,
+		apricorn: 'yellow-apricorn',
+		id: 'routeN1_yellow_tree',
+	}),
+	...makeApricornTree({
+		x: 3,
+		y: 27,
+		apricorn: 'green-apricorn',
+		id: 'routeN1_green_tree',
+	}),
 ];

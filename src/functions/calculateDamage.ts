@@ -14,6 +14,7 @@ import {
 	bitingMoves,
 	punchBasedMoves,
 } from '../constants/punchBasedMoves';
+import { soundBasedMoves } from '../constants/soundBasedMoves';
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -259,7 +260,7 @@ export const calculateDamage = (
 	};
 
 	const def =
-		damageClass === 'physical'
+		damageClass === 'physical' || attack.name === 'psyshock'
 			? calculateModifiedStat(
 					target.stats.defense,
 					defBoost(),
@@ -473,6 +474,14 @@ export const calculateDamage = (
 	)
 		? 0.75
 		: 1;
+	const powerSpotFactor = battleFieldEffects.some(
+		(b) =>
+			b.type === 'power-spot' &&
+			b.ownerId === attacker.ownerId &&
+			b.applicatorId !== attacker.id
+	)
+		? 1.3
+		: 1;
 	const muscleBandFactor =
 		getHeldItem(attacker) === 'muscle-band' && damageClass === 'physical'
 			? 1.1
@@ -628,6 +637,23 @@ export const calculateDamage = (
 		attacker.ability === 'neuroforce' && typeFactor > 1 ? 1.25 : 1;
 	const prismArmorFactor =
 		attacker.ability === 'prism-armor' && typeFactor > 1 ? 0.75 : 1;
+	const punkRockAttacker =
+		attacker.ability === 'punk-rock' && soundBasedMoves.includes(attack.name)
+			? 2
+			: 1;
+	const punkRockDefender =
+		target.ability === 'punk-rock' && soundBasedMoves.includes(attack.name)
+			? 0.5
+			: 1;
+	const iceScalesFactor =
+		target.ability === 'ice-scales' && damageClass === 'special' ? 0.5 : 1;
+	const steelySpiritFactor =
+		attackType === 'steel' &&
+		battleFieldEffects.some(
+			(b) => b.type === 'steely-spirit' && b.ownerId === attacker.ownerId
+		)
+			? 1.5
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -722,7 +748,12 @@ export const calculateDamage = (
 				mistyTerrainFactor *
 				shadowShieldFactor *
 				neuroforceFactor *
-				prismArmorFactor
+				prismArmorFactor *
+				punkRockAttacker *
+				punkRockDefender *
+				iceScalesFactor *
+				powerSpotFactor *
+				steelySpiritFactor
 		),
 		1
 	);

@@ -5,7 +5,7 @@ import { PokemonName } from '../constants/pokemonNames';
 import { TimeOfDay } from '../functions/getTimeOfDay';
 import { BattleTeamConfig } from '../hooks/useGetBattleTeam';
 import { Inventory } from './Inventory';
-import { BerryType, ItemType } from './Item';
+import { ApricornType, ItemType } from './Item';
 import { OwnedPokemon } from './OwnedPokemon';
 import { RoutesType } from './Routing';
 import {
@@ -42,9 +42,11 @@ export const OCCUPANT_TYPES = [
 	'DUGTRIO_EXPLORER',
 	'ROUTER_NPC',
 	'STORAGE_CHEST',
-	'BERRY_TREE',
+	'APRICORN_TREE',
+	'EMPTY_APRICORN_TREE',
 	'BERRY_LURE',
 	'SNORLAX',
+	'TELEPORTER_NPC',
 ] as const;
 export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
@@ -80,6 +82,13 @@ export interface RouterNpc extends BaseOccupant {
 	dialogue: string[];
 	sprite: string;
 	to: RoutesType;
+}
+export interface TeleporterNpc extends BaseOccupant {
+	type: 'TELEPORTER_NPC';
+	orientation: CharacterOrientation;
+	dialogue: string[];
+	sprite: string;
+	to: CharacterLocationData;
 }
 export interface OverworldNurse extends BaseOccupant {
 	type: 'NURSE';
@@ -181,10 +190,14 @@ export interface DugtrioExplorer extends BaseOccupant {
 	dexId: number;
 	orientation: CharacterOrientation;
 }
-export interface BerryTree extends BaseOccupant {
-	type: 'BERRY_TREE';
-	berry: BerryType;
+
+export interface ApricornTree extends BaseOccupant {
+	type: 'APRICORN_TREE';
+	apricorn: ApricornType;
 	sprite: string;
+}
+export interface EmptyApricornTree extends BaseOccupant {
+	type: 'EMPTY_APRICORN_TREE';
 }
 export interface Ledge extends BaseOccupant {
 	type: 'LEDGE';
@@ -224,10 +237,12 @@ export type Occupant =
 	| RocketRadio
 	| OverworldRock
 	| StorageChest
-	| BerryTree
 	| BerryLure
 	| OverworldSnorlax
-	| OverworldStrangeTree;
+	| OverworldStrangeTree
+	| ApricornTree
+	| EmptyApricornTree
+	| TeleporterNpc;
 
 export interface OverworldEncounter {
 	name: PokemonName;

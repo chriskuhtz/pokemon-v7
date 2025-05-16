@@ -2,6 +2,7 @@ import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
+import { typeColors } from '../../constants/typeColors';
 import {
 	applyEndOfTurnAbility,
 	applyGrassyTerrainHeal,
@@ -20,9 +21,11 @@ import { getHeldItem } from '../../functions/getHeldItem';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getSettings } from '../../functions/getPlayerId';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
+import { hexToRgb } from '../../functions/hexToRGB';
 import { isKO } from '../../functions/isKo';
 import { reduceSecondaryAilmentDurations } from '../../functions/reduceSecondaryAilmentDurations';
 import { sortByPriority } from '../../functions/sortByPriority';
+import { LocationContext } from '../../hooks/LocationProvider';
 import { LeaveBattlePayload } from '../../hooks/useLeaveBattle';
 import { Message } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
@@ -80,7 +83,9 @@ export interface BattleFieldEffect {
 		| 'aura-break'
 		| 'fairy-aura'
 		| 'tailwind'
-		| 'battery';
+		| 'battery'
+		| 'power-spot'
+		| 'steely-spirit';
 	ownerId: string;
 	applicatorId?: string;
 	duration: number;
@@ -110,8 +115,9 @@ export const BattleField = ({
 	rewardItems?: Partial<Inventory>;
 }) => {
 	const {
-		saveFile: { settings, location },
+		saveFile: { settings },
 	} = useContext(SaveFileContext);
+	const { location } = useContext(LocationContext);
 	const isTrainerBattle = useMemo(() => !!challengerId, [challengerId]);
 
 	const [battleRound, setBattleRound] = useState<number>(0);
@@ -320,6 +326,7 @@ export const BattleField = ({
 					setWeather: setBattleWeather,
 					battleFieldEffects,
 					setBattleTerrain,
+					removeScreens,
 				})
 			);
 		},
@@ -328,6 +335,7 @@ export const BattleField = ({
 			battleFieldEffects,
 			battleWeather,
 			pokemon,
+			removeScreens,
 			setBattleTerrain,
 			setBattleWeather,
 		]
@@ -732,6 +740,16 @@ export const BattleField = ({
 		}
 	}, [addMessage, battleStep, opponentCanRefill, opponents, putPokemonOnField]);
 
+	const oppColor = useMemo(() => {
+		const type = onFieldOpponents.at(0)?.data.types.at(0)?.type.name ?? 'grass';
+
+		return hexToRgb(typeColors[type], 0.5);
+	}, [onFieldOpponents]);
+	const playerColor = useMemo(() => {
+		const type = onFieldTeam.at(0)?.data.types.at(0)?.type.name ?? 'bug';
+
+		return hexToRgb(typeColors[type], 0.5);
+	}, [onFieldTeam]);
 	if (battleStep === 'REFILLING' && teamCanRefill) {
 		return (
 			<RefillHandling
@@ -744,53 +762,59 @@ export const BattleField = ({
 	}
 
 	return (
-		<div
-			style={{
-				display: 'grid',
-				gridTemplateRows: '4fr 4fr 1fr',
-				height: '100dvh',
-				backgroundColor: 'white',
-			}}
-		>
-			<div style={{ position: 'absolute', top: 0, left: '48dvw' }}>
-				<WeatherIcon weather={battleWeather} />
-				<TimeOfDayIcon />
-			</div>
+		<div style={{ backgroundColor: 'white' }}>
 			<div
 				style={{
 					display: 'grid',
-					gridTemplateRows: 'subgrid',
-					alignItems: 'stretch',
-					gridRowStart: 1,
-					gridRowEnd: 4,
+					gridTemplateRows: '4fr 4fr 1fr',
+					height: '100dvh',
+					background: `linear-gradient(
+					218deg,
+					${oppColor} 0%,
+					${playerColor} 100%
+				)`,
 				}}
 			>
-				<EnemyLane onFieldOpponents={onFieldOpponents} />
-				<PlayerLane onFieldTeam={onFieldTeam} />
-			</div>
-			{!latestMessage && (
+				<div style={{ position: 'absolute', top: 0, left: '48dvw' }}>
+					<WeatherIcon weather={battleWeather} />
+					<TimeOfDayIcon />
+				</div>
 				<div
 					style={{
-						maxWidth: '100dvw',
-						overflow: 'scroll',
-						borderTop: '1px solid black',
-						minHeight: '103px',
-						maxHeight: '103px',
+						display: 'grid',
+						gridTemplateRows: 'subgrid',
+						alignItems: 'stretch',
+						gridRowStart: 1,
+						gridRowEnd: 4,
 					}}
 				>
-					<ControlBar
-						controlled={nextPokemonWithoutMove}
-						targets={pokemon}
-						chooseAction={chooseAction}
-						playerInventory={battleInventory}
-						catchingAllowed={!isTrainerBattle}
-						runningAllowed={!isTrainerBattle}
-						battleFieldEffects={battleFieldEffects}
-						weather={battleWeather}
-						terrain={battleTerrain}
-					/>
+					<EnemyLane onFieldOpponents={onFieldOpponents} />
+					<PlayerLane onFieldTeam={onFieldTeam} />
 				</div>
-			)}
+				{!latestMessage && (
+					<div
+						style={{
+							maxWidth: '100dvw',
+							overflow: 'scroll',
+							borderTop: '1px solid black',
+							minHeight: '103px',
+							maxHeight: '103px',
+						}}
+					>
+						<ControlBar
+							controlled={nextPokemonWithoutMove}
+							targets={pokemon}
+							chooseAction={chooseAction}
+							playerInventory={battleInventory}
+							catchingAllowed={!isTrainerBattle}
+							runningAllowed={!isTrainerBattle}
+							battleFieldEffects={battleFieldEffects}
+							weather={battleWeather}
+							terrain={battleTerrain}
+						/>
+					</div>
+				)}
+			</div>
 		</div>
 	);
 };

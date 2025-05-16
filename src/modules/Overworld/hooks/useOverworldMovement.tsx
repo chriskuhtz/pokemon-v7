@@ -6,6 +6,7 @@ import { determineWildPokemon } from '../../../functions/determineWildPokemon';
 import { getNextForwardFoot } from '../../../functions/getNextForwardFoot';
 import { OPPO_ID } from '../../../functions/makeChallengerPokemon';
 import { updatePosition } from '../../../functions/updatePosition';
+import { LocationContext } from '../../../hooks/LocationProvider';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { Challenger } from '../../../interfaces/Challenger';
 import { EmptyInventory } from '../../../interfaces/Inventory';
@@ -20,17 +21,11 @@ export const useOverworldMovement = (
 	currentOccupants: Occupant[],
 	encounterRateModifier: { factor: number }
 ) => {
-	const { saveFile, setCharacterLocationReducer: setCharacterLocation } =
-		useContext(SaveFileContext);
-	const {
-		pokemon,
-		quests,
-		location: playerLocation,
-		currentSwarm,
-		campUpgrades,
-		bag,
-		activatedLure,
-	} = saveFile;
+	const { saveFile } = useContext(SaveFileContext);
+	const { pokemon, quests, currentSwarm, campUpgrades, bag, activatedLure } =
+		saveFile;
+	const { location: playerLocation, setLocation: setCharacterLocation } =
+		useContext(LocationContext);
 
 	const shinyFactor = useMemo(() => (bag['shiny-charm'] > 1 ? 4 : 1), [bag]);
 	const map = useMemo(() => mapsRecord[playerLocation.mapId], [playerLocation]);

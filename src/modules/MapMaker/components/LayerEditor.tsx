@@ -167,10 +167,9 @@ export const LayerDisplay = ({
 				))}
 
 				{layer.map((row, i) => (
-					<>
+					<React.Fragment key={'row' + i}>
 						<div
 							style={{ height: 16, fontSize: 'small' }}
-							key={'row' + i}
 							role={'button'}
 							onClick={() => changeRow(i, layerName)}
 						>
@@ -191,11 +190,12 @@ export const LayerDisplay = ({
 								></div>
 							);
 						})}
-					</>
+					</React.Fragment>
 				))}
 
 				<canvas
 					style={{
+						pointerEvents: 'none',
 						top: 16,
 						left: 16,
 						zIndex: 1,

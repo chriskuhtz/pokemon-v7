@@ -3,6 +3,7 @@ import { Message } from '../../../hooks/useMessageQueue';
 import { Inventory } from '../../../interfaces/Inventory';
 import { getRandomItem } from '../../../interfaces/Item';
 import {
+	ApricornTree,
 	Ledge,
 	Occupant,
 	OccupantType,
@@ -35,6 +36,7 @@ export const shouldRotate = (t: OccupantType) =>
 		'ZIGZAGOON_FORAGER',
 		'DUGTRIO_EXPLORER',
 		'ROUTER_NPC',
+		'TELEPORTER_NPC',
 	].includes(t);
 export const interactWithFunction = ({
 	activeMessage,
@@ -62,6 +64,7 @@ export const interactWithFunction = ({
 	interactWithSnorlax,
 	interactWithTrainer,
 	interactWithStaticEncounter,
+	interactWithApricornTree,
 	settings,
 	goTo,
 }: {
@@ -86,6 +89,7 @@ export const interactWithFunction = ({
 	interactWithLedge: (x: Ledge) => void;
 	interactWithSnorlax: (x: OverworldSnorlax) => void;
 	interactWithStaticEncounter: (x: OverworldPokemon) => void;
+	interactWithApricornTree: (x: ApricornTree) => void;
 	interactWithZigzagoonForager: () => void;
 	interactWithDugtrioExplorer: () => void;
 	interactWithSwarmRadar: () => void;
@@ -101,6 +105,29 @@ export const interactWithFunction = ({
 
 	if (shouldRotate(data.type)) {
 		rotateOccupant(occ.id, getOppositeDirection(playerLocation.orientation));
+	}
+	if (data.type === 'TELEPORTER_NPC') {
+		addMultipleMessages([
+			...data.dialogue.map((d, i) => ({
+				message: d,
+				onRemoval:
+					i === data.dialogue.length - 1
+						? () => goToPosition(data.to)
+						: undefined,
+			})),
+		]);
+		return;
+	}
+	if (data.type === 'APRICORN_TREE') {
+		interactWithApricornTree(data);
+		return;
+	}
+
+	if (data.type === 'EMPTY_APRICORN_TREE') {
+		addMultipleMessages([
+			{ message: 'The Apricorns will need some time to grow' },
+		]);
+		return;
 	}
 	if (data.type === 'SNORLAX') {
 		interactWithSnorlax(data);

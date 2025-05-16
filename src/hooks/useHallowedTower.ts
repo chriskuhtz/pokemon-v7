@@ -6,11 +6,13 @@ import {
 } from '../functions/makeChallengerPokemon';
 import { EmptyInventory, joinInventories } from '../interfaces/Inventory';
 import { getRandomNature } from '../interfaces/Natures';
+import { LocationContext } from './LocationProvider';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
 export const useHallowedTower = () => {
 	const { putSaveFileReducer, saveFile } = useContext(SaveFileContext);
+	const { location } = useContext(LocationContext);
 	const { addMultipleMessages } = useContext(MessageQueueContext);
 
 	return useCallback(() => {
@@ -54,7 +56,7 @@ export const useHallowedTower = () => {
 										nature: getRandomNature(),
 										name: 'spiritomb',
 										xp: 8000,
-										caughtOnMap: saveFile.location.mapId,
+										caughtOnMap: location.mapId,
 									}),
 								],
 							},
@@ -63,5 +65,5 @@ export const useHallowedTower = () => {
 				},
 			},
 		]);
-	}, [addMultipleMessages, putSaveFileReducer, saveFile]);
+	}, [addMultipleMessages, location.mapId, putSaveFileReducer, saveFile]);
 };

@@ -7,6 +7,7 @@ export const secondTurnMoves = [
 	'dive',
 	'bounce',
 	'sky-attack',
+	'shadow-force',
 ];
 
 export const recoveryMoves = [
@@ -16,4 +17,5 @@ export const recoveryMoves = [
 	'frenzy-plant',
 	'giga-impact',
 	'rock-wrecker',
+	'roar-of-time',
 ];

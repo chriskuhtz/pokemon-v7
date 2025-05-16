@@ -10,6 +10,7 @@ import {
 	mapDisplayNames,
 	mapsRecord,
 } from '../../../constants/maps/mapsRecord';
+import { LocationContext } from '../../../hooks/LocationProvider';
 import { BaseSizeContext } from '../../../hooks/useBaseSize';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
@@ -29,12 +30,9 @@ export const OverworldMenus = ({
 	handleEnterPress: () => void;
 }) => {
 	const { baseSize, setBaseSize } = useContext(BaseSizeContext);
-	const { saveFile, navigateAwayFromOverworldReducer } =
-		useContext(SaveFileContext);
-	const map = useMemo(
-		() => mapsRecord[saveFile.location.mapId],
-		[saveFile.location.mapId]
-	);
+	const { navigateAwayFromOverworldReducer } = useContext(SaveFileContext);
+	const { location } = useContext(LocationContext);
+	const map = useMemo(() => mapsRecord[location.mapId], [location.mapId]);
 	return (
 		<>
 			<div

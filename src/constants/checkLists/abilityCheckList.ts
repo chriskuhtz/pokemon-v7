@@ -1039,22 +1039,50 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/237/',
 		handled: true,
 	},
-	{ name: 'cotton-down', url: 'https://pokeapi.co/api/v2/ability/238/' },
-	{ name: 'propeller-tail', url: 'https://pokeapi.co/api/v2/ability/239/' },
-	{ name: 'mirror-armor', url: 'https://pokeapi.co/api/v2/ability/240/' },
-	{ name: 'gulp-missile', url: 'https://pokeapi.co/api/v2/ability/241/' },
-	{ name: 'stalwart', url: 'https://pokeapi.co/api/v2/ability/242/' },
-	{ name: 'steam-engine', url: 'https://pokeapi.co/api/v2/ability/243/' },
-	{ name: 'punk-rock', url: 'https://pokeapi.co/api/v2/ability/244/' },
-	{ name: 'sand-spit', url: 'https://pokeapi.co/api/v2/ability/245/' },
-	{ name: 'ice-scales', url: 'https://pokeapi.co/api/v2/ability/246/' },
-	{ name: 'ripen', url: 'https://pokeapi.co/api/v2/ability/247/' },
-	{ name: 'ice-face', url: 'https://pokeapi.co/api/v2/ability/248/' },
-	{ name: 'power-spot', url: 'https://pokeapi.co/api/v2/ability/249/' },
-	{ name: 'mimicry', url: 'https://pokeapi.co/api/v2/ability/250/' },
-	{ name: 'screen-cleaner', url: 'https://pokeapi.co/api/v2/ability/251/' },
-	{ name: 'steely-spirit', url: 'https://pokeapi.co/api/v2/ability/252/' },
-	{ name: 'perish-body', url: 'https://pokeapi.co/api/v2/ability/253/' },
+	{
+		name: 'cotton-down',
+		url: 'https://pokeapi.co/api/v2/ability/238/',
+		handled: true,
+	},
+
+	{
+		name: 'steam-engine',
+		url: 'https://pokeapi.co/api/v2/ability/243/',
+		handled: true,
+	},
+	{
+		name: 'punk-rock',
+		url: 'https://pokeapi.co/api/v2/ability/244/',
+		handled: true,
+	},
+
+	{
+		name: 'ice-scales',
+		url: 'https://pokeapi.co/api/v2/ability/246/',
+		handled: true,
+	},
+	{
+		name: 'ripen',
+		url: 'https://pokeapi.co/api/v2/ability/247/',
+		handled: true,
+	},
+
+	{
+		name: 'power-spot',
+		url: 'https://pokeapi.co/api/v2/ability/249/',
+		handled: true,
+	},
+	{
+		name: 'screen-cleaner',
+		url: 'https://pokeapi.co/api/v2/ability/251/',
+		handled: true,
+	},
+	{
+		name: 'steely-spirit',
+		url: 'https://pokeapi.co/api/v2/ability/252/',
+		handled: true,
+	},
+
 	{ name: 'wandering-spirit', url: 'https://pokeapi.co/api/v2/ability/254/' },
 	{ name: 'gorilla-tactics', url: 'https://pokeapi.co/api/v2/ability/255/' },
 	{ name: 'neutralizing-gas', url: 'https://pokeapi.co/api/v2/ability/256/' },
@@ -1203,6 +1231,14 @@ export const abilityCheckList: {
 	{ name: 'receiver', url: 'https://pokeapi.co/api/v2/ability/222/' },
 	{ name: 'power-of-alchemy', url: 'https://pokeapi.co/api/v2/ability/223/' },
 	{ name: 'rks-system', url: 'https://pokeapi.co/api/v2/ability/225/' },
+	{ name: 'propeller-tail', url: 'https://pokeapi.co/api/v2/ability/239/' },
+	{ name: 'mirror-armor', url: 'https://pokeapi.co/api/v2/ability/240/' },
+	{ name: 'gulp-missile', url: 'https://pokeapi.co/api/v2/ability/241/' },
+	{ name: 'stalwart', url: 'https://pokeapi.co/api/v2/ability/242/' },
+	{ name: 'sand-spit', url: 'https://pokeapi.co/api/v2/ability/245/' },
+	{ name: 'ice-face', url: 'https://pokeapi.co/api/v2/ability/248/' },
+	{ name: 'mimicry', url: 'https://pokeapi.co/api/v2/ability/250/' },
+	{ name: 'perish-body', url: 'https://pokeapi.co/api/v2/ability/253/' },
 ];
 
 export const abilityNames = [
@@ -1411,6 +1447,14 @@ export const abilityNames = [
 	'dauntless-shield',
 	'libero',
 	'ball-fetch',
+	'cotton-down',
+	'steam-engine',
+	'punk-rock',
+	'ice-scales',
+	'ripen',
+	'power-spot',
+	'screen-cleaner',
+	'steely-spirit',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

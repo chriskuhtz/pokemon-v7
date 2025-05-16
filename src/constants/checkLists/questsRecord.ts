@@ -9,6 +9,7 @@ import {
 	tier5trainers,
 	trainers,
 } from '../../functions/makeRandomTrainer';
+import { sumOfIvs } from '../../functions/sumOfIvs';
 import { honeyPokemon } from '../../hooks/useHoneyTree';
 import { Inventory } from '../../interfaces/Inventory';
 import {
@@ -27,6 +28,7 @@ import {
 import { sledgeHammerPokemon } from '../../modules/Overworld/hooks/useSledgeHammer';
 import { caveW1Encounters } from '../maps/encounters/caveW1';
 import { onixCaveEncounters } from '../maps/encounters/onixCave';
+import { allRocketCampTrainersDefeated } from '../maps/occupants/rocketCampOccupants';
 import { routeE1 } from '../maps/routeE1';
 import { routeN1 } from '../maps/routeN1';
 import { routeN1E1 } from '../maps/routeN1E1';
@@ -511,6 +513,13 @@ export const questNames = [
 	'catch a very light specimen',
 	'catch a tiny specimen',
 	'catch a gigantic specimen',
+	'catch a pokemon with perfect attack ivs',
+	'catch a pokemon with perfect special-attack ivs',
+	'catch a pokemon with perfect defense ivs',
+	'catch a pokemon with perfect special-defense ivs',
+	'catch a pokemon with perfect speed ivs',
+	'catch a pokemon with perfect hp ivs',
+	'catch a pokemon with top 90% ivs',
 	'catch a pokemon in every type of apricorn ball',
 	'defeat morty',
 	'defeat bugsy',
@@ -599,6 +608,7 @@ export const questNames = [
 	'train a Pokemon to 200 Hp EV',
 	'train the EV of two stats over 200 on a Pokemon',
 	'train a Pokemon to 510 EV',
+	'clear out the rocket camp',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -1412,6 +1422,81 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'catch a tiny specimen',
 		conditionFunction: (s) =>
 			s.pokemon.some((p) => p.heightModifier && p.heightModifier > 0.9),
+	},
+	'catch a pokemon with perfect attack ivs': {
+		kind: 'BULLETIN',
+		rewardItems: {
+			'muscle-mochi': 2,
+		},
+		researchPoints: 15,
+		availableAfter: 'catch a gigantic specimen',
+		conditionFunction: (s) =>
+			s.pokemon.some((p) => p.intrinsicValues.attack === 31),
+	},
+	'catch a pokemon with perfect special-attack ivs': {
+		kind: 'BULLETIN',
+		rewardItems: {
+			'clever-mochi': 2,
+		},
+		researchPoints: 15,
+		availableAfter: 'catch a pokemon with perfect attack ivs',
+		conditionFunction: (s) =>
+			s.pokemon.some((p) => p.intrinsicValues['special-attack'] === 31),
+	},
+	'catch a pokemon with perfect defense ivs': {
+		kind: 'BULLETIN',
+		rewardItems: {
+			'resist-mochi': 2,
+		},
+		researchPoints: 15,
+		availableAfter: 'catch a pokemon with perfect special-attack ivs',
+		conditionFunction: (s) =>
+			s.pokemon.some((p) => p.intrinsicValues['defense'] === 31),
+	},
+	'catch a pokemon with perfect special-defense ivs': {
+		kind: 'BULLETIN',
+		rewardItems: {
+			'genius-mochi': 2,
+		},
+		researchPoints: 15,
+		availableAfter: 'catch a pokemon with perfect defense ivs',
+		conditionFunction: (s) =>
+			s.pokemon.some((p) => p.intrinsicValues['special-defense'] === 31),
+	},
+	'catch a pokemon with perfect speed ivs': {
+		kind: 'BULLETIN',
+		rewardItems: {
+			'swift-mochi': 2,
+		},
+		researchPoints: 15,
+		availableAfter: 'catch a pokemon with perfect special defense ivs',
+		conditionFunction: (s) =>
+			s.pokemon.some((p) => p.intrinsicValues['speed'] === 31),
+	},
+	'catch a pokemon with perfect hp ivs': {
+		kind: 'BULLETIN',
+		rewardItems: {
+			'health-mochi': 2,
+		},
+		researchPoints: 15,
+		availableAfter: 'catch a pokemon with perfect speed ivs',
+		conditionFunction: (s) =>
+			s.pokemon.some((p) => p.intrinsicValues['hp'] === 31),
+	},
+	'catch a pokemon with top 90% ivs': {
+		kind: 'BULLETIN',
+		rewardItems: {
+			'muscle-mochi': 3,
+			'genius-mochi': 3,
+			'clever-mochi': 3,
+			'swift-mochi': 3,
+			'health-mochi': 3,
+			'resist-mochi': 3,
+		},
+		researchPoints: 50,
+		availableAfter: 'catch a pokemon with perfect attack ivs',
+		conditionFunction: (s) =>
+			s.pokemon.some((p) => sumOfIvs(p.intrinsicValues) > 168),
 	},
 	'catch local dark and ghost pokemon': {
 		rewardItems: { 'odd-keystone': 1 },
@@ -2754,6 +2839,13 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'clever-mochi': 20,
 			'swift-mochi': 20,
 		},
+	},
+	'clear out the rocket camp': {
+		researchPoints: 50,
+		rewardItems: { 'moomoo-milk': 5, 'big-malasada': 5 },
+		rangerLevels: 5,
+		kind: 'QUEST_LINE',
+		conditionFunction: allRocketCampTrainersDefeated,
 	},
 };
 

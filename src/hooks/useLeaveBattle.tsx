@@ -15,6 +15,7 @@ import {
 } from '../interfaces/Inventory';
 import { isKeyItem, pickupTable } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { LocationContext } from './LocationProvider';
 import { SaveFileContext } from './useSaveFile';
 
 export interface LeaveBattlePayload {
@@ -28,6 +29,7 @@ export interface LeaveBattlePayload {
 	rewardItems?: Partial<Inventory>;
 }
 export const useLeaveBattle = () => {
+	const { location, setLocation } = useContext(LocationContext);
 	const { patchSaveFileReducer, saveFile, reset } = useContext(SaveFileContext);
 
 	const team = useMemo(
@@ -45,12 +47,12 @@ export const useLeaveBattle = () => {
 			defeatedChallengerId,
 			rewardItems,
 		}: LeaveBattlePayload) => {
-			let updatedLocation = saveFile.location;
+			let updatedLocation = location;
 
 			if (outcome === 'LOSS') {
 				if (
-					saveFile.location.mapId !== 'camp' &&
-					saveFile.location.mapId !== 'challengeField' &&
+					location.mapId !== 'camp' &&
+					location.mapId !== 'challengeField' &&
 					(saveFile.settings?.rogueLike ||
 						saveFile.settings?.releaseFaintedPokemon)
 				) {
@@ -73,9 +75,10 @@ export const useLeaveBattle = () => {
 						)
 					);
 
+					setLocation(updatedLocation);
 					patchSaveFileReducer({
 						meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
-						location: updatedLocation,
+
 						pokemon: saveFile.pokemon.map((p) => {
 							if (p.onTeam) {
 								return fullyHealPokemon(p);
@@ -83,7 +86,7 @@ export const useLeaveBattle = () => {
 							return p;
 						}),
 						bag:
-							saveFile.location.mapId === 'camp'
+							updatedLocation.mapId === 'camp'
 								? saveFile.bag
 								: bagWithOnlyKeyItems,
 					});
@@ -96,7 +99,7 @@ export const useLeaveBattle = () => {
 				if (
 					saveFile.settings?.releaseFaintedPokemon &&
 					isKO(p) &&
-					saveFile.location.mapId !== 'camp'
+					location.mapId !== 'camp'
 				) {
 					return false;
 				}
@@ -132,7 +135,7 @@ export const useLeaveBattle = () => {
 						c.ball === 'heal-ball'
 					),
 					caughtAtDate: new Date().getTime(),
-					caughtOnMap: saveFile.location.mapId,
+					caughtOnMap: location.mapId,
 				})),
 			].map((t, i) => ({ ...t, onTeam: i < 6 }));
 
@@ -145,7 +148,7 @@ export const useLeaveBattle = () => {
 				(h) => h.id === defeatedChallengerId
 			);
 			const gainedResearchPoints = () => {
-				if (saveFile.location.mapId === 'challengeField') {
+				if (location.mapId === 'challengeField') {
 					return 0;
 				}
 				if (outcome !== 'WIN') {
@@ -210,6 +213,23 @@ export const useLeaveBattle = () => {
 				pokedex,
 			});
 		},
-		[patchSaveFileReducer, reset, saveFile, team]
+		[
+			location,
+			patchSaveFileReducer,
+			reset,
+			saveFile.bag,
+			saveFile.currentSwarm,
+			saveFile.handledOccupants,
+			saveFile.mileStones,
+			saveFile.money,
+			saveFile.playerId,
+			saveFile.pokedex,
+			saveFile.pokemon,
+			saveFile.researchPoints,
+			saveFile.settings?.releaseFaintedPokemon,
+			saveFile.settings?.rogueLike,
+			setLocation,
+			team,
+		]
 	);
 };

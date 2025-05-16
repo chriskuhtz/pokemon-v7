@@ -15,6 +15,7 @@ import { chuckLine } from './chuckLine';
 import { elmLine } from './elmLine';
 import { evExpertLine } from './evExpert';
 import { falknerLine } from './falknerLine';
+import { lookerLine } from './lookerLine';
 import { mortyLine } from './mortyLine';
 import { oakLine } from './oakLine';
 import { pikachuFanLine } from './pikachuFanLine';
@@ -329,4 +330,5 @@ export const campOccupants: OverworldMap['occupants'] = [
 	...evExpertLine,
 	rewardChris,
 	bugsy,
+	...lookerLine,
 ];

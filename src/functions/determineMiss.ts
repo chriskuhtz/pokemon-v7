@@ -1,4 +1,9 @@
-import { digHitMoves, flyHitMoves, ohkoMoves } from '../constants/ohkoMoves';
+import {
+	digHitMoves,
+	flyHitMoves,
+	ohkoMoves,
+	shadowHitMoves,
+} from '../constants/ohkoMoves';
 import { passThroughProtectMoves } from '../constants/passThroughProtectMoves';
 import { soundBasedMoves } from '../constants/soundBasedMoves';
 import { BattleAttack } from '../interfaces/BattleActions';
@@ -49,6 +54,8 @@ export const determineMiss = (
 	weather: WeatherType | undefined,
 	targetIsFlying: boolean | undefined,
 	targetIsUnderground: boolean | undefined,
+	targetIsInShadows: boolean | undefined,
+	targetIsDiving: boolean | undefined,
 	terrain: BattleTerrain | undefined
 ): { miss: boolean; reason?: MissReason } => {
 	const selfTargeting = isSelfTargeting(attack.data);
@@ -94,6 +101,8 @@ export const determineMiss = (
 		!ohkoMoves.includes(attack.name) &&
 		!targetIsFlying &&
 		!targetIsUnderground &&
+		!targetIsInShadows &&
+		!targetIsDiving &&
 		!target.protected
 	) {
 		return { miss: false };
@@ -103,6 +112,12 @@ export const determineMiss = (
 		return { miss: true };
 	}
 	if (targetIsUnderground && !digHitMoves.includes(attack.name)) {
+		return { miss: true };
+	}
+	if (targetIsInShadows && !shadowHitMoves.includes(attack.name)) {
+		return { miss: true };
+	}
+	if (targetIsDiving) {
 		return { miss: true };
 	}
 	if (attack.data.accuracy === null) {

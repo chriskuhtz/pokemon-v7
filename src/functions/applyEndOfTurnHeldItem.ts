@@ -138,10 +138,11 @@ export const applyEndOfTurnHeldItem = (
 		addMultipleMessages([
 			`${pokemon.data.name} gave itself a boost with ${heldItem}`,
 		]);
+
 		return applyStatChangeToPokemon(
 			{ ...pokemon, heldItemName: undefined, consumedBerry: heldItem },
 			booster,
-			1,
+			pokemon.ability === 'ripen' ? 2 : 1,
 			true,
 			[],
 			(x) => addMessage(x.message)
@@ -154,7 +155,7 @@ export const applyEndOfTurnHeldItem = (
 		return applyStatChangeToPokemon(
 			{ ...pokemon, heldItemName: undefined, consumedBerry: heldItem },
 			getRandomBoostableStat(),
-			1,
+			pokemon.ability === 'ripen' ? 2 : 1,
 			true,
 			[],
 			(x) => addMessage(x.message)
@@ -184,7 +185,13 @@ export const applyEndOfTurnHeldItem = (
 			...pokemon,
 			heldItemName: undefined,
 			consumedBerry: heldItem,
-			damage: Math.floor(Math.max(0, pokemon.damage - pokemon.stats.hp / 4)),
+			damage: Math.floor(
+				Math.max(
+					0,
+					pokemon.damage -
+						pokemon.stats.hp / (pokemon.ability === 'ripen' ? 2 : 4)
+				)
+			),
 		};
 	}
 	if (heldItem === 'kee-berry' && pokemon.lastReceivedDamage?.wasPhysical) {
@@ -194,7 +201,7 @@ export const applyEndOfTurnHeldItem = (
 		return applyStatChangeToPokemon(
 			{ ...pokemon, heldItemName: undefined, consumedBerry: heldItem },
 			'defense',
-			1,
+			pokemon.ability === 'ripen' ? 2 : 1,
 			true,
 			[],
 			(x) => addMessage(x.message)
@@ -207,7 +214,7 @@ export const applyEndOfTurnHeldItem = (
 		return applyStatChangeToPokemon(
 			{ ...pokemon, heldItemName: undefined, consumedBerry: heldItem },
 			'special-defense',
-			1,
+			pokemon.ability === 'ripen' ? 2 : 1,
 			true,
 			[],
 			(x) => addMessage(x.message)

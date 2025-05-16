@@ -1,5 +1,7 @@
 import { useCallback, useContext, useMemo } from 'react';
+import { startingLocation } from '../constants/gameData';
 import { joinInventories } from '../interfaces/Inventory';
+import { LocationContext } from './LocationProvider';
 import { SaveFileContext } from './useSaveFile';
 
 export const useEscapeRope = (): {
@@ -7,7 +9,7 @@ export const useEscapeRope = (): {
 	disabled: boolean;
 } => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
-
+	const { setLocation } = useContext(LocationContext);
 	const disabled = useMemo(() => {
 		if (saveFile.bag['escape-rope'] <= 0) {
 			return true;
@@ -20,19 +22,13 @@ export const useEscapeRope = (): {
 			return;
 		}
 
+		setLocation(startingLocation);
 		patchSaveFileReducer({
 			...saveFile,
 			bag: joinInventories(saveFile.bag, { 'escape-rope': 1 }, true),
-			location: {
-				...saveFile.location,
-				x: 1,
-				y: 1,
-				orientation: 'DOWN',
-				mapId: 'camp',
-			},
 			meta: { ...saveFile, activeTab: 'OVERWORLD' },
 		});
-	}, [disabled, patchSaveFileReducer, saveFile]);
+	}, [disabled, patchSaveFileReducer, saveFile, setLocation]);
 
 	return { applyEscapeRope, disabled };
 };
