@@ -260,7 +260,7 @@ export const calculateDamage = (
 	};
 
 	const def =
-		damageClass === 'physical'
+		damageClass === 'physical' || attack.name === 'psyshock'
 			? calculateModifiedStat(
 					target.stats.defense,
 					defBoost(),
