@@ -9,5 +9,6 @@ export const flyHitMoves = [
 	'magnet-bomb',
 ];
 export const digHitMoves = ['earthquake', 'magnitude', 'magnet-bomb'];
+export const shadowHitMoves = ['magnet-bomb'];
 export const flyDoubleDamageMoves = ['gust', 'twister'];
 export const diveDoubleDamageMoves = ['surf', 'whirlpool'];

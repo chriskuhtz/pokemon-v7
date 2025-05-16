@@ -7,6 +7,9 @@ export const getChargeUpMessage = (
 	if (moveName === 'fly') {
 		return `${userName} flew up high `;
 	}
+	if (moveName === 'shadow-force') {
+		return `${userName} vanished into the shadows `;
+	}
 	if (moveName === 'dig') {
 		return `${userName} dug underground `;
 	}

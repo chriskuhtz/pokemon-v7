@@ -160,6 +160,14 @@ export const handleAttackStart = ({
 			target.moveQueue.length > 0 &&
 			target.moveQueue[0].type === 'BattleAttack' &&
 			target.moveQueue[0].name === 'dig';
+		const isInShadows =
+			target.moveQueue.length > 0 &&
+			target.moveQueue[0].type === 'BattleAttack' &&
+			target.moveQueue[0].name === 'shadow-force';
+		const isDiving =
+			target.moveQueue.length > 0 &&
+			target.moveQueue[0].type === 'BattleAttack' &&
+			target.moveQueue[0].name === 'dive';
 		const { miss, reason } = determineMiss(
 			move,
 			attacker,
@@ -168,6 +176,8 @@ export const handleAttackStart = ({
 			battleWeather,
 			isFlying,
 			isUnderground,
+			isInShadows,
+			isDiving,
 			terrain
 		);
 		if (miss) {
