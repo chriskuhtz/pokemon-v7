@@ -10,13 +10,11 @@ import { useDrawForeground } from '../../hooks/useDrawBackground';
 import { useDugtrioExplorers } from '../../hooks/useDugtrioExplorers';
 import { useHallowedTower } from '../../hooks/useHallowedTower';
 import { useHoneyTree } from '../../hooks/useHoneyTree';
-import {
-	useInteractWithSnorlax,
-	useStaticEncounter,
-} from '../../hooks/useInteractWithSnorlax';
+import { useInteractWithSnorlax } from '../../hooks/useInteractWithSnorlax';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useRocketRadio } from '../../hooks/useRocketRadio';
 import { SaveFileContext } from '../../hooks/useSaveFile';
+import { useStaticEncounter } from '../../hooks/useStaticEncounter';
 import { useStrangeTree } from '../../hooks/useStrangeTree';
 import { useSwarmRadar } from '../../hooks/useSwarmRadar';
 import { useZigzagoonForagers } from '../../hooks/useZigzagoonForagers';

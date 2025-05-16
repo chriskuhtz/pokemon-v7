@@ -1,26 +1,21 @@
-import { useCallback, useContext } from 'react';
-import { ONE_DAY } from '../constants/gameData';
+import { useContext, useCallback } from 'react';
 import {
 	OPPO_ID,
 	makeChallengerPokemon,
 } from '../functions/makeChallengerPokemon';
 import { Challenger } from '../interfaces/Challenger';
 import { EmptyInventory } from '../interfaces/Inventory';
-import { OverworldSnorlax } from '../interfaces/OverworldMap';
+import { OverworldPokemon } from '../interfaces/OverworldMap';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
-export const useInteractWithSnorlax = () => {
+export const useStaticEncounter = () => {
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
 	const { addMultipleMessages } = useContext(MessageQueueContext);
 
 	const interact = useCallback(
-		(occ: OverworldSnorlax) => {
-			if (saveFile.bag['poke-flute'] <= 0) {
-				addMultipleMessages([
-					{ message: 'Snorlax is sleeping deeply', needsNoConfirmation: true },
-					{ message: 'Maybe a song could wake it', needsNoConfirmation: true },
-				]);
+		(occ: OverworldPokemon) => {
+			if (!occ.encounter) {
 				return;
 			} else {
 				const challenger: Challenger = {
@@ -29,25 +24,22 @@ export const useInteractWithSnorlax = () => {
 					inventory: EmptyInventory,
 					team: [
 						makeChallengerPokemon({
-							name: 'snorlax',
-							xp: 64000,
+							name: occ.encounter.name,
+							xp: occ.encounter.maxXp,
 						}),
 					],
 				};
-				const now = new Date().getTime();
 
 				addMultipleMessages([
-					{ message: 'You play the pokeflute' },
-					{ message: 'Snorlax wakes up grumpily ...' },
 					{
-						message: 'and attacks',
+						message: 'The wild pokemon attacks',
 						onRemoval: () => {
 							patchSaveFileReducer({
 								mileStones: { ...saveFile.mileStones, hasWokenASnorlax: true },
 								meta: { currentChallenger: challenger, activeTab: 'BATTLE' },
 								handledOccupants: [
 									...saveFile.handledOccupants,
-									{ id: occ.id, resetAt: now + ONE_DAY },
+									{ id: occ.id, resetAt: -1 },
 								],
 							});
 						},
@@ -58,7 +50,6 @@ export const useInteractWithSnorlax = () => {
 		[
 			addMultipleMessages,
 			patchSaveFileReducer,
-			saveFile.bag,
 			saveFile.handledOccupants,
 			saveFile.mileStones,
 		]

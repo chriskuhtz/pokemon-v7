@@ -420,4 +420,12 @@ export const extraFeatureCheckList: {
 	{ name: 'trainer ai should consider flying,dig, diving' },
 	{ name: 'rangers spruce,fir and pine' },
 	{ name: 'normalize data to prevent slow down' },
+	{ name: 'fix pathing' },
+	{ name: 'whitney' },
+	{ name: 'pryce' },
+	{ name: 'claire' },
+	{ name: 'jasmine' },
+	{ name: 'e4 challenge' },
+	{ name: 'rock climbing' },
+	{ name: 'kanto leaders with proper teams on training field' },
 ];

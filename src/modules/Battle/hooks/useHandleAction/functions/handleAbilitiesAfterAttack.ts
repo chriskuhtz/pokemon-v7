@@ -109,6 +109,18 @@ export const handleAbilitiesAfterAttack = (
 			'gooey'
 		);
 	}
+	//check for gooey
+	if (target.ability === 'cotton-down' && isContactMove(move.name, attacker)) {
+		updatedAttacker = applyStatChangeToPokemon(
+			updatedAttacker,
+			'speed',
+			-1,
+			false,
+			battleFieldEffects,
+			addMessage,
+			'cotton-down'
+		);
+	}
 	//check for tangling hair
 	if (
 		target.ability === 'tangling-hair' &&
