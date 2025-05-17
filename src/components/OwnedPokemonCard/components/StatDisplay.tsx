@@ -9,6 +9,7 @@ import { PokemonData } from '../../../interfaces/PokemonData';
 import { PokemonType } from '../../../interfaces/PokemonType';
 import { StatObject } from '../../../interfaces/StatObject';
 import { AnimatedBar } from '../../../uiComponents/AnimatedBar/AnimatedBar';
+import { Card } from '../../../uiComponents/Card/Card';
 import { Chip } from '../../../uiComponents/Chip/Chip';
 import { Stack } from '../../../uiComponents/Stack/Stack';
 
@@ -267,27 +268,28 @@ const IVsSection = ({
 		</div>
 	);
 };
-const NatureSection = ({ nature }: { nature: Nature }) => {
+export const NatureSection = ({ nature }: { nature: Nature }) => {
 	const mods = natures[nature];
 	return (
-		<div
-			style={{
-				padding: '.5rem',
-				border: '1px solid black',
-				borderRadius: '1rem',
-				backgroundColor: 'rgba(255, 255, 255, 0.5)',
-			}}
-		>
-			<strong
-				style={{
-					padding: '1rem .5rem',
-				}}
-			>
-				Nature: {nature}
-			</strong>
-			{!mods.buff && <p>Neutral Nature</p>}
-			{mods.buff && <p>+ 10% {mods.buff}</p>}{' '}
-			{mods.debuff && <p>- 10% {mods.debuff}</p>}
-		</div>
+		<Card
+			actionElements={[]}
+			icon={<h3>+/-</h3>}
+			content={
+				<>
+					<strong
+						style={{
+							display: 'flex',
+							gap: '.5rem',
+							alignItems: 'center',
+						}}
+					>
+						<span>{nature}: </span>
+						<span>{!mods.buff && <p>Neutral Nature</p>}</span>
+						<span>{mods.buff && <p>+ 10% {mods.buff}</p>} </span>
+						<span>{mods.debuff && <p>- 10% {mods.debuff}</p>}</span>
+					</strong>
+				</>
+			}
+		/>
 	);
 };

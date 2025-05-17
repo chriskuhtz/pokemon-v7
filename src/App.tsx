@@ -7,6 +7,7 @@ import { generateInventory, Inventory } from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
 import { mapMakerRoutes } from './interfaces/Routing';
 import { SpriteEnum } from './interfaces/SpriteEnum';
+import { AbilityTutor } from './modules/AbilityTutor/AbilityTutor';
 import { AmoongussCompostResearcher } from './modules/AmoongussResearcher/AmoongussResearcher';
 import { ApricornSmithy } from './modules/ApricornSmithy/ApricornSmithy';
 import { Bag } from './modules/Bag/Bag';
@@ -266,6 +267,9 @@ export const App = (): JSX.Element => {
 	}
 	if (activeTab === 'NATURE_TUTOR') {
 		return <NatureTutor />;
+	}
+	if (activeTab === 'ABILITY_TUTOR') {
+		return <AbilityTutor />;
 	}
 	if (activeTab === 'DRAGONITE_TAXI') {
 		return <DragoniteTaxi />;

@@ -48,6 +48,7 @@ export const routes = [
 	'WIKI',
 	'TRAVELLING_MERCHANT',
 	'NATURE_TUTOR',
+	'ABILITY_TUTOR',
 	...mapMakerRoutes,
 ] as const;
 export type RoutesType = (typeof routes)[number];

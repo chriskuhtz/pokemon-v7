@@ -1,5 +1,6 @@
-import { useCallback, useContext, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
+import { NatureSection } from '../../components/OwnedPokemonCard/components/StatDisplay';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
@@ -109,13 +110,15 @@ const NatureEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 
 	return (
 		<Stack mode={'column'}>
+			<h4>Current Nature:</h4>
+			<NatureSection nature={ownedPokemon.nature} />
 			{options.map((n) => {
 				const payment = getCostForLearnMethod(n);
 				const mods = natures[n];
 				const disabled = saveFile.bag[payment] < 1;
 
 				if (!mods.buff) {
-					return <></>;
+					return <React.Fragment key={n}></React.Fragment>;
 				}
 				return (
 					<Card

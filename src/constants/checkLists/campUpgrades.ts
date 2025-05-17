@@ -49,6 +49,7 @@ export const campUpgradeNames = [
 	'ranger certification',
 	'dragonite taxi',
 	'invite nature tutor',
+	'invite ability tutor',
 ] as const;
 
 export type CampUpgrade = (typeof campUpgradeNames)[number];
@@ -105,6 +106,7 @@ export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
 	'training field 4': 'Training',
 	'training field 5': 'Training',
 	'invite nature tutor': 'Training',
+	'invite ability tutor': 'Training',
 	'ranger certification': 'Training',
 	'machete certification': 'Exploration',
 	'sledge hammer certification': 'Exploration',
@@ -124,6 +126,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'invite move tutor': baseRequirements,
 	'invite effort value expert': ['invite move tutor', 'training field 1'],
 	'invite nature tutor': ['invite move tutor', 'training field 1'],
+	'invite ability tutor': ['invite move tutor', 'training field 1'],
 	'invite ghost expert morty': ['machete certification'],
 	'invite fighting expert chuck': ['machete certification'],
 	'invite flying pokemon expert falkner': ['machete certification'],
@@ -178,6 +181,7 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	'invite apricorn smith kurt': 'Pokeballs can be made from apricorns',
 	'invite move tutor': 'Teaches your Pokemon new moves',
 	'invite nature tutor': 'Can change your Pokemons Nature',
+	'invite ability tutor': 'Can change your Pokemons Ability',
 	'invite effort value expert': 'Explains those weird stat values',
 	'invite ghost expert morty':
 		'The Gym Leader from Ecruteak studies ghost pokemon',
