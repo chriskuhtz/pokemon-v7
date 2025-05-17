@@ -420,7 +420,7 @@ export const extraFeatureCheckList: {
 	{ name: 'releasing pokemon should not end fullscreen mode', handled: true },
 	{ name: 'catch x pokemon of type', handled: true },
 	{ name: 'filter by type', handled: true },
-	{ name: 'catch boosts as rewards' },
+	{ name: 'catch boosts as rewards', handled: true },
 	{ name: 'fix pathing' },
 	{ name: 'whitney' },
 	{ name: 'jasmine' },

@@ -81,6 +81,11 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 										)}
 									</h5>
 									<h5>Research Points: {quest.researchPoints}</h5>
+									{quest.catchBoosts && (
+										<h5>
+											Catch Boosts: {Object.keys(quest.catchBoosts).join(', ')}
+										</h5>
+									)}
 									{quest.targetPokemon && (
 										<h5 style={{ display: 'flex', alignItems: 'center' }}>
 											Targets:

@@ -25,6 +25,7 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 					[saveBerry]: 2,
 				},
 				researchPoints: 5,
+				catchBoosts: { [type]: 1 },
 				conditionFunction: (s) =>
 					Object.entries(s.pokedex).filter(
 						([name, info]) =>
@@ -43,6 +44,7 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 					'coba-berry': 4,
 					[saveBerry]: 4,
 				},
+				catchBoosts: { [type]: 1 },
 				researchPoints: 20,
 				availableAfter: `catch a ${type} pokemon` as QuestName,
 				conditionFunction: (s) =>
@@ -64,6 +66,7 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 					'aguav-berry': 6,
 					[saveBerry]: 6,
 				},
+				catchBoosts: { [type]: 1 },
 				researchPoints: 50,
 				availableAfter: `catch 10 ${type} pokemon` as QuestName,
 				conditionFunction: (s) =>
@@ -83,6 +86,7 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 					[boostItem]: 1,
 					[saveBerry]: 10,
 				},
+				catchBoosts: { [type]: 1 },
 				researchPoints: 100,
 				availableAfter: `catch 25 ${type} pokemon` as QuestName,
 				conditionFunction: (s) =>

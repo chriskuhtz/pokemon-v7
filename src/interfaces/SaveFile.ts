@@ -8,6 +8,7 @@ import { Inventory } from './Inventory';
 import { ApricornType, BerryType, ItemType, MulchType } from './Item';
 import { OverworldTrainer } from './OverworldMap';
 import { OwnedPokemon } from './OwnedPokemon';
+import { PokemonType } from './PokemonType';
 import { QuestStatus } from './Quest';
 import { RoutesType } from './Routing';
 
@@ -78,6 +79,7 @@ export type Pokedex = Record<
 	{ seenOnRoutes: MapId[]; caughtOnRoutes: MapId[] }
 >;
 
+export type CatchBoosts = Record<PokemonType, number>;
 export interface SaveFile {
 	badges: BadgeName[];
 	playerId: string;
@@ -144,4 +146,5 @@ export interface SaveFile {
 	cookingSkill?: number;
 	activatedRepel?: 'repel' | 'super-repel' | 'max-repel';
 	activatedLure?: 'lure' | 'super-lure' | 'max-lure';
+	catchBoosts?: CatchBoosts;
 }

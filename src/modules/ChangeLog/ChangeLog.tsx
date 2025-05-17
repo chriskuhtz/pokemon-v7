@@ -67,6 +67,7 @@ const ChangeLogV27 = (): JSX.Element => {
 			<ol style={{ lineHeight: '1.5rem' }}>
 				<li>Favorites System</li>
 				<li>New Quests</li>
+				<li>Catchboosts as quest rewards</li>
 				<li>New Abilities and Attacks</li>
 			</ol>
 		</>

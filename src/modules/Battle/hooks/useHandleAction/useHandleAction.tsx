@@ -6,6 +6,7 @@ import { BattleLocation } from '../../../../functions/determineCaptureSuccess';
 import { determineRunawaySuccess } from '../../../../functions/determineRunAwaySuccess';
 import { getChargeUpMessage } from '../../../../functions/getChargeUpMessage';
 import { getPlayerId } from '../../../../functions/getPlayerId';
+import { EmptyCatchBoosts } from '../../../../functions/joinCatchBoosts';
 import { Message } from '../../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../../hooks/useSaveFile';
 import { BattlePokemon } from '../../../../interfaces/BattlePokemon';
@@ -40,7 +41,7 @@ export const useHandleAction = (
 	setTerrain: (x: TerrainObject) => void
 ) => {
 	const {
-		saveFile: { pokedex, mileStones },
+		saveFile: { pokedex, mileStones, catchBoosts },
 		patchSaveFileReducer,
 	} = useContext(SaveFileContext);
 
@@ -158,7 +159,8 @@ export const useHandleAction = (
 					battleRound,
 					battleLocation,
 					addUsedItem,
-					pokedex
+					pokedex,
+					catchBoosts ?? EmptyCatchBoosts
 				);
 			}
 			if (move.type === 'InBattleItem') {
@@ -298,6 +300,7 @@ export const useHandleAction = (
 			battleLocation,
 			addUsedItem,
 			pokedex,
+			catchBoosts,
 			battleFieldEffects,
 			battleWeather,
 			scatterCoins,
