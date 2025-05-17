@@ -222,22 +222,33 @@ export const calculateDamage = (
 		addMessage({ message: 'critical hit!' });
 	}
 
-	const atk =
-		damageClass === 'physical'
-			? calculateModifiedStat(
-					'attack',
-					attacker,
-					battleFieldEffects.some(
-						(e) => e.type === 'flower-gift' && e.ownerId === attacker.ownerId
-					)
-			  )
-			: calculateModifiedStat(
-					'special-attack',
-					attacker,
-					battleFieldEffects.some(
-						(e) => e.type === 'flower-gift' && e.ownerId === attacker.ownerId
-					)
-			  );
+	const atk = () => {
+		if (attack.name === 'foul-play') {
+			return calculateModifiedStat(
+				'attack',
+				target,
+				battleFieldEffects.some(
+					(e) => e.type === 'flower-gift' && e.ownerId === target.ownerId
+				)
+			);
+		}
+		if (damageClass === 'physical') {
+			return calculateModifiedStat(
+				'attack',
+				attacker,
+				battleFieldEffects.some(
+					(e) => e.type === 'flower-gift' && e.ownerId === attacker.ownerId
+				)
+			);
+		}
+		return calculateModifiedStat(
+			'special-attack',
+			attacker,
+			battleFieldEffects.some(
+				(e) => e.type === 'flower-gift' && e.ownerId === attacker.ownerId
+			)
+		);
+	};
 
 	//Crits ignore boosted defense
 	const ignoreBoost = () => {
@@ -263,7 +274,7 @@ export const calculateDamage = (
 					ignoreBoost()
 			  );
 
-	const statFactor = atk / def;
+	const statFactor = atk() / def;
 
 	const pureDamage = (levelFactor * power * statFactor) / 50 + 2;
 
