@@ -437,4 +437,5 @@ export const extraFeatureCheckList: {
 	{ name: 'catch x pokemon of type' },
 	{ name: 'storage sorting by bst group' },
 	{ name: 'progress bar for catch x quests' },
+	{ name: 'ability and nature tutor' },
 ];

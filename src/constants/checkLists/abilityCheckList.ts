@@ -1109,7 +1109,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/260/',
 		handled: true,
 	},
-	{ name: 'curious-medicine', url: 'https://pokeapi.co/api/v2/ability/261/' },
+	{
+		name: 'curious-medicine',
+		url: 'https://pokeapi.co/api/v2/ability/261/',
+		handled: true,
+	},
 	{ name: 'transistor', url: 'https://pokeapi.co/api/v2/ability/262/' },
 	{ name: 'dragons-maw', url: 'https://pokeapi.co/api/v2/ability/263/' },
 	{ name: 'chilling-neigh', url: 'https://pokeapi.co/api/v2/ability/264/' },
@@ -1481,6 +1485,7 @@ export const abilityNames = [
 	'pastel-veil',
 	'quick-draw',
 	'unseen-fist',
+	'curious-medicine',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
