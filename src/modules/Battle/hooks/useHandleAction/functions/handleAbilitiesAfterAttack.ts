@@ -607,6 +607,18 @@ export const handleAbilitiesAfterAttack = (
 			'chilling-neigh'
 		);
 	}
+	//grim neigh
+	if (isKO(updatedTarget) && updatedAttacker.ability === 'grim-neigh') {
+		updatedAttacker = applyStatChangeToPokemon(
+			updatedAttacker,
+			'attack',
+			1,
+			true,
+			[],
+			addMessage,
+			'grim-neigh'
+		);
+	}
 	//Beast boost
 	if (isKO(updatedTarget) && updatedAttacker.ability === 'beast-boost') {
 		const highestStatName = Object.entries(updatedAttacker.stats).sort(
