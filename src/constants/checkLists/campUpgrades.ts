@@ -114,7 +114,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'berry lure station routeS1W1': ['swimming certification'],
 	//the last upgrade
 	'dragonite taxi': campUpgradeNames.filter(
-		(name) => name !== 'dragonite taxi'
+		(name) => campUpgradeCategories[name] === 'Exploration'
 	),
 };
 export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {

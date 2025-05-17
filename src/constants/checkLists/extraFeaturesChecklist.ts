@@ -400,7 +400,12 @@ export const extraFeatureCheckList: {
 	{ name: 'wild apricorn trees', handled: true },
 	{ name: 'iv quests', handled: true },
 	{ name: 'looker', handled: true },
-	{ name: 'catch x weak pokemon' },
+	{ name: 'catch x weak pokemon', handled: true },
+	{
+		name: 'dragonite should be last explorer, not last overall',
+		handled: true,
+	},
+	{ name: 'unique location, only accessible by dragonite' },
 	{ name: 'catch x medium strongpokemon' },
 	{ name: 'catch x strong pokemon' },
 	{ name: 'total bst marker' },
