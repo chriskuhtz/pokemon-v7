@@ -13,6 +13,7 @@ import {
 import { battleSpriteSize } from '../../constants/gameData';
 import { mapIds } from '../../constants/maps/mapsRecord';
 import { nameToIdMap } from '../../constants/pokemonNames';
+import { byName } from '../../constants/typeRecord';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getHeldItem } from '../../functions/getHeldItem';
 import { getItemUrl } from '../../functions/getItemUrl';
@@ -23,6 +24,7 @@ import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Inventory, joinInventories } from '../../interfaces/Inventory';
 import { balltypes } from '../../interfaces/Item';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
+import { realTypes } from '../../interfaces/PokemonType';
 import { Chip } from '../../uiComponents/Chip/Chip';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
 import { Modal } from '../../uiComponents/Modal/Modal';
@@ -30,10 +32,11 @@ import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
 export const sortByTypes = [
-	'NAME',
-	'DEX ID',
-	'CATCHDATE',
 	'FAVORITE',
+	'DEX ID',
+	'NAME',
+	'CATCHDATE',
+	'TYPE',
 	'XP',
 	'HAPPINESS',
 	'BALL',
@@ -52,20 +55,8 @@ export const PokemonStorage = ({
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
 	const allPokemon = useMemo(() => saveFile.pokemon, [saveFile]);
-	const [sortBy, setSortBy] = useState<PokemonFilter>('NAME');
+	const [sortBy, setSortBy] = useState<PokemonFilter>('FAVORITE');
 	const sortFunction = useMemo(() => {
-		if (sortBy === 'FAVORITE') {
-			return (a: OwnedPokemon) => {
-				return a.favorite ? -1 : 1;
-			};
-		}
-		if (sortBy === 'LOCATION') {
-			return (a: OwnedPokemon, b: OwnedPokemon) => {
-				if (a.caughtOnMap < b.caughtOnMap) return -1;
-				if (a.caughtOnMap > b.caughtOnMap) return 1;
-				return 0;
-			};
-		}
 		if (sortBy === 'CATCHDATE') {
 			return (a: OwnedPokemon, b: OwnedPokemon) =>
 				b.caughtAtDate - a.caughtAtDate;
@@ -73,9 +64,6 @@ export const PokemonStorage = ({
 		if (sortBy === 'DEX ID') {
 			return (a: OwnedPokemon, b: OwnedPokemon) =>
 				nameToIdMap[a.name] - nameToIdMap[b.name];
-		}
-		if (sortBy === 'XP') {
-			return (a: OwnedPokemon, b: OwnedPokemon) => b.xp - a.xp;
 		}
 		if (sortBy === 'HAPPINESS') {
 			return (a: OwnedPokemon, b: OwnedPokemon) => b.happiness - a.happiness;
@@ -102,6 +90,8 @@ export const PokemonStorage = ({
 			return (a: OwnedPokemon, b: OwnedPokemon) =>
 				(allBst[b.name] ?? 0) - (allBst[a.name] ?? 0);
 		}
+
+		return (a: OwnedPokemon, b: OwnedPokemon) => b.xp - a.xp;
 	}, [sortBy]);
 	const team = useMemo(() => allPokemon.filter((p) => p.onTeam), [allPokemon]);
 	const stored = useMemo(
@@ -390,6 +380,40 @@ const Sorted = ({
 			</Stack>
 		);
 	}
+	if (pokemonFilter === 'TYPE') {
+		return (
+			<Stack mode={'column'}>
+				{realTypes.map((type) => {
+					const filtered = stored.filter((s) => byName[s.name][0] === type);
+
+					if (filtered.length === 0) {
+						return <></>;
+					}
+					return (
+						<>
+							<h3
+								style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
+							>
+								<img height={battleSpriteSize} src={`/typeIcons/${type}.png`} />{' '}
+								{type}
+							</h3>
+							<Stack mode="row">
+								{filtered.sort(sortFunction).map((pokemon) => (
+									<Entry
+										pokemon={pokemon}
+										teamIsFull={teamIsFull}
+										togglePokemonOnTeam={togglePokemonOnTeam}
+										startReleaseProcess={startReleaseProcess}
+										toggleFavoriteStatus={toggleFavoriteStatus}
+									/>
+								))}
+							</Stack>
+						</>
+					);
+				})}
+			</Stack>
+		);
+	}
 	const happinessSteps = [200, 160, 120, 80, 40, 0];
 	if (pokemonFilter === 'HAPPINESS') {
 		return (
@@ -504,7 +528,6 @@ const Sorted = ({
 			</Stack>
 		);
 	}
-
 	const bstSteps = [
 		ultraHighBstPokemon,
 		highBstPokemon,

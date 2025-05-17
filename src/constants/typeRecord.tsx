@@ -1,7 +1,7 @@
-import { PokemonType } from '../interfaces/PokemonType';
+import { PokemonType, pokemonTypes } from '../interfaces/PokemonType';
 import { PokemonName } from './pokemonNames';
 
-export const byType: Record<PokemonName, PokemonType[]> = {
+export const byName: Record<PokemonName, PokemonType[]> = {
 	bulbasaur: ['grass', 'poison'],
 	ivysaur: ['grass', 'poison'],
 	venusaur: ['grass', 'poison'],
@@ -1306,7 +1306,15 @@ export const byType: Record<PokemonName, PokemonType[]> = {
 	'terapagos-stellar': ['normal'],
 };
 
-// const realTypes = pokemonTypes.filter((p) => p !== 'typeless');
+export const byType: Record<PokemonType, PokemonName[]> = Object.fromEntries(
+	[...pokemonTypes].map((type) => {
+		const mons: PokemonName[] = Object.entries(byName)
+			.filter(([, types]) => types.includes(type))
+			.map(([name]) => name as PokemonName);
+
+		return [type, mons];
+	})
+) as Record<PokemonType, PokemonName[]>;
 
 // realTypes.forEach((type) => {
 // 	console.log(

@@ -5,6 +5,7 @@ import {
 import { PokemonType, pokemonTypes } from '../../interfaces/PokemonType';
 import { Quest } from '../../interfaces/Quest';
 import { QuestName } from '../checkLists/questsRecord';
+import { PokemonName } from '../pokemonNames';
 import { byType } from '../typeRecord';
 
 const realTypes = pokemonTypes.filter((p) => p !== 'typeless');
@@ -21,12 +22,14 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 					'poke-ball': 2,
 					'chesto-berry': 2,
 					'pecha-berry': 2,
-					[saveBerry]: 1,
+					[saveBerry]: 2,
 				},
 				researchPoints: 5,
 				conditionFunction: (s) =>
-					[...new Set(s.pokemon.map((p) => p.name))].filter((p) =>
-						byType[p].includes(type)
+					Object.entries(s.pokedex).filter(
+						([name, info]) =>
+							info.caughtOnRoutes.length > 0 &&
+							byType[type].includes(name as PokemonName)
 					).length > 0,
 			},
 		],
@@ -38,13 +41,15 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 					'great-ball': 10,
 					'kebia-berry': 4,
 					'coba-berry': 4,
-					[saveBerry]: 3,
+					[saveBerry]: 4,
 				},
 				researchPoints: 20,
 				availableAfter: `catch a ${type} pokemon` as QuestName,
 				conditionFunction: (s) =>
-					[...new Set(s.pokemon.map((p) => p.name))].filter((p) =>
-						byType[p].includes(type)
+					Object.entries(s.pokedex).filter(
+						([name, info]) =>
+							info.caughtOnRoutes.length > 0 &&
+							byType[type].includes(name as PokemonName)
 					).length > 9,
 			},
 		],
@@ -57,13 +62,15 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 					'quick-ball': 10,
 					'rindo-berry': 6,
 					'aguav-berry': 6,
-					[saveBerry]: 3,
+					[saveBerry]: 6,
 				},
 				researchPoints: 50,
 				availableAfter: `catch 10 ${type} pokemon` as QuestName,
 				conditionFunction: (s) =>
-					[...new Set(s.pokemon.map((p) => p.name))].filter((p) =>
-						byType[p].includes(type)
+					Object.entries(s.pokedex).filter(
+						([name, info]) =>
+							info.caughtOnRoutes.length > 0 &&
+							byType[type].includes(name as PokemonName)
 					).length > 24,
 			},
 		],
@@ -74,13 +81,15 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 				rewardItems: {
 					'ultra-ball': 50,
 					[boostItem]: 1,
-					[saveBerry]: 5,
+					[saveBerry]: 10,
 				},
 				researchPoints: 100,
 				availableAfter: `catch 25 ${type} pokemon` as QuestName,
 				conditionFunction: (s) =>
-					[...new Set(s.pokemon.map((p) => p.name))].filter((p) =>
-						byType[p].includes(type)
+					Object.entries(s.pokedex).filter(
+						([name, info]) =>
+							info.caughtOnRoutes.length > 0 &&
+							byType[type].includes(name as PokemonName)
 					).length > 49,
 			},
 		],

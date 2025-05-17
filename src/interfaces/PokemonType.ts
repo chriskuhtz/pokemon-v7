@@ -21,6 +21,8 @@ export const pokemonTypes = [
 ] as const;
 export type PokemonType = (typeof pokemonTypes)[number];
 
+export const realTypes = pokemonTypes.filter((p) => p !== 'typeless');
+
 //key : MoveType, values: Target Types
 export const typeEffectivenessChart: Record<
 	PokemonType,
