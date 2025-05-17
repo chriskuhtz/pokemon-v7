@@ -60,7 +60,9 @@ export const applyPrimaryAilmentToPokemon = (
 		//fire pokemon cant get burned
 		!getTypeNames(target).includes('fire') &&
 		//flash fire pokemon cant get burned
-		!['flash-fire', 'water-veil', 'water-bubble'].includes(target.ability)
+		!['flash-fire', 'water-veil', 'water-bubble', 'thermal-exchange'].includes(
+			target.ability
+		)
 	) {
 		addMessage({
 			message: `${target.data.name} was burned ${suffix ? 'by ' + suffix : ''}`,

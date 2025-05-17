@@ -74,6 +74,7 @@ export const handleAbilitiesAfterAttack = (
 			),
 		};
 	}
+
 	//seed sower
 	if (
 		target.ability === 'seed-sower' &&
@@ -552,6 +553,22 @@ export const handleAbilitiesAfterAttack = (
 	//justified
 	if (
 		!isKO(updatedTarget) &&
+		updatedTarget.ability === 'thermal-exchange' &&
+		move.data.type.name === 'fire'
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'attack',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'thermal-exchange'
+		);
+	}
+	//justified
+	if (
+		!isKO(updatedTarget) &&
 		updatedTarget.ability === 'justified' &&
 		move.data.type.name === 'dark'
 	) {
@@ -605,6 +622,7 @@ export const handleAbilitiesAfterAttack = (
 			damage: Math.floor(updatedAttacker.damage + updatedAttacker.stats.hp / 4),
 		};
 	}
+
 	//Moxie
 	if (isKO(updatedTarget) && updatedAttacker.ability === 'moxie') {
 		updatedAttacker = applyStatChangeToPokemon(
