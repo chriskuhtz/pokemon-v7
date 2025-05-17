@@ -54,4 +54,5 @@ export interface OwnedPokemon {
 	growthRate: GrowthRateName;
 	caughtAtDate: number;
 	starter?: boolean;
+	favorite?: boolean;
 }

@@ -64,7 +64,9 @@ const ChangeLogV27 = (): JSX.Element => {
 	return (
 		<>
 			<h3>0.27:</h3>
-			<ol style={{ lineHeight: '1.5rem' }}></ol>
+			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>Favorites System</li>
+			</ol>
 		</>
 	);
 };

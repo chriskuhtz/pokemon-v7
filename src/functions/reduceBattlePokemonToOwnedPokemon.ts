@@ -11,6 +11,7 @@ export const reduceBattlePokemonToOwnedPokemon = (
 ): OwnedPokemon => {
 	const res = {
 		starter: newMon.starter,
+		favorite: newMon.favorite,
 		name: newMon.name,
 		gender: newMon.gender,
 		firstMove: {
