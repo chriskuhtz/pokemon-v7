@@ -1099,8 +1099,16 @@ export const abilityCheckList: {
 		handled: true,
 	},
 
-	{ name: 'quick-draw', url: 'https://pokeapi.co/api/v2/ability/259/' },
-	{ name: 'unseen-fist', url: 'https://pokeapi.co/api/v2/ability/260/' },
+	{
+		name: 'quick-draw',
+		url: 'https://pokeapi.co/api/v2/ability/259/',
+		handled: true,
+	},
+	{
+		name: 'unseen-fist',
+		url: 'https://pokeapi.co/api/v2/ability/260/',
+		handled: true,
+	},
 	{ name: 'curious-medicine', url: 'https://pokeapi.co/api/v2/ability/261/' },
 	{ name: 'transistor', url: 'https://pokeapi.co/api/v2/ability/262/' },
 	{ name: 'dragons-maw', url: 'https://pokeapi.co/api/v2/ability/263/' },
@@ -1472,6 +1480,7 @@ export const abilityNames = [
 	'gorilla-tactics',
 	'pastel-veil',
 	'quick-draw',
+	'unseen-fist',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

@@ -1,3 +1,4 @@
+import { isContactMove } from '../constants/contactMoves';
 import {
 	digHitMoves,
 	flyHitMoves,
@@ -65,7 +66,11 @@ export const determineMiss = (
 	if (attack.data.priority > 0 && target.ability === 'queenly-majesty') {
 		return { miss: true, reason: 'QUEENLY_MAJESTY' };
 	}
-	if (target.protected && !passThroughProtectMoves.includes(attack.name)) {
+	const passesThrough =
+		passThroughProtectMoves.includes(attack.name) ||
+		(isContactMove(attack.name, attacker) &&
+			attacker.ability === 'unseen-fist');
+	if (target.protected && !passesThrough) {
 		return { miss: true, reason: 'PROTECTED' };
 	}
 	if (attacker.ability === 'no-guard' || target.ability === 'no-guard') {
