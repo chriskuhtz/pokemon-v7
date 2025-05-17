@@ -379,6 +379,8 @@ export const calculateDamage = (
 			: 1;
 	const transistorFactor =
 		attacker.ability === 'transistor' && attackType === 'electric' ? 1.5 : 1;
+	const dragonsMawFactor =
+		attacker.ability === 'dragons-maw' && attackType === 'dragon' ? 1.5 : 1;
 	const overgrowFactor =
 		attacker.ability === 'overgrow' &&
 		attacker.damage > attacker.stats.hp * 0.66 &&
@@ -756,7 +758,8 @@ export const calculateDamage = (
 				powerSpotFactor *
 				steelySpiritFactor *
 				gorillaTacticsFactor *
-				transistorFactor
+				transistorFactor *
+				dragonsMawFactor
 		),
 		1
 	);
