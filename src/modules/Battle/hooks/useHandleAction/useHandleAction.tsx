@@ -13,7 +13,7 @@ import { ItemType } from '../../../../interfaces/Item';
 import { WeatherType } from '../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../BattleField';
 import { handleMoveBlockAilments } from '../../functions/handleMoveBlockAilments';
-import { BattleTerrain } from '../useBattleTerrain';
+import { BattleTerrain, TerrainObject } from '../useBattleTerrain';
 import { WeatherObject } from '../useBattleWeather';
 import { handleAllAttackCategories } from './functions/handleAllAttackCategories';
 import { handleCatch } from './functions/handleCatch';
@@ -36,7 +36,8 @@ export const useHandleAction = (
 	battleFieldEffects: BattleFieldEffect[],
 	setBattleWeather: (w: WeatherObject | undefined) => void,
 	removeSpikes: (ownerId: string) => void,
-	removeScreens: (ownerId: string) => void
+	removeScreens: (ownerId: string) => void,
+	setTerrain: (x: TerrainObject) => void
 ) => {
 	const {
 		saveFile: { pokedex, mileStones },
@@ -281,6 +282,7 @@ export const useHandleAction = (
 					removeScreens,
 					logDamage,
 					terrain,
+					setTerrain,
 				});
 
 				return;
@@ -307,6 +309,7 @@ export const useHandleAction = (
 			removeScreens,
 			logDamage,
 			terrain,
+			setTerrain,
 		]
 	);
 };

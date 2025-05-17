@@ -18,7 +18,7 @@ import { gemTable } from '../../../../../../interfaces/Item';
 import { EmptyStatObject } from '../../../../../../interfaces/StatObject';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
-import { BattleTerrain } from '../../../useBattleTerrain';
+import { BattleTerrain, TerrainObject } from '../../../useBattleTerrain';
 import { handleAbilitiesAfterAttack } from '../handleAbilitiesAfterAttack';
 
 /**
@@ -39,6 +39,7 @@ export const handleDamageAttack = ({
 	targetsFactor,
 	logDamage,
 	terrain,
+	setTerrain,
 }: {
 	attacker: BattlePokemon;
 	target: BattlePokemon;
@@ -54,6 +55,7 @@ export const handleDamageAttack = ({
 	targetsFactor: number;
 	logDamage: (x: number) => void;
 	terrain: BattleTerrain | undefined;
+	setTerrain: (x: TerrainObject) => void;
 }): BattlePokemon[] => {
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
@@ -461,7 +463,8 @@ export const handleDamageAttack = ({
 		damage,
 		battleFieldEffects,
 		target.stats.hp,
-		terrain
+		terrain,
+		setTerrain
 	);
 	updatedAttacker = { ...a };
 	updatedTarget = { ...t };

@@ -16,7 +16,7 @@ import { handleWholeFieldEffectAttack } from './attackCategories/handleWholeFiel
 import { handleAttackStart } from './handleAttackStart';
 
 import { changeMovePP } from '../../../../../functions/changeMovePP';
-import { BattleTerrain } from '../../useBattleTerrain';
+import { BattleTerrain, TerrainObject } from '../../useBattleTerrain';
 import { WeatherObject } from '../../useBattleWeather';
 
 export const handleAllAttackCategories = ({
@@ -37,6 +37,7 @@ export const handleAllAttackCategories = ({
 	removeSpikes,
 	removeScreens,
 	logDamage,
+	setTerrain,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
@@ -55,6 +56,7 @@ export const handleAllAttackCategories = ({
 	removeSpikes: (ownerId: string) => void;
 	removeScreens: (ownerId: string) => void;
 	logDamage: (x: number) => void;
+	setTerrain: (x: TerrainObject) => void;
 }) => {
 	let updatedPokemon = [...pokemon];
 	const { updatedPokemon: ua, targets } = handleAttackStart({
@@ -97,6 +99,7 @@ export const handleAllAttackCategories = ({
 					targetsFactor,
 					logDamage,
 					terrain,
+					setTerrain,
 				});
 			case 'heal':
 				return handleHealAttack({
@@ -137,6 +140,7 @@ export const handleAllAttackCategories = ({
 					battleFieldEffects,
 					target,
 					terrain,
+					setTerrain,
 				});
 			case 'net-good-stats':
 				return handleNetGoodStatsAttack({
@@ -166,6 +170,7 @@ export const handleAllAttackCategories = ({
 					battleFieldEffects,
 					terrain,
 					target,
+					setTerrain,
 				});
 		}
 	};

@@ -24,7 +24,7 @@ import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
 import { Stat } from '../../../../../interfaces/StatObject';
 import { WeatherType } from '../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../BattleField';
-import { BattleTerrain } from '../../useBattleTerrain';
+import { BattleTerrain, TerrainObject } from '../../useBattleTerrain';
 
 export const handleAbilitiesAfterAttack = (
 	attacker: BattlePokemon,
@@ -37,7 +37,8 @@ export const handleAbilitiesAfterAttack = (
 	damage: number,
 	battleFieldEffects: BattleFieldEffect[],
 	originalTargetHp: number,
-	terrain: BattleTerrain | undefined
+	terrain: BattleTerrain | undefined,
+	setTerrain: (x: TerrainObject) => void
 ): {
 	updatedAttacker: BattlePokemon;
 	updatedTarget: BattlePokemon;
@@ -72,6 +73,17 @@ export const handleAbilitiesAfterAttack = (
 				updatedTarget.damage - Math.floor(target.stats.hp / 4)
 			),
 		};
+	}
+	//seed sower
+	if (
+		target.ability === 'seed-sower' &&
+		terrain !== 'grassy' &&
+		isContactMove(move.name, attacker)
+	) {
+		addMessage({
+			message: `${target.name} deploys grassy terrain with seed sower`,
+		});
+		setTerrain({ type: 'grassy', duration: 5 });
 	}
 	//check for mummy
 	if (target.ability === 'mummy' && isContactMove(move.name, attacker)) {
