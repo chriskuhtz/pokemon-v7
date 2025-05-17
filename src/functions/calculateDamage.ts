@@ -377,6 +377,8 @@ export const calculateDamage = (
 		damageClass === 'physical'
 			? 0.66
 			: 1;
+	const transistorFactor =
+		attacker.ability === 'transistor' && attackType === 'electric' ? 1.5 : 1;
 	const overgrowFactor =
 		attacker.ability === 'overgrow' &&
 		attacker.damage > attacker.stats.hp * 0.66 &&
@@ -753,7 +755,8 @@ export const calculateDamage = (
 				iceScalesFactor *
 				powerSpotFactor *
 				steelySpiritFactor *
-				gorillaTacticsFactor
+				gorillaTacticsFactor *
+				transistorFactor
 		),
 		1
 	);
