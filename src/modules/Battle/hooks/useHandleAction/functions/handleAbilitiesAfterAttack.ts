@@ -595,6 +595,18 @@ export const handleAbilitiesAfterAttack = (
 			'moxie'
 		);
 	}
+	//chilling neigh
+	if (isKO(updatedTarget) && updatedAttacker.ability === 'chilling-neigh') {
+		updatedAttacker = applyStatChangeToPokemon(
+			updatedAttacker,
+			'attack',
+			1,
+			true,
+			[],
+			addMessage,
+			'chilling-neigh'
+		);
+	}
 	//Beast boost
 	if (isKO(updatedTarget) && updatedAttacker.ability === 'beast-boost') {
 		const highestStatName = Object.entries(updatedAttacker.stats).sort(
