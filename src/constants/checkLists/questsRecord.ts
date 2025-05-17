@@ -2431,6 +2431,13 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'master-ball': 1 },
 		availableAfter: 'deal 20000 damage with one attack',
 	},
+	'deal 50000 damage with one attack': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		conditionFunction: (s) => s.mileStones.damageRecord >= 50000,
+		rewardItems: { 'master-ball': 1 },
+		availableAfter: 'deal 30000 damage with one attack',
+	},
 	'defeat erika': {
 		kind: 'BULLETIN',
 		researchPoints: 25,

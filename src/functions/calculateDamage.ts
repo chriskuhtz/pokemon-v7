@@ -444,6 +444,11 @@ export const calculateDamage = (
 		damageClass === 'special'
 			? 1.5
 			: 1;
+	const gorillaTacticsFactor =
+		attack.name === attacker.choiceBandedMove &&
+		attacker.ability === 'gorilla-tactics'
+			? 1.5
+			: 1;
 	const technicianFactor =
 		attacker.ability === 'technician' && power <= 60 ? 1.5 : 1;
 	const tintedLensFactor =
@@ -753,7 +758,8 @@ export const calculateDamage = (
 				punkRockDefender *
 				iceScalesFactor *
 				powerSpotFactor *
-				steelySpiritFactor
+				steelySpiritFactor *
+				gorillaTacticsFactor
 		),
 		1
 	);
