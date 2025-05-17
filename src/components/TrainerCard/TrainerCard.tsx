@@ -1,8 +1,6 @@
 import { useContext } from 'react';
-import { BsCashCoin } from 'react-icons/bs';
 import { battleSpriteSize } from '../../constants/gameData';
 import { SaveFileContext } from '../../hooks/useSaveFile';
-import { Card } from '../../uiComponents/Card/Card';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
 
 export const TrainerCard = () => {
@@ -14,50 +12,85 @@ export const TrainerCard = () => {
 			researchPoints,
 			mileStones,
 			rangerLevel,
+			catchBoosts,
 		},
 	} = useContext(SaveFileContext);
 
 	return (
-		<Card
-			content={
-				<div
-					style={{
-						display: 'flex',
-						padding: '.5rem',
-						gap: '1rem',
-						alignItems: 'center',
-					}}
-				>
-					<IconSolarSystem
-						sun={{
-							url: `/npcs/${sprite}.png`,
-							styles: {
-								objectFit: 'none',
-								objectPosition: '0 0',
-								width: battleSpriteSize * 2,
-								height: battleSpriteSize * 2,
-							},
+		<div
+			style={{
+				display: 'flex',
+				padding: '1rem .5rem',
+				gap: '1rem',
+				alignItems: 'center',
+				backgroundColor: ' rgba(255, 255, 255, 0.5)',
+				border: '2px solid black',
+				borderRadius: '1rem',
+				justifyContent: 'space-evenly',
+			}}
+		>
+			<IconSolarSystem
+				sun={{
+					url: `/npcs/${sprite}.png`,
+					styles: {
+						objectFit: 'none',
+						objectPosition: '0 0',
+						width: battleSpriteSize * 2,
+						height: battleSpriteSize * 2,
+					},
+				}}
+				firstPlanet={
+					badges.includes('boulder-badge')
+						? '/badges/boulder-badge.png'
+						: undefined
+				}
+			/>
+
+			<div>
+				<h4>{playerId}</h4>
+				<h4>Research Points: {researchPoints}</h4>
+				<h4>Damage Record: {mileStones.damageRecord}</h4>
+				{mileStones.challengeFieldRecord ? (
+					<h4>Challenge Field Record: {mileStones.challengeFieldRecord}</h4>
+				) : (
+					<></>
+				)}
+				{rangerLevel ? <h4>Ranger Level: {rangerLevel}</h4> : <></>}
+			</div>
+			{catchBoosts ? (
+				<div>
+					<h4>Catch Boosts:</h4>
+					<div
+						style={{
+							display: 'grid',
+							gridTemplateColumns: '1fr 1fr 1fr',
+							gap: '1rem',
 						}}
-						firstPlanet={
-							badges.includes('boulder-badge')
-								? '/badges/boulder-badge.png'
-								: undefined
-						}
-					/>
-					<div>
-						<h4>{playerId}</h4>
-						{/* <h4>Money: {money}$</h4> */}
-						<h4>Research Points: {researchPoints}</h4>
-						<h4>Damage Record: {mileStones.damageRecord}</h4>
-						{mileStones.challengeFieldRecord && (
-							<h4>Challenge Field Record: {mileStones.challengeFieldRecord}</h4>
-						)}
-						{(rangerLevel ?? 0 > 0) && <h4>Ranger Level: {rangerLevel}</h4>}
+					>
+						{Object.entries(catchBoosts).map(([type, boost]) => {
+							if (boost === 0) {
+								return <></>;
+							}
+							return (
+								<strong
+									style={{
+										display: 'flex',
+										alignItems: 'center',
+									}}
+								>
+									<img
+										height={battleSpriteSize / 1.5}
+										src={`/typeIcons/${type}.png`}
+									/>
+									:{boost * 0.1}
+								</strong>
+							);
+						})}
 					</div>
 				</div>
-			}
-			icon={<BsCashCoin size={battleSpriteSize} />}
-			actionElements={[]}
-		/>
+			) : (
+				<></>
+			)}
+		</div>
 	);
 };

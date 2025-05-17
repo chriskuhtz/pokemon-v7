@@ -31,6 +31,12 @@ export const applyPrimaryAilmentToPokemon = (
 		addMessage({ message: 'The misty terrain prevents all status conditions' });
 		return { updatedApplicator: applicator, updatedTarget: target };
 	}
+	if (target.ability === 'purifying-salt') {
+		addMessage({
+			message: `${target.name} prevents status conditions with purifying salt`,
+		});
+		return { updatedApplicator: applicator, updatedTarget: target };
+	}
 	if (
 		target.id !== applicator.id &&
 		terrain === 'electric' &&
@@ -60,7 +66,9 @@ export const applyPrimaryAilmentToPokemon = (
 		//fire pokemon cant get burned
 		!getTypeNames(target).includes('fire') &&
 		//flash fire pokemon cant get burned
-		!['flash-fire', 'water-veil', 'water-bubble'].includes(target.ability)
+		!['flash-fire', 'water-veil', 'water-bubble', 'thermal-exchange'].includes(
+			target.ability
+		)
 	) {
 		addMessage({
 			message: `${target.data.name} was burned ${suffix ? 'by ' + suffix : ''}`,

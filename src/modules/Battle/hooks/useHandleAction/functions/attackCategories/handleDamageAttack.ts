@@ -14,10 +14,11 @@ import { Message } from '../../../../../../hooks/useMessageQueue';
 import { isRemovedByRapidSpin } from '../../../../../../interfaces/Ailment';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
-import { gemTable } from '../../../../../../interfaces/Item';
+import { gemTable, isBerry } from '../../../../../../interfaces/Item';
+import { EmptyStatObject } from '../../../../../../interfaces/StatObject';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
-import { BattleTerrain } from '../../../useBattleTerrain';
+import { BattleTerrain, TerrainObject } from '../../../useBattleTerrain';
 import { handleAbilitiesAfterAttack } from '../handleAbilitiesAfterAttack';
 
 /**
@@ -38,6 +39,7 @@ export const handleDamageAttack = ({
 	targetsFactor,
 	logDamage,
 	terrain,
+	setTerrain,
 }: {
 	attacker: BattlePokemon;
 	target: BattlePokemon;
@@ -53,6 +55,7 @@ export const handleDamageAttack = ({
 	targetsFactor: number;
 	logDamage: (x: number) => void;
 	terrain: BattleTerrain | undefined;
+	setTerrain: (x: TerrainObject) => void;
 }): BattlePokemon[] => {
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
@@ -129,6 +132,12 @@ export const handleDamageAttack = ({
 	if (move.name === 'pay-day') {
 		scatterCoins();
 	}
+	//clear smog
+	if (move.name === 'clear-smog') {
+		addMessage({ message: `${updatedTarget.name}´s stat changes were reset` });
+
+		updatedTarget = { ...updatedTarget, statBoosts: EmptyStatObject };
+	}
 	//knock off
 	if (
 		move.name === 'knock-off' &&
@@ -145,6 +154,14 @@ export const handleDamageAttack = ({
 		checkThiefMoves(updatedAttacker, updatedTarget, move.name, addMessage);
 	updatedAttacker = { ...aThiefChecked };
 	updatedTarget = { ...tThiefChecked };
+	//incinerate
+	if (move.name === 'incinerate' && isBerry(getHeldItem(updatedTarget))) {
+		addMessage({
+			message: `${updatedTarget}´s ${updatedTarget.heldItemName} was burned to ash`,
+		});
+
+		updatedTarget = { ...updatedTarget, heldItemName: undefined };
+	}
 
 	// apply damage
 	const { consumedHeldItem, damage, criticalHit, wasSuperEffective } =
@@ -156,7 +173,6 @@ export const handleDamageAttack = ({
 			battleFieldEffects,
 			terrain,
 			true,
-
 			isFlying,
 			isUnderground,
 			isDiving,
@@ -182,6 +198,7 @@ export const handleDamageAttack = ({
 			)} to reduce the damage`,
 		});
 	}
+	//shell bell
 	if (
 		getHeldItem(updatedAttacker) === 'shell-bell' &&
 		damage !== 0 &&
@@ -196,6 +213,69 @@ export const handleDamageAttack = ({
 			...updatedAttacker,
 			damage: getMiddleOfThree([0, 0, updatedAttacker.damage - restored]),
 		};
+	}
+	//anger shell
+	if (
+		updatedTarget.damage / updatedTarget.stats.hp > 0.5 &&
+		(updatedTarget.damage + actualDamage) / updatedTarget.stats.hp <= 0.5 &&
+		updatedTarget.ability === 'anger-shell'
+	) {
+		addMessage({ message: `${updatedTarget.name} activates anger shell ` });
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'attack',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage
+		);
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'special-attack',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage
+		);
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'speed',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage
+		);
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'defense',
+			-1,
+			true,
+			battleFieldEffects,
+			addMessage
+		);
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'special-defense',
+			-1,
+			true,
+			battleFieldEffects,
+			addMessage
+		);
+	}
+	//well baked body
+	if (
+		move.data.type.name == 'fire' &&
+		updatedTarget.ability === 'well-baked-body'
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'defense',
+			2,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'well baked body'
+		);
 	}
 	updatedTarget = {
 		...updatedTarget,
@@ -454,7 +534,8 @@ export const handleDamageAttack = ({
 		damage,
 		battleFieldEffects,
 		target.stats.hp,
-		terrain
+		terrain,
+		setTerrain
 	);
 	updatedAttacker = { ...a };
 	updatedTarget = { ...t };

@@ -252,29 +252,35 @@ export const calculateDamage = (
 
 	//Crits ignore boosted defense
 	const ignoreBoost = () => {
-		return critFactor === 2 || attacker.ability === 'unaware';
+		return (
+			critFactor === 2 ||
+			attacker.ability === 'unaware' ||
+			attack.name === 'chip-away'
+		);
 	};
 
-	const def =
-		damageClass === 'physical' || attack.name === 'psyshock'
-			? calculateModifiedStat(
-					'defense',
-					target,
-					battleFieldEffects.some(
-						(e) => e.type === 'flower-gift' && e.ownerId === target.ownerId
-					),
-					ignoreBoost()
-			  )
-			: calculateModifiedStat(
-					'special-defense',
-					target,
-					battleFieldEffects.some(
-						(e) => e.type === 'flower-gift' && e.ownerId === target.ownerId
-					),
-					ignoreBoost()
-			  );
+	const def = () => {
+		if (damageClass === 'physical' || attack.name === 'psyshock') {
+			return calculateModifiedStat(
+				'defense',
+				target,
+				battleFieldEffects.some(
+					(e) => e.type === 'flower-gift' && e.ownerId === target.ownerId
+				),
+				ignoreBoost()
+			);
+		}
+		return calculateModifiedStat(
+			'special-defense',
+			target,
+			battleFieldEffects.some(
+				(e) => e.type === 'flower-gift' && e.ownerId === target.ownerId
+			),
+			ignoreBoost()
+		);
+	};
 
-	const statFactor = atk() / def;
+	const statFactor = atk() / def();
 
 	const pureDamage = (levelFactor * power * statFactor) / 50 + 2;
 
@@ -657,6 +663,9 @@ export const calculateDamage = (
 		)
 			? 1.5
 			: 1;
+	const hexFactor = attack.name === 'hex' && target.primaryAilment ? 2 : 1;
+	const puriSaltFactor =
+		target.ability === 'purifying-salt' && attackType === 'ghost' ? 0.5 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -759,7 +768,9 @@ export const calculateDamage = (
 				steelySpiritFactor *
 				gorillaTacticsFactor *
 				transistorFactor *
-				dragonsMawFactor
+				dragonsMawFactor *
+				hexFactor *
+				puriSaltFactor
 		),
 		1
 	);

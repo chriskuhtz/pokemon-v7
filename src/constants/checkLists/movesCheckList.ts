@@ -1885,22 +1885,42 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/494/',
 		handled: true,
 	},
-	{ name: 'after-you', url: 'https://pokeapi.co/api/v2/move/495/' },
-	{ name: 'round', url: 'https://pokeapi.co/api/v2/move/496/' },
-	{ name: 'echoed-voice', url: 'https://pokeapi.co/api/v2/move/497/' },
-	{ name: 'chip-away', url: 'https://pokeapi.co/api/v2/move/498/' },
-	{ name: 'clear-smog', url: 'https://pokeapi.co/api/v2/move/499/' },
-	{ name: 'stored-power', url: 'https://pokeapi.co/api/v2/move/500/' },
-	{ name: 'quick-guard', url: 'https://pokeapi.co/api/v2/move/501/' },
-	{ name: 'ally-switch', url: 'https://pokeapi.co/api/v2/move/502/' },
-	{ name: 'scald', url: 'https://pokeapi.co/api/v2/move/503/' },
-	{ name: 'shell-smash', url: 'https://pokeapi.co/api/v2/move/504/' },
-	{ name: 'heal-pulse', url: 'https://pokeapi.co/api/v2/move/505/' },
-	{ name: 'hex', url: 'https://pokeapi.co/api/v2/move/506/' },
-	{ name: 'sky-drop', url: 'https://pokeapi.co/api/v2/move/507/' },
-	{ name: 'shift-gear', url: 'https://pokeapi.co/api/v2/move/508/' },
-	{ name: 'circle-throw', url: 'https://pokeapi.co/api/v2/move/509/' },
-	{ name: 'incinerate', url: 'https://pokeapi.co/api/v2/move/510/' },
+
+	{
+		name: 'chip-away',
+		url: 'https://pokeapi.co/api/v2/move/498/',
+		handled: true,
+	},
+	{
+		name: 'clear-smog',
+		url: 'https://pokeapi.co/api/v2/move/499/',
+		handled: true,
+	},
+	{
+		name: 'stored-power',
+		url: 'https://pokeapi.co/api/v2/move/500/',
+		handled: true,
+	},
+
+	{ name: 'scald', url: 'https://pokeapi.co/api/v2/move/503/', handled: true },
+	{
+		name: 'shell-smash',
+		url: 'https://pokeapi.co/api/v2/move/504/',
+		handled: true,
+	},
+	{ name: 'hex', url: 'https://pokeapi.co/api/v2/move/506/', handled: true },
+
+	{
+		name: 'shift-gear',
+		url: 'https://pokeapi.co/api/v2/move/508/',
+		handled: true,
+	},
+
+	{
+		name: 'incinerate',
+		url: 'https://pokeapi.co/api/v2/move/510/',
+		handled: true,
+	},
 	{ name: 'quash', url: 'https://pokeapi.co/api/v2/move/511/' },
 	{ name: 'acrobatics', url: 'https://pokeapi.co/api/v2/move/512/' },
 	{ name: 'reflect-type', url: 'https://pokeapi.co/api/v2/move/513/' },
@@ -2360,6 +2380,7 @@ export const movesCheckList: {
 	{ name: 'telekinesis', url: 'https://pokeapi.co/api/v2/move/477/' },
 	{ name: 'magic-room', url: 'https://pokeapi.co/api/v2/move/478/' },
 	{ name: 'soak', url: 'https://pokeapi.co/api/v2/move/487/' },
+	{ name: 'quick-guard', url: 'https://pokeapi.co/api/v2/move/501/' },
 	/*
 	 * BANISHED:
 	 */
@@ -2414,6 +2435,16 @@ export const movesCheckList: {
 	{ name: 'natural-gift', url: 'https://pokeapi.co/api/v2/move/363/' },
 	{ name: 'feint', url: 'https://pokeapi.co/api/v2/move/364/' },
 	{ name: 'u-turn', url: 'https://pokeapi.co/api/v2/move/369/' },
+	{ name: 'after-you', url: 'https://pokeapi.co/api/v2/move/495/' },
+	{ name: 'round', url: 'https://pokeapi.co/api/v2/move/496/' },
+	{ name: 'echoed-voice', url: 'https://pokeapi.co/api/v2/move/497/' },
+	{ name: 'ally-switch', url: 'https://pokeapi.co/api/v2/move/502/' },
+	{
+		name: 'heal-pulse',
+		url: 'https://pokeapi.co/api/v2/move/505/',
+	},
+	{ name: 'sky-drop', url: 'https://pokeapi.co/api/v2/move/507/' },
+	{ name: 'circle-throw', url: 'https://pokeapi.co/api/v2/move/509/' },
 	/**
 	 * INCOMPLETE DATA:
 	 */
@@ -2959,6 +2990,14 @@ export const handledMoves = [
 	'foul-play',
 	'simple-beam',
 	'entrainment',
+	'chip-away',
+	'clear-smog',
+	'stored-power',
+	'scald',
+	'shell-smash',
+	'hex',
+	'shift-gear',
+	'incinerate',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

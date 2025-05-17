@@ -1129,15 +1129,41 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/264/',
 		handled: true,
 	},
-	{ name: 'grim-neigh', url: 'https://pokeapi.co/api/v2/ability/265/' },
-	{ name: 'as-one-glastrier', url: 'https://pokeapi.co/api/v2/ability/266/' },
-	{ name: 'as-one-spectrier', url: 'https://pokeapi.co/api/v2/ability/267/' },
-	{ name: 'lingering-aroma', url: 'https://pokeapi.co/api/v2/ability/268/' },
-	{ name: 'seed-sower', url: 'https://pokeapi.co/api/v2/ability/269/' },
-	{ name: 'thermal-exchange', url: 'https://pokeapi.co/api/v2/ability/270/' },
-	{ name: 'anger-shell', url: 'https://pokeapi.co/api/v2/ability/271/' },
-	{ name: 'purifying-salt', url: 'https://pokeapi.co/api/v2/ability/272/' },
-	{ name: 'well-baked-body', url: 'https://pokeapi.co/api/v2/ability/273/' },
+	{
+		name: 'grim-neigh',
+		url: 'https://pokeapi.co/api/v2/ability/265/',
+		handled: true,
+	},
+	{
+		name: 'lingering-aroma',
+		url: 'https://pokeapi.co/api/v2/ability/268/',
+		handled: true,
+	},
+	{
+		name: 'seed-sower',
+		url: 'https://pokeapi.co/api/v2/ability/269/',
+		handled: true,
+	},
+	{
+		name: 'thermal-exchange',
+		url: 'https://pokeapi.co/api/v2/ability/270/',
+		handled: true,
+	},
+	{
+		name: 'anger-shell',
+		url: 'https://pokeapi.co/api/v2/ability/271/',
+		handled: true,
+	},
+	{
+		name: 'purifying-salt',
+		url: 'https://pokeapi.co/api/v2/ability/272/',
+		handled: true,
+	},
+	{
+		name: 'well-baked-body',
+		url: 'https://pokeapi.co/api/v2/ability/273/',
+		handled: true,
+	},
 	{ name: 'wind-rider', url: 'https://pokeapi.co/api/v2/ability/274/' },
 	{ name: 'guard-dog', url: 'https://pokeapi.co/api/v2/ability/275/' },
 	{ name: 'rocky-payload', url: 'https://pokeapi.co/api/v2/ability/276/' },
@@ -1276,6 +1302,8 @@ export const abilityCheckList: {
 	{ name: 'perish-body', url: 'https://pokeapi.co/api/v2/ability/253/' },
 	{ name: 'neutralizing-gas', url: 'https://pokeapi.co/api/v2/ability/256/' },
 	{ name: 'hunger-switch', url: 'https://pokeapi.co/api/v2/ability/258/' },
+	{ name: 'as-one-glastrier', url: 'https://pokeapi.co/api/v2/ability/266/' },
+	{ name: 'as-one-spectrier', url: 'https://pokeapi.co/api/v2/ability/267/' },
 ];
 
 export const abilityNames = [
@@ -1501,6 +1529,13 @@ export const abilityNames = [
 	'transistor',
 	'dragons-maw',
 	'chilling-neigh',
+	'grim-neigh',
+	'lingering-aroma',
+	'seed-sower',
+	'thermal-exchange',
+	'anger-shell',
+	'purifying-salt',
+	'well-baked-body',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

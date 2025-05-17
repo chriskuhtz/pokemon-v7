@@ -1,4 +1,5 @@
 import React, { useContext, useMemo, useState } from 'react';
+import { FaRegStar, FaStar } from 'react-icons/fa';
 import { GiBreakingChain } from 'react-icons/gi';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
@@ -12,6 +13,7 @@ import {
 import { battleSpriteSize } from '../../constants/gameData';
 import { mapIds } from '../../constants/maps/mapsRecord';
 import { nameToIdMap } from '../../constants/pokemonNames';
+import { byName } from '../../constants/typeRecord';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getHeldItem } from '../../functions/getHeldItem';
 import { getItemUrl } from '../../functions/getItemUrl';
@@ -22,15 +24,19 @@ import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Inventory, joinInventories } from '../../interfaces/Inventory';
 import { balltypes } from '../../interfaces/Item';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
+import { realTypes } from '../../interfaces/PokemonType';
 import { Chip } from '../../uiComponents/Chip/Chip';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
+import { Modal } from '../../uiComponents/Modal/Modal';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
 export const sortByTypes = [
-	'NAME',
+	'FAVORITE',
 	'DEX ID',
+	'NAME',
 	'CATCHDATE',
+	'TYPE',
 	'XP',
 	'HAPPINESS',
 	'BALL',
@@ -49,15 +55,8 @@ export const PokemonStorage = ({
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
 	const allPokemon = useMemo(() => saveFile.pokemon, [saveFile]);
-	const [sortBy, setSortBy] = useState<PokemonFilter>('NAME');
+	const [sortBy, setSortBy] = useState<PokemonFilter>('FAVORITE');
 	const sortFunction = useMemo(() => {
-		if (sortBy === 'LOCATION') {
-			return (a: OwnedPokemon, b: OwnedPokemon) => {
-				if (a.caughtOnMap < b.caughtOnMap) return -1;
-				if (a.caughtOnMap > b.caughtOnMap) return 1;
-				return 0;
-			};
-		}
 		if (sortBy === 'CATCHDATE') {
 			return (a: OwnedPokemon, b: OwnedPokemon) =>
 				b.caughtAtDate - a.caughtAtDate;
@@ -65,9 +64,6 @@ export const PokemonStorage = ({
 		if (sortBy === 'DEX ID') {
 			return (a: OwnedPokemon, b: OwnedPokemon) =>
 				nameToIdMap[a.name] - nameToIdMap[b.name];
-		}
-		if (sortBy === 'XP') {
-			return (a: OwnedPokemon, b: OwnedPokemon) => b.xp - a.xp;
 		}
 		if (sortBy === 'HAPPINESS') {
 			return (a: OwnedPokemon, b: OwnedPokemon) => b.happiness - a.happiness;
@@ -94,6 +90,8 @@ export const PokemonStorage = ({
 			return (a: OwnedPokemon, b: OwnedPokemon) =>
 				(allBst[b.name] ?? 0) - (allBst[a.name] ?? 0);
 		}
+
+		return (a: OwnedPokemon, b: OwnedPokemon) => b.xp - a.xp;
 	}, [sortBy]);
 	const team = useMemo(() => allPokemon.filter((p) => p.onTeam), [allPokemon]);
 	const stored = useMemo(
@@ -111,17 +109,17 @@ export const PokemonStorage = ({
 		});
 	};
 
+	const [releaseToConfirm, setReleaseToConfirm] = useState<
+		OwnedPokemon | undefined
+	>();
+
 	const startReleaseProcess = (id: string) => {
 		const pokemon = allPokemon.find((p) => p.id === id);
 
 		if (!pokemon) {
 			return;
 		}
-		if (window.confirm(`Do you really want to release ${pokemon.name}`)) {
-			patchSaveFileReducer({
-				pokemon: allPokemon.filter((p) => p.id !== id),
-			});
-		}
+		setReleaseToConfirm(pokemon);
 	};
 	const collectAllHeldItemsFromStored = () => {
 		const allHeldItemKeys = allPokemon
@@ -142,9 +140,40 @@ export const PokemonStorage = ({
 			}),
 		});
 	};
+	const toggleFavoriteStatus = (id: string) => {
+		patchSaveFileReducer({
+			pokemon: allPokemon.map((p) => {
+				if (p.id === id) {
+					return { ...p, favorite: !p.favorite };
+				}
+				return p;
+			}),
+		});
+	};
 
 	return (
 		<Page goBack={goBack} headline="Your Pokemon:">
+			<Modal
+				close={() => setReleaseToConfirm(undefined)}
+				open={!!releaseToConfirm}
+			>
+				<div>
+					<p>Do you really want to release {releaseToConfirm?.name}</p>
+					<button
+						onClick={() => {
+							patchSaveFileReducer({
+								pokemon: allPokemon.filter(
+									(p) => p.id !== releaseToConfirm?.id
+								),
+							});
+							setReleaseToConfirm(undefined);
+						}}
+					>
+						Yes
+					</button>
+					<button onClick={() => setReleaseToConfirm(undefined)}>No</button>
+				</div>
+			</Modal>
 			<h2>Team:</h2>
 			<Stack mode="row">
 				{team.map((pokemon) => {
@@ -225,6 +254,7 @@ export const PokemonStorage = ({
 				teamIsFull={team.length === 6}
 				togglePokemonOnTeam={togglePokemonOnTeam}
 				startReleaseProcess={startReleaseProcess}
+				toggleFavoriteStatus={toggleFavoriteStatus}
 			/>
 		</Page>
 	);
@@ -237,6 +267,7 @@ const Sorted = ({
 	teamIsFull,
 	togglePokemonOnTeam,
 	startReleaseProcess,
+	toggleFavoriteStatus,
 }: {
 	pokemonFilter: PokemonFilter;
 	stored: OwnedPokemon[];
@@ -244,7 +275,48 @@ const Sorted = ({
 	teamIsFull: boolean;
 	togglePokemonOnTeam: (id: string) => void;
 	startReleaseProcess: (id: string) => void;
+	toggleFavoriteStatus: (id: string) => void;
 }) => {
+	if (pokemonFilter === 'FAVORITE') {
+		return (
+			<Stack mode={'column'}>
+				<h3 style={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>
+					<FaStar size={battleSpriteSize / 1.5} />
+					Favorites:
+				</h3>
+				<Stack mode="row">
+					{stored
+						.filter((s) => s.favorite)
+						.map((pokemon) => (
+							<Entry
+								pokemon={pokemon}
+								teamIsFull={teamIsFull}
+								togglePokemonOnTeam={togglePokemonOnTeam}
+								startReleaseProcess={startReleaseProcess}
+								toggleFavoriteStatus={toggleFavoriteStatus}
+							/>
+						))}
+				</Stack>
+				<h3 style={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}>
+					<FaRegStar size={battleSpriteSize / 1.5} />
+					Other:
+				</h3>
+				<Stack mode="row">
+					{stored
+						.filter((s) => !s.favorite)
+						.map((pokemon) => (
+							<Entry
+								pokemon={pokemon}
+								teamIsFull={teamIsFull}
+								togglePokemonOnTeam={togglePokemonOnTeam}
+								startReleaseProcess={startReleaseProcess}
+								toggleFavoriteStatus={toggleFavoriteStatus}
+							/>
+						))}
+				</Stack>
+			</Stack>
+		);
+	}
 	if (pokemonFilter === 'BALL') {
 		return (
 			<Stack mode={'column'}>
@@ -267,6 +339,7 @@ const Sorted = ({
 										teamIsFull={teamIsFull}
 										togglePokemonOnTeam={togglePokemonOnTeam}
 										startReleaseProcess={startReleaseProcess}
+										toggleFavoriteStatus={toggleFavoriteStatus}
 									/>
 								))}
 							</Stack>
@@ -297,6 +370,41 @@ const Sorted = ({
 										teamIsFull={teamIsFull}
 										togglePokemonOnTeam={togglePokemonOnTeam}
 										startReleaseProcess={startReleaseProcess}
+										toggleFavoriteStatus={toggleFavoriteStatus}
+									/>
+								))}
+							</Stack>
+						</>
+					);
+				})}
+			</Stack>
+		);
+	}
+	if (pokemonFilter === 'TYPE') {
+		return (
+			<Stack mode={'column'}>
+				{realTypes.map((type) => {
+					const filtered = stored.filter((s) => byName[s.name][0] === type);
+
+					if (filtered.length === 0) {
+						return <></>;
+					}
+					return (
+						<>
+							<h3
+								style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
+							>
+								<img height={battleSpriteSize} src={`/typeIcons/${type}.png`} />{' '}
+								{type}
+							</h3>
+							<Stack mode="row">
+								{filtered.sort(sortFunction).map((pokemon) => (
+									<Entry
+										pokemon={pokemon}
+										teamIsFull={teamIsFull}
+										togglePokemonOnTeam={togglePokemonOnTeam}
+										startReleaseProcess={startReleaseProcess}
+										toggleFavoriteStatus={toggleFavoriteStatus}
 									/>
 								))}
 							</Stack>
@@ -336,6 +444,7 @@ const Sorted = ({
 										teamIsFull={teamIsFull}
 										togglePokemonOnTeam={togglePokemonOnTeam}
 										startReleaseProcess={startReleaseProcess}
+										toggleFavoriteStatus={toggleFavoriteStatus}
 									/>
 								))}
 							</Stack>
@@ -372,6 +481,7 @@ const Sorted = ({
 										teamIsFull={teamIsFull}
 										togglePokemonOnTeam={togglePokemonOnTeam}
 										startReleaseProcess={startReleaseProcess}
+										toggleFavoriteStatus={toggleFavoriteStatus}
 									/>
 								))}
 							</Stack>
@@ -408,6 +518,7 @@ const Sorted = ({
 										teamIsFull={teamIsFull}
 										togglePokemonOnTeam={togglePokemonOnTeam}
 										startReleaseProcess={startReleaseProcess}
+										toggleFavoriteStatus={toggleFavoriteStatus}
 									/>
 								))}
 							</Stack>
@@ -417,7 +528,6 @@ const Sorted = ({
 			</Stack>
 		);
 	}
-
 	const bstSteps = [
 		ultraHighBstPokemon,
 		highBstPokemon,
@@ -452,6 +562,7 @@ const Sorted = ({
 										teamIsFull={teamIsFull}
 										togglePokemonOnTeam={togglePokemonOnTeam}
 										startReleaseProcess={startReleaseProcess}
+										toggleFavoriteStatus={toggleFavoriteStatus}
 									/>
 								))}
 							</Stack>
@@ -470,6 +581,7 @@ const Sorted = ({
 					teamIsFull={teamIsFull}
 					togglePokemonOnTeam={togglePokemonOnTeam}
 					startReleaseProcess={startReleaseProcess}
+					toggleFavoriteStatus={toggleFavoriteStatus}
 				/>
 			))}
 		</Stack>
@@ -481,11 +593,13 @@ const Entry = ({
 	teamIsFull,
 	togglePokemonOnTeam,
 	startReleaseProcess,
+	toggleFavoriteStatus,
 }: {
 	pokemon: OwnedPokemon;
 	teamIsFull: boolean;
 	togglePokemonOnTeam: (id: string) => void;
 	startReleaseProcess: (id: string) => void;
+	toggleFavoriteStatus: (id: string) => void;
 }) => {
 	const { addMessage } = useContext(MessageQueueContext);
 
@@ -516,10 +630,23 @@ const Entry = ({
 					togglePokemonOnTeam(pokemon.id);
 				}}
 			/>
-			<GiBreakingChain
-				size={battleSpriteSize / 1.5}
-				onClick={() => startReleaseProcess(pokemon.id)}
-			/>
+			<div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
+				{pokemon.favorite ? (
+					<FaStar
+						size={battleSpriteSize / 1.5}
+						onClick={() => toggleFavoriteStatus(pokemon.id)}
+					/>
+				) : (
+					<FaRegStar
+						size={battleSpriteSize / 1.5}
+						onClick={() => toggleFavoriteStatus(pokemon.id)}
+					/>
+				)}
+				<GiBreakingChain
+					size={battleSpriteSize / 1.5}
+					onClick={() => startReleaseProcess(pokemon.id)}
+				/>
+			</div>
 		</div>
 	);
 };

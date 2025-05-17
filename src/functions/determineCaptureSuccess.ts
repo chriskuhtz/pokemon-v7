@@ -1,5 +1,7 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { PokeballType } from '../interfaces/Item';
+import { PokemonType } from '../interfaces/PokemonType';
+import { CatchBoosts } from '../interfaces/SaveFile';
 import { calculateLevelData } from './calculateLevelData';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getTimeOfDay } from './getTimeOfDay';
@@ -12,7 +14,8 @@ export const determineCaptureSuccess = (
 	target: BattlePokemon,
 	battleRound: number,
 	location: BattleLocation,
-	caughtBefore: boolean
+	caughtBefore: boolean,
+	catchBoosts: CatchBoosts
 ): boolean => {
 	//master ball always catches
 	if (ball === 'master-ball') {
@@ -20,6 +23,16 @@ export const determineCaptureSuccess = (
 	}
 	const { level } = calculateLevelData(target.xp, target.growthRate);
 	const targetTypes = getTypeNames(target);
+
+	const catchBoostFactor =
+		1 +
+		Object.entries(catchBoosts).reduce((sum, [type, boost]) => {
+			if (targetTypes.includes(type as PokemonType)) {
+				return sum + boost;
+			}
+			return sum;
+		}, 0) *
+			0.1;
 
 	let ballfactor = 0.5; // base: poke-ball, luxury-ball, heal-ball, cherish-ball
 
@@ -85,7 +98,9 @@ export const determineCaptureSuccess = (
 	const captureRateFactor = target.capture_rate / 255;
 
 	//between 0 and 4
-	const catchRate = ballfactor + healthfactor + levelFactor + captureRateFactor;
+	const catchRate =
+		(ballfactor + healthfactor + levelFactor + captureRateFactor) *
+		catchBoostFactor;
 
 	//between 1 and 2.5
 	const random = 1 + Math.random() * 1.5;

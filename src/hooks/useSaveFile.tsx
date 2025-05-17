@@ -31,6 +31,10 @@ import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getRewardItemsForQuest } from '../functions/getRewardForQuest';
 import { TimeOfDay } from '../functions/getTimeOfDay';
+import {
+	EmptyCatchBoosts,
+	joinCatchBoosts,
+} from '../functions/joinCatchBoosts';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { updateItemFunction } from '../functions/updateItemFunction';
 import { Challenger } from '../interfaces/Challenger';
@@ -38,8 +42,9 @@ import { EmptyInventory, joinInventories } from '../interfaces/Inventory';
 import { ItemType } from '../interfaces/Item';
 import { Occupant } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { QuestStatus } from '../interfaces/Quest';
 import { RoutesType } from '../interfaces/Routing';
-import { SaveFile } from '../interfaces/SaveFile';
+import { CatchBoosts, SaveFile } from '../interfaces/SaveFile';
 import { MessageQueueContext } from './useMessageQueue';
 
 export interface EvolutionReducerPayload {
@@ -96,7 +101,7 @@ const migrateSavefile = (input: SaveFile) => {
 	//migrate new quests
 	updatedInput.quests = Object.fromEntries(
 		questNames.map((q) => [q, updatedInput.quests[q] ?? 'INACTIVE'])
-	);
+	) as Record<QuestName, QuestStatus>;
 
 	return updatedInput;
 };
@@ -338,6 +343,9 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 			  ]
 			: saveFile.pokemon;
 
+		const existingCatchBoosts: CatchBoosts =
+			saveFile.catchBoosts ?? EmptyCatchBoosts;
+
 		const rewardStrings: string[] = [
 			`${quest.researchPoints} Research Points`,
 			quest.rangerLevels ? `${quest.rangerLevels} Ranger Levels` : undefined,
@@ -354,6 +362,10 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 			quests: { ...saveFile.quests, [q]: 'COLLECTED' },
 			researchPoints: saveFile.researchPoints + quest.researchPoints,
 			rangerLevel: (saveFile.rangerLevel ?? 0) + (quest.rangerLevels ?? 0),
+			catchBoosts: joinCatchBoosts(
+				existingCatchBoosts,
+				quest.catchBoosts ?? {}
+			),
 			pokemon,
 		});
 	};

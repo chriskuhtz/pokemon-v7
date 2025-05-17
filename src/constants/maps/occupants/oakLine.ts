@@ -55,7 +55,6 @@ export const oakLine: Occupant[] = [
 		],
 		conditionFunction: (s) =>
 			s.quests['catch a pokemon'] === 'COLLECTED' &&
-			s.quests['evolve your starter pokemon'] === 'COLLECTED' &&
-			s.quests['evolve your starter pokemon to its final form'] === 'COLLECTED',
+			s.quests['evolve your starter pokemon'] === 'COLLECTED',
 	},
 ];

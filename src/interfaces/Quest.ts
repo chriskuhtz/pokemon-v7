@@ -4,21 +4,25 @@ import { MapId } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { Inventory } from './Inventory';
 import { OwnedPokemon } from './OwnedPokemon';
-import { SaveFile } from './SaveFile';
+import { CatchBoosts, SaveFile } from './SaveFile';
 
 export type QuestStatus = 'INACTIVE' | 'ACTIVE' | 'COLLECTED' | 'FULFILLED';
 
 export type QuestKind = 'BULLETIN' | 'QUEST_LINE';
 
 export interface Quest {
+	//meta
+	kind: QuestKind;
+	availableAfter?: QuestName;
+	requiredUpgrade?: CampUpgrade;
+	//rewards
 	rewardItems: Partial<Inventory>;
 	rewardPokemon?: OwnedPokemon;
 	researchPoints: number;
 	rangerLevels?: number;
+	catchBoosts?: Partial<CatchBoosts>;
+	//conditions
 	conditionFunction: (saveFile: SaveFile) => boolean;
-	kind: QuestKind;
-	availableAfter?: QuestName;
-	requiredUpgrade?: CampUpgrade;
 	targetPokemon?: PokemonName[];
 	targetRoute?: MapId;
 }
