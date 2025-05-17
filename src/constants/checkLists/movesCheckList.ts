@@ -1908,8 +1908,7 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/504/',
 		handled: true,
 	},
-	{ name: 'heal-pulse', url: 'https://pokeapi.co/api/v2/move/505/' },
-	{ name: 'hex', url: 'https://pokeapi.co/api/v2/move/506/' },
+	{ name: 'hex', url: 'https://pokeapi.co/api/v2/move/506/', handled: true },
 	{ name: 'sky-drop', url: 'https://pokeapi.co/api/v2/move/507/' },
 	{ name: 'shift-gear', url: 'https://pokeapi.co/api/v2/move/508/' },
 	{ name: 'circle-throw', url: 'https://pokeapi.co/api/v2/move/509/' },
@@ -2432,6 +2431,10 @@ export const movesCheckList: {
 	{ name: 'round', url: 'https://pokeapi.co/api/v2/move/496/' },
 	{ name: 'echoed-voice', url: 'https://pokeapi.co/api/v2/move/497/' },
 	{ name: 'ally-switch', url: 'https://pokeapi.co/api/v2/move/502/' },
+	{
+		name: 'heal-pulse',
+		url: 'https://pokeapi.co/api/v2/move/505/',
+	},
 	/**
 	 * INCOMPLETE DATA:
 	 */
@@ -2982,6 +2985,7 @@ export const handledMoves = [
 	'stored-power',
 	'scald',
 	'shell-smash',
+	'hex',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

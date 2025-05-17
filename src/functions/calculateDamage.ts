@@ -663,6 +663,7 @@ export const calculateDamage = (
 		)
 			? 1.5
 			: 1;
+	const hexFactor = attack.name === 'hex' && target.primaryAilment ? 2 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -765,7 +766,8 @@ export const calculateDamage = (
 				steelySpiritFactor *
 				gorillaTacticsFactor *
 				transistorFactor *
-				dragonsMawFactor
+				dragonsMawFactor *
+				hexFactor
 		),
 		1
 	);
