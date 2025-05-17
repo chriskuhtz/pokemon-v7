@@ -20,7 +20,7 @@
    4. Obstacle Layer is impassable
    5. Water Layer is only passable if the player can swim
    6. Encounter Layer leads to wild pokemon battles (if you define encounter tiles, you must also define at least some base encounters)
-8. When you are happy with your map, click the "copy to clipboard" button
+8. Your latest map is always copied into your clipboard
 9. paste your copied map as the "tilemap" property in your file
 10. occupants and encounters can be defined directly in the code (bc your map file will be large and slow to format, you should define encounters and occupants in separate files and import them)
 

@@ -13,38 +13,33 @@ export interface TilePlacer {
 export interface Eraser {
 	type: 'eraser';
 }
-export interface TwoByTwoGroup {
-	type: 'twoByTwoPlacer';
-	tile1: TileIdentifier;
-	tile2: TileIdentifier;
-	tile3: TileIdentifier;
-	tile4: TileIdentifier;
+export interface GroupPlacer {
+	type: 'groupPlacer';
+	tiles: TileIdentifier[][];
 }
-export type Tool = TilePlacer | Eraser | TwoByTwoGroup;
+export type Tool = TilePlacer | Eraser | GroupPlacer;
 
 export const MapMaker = ({
 	goBack,
 	mapId,
-	tileSetUrl,
 }: {
 	goBack: () => void;
 	mapId: MapId;
-	tileSetUrl: string;
 }) => {
-	const [twoByTwo, setTwoByTwo] = useState<TwoByTwoGroup | undefined>();
+	const [twoByTwo, setTwoByTwo] = useState<GroupPlacer | undefined>();
 	const [selected, s] = useState<Tool | undefined>();
 
 	const setSelected = useCallback(
 		(x: Tool) => {
 			if (
 				twoByTwo &&
-				selected?.type !== 'twoByTwoPlacer' &&
-				x.type === 'twoByTwoPlacer'
+				selected?.type !== 'groupPlacer' &&
+				x.type === 'groupPlacer'
 			) {
 				s(twoByTwo);
 				return;
 			}
-			if (x.type === 'twoByTwoPlacer') {
+			if (x.type === 'groupPlacer') {
 				setTwoByTwo(x);
 			}
 			s(x);
@@ -72,22 +67,7 @@ export const MapMaker = ({
 			>
 				{' '}
 				<IoIosArrowBack role="button" tabIndex={0} onClick={goBack} />
-				Selected Tool:{' '}
-				{selected?.type === 'tileplacer' && (
-					<div
-						style={{
-							scale: 2,
-							height: 16,
-							width: 16,
-							background: `url(${tileSetUrl}) ${selected.tile.xOffset}px ${selected.tile.yOffset}px`,
-						}}
-					></div>
-				)}
-				{selected?.type === 'eraser' && 'Eraser'}
-				{selected?.type === 'twoByTwoPlacer' && (
-					<TileGroupDisplay tileSetUrl={tileSetUrl} selected={selected} />
-				)}
-				{!selected && '-'}
+				Leave Mapmaker
 			</h2>
 			<div>
 				<MapEditor
@@ -106,49 +86,30 @@ export const TileGroupDisplay = ({
 	selected,
 	tileSetUrl,
 }: {
-	selected: TwoByTwoGroup;
+	selected: GroupPlacer;
 	tileSetUrl: string;
 }) => {
 	return (
 		<div
 			style={{
 				display: 'grid',
-				gridTemplateColumns: '1fr 1fr',
+				gridTemplateColumns: Array.from({ length: selected.tiles[0].length })
+					.map(() => '1fr')
+					.join(' '),
 				width: 'min-content',
 			}}
 		>
-			<div
-				style={{
-					scale: 2,
-					height: 16,
-					width: 16,
-					background: `url(${tileSetUrl}) ${selected.tile1.xOffset}px ${selected.tile1.yOffset}px`,
-				}}
-			/>
-			<div
-				style={{
-					scale: 2,
-					height: 16,
-					width: 16,
-					background: `url(${tileSetUrl}) ${selected.tile2.xOffset}px ${selected.tile2.yOffset}px`,
-				}}
-			/>
-			<div
-				style={{
-					scale: 2,
-					height: 16,
-					width: 16,
-					background: `url(${tileSetUrl}) ${selected.tile3.xOffset}px ${selected.tile3.yOffset}px`,
-				}}
-			/>
-			<div
-				style={{
-					scale: 2,
-					height: 16,
-					width: 16,
-					background: `url(${tileSetUrl}) ${selected.tile4.xOffset}px ${selected.tile4.yOffset}px`,
-				}}
-			/>
+			{selected.tiles.flat(1).map((t, i) => (
+				<div
+					key={t.xOffset + t.yOffset + i}
+					style={{
+						scale: 2,
+						height: 16,
+						width: 16,
+						background: `url(${tileSetUrl}) ${t.xOffset}px ${t.yOffset}px`,
+					}}
+				/>
+			))}
 		</div>
 	);
 };

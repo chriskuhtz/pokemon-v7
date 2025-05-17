@@ -1,6 +1,8 @@
 import { JSX, useState } from 'react';
+import { numberToGridTemplateColumns } from '../../../functions/numberToGridTemplateColumns';
+import { Modal } from '../../../uiComponents/Modal/Modal';
 import { tileMapsRecord } from '../constants/tileMaps';
-import { TileGroupDisplay, Tool, TwoByTwoGroup } from '../MapMaker';
+import { GroupPlacer, TileGroupDisplay, Tool } from '../MapMaker';
 import { TileMapViewer } from './TileMapViewer';
 
 export const ToolSelection = ({
@@ -37,6 +39,8 @@ export const ToolSelection = ({
 						display: 'flex',
 						gap: '1rem',
 						alignItems: 'center',
+						backgroundColor:
+							selected?.type === 'tileplacer' ? 'green' : undefined,
 					}}
 					onClick={() =>
 						setSelected({
@@ -63,6 +67,7 @@ export const ToolSelection = ({
 						padding: '1rem',
 						color: 'white',
 						height: 'min-content',
+						backgroundColor: selected?.type === 'eraser' ? 'green' : undefined,
 					}}
 					onClick={() => setSelected({ type: 'eraser' })}
 				>
@@ -77,48 +82,99 @@ export const ToolSelection = ({
 						display: 'flex',
 						gap: '1rem',
 						alignItems: 'center',
+						backgroundColor:
+							selected?.type === 'groupPlacer' ? 'green' : undefined,
 					}}
 					onClick={() =>
 						setSelected({
-							type: 'twoByTwoPlacer',
-							tile1: { xOffset: 0, yOffset: 0 },
-							tile2: { xOffset: -16, yOffset: 0 },
-							tile3: { xOffset: 0, yOffset: -16 },
-							tile4: { xOffset: -16, yOffset: -16 },
+							type: 'groupPlacer',
+							tiles: [
+								[
+									{ xOffset: 0, yOffset: 0 },
+									{ xOffset: -16, yOffset: 0 },
+								],
+								[
+									{ xOffset: 0, yOffset: -16 },
+									{ xOffset: -16, yOffset: -16 },
+								],
+							],
 						})
 					}
 				>
 					Group Placer
-					{selected?.type === 'twoByTwoPlacer' && (
+					{selected?.type === 'groupPlacer' && (
 						<TileGroupDisplay tileSetUrl={tileSetUrl} selected={selected} />
 					)}
 				</button>
-				{selected?.type === 'twoByTwoPlacer' && (
+				{selected?.type === 'groupPlacer' && (
 					<div>
-						<CoordinateSelector
-							selected={selected}
-							setSelected={setSelected}
-							tileIndex={1}
-							tileSetUrl={tileSetUrl}
-						/>
-						<CoordinateSelector
-							selected={selected}
-							setSelected={setSelected}
-							tileIndex={2}
-							tileSetUrl={tileSetUrl}
-						/>
-						<CoordinateSelector
-							selected={selected}
-							setSelected={setSelected}
-							tileIndex={3}
-							tileSetUrl={tileSetUrl}
-						/>
-						<CoordinateSelector
-							selected={selected}
-							setSelected={setSelected}
-							tileIndex={4}
-							tileSetUrl={tileSetUrl}
-						/>
+						<button
+							onClick={() =>
+								setSelected({
+									...selected,
+									tiles: [...selected.tiles, selected.tiles[0]],
+								})
+							}
+						>
+							Add Row
+						</button>
+						<button
+							disabled={selected.tiles.length === 1}
+							onClick={() =>
+								setSelected({
+									...selected,
+									tiles: selected.tiles.slice(0, -1),
+								})
+							}
+						>
+							Remove Row
+						</button>
+						<button
+							onClick={() =>
+								setSelected({
+									...selected,
+									tiles: selected.tiles.map((row) => [
+										...row,
+										{ xOffset: 0, yOffset: 0 },
+									]),
+								})
+							}
+						>
+							Add Col
+						</button>
+						<button
+							disabled={selected.tiles[0].length === 1}
+							onClick={() =>
+								setSelected({
+									...selected,
+									tiles: selected.tiles.map((row) => row.slice(0, -1)),
+								})
+							}
+						>
+							Remove Col
+						</button>
+						<div
+							style={{
+								display: 'grid',
+								gap: '.5rem',
+								gridTemplateColumns: numberToGridTemplateColumns(
+									selected.tiles[0].length
+								),
+							}}
+						>
+							{selected.tiles.map((row, rowIndex) => {
+								return row.map((_, colIndex) => (
+									<CoordinateSelector
+										key={`${rowIndex}+${colIndex}`}
+										selected={selected}
+										setSelected={setSelected}
+										rowIndex={rowIndex}
+										colIndex={colIndex}
+										tileSetUrl={tileSetUrl}
+									/>
+								));
+							})}
+						</div>
 					</div>
 				)}
 			</div>
@@ -136,31 +192,64 @@ export const ToolSelection = ({
 const CoordinateSelector = ({
 	selected,
 	setSelected,
-	tileIndex,
+	rowIndex,
+	colIndex,
 	tileSetUrl,
 }: {
-	selected: TwoByTwoGroup;
-	setSelected: (x: TwoByTwoGroup) => void;
-	tileIndex: number;
+	selected: GroupPlacer;
+	setSelected: (x: GroupPlacer) => void;
+	rowIndex: number;
+	colIndex: number;
 	tileSetUrl: string;
 }) => {
 	const [open, setOpen] = useState<boolean>(false);
+	const t = selected.tiles[rowIndex][colIndex];
 	return (
 		<div>
-			<h3 onClick={() => setOpen(!open)}>Tile {tileIndex}:</h3>
+			<h3 style={{ display: 'flex' }} onClick={() => setOpen(!open)}>
+				<div
+					style={{
+						scale: 2,
+						height: 16,
+						width: 16,
+						background: `url(${tileSetUrl}) ${t.xOffset}px ${t.yOffset}px`,
+					}}
+				/>{' '}
+				{rowIndex}/{colIndex}:
+			</h3>
 			{open && (
-				<div style={{ maxHeight: '80dvh', overflowY: 'scroll' }}>
-					<TileMapViewer
-						name={tileSetUrl}
-						t={tileMapsRecord[tileSetUrl]}
-						onClick={(tile) =>
-							setSelected({
-								...selected,
-								[`tile${tileIndex}`]: tile,
-							})
-						}
-					/>
-				</div>
+				<Modal open={open} close={() => setOpen(false)}>
+					<div
+						style={{
+							maxHeight: '80dvh',
+							overflowY: 'scroll',
+							backgroundColor: 'black',
+						}}
+					>
+						<TileMapViewer
+							name={tileSetUrl}
+							t={tileMapsRecord[tileSetUrl]}
+							onClick={(tile) => {
+								setOpen(false);
+								setSelected({
+									...selected,
+									tiles: selected.tiles.map((row, r) => {
+										if (r === rowIndex) {
+											return row.map((col, c) => {
+												if (c === colIndex) {
+													return tile;
+												}
+												return col;
+											});
+										}
+
+										return row;
+									}),
+								});
+							}}
+						/>
+					</div>
+				</Modal>
 			)}
 		</div>
 	);
