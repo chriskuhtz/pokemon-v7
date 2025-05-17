@@ -229,4 +229,4 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	'dragonite taxi': 'dragonite can fly you to remote places',
 };
 
-export const campUpgradeCostScale = 15;
+export const campUpgradeCostScale = 20;

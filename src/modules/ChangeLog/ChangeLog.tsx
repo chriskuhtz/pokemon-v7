@@ -63,6 +63,8 @@ const ChangeLogV25 = (): JSX.Element => {
 		<>
 			<h3>0.25:</h3>
 			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>New Quests</li>
+				<li>UI Improvements</li>
 				<li>New Abilities and Attacks</li>
 			</ol>
 		</>
@@ -104,7 +106,8 @@ const ChangeLogV22 = (): JSX.Element => {
 				<li>Fixed Challenge Field Ranks</li>
 				<li>Terrain Items</li>
 				<li>New Quest line</li>
-				<li>New Abilities, Items and Attacks</li>
+				<li>All Items with battle effects finished</li>
+				<li>New Abilities and Attacks</li>
 			</ol>
 		</>
 	);

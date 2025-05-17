@@ -26,6 +26,7 @@ import {
 	generateRandomStatObject,
 } from '../../interfaces/StatObject';
 import { sledgeHammerPokemon } from '../../modules/Overworld/hooks/useSledgeHammer';
+import { lowBstPokemon } from '../baseStatRecord';
 import { caveW1Encounters } from '../maps/encounters/caveW1';
 import { onixCaveEncounters } from '../maps/encounters/onixCave';
 import { allRocketCampTrainersDefeated } from '../maps/occupants/rocketCampOccupants';
@@ -609,6 +610,12 @@ export const questNames = [
 	'train the EV of two stats over 200 on a Pokemon',
 	'train a Pokemon to 510 EV',
 	'clear out the rocket camp',
+	'catch a weak pokemon',
+	'catch 10 weak pokemon',
+	'catch 20 weak pokemon',
+	'catch 50 weak pokemon',
+	'catch 100 weak pokemon',
+	'catch all weak pokemon',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -617,7 +624,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	...catchQuests,
 	'catch a pokemon': {
 		rewardItems: { 'poke-ball': 10 },
-		researchPoints: 15,
+		researchPoints: campUpgradeCostScale,
 		conditionFunction: (s) => {
 			return s.pokemon.length > 1;
 		},
@@ -2846,6 +2853,65 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rangerLevels: 5,
 		kind: 'QUEST_LINE',
 		conditionFunction: allRocketCampTrainersDefeated,
+	},
+	'catch a weak pokemon': {
+		kind: 'BULLETIN',
+		rewardItems: { 'poke-ball': 5 },
+		researchPoints: 5,
+		conditionFunction: (s) =>
+			Object.keys(lowBstPokemon).filter(
+				(pok) => s.pokedex[pok as PokemonName].caughtOnRoutes.length > 0
+			).length > 0,
+	},
+	'catch 10 weak pokemon': {
+		kind: 'BULLETIN',
+		rewardItems: { 'poke-ball': 10 },
+		researchPoints: 10,
+		availableAfter: 'catch a weak pokemon',
+		conditionFunction: (s) =>
+			Object.keys(lowBstPokemon).filter(
+				(pok) => s.pokedex[pok as PokemonName].caughtOnRoutes.length > 0
+			).length > 9,
+	},
+	'catch 20 weak pokemon': {
+		kind: 'BULLETIN',
+		rewardItems: { 'poke-ball': 20 },
+		researchPoints: 20,
+		availableAfter: 'catch 10 weak pokemon',
+		conditionFunction: (s) =>
+			Object.keys(lowBstPokemon).filter(
+				(pok) => s.pokedex[pok as PokemonName].caughtOnRoutes.length > 0
+			).length > 19,
+	},
+	'catch 50 weak pokemon': {
+		kind: 'BULLETIN',
+		rewardItems: { 'poke-ball': 20 },
+		researchPoints: 50,
+		availableAfter: 'catch 20 weak pokemon',
+		conditionFunction: (s) =>
+			Object.keys(lowBstPokemon).filter(
+				(pok) => s.pokedex[pok as PokemonName].caughtOnRoutes.length > 0
+			).length > 49,
+	},
+	'catch 100 weak pokemon': {
+		kind: 'BULLETIN',
+		rewardItems: { 'poke-ball': 20 },
+		researchPoints: 100,
+		availableAfter: 'catch 50 weak pokemon',
+		conditionFunction: (s) =>
+			Object.keys(lowBstPokemon).filter(
+				(pok) => s.pokedex[pok as PokemonName].caughtOnRoutes.length > 0
+			).length > 99,
+	},
+	'catch all weak pokemon': {
+		kind: 'BULLETIN',
+		rewardItems: { 'master-ball': 1 },
+		researchPoints: 300,
+		availableAfter: 'catch 100 weak pokemon',
+		conditionFunction: (s) =>
+			Object.keys(lowBstPokemon).every(
+				(pok) => s.pokedex[pok as PokemonName].caughtOnRoutes.length > 0
+			),
 	},
 };
 

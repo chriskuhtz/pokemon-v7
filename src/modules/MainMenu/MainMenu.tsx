@@ -21,19 +21,15 @@ import { LocationContext } from '../../hooks/LocationProvider';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { useQuests } from '../../hooks/useQuests';
+import { useReset } from '../../hooks/useReset';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { useTeleport } from '../../hooks/useTeleport';
 import { EmptyInventory } from '../../interfaces/Inventory';
 
-export const MainMenu = ({
-	goBack,
-	reset,
-}: {
-	goBack: () => void;
-	reset: () => void;
-}): JSX.Element => {
+export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { location, setLocation } = useContext(LocationContext);
+	const reset = useReset();
 	const [resetConfirmationInProgress, setRCIP] = useState<boolean>(false);
 	const { numberOfUncollected } = useQuests();
 	const navigate = useNavigate();

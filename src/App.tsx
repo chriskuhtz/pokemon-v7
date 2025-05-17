@@ -92,7 +92,6 @@ export const App = (): JSX.Element => {
 		patchSaveFileReducer,
 		navigateAwayFromOverworldReducer,
 		changeHeldItemReducer,
-		reset,
 	} = useContext(SaveFileContext);
 
 	const {
@@ -168,9 +167,7 @@ export const App = (): JSX.Element => {
 		return <StarterSelection />;
 	}
 	if (activeTab === 'MAIN') {
-		return (
-			<MainMenu goBack={() => setActiveTabReducer('OVERWORLD')} reset={reset} />
-		);
+		return <MainMenu goBack={() => setActiveTabReducer('OVERWORLD')} />;
 	}
 	if (activeTab === 'QUESTS') {
 		return <Quests goBack={() => setActiveTabReducer('MAIN')} />;

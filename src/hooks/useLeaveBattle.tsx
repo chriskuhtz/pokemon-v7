@@ -16,6 +16,7 @@ import {
 import { isKeyItem, pickupTable } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { LocationContext } from './LocationProvider';
+import { useReset } from './useReset';
 import { SaveFileContext } from './useSaveFile';
 
 export interface LeaveBattlePayload {
@@ -30,7 +31,8 @@ export interface LeaveBattlePayload {
 }
 export const useLeaveBattle = () => {
 	const { location, setLocation } = useContext(LocationContext);
-	const { patchSaveFileReducer, saveFile, reset } = useContext(SaveFileContext);
+	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
+	const reset = useReset();
 
 	const team = useMemo(
 		() => saveFile.pokemon.filter((p) => p.onTeam),
