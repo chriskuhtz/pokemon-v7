@@ -119,6 +119,7 @@ export const MapEditor = ({
 				}}
 			>
 				<ToolSelection
+					selected={tool}
 					setSelected={setSelected}
 					tileSetUrl={initialMap.tilesetUrl}
 				/>

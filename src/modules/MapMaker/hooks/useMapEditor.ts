@@ -1,6 +1,6 @@
 import { useDeferredValue, useState } from 'react';
 import { OverworldMap, TileIdentifier } from '../../../interfaces/OverworldMap';
-import { Tool } from '../MapMaker';
+import { Tool, TwoByTwoGroup } from '../MapMaker';
 
 export type LayerName =
 	| 'Base'
@@ -67,8 +67,92 @@ export const useMapEditor = ({
 		]);
 	};
 
+	const applyTool = (
+		tool: Tool,
+		layer: LayerName,
+		current: TileIdentifier | null
+	): TileIdentifier | null => {
+		if (tool.type === 'eraser') {
+			if (layer === 'Base') {
+				return current;
+			}
+			return null;
+		}
+		if (tool.type === 'tileplacer') {
+			return tool.tile;
+		}
+		//new tools here
+		return current;
+	};
+
+	const applyGroupTool = (
+		tool: TwoByTwoGroup,
+		i: number,
+		j: number,
+		layer: LayerName
+	) => {
+		if (layer === 'Base') {
+			const updatedLayer = [...baseLayer];
+
+			updatedLayer[i][j] = tool.tile1;
+			updatedLayer[i][j + 1] = tool.tile2;
+			updatedLayer[i + 1][j] = tool.tile3;
+			updatedLayer[i + 1][j + 1] = tool.tile4;
+			setBaseLayer(updatedLayer);
+		}
+		if (layer === 'Decoration') {
+			const updatedLayer = [...decorationLayer];
+
+			updatedLayer[i][j] = tool.tile1;
+			updatedLayer[i][j + 1] = tool.tile2;
+			updatedLayer[i + 1][j] = tool.tile3;
+			updatedLayer[i + 1][j + 1] = tool.tile4;
+			setdecorationLayer(updatedLayer);
+		}
+		if (layer === 'Encounter') {
+			const updatedLayer = [...encounterLayer];
+
+			updatedLayer[i][j] = tool.tile1;
+			updatedLayer[i][j + 1] = tool.tile2;
+			updatedLayer[i + 1][j] = tool.tile3;
+			updatedLayer[i + 1][j + 1] = tool.tile4;
+			setencounterLayer(updatedLayer);
+		}
+		if (layer === 'Water') {
+			const updatedLayer = [...waterLayer];
+
+			updatedLayer[i][j] = tool.tile1;
+			updatedLayer[i][j + 1] = tool.tile2;
+			updatedLayer[i + 1][j] = tool.tile3;
+			updatedLayer[i + 1][j + 1] = tool.tile4;
+			setwaterLayer(updatedLayer);
+		}
+		if (layer === 'Obstacle') {
+			const updatedLayer = [...obstacleLayer];
+
+			updatedLayer[i][j] = tool.tile1;
+			updatedLayer[i][j + 1] = tool.tile2;
+			updatedLayer[i + 1][j] = tool.tile3;
+			updatedLayer[i + 1][j + 1] = tool.tile4;
+			setobstacleLayer(updatedLayer);
+		}
+		if (layer === 'Foreground') {
+			const updatedLayer = [...foregroundLayer];
+
+			updatedLayer[i][j] = tool.tile1;
+			updatedLayer[i][j + 1] = tool.tile2;
+			updatedLayer[i + 1][j] = tool.tile3;
+			updatedLayer[i + 1][j + 1] = tool.tile4;
+			setforegroundLayer(updatedLayer);
+		}
+	};
+
 	const changeTile = (i: number, j: number, layer: LayerName) => {
 		if (!tool) {
+			return;
+		}
+		if (tool.type === 'twoByTwoPlacer') {
+			applyGroupTool(tool, i, j, layer);
 			return;
 		}
 
@@ -77,7 +161,7 @@ export const useMapEditor = ({
 				baseLayer.map((row, h) => {
 					return row.map((el, k) => {
 						if (h === i && k === j) {
-							return tool.type === 'eraser' ? el : tool.tile;
+							return applyTool(tool, layer, el) ?? el;
 						}
 						return el;
 					});
@@ -89,7 +173,7 @@ export const useMapEditor = ({
 				decorationLayer.map((row, h) => {
 					return row.map((el, k) => {
 						if (h === i && k === j) {
-							return tool.type === 'eraser' ? null : tool.tile;
+							return applyTool(tool, layer, el);
 						}
 						return el;
 					});
@@ -101,7 +185,7 @@ export const useMapEditor = ({
 				encounterLayer.map((row, h) => {
 					return row.map((el, k) => {
 						if (h === i && k === j) {
-							return tool.type === 'eraser' ? null : tool.tile;
+							return applyTool(tool, layer, el);
 						}
 						return el;
 					});
@@ -113,7 +197,7 @@ export const useMapEditor = ({
 				obstacleLayer.map((row, h) => {
 					return row.map((el, k) => {
 						if (h === i && k === j) {
-							return tool.type === 'eraser' ? null : tool.tile;
+							return applyTool(tool, layer, el);
 						}
 						return el;
 					});
@@ -125,7 +209,7 @@ export const useMapEditor = ({
 				foregroundLayer.map((row, h) => {
 					return row.map((el, k) => {
 						if (h === i && k === j) {
-							return tool.type === 'eraser' ? null : tool.tile;
+							return applyTool(tool, layer, el);
 						}
 						return el;
 					});
@@ -137,7 +221,7 @@ export const useMapEditor = ({
 				waterLayer.map((row, h) => {
 					return row.map((el, k) => {
 						if (h === i && k === j) {
-							return tool.type === 'eraser' ? null : tool.tile;
+							return applyTool(tool, layer, el);
 						}
 						return el;
 					});
@@ -154,7 +238,7 @@ export const useMapEditor = ({
 			setBaseLayer(
 				baseLayer.map((row, h) => {
 					if (h === i) {
-						return row.map((el) => (tool.type === 'eraser' ? el : tool.tile));
+						return row.map((el) => applyTool(tool, layer, el) ?? el);
 					}
 					return row;
 				})
@@ -164,7 +248,7 @@ export const useMapEditor = ({
 			setencounterLayer(
 				encounterLayer.map((row, h) => {
 					if (h === i) {
-						return row.map(() => (tool.type === 'eraser' ? null : tool.tile));
+						return row.map((el) => applyTool(tool, layer, el));
 					}
 					return row;
 				})
@@ -174,7 +258,7 @@ export const useMapEditor = ({
 			setdecorationLayer(
 				decorationLayer.map((row, h) => {
 					if (h === i) {
-						return row.map(() => (tool.type === 'eraser' ? null : tool.tile));
+						return row.map((el) => applyTool(tool, layer, el));
 					}
 					return row;
 				})
@@ -184,7 +268,7 @@ export const useMapEditor = ({
 			setobstacleLayer(
 				obstacleLayer.map((row, h) => {
 					if (h === i) {
-						return row.map(() => (tool.type === 'eraser' ? null : tool.tile));
+						return row.map((el) => applyTool(tool, layer, el));
 					}
 					return row;
 				})
@@ -194,7 +278,7 @@ export const useMapEditor = ({
 			setforegroundLayer(
 				foregroundLayer.map((row, h) => {
 					if (h === i) {
-						return row.map(() => (tool.type === 'eraser' ? null : tool.tile));
+						return row.map((el) => applyTool(tool, layer, el));
 					}
 					return row;
 				})
@@ -204,7 +288,7 @@ export const useMapEditor = ({
 			setwaterLayer(
 				waterLayer.map((row, h) => {
 					if (h === i) {
-						return row.map(() => (tool.type === 'eraser' ? null : tool.tile));
+						return row.map((el) => applyTool(tool, layer, el));
 					}
 					return row;
 				})
@@ -221,7 +305,7 @@ export const useMapEditor = ({
 				baseLayer.map((row) => {
 					return row.map((el, k) => {
 						if (k === j) {
-							return tool.type === 'eraser' ? el : tool.tile;
+							return applyTool(tool, layer, el) ?? el;
 						}
 						return el;
 					});
@@ -233,7 +317,7 @@ export const useMapEditor = ({
 				encounterLayer.map((row) => {
 					return row.map((el, k) => {
 						if (k === j) {
-							return tool.type === 'eraser' ? null : tool.tile;
+							return applyTool(tool, layer, el);
 						}
 						return el;
 					});
@@ -245,7 +329,7 @@ export const useMapEditor = ({
 				obstacleLayer.map((row) => {
 					return row.map((el, k) => {
 						if (k === j) {
-							return tool.type === 'eraser' ? null : tool.tile;
+							return applyTool(tool, layer, el);
 						}
 						return el;
 					});
@@ -257,7 +341,7 @@ export const useMapEditor = ({
 				decorationLayer.map((row) => {
 					return row.map((el, k) => {
 						if (k === j) {
-							return tool.type === 'eraser' ? null : tool.tile;
+							return applyTool(tool, layer, el);
 						}
 						return el;
 					});
@@ -269,7 +353,7 @@ export const useMapEditor = ({
 				foregroundLayer.map((row) => {
 					return row.map((el, k) => {
 						if (k === j) {
-							return tool.type === 'eraser' ? null : tool.tile;
+							return applyTool(tool, layer, el);
 						}
 						return el;
 					});
@@ -281,7 +365,7 @@ export const useMapEditor = ({
 				waterLayer.map((row) => {
 					return row.map((el, k) => {
 						if (k === j) {
-							return tool.type === 'eraser' ? null : tool.tile;
+							return applyTool(tool, layer, el);
 						}
 						return el;
 					});
