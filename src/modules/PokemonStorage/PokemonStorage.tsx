@@ -25,6 +25,7 @@ import { balltypes } from '../../interfaces/Item';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { Chip } from '../../uiComponents/Chip/Chip';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
+import { Modal } from '../../uiComponents/Modal/Modal';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
@@ -118,17 +119,17 @@ export const PokemonStorage = ({
 		});
 	};
 
+	const [releaseToConfirm, setReleaseToConfirm] = useState<
+		OwnedPokemon | undefined
+	>();
+
 	const startReleaseProcess = (id: string) => {
 		const pokemon = allPokemon.find((p) => p.id === id);
 
 		if (!pokemon) {
 			return;
 		}
-		if (window.confirm(`Do you really want to release ${pokemon.name}`)) {
-			patchSaveFileReducer({
-				pokemon: allPokemon.filter((p) => p.id !== id),
-			});
-		}
+		setReleaseToConfirm(pokemon);
 	};
 	const collectAllHeldItemsFromStored = () => {
 		const allHeldItemKeys = allPokemon
@@ -162,6 +163,27 @@ export const PokemonStorage = ({
 
 	return (
 		<Page goBack={goBack} headline="Your Pokemon:">
+			<Modal
+				close={() => setReleaseToConfirm(undefined)}
+				open={!!releaseToConfirm}
+			>
+				<div>
+					<p>Do you really want to release {releaseToConfirm?.name}</p>
+					<button
+						onClick={() => {
+							patchSaveFileReducer({
+								pokemon: allPokemon.filter(
+									(p) => p.id !== releaseToConfirm?.id
+								),
+							});
+							setReleaseToConfirm(undefined);
+						}}
+					>
+						Yes
+					</button>
+					<button onClick={() => setReleaseToConfirm(undefined)}>No</button>
+				</div>
+			</Modal>
 			<h2>Team:</h2>
 			<Stack mode="row">
 				{team.map((pokemon) => {

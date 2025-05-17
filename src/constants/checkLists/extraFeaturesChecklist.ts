@@ -417,6 +417,7 @@ export const extraFeatureCheckList: {
 	{ name: 'always copy map to clipboard', handled: true },
 	{ name: 'sort by favorites', handled: true },
 	{ name: 'visualize quest kind', handled: true },
+	{ name: 'releasing pokemon should not end fullscreen mode' },
 	{ name: 'fix pathing' },
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
@@ -432,9 +433,7 @@ export const extraFeatureCheckList: {
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'Fishing?' },
 	{ name: 'movement buttons feel flaky' },
-	{ name: 'historian event: lugia' },
-	{ name: 'historian event: ho oh' },
-	{ name: 'releasing pokemon should not end fullscreen mode' },
+
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
 	{ name: 'loosing to wild mons is sometimes buggy' },
 	{ name: 'trainer ai should consider flying,dig, diving' },
@@ -442,4 +441,5 @@ export const extraFeatureCheckList: {
 	{ name: 'catch x pokemon of type' },
 	{ name: 'progress bar for catch x quests' },
 	{ name: 'Terrain Items (shovel, pickaxe) as Gym leader rewards ' },
+	{ name: 'figure out shaders' },
 ];
