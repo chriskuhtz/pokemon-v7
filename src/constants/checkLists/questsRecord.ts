@@ -1,6 +1,5 @@
 import { v4 } from 'uuid';
 import { calculateLevelData } from '../../functions/calculateLevelData';
-import { timesOfDay } from '../../functions/getTimeOfDay';
 import {
 	tier1trainers,
 	tier2trainers,
@@ -19,7 +18,6 @@ import {
 	fossilTable,
 } from '../../interfaces/Item';
 import { getRandomNature } from '../../interfaces/Natures';
-import { OverworldMap } from '../../interfaces/OverworldMap';
 import { Quest } from '../../interfaces/Quest';
 import {
 	EmptyStatObject,
@@ -31,20 +29,14 @@ import {
 	lowBstPokemon,
 	midBstPokemon,
 } from '../baseStatRecord';
+import { catchQuests } from '../generatedQuests/catchQuests';
+import { typeCatchQuests } from '../generatedQuests/typeCatchQuests';
 import { caveW1Encounters } from '../maps/encounters/caveW1';
 import { onixCaveEncounters } from '../maps/encounters/onixCave';
 import { allRocketCampTrainersDefeated } from '../maps/occupants/rocketCampOccupants';
-import { routeE1 } from '../maps/routeE1';
-import { routeN1 } from '../maps/routeN1';
-import { routeN1E1 } from '../maps/routeN1E1';
-import { routeN1W1 } from '../maps/routeN1W1';
 import { routeS1 } from '../maps/routeS1';
-import { routeS1E1 } from '../maps/routeS1E1';
-import { routeS1W1 } from '../maps/routeS1W1';
-import { routeW1 } from '../maps/routeW1';
 import { PokemonName, pokemonNames } from '../pokemonNames';
 import {
-	CampUpgrade,
 	campUpgradeCategories,
 	campUpgradeCostScale,
 	campUpgradeNames,
@@ -63,398 +55,147 @@ const smallExpCandyPackage: Partial<Inventory> = {
 	'exp-candy-m': 5,
 	'exp-candy-l': 1,
 };
-const rewardsMap: Partial<Record<QuestName, Partial<Inventory>>> = {
-	//routeN1
-	'catch a MORNING-time exclusive pokemon from routeN1': {
-		'poke-ball': 5,
-		'sitrus-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch a DAY-time exclusive pokemon from routeN1': {
-		'poke-ball': 5,
-		'cheri-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch a EVENING-time exclusive pokemon from routeN1': {
-		'poke-ball': 5,
-		'chesto-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch a NIGHT-time exclusive pokemon from routeN1': {
-		'poke-ball': 5,
-		'pecha-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch all MORNING-time pokemon from routeN1': {
-		'poke-ball': 5,
-		'rawst-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch all DAY-time pokemon from routeN1': {
-		'poke-ball': 5,
-		'aspear-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch all EVENING-time pokemon from routeN1': {
-		'poke-ball': 5,
-		'leppa-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch all NIGHT-time pokemon from routeN1': {
-		'poke-ball': 5,
-		'oran-berry': 2,
-		'berry-juice': 1,
-	},
-	//routeN1E1
-	'catch a MORNING-time exclusive pokemon from routeN1E1': {
-		'net-ball': 5,
-		'persim-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch a DAY-time exclusive pokemon from routeN1E1': {
-		'net-ball': 5,
-		'lum-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch a EVENING-time exclusive pokemon from routeN1E1': {
-		'net-ball': 5,
-		'figy-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch a NIGHT-time exclusive pokemon from routeN1E1': {
-		'net-ball': 5,
-		'mago-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch all MORNING-time pokemon from routeN1E1': {
-		'net-ball': 5,
-		'iapapa-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch all DAY-time pokemon from routeN1E1': {
-		'net-ball': 5,
-		'bluk-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch all EVENING-time pokemon from routeN1E1': {
-		'net-ball': 5,
-		'nanab-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch all NIGHT-time pokemon from routeN1E1': {
-		'net-ball': 5,
-		'pinap-berry': 2,
-		'berry-juice': 1,
-	},
-	//routeE1
-	'catch a MORNING-time exclusive pokemon from routeE1': {
-		'quick-ball': 5,
-		'aguav-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch a DAY-time exclusive pokemon from routeE1': {
-		'quick-ball': 5,
-		'wiki-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch a EVENING-time exclusive pokemon from routeE1': {
-		'quick-ball': 5,
-		'razz-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch a NIGHT-time exclusive pokemon from routeE1': {
-		'quick-ball': 5,
-		'wepear-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch all MORNING-time pokemon from routeE1': {
-		'quick-ball': 5,
-		'pinap-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch all DAY-time pokemon from routeE1': {
-		'quick-ball': 5,
-		'pomeg-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch all EVENING-time pokemon from routeE1': {
-		'quick-ball': 5,
-		'kelpsy-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch all NIGHT-time pokemon from routeE1': {
-		'quick-ball': 5,
-		'qualot-berry': 1,
-		'berry-juice': 1,
-	},
-	//routeS1E1
-	'catch a MORNING-time exclusive pokemon from routeS1E1': {
-		'great-ball': 5,
-		'kee-berry': 2,
-	},
-	'catch a DAY-time exclusive pokemon from routeS1E1': {
-		'great-ball': 5,
-		'belue-berry': 2,
-	},
-	'catch a EVENING-time exclusive pokemon from routeS1E1': {
-		'great-ball': 5,
-		'rabuta-berry': 2,
-	},
-	'catch a NIGHT-time exclusive pokemon from routeS1E1': {
-		'great-ball': 5,
-		'pinap-berry': 2,
-	},
-	'catch all MORNING-time pokemon from routeS1E1': {
-		'great-ball': 5,
-		'qualot-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch all DAY-time pokemon from routeS1E1': {
-		'great-ball': 5,
-		'payapa-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch all EVENING-time pokemon from routeS1E1': {
-		'great-ball': 5,
-		'magost-berry': 2,
-		'berry-juice': 1,
-	},
-	'catch all NIGHT-time pokemon from routeS1E1': {
-		'great-ball': 5,
-		'tamato-berry': 1,
-		'berry-juice': 1,
-	},
-	//routeS1W1
-	'catch a MORNING-time exclusive pokemon from routeS1W1': {
-		'great-ball': 5,
-		'rage-candy-bar': 1,
-		'escape-rope': 1,
-	},
-	'catch a DAY-time exclusive pokemon from routeS1W1': {
-		'great-ball': 5,
-		'rage-candy-bar': 1,
-		'escape-rope': 1,
-	},
-	'catch a EVENING-time exclusive pokemon from routeS1W1': {
-		'great-ball': 5,
-		'rage-candy-bar': 1,
-		'escape-rope': 1,
-	},
-	'catch a NIGHT-time exclusive pokemon from routeS1W1': {
-		'great-ball': 5,
-		'rage-candy-bar': 1,
-		'escape-rope': 1,
-	},
-	'catch all MORNING-time pokemon from routeS1W1': {
-		'great-ball': 5,
-		'rare-candy': 1,
-	},
-	'catch all DAY-time pokemon from routeS1W1': {
-		'great-ball': 5,
-		'rare-candy': 1,
-	},
-	'catch all EVENING-time pokemon from routeS1W1': {
-		'great-ball': 5,
-		'rare-candy': 1,
-	},
-	'catch all NIGHT-time pokemon from routeS1W1': {
-		'great-ball': 5,
-		'rare-candy': 1,
-	},
-	//routeW1
-	'catch a MORNING-time exclusive pokemon from routeW1': {
-		'quick-ball': 5,
-		'lumiose-galette': 1,
-		'escape-rope': 1,
-	},
-	'catch a DAY-time exclusive pokemon from routeW1': {
-		'quick-ball': 5,
-		'lumiose-galette': 1,
-		'escape-rope': 1,
-	},
-	'catch a EVENING-time exclusive pokemon from routeW1': {
-		'quick-ball': 5,
-		'lumiose-galette': 1,
-		'escape-rope': 1,
-	},
-	'catch a NIGHT-time exclusive pokemon from routeW1': {
-		'quick-ball': 5,
-		'lumiose-galette': 1,
-		'escape-rope': 1,
-	},
-	'catch all MORNING-time pokemon from routeW1': {
-		'quick-ball': 5,
-		'rare-candy': 1,
-	},
-	'catch all DAY-time pokemon from routeW1': {
-		'quick-ball': 5,
-		'rare-candy': 1,
-	},
-	'catch all EVENING-time pokemon from routeW1': {
-		'quick-ball': 5,
-		'rare-candy': 1,
-	},
-	'catch all NIGHT-time pokemon from routeW1': {
-		'quick-ball': 5,
-		'rare-candy': 1,
-	},
-	//routeN1W1
-	'catch a MORNING-time exclusive pokemon from routeN1W1': {
-		'dusk-ball': 5,
-		'pewter-crunchies': 1,
-		'escape-rope': 1,
-	},
-	'catch a DAY-time exclusive pokemon from routeN1W1': {
-		'dusk-ball': 5,
-		'pewter-crunchies': 1,
-		'escape-rope': 1,
-	},
-	'catch a EVENING-time exclusive pokemon from routeN1W1': {
-		'dusk-ball': 5,
-		'pewter-crunchies': 1,
-		'escape-rope': 1,
-	},
-	'catch a NIGHT-time exclusive pokemon from routeN1W1': {
-		'dusk-ball': 5,
-		'pewter-crunchies': 1,
-		'escape-rope': 1,
-	},
-	'catch all MORNING-time pokemon from routeN1W1': {
-		'dusk-ball': 5,
-		'rare-candy': 1,
-	},
-	'catch all DAY-time pokemon from routeN1W1': {
-		'dusk-ball': 5,
-		'rare-candy': 1,
-	},
-	'catch all EVENING-time pokemon from routeN1W1': {
-		'dusk-ball': 5,
-		'rare-candy': 1,
-	},
-	'catch all NIGHT-time pokemon from routeN1W1': {
-		'dusk-ball': 5,
-		'rare-candy': 1,
-	},
-};
-
-const catchQuestsForRoute = (
-	route: OverworldMap,
-	includeWater: boolean,
-	requiredUpgrade?: CampUpgrade
-): Partial<Record<string, Quest>> => {
-	return {
-		...Object.fromEntries(
-			timesOfDay.map((time) => {
-				const id = `catch a ${time}-time exclusive pokemon from ${route.id}`;
-				return [
-					id,
-					{
-						rewardItems: rewardsMap[id] ?? { 'poke-ball': 10 },
-						researchPoints: 10,
-						conditionFunction: (s) => {
-							return route.possibleEncounters[time].some((e) =>
-								s.pokedex[e.name].caughtOnRoutes.includes(route.id)
-							);
-						},
-						targetPokemon: [
-							...new Set(route.possibleEncounters[time].map((p) => p.name)),
-						],
-						targetRoute: route.id,
-						kind: 'BULLETIN',
-						requiredUpgrade: requiredUpgrade,
-					},
-				] as [QuestName, Quest];
-			})
-		),
-		...Object.fromEntries(
-			timesOfDay.map((time) => {
-				const id: QuestName = `catch all ${time}-time pokemon from ${route.id}`;
-				return [
-					id,
-					{
-						rewardItems: rewardsMap[id] ?? { 'poke-ball': 10 },
-						availableAfter: `catch a ${time}-time exclusive pokemon from ${route.id}`,
-						researchPoints: 20,
-						conditionFunction: (s) => {
-							return [
-								...route.possibleEncounters.BASE,
-								...(includeWater ? route.possibleEncounters.WATER : []),
-								...route.possibleEncounters[time],
-							].every((e) =>
-								s.pokedex[e.name].caughtOnRoutes.includes(route.id)
-							);
-						},
-						targetPokemon: [
-							...new Set(
-								[
-									...route.possibleEncounters.BASE,
-									...(includeWater ? route.possibleEncounters.WATER : []),
-									...route.possibleEncounters[time],
-								].map((p) => p.name)
-							),
-						],
-						targetRoute: route.id,
-						kind: 'BULLETIN',
-						requiredUpgrade: requiredUpgrade,
-					},
-				] as [QuestName, Quest];
-			})
-		),
-		[`catch a ultra-rare pokemon from ${route.id}`]: {
-			rewardItems: { 'rare-candy': 1 },
-			researchPoints: 20,
-			conditionFunction: (s) => {
-				return [
-					...route.possibleEncounters.BASE,
-					...route.possibleEncounters.WATER,
-					...route.possibleEncounters.NIGHT,
-					...route.possibleEncounters.MORNING,
-					...route.possibleEncounters.DAY,
-					...route.possibleEncounters.EVENING,
-				].some(
-					(e) =>
-						e.rarity === 'ultra-rare' &&
-						s.pokedex[e.name].caughtOnRoutes.includes(route.id)
-				);
-			},
-			targetPokemon: [
-				...new Set(
-					[
-						...route.possibleEncounters.BASE,
-						...route.possibleEncounters.WATER,
-						...route.possibleEncounters.NIGHT,
-						...route.possibleEncounters.MORNING,
-						...route.possibleEncounters.DAY,
-						...route.possibleEncounters.EVENING,
-					]
-						.filter((p) => p.rarity === 'ultra-rare')
-						.map((p) => p.name)
-				),
-			],
-			targetRoute: route.id,
-			kind: 'BULLETIN',
-			requiredUpgrade: requiredUpgrade,
-		},
-	};
-};
-
-const catchQuests = {
-	...catchQuestsForRoute(routeN1, false),
-	...catchQuestsForRoute(routeN1E1, false, 'machete certification'),
-	...catchQuestsForRoute(routeE1, false, 'sledge hammer certification'),
-	...catchQuestsForRoute(routeS1E1, true, 'swimming certification'),
-	...catchQuestsForRoute(routeS1W1, true, 'swimming certification'),
-	...catchQuestsForRoute(routeW1, true, 'swimming certification'),
-	...catchQuestsForRoute(routeN1W1, true, 'buy skiing equipment'),
-};
 
 export const questNames = [
-	...Object.keys(catchQuests),
+	'catch a fire pokemon',
+	'catch 10 different fire pokemon',
+	'catch 25 different fire pokemon',
+	'catch 50 different fire pokemon',
+	'catch a water pokemon',
+	'catch 10 different water pokemon',
+	'catch 25 different water pokemon',
+	'catch 50 different water pokemon',
+	'catch a grass pokemon',
+	'catch 10 different grass pokemon',
+	'catch 25 different grass pokemon',
+	'catch 50 different grass pokemon',
+	'catch a electric pokemon',
+	'catch 10 different electric pokemon',
+	'catch 25 different electric pokemon',
+	'catch 50 different electric pokemon',
+	'catch a ghost pokemon',
+	'catch 10 different ghost pokemon',
+	'catch 25 different ghost pokemon',
+	'catch 50 different ghost pokemon',
+	'catch a dark pokemon',
+	'catch 10 different dark pokemon',
+	'catch 25 different dark pokemon',
+	'catch 50 different dark pokemon',
+	'catch a psychic pokemon',
+	'catch 10 different psychic pokemon',
+	'catch 25 different psychic pokemon',
+	'catch 50 different psychic pokemon',
+	'catch a rock pokemon',
+	'catch 10 different rock pokemon',
+	'catch 25 different rock pokemon',
+	'catch 50 different rock pokemon',
+	'catch a ground pokemon',
+	'catch 10 different ground pokemon',
+	'catch 25 different ground pokemon',
+	'catch 50 different ground pokemon',
+	'catch a steel pokemon',
+	'catch 10 different steel pokemon',
+	'catch 25 different steel pokemon',
+	'catch 50 different steel pokemon',
+	'catch a ice pokemon',
+	'catch 10 different ice pokemon',
+	'catch 25 different ice pokemon',
+	'catch 50 different ice pokemon',
+	'catch a dragon pokemon',
+	'catch 10 different dragon pokemon',
+	'catch 25 different dragon pokemon',
+	'catch 50 different dragon pokemon',
+	'catch a fighting pokemon',
+	'catch 10 different fighting pokemon',
+	'catch 25 different fighting pokemon',
+	'catch 50 different fighting pokemon',
+	'catch a flying pokemon',
+	'catch 10 different flying pokemon',
+	'catch 25 different flying pokemon',
+	'catch 50 different flying pokemon',
+	'catch a poison pokemon',
+	'catch 10 different poison pokemon',
+	'catch 25 different poison pokemon',
+	'catch 50 different poison pokemon',
+	'catch a bug pokemon',
+	'catch 10 different bug pokemon',
+	'catch 25 different bug pokemon',
+	'catch 50 different bug pokemon',
+	'catch a fairy pokemon',
+	'catch 10 different fairy pokemon',
+	'catch 25 different fairy pokemon',
+	'catch 50 different fairy pokemon',
+	'catch a normal pokemon',
+	'catch 10 different normal pokemon',
+	'catch 25 different normal pokemon',
+	'catch 50 different normal pokemon',
+	'catch a MORNING-time exclusive pokemon from routeN1',
+	'catch a DAY-time exclusive pokemon from routeN1',
+	'catch a EVENING-time exclusive pokemon from routeN1',
+	'catch a NIGHT-time exclusive pokemon from routeN1',
+	'catch all MORNING-time pokemon from routeN1',
+	'catch all DAY-time pokemon from routeN1',
+	'catch all EVENING-time pokemon from routeN1',
+	'catch all NIGHT-time pokemon from routeN1',
+	'catch a ultra-rare pokemon from routeN1',
+	'catch a MORNING-time exclusive pokemon from routeN1E1',
+	'catch a DAY-time exclusive pokemon from routeN1E1',
+	'catch a EVENING-time exclusive pokemon from routeN1E1',
+	'catch a NIGHT-time exclusive pokemon from routeN1E1',
+	'catch all MORNING-time pokemon from routeN1E1',
+	'catch all DAY-time pokemon from routeN1E1',
+	'catch all EVENING-time pokemon from routeN1E1',
+	'catch all NIGHT-time pokemon from routeN1E1',
+	'catch a ultra-rare pokemon from routeN1E1',
+	'catch a MORNING-time exclusive pokemon from routeE1',
+	'catch a DAY-time exclusive pokemon from routeE1',
+	'catch a EVENING-time exclusive pokemon from routeE1',
+	'catch a NIGHT-time exclusive pokemon from routeE1',
+	'catch all MORNING-time pokemon from routeE1',
+	'catch all DAY-time pokemon from routeE1',
+	'catch all EVENING-time pokemon from routeE1',
+	'catch all NIGHT-time pokemon from routeE1',
+	'catch a ultra-rare pokemon from routeE1',
+	'catch a MORNING-time exclusive pokemon from routeS1E1',
+	'catch a DAY-time exclusive pokemon from routeS1E1',
+	'catch a EVENING-time exclusive pokemon from routeS1E1',
+	'catch a NIGHT-time exclusive pokemon from routeS1E1',
+	'catch all MORNING-time pokemon from routeS1E1',
+	'catch all DAY-time pokemon from routeS1E1',
+	'catch all EVENING-time pokemon from routeS1E1',
+	'catch all NIGHT-time pokemon from routeS1E1',
+	'catch a ultra-rare pokemon from routeS1E1',
+	'catch a MORNING-time exclusive pokemon from routeS1W1',
+	'catch a DAY-time exclusive pokemon from routeS1W1',
+	'catch a EVENING-time exclusive pokemon from routeS1W1',
+	'catch a NIGHT-time exclusive pokemon from routeS1W1',
+	'catch all MORNING-time pokemon from routeS1W1',
+	'catch all DAY-time pokemon from routeS1W1',
+	'catch all EVENING-time pokemon from routeS1W1',
+	'catch all NIGHT-time pokemon from routeS1W1',
+	'catch a ultra-rare pokemon from routeS1W1',
+	'catch a MORNING-time exclusive pokemon from routeW1',
+	'catch a DAY-time exclusive pokemon from routeW1',
+	'catch a EVENING-time exclusive pokemon from routeW1',
+	'catch a NIGHT-time exclusive pokemon from routeW1',
+	'catch all MORNING-time pokemon from routeW1',
+	'catch all DAY-time pokemon from routeW1',
+	'catch all EVENING-time pokemon from routeW1',
+	'catch all NIGHT-time pokemon from routeW1',
+	'catch a ultra-rare pokemon from routeW1',
+	'catch a MORNING-time exclusive pokemon from routeN1W1',
+	'catch a DAY-time exclusive pokemon from routeN1W1',
+	'catch a EVENING-time exclusive pokemon from routeN1W1',
+	'catch a NIGHT-time exclusive pokemon from routeN1W1',
+	'catch all MORNING-time pokemon from routeN1W1',
+	'catch all DAY-time pokemon from routeN1W1',
+	'catch all EVENING-time pokemon from routeN1W1',
+	'catch all NIGHT-time pokemon from routeN1W1',
+	'catch a ultra-rare pokemon from routeN1W1',
 	'catch a pikachu',
 	'find a lightball',
 	'catch all mouselike electric pokemon',
 	'catch all pikachus with hats',
-	'catch all costumed pikachus',
 	'catch a feebas',
 	'catch a sudowoodo',
 	'catch a pokemon',
@@ -633,12 +374,14 @@ export const questNames = [
 	'catch 50 strong pokemon',
 	'catch 100 strong pokemon',
 	'catch all strong pokemon',
+	'catch all costumed pikachus',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
 
 export const QuestsRecord: Record<QuestName, Quest> = {
 	...catchQuests,
+	...typeCatchQuests,
 	'catch a pokemon': {
 		rewardItems: { 'poke-ball': 10 },
 		researchPoints: campUpgradeCostScale,
@@ -1493,7 +1236,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'swift-mochi': 2,
 		},
 		researchPoints: 15,
-		availableAfter: 'catch a pokemon with perfect special defense ivs',
+		availableAfter: 'catch a pokemon with perfect special-defense ivs',
 		conditionFunction: (s) =>
 			s.pokemon.some((p) => p.intrinsicValues['speed'] === 31),
 	},
@@ -3057,13 +2800,15 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				(pok) => s.pokedex[pok as PokemonName].caughtOnRoutes.length > 0
 			),
 	},
-};
+} as Record<QuestName, Quest>;
 
 console.log('number of quests', questNames.length);
 
 console.log(
 	'quests w/o questName',
-	Object.keys(QuestsRecord).filter((key) => !questNames.includes(key)),
+	Object.keys(QuestsRecord).filter(
+		(key) => !([...new Set(questNames)] as string[]).includes(key)
+	),
 	'questNames w/o quest',
 	questNames.filter((name) => !Object.keys(QuestsRecord).includes(name))
 );

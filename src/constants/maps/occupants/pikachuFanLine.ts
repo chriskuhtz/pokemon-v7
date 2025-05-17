@@ -88,13 +88,13 @@ export const pikachuFanLine: Occupant[] = [
 
 		unhandledMessage: ['Some pikachu even put on complete costumes'],
 		handledMessage: ['Some pikachu even put on complete costumes'],
-		quest: 'catch all costumed pikachu',
+		quest: 'catch all costumed pikachus',
 		conditionFunction: (s) =>
 			s.campUpgrades['invite pikachu fan'] &&
 			s.quests['catch a pikachu'] === 'COLLECTED' &&
 			s.quests['find a lightball'] === 'COLLECTED' &&
 			s.quests['catch all mouselike electric pokemon'] === 'COLLECTED' &&
 			s.quests['catch all pikachus with hats'] === 'COLLECTED' &&
-			s.quests['catch all costumed pikachu'] !== 'COLLECTED',
+			s.quests['catch all costumed pikachus'] !== 'COLLECTED',
 	},
 ];

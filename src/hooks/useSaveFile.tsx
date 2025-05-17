@@ -38,6 +38,7 @@ import { EmptyInventory, joinInventories } from '../interfaces/Inventory';
 import { ItemType } from '../interfaces/Item';
 import { Occupant } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { QuestStatus } from '../interfaces/Quest';
 import { RoutesType } from '../interfaces/Routing';
 import { SaveFile } from '../interfaces/SaveFile';
 import { MessageQueueContext } from './useMessageQueue';
@@ -96,7 +97,7 @@ const migrateSavefile = (input: SaveFile) => {
 	//migrate new quests
 	updatedInput.quests = Object.fromEntries(
 		questNames.map((q) => [q, updatedInput.quests[q] ?? 'INACTIVE'])
-	);
+	) as Record<QuestName, QuestStatus>;
 
 	return updatedInput;
 };
