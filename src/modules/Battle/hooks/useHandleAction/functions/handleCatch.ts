@@ -6,7 +6,7 @@ import { Message } from '../../../../../hooks/useMessageQueue';
 import { CatchProcessInfo } from '../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
 import { ItemType } from '../../../../../interfaces/Item';
-import { Pokedex } from '../../../../../interfaces/SaveFile';
+import { CatchBoosts, Pokedex } from '../../../../../interfaces/SaveFile';
 
 export const handleCatch = (
 	pokemon: BattlePokemon[],
@@ -17,7 +17,8 @@ export const handleCatch = (
 	battleRound: number,
 	battleLocation: BattleLocation,
 	addUsedItem: (x: ItemType) => void,
-	pokedex: Pokedex
+	pokedex: Pokedex,
+	catchBoosts: CatchBoosts
 ) => {
 	const target = pokemon.find(
 		(p) => p.id === move.targetId && p.status === 'ONFIELD'
@@ -53,21 +54,24 @@ export const handleCatch = (
 		target,
 		battleRound,
 		battleLocation,
-		caughtBefore
+		caughtBefore,
+		catchBoosts
 	);
 	const check2 = determineCaptureSuccess(
 		move.ball,
 		target,
 		battleRound,
 		battleLocation,
-		caughtBefore
+		caughtBefore,
+		catchBoosts
 	);
 	const check3 = determineCaptureSuccess(
 		move.ball,
 		target,
 		battleRound,
 		battleLocation,
-		caughtBefore
+		caughtBefore,
+		catchBoosts
 	);
 
 	const getCatchStepMessage = (step: 1 | 2 | 3): Message => {

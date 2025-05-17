@@ -24,7 +24,7 @@ import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
 import { Stat } from '../../../../../interfaces/StatObject';
 import { WeatherType } from '../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../BattleField';
-import { BattleTerrain } from '../../useBattleTerrain';
+import { BattleTerrain, TerrainObject } from '../../useBattleTerrain';
 
 export const handleAbilitiesAfterAttack = (
 	attacker: BattlePokemon,
@@ -37,7 +37,8 @@ export const handleAbilitiesAfterAttack = (
 	damage: number,
 	battleFieldEffects: BattleFieldEffect[],
 	originalTargetHp: number,
-	terrain: BattleTerrain | undefined
+	terrain: BattleTerrain | undefined,
+	setTerrain: (x: TerrainObject) => void
 ): {
 	updatedAttacker: BattlePokemon;
 	updatedTarget: BattlePokemon;
@@ -73,10 +74,32 @@ export const handleAbilitiesAfterAttack = (
 			),
 		};
 	}
+
+	//seed sower
+	if (
+		target.ability === 'seed-sower' &&
+		terrain !== 'grassy' &&
+		isContactMove(move.name, attacker)
+	) {
+		addMessage({
+			message: `${target.name} deploys grassy terrain with seed sower`,
+		});
+		setTerrain({ type: 'grassy', duration: 5 });
+	}
 	//check for mummy
 	if (target.ability === 'mummy' && isContactMove(move.name, attacker)) {
 		addMessage({ message: `${updatedAttacker.name}'s ability became mummy` });
 		updatedAttacker.ability = 'mummy';
+	}
+	//check for 'lingering-aroma',
+	if (
+		target.ability === 'lingering-aroma' &&
+		isContactMove(move.name, attacker)
+	) {
+		addMessage({
+			message: `${updatedAttacker.name}'s ability became lingering aroma`,
+		});
+		updatedAttacker.ability = 'lingering-aroma';
 	}
 	//check for wandering spirit
 	if (
@@ -530,6 +553,22 @@ export const handleAbilitiesAfterAttack = (
 	//justified
 	if (
 		!isKO(updatedTarget) &&
+		updatedTarget.ability === 'thermal-exchange' &&
+		move.data.type.name === 'fire'
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'attack',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'thermal-exchange'
+		);
+	}
+	//justified
+	if (
+		!isKO(updatedTarget) &&
 		updatedTarget.ability === 'justified' &&
 		move.data.type.name === 'dark'
 	) {
@@ -583,6 +622,7 @@ export const handleAbilitiesAfterAttack = (
 			damage: Math.floor(updatedAttacker.damage + updatedAttacker.stats.hp / 4),
 		};
 	}
+
 	//Moxie
 	if (isKO(updatedTarget) && updatedAttacker.ability === 'moxie') {
 		updatedAttacker = applyStatChangeToPokemon(
@@ -605,6 +645,18 @@ export const handleAbilitiesAfterAttack = (
 			[],
 			addMessage,
 			'chilling-neigh'
+		);
+	}
+	//grim neigh
+	if (isKO(updatedTarget) && updatedAttacker.ability === 'grim-neigh') {
+		updatedAttacker = applyStatChangeToPokemon(
+			updatedAttacker,
+			'attack',
+			1,
+			true,
+			[],
+			addMessage,
+			'grim-neigh'
 		);
 	}
 	//Beast boost

@@ -14,9 +14,9 @@ import { Stack } from '../../uiComponents/Stack/Stack';
 const vilePlumeProducts: Partial<
 	Record<ItemType, { item: ItemType; amount: number }>
 > = {
-	repel: { item: 'pecha-berry', amount: 20 },
-	'super-repel': { item: 'kebia-berry', amount: 40 },
-	'max-repel': { item: 'rindo-berry', amount: 60 },
+	repel: { item: 'pecha-berry', amount: 40 },
+	'super-repel': { item: 'kebia-berry', amount: 80 },
+	'max-repel': { item: 'rindo-berry', amount: 120 },
 	lure: { item: 'chesto-berry', amount: 40 },
 	'super-lure': { item: 'coba-berry', amount: 80 },
 	'max-lure': { item: 'aguav-berry', amount: 120 },

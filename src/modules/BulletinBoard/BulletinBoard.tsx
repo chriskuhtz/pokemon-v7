@@ -1,5 +1,4 @@
 import React, { useCallback, useContext, useMemo } from 'react';
-import { MdCatchingPokemon } from 'react-icons/md';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import {
@@ -18,6 +17,7 @@ import { AnimatedBar } from '../../uiComponents/AnimatedBar/AnimatedBar';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import { MdFormatListBulleted } from 'react-icons/md';
 
 export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 	const { addMessage } = useContext(MessageQueueContext);
@@ -103,7 +103,7 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 					return (
 						<Card
 							key={name}
-							icon={<MdCatchingPokemon size={battleSpriteSize} />}
+							icon={<MdFormatListBulleted size={battleSpriteSize} />}
 							content={
 								<div>
 									<h3>{replaceRouteName(name)}</h3>

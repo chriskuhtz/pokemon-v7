@@ -416,7 +416,8 @@ export const BattleField = ({
 		battleFieldEffects,
 		setBattleWeather,
 		removeSpikes,
-		removeScreens
+		removeScreens,
+		setBattleTerrain
 	);
 
 	//Steps:

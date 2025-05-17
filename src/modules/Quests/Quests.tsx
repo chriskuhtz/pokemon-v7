@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { MdCatchingPokemon } from 'react-icons/md';
+import { IoPerson } from 'react-icons/io5';
+import { MdFormatListBulleted } from 'react-icons/md';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import {
@@ -52,7 +53,13 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 					return (
 						<Card
 							key={name}
-							icon={<MdCatchingPokemon size={battleSpriteSize} />}
+							icon={
+								quest.kind === 'BULLETIN' ? (
+									<MdFormatListBulleted size={battleSpriteSize} />
+								) : (
+									<IoPerson size={battleSpriteSize} />
+								)
+							}
 							content={
 								<div>
 									<h3>{replaceRouteName(name)}</h3>
@@ -74,6 +81,11 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 										)}
 									</h5>
 									<h5>Research Points: {quest.researchPoints}</h5>
+									{quest.catchBoosts && (
+										<h5>
+											Catch Boosts: {Object.keys(quest.catchBoosts).join(', ')}
+										</h5>
+									)}
 									{quest.targetPokemon && (
 										<h5 style={{ display: 'flex', alignItems: 'center' }}>
 											Targets:

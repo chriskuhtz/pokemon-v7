@@ -116,6 +116,17 @@ export const determineTypeFactor = (
 		res = 0;
 	}
 	if (
+		target.ability === 'well-baked-body' &&
+		attack.data.type.name === 'fire'
+	) {
+		if (addMessage) {
+			addMessage({
+				message: `${target.data.name} prevents damage with well baked body`,
+			});
+		}
+		res = 0;
+	}
+	if (
 		attack.data.type.name === 'ground' &&
 		getHeldItem(target) === 'air-balloon'
 	) {

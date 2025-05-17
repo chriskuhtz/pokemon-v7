@@ -132,6 +132,22 @@ export const getPower = (
 	attackerLevel: number,
 	weather: WeatherType | undefined
 ): number => {
+	if (attack.name === 'stored-power') {
+		const boosts = Object.entries(attacker.statBoosts).reduce(
+			(sum, [key, value]) => {
+				if (HIDDEN_STATS.includes(key)) {
+					return sum;
+				}
+				if (value <= 0) {
+					return sum;
+				}
+				return sum + value;
+			},
+			1
+		);
+
+		return 20 * boosts;
+	}
 	if (attack.name === 'punishment') {
 		const boosts = Object.entries(target.statBoosts).reduce(
 			(sum, [key, value]) => {
