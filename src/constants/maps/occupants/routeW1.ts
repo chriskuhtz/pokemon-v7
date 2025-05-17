@@ -1,3 +1,4 @@
+import { getTimeOfDay } from '../../../functions/getTimeOfDay';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { travellingMerchantRouteW1 } from '../../../modules/TravellingMerchant/TravellingMerchant';
@@ -136,4 +137,21 @@ export const routeW1Occupants: OverworldMap['occupants'] = [
 	},
 	...gary,
 	...travellingMerchantRouteW1,
+	{
+		type: 'POKEMON',
+		x: 36,
+		y: 42,
+		orientation: 'DOWN',
+		dexId: 245,
+		encounter: {
+			name: 'suicune',
+			maxXp: 125000,
+			minXp: 125000,
+			rarity: 'common',
+		},
+		dialogue: ['Suiii'],
+		conditionFunction: (s) =>
+			s.pokedex.suicune.caughtOnRoutes.length === 0 && getTimeOfDay() !== 'DAY',
+		id: 'routeW1_suicune',
+	},
 ];

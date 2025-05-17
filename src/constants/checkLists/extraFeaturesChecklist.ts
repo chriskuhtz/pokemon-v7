@@ -410,7 +410,7 @@ export const extraFeatureCheckList: {
 	{ name: 'total bst marker', handled: true },
 	{ name: 'bst, ev, iv, explainers', handled: true },
 	{ name: 'storage sorting by bst group', handled: true },
-	{ name: 'unique location, only accessible by dragonite' },
+	{ name: 'unique location, only accessible by dragonite', handled: true },
 	{ name: 'fix pathing' },
 	{ name: 'whitney' },
 	{ name: 'pryce' },
