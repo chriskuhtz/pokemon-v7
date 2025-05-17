@@ -1134,9 +1134,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/265/',
 		handled: true,
 	},
-	{ name: 'as-one-glastrier', url: 'https://pokeapi.co/api/v2/ability/266/' },
-	{ name: 'as-one-spectrier', url: 'https://pokeapi.co/api/v2/ability/267/' },
-	{ name: 'lingering-aroma', url: 'https://pokeapi.co/api/v2/ability/268/' },
+	{
+		name: 'lingering-aroma',
+		url: 'https://pokeapi.co/api/v2/ability/268/',
+		handled: true,
+	},
 	{ name: 'seed-sower', url: 'https://pokeapi.co/api/v2/ability/269/' },
 	{ name: 'thermal-exchange', url: 'https://pokeapi.co/api/v2/ability/270/' },
 	{ name: 'anger-shell', url: 'https://pokeapi.co/api/v2/ability/271/' },
@@ -1280,6 +1282,8 @@ export const abilityCheckList: {
 	{ name: 'perish-body', url: 'https://pokeapi.co/api/v2/ability/253/' },
 	{ name: 'neutralizing-gas', url: 'https://pokeapi.co/api/v2/ability/256/' },
 	{ name: 'hunger-switch', url: 'https://pokeapi.co/api/v2/ability/258/' },
+	{ name: 'as-one-glastrier', url: 'https://pokeapi.co/api/v2/ability/266/' },
+	{ name: 'as-one-spectrier', url: 'https://pokeapi.co/api/v2/ability/267/' },
 ];
 
 export const abilityNames = [
@@ -1506,6 +1510,7 @@ export const abilityNames = [
 	'dragons-maw',
 	'chilling-neigh',
 	'grim-neigh',
+	'lingering-aroma',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

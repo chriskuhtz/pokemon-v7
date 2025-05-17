@@ -78,6 +78,16 @@ export const handleAbilitiesAfterAttack = (
 		addMessage({ message: `${updatedAttacker.name}'s ability became mummy` });
 		updatedAttacker.ability = 'mummy';
 	}
+	//check for 'lingering-aroma',
+	if (
+		target.ability === 'lingering-aroma' &&
+		isContactMove(move.name, attacker)
+	) {
+		addMessage({
+			message: `${updatedAttacker.name}'s ability became lingering aroma`,
+		});
+		updatedAttacker.ability = 'lingering-aroma';
+	}
 	//check for wandering spirit
 	if (
 		target.ability === 'wandering-spirit' &&
