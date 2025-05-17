@@ -66,6 +66,7 @@ const ChangeLogV27 = (): JSX.Element => {
 			<h3>0.27:</h3>
 			<ol style={{ lineHeight: '1.5rem' }}>
 				<li>Favorites System</li>
+				<li>New Quests</li>
 				<li>New Abilities and Attacks</li>
 			</ol>
 		</>

@@ -14,7 +14,7 @@ import { Message } from '../../../../../../hooks/useMessageQueue';
 import { isRemovedByRapidSpin } from '../../../../../../interfaces/Ailment';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
-import { gemTable } from '../../../../../../interfaces/Item';
+import { gemTable, isBerry } from '../../../../../../interfaces/Item';
 import { EmptyStatObject } from '../../../../../../interfaces/StatObject';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
@@ -154,6 +154,14 @@ export const handleDamageAttack = ({
 		checkThiefMoves(updatedAttacker, updatedTarget, move.name, addMessage);
 	updatedAttacker = { ...aThiefChecked };
 	updatedTarget = { ...tThiefChecked };
+	//incinerate
+	if (move.name === 'incinerate' && isBerry(getHeldItem(updatedTarget))) {
+		addMessage({
+			message: `${updatedTarget}´s ${updatedTarget.heldItemName} was burned to ash`,
+		});
+
+		updatedTarget = { ...updatedTarget, heldItemName: undefined };
+	}
 
 	// apply damage
 	const { consumedHeldItem, damage, criticalHit, wasSuperEffective } =

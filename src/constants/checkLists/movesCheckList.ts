@@ -1909,10 +1909,18 @@ export const movesCheckList: {
 		handled: true,
 	},
 	{ name: 'hex', url: 'https://pokeapi.co/api/v2/move/506/', handled: true },
-	{ name: 'sky-drop', url: 'https://pokeapi.co/api/v2/move/507/' },
-	{ name: 'shift-gear', url: 'https://pokeapi.co/api/v2/move/508/' },
-	{ name: 'circle-throw', url: 'https://pokeapi.co/api/v2/move/509/' },
-	{ name: 'incinerate', url: 'https://pokeapi.co/api/v2/move/510/' },
+
+	{
+		name: 'shift-gear',
+		url: 'https://pokeapi.co/api/v2/move/508/',
+		handled: true,
+	},
+
+	{
+		name: 'incinerate',
+		url: 'https://pokeapi.co/api/v2/move/510/',
+		handled: true,
+	},
 	{ name: 'quash', url: 'https://pokeapi.co/api/v2/move/511/' },
 	{ name: 'acrobatics', url: 'https://pokeapi.co/api/v2/move/512/' },
 	{ name: 'reflect-type', url: 'https://pokeapi.co/api/v2/move/513/' },
@@ -2435,6 +2443,8 @@ export const movesCheckList: {
 		name: 'heal-pulse',
 		url: 'https://pokeapi.co/api/v2/move/505/',
 	},
+	{ name: 'sky-drop', url: 'https://pokeapi.co/api/v2/move/507/' },
+	{ name: 'circle-throw', url: 'https://pokeapi.co/api/v2/move/509/' },
 	/**
 	 * INCOMPLETE DATA:
 	 */
@@ -2986,6 +2996,8 @@ export const handledMoves = [
 	'scald',
 	'shell-smash',
 	'hex',
+	'shift-gear',
+	'incinerate',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
