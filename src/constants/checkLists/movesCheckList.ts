@@ -1885,10 +1885,12 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/494/',
 		handled: true,
 	},
-	{ name: 'after-you', url: 'https://pokeapi.co/api/v2/move/495/' },
-	{ name: 'round', url: 'https://pokeapi.co/api/v2/move/496/' },
-	{ name: 'echoed-voice', url: 'https://pokeapi.co/api/v2/move/497/' },
-	{ name: 'chip-away', url: 'https://pokeapi.co/api/v2/move/498/' },
+
+	{
+		name: 'chip-away',
+		url: 'https://pokeapi.co/api/v2/move/498/',
+		handled: true,
+	},
 	{ name: 'clear-smog', url: 'https://pokeapi.co/api/v2/move/499/' },
 	{ name: 'stored-power', url: 'https://pokeapi.co/api/v2/move/500/' },
 	{ name: 'quick-guard', url: 'https://pokeapi.co/api/v2/move/501/' },
@@ -2414,6 +2416,9 @@ export const movesCheckList: {
 	{ name: 'natural-gift', url: 'https://pokeapi.co/api/v2/move/363/' },
 	{ name: 'feint', url: 'https://pokeapi.co/api/v2/move/364/' },
 	{ name: 'u-turn', url: 'https://pokeapi.co/api/v2/move/369/' },
+	{ name: 'after-you', url: 'https://pokeapi.co/api/v2/move/495/' },
+	{ name: 'round', url: 'https://pokeapi.co/api/v2/move/496/' },
+	{ name: 'echoed-voice', url: 'https://pokeapi.co/api/v2/move/497/' },
 	/**
 	 * INCOMPLETE DATA:
 	 */
@@ -2959,6 +2964,7 @@ export const handledMoves = [
 	'foul-play',
 	'simple-beam',
 	'entrainment',
+	'chip-away',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
