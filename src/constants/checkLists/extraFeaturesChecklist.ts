@@ -413,6 +413,7 @@ export const extraFeatureCheckList: {
 	{ name: 'unique location, only accessible by dragonite', handled: true },
 	{ name: 'nature tutor', handled: true },
 	{ name: 'ability tutor', handled: true },
+	{ name: 'sort by dex id', handled: true },
 	{ name: 'fix pathing' },
 	{ name: 'whitney' },
 	{ name: 'pryce' },
@@ -438,4 +439,8 @@ export const extraFeatureCheckList: {
 	{ name: 'magma/aqua quests from looker' },
 	{ name: 'catch x pokemon of type' },
 	{ name: 'progress bar for catch x quests' },
+
+	{ name: 'sort by favorites' },
+	{ name: 'Terrain Items (shovel, pickaxe) as Gym leader rewards ' },
+	{ name: 'breakpoints in dex ids' },
 ];
