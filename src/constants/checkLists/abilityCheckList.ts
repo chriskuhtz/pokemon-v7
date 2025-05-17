@@ -1082,8 +1082,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/252/',
 		handled: true,
 	},
-
-	{ name: 'wandering-spirit', url: 'https://pokeapi.co/api/v2/ability/254/' },
+	{
+		name: 'wandering-spirit',
+		url: 'https://pokeapi.co/api/v2/ability/254/',
+		handled: true,
+	},
 	{ name: 'gorilla-tactics', url: 'https://pokeapi.co/api/v2/ability/255/' },
 	{ name: 'neutralizing-gas', url: 'https://pokeapi.co/api/v2/ability/256/' },
 	{ name: 'pastel-veil', url: 'https://pokeapi.co/api/v2/ability/257/' },
@@ -1455,6 +1458,7 @@ export const abilityNames = [
 	'power-spot',
 	'screen-cleaner',
 	'steely-spirit',
+	'wandering-spirit',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
