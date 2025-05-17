@@ -1,3 +1,6 @@
+import { IoMdCloseCircle } from 'react-icons/io';
+import { battleSpriteSize } from '../../constants/gameData';
+
 export const Modal = ({
 	open,
 	close,
@@ -34,10 +37,12 @@ export const Modal = ({
 					backgroundColor: 'white',
 					maxHeight: '80%',
 					overflow: 'scroll',
+					color: 'black',
 				}}
 			>
-				<strong
+				<IoMdCloseCircle
 					role="button"
+					size={battleSpriteSize}
 					tabIndex={0}
 					onKeyDown={(e) => {
 						e.stopPropagation();
@@ -46,9 +51,7 @@ export const Modal = ({
 						}
 					}}
 					onClick={close}
-				>
-					X
-				</strong>
+				/>
 				{children}
 			</div>
 		</div>

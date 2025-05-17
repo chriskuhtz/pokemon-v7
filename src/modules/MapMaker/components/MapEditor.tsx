@@ -68,27 +68,7 @@ export const MapEditor = ({
 	return (
 		<div>
 			<h2>{initialMap.id}</h2>
-			<button
-				style={{
-					color: 'white',
-					backgroundColor: 'rgba(0,0,0,0)',
-					marginBottom: '.5rem',
-				}}
-				onClick={() => {
-					navigator.clipboard.writeText(
-						JSON.stringify({
-							baseLayer,
-							encounterLayer,
-							obstacleLayer,
-							decorationLayer,
-							foregroundLayer,
-							waterLayer,
-						})
-					);
-				}}
-			>
-				Copy to Clipboard
-			</button>
+
 			<div style={{ display: 'flex', gap: '1rem' }}>
 				{[
 					'Base',
