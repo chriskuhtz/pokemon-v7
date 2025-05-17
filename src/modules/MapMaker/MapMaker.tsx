@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import { MapId, mapsRecord } from '../../constants/maps/mapsRecord';
 import { TileIdentifier } from '../../interfaces/OverworldMap';
@@ -31,7 +31,26 @@ export const MapMaker = ({
 	mapId: MapId;
 	tileSetUrl: string;
 }) => {
-	const [selected, setSelected] = useState<Tool | undefined>();
+	const [twoByTwo, setTwoByTwo] = useState<TwoByTwoGroup | undefined>();
+	const [selected, s] = useState<Tool | undefined>();
+
+	const setSelected = useCallback(
+		(x: Tool) => {
+			if (
+				twoByTwo &&
+				selected?.type !== 'twoByTwoPlacer' &&
+				x.type === 'twoByTwoPlacer'
+			) {
+				s(twoByTwo);
+				return;
+			}
+			if (x.type === 'twoByTwoPlacer') {
+				setTwoByTwo(x);
+			}
+			s(x);
+		},
+		[selected?.type, twoByTwo]
+	);
 
 	const [activeTab, setActiveTab] = useState<LayerName>('Base');
 
@@ -66,40 +85,7 @@ export const MapMaker = ({
 				)}
 				{selected?.type === 'eraser' && 'Eraser'}
 				{selected?.type === 'twoByTwoPlacer' && (
-					<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-						<div
-							style={{
-								scale: 2,
-								height: 16,
-								width: 16,
-								background: `url(${tileSetUrl}) ${selected.tile1.xOffset}px ${selected.tile1.yOffset}px`,
-							}}
-						/>
-						<div
-							style={{
-								scale: 2,
-								height: 16,
-								width: 16,
-								background: `url(${tileSetUrl}) ${selected.tile2.xOffset}px ${selected.tile2.yOffset}px`,
-							}}
-						/>
-						<div
-							style={{
-								scale: 2,
-								height: 16,
-								width: 16,
-								background: `url(${tileSetUrl}) ${selected.tile3.xOffset}px ${selected.tile3.yOffset}px`,
-							}}
-						/>
-						<div
-							style={{
-								scale: 2,
-								height: 16,
-								width: 16,
-								background: `url(${tileSetUrl}) ${selected.tile4.xOffset}px ${selected.tile4.yOffset}px`,
-							}}
-						/>
-					</div>
+					<TileGroupDisplay tileSetUrl={tileSetUrl} selected={selected} />
 				)}
 				{!selected && '-'}
 			</h2>
@@ -112,6 +98,57 @@ export const MapMaker = ({
 					initialMap={mapsRecord[mapId]}
 				/>
 			</div>
+		</div>
+	);
+};
+
+export const TileGroupDisplay = ({
+	selected,
+	tileSetUrl,
+}: {
+	selected: TwoByTwoGroup;
+	tileSetUrl: string;
+}) => {
+	return (
+		<div
+			style={{
+				display: 'grid',
+				gridTemplateColumns: '1fr 1fr',
+				width: 'min-content',
+			}}
+		>
+			<div
+				style={{
+					scale: 2,
+					height: 16,
+					width: 16,
+					background: `url(${tileSetUrl}) ${selected.tile1.xOffset}px ${selected.tile1.yOffset}px`,
+				}}
+			/>
+			<div
+				style={{
+					scale: 2,
+					height: 16,
+					width: 16,
+					background: `url(${tileSetUrl}) ${selected.tile2.xOffset}px ${selected.tile2.yOffset}px`,
+				}}
+			/>
+			<div
+				style={{
+					scale: 2,
+					height: 16,
+					width: 16,
+					background: `url(${tileSetUrl}) ${selected.tile3.xOffset}px ${selected.tile3.yOffset}px`,
+				}}
+			/>
+			<div
+				style={{
+					scale: 2,
+					height: 16,
+					width: 16,
+					background: `url(${tileSetUrl}) ${selected.tile4.xOffset}px ${selected.tile4.yOffset}px`,
+				}}
+			/>
 		</div>
 	);
 };
