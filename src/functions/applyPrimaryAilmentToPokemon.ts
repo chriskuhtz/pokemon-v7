@@ -31,6 +31,12 @@ export const applyPrimaryAilmentToPokemon = (
 		addMessage({ message: 'The misty terrain prevents all status conditions' });
 		return { updatedApplicator: applicator, updatedTarget: target };
 	}
+	if (target.ability === 'purifying-salt') {
+		addMessage({
+			message: `${target.name} prevents status conditions with purifying salt`,
+		});
+		return { updatedApplicator: applicator, updatedTarget: target };
+	}
 	if (
 		target.id !== applicator.id &&
 		terrain === 'electric' &&

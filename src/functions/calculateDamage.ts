@@ -664,6 +664,8 @@ export const calculateDamage = (
 			? 1.5
 			: 1;
 	const hexFactor = attack.name === 'hex' && target.primaryAilment ? 2 : 1;
+	const puriSaltFactor =
+		target.ability === 'purifying-salt' && attackType === 'ghost' ? 0.5 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -767,7 +769,8 @@ export const calculateDamage = (
 				gorillaTacticsFactor *
 				transistorFactor *
 				dragonsMawFactor *
-				hexFactor
+				hexFactor *
+				puriSaltFactor
 		),
 		1
 	);
