@@ -1,6 +1,6 @@
-import { useDeferredValue, useState } from 'react';
+import { useDeferredValue, useEffect, useState } from 'react';
 import { OverworldMap, TileIdentifier } from '../../../interfaces/OverworldMap';
-import { Tool, TwoByTwoGroup } from '../MapMaker';
+import { GroupPlacer, Tool } from '../MapMaker';
 
 export type LayerName =
 	| 'Base'
@@ -34,6 +34,27 @@ export const useMapEditor = ({
 	const [waterLayer, setwaterLayer] = useState<(TileIdentifier | null)[][]>(
 		initialMap.tileMap.waterLayer
 	);
+
+	useEffect(() => {
+		console.log('write to clip');
+		navigator.clipboard.writeText(
+			JSON.stringify({
+				baseLayer,
+				encounterLayer,
+				obstacleLayer,
+				decorationLayer,
+				foregroundLayer,
+				waterLayer,
+			})
+		);
+	}, [
+		baseLayer,
+		decorationLayer,
+		encounterLayer,
+		foregroundLayer,
+		obstacleLayer,
+		waterLayer,
+	]);
 
 	const addColumn = () => {
 		setBaseLayer(baseLayer.map((row) => [...row, row[row.length - 1]]));
@@ -86,7 +107,7 @@ export const useMapEditor = ({
 	};
 
 	const applyGroupTool = (
-		tool: TwoByTwoGroup,
+		tool: GroupPlacer,
 		i: number,
 		j: number,
 		layer: LayerName
@@ -94,55 +115,62 @@ export const useMapEditor = ({
 		if (layer === 'Base') {
 			const updatedLayer = [...baseLayer];
 
-			updatedLayer[i][j] = tool.tile1;
-			updatedLayer[i][j + 1] = tool.tile2;
-			updatedLayer[i + 1][j] = tool.tile3;
-			updatedLayer[i + 1][j + 1] = tool.tile4;
+			tool.tiles.forEach((row, rowIndex) => {
+				row.forEach((col, colIndex) => {
+					updatedLayer[i + rowIndex][j + colIndex] = col;
+				});
+			});
+
 			setBaseLayer(updatedLayer);
 		}
 		if (layer === 'Decoration') {
 			const updatedLayer = [...decorationLayer];
 
-			updatedLayer[i][j] = tool.tile1;
-			updatedLayer[i][j + 1] = tool.tile2;
-			updatedLayer[i + 1][j] = tool.tile3;
-			updatedLayer[i + 1][j + 1] = tool.tile4;
+			tool.tiles.forEach((row, rowIndex) => {
+				row.forEach((col, colIndex) => {
+					updatedLayer[i + rowIndex][j + colIndex] = col;
+				});
+			});
 			setdecorationLayer(updatedLayer);
 		}
 		if (layer === 'Encounter') {
 			const updatedLayer = [...encounterLayer];
 
-			updatedLayer[i][j] = tool.tile1;
-			updatedLayer[i][j + 1] = tool.tile2;
-			updatedLayer[i + 1][j] = tool.tile3;
-			updatedLayer[i + 1][j + 1] = tool.tile4;
+			tool.tiles.forEach((row, rowIndex) => {
+				row.forEach((col, colIndex) => {
+					updatedLayer[i + rowIndex][j + colIndex] = col;
+				});
+			});
 			setencounterLayer(updatedLayer);
 		}
 		if (layer === 'Water') {
 			const updatedLayer = [...waterLayer];
 
-			updatedLayer[i][j] = tool.tile1;
-			updatedLayer[i][j + 1] = tool.tile2;
-			updatedLayer[i + 1][j] = tool.tile3;
-			updatedLayer[i + 1][j + 1] = tool.tile4;
+			tool.tiles.forEach((row, rowIndex) => {
+				row.forEach((col, colIndex) => {
+					updatedLayer[i + rowIndex][j + colIndex] = col;
+				});
+			});
 			setwaterLayer(updatedLayer);
 		}
 		if (layer === 'Obstacle') {
 			const updatedLayer = [...obstacleLayer];
 
-			updatedLayer[i][j] = tool.tile1;
-			updatedLayer[i][j + 1] = tool.tile2;
-			updatedLayer[i + 1][j] = tool.tile3;
-			updatedLayer[i + 1][j + 1] = tool.tile4;
+			tool.tiles.forEach((row, rowIndex) => {
+				row.forEach((col, colIndex) => {
+					updatedLayer[i + rowIndex][j + colIndex] = col;
+				});
+			});
 			setobstacleLayer(updatedLayer);
 		}
 		if (layer === 'Foreground') {
 			const updatedLayer = [...foregroundLayer];
 
-			updatedLayer[i][j] = tool.tile1;
-			updatedLayer[i][j + 1] = tool.tile2;
-			updatedLayer[i + 1][j] = tool.tile3;
-			updatedLayer[i + 1][j + 1] = tool.tile4;
+			tool.tiles.forEach((row, rowIndex) => {
+				row.forEach((col, colIndex) => {
+					updatedLayer[i + rowIndex][j + colIndex] = col;
+				});
+			});
 			setforegroundLayer(updatedLayer);
 		}
 	};
@@ -151,7 +179,7 @@ export const useMapEditor = ({
 		if (!tool) {
 			return;
 		}
-		if (tool.type === 'twoByTwoPlacer') {
+		if (tool.type === 'groupPlacer') {
 			applyGroupTool(tool, i, j, layer);
 			return;
 		}
