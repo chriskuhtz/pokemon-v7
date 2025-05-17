@@ -43,6 +43,13 @@ const taxiLocations: Record<string, CharacterLocationData> = {
 		orientation: 'DOWN',
 		forwardFoot: 'CENTER1',
 	},
+	'routeW1 small waterfall': {
+		mapId: 'routeW1',
+		x: 38,
+		y: 41,
+		orientation: 'DOWN',
+		forwardFoot: 'CENTER1',
+	},
 	routeN1W1: {
 		mapId: 'routeN1W1',
 		x: 25,

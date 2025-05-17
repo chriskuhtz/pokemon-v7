@@ -7,6 +7,7 @@ import { generateInventory, Inventory } from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
 import { mapMakerRoutes } from './interfaces/Routing';
 import { SpriteEnum } from './interfaces/SpriteEnum';
+import { AbilityTutor } from './modules/AbilityTutor/AbilityTutor';
 import { AmoongussCompostResearcher } from './modules/AmoongussResearcher/AmoongussResearcher';
 import { ApricornSmithy } from './modules/ApricornSmithy/ApricornSmithy';
 import { Bag } from './modules/Bag/Bag';
@@ -27,6 +28,7 @@ import { Market } from './modules/Market/Market';
 import { SellMarket } from './modules/Market/SellMarket';
 import { MiltankFarm } from './modules/MiltankFarm/MiltankFarm';
 import { MoveTutor } from './modules/MoveTutor/MoveTutor';
+import { NatureTutor } from './modules/NatureTutor/NatureTutor';
 import { Overworld } from './modules/Overworld/Overworld';
 import { Pokedex } from './modules/Pokedex/Pokedex';
 import { PokemonStorage } from './modules/PokemonStorage/PokemonStorage';
@@ -92,7 +94,6 @@ export const App = (): JSX.Element => {
 		patchSaveFileReducer,
 		navigateAwayFromOverworldReducer,
 		changeHeldItemReducer,
-		reset,
 	} = useContext(SaveFileContext);
 
 	const {
@@ -168,9 +169,7 @@ export const App = (): JSX.Element => {
 		return <StarterSelection />;
 	}
 	if (activeTab === 'MAIN') {
-		return (
-			<MainMenu goBack={() => setActiveTabReducer('OVERWORLD')} reset={reset} />
-		);
+		return <MainMenu goBack={() => setActiveTabReducer('OVERWORLD')} />;
 	}
 	if (activeTab === 'QUESTS') {
 		return <Quests goBack={() => setActiveTabReducer('MAIN')} />;
@@ -265,6 +264,12 @@ export const App = (): JSX.Element => {
 	}
 	if (activeTab === 'MOVE_TUTOR') {
 		return <MoveTutor />;
+	}
+	if (activeTab === 'NATURE_TUTOR') {
+		return <NatureTutor />;
+	}
+	if (activeTab === 'ABILITY_TUTOR') {
+		return <AbilityTutor />;
 	}
 	if (activeTab === 'DRAGONITE_TAXI') {
 		return <DragoniteTaxi />;

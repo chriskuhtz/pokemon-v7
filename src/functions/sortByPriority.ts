@@ -51,13 +51,7 @@ const calculateTotalSpeed = (
 	const ironBallFactor = getHeldItem(a) === 'iron-ball' ? 0.5 : 1;
 
 	return (
-		calculateModifiedStat(
-			a.stats.speed,
-			a.statBoosts.speed,
-			'speed',
-			a,
-			false
-		) *
+		calculateModifiedStat('speed', a, false) *
 		paraFactor *
 		swiftSwimFactor *
 		chlorophyllFactor *
@@ -80,7 +74,8 @@ export const sortByPriority = (
 	battleRound: number,
 	battleWeather: WeatherType | undefined,
 	battleFieldEffects: BattleFieldEffect[],
-	battleTerrain: BattleTerrain | undefined
+	battleTerrain: BattleTerrain | undefined,
+	quickDrawActivates: boolean
 ): number => {
 	const aMove = a.moveQueue.find((m) => m.round === battleRound);
 	const bMove = b.moveQueue.find((m) => m.round === battleRound);
@@ -176,6 +171,13 @@ export const sortByPriority = (
 		battleFieldEffects,
 		battleTerrain
 	);
+
+	if (b.ability === 'quick-draw' && quickDrawActivates) {
+		return 1;
+	}
+	if (a.ability === 'quick-draw' && quickDrawActivates) {
+		return -1;
+	}
 
 	if (bSpeed > aSpeed) {
 		return 1;

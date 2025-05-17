@@ -222,65 +222,59 @@ export const calculateDamage = (
 		addMessage({ message: 'critical hit!' });
 	}
 
-	const atk =
-		damageClass === 'physical'
-			? calculateModifiedStat(
-					attacker.stats.attack,
-					attacker.statBoosts.attack,
-					'attack',
-					attacker,
-					battleFieldEffects.some(
-						(e) => e.type === 'flower-gift' && e.ownerId === attacker.ownerId
-					)
-			  )
-			: calculateModifiedStat(
-					attacker.stats['special-attack'],
-					attacker.statBoosts['special-attack'],
-					'special-attack',
-					attacker,
-					battleFieldEffects.some(
-						(e) => e.type === 'flower-gift' && e.ownerId === attacker.ownerId
-					)
-			  );
+	const atk = () => {
+		if (attack.name === 'foul-play') {
+			return calculateModifiedStat(
+				'attack',
+				target,
+				battleFieldEffects.some(
+					(e) => e.type === 'flower-gift' && e.ownerId === target.ownerId
+				)
+			);
+		}
+		if (damageClass === 'physical') {
+			return calculateModifiedStat(
+				'attack',
+				attacker,
+				battleFieldEffects.some(
+					(e) => e.type === 'flower-gift' && e.ownerId === attacker.ownerId
+				)
+			);
+		}
+		return calculateModifiedStat(
+			'special-attack',
+			attacker,
+			battleFieldEffects.some(
+				(e) => e.type === 'flower-gift' && e.ownerId === attacker.ownerId
+			)
+		);
+	};
 
 	//Crits ignore boosted defense
-	const defBoost = () => {
-		if (critFactor === 2 || attacker.ability === 'unaware') {
-			return 0;
-		}
-
-		return target.statBoosts.defense;
-	};
-	const spdefBoost = () => {
-		if (critFactor === 2 || attacker.ability === 'unaware') {
-			return 0;
-		}
-
-		return target.statBoosts['special-defense'];
+	const ignoreBoost = () => {
+		return critFactor === 2 || attacker.ability === 'unaware';
 	};
 
 	const def =
 		damageClass === 'physical' || attack.name === 'psyshock'
 			? calculateModifiedStat(
-					target.stats.defense,
-					defBoost(),
 					'defense',
 					target,
 					battleFieldEffects.some(
 						(e) => e.type === 'flower-gift' && e.ownerId === target.ownerId
-					)
+					),
+					ignoreBoost()
 			  )
 			: calculateModifiedStat(
-					target.stats['special-defense'],
-					spdefBoost(),
 					'special-defense',
 					target,
 					battleFieldEffects.some(
 						(e) => e.type === 'flower-gift' && e.ownerId === target.ownerId
-					)
+					),
+					ignoreBoost()
 			  );
 
-	const statFactor = atk / def;
+	const statFactor = atk() / def;
 
 	const pureDamage = (levelFactor * power * statFactor) / 50 + 2;
 
@@ -383,6 +377,10 @@ export const calculateDamage = (
 		damageClass === 'physical'
 			? 0.66
 			: 1;
+	const transistorFactor =
+		attacker.ability === 'transistor' && attackType === 'electric' ? 1.5 : 1;
+	const dragonsMawFactor =
+		attacker.ability === 'dragons-maw' && attackType === 'dragon' ? 1.5 : 1;
 	const overgrowFactor =
 		attacker.ability === 'overgrow' &&
 		attacker.damage > attacker.stats.hp * 0.66 &&
@@ -442,6 +440,11 @@ export const calculateDamage = (
 		attack.name === attacker.choiceBandedMove &&
 		getHeldItem(attacker) === 'choice-specs' &&
 		damageClass === 'special'
+			? 1.5
+			: 1;
+	const gorillaTacticsFactor =
+		attack.name === attacker.choiceBandedMove &&
+		attacker.ability === 'gorilla-tactics'
 			? 1.5
 			: 1;
 	const technicianFactor =
@@ -753,7 +756,10 @@ export const calculateDamage = (
 				punkRockDefender *
 				iceScalesFactor *
 				powerSpotFactor *
-				steelySpiritFactor
+				steelySpiritFactor *
+				gorillaTacticsFactor *
+				transistorFactor *
+				dragonsMawFactor
 		),
 		1
 	);

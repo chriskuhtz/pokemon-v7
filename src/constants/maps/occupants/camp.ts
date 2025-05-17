@@ -51,6 +51,34 @@ const trainingField: Occupant[] = [
 		],
 		conditionFunction: (s) => s.campUpgrades['invite move tutor'],
 	},
+	{
+		type: 'ROUTER_NPC',
+		to: 'NATURE_TUTOR',
+		x: 4,
+		y: 16,
+		orientation: 'LEFT',
+		sprite: SpriteEnum.ace2Male,
+		id: 'nature_tutor',
+		dialogue: [
+			'By giving your Pokemon certain berries',
+			'we can change its nature',
+		],
+		conditionFunction: (s) => s.campUpgrades['invite nature tutor'],
+	},
+	{
+		type: 'ROUTER_NPC',
+		to: 'ABILITY_TUTOR',
+		x: 4,
+		y: 17,
+		orientation: 'LEFT',
+		sprite: SpriteEnum.ace2Female,
+		id: 'ability_tutor',
+		dialogue: [
+			'I can change your Pokemons ability',
+			'But I expect some snacks as payment',
+		],
+		conditionFunction: (s) => s.campUpgrades['invite ability tutor'],
+	},
 ];
 
 export const campOccupants: OverworldMap['occupants'] = [

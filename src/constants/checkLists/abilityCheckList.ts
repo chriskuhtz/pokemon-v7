@@ -1082,18 +1082,53 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/252/',
 		handled: true,
 	},
+	{
+		name: 'wandering-spirit',
+		url: 'https://pokeapi.co/api/v2/ability/254/',
+		handled: true,
+	},
+	{
+		name: 'gorilla-tactics',
+		url: 'https://pokeapi.co/api/v2/ability/255/',
+		handled: true,
+	},
 
-	{ name: 'wandering-spirit', url: 'https://pokeapi.co/api/v2/ability/254/' },
-	{ name: 'gorilla-tactics', url: 'https://pokeapi.co/api/v2/ability/255/' },
-	{ name: 'neutralizing-gas', url: 'https://pokeapi.co/api/v2/ability/256/' },
-	{ name: 'pastel-veil', url: 'https://pokeapi.co/api/v2/ability/257/' },
-	{ name: 'hunger-switch', url: 'https://pokeapi.co/api/v2/ability/258/' },
-	{ name: 'quick-draw', url: 'https://pokeapi.co/api/v2/ability/259/' },
-	{ name: 'unseen-fist', url: 'https://pokeapi.co/api/v2/ability/260/' },
-	{ name: 'curious-medicine', url: 'https://pokeapi.co/api/v2/ability/261/' },
-	{ name: 'transistor', url: 'https://pokeapi.co/api/v2/ability/262/' },
-	{ name: 'dragons-maw', url: 'https://pokeapi.co/api/v2/ability/263/' },
-	{ name: 'chilling-neigh', url: 'https://pokeapi.co/api/v2/ability/264/' },
+	{
+		name: 'pastel-veil',
+		url: 'https://pokeapi.co/api/v2/ability/257/',
+		handled: true,
+	},
+
+	{
+		name: 'quick-draw',
+		url: 'https://pokeapi.co/api/v2/ability/259/',
+		handled: true,
+	},
+	{
+		name: 'unseen-fist',
+		url: 'https://pokeapi.co/api/v2/ability/260/',
+		handled: true,
+	},
+	{
+		name: 'curious-medicine',
+		url: 'https://pokeapi.co/api/v2/ability/261/',
+		handled: true,
+	},
+	{
+		name: 'transistor',
+		url: 'https://pokeapi.co/api/v2/ability/262/',
+		handled: true,
+	},
+	{
+		name: 'dragons-maw',
+		url: 'https://pokeapi.co/api/v2/ability/263/',
+		handled: true,
+	},
+	{
+		name: 'chilling-neigh',
+		url: 'https://pokeapi.co/api/v2/ability/264/',
+		handled: true,
+	},
 	{ name: 'grim-neigh', url: 'https://pokeapi.co/api/v2/ability/265/' },
 	{ name: 'as-one-glastrier', url: 'https://pokeapi.co/api/v2/ability/266/' },
 	{ name: 'as-one-spectrier', url: 'https://pokeapi.co/api/v2/ability/267/' },
@@ -1239,6 +1274,8 @@ export const abilityCheckList: {
 	{ name: 'ice-face', url: 'https://pokeapi.co/api/v2/ability/248/' },
 	{ name: 'mimicry', url: 'https://pokeapi.co/api/v2/ability/250/' },
 	{ name: 'perish-body', url: 'https://pokeapi.co/api/v2/ability/253/' },
+	{ name: 'neutralizing-gas', url: 'https://pokeapi.co/api/v2/ability/256/' },
+	{ name: 'hunger-switch', url: 'https://pokeapi.co/api/v2/ability/258/' },
 ];
 
 export const abilityNames = [
@@ -1455,6 +1492,15 @@ export const abilityNames = [
 	'power-spot',
 	'screen-cleaner',
 	'steely-spirit',
+	'wandering-spirit',
+	'gorilla-tactics',
+	'pastel-veil',
+	'quick-draw',
+	'unseen-fist',
+	'curious-medicine',
+	'transistor',
+	'dragons-maw',
+	'chilling-neigh',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

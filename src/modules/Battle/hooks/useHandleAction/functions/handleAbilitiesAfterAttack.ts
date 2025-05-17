@@ -78,6 +78,27 @@ export const handleAbilitiesAfterAttack = (
 		addMessage({ message: `${updatedAttacker.name}'s ability became mummy` });
 		updatedAttacker.ability = 'mummy';
 	}
+	//check for wandering spirit
+	if (
+		target.ability === 'wandering-spirit' &&
+		isContactMove(move.name, attacker)
+	) {
+		addMessage({
+			message: `${target.name} traded the wandering spirit ability to ${attacker.name}`,
+		});
+		updatedAttacker.ability = 'wandering-spirit';
+		updatedTarget.ability = attacker.ability;
+	}
+	if (
+		attacker.ability === 'wandering-spirit' &&
+		isContactMove(move.name, attacker)
+	) {
+		addMessage({
+			message: `${attacker.name} traded the wandering spirit ability to ${target.name}`,
+		});
+		updatedAttacker.ability = target.ability;
+		updatedTarget.ability = 'wandering-spirit';
+	}
 	//check for static
 	if (
 		target.ability === 'static' &&
@@ -572,6 +593,18 @@ export const handleAbilitiesAfterAttack = (
 			[],
 			addMessage,
 			'moxie'
+		);
+	}
+	//chilling neigh
+	if (isKO(updatedTarget) && updatedAttacker.ability === 'chilling-neigh') {
+		updatedAttacker = applyStatChangeToPokemon(
+			updatedAttacker,
+			'attack',
+			1,
+			true,
+			[],
+			addMessage,
+			'chilling-neigh'
 		);
 	}
 	//Beast boost

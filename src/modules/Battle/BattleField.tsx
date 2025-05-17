@@ -85,7 +85,8 @@ export interface BattleFieldEffect {
 		| 'tailwind'
 		| 'battery'
 		| 'power-spot'
-		| 'steely-spirit';
+		| 'steely-spirit'
+		| 'pastel-veil';
 	ownerId: string;
 	applicatorId?: string;
 	duration: number;
@@ -195,6 +196,7 @@ export const BattleField = ({
 			return;
 		}
 
+		const quickDrawActivates = Math.random() > 0.7;
 		return [...onFieldOpponents, ...onFieldTeam]
 			.sort((a, b) =>
 				sortByPriority(
@@ -203,7 +205,8 @@ export const BattleField = ({
 					battleRound,
 					battleWeather,
 					battleFieldEffects,
-					battleTerrain
+					battleTerrain,
+					quickDrawActivates
 				)
 			)
 			.find((p) => p.moveQueue.some((m) => m.round === battleRound));

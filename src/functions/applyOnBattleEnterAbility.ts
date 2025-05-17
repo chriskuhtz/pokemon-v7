@@ -1,7 +1,7 @@
 import { Message } from '../hooks/useMessageQueue';
 import { SPIKES_FACTOR } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { Stat } from '../interfaces/StatObject';
+import { EmptyStatObject, Stat } from '../interfaces/StatObject';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { TerrainObject } from '../modules/Battle/hooks/useBattleTerrain';
@@ -30,7 +30,34 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 	removeScreens: (ownerId: string) => void;
 }): BattlePokemon[] => {
 	let updatedPokemon = [...pokemon];
+	if (user.ability == 'curious-medicine') {
+		addMessage({
+			message: `${user.name} deploys curious medicine and resets its teams stat changes`,
+		});
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.ownerId === user.ownerId) {
+				return { ...p, statBoosts: EmptyStatObject };
+			}
 
+			return p;
+		});
+	}
+	if (user.ability == 'pastel-veil') {
+		addMessage({
+			message: `${user.name} deploys pastel veil and cures its team of poison`,
+		});
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (
+				p.ownerId === user.ownerId &&
+				p.primaryAilment &&
+				['poison', 'toxic'].includes(p.primaryAilment?.type)
+			) {
+				return { ...p, primaryAilment: undefined };
+			}
+
+			return p;
+		});
+	}
 	if (user.ability == 'screen-cleaner') {
 		const firstOppo = pokemon.find(
 			(p) => p.ownerId !== user.ownerId && p.status === 'ONFIELD'

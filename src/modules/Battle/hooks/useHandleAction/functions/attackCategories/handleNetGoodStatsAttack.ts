@@ -1,5 +1,6 @@
 import { applyAttackStatChanges } from '../../../../../../functions/applyAttackStatChanges';
 import { applySecondaryAilmentToPokemon } from '../../../../../../functions/applySecondaryAilmentToPokemon';
+import { arePokemonOfOppositeGenders } from '../../../../../../functions/getRivalryFactor';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
@@ -9,7 +10,7 @@ export const handleNetGoodStatsAttack = ({
 	attacker,
 	pokemon,
 	addMessage,
-	move: m,
+	move,
 	battleFieldEffects,
 	target,
 }: {
@@ -22,7 +23,6 @@ export const handleNetGoodStatsAttack = ({
 }): BattlePokemon[] => {
 	let updatedAttacker = { ...attacker };
 	const updatedTarget = { ...target };
-	const move = m;
 	const selfTargeting = move.data.target.name === 'user';
 
 	if (selfTargeting) {
@@ -53,6 +53,13 @@ export const handleNetGoodStatsAttack = ({
 	} else {
 		return pokemon.map((p) => {
 			if (p.id === updatedTarget.id) {
+				if (
+					move.name === 'captivate' &&
+					!arePokemonOfOppositeGenders(attacker.gender, target.gender)
+				) {
+					addMessage({ message: `${attacker.name} failed to captivate` });
+					return updatedTarget;
+				}
 				return applyAttackStatChanges(
 					updatedTarget,
 					updatedTarget.ability,

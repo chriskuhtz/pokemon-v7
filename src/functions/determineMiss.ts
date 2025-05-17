@@ -1,3 +1,4 @@
+import { isContactMove } from '../constants/contactMoves';
 import {
 	digHitMoves,
 	flyHitMoves,
@@ -65,7 +66,11 @@ export const determineMiss = (
 	if (attack.data.priority > 0 && target.ability === 'queenly-majesty') {
 		return { miss: true, reason: 'QUEENLY_MAJESTY' };
 	}
-	if (target.protected && !passThroughProtectMoves.includes(attack.name)) {
+	const passesThrough =
+		passThroughProtectMoves.includes(attack.name) ||
+		(isContactMove(attack.name, attacker) &&
+			attacker.ability === 'unseen-fist');
+	if (target.protected && !passesThrough) {
 		return { miss: true, reason: 'PROTECTED' };
 	}
 	if (attacker.ability === 'no-guard' || target.ability === 'no-guard') {
@@ -141,13 +146,7 @@ export const determineMiss = (
 			: 1;
 
 	const targetEvasion =
-		calculateModifiedStat(
-			target.stats.evasion,
-			target.statBoosts.evasion,
-			'evasion',
-			target,
-			false
-		) *
+		calculateModifiedStat('evasion', target, false) *
 		tangledFeetFactor *
 		laxIncenseFactor *
 		wonderSkinFactor;
@@ -167,13 +166,7 @@ export const determineMiss = (
 		attack.name === 'thunder' && weather === 'sun' ? 0.5 : 1;
 
 	const attackerAccuracy =
-		calculateModifiedStat(
-			attacker.stats.accuracy,
-			attacker.statBoosts.accuracy,
-			'accuracy',
-			attacker,
-			false
-		) *
+		calculateModifiedStat('accuracy', attacker, false) *
 		compoundEyesFactor *
 		hustleFactor *
 		brightPowderFactor *

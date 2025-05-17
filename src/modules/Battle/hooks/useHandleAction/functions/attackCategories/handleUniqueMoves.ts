@@ -516,6 +516,16 @@ export const handleUniqueMoves = ({
 			addMessage({ message: 'it failed' });
 		}
 	}
+	if (move.name === 'simple-beam') {
+		updatedTarget = { ...updatedTarget, ability: 'simple' };
+		addMessage({ message: `${updatedTarget.name}´s ability became simple` });
+	}
+	if (move.name === 'entrainment') {
+		updatedTarget = { ...updatedTarget, ability: updatedAttacker.ability };
+		addMessage({
+			message: `${updatedTarget.name}´s ability became ${updatedAttacker.ability}`,
+		});
+	}
 
 	return updatedPokemon.map((p) => {
 		if (p.id === updatedAttacker.id) {

@@ -88,7 +88,6 @@ export interface UseSaveFile {
 	fulfillQuestReducer: (q: QuestName) => void;
 	changeHeldItemReducer: (pokemonId: string, newItem?: ItemType) => void;
 	useSacredAshReducer: () => void;
-	reset: () => void;
 	evolvePokemonReducer: (x: EvolutionReducerPayload) => void;
 }
 const migrateSavefile = (input: SaveFile) => {
@@ -382,9 +381,6 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 			bag: updatedInventory,
 		});
 	};
-	const reset = useCallback(() => {
-		setSaveFile(testState);
-	}, [setSaveFile]);
 
 	const evolvePokemonReducer = ({
 		id,
@@ -498,7 +494,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 
 	return {
 		evolvePokemonReducer,
-		reset,
+
 		saveFile,
 		discardItemReducer,
 		addItemReducer,
