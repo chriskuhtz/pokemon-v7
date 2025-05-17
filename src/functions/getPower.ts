@@ -1,3 +1,4 @@
+import { HIDDEN_STATS } from '../components/OwnedPokemonCard/components/StatDisplay';
 import { AbilityName } from '../constants/checkLists/abilityCheckList';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -131,6 +132,22 @@ export const getPower = (
 	attackerLevel: number,
 	weather: WeatherType | undefined
 ): number => {
+	if (attack.name === 'punishment') {
+		const boosts = Object.entries(target.statBoosts).reduce(
+			(sum, [key, value]) => {
+				if (HIDDEN_STATS.includes(key)) {
+					return sum;
+				}
+				if (value <= 0) {
+					return sum;
+				}
+				return sum + value;
+			},
+			0
+		);
+
+		return 60 + boosts * 20;
+	}
 	if (attack.name === 'electro-ball') {
 		const factor =
 			calculateModifiedStat('speed', attacker, false) /
