@@ -415,7 +415,7 @@ export const extraFeatureCheckList: {
 	{ name: 'ability tutor', handled: true },
 	{ name: 'sort by dex id', handled: true },
 	{ name: 'always copy map to clipboard', handled: true },
-	{ name: 'sort by favorites' },
+	{ name: 'sort by favorites', handled: true },
 	{ name: 'fix pathing' },
 	{ name: 'whitney' },
 	{ name: 'jasmine' },

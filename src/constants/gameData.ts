@@ -12,7 +12,7 @@ import { QuestName, QuestsRecord } from './checkLists/questsRecord';
 import { pokemonNames } from './pokemonNames';
 
 export const frames = 16;
-export const fps = 1000 / 16;
+export const fps = 1000 / frames;
 export const battleSpriteSize = 32;
 export const animationTimer = 16000 / frames;
 export const ONE_HOUR = 3600000;

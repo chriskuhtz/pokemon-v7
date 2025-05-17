@@ -4,10 +4,8 @@ import {
 	PokemonSprite,
 } from '../../../components/PokemonSprite/PokemonSprite';
 import { Sprite } from '../../../components/Sprite/Sprite';
-import { typeColors } from '../../../constants/typeColors';
 import { determineRunawaySuccess } from '../../../functions/determineRunAwaySuccess';
 import { getItemUrl } from '../../../functions/getItemUrl';
-import { hexToRgb } from '../../../functions/hexToRGB';
 import { isKO } from '../../../functions/isKo';
 import { LocationContext } from '../../../hooks/LocationProvider';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
@@ -25,6 +23,8 @@ export const LineUpSelection = ({
 	selectedTeam,
 	startBattle,
 	trainer,
+	oppColor,
+	playerColor,
 }: {
 	leave: () => void;
 	opponents: BattlePokemon[];
@@ -34,6 +34,8 @@ export const LineUpSelection = ({
 	toggleSelected: (id: string) => void;
 	startBattle: () => void;
 	trainer?: TrainerInfo;
+	oppColor: string;
+	playerColor: string;
 }) => {
 	const {
 		saveFile: { pokedex },
@@ -66,17 +68,6 @@ export const LineUpSelection = ({
 			});
 		}
 	}, [addMessage, leave, opponents, startBattle, team]);
-
-	const oppColor = useMemo(() => {
-		const type = opponents.at(0)?.data.types.at(0)?.type.name ?? 'grass';
-
-		return hexToRgb(typeColors[type], 0.5);
-	}, [opponents]);
-	const playerColor = useMemo(() => {
-		const type = team.at(0)?.data.types.at(0)?.type.name ?? 'bug';
-
-		return hexToRgb(typeColors[type], 0.5);
-	}, [team]);
 
 	return (
 		<div style={{ background: 'white' }}>
