@@ -1843,7 +1843,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/485/',
 		handled: true,
 	},
-	{ name: 'electro-ball', url: 'https://pokeapi.co/api/v2/move/486/' },
+	{
+		name: 'electro-ball',
+		url: 'https://pokeapi.co/api/v2/move/486/',
+		handled: true,
+	},
 
 	{ name: 'flame-burst', url: 'https://pokeapi.co/api/v2/move/481/' },
 	{ name: 'smack-down', url: 'https://pokeapi.co/api/v2/move/479/' },
@@ -2918,6 +2922,7 @@ export const handledMoves = [
 	'quiver-dance',
 	'heavy-slam',
 	'synchronoise',
+	'electro-ball',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

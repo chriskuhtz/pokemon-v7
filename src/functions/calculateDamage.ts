@@ -225,8 +225,6 @@ export const calculateDamage = (
 	const atk =
 		damageClass === 'physical'
 			? calculateModifiedStat(
-					attacker.stats.attack,
-					attacker.statBoosts.attack,
 					'attack',
 					attacker,
 					battleFieldEffects.some(
@@ -234,8 +232,6 @@ export const calculateDamage = (
 					)
 			  )
 			: calculateModifiedStat(
-					attacker.stats['special-attack'],
-					attacker.statBoosts['special-attack'],
 					'special-attack',
 					attacker,
 					battleFieldEffects.some(
@@ -244,40 +240,27 @@ export const calculateDamage = (
 			  );
 
 	//Crits ignore boosted defense
-	const defBoost = () => {
-		if (critFactor === 2 || attacker.ability === 'unaware') {
-			return 0;
-		}
-
-		return target.statBoosts.defense;
-	};
-	const spdefBoost = () => {
-		if (critFactor === 2 || attacker.ability === 'unaware') {
-			return 0;
-		}
-
-		return target.statBoosts['special-defense'];
+	const ignoreBoost = () => {
+		return critFactor === 2 || attacker.ability === 'unaware';
 	};
 
 	const def =
 		damageClass === 'physical' || attack.name === 'psyshock'
 			? calculateModifiedStat(
-					target.stats.defense,
-					defBoost(),
 					'defense',
 					target,
 					battleFieldEffects.some(
 						(e) => e.type === 'flower-gift' && e.ownerId === target.ownerId
-					)
+					),
+					ignoreBoost()
 			  )
 			: calculateModifiedStat(
-					target.stats['special-defense'],
-					spdefBoost(),
 					'special-defense',
 					target,
 					battleFieldEffects.some(
 						(e) => e.type === 'flower-gift' && e.ownerId === target.ownerId
-					)
+					),
+					ignoreBoost()
 			  );
 
 	const statFactor = atk / def;

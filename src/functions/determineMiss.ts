@@ -141,13 +141,7 @@ export const determineMiss = (
 			: 1;
 
 	const targetEvasion =
-		calculateModifiedStat(
-			target.stats.evasion,
-			target.statBoosts.evasion,
-			'evasion',
-			target,
-			false
-		) *
+		calculateModifiedStat('evasion', target, false) *
 		tangledFeetFactor *
 		laxIncenseFactor *
 		wonderSkinFactor;
@@ -167,13 +161,7 @@ export const determineMiss = (
 		attack.name === 'thunder' && weather === 'sun' ? 0.5 : 1;
 
 	const attackerAccuracy =
-		calculateModifiedStat(
-			attacker.stats.accuracy,
-			attacker.statBoosts.accuracy,
-			'accuracy',
-			attacker,
-			false
-		) *
+		calculateModifiedStat('accuracy', attacker, false) *
 		compoundEyesFactor *
 		hustleFactor *
 		brightPowderFactor *

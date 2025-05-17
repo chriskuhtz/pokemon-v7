@@ -51,13 +51,7 @@ const calculateTotalSpeed = (
 	const ironBallFactor = getHeldItem(a) === 'iron-ball' ? 0.5 : 1;
 
 	return (
-		calculateModifiedStat(
-			a.stats.speed,
-			a.statBoosts.speed,
-			'speed',
-			a,
-			false
-		) *
+		calculateModifiedStat('speed', a, false) *
 		paraFactor *
 		swiftSwimFactor *
 		chlorophyllFactor *

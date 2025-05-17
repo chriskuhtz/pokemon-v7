@@ -3,12 +3,13 @@ import { Stat } from '../interfaces/StatObject';
 import { getHeldItem } from './getHeldItem';
 
 export const calculateModifiedStat = (
-	unmodified: number,
-	modifier: number,
 	statName: Stat,
 	pokemon: BattlePokemon,
-	flowerGiftActive: boolean
+	flowerGiftActive: boolean,
+	ignoreModifier?: boolean
 ): number => {
+	const unmodified = pokemon.stats[statName];
+	const modifier = ignoreModifier ? 0 : pokemon.statBoosts[statName];
 	const heldItem = getHeldItem(pokemon);
 	let res = unmodified;
 	if (modifier > 0) {

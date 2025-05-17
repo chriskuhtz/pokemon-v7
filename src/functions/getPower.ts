@@ -131,6 +131,26 @@ export const getPower = (
 	attackerLevel: number,
 	weather: WeatherType | undefined
 ): number => {
+	if (attack.name === 'electro-ball') {
+		const factor =
+			calculateModifiedStat('speed', attacker, false) /
+			calculateModifiedStat('speed', target, false);
+
+		if (factor >= 4) {
+			return 150;
+		}
+		if (factor >= 3) {
+			return 120;
+		}
+		if (factor >= 2) {
+			return 80;
+		}
+		if (factor >= 1) {
+			return 60;
+		}
+
+		return 40;
+	}
 	const shareType = checkForSharedType(attacker, target);
 	if (attack.name === 'synchronoise') {
 		if (shareType) {
@@ -171,20 +191,8 @@ export const getPower = (
 	}
 	if (attack.name === 'gyro-ball') {
 		return getGyroBallPower(
-			calculateModifiedStat(
-				target.stats.speed,
-				target.statBoosts.speed,
-				'speed',
-				target,
-				false
-			),
-			calculateModifiedStat(
-				attacker.stats.speed,
-				attacker.statBoosts.speed,
-				'speed',
-				attacker,
-				false
-			)
+			calculateModifiedStat('speed', target, false),
+			calculateModifiedStat('speed', attacker, false)
 		);
 	}
 	if (attack.name === 'weather-ball' && attack.data.power) {
