@@ -172,7 +172,14 @@ export const PokemonStorage = ({
 					Storage:
 				</h2>
 
-				<div style={{ display: 'flex', gap: '.5rem', alignItems: 'center' }}>
+				<div
+					style={{
+						display: 'flex',
+						gap: '.5rem',
+						alignItems: 'center',
+						flexWrap: 'wrap',
+					}}
+				>
 					Sort By
 					{sortByTypes.map((filter) => (
 						<button

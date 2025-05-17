@@ -5,6 +5,7 @@ import { applyAttackStatChanges } from '../../../../../../functions/applyAttackS
 import { applyDrainOrRecoil } from '../../../../../../functions/applyDrainOrRecoil';
 import { applyStatChangeToPokemon } from '../../../../../../functions/applyStatChangeToPokemon';
 import { calculateDamage } from '../../../../../../functions/calculateDamage';
+import { checkThiefMoves } from '../../../../../../functions/checkThiefMoves';
 import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
 import { getPlayerId } from '../../../../../../functions/getPlayerId';
@@ -13,7 +14,7 @@ import { Message } from '../../../../../../hooks/useMessageQueue';
 import { isRemovedByRapidSpin } from '../../../../../../interfaces/Ailment';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
-import { gemTable, isBerry } from '../../../../../../interfaces/Item';
+import { gemTable } from '../../../../../../interfaces/Item';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
 import { BattleTerrain } from '../../../useBattleTerrain';
@@ -124,9 +125,11 @@ export const handleDamageAttack = ({
 			return p;
 		});
 	}
+	//pay day
 	if (move.name === 'pay-day') {
 		scatterCoins();
 	}
+	//knock off
 	if (
 		move.name === 'knock-off' &&
 		updatedTarget.ability !== 'sticky-hold' &&
@@ -137,25 +140,11 @@ export const handleDamageAttack = ({
 		});
 		updatedTarget = { ...updatedTarget, heldItemName: undefined };
 	}
-	if (
-		move.name === 'thief' ||
-		move.name === 'covet' ||
-		(move.name === 'pluck' && isBerry(updatedTarget.heldItemName)) ||
-		(move.name === 'bug-bite' &&
-			isBerry(updatedTarget.heldItemName) &&
-			updatedTarget.ability !== 'sticky-hold' &&
-			updatedTarget.heldItemName &&
-			!updatedAttacker.heldItemName)
-	) {
-		addMessage({
-			message: `${updatedAttacker.name} steals ${updatedTarget.name}'s ${updatedTarget.heldItemName}`,
-		});
-		updatedAttacker = {
-			...updatedAttacker,
-			heldItemName: updatedTarget.heldItemName,
-		};
-		updatedTarget = { ...updatedTarget, heldItemName: undefined };
-	}
+	//thief moves
+	const { updatedAttacker: aThiefChecked, updatedTarget: tThiefChecked } =
+		checkThiefMoves(updatedAttacker, updatedTarget, move.name, addMessage);
+	updatedAttacker = { ...aThiefChecked };
+	updatedTarget = { ...tThiefChecked };
 
 	// apply damage
 	const { consumedHeldItem, damage, criticalHit, wasSuperEffective } =

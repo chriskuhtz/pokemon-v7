@@ -422,4 +422,9 @@ export const extraFeatureCheckList: {
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
 	{ name: 'loosing to wild mons is sometimes buggy' },
 	{ name: 'trainer ai should consider flying,dig, diving' },
+	{ name: 'visualize quest origin' },
+	{ name: 'magma/aqua quests from looker' },
+	{ name: 'catch x weak/medium/strong pokemon' },
+	{ name: 'catch x pokemon of type' },
+	{ name: 'storage sorting by bst group' },
 ];
