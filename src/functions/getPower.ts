@@ -5,6 +5,7 @@ import { ItemType } from '../interfaces/Item';
 import { StatObject } from '../interfaces/StatObject';
 import { WeatherType } from '../interfaces/Weather';
 import { calculateModifiedStat } from './calculateModifiedStat';
+import { checkForSharedType } from './checkForSharedType';
 import { getHeldItem } from './getHeldItem';
 import { getMovesArray } from './getMovesArray';
 
@@ -130,6 +131,12 @@ export const getPower = (
 	attackerLevel: number,
 	weather: WeatherType | undefined
 ): number => {
+	const shareType = checkForSharedType(attacker, target);
+	if (attack.name === 'synchronoise') {
+		if (shareType) {
+			return attack.data.power ?? 0;
+		} else return 0;
+	}
 	if (attack.name === 'heavy-slam') {
 		const factor =
 			getActualWeight(
