@@ -198,6 +198,7 @@ export const handleDamageAttack = ({
 			)} to reduce the damage`,
 		});
 	}
+	//shell bell
 	if (
 		getHeldItem(updatedAttacker) === 'shell-bell' &&
 		damage !== 0 &&
@@ -213,6 +214,7 @@ export const handleDamageAttack = ({
 			damage: getMiddleOfThree([0, 0, updatedAttacker.damage - restored]),
 		};
 	}
+	//anger shell
 	if (
 		updatedTarget.damage / updatedTarget.stats.hp > 0.5 &&
 		(updatedTarget.damage + actualDamage) / updatedTarget.stats.hp <= 0.5 &&
@@ -258,6 +260,21 @@ export const handleDamageAttack = ({
 			true,
 			battleFieldEffects,
 			addMessage
+		);
+	}
+	//well baked body
+	if (
+		move.data.type.name == 'fire' &&
+		updatedTarget.ability === 'well-baked-body'
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'defense',
+			2,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'well baked body'
 		);
 	}
 	updatedTarget = {
