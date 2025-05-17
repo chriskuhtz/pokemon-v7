@@ -11,6 +11,7 @@ import {
 } from '../../constants/baseStatRecord';
 import { battleSpriteSize } from '../../constants/gameData';
 import { mapIds } from '../../constants/maps/mapsRecord';
+import { nameToIdMap } from '../../constants/pokemonNames';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getHeldItem } from '../../functions/getHeldItem';
 import { getItemUrl } from '../../functions/getItemUrl';
@@ -28,6 +29,7 @@ import { Stack } from '../../uiComponents/Stack/Stack';
 
 export const sortByTypes = [
 	'NAME',
+	'DEX ID',
 	'CATCHDATE',
 	'XP',
 	'HAPPINESS',
@@ -59,6 +61,10 @@ export const PokemonStorage = ({
 		if (sortBy === 'CATCHDATE') {
 			return (a: OwnedPokemon, b: OwnedPokemon) =>
 				b.caughtAtDate - a.caughtAtDate;
+		}
+		if (sortBy === 'DEX ID') {
+			return (a: OwnedPokemon, b: OwnedPokemon) =>
+				nameToIdMap[a.name] - nameToIdMap[b.name];
 		}
 		if (sortBy === 'XP') {
 			return (a: OwnedPokemon, b: OwnedPokemon) => b.xp - a.xp;
