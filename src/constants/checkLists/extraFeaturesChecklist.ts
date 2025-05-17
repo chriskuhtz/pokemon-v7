@@ -411,6 +411,8 @@ export const extraFeatureCheckList: {
 	{ name: 'bst, ev, iv, explainers', handled: true },
 	{ name: 'storage sorting by bst group', handled: true },
 	{ name: 'unique location, only accessible by dragonite', handled: true },
+	{ name: 'nature tutor' },
+	{ name: 'ability tutor' },
 	{ name: 'fix pathing' },
 	{ name: 'whitney' },
 	{ name: 'pryce' },
@@ -436,5 +438,4 @@ export const extraFeatureCheckList: {
 	{ name: 'magma/aqua quests from looker' },
 	{ name: 'catch x pokemon of type' },
 	{ name: 'progress bar for catch x quests' },
-	{ name: 'ability and nature tutor' },
 ];

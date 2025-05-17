@@ -27,6 +27,7 @@ import { Market } from './modules/Market/Market';
 import { SellMarket } from './modules/Market/SellMarket';
 import { MiltankFarm } from './modules/MiltankFarm/MiltankFarm';
 import { MoveTutor } from './modules/MoveTutor/MoveTutor';
+import { NatureTutor } from './modules/NatureTutor/NatureTutor';
 import { Overworld } from './modules/Overworld/Overworld';
 import { Pokedex } from './modules/Pokedex/Pokedex';
 import { PokemonStorage } from './modules/PokemonStorage/PokemonStorage';
@@ -262,6 +263,9 @@ export const App = (): JSX.Element => {
 	}
 	if (activeTab === 'MOVE_TUTOR') {
 		return <MoveTutor />;
+	}
+	if (activeTab === 'NATURE_TUTOR') {
+		return <NatureTutor />;
 	}
 	if (activeTab === 'DRAGONITE_TAXI') {
 		return <DragoniteTaxi />;
