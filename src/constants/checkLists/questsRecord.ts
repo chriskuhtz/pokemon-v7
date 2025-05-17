@@ -26,7 +26,11 @@ import {
 	generateRandomStatObject,
 } from '../../interfaces/StatObject';
 import { sledgeHammerPokemon } from '../../modules/Overworld/hooks/useSledgeHammer';
-import { lowBstPokemon, midBstPokemon } from '../baseStatRecord';
+import {
+	highBstPokemon,
+	lowBstPokemon,
+	midBstPokemon,
+} from '../baseStatRecord';
 import { caveW1Encounters } from '../maps/encounters/caveW1';
 import { onixCaveEncounters } from '../maps/encounters/onixCave';
 import { allRocketCampTrainersDefeated } from '../maps/occupants/rocketCampOccupants';
@@ -623,6 +627,12 @@ export const questNames = [
 	'catch 50 medium strong pokemon',
 	'catch 100 medium strong pokemon',
 	'catch all medium strong pokemon',
+	'catch a strong pokemon',
+	'catch 10 strong pokemon',
+	'catch 20 strong pokemon',
+	'catch 50 strong pokemon',
+	'catch 100 strong pokemon',
+	'catch all strong pokemon',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -2929,7 +2939,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch a medium strong pokemon': {
 		kind: 'BULLETIN',
-		rewardItems: { 'great-ball': 5 },
+		rewardItems: { 'great-ball': 5, 'coba-berry': 10 },
 		researchPoints: 10,
 		availableAfter: 'catch a weak pokemon',
 		conditionFunction: (s) =>
@@ -2939,7 +2949,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch 10 medium strong pokemon': {
 		kind: 'BULLETIN',
-		rewardItems: { 'great-ball': 10 },
+		rewardItems: { 'great-ball': 10, 'coba-berry': 10 },
 		researchPoints: 20,
 		availableAfter: 'catch a medium strong pokemon',
 		conditionFunction: (s) =>
@@ -2949,7 +2959,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch 20 medium strong pokemon': {
 		kind: 'BULLETIN',
-		rewardItems: { 'great-ball': 20 },
+		rewardItems: { 'great-ball': 20, 'coba-berry': 10 },
 		researchPoints: 40,
 		availableAfter: 'catch 10 medium strong pokemon',
 		conditionFunction: (s) =>
@@ -2984,6 +2994,66 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'catch 100 medium strong pokemon',
 		conditionFunction: (s) =>
 			Object.keys(midBstPokemon).every(
+				(pok) => s.pokedex[pok as PokemonName].caughtOnRoutes.length > 0
+			),
+	},
+	'catch a strong pokemon': {
+		kind: 'BULLETIN',
+		rewardItems: { 'ultra-ball': 5, 'aguav-berry': 10 },
+		researchPoints: 10,
+		availableAfter: 'catch a medium strong pokemon',
+		conditionFunction: (s) =>
+			Object.keys(highBstPokemon).filter(
+				(pok) => s.pokedex[pok as PokemonName].caughtOnRoutes.length > 0
+			).length > 0,
+	},
+	'catch 10 strong pokemon': {
+		kind: 'BULLETIN',
+		rewardItems: { 'ultra-ball': 10, 'aguav-berry': 20 },
+		researchPoints: 30,
+		availableAfter: 'catch a strong pokemon',
+		conditionFunction: (s) =>
+			Object.keys(highBstPokemon).filter(
+				(pok) => s.pokedex[pok as PokemonName].caughtOnRoutes.length > 0
+			).length > 9,
+	},
+	'catch 20 strong pokemon': {
+		kind: 'BULLETIN',
+		rewardItems: { 'ultra-ball': 20, 'aguav-berry': 20 },
+		researchPoints: 60,
+		availableAfter: 'catch 10 strong pokemon',
+		conditionFunction: (s) =>
+			Object.keys(highBstPokemon).filter(
+				(pok) => s.pokedex[pok as PokemonName].caughtOnRoutes.length > 0
+			).length > 19,
+	},
+	'catch 50 strong pokemon': {
+		kind: 'BULLETIN',
+		rewardItems: { 'ultra-ball': 20, 'aguav-berry': 20 },
+		researchPoints: 100,
+		availableAfter: 'catch 20 strong pokemon',
+		conditionFunction: (s) =>
+			Object.keys(highBstPokemon).filter(
+				(pok) => s.pokedex[pok as PokemonName].caughtOnRoutes.length > 0
+			).length > 49,
+	},
+	'catch 100 strong pokemon': {
+		kind: 'BULLETIN',
+		rewardItems: { 'ultra-ball': 20 },
+		researchPoints: 100,
+		availableAfter: 'catch 50 strong pokemon',
+		conditionFunction: (s) =>
+			Object.keys(highBstPokemon).filter(
+				(pok) => s.pokedex[pok as PokemonName].caughtOnRoutes.length > 0
+			).length > 99,
+	},
+	'catch all strong pokemon': {
+		kind: 'BULLETIN',
+		rewardItems: { 'master-ball': 1 },
+		researchPoints: 100,
+		availableAfter: 'catch 100 strong pokemon',
+		conditionFunction: (s) =>
+			Object.keys(highBstPokemon).every(
 				(pok) => s.pokedex[pok as PokemonName].caughtOnRoutes.length > 0
 			),
 	},
