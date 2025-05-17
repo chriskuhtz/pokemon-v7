@@ -1,7 +1,14 @@
-import { useContext, useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { GiBreakingChain } from 'react-icons/gi';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
+import {
+	allBst,
+	highBstPokemon,
+	lowBstPokemon,
+	midBstPokemon,
+	ultraHighBstPokemon,
+} from '../../constants/baseStatRecord';
 import { battleSpriteSize } from '../../constants/gameData';
 import { mapIds } from '../../constants/maps/mapsRecord';
 import { calculateLevelData } from '../../functions/calculateLevelData';
@@ -27,6 +34,7 @@ export const sortByTypes = [
 	'BALL',
 	'LOCATION',
 	'IVs',
+	'BASE POWER',
 ] as const;
 export type PokemonFilter = (typeof sortByTypes)[number];
 
@@ -75,6 +83,10 @@ export const PokemonStorage = ({
 		if (sortBy === 'IVs') {
 			return (a: OwnedPokemon, b: OwnedPokemon) =>
 				sumOfIvs(b.intrinsicValues) - sumOfIvs(a.intrinsicValues);
+		}
+		if (sortBy === 'BASE POWER') {
+			return (a: OwnedPokemon, b: OwnedPokemon) =>
+				(allBst[b.name] ?? 0) - (allBst[a.name] ?? 0);
 		}
 	}, [sortBy]);
 	const team = useMemo(() => allPokemon.filter((p) => p.onTeam), [allPokemon]);
@@ -394,6 +406,50 @@ const Sorted = ({
 								))}
 							</Stack>
 						</>
+					);
+				})}
+			</Stack>
+		);
+	}
+
+	const bstSteps = [
+		ultraHighBstPokemon,
+		highBstPokemon,
+		midBstPokemon,
+		lowBstPokemon,
+	];
+	if (pokemonFilter === 'BASE POWER') {
+		return (
+			<Stack mode={'column'}>
+				{bstSteps.map((bstStep, index) => {
+					const filtered = stored.filter((s) => {
+						return !!bstStep[s.name];
+					});
+
+					if (filtered.length === 0) {
+						return <></>;
+					}
+
+					return (
+						<React.Fragment key={index}>
+							<h3 style={{ display: 'flex', alignItems: 'center' }}>
+								{index === 0 && 'Ultra Strong Pokemon'}
+								{index === 1 && 'Strong Pokemon'}
+								{index === 2 && 'Medium Strong Pokemon'}
+								{index === 3 && 'Weak Pokemon'}
+							</h3>
+							<Stack mode="row">
+								{filtered.sort(sortFunction).map((pokemon) => (
+									<Entry
+										key={pokemon.id}
+										pokemon={pokemon}
+										teamIsFull={teamIsFull}
+										togglePokemonOnTeam={togglePokemonOnTeam}
+										startReleaseProcess={startReleaseProcess}
+									/>
+								))}
+							</Stack>
+						</React.Fragment>
 					);
 				})}
 			</Stack>

@@ -1321,4 +1321,11 @@ export const ultraHighBstPokemon: Partial<Record<PokemonName, number>> = {
 	'terapagos-stellar': 700,
 };
 
+export const allBst: Record<string, number> = {
+	...lowBstPokemon,
+	...midBstPokemon,
+	...highBstPokemon,
+	...ultraHighBstPokemon,
+};
+
 export const maxBst = 780;

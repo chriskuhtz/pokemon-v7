@@ -409,6 +409,7 @@ export const extraFeatureCheckList: {
 	{ name: 'catch x strong pokemon', handled: true },
 	{ name: 'total bst marker', handled: true },
 	{ name: 'bst, ev, iv, explainers', handled: true },
+	{ name: 'storage sorting by bst group', handled: true },
 	{ name: 'unique location, only accessible by dragonite' },
 	{ name: 'fix pathing' },
 	{ name: 'whitney' },
@@ -423,7 +424,6 @@ export const extraFeatureCheckList: {
 	{ name: 'procedural random challenge' },
 	{ name: 'eggs?' },
 	{ name: 'nicer ladder up sprite' },
-	{ name: 'shovel spots' },
 	{ name: 'Fishing?' },
 	{ name: 'movement buttons feel flaky' },
 	{ name: 'historian event: lugia' },
@@ -435,7 +435,6 @@ export const extraFeatureCheckList: {
 	{ name: 'visualize quest origin' },
 	{ name: 'magma/aqua quests from looker' },
 	{ name: 'catch x pokemon of type' },
-	{ name: 'storage sorting by bst group' },
 	{ name: 'progress bar for catch x quests' },
 	{ name: 'ability and nature tutor' },
 ];
