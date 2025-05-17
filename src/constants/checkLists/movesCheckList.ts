@@ -1901,10 +1901,13 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/500/',
 		handled: true,
 	},
-	{ name: 'quick-guard', url: 'https://pokeapi.co/api/v2/move/501/' },
-	{ name: 'ally-switch', url: 'https://pokeapi.co/api/v2/move/502/' },
-	{ name: 'scald', url: 'https://pokeapi.co/api/v2/move/503/' },
-	{ name: 'shell-smash', url: 'https://pokeapi.co/api/v2/move/504/' },
+
+	{ name: 'scald', url: 'https://pokeapi.co/api/v2/move/503/', handled: true },
+	{
+		name: 'shell-smash',
+		url: 'https://pokeapi.co/api/v2/move/504/',
+		handled: true,
+	},
 	{ name: 'heal-pulse', url: 'https://pokeapi.co/api/v2/move/505/' },
 	{ name: 'hex', url: 'https://pokeapi.co/api/v2/move/506/' },
 	{ name: 'sky-drop', url: 'https://pokeapi.co/api/v2/move/507/' },
@@ -2370,6 +2373,7 @@ export const movesCheckList: {
 	{ name: 'telekinesis', url: 'https://pokeapi.co/api/v2/move/477/' },
 	{ name: 'magic-room', url: 'https://pokeapi.co/api/v2/move/478/' },
 	{ name: 'soak', url: 'https://pokeapi.co/api/v2/move/487/' },
+	{ name: 'quick-guard', url: 'https://pokeapi.co/api/v2/move/501/' },
 	/*
 	 * BANISHED:
 	 */
@@ -2427,6 +2431,7 @@ export const movesCheckList: {
 	{ name: 'after-you', url: 'https://pokeapi.co/api/v2/move/495/' },
 	{ name: 'round', url: 'https://pokeapi.co/api/v2/move/496/' },
 	{ name: 'echoed-voice', url: 'https://pokeapi.co/api/v2/move/497/' },
+	{ name: 'ally-switch', url: 'https://pokeapi.co/api/v2/move/502/' },
 	/**
 	 * INCOMPLETE DATA:
 	 */
@@ -2975,6 +2980,8 @@ export const handledMoves = [
 	'chip-away',
 	'clear-smog',
 	'stored-power',
+	'scald',
+	'shell-smash',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
