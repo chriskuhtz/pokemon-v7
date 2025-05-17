@@ -1149,7 +1149,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/270/',
 		handled: true,
 	},
-	{ name: 'anger-shell', url: 'https://pokeapi.co/api/v2/ability/271/' },
+	{
+		name: 'anger-shell',
+		url: 'https://pokeapi.co/api/v2/ability/271/',
+		handled: true,
+	},
 	{ name: 'purifying-salt', url: 'https://pokeapi.co/api/v2/ability/272/' },
 	{ name: 'well-baked-body', url: 'https://pokeapi.co/api/v2/ability/273/' },
 	{ name: 'wind-rider', url: 'https://pokeapi.co/api/v2/ability/274/' },
@@ -1521,6 +1525,7 @@ export const abilityNames = [
 	'lingering-aroma',
 	'seed-sower',
 	'thermal-exchange',
+	'anger-shell',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

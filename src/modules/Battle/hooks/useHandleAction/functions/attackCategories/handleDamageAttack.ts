@@ -165,7 +165,6 @@ export const handleDamageAttack = ({
 			battleFieldEffects,
 			terrain,
 			true,
-
 			isFlying,
 			isUnderground,
 			isDiving,
@@ -205,6 +204,53 @@ export const handleDamageAttack = ({
 			...updatedAttacker,
 			damage: getMiddleOfThree([0, 0, updatedAttacker.damage - restored]),
 		};
+	}
+	if (
+		updatedTarget.damage / updatedTarget.stats.hp > 0.5 &&
+		(updatedTarget.damage + actualDamage) / updatedTarget.stats.hp <= 0.5 &&
+		updatedTarget.ability === 'anger-shell'
+	) {
+		addMessage({ message: `${updatedTarget.name} activates anger shell ` });
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'attack',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage
+		);
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'special-attack',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage
+		);
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'speed',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage
+		);
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'defense',
+			-1,
+			true,
+			battleFieldEffects,
+			addMessage
+		);
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'special-defense',
+			-1,
+			true,
+			battleFieldEffects,
+			addMessage
+		);
 	}
 	updatedTarget = {
 		...updatedTarget,
