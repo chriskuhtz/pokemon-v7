@@ -15,6 +15,7 @@ import { isRemovedByRapidSpin } from '../../../../../../interfaces/Ailment';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import { gemTable } from '../../../../../../interfaces/Item';
+import { EmptyStatObject } from '../../../../../../interfaces/StatObject';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
 import { BattleTerrain } from '../../../useBattleTerrain';
@@ -128,6 +129,12 @@ export const handleDamageAttack = ({
 	//pay day
 	if (move.name === 'pay-day') {
 		scatterCoins();
+	}
+	//clear smog
+	if (move.name === 'clear-smog') {
+		addMessage({ message: `${updatedTarget.name}´s stat changes were reset` });
+
+		updatedTarget = { ...updatedTarget, statBoosts: EmptyStatObject };
 	}
 	//knock off
 	if (
