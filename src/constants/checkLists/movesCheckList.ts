@@ -1896,7 +1896,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/499/',
 		handled: true,
 	},
-	{ name: 'stored-power', url: 'https://pokeapi.co/api/v2/move/500/' },
+	{
+		name: 'stored-power',
+		url: 'https://pokeapi.co/api/v2/move/500/',
+		handled: true,
+	},
 	{ name: 'quick-guard', url: 'https://pokeapi.co/api/v2/move/501/' },
 	{ name: 'ally-switch', url: 'https://pokeapi.co/api/v2/move/502/' },
 	{ name: 'scald', url: 'https://pokeapi.co/api/v2/move/503/' },
@@ -2970,6 +2974,7 @@ export const handledMoves = [
 	'entrainment',
 	'chip-away',
 	'clear-smog',
+	'stored-power',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
