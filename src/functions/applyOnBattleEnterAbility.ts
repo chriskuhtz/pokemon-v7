@@ -31,6 +31,22 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 }): BattlePokemon[] => {
 	let updatedPokemon = [...pokemon];
 
+	if (user.ability == 'pastel-veil') {
+		addMessage({
+			message: `${user.name} deploys pastel veil and cures its team of poison`,
+		});
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (
+				p.ownerId === user.ownerId &&
+				p.primaryAilment &&
+				['poison', 'toxic'].includes(p.primaryAilment?.type)
+			) {
+				return { ...p, primaryAilment: undefined };
+			}
+
+			return p;
+		});
+	}
 	if (user.ability == 'screen-cleaner') {
 		const firstOppo = pokemon.find(
 			(p) => p.ownerId !== user.ownerId && p.status === 'ONFIELD'

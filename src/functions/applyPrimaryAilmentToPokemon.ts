@@ -18,6 +18,15 @@ export const applyPrimaryAilmentToPokemon = (
 	terrain: BattleTerrain | undefined,
 	suffix?: string
 ): { updatedTarget: BattlePokemon; updatedApplicator: BattlePokemon } => {
+	if (
+		battleFieldEffects.some(
+			(b) => b.type === 'pastel-veil' && b.ownerId === target.ownerId
+		) &&
+		['poison', 'toxic'].includes(ailment)
+	) {
+		addMessage({ message: 'pastel veil stop the poison' });
+		return { updatedApplicator: applicator, updatedTarget: target };
+	}
 	if (terrain === 'misty') {
 		addMessage({ message: 'The misty terrain prevents all status conditions' });
 		return { updatedApplicator: applicator, updatedTarget: target };

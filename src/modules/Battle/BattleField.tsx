@@ -85,7 +85,8 @@ export interface BattleFieldEffect {
 		| 'tailwind'
 		| 'battery'
 		| 'power-spot'
-		| 'steely-spirit';
+		| 'steely-spirit'
+		| 'pastel-veil';
 	ownerId: string;
 	applicatorId?: string;
 	duration: number;
