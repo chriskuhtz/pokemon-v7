@@ -24,7 +24,7 @@ import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Inventory, joinInventories } from '../../interfaces/Inventory';
 import { balltypes } from '../../interfaces/Item';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
-import { realTypes } from '../../interfaces/PokemonType';
+import { PokemonType, realTypes } from '../../interfaces/PokemonType';
 import { Chip } from '../../uiComponents/Chip/Chip';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
 import { Modal } from '../../uiComponents/Modal/Modal';
@@ -277,6 +277,7 @@ const Sorted = ({
 	startReleaseProcess: (id: string) => void;
 	toggleFavoriteStatus: (id: string) => void;
 }) => {
+	const [selectedType, setSelectedType] = useState<PokemonType>(realTypes[0]);
 	if (pokemonFilter === 'FAVORITE') {
 		return (
 			<Stack mode={'column'}>
@@ -306,6 +307,7 @@ const Sorted = ({
 						.filter((s) => !s.favorite)
 						.map((pokemon) => (
 							<Entry
+								key={pokemon.id}
 								pokemon={pokemon}
 								teamIsFull={teamIsFull}
 								togglePokemonOnTeam={togglePokemonOnTeam}
@@ -381,88 +383,47 @@ const Sorted = ({
 		);
 	}
 	if (pokemonFilter === 'TYPE') {
+		const filtered = stored.filter(
+			(s) =>
+				byName[s.name].at(0) === selectedType ||
+				byName[s.name].at(1) === selectedType
+		);
+
 		return (
-			<Stack mode={'column'}>
-				{realTypes.map((type1) => {
-					return realTypes.map((type2) => {
-						if (type2 === type1) {
-							const filtered = stored.filter(
-								(s) =>
-									byName[s.name].at(0) === type1 && byName[s.name].length === 1
-							);
-
-							if (filtered.length === 0) {
-								return <></>;
-							}
-							return (
-								<>
-									<h3
-										style={{
-											display: 'flex',
-											alignItems: 'center',
-											gap: '1rem',
-										}}
-									>
-										<img
-											height={battleSpriteSize}
-											src={`/typeIcons/${type1}.png`}
-										/>
-
-										{type1}
-									</h3>
-									<Stack mode="row">
-										{filtered.sort(sortFunction).map((pokemon) => (
-											<Entry
-												pokemon={pokemon}
-												teamIsFull={teamIsFull}
-												togglePokemonOnTeam={togglePokemonOnTeam}
-												startReleaseProcess={startReleaseProcess}
-												toggleFavoriteStatus={toggleFavoriteStatus}
-											/>
-										))}
-									</Stack>
-								</>
-							);
-						}
-						const filtered = stored.filter(
-							(s) =>
-								byName[s.name].at(0) === type1 && byName[s.name].at(1) === type2
-						);
-
-						if (filtered.length === 0) {
-							return <></>;
-						}
-						return (
-							<>
-								<h3
-									style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
-								>
-									<img
-										height={battleSpriteSize}
-										src={`/typeIcons/${type1}.png`}
-									/>
-									<img
-										height={battleSpriteSize}
-										src={`/typeIcons/${type2}.png`}
-									/>{' '}
-									{type1}/{type2}
-								</h3>
-								<Stack mode="row">
-									{filtered.sort(sortFunction).map((pokemon) => (
-										<Entry
-											pokemon={pokemon}
-											teamIsFull={teamIsFull}
-											togglePokemonOnTeam={togglePokemonOnTeam}
-											startReleaseProcess={startReleaseProcess}
-											toggleFavoriteStatus={toggleFavoriteStatus}
-										/>
-									))}
-								</Stack>
-							</>
-						);
-					});
-				})}
-			</Stack>
+			<>
+				<div style={{ margin: '1rem' }}>
+					<Stack mode={'row'} gap={2}>
+						{realTypes.map((t) => (
+							<img
+								key={t}
+								style={{
+									outline: t === selectedType ? '2px solid black' : undefined,
+									borderRadius: 9000,
+								}}
+								height={battleSpriteSize}
+								src={`/typeIcons/${t}.png`}
+								onClick={() => setSelectedType(t)}
+							/>
+						))}
+					</Stack>
+				</div>
+				{filtered.length === 0 ? (
+					<React.Fragment key={selectedType}></React.Fragment>
+				) : (
+					<Stack mode="row">
+						{filtered.sort(sortFunction).map((pokemon) => (
+							<Entry
+								key={pokemon.id}
+								pokemon={pokemon}
+								teamIsFull={teamIsFull}
+								togglePokemonOnTeam={togglePokemonOnTeam}
+								startReleaseProcess={startReleaseProcess}
+								toggleFavoriteStatus={toggleFavoriteStatus}
+							/>
+						))}
+					</Stack>
+				)}
+			</>
 		);
 	}
 	const happinessSteps = [200, 160, 120, 80, 40, 0];
@@ -594,7 +555,7 @@ const Sorted = ({
 					});
 
 					if (filtered.length === 0) {
-						return <></>;
+						return <React.Fragment key={index}></React.Fragment>;
 					}
 
 					return (
@@ -667,8 +628,14 @@ const Entry = ({
 						</strong>
 					</Chip>
 				}
-				secondPlanetUrl={getItemUrl(pokemon.ball)}
+				secondPlanetUrl={`/typeIcons/${byName[pokemon.name].at(0)}.png`}
 				thirdPlanetUrl={
+					byName[pokemon.name].at(1)
+						? `/typeIcons/${byName[pokemon.name].at(1)}.png`
+						: undefined
+				}
+				fourthPlanetUrl={getItemUrl(pokemon.ball)}
+				fifthPlanetUrl={
 					pokemon.heldItemName ? getItemUrl(pokemon.heldItemName) : undefined
 				}
 				onClick={() => {
