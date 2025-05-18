@@ -262,20 +262,7 @@ export const Overworld = ({
 						height={height * baseSize}
 						width={width * baseSize}
 					/>
-					<div
-						id="shader1"
-						style={{
-							width: width * baseSize,
-							height: height * baseSize,
-							top: -location.y * baseSize,
-							left: -location.x * baseSize,
-							transitionProperty: 'top,left',
-							transition: `${fps} ease 0s`,
-							position: 'absolute',
-							backgroundColor: map.timeOfDayShadersMap[getTimeOfDay()],
-							zIndex: -2,
-						}}
-					/>
+
 					<div
 						style={{
 							top: -location.y * baseSize,

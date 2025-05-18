@@ -38,14 +38,14 @@ export function isTimeOfDay(x: string | undefined | null): x is TimeOfDay {
 }
 export const defaultShaderMap: Record<TimeOfDay, string> = {
 	MORNING: 'rgba(156, 98, 0,.2)',
-	DAY: 'rgba(0,0,0,0)',
-	EVENING: 'rgba(156, 98, 0,.2)',
-	NIGHT: 'rgba(23, 44, 79,.4)',
+	DAY: 'rgba(0,20,0,0.2)',
+	EVENING: 'rgba(156, 40, 80,.3)',
+	NIGHT: 'rgba(23, 44, 79,.6)',
 };
 
 export const caveShaderMap: Record<TimeOfDay, string> = {
-	MORNING: 'rgba(23, 44, 79,.4)',
-	DAY: 'rgba(23, 44, 79,.4)',
-	EVENING: 'rgba(23, 44, 79,.4)',
-	NIGHT: 'rgba(23, 44, 79,.4)',
+	MORNING: 'rgba(23, 44, 79,.6)',
+	DAY: 'rgba(23, 44, 79,.6)',
+	EVENING: 'rgba(23, 44, 79,.6)',
+	NIGHT: 'rgba(23, 44, 79,.6)',
 };
