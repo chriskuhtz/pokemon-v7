@@ -19,7 +19,7 @@ export const RocketIcon = () => {
 		addMessage({ message: `All Rockets defeated, Rangerlevel increased` });
 		const now = new Date().getTime();
 		patchSaveFileReducer({
-			currentRocketOperation: undefined,
+			rocketOperation: undefined,
 			rangerLevel: (saveFile.rangerLevel ?? 0) + 1,
 			nextRocketOperationAt: now + Math.floor(ONE_HOUR * Math.random()),
 			handledOccupants: saveFile.handledOccupants.filter(
@@ -28,7 +28,7 @@ export const RocketIcon = () => {
 		});
 	};
 
-	if (!saveFile.currentRocketOperation) {
+	if (!saveFile.rocketOperation) {
 		return <></>;
 	}
 
@@ -42,7 +42,7 @@ export const RocketIcon = () => {
 			/>
 		);
 	}
-	if (location.mapId !== saveFile.currentRocketOperation.route) {
+	if (location.mapId !== saveFile.rocketOperation.route) {
 		return <></>;
 	}
 
@@ -64,7 +64,7 @@ export const RocketIcon = () => {
 // if (allRocketsDefeated) {
 //
 
-// 	update.currentRocketOperation = undefined;
+// 	update.rocketOperation = undefined;
 // 	update.rangerLevel = (update.rangerLevel ?? 0) + 1;
 // 	update.nextRocketOperationAt = now + ONE_HOUR;
 // 	update.handledOccupants = update.handledOccupants.filter(

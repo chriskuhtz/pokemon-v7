@@ -139,6 +139,7 @@ export interface SaveFile {
 	nextSwarmReadyAt?: number;
 	rangerLevel?: number;
 	currentRocketOperation?: { route: MapId; trainers: OverworldTrainer[] };
+	rocketOperation?: { route: MapId; trainers: OverworldTrainer[] };
 	nextRocketOperationAt?: number;
 	starterPokemon?: PokemonName;
 	seedVault: ItemType[];
