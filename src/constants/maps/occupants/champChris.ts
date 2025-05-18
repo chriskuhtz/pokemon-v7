@@ -6,7 +6,7 @@ import {
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
 
-const chrisTeam = [
+const chrisTeam = () => [
 	makeChallengerPokemon({
 		name: 'ursaring',
 		xp: 343000,

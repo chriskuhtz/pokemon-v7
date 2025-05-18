@@ -64,7 +64,7 @@ export const challengeFieldOccupants: OverworldMap['occupants'] = [
 			sprite: t.trainer?.sprite ?? SpriteEnum.aceMale,
 			name: id,
 			unhandledMessage: ['.', '..', '...'],
-			team: t.team,
+			team: () => t.team,
 			challengeFieldRank,
 		};
 		return assembled;

@@ -21,7 +21,7 @@ export const useInteractWithTrainer = () => {
 									activeTab: 'BATTLE',
 									currentChallenger: {
 										battleTeamConfig: trainer.battleTeamConfig,
-										team: trainer.team,
+										team: trainer.team(saveFile),
 										id: trainer.id,
 										inventory: EmptyInventory,
 										type: 'TRAINER',
@@ -38,12 +38,6 @@ export const useInteractWithTrainer = () => {
 				}))
 			);
 		},
-		[addMultipleMessages, patchSaveFileReducer, saveFile.meta]
+		[addMultipleMessages, patchSaveFileReducer, saveFile]
 	);
 };
-// addMessage({
-// 	message: 'Wild Pokemon appeared!',
-// 	onRemoval: () =>
-// 		navigateAwayFromOverworldReducer('BATTLE', stepsTaken, encounter),
-// 	needsNoConfirmation: true,
-// });

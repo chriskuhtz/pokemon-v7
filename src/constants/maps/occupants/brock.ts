@@ -9,7 +9,7 @@ import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
 
-const brockTeam = [
+const brockTeam = () => [
 	makeChallengerPokemon({
 		name: 'onix',
 		xp: 1000000,
