@@ -383,33 +383,84 @@ const Sorted = ({
 	if (pokemonFilter === 'TYPE') {
 		return (
 			<Stack mode={'column'}>
-				{realTypes.map((type) => {
-					const filtered = stored.filter((s) => byName[s.name][0] === type);
+				{realTypes.map((type1) => {
+					return realTypes.map((type2) => {
+						if (type2 === type1) {
+							const filtered = stored.filter(
+								(s) =>
+									byName[s.name].at(0) === type1 && byName[s.name].length === 1
+							);
 
-					if (filtered.length === 0) {
-						return <></>;
-					}
-					return (
-						<>
-							<h3
-								style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
-							>
-								<img height={battleSpriteSize} src={`/typeIcons/${type}.png`} />{' '}
-								{type}
-							</h3>
-							<Stack mode="row">
-								{filtered.sort(sortFunction).map((pokemon) => (
-									<Entry
-										pokemon={pokemon}
-										teamIsFull={teamIsFull}
-										togglePokemonOnTeam={togglePokemonOnTeam}
-										startReleaseProcess={startReleaseProcess}
-										toggleFavoriteStatus={toggleFavoriteStatus}
+							if (filtered.length === 0) {
+								return <></>;
+							}
+							return (
+								<>
+									<h3
+										style={{
+											display: 'flex',
+											alignItems: 'center',
+											gap: '1rem',
+										}}
+									>
+										<img
+											height={battleSpriteSize}
+											src={`/typeIcons/${type1}.png`}
+										/>
+
+										{type1}
+									</h3>
+									<Stack mode="row">
+										{filtered.sort(sortFunction).map((pokemon) => (
+											<Entry
+												pokemon={pokemon}
+												teamIsFull={teamIsFull}
+												togglePokemonOnTeam={togglePokemonOnTeam}
+												startReleaseProcess={startReleaseProcess}
+												toggleFavoriteStatus={toggleFavoriteStatus}
+											/>
+										))}
+									</Stack>
+								</>
+							);
+						}
+						const filtered = stored.filter(
+							(s) =>
+								byName[s.name].at(0) === type1 && byName[s.name].at(1) === type2
+						);
+
+						if (filtered.length === 0) {
+							return <></>;
+						}
+						return (
+							<>
+								<h3
+									style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
+								>
+									<img
+										height={battleSpriteSize}
+										src={`/typeIcons/${type1}.png`}
 									/>
-								))}
-							</Stack>
-						</>
-					);
+									<img
+										height={battleSpriteSize}
+										src={`/typeIcons/${type2}.png`}
+									/>{' '}
+									{type1}/{type2}
+								</h3>
+								<Stack mode="row">
+									{filtered.sort(sortFunction).map((pokemon) => (
+										<Entry
+											pokemon={pokemon}
+											teamIsFull={teamIsFull}
+											togglePokemonOnTeam={togglePokemonOnTeam}
+											startReleaseProcess={startReleaseProcess}
+											toggleFavoriteStatus={toggleFavoriteStatus}
+										/>
+									))}
+								</Stack>
+							</>
+						);
+					});
 				})}
 			</Stack>
 		);

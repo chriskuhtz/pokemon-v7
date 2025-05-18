@@ -25,8 +25,8 @@ export const StatDisplay = ({
 }) => {
 	return (
 		<Stack mode="column">
-			<BstSection data={data} ownedPokemon={ownedPokemon} />
 			<NatureSection nature={ownedPokemon.nature} />
+			<BstSection data={data} ownedPokemon={ownedPokemon} />
 			<EVsSection
 				type={data.types[0].type.name}
 				effortValues={ownedPokemon.effortValues}
@@ -283,7 +283,7 @@ export const NatureSection = ({ nature }: { nature: Nature }) => {
 							alignItems: 'center',
 						}}
 					>
-						<span>{nature}: </span>
+						<span>{nature} Nature: </span>
 						<span>{!mods.buff && <p>Neutral Nature</p>}</span>
 						<span>{mods.buff && <p>+ 10% {mods.buff}</p>} </span>
 						<span>{mods.debuff && <p>- 10% {mods.debuff}</p>}</span>
