@@ -9,7 +9,7 @@ import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
 
-const blaineTeam = [
+const blaineTeam = () => [
 	makeChallengerPokemon({
 		name: 'scovillain',
 		xp: 15625,

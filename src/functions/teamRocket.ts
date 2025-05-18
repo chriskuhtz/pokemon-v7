@@ -178,18 +178,19 @@ export const createRocketOutbreak = (
 			(r) => r.minXp >= minXp && r.maxXp <= maxXp
 		);
 
-		return Array.from({ length: numberOfMembers }).map(() => {
-			const mon = getRandomEntry(availableMons);
+		return () =>
+			Array.from({ length: numberOfMembers }).map(() => {
+				const mon = getRandomEntry(availableMons);
 
-			return makeChallengerPokemon({
-				name: mon.name,
-				xp: getMiddleOfThree([
-					mon.minXp,
-					mon.maxXp,
-					Math.floor(mon.maxXp * Math.random()),
-				]),
+				return makeChallengerPokemon({
+					name: mon.name,
+					xp: getMiddleOfThree([
+						mon.minXp,
+						mon.maxXp,
+						Math.floor(mon.maxXp * Math.random()),
+					]),
+				});
 			});
-		});
 	};
 
 	const OverworldMap = mapsRecord[mapId];

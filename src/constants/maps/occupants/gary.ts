@@ -10,7 +10,7 @@ import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
 import { nameToIdMap } from '../../pokemonNames';
 
-const garyTeam = [
+const garyTeam = () => [
 	makeChallengerPokemon({
 		name: 'exeggutor',
 		xp: 216000,

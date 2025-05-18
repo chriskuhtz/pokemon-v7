@@ -69,7 +69,7 @@ export const rocketCampOccupants: Occupant[] = [
 		x: 11,
 		y: 9,
 		orientation: 'UP',
-		team: [makeChallengerPokemon({ name: 'hypno', xp: 8000 })],
+		team: () => [makeChallengerPokemon({ name: 'hypno', xp: 8000 })],
 		sprite: SpriteEnum.rocketFemale,
 		name: 'Rocket Goon Stevie',
 		unhandledMessage: ['Who the hell are you?'],
@@ -88,7 +88,7 @@ export const rocketCampOccupants: Occupant[] = [
 		x: 2,
 		y: 6,
 		orientation: 'RIGHT',
-		team: [
+		team: () => [
 			makeChallengerPokemon({ name: 'grimer', xp: 7000 }),
 			makeChallengerPokemon({ name: 'fearow', xp: 9000 }),
 		],
@@ -110,7 +110,7 @@ export const rocketCampOccupants: Occupant[] = [
 		x: 14,
 		y: 2,
 		orientation: 'DOWN',
-		team: [
+		team: () => [
 			makeChallengerPokemon({ name: 'magneton', xp: 12000 }),
 			makeChallengerPokemon({ name: 'rattata', xp: 9000 }),
 		],
@@ -132,7 +132,7 @@ export const rocketCampOccupants: Occupant[] = [
 		x: 2,
 		y: 17,
 		orientation: 'RIGHT',
-		team: [
+		team: () => [
 			makeChallengerPokemon({ name: 'houndoom', xp: 11000 }),
 			makeChallengerPokemon({ name: 'spinarak', xp: 9000 }),
 			makeChallengerPokemon({ name: 'aipom', xp: 10000 }),
@@ -155,7 +155,7 @@ export const rocketCampOccupants: Occupant[] = [
 		x: 16,
 		y: 11,
 		orientation: 'LEFT',
-		team: [
+		team: () => [
 			makeChallengerPokemon({ name: 'machoke', xp: 10000 }),
 			makeChallengerPokemon({ name: 'arbok', xp: 9000 }),
 		],
@@ -177,7 +177,7 @@ export const rocketCampOccupants: Occupant[] = [
 		x: 18,
 		y: 5,
 		orientation: 'DOWN',
-		team: [
+		team: () => [
 			makeChallengerPokemon({ name: 'primeape', xp: 10000 }),
 			makeChallengerPokemon({ name: 'kadabra', xp: 12000 }),
 		],
