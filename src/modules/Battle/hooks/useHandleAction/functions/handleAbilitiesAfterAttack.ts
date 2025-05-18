@@ -1,4 +1,5 @@
 import { isContactMove } from '../../../../../constants/contactMoves';
+import { windMoves } from '../../../../../constants/punchBasedMoves';
 import { applyPrimaryAilmentToPokemon } from '../../../../../functions/applyPrimaryAilmentToPokemon';
 import { applySecondaryAilmentToPokemon } from '../../../../../functions/applySecondaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from '../../../../../functions/applyStatChangeToPokemon';
@@ -550,7 +551,7 @@ export const handleAbilitiesAfterAttack = (
 			'weak armor'
 		);
 	}
-	//justified
+	//thermal exchange
 	if (
 		!isKO(updatedTarget) &&
 		updatedTarget.ability === 'thermal-exchange' &&
@@ -564,6 +565,22 @@ export const handleAbilitiesAfterAttack = (
 			battleFieldEffects,
 			addMessage,
 			'thermal-exchange'
+		);
+	}
+	//wind rider
+	if (
+		!isKO(updatedTarget) &&
+		updatedTarget.ability === 'wind-rider' &&
+		windMoves.includes(move.name)
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'attack',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'wind-rider'
 		);
 	}
 	//justified

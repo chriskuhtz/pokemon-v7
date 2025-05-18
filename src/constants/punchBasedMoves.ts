@@ -100,3 +100,23 @@ export const danceMoves = [
 	'teeter-dance',
 	'victory-dance',
 ];
+
+export const windMoves = [
+	'aeroblast',
+	'air-cutter',
+	'bleakwind-storm',
+	'blizzard',
+	'fairy-wind',
+	'gust',
+	'heat-wave',
+	'hurricane',
+	'icy-wind',
+	'petal-blizzard',
+	'sandsear-storm',
+	'sandstorm',
+	'springtide-storm',
+	'tailwind',
+	'twister',
+	'whirlwind',
+	'wildbolt-storm',
+];

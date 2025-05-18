@@ -1536,6 +1536,7 @@ export const abilityNames = [
 	'anger-shell',
 	'purifying-salt',
 	'well-baked-body',
+	'wind-rider',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
