@@ -1,16 +1,15 @@
 import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
 import { PokemonName } from '../../../constants/pokemonNames';
+import { useLocationColors } from '../../../hooks/useLocationColors';
 import { Banner } from '../../../uiComponents/Banner/Banner';
 
 export const IntroBanner = ({
 	names,
-	playerColor,
-	oppColor,
 }: {
 	names: PokemonName[];
-	oppColor: string;
-	playerColor: string;
 }): JSX.Element => {
+	const { playerColor, oppColor } = useLocationColors();
+
 	return (
 		<div style={{ backgroundColor: 'white' }}>
 			<div

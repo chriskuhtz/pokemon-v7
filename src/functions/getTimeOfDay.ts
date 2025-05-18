@@ -44,8 +44,8 @@ export const defaultShaderMap: Record<TimeOfDay, string> = {
 };
 
 export const caveShaderMap: Record<TimeOfDay, string> = {
-	MORNING: 'rgba(23, 44, 79,.6)',
-	DAY: 'rgba(23, 44, 79,.6)',
-	EVENING: 'rgba(23, 44, 79,.6)',
-	NIGHT: 'rgba(23, 44, 79,.6)',
+	MORNING: 'rgba(23, 44, 79,.4)',
+	DAY: 'rgba(23, 44, 79,.4)',
+	EVENING: 'rgba(23, 44, 79,.4)',
+	NIGHT: 'rgba(23, 44, 79,.4)',
 };
