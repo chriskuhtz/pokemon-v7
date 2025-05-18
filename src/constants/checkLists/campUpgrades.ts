@@ -153,7 +153,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'invite dugtrio explorers': ['build combee hive'],
 	'invite amoongus compost researcher': baseRequirements,
 	'invite vileplume scent researcher': baseRequirements,
-	'invite fossil expert': ['invite dugtrio explorers'],
+	'invite fossil expert': ['sledge hammer certification'],
 	'sledge hammer certification': ['machete certification'],
 	'ranger certification': ['machete certification', 'training field 1'],
 	'shovel certification': ['sledge hammer certification'],
