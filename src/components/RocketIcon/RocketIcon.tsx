@@ -56,18 +56,3 @@ export const RocketIcon = () => {
 		/>
 	);
 };
-
-// //check if all rockets defeated
-
-// const allRocketsDefeated = areAllActiveRocketsDefeated(update);
-
-// if (allRocketsDefeated) {
-//
-
-// 	update.rocketOperation = undefined;
-// 	update.rangerLevel = (update.rangerLevel ?? 0) + 1;
-// 	update.nextRocketOperationAt = now + ONE_HOUR;
-// 	update.handledOccupants = update.handledOccupants.filter(
-// 		(h) => !h.id.includes('Rocket Grunt')
-// 	);
-// }
