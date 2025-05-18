@@ -38,23 +38,25 @@ export const IdeaButton = () => {
 	};
 
 	return (
-		<Card
-			icon={<IoBulbOutline size={battleSpriteSize} />}
-			content={
-				<div>
-					<h3>What is your Feedback/Idea:</h3>
-					<textarea
-						style={{ width: '90%' }}
-						cols={70}
-						rows={10}
-						value={bugReport}
-						onChange={(e) => setBugReport(e.target.value)}
-					/>
-				</div>
-			}
-			actionElements={[
-				<button onClick={() => void reportIdea(bugReport)}>Submit</button>,
-			]}
-		/>
+		<div style={{ marginBottom: '10rem' }}>
+			<Card
+				icon={<IoBulbOutline size={battleSpriteSize} />}
+				content={
+					<div>
+						<h3>What is your Feedback/Idea:</h3>
+						<textarea
+							style={{ width: '90%' }}
+							cols={70}
+							rows={10}
+							value={bugReport}
+							onChange={(e) => setBugReport(e.target.value)}
+						/>
+					</div>
+				}
+				actionElements={[
+					<button onClick={() => void reportIdea(bugReport)}>Submit</button>,
+				]}
+			/>
+		</div>
 	);
 };
