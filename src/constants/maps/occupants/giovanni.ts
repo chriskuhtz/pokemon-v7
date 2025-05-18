@@ -3,7 +3,7 @@ import { OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
 
-const giovanniTeam = [
+const giovanniTeam = () => [
 	makeChallengerPokemon({
 		name: 'nidoking',
 		xp: 216000,
