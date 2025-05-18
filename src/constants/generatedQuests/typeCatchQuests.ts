@@ -68,7 +68,7 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 				},
 				catchBoosts: { [type]: 1 },
 				researchPoints: 50,
-				availableAfter: `catch 10 ${type} pokemon` as QuestName,
+				availableAfter: `catch 10 different ${type} pokemon` as QuestName,
 				conditionFunction: (s) =>
 					Object.entries(s.pokedex).filter(
 						([name, info]) =>
@@ -88,7 +88,7 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 				},
 				catchBoosts: { [type]: 1 },
 				researchPoints: 100,
-				availableAfter: `catch 25 ${type} pokemon` as QuestName,
+				availableAfter: `catch 25 different ${type} pokemon` as QuestName,
 				conditionFunction: (s) =>
 					Object.entries(s.pokedex).filter(
 						([name, info]) =>
