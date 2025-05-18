@@ -38,8 +38,8 @@ export function isTimeOfDay(x: string | undefined | null): x is TimeOfDay {
 }
 export const defaultShaderMap: Record<TimeOfDay, string> = {
 	MORNING: 'rgba(156, 98, 0,.2)',
-	DAY: 'rgba(0,20,0,0.2)',
-	EVENING: 'rgba(156, 40, 80,.3)',
+	DAY: 'rgba(0,10,0,0.2)',
+	EVENING: 'rgba(80, 40, 150,.3)',
 	NIGHT: 'rgba(23, 44, 79,.6)',
 };
 
