@@ -421,6 +421,8 @@ export const extraFeatureCheckList: {
 	{ name: 'catch x pokemon of type', handled: true },
 	{ name: 'filter by type', handled: true },
 	{ name: 'catch boosts as rewards', handled: true },
+	{ name: 'figure out shaders', handled: true },
+	{ name: 'team size as upgrades' },
 	{ name: 'fix pathing' },
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
@@ -441,5 +443,4 @@ export const extraFeatureCheckList: {
 	{ name: 'magma/aqua quests from looker' },
 	{ name: 'progress bar for catch x quests' },
 	{ name: 'Terrain Items (shovel, pickaxe) as Gym leader rewards ' },
-	{ name: 'figure out shaders' },
 ];
