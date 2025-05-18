@@ -160,7 +160,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'swimming certification': ['shovel certification'],
 	'buy skiing equipment': ['swimming certification'],
 	'invite museum curator': ['invite dugtrio explorers'],
-	'invite historian': ['invite dugtrio explorers'],
+	'invite historian': ['buy skiing equipment'],
 	'bag size upgrade 1': baseRequirements,
 	'bag size upgrade 2': [...baseRequirements, 'bag size upgrade 1'],
 	'bag size upgrade 3': [...baseRequirements, 'bag size upgrade 2'],
