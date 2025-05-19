@@ -2,6 +2,7 @@ import { getTimeOfDay } from '../../../functions/getTimeOfDay';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { routeN1E1Lure } from '../../../modules/BerryLure/BerryLure';
 import { travellingMerchantRouteN1E1 } from '../../../modules/TravellingMerchant/TravellingMerchant';
+import { barryN1E1 } from './barry';
 import { janine } from './janine';
 
 export const routeN1E1Occupants: OverworldMap['occupants'] = [
@@ -171,4 +172,5 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 	...janine,
 	routeN1E1Lure,
 	...travellingMerchantRouteN1E1,
+	barryN1E1,
 ];
