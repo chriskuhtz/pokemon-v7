@@ -72,6 +72,7 @@ export const useOverworldMovement = (
 		}
 		if (Math.random() > encounterChance * encounterRateModifier.factor) {
 			setEncounterChance(encounterChance + encounterRateStep);
+			return;
 		}
 
 		const waterEncounter =
