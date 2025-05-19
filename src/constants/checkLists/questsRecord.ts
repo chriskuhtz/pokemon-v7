@@ -375,6 +375,12 @@ export const questNames = [
 	'catch 100 strong pokemon',
 	'catch all strong pokemon',
 	'catch all costumed pikachus',
+	'defeat research assistant barry',
+	'defeat barry at lvl 20 or higher',
+	'defeat barry at lvl 40 or higher',
+	'defeat barry at lvl 60 or higher',
+	'defeat barry at lvl 80 or higher',
+	'defeat barry at lvl 100',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -548,7 +554,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 	},
 	'catch a sudowoodo': {
-		rewardItems: { 'ultra-ball': 10, 'pewter-crunchies': 2 },
+		rewardItems: { 'ultra-ball': 5, 'pewter-crunchies': 2 },
 		researchPoints: 25,
 		targetPokemon: ['sudowoodo'],
 		conditionFunction: (s) => {
@@ -681,7 +687,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch a pokemon orginally found in galar': {
-		rewardItems: { 'ultra-ball': 10 },
+		rewardItems: { 'ultra-ball': 5 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
 			return s.pokemon.some((p) =>
@@ -713,7 +719,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch a pokemon and its alolan variant': {
-		rewardItems: { 'ultra-ball': 10 },
+		rewardItems: { 'ultra-ball': 5 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
 			return s.pokemon.some((search) =>
@@ -871,7 +877,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'evolve a pokemon through friendship',
 	},
 	'evolve a pokemon that only evolves during the day': {
-		rewardItems: { 'ultra-ball': 20 },
+		rewardItems: { 'ultra-ball': 10 },
 		researchPoints: 25,
 		conditionFunction: (s) => {
 			return !!s.mileStones.hasEvolvedAPokemonThatNeedsDaytime;
@@ -880,7 +886,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'evolve gloom into vileplume and bellosom',
 	},
 	'evolve a pokemon that only evolves at night': {
-		rewardItems: { 'ultra-ball': 20 },
+		rewardItems: { 'ultra-ball': 10 },
 		researchPoints: 25,
 		conditionFunction: (s) => {
 			return !!s.mileStones.hasEvolvedAPokemonThatNeedsNighttime;
@@ -1303,7 +1309,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat morty': {
 		rewardItems: {
-			'ultra-ball': 10,
+			'ultra-ball': 5,
 			'full-restore': 5,
 			'spell-tag': 1,
 			...expCandyPackage,
@@ -1342,7 +1348,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat bugsy': {
 		rewardItems: {
-			'ultra-ball': 10,
+			'ultra-ball': 5,
 			'full-restore': 5,
 			'silver-powder': 1,
 			...expCandyPackage,
@@ -1458,7 +1464,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat falkner': {
 		rewardItems: {
-			'ultra-ball': 10,
+			'ultra-ball': 5,
 			'full-restore': 5,
 			'sharp-beak': 1,
 			...expCandyPackage,
@@ -1497,7 +1503,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat rowan': {
 		rewardItems: {
-			'ultra-ball': 10,
+			'ultra-ball': 5,
 			'full-restore': 5,
 			...expCandyPackage,
 		},
@@ -1535,7 +1541,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'defeat elm': {
 		rewardItems: {
-			'ultra-ball': 10,
+			'ultra-ball': 5,
 			'full-restore': 5,
 			...expCandyPackage,
 		},
@@ -1678,7 +1684,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		rewardItems: {
 			'rare-candy': 5,
-			'ultra-ball': 20,
+			'ultra-ball': 5,
 		},
 		researchPoints: 100,
 		conditionFunction: (s) => {
@@ -1752,7 +1758,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		researchPoints: 10,
 		rewardItems: {
-			'poke-ball': 20,
+			'poke-ball': 10,
 		},
 		conditionFunction: (s) =>
 			Object.values(s.pokedex).filter((p) => p.caughtOnRoutes.length > 0)
@@ -1762,7 +1768,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		researchPoints: 20,
 		rewardItems: {
-			'great-ball': 20,
+			'great-ball': 10,
 		},
 		availableAfter: 'catch 10 different species',
 		conditionFunction: (s) =>
@@ -1773,7 +1779,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		researchPoints: 50,
 		rewardItems: {
-			'ultra-ball': 20,
+			'ultra-ball': 10,
 		},
 		availableAfter: 'catch 20 different species',
 		conditionFunction: (s) =>
@@ -1877,7 +1883,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'create seed vault',
 		availableAfter: 'donate 20 plants to the seed vault',
 		researchPoints: 50,
-		rewardItems: { 'moomoo-milk': 10, 'ultra-ball': 20 },
+		rewardItems: { 'moomoo-milk': 10, 'ultra-ball': 5 },
 		conditionFunction: (s) => !!(s.seedVault && s.seedVault.length >= 50),
 	},
 	'donate all different plants to the seed vault': {
@@ -2114,7 +2120,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'catch 3 different pokemon from swarms',
 		researchPoints: 100,
 		rewardItems: {
-			'quick-ball': 20,
+			'quick-ball': 10,
 		},
 		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length >= 10,
 	},
@@ -2124,7 +2130,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'catch 10 different pokemon from swarms',
 		researchPoints: 100,
 		rewardItems: {
-			'ultra-ball': 20,
+			'ultra-ball': 5,
 		},
 		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length >= 20,
 	},
@@ -2623,7 +2629,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch a weak pokemon': {
 		kind: 'BULLETIN',
-		rewardItems: { 'poke-ball': 5 },
+		rewardItems: { 'poke-ball': 2 },
 		researchPoints: 5,
 		conditionFunction: (s) =>
 			Object.keys(lowBstPokemon).filter(
@@ -2632,7 +2638,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch 10 weak pokemon': {
 		kind: 'BULLETIN',
-		rewardItems: { 'poke-ball': 10 },
+		rewardItems: { 'poke-ball': 5 },
 		researchPoints: 10,
 		availableAfter: 'catch a weak pokemon',
 		conditionFunction: (s) =>
@@ -2642,7 +2648,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch 20 weak pokemon': {
 		kind: 'BULLETIN',
-		rewardItems: { 'poke-ball': 20 },
+		rewardItems: { 'poke-ball': 10 },
 		researchPoints: 20,
 		availableAfter: 'catch 10 weak pokemon',
 		conditionFunction: (s) =>
@@ -2652,7 +2658,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch 50 weak pokemon': {
 		kind: 'BULLETIN',
-		rewardItems: { 'poke-ball': 20 },
+		rewardItems: { 'poke-ball': 10 },
 		researchPoints: 50,
 		availableAfter: 'catch 20 weak pokemon',
 		conditionFunction: (s) =>
@@ -2662,7 +2668,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch 100 weak pokemon': {
 		kind: 'BULLETIN',
-		rewardItems: { 'poke-ball': 20 },
+		rewardItems: { 'poke-ball': 10 },
 		researchPoints: 100,
 		availableAfter: 'catch 50 weak pokemon',
 		conditionFunction: (s) =>
@@ -2682,7 +2688,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch a medium strong pokemon': {
 		kind: 'BULLETIN',
-		rewardItems: { 'great-ball': 5, 'coba-berry': 10 },
+		rewardItems: { 'great-ball': 3, 'coba-berry': 10 },
 		researchPoints: 10,
 		availableAfter: 'catch a weak pokemon',
 		conditionFunction: (s) =>
@@ -2692,7 +2698,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch 10 medium strong pokemon': {
 		kind: 'BULLETIN',
-		rewardItems: { 'great-ball': 10, 'coba-berry': 10 },
+		rewardItems: { 'great-ball': 5, 'coba-berry': 10 },
 		researchPoints: 20,
 		availableAfter: 'catch a medium strong pokemon',
 		conditionFunction: (s) =>
@@ -2702,7 +2708,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch 20 medium strong pokemon': {
 		kind: 'BULLETIN',
-		rewardItems: { 'great-ball': 20, 'coba-berry': 10 },
+		rewardItems: { 'great-ball': 10, 'coba-berry': 10 },
 		researchPoints: 40,
 		availableAfter: 'catch 10 medium strong pokemon',
 		conditionFunction: (s) =>
@@ -2712,7 +2718,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch 50 medium strong pokemon': {
 		kind: 'BULLETIN',
-		rewardItems: { 'great-ball': 20 },
+		rewardItems: { 'great-ball': 10 },
 		researchPoints: 100,
 		availableAfter: 'catch 20 medium strong pokemon',
 		conditionFunction: (s) =>
@@ -2722,7 +2728,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch 100 medium strong pokemon': {
 		kind: 'BULLETIN',
-		rewardItems: { 'great-ball': 20 },
+		rewardItems: { 'great-ball': 10 },
 		researchPoints: 100,
 		availableAfter: 'catch 50 medium strong pokemon',
 		conditionFunction: (s) =>
@@ -2742,7 +2748,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch a strong pokemon': {
 		kind: 'BULLETIN',
-		rewardItems: { 'ultra-ball': 5, 'aguav-berry': 10 },
+		rewardItems: { 'ultra-ball': 3, 'aguav-berry': 10 },
 		researchPoints: 10,
 		availableAfter: 'catch a medium strong pokemon',
 		conditionFunction: (s) =>
@@ -2752,7 +2758,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch 10 strong pokemon': {
 		kind: 'BULLETIN',
-		rewardItems: { 'ultra-ball': 10, 'aguav-berry': 20 },
+		rewardItems: { 'ultra-ball': 5, 'aguav-berry': 20 },
 		researchPoints: 30,
 		availableAfter: 'catch a strong pokemon',
 		conditionFunction: (s) =>
@@ -2762,7 +2768,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch 20 strong pokemon': {
 		kind: 'BULLETIN',
-		rewardItems: { 'ultra-ball': 20, 'aguav-berry': 20 },
+		rewardItems: { 'ultra-ball': 10, 'aguav-berry': 20 },
 		researchPoints: 60,
 		availableAfter: 'catch 10 strong pokemon',
 		conditionFunction: (s) =>
@@ -2772,7 +2778,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch 50 strong pokemon': {
 		kind: 'BULLETIN',
-		rewardItems: { 'ultra-ball': 20, 'aguav-berry': 20 },
+		rewardItems: { 'ultra-ball': 10, 'aguav-berry': 20 },
 		researchPoints: 100,
 		availableAfter: 'catch 20 strong pokemon',
 		conditionFunction: (s) =>
@@ -2782,7 +2788,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 	'catch 100 strong pokemon': {
 		kind: 'BULLETIN',
-		rewardItems: { 'ultra-ball': 20 },
+		rewardItems: { 'ultra-ball': 10 },
 		researchPoints: 100,
 		availableAfter: 'catch 50 strong pokemon',
 		conditionFunction: (s) =>
@@ -2799,6 +2805,71 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			Object.keys(highBstPokemon).every(
 				(pok) => s.pokedex[pok as PokemonName].caughtOnRoutes.length > 0
 			),
+	},
+	'defeat research assistant barry': {
+		kind: 'BULLETIN',
+		conditionFunction: (s) => !!s.mileStones.barryDefeatedAt,
+		researchPoints: 10,
+		rewardItems: { 'exp-candy-xs': 10 },
+	},
+	'defeat barry at lvl 20 or higher': {
+		kind: 'BULLETIN',
+		conditionFunction: (s) => (s.mileStones.barryDefeatedAt ?? 0) >= 8000,
+		researchPoints: 20,
+		availableAfter: 'defeat research assistant barry',
+		rewardItems: { 'exp-candy-s': 10 },
+	},
+	'defeat barry at lvl 40 or higher': {
+		kind: 'BULLETIN',
+		conditionFunction: (s) => (s.mileStones.barryDefeatedAt ?? 0) >= 64000,
+		researchPoints: 40,
+		availableAfter: 'defeat barry at lvl 20 or higher',
+		rewardItems: { 'exp-candy-m': 10 },
+	},
+	'defeat barry at lvl 60 or higher': {
+		kind: 'BULLETIN',
+		conditionFunction: (s) => (s.mileStones.barryDefeatedAt ?? 0) >= 216000,
+		researchPoints: 60,
+		availableAfter: 'defeat barry at lvl 40 or higher',
+		rewardItems: { 'exp-candy-l': 10 },
+	},
+	'defeat barry at lvl 80 or higher': {
+		kind: 'BULLETIN',
+		conditionFunction: (s) => (s.mileStones.barryDefeatedAt ?? 0) >= 512000,
+		researchPoints: 80,
+		availableAfter: 'defeat barry at lvl 60 or higher',
+		rewardItems: { 'exp-candy-xl': 10 },
+	},
+	'defeat barry at lvl 100': {
+		kind: 'BULLETIN',
+		conditionFunction: (s) => (s.mileStones.barryDefeatedAt ?? 0) >= 1000000,
+		researchPoints: 80,
+		availableAfter: 'defeat barry at lvl 80 or higher',
+		rewardItems: { 'exp-candy-xl': 10 },
+		rewardPokemon: {
+			caughtAtDate: new Date().getTime(),
+			growthRate: 'medium',
+			unlockedMoves: ['tail-glow'],
+			fixedAbility: true,
+			shiny: true,
+			maxHp: 30,
+			effortValues: EmptyStatObject,
+			ppBoostedMoves: [],
+			caughtOnMap: 'camp',
+			gender: 'MALE',
+			stepsWalked: 0,
+			ownerId: '',
+			damage: 0,
+			id: '',
+			ball: 'poke-ball',
+			ability: 'drizzle',
+			name: 'phione',
+			xp: 125,
+			nature: 'adamant',
+			intrinsicValues: generateRandomStatObject(31),
+			happiness: 70,
+			firstMove: { name: 'tail-glow', usedPP: 0 },
+		},
 	},
 } as Record<QuestName, Quest>;
 

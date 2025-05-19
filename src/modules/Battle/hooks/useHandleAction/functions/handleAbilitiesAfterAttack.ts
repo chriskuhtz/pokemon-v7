@@ -1,4 +1,5 @@
 import { isContactMove } from '../../../../../constants/contactMoves';
+import { windMoves } from '../../../../../constants/punchBasedMoves';
 import { applyPrimaryAilmentToPokemon } from '../../../../../functions/applyPrimaryAilmentToPokemon';
 import { applySecondaryAilmentToPokemon } from '../../../../../functions/applySecondaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from '../../../../../functions/applyStatChangeToPokemon';
@@ -45,7 +46,7 @@ export const handleAbilitiesAfterAttack = (
 } => {
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
-
+	//innards out
 	if (target.ability === 'innards-out' && isKO(target)) {
 		addMessage({
 			message: `${updatedAttacker.name} is damaged by innards-out`,
@@ -54,6 +55,19 @@ export const handleAbilitiesAfterAttack = (
 			...updatedAttacker,
 			damage: updatedAttacker.damage + originalTargetHp,
 		};
+	}
+	//wind power
+	if (
+		!isKO(target) &&
+		target.ability === 'wind-power' &&
+		windMoves.includes(move.name)
+	) {
+		updatedTarget = applySecondaryAilmentToPokemon({
+			pokemon: updatedTarget,
+			addMessage,
+			ailment: 'charge',
+			applicator: updatedAttacker,
+		});
 	}
 	//volt-absorb, water-absorb, dry-skin
 	const absorbAbility = DamageAbsorbAbilityMap[target.ability];
@@ -550,7 +564,7 @@ export const handleAbilitiesAfterAttack = (
 			'weak armor'
 		);
 	}
-	//justified
+	//thermal exchange
 	if (
 		!isKO(updatedTarget) &&
 		updatedTarget.ability === 'thermal-exchange' &&
@@ -564,6 +578,22 @@ export const handleAbilitiesAfterAttack = (
 			battleFieldEffects,
 			addMessage,
 			'thermal-exchange'
+		);
+	}
+	//wind rider
+	if (
+		!isKO(updatedTarget) &&
+		updatedTarget.ability === 'wind-rider' &&
+		windMoves.includes(move.name)
+	) {
+		updatedTarget = applyStatChangeToPokemon(
+			updatedTarget,
+			'attack',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'wind-rider'
 		);
 	}
 	//justified

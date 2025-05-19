@@ -19,7 +19,7 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 			{
 				kind: 'BULLETIN',
 				rewardItems: {
-					'poke-ball': 2,
+					'poke-ball': 1,
 					'chesto-berry': 2,
 					'pecha-berry': 2,
 					[saveBerry]: 2,
@@ -39,7 +39,7 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 			{
 				kind: 'BULLETIN',
 				rewardItems: {
-					'great-ball': 10,
+					'great-ball': 5,
 					'kebia-berry': 4,
 					'coba-berry': 4,
 					[saveBerry]: 4,
@@ -60,8 +60,8 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 			{
 				kind: 'BULLETIN',
 				rewardItems: {
-					'net-ball': 10,
-					'quick-ball': 10,
+					'net-ball': 5,
+					'quick-ball': 5,
 					'rindo-berry': 6,
 					'aguav-berry': 6,
 					[saveBerry]: 6,
@@ -82,7 +82,7 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 			{
 				kind: 'BULLETIN',
 				rewardItems: {
-					'ultra-ball': 50,
+					'ultra-ball': 25,
 					[boostItem]: 1,
 					[saveBerry]: 10,
 				},

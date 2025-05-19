@@ -23,7 +23,7 @@ export const useFossils = () => {
 			}
 			const pokemon = fossil[0] as PokemonName;
 			addMessage({
-				message: `Revived a ${pokemon} for 5 research points`,
+				message: `Revived a ${pokemon}s`,
 			});
 			putSaveFileReducer({
 				...saveFile,
@@ -32,7 +32,7 @@ export const useFossils = () => {
 					Object.fromEntries(fossils.map((f) => [f, 1])),
 					true
 				),
-				researchPoints: saveFile.researchPoints - 5,
+				researchPoints: saveFile.researchPoints,
 				pokemon: [
 					...saveFile.pokemon,
 					makeChallengerPokemon({

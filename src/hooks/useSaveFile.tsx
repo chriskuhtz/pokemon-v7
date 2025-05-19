@@ -30,6 +30,7 @@ import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalkin
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getRewardItemsForQuest } from '../functions/getRewardForQuest';
+import { getTeamSize } from '../functions/getTeamSize';
 import { TimeOfDay } from '../functions/getTimeOfDay';
 import {
 	EmptyCatchBoosts,
@@ -98,10 +99,12 @@ export interface UseSaveFile {
 const migrateSavefile = (input: SaveFile) => {
 	const updatedInput = { ...input };
 
+	delete updatedInput.currentRocketOperation;
 	//migrate new quests
 	updatedInput.quests = Object.fromEntries(
 		questNames.map((q) => [q, updatedInput.quests[q] ?? 'INACTIVE'])
 	) as Record<QuestName, QuestStatus>;
+	//delete old property
 
 	return updatedInput;
 };
@@ -181,7 +184,11 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		setSaveFile({ ...saveFile, bag: updatedInventory });
 	};
 	const receiveNewPokemonReducer = (newMon: Omit<OwnedPokemon, 'onTeam'>) => {
-		const updatedPokemon = receiveNewPokemonFunction(newMon, saveFile.pokemon);
+		const updatedPokemon = receiveNewPokemonFunction(
+			newMon,
+			saveFile.pokemon,
+			getTeamSize(saveFile)
+		);
 
 		setSaveFile({ ...saveFile, pokemon: updatedPokemon });
 	};

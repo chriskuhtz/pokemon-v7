@@ -1,6 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
-import { typeColors } from '../../../constants/typeColors';
-import { hexToRgb } from '../../../functions/hexToRGB';
+import { useCallback, useState } from 'react';
 import { isKO } from '../../../functions/isKo';
 import { LeaveBattlePayload } from '../../../hooks/useLeaveBattle';
 import { Message } from '../../../hooks/useMessageQueue';
@@ -57,22 +55,9 @@ export const BattleOverview = ({
 		[selectedTeam]
 	);
 
-	const oppColor = useMemo(() => {
-		const type = opponents.at(0)?.data.types.at(0)?.type.name ?? 'grass';
-
-		return hexToRgb(typeColors[type], 0.5);
-	}, [opponents]);
-	const playerColor: string = useMemo(() => {
-		const type = team.at(0)?.data.types.at(0)?.type.name ?? 'bug';
-
-		return hexToRgb(typeColors[type], 0.5);
-	}, [team]);
-
 	if (inTransition) {
 		return (
 			<IntroBanner
-				oppColor={oppColor}
-				playerColor={playerColor}
 				names={team
 					.filter((t) => selectedTeam.includes(t.id))
 					.map((t) => t.name)}
@@ -83,8 +68,6 @@ export const BattleOverview = ({
 	if (!battleStarted) {
 		return (
 			<LineUpSelection
-				oppColor={oppColor}
-				playerColor={playerColor}
 				trainer={trainer}
 				leave={() =>
 					leave({

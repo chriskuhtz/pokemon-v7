@@ -82,7 +82,7 @@ export const TrainerCard = () => {
 										height={battleSpriteSize / 1.5}
 										src={`/typeIcons/${type}.png`}
 									/>
-									:{boost * 0.1}
+									:{(boost * 0.1).toPrecision(1)}
 								</strong>
 							);
 						})}

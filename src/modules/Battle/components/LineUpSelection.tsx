@@ -8,6 +8,7 @@ import { determineRunawaySuccess } from '../../../functions/determineRunAwaySucc
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { isKO } from '../../../functions/isKo';
 import { LocationContext } from '../../../hooks/LocationProvider';
+import { useLocationColors } from '../../../hooks/useLocationColors';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
@@ -23,8 +24,6 @@ export const LineUpSelection = ({
 	selectedTeam,
 	startBattle,
 	trainer,
-	oppColor,
-	playerColor,
 }: {
 	leave: () => void;
 	opponents: BattlePokemon[];
@@ -34,14 +33,16 @@ export const LineUpSelection = ({
 	toggleSelected: (id: string) => void;
 	startBattle: () => void;
 	trainer?: TrainerInfo;
-	oppColor: string;
-	playerColor: string;
 }) => {
 	const {
 		saveFile: { pokedex },
 	} = useContext(SaveFileContext);
 	const { location } = useContext(LocationContext);
+
 	const { addMessage } = useContext(MessageQueueContext);
+
+	const { playerColor, oppColor } = useLocationColors();
+
 	const battleButtonMessage = useMemo(() => {
 		if (selectedTeam.length < fightersPerSide)
 			return `select ${fightersPerSide - selectedTeam.length} more`;

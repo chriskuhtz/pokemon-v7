@@ -180,6 +180,16 @@ export const handleUniqueMoves = ({
 			applicator: updatedAttacker,
 		});
 	}
+	if (move.name === 'reflect-type') {
+		const newType = updatedTarget.data.types.at(0)?.type.name;
+		updatedAttacker = applySecondaryAilmentToPokemon({
+			pokemon: updatedAttacker,
+			ailment: 'color-changed',
+			addMessage,
+			newType,
+			applicator: updatedAttacker,
+		});
+	}
 	if (move.name === 'conversion-2') {
 		if (updatedAttacker.lastReceivedDamage) {
 			const newType = getRandomEntry(

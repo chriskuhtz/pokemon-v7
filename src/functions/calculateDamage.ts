@@ -13,6 +13,7 @@ import {
 	auraAndPulseMoves,
 	bitingMoves,
 	punchBasedMoves,
+	windMoves,
 } from '../constants/punchBasedMoves';
 import { soundBasedMoves } from '../constants/soundBasedMoves';
 import { Message } from '../hooks/useMessageQueue';
@@ -666,6 +667,10 @@ export const calculateDamage = (
 	const hexFactor = attack.name === 'hex' && target.primaryAilment ? 2 : 1;
 	const puriSaltFactor =
 		target.ability === 'purifying-salt' && attackType === 'ghost' ? 0.5 : 1;
+	const windRiderFactor =
+		target.ability === 'wind-rider' && windMoves.includes(attack.name) ? 0 : 1;
+	const rockyPayloadFactor =
+		attacker.ability === 'rocky-payload' && attackType === 'rock' ? 1.5 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -770,7 +775,9 @@ export const calculateDamage = (
 				transistorFactor *
 				dragonsMawFactor *
 				hexFactor *
-				puriSaltFactor
+				puriSaltFactor *
+				windRiderFactor *
+				rockyPayloadFactor
 		),
 		1
 	);
