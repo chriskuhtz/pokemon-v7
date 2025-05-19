@@ -46,7 +46,7 @@ export const handleAbilitiesAfterAttack = (
 } => {
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
-
+	//innards out
 	if (target.ability === 'innards-out' && isKO(target)) {
 		addMessage({
 			message: `${updatedAttacker.name} is damaged by innards-out`,
@@ -55,6 +55,19 @@ export const handleAbilitiesAfterAttack = (
 			...updatedAttacker,
 			damage: updatedAttacker.damage + originalTargetHp,
 		};
+	}
+	//wind power
+	if (
+		!isKO(target) &&
+		target.ability === 'wind-power' &&
+		windMoves.includes(move.name)
+	) {
+		updatedTarget = applySecondaryAilmentToPokemon({
+			pokemon: updatedTarget,
+			addMessage,
+			ailment: 'charge',
+			applicator: updatedAttacker,
+		});
 	}
 	//volt-absorb, water-absorb, dry-skin
 	const absorbAbility = DamageAbsorbAbilityMap[target.ability];
