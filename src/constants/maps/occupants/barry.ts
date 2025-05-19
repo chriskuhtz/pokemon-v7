@@ -1,3 +1,4 @@
+import { getHighestXpOnTeam } from '../../../functions/getHighestXpOnTeam';
 import { makeChallengerPokemon } from '../../../functions/makeChallengerPokemon';
 import { Occupant, OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
@@ -5,10 +6,9 @@ import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
 
+export const barryId = 'trainer_barry';
 const barryTeam = (s: SaveFile): OwnedPokemon[] => {
-	const highestXpOnTeam = Math.max(
-		...s.pokemon.filter((p) => p.onTeam).map((p) => p.xp)
-	);
+	const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
 
 	const chimchar = makeChallengerPokemon({
 		name: 'chimchar',
@@ -249,9 +249,8 @@ const barry: OverworldTrainer = {
 	type: 'TRAINER',
 	x: 0,
 	y: 0,
-	id: 'trainer_barry',
-	conditionFunction: (s) =>
-		!s.handledOccupants.some((h) => h.id === 'trainer_barry'),
+	id: barryId,
+	conditionFunction: (s) => !s.handledOccupants.some((h) => h.id === barryId),
 	orientation: 'DOWN',
 	sprite: SpriteEnum.barry,
 	unhandledMessage: [

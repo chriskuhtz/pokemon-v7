@@ -126,6 +126,7 @@ export interface SaveFile {
 		luredWithBerries: PokemonName[];
 		hasEvolvedStarter?: boolean;
 		hasReportedBug?: boolean;
+		barryDefeatedAt?: number;
 	};
 	farm: {
 		plants: BerryBush[];
