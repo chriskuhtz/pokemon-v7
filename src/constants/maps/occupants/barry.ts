@@ -236,10 +236,10 @@ const barryTeam = (s: SaveFile): OwnedPokemon[] => {
 	});
 
 	if (highestXpOnTeam < 8000) {
-		return [chimchar, starly, stunky, snover];
+		return [chimchar, starly, snover];
 	}
 	if (highestXpOnTeam < 46656) {
-		return [monferno, staravia, staraptor, luxio, snover];
+		return [monferno, staravia, stunky, luxio, snover];
 	}
 
 	return [infernape, staraptor, skuntank, luxray, abomasnow, yanmega];

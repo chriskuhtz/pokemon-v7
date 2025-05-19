@@ -8,6 +8,7 @@ import { getRandomEntry } from '../functions/filterTargets';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getHeldItem } from '../functions/getHeldItem';
 import { getHighestXpOnTeam } from '../functions/getHighestXpOnTeam';
+import { getTeamSize } from '../functions/getTeamSize';
 import { isKO } from '../functions/isKo';
 import { reduceBattlePokemonToOwnedPokemon } from '../functions/reduceBattlePokemonToOwnedPokemon';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -142,7 +143,7 @@ export const useLeaveBattle = () => {
 					caughtAtDate: new Date().getTime(),
 					caughtOnMap: location.mapId,
 				})),
-			].map((t, i) => ({ ...t, onTeam: i < 6 }));
+			].map((t, i) => ({ ...t, onTeam: i < getTeamSize(saveFile) }));
 
 			const updatedPokemon = [
 				...teamAndCaught,
@@ -229,23 +230,6 @@ export const useLeaveBattle = () => {
 				pokedex,
 			});
 		},
-		[
-			location,
-			patchSaveFileReducer,
-			reset,
-			saveFile.bag,
-			saveFile.currentSwarm,
-			saveFile.handledOccupants,
-			saveFile.mileStones,
-			saveFile.money,
-			saveFile.playerId,
-			saveFile.pokedex,
-			saveFile.pokemon,
-			saveFile.researchPoints,
-			saveFile.settings?.releaseFaintedPokemon,
-			saveFile.settings?.rogueLike,
-			setLocation,
-			team,
-		]
+		[location, patchSaveFileReducer, reset, saveFile, setLocation, team]
 	);
 };

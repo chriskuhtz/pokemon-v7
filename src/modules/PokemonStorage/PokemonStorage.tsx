@@ -17,6 +17,7 @@ import { byName } from '../../constants/typeRecord';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getHeldItem } from '../../functions/getHeldItem';
 import { getItemUrl } from '../../functions/getItemUrl';
+import { getTeamSize } from '../../functions/getTeamSize';
 import { replaceRouteName } from '../../functions/replaceRouteName';
 import { sumOfIvs } from '../../functions/sumOfIvs';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
@@ -251,7 +252,7 @@ export const PokemonStorage = ({
 				pokemonFilter={sortBy}
 				stored={stored}
 				sortFunction={sortFunction}
-				teamIsFull={team.length === 6}
+				teamIsFull={team.length >= getTeamSize(saveFile)}
 				togglePokemonOnTeam={togglePokemonOnTeam}
 				startReleaseProcess={startReleaseProcess}
 				toggleFavoriteStatus={toggleFavoriteStatus}
@@ -641,7 +642,7 @@ const Entry = ({
 				onClick={() => {
 					if (teamIsFull) {
 						addMessage({
-							message: 'You can only take 6 Pokemon on the team!',
+							message: `You cant take more Pokemon on your team!`,
 						});
 						return;
 					}

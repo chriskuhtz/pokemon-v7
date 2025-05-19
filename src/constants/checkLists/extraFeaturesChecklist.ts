@@ -427,7 +427,7 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'reduce amount of rewarded poke balls', handled: true },
-	{ name: 'team size as upgrades' },
+	{ name: 'team size as upgrades', handled: true },
 	{ name: 'fix pathing' },
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
