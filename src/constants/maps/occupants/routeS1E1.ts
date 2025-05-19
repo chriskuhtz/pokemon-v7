@@ -1,7 +1,9 @@
+import { makeApricornTree } from '../../../functions/makeApricornTree';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { routeS1E1Lure } from '../../../modules/BerryLure/BerryLure';
 import { travellingMerchantRouteS1E1 } from '../../../modules/TravellingMerchant/TravellingMerchant';
+import { barryS1E1 } from './barry';
 import { surge } from './surge';
 
 export const routeS1E1Occupants: OverworldMap['occupants'] = [
@@ -137,4 +139,29 @@ export const routeS1E1Occupants: OverworldMap['occupants'] = [
 	...surge,
 	routeS1E1Lure,
 	...travellingMerchantRouteS1E1,
+	barryS1E1,
+	...makeApricornTree({
+		x: 4,
+		y: 5,
+		apricorn: 'black-apricorn',
+		id: 'routeS1E1_black_tree_1',
+	}),
+	...makeApricornTree({
+		x: 7,
+		y: 7,
+		apricorn: 'black-apricorn',
+		id: 'routeS1E1_black_tree_2',
+	}),
+	...makeApricornTree({
+		x: 8,
+		y: 5,
+		apricorn: 'black-apricorn',
+		id: 'routeS1E1_black_tree_3',
+	}),
+	...makeApricornTree({
+		x: 6,
+		y: 6,
+		apricorn: 'black-apricorn',
+		id: 'routeS1E1_black_tree_4',
+	}),
 ];

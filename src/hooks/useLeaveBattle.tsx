@@ -1,10 +1,14 @@
 import { useCallback, useContext, useMemo } from 'react';
+import { ONE_HOUR } from '../constants/gameData';
+import { barryId } from '../constants/maps/occupants/barry';
 import { challengeFieldOccupants } from '../constants/maps/occupants/challengeField';
 import { addPokemonToDex } from '../functions/addPokemonToDex';
 import { calculateLevelData } from '../functions/calculateLevelData';
 import { getRandomEntry } from '../functions/filterTargets';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getHeldItem } from '../functions/getHeldItem';
+import { getHighestXpOnTeam } from '../functions/getHighestXpOnTeam';
+import { getTeamSize } from '../functions/getTeamSize';
 import { isKO } from '../functions/isKo';
 import { reduceBattlePokemonToOwnedPokemon } from '../functions/reduceBattlePokemonToOwnedPokemon';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -139,7 +143,7 @@ export const useLeaveBattle = () => {
 					caughtAtDate: new Date().getTime(),
 					caughtOnMap: location.mapId,
 				})),
-			].map((t, i) => ({ ...t, onTeam: i < 6 }));
+			].map((t, i) => ({ ...t, onTeam: i < getTeamSize(saveFile) }));
 
 			const updatedPokemon = [
 				...teamAndCaught,
@@ -197,7 +201,18 @@ export const useLeaveBattle = () => {
 					updatedMileStones.challengeFieldRecord = challengeFieldRank;
 				}
 			}
+			if (defeatedChallengerId === barryId) {
+				const xp = getHighestXpOnTeam(updatedPokemon);
+				if (
+					!updatedMileStones.barryDefeatedAt ||
+					xp > updatedMileStones.barryDefeatedAt
+				) {
+					updatedMileStones.barryDefeatedAt = xp;
+				}
+			}
 			updatedMileStones.caughtFromSwarms = updatedSwarmRecord;
+
+			const resetTime = defeatedChallengerId === barryId ? ONE_HOUR : -1;
 
 			patchSaveFileReducer({
 				bag: joinInventories(updatedInventory, rewardItems ?? {}),
@@ -208,30 +223,13 @@ export const useLeaveBattle = () => {
 				handledOccupants: defeatedChallengerId
 					? [
 							...saveFile.handledOccupants,
-							{ id: defeatedChallengerId, resetAt: -1 },
+							{ id: defeatedChallengerId, resetAt: resetTime },
 					  ]
 					: saveFile.handledOccupants,
 				mileStones: updatedMileStones,
 				pokedex,
 			});
 		},
-		[
-			location,
-			patchSaveFileReducer,
-			reset,
-			saveFile.bag,
-			saveFile.currentSwarm,
-			saveFile.handledOccupants,
-			saveFile.mileStones,
-			saveFile.money,
-			saveFile.playerId,
-			saveFile.pokedex,
-			saveFile.pokemon,
-			saveFile.researchPoints,
-			saveFile.settings?.releaseFaintedPokemon,
-			saveFile.settings?.rogueLike,
-			setLocation,
-			team,
-		]
+		[location, patchSaveFileReducer, reset, saveFile, setLocation, team]
 	);
 };

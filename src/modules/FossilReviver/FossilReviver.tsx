@@ -14,7 +14,7 @@ export const FossilReviver = (): JSX.Element => {
 	const navigate = useNavigate();
 	const { revive } = useFossils();
 	const {
-		saveFile: { pokedex, bag, researchPoints },
+		saveFile: { pokedex, bag },
 	} = useContext(SaveFileContext);
 	return (
 		<Page
@@ -46,13 +46,11 @@ export const FossilReviver = (): JSX.Element => {
 									<PokemonSprite name={pokemon} />
 								)
 							}
-							disabled={
-								!requiredFossils.every((f) => bag[f] > 0) || researchPoints < 5
-							}
+							disabled={!requiredFossils.every((f) => bag[f] > 0)}
 							onClick={() => {
 								revive(requiredFossils);
 							}}
-							content={<h3>Revive for 5 Research Points</h3>}
+							content={<h3>Revive</h3>}
 							actionElements={requiredFossils.map((f) => (
 								<ItemSprite item={f} />
 							))}

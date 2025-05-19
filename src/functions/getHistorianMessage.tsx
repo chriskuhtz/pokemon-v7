@@ -5,7 +5,7 @@ export const getHistorianMessage = (): string[] => {
 			'Legends say that a cute but extremely powerful pokemon',
 			'is sometimes seen during the day in the center of orenji forest',
 			'by people carrying its favorite berry',
-			'i think it was a payapa berry',
+			'I think it starts with a p',
 			'come back tomorrow for a different tale',
 		];
 	}

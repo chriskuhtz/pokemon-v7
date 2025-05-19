@@ -1,6 +1,8 @@
 import { useContext, useMemo } from 'react';
 import { CgZoomIn, CgZoomOut } from 'react-icons/cg';
 import { IoMdMenu } from 'react-icons/io';
+import { LureIcon } from '../../../components/LureIcon/LureIcon';
+import { RepelIcon } from '../../../components/RepelIcon/RepelIcon';
 import { RocketIcon } from '../../../components/RocketIcon/RocketIcon';
 import { TeamOverview } from '../../../components/TeamOverview/TeamOverview';
 import { TimeOfDayIcon } from '../../../components/TimeOfDayIcon/TimeOfDayIcon';
@@ -109,6 +111,8 @@ export const OverworldMenus = ({
 				}}
 			>
 				<RocketIcon />
+				<RepelIcon />
+				<LureIcon />
 				<strong>{mapDisplayNames[map.id]}</strong>
 				<WeatherIcon weather={map.weather} />
 				<TimeOfDayIcon />

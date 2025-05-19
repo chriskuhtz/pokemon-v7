@@ -3,10 +3,6 @@ import { v4 } from 'uuid';
 import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { Sprite } from '../../components/Sprite/Sprite';
 import {
-	CampUpgrade,
-	campUpgradeNames,
-} from '../../constants/checkLists/campUpgrades';
-import {
 	battleSpriteSize,
 	shinyChance,
 	testPokemon,
@@ -87,11 +83,12 @@ export const StarterSelection = (): JSX.Element => {
 					},
 				],
 				storage: CompleteInventory,
-				campUpgrades: Object.fromEntries(
-					campUpgradeNames.map((key) => [key, true])
-				) as Record<CampUpgrade, boolean>,
+				// campUpgrades: Object.fromEntries(
+				// 	campUpgradeNames.map((key) => [key, true])
+				// ) as Record<CampUpgrade, boolean>,
 				meta: { activeTab: 'OVERWORLD' },
 				starterPokemon: mon.name,
+				researchPoints: 10000,
 				pokedex,
 			});
 		} else

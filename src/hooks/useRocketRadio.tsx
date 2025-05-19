@@ -33,10 +33,10 @@ export const useRocketRadio = () => {
 
 	return useCallback(() => {
 		const now = new Date().getTime();
-		if (saveFile.currentRocketOperation) {
+		if (saveFile.rocketOperation) {
 			addMessage({
 				message: `There are reports of team rocket activity at ${
-					mapDisplayNames[saveFile.currentRocketOperation.route]
+					mapDisplayNames[saveFile.rocketOperation.route]
 				}`,
 				needsNoConfirmation: true,
 			});
@@ -53,7 +53,7 @@ export const useRocketRadio = () => {
 			});
 
 			patchSaveFileReducer({
-				currentRocketOperation: { route, trainers: op },
+				rocketOperation: { route, trainers: op },
 			});
 		} else {
 			addMessage({

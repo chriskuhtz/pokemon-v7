@@ -2,7 +2,6 @@ import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
-import { typeColors } from '../../constants/typeColors';
 import {
 	applyEndOfTurnAbility,
 	applyGrassyTerrainHeal,
@@ -21,12 +20,12 @@ import { getHeldItem } from '../../functions/getHeldItem';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getSettings } from '../../functions/getPlayerId';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
-import { hexToRgb } from '../../functions/hexToRGB';
 import { isKO } from '../../functions/isKo';
 import { reduceSecondaryAilmentDurations } from '../../functions/reduceSecondaryAilmentDurations';
 import { sortByPriority } from '../../functions/sortByPriority';
 import { LocationContext } from '../../hooks/LocationProvider';
 import { LeaveBattlePayload } from '../../hooks/useLeaveBattle';
+import { useLocationColors } from '../../hooks/useLocationColors';
 import { Message } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
@@ -118,6 +117,8 @@ export const BattleField = ({
 	const {
 		saveFile: { settings },
 	} = useContext(SaveFileContext);
+	const { playerColor, oppColor } = useLocationColors();
+
 	const { location } = useContext(LocationContext);
 	const isTrainerBattle = useMemo(() => !!challengerId, [challengerId]);
 
@@ -744,16 +745,6 @@ export const BattleField = ({
 		}
 	}, [addMessage, battleStep, opponentCanRefill, opponents, putPokemonOnField]);
 
-	const oppColor = useMemo(() => {
-		const type = onFieldOpponents.at(0)?.data.types.at(0)?.type.name ?? 'grass';
-
-		return hexToRgb(typeColors[type], 0.5);
-	}, [onFieldOpponents]);
-	const playerColor = useMemo(() => {
-		const type = onFieldTeam.at(0)?.data.types.at(0)?.type.name ?? 'bug';
-
-		return hexToRgb(typeColors[type], 0.5);
-	}, [onFieldTeam]);
 	if (battleStep === 'REFILLING' && teamCanRefill) {
 		return (
 			<RefillHandling

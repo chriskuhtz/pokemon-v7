@@ -1164,10 +1164,26 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/273/',
 		handled: true,
 	},
-	{ name: 'wind-rider', url: 'https://pokeapi.co/api/v2/ability/274/' },
-	{ name: 'guard-dog', url: 'https://pokeapi.co/api/v2/ability/275/' },
-	{ name: 'rocky-payload', url: 'https://pokeapi.co/api/v2/ability/276/' },
-	{ name: 'wind-power', url: 'https://pokeapi.co/api/v2/ability/277/' },
+	{
+		name: 'wind-rider',
+		url: 'https://pokeapi.co/api/v2/ability/274/',
+		handled: true,
+	},
+	{
+		name: 'guard-dog',
+		url: 'https://pokeapi.co/api/v2/ability/275/',
+		handled: true,
+	},
+	{
+		name: 'rocky-payload',
+		url: 'https://pokeapi.co/api/v2/ability/276/',
+		handled: true,
+	},
+	{
+		name: 'wind-power',
+		url: 'https://pokeapi.co/api/v2/ability/277/',
+		handled: true,
+	},
 	{ name: 'zero-to-hero', url: 'https://pokeapi.co/api/v2/ability/278/' },
 	{ name: 'commander', url: 'https://pokeapi.co/api/v2/ability/279/' },
 	{ name: 'electromorphosis', url: 'https://pokeapi.co/api/v2/ability/280/' },
@@ -1536,6 +1552,10 @@ export const abilityNames = [
 	'anger-shell',
 	'purifying-salt',
 	'well-baked-body',
+	'wind-rider',
+	'guard-dog',
+	'rocky-payload',
+	'wind-power',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

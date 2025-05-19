@@ -173,15 +173,30 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 			if (p.ownerId === user.ownerId) {
 				return p;
 			}
-			const res = applyStatChangeToPokemon(
-				p,
-				'attack',
-				-1,
-				false,
-				battleFieldEffects,
-				addMessage,
-				`${user.data.name}'s intimidate`
-			);
+
+			let res = { ...p };
+			if (p.ability === 'guard-dog') {
+				res = applyStatChangeToPokemon(
+					p,
+					'attack',
+					1,
+					false,
+					battleFieldEffects,
+					addMessage,
+					`guard dog`
+				);
+			} else {
+				res = applyStatChangeToPokemon(
+					p,
+					'attack',
+					-1,
+					false,
+					battleFieldEffects,
+					addMessage,
+					`${user.data.name}'s intimidate`
+				);
+			}
+
 			if (getHeldItem(p) === 'adrenaline-orb') {
 				return applyStatChangeToPokemon(
 					res,

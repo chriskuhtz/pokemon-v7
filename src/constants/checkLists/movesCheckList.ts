@@ -1921,9 +1921,17 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/510/',
 		handled: true,
 	},
-	{ name: 'quash', url: 'https://pokeapi.co/api/v2/move/511/' },
-	{ name: 'acrobatics', url: 'https://pokeapi.co/api/v2/move/512/' },
-	{ name: 'reflect-type', url: 'https://pokeapi.co/api/v2/move/513/' },
+
+	{
+		name: 'acrobatics',
+		url: 'https://pokeapi.co/api/v2/move/512/',
+		handled: true,
+	},
+	{
+		name: 'reflect-type',
+		url: 'https://pokeapi.co/api/v2/move/513/',
+		handled: true,
+	},
 	{ name: 'retaliate', url: 'https://pokeapi.co/api/v2/move/514/' },
 	{ name: 'final-gambit', url: 'https://pokeapi.co/api/v2/move/515/' },
 	{ name: 'bestow', url: 'https://pokeapi.co/api/v2/move/516/' },
@@ -2445,6 +2453,7 @@ export const movesCheckList: {
 	},
 	{ name: 'sky-drop', url: 'https://pokeapi.co/api/v2/move/507/' },
 	{ name: 'circle-throw', url: 'https://pokeapi.co/api/v2/move/509/' },
+	{ name: 'quash', url: 'https://pokeapi.co/api/v2/move/511/' },
 	/**
 	 * INCOMPLETE DATA:
 	 */
@@ -2998,6 +3007,8 @@ export const handledMoves = [
 	'hex',
 	'shift-gear',
 	'incinerate',
+	'acrobatics',
+	'reflect-type',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

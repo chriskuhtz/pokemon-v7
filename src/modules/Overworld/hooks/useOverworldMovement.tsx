@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { fps } from '../../../constants/gameData';
 import { mapsRecord } from '../../../constants/maps/mapsRecord';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
@@ -36,21 +36,94 @@ export const useOverworldMovement = (
 		CharacterOrientation | undefined
 	>();
 
-	useEffect(() => {
-		const stepOnPortal: OnStepPortal | undefined = map.occupants.find(
-			(o) =>
-				o.type === 'ON_STEP_PORTAL' &&
-				o.conditionFunction(saveFile) === true &&
-				o.x === playerLocation.x &&
-				o.y === playerLocation.y
-		) as OnStepPortal | undefined;
+	const reduceEncounterRate = useCallback(() => {
+		if (encounterChance <= baseEncounterRate) {
+			return;
+		}
+		setEncounterChance(encounterChance - encounterRateStep);
+	}, [encounterChance]);
 
-		const reduceEncounterRate = () => {
-			if (encounterChance === baseEncounterRate) {
-				return;
-			}
-			setEncounterChance(encounterChance - encounterRateStep);
+	const steptOnPortal: OnStepPortal | undefined = useMemo(
+		() =>
+			map.occupants.find(
+				(o) =>
+					o.type === 'ON_STEP_PORTAL' &&
+					o.conditionFunction(saveFile) === true &&
+					o.x === playerLocation.x &&
+					o.y === playerLocation.y
+			) as OnStepPortal | undefined,
+		[map.occupants, playerLocation.x, playerLocation.y, saveFile]
+	);
+
+	const handlePossibleEncounter = useCallback(() => {
+		setNextInput(undefined);
+		setEncounterChance(baseEncounterRate);
+		if (saveFile.activatedRepel === 'max-repel') {
+			return;
+		}
+		if (
+			!(
+				map.tileMap.encounterLayer[playerLocation.y][playerLocation.x] ||
+				map.tileMap.waterLayer[playerLocation.y][playerLocation.x]
+			)
+		) {
+			reduceEncounterRate();
+			return;
+		}
+		if (Math.random() > encounterChance * encounterRateModifier.factor) {
+			setEncounterChance(encounterChance + encounterRateStep);
+			return;
+		}
+
+		const waterEncounter =
+			!!map.tileMap.waterLayer[playerLocation.y][playerLocation.x];
+		const challenger: Challenger = {
+			type: 'WILD',
+			id: OPPO_ID,
+			inventory: EmptyInventory,
+			team: determineWildPokemon(
+				pokemon.filter((p) => p.onTeam),
+				mapsRecord[playerLocation.mapId],
+				quests,
+				waterEncounter,
+				shinyFactor,
+				currentSwarm,
+				activatedLure
+			),
 		};
+		const avgChallengerLevel =
+			challenger.team.reduce(
+				(sum, summand) =>
+					sum + calculateLevelData(summand.xp, summand.growthRate).level,
+				0
+			) / challenger.team.length;
+		if (saveFile.activatedRepel === 'repel' && avgChallengerLevel < 20) {
+			return;
+		}
+		if (saveFile.activatedRepel === 'super-repel' && avgChallengerLevel < 40) {
+			return;
+		}
+
+		startEncounter(challenger);
+	}, [
+		activatedLure,
+		currentSwarm,
+		encounterChance,
+		encounterRateModifier.factor,
+		map.tileMap.encounterLayer,
+		map.tileMap.waterLayer,
+		playerLocation.mapId,
+		playerLocation.x,
+		playerLocation.y,
+		pokemon,
+		quests,
+		reduceEncounterRate,
+		saveFile.activatedRepel,
+		shinyFactor,
+		startEncounter,
+	]);
+
+	useEffect(() => {
 		const int = setTimeout(() => {
 			if (
 				!nextInput &&
@@ -61,64 +134,12 @@ export const useOverworldMovement = (
 					forwardFoot: getNextForwardFoot(playerLocation.forwardFoot),
 				});
 			}
-			if (stepOnPortal) {
-				setCharacterLocation(stepOnPortal.portal);
+			if (steptOnPortal) {
+				setCharacterLocation(steptOnPortal.portal);
 				return;
 			}
-
 			if (nextInput) {
-				if (
-					saveFile.activatedRepel !== 'max-repel' &&
-					(map.tileMap.encounterLayer[playerLocation.y][playerLocation.x] ||
-						map.tileMap.waterLayer[playerLocation.y][playerLocation.x])
-				) {
-					if (Math.random() < encounterChance * encounterRateModifier.factor) {
-						const waterEncounter =
-							!!map.tileMap.waterLayer[playerLocation.y][playerLocation.x];
-						const challenger: Challenger = {
-							type: 'WILD',
-							id: OPPO_ID,
-							inventory: EmptyInventory,
-							team: determineWildPokemon(
-								pokemon.filter((p) => p.onTeam),
-								mapsRecord[playerLocation.mapId],
-								quests,
-								waterEncounter,
-								shinyFactor,
-								currentSwarm,
-								activatedLure
-							),
-						};
-
-						const avgChallengerLevel =
-							challenger.team.reduce(
-								(sum, summand) =>
-									sum +
-									calculateLevelData(summand.xp, summand.growthRate).level,
-								0
-							) / challenger.team.length;
-
-						if (
-							saveFile.activatedRepel === 'repel' &&
-							avgChallengerLevel < 20
-						) {
-							setEncounterChance(baseEncounterRate);
-							return;
-						}
-						if (
-							saveFile.activatedRepel === 'super-repel' &&
-							avgChallengerLevel < 40
-						) {
-							setEncounterChance(baseEncounterRate);
-							return;
-						}
-
-						setNextInput(undefined);
-						setEncounterChance(baseEncounterRate);
-						startEncounter(challenger);
-						return;
-					} else setEncounterChance(encounterChance + encounterRateStep);
-				} else reduceEncounterRate();
+				handlePossibleEncounter();
 			}
 			if (nextInput === playerLocation.orientation) {
 				setCharacterLocation({
@@ -153,15 +174,18 @@ export const useOverworldMovement = (
 		currentSwarm,
 		encounterChance,
 		encounterRateModifier.factor,
+		handlePossibleEncounter,
 		map,
 		nextInput,
 		playerLocation,
 		pokemon,
 		quests,
+		reduceEncounterRate,
 		saveFile,
 		setCharacterLocation,
 		shinyFactor,
 		startEncounter,
+		steptOnPortal,
 	]);
 
 	return setNextInput;

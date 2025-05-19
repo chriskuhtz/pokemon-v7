@@ -1,7 +1,9 @@
 import { getTimeOfDay } from '../../../functions/getTimeOfDay';
+import { makeApricornTree } from '../../../functions/makeApricornTree';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { routeN1E1Lure } from '../../../modules/BerryLure/BerryLure';
 import { travellingMerchantRouteN1E1 } from '../../../modules/TravellingMerchant/TravellingMerchant';
+import { barryN1E1 } from './barry';
 import { janine } from './janine';
 
 export const routeN1E1Occupants: OverworldMap['occupants'] = [
@@ -168,7 +170,26 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 			s.campUpgrades['invite historian'],
 		id: 'routeN1E1_mew',
 	},
+	...makeApricornTree({
+		x: 3,
+		y: 26,
+		apricorn: 'blue-apricorn',
+		id: 'routeN1E1_blue_tree_1',
+	}),
+	...makeApricornTree({
+		x: 4,
+		y: 30,
+		apricorn: 'blue-apricorn',
+		id: 'routeN1E1_blue_tree_2',
+	}),
+	...makeApricornTree({
+		x: 1,
+		y: 29,
+		apricorn: 'blue-apricorn',
+		id: 'routeN1E1_blue_tree_3',
+	}),
 	...janine,
 	routeN1E1Lure,
 	...travellingMerchantRouteN1E1,
+	barryN1E1,
 ];

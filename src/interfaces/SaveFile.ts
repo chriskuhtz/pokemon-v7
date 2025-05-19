@@ -126,6 +126,7 @@ export interface SaveFile {
 		luredWithBerries: PokemonName[];
 		hasEvolvedStarter?: boolean;
 		hasReportedBug?: boolean;
+		barryDefeatedAt?: number;
 	};
 	farm: {
 		plants: BerryBush[];
@@ -139,6 +140,7 @@ export interface SaveFile {
 	nextSwarmReadyAt?: number;
 	rangerLevel?: number;
 	currentRocketOperation?: { route: MapId; trainers: OverworldTrainer[] };
+	rocketOperation?: { route: MapId; trainers: OverworldTrainer[] };
 	nextRocketOperationAt?: number;
 	starterPokemon?: PokemonName;
 	seedVault: ItemType[];
