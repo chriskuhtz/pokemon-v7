@@ -98,6 +98,10 @@ export interface UseSaveFile {
 const migrateSavefile = (input: SaveFile) => {
 	const updatedInput = { ...input };
 
+	if (!updatedInput.maxTeamMembers) {
+		updatedInput.maxTeamMembers = 2;
+	}
+
 	delete updatedInput.currentRocketOperation;
 	//migrate new quests
 	updatedInput.quests = Object.fromEntries(

@@ -9,7 +9,7 @@ import { EmptyStatObject } from '../../../interfaces/StatObject';
 const chrisTeam = () => [
 	makeChallengerPokemon({
 		name: 'ursaring',
-		xp: 343000,
+		xp: 100 * 100 * 100,
 		nature: 'adamant',
 		ability: 'huge-power',
 		fixedAbility: true,
@@ -18,7 +18,7 @@ const chrisTeam = () => [
 		firstMove: { name: 'earthquake', usedPP: 0 },
 		secondMove: { name: 'bulk-up', usedPP: 0 },
 		thirdMove: { name: 'return', usedPP: 0 },
-		fourthMove: { name: 'zen-headbutt', usedPP: 0 },
+		fourthMove: { name: 'low-kick', usedPP: 0 },
 		effortValues: {
 			...EmptyStatObject,
 			attack: 252,
@@ -27,7 +27,7 @@ const chrisTeam = () => [
 	}),
 	makeChallengerPokemon({
 		name: 'dragonite',
-		xp: 343000,
+		xp: 100 * 100 * 100,
 		nature: 'adamant',
 		ability: 'multiscale',
 		fixedAbility: true,
@@ -50,7 +50,7 @@ const chrisTeam = () => [
 		firstMove: { name: 'surf', usedPP: 0 },
 		secondMove: { name: 'tail-glow', usedPP: 0 },
 		heldItemName: 'mystic-water',
-		xp: 343000,
+		xp: 100 * 100 * 100,
 		effortValues: {
 			...EmptyStatObject,
 			'special-attack': 252,
@@ -64,7 +64,7 @@ const chrisTeam = () => [
 		nature: 'adamant',
 		heldItemName: 'choice-band',
 		firstMove: { name: 'bullet-punch', usedPP: 0 },
-		xp: 343000,
+		xp: 100 * 100 * 100,
 		effortValues: {
 			...EmptyStatObject,
 			attack: 252,
@@ -77,7 +77,7 @@ const chrisTeam = () => [
 		ability: 'drought',
 		fixedAbility: true,
 		nature: 'adamant',
-		xp: 343000,
+		xp: 100 * 100 * 100,
 		firstMove: { name: 'dragon-dance', usedPP: 0 },
 		secondMove: { name: 'thunder-fang', usedPP: 0 },
 		thirdMove: { name: 'rock-slide', usedPP: 0 },
@@ -90,7 +90,7 @@ const chrisTeam = () => [
 	}),
 	makeChallengerPokemon({
 		name: 'meganium',
-		xp: 343000,
+		xp: 100 * 100 * 100,
 		heldItemName: 'leftovers',
 		ability: 'solar-power',
 		fixedAbility: true,

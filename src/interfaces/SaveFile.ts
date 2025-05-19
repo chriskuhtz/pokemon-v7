@@ -148,4 +148,5 @@ export interface SaveFile {
 	activatedRepel?: 'repel' | 'super-repel' | 'max-repel';
 	activatedLure?: 'lure' | 'super-lure' | 'max-lure';
 	catchBoosts?: CatchBoosts;
+	maxTeamMembers: number;
 }

@@ -108,6 +108,7 @@ export const testState: SaveFile = {
 	farm: { plants: [] },
 	campUpgrades: baseCampUpgrades,
 	pokedex: emptyPokedex,
+	maxTeamMembers: 2,
 };
 
 export const localStorageSaveFileId = 'pokemonv7SaveFile';

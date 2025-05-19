@@ -2,6 +2,7 @@ import { makeApricornTree } from '../../../functions/makeApricornTree';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { routeN1Lure } from '../../../modules/BerryLure/BerryLure';
 import { travellingMerchantRouteN1 } from '../../../modules/TravellingMerchant/TravellingMerchant';
+import { barryN1 } from './barry';
 import { erika } from './erika';
 import { giovanni } from './giovanni';
 
@@ -267,4 +268,5 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		apricorn: 'green-apricorn',
 		id: 'routeN1_green_tree',
 	}),
+	barryN1,
 ];
