@@ -253,20 +253,20 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 	...makeApricornTree({
 		x: 4,
 		y: 30,
-		apricorn: 'black-apricorn',
-		id: 'routeN1_black_tree',
+		apricorn: 'green-apricorn',
+		id: 'routeN1_green_tree_1',
 	}),
 	...makeApricornTree({
 		x: 6,
 		y: 28,
-		apricorn: 'yellow-apricorn',
-		id: 'routeN1_yellow_tree',
+		apricorn: 'green-apricorn',
+		id: 'routeN1_green_tree_2',
 	}),
 	...makeApricornTree({
 		x: 3,
 		y: 27,
 		apricorn: 'green-apricorn',
-		id: 'routeN1_green_tree',
+		id: 'routeN1_green_tree_3',
 	}),
 	barryN1,
 ];
