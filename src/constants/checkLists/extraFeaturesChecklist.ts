@@ -443,4 +443,10 @@ export const extraFeatureCheckList: {
 	{ name: 'magma/aqua quests from looker' },
 	{ name: 'progress bar for catch x quests' },
 	{ name: 'Terrain Items (shovel, pickaxe) as Gym leader rewards ' },
+	{ name: 'more apricorn trees, different types on different routes' },
+	{ name: 'reduce amount of rewarded poke balls' },
+	{ name: 'confirmation before throwing item away' },
+	{ name: 'choose random nature for starter' },
+	{ name: 'random abilites should aslo work by offset' },
+	{ name: 'timeofday in pokedex' },
 ];
