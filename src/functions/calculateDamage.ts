@@ -669,6 +669,8 @@ export const calculateDamage = (
 		target.ability === 'purifying-salt' && attackType === 'ghost' ? 0.5 : 1;
 	const windRiderFactor =
 		target.ability === 'wind-rider' && windMoves.includes(attack.name) ? 0 : 1;
+	const rockyPayloadFactor =
+		attacker.ability === 'rocky-payload' && attackType === 'rock' ? 1.5 : 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -774,7 +776,8 @@ export const calculateDamage = (
 				dragonsMawFactor *
 				hexFactor *
 				puriSaltFactor *
-				windRiderFactor
+				windRiderFactor *
+				rockyPayloadFactor
 		),
 		1
 	);
