@@ -426,7 +426,7 @@ export const extraFeatureCheckList: {
 		name: 'more apricorn trees, different types on different routes',
 		handled: true,
 	},
-	{ name: 'reduce amount of rewarded poke balls' },
+	{ name: 'reduce amount of rewarded poke balls', handled: true },
 	{ name: 'team size as upgrades' },
 	{ name: 'fix pathing' },
 	{ name: 'whitney' },
