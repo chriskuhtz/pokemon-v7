@@ -134,7 +134,7 @@ export const travellingMerchantRouteE1: Occupant[] =
     : [];
 export const travellingMerchantRouteS1E1: Occupant[] =
   day === 3
-    ? baseTravellingMerchant.map((h, i) => ({ ...h, x: 11 + i, y: 2 }))
+    ? baseTravellingMerchant.map((h, i) => ({ ...h, x: 16 + i, y: 8 }))
     : [];
 export const travellingMerchantRouteS1W1: Occupant[] =
   day === 4
