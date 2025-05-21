@@ -1990,8 +1990,16 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/531/',
 		handled: true,
 	},
-	{ name: 'horn-leech', url: 'https://pokeapi.co/api/v2/move/532/' },
-	{ name: 'sacred-sword', url: 'https://pokeapi.co/api/v2/move/533/' },
+	{
+		name: 'horn-leech',
+		url: 'https://pokeapi.co/api/v2/move/532/',
+		handled: true,
+	},
+	{
+		name: 'sacred-sword',
+		url: 'https://pokeapi.co/api/v2/move/533/',
+		handled: true,
+	},
 	{ name: 'razor-shell', url: 'https://pokeapi.co/api/v2/move/534/' },
 	{ name: 'heat-crash', url: 'https://pokeapi.co/api/v2/move/535/' },
 	{ name: 'leaf-tornado', url: 'https://pokeapi.co/api/v2/move/536/' },
@@ -3067,6 +3075,8 @@ export const handledMoves = [
 	'drill-run',
 	'dual-chop',
 	'heart-stamp',
+	'horn-leech',
+	'sacred-sword',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
