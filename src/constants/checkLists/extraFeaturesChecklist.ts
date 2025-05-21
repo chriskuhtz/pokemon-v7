@@ -428,6 +428,8 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'reduce amount of rewarded poke balls', handled: true },
 	{ name: 'team size as upgrades', handled: true },
+	{ name: 'add favorite toggle on team', handled: true },
+	{ name: 'barry timeout condition' },
 	{ name: 'fix pathing' },
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
@@ -452,6 +454,4 @@ export const extraFeatureCheckList: {
 	{ name: 'choose random nature for starter' },
 	{ name: 'random abilites should aslo work by offset' },
 	{ name: 'timeofday in pokedex' },
-	{ name: 'add favorite toggle on team' },
-	{ name: 'more gap in storage rows' },
 ];
