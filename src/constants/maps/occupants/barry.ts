@@ -277,41 +277,48 @@ export const barryN1: Occupant = {
 	...barry,
 	x: 12,
 	y: 40,
-	conditionFunction: () => day === 1,
+	conditionFunction: (s) =>
+		s.handledOccupants.every((h) => h.id !== barryId) && day === 1,
 };
 export const barryN1E1: Occupant = {
 	...barry,
 	x: 14,
 	y: 22,
-	conditionFunction: () => day === 2,
+	conditionFunction: (s) =>
+		s.handledOccupants.every((h) => h.id !== barryId) && day === 2,
 };
 export const barryE1: Occupant = {
 	...barry,
 	x: 10,
 	y: 29,
-	conditionFunction: () => day === 3,
+	conditionFunction: (s) =>
+		s.handledOccupants.every((h) => h.id !== barryId) && day === 3,
 };
 export const barryS1E1: Occupant = {
 	...barry,
 	x: 25,
 	y: 25,
-	conditionFunction: () => day === 4,
+	conditionFunction: (s) =>
+		s.handledOccupants.every((h) => h.id !== barryId) && day === 4,
 };
 export const barryOnixCave: Occupant = {
 	...barry,
 	x: 38,
 	y: 44,
-	conditionFunction: () => day === 5,
+	conditionFunction: (s) =>
+		s.handledOccupants.every((h) => h.id !== barryId) && day === 5,
 };
 export const barryS1W1: Occupant = {
 	...barry,
 	x: 29,
 	y: 6,
-	conditionFunction: () => day === 5,
+	conditionFunction: (s) =>
+		s.handledOccupants.every((h) => h.id !== barryId) && day === 5,
 };
 export const barryN1W1: Occupant = {
 	...barry,
 	x: 16,
 	y: 45,
-	conditionFunction: () => day === 6,
+	conditionFunction: (s) =>
+		s.handledOccupants.every((h) => h.id !== barryId) && day === 6,
 };
