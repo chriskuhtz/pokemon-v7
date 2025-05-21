@@ -32,6 +32,7 @@ export const MapEditor = ({
 		obstacleLayer,
 		waterLayer,
 		randomFill,
+		replaceAll,
 	} = useMapEditor({
 		tool,
 		initialMap,
@@ -130,6 +131,7 @@ export const MapEditor = ({
 					changeRow={(index) => changeRow(index, activeTab)}
 					changeColumn={(index) => changeColumn(index, activeTab)}
 					randomFill={randomFill}
+					replaceAll={replaceAll}
 				/>
 			</div>
 		</div>

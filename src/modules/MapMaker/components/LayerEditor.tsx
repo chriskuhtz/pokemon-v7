@@ -22,6 +22,7 @@ const unmemoedLayerEditor = ({
 	tileSetUrl,
 	tileMap,
 	occupants,
+	replaceAll,
 }: {
 	layerName: LayerName;
 	layer: (TileIdentifier | null)[][];
@@ -32,6 +33,7 @@ const unmemoedLayerEditor = ({
 	changeTile: (i: number, j: number, layer: LayerName) => void;
 	clear: () => void;
 	randomFill: (layer: LayerName, percentage: number) => void;
+	replaceAll: (layer: LayerName) => void;
 	tileSetUrl: string;
 	tileMap: TileMap;
 	occupants: Occupant[];
@@ -59,6 +61,12 @@ const unmemoedLayerEditor = ({
 					onClick={() => randomFill(layerName, 1)}
 				>
 					100%
+				</button>
+				<button
+					style={{ color: 'white', marginRight: '1rem' }}
+					onClick={() => replaceAll(layerName)}
+				>
+					Replace all
 				</button>
 				{layerName}:
 			</h3>
