@@ -1215,7 +1215,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/285/',
 		handled: true,
 	},
-	{ name: 'tablets-of-ruin', url: 'https://pokeapi.co/api/v2/ability/286/' },
+	{
+		name: 'tablets-of-ruin',
+		url: 'https://pokeapi.co/api/v2/ability/286/',
+		handled: true,
+	},
 	{ name: 'beads-of-ruin', url: 'https://pokeapi.co/api/v2/ability/287/' },
 	{ name: 'orichalcum-pulse', url: 'https://pokeapi.co/api/v2/ability/288/' },
 	{ name: 'hadron-engine', url: 'https://pokeapi.co/api/v2/ability/289/' },
@@ -1587,6 +1591,7 @@ export const abilityNames = [
 	'good-as-gold',
 	'vessel-of-ruin',
 	'sword-of-ruin',
+	'tablets-of-ruin',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
