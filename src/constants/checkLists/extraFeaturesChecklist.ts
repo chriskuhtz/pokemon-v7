@@ -441,6 +441,7 @@ export const extraFeatureCheckList: {
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
 	{ name: 'timeofday in pokedex' },
 	{ name: 'progress bar for catch x quests' },
+	{ name: 'min level for many things (e.g. rockets)' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
@@ -452,7 +453,9 @@ export const extraFeatureCheckList: {
 	{ name: 'silver' },
 	{ name: 'cynthia' },
 	{ name: 'procedural infinite cave with legendaries' },
-	{ name: 'procedural random challenge' },
+	{ name: 'procedural random challenge gauntlet' },
+	{ name: 'nuzlocke mode' },
+	{ name: 'cave of shadows where you face yourself' },
 	{ name: 'eggs?' },
 	{ name: 'Fishing?' },
 	{ name: 'magma/aqua quests from looker' },
