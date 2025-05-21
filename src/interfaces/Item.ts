@@ -283,6 +283,7 @@ export const heldItems = [
 	'grassy-seed',
 	'psychic-seed',
 	'misty-seed',
+	'booster-energy',
 ] as const;
 export const valuables = [
 	'auspicious-armor',

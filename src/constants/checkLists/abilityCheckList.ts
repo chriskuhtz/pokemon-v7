@@ -1190,7 +1190,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/280/',
 		handled: true,
 	},
-	{ name: 'protosynthesis', url: 'https://pokeapi.co/api/v2/ability/281/' },
+	{
+		name: 'protosynthesis',
+		url: 'https://pokeapi.co/api/v2/ability/281/',
+		handled: true,
+	},
 	{ name: 'quark-drive', url: 'https://pokeapi.co/api/v2/ability/282/' },
 	{ name: 'good-as-gold', url: 'https://pokeapi.co/api/v2/ability/283/' },
 	{ name: 'vessel-of-ruin', url: 'https://pokeapi.co/api/v2/ability/284/' },
@@ -1562,6 +1566,7 @@ export const abilityNames = [
 	'rocky-payload',
 	'wind-power',
 	'electromorphosis',
+	'protosynthesis',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

@@ -8,6 +8,7 @@ import { TerrainObject } from '../modules/Battle/hooks/useBattleTerrain';
 import { WeatherObject } from '../modules/Battle/hooks/useBattleWeather';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { getHeldItem } from './getHeldItem';
+import { getHighestStat } from './getHighestStat';
 import { getTypeNames } from './getTypeNames';
 
 export const applyOnBattleEnterAbilityAndEffects = ({
@@ -275,6 +276,33 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 					[],
 					addMessage,
 					'dauntless shield'
+				);
+			}
+
+			return p;
+		});
+	}
+	if (
+		user.ability === 'protosynthesis' &&
+		(currentWeather === 'sun' || getHeldItem(user) === 'booster-energy')
+	) {
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.status !== 'ONFIELD') {
+				return p;
+			}
+			if (p.id === user.id) {
+				const stat: Stat = getHighestStat({
+					ownedPokemon: user,
+					data: user.data,
+				})[0];
+				return applyStatChangeToPokemon(
+					p,
+					stat,
+					1,
+					true,
+					[],
+					addMessage,
+					'protosynthesis'
 				);
 			}
 
