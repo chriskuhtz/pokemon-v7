@@ -69,6 +69,19 @@ export const handleAbilitiesAfterAttack = (
 			applicator: updatedAttacker,
 		});
 	}
+	//wind power
+	if (
+		!isKO(target) &&
+		target.ability === 'electromorphosis' &&
+		(target.lastReceivedDamage?.damage ?? 0) > 0
+	) {
+		updatedTarget = applySecondaryAilmentToPokemon({
+			pokemon: updatedTarget,
+			addMessage,
+			ailment: 'charge',
+			applicator: updatedAttacker,
+		});
+	}
 	//volt-absorb, water-absorb, dry-skin
 	const absorbAbility = DamageAbsorbAbilityMap[target.ability];
 	if (

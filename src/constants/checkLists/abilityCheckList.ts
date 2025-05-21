@@ -1184,9 +1184,12 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/277/',
 		handled: true,
 	},
-	{ name: 'zero-to-hero', url: 'https://pokeapi.co/api/v2/ability/278/' },
-	{ name: 'commander', url: 'https://pokeapi.co/api/v2/ability/279/' },
-	{ name: 'electromorphosis', url: 'https://pokeapi.co/api/v2/ability/280/' },
+
+	{
+		name: 'electromorphosis',
+		url: 'https://pokeapi.co/api/v2/ability/280/',
+		handled: true,
+	},
 	{ name: 'protosynthesis', url: 'https://pokeapi.co/api/v2/ability/281/' },
 	{ name: 'quark-drive', url: 'https://pokeapi.co/api/v2/ability/282/' },
 	{ name: 'good-as-gold', url: 'https://pokeapi.co/api/v2/ability/283/' },
@@ -1277,6 +1280,8 @@ export const abilityCheckList: {
 	/**
 	 * BANISHED
 	 */
+	{ name: 'commander', url: 'https://pokeapi.co/api/v2/ability/279/' },
+	{ name: 'zero-to-hero', url: 'https://pokeapi.co/api/v2/ability/278/' },
 	{ name: 'wimp-out', url: 'https://pokeapi.co/api/v2/ability/193/' },
 	{ name: 'emergency-exit', url: 'https://pokeapi.co/api/v2/ability/194/' },
 	{ name: 'primordial-sea', url: 'https://pokeapi.co/api/v2/ability/189/' },
@@ -1556,6 +1561,7 @@ export const abilityNames = [
 	'guard-dog',
 	'rocky-payload',
 	'wind-power',
+	'electromorphosis',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
