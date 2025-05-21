@@ -69,6 +69,7 @@ const ChangeLogV31 = (): JSX.Element => {
 		<>
 			<h3>0.31:</h3>
 			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>New Travelling Trainer</li>
 				<li>fixes and improvements</li>
 				<li>New Abilities and Attacks</li>
 			</ol>

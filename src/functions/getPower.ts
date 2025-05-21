@@ -194,7 +194,7 @@ export const getPower = (
 			return attack.data.power ?? 0;
 		} else return 0;
 	}
-	if (attack.name === 'heavy-slam') {
+	if (attack.name === 'heavy-slam' || attack.name === 'heat-crash') {
 		const factor =
 			getActualWeight(
 				attacker.data.weight,
