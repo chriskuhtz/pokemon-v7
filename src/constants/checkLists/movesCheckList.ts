@@ -1932,8 +1932,12 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/513/',
 		handled: true,
 	},
-	{ name: 'retaliate', url: 'https://pokeapi.co/api/v2/move/514/' },
-	{ name: 'final-gambit', url: 'https://pokeapi.co/api/v2/move/515/' },
+
+	{
+		name: 'final-gambit',
+		url: 'https://pokeapi.co/api/v2/move/515/',
+		handled: true,
+	},
 	{ name: 'bestow', url: 'https://pokeapi.co/api/v2/move/516/' },
 	{ name: 'inferno', url: 'https://pokeapi.co/api/v2/move/517/' },
 	{ name: 'water-pledge', url: 'https://pokeapi.co/api/v2/move/518/' },
@@ -2389,6 +2393,7 @@ export const movesCheckList: {
 	{ name: 'magic-room', url: 'https://pokeapi.co/api/v2/move/478/' },
 	{ name: 'soak', url: 'https://pokeapi.co/api/v2/move/487/' },
 	{ name: 'quick-guard', url: 'https://pokeapi.co/api/v2/move/501/' },
+	{ name: 'retaliate', url: 'https://pokeapi.co/api/v2/move/514/' },
 	/*
 	 * BANISHED:
 	 */
@@ -3009,6 +3014,7 @@ export const handledMoves = [
 	'incinerate',
 	'acrobatics',
 	'reflect-type',
+	'final-gambit',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

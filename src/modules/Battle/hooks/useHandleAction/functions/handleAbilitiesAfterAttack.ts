@@ -46,6 +46,11 @@ export const handleAbilitiesAfterAttack = (
 } => {
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
+	//final gambit
+	if (move.name === 'final-gambit') {
+		updatedAttacker = { ...updatedAttacker, damage: updatedAttacker.stats.hp };
+		addMessage({ message: `${updatedAttacker.name} defeated itself` });
+	}
 	//innards out
 	if (target.ability === 'innards-out' && isKO(target)) {
 		addMessage({

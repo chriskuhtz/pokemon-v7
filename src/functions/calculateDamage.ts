@@ -159,6 +159,11 @@ export const calculateDamage = (
 			damage: calculateLevelData(attacker.xp, attacker.growthRate).level,
 		};
 	}
+	if (attack.name === 'final-gambit') {
+		return {
+			damage: attacker.stats.hp - attacker.damage,
+		};
+	}
 	if (attack.name === 'super-fang') {
 		return {
 			damage: Math.floor(
