@@ -4,7 +4,10 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { EmptyStatObject, Stat } from '../interfaces/StatObject';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
-import { TerrainObject } from '../modules/Battle/hooks/useBattleTerrain';
+import {
+	BattleTerrain,
+	TerrainObject,
+} from '../modules/Battle/hooks/useBattleTerrain';
 import { WeatherObject } from '../modules/Battle/hooks/useBattleWeather';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { getHeldItem } from './getHeldItem';
@@ -20,6 +23,7 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 	addMessage,
 	battleFieldEffects,
 	removeScreens,
+	terrain,
 }: {
 	user: BattlePokemon;
 	setWeather: (x: WeatherObject) => void;
@@ -29,6 +33,7 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 	addMessage: (x: Message) => void;
 	battleFieldEffects: BattleFieldEffect[];
 	removeScreens: (ownerId: string) => void;
+	terrain: BattleTerrain | undefined;
 }): BattlePokemon[] => {
 	let updatedPokemon = [...pokemon];
 	if (user.ability == 'curious-medicine') {
@@ -303,6 +308,34 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 					[],
 					addMessage,
 					'protosynthesis'
+				);
+			}
+
+			return p;
+		});
+	}
+
+	if (
+		user.ability === 'quark-drive' &&
+		(terrain === 'electric' || getHeldItem(user) === 'booster-energy')
+	) {
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.status !== 'ONFIELD') {
+				return p;
+			}
+			if (p.id === user.id) {
+				const stat: Stat = getHighestStat({
+					ownedPokemon: user,
+					data: user.data,
+				})[0];
+				return applyStatChangeToPokemon(
+					p,
+					stat,
+					1,
+					true,
+					[],
+					addMessage,
+					'quark-drive'
 				);
 			}
 
