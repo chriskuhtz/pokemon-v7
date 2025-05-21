@@ -1,3 +1,4 @@
+import { getRandomEntry } from '../../../functions/filterTargets';
 import { getHighestXpOnTeam } from '../../../functions/getHighestXpOnTeam';
 import { makeChallengerPokemon } from '../../../functions/makeChallengerPokemon';
 import { Occupant, OverworldTrainer } from '../../../interfaces/OverworldMap';
@@ -234,6 +235,76 @@ const barryTeam = (s: SaveFile): OwnedPokemon[] => {
 			speed: 252,
 		},
 	});
+	const rampardos = makeChallengerPokemon({
+		name: 'rampardos',
+		xp: highestXpOnTeam,
+		nature: 'adamant',
+		ability: 'rock-head',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'expert-belt',
+		firstMove: { name: 'head-smash', usedPP: 0 },
+		secondMove: { name: 'double-edge', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			attack: 252,
+			speed: 252,
+		},
+	});
+	const mismagius = makeChallengerPokemon({
+		name: 'mismagius',
+		xp: highestXpOnTeam,
+		nature: 'adamant',
+		ability: 'moody',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'expert-belt',
+		firstMove: { name: 'magical-leaf', usedPP: 0 },
+		secondMove: { name: 'psychic', usedPP: 0 },
+		thirdMove: { name: 'shadow-ball', usedPP: 0 },
+		fourthMove: { name: 'power-gem', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			'special-attack': 252,
+			speed: 252,
+		},
+	});
+	const torterra = makeChallengerPokemon({
+		name: 'torterra',
+		xp: highestXpOnTeam,
+		nature: 'adamant',
+		ability: 'steadfast',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'big-root',
+		firstMove: { name: 'earthquake', usedPP: 0 },
+		secondMove: { name: 'power-whip', usedPP: 0 },
+		thirdMove: { name: 'ingrain', usedPP: 0 },
+		fourthMove: { name: 'bulk-up', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			'special-defense': 252,
+			defense: 252,
+		},
+	});
+	const empoleon = makeChallengerPokemon({
+		name: 'empoleon',
+		xp: highestXpOnTeam,
+		nature: 'adamant',
+		ability: 'steadfast',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'metal-coat',
+		firstMove: { name: 'steel-wing', usedPP: 0 },
+		secondMove: { name: 'swords-dance', usedPP: 0 },
+		thirdMove: { name: 'drill-peck', usedPP: 0 },
+		fourthMove: { name: 'waterfall', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			attack: 252,
+			speed: 252,
+		},
+	});
 
 	if (highestXpOnTeam < 8000) {
 		return [chimchar, starly, snover];
@@ -242,7 +313,29 @@ const barryTeam = (s: SaveFile): OwnedPokemon[] => {
 		return [monferno, staravia, stunky, luxio, snover];
 	}
 
-	return [infernape, staraptor, skuntank, luxray, abomasnow, yanmega];
+	const possibilities = [
+		infernape,
+		staraptor,
+		skuntank,
+		luxray,
+		abomasnow,
+		yanmega,
+		rampardos,
+		mismagius,
+		torterra,
+		empoleon,
+	];
+	const team: OwnedPokemon[] = [];
+
+	for (let i = 0; i < 6; i++) {
+		team.push(
+			getRandomEntry(
+				possibilities.filter((p) => team.every((t) => t.name !== p.name))
+			)
+		);
+	}
+
+	return team;
 };
 
 const barry: OverworldTrainer = {

@@ -433,6 +433,7 @@ export const extraFeatureCheckList: {
 	{ name: 'choose random nature for starter', handled: true },
 	{ name: 'confirmation before throwing item away', handled: true },
 	{ name: 'random abilites should aslo work by offset', handled: true },
+	{ name: 'more pokemon for barry', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
