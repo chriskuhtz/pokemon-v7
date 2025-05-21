@@ -1932,24 +1932,64 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/513/',
 		handled: true,
 	},
-	{ name: 'retaliate', url: 'https://pokeapi.co/api/v2/move/514/' },
-	{ name: 'final-gambit', url: 'https://pokeapi.co/api/v2/move/515/' },
-	{ name: 'bestow', url: 'https://pokeapi.co/api/v2/move/516/' },
-	{ name: 'inferno', url: 'https://pokeapi.co/api/v2/move/517/' },
-	{ name: 'water-pledge', url: 'https://pokeapi.co/api/v2/move/518/' },
-	{ name: 'fire-pledge', url: 'https://pokeapi.co/api/v2/move/519/' },
-	{ name: 'grass-pledge', url: 'https://pokeapi.co/api/v2/move/520/' },
-	{ name: 'volt-switch', url: 'https://pokeapi.co/api/v2/move/521/' },
-	{ name: 'struggle-bug', url: 'https://pokeapi.co/api/v2/move/522/' },
-	{ name: 'bulldoze', url: 'https://pokeapi.co/api/v2/move/523/' },
-	{ name: 'frost-breath', url: 'https://pokeapi.co/api/v2/move/524/' },
-	{ name: 'dragon-tail', url: 'https://pokeapi.co/api/v2/move/525/' },
-	{ name: 'work-up', url: 'https://pokeapi.co/api/v2/move/526/' },
-	{ name: 'electroweb', url: 'https://pokeapi.co/api/v2/move/527/' },
-	{ name: 'wild-charge', url: 'https://pokeapi.co/api/v2/move/528/' },
-	{ name: 'drill-run', url: 'https://pokeapi.co/api/v2/move/529/' },
-	{ name: 'dual-chop', url: 'https://pokeapi.co/api/v2/move/530/' },
-	{ name: 'heart-stamp', url: 'https://pokeapi.co/api/v2/move/531/' },
+
+	{
+		name: 'final-gambit',
+		url: 'https://pokeapi.co/api/v2/move/515/',
+		handled: true,
+	},
+	{ name: 'bestow', url: 'https://pokeapi.co/api/v2/move/516/', handled: true },
+	{
+		name: 'inferno',
+		url: 'https://pokeapi.co/api/v2/move/517/',
+		handled: true,
+	},
+	{
+		name: 'struggle-bug',
+		url: 'https://pokeapi.co/api/v2/move/522/',
+		handled: true,
+	},
+	{
+		name: 'bulldoze',
+		url: 'https://pokeapi.co/api/v2/move/523/',
+		handled: true,
+	},
+	{
+		name: 'frost-breath',
+		url: 'https://pokeapi.co/api/v2/move/524/',
+		handled: true,
+	},
+
+	{
+		name: 'work-up',
+		url: 'https://pokeapi.co/api/v2/move/526/',
+		handled: true,
+	},
+	{
+		name: 'electroweb',
+		url: 'https://pokeapi.co/api/v2/move/527/',
+		handled: true,
+	},
+	{
+		name: 'wild-charge',
+		url: 'https://pokeapi.co/api/v2/move/528/',
+		handled: true,
+	},
+	{
+		name: 'drill-run',
+		url: 'https://pokeapi.co/api/v2/move/529/',
+		handled: true,
+	},
+	{
+		name: 'dual-chop',
+		url: 'https://pokeapi.co/api/v2/move/530/',
+		handled: true,
+	},
+	{
+		name: 'heart-stamp',
+		url: 'https://pokeapi.co/api/v2/move/531/',
+		handled: true,
+	},
 	{ name: 'horn-leech', url: 'https://pokeapi.co/api/v2/move/532/' },
 	{ name: 'sacred-sword', url: 'https://pokeapi.co/api/v2/move/533/' },
 	{ name: 'razor-shell', url: 'https://pokeapi.co/api/v2/move/534/' },
@@ -2389,6 +2429,11 @@ export const movesCheckList: {
 	{ name: 'magic-room', url: 'https://pokeapi.co/api/v2/move/478/' },
 	{ name: 'soak', url: 'https://pokeapi.co/api/v2/move/487/' },
 	{ name: 'quick-guard', url: 'https://pokeapi.co/api/v2/move/501/' },
+	{ name: 'retaliate', url: 'https://pokeapi.co/api/v2/move/514/' },
+	{ name: 'water-pledge', url: 'https://pokeapi.co/api/v2/move/518/' },
+	{ name: 'fire-pledge', url: 'https://pokeapi.co/api/v2/move/519/' },
+	{ name: 'grass-pledge', url: 'https://pokeapi.co/api/v2/move/520/' },
+	{ name: 'volt-switch', url: 'https://pokeapi.co/api/v2/move/521/' },
 	/*
 	 * BANISHED:
 	 */
@@ -2454,6 +2499,7 @@ export const movesCheckList: {
 	{ name: 'sky-drop', url: 'https://pokeapi.co/api/v2/move/507/' },
 	{ name: 'circle-throw', url: 'https://pokeapi.co/api/v2/move/509/' },
 	{ name: 'quash', url: 'https://pokeapi.co/api/v2/move/511/' },
+	{ name: 'dragon-tail', url: 'https://pokeapi.co/api/v2/move/525/' },
 	/**
 	 * INCOMPLETE DATA:
 	 */
@@ -3009,6 +3055,18 @@ export const handledMoves = [
 	'incinerate',
 	'acrobatics',
 	'reflect-type',
+	'final-gambit',
+	'bestow',
+	'inferno',
+	'struggle-bug',
+	'bulldoze',
+	'frost-breath',
+	'work-up',
+	'electroweb',
+	'wild-charge',
+	'drill-run',
+	'dual-chop',
+	'heart-stamp',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

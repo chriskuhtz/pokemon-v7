@@ -61,6 +61,16 @@ export const applyAttackAilmentsToPokemon = (
 		return { updatedTarget: target, updatedApplicator: applicator };
 	}
 	if (
+		//good as gold prevents all side effects
+		target.ability === 'good-as-gold' &&
+		attack.data.damage_class.name === 'status'
+	) {
+		addMessage({
+			message: `${target.name} prevents status conditions with good as gold`,
+		});
+		return { updatedTarget: target, updatedApplicator: applicator };
+	}
+	if (
 		//covert cloak prevents all side effects
 		getHeldItem(target) === 'covert-cloak' &&
 		attack.data.damage_class.name !== 'status'

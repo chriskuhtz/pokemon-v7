@@ -56,12 +56,19 @@ export const useLeaveBattle = () => {
 			let updatedLocation = location;
 
 			if (outcome === 'LOSS') {
-				if (
-					location.mapId !== 'camp' &&
-					location.mapId !== 'challengeField' &&
-					(saveFile.settings?.rogueLike ||
-						saveFile.settings?.releaseFaintedPokemon)
-				) {
+				const resetTime = () => {
+					if (
+						saveFile.settings?.rogueLike ||
+						saveFile.settings?.releaseFaintedPokemon
+					) {
+						return (
+							//dont reset on challenge field and camp
+							location.mapId !== 'camp' && location.mapId !== 'challengeField'
+						);
+					}
+					return false;
+				};
+				if (resetTime()) {
 					reset();
 					return;
 				} else {
@@ -84,17 +91,13 @@ export const useLeaveBattle = () => {
 					setLocation(updatedLocation);
 					patchSaveFileReducer({
 						meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
-
 						pokemon: saveFile.pokemon.map((p) => {
 							if (p.onTeam) {
 								return fullyHealPokemon(p);
 							}
 							return p;
 						}),
-						bag:
-							updatedLocation.mapId === 'camp'
-								? saveFile.bag
-								: bagWithOnlyKeyItems,
+						bag: location.mapId === 'camp' ? saveFile.bag : bagWithOnlyKeyItems,
 					});
 					return;
 				}

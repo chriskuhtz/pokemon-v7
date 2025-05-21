@@ -46,6 +46,11 @@ export const handleAbilitiesAfterAttack = (
 } => {
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
+	//final gambit
+	if (move.name === 'final-gambit') {
+		updatedAttacker = { ...updatedAttacker, damage: updatedAttacker.stats.hp };
+		addMessage({ message: `${updatedAttacker.name} defeated itself` });
+	}
 	//innards out
 	if (target.ability === 'innards-out' && isKO(target)) {
 		addMessage({
@@ -61,6 +66,19 @@ export const handleAbilitiesAfterAttack = (
 		!isKO(target) &&
 		target.ability === 'wind-power' &&
 		windMoves.includes(move.name)
+	) {
+		updatedTarget = applySecondaryAilmentToPokemon({
+			pokemon: updatedTarget,
+			addMessage,
+			ailment: 'charge',
+			applicator: updatedAttacker,
+		});
+	}
+	//wind power
+	if (
+		!isKO(target) &&
+		target.ability === 'electromorphosis' &&
+		(target.lastReceivedDamage?.damage ?? 0) > 0
 	) {
 		updatedTarget = applySecondaryAilmentToPokemon({
 			pokemon: updatedTarget,
