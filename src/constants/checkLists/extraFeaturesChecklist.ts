@@ -452,4 +452,6 @@ export const extraFeatureCheckList: {
 	{ name: 'choose random nature for starter' },
 	{ name: 'random abilites should aslo work by offset' },
 	{ name: 'timeofday in pokedex' },
+	{ name: 'add favorite toggle on team' },
+	{ name: 'more gap in storage rows' },
 ];
