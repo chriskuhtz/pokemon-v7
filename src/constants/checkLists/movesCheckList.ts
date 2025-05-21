@@ -1959,13 +1959,37 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/524/',
 		handled: true,
 	},
-	{ name: 'dragon-tail', url: 'https://pokeapi.co/api/v2/move/525/' },
-	{ name: 'work-up', url: 'https://pokeapi.co/api/v2/move/526/' },
-	{ name: 'electroweb', url: 'https://pokeapi.co/api/v2/move/527/' },
-	{ name: 'wild-charge', url: 'https://pokeapi.co/api/v2/move/528/' },
-	{ name: 'drill-run', url: 'https://pokeapi.co/api/v2/move/529/' },
-	{ name: 'dual-chop', url: 'https://pokeapi.co/api/v2/move/530/' },
-	{ name: 'heart-stamp', url: 'https://pokeapi.co/api/v2/move/531/' },
+
+	{
+		name: 'work-up',
+		url: 'https://pokeapi.co/api/v2/move/526/',
+		handled: true,
+	},
+	{
+		name: 'electroweb',
+		url: 'https://pokeapi.co/api/v2/move/527/',
+		handled: true,
+	},
+	{
+		name: 'wild-charge',
+		url: 'https://pokeapi.co/api/v2/move/528/',
+		handled: true,
+	},
+	{
+		name: 'drill-run',
+		url: 'https://pokeapi.co/api/v2/move/529/',
+		handled: true,
+	},
+	{
+		name: 'dual-chop',
+		url: 'https://pokeapi.co/api/v2/move/530/',
+		handled: true,
+	},
+	{
+		name: 'heart-stamp',
+		url: 'https://pokeapi.co/api/v2/move/531/',
+		handled: true,
+	},
 	{ name: 'horn-leech', url: 'https://pokeapi.co/api/v2/move/532/' },
 	{ name: 'sacred-sword', url: 'https://pokeapi.co/api/v2/move/533/' },
 	{ name: 'razor-shell', url: 'https://pokeapi.co/api/v2/move/534/' },
@@ -2475,6 +2499,7 @@ export const movesCheckList: {
 	{ name: 'sky-drop', url: 'https://pokeapi.co/api/v2/move/507/' },
 	{ name: 'circle-throw', url: 'https://pokeapi.co/api/v2/move/509/' },
 	{ name: 'quash', url: 'https://pokeapi.co/api/v2/move/511/' },
+	{ name: 'dragon-tail', url: 'https://pokeapi.co/api/v2/move/525/' },
 	/**
 	 * INCOMPLETE DATA:
 	 */
@@ -3036,6 +3061,12 @@ export const handledMoves = [
 	'struggle-bug',
 	'bulldoze',
 	'frost-breath',
+	'work-up',
+	'electroweb',
+	'wild-charge',
+	'drill-run',
+	'dual-chop',
+	'heart-stamp',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
