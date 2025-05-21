@@ -5,6 +5,7 @@ import { travellingMerchantRouteN1 } from '../../../modules/TravellingMerchant/T
 import { barryN1 } from './barry';
 import { erika } from './erika';
 import { giovanni } from './giovanni';
+import { silverN1 } from './silver';
 
 export const routeN1Occupants: OverworldMap['occupants'] = [
 	{
@@ -269,4 +270,5 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		id: 'routeN1_green_tree_3',
 	}),
 	barryN1,
+	silverN1,
 ];

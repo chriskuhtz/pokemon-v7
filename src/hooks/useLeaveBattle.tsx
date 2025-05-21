@@ -212,6 +212,12 @@ export const useLeaveBattle = () => {
 				) {
 					updatedMileStones.barryDefeatedAt = xp;
 				}
+				if (
+					!updatedMileStones.silverDefeatedAt ||
+					xp > updatedMileStones.silverDefeatedAt
+				) {
+					updatedMileStones.silverDefeatedAt = xp;
+				}
 			}
 			updatedMileStones.caughtFromSwarms = updatedSwarmRecord;
 
