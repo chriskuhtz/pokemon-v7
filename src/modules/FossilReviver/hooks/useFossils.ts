@@ -1,5 +1,6 @@
 import { useCallback, useContext } from 'react';
 import { PokemonName } from '../../../constants/pokemonNames';
+import { getTeamSize } from '../../../functions/getTeamSize';
 import { makeChallengerPokemon } from '../../../functions/makeChallengerPokemon';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
@@ -39,7 +40,9 @@ export const useFossils = () => {
 						name: pokemon,
 						xp: 1000,
 						nature: getRandomNature(),
-						onTeam: saveFile.pokemon.filter((p) => p.onTeam).length < 6,
+						onTeam:
+							saveFile.pokemon.filter((p) => p.onTeam).length <
+							getTeamSize(saveFile),
 						ownerId: saveFile.playerId,
 						weightModifier: Math.random(),
 					}),
