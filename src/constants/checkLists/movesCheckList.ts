@@ -1938,7 +1938,7 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/515/',
 		handled: true,
 	},
-	{ name: 'bestow', url: 'https://pokeapi.co/api/v2/move/516/' },
+	{ name: 'bestow', url: 'https://pokeapi.co/api/v2/move/516/', handled: true },
 	{ name: 'inferno', url: 'https://pokeapi.co/api/v2/move/517/' },
 	{ name: 'water-pledge', url: 'https://pokeapi.co/api/v2/move/518/' },
 	{ name: 'fire-pledge', url: 'https://pokeapi.co/api/v2/move/519/' },
@@ -3015,6 +3015,7 @@ export const handledMoves = [
 	'acrobatics',
 	'reflect-type',
 	'final-gambit',
+	'bestow',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
