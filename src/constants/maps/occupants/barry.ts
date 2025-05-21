@@ -359,7 +359,7 @@ const barry: OverworldTrainer = {
 		assignGender: false,
 		assignHeldItem: false,
 		assignLearnsetMoves: false,
-		assignNaturalAbility: true,
+		assignNaturalAbility: false,
 		generateIvs: true,
 	},
 };
@@ -406,12 +406,12 @@ export const barryS1W1: Occupant = {
 	x: 29,
 	y: 6,
 	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== barryId) && day === 5,
+		s.handledOccupants.every((h) => h.id !== barryId) && day === 6,
 };
 export const barryN1W1: Occupant = {
 	...barry,
 	x: 16,
 	y: 45,
 	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== barryId) && day === 6,
+		s.handledOccupants.every((h) => h.id !== barryId) && day === 0,
 };

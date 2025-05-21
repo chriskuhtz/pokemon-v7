@@ -434,6 +434,7 @@ export const extraFeatureCheckList: {
 	{ name: 'confirmation before throwing item away', handled: true },
 	{ name: 'random abilites should aslo work by offset', handled: true },
 	{ name: 'more pokemon for barry', handled: true },
+	{ name: 'silver', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -451,7 +452,7 @@ export const extraFeatureCheckList: {
 	{ name: 'e4 challenge' },
 	{ name: 'rock climbing' },
 	{ name: 'kanto leaders with proper teams on training field' },
-	{ name: 'silver' },
+
 	{ name: 'cynthia' },
 	{ name: 'procedural infinite cave with legendaries' },
 	{ name: 'procedural random challenge gauntlet' },
