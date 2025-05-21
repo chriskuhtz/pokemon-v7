@@ -301,6 +301,34 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 			return res;
 		});
 	}
+	if (user.ability === 'beads-of-ruin') {
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.status !== 'ONFIELD') {
+				return p;
+			}
+			if (p.id === user.id) {
+				return {
+					...user,
+					roundsInBattle: p.roundsInBattle + 1,
+					participatedInBattle: true,
+				};
+			}
+
+			let res = { ...p };
+
+			res = applyStatChangeToPokemon(
+				p,
+				'special-defense',
+				-1,
+				false,
+				battleFieldEffects,
+				addMessage,
+				`${user.data.name}'s beads of ruin`
+			);
+
+			return res;
+		});
+	}
 	if (user.ability === 'download') {
 		updatedPokemon = updatedPokemon.map((p) => {
 			if (p.status !== 'ONFIELD') {
