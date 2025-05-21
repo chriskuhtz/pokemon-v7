@@ -432,13 +432,13 @@ export const extraFeatureCheckList: {
 	{ name: 'barry timeout condition', handled: true },
 	{ name: 'choose random nature for starter', handled: true },
 	{ name: 'confirmation before throwing item away', handled: true },
+	{ name: 'random abilites should aslo work by offset', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
 	{ name: 'loosing to wild mons is sometimes buggy' },
 	{ name: 'trainer ai should consider flying,dig, diving' },
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
-	{ name: 'random abilites should aslo work by offset' },
 	{ name: 'timeofday in pokedex' },
 	{ name: 'progress bar for catch x quests' },
 	//CONTENT:
