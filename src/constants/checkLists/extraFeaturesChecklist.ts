@@ -441,6 +441,7 @@ export const extraFeatureCheckList: {
 	{ name: 'quests for random field', handled: true },
 	{ name: 'improve challenge field menu', handled: true },
 	{ name: 'lower catchrate with level', handled: true },
+
 	//BUGS/IMPROVEMENTS:
 	{ name: 'progress bar for catch x quests' },
 	{ name: 'nicer ladder up sprite' },
@@ -457,11 +458,9 @@ export const extraFeatureCheckList: {
 	{ name: 'claire' },
 	{ name: 'e4 challenge' },
 	{ name: 'rock climbing' },
-	{ name: 'kanto leaders with proper teams on training field' },
 	{ name: 'unlockable recipes' },
 	{ name: 'cynthia' },
 	{ name: 'procedural infinite cave with legendaries' },
-	{ name: 'procedural random challenge gauntlet' },
 	{ name: 'nuzlocke mode' },
 	{ name: 'cave of shadows where you face yourself' },
 	{ name: 'eggs?' },
@@ -473,4 +472,6 @@ export const extraFeatureCheckList: {
 	{ name: 'future and past distortions' },
 	{ name: 'random encounters' },
 	{ name: 'random evolutions' },
+	{ name: 'steven as the fossil protector' },
+	{ name: 'cynthia' },
 ];
