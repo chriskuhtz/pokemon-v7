@@ -13,6 +13,7 @@ import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { getHeldItem } from './getHeldItem';
 import { getHighestStat } from './getHighestStat';
 import { getTypeNames } from './getTypeNames';
+import { isKO } from './isKo';
 
 export const applyOnBattleEnterAbilityAndEffects = ({
 	user,
@@ -524,6 +525,47 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 		addMessage({
 			message: `${user.name} boosts itself and its allies with flower-gift`,
 		});
+	}
+
+	if (user.ability === 'supreme-overlord') {
+		const defeatedTeamMembers = updatedPokemon.filter(
+			(p) => p.participatedInBattle && isKO(p) && p.ownerId === user.ownerId
+		).length;
+
+		if (defeatedTeamMembers > 0) {
+			addMessage({
+				message: `${user.data.name} is getting ready for vengeance`,
+			});
+			updatedPokemon = updatedPokemon.map((p) => {
+				if (p.id === user.id) {
+					const up = applyStatChangeToPokemon(
+						{
+							...user,
+							roundsInBattle: p.roundsInBattle + 1,
+							participatedInBattle: true,
+						},
+						'special-attack',
+						1,
+						true,
+						battleFieldEffects,
+						addMessage,
+						'supreme overlord'
+					);
+					return applyStatChangeToPokemon(
+						up,
+						'attack',
+						1,
+						true,
+						battleFieldEffects,
+						addMessage,
+						'supreme overlord'
+					);
+				}
+
+				return p;
+			});
+		}
+		return updatedPokemon;
 	}
 
 	if (

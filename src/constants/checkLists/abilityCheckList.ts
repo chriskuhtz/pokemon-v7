@@ -1240,7 +1240,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/292/',
 		handled: true,
 	},
-	{ name: 'supreme-overlord', url: 'https://pokeapi.co/api/v2/ability/293/' },
+	{
+		name: 'supreme-overlord',
+		url: 'https://pokeapi.co/api/v2/ability/293/',
+		handled: true,
+	},
 	{ name: 'costar', url: 'https://pokeapi.co/api/v2/ability/294/' },
 	{ name: 'toxic-debris', url: 'https://pokeapi.co/api/v2/ability/295/' },
 	{ name: 'armor-tail', url: 'https://pokeapi.co/api/v2/ability/296/' },
@@ -1553,6 +1557,7 @@ export const abilityNames = [
 	'orichalcum-pulse',
 	'hadron-engine',
 	'sharpness',
+	'supreme-overlord',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
