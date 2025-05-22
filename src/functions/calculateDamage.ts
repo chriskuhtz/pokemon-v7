@@ -271,7 +271,8 @@ export const calculateDamage = (
 		if (
 			damageClass === 'physical' ||
 			attack.name === 'psyshock' ||
-			attack.name === 'psystrike'
+			attack.name === 'psystrike' ||
+			attack.name === 'secret-sword'
 		) {
 			return calculateModifiedStat(
 				'defense',

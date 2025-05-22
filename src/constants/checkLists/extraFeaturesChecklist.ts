@@ -449,6 +449,7 @@ export const extraFeatureCheckList: {
 	{ name: 'progress bar for catch x quests' },
 	{ name: 'download did not boost after tablets of ruin lowered' },
 	{ name: 'lower catchrate with level' },
+	{ name: 'improve challenge field menu' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
@@ -467,4 +468,5 @@ export const extraFeatureCheckList: {
 	{ name: 'Fishing?' },
 	{ name: 'magma/aqua quests from looker' },
 	{ name: 'Terrain Items (shovel, pickaxe) as Gym leader rewards' },
+	{ name: 'ev grind mode for challenge field' },
 ];

@@ -2060,9 +2060,17 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/545/',
 		handled: true,
 	},
-	{ name: 'techno-blast', url: 'https://pokeapi.co/api/v2/move/546/' },
-	{ name: 'relic-song', url: 'https://pokeapi.co/api/v2/move/547/' },
-	{ name: 'secret-sword', url: 'https://pokeapi.co/api/v2/move/548/' },
+
+	{
+		name: 'relic-song',
+		url: 'https://pokeapi.co/api/v2/move/547/',
+		handled: true,
+	},
+	{
+		name: 'secret-sword',
+		url: 'https://pokeapi.co/api/v2/move/548/',
+		handled: true,
+	},
 	{ name: 'glaciate', url: 'https://pokeapi.co/api/v2/move/549/' },
 	{ name: 'bolt-strike', url: 'https://pokeapi.co/api/v2/move/550/' },
 	{ name: 'blue-flare', url: 'https://pokeapi.co/api/v2/move/551/' },
@@ -2554,6 +2562,7 @@ export const movesCheckList: {
 	{ name: 'circle-throw', url: 'https://pokeapi.co/api/v2/move/509/' },
 	{ name: 'quash', url: 'https://pokeapi.co/api/v2/move/511/' },
 	{ name: 'dragon-tail', url: 'https://pokeapi.co/api/v2/move/525/' },
+	{ name: 'techno-blast', url: 'https://pokeapi.co/api/v2/move/546/' },
 ];
 
 export const handledMoves = [
@@ -3020,6 +3029,8 @@ export const handledMoves = [
 	'head-charge',
 	'gear-grind',
 	'searing-shot',
+	'relic-song',
+	'secret-sword',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
