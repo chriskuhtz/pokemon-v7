@@ -567,6 +567,30 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 		}
 		return updatedPokemon;
 	}
+	if (user.ability === 'costar') {
+		const ally = updatedPokemon.find(
+			(p) => p.status === 'ONFIELD' && p.ownerId === user.ownerId
+		);
+
+		if (ally) {
+			addMessage({
+				message: `${user.data.name} copies its ally with costar`,
+			});
+			updatedPokemon = updatedPokemon.map((p) => {
+				if (p.id === user.id) {
+					return {
+						...user,
+						roundsInBattle: p.roundsInBattle + 1,
+						participatedInBattle: true,
+						statBoosts: { ...ally.statBoosts },
+					};
+				}
+
+				return p;
+			});
+		}
+		return updatedPokemon;
+	}
 
 	if (
 		battleFieldEffects.some(

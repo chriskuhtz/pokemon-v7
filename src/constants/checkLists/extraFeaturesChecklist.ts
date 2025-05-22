@@ -469,4 +469,5 @@ export const extraFeatureCheckList: {
 	{ name: 'magma/aqua quests from looker' },
 	{ name: 'Terrain Items (shovel, pickaxe) as Gym leader rewards' },
 	{ name: 'ev grind mode for challenge field' },
+	{ name: 'trainer with dancer/costar combo' },
 ];
