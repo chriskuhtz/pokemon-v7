@@ -267,7 +267,11 @@ export const calculateDamage = (
 	};
 
 	const def = () => {
-		if (damageClass === 'physical' || attack.name === 'psyshock') {
+		if (
+			damageClass === 'physical' ||
+			attack.name === 'psyshock' ||
+			attack.name === 'psystrike'
+		) {
 			return calculateModifiedStat(
 				'defense',
 				target,

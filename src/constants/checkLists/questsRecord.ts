@@ -2499,7 +2499,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => !!s.mileStones.hasReportedBug,
 		kind: 'QUEST_LINE',
 		researchPoints: 20,
-		rewardItems: { 'great-ball': 10, 'lucky-egg': 1 },
+		rewardItems: { 'lucky-egg': 1 },
 	},
 	'train a Pokemon to 200 Attack EV': {
 		conditionFunction: (s) =>
