@@ -2010,10 +2010,26 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/535/',
 		handled: true,
 	},
-	{ name: 'leaf-tornado', url: 'https://pokeapi.co/api/v2/move/536/' },
-	{ name: 'steamroller', url: 'https://pokeapi.co/api/v2/move/537/' },
-	{ name: 'cotton-guard', url: 'https://pokeapi.co/api/v2/move/538/' },
-	{ name: 'night-daze', url: 'https://pokeapi.co/api/v2/move/539/' },
+	{
+		name: 'leaf-tornado',
+		url: 'https://pokeapi.co/api/v2/move/536/',
+		handled: true,
+	},
+	{
+		name: 'steamroller',
+		url: 'https://pokeapi.co/api/v2/move/537/',
+		handled: true,
+	},
+	{
+		name: 'cotton-guard',
+		url: 'https://pokeapi.co/api/v2/move/538/',
+		handled: true,
+	},
+	{
+		name: 'night-daze',
+		url: 'https://pokeapi.co/api/v2/move/539/',
+		handled: true,
+	},
 	{ name: 'psystrike', url: 'https://pokeapi.co/api/v2/move/540/' },
 	{ name: 'tail-slap', url: 'https://pokeapi.co/api/v2/move/541/' },
 	{ name: 'hurricane', url: 'https://pokeapi.co/api/v2/move/542/' },
@@ -3087,6 +3103,10 @@ export const handledMoves = [
 	'sacred-sword',
 	'razor-shell',
 	'heat-crash',
+	'leaf-tornado',
+	'steam-roller',
+	'cotton-guard',
+	'night-daze',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
