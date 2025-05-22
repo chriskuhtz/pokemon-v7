@@ -618,6 +618,35 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 		}
 		return updatedPokemon;
 	}
+	if (user.ability === 'hospitality') {
+		const ally = updatedPokemon.find(
+			(p) => p.status === 'ONFIELD' && p.ownerId === user.ownerId
+		);
+
+		if (ally && ally.damage) {
+			addMessage({
+				message: `${user.data.name} heals its ally with hospitality`,
+			});
+			updatedPokemon = updatedPokemon.map((p) => {
+				if (p.id === user.id) {
+					return {
+						...user,
+						roundsInBattle: p.roundsInBattle + 1,
+						participatedInBattle: true,
+					};
+				}
+				if (p.id === ally.id) {
+					return {
+						...ally,
+						damage: Math.max(0, ally.damage - ally.stats.hp / 16),
+					};
+				}
+
+				return p;
+			});
+		}
+		return updatedPokemon;
+	}
 
 	if (
 		battleFieldEffects.some(
