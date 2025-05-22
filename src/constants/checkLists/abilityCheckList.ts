@@ -1262,9 +1262,21 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/299/',
 		handled: true,
 	},
-	{ name: 'supersweet-syrup', url: 'https://pokeapi.co/api/v2/ability/300/' },
-	{ name: 'hospitality', url: 'https://pokeapi.co/api/v2/ability/301/' },
-	{ name: 'toxic-chain', url: 'https://pokeapi.co/api/v2/ability/302/' },
+	{
+		name: 'supersweet-syrup',
+		url: 'https://pokeapi.co/api/v2/ability/300/',
+		handled: true,
+	},
+	{
+		name: 'hospitality',
+		url: 'https://pokeapi.co/api/v2/ability/301/',
+		handled: true,
+	},
+	{
+		name: 'toxic-chain',
+		url: 'https://pokeapi.co/api/v2/ability/302/',
+		handled: true,
+	},
 	{ name: 'embody-aspect', url: 'https://pokeapi.co/api/v2/ability/303/' },
 	{ name: 'tera-shift', url: 'https://pokeapi.co/api/v2/ability/304/' },
 	{ name: 'tera-shell', url: 'https://pokeapi.co/api/v2/ability/305/' },
@@ -1575,6 +1587,9 @@ export const abilityNames = [
 	'costar',
 	'earth-eater',
 	'minds-eye',
+	'supersweet-syrup',
+	'hospitality',
+	'toxic-chain',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

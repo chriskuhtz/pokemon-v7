@@ -1,6 +1,7 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { barryOnixCave } from './barry';
 import { brock } from './brock';
+import { cynthiaOnixCave } from './cynthia';
 import { silverOnixCave } from './silver';
 
 export const onixCaveOccupants: OverworldMap['occupants'] = [
@@ -97,4 +98,5 @@ export const onixCaveOccupants: OverworldMap['occupants'] = [
 	...brock,
 	barryOnixCave,
 	silverOnixCave,
+	cynthiaOnixCave,
 ];

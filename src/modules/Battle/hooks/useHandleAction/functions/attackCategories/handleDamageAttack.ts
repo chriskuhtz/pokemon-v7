@@ -145,7 +145,7 @@ export const handleDamageAttack = ({
 		updatedTarget.heldItemName
 	) {
 		addMessage({
-			message: `${updatedAttacker.name} knocks away ${updatedTarget.name}'s ${updatedTarget.name}`,
+			message: `${updatedAttacker.name} knocks away ${updatedTarget.name}'s ${updatedTarget.heldItemName}`,
 		});
 		updatedTarget = { ...updatedTarget, heldItemName: undefined };
 	}

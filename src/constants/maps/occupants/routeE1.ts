@@ -4,6 +4,7 @@ import { routeE1Lure } from '../../../modules/BerryLure/BerryLure';
 import { travellingMerchantRouteE1 } from '../../../modules/TravellingMerchant/TravellingMerchant';
 import { barryE1 } from './barry';
 import { blaine } from './blaine';
+import { cynthiaE1 } from './cynthia';
 import { silverE1 } from './silver';
 
 export const routeE1Occupants: OverworldMap['occupants'] = [
@@ -250,4 +251,5 @@ export const routeE1Occupants: OverworldMap['occupants'] = [
 		id: 'routeE1_yellow_tree_3',
 	}),
 	silverE1,
+	cynthiaE1,
 ];

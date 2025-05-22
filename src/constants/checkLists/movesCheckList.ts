@@ -2096,12 +2096,28 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/553/',
 		handled: true,
 	},
-	{ name: 'ice-burn', url: 'https://pokeapi.co/api/v2/move/554/' },
-	{ name: 'snarl', url: 'https://pokeapi.co/api/v2/move/555/' },
-	{ name: 'icicle-crash', url: 'https://pokeapi.co/api/v2/move/556/' },
-	{ name: 'v-create', url: 'https://pokeapi.co/api/v2/move/557/' },
-	{ name: 'fusion-flare', url: 'https://pokeapi.co/api/v2/move/558/' },
-	{ name: 'fusion-bolt', url: 'https://pokeapi.co/api/v2/move/559/' },
+	{
+		name: 'ice-burn',
+		url: 'https://pokeapi.co/api/v2/move/554/',
+		handled: true,
+	},
+	{ name: 'snarl', url: 'https://pokeapi.co/api/v2/move/555/', handled: true },
+	{
+		name: 'icicle-crash',
+		url: 'https://pokeapi.co/api/v2/move/556/',
+		handled: true,
+	},
+	{
+		name: 'fairy-wind',
+		url: 'https://pokeapi.co/api/v2/move/584/',
+		handled: true,
+	},
+	{
+		name: 'v-create',
+		url: 'https://pokeapi.co/api/v2/move/557/',
+		handled: true,
+	},
+
 	{ name: 'flying-press', url: 'https://pokeapi.co/api/v2/move/560/' },
 	{ name: 'mat-block', url: 'https://pokeapi.co/api/v2/move/561/' },
 	{ name: 'belch', url: 'https://pokeapi.co/api/v2/move/562/' },
@@ -2126,7 +2142,11 @@ export const movesCheckList: {
 	{ name: 'misty-terrain', url: 'https://pokeapi.co/api/v2/move/581/' },
 	{ name: 'electrify', url: 'https://pokeapi.co/api/v2/move/582/' },
 	{ name: 'play-rough', url: 'https://pokeapi.co/api/v2/move/583/' },
-	{ name: 'fairy-wind', url: 'https://pokeapi.co/api/v2/move/584/' },
+	{
+		name: 'fairy-wind',
+		url: 'https://pokeapi.co/api/v2/move/584/',
+		handled: true,
+	},
 	{ name: 'boomburst', url: 'https://pokeapi.co/api/v2/move/586/' },
 	{ name: 'fairy-lock', url: 'https://pokeapi.co/api/v2/move/587/' },
 	{ name: 'kings-shield', url: 'https://pokeapi.co/api/v2/move/588/' },
@@ -2583,6 +2603,8 @@ export const movesCheckList: {
 	{ name: 'quash', url: 'https://pokeapi.co/api/v2/move/511/' },
 	{ name: 'dragon-tail', url: 'https://pokeapi.co/api/v2/move/525/' },
 	{ name: 'techno-blast', url: 'https://pokeapi.co/api/v2/move/546/' },
+	{ name: 'fusion-flare', url: 'https://pokeapi.co/api/v2/move/558/' },
+	{ name: 'fusion-bolt', url: 'https://pokeapi.co/api/v2/move/559/' },
 ];
 
 export const handledMoves = [
@@ -3056,6 +3078,11 @@ export const handledMoves = [
 	'blue-flare',
 	'fiery-dance',
 	'freeze-shock',
+	'ice-burn',
+	'snarl',
+	'icicle-crash',
+	'fairy-wind',
+	'v-create',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

@@ -441,6 +441,8 @@ export const extraFeatureCheckList: {
 	{ name: 'quests for random field', handled: true },
 	{ name: 'improve challenge field menu', handled: true },
 	{ name: 'lower catchrate with level', handled: true },
+	{ name: 'quest categories', handled: true },
+	{ name: 'cynthia', handled: true },
 
 	//BUGS/IMPROVEMENTS:
 	{ name: 'progress bar for catch x quests' },
@@ -459,7 +461,6 @@ export const extraFeatureCheckList: {
 	{ name: 'e4 challenge' },
 	{ name: 'rock climbing' },
 	{ name: 'unlockable recipes' },
-	{ name: 'cynthia' },
 	{ name: 'procedural infinite cave with legendaries' },
 	{ name: 'nuzlocke mode' },
 	{ name: 'cave of shadows where you face yourself' },
@@ -473,5 +474,5 @@ export const extraFeatureCheckList: {
 	{ name: 'random encounters' },
 	{ name: 'random evolutions' },
 	{ name: 'steven as the fossil protector' },
-	{ name: 'cynthia' },
+	{ name: 'way to produce lucky eggs' },
 ];

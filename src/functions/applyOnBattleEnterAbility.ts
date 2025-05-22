@@ -271,6 +271,33 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 			return res;
 		});
 	}
+	if (user.ability === 'supersweet-syrup') {
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.status !== 'ONFIELD') {
+				return p;
+			}
+			if (p.id === user.id) {
+				return {
+					...user,
+					roundsInBattle: p.roundsInBattle + 1,
+					participatedInBattle: true,
+				};
+			}
+			if (p.ownerId === user.ownerId) {
+				return p;
+			}
+
+			return applyStatChangeToPokemon(
+				p,
+				'evasion',
+				-1,
+				false,
+				battleFieldEffects,
+				addMessage,
+				`${user.data.name}'s supersweet syrup`
+			);
+		});
+	}
 	if (user.ability === 'vessel-of-ruin') {
 		updatedPokemon = updatedPokemon.map((p) => {
 			if (p.status !== 'ONFIELD') {
@@ -583,6 +610,35 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 						roundsInBattle: p.roundsInBattle + 1,
 						participatedInBattle: true,
 						statBoosts: { ...ally.statBoosts },
+					};
+				}
+
+				return p;
+			});
+		}
+		return updatedPokemon;
+	}
+	if (user.ability === 'hospitality') {
+		const ally = updatedPokemon.find(
+			(p) => p.status === 'ONFIELD' && p.ownerId === user.ownerId
+		);
+
+		if (ally && ally.damage) {
+			addMessage({
+				message: `${user.data.name} heals its ally with hospitality`,
+			});
+			updatedPokemon = updatedPokemon.map((p) => {
+				if (p.id === user.id) {
+					return {
+						...user,
+						roundsInBattle: p.roundsInBattle + 1,
+						participatedInBattle: true,
+					};
+				}
+				if (p.id === ally.id) {
+					return {
+						...ally,
+						damage: Math.max(0, ally.damage - ally.stats.hp / 4),
 					};
 				}
 
