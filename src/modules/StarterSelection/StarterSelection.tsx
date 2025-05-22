@@ -17,6 +17,7 @@ import { useGetBattleTeam } from '../../hooks/useGetBattleTeam';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { CompleteInventory } from '../../interfaces/Inventory';
+import { getRandomNature } from '../../interfaces/Natures';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../interfaces/StatObject';
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
@@ -45,6 +46,8 @@ export const StarterSelection = (): JSX.Element => {
 			id: v4(),
 			effortValues: EmptyStatObject,
 			starter: true,
+			shiny: Math.random() / 10 < shinyChance,
+			nature: getRandomNature(),
 		})),
 		{
 			assignLearnsetMoves: true,
@@ -65,7 +68,6 @@ export const StarterSelection = (): JSX.Element => {
 		const mon = reduceBattlePokemonToOwnedPokemon({
 			...chosenStarter,
 			ownerId: name,
-			shiny: Math.random() / 10 < shinyChance,
 		});
 
 		const pokedex = addPokemonToDex(saveFile.pokedex, mon.name, 'camp', true);
@@ -88,7 +90,7 @@ export const StarterSelection = (): JSX.Element => {
 				// ) as Record<CampUpgrade, boolean>,
 				meta: { activeTab: 'OVERWORLD' },
 				starterPokemon: mon.name,
-				researchPoints: 10000,
+				researchPoints: 20000,
 				pokedex,
 			});
 		} else

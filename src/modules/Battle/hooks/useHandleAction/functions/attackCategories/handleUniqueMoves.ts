@@ -536,6 +536,22 @@ export const handleUniqueMoves = ({
 			message: `${updatedTarget.name}´s ability became ${updatedAttacker.ability}`,
 		});
 	}
+	if (move.name === 'bestow') {
+		if (!getHeldItem(updatedAttacker)) {
+			addMessage({ message: 'it failed' });
+		} else if (getHeldItem(updatedTarget)) {
+			addMessage({ message: 'it failed' });
+		} else {
+			addMessage({
+				message: `${updatedAttacker.name} bestowed its item onto ${updatedTarget.name}`,
+			});
+			updatedTarget = {
+				...updatedTarget,
+				heldItemName: updatedAttacker.heldItemName,
+			};
+			updatedAttacker = { ...updatedAttacker, heldItemName: undefined };
+		}
+	}
 
 	return updatedPokemon.map((p) => {
 		if (p.id === updatedAttacker.id) {

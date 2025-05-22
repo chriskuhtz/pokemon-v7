@@ -1184,16 +1184,47 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/277/',
 		handled: true,
 	},
-	{ name: 'zero-to-hero', url: 'https://pokeapi.co/api/v2/ability/278/' },
-	{ name: 'commander', url: 'https://pokeapi.co/api/v2/ability/279/' },
-	{ name: 'electromorphosis', url: 'https://pokeapi.co/api/v2/ability/280/' },
-	{ name: 'protosynthesis', url: 'https://pokeapi.co/api/v2/ability/281/' },
-	{ name: 'quark-drive', url: 'https://pokeapi.co/api/v2/ability/282/' },
-	{ name: 'good-as-gold', url: 'https://pokeapi.co/api/v2/ability/283/' },
-	{ name: 'vessel-of-ruin', url: 'https://pokeapi.co/api/v2/ability/284/' },
-	{ name: 'sword-of-ruin', url: 'https://pokeapi.co/api/v2/ability/285/' },
-	{ name: 'tablets-of-ruin', url: 'https://pokeapi.co/api/v2/ability/286/' },
-	{ name: 'beads-of-ruin', url: 'https://pokeapi.co/api/v2/ability/287/' },
+
+	{
+		name: 'electromorphosis',
+		url: 'https://pokeapi.co/api/v2/ability/280/',
+		handled: true,
+	},
+	{
+		name: 'protosynthesis',
+		url: 'https://pokeapi.co/api/v2/ability/281/',
+		handled: true,
+	},
+	{
+		name: 'quark-drive',
+		url: 'https://pokeapi.co/api/v2/ability/282/',
+		handled: true,
+	},
+	{
+		name: 'good-as-gold',
+		url: 'https://pokeapi.co/api/v2/ability/283/',
+		handled: true,
+	},
+	{
+		name: 'vessel-of-ruin',
+		url: 'https://pokeapi.co/api/v2/ability/284/',
+		handled: true,
+	},
+	{
+		name: 'sword-of-ruin',
+		url: 'https://pokeapi.co/api/v2/ability/285/',
+		handled: true,
+	},
+	{
+		name: 'tablets-of-ruin',
+		url: 'https://pokeapi.co/api/v2/ability/286/',
+		handled: true,
+	},
+	{
+		name: 'beads-of-ruin',
+		url: 'https://pokeapi.co/api/v2/ability/287/',
+		handled: true,
+	},
 	{ name: 'orichalcum-pulse', url: 'https://pokeapi.co/api/v2/ability/288/' },
 	{ name: 'hadron-engine', url: 'https://pokeapi.co/api/v2/ability/289/' },
 	{ name: 'opportunist', url: 'https://pokeapi.co/api/v2/ability/290/' },
@@ -1277,6 +1308,8 @@ export const abilityCheckList: {
 	/**
 	 * BANISHED
 	 */
+	{ name: 'commander', url: 'https://pokeapi.co/api/v2/ability/279/' },
+	{ name: 'zero-to-hero', url: 'https://pokeapi.co/api/v2/ability/278/' },
 	{ name: 'wimp-out', url: 'https://pokeapi.co/api/v2/ability/193/' },
 	{ name: 'emergency-exit', url: 'https://pokeapi.co/api/v2/ability/194/' },
 	{ name: 'primordial-sea', url: 'https://pokeapi.co/api/v2/ability/189/' },
@@ -1556,6 +1589,14 @@ export const abilityNames = [
 	'guard-dog',
 	'rocky-payload',
 	'wind-power',
+	'electromorphosis',
+	'protosynthesis',
+	'quark-drive',
+	'good-as-gold',
+	'vessel-of-ruin',
+	'sword-of-ruin',
+	'tablets-of-ruin',
+	'beads-of-ruin',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

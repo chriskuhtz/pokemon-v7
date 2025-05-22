@@ -496,6 +496,40 @@ export const useMapEditor = ({
 			);
 		}
 	};
+	const replaceAll = (layer: LayerName) => {
+		if (tool?.type !== 'tileplacer') {
+			return;
+		}
+
+		if (layer === 'Base') {
+			setBaseLayer(baseLayer.map((row) => row.map(() => tool.tile)));
+		}
+		if (layer === 'Encounter') {
+			setencounterLayer(
+				encounterLayer.map((row) => row.map((c) => (c ? tool.tile : null)))
+			);
+		}
+		if (layer === 'Obstacle') {
+			setobstacleLayer(
+				obstacleLayer.map((row) => row.map((c) => (c ? tool.tile : null)))
+			);
+		}
+		if (layer === 'Decoration') {
+			setdecorationLayer(
+				decorationLayer.map((row) => row.map((c) => (c ? tool.tile : null)))
+			);
+		}
+		if (layer === 'Foreground') {
+			setforegroundLayer(
+				foregroundLayer.map((row) => row.map((c) => (c ? tool.tile : null)))
+			);
+		}
+		if (layer === 'Water') {
+			setwaterLayer(
+				waterLayer.map((row) => row.map((c) => (c ? tool.tile : null)))
+			);
+		}
+	};
 
 	const b = useDeferredValue(baseLayer);
 	const e = useDeferredValue(encounterLayer);
@@ -512,6 +546,7 @@ export const useMapEditor = ({
 		changeRow,
 		changeColumn,
 		randomFill,
+		replaceAll,
 		baseLayer: b,
 		encounterLayer: e,
 		decorationLayer: d,

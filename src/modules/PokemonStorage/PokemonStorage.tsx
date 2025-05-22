@@ -180,31 +180,37 @@ export const PokemonStorage = ({
 				{team.map((pokemon) => {
 					const heldItem = getHeldItem(pokemon);
 					return (
-						<IconSolarSystem
-							sun={{
-								url: getPokemonSprite(pokemon.name, { shiny: pokemon.shiny }),
-							}}
-							firstPlanet={
-								<Chip>
-									<strong>
-										Lvl{' '}
-										{calculateLevelData(pokemon.xp, pokemon.growthRate).level}
-									</strong>
-								</Chip>
-							}
-							secondPlanetUrl={getItemUrl(pokemon.ball)}
-							thirdPlanetUrl={heldItem ? getItemUrl(heldItem) : undefined}
-							key={pokemon.id}
-							onClick={() => {
-								if (team.length === 1) {
-									addMessage({
-										message: 'One Pokemon must remain on the team!',
-									});
-									return;
+						<div style={{ display: 'flex' }} key={pokemon.id}>
+							<IconSolarSystem
+								sun={{
+									url: getPokemonSprite(pokemon.name, { shiny: pokemon.shiny }),
+								}}
+								firstPlanet={
+									<Chip>
+										<strong>
+											Lvl{' '}
+											{calculateLevelData(pokemon.xp, pokemon.growthRate).level}
+										</strong>
+									</Chip>
 								}
-								togglePokemonOnTeam(pokemon.id);
-							}}
-						/>
+								secondPlanetUrl={getItemUrl(pokemon.ball)}
+								thirdPlanetUrl={heldItem ? getItemUrl(heldItem) : undefined}
+								key={pokemon.id}
+								onClick={() => {
+									if (team.length === 1) {
+										addMessage({
+											message: 'One Pokemon must remain on the team!',
+										});
+										return;
+									}
+									togglePokemonOnTeam(pokemon.id);
+								}}
+							/>
+							<FaveToggle
+								on={!!pokemon.favorite}
+								onClick={() => toggleFavoriteStatus(pokemon.id)}
+							/>
+						</div>
 					);
 				})}
 			</Stack>
@@ -650,22 +656,27 @@ const Entry = ({
 				}}
 			/>
 			<div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
-				{pokemon.favorite ? (
-					<FaStar
-						size={battleSpriteSize / 1.5}
-						onClick={() => toggleFavoriteStatus(pokemon.id)}
-					/>
-				) : (
-					<FaRegStar
-						size={battleSpriteSize / 1.5}
-						onClick={() => toggleFavoriteStatus(pokemon.id)}
-					/>
-				)}
+				<FaveToggle
+					on={!!pokemon.favorite}
+					onClick={() => toggleFavoriteStatus(pokemon.id)}
+				/>
 				<GiBreakingChain
 					size={battleSpriteSize / 1.5}
 					onClick={() => startReleaseProcess(pokemon.id)}
 				/>
 			</div>
 		</div>
+	);
+};
+
+const FaveToggle = ({ on, onClick }: { on: boolean; onClick: () => void }) => {
+	return (
+		<>
+			{on ? (
+				<FaStar size={battleSpriteSize / 1.5} onClick={onClick} />
+			) : (
+				<FaRegStar size={battleSpriteSize / 1.5} onClick={onClick} />
+			)}
+		</>
 	);
 };
