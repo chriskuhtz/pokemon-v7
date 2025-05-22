@@ -13,6 +13,7 @@ import {
 	auraAndPulseMoves,
 	bitingMoves,
 	punchBasedMoves,
+	slicingMoves,
 	windMoves,
 } from '../constants/punchBasedMoves';
 import { soundBasedMoves } from '../constants/soundBasedMoves';
@@ -681,6 +682,10 @@ export const calculateDamage = (
 		target.ability === 'wind-rider' && windMoves.includes(attack.name) ? 0 : 1;
 	const rockyPayloadFactor =
 		attacker.ability === 'rocky-payload' && attackType === 'rock' ? 1.5 : 1;
+	const sharpnessFactor =
+		attacker.ability === 'sharpness' && slicingMoves.includes(attack.name)
+			? 1.5
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -787,7 +792,8 @@ export const calculateDamage = (
 				hexFactor *
 				puriSaltFactor *
 				windRiderFactor *
-				rockyPayloadFactor
+				rockyPayloadFactor *
+				sharpnessFactor
 		),
 		1
 	);

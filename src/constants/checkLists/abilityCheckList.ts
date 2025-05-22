@@ -1235,9 +1235,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/289/',
 		handled: true,
 	},
-	{ name: 'opportunist', url: 'https://pokeapi.co/api/v2/ability/290/' },
-	{ name: 'cud-chew', url: 'https://pokeapi.co/api/v2/ability/291/' },
-	{ name: 'sharpness', url: 'https://pokeapi.co/api/v2/ability/292/' },
+	{
+		name: 'sharpness',
+		url: 'https://pokeapi.co/api/v2/ability/292/',
+		handled: true,
+	},
 	{ name: 'supreme-overlord', url: 'https://pokeapi.co/api/v2/ability/293/' },
 	{ name: 'costar', url: 'https://pokeapi.co/api/v2/ability/294/' },
 	{ name: 'toxic-debris', url: 'https://pokeapi.co/api/v2/ability/295/' },
@@ -1302,6 +1304,8 @@ export const abilityCheckList: {
 	{ name: 'hunger-switch', url: 'https://pokeapi.co/api/v2/ability/258/' },
 	{ name: 'as-one-glastrier', url: 'https://pokeapi.co/api/v2/ability/266/' },
 	{ name: 'as-one-spectrier', url: 'https://pokeapi.co/api/v2/ability/267/' },
+	{ name: 'opportunist', url: 'https://pokeapi.co/api/v2/ability/290/' },
+	{ name: 'cud-chew', url: 'https://pokeapi.co/api/v2/ability/291/' },
 ];
 
 export const abilityNames = [
@@ -1548,6 +1552,7 @@ export const abilityNames = [
 	'beads-of-ruin',
 	'orichalcum-pulse',
 	'hadron-engine',
+	'sharpness',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
