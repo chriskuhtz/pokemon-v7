@@ -1,6 +1,10 @@
 import { maxBst } from '../../../constants/baseStatRecord';
 import { PokemonName } from '../../../constants/pokemonNames';
 import { typeColors, typeContrastColors } from '../../../constants/typeColors';
+import {
+	getHighestStat,
+	HIDDEN_STATS_FOR_TOTAL,
+} from '../../../functions/getHighestStat';
 import { getStats } from '../../../functions/getStats';
 import { sumOfIvs } from '../../../functions/sumOfIvs';
 import { Nature, natures } from '../../../interfaces/Natures';
@@ -14,7 +18,6 @@ import { Chip } from '../../../uiComponents/Chip/Chip';
 import { Stack } from '../../../uiComponents/Stack/Stack';
 
 export const HIDDEN_STATS = ['accuracy', 'evasion'];
-export const HIDDEN_STATS_FOR_TOTAL = ['accuracy', 'evasion', 'hp'];
 
 export const StatDisplay = ({
 	ownedPokemon,
@@ -82,17 +85,7 @@ const BstSection = ({
 				)
 					.sort()
 					.map(([stat, value]) => {
-						const highestStat = Object.entries(
-							getStats(
-								data.stats,
-								ownedPokemon.xp,
-								ownedPokemon.growthRate,
-								ownedPokemon.nature,
-								ownedPokemon.effortValues
-							)
-						)
-							.filter(([stat]) => !HIDDEN_STATS_FOR_TOTAL.includes(stat))
-							.sort((a, b) => b[1] - a[1])[0][1];
+						const highestStat = getHighestStat({ ownedPokemon, data })[1];
 
 						if (!HIDDEN_STATS_FOR_TOTAL.includes(stat)) {
 							return (

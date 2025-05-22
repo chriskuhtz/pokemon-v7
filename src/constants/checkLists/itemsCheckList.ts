@@ -1988,6 +1988,11 @@ export const itemsCheckList: {
 		url: 'https://pokeapi.co/api/v2/item/901/',
 		handled: true,
 	},
+	{
+		name: 'booster-energy',
+		url: 'https://pokeapi.co/api/v2/item/1696/',
+		handled: true,
+	},
 	/**
 	 * FOODS AND FOOD RELATED
 	 */
@@ -2961,7 +2966,6 @@ export const itemsCheckList: {
 	 *
 	 */
 	{ name: 'ability-shield', url: 'https://pokeapi.co/api/v2/item/1697/' },
-	{ name: 'booster-energy', url: 'https://pokeapi.co/api/v2/item/1696/' },
 	{ name: 'mirror-herb', url: 'https://pokeapi.co/api/v2/item/1699/' },
 	{ name: 'eviolite', url: 'https://pokeapi.co/api/v2/item/581/' },
 	{ name: 'oval-charm', url: 'https://pokeapi.co/api/v2/item/674/' },

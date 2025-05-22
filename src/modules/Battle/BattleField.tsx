@@ -331,12 +331,14 @@ export const BattleField = ({
 					battleFieldEffects,
 					setBattleTerrain,
 					removeScreens,
+					terrain: battleTerrain,
 				})
 			);
 		},
 		[
 			addMessage,
 			battleFieldEffects,
+			battleTerrain,
 			battleWeather,
 			pokemon,
 			removeScreens,

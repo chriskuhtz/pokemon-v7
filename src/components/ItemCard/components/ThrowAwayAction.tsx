@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
+import { Modal } from '../../../uiComponents/Modal/Modal';
 import './ThrowAwayAction.css';
 export const ThrowAwayAction = ({
 	amount,
@@ -10,8 +11,27 @@ export const ThrowAwayAction = ({
 }) => {
 	const [numberToDiscard, setNumberToDiscard] = useState<number>(amount);
 	useEffect(() => setNumberToDiscard(amount), [amount]);
+
+	const [confirmationNeeded, setConfirmationNeeded] = useState<boolean>(false);
 	return (
 		<div className="throwAwayAction">
+			<Modal
+				close={() => setConfirmationNeeded(false)}
+				open={confirmationNeeded}
+			>
+				<div>
+					Are you sure you want to throw this away?
+					<button
+						onClick={() => {
+							discardItem(amount);
+							setConfirmationNeeded(false);
+						}}
+					>
+						Yes
+					</button>
+					<button onClick={() => setConfirmationNeeded(false)}>No</button>
+				</div>
+			</Modal>
 			<input
 				type="number"
 				value={numberToDiscard}
@@ -21,11 +41,11 @@ export const ThrowAwayAction = ({
 				onKeyDown={(e) => {
 					e.stopPropagation();
 					if (e.key === 'Enter') {
-						discardItem(numberToDiscard);
+						setConfirmationNeeded(true);
 					}
 				}}
 			/>
-			<FaTrash onClick={() => discardItem(numberToDiscard)} />
+			<FaTrash onClick={() => setConfirmationNeeded(true)} />
 		</div>
 	);
 };
