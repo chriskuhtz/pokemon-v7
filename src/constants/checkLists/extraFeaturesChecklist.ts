@@ -444,6 +444,8 @@ export const extraFeatureCheckList: {
 	{ name: 'timeofday in pokedex' },
 	{ name: 'progress bar for catch x quests' },
 	{ name: 'min level for many things (e.g. rockets)' },
+	{ name: 'download did not boost after tablets of ruin lowered' },
+	{ name: 'reduce apricorn rewards' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
@@ -452,7 +454,7 @@ export const extraFeatureCheckList: {
 	{ name: 'e4 challenge' },
 	{ name: 'rock climbing' },
 	{ name: 'kanto leaders with proper teams on training field' },
-
+	{ name: 'unlockable recipes' },
 	{ name: 'cynthia' },
 	{ name: 'procedural infinite cave with legendaries' },
 	{ name: 'procedural random challenge gauntlet' },

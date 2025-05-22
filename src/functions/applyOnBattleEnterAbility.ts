@@ -89,7 +89,6 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 			});
 		}
 	}
-
 	if (user.ability === 'drizzle' && currentWeather !== 'rain') {
 		setWeather({ duration: 9000, type: 'rain' });
 		addMessage({ message: `${user.data.name} made it rain with drizzle` });
@@ -98,6 +97,31 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 		setWeather({ duration: 9000, type: 'sun' });
 		addMessage({
 			message: `${user.data.name} intensified the sun with drought`,
+		});
+	}
+	if (user.ability === 'orichalcum-pulse' && currentWeather !== 'sun') {
+		setWeather({ duration: 9000, type: 'sun' });
+		addMessage({
+			message: `${user.data.name} intensified the sun with orichalcum pulse`,
+		});
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.id === user.id) {
+				return applyStatChangeToPokemon(
+					{
+						...user,
+						roundsInBattle: p.roundsInBattle + 1,
+						participatedInBattle: true,
+					},
+					'attack',
+					1,
+					true,
+					battleFieldEffects,
+					addMessage,
+					'orichalcum pulse'
+				);
+			}
+
+			return p;
 		});
 	}
 	if (user.ability === 'sand-stream' && currentWeather !== 'sandstorm') {
