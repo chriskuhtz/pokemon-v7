@@ -440,16 +440,16 @@ export const extraFeatureCheckList: {
 	{ name: 'procedural random challenge gauntlet', handled: true },
 	{ name: 'quests for random field', handled: true },
 	{ name: 'improve challenge field menu', handled: true },
+	{ name: 'lower catchrate with level', handled: true },
 	//BUGS/IMPROVEMENTS:
+	{ name: 'progress bar for catch x quests' },
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
 	{ name: 'loosing to wild mons is sometimes buggy' },
 	{ name: 'trainer ai should consider flying,dig, diving' },
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
 	{ name: 'timeofday in pokedex' },
-	{ name: 'progress bar for catch x quests' },
 	{ name: 'download did not boost after tablets of ruin lowered' },
-	{ name: 'lower catchrate with level' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
@@ -470,4 +470,7 @@ export const extraFeatureCheckList: {
 	{ name: 'Terrain Items (shovel, pickaxe) as Gym leader rewards' },
 	{ name: 'ev grind mode for challenge field' },
 	{ name: 'trainer with simple/costar combo' },
+	{ name: 'future and past distortions' },
+	{ name: 'random encounters' },
+	{ name: 'random evolutions' },
 ];
