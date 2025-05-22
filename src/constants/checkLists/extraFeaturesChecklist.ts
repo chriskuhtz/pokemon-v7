@@ -439,6 +439,7 @@ export const extraFeatureCheckList: {
 	{ name: 'reduce apricorn rewards', handled: true },
 	{ name: 'procedural random challenge gauntlet', handled: true },
 	{ name: 'quests for random field', handled: true },
+	{ name: 'improve challenge field menu', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -449,7 +450,6 @@ export const extraFeatureCheckList: {
 	{ name: 'progress bar for catch x quests' },
 	{ name: 'download did not boost after tablets of ruin lowered' },
 	{ name: 'lower catchrate with level' },
-	{ name: 'improve challenge field menu' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
@@ -469,5 +469,5 @@ export const extraFeatureCheckList: {
 	{ name: 'magma/aqua quests from looker' },
 	{ name: 'Terrain Items (shovel, pickaxe) as Gym leader rewards' },
 	{ name: 'ev grind mode for challenge field' },
-	{ name: 'trainer with dancer/costar combo' },
+	{ name: 'trainer with simple/costar combo' },
 ];
