@@ -435,6 +435,7 @@ export const extraFeatureCheckList: {
 	{ name: 'random abilites should aslo work by offset', handled: true },
 	{ name: 'more pokemon for barry', handled: true },
 	{ name: 'silver', handled: true },
+	{ name: 'min level for many things (e.g. rockets)', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -443,7 +444,7 @@ export const extraFeatureCheckList: {
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
 	{ name: 'timeofday in pokedex' },
 	{ name: 'progress bar for catch x quests' },
-	{ name: 'min level for many things (e.g. rockets)' },
+
 	{ name: 'download did not boost after tablets of ruin lowered' },
 	{ name: 'reduce apricorn rewards' },
 	//CONTENT:

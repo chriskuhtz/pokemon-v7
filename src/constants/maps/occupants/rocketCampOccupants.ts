@@ -1,3 +1,4 @@
+import { getHighestXpOnTeam } from '../../../functions/getHighestXpOnTeam';
 import { makeChallengerPokemon } from '../../../functions/makeChallengerPokemon';
 import { occupantHandled } from '../../../functions/occupantHandled';
 import { ItemType } from '../../../interfaces/Item';
@@ -69,7 +70,12 @@ export const rocketCampOccupants: Occupant[] = [
 		x: 11,
 		y: 9,
 		orientation: 'UP',
-		team: () => [makeChallengerPokemon({ name: 'hypno', xp: 8000 })],
+		team: (s) => [
+			makeChallengerPokemon({
+				name: 'hypno',
+				xp: getHighestXpOnTeam(s.pokemon),
+			}),
+		],
 		sprite: SpriteEnum.rocketFemale,
 		name: 'Rocket Goon Stevie',
 		unhandledMessage: ['Who the hell are you?'],
@@ -88,9 +94,15 @@ export const rocketCampOccupants: Occupant[] = [
 		x: 2,
 		y: 6,
 		orientation: 'RIGHT',
-		team: () => [
-			makeChallengerPokemon({ name: 'grimer', xp: 7000 }),
-			makeChallengerPokemon({ name: 'fearow', xp: 9000 }),
+		team: (s) => [
+			makeChallengerPokemon({
+				name: 'grimer',
+				xp: getHighestXpOnTeam(s.pokemon) * 0.8,
+			}),
+			makeChallengerPokemon({
+				name: 'fearow',
+				xp: getHighestXpOnTeam(s.pokemon),
+			}),
 		],
 		sprite: SpriteEnum.rocketFemale,
 		name: 'Rocket Goon Fatiha',
@@ -110,9 +122,15 @@ export const rocketCampOccupants: Occupant[] = [
 		x: 14,
 		y: 2,
 		orientation: 'DOWN',
-		team: () => [
-			makeChallengerPokemon({ name: 'magneton', xp: 12000 }),
-			makeChallengerPokemon({ name: 'rattata', xp: 9000 }),
+		team: (s) => [
+			makeChallengerPokemon({
+				name: 'magneton',
+				xp: getHighestXpOnTeam(s.pokemon),
+			}),
+			makeChallengerPokemon({
+				name: 'rattata',
+				xp: getHighestXpOnTeam(s.pokemon) * 0.8,
+			}),
 		],
 		sprite: SpriteEnum.rocketFemale,
 		name: 'Rocket Goon Rosie',
@@ -132,10 +150,19 @@ export const rocketCampOccupants: Occupant[] = [
 		x: 2,
 		y: 17,
 		orientation: 'RIGHT',
-		team: () => [
-			makeChallengerPokemon({ name: 'houndoom', xp: 11000 }),
-			makeChallengerPokemon({ name: 'spinarak', xp: 9000 }),
-			makeChallengerPokemon({ name: 'aipom', xp: 10000 }),
+		team: (s) => [
+			makeChallengerPokemon({
+				name: 'houndoom',
+				xp: getHighestXpOnTeam(s.pokemon) * 0.8,
+			}),
+			makeChallengerPokemon({
+				name: 'spinarak',
+				xp: getHighestXpOnTeam(s.pokemon) * 0.8,
+			}),
+			makeChallengerPokemon({
+				name: 'aipom',
+				xp: getHighestXpOnTeam(s.pokemon),
+			}),
 		],
 		sprite: SpriteEnum.rocketMale,
 		name: 'Rocket Goon Jason',
@@ -155,9 +182,15 @@ export const rocketCampOccupants: Occupant[] = [
 		x: 16,
 		y: 11,
 		orientation: 'LEFT',
-		team: () => [
-			makeChallengerPokemon({ name: 'machoke', xp: 10000 }),
-			makeChallengerPokemon({ name: 'arbok', xp: 9000 }),
+		team: (s) => [
+			makeChallengerPokemon({
+				name: 'machoke',
+				xp: getHighestXpOnTeam(s.pokemon) * 0.8,
+			}),
+			makeChallengerPokemon({
+				name: 'arbok',
+				xp: getHighestXpOnTeam(s.pokemon),
+			}),
 		],
 		sprite: SpriteEnum.rocketMale,
 		name: 'Rocket Goon Matt',
@@ -177,9 +210,15 @@ export const rocketCampOccupants: Occupant[] = [
 		x: 18,
 		y: 5,
 		orientation: 'DOWN',
-		team: () => [
-			makeChallengerPokemon({ name: 'primeape', xp: 10000 }),
-			makeChallengerPokemon({ name: 'kadabra', xp: 12000 }),
+		team: (s) => [
+			makeChallengerPokemon({
+				name: 'primeape',
+				xp: getHighestXpOnTeam(s.pokemon) * 0.8,
+			}),
+			makeChallengerPokemon({
+				name: 'kadabra',
+				xp: getHighestXpOnTeam(s.pokemon),
+			}),
 		],
 		sprite: SpriteEnum.rocketMale,
 		name: 'Rocket Goon Alex',
