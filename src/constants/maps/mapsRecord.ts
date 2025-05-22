@@ -1,9 +1,11 @@
 import { defaultShaderMap } from '../../functions/getTimeOfDay';
 import { OverworldMap } from '../../interfaces/OverworldMap';
+import { challengeFieldId, randomFieldId } from '../gameData';
 import { camp } from './camp';
 import { caveW1 } from './caveW1';
 import { challengeField } from './challengeField';
 import { onixCave } from './onixCave';
+import { randomChallengeField } from './randomChallengeField';
 import { rocketCamp } from './rocketCamp';
 import { routeE1 } from './routeE1';
 import { routeN1 } from './routeN1';
@@ -26,7 +28,8 @@ export const mapIds = [
 	'routeW1',
 	'routeN1W1',
 	'caveW1',
-	'challengeField',
+	challengeFieldId,
+	randomFieldId,
 	'rocketCamp',
 ] as const;
 export type MapId = (typeof mapIds)[number];
@@ -45,6 +48,7 @@ export const mapsRecord: Record<MapId, OverworldMap> = {
 	caveW1: caveW1,
 	challengeField: challengeField,
 	rocketCamp: rocketCamp,
+	randomField: randomChallengeField,
 };
 
 export const mapDisplayNames: Record<MapId, string> = {
@@ -60,6 +64,7 @@ export const mapDisplayNames: Record<MapId, string> = {
 	camp: 'kuma camp',
 	onixCave: 'onix cave',
 	challengeField: 'challenge field',
+	randomField: 'challenge field',
 	rocketCamp: 'Rocket Camp',
 };
 

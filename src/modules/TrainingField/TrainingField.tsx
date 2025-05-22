@@ -58,6 +58,32 @@ export const TrainingField = () => {
 					]}
 				/>
 				<Card
+					key={'random_challengeField'}
+					icon={<TbSoccerField />}
+					content={<h3>Go to random challenge field</h3>}
+					actionElements={[
+						<button
+							disabled={Object.values(saveFile.bag).some((v) => v > 0)}
+							onClick={() => {
+								patchSaveFileReducer({
+									meta: { activeTab: 'OVERWORLD' },
+								});
+								setLocation({
+									mapId: 'randomField',
+									x: 2,
+									y: 1,
+									orientation: 'DOWN',
+									forwardFoot: 'CENTER1',
+								});
+							}}
+						>
+							{Object.values(saveFile.bag).some((v) => v > 0)
+								? 'No outside items allowed'
+								: 'Start'}
+						</button>,
+					]}
+				/>
+				<Card
 					key={'random1'}
 					icon={<FaRandom />}
 					content={<h3>Random Opponent (Tier 1)</h3>}

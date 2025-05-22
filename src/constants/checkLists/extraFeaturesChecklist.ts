@@ -437,6 +437,7 @@ export const extraFeatureCheckList: {
 	{ name: 'silver', handled: true },
 	{ name: 'min level for many things (e.g. rockets)', handled: true },
 	{ name: 'reduce apricorn rewards', handled: true },
+	{ name: 'procedural random challenge gauntlet', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -446,6 +447,7 @@ export const extraFeatureCheckList: {
 	{ name: 'timeofday in pokedex' },
 	{ name: 'progress bar for catch x quests' },
 	{ name: 'download did not boost after tablets of ruin lowered' },
+	{ name: 'lower catchrate with level' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
@@ -463,5 +465,5 @@ export const extraFeatureCheckList: {
 	{ name: 'eggs?' },
 	{ name: 'Fishing?' },
 	{ name: 'magma/aqua quests from looker' },
-	{ name: 'Terrain Items (shovel, pickaxe) as Gym leader rewards ' },
+	{ name: 'Terrain Items (shovel, pickaxe) as Gym leader rewards' },
 ];

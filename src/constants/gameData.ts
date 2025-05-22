@@ -20,6 +20,7 @@ export const ONE_DAY = ONE_HOUR * 24;
 export const shinyChance = 1 / 4096;
 
 export const challengeFieldId = 'challengeField';
+export const randomFieldId = 'randomField';
 
 export const testPokemon: OwnedPokemon = {
 	name: 'teddiursa',
