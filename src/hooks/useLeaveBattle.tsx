@@ -43,7 +43,67 @@ export const useLeaveBattle = () => {
 		[saveFile]
 	);
 
-	return useCallback(
+	const handleLoss = useCallback(() => {
+		let updatedLocation = location;
+
+		const resetTime = () => {
+			if (
+				saveFile.settings?.rogueLike ||
+				saveFile.settings?.releaseFaintedPokemon
+			) {
+				return (
+					//dont reset on challenge field and camp
+					location.mapId !== 'camp' &&
+					location.mapId !== 'challengeField' &&
+					location.mapId !== 'randomField'
+				);
+			}
+			return false;
+		};
+		if (resetTime()) {
+			reset();
+			return;
+		} else {
+			updatedLocation = {
+				mapId: 'camp',
+				x: 1,
+				y: 1,
+				orientation: 'DOWN',
+				forwardFoot: 'CENTER1',
+			};
+
+			//key items dont get lost
+			const bagWithOnlyKeyItems = joinInventories(
+				EmptyInventory,
+				Object.fromEntries(
+					Object.entries(saveFile.bag).filter(([item]) => isKeyItem(item))
+				)
+			);
+
+			setLocation(updatedLocation);
+			patchSaveFileReducer({
+				meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
+				pokemon: saveFile.pokemon.map((p) => {
+					if (p.onTeam) {
+						return fullyHealPokemon(p);
+					}
+					return p;
+				}),
+				bag: location.mapId === 'camp' ? saveFile.bag : bagWithOnlyKeyItems,
+			});
+			return;
+		}
+	}, [
+		location,
+		patchSaveFileReducer,
+		reset,
+		saveFile.bag,
+		saveFile.pokemon,
+		saveFile.settings?.releaseFaintedPokemon,
+		saveFile.settings?.rogueLike,
+		setLocation,
+	]);
+	const handleWin = useCallback(
 		({
 			team: updatedTeam,
 			updatedInventory,
@@ -53,208 +113,163 @@ export const useLeaveBattle = () => {
 			defeatedChallengerId,
 			rewardItems,
 		}: LeaveBattlePayload) => {
-			let updatedLocation = location;
-
-			if (outcome === 'LOSS') {
-				const resetTime = () => {
-					if (
-						saveFile.settings?.rogueLike ||
-						saveFile.settings?.releaseFaintedPokemon
-					) {
-						return (
-							//dont reset on challenge field and camp
-							location.mapId !== 'camp' &&
-							location.mapId !== 'challengeField' &&
-							location.mapId !== 'randomField'
-						);
-					}
+			const configCheckedTeam = updatedTeam.filter((p) => {
+				//pokemon that faint on training field are not released
+				if (
+					saveFile.settings?.releaseFaintedPokemon &&
+					isKO(p) &&
+					location.mapId !== 'camp'
+				) {
 					return false;
-				};
-				if (resetTime()) {
-					reset();
-					return;
-				} else {
-					updatedLocation = {
-						mapId: 'camp',
-						x: 1,
-						y: 1,
-						orientation: 'DOWN',
-						forwardFoot: 'CENTER1',
-					};
-
-					//key items dont get lost
-					const bagWithOnlyKeyItems = joinInventories(
-						EmptyInventory,
-						Object.fromEntries(
-							Object.entries(saveFile.bag).filter(([item]) => isKeyItem(item))
-						)
-					);
-
-					setLocation(updatedLocation);
-					patchSaveFileReducer({
-						meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
-						pokemon: saveFile.pokemon.map((p) => {
-							if (p.onTeam) {
-								return fullyHealPokemon(p);
-							}
-							return p;
-						}),
-						bag: location.mapId === 'camp' ? saveFile.bag : bagWithOnlyKeyItems,
-					});
-					return;
 				}
+
+				return true;
+			});
+
+			const ownedTeam = configCheckedTeam.map((p) =>
+				reduceBattlePokemonToOwnedPokemon(p)
+			);
+			//check pickup
+			const pickUpCheckedTeam: OwnedPokemon[] = ownedTeam.map((p) => {
+				if (p.ability === 'pickup' && !getHeldItem(p) && Math.random() < 0.1) {
+					return { ...p, heldItemName: getRandomEntry(pickupTable) };
+				}
+				if (p.ability === 'honey-gather' && !getHeldItem(p)) {
+					const lvl = calculateLevelData(p.xp, p.growthRate).level;
+					const chance = 0.05 + lvl * 0.0045;
+					if (Math.random() < chance) {
+						return { ...p, heldItemName: 'honey' };
+					}
+				}
+
+				return p;
+			});
+
+			const teamAndCaught = [
+				...pickUpCheckedTeam,
+				...caughtPokemon.map((c) => ({
+					...reduceBattlePokemonToOwnedPokemon(
+						{ ...c, ownerId: saveFile.playerId },
+						c.ball === 'heal-ball'
+					),
+					caughtAtDate: new Date().getTime(),
+					caughtOnMap: location.mapId,
+				})),
+			].map((t, i) => ({ ...t, onTeam: i < getTeamSize(saveFile) }));
+
+			const updatedPokemon = [
+				...teamAndCaught,
+				...saveFile.pokemon.filter((p) => !team.some((t) => t.id === p.id)),
+			];
+
+			const alreadyDefeated = saveFile.handledOccupants.some(
+				(h) => h.id === defeatedChallengerId
+			);
+			const gainedResearchPoints = () => {
+				if (location.mapId === 'challengeField') {
+					return 0;
+				}
+				if (outcome !== 'WIN') {
+					return 0;
+				}
+				if (!defeatedChallengerId) {
+					return 0;
+				}
+				if (alreadyDefeated) {
+					return 0;
+				}
+
+				return 1;
+			};
+
+			let updatedSwarmRecord = [...saveFile.mileStones.caughtFromSwarms];
+
+			caughtPokemon.forEach((c) => {
+				if (
+					saveFile.currentSwarm &&
+					c.name === saveFile.currentSwarm?.pokemon
+				) {
+					updatedSwarmRecord.push(c.name);
+				}
+			});
+			updatedSwarmRecord = [...new Set(updatedSwarmRecord)];
+
+			const pokedex = { ...saveFile.pokedex };
+			caughtPokemon.forEach((p) =>
+				addPokemonToDex(pokedex, p.name, p.caughtOnMap, true)
+			);
+
+			const challengeFieldRank = challengeFieldOccupants
+				.filter((t) => t.type === 'TRAINER')
+				.find((c) => c.id === defeatedChallengerId)?.challengeFieldRank;
+			const randomFieldRank = defeatedChallengerId?.includes(randomFieldId)
+				? Number(defeatedChallengerId.split('_')[1])
+				: undefined;
+
+			const updatedMileStones = { ...saveFile.mileStones };
+
+			if (challengeFieldRank !== undefined) {
+				if (!updatedMileStones.challengeFieldRecord) {
+					updatedMileStones.challengeFieldRecord = challengeFieldRank;
+				}
+				if (challengeFieldRank > updatedMileStones.challengeFieldRecord) {
+					updatedMileStones.challengeFieldRecord = challengeFieldRank;
+				}
+			}
+			if (randomFieldRank !== undefined) {
+				if (!updatedMileStones.randomFieldRecord) {
+					updatedMileStones.randomFieldRecord = randomFieldRank;
+				}
+				if (randomFieldRank > updatedMileStones.randomFieldRecord) {
+					updatedMileStones.randomFieldRecord = randomFieldRank;
+				}
+			}
+			if (defeatedChallengerId === barryId) {
+				const xp = getHighestXpOnTeam(updatedPokemon);
+				if (
+					!updatedMileStones.barryDefeatedAt ||
+					xp > updatedMileStones.barryDefeatedAt
+				) {
+					updatedMileStones.barryDefeatedAt = xp;
+				}
+				if (
+					!updatedMileStones.silverDefeatedAt ||
+					xp > updatedMileStones.silverDefeatedAt
+				) {
+					updatedMileStones.silverDefeatedAt = xp;
+				}
+			}
+			updatedMileStones.caughtFromSwarms = updatedSwarmRecord;
+
+			const resetTime = defeatedChallengerId === barryId ? ONE_HOUR : -1;
+
+			patchSaveFileReducer({
+				bag: joinInventories(updatedInventory, rewardItems ?? {}),
+				money: saveFile.money + scatteredCoins,
+				pokemon: updatedPokemon,
+				meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
+				researchPoints: saveFile.researchPoints + gainedResearchPoints(),
+				handledOccupants: defeatedChallengerId
+					? [
+							...saveFile.handledOccupants,
+							{ id: defeatedChallengerId, resetAt: resetTime },
+					  ]
+					: saveFile.handledOccupants,
+				mileStones: updatedMileStones,
+				pokedex,
+			});
+		},
+		[location, patchSaveFileReducer, saveFile, team]
+	);
+
+	return useCallback(
+		(payload: LeaveBattlePayload) => {
+			if (payload.outcome === 'LOSS') {
+				handleLoss();
 			} else {
-				const configCheckedTeam = updatedTeam.filter((p) => {
-					//pokemon that faint on training field are not released
-					if (
-						saveFile.settings?.releaseFaintedPokemon &&
-						isKO(p) &&
-						location.mapId !== 'camp'
-					) {
-						return false;
-					}
-
-					return true;
-				});
-
-				const ownedTeam = configCheckedTeam.map((p) =>
-					reduceBattlePokemonToOwnedPokemon(p)
-				);
-				//check pickup
-				const pickUpCheckedTeam: OwnedPokemon[] = ownedTeam.map((p) => {
-					if (
-						p.ability === 'pickup' &&
-						!getHeldItem(p) &&
-						Math.random() < 0.1
-					) {
-						return { ...p, heldItemName: getRandomEntry(pickupTable) };
-					}
-					if (p.ability === 'honey-gather' && !getHeldItem(p)) {
-						const lvl = calculateLevelData(p.xp, p.growthRate).level;
-						const chance = 0.05 + lvl * 0.0045;
-						if (Math.random() < chance) {
-							return { ...p, heldItemName: 'honey' };
-						}
-					}
-
-					return p;
-				});
-
-				const teamAndCaught = [
-					...pickUpCheckedTeam,
-					...caughtPokemon.map((c) => ({
-						...reduceBattlePokemonToOwnedPokemon(
-							{ ...c, ownerId: saveFile.playerId },
-							c.ball === 'heal-ball'
-						),
-						caughtAtDate: new Date().getTime(),
-						caughtOnMap: location.mapId,
-					})),
-				].map((t, i) => ({ ...t, onTeam: i < getTeamSize(saveFile) }));
-
-				const updatedPokemon = [
-					...teamAndCaught,
-					...saveFile.pokemon.filter((p) => !team.some((t) => t.id === p.id)),
-				];
-
-				const alreadyDefeated = saveFile.handledOccupants.some(
-					(h) => h.id === defeatedChallengerId
-				);
-				const gainedResearchPoints = () => {
-					if (location.mapId === 'challengeField') {
-						return 0;
-					}
-					if (outcome !== 'WIN') {
-						return 0;
-					}
-					if (!defeatedChallengerId) {
-						return 0;
-					}
-					if (alreadyDefeated) {
-						return 0;
-					}
-
-					return 1;
-				};
-
-				let updatedSwarmRecord = [...saveFile.mileStones.caughtFromSwarms];
-
-				caughtPokemon.forEach((c) => {
-					if (
-						saveFile.currentSwarm &&
-						c.name === saveFile.currentSwarm?.pokemon
-					) {
-						updatedSwarmRecord.push(c.name);
-					}
-				});
-				updatedSwarmRecord = [...new Set(updatedSwarmRecord)];
-
-				const pokedex = { ...saveFile.pokedex };
-				caughtPokemon.forEach((p) =>
-					addPokemonToDex(pokedex, p.name, p.caughtOnMap, true)
-				);
-
-				const challengeFieldRank = challengeFieldOccupants
-					.filter((t) => t.type === 'TRAINER')
-					.find((c) => c.id === defeatedChallengerId)?.challengeFieldRank;
-				const randomFieldRank = defeatedChallengerId?.includes(randomFieldId)
-					? Number(defeatedChallengerId.split('_')[1])
-					: undefined;
-
-				const updatedMileStones = { ...saveFile.mileStones };
-
-				if (challengeFieldRank !== undefined) {
-					if (!updatedMileStones.challengeFieldRecord) {
-						updatedMileStones.challengeFieldRecord = challengeFieldRank;
-					}
-					if (challengeFieldRank > updatedMileStones.challengeFieldRecord) {
-						updatedMileStones.challengeFieldRecord = challengeFieldRank;
-					}
-				}
-				if (randomFieldRank !== undefined) {
-					if (!updatedMileStones.randomFieldRecord) {
-						updatedMileStones.randomFieldRecord = randomFieldRank;
-					}
-					if (randomFieldRank > updatedMileStones.randomFieldRecord) {
-						updatedMileStones.randomFieldRecord = randomFieldRank;
-					}
-				}
-				if (defeatedChallengerId === barryId) {
-					const xp = getHighestXpOnTeam(updatedPokemon);
-					if (
-						!updatedMileStones.barryDefeatedAt ||
-						xp > updatedMileStones.barryDefeatedAt
-					) {
-						updatedMileStones.barryDefeatedAt = xp;
-					}
-					if (
-						!updatedMileStones.silverDefeatedAt ||
-						xp > updatedMileStones.silverDefeatedAt
-					) {
-						updatedMileStones.silverDefeatedAt = xp;
-					}
-				}
-				updatedMileStones.caughtFromSwarms = updatedSwarmRecord;
-
-				const resetTime = defeatedChallengerId === barryId ? ONE_HOUR : -1;
-
-				patchSaveFileReducer({
-					bag: joinInventories(updatedInventory, rewardItems ?? {}),
-					money: saveFile.money + scatteredCoins,
-					pokemon: updatedPokemon,
-					meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
-					researchPoints: saveFile.researchPoints + gainedResearchPoints(),
-					handledOccupants: defeatedChallengerId
-						? [
-								...saveFile.handledOccupants,
-								{ id: defeatedChallengerId, resetAt: resetTime },
-						  ]
-						: saveFile.handledOccupants,
-					mileStones: updatedMileStones,
-					pokedex,
-				});
+				handleWin(payload);
 			}
 		},
-		[location, patchSaveFileReducer, reset, saveFile, setLocation, team]
+		[handleLoss, handleWin]
 	);
 };
