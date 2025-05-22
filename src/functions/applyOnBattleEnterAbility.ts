@@ -99,6 +99,16 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 			message: `${user.data.name} intensified the sun with drought`,
 		});
 	}
+
+	if (user.ability === 'sand-stream' && currentWeather !== 'sandstorm') {
+		setWeather({ duration: 9000, type: 'sandstorm' });
+		addMessage({ message: `${user.data.name} summoned a sand storm` });
+	}
+	if (user.ability === 'snow-warning' && currentWeather !== 'hail') {
+		setWeather({ duration: 9000, type: 'hail' });
+		addMessage({ message: `${user.data.name} summoned a hail storm` });
+	}
+
 	if (user.ability === 'orichalcum-pulse' && currentWeather !== 'sun') {
 		setWeather({ duration: 9000, type: 'sun' });
 		addMessage({
@@ -124,20 +134,39 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 			return p;
 		});
 	}
-	if (user.ability === 'sand-stream' && currentWeather !== 'sandstorm') {
-		setWeather({ duration: 9000, type: 'sandstorm' });
-		addMessage({ message: `${user.data.name} summoned a sand storm` });
-	}
-	if (user.ability === 'snow-warning' && currentWeather !== 'hail') {
-		setWeather({ duration: 9000, type: 'hail' });
-		addMessage({ message: `${user.data.name} summoned a hail storm` });
-	}
 
 	const terrainDuration = getHeldItem(user) === 'terrain-extender' ? 8 : 5;
+	if (user.ability === 'hadron-engine' && terrain !== 'electric') {
+		setBattleTerrain({ type: 'electric', duration: terrainDuration });
+		addMessage({
+			message: `${user.data.name} spreads electric terrain with hadron engine`,
+		});
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.id === user.id) {
+				return applyStatChangeToPokemon(
+					{
+						...user,
+						roundsInBattle: p.roundsInBattle + 1,
+						participatedInBattle: true,
+					},
+					'special-attack',
+					1,
+					true,
+					battleFieldEffects,
+					addMessage,
+					'hadron engine'
+				);
+			}
+
+			return p;
+		});
+	}
+
 	if (user.ability === 'electric-surge') {
 		setBattleTerrain({ type: 'electric', duration: terrainDuration });
 		addMessage({ message: `${user.data.name} spreads electric terrain` });
 	}
+
 	if (user.ability === 'psychic-surge') {
 		setBattleTerrain({ type: 'psychic', duration: terrainDuration });
 		addMessage({ message: `${user.data.name} spreads psychic terrain` });
