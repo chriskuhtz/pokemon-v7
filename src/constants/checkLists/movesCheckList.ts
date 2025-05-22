@@ -2112,9 +2112,12 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/584/',
 		handled: true,
 	},
-	{ name: 'v-create', url: 'https://pokeapi.co/api/v2/move/557/' },
-	{ name: 'fusion-flare', url: 'https://pokeapi.co/api/v2/move/558/' },
-	{ name: 'fusion-bolt', url: 'https://pokeapi.co/api/v2/move/559/' },
+	{
+		name: 'v-create',
+		url: 'https://pokeapi.co/api/v2/move/557/',
+		handled: true,
+	},
+
 	{ name: 'flying-press', url: 'https://pokeapi.co/api/v2/move/560/' },
 	{ name: 'mat-block', url: 'https://pokeapi.co/api/v2/move/561/' },
 	{ name: 'belch', url: 'https://pokeapi.co/api/v2/move/562/' },
@@ -2600,6 +2603,8 @@ export const movesCheckList: {
 	{ name: 'quash', url: 'https://pokeapi.co/api/v2/move/511/' },
 	{ name: 'dragon-tail', url: 'https://pokeapi.co/api/v2/move/525/' },
 	{ name: 'techno-blast', url: 'https://pokeapi.co/api/v2/move/546/' },
+	{ name: 'fusion-flare', url: 'https://pokeapi.co/api/v2/move/558/' },
+	{ name: 'fusion-bolt', url: 'https://pokeapi.co/api/v2/move/559/' },
 ];
 
 export const handledMoves = [
@@ -3077,6 +3082,7 @@ export const handledMoves = [
 	'snarl',
 	'icicle-crash',
 	'fairy-wind',
+	'v-create',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
