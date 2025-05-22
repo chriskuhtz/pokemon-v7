@@ -17,6 +17,7 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 		[
 			`catch a ${type} pokemon`,
 			{
+				category: 'POKEDEX',
 				kind: 'BULLETIN',
 				rewardItems: {
 					'poke-ball': 1,
@@ -37,6 +38,7 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 		[
 			`catch 10 different ${type} pokemon`,
 			{
+				category: 'POKEDEX',
 				kind: 'BULLETIN',
 				rewardItems: {
 					'great-ball': 5,
@@ -58,6 +60,7 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 		[
 			`catch 25 different ${type} pokemon`,
 			{
+				category: 'POKEDEX',
 				kind: 'BULLETIN',
 				rewardItems: {
 					'net-ball': 5,
@@ -80,6 +83,7 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 		[
 			`catch 50 different ${type} pokemon`,
 			{
+				category: 'POKEDEX',
 				kind: 'BULLETIN',
 				rewardItems: {
 					'ultra-ball': 25,

@@ -441,6 +441,7 @@ export const extraFeatureCheckList: {
 	{ name: 'quests for random field', handled: true },
 	{ name: 'improve challenge field menu', handled: true },
 	{ name: 'lower catchrate with level', handled: true },
+	{ name: 'quest categories' },
 
 	//BUGS/IMPROVEMENTS:
 	{ name: 'progress bar for catch x quests' },
@@ -451,7 +452,7 @@ export const extraFeatureCheckList: {
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
 	{ name: 'timeofday in pokedex' },
 	{ name: 'download did not boost after tablets of ruin lowered' },
-	{ name: 'quest categories' },
+
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },

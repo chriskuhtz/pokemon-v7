@@ -26,14 +26,14 @@ export const EmptyStatObject: StatObject = {
 };
 
 export const generateRandomStatObject = (max: number): StatObject => ({
-	hp: Math.floor(Math.random() * max),
-	defense: Math.floor(Math.random() * max),
-	attack: Math.floor(Math.random() * max),
-	'special-attack': Math.floor(Math.random() * max),
-	'special-defense': Math.floor(Math.random() * max),
-	speed: Math.floor(Math.random() * max),
-	accuracy: Math.floor(Math.random() * max),
-	evasion: Math.floor(Math.random() * max),
+	hp: Math.floor(Math.random() * max + 1),
+	defense: Math.floor(Math.random() * max + 1),
+	attack: Math.floor(Math.random() * max + 1),
+	'special-attack': Math.floor(Math.random() * max + 1),
+	'special-defense': Math.floor(Math.random() * max + 1),
+	speed: Math.floor(Math.random() * max + 1),
+	accuracy: Math.floor(Math.random() * max + 1),
+	evasion: Math.floor(Math.random() * max + 1),
 });
 
 export const getRandomBoostableStat = (omit?: Stat[]): Stat => {

@@ -10,9 +10,19 @@ export type QuestStatus = 'INACTIVE' | 'ACTIVE' | 'COLLECTED' | 'FULFILLED';
 
 export type QuestKind = 'BULLETIN' | 'QUEST_LINE';
 
+export const questCategories = [
+	'EXPLORATION',
+	'RESEARCH',
+	'BATTLE',
+	'TRAINING',
+	'POKEDEX',
+] as const;
+export type QuestCategory = (typeof questCategories)[number];
+
 export interface Quest {
 	//meta
 	kind: QuestKind;
+	category: QuestCategory;
 	availableAfter?: QuestName;
 	requiredUpgrade?: CampUpgrade;
 	//rewards

@@ -407,6 +407,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	...catchQuests,
 	...typeCatchQuests,
 	'catch a pokemon': {
+		category: 'RESEARCH',
 		rewardItems: { 'poke-ball': 10 },
 		researchPoints: campUpgradeCostScale,
 		conditionFunction: (s) => {
@@ -415,6 +416,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch a pikachu': {
+		category: 'RESEARCH',
 		rewardItems: { 'berry-juice': 2 },
 		researchPoints: 10,
 		targetPokemon: ['pikachu'],
@@ -424,6 +426,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'find a lightball': {
+		category: 'EXPLORATION',
 		rewardItems: { 'thunder-stone': 1 },
 		researchPoints: 30,
 		conditionFunction: (s) => {
@@ -432,6 +435,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'retrieve oaks parcel from raticate': {
+		category: 'EXPLORATION',
 		rewardItems: { 'big-malasada': 1, 'ultra-ball': 5 },
 		researchPoints: 25,
 		conditionFunction: (s) => {
@@ -442,6 +446,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch all mouselike electric pokemon': {
+		category: 'EXPLORATION',
 		rewardItems: {
 			'big-malasada': 5,
 			'belue-berry': 1,
@@ -480,6 +485,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch all pikachus with hats': {
+		category: 'EXPLORATION',
 		rewardItems: {
 			'electric-gem': 5,
 			'thunder-stone': 1,
@@ -514,6 +520,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch all costumed pikachus': {
+		category: 'EXPLORATION',
 		rewardItems: {},
 		rewardPokemon: {
 			caughtAtDate: new Date().getTime(),
@@ -562,6 +569,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch a feebas': {
+		category: 'EXPLORATION',
 		rewardItems: { 'net-ball': 10, 'old-gateau': 2 },
 		researchPoints: 25,
 		targetPokemon: ['feebas'],
@@ -572,6 +580,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 	},
 	'catch a sudowoodo': {
+		category: 'EXPLORATION',
 		rewardItems: { 'ultra-ball': 5, 'pewter-crunchies': 2 },
 		researchPoints: 25,
 		targetPokemon: ['sudowoodo'],
@@ -582,6 +591,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 	},
 	'catch all honeytree pokemon': {
+		category: 'RESEARCH',
 		rewardItems: { 'sun-stone': 2, 'leaf-stone': 2, 'berry-juice': 5 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
@@ -593,6 +603,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'build combee hive',
 	},
 	'catch all pokemon that live under rocks': {
+		category: 'RESEARCH',
 		rewardItems: {
 			'black-augurite': 1,
 			'peat-block': 1,
@@ -611,6 +622,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'sledge hammer certification',
 	},
 	'catch all different pokemon on routeS1': {
+		category: 'EXPLORATION',
 		rewardItems: {
 			'dragon-scale': 1,
 			'water-stone': 2,
@@ -637,6 +649,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'swimming certification',
 	},
 	'catch a pokemon orginally found in kanto': {
+		category: 'POKEDEX',
 		rewardItems: { protein: 2 },
 		researchPoints: 10,
 		conditionFunction: (s) => {
@@ -645,6 +658,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch a pokemon orginally found in johto': {
+		category: 'POKEDEX',
 		rewardItems: { iron: 2 },
 		researchPoints: 10,
 		conditionFunction: (s) => {
@@ -655,6 +669,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch a pokemon orginally found in hoenn': {
+		category: 'POKEDEX',
 		rewardItems: { calcium: 2 },
 		researchPoints: 10,
 		conditionFunction: (s) => {
@@ -665,6 +680,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch a pokemon orginally found in sinnoh': {
+		category: 'POKEDEX',
 		rewardItems: { zinc: 2 },
 		researchPoints: 10,
 		conditionFunction: (s) => {
@@ -675,6 +691,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch a pokemon orginally found in unova': {
+		category: 'POKEDEX',
 		rewardItems: { carbos: 2 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
@@ -685,6 +702,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch a pokemon orginally found in kalos': {
+		category: 'POKEDEX',
 		rewardItems: { 'hp-up': 2 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
@@ -695,6 +713,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch a pokemon orginally found in alola': {
+		category: 'POKEDEX',
 		rewardItems: { 'pp-max': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
@@ -705,6 +724,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch a pokemon orginally found in galar': {
+		category: 'POKEDEX',
 		rewardItems: { 'ultra-ball': 5 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
@@ -715,6 +735,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch a pokemon orginally found in paldea': {
+		category: 'POKEDEX',
 		rewardItems: { 'pp-max': 1 },
 		researchPoints: 5,
 		conditionFunction: (s) => {
@@ -725,6 +746,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch a pokemon and its galarian variant': {
+		category: 'POKEDEX',
 		rewardItems: { 'sitrus-berry': 10 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
@@ -737,6 +759,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch a pokemon and its alolan variant': {
+		category: 'POKEDEX',
 		rewardItems: { 'ultra-ball': 5 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
@@ -749,6 +772,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch a pokemon and its hisui variant': {
+		category: 'POKEDEX',
 		rewardItems: { 'black-augurite': 1 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
@@ -761,6 +785,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch a pokemon and its paldea variant': {
+		category: 'POKEDEX',
 		rewardItems: { elixir: 3 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
@@ -773,6 +798,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch all forms of tauros': {
+		category: 'RESEARCH',
 		rewardItems: { 'big-malasada': 2 },
 		researchPoints: 20,
 		targetPokemon: [
@@ -795,6 +821,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'craft a apricorn ball': {
+		category: 'EXPLORATION',
 		kind: 'BULLETIN',
 		rewardItems: {
 			'black-apricorn': 1,
@@ -810,6 +837,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => !!s.mileStones.hasCraftedApricorn,
 	},
 	'lure a pokemon with honey': {
+		category: 'RESEARCH',
 		rewardItems: { 'sitrus-berry': 3 },
 		researchPoints: 10,
 		conditionFunction: (s) => {
@@ -818,6 +846,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 	},
 	'evolve a combee': {
+		category: 'RESEARCH',
 		rewardItems: {
 			'golden-nanab-berry': 3,
 			'golden-razz-berry': 3,
@@ -834,6 +863,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 	},
 	'evolve a pokemon through level up': {
+		category: 'RESEARCH',
 		rewardItems: { 'thunder-stone': 1 },
 		researchPoints: 10,
 		conditionFunction: (s) => {
@@ -842,6 +872,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'evolve a pokemon with a stone': {
+		category: 'RESEARCH',
 		rewardItems: { 'metal-coat': 1 },
 		researchPoints: 15,
 		conditionFunction: (s) => {
@@ -851,6 +882,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'evolve a pokemon through level up',
 	},
 	'evolve a pokemon with a held item': {
+		category: 'RESEARCH',
 		rewardItems: { 'soothe-bell': 1 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
@@ -860,6 +892,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'evolve a pokemon with a stone',
 	},
 	'evolve a pokemon through friendship': {
+		category: 'RESEARCH',
 		rewardItems: { 'moon-stone': 2 },
 		researchPoints: 25,
 		conditionFunction: (s) => {
@@ -869,6 +902,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'evolve a pokemon with a held item',
 	},
 	'evolve male and female nidoran into their final form': {
+		category: 'RESEARCH',
 		rewardItems: { 'leaf-stone': 1, 'sun-stone': 1 },
 		researchPoints: 30,
 		targetPokemon: ['nidoking', 'nidoqueen'],
@@ -882,6 +916,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'evolve a pokemon through friendship',
 	},
 	'evolve gloom into vileplume and bellosom': {
+		category: 'RESEARCH',
 		rewardItems: { 'metal-coat': 1, 'black-augurite': 1 },
 		researchPoints: 30,
 		targetPokemon: ['bellossom', 'vileplume'],
@@ -895,6 +930,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'evolve a pokemon through friendship',
 	},
 	'evolve a pokemon that only evolves during the day': {
+		category: 'RESEARCH',
 		rewardItems: { 'ultra-ball': 10 },
 		researchPoints: 25,
 		conditionFunction: (s) => {
@@ -904,6 +940,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'evolve gloom into vileplume and bellosom',
 	},
 	'evolve a pokemon that only evolves at night': {
+		category: 'RESEARCH',
 		rewardItems: { 'ultra-ball': 10 },
 		researchPoints: 25,
 		conditionFunction: (s) => {
@@ -913,6 +950,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'evolve a pokemon that only evolves during the day',
 	},
 	'train a pokemon to level 10': {
+		category: 'TRAINING',
 		rewardItems: { 'exp-share': 1, 'big-malasada': 1 },
 		researchPoints: 10,
 		conditionFunction: (s) => {
@@ -923,6 +961,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 	},
 	'train a pokemon to level 20': {
+		category: 'TRAINING',
 		rewardItems: { 'rare-candy': 2, 'pewter-crunchies': 2 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
@@ -934,6 +973,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'train a pokemon to level 10',
 	},
 	'train a pokemon to level 30': {
+		category: 'TRAINING',
 		rewardItems: { 'rare-candy': 3, 'moomoo-cheese': 3 },
 		researchPoints: 30,
 		conditionFunction: (s) => {
@@ -945,6 +985,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'train a pokemon to level 20',
 	},
 	'train a pokemon to level 40': {
+		category: 'TRAINING',
 		rewardItems: { 'rare-candy': 4, 'lumiose-galette': 4 },
 		researchPoints: 40,
 		conditionFunction: (s) => {
@@ -956,6 +997,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'train a pokemon to level 30',
 	},
 	'train a pokemon to level 50': {
+		category: 'TRAINING',
 		rewardItems: { 'rare-candy': 5, casteliacone: 5 },
 		researchPoints: 50,
 		conditionFunction: (s) => {
@@ -967,6 +1009,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'train a pokemon to level 40',
 	},
 	'train a pokemon to level 60': {
+		category: 'TRAINING',
 		rewardItems: { 'rare-candy': 6, 'rage-candy-bar': 6 },
 		researchPoints: 60,
 		conditionFunction: (s) => {
@@ -978,6 +1021,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'train a pokemon to level 50',
 	},
 	'train a pokemon to level 70': {
+		category: 'TRAINING',
 		rewardItems: { 'rare-candy': 7, 'big-malasada': 7 },
 		researchPoints: 70,
 		conditionFunction: (s) => {
@@ -989,6 +1033,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'train a pokemon to level 60',
 	},
 	'train a pokemon to level 80': {
+		category: 'TRAINING',
 		rewardItems: { 'rare-candy': 8, 'pewter-crunchies': 8 },
 		researchPoints: 80,
 		conditionFunction: (s) => {
@@ -1000,6 +1045,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'train a pokemon to level 70',
 	},
 	'train a pokemon to level 90': {
+		category: 'TRAINING',
 		rewardItems: { 'rare-candy': 9, casteliacone: 9 },
 		researchPoints: 90,
 		conditionFunction: (s) => {
@@ -1011,6 +1057,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'train a pokemon to level 90',
 	},
 	'train a pokemon to level 100': {
+		category: 'TRAINING',
 		rewardItems: { 'rare-candy': 10, 'lumiose-galette': 10 },
 		researchPoints: 100,
 		conditionFunction: (s) => {
@@ -1022,6 +1069,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'train a pokemon to level 100',
 	},
 	'defeat a training field trainer': {
+		category: 'BATTLE',
 		rewardItems: {
 			'big-malasada': 1,
 		},
@@ -1036,6 +1084,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'training field 1',
 	},
 	'defeat all tier 1 field trainers': {
+		category: 'BATTLE',
 		rewardItems: {
 			'moomoo-cheese': 2,
 			'exp-candy-xs': 10,
@@ -1051,6 +1100,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'defeat a training field trainer',
 	},
 	'defeat all tier 2 field trainers': {
+		category: 'BATTLE',
 		rewardItems: {
 			casteliacone: 2,
 			'exp-candy-s': 10,
@@ -1066,6 +1116,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'defeat all tier 1 field trainers',
 	},
 	'defeat all tier 3 field trainers': {
+		category: 'BATTLE',
 		rewardItems: {
 			'pewter-crunchies': 2,
 			'exp-candy-m': 10,
@@ -1081,6 +1132,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'defeat all tier 2 field trainers',
 	},
 	'defeat all tier 4 field trainers': {
+		category: 'BATTLE',
 		rewardItems: {
 			'lumiose-galette': 2,
 			'exp-candy-l': 10,
@@ -1096,6 +1148,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'defeat all tier 3 field trainers',
 	},
 	'defeat all tier 5 field trainers': {
+		category: 'BATTLE',
 		rewardItems: {
 			'big-malasada': 10,
 			'moomoo-cheese': 10,
@@ -1118,6 +1171,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'defeat all tier 4 field trainers',
 	},
 	'grow a berry': {
+		category: 'RESEARCH',
 		rewardItems: {
 			'damp-mulch': 2,
 			'growth-mulch': 2,
@@ -1130,6 +1184,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'berry_farm',
 	},
 	'grow a apricorn': {
+		category: 'RESEARCH',
 		rewardItems: {
 			'damp-mulch': 2,
 			'growth-mulch': 2,
@@ -1142,6 +1197,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'berry_farm',
 	},
 	'catch a pokemon in an apricorn ball': {
+		category: 'EXPLORATION',
 		kind: 'BULLETIN',
 		rewardItems: {
 			'black-apricorn': 1,
@@ -1158,6 +1214,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			s.pokemon.some((p) => Object.values(apricornTable).includes(p.ball)),
 	},
 	'catch a pokemon in every type of apricorn ball': {
+		category: 'EXPLORATION',
 		kind: 'BULLETIN',
 		rewardItems: {
 			'green-apricorn': 1,
@@ -1176,6 +1233,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			),
 	},
 	'catch a very heavy specimen': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		rewardItems: {
 			'pp-up': 1,
@@ -1185,6 +1243,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			s.pokemon.some((p) => p.weightModifier && p.weightModifier > 0.9),
 	},
 	'catch a very light specimen': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		rewardItems: {
 			'sitrus-berry': 5,
@@ -1195,6 +1254,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			s.pokemon.some((p) => p.weightModifier && p.weightModifier < 0.1),
 	},
 	'catch a tiny specimen': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		rewardItems: {
 			'yellow-apricorn': 5,
@@ -1205,6 +1265,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			s.pokemon.some((p) => p.heightModifier && p.heightModifier < 0.1),
 	},
 	'catch a gigantic specimen': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		rewardItems: {
 			'green-apricorn': 5,
@@ -1215,6 +1276,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			s.pokemon.some((p) => p.heightModifier && p.heightModifier > 0.9),
 	},
 	'catch a pokemon with perfect attack ivs': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		rewardItems: {
 			'muscle-mochi': 2,
@@ -1225,6 +1287,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			s.pokemon.some((p) => p.intrinsicValues.attack === 31),
 	},
 	'catch a pokemon with perfect special-attack ivs': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		rewardItems: {
 			'clever-mochi': 2,
@@ -1235,6 +1298,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			s.pokemon.some((p) => p.intrinsicValues['special-attack'] === 31),
 	},
 	'catch a pokemon with perfect defense ivs': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		rewardItems: {
 			'resist-mochi': 2,
@@ -1245,6 +1309,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			s.pokemon.some((p) => p.intrinsicValues['defense'] === 31),
 	},
 	'catch a pokemon with perfect special-defense ivs': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		rewardItems: {
 			'genius-mochi': 2,
@@ -1255,6 +1320,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			s.pokemon.some((p) => p.intrinsicValues['special-defense'] === 31),
 	},
 	'catch a pokemon with perfect speed ivs': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		rewardItems: {
 			'swift-mochi': 2,
@@ -1265,6 +1331,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			s.pokemon.some((p) => p.intrinsicValues['speed'] === 31),
 	},
 	'catch a pokemon with perfect hp ivs': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		rewardItems: {
 			'health-mochi': 2,
@@ -1275,6 +1342,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			s.pokemon.some((p) => p.intrinsicValues['hp'] === 31),
 	},
 	'catch a pokemon with top 90% ivs': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		rewardItems: {
 			'muscle-mochi': 3,
@@ -1290,6 +1358,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			s.pokemon.some((p) => sumOfIvs(p.intrinsicValues) > 168),
 	},
 	'catch local dark and ghost pokemon': {
+		category: 'EXPLORATION',
 		rewardItems: { 'odd-keystone': 1 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
@@ -1305,6 +1374,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch Haunter and Mightyena': {
+		category: 'EXPLORATION',
 		rewardItems: { 'dusk-ball': 5, 'dusk-stone': 1 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
@@ -1317,6 +1387,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch a spiritomb': {
+		category: 'EXPLORATION',
 		rewardItems: { 'rare-candy': 3 },
 		researchPoints: 50,
 		conditionFunction: (s) => {
@@ -1326,6 +1397,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'defeat morty': {
+		category: 'BATTLE',
 		rewardItems: {
 			'ultra-ball': 5,
 			'full-restore': 5,
@@ -1365,6 +1437,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'catch Haunter and Mightyena',
 	},
 	'defeat bugsy': {
+		category: 'BATTLE',
 		rewardItems: {
 			'ultra-ball': 5,
 			'full-restore': 5,
@@ -1404,6 +1477,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'report a bug',
 	},
 	'defeat chuck': {
+		category: 'BATTLE',
 		rewardItems: {
 			'full-restore': 5,
 			'black-belt': 1,
@@ -1442,6 +1516,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'deal 10000 damage with one attack',
 	},
 	'defeat roark': {
+		category: 'BATTLE',
 		rewardItems: {
 			'full-restore': 5,
 			'rare-candy': 3,
@@ -1481,6 +1556,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'revive all different fossils',
 	},
 	'defeat falkner': {
+		category: 'BATTLE',
 		rewardItems: {
 			'ultra-ball': 5,
 			'full-restore': 5,
@@ -1520,6 +1596,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'catch the legendary bird of ice',
 	},
 	'defeat rowan': {
+		category: 'BATTLE',
 		rewardItems: {
 			'ultra-ball': 5,
 			'full-restore': 5,
@@ -1558,6 +1635,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'catch all forms of tauros',
 	},
 	'defeat elm': {
+		category: 'BATTLE',
 		rewardItems: {
 			'ultra-ball': 5,
 			'full-restore': 5,
@@ -1596,6 +1674,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'catch all evolutions of eevee',
 	},
 	'catch some local flying pokemon': {
+		category: 'EXPLORATION',
 		rewardItems: { 'yache-berry': 2 },
 		researchPoints: 10,
 		conditionFunction: (s) => {
@@ -1621,6 +1700,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'evolve some local flying pokemon': {
+		category: 'EXPLORATION',
 		rewardItems: { 'charti-berry': 2 },
 		researchPoints: 15,
 		conditionFunction: (s) => {
@@ -1633,6 +1713,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'evolve a flying pokemon to its final stage': {
+		category: 'EXPLORATION',
 		rewardItems: { 'wacan-berry': 5 },
 		researchPoints: 25,
 		conditionFunction: (s) => {
@@ -1645,6 +1726,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch the legendary bird of ice': {
+		category: 'EXPLORATION',
 		rewardItems: { 'rare-candy': 10 },
 		researchPoints: 50,
 		conditionFunction: (s) => {
@@ -1654,6 +1736,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'catch the legendary bird of fire': {
+		category: 'EXPLORATION',
 		rewardItems: { 'rare-candy': 10 },
 		researchPoints: 50,
 		conditionFunction: (s) => {
@@ -1664,6 +1747,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 	},
 	'catch the legendary bird of thunder': {
+		category: 'EXPLORATION',
 		rewardItems: { 'rare-candy': 10 },
 		researchPoints: 50,
 		conditionFunction: (s) => {
@@ -1674,6 +1758,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 	},
 	'catch the mysterious pokemon in orenji forest': {
+		category: 'EXPLORATION',
 		rewardItems: { 'rare-candy': 10 },
 		researchPoints: 50,
 		conditionFunction: (s) => {
@@ -1684,6 +1769,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 	},
 	'revive a fossil': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		rewardItems: {
 			honey: 6,
@@ -1699,6 +1785,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'invite fossil expert',
 	},
 	'revive all different fossils': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		rewardItems: {
 			'rare-candy': 5,
@@ -1715,6 +1802,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'revive a fossil',
 	},
 	'evolve your starter pokemon': {
+		category: 'RESEARCH',
 		kind: 'QUEST_LINE',
 		rewardItems: {
 			'rare-candy': 2,
@@ -1726,6 +1814,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	},
 
 	'catch a shiny pokemon': {
+		category: 'EXPLORATION',
 		kind: 'BULLETIN',
 		rewardItems: {
 			'master-ball': 1,
@@ -1736,6 +1825,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			s.pokemon.some((p) => p.shiny && p.caughtOnMap !== 'camp'),
 	},
 	'cook an easy recipe': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		researchPoints: 10,
 		rewardItems: {
@@ -1749,6 +1839,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => !!s.mileStones.cookedEasyRecipe,
 	},
 	'cook a medium recipe': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		researchPoints: 15,
 		rewardItems: {
@@ -1761,6 +1852,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => !!s.mileStones.cookedMediumRecipe,
 	},
 	'cook a tricky recipe': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		researchPoints: 25,
 		rewardItems: {
@@ -1773,6 +1865,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => !!s.mileStones.cookedTrickyRecipe,
 	},
 	'catch 10 different species': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		researchPoints: 10,
 		rewardItems: {
@@ -1783,6 +1876,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				.length >= 10,
 	},
 	'catch 20 different species': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		researchPoints: 20,
 		rewardItems: {
@@ -1794,6 +1888,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				.length >= 20,
 	},
 	'catch 50 different species': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		researchPoints: 50,
 		rewardItems: {
@@ -1805,6 +1900,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				.length >= 50,
 	},
 	'catch 100 different species': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		researchPoints: 100,
 		rewardItems: {
@@ -1816,6 +1912,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				.length >= 100,
 	},
 	'catch 150 different species': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		researchPoints: 100,
 		rewardItems: {
@@ -1827,6 +1924,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				.length >= 150,
 	},
 	'catch 250 different species': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		researchPoints: 100,
 		rewardItems: {
@@ -1838,6 +1936,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				.length >= 250,
 	},
 	'catch 350 different species': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		researchPoints: 100,
 		rewardItems: {
@@ -1849,6 +1948,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				.length >= 350,
 	},
 	'catch 450 different species': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		researchPoints: 100,
 		rewardItems: {
@@ -1861,6 +1961,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				.length >= 450,
 	},
 	'catch 550 different species': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		researchPoints: 100,
 		rewardItems: {
@@ -1873,6 +1974,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				.length >= 550,
 	},
 	'find a pokemon under a smashed rock': {
+		category: 'EXPLORATION',
 		kind: 'BULLETIN',
 		researchPoints: 20,
 		rewardItems: {
@@ -1882,6 +1984,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => !!s.mileStones.hasfoundAPokemonBySmashingRocks,
 	},
 	'donate 1 plant to the seed vault': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'create seed vault',
 		researchPoints: 5,
@@ -1889,6 +1992,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => !!(s.seedVault && s.seedVault.length > 0),
 	},
 	'donate 20 plants to the seed vault': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'create seed vault',
 		availableAfter: 'donate 1 plant to the seed vault',
@@ -1897,6 +2001,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => !!(s.seedVault && s.seedVault.length >= 20),
 	},
 	'donate 50 plants to the seed vault': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'create seed vault',
 		availableAfter: 'donate 20 plants to the seed vault',
@@ -1905,6 +2010,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => !!(s.seedVault && s.seedVault.length >= 50),
 	},
 	'donate all different plants to the seed vault': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'create seed vault',
 		availableAfter: 'donate 50 plants to the seed vault',
@@ -1914,6 +2020,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			[...berries, ...apricorns].every((item) => s.seedVault?.includes(item)),
 	},
 	'catch a pokemon from onix cave': {
+		category: 'EXPLORATION',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'shovel certification',
 		researchPoints: 10,
@@ -1926,6 +2033,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			),
 	},
 	'catch all pokemon from onix cave': {
+		category: 'EXPLORATION',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'shovel certification',
 		availableAfter: 'catch a pokemon from onix cave',
@@ -1944,6 +2052,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			),
 	},
 	'catch all pokemon from caveW1': {
+		category: 'EXPLORATION',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'swimming certification',
 		targetRoute: 'caveW1',
@@ -1962,6 +2071,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			),
 	},
 	'wake a snorlax': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'shovel certification',
 		researchPoints: 25,
@@ -1971,6 +2081,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => !!s.mileStones.hasWokenASnorlax,
 	},
 	'catch all evolutions of eevee': {
+		category: 'RESEARCH',
 		rewardItems: {},
 		researchPoints: 100,
 		conditionFunction: (s) => {
@@ -1998,6 +2109,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'reach cooking skill 20': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'invite chef grandma',
 		researchPoints: 20,
@@ -2011,6 +2123,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => !!s.cookingSkill && s.cookingSkill >= 20,
 	},
 	'reach cooking skill 50': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'invite chef grandma',
 		availableAfter: 'reach cooking skill 20',
@@ -2025,6 +2138,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => !!s.cookingSkill && s.cookingSkill >= 50,
 	},
 	'reach cooking skill 100': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'invite chef grandma',
 		availableAfter: 'reach cooking skill 50',
@@ -2037,6 +2151,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => !!s.cookingSkill && s.cookingSkill >= 100,
 	},
 	'lure a pokemon with a berry': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'berry lure station routeN1',
 		researchPoints: 20,
@@ -2049,6 +2164,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 0,
 	},
 	'lure 10 different pokemon with berries': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'berry lure station routeN1',
 		availableAfter: 'lure a pokemon with a berry',
@@ -2062,6 +2178,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 9,
 	},
 	'lure 20 different pokemon with berries': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'berry lure station routeN1',
 		availableAfter: 'lure 10 different pokemon with berries',
@@ -2076,6 +2193,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 19,
 	},
 	'lure 30 different pokemon with berries': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'berry lure station routeN1',
 		availableAfter: 'lure 20 different pokemon with berries',
@@ -2088,6 +2206,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 29,
 	},
 	'lure 40 different pokemon with berries': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'berry lure station routeN1',
 		availableAfter: 'lure 30 different pokemon with berries',
@@ -2098,6 +2217,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 39,
 	},
 	'lure 50 different pokemon with berries': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'berry lure station routeN1',
 		availableAfter: 'lure 40 different pokemon with berries',
@@ -2108,6 +2228,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 49,
 	},
 	'lure 60 different pokemon with berries': {
+		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'berry lure station routeN1',
 		availableAfter: 'lure 50 different pokemon with berries',
@@ -2118,6 +2239,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 59,
 	},
 	'catch a pokemon from a swarm': {
+		category: 'EXPLORATION',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'pokemon swarm radar',
 		researchPoints: 20,
@@ -2125,6 +2247,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length > 0,
 	},
 	'catch 3 different pokemon from swarms': {
+		category: 'EXPLORATION',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'pokemon swarm radar',
 		availableAfter: 'catch a pokemon from a swarm',
@@ -2133,6 +2256,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length >= 3,
 	},
 	'catch 10 different pokemon from swarms': {
+		category: 'EXPLORATION',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'pokemon swarm radar',
 		availableAfter: 'catch 3 different pokemon from swarms',
@@ -2143,6 +2267,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length >= 10,
 	},
 	'catch 20 different pokemon from swarms': {
+		category: 'EXPLORATION',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'pokemon swarm radar',
 		availableAfter: 'catch 10 different pokemon from swarms',
@@ -2153,48 +2278,56 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => s.mileStones.caughtFromSwarms.length >= 20,
 	},
 	'deal 50 damage with one attack': {
+		category: 'BATTLE',
 		kind: 'QUEST_LINE',
 		researchPoints: 10,
 		conditionFunction: (s) => s.mileStones.damageRecord >= 50,
 		rewardItems: { 'big-malasada': 1, 'x-attack': 1 },
 	},
 	'deal 100 damage with one attack': {
+		category: 'BATTLE',
 		kind: 'QUEST_LINE',
 		researchPoints: 20,
 		conditionFunction: (s) => s.mileStones.damageRecord >= 100,
 		rewardItems: { casteliacone: 1, 'wise-glasses': 1 },
 	},
 	'deal 200 damage with one attack': {
+		category: 'BATTLE',
 		kind: 'QUEST_LINE',
 		researchPoints: 30,
 		conditionFunction: (s) => s.mileStones.damageRecord >= 200,
 		rewardItems: { 'lava-cookie': 1, 'scope-lens': 1 },
 	},
 	'deal 500 damage with one attack': {
+		category: 'BATTLE',
 		kind: 'QUEST_LINE',
 		researchPoints: 40,
 		conditionFunction: (s) => s.mileStones.damageRecord >= 500,
 		rewardItems: { 'old-gateau': 1, 'choice-band': 1 },
 	},
 	'deal 1000 damage with one attack': {
+		category: 'BATTLE',
 		kind: 'QUEST_LINE',
 		researchPoints: 50,
 		conditionFunction: (s) => s.mileStones.damageRecord >= 1000,
 		rewardItems: { 'rage-candy-bar': 1, 'choice-band': 1 },
 	},
 	'deal 2000 damage with one attack': {
+		category: 'BATTLE',
 		kind: 'QUEST_LINE',
 		researchPoints: 100,
 		conditionFunction: (s) => s.mileStones.damageRecord >= 2000,
 		rewardItems: { 'big-malasada': 1, 'choice-specs': 1 },
 	},
 	'deal 5000 damage with one attack': {
+		category: 'BATTLE',
 		kind: 'QUEST_LINE',
 		researchPoints: 100,
 		conditionFunction: (s) => s.mileStones.damageRecord >= 5000,
 		rewardItems: { 'big-malasada': 1 },
 	},
 	'deal 10000 damage with one attack': {
+		category: 'BATTLE',
 		kind: 'QUEST_LINE',
 		researchPoints: 100,
 		conditionFunction: (s) => s.mileStones.damageRecord >= 10000,
@@ -2202,6 +2335,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'deal 5000 damage with one attack',
 	},
 	'deal 20000 damage with one attack': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		researchPoints: 100,
 		conditionFunction: (s) => s.mileStones.damageRecord >= 20000,
@@ -2209,6 +2343,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'deal 10000 damage with one attack',
 	},
 	'deal 30000 damage with one attack': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		researchPoints: 100,
 		conditionFunction: (s) => s.mileStones.damageRecord >= 30000,
@@ -2216,6 +2351,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'deal 20000 damage with one attack',
 	},
 	'deal 50000 damage with one attack': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		researchPoints: 100,
 		conditionFunction: (s) => s.mileStones.damageRecord >= 50000,
@@ -2223,6 +2359,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'deal 30000 damage with one attack',
 	},
 	'defeat erika': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		researchPoints: 25,
 		rewardItems: {
@@ -2236,6 +2373,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat janine': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		researchPoints: 25,
 		rewardItems: {
@@ -2249,6 +2387,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat blaine': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		researchPoints: 25,
 		rewardItems: { 'occa-berry': 5, charcoal: 1, ...expCandyPackage },
@@ -2258,6 +2397,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat surge': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		researchPoints: 50,
 		rewardItems: { 'wacan-berry': 5, magnet: 1, ...expCandyPackage },
@@ -2267,6 +2407,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat misty': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		researchPoints: 50,
 		rewardItems: {
@@ -2281,6 +2422,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat sabrina': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		researchPoints: 50,
 		rewardItems: { 'payapa-berry': 5, 'twisted-spoon': 1, ...expCandyPackage },
@@ -2290,6 +2432,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat brock': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		researchPoints: 50,
 		rewardItems: { 'charti-berry': 5, 'hard-stone': 1, ...expCandyPackage },
@@ -2299,6 +2442,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat gary': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		researchPoints: 100,
 		rewardItems: {
@@ -2313,6 +2457,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'reach challenge field rank 1': {
+		category: 'TRAINING',
 		kind: 'BULLETIN',
 		researchPoints: 10,
 		rewardItems: {
@@ -2329,6 +2474,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'reach challenge field rank 18': {
+		category: 'TRAINING',
 		kind: 'BULLETIN',
 		researchPoints: 20,
 		rewardItems: {
@@ -2346,6 +2492,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'reach challenge field rank 40': {
+		category: 'TRAINING',
 		kind: 'BULLETIN',
 		researchPoints: 40,
 		rewardItems: {
@@ -2363,6 +2510,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'reach challenge field rank 62': {
+		category: 'TRAINING',
 		kind: 'BULLETIN',
 		researchPoints: 60,
 		rewardItems: {
@@ -2380,6 +2528,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'reach challenge field rank 85': {
+		category: 'TRAINING',
 		kind: 'BULLETIN',
 		researchPoints: 80,
 		rewardItems: {
@@ -2397,6 +2546,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'reach challenge field rank 108': {
+		category: 'TRAINING',
 		kind: 'BULLETIN',
 		researchPoints: 100,
 		rewardItems: {
@@ -2414,6 +2564,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'reach ranger level 1': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'ranger certification',
 		researchPoints: 25,
@@ -2421,6 +2572,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'big-malasada': 1, 'rare-candy': 1, 'moomoo-milk': 2 },
 	},
 	'reach ranger level 5': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'ranger certification',
 		availableAfter: 'reach ranger level 1',
@@ -2429,6 +2581,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'old-gateau': 3, 'rare-candy': 3, 'moomoo-milk': 6 },
 	},
 	'reach ranger level 10': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'ranger certification',
 		availableAfter: 'reach ranger level 5',
@@ -2437,6 +2590,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'lumiose-galette': 5, 'rare-candy': 5, 'moomoo-milk': 10 },
 	},
 	'reach ranger level 20': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'ranger certification',
 		availableAfter: 'reach ranger level 10',
@@ -2476,6 +2630,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat giovanni': {
+		category: 'BATTLE',
 		rewardItems: {},
 		rewardPokemon: {
 			caughtAtDate: new Date().getTime(),
@@ -2508,12 +2663,14 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'reach ranger level 5',
 	},
 	'report a bug': {
+		category: 'RESEARCH',
 		conditionFunction: (s) => !!s.mileStones.hasReportedBug,
 		kind: 'QUEST_LINE',
 		researchPoints: 20,
 		rewardItems: { 'lucky-egg': 1 },
 	},
 	'train a Pokemon to 200 Attack EV': {
+		category: 'TRAINING',
 		conditionFunction: (s) =>
 			s.pokemon.some((p) => p.onTeam && p.effortValues.attack > 200),
 		kind: 'QUEST_LINE',
@@ -2528,6 +2685,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'train a Pokemon to 200 Special Attack EV': {
+		category: 'TRAINING',
 		conditionFunction: (s) =>
 			s.pokemon.some((p) => p.onTeam && p.effortValues['special-attack'] > 200),
 		kind: 'QUEST_LINE',
@@ -2542,6 +2700,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'train a Pokemon to 200 Defense EV': {
+		category: 'TRAINING',
 		conditionFunction: (s) =>
 			s.pokemon.some((p) => p.onTeam && p.effortValues['defense'] > 200),
 		kind: 'QUEST_LINE',
@@ -2556,6 +2715,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'train a Pokemon to 200 Special Defense EV': {
+		category: 'TRAINING',
 		conditionFunction: (s) =>
 			s.pokemon.some(
 				(p) => p.onTeam && p.effortValues['special-defense'] > 200
@@ -2572,6 +2732,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'train a Pokemon to 200 Speed EV': {
+		category: 'TRAINING',
 		conditionFunction: (s) =>
 			s.pokemon.some((p) => p.onTeam && p.effortValues['speed'] > 200),
 		kind: 'QUEST_LINE',
@@ -2586,6 +2747,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'train a Pokemon to 200 Hp EV': {
+		category: 'TRAINING',
 		conditionFunction: (s) =>
 			s.pokemon.some((p) => p.onTeam && p.effortValues['hp'] > 200),
 		kind: 'QUEST_LINE',
@@ -2600,6 +2762,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'train the EV of two stats over 200 on a Pokemon': {
+		category: 'TRAINING',
 		conditionFunction: (s) =>
 			s.pokemon.some(
 				(p) =>
@@ -2618,6 +2781,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'train a Pokemon to 510 EV': {
+		category: 'TRAINING',
 		conditionFunction: (s) =>
 			s.pokemon.some((p) => {
 				const totalEvs = Object.values(p.effortValues).reduce(
@@ -2638,6 +2802,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'clear out the rocket camp': {
+		category: 'BATTLE',
 		researchPoints: 50,
 		rewardItems: { 'moomoo-milk': 5, 'big-malasada': 5 },
 		rangerLevels: 5,
@@ -2645,6 +2810,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: allRocketCampTrainersDefeated,
 	},
 	'catch a weak pokemon': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		rewardItems: { 'poke-ball': 2 },
 		researchPoints: 5,
@@ -2654,6 +2820,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			).length > 0,
 	},
 	'catch 10 weak pokemon': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		rewardItems: { 'poke-ball': 5 },
 		researchPoints: 10,
@@ -2664,6 +2831,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			).length > 9,
 	},
 	'catch 20 weak pokemon': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		rewardItems: { 'poke-ball': 10 },
 		researchPoints: 20,
@@ -2674,6 +2842,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			).length > 19,
 	},
 	'catch 50 weak pokemon': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		rewardItems: { 'poke-ball': 10 },
 		researchPoints: 50,
@@ -2684,6 +2853,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			).length > 49,
 	},
 	'catch 100 weak pokemon': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		rewardItems: { 'poke-ball': 10 },
 		researchPoints: 100,
@@ -2694,6 +2864,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			).length > 99,
 	},
 	'catch all weak pokemon': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		rewardItems: { 'master-ball': 1 },
 		researchPoints: 100,
@@ -2704,6 +2875,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			),
 	},
 	'catch a medium strong pokemon': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		rewardItems: { 'great-ball': 3, 'coba-berry': 10 },
 		researchPoints: 10,
@@ -2714,6 +2886,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			).length > 0,
 	},
 	'catch 10 medium strong pokemon': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		rewardItems: { 'great-ball': 5, 'coba-berry': 10 },
 		researchPoints: 20,
@@ -2724,6 +2897,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			).length > 9,
 	},
 	'catch 20 medium strong pokemon': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		rewardItems: { 'great-ball': 10, 'coba-berry': 10 },
 		researchPoints: 40,
@@ -2734,6 +2908,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			).length > 19,
 	},
 	'catch 50 medium strong pokemon': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		rewardItems: { 'great-ball': 10 },
 		researchPoints: 100,
@@ -2744,6 +2919,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			).length > 49,
 	},
 	'catch 100 medium strong pokemon': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		rewardItems: { 'great-ball': 10 },
 		researchPoints: 100,
@@ -2754,6 +2930,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			).length > 99,
 	},
 	'catch all medium strong pokemon': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		rewardItems: { 'master-ball': 1 },
 		researchPoints: 100,
@@ -2764,6 +2941,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			),
 	},
 	'catch a strong pokemon': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		rewardItems: { 'ultra-ball': 3, 'aguav-berry': 10 },
 		researchPoints: 10,
@@ -2774,6 +2952,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			).length > 0,
 	},
 	'catch 10 strong pokemon': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		rewardItems: { 'ultra-ball': 5, 'aguav-berry': 20 },
 		researchPoints: 30,
@@ -2784,6 +2963,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			).length > 9,
 	},
 	'catch 20 strong pokemon': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		rewardItems: { 'ultra-ball': 10, 'aguav-berry': 20 },
 		researchPoints: 60,
@@ -2794,6 +2974,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			).length > 19,
 	},
 	'catch 50 strong pokemon': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		rewardItems: { 'ultra-ball': 10, 'aguav-berry': 20 },
 		researchPoints: 100,
@@ -2804,6 +2985,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			).length > 49,
 	},
 	'catch 100 strong pokemon': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		rewardItems: { 'ultra-ball': 10 },
 		researchPoints: 100,
@@ -2814,6 +2996,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			).length > 99,
 	},
 	'catch all strong pokemon': {
+		category: 'POKEDEX',
 		kind: 'BULLETIN',
 		rewardItems: { 'master-ball': 1 },
 		researchPoints: 100,
@@ -2824,12 +3007,14 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			),
 	},
 	'defeat research assistant barry': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => !!s.mileStones.barryDefeatedAt,
 		researchPoints: 10,
 		rewardItems: { 'exp-candy-xs': 10 },
 	},
 	'defeat barry at lvl 20 or higher': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.barryDefeatedAt ?? 0) >= 8000,
 		researchPoints: 20,
@@ -2837,6 +3022,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'exp-candy-s': 10 },
 	},
 	'defeat barry at lvl 40 or higher': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.barryDefeatedAt ?? 0) >= 64000,
 		researchPoints: 40,
@@ -2844,6 +3030,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'exp-candy-m': 10 },
 	},
 	'defeat barry at lvl 60 or higher': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.barryDefeatedAt ?? 0) >= 216000,
 		researchPoints: 60,
@@ -2851,6 +3038,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'exp-candy-l': 10 },
 	},
 	'defeat barry at lvl 80 or higher': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.barryDefeatedAt ?? 0) >= 512000,
 		researchPoints: 80,
@@ -2858,6 +3046,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'exp-candy-xl': 10 },
 	},
 	'defeat barry at lvl 100': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.barryDefeatedAt ?? 0) >= 1000000,
 		researchPoints: 80,
@@ -2889,12 +3078,14 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat trainer silver': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => !!s.mileStones.silverDefeatedAt,
 		researchPoints: 10,
 		rewardItems: { 'exp-candy-xs': 10 },
 	},
 	'defeat silver at lvl 20 or higher': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.silverDefeatedAt ?? 0) >= 8000,
 		researchPoints: 20,
@@ -2902,6 +3093,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'exp-candy-s': 10 },
 	},
 	'defeat silver at lvl 40 or higher': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.silverDefeatedAt ?? 0) >= 64000,
 		researchPoints: 40,
@@ -2909,6 +3101,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'exp-candy-m': 10 },
 	},
 	'defeat silver at lvl 60 or higher': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.silverDefeatedAt ?? 0) >= 216000,
 		researchPoints: 60,
@@ -2916,6 +3109,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'exp-candy-l': 10 },
 	},
 	'defeat silver at lvl 80 or higher': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.silverDefeatedAt ?? 0) >= 512000,
 		researchPoints: 80,
@@ -2923,6 +3117,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'exp-candy-xl': 10 },
 	},
 	'defeat silver at lvl 100': {
+		category: 'BATTLE',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.silverDefeatedAt ?? 0) >= 1000000,
 		researchPoints: 80,
@@ -2954,6 +3149,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'reach random field rank 1': {
+		category: 'TRAINING',
 		kind: 'BULLETIN',
 		researchPoints: 10,
 		rewardItems: {
@@ -2967,6 +3163,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'reach random field rank 10': {
+		category: 'TRAINING',
 		kind: 'BULLETIN',
 		researchPoints: 20,
 		rewardItems: {
@@ -2981,6 +3178,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'reach random field rank 20': {
+		category: 'TRAINING',
 		kind: 'BULLETIN',
 		researchPoints: 40,
 		rewardItems: {
@@ -2995,6 +3193,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'reach random field rank 30': {
+		category: 'TRAINING',
 		kind: 'BULLETIN',
 		researchPoints: 60,
 		rewardItems: {
@@ -3009,6 +3208,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'reach random field rank 40': {
+		category: 'TRAINING',
 		kind: 'BULLETIN',
 		researchPoints: 80,
 		rewardItems: {
@@ -3023,6 +3223,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'reach random field rank 50': {
+		category: 'TRAINING',
 		kind: 'BULLETIN',
 		researchPoints: 100,
 		rewardItems: {
@@ -3037,6 +3238,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'reach random field rank 60': {
+		category: 'TRAINING',
 		kind: 'BULLETIN',
 		researchPoints: 100,
 		rewardItems: {
@@ -3051,6 +3253,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'reach random field rank 70': {
+		category: 'TRAINING',
 		kind: 'BULLETIN',
 		researchPoints: 100,
 		rewardItems: {
@@ -3065,6 +3268,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'reach random field rank 80': {
+		category: 'TRAINING',
 		kind: 'BULLETIN',
 		researchPoints: 100,
 		rewardItems: {
@@ -3078,8 +3282,8 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			);
 		},
 	},
-
 	'reach random field rank 90': {
+		category: 'TRAINING',
 		kind: 'BULLETIN',
 		researchPoints: 100,
 		rewardItems: {
@@ -3094,6 +3298,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'reach random field rank 100': {
+		category: 'TRAINING',
 		kind: 'BULLETIN',
 		researchPoints: 100,
 		rewardItems: {
