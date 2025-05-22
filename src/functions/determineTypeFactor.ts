@@ -91,7 +91,8 @@ export const determineTypeFactor = (
 	if (
 		targetTypes.includes('ghost') &&
 		(target.secondaryAilments.some((s) => s.type === 'foresighted') ||
-			attacker.ability === 'scrappy') &&
+			attacker.ability === 'scrappy' ||
+			attacker.ability === 'minds-eye') &&
 		(attackType === 'normal' || attackType == 'fighting')
 	) {
 		res = 1;

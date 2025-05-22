@@ -86,7 +86,12 @@ export const applyStatChangeToPokemon = (
 
 		return pokemon;
 	}
-	if (pokemon.ability === 'keen-eye' && stat === 'accuracy' && modifier < 1) {
+
+	if (
+		(pokemon.ability === 'keen-eye' || pokemon.ability === 'minds-eye') &&
+		stat === 'accuracy' &&
+		modifier < 1
+	) {
 		if (addMessage) {
 			addMessage({
 				message: `${pokemon.data.name} prevents accuracy reduction with ${pokemon.ability}`,

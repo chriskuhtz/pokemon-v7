@@ -55,6 +55,11 @@ export const TrainerCard = () => {
 				) : (
 					<></>
 				)}
+				{mileStones.randomFieldRecord ? (
+					<h4>Random Field Record: {mileStones.randomFieldRecord}</h4>
+				) : (
+					<></>
+				)}
 				{rangerLevel ? <h4>Ranger Level: {rangerLevel}</h4> : <></>}
 			</div>
 			{catchBoosts ? (

@@ -14,8 +14,12 @@ import { IdeaButton } from '../../components/IdeaReport/IdeaReport';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { TrainerCard } from '../../components/TrainerCard/TrainerCard';
-import { battleSpriteSize, challengeFieldId } from '../../constants/gameData';
-import { mapsRecord } from '../../constants/maps/mapsRecord';
+import {
+	battleSpriteSize,
+	challengeFieldId,
+	randomFieldId,
+} from '../../constants/gameData';
+import { MapId, mapsRecord } from '../../constants/maps/mapsRecord';
 import { fullyHealPokemon } from '../../functions/fullyHealPokemon';
 import { LocationContext } from '../../hooks/LocationProvider';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
@@ -26,6 +30,9 @@ import { SaveFileContext } from '../../hooks/useSaveFile';
 import { useTeleport } from '../../hooks/useTeleport';
 import { EmptyInventory } from '../../interfaces/Inventory';
 
+export const onChallengeField = (id: MapId) => {
+	return id === challengeFieldId || id === randomFieldId;
+};
 export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { location, setLocation } = useContext(LocationContext);
@@ -53,7 +60,7 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 						actionElements={[]}
 					/>
 				)}
-				{location.mapId === challengeFieldId && (
+				{onChallengeField(location.mapId) && (
 					<Card
 						onClick={() => {
 							setLocation({
@@ -66,9 +73,17 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 							patchSaveFileReducer({
 								bag: EmptyInventory,
 								meta: { ...saveFile.meta, activeTab: 'OVERWORLD' },
-								handledOccupants: saveFile.handledOccupants.filter(
-									(h) => !h.id.includes(challengeFieldId)
-								),
+								handledOccupants: saveFile.handledOccupants.filter((h) => {
+									if (h.id.includes(challengeFieldId)) {
+										return false;
+									}
+
+									if (h.id.includes(randomFieldId)) {
+										return false;
+									}
+
+									return true;
+								}),
 
 								pokemon: saveFile.pokemon.map((p) => {
 									if (p.onTeam) {
@@ -99,9 +114,7 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 					icon={<MdCatchingPokemon size={battleSpriteSize} />}
 					actionElements={[]}
 				/>
-				{location.mapId === 'challengeField' ? (
-					<></>
-				) : (
+				{!onChallengeField(location.mapId) && (
 					<Card
 						onClick={() => navigate('MAIN', 'QUESTS')}
 						content={<h4>Quests</h4>}

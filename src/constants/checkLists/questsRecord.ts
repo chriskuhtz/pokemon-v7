@@ -23,6 +23,7 @@ import {
 	EmptyStatObject,
 	generateRandomStatObject,
 } from '../../interfaces/StatObject';
+import { moveUnlockPayments } from '../../modules/MoveTutor/MoveTutor';
 import { sledgeHammerPokemon } from '../../modules/Overworld/hooks/useSledgeHammer';
 import {
 	highBstPokemon,
@@ -341,6 +342,17 @@ export const questNames = [
 	'reach challenge field rank 62',
 	'reach challenge field rank 85',
 	'reach challenge field rank 108',
+	'reach random field rank 1',
+	'reach random field rank 10',
+	'reach random field rank 20',
+	'reach random field rank 30',
+	'reach random field rank 40',
+	'reach random field rank 50',
+	'reach random field rank 60',
+	'reach random field rank 70',
+	'reach random field rank 80',
+	'reach random field rank 90',
+	'reach random field rank 100',
 	'catch the mysterious pokemon in orenji forest',
 	'reach ranger level 1',
 	'reach ranger level 5',
@@ -1132,13 +1144,13 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'catch a pokemon in an apricorn ball': {
 		kind: 'BULLETIN',
 		rewardItems: {
-			'black-apricorn': 5,
-			'blue-apricorn': 5,
-			'green-apricorn': 5,
-			'pink-apricorn': 5,
-			'red-apricorn': 5,
-			'white-apricorn': 5,
-			'yellow-apricorn': 5,
+			'black-apricorn': 1,
+			'blue-apricorn': 1,
+			'green-apricorn': 1,
+			'pink-apricorn': 1,
+			'red-apricorn': 1,
+			'white-apricorn': 1,
+			'yellow-apricorn': 1,
 		},
 		researchPoints: 10,
 		availableAfter: 'craft a apricorn ball',
@@ -1148,15 +1160,15 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'catch a pokemon in every type of apricorn ball': {
 		kind: 'BULLETIN',
 		rewardItems: {
-			'black-apricorn': 5,
-			'blue-apricorn': 5,
-			'green-apricorn': 5,
-			'pink-apricorn': 5,
-			'red-apricorn': 5,
-			'white-apricorn': 5,
-			'yellow-apricorn': 5,
+			'green-apricorn': 1,
+			'blue-apricorn': 1,
+			'yellow-apricorn': 1,
+			'black-apricorn': 1,
+			'pink-apricorn': 1,
+			'red-apricorn': 1,
+			'white-apricorn': 1,
 		},
-		researchPoints: 30,
+		researchPoints: 50,
 		availableAfter: 'catch a pokemon in an apricorn ball',
 		conditionFunction: (s) =>
 			Object.values(apricornTable).every((apricornBall) =>
@@ -2451,7 +2463,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			weightModifier: 0.5,
 			nature: 'lonely',
 			unlockedMoves: ['flame-charge', 'swords-dance', 'sacred-fire'],
-			ability: 'dancer',
+			ability: 'competitive',
 			id: v4(),
 			damage: 0,
 			ownerId: '',
@@ -2499,7 +2511,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => !!s.mileStones.hasReportedBug,
 		kind: 'QUEST_LINE',
 		researchPoints: 20,
-		rewardItems: { 'great-ball': 10, 'lucky-egg': 1 },
+		rewardItems: { 'lucky-egg': 1 },
 	},
 	'train a Pokemon to 200 Attack EV': {
 		conditionFunction: (s) =>
@@ -2587,7 +2599,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'swift-mochi': 2,
 		},
 	},
-
 	'train the EV of two stats over 200 on a Pokemon': {
 		conditionFunction: (s) =>
 			s.pokemon.some(
@@ -2868,7 +2879,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			damage: 0,
 			id: '',
 			ball: 'poke-ball',
-			ability: 'dancer',
+			ability: 'sniper',
 			name: 'drapion',
 			xp: 125,
 			nature: 'adamant',
@@ -2940,6 +2951,160 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			intrinsicValues: generateRandomStatObject(31),
 			happiness: 70,
 			firstMove: { name: 'tail-glow', usedPP: 0 },
+		},
+	},
+	'reach random field rank 1': {
+		kind: 'BULLETIN',
+		researchPoints: 10,
+		rewardItems: {
+			[`${moveUnlockPayments.at(0)}`]: 3,
+		},
+		requiredUpgrade: 'training field 1',
+		conditionFunction: (s) => {
+			return !!(
+				s.mileStones.randomFieldRecord && s.mileStones.randomFieldRecord >= 1
+			);
+		},
+	},
+	'reach random field rank 10': {
+		kind: 'BULLETIN',
+		researchPoints: 20,
+		rewardItems: {
+			[`${moveUnlockPayments.at(1)}`]: 3,
+		},
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'reach random field rank 1',
+		conditionFunction: (s) => {
+			return !!(
+				s.mileStones.randomFieldRecord && s.mileStones.randomFieldRecord >= 10
+			);
+		},
+	},
+	'reach random field rank 20': {
+		kind: 'BULLETIN',
+		researchPoints: 40,
+		rewardItems: {
+			[`${moveUnlockPayments.at(2)}`]: 3,
+		},
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'reach random field rank 10',
+		conditionFunction: (s) => {
+			return !!(
+				s.mileStones.randomFieldRecord && s.mileStones.randomFieldRecord >= 20
+			);
+		},
+	},
+	'reach random field rank 30': {
+		kind: 'BULLETIN',
+		researchPoints: 60,
+		rewardItems: {
+			[`${moveUnlockPayments.at(3)}`]: 3,
+		},
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'reach random field rank 20',
+		conditionFunction: (s) => {
+			return !!(
+				s.mileStones.randomFieldRecord && s.mileStones.randomFieldRecord >= 30
+			);
+		},
+	},
+	'reach random field rank 40': {
+		kind: 'BULLETIN',
+		researchPoints: 80,
+		rewardItems: {
+			[`${moveUnlockPayments.at(4)}`]: 3,
+		},
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'reach random field rank 30',
+		conditionFunction: (s) => {
+			return !!(
+				s.mileStones.randomFieldRecord && s.mileStones.randomFieldRecord >= 40
+			);
+		},
+	},
+	'reach random field rank 50': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		rewardItems: {
+			[`${moveUnlockPayments.at(5)}`]: 3,
+		},
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'reach random field rank 40',
+		conditionFunction: (s) => {
+			return !!(
+				s.mileStones.randomFieldRecord && s.mileStones.randomFieldRecord >= 50
+			);
+		},
+	},
+	'reach random field rank 60': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		rewardItems: {
+			[`${moveUnlockPayments.at(6)}`]: 3,
+		},
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'reach random field rank 50',
+		conditionFunction: (s) => {
+			return !!(
+				s.mileStones.randomFieldRecord && s.mileStones.randomFieldRecord >= 60
+			);
+		},
+	},
+	'reach random field rank 70': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		rewardItems: {
+			[`${moveUnlockPayments.at(7)}`]: 3,
+		},
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'reach random field rank 60',
+		conditionFunction: (s) => {
+			return !!(
+				s.mileStones.randomFieldRecord && s.mileStones.randomFieldRecord >= 70
+			);
+		},
+	},
+	'reach random field rank 80': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		rewardItems: {
+			'exp-candy-xl': 10,
+		},
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'reach random field rank 70',
+		conditionFunction: (s) => {
+			return !!(
+				s.mileStones.randomFieldRecord && s.mileStones.randomFieldRecord >= 80
+			);
+		},
+	},
+
+	'reach random field rank 90': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		rewardItems: {
+			'exp-candy-xl': 10,
+		},
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'reach random field rank 80',
+		conditionFunction: (s) => {
+			return !!(
+				s.mileStones.randomFieldRecord && s.mileStones.randomFieldRecord >= 90
+			);
+		},
+	},
+	'reach random field rank 100': {
+		kind: 'BULLETIN',
+		researchPoints: 100,
+		rewardItems: {
+			'exp-candy-xl': 20,
+		},
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'reach random field rank 90',
+		conditionFunction: (s) => {
+			return !!(
+				s.mileStones.randomFieldRecord && s.mileStones.randomFieldRecord >= 100
+			);
 		},
 	},
 } as Record<QuestName, Quest>;

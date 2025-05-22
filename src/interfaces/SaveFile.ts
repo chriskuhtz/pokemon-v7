@@ -107,6 +107,7 @@ export interface SaveFile {
 	mileStones: {
 		damageRecord: number;
 		challengeFieldRecord?: number;
+		randomFieldRecord?: number;
 		hasEvolvedAPokemonThroughLevelUp?: boolean;
 		hasEvolvedAPokemonWithAStone?: boolean;
 		hasEvolvedAPokemonWithAHeldItem?: boolean;

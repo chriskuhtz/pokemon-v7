@@ -1,3 +1,4 @@
+import { makeApricornTree } from '../../../functions/makeApricornTree';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { travellingMerchantRouteS1W1 } from '../../../modules/TravellingMerchant/TravellingMerchant';
 import { barryS1W1 } from './barry';
@@ -34,8 +35,8 @@ export const routeS1W1Occupants: OverworldMap['occupants'] = [
 		id: 'routeS1W1_to_routeS1',
 	},
 	{
-		x: 2,
-		y: 49,
+		x: 11,
+		y: 43,
 		type: 'ITEM',
 		item: 'armor-fossil',
 		amount: 1,
@@ -44,8 +45,8 @@ export const routeS1W1Occupants: OverworldMap['occupants'] = [
 		id: 'routeS1W1_armor_fossil',
 	},
 	{
-		x: 1,
-		y: 49,
+		x: 10,
+		y: 43,
 		type: 'ITEM',
 		item: 'skull-fossil',
 		amount: 1,
@@ -97,4 +98,28 @@ export const routeS1W1Occupants: OverworldMap['occupants'] = [
 	...travellingMerchantRouteS1W1,
 	barryS1W1,
 	silverS1W1,
+	...makeApricornTree({
+		x: 8,
+		y: 43,
+		apricorn: 'red-apricorn',
+		id: 'red-apricorn-s1w1',
+	}),
+	...makeApricornTree({
+		x: 10,
+		y: 44,
+		apricorn: 'white-apricorn',
+		id: 'white-apricorn-s1w1',
+	}),
+	...makeApricornTree({
+		x: 11,
+		y: 42,
+		apricorn: 'pink-apricorn',
+		id: 'pink-apricorn-s1w1',
+	}),
+	...makeApricornTree({
+		x: 13,
+		y: 43,
+		apricorn: 'pink-apricorn',
+		id: 'pink-apricorn-s1w1-2',
+	}),
 ];

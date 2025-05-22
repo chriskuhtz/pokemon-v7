@@ -131,6 +131,9 @@ export const determineMiss = (
 	if (attack.name === 'thunder' && weather === 'rain') {
 		return { miss: false };
 	}
+	if (attack.name === 'hurricane' && weather === 'rain') {
+		return { miss: false };
+	}
 
 	//EVASION
 	const laxIncenseFactor = getHeldItem(target) === 'lax-incense' ? 1.05 : 1;
@@ -146,11 +149,15 @@ export const determineMiss = (
 			: 1;
 
 	const targetEvasion =
-		calculateModifiedStat('evasion', target, false) *
+		calculateModifiedStat(
+			'evasion',
+			target,
+			false,
+			attacker.ability === 'minds-eye'
+		) *
 		tangledFeetFactor *
 		laxIncenseFactor *
 		wonderSkinFactor;
-
 	//ACCURACY
 	const victoryStarFactor = battleFieldEffects.some(
 		(b) => b.type === 'victory-star' && b.ownerId === attacker.ownerId
@@ -163,7 +170,10 @@ export const determineMiss = (
 	const wideLensFactor = getHeldItem(attacker) === 'wide-lens' ? 1.1 : 1;
 
 	const thunderWeatherFactor =
-		attack.name === 'thunder' && weather === 'sun' ? 0.5 : 1;
+		(attack.name === 'thunder' || attack.name === 'hurricane') &&
+		weather === 'sun'
+			? 0.5
+			: 1;
 
 	const attackerAccuracy =
 		calculateModifiedStat('accuracy', attacker, false) *
