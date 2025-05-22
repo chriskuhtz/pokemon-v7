@@ -436,6 +436,7 @@ export const extraFeatureCheckList: {
 	{ name: 'more pokemon for barry', handled: true },
 	{ name: 'silver', handled: true },
 	{ name: 'min level for many things (e.g. rockets)', handled: true },
+	{ name: 'reduce apricorn rewards', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -444,9 +445,7 @@ export const extraFeatureCheckList: {
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
 	{ name: 'timeofday in pokedex' },
 	{ name: 'progress bar for catch x quests' },
-
 	{ name: 'download did not boost after tablets of ruin lowered' },
-	{ name: 'reduce apricorn rewards' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
