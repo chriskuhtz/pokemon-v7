@@ -151,6 +151,20 @@ export const sortByPriority = (
 	) {
 		bPriority += 1;
 	}
+	if (
+		b.ability === 'triage' &&
+		bMove?.type === 'BattleAttack' &&
+		bMove.data.meta.category.name === 'heal'
+	) {
+		bPriority += 3;
+	}
+	if (
+		b.ability === 'gale-wings' &&
+		bMove?.type === 'BattleAttack' &&
+		bMove.data.type.name === 'flying'
+	) {
+		bPriority += 1;
+	}
 
 	if (aPriority > bPriority) {
 		return -1;

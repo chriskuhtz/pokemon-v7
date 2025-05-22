@@ -149,11 +149,15 @@ export const determineMiss = (
 			: 1;
 
 	const targetEvasion =
-		calculateModifiedStat('evasion', target, false) *
+		calculateModifiedStat(
+			'evasion',
+			target,
+			false,
+			attacker.ability === 'minds-eye'
+		) *
 		tangledFeetFactor *
 		laxIncenseFactor *
 		wonderSkinFactor;
-
 	//ACCURACY
 	const victoryStarFactor = battleFieldEffects.some(
 		(b) => b.type === 'victory-star' && b.ownerId === attacker.ownerId

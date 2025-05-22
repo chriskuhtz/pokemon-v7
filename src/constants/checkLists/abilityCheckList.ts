@@ -1251,9 +1251,17 @@ export const abilityCheckList: {
 		handled: true,
 	},
 
-	{ name: 'earth-eater', url: 'https://pokeapi.co/api/v2/ability/297/' },
-	{ name: 'mycelium-might', url: 'https://pokeapi.co/api/v2/ability/298/' },
-	{ name: 'minds-eye', url: 'https://pokeapi.co/api/v2/ability/299/' },
+	{
+		name: 'earth-eater',
+		url: 'https://pokeapi.co/api/v2/ability/297/',
+		handled: true,
+	},
+
+	{
+		name: 'minds-eye',
+		url: 'https://pokeapi.co/api/v2/ability/299/',
+		handled: true,
+	},
 	{ name: 'supersweet-syrup', url: 'https://pokeapi.co/api/v2/ability/300/' },
 	{ name: 'hospitality', url: 'https://pokeapi.co/api/v2/ability/301/' },
 	{ name: 'toxic-chain', url: 'https://pokeapi.co/api/v2/ability/302/' },
@@ -1315,6 +1323,7 @@ export const abilityCheckList: {
 	{ name: 'opportunist', url: 'https://pokeapi.co/api/v2/ability/290/' },
 	{ name: 'cud-chew', url: 'https://pokeapi.co/api/v2/ability/291/' },
 	{ name: 'armor-tail', url: 'https://pokeapi.co/api/v2/ability/296/' },
+	{ name: 'mycelium-might', url: 'https://pokeapi.co/api/v2/ability/298/' },
 ];
 
 export const abilityNames = [
@@ -1565,6 +1574,7 @@ export const abilityNames = [
 	'supreme-overlord',
 	'costar',
 	'earth-eater',
+	'minds-eye',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
