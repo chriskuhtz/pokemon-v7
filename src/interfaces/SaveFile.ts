@@ -129,6 +129,7 @@ export interface SaveFile {
 		hasReportedBug?: boolean;
 		barryDefeatedAt?: number;
 		silverDefeatedAt?: number;
+		cynthiaDefeatedAt?: number;
 	};
 	farm: {
 		plants: BerryBush[];

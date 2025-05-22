@@ -2107,6 +2107,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/556/',
 		handled: true,
 	},
+	{
+		name: 'fairy-wind',
+		url: 'https://pokeapi.co/api/v2/move/584/',
+		handled: true,
+	},
 	{ name: 'v-create', url: 'https://pokeapi.co/api/v2/move/557/' },
 	{ name: 'fusion-flare', url: 'https://pokeapi.co/api/v2/move/558/' },
 	{ name: 'fusion-bolt', url: 'https://pokeapi.co/api/v2/move/559/' },
@@ -2134,7 +2139,11 @@ export const movesCheckList: {
 	{ name: 'misty-terrain', url: 'https://pokeapi.co/api/v2/move/581/' },
 	{ name: 'electrify', url: 'https://pokeapi.co/api/v2/move/582/' },
 	{ name: 'play-rough', url: 'https://pokeapi.co/api/v2/move/583/' },
-	{ name: 'fairy-wind', url: 'https://pokeapi.co/api/v2/move/584/' },
+	{
+		name: 'fairy-wind',
+		url: 'https://pokeapi.co/api/v2/move/584/',
+		handled: true,
+	},
 	{ name: 'boomburst', url: 'https://pokeapi.co/api/v2/move/586/' },
 	{ name: 'fairy-lock', url: 'https://pokeapi.co/api/v2/move/587/' },
 	{ name: 'kings-shield', url: 'https://pokeapi.co/api/v2/move/588/' },
@@ -3067,6 +3076,7 @@ export const handledMoves = [
 	'ice-burn',
 	'snarl',
 	'icicle-crash',
+	'fairy-wind',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

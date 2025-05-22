@@ -2,6 +2,8 @@ import { useCallback, useContext, useMemo } from 'react';
 import { ONE_HOUR, randomFieldId } from '../constants/gameData';
 import { barryId } from '../constants/maps/occupants/barry';
 import { challengeFieldOccupants } from '../constants/maps/occupants/challengeField';
+import { cynthiaId } from '../constants/maps/occupants/cynthia';
+import { silverId } from '../constants/maps/occupants/silver';
 import { addPokemonToDex } from '../functions/addPokemonToDex';
 import { calculateLevelData } from '../functions/calculateLevelData';
 import { getRandomEntry } from '../functions/filterTargets';
@@ -224,19 +226,29 @@ export const useLeaveBattle = () => {
 					updatedMileStones.randomFieldRecord = randomFieldRank;
 				}
 			}
+			const xp = getHighestXpOnTeam(updatedPokemon);
 			if (defeatedChallengerId === barryId) {
-				const xp = getHighestXpOnTeam(updatedPokemon);
 				if (
 					!updatedMileStones.barryDefeatedAt ||
 					xp > updatedMileStones.barryDefeatedAt
 				) {
 					updatedMileStones.barryDefeatedAt = xp;
 				}
+			}
+			if (defeatedChallengerId === silverId) {
 				if (
 					!updatedMileStones.silverDefeatedAt ||
 					xp > updatedMileStones.silverDefeatedAt
 				) {
 					updatedMileStones.silverDefeatedAt = xp;
+				}
+			}
+			if (defeatedChallengerId === cynthiaId) {
+				if (
+					!updatedMileStones.cynthiaDefeatedAt ||
+					xp > updatedMileStones.cynthiaDefeatedAt
+				) {
+					updatedMileStones.cynthiaDefeatedAt = xp;
 				}
 			}
 			updatedMileStones.caughtFromSwarms = updatedSwarmRecord;

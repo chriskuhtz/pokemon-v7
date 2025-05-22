@@ -4,6 +4,7 @@ import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { routeS1E1Lure } from '../../../modules/BerryLure/BerryLure';
 import { travellingMerchantRouteS1E1 } from '../../../modules/TravellingMerchant/TravellingMerchant';
 import { barryS1E1 } from './barry';
+import { cynthiaS1E1 } from './cynthia';
 import { silverS1E1 } from './silver';
 import { surge } from './surge';
 
@@ -166,4 +167,5 @@ export const routeS1E1Occupants: OverworldMap['occupants'] = [
 		id: 'routeS1E1_black_tree_4',
 	}),
 	silverS1E1,
+	cynthiaS1E1,
 ];

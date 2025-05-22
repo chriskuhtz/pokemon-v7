@@ -638,7 +638,7 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 				if (p.id === ally.id) {
 					return {
 						...ally,
-						damage: Math.max(0, ally.damage - ally.stats.hp / 16),
+						damage: Math.max(0, ally.damage - ally.stats.hp / 4),
 					};
 				}
 
