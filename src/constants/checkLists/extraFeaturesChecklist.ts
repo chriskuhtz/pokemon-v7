@@ -438,6 +438,7 @@ export const extraFeatureCheckList: {
 	{ name: 'min level for many things (e.g. rockets)', handled: true },
 	{ name: 'reduce apricorn rewards', handled: true },
 	{ name: 'procedural random challenge gauntlet', handled: true },
+	{ name: 'quests for random field', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },

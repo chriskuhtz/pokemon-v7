@@ -2045,9 +2045,21 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/542/',
 		handled: true,
 	},
-	{ name: 'head-charge', url: 'https://pokeapi.co/api/v2/move/543/' },
-	{ name: 'gear-grind', url: 'https://pokeapi.co/api/v2/move/544/' },
-	{ name: 'searing-shot', url: 'https://pokeapi.co/api/v2/move/545/' },
+	{
+		name: 'head-charge',
+		url: 'https://pokeapi.co/api/v2/move/543/',
+		handled: true,
+	},
+	{
+		name: 'gear-grind',
+		url: 'https://pokeapi.co/api/v2/move/544/',
+		handled: true,
+	},
+	{
+		name: 'searing-shot',
+		url: 'https://pokeapi.co/api/v2/move/545/',
+		handled: true,
+	},
 	{ name: 'techno-blast', url: 'https://pokeapi.co/api/v2/move/546/' },
 	{ name: 'relic-song', url: 'https://pokeapi.co/api/v2/move/547/' },
 	{ name: 'secret-sword', url: 'https://pokeapi.co/api/v2/move/548/' },
@@ -3005,6 +3017,9 @@ export const handledMoves = [
 	'psystrike',
 	'tail-slap',
 	'hurricane',
+	'head-charge',
+	'gear-grind',
+	'searing-shot',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
