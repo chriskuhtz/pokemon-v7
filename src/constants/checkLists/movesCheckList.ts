@@ -2096,9 +2096,17 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/553/',
 		handled: true,
 	},
-	{ name: 'ice-burn', url: 'https://pokeapi.co/api/v2/move/554/' },
-	{ name: 'snarl', url: 'https://pokeapi.co/api/v2/move/555/' },
-	{ name: 'icicle-crash', url: 'https://pokeapi.co/api/v2/move/556/' },
+	{
+		name: 'ice-burn',
+		url: 'https://pokeapi.co/api/v2/move/554/',
+		handled: true,
+	},
+	{ name: 'snarl', url: 'https://pokeapi.co/api/v2/move/555/', handled: true },
+	{
+		name: 'icicle-crash',
+		url: 'https://pokeapi.co/api/v2/move/556/',
+		handled: true,
+	},
 	{ name: 'v-create', url: 'https://pokeapi.co/api/v2/move/557/' },
 	{ name: 'fusion-flare', url: 'https://pokeapi.co/api/v2/move/558/' },
 	{ name: 'fusion-bolt', url: 'https://pokeapi.co/api/v2/move/559/' },
@@ -3056,6 +3064,9 @@ export const handledMoves = [
 	'blue-flare',
 	'fiery-dance',
 	'freeze-shock',
+	'ice-burn',
+	'snarl',
+	'icicle-crash',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
