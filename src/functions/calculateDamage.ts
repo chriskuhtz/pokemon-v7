@@ -42,6 +42,7 @@ export const DamageAbsorbAbilityMap: Partial<Record<AbilityName, PokemonType>> =
 		'volt-absorb': 'electric',
 		'water-absorb': 'water',
 		'dry-skin': 'water',
+		'earth-eater': 'ground',
 	};
 
 export const calculateDamage = (

@@ -1250,8 +1250,7 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/294/',
 		handled: true,
 	},
-	{ name: 'toxic-debris', url: 'https://pokeapi.co/api/v2/ability/295/' },
-	{ name: 'armor-tail', url: 'https://pokeapi.co/api/v2/ability/296/' },
+
 	{ name: 'earth-eater', url: 'https://pokeapi.co/api/v2/ability/297/' },
 	{ name: 'mycelium-might', url: 'https://pokeapi.co/api/v2/ability/298/' },
 	{ name: 'minds-eye', url: 'https://pokeapi.co/api/v2/ability/299/' },
@@ -1263,6 +1262,7 @@ export const abilityCheckList: {
 	{ name: 'tera-shell', url: 'https://pokeapi.co/api/v2/ability/305/' },
 	{ name: 'teraform-zero', url: 'https://pokeapi.co/api/v2/ability/306/' },
 	{ name: 'poison-puppeteer', url: 'https://pokeapi.co/api/v2/ability/307/' },
+	{ name: 'toxic-debris', url: 'https://pokeapi.co/api/v2/ability/295/' },
 
 	/**
 	 * BANISHED
@@ -1314,6 +1314,7 @@ export const abilityCheckList: {
 	{ name: 'as-one-spectrier', url: 'https://pokeapi.co/api/v2/ability/267/' },
 	{ name: 'opportunist', url: 'https://pokeapi.co/api/v2/ability/290/' },
 	{ name: 'cud-chew', url: 'https://pokeapi.co/api/v2/ability/291/' },
+	{ name: 'armor-tail', url: 'https://pokeapi.co/api/v2/ability/296/' },
 ];
 
 export const abilityNames = [
@@ -1563,6 +1564,7 @@ export const abilityNames = [
 	'sharpness',
 	'supreme-overlord',
 	'costar',
+	'earth-eater',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
