@@ -1,4 +1,13 @@
 import { getHighestXpOnTeam } from '../../../functions/getHighestXpOnTeam';
+import {
+	isFriday,
+	isMonday,
+	isSaturday,
+	isSunday,
+	isThursday,
+	isTuesday,
+	isWednesday,
+} from '../../../functions/isXDay';
 import { makeChallengerPokemon } from '../../../functions/makeChallengerPokemon';
 import { Occupant, OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
@@ -245,14 +254,12 @@ const red: OverworldTrainer = {
 	},
 };
 
-const day = new Date().getDay();
-
 export const redN1: Occupant = {
 	...red,
 	x: 4,
 	y: 28,
 	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== redId) && day === 5,
+		s.handledOccupants.every((h) => h.id !== redId) && isFriday(),
 };
 export const redN1E1: Occupant = {
 	...red,
@@ -260,14 +267,14 @@ export const redN1E1: Occupant = {
 	y: 3,
 	orientation: 'RIGHT',
 	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== redId) && day === 6,
+		s.handledOccupants.every((h) => h.id !== redId) && isSaturday(),
 };
 export const redE1: Occupant = {
 	...red,
 	x: 25,
 	y: 35,
 	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== redId) && day === 0,
+		s.handledOccupants.every((h) => h.id !== redId) && isSunday(),
 };
 export const redS1E1: Occupant = {
 	...red,
@@ -275,7 +282,7 @@ export const redS1E1: Occupant = {
 	y: 15,
 	orientation: 'UP',
 	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== redId) && day === 1,
+		s.handledOccupants.every((h) => h.id !== redId) && isMonday(),
 };
 export const redOnixCave: Occupant = {
 	...red,
@@ -283,14 +290,14 @@ export const redOnixCave: Occupant = {
 	y: 14,
 	orientation: 'UP',
 	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== redId) && day === 2,
+		s.handledOccupants.every((h) => h.id !== redId) && isTuesday(),
 };
 export const redS1W1: Occupant = {
 	...red,
 	x: 31,
 	y: 1,
 	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== redId) && day === 3,
+		s.handledOccupants.every((h) => h.id !== redId) && isWednesday(),
 };
 export const redcaveW1: Occupant = {
 	...red,
@@ -298,5 +305,5 @@ export const redcaveW1: Occupant = {
 	y: 9,
 	orientation: 'LEFT',
 	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== redId) && day === 4,
+		s.handledOccupants.every((h) => h.id !== redId) && isThursday(),
 };

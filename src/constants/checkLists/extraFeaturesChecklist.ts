@@ -450,23 +450,22 @@ export const extraFeatureCheckList: {
 	{ name: 'trainer n', handled: true },
 	{ name: 'trainer red', handled: true },
 	{ name: 'quests for red', handled: true },
-	{ name: 'upgrades for swarm radar (stronger pokemon)', handled: true },
+	{ name: 'isXDay functions for easier travelling npc control', handled: true },
+	{ name: 'travellers on routeS1 instead of onix cave' },
 	{
 		name: 'upgrades for swarm radar (distortions)',
-		handled: true,
 	},
+	{ name: 'upgrades for swarm radar (stronger pokemon)' },
 	{
 		name: 'quests for distortion mons / ultra beasts',
 		todos: [
-			'Radar Screens with buttons',
+			'Radar Screen with buttons',
 			'different swarms at the same time',
 			'add pokemon from all swarms to caughtFromSwarm array',
 		],
 	},
 	{ name: 'distortion shaders' },
-	{ name: 'isXDay functions for easier travelling npc control' },
-	{ name: 'travellers on routeS1 instead of onix cave' },
-	{ name: 'new apricorns' },
+
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -476,6 +475,7 @@ export const extraFeatureCheckList: {
 	{ name: 'timeofday in pokedex' },
 	{ name: 'download did not boost after tablets of ruin lowered' },
 	//CONTENT:
+	{ name: 'new apricorns (repeat ball)' },
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
 	{ name: 'pryce' },
