@@ -1293,6 +1293,19 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/167/',
 		handled: true,
 	},
+	{
+		name: 'sand-spit',
+		url: 'https://pokeapi.co/api/v2/ability/245/',
+		handled: true,
+	},
+
+	/**
+	 * BANISHED
+	 */
+	{ name: 'commander', url: 'https://pokeapi.co/api/v2/ability/279/' },
+	{ name: 'zero-to-hero', url: 'https://pokeapi.co/api/v2/ability/278/' },
+	{ name: 'wimp-out', url: 'https://pokeapi.co/api/v2/ability/193/' },
+	{ name: 'emergency-exit', url: 'https://pokeapi.co/api/v2/ability/194/' },
 	{ name: 'primordial-sea', url: 'https://pokeapi.co/api/v2/ability/189/' },
 	{ name: 'desolate-land', url: 'https://pokeapi.co/api/v2/ability/190/' },
 	{ name: 'delta-stream', url: 'https://pokeapi.co/api/v2/ability/191/' },
@@ -1325,7 +1338,6 @@ export const abilityCheckList: {
 	{ name: 'mirror-armor', url: 'https://pokeapi.co/api/v2/ability/240/' },
 	{ name: 'gulp-missile', url: 'https://pokeapi.co/api/v2/ability/241/' },
 	{ name: 'stalwart', url: 'https://pokeapi.co/api/v2/ability/242/' },
-	{ name: 'sand-spit', url: 'https://pokeapi.co/api/v2/ability/245/' },
 	{ name: 'ice-face', url: 'https://pokeapi.co/api/v2/ability/248/' },
 	{ name: 'mimicry', url: 'https://pokeapi.co/api/v2/ability/250/' },
 	{ name: 'perish-body', url: 'https://pokeapi.co/api/v2/ability/253/' },
@@ -1341,13 +1353,6 @@ export const abilityCheckList: {
 	{ name: 'tera-shift', url: 'https://pokeapi.co/api/v2/ability/304/' },
 	{ name: 'tera-shell', url: 'https://pokeapi.co/api/v2/ability/305/' },
 	{ name: 'teraform-zero', url: 'https://pokeapi.co/api/v2/ability/306/' },
-	/**
-	 * BANISHED
-	 */
-	{ name: 'commander', url: 'https://pokeapi.co/api/v2/ability/279/' },
-	{ name: 'zero-to-hero', url: 'https://pokeapi.co/api/v2/ability/278/' },
-	{ name: 'wimp-out', url: 'https://pokeapi.co/api/v2/ability/193/' },
-	{ name: 'emergency-exit', url: 'https://pokeapi.co/api/v2/ability/194/' },
 ];
 
 export const abilityNames = [
@@ -1605,6 +1610,7 @@ export const abilityNames = [
 	'poison-puppeteer',
 	'toxic-debris',
 	'cheek-pouch',
+	'sand-spit',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

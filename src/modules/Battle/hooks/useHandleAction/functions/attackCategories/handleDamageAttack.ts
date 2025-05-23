@@ -19,6 +19,7 @@ import { EmptyStatObject } from '../../../../../../interfaces/StatObject';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
 import { BattleTerrain, TerrainObject } from '../../../useBattleTerrain';
+import { WeatherObject } from '../../../useBattleWeather';
 import { handleAbilitiesAfterAttack } from '../handleAbilitiesAfterAttack';
 
 /**
@@ -40,6 +41,7 @@ export const handleDamageAttack = ({
 	logDamage,
 	terrain,
 	setTerrain,
+	setWeather,
 }: {
 	attacker: BattlePokemon;
 	target: BattlePokemon;
@@ -56,6 +58,7 @@ export const handleDamageAttack = ({
 	logDamage: (x: number) => void;
 	terrain: BattleTerrain | undefined;
 	setTerrain: (x: TerrainObject) => void;
+	setWeather: (x: WeatherObject) => void;
 }): BattlePokemon[] => {
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
@@ -548,7 +551,8 @@ export const handleDamageAttack = ({
 		battleFieldEffects,
 		target.stats.hp,
 		terrain,
-		setTerrain
+		setTerrain,
+		setWeather
 	);
 	updatedAttacker = { ...a };
 	updatedTarget = { ...t };
