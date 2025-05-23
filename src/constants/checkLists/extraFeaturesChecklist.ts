@@ -449,6 +449,7 @@ export const extraFeatureCheckList: {
 	{ name: 'different battle backgrounds', handled: true },
 	{ name: 'trainer n', handled: true },
 	{ name: 'trainer red', handled: true },
+	{ name: 'quests for red', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
