@@ -1,7 +1,7 @@
-import { CampUpgrade } from '../constants/checkLists/campUpgrades';
-import { QuestName } from '../constants/checkLists/questsRecord';
+import { CampUpgrade } from '../constants/campUpgrades';
 import { MapId } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
+import { QuestName } from '../constants/questsRecord';
 import { BadgeName } from './Badge';
 import { Challenger } from './Challenger';
 import { Inventory } from './Inventory';
@@ -137,6 +137,7 @@ export interface SaveFile {
 		silverDefeatedAt?: number;
 		cynthiaDefeatedAt?: number;
 		nDefeatedAt?: number;
+		redDefeatedAt?: number;
 	};
 	farm: {
 		plants: BerryBush[];

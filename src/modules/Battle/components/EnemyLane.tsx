@@ -8,8 +8,10 @@ import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
 export function EnemyLane({
 	onFieldOpponents,
+	spriteGeneration,
 }: {
 	onFieldOpponents: BattlePokemon[];
+	spriteGeneration?: 1;
 }) {
 	const platform = useLocationBattlePlatform();
 	return (
@@ -86,10 +88,12 @@ export function EnemyLane({
 					return (
 						<PokemonSprite
 							style={{ margin: '2rem 1rem' }}
-							sizeFactor={getSizeFactor(t.data.height)}
+							sizeFactor={
+								getSizeFactor(t.data.height) * (spriteGeneration ? 2 : 1)
+							}
 							key={t.id}
 							name={t.name}
-							config={{ shiny: t.shiny }}
+							config={{ shiny: t.shiny, spriteGeneration }}
 						/>
 					);
 				})}

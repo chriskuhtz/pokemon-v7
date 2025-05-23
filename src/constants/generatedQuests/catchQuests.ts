@@ -2,8 +2,7 @@ import { timesOfDay } from '../../functions/getTimeOfDay';
 import { Inventory } from '../../interfaces/Inventory';
 import { OverworldMap } from '../../interfaces/OverworldMap';
 import { Quest } from '../../interfaces/Quest';
-import { CampUpgrade } from '../checkLists/campUpgrades';
-import { QuestName } from '../checkLists/questsRecord';
+import { CampUpgrade } from '../campUpgrades';
 import { routeE1 } from '../maps/routeE1';
 import { routeN1 } from '../maps/routeN1';
 import { routeN1E1 } from '../maps/routeN1E1';
@@ -11,6 +10,7 @@ import { routeN1W1 } from '../maps/routeN1W1';
 import { routeS1E1 } from '../maps/routeS1E1';
 import { routeS1W1 } from '../maps/routeS1W1';
 import { routeW1 } from '../maps/routeW1';
+import { QuestName } from '../questsRecord';
 
 const rewardsMap: Record<string, Partial<Inventory>> = {
 	//routeN1

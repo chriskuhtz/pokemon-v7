@@ -11,17 +11,13 @@ import { MoveName } from '../constants/checkLists/movesCheckList';
 import { v4 } from 'uuid';
 
 import {
-	QuestName,
-	questNames,
-	QuestsRecord,
-} from '../constants/checkLists/questsRecord';
-import {
 	emptyPokedex,
 	localStorageSaveFileId,
 	ONE_DAY,
 	testState,
 } from '../constants/gameData';
 import { PokemonName } from '../constants/pokemonNames';
+import { QuestName, questNames, QuestsRecord } from '../constants/questsRecord';
 import { addPokemonToDex } from '../functions/addPokemonToDex';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';

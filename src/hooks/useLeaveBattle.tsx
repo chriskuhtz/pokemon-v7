@@ -4,6 +4,7 @@ import { barryId } from '../constants/maps/occupants/barry';
 import { challengeFieldOccupants } from '../constants/maps/occupants/challengeField';
 import { cynthiaId } from '../constants/maps/occupants/cynthia';
 import { nId } from '../constants/maps/occupants/n';
+import { redId } from '../constants/maps/occupants/red';
 import { silverId } from '../constants/maps/occupants/silver';
 import { addPokemonToDex } from '../functions/addPokemonToDex';
 import { calculateLevelData } from '../functions/calculateLevelData';
@@ -283,12 +284,22 @@ export const useLeaveBattle = () => {
 					updatedMileStones.nDefeatedAt = xp;
 				}
 			}
+			if (defeatedChallengerId === redId) {
+				if (
+					!updatedMileStones.redDefeatedAt ||
+					xp > updatedMileStones.redDefeatedAt
+				) {
+					updatedMileStones.redDefeatedAt = xp;
+				}
+			}
 			updatedMileStones.caughtFromSwarms = updatedSwarmRecord;
 
 			const resetTime = () => {
 				if (
 					defeatedChallengerId &&
-					[barryId, nId, cynthiaId, silverId].includes(defeatedChallengerId)
+					[barryId, nId, cynthiaId, silverId, redId].includes(
+						defeatedChallengerId
+					)
 				) {
 					return ONE_HOUR;
 				}

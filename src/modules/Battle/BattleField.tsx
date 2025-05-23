@@ -20,6 +20,7 @@ import { getHeldItem } from '../../functions/getHeldItem';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getSettings } from '../../functions/getPlayerId';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
+import { handleCheekPouch } from '../../functions/handleCheekPouch';
 import { isKO } from '../../functions/isKo';
 import { reduceSecondaryAilmentDurations } from '../../functions/reduceSecondaryAilmentDurations';
 import { sortByPriority } from '../../functions/sortByPriority';
@@ -42,7 +43,6 @@ import { useBattleTerrain } from './hooks/useBattleTerrain';
 import { useBattleWeather } from './hooks/useBattleWeather';
 import { useChooseAction } from './hooks/useChooseAction';
 import { useHandleAction } from './hooks/useHandleAction/useHandleAction';
-import { handleCheekPouch } from '../../functions/handleCheekPouch';
 
 export type ActionType =
 	| MoveName
@@ -105,6 +105,7 @@ export const BattleField = ({
 	addMultipleMessages,
 	challengerId,
 	rewardItems,
+	spriteGeneration,
 }: {
 	leave: (x: LeaveBattlePayload) => void;
 	initOpponents: BattlePokemon[];
@@ -116,6 +117,7 @@ export const BattleField = ({
 	addMultipleMessages: (newMessages: Message[]) => void;
 	challengerId?: string;
 	rewardItems?: Partial<Inventory>;
+	spriteGeneration?: 1;
 }) => {
 	const {
 		saveFile: { settings },
@@ -791,7 +793,10 @@ export const BattleField = ({
 						gridRowEnd: 4,
 					}}
 				>
-					<EnemyLane onFieldOpponents={onFieldOpponents} />
+					<EnemyLane
+						onFieldOpponents={onFieldOpponents}
+						spriteGeneration={spriteGeneration}
+					/>
 					<PlayerLane onFieldTeam={onFieldTeam} />
 				</div>
 				{!latestMessage && (

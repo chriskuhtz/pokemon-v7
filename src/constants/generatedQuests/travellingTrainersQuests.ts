@@ -3,7 +3,7 @@ import {
 	EmptyStatObject,
 	generateRandomStatObject,
 } from '../../interfaces/StatObject';
-import { QuestName } from '../checkLists/questsRecord';
+import { QuestName } from '../questsRecord';
 
 export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 	'defeat research assistant barry': {

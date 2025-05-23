@@ -7,6 +7,7 @@ import { cynthiaN1 } from './cynthia';
 import { erika } from './erika';
 import { giovanni } from './giovanni';
 import { nN1 } from './n';
+import { redN1 } from './red';
 import { silverN1 } from './silver';
 
 export const routeN1Occupants: OverworldMap['occupants'] = [
@@ -289,4 +290,5 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		],
 		conditionFunction: () => true,
 	},
+	redN1,
 ];

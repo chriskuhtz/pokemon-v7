@@ -1,5 +1,5 @@
 import { v4 } from 'uuid';
-import { calculateLevelData } from '../../functions/calculateLevelData';
+import { calculateLevelData } from '../functions/calculateLevelData';
 import {
 	tier1trainers,
 	tier2trainers,
@@ -7,42 +7,38 @@ import {
 	tier4trainers,
 	tier5trainers,
 	trainers,
-} from '../../functions/makeRandomTrainer';
-import { sumOfIvs } from '../../functions/sumOfIvs';
-import { honeyPokemon } from '../../hooks/useHoneyTree';
-import { Inventory } from '../../interfaces/Inventory';
+} from '../functions/makeRandomTrainer';
+import { sumOfIvs } from '../functions/sumOfIvs';
+import { honeyPokemon } from '../hooks/useHoneyTree';
+import { Inventory } from '../interfaces/Inventory';
 import {
 	apricorns,
 	apricornTable,
 	berries,
 	fossilTable,
-} from '../../interfaces/Item';
-import { getRandomNature } from '../../interfaces/Natures';
-import { Quest } from '../../interfaces/Quest';
+} from '../interfaces/Item';
+import { getRandomNature } from '../interfaces/Natures';
+import { Quest } from '../interfaces/Quest';
 import {
 	EmptyStatObject,
 	generateRandomStatObject,
-} from '../../interfaces/StatObject';
-import { moveUnlockPayments } from '../../modules/MoveTutor/MoveTutor';
-import { sledgeHammerPokemon } from '../../modules/Overworld/hooks/useSledgeHammer';
-import {
-	highBstPokemon,
-	lowBstPokemon,
-	midBstPokemon,
-} from '../baseStatRecord';
-import { catchQuests } from '../generatedQuests/catchQuests';
-import { travellingTrainerQuests } from '../generatedQuests/travellingTrainersQuests';
-import { typeCatchQuests } from '../generatedQuests/typeCatchQuests';
-import { caveW1Encounters } from '../maps/encounters/caveW1';
-import { onixCaveEncounters } from '../maps/encounters/onixCave';
-import { allRocketCampTrainersDefeated } from '../maps/occupants/rocketCampOccupants';
-import { routeS1 } from '../maps/routeS1';
-import { PokemonName, pokemonNames } from '../pokemonNames';
+} from '../interfaces/StatObject';
+import { moveUnlockPayments } from '../modules/MoveTutor/MoveTutor';
+import { sledgeHammerPokemon } from '../modules/Overworld/hooks/useSledgeHammer';
+import { highBstPokemon, lowBstPokemon, midBstPokemon } from './baseStatRecord';
 import {
 	campUpgradeCategories,
 	campUpgradeCostScale,
 	campUpgradeNames,
 } from './campUpgrades';
+import { catchQuests } from './generatedQuests/catchQuests';
+import { travellingTrainerQuests } from './generatedQuests/travellingTrainersQuests';
+import { typeCatchQuests } from './generatedQuests/typeCatchQuests';
+import { caveW1Encounters } from './maps/encounters/caveW1';
+import { onixCaveEncounters } from './maps/encounters/onixCave';
+import { allRocketCampTrainersDefeated } from './maps/occupants/rocketCampOccupants';
+import { routeS1 } from './maps/routeS1';
+import { PokemonName, pokemonNames } from './pokemonNames';
 
 const expCandyPackage: Partial<Inventory> = {
 	'exp-candy-xs': 10,

@@ -3,11 +3,8 @@ import { IoPerson } from 'react-icons/io5';
 import { MdFormatListBulleted } from 'react-icons/md';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
-import {
-	QuestName,
-	QuestsRecord,
-} from '../../constants/checkLists/questsRecord';
 import { battleSpriteSize } from '../../constants/gameData';
+import { QuestName, QuestsRecord } from '../../constants/questsRecord';
 import { typeColors } from '../../constants/typeColors';
 import { getRewardItemsForQuest } from '../../functions/getRewardForQuest';
 import { replaceRouteName } from '../../functions/replaceRouteName';

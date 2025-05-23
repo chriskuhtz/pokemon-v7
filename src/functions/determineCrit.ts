@@ -1,4 +1,4 @@
-import { AbilityName } from '../constants/checkLists/abilityCheckList';
+import { AbilityName } from '../constants/checkLists/completed/abilityCheckList';
 import { ohkoMoves } from '../constants/ohkoMoves';
 import { PokemonName } from '../constants/pokemonNames';
 import { PrimaryAilment } from '../interfaces/Ailment';

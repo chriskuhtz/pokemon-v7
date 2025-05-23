@@ -448,6 +448,7 @@ export const extraFeatureCheckList: {
 	{ name: 'progress bar for catch x quests', handled: true },
 	{ name: 'different battle backgrounds', handled: true },
 	{ name: 'trainer n', handled: true },
+	{ name: 'trainer red', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },

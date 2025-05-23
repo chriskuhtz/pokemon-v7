@@ -1,5 +1,5 @@
-import { CampUpgrade } from '../constants/checkLists/campUpgrades';
-import { QuestName } from '../constants/checkLists/questsRecord';
+import { CampUpgrade } from '../constants/campUpgrades';
+import { QuestName } from '../constants/questsRecord';
 import { BattleTeamConfig } from '../hooks/useGetBattleTeam';
 import { BattlePokemon } from './BattlePokemon';
 import { Inventory } from './Inventory';
@@ -9,6 +9,7 @@ export interface TrainerInfo {
 	name: string;
 	sprite: string;
 	profilePicture?: string;
+	spriteGeneration?: 1;
 }
 export interface Challenger {
 	type: 'TRAINER' | 'WILD';

@@ -11,7 +11,7 @@ import {
 	campUpgradeCostScale,
 	campUpgradeExplanations,
 	campUpgradeNames,
-} from '../../constants/checkLists/campUpgrades';
+} from '../../constants/campUpgrades';
 import { battleSpriteSize } from '../../constants/gameData';
 import { typeColors } from '../../constants/typeColors';
 import { replaceRouteName } from '../../functions/replaceRouteName';
