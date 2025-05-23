@@ -42,6 +42,7 @@ import { useBattleTerrain } from './hooks/useBattleTerrain';
 import { useBattleWeather } from './hooks/useBattleWeather';
 import { useChooseAction } from './hooks/useChooseAction';
 import { useHandleAction } from './hooks/useHandleAction/useHandleAction';
+import { handleCheekPouch } from '../../functions/handleCheekPouch';
 
 export type ActionType =
 	| MoveName
@@ -526,7 +527,7 @@ export const BattleField = ({
 						pokemon: updated,
 						addMessage,
 					});
-					updated = updated = applyEndOfTurnHeldItem(
+					updated = applyEndOfTurnHeldItem(
 						updated,
 						(x) => collectedMessages.push(x),
 						(x) => collectedMessages.push(...x),
@@ -534,6 +535,7 @@ export const BattleField = ({
 						battleTerrain,
 						battleInventory
 					);
+					updated = handleCheekPouch(updated, (x) => collectedMessages.push(x));
 
 					updated = applyEndOfTurnWeatherDamage(
 						updated,

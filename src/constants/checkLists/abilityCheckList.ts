@@ -1288,10 +1288,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/295/',
 		handled: true,
 	},
-	{ name: 'commander', url: 'https://pokeapi.co/api/v2/ability/279/' },
-	{ name: 'zero-to-hero', url: 'https://pokeapi.co/api/v2/ability/278/' },
-	{ name: 'wimp-out', url: 'https://pokeapi.co/api/v2/ability/193/' },
-	{ name: 'emergency-exit', url: 'https://pokeapi.co/api/v2/ability/194/' },
+	{
+		name: 'cheek-pouch',
+		url: 'https://pokeapi.co/api/v2/ability/167/',
+		handled: true,
+	},
 	{ name: 'primordial-sea', url: 'https://pokeapi.co/api/v2/ability/189/' },
 	{ name: 'desolate-land', url: 'https://pokeapi.co/api/v2/ability/190/' },
 	{ name: 'delta-stream', url: 'https://pokeapi.co/api/v2/ability/191/' },
@@ -1307,7 +1308,6 @@ export const abilityCheckList: {
 	{ name: 'zen-mode', url: 'https://pokeapi.co/api/v2/ability/161/' },
 	{ name: 'turboblaze', url: 'https://pokeapi.co/api/v2/ability/163/' },
 	{ name: 'teravolt', url: 'https://pokeapi.co/api/v2/ability/164/' },
-	{ name: 'cheek-pouch', url: 'https://pokeapi.co/api/v2/ability/167/' },
 	{ name: 'stance-change', url: 'https://pokeapi.co/api/v2/ability/176/' },
 	{ name: 'symbiosis', url: 'https://pokeapi.co/api/v2/ability/180/' },
 	{ name: 'shields-down', url: 'https://pokeapi.co/api/v2/ability/197/' },
@@ -1344,6 +1344,10 @@ export const abilityCheckList: {
 	/**
 	 * BANISHED
 	 */
+	{ name: 'commander', url: 'https://pokeapi.co/api/v2/ability/279/' },
+	{ name: 'zero-to-hero', url: 'https://pokeapi.co/api/v2/ability/278/' },
+	{ name: 'wimp-out', url: 'https://pokeapi.co/api/v2/ability/193/' },
+	{ name: 'emergency-exit', url: 'https://pokeapi.co/api/v2/ability/194/' },
 ];
 
 export const abilityNames = [
@@ -1600,6 +1604,7 @@ export const abilityNames = [
 	'toxic-chain',
 	'poison-puppeteer',
 	'toxic-debris',
+	'cheek-pouch',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
