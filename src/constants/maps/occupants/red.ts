@@ -169,6 +169,39 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
 			attack: 252,
 		},
 	});
+	const tauros = makeChallengerPokemon({
+		name: 'tauros',
+		xp: highestXpOnTeam,
+		nature: 'adamant',
+		ability: 'moxie',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'choice-band',
+		firstMove: { name: 'headbutt', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			speed: 252,
+			attack: 252,
+		},
+	});
+	const dragonite = makeChallengerPokemon({
+		name: 'dragonite',
+		xp: highestXpOnTeam,
+		nature: 'adamant',
+		ability: 'hospitality',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'leftovers',
+		firstMove: { name: 'dragon-pulse', usedPP: 0 },
+		secondMove: { name: 'reflect', usedPP: 0 },
+		thirdMove: { name: 'calm-mind', usedPP: 0 },
+		fourthMove: { name: 'recover', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			speed: 252,
+			'special-attack': 252,
+		},
+	});
 
 	if (highestXpOnTeam < 8000) {
 		return [charmander, bulbasaur, squirtle];
@@ -177,7 +210,13 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
 		return [charmeleon, ivysaur, wartortle];
 	}
 
-	const team: OwnedPokemon[] = [charizard, venusaur, blastoise];
+	const team: OwnedPokemon[] = [
+		charizard,
+		venusaur,
+		blastoise,
+		tauros,
+		dragonite,
+	];
 
 	return team;
 };
