@@ -47,7 +47,19 @@ export const determineWildPokemon = (
 		return input;
 	};
 	let encounter: OwnedPokemon[] = [];
-	if (lure === 'lure') {
+
+	if (catchStreak && Math.random() < catchStreak.streak / 100) {
+		encounter = [
+			makeChallengerPokemon(
+				{
+					name: catchStreak.pokemon,
+					nature: getRandomNature(),
+					...getRandomEncounter(map, waterEncounter),
+				},
+				{ increasedShinyFactor: shinyFactor }
+			),
+		];
+	} else if (lure === 'lure') {
 		encounter = [
 			makeChallengerPokemon({
 				nature: getRandomNature(),
@@ -59,8 +71,7 @@ export const determineWildPokemon = (
 				]),
 			}),
 		];
-	}
-	if (lure === 'super-lure') {
+	} else if (lure === 'super-lure') {
 		encounter = [
 			makeChallengerPokemon({
 				nature: getRandomNature(),
@@ -72,8 +83,7 @@ export const determineWildPokemon = (
 				]),
 			}),
 		];
-	}
-	if (lure === 'max-lure') {
+	} else if (lure === 'max-lure') {
 		encounter = [
 			makeChallengerPokemon({
 				nature: getRandomNature(),
@@ -85,8 +95,7 @@ export const determineWildPokemon = (
 				]),
 			}),
 		];
-	}
-	if (
+	} else if (
 		quests['catch the legendary bird of ice'] === 'ACTIVE' &&
 		Math.random() < 0.01
 	) {
@@ -96,8 +105,7 @@ export const determineWildPokemon = (
 				{ increasedShinyFactor: 2 * shinyFactor }
 			),
 		];
-	}
-	if (
+	} else if (
 		quests['retrieve oaks parcel from raticate'] === 'ACTIVE' &&
 		map.id === 'routeS1E1' &&
 		Math.random() < 0.1
@@ -108,8 +116,7 @@ export const determineWildPokemon = (
 				{ increasedShinyFactor: 16 * shinyFactor }
 			),
 		];
-	}
-	if (
+	} else if (
 		!waterEncounter &&
 		swarm &&
 		swarm.route === map.id &&
@@ -129,34 +136,35 @@ export const determineWildPokemon = (
 				{ increasedShinyFactor: 8 * shinyFactor }
 			),
 		];
+	} else {
+		encounter =
+			team.filter((p) => p.damage < p.maxHp).length > 1
+				? [
+						makeChallengerPokemon(
+							{
+								nature: getRandomNature(),
+								...getRandomEncounter(map, waterEncounter),
+							},
+							{ increasedShinyFactor: shinyFactor }
+						),
+						makeChallengerPokemon(
+							{
+								nature: getRandomNature(),
+								...getRandomEncounter(map, waterEncounter),
+							},
+							{ increasedShinyFactor: shinyFactor }
+						),
+				  ]
+				: [
+						makeChallengerPokemon(
+							{
+								nature: getRandomNature(),
+								...getRandomEncounter(map, waterEncounter),
+							},
+							{ increasedShinyFactor: shinyFactor }
+						),
+				  ];
 	}
-	encounter =
-		team.filter((p) => p.damage < p.maxHp).length > 1
-			? [
-					makeChallengerPokemon(
-						{
-							nature: getRandomNature(),
-							...getRandomEncounter(map, waterEncounter),
-						},
-						{ increasedShinyFactor: shinyFactor }
-					),
-					makeChallengerPokemon(
-						{
-							nature: getRandomNature(),
-							...getRandomEncounter(map, waterEncounter),
-						},
-						{ increasedShinyFactor: shinyFactor }
-					),
-			  ]
-			: [
-					makeChallengerPokemon(
-						{
-							nature: getRandomNature(),
-							...getRandomEncounter(map, waterEncounter),
-						},
-						{ increasedShinyFactor: shinyFactor }
-					),
-			  ];
 
 	return encounter.map(applyStreakBoosts);
 };
