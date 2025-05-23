@@ -451,7 +451,8 @@ export const extraFeatureCheckList: {
 	{ name: 'trainer red', handled: true },
 	{ name: 'quests for red', handled: true },
 	{ name: 'isXDay functions for easier travelling npc control', handled: true },
-	{ name: 'travellers on routeS1 instead of onix cave' },
+	{ name: 'travellers on routeS1 instead of onix cave', handled: true },
+	{ name: 'catch quests for s1', handled: true },
 	{
 		name: 'upgrades for swarm radar (distortions)',
 	},

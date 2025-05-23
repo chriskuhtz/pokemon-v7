@@ -161,6 +161,8 @@ export const handleAllAttackCategories = ({
 					move,
 					setBattleWeather,
 					target,
+					battleTerrain: terrain,
+					setBattleTerrain: setTerrain,
 				});
 			case 'swagger':
 				return handleSwaggerAttack({

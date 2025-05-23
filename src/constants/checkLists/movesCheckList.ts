@@ -2179,11 +2179,22 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/576/',
 		handled: true,
 	},
-	{ name: 'draining-kiss', url: 'https://pokeapi.co/api/v2/move/577/' },
-	{ name: 'crafty-shield', url: 'https://pokeapi.co/api/v2/move/578/' },
-	{ name: 'flower-shield', url: 'https://pokeapi.co/api/v2/move/579/' },
-	{ name: 'grassy-terrain', url: 'https://pokeapi.co/api/v2/move/580/' },
-	{ name: 'misty-terrain', url: 'https://pokeapi.co/api/v2/move/581/' },
+	{
+		name: 'draining-kiss',
+		url: 'https://pokeapi.co/api/v2/move/577/',
+		handled: true,
+	},
+
+	{
+		name: 'grassy-terrain',
+		url: 'https://pokeapi.co/api/v2/move/580/',
+		handled: true,
+	},
+	{
+		name: 'misty-terrain',
+		url: 'https://pokeapi.co/api/v2/move/581/',
+		handled: true,
+	},
 	{ name: 'electrify', url: 'https://pokeapi.co/api/v2/move/582/' },
 	{ name: 'play-rough', url: 'https://pokeapi.co/api/v2/move/583/' },
 	{ name: 'boomburst', url: 'https://pokeapi.co/api/v2/move/586/' },
@@ -2650,6 +2661,8 @@ export const movesCheckList: {
 	{ name: 'ion-deluge', url: 'https://pokeapi.co/api/v2/move/569/' },
 	{ name: 'forests-curse', url: 'https://pokeapi.co/api/v2/move/571/' },
 	{ name: 'parting-shot', url: 'https://pokeapi.co/api/v2/move/575/' },
+	{ name: 'crafty-shield', url: 'https://pokeapi.co/api/v2/move/578/' },
+	{ name: 'flower-shield', url: 'https://pokeapi.co/api/v2/move/579/' },
 ];
 
 export const handledMoves = [
@@ -3139,6 +3152,8 @@ export const handledMoves = [
 	'freeze-dry',
 	'disarming-voice',
 	'topsy-turvy',
+	'grassy-terrain',
+	'misty-terrain',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
