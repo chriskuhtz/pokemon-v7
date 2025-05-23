@@ -94,10 +94,21 @@ export const BattleOverview = ({
 			inventory={inventory}
 			fightersPerSide={fightersPerSide}
 			leave={leave}
-			initTeam={team.map((t) => ({
-				...t,
-				status: selectedTeam.includes(t.id) ? 'ONFIELD' : 'BENCH',
-			}))}
+			initTeam={team.map((t) => {
+				if (selectedTeam.includes(t.id)) {
+					return {
+						...t,
+						status: 'ONFIELD',
+					};
+				}
+				if (isKO(t)) {
+					return { ...t, status: 'FAINTED' };
+				}
+				return {
+					...t,
+					status: 'BENCH',
+				};
+			})}
 			initOpponents={opponents.map((o, i) => ({
 				...o,
 				status: i < fightersPerSide ? 'ONFIELD' : 'BENCH',
