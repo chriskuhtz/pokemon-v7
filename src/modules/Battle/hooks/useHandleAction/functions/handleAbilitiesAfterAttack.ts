@@ -46,6 +46,18 @@ export const handleAbilitiesAfterAttack = (
 } => {
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
+	//fell-stinger
+	if (isKO(target) && move.name === 'fell-stinger') {
+		updatedAttacker = applyStatChangeToPokemon(
+			updatedAttacker,
+			'attack',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'fell stinger'
+		);
+	}
 	//final gambit
 	if (move.name === 'final-gambit') {
 		updatedAttacker = { ...updatedAttacker, damage: updatedAttacker.stats.hp };
