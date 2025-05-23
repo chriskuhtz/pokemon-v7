@@ -21,6 +21,7 @@ export const mapBattleColors: Record<
 	routeN1W1: { oppColor: 'ice', playerColor: 'dragon' },
 	camp: { oppColor: 'fighting', playerColor: 'normal' },
 	challengeField: { oppColor: 'fighting', playerColor: 'normal' },
+	randomField: { oppColor: 'fighting', playerColor: 'normal' },
 	rocketCamp: { oppColor: 'fighting', playerColor: 'dark' },
 };
 

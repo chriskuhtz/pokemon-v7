@@ -64,6 +64,28 @@ export const handleAbilitiesAfterAttack = (
 	//wind power
 	if (
 		!isKO(target) &&
+		attacker.ability === 'toxic-chain' &&
+		isContactMove(move.name, attacker) &&
+		!target.primaryAilment &&
+		Math.random() > 0.7
+	) {
+		const r = applyPrimaryAilmentToPokemon(
+			updatedTarget,
+			updatedAttacker,
+			'toxic',
+			addMessage,
+			battleWeather,
+			battleFieldEffects,
+			terrain,
+			'by toxic chain'
+		);
+
+		updatedTarget = r.updatedTarget;
+		updatedAttacker = r.updatedApplicator;
+	}
+	//wind power
+	if (
+		!isKO(target) &&
 		target.ability === 'wind-power' &&
 		windMoves.includes(move.name)
 	) {

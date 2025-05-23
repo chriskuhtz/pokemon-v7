@@ -7,6 +7,7 @@ export const flyHitMoves = [
 	'sky-uppercut',
 	'smack-down',
 	'magnet-bomb',
+	'hurricane',
 ];
 export const digHitMoves = ['earthquake', 'magnitude', 'magnet-bomb'];
 export const shadowHitMoves = ['magnet-bomb'];

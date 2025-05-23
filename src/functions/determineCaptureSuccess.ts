@@ -87,12 +87,11 @@ export const determineCaptureSuccess = (
 		ballfactor = 1;
 	}
 
-	//between .5 and 0, lower health, better chance
-	const healthfactor =
-		(1 - (target.stats.hp - target.damage) / target.stats.hp) / 2;
+	//between 1 and 0, lower health, better chance
+	const healthfactor = 1 - (target.stats.hp - target.damage) / target.stats.hp;
 
-	//between 1 and 0, lower level, better chance
-	const levelFactor = (100 - level) / 100;
+	//between .5 and 0, lower level, better chance
+	const levelFactor = (100 - level) / 200;
 
 	//between 1 and 0
 	const captureRateFactor = target.capture_rate / 255;

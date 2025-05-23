@@ -8,6 +8,8 @@ export const secondTurnMoves = [
 	'bounce',
 	'sky-attack',
 	'shadow-force',
+	'freeze-shock',
+	'ice-burn',
 ];
 
 export const recoveryMoves = [

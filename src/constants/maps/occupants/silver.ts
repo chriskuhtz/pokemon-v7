@@ -302,6 +302,8 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
 };
 
 const silver: OverworldTrainer = {
+	profilePicture:
+		'https://archives.bulbagarden.net/media/upload/b/b6/VSSilver.png',
 	type: 'TRAINER',
 	x: 0,
 	y: 0,

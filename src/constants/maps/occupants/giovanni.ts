@@ -74,7 +74,7 @@ const giovanniTeam = () => [
 		name: 'persian',
 		xp: 216000,
 		nature: 'adamant',
-		ability: 'dancer',
+		ability: 'simple',
 		fixedAbility: true,
 		happiness: 255,
 		heldItemName: 'silk-scarf',

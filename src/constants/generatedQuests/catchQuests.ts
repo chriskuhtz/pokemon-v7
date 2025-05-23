@@ -299,6 +299,7 @@ const catchQuestsForRoute = (
 				return [
 					id,
 					{
+						category: 'EXPLORATION',
 						rewardItems: rewardsMap[id] ?? { 'poke-ball': 10 },
 						researchPoints: 10,
 						conditionFunction: (s) => {
@@ -322,6 +323,7 @@ const catchQuestsForRoute = (
 				return [
 					id,
 					{
+						category: 'EXPLORATION',
 						rewardItems: rewardsMap[id] ?? { 'poke-ball': 10 },
 						availableAfter: `catch a ${time}-time exclusive pokemon from ${route.id}`,
 						researchPoints: 20,
@@ -351,6 +353,7 @@ const catchQuestsForRoute = (
 			})
 		),
 		[`catch a ultra-rare pokemon from ${route.id}`]: {
+			category: 'EXPLORATION',
 			rewardItems: { 'rare-candy': 1 },
 			researchPoints: 20,
 			conditionFunction: (s) => {

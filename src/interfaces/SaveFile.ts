@@ -107,6 +107,7 @@ export interface SaveFile {
 	mileStones: {
 		damageRecord: number;
 		challengeFieldRecord?: number;
+		randomFieldRecord?: number;
 		hasEvolvedAPokemonThroughLevelUp?: boolean;
 		hasEvolvedAPokemonWithAStone?: boolean;
 		hasEvolvedAPokemonWithAHeldItem?: boolean;
@@ -128,6 +129,7 @@ export interface SaveFile {
 		hasReportedBug?: boolean;
 		barryDefeatedAt?: number;
 		silverDefeatedAt?: number;
+		cynthiaDefeatedAt?: number;
 	};
 	farm: {
 		plants: BerryBush[];

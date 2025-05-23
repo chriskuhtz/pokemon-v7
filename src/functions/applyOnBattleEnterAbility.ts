@@ -13,6 +13,7 @@ import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { getHeldItem } from './getHeldItem';
 import { getHighestStat } from './getHighestStat';
 import { getTypeNames } from './getTypeNames';
+import { isKO } from './isKo';
 
 export const applyOnBattleEnterAbilityAndEffects = ({
 	user,
@@ -89,7 +90,6 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 			});
 		}
 	}
-
 	if (user.ability === 'drizzle' && currentWeather !== 'rain') {
 		setWeather({ duration: 9000, type: 'rain' });
 		addMessage({ message: `${user.data.name} made it rain with drizzle` });
@@ -100,6 +100,7 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 			message: `${user.data.name} intensified the sun with drought`,
 		});
 	}
+
 	if (user.ability === 'sand-stream' && currentWeather !== 'sandstorm') {
 		setWeather({ duration: 9000, type: 'sandstorm' });
 		addMessage({ message: `${user.data.name} summoned a sand storm` });
@@ -109,11 +110,64 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 		addMessage({ message: `${user.data.name} summoned a hail storm` });
 	}
 
+	if (user.ability === 'orichalcum-pulse' && currentWeather !== 'sun') {
+		setWeather({ duration: 9000, type: 'sun' });
+		addMessage({
+			message: `${user.data.name} intensified the sun with orichalcum pulse`,
+		});
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.id === user.id) {
+				return applyStatChangeToPokemon(
+					{
+						...user,
+						roundsInBattle: p.roundsInBattle + 1,
+						participatedInBattle: true,
+					},
+					'attack',
+					1,
+					true,
+					battleFieldEffects,
+					addMessage,
+					'orichalcum pulse'
+				);
+			}
+
+			return p;
+		});
+	}
+
 	const terrainDuration = getHeldItem(user) === 'terrain-extender' ? 8 : 5;
+	if (user.ability === 'hadron-engine' && terrain !== 'electric') {
+		setBattleTerrain({ type: 'electric', duration: terrainDuration });
+		addMessage({
+			message: `${user.data.name} spreads electric terrain with hadron engine`,
+		});
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.id === user.id) {
+				return applyStatChangeToPokemon(
+					{
+						...user,
+						roundsInBattle: p.roundsInBattle + 1,
+						participatedInBattle: true,
+					},
+					'special-attack',
+					1,
+					true,
+					battleFieldEffects,
+					addMessage,
+					'hadron engine'
+				);
+			}
+
+			return p;
+		});
+	}
+
 	if (user.ability === 'electric-surge') {
 		setBattleTerrain({ type: 'electric', duration: terrainDuration });
 		addMessage({ message: `${user.data.name} spreads electric terrain` });
 	}
+
 	if (user.ability === 'psychic-surge') {
 		setBattleTerrain({ type: 'psychic', duration: terrainDuration });
 		addMessage({ message: `${user.data.name} spreads psychic terrain` });
@@ -215,6 +269,33 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 				);
 			}
 			return res;
+		});
+	}
+	if (user.ability === 'supersweet-syrup') {
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.status !== 'ONFIELD') {
+				return p;
+			}
+			if (p.id === user.id) {
+				return {
+					...user,
+					roundsInBattle: p.roundsInBattle + 1,
+					participatedInBattle: true,
+				};
+			}
+			if (p.ownerId === user.ownerId) {
+				return p;
+			}
+
+			return applyStatChangeToPokemon(
+				p,
+				'evasion',
+				-1,
+				false,
+				battleFieldEffects,
+				addMessage,
+				`${user.data.name}'s supersweet syrup`
+			);
 		});
 	}
 	if (user.ability === 'vessel-of-ruin') {
@@ -471,6 +552,100 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 		addMessage({
 			message: `${user.name} boosts itself and its allies with flower-gift`,
 		});
+	}
+
+	if (user.ability === 'supreme-overlord') {
+		const defeatedTeamMembers = updatedPokemon.filter(
+			(p) => p.participatedInBattle && isKO(p) && p.ownerId === user.ownerId
+		).length;
+
+		if (defeatedTeamMembers > 0) {
+			addMessage({
+				message: `${user.data.name} is getting ready for vengeance`,
+			});
+			updatedPokemon = updatedPokemon.map((p) => {
+				if (p.id === user.id) {
+					const up = applyStatChangeToPokemon(
+						{
+							...user,
+							roundsInBattle: p.roundsInBattle + 1,
+							participatedInBattle: true,
+						},
+						'special-attack',
+						1,
+						true,
+						battleFieldEffects,
+						addMessage,
+						'supreme overlord'
+					);
+					return applyStatChangeToPokemon(
+						up,
+						'attack',
+						1,
+						true,
+						battleFieldEffects,
+						addMessage,
+						'supreme overlord'
+					);
+				}
+
+				return p;
+			});
+		}
+		return updatedPokemon;
+	}
+	if (user.ability === 'costar') {
+		const ally = updatedPokemon.find(
+			(p) => p.status === 'ONFIELD' && p.ownerId === user.ownerId
+		);
+
+		if (ally) {
+			addMessage({
+				message: `${user.data.name} copies its ally with costar`,
+			});
+			updatedPokemon = updatedPokemon.map((p) => {
+				if (p.id === user.id) {
+					return {
+						...user,
+						roundsInBattle: p.roundsInBattle + 1,
+						participatedInBattle: true,
+						statBoosts: { ...ally.statBoosts },
+					};
+				}
+
+				return p;
+			});
+		}
+		return updatedPokemon;
+	}
+	if (user.ability === 'hospitality') {
+		const ally = updatedPokemon.find(
+			(p) => p.status === 'ONFIELD' && p.ownerId === user.ownerId
+		);
+
+		if (ally && ally.damage) {
+			addMessage({
+				message: `${user.data.name} heals its ally with hospitality`,
+			});
+			updatedPokemon = updatedPokemon.map((p) => {
+				if (p.id === user.id) {
+					return {
+						...user,
+						roundsInBattle: p.roundsInBattle + 1,
+						participatedInBattle: true,
+					};
+				}
+				if (p.id === ally.id) {
+					return {
+						...ally,
+						damage: Math.max(0, ally.damage - ally.stats.hp / 4),
+					};
+				}
+
+				return p;
+			});
+		}
+		return updatedPokemon;
 	}
 
 	if (

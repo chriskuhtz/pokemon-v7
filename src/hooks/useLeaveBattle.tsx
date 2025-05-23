@@ -1,7 +1,9 @@
 import { useCallback, useContext, useMemo } from 'react';
-import { ONE_HOUR } from '../constants/gameData';
+import { ONE_HOUR, randomFieldId } from '../constants/gameData';
 import { barryId } from '../constants/maps/occupants/barry';
 import { challengeFieldOccupants } from '../constants/maps/occupants/challengeField';
+import { cynthiaId } from '../constants/maps/occupants/cynthia';
+import { silverId } from '../constants/maps/occupants/silver';
 import { addPokemonToDex } from '../functions/addPokemonToDex';
 import { calculateLevelData } from '../functions/calculateLevelData';
 import { getRandomEntry } from '../functions/filterTargets';
@@ -43,7 +45,67 @@ export const useLeaveBattle = () => {
 		[saveFile]
 	);
 
-	return useCallback(
+	const handleLoss = useCallback(() => {
+		let updatedLocation = location;
+
+		const resetTime = () => {
+			if (
+				saveFile.settings?.rogueLike ||
+				saveFile.settings?.releaseFaintedPokemon
+			) {
+				return (
+					//dont reset on challenge field and camp
+					location.mapId !== 'camp' &&
+					location.mapId !== 'challengeField' &&
+					location.mapId !== 'randomField'
+				);
+			}
+			return false;
+		};
+		if (resetTime()) {
+			reset();
+			return;
+		} else {
+			updatedLocation = {
+				mapId: 'camp',
+				x: 1,
+				y: 1,
+				orientation: 'DOWN',
+				forwardFoot: 'CENTER1',
+			};
+
+			//key items dont get lost
+			const bagWithOnlyKeyItems = joinInventories(
+				EmptyInventory,
+				Object.fromEntries(
+					Object.entries(saveFile.bag).filter(([item]) => isKeyItem(item))
+				)
+			);
+
+			setLocation(updatedLocation);
+			patchSaveFileReducer({
+				meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
+				pokemon: saveFile.pokemon.map((p) => {
+					if (p.onTeam) {
+						return fullyHealPokemon(p);
+					}
+					return p;
+				}),
+				bag: location.mapId === 'camp' ? saveFile.bag : bagWithOnlyKeyItems,
+			});
+			return;
+		}
+	}, [
+		location,
+		patchSaveFileReducer,
+		reset,
+		saveFile.bag,
+		saveFile.pokemon,
+		saveFile.settings?.releaseFaintedPokemon,
+		saveFile.settings?.rogueLike,
+		setLocation,
+	]);
+	const handleWin = useCallback(
 		({
 			team: updatedTeam,
 			updatedInventory,
@@ -53,56 +115,6 @@ export const useLeaveBattle = () => {
 			defeatedChallengerId,
 			rewardItems,
 		}: LeaveBattlePayload) => {
-			let updatedLocation = location;
-
-			if (outcome === 'LOSS') {
-				const resetTime = () => {
-					if (
-						saveFile.settings?.rogueLike ||
-						saveFile.settings?.releaseFaintedPokemon
-					) {
-						return (
-							//dont reset on challenge field and camp
-							location.mapId !== 'camp' && location.mapId !== 'challengeField'
-						);
-					}
-					return false;
-				};
-				if (resetTime()) {
-					reset();
-					return;
-				} else {
-					updatedLocation = {
-						mapId: 'camp',
-						x: 1,
-						y: 1,
-						orientation: 'DOWN',
-						forwardFoot: 'CENTER1',
-					};
-
-					//key items dont get lost
-					const bagWithOnlyKeyItems = joinInventories(
-						EmptyInventory,
-						Object.fromEntries(
-							Object.entries(saveFile.bag).filter(([item]) => isKeyItem(item))
-						)
-					);
-
-					setLocation(updatedLocation);
-					patchSaveFileReducer({
-						meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
-						pokemon: saveFile.pokemon.map((p) => {
-							if (p.onTeam) {
-								return fullyHealPokemon(p);
-							}
-							return p;
-						}),
-						bag: location.mapId === 'camp' ? saveFile.bag : bagWithOnlyKeyItems,
-					});
-					return;
-				}
-			}
-
 			const configCheckedTeam = updatedTeam.filter((p) => {
 				//pokemon that faint on training field are not released
 				if (
@@ -119,7 +131,6 @@ export const useLeaveBattle = () => {
 			const ownedTeam = configCheckedTeam.map((p) =>
 				reduceBattlePokemonToOwnedPokemon(p)
 			);
-
 			//check pickup
 			const pickUpCheckedTeam: OwnedPokemon[] = ownedTeam.map((p) => {
 				if (p.ability === 'pickup' && !getHeldItem(p) && Math.random() < 0.1) {
@@ -193,6 +204,9 @@ export const useLeaveBattle = () => {
 			const challengeFieldRank = challengeFieldOccupants
 				.filter((t) => t.type === 'TRAINER')
 				.find((c) => c.id === defeatedChallengerId)?.challengeFieldRank;
+			const randomFieldRank = defeatedChallengerId?.includes(randomFieldId)
+				? Number(defeatedChallengerId.split('_')[1])
+				: undefined;
 
 			const updatedMileStones = { ...saveFile.mileStones };
 
@@ -204,19 +218,37 @@ export const useLeaveBattle = () => {
 					updatedMileStones.challengeFieldRecord = challengeFieldRank;
 				}
 			}
+			if (randomFieldRank !== undefined) {
+				if (!updatedMileStones.randomFieldRecord) {
+					updatedMileStones.randomFieldRecord = randomFieldRank;
+				}
+				if (randomFieldRank > updatedMileStones.randomFieldRecord) {
+					updatedMileStones.randomFieldRecord = randomFieldRank;
+				}
+			}
+			const xp = getHighestXpOnTeam(updatedPokemon);
 			if (defeatedChallengerId === barryId) {
-				const xp = getHighestXpOnTeam(updatedPokemon);
 				if (
 					!updatedMileStones.barryDefeatedAt ||
 					xp > updatedMileStones.barryDefeatedAt
 				) {
 					updatedMileStones.barryDefeatedAt = xp;
 				}
+			}
+			if (defeatedChallengerId === silverId) {
 				if (
 					!updatedMileStones.silverDefeatedAt ||
 					xp > updatedMileStones.silverDefeatedAt
 				) {
 					updatedMileStones.silverDefeatedAt = xp;
+				}
+			}
+			if (defeatedChallengerId === cynthiaId) {
+				if (
+					!updatedMileStones.cynthiaDefeatedAt ||
+					xp > updatedMileStones.cynthiaDefeatedAt
+				) {
+					updatedMileStones.cynthiaDefeatedAt = xp;
 				}
 			}
 			updatedMileStones.caughtFromSwarms = updatedSwarmRecord;
@@ -239,6 +271,17 @@ export const useLeaveBattle = () => {
 				pokedex,
 			});
 		},
-		[location, patchSaveFileReducer, reset, saveFile, setLocation, team]
+		[location, patchSaveFileReducer, saveFile, team]
+	);
+
+	return useCallback(
+		(payload: LeaveBattlePayload) => {
+			if (payload.outcome === 'LOSS') {
+				handleLoss();
+			} else {
+				handleWin(payload);
+			}
+		},
+		[handleLoss, handleWin]
 	);
 };
