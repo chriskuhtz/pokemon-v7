@@ -1,5 +1,5 @@
 import { useCallback, useContext, useMemo } from 'react';
-import { ItemInfoButton } from '../../components/AbilityInfoButton/AbilityInfoButton';
+import { ItemInfoButton } from '../../components/ItemInfoButton/ItemInfoButton';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
@@ -24,14 +24,12 @@ export const useTravellingMerchant = () => {
 	}[] = useMemo(() => {
 		const ber = [...berries, ...berries, ...berries];
 
-		return heldItems
-			.filter((h) => h !== 'lucky-egg')
-			.map((h, i) => ({
-				receive: h,
-				give: ber[i],
-				amount: saveFile.bag[ber[i]],
-				disabled: saveFile.bag[ber[i]] <= 0,
-			}));
+		return heldItems.map((h, i) => ({
+			receive: h,
+			give: h === 'lucky-egg' ? 'enigma-berry' : ber[i],
+			amount: saveFile.bag[ber[i]],
+			disabled: saveFile.bag[ber[i]] <= 0,
+		}));
 	}, [saveFile.bag]);
 
 	const trade = useCallback(

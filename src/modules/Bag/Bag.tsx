@@ -1,11 +1,11 @@
 import React, { useContext, useMemo } from 'react';
 import { FaRunning } from 'react-icons/fa';
 import { MdHealing } from 'react-icons/md';
-import { ItemInfoButton } from '../../components/AbilityInfoButton/AbilityInfoButton';
 import { BagLimitBar } from '../../components/BagLimitBar/BagLimitBar';
 import { HealAction } from '../../components/ItemCard/components/HealAction';
 import { ThrowAwayAction } from '../../components/ItemCard/components/ThrowAwayAction';
 import { ItemCard } from '../../components/ItemCard/ItemCard';
+import { ItemInfoButton } from '../../components/ItemInfoButton/ItemInfoButton';
 import { useFilteredInventory } from '../../components/ItemsFilter/ItemsFilter';
 import { battleSpriteSize } from '../../constants/gameData';
 import { canBenefitFromItem } from '../../functions/canBenefitFromItem';

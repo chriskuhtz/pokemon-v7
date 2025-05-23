@@ -478,8 +478,6 @@ export const extraFeatureCheckList: {
 	{ name: 'random encounters' },
 	{ name: 'random evolutions' },
 	{ name: 'steven as the fossil protector' },
-	{ name: 'way to produce lucky eggs' },
-
 	{
 		name: 'upgrades for swarm radar (stronger pokemon, future and past distortions)',
 	},
