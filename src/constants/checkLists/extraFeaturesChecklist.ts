@@ -457,6 +457,7 @@ export const extraFeatureCheckList: {
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
 	{ name: 'timeofday in pokedex' },
 	{ name: 'download did not boost after tablets of ruin lowered' },
+	{ name: 'different battle backgrounds' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },

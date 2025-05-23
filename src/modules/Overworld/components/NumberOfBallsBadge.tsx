@@ -1,8 +1,8 @@
 import { useContext, useMemo } from 'react';
 import { MdCatchingPokemon } from 'react-icons/md';
-import { getBagLimit } from '../../../components/BagLimitBar/BagLimitBar';
 import { battleSpriteSize } from '../../../constants/gameData';
 import { percentageBasedColor } from '../../../constants/typeColors';
+import { getBagLimit } from '../../../functions/getBagLimit';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { isPokeball } from '../../../interfaces/Item';

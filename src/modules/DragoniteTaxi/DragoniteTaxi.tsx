@@ -1,7 +1,7 @@
 import { useCallback, useContext } from 'react';
-import { isBagOverloaded } from '../../components/BagLimitBar/BagLimitBar';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
+import { isBagOverloaded } from '../../functions/getBagLimit';
 import { replaceRouteName } from '../../functions/replaceRouteName';
 import { LocationContext } from '../../hooks/LocationProvider';
 import { useNavigate } from '../../hooks/useNavigate';
