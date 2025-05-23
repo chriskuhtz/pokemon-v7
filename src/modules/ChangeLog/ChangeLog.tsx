@@ -73,6 +73,7 @@ const ChangeLogV34 = (): JSX.Element => {
 			<h3>0.34:</h3>
 			<ol style={{ lineHeight: '1.5rem' }}>
 				<li>Catch Streaks</li>
+				<li>New Travelling Trainer</li>
 				<li>fixes, balancing and improvements</li>
 				<li>New Abilities and Attacks</li>
 			</ol>
