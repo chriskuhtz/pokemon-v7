@@ -197,6 +197,18 @@ export const useLeaveBattle = () => {
 				) {
 					updatedSwarmRecord.push(c.name);
 				}
+				if (
+					saveFile.currentStrongSwarm &&
+					c.name === saveFile.currentStrongSwarm?.pokemon
+				) {
+					updatedSwarmRecord.push(c.name);
+				}
+				if (
+					saveFile.currentDistortionSwarm &&
+					c.name === saveFile.currentDistortionSwarm?.pokemon
+				) {
+					updatedSwarmRecord.push(c.name);
+				}
 				if (updatedCatchStreak && c.name !== updatedCatchStreak.pokemon) {
 					updatedCatchStreak = {
 						pokemon: c.name,

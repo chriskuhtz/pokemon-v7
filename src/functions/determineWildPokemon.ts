@@ -20,9 +20,11 @@ export const determineWildPokemon = (
 	quests: SaveFile['quests'],
 	waterEncounter: boolean,
 	shinyFactor: number,
-	swarm?: PokemonSwarm,
 	lure?: 'lure' | 'super-lure' | 'max-lure',
-	catchStreak?: CatchStreak
+	catchStreak?: CatchStreak,
+	currentSwarm?: PokemonSwarm,
+	currentStrongSwarm?: PokemonSwarm,
+	currentDistortionSwarm?: PokemonSwarm
 ): OwnedPokemon[] => {
 	const applyStreakBoosts = (input: OwnedPokemon): OwnedPokemon => {
 		if (catchStreak?.pokemon === input.name) {
@@ -47,6 +49,24 @@ export const determineWildPokemon = (
 		return input;
 	};
 	let encounter: OwnedPokemon[] = [];
+
+	const checkSwarm = (): PokemonSwarm | undefined => {
+		if (waterEncounter) {
+			return;
+		}
+
+		if (currentSwarm?.route === map.id) {
+			return currentSwarm;
+		}
+		if (currentStrongSwarm?.route === map.id) {
+			return currentStrongSwarm;
+		}
+		if (currentDistortionSwarm?.route === map.id) {
+			return currentDistortionSwarm;
+		}
+	};
+
+	const swarm = checkSwarm();
 
 	if (catchStreak && Math.random() < catchStreak.streak / 100) {
 		encounter = [
@@ -116,12 +136,7 @@ export const determineWildPokemon = (
 				{ increasedShinyFactor: 16 * shinyFactor }
 			),
 		];
-	} else if (
-		!waterEncounter &&
-		swarm &&
-		swarm.route === map.id &&
-		Math.random() > 0.5
-	) {
+	} else if (swarm && Math.random() > 0.5) {
 		encounter = [
 			makeChallengerPokemon(
 				{

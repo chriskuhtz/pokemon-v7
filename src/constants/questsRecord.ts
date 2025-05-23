@@ -10,6 +10,7 @@ import {
 } from '../functions/makeRandomTrainer';
 import { sumOfIvs } from '../functions/sumOfIvs';
 import { honeyPokemon } from '../hooks/useHoneyTree';
+
 import { Inventory } from '../interfaces/Inventory';
 import {
 	apricorns,
@@ -39,6 +40,11 @@ import { onixCaveEncounters } from './maps/encounters/onixCave';
 import { allRocketCampTrainersDefeated } from './maps/occupants/rocketCampOccupants';
 import { routeS1 } from './maps/routeS1';
 import { PokemonName, pokemonNames } from './pokemonNames';
+import {
+	futureDistortionMons,
+	pastDistortionMons,
+	spaceDistortionMons,
+} from './swarmOptions';
 
 const expCandyPackage: Partial<Inventory> = {
 	'exp-candy-xs': 10,
@@ -428,6 +434,12 @@ export const questNames = [
 	'achieve a catch streak of 15',
 	'achieve a catch streak of 20',
 	'achieve a catch streak of 31',
+	'catch a future distortion pokemon',
+	'catch all future distortion pokemon',
+	'catch a past distortion pokemon',
+	'catch all past distortion pokemon',
+	'catch a space distortion pokemon',
+	'catch all space distortion pokemon',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -3243,6 +3255,66 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 100,
 		conditionFunction: (s) => (s.longestStreak ?? 0) >= 31,
 		progress: (s) => ({ goal: 31, current: s.longestStreak ?? 0 }),
+	},
+	'catch a future distortion pokemon': {
+		kind: 'BULLETIN',
+		category: 'RESEARCH',
+		targetPokemon: futureDistortionMons,
+		rewardItems: { 'rare-candy': 3, 'quick-ball': 5 },
+		researchPoints: 25,
+		requiredUpgrade: 'time distortion radar',
+		conditionFunction: (s) =>
+			futureDistortionMons.some((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+	},
+	'catch a past distortion pokemon': {
+		kind: 'BULLETIN',
+		category: 'RESEARCH',
+		targetPokemon: pastDistortionMons,
+		rewardItems: { 'rare-candy': 3, 'quick-ball': 5 },
+		researchPoints: 25,
+		requiredUpgrade: 'time distortion radar',
+		conditionFunction: (s) =>
+			pastDistortionMons.some((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+	},
+	'catch all future distortion pokemon': {
+		kind: 'BULLETIN',
+		category: 'RESEARCH',
+		targetPokemon: futureDistortionMons,
+		rewardItems: { 'rare-candy': 10, 'quick-ball': 20 },
+		researchPoints: 100,
+		requiredUpgrade: 'time distortion radar',
+		conditionFunction: (s) =>
+			futureDistortionMons.every((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+	},
+	'catch all past distortion pokemon': {
+		kind: 'BULLETIN',
+		category: 'RESEARCH',
+		targetPokemon: pastDistortionMons,
+		rewardItems: { 'rare-candy': 10, 'quick-ball': 20 },
+		researchPoints: 100,
+		requiredUpgrade: 'time distortion radar',
+		conditionFunction: (s) =>
+			pastDistortionMons.every((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+	},
+	'catch a space distortion pokemon': {
+		kind: 'BULLETIN',
+		category: 'RESEARCH',
+		targetPokemon: spaceDistortionMons,
+		rewardItems: { 'rare-candy': 3, 'quick-ball': 5 },
+		researchPoints: 25,
+		requiredUpgrade: 'space distortion radar',
+		conditionFunction: (s) =>
+			spaceDistortionMons.some((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+	},
+	'catch all space distortion pokemon': {
+		kind: 'BULLETIN',
+		category: 'RESEARCH',
+		targetPokemon: spaceDistortionMons,
+		rewardItems: { 'rare-candy': 10, 'quick-ball': 20 },
+		researchPoints: 100,
+		requiredUpgrade: 'space distortion radar',
+		conditionFunction: (s) =>
+			spaceDistortionMons.every((f) => s.pokedex[f].caughtOnRoutes.length > 0),
 	},
 } as Record<QuestName, Quest>;
 

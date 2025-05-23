@@ -1,13 +1,23 @@
 import { useCallback, useContext, useMemo } from 'react';
 import { ONE_HOUR } from '../constants/gameData';
-import { mapDisplayNames, MapId, mapIds } from '../constants/maps/mapsRecord';
-import { PokemonName, pokemonNames } from '../constants/pokemonNames';
+import { mapDisplayNames, MapId } from '../constants/maps/mapsRecord';
+import { pokemonNames } from '../constants/pokemonNames';
+import {
+	futureDistortionMons,
+	pastDistortionMons,
+	spaceDistortionMons,
+	strongerSwarmMons,
+	swarmMons,
+} from '../constants/swarmOptions';
 import { getRandomEntry } from '../functions/filterTargets';
 import { PokemonSwarm, SaveFile } from '../interfaces/SaveFile';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
-const getRouteforSwarm = (s: SaveFile): MapId => {
+const getRouteforSwarm = (
+	s: SaveFile,
+	activeSwarms: PokemonSwarm[]
+): MapId | undefined => {
 	const options: MapId[] = ['routeN1'];
 
 	if (s.campUpgrades['machete certification']) {
@@ -25,140 +35,36 @@ const getRouteforSwarm = (s: SaveFile): MapId => {
 	if (s.campUpgrades['buy skiing equipment']) {
 		options.push('routeN1W1');
 	}
-	return getRandomEntry(options);
-};
-const swarmMons: PokemonName[] = [
-	'cyndaquil',
-	'chikorita',
-	'totodile',
-	'mudkip',
-	'treecko',
-	'torchic',
-	'chimchar',
-	'piplup',
-	'turtwig',
-	'snivy',
-	'tepig',
-	'oshawott',
-	'chespin',
-	'fennekin',
-	'froakie',
-	'popplio',
-	'rowlet',
-	'litten',
-	'grookey',
-	'scorbunny',
-	'sobble',
-	'fuecoco',
-	'quaxly',
-	'sprigatito',
-];
-const strongerSwarmMons: PokemonName[] = [
-	'donphan',
-	'wigglytuff',
-	'amoonguss',
-	'misdreavus',
-	'volcarona',
-	'magneton',
-	'shelgon',
-	'cyclizar',
-	'delibird',
-	'hariyama',
-	'zweilous',
-	'pupitar',
-	'kirlia',
-];
-const pastDistortionMons: PokemonName[] = [
-	'great-tusk',
-	'scream-tail',
-	'flutter-mane',
-	'brute-bonnet',
-	'slither-wing',
-	'sandy-shocks',
-	'roaring-moon',
-];
-const futureDistortionMons: PokemonName[] = [
-	'iron-treads',
-	'iron-bundle',
-	'iron-hands',
-	'iron-jugulis',
-	'iron-moth',
-	'iron-thorns',
-	'iron-valiant',
-];
-const spaceDistortionMons: PokemonName[] = [
-	'nihilego',
-	'buzzwole',
-	'pheromosa',
-	'xurkitree',
-	'celesteela',
-	'kartana',
-	'guzzlord',
-	'poipole',
-	'stakataka',
-	'blacephalon',
-];
 
-export const useSwarmRadar = () => {
+	const filteredOptions = options.filter((o) =>
+		activeSwarms.every((a) => a.route !== o)
+	);
+
+	if (filteredOptions.length === 0) {
+		return;
+	}
+	return getRandomEntry(filteredOptions);
+};
+
+export const useSwarmRadar = (): {
+	activeSwarms: PokemonSwarm[];
+	scan: (mode: 'WEAK' | 'STRONG' | 'DISTORTION') => void;
+} => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { addMessage } = useContext(MessageQueueContext);
 
-	const availableSwarms: PokemonSwarm[] = useMemo(() => {
-		const weakSwarms = swarmMons.map((p) => ({
-			pokemon: p,
-			route: mapIds[0],
-			leavesAt: 0,
-			xpMax: 1000,
-			xpMin: 125,
-		}));
-
-		const options = [weakSwarms];
-
-		const strongerSwarms = strongerSwarmMons.map((p) => ({
-			pokemon: p,
-			route: mapIds[0],
-			leavesAt: 0,
-			xpMax: 64000,
-			xpMin: 8000,
-		}));
-		if (saveFile.campUpgrades['upgraded swarm radar']) {
-			options.push(strongerSwarms);
-		}
-		const pastSwarms = pastDistortionMons.map((p) => ({
-			pokemon: p,
-			route: mapIds[0],
-			leavesAt: 0,
-			xpMax: 60 * 60 * 60,
-			xpMin: 40 * 40 * 40,
-		}));
-		const futureSwarms = futureDistortionMons.map((p) => ({
-			pokemon: p,
-			route: mapIds[0],
-			leavesAt: 0,
-			xpMax: 60 * 60 * 60,
-			xpMin: 40 * 40 * 40,
-		}));
-		if (saveFile.campUpgrades['time distortion radar']) {
-			options.push(pastSwarms, futureSwarms);
-		}
-		const ultrabeastSwarms = spaceDistortionMons.map((p) => ({
-			pokemon: p,
-			route: mapIds[0],
-			leavesAt: 0,
-			xpMax: 60 * 60 * 60,
-			xpMin: 50 * 50 * 50,
-		}));
-		if (saveFile.campUpgrades['space distortion radar']) {
-			options.push(ultrabeastSwarms);
-		}
-		return getRandomEntry(options);
-	}, [saveFile.campUpgrades]);
-
 	const addSwarmMessage = useCallback(
 		(s: PokemonSwarm) => {
-			if (s.type) {
+			if (s.type === 'SPACE') {
 				addMessage({
-					message: `The radar detects a ${s.type} distortion at ${
+					message: `The radar detects a space distortion at ${
+						mapDisplayNames[s.route]
+					}`,
+					needsNoConfirmation: true,
+				});
+			} else if (s.type === 'FUTURE' || s.type === 'PAST') {
+				addMessage({
+					message: `The radar detects a time distortion at ${
 						mapDisplayNames[s.route]
 					}`,
 					needsNoConfirmation: true,
@@ -174,39 +80,95 @@ export const useSwarmRadar = () => {
 		[addMessage]
 	);
 
-	return useCallback(() => {
-		const now = new Date().getTime();
-		//inform about current swarm
-		if (saveFile.currentSwarm) {
-			addSwarmMessage(saveFile.currentSwarm);
-		}
-		//create new swarm
-		else if (!saveFile.nextSwarmReadyAt || now > saveFile.nextSwarmReadyAt) {
-			let swarm = {
-				...getRandomEntry(availableSwarms),
-				route: getRouteforSwarm(saveFile),
+	const activeSwarms: PokemonSwarm[] = useMemo(
+		() =>
+			[
+				saveFile.currentSwarm,
+				saveFile.currentStrongSwarm,
+				saveFile.currentDistortionSwarm,
+			].filter((s) => s !== undefined),
+		[
+			saveFile.currentDistortionSwarm,
+			saveFile.currentStrongSwarm,
+			saveFile.currentSwarm,
+		]
+	);
+
+	const scan = useCallback(
+		(mode: 'WEAK' | 'STRONG' | 'DISTORTION') => {
+			const route = getRouteforSwarm(saveFile, activeSwarms);
+
+			if (!route) {
+				addMessage({ message: `The radar did not detect anything` });
+				return;
+			}
+
+			const makeSwarm = (): PokemonSwarm => {
+				const now = new Date().getTime();
+
+				if (mode === 'STRONG') {
+					return {
+						pokemon: getRandomEntry(strongerSwarmMons),
+						xpMin: 20 ^ 3,
+						xpMax: 40 ^ 3,
+						leavesAt: now + ONE_HOUR,
+						route,
+					};
+				}
+				if (mode === 'DISTORTION') {
+					const options = [...futureDistortionMons, ...pastDistortionMons];
+
+					if (saveFile.campUpgrades['space distortion radar']) {
+						options.push(...spaceDistortionMons);
+					}
+					const mon = getRandomEntry(options);
+					const type = futureDistortionMons.includes(mon)
+						? 'FUTURE'
+						: pastDistortionMons.includes(mon)
+						? 'PAST'
+						: 'SPACE';
+					return {
+						pokemon: mon,
+						type,
+						xpMin: 40 ^ 3,
+						xpMax: 60 ^ 3,
+						leavesAt: now + ONE_HOUR,
+						route,
+					};
+				}
+				return {
+					pokemon: getRandomEntry(swarmMons),
+					xpMin: 125,
+					xpMax: 1000,
+					leavesAt: now + ONE_HOUR,
+					route,
+				};
 			};
 
+			let newSwarm = makeSwarm();
 			if (saveFile.settings?.randomSwarms) {
-				swarm = { ...swarm, pokemon: getRandomEntry([...pokemonNames]) };
+				newSwarm = { ...newSwarm, pokemon: getRandomEntry([...pokemonNames]) };
 			}
-			addSwarmMessage(swarm);
+			addSwarmMessage(newSwarm);
 
-			patchSaveFileReducer({
-				currentSwarm: { ...swarm, leavesAt: now + ONE_HOUR },
-				nextSwarmReadyAt: now + ONE_HOUR,
-			});
-		} else {
-			addMessage({
-				message: 'No Swarms detected, check back later',
-				needsNoConfirmation: true,
-			});
-		}
-	}, [
-		addMessage,
-		addSwarmMessage,
-		availableSwarms,
-		patchSaveFileReducer,
-		saveFile,
-	]);
+			if (mode === 'WEAK') {
+				patchSaveFileReducer({
+					currentSwarm: newSwarm,
+				});
+			}
+			if (mode === 'STRONG') {
+				patchSaveFileReducer({
+					currentStrongSwarm: newSwarm,
+				});
+			}
+			if (mode === 'DISTORTION') {
+				patchSaveFileReducer({
+					currentDistortionSwarm: newSwarm,
+				});
+			}
+		},
+		[activeSwarms, addMessage, addSwarmMessage, patchSaveFileReducer, saveFile]
+	);
+
+	return { activeSwarms, scan };
 };

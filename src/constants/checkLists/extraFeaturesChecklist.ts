@@ -453,17 +453,11 @@ export const extraFeatureCheckList: {
 	{ name: 'isXDay functions for easier travelling npc control', handled: true },
 	{ name: 'travellers on routeS1 instead of onix cave', handled: true },
 	{ name: 'catch quests for s1', handled: true },
-	{
-		name: 'upgrades for swarm radar (distortions)',
-	},
-	{ name: 'upgrades for swarm radar (stronger pokemon)' },
+	{ name: 'upgrades for swarm radar (distortions)', handled: true },
+	{ name: 'upgrades for swarm radar (stronger pokemon)', handled: true },
 	{
 		name: 'quests for distortion mons / ultra beasts',
-		todos: [
-			'Radar Screen with buttons',
-			'different swarms at the same time',
-			'add pokemon from all swarms to caughtFromSwarm array',
-		],
+		handled: true,
 	},
 	{ name: 'distortion shaders' },
 
@@ -475,6 +469,7 @@ export const extraFeatureCheckList: {
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
 	{ name: 'timeofday in pokedex' },
 	{ name: 'download did not boost after tablets of ruin lowered' },
+	{ name: 'make red sprite smaller' },
 	//CONTENT:
 	{ name: 'new apricorns (repeat ball)' },
 	{ name: 'whitney' },

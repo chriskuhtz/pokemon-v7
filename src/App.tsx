@@ -38,6 +38,7 @@ import { Settings } from './modules/Settings/Settings';
 import { SpriteSelection } from './modules/SpriteSelection/SpriteSelection';
 import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { StorageChest } from './modules/StorageChest/StorageChest';
+import { SwarmRadar } from './modules/SwarmRadar/SwarmRadar';
 import { Team } from './modules/Team/Team';
 import { TrainingField } from './modules/TrainingField/TrainingField';
 import { TravellingMerchant } from './modules/TravellingMerchant/TravellingMerchant';
@@ -270,6 +271,9 @@ export const App = (): JSX.Element => {
 	}
 	if (activeTab === 'ABILITY_TUTOR') {
 		return <AbilityTutor />;
+	}
+	if (activeTab === 'SWARM_RADAR') {
+		return <SwarmRadar />;
 	}
 	if (activeTab === 'DRAGONITE_TAXI') {
 		return <DragoniteTaxi />;

@@ -2195,9 +2195,17 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/581/',
 		handled: true,
 	},
-	{ name: 'electrify', url: 'https://pokeapi.co/api/v2/move/582/' },
-	{ name: 'play-rough', url: 'https://pokeapi.co/api/v2/move/583/' },
-	{ name: 'boomburst', url: 'https://pokeapi.co/api/v2/move/586/' },
+
+	{
+		name: 'play-rough',
+		url: 'https://pokeapi.co/api/v2/move/583/',
+		handled: true,
+	},
+	{
+		name: 'boomburst',
+		url: 'https://pokeapi.co/api/v2/move/586/',
+		handled: true,
+	},
 	{ name: 'fairy-lock', url: 'https://pokeapi.co/api/v2/move/587/' },
 	{ name: 'kings-shield', url: 'https://pokeapi.co/api/v2/move/588/' },
 	{ name: 'play-nice', url: 'https://pokeapi.co/api/v2/move/589/' },
@@ -2663,6 +2671,7 @@ export const movesCheckList: {
 	{ name: 'parting-shot', url: 'https://pokeapi.co/api/v2/move/575/' },
 	{ name: 'crafty-shield', url: 'https://pokeapi.co/api/v2/move/578/' },
 	{ name: 'flower-shield', url: 'https://pokeapi.co/api/v2/move/579/' },
+	{ name: 'electrify', url: 'https://pokeapi.co/api/v2/move/582/' },
 ];
 
 export const handledMoves = [
@@ -3154,6 +3163,8 @@ export const handledMoves = [
 	'topsy-turvy',
 	'grassy-terrain',
 	'misty-terrain',
+	'play-rough',
+	'boomburst',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
