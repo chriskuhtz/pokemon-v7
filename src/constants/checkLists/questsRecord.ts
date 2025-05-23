@@ -405,6 +405,11 @@ export const questNames = [
 	'defeat cynthia at lvl 60 or higher',
 	'defeat cynthia at lvl 80 or higher',
 	'defeat cynthia at lvl 100',
+	'achieve a catch streak of 3',
+	'achieve a catch streak of 10',
+	'achieve a catch streak of 15',
+	'achieve a catch streak of 20',
+	'achieve a catch streak of 31',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -3389,6 +3394,45 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				s.mileStones.randomFieldRecord && s.mileStones.randomFieldRecord >= 100
 			);
 		},
+	},
+	'achieve a catch streak of 3': {
+		kind: 'BULLETIN',
+		category: 'EXPLORATION',
+		rewardItems: { 'quick-ball': 3 },
+		researchPoints: 20,
+		conditionFunction: (s) => (s.longestStreak ?? 0) >= 3,
+	},
+	'achieve a catch streak of 10': {
+		kind: 'BULLETIN',
+		category: 'EXPLORATION',
+		rewardItems: { 'quick-ball': 10 },
+		availableAfter: 'achieve a catch streak of 3',
+		researchPoints: 40,
+		conditionFunction: (s) => (s.longestStreak ?? 0) >= 10,
+	},
+	'achieve a catch streak of 15': {
+		kind: 'BULLETIN',
+		category: 'EXPLORATION',
+		rewardItems: { 'quick-ball': 15 },
+		availableAfter: 'achieve a catch streak of 10',
+		researchPoints: 60,
+		conditionFunction: (s) => (s.longestStreak ?? 0) >= 15,
+	},
+	'achieve a catch streak of 20': {
+		kind: 'BULLETIN',
+		category: 'EXPLORATION',
+		rewardItems: { 'quick-ball': 20 },
+		availableAfter: 'achieve a catch streak of 15',
+		researchPoints: 80,
+		conditionFunction: (s) => (s.longestStreak ?? 0) >= 20,
+	},
+	'achieve a catch streak of 31': {
+		kind: 'BULLETIN',
+		category: 'EXPLORATION',
+		rewardItems: { 'quick-ball': 31 },
+		availableAfter: 'achieve a catch streak of 20',
+		researchPoints: 100,
+		conditionFunction: (s) => (s.longestStreak ?? 0) >= 31,
 	},
 } as Record<QuestName, Quest>;
 

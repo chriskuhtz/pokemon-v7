@@ -26,8 +26,11 @@ export const determineWildPokemon = (
 ): OwnedPokemon[] => {
 	const applyStreakBoosts = (input: OwnedPokemon): OwnedPokemon => {
 		if (catchStreak?.pokemon === input.name) {
-			const secondShinyRoll = Math.random() / catchStreak.streak < shinyFactor;
+			let secondShinyRoll = Math.random() / catchStreak.streak < shinyFactor;
 
+			if (catchStreak.streak === 31) {
+				secondShinyRoll = true;
+			}
 			const increasedIvs: StatObject = Object.fromEntries(
 				Object.entries(input.intrinsicValues).map(([stat, value]) => [
 					stat,
