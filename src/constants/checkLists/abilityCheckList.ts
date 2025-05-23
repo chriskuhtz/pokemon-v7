@@ -1277,11 +1277,12 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/302/',
 		handled: true,
 	},
-	{ name: 'embody-aspect', url: 'https://pokeapi.co/api/v2/ability/303/' },
-	{ name: 'tera-shift', url: 'https://pokeapi.co/api/v2/ability/304/' },
-	{ name: 'tera-shell', url: 'https://pokeapi.co/api/v2/ability/305/' },
-	{ name: 'teraform-zero', url: 'https://pokeapi.co/api/v2/ability/306/' },
-	{ name: 'poison-puppeteer', url: 'https://pokeapi.co/api/v2/ability/307/' },
+
+	{
+		name: 'poison-puppeteer',
+		url: 'https://pokeapi.co/api/v2/ability/307/',
+		handled: true,
+	},
 	{ name: 'toxic-debris', url: 'https://pokeapi.co/api/v2/ability/295/' },
 
 	/**
@@ -1336,6 +1337,10 @@ export const abilityCheckList: {
 	{ name: 'cud-chew', url: 'https://pokeapi.co/api/v2/ability/291/' },
 	{ name: 'armor-tail', url: 'https://pokeapi.co/api/v2/ability/296/' },
 	{ name: 'mycelium-might', url: 'https://pokeapi.co/api/v2/ability/298/' },
+	{ name: 'embody-aspect', url: 'https://pokeapi.co/api/v2/ability/303/' },
+	{ name: 'tera-shift', url: 'https://pokeapi.co/api/v2/ability/304/' },
+	{ name: 'tera-shell', url: 'https://pokeapi.co/api/v2/ability/305/' },
+	{ name: 'teraform-zero', url: 'https://pokeapi.co/api/v2/ability/306/' },
 ];
 
 export const abilityNames = [
@@ -1590,6 +1595,7 @@ export const abilityNames = [
 	'supersweet-syrup',
 	'hospitality',
 	'toxic-chain',
+	'poison-puppeteer',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

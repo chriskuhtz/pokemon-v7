@@ -4,6 +4,7 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
+import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getTypeNames } from './getTypeNames';
 import { isKO } from './isKo';
@@ -205,9 +206,22 @@ export const applyPrimaryAilmentToPokemon = (
 				updatedApplicator: { ...applicator, primaryAilment: { type: ailment } },
 			};
 		}
+		const updatedT = { ...target, primaryAilment: { type: ailment } };
+
+		if (applicator.ability === 'poison-puppeteer') {
+			return {
+				updatedTarget: applySecondaryAilmentToPokemon({
+					pokemon: updatedT,
+					addMessage,
+					ailment: 'confusion',
+					applicator,
+				}),
+				updatedApplicator: applicator,
+			};
+		}
 
 		return {
-			updatedTarget: { ...target, primaryAilment: { type: ailment } },
+			updatedTarget: updatedT,
 			updatedApplicator: applicator,
 		};
 	}

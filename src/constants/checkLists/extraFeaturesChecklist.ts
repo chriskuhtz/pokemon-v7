@@ -470,9 +470,12 @@ export const extraFeatureCheckList: {
 	{ name: 'Terrain Items (shovel, pickaxe) as Gym leader rewards' },
 	{ name: 'ev grind mode for challenge field' },
 	{ name: 'trainer with simple/costar combo' },
-	{ name: 'future and past distortions' },
 	{ name: 'random encounters' },
 	{ name: 'random evolutions' },
 	{ name: 'steven as the fossil protector' },
 	{ name: 'way to produce lucky eggs' },
+	{ name: 'catch streaks' },
+	{
+		name: 'upgrades for swarm radar (stronger pokemon, future and past distortions)',
+	},
 ];
