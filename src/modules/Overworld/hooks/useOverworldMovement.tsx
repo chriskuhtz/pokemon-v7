@@ -22,8 +22,15 @@ export const useOverworldMovement = (
 	encounterRateModifier: { factor: number }
 ) => {
 	const { saveFile } = useContext(SaveFileContext);
-	const { pokemon, quests, currentSwarm, campUpgrades, bag, activatedLure } =
-		saveFile;
+	const {
+		pokemon,
+		quests,
+		currentSwarm,
+		campUpgrades,
+		bag,
+		activatedLure,
+		catchStreak,
+	} = saveFile;
 	const { location: playerLocation, setLocation: setCharacterLocation } =
 		useContext(LocationContext);
 
@@ -88,7 +95,8 @@ export const useOverworldMovement = (
 				waterEncounter,
 				shinyFactor,
 				currentSwarm,
-				activatedLure
+				activatedLure,
+				catchStreak
 			),
 		};
 		const avgChallengerLevel =
@@ -107,6 +115,7 @@ export const useOverworldMovement = (
 		startEncounter(challenger);
 	}, [
 		activatedLure,
+		catchStreak,
 		currentSwarm,
 		encounterChance,
 		encounterRateModifier.factor,

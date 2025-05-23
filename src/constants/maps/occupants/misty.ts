@@ -72,7 +72,6 @@ const trainerMisty: OverworldTrainer = {
 		assignHeldItem: false,
 		assignLearnsetMoves: false,
 		assignNaturalAbility: false,
-		generateIvs: true,
 	},
 };
 const npcMisty: OverworldNpc = {

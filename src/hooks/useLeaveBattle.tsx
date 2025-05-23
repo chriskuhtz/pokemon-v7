@@ -21,6 +21,7 @@ import {
 } from '../interfaces/Inventory';
 import { isKeyItem, pickupTable } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { CatchStreak } from '../interfaces/SaveFile';
 import { LocationContext } from './LocationProvider';
 import { useReset } from './useReset';
 import { SaveFileContext } from './useSaveFile';
@@ -185,6 +186,7 @@ export const useLeaveBattle = () => {
 			};
 
 			let updatedSwarmRecord = [...saveFile.mileStones.caughtFromSwarms];
+			let updatedCatchStreak: CatchStreak | undefined = saveFile.catchStreak;
 
 			caughtPokemon.forEach((c) => {
 				if (
@@ -192,6 +194,27 @@ export const useLeaveBattle = () => {
 					c.name === saveFile.currentSwarm?.pokemon
 				) {
 					updatedSwarmRecord.push(c.name);
+				}
+				if (updatedCatchStreak && c.name !== updatedCatchStreak.pokemon) {
+					updatedCatchStreak = {
+						pokemon: c.name,
+						mapId: location.mapId,
+						streak: 1,
+					};
+				} else if (!updatedCatchStreak) {
+					updatedCatchStreak = {
+						pokemon: c.name,
+						mapId: location.mapId,
+						streak: 1,
+					};
+				} else if (
+					updatedCatchStreak &&
+					c.name === updatedCatchStreak.pokemon
+				) {
+					updatedCatchStreak = {
+						...updatedCatchStreak,
+						streak: updatedCatchStreak?.streak + 1,
+					};
 				}
 			});
 			updatedSwarmRecord = [...new Set(updatedSwarmRecord)];
@@ -269,6 +292,7 @@ export const useLeaveBattle = () => {
 					: saveFile.handledOccupants,
 				mileStones: updatedMileStones,
 				pokedex,
+				catchStreak: updatedCatchStreak,
 			});
 		},
 		[location, patchSaveFileReducer, saveFile, team]

@@ -4,6 +4,7 @@ import { IoMdMenu } from 'react-icons/io';
 import { LureIcon } from '../../../components/LureIcon/LureIcon';
 import { RepelIcon } from '../../../components/RepelIcon/RepelIcon';
 import { RocketIcon } from '../../../components/RocketIcon/RocketIcon';
+import { StreakIcon } from '../../../components/StreakIcon/StreakIcon';
 import { TeamOverview } from '../../../components/TeamOverview/TeamOverview';
 import { TimeOfDayIcon } from '../../../components/TimeOfDayIcon/TimeOfDayIcon';
 import { WeatherIcon } from '../../../components/WeatherIcon/WeatherIcon';
@@ -110,6 +111,7 @@ export const OverworldMenus = ({
 					backgroundColor: 'rgba(255,255,255,.6)',
 				}}
 			>
+				<StreakIcon />
 				<RocketIcon />
 				<RepelIcon />
 				<LureIcon />

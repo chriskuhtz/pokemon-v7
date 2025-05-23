@@ -127,7 +127,6 @@ export const champChris: OverworldTrainer = {
 		assignHeldItem: false,
 		assignLearnsetMoves: false,
 		assignNaturalAbility: false,
-		generateIvs: true,
 	},
 	conditionFunction: (s) =>
 		!s.handledOccupants.some((h) => h.id === 'champ-chris'),

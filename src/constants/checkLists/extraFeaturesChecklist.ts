@@ -443,7 +443,11 @@ export const extraFeatureCheckList: {
 	{ name: 'lower catchrate with level', handled: true },
 	{ name: 'quest categories', handled: true },
 	{ name: 'cynthia', handled: true },
-
+	{
+		name: 'catch streaks',
+		handled: true,
+	},
+	{ name: 'quests for longest streak' },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'progress bar for catch x quests' },
 	{ name: 'nicer ladder up sprite' },
@@ -466,7 +470,7 @@ export const extraFeatureCheckList: {
 	{ name: 'cave of shadows where you face yourself' },
 	{ name: 'eggs?' },
 	{ name: 'Fishing?' },
-	{ name: 'magma/aqua quests from looker' },
+	{ name: 'magma/aqua quests from Looker' },
 	{ name: 'Terrain Items (shovel, pickaxe) as Gym leader rewards' },
 	{ name: 'ev grind mode for challenge field' },
 	{ name: 'trainer with simple/costar combo' },
@@ -474,7 +478,7 @@ export const extraFeatureCheckList: {
 	{ name: 'random evolutions' },
 	{ name: 'steven as the fossil protector' },
 	{ name: 'way to produce lucky eggs' },
-	{ name: 'catch streaks' },
+
 	{
 		name: 'upgrades for swarm radar (stronger pokemon, future and past distortions)',
 	},

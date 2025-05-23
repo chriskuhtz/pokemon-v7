@@ -165,7 +165,7 @@ export const travellingMerchantRouteS1W1: Occupant[] =
 export const travellingMerchantRouteW1: Occupant[] = baseTravellingMerchant.map(
 	(h, i) => ({
 		...h,
-		x: 41 + i,
+		x: 34 + i,
 		y: 47,
 		conditionFunction: () => day === 5,
 	})

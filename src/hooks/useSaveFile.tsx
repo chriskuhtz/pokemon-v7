@@ -121,6 +121,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		[saveFile]
 	);
 
+	//handle side effects here
 	const setSaveFile = useCallback((u: SaveFile) => {
 		const update = { ...u };
 		const newTime = new Date().getTime();
@@ -130,6 +131,10 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		update.pokemon.forEach((p) => {
 			pokedex = addPokemonToDex(pokedex, p.name, p.caughtOnMap, true);
 		});
+
+		if ((update.catchStreak?.streak ?? 0) > (update.longestStreak ?? 0)) {
+			update.longestStreak = update.catchStreak?.streak;
+		}
 		s({
 			...update,
 			lastEdited: newTime,

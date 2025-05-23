@@ -111,7 +111,6 @@ const trainerGary: OverworldTrainer = {
 		assignHeldItem: false,
 		assignLearnsetMoves: false,
 		assignNaturalAbility: false,
-		generateIvs: true,
 	},
 };
 const npcGary: OverworldNpc = {

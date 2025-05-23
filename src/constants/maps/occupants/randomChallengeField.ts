@@ -60,7 +60,6 @@ export const randomChallengeFieldOccupants: OverworldMap['occupants'] = [
 				assignHeldItem: false,
 				assignLearnsetMoves: true,
 				assignNaturalAbility: true,
-				generateIvs: true,
 			},
 			conditionFunction: (s) => !s.handledOccupants.some((h) => h.id === id),
 			sprite: Object.values(SpriteEnum)[index],

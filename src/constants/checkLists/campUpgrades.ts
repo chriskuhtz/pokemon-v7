@@ -64,11 +64,6 @@ export type CampUpgradeCategory =
 	| 'Research'
 	| 'Training';
 
-export const baseRequirements: CampUpgrade[] = [
-	'bulletin_board',
-	'berry_farm',
-	'invite apricorn smith kurt',
-];
 export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
 	bulletin_board: 'Research',
 	berry_farm: 'Sustainability',
@@ -126,11 +121,18 @@ export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
 	'team slot 6': 'Exploration',
 	'dragonite taxi': 'Exploration',
 };
+
+export const baseRequirements: CampUpgrade[] = [
+	'bulletin_board',
+	'berry_farm',
+	'invite apricorn smith kurt',
+];
+
 export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	bulletin_board: [],
 	berry_farm: ['bulletin_board'],
-	'create seed vault': ['bulletin_board', 'berry_farm'],
-	'invite apricorn smith kurt': ['bulletin_board', 'berry_farm'],
+	'invite apricorn smith kurt': ['bulletin_board'],
+	'create seed vault': baseRequirements,
 	'invite move tutor': baseRequirements,
 	'invite effort value expert': ['invite move tutor', 'training field 1'],
 	'invite nature tutor': ['invite move tutor', 'training field 1'],

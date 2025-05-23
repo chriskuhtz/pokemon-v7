@@ -56,7 +56,6 @@ export const challengeFieldOccupants: OverworldMap['occupants'] = [
 				assignHeldItem: false,
 				assignLearnsetMoves: true,
 				assignNaturalAbility: true,
-				generateIvs: true,
 			},
 			conditionFunction: (s) =>
 				!s.handledOccupants.some((h) => h.id === id) &&

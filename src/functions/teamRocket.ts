@@ -224,7 +224,7 @@ export const createRocketOutbreak = (
 				assignLearnsetMoves: true,
 				assignNaturalAbility: true,
 				assignGender: true,
-				generateIvs: true,
+
 				assignHeldItem: true,
 			},
 			sprite: rocketNamesMale.includes(name)
