@@ -20,6 +20,9 @@ export const determineHighestDamage = (
 	terrain: BattleTerrain | undefined,
 	effects: BattleFieldEffect[]
 ): { actionName: ActionType; targetId: string } => {
+	if (targets.length === 0) {
+		return { actionName: 'LOAFING', targetId: attacker.id };
+	}
 	const mapped: { actionName: ActionType; targetId: string; damage: number }[] =
 		moves.flatMap((move) =>
 			targets.map((target) => ({
