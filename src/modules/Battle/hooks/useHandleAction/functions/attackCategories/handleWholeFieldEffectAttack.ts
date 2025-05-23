@@ -4,6 +4,7 @@ import { Message } from '../../../../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import { EmptyStatObject } from '../../../../../../interfaces/StatObject';
+import { BattleTerrain, TerrainObject } from '../../../useBattleTerrain';
 import { WeatherObject } from '../../../useBattleWeather';
 
 export const handleWholeFieldEffectAttack = ({
@@ -13,6 +14,7 @@ export const handleWholeFieldEffectAttack = ({
 	move: m,
 	setBattleWeather,
 	target,
+	setBattleTerrain,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
@@ -20,6 +22,8 @@ export const handleWholeFieldEffectAttack = ({
 	move: BattleAttack;
 	setBattleWeather: (x: WeatherObject) => void;
 	target: BattlePokemon;
+	battleTerrain?: BattleTerrain;
+	setBattleTerrain: (x: TerrainObject) => void;
 }): BattlePokemon[] => {
 	let updatedPokemon: BattlePokemon[] = [...pokemon];
 	const setPokemon = (input: BattlePokemon[]) => (updatedPokemon = input);
@@ -70,6 +74,16 @@ export const handleWholeFieldEffectAttack = ({
 			})
 		);
 		return updatedPokemon;
+	}
+
+	const terrainDuration = getHeldItem(attacker) === 'terrain-extender' ? 8 : 5;
+	if (move.name === 'grassy-terrain') {
+		addMessage({ message: `${attacker.name} spreads grassy terrain` });
+		setBattleTerrain({ type: 'grassy', duration: terrainDuration });
+	}
+	if (move.name === 'misty-terrain') {
+		addMessage({ message: `${attacker.name} spreads misty terrain` });
+		setBattleTerrain({ type: 'misty', duration: terrainDuration });
 	}
 
 	//updated Target

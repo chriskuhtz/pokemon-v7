@@ -1,7 +1,7 @@
 import { useFetch } from '@potfisch-industries-npm/usefetch';
 import { useContext, useEffect, useState } from 'react';
 import { IoMdInformationCircleOutline } from 'react-icons/io';
-import { AbilityName } from '../../constants/checkLists/abilityCheckList';
+import { AbilityName } from '../../constants/checkLists/completed/abilityCheckList';
 import { battleSpriteSize } from '../../constants/gameData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { AbilityDto } from '../../interfaces/AbilityDto';

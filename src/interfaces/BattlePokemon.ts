@@ -1,4 +1,4 @@
-import { AbilityName } from '../constants/checkLists/abilityCheckList';
+import { AbilityName } from '../constants/checkLists/completed/abilityCheckList';
 import { MoveName } from '../constants/checkLists/movesCheckList';
 import { SecondaryAilment } from './Ailment';
 import { BattleAction, BattleAttack } from './BattleActions';

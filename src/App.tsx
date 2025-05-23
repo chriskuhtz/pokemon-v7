@@ -3,7 +3,6 @@ import { Sprite } from './components/Sprite/Sprite';
 import { MapId } from './constants/maps/mapsRecord';
 import { MessageQueueContext } from './hooks/useMessageQueue';
 import { SaveFileContext } from './hooks/useSaveFile';
-import { generateInventory, Inventory } from './interfaces/Inventory';
 import { OwnedPokemon } from './interfaces/OwnedPokemon';
 import { mapMakerRoutes } from './interfaces/Routing';
 import { SpriteEnum } from './interfaces/SpriteEnum';
@@ -23,9 +22,7 @@ import { Farm } from './modules/Farm/Farm';
 import { FossilReviver } from './modules/FossilReviver/FossilReviver';
 import { MainMenu } from './modules/MainMenu/MainMenu';
 import { MapMaker } from './modules/MapMaker/MapMaker';
-import { BuyMarket } from './modules/Market/BuyMarket';
 import { Market } from './modules/Market/Market';
-import { SellMarket } from './modules/Market/SellMarket';
 import { MiltankFarm } from './modules/MiltankFarm/MiltankFarm';
 import { MoveTutor } from './modules/MoveTutor/MoveTutor';
 import { NatureTutor } from './modules/NatureTutor/NatureTutor';
@@ -38,6 +35,7 @@ import { Settings } from './modules/Settings/Settings';
 import { SpriteSelection } from './modules/SpriteSelection/SpriteSelection';
 import { StarterSelection } from './modules/StarterSelection/StarterSelection';
 import { StorageChest } from './modules/StorageChest/StorageChest';
+import { SwarmRadar } from './modules/SwarmRadar/SwarmRadar';
 import { Team } from './modules/Team/Team';
 import { TrainingField } from './modules/TrainingField/TrainingField';
 import { TravellingMerchant } from './modules/TravellingMerchant/TravellingMerchant';
@@ -82,17 +80,12 @@ export const FullScreenToggle = () => {
 export const App = (): JSX.Element => {
 	const { latestMessage, addMessage, addMultipleMessages } =
 		useContext(MessageQueueContext);
-	const [currentMarketInventory, setCurrentMarketInventory] = useState<
-		Partial<Inventory>
-	>({});
+
 	const {
 		saveFile,
 		setActiveTabReducer,
-		sellItemReducer,
-		buyItemReducer,
 		setPokemonReducer,
 		patchSaveFileReducer,
-		navigateAwayFromOverworldReducer,
 		changeHeldItemReducer,
 	} = useContext(SaveFileContext);
 
@@ -100,7 +93,6 @@ export const App = (): JSX.Element => {
 		meta: { activeTab, currentChallenger },
 		bag: inventory,
 		pokemon,
-		money,
 	} = saveFile;
 
 	const team = useMemo(() => pokemon.filter((p) => p.onTeam), [pokemon]);
@@ -197,26 +189,7 @@ export const App = (): JSX.Element => {
 	if (activeTab === 'STORAGE') {
 		return <PokemonStorage goBack={() => setActiveTabReducer('OVERWORLD')} />;
 	}
-	if (activeTab === 'BUY_MARKET') {
-		return (
-			<BuyMarket
-				buyItem={buyItemReducer}
-				money={money}
-				goBack={() => setActiveTabReducer('MARKET')}
-				inventory={generateInventory(currentMarketInventory)}
-				owned={inventory}
-			/>
-		);
-	}
-	if (activeTab === 'SELL_MARKET') {
-		return (
-			<SellMarket
-				goBack={() => setActiveTabReducer('MARKET')}
-				inventory={inventory}
-				sellItem={sellItemReducer}
-			/>
-		);
-	}
+
 	if (activeTab === 'FARM') {
 		return <Farm />;
 	}
@@ -271,6 +244,9 @@ export const App = (): JSX.Element => {
 	if (activeTab === 'ABILITY_TUTOR') {
 		return <AbilityTutor />;
 	}
+	if (activeTab === 'SWARM_RADAR') {
+		return <SwarmRadar />;
+	}
 	if (activeTab === 'DRAGONITE_TAXI') {
 		return <DragoniteTaxi />;
 	}
@@ -292,14 +268,7 @@ export const App = (): JSX.Element => {
 		);
 	}
 
-	return (
-		<Overworld
-			goToMarket={(i, steps) => {
-				navigateAwayFromOverworldReducer('MARKET', steps);
-				setCurrentMarketInventory(i);
-			}}
-		/>
-	);
+	return <Overworld />;
 };
 
 const Intro = ({

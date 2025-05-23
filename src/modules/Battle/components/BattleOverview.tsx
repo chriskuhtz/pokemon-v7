@@ -106,6 +106,7 @@ export const BattleOverview = ({
 			addMessage={addMessage}
 			addMultipleMessages={addMultipleMessages}
 			challengerId={trainer?.name}
+			spriteGeneration={trainer?.spriteGeneration}
 		/>
 	);
 };

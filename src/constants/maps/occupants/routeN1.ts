@@ -6,7 +6,9 @@ import { barryN1 } from './barry';
 import { cynthiaN1 } from './cynthia';
 import { erika } from './erika';
 import { giovanni } from './giovanni';
+import { hughN1 } from './hugh';
 import { nN1 } from './n';
+import { redN1 } from './red';
 import { silverN1 } from './silver';
 
 export const routeN1Occupants: OverworldMap['occupants'] = [
@@ -275,6 +277,7 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 	silverN1,
 	cynthiaN1,
 	nN1,
+	hughN1,
 	{
 		type: 'SIGN',
 		x: 33,
@@ -289,4 +292,5 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		],
 		conditionFunction: () => true,
 	},
+	redN1,
 ];

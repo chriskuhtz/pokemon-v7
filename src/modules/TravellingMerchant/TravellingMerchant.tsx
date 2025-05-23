@@ -1,6 +1,15 @@
 import { useCallback, useContext, useMemo } from 'react';
 import { ItemInfoButton } from '../../components/ItemInfoButton/ItemInfoButton';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
+import {
+	isFriday,
+	isMonday,
+	isSaturday,
+	isSunday,
+	isThursday,
+	isTuesday,
+	isWednesday,
+} from '../../functions/isXDay';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
@@ -116,14 +125,12 @@ const baseTravellingMerchant: Occupant[] = [
 	},
 ];
 
-const day = new Date().getDay();
-
 export const travellingMerchantRouteN1: Occupant[] = baseTravellingMerchant.map(
 	(h, i) => ({
 		...h,
 		x: 38 + i,
 		y: 35,
-		conditionFunction: () => day === 0,
+		conditionFunction: () => isSunday(),
 	})
 );
 
@@ -132,7 +139,7 @@ export const travellingMerchantRouteN1E1: Occupant[] =
 		...h,
 		x: 10 + i,
 		y: 2,
-		conditionFunction: () => day === 1,
+		conditionFunction: () => isMonday(),
 	}));
 
 export const travellingMerchantRouteE1: Occupant[] = baseTravellingMerchant.map(
@@ -140,7 +147,7 @@ export const travellingMerchantRouteE1: Occupant[] = baseTravellingMerchant.map(
 		...h,
 		x: 32 + i,
 		y: 5,
-		conditionFunction: () => day === 2,
+		conditionFunction: () => isTuesday(),
 	})
 );
 
@@ -149,7 +156,7 @@ export const travellingMerchantRouteS1E1: Occupant[] =
 		...h,
 		x: 16 + i,
 		y: 8,
-		conditionFunction: () => day === 3,
+		conditionFunction: () => isWednesday(),
 	}));
 
 export const travellingMerchantRouteS1W1: Occupant[] =
@@ -157,7 +164,7 @@ export const travellingMerchantRouteS1W1: Occupant[] =
 		...h,
 		x: 25 + i,
 		y: 22,
-		conditionFunction: () => day === 4,
+		conditionFunction: () => isThursday(),
 	}));
 
 export const travellingMerchantRouteW1: Occupant[] = baseTravellingMerchant.map(
@@ -165,7 +172,7 @@ export const travellingMerchantRouteW1: Occupant[] = baseTravellingMerchant.map(
 		...h,
 		x: 34 + i,
 		y: 47,
-		conditionFunction: () => day === 5,
+		conditionFunction: () => isFriday(),
 	})
 );
 
@@ -174,5 +181,5 @@ export const travellingMerchantRouteN1W1: Occupant[] =
 		...h,
 		x: 37 + i,
 		y: 38,
-		conditionFunction: () => day === 6,
+		conditionFunction: () => isSaturday(),
 	}));

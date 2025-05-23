@@ -2145,31 +2145,93 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/566/',
 		handled: true,
 	},
-	{ name: 'trick-or-treat', url: 'https://pokeapi.co/api/v2/move/567/' },
-	{ name: 'noble-roar', url: 'https://pokeapi.co/api/v2/move/568/' },
-	{ name: 'ion-deluge', url: 'https://pokeapi.co/api/v2/move/569/' },
-	{ name: 'parabolic-charge', url: 'https://pokeapi.co/api/v2/move/570/' },
-	{ name: 'forests-curse', url: 'https://pokeapi.co/api/v2/move/571/' },
-	{ name: 'petal-blizzard', url: 'https://pokeapi.co/api/v2/move/572/' },
-	{ name: 'freeze-dry', url: 'https://pokeapi.co/api/v2/move/573/' },
-	{ name: 'disarming-voice', url: 'https://pokeapi.co/api/v2/move/574/' },
-	{ name: 'parting-shot', url: 'https://pokeapi.co/api/v2/move/575/' },
-	{ name: 'topsy-turvy', url: 'https://pokeapi.co/api/v2/move/576/' },
-	{ name: 'draining-kiss', url: 'https://pokeapi.co/api/v2/move/577/' },
-	{ name: 'crafty-shield', url: 'https://pokeapi.co/api/v2/move/578/' },
-	{ name: 'flower-shield', url: 'https://pokeapi.co/api/v2/move/579/' },
-	{ name: 'grassy-terrain', url: 'https://pokeapi.co/api/v2/move/580/' },
-	{ name: 'misty-terrain', url: 'https://pokeapi.co/api/v2/move/581/' },
-	{ name: 'electrify', url: 'https://pokeapi.co/api/v2/move/582/' },
-	{ name: 'play-rough', url: 'https://pokeapi.co/api/v2/move/583/' },
-	{ name: 'boomburst', url: 'https://pokeapi.co/api/v2/move/586/' },
-	{ name: 'fairy-lock', url: 'https://pokeapi.co/api/v2/move/587/' },
-	{ name: 'kings-shield', url: 'https://pokeapi.co/api/v2/move/588/' },
-	{ name: 'play-nice', url: 'https://pokeapi.co/api/v2/move/589/' },
-	{ name: 'confide', url: 'https://pokeapi.co/api/v2/move/590/' },
-	{ name: 'diamond-storm', url: 'https://pokeapi.co/api/v2/move/591/' },
-	{ name: 'steam-eruption', url: 'https://pokeapi.co/api/v2/move/592/' },
-	{ name: 'hyperspace-hole', url: 'https://pokeapi.co/api/v2/move/593/' },
+
+	{
+		name: 'noble-roar',
+		url: 'https://pokeapi.co/api/v2/move/568/',
+		handled: true,
+	},
+
+	{
+		name: 'parabolic-charge',
+		url: 'https://pokeapi.co/api/v2/move/570/',
+		handled: true,
+	},
+
+	{
+		name: 'petal-blizzard',
+		url: 'https://pokeapi.co/api/v2/move/572/',
+		handled: true,
+	},
+	{
+		name: 'freeze-dry',
+		url: 'https://pokeapi.co/api/v2/move/573/',
+		handled: true,
+	},
+	{
+		name: 'disarming-voice',
+		url: 'https://pokeapi.co/api/v2/move/574/',
+		handled: true,
+	},
+
+	{
+		name: 'topsy-turvy',
+		url: 'https://pokeapi.co/api/v2/move/576/',
+		handled: true,
+	},
+	{
+		name: 'draining-kiss',
+		url: 'https://pokeapi.co/api/v2/move/577/',
+		handled: true,
+	},
+
+	{
+		name: 'grassy-terrain',
+		url: 'https://pokeapi.co/api/v2/move/580/',
+		handled: true,
+	},
+	{
+		name: 'misty-terrain',
+		url: 'https://pokeapi.co/api/v2/move/581/',
+		handled: true,
+	},
+
+	{
+		name: 'play-rough',
+		url: 'https://pokeapi.co/api/v2/move/583/',
+		handled: true,
+	},
+	{
+		name: 'boomburst',
+		url: 'https://pokeapi.co/api/v2/move/586/',
+		handled: true,
+	},
+
+	{
+		name: 'play-nice',
+		url: 'https://pokeapi.co/api/v2/move/589/',
+		handled: true,
+	},
+	{
+		name: 'confide',
+		url: 'https://pokeapi.co/api/v2/move/590/',
+		handled: true,
+	},
+	{
+		name: 'diamond-storm',
+		url: 'https://pokeapi.co/api/v2/move/591/',
+		handled: true,
+	},
+	{
+		name: 'steam-eruption',
+		url: 'https://pokeapi.co/api/v2/move/592/',
+		handled: true,
+	},
+	{
+		name: 'hyperspace-hole',
+		url: 'https://pokeapi.co/api/v2/move/593/',
+		handled: true,
+	},
 	{ name: 'water-shuriken', url: 'https://pokeapi.co/api/v2/move/594/' },
 	{ name: 'mystical-fire', url: 'https://pokeapi.co/api/v2/move/595/' },
 	{ name: 'spiky-shield', url: 'https://pokeapi.co/api/v2/move/596/' },
@@ -2622,6 +2684,15 @@ export const movesCheckList: {
 	{ name: 'flying-press', url: 'https://pokeapi.co/api/v2/move/560/' },
 	{ name: 'mat-block', url: 'https://pokeapi.co/api/v2/move/561/' },
 	{ name: 'rototiller', url: 'https://pokeapi.co/api/v2/move/563/' },
+	{ name: 'trick-or-treat', url: 'https://pokeapi.co/api/v2/move/567/' },
+	{ name: 'ion-deluge', url: 'https://pokeapi.co/api/v2/move/569/' },
+	{ name: 'forests-curse', url: 'https://pokeapi.co/api/v2/move/571/' },
+	{ name: 'parting-shot', url: 'https://pokeapi.co/api/v2/move/575/' },
+	{ name: 'crafty-shield', url: 'https://pokeapi.co/api/v2/move/578/' },
+	{ name: 'flower-shield', url: 'https://pokeapi.co/api/v2/move/579/' },
+	{ name: 'electrify', url: 'https://pokeapi.co/api/v2/move/582/' },
+	{ name: 'fairy-lock', url: 'https://pokeapi.co/api/v2/move/587/' },
+	{ name: 'kings-shield', url: 'https://pokeapi.co/api/v2/move/588/' },
 ];
 
 export const handledMoves = [
@@ -3105,6 +3176,21 @@ export const handledMoves = [
 	'toxic-spikes',
 	'fell-stinger',
 	'phantom-force',
+	'noble-roar',
+	'parabolic-charge',
+	'petal-blizzard',
+	'freeze-dry',
+	'disarming-voice',
+	'topsy-turvy',
+	'grassy-terrain',
+	'misty-terrain',
+	'play-rough',
+	'boomburst',
+	'play-nice',
+	'confide',
+	'diamond-storm',
+	'steam-eruption',
+	'hyperspace-hole',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

@@ -1,5 +1,5 @@
 import { v4 } from 'uuid';
-import { calculateLevelData } from '../../functions/calculateLevelData';
+import { calculateLevelData } from '../functions/calculateLevelData';
 import {
 	tier1trainers,
 	tier2trainers,
@@ -7,42 +7,44 @@ import {
 	tier4trainers,
 	tier5trainers,
 	trainers,
-} from '../../functions/makeRandomTrainer';
-import { sumOfIvs } from '../../functions/sumOfIvs';
-import { honeyPokemon } from '../../hooks/useHoneyTree';
-import { Inventory } from '../../interfaces/Inventory';
+} from '../functions/makeRandomTrainer';
+import { sumOfIvs } from '../functions/sumOfIvs';
+import { honeyPokemon } from '../hooks/useHoneyTree';
+
+import { Inventory } from '../interfaces/Inventory';
 import {
 	apricorns,
 	apricornTable,
 	berries,
 	fossilTable,
-} from '../../interfaces/Item';
-import { getRandomNature } from '../../interfaces/Natures';
-import { Quest } from '../../interfaces/Quest';
+} from '../interfaces/Item';
+import { getRandomNature } from '../interfaces/Natures';
+import { Quest } from '../interfaces/Quest';
 import {
 	EmptyStatObject,
 	generateRandomStatObject,
-} from '../../interfaces/StatObject';
-import { moveUnlockPayments } from '../../modules/MoveTutor/MoveTutor';
-import { sledgeHammerPokemon } from '../../modules/Overworld/hooks/useSledgeHammer';
-import {
-	highBstPokemon,
-	lowBstPokemon,
-	midBstPokemon,
-} from '../baseStatRecord';
-import { catchQuests } from '../generatedQuests/catchQuests';
-import { travellingTrainerQuests } from '../generatedQuests/travellingTrainersQuests';
-import { typeCatchQuests } from '../generatedQuests/typeCatchQuests';
-import { caveW1Encounters } from '../maps/encounters/caveW1';
-import { onixCaveEncounters } from '../maps/encounters/onixCave';
-import { allRocketCampTrainersDefeated } from '../maps/occupants/rocketCampOccupants';
-import { routeS1 } from '../maps/routeS1';
-import { PokemonName, pokemonNames } from '../pokemonNames';
+} from '../interfaces/StatObject';
+import { moveUnlockPayments } from '../modules/MoveTutor/MoveTutor';
+import { sledgeHammerPokemon } from '../modules/Overworld/hooks/useSledgeHammer';
+import { highBstPokemon, lowBstPokemon, midBstPokemon } from './baseStatRecord';
 import {
 	campUpgradeCategories,
 	campUpgradeCostScale,
 	campUpgradeNames,
 } from './campUpgrades';
+import { catchQuests } from './generatedQuests/catchQuests';
+import { travellingTrainerQuests } from './generatedQuests/travellingTrainersQuests';
+import { typeCatchQuests } from './generatedQuests/typeCatchQuests';
+import { caveW1Encounters } from './maps/encounters/caveW1';
+import { onixCaveEncounters } from './maps/encounters/onixCave';
+import { allRocketCampTrainersDefeated } from './maps/occupants/rocketCampOccupants';
+import { routeS1 } from './maps/routeS1';
+import { PokemonName, pokemonNames } from './pokemonNames';
+import {
+	futureDistortionMons,
+	pastDistortionMons,
+	spaceDistortionMons,
+} from './swarmOptions';
 
 const expCandyPackage: Partial<Inventory> = {
 	'exp-candy-xs': 10,
@@ -167,6 +169,15 @@ export const questNames = [
 	'catch all EVENING-time pokemon from routeS1E1',
 	'catch all NIGHT-time pokemon from routeS1E1',
 	'catch a ultra-rare pokemon from routeS1E1',
+	'catch a MORNING-time exclusive pokemon from routeS1',
+	'catch a DAY-time exclusive pokemon from routeS1',
+	'catch a EVENING-time exclusive pokemon from routeS1',
+	'catch a NIGHT-time exclusive pokemon from routeS1',
+	'catch all MORNING-time pokemon from routeS1',
+	'catch all DAY-time pokemon from routeS1',
+	'catch all EVENING-time pokemon from routeS1',
+	'catch all NIGHT-time pokemon from routeS1',
+	'catch a ultra-rare pokemon from routeS1',
 	'catch a MORNING-time exclusive pokemon from routeS1W1',
 	'catch a DAY-time exclusive pokemon from routeS1W1',
 	'catch a EVENING-time exclusive pokemon from routeS1W1',
@@ -412,11 +423,29 @@ export const questNames = [
 	'defeat trainer n at lvl 60 or higher',
 	'defeat trainer n at lvl 80 or higher',
 	'defeat trainer n at lvl 100',
+	'defeat trainer red',
+	'defeat trainer red at lvl 20 or higher',
+	'defeat trainer red at lvl 40 or higher',
+	'defeat trainer red at lvl 60 or higher',
+	'defeat trainer red at lvl 80 or higher',
+	'defeat trainer red at lvl 100',
+	'defeat trainer hugh',
+	'defeat trainer hugh at lvl 20 or higher',
+	'defeat trainer hugh at lvl 40 or higher',
+	'defeat trainer hugh at lvl 60 or higher',
+	'defeat trainer hugh at lvl 80 or higher',
+	'defeat trainer hugh at lvl 100',
 	'achieve a catch streak of 3',
 	'achieve a catch streak of 10',
 	'achieve a catch streak of 15',
 	'achieve a catch streak of 20',
 	'achieve a catch streak of 31',
+	'catch a future distortion pokemon',
+	'catch all future distortion pokemon',
+	'catch a past distortion pokemon',
+	'catch all past distortion pokemon',
+	'catch a space distortion pokemon',
+	'catch all space distortion pokemon',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -850,6 +879,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'red-apricorn': 1,
 			'white-apricorn': 1,
 			'yellow-apricorn': 1,
+			'orange-apricorn': 1,
 		},
 		researchPoints: 10,
 		requiredUpgrade: 'invite apricorn smith kurt',
@@ -1226,6 +1256,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'red-apricorn': 1,
 			'white-apricorn': 1,
 			'yellow-apricorn': 1,
+			'orange-apricorn': 1,
 		},
 		researchPoints: 10,
 		availableAfter: 'craft a apricorn ball',
@@ -1243,6 +1274,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'pink-apricorn': 1,
 			'red-apricorn': 1,
 			'white-apricorn': 1,
+			'orange-apricorn': 1,
 		},
 		researchPoints: 50,
 		availableAfter: 'catch a pokemon in an apricorn ball',
@@ -3232,6 +3264,66 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 100,
 		conditionFunction: (s) => (s.longestStreak ?? 0) >= 31,
 		progress: (s) => ({ goal: 31, current: s.longestStreak ?? 0 }),
+	},
+	'catch a future distortion pokemon': {
+		kind: 'BULLETIN',
+		category: 'RESEARCH',
+		targetPokemon: futureDistortionMons,
+		rewardItems: { 'rare-candy': 3, 'quick-ball': 5 },
+		researchPoints: 25,
+		requiredUpgrade: 'time distortion radar',
+		conditionFunction: (s) =>
+			futureDistortionMons.some((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+	},
+	'catch a past distortion pokemon': {
+		kind: 'BULLETIN',
+		category: 'RESEARCH',
+		targetPokemon: pastDistortionMons,
+		rewardItems: { 'rare-candy': 3, 'quick-ball': 5 },
+		researchPoints: 25,
+		requiredUpgrade: 'time distortion radar',
+		conditionFunction: (s) =>
+			pastDistortionMons.some((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+	},
+	'catch all future distortion pokemon': {
+		kind: 'BULLETIN',
+		category: 'RESEARCH',
+		targetPokemon: futureDistortionMons,
+		rewardItems: { 'rare-candy': 10, 'quick-ball': 20 },
+		researchPoints: 100,
+		requiredUpgrade: 'time distortion radar',
+		conditionFunction: (s) =>
+			futureDistortionMons.every((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+	},
+	'catch all past distortion pokemon': {
+		kind: 'BULLETIN',
+		category: 'RESEARCH',
+		targetPokemon: pastDistortionMons,
+		rewardItems: { 'rare-candy': 10, 'quick-ball': 20 },
+		researchPoints: 100,
+		requiredUpgrade: 'time distortion radar',
+		conditionFunction: (s) =>
+			pastDistortionMons.every((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+	},
+	'catch a space distortion pokemon': {
+		kind: 'BULLETIN',
+		category: 'RESEARCH',
+		targetPokemon: spaceDistortionMons,
+		rewardItems: { 'rare-candy': 3, 'quick-ball': 5 },
+		researchPoints: 25,
+		requiredUpgrade: 'space distortion radar',
+		conditionFunction: (s) =>
+			spaceDistortionMons.some((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+	},
+	'catch all space distortion pokemon': {
+		kind: 'BULLETIN',
+		category: 'RESEARCH',
+		targetPokemon: spaceDistortionMons,
+		rewardItems: { 'rare-candy': 10, 'quick-ball': 20 },
+		researchPoints: 100,
+		requiredUpgrade: 'space distortion radar',
+		conditionFunction: (s) =>
+			spaceDistortionMons.every((f) => s.pokedex[f].caughtOnRoutes.length > 0),
 	},
 } as Record<QuestName, Quest>;
 

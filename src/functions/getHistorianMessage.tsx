@@ -1,6 +1,7 @@
+import { isOddDay, isSunday } from './isXDay';
+
 export const getHistorianMessage = (): string[] => {
-	const day = new Date().getDay();
-	if (day === 0) {
+	if (isSunday()) {
 		return [
 			'Legends say that a cute but extremely powerful pokemon',
 			'is sometimes seen during the day in the center of orenji forest',
@@ -9,7 +10,7 @@ export const getHistorianMessage = (): string[] => {
 			'come back tomorrow for a different tale',
 		];
 	}
-	if (day % 2 === 1) {
+	if (isOddDay()) {
 		return [
 			'Legends say, The Bird of Fire might appear',
 			'at night, in a cave nearby',

@@ -2,7 +2,7 @@ import { useFetch } from '@potfisch-industries-npm/usefetch';
 import {
 	AbilityName,
 	abilityNames,
-} from '../constants/checkLists/abilityCheckList';
+} from '../constants/checkLists/completed/abilityCheckList';
 import { MoveName } from '../constants/checkLists/movesCheckList';
 import { nameToIdMap } from '../constants/pokemonNames';
 import { calculateLevelData } from '../functions/calculateLevelData';

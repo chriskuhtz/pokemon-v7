@@ -1,5 +1,5 @@
 import { HIDDEN_STATS } from '../components/OwnedPokemonCard/components/StatDisplay';
-import { AbilityName } from '../constants/checkLists/abilityCheckList';
+import { AbilityName } from '../constants/checkLists/completed/abilityCheckList';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { ItemType } from '../interfaces/Item';

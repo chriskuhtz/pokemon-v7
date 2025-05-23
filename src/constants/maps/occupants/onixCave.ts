@@ -1,9 +1,5 @@
 import { OverworldMap } from '../../../interfaces/OverworldMap';
-import { barryOnixCave } from './barry';
 import { brock } from './brock';
-import { cynthiaOnixCave } from './cynthia';
-import { nOnixCave } from './n';
-import { silverOnixCave } from './silver';
 
 export const onixCaveOccupants: OverworldMap['occupants'] = [
 	{
@@ -97,8 +93,4 @@ export const onixCaveOccupants: OverworldMap['occupants'] = [
 			!s.handledOccupants.some((h) => h.id === 'onixCave_fossil'),
 	},
 	...brock,
-	barryOnixCave,
-	silverOnixCave,
-	cynthiaOnixCave,
-	nOnixCave,
 ];

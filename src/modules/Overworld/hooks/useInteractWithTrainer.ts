@@ -25,10 +25,12 @@ export const useInteractWithTrainer = () => {
 										id: trainer.id,
 										inventory: EmptyInventory,
 										type: 'TRAINER',
+
 										trainer: {
 											name: trainer.name,
 											sprite: trainer.sprite,
 											profilePicture: trainer.profilePicture,
+											spriteGeneration: trainer.spriteGeneration,
 										},
 									},
 								},

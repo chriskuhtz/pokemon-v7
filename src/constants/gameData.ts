@@ -7,9 +7,9 @@ import {
 	SaveFile,
 } from '../interfaces/SaveFile';
 import { EmptyStatObject } from '../interfaces/StatObject';
-import { CampUpgrade, campUpgradeNames } from './checkLists/campUpgrades';
-import { QuestName, QuestsRecord } from './checkLists/questsRecord';
+import { CampUpgrade, campUpgradeNames } from './campUpgrades';
 import { pokemonNames } from './pokemonNames';
+import { QuestName, QuestsRecord } from './questsRecord';
 
 export const frames = 16;
 export const fps = 1000 / frames;

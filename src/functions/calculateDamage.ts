@@ -1,4 +1,4 @@
-import { AbilityName } from '../constants/checkLists/abilityCheckList';
+import { AbilityName } from '../constants/checkLists/completed/abilityCheckList';
 import { isContactMove } from '../constants/contactMoves';
 import {
 	fixedDamageMoves,

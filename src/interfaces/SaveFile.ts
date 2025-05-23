@@ -1,7 +1,7 @@
-import { CampUpgrade } from '../constants/checkLists/campUpgrades';
-import { QuestName } from '../constants/checkLists/questsRecord';
+import { CampUpgrade } from '../constants/campUpgrades';
 import { MapId } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
+import { QuestName } from '../constants/questsRecord';
 import { BadgeName } from './Badge';
 import { Challenger } from './Challenger';
 import { Inventory } from './Inventory';
@@ -66,12 +66,14 @@ export interface BerryBush {
 	id: string;
 }
 
+export type DistortionType = 'FUTURE' | 'PAST' | 'SPACE';
 export interface PokemonSwarm {
 	pokemon: PokemonName;
 	leavesAt: number;
 	route: MapId;
 	xpMin: number;
 	xpMax: number;
+	type?: DistortionType;
 }
 
 export type Pokedex = Record<
@@ -137,6 +139,8 @@ export interface SaveFile {
 		silverDefeatedAt?: number;
 		cynthiaDefeatedAt?: number;
 		nDefeatedAt?: number;
+		redDefeatedAt?: number;
+		hughDefeatedAt?: number;
 	};
 	farm: {
 		plants: BerryBush[];
@@ -147,7 +151,8 @@ export interface SaveFile {
 	zigzagoonReadyAt?: number;
 	miltankReadyAt?: number;
 	currentSwarm?: PokemonSwarm;
-	nextSwarmReadyAt?: number;
+	currentStrongSwarm?: PokemonSwarm;
+	currentDistortionSwarm?: PokemonSwarm;
 	rangerLevel?: number;
 	currentRocketOperation?: { route: MapId; trainers: OverworldTrainer[] };
 	rocketOperation?: { route: MapId; trainers: OverworldTrainer[] };

@@ -211,6 +211,9 @@ export const determineTypeFactor = (
 	) {
 		return 1;
 	}
+	if (attack.name === 'freeze-dry' && targetTypes.includes('water')) {
+		res *= 2;
+	}
 
 	if (res === 0) {
 		if (addMessage) {

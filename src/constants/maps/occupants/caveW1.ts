@@ -1,5 +1,7 @@
 import { getTimeOfDay } from '../../../functions/getTimeOfDay';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
+import { hughcaveW1 } from './hugh';
+import { redcaveW1 } from './red';
 
 export const caveW1Occupants: OverworldMap['occupants'] = [
 	{
@@ -127,4 +129,6 @@ export const caveW1Occupants: OverworldMap['occupants'] = [
 			s.campUpgrades['invite historian'],
 		id: 'routeW1_moltres',
 	},
+	redcaveW1,
+	hughcaveW1,
 ];

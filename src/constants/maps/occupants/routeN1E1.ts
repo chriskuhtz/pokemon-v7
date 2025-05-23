@@ -5,8 +5,10 @@ import { routeN1E1Lure } from '../../../modules/BerryLure/BerryLure';
 import { travellingMerchantRouteN1E1 } from '../../../modules/TravellingMerchant/TravellingMerchant';
 import { barryN1E1 } from './barry';
 import { cynthiaN1E1 } from './cynthia';
+import { hughN1E1 } from './hugh';
 import { janine } from './janine';
 import { nN1E1 } from './n';
+import { redN1E1 } from './red';
 import { silverN1E1 } from './silver';
 
 export const routeN1E1Occupants: OverworldMap['occupants'] = [
@@ -198,4 +200,6 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 	silverN1E1,
 	cynthiaN1E1,
 	nN1E1,
+	redN1E1,
+	hughN1E1,
 ];

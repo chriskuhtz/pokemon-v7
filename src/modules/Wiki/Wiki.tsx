@@ -2,7 +2,7 @@ import { useFetch } from '@potfisch-industries-npm/usefetch';
 import { useContext, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { GoLightBulb } from 'react-icons/go';
-import { abilityNames } from '../../constants/checkLists/abilityCheckList';
+import { abilityNames } from '../../constants/checkLists/completed/abilityCheckList';
 import { handledMoves } from '../../constants/checkLists/movesCheckList';
 import { battleSpriteSize } from '../../constants/gameData';
 import { SaveFileContext } from '../../hooks/useSaveFile';

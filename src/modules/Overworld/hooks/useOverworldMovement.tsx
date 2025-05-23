@@ -30,6 +30,8 @@ export const useOverworldMovement = (
 		bag,
 		activatedLure,
 		catchStreak,
+		currentDistortionSwarm,
+		currentStrongSwarm,
 	} = saveFile;
 	const { location: playerLocation, setLocation: setCharacterLocation } =
 		useContext(LocationContext);
@@ -94,9 +96,11 @@ export const useOverworldMovement = (
 				quests,
 				waterEncounter,
 				shinyFactor,
-				currentSwarm,
 				activatedLure,
-				catchStreak
+				catchStreak,
+				currentSwarm,
+				currentStrongSwarm,
+				currentDistortionSwarm
 			),
 		};
 		const avgChallengerLevel =
@@ -116,6 +120,8 @@ export const useOverworldMovement = (
 	}, [
 		activatedLure,
 		catchStreak,
+		currentDistortionSwarm,
+		currentStrongSwarm,
 		currentSwarm,
 		encounterChance,
 		encounterRateModifier.factor,

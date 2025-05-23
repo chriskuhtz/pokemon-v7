@@ -1,5 +1,14 @@
 import { getRandomEntry } from '../../../functions/filterTargets';
 import { getHighestXpOnTeam } from '../../../functions/getHighestXpOnTeam';
+import {
+	isFriday,
+	isMonday,
+	isSaturday,
+	isSunday,
+	isThursday,
+	isTuesday,
+	isWednesday,
+} from '../../../functions/isXDay';
 import { makeChallengerPokemon } from '../../../functions/makeChallengerPokemon';
 import { Occupant, OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
@@ -322,42 +331,41 @@ const silver: OverworldTrainer = {
 	},
 };
 
-const day = new Date().getDay();
-
 export const silverN1: Occupant = {
 	...silver,
 	x: 39,
 	y: 40,
 	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== silverId) && day === 2,
+		s.handledOccupants.every((h) => h.id !== silverId) && isTuesday(),
 };
 export const silverN1E1: Occupant = {
 	...silver,
 	x: 47,
 	y: 2,
 	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== silverId) && day === 3,
+		s.handledOccupants.every((h) => h.id !== silverId) && isWednesday(),
 };
 export const silverE1: Occupant = {
 	...silver,
 	x: 32,
 	y: 23,
 	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== silverId) && day === 4,
+		s.handledOccupants.every((h) => h.id !== silverId) && isThursday(),
 };
 export const silverS1E1: Occupant = {
 	...silver,
 	x: 17,
 	y: 10,
 	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== silverId) && day === 5,
+		s.handledOccupants.every((h) => h.id !== silverId) && isFriday(),
 };
-export const silverOnixCave: Occupant = {
+export const silverS1: Occupant = {
 	...silver,
-	x: 8,
-	y: 9,
+	x: 10,
+	y: 1,
+	orientation: 'RIGHT',
 	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== silverId) && day === 6,
+		s.handledOccupants.every((h) => h.id !== silverId) && isSaturday(),
 };
 export const silverS1W1: Occupant = {
 	...silver,
@@ -365,7 +373,7 @@ export const silverS1W1: Occupant = {
 	y: 40,
 	orientation: 'RIGHT',
 	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== silverId) && day === 0,
+		s.handledOccupants.every((h) => h.id !== silverId) && isSunday(),
 };
 export const silverN1W1: Occupant = {
 	...silver,
@@ -373,5 +381,5 @@ export const silverN1W1: Occupant = {
 	y: 46,
 	orientation: 'LEFT',
 	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== silverId) && day === 1,
+		s.handledOccupants.every((h) => h.id !== silverId) && isMonday(),
 };

@@ -1,7 +1,7 @@
-import { CampUpgrade } from '../constants/checkLists/campUpgrades';
-import { QuestName } from '../constants/checkLists/questsRecord';
+import { CampUpgrade } from '../constants/campUpgrades';
 import { MapId } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
+import { QuestName } from '../constants/questsRecord';
 import { Inventory } from './Inventory';
 import { OwnedPokemon } from './OwnedPokemon';
 import { CatchBoosts, SaveFile } from './SaveFile';

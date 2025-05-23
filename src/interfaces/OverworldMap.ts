@@ -1,7 +1,7 @@
-import { QuestName } from '../constants/checkLists/questsRecord';
 import { EncounterMap } from '../constants/maps/encounters';
 import { MapId } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
+import { QuestName } from '../constants/questsRecord';
 import { TimeOfDay } from '../functions/getTimeOfDay';
 import { BattleTeamConfig } from '../hooks/useGetBattleTeam';
 import { Inventory } from './Inventory';
@@ -141,6 +141,7 @@ export interface OverworldTrainer extends BaseOccupant {
 	challengeFieldRank?: number;
 	battleTeamConfig: BattleTeamConfig;
 	profilePicture?: string;
+	spriteGeneration?: 1;
 }
 export interface Portal extends BaseOccupant {
 	type: 'PORTAL';

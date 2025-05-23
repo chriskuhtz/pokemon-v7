@@ -448,6 +448,19 @@ export const extraFeatureCheckList: {
 	{ name: 'progress bar for catch x quests', handled: true },
 	{ name: 'different battle backgrounds', handled: true },
 	{ name: 'trainer n', handled: true },
+	{ name: 'trainer red', handled: true },
+	{ name: 'quests for red', handled: true },
+	{ name: 'isXDay functions for easier travelling npc control', handled: true },
+	{ name: 'travellers on routeS1 instead of onix cave', handled: true },
+	{ name: 'catch quests for s1', handled: true },
+	{ name: 'upgrades for swarm radar (distortions)', handled: true },
+	{ name: 'upgrades for swarm radar (stronger pokemon)', handled: true },
+	{
+		name: 'quests for distortion mons / ultra beasts',
+		handled: true,
+	},
+	{ name: 'distortion shaders', handled: true },
+	{ name: 'new apricorns (repeat ball)', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -456,6 +469,7 @@ export const extraFeatureCheckList: {
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
 	{ name: 'timeofday in pokedex' },
 	{ name: 'download did not boost after tablets of ruin lowered' },
+	{ name: 'make red sprite smaller' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
@@ -476,9 +490,5 @@ export const extraFeatureCheckList: {
 	{ name: 'random encounters' },
 	{ name: 'random evolutions' },
 	{ name: 'steven as the fossil protector' },
-	{
-		name: 'upgrades for swarm radar (stronger pokemon, future and past distortions)',
-	},
-	{ name: 'time traveller red' },
-	{ name: 'download your player file and share it with other' },
+	{ name: 'download your player file and share it with others' },
 ];

@@ -9,9 +9,17 @@ export const getPokemonSprite = (
 		shiny?: boolean;
 		grayscale?: boolean;
 		officalArtwork?: boolean;
+		spriteGeneration?: 1;
 	}
 ): string => {
 	const id = nameToIdMap[name];
+
+	if (config?.spriteGeneration === 1) {
+		if (config.back) {
+			return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/red-blue/transparent/back/${id}.png`;
+		}
+		return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/red-blue/transparent/${id}.png`;
+	}
 
 	if (id > 905 || config?.officalArtwork) {
 		return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
@@ -41,6 +49,7 @@ export const PokemonSprite = ({
 		shiny?: boolean;
 		grayscale?: boolean;
 		officalArtwork?: boolean;
+		spriteGeneration?: 1;
 	};
 	onClick?: () => void;
 	className?: string;

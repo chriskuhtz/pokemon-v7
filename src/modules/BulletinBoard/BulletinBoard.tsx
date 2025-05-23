@@ -1,12 +1,13 @@
 import React, { useCallback, useContext, useMemo } from 'react';
+import { MdFormatListBulleted } from 'react-icons/md';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
+import { battleSpriteSize } from '../../constants/gameData';
 import {
 	QuestName,
 	questNames,
 	QuestsRecord,
-} from '../../constants/checkLists/questsRecord';
-import { battleSpriteSize } from '../../constants/gameData';
+} from '../../constants/questsRecord';
 import { getRewardItemsForQuest } from '../../functions/getRewardForQuest';
 import { replaceRouteName } from '../../functions/replaceRouteName';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
@@ -17,7 +18,6 @@ import { AnimatedBar } from '../../uiComponents/AnimatedBar/AnimatedBar';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { MdFormatListBulleted } from 'react-icons/md';
 
 export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 	const { addMessage } = useContext(MessageQueueContext);

@@ -3,7 +3,9 @@ import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { travellingMerchantRouteS1W1 } from '../../../modules/TravellingMerchant/TravellingMerchant';
 import { barryS1W1 } from './barry';
 import { cynthiaS1W1 } from './cynthia';
+import { hughS1W1 } from './hugh';
 import { nS1W1 } from './n';
+import { redS1W1 } from './red';
 import { sabrina } from './sabrina';
 import { silverS1W1 } from './silver';
 
@@ -126,4 +128,6 @@ export const routeS1W1Occupants: OverworldMap['occupants'] = [
 	}),
 	cynthiaS1W1,
 	nS1W1,
+	redS1W1,
+	hughS1W1,
 ];

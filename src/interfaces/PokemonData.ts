@@ -104,6 +104,14 @@ export interface PokemonData {
 				front_shiny_female: string | null;
 			};
 		};
+		versions: {
+			'generation-i': {
+				'red-blue': {
+					front_default: string | null;
+					back_default: string | null;
+				};
+			};
+		};
 	};
 	stats: StatInfo[];
 	types: TypeInfo[];

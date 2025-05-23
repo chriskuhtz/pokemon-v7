@@ -5,7 +5,7 @@ import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import {
 	AbilityName,
 	abilityNames,
-} from '../../constants/checkLists/abilityCheckList';
+} from '../../constants/checkLists/completed/abilityCheckList';
 import { nameToIdMap } from '../../constants/pokemonNames';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';

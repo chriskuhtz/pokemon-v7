@@ -3,7 +3,9 @@ import { ONE_HOUR, randomFieldId } from '../constants/gameData';
 import { barryId } from '../constants/maps/occupants/barry';
 import { challengeFieldOccupants } from '../constants/maps/occupants/challengeField';
 import { cynthiaId } from '../constants/maps/occupants/cynthia';
+import { hughId } from '../constants/maps/occupants/hugh';
 import { nId } from '../constants/maps/occupants/n';
+import { redId } from '../constants/maps/occupants/red';
 import { silverId } from '../constants/maps/occupants/silver';
 import { addPokemonToDex } from '../functions/addPokemonToDex';
 import { calculateLevelData } from '../functions/calculateLevelData';
@@ -196,6 +198,18 @@ export const useLeaveBattle = () => {
 				) {
 					updatedSwarmRecord.push(c.name);
 				}
+				if (
+					saveFile.currentStrongSwarm &&
+					c.name === saveFile.currentStrongSwarm?.pokemon
+				) {
+					updatedSwarmRecord.push(c.name);
+				}
+				if (
+					saveFile.currentDistortionSwarm &&
+					c.name === saveFile.currentDistortionSwarm?.pokemon
+				) {
+					updatedSwarmRecord.push(c.name);
+				}
 				if (updatedCatchStreak && c.name !== updatedCatchStreak.pokemon) {
 					updatedCatchStreak = {
 						pokemon: c.name,
@@ -283,12 +297,30 @@ export const useLeaveBattle = () => {
 					updatedMileStones.nDefeatedAt = xp;
 				}
 			}
+			if (defeatedChallengerId === redId) {
+				if (
+					!updatedMileStones.redDefeatedAt ||
+					xp > updatedMileStones.redDefeatedAt
+				) {
+					updatedMileStones.redDefeatedAt = xp;
+				}
+			}
+			if (defeatedChallengerId === hughId) {
+				if (
+					!updatedMileStones.hughDefeatedAt ||
+					xp > updatedMileStones.hughDefeatedAt
+				) {
+					updatedMileStones.hughDefeatedAt = xp;
+				}
+			}
 			updatedMileStones.caughtFromSwarms = updatedSwarmRecord;
 
 			const resetTime = () => {
 				if (
 					defeatedChallengerId &&
-					[barryId, nId, cynthiaId, silverId].includes(defeatedChallengerId)
+					[barryId, nId, cynthiaId, silverId, redId, hughId].includes(
+						defeatedChallengerId
+					)
 				) {
 					return ONE_HOUR;
 				}
