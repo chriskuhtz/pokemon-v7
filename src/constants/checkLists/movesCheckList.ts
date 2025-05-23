@@ -2117,10 +2117,13 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/557/',
 		handled: true,
 	},
+	{
+		name: 'fairy-wind',
+		url: 'https://pokeapi.co/api/v2/move/584/',
+		handled: true,
+	},
 
-	{ name: 'flying-press', url: 'https://pokeapi.co/api/v2/move/560/' },
-	{ name: 'mat-block', url: 'https://pokeapi.co/api/v2/move/561/' },
-	{ name: 'belch', url: 'https://pokeapi.co/api/v2/move/562/' },
+	{ name: 'belch', url: 'https://pokeapi.co/api/v2/move/562/', handled: true },
 	{ name: 'rototiller', url: 'https://pokeapi.co/api/v2/move/563/' },
 	{ name: 'sticky-web', url: 'https://pokeapi.co/api/v2/move/564/' },
 	{ name: 'fell-stinger', url: 'https://pokeapi.co/api/v2/move/565/' },
@@ -2142,11 +2145,6 @@ export const movesCheckList: {
 	{ name: 'misty-terrain', url: 'https://pokeapi.co/api/v2/move/581/' },
 	{ name: 'electrify', url: 'https://pokeapi.co/api/v2/move/582/' },
 	{ name: 'play-rough', url: 'https://pokeapi.co/api/v2/move/583/' },
-	{
-		name: 'fairy-wind',
-		url: 'https://pokeapi.co/api/v2/move/584/',
-		handled: true,
-	},
 	{ name: 'boomburst', url: 'https://pokeapi.co/api/v2/move/586/' },
 	{ name: 'fairy-lock', url: 'https://pokeapi.co/api/v2/move/587/' },
 	{ name: 'kings-shield', url: 'https://pokeapi.co/api/v2/move/588/' },
@@ -2605,6 +2603,8 @@ export const movesCheckList: {
 	{ name: 'techno-blast', url: 'https://pokeapi.co/api/v2/move/546/' },
 	{ name: 'fusion-flare', url: 'https://pokeapi.co/api/v2/move/558/' },
 	{ name: 'fusion-bolt', url: 'https://pokeapi.co/api/v2/move/559/' },
+	{ name: 'flying-press', url: 'https://pokeapi.co/api/v2/move/560/' },
+	{ name: 'mat-block', url: 'https://pokeapi.co/api/v2/move/561/' },
 ];
 
 export const handledMoves = [
@@ -3083,6 +3083,7 @@ export const handledMoves = [
 	'icicle-crash',
 	'fairy-wind',
 	'v-create',
+	'belch',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

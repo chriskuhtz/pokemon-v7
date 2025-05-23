@@ -115,6 +115,19 @@ export const handleDamageAttack = ({
 			return p;
 		});
 	}
+	//fake out
+	if (move.name === 'belch' && !updatedAttacker.consumedBerry) {
+		addMessage({ message: 'It failed' });
+		return pokemon.map((p) => {
+			if (p.id === updatedAttacker.id) {
+				return updatedAttacker;
+			}
+			if (p.id === updatedTarget.id) {
+				return updatedTarget;
+			}
+			return p;
+		});
+	}
 	//focus punch
 	if (move.name === 'focus-punch' && updatedAttacker.lastReceivedDamage) {
 		addMessage({ message: 'It failed' });

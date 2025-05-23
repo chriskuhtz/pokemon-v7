@@ -70,10 +70,9 @@ export const ChangeLog = ({
 const ChangeLogV34 = (): JSX.Element => {
 	return (
 		<>
-			<h3>0.33:</h3>
+			<h3>0.34:</h3>
 			<ol style={{ lineHeight: '1.5rem' }}>
-				<li>Quest Categories</li>
-				<li>New Travelling Trainer</li>
+				<li>Catch Streaks</li>
 				<li>fixes, balancing and improvements</li>
 				<li>New Abilities and Attacks</li>
 			</ol>
