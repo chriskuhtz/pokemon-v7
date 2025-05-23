@@ -136,6 +136,7 @@ export interface SaveFile {
 		barryDefeatedAt?: number;
 		silverDefeatedAt?: number;
 		cynthiaDefeatedAt?: number;
+		nDefeatedAt?: number;
 	};
 	farm: {
 		plants: BerryBush[];

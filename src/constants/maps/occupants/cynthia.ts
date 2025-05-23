@@ -235,13 +235,10 @@ const cynthia: OverworldTrainer = {
 	orientation: 'DOWN',
 	sprite: SpriteEnum.cynthia,
 	unhandledMessage: [
-		'Yo, good to meet you',
-		'My Name is cynthia, i am a fellow research assistant',
-		'So i am travelling to a different route every day',
-		'Lets battle every time we meet each other in the wild',
-		'That way, we will grow stronger together',
+		'Its always nice to meet aspiring trainers',
+		'lets see how strong you have grown',
 	],
-	name: 'Research Assistant cynthia',
+	name: 'Champion cynthia',
 	team: cynthiaTeam,
 	battleTeamConfig: {
 		assignGender: false,

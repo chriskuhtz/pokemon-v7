@@ -3,6 +3,7 @@ import { ONE_HOUR, randomFieldId } from '../constants/gameData';
 import { barryId } from '../constants/maps/occupants/barry';
 import { challengeFieldOccupants } from '../constants/maps/occupants/challengeField';
 import { cynthiaId } from '../constants/maps/occupants/cynthia';
+import { nId } from '../constants/maps/occupants/n';
 import { silverId } from '../constants/maps/occupants/silver';
 import { addPokemonToDex } from '../functions/addPokemonToDex';
 import { calculateLevelData } from '../functions/calculateLevelData';
@@ -274,9 +275,26 @@ export const useLeaveBattle = () => {
 					updatedMileStones.cynthiaDefeatedAt = xp;
 				}
 			}
+			if (defeatedChallengerId === nId) {
+				if (
+					!updatedMileStones.nDefeatedAt ||
+					xp > updatedMileStones.nDefeatedAt
+				) {
+					updatedMileStones.nDefeatedAt = xp;
+				}
+			}
 			updatedMileStones.caughtFromSwarms = updatedSwarmRecord;
 
-			const resetTime = defeatedChallengerId === barryId ? ONE_HOUR : -1;
+			const resetTime = () => {
+				if (
+					defeatedChallengerId &&
+					[barryId, nId, cynthiaId, silverId].includes(defeatedChallengerId)
+				) {
+					return ONE_HOUR;
+				}
+
+				return -1;
+			};
 
 			patchSaveFileReducer({
 				bag: joinInventories(updatedInventory, rewardItems ?? {}),
@@ -287,7 +305,7 @@ export const useLeaveBattle = () => {
 				handledOccupants: defeatedChallengerId
 					? [
 							...saveFile.handledOccupants,
-							{ id: defeatedChallengerId, resetAt: resetTime },
+							{ id: defeatedChallengerId, resetAt: resetTime() },
 					  ]
 					: saveFile.handledOccupants,
 				mileStones: updatedMileStones,

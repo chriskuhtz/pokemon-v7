@@ -5,6 +5,7 @@ import { travellingMerchantRouteE1 } from '../../../modules/TravellingMerchant/T
 import { barryE1 } from './barry';
 import { blaine } from './blaine';
 import { cynthiaE1 } from './cynthia';
+import { nE1 } from './n';
 import { silverE1 } from './silver';
 
 export const routeE1Occupants: OverworldMap['occupants'] = [
@@ -252,4 +253,5 @@ export const routeE1Occupants: OverworldMap['occupants'] = [
 	}),
 	silverE1,
 	cynthiaE1,
+	nE1,
 ];

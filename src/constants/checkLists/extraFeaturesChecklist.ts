@@ -443,13 +443,11 @@ export const extraFeatureCheckList: {
 	{ name: 'lower catchrate with level', handled: true },
 	{ name: 'quest categories', handled: true },
 	{ name: 'cynthia', handled: true },
-	{
-		name: 'catch streaks',
-		handled: true,
-	},
+	{ name: 'catch streaks', handled: true },
 	{ name: 'quests for longest streak', handled: true },
 	{ name: 'progress bar for catch x quests', handled: true },
 	{ name: 'different battle backgrounds', handled: true },
+	{ name: 'trainer n', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -458,7 +456,6 @@ export const extraFeatureCheckList: {
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
 	{ name: 'timeofday in pokedex' },
 	{ name: 'download did not boost after tablets of ruin lowered' },
-
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
@@ -482,4 +479,6 @@ export const extraFeatureCheckList: {
 	{
 		name: 'upgrades for swarm radar (stronger pokemon, future and past distortions)',
 	},
+	{ name: 'time traveller red' },
+	{ name: 'download your player file and share it with other' },
 ];
