@@ -25,6 +25,7 @@ export interface Quest {
 	category: QuestCategory;
 	availableAfter?: QuestName;
 	requiredUpgrade?: CampUpgrade;
+	progress?: (s: SaveFile) => { current: number; goal: number };
 	//rewards
 	rewardItems: Partial<Inventory>;
 	rewardPokemon?: OwnedPokemon;

@@ -3401,6 +3401,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'quick-ball': 3 },
 		researchPoints: 20,
 		conditionFunction: (s) => (s.longestStreak ?? 0) >= 3,
+		progress: (s) => ({ goal: 3, current: s.longestStreak ?? 0 }),
 	},
 	'achieve a catch streak of 10': {
 		kind: 'BULLETIN',
@@ -3409,6 +3410,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'achieve a catch streak of 3',
 		researchPoints: 40,
 		conditionFunction: (s) => (s.longestStreak ?? 0) >= 10,
+		progress: (s) => ({ goal: 10, current: s.longestStreak ?? 0 }),
 	},
 	'achieve a catch streak of 15': {
 		kind: 'BULLETIN',
@@ -3417,6 +3419,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'achieve a catch streak of 10',
 		researchPoints: 60,
 		conditionFunction: (s) => (s.longestStreak ?? 0) >= 15,
+		progress: (s) => ({ goal: 15, current: s.longestStreak ?? 0 }),
 	},
 	'achieve a catch streak of 20': {
 		kind: 'BULLETIN',
@@ -3425,6 +3428,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'achieve a catch streak of 15',
 		researchPoints: 80,
 		conditionFunction: (s) => (s.longestStreak ?? 0) >= 20,
+		progress: (s) => ({ goal: 20, current: s.longestStreak ?? 0 }),
 	},
 	'achieve a catch streak of 31': {
 		kind: 'BULLETIN',
@@ -3433,6 +3437,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'achieve a catch streak of 20',
 		researchPoints: 100,
 		conditionFunction: (s) => (s.longestStreak ?? 0) >= 31,
+		progress: (s) => ({ goal: 31, current: s.longestStreak ?? 0 }),
 	},
 } as Record<QuestName, Quest>;
 

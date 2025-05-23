@@ -448,8 +448,8 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'quests for longest streak', handled: true },
+	{ name: 'progress bar for catch x quests', handled: true },
 	//BUGS/IMPROVEMENTS:
-	{ name: 'progress bar for catch x quests' },
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
 	{ name: 'loosing to wild mons is sometimes buggy' },
@@ -457,7 +457,6 @@ export const extraFeatureCheckList: {
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
 	{ name: 'timeofday in pokedex' },
 	{ name: 'download did not boost after tablets of ruin lowered' },
-	{ name: 'layers for spikes and toxic spikes' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
