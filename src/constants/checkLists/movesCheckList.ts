@@ -2124,8 +2124,17 @@ export const movesCheckList: {
 	},
 
 	{ name: 'belch', url: 'https://pokeapi.co/api/v2/move/562/', handled: true },
-	{ name: 'rototiller', url: 'https://pokeapi.co/api/v2/move/563/' },
-	{ name: 'sticky-web', url: 'https://pokeapi.co/api/v2/move/564/' },
+
+	{
+		name: 'sticky-web',
+		url: 'https://pokeapi.co/api/v2/move/564/',
+		handled: true,
+	},
+	{
+		name: 'toxic-spikes',
+		url: 'https://pokeapi.co/api/v2/move/390/',
+		handled: true,
+	},
 	{ name: 'fell-stinger', url: 'https://pokeapi.co/api/v2/move/565/' },
 	{ name: 'phantom-force', url: 'https://pokeapi.co/api/v2/move/566/' },
 	{ name: 'trick-or-treat', url: 'https://pokeapi.co/api/v2/move/567/' },
@@ -2513,7 +2522,6 @@ export const movesCheckList: {
 	{ name: 'last-resort', url: 'https://pokeapi.co/api/v2/move/387/' },
 	{ name: 'worry-seed', url: 'https://pokeapi.co/api/v2/move/388/' },
 	{ name: 'sucker-punch', url: 'https://pokeapi.co/api/v2/move/389/' },
-	{ name: 'toxic-spikes', url: 'https://pokeapi.co/api/v2/move/390/' },
 	{ name: 'heart-swap', url: 'https://pokeapi.co/api/v2/move/391/' },
 	{ name: 'aqua-ring', url: 'https://pokeapi.co/api/v2/move/392/' },
 	{ name: 'magnet-rise', url: 'https://pokeapi.co/api/v2/move/393/' },
@@ -2605,6 +2613,7 @@ export const movesCheckList: {
 	{ name: 'fusion-bolt', url: 'https://pokeapi.co/api/v2/move/559/' },
 	{ name: 'flying-press', url: 'https://pokeapi.co/api/v2/move/560/' },
 	{ name: 'mat-block', url: 'https://pokeapi.co/api/v2/move/561/' },
+	{ name: 'rototiller', url: 'https://pokeapi.co/api/v2/move/563/' },
 ];
 
 export const handledMoves = [
@@ -3084,6 +3093,8 @@ export const handledMoves = [
 	'fairy-wind',
 	'v-create',
 	'belch',
+	'sticky-web',
+	'toxic-spikes',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

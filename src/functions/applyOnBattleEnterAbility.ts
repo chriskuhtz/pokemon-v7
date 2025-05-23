@@ -713,6 +713,36 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 			return p;
 		});
 	}
+	if (
+		battleFieldEffects.some(
+			(b) => b.type === 'sticky-web' && b.ownerId !== user.ownerId
+		)
+	) {
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.id === user.id) {
+				if (
+					(getTypeNames(p).includes('flying') ||
+						p.ability === 'levitate' ||
+						getHeldItem(p) === 'air-balloon' ||
+						getHeldItem(p) === 'heavy-duty-boots') &&
+					getHeldItem(p) !== 'iron-ball'
+				) {
+					return p;
+				} else {
+					return applyStatChangeToPokemon(
+						p,
+						'speed',
+						-1,
+						false,
+						battleFieldEffects,
+						addMessage,
+						'sticky web'
+					);
+				}
+			}
+			return p;
+		});
+	}
 	updatedPokemon = updatedPokemon.map((p) => {
 		if (p.status !== 'ONFIELD') {
 			return p;

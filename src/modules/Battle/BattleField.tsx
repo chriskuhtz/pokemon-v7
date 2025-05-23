@@ -86,7 +86,8 @@ export interface BattleFieldEffect {
 		| 'battery'
 		| 'power-spot'
 		| 'steely-spirit'
-		| 'pastel-veil';
+		| 'pastel-veil'
+		| 'sticky-web';
 	ownerId: string;
 	applicatorId?: string;
 	duration: number;
