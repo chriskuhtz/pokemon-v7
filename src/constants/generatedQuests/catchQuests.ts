@@ -7,6 +7,7 @@ import { routeE1 } from '../maps/routeE1';
 import { routeN1 } from '../maps/routeN1';
 import { routeN1E1 } from '../maps/routeN1E1';
 import { routeN1W1 } from '../maps/routeN1W1';
+import { routeS1 } from '../maps/routeS1';
 import { routeS1E1 } from '../maps/routeS1E1';
 import { routeS1W1 } from '../maps/routeS1W1';
 import { routeW1 } from '../maps/routeW1';
@@ -392,12 +393,14 @@ const catchQuestsForRoute = (
 };
 
 //log the keys and add them to the type def if you add new maps
-//console.log( Object.keys(catchQuests));
+//console.log(Object.keys(catchQuests).filter((c) => c.includes(Your Route Name)));
+
 export const catchQuests: Partial<Record<QuestName, Quest>> = {
 	...catchQuestsForRoute(routeN1, false),
 	...catchQuestsForRoute(routeN1E1, false, 'machete certification'),
 	...catchQuestsForRoute(routeE1, false, 'sledge hammer certification'),
 	...catchQuestsForRoute(routeS1E1, true, 'swimming certification'),
+	...catchQuestsForRoute(routeS1, true, 'swimming certification'),
 	...catchQuestsForRoute(routeS1W1, true, 'swimming certification'),
 	...catchQuestsForRoute(routeW1, true, 'swimming certification'),
 	...catchQuestsForRoute(routeN1W1, true, 'buy skiing equipment'),

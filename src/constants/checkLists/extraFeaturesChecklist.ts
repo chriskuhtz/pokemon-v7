@@ -450,8 +450,23 @@ export const extraFeatureCheckList: {
 	{ name: 'trainer n', handled: true },
 	{ name: 'trainer red', handled: true },
 	{ name: 'quests for red', handled: true },
-	{ name: 'upgrades for swarm radar (stronger pokemon)' },
-	{ name: 'upgrades for swarm radar (future and past distortions)' },
+	{ name: 'upgrades for swarm radar (stronger pokemon)', handled: true },
+	{
+		name: 'upgrades for swarm radar (distortions)',
+		handled: true,
+	},
+	{
+		name: 'quests for distortion mons / ultra beasts',
+		todos: [
+			'Radar Screens with buttons',
+			'different swarms at the same time',
+			'add pokemon from all swarms to caughtFromSwarm array',
+		],
+	},
+	{ name: 'distortion shaders' },
+	{ name: 'isXDay functions for easier travelling npc control' },
+	{ name: 'travellers on routeS1 instead of onix cave' },
+	{ name: 'new apricorns' },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },

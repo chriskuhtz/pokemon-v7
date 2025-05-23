@@ -20,7 +20,7 @@ const getRouteforSwarm = (s: SaveFile): MapId => {
 		options.push('onixCave');
 	}
 	if (s.campUpgrades['swimming certification']) {
-		options.push('routeS1E1', 'routeS1W1', 'routeW1', 'caveW1');
+		options.push('routeS1E1', 'routeS1W1', 'routeW1', 'caveW1', 'routeS1');
 	}
 	if (s.campUpgrades['buy skiing equipment']) {
 		options.push('routeN1W1');
@@ -68,43 +68,120 @@ const strongerSwarmMons: PokemonName[] = [
 	'pupitar',
 	'kirlia',
 ];
+const pastDistortionMons: PokemonName[] = [
+	'great-tusk',
+	'scream-tail',
+	'flutter-mane',
+	'brute-bonnet',
+	'slither-wing',
+	'sandy-shocks',
+	'roaring-moon',
+];
+const futureDistortionMons: PokemonName[] = [
+	'iron-treads',
+	'iron-bundle',
+	'iron-hands',
+	'iron-jugulis',
+	'iron-moth',
+	'iron-thorns',
+	'iron-valiant',
+];
+const spaceDistortionMons: PokemonName[] = [
+	'nihilego',
+	'buzzwole',
+	'pheromosa',
+	'xurkitree',
+	'celesteela',
+	'kartana',
+	'guzzlord',
+	'poipole',
+	'stakataka',
+	'blacephalon',
+];
 
 export const useSwarmRadar = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { addMessage } = useContext(MessageQueueContext);
 
 	const availableSwarms: PokemonSwarm[] = useMemo(() => {
-		const res = swarmMons.map((p) => ({
+		const weakSwarms = swarmMons.map((p) => ({
 			pokemon: p,
 			route: mapIds[0],
 			leavesAt: 0,
 			xpMax: 1000,
 			xpMin: 125,
 		}));
+
+		const options = [weakSwarms];
+
+		const strongerSwarms = strongerSwarmMons.map((p) => ({
+			pokemon: p,
+			route: mapIds[0],
+			leavesAt: 0,
+			xpMax: 64000,
+			xpMin: 8000,
+		}));
 		if (saveFile.campUpgrades['upgraded swarm radar']) {
-			return res.concat(
-				...strongerSwarmMons.map((p) => ({
-					pokemon: p,
-					route: mapIds[0],
-					leavesAt: 0,
-					xpMax: 64000,
-					xpMin: 8000,
-				}))
-			);
+			options.push(strongerSwarms);
 		}
-		return res;
+		const pastSwarms = pastDistortionMons.map((p) => ({
+			pokemon: p,
+			route: mapIds[0],
+			leavesAt: 0,
+			xpMax: 60 * 60 * 60,
+			xpMin: 40 * 40 * 40,
+		}));
+		const futureSwarms = futureDistortionMons.map((p) => ({
+			pokemon: p,
+			route: mapIds[0],
+			leavesAt: 0,
+			xpMax: 60 * 60 * 60,
+			xpMin: 40 * 40 * 40,
+		}));
+		if (saveFile.campUpgrades['time distortion radar']) {
+			options.push(pastSwarms, futureSwarms);
+		}
+		const ultrabeastSwarms = spaceDistortionMons.map((p) => ({
+			pokemon: p,
+			route: mapIds[0],
+			leavesAt: 0,
+			xpMax: 60 * 60 * 60,
+			xpMin: 50 * 50 * 50,
+		}));
+		if (saveFile.campUpgrades['space distortion radar']) {
+			options.push(ultrabeastSwarms);
+		}
+		return getRandomEntry(options);
 	}, [saveFile.campUpgrades]);
+
+	const addSwarmMessage = useCallback(
+		(s: PokemonSwarm) => {
+			if (s.type) {
+				addMessage({
+					message: `The radar detects a ${s.type} distortion at ${
+						mapDisplayNames[s.route]
+					}`,
+					needsNoConfirmation: true,
+				});
+			} else
+				addMessage({
+					message: `The radar detects swarms of ${s.pokemon} at ${
+						mapDisplayNames[s.route]
+					}`,
+					needsNoConfirmation: true,
+				});
+		},
+		[addMessage]
+	);
 
 	return useCallback(() => {
 		const now = new Date().getTime();
+		//inform about current swarm
 		if (saveFile.currentSwarm) {
-			addMessage({
-				message: `The radar detects swarms of ${
-					saveFile.currentSwarm.pokemon
-				} at ${mapDisplayNames[saveFile.currentSwarm.route]}`,
-				needsNoConfirmation: true,
-			});
-		} else if (!saveFile.nextSwarmReadyAt || now > saveFile.nextSwarmReadyAt) {
+			addSwarmMessage(saveFile.currentSwarm);
+		}
+		//create new swarm
+		else if (!saveFile.nextSwarmReadyAt || now > saveFile.nextSwarmReadyAt) {
 			let swarm = {
 				...getRandomEntry(availableSwarms),
 				route: getRouteforSwarm(saveFile),
@@ -113,12 +190,7 @@ export const useSwarmRadar = () => {
 			if (saveFile.settings?.randomSwarms) {
 				swarm = { ...swarm, pokemon: getRandomEntry([...pokemonNames]) };
 			}
-			addMessage({
-				message: `The radar detects swarms of ${swarm.pokemon} at ${
-					mapDisplayNames[swarm.route]
-				}`,
-				needsNoConfirmation: true,
-			});
+			addSwarmMessage(swarm);
 
 			patchSaveFileReducer({
 				currentSwarm: { ...swarm, leavesAt: now + ONE_HOUR },
@@ -130,5 +202,11 @@ export const useSwarmRadar = () => {
 				needsNoConfirmation: true,
 			});
 		}
-	}, [addMessage, availableSwarms, patchSaveFileReducer, saveFile]);
+	}, [
+		addMessage,
+		addSwarmMessage,
+		availableSwarms,
+		patchSaveFileReducer,
+		saveFile,
+	]);
 };

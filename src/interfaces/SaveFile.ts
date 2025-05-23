@@ -66,12 +66,14 @@ export interface BerryBush {
 	id: string;
 }
 
+export type DistortionType = 'FUTURE' | 'PAST' | 'SPACE';
 export interface PokemonSwarm {
 	pokemon: PokemonName;
 	leavesAt: number;
 	route: MapId;
 	xpMin: number;
 	xpMax: number;
+	type?: DistortionType;
 }
 
 export type Pokedex = Record<
