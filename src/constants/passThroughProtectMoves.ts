@@ -12,4 +12,5 @@ export const passThroughProtectMoves = [
 	'shadow-force',
 	'transform',
 	'mighty-cleave',
+	'hyperspace-hole',
 ];

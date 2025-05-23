@@ -460,7 +460,7 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'distortion shaders', handled: true },
-	{ name: 'new apricorns (repeat ball)' },
+	{ name: 'new apricorns (repeat ball)', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -470,7 +470,6 @@ export const extraFeatureCheckList: {
 	{ name: 'timeofday in pokedex' },
 	{ name: 'download did not boost after tablets of ruin lowered' },
 	{ name: 'make red sprite smaller' },
-	{ name: 'custom item descriptions' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
