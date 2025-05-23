@@ -1277,12 +1277,32 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/302/',
 		handled: true,
 	},
-	{ name: 'embody-aspect', url: 'https://pokeapi.co/api/v2/ability/303/' },
-	{ name: 'tera-shift', url: 'https://pokeapi.co/api/v2/ability/304/' },
-	{ name: 'tera-shell', url: 'https://pokeapi.co/api/v2/ability/305/' },
-	{ name: 'teraform-zero', url: 'https://pokeapi.co/api/v2/ability/306/' },
-	{ name: 'poison-puppeteer', url: 'https://pokeapi.co/api/v2/ability/307/' },
-	{ name: 'toxic-debris', url: 'https://pokeapi.co/api/v2/ability/295/' },
+
+	{
+		name: 'poison-puppeteer',
+		url: 'https://pokeapi.co/api/v2/ability/307/',
+		handled: true,
+	},
+	{
+		name: 'toxic-debris',
+		url: 'https://pokeapi.co/api/v2/ability/295/',
+		handled: true,
+	},
+	{
+		name: 'cheek-pouch',
+		url: 'https://pokeapi.co/api/v2/ability/167/',
+		handled: true,
+	},
+	{
+		name: 'sand-spit',
+		url: 'https://pokeapi.co/api/v2/ability/245/',
+		handled: true,
+	},
+	{
+		name: 'perish-body',
+		url: 'https://pokeapi.co/api/v2/ability/253/',
+		handled: true,
+	},
 
 	/**
 	 * BANISHED
@@ -1306,7 +1326,6 @@ export const abilityCheckList: {
 	{ name: 'zen-mode', url: 'https://pokeapi.co/api/v2/ability/161/' },
 	{ name: 'turboblaze', url: 'https://pokeapi.co/api/v2/ability/163/' },
 	{ name: 'teravolt', url: 'https://pokeapi.co/api/v2/ability/164/' },
-	{ name: 'cheek-pouch', url: 'https://pokeapi.co/api/v2/ability/167/' },
 	{ name: 'stance-change', url: 'https://pokeapi.co/api/v2/ability/176/' },
 	{ name: 'symbiosis', url: 'https://pokeapi.co/api/v2/ability/180/' },
 	{ name: 'shields-down', url: 'https://pokeapi.co/api/v2/ability/197/' },
@@ -1324,10 +1343,8 @@ export const abilityCheckList: {
 	{ name: 'mirror-armor', url: 'https://pokeapi.co/api/v2/ability/240/' },
 	{ name: 'gulp-missile', url: 'https://pokeapi.co/api/v2/ability/241/' },
 	{ name: 'stalwart', url: 'https://pokeapi.co/api/v2/ability/242/' },
-	{ name: 'sand-spit', url: 'https://pokeapi.co/api/v2/ability/245/' },
 	{ name: 'ice-face', url: 'https://pokeapi.co/api/v2/ability/248/' },
 	{ name: 'mimicry', url: 'https://pokeapi.co/api/v2/ability/250/' },
-	{ name: 'perish-body', url: 'https://pokeapi.co/api/v2/ability/253/' },
 	{ name: 'neutralizing-gas', url: 'https://pokeapi.co/api/v2/ability/256/' },
 	{ name: 'hunger-switch', url: 'https://pokeapi.co/api/v2/ability/258/' },
 	{ name: 'as-one-glastrier', url: 'https://pokeapi.co/api/v2/ability/266/' },
@@ -1336,6 +1353,10 @@ export const abilityCheckList: {
 	{ name: 'cud-chew', url: 'https://pokeapi.co/api/v2/ability/291/' },
 	{ name: 'armor-tail', url: 'https://pokeapi.co/api/v2/ability/296/' },
 	{ name: 'mycelium-might', url: 'https://pokeapi.co/api/v2/ability/298/' },
+	{ name: 'embody-aspect', url: 'https://pokeapi.co/api/v2/ability/303/' },
+	{ name: 'tera-shift', url: 'https://pokeapi.co/api/v2/ability/304/' },
+	{ name: 'tera-shell', url: 'https://pokeapi.co/api/v2/ability/305/' },
+	{ name: 'teraform-zero', url: 'https://pokeapi.co/api/v2/ability/306/' },
 ];
 
 export const abilityNames = [
@@ -1590,6 +1611,11 @@ export const abilityNames = [
 	'supersweet-syrup',
 	'hospitality',
 	'toxic-chain',
+	'poison-puppeteer',
+	'toxic-debris',
+	'cheek-pouch',
+	'sand-spit',
+	'perish-body',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

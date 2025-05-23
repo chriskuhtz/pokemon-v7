@@ -11,6 +11,7 @@ import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
 import { BattleTerrain, TerrainObject } from '../../../useBattleTerrain';
+import { WeatherObject } from '../../../useBattleWeather';
 import { handleAbilitiesAfterAttack } from '../handleAbilitiesAfterAttack';
 
 export const handleSwaggerAttack = ({
@@ -23,6 +24,7 @@ export const handleSwaggerAttack = ({
 	battleFieldEffects,
 	target,
 	setTerrain,
+	setWeather,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
@@ -33,6 +35,7 @@ export const handleSwaggerAttack = ({
 	battleFieldEffects: BattleFieldEffect[];
 	target: BattlePokemon;
 	setTerrain: (x: TerrainObject) => void;
+	setWeather: (x: WeatherObject) => void;
 }): BattlePokemon[] => {
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
@@ -201,7 +204,8 @@ export const handleSwaggerAttack = ({
 			battleFieldEffects,
 			target.stats.hp,
 			terrain,
-			setTerrain
+			setTerrain,
+			setWeather
 		);
 	updatedAttacker = { ...afterAbilityCheck };
 	updatedTarget = { ...t };

@@ -141,4 +141,5 @@ export enum SpriteEnum {
 	rocketFemale = '185',
 	giovanni = '190',
 	pikachuFan = '209',
+	n = '210',
 }

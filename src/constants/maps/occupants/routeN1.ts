@@ -6,6 +6,7 @@ import { barryN1 } from './barry';
 import { cynthiaN1 } from './cynthia';
 import { erika } from './erika';
 import { giovanni } from './giovanni';
+import { nN1 } from './n';
 import { silverN1 } from './silver';
 
 export const routeN1Occupants: OverworldMap['occupants'] = [
@@ -273,4 +274,19 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 	barryN1,
 	silverN1,
 	cynthiaN1,
+	nN1,
+	{
+		type: 'SIGN',
+		x: 33,
+		y: 31,
+		approachDirection: 'UP',
+		id: 'catch streak sign',
+		dialogue: [
+			'If you catch the same pokemon multiple times in a row',
+			'stronger specimen will appear',
+			'and they are more likely to be shiny',
+			'if you leave the area, this effect resets',
+		],
+		conditionFunction: () => true,
+	},
 ];

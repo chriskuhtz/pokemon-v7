@@ -15,6 +15,7 @@ import { useQuests } from '../../hooks/useQuests';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { ItemType } from '../../interfaces/Item';
 import { questCategories, QuestCategory } from '../../interfaces/Quest';
+import { AnimatedBar } from '../../uiComponents/AnimatedBar/AnimatedBar';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
@@ -160,6 +161,15 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 												return <ItemSprite key={p + name} item={'poke-ball'} />;
 											})}
 										</h5>
+									)}
+									{quest.progress !== undefined && (
+										<AnimatedBar
+											max={quest.progress(saveFile).goal}
+											offset={
+												quest.progress(saveFile).goal -
+												quest.progress(saveFile).current
+											}
+										/>
 									)}
 								</div>
 							}

@@ -2,6 +2,7 @@ import { useContext, useMemo } from 'react';
 import { MapId } from '../constants/maps/mapsRecord';
 import { typeColors } from '../constants/typeColors';
 import { hexToRgb } from '../functions/hexToRGB';
+import { isWater } from '../functions/isPassable';
 import { PokemonType } from '../interfaces/PokemonType';
 import { LocationContext } from './LocationProvider';
 
@@ -42,4 +43,31 @@ export const useLocationColors = (): {
 	}, [location.mapId]);
 
 	return { oppColor, playerColor };
+};
+
+export const mapBattlePlatforms: Record<MapId, string> = {
+	routeN1: 'grass',
+	routeN1E1: 'forest',
+	routeE1: 'hills',
+	routeS1E1: 'plains',
+	routeS1: 'sand',
+	routeS1W1: 'grass',
+	routeW1: 'grass',
+	caveW1: 'cave',
+	onixCave: 'cave',
+	routeN1W1: 'snow',
+	camp: 'grass',
+	challengeField: 'grass',
+	randomField: 'grass',
+	rocketCamp: 'street',
+};
+
+export const useLocationBattlePlatform = (): string => {
+	const { location } = useContext(LocationContext);
+
+	if (isWater(location.x, location.y, location.mapId)) {
+		return 'water';
+	}
+
+	return mapBattlePlatforms[location.mapId];
 };

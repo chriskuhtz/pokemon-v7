@@ -100,6 +100,7 @@ export const handleAllAttackCategories = ({
 					logDamage,
 					terrain,
 					setTerrain,
+					setWeather: setBattleWeather,
 				});
 			case 'heal':
 				return handleHealAttack({
@@ -141,6 +142,7 @@ export const handleAllAttackCategories = ({
 					target,
 					terrain,
 					setTerrain,
+					setWeather: setBattleWeather,
 				});
 			case 'net-good-stats':
 				return handleNetGoodStatsAttack({
@@ -171,6 +173,7 @@ export const handleAllAttackCategories = ({
 					terrain,
 					target,
 					setTerrain,
+					setWeather: setBattleWeather,
 				});
 		}
 	};

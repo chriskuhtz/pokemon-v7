@@ -76,7 +76,6 @@ const trainerSabrina: OverworldTrainer = {
 		assignHeldItem: false,
 		assignLearnsetMoves: false,
 		assignNaturalAbility: false,
-		generateIvs: true,
 	},
 };
 const npcSabrina: OverworldNpc = {

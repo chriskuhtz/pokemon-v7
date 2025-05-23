@@ -3,6 +3,7 @@ import { ONE_HOUR, randomFieldId } from '../constants/gameData';
 import { barryId } from '../constants/maps/occupants/barry';
 import { challengeFieldOccupants } from '../constants/maps/occupants/challengeField';
 import { cynthiaId } from '../constants/maps/occupants/cynthia';
+import { nId } from '../constants/maps/occupants/n';
 import { silverId } from '../constants/maps/occupants/silver';
 import { addPokemonToDex } from '../functions/addPokemonToDex';
 import { calculateLevelData } from '../functions/calculateLevelData';
@@ -21,6 +22,7 @@ import {
 } from '../interfaces/Inventory';
 import { isKeyItem, pickupTable } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { CatchStreak } from '../interfaces/SaveFile';
 import { LocationContext } from './LocationProvider';
 import { useReset } from './useReset';
 import { SaveFileContext } from './useSaveFile';
@@ -185,6 +187,7 @@ export const useLeaveBattle = () => {
 			};
 
 			let updatedSwarmRecord = [...saveFile.mileStones.caughtFromSwarms];
+			let updatedCatchStreak: CatchStreak | undefined = saveFile.catchStreak;
 
 			caughtPokemon.forEach((c) => {
 				if (
@@ -192,6 +195,27 @@ export const useLeaveBattle = () => {
 					c.name === saveFile.currentSwarm?.pokemon
 				) {
 					updatedSwarmRecord.push(c.name);
+				}
+				if (updatedCatchStreak && c.name !== updatedCatchStreak.pokemon) {
+					updatedCatchStreak = {
+						pokemon: c.name,
+						mapId: location.mapId,
+						streak: 1,
+					};
+				} else if (!updatedCatchStreak) {
+					updatedCatchStreak = {
+						pokemon: c.name,
+						mapId: location.mapId,
+						streak: 1,
+					};
+				} else if (
+					updatedCatchStreak &&
+					c.name === updatedCatchStreak.pokemon
+				) {
+					updatedCatchStreak = {
+						...updatedCatchStreak,
+						streak: updatedCatchStreak?.streak + 1,
+					};
 				}
 			});
 			updatedSwarmRecord = [...new Set(updatedSwarmRecord)];
@@ -251,9 +275,26 @@ export const useLeaveBattle = () => {
 					updatedMileStones.cynthiaDefeatedAt = xp;
 				}
 			}
+			if (defeatedChallengerId === nId) {
+				if (
+					!updatedMileStones.nDefeatedAt ||
+					xp > updatedMileStones.nDefeatedAt
+				) {
+					updatedMileStones.nDefeatedAt = xp;
+				}
+			}
 			updatedMileStones.caughtFromSwarms = updatedSwarmRecord;
 
-			const resetTime = defeatedChallengerId === barryId ? ONE_HOUR : -1;
+			const resetTime = () => {
+				if (
+					defeatedChallengerId &&
+					[barryId, nId, cynthiaId, silverId].includes(defeatedChallengerId)
+				) {
+					return ONE_HOUR;
+				}
+
+				return -1;
+			};
 
 			patchSaveFileReducer({
 				bag: joinInventories(updatedInventory, rewardItems ?? {}),
@@ -264,11 +305,12 @@ export const useLeaveBattle = () => {
 				handledOccupants: defeatedChallengerId
 					? [
 							...saveFile.handledOccupants,
-							{ id: defeatedChallengerId, resetAt: resetTime },
+							{ id: defeatedChallengerId, resetAt: resetTime() },
 					  ]
 					: saveFile.handledOccupants,
 				mileStones: updatedMileStones,
 				pokedex,
+				catchStreak: updatedCatchStreak,
 			});
 		},
 		[location, patchSaveFileReducer, saveFile, team]

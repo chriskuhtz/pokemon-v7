@@ -38,9 +38,20 @@ export const useBattleFieldEffects = (
 
 	const removeSpikes = useCallback((ownerId: string) => {
 		setBattleFieldEffects((bf) =>
-			bf.filter(
-				(effect) => effect.ownerId !== ownerId || effect.type !== 'spikes'
-			)
+			bf.filter((effect) => {
+				if (effect.ownerId !== ownerId && effect.type == 'spikes') {
+					return false;
+				}
+
+				if (effect.ownerId !== ownerId && effect.type == 'toxic-spikes') {
+					return false;
+				}
+				if (effect.ownerId !== ownerId && effect.type == 'sticky-web') {
+					return false;
+				}
+
+				return true;
+			})
 		);
 	}, []);
 	const removeScreens = useCallback((ownerId: string) => {

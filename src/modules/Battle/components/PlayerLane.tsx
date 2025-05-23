@@ -1,9 +1,11 @@
 import { BattlePokemonInfo } from '../../../components/BattlePokemonInfo/BattlePokemonInfo';
 import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
 import { getSizeFactor } from '../../../functions/getSizeFactor';
+import { useLocationBattlePlatform } from '../../../hooks/useLocationColors';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
 export function PlayerLane(props: { onFieldTeam: BattlePokemon[] }) {
+	const platform = useLocationBattlePlatform();
 	return (
 		<div
 			style={{
@@ -16,7 +18,7 @@ export function PlayerLane(props: { onFieldTeam: BattlePokemon[] }) {
 				style={{
 					display: 'flex',
 					alignItems: 'center',
-					backgroundImage: "url('/battlePlatforms/grass.png')",
+					backgroundImage: `url('/battlePlatforms/${platform}.png')`,
 					backgroundSize: '100% 100%',
 					backgroundRepeat: 'no-repeat',
 					minWidth: '300px',
