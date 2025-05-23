@@ -140,6 +140,7 @@ export interface SaveFile {
 		cynthiaDefeatedAt?: number;
 		nDefeatedAt?: number;
 		redDefeatedAt?: number;
+		hughDefeatedAt?: number;
 	};
 	farm: {
 		plants: BerryBush[];

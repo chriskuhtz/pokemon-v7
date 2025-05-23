@@ -212,6 +212,25 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
 		},
 	});
 
+	const machamp = makeChallengerPokemon({
+		name: 'dragonite',
+		xp: highestXpOnTeam,
+		nature: 'adamant',
+		ability: 'iron-fist',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'black-belt',
+		firstMove: { name: 'bulk-up', usedPP: 0 },
+		secondMove: { name: 'thunder-punch', usedPP: 0 },
+		thirdMove: { name: 'drain-punch', usedPP: 0 },
+		fourthMove: { name: 'mach-punch', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			defense: 252,
+			attack: 252,
+		},
+	});
+
 	if (highestXpOnTeam < 8000) {
 		return [charmander, bulbasaur, squirtle];
 	}
@@ -225,6 +244,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
 		blastoise,
 		tauros,
 		dragonite,
+		machamp,
 	];
 
 	return team;

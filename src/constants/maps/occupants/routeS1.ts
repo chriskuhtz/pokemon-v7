@@ -3,6 +3,7 @@ import { makeApricornTree } from '../../../functions/makeApricornTree';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { barryS1 } from './barry';
 import { cynthiaS1 } from './cynthia';
+import { hughS1 } from './hugh';
 import { misty } from './misty';
 import { nS1 } from './n';
 import { redS1 } from './red';
@@ -145,6 +146,7 @@ export const routeS1Occupants: OverworldMap['occupants'] = [
 	nS1,
 	redS1,
 	silverS1,
+	hughS1,
 	...makeApricornTree({
 		x: 42,
 		y: 18,

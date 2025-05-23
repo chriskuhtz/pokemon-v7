@@ -3,6 +3,7 @@ import { ONE_HOUR, randomFieldId } from '../constants/gameData';
 import { barryId } from '../constants/maps/occupants/barry';
 import { challengeFieldOccupants } from '../constants/maps/occupants/challengeField';
 import { cynthiaId } from '../constants/maps/occupants/cynthia';
+import { hughId } from '../constants/maps/occupants/hugh';
 import { nId } from '../constants/maps/occupants/n';
 import { redId } from '../constants/maps/occupants/red';
 import { silverId } from '../constants/maps/occupants/silver';
@@ -304,12 +305,20 @@ export const useLeaveBattle = () => {
 					updatedMileStones.redDefeatedAt = xp;
 				}
 			}
+			if (defeatedChallengerId === hughId) {
+				if (
+					!updatedMileStones.hughDefeatedAt ||
+					xp > updatedMileStones.hughDefeatedAt
+				) {
+					updatedMileStones.hughDefeatedAt = xp;
+				}
+			}
 			updatedMileStones.caughtFromSwarms = updatedSwarmRecord;
 
 			const resetTime = () => {
 				if (
 					defeatedChallengerId &&
-					[barryId, nId, cynthiaId, silverId, redId].includes(
+					[barryId, nId, cynthiaId, silverId, redId, hughId].includes(
 						defeatedChallengerId
 					)
 				) {

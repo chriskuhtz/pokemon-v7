@@ -490,5 +490,5 @@ export const extraFeatureCheckList: {
 	{ name: 'random encounters' },
 	{ name: 'random evolutions' },
 	{ name: 'steven as the fossil protector' },
-	{ name: 'download your player file and share it with other' },
+	{ name: 'download your player file and share it with others' },
 ];
