@@ -48,8 +48,31 @@ export const handleAbilitiesAfterAttack = (
 } => {
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
+	//perish-body
+	if (
+		!isKO(target) &&
+		target.ability === 'perish-body' &&
+		target.lastReceivedDamage
+	) {
+		addMessage({
+			message: `${target.name} activates perish body`,
+		});
+		updatedAttacker = applySecondaryAilmentToPokemon({
+			pokemon: updatedAttacker,
+			addMessage,
+			ailment: 'perish-songed',
+			applicator: updatedTarget,
+		});
+		updatedTarget = applySecondaryAilmentToPokemon({
+			pokemon: updatedTarget,
+			addMessage,
+			ailment: 'perish-songed',
+			applicator: updatedTarget,
+		});
+	}
 	//sand-spit
 	if (
+		!isKO(target) &&
 		target.ability === 'sand-spit' &&
 		target.lastReceivedDamage &&
 		battleWeather !== 'sandstorm' &&

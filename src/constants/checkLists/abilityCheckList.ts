@@ -1298,6 +1298,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/245/',
 		handled: true,
 	},
+	{
+		name: 'perish-body',
+		url: 'https://pokeapi.co/api/v2/ability/253/',
+		handled: true,
+	},
 
 	/**
 	 * BANISHED
@@ -1340,7 +1345,6 @@ export const abilityCheckList: {
 	{ name: 'stalwart', url: 'https://pokeapi.co/api/v2/ability/242/' },
 	{ name: 'ice-face', url: 'https://pokeapi.co/api/v2/ability/248/' },
 	{ name: 'mimicry', url: 'https://pokeapi.co/api/v2/ability/250/' },
-	{ name: 'perish-body', url: 'https://pokeapi.co/api/v2/ability/253/' },
 	{ name: 'neutralizing-gas', url: 'https://pokeapi.co/api/v2/ability/256/' },
 	{ name: 'hunger-switch', url: 'https://pokeapi.co/api/v2/ability/258/' },
 	{ name: 'as-one-glastrier', url: 'https://pokeapi.co/api/v2/ability/266/' },
@@ -1611,6 +1615,7 @@ export const abilityNames = [
 	'toxic-debris',
 	'cheek-pouch',
 	'sand-spit',
+	'perish-body',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
