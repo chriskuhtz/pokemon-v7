@@ -1283,11 +1283,11 @@ export const abilityCheckList: {
 		url: 'https://pokeapi.co/api/v2/ability/307/',
 		handled: true,
 	},
-	{ name: 'toxic-debris', url: 'https://pokeapi.co/api/v2/ability/295/' },
-
-	/**
-	 * BANISHED
-	 */
+	{
+		name: 'toxic-debris',
+		url: 'https://pokeapi.co/api/v2/ability/295/',
+		handled: true,
+	},
 	{ name: 'commander', url: 'https://pokeapi.co/api/v2/ability/279/' },
 	{ name: 'zero-to-hero', url: 'https://pokeapi.co/api/v2/ability/278/' },
 	{ name: 'wimp-out', url: 'https://pokeapi.co/api/v2/ability/193/' },
@@ -1341,6 +1341,9 @@ export const abilityCheckList: {
 	{ name: 'tera-shift', url: 'https://pokeapi.co/api/v2/ability/304/' },
 	{ name: 'tera-shell', url: 'https://pokeapi.co/api/v2/ability/305/' },
 	{ name: 'teraform-zero', url: 'https://pokeapi.co/api/v2/ability/306/' },
+	/**
+	 * BANISHED
+	 */
 ];
 
 export const abilityNames = [
@@ -1596,6 +1599,7 @@ export const abilityNames = [
 	'hospitality',
 	'toxic-chain',
 	'poison-puppeteer',
+	'toxic-debris',
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];

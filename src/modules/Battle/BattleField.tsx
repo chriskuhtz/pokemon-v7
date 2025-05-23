@@ -69,6 +69,7 @@ export interface BattleFieldEffect {
 		| 'shadow-tag'
 		| 'magnet-pull'
 		| 'spikes'
+		| 'toxic-spikes'
 		| 'flower-gift'
 		| 'bad-dreams'
 		| 'unnerve'
@@ -332,10 +333,12 @@ export const BattleField = ({
 					setBattleTerrain,
 					removeScreens,
 					terrain: battleTerrain,
+					addBattleFieldEffect,
 				})
 			);
 		},
 		[
+			addBattleFieldEffect,
 			addMessage,
 			battleFieldEffects,
 			battleTerrain,

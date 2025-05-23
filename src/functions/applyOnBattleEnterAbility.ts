@@ -9,6 +9,7 @@ import {
 	TerrainObject,
 } from '../modules/Battle/hooks/useBattleTerrain';
 import { WeatherObject } from '../modules/Battle/hooks/useBattleWeather';
+import { applyPrimaryAilmentToPokemon } from './applyPrimaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { getHeldItem } from './getHeldItem';
 import { getHighestStat } from './getHighestStat';
@@ -25,6 +26,7 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 	battleFieldEffects,
 	removeScreens,
 	terrain,
+	addBattleFieldEffect,
 }: {
 	user: BattlePokemon;
 	setWeather: (x: WeatherObject) => void;
@@ -35,6 +37,7 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 	battleFieldEffects: BattleFieldEffect[];
 	removeScreens: (ownerId: string) => void;
 	terrain: BattleTerrain | undefined;
+	addBattleFieldEffect: (x: BattleFieldEffect) => void;
 }): BattlePokemon[] => {
 	let updatedPokemon = [...pokemon];
 	if (user.ability == 'curious-medicine') {
@@ -647,6 +650,14 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 		}
 		return updatedPokemon;
 	}
+	if (user.ability === 'toxic-debris') {
+		addBattleFieldEffect({
+			type: 'toxic-spikes',
+			duration: 9000,
+			ownerId: user.ownerId,
+		});
+		addMessage({ message: `${name} spreads toxic debris` });
+	}
 
 	if (
 		battleFieldEffects.some(
@@ -666,6 +677,37 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 				} else {
 					addMessage({ message: `${user.name} is hurt by spikes` });
 					return { ...p, damage: Math.floor(p.stats.hp * SPIKES_FACTOR) };
+				}
+			}
+			return p;
+		});
+	}
+	if (
+		battleFieldEffects.some(
+			(b) => b.type === 'toxic-spikes' && b.ownerId !== user.ownerId
+		)
+	) {
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.id === user.id) {
+				if (
+					(getTypeNames(p).includes('flying') ||
+						p.ability === 'levitate' ||
+						getHeldItem(p) === 'air-balloon' ||
+						getHeldItem(p) === 'heavy-duty-boots') &&
+					getHeldItem(p) !== 'iron-ball'
+				) {
+					return p;
+				} else {
+					return applyPrimaryAilmentToPokemon(
+						p,
+						p,
+						'poison',
+						addMessage,
+						currentWeather,
+						battleFieldEffects,
+						terrain,
+						'toxic spikes'
+					).updatedTarget;
 				}
 			}
 			return p;
