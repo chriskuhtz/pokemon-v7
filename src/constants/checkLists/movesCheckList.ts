@@ -2168,9 +2168,17 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/573/',
 		handled: true,
 	},
-	{ name: 'disarming-voice', url: 'https://pokeapi.co/api/v2/move/574/' },
-	{ name: 'parting-shot', url: 'https://pokeapi.co/api/v2/move/575/' },
-	{ name: 'topsy-turvy', url: 'https://pokeapi.co/api/v2/move/576/' },
+	{
+		name: 'disarming-voice',
+		url: 'https://pokeapi.co/api/v2/move/574/',
+		handled: true,
+	},
+
+	{
+		name: 'topsy-turvy',
+		url: 'https://pokeapi.co/api/v2/move/576/',
+		handled: true,
+	},
 	{ name: 'draining-kiss', url: 'https://pokeapi.co/api/v2/move/577/' },
 	{ name: 'crafty-shield', url: 'https://pokeapi.co/api/v2/move/578/' },
 	{ name: 'flower-shield', url: 'https://pokeapi.co/api/v2/move/579/' },
@@ -2641,6 +2649,7 @@ export const movesCheckList: {
 	{ name: 'trick-or-treat', url: 'https://pokeapi.co/api/v2/move/567/' },
 	{ name: 'ion-deluge', url: 'https://pokeapi.co/api/v2/move/569/' },
 	{ name: 'forests-curse', url: 'https://pokeapi.co/api/v2/move/571/' },
+	{ name: 'parting-shot', url: 'https://pokeapi.co/api/v2/move/575/' },
 ];
 
 export const handledMoves = [
@@ -3128,6 +3137,8 @@ export const handledMoves = [
 	'parabolic-charge',
 	'petal-blizzard',
 	'freeze-dry',
+	'disarming-voice',
+	'topsy-turvy',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

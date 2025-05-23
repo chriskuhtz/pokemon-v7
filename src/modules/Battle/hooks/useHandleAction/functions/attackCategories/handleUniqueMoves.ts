@@ -13,7 +13,10 @@ import { Message } from '../../../../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import { typeEffectivenessChart } from '../../../../../../interfaces/PokemonType';
-import { getRandomBoostableStat } from '../../../../../../interfaces/StatObject';
+import {
+	getRandomBoostableStat,
+	StatObject,
+} from '../../../../../../interfaces/StatObject';
 import { BattleFieldEffect } from '../../../../BattleField';
 
 export const handleUniqueMoves = ({
@@ -54,6 +57,18 @@ export const handleUniqueMoves = ({
 		addMessage({ message: `${updatedTarget.name} is protected by aroma veil` });
 	}
 
+	if (move.name === 'topsy-turvy') {
+		addMessage({
+			message: `${updatedAttacker.name}'s stat modifiers are inverted`,
+		});
+		const invertedBoosts: StatObject = Object.fromEntries(
+			Object.entries(updatedAttacker.statBoosts).map(([stat, value]) => [
+				stat,
+				value * -1,
+			])
+		) as StatObject;
+		updatedAttacker = { ...updatedAttacker, statBoosts: invertedBoosts };
+	}
 	if (move.name === 'disable' && !targetIsAromaVeiled) {
 		const moves = getMovesArray(target, { filterOutDisabled: false });
 		const randomMoveName = moves[getRandomIndex(moves.length)].name;
