@@ -1,6 +1,5 @@
 import { getOppositeDirection } from '../../../functions/getOppositeDirection';
 import { Message } from '../../../hooks/useMessageQueue';
-import { Inventory } from '../../../interfaces/Inventory';
 import { getRandomItem } from '../../../interfaces/Item';
 import {
 	ApricornTree,
@@ -42,10 +41,8 @@ export const interactWithFunction = ({
 	activeMessage,
 	occ,
 	addMultipleMessages,
-	stepsTaken,
 	rotateOccupant,
 	playerLocation,
-	goToMarket,
 	talkToNurse,
 	handledOccupants,
 	handleThisOccupant,
@@ -71,10 +68,8 @@ export const interactWithFunction = ({
 	activeMessage: boolean;
 	occ: Occupant | undefined;
 	addMultipleMessages: (x: Message[]) => void;
-	stepsTaken: number;
 	rotateOccupant: (id: string, newOrientation: CharacterOrientation) => void;
 	playerLocation: CharacterLocationData;
-	goToMarket: (marketInventory: Partial<Inventory>, stepsTaken: number) => void;
 	talkToNurse: (id: string) => void;
 	handleThisOccupant: (occ: Occupant) => void;
 	handledOccupants: string[];
@@ -195,20 +190,6 @@ export const interactWithFunction = ({
 		playerLocation.orientation === data.approachDirection
 	) {
 		addMultipleMessages(data.dialogue.map((d) => ({ message: d })));
-
-		return;
-	}
-	if (data.type === 'MERCHANT') {
-		addMultipleMessages(
-			data.dialogue.map((d, i) => ({
-				message: d,
-				onRemoval:
-					i === data.dialogue.length - 1
-						? () => goToMarket(data.inventory, stepsTaken)
-						: undefined,
-				needsNoConfirmation: true,
-			}))
-		);
 
 		return;
 	}

@@ -3,7 +3,6 @@ import { useCallback, useContext, useMemo, useState } from 'react';
 import { CombinedCanvas } from '../../components/CombinedCanvas/CombinedCanvas';
 import { fps } from '../../constants/gameData';
 import { mapsRecord } from '../../constants/maps/mapsRecord';
-import { getTimeOfDay } from '../../functions/getTimeOfDay';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { LocationContext } from '../../hooks/LocationProvider';
 import { useApricornTree } from '../../hooks/useApricornTree';
@@ -16,10 +15,10 @@ import { useInteractWithSnorlax } from '../../hooks/useInteractWithSnorlax';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useRocketRadio } from '../../hooks/useRocketRadio';
 import { SaveFileContext } from '../../hooks/useSaveFile';
+import { useShader } from '../../hooks/useShader';
 import { useStaticEncounter } from '../../hooks/useStaticEncounter';
 import { useStrangeTree } from '../../hooks/useStrangeTree';
 import { useZigzagoonForagers } from '../../hooks/useZigzagoonForagers';
-import { Inventory } from '../../interfaces/Inventory';
 import { Occupant } from '../../interfaces/OverworldMap';
 import './Overworld.css';
 import { ClickerGrid } from './components/ClickerGrid';
@@ -43,11 +42,8 @@ const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
 const occupantsCanvasId = 'occs';
 
-export const Overworld = ({
-	goToMarket,
-}: {
-	goToMarket: (marketInventory: Partial<Inventory>, stepsTaken: number) => void;
-}) => {
+export const Overworld = () => {
+	const shader = useShader();
 	const [stepsTaken, setStepsTaken] = useState<number>(0);
 	const { baseSize } = useContext(BaseSizeContext);
 	const { latestMessage, addMultipleMessages } =
@@ -111,10 +107,8 @@ export const Overworld = ({
 				activeMessage: !!latestMessage,
 				occ,
 				addMultipleMessages,
-				stepsTaken,
 				rotateOccupant,
 				playerLocation: location,
-				goToMarket,
 				talkToNurse,
 				handledOccupants: saveFile.handledOccupants.map((h) => h.id),
 				handleThisOccupant: handleOccupantReducer,
@@ -143,7 +137,6 @@ export const Overworld = ({
 			stepsTaken,
 			rotateOccupant,
 			location,
-			goToMarket,
 			talkToNurse,
 			saveFile.handledOccupants,
 			saveFile.settings,
@@ -232,7 +225,7 @@ export const Overworld = ({
 							top: -location.y * baseSize,
 							left: -location.x * baseSize,
 							position: 'absolute',
-							backgroundColor: map.timeOfDayShadersMap[getTimeOfDay()],
+							backgroundColor: shader,
 							zIndex: 1,
 						}}
 					/>
@@ -289,7 +282,7 @@ export const Overworld = ({
 						top: 0,
 						left: 0,
 						position: 'absolute',
-						backgroundColor: map.timeOfDayShadersMap[getTimeOfDay()],
+						backgroundColor: shader,
 						zIndex: -4,
 					}}
 				/>

@@ -1,13 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
-import { mapsRecord } from '../../../constants/maps/mapsRecord';
 import { addPokemonToDex } from '../../../functions/addPokemonToDex';
 import { getMiddleOfThree } from '../../../functions/getMiddleOfThree';
-import { getTimeOfDay } from '../../../functions/getTimeOfDay';
 import { LocationContext } from '../../../hooks/LocationProvider';
 import { useGetBattleTeam } from '../../../hooks/useGetBattleTeam';
 import { useLeaveBattle } from '../../../hooks/useLeaveBattle';
 import { Message } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
+import { useShader } from '../../../hooks/useShader';
 import { Challenger } from '../../../interfaces/Challenger';
 import { Inventory } from '../../../interfaces/Inventory';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
@@ -42,7 +41,6 @@ export const BattleLoader = ({
 
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { location } = useContext(LocationContext);
-	const { timeOfDayShadersMap } = mapsRecord[location.mapId];
 	const leave = useLeaveBattle();
 
 	const [registered, setRegistered] = useState<boolean>(false);
@@ -63,6 +61,7 @@ export const BattleLoader = ({
 		saveFile,
 	]);
 
+	const shader = useShader();
 	if (!battleOpponents || !battleTeam) {
 		return <LoadingScreen />;
 	}
@@ -77,7 +76,7 @@ export const BattleLoader = ({
 					top: 0,
 					left: 0,
 					position: 'absolute',
-					backgroundColor: timeOfDayShadersMap[getTimeOfDay()],
+					backgroundColor: shader,
 					zIndex: 1,
 				}}
 			/>
