@@ -450,6 +450,8 @@ export const extraFeatureCheckList: {
 	{ name: 'trainer n', handled: true },
 	{ name: 'trainer red', handled: true },
 	{ name: 'quests for red', handled: true },
+	{ name: 'upgrades for swarm radar (stronger pokemon)' },
+	{ name: 'upgrades for swarm radar (future and past distortions)' },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -478,9 +480,5 @@ export const extraFeatureCheckList: {
 	{ name: 'random encounters' },
 	{ name: 'random evolutions' },
 	{ name: 'steven as the fossil protector' },
-	{
-		name: 'upgrades for swarm radar (stronger pokemon, future and past distortions)',
-	},
-	{ name: 'time traveller red' },
 	{ name: 'download your player file and share it with other' },
 ];

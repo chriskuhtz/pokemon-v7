@@ -1,6 +1,6 @@
-import { useCallback, useContext } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
 import { ONE_HOUR } from '../constants/gameData';
-import { mapDisplayNames, MapId } from '../constants/maps/mapsRecord';
+import { mapDisplayNames, MapId, mapIds } from '../constants/maps/mapsRecord';
 import { PokemonName, pokemonNames } from '../constants/pokemonNames';
 import { getRandomEntry } from '../functions/filterTargets';
 import { PokemonSwarm, SaveFile } from '../interfaces/SaveFile';
@@ -53,17 +53,47 @@ const swarmMons: PokemonName[] = [
 	'quaxly',
 	'sprigatito',
 ];
+const strongerSwarmMons: PokemonName[] = [
+	'donphan',
+	'wigglytuff',
+	'amoonguss',
+	'misdreavus',
+	'volcarona',
+	'magneton',
+	'shelgon',
+	'cyclizar',
+	'delibird',
+	'hariyama',
+	'zweilous',
+	'pupitar',
+	'kirlia',
+];
 
-export const swarms: PokemonSwarm[] = swarmMons.map((p) => ({
-	pokemon: p,
-	route: 'camp',
-	leavesAt: 0,
-	xpMax: 1000,
-	xpMin: 125,
-}));
 export const useSwarmRadar = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { addMessage } = useContext(MessageQueueContext);
+
+	const availableSwarms: PokemonSwarm[] = useMemo(() => {
+		const res = swarmMons.map((p) => ({
+			pokemon: p,
+			route: mapIds[0],
+			leavesAt: 0,
+			xpMax: 1000,
+			xpMin: 125,
+		}));
+		if (saveFile.campUpgrades['upgraded swarm radar']) {
+			return res.concat(
+				...strongerSwarmMons.map((p) => ({
+					pokemon: p,
+					route: mapIds[0],
+					leavesAt: 0,
+					xpMax: 64000,
+					xpMin: 8000,
+				}))
+			);
+		}
+		return res;
+	}, [saveFile.campUpgrades]);
 
 	return useCallback(() => {
 		const now = new Date().getTime();
@@ -76,7 +106,7 @@ export const useSwarmRadar = () => {
 			});
 		} else if (!saveFile.nextSwarmReadyAt || now > saveFile.nextSwarmReadyAt) {
 			let swarm = {
-				...getRandomEntry(swarms),
+				...getRandomEntry(availableSwarms),
 				route: getRouteforSwarm(saveFile),
 			};
 
@@ -100,5 +130,5 @@ export const useSwarmRadar = () => {
 				needsNoConfirmation: true,
 			});
 		}
-	}, [addMessage, patchSaveFileReducer, saveFile]);
+	}, [addMessage, availableSwarms, patchSaveFileReducer, saveFile]);
 };
