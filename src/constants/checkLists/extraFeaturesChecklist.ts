@@ -459,8 +459,8 @@ export const extraFeatureCheckList: {
 		name: 'quests for distortion mons / ultra beasts',
 		handled: true,
 	},
-	{ name: 'distortion shaders' },
-
+	{ name: 'distortion shaders', handled: true },
+	{ name: 'new apricorns (repeat ball)' },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -470,8 +470,8 @@ export const extraFeatureCheckList: {
 	{ name: 'timeofday in pokedex' },
 	{ name: 'download did not boost after tablets of ruin lowered' },
 	{ name: 'make red sprite smaller' },
+	{ name: 'custom item descriptions' },
 	//CONTENT:
-	{ name: 'new apricorns (repeat ball)' },
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
 	{ name: 'pryce' },

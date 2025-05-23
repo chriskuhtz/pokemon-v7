@@ -9,6 +9,7 @@ const apricornSpriteMap: Record<ApricornType, string> = {
 	'red-apricorn': '/mapObjects/apricornRed.png',
 	'white-apricorn': '/mapObjects/apricornWhite.png',
 	'yellow-apricorn': '/mapObjects/apricornYellow.png',
+	'orange-apricorn': '/mapObjects/apricornYellow.png',
 };
 export const makeApricornTree = ({
 	x,

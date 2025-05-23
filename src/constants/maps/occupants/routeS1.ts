@@ -1,4 +1,5 @@
 import { getTimeOfDay } from '../../../functions/getTimeOfDay';
+import { makeApricornTree } from '../../../functions/makeApricornTree';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { barryS1 } from './barry';
 import { cynthiaS1 } from './cynthia';
@@ -144,4 +145,22 @@ export const routeS1Occupants: OverworldMap['occupants'] = [
 	nS1,
 	redS1,
 	silverS1,
+	...makeApricornTree({
+		x: 42,
+		y: 18,
+		apricorn: 'orange-apricorn',
+		id: 'orange-apri-routeS1-1',
+	}),
+	...makeApricornTree({
+		x: 40,
+		y: 16,
+		apricorn: 'orange-apricorn',
+		id: 'orange-apri-routeS1-2',
+	}),
+	...makeApricornTree({
+		x: 39,
+		y: 17,
+		apricorn: 'orange-apricorn',
+		id: 'orange-apri-routeS1-3',
+	}),
 ];

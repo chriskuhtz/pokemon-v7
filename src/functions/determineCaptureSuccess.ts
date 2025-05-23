@@ -56,7 +56,7 @@ export const determineCaptureSuccess = (
 		ballfactor = 0.5 + 0.016 * Math.max(0, 30 - level);
 	}
 	if (ball === 'repeat-ball' && caughtBefore) {
-		ballfactor = 1;
+		ballfactor = 1.25;
 	}
 	//max after 10 rounds
 	if (ball === 'timer-ball') {
