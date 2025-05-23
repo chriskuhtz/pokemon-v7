@@ -5,4 +5,5 @@ export const refactoringCheckList: {
 }[] = [
 	{ name: 'AbilityInfoButton', handled: true },
 	{ name: 'BagLimitBar', handled: true },
+	{ name: 'BattlePokemonInfo', handled: true },
 ];
