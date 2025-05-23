@@ -287,10 +287,10 @@ export const cynthiaS1E1: Occupant = {
 	conditionFunction: (s) =>
 		s.handledOccupants.every((h) => h.id !== cynthiaId) && isSunday(),
 };
-export const cynthiaOnixCave: Occupant = {
+export const cynthiaS1: Occupant = {
 	...cynthia,
 	x: 25,
-	y: 25,
+	y: 20,
 	conditionFunction: (s) =>
 		s.handledOccupants.every((h) => h.id !== cynthiaId) && isMonday(),
 };

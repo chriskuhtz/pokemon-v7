@@ -400,10 +400,11 @@ export const barryS1E1: Occupant = {
 	conditionFunction: (s) =>
 		s.handledOccupants.every((h) => h.id !== barryId) && isThursday(),
 };
-export const barryOnixCave: Occupant = {
+export const barryS1: Occupant = {
 	...barry,
-	x: 38,
-	y: 44,
+	x: 4,
+	y: 29,
+	orientation: 'RIGHT',
 	conditionFunction: (s) =>
 		s.handledOccupants.every((h) => h.id !== barryId) && isFriday(),
 };

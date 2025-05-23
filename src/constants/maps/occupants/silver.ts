@@ -359,10 +359,11 @@ export const silverS1E1: Occupant = {
 	conditionFunction: (s) =>
 		s.handledOccupants.every((h) => h.id !== silverId) && isFriday(),
 };
-export const silverOnixCave: Occupant = {
+export const silverS1: Occupant = {
 	...silver,
-	x: 8,
-	y: 9,
+	x: 10,
+	y: 1,
+	orientation: 'RIGHT',
 	conditionFunction: (s) =>
 		s.handledOccupants.every((h) => h.id !== silverId) && isSaturday(),
 };

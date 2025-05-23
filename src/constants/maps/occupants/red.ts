@@ -284,11 +284,11 @@ export const redS1E1: Occupant = {
 	conditionFunction: (s) =>
 		s.handledOccupants.every((h) => h.id !== redId) && isMonday(),
 };
-export const redOnixCave: Occupant = {
+export const redS1: Occupant = {
 	...red,
-	x: 7,
-	y: 14,
-	orientation: 'UP',
+	x: 3,
+	y: 13,
+	orientation: 'DOWN',
 	conditionFunction: (s) =>
 		s.handledOccupants.every((h) => h.id !== redId) && isTuesday(),
 };

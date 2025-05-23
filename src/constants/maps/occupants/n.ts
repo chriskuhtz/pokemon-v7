@@ -255,10 +255,10 @@ export const nS1E1: Occupant = {
 	conditionFunction: (s) =>
 		s.handledOccupants.every((h) => h.id !== nId) && isSunday(),
 };
-export const nOnixCave: Occupant = {
+export const nS1: Occupant = {
 	...n,
-	x: 45,
-	y: 15,
+	x: 38,
+	y: 22,
 	conditionFunction: (s) =>
 		s.handledOccupants.every((h) => h.id !== nId) && isMonday(),
 };
