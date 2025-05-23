@@ -163,7 +163,8 @@ export const handleAttackStart = ({
 		const isInShadows =
 			target.moveQueue.length > 0 &&
 			target.moveQueue[0].type === 'BattleAttack' &&
-			target.moveQueue[0].name === 'shadow-force';
+			(target.moveQueue[0].name === 'shadow-force' ||
+				target.moveQueue[0].name === 'phantom-force');
 		const isDiving =
 			target.moveQueue.length > 0 &&
 			target.moveQueue[0].type === 'BattleAttack' &&

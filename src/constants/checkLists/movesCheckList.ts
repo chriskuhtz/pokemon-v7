@@ -2140,7 +2140,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/565/',
 		handled: true,
 	},
-	{ name: 'phantom-force', url: 'https://pokeapi.co/api/v2/move/566/' },
+	{
+		name: 'phantom-force',
+		url: 'https://pokeapi.co/api/v2/move/566/',
+		handled: true,
+	},
 	{ name: 'trick-or-treat', url: 'https://pokeapi.co/api/v2/move/567/' },
 	{ name: 'noble-roar', url: 'https://pokeapi.co/api/v2/move/568/' },
 	{ name: 'ion-deluge', url: 'https://pokeapi.co/api/v2/move/569/' },
@@ -3100,6 +3104,7 @@ export const handledMoves = [
 	'sticky-web',
 	'toxic-spikes',
 	'fell-stinger',
+	'phantom-force',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
