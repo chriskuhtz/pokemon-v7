@@ -12,7 +12,7 @@ import { filterTargets } from './filterTargets';
 import { getHeldItem } from './getHeldItem';
 import { getMovesArray } from './getMovesArray';
 
-export const determineBestMoveAndTarget = (
+export const determineHighestDamage = (
 	attacker: BattlePokemon,
 	moves: BattleMove[],
 	targets: BattlePokemon[],
@@ -184,7 +184,7 @@ export const chooseOpponentAction = ({
 		};
 	}
 
-	const { targetId, actionName } = determineBestMoveAndTarget(
+	const { targetId, actionName } = determineHighestDamage(
 		controlled,
 		moves,
 		filtered,

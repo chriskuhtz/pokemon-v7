@@ -1,3 +1,4 @@
+import { MapId, mapsRecord } from '../constants/maps/mapsRecord';
 import { Occupant, OverworldMap } from '../interfaces/OverworldMap';
 
 export const getMapDimensions = (
@@ -46,7 +47,7 @@ export const isPassable = (
 	}
 	const nextFieldObstacle = map.tileMap.obstacleLayer[field.y][field.x];
 
-	const nextFieldWater = map.tileMap.waterLayer[field.y][field.x];
+	const nextFieldWater = isWater(field.x, field.y, map.id);
 
 	if (nextFieldWater) {
 		return canSwim;
@@ -69,3 +70,6 @@ export const isPassable = (
 
 	return true;
 };
+
+export const isWater = (x: number, y: number, mapId: MapId): boolean =>
+	!!mapsRecord[mapId].tileMap.waterLayer[y][x];

@@ -80,6 +80,12 @@ export type Pokedex = Record<
 >;
 
 export type CatchBoosts = Record<PokemonType, number>;
+
+export type CatchStreak = {
+	pokemon: PokemonName;
+	streak: number;
+	mapId: MapId;
+};
 export interface SaveFile {
 	badges: BadgeName[];
 	playerId: string;
@@ -130,6 +136,7 @@ export interface SaveFile {
 		barryDefeatedAt?: number;
 		silverDefeatedAt?: number;
 		cynthiaDefeatedAt?: number;
+		nDefeatedAt?: number;
 	};
 	farm: {
 		plants: BerryBush[];
@@ -152,4 +159,6 @@ export interface SaveFile {
 	activatedRepel?: 'repel' | 'super-repel' | 'max-repel';
 	activatedLure?: 'lure' | 'super-lure' | 'max-lure';
 	catchBoosts?: CatchBoosts;
+	catchStreak?: CatchStreak;
+	longestStreak?: number;
 }

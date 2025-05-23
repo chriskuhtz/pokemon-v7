@@ -3,6 +3,7 @@ import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
 import { battleSpriteSize } from '../../../constants/gameData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getSizeFactor } from '../../../functions/getSizeFactor';
+import { useLocationBattlePlatform } from '../../../hooks/useLocationColors';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
 export function EnemyLane({
@@ -10,6 +11,7 @@ export function EnemyLane({
 }: {
 	onFieldOpponents: BattlePokemon[];
 }) {
+	const platform = useLocationBattlePlatform();
 	return (
 		<div
 			style={{
@@ -33,7 +35,7 @@ export function EnemyLane({
 				style={{
 					display: 'flex',
 					alignItems: 'center',
-					backgroundImage: "url('/battlePlatforms/grass.png')",
+					backgroundImage: `url('/battlePlatforms/${platform}.png')`,
 					backgroundSize: '100% 100%',
 					backgroundRepeat: 'no-repeat',
 					minWidth: '300px',

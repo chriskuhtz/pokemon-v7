@@ -9,10 +9,7 @@ import React, {
 import { MoveName } from '../constants/checkLists/movesCheckList';
 
 import { v4 } from 'uuid';
-import {
-	getBagLimit,
-	getTotalInventoryAmount,
-} from '../components/BagLimitBar/BagLimitBar';
+
 import {
 	QuestName,
 	questNames,
@@ -29,6 +26,7 @@ import { addPokemonToDex } from '../functions/addPokemonToDex';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
+import { getBagLimit, getTotalInventoryAmount } from '../functions/getBagLimit';
 import { getRewardItemsForQuest } from '../functions/getRewardForQuest';
 import { getTeamSize } from '../functions/getTeamSize';
 import { TimeOfDay } from '../functions/getTimeOfDay';
@@ -121,6 +119,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		[saveFile]
 	);
 
+	//handle side effects here
 	const setSaveFile = useCallback((u: SaveFile) => {
 		const update = { ...u };
 		const newTime = new Date().getTime();
@@ -130,6 +129,10 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		update.pokemon.forEach((p) => {
 			pokedex = addPokemonToDex(pokedex, p.name, p.caughtOnMap, true);
 		});
+
+		if ((update.catchStreak?.streak ?? 0) > (update.longestStreak ?? 0)) {
+			update.longestStreak = update.catchStreak?.streak;
+		}
 		s({
 			...update,
 			lastEdited: newTime,

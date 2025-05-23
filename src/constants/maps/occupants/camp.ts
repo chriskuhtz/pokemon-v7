@@ -1,4 +1,4 @@
-import { isBagOverloaded } from '../../../components/BagLimitBar/BagLimitBar';
+import { isBagOverloaded } from '../../../functions/getBagLimit';
 import { getHistorianMessage } from '../../../functions/getHistorianMessage';
 import { dugtrioExplorers } from '../../../hooks/useDugtrioExplorers';
 import { zigzagoonForagers } from '../../../hooks/useZigzagoonForagers';

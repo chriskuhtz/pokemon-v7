@@ -194,9 +194,7 @@ export const interactWithFunction = ({
 		data.type === 'SIGN' &&
 		playerLocation.orientation === data.approachDirection
 	) {
-		addMultipleMessages(
-			data.dialogue.map((d) => ({ message: d, needsNoConfirmation: true }))
-		);
+		addMultipleMessages(data.dialogue.map((d) => ({ message: d })));
 
 		return;
 	}

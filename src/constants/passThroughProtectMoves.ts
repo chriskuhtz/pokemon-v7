@@ -9,6 +9,7 @@ export const passThroughProtectMoves = [
 	'play-nice',
 	'psych-up',
 	'shadow-force',
+	'shadow-force',
 	'transform',
 	'mighty-cleave',
 ];

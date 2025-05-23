@@ -19,16 +19,12 @@ import { MoveDto } from '../interfaces/Move';
 import { OwnedPokemon, PokemonGender } from '../interfaces/OwnedPokemon';
 import { PokemonData } from '../interfaces/PokemonData';
 import { PokemonSpeciesData } from '../interfaces/PokemonSpeciesData';
-import {
-	EmptyStatObject,
-	generateRandomStatObject,
-} from '../interfaces/StatObject';
+import { EmptyStatObject } from '../interfaces/StatObject';
 
 export interface BattleTeamConfig {
 	assignLearnsetMoves?: boolean;
 	assignNaturalAbility?: boolean;
 	assignGender?: boolean;
-	generateIvs?: boolean;
 	assignHeldItem?: boolean;
 }
 
@@ -36,8 +32,7 @@ export const useGetBattleTeam = (
 	initTeam: OwnedPokemon[],
 	config: BattleTeamConfig
 ) => {
-	const { assignGender, assignLearnsetMoves, generateIvs, assignHeldItem } =
-		config;
+	const { assignGender, assignLearnsetMoves, assignHeldItem } = config;
 	return useFetch<BattlePokemon[]>(() =>
 		Promise.all(
 			initTeam.map(async (pokemon) => {
@@ -217,9 +212,7 @@ export const useGetBattleTeam = (
 					capture_rate: capture_rate,
 					happiness: pokemon.happiness < 0 ? base_happiness : pokemon.happiness,
 					status: 'BENCH',
-					intrinsicValues: generateIvs
-						? generateRandomStatObject(31)
-						: pokemon.intrinsicValues,
+
 					effortValues: pokemon.effortValues,
 					evAwards: getEvAwards(fetchedData.stats),
 					participatedInBattle: false,

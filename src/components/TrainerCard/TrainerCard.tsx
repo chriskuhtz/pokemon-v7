@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { battleSpriteSize } from '../../constants/gameData';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
@@ -13,6 +13,7 @@ export const TrainerCard = () => {
 			mileStones,
 			rangerLevel,
 			catchBoosts,
+			longestStreak,
 		},
 	} = useContext(SaveFileContext);
 
@@ -60,6 +61,7 @@ export const TrainerCard = () => {
 				) : (
 					<></>
 				)}
+				{longestStreak ? <h4>Longest Catch Streak: {longestStreak}</h4> : <></>}
 				{rangerLevel ? <h4>Ranger Level: {rangerLevel}</h4> : <></>}
 			</div>
 			{catchBoosts ? (
@@ -74,10 +76,11 @@ export const TrainerCard = () => {
 					>
 						{Object.entries(catchBoosts).map(([type, boost]) => {
 							if (boost === 0) {
-								return <></>;
+								return <React.Fragment key={type}></React.Fragment>;
 							}
 							return (
 								<strong
+									key={type}
 									style={{
 										display: 'flex',
 										alignItems: 'center',

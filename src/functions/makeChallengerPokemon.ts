@@ -1,6 +1,10 @@
 import { v4 } from 'uuid';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
-import { EmptyStatObject } from '../interfaces/StatObject';
+import {
+	EmptyStatObject,
+	generateRandomStatObject,
+	StatObject,
+} from '../interfaces/StatObject';
 
 export const OPPO_ID = 'oppo';
 export const shinyChance = 1 / 4096;
@@ -30,13 +34,21 @@ export const testOpponent: OwnedPokemon = {
 
 export const makeChallengerPokemon = (
 	data: Partial<Omit<OwnedPokemon, 'id'>>,
-	config?: { increasedShinyFactor?: number }
+	config?: { increasedShinyFactor?: number; fixedIvs?: boolean }
 ): OwnedPokemon => {
+	const ivs = (): StatObject => {
+		if (config?.fixedIvs) {
+			return data.intrinsicValues ?? generateRandomStatObject(31);
+		}
+
+		return generateRandomStatObject(31);
+	};
 	return {
 		...testOpponent,
 		weightModifier: Math.random(),
 		...data,
 		id: v4(),
+		intrinsicValues: ivs(),
 		shiny: Math.random() * (config?.increasedShinyFactor ?? 1) < shinyChance,
 	};
 };

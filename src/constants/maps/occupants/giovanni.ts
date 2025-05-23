@@ -128,7 +128,6 @@ export const giovanni: OverworldTrainer = {
 		assignHeldItem: false,
 		assignLearnsetMoves: false,
 		assignNaturalAbility: false,
-		generateIvs: true,
 	},
 	conditionFunction: (s) =>
 		!!(

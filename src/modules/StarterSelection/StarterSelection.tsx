@@ -52,7 +52,6 @@ export const StarterSelection = (): JSX.Element => {
 		{
 			assignLearnsetMoves: true,
 			assignGender: true,
-			generateIvs: true,
 		}
 	);
 	const [chosenStarter, setChosenStarter] = useState<

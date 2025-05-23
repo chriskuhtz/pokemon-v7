@@ -42,6 +42,7 @@ import { useBattleTerrain } from './hooks/useBattleTerrain';
 import { useBattleWeather } from './hooks/useBattleWeather';
 import { useChooseAction } from './hooks/useChooseAction';
 import { useHandleAction } from './hooks/useHandleAction/useHandleAction';
+import { handleCheekPouch } from '../../functions/handleCheekPouch';
 
 export type ActionType =
 	| MoveName
@@ -69,6 +70,7 @@ export interface BattleFieldEffect {
 		| 'shadow-tag'
 		| 'magnet-pull'
 		| 'spikes'
+		| 'toxic-spikes'
 		| 'flower-gift'
 		| 'bad-dreams'
 		| 'unnerve'
@@ -85,7 +87,8 @@ export interface BattleFieldEffect {
 		| 'battery'
 		| 'power-spot'
 		| 'steely-spirit'
-		| 'pastel-veil';
+		| 'pastel-veil'
+		| 'sticky-web';
 	ownerId: string;
 	applicatorId?: string;
 	duration: number;
@@ -332,10 +335,12 @@ export const BattleField = ({
 					setBattleTerrain,
 					removeScreens,
 					terrain: battleTerrain,
+					addBattleFieldEffect,
 				})
 			);
 		},
 		[
+			addBattleFieldEffect,
 			addMessage,
 			battleFieldEffects,
 			battleTerrain,
@@ -522,7 +527,7 @@ export const BattleField = ({
 						pokemon: updated,
 						addMessage,
 					});
-					updated = updated = applyEndOfTurnHeldItem(
+					updated = applyEndOfTurnHeldItem(
 						updated,
 						(x) => collectedMessages.push(x),
 						(x) => collectedMessages.push(...x),
@@ -530,6 +535,7 @@ export const BattleField = ({
 						battleTerrain,
 						battleInventory
 					);
+					updated = handleCheekPouch(updated, (x) => collectedMessages.push(x));
 
 					updated = applyEndOfTurnWeatherDamage(
 						updated,

@@ -57,6 +57,7 @@ export interface BattlePokemon extends OwnedPokemon {
 	furyCutterStack?: number;
 	metronomeStack?: number;
 	consumedBerry?: BerryType;
+	cheekPouched?: boolean;
 }
 
 export function isBattlePokemon(

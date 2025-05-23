@@ -26,6 +26,7 @@ import { Stat } from '../../../../../interfaces/StatObject';
 import { WeatherType } from '../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../BattleField';
 import { BattleTerrain, TerrainObject } from '../../useBattleTerrain';
+import { WeatherObject } from '../../useBattleWeather';
 
 export const handleAbilitiesAfterAttack = (
 	attacker: BattlePokemon,
@@ -39,13 +40,61 @@ export const handleAbilitiesAfterAttack = (
 	battleFieldEffects: BattleFieldEffect[],
 	originalTargetHp: number,
 	terrain: BattleTerrain | undefined,
-	setTerrain: (x: TerrainObject) => void
+	setTerrain: (x: TerrainObject) => void,
+	setWeather: (x: WeatherObject) => void
 ): {
 	updatedAttacker: BattlePokemon;
 	updatedTarget: BattlePokemon;
 } => {
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
+	//perish-body
+	if (
+		!isKO(target) &&
+		target.ability === 'perish-body' &&
+		target.lastReceivedDamage
+	) {
+		addMessage({
+			message: `${target.name} activates perish body`,
+		});
+		updatedAttacker = applySecondaryAilmentToPokemon({
+			pokemon: updatedAttacker,
+			addMessage,
+			ailment: 'perish-songed',
+			applicator: updatedTarget,
+		});
+		updatedTarget = applySecondaryAilmentToPokemon({
+			pokemon: updatedTarget,
+			addMessage,
+			ailment: 'perish-songed',
+			applicator: updatedTarget,
+		});
+	}
+	//sand-spit
+	if (
+		!isKO(target) &&
+		target.ability === 'sand-spit' &&
+		target.lastReceivedDamage &&
+		battleWeather !== 'sandstorm' &&
+		battleWeather !== 'sandstorm_effectless'
+	) {
+		addMessage({
+			message: `${target.name} uses ability sand spit to create a sandstorm`,
+		});
+		setWeather({ type: 'sandstorm', duration: 9000 });
+	}
+	//fell-stinger
+	if (isKO(target) && move.name === 'fell-stinger') {
+		updatedAttacker = applyStatChangeToPokemon(
+			updatedAttacker,
+			'attack',
+			1,
+			true,
+			battleFieldEffects,
+			addMessage,
+			'fell stinger'
+		);
+	}
 	//final gambit
 	if (move.name === 'final-gambit') {
 		updatedAttacker = { ...updatedAttacker, damage: updatedAttacker.stats.hp };

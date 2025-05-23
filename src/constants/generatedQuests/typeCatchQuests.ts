@@ -49,6 +49,14 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 				catchBoosts: { [type]: 1 },
 				researchPoints: 20,
 				availableAfter: `catch a ${type} pokemon` as QuestName,
+				progress: (s) => ({
+					goal: 10,
+					current: Object.entries(s.pokedex).filter(
+						([name, info]) =>
+							info.caughtOnRoutes.length > 0 &&
+							byType[type].includes(name as PokemonName)
+					).length,
+				}),
 				conditionFunction: (s) =>
 					Object.entries(s.pokedex).filter(
 						([name, info]) =>
@@ -72,6 +80,14 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 				catchBoosts: { [type]: 1 },
 				researchPoints: 50,
 				availableAfter: `catch 10 different ${type} pokemon` as QuestName,
+				progress: (s) => ({
+					goal: 25,
+					current: Object.entries(s.pokedex).filter(
+						([name, info]) =>
+							info.caughtOnRoutes.length > 0 &&
+							byType[type].includes(name as PokemonName)
+					).length,
+				}),
 				conditionFunction: (s) =>
 					Object.entries(s.pokedex).filter(
 						([name, info]) =>
@@ -93,6 +109,14 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 				catchBoosts: { [type]: 1 },
 				researchPoints: 100,
 				availableAfter: `catch 25 different ${type} pokemon` as QuestName,
+				progress: (s) => ({
+					goal: 50,
+					current: Object.entries(s.pokedex).filter(
+						([name, info]) =>
+							info.caughtOnRoutes.length > 0 &&
+							byType[type].includes(name as PokemonName)
+					).length,
+				}),
 				conditionFunction: (s) =>
 					Object.entries(s.pokedex).filter(
 						([name, info]) =>

@@ -1,11 +1,11 @@
-import { useContext, useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { IoMdFemale, IoMdMale } from 'react-icons/io';
 import { RiSparkling2Line } from 'react-icons/ri';
 import { battleSpriteSize } from '../../constants/gameData';
 import { secondTurnMoves } from '../../constants/secondTurnMoves';
-import { typeColors } from '../../constants/typeColors';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getPlayerId } from '../../functions/getPlayerId';
+import { getPrimaryAilmentColor } from '../../functions/getPrimaryAilmentColor';
 import { LocationContext } from '../../hooks/LocationProvider';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
@@ -28,27 +28,14 @@ export const BattlePokemonInfo = ({
 	} = useContext(SaveFileContext);
 	const { location } = useContext(LocationContext);
 
-	const backgroundColor = useMemo(() => {
-		if (pokemon.primaryAilment?.type === 'burn') {
-			return typeColors['fire'];
-		}
-		if (pokemon.primaryAilment?.type === 'paralysis') {
-			return typeColors['electric'];
-		}
-		if (pokemon.primaryAilment?.type === 'sleep') {
-			return typeColors['normal'];
-		}
-		if (pokemon.primaryAilment?.type === 'freeze') {
-			return typeColors['ice'];
-		}
-		if (
-			pokemon.primaryAilment?.type === 'poison' ||
-			pokemon.primaryAilment?.type === 'toxic'
-		) {
-			return typeColors['poison'];
-		}
-		return 'black';
-	}, [pokemon]);
+	const backgroundColor = useMemo(
+		() => getPrimaryAilmentColor(pokemon.primaryAilment?.type),
+		[pokemon]
+	);
+
+	if (pokemon.status === 'CAUGHT') {
+		return <React.Fragment key={pokemon.id}></React.Fragment>;
+	}
 	return (
 		<div
 			onClick={onClick}
