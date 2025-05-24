@@ -26,6 +26,7 @@ export type MissReason =
 	| 'ATTACKER_NOT_ASLEEP'
 	| 'TARGET_NOT_ASLEEP'
 	| 'PROTECTED'
+	| 'SPIKY_SHIELDED'
 	| 'QUEENLY_MAJESTY'
 	| 'PSYCHIC_TERRAIN';
 
@@ -70,6 +71,9 @@ export const determineMiss = (
 		passThroughProtectMoves.includes(attack.name) ||
 		(isContactMove(attack.name, attacker) &&
 			attacker.ability === 'unseen-fist');
+	if (target.spikyShielded && !passesThrough) {
+		return { miss: true, reason: 'SPIKY_SHIELDED' };
+	}
 	if (target.protected && !passesThrough) {
 		return { miss: true, reason: 'PROTECTED' };
 	}
