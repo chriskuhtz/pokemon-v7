@@ -16,7 +16,7 @@ import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
 
-export const silverId = 'trainer_silver';
+export const silverId = 'trainer silver';
 const silverTeam = (s: SaveFile): OwnedPokemon[] => {
 	const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
 
@@ -321,7 +321,7 @@ const silver: OverworldTrainer = {
 	orientation: 'DOWN',
 	sprite: SpriteEnum.silver,
 	unhandledMessage: ['hmppf', 'do you even have strong pokemon?'],
-	name: 'Trainer Silver',
+	name: silverId,
 	team: silverTeam,
 	battleTeamConfig: {
 		assignGender: false,

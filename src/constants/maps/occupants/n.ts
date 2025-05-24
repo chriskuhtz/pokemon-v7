@@ -15,7 +15,7 @@ import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
 
-export const nId = 'trainer_n';
+export const nId = 'trainer n';
 const nTeam = (s: SaveFile): OwnedPokemon[] => {
 	const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
 
@@ -213,7 +213,7 @@ const n: OverworldTrainer = {
 	orientation: 'DOWN',
 	sprite: SpriteEnum.n,
 	unhandledMessage: ['Do you treat your pokemon well?'],
-	name: 'traveller n',
+	name: nId,
 	team: nTeam,
 	battleTeamConfig: {
 		assignGender: false,
