@@ -13,9 +13,7 @@ import {
 	aquaNamesFemale,
 	aquaNamesMale,
 	aquaPokemon,
-	getAquaAliyaTeam,
-	getAquaArnoldTeam,
-	getAquaMessage,
+	getAquaArchieTeam,
 } from './aqua';
 import {
 	getRocketChadTeam,
@@ -107,43 +105,28 @@ const createAdmin = (
 	const { x, y } = pos;
 
 	if (affiliation === 'aqua') {
-		const arnold: OverworldTrainer = {
+		return {
 			x,
 			y,
 			type: 'TRAINER',
-			id: `Aqua Admin Arnold`,
+			id: `Aqua Boss Archie`,
 			orientation: getRandomOrientation(),
-			unhandledMessage: getAquaMessage(),
-			team: (s) => getAquaArnoldTeam(s),
+			unhandledMessage: [
+				'We shall flood the whole world',
+				'Then my beloved water pokemon',
+				'will have all the space they need',
+				'Isnt that a noble goal?',
+			],
+			team: (s) => getAquaArchieTeam(s),
 			battleTeamConfig: {
 				assignLearnsetMoves: true,
 				assignNaturalAbility: true,
 				assignGender: true,
 				assignHeldItem: true,
 			},
-			sprite: SpriteEnum.rocketAdminMale,
+			sprite: SpriteEnum.archie,
 			conditionFunction: () => true,
 		};
-		const aliya: OverworldTrainer = {
-			x,
-			y,
-			type: 'TRAINER',
-			id: `Aqua Admin Aliya`,
-			orientation: getRandomOrientation(),
-			unhandledMessage: getAquaMessage(),
-			team: (s) => getAquaAliyaTeam(s),
-			battleTeamConfig: {
-				assignLearnsetMoves: true,
-				assignNaturalAbility: true,
-				assignGender: true,
-				assignHeldItem: true,
-			},
-			sprite: SpriteEnum.rocketAdminFemale,
-			conditionFunction: () => true,
-		};
-		if (Math.random() > 0.5) {
-			return arnold;
-		} else return aliya;
 	}
 	const chad: OverworldTrainer = {
 		x,
@@ -246,6 +229,22 @@ const createTroubleMakers = (
 		const id = `${affiliation} Grunt ${name}`;
 
 		const { x, y } = getPosition();
+
+		const sprite = () => {
+			if (affiliation === 'aqua' || affiliation === 'magma') {
+				if (namesMale.includes(name)) {
+					return SpriteEnum.aquaMagma;
+				} else return SpriteEnum.aquaMagmaFemale;
+			}
+			if (affiliation === 'galactic') {
+				if (namesMale.includes(name)) {
+					return SpriteEnum.galacticMale;
+				} else return SpriteEnum.galacticFemale;
+			}
+			if (namesMale.includes(name)) {
+				return SpriteEnum.rocketMale;
+			} else return SpriteEnum.rocketFemale;
+		};
 		const trainer: OverworldTrainer = {
 			x,
 			y,
@@ -260,9 +259,7 @@ const createTroubleMakers = (
 				assignGender: true,
 				assignHeldItem: true,
 			},
-			sprite: rocketNamesMale.includes(name)
-				? SpriteEnum.rocketMale
-				: SpriteEnum.rocketFemale,
+			sprite: sprite(),
 			conditionFunction: () => true,
 		};
 

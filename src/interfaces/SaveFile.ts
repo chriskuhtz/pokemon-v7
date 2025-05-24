@@ -88,7 +88,7 @@ export type CatchStreak = {
 	streak: number;
 	mapId: MapId;
 };
-export const evilTeams = ['rocket', 'aqua', 'magma', 'plasma'] as const;
+export const evilTeams = ['rocket', 'aqua', 'magma', 'galactic'] as const;
 export type EvilTeam = (typeof evilTeams)[number];
 export interface SaveFile {
 	badges: BadgeName[];

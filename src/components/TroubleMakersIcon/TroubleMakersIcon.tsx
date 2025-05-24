@@ -49,7 +49,7 @@ export const TroubleMakersIcon = () => {
 				/>
 			);
 		}
-		if (affiliation === 'plasma') {
+		if (affiliation === 'galactic') {
 			return (
 				<TbCircleLetterPFilled
 					className={'rocketIcon'}
@@ -104,13 +104,13 @@ export const TroubleMakersIcon = () => {
 			/>
 		);
 	}
-	if (affiliation === 'plasma') {
+	if (affiliation === 'galactic') {
 		return (
 			<TbCircleLetterPFilled
 				size={battleSpriteSize}
 				color={typeColors['fighting']}
 				onClick={() =>
-					addMessage({ message: `${remaining} Plasma Members remaining` })
+					addMessage({ message: `${remaining} galactic Members remaining` })
 				}
 			/>
 		);

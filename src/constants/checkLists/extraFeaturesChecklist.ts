@@ -484,7 +484,9 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'flyer cert as quest reward', handled: true },
-	{ name: 'other evil teams', todos: ['sprites', 'teams'] },
+	{ name: ' team aqua', handled: true },
+	{ name: ' team magma', handled: true },
+	{ name: ' team galactic', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },

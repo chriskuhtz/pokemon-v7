@@ -110,7 +110,7 @@ export const getAquaMessage = (): string[] => {
 	return ['I will squash you'];
 };
 
-export const getAquaArnoldTeam = (s: SaveFile): OwnedPokemon[] => {
+export const getAquaArchieTeam = (s: SaveFile): OwnedPokemon[] => {
 	const xp = getHighestXpOnTeam(s.pokemon);
 
 	return [
@@ -150,50 +150,6 @@ export const getAquaArnoldTeam = (s: SaveFile): OwnedPokemon[] => {
 				...EmptyStatObject,
 				attack: 252,
 				speed: 252,
-			},
-		}),
-	];
-};
-export const getAquaAliyaTeam = (s: SaveFile): OwnedPokemon[] => {
-	const xp = getHighestXpOnTeam(s.pokemon);
-
-	return [
-		makeChallengerPokemon({
-			xp,
-			name: 'walrein',
-			effortValues: { ...EmptyStatObject, attack: 252, defense: 252 },
-		}),
-		makeChallengerPokemon({
-			xp,
-			name: 'tauros',
-			effortValues: { ...EmptyStatObject, attack: 252 },
-		}),
-		makeChallengerPokemon({
-			xp,
-			name: 'slaking',
-			effortValues: { ...EmptyStatObject, attack: 252 },
-		}),
-		makeChallengerPokemon({
-			xp,
-			name: 'ludicolo',
-			effortValues: { ...EmptyStatObject, attack: 252 },
-		}),
-		makeChallengerPokemon({
-			xp,
-			name: 'pelipper',
-			effortValues: {
-				...EmptyStatObject,
-				attack: 252,
-				speed: 252,
-			},
-		}),
-		makeChallengerPokemon({
-			xp,
-			name: 'ninjask',
-			effortValues: {
-				...EmptyStatObject,
-				defense: 252,
-				'special-attack': 252,
 			},
 		}),
 	];
