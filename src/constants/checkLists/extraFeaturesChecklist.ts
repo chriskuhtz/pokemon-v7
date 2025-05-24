@@ -469,7 +469,7 @@ export const extraFeatureCheckList: {
 	{ name: 'variable teams for cynthia', handled: true },
 	{ name: 'variable teams for red', handled: true },
 	{ name: 'variable teams for silver', handled: true },
-	{ name: 'variable teams for hugh' },
+	{ name: 'variable teams for hugh', handled: true },
 	{ name: 'variable teams for n' },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },

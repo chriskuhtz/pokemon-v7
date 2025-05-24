@@ -1,3 +1,4 @@
+import { getRandomEntry } from '../../../functions/filterTargets';
 import { getHighestXpOnTeam } from '../../../functions/getHighestXpOnTeam';
 import {
 	isFriday,
@@ -192,7 +193,7 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
 		name: 'gothitelle',
 		xp: highestXpOnTeam,
 		nature: 'sassy',
-		ability: 'iron-fist',
+		ability: 'adaptability',
 		fixedAbility: true,
 		happiness: 255,
 		heldItemName: 'light-clay',
@@ -203,6 +204,41 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
 			...EmptyStatObject,
 			'special-defense': 252,
 			defense: 252,
+		},
+	});
+	const serperior = makeChallengerPokemon({
+		name: 'serperior',
+		xp: highestXpOnTeam,
+		nature: 'sassy',
+		ability: 'sharpness',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'light-clay',
+		firstMove: { name: 'reflect', usedPP: 0 },
+		secondMove: { name: 'light-screen', usedPP: 0 },
+		thirdMove: { name: 'leaf-blade', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			'special-defense': 252,
+			defense: 252,
+		},
+	});
+	const samurott = makeChallengerPokemon({
+		name: 'samurott',
+		xp: highestXpOnTeam,
+		nature: 'sassy',
+		ability: 'technician',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'choice-band',
+		firstMove: { name: 'aerial-ace', usedPP: 0 },
+		secondMove: { name: 'aqua-jet', usedPP: 0 },
+		thirdMove: { name: 'quick-attack', usedPP: 0 },
+		fourthMove: { name: 'shadow-sneak', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			attack: 252,
+			speed: 252,
 		},
 	});
 	const scolipede = makeChallengerPokemon({
@@ -222,6 +258,24 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
 			speed: 252,
 		},
 	});
+	const conkeldurr = makeChallengerPokemon({
+		name: 'conkeldurr',
+		xp: highestXpOnTeam,
+		nature: 'adamant',
+		ability: 'iron-fist',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'black-belt',
+		firstMove: { name: 'bulk-up', usedPP: 0 },
+		secondMove: { name: 'thunder-punch', usedPP: 0 },
+		thirdMove: { name: 'drain-punch', usedPP: 0 },
+		fourthMove: { name: 'mach-punch', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			defense: 252,
+			attack: 252,
+		},
+	});
 
 	if (highestXpOnTeam < 8000) {
 		return [tepig, rufflet, axew];
@@ -230,14 +284,26 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
 		return [pignite, rufflet, fraxure, golett];
 	}
 
-	const team: OwnedPokemon[] = [
+	const possibilities = [
 		emboar,
 		braviary,
 		gothitelle,
 		haxorus,
 		golurk,
-		scolipede,
+		serperior,
+		samurott,
+		conkeldurr,
 	];
+	const team: OwnedPokemon[] = [];
+
+	for (let i = 0; i < 5; i++) {
+		team.push(
+			getRandomEntry(
+				possibilities.filter((p) => team.every((t) => t.name !== p.name))
+			)
+		);
+	}
+	team.push(scolipede);
 
 	return team;
 };
