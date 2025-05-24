@@ -98,7 +98,6 @@ const migrateSavefile = (input: SaveFile) => {
 		questNames.map((q) => [q, updatedInput.quests[q] ?? 'INACTIVE'])
 	) as Record<QuestName, QuestStatus>;
 
-	updatedInput.rocketOperation = undefined;
 	return updatedInput;
 };
 
