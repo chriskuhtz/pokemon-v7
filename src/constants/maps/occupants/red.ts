@@ -293,7 +293,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
 		happiness: 255,
 		heldItemName: 'shuca-berry',
 		firstMove: { name: 'nasty-plot', usedPP: 0 },
-		secondMove: { name: 'thunderbolt', usedPP: 0 },
+		secondMove: { name: 'nuzzle', usedPP: 0 },
 		effortValues: {
 			...EmptyStatObject,
 			'special-attack': 252,

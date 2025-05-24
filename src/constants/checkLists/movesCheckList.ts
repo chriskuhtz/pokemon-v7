@@ -2277,10 +2277,13 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/605/',
 		handled: true,
 	},
-	{ name: 'celebrate', url: 'https://pokeapi.co/api/v2/move/606/' },
-	{ name: 'hold-hands', url: 'https://pokeapi.co/api/v2/move/607/' },
-	{ name: 'baby-doll-eyes', url: 'https://pokeapi.co/api/v2/move/608/' },
-	{ name: 'nuzzle', url: 'https://pokeapi.co/api/v2/move/609/' },
+
+	{
+		name: 'baby-doll-eyes',
+		url: 'https://pokeapi.co/api/v2/move/608/',
+		handled: true,
+	},
+	{ name: 'nuzzle', url: 'https://pokeapi.co/api/v2/move/609/', handled: true },
 	{ name: 'hold-back', url: 'https://pokeapi.co/api/v2/move/610/' },
 	{ name: 'infestation', url: 'https://pokeapi.co/api/v2/move/611/' },
 	{ name: 'power-up-punch', url: 'https://pokeapi.co/api/v2/move/612/' },
@@ -2729,6 +2732,8 @@ export const movesCheckList: {
 	{ name: 'powder', url: 'https://pokeapi.co/api/v2/move/600/' },
 	{ name: 'magnetic-flux', url: 'https://pokeapi.co/api/v2/move/602/' },
 	{ name: 'happy-hour', url: 'https://pokeapi.co/api/v2/move/603/' },
+	{ name: 'celebrate', url: 'https://pokeapi.co/api/v2/move/606/' },
+	{ name: 'hold-hands', url: 'https://pokeapi.co/api/v2/move/607/' },
 ];
 
 export const handledMoves = [
@@ -3237,6 +3242,8 @@ export const handledMoves = [
 	'geomancy',
 	'electric-terrain',
 	'dazzling-gleam',
+	'baby-doll-eyes',
+	'nuzzle',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
