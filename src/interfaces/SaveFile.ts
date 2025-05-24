@@ -154,7 +154,6 @@ export interface SaveFile {
 	currentStrongSwarm?: PokemonSwarm;
 	currentDistortionSwarm?: PokemonSwarm;
 	rangerLevel?: number;
-	currentRocketOperation?: { route: MapId; trainers: OverworldTrainer[] };
 	rocketOperation?: { route: MapId; trainers: OverworldTrainer[] };
 	nextRocketOperationAt?: number;
 	starterPokemon?: PokemonName;
