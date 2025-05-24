@@ -145,7 +145,7 @@ export const getAquaArchieTeam = (s: SaveFile): OwnedPokemon[] => {
 		}),
 		makeChallengerPokemon({
 			xp,
-			name: 'sableye',
+			name: 'walrein',
 			effortValues: {
 				...EmptyStatObject,
 				attack: 252,

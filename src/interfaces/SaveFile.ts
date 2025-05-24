@@ -161,7 +161,6 @@ export interface SaveFile {
 		trainers: OverworldTrainer[];
 		affiliation: EvilTeam;
 	};
-	nextTroubleMakersAt?: number;
 	starterPokemon?: PokemonName;
 	seedVault: ItemType[];
 	pokedex: Pokedex;

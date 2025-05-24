@@ -32,7 +32,6 @@ export const useRangerRadio = () => {
 	const { addMessage } = useContext(MessageQueueContext);
 
 	return useCallback(() => {
-		const now = new Date().getTime();
 		if (saveFile.troubleMakers) {
 			addMessage({
 				message: `There are reports of team ${
@@ -40,13 +39,12 @@ export const useRangerRadio = () => {
 				} activity at ${mapDisplayNames[saveFile.troubleMakers.route]}`,
 				needsNoConfirmation: true,
 			});
-		} else if (
-			!saveFile.nextTroubleMakersAt ||
-			now > saveFile.nextTroubleMakersAt
-		) {
+		} else {
 			const route = getRouteForTroubleMakers(saveFile);
 
-			const randomAffiliation = getRandomEntry([...evilTeams]);
+			const randomAffiliation = getRandomEntry([
+				...evilTeams.filter((e) => e !== 'galactic'),
+			]);
 			const op = makeTroubleMakers(
 				saveFile.rangerLevel ?? 0,
 				route,
@@ -61,11 +59,6 @@ export const useRangerRadio = () => {
 
 			patchSaveFileReducer({
 				troubleMakers: { route, trainers: op, affiliation: randomAffiliation },
-			});
-		} else {
-			addMessage({
-				message: 'There are no news, check back later',
-				needsNoConfirmation: true,
 			});
 		}
 	}, [addMessage, patchSaveFileReducer, saveFile]);

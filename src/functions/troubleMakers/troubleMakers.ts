@@ -16,6 +16,12 @@ import {
 	getAquaArchieTeam,
 } from './aqua';
 import {
+	getMagmaMaxieTeam,
+	magmaNamesFemale,
+	magmaNamesMale,
+	magmaPokemon,
+} from './magma';
+import {
 	getRocketChadTeam,
 	getRocketHillaryTeam,
 	getRocketMessage,
@@ -87,6 +93,17 @@ export const makeTroubleMakers = (
 			aquaPokemon
 		);
 	}
+	if (affiliation === 'magma') {
+		return createTroubleMakers(
+			rangerLevel,
+			mapId,
+			warden,
+			affiliation,
+			magmaNamesMale,
+			magmaNamesFemale,
+			magmaPokemon
+		);
+	}
 	return createTroubleMakers(
 		rangerLevel,
 		mapId,
@@ -118,6 +135,29 @@ const createAdmin = (
 				'Isnt that a noble goal?',
 			],
 			team: (s) => getAquaArchieTeam(s),
+			battleTeamConfig: {
+				assignLearnsetMoves: true,
+				assignNaturalAbility: true,
+				assignGender: true,
+				assignHeldItem: true,
+			},
+			sprite: SpriteEnum.archie,
+			conditionFunction: () => true,
+		};
+	}
+	if (affiliation === 'magma') {
+		return {
+			x,
+			y,
+			type: 'TRAINER',
+			id: `Magma Boss Maxie`,
+			orientation: getRandomOrientation(),
+			unhandledMessage: [
+				'If we remove the oceans',
+				'The Pokemon will be free to roam',
+				'Isnt that a noble goal?',
+			],
+			team: (s) => getMagmaMaxieTeam(s),
 			battleTeamConfig: {
 				assignLearnsetMoves: true,
 				assignNaturalAbility: true,

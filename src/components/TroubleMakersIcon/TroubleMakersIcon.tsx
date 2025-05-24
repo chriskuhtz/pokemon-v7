@@ -5,7 +5,7 @@ import {
 	TbCircleLetterPFilled,
 	TbCircleLetterRFilled,
 } from 'react-icons/tb';
-import { battleSpriteSize, ONE_HOUR } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData';
 import { typeColors } from '../../constants/typeColors';
 import { troubleMakersRemaining } from '../../functions/areAllRocketsDefeated';
 import { LocationContext } from '../../hooks/LocationProvider';
@@ -22,11 +22,10 @@ export const TroubleMakersIcon = () => {
 
 	const handleClear = () => {
 		addMessage({ message: `All Rockets defeated, Rangerlevel increased` });
-		const now = new Date().getTime();
+
 		patchSaveFileReducer({
 			troubleMakers: undefined,
 			rangerLevel: (saveFile.rangerLevel ?? 0) + 1,
-			nextTroubleMakersAt: now + Math.floor(ONE_HOUR * Math.random()),
 			handledOccupants: saveFile.handledOccupants.filter(
 				(h) => !saveFile.troubleMakers?.trainers.some((t) => t.id === h.id)
 			),
