@@ -15,6 +15,7 @@ export const secondTurnMoves = [
 	'freeze-shock',
 	'ice-burn',
 	'phantom-force',
+	'geomancy',
 ];
 
 export const soundBasedMoves = [
