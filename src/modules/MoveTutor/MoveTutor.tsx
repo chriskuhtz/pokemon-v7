@@ -203,7 +203,16 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 		if (learnMethod === 'level-up') {
 			return 'berry-juice';
 		}
-		return moveUnlockPayments[(moveName.length * 5) % options.length];
+		return (
+			[
+				...moveUnlockPayments,
+				...moveUnlockPayments,
+				...moveUnlockPayments,
+				...moveUnlockPayments,
+				...moveUnlockPayments,
+				...moveUnlockPayments,
+			].at(moveName.length) ?? 'berry-juice'
+		);
 	};
 
 	return (
@@ -217,6 +226,7 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 					m,
 					calculateLevelData(ownedPokemon.xp, ownedPokemon.growthRate).level
 				);
+				console.log(m.move.name, payment);
 				const disabled = saveFile.bag[payment] < 1 || !available;
 				return (
 					<div
