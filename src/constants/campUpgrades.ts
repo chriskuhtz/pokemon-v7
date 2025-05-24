@@ -159,7 +159,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'build miltank farm': baseRequirements,
 	'invite chef grandma': baseRequirements,
 	'pokemon swarm radar': baseRequirements,
-	'upgraded swarm radar': ['pokemon swarm radar'],
+	'upgraded swarm radar': ['pokemon swarm radar', 'ranger certification'],
 	'time distortion radar': ['upgraded swarm radar'],
 	'space distortion radar': ['time distortion radar'],
 	'second slot for farm': baseRequirements,

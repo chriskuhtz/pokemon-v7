@@ -93,7 +93,6 @@ export interface UseSaveFile {
 const migrateSavefile = (input: SaveFile) => {
 	const updatedInput = { ...input };
 
-	//delete old property
 	delete updatedInput.rocketOperation;
 	//migrate new quests
 	updatedInput.quests = Object.fromEntries(
