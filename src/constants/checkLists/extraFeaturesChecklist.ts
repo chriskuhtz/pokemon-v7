@@ -471,6 +471,9 @@ export const extraFeatureCheckList: {
 	{ name: 'variable teams for silver', handled: true },
 	{ name: 'variable teams for hugh', handled: true },
 	{ name: 'variable teams for n', handled: true },
+	{
+		name: 'Warden cert (required for distortions), outbreaks of strong Pokemon',
+	},
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -501,7 +504,4 @@ export const extraFeatureCheckList: {
 	{ name: 'random evolutions' },
 	{ name: 'steven as the fossil protector' },
 	{ name: 'download your player file and share it with others' },
-	{
-		name: 'Warden cert (required for distortions), outbreaks of strong Pokemon',
-	},
 ];

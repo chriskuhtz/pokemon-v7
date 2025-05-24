@@ -23,11 +23,12 @@ export const RocketIcon = () => {
 			rangerLevel: (saveFile.rangerLevel ?? 0) + 1,
 			nextRocketOperationAt: now + Math.floor(ONE_HOUR * Math.random()),
 			handledOccupants: saveFile.handledOccupants.filter(
-				(h) => !h.id.includes('Rocket Grunt')
+				(h) => !h.id.includes('Rocket')
 			),
 		});
 	};
 
+	console.log(saveFile.rocketOperation);
 	if (!saveFile.rocketOperation) {
 		return <></>;
 	}

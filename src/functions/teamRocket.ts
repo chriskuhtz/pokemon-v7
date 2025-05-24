@@ -4,7 +4,9 @@ import { OverworldTrainer } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { SaveFile } from '../interfaces/SaveFile';
 import { SpriteEnum } from '../interfaces/SpriteEnum';
+import { EmptyStatObject } from '../interfaces/StatObject';
 import { getRandomEntry } from './filterTargets';
+import { getHighestXpOnTeam } from './getHighestXpOnTeam';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getRandomOrientation } from './getNextClockwiseDirection';
 import { isPassable } from './isPassable';
@@ -164,9 +166,99 @@ const getRocketMessage = (): string[] => {
 	return ['I will squash you'];
 };
 
+const getChadTeam = (s: SaveFile): OwnedPokemon[] => {
+	const xp = getHighestXpOnTeam(s.pokemon);
+
+	return [
+		makeChallengerPokemon({
+			xp,
+			name: 'annihilape',
+			effortValues: { ...EmptyStatObject, attack: 252 },
+		}),
+		makeChallengerPokemon({
+			xp,
+			name: 'granbull',
+			effortValues: { ...EmptyStatObject, attack: 252 },
+		}),
+		makeChallengerPokemon({
+			xp,
+			name: 'honchkrow',
+			effortValues: { ...EmptyStatObject, 'special-attack': 252 },
+		}),
+		makeChallengerPokemon({
+			xp,
+			name: 'arbok',
+			effortValues: { ...EmptyStatObject, attack: 252 },
+		}),
+		makeChallengerPokemon({
+			xp,
+			name: 'muk',
+			effortValues: {
+				...EmptyStatObject,
+				defense: 252,
+				'special-defense': 252,
+			},
+		}),
+		makeChallengerPokemon({
+			xp,
+			name: 'weavile',
+			effortValues: {
+				...EmptyStatObject,
+				attack: 252,
+				speed: 252,
+			},
+		}),
+	];
+};
+const getHillaryTeam = (s: SaveFile): OwnedPokemon[] => {
+	const xp = getHighestXpOnTeam(s.pokemon);
+
+	return [
+		makeChallengerPokemon({
+			xp,
+			name: 'purugly',
+			effortValues: { ...EmptyStatObject, attack: 252, defense: 252 },
+		}),
+		makeChallengerPokemon({
+			xp,
+			name: 'rapidash',
+			effortValues: { ...EmptyStatObject, attack: 252 },
+		}),
+		makeChallengerPokemon({
+			xp,
+			name: 'persian',
+			effortValues: { ...EmptyStatObject, attack: 252 },
+		}),
+		makeChallengerPokemon({
+			xp,
+			name: 'weezing',
+			effortValues: { ...EmptyStatObject, attack: 252 },
+		}),
+		makeChallengerPokemon({
+			xp,
+			name: 'gengar',
+			effortValues: {
+				...EmptyStatObject,
+				attack: 252,
+				speed: 252,
+			},
+		}),
+		makeChallengerPokemon({
+			xp,
+			name: 'jynx',
+			effortValues: {
+				...EmptyStatObject,
+				defense: 252,
+				'special-attack': 252,
+			},
+		}),
+	];
+};
+
 export const createRocketOutbreak = (
 	rangerLevel: number,
-	mapId: MapId
+	mapId: MapId,
+	warden: boolean
 ): OverworldTrainer[] => {
 	const chosenNames = [...rocketNamesFemale, ...rocketNamesMale].filter(
 		() => Math.random() < 0.5
@@ -211,7 +303,7 @@ export const createRocketOutbreak = (
 		return { y, x };
 	};
 
-	return chosenNames.map((name) => {
+	const res = chosenNames.map((name) => {
 		const id = `Rocket Grunt ${name}`;
 
 		const { x, y } = getPosition();
@@ -237,4 +329,51 @@ export const createRocketOutbreak = (
 
 		return trainer;
 	});
+
+	if (warden) {
+		const chadId = `Rocket Admin Chad`;
+		const hillaryId = `Rocket Admin Hillary`;
+
+		const { x, y } = getPosition();
+
+		const chad: OverworldTrainer = {
+			x,
+			y,
+			type: 'TRAINER',
+			id: chadId,
+			orientation: getRandomOrientation(),
+			unhandledMessage: getRocketMessage(),
+			team: (s) => getChadTeam(s),
+			battleTeamConfig: {
+				assignLearnsetMoves: true,
+				assignNaturalAbility: true,
+				assignGender: true,
+				assignHeldItem: true,
+			},
+			sprite: SpriteEnum.rocketAdminMale,
+			conditionFunction: () => true,
+		};
+		const hillary: OverworldTrainer = {
+			x,
+			y,
+			type: 'TRAINER',
+			id: hillaryId,
+			orientation: getRandomOrientation(),
+			unhandledMessage: getRocketMessage(),
+			team: (s) => getHillaryTeam(s),
+			battleTeamConfig: {
+				assignLearnsetMoves: true,
+				assignNaturalAbility: true,
+				assignGender: true,
+				assignHeldItem: true,
+			},
+			sprite: SpriteEnum.rocketAdminFemale,
+			conditionFunction: () => true,
+		};
+		if (Math.random() > 0.5) {
+			res.push(chad);
+		} else res.push(hillary);
+	}
+
+	return res;
 };

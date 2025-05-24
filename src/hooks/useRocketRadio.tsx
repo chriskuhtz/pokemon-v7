@@ -45,7 +45,11 @@ export const useRocketRadio = () => {
 			now > saveFile.nextRocketOperationAt
 		) {
 			const route = getRouteForRockets(saveFile);
-			const op = createRocketOutbreak(saveFile.rangerLevel ?? 0, route);
+			const op = createRocketOutbreak(
+				saveFile.rangerLevel ?? 0,
+				route,
+				saveFile.campUpgrades['warden certification']
+			);
 
 			addMessage({
 				message: `There are reports of team rocket activity at ${mapDisplayNames[route]}`,
