@@ -1,3 +1,4 @@
+import { getRandomEntry } from '../../../functions/filterTargets';
 import { getHighestXpOnTeam } from '../../../functions/getHighestXpOnTeam';
 import {
 	isFriday,
@@ -184,6 +185,56 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
 			'special-defense': 252,
 		},
 	});
+	const hydreigon = makeChallengerPokemon({
+		name: 'hydreigon',
+		xp: highestXpOnTeam,
+		nature: 'adamant',
+		ability: 'strong-jaw',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'black-glasses',
+		firstMove: { name: 'crunch', usedPP: 0 },
+		secondMove: { name: 'dragon-claw', usedPP: 0 },
+		thirdMove: { name: 'poison-fang', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			defense: 252,
+			attack: 252,
+		},
+	});
+	const volcarona = makeChallengerPokemon({
+		name: 'volcarona',
+		xp: highestXpOnTeam,
+		nature: 'adamant',
+		ability: 'flame-body',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'charti-berry',
+		firstMove: { name: 'flamethrower', usedPP: 0 },
+		secondMove: { name: 'quiver-dance', usedPP: 0 },
+		thirdMove: { name: 'signal-beam', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			defense: 252,
+			attack: 252,
+		},
+	});
+	const bouffalant = makeChallengerPokemon({
+		name: 'bouffalant',
+		xp: highestXpOnTeam,
+		nature: 'adamant',
+		ability: 'rock-head',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'chople-berry',
+		firstMove: { name: 'double-edge', usedPP: 0 },
+		secondMove: { name: 'reversal', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			speed: 252,
+			attack: 252,
+		},
+	});
 
 	if (highestXpOnTeam < 8000) {
 		return [zorua, sandile, darumaka];
@@ -192,14 +243,26 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
 		return [zoroark, krokorok, darumaka];
 	}
 
-	const team: OwnedPokemon[] = [
+	const possibilities = [
 		zoroark,
 		krookodile,
 		darmanitan,
 		scrafty,
 		sigilyph,
 		ferrothorn,
+		hydreigon,
+		volcarona,
+		bouffalant,
 	];
+	const team: OwnedPokemon[] = [];
+
+	for (let i = 0; i < 6; i++) {
+		team.push(
+			getRandomEntry(
+				possibilities.filter((p) => team.every((t) => t.name !== p.name))
+			)
+		);
+	}
 
 	return team;
 };
