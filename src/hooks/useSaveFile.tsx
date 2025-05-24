@@ -350,11 +350,18 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		const existingCatchBoosts: CatchBoosts =
 			saveFile.catchBoosts ?? EmptyCatchBoosts;
 
+		const updatedCampUpgrades = { ...saveFile.campUpgrades };
+
+		if (quest.campUpgrade) {
+			updatedCampUpgrades[quest.campUpgrade] = true;
+		}
+
 		const rewardStrings: string[] = [
 			`${quest.researchPoints} Research Points`,
 			quest.rangerLevels ? `${quest.rangerLevels} Ranger Levels` : undefined,
 			...Object.entries(reward).map(([item, amount]) => `${amount} ${item}`),
 			quest.rewardPokemon ? `a ${quest.rewardPokemon.name}` : undefined,
+			quest.campUpgrade ? quest.campUpgrade : undefined,
 		].filter((s) => s !== undefined);
 
 		addMessage({
@@ -370,6 +377,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 				existingCatchBoosts,
 				quest.catchBoosts ?? {}
 			),
+			campUpgrades: updatedCampUpgrades,
 			pokemon,
 		});
 	};

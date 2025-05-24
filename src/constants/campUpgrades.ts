@@ -58,6 +58,7 @@ export const campUpgradeNames = [
 	'dragonite taxi',
 	'invite nature tutor',
 	'invite ability tutor',
+	'pidgeot rider certification',
 ] as const;
 
 export type CampUpgrade = (typeof campUpgradeNames)[number];
@@ -66,7 +67,8 @@ export type CampUpgradeCategory =
 	| 'Sustainability'
 	| 'Exploration'
 	| 'Research'
-	| 'Training';
+	| 'Training'
+	| 'Special';
 
 export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
 	bulletin_board: 'Research',
@@ -128,6 +130,7 @@ export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
 	'team slot 5': 'Exploration',
 	'team slot 6': 'Exploration',
 	'dragonite taxi': 'Exploration',
+	'pidgeot rider certification': 'Special',
 };
 
 export const baseRequirements: CampUpgrade[] = [
@@ -195,10 +198,11 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'berry lure station routeE1': ['shovel certification'],
 	'berry lure station routeS1E1': ['swimming certification'],
 	'berry lure station routeS1W1': ['swimming certification'],
-	//the last upgrade
+	//the last exploration upgrade
 	'dragonite taxi': campUpgradeNames.filter(
 		(name) => campUpgradeCategories[name] === 'Exploration'
 	),
+	'pidgeot rider certification': [],
 };
 
 export const campUpgradeExplanations: Record<CampUpgrade, string> = {
@@ -270,6 +274,7 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	'seventh slot for farm': 'more space at the berry farm',
 	'invite historian': 'It might not all be true, but it sounds interesting',
 	'dragonite taxi': 'dragonite can fly you to remote places',
+	'pidgeot rider certification': '...',
 };
 
 export const campUpgradeCostScale = 25;

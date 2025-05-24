@@ -86,6 +86,9 @@ export const Overworld = () => {
 	const { rotateOccupant, occupants } = useOccupants();
 
 	const sprite = useMemo(() => {
+		if (saveFile.flying) {
+			return 'pidgeot';
+		}
 		const onWater = map.tileMap.waterLayer[location.y][location.x];
 		if (onWater) {
 			return 'NPC_027';
@@ -95,7 +98,14 @@ export const Overworld = () => {
 		}
 
 		return saveFile.sprite;
-	}, [map.id, map.tileMap.waterLayer, location.x, location.y, saveFile.sprite]);
+	}, [
+		saveFile.flying,
+		saveFile.sprite,
+		map.tileMap.waterLayer,
+		map.id,
+		location.y,
+		location.x,
+	]);
 	//DRAWING
 	useDrawCharacter(playerCanvasId, location, sprite);
 	useDrawOccupants(occupantsCanvasId, occupants, baseSize);

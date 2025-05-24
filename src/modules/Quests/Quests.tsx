@@ -111,6 +111,7 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 											Catch Boosts: {Object.keys(quest.catchBoosts).join(', ')}
 										</h5>
 									)}
+									{quest.campUpgrade && <h5>Unlock {quest.campUpgrade}</h5>}
 									{quest.targetPokemon && (
 										<h5 style={{ display: 'flex', alignItems: 'center' }}>
 											Targets:

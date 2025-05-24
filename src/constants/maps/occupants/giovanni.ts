@@ -131,7 +131,7 @@ export const giovanni: OverworldTrainer = {
 	conditionFunction: (s) =>
 		!!(
 			s.rangerLevel &&
-			s.rangerLevel > 20 &&
+			s.rangerLevel > 10 &&
 			!s.handledOccupants.some((h) => h.id === 'giovanni')
 		),
 };

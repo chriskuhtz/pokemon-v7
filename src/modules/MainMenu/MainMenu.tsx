@@ -61,6 +61,7 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 						actionElements={[]}
 					/>
 				)}
+				<FlyingButton />
 				{onChallengeField(location.mapId) && (
 					<Card
 						onClick={() => {
@@ -364,4 +365,34 @@ export const LureButton = () => {
 		);
 	}
 	return <></>;
+};
+export const FlyingButton = () => {
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+
+	if (!saveFile.campUpgrades['pidgeot rider certification']) {
+		return <></>;
+	}
+	return (
+		<>
+			{saveFile.flying ? (
+				<Card
+					onClick={() => patchSaveFileReducer({ flying: false })}
+					content={<h4>Stop flying</h4>}
+					icon={
+						<PokemonSprite name={'pidgeot'} config={{ officalArtwork: true }} />
+					}
+					actionElements={[]}
+				/>
+			) : (
+				<Card
+					onClick={() => patchSaveFileReducer({ flying: true })}
+					content={<h4>Fly on Pidgeot</h4>}
+					icon={
+						<PokemonSprite name={'pidgeot'} config={{ officalArtwork: true }} />
+					}
+					actionElements={[]}
+				/>
+			)}
+		</>
+	);
 };

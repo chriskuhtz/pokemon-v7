@@ -297,7 +297,9 @@ export const createRocketOutbreak = (
 			Math.random() * OverworldMap.tileMap.baseLayer[0].length
 		);
 
-		if (!isPassable({ x, y }, OverworldMap, OverworldMap.occupants, false)) {
+		if (
+			!isPassable({ x, y }, OverworldMap, OverworldMap.occupants, false, false)
+		) {
 			return getPosition();
 		}
 		return { y, x };

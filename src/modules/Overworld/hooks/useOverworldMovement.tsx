@@ -153,7 +153,7 @@ export const useOverworldMovement = (
 				setCharacterLocation(steptOnPortal.portal);
 				return;
 			}
-			if (nextInput) {
+			if (nextInput && !saveFile.flying) {
 				handlePossibleEncounter();
 			}
 			if (nextInput === playerLocation.orientation) {
@@ -165,7 +165,8 @@ export const useOverworldMovement = (
 						map,
 						addStep,
 						currentOccupants,
-						campUpgrades['swimming certification']
+						campUpgrades['swimming certification'],
+						!!saveFile.flying
 					),
 					forwardFoot: getNextForwardFoot(playerLocation.forwardFoot),
 				});

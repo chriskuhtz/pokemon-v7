@@ -454,6 +454,7 @@ export const questNames = [
 	'catch all past distortion pokemon',
 	'catch a space distortion pokemon',
 	'catch all space distortion pokemon',
+	'train a pidgeot to lvl 100',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -3332,6 +3333,19 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'space distortion radar',
 		conditionFunction: (s) =>
 			spaceDistortionMons.every((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+	},
+	'train a pidgeot to lvl 100': {
+		kind: 'BULLETIN',
+		category: 'TRAINING',
+		researchPoints: 100,
+		campUpgrade: 'pidgeot rider certification',
+		rewardItems: {},
+		conditionFunction: (s) =>
+			s.pokemon.some(
+				(p) =>
+					p.name === 'pidgeot' &&
+					calculateLevelData(p.xp, p.growthRate).level === 100
+			),
 	},
 } as Record<QuestName, Quest>;
 

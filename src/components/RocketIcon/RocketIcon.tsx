@@ -28,7 +28,6 @@ export const RocketIcon = () => {
 		});
 	};
 
-	console.log(saveFile.rocketOperation);
 	if (!saveFile.rocketOperation) {
 		return <></>;
 	}

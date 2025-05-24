@@ -472,8 +472,18 @@ export const extraFeatureCheckList: {
 	{ name: 'variable teams for hugh', handled: true },
 	{ name: 'variable teams for n', handled: true },
 	{
-		name: 'Warden cert (required for distortions), outbreaks of strong Pokemon',
+		name: 'Warden cert (required for distortions), stronger rockets',
+		handled: true,
 	},
+	{
+		name: 'raikou on s1',
+		handled: true,
+	},
+	{
+		name: 'entei on e1',
+		handled: true,
+	},
+	{ name: 'flyer cert as quest reward' },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },

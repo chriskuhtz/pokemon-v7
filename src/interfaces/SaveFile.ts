@@ -165,4 +165,5 @@ export interface SaveFile {
 	catchBoosts?: CatchBoosts;
 	catchStreak?: CatchStreak;
 	longestStreak?: number;
+	flying?: boolean;
 }
