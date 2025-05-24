@@ -488,6 +488,7 @@ export const extraFeatureCheckList: {
 	{ name: ' team magma', handled: true },
 	{ name: ' team galactic' },
 	//BUGS/IMPROVEMENTS:
+	{ name: 'trainer ai should use fake out correctly' },
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
 	{ name: 'loosing to wild mons is sometimes buggy' },
