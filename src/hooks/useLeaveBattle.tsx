@@ -316,13 +316,14 @@ export const useLeaveBattle = () => {
 			updatedMileStones.caughtFromSwarms = updatedSwarmRecord;
 
 			const resetTime = () => {
+				const now = new Date().getTime();
 				if (
 					defeatedChallengerId &&
 					[barryId, nId, cynthiaId, silverId, redId, hughId].includes(
 						defeatedChallengerId
 					)
 				) {
-					return ONE_HOUR;
+					return now + ONE_HOUR;
 				}
 
 				return -1;
