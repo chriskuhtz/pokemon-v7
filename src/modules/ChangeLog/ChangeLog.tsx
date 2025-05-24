@@ -3,7 +3,7 @@ import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
-export const newestChangeLog = '0.35';
+export const newestChangeLog = '0.36';
 
 export const ChangeLog = ({
 	setHasReadIntro,
@@ -31,6 +31,7 @@ export const ChangeLog = ({
 					>
 						Got it, lets go
 					</button>
+					<ChangeLogV36 />
 					<ChangeLogV35 />
 					<ChangeLogV34 />
 					<ChangeLogV33 />
@@ -68,17 +69,19 @@ export const ChangeLog = ({
 		</Page>
 	);
 };
-// const ChangeLogV36 = (): JSX.Element => {
-// 	return (
-// 		<>
-// 			<h3>0.35:</h3>
-// 			<ol style={{ lineHeight: '1.5rem' }}>
-// 				<li>Balancing and Fixes</li>
-// 				<li>New Attacks</li>
-// 			</ol>
-// 		</>
-// 	);
-// };
+const ChangeLogV36 = (): JSX.Element => {
+	return (
+		<>
+			<h3>0.36:</h3>
+			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>New Camp Upgrades</li>
+				<li>New evil teams</li>
+				<li>Balancing and Fixes</li>
+				<li>New Attacks</li>
+			</ol>
+		</>
+	);
+};
 const ChangeLogV35 = (): JSX.Element => {
 	return (
 		<>

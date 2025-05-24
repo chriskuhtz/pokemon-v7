@@ -54,9 +54,11 @@ export const campUpgradeNames = [
 	'buy skiing equipment',
 	'invite historian',
 	'ranger certification',
+	'warden certification',
 	'dragonite taxi',
 	'invite nature tutor',
 	'invite ability tutor',
+	'pidgeot rider certification',
 ] as const;
 
 export type CampUpgrade = (typeof campUpgradeNames)[number];
@@ -65,7 +67,8 @@ export type CampUpgradeCategory =
 	| 'Sustainability'
 	| 'Exploration'
 	| 'Research'
-	| 'Training';
+	| 'Training'
+	| 'Special';
 
 export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
 	bulletin_board: 'Research',
@@ -113,6 +116,7 @@ export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
 	'invite nature tutor': 'Training',
 	'invite ability tutor': 'Training',
 	'ranger certification': 'Training',
+	'warden certification': 'Training',
 	'machete certification': 'Exploration',
 	'sledge hammer certification': 'Exploration',
 	'shovel certification': 'Exploration',
@@ -126,6 +130,7 @@ export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
 	'team slot 5': 'Exploration',
 	'team slot 6': 'Exploration',
 	'dragonite taxi': 'Exploration',
+	'pidgeot rider certification': 'Special',
 };
 
 export const baseRequirements: CampUpgrade[] = [
@@ -160,7 +165,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'invite chef grandma': baseRequirements,
 	'pokemon swarm radar': baseRequirements,
 	'upgraded swarm radar': ['pokemon swarm radar', 'ranger certification'],
-	'time distortion radar': ['upgraded swarm radar'],
+	'time distortion radar': ['upgraded swarm radar', 'warden certification'],
 	'space distortion radar': ['time distortion radar'],
 	'second slot for farm': baseRequirements,
 	'third slot for farm': ['second slot for farm'],
@@ -175,6 +180,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'invite fossil expert': ['sledge hammer certification'],
 	'sledge hammer certification': ['machete certification'],
 	'ranger certification': ['machete certification', 'training field 1'],
+	'warden certification': ['ranger certification', 'team slot 6'],
 	'shovel certification': ['sledge hammer certification'],
 	'swimming certification': ['shovel certification'],
 	'buy skiing equipment': ['swimming certification'],
@@ -192,10 +198,11 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'berry lure station routeE1': ['shovel certification'],
 	'berry lure station routeS1E1': ['swimming certification'],
 	'berry lure station routeS1W1': ['swimming certification'],
-	//the last upgrade
+	//the last exploration upgrade
 	'dragonite taxi': campUpgradeNames.filter(
 		(name) => campUpgradeCategories[name] === 'Exploration'
 	),
+	'pidgeot rider certification': [],
 };
 
 export const campUpgradeExplanations: Record<CampUpgrade, string> = {
@@ -219,6 +226,8 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	'machete certification': 'Safety Training for bush cutting',
 	'ranger certification':
 		'Pokemon Rangers keep the land safe from poachers like team rocket',
+	'warden certification':
+		'Only strong Pokemon Rangers can be promoted to warden',
 	'training field 1': 'Train your Pokemon against other trainers',
 	'training field 2': 'Invite Stronger Trainers (Lvl 20)',
 	'training field 3': 'Invite Even Stronger Trainers (Lvl 30)',
@@ -265,6 +274,7 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	'seventh slot for farm': 'more space at the berry farm',
 	'invite historian': 'It might not all be true, but it sounds interesting',
 	'dragonite taxi': 'dragonite can fly you to remote places',
+	'pidgeot rider certification': '...',
 };
 
 export const campUpgradeCostScale = 25;

@@ -165,4 +165,23 @@ export const routeS1Occupants: OverworldMap['occupants'] = [
 		apricorn: 'orange-apricorn',
 		id: 'orange-apri-routeS1-3',
 	}),
+	{
+		type: 'POKEMON',
+		x: 2,
+		y: 43,
+		orientation: 'RIGHT',
+		dexId: 243,
+		encounter: {
+			name: 'raikou',
+			maxXp: 125000,
+			minXp: 125000,
+			rarity: 'common',
+		},
+		dialogue: ['Raaaaii'],
+		conditionFunction: (s) =>
+			s.pokedex.raikou.caughtOnRoutes.length === 0 &&
+			getTimeOfDay() === 'NIGHT',
+
+		id: 'routeS1_raikou',
+	},
 ];

@@ -217,6 +217,7 @@ export const useGetBattleTeam = (
 					evAwards: getEvAwards(fetchedData.stats),
 					participatedInBattle: false,
 					protected: false,
+					spikyShielded: false,
 					endured: false,
 					charged: false,
 					helpingHanded: false,

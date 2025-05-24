@@ -1,3 +1,4 @@
+import { getTimeOfDay } from '../../../functions/getTimeOfDay';
 import { makeApricornTree } from '../../../functions/makeApricornTree';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { routeE1Lure } from '../../../modules/BerryLure/BerryLure';
@@ -258,4 +259,21 @@ export const routeE1Occupants: OverworldMap['occupants'] = [
 	nE1,
 	redE1,
 	hughE1,
+	{
+		type: 'POKEMON',
+		x: 15,
+		y: 28,
+		orientation: 'RIGHT',
+		dexId: 244,
+		encounter: {
+			name: 'entei',
+			maxXp: 125000,
+			minXp: 125000,
+			rarity: 'common',
+		},
+		dialogue: ['Grrr'],
+		conditionFunction: (s) =>
+			s.pokedex.entei.caughtOnRoutes.length === 0 && getTimeOfDay() === 'DAY',
+		id: 'routeE1_entei',
+	},
 ];

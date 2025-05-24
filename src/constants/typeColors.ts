@@ -50,14 +50,14 @@ export const percentageBasedColor = (
 	if (percentage < 0.25) {
 		return {
 			color: typeColors.fighting,
-			contrast: typeContrastColors.fighting,
+			contrast: 'white',
 		};
 	}
 	if (percentage < 0.5) {
 		return {
 			color: typeColors.electric,
-			contrast: typeContrastColors.electric,
+			contrast: 'black',
 		};
 	}
-	return { color: typeColors.grass, contrast: typeContrastColors.grass };
+	return { color: typeColors.grass, contrast: 'black' };
 };

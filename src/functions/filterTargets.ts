@@ -1,5 +1,5 @@
 import { isMove } from '../constants/checkLists/movesCheckList';
-import { lockInMoves } from '../constants/forceSwitchMoves';
+import { thrashingMoves } from '../constants/groupedMoves';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import {
 	isHealingItem,
@@ -52,7 +52,7 @@ export const filterTargets = ({
 			return [user];
 		}
 
-		if (lockInMoves.includes(chosenAction)) {
+		if (thrashingMoves.includes(chosenAction)) {
 			return preFiltered.filter(
 				(t) => t.status === 'ONFIELD' && t.id !== user.id
 			);

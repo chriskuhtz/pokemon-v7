@@ -6,7 +6,7 @@ import { Inventory } from './Inventory';
 import { OwnedPokemon } from './OwnedPokemon';
 
 export interface TrainerInfo {
-	name: string;
+	id: string;
 	sprite: string;
 	profilePicture?: string;
 	spriteGeneration?: 1;

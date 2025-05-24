@@ -258,7 +258,7 @@ const trainerCardStack = ({
 									gap: '1rem',
 								}}
 							>
-								{t.trainer?.name}{' '}
+								{t.trainer?.id}{' '}
 								{t.team.map((p, j) => (
 									<PokemonSprite key={t.id + p.name + i + j} name={p.name} />
 								))}

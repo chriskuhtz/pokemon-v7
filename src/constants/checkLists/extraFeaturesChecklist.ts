@@ -461,7 +461,34 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'distortion shaders', handled: true },
 	{ name: 'new apricorns (repeat ball)', handled: true },
+	{ name: 'tidy up constants', handled: true },
+	{
+		name: 'remove name prop from trainer, leads to confusion with id',
+		handled: true,
+	},
+	{ name: 'variable teams for cynthia', handled: true },
+	{ name: 'variable teams for red', handled: true },
+	{ name: 'variable teams for silver', handled: true },
+	{ name: 'variable teams for hugh', handled: true },
+	{ name: 'variable teams for n', handled: true },
+	{
+		name: 'Warden cert (required for distortions), stronger rockets',
+		handled: true,
+	},
+	{
+		name: 'raikou on s1',
+		handled: true,
+	},
+	{
+		name: 'entei on e1',
+		handled: true,
+	},
+	{ name: 'flyer cert as quest reward', handled: true },
+	{ name: ' team aqua', handled: true },
+	{ name: ' team magma', handled: true },
+	{ name: ' team galactic' },
 	//BUGS/IMPROVEMENTS:
+	{ name: 'trainer ai should use fake out correctly' },
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
 	{ name: 'loosing to wild mons is sometimes buggy' },
@@ -491,7 +518,4 @@ export const extraFeatureCheckList: {
 	{ name: 'random evolutions' },
 	{ name: 'steven as the fossil protector' },
 	{ name: 'download your player file and share it with others' },
-	{
-		name: 'Warden cert (required for distortions), outbreaks of strong Pokemon',
-	},
 ];

@@ -63,7 +63,6 @@ export const randomChallengeFieldOccupants: OverworldMap['occupants'] = [
 			},
 			conditionFunction: (s) => !s.handledOccupants.some((h) => h.id === id),
 			sprite: Object.values(SpriteEnum)[index],
-			name: id,
 			unhandledMessage: ['.', '..', '...'],
 			team: () => makeRandomTeam({ xp }),
 			challengeFieldRank,

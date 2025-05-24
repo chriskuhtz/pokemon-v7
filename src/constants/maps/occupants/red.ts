@@ -1,3 +1,4 @@
+import { getRandomEntry } from '../../../functions/filterTargets';
 import { getHighestXpOnTeam } from '../../../functions/getHighestXpOnTeam';
 import {
 	isFriday,
@@ -213,7 +214,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
 	});
 
 	const machamp = makeChallengerPokemon({
-		name: 'dragonite',
+		name: 'machamp',
 		xp: highestXpOnTeam,
 		nature: 'adamant',
 		ability: 'iron-fist',
@@ -230,6 +231,75 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
 			attack: 252,
 		},
 	});
+	const alakazam = makeChallengerPokemon({
+		name: 'alakazam',
+		xp: highestXpOnTeam,
+		nature: 'modest',
+		ability: 'serene-grace',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'twisted-spoon',
+		firstMove: { name: 'extrasensory', usedPP: 0 },
+		secondMove: { name: 'calm-mind', usedPP: 0 },
+		thirdMove: { name: 'recover', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			speed: 252,
+			'special-attack': 252,
+		},
+	});
+	const scyther = makeChallengerPokemon({
+		name: 'scyther',
+		xp: highestXpOnTeam,
+		nature: 'adamant',
+		ability: 'technician',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'choice-band',
+		firstMove: { name: 'wing-attack', usedPP: 0 },
+		secondMove: { name: 'mach-punch', usedPP: 0 },
+		thirdMove: { name: 'bug-bite', usedPP: 0 },
+		fourthMove: { name: 'bullet-punch', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			speed: 252,
+			attack: 252,
+		},
+	});
+	const slowbro = makeChallengerPokemon({
+		name: 'slowbro',
+		xp: highestXpOnTeam,
+		nature: 'quiet',
+		ability: 'adaptability',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'leftovers',
+		firstMove: { name: 'bubble-beam', usedPP: 0 },
+		secondMove: { name: 'psychic', usedPP: 0 },
+		thirdMove: { name: 'recover', usedPP: 0 },
+		fourthMove: { name: 'cosmic-power', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			defense: 252,
+			'special-defense': 252,
+		},
+	});
+	const raichu = makeChallengerPokemon({
+		name: 'raichu',
+		xp: highestXpOnTeam,
+		nature: 'naive',
+		ability: 'lightning-rod',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'shuca-berry',
+		firstMove: { name: 'nasty-plot', usedPP: 0 },
+		secondMove: { name: 'nuzzle', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			'special-attack': 252,
+			speed: 252,
+		},
+	});
 
 	if (highestXpOnTeam < 8000) {
 		return [charmander, bulbasaur, squirtle];
@@ -238,14 +308,27 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
 		return [charmeleon, ivysaur, wartortle];
 	}
 
-	const team: OwnedPokemon[] = [
+	const possibilities = [
 		charizard,
 		venusaur,
 		blastoise,
 		tauros,
 		dragonite,
 		machamp,
+		alakazam,
+		scyther,
+		slowbro,
+		raichu,
 	];
+	const team: OwnedPokemon[] = [];
+
+	for (let i = 0; i < 6; i++) {
+		team.push(
+			getRandomEntry(
+				possibilities.filter((p) => team.every((t) => t.name !== p.name))
+			)
+		);
+	}
 
 	return team;
 };
@@ -264,7 +347,6 @@ const red: OverworldTrainer = {
 		'this doesnt feel like 1996 anymore',
 		'whats with these colors?',
 	],
-	name: redId,
 	team: redTeam,
 	battleTeamConfig: {
 		assignGender: false,

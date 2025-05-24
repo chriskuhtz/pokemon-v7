@@ -32,6 +32,7 @@ export interface Quest {
 	researchPoints: number;
 	rangerLevels?: number;
 	catchBoosts?: Partial<CatchBoosts>;
+	campUpgrade?: CampUpgrade;
 	//conditions
 	conditionFunction: (saveFile: SaveFile) => boolean;
 	targetPokemon?: PokemonName[];

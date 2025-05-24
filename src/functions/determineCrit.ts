@@ -1,5 +1,5 @@
 import { AbilityName } from '../constants/checkLists/completed/abilityCheckList';
-import { ohkoMoves } from '../constants/ohkoMoves';
+import { ohkoMoves } from '../constants/groupedMoves';
 import { PokemonName } from '../constants/pokemonNames';
 import { PrimaryAilment } from '../interfaces/Ailment';
 import { ItemType } from '../interfaces/Item';

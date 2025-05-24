@@ -323,7 +323,11 @@ export const handleUniqueMoves = ({
 			statBoosts: updatedTarget.statBoosts,
 		};
 	}
-	if (move.name === 'protect' || move.name === 'detect') {
+	if (
+		move.name === 'protect' ||
+		move.name === 'detect' ||
+		move.name === 'spiky-shield'
+	) {
 		if (
 			(updatedAttacker.lastUsedMove?.name === 'protect' ||
 				updatedAttacker.lastUsedMove?.name === 'detect' ||
@@ -334,7 +338,11 @@ export const handleUniqueMoves = ({
 				message: `It failed`,
 			});
 		} else {
-			updatedAttacker = { ...updatedAttacker, protected: true };
+			updatedAttacker = {
+				...updatedAttacker,
+				protected: true,
+				spikyShielded: move.name === 'spiky-shield',
+			};
 		}
 	}
 	if (move.name === 'endure') {

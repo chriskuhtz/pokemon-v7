@@ -226,7 +226,7 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 					m,
 					calculateLevelData(ownedPokemon.xp, ownedPokemon.growthRate).level
 				);
-				console.log(m.move.name, payment);
+
 				const disabled = saveFile.bag[payment] < 1 || !available;
 				return (
 					<div

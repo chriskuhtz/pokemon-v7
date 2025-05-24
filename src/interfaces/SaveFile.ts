@@ -88,6 +88,8 @@ export type CatchStreak = {
 	streak: number;
 	mapId: MapId;
 };
+export const evilTeams = ['rocket', 'aqua', 'magma', 'galactic'] as const;
+export type EvilTeam = (typeof evilTeams)[number];
 export interface SaveFile {
 	badges: BadgeName[];
 	playerId: string;
@@ -154,8 +156,11 @@ export interface SaveFile {
 	currentStrongSwarm?: PokemonSwarm;
 	currentDistortionSwarm?: PokemonSwarm;
 	rangerLevel?: number;
-	rocketOperation?: { route: MapId; trainers: OverworldTrainer[] };
-	nextRocketOperationAt?: number;
+	troubleMakers?: {
+		route: MapId;
+		trainers: OverworldTrainer[];
+		affiliation: EvilTeam;
+	};
 	starterPokemon?: PokemonName;
 	seedVault: ItemType[];
 	pokedex: Pokedex;
@@ -165,4 +170,5 @@ export interface SaveFile {
 	catchBoosts?: CatchBoosts;
 	catchStreak?: CatchStreak;
 	longestStreak?: number;
+	flying?: boolean;
 }

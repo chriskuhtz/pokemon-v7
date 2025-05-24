@@ -1,4 +1,4 @@
-import { lockInMoves } from '../../../../../../constants/forceSwitchMoves';
+import { thrashingMoves } from '../../../../../../constants/groupedMoves';
 import { applyAttackAilmentsToPokemon } from '../../../../../../functions/applyAttackAilmentsToPokemon';
 import { applyAttackStatChanges } from '../../../../../../functions/applyAttackStatChanges';
 import { applySecondaryAilmentToPokemon } from '../../../../../../functions/applySecondaryAilmentToPokemon';
@@ -71,7 +71,7 @@ export const handleSwaggerAttack = ({
 
 	//apply confusion on lock in end
 	if (
-		lockInMoves.includes(move.name) &&
+		thrashingMoves.includes(move.name) &&
 		updatedAttacker.moveQueue.length === 1
 	) {
 		addMessage({ message: `${updatedAttacker.data.name} stopped thrashing` });

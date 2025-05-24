@@ -3,10 +3,10 @@ import { CgZoomIn, CgZoomOut } from 'react-icons/cg';
 import { IoMdMenu } from 'react-icons/io';
 import { LureIcon } from '../../../components/LureIcon/LureIcon';
 import { RepelIcon } from '../../../components/RepelIcon/RepelIcon';
-import { RocketIcon } from '../../../components/RocketIcon/RocketIcon';
 import { StreakIcon } from '../../../components/StreakIcon/StreakIcon';
 import { TeamOverview } from '../../../components/TeamOverview/TeamOverview';
 import { TimeOfDayIcon } from '../../../components/TimeOfDayIcon/TimeOfDayIcon';
+import { TroubleMakersIcon } from '../../../components/TroubleMakersIcon/TroubleMakersIcon';
 import { WeatherIcon } from '../../../components/WeatherIcon/WeatherIcon';
 import { battleSpriteSize } from '../../../constants/gameData';
 import {
@@ -112,7 +112,7 @@ export const OverworldMenus = ({
 				}}
 			>
 				<StreakIcon />
-				<RocketIcon />
+				<TroubleMakersIcon />
 				<RepelIcon />
 				<LureIcon />
 				<strong>{mapDisplayNames[map.id]}</strong>

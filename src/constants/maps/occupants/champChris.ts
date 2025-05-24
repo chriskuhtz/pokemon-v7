@@ -117,7 +117,6 @@ export const champChris: OverworldTrainer = {
 	x: 25,
 	y: 18,
 	orientation: 'DOWN',
-	name: 'Chris',
 	sprite: SpriteEnum.red,
 	id: 'champ-chris',
 	unhandledMessage: ['.', '..', '...'],

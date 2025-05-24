@@ -58,6 +58,8 @@ const sabrinaCondition = (s: SaveFile) => {
 		team.every((t) => calculateLevelData(t.xp, t.growthRate).level <= 40)
 	);
 };
+
+export const sabrinaId = 'trainer_sabrina';
 const trainerSabrina: OverworldTrainer = {
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/5/58/VSSabrina.png',
@@ -65,11 +67,10 @@ const trainerSabrina: OverworldTrainer = {
 	x: 3,
 	y: 3,
 	orientation: 'LEFT',
-	id: 'trainer_sabrina',
+	id: sabrinaId,
 	conditionFunction: sabrinaCondition,
 	sprite: SpriteEnum.sabrina,
 	unhandledMessage: ['Just as i foresaw'],
-	name: 'Gym Leader Sabrina',
 	team: sabrinaTeam,
 	battleTeamConfig: {
 		assignGender: false,

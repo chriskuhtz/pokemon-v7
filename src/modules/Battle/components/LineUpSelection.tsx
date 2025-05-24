@@ -97,12 +97,12 @@ export const LineUpSelection = ({
 					{trainer ? (
 						<h2 style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
 							{' '}
-							VS {trainer.name}{' '}
+							VS {trainer.id}{' '}
 							{trainer.profilePicture ? (
 								<img src={trainer.profilePicture} />
 							) : (
 								<Sprite
-									canvasKey={trainer.name}
+									canvasKey={trainer.id}
 									id={trainer.sprite}
 									rotating={false}
 								/>

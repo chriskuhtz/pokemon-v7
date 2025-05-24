@@ -39,6 +39,8 @@ const brockCondition = (s: SaveFile) => {
 		)
 	);
 };
+
+export const brockId = 'trainer_brock';
 const trainerBrock: OverworldTrainer = {
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/1/11/VSBrock.png',
@@ -46,11 +48,10 @@ const trainerBrock: OverworldTrainer = {
 	x: 8,
 	y: 28,
 	orientation: 'RIGHT',
-	id: 'trainer_brock',
+	id: brockId,
 	conditionFunction: brockCondition,
 	sprite: SpriteEnum.brock,
 	unhandledMessage: ['Lets do this'],
-	name: 'Gym Leader Brock',
 	team: brockTeam,
 	battleTeamConfig: {
 		assignGender: false,

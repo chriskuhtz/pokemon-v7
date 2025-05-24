@@ -1,12 +1,12 @@
-import { isContactMove } from '../constants/contactMoves';
 import {
 	digHitMoves,
 	flyHitMoves,
+	isContactMove,
 	ohkoMoves,
+	passThroughProtectMoves,
 	shadowHitMoves,
-} from '../constants/ohkoMoves';
-import { passThroughProtectMoves } from '../constants/passThroughProtectMoves';
-import { soundBasedMoves } from '../constants/soundBasedMoves';
+	soundBasedMoves,
+} from '../constants/groupedMoves';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
@@ -26,6 +26,7 @@ export type MissReason =
 	| 'ATTACKER_NOT_ASLEEP'
 	| 'TARGET_NOT_ASLEEP'
 	| 'PROTECTED'
+	| 'SPIKY_SHIELDED'
 	| 'QUEENLY_MAJESTY'
 	| 'PSYCHIC_TERRAIN';
 
@@ -70,6 +71,9 @@ export const determineMiss = (
 		passThroughProtectMoves.includes(attack.name) ||
 		(isContactMove(attack.name, attacker) &&
 			attacker.ability === 'unseen-fist');
+	if (target.spikyShielded && !passesThrough) {
+		return { miss: true, reason: 'SPIKY_SHIELDED' };
+	}
 	if (target.protected && !passesThrough) {
 		return { miss: true, reason: 'PROTECTED' };
 	}

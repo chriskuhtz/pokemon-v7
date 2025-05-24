@@ -1,22 +1,29 @@
 export const isSunday = () => {
+	//return true;
 	return new Date().getDay() === 0;
 };
 export const isMonday = () => {
+	//return true;
 	return new Date().getDay() === 1;
 };
 export const isTuesday = () => {
+	//return true;
 	return new Date().getDay() === 2;
 };
 export const isWednesday = () => {
+	//return true;
 	return new Date().getDay() === 3;
 };
 export const isThursday = () => {
+	//return true;
 	return new Date().getDay() === 4;
 };
 export const isFriday = () => {
+	//return true;
 	return new Date().getDay() === 5;
 };
 export const isSaturday = () => {
+	//return true;
 	return new Date().getDay() === 6;
 };
 

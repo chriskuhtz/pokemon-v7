@@ -151,7 +151,8 @@ export const routeW1Occupants: OverworldMap['occupants'] = [
 		},
 		dialogue: ['Suiii'],
 		conditionFunction: (s) =>
-			s.pokedex.suicune.caughtOnRoutes.length === 0 && getTimeOfDay() !== 'DAY',
+			s.pokedex.suicune.caughtOnRoutes.length === 0 &&
+			getTimeOfDay() === 'EVENING',
 		id: 'routeW1_suicune',
 	},
 ];

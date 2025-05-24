@@ -1,4 +1,4 @@
-import { ohkoMoves } from '../constants/ohkoMoves';
+import { ohkoMoves } from '../constants/groupedMoves';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 

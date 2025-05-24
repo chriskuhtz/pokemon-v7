@@ -36,7 +36,6 @@ export const useMapEditor = ({
 	);
 
 	useEffect(() => {
-		console.log('write to clip');
 		navigator.clipboard.writeText(
 			JSON.stringify({
 				baseLayer,

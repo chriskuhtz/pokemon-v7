@@ -54,6 +54,8 @@ const mistyCondition = (s: SaveFile) => {
 		team[0].name === team[1].name
 	);
 };
+
+export const mistyId = 'trainer_misty';
 const trainerMisty: OverworldTrainer = {
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/2/20/VSMisty.png',
@@ -61,11 +63,10 @@ const trainerMisty: OverworldTrainer = {
 	x: 16,
 	y: 24,
 	orientation: 'DOWN',
-	id: 'trainer_misty',
+	id: mistyId,
 	conditionFunction: mistyCondition,
 	sprite: SpriteEnum.misty,
 	unhandledMessage: ['lets see what you got'],
-	name: 'Gym Leader Misty',
 	team: mistyTeam,
 	battleTeamConfig: {
 		assignGender: false,

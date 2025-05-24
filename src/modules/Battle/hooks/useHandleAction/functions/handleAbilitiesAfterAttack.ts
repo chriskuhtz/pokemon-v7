@@ -1,5 +1,7 @@
-import { isContactMove } from '../../../../../constants/contactMoves';
-import { windMoves } from '../../../../../constants/punchBasedMoves';
+import {
+	isContactMove,
+	windMoves,
+} from '../../../../../constants/groupedMoves';
 import { applyPrimaryAilmentToPokemon } from '../../../../../functions/applyPrimaryAilmentToPokemon';
 import { applySecondaryAilmentToPokemon } from '../../../../../functions/applySecondaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from '../../../../../functions/applyStatChangeToPokemon';
