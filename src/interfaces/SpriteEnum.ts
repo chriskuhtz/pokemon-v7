@@ -144,4 +144,5 @@ export enum SpriteEnum {
 	n = '210',
 	red1996 = '211',
 	hugh = '213',
+	dawn = '214',
 }

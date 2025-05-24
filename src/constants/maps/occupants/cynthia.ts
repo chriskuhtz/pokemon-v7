@@ -1,3 +1,4 @@
+import { getRandomEntry } from '../../../functions/filterTargets';
 import { getHighestXpOnTeam } from '../../../functions/getHighestXpOnTeam';
 import {
 	isFriday,
@@ -66,6 +67,24 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
 		secondMove: { name: 'dragon-claw', usedPP: 0 },
 		thirdMove: { name: 'bite', usedPP: 0 },
 		fourthMove: { name: 'dragon-dance', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			attack: 252,
+			speed: 252,
+		},
+	});
+	const otherGarchomp = makeChallengerPokemon({
+		name: 'garchomp',
+		xp: highestXpOnTeam,
+		nature: 'adamant',
+		ability: 'sand-force',
+		fixedAbility: true,
+		shiny: true,
+		happiness: 255,
+		heldItemName: 'soft-sand',
+		firstMove: { name: 'earthquake', usedPP: 0 },
+		secondMove: { name: 'dragon-claw', usedPP: 0 },
+		thirdMove: { name: 'dragon-dance', usedPP: 0 },
 		effortValues: {
 			...EmptyStatObject,
 			attack: 252,
@@ -213,6 +232,58 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
 			'special-attack': 252,
 		},
 	});
+	const milotic = makeChallengerPokemon({
+		name: 'milotic',
+		xp: highestXpOnTeam,
+		nature: 'adamant',
+		ability: 'drizzle',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'mystic-water',
+		firstMove: { name: 'recover', usedPP: 0 },
+		secondMove: { name: 'calm-mind', usedPP: 0 },
+		thirdMove: { name: 'surf', usedPP: 0 },
+		fourthMove: { name: 'ice-beam', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			'special-defense': 252,
+			'special-attack': 252,
+		},
+	});
+	const glaceon = makeChallengerPokemon({
+		name: 'glaceon',
+		xp: highestXpOnTeam,
+		nature: 'adamant',
+		ability: 'clear-body',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'leftovers',
+		firstMove: { name: 'recover', usedPP: 0 },
+		secondMove: { name: 'cosmic-power', usedPP: 0 },
+		thirdMove: { name: 'draining-kiss', usedPP: 0 },
+		fourthMove: { name: 'ice-beam', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			'special-defense': 252,
+			'special-attack': 252,
+		},
+	});
+
+	const pory = makeChallengerPokemon({
+		name: 'porygon-z',
+		xp: highestXpOnTeam,
+		nature: 'adamant',
+		ability: 'clear-body',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'choice-band',
+		firstMove: { name: 'hyper-beam', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			speed: 252,
+			'special-attack': 252,
+		},
+	});
 
 	if (highestXpOnTeam < 8000) {
 		return [gible, riolu, togepi];
@@ -221,14 +292,27 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
 		return [gabite, riolu, togetic, spiritomb];
 	}
 
-	const team: OwnedPokemon[] = [
+	const possibilities = [
 		garchomp,
 		lucario,
 		togekiss,
 		spiritomb,
 		roserade,
 		gastrodon,
+		milotic,
+		glaceon,
+		otherGarchomp,
+		pory,
 	];
+	const team: OwnedPokemon[] = [];
+
+	for (let i = 0; i < 6; i++) {
+		team.push(
+			getRandomEntry(
+				possibilities.filter((p) => team.every((t) => t.name !== p.name))
+			)
+		);
+	}
 
 	return team;
 };

@@ -466,6 +466,11 @@ export const extraFeatureCheckList: {
 		name: 'remove name prop from trainer, leads to confusion with id',
 		handled: true,
 	},
+	{ name: 'variable teams for cynthia', handled: true },
+	{ name: 'variable teams for red' },
+	{ name: 'variable teams for silver' },
+	{ name: 'variable teams for hugh' },
+	{ name: 'variable teams for n' },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -499,5 +504,4 @@ export const extraFeatureCheckList: {
 	{
 		name: 'Warden cert (required for distortions), outbreaks of strong Pokemon',
 	},
-	{ name: 'variable teams for all travellers' },
 ];
