@@ -2289,8 +2289,16 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/610/',
 		handled: true,
 	},
-	{ name: 'infestation', url: 'https://pokeapi.co/api/v2/move/611/' },
-	{ name: 'power-up-punch', url: 'https://pokeapi.co/api/v2/move/612/' },
+	{
+		name: 'infestation',
+		url: 'https://pokeapi.co/api/v2/move/611/',
+		handled: true,
+	},
+	{
+		name: 'power-up-punch',
+		url: 'https://pokeapi.co/api/v2/move/612/',
+		handled: true,
+	},
 	{ name: 'oblivion-wing', url: 'https://pokeapi.co/api/v2/move/613/' },
 	{ name: 'thousand-arrows', url: 'https://pokeapi.co/api/v2/move/614/' },
 	{ name: 'thousand-waves', url: 'https://pokeapi.co/api/v2/move/615/' },
@@ -3249,6 +3257,8 @@ export const handledMoves = [
 	'baby-doll-eyes',
 	'nuzzle',
 	'hold-back',
+	'infestation',
+	'power-up-punch',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
