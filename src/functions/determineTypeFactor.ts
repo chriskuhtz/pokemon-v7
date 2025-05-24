@@ -1,5 +1,8 @@
-import { ballAndBombMoves, powderMoves } from '../constants/punchBasedMoves';
-import { soundBasedMoves } from '../constants/soundBasedMoves';
+import {
+	soundBasedMoves,
+	ballAndBombMoves,
+	powderMoves,
+} from '../constants/groupedMoves';
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';

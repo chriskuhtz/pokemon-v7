@@ -1,5 +1,7 @@
-import { isContactMove } from '../../../../../../constants/contactMoves';
-import { SELF_DESTRUCTING_MOVES } from '../../../../../../constants/selfDestructingMoves';
+import {
+	isContactMove,
+	SELF_DESTRUCTING_MOVES,
+} from '../../../../../../constants/groupedMoves';
 import { applyAttackAilmentsToPokemon } from '../../../../../../functions/applyAttackAilmentsToPokemon';
 import { applyAttackStatChanges } from '../../../../../../functions/applyAttackStatChanges';
 import { applyDrainOrRecoil } from '../../../../../../functions/applyDrainOrRecoil';

@@ -1,12 +1,12 @@
-import { isContactMove } from '../constants/contactMoves';
 import {
 	digHitMoves,
 	flyHitMoves,
+	isContactMove,
 	ohkoMoves,
+	passThroughProtectMoves,
 	shadowHitMoves,
-} from '../constants/ohkoMoves';
-import { passThroughProtectMoves } from '../constants/passThroughProtectMoves';
-import { soundBasedMoves } from '../constants/soundBasedMoves';
+	soundBasedMoves,
+} from '../constants/groupedMoves';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';

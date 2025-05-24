@@ -1,7 +1,75 @@
 import { getHeldItem } from '../functions/getHeldItem';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { MoveName } from './checkLists/movesCheckList';
-import { punchBasedMoves } from './punchBasedMoves';
+
+export const secondTurnMoves = [
+	'razor-wind',
+	'skull-bash',
+	'solar-beam',
+	'fly',
+	'dig',
+	'dive',
+	'bounce',
+	'sky-attack',
+	'shadow-force',
+	'freeze-shock',
+	'ice-burn',
+	'phantom-force',
+];
+
+export const soundBasedMoves = [
+	'alluring-voice',
+	'boomburst',
+	'bug-buzz',
+	'chatter',
+	'clanging-scales',
+	'clangorous-soul',
+	'clangorous-soulblaze',
+	'confide',
+	'disarming-voice',
+	'echoed-voice',
+	'eerie-spell',
+	'grass-whistle',
+	'growl',
+	'heal-bell',
+	'howl',
+	'hyper-voice',
+	'metal-sound',
+	'noble-roar',
+	'overdrive',
+	'parting-shot',
+	'perish-song',
+	'psychic-noise',
+	'relic-song',
+	'roar',
+	'round',
+	'screech',
+	'shadow-panic',
+	'sing',
+	'snarl',
+	'snore',
+	'sparkling-aria',
+	'supersonic',
+	'torch-song',
+	'uproar',
+];
+
+export const SELF_DESTRUCTING_MOVES = [
+	'explosion',
+	'misty-explosion',
+	'self-destruct',
+	'mind-blown',
+];
+
+export const recoveryMoves = [
+	'hyper-beam',
+	'blast-burn',
+	'hydro-cannon',
+	'frenzy-plant',
+	'giga-impact',
+	'rock-wrecker',
+	'roar-of-time',
+];
 
 const contactMoves = [
 	'accelerock',
@@ -295,3 +363,204 @@ export const isContactMove = (move: MoveName, pokemon: BattlePokemon) => {
 	}
 	return contactMoves.includes(move);
 };
+export const forceSwitchMoves = ['whirlwind', 'roar'];
+
+export const thrashingMoves = ['thrash', 'petal-dance', 'outrage'];
+
+export const crashDamageMoves = [
+	'jump-kick',
+	'axe-kick',
+	'high-jump-kick',
+	'supercell-slam',
+];
+
+export const ohkoMoves = ['guillotine', 'sheer-cold', 'fissure', 'horn-drill'];
+
+export const flyHitMoves = [
+	'gust',
+	'twister',
+	'thunder',
+	'sky-uppercut',
+	'smack-down',
+	'magnet-bomb',
+	'hurricane',
+];
+export const digHitMoves = ['earthquake', 'magnitude', 'magnet-bomb'];
+export const shadowHitMoves = ['magnet-bomb'];
+export const flyDoubleDamageMoves = ['gust', 'twister'];
+export const diveDoubleDamageMoves = ['surf', 'whirlpool'];
+
+export const passThroughProtectMoves = [
+	'acupressure',
+	'doom-desire',
+	'future-sight',
+	'feint',
+	'imprison',
+	'perish-song',
+	'phantom-force',
+	'play-nice',
+	'psych-up',
+	'shadow-force',
+	'shadow-force',
+	'transform',
+	'mighty-cleave',
+	'hyperspace-hole',
+];
+
+export const fixedDamageMoves: Record<string, number> = {
+	'sonic-boom': 20,
+	'dragon-rage': 40,
+};
+
+export const levelDamageMoves: string[] = ['seismic-toss', 'night-shade'];
+
+export const punchBasedMoves = [
+	'bullet-punch',
+	'comet-punch',
+	'dizzy-punch',
+	'double-iron-bash',
+	'drain-punch',
+	'dynamic-punch',
+	'fire-punch',
+	'focus-punch',
+	'hammer-arm',
+	'headlong-rush',
+	'ice-hammer',
+	'ice-punch',
+	'jet-punch',
+	'mach-punch',
+	'mega-punch',
+	'meteor-mash',
+	'plasma-fists',
+	'power-up-punch',
+	'rage-fist',
+	'shadow-punch',
+	'sky-uppercut',
+	'surging-strikes',
+	'thunder-punch',
+	'wicked-blow',
+];
+
+export const ballAndBombMoves = [
+	'egg-bomb',
+	'barrage',
+	'sludge-bomb',
+	'octazooka',
+	'zap-cannon',
+	'shadow-ball',
+	'mist-ball',
+	'ice-ball',
+	'weather-ball',
+	'bullet-seed',
+	'rock-blast',
+	'gyro-ball',
+	'aura-sphere',
+	'seed-bomb',
+	'focus-blast',
+	'energy-ball',
+	'mud-bomb',
+	'rock-wrecker',
+	'magnet-bomb',
+	'electro-ball',
+	'acid-spray',
+	'searing-shot',
+	'pollen-puff',
+	'beak-blast',
+	'pyro-all',
+	'syrup-bomb',
+];
+
+export const bitingMoves = [
+	'bite',
+	'hyper-fang',
+	'chrunch',
+	'poison-fang',
+	'thunder-fang',
+	'ice-fang',
+	'fire-fang',
+	'psychic-fangs',
+	'jaw-lock',
+	'fishious-rend',
+];
+export const auraAndPulseMoves = [
+	'aura-sphere',
+	'dark-pulse',
+	'dragon-pulse',
+	'heal-pulse',
+	'terrain-pulse',
+	'water-pulse',
+	'heal-pulse',
+];
+
+export const powderMoves = [
+	'Poison Powder',
+	'Stun Spore',
+	'Sleep Powder',
+	'Spore',
+	'Cotton Spore',
+	'Rage Powder',
+	'Powder',
+	'Magic Powder',
+];
+export const danceMoves = [
+	'aqua-step',
+	'clangorous-soul',
+	'dragon-dance',
+	'feather-dance',
+	'fiery-dance',
+	'lunar-dance',
+	'petal-dance',
+	'revelation-dance',
+	'quiver-dance',
+	'swords-dance',
+	'teeter-dance',
+	'victory-dance',
+];
+
+export const windMoves = [
+	'aeroblast',
+	'air-cutter',
+	'bleakwind-storm',
+	'blizzard',
+	'fairy-wind',
+	'gust',
+	'heat-wave',
+	'hurricane',
+	'icy-wind',
+	'petal-blizzard',
+	'sandsear-storm',
+	'sandstorm',
+	'springtide-storm',
+	'tailwind',
+	'twister',
+	'whirlwind',
+	'wildbolt-storm',
+];
+
+export const slicingMoves = [
+	'cut',
+	'razor-leaf',
+	'slash',
+	'fury-cutter',
+	'air-cutter',
+	'aerial-ace',
+	'leaf-blade',
+	'night-slash',
+	'air-slash',
+	'x-scissor',
+	'psycho-cut',
+	'cross-poison',
+	'sacred-sword',
+	'razor-shell',
+	'secret-sword',
+	'solar-blade',
+	'behemoth-blade',
+	'stone-axe',
+	'ceaseless-edge',
+	'kowtow-cleave',
+	'psyblade',
+	'bitter-blade',
+	'aqua-cutter',
+	'mighty-cleave',
+	'tachyon-cutter',
+];

@@ -1,22 +1,19 @@
 import { AbilityName } from '../constants/checkLists/completed/abilityCheckList';
-import { isContactMove } from '../constants/contactMoves';
-import {
-	fixedDamageMoves,
-	levelDamageMoves,
-} from '../constants/fixedDamageMoves';
-import {
-	diveDoubleDamageMoves,
-	flyDoubleDamageMoves,
-	ohkoMoves,
-} from '../constants/ohkoMoves';
 import {
 	auraAndPulseMoves,
 	bitingMoves,
+	diveDoubleDamageMoves,
+	fixedDamageMoves,
+	flyDoubleDamageMoves,
+	isContactMove,
+	levelDamageMoves,
+	ohkoMoves,
 	punchBasedMoves,
 	slicingMoves,
+	soundBasedMoves,
 	windMoves,
-} from '../constants/punchBasedMoves';
-import { soundBasedMoves } from '../constants/soundBasedMoves';
+} from '../constants/groupedMoves';
+
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
