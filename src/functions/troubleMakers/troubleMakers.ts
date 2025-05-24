@@ -1,8 +1,11 @@
 import { MapId, mapsRecord } from '../../constants/maps/mapsRecord';
-import { PokemonName } from '../../constants/pokemonNames';
 import { OverworldTrainer } from '../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
-import { EvilTeam, SaveFile } from '../../interfaces/SaveFile';
+import {
+	EvilTeam,
+	OverworldTrainerStump,
+	SaveFile,
+} from '../../interfaces/SaveFile';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { getRandomEntry } from '../filterTargets';
 import { getMiddleOfThree } from '../getMiddleOfThree';
@@ -77,45 +80,38 @@ const determineMaxXp = (rangerLevel: number) => {
 };
 
 export const makeTroubleMakers = (
-	rangerLevel: number,
 	mapId: MapId,
 	warden: boolean,
 	affiliation: EvilTeam
-): OverworldTrainer[] => {
+): OverworldTrainerStump[] => {
 	if (affiliation === 'aqua') {
 		return createTroubleMakers(
-			rangerLevel,
 			mapId,
 			warden,
 			affiliation,
 			aquaNamesMale,
-			aquaNamesFemale,
-			aquaPokemon
+			aquaNamesFemale
 		);
 	}
 	if (affiliation === 'magma') {
 		return createTroubleMakers(
-			rangerLevel,
 			mapId,
 			warden,
 			affiliation,
 			magmaNamesMale,
-			magmaNamesFemale,
-			magmaPokemon
+			magmaNamesFemale
 		);
 	}
 	return createTroubleMakers(
-		rangerLevel,
 		mapId,
 		warden,
 		affiliation,
 		rocketNamesMale,
-		rocketNamesFemale,
-		rocketPokemon
+		rocketNamesFemale
 	);
 };
 
-const createAdmin = (
+export const createAdmin = (
 	affiliation: EvilTeam,
 	pos: { x: number; y: number }
 ): OverworldTrainer => {
@@ -207,47 +203,52 @@ const createAdmin = (
 	} else return hillary;
 };
 
+export const getTroubleMakerTeam = (s: SaveFile): OwnedPokemon[] => {
+	if (!s.campUpgrades['ranger certification']) {
+		return [makeChallengerPokemon({})];
+	}
+	const rangerLevel = s.rangerLevel ?? 0;
+	const pokemon = () => {
+		if (s.troubleMakers?.affiliation === 'magma') {
+			return magmaPokemon;
+		}
+		if (s.troubleMakers?.affiliation === 'aqua') {
+			return aquaPokemon;
+		}
+
+		return rocketPokemon;
+	};
+	const numberOfMembers = determineNumberOfMembers(rangerLevel);
+	const minXp = determineMinXp(rangerLevel);
+	const maxXp = determineMaxXp(rangerLevel);
+	const availableMons = pokemon().filter(
+		(r) => r.minXp >= minXp && r.maxXp <= maxXp
+	);
+
+	return Array.from({ length: numberOfMembers }).map(() => {
+		const mon = getRandomEntry(availableMons);
+
+		return makeChallengerPokemon({
+			name: mon.name,
+			xp: getMiddleOfThree([
+				mon.minXp,
+				mon.maxXp,
+				Math.floor(mon.maxXp * Math.random()),
+			]),
+		});
+	});
+};
+
 const createTroubleMakers = (
-	rangerLevel: number,
 	mapId: MapId,
 	warden: boolean,
 	affiliation: EvilTeam,
 	namesMale: string[],
-	namesFemale: string[],
-	pokemon: {
-		name: PokemonName;
-		minXp: number;
-		maxXp: number;
-	}[]
-): OverworldTrainer[] => {
+	namesFemale: string[]
+): OverworldTrainerStump[] => {
 	const chosenNames = [...namesFemale, ...namesMale].filter(
 		() => Math.random() < 0.5
 	);
-
-	const getTeam = (s: SaveFile): OwnedPokemon[] => {
-		if (!s.campUpgrades['ranger certification']) {
-			return [makeChallengerPokemon({})];
-		}
-		const numberOfMembers = determineNumberOfMembers(rangerLevel);
-		const minXp = determineMinXp(rangerLevel);
-		const maxXp = determineMaxXp(rangerLevel);
-		const availableMons = pokemon.filter(
-			(r) => r.minXp >= minXp && r.maxXp <= maxXp
-		);
-
-		return Array.from({ length: numberOfMembers }).map(() => {
-			const mon = getRandomEntry(availableMons);
-
-			return makeChallengerPokemon({
-				name: mon.name,
-				xp: getMiddleOfThree([
-					mon.minXp,
-					mon.maxXp,
-					Math.floor(mon.maxXp * Math.random()),
-				]),
-			});
-		});
-	};
 
 	const OverworldMap = mapsRecord[mapId];
 
@@ -285,14 +286,13 @@ const createTroubleMakers = (
 				return SpriteEnum.rocketMale;
 			} else return SpriteEnum.rocketFemale;
 		};
-		const trainer: OverworldTrainer = {
+		const trainer: OverworldTrainerStump = {
 			x,
 			y,
 			type: 'TRAINER',
 			id,
 			orientation: getRandomOrientation(),
 			unhandledMessage: getRocketMessage(),
-			team: (s) => getTeam(s),
 			battleTeamConfig: {
 				assignLearnsetMoves: true,
 				assignNaturalAbility: true,
@@ -300,7 +300,6 @@ const createTroubleMakers = (
 				assignHeldItem: true,
 			},
 			sprite: sprite(),
-			conditionFunction: () => true,
 		};
 
 		return trainer;

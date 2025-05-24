@@ -90,6 +90,10 @@ export type CatchStreak = {
 };
 export const evilTeams = ['rocket', 'aqua', 'magma', 'galactic'] as const;
 export type EvilTeam = (typeof evilTeams)[number];
+export type OverworldTrainerStump = Omit<
+	OverworldTrainer,
+	'team' | 'conditionFunction'
+>;
 export interface SaveFile {
 	badges: BadgeName[];
 	playerId: string;
@@ -158,7 +162,7 @@ export interface SaveFile {
 	rangerLevel?: number;
 	troubleMakers?: {
 		route: MapId;
-		trainers: OverworldTrainer[];
+		trainers: OverworldTrainerStump[];
 		affiliation: EvilTeam;
 	};
 	starterPokemon?: PokemonName;

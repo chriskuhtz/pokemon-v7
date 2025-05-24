@@ -46,7 +46,6 @@ export const useRangerRadio = () => {
 				...evilTeams.filter((e) => e !== 'galactic'),
 			]);
 			const op = makeTroubleMakers(
-				saveFile.rangerLevel ?? 0,
 				route,
 				saveFile.campUpgrades['warden certification'],
 				randomAffiliation

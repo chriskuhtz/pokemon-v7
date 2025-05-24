@@ -53,7 +53,7 @@ export const rocketPokemon: {
 ];
 
 export const rocketNamesMale = [
-	'Chad',
+	'Joe',
 	'Brad',
 	'Cliff',
 	'Cleetus',
