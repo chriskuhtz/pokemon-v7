@@ -1,6 +1,7 @@
 import { getHighestXpOnTeam } from '../../../functions/getHighestXpOnTeam';
 import { makeChallengerPokemon } from '../../../functions/makeChallengerPokemon';
 import { occupantHandled } from '../../../functions/occupantHandled';
+import { getRocketChadTeam } from '../../../functions/troubleMakers/rocket';
 import { ItemType } from '../../../interfaces/Item';
 import { Occupant, OverworldItem } from '../../../interfaces/OverworldMap';
 import { SaveFile } from '../../../interfaces/SaveFile';
@@ -225,6 +226,30 @@ export const rocketCampOccupants: Occupant[] = [
 			assignNaturalAbility: true,
 			assignGender: true,
 
+			assignHeldItem: true,
+		},
+	},
+	{
+		type: 'TRAINER',
+		id: 'Rocket Admin Chad',
+		x: 10,
+		y: 9,
+		orientation: 'DOWN',
+		team: getRocketChadTeam,
+		sprite: SpriteEnum.rocketAdminMale,
+
+		unhandledMessage: [
+			'Dont you understand?',
+			'Everybody has got to make a living',
+			'I accept no responsibility for my cruelty',
+			'...',
+			'big dog',
+		],
+		conditionFunction: (s) => !occupantHandled(s, 'Rocket Admin Chad'),
+		battleTeamConfig: {
+			assignLearnsetMoves: true,
+			assignNaturalAbility: true,
+			assignGender: true,
 			assignHeldItem: true,
 		},
 	},
