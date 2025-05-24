@@ -10,8 +10,8 @@ export const aquaPokemon: {
 	maxXp: number;
 }[] = [
 	//magma and aqua
-	{ name: 'makuhita', minXp: 8000, maxXp: 125000 },
-	{ name: 'hariyama', minXp: 1000, maxXp: 8000 },
+	{ name: 'makuhita', minXp: 1000, maxXp: 8000 },
+	{ name: 'hariyama', minXp: 8000, maxXp: 125000 },
 	{ name: 'poochyena', minXp: 1000, maxXp: 8000 },
 	{ name: 'mightyena', minXp: 8000, maxXp: 125000 },
 	{ name: 'seviper', minXp: 8000, maxXp: 125000 },
@@ -40,7 +40,7 @@ export const aquaPokemon: {
 	{ name: 'glalie', minXp: 1000, maxXp: 125000 },
 	{ name: 'spheal', minXp: 1000, maxXp: 8000 },
 	{ name: 'sealeo', minXp: 8000, maxXp: 64000 },
-	{ name: 'walrein', minXp: 15000, maxXp: 125000 },
+	{ name: 'walrein', minXp: 27000, maxXp: 125000 },
 	{ name: 'gyarados', minXp: 27000, maxXp: 125000 },
 	{ name: 'relicanth', minXp: 27000, maxXp: 125000 },
 	{ name: 'luvdisc', minXp: 27000, maxXp: 125000 },

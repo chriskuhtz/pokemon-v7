@@ -10,8 +10,8 @@ export const magmaPokemon: {
 	maxXp: number;
 }[] = [
 	//magma and aqua
-	{ name: 'makuhita', minXp: 8000, maxXp: 125000 },
-	{ name: 'hariyama', minXp: 1000, maxXp: 8000 },
+	{ name: 'makuhita', minXp: 1000, maxXp: 8000 },
+	{ name: 'hariyama', minXp: 8000, maxXp: 125000 },
 	{ name: 'poochyena', minXp: 1000, maxXp: 8000 },
 	{ name: 'mightyena', minXp: 8000, maxXp: 125000 },
 	{ name: 'seviper', minXp: 8000, maxXp: 125000 },
@@ -39,7 +39,7 @@ export const magmaPokemon: {
 	{ name: 'solrock', minXp: 8000, maxXp: 125000 },
 	{ name: 'trapinch', minXp: 1000, maxXp: 8000 },
 	{ name: 'vibrava', minXp: 8000, maxXp: 64000 },
-	{ name: 'flygon', minXp: 15000, maxXp: 125000 },
+	{ name: 'flygon', minXp: 27000, maxXp: 125000 },
 	{ name: 'torkoal', minXp: 27000, maxXp: 125000 },
 	{ name: 'nosepass', minXp: 27000, maxXp: 125000 },
 ];
