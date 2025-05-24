@@ -29,10 +29,6 @@ export const randomChallengeFieldOccupants: OverworldMap['occupants'] = [
 		],
 	},
 	...Array.from({ length: 100 }).map((_, index) => {
-		const factor = index + 1;
-		const xp = factor * factor * factor;
-		const id = `${randomFieldId}_${index}`;
-
 		const x = () => {
 			const offset = Math.floor(index / 9) * 4;
 			return 2 + offset;
@@ -48,6 +44,10 @@ export const randomChallengeFieldOccupants: OverworldMap['occupants'] = [
 
 		const challengeFieldRank =
 			ori === 'UP' ? 1 + index : 10 + Math.floor((9 * (x() - 2)) / 4 - y() / 4);
+
+		const factor = challengeFieldRank;
+		const xp = factor * factor * factor;
+		const id = `${randomFieldId}_${challengeFieldRank}`;
 
 		const assembled: OverworldTrainer = {
 			type: 'TRAINER',
