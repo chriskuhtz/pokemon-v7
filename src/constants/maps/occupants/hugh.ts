@@ -244,7 +244,6 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
 
 const hugh: OverworldTrainer = {
 	type: 'TRAINER',
-	spriteGeneration: 1,
 	x: 0,
 	y: 0,
 	id: hughId,
