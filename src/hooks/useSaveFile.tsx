@@ -93,12 +93,10 @@ export interface UseSaveFile {
 const migrateSavefile = (input: SaveFile) => {
 	const updatedInput = { ...input };
 
-	delete updatedInput.rocketOperation;
 	//migrate new quests
 	updatedInput.quests = Object.fromEntries(
 		questNames.map((q) => [q, updatedInput.quests[q] ?? 'INACTIVE'])
 	) as Record<QuestName, QuestStatus>;
-	//delete old property
 
 	return updatedInput;
 };
