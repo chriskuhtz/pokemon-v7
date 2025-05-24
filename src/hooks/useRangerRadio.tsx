@@ -53,7 +53,7 @@ export const useRangerRadio = () => {
 			);
 
 			addMessage({
-				message: `There are reports of team rocket activity at ${mapDisplayNames[route]}`,
+				message: `There are reports of team ${randomAffiliation} activity at ${mapDisplayNames[route]}`,
 				needsNoConfirmation: true,
 			});
 
