@@ -13,7 +13,7 @@ import { useHallowedTower } from '../../hooks/useHallowedTower';
 import { useHoneyTree } from '../../hooks/useHoneyTree';
 import { useInteractWithSnorlax } from '../../hooks/useInteractWithSnorlax';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
-import { useRocketRadio } from '../../hooks/useRocketRadio';
+import { useRangerRadio } from '../../hooks/useRangerRadio';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { useShader } from '../../hooks/useShader';
 import { useStaticEncounter } from '../../hooks/useStaticEncounter';
@@ -71,7 +71,7 @@ export const Overworld = () => {
 	const interactWithSwarmRadar = useCallback(() => {
 		navigateAwayFromOverworldReducer('SWARM_RADAR', stepsTaken);
 	}, [navigateAwayFromOverworldReducer, stepsTaken]);
-	const interactWithRocketRadio = useRocketRadio();
+	const interactWithRocketRadio = useRangerRadio();
 	const interactWithRock = useSledgeHammer();
 	const addEncounterMessage = useStartEncounter();
 	const encounterRateModifier = useEncounterRateModifier();

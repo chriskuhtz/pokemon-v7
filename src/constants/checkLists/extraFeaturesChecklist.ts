@@ -483,7 +483,8 @@ export const extraFeatureCheckList: {
 		name: 'entei on e1',
 		handled: true,
 	},
-	{ name: 'flyer cert as quest reward' },
+	{ name: 'flyer cert as quest reward', handled: true },
+	{ name: 'other evil teams', todos: ['sprites', 'teams'] },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },

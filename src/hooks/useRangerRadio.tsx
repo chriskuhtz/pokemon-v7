@@ -1,12 +1,12 @@
 import { useCallback, useContext } from 'react';
 import { mapDisplayNames, MapId } from '../constants/maps/mapsRecord';
 import { getRandomEntry } from '../functions/filterTargets';
-import { createRocketOutbreak } from '../functions/teamRocket';
-import { SaveFile } from '../interfaces/SaveFile';
+import { makeTroubleMakers } from '../functions/troubleMakers/troubleMakers';
+import { evilTeams, SaveFile } from '../interfaces/SaveFile';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
-const getRouteForRockets = (s: SaveFile): MapId => {
+const getRouteForTroubleMakers = (s: SaveFile): MapId => {
 	const options: MapId[] = ['routeN1'];
 
 	if (s.campUpgrades['machete certification']) {
@@ -27,28 +27,31 @@ const getRouteForRockets = (s: SaveFile): MapId => {
 	return getRandomEntry(options);
 };
 
-export const useRocketRadio = () => {
+export const useRangerRadio = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { addMessage } = useContext(MessageQueueContext);
 
 	return useCallback(() => {
 		const now = new Date().getTime();
-		if (saveFile.rocketOperation) {
+		if (saveFile.troubleMakers) {
 			addMessage({
-				message: `There are reports of team rocket activity at ${
-					mapDisplayNames[saveFile.rocketOperation.route]
-				}`,
+				message: `There are reports of team ${
+					saveFile.troubleMakers.affiliation
+				} activity at ${mapDisplayNames[saveFile.troubleMakers.route]}`,
 				needsNoConfirmation: true,
 			});
 		} else if (
-			!saveFile.nextRocketOperationAt ||
-			now > saveFile.nextRocketOperationAt
+			!saveFile.nextTroubleMakersAt ||
+			now > saveFile.nextTroubleMakersAt
 		) {
-			const route = getRouteForRockets(saveFile);
-			const op = createRocketOutbreak(
+			const route = getRouteForTroubleMakers(saveFile);
+
+			const randomAffiliation = getRandomEntry([...evilTeams]);
+			const op = makeTroubleMakers(
 				saveFile.rangerLevel ?? 0,
 				route,
-				saveFile.campUpgrades['warden certification']
+				saveFile.campUpgrades['warden certification'],
+				randomAffiliation
 			);
 
 			addMessage({
@@ -57,7 +60,7 @@ export const useRocketRadio = () => {
 			});
 
 			patchSaveFileReducer({
-				rocketOperation: { route, trainers: op },
+				troubleMakers: { route, trainers: op, affiliation: randomAffiliation },
 			});
 		} else {
 			addMessage({

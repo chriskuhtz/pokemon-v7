@@ -12,10 +12,10 @@ export const useOccupants = () => {
 
 	const [statefulOccupants, setStatefulOccupants] = useState<Occupant[]>([]);
 	useEffect(() => {
-		if (saveFile.rocketOperation && saveFile.rocketOperation.route === map.id) {
+		if (saveFile.troubleMakers && saveFile.troubleMakers.route === map.id) {
 			const all = [
 				...map.occupants,
-				...saveFile.rocketOperation.trainers.map((t) => ({
+				...saveFile.troubleMakers.trainers.map((t) => ({
 					...t,
 					conditionFunction: () =>
 						!saveFile.handledOccupants.some((h) => h.id === t.id),
@@ -31,7 +31,7 @@ export const useOccupants = () => {
 		setStatefulOccupants(map.occupants);
 	}, [
 		map,
-		saveFile.rocketOperation,
+		saveFile.troubleMakers,
 		saveFile.handledOccupants,
 		statefulOccupants.length,
 	]);
