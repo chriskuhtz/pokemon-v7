@@ -100,37 +100,6 @@ export const TrainerCard = () => {
 			) : (
 				<></>
 			)}
-
-			<div>
-				<h4>Travelling Trainer Scores:</h4>
-
-				{mileStones.barryDefeatedAt ? (
-					<h4>Barry: {mileStones.barryDefeatedAt}</h4>
-				) : (
-					<></>
-				)}
-				{mileStones.cynthiaDefeatedAt ? (
-					<h4>Cynthia: {mileStones.cynthiaDefeatedAt}</h4>
-				) : (
-					<></>
-				)}
-				{mileStones.nDefeatedAt ? <h4>N: {mileStones.nDefeatedAt}</h4> : <></>}
-				{mileStones.silverDefeatedAt ? (
-					<h4>silver: {mileStones.silverDefeatedAt}</h4>
-				) : (
-					<></>
-				)}
-				{mileStones.silverDefeatedAt ? (
-					<h4>silver: {mileStones.silverDefeatedAt}</h4>
-				) : (
-					<></>
-				)}
-				{mileStones.hughDefeatedAt ? (
-					<h4>hugh: {mileStones.hughDefeatedAt}</h4>
-				) : (
-					<></>
-				)}
-			</div>
 		</div>
 	);
 };

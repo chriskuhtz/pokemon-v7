@@ -15,7 +15,7 @@ import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
 
-export const redId = 'trainer_red';
+export const redId = 'trainer red';
 const redTeam = (s: SaveFile): OwnedPokemon[] => {
 	const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
 
@@ -264,7 +264,7 @@ const red: OverworldTrainer = {
 		'this doesnt feel like 1996 anymore',
 		'whats with these colors?',
 	],
-	name: 'time traveller red',
+	name: redId,
 	team: redTeam,
 	battleTeamConfig: {
 		assignGender: false,

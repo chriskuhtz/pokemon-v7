@@ -15,7 +15,7 @@ import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
 
-export const cynthiaId = 'trainer_cynthia';
+export const cynthiaId = 'champion cynthia';
 const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
 	const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
 
@@ -247,7 +247,7 @@ const cynthia: OverworldTrainer = {
 		'Its always nice to meet aspiring trainers',
 		'lets see how strong you have grown',
 	],
-	name: 'Champion cynthia',
+	name: cynthiaId,
 	team: cynthiaTeam,
 	battleTeamConfig: {
 		assignGender: false,

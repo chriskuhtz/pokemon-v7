@@ -16,7 +16,7 @@ import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
 
-export const barryId = 'trainer_barry';
+export const barryId = 'trainer barry';
 const barryTeam = (s: SaveFile): OwnedPokemon[] => {
 	const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
 
@@ -362,7 +362,7 @@ const barry: OverworldTrainer = {
 		'Lets battle every time we meet each other in the wild',
 		'That way, we will grow stronger together',
 	],
-	name: 'Research Assistant Barry',
+	name: barryId,
 	team: barryTeam,
 	battleTeamConfig: {
 		assignGender: false,
