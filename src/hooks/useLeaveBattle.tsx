@@ -16,6 +16,7 @@ import { getHighestXpOnTeam } from '../functions/getHighestXpOnTeam';
 import { getTeamSize } from '../functions/getTeamSize';
 import { isKO } from '../functions/isKo';
 import { reduceBattlePokemonToOwnedPokemon } from '../functions/reduceBattlePokemonToOwnedPokemon';
+import { resetChallengeFielders } from '../functions/resetChallengeFielders';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import {
 	EmptyInventory,
@@ -95,20 +96,12 @@ export const useLeaveBattle = () => {
 					}
 					return p;
 				}),
+				handledOccupants: resetChallengeFielders(saveFile.handledOccupants),
 				bag: location.mapId === 'camp' ? saveFile.bag : bagWithOnlyKeyItems,
 			});
 			return;
 		}
-	}, [
-		location,
-		patchSaveFileReducer,
-		reset,
-		saveFile.bag,
-		saveFile.pokemon,
-		saveFile.settings?.releaseFaintedPokemon,
-		saveFile.settings?.rogueLike,
-		setLocation,
-	]);
+	}, [location, patchSaveFileReducer, reset, saveFile, setLocation]);
 	const handleWin = useCallback(
 		({
 			team: updatedTeam,

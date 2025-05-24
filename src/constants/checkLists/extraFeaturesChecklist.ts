@@ -494,4 +494,5 @@ export const extraFeatureCheckList: {
 	{
 		name: 'Warden cert (required for distortions), outbreaks of strong Pokemon',
 	},
+	{ name: 'variable teams for all travellers' },
 ];
