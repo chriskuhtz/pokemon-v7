@@ -491,4 +491,7 @@ export const extraFeatureCheckList: {
 	{ name: 'random evolutions' },
 	{ name: 'steven as the fossil protector' },
 	{ name: 'download your player file and share it with others' },
+	{
+		name: 'Warden cert (required for distortions), outbreaks of strong Pokemon',
+	},
 ];
