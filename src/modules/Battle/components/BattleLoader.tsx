@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { addPokemonToDex } from '../../../functions/addPokemonToDex';
 import { getMiddleOfThree } from '../../../functions/getMiddleOfThree';
+import { isKO } from '../../../functions/isKo';
 import { LocationContext } from '../../../hooks/LocationProvider';
 import { useGetBattleTeam } from '../../../hooks/useGetBattleTeam';
 import { useLeaveBattle } from '../../../hooks/useLeaveBattle';
@@ -86,7 +87,10 @@ export const BattleLoader = ({
 				team={battleTeam}
 				fightersPerSide={getMiddleOfThree([
 					1,
-					Math.min(battleOpponents.length, battleTeam.length),
+					Math.min(
+						battleOpponents.length,
+						battleTeam.filter((b) => !isKO(b)).length
+					),
 					2,
 				])}
 				inventory={inventory}
