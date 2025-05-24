@@ -72,7 +72,7 @@ export const ChangeLog = ({
 const ChangeLogV36 = (): JSX.Element => {
 	return (
 		<>
-			<h3>0.35:</h3>
+			<h3>0.36:</h3>
 			<ol style={{ lineHeight: '1.5rem' }}>
 				<li>Balancing and Fixes</li>
 				<li>New Attacks</li>

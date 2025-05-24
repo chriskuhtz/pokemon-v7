@@ -2232,8 +2232,16 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/593/',
 		handled: true,
 	},
-	{ name: 'water-shuriken', url: 'https://pokeapi.co/api/v2/move/594/' },
-	{ name: 'mystical-fire', url: 'https://pokeapi.co/api/v2/move/595/' },
+	{
+		name: 'water-shuriken',
+		url: 'https://pokeapi.co/api/v2/move/594/',
+		handled: true,
+	},
+	{
+		name: 'mystical-fire',
+		url: 'https://pokeapi.co/api/v2/move/595/',
+		handled: true,
+	},
 	{ name: 'spiky-shield', url: 'https://pokeapi.co/api/v2/move/596/' },
 	{ name: 'aromatic-mist', url: 'https://pokeapi.co/api/v2/move/597/' },
 	{ name: 'eerie-impulse', url: 'https://pokeapi.co/api/v2/move/598/' },
@@ -3191,6 +3199,8 @@ export const handledMoves = [
 	'diamond-storm',
 	'steam-eruption',
 	'hyperspace-hole',
+	'water-shuriken',
+	'mystical-fire',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
