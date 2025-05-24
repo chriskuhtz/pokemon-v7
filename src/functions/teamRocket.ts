@@ -1,6 +1,8 @@
 import { MapId, mapsRecord } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { OverworldTrainer } from '../interfaces/OverworldMap';
+import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { SaveFile } from '../interfaces/SaveFile';
 import { SpriteEnum } from '../interfaces/SpriteEnum';
 import { getRandomEntry } from './filterTargets';
 import { getMiddleOfThree } from './getMiddleOfThree';
@@ -170,7 +172,10 @@ export const createRocketOutbreak = (
 		() => Math.random() < 0.5
 	);
 
-	const getTeam = (): OverworldTrainer['team'] => {
+	const getTeam = (s: SaveFile): OwnedPokemon[] => {
+		if (!s.campUpgrades['ranger certification']) {
+			return [makeChallengerPokemon({})];
+		}
 		const numberOfMembers = determineNumberOfMembers(rangerLevel);
 		const minXp = determineMinXp(rangerLevel);
 		const maxXp = determineMaxXp(rangerLevel);
@@ -178,19 +183,18 @@ export const createRocketOutbreak = (
 			(r) => r.minXp >= minXp && r.maxXp <= maxXp
 		);
 
-		return () =>
-			Array.from({ length: numberOfMembers }).map(() => {
-				const mon = getRandomEntry(availableMons);
+		return Array.from({ length: numberOfMembers }).map(() => {
+			const mon = getRandomEntry(availableMons);
 
-				return makeChallengerPokemon({
-					name: mon.name,
-					xp: getMiddleOfThree([
-						mon.minXp,
-						mon.maxXp,
-						Math.floor(mon.maxXp * Math.random()),
-					]),
-				});
+			return makeChallengerPokemon({
+				name: mon.name,
+				xp: getMiddleOfThree([
+					mon.minXp,
+					mon.maxXp,
+					Math.floor(mon.maxXp * Math.random()),
+				]),
 			});
+		});
 	};
 
 	const OverworldMap = mapsRecord[mapId];
@@ -209,7 +213,7 @@ export const createRocketOutbreak = (
 
 	return chosenNames.map((name) => {
 		const id = `Rocket Grunt ${name}`;
-		const team = getTeam();
+
 		const { x, y } = getPosition();
 		const trainer: OverworldTrainer = {
 			x,
@@ -219,12 +223,11 @@ export const createRocketOutbreak = (
 			name: id,
 			orientation: getRandomOrientation(),
 			unhandledMessage: getRocketMessage(),
-			team,
+			team: (s) => getTeam(s),
 			battleTeamConfig: {
 				assignLearnsetMoves: true,
 				assignNaturalAbility: true,
 				assignGender: true,
-
 				assignHeldItem: true,
 			},
 			sprite: rocketNamesMale.includes(name)
