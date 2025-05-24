@@ -846,7 +846,10 @@ export const calculateDamage = (
 		};
 	}
 	//false swipe never defeats
-	if (attack.name === 'false-swipe' && res > target.stats.hp - target.damage) {
+	if (
+		(attack.name === 'false-swipe' || attack.name === 'hold-back') &&
+		res > target.stats.hp - target.damage
+	) {
 		return {
 			damage: target.stats.hp - 1,
 			criticalHit: critFactor === 2,
