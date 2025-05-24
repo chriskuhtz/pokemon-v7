@@ -1,5 +1,9 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { mapsRecord } from '../../../constants/maps/mapsRecord';
+import {
+	createAdmin,
+	getTroubleMakerTeam,
+} from '../../../functions/troubleMakers/troubleMakers';
 import { LocationContext } from '../../../hooks/LocationProvider';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { Occupant } from '../../../interfaces/OverworldMap';
@@ -15,11 +19,31 @@ export const useOccupants = () => {
 		if (saveFile.troubleMakers && saveFile.troubleMakers.route === map.id) {
 			const all = [
 				...map.occupants,
-				...saveFile.troubleMakers.trainers.map((t) => ({
-					...t,
-					conditionFunction: () =>
-						!saveFile.handledOccupants.some((h) => h.id === t.id),
-				})),
+				...saveFile.troubleMakers.trainers.map((t) => {
+					if (
+						[
+							'Rocket Admin Chad',
+							'Rocket Admin Hillary',
+							'Aqua Boss Archie',
+							'Magma Boss Maxie',
+						].includes(t.id)
+					) {
+						return createAdmin(
+							saveFile.troubleMakers?.affiliation ?? 'rocket',
+							{
+								x: t.x,
+								y: t.y,
+							}
+						);
+					}
+
+					return {
+						...t,
+						team: () => getTroubleMakerTeam(saveFile),
+						conditionFunction: () =>
+							!saveFile.handledOccupants.some((h) => h.id === t.id),
+					};
+				}),
 			];
 			const length = all.length;
 			if (statefulOccupants.length !== length) {
@@ -34,6 +58,7 @@ export const useOccupants = () => {
 		saveFile.troubleMakers,
 		saveFile.handledOccupants,
 		statefulOccupants.length,
+		saveFile,
 	]);
 
 	const conditionalOccupants = useMemo(() => {
