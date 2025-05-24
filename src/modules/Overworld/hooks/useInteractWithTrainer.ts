@@ -27,7 +27,7 @@ export const useInteractWithTrainer = () => {
 										type: 'TRAINER',
 
 										trainer: {
-											name: trainer.name,
+											id: trainer.id,
 											sprite: trainer.sprite,
 											profilePicture: trainer.profilePicture,
 											spriteGeneration: trainer.spriteGeneration,

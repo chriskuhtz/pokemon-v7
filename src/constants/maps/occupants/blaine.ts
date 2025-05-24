@@ -40,16 +40,17 @@ const blaineCondition = (s: SaveFile) => {
 		)
 	);
 };
+
+export const blaineId = 'trainer_blaine';
 const trainerBlaine: OverworldTrainer = {
 	type: 'TRAINER',
 	x: 43,
 	y: 41,
 	orientation: 'DOWN',
-	id: 'trainer_blaine',
+	id: blaineId,
 	conditionFunction: blaineCondition,
 	sprite: SpriteEnum.blaine,
 	unhandledMessage: ['Wahooo'],
-	name: 'Gym Leader Blaine',
 	team: blaineTeam,
 	battleTeamConfig: {
 		assignGender: false,

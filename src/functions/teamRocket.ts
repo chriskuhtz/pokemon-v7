@@ -220,7 +220,6 @@ export const createRocketOutbreak = (
 			y,
 			type: 'TRAINER',
 			id,
-			name: id,
 			orientation: getRandomOrientation(),
 			unhandledMessage: getRocketMessage(),
 			team: (s) => getTeam(s),

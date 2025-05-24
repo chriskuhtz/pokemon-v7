@@ -213,7 +213,6 @@ const n: OverworldTrainer = {
 	orientation: 'DOWN',
 	sprite: SpriteEnum.n,
 	unhandledMessage: ['Do you treat your pokemon well?'],
-	name: nId,
 	team: nTeam,
 	battleTeamConfig: {
 		assignGender: false,

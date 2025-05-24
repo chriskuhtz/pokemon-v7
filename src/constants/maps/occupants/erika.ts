@@ -34,18 +34,19 @@ const erikaCondition = (s: SaveFile) => {
 		calculateLevelData(team[0].xp, team[0].growthRate).level === 15
 	);
 };
+
+export const erikaId = 'Gym Leader Erika';
 const trainerErika: OverworldTrainer = {
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/5/5a/VSErika.png',
 	type: 'TRAINER',
 	x: 25,
 	y: 8,
-	id: 'trainer_erika',
+	id: erikaId,
 	conditionFunction: erikaCondition,
 	orientation: 'DOWN',
 	sprite: SpriteEnum.erika,
 	unhandledMessage: ['Lets see how good you are'],
-	name: 'Gym Leader Erika',
 	team: erikaTeam,
 	battleTeamConfig: {
 		assignGender: false,

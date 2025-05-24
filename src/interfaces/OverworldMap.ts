@@ -137,7 +137,6 @@ export interface OverworldTrainer extends BaseOccupant {
 	handledMessage?: string[];
 	sprite: string;
 	team: (s: SaveFile) => OwnedPokemon[];
-	name: string;
 	challengeFieldRank?: number;
 	battleTeamConfig: BattleTeamConfig;
 	profilePicture?: string;

@@ -264,7 +264,6 @@ const red: OverworldTrainer = {
 		'this doesnt feel like 1996 anymore',
 		'whats with these colors?',
 	],
-	name: redId,
 	team: redTeam,
 	battleTeamConfig: {
 		assignGender: false,

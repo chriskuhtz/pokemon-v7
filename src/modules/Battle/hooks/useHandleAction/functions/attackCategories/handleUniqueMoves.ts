@@ -326,7 +326,7 @@ export const handleUniqueMoves = ({
 	if (
 		move.name === 'protect' ||
 		move.name === 'detect' ||
-		move.name === 'spiky-shield' //spiky shield does damage
+		move.name === 'spiky-shield'
 	) {
 		if (
 			(updatedAttacker.lastUsedMove?.name === 'protect' ||

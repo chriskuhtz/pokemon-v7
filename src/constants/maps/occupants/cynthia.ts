@@ -247,7 +247,6 @@ const cynthia: OverworldTrainer = {
 		'Its always nice to meet aspiring trainers',
 		'lets see how strong you have grown',
 	],
-	name: cynthiaId,
 	team: cynthiaTeam,
 	battleTeamConfig: {
 		assignGender: false,

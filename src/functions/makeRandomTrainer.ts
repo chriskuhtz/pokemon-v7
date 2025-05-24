@@ -15,7 +15,7 @@ export const tier1trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'litleo', xp: 1000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Fiery Fred', sprite: SpriteEnum.pyro },
+		trainer: { id: 'Fiery Fred', sprite: SpriteEnum.pyro },
 	},
 	{
 		type: 'TRAINER',
@@ -26,7 +26,7 @@ export const tier1trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'poliwag', xp: 1000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Adrian Agua', sprite: SpriteEnum.sailor },
+		trainer: { id: 'Adrian Agua', sprite: SpriteEnum.sailor },
 	},
 	{
 		type: 'TRAINER',
@@ -37,7 +37,7 @@ export const tier1trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'shroomish', xp: 1000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Planter Paul', sprite: SpriteEnum.farmer },
+		trainer: { id: 'Planter Paul', sprite: SpriteEnum.farmer },
 	},
 	{
 		type: 'TRAINER',
@@ -48,7 +48,7 @@ export const tier1trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'yamper', xp: 1000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Electric Erik', sprite: SpriteEnum.mechanic },
+		trainer: { id: 'Electric Erik', sprite: SpriteEnum.mechanic },
 	},
 	{
 		type: 'TRAINER',
@@ -59,7 +59,7 @@ export const tier1trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'duskull', xp: 1000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Haunted Hilda', sprite: SpriteEnum.possessed },
+		trainer: { id: 'Haunted Hilda', sprite: SpriteEnum.possessed },
 	},
 	{
 		type: 'TRAINER',
@@ -70,7 +70,7 @@ export const tier1trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'nuzleaf', xp: 1000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Dark Dave', sprite: SpriteEnum.gangster },
+		trainer: { id: 'Dark Dave', sprite: SpriteEnum.gangster },
 	},
 	{
 		type: 'TRAINER',
@@ -81,7 +81,7 @@ export const tier1trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'espurr', xp: 1000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Psycho Pete', sprite: SpriteEnum.psychic },
+		trainer: { id: 'Psycho Pete', sprite: SpriteEnum.psychic },
 	},
 	{
 		type: 'TRAINER',
@@ -92,7 +92,7 @@ export const tier1trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'slurpuff', xp: 1000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Fairy Frida', sprite: SpriteEnum.maid },
+		trainer: { id: 'Fairy Frida', sprite: SpriteEnum.maid },
 	},
 	{
 		type: 'TRAINER',
@@ -103,7 +103,7 @@ export const tier1trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'tauros', xp: 1000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Normal Norman', sprite: SpriteEnum.uncle },
+		trainer: { id: 'Normal Norman', sprite: SpriteEnum.uncle },
 	},
 	{
 		type: 'TRAINER',
@@ -114,7 +114,7 @@ export const tier1trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'roggenrola', xp: 1000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Rick the Rock', sprite: SpriteEnum.hiker },
+		trainer: { id: 'Rick the Rock', sprite: SpriteEnum.hiker },
 	},
 	{
 		type: 'TRAINER',
@@ -125,7 +125,7 @@ export const tier1trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'trapinch', xp: 1000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'grounded gunther', sprite: SpriteEnum.explorer },
+		trainer: { id: 'grounded gunther', sprite: SpriteEnum.explorer },
 	},
 	{
 		type: 'TRAINER',
@@ -136,7 +136,7 @@ export const tier1trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'skarmory', xp: 1000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'steely stannis', sprite: SpriteEnum.builder },
+		trainer: { id: 'steely stannis', sprite: SpriteEnum.builder },
 	},
 	{
 		type: 'TRAINER',
@@ -147,7 +147,7 @@ export const tier1trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'spheal', xp: 1000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'icy irmgard', sprite: SpriteEnum.grandma },
+		trainer: { id: 'icy irmgard', sprite: SpriteEnum.grandma },
 	},
 	{
 		type: 'TRAINER',
@@ -158,7 +158,7 @@ export const tier1trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'bagon', xp: 1000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'drake', sprite: SpriteEnum.ace2Male },
+		trainer: { id: 'drake', sprite: SpriteEnum.ace2Male },
 	},
 	{
 		type: 'TRAINER',
@@ -169,7 +169,7 @@ export const tier1trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'timburr', xp: 1000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'fighting frank', sprite: SpriteEnum.karateMale },
+		trainer: { id: 'fighting frank', sprite: SpriteEnum.karateMale },
 	},
 	{
 		type: 'TRAINER',
@@ -180,7 +180,7 @@ export const tier1trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'spearow', xp: 1000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'flying fernanda', sprite: SpriteEnum.beauty1 },
+		trainer: { id: 'flying fernanda', sprite: SpriteEnum.beauty1 },
 	},
 	{
 		type: 'TRAINER',
@@ -191,7 +191,7 @@ export const tier1trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'toxel', xp: 1000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'poisonous pedro', sprite: SpriteEnum.biker },
+		trainer: { id: 'poisonous pedro', sprite: SpriteEnum.biker },
 	},
 	{
 		type: 'TRAINER',
@@ -202,7 +202,7 @@ export const tier1trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'pinsir', xp: 1000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Buggin Bob', sprite: SpriteEnum.bugCatcher },
+		trainer: { id: 'Buggin Bob', sprite: SpriteEnum.bugCatcher },
 	},
 ];
 export const tier2trainers: Challenger[] = [
@@ -215,7 +215,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'litleo', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Fiery Fred 2', sprite: SpriteEnum.pyro },
+		trainer: { id: 'Fiery Fred 2', sprite: SpriteEnum.pyro },
 		requiredUpgrade: 'training field 2',
 	},
 	{
@@ -227,7 +227,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'poliwag', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Adrian Agua 2', sprite: SpriteEnum.sailor },
+		trainer: { id: 'Adrian Agua 2', sprite: SpriteEnum.sailor },
 		requiredUpgrade: 'training field 2',
 	},
 	{
@@ -239,7 +239,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'shroomish', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Planter Paul 2', sprite: SpriteEnum.farmer },
+		trainer: { id: 'Planter Paul 2', sprite: SpriteEnum.farmer },
 		requiredUpgrade: 'training field 2',
 	},
 	{
@@ -251,7 +251,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'yamper', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Electric Erik 2', sprite: SpriteEnum.mechanic },
+		trainer: { id: 'Electric Erik 2', sprite: SpriteEnum.mechanic },
 		requiredUpgrade: 'training field 2',
 	},
 	{
@@ -263,7 +263,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'dusclops', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Haunted Hilda 2', sprite: SpriteEnum.possessed },
+		trainer: { id: 'Haunted Hilda 2', sprite: SpriteEnum.possessed },
 		requiredUpgrade: 'training field 2',
 	},
 	{
@@ -275,7 +275,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'nuzleaf', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Dark Dave 2', sprite: SpriteEnum.gangster },
+		trainer: { id: 'Dark Dave 2', sprite: SpriteEnum.gangster },
 		requiredUpgrade: 'training field 2',
 	},
 	{
@@ -287,7 +287,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'espurr', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Psycho Pete 2', sprite: SpriteEnum.psychic },
+		trainer: { id: 'Psycho Pete 2', sprite: SpriteEnum.psychic },
 		requiredUpgrade: 'training field 2',
 	},
 	{
@@ -299,7 +299,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'slurpuff', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Fairy Frida 2', sprite: SpriteEnum.maid },
+		trainer: { id: 'Fairy Frida 2', sprite: SpriteEnum.maid },
 		requiredUpgrade: 'training field 2',
 	},
 	{
@@ -311,7 +311,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'tauros', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Normal Norman 2', sprite: SpriteEnum.uncle },
+		trainer: { id: 'Normal Norman 2', sprite: SpriteEnum.uncle },
 		requiredUpgrade: 'training field 2',
 	},
 	{
@@ -323,7 +323,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'boldore', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Rick the Rock 2', sprite: SpriteEnum.hiker },
+		trainer: { id: 'Rick the Rock 2', sprite: SpriteEnum.hiker },
 		requiredUpgrade: 'training field 2',
 	},
 	{
@@ -335,7 +335,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'vibrava', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'grounded gunther 2', sprite: SpriteEnum.explorer },
+		trainer: { id: 'grounded gunther 2', sprite: SpriteEnum.explorer },
 		requiredUpgrade: 'training field 2',
 	},
 	{
@@ -347,7 +347,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'skarmory', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'steely stannis 2', sprite: SpriteEnum.builder },
+		trainer: { id: 'steely stannis 2', sprite: SpriteEnum.builder },
 		requiredUpgrade: 'training field 2',
 	},
 	{
@@ -359,7 +359,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'sealeo', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'icy irmgard 2', sprite: SpriteEnum.grandma },
+		trainer: { id: 'icy irmgard 2', sprite: SpriteEnum.grandma },
 		requiredUpgrade: 'training field 2',
 	},
 	{
@@ -372,7 +372,7 @@ export const tier2trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: {
-			name: 'drake 2',
+			id: 'drake 2',
 			sprite: SpriteEnum.ace2Male,
 		},
 		requiredUpgrade: 'training field 2',
@@ -386,7 +386,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'timburr', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'fighting frank 2', sprite: SpriteEnum.karateMale },
+		trainer: { id: 'fighting frank 2', sprite: SpriteEnum.karateMale },
 		requiredUpgrade: 'training field 2',
 	},
 	{
@@ -398,7 +398,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'spearow', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'flying fernanda 2', sprite: SpriteEnum.beauty1 },
+		trainer: { id: 'flying fernanda 2', sprite: SpriteEnum.beauty1 },
 		requiredUpgrade: 'training field 2',
 	},
 	{
@@ -410,7 +410,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'toxel', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'poisonous pedro 2', sprite: SpriteEnum.biker },
+		trainer: { id: 'poisonous pedro 2', sprite: SpriteEnum.biker },
 		requiredUpgrade: 'training field 2',
 	},
 	{
@@ -422,7 +422,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'pinsir', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Buggin Bob 2', sprite: SpriteEnum.bugCatcher },
+		trainer: { id: 'Buggin Bob 2', sprite: SpriteEnum.bugCatcher },
 		requiredUpgrade: 'training field 2',
 	},
 	{
@@ -434,7 +434,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'ivysaur', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Kanto Ken', sprite: SpriteEnum.aceMale },
+		trainer: { id: 'Kanto Ken', sprite: SpriteEnum.aceMale },
 		requiredUpgrade: 'training field 2',
 	},
 	{
@@ -446,7 +446,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'bayleef', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Johto John', sprite: SpriteEnum.aceMale },
+		trainer: { id: 'Johto John', sprite: SpriteEnum.aceMale },
 		requiredUpgrade: 'training field 2',
 	},
 	{
@@ -458,7 +458,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'grovyle', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Hoenn Hannah', sprite: SpriteEnum.aceFemale },
+		trainer: { id: 'Hoenn Hannah', sprite: SpriteEnum.aceFemale },
 		requiredUpgrade: 'training field 2',
 	},
 	{
@@ -470,7 +470,7 @@ export const tier2trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'grotle', xp: 8000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Sinnoh Simone', sprite: SpriteEnum.aceFemale },
+		trainer: { id: 'Sinnoh Simone', sprite: SpriteEnum.aceFemale },
 		requiredUpgrade: 'training field 2',
 	},
 ];
@@ -485,7 +485,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'heatmor', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Fiery Fred 3', sprite: SpriteEnum.pyro },
+		trainer: { id: 'Fiery Fred 3', sprite: SpriteEnum.pyro },
 		requiredUpgrade: 'training field 3',
 	},
 	{
@@ -498,7 +498,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'crawdaunt', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Adrian Agua 3', sprite: SpriteEnum.sailor },
+		trainer: { id: 'Adrian Agua 3', sprite: SpriteEnum.sailor },
 		requiredUpgrade: 'training field 3',
 	},
 	{
@@ -511,7 +511,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'dolliv', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Planter Paul 3', sprite: SpriteEnum.farmer },
+		trainer: { id: 'Planter Paul 3', sprite: SpriteEnum.farmer },
 		requiredUpgrade: 'training field 3',
 	},
 	{
@@ -524,7 +524,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'pawmo', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Electric Erik 3', sprite: SpriteEnum.mechanic },
+		trainer: { id: 'Electric Erik 3', sprite: SpriteEnum.mechanic },
 		requiredUpgrade: 'training field 3',
 	},
 	{
@@ -537,7 +537,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'banette', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Haunted Hilda 3', sprite: SpriteEnum.possessed },
+		trainer: { id: 'Haunted Hilda 3', sprite: SpriteEnum.possessed },
 		requiredUpgrade: 'training field 3',
 	},
 	{
@@ -550,7 +550,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'cacturne', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Dark Dave 3', sprite: SpriteEnum.gangster },
+		trainer: { id: 'Dark Dave 3', sprite: SpriteEnum.gangster },
 		requiredUpgrade: 'training field 3',
 	},
 	{
@@ -563,7 +563,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'indeedee-male', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Psycho Pete 3', sprite: SpriteEnum.psychic },
+		trainer: { id: 'Psycho Pete 3', sprite: SpriteEnum.psychic },
 		requiredUpgrade: 'training field 3',
 	},
 	{
@@ -576,7 +576,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'alcremie', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Fairy Frida 3', sprite: SpriteEnum.maid },
+		trainer: { id: 'Fairy Frida 3', sprite: SpriteEnum.maid },
 		requiredUpgrade: 'training field 3',
 	},
 	{
@@ -589,7 +589,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'zangoose', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Normal Norman 3', sprite: SpriteEnum.uncle },
+		trainer: { id: 'Normal Norman 3', sprite: SpriteEnum.uncle },
 		requiredUpgrade: 'training field 3',
 	},
 	{
@@ -602,7 +602,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'golem', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Rick the Rock 3', sprite: SpriteEnum.hiker },
+		trainer: { id: 'Rick the Rock 3', sprite: SpriteEnum.hiker },
 		requiredUpgrade: 'training field 3',
 	},
 	{
@@ -615,7 +615,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'donphan', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'grounded gunther 3', sprite: SpriteEnum.explorer },
+		trainer: { id: 'grounded gunther 3', sprite: SpriteEnum.explorer },
 		requiredUpgrade: 'training field 3',
 	},
 	{
@@ -628,7 +628,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'mawile', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'steely stannis 3', sprite: SpriteEnum.builder },
+		trainer: { id: 'steely stannis 3', sprite: SpriteEnum.builder },
 		requiredUpgrade: 'training field 3',
 	},
 	{
@@ -641,7 +641,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'jynx', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'icy irmgard 3', sprite: SpriteEnum.grandma },
+		trainer: { id: 'icy irmgard 3', sprite: SpriteEnum.grandma },
 		requiredUpgrade: 'training field 3',
 	},
 	{
@@ -655,7 +655,7 @@ export const tier3trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: {
-			name: 'drake 3',
+			id: 'drake 3',
 			sprite: SpriteEnum.ace2Male,
 		},
 		requiredUpgrade: 'training field 3',
@@ -670,7 +670,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'hitmonchan', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'fighting frank 3', sprite: SpriteEnum.karateMale },
+		trainer: { id: 'fighting frank 3', sprite: SpriteEnum.karateMale },
 		requiredUpgrade: 'training field 3',
 	},
 	{
@@ -683,7 +683,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'honchkrow', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'flying fernanda 3', sprite: SpriteEnum.beauty1 },
+		trainer: { id: 'flying fernanda 3', sprite: SpriteEnum.beauty1 },
 		requiredUpgrade: 'training field 3',
 	},
 	{
@@ -696,7 +696,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'ariados', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'poisonous pedro 3', sprite: SpriteEnum.biker },
+		trainer: { id: 'poisonous pedro 3', sprite: SpriteEnum.biker },
 		requiredUpgrade: 'training field 3',
 	},
 	{
@@ -709,7 +709,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'heracross', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Buggin Bob 3', sprite: SpriteEnum.bugCatcher },
+		trainer: { id: 'Buggin Bob 3', sprite: SpriteEnum.bugCatcher },
 		requiredUpgrade: 'training field 3',
 	},
 	{
@@ -722,7 +722,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'raichu', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Kanto Ken 2', sprite: SpriteEnum.aceMale },
+		trainer: { id: 'Kanto Ken 2', sprite: SpriteEnum.aceMale },
 		requiredUpgrade: 'training field 3',
 	},
 	{
@@ -735,7 +735,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'azumarill', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Johto John 2', sprite: SpriteEnum.aceMale },
+		trainer: { id: 'Johto John 2', sprite: SpriteEnum.aceMale },
 		requiredUpgrade: 'training field 3',
 	},
 	{
@@ -749,7 +749,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'minun', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Hoenn Hannah 2', sprite: SpriteEnum.aceFemale },
+		trainer: { id: 'Hoenn Hannah 2', sprite: SpriteEnum.aceFemale },
 		requiredUpgrade: 'training field 3',
 	},
 	{
@@ -762,7 +762,7 @@ export const tier3trainers: Challenger[] = [
 			makeChallengerPokemon({ name: 'pachirisu', xp: 27000 }),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Sinnoh Simone 2', sprite: SpriteEnum.aceFemale },
+		trainer: { id: 'Sinnoh Simone 2', sprite: SpriteEnum.aceFemale },
 		requiredUpgrade: 'training field 3',
 	},
 ];
@@ -793,7 +793,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Fiery Fred 4', sprite: SpriteEnum.pyro },
+		trainer: { id: 'Fiery Fred 4', sprite: SpriteEnum.pyro },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -822,7 +822,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Adrian Agua 4', sprite: SpriteEnum.sailor },
+		trainer: { id: 'Adrian Agua 4', sprite: SpriteEnum.sailor },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -851,7 +851,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Planter Paul 4', sprite: SpriteEnum.farmer },
+		trainer: { id: 'Planter Paul 4', sprite: SpriteEnum.farmer },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -880,7 +880,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Electric Erik 4', sprite: SpriteEnum.mechanic },
+		trainer: { id: 'Electric Erik 4', sprite: SpriteEnum.mechanic },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -909,7 +909,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Haunted Hilda 4', sprite: SpriteEnum.possessed },
+		trainer: { id: 'Haunted Hilda 4', sprite: SpriteEnum.possessed },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -938,7 +938,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Dark Dave 4', sprite: SpriteEnum.gangster },
+		trainer: { id: 'Dark Dave 4', sprite: SpriteEnum.gangster },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -967,7 +967,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Psycho Pete 4', sprite: SpriteEnum.psychic },
+		trainer: { id: 'Psycho Pete 4', sprite: SpriteEnum.psychic },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -996,7 +996,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Fairy Frida 4', sprite: SpriteEnum.maid },
+		trainer: { id: 'Fairy Frida 4', sprite: SpriteEnum.maid },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -1025,7 +1025,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Normal Norman 4', sprite: SpriteEnum.uncle },
+		trainer: { id: 'Normal Norman 4', sprite: SpriteEnum.uncle },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -1054,7 +1054,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Rick the Rock 4', sprite: SpriteEnum.hiker },
+		trainer: { id: 'Rick the Rock 4', sprite: SpriteEnum.hiker },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -1083,7 +1083,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'grounded gunther 4', sprite: SpriteEnum.explorer },
+		trainer: { id: 'grounded gunther 4', sprite: SpriteEnum.explorer },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -1112,7 +1112,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'steely stannis 4', sprite: SpriteEnum.builder },
+		trainer: { id: 'steely stannis 4', sprite: SpriteEnum.builder },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -1141,7 +1141,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'icy irmgard 4', sprite: SpriteEnum.grandma },
+		trainer: { id: 'icy irmgard 4', sprite: SpriteEnum.grandma },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -1171,7 +1171,7 @@ export const tier4trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: {
-			name: 'drake 4',
+			id: 'drake 4',
 			sprite: SpriteEnum.ace2Male,
 		},
 		requiredUpgrade: 'training field 4',
@@ -1202,7 +1202,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'fighting frank 4', sprite: SpriteEnum.karateMale },
+		trainer: { id: 'fighting frank 4', sprite: SpriteEnum.karateMale },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -1231,7 +1231,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'flying fernanda 4', sprite: SpriteEnum.beauty1 },
+		trainer: { id: 'flying fernanda 4', sprite: SpriteEnum.beauty1 },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -1260,7 +1260,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'poisonous pedro 4', sprite: SpriteEnum.biker },
+		trainer: { id: 'poisonous pedro 4', sprite: SpriteEnum.biker },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -1289,7 +1289,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Buggin Bob 4', sprite: SpriteEnum.bugCatcher },
+		trainer: { id: 'Buggin Bob 4', sprite: SpriteEnum.bugCatcher },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -1318,7 +1318,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Kanto Ken 3', sprite: SpriteEnum.aceMale },
+		trainer: { id: 'Kanto Ken 3', sprite: SpriteEnum.aceMale },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -1347,7 +1347,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Johto John 3', sprite: SpriteEnum.aceMale },
+		trainer: { id: 'Johto John 3', sprite: SpriteEnum.aceMale },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -1381,7 +1381,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Hoenn Hannah 3', sprite: SpriteEnum.aceFemale },
+		trainer: { id: 'Hoenn Hannah 3', sprite: SpriteEnum.aceFemale },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -1410,7 +1410,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Sinnoh Simone 3', sprite: SpriteEnum.aceFemale },
+		trainer: { id: 'Sinnoh Simone 3', sprite: SpriteEnum.aceFemale },
 		requiredUpgrade: 'training field 4',
 	},
 	{
@@ -1443,7 +1443,7 @@ export const tier4trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Blissful Beatrice', sprite: SpriteEnum.grandma },
+		trainer: { id: 'Blissful Beatrice', sprite: SpriteEnum.grandma },
 		requiredUpgrade: 'training field 4',
 	},
 ];
@@ -1479,7 +1479,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Fiery Fred 5', sprite: SpriteEnum.pyro },
+		trainer: { id: 'Fiery Fred 5', sprite: SpriteEnum.pyro },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -1513,7 +1513,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Adrian Agua 5', sprite: SpriteEnum.sailor },
+		trainer: { id: 'Adrian Agua 5', sprite: SpriteEnum.sailor },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -1547,7 +1547,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Planter Paul 5', sprite: SpriteEnum.farmer },
+		trainer: { id: 'Planter Paul 5', sprite: SpriteEnum.farmer },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -1581,7 +1581,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Electric Erik 5', sprite: SpriteEnum.mechanic },
+		trainer: { id: 'Electric Erik 5', sprite: SpriteEnum.mechanic },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -1615,7 +1615,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Haunted Hilda 5', sprite: SpriteEnum.possessed },
+		trainer: { id: 'Haunted Hilda 5', sprite: SpriteEnum.possessed },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -1649,7 +1649,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Dark Dave 5', sprite: SpriteEnum.gangster },
+		trainer: { id: 'Dark Dave 5', sprite: SpriteEnum.gangster },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -1683,7 +1683,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Psycho Pete 5', sprite: SpriteEnum.psychic },
+		trainer: { id: 'Psycho Pete 5', sprite: SpriteEnum.psychic },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -1717,7 +1717,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Fairy Frida 5', sprite: SpriteEnum.maid },
+		trainer: { id: 'Fairy Frida 5', sprite: SpriteEnum.maid },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -1751,7 +1751,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Normal Norman 5', sprite: SpriteEnum.uncle },
+		trainer: { id: 'Normal Norman 5', sprite: SpriteEnum.uncle },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -1785,7 +1785,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Rick the Rock 5', sprite: SpriteEnum.hiker },
+		trainer: { id: 'Rick the Rock 5', sprite: SpriteEnum.hiker },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -1819,7 +1819,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'grounded gunther 5', sprite: SpriteEnum.explorer },
+		trainer: { id: 'grounded gunther 5', sprite: SpriteEnum.explorer },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -1853,7 +1853,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'steely stannis 5', sprite: SpriteEnum.builder },
+		trainer: { id: 'steely stannis 5', sprite: SpriteEnum.builder },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -1887,7 +1887,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'icy irmgard 5', sprite: SpriteEnum.grandma },
+		trainer: { id: 'icy irmgard 5', sprite: SpriteEnum.grandma },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -1922,7 +1922,7 @@ export const tier5trainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		trainer: {
-			name: 'drake 5',
+			id: 'drake 5',
 			sprite: SpriteEnum.ace2Male,
 		},
 		requiredUpgrade: 'training field 5',
@@ -1958,7 +1958,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'fighting frank 5', sprite: SpriteEnum.karateMale },
+		trainer: { id: 'fighting frank 5', sprite: SpriteEnum.karateMale },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -1992,7 +1992,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'flying fernanda 5', sprite: SpriteEnum.beauty1 },
+		trainer: { id: 'flying fernanda 5', sprite: SpriteEnum.beauty1 },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -2026,7 +2026,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'poisonous pedro 5', sprite: SpriteEnum.biker },
+		trainer: { id: 'poisonous pedro 5', sprite: SpriteEnum.biker },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -2060,7 +2060,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Buggin Bob 5', sprite: SpriteEnum.bugCatcher },
+		trainer: { id: 'Buggin Bob 5', sprite: SpriteEnum.bugCatcher },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -2094,7 +2094,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Kanto Ken 4', sprite: SpriteEnum.aceMale },
+		trainer: { id: 'Kanto Ken 4', sprite: SpriteEnum.aceMale },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -2128,7 +2128,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Johto John 4', sprite: SpriteEnum.aceMale },
+		trainer: { id: 'Johto John 4', sprite: SpriteEnum.aceMale },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -2167,7 +2167,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Hoenn Hannah 4', sprite: SpriteEnum.aceFemale },
+		trainer: { id: 'Hoenn Hannah 4', sprite: SpriteEnum.aceFemale },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -2201,7 +2201,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Sinnoh Simone 4', sprite: SpriteEnum.aceFemale },
+		trainer: { id: 'Sinnoh Simone 4', sprite: SpriteEnum.aceFemale },
 		requiredUpgrade: 'training field 5',
 	},
 	{
@@ -2234,7 +2234,7 @@ export const tier5trainers: Challenger[] = [
 			}),
 		],
 		inventory: EmptyInventory,
-		trainer: { name: 'Blissful Beatrice 2', sprite: SpriteEnum.grandma },
+		trainer: { id: 'Blissful Beatrice 2', sprite: SpriteEnum.grandma },
 		requiredUpgrade: 'training field 5',
 	},
 ];
@@ -2268,7 +2268,7 @@ export const specialTrainers: Challenger[] = [
 		inventory: EmptyInventory,
 		availableAfter: 'catch Haunter and Mightyena',
 		trainer: {
-			name: 'Gym Leader Morty',
+			id: 'Gym Leader Morty',
 			sprite: SpriteEnum.morty,
 			profilePicture:
 				'https://archives.bulbagarden.net/media/upload/0/04/VSMorty.png',
@@ -2312,7 +2312,7 @@ export const specialTrainers: Challenger[] = [
 		inventory: EmptyInventory,
 		availableAfter: 'report a bug',
 		trainer: {
-			name: 'Gym Leader Bugsy',
+			id: 'Gym Leader Bugsy',
 			sprite: SpriteEnum.bugsy,
 			profilePicture:
 				'https://archives.bulbagarden.net/media/upload/2/2a/VSBugsy.png',
@@ -2351,7 +2351,7 @@ export const specialTrainers: Challenger[] = [
 		inventory: EmptyInventory,
 		availableAfter: 'catch the legendary bird of ice',
 		trainer: {
-			name: 'Gym Leader Falkner',
+			id: 'Gym Leader Falkner',
 			sprite: SpriteEnum.falkner,
 			profilePicture:
 				'https://archives.bulbagarden.net/media/upload/5/5a/VSFalkner.png',
@@ -2395,7 +2395,7 @@ export const specialTrainers: Challenger[] = [
 		inventory: EmptyInventory,
 		availableAfter: 'deal 10000 damage with one attack',
 		trainer: {
-			name: 'Gym Leader Chuck',
+			id: 'Gym Leader Chuck',
 			sprite: SpriteEnum.chuck,
 			profilePicture:
 				'https://archives.bulbagarden.net/media/upload/a/af/VSChuck.png',
@@ -2414,7 +2414,7 @@ export const specialTrainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		availableAfter: 'catch all forms of tauros',
-		trainer: { name: 'Professor Rowan', sprite: SpriteEnum.rowan },
+		trainer: { id: 'Professor Rowan', sprite: SpriteEnum.rowan },
 	},
 	{
 		type: 'TRAINER',
@@ -2429,7 +2429,7 @@ export const specialTrainers: Challenger[] = [
 		],
 		inventory: EmptyInventory,
 		availableAfter: 'catch all evolutions of eevee',
-		trainer: { name: 'Professor Elm', sprite: SpriteEnum.elm },
+		trainer: { id: 'Professor Elm', sprite: SpriteEnum.elm },
 	},
 	{
 		type: 'TRAINER',
@@ -2445,7 +2445,7 @@ export const specialTrainers: Challenger[] = [
 		inventory: EmptyInventory,
 		availableAfter: 'revive all different fossils',
 		trainer: {
-			name: 'Gym Leader Roark',
+			id: 'Gym Leader Roark',
 			sprite: SpriteEnum.roark,
 			profilePicture:
 				'https://archives.bulbagarden.net/media/upload/6/62/VSRoark.png',

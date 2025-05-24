@@ -53,6 +53,8 @@ const janineCondition = (s: SaveFile) => {
 		team.every((t) => calculateLevelData(t.xp, t.growthRate).level <= 20)
 	);
 };
+
+export const janineId = 'trainer_janine';
 const trainerJanine: OverworldTrainer = {
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/2/2d/VSJanine.png',
@@ -60,11 +62,10 @@ const trainerJanine: OverworldTrainer = {
 	x: 13,
 	y: 46,
 	orientation: 'UP',
-	id: 'trainer_janine',
+	id: janineId,
 	conditionFunction: janineCondition,
 	sprite: SpriteEnum.janine,
 	unhandledMessage: ['Think you can beat me?'],
-	name: 'Gym Leader Janine',
 	team: janineTeam,
 	battleTeamConfig: {
 		assignGender: false,

@@ -93,16 +93,17 @@ const garyCondition = (s: SaveFile) => {
 		)
 	);
 };
+
+export const garyId = 'trainer_gary';
 const trainerGary: OverworldTrainer = {
 	type: 'TRAINER',
 	x: 10,
 	y: 20,
 	orientation: 'DOWN',
-	id: 'trainer_gary',
+	id: garyId,
 	conditionFunction: garyCondition,
 	sprite: SpriteEnum.gary,
 	unhandledMessage: ['I am always looking for a challenge'],
-	name: 'Gym Leader Gary',
 	team: garyTeam,
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/8/89/VSBlue.png',

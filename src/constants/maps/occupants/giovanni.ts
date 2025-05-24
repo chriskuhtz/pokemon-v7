@@ -113,7 +113,6 @@ export const giovanni: OverworldTrainer = {
 	x: 25,
 	y: 30,
 	orientation: 'DOWN',
-	name: 'giovanni',
 	sprite: SpriteEnum.giovanni,
 	id: 'giovanni',
 	unhandledMessage: [

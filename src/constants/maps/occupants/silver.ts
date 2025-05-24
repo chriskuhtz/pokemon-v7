@@ -321,7 +321,6 @@ const silver: OverworldTrainer = {
 	orientation: 'DOWN',
 	sprite: SpriteEnum.silver,
 	unhandledMessage: ['hmppf', 'do you even have strong pokemon?'],
-	name: silverId,
 	team: silverTeam,
 	battleTeamConfig: {
 		assignGender: false,

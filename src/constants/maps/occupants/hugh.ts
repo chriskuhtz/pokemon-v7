@@ -255,7 +255,6 @@ const hugh: OverworldTrainer = {
 		'I really enjoy the wilderness',
 		'Its refreshing to get out of the city',
 	],
-	name: hughId,
 	team: hughTeam,
 	battleTeamConfig: {
 		assignGender: false,

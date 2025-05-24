@@ -461,8 +461,11 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'distortion shaders', handled: true },
 	{ name: 'new apricorns (repeat ball)', handled: true },
-	{ name: 'tidy up constants' },
-	{ name: 'remove name prop from trainer, leads to confusion with id' },
+	{ name: 'tidy up constants', handled: true },
+	{
+		name: 'remove name prop from trainer, leads to confusion with id',
+		handled: true,
+	},
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },

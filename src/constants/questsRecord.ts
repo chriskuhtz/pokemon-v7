@@ -37,7 +37,15 @@ import { travellingTrainerQuests } from './generatedQuests/travellingTrainersQue
 import { typeCatchQuests } from './generatedQuests/typeCatchQuests';
 import { caveW1Encounters } from './maps/encounters/caveW1';
 import { onixCaveEncounters } from './maps/encounters/onixCave';
+import { blaineId } from './maps/occupants/blaine';
+import { brockId } from './maps/occupants/brock';
+import { erikaId } from './maps/occupants/erika';
+import { garyId } from './maps/occupants/gary';
+import { janineId } from './maps/occupants/janine';
+import { mistyId } from './maps/occupants/misty';
 import { allRocketCampTrainersDefeated } from './maps/occupants/rocketCampOccupants';
+import { sabrinaId } from './maps/occupants/sabrina';
+import { surgeId } from './maps/occupants/surge';
 import { routeS1 } from './maps/routeS1';
 import { PokemonName, pokemonNames } from './pokemonNames';
 import {
@@ -2420,7 +2428,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...smallExpCandyPackage,
 		},
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Erika');
+			return s.handledOccupants.some((h) => h.id === erikaId);
 		},
 	},
 	'defeat janine': {
@@ -2434,7 +2442,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		requiredUpgrade: 'machete certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Janine');
+			return s.handledOccupants.some((h) => h.id === janineId);
 		},
 	},
 	'defeat blaine': {
@@ -2444,7 +2452,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'occa-berry': 5, charcoal: 1, ...expCandyPackage },
 		requiredUpgrade: 'sledge hammer certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Blaine');
+			return s.handledOccupants.some((h) => h.id === blaineId);
 		},
 	},
 	'defeat surge': {
@@ -2454,7 +2462,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'wacan-berry': 5, magnet: 1, ...expCandyPackage },
 		requiredUpgrade: 'shovel certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Surge');
+			return s.handledOccupants.some((h) => h.id === surgeId);
 		},
 	},
 	'defeat misty': {
@@ -2469,7 +2477,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Misty');
+			return s.handledOccupants.some((h) => h.id === mistyId);
 		},
 	},
 	'defeat sabrina': {
@@ -2479,7 +2487,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'payapa-berry': 5, 'twisted-spoon': 1, ...expCandyPackage },
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Sabrina');
+			return s.handledOccupants.some((h) => h.id === sabrinaId);
 		},
 	},
 	'defeat brock': {
@@ -2489,7 +2497,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'charti-berry': 5, 'hard-stone': 1, ...expCandyPackage },
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Brock');
+			return s.handledOccupants.some((h) => h.id === brockId);
 		},
 	},
 	'defeat gary': {
@@ -2504,7 +2512,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Gary');
+			return s.handledOccupants.some((h) => h.id === garyId);
 		},
 	},
 	'reach challenge field rank 1': {
