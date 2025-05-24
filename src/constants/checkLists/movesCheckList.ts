@@ -2299,11 +2299,21 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/612/',
 		handled: true,
 	},
-	{ name: 'oblivion-wing', url: 'https://pokeapi.co/api/v2/move/613/' },
-	{ name: 'thousand-arrows', url: 'https://pokeapi.co/api/v2/move/614/' },
-	{ name: 'thousand-waves', url: 'https://pokeapi.co/api/v2/move/615/' },
-	{ name: 'lands-wrath', url: 'https://pokeapi.co/api/v2/move/616/' },
-	{ name: 'light-of-ruin', url: 'https://pokeapi.co/api/v2/move/617/' },
+	{
+		name: 'oblivion-wing',
+		url: 'https://pokeapi.co/api/v2/move/613/',
+		handled: true,
+	},
+	{
+		name: 'lands-wrath',
+		url: 'https://pokeapi.co/api/v2/move/616/',
+		handled: true,
+	},
+	{
+		name: 'light-of-ruin',
+		url: 'https://pokeapi.co/api/v2/move/617/',
+		handled: true,
+	},
 	{ name: 'origin-pulse', url: 'https://pokeapi.co/api/v2/move/618/' },
 	{ name: 'precipice-blades', url: 'https://pokeapi.co/api/v2/move/619/' },
 	{ name: 'dragon-ascent', url: 'https://pokeapi.co/api/v2/move/620/' },
@@ -2625,7 +2635,9 @@ export const movesCheckList: {
 	{ name: 'glacial-lance', url: 'https://pokeapi.co/api/v2/move/824/' },
 	{ name: 'astral-barrage', url: 'https://pokeapi.co/api/v2/move/825/' },
 	{ name: 'eerie-spell', url: 'https://pokeapi.co/api/v2/move/826/' },
-	//next round
+	/*
+	NEXT ROUND
+	*/
 	{ name: 'flame-burst', url: 'https://pokeapi.co/api/v2/move/481/' },
 	{ name: 'smack-down', url: 'https://pokeapi.co/api/v2/move/479/' },
 	{ name: 'heal-block', url: 'https://pokeapi.co/api/v2/move/377/' },
@@ -2746,6 +2758,8 @@ export const movesCheckList: {
 	{ name: 'happy-hour', url: 'https://pokeapi.co/api/v2/move/603/' },
 	{ name: 'celebrate', url: 'https://pokeapi.co/api/v2/move/606/' },
 	{ name: 'hold-hands', url: 'https://pokeapi.co/api/v2/move/607/' },
+	{ name: 'thousand-arrows', url: 'https://pokeapi.co/api/v2/move/614/' },
+	{ name: 'thousand-waves', url: 'https://pokeapi.co/api/v2/move/615/' },
 ];
 
 export const handledMoves = [
@@ -3259,6 +3273,9 @@ export const handledMoves = [
 	'hold-back',
 	'infestation',
 	'power-up-punch',
+	'light-of-ruin',
+	'oblivion-wing',
+	'lands-wrath',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
