@@ -1,7 +1,11 @@
 import { MapId, mapsRecord } from '../../constants/maps/mapsRecord';
 import { OverworldTrainer } from '../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
-import { EvilTeam, SaveFile } from '../../interfaces/SaveFile';
+import {
+	EvilTeam,
+	OverworldTrainerStump,
+	SaveFile,
+} from '../../interfaces/SaveFile';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { getRandomEntry } from '../filterTargets';
 import { getMiddleOfThree } from '../getMiddleOfThree';
@@ -79,7 +83,7 @@ export const makeTroubleMakers = (
 	mapId: MapId,
 	warden: boolean,
 	affiliation: EvilTeam
-): OverworldTrainer[] => {
+): OverworldTrainerStump[] => {
 	if (affiliation === 'aqua') {
 		return createTroubleMakers(
 			mapId,
@@ -241,7 +245,7 @@ const createTroubleMakers = (
 	affiliation: EvilTeam,
 	namesMale: string[],
 	namesFemale: string[]
-): OverworldTrainer[] => {
+): OverworldTrainerStump[] => {
 	const chosenNames = [...namesFemale, ...namesMale].filter(
 		() => Math.random() < 0.5
 	);
@@ -282,14 +286,13 @@ const createTroubleMakers = (
 				return SpriteEnum.rocketMale;
 			} else return SpriteEnum.rocketFemale;
 		};
-		const trainer: OverworldTrainer = {
+		const trainer: OverworldTrainerStump = {
 			x,
 			y,
 			type: 'TRAINER',
 			id,
 			orientation: getRandomOrientation(),
 			unhandledMessage: getRocketMessage(),
-			team: (s) => getTroubleMakerTeam(s),
 			battleTeamConfig: {
 				assignLearnsetMoves: true,
 				assignNaturalAbility: true,
@@ -297,7 +300,6 @@ const createTroubleMakers = (
 				assignHeldItem: true,
 			},
 			sprite: sprite(),
-			conditionFunction: () => true,
 		};
 
 		return trainer;
