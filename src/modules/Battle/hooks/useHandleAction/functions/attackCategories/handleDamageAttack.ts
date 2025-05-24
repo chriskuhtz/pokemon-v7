@@ -403,7 +403,7 @@ export const handleDamageAttack = ({
 		actualDamage > 0 &&
 		move.data.type.name === 'water'
 	) {
-		addMessage({ message: `${updatedTarget} consumed its absorb-bulb` });
+		addMessage({ message: `${updatedTarget.name} consumed its absorb-bulb` });
 		updatedTarget = applyStatChangeToPokemon(
 			updatedTarget,
 			'special-attack',
@@ -458,7 +458,7 @@ export const handleDamageAttack = ({
 		actualDamage > 0 &&
 		move.data.type.name === 'water'
 	) {
-		addMessage({ message: `${updatedTarget} consumed its luminous-moss` });
+		addMessage({ message: `${updatedTarget.name} consumed its luminous-moss` });
 		updatedTarget = applyStatChangeToPokemon(
 			updatedTarget,
 			'special-defense',
@@ -477,7 +477,7 @@ export const handleDamageAttack = ({
 		actualDamage > 0 &&
 		move.data.type.name === 'electric'
 	) {
-		addMessage({ message: `${updatedTarget} consumed its cell-battery` });
+		addMessage({ message: `${updatedTarget.name} consumed its cell-battery` });
 		updatedTarget = applyStatChangeToPokemon(
 			updatedTarget,
 			'attack',
@@ -499,7 +499,7 @@ export const handleDamageAttack = ({
 		actualDamage > 0
 	) {
 		addMessage({
-			message: `${updatedTarget} consumed its ${attackerItem} to increase the damage`,
+			message: `${updatedTarget.name} consumed its ${attackerItem} to increase the damage`,
 		});
 		updatedAttacker = { ...updatedAttacker, heldItemName: undefined };
 	}
