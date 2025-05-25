@@ -21,7 +21,11 @@ export const TroubleMakersIcon = () => {
 	const remaining = useMemo(() => troubleMakersRemaining(saveFile), [saveFile]);
 
 	const handleClear = () => {
-		addMessage({ message: `All Rockets defeated, Rangerlevel increased` });
+		addMessage({
+			message: `All ${
+				saveFile.troubleMakers?.affiliation ?? 'rocket'
+			} Members defeated, Rangerlevel increased`,
+		});
 
 		patchSaveFileReducer({
 			troubleMakers: undefined,
