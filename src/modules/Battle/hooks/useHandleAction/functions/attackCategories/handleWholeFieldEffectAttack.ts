@@ -90,6 +90,10 @@ export const handleWholeFieldEffectAttack = ({
 		addMessage({ message: `${attacker.name} spreads electric terrain` });
 		setBattleTerrain({ type: 'electric', duration: terrainDuration });
 	}
+	if (move.name === 'psychic-terrain') {
+		addMessage({ message: `${attacker.name} spreads psychic terrain` });
+		setBattleTerrain({ type: 'psychic', duration: terrainDuration });
+	}
 
 	//updated Target
 
