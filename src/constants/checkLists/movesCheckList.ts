@@ -2401,9 +2401,17 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/678/',
 		handled: true,
 	},
-	{ name: 'lunge', url: 'https://pokeapi.co/api/v2/move/679/' },
-	{ name: 'fire-lash', url: 'https://pokeapi.co/api/v2/move/680/' },
-	{ name: 'power-trip', url: 'https://pokeapi.co/api/v2/move/681/' },
+	{ name: 'lunge', url: 'https://pokeapi.co/api/v2/move/679/', handled: true },
+	{
+		name: 'fire-lash',
+		url: 'https://pokeapi.co/api/v2/move/680/',
+		handled: true,
+	},
+	{
+		name: 'power-trip',
+		url: 'https://pokeapi.co/api/v2/move/681/',
+		handled: true,
+	},
 	{ name: 'burn-up', url: 'https://pokeapi.co/api/v2/move/682/' },
 	{ name: 'speed-swap', url: 'https://pokeapi.co/api/v2/move/683/' },
 	{ name: 'smart-strike', url: 'https://pokeapi.co/api/v2/move/684/' },
@@ -3369,6 +3377,9 @@ export const handledMoves = [
 	'toxic-thread',
 	'anchor-shot',
 	'psychic-terrain',
+	'lunge',
+	'fire-lash',
+	'power-trip',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
