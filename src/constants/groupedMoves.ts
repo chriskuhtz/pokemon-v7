@@ -566,3 +566,4 @@ export const slicingMoves = [
 	'mighty-cleave',
 	'tachyon-cutter',
 ];
+export const firstTurnMoves = ['fake-out', 'first-impression'];

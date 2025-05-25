@@ -1,4 +1,5 @@
 import {
+	firstTurnMoves,
 	isContactMove,
 	SELF_DESTRUCTING_MOVES,
 } from '../../../../../../constants/groupedMoves';
@@ -108,7 +109,10 @@ export const handleDamageAttack = ({
 		});
 	}
 	//fake out
-	if (move.name === 'fake-out' && updatedAttacker.roundsInBattle !== 1) {
+	if (
+		firstTurnMoves.includes(move.name) &&
+		updatedAttacker.roundsInBattle !== 1
+	) {
 		addMessage({ message: 'It failed' });
 		return pokemon.map((p) => {
 			if (p.id === updatedAttacker.id) {

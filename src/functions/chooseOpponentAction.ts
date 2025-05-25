@@ -1,3 +1,4 @@
+import { firstTurnMoves } from '../constants/groupedMoves';
 import { BattleMove, BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import {
@@ -25,10 +26,10 @@ export const determineHighestDamage = (
 	}
 	const mapped: { actionName: ActionType; targetId: string; damage: number }[] =
 		moves.flatMap((move) => {
-			if (move.name === 'fake-out' && attacker.roundsInBattle !== 1) {
+			if (firstTurnMoves.includes(move.name) && attacker.roundsInBattle !== 1) {
 				return [
 					{
-						actionName: 'fake-out',
+						actionName: move.name,
 						targetId: targets.at(0)?.id ?? '',
 						damage: 0,
 					},
@@ -111,13 +112,13 @@ export const chooseOpponentAction = ({
 		};
 	}
 	//fake out if possible
-	const canFakeOut =
-		moves.find((m) => m.name === 'fake-out') && controlled.roundsInBattle === 1;
+	const firstTurnMove = moves.find((m) => firstTurnMoves.includes(m.name));
+	const canUseFirstTurnMove = firstTurnMove && controlled.roundsInBattle === 1;
 
-	if (canFakeOut) {
+	if (canUseFirstTurnMove) {
 		return {
 			userId: controlled.id,
-			actionName: 'fake-out',
+			actionName: firstTurnMove.name,
 			targetId: controlled.id,
 		};
 	}
