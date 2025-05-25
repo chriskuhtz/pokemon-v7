@@ -77,6 +77,7 @@ const ChangeLogV38 = (): JSX.Element => {
 			<h3>0.38:</h3>
 			<ol style={{ lineHeight: '1.5rem' }}>
 				<li>Internal Dex</li>
+				<li>New evil team</li>
 				<li>New Features</li>
 				<li>Balancing and Fixes</li>
 				<li>New Attacks</li>

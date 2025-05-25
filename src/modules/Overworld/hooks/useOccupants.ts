@@ -1,17 +1,17 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { internalDex } from '../../../constants/internalDexData';
 import { mapsRecord } from '../../../constants/maps/mapsRecord';
 import { getMiddleOfThree } from '../../../functions/getMiddleOfThree';
 import { getRandomOrientation } from '../../../functions/getNextClockwiseDirection';
 import { occupantHandled } from '../../../functions/occupantHandled';
 import {
-	createAdmin,
+	getTroubleMakerAdminTeam,
 	getTroubleMakerTeam,
 } from '../../../functions/troubleMakers/troubleMakers';
 import { LocationContext } from '../../../hooks/LocationProvider';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { Occupant } from '../../../interfaces/OverworldMap';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
-import { internalDex } from '../../../constants/internalDexData';
 
 export const useOccupants = () => {
 	const { saveFile } = useContext(SaveFileContext);
@@ -30,15 +30,17 @@ export const useOccupants = () => {
 							'Rocket Admin Hillary',
 							'Aqua Boss Archie',
 							'Magma Boss Maxie',
+							'Galactic Admin Mars',
+							'Galactic Admin Saturn',
+							'Galactic Admin Jupiter',
 						].includes(t.id)
 					) {
-						return createAdmin(
-							saveFile.troubleMakers?.affiliation ?? 'rocket',
-							{
-								x: t.x,
-								y: t.y,
-							}
-						);
+						return {
+							...t,
+							team: () => getTroubleMakerAdminTeam(saveFile, t.id),
+							conditionFunction: () =>
+								!saveFile.handledOccupants.some((h) => h.id === t.id),
+						};
 					}
 
 					return {

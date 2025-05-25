@@ -508,14 +508,10 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'internaldex visualizer', handled: true },
+	{ name: 'team galactic', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
-	{ name: 'loosing to wild mons is sometimes buggy' },
-	{ name: 'trainer ai should consider flying,dig, diving' },
-	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
-	{ name: 'timeofday in pokedex' },
-	{ name: 'download did not boost after tablets of ruin lowered' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
@@ -531,10 +527,8 @@ export const extraFeatureCheckList: {
 	{ name: 'trainer with simple/costar combo' },
 	{ name: 'steven as the fossil protector' },
 	{ name: 'download your player file and share it with others' },
-	{ name: 'team galactic' },
 	{ name: 'more legendary stories' },
 	{ name: 'cave of shadows where you face yourself' },
-	{ name: 'flying encounters' },
 	//SETTINGS:
 	{ name: 'random encounters' },
 	{ name: 'random evolutions' },
