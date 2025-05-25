@@ -486,9 +486,11 @@ export const extraFeatureCheckList: {
 	{ name: 'flyer cert as quest reward', handled: true },
 	{ name: ' team aqua', handled: true },
 	{ name: ' team magma', handled: true },
-	{ name: ' team galactic' },
-	//BUGS/IMPROVEMENTS:
 	{ name: 'trainer ai should use fake out correctly' },
+
+	//BUGS/IMPROVEMENTS:
+	{ name: 'combine radars' },
+
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
 	{ name: 'loosing to wild mons is sometimes buggy' },
@@ -518,4 +520,6 @@ export const extraFeatureCheckList: {
 	{ name: 'random evolutions' },
 	{ name: 'steven as the fossil protector' },
 	{ name: 'download your player file and share it with others' },
+	{ name: ' team galactic' },
+	{ name: 'rampaging pokemon for wardens' },
 ];

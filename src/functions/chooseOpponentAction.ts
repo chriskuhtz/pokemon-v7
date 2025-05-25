@@ -24,8 +24,17 @@ export const determineHighestDamage = (
 		return { actionName: 'LOAFING', targetId: attacker.id };
 	}
 	const mapped: { actionName: ActionType; targetId: string; damage: number }[] =
-		moves.flatMap((move) =>
-			targets.map((target) => ({
+		moves.flatMap((move) => {
+			if (move.name === 'fake-out' && attacker.roundsInBattle !== 1) {
+				return [
+					{
+						actionName: 'fake-out',
+						targetId: targets.at(0)?.id ?? '',
+						damage: 0,
+					},
+				];
+			}
+			return targets.map((target) => ({
 				actionName: move.name,
 				targetId: target.id,
 				damage: calculateDamage(
@@ -54,8 +63,8 @@ export const determineHighestDamage = (
 					1,
 					() => {}
 				).damage,
-			}))
-		);
+			}));
+		});
 
 	const sorted = mapped.sort((a, b) => b.damage - a.damage);
 
@@ -99,6 +108,17 @@ export const chooseOpponentAction = ({
 			userId: controlled.id,
 			actionName: 'LOAFING',
 			targetId: filtered[0].id,
+		};
+	}
+	//fake out if possible
+	const canFakeOut =
+		moves.find((m) => m.name === 'fake-out') && controlled.roundsInBattle === 1;
+
+	if (canFakeOut) {
+		return {
+			userId: controlled.id,
+			actionName: 'fake-out',
+			targetId: controlled.id,
 		};
 	}
 	//ingrain if possible
@@ -179,7 +199,11 @@ export const chooseOpponentAction = ({
 			m.data.target.name === 'user'
 	);
 
-	if (setupMove && controlled.roundsInBattle === 1 && !random) {
+	if (
+		setupMove &&
+		Object.values(controlled.statBoosts).every((boost) => boost <= 0) &&
+		!random
+	) {
 		return {
 			userId: controlled.id,
 			actionName: setupMove.name,
