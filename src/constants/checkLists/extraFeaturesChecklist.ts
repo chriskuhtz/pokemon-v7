@@ -502,6 +502,7 @@ export const extraFeatureCheckList: {
 	{ name: 'refactor types into internalDex', handled: true },
 	{ name: 'refactor berry lure mons into internalDex', handled: true },
 	{ name: 'refactor honey mons into internalDex', handled: true },
+	{ name: 'refactor under rock mons into internalDex', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -514,7 +515,6 @@ export const extraFeatureCheckList: {
 		name: 'refactor encounters into internalDex ',
 	},
 
-	{ name: 'refactor under rock mons into internalDex' },
 	{ name: 'internaldex visualizer' },
 	//CONTENT:
 	{ name: 'whitney' },

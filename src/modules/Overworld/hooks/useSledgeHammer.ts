@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react';
 import { ONE_HOUR } from '../../../constants/gameData';
-import { PokemonName } from '../../../constants/pokemonNames';
+import { getUnderRockEncounters } from '../../../constants/internalDex';
 import { getRandomEntry } from '../../../functions/filterTargets';
 import {
 	makeChallengerPokemon,
@@ -15,28 +15,15 @@ import { OverworldRock } from '../../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../../interfaces/SaveFile';
 
-export const sledgeHammerPokemon: PokemonName[] = [
-	'geodude',
-	'geodude-alola',
-	'shuckle',
-	'roggenrola',
-	'nacli',
-	'nosepass',
-	'dwebble',
-	'bonsly',
-	'klawf',
-	'stunfisk',
-];
-
-const SLEDGEHAMMER_ENCOUNTER_OPTIONS: OwnedPokemon[] = sledgeHammerPokemon.map(
-	(h) =>
+const SLEDGEHAMMER_ENCOUNTER_OPTIONS: OwnedPokemon[] =
+	getUnderRockEncounters().map((h) =>
 		makeChallengerPokemon({
 			nature: getRandomNature(),
 			name: h,
 			xp: 3375,
 			caughtOnMap: 'routeN1',
 		})
-);
+	);
 export const useSledgeHammer = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { addMultipleMessages } = useContext(MessageQueueContext);

@@ -15,6 +15,7 @@ export type InternalDexEntry = {
 	berryLureMapId?: MapId;
 	types: PokemonType[];
 	honey?: boolean;
+	underRock?: boolean;
 };
 
 export const internalDex: Record<PokemonName, InternalDexEntry> = {
@@ -325,6 +326,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	geodude: {
 		dexId: 74,
 		types: ['rock', 'ground'],
+		underRock: true,
 	},
 	graveler: {
 		dexId: 75,
@@ -910,6 +912,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	shuckle: {
 		dexId: 213,
 		types: ['bug', 'rock'],
+		underRock: true,
 	},
 	heracross: {
 		dexId: 214,
@@ -941,6 +944,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	swinub: {
 		dexId: 220,
 		types: ['ice', 'ground'],
+		underRock: true,
 	},
 	piloswine: {
 		dexId: 221,
@@ -1249,6 +1253,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	whismur: {
 		dexId: 293,
 		types: ['normal'],
+		underRock: true,
 	},
 	loudred: {
 		dexId: 294,
@@ -2200,6 +2205,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	roggenrola: {
 		dexId: 524,
 		types: ['rock'],
+		underRock: true,
 	},
 	boldore: {
 		dexId: 525,
@@ -2338,7 +2344,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	dwebble: {
 		dexId: 557,
 		types: ['bug', 'rock'],
-		berryLureMapId: 'routeE1',
+		underRock: true,
 	},
 	crustle: {
 		dexId: 558,
@@ -2587,6 +2593,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	stunfisk: {
 		dexId: 618,
 		types: ['ground', 'electric'],
+		underRock: true,
 	},
 	mienfoo: {
 		dexId: 619,
@@ -2881,6 +2888,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	binacle: {
 		dexId: 688,
 		types: ['rock', 'water'],
+		berryLureMapId: 'routeE1',
 	},
 	barbaracle: {
 		dexId: 689,
@@ -3891,6 +3899,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	nacli: {
 		dexId: 932,
 		types: ['rock'],
+		underRock: true,
 	},
 	naclstack: {
 		dexId: 933,
@@ -3963,6 +3972,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	klawf: {
 		dexId: 950,
 		types: ['rock'],
+		underRock: true,
 	},
 	capsakid: {
 		dexId: 951,
@@ -4724,6 +4734,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'geodude-alola': {
 		dexId: 10109,
 		types: ['rock', 'electric'],
+		underRock: true,
 	},
 	'graveler-alola': {
 		dexId: 10110,
@@ -5422,6 +5433,11 @@ export const getHoneyEncounters = () => {
 		.filter(([, value]) => value.honey)
 		.map(([key]) => key) as PokemonName[];
 };
+export const getUnderRockEncounters = () => {
+	return Object.entries(internalDex)
+		.filter(([, value]) => value.underRock)
+		.map(([key]) => key) as PokemonName[];
+};
 export const getSwarmOptions = (type: SwarmType) => {
 	return Object.entries(internalDex)
 		.filter(([, value]) => value.swarm === type)
@@ -5445,19 +5461,6 @@ export const getBerryLureMon = (map: MapId, type: PokemonType) => {
 	return getRandomEntry(options);
 };
 
-export const honeyPokemon: PokemonName[] = [
-	'burmy',
-	'mankey',
-	'heracross',
-	'munchlax',
-	'petilil',
-	'combee',
-	'aipom',
-	'pineco',
-	'exeggcute',
-	'budew',
-	'pikachu-cosplay',
-];
 const overUsed = Object.entries(internalDex)
 	.filter(([, value]) => {
 		return (
@@ -5466,6 +5469,7 @@ const overUsed = Object.entries(internalDex)
 				!!value.honey,
 				!!value.rampager,
 				!!value.swarm,
+				!!value.underRock,
 			].filter((v) => v).length > 1
 		);
 	})
@@ -5489,8 +5493,8 @@ console.log('overUsed Mons', overUsed);
 // console.log(
 // 	Object.fromEntries(
 // 		Object.entries(internalDex).map(([key, value]) => {
-// 			return honeyPokemon.includes(key)
-// 				? [key, { ...value, honey: true }]
+// 			return sledgeHammerPokemon.includes(key)
+// 				? [key, { ...value, underRock: true }]
 // 				: [key, value];
 // 		})
 // 	)

@@ -24,7 +24,6 @@ import {
 	generateRandomStatObject,
 } from '../interfaces/StatObject';
 import { moveUnlockPayments } from '../modules/MoveTutor/MoveTutor';
-import { sledgeHammerPokemon } from '../modules/Overworld/hooks/useSledgeHammer';
 import { highBstPokemon, lowBstPokemon, midBstPokemon } from './baseStatRecord';
 import {
 	campUpgradeCategories,
@@ -37,7 +36,7 @@ import { typeCatchQuests } from './generatedQuests/typeCatchQuests';
 import {
 	getHoneyEncounters,
 	getSwarmOptions,
-	honeyPokemon,
+	getUnderRockEncounters,
 } from './internalDex';
 import { caveW1Encounters } from './maps/encounters/caveW1';
 import { onixCaveEncounters } from './maps/encounters/onixCave';
@@ -655,7 +654,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				(e) => s.pokedex[e].caughtOnRoutes.length > 0
 			);
 		},
-		targetPokemon: honeyPokemon,
+		targetPokemon: getHoneyEncounters(),
 		kind: 'BULLETIN',
 		availableAfter: 'lure a pokemon with honey',
 		requiredUpgrade: 'build combee hive',
@@ -670,11 +669,11 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return sledgeHammerPokemon.every(
+			return getUnderRockEncounters().every(
 				(e) => s.pokedex[e].caughtOnRoutes.length > 0
 			);
 		},
-		targetPokemon: sledgeHammerPokemon,
+		targetPokemon: getUnderRockEncounters(),
 		kind: 'BULLETIN',
 		availableAfter: 'find a pokemon under a smashed rock',
 		requiredUpgrade: 'sledge hammer certification',
