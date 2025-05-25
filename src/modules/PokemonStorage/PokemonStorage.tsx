@@ -13,7 +13,6 @@ import {
 import { battleSpriteSize } from '../../constants/gameData';
 import { internalDex } from '../../constants/internalDex';
 import { mapIds } from '../../constants/maps/mapsRecord';
-import { byName } from '../../constants/typeRecord';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getHeldItem } from '../../functions/getHeldItem';
 import { getItemUrl } from '../../functions/getItemUrl';
@@ -392,8 +391,8 @@ const Sorted = ({
 	if (pokemonFilter === 'TYPE') {
 		const filtered = stored.filter(
 			(s) =>
-				byName[s.name].at(0) === selectedType ||
-				byName[s.name].at(1) === selectedType
+				internalDex[s.name].types.at(0) === selectedType ||
+				internalDex[s.name].types.at(1) === selectedType
 		);
 
 		return (
@@ -635,10 +634,12 @@ const Entry = ({
 						</strong>
 					</Chip>
 				}
-				secondPlanetUrl={`/typeIcons/${byName[pokemon.name].at(0)}.png`}
+				secondPlanetUrl={`/typeIcons/${internalDex[pokemon.name].types.at(
+					0
+				)}.png`}
 				thirdPlanetUrl={
-					byName[pokemon.name].at(1)
-						? `/typeIcons/${byName[pokemon.name].at(1)}.png`
+					internalDex[pokemon.name].types.at(1)
+						? `/typeIcons/${internalDex[pokemon.name].types.at(1)}.png`
 						: undefined
 				}
 				fourthPlanetUrl={getItemUrl(pokemon.ball)}

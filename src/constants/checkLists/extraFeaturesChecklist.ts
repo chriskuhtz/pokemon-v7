@@ -499,6 +499,8 @@ export const extraFeatureCheckList: {
 		name: 'refactor swarms into internalDex',
 		handled: true,
 	},
+	{ name: 'refactor types into internalDex', handled: true },
+	{ name: 'refactor berry lure mons into internalDex' },
 
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
@@ -511,8 +513,7 @@ export const extraFeatureCheckList: {
 	{
 		name: 'refactor encounters into internalDex ',
 	},
-	{ name: 'refactor berry lure mons into internalDex' },
-	{ name: 'refactor types into internalDex' },
+
 	{ name: 'refactor bst into internalDex' },
 	//CONTENT:
 	{ name: 'whitney' },
