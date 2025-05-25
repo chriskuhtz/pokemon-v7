@@ -24,13 +24,11 @@ import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getBagLimit, getTotalInventoryAmount } from '../functions/getBagLimit';
 import { getRewardItemsForQuest } from '../functions/getRewardForQuest';
-import { getTeamSize } from '../functions/getTeamSize';
 import { TimeOfDay } from '../functions/getTimeOfDay';
 import {
 	EmptyCatchBoosts,
 	joinCatchBoosts,
 } from '../functions/joinCatchBoosts';
-import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { updateItemFunction } from '../functions/updateItemFunction';
 import { Challenger } from '../interfaces/Challenger';
 import { EmptyInventory, joinInventories } from '../interfaces/Inventory';
@@ -55,24 +53,8 @@ export interface EvolutionReducerPayload {
 export interface UseSaveFile {
 	saveFile: SaveFile;
 	discardItemReducer: (item: ItemType, number: number) => void;
-	addItemReducer: (item: ItemType, number: number) => void;
-	receiveNewPokemonReducer: (newMon: Omit<OwnedPokemon, 'onTeam'>) => void;
-	putSaveFileReducer: (update: SaveFile) => void;
 	patchSaveFileReducer: (update: Partial<SaveFile>) => void;
 	setActiveTabReducer: (update: RoutesType) => void;
-	sellItemReducer: (
-		item: ItemType,
-		number: number,
-		pricePerItem: number
-	) => void;
-	buyItemReducer: (
-		item: ItemType,
-		number: number,
-		pricePerItem: number
-	) => void;
-
-	setPokemonReducer: (update: OwnedPokemon[]) => void;
-
 	talkToNurseReducer: (id: string) => void;
 	handleOccupantReducer: (occ: Occupant) => void;
 	navigateAwayFromOverworldReducer: (
@@ -148,53 +130,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		const updatedInventory = updateItemFunction(item, -number, saveFile.bag);
 		setSaveFile({ ...saveFile, bag: updatedInventory });
 	};
-	const sellItemReducer = (
-		item: ItemType,
-		number: number,
-		pricePerItem: number
-	) => {
-		const updatedInventory = updateItemFunction(item, -number, saveFile.bag);
-		const updatedMoney = saveFile.money + number * pricePerItem;
 
-		setSaveFile({
-			...saveFile,
-			bag: updatedInventory,
-			money: updatedMoney,
-		});
-	};
-	const buyItemReducer = (
-		item: ItemType,
-		number: number,
-		pricePerItem: number
-	) => {
-		const updatedInventory = updateItemFunction(item, number, saveFile.bag);
-		const updatedMoney = saveFile.money - number * pricePerItem;
-
-		setSaveFile({
-			...saveFile,
-			bag: updatedInventory,
-			money: updatedMoney,
-		});
-	};
-	const addItemReducer = (item: ItemType, number: number) => {
-		const updatedInventory = updateItemFunction(item, number, saveFile.bag);
-		setSaveFile({ ...saveFile, bag: updatedInventory });
-	};
-	const receiveNewPokemonReducer = (newMon: Omit<OwnedPokemon, 'onTeam'>) => {
-		const updatedPokemon = receiveNewPokemonFunction(
-			newMon,
-			saveFile.pokemon,
-			getTeamSize(saveFile)
-		);
-
-		setSaveFile({ ...saveFile, pokemon: updatedPokemon });
-	};
-	const putSaveFileReducer = useCallback(
-		(update: SaveFile) => {
-			setSaveFile(update);
-		},
-		[setSaveFile]
-	);
 	const patchSaveFileReducer = (update: Partial<SaveFile>) =>
 		setSaveFile({ ...saveFile, ...update });
 	const setActiveTabReducer = useCallback(
@@ -207,18 +143,12 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		[saveFile, setSaveFile]
 	);
 
-	const setPokemonReducer = (update: OwnedPokemon[]) => {
-		setSaveFile({
-			...saveFile,
-			pokemon: update,
-		});
-	};
 	const navigateAwayFromOverworldReducer = (
 		route: RoutesType,
 		stepsTaken: number,
 		challenger?: Challenger
 	) => {
-		if (route === 'BATLLE' && !challenger) {
+		if (route === 'BATTLE' && !challenger) {
 			throw new Error('cant route to battle without challenger');
 		}
 
@@ -518,17 +448,10 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 
 	return {
 		evolvePokemonReducer,
-
 		saveFile,
 		discardItemReducer,
-		addItemReducer,
-		receiveNewPokemonReducer,
-		putSaveFileReducer,
 		patchSaveFileReducer,
 		setActiveTabReducer,
-		sellItemReducer,
-		buyItemReducer,
-		setPokemonReducer,
 		talkToNurseReducer,
 		navigateAwayFromOverworldReducer,
 		handleOccupantReducer,

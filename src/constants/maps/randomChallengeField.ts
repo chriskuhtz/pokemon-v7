@@ -8,14 +8,7 @@ export const randomChallengeField: OverworldMap = {
 	tilesetUrl: '/tilesets/slateport.png',
 	occupants: randomChallengeFieldOccupants,
 	timeOfDayShadersMap: defaultShaderMap,
-	possibleEncounters: {
-		WATER: [],
-		BASE: [],
-		MORNING: [],
-		DAY: [],
-		EVENING: [],
-		NIGHT: [],
-	},
+
 	tileMap: {
 		baseLayer: [
 			[

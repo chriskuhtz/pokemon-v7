@@ -13,7 +13,7 @@ export const getChargeUpMessage = (
 	if (moveName === 'dig') {
 		return `${userName} dug underground `;
 	}
-	if (moveName === 'solar-beam') {
+	if (moveName === 'solar-beam' || moveName === 'solar-blade') {
 		return `${userName} is taking in sunlight`;
 	}
 	if (moveName === 'skull-bash') {

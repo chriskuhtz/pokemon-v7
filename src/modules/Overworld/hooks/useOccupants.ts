@@ -1,11 +1,11 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { internalDex } from '../../../constants/internalDexData';
 import { mapsRecord } from '../../../constants/maps/mapsRecord';
-import { nameToIdMap } from '../../../constants/pokemonNames';
 import { getMiddleOfThree } from '../../../functions/getMiddleOfThree';
 import { getRandomOrientation } from '../../../functions/getNextClockwiseDirection';
 import { occupantHandled } from '../../../functions/occupantHandled';
 import {
-	createAdmin,
+	getTroubleMakerAdminTeam,
 	getTroubleMakerTeam,
 } from '../../../functions/troubleMakers/troubleMakers';
 import { LocationContext } from '../../../hooks/LocationProvider';
@@ -30,15 +30,17 @@ export const useOccupants = () => {
 							'Rocket Admin Hillary',
 							'Aqua Boss Archie',
 							'Magma Boss Maxie',
+							'Galactic Admin Mars',
+							'Galactic Admin Saturn',
+							'Galactic Admin Jupiter',
 						].includes(t.id)
 					) {
-						return createAdmin(
-							saveFile.troubleMakers?.affiliation ?? 'rocket',
-							{
-								x: t.x,
-								y: t.y,
-							}
-						);
+						return {
+							...t,
+							team: () => getTroubleMakerAdminTeam(saveFile, t.id),
+							conditionFunction: () =>
+								!saveFile.handledOccupants.some((h) => h.id === t.id),
+						};
 					}
 
 					return {
@@ -56,8 +58,7 @@ export const useOccupants = () => {
 			}
 
 			return;
-		}
-		if (
+		} else if (
 			saveFile.currentRampagingPokemon &&
 			saveFile.currentRampagingPokemon.route === map.id
 		) {
@@ -74,7 +75,7 @@ export const useOccupants = () => {
 					x,
 					y,
 					orientation: getRandomOrientation(),
-					dexId: nameToIdMap[name],
+					dexId: internalDex[name].dexId,
 					encounter: {
 						name: name,
 						maxXp: xp,

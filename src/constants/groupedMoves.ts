@@ -6,6 +6,7 @@ export const secondTurnMoves = [
 	'razor-wind',
 	'skull-bash',
 	'solar-beam',
+	'solar-blade',
 	'fly',
 	'dig',
 	'dive',
@@ -385,8 +386,14 @@ export const flyHitMoves = [
 	'smack-down',
 	'magnet-bomb',
 	'hurricane',
+	'smart-strike',
 ];
-export const digHitMoves = ['earthquake', 'magnitude', 'magnet-bomb'];
+export const digHitMoves = [
+	'earthquake',
+	'magnitude',
+	'magnet-bomb',
+	'smart-strike',
+];
 export const shadowHitMoves = ['magnet-bomb'];
 export const flyDoubleDamageMoves = ['gust', 'twister'];
 export const diveDoubleDamageMoves = ['surf', 'whirlpool'];
@@ -565,4 +572,12 @@ export const slicingMoves = [
 	'aqua-cutter',
 	'mighty-cleave',
 	'tachyon-cutter',
+];
+export const firstTurnMoves = ['fake-out', 'first-impression'];
+
+export const protectMoves = [
+	'protect',
+	'detect',
+	'spiky-shield',
+	'baneful-bunker',
 ];

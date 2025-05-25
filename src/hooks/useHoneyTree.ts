@@ -1,5 +1,5 @@
 import { useCallback, useContext } from 'react';
-import { PokemonName } from '../constants/pokemonNames';
+import { getHoneyEncounters } from '../constants/internalDex';
 import { getRandomIndex } from '../functions/filterTargets';
 import {
 	makeChallengerPokemon,
@@ -12,21 +12,7 @@ import { LocationContext } from './LocationProvider';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
-export const honeyPokemon: PokemonName[] = [
-	'burmy',
-	'mankey',
-	'heracross',
-	'munchlax',
-	'petilil',
-	'combee',
-	'aipom',
-	'pineco',
-	'exeggcute',
-	'budew',
-	'pikachu-cosplay',
-];
-
-const HONEY_ENCOUNTER_OPTIONS: OwnedPokemon[] = honeyPokemon.map((h) =>
+const HONEY_ENCOUNTER_OPTIONS: OwnedPokemon[] = getHoneyEncounters().map((h) =>
 	makeChallengerPokemon({
 		nature: getRandomNature(),
 		name: h,
@@ -36,7 +22,7 @@ const HONEY_ENCOUNTER_OPTIONS: OwnedPokemon[] = honeyPokemon.map((h) =>
 );
 
 export const useHoneyTree = () => {
-	const { putSaveFileReducer, saveFile } = useContext(SaveFileContext);
+	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
 	const { location } = useContext(LocationContext);
 	const { addMultipleMessages, addMessage } = useContext(MessageQueueContext);
 
@@ -58,8 +44,7 @@ export const useHoneyTree = () => {
 					needsNoConfirmation: true,
 					onRemoval: () => {
 						//Start encounter
-						putSaveFileReducer({
-							...saveFile,
+						patchSaveFileReducer({
 							bag: joinInventories(saveFile.bag, { honey: 1 }, true),
 							meta: {
 								activeTab: 'BATTLE',
@@ -94,7 +79,7 @@ export const useHoneyTree = () => {
 				{
 					message: 'No Pokemon seem interested in the honey',
 					onRemoval: () => {
-						putSaveFileReducer({
+						patchSaveFileReducer({
 							...saveFile,
 							bag: joinInventories(saveFile.bag, { honey: 1 }, true),
 						});
@@ -106,7 +91,7 @@ export const useHoneyTree = () => {
 		addMessage,
 		addMultipleMessages,
 		location.mapId,
-		putSaveFileReducer,
+		patchSaveFileReducer,
 		saveFile,
 	]);
 };

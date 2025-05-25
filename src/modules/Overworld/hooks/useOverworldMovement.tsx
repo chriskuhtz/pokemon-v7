@@ -92,7 +92,7 @@ export const useOverworldMovement = (
 			inventory: EmptyInventory,
 			team: determineWildPokemon(
 				pokemon.filter((p) => p.onTeam),
-				mapsRecord[playerLocation.mapId],
+				playerLocation.mapId,
 				quests,
 				waterEncounter,
 				shinyFactor,

@@ -1,13 +1,11 @@
 import { caveShaderMap } from '../../functions/getTimeOfDay';
 import { OverworldMap } from '../../interfaces/OverworldMap';
-import { onixCaveEncounters } from './encounters/onixCave';
 import { onixCaveOccupants } from './occupants/onixCave';
 
 export const onixCave: OverworldMap = {
 	id: 'onixCave',
 	tilesetUrl: '/tilesets/masterSheet.png',
 	timeOfDayShadersMap: caveShaderMap,
-	possibleEncounters: onixCaveEncounters,
 	occupants: onixCaveOccupants,
 	tileMap: {
 		baseLayer: [

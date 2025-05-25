@@ -21,7 +21,7 @@ import { Stack } from '../../uiComponents/Stack/Stack';
 
 export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 	const { addMessage } = useContext(MessageQueueContext);
-	const { saveFile, putSaveFileReducer } = useContext(SaveFileContext);
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { quests, campUpgrades } = saveFile;
 
 	const acceptQuest = useCallback(
@@ -30,12 +30,12 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 				message: `Accepted Quest: ${name}`,
 				needsNoConfirmation: true,
 			});
-			putSaveFileReducer({
+			patchSaveFileReducer({
 				...saveFile,
 				quests: { ...saveFile.quests, [name]: 'ACTIVE' },
 			});
 		},
-		[addMessage, putSaveFileReducer, saveFile]
+		[addMessage, patchSaveFileReducer, saveFile]
 	);
 
 	const availableQuests: { name: QuestName; quest: Quest }[] = useMemo(

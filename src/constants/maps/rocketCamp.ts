@@ -5,14 +5,6 @@ import { rocketCampOccupants } from './occupants/rocketCampOccupants';
 export const rocketCamp: OverworldMap = {
 	id: 'rocketCamp',
 	occupants: rocketCampOccupants,
-	possibleEncounters: {
-		BASE: [],
-		WATER: [],
-		MORNING: [],
-		EVENING: [],
-		DAY: [],
-		NIGHT: [],
-	},
 	timeOfDayShadersMap: defaultShaderMap,
 	tilesetUrl: '/tilesets/market.png',
 	tileMap: {

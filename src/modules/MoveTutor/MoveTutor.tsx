@@ -6,7 +6,6 @@ import {
 	handledMoves,
 	MoveName,
 } from '../../constants/checkLists/movesCheckList';
-import { nameToIdMap } from '../../constants/pokemonNames';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getEntryWithOverflow } from '../../functions/filterTargets';
 import { moveIsTeachable } from '../../functions/moveIsAvailable';
@@ -21,6 +20,7 @@ import { LearnMethod } from '../../interfaces/PokemonData';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import { internalDex } from '../../constants/internalDexData';
 
 export const moveUnlockPayments: ItemType[] = [
 	'big-malasada',
@@ -132,7 +132,7 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 		]
 	);
 	const { res: data, invalidate } = useGetPokemonData(
-		nameToIdMap[ownedPokemon.name]
+		internalDex[ownedPokemon.name].dexId
 	);
 
 	useEffect(() => {

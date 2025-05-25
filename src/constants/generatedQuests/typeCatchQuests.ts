@@ -4,9 +4,9 @@ import {
 } from '../../interfaces/Item';
 import { PokemonType, pokemonTypes } from '../../interfaces/PokemonType';
 import { Quest } from '../../interfaces/Quest';
+import { byType } from '../internalDex';
 import { PokemonName } from '../pokemonNames';
 import { QuestName } from '../questsRecord';
-import { byType } from '../typeRecord';
 
 const realTypes = pokemonTypes.filter((p) => p !== 'typeless');
 

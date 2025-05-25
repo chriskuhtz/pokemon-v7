@@ -188,7 +188,10 @@ export const useChooseAction = (
 			}
 
 			const canSkipCharge = () => {
-				if (battleWeather === 'sun' && actionName === 'solar-beam') {
+				if (
+					battleWeather === 'sun' &&
+					(actionName === 'solar-beam' || actionName === 'solar-blade')
+				) {
 					return true;
 				}
 				if (getHeldItem(user) === 'power-herb') {

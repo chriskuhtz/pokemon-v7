@@ -1,4 +1,5 @@
 import { applyCrashDamage } from '../../../functions/applyCrashDamage';
+import { applyPrimaryAilmentToPokemon } from '../../../functions/applyPrimaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from '../../../functions/applyStatChangeToPokemon';
 import { MissReason } from '../../../functions/determineMiss';
 import { getHeldItem } from '../../../functions/getHeldItem';
@@ -24,7 +25,11 @@ export const handleMiss = (
 			message: 'The Target prevents priority attacks with queenly majesty',
 		});
 	}
-	if (reason === 'PROTECTED' || reason === 'SPIKY_SHIELDED') {
+	if (
+		reason === 'PROTECTED' ||
+		reason === 'SPIKY_SHIELDED' ||
+		reason === 'BANEFUL_BUNKERED'
+	) {
 		addMessage({ message: 'The Target protected itself' });
 	}
 	if (reason === 'SOUNDPROOF') {
@@ -67,6 +72,18 @@ export const handleMiss = (
 					});
 
 					u = { ...u, damage: u.damage + Math.floor(u.stats.hp * 8) };
+				}
+				if (reason === 'BANEFUL_BUNKERED' && !u.primaryAilment) {
+					u = applyPrimaryAilmentToPokemon(
+						u,
+						u,
+						'poison',
+						addMessage,
+						undefined,
+						[],
+						undefined,
+						'baneful bunker'
+					).updatedTarget;
 				}
 
 				return applyCrashDamage(u, attack.name, addMessage);

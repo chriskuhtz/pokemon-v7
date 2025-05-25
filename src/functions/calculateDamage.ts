@@ -261,7 +261,8 @@ export const calculateDamage = (
 			critFactor === 2 ||
 			attacker.ability === 'unaware' ||
 			attack.name === 'chip-away' ||
-			attack.name === 'sacred-sword'
+			attack.name === 'sacred-sword' ||
+			attack.name === 'darkest-lariat'
 		);
 	};
 

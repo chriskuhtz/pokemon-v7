@@ -1,5 +1,4 @@
 import { MapId, mapsRecord } from '../../constants/maps/mapsRecord';
-import { OverworldTrainer } from '../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import {
 	EvilTeam,
@@ -18,6 +17,13 @@ import {
 	aquaPokemon,
 	getAquaArchieTeam,
 } from './aqua';
+import {
+	galacticNamesFemale,
+	galacticNamesMale,
+	getGalacticJupiterTeam,
+	getGalacticMarsTeam,
+	getGalacticSaturnTeam,
+} from './galactic';
 import {
 	getMagmaMaxieTeam,
 	magmaNamesFemale,
@@ -102,6 +108,15 @@ export const makeTroubleMakers = (
 			magmaNamesFemale
 		);
 	}
+	if (affiliation === 'galactic') {
+		return createTroubleMakers(
+			mapId,
+			warden,
+			affiliation,
+			galacticNamesMale,
+			galacticNamesFemale
+		);
+	}
 	return createTroubleMakers(
 		mapId,
 		warden,
@@ -114,64 +129,121 @@ export const makeTroubleMakers = (
 export const createAdmin = (
 	affiliation: EvilTeam,
 	pos: { x: number; y: number }
-): OverworldTrainer => {
+): OverworldTrainerStump[] => {
 	const { x, y } = pos;
 
 	if (affiliation === 'aqua') {
-		return {
-			x,
-			y,
-			type: 'TRAINER',
-			id: `Aqua Boss Archie`,
-			orientation: getRandomOrientation(),
-			unhandledMessage: [
-				'We shall flood the whole world',
-				'Then my beloved water pokemon',
-				'will have all the space they need',
-				'Isnt that a noble goal?',
-			],
-			team: (s) => getAquaArchieTeam(s),
-			battleTeamConfig: {
-				assignLearnsetMoves: true,
-				assignNaturalAbility: true,
-				assignGender: true,
-				assignHeldItem: true,
+		return [
+			{
+				x,
+				y,
+				type: 'TRAINER',
+				id: `Aqua Boss Archie`,
+				orientation: getRandomOrientation(),
+				unhandledMessage: [
+					'We shall flood the whole world',
+					'Then my beloved water pokemon',
+					'will have all the space they need',
+					'Isnt that a noble goal?',
+				],
+				battleTeamConfig: {
+					assignLearnsetMoves: true,
+					assignNaturalAbility: true,
+					assignGender: true,
+					assignHeldItem: true,
+				},
+				sprite: SpriteEnum.archie,
 			},
-			sprite: SpriteEnum.archie,
-			conditionFunction: () => true,
-		};
+		];
 	}
 	if (affiliation === 'magma') {
-		return {
+		return [
+			{
+				x,
+				y,
+				type: 'TRAINER',
+				id: `Magma Boss Maxie`,
+				orientation: getRandomOrientation(),
+				unhandledMessage: [
+					'If we remove the oceans',
+					'The Pokemon will be free to roam',
+					'Isnt that a noble goal?',
+				],
+
+				battleTeamConfig: {
+					assignLearnsetMoves: true,
+					assignNaturalAbility: true,
+					assignGender: true,
+					assignHeldItem: true,
+				},
+				sprite: SpriteEnum.archie,
+			},
+		];
+	}
+	if (affiliation === 'galactic') {
+		const mars: OverworldTrainerStump = {
 			x,
 			y,
 			type: 'TRAINER',
-			id: `Magma Boss Maxie`,
+			id: 'Galactic Admin Mars',
 			orientation: getRandomOrientation(),
-			unhandledMessage: [
-				'If we remove the oceans',
-				'The Pokemon will be free to roam',
-				'Isnt that a noble goal?',
-			],
-			team: (s) => getMagmaMaxieTeam(s),
+			unhandledMessage: ['We seek the power over space and time'],
+
 			battleTeamConfig: {
 				assignLearnsetMoves: true,
 				assignNaturalAbility: true,
 				assignGender: true,
 				assignHeldItem: true,
 			},
-			sprite: SpriteEnum.archie,
-			conditionFunction: () => true,
+			sprite: SpriteEnum.mars,
 		};
+		const jupiter: OverworldTrainerStump = {
+			x,
+			y,
+			type: 'TRAINER',
+			id: 'Galactic Admin Jupiter',
+			orientation: getRandomOrientation(),
+			unhandledMessage: ['Why cant you just leave us alone'],
+
+			battleTeamConfig: {
+				assignLearnsetMoves: true,
+				assignNaturalAbility: true,
+				assignGender: true,
+				assignHeldItem: true,
+			},
+			sprite: SpriteEnum.jupiter,
+		};
+		const saturn: OverworldTrainerStump = {
+			x,
+			y,
+			type: 'TRAINER',
+			id: 'Galactic Admin Saturn',
+			orientation: getRandomOrientation(),
+			unhandledMessage: [
+				'In a cult, you have more fun as a follower',
+				'But make more money as a leader',
+				'Thats why i went into management',
+			],
+
+			battleTeamConfig: {
+				assignLearnsetMoves: true,
+				assignNaturalAbility: true,
+				assignGender: true,
+				assignHeldItem: true,
+			},
+			sprite: SpriteEnum.saturn,
+		};
+
+		return [mars, jupiter, saturn];
 	}
-	const chad: OverworldTrainer = {
+
+	const chad: OverworldTrainerStump = {
 		x,
 		y,
 		type: 'TRAINER',
 		id: `Rocket Admin Chad`,
 		orientation: getRandomOrientation(),
 		unhandledMessage: getRocketMessage(),
-		team: (s) => getRocketChadTeam(s),
 		battleTeamConfig: {
 			assignLearnsetMoves: true,
 			assignNaturalAbility: true,
@@ -179,16 +251,14 @@ export const createAdmin = (
 			assignHeldItem: true,
 		},
 		sprite: SpriteEnum.rocketAdminMale,
-		conditionFunction: () => true,
 	};
-	const hillary: OverworldTrainer = {
+	const hillary: OverworldTrainerStump = {
 		x,
 		y,
 		type: 'TRAINER',
 		id: `Rocket Admin Hillary`,
 		orientation: getRandomOrientation(),
 		unhandledMessage: getRocketMessage(),
-		team: (s) => getRocketHillaryTeam(s),
 		battleTeamConfig: {
 			assignLearnsetMoves: true,
 			assignNaturalAbility: true,
@@ -196,11 +266,9 @@ export const createAdmin = (
 			assignHeldItem: true,
 		},
 		sprite: SpriteEnum.rocketAdminFemale,
-		conditionFunction: () => true,
 	};
-	if (Math.random() > 0.5) {
-		return chad;
-	} else return hillary;
+
+	return [chad, hillary];
 };
 
 export const getTroubleMakerTeam = (s: SaveFile): OwnedPokemon[] => {
@@ -237,6 +305,31 @@ export const getTroubleMakerTeam = (s: SaveFile): OwnedPokemon[] => {
 			]),
 		});
 	});
+};
+
+export const getTroubleMakerAdminTeam = (
+	s: SaveFile,
+	id: string
+): OwnedPokemon[] => {
+	if (id === 'Rocket Admin Hillary') {
+		return getRocketHillaryTeam(s);
+	}
+	if (id === 'Aqua Boss Archie') {
+		return getAquaArchieTeam(s);
+	}
+	if (id === 'Magma Boss Maxie') {
+		return getMagmaMaxieTeam(s);
+	}
+	if (id === 'Galactic Admin Mars') {
+		return getGalacticMarsTeam(s);
+	}
+	if (id === 'Galactic Admin Jupiter') {
+		return getGalacticJupiterTeam(s);
+	}
+	if (id === 'Galactic Admin Saturn') {
+		return getGalacticSaturnTeam(s);
+	}
+	return getRocketChadTeam(s);
 };
 
 const createTroubleMakers = (
@@ -292,7 +385,11 @@ const createTroubleMakers = (
 	});
 
 	if (warden) {
-		res.push(createAdmin(affiliation, getRandomPosition(OverworldMap)));
+		const admins = createAdmin(affiliation, { x: 0, y: 0 });
+
+		admins.forEach((a) =>
+			res.push({ ...a, ...getRandomPosition(OverworldMap) })
+		);
 	}
 
 	return res;
