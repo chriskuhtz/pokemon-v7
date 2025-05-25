@@ -2314,10 +2314,26 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/617/',
 		handled: true,
 	},
-	{ name: 'origin-pulse', url: 'https://pokeapi.co/api/v2/move/618/' },
-	{ name: 'precipice-blades', url: 'https://pokeapi.co/api/v2/move/619/' },
-	{ name: 'dragon-ascent', url: 'https://pokeapi.co/api/v2/move/620/' },
-	{ name: 'hyperspace-fury', url: 'https://pokeapi.co/api/v2/move/621/' },
+	{
+		name: 'origin-pulse',
+		url: 'https://pokeapi.co/api/v2/move/618/',
+		handled: true,
+	},
+	{
+		name: 'precipice-blades',
+		url: 'https://pokeapi.co/api/v2/move/619/',
+		handled: true,
+	},
+	{
+		name: 'dragon-ascent',
+		url: 'https://pokeapi.co/api/v2/move/620/',
+		handled: true,
+	},
+	{
+		name: 'hyperspace-fury',
+		url: 'https://pokeapi.co/api/v2/move/621/',
+		handled: true,
+	},
 	{
 		name: 'breakneck-blitz--physical',
 		url: 'https://pokeapi.co/api/v2/move/622/',
@@ -3276,6 +3292,10 @@ export const handledMoves = [
 	'light-of-ruin',
 	'oblivion-wing',
 	'lands-wrath',
+	'origin-pulse',
+	'precipice-blades',
+	'hyperspace-fury',
+	'dragon-ascent',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
