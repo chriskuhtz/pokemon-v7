@@ -1,6 +1,5 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { mapsRecord } from '../../../constants/maps/mapsRecord';
-import { internalDex } from '../../../constants/pokemonNames';
 import { getMiddleOfThree } from '../../../functions/getMiddleOfThree';
 import { getRandomOrientation } from '../../../functions/getNextClockwiseDirection';
 import { occupantHandled } from '../../../functions/occupantHandled';
@@ -12,6 +11,7 @@ import { LocationContext } from '../../../hooks/LocationProvider';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { Occupant } from '../../../interfaces/OverworldMap';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
+import { internalDex } from '../../../constants/internalDex';
 
 export const useOccupants = () => {
 	const { saveFile } = useContext(SaveFileContext);

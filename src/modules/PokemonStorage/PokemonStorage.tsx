@@ -11,8 +11,8 @@ import {
 	ultraHighBstPokemon,
 } from '../../constants/baseStatRecord';
 import { battleSpriteSize } from '../../constants/gameData';
+import { internalDex } from '../../constants/internalDex';
 import { mapIds } from '../../constants/maps/mapsRecord';
-import { internalDex } from '../../constants/pokemonNames';
 import { byName } from '../../constants/typeRecord';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getHeldItem } from '../../functions/getHeldItem';

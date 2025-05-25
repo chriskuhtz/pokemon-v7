@@ -71,26 +71,3 @@ export const spaceDistortionMons: PokemonName[] = [
 	'stakataka',
 	'blacephalon',
 ];
-
-export const rampageOptions: PokemonName[] = [
-	'dragonite',
-	'ursaring',
-	'crobat',
-	'arcanine',
-	'garchomp',
-	'tyranitar',
-	'machamp',
-	'alakazam',
-	'slaking',
-	'steelix',
-	'primeape',
-	'pinsir',
-	'heracross',
-	'gengar',
-	'scolipede',
-	'drapion',
-	'kommo-o',
-	'oranguru',
-	'beartic',
-	'pangoro',
-];

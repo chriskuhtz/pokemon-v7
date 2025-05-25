@@ -491,6 +491,10 @@ export const extraFeatureCheckList: {
 	{ name: 'quests for rampagers', handled: true },
 	{ name: 'icon for rampagers', handled: true },
 	{ name: 'concept of internalDex', handled: true },
+	{
+		name: 'refactor rampagers into internalDex',
+		handled: true,
+	},
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -506,9 +510,7 @@ export const extraFeatureCheckList: {
 	{
 		name: 'refactor swarms into internalDex',
 	},
-	{
-		name: 'refactor rampagers into internalDex',
-	},
+
 	{ name: 'refactor berry lure mons into internalDex' },
 	{ name: 'refactor types into internalDex' },
 	{ name: 'refactor bst into internalDex' },

@@ -1,5 +1,6 @@
 import { useCallback, useContext, useMemo } from 'react';
 import { ONE_HOUR } from '../constants/gameData';
+import { getRampagers } from '../constants/internalDex';
 import {
 	mapDisplayNames,
 	MapId,
@@ -9,7 +10,6 @@ import { pokemonNames } from '../constants/pokemonNames';
 import {
 	futureDistortionMons,
 	pastDistortionMons,
-	rampageOptions,
 	spaceDistortionMons,
 	strongerSwarmMons,
 	swarmMons,
@@ -75,7 +75,7 @@ export const useSwarmRadar = (): {
 			if (saveFile.currentRampagingPokemon) {
 				return;
 			}
-			const pokemon = getRandomEntry(rampageOptions);
+			const pokemon = getRandomEntry(getRampagers());
 
 			addMessage({ message: `rampaging ${pokemon} detected at ${route}` });
 			const { x, y } = getRandomPosition(mapsRecord[route]);

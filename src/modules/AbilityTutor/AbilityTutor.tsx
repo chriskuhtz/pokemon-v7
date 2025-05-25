@@ -6,7 +6,6 @@ import {
 	AbilityName,
 	abilityNames,
 } from '../../constants/checkLists/completed/abilityCheckList';
-import { internalDex } from '../../constants/pokemonNames';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
@@ -17,6 +16,7 @@ import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import { internalDex } from '../../constants/internalDex';
 
 export const AbilityTutor = () => {
 	const { saveFile } = useContext(SaveFileContext);
