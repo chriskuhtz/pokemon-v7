@@ -8,7 +8,7 @@ import {
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
-import { internalDex } from '../../internalDex';
+import { internalDex } from '../../internalDexData';
 
 const garyTeam = () => [
 	makeChallengerPokemon({

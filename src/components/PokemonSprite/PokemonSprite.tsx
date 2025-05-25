@@ -1,7 +1,7 @@
 import { CSSProperties } from 'react';
 import { battleSpriteSize } from '../../constants/gameData';
 import { PokemonName } from '../../constants/pokemonNames';
-import { internalDex } from '../../constants/internalDex';
+import { internalDex } from '../../constants/internalDexData';
 
 export const getPokemonSprite = (
 	name: PokemonName,

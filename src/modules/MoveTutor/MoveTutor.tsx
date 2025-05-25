@@ -20,7 +20,7 @@ import { LearnMethod } from '../../interfaces/PokemonData';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { internalDex } from '../../constants/internalDex';
+import { internalDex } from '../../constants/internalDexData';
 
 export const moveUnlockPayments: ItemType[] = [
 	'big-malasada',

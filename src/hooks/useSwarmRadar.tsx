@@ -1,10 +1,6 @@
 import { useCallback, useContext, useMemo } from 'react';
 import { ONE_HOUR } from '../constants/gameData';
-import {
-	getRampagers,
-	getRandomSwarmMon,
-	SwarmType,
-} from '../constants/internalDex';
+import { getRampagers, getRandomSwarmMon } from '../constants/internalDex';
 import {
 	mapDisplayNames,
 	MapId,
@@ -12,6 +8,7 @@ import {
 } from '../constants/maps/mapsRecord';
 import { pokemonNames } from '../constants/pokemonNames';
 
+import { SwarmType } from '../constants/internalDexData';
 import { getRandomEntry } from '../functions/filterTargets';
 import { getRandomAvailableRoute } from '../functions/getRandomAvailableRoute';
 import { getRandomPosition } from '../functions/getRandomPosition';

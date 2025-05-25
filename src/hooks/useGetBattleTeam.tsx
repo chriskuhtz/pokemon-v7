@@ -4,7 +4,7 @@ import {
 	abilityNames,
 } from '../constants/checkLists/completed/abilityCheckList';
 import { MoveName } from '../constants/checkLists/movesCheckList';
-import { internalDex } from '../constants/internalDex';
+import { internalDex } from '../constants/internalDexData';
 import { calculateLevelData } from '../functions/calculateLevelData';
 import { getRandomEntry } from '../functions/filterTargets';
 import { getEvAwards } from '../functions/getEvAwards';

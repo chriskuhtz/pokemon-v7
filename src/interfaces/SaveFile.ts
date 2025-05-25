@@ -1,5 +1,5 @@
 import { CampUpgrade } from '../constants/campUpgrades';
-import { SwarmType } from '../constants/internalDex';
+import { SwarmType } from '../constants/internalDexData';
 import { MapId } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { QuestName } from '../constants/questsRecord';

@@ -16,7 +16,7 @@ import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { internalDex } from '../../constants/internalDex';
+import { internalDex } from '../../constants/internalDexData';
 
 export const AbilityTutor = () => {
 	const { saveFile } = useContext(SaveFileContext);

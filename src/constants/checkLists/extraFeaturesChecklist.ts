@@ -503,6 +503,9 @@ export const extraFeatureCheckList: {
 	{ name: 'refactor berry lure mons into internalDex', handled: true },
 	{ name: 'refactor honey mons into internalDex', handled: true },
 	{ name: 'refactor under rock mons into internalDex', handled: true },
+	{
+		name: 'refactor encounters into internalDex ',
+	},
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -511,9 +514,6 @@ export const extraFeatureCheckList: {
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
 	{ name: 'timeofday in pokedex' },
 	{ name: 'download did not boost after tablets of ruin lowered' },
-	{
-		name: 'refactor encounters into internalDex ',
-	},
 
 	{ name: 'internaldex visualizer' },
 	//CONTENT:
@@ -540,4 +540,5 @@ export const extraFeatureCheckList: {
 	{
 		name: 'quests for all future/past/space pokemon, followed by quests for legends(koraidon,miraidon,cosmog)',
 	},
+	{ name: 'flying encounters' },
 ];

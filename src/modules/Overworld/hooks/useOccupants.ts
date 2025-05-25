@@ -11,7 +11,7 @@ import { LocationContext } from '../../../hooks/LocationProvider';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { Occupant } from '../../../interfaces/OverworldMap';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
-import { internalDex } from '../../../constants/internalDex';
+import { internalDex } from '../../../constants/internalDexData';
 
 export const useOccupants = () => {
 	const { saveFile } = useContext(SaveFileContext);
