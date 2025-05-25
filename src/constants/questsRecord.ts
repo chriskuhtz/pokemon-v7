@@ -35,6 +35,7 @@ import {
 import { catchQuests } from './generatedQuests/catchQuests';
 import { travellingTrainerQuests } from './generatedQuests/travellingTrainersQuests';
 import { typeCatchQuests } from './generatedQuests/typeCatchQuests';
+import { getSwarmOptions } from './internalDex';
 import { caveW1Encounters } from './maps/encounters/caveW1';
 import { onixCaveEncounters } from './maps/encounters/onixCave';
 import { blaineId } from './maps/occupants/blaine';
@@ -48,11 +49,6 @@ import { sabrinaId } from './maps/occupants/sabrina';
 import { surgeId } from './maps/occupants/surge';
 import { routeS1 } from './maps/routeS1';
 import { PokemonName, pokemonNames } from './pokemonNames';
-import {
-	futureDistortionMons,
-	pastDistortionMons,
-	spaceDistortionMons,
-} from './swarmOptions';
 
 const expCandyPackage: Partial<Inventory> = {
 	'exp-candy-xs': 10,
@@ -3278,62 +3274,74 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'catch a future distortion pokemon': {
 		kind: 'BULLETIN',
 		category: 'RESEARCH',
-		targetPokemon: futureDistortionMons,
+		targetPokemon: getSwarmOptions('FUTURE_DISTORTION'),
 		rewardItems: { 'rare-candy': 3, 'quick-ball': 5 },
 		researchPoints: 25,
 		requiredUpgrade: 'time distortion radar',
 		conditionFunction: (s) =>
-			futureDistortionMons.some((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+			getSwarmOptions('FUTURE_DISTORTION').some(
+				(f) => s.pokedex[f].caughtOnRoutes.length > 0
+			),
 	},
 	'catch a past distortion pokemon': {
 		kind: 'BULLETIN',
 		category: 'RESEARCH',
-		targetPokemon: pastDistortionMons,
+		targetPokemon: getSwarmOptions('PAST_DISTORTION'),
 		rewardItems: { 'rare-candy': 3, 'quick-ball': 5 },
 		researchPoints: 25,
 		requiredUpgrade: 'time distortion radar',
 		conditionFunction: (s) =>
-			pastDistortionMons.some((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+			getSwarmOptions('PAST_DISTORTION').some(
+				(f) => s.pokedex[f].caughtOnRoutes.length > 0
+			),
 	},
 	'catch all future distortion pokemon': {
 		kind: 'BULLETIN',
 		category: 'RESEARCH',
-		targetPokemon: futureDistortionMons,
+		targetPokemon: getSwarmOptions('FUTURE_DISTORTION'),
 		rewardItems: { 'rare-candy': 10, 'quick-ball': 20 },
 		researchPoints: 100,
 		requiredUpgrade: 'time distortion radar',
 		conditionFunction: (s) =>
-			futureDistortionMons.every((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+			getSwarmOptions('FUTURE_DISTORTION').every(
+				(f) => s.pokedex[f].caughtOnRoutes.length > 0
+			),
 	},
 	'catch all past distortion pokemon': {
 		kind: 'BULLETIN',
 		category: 'RESEARCH',
-		targetPokemon: pastDistortionMons,
+		targetPokemon: getSwarmOptions('PAST_DISTORTION'),
 		rewardItems: { 'rare-candy': 10, 'quick-ball': 20 },
 		researchPoints: 100,
 		requiredUpgrade: 'time distortion radar',
 		conditionFunction: (s) =>
-			pastDistortionMons.every((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+			getSwarmOptions('PAST_DISTORTION').every(
+				(f) => s.pokedex[f].caughtOnRoutes.length > 0
+			),
 	},
 	'catch a space distortion pokemon': {
 		kind: 'BULLETIN',
 		category: 'RESEARCH',
-		targetPokemon: spaceDistortionMons,
+		targetPokemon: getSwarmOptions('SPACE_DISTORTION'),
 		rewardItems: { 'rare-candy': 3, 'quick-ball': 5 },
 		researchPoints: 25,
 		requiredUpgrade: 'space distortion radar',
 		conditionFunction: (s) =>
-			spaceDistortionMons.some((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+			getSwarmOptions('SPACE_DISTORTION').some(
+				(f) => s.pokedex[f].caughtOnRoutes.length > 0
+			),
 	},
 	'catch all space distortion pokemon': {
 		kind: 'BULLETIN',
 		category: 'RESEARCH',
-		targetPokemon: spaceDistortionMons,
+		targetPokemon: getSwarmOptions('SPACE_DISTORTION'),
 		rewardItems: { 'rare-candy': 10, 'quick-ball': 20 },
 		researchPoints: 100,
 		requiredUpgrade: 'space distortion radar',
 		conditionFunction: (s) =>
-			spaceDistortionMons.every((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+			getSwarmOptions('SPACE_DISTORTION').every(
+				(f) => s.pokedex[f].caughtOnRoutes.length > 0
+			),
 	},
 	'train a pidgeot to lvl 100': {
 		kind: 'BULLETIN',

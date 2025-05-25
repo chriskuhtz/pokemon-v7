@@ -1,19 +1,17 @@
 import { useCallback, useContext, useMemo } from 'react';
 import { ONE_HOUR } from '../constants/gameData';
-import { getRampagers } from '../constants/internalDex';
+import {
+	getRampagers,
+	getRandomSwarmMon,
+	SwarmType,
+} from '../constants/internalDex';
 import {
 	mapDisplayNames,
 	MapId,
 	mapsRecord,
 } from '../constants/maps/mapsRecord';
 import { pokemonNames } from '../constants/pokemonNames';
-import {
-	futureDistortionMons,
-	pastDistortionMons,
-	spaceDistortionMons,
-	strongerSwarmMons,
-	swarmMons,
-} from '../constants/swarmOptions';
+
 import { getRandomEntry } from '../functions/filterTargets';
 import { getRandomAvailableRoute } from '../functions/getRandomAvailableRoute';
 import { getRandomPosition } from '../functions/getRandomPosition';
@@ -31,14 +29,17 @@ export const useSwarmRadar = (): {
 
 	const addSwarmMessage = useCallback(
 		(s: PokemonSwarm) => {
-			if (s.type === 'SPACE') {
+			if (s.type === 'SPACE_DISTORTION') {
 				addMessage({
 					message: `The radar detects a space distortion at ${
 						mapDisplayNames[s.route]
 					}`,
 					needsNoConfirmation: true,
 				});
-			} else if (s.type === 'FUTURE' || s.type === 'PAST') {
+			} else if (
+				s.type === 'FUTURE_DISTORTION' ||
+				s.type === 'PAST_DISTORTION'
+			) {
 				addMessage({
 					message: `The radar detects a time distortion at ${
 						mapDisplayNames[s.route]
@@ -114,7 +115,8 @@ export const useSwarmRadar = (): {
 
 				if (mode === 'STRONG') {
 					return {
-						pokemon: getRandomEntry(strongerSwarmMons),
+						type: 'STRONG',
+						pokemon: getRandomSwarmMon('STRONG'),
 						xpMin: 20 ^ 3,
 						xpMax: 40 ^ 3,
 						leavesAt: now + ONE_HOUR,
@@ -122,20 +124,17 @@ export const useSwarmRadar = (): {
 					};
 				}
 				if (mode === 'DISTORTION') {
-					const options = [...futureDistortionMons, ...pastDistortionMons];
+					const options: SwarmType[] = ['FUTURE_DISTORTION', 'PAST_DISTORTION'];
 
 					if (saveFile.campUpgrades['space distortion radar']) {
-						options.push(...spaceDistortionMons);
+						options.push('SPACE_DISTORTION');
 					}
-					const mon = getRandomEntry(options);
-					const type = futureDistortionMons.includes(mon)
-						? 'FUTURE'
-						: pastDistortionMons.includes(mon)
-						? 'PAST'
-						: 'SPACE';
+					const randomOption = getRandomEntry(options);
+					const mon = getRandomSwarmMon(randomOption);
+
 					return {
 						pokemon: mon,
-						type,
+						type: randomOption,
 						xpMin: 40 ^ 3,
 						xpMax: 60 ^ 3,
 						leavesAt: now + ONE_HOUR,
@@ -143,7 +142,8 @@ export const useSwarmRadar = (): {
 					};
 				}
 				return {
-					pokemon: getRandomEntry(swarmMons),
+					pokemon: getRandomSwarmMon('WEAK'),
+					type: 'WEAK',
 					xpMin: 125,
 					xpMax: 1000,
 					leavesAt: now + ONE_HOUR,

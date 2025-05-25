@@ -1,8 +1,15 @@
+import { getRandomEntry } from '../functions/filterTargets';
 import { PokemonName } from './pokemonNames';
-
+export type SwarmType =
+	| 'WEAK'
+	| 'STRONG'
+	| 'PAST_DISTORTION'
+	| 'SPACE_DISTORTION'
+	| 'FUTURE_DISTORTION';
 export type InternalDexEntry = {
 	dexId: number;
 	rampager?: boolean;
+	swarm?: SwarmType;
 };
 
 export const internalDex: Record<PokemonName, InternalDexEntry> = {
@@ -125,6 +132,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	wigglytuff: {
 		dexId: 40,
+		swarm: 'STRONG',
 	},
 	zubat: {
 		dexId: 41,
@@ -255,6 +263,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	magneton: {
 		dexId: 82,
+		swarm: 'STRONG',
 	},
 	farfetchd: {
 		dexId: 83,
@@ -468,6 +477,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	chikorita: {
 		dexId: 152,
+		swarm: 'WEAK',
 	},
 	bayleef: {
 		dexId: 153,
@@ -477,6 +487,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	cyndaquil: {
 		dexId: 155,
+		swarm: 'WEAK',
 	},
 	quilava: {
 		dexId: 156,
@@ -486,6 +497,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	totodile: {
 		dexId: 158,
+		swarm: 'WEAK',
 	},
 	croconaw: {
 		dexId: 159,
@@ -613,6 +625,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	misdreavus: {
 		dexId: 200,
+		swarm: 'STRONG',
 	},
 	unown: {
 		dexId: 201,
@@ -691,6 +704,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	delibird: {
 		dexId: 225,
+		swarm: 'STRONG',
 	},
 	mantine: {
 		dexId: 226,
@@ -712,6 +726,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	donphan: {
 		dexId: 232,
+		swarm: 'STRONG',
 	},
 	porygon2: {
 		dexId: 233,
@@ -757,6 +772,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	pupitar: {
 		dexId: 247,
+		swarm: 'STRONG',
 	},
 	tyranitar: {
 		dexId: 248,
@@ -773,6 +789,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	treecko: {
 		dexId: 252,
+		swarm: 'WEAK',
 	},
 	grovyle: {
 		dexId: 253,
@@ -782,6 +799,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	torchic: {
 		dexId: 255,
+		swarm: 'WEAK',
 	},
 	combusken: {
 		dexId: 256,
@@ -791,6 +809,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	mudkip: {
 		dexId: 258,
+		swarm: 'WEAK',
 	},
 	marshtomp: {
 		dexId: 259,
@@ -860,6 +879,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	kirlia: {
 		dexId: 281,
+		swarm: 'STRONG',
 	},
 	gardevoir: {
 		dexId: 282,
@@ -909,6 +929,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	hariyama: {
 		dexId: 297,
+		swarm: 'STRONG',
 	},
 	azurill: {
 		dexId: 298,
@@ -1134,6 +1155,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	shelgon: {
 		dexId: 372,
+		swarm: 'STRONG',
 	},
 	salamence: {
 		dexId: 373,
@@ -1179,6 +1201,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	turtwig: {
 		dexId: 387,
+		swarm: 'WEAK',
 	},
 	grotle: {
 		dexId: 388,
@@ -1188,6 +1211,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	chimchar: {
 		dexId: 390,
+		swarm: 'WEAK',
 	},
 	monferno: {
 		dexId: 391,
@@ -1197,6 +1221,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	piplup: {
 		dexId: 393,
+		swarm: 'WEAK',
 	},
 	prinplup: {
 		dexId: 394,
@@ -1505,6 +1530,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	snivy: {
 		dexId: 495,
+		swarm: 'WEAK',
 	},
 	servine: {
 		dexId: 496,
@@ -1514,6 +1540,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	tepig: {
 		dexId: 498,
+		swarm: 'WEAK',
 	},
 	pignite: {
 		dexId: 499,
@@ -1523,6 +1550,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	oshawott: {
 		dexId: 501,
+		swarm: 'WEAK',
 	},
 	dewott: {
 		dexId: 502,
@@ -1794,6 +1822,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	amoonguss: {
 		dexId: 591,
+		swarm: 'STRONG',
 	},
 	frillish: {
 		dexId: 592,
@@ -1924,6 +1953,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	zweilous: {
 		dexId: 634,
+		swarm: 'STRONG',
 	},
 	hydreigon: {
 		dexId: 635,
@@ -1933,6 +1963,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	volcarona: {
 		dexId: 637,
+		swarm: 'STRONG',
 	},
 	cobalion: {
 		dexId: 638,
@@ -1972,6 +2003,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	chespin: {
 		dexId: 650,
+		swarm: 'WEAK',
 	},
 	quilladin: {
 		dexId: 651,
@@ -1981,6 +2013,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	fennekin: {
 		dexId: 653,
+		swarm: 'WEAK',
 	},
 	braixen: {
 		dexId: 654,
@@ -1990,6 +2023,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	froakie: {
 		dexId: 656,
+		swarm: 'WEAK',
 	},
 	frogadier: {
 		dexId: 657,
@@ -2189,6 +2223,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	rowlet: {
 		dexId: 722,
+		swarm: 'WEAK',
 	},
 	dartrix: {
 		dexId: 723,
@@ -2198,6 +2233,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	litten: {
 		dexId: 725,
+		swarm: 'WEAK',
 	},
 	torracat: {
 		dexId: 726,
@@ -2207,6 +2243,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	popplio: {
 		dexId: 728,
+		swarm: 'WEAK',
 	},
 	brionne: {
 		dexId: 729,
@@ -2404,24 +2441,31 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	nihilego: {
 		dexId: 793,
+		swarm: 'SPACE_DISTORTION',
 	},
 	buzzwole: {
 		dexId: 794,
+		swarm: 'SPACE_DISTORTION',
 	},
 	pheromosa: {
 		dexId: 795,
+		swarm: 'SPACE_DISTORTION',
 	},
 	xurkitree: {
 		dexId: 796,
+		swarm: 'SPACE_DISTORTION',
 	},
 	celesteela: {
 		dexId: 797,
+		swarm: 'SPACE_DISTORTION',
 	},
 	kartana: {
 		dexId: 798,
+		swarm: 'SPACE_DISTORTION',
 	},
 	guzzlord: {
 		dexId: 799,
+		swarm: 'SPACE_DISTORTION',
 	},
 	necrozma: {
 		dexId: 800,
@@ -2434,15 +2478,18 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	poipole: {
 		dexId: 803,
+		swarm: 'SPACE_DISTORTION',
 	},
 	naganadel: {
 		dexId: 804,
 	},
 	stakataka: {
 		dexId: 805,
+		swarm: 'SPACE_DISTORTION',
 	},
 	blacephalon: {
 		dexId: 806,
+		swarm: 'SPACE_DISTORTION',
 	},
 	zeraora: {
 		dexId: 807,
@@ -2455,6 +2502,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	grookey: {
 		dexId: 810,
+		swarm: 'WEAK',
 	},
 	thwackey: {
 		dexId: 811,
@@ -2464,6 +2512,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	scorbunny: {
 		dexId: 813,
+		swarm: 'WEAK',
 	},
 	raboot: {
 		dexId: 814,
@@ -2473,6 +2522,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	sobble: {
 		dexId: 816,
+		swarm: 'WEAK',
 	},
 	drizzile: {
 		dexId: 817,
@@ -2743,6 +2793,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	sprigatito: {
 		dexId: 906,
+		swarm: 'WEAK',
 	},
 	floragato: {
 		dexId: 907,
@@ -2752,6 +2803,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	fuecoco: {
 		dexId: 909,
+		swarm: 'WEAK',
 	},
 	crocalor: {
 		dexId: 910,
@@ -2761,6 +2813,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	quaxly: {
 		dexId: 912,
+		swarm: 'WEAK',
 	},
 	quaxwell: {
 		dexId: 913,
@@ -2926,6 +2979,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	cyclizar: {
 		dexId: 967,
+		swarm: 'STRONG',
 	},
 	orthworm: {
 		dexId: 968,
@@ -2977,39 +3031,51 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	'great-tusk': {
 		dexId: 984,
+		swarm: 'PAST_DISTORTION',
 	},
 	'scream-tail': {
 		dexId: 985,
+		swarm: 'PAST_DISTORTION',
 	},
 	'brute-bonnet': {
 		dexId: 986,
+		swarm: 'PAST_DISTORTION',
 	},
 	'flutter-mane': {
 		dexId: 987,
+		swarm: 'PAST_DISTORTION',
 	},
 	'slither-wing': {
 		dexId: 988,
+		swarm: 'PAST_DISTORTION',
 	},
 	'sandy-shocks': {
 		dexId: 989,
+		swarm: 'PAST_DISTORTION',
 	},
 	'iron-treads': {
 		dexId: 990,
+		swarm: 'FUTURE_DISTORTION',
 	},
 	'iron-bundle': {
 		dexId: 991,
+		swarm: 'FUTURE_DISTORTION',
 	},
 	'iron-hands': {
 		dexId: 992,
+		swarm: 'FUTURE_DISTORTION',
 	},
 	'iron-jugulis': {
 		dexId: 993,
+		swarm: 'FUTURE_DISTORTION',
 	},
 	'iron-moth': {
 		dexId: 994,
+		swarm: 'FUTURE_DISTORTION',
 	},
 	'iron-thorns': {
 		dexId: 995,
+		swarm: 'FUTURE_DISTORTION',
 	},
 	frigibax: {
 		dexId: 996,
@@ -3040,9 +3106,11 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	'roaring-moon': {
 		dexId: 1005,
+		swarm: 'PAST_DISTORTION',
 	},
 	'iron-valiant': {
 		dexId: 1006,
+		swarm: 'FUTURE_DISTORTION',
 	},
 	koraidon: {
 		dexId: 1007,
@@ -3938,4 +4006,13 @@ export const getRampagers = () => {
 	return Object.entries(internalDex)
 		.filter(([, value]) => value.rampager)
 		.map(([key]) => key) as PokemonName[];
+};
+export const getSwarmOptions = (type: SwarmType) => {
+	return Object.entries(internalDex)
+		.filter(([, value]) => value.swarm === type)
+		.map(([key]) => key) as PokemonName[];
+};
+
+export const getRandomSwarmMon = (type: SwarmType): PokemonName => {
+	return getRandomEntry(getSwarmOptions(type));
 };

@@ -44,14 +44,13 @@ export const SwarmRadar = () => {
 					<Card
 						key={a.leavesAt}
 						content={
-							a.type ? (
+							a.type === 'WEAK' || a.type === 'STRONG' ? (
 								<strong>
-									{a.type === 'SPACE' ? 'SPACE' : 'TIME'} Distortion at{' '}
-									{replaceRouteName(a.route)}
+									Swarm of {a.pokemon} at {replaceRouteName(a.route)}
 								</strong>
 							) : (
 								<strong>
-									Swarm of {a.pokemon} at {replaceRouteName(a.route)}
+									{a.type} at {replaceRouteName(a.route)}
 								</strong>
 							)
 						}

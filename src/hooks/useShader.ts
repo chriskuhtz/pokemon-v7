@@ -18,10 +18,10 @@ export const useShader = () => {
 			saveFile.currentDistortionSwarm &&
 			location.mapId === saveFile.currentDistortionSwarm.route
 		) {
-			if (saveFile.currentDistortionSwarm.type === 'FUTURE') {
+			if (saveFile.currentDistortionSwarm.type === 'FUTURE_DISTORTION') {
 				return futureShader;
 			}
-			if (saveFile.currentDistortionSwarm.type === 'PAST') {
+			if (saveFile.currentDistortionSwarm.type === 'PAST_DISTORTION') {
 				return pastShader;
 			}
 			return spaceShader;
