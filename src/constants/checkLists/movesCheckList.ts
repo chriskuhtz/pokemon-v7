@@ -2386,8 +2386,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/669/',
 		handled: true,
 	},
-	{ name: 'spotlight', url: 'https://pokeapi.co/api/v2/move/671/' },
-	{ name: 'toxic-thread', url: 'https://pokeapi.co/api/v2/move/672/' },
+	{
+		name: 'toxic-thread',
+		url: 'https://pokeapi.co/api/v2/move/672/',
+		handled: true,
+	},
 	{ name: 'laser-focus', url: 'https://pokeapi.co/api/v2/move/673/' },
 	{ name: 'gear-up', url: 'https://pokeapi.co/api/v2/move/674/' },
 	{ name: 'throat-chop', url: 'https://pokeapi.co/api/v2/move/675/' },
@@ -2821,6 +2824,7 @@ export const movesCheckList: {
 	{ name: 'thousand-arrows', url: 'https://pokeapi.co/api/v2/move/614/' },
 	{ name: 'thousand-waves', url: 'https://pokeapi.co/api/v2/move/615/' },
 	{ name: 'strength-sap', url: 'https://pokeapi.co/api/v2/move/668/' },
+	{ name: 'spotlight', url: 'https://pokeapi.co/api/v2/move/671/' },
 ];
 
 export const handledMoves = [
@@ -3351,6 +3355,7 @@ export const handledMoves = [
 	'floral-healing',
 	'high-horsepower',
 	'solar-blade',
+	'toxic-thread',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
