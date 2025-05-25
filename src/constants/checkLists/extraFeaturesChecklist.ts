@@ -515,6 +515,7 @@ export const extraFeatureCheckList: {
 	},
 
 	{ name: 'refactor bst into internalDex' },
+	{ name: 'refactor honey mons into internalDex' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },

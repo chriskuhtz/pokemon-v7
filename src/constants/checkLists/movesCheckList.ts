@@ -2360,7 +2360,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/663/',
 		handled: true,
 	},
-	{ name: 'sparkling-aria', url: 'https://pokeapi.co/api/v2/move/664/' },
+	{
+		name: 'sparkling-aria',
+		url: 'https://pokeapi.co/api/v2/move/664/',
+		handled: true,
+	},
 	{ name: 'ice-hammer', url: 'https://pokeapi.co/api/v2/move/665/' },
 	{ name: 'floral-healing', url: 'https://pokeapi.co/api/v2/move/666/' },
 	{ name: 'high-horsepower', url: 'https://pokeapi.co/api/v2/move/667/' },
@@ -3325,6 +3329,7 @@ export const handledMoves = [
 	'baneful-bunker',
 	'spirit-shackle',
 	'darkest-lariat',
+	'sparkling-aria',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

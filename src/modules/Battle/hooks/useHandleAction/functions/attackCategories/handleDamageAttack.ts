@@ -184,6 +184,14 @@ export const handleDamageAttack = ({
 
 		updatedTarget = { ...updatedTarget, heldItemName: undefined };
 	}
+	//sparkling-aria
+	if (
+		move.name === 'sparkling-aria' &&
+		updatedTarget.primaryAilment?.type === 'burn'
+	) {
+		addMessage({ message: `${updatedTarget.name}'s burn was healed` });
+		updatedTarget = { ...updatedTarget, primaryAilment: undefined };
+	}
 
 	// apply damage
 	const { consumedHeldItem, damage, criticalHit, wasSuperEffective } =
