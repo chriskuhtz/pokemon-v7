@@ -6,6 +6,7 @@ export const secondTurnMoves = [
 	'razor-wind',
 	'skull-bash',
 	'solar-beam',
+	'solar-blade',
 	'fly',
 	'dig',
 	'dive',
