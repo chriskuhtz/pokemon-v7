@@ -30,6 +30,7 @@ import { useReset } from '../../hooks/useReset';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { useTeleport } from '../../hooks/useTeleport';
 import { EmptyInventory } from '../../interfaces/Inventory';
+import { RoutesType } from '../../interfaces/Routing';
 
 export const onChallengeField = (id: MapId) => {
 	return id === challengeFieldId || id === randomFieldId;
@@ -127,6 +128,12 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 					actionElements={[]}
 				/>
 				<Card
+					onClick={() => navigate('MAIN', 'INTERNAL_DEX')}
+					content={<h4>Internal Dex</h4>}
+					icon={<RiBookShelfLine size={battleSpriteSize} />}
+					actionElements={[]}
+				/>
+				<Card
 					onClick={() => navigate('MAIN', 'WIKI')}
 					content={<h4>Wiki</h4>}
 					icon={<FaSearch size={battleSpriteSize} />}
@@ -161,7 +168,7 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 					Object.keys(mapsRecord).map((m) => (
 						<Card
 							key={m}
-							onClick={() => navigate('MAIN', `MAP_MAKER_${m}`)}
+							onClick={() => navigate('MAIN', `MAP_MAKER_${m}` as RoutesType)}
 							content={<h4>Map Maker {m}</h4>}
 							icon={<GoTasklist size={battleSpriteSize} />}
 							actionElements={[]}

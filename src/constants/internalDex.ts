@@ -6,7 +6,7 @@ import {
 } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { PokemonType, pokemonTypes } from '../interfaces/PokemonType';
-import { internalDex, SwarmType } from './internalDexData';
+import { internalDex, InternalDexEntry, SwarmType } from './internalDexData';
 import { MapId } from './maps/mapsRecord';
 import { PokemonName } from './pokemonNames';
 
@@ -121,6 +121,18 @@ export const getRandomEncounter = (
 	);
 	return { ...chosen, xp };
 };
+export const isNotCatchable = (entry: InternalDexEntry) => {
+	return (
+		[
+			!!entry.berryLureMapId,
+			!!entry.honey,
+			!!entry.rampager,
+			!!entry.swarm,
+			!!entry.underRock,
+			!!(entry.encounterOptions.length > 0),
+		].filter((v) => v).length === 0
+	);
+};
 
 const overUsed = Object.entries(internalDex)
 	.filter(([, value]) => {
@@ -131,27 +143,12 @@ const overUsed = Object.entries(internalDex)
 				!!value.rampager,
 				!!value.swarm,
 				!!value.underRock,
+				...value.encounterOptions.map(() => true),
 			].filter((v) => v).length > 1
 		);
 	})
 	.map(([key]) => key);
 console.log('Mons with more than one encounter option', overUsed);
-// const neverUsed = Object.entries(internalDex)
-// 	.filter(([, value]) => {
-// 		return (
-// 			[
-// 				!!value.berryLureMapId,
-// 				!!value.honey,
-// 				!!value.rampager,
-// 				!!value.swarm,
-// 				!!value.underRock,
-// 				!!(value.encounterOptions.length > 0),
-// 			].filter((v) => v).length === 0
-// 		);
-// 	})
-// 	.map(([key]) => key);
-
-// console.log('neverUsed Mons', neverUsed);
 
 // console.log(
 // 	Object.fromEntries(
