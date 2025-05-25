@@ -3,7 +3,6 @@ import { Sprite } from './components/Sprite/Sprite';
 import { MapId } from './constants/maps/mapsRecord';
 import { MessageQueueContext } from './hooks/useMessageQueue';
 import { SaveFileContext } from './hooks/useSaveFile';
-import { OwnedPokemon } from './interfaces/OwnedPokemon';
 import { SpriteEnum } from './interfaces/SpriteEnum';
 import { AbilityTutor } from './modules/AbilityTutor/AbilityTutor';
 import { AmoongussCompostResearcher } from './modules/AmoongussResearcher/AmoongussResearcher';
@@ -84,7 +83,6 @@ export const App = (): JSX.Element => {
 	const {
 		saveFile,
 		setActiveTabReducer,
-		setPokemonReducer,
 		patchSaveFileReducer,
 		changeHeldItemReducer,
 	} = useContext(SaveFileContext);
@@ -178,9 +176,6 @@ export const App = (): JSX.Element => {
 				initialFocus={team[0].id}
 				team={team}
 				goBack={() => setActiveTabReducer('MAIN')}
-				setTeam={(newTeam: OwnedPokemon[]) =>
-					setPokemonReducer([...newTeam, ...pokemon.filter((p) => !p.onTeam)])
-				}
 				inventory={inventory}
 				changeHeldItem={changeHeldItemReducer}
 			/>

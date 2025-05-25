@@ -507,6 +507,7 @@ export const extraFeatureCheckList: {
 		name: 'refactor encounters into internalDex ',
 		handled: true,
 	},
+	{ name: 'internaldex visualizer', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -515,8 +516,6 @@ export const extraFeatureCheckList: {
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
 	{ name: 'timeofday in pokedex' },
 	{ name: 'download did not boost after tablets of ruin lowered' },
-
-	{ name: 'internaldex visualizer' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
@@ -524,22 +523,20 @@ export const extraFeatureCheckList: {
 	{ name: 'claire' },
 	{ name: 'e4 challenge' },
 	{ name: 'rock climbing' },
-	{ name: 'nuzlocke mode' },
 	{ name: 'eggs?' },
 	{ name: 'Fishing?' },
 	{ name: 'magma/aqua quests from Looker' },
 	{ name: 'Terrain Items (shovel, pickaxe) as Gym leader rewards' },
 	{ name: 'ev grind mode for challenge field' },
 	{ name: 'trainer with simple/costar combo' },
-	{ name: 'random encounters' },
-	{ name: 'random evolutions' },
 	{ name: 'steven as the fossil protector' },
 	{ name: 'download your player file and share it with others' },
 	{ name: 'team galactic' },
 	{ name: 'more legendary stories' },
 	{ name: 'cave of shadows where you face yourself' },
-	{
-		name: 'quests for all future/past/space pokemon, followed by quests for legends(koraidon,miraidon,cosmog)',
-	},
 	{ name: 'flying encounters' },
+	//SETTINGS:
+	{ name: 'random encounters' },
+	{ name: 'random evolutions' },
+	{ name: 'nuzlocke mode' },
 ];

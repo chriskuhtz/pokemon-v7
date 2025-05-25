@@ -22,7 +22,7 @@ const HONEY_ENCOUNTER_OPTIONS: OwnedPokemon[] = getHoneyEncounters().map((h) =>
 );
 
 export const useHoneyTree = () => {
-	const { putSaveFileReducer, saveFile } = useContext(SaveFileContext);
+	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
 	const { location } = useContext(LocationContext);
 	const { addMultipleMessages, addMessage } = useContext(MessageQueueContext);
 
@@ -44,8 +44,7 @@ export const useHoneyTree = () => {
 					needsNoConfirmation: true,
 					onRemoval: () => {
 						//Start encounter
-						putSaveFileReducer({
-							...saveFile,
+						patchSaveFileReducer({
 							bag: joinInventories(saveFile.bag, { honey: 1 }, true),
 							meta: {
 								activeTab: 'BATTLE',
@@ -80,7 +79,7 @@ export const useHoneyTree = () => {
 				{
 					message: 'No Pokemon seem interested in the honey',
 					onRemoval: () => {
-						putSaveFileReducer({
+						patchSaveFileReducer({
 							...saveFile,
 							bag: joinInventories(saveFile.bag, { honey: 1 }, true),
 						});
@@ -92,7 +91,7 @@ export const useHoneyTree = () => {
 		addMessage,
 		addMultipleMessages,
 		location.mapId,
-		putSaveFileReducer,
+		patchSaveFileReducer,
 		saveFile,
 	]);
 };

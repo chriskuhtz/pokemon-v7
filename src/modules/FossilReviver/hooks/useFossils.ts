@@ -10,7 +10,7 @@ import { getRandomNature } from '../../../interfaces/Natures';
 
 export const useFossils = () => {
 	const { addMessage } = useContext(MessageQueueContext);
-	const { saveFile, putSaveFileReducer } = useContext(SaveFileContext);
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
 	const revive = useCallback(
 		(fossils: FossilType[]) => {
@@ -26,7 +26,7 @@ export const useFossils = () => {
 			addMessage({
 				message: `Revived a ${pokemon}s`,
 			});
-			putSaveFileReducer({
+			patchSaveFileReducer({
 				...saveFile,
 				bag: joinInventories(
 					saveFile.bag,
@@ -49,7 +49,7 @@ export const useFossils = () => {
 				],
 			});
 		},
-		[addMessage, putSaveFileReducer, saveFile]
+		[addMessage, patchSaveFileReducer, saveFile]
 	);
 
 	return { revive };

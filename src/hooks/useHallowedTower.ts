@@ -11,7 +11,7 @@ import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
 export const useHallowedTower = () => {
-	const { putSaveFileReducer, saveFile } = useContext(SaveFileContext);
+	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
 	const { location } = useContext(LocationContext);
 	const { addMultipleMessages } = useContext(MessageQueueContext);
 
@@ -42,8 +42,7 @@ export const useHallowedTower = () => {
 				needsNoConfirmation: true,
 				onRemoval: () => {
 					//Start encounter
-					putSaveFileReducer({
-						...saveFile,
+					patchSaveFileReducer({
 						bag: joinInventories(saveFile.bag, { 'odd-keystone': 1 }, true),
 						meta: {
 							activeTab: 'BATTLE',
@@ -65,5 +64,5 @@ export const useHallowedTower = () => {
 				},
 			},
 		]);
-	}, [addMultipleMessages, location.mapId, putSaveFileReducer, saveFile]);
+	}, [addMultipleMessages, location.mapId, patchSaveFileReducer, saveFile.bag]);
 };
