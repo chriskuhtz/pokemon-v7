@@ -342,8 +342,8 @@ const cynthia: OverworldTrainer = {
 
 export const cynthiaN1: Occupant = {
 	...cynthia,
-	x: 43,
-	y: 23,
+	x: 45,
+	y: 3,
 	conditionFunction: (s) =>
 		s.handledOccupants.every((h) => h.id !== cynthiaId) && isThursday(),
 };

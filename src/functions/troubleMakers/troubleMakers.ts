@@ -10,7 +10,7 @@ import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { getRandomEntry } from '../filterTargets';
 import { getMiddleOfThree } from '../getMiddleOfThree';
 import { getRandomOrientation } from '../getNextClockwiseDirection';
-import { isPassable } from '../isPassable';
+import { getRandomPosition } from '../getRandomPosition';
 import { makeChallengerPokemon } from '../makeChallengerPokemon';
 import {
 	aquaNamesFemale,
@@ -252,24 +252,10 @@ const createTroubleMakers = (
 
 	const OverworldMap = mapsRecord[mapId];
 
-	const getPosition = (): { x: number; y: number } => {
-		const y = Math.floor(Math.random() * OverworldMap.tileMap.baseLayer.length);
-		const x = Math.floor(
-			Math.random() * OverworldMap.tileMap.baseLayer[0].length
-		);
-
-		if (
-			!isPassable({ x, y }, OverworldMap, OverworldMap.occupants, false, false)
-		) {
-			return getPosition();
-		}
-		return { y, x };
-	};
-
 	const res = chosenNames.map((name) => {
 		const id = `${affiliation} Grunt ${name}`;
 
-		const { x, y } = getPosition();
+		const { x, y } = getRandomPosition(OverworldMap);
 
 		const sprite = () => {
 			if (affiliation === 'aqua' || affiliation === 'magma') {
@@ -306,7 +292,7 @@ const createTroubleMakers = (
 	});
 
 	if (warden) {
-		res.push(createAdmin(affiliation, getPosition()));
+		res.push(createAdmin(affiliation, getRandomPosition(OverworldMap)));
 	}
 
 	return res;

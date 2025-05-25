@@ -1,5 +1,9 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { mapsRecord } from '../../../constants/maps/mapsRecord';
+import { nameToIdMap } from '../../../constants/pokemonNames';
+import { getMiddleOfThree } from '../../../functions/getMiddleOfThree';
+import { getRandomOrientation } from '../../../functions/getNextClockwiseDirection';
+import { occupantHandled } from '../../../functions/occupantHandled';
 import {
 	createAdmin,
 	getTroubleMakerTeam,
@@ -45,6 +49,44 @@ export const useOccupants = () => {
 					};
 				}),
 			];
+
+			const length = all.length;
+			if (statefulOccupants.length !== length) {
+				setStatefulOccupants(all);
+			}
+
+			return;
+		}
+		if (
+			saveFile.currentRampagingPokemon &&
+			saveFile.currentRampagingPokemon.route === map.id
+		) {
+			const { x, y, id, name } = saveFile.currentRampagingPokemon;
+			const xp = getMiddleOfThree([
+				70 * 70 * 70,
+				Math.random() * 1000000,
+				1000000,
+			]);
+			const all: Occupant[] = [
+				...map.occupants,
+				{
+					type: 'POKEMON',
+					x,
+					y,
+					orientation: getRandomOrientation(),
+					dexId: nameToIdMap[name],
+					encounter: {
+						name: name,
+						maxXp: xp,
+						minXp: xp,
+						rarity: 'common',
+					},
+					dialogue: [`The rampaging ${name} attacks`],
+					conditionFunction: (s) => !occupantHandled(s, id),
+
+					id,
+				},
+			];
 			const length = all.length;
 			if (statefulOccupants.length !== length) {
 				setStatefulOccupants(all);
@@ -59,6 +101,7 @@ export const useOccupants = () => {
 		saveFile.handledOccupants,
 		statefulOccupants.length,
 		saveFile,
+		location.mapId,
 	]);
 
 	const conditionalOccupants = useMemo(() => {

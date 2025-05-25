@@ -406,6 +406,7 @@ export const passThroughProtectMoves = [
 	'transform',
 	'mighty-cleave',
 	'hyperspace-hole',
+	'hyperspace-fury',
 ];
 
 export const fixedDamageMoves: Record<string, number> = {

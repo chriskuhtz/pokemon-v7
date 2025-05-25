@@ -2639,6 +2639,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 50,
 		conditionFunction: (s) => (s.rangerLevel ?? 0) >= 5,
 		rewardItems: { 'old-gateau': 3, 'rare-candy': 3, 'moomoo-milk': 6 },
+		campUpgrade: 'warden certification',
 	},
 	'reach ranger level 10': {
 		category: 'BATTLE',

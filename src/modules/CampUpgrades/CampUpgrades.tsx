@@ -2,6 +2,7 @@ import { useCallback, useContext, useMemo, useState } from 'react';
 import { FaCheckCircle, FaFistRaised } from 'react-icons/fa';
 import { GiMountainRoad } from 'react-icons/gi';
 import { HiBeaker } from 'react-icons/hi';
+import { MdFormatListBulleted } from 'react-icons/md';
 import { PiFarm } from 'react-icons/pi';
 import {
 	CampUpgrade,
@@ -13,6 +14,7 @@ import {
 	campUpgradeNames,
 } from '../../constants/campUpgrades';
 import { battleSpriteSize } from '../../constants/gameData';
+import { QuestName, QuestsRecord } from '../../constants/questsRecord';
 import { typeColors } from '../../constants/typeColors';
 import { replaceRouteName } from '../../functions/replaceRouteName';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
@@ -26,6 +28,7 @@ const categories: CampUpgradeCategory[] = [
 	'Sustainability',
 	'Exploration',
 	'Training',
+	'Quest Reward',
 ];
 
 export const CampUpgrades = ({
@@ -35,8 +38,8 @@ export const CampUpgrades = ({
 }): JSX.Element => {
 	const [filter, setFilter] = useState<CampUpgradeCategory>('Research');
 
-	const { saveFile, putSaveFileReducer } = useContext(SaveFileContext);
 	const { addMessage } = useContext(MessageQueueContext);
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
 	const { campUpgrades, researchPoints } = saveFile;
 
@@ -60,9 +63,7 @@ export const CampUpgrades = ({
 				return;
 			}
 			addMessage({ message: `Unlocked ${id}`, needsNoConfirmation: true });
-			putSaveFileReducer({
-				...saveFile,
-				//researchPoints: researchPoints - campUpgradePrices[id],
+			patchSaveFileReducer({
 				researchPoints: researchPoints - currentPrices[filter],
 				campUpgrades: { ...campUpgrades, [id]: true },
 			});
@@ -72,9 +73,8 @@ export const CampUpgrades = ({
 			campUpgrades,
 			currentPrices,
 			filter,
-			putSaveFileReducer,
+			patchSaveFileReducer,
 			researchPoints,
-			saveFile,
 		]
 	);
 
@@ -120,41 +120,87 @@ export const CampUpgrades = ({
 					))}
 				</Stack>
 				{filteredUpgrades.map((upgrade) => (
-					<Card
-						key={upgrade}
-						disabled={campUpgrades[upgrade]}
-						content={
-							<div>
-								<h3>
-									{campUpgradeCategories[upgrade]}: {replaceRouteName(upgrade)}
-								</h3>
-
-								<h4>{campUpgradeExplanations[upgrade]}</h4>
-								<br />
-								{!campUpgrades[upgrade] && (
-									<h4>Research Points: {currentPrices[filter]}</h4>
-								)}
-							</div>
-						}
-						actionElements={
-							campUpgrades[upgrade]
-								? [<FaCheckCircle size={battleSpriteSize} />]
-								: [
-										<button
-											disabled={currentPrices[filter] > researchPoints}
-											onClick={() => unlock(upgrade)}
-										>
-											{currentPrices[filter] <= researchPoints
-												? 'Unlock'
-												: 'More Research Points needed'}
-										</button>,
-								  ]
-						}
-						icon={<CampUpgradeIcon category={campUpgradeCategories[upgrade]} />}
+					<UpgradeCard
+						upgrade={upgrade}
+						price={currentPrices[filter]}
+						unlock={unlock}
 					/>
 				))}
 			</Stack>
 		</Page>
+	);
+};
+
+const UpgradeCard = ({
+	upgrade,
+	price,
+	unlock,
+}: {
+	upgrade: CampUpgrade;
+	price: number;
+	unlock: (id: CampUpgrade) => void;
+}) => {
+	const { saveFile } = useContext(SaveFileContext);
+
+	const { campUpgrades, researchPoints } = saveFile;
+
+	if (campUpgradeCategories[upgrade] === 'Quest Reward') {
+		const requiredQuest = Object.entries(QuestsRecord)
+			.find(([, value]) => value.campUpgrade === upgrade)
+			?.at(0) as QuestName | undefined;
+		return (
+			<Card
+				key={upgrade}
+				disabled={campUpgrades[upgrade]}
+				content={
+					<div>
+						<h3>
+							{campUpgradeCategories[upgrade]}: {replaceRouteName(upgrade)}
+						</h3>
+
+						<h4>{campUpgradeExplanations[upgrade]}</h4>
+						<br />
+						<div>
+							Required Quest: <strong>{requiredQuest}</strong>
+						</div>
+					</div>
+				}
+				actionElements={[]}
+				icon={<CampUpgradeIcon category={campUpgradeCategories[upgrade]} />}
+			/>
+		);
+	}
+	return (
+		<Card
+			key={upgrade}
+			disabled={campUpgrades[upgrade]}
+			content={
+				<div>
+					<h3>
+						{campUpgradeCategories[upgrade]}: {replaceRouteName(upgrade)}
+					</h3>
+
+					<h4>{campUpgradeExplanations[upgrade]}</h4>
+					<br />
+					{!campUpgrades[upgrade] && <h4>Research Points: {price}</h4>}
+				</div>
+			}
+			actionElements={
+				campUpgrades[upgrade]
+					? [<FaCheckCircle size={battleSpriteSize} />]
+					: [
+							<button
+								disabled={price > researchPoints}
+								onClick={() => unlock(upgrade)}
+							>
+								{price <= researchPoints
+									? 'Unlock'
+									: 'More Research Points needed'}
+							</button>,
+					  ]
+			}
+			icon={<CampUpgradeIcon category={campUpgradeCategories[upgrade]} />}
+		/>
 	);
 };
 
@@ -167,6 +213,15 @@ const CampUpgradeIcon = ({
 	onClick?: () => void;
 	highlighted?: boolean;
 }) => {
+	if (category === 'Quest Reward') {
+		return (
+			<MdFormatListBulleted
+				size={battleSpriteSize}
+				onClick={onClick}
+				color={highlighted ? typeColors['grass'] : undefined}
+			/>
+		);
+	}
 	if (category === 'Training') {
 		return (
 			<FaFistRaised

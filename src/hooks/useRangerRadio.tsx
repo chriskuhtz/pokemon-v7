@@ -1,31 +1,11 @@
 import { useCallback, useContext } from 'react';
-import { mapDisplayNames, MapId } from '../constants/maps/mapsRecord';
+import { mapDisplayNames } from '../constants/maps/mapsRecord';
 import { getRandomEntry } from '../functions/filterTargets';
+import { getRandomAvailableRoute } from '../functions/getRandomAvailableRoute';
 import { makeTroubleMakers } from '../functions/troubleMakers/troubleMakers';
-import { evilTeams, SaveFile } from '../interfaces/SaveFile';
+import { evilTeams } from '../interfaces/SaveFile';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
-
-const getRouteForTroubleMakers = (s: SaveFile): MapId => {
-	const options: MapId[] = ['routeN1'];
-
-	if (s.campUpgrades['machete certification']) {
-		options.push('routeN1E1');
-	}
-	if (s.campUpgrades['sledge hammer certification']) {
-		options.push('routeE1');
-	}
-	if (s.campUpgrades['shovel certification']) {
-		options.push('onixCave');
-	}
-	if (s.campUpgrades['swimming certification']) {
-		options.push('routeS1E1', 'routeS1W1', 'caveW1');
-	}
-	if (s.campUpgrades['buy skiing equipment']) {
-		options.push('routeN1W1');
-	}
-	return getRandomEntry(options);
-};
 
 export const useRangerRadio = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
@@ -40,7 +20,11 @@ export const useRangerRadio = () => {
 				needsNoConfirmation: true,
 			});
 		} else {
-			const route = getRouteForTroubleMakers(saveFile);
+			const route = getRandomAvailableRoute(saveFile, []);
+
+			if (!route) {
+				return;
+			}
 
 			const randomAffiliation = getRandomEntry([
 				...evilTeams.filter((e) => e !== 'galactic'),

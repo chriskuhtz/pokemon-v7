@@ -1,8 +1,5 @@
-import { useContext, useCallback } from 'react';
-import {
-	OPPO_ID,
-	makeChallengerPokemon,
-} from '../functions/makeChallengerPokemon';
+import { useCallback, useContext } from 'react';
+import { makeChallengerPokemon } from '../functions/makeChallengerPokemon';
 import { Challenger } from '../interfaces/Challenger';
 import { EmptyInventory } from '../interfaces/Inventory';
 import { OverworldPokemon } from '../interfaces/OverworldMap';
@@ -19,8 +16,8 @@ export const useStaticEncounter = () => {
 				return;
 			} else {
 				const challenger: Challenger = {
-					type: 'WILD',
-					id: OPPO_ID,
+					type: 'TRAINER',
+					id: occ.id,
 					inventory: EmptyInventory,
 					team: [
 						makeChallengerPokemon({
@@ -37,22 +34,13 @@ export const useStaticEncounter = () => {
 							patchSaveFileReducer({
 								mileStones: { ...saveFile.mileStones, hasWokenASnorlax: true },
 								meta: { currentChallenger: challenger, activeTab: 'BATTLE' },
-								handledOccupants: [
-									...saveFile.handledOccupants,
-									{ id: occ.id, resetAt: -1 },
-								],
 							});
 						},
 					},
 				]);
 			}
 		},
-		[
-			addMultipleMessages,
-			patchSaveFileReducer,
-			saveFile.handledOccupants,
-			saveFile.mileStones,
-		]
+		[addMultipleMessages, patchSaveFileReducer, saveFile.mileStones]
 	);
 
 	return interact;

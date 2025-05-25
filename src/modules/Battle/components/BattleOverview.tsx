@@ -20,6 +20,8 @@ export const BattleOverview = ({
 	latestMessage,
 	addMessage,
 	addMultipleMessages,
+	challengerId,
+	challengerType,
 }: {
 	leave: (x: LeaveBattlePayload) => void;
 	opponents: BattlePokemon[];
@@ -28,8 +30,10 @@ export const BattleOverview = ({
 	inventory: Inventory;
 	trainer?: TrainerInfo;
 	latestMessage: Message | undefined;
+	challengerId: string;
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
+	challengerType: 'TRAINER' | 'WILD';
 }): JSX.Element => {
 	const [battleStarted, setBattleStarted] = useState<boolean>(false);
 
@@ -116,8 +120,9 @@ export const BattleOverview = ({
 			latestMessage={latestMessage}
 			addMessage={addMessage}
 			addMultipleMessages={addMultipleMessages}
-			challengerId={trainer?.id}
+			challengerId={challengerId}
 			spriteGeneration={trainer?.spriteGeneration}
+			challengerType={challengerType}
 		/>
 	);
 };

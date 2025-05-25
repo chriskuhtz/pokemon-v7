@@ -1,30 +1,24 @@
+const devmode = !!window.localStorage.getItem('devmode');
 export const isSunday = () => {
-	//return true;
-	return new Date().getDay() === 0;
+	return !!devmode || new Date().getDay() === 0;
 };
 export const isMonday = () => {
-	//return true;
-	return new Date().getDay() === 1;
+	return !!devmode || new Date().getDay() === 1;
 };
 export const isTuesday = () => {
-	//return true;
-	return new Date().getDay() === 2;
+	return !!devmode || new Date().getDay() === 2;
 };
 export const isWednesday = () => {
-	//return true;
-	return new Date().getDay() === 3;
+	return !!devmode || new Date().getDay() === 3;
 };
 export const isThursday = () => {
-	//return true;
-	return new Date().getDay() === 4;
+	return !!devmode || new Date().getDay() === 4;
 };
 export const isFriday = () => {
-	//return true;
-	return new Date().getDay() === 5;
+	return !!devmode || new Date().getDay() === 5;
 };
 export const isSaturday = () => {
-	//return true;
-	return new Date().getDay() === 6;
+	return !!devmode || new Date().getDay() === 6;
 };
 
 export const isOddDay = () => {

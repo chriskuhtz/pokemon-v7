@@ -486,9 +486,12 @@ export const extraFeatureCheckList: {
 	{ name: 'flyer cert as quest reward', handled: true },
 	{ name: ' team aqua', handled: true },
 	{ name: ' team magma', handled: true },
-	{ name: ' team galactic' },
+	{ name: 'trainer ai should use fake out correctly', handled: true },
+	{ name: 'rampaging pokemon for wardens', handled: true },
+	{ name: 'quests for rampagers', handled: true },
+	{ name: 'icon for rampagers' },
+
 	//BUGS/IMPROVEMENTS:
-	{ name: 'trainer ai should use fake out correctly' },
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
 	{ name: 'loosing to wild mons is sometimes buggy' },
@@ -496,7 +499,6 @@ export const extraFeatureCheckList: {
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
 	{ name: 'timeofday in pokedex' },
 	{ name: 'download did not boost after tablets of ruin lowered' },
-	{ name: 'make red sprite smaller' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
@@ -518,4 +520,5 @@ export const extraFeatureCheckList: {
 	{ name: 'random evolutions' },
 	{ name: 'steven as the fossil protector' },
 	{ name: 'download your player file and share it with others' },
+	{ name: 'team galactic' },
 ];

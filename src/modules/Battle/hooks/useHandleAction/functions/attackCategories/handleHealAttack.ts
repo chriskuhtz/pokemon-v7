@@ -62,6 +62,11 @@ export const handleHealAttack = ({
 				return 25;
 			}
 		}
+		if (move.name === 'shore-up') {
+			if (battleWeather === 'sandstorm') {
+				return 66;
+			}
+		}
 
 		return move.data.meta.healing;
 	};
