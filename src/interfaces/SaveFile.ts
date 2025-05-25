@@ -94,6 +94,37 @@ export type OverworldTrainerStump = Omit<
 	OverworldTrainer,
 	'team' | 'conditionFunction'
 >;
+
+export type MileStonesObject = {
+	damageRecord: number;
+	challengeFieldRecord?: number;
+	randomFieldRecord?: number;
+	hasEvolvedAPokemonThroughLevelUp?: boolean;
+	hasEvolvedAPokemonWithAStone?: boolean;
+	hasEvolvedAPokemonWithAHeldItem?: boolean;
+	hasEvolvedAPokemonThroughFriendship?: boolean;
+	hasEvolvedAPokemonThatNeedsDaytime?: boolean;
+	hasEvolvedAPokemonThatNeedsNighttime?: boolean;
+	hasCaughtAPokemonWithHoney?: boolean;
+	hasfoundAPokemonBySmashingRocks?: boolean;
+	hasCraftedApricorn?: boolean;
+	hasGrownABerry?: boolean;
+	hasGrownAnApricorn?: boolean;
+	cookedEasyRecipe?: boolean;
+	cookedMediumRecipe?: boolean;
+	cookedTrickyRecipe?: boolean;
+	hasWokenASnorlax?: boolean;
+	caughtFromSwarms: PokemonName[];
+	luredWithBerries: PokemonName[];
+	hasEvolvedStarter?: boolean;
+	hasReportedBug?: boolean;
+	barryDefeatedAt?: number;
+	silverDefeatedAt?: number;
+	cynthiaDefeatedAt?: number;
+	nDefeatedAt?: number;
+	redDefeatedAt?: number;
+	hughDefeatedAt?: number;
+};
 export interface SaveFile {
 	badges: BadgeName[];
 	playerId: string;
@@ -106,48 +137,17 @@ export interface SaveFile {
 		activeTab: RoutesType;
 		currentChallenger?: Challenger;
 	};
-
 	handledOccupants: {
 		id: string;
 		//at this point in time (in ms), this occupant will be removed from the handled list
 		resetAt: number;
 	}[];
-
 	lastEdited: number;
 	lastNurse: string;
 	settings?: SettingsObject;
 	quests: Record<QuestName, QuestStatus>;
 	sprite: string;
-	mileStones: {
-		damageRecord: number;
-		challengeFieldRecord?: number;
-		randomFieldRecord?: number;
-		hasEvolvedAPokemonThroughLevelUp?: boolean;
-		hasEvolvedAPokemonWithAStone?: boolean;
-		hasEvolvedAPokemonWithAHeldItem?: boolean;
-		hasEvolvedAPokemonThroughFriendship?: boolean;
-		hasEvolvedAPokemonThatNeedsDaytime?: boolean;
-		hasEvolvedAPokemonThatNeedsNighttime?: boolean;
-		hasCaughtAPokemonWithHoney?: boolean;
-		hasfoundAPokemonBySmashingRocks?: boolean;
-		hasCraftedApricorn?: boolean;
-		hasGrownABerry?: boolean;
-		hasGrownAnApricorn?: boolean;
-		cookedEasyRecipe?: boolean;
-		cookedMediumRecipe?: boolean;
-		cookedTrickyRecipe?: boolean;
-		hasWokenASnorlax?: boolean;
-		caughtFromSwarms: PokemonName[];
-		luredWithBerries: PokemonName[];
-		hasEvolvedStarter?: boolean;
-		hasReportedBug?: boolean;
-		barryDefeatedAt?: number;
-		silverDefeatedAt?: number;
-		cynthiaDefeatedAt?: number;
-		nDefeatedAt?: number;
-		redDefeatedAt?: number;
-		hughDefeatedAt?: number;
-	};
+	mileStones: MileStonesObject;
 	farm: {
 		plants: BerryBush[];
 	};
@@ -159,13 +159,19 @@ export interface SaveFile {
 	currentSwarm?: PokemonSwarm;
 	currentStrongSwarm?: PokemonSwarm;
 	currentDistortionSwarm?: PokemonSwarm;
+	currentRampagingPokemon?: {
+		route: MapId;
+		name: PokemonName;
+		id: string;
+		x: number;
+		y: number;
+	};
 	rangerLevel?: number;
 	troubleMakers?: {
 		route: MapId;
 		trainers: OverworldTrainerStump[];
 		affiliation: EvilTeam;
 	};
-	starterPokemon?: PokemonName;
 	seedVault: ItemType[];
 	pokedex: Pokedex;
 	cookingSkill?: number;

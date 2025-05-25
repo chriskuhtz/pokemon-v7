@@ -94,6 +94,7 @@ export const BattleLoader = ({
 					2,
 				])}
 				inventory={inventory}
+				challengerId={challenger.id}
 				trainer={challenger.trainer}
 				latestMessage={latestMessage}
 				addMessage={addMessage}

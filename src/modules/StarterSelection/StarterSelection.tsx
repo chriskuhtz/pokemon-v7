@@ -88,7 +88,6 @@ export const StarterSelection = (): JSX.Element => {
 				// 	campUpgradeNames.map((key) => [key, true])
 				// ) as Record<CampUpgrade, boolean>,
 				meta: { activeTab: 'OVERWORLD' },
-				starterPokemon: mon.name,
 				researchPoints: 20000,
 				pokedex,
 			});
@@ -98,7 +97,6 @@ export const StarterSelection = (): JSX.Element => {
 				playerId: name,
 				pokemon: [mon],
 				meta: { activeTab: 'OVERWORLD' },
-				starterPokemon: mon.name,
 				pokedex,
 			});
 	}, [chosenStarter, name, patchSaveFileReducer, saveFile]);
