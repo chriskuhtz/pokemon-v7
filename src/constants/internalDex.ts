@@ -144,6 +144,8 @@ console.log('Mons with more than one encounter option', overUsed);
 // 				!!value.honey,
 // 				!!value.rampager,
 // 				!!value.swarm,
+// 				!!value.underRock,
+// 				!!(value.encounterOptions.length > 0),
 // 			].filter((v) => v).length === 0
 // 		);
 // 	})

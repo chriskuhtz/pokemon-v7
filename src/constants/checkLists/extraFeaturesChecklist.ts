@@ -505,6 +505,7 @@ export const extraFeatureCheckList: {
 	{ name: 'refactor under rock mons into internalDex', handled: true },
 	{
 		name: 'refactor encounters into internalDex ',
+		handled: true,
 	},
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },

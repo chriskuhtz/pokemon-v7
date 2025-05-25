@@ -26,7 +26,7 @@ export type InternalDexEntry = {
 	types: PokemonType[];
 	honey?: boolean;
 	underRock?: boolean;
-	encounterOptions?: EncounterOption[];
+	encounterOptions: EncounterOption[];
 };
 
 export const internalDex: Record<PokemonName, InternalDexEntry> = {
@@ -252,17 +252,9 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		types: ['ground'],
 		encounterOptions: [
 			{
-				rarity: 'rare',
+				rarity: 'ultra-rare',
 				maxXp: 15625,
 				minXp: 8000,
-				timeOfDay: 'MORNING',
-				area: 'LAND',
-				route: 'routeE1',
-			},
-			{
-				rarity: 'ultra-rare',
-				maxXp: 8000,
-				minXp: 3375,
 				timeOfDay: 'DAY',
 				area: 'LAND',
 				route: 'routeE1',
@@ -1863,11 +1855,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 220,
 		types: ['ice', 'ground'],
 		underRock: true,
-		encounterOptions: [],
-	},
-	piloswine: {
-		dexId: 221,
-		types: ['ice', 'ground'],
 		encounterOptions: [
 			{
 				rarity: 'medium',
@@ -1877,6 +1864,12 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 				area: 'LAND',
 				route: 'routeS1W1',
 			},
+		],
+	},
+	piloswine: {
+		dexId: 221,
+		types: ['ice', 'ground'],
+		encounterOptions: [
 			{
 				rarity: 'common',
 				maxXp: 216000,
@@ -2301,14 +2294,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		encounterOptions: [
 			{
 				rarity: 'common',
-				maxXp: 15625,
-				minXp: 3375,
-				timeOfDay: 'ALL_DAY',
-				area: 'WATER',
-				route: 'routeS1E1',
-			},
-			{
-				rarity: 'common',
 				maxXp: 27000,
 				minXp: 15625,
 				timeOfDay: 'ALL_DAY',
@@ -2323,11 +2308,11 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		encounterOptions: [
 			{
 				rarity: 'rare',
-				maxXp: 15625,
-				minXp: 8000,
+				maxXp: 27000,
+				minXp: 15625,
 				timeOfDay: 'ALL_DAY',
 				area: 'WATER',
-				route: 'routeS1E1',
+				route: 'routeS1',
 			},
 		],
 	},
@@ -2796,14 +2781,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 343,
 		types: ['ground', 'psychic'],
 		encounterOptions: [
-			{
-				rarity: 'rare',
-				maxXp: 8000,
-				minXp: 3375,
-				timeOfDay: 'EVENING',
-				area: 'LAND',
-				route: 'routeE1',
-			},
 			{
 				rarity: 'medium',
 				maxXp: 42875,
@@ -3531,14 +3508,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 				maxXp: 27000,
 				minXp: 8000,
 				timeOfDay: 'DAY',
-				area: 'LAND',
-				route: 'routeN1W1',
-			},
-			{
-				rarity: 'ultra-rare',
-				maxXp: 27000,
-				minXp: 8000,
-				timeOfDay: 'EVENING',
 				area: 'LAND',
 				route: 'routeN1W1',
 			},
@@ -4279,7 +4248,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	ducklett: {
 		dexId: 580,
 		types: ['water', 'flying'],
-		encounterOptions: [],
+		encounterOptions: [
+			{
+				rarity: 'common',
+				maxXp: 15625,
+				minXp: 3375,
+				timeOfDay: 'ALL_DAY',
+				area: 'WATER',
+				route: 'routeS1E1',
+			},
+		],
 	},
 	swanna: {
 		dexId: 581,
@@ -6495,7 +6473,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	capsakid: {
 		dexId: 951,
 		types: ['grass'],
-		encounterOptions: [],
+		encounterOptions: [
+			{
+				rarity: 'rare',
+				maxXp: 8000,
+				minXp: 3375,
+				timeOfDay: 'EVENING',
+				area: 'LAND',
+				route: 'routeE1',
+			},
+		],
 	},
 	scovillain: {
 		dexId: 952,
