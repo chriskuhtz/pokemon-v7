@@ -12,7 +12,7 @@ export type InternalDexEntry = {
 	dexId: number;
 	rampager?: boolean;
 	swarm?: SwarmType;
-	berryLure?: MapId;
+	berryLureMapId?: MapId;
 	types: PokemonType[];
 };
 
@@ -164,6 +164,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	vulpix: {
 		dexId: 37,
 		types: ['fire'],
+		berryLureMapId: 'routeN1',
 	},
 	ninetales: {
 		dexId: 38,
@@ -297,6 +298,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	bellsprout: {
 		dexId: 69,
 		types: ['grass', 'poison'],
+		berryLureMapId: 'routeN1',
 	},
 	weepinbell: {
 		dexId: 70,
@@ -374,6 +376,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	grimer: {
 		dexId: 88,
 		types: ['poison'],
+		berryLureMapId: 'routeN1',
 	},
 	muk: {
 		dexId: 89,
@@ -737,6 +740,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	natu: {
 		dexId: 177,
 		types: ['psychic', 'flying'],
+		berryLureMapId: 'routeN1',
 	},
 	xatu: {
 		dexId: 178,
@@ -761,6 +765,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	marill: {
 		dexId: 183,
 		types: ['water', 'fairy'],
+		berryLureMapId: 'routeN1',
 	},
 	azumarill: {
 		dexId: 184,
@@ -854,6 +859,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	dunsparce: {
 		dexId: 206,
 		types: ['normal'],
+		berryLureMapId: 'routeN1',
 	},
 	gligar: {
 		dexId: 207,
@@ -958,6 +964,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	phanpy: {
 		dexId: 231,
 		types: ['ground'],
+		berryLureMapId: 'routeN1',
 	},
 	donphan: {
 		dexId: 232,
@@ -1735,6 +1742,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	shellos: {
 		dexId: 422,
 		types: ['water'],
+		berryLureMapId: 'routeN1',
 	},
 	gastrodon: {
 		dexId: 423,
@@ -1799,6 +1807,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	bonsly: {
 		dexId: 438,
 		types: ['rock'],
+		berryLureMapId: 'routeN1',
 	},
 	'mime-jr': {
 		dexId: 439,
@@ -2128,6 +2137,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	pidove: {
 		dexId: 519,
 		types: ['normal', 'flying'],
+		berryLureMapId: 'routeN1',
 	},
 	tranquill: {
 		dexId: 520,
@@ -2180,6 +2190,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	timburr: {
 		dexId: 532,
 		types: ['fighting'],
+		berryLureMapId: 'routeN1',
 	},
 	gurdurr: {
 		dexId: 533,
@@ -2893,6 +2904,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	phantump: {
 		dexId: 708,
 		types: ['ghost', 'grass'],
+		berryLureMapId: 'routeN1',
 	},
 	trevenant: {
 		dexId: 709,
@@ -3375,6 +3387,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	blipbug: {
 		dexId: 824,
 		types: ['bug'],
+		berryLureMapId: 'routeN1',
 	},
 	dottler: {
 		dexId: 825,
@@ -3439,6 +3452,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	applin: {
 		dexId: 840,
 		types: ['grass', 'dragon'],
+		berryLureMapId: 'routeN1',
 	},
 	flapple: {
 		dexId: 841,
@@ -3591,6 +3605,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	cufant: {
 		dexId: 878,
 		types: ['steel'],
+		berryLureMapId: 'routeN1',
 	},
 	copperajah: {
 		dexId: 879,
@@ -4517,6 +4532,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'pikachu-rock-star': {
 		dexId: 10080,
 		types: ['electric'],
+		berryLureMapId: 'routeN1',
 	},
 	'pikachu-belle': {
 		dexId: 10081,
@@ -4561,6 +4577,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'rattata-alola': {
 		dexId: 10091,
 		types: ['dark', 'normal'],
+		berryLureMapId: 'routeN1',
 	},
 	'raticate-alola': {
 		dexId: 10092,
@@ -4609,6 +4626,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'vulpix-alola': {
 		dexId: 10103,
 		types: ['ice'],
+		berryLureMapId: 'routeN1',
 	},
 	'ninetales-alola': {
 		dexId: 10104,
@@ -5307,6 +5325,15 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		types: ['normal'],
 	},
 };
+export const byType: Record<PokemonType, PokemonName[]> = Object.fromEntries(
+	[...pokemonTypes].map((type) => {
+		const mons: PokemonName[] = Object.entries(internalDex)
+			.filter(([, { types }]) => types.includes(type))
+			.map(([name]) => name as PokemonName);
+
+		return [type, mons];
+	})
+) as Record<PokemonType, PokemonName[]>;
 
 export const getRampagers = () => {
 	return Object.entries(internalDex)
@@ -5323,15 +5350,18 @@ export const getRandomSwarmMon = (type: SwarmType): PokemonName => {
 	return getRandomEntry(getSwarmOptions(type));
 };
 
-export const byType: Record<PokemonType, PokemonName[]> = Object.fromEntries(
-	[...pokemonTypes].map((type) => {
-		const mons: PokemonName[] = Object.entries(internalDex)
-			.filter(([, { types }]) => types.includes(type))
-			.map(([name]) => name as PokemonName);
+export const getBerryLureMon = (map: MapId, type: PokemonType) => {
+	const options: PokemonName[] = Object.entries(internalDex)
+		.filter(
+			([, value]) => value.berryLureMapId === map && value.types.includes(type)
+		)
+		.map(([key]) => key as PokemonName);
 
-		return [type, mons];
-	})
-) as Record<PokemonType, PokemonName[]>;
+	if (options.length === 0) {
+		return;
+	}
+	return getRandomEntry(options);
+};
 
 // console.log(
 // 	Object.fromEntries(
@@ -5341,3 +5371,88 @@ export const byType: Record<PokemonType, PokemonName[]> = Object.fromEntries(
 // 		])
 // 	)
 // );
+
+const lureBerryEncountersN1E1: Record<PokemonType, PokemonName> = {
+	fire: 'sizzlipede',
+	water: 'dewpider',
+	electric: 'pikachu-belle',
+	grass: 'sewaddle',
+	ice: 'snom',
+	fighting: 'shroomish',
+	poison: 'venonat',
+	ground: 'nincada',
+	flying: 'butterfree',
+	psychic: 'abra',
+	bug: 'kricketot',
+	rock: 'growlithe-hisui',
+	ghost: 'shuppet',
+	dragon: 'jangmo-o',
+	dark: 'meowth-alola',
+	steel: 'meowth-galar',
+	normal: 'miltank',
+	fairy: 'cottonee',
+	typeless: 'spiritomb',
+};
+const lureBerryEncountersE1: Record<PokemonType, PokemonName> = {
+	fire: 'slugma',
+	water: 'quagsire',
+	electric: 'pikachu-pop-star',
+	grass: 'bellsprout',
+	ice: 'bergmite',
+	fighting: 'tyrogue',
+	poison: 'grimer',
+	ground: 'trapinch',
+	flying: 'hawlucha',
+	psychic: 'girafarig',
+	bug: 'dwebble',
+	rock: 'nosepass',
+	ghost: 'haunter',
+	dragon: 'vibrava',
+	dark: 'absol',
+	steel: 'orthworm',
+	normal: 'furfrou',
+	fairy: 'slurpuff',
+	typeless: 'spiritomb',
+};
+const lureBerryEncountersS1E1: Record<PokemonType, PokemonName> = {
+	fire: 'magmar',
+	water: 'panpour',
+	electric: 'pikachu-phd',
+	grass: 'gogoat',
+	ice: 'vulpix-alola',
+	fighting: 'makuhita',
+	poison: 'venipede',
+	ground: 'bunnelby',
+	flying: 'vivillon',
+	psychic: 'natu',
+	bug: 'paras',
+	rock: 'rhyhorn',
+	ghost: 'shedinja',
+	dragon: 'dratini',
+	dark: 'grimer-alola',
+	steel: 'togedemaru',
+	normal: 'doduo',
+	fairy: 'snubbull',
+	typeless: 'spiritomb',
+};
+const lureBerryEncountersS1W1: Record<PokemonType, PokemonName> = {
+	fire: 'heatmor',
+	water: 'simipour',
+	electric: 'pikachu-libre',
+	grass: 'nuzleaf',
+	ice: 'avalugg',
+	fighting: 'hawlucha',
+	poison: 'weezing',
+	ground: 'marowak',
+	flying: 'corvisquire',
+	psychic: 'mr-mime',
+	bug: 'accelgor',
+	rock: 'rhydon',
+	ghost: 'yamask',
+	dragon: 'shelgon',
+	dark: 'deino',
+	steel: 'mawile',
+	normal: 'bouffalant',
+	fairy: 'swirlix',
+	typeless: 'spiritomb',
+};

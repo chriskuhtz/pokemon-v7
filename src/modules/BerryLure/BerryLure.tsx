@@ -1,5 +1,6 @@
 import { useCallback, useContext, useMemo } from 'react';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
+import { getBerryLureMon } from '../../constants/internalDex';
 import { PokemonName } from '../../constants/pokemonNames';
 import {
 	makeChallengerPokemon,
@@ -18,111 +19,6 @@ import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
-export const lureBerryEncountersN1: Record<PokemonType, PokemonName> = {
-	fire: 'tauros-paldea-blaze-breed',
-	water: 'tauros-paldea-aqua-breed',
-	electric: 'pikachu-rock-star',
-	grass: 'deerling',
-	ice: 'vulpix-alola',
-	fighting: 'tauros-paldea-combat-breed',
-	poison: 'bulbasaur',
-	ground: 'phanpy',
-	flying: 'pidove',
-	psychic: 'natu',
-	bug: 'blipbug',
-	rock: 'growlithe-hisui',
-	ghost: 'phantump',
-	dragon: 'applin',
-	dark: 'rattata-alola',
-	steel: 'cufant',
-	normal: 'dunsparce',
-	fairy: 'marill',
-	typeless: 'spiritomb',
-};
-export const lureBerryEncountersN1E1: Record<PokemonType, PokemonName> = {
-	fire: 'sizzlipede',
-	water: 'dewpider',
-	electric: 'pikachu-belle',
-	grass: 'sewaddle',
-	ice: 'snom',
-	fighting: 'shroomish',
-	poison: 'venonat',
-	ground: 'nincada',
-	flying: 'butterfree',
-	psychic: 'abra',
-	bug: 'kricketot',
-	rock: 'growlithe-hisui',
-	ghost: 'shuppet',
-	dragon: 'jangmo-o',
-	dark: 'meowth-alola',
-	steel: 'meowth-galar',
-	normal: 'miltank',
-	fairy: 'cottonee',
-	typeless: 'spiritomb',
-};
-export const lureBerryEncountersE1: Record<PokemonType, PokemonName> = {
-	fire: 'slugma',
-	water: 'quagsire',
-	electric: 'pikachu-pop-star',
-	grass: 'bellsprout',
-	ice: 'bergmite',
-	fighting: 'tyrogue',
-	poison: 'grimer',
-	ground: 'trapinch',
-	flying: 'hawlucha',
-	psychic: 'girafarig',
-	bug: 'dwebble',
-	rock: 'nosepass',
-	ghost: 'haunter',
-	dragon: 'vibrava',
-	dark: 'absol',
-	steel: 'orthworm',
-	normal: 'furfrou',
-	fairy: 'slurpuff',
-	typeless: 'spiritomb',
-};
-export const lureBerryEncountersS1E1: Record<PokemonType, PokemonName> = {
-	fire: 'magmar',
-	water: 'panpour',
-	electric: 'pikachu-phd',
-	grass: 'gogoat',
-	ice: 'vulpix-alola',
-	fighting: 'makuhita',
-	poison: 'venipede',
-	ground: 'bunnelby',
-	flying: 'vivillon',
-	psychic: 'natu',
-	bug: 'paras',
-	rock: 'rhyhorn',
-	ghost: 'shedinja',
-	dragon: 'dratini',
-	dark: 'grimer-alola',
-	steel: 'togedemaru',
-	normal: 'doduo',
-	fairy: 'snubbull',
-	typeless: 'spiritomb',
-};
-export const lureBerryEncountersS1W1: Record<PokemonType, PokemonName> = {
-	fire: 'heatmor',
-	water: 'simipour',
-	electric: 'pikachu-libre',
-	grass: 'nuzleaf',
-	ice: 'avalugg',
-	fighting: 'hawlucha',
-	poison: 'weezing',
-	ground: 'marowak',
-	flying: 'corvisquire',
-	psychic: 'mr-mime',
-	bug: 'accelgor',
-	rock: 'rhydon',
-	ghost: 'yamask',
-	dragon: 'shelgon',
-	dark: 'deino',
-	steel: 'mawile',
-	normal: 'bouffalant',
-	fairy: 'swirlix',
-	typeless: 'spiritomb',
-};
 export const BerryLure = () => {
 	const navigate = useNavigate();
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
@@ -144,28 +40,38 @@ export const BerryLure = () => {
 		(berry: BerryType) => {
 			const lureType = Object.entries(superEffectiveSaveTable).find(
 				([, typeBerry]) => typeBerry === berry
-			);
+			)?.[0] as PokemonType | undefined;
 			if (!lureType) {
 				throw new Error('What did you put in the lure');
 			}
 
 			const succeded = Math.random() > 0.25;
 
-			const getRouteBasedLureEncounter = (): PokemonName => {
-				if (location.mapId === 'routeN1E1') {
-					return lureBerryEncountersN1E1[lureType[0] as PokemonType];
-				}
-				if (location.mapId === 'routeE1') {
-					return lureBerryEncountersE1[lureType[0] as PokemonType];
-				}
-				if (location.mapId === 'routeS1E1') {
-					return lureBerryEncountersS1E1[lureType[0] as PokemonType];
-				}
-				if (location.mapId === 'routeS1W1') {
-					return lureBerryEncountersS1W1[lureType[0] as PokemonType];
-				}
-				return lureBerryEncountersN1[lureType[0] as PokemonType];
+			const getRouteBasedLureEncounter = (): PokemonName | undefined => {
+				//Todo: put me back
+				// if (location.mapId === 'routeN1E1') {
+				// 	return lureBerryEncountersN1E1[lureType[0] as PokemonType];
+				// }
+				// if (location.mapId === 'routeE1') {
+				// 	return lureBerryEncountersE1[lureType[0] as PokemonType];
+				// }
+				// if (location.mapId === 'routeS1E1') {
+				// 	return lureBerryEncountersS1E1[lureType[0] as PokemonType];
+				// }
+				// if (location.mapId === 'routeS1W1') {
+				// 	return lureBerryEncountersS1W1[lureType[0] as PokemonType];
+				// }
+				return getBerryLureMon('routeN1', lureType);
 			};
+
+			const encounterName = getRouteBasedLureEncounter();
+
+			if (!encounterName) {
+				addMultipleMessages([
+					{ message: `No Pokemon around here seem interested in this berry` },
+				]);
+				return;
+			}
 
 			const xp = () => {
 				if (location.mapId === 'routeN1E1') {
@@ -188,7 +94,7 @@ export const BerryLure = () => {
 				inventory: EmptyInventory,
 				team: [
 					makeChallengerPokemon({
-						name: getRouteBasedLureEncounter(),
+						name: encounterName,
 						xp: xp(),
 					}),
 				],
