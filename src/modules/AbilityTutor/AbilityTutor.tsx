@@ -6,7 +6,7 @@ import {
 	AbilityName,
 	abilityNames,
 } from '../../constants/checkLists/completed/abilityCheckList';
-import { nameToIdMap } from '../../constants/pokemonNames';
+import { internalDex } from '../../constants/pokemonNames';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
@@ -105,7 +105,7 @@ const AbilityEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 		]
 	);
 	const { res: data, invalidate } = useGetPokemonData(
-		nameToIdMap[ownedPokemon.name]
+		internalDex[ownedPokemon.name].dexId
 	);
 
 	useEffect(() => {

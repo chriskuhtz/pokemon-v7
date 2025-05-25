@@ -1304,2608 +1304,3916 @@ export const pokemonNames = [
 ] as const;
 
 export type PokemonName = (typeof pokemonNames)[number];
-export const nameToIdMap: Record<PokemonName, number> = {
-	bulbasaur: 1,
 
-	ivysaur: 2,
-
-	venusaur: 3,
-
-	charmander: 4,
-
-	charmeleon: 5,
-
-	charizard: 6,
-
-	squirtle: 7,
-
-	wartortle: 8,
-
-	blastoise: 9,
-
-	caterpie: 10,
-
-	metapod: 11,
-
-	butterfree: 12,
-
-	weedle: 13,
-
-	kakuna: 14,
-
-	beedrill: 15,
-
-	pidgey: 16,
-
-	pidgeotto: 17,
-
-	pidgeot: 18,
-
-	rattata: 19,
-
-	raticate: 20,
-
-	spearow: 21,
-
-	fearow: 22,
-
-	ekans: 23,
-
-	arbok: 24,
-
-	pikachu: 25,
-
-	raichu: 26,
-
-	sandshrew: 27,
-
-	sandslash: 28,
-
-	'nidoran-f': 29,
-
-	nidorina: 30,
-
-	nidoqueen: 31,
-
-	'nidoran-m': 32,
-
-	nidorino: 33,
-
-	nidoking: 34,
-
-	clefairy: 35,
-
-	clefable: 36,
-
-	vulpix: 37,
-
-	ninetales: 38,
-
-	jigglypuff: 39,
-
-	wigglytuff: 40,
-
-	zubat: 41,
-
-	golbat: 42,
-
-	oddish: 43,
-
-	gloom: 44,
-
-	vileplume: 45,
-
-	paras: 46,
-
-	parasect: 47,
-
-	venonat: 48,
-
-	venomoth: 49,
-
-	diglett: 50,
-
-	dugtrio: 51,
-
-	meowth: 52,
-
-	persian: 53,
-
-	psyduck: 54,
-
-	golduck: 55,
-
-	mankey: 56,
-
-	primeape: 57,
-
-	growlithe: 58,
-
-	arcanine: 59,
-
-	poliwag: 60,
-
-	poliwhirl: 61,
-
-	poliwrath: 62,
-
-	abra: 63,
-
-	kadabra: 64,
-
-	alakazam: 65,
-
-	machop: 66,
-
-	machoke: 67,
-
-	machamp: 68,
-
-	bellsprout: 69,
-
-	weepinbell: 70,
-
-	victreebel: 71,
-
-	tentacool: 72,
-
-	tentacruel: 73,
-
-	geodude: 74,
-
-	graveler: 75,
-
-	golem: 76,
-
-	ponyta: 77,
-
-	rapidash: 78,
-
-	slowpoke: 79,
-
-	slowbro: 80,
-
-	magnemite: 81,
-
-	magneton: 82,
-
-	farfetchd: 83,
-
-	doduo: 84,
-
-	dodrio: 85,
-
-	seel: 86,
-
-	dewgong: 87,
-
-	grimer: 88,
-
-	muk: 89,
-
-	shellder: 90,
-
-	cloyster: 91,
-
-	gastly: 92,
-
-	haunter: 93,
-
-	gengar: 94,
-
-	onix: 95,
-
-	drowzee: 96,
-
-	hypno: 97,
-
-	krabby: 98,
-
-	kingler: 99,
-
-	voltorb: 100,
-
-	electrode: 101,
-
-	exeggcute: 102,
-
-	exeggutor: 103,
-
-	cubone: 104,
-
-	marowak: 105,
-
-	hitmonlee: 106,
-
-	hitmonchan: 107,
-
-	lickitung: 108,
-
-	koffing: 109,
-
-	weezing: 110,
-
-	rhyhorn: 111,
-
-	rhydon: 112,
-
-	chansey: 113,
-
-	tangela: 114,
-
-	kangaskhan: 115,
-
-	horsea: 116,
-
-	seadra: 117,
-
-	goldeen: 118,
-
-	seaking: 119,
-
-	staryu: 120,
-
-	starmie: 121,
-
-	'mr-mime': 122,
-
-	scyther: 123,
-
-	jynx: 124,
-
-	electabuzz: 125,
-
-	magmar: 126,
-
-	pinsir: 127,
-
-	tauros: 128,
-
-	magikarp: 129,
-
-	gyarados: 130,
-
-	lapras: 131,
-
-	ditto: 132,
-
-	eevee: 133,
-
-	vaporeon: 134,
-
-	jolteon: 135,
-
-	flareon: 136,
-
-	porygon: 137,
-
-	omanyte: 138,
-
-	omastar: 139,
-
-	kabuto: 140,
-
-	kabutops: 141,
-
-	aerodactyl: 142,
-
-	snorlax: 143,
-
-	articuno: 144,
-
-	zapdos: 145,
-
-	moltres: 146,
-
-	dratini: 147,
-
-	dragonair: 148,
-
-	dragonite: 149,
-
-	mewtwo: 150,
-
-	mew: 151,
-
-	chikorita: 152,
-
-	bayleef: 153,
-
-	meganium: 154,
-
-	cyndaquil: 155,
-
-	quilava: 156,
-
-	typhlosion: 157,
-
-	totodile: 158,
-
-	croconaw: 159,
-
-	feraligatr: 160,
-
-	sentret: 161,
-
-	furret: 162,
-
-	hoothoot: 163,
-
-	noctowl: 164,
-
-	ledyba: 165,
-
-	ledian: 166,
-
-	spinarak: 167,
-
-	ariados: 168,
-
-	crobat: 169,
-
-	chinchou: 170,
-
-	lanturn: 171,
-
-	pichu: 172,
-
-	cleffa: 173,
-
-	igglybuff: 174,
-
-	togepi: 175,
-
-	togetic: 176,
-
-	natu: 177,
-
-	xatu: 178,
-
-	mareep: 179,
-
-	flaaffy: 180,
-
-	ampharos: 181,
-
-	bellossom: 182,
-
-	marill: 183,
-
-	azumarill: 184,
-
-	sudowoodo: 185,
-
-	politoed: 186,
-
-	hoppip: 187,
-
-	skiploom: 188,
-
-	jumpluff: 189,
-
-	aipom: 190,
-
-	sunkern: 191,
-
-	sunflora: 192,
-
-	yanma: 193,
-
-	wooper: 194,
-
-	quagsire: 195,
-
-	espeon: 196,
-
-	umbreon: 197,
-
-	murkrow: 198,
-
-	slowking: 199,
-
-	misdreavus: 200,
-
-	unown: 201,
-
-	wobbuffet: 202,
-
-	girafarig: 203,
-
-	pineco: 204,
-
-	forretress: 205,
-
-	dunsparce: 206,
-
-	gligar: 207,
-
-	steelix: 208,
-
-	snubbull: 209,
-
-	granbull: 210,
-
-	qwilfish: 211,
-
-	scizor: 212,
-
-	shuckle: 213,
-
-	heracross: 214,
-
-	sneasel: 215,
-
-	teddiursa: 216,
-
-	ursaring: 217,
-
-	slugma: 218,
-
-	magcargo: 219,
-
-	swinub: 220,
-
-	piloswine: 221,
-
-	corsola: 222,
-
-	remoraid: 223,
-
-	octillery: 224,
-
-	delibird: 225,
-
-	mantine: 226,
-
-	skarmory: 227,
-
-	houndour: 228,
-
-	houndoom: 229,
-
-	kingdra: 230,
-
-	phanpy: 231,
-
-	donphan: 232,
-
-	porygon2: 233,
-
-	stantler: 234,
-
-	smeargle: 235,
-
-	tyrogue: 236,
-
-	hitmontop: 237,
-
-	smoochum: 238,
-
-	elekid: 239,
-
-	magby: 240,
-
-	miltank: 241,
-
-	blissey: 242,
-
-	raikou: 243,
-
-	entei: 244,
-
-	suicune: 245,
-
-	larvitar: 246,
-
-	pupitar: 247,
-
-	tyranitar: 248,
-
-	lugia: 249,
-
-	'ho-oh': 250,
-
-	celebi: 251,
-
-	treecko: 252,
-
-	grovyle: 253,
-
-	sceptile: 254,
-
-	torchic: 255,
-
-	combusken: 256,
-
-	blaziken: 257,
-
-	mudkip: 258,
-
-	marshtomp: 259,
-
-	swampert: 260,
-
-	poochyena: 261,
-
-	mightyena: 262,
-
-	zigzagoon: 263,
-
-	linoone: 264,
-
-	wurmple: 265,
-
-	silcoon: 266,
-
-	beautifly: 267,
-
-	cascoon: 268,
-
-	dustox: 269,
-
-	lotad: 270,
-
-	lombre: 271,
-
-	ludicolo: 272,
-
-	seedot: 273,
-
-	nuzleaf: 274,
-
-	shiftry: 275,
-
-	taillow: 276,
-
-	swellow: 277,
-
-	wingull: 278,
-
-	pelipper: 279,
-
-	ralts: 280,
-
-	kirlia: 281,
-
-	gardevoir: 282,
-
-	surskit: 283,
-
-	masquerain: 284,
-
-	shroomish: 285,
-
-	breloom: 286,
-
-	slakoth: 287,
-
-	vigoroth: 288,
-
-	slaking: 289,
-
-	nincada: 290,
-
-	ninjask: 291,
-
-	shedinja: 292,
-
-	whismur: 293,
-
-	loudred: 294,
-
-	exploud: 295,
-
-	makuhita: 296,
-
-	hariyama: 297,
-
-	azurill: 298,
-
-	nosepass: 299,
-
-	skitty: 300,
-
-	delcatty: 301,
-
-	sableye: 302,
-
-	mawile: 303,
-
-	aron: 304,
-
-	lairon: 305,
-
-	aggron: 306,
-
-	meditite: 307,
-
-	medicham: 308,
-
-	electrike: 309,
-
-	manectric: 310,
-
-	plusle: 311,
-
-	minun: 312,
-
-	volbeat: 313,
-
-	illumise: 314,
-
-	roselia: 315,
-
-	gulpin: 316,
-
-	swalot: 317,
-
-	carvanha: 318,
-
-	sharpedo: 319,
-
-	wailmer: 320,
-
-	wailord: 321,
-
-	numel: 322,
-
-	camerupt: 323,
-
-	torkoal: 324,
-
-	spoink: 325,
-
-	grumpig: 326,
-
-	spinda: 327,
-
-	trapinch: 328,
-
-	vibrava: 329,
-
-	flygon: 330,
-
-	cacnea: 331,
-
-	cacturne: 332,
-
-	swablu: 333,
-
-	altaria: 334,
-
-	zangoose: 335,
-
-	seviper: 336,
-
-	lunatone: 337,
-
-	solrock: 338,
-
-	barboach: 339,
-
-	whiscash: 340,
-
-	corphish: 341,
-
-	crawdaunt: 342,
-
-	baltoy: 343,
-
-	claydol: 344,
-
-	lileep: 345,
-
-	cradily: 346,
-
-	anorith: 347,
-
-	armaldo: 348,
-
-	feebas: 349,
-
-	milotic: 350,
-
-	castform: 351,
-
-	kecleon: 352,
-
-	shuppet: 353,
-
-	banette: 354,
-
-	duskull: 355,
-
-	dusclops: 356,
-
-	tropius: 357,
-
-	chimecho: 358,
-
-	absol: 359,
-
-	wynaut: 360,
-
-	snorunt: 361,
-
-	glalie: 362,
-
-	spheal: 363,
-
-	sealeo: 364,
-
-	walrein: 365,
-
-	clamperl: 366,
-
-	huntail: 367,
-
-	gorebyss: 368,
-
-	relicanth: 369,
-
-	luvdisc: 370,
-
-	bagon: 371,
-
-	shelgon: 372,
-
-	salamence: 373,
-
-	beldum: 374,
-
-	metang: 375,
-
-	metagross: 376,
-
-	regirock: 377,
-
-	regice: 378,
-
-	registeel: 379,
-
-	latias: 380,
-
-	latios: 381,
-
-	kyogre: 382,
-
-	groudon: 383,
-
-	rayquaza: 384,
-
-	jirachi: 385,
-
-	'deoxys-normal': 386,
-
-	turtwig: 387,
-
-	grotle: 388,
-
-	torterra: 389,
-
-	chimchar: 390,
-
-	monferno: 391,
-
-	infernape: 392,
-
-	piplup: 393,
-
-	prinplup: 394,
-
-	empoleon: 395,
-
-	starly: 396,
-
-	staravia: 397,
-
-	staraptor: 398,
-
-	bidoof: 399,
-
-	bibarel: 400,
-
-	kricketot: 401,
-
-	kricketune: 402,
-
-	shinx: 403,
-
-	luxio: 404,
-
-	luxray: 405,
-
-	budew: 406,
-
-	roserade: 407,
-
-	cranidos: 408,
-
-	rampardos: 409,
-
-	shieldon: 410,
-
-	bastiodon: 411,
-
-	burmy: 412,
-
-	'wormadam-plant': 413,
-
-	mothim: 414,
-
-	combee: 415,
-
-	vespiquen: 416,
-
-	pachirisu: 417,
-
-	buizel: 418,
-
-	floatzel: 419,
-
-	cherubi: 420,
-
-	cherrim: 421,
-
-	shellos: 422,
-
-	gastrodon: 423,
-
-	ambipom: 424,
-
-	drifloon: 425,
-
-	drifblim: 426,
-
-	buneary: 427,
-
-	lopunny: 428,
-
-	mismagius: 429,
-
-	honchkrow: 430,
-
-	glameow: 431,
-
-	purugly: 432,
-
-	chingling: 433,
-
-	stunky: 434,
-
-	skuntank: 435,
-
-	bronzor: 436,
-
-	bronzong: 437,
-
-	bonsly: 438,
-
-	'mime-jr': 439,
-
-	happiny: 440,
-
-	chatot: 441,
-
-	spiritomb: 442,
-
-	gible: 443,
-
-	gabite: 444,
-
-	garchomp: 445,
-
-	munchlax: 446,
-
-	riolu: 447,
-
-	lucario: 448,
-
-	hippopotas: 449,
-
-	hippowdon: 450,
-
-	skorupi: 451,
-
-	drapion: 452,
-
-	croagunk: 453,
-
-	toxicroak: 454,
-
-	carnivine: 455,
-
-	finneon: 456,
-
-	lumineon: 457,
-
-	mantyke: 458,
-
-	snover: 459,
-
-	abomasnow: 460,
-
-	weavile: 461,
-
-	magnezone: 462,
-
-	lickilicky: 463,
-
-	rhyperior: 464,
-
-	tangrowth: 465,
-
-	electivire: 466,
-
-	magmortar: 467,
-
-	togekiss: 468,
-
-	yanmega: 469,
-
-	leafeon: 470,
-
-	glaceon: 471,
-
-	gliscor: 472,
-
-	mamoswine: 473,
-
-	'porygon-z': 474,
-
-	gallade: 475,
-
-	probopass: 476,
-
-	dusknoir: 477,
-
-	froslass: 478,
-
-	rotom: 479,
-
-	uxie: 480,
-
-	mesprit: 481,
-
-	azelf: 482,
-
-	dialga: 483,
-
-	palkia: 484,
-
-	heatran: 485,
-
-	regigigas: 486,
-
-	'giratina-altered': 487,
-
-	cresselia: 488,
-
-	phione: 489,
-
-	manaphy: 490,
-
-	darkrai: 491,
-
-	'shaymin-land': 492,
-
-	arceus: 493,
-
-	victini: 494,
-
-	snivy: 495,
-
-	servine: 496,
-
-	serperior: 497,
-
-	tepig: 498,
-
-	pignite: 499,
-
-	emboar: 500,
-
-	oshawott: 501,
-
-	dewott: 502,
-
-	samurott: 503,
-
-	patrat: 504,
-
-	watchog: 505,
-
-	lillipup: 506,
-
-	herdier: 507,
-
-	stoutland: 508,
-
-	purrloin: 509,
-
-	liepard: 510,
-
-	pansage: 511,
-
-	simisage: 512,
-
-	pansear: 513,
-
-	simisear: 514,
-
-	panpour: 515,
-
-	simipour: 516,
-
-	munna: 517,
-
-	musharna: 518,
-
-	pidove: 519,
-
-	tranquill: 520,
-
-	unfezant: 521,
-
-	blitzle: 522,
-
-	zebstrika: 523,
-
-	roggenrola: 524,
-
-	boldore: 525,
-
-	gigalith: 526,
-
-	woobat: 527,
-
-	swoobat: 528,
-
-	drilbur: 529,
-
-	excadrill: 530,
-
-	audino: 531,
-
-	timburr: 532,
-
-	gurdurr: 533,
-
-	conkeldurr: 534,
-
-	tympole: 535,
-
-	palpitoad: 536,
-
-	seismitoad: 537,
-
-	throh: 538,
-
-	sawk: 539,
-
-	sewaddle: 540,
-
-	swadloon: 541,
-
-	leavanny: 542,
-
-	venipede: 543,
-
-	whirlipede: 544,
-
-	scolipede: 545,
-
-	cottonee: 546,
-
-	whimsicott: 547,
-
-	petilil: 548,
-
-	lilligant: 549,
-
-	'basculin-red-striped': 550,
-
-	sandile: 551,
-
-	krokorok: 552,
-
-	krookodile: 553,
-
-	darumaka: 554,
-
-	'darmanitan-standard': 555,
-
-	maractus: 556,
-
-	dwebble: 557,
-
-	crustle: 558,
-
-	scraggy: 559,
-
-	scrafty: 560,
-
-	sigilyph: 561,
-
-	yamask: 562,
-
-	cofagrigus: 563,
-
-	tirtouga: 564,
-
-	carracosta: 565,
-
-	archen: 566,
-
-	archeops: 567,
-
-	trubbish: 568,
-
-	garbodor: 569,
-
-	zorua: 570,
-
-	zoroark: 571,
-
-	minccino: 572,
-
-	cinccino: 573,
-
-	gothita: 574,
-
-	gothorita: 575,
-
-	gothitelle: 576,
-
-	solosis: 577,
-
-	duosion: 578,
-
-	reuniclus: 579,
-
-	ducklett: 580,
-
-	swanna: 581,
-
-	vanillite: 582,
-
-	vanillish: 583,
-
-	vanilluxe: 584,
-
-	deerling: 585,
-
-	sawsbuck: 586,
-
-	emolga: 587,
-
-	karrablast: 588,
-
-	escavalier: 589,
-
-	foongus: 590,
-
-	amoonguss: 591,
-
-	frillish: 592,
-
-	jellicent: 593,
-
-	alomomola: 594,
-
-	joltik: 595,
-
-	galvantula: 596,
-
-	ferroseed: 597,
-
-	ferrothorn: 598,
-
-	klink: 599,
-
-	klang: 600,
-
-	klinklang: 601,
-
-	tynamo: 602,
-
-	eelektrik: 603,
-
-	eelektross: 604,
-
-	elgyem: 605,
-
-	beheeyem: 606,
-
-	litwick: 607,
-
-	lampent: 608,
-
-	chandelure: 609,
-
-	axew: 610,
-
-	fraxure: 611,
-
-	haxorus: 612,
-
-	cubchoo: 613,
-
-	beartic: 614,
-
-	cryogonal: 615,
-
-	shelmet: 616,
-
-	accelgor: 617,
-
-	stunfisk: 618,
-
-	mienfoo: 619,
-
-	mienshao: 620,
-
-	druddigon: 621,
-
-	golett: 622,
-
-	golurk: 623,
-
-	pawniard: 624,
-
-	bisharp: 625,
-
-	bouffalant: 626,
-
-	rufflet: 627,
-
-	braviary: 628,
-
-	vullaby: 629,
-
-	mandibuzz: 630,
-
-	heatmor: 631,
-
-	durant: 632,
-
-	deino: 633,
-
-	zweilous: 634,
-
-	hydreigon: 635,
-
-	larvesta: 636,
-
-	volcarona: 637,
-
-	cobalion: 638,
-
-	terrakion: 639,
-
-	virizion: 640,
-
-	'tornadus-incarnate': 641,
-
-	'thundurus-incarnate': 642,
-
-	reshiram: 643,
-
-	zekrom: 644,
-
-	'landorus-incarnate': 645,
-
-	kyurem: 646,
-
-	'keldeo-ordinary': 647,
-
-	'meloetta-aria': 648,
-
-	genesect: 649,
-
-	chespin: 650,
-
-	quilladin: 651,
-
-	chesnaught: 652,
-
-	fennekin: 653,
-
-	braixen: 654,
-
-	delphox: 655,
-
-	froakie: 656,
-
-	frogadier: 657,
-
-	greninja: 658,
-
-	bunnelby: 659,
-
-	diggersby: 660,
-
-	fletchling: 661,
-
-	fletchinder: 662,
-
-	talonflame: 663,
-
-	scatterbug: 664,
-
-	spewpa: 665,
-
-	vivillon: 666,
-
-	litleo: 667,
-
-	pyroar: 668,
-
-	flabebe: 669,
-
-	floette: 670,
-
-	florges: 671,
-
-	skiddo: 672,
-
-	gogoat: 673,
-
-	pancham: 674,
-
-	pangoro: 675,
-
-	furfrou: 676,
-
-	espurr: 677,
-
-	'meowstic-male': 678,
-
-	honedge: 679,
-
-	doublade: 680,
-
-	'aegislash-shield': 681,
-
-	spritzee: 682,
-
-	aromatisse: 683,
-
-	swirlix: 684,
-
-	slurpuff: 685,
-
-	inkay: 686,
-
-	malamar: 687,
-
-	binacle: 688,
-
-	barbaracle: 689,
-
-	skrelp: 690,
-
-	dragalge: 691,
-
-	clauncher: 692,
-
-	clawitzer: 693,
-
-	helioptile: 694,
-
-	heliolisk: 695,
-
-	tyrunt: 696,
-
-	tyrantrum: 697,
-
-	amaura: 698,
-
-	aurorus: 699,
-
-	sylveon: 700,
-
-	hawlucha: 701,
-
-	dedenne: 702,
-
-	carbink: 703,
-
-	goomy: 704,
-
-	sliggoo: 705,
-
-	goodra: 706,
-
-	klefki: 707,
-
-	phantump: 708,
-
-	trevenant: 709,
-
-	'pumpkaboo-average': 710,
-
-	'gourgeist-average': 711,
-
-	bergmite: 712,
-
-	avalugg: 713,
-
-	noibat: 714,
-
-	noivern: 715,
-
-	xerneas: 716,
-
-	yveltal: 717,
-
-	'zygarde-50': 718,
-
-	diancie: 719,
-
-	hoopa: 720,
-
-	volcanion: 721,
-
-	rowlet: 722,
-
-	dartrix: 723,
-
-	decidueye: 724,
-
-	litten: 725,
-
-	torracat: 726,
-
-	incineroar: 727,
-
-	popplio: 728,
-
-	brionne: 729,
-
-	primarina: 730,
-
-	pikipek: 731,
-
-	trumbeak: 732,
-
-	toucannon: 733,
-
-	yungoos: 734,
-
-	gumshoos: 735,
-
-	grubbin: 736,
-
-	charjabug: 737,
-
-	vikavolt: 738,
-
-	crabrawler: 739,
-
-	crabominable: 740,
-
-	'oricorio-baile': 741,
-
-	cutiefly: 742,
-
-	ribombee: 743,
-
-	rockruff: 744,
-
-	'lycanroc-midday': 745,
-
-	'wishiwashi-solo': 746,
-
-	mareanie: 747,
-
-	toxapex: 748,
-
-	mudbray: 749,
-
-	mudsdale: 750,
-
-	dewpider: 751,
-
-	araquanid: 752,
-
-	fomantis: 753,
-
-	lurantis: 754,
-
-	morelull: 755,
-
-	shiinotic: 756,
-
-	salandit: 757,
-
-	salazzle: 758,
-
-	stufful: 759,
-
-	bewear: 760,
-
-	bounsweet: 761,
-
-	steenee: 762,
-
-	tsareena: 763,
-
-	comfey: 764,
-
-	oranguru: 765,
-
-	passimian: 766,
-
-	wimpod: 767,
-
-	golisopod: 768,
-
-	sandygast: 769,
-
-	palossand: 770,
-
-	pyukumuku: 771,
-
-	'type-null': 772,
-
-	silvally: 773,
-
-	'minior-red-meteor': 774,
-
-	komala: 775,
-
-	turtonator: 776,
-
-	togedemaru: 777,
-
-	'mimikyu-disguised': 778,
-
-	bruxish: 779,
-
-	drampa: 780,
-
-	dhelmise: 781,
-
-	'jangmo-o': 782,
-
-	'hakamo-o': 783,
-
-	'kommo-o': 784,
-
-	'tapu-koko': 785,
-
-	'tapu-lele': 786,
-
-	'tapu-bulu': 787,
-
-	'tapu-fini': 788,
-
-	cosmog: 789,
-
-	cosmoem: 790,
-
-	solgaleo: 791,
-
-	lunala: 792,
-
-	nihilego: 793,
-
-	buzzwole: 794,
-
-	pheromosa: 795,
-
-	xurkitree: 796,
-
-	celesteela: 797,
-
-	kartana: 798,
-
-	guzzlord: 799,
-
-	necrozma: 800,
-
-	magearna: 801,
-
-	marshadow: 802,
-
-	poipole: 803,
-
-	naganadel: 804,
-
-	stakataka: 805,
-
-	blacephalon: 806,
-
-	zeraora: 807,
-
-	meltan: 808,
-
-	melmetal: 809,
-
-	grookey: 810,
-
-	thwackey: 811,
-
-	rillaboom: 812,
-
-	scorbunny: 813,
-
-	raboot: 814,
-
-	cinderace: 815,
-
-	sobble: 816,
-
-	drizzile: 817,
-
-	inteleon: 818,
-
-	skwovet: 819,
-
-	greedent: 820,
-
-	rookidee: 821,
-
-	corvisquire: 822,
-
-	corviknight: 823,
-
-	blipbug: 824,
-
-	dottler: 825,
-
-	orbeetle: 826,
-
-	nickit: 827,
-
-	thievul: 828,
-
-	gossifleur: 829,
-
-	eldegoss: 830,
-
-	wooloo: 831,
-
-	dubwool: 832,
-
-	chewtle: 833,
-
-	drednaw: 834,
-
-	yamper: 835,
-
-	boltund: 836,
-
-	rolycoly: 837,
-
-	carkol: 838,
-
-	coalossal: 839,
-
-	applin: 840,
-
-	flapple: 841,
-
-	appletun: 842,
-
-	silicobra: 843,
-
-	sandaconda: 844,
-
-	cramorant: 845,
-
-	arrokuda: 846,
-
-	barraskewda: 847,
-
-	toxel: 848,
-
-	'toxtricity-amped': 849,
-
-	sizzlipede: 850,
-
-	centiskorch: 851,
-
-	clobbopus: 852,
-
-	grapploct: 853,
-
-	sinistea: 854,
-
-	polteageist: 855,
-
-	hatenna: 856,
-
-	hattrem: 857,
-
-	hatterene: 858,
-
-	impidimp: 859,
-
-	morgrem: 860,
-
-	grimmsnarl: 861,
-
-	obstagoon: 862,
-
-	perrserker: 863,
-
-	cursola: 864,
-
-	sirfetchd: 865,
-
-	'mr-rime': 866,
-
-	runerigus: 867,
-
-	milcery: 868,
-
-	alcremie: 869,
-
-	falinks: 870,
-
-	pincurchin: 871,
-
-	snom: 872,
-
-	frosmoth: 873,
-
-	stonjourner: 874,
-
-	'eiscue-ice': 875,
-
-	'indeedee-male': 876,
-
-	'morpeko-full-belly': 877,
-
-	cufant: 878,
-
-	copperajah: 879,
-
-	dracozolt: 880,
-
-	arctozolt: 881,
-
-	dracovish: 882,
-
-	arctovish: 883,
-
-	duraludon: 884,
-
-	dreepy: 885,
-
-	drakloak: 886,
-
-	dragapult: 887,
-
-	zacian: 888,
-
-	zamazenta: 889,
-
-	eternatus: 890,
-
-	kubfu: 891,
-
-	'urshifu-single-strike': 892,
-
-	zarude: 893,
-
-	regieleki: 894,
-
-	regidrago: 895,
-
-	glastrier: 896,
-
-	spectrier: 897,
-
-	calyrex: 898,
-
-	wyrdeer: 899,
-
-	kleavor: 900,
-
-	ursaluna: 901,
-
-	'basculegion-male': 902,
-
-	sneasler: 903,
-
-	overqwil: 904,
-
-	'enamorus-incarnate': 905,
-
-	sprigatito: 906,
-
-	floragato: 907,
-
-	meowscarada: 908,
-
-	fuecoco: 909,
-
-	crocalor: 910,
-
-	skeledirge: 911,
-
-	quaxly: 912,
-
-	quaxwell: 913,
-
-	quaquaval: 914,
-
-	lechonk: 915,
-
-	'oinkologne-male': 916,
-
-	tarountula: 917,
-
-	spidops: 918,
-
-	nymble: 919,
-
-	lokix: 920,
-
-	pawmi: 921,
-
-	pawmo: 922,
-
-	pawmot: 923,
-
-	tandemaus: 924,
-
-	'maushold-family-of-four': 925,
-
-	fidough: 926,
-
-	dachsbun: 927,
-
-	smoliv: 928,
-
-	dolliv: 929,
-
-	arboliva: 930,
-
-	'squawkabilly-green-plumage': 931,
-
-	nacli: 932,
-
-	naclstack: 933,
-
-	garganacl: 934,
-
-	charcadet: 935,
-
-	armarouge: 936,
-
-	ceruledge: 937,
-
-	tadbulb: 938,
-
-	bellibolt: 939,
-
-	wattrel: 940,
-
-	kilowattrel: 941,
-
-	maschiff: 942,
-
-	mabosstiff: 943,
-
-	shroodle: 944,
-
-	grafaiai: 945,
-
-	bramblin: 946,
-
-	brambleghast: 947,
-
-	toedscool: 948,
-
-	toedscruel: 949,
-
-	klawf: 950,
-
-	capsakid: 951,
-
-	scovillain: 952,
-
-	rellor: 953,
-
-	rabsca: 954,
-
-	flittle: 955,
-
-	espathra: 956,
-
-	tinkatink: 957,
-
-	tinkatuff: 958,
-
-	tinkaton: 959,
-
-	wiglett: 960,
-
-	wugtrio: 961,
-
-	bombirdier: 962,
-
-	finizen: 963,
-
-	'palafin-zero': 964,
-
-	varoom: 965,
-
-	revavroom: 966,
-
-	cyclizar: 967,
-
-	orthworm: 968,
-
-	glimmet: 969,
-
-	glimmora: 970,
-
-	greavard: 971,
-
-	houndstone: 972,
-
-	flamigo: 973,
-
-	cetoddle: 974,
-
-	cetitan: 975,
-
-	veluza: 976,
-
-	dondozo: 977,
-
-	'tatsugiri-curly': 978,
-
-	annihilape: 979,
-
-	clodsire: 980,
-
-	farigiraf: 981,
-
-	'dudunsparce-two-segment': 982,
-
-	kingambit: 983,
-
-	'great-tusk': 984,
-
-	'scream-tail': 985,
-
-	'brute-bonnet': 986,
-
-	'flutter-mane': 987,
-
-	'slither-wing': 988,
-
-	'sandy-shocks': 989,
-
-	'iron-treads': 990,
-
-	'iron-bundle': 991,
-
-	'iron-hands': 992,
-
-	'iron-jugulis': 993,
-
-	'iron-moth': 994,
-
-	'iron-thorns': 995,
-
-	frigibax: 996,
-
-	arctibax: 997,
-
-	baxcalibur: 998,
-
-	gimmighoul: 999,
-
-	gholdengo: 1000,
-
-	'wo-chien': 1001,
-
-	'chien-pao': 1002,
-
-	'ting-lu': 1003,
-
-	'chi-yu': 1004,
-
-	'roaring-moon': 1005,
-
-	'iron-valiant': 1006,
-
-	koraidon: 1007,
-
-	miraidon: 1008,
-
-	'walking-wake': 1009,
-
-	'iron-leaves': 1010,
-
-	dipplin: 1011,
-
-	poltchageist: 1012,
-
-	sinistcha: 1013,
-
-	okidogi: 1014,
-
-	munkidori: 1015,
-
-	fezandipiti: 1016,
-
-	ogerpon: 1017,
-
-	archaludon: 1018,
-
-	hydrapple: 1019,
-
-	'gouging-fire': 1020,
-
-	'raging-bolt': 1021,
-
-	'iron-boulder': 1022,
-
-	'iron-crown': 1023,
-
-	terapagos: 1024,
-
-	pecharunt: 1025,
-
-	'deoxys-attack': 10001,
-
-	'deoxys-defense': 10002,
-
-	'deoxys-speed': 10003,
-
-	'wormadam-sandy': 10004,
-
-	'wormadam-trash': 10005,
-
-	'shaymin-sky': 10006,
-
-	'giratina-origin': 10007,
-
-	'rotom-heat': 10008,
-
-	'rotom-wash': 10009,
-
-	'rotom-frost': 10010,
-
-	'rotom-fan': 10011,
-
-	'rotom-mow': 10012,
-
-	'castform-sunny': 10013,
-
-	'castform-rainy': 10014,
-
-	'castform-snowy': 10015,
-
-	'basculin-blue-striped': 10016,
-
-	'darmanitan-zen': 10017,
-
-	'meloetta-pirouette': 10018,
-
-	'tornadus-therian': 10019,
-
-	'thundurus-therian': 10020,
-
-	'landorus-therian': 10021,
-
-	'kyurem-black': 10022,
-
-	'kyurem-white': 10023,
-
-	'keldeo-resolute': 10024,
-
-	'meowstic-female': 10025,
-
-	'aegislash-blade': 10026,
-
-	'pumpkaboo-small': 10027,
-
-	'pumpkaboo-large': 10028,
-
-	'pumpkaboo-super': 10029,
-
-	'gourgeist-small': 10030,
-
-	'gourgeist-large': 10031,
-
-	'gourgeist-super': 10032,
-
-	'venusaur-mega': 10033,
-
-	'charizard-mega-x': 10034,
-
-	'charizard-mega-y': 10035,
-
-	'blastoise-mega': 10036,
-
-	'alakazam-mega': 10037,
-
-	'gengar-mega': 10038,
-
-	'kangaskhan-mega': 10039,
-
-	'pinsir-mega': 10040,
-
-	'gyarados-mega': 10041,
-
-	'aerodactyl-mega': 10042,
-
-	'mewtwo-mega-x': 10043,
-
-	'mewtwo-mega-y': 10044,
-
-	'ampharos-mega': 10045,
-
-	'scizor-mega': 10046,
-
-	'heracross-mega': 10047,
-
-	'houndoom-mega': 10048,
-
-	'tyranitar-mega': 10049,
-
-	'blaziken-mega': 10050,
-
-	'gardevoir-mega': 10051,
-
-	'mawile-mega': 10052,
-
-	'aggron-mega': 10053,
-
-	'medicham-mega': 10054,
-
-	'manectric-mega': 10055,
-
-	'banette-mega': 10056,
-
-	'absol-mega': 10057,
-
-	'garchomp-mega': 10058,
-
-	'lucario-mega': 10059,
-
-	'abomasnow-mega': 10060,
-
-	'floette-eternal': 10061,
-
-	'latias-mega': 10062,
-
-	'latios-mega': 10063,
-
-	'swampert-mega': 10064,
-
-	'sceptile-mega': 10065,
-
-	'sableye-mega': 10066,
-
-	'altaria-mega': 10067,
-
-	'gallade-mega': 10068,
-
-	'audino-mega': 10069,
-
-	'sharpedo-mega': 10070,
-
-	'slowbro-mega': 10071,
-
-	'steelix-mega': 10072,
-
-	'pidgeot-mega': 10073,
-
-	'glalie-mega': 10074,
-
-	'diancie-mega': 10075,
-
-	'metagross-mega': 10076,
-
-	'kyogre-primal': 10077,
-
-	'groudon-primal': 10078,
-
-	'rayquaza-mega': 10079,
-
-	'pikachu-rock-star': 10080,
-
-	'pikachu-belle': 10081,
-
-	'pikachu-pop-star': 10082,
-
-	'pikachu-phd': 10083,
-
-	'pikachu-libre': 10084,
-
-	'pikachu-cosplay': 10085,
-
-	'hoopa-unbound': 10086,
-
-	'camerupt-mega': 10087,
-
-	'lopunny-mega': 10088,
-
-	'salamence-mega': 10089,
-
-	'beedrill-mega': 10090,
-
-	'rattata-alola': 10091,
-
-	'raticate-alola': 10092,
-
-	'raticate-totem-alola': 10093,
-
-	'pikachu-original-cap': 10094,
-
-	'pikachu-hoenn-cap': 10095,
-
-	'pikachu-sinnoh-cap': 10096,
-
-	'pikachu-unova-cap': 10097,
-
-	'pikachu-kalos-cap': 10098,
-
-	'pikachu-alola-cap': 10099,
-
-	'raichu-alola': 10100,
-
-	'sandshrew-alola': 10101,
-
-	'sandslash-alola': 10102,
-
-	'vulpix-alola': 10103,
-
-	'ninetales-alola': 10104,
-
-	'diglett-alola': 10105,
-
-	'dugtrio-alola': 10106,
-
-	'meowth-alola': 10107,
-
-	'persian-alola': 10108,
-
-	'geodude-alola': 10109,
-
-	'graveler-alola': 10110,
-
-	'golem-alola': 10111,
-
-	'grimer-alola': 10112,
-
-	'muk-alola': 10113,
-
-	'exeggutor-alola': 10114,
-
-	'marowak-alola': 10115,
-
-	'greninja-battle-bond': 10116,
-
-	'greninja-ash': 10117,
-
-	'zygarde-10-power-construct': 10118,
-
-	'zygarde-50-power-construct': 10119,
-
-	'zygarde-complete': 10120,
-
-	'gumshoos-totem': 10121,
-
-	'vikavolt-totem': 10122,
-
-	'oricorio-pom-pom': 10123,
-
-	'oricorio-pau': 10124,
-
-	'oricorio-sensu': 10125,
-
-	'lycanroc-midnight': 10126,
-
-	'wishiwashi-school': 10127,
-
-	'lurantis-totem': 10128,
-
-	'salazzle-totem': 10129,
-
-	'minior-orange-meteor': 10130,
-
-	'minior-yellow-meteor': 10131,
-
-	'minior-green-meteor': 10132,
-
-	'minior-blue-meteor': 10133,
-
-	'minior-indigo-meteor': 10134,
-
-	'minior-violet-meteor': 10135,
-
-	'minior-red': 10136,
-
-	'minior-orange': 10137,
-
-	'minior-yellow': 10138,
-
-	'minior-green': 10139,
-
-	'minior-blue': 10140,
-
-	'minior-indigo': 10141,
-
-	'minior-violet': 10142,
-
-	'mimikyu-busted': 10143,
-
-	'mimikyu-totem-disguised': 10144,
-
-	'mimikyu-totem-busted': 10145,
-
-	'kommo-o-totem': 10146,
-
-	'magearna-original': 10147,
-
-	'pikachu-partner-cap': 10148,
-
-	'marowak-totem': 10149,
-
-	'ribombee-totem': 10150,
-
-	'rockruff-own-tempo': 10151,
-
-	'lycanroc-dusk': 10152,
-
-	'araquanid-totem': 10153,
-
-	'togedemaru-totem': 10154,
-
-	'necrozma-dusk': 10155,
-
-	'necrozma-dawn': 10156,
-
-	'necrozma-ultra': 10157,
-
-	'pikachu-starter': 10158,
-
-	'eevee-starter': 10159,
-
-	'pikachu-world-cap': 10160,
-
-	'meowth-galar': 10161,
-
-	'ponyta-galar': 10162,
-
-	'rapidash-galar': 10163,
-
-	'slowpoke-galar': 10164,
-
-	'slowbro-galar': 10165,
-
-	'farfetchd-galar': 10166,
-
-	'weezing-galar': 10167,
-
-	'mr-mime-galar': 10168,
-
-	'articuno-galar': 10169,
-
-	'zapdos-galar': 10170,
-
-	'moltres-galar': 10171,
-
-	'slowking-galar': 10172,
-
-	'corsola-galar': 10173,
-
-	'zigzagoon-galar': 10174,
-
-	'linoone-galar': 10175,
-
-	'darumaka-galar': 10176,
-
-	'darmanitan-galar-standard': 10177,
-
-	'darmanitan-galar-zen': 10178,
-
-	'yamask-galar': 10179,
-
-	'stunfisk-galar': 10180,
-
-	'zygarde-10': 10181,
-
-	'cramorant-gulping': 10182,
-
-	'cramorant-gorging': 10183,
-
-	'toxtricity-low-key': 10184,
-
-	'eiscue-noice': 10185,
-
-	'indeedee-female': 10186,
-
-	'morpeko-hangry': 10187,
-
-	'zacian-crowned': 10188,
-
-	'zamazenta-crowned': 10189,
-
-	'eternatus-eternamax': 10190,
-
-	'urshifu-rapid-strike': 10191,
-
-	'zarude-dada': 10192,
-
-	'calyrex-ice': 10193,
-
-	'calyrex-shadow': 10194,
-
-	'venusaur-gmax': 10195,
-
-	'charizard-gmax': 10196,
-
-	'blastoise-gmax': 10197,
-
-	'butterfree-gmax': 10198,
-
-	'pikachu-gmax': 10199,
-
-	'meowth-gmax': 10200,
-
-	'machamp-gmax': 10201,
-
-	'gengar-gmax': 10202,
-
-	'kingler-gmax': 10203,
-
-	'lapras-gmax': 10204,
-
-	'eevee-gmax': 10205,
-
-	'snorlax-gmax': 10206,
-
-	'garbodor-gmax': 10207,
-
-	'melmetal-gmax': 10208,
-
-	'rillaboom-gmax': 10209,
-
-	'cinderace-gmax': 10210,
-
-	'inteleon-gmax': 10211,
-
-	'corviknight-gmax': 10212,
-
-	'orbeetle-gmax': 10213,
-
-	'drednaw-gmax': 10214,
-
-	'coalossal-gmax': 10215,
-
-	'flapple-gmax': 10216,
-
-	'appletun-gmax': 10217,
-
-	'sandaconda-gmax': 10218,
-
-	'toxtricity-amped-gmax': 10219,
-
-	'centiskorch-gmax': 10220,
-
-	'hatterene-gmax': 10221,
-
-	'grimmsnarl-gmax': 10222,
-
-	'alcremie-gmax': 10223,
-
-	'copperajah-gmax': 10224,
-
-	'duraludon-gmax': 10225,
-
-	'urshifu-single-strike-gmax': 10226,
-
-	'urshifu-rapid-strike-gmax': 10227,
-
-	'toxtricity-low-key-gmax': 10228,
-
-	'growlithe-hisui': 10229,
-
-	'arcanine-hisui': 10230,
-
-	'voltorb-hisui': 10231,
-
-	'electrode-hisui': 10232,
-
-	'typhlosion-hisui': 10233,
-
-	'qwilfish-hisui': 10234,
-
-	'sneasel-hisui': 10235,
-
-	'samurott-hisui': 10236,
-
-	'lilligant-hisui': 10237,
-
-	'zorua-hisui': 10238,
-
-	'zoroark-hisui': 10239,
-
-	'braviary-hisui': 10240,
-
-	'sliggoo-hisui': 10241,
-
-	'goodra-hisui': 10242,
-
-	'avalugg-hisui': 10243,
-
-	'decidueye-hisui': 10244,
-
-	'dialga-origin': 10245,
-
-	'palkia-origin': 10246,
-
-	'basculin-white-striped': 10247,
-
-	'basculegion-female': 10248,
-
-	'enamorus-therian': 10249,
-
-	'tauros-paldea-combat-breed': 10250,
-
-	'tauros-paldea-blaze-breed': 10251,
-
-	'tauros-paldea-aqua-breed': 10252,
-
-	'wooper-paldea': 10253,
-
-	'oinkologne-female': 10254,
-
-	'dudunsparce-three-segment': 10255,
-
-	'palafin-hero': 10256,
-
-	'maushold-family-of-three': 10257,
-
-	'tatsugiri-droopy': 10258,
-
-	'tatsugiri-stretchy': 10259,
-
-	'squawkabilly-blue-plumage': 10260,
-
-	'squawkabilly-yellow-plumage': 10261,
-
-	'squawkabilly-white-plumage': 10262,
-
-	'gimmighoul-roaming': 10263,
-
-	'koraidon-limited-build': 10264,
-
-	'koraidon-sprinting-build': 10265,
-
-	'koraidon-swimming-build': 10266,
-
-	'koraidon-gliding-build': 10267,
-
-	'miraidon-low-power-mode': 10268,
-
-	'miraidon-drive-mode': 10269,
-
-	'miraidon-aquatic-mode': 10270,
-
-	'miraidon-glide-mode': 10271,
-
-	'ursaluna-bloodmoon': 10272,
-
-	'ogerpon-wellspring-mask': 10273,
-
-	'ogerpon-hearthflame-mask': 10274,
-
-	'ogerpon-cornerstone-mask': 10275,
-
-	'terapagos-terastal': 10276,
-
-	'terapagos-stellar': 10277,
+export type InternalDexEntry = {
+	dexId: number;
+};
+
+export const internalDex: Record<PokemonName, InternalDexEntry> = {
+	bulbasaur: {
+		dexId: 1,
+	},
+	ivysaur: {
+		dexId: 2,
+	},
+	venusaur: {
+		dexId: 3,
+	},
+	charmander: {
+		dexId: 4,
+	},
+	charmeleon: {
+		dexId: 5,
+	},
+	charizard: {
+		dexId: 6,
+	},
+	squirtle: {
+		dexId: 7,
+	},
+	wartortle: {
+		dexId: 8,
+	},
+	blastoise: {
+		dexId: 9,
+	},
+	caterpie: {
+		dexId: 10,
+	},
+	metapod: {
+		dexId: 11,
+	},
+	butterfree: {
+		dexId: 12,
+	},
+	weedle: {
+		dexId: 13,
+	},
+	kakuna: {
+		dexId: 14,
+	},
+	beedrill: {
+		dexId: 15,
+	},
+	pidgey: {
+		dexId: 16,
+	},
+	pidgeotto: {
+		dexId: 17,
+	},
+	pidgeot: {
+		dexId: 18,
+	},
+	rattata: {
+		dexId: 19,
+	},
+	raticate: {
+		dexId: 20,
+	},
+	spearow: {
+		dexId: 21,
+	},
+	fearow: {
+		dexId: 22,
+	},
+	ekans: {
+		dexId: 23,
+	},
+	arbok: {
+		dexId: 24,
+	},
+	pikachu: {
+		dexId: 25,
+	},
+	raichu: {
+		dexId: 26,
+	},
+	sandshrew: {
+		dexId: 27,
+	},
+	sandslash: {
+		dexId: 28,
+	},
+	'nidoran-f': {
+		dexId: 29,
+	},
+	nidorina: {
+		dexId: 30,
+	},
+	nidoqueen: {
+		dexId: 31,
+	},
+	'nidoran-m': {
+		dexId: 32,
+	},
+	nidorino: {
+		dexId: 33,
+	},
+	nidoking: {
+		dexId: 34,
+	},
+	clefairy: {
+		dexId: 35,
+	},
+	clefable: {
+		dexId: 36,
+	},
+	vulpix: {
+		dexId: 37,
+	},
+	ninetales: {
+		dexId: 38,
+	},
+	jigglypuff: {
+		dexId: 39,
+	},
+	wigglytuff: {
+		dexId: 40,
+	},
+	zubat: {
+		dexId: 41,
+	},
+	golbat: {
+		dexId: 42,
+	},
+	oddish: {
+		dexId: 43,
+	},
+	gloom: {
+		dexId: 44,
+	},
+	vileplume: {
+		dexId: 45,
+	},
+	paras: {
+		dexId: 46,
+	},
+	parasect: {
+		dexId: 47,
+	},
+	venonat: {
+		dexId: 48,
+	},
+	venomoth: {
+		dexId: 49,
+	},
+	diglett: {
+		dexId: 50,
+	},
+	dugtrio: {
+		dexId: 51,
+	},
+	meowth: {
+		dexId: 52,
+	},
+	persian: {
+		dexId: 53,
+	},
+	psyduck: {
+		dexId: 54,
+	},
+	golduck: {
+		dexId: 55,
+	},
+	mankey: {
+		dexId: 56,
+	},
+	primeape: {
+		dexId: 57,
+	},
+	growlithe: {
+		dexId: 58,
+	},
+	arcanine: {
+		dexId: 59,
+	},
+	poliwag: {
+		dexId: 60,
+	},
+	poliwhirl: {
+		dexId: 61,
+	},
+	poliwrath: {
+		dexId: 62,
+	},
+	abra: {
+		dexId: 63,
+	},
+	kadabra: {
+		dexId: 64,
+	},
+	alakazam: {
+		dexId: 65,
+	},
+	machop: {
+		dexId: 66,
+	},
+	machoke: {
+		dexId: 67,
+	},
+	machamp: {
+		dexId: 68,
+	},
+	bellsprout: {
+		dexId: 69,
+	},
+	weepinbell: {
+		dexId: 70,
+	},
+	victreebel: {
+		dexId: 71,
+	},
+	tentacool: {
+		dexId: 72,
+	},
+	tentacruel: {
+		dexId: 73,
+	},
+	geodude: {
+		dexId: 74,
+	},
+	graveler: {
+		dexId: 75,
+	},
+	golem: {
+		dexId: 76,
+	},
+	ponyta: {
+		dexId: 77,
+	},
+	rapidash: {
+		dexId: 78,
+	},
+	slowpoke: {
+		dexId: 79,
+	},
+	slowbro: {
+		dexId: 80,
+	},
+	magnemite: {
+		dexId: 81,
+	},
+	magneton: {
+		dexId: 82,
+	},
+	farfetchd: {
+		dexId: 83,
+	},
+	doduo: {
+		dexId: 84,
+	},
+	dodrio: {
+		dexId: 85,
+	},
+	seel: {
+		dexId: 86,
+	},
+	dewgong: {
+		dexId: 87,
+	},
+	grimer: {
+		dexId: 88,
+	},
+	muk: {
+		dexId: 89,
+	},
+	shellder: {
+		dexId: 90,
+	},
+	cloyster: {
+		dexId: 91,
+	},
+	gastly: {
+		dexId: 92,
+	},
+	haunter: {
+		dexId: 93,
+	},
+	gengar: {
+		dexId: 94,
+	},
+	onix: {
+		dexId: 95,
+	},
+	drowzee: {
+		dexId: 96,
+	},
+	hypno: {
+		dexId: 97,
+	},
+	krabby: {
+		dexId: 98,
+	},
+	kingler: {
+		dexId: 99,
+	},
+	voltorb: {
+		dexId: 100,
+	},
+	electrode: {
+		dexId: 101,
+	},
+	exeggcute: {
+		dexId: 102,
+	},
+	exeggutor: {
+		dexId: 103,
+	},
+	cubone: {
+		dexId: 104,
+	},
+	marowak: {
+		dexId: 105,
+	},
+	hitmonlee: {
+		dexId: 106,
+	},
+	hitmonchan: {
+		dexId: 107,
+	},
+	lickitung: {
+		dexId: 108,
+	},
+	koffing: {
+		dexId: 109,
+	},
+	weezing: {
+		dexId: 110,
+	},
+	rhyhorn: {
+		dexId: 111,
+	},
+	rhydon: {
+		dexId: 112,
+	},
+	chansey: {
+		dexId: 113,
+	},
+	tangela: {
+		dexId: 114,
+	},
+	kangaskhan: {
+		dexId: 115,
+	},
+	horsea: {
+		dexId: 116,
+	},
+	seadra: {
+		dexId: 117,
+	},
+	goldeen: {
+		dexId: 118,
+	},
+	seaking: {
+		dexId: 119,
+	},
+	staryu: {
+		dexId: 120,
+	},
+	starmie: {
+		dexId: 121,
+	},
+	'mr-mime': {
+		dexId: 122,
+	},
+	scyther: {
+		dexId: 123,
+	},
+	jynx: {
+		dexId: 124,
+	},
+	electabuzz: {
+		dexId: 125,
+	},
+	magmar: {
+		dexId: 126,
+	},
+	pinsir: {
+		dexId: 127,
+	},
+	tauros: {
+		dexId: 128,
+	},
+	magikarp: {
+		dexId: 129,
+	},
+	gyarados: {
+		dexId: 130,
+	},
+	lapras: {
+		dexId: 131,
+	},
+	ditto: {
+		dexId: 132,
+	},
+	eevee: {
+		dexId: 133,
+	},
+	vaporeon: {
+		dexId: 134,
+	},
+	jolteon: {
+		dexId: 135,
+	},
+	flareon: {
+		dexId: 136,
+	},
+	porygon: {
+		dexId: 137,
+	},
+	omanyte: {
+		dexId: 138,
+	},
+	omastar: {
+		dexId: 139,
+	},
+	kabuto: {
+		dexId: 140,
+	},
+	kabutops: {
+		dexId: 141,
+	},
+	aerodactyl: {
+		dexId: 142,
+	},
+	snorlax: {
+		dexId: 143,
+	},
+	articuno: {
+		dexId: 144,
+	},
+	zapdos: {
+		dexId: 145,
+	},
+	moltres: {
+		dexId: 146,
+	},
+	dratini: {
+		dexId: 147,
+	},
+	dragonair: {
+		dexId: 148,
+	},
+	dragonite: {
+		dexId: 149,
+	},
+	mewtwo: {
+		dexId: 150,
+	},
+	mew: {
+		dexId: 151,
+	},
+	chikorita: {
+		dexId: 152,
+	},
+	bayleef: {
+		dexId: 153,
+	},
+	meganium: {
+		dexId: 154,
+	},
+	cyndaquil: {
+		dexId: 155,
+	},
+	quilava: {
+		dexId: 156,
+	},
+	typhlosion: {
+		dexId: 157,
+	},
+	totodile: {
+		dexId: 158,
+	},
+	croconaw: {
+		dexId: 159,
+	},
+	feraligatr: {
+		dexId: 160,
+	},
+	sentret: {
+		dexId: 161,
+	},
+	furret: {
+		dexId: 162,
+	},
+	hoothoot: {
+		dexId: 163,
+	},
+	noctowl: {
+		dexId: 164,
+	},
+	ledyba: {
+		dexId: 165,
+	},
+	ledian: {
+		dexId: 166,
+	},
+	spinarak: {
+		dexId: 167,
+	},
+	ariados: {
+		dexId: 168,
+	},
+	crobat: {
+		dexId: 169,
+	},
+	chinchou: {
+		dexId: 170,
+	},
+	lanturn: {
+		dexId: 171,
+	},
+	pichu: {
+		dexId: 172,
+	},
+	cleffa: {
+		dexId: 173,
+	},
+	igglybuff: {
+		dexId: 174,
+	},
+	togepi: {
+		dexId: 175,
+	},
+	togetic: {
+		dexId: 176,
+	},
+	natu: {
+		dexId: 177,
+	},
+	xatu: {
+		dexId: 178,
+	},
+	mareep: {
+		dexId: 179,
+	},
+	flaaffy: {
+		dexId: 180,
+	},
+	ampharos: {
+		dexId: 181,
+	},
+	bellossom: {
+		dexId: 182,
+	},
+	marill: {
+		dexId: 183,
+	},
+	azumarill: {
+		dexId: 184,
+	},
+	sudowoodo: {
+		dexId: 185,
+	},
+	politoed: {
+		dexId: 186,
+	},
+	hoppip: {
+		dexId: 187,
+	},
+	skiploom: {
+		dexId: 188,
+	},
+	jumpluff: {
+		dexId: 189,
+	},
+	aipom: {
+		dexId: 190,
+	},
+	sunkern: {
+		dexId: 191,
+	},
+	sunflora: {
+		dexId: 192,
+	},
+	yanma: {
+		dexId: 193,
+	},
+	wooper: {
+		dexId: 194,
+	},
+	quagsire: {
+		dexId: 195,
+	},
+	espeon: {
+		dexId: 196,
+	},
+	umbreon: {
+		dexId: 197,
+	},
+	murkrow: {
+		dexId: 198,
+	},
+	slowking: {
+		dexId: 199,
+	},
+	misdreavus: {
+		dexId: 200,
+	},
+	unown: {
+		dexId: 201,
+	},
+	wobbuffet: {
+		dexId: 202,
+	},
+	girafarig: {
+		dexId: 203,
+	},
+	pineco: {
+		dexId: 204,
+	},
+	forretress: {
+		dexId: 205,
+	},
+	dunsparce: {
+		dexId: 206,
+	},
+	gligar: {
+		dexId: 207,
+	},
+	steelix: {
+		dexId: 208,
+	},
+	snubbull: {
+		dexId: 209,
+	},
+	granbull: {
+		dexId: 210,
+	},
+	qwilfish: {
+		dexId: 211,
+	},
+	scizor: {
+		dexId: 212,
+	},
+	shuckle: {
+		dexId: 213,
+	},
+	heracross: {
+		dexId: 214,
+	},
+	sneasel: {
+		dexId: 215,
+	},
+	teddiursa: {
+		dexId: 216,
+	},
+	ursaring: {
+		dexId: 217,
+	},
+	slugma: {
+		dexId: 218,
+	},
+	magcargo: {
+		dexId: 219,
+	},
+	swinub: {
+		dexId: 220,
+	},
+	piloswine: {
+		dexId: 221,
+	},
+	corsola: {
+		dexId: 222,
+	},
+	remoraid: {
+		dexId: 223,
+	},
+	octillery: {
+		dexId: 224,
+	},
+	delibird: {
+		dexId: 225,
+	},
+	mantine: {
+		dexId: 226,
+	},
+	skarmory: {
+		dexId: 227,
+	},
+	houndour: {
+		dexId: 228,
+	},
+	houndoom: {
+		dexId: 229,
+	},
+	kingdra: {
+		dexId: 230,
+	},
+	phanpy: {
+		dexId: 231,
+	},
+	donphan: {
+		dexId: 232,
+	},
+	porygon2: {
+		dexId: 233,
+	},
+	stantler: {
+		dexId: 234,
+	},
+	smeargle: {
+		dexId: 235,
+	},
+	tyrogue: {
+		dexId: 236,
+	},
+	hitmontop: {
+		dexId: 237,
+	},
+	smoochum: {
+		dexId: 238,
+	},
+	elekid: {
+		dexId: 239,
+	},
+	magby: {
+		dexId: 240,
+	},
+	miltank: {
+		dexId: 241,
+	},
+	blissey: {
+		dexId: 242,
+	},
+	raikou: {
+		dexId: 243,
+	},
+	entei: {
+		dexId: 244,
+	},
+	suicune: {
+		dexId: 245,
+	},
+	larvitar: {
+		dexId: 246,
+	},
+	pupitar: {
+		dexId: 247,
+	},
+	tyranitar: {
+		dexId: 248,
+	},
+	lugia: {
+		dexId: 249,
+	},
+	'ho-oh': {
+		dexId: 250,
+	},
+	celebi: {
+		dexId: 251,
+	},
+	treecko: {
+		dexId: 252,
+	},
+	grovyle: {
+		dexId: 253,
+	},
+	sceptile: {
+		dexId: 254,
+	},
+	torchic: {
+		dexId: 255,
+	},
+	combusken: {
+		dexId: 256,
+	},
+	blaziken: {
+		dexId: 257,
+	},
+	mudkip: {
+		dexId: 258,
+	},
+	marshtomp: {
+		dexId: 259,
+	},
+	swampert: {
+		dexId: 260,
+	},
+	poochyena: {
+		dexId: 261,
+	},
+	mightyena: {
+		dexId: 262,
+	},
+	zigzagoon: {
+		dexId: 263,
+	},
+	linoone: {
+		dexId: 264,
+	},
+	wurmple: {
+		dexId: 265,
+	},
+	silcoon: {
+		dexId: 266,
+	},
+	beautifly: {
+		dexId: 267,
+	},
+	cascoon: {
+		dexId: 268,
+	},
+	dustox: {
+		dexId: 269,
+	},
+	lotad: {
+		dexId: 270,
+	},
+	lombre: {
+		dexId: 271,
+	},
+	ludicolo: {
+		dexId: 272,
+	},
+	seedot: {
+		dexId: 273,
+	},
+	nuzleaf: {
+		dexId: 274,
+	},
+	shiftry: {
+		dexId: 275,
+	},
+	taillow: {
+		dexId: 276,
+	},
+	swellow: {
+		dexId: 277,
+	},
+	wingull: {
+		dexId: 278,
+	},
+	pelipper: {
+		dexId: 279,
+	},
+	ralts: {
+		dexId: 280,
+	},
+	kirlia: {
+		dexId: 281,
+	},
+	gardevoir: {
+		dexId: 282,
+	},
+	surskit: {
+		dexId: 283,
+	},
+	masquerain: {
+		dexId: 284,
+	},
+	shroomish: {
+		dexId: 285,
+	},
+	breloom: {
+		dexId: 286,
+	},
+	slakoth: {
+		dexId: 287,
+	},
+	vigoroth: {
+		dexId: 288,
+	},
+	slaking: {
+		dexId: 289,
+	},
+	nincada: {
+		dexId: 290,
+	},
+	ninjask: {
+		dexId: 291,
+	},
+	shedinja: {
+		dexId: 292,
+	},
+	whismur: {
+		dexId: 293,
+	},
+	loudred: {
+		dexId: 294,
+	},
+	exploud: {
+		dexId: 295,
+	},
+	makuhita: {
+		dexId: 296,
+	},
+	hariyama: {
+		dexId: 297,
+	},
+	azurill: {
+		dexId: 298,
+	},
+	nosepass: {
+		dexId: 299,
+	},
+	skitty: {
+		dexId: 300,
+	},
+	delcatty: {
+		dexId: 301,
+	},
+	sableye: {
+		dexId: 302,
+	},
+	mawile: {
+		dexId: 303,
+	},
+	aron: {
+		dexId: 304,
+	},
+	lairon: {
+		dexId: 305,
+	},
+	aggron: {
+		dexId: 306,
+	},
+	meditite: {
+		dexId: 307,
+	},
+	medicham: {
+		dexId: 308,
+	},
+	electrike: {
+		dexId: 309,
+	},
+	manectric: {
+		dexId: 310,
+	},
+	plusle: {
+		dexId: 311,
+	},
+	minun: {
+		dexId: 312,
+	},
+	volbeat: {
+		dexId: 313,
+	},
+	illumise: {
+		dexId: 314,
+	},
+	roselia: {
+		dexId: 315,
+	},
+	gulpin: {
+		dexId: 316,
+	},
+	swalot: {
+		dexId: 317,
+	},
+	carvanha: {
+		dexId: 318,
+	},
+	sharpedo: {
+		dexId: 319,
+	},
+	wailmer: {
+		dexId: 320,
+	},
+	wailord: {
+		dexId: 321,
+	},
+	numel: {
+		dexId: 322,
+	},
+	camerupt: {
+		dexId: 323,
+	},
+	torkoal: {
+		dexId: 324,
+	},
+	spoink: {
+		dexId: 325,
+	},
+	grumpig: {
+		dexId: 326,
+	},
+	spinda: {
+		dexId: 327,
+	},
+	trapinch: {
+		dexId: 328,
+	},
+	vibrava: {
+		dexId: 329,
+	},
+	flygon: {
+		dexId: 330,
+	},
+	cacnea: {
+		dexId: 331,
+	},
+	cacturne: {
+		dexId: 332,
+	},
+	swablu: {
+		dexId: 333,
+	},
+	altaria: {
+		dexId: 334,
+	},
+	zangoose: {
+		dexId: 335,
+	},
+	seviper: {
+		dexId: 336,
+	},
+	lunatone: {
+		dexId: 337,
+	},
+	solrock: {
+		dexId: 338,
+	},
+	barboach: {
+		dexId: 339,
+	},
+	whiscash: {
+		dexId: 340,
+	},
+	corphish: {
+		dexId: 341,
+	},
+	crawdaunt: {
+		dexId: 342,
+	},
+	baltoy: {
+		dexId: 343,
+	},
+	claydol: {
+		dexId: 344,
+	},
+	lileep: {
+		dexId: 345,
+	},
+	cradily: {
+		dexId: 346,
+	},
+	anorith: {
+		dexId: 347,
+	},
+	armaldo: {
+		dexId: 348,
+	},
+	feebas: {
+		dexId: 349,
+	},
+	milotic: {
+		dexId: 350,
+	},
+	castform: {
+		dexId: 351,
+	},
+	kecleon: {
+		dexId: 352,
+	},
+	shuppet: {
+		dexId: 353,
+	},
+	banette: {
+		dexId: 354,
+	},
+	duskull: {
+		dexId: 355,
+	},
+	dusclops: {
+		dexId: 356,
+	},
+	tropius: {
+		dexId: 357,
+	},
+	chimecho: {
+		dexId: 358,
+	},
+	absol: {
+		dexId: 359,
+	},
+	wynaut: {
+		dexId: 360,
+	},
+	snorunt: {
+		dexId: 361,
+	},
+	glalie: {
+		dexId: 362,
+	},
+	spheal: {
+		dexId: 363,
+	},
+	sealeo: {
+		dexId: 364,
+	},
+	walrein: {
+		dexId: 365,
+	},
+	clamperl: {
+		dexId: 366,
+	},
+	huntail: {
+		dexId: 367,
+	},
+	gorebyss: {
+		dexId: 368,
+	},
+	relicanth: {
+		dexId: 369,
+	},
+	luvdisc: {
+		dexId: 370,
+	},
+	bagon: {
+		dexId: 371,
+	},
+	shelgon: {
+		dexId: 372,
+	},
+	salamence: {
+		dexId: 373,
+	},
+	beldum: {
+		dexId: 374,
+	},
+	metang: {
+		dexId: 375,
+	},
+	metagross: {
+		dexId: 376,
+	},
+	regirock: {
+		dexId: 377,
+	},
+	regice: {
+		dexId: 378,
+	},
+	registeel: {
+		dexId: 379,
+	},
+	latias: {
+		dexId: 380,
+	},
+	latios: {
+		dexId: 381,
+	},
+	kyogre: {
+		dexId: 382,
+	},
+	groudon: {
+		dexId: 383,
+	},
+	rayquaza: {
+		dexId: 384,
+	},
+	jirachi: {
+		dexId: 385,
+	},
+	'deoxys-normal': {
+		dexId: 386,
+	},
+	turtwig: {
+		dexId: 387,
+	},
+	grotle: {
+		dexId: 388,
+	},
+	torterra: {
+		dexId: 389,
+	},
+	chimchar: {
+		dexId: 390,
+	},
+	monferno: {
+		dexId: 391,
+	},
+	infernape: {
+		dexId: 392,
+	},
+	piplup: {
+		dexId: 393,
+	},
+	prinplup: {
+		dexId: 394,
+	},
+	empoleon: {
+		dexId: 395,
+	},
+	starly: {
+		dexId: 396,
+	},
+	staravia: {
+		dexId: 397,
+	},
+	staraptor: {
+		dexId: 398,
+	},
+	bidoof: {
+		dexId: 399,
+	},
+	bibarel: {
+		dexId: 400,
+	},
+	kricketot: {
+		dexId: 401,
+	},
+	kricketune: {
+		dexId: 402,
+	},
+	shinx: {
+		dexId: 403,
+	},
+	luxio: {
+		dexId: 404,
+	},
+	luxray: {
+		dexId: 405,
+	},
+	budew: {
+		dexId: 406,
+	},
+	roserade: {
+		dexId: 407,
+	},
+	cranidos: {
+		dexId: 408,
+	},
+	rampardos: {
+		dexId: 409,
+	},
+	shieldon: {
+		dexId: 410,
+	},
+	bastiodon: {
+		dexId: 411,
+	},
+	burmy: {
+		dexId: 412,
+	},
+	'wormadam-plant': {
+		dexId: 413,
+	},
+	mothim: {
+		dexId: 414,
+	},
+	combee: {
+		dexId: 415,
+	},
+	vespiquen: {
+		dexId: 416,
+	},
+	pachirisu: {
+		dexId: 417,
+	},
+	buizel: {
+		dexId: 418,
+	},
+	floatzel: {
+		dexId: 419,
+	},
+	cherubi: {
+		dexId: 420,
+	},
+	cherrim: {
+		dexId: 421,
+	},
+	shellos: {
+		dexId: 422,
+	},
+	gastrodon: {
+		dexId: 423,
+	},
+	ambipom: {
+		dexId: 424,
+	},
+	drifloon: {
+		dexId: 425,
+	},
+	drifblim: {
+		dexId: 426,
+	},
+	buneary: {
+		dexId: 427,
+	},
+	lopunny: {
+		dexId: 428,
+	},
+	mismagius: {
+		dexId: 429,
+	},
+	honchkrow: {
+		dexId: 430,
+	},
+	glameow: {
+		dexId: 431,
+	},
+	purugly: {
+		dexId: 432,
+	},
+	chingling: {
+		dexId: 433,
+	},
+	stunky: {
+		dexId: 434,
+	},
+	skuntank: {
+		dexId: 435,
+	},
+	bronzor: {
+		dexId: 436,
+	},
+	bronzong: {
+		dexId: 437,
+	},
+	bonsly: {
+		dexId: 438,
+	},
+	'mime-jr': {
+		dexId: 439,
+	},
+	happiny: {
+		dexId: 440,
+	},
+	chatot: {
+		dexId: 441,
+	},
+	spiritomb: {
+		dexId: 442,
+	},
+	gible: {
+		dexId: 443,
+	},
+	gabite: {
+		dexId: 444,
+	},
+	garchomp: {
+		dexId: 445,
+	},
+	munchlax: {
+		dexId: 446,
+	},
+	riolu: {
+		dexId: 447,
+	},
+	lucario: {
+		dexId: 448,
+	},
+	hippopotas: {
+		dexId: 449,
+	},
+	hippowdon: {
+		dexId: 450,
+	},
+	skorupi: {
+		dexId: 451,
+	},
+	drapion: {
+		dexId: 452,
+	},
+	croagunk: {
+		dexId: 453,
+	},
+	toxicroak: {
+		dexId: 454,
+	},
+	carnivine: {
+		dexId: 455,
+	},
+	finneon: {
+		dexId: 456,
+	},
+	lumineon: {
+		dexId: 457,
+	},
+	mantyke: {
+		dexId: 458,
+	},
+	snover: {
+		dexId: 459,
+	},
+	abomasnow: {
+		dexId: 460,
+	},
+	weavile: {
+		dexId: 461,
+	},
+	magnezone: {
+		dexId: 462,
+	},
+	lickilicky: {
+		dexId: 463,
+	},
+	rhyperior: {
+		dexId: 464,
+	},
+	tangrowth: {
+		dexId: 465,
+	},
+	electivire: {
+		dexId: 466,
+	},
+	magmortar: {
+		dexId: 467,
+	},
+	togekiss: {
+		dexId: 468,
+	},
+	yanmega: {
+		dexId: 469,
+	},
+	leafeon: {
+		dexId: 470,
+	},
+	glaceon: {
+		dexId: 471,
+	},
+	gliscor: {
+		dexId: 472,
+	},
+	mamoswine: {
+		dexId: 473,
+	},
+	'porygon-z': {
+		dexId: 474,
+	},
+	gallade: {
+		dexId: 475,
+	},
+	probopass: {
+		dexId: 476,
+	},
+	dusknoir: {
+		dexId: 477,
+	},
+	froslass: {
+		dexId: 478,
+	},
+	rotom: {
+		dexId: 479,
+	},
+	uxie: {
+		dexId: 480,
+	},
+	mesprit: {
+		dexId: 481,
+	},
+	azelf: {
+		dexId: 482,
+	},
+	dialga: {
+		dexId: 483,
+	},
+	palkia: {
+		dexId: 484,
+	},
+	heatran: {
+		dexId: 485,
+	},
+	regigigas: {
+		dexId: 486,
+	},
+	'giratina-altered': {
+		dexId: 487,
+	},
+	cresselia: {
+		dexId: 488,
+	},
+	phione: {
+		dexId: 489,
+	},
+	manaphy: {
+		dexId: 490,
+	},
+	darkrai: {
+		dexId: 491,
+	},
+	'shaymin-land': {
+		dexId: 492,
+	},
+	arceus: {
+		dexId: 493,
+	},
+	victini: {
+		dexId: 494,
+	},
+	snivy: {
+		dexId: 495,
+	},
+	servine: {
+		dexId: 496,
+	},
+	serperior: {
+		dexId: 497,
+	},
+	tepig: {
+		dexId: 498,
+	},
+	pignite: {
+		dexId: 499,
+	},
+	emboar: {
+		dexId: 500,
+	},
+	oshawott: {
+		dexId: 501,
+	},
+	dewott: {
+		dexId: 502,
+	},
+	samurott: {
+		dexId: 503,
+	},
+	patrat: {
+		dexId: 504,
+	},
+	watchog: {
+		dexId: 505,
+	},
+	lillipup: {
+		dexId: 506,
+	},
+	herdier: {
+		dexId: 507,
+	},
+	stoutland: {
+		dexId: 508,
+	},
+	purrloin: {
+		dexId: 509,
+	},
+	liepard: {
+		dexId: 510,
+	},
+	pansage: {
+		dexId: 511,
+	},
+	simisage: {
+		dexId: 512,
+	},
+	pansear: {
+		dexId: 513,
+	},
+	simisear: {
+		dexId: 514,
+	},
+	panpour: {
+		dexId: 515,
+	},
+	simipour: {
+		dexId: 516,
+	},
+	munna: {
+		dexId: 517,
+	},
+	musharna: {
+		dexId: 518,
+	},
+	pidove: {
+		dexId: 519,
+	},
+	tranquill: {
+		dexId: 520,
+	},
+	unfezant: {
+		dexId: 521,
+	},
+	blitzle: {
+		dexId: 522,
+	},
+	zebstrika: {
+		dexId: 523,
+	},
+	roggenrola: {
+		dexId: 524,
+	},
+	boldore: {
+		dexId: 525,
+	},
+	gigalith: {
+		dexId: 526,
+	},
+	woobat: {
+		dexId: 527,
+	},
+	swoobat: {
+		dexId: 528,
+	},
+	drilbur: {
+		dexId: 529,
+	},
+	excadrill: {
+		dexId: 530,
+	},
+	audino: {
+		dexId: 531,
+	},
+	timburr: {
+		dexId: 532,
+	},
+	gurdurr: {
+		dexId: 533,
+	},
+	conkeldurr: {
+		dexId: 534,
+	},
+	tympole: {
+		dexId: 535,
+	},
+	palpitoad: {
+		dexId: 536,
+	},
+	seismitoad: {
+		dexId: 537,
+	},
+	throh: {
+		dexId: 538,
+	},
+	sawk: {
+		dexId: 539,
+	},
+	sewaddle: {
+		dexId: 540,
+	},
+	swadloon: {
+		dexId: 541,
+	},
+	leavanny: {
+		dexId: 542,
+	},
+	venipede: {
+		dexId: 543,
+	},
+	whirlipede: {
+		dexId: 544,
+	},
+	scolipede: {
+		dexId: 545,
+	},
+	cottonee: {
+		dexId: 546,
+	},
+	whimsicott: {
+		dexId: 547,
+	},
+	petilil: {
+		dexId: 548,
+	},
+	lilligant: {
+		dexId: 549,
+	},
+	'basculin-red-striped': {
+		dexId: 550,
+	},
+	sandile: {
+		dexId: 551,
+	},
+	krokorok: {
+		dexId: 552,
+	},
+	krookodile: {
+		dexId: 553,
+	},
+	darumaka: {
+		dexId: 554,
+	},
+	'darmanitan-standard': {
+		dexId: 555,
+	},
+	maractus: {
+		dexId: 556,
+	},
+	dwebble: {
+		dexId: 557,
+	},
+	crustle: {
+		dexId: 558,
+	},
+	scraggy: {
+		dexId: 559,
+	},
+	scrafty: {
+		dexId: 560,
+	},
+	sigilyph: {
+		dexId: 561,
+	},
+	yamask: {
+		dexId: 562,
+	},
+	cofagrigus: {
+		dexId: 563,
+	},
+	tirtouga: {
+		dexId: 564,
+	},
+	carracosta: {
+		dexId: 565,
+	},
+	archen: {
+		dexId: 566,
+	},
+	archeops: {
+		dexId: 567,
+	},
+	trubbish: {
+		dexId: 568,
+	},
+	garbodor: {
+		dexId: 569,
+	},
+	zorua: {
+		dexId: 570,
+	},
+	zoroark: {
+		dexId: 571,
+	},
+	minccino: {
+		dexId: 572,
+	},
+	cinccino: {
+		dexId: 573,
+	},
+	gothita: {
+		dexId: 574,
+	},
+	gothorita: {
+		dexId: 575,
+	},
+	gothitelle: {
+		dexId: 576,
+	},
+	solosis: {
+		dexId: 577,
+	},
+	duosion: {
+		dexId: 578,
+	},
+	reuniclus: {
+		dexId: 579,
+	},
+	ducklett: {
+		dexId: 580,
+	},
+	swanna: {
+		dexId: 581,
+	},
+	vanillite: {
+		dexId: 582,
+	},
+	vanillish: {
+		dexId: 583,
+	},
+	vanilluxe: {
+		dexId: 584,
+	},
+	deerling: {
+		dexId: 585,
+	},
+	sawsbuck: {
+		dexId: 586,
+	},
+	emolga: {
+		dexId: 587,
+	},
+	karrablast: {
+		dexId: 588,
+	},
+	escavalier: {
+		dexId: 589,
+	},
+	foongus: {
+		dexId: 590,
+	},
+	amoonguss: {
+		dexId: 591,
+	},
+	frillish: {
+		dexId: 592,
+	},
+	jellicent: {
+		dexId: 593,
+	},
+	alomomola: {
+		dexId: 594,
+	},
+	joltik: {
+		dexId: 595,
+	},
+	galvantula: {
+		dexId: 596,
+	},
+	ferroseed: {
+		dexId: 597,
+	},
+	ferrothorn: {
+		dexId: 598,
+	},
+	klink: {
+		dexId: 599,
+	},
+	klang: {
+		dexId: 600,
+	},
+	klinklang: {
+		dexId: 601,
+	},
+	tynamo: {
+		dexId: 602,
+	},
+	eelektrik: {
+		dexId: 603,
+	},
+	eelektross: {
+		dexId: 604,
+	},
+	elgyem: {
+		dexId: 605,
+	},
+	beheeyem: {
+		dexId: 606,
+	},
+	litwick: {
+		dexId: 607,
+	},
+	lampent: {
+		dexId: 608,
+	},
+	chandelure: {
+		dexId: 609,
+	},
+	axew: {
+		dexId: 610,
+	},
+	fraxure: {
+		dexId: 611,
+	},
+	haxorus: {
+		dexId: 612,
+	},
+	cubchoo: {
+		dexId: 613,
+	},
+	beartic: {
+		dexId: 614,
+	},
+	cryogonal: {
+		dexId: 615,
+	},
+	shelmet: {
+		dexId: 616,
+	},
+	accelgor: {
+		dexId: 617,
+	},
+	stunfisk: {
+		dexId: 618,
+	},
+	mienfoo: {
+		dexId: 619,
+	},
+	mienshao: {
+		dexId: 620,
+	},
+	druddigon: {
+		dexId: 621,
+	},
+	golett: {
+		dexId: 622,
+	},
+	golurk: {
+		dexId: 623,
+	},
+	pawniard: {
+		dexId: 624,
+	},
+	bisharp: {
+		dexId: 625,
+	},
+	bouffalant: {
+		dexId: 626,
+	},
+	rufflet: {
+		dexId: 627,
+	},
+	braviary: {
+		dexId: 628,
+	},
+	vullaby: {
+		dexId: 629,
+	},
+	mandibuzz: {
+		dexId: 630,
+	},
+	heatmor: {
+		dexId: 631,
+	},
+	durant: {
+		dexId: 632,
+	},
+	deino: {
+		dexId: 633,
+	},
+	zweilous: {
+		dexId: 634,
+	},
+	hydreigon: {
+		dexId: 635,
+	},
+	larvesta: {
+		dexId: 636,
+	},
+	volcarona: {
+		dexId: 637,
+	},
+	cobalion: {
+		dexId: 638,
+	},
+	terrakion: {
+		dexId: 639,
+	},
+	virizion: {
+		dexId: 640,
+	},
+	'tornadus-incarnate': {
+		dexId: 641,
+	},
+	'thundurus-incarnate': {
+		dexId: 642,
+	},
+	reshiram: {
+		dexId: 643,
+	},
+	zekrom: {
+		dexId: 644,
+	},
+	'landorus-incarnate': {
+		dexId: 645,
+	},
+	kyurem: {
+		dexId: 646,
+	},
+	'keldeo-ordinary': {
+		dexId: 647,
+	},
+	'meloetta-aria': {
+		dexId: 648,
+	},
+	genesect: {
+		dexId: 649,
+	},
+	chespin: {
+		dexId: 650,
+	},
+	quilladin: {
+		dexId: 651,
+	},
+	chesnaught: {
+		dexId: 652,
+	},
+	fennekin: {
+		dexId: 653,
+	},
+	braixen: {
+		dexId: 654,
+	},
+	delphox: {
+		dexId: 655,
+	},
+	froakie: {
+		dexId: 656,
+	},
+	frogadier: {
+		dexId: 657,
+	},
+	greninja: {
+		dexId: 658,
+	},
+	bunnelby: {
+		dexId: 659,
+	},
+	diggersby: {
+		dexId: 660,
+	},
+	fletchling: {
+		dexId: 661,
+	},
+	fletchinder: {
+		dexId: 662,
+	},
+	talonflame: {
+		dexId: 663,
+	},
+	scatterbug: {
+		dexId: 664,
+	},
+	spewpa: {
+		dexId: 665,
+	},
+	vivillon: {
+		dexId: 666,
+	},
+	litleo: {
+		dexId: 667,
+	},
+	pyroar: {
+		dexId: 668,
+	},
+	flabebe: {
+		dexId: 669,
+	},
+	floette: {
+		dexId: 670,
+	},
+	florges: {
+		dexId: 671,
+	},
+	skiddo: {
+		dexId: 672,
+	},
+	gogoat: {
+		dexId: 673,
+	},
+	pancham: {
+		dexId: 674,
+	},
+	pangoro: {
+		dexId: 675,
+	},
+	furfrou: {
+		dexId: 676,
+	},
+	espurr: {
+		dexId: 677,
+	},
+	'meowstic-male': {
+		dexId: 678,
+	},
+	honedge: {
+		dexId: 679,
+	},
+	doublade: {
+		dexId: 680,
+	},
+	'aegislash-shield': {
+		dexId: 681,
+	},
+	spritzee: {
+		dexId: 682,
+	},
+	aromatisse: {
+		dexId: 683,
+	},
+	swirlix: {
+		dexId: 684,
+	},
+	slurpuff: {
+		dexId: 685,
+	},
+	inkay: {
+		dexId: 686,
+	},
+	malamar: {
+		dexId: 687,
+	},
+	binacle: {
+		dexId: 688,
+	},
+	barbaracle: {
+		dexId: 689,
+	},
+	skrelp: {
+		dexId: 690,
+	},
+	dragalge: {
+		dexId: 691,
+	},
+	clauncher: {
+		dexId: 692,
+	},
+	clawitzer: {
+		dexId: 693,
+	},
+	helioptile: {
+		dexId: 694,
+	},
+	heliolisk: {
+		dexId: 695,
+	},
+	tyrunt: {
+		dexId: 696,
+	},
+	tyrantrum: {
+		dexId: 697,
+	},
+	amaura: {
+		dexId: 698,
+	},
+	aurorus: {
+		dexId: 699,
+	},
+	sylveon: {
+		dexId: 700,
+	},
+	hawlucha: {
+		dexId: 701,
+	},
+	dedenne: {
+		dexId: 702,
+	},
+	carbink: {
+		dexId: 703,
+	},
+	goomy: {
+		dexId: 704,
+	},
+	sliggoo: {
+		dexId: 705,
+	},
+	goodra: {
+		dexId: 706,
+	},
+	klefki: {
+		dexId: 707,
+	},
+	phantump: {
+		dexId: 708,
+	},
+	trevenant: {
+		dexId: 709,
+	},
+	'pumpkaboo-average': {
+		dexId: 710,
+	},
+	'gourgeist-average': {
+		dexId: 711,
+	},
+	bergmite: {
+		dexId: 712,
+	},
+	avalugg: {
+		dexId: 713,
+	},
+	noibat: {
+		dexId: 714,
+	},
+	noivern: {
+		dexId: 715,
+	},
+	xerneas: {
+		dexId: 716,
+	},
+	yveltal: {
+		dexId: 717,
+	},
+	'zygarde-50': {
+		dexId: 718,
+	},
+	diancie: {
+		dexId: 719,
+	},
+	hoopa: {
+		dexId: 720,
+	},
+	volcanion: {
+		dexId: 721,
+	},
+	rowlet: {
+		dexId: 722,
+	},
+	dartrix: {
+		dexId: 723,
+	},
+	decidueye: {
+		dexId: 724,
+	},
+	litten: {
+		dexId: 725,
+	},
+	torracat: {
+		dexId: 726,
+	},
+	incineroar: {
+		dexId: 727,
+	},
+	popplio: {
+		dexId: 728,
+	},
+	brionne: {
+		dexId: 729,
+	},
+	primarina: {
+		dexId: 730,
+	},
+	pikipek: {
+		dexId: 731,
+	},
+	trumbeak: {
+		dexId: 732,
+	},
+	toucannon: {
+		dexId: 733,
+	},
+	yungoos: {
+		dexId: 734,
+	},
+	gumshoos: {
+		dexId: 735,
+	},
+	grubbin: {
+		dexId: 736,
+	},
+	charjabug: {
+		dexId: 737,
+	},
+	vikavolt: {
+		dexId: 738,
+	},
+	crabrawler: {
+		dexId: 739,
+	},
+	crabominable: {
+		dexId: 740,
+	},
+	'oricorio-baile': {
+		dexId: 741,
+	},
+	cutiefly: {
+		dexId: 742,
+	},
+	ribombee: {
+		dexId: 743,
+	},
+	rockruff: {
+		dexId: 744,
+	},
+	'lycanroc-midday': {
+		dexId: 745,
+	},
+	'wishiwashi-solo': {
+		dexId: 746,
+	},
+	mareanie: {
+		dexId: 747,
+	},
+	toxapex: {
+		dexId: 748,
+	},
+	mudbray: {
+		dexId: 749,
+	},
+	mudsdale: {
+		dexId: 750,
+	},
+	dewpider: {
+		dexId: 751,
+	},
+	araquanid: {
+		dexId: 752,
+	},
+	fomantis: {
+		dexId: 753,
+	},
+	lurantis: {
+		dexId: 754,
+	},
+	morelull: {
+		dexId: 755,
+	},
+	shiinotic: {
+		dexId: 756,
+	},
+	salandit: {
+		dexId: 757,
+	},
+	salazzle: {
+		dexId: 758,
+	},
+	stufful: {
+		dexId: 759,
+	},
+	bewear: {
+		dexId: 760,
+	},
+	bounsweet: {
+		dexId: 761,
+	},
+	steenee: {
+		dexId: 762,
+	},
+	tsareena: {
+		dexId: 763,
+	},
+	comfey: {
+		dexId: 764,
+	},
+	oranguru: {
+		dexId: 765,
+	},
+	passimian: {
+		dexId: 766,
+	},
+	wimpod: {
+		dexId: 767,
+	},
+	golisopod: {
+		dexId: 768,
+	},
+	sandygast: {
+		dexId: 769,
+	},
+	palossand: {
+		dexId: 770,
+	},
+	pyukumuku: {
+		dexId: 771,
+	},
+	'type-null': {
+		dexId: 772,
+	},
+	silvally: {
+		dexId: 773,
+	},
+	'minior-red-meteor': {
+		dexId: 774,
+	},
+	komala: {
+		dexId: 775,
+	},
+	turtonator: {
+		dexId: 776,
+	},
+	togedemaru: {
+		dexId: 777,
+	},
+	'mimikyu-disguised': {
+		dexId: 778,
+	},
+	bruxish: {
+		dexId: 779,
+	},
+	drampa: {
+		dexId: 780,
+	},
+	dhelmise: {
+		dexId: 781,
+	},
+	'jangmo-o': {
+		dexId: 782,
+	},
+	'hakamo-o': {
+		dexId: 783,
+	},
+	'kommo-o': {
+		dexId: 784,
+	},
+	'tapu-koko': {
+		dexId: 785,
+	},
+	'tapu-lele': {
+		dexId: 786,
+	},
+	'tapu-bulu': {
+		dexId: 787,
+	},
+	'tapu-fini': {
+		dexId: 788,
+	},
+	cosmog: {
+		dexId: 789,
+	},
+	cosmoem: {
+		dexId: 790,
+	},
+	solgaleo: {
+		dexId: 791,
+	},
+	lunala: {
+		dexId: 792,
+	},
+	nihilego: {
+		dexId: 793,
+	},
+	buzzwole: {
+		dexId: 794,
+	},
+	pheromosa: {
+		dexId: 795,
+	},
+	xurkitree: {
+		dexId: 796,
+	},
+	celesteela: {
+		dexId: 797,
+	},
+	kartana: {
+		dexId: 798,
+	},
+	guzzlord: {
+		dexId: 799,
+	},
+	necrozma: {
+		dexId: 800,
+	},
+	magearna: {
+		dexId: 801,
+	},
+	marshadow: {
+		dexId: 802,
+	},
+	poipole: {
+		dexId: 803,
+	},
+	naganadel: {
+		dexId: 804,
+	},
+	stakataka: {
+		dexId: 805,
+	},
+	blacephalon: {
+		dexId: 806,
+	},
+	zeraora: {
+		dexId: 807,
+	},
+	meltan: {
+		dexId: 808,
+	},
+	melmetal: {
+		dexId: 809,
+	},
+	grookey: {
+		dexId: 810,
+	},
+	thwackey: {
+		dexId: 811,
+	},
+	rillaboom: {
+		dexId: 812,
+	},
+	scorbunny: {
+		dexId: 813,
+	},
+	raboot: {
+		dexId: 814,
+	},
+	cinderace: {
+		dexId: 815,
+	},
+	sobble: {
+		dexId: 816,
+	},
+	drizzile: {
+		dexId: 817,
+	},
+	inteleon: {
+		dexId: 818,
+	},
+	skwovet: {
+		dexId: 819,
+	},
+	greedent: {
+		dexId: 820,
+	},
+	rookidee: {
+		dexId: 821,
+	},
+	corvisquire: {
+		dexId: 822,
+	},
+	corviknight: {
+		dexId: 823,
+	},
+	blipbug: {
+		dexId: 824,
+	},
+	dottler: {
+		dexId: 825,
+	},
+	orbeetle: {
+		dexId: 826,
+	},
+	nickit: {
+		dexId: 827,
+	},
+	thievul: {
+		dexId: 828,
+	},
+	gossifleur: {
+		dexId: 829,
+	},
+	eldegoss: {
+		dexId: 830,
+	},
+	wooloo: {
+		dexId: 831,
+	},
+	dubwool: {
+		dexId: 832,
+	},
+	chewtle: {
+		dexId: 833,
+	},
+	drednaw: {
+		dexId: 834,
+	},
+	yamper: {
+		dexId: 835,
+	},
+	boltund: {
+		dexId: 836,
+	},
+	rolycoly: {
+		dexId: 837,
+	},
+	carkol: {
+		dexId: 838,
+	},
+	coalossal: {
+		dexId: 839,
+	},
+	applin: {
+		dexId: 840,
+	},
+	flapple: {
+		dexId: 841,
+	},
+	appletun: {
+		dexId: 842,
+	},
+	silicobra: {
+		dexId: 843,
+	},
+	sandaconda: {
+		dexId: 844,
+	},
+	cramorant: {
+		dexId: 845,
+	},
+	arrokuda: {
+		dexId: 846,
+	},
+	barraskewda: {
+		dexId: 847,
+	},
+	toxel: {
+		dexId: 848,
+	},
+	'toxtricity-amped': {
+		dexId: 849,
+	},
+	sizzlipede: {
+		dexId: 850,
+	},
+	centiskorch: {
+		dexId: 851,
+	},
+	clobbopus: {
+		dexId: 852,
+	},
+	grapploct: {
+		dexId: 853,
+	},
+	sinistea: {
+		dexId: 854,
+	},
+	polteageist: {
+		dexId: 855,
+	},
+	hatenna: {
+		dexId: 856,
+	},
+	hattrem: {
+		dexId: 857,
+	},
+	hatterene: {
+		dexId: 858,
+	},
+	impidimp: {
+		dexId: 859,
+	},
+	morgrem: {
+		dexId: 860,
+	},
+	grimmsnarl: {
+		dexId: 861,
+	},
+	obstagoon: {
+		dexId: 862,
+	},
+	perrserker: {
+		dexId: 863,
+	},
+	cursola: {
+		dexId: 864,
+	},
+	sirfetchd: {
+		dexId: 865,
+	},
+	'mr-rime': {
+		dexId: 866,
+	},
+	runerigus: {
+		dexId: 867,
+	},
+	milcery: {
+		dexId: 868,
+	},
+	alcremie: {
+		dexId: 869,
+	},
+	falinks: {
+		dexId: 870,
+	},
+	pincurchin: {
+		dexId: 871,
+	},
+	snom: {
+		dexId: 872,
+	},
+	frosmoth: {
+		dexId: 873,
+	},
+	stonjourner: {
+		dexId: 874,
+	},
+	'eiscue-ice': {
+		dexId: 875,
+	},
+	'indeedee-male': {
+		dexId: 876,
+	},
+	'morpeko-full-belly': {
+		dexId: 877,
+	},
+	cufant: {
+		dexId: 878,
+	},
+	copperajah: {
+		dexId: 879,
+	},
+	dracozolt: {
+		dexId: 880,
+	},
+	arctozolt: {
+		dexId: 881,
+	},
+	dracovish: {
+		dexId: 882,
+	},
+	arctovish: {
+		dexId: 883,
+	},
+	duraludon: {
+		dexId: 884,
+	},
+	dreepy: {
+		dexId: 885,
+	},
+	drakloak: {
+		dexId: 886,
+	},
+	dragapult: {
+		dexId: 887,
+	},
+	zacian: {
+		dexId: 888,
+	},
+	zamazenta: {
+		dexId: 889,
+	},
+	eternatus: {
+		dexId: 890,
+	},
+	kubfu: {
+		dexId: 891,
+	},
+	'urshifu-single-strike': {
+		dexId: 892,
+	},
+	zarude: {
+		dexId: 893,
+	},
+	regieleki: {
+		dexId: 894,
+	},
+	regidrago: {
+		dexId: 895,
+	},
+	glastrier: {
+		dexId: 896,
+	},
+	spectrier: {
+		dexId: 897,
+	},
+	calyrex: {
+		dexId: 898,
+	},
+	wyrdeer: {
+		dexId: 899,
+	},
+	kleavor: {
+		dexId: 900,
+	},
+	ursaluna: {
+		dexId: 901,
+	},
+	'basculegion-male': {
+		dexId: 902,
+	},
+	sneasler: {
+		dexId: 903,
+	},
+	overqwil: {
+		dexId: 904,
+	},
+	'enamorus-incarnate': {
+		dexId: 905,
+	},
+	sprigatito: {
+		dexId: 906,
+	},
+	floragato: {
+		dexId: 907,
+	},
+	meowscarada: {
+		dexId: 908,
+	},
+	fuecoco: {
+		dexId: 909,
+	},
+	crocalor: {
+		dexId: 910,
+	},
+	skeledirge: {
+		dexId: 911,
+	},
+	quaxly: {
+		dexId: 912,
+	},
+	quaxwell: {
+		dexId: 913,
+	},
+	quaquaval: {
+		dexId: 914,
+	},
+	lechonk: {
+		dexId: 915,
+	},
+	'oinkologne-male': {
+		dexId: 916,
+	},
+	tarountula: {
+		dexId: 917,
+	},
+	spidops: {
+		dexId: 918,
+	},
+	nymble: {
+		dexId: 919,
+	},
+	lokix: {
+		dexId: 920,
+	},
+	pawmi: {
+		dexId: 921,
+	},
+	pawmo: {
+		dexId: 922,
+	},
+	pawmot: {
+		dexId: 923,
+	},
+	tandemaus: {
+		dexId: 924,
+	},
+	'maushold-family-of-four': {
+		dexId: 925,
+	},
+	fidough: {
+		dexId: 926,
+	},
+	dachsbun: {
+		dexId: 927,
+	},
+	smoliv: {
+		dexId: 928,
+	},
+	dolliv: {
+		dexId: 929,
+	},
+	arboliva: {
+		dexId: 930,
+	},
+	'squawkabilly-green-plumage': {
+		dexId: 931,
+	},
+	nacli: {
+		dexId: 932,
+	},
+	naclstack: {
+		dexId: 933,
+	},
+	garganacl: {
+		dexId: 934,
+	},
+	charcadet: {
+		dexId: 935,
+	},
+	armarouge: {
+		dexId: 936,
+	},
+	ceruledge: {
+		dexId: 937,
+	},
+	tadbulb: {
+		dexId: 938,
+	},
+	bellibolt: {
+		dexId: 939,
+	},
+	wattrel: {
+		dexId: 940,
+	},
+	kilowattrel: {
+		dexId: 941,
+	},
+	maschiff: {
+		dexId: 942,
+	},
+	mabosstiff: {
+		dexId: 943,
+	},
+	shroodle: {
+		dexId: 944,
+	},
+	grafaiai: {
+		dexId: 945,
+	},
+	bramblin: {
+		dexId: 946,
+	},
+	brambleghast: {
+		dexId: 947,
+	},
+	toedscool: {
+		dexId: 948,
+	},
+	toedscruel: {
+		dexId: 949,
+	},
+	klawf: {
+		dexId: 950,
+	},
+	capsakid: {
+		dexId: 951,
+	},
+	scovillain: {
+		dexId: 952,
+	},
+	rellor: {
+		dexId: 953,
+	},
+	rabsca: {
+		dexId: 954,
+	},
+	flittle: {
+		dexId: 955,
+	},
+	espathra: {
+		dexId: 956,
+	},
+	tinkatink: {
+		dexId: 957,
+	},
+	tinkatuff: {
+		dexId: 958,
+	},
+	tinkaton: {
+		dexId: 959,
+	},
+	wiglett: {
+		dexId: 960,
+	},
+	wugtrio: {
+		dexId: 961,
+	},
+	bombirdier: {
+		dexId: 962,
+	},
+	finizen: {
+		dexId: 963,
+	},
+	'palafin-zero': {
+		dexId: 964,
+	},
+	varoom: {
+		dexId: 965,
+	},
+	revavroom: {
+		dexId: 966,
+	},
+	cyclizar: {
+		dexId: 967,
+	},
+	orthworm: {
+		dexId: 968,
+	},
+	glimmet: {
+		dexId: 969,
+	},
+	glimmora: {
+		dexId: 970,
+	},
+	greavard: {
+		dexId: 971,
+	},
+	houndstone: {
+		dexId: 972,
+	},
+	flamigo: {
+		dexId: 973,
+	},
+	cetoddle: {
+		dexId: 974,
+	},
+	cetitan: {
+		dexId: 975,
+	},
+	veluza: {
+		dexId: 976,
+	},
+	dondozo: {
+		dexId: 977,
+	},
+	'tatsugiri-curly': {
+		dexId: 978,
+	},
+	annihilape: {
+		dexId: 979,
+	},
+	clodsire: {
+		dexId: 980,
+	},
+	farigiraf: {
+		dexId: 981,
+	},
+	'dudunsparce-two-segment': {
+		dexId: 982,
+	},
+	kingambit: {
+		dexId: 983,
+	},
+	'great-tusk': {
+		dexId: 984,
+	},
+	'scream-tail': {
+		dexId: 985,
+	},
+	'brute-bonnet': {
+		dexId: 986,
+	},
+	'flutter-mane': {
+		dexId: 987,
+	},
+	'slither-wing': {
+		dexId: 988,
+	},
+	'sandy-shocks': {
+		dexId: 989,
+	},
+	'iron-treads': {
+		dexId: 990,
+	},
+	'iron-bundle': {
+		dexId: 991,
+	},
+	'iron-hands': {
+		dexId: 992,
+	},
+	'iron-jugulis': {
+		dexId: 993,
+	},
+	'iron-moth': {
+		dexId: 994,
+	},
+	'iron-thorns': {
+		dexId: 995,
+	},
+	frigibax: {
+		dexId: 996,
+	},
+	arctibax: {
+		dexId: 997,
+	},
+	baxcalibur: {
+		dexId: 998,
+	},
+	gimmighoul: {
+		dexId: 999,
+	},
+	gholdengo: {
+		dexId: 1000,
+	},
+	'wo-chien': {
+		dexId: 1001,
+	},
+	'chien-pao': {
+		dexId: 1002,
+	},
+	'ting-lu': {
+		dexId: 1003,
+	},
+	'chi-yu': {
+		dexId: 1004,
+	},
+	'roaring-moon': {
+		dexId: 1005,
+	},
+	'iron-valiant': {
+		dexId: 1006,
+	},
+	koraidon: {
+		dexId: 1007,
+	},
+	miraidon: {
+		dexId: 1008,
+	},
+	'walking-wake': {
+		dexId: 1009,
+	},
+	'iron-leaves': {
+		dexId: 1010,
+	},
+	dipplin: {
+		dexId: 1011,
+	},
+	poltchageist: {
+		dexId: 1012,
+	},
+	sinistcha: {
+		dexId: 1013,
+	},
+	okidogi: {
+		dexId: 1014,
+	},
+	munkidori: {
+		dexId: 1015,
+	},
+	fezandipiti: {
+		dexId: 1016,
+	},
+	ogerpon: {
+		dexId: 1017,
+	},
+	archaludon: {
+		dexId: 1018,
+	},
+	hydrapple: {
+		dexId: 1019,
+	},
+	'gouging-fire': {
+		dexId: 1020,
+	},
+	'raging-bolt': {
+		dexId: 1021,
+	},
+	'iron-boulder': {
+		dexId: 1022,
+	},
+	'iron-crown': {
+		dexId: 1023,
+	},
+	terapagos: {
+		dexId: 1024,
+	},
+	pecharunt: {
+		dexId: 1025,
+	},
+	'deoxys-attack': {
+		dexId: 10001,
+	},
+	'deoxys-defense': {
+		dexId: 10002,
+	},
+	'deoxys-speed': {
+		dexId: 10003,
+	},
+	'wormadam-sandy': {
+		dexId: 10004,
+	},
+	'wormadam-trash': {
+		dexId: 10005,
+	},
+	'shaymin-sky': {
+		dexId: 10006,
+	},
+	'giratina-origin': {
+		dexId: 10007,
+	},
+	'rotom-heat': {
+		dexId: 10008,
+	},
+	'rotom-wash': {
+		dexId: 10009,
+	},
+	'rotom-frost': {
+		dexId: 10010,
+	},
+	'rotom-fan': {
+		dexId: 10011,
+	},
+	'rotom-mow': {
+		dexId: 10012,
+	},
+	'castform-sunny': {
+		dexId: 10013,
+	},
+	'castform-rainy': {
+		dexId: 10014,
+	},
+	'castform-snowy': {
+		dexId: 10015,
+	},
+	'basculin-blue-striped': {
+		dexId: 10016,
+	},
+	'darmanitan-zen': {
+		dexId: 10017,
+	},
+	'meloetta-pirouette': {
+		dexId: 10018,
+	},
+	'tornadus-therian': {
+		dexId: 10019,
+	},
+	'thundurus-therian': {
+		dexId: 10020,
+	},
+	'landorus-therian': {
+		dexId: 10021,
+	},
+	'kyurem-black': {
+		dexId: 10022,
+	},
+	'kyurem-white': {
+		dexId: 10023,
+	},
+	'keldeo-resolute': {
+		dexId: 10024,
+	},
+	'meowstic-female': {
+		dexId: 10025,
+	},
+	'aegislash-blade': {
+		dexId: 10026,
+	},
+	'pumpkaboo-small': {
+		dexId: 10027,
+	},
+	'pumpkaboo-large': {
+		dexId: 10028,
+	},
+	'pumpkaboo-super': {
+		dexId: 10029,
+	},
+	'gourgeist-small': {
+		dexId: 10030,
+	},
+	'gourgeist-large': {
+		dexId: 10031,
+	},
+	'gourgeist-super': {
+		dexId: 10032,
+	},
+	'venusaur-mega': {
+		dexId: 10033,
+	},
+	'charizard-mega-x': {
+		dexId: 10034,
+	},
+	'charizard-mega-y': {
+		dexId: 10035,
+	},
+	'blastoise-mega': {
+		dexId: 10036,
+	},
+	'alakazam-mega': {
+		dexId: 10037,
+	},
+	'gengar-mega': {
+		dexId: 10038,
+	},
+	'kangaskhan-mega': {
+		dexId: 10039,
+	},
+	'pinsir-mega': {
+		dexId: 10040,
+	},
+	'gyarados-mega': {
+		dexId: 10041,
+	},
+	'aerodactyl-mega': {
+		dexId: 10042,
+	},
+	'mewtwo-mega-x': {
+		dexId: 10043,
+	},
+	'mewtwo-mega-y': {
+		dexId: 10044,
+	},
+	'ampharos-mega': {
+		dexId: 10045,
+	},
+	'scizor-mega': {
+		dexId: 10046,
+	},
+	'heracross-mega': {
+		dexId: 10047,
+	},
+	'houndoom-mega': {
+		dexId: 10048,
+	},
+	'tyranitar-mega': {
+		dexId: 10049,
+	},
+	'blaziken-mega': {
+		dexId: 10050,
+	},
+	'gardevoir-mega': {
+		dexId: 10051,
+	},
+	'mawile-mega': {
+		dexId: 10052,
+	},
+	'aggron-mega': {
+		dexId: 10053,
+	},
+	'medicham-mega': {
+		dexId: 10054,
+	},
+	'manectric-mega': {
+		dexId: 10055,
+	},
+	'banette-mega': {
+		dexId: 10056,
+	},
+	'absol-mega': {
+		dexId: 10057,
+	},
+	'garchomp-mega': {
+		dexId: 10058,
+	},
+	'lucario-mega': {
+		dexId: 10059,
+	},
+	'abomasnow-mega': {
+		dexId: 10060,
+	},
+	'floette-eternal': {
+		dexId: 10061,
+	},
+	'latias-mega': {
+		dexId: 10062,
+	},
+	'latios-mega': {
+		dexId: 10063,
+	},
+	'swampert-mega': {
+		dexId: 10064,
+	},
+	'sceptile-mega': {
+		dexId: 10065,
+	},
+	'sableye-mega': {
+		dexId: 10066,
+	},
+	'altaria-mega': {
+		dexId: 10067,
+	},
+	'gallade-mega': {
+		dexId: 10068,
+	},
+	'audino-mega': {
+		dexId: 10069,
+	},
+	'sharpedo-mega': {
+		dexId: 10070,
+	},
+	'slowbro-mega': {
+		dexId: 10071,
+	},
+	'steelix-mega': {
+		dexId: 10072,
+	},
+	'pidgeot-mega': {
+		dexId: 10073,
+	},
+	'glalie-mega': {
+		dexId: 10074,
+	},
+	'diancie-mega': {
+		dexId: 10075,
+	},
+	'metagross-mega': {
+		dexId: 10076,
+	},
+	'kyogre-primal': {
+		dexId: 10077,
+	},
+	'groudon-primal': {
+		dexId: 10078,
+	},
+	'rayquaza-mega': {
+		dexId: 10079,
+	},
+	'pikachu-rock-star': {
+		dexId: 10080,
+	},
+	'pikachu-belle': {
+		dexId: 10081,
+	},
+	'pikachu-pop-star': {
+		dexId: 10082,
+	},
+	'pikachu-phd': {
+		dexId: 10083,
+	},
+	'pikachu-libre': {
+		dexId: 10084,
+	},
+	'pikachu-cosplay': {
+		dexId: 10085,
+	},
+	'hoopa-unbound': {
+		dexId: 10086,
+	},
+	'camerupt-mega': {
+		dexId: 10087,
+	},
+	'lopunny-mega': {
+		dexId: 10088,
+	},
+	'salamence-mega': {
+		dexId: 10089,
+	},
+	'beedrill-mega': {
+		dexId: 10090,
+	},
+	'rattata-alola': {
+		dexId: 10091,
+	},
+	'raticate-alola': {
+		dexId: 10092,
+	},
+	'raticate-totem-alola': {
+		dexId: 10093,
+	},
+	'pikachu-original-cap': {
+		dexId: 10094,
+	},
+	'pikachu-hoenn-cap': {
+		dexId: 10095,
+	},
+	'pikachu-sinnoh-cap': {
+		dexId: 10096,
+	},
+	'pikachu-unova-cap': {
+		dexId: 10097,
+	},
+	'pikachu-kalos-cap': {
+		dexId: 10098,
+	},
+	'pikachu-alola-cap': {
+		dexId: 10099,
+	},
+	'raichu-alola': {
+		dexId: 10100,
+	},
+	'sandshrew-alola': {
+		dexId: 10101,
+	},
+	'sandslash-alola': {
+		dexId: 10102,
+	},
+	'vulpix-alola': {
+		dexId: 10103,
+	},
+	'ninetales-alola': {
+		dexId: 10104,
+	},
+	'diglett-alola': {
+		dexId: 10105,
+	},
+	'dugtrio-alola': {
+		dexId: 10106,
+	},
+	'meowth-alola': {
+		dexId: 10107,
+	},
+	'persian-alola': {
+		dexId: 10108,
+	},
+	'geodude-alola': {
+		dexId: 10109,
+	},
+	'graveler-alola': {
+		dexId: 10110,
+	},
+	'golem-alola': {
+		dexId: 10111,
+	},
+	'grimer-alola': {
+		dexId: 10112,
+	},
+	'muk-alola': {
+		dexId: 10113,
+	},
+	'exeggutor-alola': {
+		dexId: 10114,
+	},
+	'marowak-alola': {
+		dexId: 10115,
+	},
+	'greninja-battle-bond': {
+		dexId: 10116,
+	},
+	'greninja-ash': {
+		dexId: 10117,
+	},
+	'zygarde-10-power-construct': {
+		dexId: 10118,
+	},
+	'zygarde-50-power-construct': {
+		dexId: 10119,
+	},
+	'zygarde-complete': {
+		dexId: 10120,
+	},
+	'gumshoos-totem': {
+		dexId: 10121,
+	},
+	'vikavolt-totem': {
+		dexId: 10122,
+	},
+	'oricorio-pom-pom': {
+		dexId: 10123,
+	},
+	'oricorio-pau': {
+		dexId: 10124,
+	},
+	'oricorio-sensu': {
+		dexId: 10125,
+	},
+	'lycanroc-midnight': {
+		dexId: 10126,
+	},
+	'wishiwashi-school': {
+		dexId: 10127,
+	},
+	'lurantis-totem': {
+		dexId: 10128,
+	},
+	'salazzle-totem': {
+		dexId: 10129,
+	},
+	'minior-orange-meteor': {
+		dexId: 10130,
+	},
+	'minior-yellow-meteor': {
+		dexId: 10131,
+	},
+	'minior-green-meteor': {
+		dexId: 10132,
+	},
+	'minior-blue-meteor': {
+		dexId: 10133,
+	},
+	'minior-indigo-meteor': {
+		dexId: 10134,
+	},
+	'minior-violet-meteor': {
+		dexId: 10135,
+	},
+	'minior-red': {
+		dexId: 10136,
+	},
+	'minior-orange': {
+		dexId: 10137,
+	},
+	'minior-yellow': {
+		dexId: 10138,
+	},
+	'minior-green': {
+		dexId: 10139,
+	},
+	'minior-blue': {
+		dexId: 10140,
+	},
+	'minior-indigo': {
+		dexId: 10141,
+	},
+	'minior-violet': {
+		dexId: 10142,
+	},
+	'mimikyu-busted': {
+		dexId: 10143,
+	},
+	'mimikyu-totem-disguised': {
+		dexId: 10144,
+	},
+	'mimikyu-totem-busted': {
+		dexId: 10145,
+	},
+	'kommo-o-totem': {
+		dexId: 10146,
+	},
+	'magearna-original': {
+		dexId: 10147,
+	},
+	'pikachu-partner-cap': {
+		dexId: 10148,
+	},
+	'marowak-totem': {
+		dexId: 10149,
+	},
+	'ribombee-totem': {
+		dexId: 10150,
+	},
+	'rockruff-own-tempo': {
+		dexId: 10151,
+	},
+	'lycanroc-dusk': {
+		dexId: 10152,
+	},
+	'araquanid-totem': {
+		dexId: 10153,
+	},
+	'togedemaru-totem': {
+		dexId: 10154,
+	},
+	'necrozma-dusk': {
+		dexId: 10155,
+	},
+	'necrozma-dawn': {
+		dexId: 10156,
+	},
+	'necrozma-ultra': {
+		dexId: 10157,
+	},
+	'pikachu-starter': {
+		dexId: 10158,
+	},
+	'eevee-starter': {
+		dexId: 10159,
+	},
+	'pikachu-world-cap': {
+		dexId: 10160,
+	},
+	'meowth-galar': {
+		dexId: 10161,
+	},
+	'ponyta-galar': {
+		dexId: 10162,
+	},
+	'rapidash-galar': {
+		dexId: 10163,
+	},
+	'slowpoke-galar': {
+		dexId: 10164,
+	},
+	'slowbro-galar': {
+		dexId: 10165,
+	},
+	'farfetchd-galar': {
+		dexId: 10166,
+	},
+	'weezing-galar': {
+		dexId: 10167,
+	},
+	'mr-mime-galar': {
+		dexId: 10168,
+	},
+	'articuno-galar': {
+		dexId: 10169,
+	},
+	'zapdos-galar': {
+		dexId: 10170,
+	},
+	'moltres-galar': {
+		dexId: 10171,
+	},
+	'slowking-galar': {
+		dexId: 10172,
+	},
+	'corsola-galar': {
+		dexId: 10173,
+	},
+	'zigzagoon-galar': {
+		dexId: 10174,
+	},
+	'linoone-galar': {
+		dexId: 10175,
+	},
+	'darumaka-galar': {
+		dexId: 10176,
+	},
+	'darmanitan-galar-standard': {
+		dexId: 10177,
+	},
+	'darmanitan-galar-zen': {
+		dexId: 10178,
+	},
+	'yamask-galar': {
+		dexId: 10179,
+	},
+	'stunfisk-galar': {
+		dexId: 10180,
+	},
+	'zygarde-10': {
+		dexId: 10181,
+	},
+	'cramorant-gulping': {
+		dexId: 10182,
+	},
+	'cramorant-gorging': {
+		dexId: 10183,
+	},
+	'toxtricity-low-key': {
+		dexId: 10184,
+	},
+	'eiscue-noice': {
+		dexId: 10185,
+	},
+	'indeedee-female': {
+		dexId: 10186,
+	},
+	'morpeko-hangry': {
+		dexId: 10187,
+	},
+	'zacian-crowned': {
+		dexId: 10188,
+	},
+	'zamazenta-crowned': {
+		dexId: 10189,
+	},
+	'eternatus-eternamax': {
+		dexId: 10190,
+	},
+	'urshifu-rapid-strike': {
+		dexId: 10191,
+	},
+	'zarude-dada': {
+		dexId: 10192,
+	},
+	'calyrex-ice': {
+		dexId: 10193,
+	},
+	'calyrex-shadow': {
+		dexId: 10194,
+	},
+	'venusaur-gmax': {
+		dexId: 10195,
+	},
+	'charizard-gmax': {
+		dexId: 10196,
+	},
+	'blastoise-gmax': {
+		dexId: 10197,
+	},
+	'butterfree-gmax': {
+		dexId: 10198,
+	},
+	'pikachu-gmax': {
+		dexId: 10199,
+	},
+	'meowth-gmax': {
+		dexId: 10200,
+	},
+	'machamp-gmax': {
+		dexId: 10201,
+	},
+	'gengar-gmax': {
+		dexId: 10202,
+	},
+	'kingler-gmax': {
+		dexId: 10203,
+	},
+	'lapras-gmax': {
+		dexId: 10204,
+	},
+	'eevee-gmax': {
+		dexId: 10205,
+	},
+	'snorlax-gmax': {
+		dexId: 10206,
+	},
+	'garbodor-gmax': {
+		dexId: 10207,
+	},
+	'melmetal-gmax': {
+		dexId: 10208,
+	},
+	'rillaboom-gmax': {
+		dexId: 10209,
+	},
+	'cinderace-gmax': {
+		dexId: 10210,
+	},
+	'inteleon-gmax': {
+		dexId: 10211,
+	},
+	'corviknight-gmax': {
+		dexId: 10212,
+	},
+	'orbeetle-gmax': {
+		dexId: 10213,
+	},
+	'drednaw-gmax': {
+		dexId: 10214,
+	},
+	'coalossal-gmax': {
+		dexId: 10215,
+	},
+	'flapple-gmax': {
+		dexId: 10216,
+	},
+	'appletun-gmax': {
+		dexId: 10217,
+	},
+	'sandaconda-gmax': {
+		dexId: 10218,
+	},
+	'toxtricity-amped-gmax': {
+		dexId: 10219,
+	},
+	'centiskorch-gmax': {
+		dexId: 10220,
+	},
+	'hatterene-gmax': {
+		dexId: 10221,
+	},
+	'grimmsnarl-gmax': {
+		dexId: 10222,
+	},
+	'alcremie-gmax': {
+		dexId: 10223,
+	},
+	'copperajah-gmax': {
+		dexId: 10224,
+	},
+	'duraludon-gmax': {
+		dexId: 10225,
+	},
+	'urshifu-single-strike-gmax': {
+		dexId: 10226,
+	},
+	'urshifu-rapid-strike-gmax': {
+		dexId: 10227,
+	},
+	'toxtricity-low-key-gmax': {
+		dexId: 10228,
+	},
+	'growlithe-hisui': {
+		dexId: 10229,
+	},
+	'arcanine-hisui': {
+		dexId: 10230,
+	},
+	'voltorb-hisui': {
+		dexId: 10231,
+	},
+	'electrode-hisui': {
+		dexId: 10232,
+	},
+	'typhlosion-hisui': {
+		dexId: 10233,
+	},
+	'qwilfish-hisui': {
+		dexId: 10234,
+	},
+	'sneasel-hisui': {
+		dexId: 10235,
+	},
+	'samurott-hisui': {
+		dexId: 10236,
+	},
+	'lilligant-hisui': {
+		dexId: 10237,
+	},
+	'zorua-hisui': {
+		dexId: 10238,
+	},
+	'zoroark-hisui': {
+		dexId: 10239,
+	},
+	'braviary-hisui': {
+		dexId: 10240,
+	},
+	'sliggoo-hisui': {
+		dexId: 10241,
+	},
+	'goodra-hisui': {
+		dexId: 10242,
+	},
+	'avalugg-hisui': {
+		dexId: 10243,
+	},
+	'decidueye-hisui': {
+		dexId: 10244,
+	},
+	'dialga-origin': {
+		dexId: 10245,
+	},
+	'palkia-origin': {
+		dexId: 10246,
+	},
+	'basculin-white-striped': {
+		dexId: 10247,
+	},
+	'basculegion-female': {
+		dexId: 10248,
+	},
+	'enamorus-therian': {
+		dexId: 10249,
+	},
+	'tauros-paldea-combat-breed': {
+		dexId: 10250,
+	},
+	'tauros-paldea-blaze-breed': {
+		dexId: 10251,
+	},
+	'tauros-paldea-aqua-breed': {
+		dexId: 10252,
+	},
+	'wooper-paldea': {
+		dexId: 10253,
+	},
+	'oinkologne-female': {
+		dexId: 10254,
+	},
+	'dudunsparce-three-segment': {
+		dexId: 10255,
+	},
+	'palafin-hero': {
+		dexId: 10256,
+	},
+	'maushold-family-of-three': {
+		dexId: 10257,
+	},
+	'tatsugiri-droopy': {
+		dexId: 10258,
+	},
+	'tatsugiri-stretchy': {
+		dexId: 10259,
+	},
+	'squawkabilly-blue-plumage': {
+		dexId: 10260,
+	},
+	'squawkabilly-yellow-plumage': {
+		dexId: 10261,
+	},
+	'squawkabilly-white-plumage': {
+		dexId: 10262,
+	},
+	'gimmighoul-roaming': {
+		dexId: 10263,
+	},
+	'koraidon-limited-build': {
+		dexId: 10264,
+	},
+	'koraidon-sprinting-build': {
+		dexId: 10265,
+	},
+	'koraidon-swimming-build': {
+		dexId: 10266,
+	},
+	'koraidon-gliding-build': {
+		dexId: 10267,
+	},
+	'miraidon-low-power-mode': {
+		dexId: 10268,
+	},
+	'miraidon-drive-mode': {
+		dexId: 10269,
+	},
+	'miraidon-aquatic-mode': {
+		dexId: 10270,
+	},
+	'miraidon-glide-mode': {
+		dexId: 10271,
+	},
+	'ursaluna-bloodmoon': {
+		dexId: 10272,
+	},
+	'ogerpon-wellspring-mask': {
+		dexId: 10273,
+	},
+	'ogerpon-hearthflame-mask': {
+		dexId: 10274,
+	},
+	'ogerpon-cornerstone-mask': {
+		dexId: 10275,
+	},
+	'terapagos-terastal': {
+		dexId: 10276,
+	},
+	'terapagos-stellar': {
+		dexId: 10277,
+	},
 };

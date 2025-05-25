@@ -489,8 +489,8 @@ export const extraFeatureCheckList: {
 	{ name: 'trainer ai should use fake out correctly', handled: true },
 	{ name: 'rampaging pokemon for wardens', handled: true },
 	{ name: 'quests for rampagers', handled: true },
-	{ name: 'icon for rampagers' },
-
+	{ name: 'icon for rampagers', handled: true },
+	{ name: 'concept of internalDex', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -499,6 +499,19 @@ export const extraFeatureCheckList: {
 	{ name: 'Sleeping charged up Pokemon attacks even tho sleeping' },
 	{ name: 'timeofday in pokedex' },
 	{ name: 'download did not boost after tablets of ruin lowered' },
+
+	{
+		name: 'refactor encounters into internalDex ',
+	},
+	{
+		name: 'refactor swarms into internalDex',
+	},
+	{
+		name: 'refactor rampagers into internalDex',
+	},
+	{ name: 'refactor berry lure mons into internalDex' },
+	{ name: 'refactor types into internalDex' },
+	{ name: 'refactor bst into internalDex' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
@@ -506,10 +519,7 @@ export const extraFeatureCheckList: {
 	{ name: 'claire' },
 	{ name: 'e4 challenge' },
 	{ name: 'rock climbing' },
-	{ name: 'unlockable recipes' },
-	{ name: 'procedural infinite cave with legendaries' },
 	{ name: 'nuzlocke mode' },
-	{ name: 'cave of shadows where you face yourself' },
 	{ name: 'eggs?' },
 	{ name: 'Fishing?' },
 	{ name: 'magma/aqua quests from Looker' },
@@ -521,4 +531,6 @@ export const extraFeatureCheckList: {
 	{ name: 'steven as the fossil protector' },
 	{ name: 'download your player file and share it with others' },
 	{ name: 'team galactic' },
+	{ name: 'more legendary stories' },
+	{ name: 'cave of shadows where you face yourself' },
 ];

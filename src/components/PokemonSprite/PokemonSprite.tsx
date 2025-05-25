@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
 import { battleSpriteSize } from '../../constants/gameData';
-import { nameToIdMap, PokemonName } from '../../constants/pokemonNames';
+import { internalDex, PokemonName } from '../../constants/pokemonNames';
 
 export const getPokemonSprite = (
 	name: PokemonName,
@@ -12,7 +12,7 @@ export const getPokemonSprite = (
 		spriteGeneration?: 1;
 	}
 ): string => {
-	const id = nameToIdMap[name];
+	const id = internalDex[name].dexId;
 
 	if (config?.spriteGeneration === 1) {
 		if (config.back) {

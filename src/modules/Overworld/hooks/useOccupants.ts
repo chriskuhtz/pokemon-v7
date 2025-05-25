@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { mapsRecord } from '../../../constants/maps/mapsRecord';
-import { nameToIdMap } from '../../../constants/pokemonNames';
+import { internalDex } from '../../../constants/pokemonNames';
 import { getMiddleOfThree } from '../../../functions/getMiddleOfThree';
 import { getRandomOrientation } from '../../../functions/getNextClockwiseDirection';
 import { occupantHandled } from '../../../functions/occupantHandled';
@@ -56,8 +56,7 @@ export const useOccupants = () => {
 			}
 
 			return;
-		}
-		if (
+		} else if (
 			saveFile.currentRampagingPokemon &&
 			saveFile.currentRampagingPokemon.route === map.id
 		) {
@@ -74,7 +73,7 @@ export const useOccupants = () => {
 					x,
 					y,
 					orientation: getRandomOrientation(),
-					dexId: nameToIdMap[name],
+					dexId: internalDex[name].dexId,
 					encounter: {
 						name: name,
 						maxXp: xp,
