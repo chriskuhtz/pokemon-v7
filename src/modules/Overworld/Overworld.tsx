@@ -247,6 +247,7 @@ export const Overworld = () => {
 							transition: `${fps} ease 0s`,
 							zIndex: 0,
 							position: 'absolute',
+							opacity: 0.5,
 						}}
 						id={'foreground'}
 						height={height * baseSize}
