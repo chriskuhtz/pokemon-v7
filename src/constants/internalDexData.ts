@@ -9,6 +9,15 @@ export type SwarmType =
 	| 'PAST_DISTORTION'
 	| 'SPACE_DISTORTION'
 	| 'FUTURE_DISTORTION';
+
+export type EncounterOption = {
+	route: MapId;
+	timeOfDay: TimeOfDay | 'ALL_DAY';
+	minXp: number;
+	maxXp: number;
+	rarity: 'common' | 'medium' | 'rare' | 'ultra-rare';
+	area: 'LAND' | 'WATER';
+};
 export type InternalDexEntry = {
 	dexId: number;
 	rampager?: boolean;
@@ -17,14 +26,7 @@ export type InternalDexEntry = {
 	types: PokemonType[];
 	honey?: boolean;
 	underRock?: boolean;
-	encounterOptions?: {
-		route: MapId;
-		timeOfDay: TimeOfDay | 'ALL_DAY';
-		minXp: number;
-		maxXp: number;
-		rarity: 'common' | 'medium' | 'rare' | 'ultra-rare';
-		area: 'LAND' | 'WATER';
-	}[];
+	encounterOptions?: EncounterOption[];
 };
 
 export const internalDex: Record<PokemonName, InternalDexEntry> = {

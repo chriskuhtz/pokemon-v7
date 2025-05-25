@@ -3,20 +3,21 @@ import {
 	lowBstPokemon,
 	midBstPokemon,
 } from '../constants/baseStatRecord';
+import { getRandomEncounter } from '../constants/internalDex';
+import { MapId } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { getRandomNature } from '../interfaces/Natures';
-import { OverworldMap } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { CatchStreak, PokemonSwarm, SaveFile } from '../interfaces/SaveFile';
 import { StatObject } from '../interfaces/StatObject';
 import { getRandomEntry } from './filterTargets';
 import { getMiddleOfThree } from './getMiddleOfThree';
-import { getRandomEncounter } from './getRandomEncounter';
+import { getTimeOfDay } from './getTimeOfDay';
 import { makeChallengerPokemon } from './makeChallengerPokemon';
 
 export const determineWildPokemon = (
 	team: OwnedPokemon[],
-	map: OverworldMap,
+	mapId: MapId,
 	quests: SaveFile['quests'],
 	waterEncounter: boolean,
 	shinyFactor: number,
@@ -26,6 +27,7 @@ export const determineWildPokemon = (
 	currentStrongSwarm?: PokemonSwarm,
 	currentDistortionSwarm?: PokemonSwarm
 ): OwnedPokemon[] => {
+	const timeOfDay = getTimeOfDay();
 	const applyStreakBoosts = (input: OwnedPokemon): OwnedPokemon => {
 		if (catchStreak?.pokemon === input.name) {
 			let secondShinyRoll = Math.random() / catchStreak.streak < shinyFactor;
@@ -55,13 +57,13 @@ export const determineWildPokemon = (
 			return;
 		}
 
-		if (currentSwarm?.route === map.id) {
+		if (currentSwarm?.route === mapId) {
 			return currentSwarm;
 		}
-		if (currentStrongSwarm?.route === map.id) {
+		if (currentStrongSwarm?.route === mapId) {
 			return currentStrongSwarm;
 		}
-		if (currentDistortionSwarm?.route === map.id) {
+		if (currentDistortionSwarm?.route === mapId) {
 			return currentDistortionSwarm;
 		}
 	};
@@ -74,7 +76,10 @@ export const determineWildPokemon = (
 				{
 					name: catchStreak.pokemon,
 					nature: getRandomNature(),
-					...getRandomEncounter(map, waterEncounter),
+					...getRandomEncounter(mapId, {
+						area: waterEncounter ? 'WATER' : 'LAND',
+						timeOfDay,
+					}),
 				},
 				{ increasedShinyFactor: shinyFactor }
 			),
@@ -127,7 +132,7 @@ export const determineWildPokemon = (
 		];
 	} else if (
 		quests['retrieve oaks parcel from raticate'] === 'ACTIVE' &&
-		map.id === 'routeS1E1' &&
+		mapId === 'routeS1E1' &&
 		Math.random() < 0.1
 	) {
 		encounter = [
@@ -158,14 +163,20 @@ export const determineWildPokemon = (
 						makeChallengerPokemon(
 							{
 								nature: getRandomNature(),
-								...getRandomEncounter(map, waterEncounter),
+								...getRandomEncounter(mapId, {
+									area: waterEncounter ? 'WATER' : 'LAND',
+									timeOfDay,
+								}),
 							},
 							{ increasedShinyFactor: shinyFactor }
 						),
 						makeChallengerPokemon(
 							{
 								nature: getRandomNature(),
-								...getRandomEncounter(map, waterEncounter),
+								...getRandomEncounter(mapId, {
+									area: waterEncounter ? 'WATER' : 'LAND',
+									timeOfDay,
+								}),
 							},
 							{ increasedShinyFactor: shinyFactor }
 						),
@@ -174,7 +185,10 @@ export const determineWildPokemon = (
 						makeChallengerPokemon(
 							{
 								nature: getRandomNature(),
-								...getRandomEncounter(map, waterEncounter),
+								...getRandomEncounter(mapId, {
+									area: waterEncounter ? 'WATER' : 'LAND',
+									timeOfDay,
+								}),
 							},
 							{ increasedShinyFactor: shinyFactor }
 						),

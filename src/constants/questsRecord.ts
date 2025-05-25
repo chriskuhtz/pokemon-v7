@@ -49,7 +49,6 @@ import { mistyId } from './maps/occupants/misty';
 import { allRocketCampTrainersDefeated } from './maps/occupants/rocketCampOccupants';
 import { sabrinaId } from './maps/occupants/sabrina';
 import { surgeId } from './maps/occupants/surge';
-import { routeS1 } from './maps/routeS1';
 import { PokemonName, pokemonNames } from './pokemonNames';
 
 const expCandyPackage: Partial<Inventory> = {
@@ -318,7 +317,6 @@ export const questNames = [
 	'reach cooking skill 20',
 	'reach cooking skill 50',
 	'reach cooking skill 100',
-	'catch all different pokemon on routeS1',
 	'lure a pokemon with a berry',
 	'lure 10 different pokemon with berries',
 	'lure 20 different pokemon with berries',
@@ -677,33 +675,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		availableAfter: 'find a pokemon under a smashed rock',
 		requiredUpgrade: 'sledge hammer certification',
-	},
-	'catch all different pokemon on routeS1': {
-		category: 'EXPLORATION',
-		rewardItems: {
-			'dragon-scale': 1,
-			'water-stone': 2,
-			'belue-berry': 5,
-			'razz-berry': 5,
-			'rindo-berry': 5,
-		},
-		researchPoints: 50,
-		conditionFunction: (s) => {
-			return [
-				...routeS1.possibleEncounters.BASE,
-				...routeS1.possibleEncounters.WATER,
-			].every((e) => s.pokedex[e.name].caughtOnRoutes.includes(routeS1.id));
-		},
-		targetPokemon: [
-			...new Set(
-				[
-					...routeS1.possibleEncounters.BASE,
-					...routeS1.possibleEncounters.WATER,
-				].map((p) => p.name)
-			),
-		],
-		kind: 'BULLETIN',
-		requiredUpgrade: 'swimming certification',
 	},
 	'catch a pokemon orginally found in kanto': {
 		category: 'POKEDEX',

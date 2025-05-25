@@ -1,4 +1,10 @@
 import { getRandomEntry } from '../functions/filterTargets';
+import { TimeOfDay } from '../functions/getTimeOfDay';
+import {
+	EncounterRarity,
+	OverworldEncounter,
+} from '../interfaces/OverworldMap';
+import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { PokemonType, pokemonTypes } from '../interfaces/PokemonType';
 import { internalDex, SwarmType } from './internalDexData';
 import { MapId } from './maps/mapsRecord';
@@ -50,6 +56,70 @@ export const getBerryLureMon = (map: MapId, type: PokemonType) => {
 		return;
 	}
 	return getRandomEntry(options);
+};
+
+export const getAllEncountersFor = (
+	mapId: MapId,
+	config: {
+		area?: 'WATER' | 'LAND';
+		timeOfDay?: TimeOfDay;
+		includeAllDay?: boolean;
+		rarity?: EncounterRarity;
+	}
+): OverworldEncounter[] => {
+	const { area, timeOfDay, rarity, includeAllDay } = config;
+	const res: OverworldEncounter[] = [];
+	Object.entries(internalDex).map(([key, value]) => {
+		value.encounterOptions?.forEach((option) => {
+			if (option.route !== mapId) {
+				return;
+			}
+			if (
+				timeOfDay &&
+				option.timeOfDay !== timeOfDay &&
+				!(includeAllDay && option.timeOfDay === 'ALL_DAY')
+			) {
+				return;
+			}
+			if (area && option.area !== area) {
+				return;
+			}
+			if (rarity && option.rarity !== rarity) {
+				return;
+			}
+			res.push({ name: key as PokemonName, ...option });
+		});
+	});
+
+	return res;
+};
+
+export const getRandomEncounter = (
+	mapId: MapId,
+	config: {
+		area?: 'WATER' | 'LAND';
+		timeOfDay?: TimeOfDay;
+	}
+): Partial<OwnedPokemon> => {
+	const options = getAllEncountersFor(mapId, config);
+	const flatMapped = options.flatMap((p) => {
+		if (p.rarity === 'common') {
+			return [p, p, p, p, p, p];
+		}
+		if (p.rarity === 'medium') {
+			return [p, p, p, p];
+		}
+		if (p.rarity === 'rare') {
+			return [p, p, p];
+		}
+		return [p];
+	});
+
+	const chosen = getRandomEntry(flatMapped);
+	const xp = Math.floor(
+		chosen.maxXp - Math.random() * (chosen.maxXp - chosen.minXp)
+	);
+	return { ...chosen, xp };
 };
 
 const overUsed = Object.entries(internalDex)

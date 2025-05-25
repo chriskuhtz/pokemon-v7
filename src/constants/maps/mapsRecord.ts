@@ -71,14 +71,6 @@ export const mapDisplayNames: Record<MapId, string> = {
 export const Emptymap: OverworldMap = {
 	id: 'camp',
 	occupants: [],
-	possibleEncounters: {
-		BASE: [],
-		WATER: [],
-		MORNING: [],
-		EVENING: [],
-		DAY: [],
-		NIGHT: [],
-	},
 	timeOfDayShadersMap: defaultShaderMap,
 	tilesetUrl: '/tilesets/palletTown.png',
 	tileMap: {
