@@ -500,7 +500,7 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'refactor types into internalDex', handled: true },
-	{ name: 'refactor berry lure mons into internalDex' },
+	{ name: 'refactor berry lure mons into internalDex', handled: true },
 
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },

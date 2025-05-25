@@ -48,20 +48,7 @@ export const BerryLure = () => {
 			const succeded = Math.random() > 0.25;
 
 			const getRouteBasedLureEncounter = (): PokemonName | undefined => {
-				//Todo: put me back
-				// if (location.mapId === 'routeN1E1') {
-				// 	return lureBerryEncountersN1E1[lureType[0] as PokemonType];
-				// }
-				// if (location.mapId === 'routeE1') {
-				// 	return lureBerryEncountersE1[lureType[0] as PokemonType];
-				// }
-				// if (location.mapId === 'routeS1E1') {
-				// 	return lureBerryEncountersS1E1[lureType[0] as PokemonType];
-				// }
-				// if (location.mapId === 'routeS1W1') {
-				// 	return lureBerryEncountersS1W1[lureType[0] as PokemonType];
-				// }
-				return getBerryLureMon('routeN1', lureType);
+				return getBerryLureMon(location.mapId, lureType);
 			};
 
 			const encounterName = getRouteBasedLureEncounter();
