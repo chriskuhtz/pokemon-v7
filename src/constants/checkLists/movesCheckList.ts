@@ -2412,7 +2412,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/681/',
 		handled: true,
 	},
-	{ name: 'burn-up', url: 'https://pokeapi.co/api/v2/move/682/' },
+	{
+		name: 'burn-up',
+		url: 'https://pokeapi.co/api/v2/move/682/',
+		handled: true,
+	},
 	{ name: 'speed-swap', url: 'https://pokeapi.co/api/v2/move/683/' },
 	{ name: 'smart-strike', url: 'https://pokeapi.co/api/v2/move/684/' },
 	{ name: 'purify', url: 'https://pokeapi.co/api/v2/move/685/' },
@@ -3380,6 +3384,7 @@ export const handledMoves = [
 	'lunge',
 	'fire-lash',
 	'power-trip',
+	'burn-up',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
