@@ -65,7 +65,7 @@ const overUsed = Object.entries(internalDex)
 		);
 	})
 	.map(([key]) => key);
-console.log('overUsed Mons', overUsed);
+console.log('Mons with more than one encounter option', overUsed);
 // const neverUsed = Object.entries(internalDex)
 // 	.filter(([, value]) => {
 // 		return (
@@ -90,3 +90,10 @@ console.log('overUsed Mons', overUsed);
 // 		})
 // 	)
 // );
+
+const onMultipleRoutes = Object.entries(internalDex)
+	.filter(
+		([, value]) => value.encounterOptions && value.encounterOptions?.length > 1
+	)
+	.map(([key]) => key);
+console.log('on multiple routes', onMultipleRoutes);
