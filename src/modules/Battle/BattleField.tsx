@@ -22,6 +22,7 @@ import { getSettings } from '../../functions/getPlayerId';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
 import { handleCheekPouch } from '../../functions/handleCheekPouch';
 import { isKO } from '../../functions/isKo';
+import { OPPO_ID } from '../../functions/makeChallengerPokemon';
 import { reduceSecondaryAilmentDurations } from '../../functions/reduceSecondaryAilmentDurations';
 import { sortByPriority } from '../../functions/sortByPriority';
 import { LocationContext } from '../../hooks/LocationProvider';
@@ -115,7 +116,7 @@ export const BattleField = ({
 	latestMessage: Message | undefined;
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
-	challengerId?: string;
+	challengerId: string;
 	rewardItems?: Partial<Inventory>;
 	spriteGeneration?: 1;
 }) => {
@@ -125,7 +126,10 @@ export const BattleField = ({
 	const { playerColor, oppColor } = useLocationColors();
 
 	const { location } = useContext(LocationContext);
-	const isTrainerBattle = useMemo(() => !!challengerId, [challengerId]);
+	const isTrainerBattle = useMemo(
+		() => challengerId !== OPPO_ID,
+		[challengerId]
+	);
 
 	const [battleRound, setBattleRound] = useState<number>(0);
 	const [battleLocation] = useState<BattleLocation>('STANDARD');

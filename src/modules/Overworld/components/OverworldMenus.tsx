@@ -6,7 +6,10 @@ import { RepelIcon } from '../../../components/RepelIcon/RepelIcon';
 import { StreakIcon } from '../../../components/StreakIcon/StreakIcon';
 import { TeamOverview } from '../../../components/TeamOverview/TeamOverview';
 import { TimeOfDayIcon } from '../../../components/TimeOfDayIcon/TimeOfDayIcon';
-import { TroubleMakersIcon } from '../../../components/TroubleMakersIcon/TroubleMakersIcon';
+import {
+	RampagerIcon,
+	TroubleMakersIcon,
+} from '../../../components/TroubleMakersIcon/TroubleMakersIcon';
 import { WeatherIcon } from '../../../components/WeatherIcon/WeatherIcon';
 import { battleSpriteSize } from '../../../constants/gameData';
 import {
@@ -113,6 +116,7 @@ export const OverworldMenus = ({
 			>
 				<StreakIcon />
 				<TroubleMakersIcon />
+				<RampagerIcon />
 				<RepelIcon />
 				<LureIcon />
 				<strong>{mapDisplayNames[map.id]}</strong>

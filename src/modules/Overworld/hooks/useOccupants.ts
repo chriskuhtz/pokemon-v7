@@ -1,6 +1,7 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { mapsRecord } from '../../../constants/maps/mapsRecord';
 import { nameToIdMap } from '../../../constants/pokemonNames';
+import { getMiddleOfThree } from '../../../functions/getMiddleOfThree';
 import { getRandomOrientation } from '../../../functions/getNextClockwiseDirection';
 import { occupantHandled } from '../../../functions/occupantHandled';
 import {
@@ -61,7 +62,11 @@ export const useOccupants = () => {
 			saveFile.currentRampagingPokemon.route === map.id
 		) {
 			const { x, y, id, name } = saveFile.currentRampagingPokemon;
-
+			const xp = getMiddleOfThree([
+				70 * 70 * 70,
+				Math.random() * 1000000,
+				1000000,
+			]);
 			const all: Occupant[] = [
 				...map.occupants,
 				{
@@ -72,8 +77,8 @@ export const useOccupants = () => {
 					dexId: nameToIdMap[name],
 					encounter: {
 						name: name,
-						maxXp: 100 * 100 * 100,
-						minXp: 70 * 70 * 70,
+						maxXp: xp,
+						minXp: xp,
 						rarity: 'common',
 					},
 					dialogue: [`The rampaging ${name} attacks`],

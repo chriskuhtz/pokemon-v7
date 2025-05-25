@@ -488,7 +488,7 @@ export const extraFeatureCheckList: {
 	{ name: ' team magma', handled: true },
 	{ name: 'trainer ai should use fake out correctly', handled: true },
 	{ name: 'rampaging pokemon for wardens', handled: true },
-	{ name: 'quests for rampagers' },
+	{ name: 'quests for rampagers', handled: true },
 	{ name: 'icon for rampagers' },
 
 	//BUGS/IMPROVEMENTS:

@@ -23,6 +23,7 @@ import { EmptyStatObject } from '../../interfaces/StatObject';
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import { campUpgradeNames, CampUpgrade } from '../../constants/campUpgrades';
 const defaultStarters: PokemonName[] = ['bulbasaur', 'charmander', 'squirtle'];
 export const StarterSelection = (): JSX.Element => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
@@ -84,9 +85,9 @@ export const StarterSelection = (): JSX.Element => {
 					},
 				],
 				storage: CompleteInventory,
-				// campUpgrades: Object.fromEntries(
-				// 	campUpgradeNames.map((key) => [key, true])
-				// ) as Record<CampUpgrade, boolean>,
+				campUpgrades: Object.fromEntries(
+					campUpgradeNames.map((key) => [key, true])
+				) as Record<CampUpgrade, boolean>,
 				meta: { activeTab: 'OVERWORLD' },
 				researchPoints: 20000,
 				pokedex,
