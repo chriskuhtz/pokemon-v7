@@ -1,3 +1,4 @@
+import { protectMoves } from '../../../../../../constants/groupedMoves';
 import { applySecondaryAilmentToPokemon } from '../../../../../../functions/applySecondaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from '../../../../../../functions/applyStatChangeToPokemon';
 import { changeMovePP } from '../../../../../../functions/changeMovePP';
@@ -323,15 +324,9 @@ export const handleUniqueMoves = ({
 			statBoosts: updatedTarget.statBoosts,
 		};
 	}
-	if (
-		move.name === 'protect' ||
-		move.name === 'detect' ||
-		move.name === 'spiky-shield'
-	) {
+	if (protectMoves.includes(move.name)) {
 		if (
-			(updatedAttacker.lastUsedMove?.name === 'protect' ||
-				updatedAttacker.lastUsedMove?.name === 'detect' ||
-				updatedAttacker.lastUsedMove?.name === 'endure') &&
+			protectMoves.includes(updatedAttacker.lastUsedMove?.name ?? '') &&
 			Math.random() > 0.5
 		) {
 			addMessage({
@@ -342,6 +337,7 @@ export const handleUniqueMoves = ({
 				...updatedAttacker,
 				protected: true,
 				spikyShielded: move.name === 'spiky-shield',
+				banefulBunkered: move.name === 'baneful-bunker',
 			};
 		}
 	}

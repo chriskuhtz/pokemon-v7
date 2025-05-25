@@ -4,6 +4,7 @@ import {
 	abilityNames,
 } from '../constants/checkLists/completed/abilityCheckList';
 import { MoveName } from '../constants/checkLists/movesCheckList';
+import { internalDex } from '../constants/internalDex';
 import { calculateLevelData } from '../functions/calculateLevelData';
 import { getRandomEntry } from '../functions/filterTargets';
 import { getEvAwards } from '../functions/getEvAwards';
@@ -19,7 +20,6 @@ import { OwnedPokemon, PokemonGender } from '../interfaces/OwnedPokemon';
 import { PokemonData } from '../interfaces/PokemonData';
 import { PokemonSpeciesData } from '../interfaces/PokemonSpeciesData';
 import { EmptyStatObject } from '../interfaces/StatObject';
-import { internalDex } from '../constants/internalDex';
 
 export interface BattleTeamConfig {
 	assignLearnsetMoves?: boolean;
@@ -218,6 +218,7 @@ export const useGetBattleTeam = (
 					participatedInBattle: false,
 					protected: false,
 					spikyShielded: false,
+					banefulBunkered: false,
 					endured: false,
 					charged: false,
 					helpingHanded: false,

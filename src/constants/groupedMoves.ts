@@ -567,3 +567,10 @@ export const slicingMoves = [
 	'tachyon-cutter',
 ];
 export const firstTurnMoves = ['fake-out', 'first-impression'];
+
+export const protectMoves = [
+	'protect',
+	'detect',
+	'spiky-shield',
+	'baneful-bunker',
+];
