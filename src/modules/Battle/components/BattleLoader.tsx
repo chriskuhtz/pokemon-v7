@@ -99,6 +99,7 @@ export const BattleLoader = ({
 				latestMessage={latestMessage}
 				addMessage={addMessage}
 				addMultipleMessages={addMultipleMessages}
+				challengerType={challenger.type}
 			/>
 		</>
 	);
