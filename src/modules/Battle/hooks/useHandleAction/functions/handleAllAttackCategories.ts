@@ -109,6 +109,7 @@ export const handleAllAttackCategories = ({
 					addMessage,
 					move,
 					battleWeather,
+					terrain,
 				});
 			case 'force-switch':
 				return handleForceSwitch(attacker, move.name);
