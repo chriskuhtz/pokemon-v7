@@ -2350,8 +2350,16 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/661/',
 		handled: true,
 	},
-	{ name: 'spirit-shackle', url: 'https://pokeapi.co/api/v2/move/662/' },
-	{ name: 'darkest-lariat', url: 'https://pokeapi.co/api/v2/move/663/' },
+	{
+		name: 'spirit-shackle',
+		url: 'https://pokeapi.co/api/v2/move/662/',
+		handled: true,
+	},
+	{
+		name: 'darkest-lariat',
+		url: 'https://pokeapi.co/api/v2/move/663/',
+		handled: true,
+	},
 	{ name: 'sparkling-aria', url: 'https://pokeapi.co/api/v2/move/664/' },
 	{ name: 'ice-hammer', url: 'https://pokeapi.co/api/v2/move/665/' },
 	{ name: 'floral-healing', url: 'https://pokeapi.co/api/v2/move/666/' },
@@ -3315,6 +3323,8 @@ export const handledMoves = [
 	'shore-up',
 	'first-impression',
 	'baneful-bunker',
+	'spirit-shackle',
+	'darkest-lariat',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
