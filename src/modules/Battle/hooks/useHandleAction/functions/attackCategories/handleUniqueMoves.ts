@@ -571,7 +571,19 @@ export const handleUniqueMoves = ({
 			updatedAttacker = { ...updatedAttacker, heldItemName: undefined };
 		}
 	}
-
+	if (move.name === 'purify') {
+		if (updatedAttacker.primaryAilment) {
+			addMessage({ message: `${updatedAttacker.name} healed itself` });
+			updatedAttacker = {
+				...updatedAttacker,
+				primaryAilment: undefined,
+				damage: Math.max(
+					0,
+					updatedAttacker.damage - Math.floor(updatedAttacker.stats.hp / 2)
+				),
+			};
+		} else addMessage({ message: `it failed` });
+	}
 	return updatedPokemon.map((p) => {
 		if (p.id === updatedAttacker.id) {
 			return updatedAttacker;

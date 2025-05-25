@@ -386,8 +386,14 @@ export const flyHitMoves = [
 	'smack-down',
 	'magnet-bomb',
 	'hurricane',
+	'smart-strike',
 ];
-export const digHitMoves = ['earthquake', 'magnitude', 'magnet-bomb'];
+export const digHitMoves = [
+	'earthquake',
+	'magnitude',
+	'magnet-bomb',
+	'smart-strike',
+];
 export const shadowHitMoves = ['magnet-bomb'];
 export const flyDoubleDamageMoves = ['gust', 'twister'];
 export const diveDoubleDamageMoves = ['surf', 'whirlpool'];

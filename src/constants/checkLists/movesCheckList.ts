@@ -2417,9 +2417,13 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/682/',
 		handled: true,
 	},
-	{ name: 'speed-swap', url: 'https://pokeapi.co/api/v2/move/683/' },
-	{ name: 'smart-strike', url: 'https://pokeapi.co/api/v2/move/684/' },
-	{ name: 'purify', url: 'https://pokeapi.co/api/v2/move/685/' },
+
+	{
+		name: 'smart-strike',
+		url: 'https://pokeapi.co/api/v2/move/684/',
+		handled: true,
+	},
+	{ name: 'purify', url: 'https://pokeapi.co/api/v2/move/685/', handled: true },
 	{ name: 'revelation-dance', url: 'https://pokeapi.co/api/v2/move/686/' },
 	{ name: 'core-enforcer', url: 'https://pokeapi.co/api/v2/move/687/' },
 	{ name: 'trop-kick', url: 'https://pokeapi.co/api/v2/move/688/' },
@@ -2848,6 +2852,7 @@ export const movesCheckList: {
 	{ name: 'gear-up', url: 'https://pokeapi.co/api/v2/move/674/' },
 	{ name: 'throat-chop', url: 'https://pokeapi.co/api/v2/move/675/' },
 	{ name: 'pollen-puff', url: 'https://pokeapi.co/api/v2/move/676/' },
+	{ name: 'speed-swap', url: 'https://pokeapi.co/api/v2/move/683/' },
 ];
 
 export const handledMoves = [
@@ -3385,6 +3390,8 @@ export const handledMoves = [
 	'fire-lash',
 	'power-trip',
 	'burn-up',
+	'smart-strike',
+	'purify',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
