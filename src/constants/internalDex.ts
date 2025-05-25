@@ -14,6 +14,7 @@ export type InternalDexEntry = {
 	swarm?: SwarmType;
 	berryLureMapId?: MapId;
 	types: PokemonType[];
+	honey?: boolean;
 };
 
 export const internalDex: Record<PokemonName, InternalDexEntry> = {
@@ -245,6 +246,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	mankey: {
 		dexId: 56,
 		types: ['fighting'],
+		honey: true,
 	},
 	primeape: {
 		dexId: 57,
@@ -440,6 +442,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	exeggcute: {
 		dexId: 102,
 		types: ['grass', 'psychic'],
+		honey: true,
 	},
 	exeggutor: {
 		dexId: 103,
@@ -807,6 +810,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	aipom: {
 		dexId: 190,
 		types: ['normal'],
+		honey: true,
 	},
 	sunkern: {
 		dexId: 191,
@@ -866,6 +870,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	pineco: {
 		dexId: 204,
 		types: ['bug'],
+		honey: true,
 	},
 	forretress: {
 		dexId: 205,
@@ -908,8 +913,8 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	heracross: {
 		dexId: 214,
-		rampager: true,
 		types: ['bug', 'fighting'],
+		honey: true,
 	},
 	sneasel: {
 		dexId: 215,
@@ -1563,12 +1568,12 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	bagon: {
 		dexId: 371,
 		types: ['dragon'],
+		berryLureMapId: 'routeE1',
 	},
 	shelgon: {
 		dexId: 372,
 		swarm: 'STRONG',
 		types: ['dragon'],
-		berryLureMapId: 'routeE1',
 	},
 	salamence: {
 		dexId: 373,
@@ -1709,6 +1714,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	budew: {
 		dexId: 406,
 		types: ['grass', 'poison'],
+		honey: true,
 	},
 	roserade: {
 		dexId: 407,
@@ -1733,6 +1739,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	burmy: {
 		dexId: 412,
 		types: ['bug'],
+		honey: true,
 	},
 	'wormadam-plant': {
 		dexId: 413,
@@ -1745,6 +1752,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	combee: {
 		dexId: 415,
 		types: ['bug', 'flying'],
+		honey: true,
 	},
 	vespiquen: {
 		dexId: 416,
@@ -1872,6 +1880,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	munchlax: {
 		dexId: 446,
 		types: ['normal'],
+		honey: true,
 	},
 	riolu: {
 		dexId: 447,
@@ -2292,6 +2301,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	petilil: {
 		dexId: 548,
 		types: ['grass'],
+		honey: true,
 	},
 	lilligant: {
 		dexId: 549,
@@ -4614,6 +4624,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'pikachu-cosplay': {
 		dexId: 10085,
 		types: ['electric'],
+		honey: true,
 	},
 	'hoopa-unbound': {
 		dexId: 10086,
@@ -5406,6 +5417,11 @@ export const getRampagers = () => {
 		.filter(([, value]) => value.rampager)
 		.map(([key]) => key) as PokemonName[];
 };
+export const getHoneyEncounters = () => {
+	return Object.entries(internalDex)
+		.filter(([, value]) => value.honey)
+		.map(([key]) => key) as PokemonName[];
+};
 export const getSwarmOptions = (type: SwarmType) => {
 	return Object.entries(internalDex)
 		.filter(([, value]) => value.swarm === type)
@@ -5428,3 +5444,54 @@ export const getBerryLureMon = (map: MapId, type: PokemonType) => {
 	}
 	return getRandomEntry(options);
 };
+
+export const honeyPokemon: PokemonName[] = [
+	'burmy',
+	'mankey',
+	'heracross',
+	'munchlax',
+	'petilil',
+	'combee',
+	'aipom',
+	'pineco',
+	'exeggcute',
+	'budew',
+	'pikachu-cosplay',
+];
+const overUsed = Object.entries(internalDex)
+	.filter(([, value]) => {
+		return (
+			[
+				!!value.berryLureMapId,
+				!!value.honey,
+				!!value.rampager,
+				!!value.swarm,
+			].filter((v) => v).length > 1
+		);
+	})
+	.map(([key]) => key);
+console.log('overUsed Mons', overUsed);
+// const neverUsed = Object.entries(internalDex)
+// 	.filter(([, value]) => {
+// 		return (
+// 			[
+// 				!!value.berryLureMapId,
+// 				!!value.honey,
+// 				!!value.rampager,
+// 				!!value.swarm,
+// 			].filter((v) => v).length === 0
+// 		);
+// 	})
+// 	.map(([key]) => key);
+
+// console.log('neverUsed Mons', neverUsed);
+
+// console.log(
+// 	Object.fromEntries(
+// 		Object.entries(internalDex).map(([key, value]) => {
+// 			return honeyPokemon.includes(key)
+// 				? [key, { ...value, honey: true }]
+// 				: [key, value];
+// 		})
+// 	)
+// );

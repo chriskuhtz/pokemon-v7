@@ -9,7 +9,6 @@ import {
 	trainers,
 } from '../functions/makeRandomTrainer';
 import { sumOfIvs } from '../functions/sumOfIvs';
-import { honeyPokemon } from '../hooks/useHoneyTree';
 
 import { Inventory } from '../interfaces/Inventory';
 import {
@@ -35,7 +34,11 @@ import {
 import { catchQuests } from './generatedQuests/catchQuests';
 import { travellingTrainerQuests } from './generatedQuests/travellingTrainersQuests';
 import { typeCatchQuests } from './generatedQuests/typeCatchQuests';
-import { getSwarmOptions } from './internalDex';
+import {
+	getHoneyEncounters,
+	getSwarmOptions,
+	honeyPokemon,
+} from './internalDex';
 import { caveW1Encounters } from './maps/encounters/caveW1';
 import { onixCaveEncounters } from './maps/encounters/onixCave';
 import { blaineId } from './maps/occupants/blaine';
@@ -648,7 +651,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'sun-stone': 2, 'leaf-stone': 2, 'berry-juice': 5 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return honeyPokemon.every((e) => s.pokedex[e].caughtOnRoutes.length > 0);
+			return getHoneyEncounters().every(
+				(e) => s.pokedex[e].caughtOnRoutes.length > 0
+			);
 		},
 		targetPokemon: honeyPokemon,
 		kind: 'BULLETIN',

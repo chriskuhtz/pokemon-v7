@@ -1,5 +1,5 @@
 import { useCallback, useContext } from 'react';
-import { PokemonName } from '../constants/pokemonNames';
+import { getHoneyEncounters } from '../constants/internalDex';
 import { getRandomIndex } from '../functions/filterTargets';
 import {
 	makeChallengerPokemon,
@@ -12,21 +12,7 @@ import { LocationContext } from './LocationProvider';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
-export const honeyPokemon: PokemonName[] = [
-	'burmy',
-	'mankey',
-	'heracross',
-	'munchlax',
-	'petilil',
-	'combee',
-	'aipom',
-	'pineco',
-	'exeggcute',
-	'budew',
-	'pikachu-cosplay',
-];
-
-const HONEY_ENCOUNTER_OPTIONS: OwnedPokemon[] = honeyPokemon.map((h) =>
+const HONEY_ENCOUNTER_OPTIONS: OwnedPokemon[] = getHoneyEncounters().map((h) =>
 	makeChallengerPokemon({
 		nature: getRandomNature(),
 		name: h,
