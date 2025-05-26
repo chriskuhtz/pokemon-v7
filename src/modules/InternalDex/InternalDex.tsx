@@ -81,7 +81,7 @@ export const InternalDex = (): JSX.Element => {
 							}}
 							onClick={() => setRouteFilter(id)}
 						>
-							{id}
+							{replaceRouteName(id)}
 						</button>
 					))}
 				</Stack>

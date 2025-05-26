@@ -233,7 +233,7 @@ export const determineTypeFactor = (
 	if (res === 0) {
 		if (addMessage) {
 			addMessage({
-				message: 'It has no effect',
+				message: `It has no effect against ${target.name}`,
 				icon: <strong>x{res}</strong>,
 			});
 		}
@@ -241,13 +241,13 @@ export const determineTypeFactor = (
 	}
 	if (res > 1 && addMessage) {
 		addMessage({
-			message: 'It is very effective',
+			message: `It is very effective against ${target.name}`,
 			icon: <strong>x{res}</strong>,
 		});
 	}
 	if (res < 1 && addMessage) {
 		addMessage({
-			message: 'It is not very effective',
+			message: `It is not very effective against ${target.name}`,
 			icon: <strong>x{res}</strong>,
 		});
 	}

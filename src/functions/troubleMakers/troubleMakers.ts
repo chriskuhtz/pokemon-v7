@@ -8,7 +8,6 @@ import {
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { getRandomEntry } from '../filterTargets';
 import { getHighestXpOnTeam } from '../getHighestXpOnTeam';
-import { getMiddleOfThree } from '../getMiddleOfThree';
 import { getRandomOrientation } from '../getNextClockwiseDirection';
 import { getRandomPosition } from '../getRandomPosition';
 import { makeChallengerPokemon } from '../makeChallengerPokemon';
@@ -21,6 +20,7 @@ import {
 import {
 	galacticNamesFemale,
 	galacticNamesMale,
+	galacticPokemon,
 	getGalacticJupiterTeam,
 	getGalacticMarsTeam,
 	getGalacticSaturnTeam,
@@ -214,28 +214,24 @@ export const getTroubleMakerTeam = (s: SaveFile): OwnedPokemon[] => {
 		if (s.troubleMakers?.affiliation === 'aqua') {
 			return aquaPokemon;
 		}
+		if (s.troubleMakers?.affiliation === 'galactic') {
+			return galacticPokemon;
+		}
 
 		return rocketPokemon;
 	};
 	const numberOfMembers = determineNumberOfMembers(rangerLevel);
 
 	const xp = getHighestXpOnTeam(s.pokemon);
-	const minXp = xp * 0.8;
-	const maxXp = xp * 0.95;
-	const availableMons = pokemon().filter(
-		(r) => r.minXp >= minXp && r.maxXp <= maxXp
-	);
+
+	const availableMons = pokemon().filter((r) => r.minXp <= xp);
 
 	return Array.from({ length: numberOfMembers }).map(() => {
 		const mon = getRandomEntry(availableMons);
 
 		return makeChallengerPokemon({
 			name: mon.name,
-			xp: getMiddleOfThree([
-				mon.minXp,
-				mon.maxXp,
-				Math.floor(mon.maxXp * Math.random()),
-			]),
+			xp: xp * (Math.random() * 0.25 + 0.75),
 		});
 	});
 };
