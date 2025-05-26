@@ -1,6 +1,8 @@
 import { getHeldItem } from '../../../../../../functions/getHeldItem';
+import { Message } from '../../../../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
+import { WeatherType } from '../../../../../../interfaces/Weather';
 import { BattleFieldEffect } from '../../../../BattleField';
 
 export const handleFieldEffectMoves = ({
@@ -9,12 +11,16 @@ export const handleFieldEffectMoves = ({
 	move,
 	addBattleFieldEffect,
 	target,
+	weather,
+	addMessage,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
 	move: BattleAttack;
 	addBattleFieldEffect: (x: BattleFieldEffect) => void;
 	target: BattlePokemon;
+	weather: WeatherType | undefined;
+	addMessage: (message: Message) => void;
 }): BattlePokemon[] => {
 	//MIST, LIGHT-SCREEN, REFLECT
 	if (['mist', 'light-screen', 'reflect'].includes(move.name)) {
@@ -59,6 +65,16 @@ export const handleFieldEffectMoves = ({
 			ownerId: target.ownerId,
 			duration: 5,
 		});
+	}
+	if (move.name === 'aurora-veil') {
+		if (weather !== 'hail') {
+			addMessage({ message: 'it failed' });
+		} else
+			addBattleFieldEffect({
+				type: move.name as BattleFieldEffect['type'],
+				ownerId: target.ownerId,
+				duration: 5,
+			});
 	}
 	return pokemon.map((p) => {
 		if (p.id === attacker.id) {

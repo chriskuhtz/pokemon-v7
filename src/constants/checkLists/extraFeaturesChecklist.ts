@@ -520,6 +520,7 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'overwoldmap area type', handled: true },
 	{ name: 'only show internaldex for caught pokemon', handled: true },
+	{ name: 'filter for internaldex' },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -531,6 +532,7 @@ Sie finden nicht immer gleich hintereinander statt also manchmal ist 1ster kick 
 Der zweite doppelkick trifft auch untergetauchte pokemon
 Anmerkung: beides nur mit doppel kick getestet`,
 	},
+	{ name: 'icons in message' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
