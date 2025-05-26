@@ -552,7 +552,7 @@ export const handleDamageAttack = ({
 			message: `${updatedAttacker.name} uses parental bond to hit twice`,
 		});
 	}
-	if (move.name === 'brick-break') {
+	if (move.name === 'brick-break' || move.name === 'psychic-fangs') {
 		addMessage({
 			message: `${updatedAttacker.name} breaks through any protective screens`,
 		});

@@ -1,4 +1,5 @@
 import { useCallback, useContext } from 'react';
+import { SpriteIcon } from '../../../components/SpriteIcon/SpriteIcon';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { EmptyInventory } from '../../../interfaces/Inventory';
@@ -12,6 +13,7 @@ export const useInteractWithTrainer = () => {
 		(trainer: OverworldTrainer) => {
 			addMultipleMessages(
 				trainer.unhandledMessage.map((message, index) => ({
+					icon: <SpriteIcon sprite={trainer.sprite} />,
 					message,
 					onRemoval: () => {
 						if (index === trainer.unhandledMessage.length - 1) {

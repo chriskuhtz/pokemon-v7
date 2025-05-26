@@ -20,8 +20,23 @@ export const MessageContainer = () => {
 		>
 			{latestMessage && (
 				<Banner onClick={confirmLatestMessage}>
-					<h2 style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-						{latestMessage?.message}{' '}
+					<h2
+						style={{
+							display: 'grid',
+							gap: '1rem',
+							alignItems: 'center',
+							gridTemplateColumns: '1fr 10fr 1fr',
+							padding: '0 2rem',
+						}}
+					>
+						{latestMessage.icon ? (
+							<span>{latestMessage.icon}</span>
+						) : (
+							<span></span>
+						)}
+						<span style={{ textAlign: 'center' }}>
+							{latestMessage?.message}
+						</span>{' '}
 						{!latestMessage.needsNoConfirmation && (
 							<FaRegCircleCheck size={battleSpriteSize} />
 						)}

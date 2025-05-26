@@ -26,6 +26,10 @@ export const useBattleFieldEffects = (
 			setBattleFieldEffects((effects) =>
 				effects
 					.map((e) => {
+						if (e.type === 'aurora-veil' && battleWeather !== 'hail') {
+							addMessage({ message: `${e.type} ended` });
+							return undefined;
+						}
 						if (e.duration === 1) {
 							addMessage({ message: `${e.type} ended` });
 							return undefined;
@@ -33,7 +37,7 @@ export const useBattleFieldEffects = (
 					})
 					.filter((e) => e !== undefined)
 			),
-		[addMessage]
+		[addMessage, battleWeather]
 	);
 
 	const removeSpikes = useCallback((ownerId: string) => {

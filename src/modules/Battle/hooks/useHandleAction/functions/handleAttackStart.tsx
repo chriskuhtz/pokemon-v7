@@ -1,3 +1,4 @@
+import { battleSpriteSize } from '../../../../../constants/gameData';
 import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/groupedMoves';
 import { determineMiss } from '../../../../../functions/determineMiss';
 import { getRandomTarget } from '../../../../../functions/filterTargets';
@@ -141,14 +142,26 @@ export const handleAttackStart = ({
 		return { updatedPokemon, targets: [] };
 	}
 
+	const attackIcon = (
+		<img
+			style={{
+				borderRadius: 9000,
+			}}
+			height={battleSpriteSize}
+			src={`/typeIcons/${move.data.type.name}.png`}
+		/>
+	);
+
 	//MESSAGES
 	if (targets.length === 1 && targets[0].id !== attacker.id) {
 		addMessage({
 			message: `${attacker.data.name} used ${move.name} against ${targets[0].data.name}`,
+			icon: attackIcon,
 		});
 	} else
 		addMessage({
 			message: `${attacker.data.name} used ${move.name}`,
+			icon: attackIcon,
 		});
 
 	const misses = targets.map((target) => {

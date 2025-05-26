@@ -3,6 +3,7 @@ import { OverworldMap } from '../../interfaces/OverworldMap';
 import { campOccupants } from './occupants/camp';
 
 export const camp: OverworldMap = {
+	area: 'OPEN',
 	id: 'camp',
 	tilesetUrl: '/tilesets/palletTown.png',
 	occupants: campOccupants,

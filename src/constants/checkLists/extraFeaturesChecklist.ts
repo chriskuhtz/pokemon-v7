@@ -484,8 +484,8 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'flyer cert as quest reward', handled: true },
-	{ name: ' team aqua', handled: true },
-	{ name: ' team magma', handled: true },
+	{ name: 'team aqua', handled: true },
+	{ name: 'team magma', handled: true },
 	{ name: 'trainer ai should use fake out correctly', handled: true },
 	{ name: 'rampaging pokemon for wardens', handled: true },
 	{ name: 'quests for rampagers', handled: true },
@@ -509,15 +509,30 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'internaldex visualizer', handled: true },
 	{ name: 'team galactic', handled: true },
+	{
+		name: 'strong swarms (and prob distortion as well) dont leave',
+		handled: true,
+	},
+	{ name: 'strong swarm mon was lvl 2', handled: true },
+	{
+		name: 'Man kann auf wasser feldern schwimmen obwohl die ein obstacle drauf haben!',
+		handled: true,
+	},
+	{ name: 'overwoldmap area type', handled: true },
+	{ name: 'only show internaldex for caught pokemon', handled: true },
+	{ name: 'filter for internaldex', handled: true },
+	{ name: 'booster enegry sprite is missing', handled: true },
+	{ name: 'icons in message', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
 	{
-		name: 'Man kann auf wasser feldern schwimmen obwohl die ein obstacle drauf haben!',
+		name: `Moves die mehrmals in der selben runde passieren z.b. doppel kick verhalten sich sonderbar.
+Sie finden nicht immer gleich hintereinander statt also manchmal ist 1ster kick dann andere attacke von anderem pokemon und dann 2ter kick, das passiert aber nur manchmal
+Der zweite doppelkick trifft auch untergetauchte pokemon
+Anmerkung: beides nur mit doppel kick getestet`,
 	},
-	{ name: 'strong swarms (and prob distortion as well) dont leave' },
-	{ name: 'booster enegry sprite is missing' },
-	{ name: 'strong swarm mon was lvl 2' },
+
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },

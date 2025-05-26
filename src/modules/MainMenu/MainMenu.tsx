@@ -121,15 +121,15 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 						}
 					/>
 				)}
-				<Card
+				{/* <Card
 					onClick={() => navigate('MAIN', 'POKEDEX')}
 					content={<h4>Pokedex</h4>}
 					icon={<RiBookShelfLine size={battleSpriteSize} />}
 					actionElements={[]}
-				/>
+				/> */}
 				<Card
 					onClick={() => navigate('MAIN', 'INTERNAL_DEX')}
-					content={<h4>Internal Dex</h4>}
+					content={<h4>Pokedex</h4>}
 					icon={<RiBookShelfLine size={battleSpriteSize} />}
 					actionElements={[]}
 				/>
@@ -375,9 +375,23 @@ export const LureButton = () => {
 };
 export const FlyingButton = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+	const { location } = useContext(LocationContext);
 
 	if (!saveFile.campUpgrades['pidgeot rider certification']) {
 		return <></>;
+	}
+
+	if (mapsRecord[location.mapId].area === 'CAVE') {
+		return (
+			<Card
+				disabled
+				content={<h4>Cant fly in Caves</h4>}
+				icon={
+					<PokemonSprite name={'pidgeot'} config={{ officalArtwork: true }} />
+				}
+				actionElements={[]}
+			/>
+		);
 	}
 	return (
 		<>

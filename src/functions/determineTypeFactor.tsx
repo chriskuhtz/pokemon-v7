@@ -1,7 +1,7 @@
 import {
-	soundBasedMoves,
 	ballAndBombMoves,
 	powderMoves,
+	soundBasedMoves,
 } from '../constants/groupedMoves';
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
@@ -78,6 +78,9 @@ export const determineTypeFactor = (
 			attackType = 'rock';
 		}
 	}
+	if (attack.name === 'revelation-dance') {
+		attackType = getTypeNames(attacker).at(0) ?? 'typeless';
+	}
 
 	const effectiveness = typeEffectivenessChart[attackType];
 
@@ -115,6 +118,7 @@ export const determineTypeFactor = (
 		if (addMessage) {
 			addMessage({
 				message: `${target.data.name} prevents damage with levitate`,
+				icon: <strong>x0</strong>,
 			});
 		}
 		res = 0;
@@ -126,6 +130,7 @@ export const determineTypeFactor = (
 		if (addMessage) {
 			addMessage({
 				message: `${target.data.name} prevents damage with well baked body`,
+				icon: <strong>x0</strong>,
 			});
 		}
 		res = 0;
@@ -137,6 +142,7 @@ export const determineTypeFactor = (
 		if (addMessage) {
 			addMessage({
 				message: `${target.data.name} prevents damage with air-balloon`,
+				icon: <strong>x0</strong>,
 			});
 		}
 		res = 0;
@@ -146,6 +152,7 @@ export const determineTypeFactor = (
 		if (addMessage) {
 			addMessage({
 				message: `${target.data.name} prevents damage with wonder guard`,
+				icon: <strong>x0</strong>,
 			});
 		}
 		return 0;
@@ -157,6 +164,7 @@ export const determineTypeFactor = (
 		if (addMessage) {
 			addMessage({
 				message: `${target.data.name} prevents damage with bulletproof`,
+				icon: <strong>x0</strong>,
 			});
 		}
 		return 0;
@@ -168,6 +176,7 @@ export const determineTypeFactor = (
 		if (addMessage) {
 			addMessage({
 				message: `${target.data.name} prevents damage with safety goggles`,
+				icon: <strong>x0</strong>,
 			});
 		}
 		return 0;
@@ -180,6 +189,7 @@ export const determineTypeFactor = (
 		if (addMessage) {
 			addMessage({
 				message: `${target.data.name} prevents damage with lightning rod`,
+				icon: <strong>x0</strong>,
 			});
 		}
 		return 0;
@@ -188,6 +198,7 @@ export const determineTypeFactor = (
 		if (addMessage) {
 			addMessage({
 				message: `${target.data.name} prevents damage with sap sipper`,
+				icon: <strong>x0</strong>,
 			});
 		}
 		return 0;
@@ -196,6 +207,7 @@ export const determineTypeFactor = (
 		if (addMessage) {
 			addMessage({
 				message: `${target.data.name} prevents damage with storm drain`,
+				icon: <strong>x0</strong>,
 			});
 		}
 		return 0;
@@ -220,15 +232,24 @@ export const determineTypeFactor = (
 
 	if (res === 0) {
 		if (addMessage) {
-			addMessage({ message: 'It has no effect' });
+			addMessage({
+				message: 'It has no effect',
+				icon: <strong>x{res}</strong>,
+			});
 		}
 		return 0;
 	}
 	if (res > 1 && addMessage) {
-		addMessage({ message: 'It is very effective' });
+		addMessage({
+			message: 'It is very effective',
+			icon: <strong>x{res}</strong>,
+		});
 	}
 	if (res < 1 && addMessage) {
-		addMessage({ message: 'It is not very effective' });
+		addMessage({
+			message: 'It is not very effective',
+			icon: <strong>x{res}</strong>,
+		});
 	}
 	return res;
 };

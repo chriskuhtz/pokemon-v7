@@ -54,6 +54,7 @@ const hasCustomSprite: ItemType[] = [
 	'psychic-seed',
 	'misty-seed',
 	'orange-apricorn',
+	'booster-energy',
 ];
 
 export const getItemUrl = (item: ItemType): string => {

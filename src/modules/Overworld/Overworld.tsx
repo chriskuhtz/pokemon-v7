@@ -1,4 +1,4 @@
-import { useCallback, useContext, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import { CombinedCanvas } from '../../components/CombinedCanvas/CombinedCanvas';
 import { fps } from '../../constants/gameData';
@@ -52,6 +52,7 @@ export const Overworld = () => {
 		saveFile,
 		handleOccupantReducer,
 		navigateAwayFromOverworldReducer,
+		patchSaveFileReducer,
 		talkToNurseReducer: talkToNurse,
 	} = useContext(SaveFileContext);
 	const { location, setLocation: setCharacterLocation } =
@@ -82,6 +83,13 @@ export const Overworld = () => {
 		width: map.tileMap.baseLayer[0].length,
 		height: map.tileMap.baseLayer.length,
 	};
+
+	//stop flying in cave
+	useEffect(() => {
+		if (mapsRecord[location.mapId].area === 'CAVE' && saveFile.flying) {
+			patchSaveFileReducer({ flying: false });
+		}
+	}, [location, patchSaveFileReducer, saveFile]);
 
 	const { rotateOccupant, occupants } = useOccupants();
 

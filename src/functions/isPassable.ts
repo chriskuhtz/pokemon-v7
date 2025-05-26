@@ -48,11 +48,6 @@ export const isPassable = (
 	}
 	const nextFieldObstacle = map.tileMap.obstacleLayer[field.y][field.x];
 
-	const nextFieldWater = isWater(field.x, field.y, map.id);
-
-	if (nextFieldWater) {
-		return canSwim;
-	}
 	if (nextFieldObstacle) {
 		return false;
 	}
@@ -67,6 +62,11 @@ export const isPassable = (
 
 	if (nextFieldOccupant) {
 		return false;
+	}
+
+	const nextFieldWater = isWater(field.x, field.y, map.id);
+	if (nextFieldWater) {
+		return canSwim;
 	}
 
 	return true;

@@ -174,6 +174,17 @@ export const calculateDamage = (
 			),
 		};
 	}
+	if (attack.name === 'guardian-of-alola') {
+		return {
+			damage: Math.floor(
+				getMiddleOfThree([
+					1,
+					(attacker.stats.hp - attacker.damage) * 0.75,
+					attacker.stats.hp,
+				])
+			),
+		};
+	}
 
 	if (target.ability === 'flash-fire' && attackType === 'fire') {
 		return { damage: 0 };
@@ -224,7 +235,10 @@ export const calculateDamage = (
 				: 2
 			: 1;
 	if (critFactor === 2 && addMessage) {
-		addMessage({ message: 'critical hit!' });
+		addMessage({
+			message: 'critical hit!',
+			icon: <strong>x{critFactor}</strong>,
+		});
 	}
 
 	const atk = () => {

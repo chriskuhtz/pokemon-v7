@@ -3,6 +3,7 @@ import { OverworldMap } from '../../interfaces/OverworldMap';
 import { rocketCampOccupants } from './occupants/rocketCampOccupants';
 
 export const rocketCamp: OverworldMap = {
+	area: 'OPEN',
 	id: 'rocketCamp',
 	occupants: rocketCampOccupants,
 	timeOfDayShadersMap: defaultShaderMap,

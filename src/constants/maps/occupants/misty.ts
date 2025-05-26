@@ -36,8 +36,10 @@ const mistyTeam = () => [
 		ability: 'drizzle',
 		fixedAbility: true,
 		happiness: 255,
-		heldItemName: 'choice-band',
+		heldItemName: 'mystic-water',
 		firstMove: { name: 'surf', usedPP: 0 },
+		secondMove: { name: 'light-screen', usedPP: 0 },
+		thirdMove: { name: 'recover', usedPP: 0 },
 		effortValues: {
 			...EmptyStatObject,
 			'special-attack': 252,

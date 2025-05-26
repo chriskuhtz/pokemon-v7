@@ -171,6 +171,7 @@ export interface SaveFile {
 		route: MapId;
 		trainers: OverworldTrainerStump[];
 		affiliation: EvilTeam;
+		leavesAt?: number;
 	};
 	seedVault: ItemType[];
 	pokedex: Pokedex;

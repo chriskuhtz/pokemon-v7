@@ -3,6 +3,7 @@ import { OverworldMap } from '../../interfaces/OverworldMap';
 import { onixCaveOccupants } from './occupants/onixCave';
 
 export const onixCave: OverworldMap = {
+	area: 'CAVE',
 	id: 'onixCave',
 	tilesetUrl: '/tilesets/masterSheet.png',
 	timeOfDayShadersMap: caveShaderMap,

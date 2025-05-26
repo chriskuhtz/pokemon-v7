@@ -11,6 +11,7 @@ import { MoveName } from '../constants/checkLists/movesCheckList';
 import { v4 } from 'uuid';
 
 import {
+	battleSpriteSize,
 	emptyPokedex,
 	localStorageSaveFileId,
 	ONE_DAY,
@@ -39,6 +40,7 @@ import { QuestStatus } from '../interfaces/Quest';
 import { RoutesType } from '../interfaces/Routing';
 import { CatchBoosts, SaveFile } from '../interfaces/SaveFile';
 import { MessageQueueContext } from './useMessageQueue';
+import { getItemUrl } from '../functions/getItemUrl';
 
 export interface EvolutionReducerPayload {
 	id: string;
@@ -109,6 +111,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		if ((update.catchStreak?.streak ?? 0) > (update.longestStreak ?? 0)) {
 			update.longestStreak = update.catchStreak?.streak;
 		}
+
 		s({
 			...update,
 			lastEdited: newTime,
@@ -134,6 +137,11 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 				newTime > update.currentDistortionSwarm?.leavesAt
 					? undefined
 					: update.currentDistortionSwarm,
+			troubleMakers:
+				update.troubleMakers?.leavesAt &&
+				newTime > update.troubleMakers?.leavesAt
+					? undefined
+					: update.troubleMakers,
 		});
 	}, []);
 	const discardItemReducer = (item: ItemType, number: number) => {
@@ -228,6 +236,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 				return;
 			} else
 				addMessage({
+					icon: <img src={getItemUrl(item)} height={battleSpriteSize} />,
 					message: `Found ${amount} ${item}`,
 					needsNoConfirmation: true,
 				});
