@@ -12,6 +12,7 @@ export interface Message {
 	onRemoval?: () => void;
 	clearStackOnRemoval?: boolean;
 	needsNoConfirmation?: boolean;
+	icon?: ReactNode;
 }
 
 export interface UseMessageQueue {

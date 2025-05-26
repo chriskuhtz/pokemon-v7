@@ -34,6 +34,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 1,
 		types: ['grass', 'poison'],
 		encounterOptions: [],
+		swarm: 'WEAK',
 	},
 	ivysaur: {
 		dexId: 2,
@@ -49,6 +50,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 4,
 		types: ['fire'],
 		encounterOptions: [],
+		swarm: 'WEAK',
 	},
 	charmeleon: {
 		dexId: 5,
@@ -64,6 +66,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 7,
 		types: ['water'],
 		encounterOptions: [],
+		swarm: 'WEAK',
 	},
 	wartortle: {
 		dexId: 8,

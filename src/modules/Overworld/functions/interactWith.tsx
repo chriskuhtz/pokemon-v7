@@ -1,3 +1,4 @@
+import { SpriteIcon } from '../../../components/SpriteIcon/SpriteIcon';
 import { getOppositeDirection } from '../../../functions/getOppositeDirection';
 import { Message } from '../../../hooks/useMessageQueue';
 import { getRandomItem } from '../../../interfaces/Item';
@@ -196,6 +197,7 @@ export const interactWithFunction = ({
 	if (data.type === 'ROUTER_NPC') {
 		addMultipleMessages(
 			data.dialogue.map((d, i) => ({
+				icon: <SpriteIcon sprite={data.sprite} />,
 				message: d,
 				onRemoval:
 					i === data.dialogue.length - 1 ? () => goTo(data.to) : undefined,
@@ -223,6 +225,7 @@ export const interactWithFunction = ({
 	if (data.type === 'NURSE') {
 		addMultipleMessages([
 			...data.dialogue.map((d, i) => ({
+				icon: <SpriteIcon sprite={data.sprite} />,
 				message: d,
 				onRemoval:
 					i === data.dialogue.length - 1
@@ -230,7 +233,11 @@ export const interactWithFunction = ({
 						: undefined,
 				needsNoConfirmation: true,
 			})),
-			{ message: 'Whole Team fully healed', needsNoConfirmation: true },
+			{
+				icon: <SpriteIcon sprite={data.sprite} />,
+				message: 'Whole Team fully healed',
+				needsNoConfirmation: true,
+			},
 		]);
 
 		return;
@@ -240,6 +247,7 @@ export const interactWithFunction = ({
 			addMultipleMessages(
 				[
 					...data.unhandledMessage.map((d, i) => ({
+						icon: <SpriteIcon sprite={data.sprite} />,
 						message: d,
 						onRemoval:
 							i === data.unhandledMessage.length - 1
@@ -255,6 +263,7 @@ export const interactWithFunction = ({
 		} else {
 			addMultipleMessages(
 				(data.handledMessage ?? data.unhandledMessage).map((d) => ({
+					icon: <SpriteIcon sprite={data.sprite} />,
 					message: d,
 				}))
 			);
