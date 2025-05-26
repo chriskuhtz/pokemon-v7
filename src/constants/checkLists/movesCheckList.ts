@@ -2620,10 +2620,26 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/694/',
 		handled: true,
 	},
-	{ name: 'sinister-arrow-raid', url: 'https://pokeapi.co/api/v2/move/695/' },
-	{ name: 'malicious-moonsault', url: 'https://pokeapi.co/api/v2/move/696/' },
-	{ name: 'oceanic-operetta', url: 'https://pokeapi.co/api/v2/move/697/' },
-	{ name: 'guardian-of-alola', url: 'https://pokeapi.co/api/v2/move/698/' },
+	{
+		name: 'sinister-arrow-raid',
+		url: 'https://pokeapi.co/api/v2/move/695/',
+		handled: true,
+	},
+	{
+		name: 'malicious-moonsault',
+		url: 'https://pokeapi.co/api/v2/move/696/',
+		handled: true,
+	},
+	{
+		name: 'oceanic-operetta',
+		url: 'https://pokeapi.co/api/v2/move/697/',
+		handled: true,
+	},
+	{
+		name: 'guardian-of-alola',
+		url: 'https://pokeapi.co/api/v2/move/698/',
+		handled: true,
+	},
 	{
 		name: 'soul-stealing-7-star-strike',
 		url: 'https://pokeapi.co/api/v2/move/699/',
@@ -3430,6 +3446,10 @@ export const handledMoves = [
 	'dragon-hammer',
 	'brutal-swing',
 	'aurora-veil',
+	'sinister-arrow-raid',
+	'malicious-moonsault',
+	'oceanic-operetta',
+	'guardian-of-alola',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
