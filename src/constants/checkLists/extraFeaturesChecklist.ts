@@ -520,12 +520,12 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'overwoldmap area type', handled: true },
 	{ name: 'only show internaldex for caught pokemon', handled: true },
-	{ name: 'filter for internaldex' },
+	{ name: 'filter for internaldex', handled: true },
+	{ name: 'booster enegry sprite is missing' },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
 
-	{ name: 'booster enegry sprite is missing' },
 	{
 		name: `Moves die mehrmals in der selben runde passieren z.b. doppel kick verhalten sich sonderbar.
 Sie finden nicht immer gleich hintereinander statt also manchmal ist 1ster kick dann andere attacke von anderem pokemon und dann 2ter kick, das passiert aber nur manchmal
