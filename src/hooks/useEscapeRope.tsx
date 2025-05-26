@@ -1,7 +1,9 @@
 import { useCallback, useContext, useMemo } from 'react';
 import { startingLocation } from '../constants/gameData';
+import { mapsRecord } from '../constants/maps/mapsRecord';
 import { joinInventories } from '../interfaces/Inventory';
 import { LocationContext } from './LocationProvider';
+import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
 export const useEscapeRope = (): {
@@ -9,7 +11,8 @@ export const useEscapeRope = (): {
 	disabled: boolean;
 } => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
-	const { setLocation } = useContext(LocationContext);
+	const { setLocation, location } = useContext(LocationContext);
+	const { addMessage } = useContext(MessageQueueContext);
 	const disabled = useMemo(() => {
 		if (saveFile.bag['escape-rope'] <= 0) {
 			return true;
@@ -21,14 +24,24 @@ export const useEscapeRope = (): {
 		if (disabled) {
 			return;
 		}
-
+		if (mapsRecord[location.mapId].area !== 'CAVE') {
+			addMessage({ message: `Escape Rope only works in caves` });
+			return;
+		}
 		setLocation(startingLocation);
 		patchSaveFileReducer({
 			...saveFile,
 			bag: joinInventories(saveFile.bag, { 'escape-rope': 1 }, true),
 			meta: { ...saveFile, activeTab: 'OVERWORLD' },
 		});
-	}, [disabled, patchSaveFileReducer, saveFile, setLocation]);
+	}, [
+		addMessage,
+		disabled,
+		location.mapId,
+		patchSaveFileReducer,
+		saveFile,
+		setLocation,
+	]);
 
 	return { applyEscapeRope, disabled };
 };
