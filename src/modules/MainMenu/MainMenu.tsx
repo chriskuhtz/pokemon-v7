@@ -121,15 +121,15 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 						}
 					/>
 				)}
-				<Card
+				{/* <Card
 					onClick={() => navigate('MAIN', 'POKEDEX')}
 					content={<h4>Pokedex</h4>}
 					icon={<RiBookShelfLine size={battleSpriteSize} />}
 					actionElements={[]}
-				/>
+				/> */}
 				<Card
 					onClick={() => navigate('MAIN', 'INTERNAL_DEX')}
-					content={<h4>Internal Dex</h4>}
+					content={<h4>Pokedex</h4>}
 					icon={<RiBookShelfLine size={battleSpriteSize} />}
 					actionElements={[]}
 				/>

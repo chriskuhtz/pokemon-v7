@@ -1,18 +1,32 @@
-import React, { useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { battleSpriteSize } from '../../constants/gameData';
 import { isNotCatchable } from '../../constants/internalDex';
 import { internalDex, InternalDexEntry } from '../../constants/internalDexData';
+import { PokemonName } from '../../constants/pokemonNames';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { replaceRouteName } from '../../functions/replaceRouteName';
 import { useNavigate } from '../../hooks/useNavigate';
+import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
+const devmode = !!window.localStorage.getItem('devmode');
+
 export const InternalDex = (): JSX.Element => {
+	const { saveFile } = useContext(SaveFileContext);
 	const [searchString, setSearchString] = useState<string>('');
 	const navigate = useNavigate();
+
+	const availableEntries: [PokemonName, InternalDexEntry][] = useMemo(() => {
+		return Object.entries(internalDex).filter(([key]) => {
+			if (devmode) {
+				return true;
+			}
+			return saveFile.pokedex[key as PokemonName].caughtOnRoutes.length > 0;
+		}) as [PokemonName, InternalDexEntry][];
+	}, [saveFile]);
 
 	return (
 		<Page
@@ -30,7 +44,7 @@ export const InternalDex = (): JSX.Element => {
 					}
 					actionElements={[]}
 				/>
-				{Object.entries(internalDex).map(([key, entry]) => {
+				{availableEntries.map(([key, entry]) => {
 					if (!key.includes(searchString)) {
 						return <React.Fragment key={key}></React.Fragment>;
 					}
