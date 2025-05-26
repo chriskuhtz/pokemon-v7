@@ -4,6 +4,170 @@ export const movesCheckList: {
 	todos?: string[];
 	handled?: boolean;
 }[] = [
+	/**
+	 * GIGANTAMAX Moves
+	 */
+	{ name: 'max-guard', url: 'https://pokeapi.co/api/v2/move/743/' },
+	{ name: 'max-flare', url: 'https://pokeapi.co/api/v2/move/757/' },
+	{ name: 'max-flutterby', url: 'https://pokeapi.co/api/v2/move/758/' },
+	{ name: 'max-lightning', url: 'https://pokeapi.co/api/v2/move/759/' },
+	{ name: 'max-strike', url: 'https://pokeapi.co/api/v2/move/760/' },
+	{ name: 'max-knuckle', url: 'https://pokeapi.co/api/v2/move/761/' },
+	{ name: 'max-phantasm', url: 'https://pokeapi.co/api/v2/move/762/' },
+	{ name: 'max-hailstorm', url: 'https://pokeapi.co/api/v2/move/763/' },
+	{ name: 'max-ooze', url: 'https://pokeapi.co/api/v2/move/764/' },
+	{ name: 'max-geyser', url: 'https://pokeapi.co/api/v2/move/765/' },
+	{ name: 'max-airstream', url: 'https://pokeapi.co/api/v2/move/766/' },
+	{ name: 'max-starfall', url: 'https://pokeapi.co/api/v2/move/767/' },
+	{ name: 'max-wyrmwind', url: 'https://pokeapi.co/api/v2/move/768/' },
+	{ name: 'max-mindstorm', url: 'https://pokeapi.co/api/v2/move/769/' },
+	{ name: 'max-rockfall', url: 'https://pokeapi.co/api/v2/move/770/' },
+	{ name: 'max-quake', url: 'https://pokeapi.co/api/v2/move/771/' },
+	{ name: 'max-darkness', url: 'https://pokeapi.co/api/v2/move/772/' },
+	{ name: 'max-overgrowth', url: 'https://pokeapi.co/api/v2/move/773/' },
+	{ name: 'max-steelspike', url: 'https://pokeapi.co/api/v2/move/774/' },
+	/**
+	 * Z MOVES:
+	 */
+	{ name: 'catastropika', url: 'https://pokeapi.co/api/v2/move/658/' },
+	{
+		name: 'breakneck-blitz--physical',
+		url: 'https://pokeapi.co/api/v2/move/622/',
+	},
+	{
+		name: 'breakneck-blitz--special',
+		url: 'https://pokeapi.co/api/v2/move/623/',
+	},
+	{
+		name: 'all-out-pummeling--physical',
+		url: 'https://pokeapi.co/api/v2/move/624/',
+	},
+	{
+		name: 'all-out-pummeling--special',
+		url: 'https://pokeapi.co/api/v2/move/625/',
+	},
+	{
+		name: 'supersonic-skystrike--physical',
+		url: 'https://pokeapi.co/api/v2/move/626/',
+	},
+	{
+		name: 'supersonic-skystrike--special',
+		url: 'https://pokeapi.co/api/v2/move/627/',
+	},
+	{
+		name: 'acid-downpour--physical',
+		url: 'https://pokeapi.co/api/v2/move/628/',
+	},
+	{
+		name: 'acid-downpour--special',
+		url: 'https://pokeapi.co/api/v2/move/629/',
+	},
+	{
+		name: 'tectonic-rage--physical',
+		url: 'https://pokeapi.co/api/v2/move/630/',
+	},
+	{
+		name: 'tectonic-rage--special',
+		url: 'https://pokeapi.co/api/v2/move/631/',
+	},
+	{
+		name: 'continental-crush--physical',
+		url: 'https://pokeapi.co/api/v2/move/632/',
+	},
+	{
+		name: 'continental-crush--special',
+		url: 'https://pokeapi.co/api/v2/move/633/',
+	},
+	{
+		name: 'savage-spin-out--physical',
+		url: 'https://pokeapi.co/api/v2/move/634/',
+	},
+	{
+		name: 'savage-spin-out--special',
+		url: 'https://pokeapi.co/api/v2/move/635/',
+	},
+	{
+		name: 'never-ending-nightmare--physical',
+		url: 'https://pokeapi.co/api/v2/move/636/',
+	},
+	{
+		name: 'never-ending-nightmare--special',
+		url: 'https://pokeapi.co/api/v2/move/637/',
+	},
+	{
+		name: 'corkscrew-crash--physical',
+		url: 'https://pokeapi.co/api/v2/move/638/',
+	},
+	{
+		name: 'corkscrew-crash--special',
+		url: 'https://pokeapi.co/api/v2/move/639/',
+	},
+	{
+		name: 'inferno-overdrive--physical',
+		url: 'https://pokeapi.co/api/v2/move/640/',
+	},
+	{
+		name: 'inferno-overdrive--special',
+		url: 'https://pokeapi.co/api/v2/move/641/',
+	},
+	{
+		name: 'hydro-vortex--physical',
+		url: 'https://pokeapi.co/api/v2/move/642/',
+	},
+	{ name: 'hydro-vortex--special', url: 'https://pokeapi.co/api/v2/move/643/' },
+	{ name: 'bloom-doom--physical', url: 'https://pokeapi.co/api/v2/move/644/' },
+	{ name: 'bloom-doom--special', url: 'https://pokeapi.co/api/v2/move/645/' },
+	{
+		name: 'gigavolt-havoc--physical',
+		url: 'https://pokeapi.co/api/v2/move/646/',
+	},
+	{
+		name: 'gigavolt-havoc--special',
+		url: 'https://pokeapi.co/api/v2/move/647/',
+	},
+	{
+		name: 'shattered-psyche--physical',
+		url: 'https://pokeapi.co/api/v2/move/648/',
+	},
+	{
+		name: 'shattered-psyche--special',
+		url: 'https://pokeapi.co/api/v2/move/649/',
+	},
+	{
+		name: 'subzero-slammer--physical',
+		url: 'https://pokeapi.co/api/v2/move/650/',
+	},
+	{
+		name: 'subzero-slammer--special',
+		url: 'https://pokeapi.co/api/v2/move/651/',
+	},
+	{
+		name: 'devastating-drake--physical',
+		url: 'https://pokeapi.co/api/v2/move/652/',
+	},
+	{
+		name: 'devastating-drake--special',
+		url: 'https://pokeapi.co/api/v2/move/653/',
+	},
+	{
+		name: 'black-hole-eclipse--physical',
+		url: 'https://pokeapi.co/api/v2/move/654/',
+	},
+	{
+		name: 'black-hole-eclipse--special',
+		url: 'https://pokeapi.co/api/v2/move/655/',
+	},
+	{
+		name: 'twinkle-tackle--physical',
+		url: 'https://pokeapi.co/api/v2/move/656/',
+	},
+	{
+		name: 'twinkle-tackle--special',
+		url: 'https://pokeapi.co/api/v2/move/657/',
+	},
+	/**
+	 * HANDLED:
+	 */
 	{
 		name: 'pound',
 		url: 'https://pokeapi.co/api/v2/move/1/',
@@ -2429,12 +2593,23 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/686/',
 		handled: true,
 	},
-	{ name: 'core-enforcer', url: 'https://pokeapi.co/api/v2/move/687/' },
-	{ name: 'trop-kick', url: 'https://pokeapi.co/api/v2/move/688/' },
-	{ name: 'instruct', url: 'https://pokeapi.co/api/v2/move/689/' },
-	{ name: 'beak-blast', url: 'https://pokeapi.co/api/v2/move/690/' },
-	{ name: 'clanging-scales', url: 'https://pokeapi.co/api/v2/move/691/' },
-	{ name: 'dragon-hammer', url: 'https://pokeapi.co/api/v2/move/692/' },
+
+	{
+		name: 'trop-kick',
+		url: 'https://pokeapi.co/api/v2/move/688/',
+		handled: true,
+	},
+
+	{
+		name: 'clanging-scales',
+		url: 'https://pokeapi.co/api/v2/move/691/',
+		handled: true,
+	},
+	{
+		name: 'dragon-hammer',
+		url: 'https://pokeapi.co/api/v2/move/692/',
+		handled: true,
+	},
 	{ name: 'brutal-swing', url: 'https://pokeapi.co/api/v2/move/693/' },
 	{ name: 'aurora-veil', url: 'https://pokeapi.co/api/v2/move/694/' },
 	{ name: 'sinister-arrow-raid', url: 'https://pokeapi.co/api/v2/move/695/' },
@@ -2564,167 +2739,6 @@ export const movesCheckList: {
 	{ name: 'glacial-lance', url: 'https://pokeapi.co/api/v2/move/824/' },
 	{ name: 'astral-barrage', url: 'https://pokeapi.co/api/v2/move/825/' },
 	{ name: 'eerie-spell', url: 'https://pokeapi.co/api/v2/move/826/' },
-	/**
-	 * GIGANTAMAX Moves
-	 */
-	{ name: 'max-guard', url: 'https://pokeapi.co/api/v2/move/743/' },
-	{ name: 'max-flare', url: 'https://pokeapi.co/api/v2/move/757/' },
-	{ name: 'max-flutterby', url: 'https://pokeapi.co/api/v2/move/758/' },
-	{ name: 'max-lightning', url: 'https://pokeapi.co/api/v2/move/759/' },
-	{ name: 'max-strike', url: 'https://pokeapi.co/api/v2/move/760/' },
-	{ name: 'max-knuckle', url: 'https://pokeapi.co/api/v2/move/761/' },
-	{ name: 'max-phantasm', url: 'https://pokeapi.co/api/v2/move/762/' },
-	{ name: 'max-hailstorm', url: 'https://pokeapi.co/api/v2/move/763/' },
-	{ name: 'max-ooze', url: 'https://pokeapi.co/api/v2/move/764/' },
-	{ name: 'max-geyser', url: 'https://pokeapi.co/api/v2/move/765/' },
-	{ name: 'max-airstream', url: 'https://pokeapi.co/api/v2/move/766/' },
-	{ name: 'max-starfall', url: 'https://pokeapi.co/api/v2/move/767/' },
-	{ name: 'max-wyrmwind', url: 'https://pokeapi.co/api/v2/move/768/' },
-	{ name: 'max-mindstorm', url: 'https://pokeapi.co/api/v2/move/769/' },
-	{ name: 'max-rockfall', url: 'https://pokeapi.co/api/v2/move/770/' },
-	{ name: 'max-quake', url: 'https://pokeapi.co/api/v2/move/771/' },
-	{ name: 'max-darkness', url: 'https://pokeapi.co/api/v2/move/772/' },
-	{ name: 'max-overgrowth', url: 'https://pokeapi.co/api/v2/move/773/' },
-	{ name: 'max-steelspike', url: 'https://pokeapi.co/api/v2/move/774/' },
-	/**
-	 * Z MOVES:
-	 */
-	{ name: 'catastropika', url: 'https://pokeapi.co/api/v2/move/658/' },
-	{
-		name: 'breakneck-blitz--physical',
-		url: 'https://pokeapi.co/api/v2/move/622/',
-	},
-	{
-		name: 'breakneck-blitz--special',
-		url: 'https://pokeapi.co/api/v2/move/623/',
-	},
-	{
-		name: 'all-out-pummeling--physical',
-		url: 'https://pokeapi.co/api/v2/move/624/',
-	},
-	{
-		name: 'all-out-pummeling--special',
-		url: 'https://pokeapi.co/api/v2/move/625/',
-	},
-	{
-		name: 'supersonic-skystrike--physical',
-		url: 'https://pokeapi.co/api/v2/move/626/',
-	},
-	{
-		name: 'supersonic-skystrike--special',
-		url: 'https://pokeapi.co/api/v2/move/627/',
-	},
-	{
-		name: 'acid-downpour--physical',
-		url: 'https://pokeapi.co/api/v2/move/628/',
-	},
-	{
-		name: 'acid-downpour--special',
-		url: 'https://pokeapi.co/api/v2/move/629/',
-	},
-	{
-		name: 'tectonic-rage--physical',
-		url: 'https://pokeapi.co/api/v2/move/630/',
-	},
-	{
-		name: 'tectonic-rage--special',
-		url: 'https://pokeapi.co/api/v2/move/631/',
-	},
-	{
-		name: 'continental-crush--physical',
-		url: 'https://pokeapi.co/api/v2/move/632/',
-	},
-	{
-		name: 'continental-crush--special',
-		url: 'https://pokeapi.co/api/v2/move/633/',
-	},
-	{
-		name: 'savage-spin-out--physical',
-		url: 'https://pokeapi.co/api/v2/move/634/',
-	},
-	{
-		name: 'savage-spin-out--special',
-		url: 'https://pokeapi.co/api/v2/move/635/',
-	},
-	{
-		name: 'never-ending-nightmare--physical',
-		url: 'https://pokeapi.co/api/v2/move/636/',
-	},
-	{
-		name: 'never-ending-nightmare--special',
-		url: 'https://pokeapi.co/api/v2/move/637/',
-	},
-	{
-		name: 'corkscrew-crash--physical',
-		url: 'https://pokeapi.co/api/v2/move/638/',
-	},
-	{
-		name: 'corkscrew-crash--special',
-		url: 'https://pokeapi.co/api/v2/move/639/',
-	},
-	{
-		name: 'inferno-overdrive--physical',
-		url: 'https://pokeapi.co/api/v2/move/640/',
-	},
-	{
-		name: 'inferno-overdrive--special',
-		url: 'https://pokeapi.co/api/v2/move/641/',
-	},
-	{
-		name: 'hydro-vortex--physical',
-		url: 'https://pokeapi.co/api/v2/move/642/',
-	},
-	{ name: 'hydro-vortex--special', url: 'https://pokeapi.co/api/v2/move/643/' },
-	{ name: 'bloom-doom--physical', url: 'https://pokeapi.co/api/v2/move/644/' },
-	{ name: 'bloom-doom--special', url: 'https://pokeapi.co/api/v2/move/645/' },
-	{
-		name: 'gigavolt-havoc--physical',
-		url: 'https://pokeapi.co/api/v2/move/646/',
-	},
-	{
-		name: 'gigavolt-havoc--special',
-		url: 'https://pokeapi.co/api/v2/move/647/',
-	},
-	{
-		name: 'shattered-psyche--physical',
-		url: 'https://pokeapi.co/api/v2/move/648/',
-	},
-	{
-		name: 'shattered-psyche--special',
-		url: 'https://pokeapi.co/api/v2/move/649/',
-	},
-	{
-		name: 'subzero-slammer--physical',
-		url: 'https://pokeapi.co/api/v2/move/650/',
-	},
-	{
-		name: 'subzero-slammer--special',
-		url: 'https://pokeapi.co/api/v2/move/651/',
-	},
-	{
-		name: 'devastating-drake--physical',
-		url: 'https://pokeapi.co/api/v2/move/652/',
-	},
-	{
-		name: 'devastating-drake--special',
-		url: 'https://pokeapi.co/api/v2/move/653/',
-	},
-	{
-		name: 'black-hole-eclipse--physical',
-		url: 'https://pokeapi.co/api/v2/move/654/',
-	},
-	{
-		name: 'black-hole-eclipse--special',
-		url: 'https://pokeapi.co/api/v2/move/655/',
-	},
-	{
-		name: 'twinkle-tackle--physical',
-		url: 'https://pokeapi.co/api/v2/move/656/',
-	},
-	{
-		name: 'twinkle-tackle--special',
-		url: 'https://pokeapi.co/api/v2/move/657/',
-	},
 	/*
 	NEXT ROUND
 	*/
@@ -2857,6 +2871,12 @@ export const movesCheckList: {
 	{ name: 'throat-chop', url: 'https://pokeapi.co/api/v2/move/675/' },
 	{ name: 'pollen-puff', url: 'https://pokeapi.co/api/v2/move/676/' },
 	{ name: 'speed-swap', url: 'https://pokeapi.co/api/v2/move/683/' },
+	{ name: 'core-enforcer', url: 'https://pokeapi.co/api/v2/move/687/' },
+	{ name: 'instruct', url: 'https://pokeapi.co/api/v2/move/689/' },
+	{
+		name: 'beak-blast',
+		url: 'https://pokeapi.co/api/v2/move/690/',
+	},
 ];
 
 export const handledMoves = [
@@ -3397,6 +3417,9 @@ export const handledMoves = [
 	'smart-strike',
 	'purify',
 	'revelation-dance',
+	'trop-kick',
+	'clanging-scales',
+	'dragon-hammer',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
