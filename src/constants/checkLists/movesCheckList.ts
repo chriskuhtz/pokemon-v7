@@ -2424,7 +2424,11 @@ export const movesCheckList: {
 		handled: true,
 	},
 	{ name: 'purify', url: 'https://pokeapi.co/api/v2/move/685/', handled: true },
-	{ name: 'revelation-dance', url: 'https://pokeapi.co/api/v2/move/686/' },
+	{
+		name: 'revelation-dance',
+		url: 'https://pokeapi.co/api/v2/move/686/',
+		handled: true,
+	},
 	{ name: 'core-enforcer', url: 'https://pokeapi.co/api/v2/move/687/' },
 	{ name: 'trop-kick', url: 'https://pokeapi.co/api/v2/move/688/' },
 	{ name: 'instruct', url: 'https://pokeapi.co/api/v2/move/689/' },
@@ -3392,6 +3396,7 @@ export const handledMoves = [
 	'burn-up',
 	'smart-strike',
 	'purify',
+	'revelation-dance',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

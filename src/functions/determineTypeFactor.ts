@@ -1,7 +1,7 @@
 import {
-	soundBasedMoves,
 	ballAndBombMoves,
 	powderMoves,
+	soundBasedMoves,
 } from '../constants/groupedMoves';
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
@@ -77,6 +77,9 @@ export const determineTypeFactor = (
 		if (weather === 'sandstorm') {
 			attackType = 'rock';
 		}
+	}
+	if (attack.name === 'revelation-dance') {
+		attackType = getTypeNames(attacker).at(0) ?? 'typeless';
 	}
 
 	const effectiveness = typeEffectivenessChart[attackType];
