@@ -514,12 +514,14 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'strong swarm mon was lvl 2', handled: true },
+	{
+		name: 'Man kann auf wasser feldern schwimmen obwohl die ein obstacle drauf haben!',
+		handled: true,
+	},
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
-	{
-		name: 'Man kann auf wasser feldern schwimmen obwohl die ein obstacle drauf haben!',
-	},
+
 	{ name: 'booster enegry sprite is missing' },
 	{
 		name: `Moves die mehrmals in der selben runde passieren z.b. doppel kick verhalten sich sonderbar.
