@@ -109,6 +109,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		if ((update.catchStreak?.streak ?? 0) > (update.longestStreak ?? 0)) {
 			update.longestStreak = update.catchStreak?.streak;
 		}
+
 		s({
 			...update,
 			lastEdited: newTime,
@@ -134,6 +135,11 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 				newTime > update.currentDistortionSwarm?.leavesAt
 					? undefined
 					: update.currentDistortionSwarm,
+			troubleMakers:
+				update.troubleMakers?.leavesAt &&
+				newTime > update.troubleMakers?.leavesAt
+					? undefined
+					: update.troubleMakers,
 		});
 	}, []);
 	const discardItemReducer = (item: ItemType, number: number) => {

@@ -7,6 +7,7 @@ import {
 } from '../../interfaces/SaveFile';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { getRandomEntry } from '../filterTargets';
+import { getHighestXpOnTeam } from '../getHighestXpOnTeam';
 import { getMiddleOfThree } from '../getMiddleOfThree';
 import { getRandomOrientation } from '../getNextClockwiseDirection';
 import { getRandomPosition } from '../getRandomPosition';
@@ -54,76 +55,6 @@ const determineNumberOfMembers = (rangerLevel: number) => {
 	}
 
 	return 2;
-};
-const determineMinXp = (rangerLevel: number) => {
-	if (rangerLevel > 15) {
-		return 125000;
-	}
-	if (rangerLevel > 10) {
-		return 64000;
-	}
-	if (rangerLevel > 5) {
-		return 8000;
-	}
-	if (rangerLevel > 3) {
-		return 3000;
-	}
-
-	return 0;
-};
-const determineMaxXp = (rangerLevel: number) => {
-	if (rangerLevel > 15) {
-		return 1250000;
-	}
-	if (rangerLevel > 10) {
-		return 125000;
-	}
-	if (rangerLevel > 5) {
-		return 27000;
-	}
-
-	return 8000;
-};
-
-export const makeTroubleMakers = (
-	mapId: MapId,
-	warden: boolean,
-	affiliation: EvilTeam
-): OverworldTrainerStump[] => {
-	if (affiliation === 'aqua') {
-		return createTroubleMakers(
-			mapId,
-			warden,
-			affiliation,
-			aquaNamesMale,
-			aquaNamesFemale
-		);
-	}
-	if (affiliation === 'magma') {
-		return createTroubleMakers(
-			mapId,
-			warden,
-			affiliation,
-			magmaNamesMale,
-			magmaNamesFemale
-		);
-	}
-	if (affiliation === 'galactic') {
-		return createTroubleMakers(
-			mapId,
-			warden,
-			affiliation,
-			galacticNamesMale,
-			galacticNamesFemale
-		);
-	}
-	return createTroubleMakers(
-		mapId,
-		warden,
-		affiliation,
-		rocketNamesMale,
-		rocketNamesFemale
-	);
 };
 
 export const createAdmin = (
@@ -287,8 +218,10 @@ export const getTroubleMakerTeam = (s: SaveFile): OwnedPokemon[] => {
 		return rocketPokemon;
 	};
 	const numberOfMembers = determineNumberOfMembers(rangerLevel);
-	const minXp = determineMinXp(rangerLevel);
-	const maxXp = determineMaxXp(rangerLevel);
+
+	const xp = getHighestXpOnTeam(s.pokemon);
+	const minXp = xp * 0.8;
+	const maxXp = xp * 0.95;
 	const availableMons = pokemon().filter(
 		(r) => r.minXp >= minXp && r.maxXp <= maxXp
 	);
@@ -393,4 +326,45 @@ const createTroubleMakers = (
 	}
 
 	return res;
+};
+
+export const makeTroubleMakers = (
+	mapId: MapId,
+	warden: boolean,
+	affiliation: EvilTeam
+): OverworldTrainerStump[] => {
+	if (affiliation === 'aqua') {
+		return createTroubleMakers(
+			mapId,
+			warden,
+			affiliation,
+			aquaNamesMale,
+			aquaNamesFemale
+		);
+	}
+	if (affiliation === 'magma') {
+		return createTroubleMakers(
+			mapId,
+			warden,
+			affiliation,
+			magmaNamesMale,
+			magmaNamesFemale
+		);
+	}
+	if (affiliation === 'galactic') {
+		return createTroubleMakers(
+			mapId,
+			warden,
+			affiliation,
+			galacticNamesMale,
+			galacticNamesFemale
+		);
+	}
+	return createTroubleMakers(
+		mapId,
+		warden,
+		affiliation,
+		rocketNamesMale,
+		rocketNamesFemale
+	);
 };

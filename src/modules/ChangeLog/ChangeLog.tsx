@@ -77,6 +77,8 @@ const ChangeLogV39 = (): JSX.Element => {
 		<>
 			<h3>0.39:</h3>
 			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>Evil Teams leave after 3 Hours</li>
+				<li>Evil Teams level scale with you</li>
 				<li>Balancing and Fixes</li>
 				<li>New Attacks</li>
 			</ol>

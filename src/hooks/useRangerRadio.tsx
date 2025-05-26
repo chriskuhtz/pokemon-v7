@@ -1,4 +1,5 @@
 import { useCallback, useContext } from 'react';
+import { ONE_HOUR } from '../constants/gameData';
 import { mapDisplayNames } from '../constants/maps/mapsRecord';
 import { getRandomEntry } from '../functions/filterTargets';
 import { getRandomAvailableRoute } from '../functions/getRandomAvailableRoute';
@@ -26,9 +27,7 @@ export const useRangerRadio = () => {
 				return;
 			}
 
-			const randomAffiliation = getRandomEntry([
-				...evilTeams.filter((e) => e !== 'galactic'),
-			]);
+			const randomAffiliation = getRandomEntry([...evilTeams]);
 			const op = makeTroubleMakers(
 				route,
 				saveFile.campUpgrades['warden certification'],
@@ -39,9 +38,14 @@ export const useRangerRadio = () => {
 				message: `There are reports of team ${randomAffiliation} activity at ${mapDisplayNames[route]}`,
 				needsNoConfirmation: true,
 			});
-
+			const now = new Date().getTime();
 			patchSaveFileReducer({
-				troubleMakers: { route, trainers: op, affiliation: randomAffiliation },
+				troubleMakers: {
+					route,
+					trainers: op,
+					affiliation: randomAffiliation,
+					leavesAt: now + ONE_HOUR * 3,
+				},
 			});
 		}
 	}, [addMessage, patchSaveFileReducer, saveFile]);
