@@ -1676,7 +1676,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	misdreavus: {
 		dexId: 200,
-
 		types: ['ghost'],
 		encounterOptions: [
 			{
