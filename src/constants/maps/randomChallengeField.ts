@@ -1,9 +1,10 @@
-import { defaultShaderMap } from "../../functions/getTimeOfDay";
-import { OverworldMap } from "../../interfaces/OverworldMap";
-import { randomFieldId } from "../gameData";
-import { randomChallengeFieldOccupants } from "./occupants/randomChallengeField";
+import { defaultShaderMap } from '../../functions/getTimeOfDay';
+import { OverworldMap } from '../../interfaces/OverworldMap';
+import { randomFieldId } from '../gameData';
+import { randomChallengeFieldOccupants } from './occupants/randomChallengeField';
 
 export const randomChallengeField: OverworldMap = {
+	area: 'OPEN',
 	id: randomFieldId,
 	tilesetUrl: '/tilesets/slateport.png',
 	occupants: randomChallengeFieldOccupants,

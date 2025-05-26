@@ -3,6 +3,7 @@ import { OverworldMap } from '../../interfaces/OverworldMap';
 import { routeE1Occupants } from './occupants/routeE1';
 
 export const routeE1: OverworldMap = {
+	area: 'OPEN',
 	id: 'routeE1',
 	tilesetUrl: '/tilesets/swamp.png',
 	timeOfDayShadersMap: defaultShaderMap,

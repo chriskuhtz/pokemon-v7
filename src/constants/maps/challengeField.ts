@@ -4,6 +4,7 @@ import { challengeFieldId } from '../gameData';
 import { challengeFieldOccupants } from './occupants/challengeField';
 
 export const challengeField: OverworldMap = {
+	area: 'OPEN',
 	id: challengeFieldId,
 	tilesetUrl: '/tilesets/slateport.png',
 	occupants: challengeFieldOccupants,

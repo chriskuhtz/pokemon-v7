@@ -3,6 +3,7 @@ import { OverworldMap } from '../../interfaces/OverworldMap';
 import { caveW1Occupants } from './occupants/caveW1';
 
 export const caveW1: OverworldMap = {
+	area: 'CAVE',
 	id: 'caveW1',
 	tilesetUrl: '/tilesets/cave.png',
 	timeOfDayShadersMap: caveShaderMap,

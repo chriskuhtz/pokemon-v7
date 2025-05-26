@@ -69,6 +69,7 @@ export const mapDisplayNames: Record<MapId, string> = {
 };
 
 export const Emptymap: OverworldMap = {
+	area: 'OPEN',
 	id: 'camp',
 	occupants: [],
 	timeOfDayShadersMap: defaultShaderMap,

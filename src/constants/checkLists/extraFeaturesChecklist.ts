@@ -518,6 +518,7 @@ export const extraFeatureCheckList: {
 		name: 'Man kann auf wasser feldern schwimmen obwohl die ein obstacle drauf haben!',
 		handled: true,
 	},
+	{ name: 'overwoldmap area type' },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
