@@ -131,6 +131,8 @@ export const handleAllAttackCategories = ({
 					move,
 					addBattleFieldEffect,
 					target,
+					addMessage,
+					weather: battleWeather,
 				});
 			case 'ailment':
 				return handleAilmentAttack({
