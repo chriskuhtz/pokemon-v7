@@ -512,6 +512,9 @@ export const extraFeatureCheckList: {
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
+	{
+		name: 'Man kann auf wasser feldern schwimmen obwohl die ein obstacle drauf haben!',
+	},
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
