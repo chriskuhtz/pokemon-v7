@@ -1,13 +1,11 @@
 import { defaultShaderMap } from "../../functions/getTimeOfDay";
 import { OverworldMap } from "../../interfaces/OverworldMap";
-import { routeN1E1Encounters } from "./encounters/routeN1E1";
 import { routeN1E1Occupants } from "./occupants/routeN1E1";
 
 export const routeN1E1: OverworldMap = {
   id: "routeN1E1",
   tilesetUrl: "/tilesets/DarkWoods.png",
   timeOfDayShadersMap: defaultShaderMap,
-  possibleEncounters: routeN1E1Encounters,
   tileMap: {
     baseLayer: [
       [

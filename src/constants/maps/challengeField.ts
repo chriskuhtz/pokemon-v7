@@ -3,20 +3,12 @@ import { OverworldMap } from '../../interfaces/OverworldMap';
 import { challengeFieldId } from '../gameData';
 import { challengeFieldOccupants } from './occupants/challengeField';
 
-
 export const challengeField: OverworldMap = {
 	id: challengeFieldId,
 	tilesetUrl: '/tilesets/slateport.png',
 	occupants: challengeFieldOccupants,
 	timeOfDayShadersMap: defaultShaderMap,
-	possibleEncounters: {
-		WATER: [],
-		BASE: [],
-		MORNING: [],
-		DAY: [],
-		EVENING: [],
-		NIGHT: [],
-	},
+
 	tileMap: {
 		baseLayer: [
 			[

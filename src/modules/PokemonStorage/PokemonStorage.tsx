@@ -11,9 +11,8 @@ import {
 	ultraHighBstPokemon,
 } from '../../constants/baseStatRecord';
 import { battleSpriteSize } from '../../constants/gameData';
+import { internalDex } from '../../constants/internalDexData';
 import { mapIds } from '../../constants/maps/mapsRecord';
-import { nameToIdMap } from '../../constants/pokemonNames';
-import { byName } from '../../constants/typeRecord';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getHeldItem } from '../../functions/getHeldItem';
 import { getItemUrl } from '../../functions/getItemUrl';
@@ -64,7 +63,7 @@ export const PokemonStorage = ({
 		}
 		if (sortBy === 'DEX ID') {
 			return (a: OwnedPokemon, b: OwnedPokemon) =>
-				nameToIdMap[a.name] - nameToIdMap[b.name];
+				internalDex[a.name].dexId - internalDex[b.name].dexId;
 		}
 		if (sortBy === 'HAPPINESS') {
 			return (a: OwnedPokemon, b: OwnedPokemon) => b.happiness - a.happiness;
@@ -392,8 +391,8 @@ const Sorted = ({
 	if (pokemonFilter === 'TYPE') {
 		const filtered = stored.filter(
 			(s) =>
-				byName[s.name].at(0) === selectedType ||
-				byName[s.name].at(1) === selectedType
+				internalDex[s.name].types.at(0) === selectedType ||
+				internalDex[s.name].types.at(1) === selectedType
 		);
 
 		return (
@@ -635,10 +634,12 @@ const Entry = ({
 						</strong>
 					</Chip>
 				}
-				secondPlanetUrl={`/typeIcons/${byName[pokemon.name].at(0)}.png`}
+				secondPlanetUrl={`/typeIcons/${internalDex[pokemon.name].types.at(
+					0
+				)}.png`}
 				thirdPlanetUrl={
-					byName[pokemon.name].at(1)
-						? `/typeIcons/${byName[pokemon.name].at(1)}.png`
+					internalDex[pokemon.name].types.at(1)
+						? `/typeIcons/${internalDex[pokemon.name].types.at(1)}.png`
 						: undefined
 				}
 				fourthPlanetUrl={getItemUrl(pokemon.ball)}

@@ -9,7 +9,6 @@ import {
 	trainers,
 } from '../functions/makeRandomTrainer';
 import { sumOfIvs } from '../functions/sumOfIvs';
-import { honeyPokemon } from '../hooks/useHoneyTree';
 
 import { Inventory } from '../interfaces/Inventory';
 import {
@@ -25,7 +24,6 @@ import {
 	generateRandomStatObject,
 } from '../interfaces/StatObject';
 import { moveUnlockPayments } from '../modules/MoveTutor/MoveTutor';
-import { sledgeHammerPokemon } from '../modules/Overworld/hooks/useSledgeHammer';
 import { highBstPokemon, lowBstPokemon, midBstPokemon } from './baseStatRecord';
 import {
 	campUpgradeCategories,
@@ -35,16 +33,23 @@ import {
 import { catchQuests } from './generatedQuests/catchQuests';
 import { travellingTrainerQuests } from './generatedQuests/travellingTrainersQuests';
 import { typeCatchQuests } from './generatedQuests/typeCatchQuests';
+import {
+	getHoneyEncounters,
+	getSwarmOptions,
+	getUnderRockEncounters,
+} from './internalDex';
 import { caveW1Encounters } from './maps/encounters/caveW1';
 import { onixCaveEncounters } from './maps/encounters/onixCave';
+import { blaineId } from './maps/occupants/blaine';
+import { brockId } from './maps/occupants/brock';
+import { erikaId } from './maps/occupants/erika';
+import { garyId } from './maps/occupants/gary';
+import { janineId } from './maps/occupants/janine';
+import { mistyId } from './maps/occupants/misty';
 import { allRocketCampTrainersDefeated } from './maps/occupants/rocketCampOccupants';
-import { routeS1 } from './maps/routeS1';
+import { sabrinaId } from './maps/occupants/sabrina';
+import { surgeId } from './maps/occupants/surge';
 import { PokemonName, pokemonNames } from './pokemonNames';
-import {
-	futureDistortionMons,
-	pastDistortionMons,
-	spaceDistortionMons,
-} from './swarmOptions';
 
 const expCandyPackage: Partial<Inventory> = {
 	'exp-candy-xs': 10,
@@ -312,7 +317,6 @@ export const questNames = [
 	'reach cooking skill 20',
 	'reach cooking skill 50',
 	'reach cooking skill 100',
-	'catch all different pokemon on routeS1',
 	'lure a pokemon with a berry',
 	'lure 10 different pokemon with berries',
 	'lure 20 different pokemon with berries',
@@ -446,6 +450,7 @@ export const questNames = [
 	'catch all past distortion pokemon',
 	'catch a space distortion pokemon',
 	'catch all space distortion pokemon',
+	'train a pidgeot to lvl 100',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -643,9 +648,11 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'sun-stone': 2, 'leaf-stone': 2, 'berry-juice': 5 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return honeyPokemon.every((e) => s.pokedex[e].caughtOnRoutes.length > 0);
+			return getHoneyEncounters().every(
+				(e) => s.pokedex[e].caughtOnRoutes.length > 0
+			);
 		},
-		targetPokemon: honeyPokemon,
+		targetPokemon: getHoneyEncounters(),
 		kind: 'BULLETIN',
 		availableAfter: 'lure a pokemon with honey',
 		requiredUpgrade: 'build combee hive',
@@ -660,41 +667,14 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return sledgeHammerPokemon.every(
+			return getUnderRockEncounters().every(
 				(e) => s.pokedex[e].caughtOnRoutes.length > 0
 			);
 		},
-		targetPokemon: sledgeHammerPokemon,
+		targetPokemon: getUnderRockEncounters(),
 		kind: 'BULLETIN',
 		availableAfter: 'find a pokemon under a smashed rock',
 		requiredUpgrade: 'sledge hammer certification',
-	},
-	'catch all different pokemon on routeS1': {
-		category: 'EXPLORATION',
-		rewardItems: {
-			'dragon-scale': 1,
-			'water-stone': 2,
-			'belue-berry': 5,
-			'razz-berry': 5,
-			'rindo-berry': 5,
-		},
-		researchPoints: 50,
-		conditionFunction: (s) => {
-			return [
-				...routeS1.possibleEncounters.BASE,
-				...routeS1.possibleEncounters.WATER,
-			].every((e) => s.pokedex[e.name].caughtOnRoutes.includes(routeS1.id));
-		},
-		targetPokemon: [
-			...new Set(
-				[
-					...routeS1.possibleEncounters.BASE,
-					...routeS1.possibleEncounters.WATER,
-				].map((p) => p.name)
-			),
-		],
-		kind: 'BULLETIN',
-		requiredUpgrade: 'swimming certification',
 	},
 	'catch a pokemon orginally found in kanto': {
 		category: 'POKEDEX',
@@ -2205,12 +2185,13 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		category: 'RESEARCH',
 		kind: 'BULLETIN',
 		requiredUpgrade: 'berry lure station routeN1',
-		researchPoints: 20,
+		researchPoints: 40,
 		rewardItems: {
 			'roseli-berry': 1,
 			'passho-berry': 1,
 			'wacan-berry': 1,
 			'yache-berry': 1,
+			...smallExpCandyPackage,
 		},
 		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 0,
 	},
@@ -2219,12 +2200,13 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'berry lure station routeN1',
 		availableAfter: 'lure a pokemon with a berry',
-		researchPoints: 30,
+		researchPoints: 60,
 		rewardItems: {
 			'chople-berry': 1,
 			'shuca-berry': 1,
 			'coba-berry': 1,
 			'payapa-berry': 1,
+			...smallExpCandyPackage,
 		},
 		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 9,
 	},
@@ -2233,13 +2215,14 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'berry lure station routeN1',
 		availableAfter: 'lure 10 different pokemon with berries',
-		researchPoints: 40,
+		researchPoints: 80,
 		rewardItems: {
 			'tanga-berry': 1,
 			'charti-berry': 1,
 			'kasib-berry': 1,
 			'colbur-berry': 1,
 			'babiri-berry': 1,
+			...smallExpCandyPackage,
 		},
 		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 19,
 	},
@@ -2248,11 +2231,12 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'berry lure station routeN1',
 		availableAfter: 'lure 20 different pokemon with berries',
-		researchPoints: 50,
+		researchPoints: 100,
 		rewardItems: {
 			'golden-nanab-berry': 3,
 			'golden-pinap-berry': 3,
 			'golden-razz-berry': 3,
+			...expCandyPackage,
 		},
 		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 29,
 	},
@@ -2261,9 +2245,10 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'berry lure station routeN1',
 		availableAfter: 'lure 30 different pokemon with berries',
-		researchPoints: 60,
+		researchPoints: 100,
 		rewardItems: {
 			'rare-candy': 10,
+			...expCandyPackage,
 		},
 		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 39,
 	},
@@ -2274,7 +2259,8 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'lure 40 different pokemon with berries',
 		researchPoints: 70,
 		rewardItems: {
-			'rare-candy': 10,
+			'rare-candy': 100,
+			...expCandyPackage,
 		},
 		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 49,
 	},
@@ -2283,9 +2269,10 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'berry lure station routeN1',
 		availableAfter: 'lure 50 different pokemon with berries',
-		researchPoints: 80,
+		researchPoints: 100,
 		rewardItems: {
 			'rare-candy': 10,
+			...expCandyPackage,
 		},
 		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 59,
 	},
@@ -2420,7 +2407,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...smallExpCandyPackage,
 		},
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Erika');
+			return s.handledOccupants.some((h) => h.id === erikaId);
 		},
 	},
 	'defeat janine': {
@@ -2434,7 +2421,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		requiredUpgrade: 'machete certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Janine');
+			return s.handledOccupants.some((h) => h.id === janineId);
 		},
 	},
 	'defeat blaine': {
@@ -2444,7 +2431,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'occa-berry': 5, charcoal: 1, ...expCandyPackage },
 		requiredUpgrade: 'sledge hammer certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Blaine');
+			return s.handledOccupants.some((h) => h.id === blaineId);
 		},
 	},
 	'defeat surge': {
@@ -2454,7 +2441,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'wacan-berry': 5, magnet: 1, ...expCandyPackage },
 		requiredUpgrade: 'shovel certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Surge');
+			return s.handledOccupants.some((h) => h.id === surgeId);
 		},
 	},
 	'defeat misty': {
@@ -2469,7 +2456,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Misty');
+			return s.handledOccupants.some((h) => h.id === mistyId);
 		},
 	},
 	'defeat sabrina': {
@@ -2479,7 +2466,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'payapa-berry': 5, 'twisted-spoon': 1, ...expCandyPackage },
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Sabrina');
+			return s.handledOccupants.some((h) => h.id === sabrinaId);
 		},
 	},
 	'defeat brock': {
@@ -2489,7 +2476,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'charti-berry': 5, 'hard-stone': 1, ...expCandyPackage },
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Brock');
+			return s.handledOccupants.some((h) => h.id === brockId);
 		},
 	},
 	'defeat gary': {
@@ -2504,7 +2491,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		requiredUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Gary');
+			return s.handledOccupants.some((h) => h.id === garyId);
 		},
 	},
 	'reach challenge field rank 1': {
@@ -2630,6 +2617,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 50,
 		conditionFunction: (s) => (s.rangerLevel ?? 0) >= 5,
 		rewardItems: { 'old-gateau': 3, 'rare-candy': 3, 'moomoo-milk': 6 },
+		campUpgrade: 'warden certification',
 	},
 	'reach ranger level 10': {
 		category: 'BATTLE',
@@ -3268,62 +3256,87 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'catch a future distortion pokemon': {
 		kind: 'BULLETIN',
 		category: 'RESEARCH',
-		targetPokemon: futureDistortionMons,
+		targetPokemon: getSwarmOptions('FUTURE_DISTORTION'),
 		rewardItems: { 'rare-candy': 3, 'quick-ball': 5 },
 		researchPoints: 25,
 		requiredUpgrade: 'time distortion radar',
 		conditionFunction: (s) =>
-			futureDistortionMons.some((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+			getSwarmOptions('FUTURE_DISTORTION').some(
+				(f) => s.pokedex[f].caughtOnRoutes.length > 0
+			),
 	},
 	'catch a past distortion pokemon': {
 		kind: 'BULLETIN',
 		category: 'RESEARCH',
-		targetPokemon: pastDistortionMons,
+		targetPokemon: getSwarmOptions('PAST_DISTORTION'),
 		rewardItems: { 'rare-candy': 3, 'quick-ball': 5 },
 		researchPoints: 25,
 		requiredUpgrade: 'time distortion radar',
 		conditionFunction: (s) =>
-			pastDistortionMons.some((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+			getSwarmOptions('PAST_DISTORTION').some(
+				(f) => s.pokedex[f].caughtOnRoutes.length > 0
+			),
 	},
 	'catch all future distortion pokemon': {
 		kind: 'BULLETIN',
 		category: 'RESEARCH',
-		targetPokemon: futureDistortionMons,
+		targetPokemon: getSwarmOptions('FUTURE_DISTORTION'),
 		rewardItems: { 'rare-candy': 10, 'quick-ball': 20 },
 		researchPoints: 100,
 		requiredUpgrade: 'time distortion radar',
 		conditionFunction: (s) =>
-			futureDistortionMons.every((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+			getSwarmOptions('FUTURE_DISTORTION').every(
+				(f) => s.pokedex[f].caughtOnRoutes.length > 0
+			),
 	},
 	'catch all past distortion pokemon': {
 		kind: 'BULLETIN',
 		category: 'RESEARCH',
-		targetPokemon: pastDistortionMons,
+		targetPokemon: getSwarmOptions('PAST_DISTORTION'),
 		rewardItems: { 'rare-candy': 10, 'quick-ball': 20 },
 		researchPoints: 100,
 		requiredUpgrade: 'time distortion radar',
 		conditionFunction: (s) =>
-			pastDistortionMons.every((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+			getSwarmOptions('PAST_DISTORTION').every(
+				(f) => s.pokedex[f].caughtOnRoutes.length > 0
+			),
 	},
 	'catch a space distortion pokemon': {
 		kind: 'BULLETIN',
 		category: 'RESEARCH',
-		targetPokemon: spaceDistortionMons,
+		targetPokemon: getSwarmOptions('SPACE_DISTORTION'),
 		rewardItems: { 'rare-candy': 3, 'quick-ball': 5 },
 		researchPoints: 25,
 		requiredUpgrade: 'space distortion radar',
 		conditionFunction: (s) =>
-			spaceDistortionMons.some((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+			getSwarmOptions('SPACE_DISTORTION').some(
+				(f) => s.pokedex[f].caughtOnRoutes.length > 0
+			),
 	},
 	'catch all space distortion pokemon': {
 		kind: 'BULLETIN',
 		category: 'RESEARCH',
-		targetPokemon: spaceDistortionMons,
+		targetPokemon: getSwarmOptions('SPACE_DISTORTION'),
 		rewardItems: { 'rare-candy': 10, 'quick-ball': 20 },
 		researchPoints: 100,
 		requiredUpgrade: 'space distortion radar',
 		conditionFunction: (s) =>
-			spaceDistortionMons.every((f) => s.pokedex[f].caughtOnRoutes.length > 0),
+			getSwarmOptions('SPACE_DISTORTION').every(
+				(f) => s.pokedex[f].caughtOnRoutes.length > 0
+			),
+	},
+	'train a pidgeot to lvl 100': {
+		kind: 'BULLETIN',
+		category: 'TRAINING',
+		researchPoints: 100,
+		campUpgrade: 'pidgeot rider certification',
+		rewardItems: {},
+		conditionFunction: (s) =>
+			s.pokemon.some(
+				(p) =>
+					p.name === 'pidgeot' &&
+					calculateLevelData(p.xp, p.growthRate).level === 100
+			),
 	},
 } as Record<QuestName, Quest>;
 

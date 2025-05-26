@@ -52,17 +52,6 @@ const getFlailPower = (hp: number, damage: number): number => {
 	}
 
 	return 20;
-
-	// {
-	// 	"effect": "Inflicts regular damage.
-	// 	Power varies inversely with the user's
-	// 	proportional remaining HP.\n\n64 * current HP / max HP | Power\n-----------------------: | ----:\n 0– 1                    |  200\n 2– 5                    |  150\n 6–12                    |  100\n13–21                    |   80\n22–42                    |   40\n43–64                    |   20\n",
-	// 	"language": {
-	// 		"name": "en",
-	// 		"url": "https://pokeapi.co/api/v2/language/9/"
-	// 	},
-	// 	"short_effect": "Inflicts more damage when the user has less HP remaining, with a maximum of 200 power."
-	// }
 };
 
 const getMagnitudePower = () => {
@@ -167,6 +156,22 @@ export const getPower = (
 		);
 
 		return 60 + boosts * 20;
+	}
+	if (attack.name === 'power-trip') {
+		const boosts = Object.entries(attacker.statBoosts).reduce(
+			(sum, [key, value]) => {
+				if (HIDDEN_STATS.includes(key)) {
+					return sum;
+				}
+				if (value <= 0) {
+					return sum;
+				}
+				return sum + value;
+			},
+			0
+		);
+
+		return 20 + boosts * 20;
 	}
 	if (attack.name === 'electro-ball') {
 		const factor =

@@ -27,7 +27,7 @@ import {
 
 export const useFarm = () => {
 	const { addMessage } = useContext(MessageQueueContext);
-	const { saveFile, putSaveFileReducer } = useContext(SaveFileContext);
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
 	const hasEmptySlots = useMemo(() => {
 		const slots = [
@@ -50,8 +50,7 @@ export const useFarm = () => {
 			}
 			if (!bush.successful) {
 				addMessage({ message: `removed the withered  ${bush.type}` });
-				putSaveFileReducer({
-					...saveFile,
+				patchSaveFileReducer({
 					farm: {
 						...saveFile.farm,
 						plants: saveFile.farm.plants.filter((p) => p.id !== id),
@@ -67,8 +66,7 @@ export const useFarm = () => {
 
 			if (bush.successful) {
 				addMessage({ message: `harvested ${bush.yield} ${bush.type}` });
-				putSaveFileReducer({
-					...saveFile,
+				patchSaveFileReducer({
 					bag: joinInventories(saveFile.bag, {
 						[bush.type]: bush.yield,
 					}),
@@ -84,7 +82,7 @@ export const useFarm = () => {
 				});
 			}
 		},
-		[addMessage, putSaveFileReducer, saveFile]
+		[addMessage, patchSaveFileReducer, saveFile]
 	);
 
 	const getGrowingTime = (mulch?: MulchType) => {
@@ -147,7 +145,7 @@ export const useFarm = () => {
 					[mulch]: 1,
 			  }
 			: { [t]: 1 };
-		putSaveFileReducer({
+		patchSaveFileReducer({
 			...saveFile,
 			bag: joinInventories(saveFile.bag, usedItems, true),
 			farm: {

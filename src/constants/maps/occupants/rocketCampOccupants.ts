@@ -1,6 +1,7 @@
 import { getHighestXpOnTeam } from '../../../functions/getHighestXpOnTeam';
 import { makeChallengerPokemon } from '../../../functions/makeChallengerPokemon';
 import { occupantHandled } from '../../../functions/occupantHandled';
+import { getRocketChadTeam } from '../../../functions/troubleMakers/rocket';
 import { ItemType } from '../../../interfaces/Item';
 import { Occupant, OverworldItem } from '../../../interfaces/OverworldMap';
 import { SaveFile } from '../../../interfaces/SaveFile';
@@ -66,7 +67,7 @@ export const rocketCampOccupants: Occupant[] = [
 	}),
 	{
 		type: 'TRAINER',
-		id: 'rocketCamp-goon-1',
+		id: 'Rocket Goon Stevie',
 		x: 11,
 		y: 9,
 		orientation: 'UP',
@@ -77,9 +78,8 @@ export const rocketCampOccupants: Occupant[] = [
 			}),
 		],
 		sprite: SpriteEnum.rocketFemale,
-		name: 'Rocket Goon Stevie',
 		unhandledMessage: ['Who the hell are you?'],
-		conditionFunction: (s) => !occupantHandled(s, 'rocketCamp-goon-1'),
+		conditionFunction: (s) => !occupantHandled(s, 'Rocket Goon Stevie'),
 		battleTeamConfig: {
 			assignLearnsetMoves: true,
 			assignNaturalAbility: true,
@@ -90,7 +90,7 @@ export const rocketCampOccupants: Occupant[] = [
 	},
 	{
 		type: 'TRAINER',
-		id: 'rocketCamp-goon-2',
+		id: 'Rocket Goon Fatiha',
 		x: 2,
 		y: 6,
 		orientation: 'RIGHT',
@@ -105,9 +105,8 @@ export const rocketCampOccupants: Occupant[] = [
 			}),
 		],
 		sprite: SpriteEnum.rocketFemale,
-		name: 'Rocket Goon Fatiha',
 		unhandledMessage: ['Bruv'],
-		conditionFunction: (s) => !occupantHandled(s, 'rocketCamp-goon-2'),
+		conditionFunction: (s) => !occupantHandled(s, 'Rocket Goon Fatiha'),
 		battleTeamConfig: {
 			assignLearnsetMoves: true,
 			assignNaturalAbility: true,
@@ -118,7 +117,7 @@ export const rocketCampOccupants: Occupant[] = [
 	},
 	{
 		type: 'TRAINER',
-		id: 'rocketCamp-goon-3',
+		id: 'Rocket Goon Rosie',
 		x: 14,
 		y: 2,
 		orientation: 'DOWN',
@@ -133,9 +132,8 @@ export const rocketCampOccupants: Occupant[] = [
 			}),
 		],
 		sprite: SpriteEnum.rocketFemale,
-		name: 'Rocket Goon Rosie',
 		unhandledMessage: ['Dont mess with our loot'],
-		conditionFunction: (s) => !occupantHandled(s, 'rocketCamp-goon-3'),
+		conditionFunction: (s) => !occupantHandled(s, 'Rocket Goon Rosie'),
 		battleTeamConfig: {
 			assignLearnsetMoves: true,
 			assignNaturalAbility: true,
@@ -146,7 +144,7 @@ export const rocketCampOccupants: Occupant[] = [
 	},
 	{
 		type: 'TRAINER',
-		id: 'rocketCamp-goon-4',
+		id: 'Rocket Goon Jason',
 		x: 2,
 		y: 17,
 		orientation: 'RIGHT',
@@ -165,9 +163,9 @@ export const rocketCampOccupants: Occupant[] = [
 			}),
 		],
 		sprite: SpriteEnum.rocketMale,
-		name: 'Rocket Goon Jason',
+
 		unhandledMessage: ['Nyyyaaaah'],
-		conditionFunction: (s) => !occupantHandled(s, 'rocketCamp-goon-4'),
+		conditionFunction: (s) => !occupantHandled(s, 'Rocket Goon Jason'),
 		battleTeamConfig: {
 			assignLearnsetMoves: true,
 			assignNaturalAbility: true,
@@ -178,7 +176,7 @@ export const rocketCampOccupants: Occupant[] = [
 	},
 	{
 		type: 'TRAINER',
-		id: 'rocketCamp-goon-5',
+		id: 'Rocket Goon Matt',
 		x: 16,
 		y: 11,
 		orientation: 'LEFT',
@@ -193,9 +191,8 @@ export const rocketCampOccupants: Occupant[] = [
 			}),
 		],
 		sprite: SpriteEnum.rocketMale,
-		name: 'Rocket Goon Matt',
 		unhandledMessage: ['You aint getting out of here'],
-		conditionFunction: (s) => !occupantHandled(s, 'rocketCamp-goon-5'),
+		conditionFunction: (s) => !occupantHandled(s, 'Rocket Goon Matt'),
 		battleTeamConfig: {
 			assignLearnsetMoves: true,
 			assignNaturalAbility: true,
@@ -206,7 +203,7 @@ export const rocketCampOccupants: Occupant[] = [
 	},
 	{
 		type: 'TRAINER',
-		id: 'rocketCamp-goon-6',
+		id: 'Rocket Goon Alex',
 		x: 18,
 		y: 5,
 		orientation: 'DOWN',
@@ -221,14 +218,38 @@ export const rocketCampOccupants: Occupant[] = [
 			}),
 		],
 		sprite: SpriteEnum.rocketMale,
-		name: 'Rocket Goon Alex',
+
 		unhandledMessage: ['Why?'],
-		conditionFunction: (s) => !occupantHandled(s, 'rocketCamp-goon-6'),
+		conditionFunction: (s) => !occupantHandled(s, 'Rocket Goon Alex'),
 		battleTeamConfig: {
 			assignLearnsetMoves: true,
 			assignNaturalAbility: true,
 			assignGender: true,
 
+			assignHeldItem: true,
+		},
+	},
+	{
+		type: 'TRAINER',
+		id: 'Rocket Admin Chad',
+		x: 10,
+		y: 9,
+		orientation: 'DOWN',
+		team: getRocketChadTeam,
+		sprite: SpriteEnum.rocketAdminMale,
+
+		unhandledMessage: [
+			'Dont you understand?',
+			'Everybody has got to make a living',
+			'I accept no responsibility for my cruelty',
+			'...',
+			'big dog',
+		],
+		conditionFunction: (s) => !occupantHandled(s, 'Rocket Admin Chad'),
+		battleTeamConfig: {
+			assignLearnsetMoves: true,
+			assignNaturalAbility: true,
+			assignGender: true,
 			assignHeldItem: true,
 		},
 	},

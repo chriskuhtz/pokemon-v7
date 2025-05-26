@@ -8,7 +8,7 @@ import {
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
-import { nameToIdMap } from '../../pokemonNames';
+import { internalDex } from '../../internalDexData';
 
 const garyTeam = () => [
 	makeChallengerPokemon({
@@ -89,20 +89,21 @@ const garyCondition = (s: SaveFile) => {
 		team.every(
 			(t) =>
 				calculateLevelData(t.xp, t.growthRate).level <= 60 &&
-				nameToIdMap[t.name] <= 151
+				internalDex[t.name].dexId <= 151
 		)
 	);
 };
+
+export const garyId = 'trainer_gary';
 const trainerGary: OverworldTrainer = {
 	type: 'TRAINER',
 	x: 10,
 	y: 20,
 	orientation: 'DOWN',
-	id: 'trainer_gary',
+	id: garyId,
 	conditionFunction: garyCondition,
 	sprite: SpriteEnum.gary,
 	unhandledMessage: ['I am always looking for a challenge'],
-	name: 'Gym Leader Gary',
 	team: garyTeam,
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/8/89/VSBlue.png',

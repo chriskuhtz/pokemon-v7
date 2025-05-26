@@ -1,4 +1,3 @@
-import { EncounterMap } from '../constants/maps/encounters';
 import { MapId } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { QuestName } from '../constants/questsRecord';
@@ -137,7 +136,6 @@ export interface OverworldTrainer extends BaseOccupant {
 	handledMessage?: string[];
 	sprite: string;
 	team: (s: SaveFile) => OwnedPokemon[];
-	name: string;
 	challengeFieldRank?: number;
 	battleTeamConfig: BattleTeamConfig;
 	profilePicture?: string;
@@ -245,15 +243,16 @@ export type Occupant =
 	| EmptyApricornTree
 	| TeleporterNpc;
 
+export type EncounterRarity = 'common' | 'medium' | 'rare' | 'ultra-rare';
+
 export interface OverworldEncounter {
 	name: PokemonName;
 	minXp: number;
 	maxXp: number;
-	rarity: 'common' | 'medium' | 'rare' | 'ultra-rare';
+	rarity: EncounterRarity;
 }
 export interface OverworldMap {
 	id: MapId;
-	possibleEncounters: EncounterMap;
 	tileMap: TileMap;
 	occupants: Occupant[];
 	weather?: WeatherType;

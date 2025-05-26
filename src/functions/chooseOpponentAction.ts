@@ -1,3 +1,4 @@
+import { firstTurnMoves } from '../constants/groupedMoves';
 import { BattleMove, BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import {
@@ -24,8 +25,17 @@ export const determineHighestDamage = (
 		return { actionName: 'LOAFING', targetId: attacker.id };
 	}
 	const mapped: { actionName: ActionType; targetId: string; damage: number }[] =
-		moves.flatMap((move) =>
-			targets.map((target) => ({
+		moves.flatMap((move) => {
+			if (firstTurnMoves.includes(move.name) && attacker.roundsInBattle !== 1) {
+				return [
+					{
+						actionName: move.name,
+						targetId: targets.at(0)?.id ?? '',
+						damage: 0,
+					},
+				];
+			}
+			return targets.map((target) => ({
 				actionName: move.name,
 				targetId: target.id,
 				damage: calculateDamage(
@@ -54,8 +64,8 @@ export const determineHighestDamage = (
 					1,
 					() => {}
 				).damage,
-			}))
-		);
+			}));
+		});
 
 	const sorted = mapped.sort((a, b) => b.damage - a.damage);
 
@@ -99,6 +109,17 @@ export const chooseOpponentAction = ({
 			userId: controlled.id,
 			actionName: 'LOAFING',
 			targetId: filtered[0].id,
+		};
+	}
+	//fake out if possible
+	const firstTurnMove = moves.find((m) => firstTurnMoves.includes(m.name));
+	const canUseFirstTurnMove = firstTurnMove && controlled.roundsInBattle === 1;
+
+	if (canUseFirstTurnMove) {
+		return {
+			userId: controlled.id,
+			actionName: firstTurnMove.name,
+			targetId: controlled.id,
 		};
 	}
 	//ingrain if possible
@@ -179,7 +200,11 @@ export const chooseOpponentAction = ({
 			m.data.target.name === 'user'
 	);
 
-	if (setupMove && controlled.roundsInBattle === 1 && !random) {
+	if (
+		setupMove &&
+		Object.values(controlled.statBoosts).every((boost) => boost <= 0) &&
+		!random
+	) {
 		return {
 			userId: controlled.id,
 			actionName: setupMove.name,

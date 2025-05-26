@@ -61,7 +61,6 @@ export const challengeFieldOccupants: OverworldMap['occupants'] = [
 				!s.handledOccupants.some((h) => h.id === id) &&
 				(!t.requiredUpgrade || s.campUpgrades[t.requiredUpgrade]),
 			sprite: t.trainer?.sprite ?? SpriteEnum.aceMale,
-			name: id,
 			unhandledMessage: ['.', '..', '...'],
 			team: () => t.team,
 			challengeFieldRank,

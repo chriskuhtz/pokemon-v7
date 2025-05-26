@@ -1,22 +1,19 @@
 import { AbilityName } from '../constants/checkLists/completed/abilityCheckList';
-import { isContactMove } from '../constants/contactMoves';
-import {
-	fixedDamageMoves,
-	levelDamageMoves,
-} from '../constants/fixedDamageMoves';
-import {
-	diveDoubleDamageMoves,
-	flyDoubleDamageMoves,
-	ohkoMoves,
-} from '../constants/ohkoMoves';
 import {
 	auraAndPulseMoves,
 	bitingMoves,
+	diveDoubleDamageMoves,
+	fixedDamageMoves,
+	flyDoubleDamageMoves,
+	isContactMove,
+	levelDamageMoves,
+	ohkoMoves,
 	punchBasedMoves,
 	slicingMoves,
+	soundBasedMoves,
 	windMoves,
-} from '../constants/punchBasedMoves';
-import { soundBasedMoves } from '../constants/soundBasedMoves';
+} from '../constants/groupedMoves';
+
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
@@ -264,7 +261,8 @@ export const calculateDamage = (
 			critFactor === 2 ||
 			attacker.ability === 'unaware' ||
 			attack.name === 'chip-away' ||
-			attack.name === 'sacred-sword'
+			attack.name === 'sacred-sword' ||
+			attack.name === 'darkest-lariat'
 		);
 	};
 
@@ -849,7 +847,10 @@ export const calculateDamage = (
 		};
 	}
 	//false swipe never defeats
-	if (attack.name === 'false-swipe' && res > target.stats.hp - target.damage) {
+	if (
+		(attack.name === 'false-swipe' || attack.name === 'hold-back') &&
+		res > target.stats.hp - target.damage
+	) {
 		return {
 			damage: target.stats.hp - 1,
 			criticalHit: critFactor === 2,

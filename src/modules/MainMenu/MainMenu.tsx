@@ -21,6 +21,7 @@ import {
 } from '../../constants/gameData';
 import { MapId, mapsRecord } from '../../constants/maps/mapsRecord';
 import { fullyHealPokemon } from '../../functions/fullyHealPokemon';
+import { resetChallengeFielders } from '../../functions/resetChallengeFielders';
 import { LocationContext } from '../../hooks/LocationProvider';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
@@ -29,6 +30,7 @@ import { useReset } from '../../hooks/useReset';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { useTeleport } from '../../hooks/useTeleport';
 import { EmptyInventory } from '../../interfaces/Inventory';
+import { RoutesType } from '../../interfaces/Routing';
 
 export const onChallengeField = (id: MapId) => {
 	return id === challengeFieldId || id === randomFieldId;
@@ -60,6 +62,7 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 						actionElements={[]}
 					/>
 				)}
+				<FlyingButton />
 				{onChallengeField(location.mapId) && (
 					<Card
 						onClick={() => {
@@ -73,17 +76,9 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 							patchSaveFileReducer({
 								bag: EmptyInventory,
 								meta: { ...saveFile.meta, activeTab: 'OVERWORLD' },
-								handledOccupants: saveFile.handledOccupants.filter((h) => {
-									if (h.id.includes(challengeFieldId)) {
-										return false;
-									}
-
-									if (h.id.includes(randomFieldId)) {
-										return false;
-									}
-
-									return true;
-								}),
+								handledOccupants: resetChallengeFielders(
+									saveFile.handledOccupants
+								),
 
 								pokemon: saveFile.pokemon.map((p) => {
 									if (p.onTeam) {
@@ -133,6 +128,12 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 					actionElements={[]}
 				/>
 				<Card
+					onClick={() => navigate('MAIN', 'INTERNAL_DEX')}
+					content={<h4>Internal Dex</h4>}
+					icon={<RiBookShelfLine size={battleSpriteSize} />}
+					actionElements={[]}
+				/>
+				<Card
 					onClick={() => navigate('MAIN', 'WIKI')}
 					content={<h4>Wiki</h4>}
 					icon={<FaSearch size={battleSpriteSize} />}
@@ -167,7 +168,7 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 					Object.keys(mapsRecord).map((m) => (
 						<Card
 							key={m}
-							onClick={() => navigate('MAIN', `MAP_MAKER_${m}`)}
+							onClick={() => navigate('MAIN', `MAP_MAKER_${m}` as RoutesType)}
 							content={<h4>Map Maker {m}</h4>}
 							icon={<GoTasklist size={battleSpriteSize} />}
 							actionElements={[]}
@@ -371,4 +372,34 @@ export const LureButton = () => {
 		);
 	}
 	return <></>;
+};
+export const FlyingButton = () => {
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+
+	if (!saveFile.campUpgrades['pidgeot rider certification']) {
+		return <></>;
+	}
+	return (
+		<>
+			{saveFile.flying ? (
+				<Card
+					onClick={() => patchSaveFileReducer({ flying: false })}
+					content={<h4>Stop flying</h4>}
+					icon={
+						<PokemonSprite name={'pidgeot'} config={{ officalArtwork: true }} />
+					}
+					actionElements={[]}
+				/>
+			) : (
+				<Card
+					onClick={() => patchSaveFileReducer({ flying: true })}
+					content={<h4>Fly on Pidgeot</h4>}
+					icon={
+						<PokemonSprite name={'pidgeot'} config={{ officalArtwork: true }} />
+					}
+					actionElements={[]}
+				/>
+			)}
+		</>
+	);
 };

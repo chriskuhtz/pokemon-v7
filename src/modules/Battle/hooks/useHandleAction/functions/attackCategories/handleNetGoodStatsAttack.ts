@@ -60,6 +60,13 @@ export const handleNetGoodStatsAttack = ({
 					addMessage({ message: `${attacker.name} failed to captivate` });
 					return updatedTarget;
 				}
+				if (
+					move.name === 'venom-drench' &&
+					updatedTarget.primaryAilment?.type !== 'poison'
+				) {
+					addMessage({ message: `venom drench failed` });
+					return updatedTarget;
+				}
 				return applyAttackStatChanges(
 					updatedTarget,
 					updatedTarget.ability,

@@ -10,7 +10,7 @@ import { Stack } from '../../uiComponents/Stack/Stack';
 
 export const ApricornSmithy = ({ goBack }: { goBack: () => void }) => {
 	const { addMessage } = useContext(MessageQueueContext);
-	const { saveFile, putSaveFileReducer } = useContext(SaveFileContext);
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
 	const apricorns: [ApricornType, number][] = useMemo(
 		() =>
@@ -26,8 +26,7 @@ export const ApricornSmithy = ({ goBack }: { goBack: () => void }) => {
 				message: `Crafted a ${apricornTable[apricorn]} from a ${apricorn}`,
 				needsNoConfirmation: true,
 			});
-			putSaveFileReducer({
-				...saveFile,
+			patchSaveFileReducer({
 				bag: joinInventories(saveFile.bag, {
 					[apricorn]: -1,
 					[apricornTable[apricorn]]: 1,
@@ -35,7 +34,7 @@ export const ApricornSmithy = ({ goBack }: { goBack: () => void }) => {
 				mileStones: { ...saveFile.mileStones, hasCraftedApricorn: true },
 			});
 		},
-		[addMessage, putSaveFileReducer, saveFile]
+		[addMessage, patchSaveFileReducer, saveFile.bag, saveFile.mileStones]
 	);
 	return (
 		<Page goBack={goBack} headline="Kurt's Apricorn Smithy">

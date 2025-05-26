@@ -106,6 +106,7 @@ export const BattleField = ({
 	challengerId,
 	rewardItems,
 	spriteGeneration,
+	challengerType,
 }: {
 	leave: (x: LeaveBattlePayload) => void;
 	initOpponents: BattlePokemon[];
@@ -115,9 +116,10 @@ export const BattleField = ({
 	latestMessage: Message | undefined;
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
-	challengerId?: string;
+	challengerId: string;
 	rewardItems?: Partial<Inventory>;
 	spriteGeneration?: 1;
+	challengerType: 'TRAINER' | 'WILD';
 }) => {
 	const {
 		saveFile: { settings },
@@ -125,7 +127,9 @@ export const BattleField = ({
 	const { playerColor, oppColor } = useLocationColors();
 
 	const { location } = useContext(LocationContext);
-	const isTrainerBattle = useMemo(() => !!challengerId, [challengerId]);
+	const isTrainerBattle = useMemo(() => {
+		return challengerType === 'TRAINER';
+	}, [challengerType]);
 
 	const [battleRound, setBattleRound] = useState<number>(0);
 	const [battleLocation] = useState<BattleLocation>('STANDARD');

@@ -4,7 +4,7 @@ import {
 	abilityNames,
 } from '../constants/checkLists/completed/abilityCheckList';
 import { MoveName } from '../constants/checkLists/movesCheckList';
-import { nameToIdMap } from '../constants/pokemonNames';
+import { internalDex } from '../constants/internalDexData';
 import { calculateLevelData } from '../functions/calculateLevelData';
 import { getRandomEntry } from '../functions/filterTargets';
 import { getEvAwards } from '../functions/getEvAwards';
@@ -79,7 +79,7 @@ export const useGetBattleTeam = (
 						const res = getRandomEntry(possibleAbilities);
 						if (randomAbilities) {
 							const index = abilityNames.findIndex((a) => a === res);
-							const dexId = nameToIdMap[pokemon.name];
+							const dexId = internalDex[pokemon.name].dexId;
 							return [
 								...abilityNames,
 								...abilityNames,
@@ -217,6 +217,8 @@ export const useGetBattleTeam = (
 					evAwards: getEvAwards(fetchedData.stats),
 					participatedInBattle: false,
 					protected: false,
+					spikyShielded: false,
+					banefulBunkered: false,
 					endured: false,
 					charged: false,
 					helpingHanded: false,

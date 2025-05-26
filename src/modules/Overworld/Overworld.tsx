@@ -13,7 +13,7 @@ import { useHallowedTower } from '../../hooks/useHallowedTower';
 import { useHoneyTree } from '../../hooks/useHoneyTree';
 import { useInteractWithSnorlax } from '../../hooks/useInteractWithSnorlax';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
-import { useRocketRadio } from '../../hooks/useRocketRadio';
+import { useRangerRadio } from '../../hooks/useRangerRadio';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { useShader } from '../../hooks/useShader';
 import { useStaticEncounter } from '../../hooks/useStaticEncounter';
@@ -71,7 +71,7 @@ export const Overworld = () => {
 	const interactWithSwarmRadar = useCallback(() => {
 		navigateAwayFromOverworldReducer('SWARM_RADAR', stepsTaken);
 	}, [navigateAwayFromOverworldReducer, stepsTaken]);
-	const interactWithRocketRadio = useRocketRadio();
+	const interactWithRocketRadio = useRangerRadio();
 	const interactWithRock = useSledgeHammer();
 	const addEncounterMessage = useStartEncounter();
 	const encounterRateModifier = useEncounterRateModifier();
@@ -86,6 +86,9 @@ export const Overworld = () => {
 	const { rotateOccupant, occupants } = useOccupants();
 
 	const sprite = useMemo(() => {
+		if (saveFile.flying) {
+			return 'pidgeot';
+		}
 		const onWater = map.tileMap.waterLayer[location.y][location.x];
 		if (onWater) {
 			return 'NPC_027';
@@ -95,7 +98,14 @@ export const Overworld = () => {
 		}
 
 		return saveFile.sprite;
-	}, [map.id, map.tileMap.waterLayer, location.x, location.y, saveFile.sprite]);
+	}, [
+		saveFile.flying,
+		saveFile.sprite,
+		map.tileMap.waterLayer,
+		map.id,
+		location.y,
+		location.x,
+	]);
 	//DRAWING
 	useDrawCharacter(playerCanvasId, location, sprite);
 	useDrawOccupants(occupantsCanvasId, occupants, baseSize);

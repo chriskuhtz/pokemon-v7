@@ -93,6 +93,10 @@ export const AnimatedBar = ({
 			</div>
 			<div
 				style={{
+					color:
+						textColor ??
+						percentageBasedColor(inversedColor ? 1 - percentage : percentage)
+							.contrast,
 					backgroundColor:
 						color ??
 						percentageBasedColor(inversedColor ? 1 - percentage : percentage)

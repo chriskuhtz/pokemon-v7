@@ -54,9 +54,11 @@ export const campUpgradeNames = [
 	'buy skiing equipment',
 	'invite historian',
 	'ranger certification',
+	'warden certification',
 	'dragonite taxi',
 	'invite nature tutor',
 	'invite ability tutor',
+	'pidgeot rider certification',
 ] as const;
 
 export type CampUpgrade = (typeof campUpgradeNames)[number];
@@ -65,7 +67,8 @@ export type CampUpgradeCategory =
 	| 'Sustainability'
 	| 'Exploration'
 	| 'Research'
-	| 'Training';
+	| 'Training'
+	| 'Quest Reward';
 
 export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
 	bulletin_board: 'Research',
@@ -126,6 +129,8 @@ export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
 	'team slot 5': 'Exploration',
 	'team slot 6': 'Exploration',
 	'dragonite taxi': 'Exploration',
+	'pidgeot rider certification': 'Quest Reward',
+	'warden certification': 'Quest Reward',
 };
 
 export const baseRequirements: CampUpgrade[] = [
@@ -160,7 +165,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'invite chef grandma': baseRequirements,
 	'pokemon swarm radar': baseRequirements,
 	'upgraded swarm radar': ['pokemon swarm radar', 'ranger certification'],
-	'time distortion radar': ['upgraded swarm radar'],
+	'time distortion radar': ['upgraded swarm radar', 'warden certification'],
 	'space distortion radar': ['time distortion radar'],
 	'second slot for farm': baseRequirements,
 	'third slot for farm': ['second slot for farm'],
@@ -192,10 +197,12 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'berry lure station routeE1': ['shovel certification'],
 	'berry lure station routeS1E1': ['swimming certification'],
 	'berry lure station routeS1W1': ['swimming certification'],
-	//the last upgrade
+	//the last exploration upgrade
 	'dragonite taxi': campUpgradeNames.filter(
 		(name) => campUpgradeCategories[name] === 'Exploration'
 	),
+	'pidgeot rider certification': [],
+	'warden certification': ['ranger certification'],
 };
 
 export const campUpgradeExplanations: Record<CampUpgrade, string> = {
@@ -265,6 +272,10 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	'seventh slot for farm': 'more space at the berry farm',
 	'invite historian': 'It might not all be true, but it sounds interesting',
 	'dragonite taxi': 'dragonite can fly you to remote places',
+	'pidgeot rider certification':
+		'Expert flying Pokemon Trainers can ride on their pokemon',
+	'warden certification':
+		'Wardens are strong rangers that take on more difficult tasks',
 };
 
 export const campUpgradeCostScale = 25;

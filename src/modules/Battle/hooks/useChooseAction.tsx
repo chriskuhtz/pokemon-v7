@@ -1,10 +1,11 @@
 import { useCallback } from 'react';
 import { MoveName } from '../../../constants/checkLists/movesCheckList';
-import { lockInMoves } from '../../../constants/forceSwitchMoves';
+
 import {
 	recoveryMoves,
 	secondTurnMoves,
-} from '../../../constants/secondTurnMoves';
+	thrashingMoves,
+} from '../../../constants/groupedMoves';
 import { determineMultiHits } from '../../../functions/determineMultiHits';
 import { getRandomEntry } from '../../../functions/filterTargets';
 import { getHeldItem } from '../../../functions/getHeldItem';
@@ -187,7 +188,10 @@ export const useChooseAction = (
 			}
 
 			const canSkipCharge = () => {
-				if (battleWeather === 'sun' && actionName === 'solar-beam') {
+				if (
+					battleWeather === 'sun' &&
+					(actionName === 'solar-beam' || actionName === 'solar-blade')
+				) {
 					return true;
 				}
 				if (getHeldItem(user) === 'power-herb') {
@@ -257,7 +261,7 @@ export const useChooseAction = (
 				);
 				return;
 			}
-			if (lockInMoves.includes(actionName)) {
+			if (thrashingMoves.includes(actionName)) {
 				setPokemon((pokemon) =>
 					pokemon.map((p) => {
 						if (p.id === user.id) {

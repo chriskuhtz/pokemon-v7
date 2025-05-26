@@ -362,7 +362,6 @@ const barry: OverworldTrainer = {
 		'Lets battle every time we meet each other in the wild',
 		'That way, we will grow stronger together',
 	],
-	name: barryId,
 	team: barryTeam,
 	battleTeamConfig: {
 		assignGender: false,

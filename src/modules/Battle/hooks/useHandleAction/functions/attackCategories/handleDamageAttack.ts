@@ -1,14 +1,19 @@
-import { isContactMove } from '../../../../../../constants/contactMoves';
-import { SELF_DESTRUCTING_MOVES } from '../../../../../../constants/selfDestructingMoves';
+import {
+	firstTurnMoves,
+	isContactMove,
+	SELF_DESTRUCTING_MOVES,
+} from '../../../../../../constants/groupedMoves';
 import { applyAttackAilmentsToPokemon } from '../../../../../../functions/applyAttackAilmentsToPokemon';
 import { applyAttackStatChanges } from '../../../../../../functions/applyAttackStatChanges';
 import { applyDrainOrRecoil } from '../../../../../../functions/applyDrainOrRecoil';
+import { applySecondaryAilmentToPokemon } from '../../../../../../functions/applySecondaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from '../../../../../../functions/applyStatChangeToPokemon';
 import { calculateDamage } from '../../../../../../functions/calculateDamage';
 import { checkThiefMoves } from '../../../../../../functions/checkThiefMoves';
 import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
 import { getPlayerId } from '../../../../../../functions/getPlayerId';
+import { getTypeNames } from '../../../../../../functions/getTypeNames';
 import { isKO } from '../../../../../../functions/isKo';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import { isRemovedByRapidSpin } from '../../../../../../interfaces/Ailment';
@@ -106,8 +111,26 @@ export const handleDamageAttack = ({
 		});
 	}
 	//fake out
-	if (move.name === 'fake-out' && updatedAttacker.roundsInBattle !== 1) {
+	if (
+		firstTurnMoves.includes(move.name) &&
+		updatedAttacker.roundsInBattle !== 1
+	) {
 		addMessage({ message: 'It failed' });
+		return pokemon.map((p) => {
+			if (p.id === updatedAttacker.id) {
+				return updatedAttacker;
+			}
+			if (p.id === updatedTarget.id) {
+				return updatedTarget;
+			}
+			return p;
+		});
+	}
+	if (
+		move.name === 'burn-up' &&
+		!getTypeNames(updatedAttacker).includes('fire')
+	) {
+		addMessage({ message: 'it failed' });
 		return pokemon.map((p) => {
 			if (p.id === updatedAttacker.id) {
 				return updatedAttacker;
@@ -177,6 +200,14 @@ export const handleDamageAttack = ({
 		});
 
 		updatedTarget = { ...updatedTarget, heldItemName: undefined };
+	}
+	//sparkling-aria
+	if (
+		move.name === 'sparkling-aria' &&
+		updatedTarget.primaryAilment?.type === 'burn'
+	) {
+		addMessage({ message: `${updatedTarget.name}'s burn was healed` });
+		updatedTarget = { ...updatedTarget, primaryAilment: undefined };
 	}
 
 	// apply damage
@@ -537,6 +568,17 @@ export const handleDamageAttack = ({
 	) {
 		updatedAttacker.metronomeStack = (updatedAttacker.metronomeStack ?? 0) + 1;
 	} else updatedAttacker.metronomeStack = 0;
+
+	if (move.name === 'burn-up') {
+		addMessage({ message: `${updatedAttacker.name} is no longer fire type` });
+		updatedAttacker = applySecondaryAilmentToPokemon({
+			pokemon: updatedAttacker,
+			addMessage,
+			applicator: updatedAttacker,
+			ailment: 'color-changed',
+			newType: 'normal',
+		});
+	}
 
 	//ABILITYCHECK
 	const { updatedAttacker: a, updatedTarget: t } = handleAbilitiesAfterAttack(

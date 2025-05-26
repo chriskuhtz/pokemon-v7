@@ -1,3 +1,4 @@
+import { protectMoves } from '../../../../../../constants/groupedMoves';
 import { applySecondaryAilmentToPokemon } from '../../../../../../functions/applySecondaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from '../../../../../../functions/applyStatChangeToPokemon';
 import { changeMovePP } from '../../../../../../functions/changeMovePP';
@@ -323,18 +324,21 @@ export const handleUniqueMoves = ({
 			statBoosts: updatedTarget.statBoosts,
 		};
 	}
-	if (move.name === 'protect' || move.name === 'detect') {
+	if (protectMoves.includes(move.name)) {
 		if (
-			(updatedAttacker.lastUsedMove?.name === 'protect' ||
-				updatedAttacker.lastUsedMove?.name === 'detect' ||
-				updatedAttacker.lastUsedMove?.name === 'endure') &&
+			protectMoves.includes(updatedAttacker.lastUsedMove?.name ?? '') &&
 			Math.random() > 0.5
 		) {
 			addMessage({
 				message: `It failed`,
 			});
 		} else {
-			updatedAttacker = { ...updatedAttacker, protected: true };
+			updatedAttacker = {
+				...updatedAttacker,
+				protected: true,
+				spikyShielded: move.name === 'spiky-shield',
+				banefulBunkered: move.name === 'baneful-bunker',
+			};
 		}
 	}
 	if (move.name === 'endure') {
@@ -567,7 +571,19 @@ export const handleUniqueMoves = ({
 			updatedAttacker = { ...updatedAttacker, heldItemName: undefined };
 		}
 	}
-
+	if (move.name === 'purify') {
+		if (updatedAttacker.primaryAilment) {
+			addMessage({ message: `${updatedAttacker.name} healed itself` });
+			updatedAttacker = {
+				...updatedAttacker,
+				primaryAilment: undefined,
+				damage: Math.max(
+					0,
+					updatedAttacker.damage - Math.floor(updatedAttacker.stats.hp / 2)
+				),
+			};
+		} else addMessage({ message: `it failed` });
+	}
 	return updatedPokemon.map((p) => {
 		if (p.id === updatedAttacker.id) {
 			return updatedAttacker;

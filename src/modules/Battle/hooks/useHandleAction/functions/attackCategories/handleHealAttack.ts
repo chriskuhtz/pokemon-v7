@@ -5,6 +5,7 @@ import { Message } from '../../../../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../../../../interfaces/Weather';
+import { BattleTerrain } from '../../../useBattleTerrain';
 
 export const handleHealAttack = ({
 	attacker,
@@ -12,12 +13,14 @@ export const handleHealAttack = ({
 	addMessage,
 	move: m,
 	battleWeather,
+	terrain,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
 	addMessage: (x: Message) => void;
 	move: BattleAttack;
 	battleWeather: WeatherType | undefined;
+	terrain: BattleTerrain | undefined;
 }): BattlePokemon[] => {
 	let updatedAttacker = { ...attacker };
 
@@ -60,6 +63,16 @@ export const handleHealAttack = ({
 				battleWeather === 'sandstorm'
 			) {
 				return 25;
+			}
+		}
+		if (move.name === 'shore-up') {
+			if (battleWeather === 'sandstorm') {
+				return 66;
+			}
+		}
+		if (move.name === 'floral-healing') {
+			if (terrain === 'grassy') {
+				return 66;
 			}
 		}
 

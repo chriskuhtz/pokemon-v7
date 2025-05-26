@@ -12,19 +12,20 @@ export const updatePosition = (
 	map: OverworldMap,
 	addStep: () => void,
 	currentOccupants: Occupant[],
-	canSwim: boolean
+	canSwim: boolean,
+	flying: boolean
 ): { x: number; y: number } => {
 	const nextLocation = getNextLocation(playerLocation, nextInput);
 
 	const waterfall = isWaterFall(map, nextLocation);
 
-	if (waterfall) {
+	if (waterfall && !flying) {
 		if (nextInput === 'DOWN') {
 			addStep();
 			return nextLocation;
 		} else return playerLocation;
 	}
-	if (isPassable(nextLocation, map, currentOccupants, canSwim)) {
+	if (isPassable(nextLocation, map, currentOccupants, canSwim, flying)) {
 		addStep();
 		return nextLocation;
 	}

@@ -1,12 +1,14 @@
 import { SaveFile } from '../interfaces/SaveFile';
-export const rocketsRemaining = (saveFile: SaveFile): number => {
-	if (!saveFile.rocketOperation) {
+export const troubleMakersRemaining = (saveFile: SaveFile): number => {
+	if (!saveFile.troubleMakers) {
 		return 0;
 	}
-	return saveFile.rocketOperation.trainers.filter(
+	return saveFile.troubleMakers.trainers.filter(
 		(t) => !saveFile.handledOccupants.some((h) => h.id == t.id)
 	).length;
 };
-export const areAllActiveRocketsDefeated = (saveFile: SaveFile): boolean => {
-	return !!(saveFile.rocketOperation && rocketsRemaining(saveFile) === 0);
+export const areAllActiveTroubleMakersDefeated = (
+	saveFile: SaveFile
+): boolean => {
+	return !!(saveFile.troubleMakers && troubleMakersRemaining(saveFile) === 0);
 };

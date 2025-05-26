@@ -27,7 +27,8 @@ export const isPassable = (
 	field: { x: number; y: number },
 	map: OverworldMap,
 	currentOccupants: Occupant[],
-	canSwim: boolean
+	canSwim: boolean,
+	flying: boolean
 ): boolean => {
 	const { width, height } = getMapDimensions(map);
 	if (field.y >= height) {
@@ -42,7 +43,7 @@ export const isPassable = (
 	if (field.x >= width) {
 		return false;
 	}
-	if (devmode) {
+	if (devmode || flying) {
 		return true;
 	}
 	const nextFieldObstacle = map.tileMap.obstacleLayer[field.y][field.x];
@@ -69,6 +70,27 @@ export const isPassable = (
 	}
 
 	return true;
+};
+
+export const hasForeground = (
+	field: { x: number; y: number },
+	map: OverworldMap
+): boolean => {
+	const { width, height } = getMapDimensions(map);
+	if (field.y >= height) {
+		return false;
+	}
+	if (field.y < 0) {
+		return false;
+	}
+	if (field.x < 0) {
+		return false;
+	}
+	if (field.x >= width) {
+		return false;
+	}
+
+	return !!map.tileMap.foregroundLayer[field.y][field.x];
 };
 
 export const isWater = (x: number, y: number, mapId: MapId): boolean =>

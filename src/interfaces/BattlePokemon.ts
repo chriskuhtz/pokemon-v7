@@ -41,6 +41,8 @@ export interface BattlePokemon extends OwnedPokemon {
 		attack: BattleAttack;
 	};
 	protected: boolean;
+	spikyShielded: boolean;
+	banefulBunkered: boolean;
 	endured: boolean;
 	helpingHanded: boolean;
 	defenseCurled?: boolean;

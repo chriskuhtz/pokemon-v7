@@ -33,19 +33,24 @@ export const SwarmRadar = () => {
 							Scan for Distortions
 						</button>
 					)}
-				<h3>Active Swarms:</h3>
+				{saveFile.campUpgrades['warden certification'] &&
+					!saveFile.currentRampagingPokemon && (
+						<button onClick={() => scan('RAMPAGE')}>
+							Scan for Rampaging Pokemon
+						</button>
+					)}
+				<h3>Active:</h3>
 				{activeSwarms.map((a) => (
 					<Card
 						key={a.leavesAt}
 						content={
-							a.type ? (
+							a.type === 'WEAK' || a.type === 'STRONG' ? (
 								<strong>
-									{a.type === 'SPACE' ? 'SPACE' : 'TIME'} Distortion at{' '}
-									{replaceRouteName(a.route)}
+									Swarm of {a.pokemon} at {replaceRouteName(a.route)}
 								</strong>
 							) : (
 								<strong>
-									Swarm of {a.pokemon} at {replaceRouteName(a.route)}
+									{a.type} at {replaceRouteName(a.route)}
 								</strong>
 							)
 						}
@@ -58,6 +63,24 @@ export const SwarmRadar = () => {
 						}
 					/>
 				))}
+				{saveFile.currentRampagingPokemon && (
+					<Card
+						key={saveFile.currentRampagingPokemon.id}
+						content={
+							<strong>
+								Rampaging {saveFile.currentRampagingPokemon.name} at{' '}
+								{replaceRouteName(saveFile.currentRampagingPokemon.route)}
+							</strong>
+						}
+						actionElements={[]}
+						icon={
+							<PokemonSprite
+								name={saveFile.currentRampagingPokemon.name}
+								config={{ officalArtwork: true }}
+							/>
+						}
+					/>
+				)}
 			</Stack>
 		</Page>
 	);

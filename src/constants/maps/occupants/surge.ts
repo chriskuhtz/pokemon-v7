@@ -37,6 +37,8 @@ const surgeCondition = (s: SaveFile) => {
 		)
 	);
 };
+
+export const surgeId = 'trainer_surge';
 const trainerSurge: OverworldTrainer = {
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/4/46/VSLt_Surge.png',
@@ -44,14 +46,13 @@ const trainerSurge: OverworldTrainer = {
 	x: 45,
 	y: 7,
 	orientation: 'UP',
-	id: 'trainer_surge',
+	id: surgeId,
 	conditionFunction: surgeCondition,
 	sprite: SpriteEnum.surge,
 	unhandledMessage: [
 		'First I crush you',
 		"then i'll crush some burgers and brewskies with the boys",
 	],
-	name: 'Gym Leader Surge',
 	team: surgeTeam,
 	battleTeamConfig: {
 		assignGender: false,

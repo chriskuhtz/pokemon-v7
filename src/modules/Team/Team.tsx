@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { OwnedPokemonCard } from '../../components/OwnedPokemonCard/OwnedPokemonCard';
 import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
@@ -20,7 +20,6 @@ import { Stack } from '../../uiComponents/Stack/Stack';
 export const Team = ({
 	team,
 	goBack,
-	setTeam,
 	changeHeldItem,
 	inventory,
 	initialFocus,
@@ -28,12 +27,24 @@ export const Team = ({
 	team: OwnedPokemon[];
 	initialFocus: string;
 	goBack: () => void;
-	setTeam: (newTeam: OwnedPokemon[]) => void;
 	inventory: Inventory;
 	changeHeldItem: (pokemonId: string, newItem?: ItemType) => void;
 }): JSX.Element => {
-	const { evolvePokemonReducer: evolve } = useContext(SaveFileContext);
+	const {
+		evolvePokemonReducer: evolve,
+		patchSaveFileReducer,
+		saveFile,
+	} = useContext(SaveFileContext);
 	const { res, invalidate } = useGetBattleTeam(team, {});
+
+	const setTeam = useCallback(
+		(newTeam: OwnedPokemon[]) => {
+			patchSaveFileReducer({
+				pokemon: [...newTeam, ...saveFile.pokemon.filter((p) => !p.onTeam)],
+			});
+		},
+		[patchSaveFileReducer, saveFile.pokemon]
+	);
 
 	const [focusedId, setFocusedId] = useState<string>(initialFocus);
 

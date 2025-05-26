@@ -3,8 +3,6 @@ import { Sprite } from './components/Sprite/Sprite';
 import { MapId } from './constants/maps/mapsRecord';
 import { MessageQueueContext } from './hooks/useMessageQueue';
 import { SaveFileContext } from './hooks/useSaveFile';
-import { OwnedPokemon } from './interfaces/OwnedPokemon';
-import { mapMakerRoutes } from './interfaces/Routing';
 import { SpriteEnum } from './interfaces/SpriteEnum';
 import { AbilityTutor } from './modules/AbilityTutor/AbilityTutor';
 import { AmoongussCompostResearcher } from './modules/AmoongussResearcher/AmoongussResearcher';
@@ -20,6 +18,7 @@ import { Curator } from './modules/Curator/Curator';
 import { DragoniteTaxi } from './modules/DragoniteTaxi/DragoniteTaxi';
 import { Farm } from './modules/Farm/Farm';
 import { FossilReviver } from './modules/FossilReviver/FossilReviver';
+import { InternalDex } from './modules/InternalDex/InternalDex';
 import { MainMenu } from './modules/MainMenu/MainMenu';
 import { MapMaker } from './modules/MapMaker/MapMaker';
 import { Market } from './modules/Market/Market';
@@ -84,7 +83,6 @@ export const App = (): JSX.Element => {
 	const {
 		saveFile,
 		setActiveTabReducer,
-		setPokemonReducer,
 		patchSaveFileReducer,
 		changeHeldItemReducer,
 	} = useContext(SaveFileContext);
@@ -178,9 +176,6 @@ export const App = (): JSX.Element => {
 				initialFocus={team[0].id}
 				team={team}
 				goBack={() => setActiveTabReducer('MAIN')}
-				setTeam={(newTeam: OwnedPokemon[]) =>
-					setPokemonReducer([...newTeam, ...pokemon.filter((p) => !p.onTeam)])
-				}
 				inventory={inventory}
 				changeHeldItem={changeHeldItemReducer}
 			/>
@@ -261,7 +256,10 @@ export const App = (): JSX.Element => {
 	if (activeTab === 'TRAVELLING_MERCHANT') {
 		return <TravellingMerchant />;
 	}
-	if (mapMakerRoutes.includes(activeTab)) {
+	if (activeTab === 'INTERNAL_DEX') {
+		return <InternalDex />;
+	}
+	if (activeTab.includes('MAP_MAKER')) {
 		const mapId = activeTab.slice(10) as MapId;
 		return (
 			<MapMaker mapId={mapId} goBack={() => setActiveTabReducer('MAIN')} />

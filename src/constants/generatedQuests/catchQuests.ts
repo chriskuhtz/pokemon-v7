@@ -3,6 +3,7 @@ import { Inventory } from '../../interfaces/Inventory';
 import { OverworldMap } from '../../interfaces/OverworldMap';
 import { Quest } from '../../interfaces/Quest';
 import { CampUpgrade } from '../campUpgrades';
+import { getAllEncountersFor } from '../internalDex';
 import { routeE1 } from '../maps/routeE1';
 import { routeN1 } from '../maps/routeN1';
 import { routeN1E1 } from '../maps/routeN1E1';
@@ -292,11 +293,20 @@ const catchQuestsForRoute = (
 	includeWater: boolean,
 	requiredUpgrade?: CampUpgrade
 ): Record<string, Quest> => {
+	const ultraRares = getAllEncountersFor(route.id, {
+		rarity: 'ultra-rare',
+		area: includeWater ? undefined : 'LAND',
+	});
 	return {
 		...Object.fromEntries(
 			timesOfDay.map((time) => {
 				const id =
 					`catch a ${time}-time exclusive pokemon from ${route.id}` as QuestName;
+
+				const options = getAllEncountersFor(route.id, {
+					timeOfDay: time,
+					area: includeWater ? undefined : 'LAND',
+				});
 				return [
 					id,
 					{
@@ -304,13 +314,11 @@ const catchQuestsForRoute = (
 						rewardItems: rewardsMap[id] ?? { 'poke-ball': 10 },
 						researchPoints: 10,
 						conditionFunction: (s) => {
-							return route.possibleEncounters[time].some((e) =>
+							return options.some((e) =>
 								s.pokedex[e.name].caughtOnRoutes.includes(route.id)
 							);
 						},
-						targetPokemon: [
-							...new Set(route.possibleEncounters[time].map((p) => p.name)),
-						],
+						targetPokemon: [...new Set(options.map((p) => p.name))],
 						targetRoute: route.id,
 						kind: 'BULLETIN',
 						requiredUpgrade: requiredUpgrade,
@@ -321,6 +329,12 @@ const catchQuestsForRoute = (
 		...Object.fromEntries(
 			timesOfDay.map((time) => {
 				const id = `catch all ${time}-time pokemon from ${route.id}`;
+				const options = getAllEncountersFor(route.id, {
+					timeOfDay: time,
+					includeAllDay: true,
+					area: includeWater ? undefined : 'LAND',
+				});
+
 				return [
 					id,
 					{
@@ -329,23 +343,11 @@ const catchQuestsForRoute = (
 						availableAfter: `catch a ${time}-time exclusive pokemon from ${route.id}`,
 						researchPoints: 20,
 						conditionFunction: (s) => {
-							return [
-								...route.possibleEncounters.BASE,
-								...(includeWater ? route.possibleEncounters.WATER : []),
-								...route.possibleEncounters[time],
-							].every((e) =>
+							return options.every((e) =>
 								s.pokedex[e.name].caughtOnRoutes.includes(route.id)
 							);
 						},
-						targetPokemon: [
-							...new Set(
-								[
-									...route.possibleEncounters.BASE,
-									...(includeWater ? route.possibleEncounters.WATER : []),
-									...route.possibleEncounters[time],
-								].map((p) => p.name)
-							),
-						],
+						targetPokemon: [...new Set(options.map((p) => p.name))],
 						targetRoute: route.id,
 						kind: 'BULLETIN',
 						requiredUpgrade: requiredUpgrade,
@@ -358,14 +360,7 @@ const catchQuestsForRoute = (
 			rewardItems: { 'rare-candy': 1 },
 			researchPoints: 20,
 			conditionFunction: (s) => {
-				return [
-					...route.possibleEncounters.BASE,
-					...route.possibleEncounters.WATER,
-					...route.possibleEncounters.NIGHT,
-					...route.possibleEncounters.MORNING,
-					...route.possibleEncounters.DAY,
-					...route.possibleEncounters.EVENING,
-				].some(
+				return ultraRares.some(
 					(e) =>
 						e.rarity === 'ultra-rare' &&
 						s.pokedex[e.name].caughtOnRoutes.includes(route.id)
@@ -373,16 +368,7 @@ const catchQuestsForRoute = (
 			},
 			targetPokemon: [
 				...new Set(
-					[
-						...route.possibleEncounters.BASE,
-						...route.possibleEncounters.WATER,
-						...route.possibleEncounters.NIGHT,
-						...route.possibleEncounters.MORNING,
-						...route.possibleEncounters.DAY,
-						...route.possibleEncounters.EVENING,
-					]
-						.filter((p) => p.rarity === 'ultra-rare')
-						.map((p) => p.name)
+					ultraRares.filter((p) => p.rarity === 'ultra-rare').map((p) => p.name)
 				),
 			],
 			targetRoute: route.id,
