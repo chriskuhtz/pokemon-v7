@@ -521,7 +521,7 @@ export const extraFeatureCheckList: {
 	{ name: 'overwoldmap area type', handled: true },
 	{ name: 'only show internaldex for caught pokemon', handled: true },
 	{ name: 'filter for internaldex', handled: true },
-	{ name: 'booster enegry sprite is missing' },
+	{ name: 'booster enegry sprite is missing', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },

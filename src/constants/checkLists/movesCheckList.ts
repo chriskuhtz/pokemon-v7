@@ -29,6 +29,36 @@ export const movesCheckList: {
 	/**
 	 * Z MOVES:
 	 */
+	{
+		name: 'sinister-arrow-raid',
+		url: 'https://pokeapi.co/api/v2/move/695/',
+		handled: true,
+	},
+	{
+		name: 'malicious-moonsault',
+		url: 'https://pokeapi.co/api/v2/move/696/',
+		handled: true,
+	},
+	{
+		name: 'oceanic-operetta',
+		url: 'https://pokeapi.co/api/v2/move/697/',
+		handled: true,
+	},
+	{
+		name: 'guardian-of-alola',
+		url: 'https://pokeapi.co/api/v2/move/698/',
+		handled: true,
+	},
+	{
+		name: 'soul-stealing-7-star-strike',
+		url: 'https://pokeapi.co/api/v2/move/699/',
+		handled: true,
+	},
+
+	{ name: 'stoked-sparksurfer', url: 'https://pokeapi.co/api/v2/move/700/' },
+	{ name: 'pulverizing-pancake', url: 'https://pokeapi.co/api/v2/move/701/' },
+	{ name: 'extreme-evoboost', url: 'https://pokeapi.co/api/v2/move/702/' },
+	{ name: 'genesis-supernova', url: 'https://pokeapi.co/api/v2/move/703/' },
 	{ name: 'catastropika', url: 'https://pokeapi.co/api/v2/move/658/' },
 	{
 		name: 'breakneck-blitz--physical',
@@ -2620,37 +2650,17 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/694/',
 		handled: true,
 	},
+
 	{
-		name: 'sinister-arrow-raid',
-		url: 'https://pokeapi.co/api/v2/move/695/',
+		name: 'fleur-cannon',
+		url: 'https://pokeapi.co/api/v2/move/705/',
 		handled: true,
 	},
 	{
-		name: 'malicious-moonsault',
-		url: 'https://pokeapi.co/api/v2/move/696/',
+		name: 'psychic-fangs',
+		url: 'https://pokeapi.co/api/v2/move/706/',
 		handled: true,
 	},
-	{
-		name: 'oceanic-operetta',
-		url: 'https://pokeapi.co/api/v2/move/697/',
-		handled: true,
-	},
-	{
-		name: 'guardian-of-alola',
-		url: 'https://pokeapi.co/api/v2/move/698/',
-		handled: true,
-	},
-	{
-		name: 'soul-stealing-7-star-strike',
-		url: 'https://pokeapi.co/api/v2/move/699/',
-	},
-	{ name: 'stoked-sparksurfer', url: 'https://pokeapi.co/api/v2/move/700/' },
-	{ name: 'pulverizing-pancake', url: 'https://pokeapi.co/api/v2/move/701/' },
-	{ name: 'extreme-evoboost', url: 'https://pokeapi.co/api/v2/move/702/' },
-	{ name: 'genesis-supernova', url: 'https://pokeapi.co/api/v2/move/703/' },
-	{ name: 'shell-trap', url: 'https://pokeapi.co/api/v2/move/704/' },
-	{ name: 'fleur-cannon', url: 'https://pokeapi.co/api/v2/move/705/' },
-	{ name: 'psychic-fangs', url: 'https://pokeapi.co/api/v2/move/706/' },
 	{ name: 'stomping-tantrum', url: 'https://pokeapi.co/api/v2/move/707/' },
 	{ name: 'shadow-bone', url: 'https://pokeapi.co/api/v2/move/708/' },
 	{ name: 'liquidation', url: 'https://pokeapi.co/api/v2/move/710/' },
@@ -2901,6 +2911,7 @@ export const movesCheckList: {
 		name: 'beak-blast',
 		url: 'https://pokeapi.co/api/v2/move/690/',
 	},
+	{ name: 'shell-trap', url: 'https://pokeapi.co/api/v2/move/704/' },
 ];
 
 export const handledMoves = [
@@ -3450,6 +3461,9 @@ export const handledMoves = [
 	'malicious-moonsault',
 	'oceanic-operetta',
 	'guardian-of-alola',
+	'soul-stealing-7-star-strike',
+	'fleur-cannon',
+	'psychic-fangs',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
