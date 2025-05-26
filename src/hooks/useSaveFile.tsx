@@ -128,7 +128,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 				update.currentStrongSwarm &&
 				newTime > update.currentStrongSwarm?.leavesAt
 					? undefined
-					: update.currentSwarm,
+					: update.currentStrongSwarm,
 			currentDistortionSwarm:
 				update.currentDistortionSwarm &&
 				newTime > update.currentDistortionSwarm?.leavesAt
