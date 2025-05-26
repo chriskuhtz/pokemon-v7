@@ -3,6 +3,7 @@ import { FaSearch } from 'react-icons/fa';
 import { battleSpriteSize } from '../../constants/gameData';
 import { isNotCatchable } from '../../constants/internalDex';
 import { internalDex, InternalDexEntry } from '../../constants/internalDexData';
+import { MapId, mapIds } from '../../constants/maps/mapsRecord';
 import { PokemonName } from '../../constants/pokemonNames';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { replaceRouteName } from '../../functions/replaceRouteName';
@@ -28,12 +29,28 @@ export const InternalDex = (): JSX.Element => {
 		}) as [PokemonName, InternalDexEntry][];
 	}, [saveFile]);
 
+	const [routeFilter, setRouteFilter] = useState<MapId>();
+
+	const filtered = useMemo(() => {
+		return availableEntries.filter(([, value]) => {
+			if (
+				routeFilter &&
+				value.encounterOptions?.every((op) => op.route !== routeFilter)
+			) {
+				return false;
+			}
+
+			return true;
+		});
+	}, [availableEntries, routeFilter]);
+
 	return (
 		<Page
 			headline="Internal Dex"
 			goBack={() => navigate('INTERNAL_DEX', 'MAIN')}
 		>
 			<Stack mode="column">
+				<h4>Search:</h4>
 				<Card
 					icon={<FaSearch size={battleSpriteSize} />}
 					content={
@@ -44,7 +61,31 @@ export const InternalDex = (): JSX.Element => {
 					}
 					actionElements={[]}
 				/>
-				{availableEntries.map(([key, entry]) => {
+				<h4>Filter By Route:</h4>
+				<Stack mode={'row'}>
+					<button
+						style={{
+							backgroundColor: routeFilter === undefined ? 'black' : undefined,
+							color: routeFilter === undefined ? 'white' : undefined,
+						}}
+						onClick={() => setRouteFilter(undefined)}
+					>
+						All
+					</button>
+					{mapIds.map((id) => (
+						<button
+							key={id}
+							style={{
+								backgroundColor: routeFilter === id ? 'black' : undefined,
+								color: routeFilter === id ? 'white' : undefined,
+							}}
+							onClick={() => setRouteFilter(id)}
+						>
+							{id}
+						</button>
+					))}
+				</Stack>
+				{filtered.map(([key, entry]) => {
 					if (!key.includes(searchString)) {
 						return <React.Fragment key={key}></React.Fragment>;
 					}
