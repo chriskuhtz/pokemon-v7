@@ -519,6 +519,7 @@ export const extraFeatureCheckList: {
 		handled: true,
 	},
 	{ name: 'overwoldmap area type' },
+	{ name: 'only show internaldex for caught pokemon' },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },

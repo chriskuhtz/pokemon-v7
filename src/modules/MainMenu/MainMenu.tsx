@@ -375,9 +375,23 @@ export const LureButton = () => {
 };
 export const FlyingButton = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+	const { location } = useContext(LocationContext);
 
 	if (!saveFile.campUpgrades['pidgeot rider certification']) {
 		return <></>;
+	}
+
+	if (mapsRecord[location.mapId].area === 'CAVE') {
+		return (
+			<Card
+				disabled
+				content={<h4>Cant fly in Caves</h4>}
+				icon={
+					<PokemonSprite name={'pidgeot'} config={{ officalArtwork: true }} />
+				}
+				actionElements={[]}
+			/>
+		);
 	}
 	return (
 		<>
