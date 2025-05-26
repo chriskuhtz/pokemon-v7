@@ -235,7 +235,10 @@ export const calculateDamage = (
 				: 2
 			: 1;
 	if (critFactor === 2 && addMessage) {
-		addMessage({ message: 'critical hit!' });
+		addMessage({
+			message: 'critical hit!',
+			icon: <strong>x{critFactor}</strong>,
+		});
 	}
 
 	const atk = () => {
