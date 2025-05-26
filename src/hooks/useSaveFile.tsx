@@ -124,6 +124,16 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 				update.currentSwarm && newTime > update.currentSwarm?.leavesAt
 					? undefined
 					: update.currentSwarm,
+			currentStrongSwarm:
+				update.currentStrongSwarm &&
+				newTime > update.currentStrongSwarm?.leavesAt
+					? undefined
+					: update.currentSwarm,
+			currentDistortionSwarm:
+				update.currentDistortionSwarm &&
+				newTime > update.currentDistortionSwarm?.leavesAt
+					? undefined
+					: update.currentDistortionSwarm,
 		});
 	}, []);
 	const discardItemReducer = (item: ItemType, number: number) => {

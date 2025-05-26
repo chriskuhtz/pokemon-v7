@@ -515,6 +515,9 @@ export const extraFeatureCheckList: {
 	{
 		name: 'Man kann auf wasser feldern schwimmen obwohl die ein obstacle drauf haben!',
 	},
+	{ name: 'strong swarms (and prob distortion as well) dont leave' },
+	{ name: 'booster enegry sprite is missing' },
+	{ name: 'strong swarm mon was lvl 2' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
@@ -532,6 +535,13 @@ export const extraFeatureCheckList: {
 	{ name: 'download your player file and share it with others' },
 	{ name: 'more legendary stories' },
 	{ name: 'cave of shadows where you face yourself' },
+	{
+		name: `Apricorn Bälle:
+Ein paar (langweiligere) Ideen
+DarkRed-Apricorn: Vulcan Balls: Bonus for Fire and Stone Pokemon
+Beige-Apricorn: Sand-Storm Balls: Bonus for Ground and Flying Pokemon
+Purple-Apricorn: Nightmare Balls: Bonus for Psycho, Dark, and Ghost Pokemon`,
+	},
 	//SETTINGS:
 	{ name: 'random encounters' },
 	{ name: 'random evolutions' },
