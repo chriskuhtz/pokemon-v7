@@ -6,7 +6,6 @@ export const routeS1: OverworldMap = {
   id: "routeS1",
   tilesetUrl: "/tilesets/swamp.png",
   timeOfDayShadersMap: defaultShaderMap,
-
   occupants: routeS1Occupants,
   tileMap: {
     baseLayer: [
