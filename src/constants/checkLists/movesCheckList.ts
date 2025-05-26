@@ -2661,9 +2661,17 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/706/',
 		handled: true,
 	},
-	{ name: 'stomping-tantrum', url: 'https://pokeapi.co/api/v2/move/707/' },
-	{ name: 'shadow-bone', url: 'https://pokeapi.co/api/v2/move/708/' },
-	{ name: 'liquidation', url: 'https://pokeapi.co/api/v2/move/710/' },
+
+	{
+		name: 'shadow-bone',
+		url: 'https://pokeapi.co/api/v2/move/708/',
+		handled: true,
+	},
+	{
+		name: 'liquidation',
+		url: 'https://pokeapi.co/api/v2/move/710/',
+		handled: true,
+	},
 	{ name: 'prismatic-laser', url: 'https://pokeapi.co/api/v2/move/711/' },
 	{ name: 'spectral-thief', url: 'https://pokeapi.co/api/v2/move/712/' },
 	{ name: 'sunsteel-strike', url: 'https://pokeapi.co/api/v2/move/713/' },
@@ -2912,6 +2920,7 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/690/',
 	},
 	{ name: 'shell-trap', url: 'https://pokeapi.co/api/v2/move/704/' },
+	{ name: 'stomping-tantrum', url: 'https://pokeapi.co/api/v2/move/707/' },
 ];
 
 export const handledMoves = [
@@ -3464,6 +3473,8 @@ export const handledMoves = [
 	'soul-stealing-7-star-strike',
 	'fleur-cannon',
 	'psychic-fangs',
+	'liquidation',
+	'shadow-bone',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
