@@ -101,7 +101,10 @@ export const getRandomEncounter = (
 		timeOfDay?: TimeOfDay;
 	}
 ): Partial<OwnedPokemon> => {
-	const options = getAllEncountersFor(mapId, config);
+	const options = getAllEncountersFor(mapId, {
+		...config,
+		includeAllDay: true,
+	});
 	const flatMapped = options.flatMap((p) => {
 		if (p.rarity === 'common') {
 			return [p, p, p, p, p, p];

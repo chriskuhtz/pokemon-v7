@@ -114,8 +114,8 @@ export const useSwarmRadar = (): {
 					return {
 						type: 'STRONG',
 						pokemon: getRandomSwarmMon('STRONG'),
-						xpMin: 20 ^ 3,
-						xpMax: 40 ^ 3,
+						xpMin: 20 * 20 * 20,
+						xpMax: 40 * 40 * 40,
 						leavesAt: now + ONE_HOUR,
 						route,
 					};
@@ -132,8 +132,8 @@ export const useSwarmRadar = (): {
 					return {
 						pokemon: mon,
 						type: randomOption,
-						xpMin: 40 ^ 3,
-						xpMax: 60 ^ 3,
+						xpMin: 40 * 40 * 40,
+						xpMax: 60 * 60 * 60,
 						leavesAt: now + ONE_HOUR,
 						route,
 					};
