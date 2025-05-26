@@ -24,6 +24,7 @@ import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalkin
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getBagLimit, getTotalInventoryAmount } from '../functions/getBagLimit';
+import { getItemUrl } from '../functions/getItemUrl';
 import { getRewardItemsForQuest } from '../functions/getRewardForQuest';
 import { TimeOfDay } from '../functions/getTimeOfDay';
 import {
@@ -40,7 +41,6 @@ import { QuestStatus } from '../interfaces/Quest';
 import { RoutesType } from '../interfaces/Routing';
 import { CatchBoosts, SaveFile } from '../interfaces/SaveFile';
 import { MessageQueueContext } from './useMessageQueue';
-import { getItemUrl } from '../functions/getItemUrl';
 
 export interface EvolutionReducerPayload {
 	id: string;
@@ -138,8 +138,9 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 					? undefined
 					: update.currentDistortionSwarm,
 			troubleMakers:
-				update.troubleMakers?.leavesAt &&
-				newTime > update.troubleMakers?.leavesAt
+				(update.troubleMakers?.leavesAt &&
+					newTime > update.troubleMakers?.leavesAt) ||
+				!update.troubleMakers?.leavesAt
 					? undefined
 					: update.troubleMakers,
 		});
