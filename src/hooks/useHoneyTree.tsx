@@ -1,6 +1,8 @@
 import { useCallback, useContext } from 'react';
+import { battleSpriteSize } from '../constants/gameData';
 import { getHoneyEncounters } from '../constants/internalDex';
 import { getRandomIndex } from '../functions/filterTargets';
+import { getItemUrl } from '../functions/getItemUrl';
 import {
 	makeChallengerPokemon,
 	OPPO_ID,
@@ -32,13 +34,23 @@ export const useHoneyTree = () => {
 			return;
 		}
 		const honeySuccess = Math.random() > 0.5;
+		const honeyIcon = (
+			<img src={getItemUrl('honey')} height={battleSpriteSize} />
+		);
 		if (honeySuccess) {
 			addMultipleMessages([
-				{ message: 'You rub some honey on the bark of the tree...' },
-				{ message: '... and hide nearby', needsNoConfirmation: true },
-				{ message: '...waiting', needsNoConfirmation: true },
-				{ message: '..waiting.', needsNoConfirmation: true },
-				{ message: '.waiting..', needsNoConfirmation: true },
+				{
+					message: 'You rub some honey on the bark of the tree...',
+					icon: honeyIcon,
+				},
+				{
+					message: '... and hide nearby',
+					needsNoConfirmation: true,
+					icon: honeyIcon,
+				},
+				{ message: '...waiting', needsNoConfirmation: true, icon: honeyIcon },
+				{ message: '..waiting.', needsNoConfirmation: true, icon: honeyIcon },
+				{ message: '.waiting..', needsNoConfirmation: true, icon: honeyIcon },
 				{
 					message: 'A wild Pokemon is lured in by the honey!',
 					needsNoConfirmation: true,
@@ -68,14 +80,22 @@ export const useHoneyTree = () => {
 							},
 						});
 					},
+					icon: honeyIcon,
 				},
 			]);
 		} else {
 			addMultipleMessages([
-				{ message: 'You rub some honey on the bark of the tree...' },
-				{ message: '... and hide nearby', needsNoConfirmation: true },
-				{ message: '...waiting', needsNoConfirmation: true },
-				{ message: '..waiting.', needsNoConfirmation: true },
+				{
+					message: 'You rub some honey on the bark of the tree...',
+					icon: honeyIcon,
+				},
+				{
+					message: '... and hide nearby',
+					needsNoConfirmation: true,
+					icon: honeyIcon,
+				},
+				{ message: '...waiting', needsNoConfirmation: true, icon: honeyIcon },
+				{ message: '..waiting.', needsNoConfirmation: true, icon: honeyIcon },
 				{
 					message: 'No Pokemon seem interested in the honey',
 					onRemoval: () => {
@@ -84,6 +104,7 @@ export const useHoneyTree = () => {
 							bag: joinInventories(saveFile.bag, { honey: 1 }, true),
 						});
 					},
+					icon: honeyIcon,
 				},
 			]);
 		}
