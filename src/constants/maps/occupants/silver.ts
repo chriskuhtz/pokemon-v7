@@ -192,7 +192,7 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
 		},
 	});
 	const tyranitar = makeChallengerPokemon({
-		name: 'houndoom',
+		name: 'tyranitar',
 		xp: highestXpOnTeam,
 		nature: 'adamant',
 		ability: 'intimidate',
@@ -209,7 +209,7 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
 		},
 	});
 	const espeon = makeChallengerPokemon({
-		name: 'houndoom',
+		name: 'espeon',
 		xp: highestXpOnTeam,
 		nature: 'mild',
 		ability: 'synchronize',

@@ -532,6 +532,7 @@ Sie finden nicht immer gleich hintereinander statt also manchmal ist 1ster kick 
 Der zweite doppelkick trifft auch untergetauchte pokemon
 Anmerkung: beides nur mit doppel kick getestet`,
 	},
+	{ name: 'rollout stops stacking when target is defeated' },
 
 	//CONTENT:
 	{ name: 'whitney' },
