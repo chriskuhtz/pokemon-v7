@@ -72,7 +72,7 @@ const darkWoods: TileSet = {
   gap: 0,
 };
 const swamp: TileSet = {
-  src: "url('/tilesets/swamp.png')",
+  src: "url('/tilesets/newMasterSheet.png')",
   height: 133,
   width: 88,
   gap: 0,
@@ -90,5 +90,5 @@ export const tileMapsRecord: Record<string, TileSet> = {
   "/tilesets/snow.png": snow,
   "/tilesets/market.png": market,
   "/tilesets/DarkWoods.png": darkWoods,
-  "/tilesets/swamp.png": swamp,
+  "/tilesets/newMasterSheet.png": swamp,
 };

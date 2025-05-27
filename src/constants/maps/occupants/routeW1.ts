@@ -49,8 +49,50 @@ export const routeW1Occupants: OverworldMap['occupants'] = [
 	},
 	{
 		type: 'ON_STEP_PORTAL',
+		x: 37,
+		y: 50,
+		portal: {
+			mapId: 'routeS1W1',
+			y: 1,
+			x: 37,
+			orientation: 'DOWN',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+		id: 'routeN1W1_to_routeS1W1',
+	},
+	{
+		type: 'ON_STEP_PORTAL',
+		x: 38,
+		y: 50,
+		portal: {
+			mapId: 'routeS1W1',
+			y: 1,
+			x: 38,
+			orientation: 'DOWN',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+		id: 'routeN1W1_to_routeS1W1',
+	},
+	{
+		type: 'ON_STEP_PORTAL',
+		x: 39,
+		y: 50,
+		portal: {
+			mapId: 'routeS1W1',
+			y: 1,
+			x: 39,
+			orientation: 'DOWN',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+		id: 'routeN1W1_to_routeS1W1',
+	},
+	{
+		type: 'ON_STEP_PORTAL',
 		x: 50,
-		y: 25,
+		y: 39,
 		portal: {
 			mapId: 'camp',
 			y: 10,
@@ -63,8 +105,8 @@ export const routeW1Occupants: OverworldMap['occupants'] = [
 	},
 	{
 		type: 'STRANGE_TREE',
-		x: 48,
-		y: 25,
+		x: 49,
+		y: 40,
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'sudowoodo'),
 		id: 'sudowoodo',
@@ -139,8 +181,8 @@ export const routeW1Occupants: OverworldMap['occupants'] = [
 	...travellingMerchantRouteW1,
 	{
 		type: 'POKEMON',
-		x: 36,
-		y: 42,
+		x: 43,
+		y: 33,
 		orientation: 'DOWN',
 		dexId: 245,
 		encounter: {
