@@ -276,7 +276,7 @@ export const routeS1: OverworldMap = {
         { yOffset: -128, xOffset: -64 },
       ],
       [
-        { yOffset: -128, xOffset: -64 },
+        { yOffset: -16, xOffset: -288 },
         { yOffset: -16, xOffset: -288 },
         { yOffset: -16, xOffset: -288 },
         { yOffset: -16, xOffset: -288 },
@@ -329,7 +329,7 @@ export const routeS1: OverworldMap = {
         { yOffset: -128, xOffset: -64 },
       ],
       [
-        { yOffset: -128, xOffset: -64 },
+        { yOffset: -16, xOffset: -288 },
         { yOffset: -16, xOffset: -288 },
         { yOffset: -16, xOffset: -288 },
         { yOffset: -16, xOffset: -288 },
@@ -382,7 +382,7 @@ export const routeS1: OverworldMap = {
         { yOffset: -128, xOffset: -64 },
       ],
       [
-        { yOffset: -128, xOffset: -64 },
+        { yOffset: -16, xOffset: -288 },
         { yOffset: -16, xOffset: -288 },
         { yOffset: -16, xOffset: -288 },
         { yOffset: -16, xOffset: -288 },
@@ -5633,7 +5633,7 @@ export const routeS1: OverworldMap = {
         { yOffset: -16, xOffset: -112 },
       ],
       [
-        { yOffset: -128, xOffset: -16 },
+        { yOffset: -144, xOffset: -16 },
         { yOffset: -176, xOffset: -144 },
         null,
         null,
@@ -5686,8 +5686,8 @@ export const routeS1: OverworldMap = {
         { yOffset: -16, xOffset: -112 },
       ],
       [
-        { yOffset: -128, xOffset: -16 },
-        { yOffset: -176, xOffset: -144 },
+        { yOffset: -192, xOffset: -128 },
+        { yOffset: -192, xOffset: -144 },
         null,
         null,
         null,
@@ -5739,8 +5739,8 @@ export const routeS1: OverworldMap = {
         { yOffset: -16, xOffset: -112 },
       ],
       [
-        { yOffset: -128, xOffset: -16 },
-        { yOffset: -176, xOffset: -144 },
+        null,
+        { yOffset: 0, xOffset: -80 },
         null,
         null,
         null,
@@ -5792,8 +5792,8 @@ export const routeS1: OverworldMap = {
         { yOffset: -128, xOffset: -16 },
       ],
       [
-        { yOffset: -128, xOffset: -16 },
-        { yOffset: -176, xOffset: -144 },
+        { yOffset: 0, xOffset: -80 },
+        null,
         null,
         null,
         null,
@@ -5846,7 +5846,7 @@ export const routeS1: OverworldMap = {
       ],
       [
         { yOffset: -128, xOffset: -16 },
-        { yOffset: -176, xOffset: -144 },
+        { yOffset: -160, xOffset: -144 },
         null,
         null,
         null,
@@ -8550,7 +8550,7 @@ export const routeS1: OverworldMap = {
         null,
       ],
       [
-        null,
+        { yOffset: -160, xOffset: -128 },
         null,
         null,
         null,
@@ -11202,7 +11202,7 @@ export const routeS1: OverworldMap = {
         null,
       ],
       [
-        null,
+        { yOffset: -128, xOffset: 0 },
         null,
         null,
         null,
@@ -13854,9 +13854,9 @@ export const routeS1: OverworldMap = {
         null,
       ],
       [
-        null,
-        null,
-        { yOffset: -160, xOffset: -224 },
+        { yOffset: -144, xOffset: -192 },
+        { yOffset: -144, xOffset: -192 },
+        { yOffset: -176, xOffset: -224 },
         { yOffset: -16, xOffset: -224 },
         { yOffset: -16, xOffset: -224 },
         { yOffset: -16, xOffset: -224 },
@@ -13907,9 +13907,9 @@ export const routeS1: OverworldMap = {
         null,
       ],
       [
-        null,
-        null,
-        { yOffset: -160, xOffset: -224 },
+        { yOffset: -160, xOffset: -192 },
+        { yOffset: -160, xOffset: -192 },
+        { yOffset: -144, xOffset: -224 },
         { yOffset: -16, xOffset: -224 },
         { yOffset: -16, xOffset: -224 },
         { yOffset: -16, xOffset: -224 },
