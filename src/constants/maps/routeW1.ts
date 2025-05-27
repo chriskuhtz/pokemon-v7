@@ -5,7 +5,7 @@ import { routeW1Occupants } from "./occupants/routeW1";
 export const routeW1: OverworldMap = {
   area: "OPEN",
   id: "routeW1",
-  tilesetUrl: "/tilesets/swamp.png",
+  tilesetUrl: "/tilesets/newMasterSheet.png",
   timeOfDayShadersMap: defaultShaderMap,
   occupants: routeW1Occupants,
   tileMap: {
@@ -6796,7 +6796,7 @@ export const routeW1: OverworldMap = {
         null,
         null,
         null,
-        null,
+        { yOffset: -240, xOffset: -208 },
       ],
       [
         { yOffset: -208, xOffset: -32 },
@@ -12153,7 +12153,7 @@ export const routeW1: OverworldMap = {
         null,
         null,
         null,
-        null,
+        { yOffset: -224, xOffset: -208 },
       ],
       [
         null,
