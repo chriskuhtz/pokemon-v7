@@ -151,7 +151,6 @@ export const ImportSnapshotCard = () => {
 						backgroundColor: 'rgba(255, 255, 255, 0.5)',
 						color: 'black',
 					}}
-					accept=".json"
 					type="file"
 					onChange={handleChange}
 				/>,
