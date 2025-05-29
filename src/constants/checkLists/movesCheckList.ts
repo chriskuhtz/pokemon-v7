@@ -2773,7 +2773,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/753/',
 		handled: true,
 	},
-	{ name: 'bolt-beak', url: 'https://pokeapi.co/api/v2/move/754/' },
+	{
+		name: 'bolt-beak',
+		url: 'https://pokeapi.co/api/v2/move/754/',
+		handled: true,
+	},
 	{ name: 'fishious-rend', url: 'https://pokeapi.co/api/v2/move/755/' },
 	{ name: 'court-change', url: 'https://pokeapi.co/api/v2/move/756/' },
 	{ name: 'clangorous-soul', url: 'https://pokeapi.co/api/v2/move/775/' },
@@ -3545,6 +3549,7 @@ export const handledMoves = [
 	'double-iron-bash',
 	'no-retreat',
 	'magic-powder',
+	'bolt-beak',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

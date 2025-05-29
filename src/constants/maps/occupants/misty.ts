@@ -21,7 +21,7 @@ const mistyTeam = () => [
 		firstMove: { name: 'reflect', usedPP: 0 },
 		secondMove: { name: 'light-screen', usedPP: 0 },
 		thirdMove: { name: 'recover', usedPP: 0 },
-		fourthMove: { name: 'psychic', usedPP: 0 },
+		fourthMove: { name: 'swift', usedPP: 0 },
 		effortValues: {
 			...EmptyStatObject,
 			defense: 252,
