@@ -2761,8 +2761,12 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/748/',
 		handled: true,
 	},
-	{ name: 'tar-shot', url: 'https://pokeapi.co/api/v2/move/749/' },
-	{ name: 'magic-powder', url: 'https://pokeapi.co/api/v2/move/750/' },
+
+	{
+		name: 'magic-powder',
+		url: 'https://pokeapi.co/api/v2/move/750/',
+		handled: true,
+	},
 	{ name: 'dragon-darts', url: 'https://pokeapi.co/api/v2/move/751/' },
 	{ name: 'teatime', url: 'https://pokeapi.co/api/v2/move/752/' },
 	{ name: 'octolock', url: 'https://pokeapi.co/api/v2/move/753/' },
@@ -2967,6 +2971,10 @@ export const movesCheckList: {
 	{ name: 'snipe-shot', url: 'https://pokeapi.co/api/v2/move/745/' },
 	{ name: 'jaw-lock', url: 'https://pokeapi.co/api/v2/move/746/' },
 	{ name: 'stuff-cheeks', url: 'https://pokeapi.co/api/v2/move/747/' },
+	{
+		name: 'tar-shot',
+		url: 'https://pokeapi.co/api/v2/move/749/',
+	},
 ];
 
 export const handledMoves = [
@@ -3531,6 +3539,7 @@ export const handledMoves = [
 	'photon-geyser',
 	'double-iron-bash',
 	'no-retreat',
+	'magic-powder',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
