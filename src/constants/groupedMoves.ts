@@ -71,6 +71,7 @@ export const recoveryMoves = [
 	'giga-impact',
 	'rock-wrecker',
 	'roar-of-time',
+	'prismatic-laser',
 ];
 
 const contactMoves = [

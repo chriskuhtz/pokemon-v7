@@ -29,6 +29,8 @@ export type InternalDexEntry = {
 	encounterOptions: EncounterOption[];
 };
 
+//route W1:  rock
+
 export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	bulbasaur: {
 		dexId: 1,
@@ -82,6 +84,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 10,
 		types: ['bug'],
 		encounterOptions: [],
+		berryLureMapId: 'routeN1E1',
 	},
 	metapod: {
 		dexId: 11,
@@ -91,7 +94,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	butterfree: {
 		dexId: 12,
 		types: ['bug', 'flying'],
-		berryLureMapId: 'routeN1E1',
 		encounterOptions: [],
 	},
 	weedle: {
@@ -325,7 +327,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	vulpix: {
 		dexId: 37,
 		types: ['fire'],
-		berryLureMapId: 'routeN1',
 		encounterOptions: [],
 	},
 	ninetales: {
@@ -432,7 +433,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	paras: {
 		dexId: 46,
 		types: ['bug', 'grass'],
-		berryLureMapId: 'routeS1E1',
 		encounterOptions: [],
 	},
 	parasect: {
@@ -452,7 +452,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	venonat: {
 		dexId: 48,
 		types: ['bug', 'poison'],
-		berryLureMapId: 'routeN1E1',
 		encounterOptions: [],
 	},
 	venomoth: {
@@ -594,7 +593,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	abra: {
 		dexId: 63,
 		types: ['psychic'],
-
 		encounterOptions: [
 			{
 				rarity: 'ultra-rare',
@@ -771,6 +769,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 81,
 		types: ['electric', 'steel'],
 		encounterOptions: [],
+		berryLureMapId: 'routeS1W1',
 	},
 	magneton: {
 		dexId: 82,
@@ -781,12 +780,12 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	farfetchd: {
 		dexId: 83,
 		types: ['normal', 'flying'],
+		berryLureMapId: 'routeN1',
 		encounterOptions: [],
 	},
 	doduo: {
 		dexId: 84,
 		types: ['normal', 'flying'],
-		berryLureMapId: 'routeS1E1',
 		encounterOptions: [],
 	},
 	dodrio: {
@@ -816,7 +815,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	grimer: {
 		dexId: 88,
 		types: ['poison'],
-		berryLureMapId: 'routeN1',
 		encounterOptions: [],
 	},
 	muk: {
@@ -860,7 +858,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	haunter: {
 		dexId: 93,
 		types: ['ghost', 'poison'],
-		berryLureMapId: 'routeE1',
 		encounterOptions: [],
 	},
 	gengar: {
@@ -1028,7 +1025,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	weezing: {
 		dexId: 110,
 		types: ['poison'],
-		berryLureMapId: 'routeE1',
 		encounterOptions: [],
 	},
 	rhyhorn: {
@@ -1048,7 +1044,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	rhydon: {
 		dexId: 112,
 		types: ['ground', 'rock'],
-		berryLureMapId: 'routeS1W1',
 		encounterOptions: [],
 	},
 	chansey: {
@@ -1126,6 +1121,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 120,
 		types: ['water'],
 		encounterOptions: [],
+		berryLureMapId: 'routeS1E1',
 	},
 	starmie: {
 		dexId: 121,
@@ -1135,7 +1131,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'mr-mime': {
 		dexId: 122,
 		types: ['psychic', 'fairy'],
-		berryLureMapId: 'routeE1',
+		berryLureMapId: 'routeS1E1',
 		encounterOptions: [],
 	},
 	scyther: {
@@ -1174,7 +1170,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	magmar: {
 		dexId: 126,
 		types: ['fire'],
-		berryLureMapId: 'routeS1E1',
 		encounterOptions: [],
 	},
 	pinsir: {
@@ -1325,7 +1320,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	dratini: {
 		dexId: 147,
 		types: ['dragon'],
-		berryLureMapId: 'routeS1E1',
 		encounterOptions: [],
 	},
 	dragonair: {
@@ -1401,6 +1395,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 161,
 		types: ['normal'],
 		encounterOptions: [],
+		berryLureMapId: 'routeN1',
 	},
 	furret: {
 		dexId: 162,
@@ -1517,7 +1512,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	natu: {
 		dexId: 177,
 		types: ['psychic', 'flying'],
-		berryLureMapId: 'routeN1',
 		encounterOptions: [],
 	},
 	xatu: {
@@ -1645,7 +1639,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	quagsire: {
 		dexId: 195,
 		types: ['water', 'ground'],
-		berryLureMapId: 'routeE1',
 		encounterOptions: [],
 	},
 	espeon: {
@@ -1704,7 +1697,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	girafarig: {
 		dexId: 203,
 		types: ['normal', 'psychic'],
-		berryLureMapId: 'routeS1W1',
 		encounterOptions: [],
 	},
 	pineco: {
@@ -1721,7 +1713,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	dunsparce: {
 		dexId: 206,
 		types: ['normal'],
-		berryLureMapId: 'routeN1',
 		encounterOptions: [],
 	},
 	gligar: {
@@ -1740,7 +1731,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	steelix: {
 		dexId: 208,
-		rampager: true,
 		types: ['steel', 'ground'],
 		encounterOptions: [
 			{
@@ -1756,8 +1746,8 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	snubbull: {
 		dexId: 209,
 		types: ['fairy'],
-		berryLureMapId: 'routeS1E1',
 		encounterOptions: [],
+		berryLureMapId: 'routeS1E1',
 	},
 	granbull: {
 		dexId: 210,
@@ -1816,7 +1806,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	ursaring: {
 		dexId: 217,
-		rampager: true,
 		types: ['normal'],
 		encounterOptions: [
 			{
@@ -1832,7 +1821,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	slugma: {
 		dexId: 218,
 		types: ['fire'],
-		berryLureMapId: 'routeE1',
 		encounterOptions: [],
 	},
 	magcargo: {
@@ -1896,16 +1884,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 225,
 		swarm: 'STRONG',
 		types: ['ice', 'flying'],
-		encounterOptions: [
-			{
-				rarity: 'medium',
-				maxXp: 216000,
-				minXp: 64000,
-				timeOfDay: 'DAY',
-				area: 'LAND',
-				route: 'routeN1W1',
-			},
-		],
+		encounterOptions: [],
 	},
 	mantine: {
 		dexId: 226,
@@ -1962,8 +1941,8 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	phanpy: {
 		dexId: 231,
 		types: ['ground'],
-		berryLureMapId: 'routeN1',
 		encounterOptions: [],
+		berryLureMapId: 'routeE1',
 	},
 	donphan: {
 		dexId: 232,
@@ -1998,7 +1977,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	tyrogue: {
 		dexId: 236,
 		types: ['fighting'],
-
 		encounterOptions: [
 			{
 				rarity: 'rare',
@@ -2027,6 +2005,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	smoochum: {
 		dexId: 238,
 		types: ['ice', 'psychic'],
+		berryLureMapId: 'routeW1',
 		encounterOptions: [],
 	},
 	elekid: {
@@ -2037,13 +2016,12 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	magby: {
 		dexId: 240,
 		types: ['fire'],
-		berryLureMapId: 'routeN1E1',
 		encounterOptions: [],
+		berryLureMapId: 'routeE1',
 	},
 	miltank: {
 		dexId: 241,
 		types: ['normal'],
-
 		encounterOptions: [
 			{
 				rarity: 'common',
@@ -2250,7 +2228,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	nuzleaf: {
 		dexId: 274,
 		types: ['grass', 'dark'],
-		berryLureMapId: 'routeE1',
 		encounterOptions: [],
 	},
 	shiftry: {
@@ -2312,7 +2289,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	kirlia: {
 		dexId: 281,
-
 		types: ['psychic', 'fairy'],
 		encounterOptions: [
 			{
@@ -2344,7 +2320,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	shroomish: {
 		dexId: 285,
 		types: ['grass'],
-
 		encounterOptions: [
 			{
 				rarity: 'rare',
@@ -2363,8 +2338,8 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	slakoth: {
 		dexId: 287,
+		honey: true,
 		types: ['normal'],
-		berryLureMapId: 'routeN1E1',
 		encounterOptions: [],
 	},
 	vigoroth: {
@@ -2390,7 +2365,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	nincada: {
 		dexId: 290,
 		types: ['bug', 'ground'],
-		berryLureMapId: 'routeN1E1',
 		encounterOptions: [],
 	},
 	ninjask: {
@@ -2401,7 +2375,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	shedinja: {
 		dexId: 292,
 		types: ['bug', 'ghost'],
-		berryLureMapId: 'routeS1E1',
 		encounterOptions: [],
 	},
 	whismur: {
@@ -2423,8 +2396,8 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	makuhita: {
 		dexId: 296,
 		types: ['fighting'],
-		berryLureMapId: 'routeS1E1',
 		encounterOptions: [],
+		berryLureMapId: 'routeE1',
 	},
 	hariyama: {
 		dexId: 297,
@@ -2435,13 +2408,12 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	azurill: {
 		dexId: 298,
 		types: ['normal', 'fairy'],
-		berryLureMapId: 'routeN1',
 		encounterOptions: [],
 	},
 	nosepass: {
 		dexId: 299,
 		types: ['rock'],
-		berryLureMapId: 'routeE1',
+		berryLureMapId: 'routeW1',
 		encounterOptions: [],
 	},
 	skitty: {
@@ -2479,8 +2451,8 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	mawile: {
 		dexId: 303,
+		berryLureMapId: 'routeS1W1',
 		types: ['steel', 'fairy'],
-		berryLureMapId: 'routeE1',
 		encounterOptions: [],
 	},
 	aron: {
@@ -2509,7 +2481,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	meditite: {
 		dexId: 307,
-		berryLureMapId: 'routeE1',
 		types: ['fighting', 'psychic'],
 		encounterOptions: [],
 	},
@@ -2631,7 +2602,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	numel: {
 		dexId: 322,
 		types: ['fire', 'ground'],
-		berryLureMapId: 'routeE1',
 		encounterOptions: [],
 	},
 	camerupt: {
@@ -2663,7 +2633,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	trapinch: {
 		dexId: 328,
 		types: ['ground'],
-		berryLureMapId: 'routeS1W1',
 		encounterOptions: [],
 	},
 	vibrava: {
@@ -2834,7 +2803,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	shuppet: {
 		dexId: 353,
 		types: ['ghost'],
-		berryLureMapId: 'routeN1E1',
 		encounterOptions: [],
 	},
 	banette: {
@@ -2854,7 +2822,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	tropius: {
 		dexId: 357,
-		berryLureMapId: 'routeN1E1',
 		types: ['grass', 'flying'],
 		encounterOptions: [],
 	},
@@ -2866,7 +2833,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	absol: {
 		dexId: 359,
 		types: ['dark'],
-
 		encounterOptions: [
 			{
 				rarity: 'ultra-rare',
@@ -2881,7 +2847,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	wynaut: {
 		dexId: 360,
 		types: ['psychic'],
-		berryLureMapId: 'routeN1E1',
 		encounterOptions: [],
 	},
 	snorunt: {
@@ -2946,7 +2911,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	bagon: {
 		dexId: 371,
 		types: ['dragon'],
-		berryLureMapId: 'routeE1',
 		encounterOptions: [],
 	},
 	shelgon: {
@@ -3128,7 +3092,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	kricketot: {
 		dexId: 401,
 		types: ['bug'],
-
 		encounterOptions: [
 			{
 				rarity: 'common',
@@ -3264,7 +3227,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	shellos: {
 		dexId: 422,
 		types: ['water'],
-		berryLureMapId: 'routeN1',
 		encounterOptions: [],
 	},
 	gastrodon: {
@@ -3334,9 +3296,9 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	stunky: {
 		dexId: 434,
-		berryLureMapId: 'routeE1',
 		types: ['poison', 'dark'],
 		encounterOptions: [],
+		berryLureMapId: 'routeN1E1',
 	},
 	skuntank: {
 		dexId: 435,
@@ -3356,7 +3318,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	bonsly: {
 		dexId: 438,
 		types: ['rock'],
-		berryLureMapId: 'routeN1',
 		encounterOptions: [],
 	},
 	'mime-jr': {
@@ -3432,7 +3393,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	skorupi: {
 		dexId: 451,
-		berryLureMapId: 'routeN1E1',
 		types: ['poison', 'bug'],
 		encounterOptions: [],
 	},
@@ -3849,13 +3809,11 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	panpour: {
 		dexId: 515,
 		types: ['water'],
-		berryLureMapId: 'routeS1E1',
 		encounterOptions: [],
 	},
 	simipour: {
 		dexId: 516,
 		types: ['water'],
-		berryLureMapId: 'routeS1W1',
 		encounterOptions: [],
 	},
 	munna: {
@@ -3871,7 +3829,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	pidove: {
 		dexId: 519,
 		types: ['normal', 'flying'],
-		berryLureMapId: 'routeN1',
 		encounterOptions: [],
 	},
 	tranquill: {
@@ -3965,7 +3922,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	timburr: {
 		dexId: 532,
 		types: ['fighting'],
-		berryLureMapId: 'routeN1',
 		encounterOptions: [],
 	},
 	gurdurr: {
@@ -4006,7 +3962,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	sewaddle: {
 		dexId: 540,
 		types: ['bug', 'grass'],
-		berryLureMapId: 'routeN1E1',
 		encounterOptions: [],
 	},
 	swadloon: {
@@ -4022,7 +3977,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	venipede: {
 		dexId: 543,
 		types: ['bug', 'poison'],
-		berryLureMapId: 'routeS1E1',
 		encounterOptions: [],
 	},
 	whirlipede: {
@@ -4039,7 +3993,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	cottonee: {
 		dexId: 546,
 		types: ['grass', 'fairy'],
-		berryLureMapId: 'routeN1E1',
 		encounterOptions: [],
 	},
 	whimsicott: {
@@ -4108,6 +4061,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 559,
 		types: ['dark', 'fighting'],
 		encounterOptions: [],
+		berryLureMapId: 'routeS1W1',
 	},
 	scrafty: {
 		dexId: 560,
@@ -4122,7 +4076,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	yamask: {
 		dexId: 562,
 		types: ['ghost'],
-		berryLureMapId: 'routeS1W1',
 		encounterOptions: [],
 	},
 	cofagrigus: {
@@ -4404,6 +4357,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 607,
 		types: ['ghost', 'fire'],
 		encounterOptions: [],
+		berryLureMapId: 'routeN1E1',
 	},
 	lampent: {
 		dexId: 608,
@@ -4419,6 +4373,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 610,
 		types: ['dragon'],
 		encounterOptions: [],
+		berryLureMapId: 'routeW1',
 	},
 	fraxure: {
 		dexId: 611,
@@ -4481,7 +4436,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	accelgor: {
 		dexId: 617,
 		types: ['bug'],
-		berryLureMapId: 'routeS1W1',
 		encounterOptions: [],
 	},
 	stunfisk: {
@@ -4580,7 +4534,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	heatmor: {
 		dexId: 631,
 		types: ['fire'],
-		berryLureMapId: 'routeS1W1',
 		encounterOptions: [],
 	},
 	durant: {
@@ -4591,7 +4544,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	deino: {
 		dexId: 633,
 		types: ['dark', 'dragon'],
-		berryLureMapId: 'routeS1W1',
 		encounterOptions: [],
 	},
 	zweilous: {
@@ -4780,13 +4732,11 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	vivillon: {
 		dexId: 666,
 		types: ['bug', 'flying'],
-		berryLureMapId: 'routeS1E1',
 		encounterOptions: [],
 	},
 	litleo: {
 		dexId: 667,
 		types: ['fire', 'normal'],
-		berryLureMapId: 'routeS1E1',
 		encounterOptions: [],
 	},
 	pyroar: {
@@ -4826,7 +4776,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	gogoat: {
 		dexId: 673,
 		types: ['grass'],
-		berryLureMapId: 'routeS1E1',
 		encounterOptions: [],
 	},
 	pancham: {
@@ -4852,7 +4801,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	furfrou: {
 		dexId: 676,
 		types: ['normal'],
-		berryLureMapId: 'routeE1',
 		encounterOptions: [],
 	},
 	espurr: {
@@ -4893,13 +4841,11 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	swirlix: {
 		dexId: 684,
 		types: ['fairy'],
-		berryLureMapId: 'routeE1',
 		encounterOptions: [],
 	},
 	slurpuff: {
 		dexId: 685,
 		types: ['fairy'],
-		berryLureMapId: 'routeS1W1',
 		encounterOptions: [],
 	},
 	inkay: {
@@ -4911,11 +4857,11 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 687,
 		types: ['dark', 'psychic'],
 		encounterOptions: [],
+		rampager: true,
 	},
 	binacle: {
 		dexId: 688,
 		types: ['rock', 'water'],
-		berryLureMapId: 'routeE1',
 		encounterOptions: [],
 	},
 	barbaracle: {
@@ -4981,7 +4927,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	hawlucha: {
 		dexId: 701,
 		types: ['fighting', 'flying'],
-		berryLureMapId: 'routeS1W1',
 		encounterOptions: [],
 	},
 	dedenne: {
@@ -5026,7 +4971,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	phantump: {
 		dexId: 708,
 		types: ['ghost', 'grass'],
-		berryLureMapId: 'routeN1',
 		encounterOptions: [],
 	},
 	trevenant: {
@@ -5047,7 +4991,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	bergmite: {
 		dexId: 712,
 		types: ['ice'],
-		berryLureMapId: 'routeE1',
 		encounterOptions: [],
 	},
 	avalugg: {
@@ -5179,7 +5122,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	yungoos: {
 		dexId: 734,
 		types: ['normal'],
-		berryLureMapId: 'routeS1W1',
 		encounterOptions: [],
 	},
 	gumshoos: {
@@ -5390,6 +5332,11 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 765,
 		rampager: true,
 		types: ['normal', 'psychic'],
+		encounterOptions: [],
+	},
+	passimian: {
+		dexId: 766,
+		types: ['fighting'],
 		encounterOptions: [
 			{
 				rarity: 'ultra-rare',
@@ -5401,15 +5348,9 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 			},
 		],
 	},
-	passimian: {
-		dexId: 766,
-		types: ['fighting'],
-		encounterOptions: [],
-	},
 	wimpod: {
 		dexId: 767,
 		types: ['bug', 'water'],
-		berryLureMapId: 'routeN1E1',
 		encounterOptions: [],
 	},
 	golisopod: {
@@ -5460,7 +5401,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	togedemaru: {
 		dexId: 777,
 		types: ['electric', 'steel'],
-
 		encounterOptions: [
 			{
 				rarity: 'rare',
@@ -5495,7 +5435,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'jangmo-o': {
 		dexId: 782,
 		types: ['dragon'],
-		berryLureMapId: 'routeN1E1',
 		encounterOptions: [],
 	},
 	'hakamo-o': {
@@ -5710,7 +5649,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	corvisquire: {
 		dexId: 822,
 		types: ['flying'],
-		berryLureMapId: 'routeE1',
 		encounterOptions: [],
 	},
 	corviknight: {
@@ -5721,7 +5659,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	blipbug: {
 		dexId: 824,
 		types: ['bug'],
-		berryLureMapId: 'routeN1',
 		encounterOptions: [],
 	},
 	dottler: {
@@ -5785,7 +5722,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	yamper: {
 		dexId: 835,
-		berryLureMapId: 'routeS1E1',
 		types: ['electric'],
 		encounterOptions: [],
 	},
@@ -5821,7 +5757,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	applin: {
 		dexId: 840,
 		types: ['grass', 'dragon'],
-		berryLureMapId: 'routeN1',
 		encounterOptions: [],
 	},
 	flapple: {
@@ -5881,7 +5816,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	sizzlipede: {
 		dexId: 850,
 		types: ['fire', 'bug'],
-		berryLureMapId: 'routeN1E1',
 		encounterOptions: [],
 	},
 	centiskorch: {
@@ -5962,7 +5896,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'mr-rime': {
 		dexId: 866,
 		types: ['ice', 'psychic'],
-		encounterOptions: [],
+		encounterOptions: [
+			{
+				rarity: 'medium',
+				maxXp: 216000,
+				minXp: 64000,
+				timeOfDay: 'DAY',
+				area: 'LAND',
+				route: 'routeN1W1',
+			},
+		],
 	},
 	runerigus: {
 		dexId: 867,
@@ -5992,7 +5935,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	snom: {
 		dexId: 872,
 		types: ['ice', 'bug'],
-		berryLureMapId: 'routeN1E1',
 		encounterOptions: [],
 	},
 	frosmoth: {
@@ -6032,7 +5974,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	cufant: {
 		dexId: 878,
 		types: ['steel'],
-		berryLureMapId: 'routeN1',
 		encounterOptions: [],
 	},
 	copperajah: {
@@ -6552,7 +6493,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	orthworm: {
 		dexId: 968,
 		types: ['steel'],
-		berryLureMapId: 'routeS1W1',
 		encounterOptions: [],
 	},
 	glimmet: {
@@ -7336,7 +7276,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'pikachu-cosplay': {
 		dexId: 10085,
 		types: ['electric'],
-		honey: true,
+		berryLureMapId: 'routeW1',
 		encounterOptions: [],
 	},
 	'hoopa-unbound': {
@@ -7499,7 +7439,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'vulpix-alola': {
 		dexId: 10103,
 		types: ['ice'],
-
 		encounterOptions: [
 			{
 				rarity: 'ultra-rare',
@@ -7547,7 +7486,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'meowth-alola': {
 		dexId: 10107,
 		types: ['dark'],
-		berryLureMapId: 'routeN1E1',
 		encounterOptions: [],
 	},
 	'persian-alola': {
@@ -7671,6 +7609,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'lycanroc-midnight': {
 		dexId: 10126,
 		types: ['rock'],
+		rampager: true,
 		encounterOptions: [],
 	},
 	'wishiwashi-school': {
@@ -7864,7 +7803,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'meowth-galar': {
 		dexId: 10161,
 		types: ['steel'],
-		berryLureMapId: 'routeN1E1',
 		encounterOptions: [],
 	},
 	'ponyta-galar': {
@@ -7918,7 +7856,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'mr-mime-galar': {
 		dexId: 10168,
 		types: ['ice', 'psychic'],
-		berryLureMapId: 'routeN1',
 		encounterOptions: [],
 	},
 	'articuno-galar': {
@@ -7949,7 +7886,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'zigzagoon-galar': {
 		dexId: 10174,
 		types: ['dark', 'normal'],
-		berryLureMapId: 'routeN1',
 		encounterOptions: [],
 	},
 	'linoone-galar': {
@@ -8234,7 +8170,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'growlithe-hisui': {
 		dexId: 10229,
 		types: ['fire', 'rock'],
-
 		encounterOptions: [
 			{
 				rarity: 'medium',
@@ -8269,7 +8204,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'qwilfish-hisui': {
 		dexId: 10234,
 		types: ['dark', 'poison'],
-		berryLureMapId: 'routeS1E1',
 		encounterOptions: [],
 	},
 	'sneasel-hisui': {
@@ -8333,7 +8267,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'avalugg-hisui': {
 		dexId: 10243,
 		types: ['ice', 'rock'],
-		berryLureMapId: 'routeS1W1',
 		encounterOptions: [],
 	},
 	'decidueye-hisui': {

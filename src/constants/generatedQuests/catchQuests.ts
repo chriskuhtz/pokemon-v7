@@ -1,9 +1,14 @@
 import { timesOfDay } from '../../functions/getTimeOfDay';
 import { Inventory } from '../../interfaces/Inventory';
+import { smallExpCandyPackage } from '../../interfaces/Item';
 import { OverworldMap } from '../../interfaces/OverworldMap';
 import { Quest } from '../../interfaces/Quest';
+import { SaveFile } from '../../interfaces/SaveFile';
 import { CampUpgrade } from '../campUpgrades';
-import { getAllEncountersFor } from '../internalDex';
+import {
+	getAllBerryLureMonForRoute,
+	getAllEncountersFor,
+} from '../internalDex';
 import { routeE1 } from '../maps/routeE1';
 import { routeN1 } from '../maps/routeN1';
 import { routeN1E1 } from '../maps/routeN1E1';
@@ -292,12 +297,13 @@ const catchQuestsForRoute = (
 	route: OverworldMap,
 	includeWater: boolean,
 	requiredUpgrade?: CampUpgrade
-): Record<string, Quest> => {
+): Partial<Record<QuestName, Quest>> => {
 	const ultraRares = getAllEncountersFor(route.id, {
 		rarity: 'ultra-rare',
 		area: includeWater ? undefined : 'LAND',
 	});
-	return {
+	const berryLures = getAllBerryLureMonForRoute(route.id);
+	const res = {
 		...Object.fromEntries(
 			timesOfDay.map((time) => {
 				const id =
@@ -358,8 +364,12 @@ const catchQuestsForRoute = (
 		[`catch a ultra-rare pokemon from ${route.id}`]: {
 			category: 'EXPLORATION',
 			rewardItems: { 'rare-candy': 1 },
+			campUpgrade:
+				berryLures.length > 0
+					? (`berry lure station ${route.id}` as CampUpgrade)
+					: undefined,
 			researchPoints: 20,
-			conditionFunction: (s) => {
+			conditionFunction: (s: SaveFile) => {
 				return ultraRares.some(
 					(e) =>
 						e.rarity === 'ultra-rare' &&
@@ -376,6 +386,26 @@ const catchQuestsForRoute = (
 			requiredUpgrade: requiredUpgrade,
 		},
 	};
+
+	if (berryLures.length > 0) {
+		const berryLureQuest = {
+			kind: 'BULLETIN',
+			availableAfter:
+				`catch a ultra-rare pokemon from ${route.id}` as QuestName,
+			rewardItems: smallExpCandyPackage,
+			targetPokemon: berryLures,
+			researchPoints: 30,
+			category: 'RESEARCH',
+			conditionFunction: (s: SaveFile) =>
+				berryLures.every((b) => s.pokedex[b].caughtOnRoutes.includes(route.id)),
+		};
+		const berryLureQuestName =
+			`berry-lure all different pokemon from ${route.id}` as QuestName;
+		//@ts-expect-error trust me
+		res[berryLureQuestName] = berryLureQuest;
+	}
+
+	return res as Partial<Record<QuestName, Quest>>;
 };
 
 //log the keys and add them to the type def if you add new maps

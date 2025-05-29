@@ -1,5 +1,6 @@
 import { PokemonName } from '../constants/pokemonNames';
 import { getRandomIndex } from '../functions/filterTargets';
+import { Inventory } from './Inventory';
 import { Nature } from './Natures';
 import { PokemonType } from './PokemonType';
 import { Stat } from './StatObject';
@@ -873,4 +874,18 @@ export const expCandyTable: Partial<Record<ItemType, number>> = {
 	'exp-candy-m': 3000,
 	'exp-candy-l': 10000,
 	'exp-candy-xl': 30000,
+};
+
+export const expCandyPackage: Partial<Inventory> = {
+	'exp-candy-xs': 10,
+	'exp-candy-s': 10,
+	'exp-candy-m': 10,
+	'exp-candy-l': 5,
+	'exp-candy-xl': 2,
+};
+export const smallExpCandyPackage: Partial<Inventory> = {
+	'exp-candy-xs': 10,
+	'exp-candy-s': 10,
+	'exp-candy-m': 5,
+	'exp-candy-l': 1,
 };

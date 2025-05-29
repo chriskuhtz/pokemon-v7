@@ -1,6 +1,12 @@
 import { useCallback, useContext, useMemo } from 'react';
+import { FaRegCircleQuestion } from 'react-icons/fa6';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
-import { getBerryLureMon } from '../../constants/internalDex';
+import { battleSpriteSize } from '../../constants/gameData';
+import {
+	getAllBerryLureMonForRoute,
+	getBerryLureMon,
+} from '../../constants/internalDex';
+import { internalDex } from '../../constants/internalDexData';
 import { PokemonName } from '../../constants/pokemonNames';
 import {
 	makeChallengerPokemon,
@@ -13,7 +19,7 @@ import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Challenger } from '../../interfaces/Challenger';
 import { EmptyInventory, joinInventories } from '../../interfaces/Inventory';
 import { BerryType, superEffectiveSaveTable } from '../../interfaces/Item';
-import { Occupant } from '../../interfaces/OverworldMap';
+import { OverworldBerryLure } from '../../interfaces/OverworldMap';
 import { PokemonType } from '../../interfaces/PokemonType';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
@@ -25,16 +31,21 @@ export const BerryLure = () => {
 	const { location } = useContext(LocationContext);
 	const { addMultipleMessages } = useContext(MessageQueueContext);
 
-	const availableBerries: BerryType[] = useMemo(() => {
-		return Object.values(superEffectiveSaveTable).filter((b) => {
-			if (b === 'odd-keystone') {
-				return false;
-			}
-			const berry = b as BerryType;
-
-			return saveFile.bag[berry] > 0;
-		}) as BerryType[];
-	}, [saveFile.bag]);
+	const pokemon: PokemonName[] = useMemo(
+		() => getAllBerryLureMonForRoute(location.mapId),
+		[location.mapId]
+	);
+	const possibleBerries: BerryType[] = useMemo(
+		() =>
+			pokemon.map(
+				(p) => superEffectiveSaveTable[internalDex[p].types.at(0) ?? 'normal']
+			) as BerryType[],
+		[pokemon]
+	);
+	const availableBerries: BerryType[] = useMemo(
+		() => possibleBerries.filter((b) => saveFile.bag[b] > 0) as BerryType[],
+		[possibleBerries, saveFile.bag]
+	);
 
 	const lure = useCallback(
 		(berry: BerryType) => {
@@ -47,11 +58,7 @@ export const BerryLure = () => {
 
 			const succeded = Math.random() > 0.25;
 
-			const getRouteBasedLureEncounter = (): PokemonName | undefined => {
-				return getBerryLureMon(location.mapId, lureType);
-			};
-
-			const encounterName = getRouteBasedLureEncounter();
+			const encounterName = getBerryLureMon(location.mapId, lureType);
 
 			if (!encounterName) {
 				addMultipleMessages([
@@ -203,9 +210,25 @@ export const BerryLure = () => {
 					: [
 							<Card
 								key="no-berries"
-								icon={<ItemSprite item={'sitrus-berry'} grayscale />}
+								icon={<FaRegCircleQuestion size={battleSpriteSize} />}
 								content={
-									'You dont have any berries that could be used as lures'
+									<div>
+										<strong>
+											You dont have any berries that could be used as lures.
+										</strong>
+										<br />
+										<strong>
+											The Pokemon in this area like the following berries:
+										</strong>
+										<Stack mode="row">
+											{possibleBerries.map((p) => (
+												<p style={{ display: 'flex', alignItems: 'center' }}>
+													<ItemSprite key={p} item={p} />
+													{p}
+												</p>
+											))}
+										</Stack>
+									</div>
 								}
 								actionElements={[]}
 							/>,
@@ -215,38 +238,45 @@ export const BerryLure = () => {
 	);
 };
 
-export const routeN1Lure: Occupant = {
+export const routeN1Lure: OverworldBerryLure = {
 	id: 'routeN1_berryLure',
 	type: 'BERRY_LURE',
 	x: 25,
 	y: 44,
 	conditionFunction: (s) => s.campUpgrades['berry lure station routeN1'],
 };
-export const routeN1E1Lure: Occupant = {
+export const routeN1E1Lure: OverworldBerryLure = {
 	id: 'routeN1E1_berryLure',
 	type: 'BERRY_LURE',
 	x: 4,
 	y: 22,
 	conditionFunction: (s) => s.campUpgrades['berry lure station routeN1E1'],
 };
-export const routeE1Lure: Occupant = {
+export const routeE1Lure: OverworldBerryLure = {
 	id: 'routeE1_berryLure',
 	type: 'BERRY_LURE',
 	x: 26,
 	y: 24,
 	conditionFunction: (s) => s.campUpgrades['berry lure station routeE1'],
 };
-export const routeS1E1Lure: Occupant = {
+export const routeS1E1Lure: OverworldBerryLure = {
 	id: 'routeS1E1_berryLure',
 	type: 'BERRY_LURE',
 	x: 24,
 	y: 25,
 	conditionFunction: (s) => s.campUpgrades['berry lure station routeS1E1'],
 };
-export const routeS1W1Lure: Occupant = {
+export const routeS1W1Lure: OverworldBerryLure = {
 	id: 'routeS1W1_berryLure',
 	type: 'BERRY_LURE',
 	x: 47,
 	y: 26,
 	conditionFunction: (s) => s.campUpgrades['berry lure station routeS1W1'],
+};
+export const routeW1Lure: OverworldBerryLure = {
+	id: 'routeW1_berryLure',
+	type: 'BERRY_LURE',
+	x: 43,
+	y: 18,
+	conditionFunction: (s) => s.campUpgrades['berry lure station routeW1'],
 };

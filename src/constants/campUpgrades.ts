@@ -51,6 +51,7 @@ export const campUpgradeNames = [
 	'berry lure station routeE1',
 	'berry lure station routeS1E1',
 	'berry lure station routeS1W1',
+	'berry lure station routeW1',
 	'buy skiing equipment',
 	'invite historian',
 	'ranger certification',
@@ -100,11 +101,12 @@ export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
 	'time distortion radar': 'Research',
 	'space distortion radar': 'Research',
 	'invite fossil expert': 'Research',
-	'berry lure station routeN1': 'Research',
-	'berry lure station routeN1E1': 'Research',
-	'berry lure station routeE1': 'Research',
-	'berry lure station routeS1E1': 'Research',
-	'berry lure station routeS1W1': 'Research',
+	'berry lure station routeN1': 'Quest Reward',
+	'berry lure station routeN1E1': 'Quest Reward',
+	'berry lure station routeE1': 'Quest Reward',
+	'berry lure station routeS1E1': 'Quest Reward',
+	'berry lure station routeS1W1': 'Quest Reward',
+	'berry lure station routeW1': 'Quest Reward',
 	'invite historian': 'Research',
 	'invite move tutor': 'Training',
 	'invite effort value expert': 'Training',
@@ -192,17 +194,19 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'team slot 4': [...baseRequirements, 'team slot 3'],
 	'team slot 5': [...baseRequirements, 'team slot 4'],
 	'team slot 6': [...baseRequirements, 'team slot 5'],
-	'berry lure station routeN1': baseRequirements,
-	'berry lure station routeN1E1': ['machete certification'],
-	'berry lure station routeE1': ['shovel certification'],
-	'berry lure station routeS1E1': ['swimming certification'],
-	'berry lure station routeS1W1': ['swimming certification'],
 	//the last exploration upgrade
 	'dragonite taxi': campUpgradeNames.filter(
 		(name) => campUpgradeCategories[name] === 'Exploration'
 	),
+	//"Quest rewards"
 	'pidgeot rider certification': [],
 	'warden certification': ['ranger certification'],
+	'berry lure station routeN1': [],
+	'berry lure station routeN1E1': [],
+	'berry lure station routeE1': [],
+	'berry lure station routeS1E1': [],
+	'berry lure station routeS1W1': [],
+	'berry lure station routeW1': [],
 };
 
 export const campUpgradeExplanations: Record<CampUpgrade, string> = {
@@ -267,6 +271,7 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	'berry lure station routeE1': 'Place berries inside to attract pokemon',
 	'berry lure station routeS1E1': 'Place berries inside to attract pokemon',
 	'berry lure station routeS1W1': 'Place berries inside to attract pokemon',
+	'berry lure station routeW1': 'Place berries inside to attract pokemon',
 	'fifth slot for farm': 'more space at the berry farm',
 	'sixth slot for farm': 'more space at the berry farm',
 	'seventh slot for farm': 'more space at the berry farm',

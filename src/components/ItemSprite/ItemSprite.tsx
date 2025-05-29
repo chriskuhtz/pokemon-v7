@@ -18,7 +18,7 @@ export const ItemSprite = ({
 			src={getItemUrl(item)}
 			height={battleSpriteSize * (sizeFactor ?? 1)}
 			width={battleSpriteSize * (sizeFactor ?? 1)}
-			style={grayscale ? { filter: 'grayccale(1)' } : undefined}
+			style={grayscale ? { filter: 'grayscale(1)' } : undefined}
 			onClick={onClick}
 		/>
 	);

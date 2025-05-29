@@ -523,16 +523,22 @@ export const extraFeatureCheckList: {
 	{ name: 'filter for internaldex', handled: true },
 	{ name: 'booster enegry sprite is missing', handled: true },
 	{ name: 'icons in message', handled: true },
-	//BUGS/IMPROVEMENTS:
-	{ name: 'nicer ladder up sprite' },
-	{ name: 'fix pathing' },
+	{ name: 'routeN1 occs on routeN1E1', handled: true },
+	{ name: 'Quests for dogs', handled: true },
 	{
 		name: `Moves die mehrmals in der selben runde passieren z.b. doppel kick verhalten sich sonderbar.
 Sie finden nicht immer gleich hintereinander statt also manchmal ist 1ster kick dann andere attacke von anderem pokemon und dann 2ter kick, das passiert aber nur manchmal
 Der zweite doppelkick trifft auch untergetauchte pokemon
 Anmerkung: beides nur mit doppel kick getestet`,
+		handled: true,
 	},
-
+	{ name: 'unlock berry lure after catching all mons on route', handled: true },
+	{ name: 'each berry lure on takes specific berries', handled: true },
+	//BUGS/IMPROVEMENTS:
+	{ name: 'nicer ladder up sprite' },
+	{ name: 'fix pathing' },
+	{ name: 'rollout stops stacking when target is defeated' },
+	{ name: 'completely rework opponent decision tree' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
@@ -543,6 +549,8 @@ Anmerkung: beides nur mit doppel kick getestet`,
 	{ name: 'eggs?' },
 	{ name: 'Fishing?' },
 	{ name: 'magma/aqua quests from Looker' },
+	{ name: 'Lugia quest after catching the birds' },
+	{ name: 'Hooh quest after catching the dogs' },
 	{ name: 'Terrain Items (shovel, pickaxe) as Gym leader rewards' },
 	{ name: 'ev grind mode for challenge field' },
 	{ name: 'trainer with simple/costar combo' },

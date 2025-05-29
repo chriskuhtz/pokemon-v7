@@ -45,6 +45,14 @@ export const getRandomSwarmMon = (type: SwarmType): PokemonName => {
 	return getRandomEntry(getSwarmOptions(type));
 };
 
+export const getAllBerryLureMonForRoute = (map: MapId): PokemonName[] => {
+	const options: PokemonName[] = Object.entries(internalDex)
+		.filter(([, value]) => value.berryLureMapId === map)
+		.map(([key]) => key as PokemonName);
+
+	return options;
+};
+
 export const getBerryLureMon = (map: MapId, type: PokemonType) => {
 	const options: PokemonName[] = Object.entries(internalDex)
 		.filter(
@@ -124,6 +132,7 @@ export const getRandomEncounter = (
 	);
 	return { ...chosen, xp };
 };
+
 export const isNotCatchable = (entry: InternalDexEntry) => {
 	return (
 		[
