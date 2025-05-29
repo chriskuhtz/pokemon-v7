@@ -2717,9 +2717,21 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/713/',
 		handled: true,
 	},
-	{ name: 'moongeist-beam', url: 'https://pokeapi.co/api/v2/move/714/' },
-	{ name: 'tearful-look', url: 'https://pokeapi.co/api/v2/move/715/' },
-	{ name: 'zing-zap', url: 'https://pokeapi.co/api/v2/move/716/' },
+	{
+		name: 'moongeist-beam',
+		url: 'https://pokeapi.co/api/v2/move/714/',
+		handled: true,
+	},
+	{
+		name: 'tearful-look',
+		url: 'https://pokeapi.co/api/v2/move/715/',
+		handled: true,
+	},
+	{
+		name: 'zing-zap',
+		url: 'https://pokeapi.co/api/v2/move/716/',
+		handled: true,
+	},
 	{ name: 'natures-madness', url: 'https://pokeapi.co/api/v2/move/717/' },
 	{ name: 'multi-attack', url: 'https://pokeapi.co/api/v2/move/718/' },
 	{ name: 'mind-blown', url: 'https://pokeapi.co/api/v2/move/720/' },
@@ -3488,6 +3500,9 @@ export const handledMoves = [
 	'shadow-bone',
 	'prismatic-laser',
 	'sunsteel-strike',
+	'tearful-look',
+	'moongeist-beam',
+	'zing-zap',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

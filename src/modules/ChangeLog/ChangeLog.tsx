@@ -78,6 +78,8 @@ const ChangeLogV40 = (): JSX.Element => {
 		<>
 			<h3>0.40:</h3>
 			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>Fixes and Balancing</li>
+				<li>New Quests</li>
 				<li>New Attacks</li>
 			</ol>
 		</>
