@@ -2840,8 +2840,16 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/786/',
 		handled: true,
 	},
-	{ name: 'apple-acid', url: 'https://pokeapi.co/api/v2/move/787/' },
-	{ name: 'grav-apple', url: 'https://pokeapi.co/api/v2/move/788/' },
+	{
+		name: 'apple-acid',
+		url: 'https://pokeapi.co/api/v2/move/787/',
+		handled: true,
+	},
+	{
+		name: 'grav-apple',
+		url: 'https://pokeapi.co/api/v2/move/788/',
+		handled: true,
+	},
 	{ name: 'spirit-break', url: 'https://pokeapi.co/api/v2/move/789/' },
 	{ name: 'strange-steam', url: 'https://pokeapi.co/api/v2/move/790/' },
 	{ name: 'life-dew', url: 'https://pokeapi.co/api/v2/move/791/' },
@@ -3612,6 +3620,8 @@ export const handledMoves = [
 	'breaking-swipe',
 	'branch-poke',
 	'overdrive',
+	'apple-acid',
+	'grav-apple',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
