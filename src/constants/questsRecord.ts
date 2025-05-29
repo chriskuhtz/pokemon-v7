@@ -445,6 +445,12 @@ export const questNames = [
 	'catch all space distortion pokemon',
 	'train a pidgeot to lvl 70',
 	"catch whitney's favorite cute pokemon",
+	'defeat an imported challenger',
+	'defeat an imported challenger at lvl 20 or higher',
+	'defeat an imported challenger at lvl 40 or higher',
+	'defeat an imported challenger at lvl 60 or higher',
+	'defeat an imported challenger at lvl 80 or higher',
+	'defeat an imported challenger at lvl 100',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -3337,6 +3343,59 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 					p.name === 'pidgeot' &&
 					calculateLevelData(p.xp, p.growthRate).level >= 70
 			),
+	},
+	'defeat an imported challenger': {
+		category: 'BATTLE',
+		kind: 'BULLETIN',
+		conditionFunction: (s: SaveFile) =>
+			!!s.mileStones.importedChallengerDefeatedAt,
+		researchPoints: 10,
+		rewardItems: { 'exp-candy-xs': 10 },
+	},
+	'defeat an imported challenger at lvl 20 or higher': {
+		category: 'BATTLE',
+		kind: 'BULLETIN',
+		conditionFunction: (s: SaveFile) =>
+			(s.mileStones.importedChallengerDefeatedAt ?? 0) >= 8000,
+		researchPoints: 20,
+		availableAfter: 'defeat an imported challenger',
+		rewardItems: { 'exp-candy-s': 10 },
+	},
+	'defeat an imported challenger at lvl 40 or higher': {
+		category: 'BATTLE',
+		kind: 'BULLETIN',
+		conditionFunction: (s: SaveFile) =>
+			(s.mileStones.importedChallengerDefeatedAt ?? 0) >= 64000,
+		researchPoints: 40,
+		availableAfter: 'defeat an imported challenger at lvl 20 or higher',
+		rewardItems: { 'exp-candy-m': 10 },
+	},
+	'defeat an imported challenger at lvl 60 or higher': {
+		category: 'BATTLE',
+		kind: 'BULLETIN',
+		conditionFunction: (s: SaveFile) =>
+			(s.mileStones.importedChallengerDefeatedAt ?? 0) >= 216000,
+		researchPoints: 60,
+		availableAfter: 'defeat an imported challenger at lvl 40 or higher',
+		rewardItems: { 'exp-candy-l': 10 },
+	},
+	'defeat an imported challenger at lvl 80 or higher': {
+		category: 'BATTLE',
+		kind: 'BULLETIN',
+		conditionFunction: (s: SaveFile) =>
+			(s.mileStones.importedChallengerDefeatedAt ?? 0) >= 512000,
+		researchPoints: 80,
+		availableAfter: 'defeat an imported challenger at lvl 60 or higher',
+		rewardItems: { 'exp-candy-xl': 10 },
+	},
+	'defeat an imported challenger at lvl 100': {
+		category: 'BATTLE',
+		kind: 'BULLETIN',
+		conditionFunction: (s: SaveFile) =>
+			(s.mileStones.importedChallengerDefeatedAt ?? 0) >= 1000000,
+		researchPoints: 100,
+		availableAfter: 'defeat an imported challenger at lvl 80 or higher',
+		rewardItems: { 'exp-candy-xl': 10 },
 	},
 } as Record<QuestName, Quest>;
 

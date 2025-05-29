@@ -49,7 +49,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.barryDefeatedAt ?? 0) >= 1000000,
-		researchPoints: 80,
+		researchPoints: 100,
 		availableAfter: 'defeat barry at lvl 80 or higher',
 		rewardItems: { 'exp-candy-xl': 10 },
 		rewardPokemon: {
@@ -120,7 +120,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.silverDefeatedAt ?? 0) >= 1000000,
-		researchPoints: 80,
+		researchPoints: 100,
 		availableAfter: 'defeat silver at lvl 80 or higher',
 		rewardItems: { 'exp-candy-xl': 10 },
 		rewardPokemon: {
@@ -191,7 +191,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.cynthiaDefeatedAt ?? 0) >= 1000000,
-		researchPoints: 80,
+		researchPoints: 100,
 		availableAfter: 'defeat cynthia at lvl 80 or higher',
 		rewardItems: { 'exp-candy-xl': 10 },
 		rewardPokemon: {
@@ -263,7 +263,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.nDefeatedAt ?? 0) >= 1000000,
-		researchPoints: 80,
+		researchPoints: 100,
 		availableAfter: 'defeat trainer n at lvl 80 or higher',
 		rewardItems: { 'exp-candy-xl': 10 },
 		rewardPokemon: {
@@ -335,7 +335,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.redDefeatedAt ?? 0) >= 1000000,
-		researchPoints: 80,
+		researchPoints: 100,
 		availableAfter: 'defeat trainer red at lvl 80 or higher',
 		rewardItems: { 'exp-candy-xl': 10 },
 		rewardPokemon: {
@@ -406,7 +406,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.hughDefeatedAt ?? 0) >= 1000000,
-		researchPoints: 80,
+		researchPoints: 100,
 		availableAfter: 'defeat trainer hugh at lvl 80 or higher',
 		rewardItems: { 'exp-candy-xl': 10 },
 		rewardPokemon: {

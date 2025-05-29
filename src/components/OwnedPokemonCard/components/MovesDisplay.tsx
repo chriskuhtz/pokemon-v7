@@ -63,20 +63,24 @@ export const MovesDisplay = ({
 					<div style={{ flexGrow: 1 }}>
 						<Card
 							key={o}
-							actionElements={[
-								<FaArrowUp
-									onClick={(e) => {
-										e.stopPropagation();
-										reorder('UP', o);
-									}}
-								/>,
-								<FaArrowDown
-									onClick={(e) => {
-										e.stopPropagation();
-										reorder('DOWN', o);
-									}}
-								/>,
-							]}
+							actionElements={
+								onlyCurrent
+									? []
+									: [
+											<FaArrowUp
+												onClick={(e) => {
+													e.stopPropagation();
+													reorder('UP', o);
+												}}
+											/>,
+											<FaArrowDown
+												onClick={(e) => {
+													e.stopPropagation();
+													reorder('DOWN', o);
+												}}
+											/>,
+									  ]
+							}
 							disabled={!currentMoves.includes(o) && currentMoves.length === 4}
 							icon={<MdOutlineRadioButtonChecked />}
 							onClick={() => {

@@ -306,6 +306,20 @@ export const useLeaveBattle = () => {
 					updatedMileStones.hughDefeatedAt = xp;
 				}
 			}
+			if (
+				saveFile.importedChallenger &&
+				defeatedChallengerId === saveFile.importedChallenger?.id
+			) {
+				const challengerXp = getHighestXpOnTeam(
+					saveFile.importedChallenger?.team
+				);
+				if (
+					!updatedMileStones.importedChallengerDefeatedAt ||
+					challengerXp > updatedMileStones.importedChallengerDefeatedAt
+				) {
+					updatedMileStones.importedChallengerDefeatedAt = challengerXp;
+				}
+			}
 			updatedMileStones.caughtFromSwarms = updatedSwarmRecord;
 
 			const resetTime = () => {

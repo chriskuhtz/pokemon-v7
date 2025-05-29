@@ -124,6 +124,7 @@ export type MileStonesObject = {
 	nDefeatedAt?: number;
 	redDefeatedAt?: number;
 	hughDefeatedAt?: number;
+	importedChallengerDefeatedAt?: number;
 };
 
 export type ImportedChallenger = Omit<

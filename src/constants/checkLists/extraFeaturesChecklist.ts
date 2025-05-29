@@ -540,7 +540,7 @@ export const extraFeatureCheckList: {
 	{ name: 'Travelling Trainer as quest type', handled: true },
 	{ name: 'download your player snapshot', handled: true },
 	{ name: 'import other players snapshots', handled: true },
-	{ name: 'defeat an imported trainer quest' },
+	{ name: 'defeat an imported trainer quest', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'repair raticate quest' },
 	{ name: 'nicer ladder up sprite' },
