@@ -1539,7 +1539,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			damage: 0,
 			id: '',
 			ball: 'poke-ball',
-			ability: 'drought',
+			ability: 'normalize',
 			name: 'buneary',
 			xp: 125,
 			nature: 'adamant',
