@@ -700,8 +700,11 @@ export const calculateDamage = (
 		attacker.ability === 'sharpness' && slicingMoves.includes(attack.name)
 			? 1.5
 			: 1;
-	const boltbeakFactor =
-		attack.name === 'bolt-beak' && target.moveQueue.length !== 0 ? 2 : 1;
+	const earlyMoverFactor =
+		(attack.name === 'bolt-beak' || attack.name === 'fishious-rend') &&
+		target.moveQueue.length !== 0
+			? 2
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -810,7 +813,7 @@ export const calculateDamage = (
 				windRiderFactor *
 				rockyPayloadFactor *
 				sharpnessFactor *
-				boltbeakFactor
+				earlyMoverFactor
 		),
 		1
 	);

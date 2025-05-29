@@ -2778,9 +2778,17 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/754/',
 		handled: true,
 	},
-	{ name: 'fishious-rend', url: 'https://pokeapi.co/api/v2/move/755/' },
-	{ name: 'court-change', url: 'https://pokeapi.co/api/v2/move/756/' },
-	{ name: 'clangorous-soul', url: 'https://pokeapi.co/api/v2/move/775/' },
+	{
+		name: 'fishious-rend',
+		url: 'https://pokeapi.co/api/v2/move/755/',
+		handled: true,
+	},
+
+	{
+		name: 'clangorous-soul',
+		url: 'https://pokeapi.co/api/v2/move/775/',
+		handled: true,
+	},
 	{ name: 'body-press', url: 'https://pokeapi.co/api/v2/move/776/' },
 	{ name: 'decorate', url: 'https://pokeapi.co/api/v2/move/777/' },
 	{ name: 'drum-beating', url: 'https://pokeapi.co/api/v2/move/778/' },
@@ -2984,6 +2992,7 @@ export const movesCheckList: {
 	},
 	{ name: 'dragon-darts', url: 'https://pokeapi.co/api/v2/move/751/' },
 	{ name: 'teatime', url: 'https://pokeapi.co/api/v2/move/752/' },
+	{ name: 'court-change', url: 'https://pokeapi.co/api/v2/move/756/' },
 ];
 
 export const handledMoves = [
@@ -3550,6 +3559,8 @@ export const handledMoves = [
 	'no-retreat',
 	'magic-powder',
 	'bolt-beak',
+	'fishious-rend',
+	'clangorous-soul',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
