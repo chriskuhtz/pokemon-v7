@@ -90,7 +90,6 @@ export const useOccupants = () => {
 			});
 		}
 		const impo = saveFile.importedChallenger;
-		console.log(impo);
 		if (impo && impo.mapId === map.id) {
 			all.push({
 				...impo,
