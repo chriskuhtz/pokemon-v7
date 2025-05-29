@@ -166,7 +166,8 @@ export const useOverworldMovement = (
 						addStep,
 						currentOccupants,
 						campUpgrades['swimming certification'],
-						!!saveFile.flying
+						!!saveFile.flying,
+						campUpgrades['rock climbing certification']
 					),
 					forwardFoot: getNextForwardFoot(playerLocation.forwardFoot),
 				});
