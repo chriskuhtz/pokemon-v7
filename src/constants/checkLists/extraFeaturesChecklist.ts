@@ -532,8 +532,8 @@ Der zweite doppelkick trifft auch untergetauchte pokemon
 Anmerkung: beides nur mit doppel kick getestet`,
 		handled: true,
 	},
-	{ name: 'unlock berry lure after catching all mons on route' },
-	{ name: 'each berry lure on takes specific berries' },
+	{ name: 'unlock berry lure after catching all mons on route', handled: true },
+	{ name: 'each berry lure on takes specific berries', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },

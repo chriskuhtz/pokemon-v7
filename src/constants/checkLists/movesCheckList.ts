@@ -42,6 +42,7 @@ export const movesCheckList: {
 	{ name: 'max-darkness', url: 'https://pokeapi.co/api/v2/move/772/' },
 	{ name: 'max-overgrowth', url: 'https://pokeapi.co/api/v2/move/773/' },
 	{ name: 'max-steelspike', url: 'https://pokeapi.co/api/v2/move/774/' },
+	{ name: 'dynamax-cannon', url: 'https://pokeapi.co/api/v2/move/744/' },
 	/**
 	 * Z MOVES:
 	 */
@@ -2754,11 +2755,12 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/742/',
 		handled: true,
 	},
-	{ name: 'dynamax-cannon', url: 'https://pokeapi.co/api/v2/move/744/' },
-	{ name: 'snipe-shot', url: 'https://pokeapi.co/api/v2/move/745/' },
-	{ name: 'jaw-lock', url: 'https://pokeapi.co/api/v2/move/746/' },
-	{ name: 'stuff-cheeks', url: 'https://pokeapi.co/api/v2/move/747/' },
-	{ name: 'no-retreat', url: 'https://pokeapi.co/api/v2/move/748/' },
+
+	{
+		name: 'no-retreat',
+		url: 'https://pokeapi.co/api/v2/move/748/',
+		handled: true,
+	},
 	{ name: 'tar-shot', url: 'https://pokeapi.co/api/v2/move/749/' },
 	{ name: 'magic-powder', url: 'https://pokeapi.co/api/v2/move/750/' },
 	{ name: 'dragon-darts', url: 'https://pokeapi.co/api/v2/move/751/' },
@@ -2962,6 +2964,9 @@ export const movesCheckList: {
 	{ name: 'spectral-thief', url: 'https://pokeapi.co/api/v2/move/712/' },
 	{ name: 'multi-attack', url: 'https://pokeapi.co/api/v2/move/718/' },
 	{ name: 'plasma-fists', url: 'https://pokeapi.co/api/v2/move/721/' },
+	{ name: 'snipe-shot', url: 'https://pokeapi.co/api/v2/move/745/' },
+	{ name: 'jaw-lock', url: 'https://pokeapi.co/api/v2/move/746/' },
+	{ name: 'stuff-cheeks', url: 'https://pokeapi.co/api/v2/move/747/' },
 ];
 
 export const handledMoves = [
@@ -3525,6 +3530,7 @@ export const handledMoves = [
 	'mind-blown',
 	'photon-geyser',
 	'double-iron-bash',
+	'no-retreat',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
