@@ -81,6 +81,15 @@ const migrateSavefile = (input: SaveFile) => {
 	updatedInput.quests = Object.fromEntries(
 		questNames.map((q) => [q, updatedInput.quests[q] ?? 'INACTIVE'])
 	) as Record<QuestName, QuestStatus>;
+	//migrate in unlocks
+	Object.entries(QuestsRecord).forEach(([key, value]) => {
+		if (!value.campUpgrade) {
+			return;
+		}
+		if (updatedInput.quests[key as QuestName] === 'COLLECTED') {
+			updatedInput.campUpgrades[value.campUpgrade] = true;
+		}
+	});
 
 	return updatedInput;
 };
