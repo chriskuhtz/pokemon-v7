@@ -29,7 +29,12 @@ export const determineWildPokemon = (
 	currentStrongSwarm?: PokemonSwarm,
 	currentDistortionSwarm?: PokemonSwarm
 ): { team: OwnedPokemon[]; battleTeamConfig: BattleTeamConfig } => {
-	let battleTeamConfig: BattleTeamConfig = {};
+	let battleTeamConfig: BattleTeamConfig = {
+		assignGender: true,
+		assignHeldItem: true,
+		assignLearnsetMoves: true,
+		assignNaturalAbility: true,
+	};
 	const timeOfDay = getTimeOfDay();
 	const applyStreakBoosts = (input: OwnedPokemon): OwnedPokemon => {
 		if (catchStreak?.pokemon === input.name) {
