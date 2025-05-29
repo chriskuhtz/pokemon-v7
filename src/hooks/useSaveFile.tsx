@@ -116,9 +116,6 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 			...update,
 			lastEdited: now,
 			pokedex,
-			//migrate pokemon
-			//pokemon: update.pokemon.map(migratePokemon),
-			//migrate inventory
 			bag: joinInventories(EmptyInventory, update.bag),
 			handledOccupants: update.handledOccupants.filter(
 				(h) => h.resetAt < 0 || h.resetAt > now
