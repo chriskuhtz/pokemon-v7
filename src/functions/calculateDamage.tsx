@@ -242,6 +242,15 @@ export const calculateDamage = (
 	}
 
 	const atk = () => {
+		if (attack.name === 'body-press') {
+			return calculateModifiedStat(
+				'defense',
+				attacker,
+				battleFieldEffects.some(
+					(e) => e.type === 'flower-gift' && e.ownerId === attacker.ownerId
+				)
+			);
+		}
 		if (attack.name === 'foul-play') {
 			return calculateModifiedStat(
 				'attack',

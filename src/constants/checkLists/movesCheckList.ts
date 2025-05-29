@@ -2789,8 +2789,16 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/775/',
 		handled: true,
 	},
-	{ name: 'body-press', url: 'https://pokeapi.co/api/v2/move/776/' },
-	{ name: 'decorate', url: 'https://pokeapi.co/api/v2/move/777/' },
+	{
+		name: 'body-press',
+		url: 'https://pokeapi.co/api/v2/move/776/',
+		handled: true,
+	},
+	{
+		name: 'decorate',
+		url: 'https://pokeapi.co/api/v2/move/777/',
+		handled: true,
+	},
 	{ name: 'drum-beating', url: 'https://pokeapi.co/api/v2/move/778/' },
 	{ name: 'snap-trap', url: 'https://pokeapi.co/api/v2/move/779/' },
 	{ name: 'pyro-ball', url: 'https://pokeapi.co/api/v2/move/780/' },
@@ -3561,6 +3569,8 @@ export const handledMoves = [
 	'bolt-beak',
 	'fishious-rend',
 	'clangorous-soul',
+	'body-press',
+	'decorate',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
