@@ -79,6 +79,7 @@ const ChangeLogV41 = (): JSX.Element => {
 		<>
 			<h3>0.41:</h3>
 			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>Snapshot Battles against Friends</li>
 				<li>New Camp Upgrade</li>
 				<li>New Gym Leaders</li>
 				<li>Moves can only be changed at the Move Tutor</li>

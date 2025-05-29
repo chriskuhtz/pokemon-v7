@@ -279,6 +279,7 @@ export const questNames = [
 	'catch a pokemon in every type of apricorn ball',
 	'defeat morty',
 	'defeat bugsy',
+	'defeat whitney',
 	'revive a fossil',
 	'revive all different fossils',
 	'evolve your starter pokemon',

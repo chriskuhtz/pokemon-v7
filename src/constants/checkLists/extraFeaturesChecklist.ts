@@ -538,17 +538,19 @@ export const extraFeatureCheckList: {
 	{ name: 'whitney', handled: true },
 	{ name: 'Gym Leader as quest type', handled: true },
 	{ name: 'Travelling Trainer as quest type', handled: true },
+	{ name: 'download your player snapshot', handled: true },
+	{ name: 'import other players snapshots', handled: true },
+	{ name: 'defeat an imported trainer quest' },
 	//BUGS/IMPROVEMENTS:
+	{ name: 'repair raticate quest' },
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
 	{ name: 'rollout stops stacking when target is defeated' },
-
 	//CONTENT:
 	{ name: 'jasmine' },
 	{ name: 'pryce' },
 	{ name: 'claire' },
 	{ name: 'e4 challenge' },
-	{ name: 'rock climbing' },
 	{ name: 'eggs?' },
 	{ name: 'Fishing?' },
 	{ name: 'magma/aqua quests from Looker' },
@@ -558,19 +560,19 @@ export const extraFeatureCheckList: {
 	{ name: 'ev grind mode for challenge field' },
 	{ name: 'trainer with simple/costar combo' },
 	{ name: 'steven as the fossil protector' },
-	{ name: 'download your player file and share it with others' },
 	{ name: 'more legendary stories' },
 	{ name: 'cave of shadows where you face yourself' },
+	{ name: 'gym leaders give balls as rewards' },
 	{
 		name: `Apricorn Bälle:
 Ein paar (langweiligere) Ideen
 DarkRed-Apricorn: Vulcan Balls: Bonus for Fire and Stone Pokemon
 Beige-Apricorn: Sand-Storm Balls: Bonus for Ground and Flying Pokemon
-Purple-Apricorn: Nightmare Balls: Bonus for Psycho, Dark, and Ghost Pokemon`,
+LightBlue-Apricorn: SnowCloud Balls: Bonus for Ice and Fairy Pokemon
+Purple-Apricorn: Spooky Balls: Bonus for Psycho, Dark, and Ghost Pokemon`,
 	},
 	//SETTINGS:
 	{ name: 'random encounters' },
 	{ name: 'random evolutions' },
 	{ name: 'nuzlocke mode' },
-	{ name: 'gym leaders give balls as rewards' },
 ];
