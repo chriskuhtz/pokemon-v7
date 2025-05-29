@@ -51,7 +51,7 @@ const chrisTeam = (s: SaveFile) => {
 			ability: 'drizzle',
 			fixedAbility: true,
 			nature: 'modest',
-			firstMove: { name: 'surf', usedPP: 0 },
+			firstMove: { name: 'hydro-pump', usedPP: 0 },
 			secondMove: { name: 'tail-glow', usedPP: 0 },
 			heldItemName: 'mystic-water',
 			xp,
@@ -68,6 +68,7 @@ const chrisTeam = (s: SaveFile) => {
 			nature: 'adamant',
 			heldItemName: 'choice-band',
 			firstMove: { name: 'bullet-punch', usedPP: 0 },
+			secondMove: { name: 'x-scissor', usedPP: 0 },
 			xp,
 			effortValues: {
 				...EmptyStatObject,

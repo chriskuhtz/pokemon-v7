@@ -279,8 +279,8 @@ export const getPower = (
 	}
 	if (attack.name == 'rollout') {
 		return (
-			attack.data.power ??
-			0 * getRolloutFactor(attack.multiTurn ?? 1, !!attacker.defenseCurled)
+			(attack.data.power ?? 0) *
+			getRolloutFactor(attack.multiTurn ?? 1, !!attacker.defenseCurled)
 		);
 	}
 	if (attack.name == 'ice-ball') {

@@ -1,6 +1,7 @@
 import { getTimeOfDay } from '../../../functions/getTimeOfDay';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
+import { routeW1Lure } from '../../../modules/BerryLure/BerryLure';
 import { travellingMerchantRouteW1 } from '../../../modules/TravellingMerchant/TravellingMerchant';
 import { gary } from './gary';
 
@@ -159,16 +160,6 @@ export const routeW1Occupants: OverworldMap['occupants'] = [
 	},
 	{
 		type: 'ITEM',
-		x: 12,
-		y: 19,
-		item: 'plume-fossil',
-		amount: 1,
-		conditionFunction: (s) =>
-			!s.handledOccupants.some((h) => h.id === 'routeW1-plume-fossil'),
-		id: 'routeW1-plume-fossil',
-	},
-	{
-		type: 'ITEM',
 		x: 23,
 		y: 47,
 		item: 'escape-rope',
@@ -197,4 +188,35 @@ export const routeW1Occupants: OverworldMap['occupants'] = [
 			getTimeOfDay() === 'EVENING',
 		id: 'routeW1_suicune',
 	},
+	{
+		type: 'ITEM',
+		x: 36,
+		y: 21,
+		item: 'fire-stone',
+		amount: 1,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'routeW1-fire-stone'),
+		id: 'routeW1-fire-stone',
+	},
+	{
+		type: 'ITEM',
+		x: 5,
+		y: 27,
+		item: 'plume-fossil',
+		amount: 1,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'routeW1-plume-fossil'),
+		id: 'routeW1-plume-fossil',
+	},
+	{
+		type: 'ITEM',
+		x: 3,
+		y: 37,
+		item: 'rage-candy-bar',
+		amount: 2,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'routeW1-rage-candy-bar'),
+		id: 'routeW1-rage-candy-bar',
+	},
+	routeW1Lure,
 ];

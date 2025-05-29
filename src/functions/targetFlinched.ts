@@ -22,6 +22,10 @@ export const targetFlinched = (
 		flinch_chance = 0;
 	}
 
+	if (attack.name === 'no-retreat') {
+		return true;
+	}
+
 	const modified =
 		(flinch_chance + stenchBonus + kingsRockBonus + razorfangBonus) / 100;
 

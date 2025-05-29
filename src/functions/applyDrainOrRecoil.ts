@@ -14,7 +14,7 @@ export const applyDrainOrRecoil = (
 	//Recoil is just negative drain
 	const updatedAttacker = { ...attacker };
 
-	const baseDrain = move.data.meta.drain;
+	const baseDrain = move.name === 'mind-blown' ? -51 : move.data.meta.drain;
 
 	if (baseDrain === 0 || damage === 0) {
 		return updatedAttacker;

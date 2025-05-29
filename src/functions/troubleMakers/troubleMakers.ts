@@ -107,7 +107,7 @@ export const createAdmin = (
 					assignGender: true,
 					assignHeldItem: true,
 				},
-				sprite: SpriteEnum.archie,
+				sprite: SpriteEnum.maxie,
 			},
 		];
 	}

@@ -5,6 +5,22 @@ export const movesCheckList: {
 	handled?: boolean;
 }[] = [
 	/**
+	 * Lets go moves
+	 */
+	{ name: 'zippy-zap', url: 'https://pokeapi.co/api/v2/move/729/' },
+	{ name: 'splishy-splash', url: 'https://pokeapi.co/api/v2/move/730/' },
+	{ name: 'floaty-fall', url: 'https://pokeapi.co/api/v2/move/731/' },
+	{ name: 'pika-papow', url: 'https://pokeapi.co/api/v2/move/732/' },
+	{ name: 'bouncy-bubble', url: 'https://pokeapi.co/api/v2/move/733/' },
+	{ name: 'buzzy-buzz', url: 'https://pokeapi.co/api/v2/move/734/' },
+	{ name: 'sizzly-slide', url: 'https://pokeapi.co/api/v2/move/735/' },
+	{ name: 'glitzy-glow', url: 'https://pokeapi.co/api/v2/move/736/' },
+	{ name: 'baddy-bad', url: 'https://pokeapi.co/api/v2/move/737/' },
+	{ name: 'sappy-seed', url: 'https://pokeapi.co/api/v2/move/738/' },
+	{ name: 'freezy-frost', url: 'https://pokeapi.co/api/v2/move/739/' },
+	{ name: 'sparkly-swirl', url: 'https://pokeapi.co/api/v2/move/740/' },
+	{ name: 'veevee-volley', url: 'https://pokeapi.co/api/v2/move/741/' },
+	/**
 	 * GIGANTAMAX Moves
 	 */
 	{ name: 'max-guard', url: 'https://pokeapi.co/api/v2/move/743/' },
@@ -26,9 +42,29 @@ export const movesCheckList: {
 	{ name: 'max-darkness', url: 'https://pokeapi.co/api/v2/move/772/' },
 	{ name: 'max-overgrowth', url: 'https://pokeapi.co/api/v2/move/773/' },
 	{ name: 'max-steelspike', url: 'https://pokeapi.co/api/v2/move/774/' },
+	{ name: 'dynamax-cannon', url: 'https://pokeapi.co/api/v2/move/744/' },
 	/**
 	 * Z MOVES:
 	 */
+	{
+		name: '10-000-000-volt-thunderbolt',
+		url: 'https://pokeapi.co/api/v2/move/719/',
+	},
+	{
+		name: 'light-that-burns-the-sky',
+		url: 'https://pokeapi.co/api/v2/move/723/',
+	},
+	{ name: 'searing-sunraze-smash', url: 'https://pokeapi.co/api/v2/move/724/' },
+	{
+		name: 'menacing-moonraze-maelstrom',
+		url: 'https://pokeapi.co/api/v2/move/725/',
+	},
+	{ name: 'lets-snuggle-forever', url: 'https://pokeapi.co/api/v2/move/726/' },
+	{
+		name: 'splintered-stormshards',
+		url: 'https://pokeapi.co/api/v2/move/727/',
+	},
+	{ name: 'clangorous-soulblaze', url: 'https://pokeapi.co/api/v2/move/728/' },
 	{
 		name: 'sinister-arrow-raid',
 		url: 'https://pokeapi.co/api/v2/move/695/',
@@ -2672,55 +2708,59 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/710/',
 		handled: true,
 	},
-	{ name: 'prismatic-laser', url: 'https://pokeapi.co/api/v2/move/711/' },
-	{ name: 'spectral-thief', url: 'https://pokeapi.co/api/v2/move/712/' },
-	{ name: 'sunsteel-strike', url: 'https://pokeapi.co/api/v2/move/713/' },
-	{ name: 'moongeist-beam', url: 'https://pokeapi.co/api/v2/move/714/' },
-	{ name: 'tearful-look', url: 'https://pokeapi.co/api/v2/move/715/' },
-	{ name: 'zing-zap', url: 'https://pokeapi.co/api/v2/move/716/' },
-	{ name: 'natures-madness', url: 'https://pokeapi.co/api/v2/move/717/' },
-	{ name: 'multi-attack', url: 'https://pokeapi.co/api/v2/move/718/' },
 	{
-		name: '10-000-000-volt-thunderbolt',
-		url: 'https://pokeapi.co/api/v2/move/719/',
+		name: 'prismatic-laser',
+		url: 'https://pokeapi.co/api/v2/move/711/',
+		handled: true,
 	},
-	{ name: 'mind-blown', url: 'https://pokeapi.co/api/v2/move/720/' },
-	{ name: 'plasma-fists', url: 'https://pokeapi.co/api/v2/move/721/' },
-	{ name: 'photon-geyser', url: 'https://pokeapi.co/api/v2/move/722/' },
 	{
-		name: 'light-that-burns-the-sky',
-		url: 'https://pokeapi.co/api/v2/move/723/',
+		name: 'sunsteel-strike',
+		url: 'https://pokeapi.co/api/v2/move/713/',
+		handled: true,
 	},
-	{ name: 'searing-sunraze-smash', url: 'https://pokeapi.co/api/v2/move/724/' },
 	{
-		name: 'menacing-moonraze-maelstrom',
-		url: 'https://pokeapi.co/api/v2/move/725/',
+		name: 'moongeist-beam',
+		url: 'https://pokeapi.co/api/v2/move/714/',
+		handled: true,
 	},
-	{ name: 'lets-snuggle-forever', url: 'https://pokeapi.co/api/v2/move/726/' },
 	{
-		name: 'splintered-stormshards',
-		url: 'https://pokeapi.co/api/v2/move/727/',
+		name: 'tearful-look',
+		url: 'https://pokeapi.co/api/v2/move/715/',
+		handled: true,
 	},
-	{ name: 'clangorous-soulblaze', url: 'https://pokeapi.co/api/v2/move/728/' },
-	{ name: 'zippy-zap', url: 'https://pokeapi.co/api/v2/move/729/' },
-	{ name: 'splishy-splash', url: 'https://pokeapi.co/api/v2/move/730/' },
-	{ name: 'floaty-fall', url: 'https://pokeapi.co/api/v2/move/731/' },
-	{ name: 'pika-papow', url: 'https://pokeapi.co/api/v2/move/732/' },
-	{ name: 'bouncy-bubble', url: 'https://pokeapi.co/api/v2/move/733/' },
-	{ name: 'buzzy-buzz', url: 'https://pokeapi.co/api/v2/move/734/' },
-	{ name: 'sizzly-slide', url: 'https://pokeapi.co/api/v2/move/735/' },
-	{ name: 'glitzy-glow', url: 'https://pokeapi.co/api/v2/move/736/' },
-	{ name: 'baddy-bad', url: 'https://pokeapi.co/api/v2/move/737/' },
-	{ name: 'sappy-seed', url: 'https://pokeapi.co/api/v2/move/738/' },
-	{ name: 'freezy-frost', url: 'https://pokeapi.co/api/v2/move/739/' },
-	{ name: 'sparkly-swirl', url: 'https://pokeapi.co/api/v2/move/740/' },
-	{ name: 'veevee-volley', url: 'https://pokeapi.co/api/v2/move/741/' },
-	{ name: 'double-iron-bash', url: 'https://pokeapi.co/api/v2/move/742/' },
-	{ name: 'dynamax-cannon', url: 'https://pokeapi.co/api/v2/move/744/' },
-	{ name: 'snipe-shot', url: 'https://pokeapi.co/api/v2/move/745/' },
-	{ name: 'jaw-lock', url: 'https://pokeapi.co/api/v2/move/746/' },
-	{ name: 'stuff-cheeks', url: 'https://pokeapi.co/api/v2/move/747/' },
-	{ name: 'no-retreat', url: 'https://pokeapi.co/api/v2/move/748/' },
+	{
+		name: 'zing-zap',
+		url: 'https://pokeapi.co/api/v2/move/716/',
+		handled: true,
+	},
+	{
+		name: 'natures-madness',
+		url: 'https://pokeapi.co/api/v2/move/717/',
+		handled: true,
+	},
+
+	{
+		name: 'mind-blown',
+		url: 'https://pokeapi.co/api/v2/move/720/',
+		handled: true,
+	},
+
+	{
+		name: 'photon-geyser',
+		url: 'https://pokeapi.co/api/v2/move/722/',
+		handled: true,
+	},
+	{
+		name: 'double-iron-bash',
+		url: 'https://pokeapi.co/api/v2/move/742/',
+		handled: true,
+	},
+
+	{
+		name: 'no-retreat',
+		url: 'https://pokeapi.co/api/v2/move/748/',
+		handled: true,
+	},
 	{ name: 'tar-shot', url: 'https://pokeapi.co/api/v2/move/749/' },
 	{ name: 'magic-powder', url: 'https://pokeapi.co/api/v2/move/750/' },
 	{ name: 'dragon-darts', url: 'https://pokeapi.co/api/v2/move/751/' },
@@ -2921,6 +2961,12 @@ export const movesCheckList: {
 	},
 	{ name: 'shell-trap', url: 'https://pokeapi.co/api/v2/move/704/' },
 	{ name: 'stomping-tantrum', url: 'https://pokeapi.co/api/v2/move/707/' },
+	{ name: 'spectral-thief', url: 'https://pokeapi.co/api/v2/move/712/' },
+	{ name: 'multi-attack', url: 'https://pokeapi.co/api/v2/move/718/' },
+	{ name: 'plasma-fists', url: 'https://pokeapi.co/api/v2/move/721/' },
+	{ name: 'snipe-shot', url: 'https://pokeapi.co/api/v2/move/745/' },
+	{ name: 'jaw-lock', url: 'https://pokeapi.co/api/v2/move/746/' },
+	{ name: 'stuff-cheeks', url: 'https://pokeapi.co/api/v2/move/747/' },
 ];
 
 export const handledMoves = [
@@ -3475,6 +3521,16 @@ export const handledMoves = [
 	'psychic-fangs',
 	'liquidation',
 	'shadow-bone',
+	'prismatic-laser',
+	'sunsteel-strike',
+	'tearful-look',
+	'moongeist-beam',
+	'zing-zap',
+	'natures-madness',
+	'mind-blown',
+	'photon-geyser',
+	'double-iron-bash',
+	'no-retreat',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

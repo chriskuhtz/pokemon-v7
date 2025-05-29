@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { internalDex } from '../../../constants/internalDexData';
-import { mapsRecord } from '../../../constants/maps/mapsRecord';
+import { MapId, mapsRecord } from '../../../constants/maps/mapsRecord';
 import { getMiddleOfThree } from '../../../functions/getMiddleOfThree';
 import { getRandomOrientation } from '../../../functions/getNextClockwiseDirection';
 import { occupantHandled } from '../../../functions/occupantHandled';
@@ -19,6 +19,15 @@ export const useOccupants = () => {
 	const map = useMemo(() => mapsRecord[location.mapId], [location.mapId]);
 
 	const [statefulOccupants, setStatefulOccupants] = useState<Occupant[]>([]);
+	const [lastRenderedMap, setLastRenderedMap] = useState<MapId>();
+
+	useEffect(() => {
+		if (location.mapId !== lastRenderedMap) {
+			console.log('reset');
+			setStatefulOccupants([]);
+			setLastRenderedMap(location.mapId);
+		}
+	}, [lastRenderedMap, location.mapId]);
 	useEffect(() => {
 		if (saveFile.troubleMakers && saveFile.troubleMakers.route === map.id) {
 			const all = [
