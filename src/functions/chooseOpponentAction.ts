@@ -169,6 +169,28 @@ export const chooseOpponentAction = ({
 			targetId: controlled.id,
 		};
 	}
+
+	/**
+	 * GOOD STATUS MOVE
+	 */
+	const statusMove = moves.find((m) =>
+		['spore', 'will-o-wisp', 'thunder-wave', 'toxic', 'dark-void'].includes(
+			m.name
+		)
+	);
+	const statusTarget = targets.find(
+		(t) =>
+			t.status === 'ONFIELD' &&
+			!t.primaryAilment &&
+			t.ownerId !== controlled.ownerId
+	);
+	if (statusMove && statusTarget && !random) {
+		return {
+			userId: controlled.id,
+			actionName: statusMove.name,
+			targetId: statusTarget.id,
+		};
+	}
 	/**
 	 * DAMAGING MOVE
 	 */
