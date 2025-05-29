@@ -317,7 +317,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	clefairy: {
 		dexId: 35,
 		types: ['fairy'],
-		encounterOptions: [],
+		encounterOptions: [
+			{
+				maxXp: 125,
+				minXp: 125,
+				route: 'onixCave',
+				rarity: 'ultra-rare',
+				timeOfDay: 'NIGHT',
+				area: 'LAND',
+			},
+		],
 	},
 	clefable: {
 		dexId: 36,

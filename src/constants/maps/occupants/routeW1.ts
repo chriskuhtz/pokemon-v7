@@ -219,4 +219,25 @@ export const routeW1Occupants: OverworldMap['occupants'] = [
 		id: 'routeW1-rage-candy-bar',
 	},
 	routeW1Lure,
+	{
+		type: 'CLIMBING_STEPS',
+		x: 21,
+		y: 40,
+		conditionFunction: () => true,
+		id: 'climbing-steps-routeW1-1',
+	},
+	{
+		type: 'CLIMBING_STEPS',
+		x: 21,
+		y: 41,
+		conditionFunction: () => true,
+		id: 'climbing-steps-routeW1-2',
+	},
+	{
+		type: 'CLIMBING_STEPS',
+		x: 21,
+		y: 42,
+		conditionFunction: () => true,
+		id: 'climbing-steps-routeW1-3',
+	},
 ];

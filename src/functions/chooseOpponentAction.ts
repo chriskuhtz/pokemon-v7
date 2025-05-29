@@ -1,76 +1,14 @@
 import { firstTurnMoves } from '../constants/groupedMoves';
-import { BattleMove, BattlePokemon } from '../interfaces/BattlePokemon';
+import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import {
-	ActionType,
 	BattleFieldEffect,
 	ChooseActionPayload,
 } from '../modules/Battle/BattleField';
 import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
-import { calculateDamage } from './calculateDamage';
-import { determineMultiHits } from './determineMultiHits';
+import { determineHighestDamage } from './determineHighestDamage';
 import { filterTargets } from './filterTargets';
-import { getHeldItem } from './getHeldItem';
 import { getMovesArray } from './getMovesArray';
-
-export const determineHighestDamage = (
-	attacker: BattlePokemon,
-	moves: BattleMove[],
-	targets: BattlePokemon[],
-	weather: WeatherType | undefined,
-	terrain: BattleTerrain | undefined,
-	effects: BattleFieldEffect[]
-): { actionName: ActionType; targetId: string } => {
-	if (targets.length === 0) {
-		return { actionName: 'LOAFING', targetId: attacker.id };
-	}
-	const mapped: { actionName: ActionType; targetId: string; damage: number }[] =
-		moves.flatMap((move) => {
-			if (firstTurnMoves.includes(move.name) && attacker.roundsInBattle !== 1) {
-				return [
-					{
-						actionName: move.name,
-						targetId: targets.at(0)?.id ?? '',
-						damage: 0,
-					},
-				];
-			}
-			return targets.map((target) => ({
-				actionName: move.name,
-				targetId: target.id,
-				damage: calculateDamage(
-					attacker,
-					target,
-					{
-						name: move.name,
-						type: 'BattleAttack',
-						round: 0,
-						data: move.data,
-						targetId: target.id,
-						multiHits: determineMultiHits(
-							move.data,
-							attacker.ability,
-							getHeldItem(attacker)
-						),
-						isAMultiHit: false,
-					},
-					weather,
-					effects,
-					terrain,
-					false,
-					false,
-					false,
-					false,
-					1,
-					() => {}
-				).damage,
-			}));
-		});
-
-	const sorted = mapped.sort((a, b) => b.damage - a.damage);
-
-	return sorted[0];
-};
 
 export const chooseOpponentAction = ({
 	controlled,
@@ -93,7 +31,9 @@ export const chooseOpponentAction = ({
 		filterOutEmpty: true,
 	});
 
-	//determine the best damage move
+	const probablyDead =
+		(controlled.lastReceivedDamage?.damage ?? 0) < controlled.stats.hp / 2;
+
 	const filtered = filterTargets({
 		targets,
 		user: controlled,
@@ -103,7 +43,9 @@ export const chooseOpponentAction = ({
 
 	const random = Math.random() > 0.9;
 
-	//loaf if nothing else
+	/**
+	 * IF YOU CANT DO ANYTHING, JUST LOAF
+	 */
 	if (moves.length === 0) {
 		return {
 			userId: controlled.id,
@@ -111,7 +53,9 @@ export const chooseOpponentAction = ({
 			targetId: filtered[0].id,
 		};
 	}
-	//fake out if possible
+	/**
+	 * USE FIRST TURN MOVE
+	 */
 	const firstTurnMove = moves.find((m) => firstTurnMoves.includes(m.name));
 	const canUseFirstTurnMove = firstTurnMove && controlled.roundsInBattle === 1;
 
@@ -122,9 +66,12 @@ export const chooseOpponentAction = ({
 			targetId: controlled.id,
 		};
 	}
-	//ingrain if possible
+	/**
+	 * INGRAIN IF YOU HAVE IT
+	 */
 	const canIngrain =
 		moves.find((m) => m.name === 'ingrain') &&
+		!probablyDead &&
 		!controlled.secondaryAilments.some((s) => s.type === 'ingrained');
 
 	if (canIngrain) {
@@ -135,14 +82,15 @@ export const chooseOpponentAction = ({
 		};
 	}
 
+	/**
+	 * WEATHER CONTROL
+	 */
 	const weatherMoves: Record<string, WeatherType> = {
 		'rain-dance': 'rain',
 		sandstorm: 'sandstorm',
 		hail: 'hail',
 		'sunny-day': 'sun',
 	};
-
-	//weather control
 	const weatherMove = moves.find((m) =>
 		Object.keys(weatherMoves).includes(m.name)
 	);
@@ -154,13 +102,14 @@ export const chooseOpponentAction = ({
 		};
 	}
 
-	//screens if possible
+	/**
+	 * SET UP SCREENS
+	 */
 	const reflect =
 		moves.find((m) => m.name === 'reflect') &&
 		!effects.some(
 			(e) => e.type === 'reflect' && e.ownerId === controlled.ownerId
 		);
-
 	if (reflect) {
 		return {
 			userId: controlled.id,
@@ -181,28 +130,37 @@ export const chooseOpponentAction = ({
 			targetId: controlled.id,
 		};
 	}
-	//use heal move if low
+	/**
+	 * HEAL IF LOW ON HEALTH AND NOT DEAD ON NEXT TURN
+	 */
 	const healMove = moves.find(
 		(m) => m.data.meta.category.name === 'heal' && m.data.target.name === 'user'
 	);
 
-	if (healMove && controlled.damage > controlled.stats.hp * 0.33 && !random) {
+	if (
+		healMove &&
+		controlled.damage > controlled.stats.hp * 0.33 &&
+		!probablyDead &&
+		!random
+	) {
 		return {
 			userId: controlled.id,
 			actionName: healMove.name,
 			targetId: controlled.id,
 		};
 	}
-	//use setup on first turn
+	/**
+	 * SETUP MOVE IF NOT BOOSTED YET AND IN GOOD HEALTH
+	 */
 	const setupMove = moves.find(
 		(m) =>
 			m.data.meta.category.name === 'net-good-stats' &&
 			m.data.target.name === 'user'
 	);
-
 	if (
 		setupMove &&
 		Object.values(controlled.statBoosts).every((boost) => boost <= 0) &&
+		!probablyDead &&
 		!random
 	) {
 		return {
@@ -212,6 +170,30 @@ export const chooseOpponentAction = ({
 		};
 	}
 
+	/**
+	 * GOOD STATUS MOVE
+	 */
+	const statusMove = moves.find((m) =>
+		['spore', 'will-o-wisp', 'thunder-wave', 'toxic', 'dark-void'].includes(
+			m.name
+		)
+	);
+	const statusTarget = targets.find(
+		(t) =>
+			t.status === 'ONFIELD' &&
+			!t.primaryAilment &&
+			t.ownerId !== controlled.ownerId
+	);
+	if (statusMove && statusTarget && !random) {
+		return {
+			userId: controlled.id,
+			actionName: statusMove.name,
+			targetId: statusTarget.id,
+		};
+	}
+	/**
+	 * DAMAGING MOVE
+	 */
 	const { targetId, actionName } = determineHighestDamage(
 		controlled,
 		moves,

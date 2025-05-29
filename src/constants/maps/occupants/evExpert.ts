@@ -5,9 +5,9 @@ const evExpertBase: Omit<
 	OverworldNpc,
 	'unhandledMessage' | 'conditionFunction' | 'id'
 > = {
-	x: 15,
-	y: 3,
-	orientation: 'DOWN',
+	x: 12,
+	y: 5,
+	orientation: 'UP',
 	type: 'NPC',
 	sprite: SpriteEnum.trent,
 };

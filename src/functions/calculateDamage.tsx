@@ -242,6 +242,15 @@ export const calculateDamage = (
 	}
 
 	const atk = () => {
+		if (attack.name === 'body-press') {
+			return calculateModifiedStat(
+				'defense',
+				attacker,
+				battleFieldEffects.some(
+					(e) => e.type === 'flower-gift' && e.ownerId === attacker.ownerId
+				)
+			);
+		}
 		if (attack.name === 'foul-play') {
 			return calculateModifiedStat(
 				'attack',
@@ -700,6 +709,11 @@ export const calculateDamage = (
 		attacker.ability === 'sharpness' && slicingMoves.includes(attack.name)
 			? 1.5
 			: 1;
+	const earlyMoverFactor =
+		(attack.name === 'bolt-beak' || attack.name === 'fishious-rend') &&
+		target.moveQueue.length !== 0
+			? 2
+			: 1;
 	const res = Math.max(
 		Math.floor(
 			pureDamage *
@@ -807,7 +821,8 @@ export const calculateDamage = (
 				puriSaltFactor *
 				windRiderFactor *
 				rockyPayloadFactor *
-				sharpnessFactor
+				sharpnessFactor *
+				earlyMoverFactor
 		),
 		1
 	);

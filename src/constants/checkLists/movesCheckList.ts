@@ -2761,28 +2761,95 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/748/',
 		handled: true,
 	},
-	{ name: 'tar-shot', url: 'https://pokeapi.co/api/v2/move/749/' },
-	{ name: 'magic-powder', url: 'https://pokeapi.co/api/v2/move/750/' },
-	{ name: 'dragon-darts', url: 'https://pokeapi.co/api/v2/move/751/' },
-	{ name: 'teatime', url: 'https://pokeapi.co/api/v2/move/752/' },
-	{ name: 'octolock', url: 'https://pokeapi.co/api/v2/move/753/' },
-	{ name: 'bolt-beak', url: 'https://pokeapi.co/api/v2/move/754/' },
-	{ name: 'fishious-rend', url: 'https://pokeapi.co/api/v2/move/755/' },
-	{ name: 'court-change', url: 'https://pokeapi.co/api/v2/move/756/' },
-	{ name: 'clangorous-soul', url: 'https://pokeapi.co/api/v2/move/775/' },
-	{ name: 'body-press', url: 'https://pokeapi.co/api/v2/move/776/' },
-	{ name: 'decorate', url: 'https://pokeapi.co/api/v2/move/777/' },
-	{ name: 'drum-beating', url: 'https://pokeapi.co/api/v2/move/778/' },
-	{ name: 'snap-trap', url: 'https://pokeapi.co/api/v2/move/779/' },
-	{ name: 'pyro-ball', url: 'https://pokeapi.co/api/v2/move/780/' },
-	{ name: 'behemoth-blade', url: 'https://pokeapi.co/api/v2/move/781/' },
-	{ name: 'behemoth-bash', url: 'https://pokeapi.co/api/v2/move/782/' },
-	{ name: 'aura-wheel', url: 'https://pokeapi.co/api/v2/move/783/' },
-	{ name: 'breaking-swipe', url: 'https://pokeapi.co/api/v2/move/784/' },
-	{ name: 'branch-poke', url: 'https://pokeapi.co/api/v2/move/785/' },
-	{ name: 'overdrive', url: 'https://pokeapi.co/api/v2/move/786/' },
-	{ name: 'apple-acid', url: 'https://pokeapi.co/api/v2/move/787/' },
-	{ name: 'grav-apple', url: 'https://pokeapi.co/api/v2/move/788/' },
+
+	{
+		name: 'magic-powder',
+		url: 'https://pokeapi.co/api/v2/move/750/',
+		handled: true,
+	},
+
+	{
+		name: 'octolock',
+		url: 'https://pokeapi.co/api/v2/move/753/',
+		handled: true,
+	},
+	{
+		name: 'bolt-beak',
+		url: 'https://pokeapi.co/api/v2/move/754/',
+		handled: true,
+	},
+	{
+		name: 'fishious-rend',
+		url: 'https://pokeapi.co/api/v2/move/755/',
+		handled: true,
+	},
+
+	{
+		name: 'clangorous-soul',
+		url: 'https://pokeapi.co/api/v2/move/775/',
+		handled: true,
+	},
+	{
+		name: 'body-press',
+		url: 'https://pokeapi.co/api/v2/move/776/',
+		handled: true,
+	},
+	{
+		name: 'decorate',
+		url: 'https://pokeapi.co/api/v2/move/777/',
+		handled: true,
+	},
+	{
+		name: 'drum-beating',
+		url: 'https://pokeapi.co/api/v2/move/778/',
+		handled: true,
+	},
+	{
+		name: 'snap-trap',
+		url: 'https://pokeapi.co/api/v2/move/779/',
+		handled: true,
+	},
+	{
+		name: 'pyro-ball',
+		url: 'https://pokeapi.co/api/v2/move/780/',
+		handled: true,
+	},
+	{
+		name: 'behemoth-blade',
+		url: 'https://pokeapi.co/api/v2/move/781/',
+		handled: true,
+	},
+	{
+		name: 'behemoth-bash',
+		url: 'https://pokeapi.co/api/v2/move/782/',
+		handled: true,
+	},
+
+	{
+		name: 'breaking-swipe',
+		url: 'https://pokeapi.co/api/v2/move/784/',
+		handled: true,
+	},
+	{
+		name: 'branch-poke',
+		url: 'https://pokeapi.co/api/v2/move/785/',
+		handled: true,
+	},
+	{
+		name: 'overdrive',
+		url: 'https://pokeapi.co/api/v2/move/786/',
+		handled: true,
+	},
+	{
+		name: 'apple-acid',
+		url: 'https://pokeapi.co/api/v2/move/787/',
+		handled: true,
+	},
+	{
+		name: 'grav-apple',
+		url: 'https://pokeapi.co/api/v2/move/788/',
+		handled: true,
+	},
 	{ name: 'spirit-break', url: 'https://pokeapi.co/api/v2/move/789/' },
 	{ name: 'strange-steam', url: 'https://pokeapi.co/api/v2/move/790/' },
 	{ name: 'life-dew', url: 'https://pokeapi.co/api/v2/move/791/' },
@@ -2967,6 +3034,14 @@ export const movesCheckList: {
 	{ name: 'snipe-shot', url: 'https://pokeapi.co/api/v2/move/745/' },
 	{ name: 'jaw-lock', url: 'https://pokeapi.co/api/v2/move/746/' },
 	{ name: 'stuff-cheeks', url: 'https://pokeapi.co/api/v2/move/747/' },
+	{
+		name: 'tar-shot',
+		url: 'https://pokeapi.co/api/v2/move/749/',
+	},
+	{ name: 'dragon-darts', url: 'https://pokeapi.co/api/v2/move/751/' },
+	{ name: 'teatime', url: 'https://pokeapi.co/api/v2/move/752/' },
+	{ name: 'court-change', url: 'https://pokeapi.co/api/v2/move/756/' },
+	{ name: 'aura-wheel', url: 'https://pokeapi.co/api/v2/move/783/' },
 ];
 
 export const handledMoves = [
@@ -3531,6 +3606,22 @@ export const handledMoves = [
 	'photon-geyser',
 	'double-iron-bash',
 	'no-retreat',
+	'magic-powder',
+	'bolt-beak',
+	'fishious-rend',
+	'clangorous-soul',
+	'body-press',
+	'decorate',
+	'drum-beating',
+	'snap-trap',
+	'behemoth-blade',
+	'behemoth-bash',
+	'pyro-ball',
+	'breaking-swipe',
+	'branch-poke',
+	'overdrive',
+	'apple-acid',
+	'grav-apple',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

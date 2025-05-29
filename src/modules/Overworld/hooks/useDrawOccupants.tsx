@@ -124,6 +124,7 @@ const drawOccupant = (
 			case 'SWARM_RADAR':
 			case 'ROCKET_RADIO':
 			case 'ROCK':
+			case 'CLIMBING_STEPS':
 			case 'BUSH':
 				ctx?.drawImage(
 					img,
@@ -180,6 +181,8 @@ const getSource = (occ: Occupant) => {
 			return '/mapObjects/apricornEmpty.png';
 		case 'BERRY_LURE':
 			return '/mapObjects/berry_lure.png';
+		case 'CLIMBING_STEPS':
+			return '/mapObjects/climbingSteps.png';
 		case 'ON_STEP_PORTAL':
 			return occ.sprite ?? '';
 

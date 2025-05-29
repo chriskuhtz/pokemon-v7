@@ -46,6 +46,7 @@ export const OCCUPANT_TYPES = [
 	'BERRY_LURE',
 	'SNORLAX',
 	'TELEPORTER_NPC',
+	'CLIMBING_STEPS',
 ] as const;
 export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
@@ -116,6 +117,9 @@ export interface OverworldBush extends BaseOccupant {
 }
 export interface OverworldRock extends BaseOccupant {
 	type: 'ROCK';
+}
+export interface OverworldClimbingSteps extends BaseOccupant {
+	type: 'CLIMBING_STEPS';
 }
 export interface OverworldHoneyTree extends BaseOccupant {
 	type: 'HONEY_TREE';
@@ -241,7 +245,8 @@ export type Occupant =
 	| OverworldStrangeTree
 	| ApricornTree
 	| EmptyApricornTree
-	| TeleporterNpc;
+	| TeleporterNpc
+	| OverworldClimbingSteps;
 
 export type EncounterRarity = 'common' | 'medium' | 'rare' | 'ultra-rare';
 

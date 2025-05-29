@@ -526,26 +526,32 @@ export const extraFeatureCheckList: {
 	{ name: 'routeN1 occs on routeN1E1', handled: true },
 	{ name: 'Quests for dogs', handled: true },
 	{
-		name: `Moves die mehrmals in der selben runde passieren z.b. doppel kick verhalten sich sonderbar.
-Sie finden nicht immer gleich hintereinander statt also manchmal ist 1ster kick dann andere attacke von anderem pokemon und dann 2ter kick, das passiert aber nur manchmal
-Der zweite doppelkick trifft auch untergetauchte pokemon
-Anmerkung: beides nur mit doppel kick getestet`,
+		name: `fix multihit order`,
 		handled: true,
 	},
 	{ name: 'unlock berry lure after catching all mons on route', handled: true },
 	{ name: 'each berry lure on takes specific berries', handled: true },
+	{ name: 'move switching? PP Used?', handled: true },
+	{ name: 'completely rework opponent decision tree', handled: true },
+	{ name: 'stronger misty', handled: true },
+	{ name: 'rock climbing', handled: true },
+	{ name: 'whitney', handled: true },
+	{ name: 'Gym Leader as quest type', handled: true },
+	{ name: 'Travelling Trainer as quest type', handled: true },
+	{ name: 'download your player snapshot', handled: true },
+	{ name: 'import other players snapshots', handled: true },
+	{ name: 'defeat an imported trainer quest', handled: true },
+	{ name: 'repair raticate quest', handled: true },
+	{ name: 'jasmine', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
 	{ name: 'rollout stops stacking when target is defeated' },
-	{ name: 'completely rework opponent decision tree' },
 	//CONTENT:
-	{ name: 'whitney' },
-	{ name: 'jasmine' },
+
 	{ name: 'pryce' },
 	{ name: 'claire' },
 	{ name: 'e4 challenge' },
-	{ name: 'rock climbing' },
 	{ name: 'eggs?' },
 	{ name: 'Fishing?' },
 	{ name: 'magma/aqua quests from Looker' },
@@ -555,16 +561,18 @@ Anmerkung: beides nur mit doppel kick getestet`,
 	{ name: 'ev grind mode for challenge field' },
 	{ name: 'trainer with simple/costar combo' },
 	{ name: 'steven as the fossil protector' },
-	{ name: 'download your player file and share it with others' },
 	{ name: 'more legendary stories' },
 	{ name: 'cave of shadows where you face yourself' },
+	{ name: 'gym leaders give badges as rewards' },
 	{
 		name: `Apricorn Bälle:
 Ein paar (langweiligere) Ideen
 DarkRed-Apricorn: Vulcan Balls: Bonus for Fire and Stone Pokemon
 Beige-Apricorn: Sand-Storm Balls: Bonus for Ground and Flying Pokemon
-Purple-Apricorn: Nightmare Balls: Bonus for Psycho, Dark, and Ghost Pokemon`,
+LightBlue-Apricorn: SnowCloud Balls: Bonus for Ice and Fairy Pokemon
+Purple-Apricorn: Spooky Balls: Bonus for Psycho, Dark, and Ghost Pokemon`,
 	},
+	{ name: 'more rock climbing spots' },
 	//SETTINGS:
 	{ name: 'random encounters' },
 	{ name: 'random evolutions' },

@@ -28,7 +28,10 @@ export const AbilityInfoButton = ({
 		if (res && skip === false && !latestMessage) {
 			addMultipleMessages([
 				{
-					message: res['effect_entries'][0]['short_effect'],
+					message:
+						res['effect_entries'].find(
+							(entry) => entry.language.name === 'en'
+						)?.['short_effect'] ?? 'No description available',
 					onRemoval: () => {
 						invalidate();
 						setSkip(true);

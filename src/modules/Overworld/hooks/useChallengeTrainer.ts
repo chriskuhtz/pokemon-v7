@@ -1,9 +1,7 @@
 import { useCallback, useContext } from 'react';
-import {
-	makeRandomTrainer,
-	trainers,
-} from '../../../functions/makeRandomTrainer';
+import { makeRandomTrainer } from '../../../functions/makeRandomTrainer';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
+import { trainers } from '../../../constants/trainersRecord';
 
 export const useChallengeTrainer = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);

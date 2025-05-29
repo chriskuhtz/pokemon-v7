@@ -1,10 +1,10 @@
-import { trainersWeakToStrong } from '../../../functions/makeRandomTrainer';
 import {
 	OverworldMap,
 	OverworldTrainer,
 } from '../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { challengeFieldId } from '../../gameData';
+import { trainersWeakToStrong } from '../../trainersRecord';
 
 export const challengeFieldOccupants: OverworldMap['occupants'] = [
 	{

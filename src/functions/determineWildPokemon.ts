@@ -3,9 +3,11 @@ import {
 	lowBstPokemon,
 	midBstPokemon,
 } from '../constants/baseStatRecord';
-import { getRandomEncounter } from '../constants/internalDex';
+import { getRandomEncounter, isNotCatchable } from '../constants/internalDex';
+import { internalDex } from '../constants/internalDexData';
 import { MapId } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
+import { BattleTeamConfig } from '../hooks/useGetBattleTeam';
 import { getRandomNature } from '../interfaces/Natures';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { CatchStreak, PokemonSwarm, SaveFile } from '../interfaces/SaveFile';
@@ -26,7 +28,8 @@ export const determineWildPokemon = (
 	currentSwarm?: PokemonSwarm,
 	currentStrongSwarm?: PokemonSwarm,
 	currentDistortionSwarm?: PokemonSwarm
-): OwnedPokemon[] => {
+): { team: OwnedPokemon[]; battleTeamConfig: BattleTeamConfig } => {
+	let battleTeamConfig: BattleTeamConfig = {};
 	const timeOfDay = getTimeOfDay();
 	const applyStreakBoosts = (input: OwnedPokemon): OwnedPokemon => {
 		if (catchStreak?.pokemon === input.name) {
@@ -85,10 +88,15 @@ export const determineWildPokemon = (
 			),
 		];
 	} else if (lure === 'lure') {
+		const name = getRandomEntry(
+			Object.entries(lowBstPokemon).filter(([p]) =>
+				isNotCatchable(internalDex[p as PokemonName])
+			)
+		)[0] as PokemonName;
 		encounter = [
 			makeChallengerPokemon({
 				nature: getRandomNature(),
-				name: getRandomEntry(Object.entries(lowBstPokemon))[0] as PokemonName,
+				name,
 				xp: getMiddleOfThree([
 					1000,
 					8000,
@@ -97,10 +105,15 @@ export const determineWildPokemon = (
 			}),
 		];
 	} else if (lure === 'super-lure') {
+		const name = getRandomEntry(
+			Object.entries(midBstPokemon).filter(([p]) =>
+				isNotCatchable(internalDex[p as PokemonName])
+			)
+		)[0] as PokemonName;
 		encounter = [
 			makeChallengerPokemon({
 				nature: getRandomNature(),
-				name: getRandomEntry(Object.entries(midBstPokemon))[0] as PokemonName,
+				name,
 				xp: getMiddleOfThree([
 					27000,
 					8000,
@@ -109,10 +122,15 @@ export const determineWildPokemon = (
 			}),
 		];
 	} else if (lure === 'max-lure') {
+		const name = getRandomEntry(
+			Object.entries(highBstPokemon).filter(([p]) =>
+				isNotCatchable(internalDex[p as PokemonName])
+			)
+		)[0] as PokemonName;
 		encounter = [
 			makeChallengerPokemon({
 				nature: getRandomNature(),
-				name: getRandomEntry(Object.entries(highBstPokemon))[0] as PokemonName,
+				name,
 				xp: getMiddleOfThree([
 					27000,
 					125000,
@@ -137,10 +155,11 @@ export const determineWildPokemon = (
 	) {
 		encounter = [
 			makeChallengerPokemon(
-				{ name: 'raticate', xp: 27000 },
+				{ name: 'raticate', xp: 27000, heldItemName: 'oaks-parcel' },
 				{ increasedShinyFactor: 16 * shinyFactor }
 			),
 		];
+		battleTeamConfig = { assignHeldItem: false };
 	} else if (swarm && Math.random() > 0.5) {
 		encounter = [
 			makeChallengerPokemon(
@@ -195,5 +214,5 @@ export const determineWildPokemon = (
 				  ];
 	}
 
-	return encounter.map(applyStreakBoosts);
+	return { team: encounter.map(applyStreakBoosts), battleTeamConfig };
 };

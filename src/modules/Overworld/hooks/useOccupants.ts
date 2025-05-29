@@ -29,9 +29,9 @@ export const useOccupants = () => {
 		}
 	}, [lastRenderedMap, location.mapId]);
 	useEffect(() => {
+		const all = [...map.occupants];
 		if (saveFile.troubleMakers && saveFile.troubleMakers.route === map.id) {
-			const all = [
-				...map.occupants,
+			all.push(
 				...saveFile.troubleMakers.trainers.map((t) => {
 					if (
 						[
@@ -58,16 +58,10 @@ export const useOccupants = () => {
 						conditionFunction: () =>
 							!saveFile.handledOccupants.some((h) => h.id === t.id),
 					};
-				}),
-			];
-
-			const length = all.length;
-			if (statefulOccupants.length !== length) {
-				setStatefulOccupants(all);
-			}
-
-			return;
-		} else if (
+				})
+			);
+		}
+		if (
 			saveFile.currentRampagingPokemon &&
 			saveFile.currentRampagingPokemon.route === map.id
 		) {
@@ -77,34 +71,35 @@ export const useOccupants = () => {
 				Math.random() * 1000000,
 				1000000,
 			]);
-			const all: Occupant[] = [
-				...map.occupants,
-				{
-					type: 'POKEMON',
-					x,
-					y,
-					orientation: getRandomOrientation(),
-					dexId: internalDex[name].dexId,
-					encounter: {
-						name: name,
-						maxXp: xp,
-						minXp: xp,
-						rarity: 'common',
-					},
-					dialogue: [`The rampaging ${name} attacks`],
-					conditionFunction: (s) => !occupantHandled(s, id),
-
-					id,
+			all.push({
+				type: 'POKEMON',
+				x,
+				y,
+				orientation: getRandomOrientation(),
+				dexId: internalDex[name].dexId,
+				encounter: {
+					name: name,
+					maxXp: xp,
+					minXp: xp,
+					rarity: 'common',
 				},
-			];
-			const length = all.length;
-			if (statefulOccupants.length !== length) {
-				setStatefulOccupants(all);
-			}
+				dialogue: [`The rampaging ${name} attacks`],
+				conditionFunction: (s) => !occupantHandled(s, id),
 
-			return;
+				id,
+			});
 		}
-		setStatefulOccupants(map.occupants);
+		const impo = saveFile.importedChallenger;
+		if (impo && impo.mapId === map.id) {
+			all.push({
+				...impo,
+				team: () => impo.team,
+				conditionFunction: () => true,
+			});
+		}
+		if (statefulOccupants.length !== all.length) {
+			setStatefulOccupants(all);
+		}
 	}, [
 		map,
 		saveFile.troubleMakers,

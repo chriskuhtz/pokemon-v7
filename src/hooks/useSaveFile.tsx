@@ -100,7 +100,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 	//handle side effects here
 	const setSaveFile = useCallback((u: SaveFile) => {
 		const update = { ...u };
-		const newTime = new Date().getTime();
+		const now = new Date().getTime();
 
 		let pokedex = update.pokedex ?? emptyPokedex;
 
@@ -114,33 +114,27 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 
 		s({
 			...update,
-			lastEdited: newTime,
+			lastEdited: now,
 			pokedex,
-			//migrate pokemon
-			//pokemon: update.pokemon.map(migratePokemon),
-			//migrate inventory
 			bag: joinInventories(EmptyInventory, update.bag),
 			handledOccupants: update.handledOccupants.filter(
-				(h) => h.resetAt < 0 || h.resetAt > newTime
+				(h) => h.resetAt < 0 || h.resetAt > now
 			),
 			currentSwarm:
-				update.currentSwarm && newTime > update.currentSwarm?.leavesAt
+				update.currentSwarm && now > update.currentSwarm?.leavesAt
 					? undefined
 					: update.currentSwarm,
 			currentStrongSwarm:
-				update.currentStrongSwarm &&
-				newTime > update.currentStrongSwarm?.leavesAt
+				update.currentStrongSwarm && now > update.currentStrongSwarm?.leavesAt
 					? undefined
 					: update.currentStrongSwarm,
 			currentDistortionSwarm:
 				update.currentDistortionSwarm &&
-				newTime > update.currentDistortionSwarm?.leavesAt
+				now > update.currentDistortionSwarm?.leavesAt
 					? undefined
 					: update.currentDistortionSwarm,
 			troubleMakers:
-				(update.troubleMakers?.leavesAt &&
-					newTime > update.troubleMakers?.leavesAt) ||
-				!update.troubleMakers?.leavesAt
+				update.troubleMakers?.leavesAt && now > update.troubleMakers?.leavesAt
 					? undefined
 					: update.troubleMakers,
 		});

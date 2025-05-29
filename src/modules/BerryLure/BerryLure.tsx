@@ -97,22 +97,27 @@ export const BerryLure = () => {
 			if (succeded) {
 				addMultipleMessages([
 					{
+						icon: <ItemSprite item={berry} />,
 						message: `You place a ${berry} in the lure and hide nearby`,
 						needsNoConfirmation: true,
 					},
 					{
+						icon: <ItemSprite item={berry} />,
 						message: `...waiting`,
 						needsNoConfirmation: true,
 					},
 					{
+						icon: <ItemSprite item={berry} />,
 						message: `..waiting.`,
 						needsNoConfirmation: true,
 					},
 					{
+						icon: <ItemSprite item={berry} />,
 						message: `.waiting..`,
 						needsNoConfirmation: true,
 					},
 					{
+						icon: <ItemSprite item={berry} />,
 						message: `A Pokemon tries to snatch the berry`,
 						onRemoval: () => {
 							patchSaveFileReducer({
@@ -138,25 +143,31 @@ export const BerryLure = () => {
 			} else {
 				addMultipleMessages([
 					{
+						icon: <ItemSprite item={berry} />,
 						message: `You place a ${berry} in the lure and hide nearby`,
 						needsNoConfirmation: true,
 					},
 					{
+						icon: <ItemSprite item={berry} />,
 						message: `...waiting`,
 						needsNoConfirmation: true,
 					},
 					{
+						icon: <ItemSprite item={berry} />,
 						message: `..waiting.`,
 						needsNoConfirmation: true,
 					},
 					{
+						icon: <ItemSprite item={berry} />,
 						message: `.waiting..`,
 						needsNoConfirmation: true,
 					},
 					{
+						icon: <ItemSprite item={berry} />,
 						message: 'A nimble pokemon must have snatched the berry',
 					},
 					{
+						icon: <ItemSprite item={berry} />,
 						message: 'while you looked away',
 						onRemoval: () => {
 							patchSaveFileReducer({

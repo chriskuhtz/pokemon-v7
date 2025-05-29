@@ -124,6 +124,15 @@ export type MileStonesObject = {
 	nDefeatedAt?: number;
 	redDefeatedAt?: number;
 	hughDefeatedAt?: number;
+	importedChallengerDefeatedAt?: number;
+};
+
+export type ImportedChallenger = Omit<
+	OverworldTrainer,
+	'team' | 'conditionFunction'
+> & {
+	mapId: MapId;
+	team: OwnedPokemon[];
 };
 export interface SaveFile {
 	badges: BadgeName[];
@@ -182,4 +191,5 @@ export interface SaveFile {
 	catchStreak?: CatchStreak;
 	longestStreak?: number;
 	flying?: boolean;
+	importedChallenger?: ImportedChallenger;
 }
