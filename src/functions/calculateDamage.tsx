@@ -163,7 +163,7 @@ export const calculateDamage = (
 			damage: attacker.stats.hp - attacker.damage,
 		};
 	}
-	if (attack.name === 'super-fang') {
+	if (attack.name === 'super-fang' || attack.name === 'natures-madness') {
 		return {
 			damage: Math.floor(
 				getMiddleOfThree([
