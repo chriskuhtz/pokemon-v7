@@ -440,7 +440,7 @@ export const questNames = [
 	'catch all past distortion pokemon',
 	'catch a space distortion pokemon',
 	'catch all space distortion pokemon',
-	'train a pidgeot to lvl 100',
+	'train a pidgeot to lvl 70',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -3268,7 +3268,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				(f) => s.pokedex[f].caughtOnRoutes.length > 0
 			),
 	},
-	'train a pidgeot to lvl 100': {
+	'train a pidgeot to lvl 70': {
 		kind: 'BULLETIN',
 		category: 'TRAINING',
 		researchPoints: 100,
@@ -3278,7 +3278,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			s.pokemon.some(
 				(p) =>
 					p.name === 'pidgeot' &&
-					calculateLevelData(p.xp, p.growthRate).level === 100
+					calculateLevelData(p.xp, p.growthRate).level >= 70
 			),
 	},
 } as Record<QuestName, Quest>;
