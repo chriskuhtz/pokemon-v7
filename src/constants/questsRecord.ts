@@ -281,6 +281,7 @@ export const questNames = [
 	'defeat morty',
 	'defeat bugsy',
 	'defeat whitney',
+	'defeat jasmine',
 	'revive a fossil',
 	'revive all different fossils',
 	'evolve your starter pokemon',

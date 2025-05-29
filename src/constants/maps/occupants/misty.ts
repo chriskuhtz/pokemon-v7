@@ -15,7 +15,7 @@ const mistyTeam = () => [
 		xp: 46656,
 		nature: 'bold',
 		heldItemName: 'leftovers',
-		ability: 'drizzle',
+		ability: 'lightning-rod',
 		fixedAbility: true,
 		happiness: 255,
 		firstMove: { name: 'reflect', usedPP: 0 },
