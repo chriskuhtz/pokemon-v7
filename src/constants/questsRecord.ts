@@ -10,12 +10,13 @@ import {
 } from '../functions/makeRandomTrainer';
 import { sumOfIvs } from '../functions/sumOfIvs';
 
-import { Inventory } from '../interfaces/Inventory';
 import {
 	apricorns,
 	apricornTable,
 	berries,
+	expCandyPackage,
 	fossilTable,
+	smallExpCandyPackage,
 } from '../interfaces/Item';
 import { getRandomNature } from '../interfaces/Natures';
 import { Quest } from '../interfaces/Quest';
@@ -50,20 +51,6 @@ import { allRocketCampTrainersDefeated } from './maps/occupants/rocketCampOccupa
 import { sabrinaId } from './maps/occupants/sabrina';
 import { surgeId } from './maps/occupants/surge';
 import { PokemonName, pokemonNames } from './pokemonNames';
-
-const expCandyPackage: Partial<Inventory> = {
-	'exp-candy-xs': 10,
-	'exp-candy-s': 10,
-	'exp-candy-m': 10,
-	'exp-candy-l': 5,
-	'exp-candy-xl': 2,
-};
-const smallExpCandyPackage: Partial<Inventory> = {
-	'exp-candy-xs': 10,
-	'exp-candy-s': 10,
-	'exp-candy-m': 5,
-	'exp-candy-l': 1,
-};
 
 export const questNames = [
 	'catch a fire pokemon',
@@ -321,12 +308,12 @@ export const questNames = [
 	'reach cooking skill 50',
 	'reach cooking skill 100',
 	'lure a pokemon with a berry',
-	'lure 10 different pokemon with berries',
-	'lure 20 different pokemon with berries',
-	'lure 30 different pokemon with berries',
-	'lure 40 different pokemon with berries',
-	'lure 50 different pokemon with berries',
-	'lure 60 different pokemon with berries',
+	'berry-lure all different pokemon from routeN1',
+	'berry-lure all different pokemon from routeN1E1',
+	'berry-lure all different pokemon from routeE1',
+	'berry-lure all different pokemon from routeS1E1',
+	'berry-lure all different pokemon from routeS1W1',
+	'berry-lure all different pokemon from routeW1',
 	'catch a pokemon from a swarm',
 	'catch 3 different pokemon from swarms',
 	'catch 10 different pokemon from swarms',
@@ -2231,87 +2218,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...smallExpCandyPackage,
 		},
 		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 0,
-	},
-	'lure 10 different pokemon with berries': {
-		category: 'RESEARCH',
-		kind: 'BULLETIN',
-		requiredUpgrade: 'berry lure station routeN1',
-		availableAfter: 'lure a pokemon with a berry',
-		researchPoints: 60,
-		rewardItems: {
-			'chople-berry': 1,
-			'shuca-berry': 1,
-			'coba-berry': 1,
-			'payapa-berry': 1,
-			...smallExpCandyPackage,
-		},
-		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 9,
-	},
-	'lure 20 different pokemon with berries': {
-		category: 'RESEARCH',
-		kind: 'BULLETIN',
-		requiredUpgrade: 'berry lure station routeN1',
-		availableAfter: 'lure 10 different pokemon with berries',
-		researchPoints: 80,
-		rewardItems: {
-			'tanga-berry': 1,
-			'charti-berry': 1,
-			'kasib-berry': 1,
-			'colbur-berry': 1,
-			'babiri-berry': 1,
-			...smallExpCandyPackage,
-		},
-		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 19,
-	},
-	'lure 30 different pokemon with berries': {
-		category: 'RESEARCH',
-		kind: 'BULLETIN',
-		requiredUpgrade: 'berry lure station routeN1',
-		availableAfter: 'lure 20 different pokemon with berries',
-		researchPoints: 100,
-		rewardItems: {
-			'golden-nanab-berry': 3,
-			'golden-pinap-berry': 3,
-			'golden-razz-berry': 3,
-			...expCandyPackage,
-		},
-		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 29,
-	},
-	'lure 40 different pokemon with berries': {
-		category: 'RESEARCH',
-		kind: 'BULLETIN',
-		requiredUpgrade: 'berry lure station routeN1',
-		availableAfter: 'lure 30 different pokemon with berries',
-		researchPoints: 100,
-		rewardItems: {
-			'rare-candy': 10,
-			...expCandyPackage,
-		},
-		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 39,
-	},
-	'lure 50 different pokemon with berries': {
-		category: 'RESEARCH',
-		kind: 'BULLETIN',
-		requiredUpgrade: 'berry lure station routeN1',
-		availableAfter: 'lure 40 different pokemon with berries',
-		researchPoints: 70,
-		rewardItems: {
-			'rare-candy': 100,
-			...expCandyPackage,
-		},
-		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 49,
-	},
-	'lure 60 different pokemon with berries': {
-		category: 'RESEARCH',
-		kind: 'BULLETIN',
-		requiredUpgrade: 'berry lure station routeN1',
-		availableAfter: 'lure 50 different pokemon with berries',
-		researchPoints: 100,
-		rewardItems: {
-			'rare-candy': 10,
-			...expCandyPackage,
-		},
-		conditionFunction: (s) => s.mileStones.luredWithBerries.length > 59,
 	},
 	'catch a pokemon from a swarm': {
 		category: 'EXPLORATION',

@@ -206,7 +206,7 @@ export interface Ledge extends BaseOccupant {
 export interface StorageChest extends BaseOccupant {
 	type: 'STORAGE_CHEST';
 }
-export interface BerryLure extends BaseOccupant {
+export interface OverworldBerryLure extends BaseOccupant {
 	type: 'BERRY_LURE';
 }
 
@@ -236,7 +236,7 @@ export type Occupant =
 	| RocketRadio
 	| OverworldRock
 	| StorageChest
-	| BerryLure
+	| OverworldBerryLure
 	| OverworldSnorlax
 	| OverworldStrangeTree
 	| ApricornTree

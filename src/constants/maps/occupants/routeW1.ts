@@ -1,6 +1,7 @@
 import { getTimeOfDay } from '../../../functions/getTimeOfDay';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
+import { routeW1Lure } from '../../../modules/BerryLure/BerryLure';
 import { travellingMerchantRouteW1 } from '../../../modules/TravellingMerchant/TravellingMerchant';
 import { gary } from './gary';
 
@@ -217,4 +218,5 @@ export const routeW1Occupants: OverworldMap['occupants'] = [
 			!s.handledOccupants.some((h) => h.id === 'routeW1-rage-candy-bar'),
 		id: 'routeW1-rage-candy-bar',
 	},
+	routeW1Lure,
 ];
