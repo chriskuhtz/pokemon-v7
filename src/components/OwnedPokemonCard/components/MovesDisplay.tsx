@@ -14,9 +14,11 @@ import { MoveInfoButton } from '../../MoveInfoButton/MoveInfoButton';
 export const MovesDisplay = ({
 	ownedPokemon,
 	setMoves,
+	onlyCurrent,
 }: {
 	ownedPokemon: OwnedPokemon;
 	setMoves: (id: string, moves: MoveName[]) => void;
+	onlyCurrent?: boolean;
 }) => {
 	const currentMoves = useMemo(
 		() => getMovesArray(ownedPokemon).map((m) => m.name),
@@ -78,6 +80,9 @@ export const MovesDisplay = ({
 							disabled={!currentMoves.includes(o) && currentMoves.length === 4}
 							icon={<MdOutlineRadioButtonChecked />}
 							onClick={() => {
+								if (onlyCurrent) {
+									return;
+								}
 								if (currentMoves.includes(o)) {
 									if (currentMoves.length === 1) {
 										return;
@@ -99,43 +104,44 @@ export const MovesDisplay = ({
 					<MoveInfoButton movename={o} />
 				</div>
 			))}
-			{ownedPokemon.unlockedMoves
-				.filter((u) => !currentMoves.includes(u))
-				.map((o) => (
-					<div
-						key={o}
-						style={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}
-					>
-						<div style={{ flexGrow: 1 }}>
-							<Card
-								key={o}
-								actionElements={[]}
-								disabled={
-									!currentMoves.includes(o) && currentMoves.length === 4
-								}
-								icon={<MdRadioButtonUnchecked />}
-								onClick={() => {
-									if (currentMoves.includes(o)) {
-										if (currentMoves.length === 1) {
-											return;
-										} else
-											setMoves(
-												ownedPokemon.id,
-												currentMoves.filter((c) => c !== o)
-											);
+			{!onlyCurrent &&
+				ownedPokemon.unlockedMoves
+					.filter((u) => !currentMoves.includes(u))
+					.map((o) => (
+						<div
+							key={o}
+							style={{ display: 'flex', alignItems: 'center', gap: '.5rem' }}
+						>
+							<div style={{ flexGrow: 1 }}>
+								<Card
+									key={o}
+									actionElements={[]}
+									disabled={
+										!currentMoves.includes(o) && currentMoves.length === 4
 									}
-									if (!currentMoves.includes(o)) {
-										if (currentMoves.length === 4) {
-											return;
-										} else setMoves(ownedPokemon.id, [...currentMoves, o]);
-									}
-								}}
-								content={<strong>{o}</strong>}
-							/>
+									icon={<MdRadioButtonUnchecked />}
+									onClick={() => {
+										if (currentMoves.includes(o)) {
+											if (currentMoves.length === 1) {
+												return;
+											} else
+												setMoves(
+													ownedPokemon.id,
+													currentMoves.filter((c) => c !== o)
+												);
+										}
+										if (!currentMoves.includes(o)) {
+											if (currentMoves.length === 4) {
+												return;
+											} else setMoves(ownedPokemon.id, [...currentMoves, o]);
+										}
+									}}
+									content={<strong>{o}</strong>}
+								/>
+							</div>
+							<MoveInfoButton movename={o} />
 						</div>
-						<MoveInfoButton movename={o} />
-					</div>
-				))}
+					))}
 		</Stack>
 	);
 };

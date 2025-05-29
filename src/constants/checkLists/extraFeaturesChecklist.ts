@@ -526,14 +526,12 @@ export const extraFeatureCheckList: {
 	{ name: 'routeN1 occs on routeN1E1', handled: true },
 	{ name: 'Quests for dogs', handled: true },
 	{
-		name: `Moves die mehrmals in der selben runde passieren z.b. doppel kick verhalten sich sonderbar.
-Sie finden nicht immer gleich hintereinander statt also manchmal ist 1ster kick dann andere attacke von anderem pokemon und dann 2ter kick, das passiert aber nur manchmal
-Der zweite doppelkick trifft auch untergetauchte pokemon
-Anmerkung: beides nur mit doppel kick getestet`,
+		name: `fix multihit order`,
 		handled: true,
 	},
 	{ name: 'unlock berry lure after catching all mons on route', handled: true },
 	{ name: 'each berry lure on takes specific berries', handled: true },
+	{ name: 'move switching? PP Used?' },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },

@@ -3,7 +3,8 @@ import {
 	lowBstPokemon,
 	midBstPokemon,
 } from '../constants/baseStatRecord';
-import { getRandomEncounter } from '../constants/internalDex';
+import { getRandomEncounter, isNotCatchable } from '../constants/internalDex';
+import { internalDex } from '../constants/internalDexData';
 import { MapId } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { getRandomNature } from '../interfaces/Natures';
@@ -85,10 +86,15 @@ export const determineWildPokemon = (
 			),
 		];
 	} else if (lure === 'lure') {
+		const name = getRandomEntry(
+			Object.entries(lowBstPokemon).filter(([p]) =>
+				isNotCatchable(internalDex[p as PokemonName])
+			)
+		)[0] as PokemonName;
 		encounter = [
 			makeChallengerPokemon({
 				nature: getRandomNature(),
-				name: getRandomEntry(Object.entries(lowBstPokemon))[0] as PokemonName,
+				name,
 				xp: getMiddleOfThree([
 					1000,
 					8000,
@@ -97,10 +103,15 @@ export const determineWildPokemon = (
 			}),
 		];
 	} else if (lure === 'super-lure') {
+		const name = getRandomEntry(
+			Object.entries(midBstPokemon).filter(([p]) =>
+				isNotCatchable(internalDex[p as PokemonName])
+			)
+		)[0] as PokemonName;
 		encounter = [
 			makeChallengerPokemon({
 				nature: getRandomNature(),
-				name: getRandomEntry(Object.entries(midBstPokemon))[0] as PokemonName,
+				name,
 				xp: getMiddleOfThree([
 					27000,
 					8000,
@@ -109,10 +120,15 @@ export const determineWildPokemon = (
 			}),
 		];
 	} else if (lure === 'max-lure') {
+		const name = getRandomEntry(
+			Object.entries(highBstPokemon).filter(([p]) =>
+				isNotCatchable(internalDex[p as PokemonName])
+			)
+		)[0] as PokemonName;
 		encounter = [
 			makeChallengerPokemon({
 				nature: getRandomNature(),
-				name: getRandomEntry(Object.entries(highBstPokemon))[0] as PokemonName,
+				name,
 				xp: getMiddleOfThree([
 					27000,
 					125000,

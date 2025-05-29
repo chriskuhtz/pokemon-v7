@@ -1,14 +1,17 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { MoveInfoButton } from '../../components/MoveInfoButton/MoveInfoButton';
+import { MovesDisplay } from '../../components/OwnedPokemonCard/components/MovesDisplay';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import {
 	handledMoves,
 	MoveName,
 } from '../../constants/checkLists/movesCheckList';
+import { internalDex } from '../../constants/internalDexData';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getEntryWithOverflow } from '../../functions/filterTargets';
 import { moveIsTeachable } from '../../functions/moveIsAvailable';
+import { withChangedMoves } from '../../functions/withChangedMoves';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
@@ -20,7 +23,6 @@ import { LearnMethod } from '../../interfaces/PokemonData';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { internalDex } from '../../constants/internalDexData';
 
 export const moveUnlockPayments: ItemType[] = [
 	'big-malasada',
@@ -48,7 +50,7 @@ const learnMethodOrder: Record<LearnMethod, number> = {
 };
 
 export const MoveTutor = () => {
-	const { saveFile } = useContext(SaveFileContext);
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const team = useMemo(
 		() => saveFile.pokemon.filter((p) => p.onTeam),
 		[saveFile]
@@ -59,6 +61,21 @@ export const MoveTutor = () => {
 	const pokemonWithId = useMemo(
 		() => team.find((t) => t.id === id),
 		[id, team]
+	);
+
+	const updateMoves = useCallback(
+		(id: string, newMoveNames: MoveName[]) => {
+			patchSaveFileReducer({
+				pokemon: saveFile.pokemon.map((p) => {
+					if (p.id === id) {
+						return withChangedMoves(p, newMoveNames);
+					}
+
+					return p;
+				}),
+			});
+		},
+		[patchSaveFileReducer, saveFile.pokemon]
 	);
 
 	const navigate = useNavigate();
@@ -87,7 +104,14 @@ export const MoveTutor = () => {
 						/>
 					))}
 				</div>
-				{pokemonWithId && <MoveEditor ownedPokemon={pokemonWithId} />}
+				{pokemonWithId && (
+					<>
+						<h2>Change Moves:</h2>
+						<MovesDisplay ownedPokemon={pokemonWithId} setMoves={updateMoves} />
+						<h2>Learn new Moves:</h2>
+						<MoveEditor ownedPokemon={pokemonWithId} />
+					</>
+				)}
 			</Stack>
 		</Page>
 	);
