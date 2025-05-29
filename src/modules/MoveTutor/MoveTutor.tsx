@@ -106,7 +106,7 @@ export const MoveTutor = () => {
 				</div>
 				{pokemonWithId && (
 					<>
-						<h2>Change Moves:</h2>
+						<h2>Choose Active Moves:</h2>
 						<MovesDisplay ownedPokemon={pokemonWithId} setMoves={updateMoves} />
 						<h2>Learn new Moves:</h2>
 						<MoveEditor ownedPokemon={pokemonWithId} />

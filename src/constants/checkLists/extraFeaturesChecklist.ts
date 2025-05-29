@@ -531,12 +531,12 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'unlock berry lure after catching all mons on route', handled: true },
 	{ name: 'each berry lure on takes specific berries', handled: true },
-	{ name: 'move switching? PP Used?' },
+	{ name: 'move switching? PP Used?', handled: true },
+	{ name: 'completely rework opponent decision tree', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
 	{ name: 'rollout stops stacking when target is defeated' },
-	{ name: 'completely rework opponent decision tree' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
