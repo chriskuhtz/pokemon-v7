@@ -5,7 +5,7 @@ const mortyBase: Omit<
 	OverworldNpc,
 	'unhandledMessage' | 'conditionFunction' | 'id'
 > = {
-	x: 10,
+	x: 12,
 	y: 3,
 	orientation: 'DOWN',
 	type: 'NPC',

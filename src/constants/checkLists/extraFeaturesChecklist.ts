@@ -535,12 +535,14 @@ export const extraFeatureCheckList: {
 	{ name: 'completely rework opponent decision tree', handled: true },
 	{ name: 'stronger misty', handled: true },
 	{ name: 'rock climbing', handled: true },
+	{ name: 'whitney' },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
 	{ name: 'rollout stops stacking when target is defeated' },
+	{ name: 'Gym Leader as quest type' },
+	{ name: 'Travelling Trainer as quest type' },
 	//CONTENT:
-	{ name: 'whitney' },
 	{ name: 'jasmine' },
 	{ name: 'pryce' },
 	{ name: 'claire' },
@@ -569,4 +571,5 @@ Purple-Apricorn: Nightmare Balls: Bonus for Psycho, Dark, and Ghost Pokemon`,
 	{ name: 'random encounters' },
 	{ name: 'random evolutions' },
 	{ name: 'nuzlocke mode' },
+	{ name: 'gym leaders give balls as rewards' },
 ];

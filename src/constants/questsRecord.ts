@@ -1,13 +1,6 @@
 import { v4 } from 'uuid';
 import { calculateLevelData } from '../functions/calculateLevelData';
-import {
-	tier1trainers,
-	tier2trainers,
-	tier3trainers,
-	tier4trainers,
-	tier5trainers,
-	trainers,
-} from '../functions/makeRandomTrainer';
+
 import { sumOfIvs } from '../functions/sumOfIvs';
 
 import {
@@ -20,6 +13,7 @@ import {
 } from '../interfaces/Item';
 import { getRandomNature } from '../interfaces/Natures';
 import { Quest } from '../interfaces/Quest';
+import { SaveFile } from '../interfaces/SaveFile';
 import {
 	EmptyStatObject,
 	generateRandomStatObject,
@@ -51,6 +45,14 @@ import { allRocketCampTrainersDefeated } from './maps/occupants/rocketCampOccupa
 import { sabrinaId } from './maps/occupants/sabrina';
 import { surgeId } from './maps/occupants/surge';
 import { PokemonName, pokemonNames } from './pokemonNames';
+import {
+	tier1trainers,
+	tier2trainers,
+	tier3trainers,
+	tier4trainers,
+	tier5trainers,
+	trainers,
+} from './trainersRecord';
 
 export const questNames = [
 	'catch a fire pokemon',
@@ -441,6 +443,7 @@ export const questNames = [
 	'catch a space distortion pokemon',
 	'catch all space distortion pokemon',
 	'train a pidgeot to lvl 70',
+	"catch whitney's favorite cute pokemon",
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -1394,6 +1397,21 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: ['gastly', 'poochyena', 'murkrow', 'drifloon', 'houndour'],
 		kind: 'QUEST_LINE',
 	},
+	"catch whitney's favorite cute pokemon": {
+		category: 'EXPLORATION',
+		rewardItems: { 'clear-amulet': 1 },
+		researchPoints: 100,
+		conditionFunction: (s) => {
+			return (
+				s.pokedex['clefairy'].caughtOnRoutes.length > 0 &&
+				s.pokedex['jigglypuff'].caughtOnRoutes.length > 0 &&
+				s.pokedex['vulpix-alola'].caughtOnRoutes.length > 0 &&
+				s.pokedex['pikachu-belle'].caughtOnRoutes.length > 0
+			);
+		},
+		targetPokemon: ['pikachu-belle', 'clefairy', 'vulpix-alola', 'jigglypuff'],
+		kind: 'QUEST_LINE',
+	},
 	'catch Haunter and Mightyena': {
 		category: 'EXPLORATION',
 		rewardItems: { 'dusk-ball': 5, 'dusk-stone': 1 },
@@ -1496,6 +1514,46 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 1',
 		availableAfter: 'report a bug',
+	},
+	'defeat whitney': {
+		category: 'BATTLE',
+		rewardItems: {
+			'ultra-ball': 5,
+			'full-restore': 5,
+			'silver-powder': 1,
+			...expCandyPackage,
+		},
+		rewardPokemon: {
+			caughtAtDate: new Date().getTime(),
+			growthRate: 'medium',
+			unlockedMoves: ['dragon-dance'],
+			fixedAbility: true,
+			shiny: true,
+			maxHp: 30,
+			effortValues: EmptyStatObject,
+			ppBoostedMoves: [],
+			caughtOnMap: 'camp',
+			gender: 'MALE',
+			stepsWalked: 0,
+			ownerId: '',
+			damage: 0,
+			id: '',
+			ball: 'poke-ball',
+			ability: 'drought',
+			name: 'lopunny',
+			xp: 125,
+			nature: 'adamant',
+			intrinsicValues: generateRandomStatObject(31),
+			happiness: 70,
+			firstMove: { name: 'dragon-dance', usedPP: 0 },
+		},
+		researchPoints: 50,
+		conditionFunction: (s: SaveFile) => {
+			return s.handledOccupants.some((h) => h.id === 'Gym Leader Whitney');
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 1',
+		availableAfter: "catch whitney's favorite cute pokemon",
 	},
 	'defeat chuck': {
 		category: 'BATTLE',

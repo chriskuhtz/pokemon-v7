@@ -3,8 +3,8 @@ import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 
 export const bugsy: OverworldNpc = {
 	type: 'NPC',
-	x: 9,
-	y: 8,
+	x: 10,
+	y: 3,
 	orientation: 'DOWN',
 	id: 'bugsy',
 	conditionFunction: (s) =>
