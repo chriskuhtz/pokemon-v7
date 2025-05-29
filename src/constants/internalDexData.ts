@@ -1740,7 +1740,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	steelix: {
 		dexId: 208,
-		rampager: true,
 		types: ['steel', 'ground'],
 		encounterOptions: [
 			{
@@ -1816,7 +1815,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	ursaring: {
 		dexId: 217,
-		rampager: true,
 		types: ['normal'],
 		encounterOptions: [
 			{
@@ -1896,16 +1894,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 225,
 		swarm: 'STRONG',
 		types: ['ice', 'flying'],
-		encounterOptions: [
-			{
-				rarity: 'medium',
-				maxXp: 216000,
-				minXp: 64000,
-				timeOfDay: 'DAY',
-				area: 'LAND',
-				route: 'routeN1W1',
-			},
-		],
+		encounterOptions: [],
 	},
 	mantine: {
 		dexId: 226,
@@ -4911,6 +4900,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 687,
 		types: ['dark', 'psychic'],
 		encounterOptions: [],
+		rampager: true,
 	},
 	binacle: {
 		dexId: 688,
@@ -5390,6 +5380,11 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 765,
 		rampager: true,
 		types: ['normal', 'psychic'],
+		encounterOptions: [],
+	},
+	passimian: {
+		dexId: 766,
+		types: ['fighting'],
 		encounterOptions: [
 			{
 				rarity: 'ultra-rare',
@@ -5400,11 +5395,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 				route: 'routeN1E1',
 			},
 		],
-	},
-	passimian: {
-		dexId: 766,
-		types: ['fighting'],
-		encounterOptions: [],
 	},
 	wimpod: {
 		dexId: 767,
@@ -5962,7 +5952,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'mr-rime': {
 		dexId: 866,
 		types: ['ice', 'psychic'],
-		encounterOptions: [],
+		encounterOptions: [
+			{
+				rarity: 'medium',
+				maxXp: 216000,
+				minXp: 64000,
+				timeOfDay: 'DAY',
+				area: 'LAND',
+				route: 'routeN1W1',
+			},
+		],
 	},
 	runerigus: {
 		dexId: 867,
@@ -7671,6 +7670,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'lycanroc-midnight': {
 		dexId: 10126,
 		types: ['rock'],
+		rampager: true,
 		encounterOptions: [],
 	},
 	'wishiwashi-school': {
