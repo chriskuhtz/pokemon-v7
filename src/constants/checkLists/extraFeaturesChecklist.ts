@@ -523,6 +523,7 @@ export const extraFeatureCheckList: {
 	{ name: 'filter for internaldex', handled: true },
 	{ name: 'booster enegry sprite is missing', handled: true },
 	{ name: 'icons in message', handled: true },
+	{ name: 'routeN1 occs on routeN1E1', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -533,7 +534,7 @@ Der zweite doppelkick trifft auch untergetauchte pokemon
 Anmerkung: beides nur mit doppel kick getestet`,
 	},
 	{ name: 'rollout stops stacking when target is defeated' },
-
+	{ name: 'completely rework opponent decision tree' },
 	//CONTENT:
 	{ name: 'whitney' },
 	{ name: 'jasmine' },
@@ -544,6 +545,9 @@ Anmerkung: beides nur mit doppel kick getestet`,
 	{ name: 'eggs?' },
 	{ name: 'Fishing?' },
 	{ name: 'magma/aqua quests from Looker' },
+	{ name: 'Lugia quest after catching the birds' },
+	{ name: 'Quests for dogs' },
+	{ name: 'Hooh quest after catching the dogs' },
 	{ name: 'Terrain Items (shovel, pickaxe) as Gym leader rewards' },
 	{ name: 'ev grind mode for challenge field' },
 	{ name: 'trainer with simple/costar combo' },
