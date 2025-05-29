@@ -541,8 +541,9 @@ export const extraFeatureCheckList: {
 	{ name: 'download your player snapshot', handled: true },
 	{ name: 'import other players snapshots', handled: true },
 	{ name: 'defeat an imported trainer quest', handled: true },
-	//BUGS/IMPROVEMENTS:
 	{ name: 'repair raticate quest' },
+	//BUGS/IMPROVEMENTS:
+
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
 	{ name: 'rollout stops stacking when target is defeated' },

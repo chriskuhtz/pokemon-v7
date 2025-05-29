@@ -7,6 +7,7 @@ import { getRandomEncounter, isNotCatchable } from '../constants/internalDex';
 import { internalDex } from '../constants/internalDexData';
 import { MapId } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
+import { BattleTeamConfig } from '../hooks/useGetBattleTeam';
 import { getRandomNature } from '../interfaces/Natures';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { CatchStreak, PokemonSwarm, SaveFile } from '../interfaces/SaveFile';
@@ -27,7 +28,8 @@ export const determineWildPokemon = (
 	currentSwarm?: PokemonSwarm,
 	currentStrongSwarm?: PokemonSwarm,
 	currentDistortionSwarm?: PokemonSwarm
-): OwnedPokemon[] => {
+): { team: OwnedPokemon[]; battleTeamConfig: BattleTeamConfig } => {
+	let battleTeamConfig: BattleTeamConfig = {};
 	const timeOfDay = getTimeOfDay();
 	const applyStreakBoosts = (input: OwnedPokemon): OwnedPokemon => {
 		if (catchStreak?.pokemon === input.name) {
@@ -153,10 +155,11 @@ export const determineWildPokemon = (
 	) {
 		encounter = [
 			makeChallengerPokemon(
-				{ name: 'raticate', xp: 27000 },
+				{ name: 'raticate', xp: 27000, heldItemName: 'oaks-parcel' },
 				{ increasedShinyFactor: 16 * shinyFactor }
 			),
 		];
+		battleTeamConfig = { assignHeldItem: false };
 	} else if (swarm && Math.random() > 0.5) {
 		encounter = [
 			makeChallengerPokemon(
@@ -211,5 +214,5 @@ export const determineWildPokemon = (
 				  ];
 	}
 
-	return encounter.map(applyStreakBoosts);
+	return { team: encounter.map(applyStreakBoosts), battleTeamConfig };
 };

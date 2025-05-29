@@ -86,22 +86,26 @@ export const useOverworldMovement = (
 
 		const waterEncounter =
 			!!map.tileMap.waterLayer[playerLocation.y][playerLocation.x];
+
+		const { team, battleTeamConfig } = determineWildPokemon(
+			pokemon.filter((p) => p.onTeam),
+			playerLocation.mapId,
+			quests,
+			waterEncounter,
+			shinyFactor,
+			activatedLure,
+			catchStreak,
+			currentSwarm,
+			currentStrongSwarm,
+			currentDistortionSwarm
+		);
+
 		const challenger: Challenger = {
 			type: 'WILD',
 			id: OPPO_ID,
 			inventory: EmptyInventory,
-			team: determineWildPokemon(
-				pokemon.filter((p) => p.onTeam),
-				playerLocation.mapId,
-				quests,
-				waterEncounter,
-				shinyFactor,
-				activatedLure,
-				catchStreak,
-				currentSwarm,
-				currentStrongSwarm,
-				currentDistortionSwarm
-			),
+			team,
+			battleTeamConfig,
 		};
 		const avgChallengerLevel =
 			challenger.team.reduce(
