@@ -43,13 +43,6 @@ const taxiLocations: Record<string, CharacterLocationData> = {
 		orientation: 'DOWN',
 		forwardFoot: 'CENTER1',
 	},
-	'routeW1 small waterfall': {
-		mapId: 'routeW1',
-		x: 38,
-		y: 41,
-		orientation: 'DOWN',
-		forwardFoot: 'CENTER1',
-	},
 	routeN1W1: {
 		mapId: 'routeN1W1',
 		x: 25,
@@ -91,6 +84,7 @@ export const DragoniteTaxi = (): JSX.Element => {
 				</h3>
 				{Object.entries(taxiLocations).map(([n, location]) => (
 					<Card
+						key={n}
 						disabled={
 							saveFile.bag['charti-berry'] < 1 || isBagOverloaded(saveFile)
 						}

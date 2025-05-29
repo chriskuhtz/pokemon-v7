@@ -226,6 +226,9 @@ export const questNames = [
 	'catch the legendary bird of ice',
 	'catch the legendary bird of fire',
 	'catch the legendary bird of thunder',
+	'catch the legendary beast of water',
+	'catch the legendary beast of fire',
+	'catch the legendary beast of thunder',
 	'catch a pokemon orginally found in kanto',
 	'catch a pokemon orginally found in johto',
 	'catch a pokemon orginally found in hoenn',
@@ -1798,6 +1801,40 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: ['mew'],
 		requiredUpgrade: 'invite historian',
 		kind: 'BULLETIN',
+	},
+
+	'catch the legendary beast of water': {
+		category: 'EXPLORATION',
+		rewardItems: { 'rare-candy': 10 },
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.pokedex['suicune'].caughtOnRoutes.length > 0;
+		},
+		targetPokemon: ['suicune'],
+		kind: 'BULLETIN',
+		requiredUpgrade: 'pidgeot rider certification',
+	},
+	'catch the legendary beast of fire': {
+		category: 'EXPLORATION',
+		rewardItems: { 'rare-candy': 10 },
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.pokedex['entei'].caughtOnRoutes.length > 0;
+		},
+		targetPokemon: ['suicune'],
+		kind: 'BULLETIN',
+		requiredUpgrade: 'pidgeot rider certification',
+	},
+	'catch the legendary beast of thunder': {
+		category: 'EXPLORATION',
+		rewardItems: { 'rare-candy': 10 },
+		researchPoints: 50,
+		conditionFunction: (s) => {
+			return s.pokedex['suicune'].caughtOnRoutes.length > 0;
+		},
+		targetPokemon: ['raikou'],
+		kind: 'BULLETIN',
+		requiredUpgrade: 'pidgeot rider certification',
 	},
 	'revive a fossil': {
 		category: 'RESEARCH',
