@@ -535,13 +535,14 @@ export const extraFeatureCheckList: {
 	{ name: 'completely rework opponent decision tree', handled: true },
 	{ name: 'stronger misty', handled: true },
 	{ name: 'rock climbing', handled: true },
-	{ name: 'whitney' },
+	{ name: 'whitney', handled: true },
+	{ name: 'Gym Leader as quest type', handled: true },
+	{ name: 'Travelling Trainer as quest type', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
 	{ name: 'rollout stops stacking when target is defeated' },
-	{ name: 'Gym Leader as quest type' },
-	{ name: 'Travelling Trainer as quest type' },
+
 	//CONTENT:
 	{ name: 'jasmine' },
 	{ name: 'pryce' },

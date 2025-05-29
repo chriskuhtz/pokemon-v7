@@ -1436,7 +1436,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'defeat morty': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		rewardItems: {
 			'ultra-ball': 5,
 			'full-restore': 5,
@@ -1476,7 +1476,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'catch Haunter and Mightyena',
 	},
 	'defeat bugsy': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		rewardItems: {
 			'ultra-ball': 5,
 			'full-restore': 5,
@@ -1516,7 +1516,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'report a bug',
 	},
 	'defeat whitney': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		rewardItems: {
 			'ultra-ball': 5,
 			'full-restore': 5,
@@ -1540,7 +1540,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			id: '',
 			ball: 'poke-ball',
 			ability: 'drought',
-			name: 'lopunny',
+			name: 'buneary',
 			xp: 125,
 			nature: 'adamant',
 			intrinsicValues: generateRandomStatObject(31),
@@ -1556,7 +1556,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: "catch whitney's favorite cute pokemon",
 	},
 	'defeat chuck': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		rewardItems: {
 			'full-restore': 5,
 			'black-belt': 1,
@@ -1635,7 +1635,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'revive all different fossils',
 	},
 	'defeat falkner': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		rewardItems: {
 			'ultra-ball': 5,
 			'full-restore': 5,
@@ -1847,7 +1847,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'invite historian',
 		kind: 'BULLETIN',
 	},
-
 	'catch the legendary beast of water': {
 		category: 'EXPLORATION',
 		rewardItems: { 'rare-candy': 10 },
@@ -1925,7 +1924,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			return !!s.mileStones.hasEvolvedStarter;
 		},
 	},
-
 	'catch a shiny pokemon': {
 		category: 'EXPLORATION',
 		kind: 'BULLETIN',
@@ -2398,7 +2396,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'deal 30000 damage with one attack',
 	},
 	'defeat erika': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		kind: 'BULLETIN',
 		researchPoints: 25,
 		rewardItems: {
@@ -2412,7 +2410,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat janine': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		kind: 'BULLETIN',
 		researchPoints: 25,
 		rewardItems: {
@@ -2426,7 +2424,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat blaine': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		kind: 'BULLETIN',
 		researchPoints: 25,
 		rewardItems: { 'occa-berry': 5, charcoal: 1, ...expCandyPackage },
@@ -2436,7 +2434,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat surge': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		kind: 'BULLETIN',
 		researchPoints: 50,
 		rewardItems: { 'wacan-berry': 5, magnet: 1, ...expCandyPackage },
@@ -2446,7 +2444,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat misty': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		kind: 'BULLETIN',
 		researchPoints: 50,
 		rewardItems: {
@@ -2461,7 +2459,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat sabrina': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		kind: 'BULLETIN',
 		researchPoints: 50,
 		rewardItems: { 'payapa-berry': 5, 'twisted-spoon': 1, ...expCandyPackage },
@@ -2471,7 +2469,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat brock': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		kind: 'BULLETIN',
 		researchPoints: 50,
 		rewardItems: { 'charti-berry': 5, 'hard-stone': 1, ...expCandyPackage },
@@ -2481,7 +2479,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat gary': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		kind: 'BULLETIN',
 		researchPoints: 100,
 		rewardItems: {

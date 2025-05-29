@@ -7,14 +7,14 @@ import { QuestName } from '../questsRecord';
 
 export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 	'defeat research assistant barry': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => !!s.mileStones.barryDefeatedAt,
 		researchPoints: 10,
 		rewardItems: { 'exp-candy-xs': 10 },
 	},
 	'defeat barry at lvl 20 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.barryDefeatedAt ?? 0) >= 8000,
 		researchPoints: 20,
@@ -22,7 +22,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-s': 10 },
 	},
 	'defeat barry at lvl 40 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.barryDefeatedAt ?? 0) >= 64000,
 		researchPoints: 40,
@@ -30,7 +30,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-m': 10 },
 	},
 	'defeat barry at lvl 60 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.barryDefeatedAt ?? 0) >= 216000,
 		researchPoints: 60,
@@ -38,7 +38,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-l': 10 },
 	},
 	'defeat barry at lvl 80 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.barryDefeatedAt ?? 0) >= 512000,
 		researchPoints: 80,
@@ -46,7 +46,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-xl': 10 },
 	},
 	'defeat barry at lvl 100': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.barryDefeatedAt ?? 0) >= 1000000,
 		researchPoints: 80,
@@ -78,14 +78,14 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		},
 	},
 	'defeat trainer silver': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => !!s.mileStones.silverDefeatedAt,
 		researchPoints: 10,
 		rewardItems: { 'exp-candy-xs': 10 },
 	},
 	'defeat silver at lvl 20 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.silverDefeatedAt ?? 0) >= 8000,
 		researchPoints: 20,
@@ -93,7 +93,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-s': 10 },
 	},
 	'defeat silver at lvl 40 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.silverDefeatedAt ?? 0) >= 64000,
 		researchPoints: 40,
@@ -101,7 +101,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-m': 10 },
 	},
 	'defeat silver at lvl 60 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.silverDefeatedAt ?? 0) >= 216000,
 		researchPoints: 60,
@@ -109,7 +109,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-l': 10 },
 	},
 	'defeat silver at lvl 80 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.silverDefeatedAt ?? 0) >= 512000,
 		researchPoints: 80,
@@ -117,7 +117,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-xl': 10 },
 	},
 	'defeat silver at lvl 100': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.silverDefeatedAt ?? 0) >= 1000000,
 		researchPoints: 80,
@@ -149,14 +149,14 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		},
 	},
 	'defeat trainer cynthia': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => !!s.mileStones.cynthiaDefeatedAt,
 		researchPoints: 10,
 		rewardItems: { 'exp-candy-xs': 10 },
 	},
 	'defeat cynthia at lvl 20 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.cynthiaDefeatedAt ?? 0) >= 8000,
 		researchPoints: 20,
@@ -164,7 +164,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-s': 10 },
 	},
 	'defeat cynthia at lvl 40 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.cynthiaDefeatedAt ?? 0) >= 64000,
 		researchPoints: 40,
@@ -172,7 +172,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-m': 10 },
 	},
 	'defeat cynthia at lvl 60 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.cynthiaDefeatedAt ?? 0) >= 216000,
 		researchPoints: 60,
@@ -180,7 +180,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-l': 10 },
 	},
 	'defeat cynthia at lvl 80 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.cynthiaDefeatedAt ?? 0) >= 512000,
 		researchPoints: 80,
@@ -188,7 +188,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-xl': 10 },
 	},
 	'defeat cynthia at lvl 100': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.cynthiaDefeatedAt ?? 0) >= 1000000,
 		researchPoints: 80,
@@ -221,14 +221,14 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		},
 	},
 	'defeat trainer n': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => !!s.mileStones.nDefeatedAt,
 		researchPoints: 10,
 		rewardItems: { 'exp-candy-xs': 10 },
 	},
 	'defeat trainer n at lvl 20 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.nDefeatedAt ?? 0) >= 8000,
 		researchPoints: 20,
@@ -236,7 +236,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-s': 10 },
 	},
 	'defeat trainer n at lvl 40 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.nDefeatedAt ?? 0) >= 64000,
 		researchPoints: 40,
@@ -244,7 +244,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-m': 10 },
 	},
 	'defeat trainer n at lvl 60 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.nDefeatedAt ?? 0) >= 216000,
 		researchPoints: 60,
@@ -252,7 +252,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-l': 10 },
 	},
 	'defeat trainer n at lvl 80 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.nDefeatedAt ?? 0) >= 512000,
 		researchPoints: 80,
@@ -260,7 +260,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-xl': 10 },
 	},
 	'defeat trainer n at lvl 100': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.nDefeatedAt ?? 0) >= 1000000,
 		researchPoints: 80,
@@ -293,14 +293,14 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		},
 	},
 	'defeat trainer red': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => !!s.mileStones.redDefeatedAt,
 		researchPoints: 10,
 		rewardItems: { 'exp-candy-xs': 10 },
 	},
 	'defeat trainer red at lvl 20 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.redDefeatedAt ?? 0) >= 8000,
 		researchPoints: 20,
@@ -308,7 +308,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-s': 10 },
 	},
 	'defeat trainer red at lvl 40 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.redDefeatedAt ?? 0) >= 64000,
 		researchPoints: 40,
@@ -316,7 +316,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-m': 10 },
 	},
 	'defeat trainer red at lvl 60 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.redDefeatedAt ?? 0) >= 216000,
 		researchPoints: 60,
@@ -324,7 +324,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-l': 10 },
 	},
 	'defeat trainer red at lvl 80 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.redDefeatedAt ?? 0) >= 512000,
 		researchPoints: 80,
@@ -332,7 +332,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-xl': 10 },
 	},
 	'defeat trainer red at lvl 100': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.redDefeatedAt ?? 0) >= 1000000,
 		researchPoints: 80,
@@ -364,14 +364,14 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		},
 	},
 	'defeat trainer hugh': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => !!s.mileStones.hughDefeatedAt,
 		researchPoints: 10,
 		rewardItems: { 'exp-candy-xs': 10 },
 	},
 	'defeat trainer hugh at lvl 20 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.hughDefeatedAt ?? 0) >= 8000,
 		researchPoints: 20,
@@ -379,7 +379,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-s': 10 },
 	},
 	'defeat trainer hugh at lvl 40 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.hughDefeatedAt ?? 0) >= 64000,
 		researchPoints: 40,
@@ -387,7 +387,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-m': 10 },
 	},
 	'defeat trainer hugh at lvl 60 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.hughDefeatedAt ?? 0) >= 216000,
 		researchPoints: 60,
@@ -395,7 +395,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-l': 10 },
 	},
 	'defeat trainer hugh at lvl 80 or higher': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.hughDefeatedAt ?? 0) >= 512000,
 		researchPoints: 80,
@@ -403,7 +403,7 @@ export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 		rewardItems: { 'exp-candy-xl': 10 },
 	},
 	'defeat trainer hugh at lvl 100': {
-		category: 'BATTLE',
+		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',
 		conditionFunction: (s) => (s.mileStones.hughDefeatedAt ?? 0) >= 1000000,
 		researchPoints: 80,
