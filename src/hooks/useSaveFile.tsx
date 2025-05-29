@@ -134,7 +134,8 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 					? undefined
 					: update.currentDistortionSwarm,
 			troubleMakers:
-				update.troubleMakers?.leavesAt && now > update.troubleMakers?.leavesAt
+				!update.troubleMakers?.leavesAt ||
+				(update.troubleMakers?.leavesAt && now > update.troubleMakers?.leavesAt)
 					? undefined
 					: update.troubleMakers,
 		});
