@@ -2767,9 +2767,12 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/750/',
 		handled: true,
 	},
-	{ name: 'dragon-darts', url: 'https://pokeapi.co/api/v2/move/751/' },
-	{ name: 'teatime', url: 'https://pokeapi.co/api/v2/move/752/' },
-	{ name: 'octolock', url: 'https://pokeapi.co/api/v2/move/753/' },
+
+	{
+		name: 'octolock',
+		url: 'https://pokeapi.co/api/v2/move/753/',
+		handled: true,
+	},
 	{ name: 'bolt-beak', url: 'https://pokeapi.co/api/v2/move/754/' },
 	{ name: 'fishious-rend', url: 'https://pokeapi.co/api/v2/move/755/' },
 	{ name: 'court-change', url: 'https://pokeapi.co/api/v2/move/756/' },
@@ -2975,6 +2978,8 @@ export const movesCheckList: {
 		name: 'tar-shot',
 		url: 'https://pokeapi.co/api/v2/move/749/',
 	},
+	{ name: 'dragon-darts', url: 'https://pokeapi.co/api/v2/move/751/' },
+	{ name: 'teatime', url: 'https://pokeapi.co/api/v2/move/752/' },
 ];
 
 export const handledMoves = [

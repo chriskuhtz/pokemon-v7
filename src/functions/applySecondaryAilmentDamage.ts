@@ -6,6 +6,7 @@ import {
 	TRAP_DAMAGE_FACTOR,
 } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { getHeldItem } from './getHeldItem';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import {
@@ -75,6 +76,26 @@ export const applySecondaryAilmentDamage = (
 			...updated,
 			damage: updated.damage + nightmareDamage,
 		};
+	}
+	if (updated.secondaryAilments.some((ail) => ail.type === 'octolocked')) {
+		updated = applyStatChangeToPokemon(
+			updated,
+			'defense',
+			-1,
+			false,
+			[],
+			(m) => addMessage(m.message),
+			'octolock'
+		);
+		updated = applyStatChangeToPokemon(
+			updated,
+			'special-defense',
+			-1,
+			false,
+			[],
+			(m) => addMessage(m.message),
+			'octolock'
+		);
 	}
 
 	if (updated.secondaryAilments.some((ail) => ail.type === 'ingrained')) {

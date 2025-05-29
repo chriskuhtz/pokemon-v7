@@ -533,6 +533,8 @@ export const extraFeatureCheckList: {
 	{ name: 'each berry lure on takes specific berries', handled: true },
 	{ name: 'move switching? PP Used?', handled: true },
 	{ name: 'completely rework opponent decision tree', handled: true },
+	{ name: 'stronger misty' },
+	{ name: 'rock climbing' },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
