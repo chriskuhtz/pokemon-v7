@@ -2799,10 +2799,26 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/777/',
 		handled: true,
 	},
-	{ name: 'drum-beating', url: 'https://pokeapi.co/api/v2/move/778/' },
-	{ name: 'snap-trap', url: 'https://pokeapi.co/api/v2/move/779/' },
-	{ name: 'pyro-ball', url: 'https://pokeapi.co/api/v2/move/780/' },
-	{ name: 'behemoth-blade', url: 'https://pokeapi.co/api/v2/move/781/' },
+	{
+		name: 'drum-beating',
+		url: 'https://pokeapi.co/api/v2/move/778/',
+		handled: true,
+	},
+	{
+		name: 'snap-trap',
+		url: 'https://pokeapi.co/api/v2/move/779/',
+		handled: true,
+	},
+	{
+		name: 'pyro-ball',
+		url: 'https://pokeapi.co/api/v2/move/780/',
+		handled: true,
+	},
+	{
+		name: 'behemoth-blade',
+		url: 'https://pokeapi.co/api/v2/move/781/',
+		handled: true,
+	},
 	{ name: 'behemoth-bash', url: 'https://pokeapi.co/api/v2/move/782/' },
 	{ name: 'aura-wheel', url: 'https://pokeapi.co/api/v2/move/783/' },
 	{ name: 'breaking-swipe', url: 'https://pokeapi.co/api/v2/move/784/' },
@@ -3571,6 +3587,10 @@ export const handledMoves = [
 	'clangorous-soul',
 	'body-press',
 	'decorate',
+	'drum-beating',
+	'snap-trap',
+	'behemoth-blade',
+	'pyro-ball',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
