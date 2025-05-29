@@ -33,6 +33,7 @@ import {
 	getSwarmOptions,
 	getUnderRockEncounters,
 } from './internalDex';
+import { internalDex } from './internalDexData';
 import { caveW1Encounters } from './maps/encounters/caveW1';
 import { onixCaveEncounters } from './maps/encounters/onixCave';
 import { blaineId } from './maps/occupants/blaine';
@@ -445,6 +446,7 @@ export const questNames = [
 	'catch all space distortion pokemon',
 	'train a pidgeot to lvl 70',
 	"catch whitney's favorite cute pokemon",
+	'catch an exceptional steel pokemon for jasmine',
 	'defeat an imported challenger',
 	'defeat an imported challenger at lvl 20 or higher',
 	'defeat an imported challenger at lvl 40 or higher',
@@ -1417,6 +1419,19 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: ['pikachu-belle', 'clefairy', 'vulpix-alola', 'jigglypuff'],
 		kind: 'QUEST_LINE',
 	},
+	'catch an exceptional steel pokemon for jasmine': {
+		category: 'EXPLORATION',
+		rewardItems: { 'steel-gem': 10, 'babiri-berry': 10 },
+		researchPoints: 100,
+		conditionFunction: (s: SaveFile) => {
+			return s.pokemon.some(
+				(p) =>
+					internalDex[p.name].types.includes('steel') &&
+					Object.values(p.intrinsicValues).some((v) => v === 31)
+			);
+		},
+		kind: 'QUEST_LINE',
+	},
 	'catch Haunter and Mightyena': {
 		category: 'EXPLORATION',
 		rewardItems: { 'dusk-ball': 5, 'dusk-stone': 1 },
@@ -1525,7 +1540,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: {
 			'ultra-ball': 5,
 			'full-restore': 5,
-			'silver-powder': 1,
+			'silk-scarf': 1,
 			...expCandyPackage,
 		},
 		rewardPokemon: {
@@ -1559,6 +1574,46 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 1',
 		availableAfter: "catch whitney's favorite cute pokemon",
+	},
+	'defeat jasmine': {
+		category: 'GYM LEADER',
+		rewardItems: {
+			'ultra-ball': 5,
+			'full-restore': 5,
+			'metal-coat': 1,
+			...expCandyPackage,
+		},
+		rewardPokemon: {
+			caughtAtDate: new Date().getTime(),
+			growthRate: 'medium',
+			unlockedMoves: ['slash'],
+			fixedAbility: true,
+			shiny: true,
+			maxHp: 30,
+			effortValues: EmptyStatObject,
+			ppBoostedMoves: [],
+			caughtOnMap: 'camp',
+			gender: 'MALE',
+			stepsWalked: 0,
+			ownerId: '',
+			damage: 0,
+			id: '',
+			ball: 'poke-ball',
+			ability: 'flash-fire',
+			name: 'scyther',
+			xp: 125,
+			nature: 'adamant',
+			intrinsicValues: generateRandomStatObject(31),
+			happiness: 70,
+			firstMove: { name: 'slash', usedPP: 0 },
+		},
+		researchPoints: 50,
+		conditionFunction: (s: SaveFile) => {
+			return s.handledOccupants.some((h) => h.id === 'Gym Leader Jasmine');
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'catch an exceptional steel pokemon for jasmine',
 	},
 	'defeat chuck': {
 		category: 'GYM LEADER',

@@ -541,14 +541,14 @@ export const extraFeatureCheckList: {
 	{ name: 'download your player snapshot', handled: true },
 	{ name: 'import other players snapshots', handled: true },
 	{ name: 'defeat an imported trainer quest', handled: true },
-	{ name: 'repair raticate quest' },
+	{ name: 'repair raticate quest', handled: true },
+	{ name: 'jasmine' },
 	//BUGS/IMPROVEMENTS:
-
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
 	{ name: 'rollout stops stacking when target is defeated' },
 	//CONTENT:
-	{ name: 'jasmine' },
+
 	{ name: 'pryce' },
 	{ name: 'claire' },
 	{ name: 'e4 challenge' },
@@ -572,6 +572,7 @@ Beige-Apricorn: Sand-Storm Balls: Bonus for Ground and Flying Pokemon
 LightBlue-Apricorn: SnowCloud Balls: Bonus for Ice and Fairy Pokemon
 Purple-Apricorn: Spooky Balls: Bonus for Psycho, Dark, and Ghost Pokemon`,
 	},
+	{ name: 'more rock climbing spots' },
 	//SETTINGS:
 	{ name: 'random encounters' },
 	{ name: 'random evolutions' },

@@ -17,10 +17,11 @@ export const campUpgradeNames = [
 	'bag size upgrade 2',
 	'bag size upgrade 3',
 	'invite move tutor',
-	'invite ghost expert morty',
-	'invite fighting expert chuck',
 	'invite flying pokemon expert falkner',
 	'invite normal pokemon expert whitney',
+	'invite ghost expert morty',
+	'invite fighting expert chuck',
+	'invite steel pokemon expert jasmine',
 	'invite professor rowan',
 	'invite professor elm',
 	'invite pikachu fan',
@@ -94,6 +95,7 @@ export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
 	'invite museum curator': 'Sustainability',
 	'invite ghost expert morty': 'Research',
 	'invite fighting expert chuck': 'Research',
+	'invite steel pokemon expert jasmine': 'Research',
 	'invite flying pokemon expert falkner': 'Research',
 	'invite normal pokemon expert whitney': 'Research',
 	'invite professor rowan': 'Research',
@@ -156,6 +158,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'invite ability tutor': ['invite move tutor', 'training field 1'],
 	'invite ghost expert morty': ['machete certification'],
 	'invite fighting expert chuck': ['machete certification'],
+	'invite steel pokemon expert jasmine': ['machete certification'],
 	'invite flying pokemon expert falkner': ['machete certification'],
 	'invite normal pokemon expert whitney': ['machete certification'],
 	'invite professor rowan': baseRequirements,
@@ -231,6 +234,8 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 		'The Gym Leader from Violet city studies flying pokemon',
 	'invite normal pokemon expert whitney':
 		'The Gym Leader from Goldenrod City studies normal pokemon',
+	'invite steel pokemon expert jasmine':
+		'The Gym Leader from Olivine City studies steel pokemon',
 	'invite professor rowan':
 		'professor rowan collects pokemon from all over the world',
 	'invite professor elm': 'professor elm studies pokemon evolution',

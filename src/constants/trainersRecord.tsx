@@ -2440,6 +2440,46 @@ export const specialTrainers: Challenger[] = [
 	},
 	{
 		type: 'TRAINER',
+		id: 'Gym Leader Jasmine',
+		team: [
+			makeChallengerPokemon({
+				name: 'steelix',
+				firstMove: { name: 'earthquake', usedPP: 0 },
+				xp: 125000,
+				heldItemName: 'occa-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'skarmory',
+				xp: 125000,
+				heldItemName: 'occa-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'scizor',
+				xp: 125000,
+				heldItemName: 'metal-coat',
+			}),
+			makeChallengerPokemon({
+				name: 'magnezone',
+				xp: 125000,
+				heldItemName: 'magnet',
+			}),
+			makeChallengerPokemon({
+				name: 'bisharp',
+				xp: 125000,
+				heldItemName: 'black-glasses',
+			}),
+		],
+		inventory: EmptyInventory,
+		availableAfter: 'catch an exceptional steel pokemon for jasmine',
+		trainer: {
+			id: 'Gym Leader Jasmine',
+			sprite: SpriteEnum.jasmine,
+			profilePicture:
+				'https://archives.bulbagarden.net/media/upload/f/f2/VSJasmine.png',
+		},
+	},
+	{
+		type: 'TRAINER',
 		id: 'Professor Rowan',
 		team: [
 			makeChallengerPokemon({ name: 'infernape', xp: 125000 }),
