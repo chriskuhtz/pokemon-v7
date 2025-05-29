@@ -111,6 +111,27 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		if ((update.catchStreak?.streak ?? 0) > (update.longestStreak ?? 0)) {
 			update.longestStreak = update.catchStreak?.streak;
 		}
+		if (update.currentSwarm && now > update.currentSwarm?.leavesAt) {
+			update.currentSwarm = undefined;
+		}
+		if (
+			update.currentStrongSwarm &&
+			now > update.currentStrongSwarm?.leavesAt
+		) {
+			update.currentStrongSwarm = undefined;
+		}
+		if (
+			update.currentDistortionSwarm &&
+			now > update.currentDistortionSwarm?.leavesAt
+		) {
+			update.currentDistortionSwarm = undefined;
+		}
+		if (
+			!update.troubleMakers?.leavesAt ||
+			(update.troubleMakers?.leavesAt && now > update.troubleMakers?.leavesAt)
+		) {
+			update.troubleMakers = undefined;
+		}
 
 		s({
 			...update,
@@ -120,24 +141,6 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 			handledOccupants: update.handledOccupants.filter(
 				(h) => h.resetAt < 0 || h.resetAt > now
 			),
-			currentSwarm:
-				update.currentSwarm && now > update.currentSwarm?.leavesAt
-					? undefined
-					: update.currentSwarm,
-			currentStrongSwarm:
-				update.currentStrongSwarm && now > update.currentStrongSwarm?.leavesAt
-					? undefined
-					: update.currentStrongSwarm,
-			currentDistortionSwarm:
-				update.currentDistortionSwarm &&
-				now > update.currentDistortionSwarm?.leavesAt
-					? undefined
-					: update.currentDistortionSwarm,
-			troubleMakers:
-				!update.troubleMakers?.leavesAt ||
-				(update.troubleMakers?.leavesAt && now > update.troubleMakers?.leavesAt)
-					? undefined
-					: update.troubleMakers,
 		});
 	}, []);
 	const discardItemReducer = (item: ItemType, number: number) => {
