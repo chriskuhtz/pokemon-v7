@@ -1,13 +1,6 @@
 import { v4 } from 'uuid';
 import { calculateLevelData } from '../functions/calculateLevelData';
-import {
-	tier1trainers,
-	tier2trainers,
-	tier3trainers,
-	tier4trainers,
-	tier5trainers,
-	trainers,
-} from '../functions/makeRandomTrainer';
+
 import { sumOfIvs } from '../functions/sumOfIvs';
 
 import {
@@ -20,6 +13,7 @@ import {
 } from '../interfaces/Item';
 import { getRandomNature } from '../interfaces/Natures';
 import { Quest } from '../interfaces/Quest';
+import { SaveFile } from '../interfaces/SaveFile';
 import {
 	EmptyStatObject,
 	generateRandomStatObject,
@@ -39,6 +33,7 @@ import {
 	getSwarmOptions,
 	getUnderRockEncounters,
 } from './internalDex';
+import { internalDex } from './internalDexData';
 import { caveW1Encounters } from './maps/encounters/caveW1';
 import { onixCaveEncounters } from './maps/encounters/onixCave';
 import { blaineId } from './maps/occupants/blaine';
@@ -51,6 +46,14 @@ import { allRocketCampTrainersDefeated } from './maps/occupants/rocketCampOccupa
 import { sabrinaId } from './maps/occupants/sabrina';
 import { surgeId } from './maps/occupants/surge';
 import { PokemonName, pokemonNames } from './pokemonNames';
+import {
+	tier1trainers,
+	tier2trainers,
+	tier3trainers,
+	tier4trainers,
+	tier5trainers,
+	trainers,
+} from './trainersRecord';
 
 export const questNames = [
 	'catch a fire pokemon',
@@ -277,6 +280,8 @@ export const questNames = [
 	'catch a pokemon in every type of apricorn ball',
 	'defeat morty',
 	'defeat bugsy',
+	'defeat whitney',
+	'defeat jasmine',
 	'revive a fossil',
 	'revive all different fossils',
 	'evolve your starter pokemon',
@@ -440,7 +445,15 @@ export const questNames = [
 	'catch all past distortion pokemon',
 	'catch a space distortion pokemon',
 	'catch all space distortion pokemon',
-	'train a pidgeot to lvl 100',
+	'train a pidgeot to lvl 70',
+	"catch whitney's favorite cute pokemon",
+	'catch an exceptional steel pokemon for jasmine',
+	'defeat an imported challenger',
+	'defeat an imported challenger at lvl 20 or higher',
+	'defeat an imported challenger at lvl 40 or higher',
+	'defeat an imported challenger at lvl 60 or higher',
+	'defeat an imported challenger at lvl 80 or higher',
+	'defeat an imported challenger at lvl 100',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -482,9 +495,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'big-malasada': 1, 'ultra-ball': 5 },
 		researchPoints: 25,
 		conditionFunction: (s) => {
-			return s.pokemon.some(
-				(p) => p.name === 'raticate' && p.caughtOnMap === 'routeS1E1'
-			);
+			return s.bag['oaks-parcel'] > 0;
 		},
 		kind: 'QUEST_LINE',
 	},
@@ -1394,6 +1405,34 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: ['gastly', 'poochyena', 'murkrow', 'drifloon', 'houndour'],
 		kind: 'QUEST_LINE',
 	},
+	"catch whitney's favorite cute pokemon": {
+		category: 'EXPLORATION',
+		rewardItems: { 'clear-amulet': 1 },
+		researchPoints: 100,
+		conditionFunction: (s) => {
+			return (
+				s.pokedex['clefairy'].caughtOnRoutes.length > 0 &&
+				s.pokedex['jigglypuff'].caughtOnRoutes.length > 0 &&
+				s.pokedex['vulpix-alola'].caughtOnRoutes.length > 0 &&
+				s.pokedex['pikachu-belle'].caughtOnRoutes.length > 0
+			);
+		},
+		targetPokemon: ['pikachu-belle', 'clefairy', 'vulpix-alola', 'jigglypuff'],
+		kind: 'QUEST_LINE',
+	},
+	'catch an exceptional steel pokemon for jasmine': {
+		category: 'EXPLORATION',
+		rewardItems: { 'steel-gem': 10, 'babiri-berry': 10 },
+		researchPoints: 100,
+		conditionFunction: (s: SaveFile) => {
+			return s.pokemon.some(
+				(p) =>
+					internalDex[p.name].types.includes('steel') &&
+					Object.values(p.intrinsicValues).some((v) => v === 31)
+			);
+		},
+		kind: 'QUEST_LINE',
+	},
 	'catch Haunter and Mightyena': {
 		category: 'EXPLORATION',
 		rewardItems: { 'dusk-ball': 5, 'dusk-stone': 1 },
@@ -1418,7 +1457,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'QUEST_LINE',
 	},
 	'defeat morty': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		rewardItems: {
 			'ultra-ball': 5,
 			'full-restore': 5,
@@ -1458,7 +1497,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'catch Haunter and Mightyena',
 	},
 	'defeat bugsy': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		rewardItems: {
 			'ultra-ball': 5,
 			'full-restore': 5,
@@ -1497,8 +1536,88 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'training field 1',
 		availableAfter: 'report a bug',
 	},
+	'defeat whitney': {
+		category: 'GYM LEADER',
+		rewardItems: {
+			'ultra-ball': 5,
+			'full-restore': 5,
+			'silk-scarf': 1,
+			...expCandyPackage,
+		},
+		rewardPokemon: {
+			caughtAtDate: new Date().getTime(),
+			growthRate: 'medium',
+			unlockedMoves: ['dragon-dance'],
+			fixedAbility: true,
+			shiny: true,
+			maxHp: 30,
+			effortValues: EmptyStatObject,
+			ppBoostedMoves: [],
+			caughtOnMap: 'camp',
+			gender: 'MALE',
+			stepsWalked: 0,
+			ownerId: '',
+			damage: 0,
+			id: '',
+			ball: 'poke-ball',
+			ability: 'normalize',
+			name: 'buneary',
+			xp: 125,
+			nature: 'adamant',
+			intrinsicValues: generateRandomStatObject(31),
+			happiness: 70,
+			firstMove: { name: 'dragon-dance', usedPP: 0 },
+		},
+		researchPoints: 50,
+		conditionFunction: (s: SaveFile) => {
+			return s.handledOccupants.some((h) => h.id === 'Gym Leader Whitney');
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 1',
+		availableAfter: "catch whitney's favorite cute pokemon",
+	},
+	'defeat jasmine': {
+		category: 'GYM LEADER',
+		rewardItems: {
+			'ultra-ball': 5,
+			'full-restore': 5,
+			'metal-coat': 1,
+			...expCandyPackage,
+		},
+		rewardPokemon: {
+			caughtAtDate: new Date().getTime(),
+			growthRate: 'medium',
+			unlockedMoves: ['slash'],
+			fixedAbility: true,
+			shiny: true,
+			maxHp: 30,
+			effortValues: EmptyStatObject,
+			ppBoostedMoves: [],
+			caughtOnMap: 'camp',
+			gender: 'MALE',
+			stepsWalked: 0,
+			ownerId: '',
+			damage: 0,
+			id: '',
+			ball: 'poke-ball',
+			ability: 'flash-fire',
+			name: 'scyther',
+			xp: 125,
+			nature: 'adamant',
+			intrinsicValues: generateRandomStatObject(31),
+			happiness: 70,
+			firstMove: { name: 'slash', usedPP: 0 },
+		},
+		researchPoints: 50,
+		conditionFunction: (s: SaveFile) => {
+			return s.handledOccupants.some((h) => h.id === 'Gym Leader Jasmine');
+		},
+		kind: 'BULLETIN',
+		requiredUpgrade: 'training field 1',
+		availableAfter: 'catch an exceptional steel pokemon for jasmine',
+	},
 	'defeat chuck': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		rewardItems: {
 			'full-restore': 5,
 			'black-belt': 1,
@@ -1577,7 +1696,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'revive all different fossils',
 	},
 	'defeat falkner': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		rewardItems: {
 			'ultra-ball': 5,
 			'full-restore': 5,
@@ -1789,7 +1908,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		requiredUpgrade: 'invite historian',
 		kind: 'BULLETIN',
 	},
-
 	'catch the legendary beast of water': {
 		category: 'EXPLORATION',
 		rewardItems: { 'rare-candy': 10 },
@@ -1867,7 +1985,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			return !!s.mileStones.hasEvolvedStarter;
 		},
 	},
-
 	'catch a shiny pokemon': {
 		category: 'EXPLORATION',
 		kind: 'BULLETIN',
@@ -2340,7 +2457,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'deal 30000 damage with one attack',
 	},
 	'defeat erika': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		kind: 'BULLETIN',
 		researchPoints: 25,
 		rewardItems: {
@@ -2354,7 +2471,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat janine': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		kind: 'BULLETIN',
 		researchPoints: 25,
 		rewardItems: {
@@ -2368,7 +2485,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat blaine': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		kind: 'BULLETIN',
 		researchPoints: 25,
 		rewardItems: { 'occa-berry': 5, charcoal: 1, ...expCandyPackage },
@@ -2378,7 +2495,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat surge': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		kind: 'BULLETIN',
 		researchPoints: 50,
 		rewardItems: { 'wacan-berry': 5, magnet: 1, ...expCandyPackage },
@@ -2388,7 +2505,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat misty': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		kind: 'BULLETIN',
 		researchPoints: 50,
 		rewardItems: {
@@ -2403,7 +2520,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat sabrina': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		kind: 'BULLETIN',
 		researchPoints: 50,
 		rewardItems: { 'payapa-berry': 5, 'twisted-spoon': 1, ...expCandyPackage },
@@ -2413,7 +2530,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat brock': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		kind: 'BULLETIN',
 		researchPoints: 50,
 		rewardItems: { 'charti-berry': 5, 'hard-stone': 1, ...expCandyPackage },
@@ -2423,7 +2540,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 	},
 	'defeat gary': {
-		category: 'BATTLE',
+		category: 'GYM LEADER',
 		kind: 'BULLETIN',
 		researchPoints: 100,
 		rewardItems: {
@@ -3268,7 +3385,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				(f) => s.pokedex[f].caughtOnRoutes.length > 0
 			),
 	},
-	'train a pidgeot to lvl 100': {
+	'train a pidgeot to lvl 70': {
 		kind: 'BULLETIN',
 		category: 'TRAINING',
 		researchPoints: 100,
@@ -3278,8 +3395,61 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			s.pokemon.some(
 				(p) =>
 					p.name === 'pidgeot' &&
-					calculateLevelData(p.xp, p.growthRate).level === 100
+					calculateLevelData(p.xp, p.growthRate).level >= 70
 			),
+	},
+	'defeat an imported challenger': {
+		category: 'BATTLE',
+		kind: 'BULLETIN',
+		conditionFunction: (s: SaveFile) =>
+			!!s.mileStones.importedChallengerDefeatedAt,
+		researchPoints: 10,
+		rewardItems: { 'exp-candy-xs': 10 },
+	},
+	'defeat an imported challenger at lvl 20 or higher': {
+		category: 'BATTLE',
+		kind: 'BULLETIN',
+		conditionFunction: (s: SaveFile) =>
+			(s.mileStones.importedChallengerDefeatedAt ?? 0) >= 8000,
+		researchPoints: 20,
+		availableAfter: 'defeat an imported challenger',
+		rewardItems: { 'exp-candy-s': 10 },
+	},
+	'defeat an imported challenger at lvl 40 or higher': {
+		category: 'BATTLE',
+		kind: 'BULLETIN',
+		conditionFunction: (s: SaveFile) =>
+			(s.mileStones.importedChallengerDefeatedAt ?? 0) >= 64000,
+		researchPoints: 40,
+		availableAfter: 'defeat an imported challenger at lvl 20 or higher',
+		rewardItems: { 'exp-candy-m': 10 },
+	},
+	'defeat an imported challenger at lvl 60 or higher': {
+		category: 'BATTLE',
+		kind: 'BULLETIN',
+		conditionFunction: (s: SaveFile) =>
+			(s.mileStones.importedChallengerDefeatedAt ?? 0) >= 216000,
+		researchPoints: 60,
+		availableAfter: 'defeat an imported challenger at lvl 40 or higher',
+		rewardItems: { 'exp-candy-l': 10 },
+	},
+	'defeat an imported challenger at lvl 80 or higher': {
+		category: 'BATTLE',
+		kind: 'BULLETIN',
+		conditionFunction: (s: SaveFile) =>
+			(s.mileStones.importedChallengerDefeatedAt ?? 0) >= 512000,
+		researchPoints: 80,
+		availableAfter: 'defeat an imported challenger at lvl 60 or higher',
+		rewardItems: { 'exp-candy-xl': 10 },
+	},
+	'defeat an imported challenger at lvl 100': {
+		category: 'BATTLE',
+		kind: 'BULLETIN',
+		conditionFunction: (s: SaveFile) =>
+			(s.mileStones.importedChallengerDefeatedAt ?? 0) >= 1000000,
+		researchPoints: 100,
+		availableAfter: 'defeat an imported challenger at lvl 80 or higher',
+		rewardItems: { 'exp-candy-xl': 10 },
 	},
 } as Record<QuestName, Quest>;
 

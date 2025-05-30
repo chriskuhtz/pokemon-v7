@@ -103,7 +103,9 @@ export const TroubleMakersIcon = () => {
 				size={battleSpriteSize}
 				color={typeColors['fighting']}
 				onClick={() =>
-					addMessage({ message: `${remaining} Magma Members remaining` })
+					addMessage({
+						message: `${remaining} Magma Members remaining`,
+					})
 				}
 			/>
 		);

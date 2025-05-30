@@ -188,7 +188,11 @@ export const OwnedPokemonCardContent = ({
 						<HappinessIcon value={ownedPokemon.happiness} />
 					</div>
 				</div>
-				<MovesDisplay ownedPokemon={ownedPokemon} setMoves={setMoves} />
+				<MovesDisplay
+					ownedPokemon={ownedPokemon}
+					setMoves={setMoves}
+					onlyCurrent
+				/>
 				<StatDisplay ownedPokemon={ownedPokemon} data={data} />{' '}
 				<EvoInfo
 					ownedPokemon={ownedPokemon}

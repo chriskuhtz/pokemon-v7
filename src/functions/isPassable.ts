@@ -17,7 +17,8 @@ export const isPassable = (
   map: OverworldMap,
   currentOccupants: Occupant[],
   canSwim: boolean,
-  flying: boolean
+  flying: boolean,
+  canClimb: boolean
 ): boolean => {
   const { width, height } = getMapDimensions(map);
   if (field.y >= height) {
@@ -35,12 +36,6 @@ export const isPassable = (
   if (devmode || flying) {
     return true;
   }
-  const nextFieldObstacle = map.tileMap.obstacleLayer[field.y][field.x];
-
-  if (nextFieldObstacle) {
-    return false;
-  }
-
   const nextFieldOccupant = currentOccupants.find(
     (c) =>
       c.x === field.x &&
@@ -49,7 +44,17 @@ export const isPassable = (
       c.type !== "ON_STEP_PORTAL"
   );
 
+  if (nextFieldOccupant?.type === "CLIMBING_STEPS" && canClimb) {
+    return true;
+  }
+
   if (nextFieldOccupant) {
+    return false;
+  }
+
+  const nextFieldObstacle = map.tileMap.obstacleLayer[field.y][field.x];
+
+  if (nextFieldObstacle) {
     return false;
   }
 

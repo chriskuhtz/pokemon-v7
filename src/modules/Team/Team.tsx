@@ -16,6 +16,7 @@ import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSys
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import { withChangedMoves } from '../../functions/withChangedMoves';
 
 export const Team = ({
 	team,
@@ -180,36 +181,7 @@ export const Team = ({
 						setTeam(
 							team.map((t) => {
 								if (t.id === id) {
-									return {
-										...t,
-										firstMove: {
-											name: newMoveNames[0],
-											usedPP: t.firstMove.usedPP,
-										},
-										secondMove:
-											newMoveNames.length > 1
-												? {
-														name: newMoveNames[1],
-														usedPP: t.secondMove?.usedPP ?? 0,
-												  }
-												: undefined,
-
-										thirdMove:
-											newMoveNames.length > 2
-												? {
-														name: newMoveNames[2],
-														usedPP: t.thirdMove?.usedPP ?? 0,
-												  }
-												: undefined,
-
-										fourthMove:
-											newMoveNames.length > 3
-												? {
-														name: newMoveNames[3],
-														usedPP: t.fourthMove?.usedPP ?? 0,
-												  }
-												: undefined,
-									};
+									return withChangedMoves(t, newMoveNames);
 								}
 
 								return t;

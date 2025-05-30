@@ -42,6 +42,22 @@ const playerCanvasId = "playerCanvas";
 const backgroundCanvasId = "bg";
 const occupantsCanvasId = "occs";
 
+export const useInteractWithClimbingSteps = () => {
+  const { addMultipleMessages } = useContext(MessageQueueContext);
+
+  const { saveFile } = useContext(SaveFileContext);
+
+  return useCallback(() => {
+    if (!saveFile.campUpgrades["rock climbing certification"]) {
+      addMultipleMessages([
+        { message: "A certified rock climber would be allowed to climb here" },
+        { message: "... Bureaucracy" },
+      ]);
+      return;
+    }
+  }, [addMultipleMessages, saveFile.campUpgrades]);
+};
+
 export const Overworld = () => {
   const shader = useShader();
   const [stepsTaken, setStepsTaken] = useState<number>(0);
@@ -57,6 +73,7 @@ export const Overworld = () => {
   } = useContext(SaveFileContext);
   const { location, setLocation: setCharacterLocation } =
     useContext(LocationContext);
+  const interactWithClimbingSteps = useInteractWithClimbingSteps();
   const interactWithApricornTree = useApricornTree();
   const interactWithHoneyTree = useHoneyTree();
   const interactWithTrainer = useInteractWithTrainer();
@@ -151,13 +168,13 @@ export const Overworld = () => {
         interactWithSnorlax,
         interactWithStaticEncounter,
         interactWithTrainer,
+        interactWithClimbingSteps,
         goTo: (route) => navigateAwayFromOverworldReducer(route, stepsTaken),
         settings: saveFile.settings,
       }),
     [
       latestMessage,
       addMultipleMessages,
-      stepsTaken,
       rotateOccupant,
       location,
       talkToNurse,
@@ -180,7 +197,9 @@ export const Overworld = () => {
       interactWithSnorlax,
       interactWithStaticEncounter,
       interactWithTrainer,
+      interactWithClimbingSteps,
       navigateAwayFromOverworldReducer,
+      stepsTaken,
     ]
   );
   //MOVEMENT

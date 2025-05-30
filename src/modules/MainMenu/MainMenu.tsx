@@ -13,6 +13,10 @@ import { BugReportButton } from "../../components/BugReport/BugReport";
 import { IdeaButton } from "../../components/IdeaReport/IdeaReport";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
+import {
+  ExportSnapshotCard,
+  ImportSnapshotCard,
+} from "../../components/SnapshotCard/SnapshotCard";
 import { TrainerCard } from "../../components/TrainerCard/TrainerCard";
 import {
   battleSpriteSize,
@@ -139,6 +143,8 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
           icon={<FaSearch size={battleSpriteSize} />}
           actionElements={[]}
         />
+        <ExportSnapshotCard />
+        <ImportSnapshotCard />
         <ToggleMovementButtons />
         {resetConfirmationInProgress ? (
           <button

@@ -148,6 +148,7 @@ const UpgradeCard = ({
 		const requiredQuest = Object.entries(QuestsRecord)
 			.find(([, value]) => value.campUpgrade === upgrade)
 			?.at(0) as QuestName | undefined;
+
 		return (
 			<Card
 				key={upgrade}

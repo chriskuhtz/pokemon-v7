@@ -584,6 +584,15 @@ export const handleUniqueMoves = ({
 			};
 		} else addMessage({ message: `it failed` });
 	}
+	if (move.name === 'magic-powder') {
+		updatedTarget = applySecondaryAilmentToPokemon({
+			pokemon: updatedTarget,
+			ailment: 'color-changed',
+			newType: 'psychic',
+			applicator: updatedAttacker,
+			addMessage,
+		});
+	}
 	return updatedPokemon.map((p) => {
 		if (p.id === updatedAttacker.id) {
 			return updatedAttacker;

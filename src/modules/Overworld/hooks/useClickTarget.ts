@@ -62,7 +62,8 @@ export const useClickTarget = (
 				assembledMap,
 				currentOccupants,
 				saveFile.campUpgrades['swimming certification'],
-				!!saveFile.flying
+				!!saveFile.flying,
+				saveFile.campUpgrades['rock climbing certification']
 			)
 		) {
 			setNextInput('RIGHT');
@@ -75,7 +76,8 @@ export const useClickTarget = (
 				assembledMap,
 				currentOccupants,
 				saveFile.campUpgrades['swimming certification'],
-				!!saveFile.flying
+				!!saveFile.flying,
+				saveFile.campUpgrades['rock climbing certification']
 			)
 		) {
 			setNextInput('LEFT');
@@ -88,7 +90,8 @@ export const useClickTarget = (
 				assembledMap,
 				currentOccupants,
 				saveFile.campUpgrades['swimming certification'],
-				!!saveFile.flying
+				!!saveFile.flying,
+				saveFile.campUpgrades['rock climbing certification']
 			)
 		) {
 			setNextInput('DOWN');
@@ -101,7 +104,8 @@ export const useClickTarget = (
 				assembledMap,
 				currentOccupants,
 				saveFile.campUpgrades['swimming certification'],
-				!!saveFile.flying
+				!!saveFile.flying,
+				saveFile.campUpgrades['rock climbing certification']
 			)
 		) {
 			setNextInput('UP');
@@ -116,7 +120,8 @@ export const useClickTarget = (
 				assembledMap,
 				currentOccupants,
 				saveFile.campUpgrades['swimming certification'],
-				!!saveFile.flying
+				!!saveFile.flying,
+				saveFile.campUpgrades['rock climbing certification']
 			) &&
 				getOverworldDistance(clickTarget, playerLocation) === 1)
 		) {

@@ -4,14 +4,7 @@ import { TbSoccerField } from 'react-icons/tb';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { Sprite } from '../../components/Sprite/Sprite';
 import { calculateLevelData } from '../../functions/calculateLevelData';
-import {
-	specialTrainers,
-	tier1trainers,
-	tier2trainers,
-	tier3trainers,
-	tier4trainers,
-	tier5trainers,
-} from '../../functions/makeRandomTrainer';
+
 import { LocationContext } from '../../hooks/LocationProvider';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Challenger } from '../../interfaces/Challenger';
@@ -20,6 +13,14 @@ import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 import { useChallengeTrainer } from '../Overworld/hooks/useChallengeTrainer';
+import {
+	tier1trainers,
+	tier2trainers,
+	tier3trainers,
+	tier4trainers,
+	tier5trainers,
+	specialTrainers,
+} from '../../constants/trainersRecord';
 
 export const TrainingField = () => {
 	const { setActiveTabReducer, saveFile, patchSaveFileReducer } =

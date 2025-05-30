@@ -390,5 +390,18 @@ export const applySecondaryAilmentToPokemon = ({
 			],
 		};
 	}
+	if (ailment === 'octolocked') {
+		addMessage({ message: `${pokemon.data.name} is wrapped tightly` });
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'octolocked',
+					duration: 9000,
+				},
+			],
+		};
+	}
 	return pokemon;
 };

@@ -1,5 +1,6 @@
 import { applyAttackStatChanges } from '../../../../../../functions/applyAttackStatChanges';
 import { applySecondaryAilmentToPokemon } from '../../../../../../functions/applySecondaryAilmentToPokemon';
+import { getHpPercentage } from '../../../../../../functions/getHpPercentage';
 import { arePokemonOfOppositeGenders } from '../../../../../../functions/getRivalryFactor';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
@@ -36,6 +37,23 @@ export const handleNetGoodStatsAttack = ({
 				applicator: updatedAttacker,
 				addMessage,
 			});
+		}
+		if (move.name === 'clangorous-soul') {
+			const remaining = getHpPercentage(updatedAttacker);
+
+			if (remaining < 0.33) {
+				addMessage({ message: 'it failed' });
+				return pokemon;
+			} else {
+				addMessage({
+					message: `${updatedAttacker.name} sacrifficed some of its HP for a boost`,
+				});
+				updatedAttacker = {
+					...updatedAttacker,
+					damage:
+						updatedAttacker.damage + Math.floor(updatedAttacker.stats.hp / 3),
+				};
+			}
 		}
 		return pokemon.map((p) => {
 			if (p.id === attacker.id) {

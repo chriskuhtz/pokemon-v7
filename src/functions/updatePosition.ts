@@ -15,7 +15,8 @@ export const updatePosition = (
   addStep: () => void,
   currentOccupants: Occupant[],
   canSwim: boolean,
-  flying: boolean
+  flying: boolean,
+  canClimb: boolean
 ): { x: number; y: number } => {
   const nextLocation = getNextLocation(playerLocation, nextInput);
 
@@ -29,19 +30,9 @@ export const updatePosition = (
       return nextLocation;
     } else return playerLocation;
   }
-  if (southOfEdge && !flying) {
-    if (nextInput !== "UP") {
-      addStep();
-      return nextLocation;
-    } else return playerLocation;
-  }
-  if (northOfEdge && !flying) {
-    if (nextInput !== "DOWN") {
-      addStep();
-      return nextLocation;
-    } else return playerLocation;
-  }
-  if (isPassable(nextLocation, map, currentOccupants, canSwim, flying)) {
+  if (
+    isPassable(nextLocation, map, currentOccupants, canSwim, flying, canClimb)
+  ) {
     addStep();
     return nextLocation;
   }

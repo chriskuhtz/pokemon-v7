@@ -5,9 +5,9 @@ const rowanBase: Omit<
 	OverworldNpc,
 	'unhandledMessage' | 'conditionFunction' | 'id'
 > = {
-	x: 13,
-	y: 3,
-	orientation: 'DOWN',
+	x: 11,
+	y: 5,
+	orientation: 'UP',
 	type: 'NPC',
 	sprite: SpriteEnum.rowan,
 };

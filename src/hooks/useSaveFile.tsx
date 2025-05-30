@@ -73,6 +73,7 @@ export interface UseSaveFile {
 	changeHeldItemReducer: (pokemonId: string, newItem?: ItemType) => void;
 	useSacredAshReducer: () => void;
 	evolvePokemonReducer: (x: EvolutionReducerPayload) => void;
+	reset: () => void;
 }
 const migrateSavefile = (input: SaveFile) => {
 	const updatedInput = { ...input };
@@ -81,6 +82,15 @@ const migrateSavefile = (input: SaveFile) => {
 	updatedInput.quests = Object.fromEntries(
 		questNames.map((q) => [q, updatedInput.quests[q] ?? 'INACTIVE'])
 	) as Record<QuestName, QuestStatus>;
+	//migrate in unlocks
+	Object.entries(QuestsRecord).forEach(([key, value]) => {
+		if (!value.campUpgrade) {
+			return;
+		}
+		if (updatedInput.quests[key as QuestName] === 'COLLECTED') {
+			updatedInput.campUpgrades[value.campUpgrade] = true;
+		}
+	});
 
 	return updatedInput;
 };
@@ -97,10 +107,14 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		[saveFile]
 	);
 
+	const reset = useCallback(() => {
+		s(testState);
+	}, []);
+
 	//handle side effects here
 	const setSaveFile = useCallback((u: SaveFile) => {
 		const update = { ...u };
-		const newTime = new Date().getTime();
+		const now = new Date().getTime();
 
 		let pokedex = update.pokedex ?? emptyPokedex;
 
@@ -111,38 +125,36 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		if ((update.catchStreak?.streak ?? 0) > (update.longestStreak ?? 0)) {
 			update.longestStreak = update.catchStreak?.streak;
 		}
+		if (update.currentSwarm && now > update.currentSwarm?.leavesAt) {
+			update.currentSwarm = undefined;
+		}
+		if (
+			update.currentStrongSwarm &&
+			now > update.currentStrongSwarm?.leavesAt
+		) {
+			update.currentStrongSwarm = undefined;
+		}
+		if (
+			update.currentDistortionSwarm &&
+			now > update.currentDistortionSwarm?.leavesAt
+		) {
+			update.currentDistortionSwarm = undefined;
+		}
+		if (
+			!update.troubleMakers?.leavesAt ||
+			(update.troubleMakers?.leavesAt && now > update.troubleMakers?.leavesAt)
+		) {
+			update.troubleMakers = undefined;
+		}
 
 		s({
 			...update,
-			lastEdited: newTime,
+			lastEdited: now,
 			pokedex,
-			//migrate pokemon
-			//pokemon: update.pokemon.map(migratePokemon),
-			//migrate inventory
 			bag: joinInventories(EmptyInventory, update.bag),
 			handledOccupants: update.handledOccupants.filter(
-				(h) => h.resetAt < 0 || h.resetAt > newTime
+				(h) => h.resetAt < 0 || h.resetAt > now
 			),
-			currentSwarm:
-				update.currentSwarm && newTime > update.currentSwarm?.leavesAt
-					? undefined
-					: update.currentSwarm,
-			currentStrongSwarm:
-				update.currentStrongSwarm &&
-				newTime > update.currentStrongSwarm?.leavesAt
-					? undefined
-					: update.currentStrongSwarm,
-			currentDistortionSwarm:
-				update.currentDistortionSwarm &&
-				newTime > update.currentDistortionSwarm?.leavesAt
-					? undefined
-					: update.currentDistortionSwarm,
-			troubleMakers:
-				(update.troubleMakers?.leavesAt &&
-					newTime > update.troubleMakers?.leavesAt) ||
-				!update.troubleMakers?.leavesAt
-					? undefined
-					: update.troubleMakers,
 		});
 	}, []);
 	const discardItemReducer = (item: ItemType, number: number) => {
@@ -479,6 +491,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		fulfillQuestReducer,
 		changeHeldItemReducer,
 		useSacredAshReducer,
+		reset,
 	};
 };
 

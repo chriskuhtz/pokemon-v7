@@ -16,6 +16,8 @@ export const questCategories = [
 	'BATTLE',
 	'TRAINING',
 	'POKEDEX',
+	'GYM LEADER',
+	'TRAVELLING TRAINER',
 ] as const;
 export type QuestCategory = (typeof questCategories)[number];
 

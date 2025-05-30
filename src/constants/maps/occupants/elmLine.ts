@@ -5,9 +5,9 @@ const elmBase: Omit<
 	OverworldNpc,
 	'unhandledMessage' | 'conditionFunction' | 'id'
 > = {
-	x: 12,
-	y: 3,
-	orientation: 'DOWN',
+	x: 10,
+	y: 5,
+	orientation: 'UP',
 	type: 'NPC',
 	sprite: SpriteEnum.elm,
 };

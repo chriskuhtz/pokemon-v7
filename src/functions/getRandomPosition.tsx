@@ -9,7 +9,7 @@ export const getRandomPosition = (
 
 	if (
 		hasForeground({ x, y }, map) ||
-		!isPassable({ x, y }, map, map.occupants, false, false)
+		!isPassable({ x, y }, map, map.occupants, false, false, false)
 	) {
 		return getRandomPosition(map);
 	}

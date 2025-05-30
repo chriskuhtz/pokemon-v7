@@ -54,6 +54,7 @@ export const interactWithFunction = ({
 	interactWithHallowedTower,
 	interactWithBush,
 	interactWithRock,
+	interactWithClimbingSteps,
 	interactWithLedge,
 	interactWithZigzagoonForager,
 	interactWithDugtrioExplorer,
@@ -81,6 +82,7 @@ export const interactWithFunction = ({
 	interactWithCombeeHive: () => void;
 	interactWithBush: (x: OverworldBush) => void;
 	interactWithRock: (x: OverworldRock) => void;
+	interactWithClimbingSteps: () => void;
 	interactWithTrainer: (x: OverworldTrainer) => void;
 	interactWithLedge: (x: Ledge) => void;
 	interactWithSnorlax: (x: OverworldSnorlax) => void;
@@ -160,6 +162,10 @@ export const interactWithFunction = ({
 	}
 	if (data.type === 'ROCK') {
 		interactWithRock(data);
+		return;
+	}
+	if (data.type === 'CLIMBING_STEPS') {
+		interactWithClimbingSteps();
 		return;
 	}
 	if (data.type === 'LEDGE') {
