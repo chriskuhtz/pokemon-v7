@@ -1,12 +1,11 @@
 import { getTimeOfDay } from "../../../functions/getTimeOfDay";
 import { OverworldMap } from "../../../interfaces/OverworldMap";
 import { hughcaveW1 } from "./hugh";
-import { redcaveW1 } from "./red";
 
 export const caveW1Occupants: OverworldMap["occupants"] = [
   {
     type: "ON_STEP_PORTAL",
-    id: "cave entry bottom",
+    id: "cave1 entry bottom",
     conditionFunction: () => true,
     x: 28,
     y: 47,
@@ -20,33 +19,31 @@ export const caveW1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ON_STEP_PORTAL",
-    id: "cave entry middle",
+    id: "cave1 entry middle",
     conditionFunction: () => true,
-    x: 6,
-    y: 17,
+    x: 2,
+    y: 36,
     portal: {
       mapId: "routeW1",
-      x: 7,
-      y: 17,
-      orientation: "DOWN",
+      x: 3,
+      y: 36,
+      orientation: "RIGHT",
       forwardFoot: "CENTER1",
     },
-    sprite: "/mapObjects/ladderUp.png",
   },
   {
     type: "ON_STEP_PORTAL",
-    id: "cave entry top",
+    id: "cave1 cave12",
     conditionFunction: () => true,
-    x: 23,
-    y: 2,
+    x: 47,
+    y: 21,
     portal: {
-      mapId: "routeW1",
-      x: 24,
-      y: 2,
-      orientation: "DOWN",
+      mapId: "caveW12",
+      x: 46,
+      y: 21,
+      orientation: "RIGHT",
       forwardFoot: "CENTER1",
     },
-    sprite: "/mapObjects/ladderUp.png",
   },
   {
     type: "ITEM",
@@ -70,16 +67,6 @@ export const caveW1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ITEM",
-    x: 5,
-    y: 3,
-    item: "rocky-helmet",
-    amount: 1,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === "caveW1-rocky-helmet"),
-    id: "caveW1-rocky-helmet",
-  },
-  {
-    type: "ITEM",
     x: 35,
     y: 45,
     item: "max-mushroom",
@@ -97,16 +84,6 @@ export const caveW1Occupants: OverworldMap["occupants"] = [
     conditionFunction: (s) =>
       !s.handledOccupants.some((h) => h.id === "caveW1-elixir"),
     id: "caveW1-elixir",
-  },
-  {
-    type: "ITEM",
-    x: 48,
-    y: 3,
-    item: "revive",
-    amount: 2,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === "caveW1-revive"),
-    id: "caveW1-revive",
   },
   {
     type: "POKEMON",
@@ -128,6 +105,5 @@ export const caveW1Occupants: OverworldMap["occupants"] = [
       s.campUpgrades["invite historian"],
     id: "routeW1_moltres",
   },
-  redcaveW1,
   hughcaveW1,
 ];
