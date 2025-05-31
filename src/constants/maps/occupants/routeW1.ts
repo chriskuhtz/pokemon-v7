@@ -257,8 +257,8 @@ export const routeW1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ITEM",
-    x: 36,
-    y: 21,
+    x: 39,
+    y: 19,
     item: "fire-stone",
     amount: 1,
     conditionFunction: (s) =>
@@ -267,7 +267,7 @@ export const routeW1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ITEM",
-    x: 5,
+    x: 9,
     y: 27,
     item: "plume-fossil",
     amount: 1,
@@ -277,8 +277,8 @@ export const routeW1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ITEM",
-    x: 3,
-    y: 37,
+    x: 9,
+    y: 8,
     item: "rage-candy-bar",
     amount: 2,
     conditionFunction: (s) =>
@@ -304,6 +304,41 @@ export const routeW1Occupants: OverworldMap["occupants"] = [
     type: "CLIMBING_STEPS",
     x: 21,
     y: 42,
+    conditionFunction: () => true,
+    id: "climbing-steps-routeW1-3",
+  },
+  {
+    type: "CLIMBING_STEPS",
+    x: 8,
+    y: 5,
+    conditionFunction: () => true,
+    id: "climbing-steps-routeW1-3",
+  },
+  {
+    type: "CLIMBING_STEPS",
+    x: 8,
+    y: 6,
+    conditionFunction: () => true,
+    id: "climbing-steps-routeW1-3",
+  },
+  {
+    type: "CLIMBING_STEPS",
+    x: 16,
+    y: 17,
+    conditionFunction: () => true,
+    id: "climbing-steps-routeW1-3",
+  },
+  {
+    type: "CLIMBING_STEPS",
+    x: 16,
+    y: 18,
+    conditionFunction: () => true,
+    id: "climbing-steps-routeW1-3",
+  },
+  {
+    type: "CLIMBING_STEPS",
+    x: 16,
+    y: 19,
     conditionFunction: () => true,
     id: "climbing-steps-routeW1-3",
   },

@@ -9274,7 +9274,7 @@ export const caveW12: OverworldMap = {
         null,
         null,
         null,
-        { yOffset: -464, xOffset: -16 },
+        null,
         null,
         null,
         null,
