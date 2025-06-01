@@ -72,6 +72,7 @@ export const recoveryMoves = [
 	'rock-wrecker',
 	'roar-of-time',
 	'prismatic-laser',
+	'meteor-assault',
 ];
 
 const contactMoves = [
@@ -388,12 +389,14 @@ export const flyHitMoves = [
 	'magnet-bomb',
 	'hurricane',
 	'smart-strike',
+	'false-surrender',
 ];
 export const digHitMoves = [
 	'earthquake',
 	'magnitude',
 	'magnet-bomb',
 	'smart-strike',
+	'false-surrender',
 ];
 export const shadowHitMoves = ['magnet-bomb'];
 export const flyDoubleDamageMoves = ['gust', 'twister'];

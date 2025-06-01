@@ -2866,8 +2866,16 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/792/',
 		handled: true,
 	},
-	{ name: 'false-surrender', url: 'https://pokeapi.co/api/v2/move/793/' },
-	{ name: 'meteor-assault', url: 'https://pokeapi.co/api/v2/move/794/' },
+	{
+		name: 'false-surrender',
+		url: 'https://pokeapi.co/api/v2/move/793/',
+		handled: true,
+	},
+	{
+		name: 'meteor-assault',
+		url: 'https://pokeapi.co/api/v2/move/794/',
+		handled: true,
+	},
 	{ name: 'eternabeam', url: 'https://pokeapi.co/api/v2/move/795/' },
 	{ name: 'steel-beam', url: 'https://pokeapi.co/api/v2/move/796/' },
 	{ name: 'expanding-force', url: 'https://pokeapi.co/api/v2/move/797/' },
@@ -3638,6 +3646,8 @@ export const handledMoves = [
 	'strange-steam',
 	'spirit-break',
 	'obstruct',
+	'false-surrender',
+	'meteor-assault',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
