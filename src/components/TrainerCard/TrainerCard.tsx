@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { battleSpriteSize } from '../../constants/gameData';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
-import { Stack } from '../../uiComponents/Stack/Stack';
 
 export const TrainerCard = () => {
 	const {
@@ -14,7 +13,6 @@ export const TrainerCard = () => {
 			rangerLevel,
 			catchBoosts,
 			longestStreak,
-			badges,
 		},
 	} = useContext(SaveFileContext);
 
@@ -104,18 +102,6 @@ export const TrainerCard = () => {
 				) : (
 					<></>
 				)}
-			</div>
-			<div>
-				<h3>Badges:</h3>
-				<Stack mode="row">
-					{badges.map((b) => (
-						<img
-							height={battleSpriteSize}
-							width={battleSpriteSize}
-							src={`/badges/${b}.png`}
-						/>
-					))}
-				</Stack>
 			</div>
 		</div>
 	);

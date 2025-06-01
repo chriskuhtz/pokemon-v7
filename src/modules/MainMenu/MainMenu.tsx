@@ -36,6 +36,7 @@ import { SaveFileContext } from '../../hooks/useSaveFile';
 import { useTeleport } from '../../hooks/useTeleport';
 import { EmptyInventory } from '../../interfaces/Inventory';
 import { RoutesType } from '../../interfaces/Routing';
+import { BadgesCard } from '../../components/BadgesCard/BadgesCard';
 
 export const onChallengeField = (id: MapId) => {
 	return id === challengeFieldId || id === randomFieldId;
@@ -54,6 +55,7 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 		<Page headline="Main Menu:" goBack={goBack}>
 			<Stack mode="column">
 				<TrainerCard />
+				<BadgesCard />
 				{teleporter && (
 					<Card
 						onClick={() => teleportHome()}
