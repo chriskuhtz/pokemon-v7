@@ -3,12 +3,9 @@ import React, {
 	useCallback,
 	useContext,
 	useEffect,
-	useMemo,
 	useState,
 } from 'react';
 import { MoveName } from '../constants/checkLists/movesCheckList';
-
-import { v4 } from 'uuid';
 
 import {
 	battleSpriteSize,
@@ -25,12 +22,7 @@ import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getBagLimit, getTotalInventoryAmount } from '../functions/getBagLimit';
 import { getItemUrl } from '../functions/getItemUrl';
-import { getRewardItemsForQuest } from '../functions/getRewardForQuest';
 import { TimeOfDay } from '../functions/getTimeOfDay';
-import {
-	EmptyCatchBoosts,
-	joinCatchBoosts,
-} from '../functions/joinCatchBoosts';
 import { updateItemFunction } from '../functions/updateItemFunction';
 import { Challenger } from '../interfaces/Challenger';
 import { EmptyInventory, joinInventories } from '../interfaces/Inventory';
@@ -39,7 +31,7 @@ import { Occupant } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { QuestStatus } from '../interfaces/Quest';
 import { RoutesType } from '../interfaces/Routing';
-import { CatchBoosts, SaveFile } from '../interfaces/SaveFile';
+import { SaveFile } from '../interfaces/SaveFile';
 import { MessageQueueContext } from './useMessageQueue';
 
 export interface EvolutionReducerPayload {
@@ -69,7 +61,6 @@ export interface UseSaveFile {
 		item: ItemType,
 		move?: MoveName
 	) => void;
-	fulfillQuestReducer: (q: QuestName) => void;
 	changeHeldItemReducer: (pokemonId: string, newItem?: ItemType) => void;
 	useSacredAshReducer: () => void;
 	evolvePokemonReducer: (x: EvolutionReducerPayload) => void;
@@ -91,6 +82,15 @@ const migrateSavefile = (input: SaveFile) => {
 			updatedInput.campUpgrades[value.campUpgrade] = true;
 		}
 	});
+	//migrate in badges
+	Object.entries(QuestsRecord).forEach(([key, value]) => {
+		if (!value.badge) {
+			return;
+		}
+		if (updatedInput.quests[key as QuestName] === 'COLLECTED') {
+			updatedInput.badges = [...new Set([...updatedInput.badges, value.badge])];
+		}
+	});
 
 	return updatedInput;
 };
@@ -101,11 +101,6 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 	const loaded = local ? migrateSavefile(JSON.parse(local) as SaveFile) : init;
 
 	const [saveFile, s] = useState<SaveFile>(loaded);
-
-	const team = useMemo(
-		() => saveFile.pokemon.filter((p) => p.onTeam),
-		[saveFile]
-	);
 
 	const reset = useCallback(() => {
 		s(testState);
@@ -291,58 +286,6 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		});
 	};
 
-	const fulfillQuestReducer = (q: QuestName) => {
-		const quest = QuestsRecord[q];
-
-		const reward = getRewardItemsForQuest(q);
-		const updatedInventory = joinInventories(saveFile.bag, reward);
-
-		const pokemon = quest.rewardPokemon
-			? [
-					...saveFile.pokemon,
-					{
-						...quest.rewardPokemon,
-						id: v4(),
-						ownerId: saveFile.playerId,
-						onTeam: team.length < 6,
-					},
-			  ]
-			: saveFile.pokemon;
-
-		const existingCatchBoosts: CatchBoosts =
-			saveFile.catchBoosts ?? EmptyCatchBoosts;
-
-		const updatedCampUpgrades = { ...saveFile.campUpgrades };
-
-		if (quest.campUpgrade) {
-			updatedCampUpgrades[quest.campUpgrade] = true;
-		}
-
-		const rewardStrings: string[] = [
-			`${quest.researchPoints} Research Points`,
-			quest.rangerLevels ? `${quest.rangerLevels} Ranger Levels` : undefined,
-			...Object.entries(reward).map(([item, amount]) => `${amount} ${item}`),
-			quest.rewardPokemon ? `a ${quest.rewardPokemon.name}` : undefined,
-			quest.campUpgrade ? quest.campUpgrade : undefined,
-		].filter((s) => s !== undefined);
-
-		addMessage({
-			message: `Received ${rewardStrings.join(' + ')} `,
-		});
-		setSaveFile({
-			...saveFile,
-			bag: updatedInventory,
-			quests: { ...saveFile.quests, [q]: 'COLLECTED' },
-			researchPoints: saveFile.researchPoints + quest.researchPoints,
-			rangerLevel: (saveFile.rangerLevel ?? 0) + (quest.rangerLevels ?? 0),
-			catchBoosts: joinCatchBoosts(
-				existingCatchBoosts,
-				quest.catchBoosts ?? {}
-			),
-			campUpgrades: updatedCampUpgrades,
-			pokemon,
-		});
-	};
 	const changeHeldItemReducer = (pokemonId: string, newItem?: ItemType) => {
 		const heldItem = saveFile.pokemon.find(
 			(p) => p.id === pokemonId
@@ -488,7 +431,6 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		navigateAwayFromOverworldReducer,
 		handleOccupantReducer,
 		applyItemToPokemonReducer,
-		fulfillQuestReducer,
 		changeHeldItemReducer,
 		useSacredAshReducer,
 		reset,
