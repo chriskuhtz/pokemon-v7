@@ -243,7 +243,7 @@ export const Overworld = () => {
 							top: -location.y * baseSize,
 							left: -location.x * baseSize,
 							position: 'absolute',
-							zIndex: 2,
+							zIndex: 3,
 						}}
 					>
 						<ClickerGrid
@@ -254,6 +254,22 @@ export const Overworld = () => {
 							mapId={location.mapId}
 						/>
 					</div>
+					{map.foggy ? (
+						<div
+							className="fogshader"
+							style={{
+								marginLeft: '-100dvw',
+								width: '300dvw',
+								height: '100dvh',
+								top: -location.y * baseSize,
+								left: -location.x * baseSize,
+								position: 'absolute',
+								zIndex: 2,
+							}}
+						/>
+					) : (
+						<></>
+					)}
 					<div
 						id="shader1"
 						style={{

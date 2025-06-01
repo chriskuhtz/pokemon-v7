@@ -8,3 +8,21 @@
 	justify-content: center;
 	overflow: hidden;
 }
+.fogshader {
+	background-image: url('/shader/fog.gif');
+	opacity: 0.3;
+	animation: infinite;
+	animation-name: scroll;
+	animation-direction: alternate;
+	animation-duration: 20s;
+}
+
+@keyframes scroll {
+	from {
+		transform: translateX(5%);
+	}
+
+	to {
+		transform: translateX(15%);
+	}
+}
