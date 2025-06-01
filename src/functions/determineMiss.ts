@@ -27,6 +27,7 @@ export type MissReason =
 	| 'TARGET_NOT_ASLEEP'
 	| 'PROTECTED'
 	| 'SPIKY_SHIELDED'
+	| 'OBSTRUCTED'
 	| 'BANEFUL_BUNKERED'
 	| 'QUEENLY_MAJESTY'
 	| 'PSYCHIC_TERRAIN';
@@ -74,6 +75,9 @@ export const determineMiss = (
 			attacker.ability === 'unseen-fist');
 	if (target.spikyShielded && !passesThrough) {
 		return { miss: true, reason: 'SPIKY_SHIELDED' };
+	}
+	if (target.obstructed && !passesThrough) {
+		return { miss: true, reason: 'OBSTRUCTED' };
 	}
 	if (target.banefulBunkered && !passesThrough) {
 		return { miss: true, reason: 'BANEFUL_BUNKERED' };

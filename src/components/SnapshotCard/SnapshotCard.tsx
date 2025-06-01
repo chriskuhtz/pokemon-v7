@@ -158,3 +158,25 @@ export const ImportSnapshotCard = () => {
 		/>
 	);
 };
+export const ResetSnapshotCard = () => {
+	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
+
+	if (!saveFile.importedChallenger) {
+		return <></>;
+	}
+
+	return (
+		<Card
+			icon={
+				saveFile.importedChallenger ? (
+					<SpriteIcon sprite={saveFile.importedChallenger.sprite} />
+				) : (
+					<FaRegCircleQuestion size={battleSpriteSize} />
+				)
+			}
+			content={<h3>Remove Challenger {saveFile.importedChallenger.id}</h3>}
+			actionElements={[]}
+			onClick={() => patchSaveFileReducer({ importedChallenger: undefined })}
+		/>
+	);
+};

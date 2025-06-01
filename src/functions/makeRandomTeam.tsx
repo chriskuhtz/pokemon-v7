@@ -1,11 +1,13 @@
 import {
-	ultraHighBstPokemon,
 	highBstPokemon,
-	midBstPokemon,
 	lowBstPokemon,
+	midBstPokemon,
+	ultraHighBstPokemon,
 } from '../constants/baseStatRecord';
+import { getAllPokemonThatMaxThisEV } from '../constants/internalDex';
 import { PokemonName } from '../constants/pokemonNames';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { Stat } from '../interfaces/StatObject';
 import { getRandomEntry } from './filterTargets';
 import { makeChallengerPokemon } from './makeChallengerPokemon';
 
@@ -95,4 +97,19 @@ export const makeRandomTeam = ({ xp }: { xp: number }): OwnedPokemon[] => {
 	}
 
 	return res.map((n) => makeChallengerPokemon({ name: n as PokemonName, xp }));
+};
+
+export const makeEVTeam = (stat: Stat): OwnedPokemon[] => {
+	const options = getAllPokemonThatMaxThisEV(stat);
+	const res: PokemonName[] = [
+		getRandomEntry(options.map((o) => o[0])),
+		getRandomEntry(options.map((o) => o[0])),
+		getRandomEntry(options.map((o) => o[0])),
+		getRandomEntry(options.map((o) => o[0])),
+		getRandomEntry(options.map((o) => o[0])),
+		getRandomEntry(options.map((o) => o[0])),
+	];
+	return res.map((n) =>
+		makeChallengerPokemon({ name: n as PokemonName, xp: 125 })
+	);
 };

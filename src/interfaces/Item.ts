@@ -889,3 +889,11 @@ export const smallExpCandyPackage: Partial<Inventory> = {
 	'exp-candy-m': 5,
 	'exp-candy-l': 1,
 };
+export const evTrainingTool: Partial<Record<Stat, ItemType>> = {
+	defense: 'power-belt',
+	attack: 'power-bracer',
+	'special-attack': 'power-lens',
+	'special-defense': 'power-band',
+	speed: 'power-anklet',
+	hp: 'power-weight',
+};

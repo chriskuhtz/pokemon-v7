@@ -338,6 +338,7 @@ export const handleUniqueMoves = ({
 				protected: true,
 				spikyShielded: move.name === 'spiky-shield',
 				banefulBunkered: move.name === 'baneful-bunker',
+				obstructed: move.name === 'obstruct',
 			};
 		}
 	}

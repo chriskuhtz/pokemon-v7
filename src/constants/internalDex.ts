@@ -6,6 +6,7 @@ import {
 } from '../interfaces/OverworldMap';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { PokemonType, pokemonTypes } from '../interfaces/PokemonType';
+import { Stat } from '../interfaces/StatObject';
 import { internalDex, InternalDexEntry, SwarmType } from './internalDexData';
 import { MapId } from './maps/mapsRecord';
 import { PokemonName } from './pokemonNames';
@@ -131,6 +132,17 @@ export const getRandomEncounter = (
 		chosen.maxXp - Math.random() * (chosen.maxXp - chosen.minXp)
 	);
 	return { ...chosen, xp };
+};
+
+export const getAllPokemonThatMaxThisEV = (
+	stat: Stat
+): [PokemonName, InternalDexEntry][] => {
+	return Object.entries(internalDex).filter(
+		([, value]) =>
+			Object.keys(value.evs).includes(stat) &&
+			value.evs[stat] === 3 &&
+			Object.keys(value.evs).length === 1
+	) as [PokemonName, InternalDexEntry][];
 };
 
 export const isNotCatchable = (entry: InternalDexEntry) => {
