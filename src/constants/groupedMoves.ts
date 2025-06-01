@@ -73,6 +73,7 @@ export const recoveryMoves = [
 	'roar-of-time',
 	'prismatic-laser',
 	'meteor-assault',
+	'eternabeam',
 ];
 
 const contactMoves = [

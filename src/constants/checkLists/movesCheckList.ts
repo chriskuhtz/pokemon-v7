@@ -2876,8 +2876,12 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/794/',
 		handled: true,
 	},
-	{ name: 'eternabeam', url: 'https://pokeapi.co/api/v2/move/795/' },
-	{ name: 'steel-beam', url: 'https://pokeapi.co/api/v2/move/796/' },
+	{
+		name: 'eternabeam',
+		url: 'https://pokeapi.co/api/v2/move/795/',
+		handled: true,
+	},
+
 	{ name: 'expanding-force', url: 'https://pokeapi.co/api/v2/move/797/' },
 	{ name: 'steel-roller', url: 'https://pokeapi.co/api/v2/move/798/' },
 	{ name: 'scale-shot', url: 'https://pokeapi.co/api/v2/move/799/' },
@@ -3063,6 +3067,7 @@ export const movesCheckList: {
 	{ name: 'court-change', url: 'https://pokeapi.co/api/v2/move/756/' },
 	{ name: 'aura-wheel', url: 'https://pokeapi.co/api/v2/move/783/' },
 	{ name: 'life-dew', url: 'https://pokeapi.co/api/v2/move/791/' },
+	{ name: 'steel-beam', url: 'https://pokeapi.co/api/v2/move/796/' },
 ];
 
 export const handledMoves = [
@@ -3648,6 +3653,7 @@ export const handledMoves = [
 	'obstruct',
 	'false-surrender',
 	'meteor-assault',
+	'eternabeam',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
