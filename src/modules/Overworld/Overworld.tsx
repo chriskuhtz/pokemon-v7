@@ -260,7 +260,7 @@ export const Overworld = () => {
 							style={{
 								marginLeft: '-100dvw',
 								width: '300dvw',
-								height: '100dvh',
+								height: height * baseSize,
 								top: -location.y * baseSize,
 								left: -location.x * baseSize,
 								position: 'absolute',
