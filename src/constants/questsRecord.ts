@@ -1450,7 +1450,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: ['spiritomb'],
 		kind: 'QUEST_LINE',
 	},
-
 	'defeat roark': {
 		category: 'BATTLE',
 		rewardItems: {
