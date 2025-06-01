@@ -225,7 +225,7 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	'invite move tutor': 'Teaches your Pokemon new moves',
 	'invite nature tutor': 'Can change your Pokemons Nature',
 	'invite ability tutor': 'Can change your Pokemons Ability',
-	'invite effort value expert': 'Explains those weird stat values',
+	'invite effort value expert': 'Train your Pokemons Effort values with ease',
 	'invite ghost expert morty':
 		'The Gym Leader from Ecruteak studies ghost pokemon',
 	'invite fighting expert chuck':
