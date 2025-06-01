@@ -104,6 +104,7 @@ export const calculateDamage = (
 		attacker,
 		attack,
 		weather,
+		terrain,
 		addMessage
 	);
 	if (typeFactor === 0) {
@@ -221,7 +222,8 @@ export const calculateDamage = (
 		attack,
 		target,
 		calculateLevelData(attacker.xp, attacker.growthRate).level,
-		weather
+		weather,
+		terrain
 	);
 
 	if (attack.name === 'present' && power < 0) {
