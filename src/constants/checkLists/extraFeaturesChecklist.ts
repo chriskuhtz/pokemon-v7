@@ -543,12 +543,13 @@ export const extraFeatureCheckList: {
 	{ name: 'defeat an imported trainer quest', handled: true },
 	{ name: 'repair raticate quest', handled: true },
 	{ name: 'jasmine', handled: true },
+	{ name: 'gym leaders give badges as rewards', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
+	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },
 	//CONTENT:
-
 	{ name: 'pryce' },
 	{ name: 'claire' },
 	{ name: 'e4 challenge' },
@@ -563,7 +564,6 @@ export const extraFeatureCheckList: {
 	{ name: 'steven as the fossil protector' },
 	{ name: 'more legendary stories' },
 	{ name: 'cave of shadows where you face yourself' },
-	{ name: 'gym leaders give badges as rewards' },
 	{
 		name: `Apricorn Bälle:
 Ein paar (langweiligere) Ideen
