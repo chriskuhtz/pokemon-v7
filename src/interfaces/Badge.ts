@@ -1,2 +1,2 @@
-export const badgeNames = ['boulder-badge'] as const;
+export const badgeNames = ['Boulder_Badge', 'Cascade_Badge'] as const;
 export type BadgeName = (typeof badgeNames)[number];
