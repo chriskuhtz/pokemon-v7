@@ -2850,10 +2850,22 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/788/',
 		handled: true,
 	},
-	{ name: 'spirit-break', url: 'https://pokeapi.co/api/v2/move/789/' },
-	{ name: 'strange-steam', url: 'https://pokeapi.co/api/v2/move/790/' },
-	{ name: 'life-dew', url: 'https://pokeapi.co/api/v2/move/791/' },
-	{ name: 'obstruct', url: 'https://pokeapi.co/api/v2/move/792/' },
+	{
+		name: 'spirit-break',
+		url: 'https://pokeapi.co/api/v2/move/789/',
+		handled: true,
+	},
+	{
+		name: 'strange-steam',
+		url: 'https://pokeapi.co/api/v2/move/790/',
+		handled: true,
+	},
+
+	{
+		name: 'obstruct',
+		url: 'https://pokeapi.co/api/v2/move/792/',
+		handled: true,
+	},
 	{ name: 'false-surrender', url: 'https://pokeapi.co/api/v2/move/793/' },
 	{ name: 'meteor-assault', url: 'https://pokeapi.co/api/v2/move/794/' },
 	{ name: 'eternabeam', url: 'https://pokeapi.co/api/v2/move/795/' },
@@ -3042,6 +3054,7 @@ export const movesCheckList: {
 	{ name: 'teatime', url: 'https://pokeapi.co/api/v2/move/752/' },
 	{ name: 'court-change', url: 'https://pokeapi.co/api/v2/move/756/' },
 	{ name: 'aura-wheel', url: 'https://pokeapi.co/api/v2/move/783/' },
+	{ name: 'life-dew', url: 'https://pokeapi.co/api/v2/move/791/' },
 ];
 
 export const handledMoves = [
@@ -3622,6 +3635,9 @@ export const handledMoves = [
 	'overdrive',
 	'apple-acid',
 	'grav-apple',
+	'strange-steam',
+	'spirit-break',
+	'obstruct',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

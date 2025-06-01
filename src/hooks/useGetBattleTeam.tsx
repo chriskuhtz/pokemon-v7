@@ -219,6 +219,7 @@ export const useGetBattleTeam = (
 					protected: false,
 					spikyShielded: false,
 					banefulBunkered: false,
+					obstructed: false,
 					endured: false,
 					charged: false,
 					helpingHanded: false,

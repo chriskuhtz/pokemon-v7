@@ -1,3 +1,4 @@
+import { isContactMove } from '../../../constants/groupedMoves';
 import { applyCrashDamage } from '../../../functions/applyCrashDamage';
 import { applyPrimaryAilmentToPokemon } from '../../../functions/applyPrimaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from '../../../functions/applyStatChangeToPokemon';
@@ -28,7 +29,8 @@ export const handleMiss = (
 	if (
 		reason === 'PROTECTED' ||
 		reason === 'SPIKY_SHIELDED' ||
-		reason === 'BANEFUL_BUNKERED'
+		reason === 'BANEFUL_BUNKERED' ||
+		reason === 'OBSTRUCTED'
 	) {
 		addMessage({ message: 'The Target protected itself' });
 	}
@@ -72,6 +74,17 @@ export const handleMiss = (
 					});
 
 					u = { ...u, damage: u.damage + Math.floor(u.stats.hp * 8) };
+				}
+				if (reason === 'OBSTRUCTED' && isContactMove(attack.name, u)) {
+					u = applyStatChangeToPokemon(
+						u,
+						'defense',
+						-2,
+						false,
+						[],
+						addMessage,
+						'obstruct'
+					);
 				}
 				if (reason === 'BANEFUL_BUNKERED' && !u.primaryAilment) {
 					u = applyPrimaryAilmentToPokemon(
