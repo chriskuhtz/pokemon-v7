@@ -13,6 +13,7 @@ import {
 } from '../interfaces/PokemonType';
 import { StatObject } from '../interfaces/StatObject';
 import { WeatherType } from '../interfaces/Weather';
+import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { getHeldItem } from './getHeldItem';
 import { getTypeNames } from './getTypeNames';
 
@@ -33,6 +34,7 @@ export const determineTypeFactor = (
 	attacker: BattlePokemon,
 	attack: BattleAttack,
 	weather: WeatherType | undefined,
+	terrain: BattleTerrain | undefined,
 	addMessage?: (x: Message) => void
 ): number => {
 	let res = 1;
@@ -76,6 +78,20 @@ export const determineTypeFactor = (
 		}
 		if (weather === 'sandstorm') {
 			attackType = 'rock';
+		}
+	}
+	if (attack.name === 'terrain-pulse') {
+		if (terrain === 'electric') {
+			attackType = 'electric';
+		}
+		if (terrain === 'grassy') {
+			attackType = 'grass';
+		}
+		if (terrain === 'misty') {
+			attackType = 'fairy';
+		}
+		if (terrain === 'psychic') {
+			attackType = 'psychic';
 		}
 	}
 	if (attack.name === 'revelation-dance') {

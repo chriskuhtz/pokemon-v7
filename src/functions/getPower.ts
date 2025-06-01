@@ -5,6 +5,7 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { ItemType } from '../interfaces/Item';
 import { StatObject } from '../interfaces/StatObject';
 import { WeatherType } from '../interfaces/Weather';
+import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { calculateModifiedStat } from './calculateModifiedStat';
 import { checkForSharedType } from './checkForSharedType';
 import { getHeldItem } from './getHeldItem';
@@ -119,7 +120,8 @@ export const getPower = (
 	attack: BattleAttack,
 	target: BattlePokemon,
 	attackerLevel: number,
-	weather: WeatherType | undefined
+	weather: WeatherType | undefined,
+	terrain: BattleTerrain | undefined
 ): number => {
 	const power = attack.data.power ?? 0;
 	if (attack.name === 'acrobatics') {
@@ -244,6 +246,13 @@ export const getPower = (
 			weather === 'hail' ||
 			weather === 'sandstorm'
 		) {
+			return attack.data.power * 2;
+		}
+
+		return attack.data.power;
+	}
+	if (attack.name === 'terrain-pulse' && attack.data.power) {
+		if (terrain) {
 			return attack.data.power * 2;
 		}
 

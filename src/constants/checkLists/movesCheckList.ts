@@ -2922,7 +2922,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/804/',
 		handled: true,
 	},
-	{ name: 'terrain-pulse', url: 'https://pokeapi.co/api/v2/move/805/' },
+	{
+		name: 'terrain-pulse',
+		url: 'https://pokeapi.co/api/v2/move/805/',
+		handled: true,
+	},
 	{ name: 'skitter-smack', url: 'https://pokeapi.co/api/v2/move/806/' },
 	{ name: 'burning-jealousy', url: 'https://pokeapi.co/api/v2/move/807/' },
 	{ name: 'lash-out', url: 'https://pokeapi.co/api/v2/move/808/' },
@@ -3694,6 +3698,7 @@ export const handledMoves = [
 	'misty-explosion',
 	'rising-voltage',
 	'grassy-glide',
+	'terrain-pulse',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
