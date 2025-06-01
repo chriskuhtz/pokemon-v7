@@ -2882,14 +2882,46 @@ export const movesCheckList: {
 		handled: true,
 	},
 
-	{ name: 'expanding-force', url: 'https://pokeapi.co/api/v2/move/797/' },
-	{ name: 'steel-roller', url: 'https://pokeapi.co/api/v2/move/798/' },
-	{ name: 'scale-shot', url: 'https://pokeapi.co/api/v2/move/799/' },
-	{ name: 'meteor-beam', url: 'https://pokeapi.co/api/v2/move/800/' },
-	{ name: 'shell-side-arm', url: 'https://pokeapi.co/api/v2/move/801/' },
-	{ name: 'misty-explosion', url: 'https://pokeapi.co/api/v2/move/802/' },
-	{ name: 'grassy-glide', url: 'https://pokeapi.co/api/v2/move/803/' },
-	{ name: 'rising-voltage', url: 'https://pokeapi.co/api/v2/move/804/' },
+	{
+		name: 'expanding-force',
+		url: 'https://pokeapi.co/api/v2/move/797/',
+		handled: true,
+	},
+	{
+		name: 'steel-roller',
+		url: 'https://pokeapi.co/api/v2/move/798/',
+		handled: true,
+	},
+	{
+		name: 'scale-shot',
+		url: 'https://pokeapi.co/api/v2/move/799/',
+		handled: true,
+	},
+	{
+		name: 'meteor-beam',
+		url: 'https://pokeapi.co/api/v2/move/800/',
+		handled: true,
+	},
+	{
+		name: 'shell-side-arm',
+		url: 'https://pokeapi.co/api/v2/move/801/',
+		handled: true,
+	},
+	{
+		name: 'misty-explosion',
+		url: 'https://pokeapi.co/api/v2/move/802/',
+		handled: true,
+	},
+	{
+		name: 'grassy-glide',
+		url: 'https://pokeapi.co/api/v2/move/803/',
+		handled: true,
+	},
+	{
+		name: 'rising-voltage',
+		url: 'https://pokeapi.co/api/v2/move/804/',
+		handled: true,
+	},
 	{ name: 'terrain-pulse', url: 'https://pokeapi.co/api/v2/move/805/' },
 	{ name: 'skitter-smack', url: 'https://pokeapi.co/api/v2/move/806/' },
 	{ name: 'burning-jealousy', url: 'https://pokeapi.co/api/v2/move/807/' },
@@ -3654,6 +3686,14 @@ export const handledMoves = [
 	'false-surrender',
 	'meteor-assault',
 	'eternabeam',
+	'steel-roller',
+	'scale-shot',
+	'expanding-force',
+	'meteor-beam',
+	'shell-side-arm',
+	'misty-explosion',
+	'rising-voltage',
+	'grassy-glide',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
