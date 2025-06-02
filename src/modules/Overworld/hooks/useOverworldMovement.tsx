@@ -67,9 +67,7 @@ export const useOverworldMovement = (
 	const handlePossibleEncounter = useCallback(() => {
 		setNextInput(undefined);
 		setEncounterChance(baseEncounterRate);
-		if (saveFile.activatedRepel === 'max-repel') {
-			return;
-		}
+
 		if (
 			!(
 				map.tileMap.encounterLayer[playerLocation.y][playerLocation.x] ||
@@ -117,6 +115,9 @@ export const useOverworldMovement = (
 			return;
 		}
 		if (saveFile.activatedRepel === 'super-repel' && avgChallengerLevel < 40) {
+			return;
+		}
+		if (saveFile.activatedRepel === 'max-repel' && avgChallengerLevel < 60) {
 			return;
 		}
 

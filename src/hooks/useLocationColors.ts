@@ -24,6 +24,7 @@ export const mapBattleColors: Record<
 	challengeField: { oppColor: 'fighting', playerColor: 'normal' },
 	randomField: { oppColor: 'fighting', playerColor: 'normal' },
 	rocketCamp: { oppColor: 'fighting', playerColor: 'dark' },
+	victoryRoad: { oppColor: 'ghost', playerColor: 'dragon' },
 };
 
 export const useLocationColors = (): {
@@ -60,6 +61,7 @@ export const mapBattlePlatforms: Record<MapId, string> = {
 	challengeField: 'grass',
 	randomField: 'grass',
 	rocketCamp: 'street',
+	victoryRoad: 'cave',
 };
 
 export const useLocationBattlePlatform = (): string => {
