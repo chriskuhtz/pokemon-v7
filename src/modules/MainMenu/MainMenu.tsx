@@ -16,6 +16,7 @@ import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 import {
   ExportSnapshotCard,
   ImportSnapshotCard,
+  ResetSnapshotCard,
 } from "../../components/SnapshotCard/SnapshotCard";
 import { TrainerCard } from "../../components/TrainerCard/TrainerCard";
 import {
@@ -125,12 +126,6 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
             }
           />
         )}
-        {/* <Card
-					onClick={() => navigate('MAIN', 'POKEDEX')}
-					content={<h4>Pokedex</h4>}
-					icon={<RiBookShelfLine size={battleSpriteSize} />}
-					actionElements={[]}
-				/> */}
         <Card
           onClick={() => navigate("MAIN", "INTERNAL_DEX")}
           content={<h4>Pokedex</h4>}
@@ -145,6 +140,7 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
         />
         <ExportSnapshotCard />
         <ImportSnapshotCard />
+        <ResetSnapshotCard />
         <ToggleMovementButtons />
         {resetConfirmationInProgress ? (
           <button
