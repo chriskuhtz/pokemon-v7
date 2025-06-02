@@ -594,6 +594,20 @@ export const handleUniqueMoves = ({
 			addMessage,
 		});
 	}
+	if (move.name === 'corrosive-gas') {
+		addMessage({
+			message: `${updatedAttacker.name} destroys all held items with corrosive gas`,
+		});
+		return updatedPokemon.map((p) => {
+			if (p.id === updatedAttacker.id) {
+				return updatedAttacker;
+			}
+			if (p.status === 'ONFIELD') {
+				return { ...p, heldItemName: undefined };
+			}
+			return p;
+		});
+	}
 	return updatedPokemon.map((p) => {
 		if (p.id === updatedAttacker.id) {
 			return updatedAttacker;

@@ -7,6 +7,7 @@ export const victoryRoad: OverworldMap = {
 	id: 'victoryRoad',
 	occupants: victoryRoadOccupants,
 	timeOfDayShadersMap: defaultShaderMap,
+	foggy: true,
 	tilesetUrl: '/tilesets/newMasterSheet.png',
 	tileMap: {
 		baseLayer: [

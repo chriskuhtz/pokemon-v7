@@ -446,6 +446,7 @@ export const questNames = [
 	'defeat an imported challenger at lvl 60 or higher',
 	'defeat an imported challenger at lvl 80 or higher',
 	'defeat an imported challenger at lvl 100',
+	'catch all pokemon from victory road',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];

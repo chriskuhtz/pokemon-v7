@@ -2938,8 +2938,16 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/808/',
 		handled: true,
 	},
-	{ name: 'poltergeist', url: 'https://pokeapi.co/api/v2/move/809/' },
-	{ name: 'corrosive-gas', url: 'https://pokeapi.co/api/v2/move/810/' },
+	{
+		name: 'poltergeist',
+		url: 'https://pokeapi.co/api/v2/move/809/',
+		handled: true,
+	},
+	{
+		name: 'corrosive-gas',
+		url: 'https://pokeapi.co/api/v2/move/810/',
+		handled: true,
+	},
 	{ name: 'coaching', url: 'https://pokeapi.co/api/v2/move/811/' },
 	{ name: 'flip-turn', url: 'https://pokeapi.co/api/v2/move/812/' },
 	{ name: 'triple-axel', url: 'https://pokeapi.co/api/v2/move/813/' },
@@ -3710,6 +3718,8 @@ export const handledMoves = [
 	'terrain-pulse',
 	'skitter-smack',
 	'lash-out',
+	'poltergeist',
+	'corrosive-gas',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
