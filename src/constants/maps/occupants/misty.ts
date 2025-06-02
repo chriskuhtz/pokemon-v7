@@ -53,8 +53,7 @@ const mistyCondition = (s: SaveFile) => {
 	const team = s.pokemon.filter((p) => p.onTeam);
 	return (
 		team.length === 2 &&
-		team.every((t) => calculateLevelData(t.xp, t.growthRate).level <= 36) &&
-		team[0].name === team[1].name
+		team.every((t) => calculateLevelData(t.xp, t.growthRate).level <= 36)
 	);
 };
 
@@ -90,7 +89,7 @@ const npcMisty: OverworldNpc = {
 		'nice to meet you',
 		"i'm misty",
 		'if you want to battle me',
-		'you may bring 2 of the same pokemon',
+		'you may bring any two pokemon you like',
 		'Level 36 at the highest',
 		'I will use my two starmies',
 	],
