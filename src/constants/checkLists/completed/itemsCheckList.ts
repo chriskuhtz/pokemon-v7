@@ -1441,11 +1441,6 @@ export const itemsCheckList: {
     handled: true,
   },
   {
-    name: "grey-apricorn",
-    url: "https://pokeapi.co/api/v2/item/463/",
-    handled: true,
-  },
-  {
     name: "moomoo-cheese",
     url: "https://pokeapi.co/api/v2/item/1315/",
     handled: true,
