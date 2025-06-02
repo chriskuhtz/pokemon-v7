@@ -30,13 +30,12 @@ import { gymLeaderQuests } from './generatedQuests/gymLeaderQuests';
 import { travellingTrainerQuests } from './generatedQuests/travellingTrainersQuests';
 import { typeCatchQuests } from './generatedQuests/typeCatchQuests';
 import {
+	getAllEncountersFor,
 	getHoneyEncounters,
 	getSwarmOptions,
 	getUnderRockEncounters,
 } from './internalDex';
 import { internalDex } from './internalDexData';
-import { caveW1Encounters } from './maps/encounters/caveW1';
-import { onixCaveEncounters } from './maps/encounters/onixCave';
 import { allRocketCampTrainersDefeated } from './maps/occupants/rocketCampOccupants';
 import { PokemonName, pokemonNames } from './pokemonNames';
 import {
@@ -1953,9 +1952,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 10,
 		rewardItems: { 'babiri-berry': 2, 'kee-berry': 2, 'fossilized-dino': 2 },
 		targetRoute: 'onixCave',
-		targetPokemon: onixCaveEncounters.BASE.map((p) => p.name),
-		conditionFunction: (s) =>
-			onixCaveEncounters.BASE.some((o) =>
+		targetPokemon: getAllEncountersFor('onixCave', {}).map((p) => p.name),
+		conditionFunction: (s: SaveFile) =>
+			getAllEncountersFor('onixCave', {}).some((o) =>
 				s.pokedex[o.name].caughtOnRoutes.includes('onixCave')
 			),
 	},
@@ -1972,9 +1971,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'moon-stone': 2,
 			'fossilized-drake': 2,
 		},
-		targetPokemon: onixCaveEncounters.BASE.map((p) => p.name),
-		conditionFunction: (s) =>
-			onixCaveEncounters.BASE.every((o) =>
+		targetPokemon: getAllEncountersFor('onixCave', {}).map((p) => p.name),
+		conditionFunction: (s: SaveFile) =>
+			getAllEncountersFor('onixCave', {}).every((o) =>
 				s.pokedex[o.name].caughtOnRoutes.includes('onixCave')
 			),
 	},
@@ -1991,10 +1990,23 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'big-malasada': 2,
 			'fossilized-fish': 2,
 		},
-		targetPokemon: caveW1Encounters.BASE.map((p) => p.name),
-		conditionFunction: (s) =>
-			caveW1Encounters.BASE.every((o) =>
+		targetPokemon: getAllEncountersFor('caveW1', {}).map((p) => p.name),
+		conditionFunction: (s: SaveFile) =>
+			getAllEncountersFor('caveW1', {}).every((o) =>
 				s.pokedex[o.name].caughtOnRoutes.includes('caveW1')
+			),
+	},
+	'catch all pokemon from victory road': {
+		category: 'EXPLORATION',
+		kind: 'BULLETIN',
+		requiredUpgrade: 'rock climbing certification',
+		targetRoute: 'victoryRoad',
+		researchPoints: 50,
+		rewardItems: {},
+		targetPokemon: getAllEncountersFor('victoryRoad', {}).map((p) => p.name),
+		conditionFunction: (s: SaveFile) =>
+			getAllEncountersFor('victoryRoad', {}).every((o) =>
+				s.pokedex[o.name].caughtOnRoutes.includes('victoryRoad')
 			),
 	},
 	'wake a snorlax': {
