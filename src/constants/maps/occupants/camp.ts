@@ -231,7 +231,7 @@ export const campOccupants: OverworldMap["occupants"] = [
     x: 18,
     y: 15,
     dialogue: [`Kuma Farm`],
-    approachDirection: "LEFT",
+    approachDirection: "UP",
     id: "farmSign",
     conditionFunction: () => true,
   },
