@@ -2,6 +2,7 @@ import { useCallback, useContext, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { Sprite } from '../../components/Sprite/Sprite';
+import { CampUpgrade, campUpgradeNames } from '../../constants/campUpgrades';
 import {
 	battleSpriteSize,
 	shinyChance,
@@ -19,11 +20,13 @@ import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { CompleteInventory } from '../../interfaces/Inventory';
 import { getRandomNature } from '../../interfaces/Natures';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
-import { EmptyStatObject } from '../../interfaces/StatObject';
+import {
+	EmptyStatObject,
+	generateRandomStatObject,
+} from '../../interfaces/StatObject';
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { campUpgradeNames, CampUpgrade } from '../../constants/campUpgrades';
 const defaultStarters: PokemonName[] = ['bulbasaur', 'charmander', 'squirtle'];
 export const StarterSelection = (): JSX.Element => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
@@ -49,6 +52,7 @@ export const StarterSelection = (): JSX.Element => {
 			starter: true,
 			shiny: Math.random() / 10 < shinyChance,
 			nature: getRandomNature(),
+			intrinsicValues: generateRandomStatObject(31),
 		})),
 		{
 			assignLearnsetMoves: true,
