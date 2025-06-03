@@ -1,7 +1,22 @@
+import { makeOverworldItem } from '../../../functions/makeOverworldItem';
 import { occupantHandled } from '../../../functions/occupantHandled';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 
 export const victoryRoadOccupants: OverworldMap['occupants'] = [
+	{
+		id: 'victory_road_to_routeN1',
+		type: 'ON_STEP_PORTAL',
+		x: 15,
+		y: 50,
+		portal: {
+			mapId: 'routeN1',
+			x: 15,
+			y: 1,
+			orientation: 'DOWN',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+	},
 	{
 		type: 'CLIMBING_STEPS',
 		x: 7,
@@ -109,4 +124,60 @@ export const victoryRoadOccupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) => !occupantHandled(s, 'victory-road_drapion'),
 		id: 'victory-road_drapion',
 	},
+	makeOverworldItem({
+		mapId: 'victoryRoad',
+		item: 'full-restore',
+		x: 20,
+		y: 28,
+		amount: 2,
+	}),
+	makeOverworldItem({
+		mapId: 'victoryRoad',
+		item: 'ultra-ball',
+		x: 10,
+		y: 41,
+		amount: 5,
+	}),
+	makeOverworldItem({
+		mapId: 'victoryRoad',
+		item: 'max-ether',
+		x: 43,
+		y: 35,
+		amount: 1,
+	}),
+	makeOverworldItem({
+		mapId: 'victoryRoad',
+		item: 'lum-berry',
+		x: 25,
+		y: 25,
+		amount: 1,
+	}),
+	makeOverworldItem({
+		mapId: 'victoryRoad',
+		item: 'loaded-dice',
+		x: 45,
+		y: 9,
+		amount: 1,
+	}),
+	makeOverworldItem({
+		mapId: 'victoryRoad',
+		item: 'max-potion',
+		x: 17,
+		y: 19,
+		amount: 3,
+	}),
+	makeOverworldItem({
+		mapId: 'victoryRoad',
+		item: 'leftovers',
+		x: 20,
+		y: 13,
+		amount: 1,
+	}),
+	makeOverworldItem({
+		mapId: 'victoryRoad',
+		item: 'choice-band',
+		x: 11,
+		y: 5,
+		amount: 1,
+	}),
 ];

@@ -320,7 +320,6 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 			orientation: 'UP',
 			forwardFoot: 'CENTER1',
 		},
-		//conditionFunction: (s) => s.badges.length >= 8,
-		conditionFunction: (s) => true,
+		conditionFunction: (s) => s.badges.length >= 8,
 	},
 ];

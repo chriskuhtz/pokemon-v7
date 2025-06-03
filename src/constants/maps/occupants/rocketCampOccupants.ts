@@ -1,9 +1,9 @@
 import { getHighestXpOnTeam } from '../../../functions/getHighestXpOnTeam';
 import { makeChallengerPokemon } from '../../../functions/makeChallengerPokemon';
+import { makeOverworldItem } from '../../../functions/makeOverworldItem';
 import { occupantHandled } from '../../../functions/occupantHandled';
 import { getRocketChadTeam } from '../../../functions/troubleMakers/rocket';
-import { ItemType } from '../../../interfaces/Item';
-import { Occupant, OverworldItem } from '../../../interfaces/OverworldMap';
+import { Occupant } from '../../../interfaces/OverworldMap';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 
@@ -13,54 +13,31 @@ export const allRocketCampTrainersDefeated = (s: SaveFile): boolean => {
 		.every((r) => s.handledOccupants.some((h) => h.id === r.id));
 };
 
-export const makeOverworldItem = ({
-	id,
-	x,
-	y,
-	item,
-	amount,
-}: {
-	id: string;
-	x: number;
-	y: number;
-	item: ItemType;
-	amount: number;
-}): OverworldItem => {
-	return {
-		type: 'ITEM',
-		x,
-		y,
-		id,
-		conditionFunction: (s) => !occupantHandled(s, id),
-		item,
-		amount,
-	};
-};
 export const rocketCampOccupants: Occupant[] = [
 	makeOverworldItem({
 		item: 'ultra-ball',
-		id: 'rocket-camp-ultra-ball',
+		mapId: 'rocketCamp',
 		amount: 5,
 		x: 7,
 		y: 15,
 	}),
 	makeOverworldItem({
 		item: 'rare-candy',
-		id: 'rocket-camp-rare-candy',
+		mapId: 'rocketCamp',
 		amount: 1,
 		x: 19,
 		y: 11,
 	}),
 	makeOverworldItem({
 		item: 'loaded-dice',
-		id: 'rocket-camp-loaded-dice',
+		mapId: 'rocketCamp',
 		amount: 1,
 		x: 8,
 		y: 5,
 	}),
 	makeOverworldItem({
 		item: 'exp-candy-l',
-		id: 'rocket-camp-exp-candy-l',
+		mapId: 'rocketCamp',
 		amount: 1,
 		x: 1,
 		y: 17,

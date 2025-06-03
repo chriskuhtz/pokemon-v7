@@ -2959,8 +2959,16 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/813/',
 		handled: true,
 	},
-	{ name: 'dual-wingbeat', url: 'https://pokeapi.co/api/v2/move/814/' },
-	{ name: 'scorching-sands', url: 'https://pokeapi.co/api/v2/move/815/' },
+	{
+		name: 'dual-wingbeat',
+		url: 'https://pokeapi.co/api/v2/move/814/',
+		handled: true,
+	},
+	{
+		name: 'scorching-sands',
+		url: 'https://pokeapi.co/api/v2/move/815/',
+		handled: true,
+	},
 	{ name: 'jungle-healing', url: 'https://pokeapi.co/api/v2/move/816/' },
 	{ name: 'wicked-blow', url: 'https://pokeapi.co/api/v2/move/817/' },
 	{ name: 'surging-strikes', url: 'https://pokeapi.co/api/v2/move/818/' },
@@ -3731,6 +3739,8 @@ export const handledMoves = [
 	'corrosive-gas',
 	'coaching',
 	'triple-axel',
+	'scorching-sands',
+	'dual-wingbeat',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

@@ -16,6 +16,7 @@ import { getRandomPokemonName } from '../../functions/getRandomPokemonId';
 import { reduceBattlePokemonToOwnedPokemon } from '../../functions/reduceBattlePokemonToOwnedPokemon';
 import { useGetBattleTeam } from '../../hooks/useGetBattleTeam';
 import { SaveFileContext } from '../../hooks/useSaveFile';
+import { badgeNames } from '../../interfaces/Badge';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { CompleteInventory } from '../../interfaces/Inventory';
 import { getRandomNature } from '../../interfaces/Natures';
@@ -88,6 +89,7 @@ export const StarterSelection = (): JSX.Element => {
 						xp: 1250000,
 					},
 				],
+				badges: [...badgeNames],
 				storage: CompleteInventory,
 				campUpgrades: Object.fromEntries(
 					campUpgradeNames.map((key) => [key, true])
