@@ -1463,22 +1463,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
         area: "LAND",
         route: "caveW1",
       },
-      {
-        rarity: "ultra-rare",
-        maxXp: 64000,
-        minXp: 50000,
-        timeOfDay: "ALL_DAY",
-        area: "LAND",
-        route: "caveW1F1",
-      },
-      {
-        rarity: "ultra-rare",
-        maxXp: 64000,
-        minXp: 52000,
-        timeOfDay: "ALL_DAY",
-        area: "LAND",
-        route: "caveW1F2",
-      },
     ],
     evs: {
       hp: 2,
@@ -5693,7 +5677,32 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   boldore: {
     dexId: 525,
     types: ["rock"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "rare",
+        maxXp: 60000,
+        minXp: 42875,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "caveW1",
+      },
+      {
+        rarity: "medium",
+        maxXp: 64000,
+        minXp: 50000,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "caveW1F1",
+      },
+      {
+        rarity: "medium",
+        maxXp: 64000,
+        minXp: 50000,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "caveW1F2",
+      },
+    ],
     evs: {
       attack: 1,
       defense: 1,
@@ -5706,10 +5715,10 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
       {
         rarity: "medium",
         maxXp: 64000,
-        minXp: 42875,
+        minXp: 52000,
         timeOfDay: "ALL_DAY",
         area: "LAND",
-        route: "caveW1",
+        route: "caveW1F2",
       },
     ],
     evs: {
@@ -9762,10 +9771,10 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
       {
         rarity: "ultra-rare",
         maxXp: 64000,
-        minXp: 42875,
+        minXp: 50000,
         timeOfDay: "ALL_DAY",
         area: "LAND",
-        route: "caveW1",
+        route: "caveW1F1",
       },
     ],
     evs: {
@@ -11282,7 +11291,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   "golem-alola": {
     dexId: 10111,
     types: ["rock", "electric"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "ultra-rare",
+        maxXp: 64000,
+        minXp: 52000,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "caveW1F2",
+      },
+    ],
     evs: {
       defense: 3,
     },
