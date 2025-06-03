@@ -544,14 +544,28 @@ export const extraFeatureCheckList: {
 	{ name: 'repair raticate quest', handled: true },
 	{ name: 'jasmine', handled: true },
 	{ name: 'gym leaders give badges as rewards', handled: true },
-	{ name: 'victory-road' },
-	{ name: 'e4 challenge' },
+	{ name: 'victory-road', handled: true },
+	{ name: 'flinched himself with fake out', handled: true },
+	{ name: 'Deactivate repel when click upper right corner', handled: true },
+	{
+		name: 'scrolling in the cooking screen',
+		handled: true,
+	},
+	{ name: 'remove encounter tiles around ladder in onix cave', handled: true },
+	{ name: 'throwing away part of stack doesnt work', handled: true },
+	{ name: 'more rock climbing spots', handled: true },
+	{ name: 'ev grind mode for challenge field', handled: true },
+
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
 	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },
+	{ name: 'leech seed benefit doesnt pass to switched in mon' },
+
 	//CONTENT:
+	{ name: 'prettier entry to e4' },
+	{ name: 'e4 map and trainers' },
 	{ name: 'pryce' },
 	{ name: 'claire' },
 	{ name: 'eggs?' },
@@ -560,20 +574,17 @@ export const extraFeatureCheckList: {
 	{ name: 'Lugia quest after catching the birds' },
 	{ name: 'Hooh quest after catching the dogs' },
 	{ name: 'Terrain Items (shovel, pickaxe) as Gym leader rewards' },
-	{ name: 'ev grind mode for challenge field' },
 	{ name: 'trainer with simple/costar combo' },
 	{ name: 'steven as the fossil protector' },
 	{ name: 'more legendary stories' },
 	{ name: 'cave of shadows where you face yourself' },
 	{
-		name: `Apricorn Bälle:
-Ein paar (langweiligere) Ideen
+		name: `
 DarkRed-Apricorn: Vulcan Balls: Bonus for Fire and Stone Pokemon
 Beige-Apricorn: Sand-Storm Balls: Bonus for Ground and Flying Pokemon
 LightBlue-Apricorn: SnowCloud Balls: Bonus for Ice and Fairy Pokemon
 Purple-Apricorn: Spooky Balls: Bonus for Psycho, Dark, and Ghost Pokemon`,
 	},
-	{ name: 'more rock climbing spots' },
 	//SETTINGS:
 	{ name: 'random encounters' },
 	{ name: 'random evolutions' },

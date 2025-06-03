@@ -4,13 +4,17 @@ import { getItemUrl } from '../../functions/getItemUrl';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 
 export const RepelIcon = () => {
-	const { saveFile } = useContext(SaveFileContext);
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
 	if (!saveFile.activatedRepel) {
 		return <></>;
 	}
 
 	return (
-		<img height={battleSpriteSize} src={getItemUrl(saveFile.activatedRepel)} />
+		<img
+			onClick={() => patchSaveFileReducer({ activatedRepel: undefined })}
+			height={battleSpriteSize}
+			src={getItemUrl(saveFile.activatedRepel)}
+		/>
 	);
 };
