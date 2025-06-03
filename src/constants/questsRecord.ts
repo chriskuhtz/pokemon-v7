@@ -26,25 +26,17 @@ import {
 	campUpgradeNames,
 } from './campUpgrades';
 import { catchQuests } from './generatedQuests/catchQuests';
+import { gymLeaderQuests } from './generatedQuests/gymLeaderQuests';
 import { travellingTrainerQuests } from './generatedQuests/travellingTrainersQuests';
 import { typeCatchQuests } from './generatedQuests/typeCatchQuests';
 import {
+	getAllEncountersFor,
 	getHoneyEncounters,
 	getSwarmOptions,
 	getUnderRockEncounters,
 } from './internalDex';
 import { internalDex } from './internalDexData';
-import { caveW1Encounters } from './maps/encounters/caveW1';
-import { onixCaveEncounters } from './maps/encounters/onixCave';
-import { blaineId } from './maps/occupants/blaine';
-import { brockId } from './maps/occupants/brock';
-import { erikaId } from './maps/occupants/erika';
-import { garyId } from './maps/occupants/gary';
-import { janineId } from './maps/occupants/janine';
-import { mistyId } from './maps/occupants/misty';
 import { allRocketCampTrainersDefeated } from './maps/occupants/rocketCampOccupants';
-import { sabrinaId } from './maps/occupants/sabrina';
-import { surgeId } from './maps/occupants/surge';
 import { PokemonName, pokemonNames } from './pokemonNames';
 import {
 	tier1trainers,
@@ -454,6 +446,7 @@ export const questNames = [
 	'defeat an imported challenger at lvl 60 or higher',
 	'defeat an imported challenger at lvl 80 or higher',
 	'defeat an imported challenger at lvl 100',
+	'catch all pokemon from victory road',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -462,6 +455,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	...catchQuests,
 	...typeCatchQuests,
 	...travellingTrainerQuests,
+	...gymLeaderQuests,
 	'catch a pokemon': {
 		category: 'RESEARCH',
 		rewardItems: { 'poke-ball': 10 },
@@ -1456,205 +1450,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		targetPokemon: ['spiritomb'],
 		kind: 'QUEST_LINE',
 	},
-	'defeat morty': {
-		category: 'GYM LEADER',
-		rewardItems: {
-			'ultra-ball': 5,
-			'full-restore': 5,
-			'spell-tag': 1,
-			...expCandyPackage,
-		},
-		rewardPokemon: {
-			caughtAtDate: new Date().getTime(),
-			growthRate: 'medium',
-			unlockedMoves: ['ominous-wind'],
-			fixedAbility: true,
-			shiny: true,
-			maxHp: 30,
-			effortValues: EmptyStatObject,
-			ppBoostedMoves: [],
-			caughtOnMap: 'camp',
-			gender: 'MALE',
-			stepsWalked: 0,
-			ownerId: '',
-			damage: 0,
-			id: '',
-			ball: 'poke-ball',
-			ability: 'serene-grace',
-			name: 'dreepy',
-			xp: 125,
-			nature: 'adamant',
-			intrinsicValues: generateRandomStatObject(31),
-			happiness: 70,
-			firstMove: { name: 'ominous-wind', usedPP: 0 },
-		},
-		researchPoints: 50,
-		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Morty');
-		},
-		kind: 'BULLETIN',
-		requiredUpgrade: 'training field 1',
-		availableAfter: 'catch Haunter and Mightyena',
-	},
-	'defeat bugsy': {
-		category: 'GYM LEADER',
-		rewardItems: {
-			'ultra-ball': 5,
-			'full-restore': 5,
-			'silver-powder': 1,
-			...expCandyPackage,
-		},
-		rewardPokemon: {
-			caughtAtDate: new Date().getTime(),
-			growthRate: 'medium',
-			unlockedMoves: ['tail-glow'],
-			fixedAbility: true,
-			shiny: true,
-			maxHp: 30,
-			effortValues: EmptyStatObject,
-			ppBoostedMoves: [],
-			caughtOnMap: 'camp',
-			gender: 'MALE',
-			stepsWalked: 0,
-			ownerId: '',
-			damage: 0,
-			id: '',
-			ball: 'poke-ball',
-			ability: 'drought',
-			name: 'larvesta',
-			xp: 125,
-			nature: 'adamant',
-			intrinsicValues: generateRandomStatObject(31),
-			happiness: 70,
-			firstMove: { name: 'tail-glow', usedPP: 0 },
-		},
-		researchPoints: 50,
-		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Bugsy');
-		},
-		kind: 'BULLETIN',
-		requiredUpgrade: 'training field 1',
-		availableAfter: 'report a bug',
-	},
-	'defeat whitney': {
-		category: 'GYM LEADER',
-		rewardItems: {
-			'ultra-ball': 5,
-			'full-restore': 5,
-			'silk-scarf': 1,
-			...expCandyPackage,
-		},
-		rewardPokemon: {
-			caughtAtDate: new Date().getTime(),
-			growthRate: 'medium',
-			unlockedMoves: ['dragon-dance'],
-			fixedAbility: true,
-			shiny: true,
-			maxHp: 30,
-			effortValues: EmptyStatObject,
-			ppBoostedMoves: [],
-			caughtOnMap: 'camp',
-			gender: 'MALE',
-			stepsWalked: 0,
-			ownerId: '',
-			damage: 0,
-			id: '',
-			ball: 'poke-ball',
-			ability: 'normalize',
-			name: 'buneary',
-			xp: 125,
-			nature: 'adamant',
-			intrinsicValues: generateRandomStatObject(31),
-			happiness: 70,
-			firstMove: { name: 'dragon-dance', usedPP: 0 },
-		},
-		researchPoints: 50,
-		conditionFunction: (s: SaveFile) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Whitney');
-		},
-		kind: 'BULLETIN',
-		requiredUpgrade: 'training field 1',
-		availableAfter: "catch whitney's favorite cute pokemon",
-	},
-	'defeat jasmine': {
-		category: 'GYM LEADER',
-		rewardItems: {
-			'ultra-ball': 5,
-			'full-restore': 5,
-			'metal-coat': 1,
-			...expCandyPackage,
-		},
-		rewardPokemon: {
-			caughtAtDate: new Date().getTime(),
-			growthRate: 'medium',
-			unlockedMoves: ['slash'],
-			fixedAbility: true,
-			shiny: true,
-			maxHp: 30,
-			effortValues: EmptyStatObject,
-			ppBoostedMoves: [],
-			caughtOnMap: 'camp',
-			gender: 'MALE',
-			stepsWalked: 0,
-			ownerId: '',
-			damage: 0,
-			id: '',
-			ball: 'poke-ball',
-			ability: 'flash-fire',
-			name: 'scyther',
-			xp: 125,
-			nature: 'adamant',
-			intrinsicValues: generateRandomStatObject(31),
-			happiness: 70,
-			firstMove: { name: 'slash', usedPP: 0 },
-		},
-		researchPoints: 50,
-		conditionFunction: (s: SaveFile) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Jasmine');
-		},
-		kind: 'BULLETIN',
-		requiredUpgrade: 'training field 1',
-		availableAfter: 'catch an exceptional steel pokemon for jasmine',
-	},
-	'defeat chuck': {
-		category: 'GYM LEADER',
-		rewardItems: {
-			'full-restore': 5,
-			'black-belt': 1,
-			...expCandyPackage,
-		},
-		rewardPokemon: {
-			caughtAtDate: new Date().getTime(),
-			growthRate: 'medium',
-			unlockedMoves: ['drill-peck'],
-			fixedAbility: true,
-			shiny: true,
-			maxHp: 30,
-			effortValues: EmptyStatObject,
-			ppBoostedMoves: [],
-			caughtOnMap: 'camp',
-			gender: 'MALE',
-			stepsWalked: 0,
-			ownerId: '',
-			damage: 0,
-			id: '',
-			ball: 'poke-ball',
-			ability: 'huge-power',
-			name: 'hawlucha',
-			xp: 125,
-			nature: 'adamant',
-			intrinsicValues: generateRandomStatObject(31),
-			happiness: 70,
-			firstMove: { name: 'drill-peck', usedPP: 0 },
-		},
-		researchPoints: 50,
-		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Chuck');
-		},
-		kind: 'BULLETIN',
-		requiredUpgrade: 'training field 1',
-		availableAfter: 'deal 10000 damage with one attack',
-	},
 	'defeat roark': {
 		category: 'BATTLE',
 		rewardItems: {
@@ -1694,46 +1489,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		kind: 'BULLETIN',
 		requiredUpgrade: 'training field 1',
 		availableAfter: 'revive all different fossils',
-	},
-	'defeat falkner': {
-		category: 'GYM LEADER',
-		rewardItems: {
-			'ultra-ball': 5,
-			'full-restore': 5,
-			'sharp-beak': 1,
-			...expCandyPackage,
-		},
-		rewardPokemon: {
-			caughtAtDate: new Date().getTime(),
-			growthRate: 'medium',
-			unlockedMoves: ['drill-peck'],
-			fixedAbility: true,
-			shiny: true,
-			maxHp: 30,
-			effortValues: EmptyStatObject,
-			ppBoostedMoves: [],
-			caughtOnMap: 'camp',
-			gender: 'MALE',
-			stepsWalked: 0,
-			ownerId: '',
-			damage: 0,
-			id: '',
-			ball: 'poke-ball',
-			ability: 'adaptability',
-			name: 'rufflet',
-			xp: 125,
-			nature: 'adamant',
-			intrinsicValues: generateRandomStatObject(31),
-			happiness: 70,
-			firstMove: { name: 'drill-peck', usedPP: 0 },
-		},
-		researchPoints: 50,
-		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === 'Gym Leader Falkner');
-		},
-		kind: 'BULLETIN',
-		requiredUpgrade: 'training field 1',
-		availableAfter: 'catch the legendary bird of ice',
 	},
 	'defeat rowan': {
 		category: 'BATTLE',
@@ -2198,9 +1953,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 10,
 		rewardItems: { 'babiri-berry': 2, 'kee-berry': 2, 'fossilized-dino': 2 },
 		targetRoute: 'onixCave',
-		targetPokemon: onixCaveEncounters.BASE.map((p) => p.name),
-		conditionFunction: (s) =>
-			onixCaveEncounters.BASE.some((o) =>
+		targetPokemon: getAllEncountersFor('onixCave', {}).map((p) => p.name),
+		conditionFunction: (s: SaveFile) =>
+			getAllEncountersFor('onixCave', {}).some((o) =>
 				s.pokedex[o.name].caughtOnRoutes.includes('onixCave')
 			),
 	},
@@ -2217,9 +1972,9 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'moon-stone': 2,
 			'fossilized-drake': 2,
 		},
-		targetPokemon: onixCaveEncounters.BASE.map((p) => p.name),
-		conditionFunction: (s) =>
-			onixCaveEncounters.BASE.every((o) =>
+		targetPokemon: getAllEncountersFor('onixCave', {}).map((p) => p.name),
+		conditionFunction: (s: SaveFile) =>
+			getAllEncountersFor('onixCave', {}).every((o) =>
 				s.pokedex[o.name].caughtOnRoutes.includes('onixCave')
 			),
 	},
@@ -2236,10 +1991,23 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'big-malasada': 2,
 			'fossilized-fish': 2,
 		},
-		targetPokemon: caveW1Encounters.BASE.map((p) => p.name),
-		conditionFunction: (s) =>
-			caveW1Encounters.BASE.every((o) =>
+		targetPokemon: getAllEncountersFor('caveW1', {}).map((p) => p.name),
+		conditionFunction: (s: SaveFile) =>
+			getAllEncountersFor('caveW1', {}).every((o) =>
 				s.pokedex[o.name].caughtOnRoutes.includes('caveW1')
+			),
+	},
+	'catch all pokemon from victory road': {
+		category: 'EXPLORATION',
+		kind: 'BULLETIN',
+		requiredUpgrade: 'rock climbing certification',
+		targetRoute: 'victoryRoad',
+		researchPoints: 50,
+		rewardItems: {},
+		targetPokemon: getAllEncountersFor('victoryRoad', {}).map((p) => p.name),
+		conditionFunction: (s: SaveFile) =>
+			getAllEncountersFor('victoryRoad', {}).every((o) =>
+				s.pokedex[o.name].caughtOnRoutes.includes('victoryRoad')
 			),
 	},
 	'wake a snorlax': {
@@ -2455,104 +2223,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s) => s.mileStones.damageRecord >= 50000,
 		rewardItems: { 'master-ball': 1 },
 		availableAfter: 'deal 30000 damage with one attack',
-	},
-	'defeat erika': {
-		category: 'GYM LEADER',
-		kind: 'BULLETIN',
-		researchPoints: 25,
-		rewardItems: {
-			'rindo-berry': 5,
-			'miracle-seed': 1,
-			'big-root': 1,
-			...smallExpCandyPackage,
-		},
-		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === erikaId);
-		},
-	},
-	'defeat janine': {
-		category: 'GYM LEADER',
-		kind: 'BULLETIN',
-		researchPoints: 25,
-		rewardItems: {
-			'kebia-berry': 5,
-			'black-sludge': 1,
-			...smallExpCandyPackage,
-		},
-		requiredUpgrade: 'machete certification',
-		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === janineId);
-		},
-	},
-	'defeat blaine': {
-		category: 'GYM LEADER',
-		kind: 'BULLETIN',
-		researchPoints: 25,
-		rewardItems: { 'occa-berry': 5, charcoal: 1, ...expCandyPackage },
-		requiredUpgrade: 'sledge hammer certification',
-		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === blaineId);
-		},
-	},
-	'defeat surge': {
-		category: 'GYM LEADER',
-		kind: 'BULLETIN',
-		researchPoints: 50,
-		rewardItems: { 'wacan-berry': 5, magnet: 1, ...expCandyPackage },
-		requiredUpgrade: 'shovel certification',
-		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === surgeId);
-		},
-	},
-	'defeat misty': {
-		category: 'GYM LEADER',
-		kind: 'BULLETIN',
-		researchPoints: 50,
-		rewardItems: {
-			'passho-berry': 5,
-			'mystic-water': 1,
-			sprayduck: 1,
-			...expCandyPackage,
-		},
-		requiredUpgrade: 'swimming certification',
-		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === mistyId);
-		},
-	},
-	'defeat sabrina': {
-		category: 'GYM LEADER',
-		kind: 'BULLETIN',
-		researchPoints: 50,
-		rewardItems: { 'payapa-berry': 5, 'twisted-spoon': 1, ...expCandyPackage },
-		requiredUpgrade: 'swimming certification',
-		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === sabrinaId);
-		},
-	},
-	'defeat brock': {
-		category: 'GYM LEADER',
-		kind: 'BULLETIN',
-		researchPoints: 50,
-		rewardItems: { 'charti-berry': 5, 'hard-stone': 1, ...expCandyPackage },
-		requiredUpgrade: 'swimming certification',
-		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === brockId);
-		},
-	},
-	'defeat gary': {
-		category: 'GYM LEADER',
-		kind: 'BULLETIN',
-		researchPoints: 100,
-		rewardItems: {
-			electirizer: 1,
-			magmarizer: 1,
-			protector: 1,
-			...expCandyPackage,
-		},
-		requiredUpgrade: 'swimming certification',
-		conditionFunction: (s) => {
-			return s.handledOccupants.some((h) => h.id === garyId);
-		},
 	},
 	'reach challenge field rank 1': {
 		category: 'TRAINING',

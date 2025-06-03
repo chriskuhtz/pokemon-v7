@@ -17,6 +17,7 @@ import { routeS1 } from "./routeS1";
 import { routeS1E1 } from "./routeS1E1";
 import { routeS1W1 } from "./routeS1W1";
 import { routeW1 } from "./routeW1";
+import { victoryRoad } from "./victoryRoad";
 
 export const mapIds = [
   "camp",
@@ -35,6 +36,21 @@ export const mapIds = [
   challengeFieldId,
   randomFieldId,
   "rocketCamp",
+  "camp",
+  "routeN1",
+  "routeN1E1",
+  "routeE1",
+  "onixCave",
+  "routeS1E1",
+  "routeS1",
+  "routeS1W1",
+  "routeW1",
+  "routeN1W1",
+  "caveW1",
+  challengeFieldId,
+  randomFieldId,
+  "rocketCamp",
+  "victoryRoad",
 ] as const;
 export type MapId = (typeof mapIds)[number];
 
@@ -55,6 +71,21 @@ export const mapsRecord: Record<MapId, OverworldMap> = {
   challengeField: challengeField,
   rocketCamp: rocketCamp,
   randomField: randomChallengeField,
+  camp: camp,
+  routeN1: routeN1,
+  routeN1E1: routeN1E1,
+  routeE1: routeE1,
+  routeS1E1: routeS1E1,
+  routeS1: routeS1,
+  routeS1W1: routeS1W1,
+  routeW1: routeW1,
+  routeN1W1: routeN1W1,
+  onixCave: onixCave,
+  caveW1: caveW1,
+  challengeField: challengeField,
+  rocketCamp: rocketCamp,
+  randomField: randomChallengeField,
+  victoryRoad: victoryRoad,
 };
 
 export const mapDisplayNames: Record<MapId, string> = {
@@ -74,6 +105,21 @@ export const mapDisplayNames: Record<MapId, string> = {
   challengeField: "challenge field",
   randomField: "challenge field",
   rocketCamp: "Rocket Camp",
+  routeN1: "akai meadow",
+  routeN1E1: "orenji forest",
+  routeE1: "kiiro highlands",
+  routeS1E1: "midori plains",
+  routeS1: "aoi lake",
+  routeS1W1: "kuro hills",
+  routeW1: "shiro cliffs",
+  caveW1: "shiro cave",
+  routeN1W1: "koniro plateau",
+  camp: "kuma camp",
+  onixCave: "onix cave",
+  challengeField: "challenge field",
+  randomField: "challenge field",
+  rocketCamp: "Rocket Camp",
+  victoryRoad: "Victory Road",
 };
 
 export const Emptymap: OverworldMap = {

@@ -5,28 +5,34 @@ import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { Sprite } from '../../components/Sprite/Sprite';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 
-import { LocationContext } from '../../hooks/LocationProvider';
-import { SaveFileContext } from '../../hooks/useSaveFile';
-import { Challenger } from '../../interfaces/Challenger';
-import { SaveFile } from '../../interfaces/SaveFile';
-import { Card } from '../../uiComponents/Card/Card';
-import { Page } from '../../uiComponents/Page/Page';
-import { Stack } from '../../uiComponents/Stack/Stack';
-import { useChallengeTrainer } from '../Overworld/hooks/useChallengeTrainer';
 import {
+	specialTrainers,
 	tier1trainers,
 	tier2trainers,
 	tier3trainers,
 	tier4trainers,
 	tier5trainers,
-	specialTrainers,
 } from '../../constants/trainersRecord';
+import { LocationContext } from '../../hooks/LocationProvider';
+import { SaveFileContext } from '../../hooks/useSaveFile';
+import { Challenger } from '../../interfaces/Challenger';
+import { evTrainingTool } from '../../interfaces/Item';
+import { SaveFile } from '../../interfaces/SaveFile';
+import { Stat } from '../../interfaces/StatObject';
+import { Card } from '../../uiComponents/Card/Card';
+import { Page } from '../../uiComponents/Page/Page';
+import { Stack } from '../../uiComponents/Stack/Stack';
+import {
+	useChallengeTrainer,
+	useEvTraining,
+} from '../Overworld/hooks/useChallengeTrainer';
 
 export const TrainingField = () => {
 	const { setActiveTabReducer, saveFile, patchSaveFileReducer } =
 		useContext(SaveFileContext);
 	const { setLocation } = useContext(LocationContext);
 	const challenge = useChallengeTrainer();
+	const evChallenge = useEvTraining();
 	const [filter, setFilter] = useState<number>(0);
 
 	const filteredElements = useMemo(() => {
@@ -153,8 +159,45 @@ export const TrainingField = () => {
 					</button>,
 				]}
 			/>,
+			...(saveFile.campUpgrades['invite effort value expert']
+				? [
+						'hp',
+						'attack',
+						'defense',
+						'special-attack',
+						'special-defense',
+						'speed',
+				  ]
+				: [].map((v) => (
+						<Card
+							key={`ev_training_${v}`}
+							icon={<TbSoccerField />}
+							content={
+								<div>
+									<h3>EV Training ({v})</h3>
+									<p>
+										random Pokemon that increase {v} EV (hold a{' '}
+										{evTrainingTool[v as Stat]} or macho-brace for increased ev
+										gain)
+									</p>
+								</div>
+							}
+							actionElements={[
+								<button onClick={() => evChallenge(v as Stat)}>
+									challenge
+								</button>,
+							]}
+						/>
+				  ))),
 		];
-	}, [challenge, filter, patchSaveFileReducer, saveFile, setLocation]);
+	}, [
+		challenge,
+		evChallenge,
+		filter,
+		patchSaveFileReducer,
+		saveFile,
+		setLocation,
+	]);
 
 	const filterButtonText: Record<number, string> = {
 		0: 'Challenge Mode',

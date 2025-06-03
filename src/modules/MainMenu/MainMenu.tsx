@@ -9,6 +9,7 @@ import { FaSearch } from "react-icons/fa";
 import { GoTasklist } from "react-icons/go";
 import { IoMdExit } from "react-icons/io";
 import { RiBookShelfLine } from "react-icons/ri";
+import { BadgesCard } from "../../components/BadgesCard/BadgesCard";
 import { BugReportButton } from "../../components/BugReport/BugReport";
 import { IdeaButton } from "../../components/IdeaReport/IdeaReport";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
@@ -16,6 +17,7 @@ import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 import {
   ExportSnapshotCard,
   ImportSnapshotCard,
+  ResetSnapshotCard,
 } from "../../components/SnapshotCard/SnapshotCard";
 import { TrainerCard } from "../../components/TrainerCard/TrainerCard";
 import {
@@ -53,6 +55,7 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
     <Page headline="Main Menu:" goBack={goBack}>
       <Stack mode="column">
         <TrainerCard />
+        <BadgesCard />
         {teleporter && (
           <Card
             onClick={() => teleportHome()}
@@ -125,12 +128,6 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
             }
           />
         )}
-        {/* <Card
-					onClick={() => navigate('MAIN', 'POKEDEX')}
-					content={<h4>Pokedex</h4>}
-					icon={<RiBookShelfLine size={battleSpriteSize} />}
-					actionElements={[]}
-				/> */}
         <Card
           onClick={() => navigate("MAIN", "INTERNAL_DEX")}
           content={<h4>Pokedex</h4>}
@@ -145,6 +142,7 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
         />
         <ExportSnapshotCard />
         <ImportSnapshotCard />
+        <ResetSnapshotCard />
         <ToggleMovementButtons />
         {resetConfirmationInProgress ? (
           <button

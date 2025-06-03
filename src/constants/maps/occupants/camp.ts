@@ -15,6 +15,7 @@ import { chuckLine } from './chuckLine';
 import { elmLine } from './elmLine';
 import { evExpertLine } from './evExpert';
 import { falknerLine } from './falknerLine';
+import { jasmineLine } from './jasmine';
 import { lookerLine } from './lookerLine';
 import { mortyLine } from './mortyLine';
 import { oakLine } from './oakLine';
@@ -361,4 +362,5 @@ export const campOccupants: OverworldMap['occupants'] = [
 	...dragoniteTaxi,
 	rewardChris,
 	...lookerLine,
+	...jasmineLine,
 ];

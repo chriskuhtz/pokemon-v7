@@ -1,5 +1,6 @@
 import { makeApricornTree } from '../../../functions/makeApricornTree';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
+import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { routeN1Lure } from '../../../modules/BerryLure/BerryLure';
 import { travellingMerchantRouteN1 } from '../../../modules/TravellingMerchant/TravellingMerchant';
 import { barryN1 } from './barry';
@@ -293,4 +294,32 @@ export const routeN1Occupants: OverworldMap['occupants'] = [
 		conditionFunction: () => true,
 	},
 	redN1,
+	{
+		id: 'league_guard',
+		type: 'NPC',
+		x: 15,
+		y: 1,
+		orientation: 'DOWN',
+		sprite: SpriteEnum.doormanRed,
+		conditionFunction: (s) => s.badges.length < 8,
+		unhandledMessage: [
+			'This path leads to the Pokemon League',
+			'The League is the ultimate challenge for Pokemon Trainers',
+			'Only Trainers with at least 8 badges may pass',
+		],
+	},
+	{
+		id: 'routeN1_to_league',
+		type: 'ON_STEP_PORTAL',
+		x: 15,
+		y: 0,
+		portal: {
+			mapId: 'victoryRoad',
+			x: 15,
+			y: 49,
+			orientation: 'UP',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: (s) => s.badges.length >= 8,
+	},
 ];
