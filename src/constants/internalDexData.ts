@@ -1046,7 +1046,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	farfetchd: {
 		dexId: 83,
 		types: ['normal', 'flying'],
-		berryLureMapId: 'routeN1',
 		encounterOptions: [],
 		evs: {
 			attack: 1,
@@ -8314,6 +8313,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	rookidee: {
 		dexId: 821,
 		types: ['flying'],
+		berryLureMapId: 'routeN1',
 		encounterOptions: [],
 		evs: {
 			speed: 1,
