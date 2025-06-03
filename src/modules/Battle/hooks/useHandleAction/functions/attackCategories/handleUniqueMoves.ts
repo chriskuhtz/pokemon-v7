@@ -9,6 +9,7 @@ import {
 import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMovesArray } from '../../../../../../functions/getMovesArray';
 import { handleMimicOrSketch } from '../../../../../../functions/handleMimic';
+import { healByPercentage } from '../../../../../../functions/healByPercentage';
 import { removeHealableAilments } from '../../../../../../functions/removeHealableAilments';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
@@ -604,6 +605,28 @@ export const handleUniqueMoves = ({
 			}
 			if (p.status === 'ONFIELD') {
 				return { ...p, heldItemName: undefined };
+			}
+			return p;
+		});
+	}
+	if (move.name === 'jungle-healing') {
+		addMessage({
+			message: `${updatedAttacker.name} heals itself and its allies`,
+		});
+		return updatedPokemon.map((p) => {
+			if (p.id === updatedAttacker.id) {
+				return {
+					...updatedAttacker,
+					primaryAilment: undefined,
+					damage: healByPercentage(updatedAttacker, 25).damage,
+				};
+			}
+			if (p.status === 'ONFIELD' && p.ownerId === updatedAttacker.ownerId) {
+				return {
+					...p,
+					primaryAilment: undefined,
+					damage: healByPercentage(p, 25).damage,
+				};
 			}
 			return p;
 		});
