@@ -544,6 +544,8 @@ export const extraFeatureCheckList: {
 	{ name: 'repair raticate quest', handled: true },
 	{ name: 'jasmine', handled: true },
 	{ name: 'gym leaders give badges as rewards', handled: true },
+	{ name: 'victory-road' },
+	{ name: 'e4 challenge' },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -552,7 +554,6 @@ export const extraFeatureCheckList: {
 	//CONTENT:
 	{ name: 'pryce' },
 	{ name: 'claire' },
-	{ name: 'e4 challenge' },
 	{ name: 'eggs?' },
 	{ name: 'Fishing?' },
 	{ name: 'magma/aqua quests from Looker' },
