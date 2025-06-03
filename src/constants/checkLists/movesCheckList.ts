@@ -2994,15 +2994,32 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/820/',
 		handled: true,
 	},
-	{ name: 'freezing-glare', url: 'https://pokeapi.co/api/v2/move/821/' },
-	{ name: 'fiery-wrath', url: 'https://pokeapi.co/api/v2/move/822/' },
-	{ name: 'thunderous-kick', url: 'https://pokeapi.co/api/v2/move/823/' },
-	{ name: 'glacial-lance', url: 'https://pokeapi.co/api/v2/move/824/' },
-	{ name: 'astral-barrage', url: 'https://pokeapi.co/api/v2/move/825/' },
-	{ name: 'eerie-spell', url: 'https://pokeapi.co/api/v2/move/826/' },
-	/*
-	NEXT ROUND
-	*/
+	{
+		name: 'freezing-glare',
+		url: 'https://pokeapi.co/api/v2/move/821/',
+		handled: true,
+	},
+	{
+		name: 'fiery-wrath',
+		url: 'https://pokeapi.co/api/v2/move/822/',
+		handled: true,
+	},
+	{
+		name: 'thunderous-kick',
+		url: 'https://pokeapi.co/api/v2/move/823/',
+		handled: true,
+	},
+	{
+		name: 'glacial-lance',
+		url: 'https://pokeapi.co/api/v2/move/824/',
+		handled: true,
+	},
+	{
+		name: 'astral-barrage',
+		url: 'https://pokeapi.co/api/v2/move/825/',
+		handled: true,
+	},
+
 	{ name: 'flame-burst', url: 'https://pokeapi.co/api/v2/move/481/' },
 	{ name: 'smack-down', url: 'https://pokeapi.co/api/v2/move/479/' },
 	{ name: 'heal-block', url: 'https://pokeapi.co/api/v2/move/377/' },
@@ -3158,6 +3175,10 @@ export const movesCheckList: {
 	{ name: 'steel-beam', url: 'https://pokeapi.co/api/v2/move/796/' },
 	{ name: 'burning-jealousy', url: 'https://pokeapi.co/api/v2/move/807/' },
 	{ name: 'flip-turn', url: 'https://pokeapi.co/api/v2/move/812/' },
+	{ name: 'eerie-spell', url: 'https://pokeapi.co/api/v2/move/826/' },
+	/*
+	NEXT ROUND
+	*/
 ];
 
 export const handledMoves = [
@@ -3766,6 +3787,11 @@ export const handledMoves = [
 	'surging-strikes',
 	'thunder-cage',
 	'dragon-energy',
+	'freezing-glare',
+	'fiery-wrath',
+	'thunderous-kick',
+	'glacial-lance',
+	'astral-barrage',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

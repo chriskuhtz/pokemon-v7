@@ -553,6 +553,8 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'remove encounter tiles around ladder in onix cave', handled: true },
 	{ name: 'throwing away part of stack doesnt work', handled: true },
+	{ name: 'more rock climbing spots', handled: true },
+	{ name: 'ev grind mode for challenge field', handled: true },
 
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
@@ -562,7 +564,8 @@ export const extraFeatureCheckList: {
 	{ name: 'leech seed benefit doesnt pass to switched in mon' },
 
 	//CONTENT:
-	{ name: 'e4 challenge' },
+	{ name: 'prettier entry to e4' },
+	{ name: 'e4 map and trainers' },
 	{ name: 'pryce' },
 	{ name: 'claire' },
 	{ name: 'eggs?' },
@@ -571,20 +574,17 @@ export const extraFeatureCheckList: {
 	{ name: 'Lugia quest after catching the birds' },
 	{ name: 'Hooh quest after catching the dogs' },
 	{ name: 'Terrain Items (shovel, pickaxe) as Gym leader rewards' },
-	{ name: 'ev grind mode for challenge field' },
 	{ name: 'trainer with simple/costar combo' },
 	{ name: 'steven as the fossil protector' },
 	{ name: 'more legendary stories' },
 	{ name: 'cave of shadows where you face yourself' },
 	{
-		name: `Apricorn Bälle:
-Ein paar (langweiligere) Ideen
+		name: `
 DarkRed-Apricorn: Vulcan Balls: Bonus for Fire and Stone Pokemon
 Beige-Apricorn: Sand-Storm Balls: Bonus for Ground and Flying Pokemon
 LightBlue-Apricorn: SnowCloud Balls: Bonus for Ice and Fairy Pokemon
 Purple-Apricorn: Spooky Balls: Bonus for Psycho, Dark, and Ghost Pokemon`,
 	},
-	{ name: 'more rock climbing spots' },
 	//SETTINGS:
 	{ name: 'random encounters' },
 	{ name: 'random evolutions' },
