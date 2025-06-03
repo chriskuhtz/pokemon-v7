@@ -28,100 +28,94 @@ export const CookingGrandma = (): JSX.Element => {
 				<p>
 					<strong>What should we cook:</strong>
 				</p>
-				<div
-					style={{
-						display: 'grid',
-						gridTemplateColumns: '1fr 3fr',
-						gap: '.5rem',
-					}}
-				>
-					<Stack mode="column">
-						{[
-							...new Set([
-								...enabledRecipes.map((e) => e.result),
-								...disabledRecipes.map((e) => e.result),
-							]),
-						].map((result) => (
-							<button
-								key={result}
-								style={{
-									color: filter === result ? 'white' : undefined,
-									backgroundColor: filter === result ? 'black' : undefined,
-								}}
-								onClick={() => setFilter(result)}
-							>
-								{result}
-							</button>
+
+				<Stack mode="row">
+					{[
+						...new Set([
+							...enabledRecipes.map((e) => e.result),
+							...disabledRecipes.map((e) => e.result),
+						]),
+					].map((result) => (
+						<button
+							key={result}
+							style={{
+								padding: '0rem .75rem',
+								color: filter === result ? 'white' : undefined,
+								backgroundColor: filter === result ? 'black' : undefined,
+							}}
+							onClick={() => setFilter(result)}
+						>
+							<ItemSprite item={result} />
+						</button>
+					))}
+				</Stack>
+				<Stack mode="column">
+					{enabledRecipes
+						.filter((recipe) => {
+							if (!filter) {
+								return true;
+							}
+							return recipe.result === filter;
+						})
+						.map((recipe, index) => (
+							<Card
+								onClick={() => cook(recipe)}
+								key={recipe.result + index}
+								icon={<ItemSprite item={recipe.result} />}
+								content={
+									<div>
+										<h3>
+											Cook {recipe.result} ({recipe.difficulty} Recipe)
+										</h3>
+										<strong>
+											Chance of Success:{' '}
+											<AnimatedBar
+												max={100}
+												offset={Math.max(
+													0,
+													100 -
+														recipeChanceMap[recipe.difficulty] -
+														(saveFile.cookingSkill ?? 0)
+												)}
+											/>
+										</strong>
+										<p>Ingredients: {recipe.ingredients.join(', ')}</p>
+									</div>
+								}
+								actionElements={recipe.ingredients.map((ing) => (
+									<ItemSprite item={ing} />
+								))}
+							/>
 						))}
-					</Stack>
-					<Stack mode="column">
-						{enabledRecipes
-							.filter((recipe) => {
-								if (!filter) {
-									return true;
+					{disabledRecipes
+						.filter((recipe) => {
+							if (!filter) {
+								return true;
+							}
+							return recipe.result === filter;
+						})
+						.map((recipe, index) => (
+							<Card
+								disabled
+								icon={<ItemSprite item={recipe.result} grayscale />}
+								key={recipe.result + index}
+								content={
+									<div>
+										<h3>{recipe.result}</h3>
+										<p>
+											Missing Ingredients:{' '}
+											{recipe.ingredients
+												.filter((ing) => saveFile.bag[ing] <= 0)
+												.join(', ')}
+										</p>
+									</div>
 								}
-								return recipe.result === filter;
-							})
-							.map((recipe, index) => (
-								<Card
-									onClick={() => cook(recipe)}
-									key={recipe.result + index}
-									icon={<ItemSprite item={recipe.result} />}
-									content={
-										<div>
-											<h3>
-												Cook {recipe.result} ({recipe.difficulty} Recipe)
-											</h3>
-											<strong>
-												Chance of Success:{' '}
-												<AnimatedBar
-													max={100}
-													offset={Math.max(
-														0,
-														100 -
-															recipeChanceMap[recipe.difficulty] -
-															(saveFile.cookingSkill ?? 0)
-													)}
-												/>
-											</strong>
-											<p>Ingredients: {recipe.ingredients.join(', ')}</p>
-										</div>
-									}
-									actionElements={recipe.ingredients.map((ing) => (
-										<ItemSprite item={ing} />
-									))}
-								/>
-							))}
-						{disabledRecipes
-							.filter((recipe) => {
-								if (!filter) {
-									return true;
-								}
-								return recipe.result === filter;
-							})
-							.map((recipe, index) => (
-								<Card
-									disabled
-									icon={<ItemSprite item={recipe.result} grayscale />}
-									key={recipe.result + index}
-									content={
-										<div>
-											<h3>{recipe.result}</h3>
-											<p>
-												Missing Ingredients:{' '}
-												{recipe.ingredients
-													.filter((ing) => saveFile.bag[ing] <= 0)
-													.join(', ')}
-											</p>
-										</div>
-									}
-									actionElements={recipe.ingredients.map((ing) => (
-										<ItemSprite item={ing} grayscale={saveFile.bag[ing] <= 0} />
-									))}
-								/>
-							))}
-					</Stack>
-				</div>
+								actionElements={recipe.ingredients.map((ing) => (
+									<ItemSprite item={ing} grayscale={saveFile.bag[ing] <= 0} />
+								))}
+							/>
+						))}
+				</Stack>
 			</Stack>
 		</Page>
 	);

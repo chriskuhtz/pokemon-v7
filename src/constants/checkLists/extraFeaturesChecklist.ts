@@ -546,7 +546,12 @@ export const extraFeatureCheckList: {
 	{ name: 'gym leaders give badges as rewards', handled: true },
 	{ name: 'victory-road', handled: true },
 	{ name: 'flinched himself with fake out', handled: true },
-	{ name: 'Deactivate repel when click upper right corner' },
+	{ name: 'Deactivate repel when click upper right corner', handled: true },
+	{
+		name: 'scrolling in the cooking screen',
+		handled: true,
+	},
+
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
@@ -555,9 +560,6 @@ export const extraFeatureCheckList: {
 	{ name: 'leech seed benefit doesnt pass to switched in mon' },
 	{ name: 'throwing away part of stack doesnt work' },
 	{ name: 'remove encounter tiles around ladder in onix cave' },
-	{
-		name: 'scrolling in the cooking screen',
-	},
 
 	//CONTENT:
 	{ name: 'e4 challenge' },
