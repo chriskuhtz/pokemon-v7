@@ -551,6 +551,8 @@ export const extraFeatureCheckList: {
 		name: 'scrolling in the cooking screen',
 		handled: true,
 	},
+	{ name: 'remove encounter tiles around ladder in onix cave', handled: true },
+	{ name: 'throwing away part of stack doesnt work', handled: true },
 
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
@@ -558,8 +560,6 @@ export const extraFeatureCheckList: {
 	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },
 	{ name: 'leech seed benefit doesnt pass to switched in mon' },
-	{ name: 'throwing away part of stack doesnt work' },
-	{ name: 'remove encounter tiles around ladder in onix cave' },
 
 	//CONTENT:
 	{ name: 'e4 challenge' },
