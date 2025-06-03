@@ -111,7 +111,7 @@ export const handleAttackStart = ({
 	const canAttackChecks = targets.map((t) => {
 		const { canAttack, updatedAttacker: afterBlockers } =
 			handleMoveBlockAilments({
-				attacker,
+				attacker: updatedAttacker,
 				attack: move,
 				addMessage,
 				targetId: t.id,
