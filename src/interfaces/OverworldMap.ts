@@ -264,6 +264,7 @@ export interface OverworldMap {
 	timeOfDayShadersMap: Record<TimeOfDay, string>;
 	tilesetUrl: string;
 	area: 'CAVE' | 'OPEN';
+	foggy?: boolean;
 }
 
 export interface TileMap {

@@ -15,6 +15,7 @@ import { routeS1 } from './routeS1';
 import { routeS1E1 } from './routeS1E1';
 import { routeS1W1 } from './routeS1W1';
 import { routeW1 } from './routeW1';
+import { victoryRoad } from './victoryRoad';
 
 export const mapIds = [
 	'camp',
@@ -31,6 +32,7 @@ export const mapIds = [
 	challengeFieldId,
 	randomFieldId,
 	'rocketCamp',
+	'victoryRoad',
 ] as const;
 export type MapId = (typeof mapIds)[number];
 
@@ -49,6 +51,7 @@ export const mapsRecord: Record<MapId, OverworldMap> = {
 	challengeField: challengeField,
 	rocketCamp: rocketCamp,
 	randomField: randomChallengeField,
+	victoryRoad: victoryRoad,
 };
 
 export const mapDisplayNames: Record<MapId, string> = {
@@ -66,6 +69,7 @@ export const mapDisplayNames: Record<MapId, string> = {
 	challengeField: 'challenge field',
 	randomField: 'challenge field',
 	rocketCamp: 'Rocket Camp',
+	victoryRoad: 'Victory Road',
 };
 
 export const Emptymap: OverworldMap = {
