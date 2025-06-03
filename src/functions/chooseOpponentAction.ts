@@ -63,7 +63,14 @@ export const chooseOpponentAction = ({
 		return {
 			userId: controlled.id,
 			actionName: firstTurnMove.name,
-			targetId: controlled.id,
+			targetId: determineHighestDamage(
+				controlled,
+				[firstTurnMove],
+				filtered,
+				weather,
+				terrain,
+				effects
+			).targetId,
 		};
 	}
 	/**

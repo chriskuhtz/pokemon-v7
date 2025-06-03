@@ -544,14 +544,23 @@ export const extraFeatureCheckList: {
 	{ name: 'repair raticate quest', handled: true },
 	{ name: 'jasmine', handled: true },
 	{ name: 'gym leaders give badges as rewards', handled: true },
-	{ name: 'victory-road' },
-	{ name: 'e4 challenge' },
+	{ name: 'victory-road', handled: true },
+	{ name: 'flinched himself with fake out' },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
 	{ name: 'fix pathing' },
 	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },
+	{ name: 'leech seed benefit doesnt pass to switched in mon' },
+	{ name: 'throwing away part of stack doesnt work' },
+	{ name: 'Deactivate repel when click upper right corner' },
+	{ name: 'remove encounter tiles around ladder in onix cave' },
+	{
+		name: 'scrolling in the cooking screen',
+	},
+
 	//CONTENT:
+	{ name: 'e4 challenge' },
 	{ name: 'pryce' },
 	{ name: 'claire' },
 	{ name: 'eggs?' },
