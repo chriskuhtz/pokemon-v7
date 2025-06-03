@@ -1,3 +1,4 @@
+import { occupantHandled } from '../../../functions/occupantHandled';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 
 export const victoryRoadOccupants: OverworldMap['occupants'] = [
@@ -75,5 +76,37 @@ export const victoryRoadOccupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((occ) => occ.id === 'rock_victory_road_3'),
 		id: 'rock_victory_road_3',
+	},
+	{
+		type: 'POKEMON',
+		x: 4,
+		y: 49,
+		orientation: 'UP',
+		dexId: 248,
+		encounter: {
+			name: 'tyranitar',
+			maxXp: 343000,
+			minXp: 343000,
+			rarity: 'common',
+		},
+		dialogue: ['Taaarr'],
+		conditionFunction: (s) => !occupantHandled(s, 'victory-road_ttar'),
+		id: 'victory-road_ttar',
+	},
+	{
+		type: 'POKEMON',
+		x: 4,
+		y: 48,
+		orientation: 'DOWN',
+		dexId: 452,
+		encounter: {
+			name: 'drapion',
+			maxXp: 343000,
+			minXp: 343000,
+			rarity: 'common',
+		},
+		dialogue: ['Drap Drap'],
+		conditionFunction: (s) => !occupantHandled(s, 'victory-road_drapion'),
+		id: 'victory-road_drapion',
 	},
 ];

@@ -124,6 +124,24 @@ export const getPower = (
 	terrain: BattleTerrain | undefined
 ): number => {
 	const power = attack.data.power ?? 0;
+	if (attack.name === 'triple-kick') {
+		if (attack.multiHits == 1) {
+			return 30;
+		}
+		if (attack.multiHits == 2) {
+			return 20;
+		}
+		return 10;
+	}
+	if (attack.name === 'triple-axel') {
+		if (attack.multiHits == 1) {
+			return 60;
+		}
+		if (attack.multiHits == 2) {
+			return 40;
+		}
+		return 20;
+	}
 	if (attack.name === 'acrobatics') {
 		return attacker.heldItemName ? 2 * power : power;
 	}
