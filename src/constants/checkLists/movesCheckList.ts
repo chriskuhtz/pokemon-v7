@@ -2989,7 +2989,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/819/',
 		handled: true,
 	},
-	{ name: 'dragon-energy', url: 'https://pokeapi.co/api/v2/move/820/' },
+	{
+		name: 'dragon-energy',
+		url: 'https://pokeapi.co/api/v2/move/820/',
+		handled: true,
+	},
 	{ name: 'freezing-glare', url: 'https://pokeapi.co/api/v2/move/821/' },
 	{ name: 'fiery-wrath', url: 'https://pokeapi.co/api/v2/move/822/' },
 	{ name: 'thunderous-kick', url: 'https://pokeapi.co/api/v2/move/823/' },
@@ -3761,6 +3765,7 @@ export const handledMoves = [
 	'wicked-blow',
 	'surging-strikes',
 	'thunder-cage',
+	'dragon-energy',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
