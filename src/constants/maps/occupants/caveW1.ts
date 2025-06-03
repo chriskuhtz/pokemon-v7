@@ -33,12 +33,12 @@ export const caveW1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ON_STEP_PORTAL",
-    id: "cave1 cave1_2",
+    id: "cave1 cave1F1",
     conditionFunction: () => true,
     x: 47,
     y: 21,
     portal: {
-      mapId: "caveW1_2",
+      mapId: "caveW1F1",
       x: 46,
       y: 21,
       orientation: "RIGHT",

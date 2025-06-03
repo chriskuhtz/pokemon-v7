@@ -30,6 +30,18 @@ export const updatePosition = (
       return nextLocation;
     } else return playerLocation;
   }
+  if (southOfEdge && !flying) {
+    if (nextInput !== "UP") {
+      addStep();
+      return nextLocation;
+    } else return playerLocation;
+  }
+  if (northOfEdge && !flying) {
+    if (nextInput !== "DOWN") {
+      addStep();
+      return nextLocation;
+    } else return playerLocation;
+  }
   if (
     isPassable(nextLocation, map, currentOccupants, canSwim, flying, canClimb)
   ) {

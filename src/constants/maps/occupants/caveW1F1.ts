@@ -1,10 +1,10 @@
 import { OverworldMap } from "../../../interfaces/OverworldMap";
 import { redcaveW1 } from "./red";
 
-export const caveW1Occupants: OverworldMap["occupants"] = [
+export const caveW1F1Occupants: OverworldMap["occupants"] = [
   {
     type: "ON_STEP_PORTAL",
-    id: "cave1 cave1_2",
+    id: "cave1 cave1F1",
     conditionFunction: () => true,
     x: 47,
     y: 21,
@@ -18,7 +18,7 @@ export const caveW1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ON_STEP_PORTAL",
-    id: "cave1_2 entry middle",
+    id: "cave1F1 entry middle",
     conditionFunction: () => true,
     x: 3,
     y: 26,
@@ -32,7 +32,7 @@ export const caveW1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ON_STEP_PORTAL",
-    id: "cave1_2 waterfall entry",
+    id: "cave1F1 waterfall entry",
     conditionFunction: () => true,
     x: 27,
     y: 36,
@@ -46,7 +46,7 @@ export const caveW1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ON_STEP_PORTAL",
-    id: "cave1_2 waterfall entry",
+    id: "cave1F1 waterfall entry",
     conditionFunction: () => true,
     x: 28,
     y: 36,

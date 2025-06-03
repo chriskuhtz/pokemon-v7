@@ -1,13 +1,13 @@
 import { caveShaderMap } from "../../functions/getTimeOfDay";
 import { OverworldMap } from "../../interfaces/OverworldMap";
-import { caveW1Occupants } from "./occupants/caveW1_3";
+import { caveW1F2Occupants } from "./occupants/caveW1F2";
 
-export const caveW1_3: OverworldMap = {
+export const caveW1F2: OverworldMap = {
   area: "CAVE",
-  id: "caveW1_3",
+  id: "caveW1F2",
   tilesetUrl: "/tilesets/newMasterSheet.png",
   timeOfDayShadersMap: caveShaderMap,
-  occupants: caveW1Occupants,
+  occupants: caveW1F2Occupants,
   tileMap: {
     baseLayer: [
       [

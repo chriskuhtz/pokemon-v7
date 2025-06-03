@@ -129,12 +129,12 @@ export const routeW1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ON_STEP_PORTAL",
-    id: "cave1_2 entry middle",
+    id: "cave1F1 entry middle",
     conditionFunction: () => true,
     x: 3,
     y: 26,
     portal: {
-      mapId: "caveW1_2",
+      mapId: "caveW1F1",
       x: 3,
       y: 25,
       orientation: "RIGHT",
@@ -143,12 +143,12 @@ export const routeW1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ON_STEP_PORTAL",
-    id: "cave1_2 waterfall entry",
+    id: "cave1F1 waterfall entry",
     conditionFunction: () => true,
     x: 27,
     y: 36,
     portal: {
-      mapId: "caveW1_2",
+      mapId: "caveW1F1",
       x: 27,
       y: 35,
       orientation: "UP",
@@ -157,12 +157,12 @@ export const routeW1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ON_STEP_PORTAL",
-    id: "cave1_2 waterfall entry",
+    id: "cave1F1 waterfall entry",
     conditionFunction: () => true,
     x: 28,
     y: 36,
     portal: {
-      mapId: "caveW1_2",
+      mapId: "caveW1F1",
       x: 28,
       y: 35,
       orientation: "UP",
@@ -185,12 +185,12 @@ export const routeW1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ON_STEP_PORTAL",
-    id: "cave1_3 entry middle hole",
+    id: "cave1F2 entry middle hole",
     conditionFunction: () => true,
     x: 35,
     y: 20,
     portal: {
-      mapId: "caveW1_3",
+      mapId: "caveW1F2",
       x: 35,
       y: 18,
       orientation: "DOWN",
@@ -199,12 +199,12 @@ export const routeW1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ON_STEP_PORTAL",
-    id: "cave1_3 entry trainer",
+    id: "cave1F2 entry trainer",
     conditionFunction: () => true,
     x: 6,
     y: 17,
     portal: {
-      mapId: "caveW1_3",
+      mapId: "caveW1F2",
       x: 6,
       y: 16,
       orientation: "DOWN",
@@ -213,12 +213,12 @@ export const routeW1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ON_STEP_PORTAL",
-    id: "cave1_3 entry top",
+    id: "cave1F2 entry top",
     conditionFunction: () => true,
     x: 23,
     y: 2,
     portal: {
-      mapId: "caveW1_3",
+      mapId: "caveW1F2",
       x: 22,
       y: 2,
       orientation: "DOWN",

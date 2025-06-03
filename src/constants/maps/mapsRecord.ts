@@ -3,8 +3,8 @@ import { OverworldMap } from "../../interfaces/OverworldMap";
 import { challengeFieldId, randomFieldId } from "../gameData";
 import { camp } from "./camp";
 import { caveW1 } from "./caveW1";
-import { caveW1_2 } from "./caveW1_2";
-import { caveW1_3 } from "./caveW1_3";
+import { caveW1F1 } from "./caveW1F1";
+import { caveW1F2 } from "./caveW1F2";
 import { challengeField } from "./challengeField";
 import { onixCave } from "./onixCave";
 import { randomChallengeField } from "./randomChallengeField";
@@ -31,8 +31,8 @@ export const mapIds = [
   "routeW1",
   "routeN1W1",
   "caveW1",
-  "caveW1_2",
-  "caveW1_3",
+  "caveW1F1",
+  "caveW1F2",
   challengeFieldId,
   randomFieldId,
   "rocketCamp",
@@ -66,8 +66,8 @@ export const mapsRecord: Record<MapId, OverworldMap> = {
   routeN1W1: routeN1W1,
   onixCave: onixCave,
   caveW1: caveW1,
-  caveW1_2: caveW1_2,
-  caveW1_3: caveW1_3,
+  caveW1F1: caveW1F1,
+  caveW1F2: caveW1F2,
   challengeField: challengeField,
   rocketCamp: rocketCamp,
   randomField: randomChallengeField,
@@ -82,9 +82,9 @@ export const mapDisplayNames: Record<MapId, string> = {
   routeS1: "aoi lake",
   routeS1W1: "kuro hills",
   routeW1: "shiro cliffs",
-  caveW1: "shiro cave E",
-  caveW1_2: "shiro cave O1",
-  caveW1_3: "shiro cave O2",
+  caveW1: "shiro cave G",
+  caveW1F1: "shiro cave F1",
+  caveW1F2: "shiro cave F2",
   routeN1W1: "koniro plateau",
   camp: "kuma camp",
   onixCave: "onix cave",
