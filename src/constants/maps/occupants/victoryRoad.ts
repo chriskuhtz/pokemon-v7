@@ -23,6 +23,15 @@ export const victoryRoadOccupants: OverworldMap['occupants'] = [
 	},
 	//OBSTACLES
 	{
+		type: 'SIGN',
+		approachDirection: 'UP',
+		dialogue: ['The Pokemon League is redecorating', 'Come back soon'],
+		x: 7,
+		y: 8,
+		conditionFunction: () => true,
+		id: 'construction-sign-victoryRoad-1',
+	},
+	{
 		type: 'CLIMBING_STEPS',
 		x: 7,
 		y: 9,
