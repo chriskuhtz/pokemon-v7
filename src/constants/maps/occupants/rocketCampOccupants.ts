@@ -61,7 +61,6 @@ export const rocketCampOccupants: Occupant[] = [
 			assignLearnsetMoves: true,
 			assignNaturalAbility: true,
 			assignGender: true,
-
 			assignHeldItem: true,
 		},
 	},
@@ -88,7 +87,6 @@ export const rocketCampOccupants: Occupant[] = [
 			assignLearnsetMoves: true,
 			assignNaturalAbility: true,
 			assignGender: true,
-
 			assignHeldItem: true,
 		},
 	},
@@ -115,7 +113,6 @@ export const rocketCampOccupants: Occupant[] = [
 			assignLearnsetMoves: true,
 			assignNaturalAbility: true,
 			assignGender: true,
-
 			assignHeldItem: true,
 		},
 	},
@@ -147,7 +144,6 @@ export const rocketCampOccupants: Occupant[] = [
 			assignLearnsetMoves: true,
 			assignNaturalAbility: true,
 			assignGender: true,
-
 			assignHeldItem: true,
 		},
 	},

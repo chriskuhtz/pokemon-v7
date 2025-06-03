@@ -3,6 +3,7 @@ import { occupantHandled } from '../../../functions/occupantHandled';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 
 export const victoryRoadOccupants: OverworldMap['occupants'] = [
+	//PORTALS
 	{
 		id: 'victory_road_to_routeN1',
 		type: 'ON_STEP_PORTAL',
@@ -17,6 +18,7 @@ export const victoryRoadOccupants: OverworldMap['occupants'] = [
 		},
 		conditionFunction: () => true,
 	},
+	//OBSTACLES
 	{
 		type: 'CLIMBING_STEPS',
 		x: 7,
@@ -92,6 +94,7 @@ export const victoryRoadOccupants: OverworldMap['occupants'] = [
 			!s.handledOccupants.some((occ) => occ.id === 'rock_victory_road_3'),
 		id: 'rock_victory_road_3',
 	},
+	//OVERWORLD_MONS
 	{
 		type: 'POKEMON',
 		x: 4,
@@ -124,12 +127,84 @@ export const victoryRoadOccupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) => !occupantHandled(s, 'victory-road_drapion'),
 		id: 'victory-road_drapion',
 	},
+	{
+		type: 'POKEMON',
+		x: 4,
+		y: 48,
+		orientation: 'DOWN',
+		dexId: 452,
+		encounter: {
+			name: 'drapion',
+			maxXp: 343000,
+			minXp: 343000,
+			rarity: 'common',
+		},
+		dialogue: ['Drap Drap'],
+		conditionFunction: (s) => !occupantHandled(s, 'victory-road_drapion'),
+		id: 'victory-road_drapion',
+	},
+	{
+		type: 'POKEMON',
+		x: 21,
+		y: 16,
+		orientation: 'LEFT',
+		dexId: 68,
+		encounter: {
+			name: 'machamp',
+			maxXp: 343000,
+			minXp: 343000,
+			rarity: 'common',
+		},
+		dialogue: ['Ugh'],
+		conditionFunction: (s) => !occupantHandled(s, 'victory-road_machamp'),
+		id: 'victory-road_machamp',
+	},
+	{
+		type: 'POKEMON',
+		x: 47,
+		y: 22,
+		orientation: 'DOWN',
+		dexId: 76,
+		encounter: {
+			name: 'machamp',
+			maxXp: 343000,
+			minXp: 343000,
+			rarity: 'common',
+		},
+		dialogue: ['lem', '...', 'go'],
+		conditionFunction: (s) => !occupantHandled(s, 'victory-road_golem'),
+		id: 'victory-road_golem',
+	},
+	{
+		type: 'POKEMON',
+		x: 33,
+		y: 6,
+		orientation: 'LEFT',
+		dexId: 324,
+		encounter: {
+			name: 'torkoal',
+			maxXp: 343000,
+			minXp: 343000,
+			rarity: 'common',
+		},
+		dialogue: ['torko', '..torko', '.torko'],
+		conditionFunction: (s) => !occupantHandled(s, 'victory-road_torkoal'),
+		id: 'victory-road_torkoal',
+	},
+	//ITEMS
 	makeOverworldItem({
 		mapId: 'victoryRoad',
 		item: 'full-restore',
 		x: 20,
 		y: 28,
 		amount: 2,
+	}),
+	makeOverworldItem({
+		mapId: 'victoryRoad',
+		item: 'revival-herb',
+		x: 42,
+		y: 12,
+		amount: 3,
 	}),
 	makeOverworldItem({
 		mapId: 'victoryRoad',
