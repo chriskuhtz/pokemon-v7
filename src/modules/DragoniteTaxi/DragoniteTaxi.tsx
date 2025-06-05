@@ -58,6 +58,16 @@ const taxiLocations: Record<
 			forwardFoot: 'CENTER1',
 		},
 	},
+	pokemonLeague: {
+		ticket: 'league-ticket',
+		to: {
+			mapId: 'pokemonLeague',
+			x: 5,
+			y: 55,
+			orientation: 'UP',
+			forwardFoot: 'CENTER1',
+		},
+	},
 };
 
 export const DragoniteTaxi = (): JSX.Element => {

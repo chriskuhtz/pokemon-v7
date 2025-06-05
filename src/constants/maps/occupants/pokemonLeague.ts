@@ -1,0 +1,79 @@
+import { occupantHandled } from '../../../functions/occupantHandled';
+import { OverworldMap } from '../../../interfaces/OverworldMap';
+import { SpriteEnum } from '../../../interfaces/SpriteEnum';
+
+export const pokemonLeagueOccupants: OverworldMap['occupants'] = [
+	{
+		id: 'pokemonLeague_to_victoryRoad',
+		type: 'ON_STEP_PORTAL',
+		x: 5,
+		y: 56,
+		portal: {
+			mapId: 'victoryRoad',
+			x: 4,
+			y: 5,
+			orientation: 'DOWN',
+			forwardFoot: 'CENTER1',
+		},
+		sprite: '/mapObjects/ladderDown.png',
+		conditionFunction: () => true,
+	},
+	{
+		type: 'NURSE',
+		id: 'camp_nurse',
+		x: 2,
+		y: 52,
+		orientation: 'DOWN',
+		sprite: SpriteEnum.nurse,
+		dialogue: ['Lets heal your Pokemon'],
+		conditionFunction: () => true,
+	},
+	{
+		type: 'POKEMON',
+		id: 'camp_nurse_blissey',
+		x: 1,
+		y: 52,
+		orientation: 'DOWN',
+		dexId: 242,
+		dialogue: ['Blissey is assisting Nurse Joy'],
+		conditionFunction: () => true,
+	},
+	{
+		type: 'PC',
+		x: 8,
+		y: 52,
+
+		id: 'camp_pc',
+		conditionFunction: () => true,
+	},
+	{
+		type: 'STORAGE_CHEST',
+		x: 7,
+		y: 52,
+		id: 'camp_storage',
+		conditionFunction: () => true,
+	},
+	{
+		type: 'NPC',
+		x: 5,
+		y: 51,
+		orientation: 'UP',
+		sprite: SpriteEnum.doormanGreen,
+		id: 'elite-four-doorman-active',
+		unhandledMessage: ['You have to defeat all 5 trainers in one go'],
+		conditionFunction: (s) => occupantHandled(s, 'elite-four-will'),
+	},
+	{
+		type: 'NPC',
+		x: 4,
+		y: 52,
+		orientation: 'DOWN',
+		sprite: SpriteEnum.doormanGreen,
+		id: 'elite-four-doorman-inactive',
+		unhandledMessage: [
+			'You have to defeat all 5 trainers in one go',
+			'So choose your team and items wisely',
+		],
+		conditionFunction: (s) => !occupantHandled(s, 'elite-four-will'),
+	},
+];

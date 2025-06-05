@@ -43,6 +43,7 @@ const ballForRoute: Record<MapId, PokeballType> = {
 	victoryRoad: 'poke-ball',
 	onixCave: 'poke-ball',
 	rocketCamp: 'poke-ball',
+	pokemonLeague: 'poke-ball',
 };
 const snackForRoute: Record<MapId, ItemType> = {
 	//actual rewards
@@ -64,6 +65,7 @@ const snackForRoute: Record<MapId, ItemType> = {
 	victoryRoad: 'poke-ball',
 	onixCave: 'poke-ball',
 	rocketCamp: 'poke-ball',
+	pokemonLeague: 'poke-ball',
 };
 const ticketForRoute: Record<MapId, ItemType> = {
 	//actual tickets
@@ -87,6 +89,7 @@ const ticketForRoute: Record<MapId, ItemType> = {
 	victoryRoad: 'poke-ball',
 	onixCave: 'poke-ball',
 	rocketCamp: 'poke-ball',
+	pokemonLeague: 'poke-ball',
 };
 
 const catchQuestsForRoute = (

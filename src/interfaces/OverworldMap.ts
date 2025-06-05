@@ -263,7 +263,7 @@ export interface OverworldMap {
 	weather?: WeatherType;
 	timeOfDayShadersMap: Record<TimeOfDay, string>;
 	tilesetUrl: string;
-	area: 'CAVE' | 'OPEN';
+	area: 'CAVE' | 'OPEN' | 'BUILDING';
 	foggy?: boolean;
 }
 

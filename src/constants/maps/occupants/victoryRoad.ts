@@ -21,16 +21,21 @@ export const victoryRoadOccupants: OverworldMap['occupants'] = [
 		},
 		conditionFunction: () => true,
 	},
-	//OBSTACLES
 	{
-		type: 'SIGN',
-		approachDirection: 'UP',
-		dialogue: ['The Pokemon League is redecorating', 'Come back soon'],
-		x: 7,
-		y: 8,
+		id: 'victory_road_to_pokemonLeague',
+		type: 'ON_STEP_PORTAL',
+		x: 4,
+		y: 4,
+		portal: {
+			mapId: 'pokemonLeague',
+			x: 5,
+			y: 55,
+			orientation: 'UP',
+			forwardFoot: 'CENTER1',
+		},
 		conditionFunction: () => true,
-		id: 'construction-sign-victoryRoad-1',
 	},
+	//OBSTACLES
 	{
 		type: 'CLIMBING_STEPS',
 		x: 7,
@@ -564,6 +569,13 @@ export const victoryRoadOccupants: OverworldMap['occupants'] = [
 		item: 'choice-band',
 		x: 11,
 		y: 5,
+		amount: 1,
+	}),
+	makeOverworldItem({
+		mapId: 'victoryRoad',
+		item: 'league-ticket',
+		x: 7,
+		y: 4,
 		amount: 1,
 	}),
 ];

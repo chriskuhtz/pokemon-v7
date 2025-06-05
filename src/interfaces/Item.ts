@@ -441,6 +441,7 @@ export const keyItems = [
 	'plains-ticket',
 	'hills-ticket',
 	'plateau-ticket',
+	'league-ticket',
 ] as const;
 
 export const expCandies = [
