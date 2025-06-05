@@ -555,7 +555,7 @@ export const extraFeatureCheckList: {
 	{ name: 'throwing away part of stack doesnt work', handled: true },
 	{ name: 'more rock climbing spots', handled: true },
 	{ name: 'ev grind mode for challenge field', handled: true },
-	{ name: 'sleep is still buggy' },
+	{ name: 'sleep is still buggy', handled: true },
 
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
@@ -565,8 +565,20 @@ export const extraFeatureCheckList: {
 	{ name: 'leech seed benefit doesnt pass to switched in mon' },
 
 	//CONTENT:
-	{ name: 'prettier entry to e4' },
-	{ name: 'e4 map and trainers' },
+	{ name: 'prettier entry to victory road' },
+	{ name: 'e4 entrance (nurse, storage, etc' },
+	{ name: 'dragonite flying to league' },
+	{ name: 'e4 will' },
+	{ name: 'e4 koga' },
+	{ name: 'e4 bruno' },
+	{ name: 'e4 karen' },
+	{ name: 'e4 lance' },
+	{ name: 'more strength increase steps for barry' },
+	{ name: 'more strength increase steps for red' },
+	{ name: 'more strength increase steps for cynthia' },
+	{ name: 'more strength increase steps for n' },
+	{ name: 'more strength increase steps for hugh' },
+	{ name: 'more strength increase steps for silver' },
 	{ name: 'pryce' },
 	{ name: 'claire' },
 	{ name: 'eggs?' },

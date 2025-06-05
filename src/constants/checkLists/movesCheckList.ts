@@ -3020,8 +3020,11 @@ export const movesCheckList: {
 		handled: true,
 	},
 
-	{ name: 'flame-burst', url: 'https://pokeapi.co/api/v2/move/481/' },
-	{ name: 'smack-down', url: 'https://pokeapi.co/api/v2/move/479/' },
+	{
+		name: 'smack-down',
+		url: 'https://pokeapi.co/api/v2/move/479/',
+		handled: true,
+	},
 	{ name: 'heal-block', url: 'https://pokeapi.co/api/v2/move/377/' },
 	{ name: 'wring-out', url: 'https://pokeapi.co/api/v2/move/378/' },
 	{ name: 'power-trick', url: 'https://pokeapi.co/api/v2/move/379/' },
@@ -3178,7 +3181,7 @@ export const movesCheckList: {
 	{ name: 'eerie-spell', url: 'https://pokeapi.co/api/v2/move/826/' },
 	/*
 	NEXT ROUND
-	*/
+	*/ { name: 'flame-burst', url: 'https://pokeapi.co/api/v2/move/481/' },
 ];
 
 export const handledMoves = [
@@ -3792,6 +3795,7 @@ export const handledMoves = [
 	'thunderous-kick',
 	'glacial-lance',
 	'astral-barrage',
+	'smack-down',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

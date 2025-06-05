@@ -209,6 +209,19 @@ export const handleDamageAttack = ({
 		addMessage({ message: `${updatedTarget.name}'s burn was healed` });
 		updatedTarget = { ...updatedTarget, primaryAilment: undefined };
 	}
+	//smack down
+	if (
+		move.name === 'smack-down' &&
+		getTypeNames(updatedTarget).includes('flying')
+	) {
+		updatedTarget = {
+			...updatedTarget,
+			secondaryAilments: [
+				...updatedAttacker.secondaryAilments,
+				{ type: 'landed', duration: 1 },
+			],
+		};
+	}
 
 	// apply damage
 	const { consumedHeldItem, damage, criticalHit, wasSuperEffective } =
