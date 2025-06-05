@@ -100,9 +100,9 @@ export const amoongussCompostResearchers: Occupant[] = [
       "It will turn them into mulch in no time",
     ],
     to: "AMOONGUSS",
-    x: 1,
-    y: 14,
-    orientation: "RIGHT",
+    x: 11,
+    y: 21,
+    orientation: "UP",
     sprite: SpriteEnum.scientistFemale,
     id: "amoonguss researcher",
     conditionFunction: (s) =>
@@ -111,9 +111,9 @@ export const amoongussCompostResearchers: Occupant[] = [
   {
     type: "POKEMON",
     dexId: 591,
-    x: 1,
-    y: 13,
-    orientation: "RIGHT",
+    x: 10,
+    y: 21,
+    orientation: "UP",
     id: "amoonguss",
     dialogue: ["Amoonguss is 'processing' berries"],
     conditionFunction: (s) =>
