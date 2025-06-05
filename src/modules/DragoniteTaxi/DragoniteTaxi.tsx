@@ -6,7 +6,7 @@ import { replaceRouteName } from '../../functions/replaceRouteName';
 import { LocationContext } from '../../hooks/LocationProvider';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
-import { joinInventories } from '../../interfaces/Inventory';
+import { ItemType } from '../../interfaces/Item';
 import { Occupant } from '../../interfaces/OverworldMap';
 import { CharacterLocationData } from '../../interfaces/SaveFile';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
@@ -14,55 +14,63 @@ import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
-const taxiLocations: Record<string, CharacterLocationData> = {
+const taxiLocations: Record<
+	string,
+	{ to: CharacterLocationData; ticket: ItemType }
+> = {
 	routeN1E1: {
-		mapId: 'routeN1E1',
-		x: 25,
-		y: 25,
-		orientation: 'DOWN',
-		forwardFoot: 'CENTER1',
+		ticket: 'forest-ticket',
+		to: {
+			mapId: 'routeN1E1',
+			x: 25,
+			y: 25,
+			orientation: 'DOWN',
+			forwardFoot: 'CENTER1',
+		},
 	},
 	routeS1E1: {
-		mapId: 'routeS1E1',
-		x: 25,
-		y: 25,
-		orientation: 'DOWN',
-		forwardFoot: 'CENTER1',
+		ticket: 'plains-ticket',
+		to: {
+			mapId: 'routeS1E1',
+			x: 25,
+			y: 25,
+			orientation: 'DOWN',
+			forwardFoot: 'CENTER1',
+		},
 	},
 	routeS1W1: {
-		mapId: 'routeS1W1',
-		x: 49,
-		y: 25,
-		orientation: 'DOWN',
-		forwardFoot: 'CENTER1',
-	},
-	'routeW1 lookout': {
-		mapId: 'routeW1',
-		x: 9,
-		y: 20,
-		orientation: 'DOWN',
-		forwardFoot: 'CENTER1',
+		ticket: 'hills-ticket',
+		to: {
+			mapId: 'routeS1W1',
+			x: 49,
+			y: 25,
+			orientation: 'DOWN',
+			forwardFoot: 'CENTER1',
+		},
 	},
 	routeN1W1: {
-		mapId: 'routeN1W1',
-		x: 25,
-		y: 49,
-		orientation: 'UP',
-		forwardFoot: 'CENTER1',
+		ticket: 'plateau-ticket',
+		to: {
+			mapId: 'routeN1W1',
+			x: 25,
+			y: 49,
+			orientation: 'UP',
+			forwardFoot: 'CENTER1',
+		},
 	},
 };
+
 export const DragoniteTaxi = (): JSX.Element => {
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
 	const { setLocation } = useContext(LocationContext);
 
 	const fly = useCallback(
-		(location: CharacterLocationData) => {
-			if (saveFile.bag['charti-berry'] < 1) {
+		({ to, ticket }: { to: CharacterLocationData; ticket: ItemType }) => {
+			if (saveFile.bag[ticket] < 1) {
 				return;
 			}
-			setLocation(location);
+			setLocation(to);
 			patchSaveFileReducer({
-				bag: joinInventories(saveFile.bag, { 'charti-berry': 1 }, true),
 				meta: { ...saveFile.meta, activeTab: 'OVERWORLD' },
 			});
 		},

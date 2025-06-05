@@ -563,6 +563,7 @@ export const extraFeatureCheckList: {
 	{ name: 'more strength increase steps for hugh', handled: true },
 	{ name: 'more strength increase steps for silver', handled: true },
 	{ name: 'nicer ladder up sprite', handled: true },
+	{ name: 'refactor dragonite to take tickets', handled: true },
 
 	//BUGS/IMPROVEMENTS:
 
@@ -572,9 +573,9 @@ export const extraFeatureCheckList: {
 	{ name: 'leech seed benefit doesnt pass to switched in mon' },
 
 	//CONTENT:
+	{ name: 'e4 ticket at end of victory road' },
 	{ name: 'prettier entry to victory road' },
 	{ name: 'e4 entrance (nurse, storage, etc' },
-	{ name: 'dragonite flying to league' },
 	{ name: 'e4 will' },
 	{ name: 'e4 koga' },
 	{ name: 'e4 bruno' },
@@ -593,13 +594,24 @@ export const extraFeatureCheckList: {
 	{ name: 'steven as the fossil protector' },
 	{ name: 'more legendary stories' },
 	{ name: 'cave of shadows where you face yourself' },
+
+	{ name: 'DarkRed-Apricorn: Vulcan Balls: Bonus for Fire and Stone Pokemon' },
 	{
-		name: `
-DarkRed-Apricorn: Vulcan Balls: Bonus for Fire and Stone Pokemon
-Beige-Apricorn: Sand-Storm Balls: Bonus for Ground and Flying Pokemon
-LightBlue-Apricorn: SnowCloud Balls: Bonus for Ice and Fairy Pokemon
-Purple-Apricorn: Spooky Balls: Bonus for Psycho, Dark, and Ghost Pokemon`,
+		name: 'Beige-Apricorn: Sand-Storm Balls: Bonus for Ground and Flying Pokemon',
 	},
+	{
+		name: 'LightBlue-Apricorn: SnowCloud Balls: Bonus for Ice and Fairy Pokemon',
+	},
+	{
+		name: 'Purple-Apricorn: Spooky Balls: Bonus for Dark, and Ghost Pokemon',
+	},
+	{
+		name: 'DarkGray-Apricorn: Tech Balls: Bonus for Electric and Steel Pokemon',
+	},
+	{
+		name: 'DarkGreen-Apricorn: Jungle Balls: Bonus for Grass and Psychic Pokemon',
+	},
+
 	//SETTINGS:
 	{ name: 'random encounters' },
 	{ name: 'random evolutions' },

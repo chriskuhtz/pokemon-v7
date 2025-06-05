@@ -58,6 +58,9 @@ const hasCustomSprite: ItemType[] = [
 ];
 
 export const getItemUrl = (item: ItemType): string => {
+	if (item.includes('ticket')) {
+		return `/customItems/ticket.png`;
+	}
 	if (hasCustomSprite.includes(item)) {
 		return `/customItems/${item}.png`;
 	}

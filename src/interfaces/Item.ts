@@ -437,6 +437,10 @@ export const keyItems = [
 	'lure',
 	'super-lure',
 	'max-lure',
+	'forest-ticket',
+	'plains-ticket',
+	'hills-ticket',
+	'plateau-ticket',
 ] as const;
 
 export const expCandies = [
