@@ -45,10 +45,17 @@ export const handleMoveBlockAilments = ({
 			updatedAttacker.primaryAilment.duration <= 0;
 		if (wokeUp) {
 			addMessage({ message: `${attacker.data.name} woke Up` });
-			updatedAttacker.primaryAilment = undefined;
-			updatedAttacker.secondaryAilments = (
-				updatedAttacker.secondaryAilments ?? []
-			).filter((a) => a.type !== 'nightmare');
+
+			return {
+				canAttack: true,
+				updatedAttacker: {
+					...attacker,
+					primaryAilment: undefined,
+					secondaryAilments: (updatedAttacker.secondaryAilments ?? []).filter(
+						(a) => a.type !== 'nightmare'
+					),
+				},
+			};
 		} else {
 			updatedAttacker = handleAsleep(
 				updatedAttacker,

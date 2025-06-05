@@ -555,6 +555,7 @@ export const extraFeatureCheckList: {
 	{ name: 'throwing away part of stack doesnt work', handled: true },
 	{ name: 'more rock climbing spots', handled: true },
 	{ name: 'ev grind mode for challenge field', handled: true },
+	{ name: 'sleep is still buggy' },
 
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
