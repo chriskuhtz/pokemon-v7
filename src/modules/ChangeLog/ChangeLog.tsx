@@ -83,6 +83,7 @@ const ChangeLogV45 = (): JSX.Element => {
 		<>
 			<h3>0.45:</h3>
 			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>Balancing</li>
 				<li>New Attacks</li>
 			</ol>
 		</>

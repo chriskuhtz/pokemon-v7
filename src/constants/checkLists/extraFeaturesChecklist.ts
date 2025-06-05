@@ -556,6 +556,7 @@ export const extraFeatureCheckList: {
 	{ name: 'more rock climbing spots', handled: true },
 	{ name: 'ev grind mode for challenge field', handled: true },
 	{ name: 'sleep is still buggy', handled: true },
+	{ name: 'more strength increase steps for barry', handled: true },
 
 	//BUGS/IMPROVEMENTS:
 	{ name: 'nicer ladder up sprite' },
@@ -573,7 +574,7 @@ export const extraFeatureCheckList: {
 	{ name: 'e4 bruno' },
 	{ name: 'e4 karen' },
 	{ name: 'e4 lance' },
-	{ name: 'more strength increase steps for barry' },
+
 	{ name: 'more strength increase steps for red' },
 	{ name: 'more strength increase steps for cynthia' },
 	{ name: 'more strength increase steps for n' },
