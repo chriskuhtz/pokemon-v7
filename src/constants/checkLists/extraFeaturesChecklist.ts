@@ -557,9 +557,15 @@ export const extraFeatureCheckList: {
 	{ name: 'ev grind mode for challenge field', handled: true },
 	{ name: 'sleep is still buggy', handled: true },
 	{ name: 'more strength increase steps for barry', handled: true },
+	{ name: 'more strength increase steps for red', handled: true },
+	{ name: 'more strength increase steps for cynthia', handled: true },
+	{ name: 'more strength increase steps for n', handled: true },
+	{ name: 'more strength increase steps for hugh', handled: true },
+	{ name: 'more strength increase steps for silver', handled: true },
+	{ name: 'nicer ladder up sprite', handled: true },
 
 	//BUGS/IMPROVEMENTS:
-	{ name: 'nicer ladder up sprite' },
+
 	{ name: 'fix pathing' },
 	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },
@@ -575,11 +581,6 @@ export const extraFeatureCheckList: {
 	{ name: 'e4 karen' },
 	{ name: 'e4 lance' },
 
-	{ name: 'more strength increase steps for red' },
-	{ name: 'more strength increase steps for cynthia' },
-	{ name: 'more strength increase steps for n' },
-	{ name: 'more strength increase steps for hugh' },
-	{ name: 'more strength increase steps for silver' },
 	{ name: 'pryce' },
 	{ name: 'claire' },
 	{ name: 'eggs?' },
