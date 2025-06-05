@@ -236,16 +236,7 @@ export const calculateDamage = (
 		(attacker.secondaryAilments.some((a) => a.type === 'dire-hit') ? 1 : 0);
 	const critFactor =
 		calculateCrits &&
-		determineCrit(
-			attack.name,
-			critRate,
-			target.ability,
-			attacker.ability,
-			attacker.secondaryAilments.some((s) => s.type === 'focused'),
-			attacker.name,
-			getHeldItem(attacker),
-			target.primaryAilment
-		)
+		determineCrit(target, attacker, attack.name, critRate, battleFieldEffects)
 			? attacker.ability === 'sniper'
 				? 3
 				: 2

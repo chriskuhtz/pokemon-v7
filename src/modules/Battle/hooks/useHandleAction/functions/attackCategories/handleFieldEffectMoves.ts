@@ -76,6 +76,13 @@ export const handleFieldEffectMoves = ({
 				duration: 5,
 			});
 	}
+	if (move.name === 'lucky-chant') {
+		addBattleFieldEffect({
+			type: move.name as BattleFieldEffect['type'],
+			ownerId: target.ownerId,
+			duration: 5,
+		});
+	}
 	return pokemon.map((p) => {
 		if (p.id === attacker.id) {
 			return attacker;
