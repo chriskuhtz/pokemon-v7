@@ -631,6 +631,11 @@ export const handleUniqueMoves = ({
 			return p;
 		});
 	}
+	if (move.name === 'gastro-acid') {
+		addMessage({ message: `${updatedTarget.name}'s ability was nullified` });
+
+		updatedTarget = { ...updatedTarget, ability: 'nothing' };
+	}
 	return updatedPokemon.map((p) => {
 		if (p.id === updatedAttacker.id) {
 			return updatedAttacker;
