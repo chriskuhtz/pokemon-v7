@@ -1,5 +1,9 @@
 import { useCallback, useContext, useMemo } from 'react';
-import { ONE_HOUR, randomFieldId } from '../constants/gameData';
+import {
+	ONE_HOUR,
+	randomFieldId,
+	startingLocation,
+} from '../constants/gameData';
 import { barryId } from '../constants/maps/occupants/barry';
 import { challengeFieldOccupants } from '../constants/maps/occupants/challengeField';
 import { cynthiaId } from '../constants/maps/occupants/cynthia';
@@ -52,8 +56,6 @@ export const useLeaveBattle = () => {
 	);
 
 	const handleLoss = useCallback(() => {
-		let updatedLocation = location;
-
 		const resetTime = () => {
 			if (
 				saveFile.settings?.rogueLike ||
@@ -72,14 +74,6 @@ export const useLeaveBattle = () => {
 			reset();
 			return;
 		} else {
-			updatedLocation = {
-				mapId: 'camp',
-				x: 1,
-				y: 1,
-				orientation: 'DOWN',
-				forwardFoot: 'CENTER1',
-			};
-
 			//key items dont get lost
 			const bagWithOnlyKeyItems = joinInventories(
 				EmptyInventory,
@@ -88,7 +82,7 @@ export const useLeaveBattle = () => {
 				)
 			);
 
-			setLocation(updatedLocation);
+			setLocation(startingLocation);
 			patchSaveFileReducer({
 				meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
 				pokemon: saveFile.pokemon.map((p) => {

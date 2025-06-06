@@ -45,7 +45,7 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
 		fixedAbility: true,
 		happiness: 255,
 		heldItemName: 'soft-sand',
-		firstMove: { name: 'dig', usedPP: 0 },
+		firstMove: { name: 'bone-rush', usedPP: 0 },
 		secondMove: { name: 'dragon-claw', usedPP: 0 },
 		thirdMove: { name: 'bite', usedPP: 0 },
 		fourthMove: { name: 'dragon-dance', usedPP: 0 },
