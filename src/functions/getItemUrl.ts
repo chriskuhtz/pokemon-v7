@@ -54,6 +54,7 @@ const hasCustomSprite: ItemType[] = [
 	'psychic-seed',
 	'misty-seed',
 	'orange-apricorn',
+	'grey-apricorn',
 	'booster-energy',
 ];
 

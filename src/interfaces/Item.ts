@@ -109,6 +109,7 @@ export const apricorns = [
 	'white-apricorn',
 	'black-apricorn',
 	'orange-apricorn',
+	'grey-apricorn',
 ] as const;
 
 export const herbs = ['white-herb', 'mental-herb', 'power-herb'] as const;
@@ -746,6 +747,7 @@ export const apricornTable: Record<ApricornType, PokeballType> = {
 	'white-apricorn': 'heavy-ball',
 	'yellow-apricorn': 'quick-ball',
 	'orange-apricorn': 'repeat-ball',
+	'grey-apricorn': 'poke-ball',
 };
 export const getRandomItem = () => {
 	return itemTypes[getRandomIndex(itemTypes.length)];

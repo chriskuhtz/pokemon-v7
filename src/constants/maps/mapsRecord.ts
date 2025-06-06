@@ -2,6 +2,8 @@ import { defaultShaderMap } from '../../functions/getTimeOfDay';
 import { OverworldMap } from '../../interfaces/OverworldMap';
 import { challengeFieldId, randomFieldId } from '../gameData';
 import { camp } from './camp';
+import { campCave } from './campCave';
+import { campLaboratory } from './campLaboratory';
 import { caveW1 } from './caveW1';
 import { caveW1F1 } from './caveW1F1';
 import { caveW1F2 } from './caveW1F2';
@@ -22,6 +24,8 @@ import { victoryRoad } from './victoryRoad';
 
 export const mapIds = [
 	'camp',
+	'campCave',
+	'campLaboratory',
 	'routeN1',
 	'routeN1E1',
 	'routeE1',
@@ -58,6 +62,8 @@ export type MapId = (typeof mapIds)[number];
 
 export const mapsRecord: Record<MapId, OverworldMap> = {
 	camp: camp,
+	campCave: campCave,
+	campLaboratory: campLaboratory,
 	routeN1: routeN1,
 	routeN1E1: routeN1E1,
 	routeE1: routeE1,
@@ -90,6 +96,8 @@ export const mapDisplayNames: Record<MapId, string> = {
 	caveW1F2: 'shiro cave F2',
 	routeN1W1: 'koniro plateau',
 	camp: 'kuma camp',
+	campCave: 'kuma cave',
+	campLaboratory: 'kuma laboratory',
 	onixCave: 'onix cave',
 	challengeField: 'challenge field',
 	randomField: 'challenge field',
