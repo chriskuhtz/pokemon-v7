@@ -76,7 +76,12 @@ export const will: OverworldTrainer = {
 	y: 42,
 	orientation: 'DOWN',
 	sprite: SpriteEnum.will,
-	unhandledMessage: ['Nyaaaaahhh'],
+	unhandledMessage: [
+		'Congratulations',
+		'Only really talented trainers get here',
+		'Unfortunately for you',
+		'You wont get any further',
+	],
 	team: willTeam,
 	battleTeamConfig: {
 		assignGender: true,

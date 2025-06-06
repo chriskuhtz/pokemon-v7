@@ -214,7 +214,7 @@ export const chooseOpponentAction = ({
 	 * GOOD STATUS MOVE
 	 */
 	const statusMove = moves.find((m) =>
-		['spore', 'will-o-wisp', 'thunder-wave', 'toxic', 'dark-void'].includes(
+		['spore', 'will-o-wisp', 'thunderwave', 'toxic', 'dark-void'].includes(
 			m.name
 		)
 	);
