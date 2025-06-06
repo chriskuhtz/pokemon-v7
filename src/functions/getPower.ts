@@ -9,6 +9,7 @@ import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { calculateModifiedStat } from './calculateModifiedStat';
 import { checkForSharedType } from './checkForSharedType';
 import { getHeldItem } from './getHeldItem';
+import { getHpPercentage } from './getHpPercentage';
 import { getMovesArray } from './getMovesArray';
 
 const getActualWeight = (
@@ -124,6 +125,11 @@ export const getPower = (
 	terrain: BattleTerrain | undefined
 ): number => {
 	const power = attack.data.power ?? 0;
+	if (attack.name === 'wring-out') {
+		const perc = getHpPercentage(target);
+
+		return Math.floor(1 + 120 * perc);
+	}
 	if (attack.name === 'triple-kick') {
 		if (attack.multiHits == 1) {
 			return 30;

@@ -114,6 +114,15 @@ export const sortByPriority = (
 		//Pursuit goes before switch
 		return -1;
 	}
+	if (
+		aMove?.type === 'BattleAttack' &&
+		aMove.name === 'sucker-punch' &&
+		bMove?.type === 'BattleAttack' &&
+		['physical', 'special'].includes(bMove.data.damage_class.name)
+	) {
+		//Sucker punch goes before target
+		return -1;
+	}
 
 	if (
 		aMove?.type === 'CatchProcessInfo' ||

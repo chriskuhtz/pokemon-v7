@@ -5,8 +5,8 @@ const jasmineBase: Omit<
 	OverworldNpc,
 	'unhandledMessage' | 'conditionFunction' | 'id'
 > = {
-	x: 14,
-	y: 3,
+	x: 27,
+	y: 6,
 	orientation: 'DOWN',
 	type: 'NPC',
 	sprite: SpriteEnum.jasmine,

@@ -9,6 +9,7 @@ import {
 	ApricornType,
 	berries,
 	BerryType,
+	HerbType,
 	isApricorn,
 	isBerry,
 	isHerb,
@@ -61,6 +62,8 @@ export const useFarm = () => {
 			}
 			const hasGrownABerry =
 				saveFile.mileStones.hasGrownABerry || isBerry(bush.type);
+			const hasGrownAHerb =
+				saveFile.mileStones.hasGrownAHerb || isHerb(bush.type);
 			const hasGrownAnApricorn =
 				saveFile.mileStones.hasGrownAnApricorn || isApricorn(bush.type);
 
@@ -78,6 +81,7 @@ export const useFarm = () => {
 						...saveFile.mileStones,
 						hasGrownABerry,
 						hasGrownAnApricorn,
+						hasGrownAHerb,
 					},
 				});
 			}
@@ -99,7 +103,7 @@ export const useFarm = () => {
 		}
 		return now + ONE_HOUR;
 	};
-	const plant = (t: BerryType | ApricornType, mulch?: MulchType) => {
+	const plant = (t: BerryType | ApricornType | HerbType, mulch?: MulchType) => {
 		let type = t;
 		if (!hasEmptySlots) {
 			return;

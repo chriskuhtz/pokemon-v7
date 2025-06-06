@@ -70,41 +70,47 @@ export const MapEditor = ({
 		<div>
 			<h2>{initialMap.id}</h2>
 
-			<div style={{ display: 'flex', gap: '1rem' }}>
-				{[
-					'Base',
-					'Obstacle',
-					'Decoration',
-					'Encounter',
-					'Foreground',
-					'Water',
-				].map((t) => (
-					<button
-						key={t}
-						style={{
-							color: t === activeTab ? 'wheat' : 'lightgray',
-							backgroundColor: 'rgba(0,0,0,0)',
-						}}
-						onClick={() => setActiveTab(t as LayerName)}
-					>
-						{t}
-					</button>
-				))}
-			</div>
 			<div
 				style={{
-					position: 'relative',
-					display: 'flex',
-					justifyContent: 'space-between',
 					padding: '1rem',
+					borderBottom: '2px solid white',
 				}}
 			>
-				<ToolSelection
-					selected={tool}
-					setSelected={setSelected}
-					tileSetUrl={initialMap.tilesetUrl}
-				/>
+				<h3>Select Layer:</h3>
+				<div
+					style={{
+						display: 'flex',
+						gap: '1rem',
+						paddingBottom: '1rem',
+					}}
+				>
+					{[
+						'Base',
+						'Obstacle',
+						'Decoration',
+						'Encounter',
+						'Foreground',
+						'Water',
+					].map((t) => (
+						<button
+							key={t}
+							style={{
+								color: t === activeTab ? 'wheat' : 'lightgray',
+								backgroundColor: 'rgba(0,0,0,0)',
+							}}
+							onClick={() => setActiveTab(t as LayerName)}
+						>
+							{t}
+						</button>
+					))}
+				</div>
 			</div>
+
+			<ToolSelection
+				selected={tool}
+				setSelected={setSelected}
+				tileSetUrl={initialMap.tilesetUrl}
+			/>
 
 			<div
 				style={{

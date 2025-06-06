@@ -3020,33 +3020,80 @@ export const movesCheckList: {
 		handled: true,
 	},
 
-	{ name: 'flame-burst', url: 'https://pokeapi.co/api/v2/move/481/' },
-	{ name: 'smack-down', url: 'https://pokeapi.co/api/v2/move/479/' },
-	{ name: 'heal-block', url: 'https://pokeapi.co/api/v2/move/377/' },
-	{ name: 'wring-out', url: 'https://pokeapi.co/api/v2/move/378/' },
-	{ name: 'power-trick', url: 'https://pokeapi.co/api/v2/move/379/' },
-	{ name: 'gastro-acid', url: 'https://pokeapi.co/api/v2/move/380/' },
-	{ name: 'lucky-chant', url: 'https://pokeapi.co/api/v2/move/381/' },
-	{ name: 'me-first', url: 'https://pokeapi.co/api/v2/move/382/' },
-	{ name: 'copycat', url: 'https://pokeapi.co/api/v2/move/383/' },
-	{ name: 'power-swap', url: 'https://pokeapi.co/api/v2/move/384/' },
-	{ name: 'guard-swap', url: 'https://pokeapi.co/api/v2/move/385/' },
-	{ name: 'last-resort', url: 'https://pokeapi.co/api/v2/move/387/' },
-	{ name: 'worry-seed', url: 'https://pokeapi.co/api/v2/move/388/' },
-	{ name: 'sucker-punch', url: 'https://pokeapi.co/api/v2/move/389/' },
-	{ name: 'heart-swap', url: 'https://pokeapi.co/api/v2/move/391/' },
-	{ name: 'aqua-ring', url: 'https://pokeapi.co/api/v2/move/392/' },
-	{ name: 'magnet-rise', url: 'https://pokeapi.co/api/v2/move/393/' },
-	{ name: 'aqua-tail', url: 'https://pokeapi.co/api/v2/move/401/' },
-	{ name: 'switcheroo', url: 'https://pokeapi.co/api/v2/move/415/' },
-	{ name: 'defog', url: 'https://pokeapi.co/api/v2/move/432/' },
-	{ name: 'trick-room', url: 'https://pokeapi.co/api/v2/move/433/' },
-	{ name: 'stealth-rock', url: 'https://pokeapi.co/api/v2/move/446/' },
-	{ name: 'lunar-dance', url: 'https://pokeapi.co/api/v2/move/461/' },
-	{ name: 'wide-guard', url: 'https://pokeapi.co/api/v2/move/469/' },
-	{ name: 'guard-split', url: 'https://pokeapi.co/api/v2/move/470/' },
-	{ name: 'power-split', url: 'https://pokeapi.co/api/v2/move/471/' },
-	{ name: 'wonder-room', url: 'https://pokeapi.co/api/v2/move/472/' },
+	{
+		name: 'smack-down',
+		url: 'https://pokeapi.co/api/v2/move/479/',
+		handled: true,
+	},
+
+	{
+		name: 'wring-out',
+		url: 'https://pokeapi.co/api/v2/move/378/',
+		handled: true,
+	},
+
+	{
+		name: 'gastro-acid',
+		url: 'https://pokeapi.co/api/v2/move/380/',
+		handled: true,
+	},
+	{
+		name: 'lucky-chant',
+		url: 'https://pokeapi.co/api/v2/move/381/',
+		handled: true,
+	},
+
+	{
+		name: 'power-swap',
+		url: 'https://pokeapi.co/api/v2/move/384/',
+		handled: true,
+	},
+	{
+		name: 'guard-swap',
+		url: 'https://pokeapi.co/api/v2/move/385/',
+		handled: true,
+	},
+
+	{
+		name: 'worry-seed',
+		url: 'https://pokeapi.co/api/v2/move/388/',
+		handled: true,
+	},
+	{
+		name: 'sucker-punch',
+		url: 'https://pokeapi.co/api/v2/move/389/',
+		handled: true,
+	},
+	{
+		name: 'heart-swap',
+		url: 'https://pokeapi.co/api/v2/move/391/',
+		handled: true,
+	},
+	{
+		name: 'aqua-ring',
+		url: 'https://pokeapi.co/api/v2/move/392/',
+		handled: true,
+	},
+
+	{
+		name: 'aqua-tail',
+		url: 'https://pokeapi.co/api/v2/move/401/',
+		handled: true,
+	},
+	{
+		name: 'switcheroo',
+		url: 'https://pokeapi.co/api/v2/move/415/',
+		handled: true,
+	},
+	{
+		name: 'stealth-rock',
+		url: 'https://pokeapi.co/api/v2/move/446/',
+		handled: true,
+	},
+
+	{ name: 'flip-turn', url: 'https://pokeapi.co/api/v2/move/812/' },
+	{ name: 'volt-switch', url: 'https://pokeapi.co/api/v2/move/521/' },
+	{ name: 'u-turn', url: 'https://pokeapi.co/api/v2/move/369/' },
 	{ name: 'rage-powder', url: 'https://pokeapi.co/api/v2/move/476/' },
 	{ name: 'telekinesis', url: 'https://pokeapi.co/api/v2/move/477/' },
 	{ name: 'magic-room', url: 'https://pokeapi.co/api/v2/move/478/' },
@@ -3056,7 +3103,6 @@ export const movesCheckList: {
 	{ name: 'water-pledge', url: 'https://pokeapi.co/api/v2/move/518/' },
 	{ name: 'fire-pledge', url: 'https://pokeapi.co/api/v2/move/519/' },
 	{ name: 'grass-pledge', url: 'https://pokeapi.co/api/v2/move/520/' },
-	{ name: 'volt-switch', url: 'https://pokeapi.co/api/v2/move/521/' },
 	{ name: 'chatter', url: 'https://pokeapi.co/api/v2/move/448/' },
 	{ name: 'embargo', url: 'https://pokeapi.co/api/v2/move/373/' },
 	{ name: 'fling', url: 'https://pokeapi.co/api/v2/move/374/' },
@@ -3107,7 +3153,7 @@ export const movesCheckList: {
 	{ name: 'healing-wish', url: 'https://pokeapi.co/api/v2/move/361/' },
 	{ name: 'natural-gift', url: 'https://pokeapi.co/api/v2/move/363/' },
 	{ name: 'feint', url: 'https://pokeapi.co/api/v2/move/364/' },
-	{ name: 'u-turn', url: 'https://pokeapi.co/api/v2/move/369/' },
+
 	{ name: 'after-you', url: 'https://pokeapi.co/api/v2/move/495/' },
 	{ name: 'round', url: 'https://pokeapi.co/api/v2/move/496/' },
 	{ name: 'echoed-voice', url: 'https://pokeapi.co/api/v2/move/497/' },
@@ -3174,11 +3220,23 @@ export const movesCheckList: {
 	{ name: 'life-dew', url: 'https://pokeapi.co/api/v2/move/791/' },
 	{ name: 'steel-beam', url: 'https://pokeapi.co/api/v2/move/796/' },
 	{ name: 'burning-jealousy', url: 'https://pokeapi.co/api/v2/move/807/' },
-	{ name: 'flip-turn', url: 'https://pokeapi.co/api/v2/move/812/' },
 	{ name: 'eerie-spell', url: 'https://pokeapi.co/api/v2/move/826/' },
 	/*
-	NEXT ROUND
-	*/
+	ROUND 3
+	*/ { name: 'flame-burst', url: 'https://pokeapi.co/api/v2/move/481/' },
+	{ name: 'heal-block', url: 'https://pokeapi.co/api/v2/move/377/' },
+	{ name: 'power-trick', url: 'https://pokeapi.co/api/v2/move/379/' },
+	{ name: 'me-first', url: 'https://pokeapi.co/api/v2/move/382/' },
+	{ name: 'copycat', url: 'https://pokeapi.co/api/v2/move/383/' },
+	{ name: 'last-resort', url: 'https://pokeapi.co/api/v2/move/387/' },
+	{ name: 'magnet-rise', url: 'https://pokeapi.co/api/v2/move/393/' },
+	{ name: 'defog', url: 'https://pokeapi.co/api/v2/move/432/' },
+	{ name: 'trick-room', url: 'https://pokeapi.co/api/v2/move/433/' },
+	{ name: 'lunar-dance', url: 'https://pokeapi.co/api/v2/move/461/' },
+	{ name: 'wide-guard', url: 'https://pokeapi.co/api/v2/move/469/' },
+	{ name: 'guard-split', url: 'https://pokeapi.co/api/v2/move/470/' },
+	{ name: 'power-split', url: 'https://pokeapi.co/api/v2/move/471/' },
+	{ name: 'wonder-room', url: 'https://pokeapi.co/api/v2/move/472/' },
 ];
 
 export const handledMoves = [
@@ -3792,6 +3850,19 @@ export const handledMoves = [
 	'thunderous-kick',
 	'glacial-lance',
 	'astral-barrage',
+	'smack-down',
+	'wring-out',
+	'gastro-acid',
+	'lucky-chant',
+	'guard-swap',
+	'power-swap',
+	'worry-seed',
+	'sucker-punch',
+	'heart-swap',
+	'aqua-ring',
+	'aqua-tail',
+	'switcheroo',
+	'stealth-rock',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

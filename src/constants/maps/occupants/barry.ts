@@ -336,7 +336,20 @@ const barryTeam = (s: SaveFile): OwnedPokemon[] => {
 	];
 	const team: OwnedPokemon[] = [];
 
-	for (let i = 0; i < 6; i++) {
+	const numberOfMembers = () => {
+		if (highestXpOnTeam < 50 * 50 * 50) {
+			return 3;
+		}
+		if (highestXpOnTeam < 60 * 60 * 60) {
+			return 4;
+		}
+		if (highestXpOnTeam < 70 * 70 * 70) {
+			return 5;
+		}
+
+		return 6;
+	};
+	for (let i = 0; i < numberOfMembers(); i++) {
 		team.push(
 			getRandomEntry(
 				possibilities.filter((p) => team.every((t) => t.name !== p.name))

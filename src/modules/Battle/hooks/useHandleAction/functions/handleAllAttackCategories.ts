@@ -77,7 +77,11 @@ export const handleAllAttackCategories = ({
 		allPokemon: BattlePokemon[],
 		targetsFactor: number
 	): BattlePokemon[] => {
-		switch (move.data.meta.category.name) {
+		const catname =
+			move.name === 'stealth-rock'
+				? 'field-effect'
+				: move.data.meta.category.name;
+		switch (catname) {
 			case 'damage':
 			case 'damage+ailment':
 			case 'damage+heal':

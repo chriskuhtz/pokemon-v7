@@ -49,6 +49,8 @@ export const makeChallengerPokemon = (
 		...data,
 		id: v4(),
 		intrinsicValues: ivs(),
-		shiny: Math.random() * (config?.increasedShinyFactor ?? 1) < shinyChance,
+		shiny:
+			testOpponent.shiny ??
+			Math.random() * (config?.increasedShinyFactor ?? 1) < shinyChance,
 	};
 };

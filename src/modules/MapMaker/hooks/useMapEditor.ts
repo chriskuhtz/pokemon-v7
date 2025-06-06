@@ -98,8 +98,8 @@ export const useMapEditor = ({
 			}
 			return null;
 		}
-		if (tool.type === 'tileplacer') {
-			return tool.tile;
+		if (tool.type === 'groupPlacer' && tool.tiles.at(0)?.at(0)) {
+			return tool.tiles.at(0)?.at(0) ?? { xOffset: 0, yOffset: 0 };
 		}
 		//new tools here
 		return current;
@@ -448,85 +448,93 @@ export const useMapEditor = ({
 		}
 	};
 	const randomFill = (layer: LayerName, percentage: number) => {
-		if (tool?.type !== 'tileplacer') {
+		if (tool?.type !== 'groupPlacer') {
+			return;
+		}
+		const tile = tool.tiles.at(0)?.at(0);
+
+		if (!tile) {
 			return;
 		}
 
 		if (layer === 'Base') {
 			setBaseLayer(
 				baseLayer.map((row) =>
-					row.map((c) => (Math.random() < percentage ? tool.tile : c))
+					row.map((c) => (Math.random() < percentage ? tile : c))
 				)
 			);
 		}
 		if (layer === 'Encounter') {
 			setencounterLayer(
 				encounterLayer.map((row) =>
-					row.map((c) => (Math.random() < percentage ? tool.tile : c))
+					row.map((c) => (Math.random() < percentage ? tile : c))
 				)
 			);
 		}
 		if (layer === 'Obstacle') {
 			setobstacleLayer(
 				obstacleLayer.map((row) =>
-					row.map((c) => (Math.random() < percentage ? tool.tile : c))
+					row.map((c) => (Math.random() < percentage ? tile : c))
 				)
 			);
 		}
 		if (layer === 'Decoration') {
 			setdecorationLayer(
 				decorationLayer.map((row) =>
-					row.map((c) => (Math.random() < percentage ? tool.tile : c))
+					row.map((c) => (Math.random() < percentage ? tile : c))
 				)
 			);
 		}
 		if (layer === 'Foreground') {
 			setforegroundLayer(
 				foregroundLayer.map((row) =>
-					row.map((c) => (Math.random() < percentage ? tool.tile : c))
+					row.map((c) => (Math.random() < percentage ? tile : c))
 				)
 			);
 		}
 		if (layer === 'Water') {
 			setwaterLayer(
 				waterLayer.map((row) =>
-					row.map((c) => (Math.random() < percentage ? tool.tile : c))
+					row.map((c) => (Math.random() < percentage ? tile : c))
 				)
 			);
 		}
 	};
 	const replaceAll = (layer: LayerName) => {
-		if (tool?.type !== 'tileplacer') {
+		if (tool?.type !== 'groupPlacer') {
+			return;
+		}
+		const tile = tool.tiles.at(0)?.at(0);
+
+		if (!tile) {
 			return;
 		}
 
 		if (layer === 'Base') {
-			setBaseLayer(baseLayer.map((row) => row.map(() => tool.tile)));
+			setBaseLayer(baseLayer.map((row) => row.map(() => tile)));
 		}
 		if (layer === 'Encounter') {
 			setencounterLayer(
-				encounterLayer.map((row) => row.map((c) => (c ? tool.tile : null)))
+				encounterLayer.map((row) => row.map((c) => (c ? tile : null)))
 			);
 		}
 		if (layer === 'Obstacle') {
 			setobstacleLayer(
-				obstacleLayer.map((row) => row.map((c) => (c ? tool.tile : null)))
+				obstacleLayer.map((row) => row.map((c) => (c ? tile : null)))
 			);
 		}
 		if (layer === 'Decoration') {
 			setdecorationLayer(
-				decorationLayer.map((row) => row.map((c) => (c ? tool.tile : null)))
+				decorationLayer.map((row) => row.map((c) => (c ? tile : null)))
 			);
 		}
 		if (layer === 'Foreground') {
 			setforegroundLayer(
-				foregroundLayer.map((row) => row.map((c) => (c ? tool.tile : null)))
+				foregroundLayer.map((row) => row.map((c) => (c ? tile : null)))
 			);
 		}
 		if (layer === 'Water') {
-			setwaterLayer(
-				waterLayer.map((row) => row.map((c) => (c ? tool.tile : null)))
-			);
+			setwaterLayer(waterLayer.map((row) => row.map((c) => (c ? tile : null))));
 		}
 	};
 

@@ -197,16 +197,14 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'invite museum curator': ['invite dugtrio explorers'],
 	'invite historian': ['buy skiing equipment'],
 	'bag size upgrade 1': baseRequirements,
-	'bag size upgrade 2': [...baseRequirements, 'bag size upgrade 1'],
-	'bag size upgrade 3': [...baseRequirements, 'bag size upgrade 2'],
+	'bag size upgrade 2': ['bag size upgrade 1'],
+	'bag size upgrade 3': ['bag size upgrade 2'],
 	'team slot 3': [...baseRequirements],
-	'team slot 4': [...baseRequirements, 'team slot 3'],
-	'team slot 5': [...baseRequirements, 'team slot 4'],
-	'team slot 6': [...baseRequirements, 'team slot 5'],
-	//the last exploration upgrade
-	'dragonite taxi': campUpgradeNames.filter(
-		(name) => campUpgradeCategories[name] === 'Exploration'
-	),
+	'team slot 4': ['team slot 3'],
+	'team slot 5': ['team slot 4'],
+	'team slot 6': ['team slot 5'],
+	'dragonite taxi': ['swimming certification'],
+
 	//"Quest rewards"
 	'pidgeot rider certification': [],
 	'warden certification': ['ranger certification'],
@@ -220,7 +218,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 
 export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	bulletin_board: 'A place for people to post quests',
-	berry_farm: 'Berries and Apricorns are our main resources',
+	berry_farm: 'Berries, Apricorns and Herbs are our main resources',
 	'invite apricorn smith kurt': 'Pokeballs can be made from apricorns',
 	'invite move tutor': 'Teaches your Pokemon new moves',
 	'invite nature tutor': 'Can change your Pokemons Nature',
@@ -291,7 +289,8 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	'sixth slot for farm': 'more space at the berry farm',
 	'seventh slot for farm': 'more space at the berry farm',
 	'invite historian': 'It might not all be true, but it sounds interesting',
-	'dragonite taxi': 'dragonite can fly you to remote places',
+	'dragonite taxi':
+		'dragonite can fly you to remote places if you have the correct ticket',
 	'pidgeot rider certification':
 		'Expert flying Pokemon Trainers can ride on their pokemon',
 	'warden certification':

@@ -51,6 +51,7 @@ const secondaryAilments = [
 	'ingrained',
 	'landed',
 	'octolocked',
+	'aqua-ringed',
 ] as const;
 
 export type SecondaryAilmentType = (typeof secondaryAilments)[number];

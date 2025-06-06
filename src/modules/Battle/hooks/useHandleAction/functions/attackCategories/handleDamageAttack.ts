@@ -209,6 +209,40 @@ export const handleDamageAttack = ({
 		addMessage({ message: `${updatedTarget.name}'s burn was healed` });
 		updatedTarget = { ...updatedTarget, primaryAilment: undefined };
 	}
+	//smack down
+	if (
+		move.name === 'smack-down' &&
+		getTypeNames(updatedTarget).includes('flying')
+	) {
+		updatedTarget = {
+			...updatedTarget,
+			secondaryAilments: [
+				...updatedAttacker.secondaryAilments,
+				{ type: 'landed', duration: 1 },
+			],
+		};
+	}
+	//smack down
+
+	const targetMove = updatedTarget.moveQueue.at(0);
+	if (
+		move.name === 'sucker-punch' &&
+		!(
+			targetMove?.type == 'BattleAttack' &&
+			['physical', 'special'].includes(targetMove.data.damage_class.name)
+		)
+	) {
+		addMessage({ message: 'It failed' });
+		return pokemon.map((p) => {
+			if (p.id === updatedAttacker.id) {
+				return updatedAttacker;
+			}
+			if (p.id === updatedTarget.id) {
+				return updatedTarget;
+			}
+			return p;
+		});
+	}
 
 	// apply damage
 	const { consumedHeldItem, damage, criticalHit, wasSuperEffective } =

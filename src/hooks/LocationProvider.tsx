@@ -1,5 +1,6 @@
 import React, {
 	ReactNode,
+	useCallback,
 	useContext,
 	useEffect,
 	useMemo,
@@ -9,6 +10,7 @@ import {
 	localStorageLocationId,
 	startingLocation,
 } from '../constants/gameData';
+import { resetEliteFour } from '../functions/resetChallengeFielders';
 import { CharacterLocationData } from '../interfaces/SaveFile';
 import { SaveFileContext } from './useSaveFile';
 
@@ -27,7 +29,20 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
 			? (JSON.parse(local) as CharacterLocationData)
 			: startingLocation;
 	}, []);
-	const [location, setLocation] = useState<CharacterLocationData>(initValue);
+	const [location, s] = useState<CharacterLocationData>(initValue);
+
+	const setLocation = useCallback(
+		(l: CharacterLocationData) => {
+			//reset e4 when entering league
+			if (l.mapId == 'pokemonLeague' && location.mapId !== 'pokemonLeague') {
+				patchSaveFileReducer({
+					handledOccupants: resetEliteFour(saveFile.handledOccupants),
+				});
+			}
+			s(l);
+		},
+		[location.mapId, patchSaveFileReducer, saveFile.handledOccupants]
+	);
 
 	//SYNC WITH LOCAL STORAGE
 	useEffect(() => {
@@ -47,7 +62,10 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
 		}
 	}, [location, patchSaveFileReducer, saveFile]);
 
-	const value = useMemo(() => ({ location, setLocation }), [location]);
+	const value = useMemo(
+		() => ({ location, setLocation }),
+		[location, setLocation]
+	);
 
 	return (
 		<LocationContext.Provider value={value}>

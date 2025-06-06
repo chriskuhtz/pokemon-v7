@@ -38,6 +38,13 @@ export const handleFieldEffectMoves = ({
 			duration: 9000,
 		});
 	}
+	if (move.name === 'stealth-rock') {
+		addBattleFieldEffect({
+			type: move.name as BattleFieldEffect['type'],
+			ownerId: target.ownerId,
+			duration: 9000,
+		});
+	}
 	if (move.name === 'toxic-spikes') {
 		addBattleFieldEffect({
 			type: move.name as BattleFieldEffect['type'],
@@ -75,6 +82,13 @@ export const handleFieldEffectMoves = ({
 				ownerId: target.ownerId,
 				duration: 5,
 			});
+	}
+	if (move.name === 'lucky-chant') {
+		addBattleFieldEffect({
+			type: move.name as BattleFieldEffect['type'],
+			ownerId: target.ownerId,
+			duration: 5,
+		});
 	}
 	return pokemon.map((p) => {
 		if (p.id === attacker.id) {

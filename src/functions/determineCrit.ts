@@ -1,42 +1,51 @@
-import { AbilityName } from '../constants/checkLists/completed/abilityCheckList';
 import { ohkoMoves } from '../constants/groupedMoves';
-import { PokemonName } from '../constants/pokemonNames';
-import { PrimaryAilment } from '../interfaces/Ailment';
-import { ItemType } from '../interfaces/Item';
+import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { BattleFieldEffect } from '../modules/Battle/BattleField';
+import { getHeldItem } from './getHeldItem';
 
 export const determineCrit = (
+	target: BattlePokemon,
+	attacker: BattlePokemon,
 	moveName: string,
 	critRate: number,
-	targetAbility: AbilityName,
-	attackerAbilty: AbilityName,
-	attackerFocused: boolean,
-	attackerName: PokemonName,
-	attackerHeldItem: ItemType | undefined,
-	targetPrimaryAilment: PrimaryAilment | undefined
+	battleFieldEffects: BattleFieldEffect[]
 ): boolean => {
+	const targetLuckyChanted = battleFieldEffects.some(
+		(b) => b.ownerId === target.ownerId && b.type === 'lucky-chant'
+	);
+	if (targetLuckyChanted) {
+		return false;
+	}
+
+	const attackerFocused = attacker.secondaryAilments.some(
+		(s) => s.type === 'focused'
+	);
+
 	const boostedCritRate =
 		critRate +
 		(attackerFocused ? 2 : 0) +
-		(attackerAbilty === 'super-luck' ? 1 : 0) +
-		(attackerHeldItem === 'scope-lens' ? 1 : 0) +
-		(attackerHeldItem === 'razor-claw' ? 1 : 0) +
-		(attackerName === 'chansey' && attackerHeldItem === 'lucky-punch' ? 2 : 0) +
-		((attackerName === 'farfetchd' ||
-			attackerName === 'farfetchd-galar' ||
-			attackerName === 'sirfetchd') &&
-		attackerHeldItem === 'stick'
+		(attacker.ability === 'super-luck' ? 1 : 0) +
+		(getHeldItem(attacker) === 'scope-lens' ? 1 : 0) +
+		(getHeldItem(attacker) === 'razor-claw' ? 1 : 0) +
+		(attacker.name === 'chansey' && getHeldItem(attacker) === 'lucky-punch'
+			? 2
+			: 0) +
+		((attacker.name === 'farfetchd' ||
+			attacker.name === 'farfetchd-galar' ||
+			attacker.name === 'sirfetchd') &&
+		getHeldItem(attacker) === 'stick'
 			? 2
 			: 0);
 	if (ohkoMoves.includes(moveName)) {
 		return false;
 	}
-	if (targetAbility === 'battle-armor' || targetAbility === 'shell-armor') {
+	if (target.ability === 'battle-armor' || target.ability === 'shell-armor') {
 		return false;
 	}
 	if (
-		attackerAbilty === 'merciless' &&
-		(targetPrimaryAilment?.type === 'poison' ||
-			targetPrimaryAilment?.type === 'toxic')
+		attacker.ability === 'merciless' &&
+		(target.primaryAilment?.type === 'poison' ||
+			target.primaryAilment?.type === 'toxic')
 	) {
 		return true;
 	}
