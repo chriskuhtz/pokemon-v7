@@ -44,12 +44,6 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
 		[location.mapId, patchSaveFileReducer, saveFile.handledOccupants]
 	);
 
-	//RESCUE FROM SOFT LOCK
-	useEffect(() => {
-		if (location.mapId === 'camp' && location.x === 1 && location.y === 1) {
-			setLocation(startingLocation);
-		}
-	}, [location, setLocation]);
 	//SYNC WITH LOCAL STORAGE
 	useEffect(() => {
 		window.localStorage.setItem(
