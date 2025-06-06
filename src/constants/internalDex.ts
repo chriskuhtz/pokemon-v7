@@ -174,16 +174,6 @@ const overUsed = Object.entries(internalDex)
 	.map(([key]) => key);
 console.log('Mons with more than one encounter option', overUsed);
 
-// console.log(
-// 	Object.fromEntries(
-// 		Object.entries(internalDex).map(([key, value]) => {
-// 			return sledgeHammerPokemon.includes(key)
-// 				? [key, { ...value, underRock: true }]
-// 				: [key, value];
-// 		})
-// 	)
-// );
-
 const onMultipleRoutes = Object.entries(internalDex)
 	.filter(
 		([, value]) => value.encounterOptions && value.encounterOptions?.length > 1
