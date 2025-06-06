@@ -7,7 +7,7 @@ import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 
 const willTeam = (s: SaveFile): OwnedPokemon[] => {
-	const xp = Math.min(70 * 70 * 70, getHighestXpOnTeam(s.pokemon));
+	const xp = Math.min(70 * 70 * 70, getHighestXpOnTeam(s.pokemon) * 0.8);
 
 	const bronzong = makeChallengerPokemon({
 		xp,
@@ -67,6 +67,8 @@ const willTeam = (s: SaveFile): OwnedPokemon[] => {
 	return [bronzong, jynx, grumpig, slowbro, gardevoir, xatu];
 };
 export const will: OverworldTrainer = {
+	profilePicture:
+		'https://archives.bulbagarden.net/media/upload/0/07/VSWill.png',
 	type: 'TRAINER',
 	id: 'elite4-will',
 	conditionFunction: (s) => !occupantHandled(s, 'elite4-will'),
