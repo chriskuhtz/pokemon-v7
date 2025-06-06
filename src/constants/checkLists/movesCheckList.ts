@@ -3064,7 +3064,11 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/389/',
 		handled: true,
 	},
-	{ name: 'heart-swap', url: 'https://pokeapi.co/api/v2/move/391/' },
+	{
+		name: 'heart-swap',
+		url: 'https://pokeapi.co/api/v2/move/391/',
+		handled: true,
+	},
 	{ name: 'aqua-ring', url: 'https://pokeapi.co/api/v2/move/392/' },
 	{ name: 'magnet-rise', url: 'https://pokeapi.co/api/v2/move/393/' },
 	{ name: 'aqua-tail', url: 'https://pokeapi.co/api/v2/move/401/' },
@@ -3835,6 +3839,7 @@ export const handledMoves = [
 	'power-swap',
 	'worry-seed',
 	'sucker-punch',
+	'heart-swap',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

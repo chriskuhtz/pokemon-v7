@@ -665,6 +665,13 @@ export const handleUniqueMoves = ({
 		updatedAttacker.statBoosts['special-attack'] =
 			target.statBoosts['special-attack'];
 	}
+	if (move.name === 'heart-swap') {
+		addMessage({
+			message: `${updatedAttacker.name}'s swapped boosts with ${updatedTarget.name}`,
+		});
+		updatedTarget.statBoosts = attacker.statBoosts;
+		updatedAttacker.statBoosts = target.statBoosts;
+	}
 
 	return updatedPokemon.map((p) => {
 		if (p.id === updatedAttacker.id) {
