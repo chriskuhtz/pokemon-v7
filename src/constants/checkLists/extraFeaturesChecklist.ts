@@ -565,7 +565,7 @@ export const extraFeatureCheckList: {
 	{ name: 'nicer ladder up sprite', handled: true },
 	{ name: 'refactor dragonite to take tickets', handled: true },
 	{ name: 'e4 entrance (nurse, storage, etc', handled: true },
-	{ name: 'mapmaker snippets' },
+	{ name: 'mapmaker snippets', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'fix pathing' },
 	{ name: 'fix npc orientation' },
