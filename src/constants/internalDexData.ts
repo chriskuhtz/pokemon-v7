@@ -1789,7 +1789,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	dratini: {
 		dexId: 147,
 		types: ['dragon'],
-		encounterOptions: [],
+		encounterOptions: [
+			{
+				rarity: 'ultra-rare',
+				maxXp: 125,
+				minXp: 125,
+				timeOfDay: 'ALL_DAY',
+				area: 'WATER',
+				route: 'caveW1F1',
+			},
+		],
 		evs: {
 			attack: 1,
 		},

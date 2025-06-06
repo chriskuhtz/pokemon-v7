@@ -99,17 +99,16 @@ export const useOccupants = () => {
 		}
 
 		if (location.mapId === 'camp') {
-			const uniqueNames = new Set(
-				shuffle(
-					saveFile.pokemon
-						.filter((p) => !p.onTeam && internalDex[p.name].dexId < 815)
-						.map((p) => p.name)
-				)
+			const uniqueNames = shuffle(
+				saveFile.pokemon
+					.filter((p) => !p.onTeam && internalDex[p.name].dexId < 815)
+					.map((p) => p.name)
 			);
-			const first = [...uniqueNames].at(0);
-			const second = [...uniqueNames].at(1);
-			const third = [...uniqueNames].at(2);
-			const fourth = [...uniqueNames].at(3);
+
+			const first = uniqueNames.at(0);
+			const second = uniqueNames.at(1);
+			const third = uniqueNames.at(2);
+			const fourth = uniqueNames.at(3);
 
 			if (first) {
 				all.push({
