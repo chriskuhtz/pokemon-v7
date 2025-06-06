@@ -200,8 +200,8 @@ export const BattleField = ({
 		}
 		return [...onFieldTeam, ...onFieldOpponents].find(
 			(p) =>
-				!p.moveQueue.some((m) => m.round === battleRound) &&
-				p.status === 'ONFIELD'
+				p.status === 'ONFIELD' &&
+				!p.moveQueue.some((m) => m.round === battleRound)
 		);
 	}, [battleRound, battleStep, onFieldOpponents, onFieldTeam]);
 	const nextMover = useMemo(() => {
