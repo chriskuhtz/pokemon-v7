@@ -3091,15 +3091,9 @@ export const movesCheckList: {
 		handled: true,
 	},
 
-	{
-		name: 'trick-room',
-		url: 'https://pokeapi.co/api/v2/move/433/',
-	},
-	{ name: 'lunar-dance', url: 'https://pokeapi.co/api/v2/move/461/' },
-	{ name: 'wide-guard', url: 'https://pokeapi.co/api/v2/move/469/' },
-	{ name: 'guard-split', url: 'https://pokeapi.co/api/v2/move/470/' },
-	{ name: 'power-split', url: 'https://pokeapi.co/api/v2/move/471/' },
-	{ name: 'wonder-room', url: 'https://pokeapi.co/api/v2/move/472/' },
+	{ name: 'flip-turn', url: 'https://pokeapi.co/api/v2/move/812/' },
+	{ name: 'volt-switch', url: 'https://pokeapi.co/api/v2/move/521/' },
+	{ name: 'u-turn', url: 'https://pokeapi.co/api/v2/move/369/' },
 	{ name: 'rage-powder', url: 'https://pokeapi.co/api/v2/move/476/' },
 	{ name: 'telekinesis', url: 'https://pokeapi.co/api/v2/move/477/' },
 	{ name: 'magic-room', url: 'https://pokeapi.co/api/v2/move/478/' },
@@ -3109,7 +3103,6 @@ export const movesCheckList: {
 	{ name: 'water-pledge', url: 'https://pokeapi.co/api/v2/move/518/' },
 	{ name: 'fire-pledge', url: 'https://pokeapi.co/api/v2/move/519/' },
 	{ name: 'grass-pledge', url: 'https://pokeapi.co/api/v2/move/520/' },
-	{ name: 'volt-switch', url: 'https://pokeapi.co/api/v2/move/521/' },
 	{ name: 'chatter', url: 'https://pokeapi.co/api/v2/move/448/' },
 	{ name: 'embargo', url: 'https://pokeapi.co/api/v2/move/373/' },
 	{ name: 'fling', url: 'https://pokeapi.co/api/v2/move/374/' },
@@ -3160,7 +3153,7 @@ export const movesCheckList: {
 	{ name: 'healing-wish', url: 'https://pokeapi.co/api/v2/move/361/' },
 	{ name: 'natural-gift', url: 'https://pokeapi.co/api/v2/move/363/' },
 	{ name: 'feint', url: 'https://pokeapi.co/api/v2/move/364/' },
-	{ name: 'u-turn', url: 'https://pokeapi.co/api/v2/move/369/' },
+
 	{ name: 'after-you', url: 'https://pokeapi.co/api/v2/move/495/' },
 	{ name: 'round', url: 'https://pokeapi.co/api/v2/move/496/' },
 	{ name: 'echoed-voice', url: 'https://pokeapi.co/api/v2/move/497/' },
@@ -3227,7 +3220,6 @@ export const movesCheckList: {
 	{ name: 'life-dew', url: 'https://pokeapi.co/api/v2/move/791/' },
 	{ name: 'steel-beam', url: 'https://pokeapi.co/api/v2/move/796/' },
 	{ name: 'burning-jealousy', url: 'https://pokeapi.co/api/v2/move/807/' },
-	{ name: 'flip-turn', url: 'https://pokeapi.co/api/v2/move/812/' },
 	{ name: 'eerie-spell', url: 'https://pokeapi.co/api/v2/move/826/' },
 	/*
 	ROUND 3
@@ -3239,6 +3231,12 @@ export const movesCheckList: {
 	{ name: 'last-resort', url: 'https://pokeapi.co/api/v2/move/387/' },
 	{ name: 'magnet-rise', url: 'https://pokeapi.co/api/v2/move/393/' },
 	{ name: 'defog', url: 'https://pokeapi.co/api/v2/move/432/' },
+	{ name: 'trick-room', url: 'https://pokeapi.co/api/v2/move/433/' },
+	{ name: 'lunar-dance', url: 'https://pokeapi.co/api/v2/move/461/' },
+	{ name: 'wide-guard', url: 'https://pokeapi.co/api/v2/move/469/' },
+	{ name: 'guard-split', url: 'https://pokeapi.co/api/v2/move/470/' },
+	{ name: 'power-split', url: 'https://pokeapi.co/api/v2/move/471/' },
+	{ name: 'wonder-room', url: 'https://pokeapi.co/api/v2/move/472/' },
 ];
 
 export const handledMoves = [
