@@ -4,6 +4,7 @@ import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { bruno } from './bruno';
 import { karen } from './karen';
 import { koga } from './koga';
+import { lance } from './lance';
 import { will } from './will';
 
 export const pokemonLeagueOccupants: OverworldMap['occupants'] = [
@@ -124,25 +125,7 @@ export const pokemonLeagueOccupants: OverworldMap['occupants'] = [
 		dialogue: ['grrrr'],
 		conditionFunction: (s) => !occupantHandled(s, 'elite4-karen'),
 	},
-	{
-		type: 'TRAINER',
-		profilePicture:
-			'https://archives.bulbagarden.net/media/upload/c/ce/VSLance.png',
-		id: 'elite4-lance',
-		conditionFunction: (s) => !occupantHandled(s, 'elite4-lance'),
-		x: 5,
-		y: 3,
-		orientation: 'DOWN',
-		sprite: SpriteEnum.lance,
-		unhandledMessage: ['Nyaaaaahhh'],
-		team: (s) => [],
-		battleTeamConfig: {
-			assignGender: true,
-			assignHeldItem: false,
-			assignLearnsetMoves: false,
-			assignNaturalAbility: false,
-		},
-	},
+	lance,
 	{
 		type: 'POKEMON',
 		dexId: 149,
