@@ -636,6 +636,11 @@ export const handleUniqueMoves = ({
 
 		updatedTarget = { ...updatedTarget, ability: 'nothing' };
 	}
+	if (move.name === 'worry-seed') {
+		addMessage({ message: `${updatedTarget.name}'s ability became insomnia` });
+
+		updatedTarget = { ...updatedTarget, ability: 'insomnia' };
+	}
 	if (move.name === 'guard-swap') {
 		addMessage({
 			message: `${updatedAttacker.name}'s swapped defense boosts with ${updatedTarget.name}`,
@@ -660,6 +665,7 @@ export const handleUniqueMoves = ({
 		updatedAttacker.statBoosts['special-attack'] =
 			target.statBoosts['special-attack'];
 	}
+
 	return updatedPokemon.map((p) => {
 		if (p.id === updatedAttacker.id) {
 			return updatedAttacker;
