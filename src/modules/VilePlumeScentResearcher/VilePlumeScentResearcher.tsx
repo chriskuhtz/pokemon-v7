@@ -30,7 +30,7 @@ const vilePlumeProducts: Partial<
 const productDescriptions: Partial<Record<ItemType, string>> = {
   repel: "repels pokemon under level 20 when active, lasts forever",
   "super-repel": "repels pokemon under level 40 when active, lasts forever",
-  "max-repel": "repels all pokemon when active, lasts forever",
+  "max-repel": "repels pokemon under level 60 when active, lasts forever",
   lure: "causes random weak pokemon to attack you",
   "super-lure": "causes random medium strong pokemon to attack you",
   "max-lure": "causes random very strong pokemon to attack you",

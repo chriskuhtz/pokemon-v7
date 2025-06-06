@@ -5,8 +5,8 @@ import { camp } from "./camp";
 import { campCave } from "./campCave";
 import { campLaboratory } from "./campLaboratory";
 import { caveW1 } from "./caveW1";
-import { caveW12 } from "./caveW12";
-import { caveW13 } from "./caveW13";
+import { caveW1F1 } from "./caveW1F1";
+import { caveW1F2 } from "./caveW1F2";
 import { challengeField } from "./challengeField";
 import { onixCave } from "./onixCave";
 import { randomChallengeField } from "./randomChallengeField";
@@ -19,6 +19,7 @@ import { routeS1 } from "./routeS1";
 import { routeS1E1 } from "./routeS1E1";
 import { routeS1W1 } from "./routeS1W1";
 import { routeW1 } from "./routeW1";
+import { victoryRoad } from "./victoryRoad";
 
 export const mapIds = [
   "camp",
@@ -34,11 +35,26 @@ export const mapIds = [
   "routeW1",
   "routeN1W1",
   "caveW1",
-  "caveW12",
-  "caveW13",
+  "caveW1F1",
+  "caveW1F2",
   challengeFieldId,
   randomFieldId,
   "rocketCamp",
+  "camp",
+  "routeN1",
+  "routeN1E1",
+  "routeE1",
+  "onixCave",
+  "routeS1E1",
+  "routeS1",
+  "routeS1W1",
+  "routeW1",
+  "routeN1W1",
+  "caveW1",
+  challengeFieldId,
+  randomFieldId,
+  "rocketCamp",
+  "victoryRoad",
 ] as const;
 export type MapId = (typeof mapIds)[number];
 
@@ -56,11 +72,12 @@ export const mapsRecord: Record<MapId, OverworldMap> = {
   routeN1W1: routeN1W1,
   onixCave: onixCave,
   caveW1: caveW1,
-  caveW12: caveW12,
-  caveW13: caveW13,
+  caveW1F1: caveW1F1,
+  caveW1F2: caveW1F2,
   challengeField: challengeField,
   rocketCamp: rocketCamp,
   randomField: randomChallengeField,
+  victoryRoad: victoryRoad,
 };
 
 export const mapDisplayNames: Record<MapId, string> = {
@@ -71,9 +88,9 @@ export const mapDisplayNames: Record<MapId, string> = {
   routeS1: "aoi lake",
   routeS1W1: "kuro hills",
   routeW1: "shiro cliffs",
-  caveW1: "shiro cave E",
-  caveW12: "shiro cave O1",
-  caveW13: "shiro cave O2",
+  caveW1: "shiro cave G",
+  caveW1F1: "shiro cave F1",
+  caveW1F2: "shiro cave F2",
   routeN1W1: "koniro plateau",
   camp: "kuma camp",
   campCave: "kuma cave",
@@ -82,6 +99,7 @@ export const mapDisplayNames: Record<MapId, string> = {
   challengeField: "challenge field",
   randomField: "challenge field",
   rocketCamp: "Rocket Camp",
+  victoryRoad: "Victory Road",
 };
 
 export const Emptymap: OverworldMap = {

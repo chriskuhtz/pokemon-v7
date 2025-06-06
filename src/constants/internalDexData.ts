@@ -539,11 +539,27 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
       },
       {
         rarity: "common",
-        maxXp: 64000,
+        maxXp: 60000,
         minXp: 42875,
         timeOfDay: "ALL_DAY",
         area: "LAND",
         route: "caveW1",
+      },
+      {
+        rarity: "common",
+        maxXp: 64000,
+        minXp: 50000,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "caveW1F1",
+      },
+      {
+        rarity: "common",
+        maxXp: 64000,
+        minXp: 52000,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "caveW1F2",
       },
     ],
     evs: {
@@ -597,11 +613,19 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
     encounterOptions: [
       {
         rarity: "medium",
-        maxXp: 64000,
+        maxXp: 60000,
         minXp: 42875,
         timeOfDay: "ALL_DAY",
         area: "LAND",
         route: "caveW1",
+      },
+      {
+        rarity: "medium",
+        maxXp: 64000,
+        minXp: 50000,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "caveW1F1",
       },
     ],
     evs: {
@@ -956,10 +980,18 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
       {
         rarity: "common",
         maxXp: 64000,
-        minXp: 42875,
+        minXp: 50000,
         timeOfDay: "ALL_DAY",
         area: "LAND",
-        route: "caveW1",
+        route: "caveW1F1",
+      },
+      {
+        rarity: "common",
+        maxXp: 64000,
+        minXp: 55000,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "caveW1F2",
       },
     ],
     evs: {
@@ -1046,7 +1078,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   farfetchd: {
     dexId: 83,
     types: ["normal", "flying"],
-    berryLureMapId: "routeN1",
     encounterOptions: [],
     evs: {
       attack: 1,
@@ -1425,7 +1456,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
     encounterOptions: [
       {
         rarity: "ultra-rare",
-        maxXp: 64000,
+        maxXp: 60000,
         minXp: 42875,
         timeOfDay: "ALL_DAY",
         area: "LAND",
@@ -1652,7 +1683,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   lapras: {
     dexId: 131,
     types: ["water", "ice"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "medium",
+        maxXp: 343000,
+        minXp: 226981,
+        timeOfDay: "ALL_DAY",
+        area: "WATER",
+        route: "victoryRoad",
+      },
+    ],
     evs: {
       hp: 2,
     },
@@ -2258,7 +2298,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   quagsire: {
     dexId: 195,
     types: ["water", "ground"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "common",
+        maxXp: 80000,
+        minXp: 64000,
+        timeOfDay: "ALL_DAY",
+        area: "WATER",
+        route: "caveW1F1",
+      },
+    ],
     evs: {
       hp: 2,
     },
@@ -2425,7 +2474,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   qwilfish: {
     dexId: 211,
     types: ["water", "poison"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "common",
+        maxXp: 80000,
+        minXp: 64000,
+        timeOfDay: "ALL_DAY",
+        area: "WATER",
+        route: "caveW1F1",
+      },
+    ],
     evs: {
       attack: 1,
     },
@@ -2562,7 +2620,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   corsola: {
     dexId: 222,
     types: ["water", "rock"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "rare",
+        maxXp: 80000,
+        minXp: 64000,
+        timeOfDay: "ALL_DAY",
+        area: "WATER",
+        route: "caveW1F1",
+      },
+    ],
     evs: {
       defense: 1,
       "special-defense": 1,
@@ -3395,11 +3462,27 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
     encounterOptions: [
       {
         rarity: "rare",
-        maxXp: 64000,
+        maxXp: 60000,
         minXp: 42875,
         timeOfDay: "ALL_DAY",
         area: "LAND",
         route: "caveW1",
+      },
+      {
+        rarity: "rare",
+        maxXp: 64000,
+        minXp: 50000,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "caveW1F1",
+      },
+      {
+        rarity: "rare",
+        maxXp: 64000,
+        minXp: 52000,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "caveW1F2",
       },
     ],
     evs: {
@@ -3668,7 +3751,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   trapinch: {
     dexId: 328,
     types: ["ground"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "ultra-rare",
+        maxXp: 125,
+        minXp: 125,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "victoryRoad",
+      },
+    ],
     evs: {
       attack: 1,
     },
@@ -3685,7 +3777,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   flygon: {
     dexId: 330,
     types: ["ground", "dragon"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "common",
+        maxXp: 343000,
+        minXp: 226981,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "victoryRoad",
+      },
+    ],
     evs: {
       attack: 1,
       speed: 2,
@@ -3778,7 +3879,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   barboach: {
     dexId: 339,
     types: ["water", "ground"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "medium",
+        maxXp: 80000,
+        minXp: 64000,
+        timeOfDay: "ALL_DAY",
+        area: "WATER",
+        route: "caveW1F1",
+      },
+    ],
     evs: {
       hp: 1,
     },
@@ -3786,7 +3896,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   whiscash: {
     dexId: 340,
     types: ["water", "ground"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "rare",
+        maxXp: 80000,
+        minXp: 69000,
+        timeOfDay: "ALL_DAY",
+        area: "WATER",
+        route: "caveW1F1",
+      },
+    ],
     evs: {
       hp: 2,
     },
@@ -3941,7 +4060,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   dusclops: {
     dexId: 356,
     types: ["ghost"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "medium",
+        maxXp: 343000,
+        minXp: 226981,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "victoryRoad",
+      },
+    ],
     evs: {
       defense: 1,
       "special-defense": 1,
@@ -4066,7 +4194,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   relicanth: {
     dexId: 369,
     types: ["water", "rock"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "ultra-rare",
+        maxXp: 80000,
+        minXp: 64000,
+        timeOfDay: "ALL_DAY",
+        area: "WATER",
+        route: "caveW1F1",
+      },
+    ],
     evs: {
       hp: 1,
       defense: 1,
@@ -4687,7 +4824,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   bronzor: {
     dexId: 436,
     types: ["steel", "psychic"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "ultra-rare",
+        maxXp: 125,
+        minXp: 125,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "victoryRoad",
+      },
+    ],
     evs: {
       defense: 1,
     },
@@ -4695,7 +4841,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   bronzong: {
     dexId: 437,
     types: ["steel", "psychic"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "common",
+        maxXp: 343000,
+        minXp: 226981,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "victoryRoad",
+      },
+    ],
     evs: {
       defense: 1,
       "special-defense": 1,
@@ -5529,7 +5684,32 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   boldore: {
     dexId: 525,
     types: ["rock"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "rare",
+        maxXp: 60000,
+        minXp: 42875,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "caveW1",
+      },
+      {
+        rarity: "medium",
+        maxXp: 64000,
+        minXp: 50000,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "caveW1F1",
+      },
+      {
+        rarity: "medium",
+        maxXp: 64000,
+        minXp: 50000,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "caveW1F2",
+      },
+    ],
     evs: {
       attack: 1,
       defense: 1,
@@ -5542,10 +5722,10 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
       {
         rarity: "medium",
         maxXp: 64000,
-        minXp: 42875,
+        minXp: 52000,
         timeOfDay: "ALL_DAY",
         area: "LAND",
-        route: "caveW1",
+        route: "caveW1F2",
       },
     ],
     evs: {
@@ -5580,7 +5760,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   drilbur: {
     dexId: 529,
     types: ["ground"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "ultra-rare",
+        maxXp: 125,
+        minXp: 125,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "victoryRoad",
+      },
+    ],
     evs: {
       attack: 1,
     },
@@ -5588,7 +5777,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   excadrill: {
     dexId: 530,
     types: ["ground", "steel"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "medium",
+        maxXp: 343000,
+        minXp: 226981,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "victoryRoad",
+      },
+    ],
     evs: {
       attack: 2,
     },
@@ -5963,7 +6161,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   gothita: {
     dexId: 574,
     types: ["psychic"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "ultra-rare",
+        maxXp: 125,
+        minXp: 125,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "victoryRoad",
+      },
+    ],
     evs: {
       "special-defense": 1,
     },
@@ -5979,7 +6186,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   gothitelle: {
     dexId: 576,
     types: ["psychic"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "common",
+        maxXp: 343000,
+        minXp: 226981,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "victoryRoad",
+      },
+    ],
     evs: {
       "special-defense": 3,
     },
@@ -6407,7 +6623,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   druddigon: {
     dexId: 621,
     types: ["dragon"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "medium",
+        maxXp: 343000,
+        minXp: 226981,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "victoryRoad",
+      },
+    ],
     evs: {
       attack: 2,
     },
@@ -7644,7 +7869,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   shiinotic: {
     dexId: 756,
     types: ["grass", "fairy"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "medium",
+        maxXp: 343000,
+        minXp: 226981,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "victoryRoad",
+      },
+    ],
     evs: {
       "special-defense": 2,
     },
@@ -8214,6 +8448,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   rookidee: {
     dexId: 821,
     types: ["flying"],
+    berryLureMapId: "routeN1",
     encounterOptions: [],
     evs: {
       speed: 1,
@@ -9286,7 +9521,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   mabosstiff: {
     dexId: 943,
     types: ["dark"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "medium",
+        maxXp: 343000,
+        minXp: 226981,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "victoryRoad",
+      },
+    ],
     evs: {
       attack: 2,
     },
@@ -9535,10 +9779,10 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
       {
         rarity: "ultra-rare",
         maxXp: 64000,
-        minXp: 42875,
+        minXp: 50000,
         timeOfDay: "ALL_DAY",
         area: "LAND",
-        route: "caveW1",
+        route: "caveW1F1",
       },
     ],
     evs: {
@@ -11055,7 +11299,16 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
   "golem-alola": {
     dexId: 10111,
     types: ["rock", "electric"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "ultra-rare",
+        maxXp: 64000,
+        minXp: 52000,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "caveW1F2",
+      },
+    ],
     evs: {
       defense: 3,
     },

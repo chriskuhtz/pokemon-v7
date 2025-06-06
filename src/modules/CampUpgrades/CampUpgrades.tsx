@@ -161,9 +161,12 @@ const UpgradeCard = ({
 
 						<h4>{campUpgradeExplanations[upgrade]}</h4>
 						<br />
-						<div>
-							Required Quest: <strong>{requiredQuest}</strong>
-						</div>
+						{requiredQuest && (
+							<div>
+								Required Quest:
+								<strong>{replaceRouteName(requiredQuest)}</strong>
+							</div>
+						)}
 					</div>
 				}
 				actionElements={[]}

@@ -9,6 +9,7 @@ import { FaSearch } from "react-icons/fa";
 import { GoTasklist } from "react-icons/go";
 import { IoMdExit } from "react-icons/io";
 import { RiBookShelfLine } from "react-icons/ri";
+import { BadgesCard } from "../../components/BadgesCard/BadgesCard";
 import { BugReportButton } from "../../components/BugReport/BugReport";
 import { IdeaButton } from "../../components/IdeaReport/IdeaReport";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
@@ -54,6 +55,7 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
     <Page headline="Main Menu:" goBack={goBack}>
       <Stack mode="column">
         <TrainerCard />
+        <BadgesCard />
         {teleporter && (
           <Card
             onClick={() => teleportHome()}

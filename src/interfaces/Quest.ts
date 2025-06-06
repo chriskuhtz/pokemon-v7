@@ -2,6 +2,7 @@ import { CampUpgrade } from '../constants/campUpgrades';
 import { MapId } from '../constants/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { QuestName } from '../constants/questsRecord';
+import { BadgeName } from './Badge';
 import { Inventory } from './Inventory';
 import { OwnedPokemon } from './OwnedPokemon';
 import { CatchBoosts, SaveFile } from './SaveFile';
@@ -35,6 +36,7 @@ export interface Quest {
 	rangerLevels?: number;
 	catchBoosts?: Partial<CatchBoosts>;
 	campUpgrade?: CampUpgrade;
+	badge?: BadgeName;
 	//conditions
 	conditionFunction: (saveFile: SaveFile) => boolean;
 	targetPokemon?: PokemonName[];

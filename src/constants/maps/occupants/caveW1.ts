@@ -33,12 +33,12 @@ export const caveW1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ON_STEP_PORTAL",
-    id: "cave1 cave12",
+    id: "cave1 cave1F1",
     conditionFunction: () => true,
     x: 47,
     y: 21,
     portal: {
-      mapId: "caveW12",
+      mapId: "caveW1F1",
       x: 46,
       y: 21,
       orientation: "RIGHT",
@@ -87,8 +87,8 @@ export const caveW1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "POKEMON",
-    x: 46,
-    y: 21,
+    x: 41,
+    y: 12,
     orientation: "DOWN",
     dexId: 146,
     encounter: {

@@ -2882,39 +2882,144 @@ export const movesCheckList: {
 		handled: true,
 	},
 
-	{ name: 'expanding-force', url: 'https://pokeapi.co/api/v2/move/797/' },
-	{ name: 'steel-roller', url: 'https://pokeapi.co/api/v2/move/798/' },
-	{ name: 'scale-shot', url: 'https://pokeapi.co/api/v2/move/799/' },
-	{ name: 'meteor-beam', url: 'https://pokeapi.co/api/v2/move/800/' },
-	{ name: 'shell-side-arm', url: 'https://pokeapi.co/api/v2/move/801/' },
-	{ name: 'misty-explosion', url: 'https://pokeapi.co/api/v2/move/802/' },
-	{ name: 'grassy-glide', url: 'https://pokeapi.co/api/v2/move/803/' },
-	{ name: 'rising-voltage', url: 'https://pokeapi.co/api/v2/move/804/' },
-	{ name: 'terrain-pulse', url: 'https://pokeapi.co/api/v2/move/805/' },
-	{ name: 'skitter-smack', url: 'https://pokeapi.co/api/v2/move/806/' },
-	{ name: 'burning-jealousy', url: 'https://pokeapi.co/api/v2/move/807/' },
-	{ name: 'lash-out', url: 'https://pokeapi.co/api/v2/move/808/' },
-	{ name: 'poltergeist', url: 'https://pokeapi.co/api/v2/move/809/' },
-	{ name: 'corrosive-gas', url: 'https://pokeapi.co/api/v2/move/810/' },
-	{ name: 'coaching', url: 'https://pokeapi.co/api/v2/move/811/' },
-	{ name: 'flip-turn', url: 'https://pokeapi.co/api/v2/move/812/' },
-	{ name: 'triple-axel', url: 'https://pokeapi.co/api/v2/move/813/' },
-	{ name: 'dual-wingbeat', url: 'https://pokeapi.co/api/v2/move/814/' },
-	{ name: 'scorching-sands', url: 'https://pokeapi.co/api/v2/move/815/' },
-	{ name: 'jungle-healing', url: 'https://pokeapi.co/api/v2/move/816/' },
-	{ name: 'wicked-blow', url: 'https://pokeapi.co/api/v2/move/817/' },
-	{ name: 'surging-strikes', url: 'https://pokeapi.co/api/v2/move/818/' },
-	{ name: 'thunder-cage', url: 'https://pokeapi.co/api/v2/move/819/' },
-	{ name: 'dragon-energy', url: 'https://pokeapi.co/api/v2/move/820/' },
-	{ name: 'freezing-glare', url: 'https://pokeapi.co/api/v2/move/821/' },
-	{ name: 'fiery-wrath', url: 'https://pokeapi.co/api/v2/move/822/' },
-	{ name: 'thunderous-kick', url: 'https://pokeapi.co/api/v2/move/823/' },
-	{ name: 'glacial-lance', url: 'https://pokeapi.co/api/v2/move/824/' },
-	{ name: 'astral-barrage', url: 'https://pokeapi.co/api/v2/move/825/' },
-	{ name: 'eerie-spell', url: 'https://pokeapi.co/api/v2/move/826/' },
-	/*
-	NEXT ROUND
-	*/
+	{
+		name: 'expanding-force',
+		url: 'https://pokeapi.co/api/v2/move/797/',
+		handled: true,
+	},
+	{
+		name: 'steel-roller',
+		url: 'https://pokeapi.co/api/v2/move/798/',
+		handled: true,
+	},
+	{
+		name: 'scale-shot',
+		url: 'https://pokeapi.co/api/v2/move/799/',
+		handled: true,
+	},
+	{
+		name: 'meteor-beam',
+		url: 'https://pokeapi.co/api/v2/move/800/',
+		handled: true,
+	},
+	{
+		name: 'shell-side-arm',
+		url: 'https://pokeapi.co/api/v2/move/801/',
+		handled: true,
+	},
+	{
+		name: 'misty-explosion',
+		url: 'https://pokeapi.co/api/v2/move/802/',
+		handled: true,
+	},
+	{
+		name: 'grassy-glide',
+		url: 'https://pokeapi.co/api/v2/move/803/',
+		handled: true,
+	},
+	{
+		name: 'rising-voltage',
+		url: 'https://pokeapi.co/api/v2/move/804/',
+		handled: true,
+	},
+	{
+		name: 'terrain-pulse',
+		url: 'https://pokeapi.co/api/v2/move/805/',
+		handled: true,
+	},
+	{
+		name: 'skitter-smack',
+		url: 'https://pokeapi.co/api/v2/move/806/',
+		handled: true,
+	},
+
+	{
+		name: 'lash-out',
+		url: 'https://pokeapi.co/api/v2/move/808/',
+		handled: true,
+	},
+	{
+		name: 'poltergeist',
+		url: 'https://pokeapi.co/api/v2/move/809/',
+		handled: true,
+	},
+	{
+		name: 'corrosive-gas',
+		url: 'https://pokeapi.co/api/v2/move/810/',
+		handled: true,
+	},
+	{
+		name: 'coaching',
+		url: 'https://pokeapi.co/api/v2/move/811/',
+		handled: true,
+	},
+
+	{
+		name: 'triple-axel',
+		url: 'https://pokeapi.co/api/v2/move/813/',
+		handled: true,
+	},
+	{
+		name: 'dual-wingbeat',
+		url: 'https://pokeapi.co/api/v2/move/814/',
+		handled: true,
+	},
+	{
+		name: 'scorching-sands',
+		url: 'https://pokeapi.co/api/v2/move/815/',
+		handled: true,
+	},
+	{
+		name: 'jungle-healing',
+		url: 'https://pokeapi.co/api/v2/move/816/',
+		handled: true,
+	},
+	{
+		name: 'wicked-blow',
+		url: 'https://pokeapi.co/api/v2/move/817/',
+		handled: true,
+	},
+	{
+		name: 'surging-strikes',
+		url: 'https://pokeapi.co/api/v2/move/818/',
+		handled: true,
+	},
+	{
+		name: 'thunder-cage',
+		url: 'https://pokeapi.co/api/v2/move/819/',
+		handled: true,
+	},
+	{
+		name: 'dragon-energy',
+		url: 'https://pokeapi.co/api/v2/move/820/',
+		handled: true,
+	},
+	{
+		name: 'freezing-glare',
+		url: 'https://pokeapi.co/api/v2/move/821/',
+		handled: true,
+	},
+	{
+		name: 'fiery-wrath',
+		url: 'https://pokeapi.co/api/v2/move/822/',
+		handled: true,
+	},
+	{
+		name: 'thunderous-kick',
+		url: 'https://pokeapi.co/api/v2/move/823/',
+		handled: true,
+	},
+	{
+		name: 'glacial-lance',
+		url: 'https://pokeapi.co/api/v2/move/824/',
+		handled: true,
+	},
+	{
+		name: 'astral-barrage',
+		url: 'https://pokeapi.co/api/v2/move/825/',
+		handled: true,
+	},
+
 	{ name: 'flame-burst', url: 'https://pokeapi.co/api/v2/move/481/' },
 	{ name: 'smack-down', url: 'https://pokeapi.co/api/v2/move/479/' },
 	{ name: 'heal-block', url: 'https://pokeapi.co/api/v2/move/377/' },
@@ -3068,6 +3173,12 @@ export const movesCheckList: {
 	{ name: 'aura-wheel', url: 'https://pokeapi.co/api/v2/move/783/' },
 	{ name: 'life-dew', url: 'https://pokeapi.co/api/v2/move/791/' },
 	{ name: 'steel-beam', url: 'https://pokeapi.co/api/v2/move/796/' },
+	{ name: 'burning-jealousy', url: 'https://pokeapi.co/api/v2/move/807/' },
+	{ name: 'flip-turn', url: 'https://pokeapi.co/api/v2/move/812/' },
+	{ name: 'eerie-spell', url: 'https://pokeapi.co/api/v2/move/826/' },
+	/*
+	NEXT ROUND
+	*/
 ];
 
 export const handledMoves = [
@@ -3654,6 +3765,33 @@ export const handledMoves = [
 	'false-surrender',
 	'meteor-assault',
 	'eternabeam',
+	'steel-roller',
+	'scale-shot',
+	'expanding-force',
+	'meteor-beam',
+	'shell-side-arm',
+	'misty-explosion',
+	'rising-voltage',
+	'grassy-glide',
+	'terrain-pulse',
+	'skitter-smack',
+	'lash-out',
+	'poltergeist',
+	'corrosive-gas',
+	'coaching',
+	'triple-axel',
+	'scorching-sands',
+	'dual-wingbeat',
+	'jungle-healing',
+	'wicked-blow',
+	'surging-strikes',
+	'thunder-cage',
+	'dragon-energy',
+	'freezing-glare',
+	'fiery-wrath',
+	'thunderous-kick',
+	'glacial-lance',
+	'astral-barrage',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

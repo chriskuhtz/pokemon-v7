@@ -63,7 +63,14 @@ export const chooseOpponentAction = ({
 		return {
 			userId: controlled.id,
 			actionName: firstTurnMove.name,
-			targetId: controlled.id,
+			targetId: determineHighestDamage(
+				controlled,
+				[firstTurnMove],
+				filtered,
+				weather,
+				terrain,
+				effects
+			).targetId,
 		};
 	}
 	/**
@@ -78,6 +85,20 @@ export const chooseOpponentAction = ({
 		return {
 			userId: controlled.id,
 			actionName: 'ingrain',
+			targetId: controlled.id,
+		};
+	}
+	/**
+	 * CORROSIVE GAS IF YOU HAVE IT
+	 */
+	const canCorrosiveGas =
+		moves.find((m) => m.name === 'corrosive-gas') &&
+		targets.some((t) => t.ownerId !== controlled.ownerId && t.heldItemName);
+
+	if (canCorrosiveGas) {
+		return {
+			userId: controlled.id,
+			actionName: 'corrosive-gas',
 			targetId: controlled.id,
 		};
 	}

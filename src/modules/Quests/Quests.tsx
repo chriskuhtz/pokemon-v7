@@ -8,6 +8,7 @@ import { QuestName, QuestsRecord } from '../../constants/questsRecord';
 import { typeColors } from '../../constants/typeColors';
 import { getRewardItemsForQuest } from '../../functions/getRewardForQuest';
 import { replaceRouteName } from '../../functions/replaceRouteName';
+import { useFulfillQuest } from '../../hooks/useFulfillQuest';
 import { useQuests } from '../../hooks/useQuests';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { ItemType } from '../../interfaces/Item';
@@ -21,8 +22,8 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 	const [filter, setFilter] = useState<QuestCategory | 'FULFILLED'>(
 		'FULFILLED'
 	);
-	const { saveFile, fulfillQuestReducer: fulfillQuest } =
-		useContext(SaveFileContext);
+	const { saveFile } = useContext(SaveFileContext);
+	const fulfillQuest = useFulfillQuest();
 
 	const { all } = useQuests();
 
