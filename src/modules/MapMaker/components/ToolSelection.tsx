@@ -19,7 +19,7 @@ export const ToolSelection = ({
 	setSelected: (x: Tool) => void;
 	tileSetUrl: string;
 }): JSX.Element => {
-	const { snippets, addSnippet, removeSnippet } = useSnippets();
+	const { snippets, addSnippet, removeSnippet } = useSnippets(tileSetUrl);
 
 	return (
 		<div
@@ -69,7 +69,7 @@ export const ToolSelection = ({
 								})
 							}
 						>
-							Add Row
+							+ Row
 						</button>
 						<button
 							disabled={selected.tiles.length === 1}
@@ -80,7 +80,7 @@ export const ToolSelection = ({
 								})
 							}
 						>
-							Remove Row
+							- Row
 						</button>
 						<button
 							onClick={() =>
@@ -93,7 +93,7 @@ export const ToolSelection = ({
 								})
 							}
 						>
-							Add Col
+							+ Col
 						</button>
 						<button
 							disabled={selected.tiles[0].length === 1}
@@ -104,7 +104,7 @@ export const ToolSelection = ({
 								})
 							}
 						>
-							Remove Col
+							- Col
 						</button>
 						<div
 							style={{
