@@ -435,7 +435,7 @@ export const handleUniqueMoves = ({
 			duration: 9000,
 		});
 	}
-	if (move.name === 'trick') {
+	if (move.name === 'trick' || move.name === 'switcheroo') {
 		addMessage({
 			message: `${updatedAttacker.name} tricked ${updatedTarget.name} into swapping held items`,
 		});

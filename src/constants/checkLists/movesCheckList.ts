@@ -3074,9 +3074,17 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/392/',
 		handled: true,
 	},
-	{ name: 'magnet-rise', url: 'https://pokeapi.co/api/v2/move/393/' },
-	{ name: 'aqua-tail', url: 'https://pokeapi.co/api/v2/move/401/' },
-	{ name: 'switcheroo', url: 'https://pokeapi.co/api/v2/move/415/' },
+
+	{
+		name: 'aqua-tail',
+		url: 'https://pokeapi.co/api/v2/move/401/',
+		handled: true,
+	},
+	{
+		name: 'switcheroo',
+		url: 'https://pokeapi.co/api/v2/move/415/',
+		handled: true,
+	},
 	{ name: 'defog', url: 'https://pokeapi.co/api/v2/move/432/' },
 	{ name: 'trick-room', url: 'https://pokeapi.co/api/v2/move/433/' },
 	{ name: 'stealth-rock', url: 'https://pokeapi.co/api/v2/move/446/' },
@@ -3222,6 +3230,7 @@ export const movesCheckList: {
 	{ name: 'me-first', url: 'https://pokeapi.co/api/v2/move/382/' },
 	{ name: 'copycat', url: 'https://pokeapi.co/api/v2/move/383/' },
 	{ name: 'last-resort', url: 'https://pokeapi.co/api/v2/move/387/' },
+	{ name: 'magnet-rise', url: 'https://pokeapi.co/api/v2/move/393/' },
 ];
 
 export const handledMoves = [
@@ -3845,6 +3854,8 @@ export const handledMoves = [
 	'sucker-punch',
 	'heart-swap',
 	'aqua-ring',
+	'aqua-tail',
+	'switcheroo',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];
