@@ -570,17 +570,17 @@ export const extraFeatureCheckList: {
 	{ name: 'e4 koga', handled: true },
 	{ name: 'e4 bruno', handled: true },
 	{ name: 'e4 ticket at end of victory road', handled: true },
+	{ name: 'e4 karen', handled: true },
+	{ name: 'overworld mon next to e4 trainers', handled: true },
+	{ name: 'prettier entry to victory road', handled: true },
+	{ name: 'e4 lance' },
+	{ name: 'evs for e4 trainers' },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'fix pathing' },
 	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },
 	{ name: 'leech seed benefit doesnt pass to switched in mon' },
 	//CONTENT:
-	{ name: 'prettier entry to victory road' },
-
-	{ name: 'e4 karen' },
-	{ name: 'e4 lance' },
-	{ name: 'overworld mon next to e4 trainers' },
 	{ name: 'pryce' },
 	{ name: 'claire' },
 	{ name: 'eggs?' },

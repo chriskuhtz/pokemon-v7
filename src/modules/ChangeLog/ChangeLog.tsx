@@ -81,8 +81,10 @@ export const ChangeLog = ({
 const ChangeLogV45 = (): JSX.Element => {
 	return (
 		<>
-			<h3>0.45:</h3>
+			<h3>.45:</h3>
 			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>Pokemon League Challenge</li>
+				<li>Redesigned Camp</li>
 				<li>Balancing</li>
 				<li>New Attacks</li>
 			</ol>
