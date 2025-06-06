@@ -7,7 +7,7 @@ import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 
 const kogaTeam = (s: SaveFile): OwnedPokemon[] => {
-	const xp = Math.min(70 * 70 * 70, getHighestXpOnTeam(s.pokemon) * 0.8);
+	const xp = Math.min(70 * 70 * 70, getHighestXpOnTeam(s.pokemon) * 0.85);
 
 	const skuntank = makeChallengerPokemon({
 		xp,

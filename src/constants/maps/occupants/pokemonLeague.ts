@@ -1,6 +1,7 @@
 import { occupantHandled } from '../../../functions/occupantHandled';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
+import { bruno } from './bruno';
 import { koga } from './koga';
 import { will } from './will';
 
@@ -80,23 +81,7 @@ export const pokemonLeagueOccupants: OverworldMap['occupants'] = [
 	},
 	will,
 	koga,
-	{
-		type: 'TRAINER',
-		id: 'elite4-bruno',
-		conditionFunction: (s) => !occupantHandled(s, 'elite4-bruno'),
-		x: 5,
-		y: 22,
-		orientation: 'DOWN',
-		sprite: SpriteEnum.bruno,
-		unhandledMessage: ['Nyaaaaahhh'],
-		team: (s) => [],
-		battleTeamConfig: {
-			assignGender: true,
-			assignHeldItem: false,
-			assignLearnsetMoves: false,
-			assignNaturalAbility: false,
-		},
-	},
+	bruno,
 	{
 		type: 'TRAINER',
 		id: 'elite4-karen',
