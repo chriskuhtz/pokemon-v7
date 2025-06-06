@@ -75,16 +75,13 @@ export const DragoniteTaxi = (): JSX.Element => {
 	const { setLocation } = useContext(LocationContext);
 
 	const fly = useCallback(
-		({ to, ticket }: { to: CharacterLocationData; ticket: ItemType }) => {
-			if (saveFile.bag[ticket] < 1) {
-				return;
-			}
+		({ to }: { to: CharacterLocationData; ticket: ItemType }) => {
 			setLocation(to);
 			patchSaveFileReducer({
 				meta: { ...saveFile.meta, activeTab: 'OVERWORLD' },
 			});
 		},
-		[patchSaveFileReducer, saveFile.bag, saveFile.meta, setLocation]
+		[patchSaveFileReducer, saveFile.meta, setLocation]
 	);
 
 	const navigate = useNavigate();
@@ -98,16 +95,18 @@ export const DragoniteTaxi = (): JSX.Element => {
 				<h3>
 					{isBagOverloaded(saveFile)
 						? 'That is a bit too much equipment, even for dragonite. Drop something off and come back'
-						: 'For a Charti Berry, Dragonite will take you anywhere you want'}
+						: 'If you have a ticket, Dragonite will take you anywhere you want'}
 				</h3>
 				{Object.entries(taxiLocations).map(([n, location]) => (
 					<Card
 						key={n}
 						disabled={
-							saveFile.bag['charti-berry'] < 1 || isBagOverloaded(saveFile)
+							(saveFile.bag[location.ticket] < 1 &&
+								saveFile.storage[location.ticket] < 1) ||
+							isBagOverloaded(saveFile)
 						}
 						onClick={() => fly(location)}
-						actionElements={[<ItemSprite item={'charti-berry'} />]}
+						actionElements={[<ItemSprite item={'forest-ticket'} />]}
 						icon={
 							<PokemonSprite
 								name={'dragonite'}

@@ -136,4 +136,27 @@ export const pokemonLeagueOccupants: OverworldMap['occupants'] = [
 		dialogue: ['dragoooo'],
 		conditionFunction: (s) => !occupantHandled(s, 'elite4-champ-lance'),
 	},
+	{
+		type: 'TELEPORTER_NPC',
+		sprite: SpriteEnum.oak,
+		dialogue: [
+			'Congratulations, Champ',
+			'You have progressed so much',
+			'since we started exploring the kuma region',
+			'But there is still more to do',
+			'lets head back to the lab',
+		],
+		to: {
+			mapId: 'campLaboratory',
+			x: 10,
+			y: 4,
+			orientation: 'UP',
+			forwardFoot: 'CENTER1',
+		},
+		x: 7,
+		y: 4,
+		id: 'congrats-oak',
+		orientation: 'LEFT',
+		conditionFunction: (s) => occupantHandled(s, 'elite4-champ-lance'),
+	},
 ];
