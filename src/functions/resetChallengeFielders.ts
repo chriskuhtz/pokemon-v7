@@ -16,3 +16,19 @@ export const resetChallengeFielders = (
 		return true;
 	});
 };
+
+export const resetEliteFour = (
+	occs: SaveFile['handledOccupants']
+): SaveFile['handledOccupants'] => {
+	return occs.filter((h) => {
+		if (h.id.includes(challengeFieldId)) {
+			return false;
+		}
+
+		if (h.id.includes(randomFieldId)) {
+			return false;
+		}
+
+		return true;
+	});
+};
