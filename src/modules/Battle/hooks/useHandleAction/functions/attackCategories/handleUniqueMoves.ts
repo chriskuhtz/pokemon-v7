@@ -636,6 +636,30 @@ export const handleUniqueMoves = ({
 
 		updatedTarget = { ...updatedTarget, ability: 'nothing' };
 	}
+	if (move.name === 'guard-swap') {
+		addMessage({
+			message: `${updatedAttacker.name}'s swapped defense boosts with ${updatedTarget.name}`,
+		});
+		updatedTarget.statBoosts.defense = attacker.statBoosts.defense;
+		updatedTarget.statBoosts['special-defense'] =
+			attacker.statBoosts['special-defense'];
+
+		updatedAttacker.statBoosts.defense = target.statBoosts.defense;
+		updatedAttacker.statBoosts['special-defense'] =
+			target.statBoosts['special-defense'];
+	}
+	if (move.name === 'power-swap') {
+		addMessage({
+			message: `${updatedAttacker.name}'s swapped attack boosts with ${updatedTarget.name}`,
+		});
+		updatedTarget.statBoosts.attack = attacker.statBoosts.attack;
+		updatedTarget.statBoosts['special-attack'] =
+			attacker.statBoosts['special-attack'];
+
+		updatedAttacker.statBoosts.attack = target.statBoosts.attack;
+		updatedAttacker.statBoosts['special-attack'] =
+			target.statBoosts['special-attack'];
+	}
 	return updatedPokemon.map((p) => {
 		if (p.id === updatedAttacker.id) {
 			return updatedAttacker;
