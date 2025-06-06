@@ -112,7 +112,12 @@ export const apricorns = [
 	'grey-apricorn',
 ] as const;
 
-export const herbs = ['white-herb', 'mental-herb', 'power-herb'] as const;
+export const herbs = [
+	'white-herb',
+	'mental-herb',
+	'power-herb',
+	'revival-herb',
+] as const;
 export const evoStones = [
 	'sun-stone',
 	'thunder-stone',

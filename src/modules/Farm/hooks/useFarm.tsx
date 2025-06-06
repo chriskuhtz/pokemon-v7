@@ -9,6 +9,7 @@ import {
 	ApricornType,
 	berries,
 	BerryType,
+	HerbType,
 	isApricorn,
 	isBerry,
 	isHerb,
@@ -99,7 +100,7 @@ export const useFarm = () => {
 		}
 		return now + ONE_HOUR;
 	};
-	const plant = (t: BerryType | ApricornType, mulch?: MulchType) => {
+	const plant = (t: BerryType | ApricornType | HerbType, mulch?: MulchType) => {
 		let type = t;
 		if (!hasEmptySlots) {
 			return;

@@ -6,7 +6,7 @@ import { QuestName } from '../constants/questsRecord';
 import { BadgeName } from './Badge';
 import { Challenger } from './Challenger';
 import { Inventory } from './Inventory';
-import { ApricornType, BerryType, ItemType, MulchType } from './Item';
+import { ApricornType, BerryType, HerbType, ItemType, MulchType } from './Item';
 import { OverworldTrainer } from './OverworldMap';
 import { OwnedPokemon } from './OwnedPokemon';
 import { PokemonType } from './PokemonType';
@@ -62,7 +62,7 @@ export interface BerryBush {
 	readyAt: number;
 	successful: boolean;
 	yield: number;
-	type: BerryType | ApricornType;
+	type: BerryType | ApricornType | HerbType;
 	mulch?: MulchType;
 	id: string;
 }

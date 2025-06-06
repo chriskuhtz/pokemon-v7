@@ -2,6 +2,7 @@ import { occupantHandled } from '../../../functions/occupantHandled';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { bruno } from './bruno';
+import { karen } from './karen';
 import { koga } from './koga';
 import { will } from './will';
 
@@ -80,27 +81,53 @@ export const pokemonLeagueOccupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) => !occupantHandled(s, 'elite-four-will'),
 	},
 	will,
+	{
+		type: 'POKEMON',
+		dexId: 178,
+		x: 6,
+		y: 42,
+		orientation: 'DOWN',
+		id: 'wills-xatu',
+		dialogue: ['xat', 'xatu'],
+		conditionFunction: (s) => !occupantHandled(s, 'elite4-will'),
+	},
 	koga,
+	{
+		type: 'POKEMON',
+		dexId: 169,
+		x: 4,
+		y: 32,
+		orientation: 'DOWN',
+		id: 'kogas-crobat',
+		dialogue: ['hssss'],
+		conditionFunction: (s) => !occupantHandled(s, 'elite4-koga'),
+	},
 	bruno,
 	{
-		type: 'TRAINER',
-		id: 'elite4-karen',
-		conditionFunction: (s) => !occupantHandled(s, 'elite4-karen'),
-		x: 5,
+		type: 'POKEMON',
+		dexId: 68,
+		x: 6,
+		y: 22,
+		orientation: 'DOWN',
+		id: 'brunos-machamp',
+		dialogue: ['champ champ'],
+		conditionFunction: (s) => !occupantHandled(s, 'elite4-bruno'),
+	},
+	karen,
+	{
+		type: 'POKEMON',
+		dexId: 359,
+		x: 4,
 		y: 12,
 		orientation: 'DOWN',
-		sprite: SpriteEnum.karen,
-		unhandledMessage: ['Nyaaaaahhh'],
-		team: (s) => [],
-		battleTeamConfig: {
-			assignGender: true,
-			assignHeldItem: false,
-			assignLearnsetMoves: false,
-			assignNaturalAbility: false,
-		},
+		id: 'karens-absol',
+		dialogue: ['grrrr'],
+		conditionFunction: (s) => !occupantHandled(s, 'elite4-karen'),
 	},
 	{
 		type: 'TRAINER',
+		profilePicture:
+			'https://archives.bulbagarden.net/media/upload/c/ce/VSLance.png',
 		id: 'elite4-lance',
 		conditionFunction: (s) => !occupantHandled(s, 'elite4-lance'),
 		x: 5,
@@ -115,5 +142,15 @@ export const pokemonLeagueOccupants: OverworldMap['occupants'] = [
 			assignLearnsetMoves: false,
 			assignNaturalAbility: false,
 		},
+	},
+	{
+		type: 'POKEMON',
+		dexId: 149,
+		x: 6,
+		y: 3,
+		orientation: 'DOWN',
+		id: 'lances-dragonite',
+		dialogue: ['dragoooo'],
+		conditionFunction: (s) => !occupantHandled(s, 'elite4-champ-lance'),
 	},
 ];

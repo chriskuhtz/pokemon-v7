@@ -72,7 +72,7 @@ export const bruno: OverworldTrainer = {
 	id: 'elite4-bruno',
 	conditionFunction: (s) => !occupantHandled(s, 'elite4-bruno'),
 	x: 5,
-	y: 32,
+	y: 22,
 	orientation: 'DOWN',
 	sprite: SpriteEnum.bruno,
 	unhandledMessage: ['Looks like koga did his part', 'We will squash you now'],

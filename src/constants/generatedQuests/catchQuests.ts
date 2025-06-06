@@ -35,6 +35,8 @@ const ballForRoute: Record<MapId, PokeballType> = {
 	routeN1W1: 'quick-ball',
 	//completing the type
 	camp: 'poke-ball',
+	campCave: 'poke-ball',
+	campLaboratory: 'poke-ball',
 	challengeField: 'poke-ball',
 	randomField: 'poke-ball',
 	caveW1: 'poke-ball',
@@ -57,6 +59,8 @@ const snackForRoute: Record<MapId, ItemType> = {
 	routeN1W1: 'lava-cookie',
 	//completing the type
 	camp: 'poke-ball',
+	campCave: 'poke-ball',
+	campLaboratory: 'poke-ball',
 	challengeField: 'poke-ball',
 	randomField: 'poke-ball',
 	caveW1: 'poke-ball',
@@ -81,6 +85,8 @@ const ticketForRoute: Record<MapId, ItemType> = {
 	//completing the type
 
 	camp: 'poke-ball',
+	campCave: 'poke-ball',
+	campLaboratory: 'poke-ball',
 	challengeField: 'poke-ball',
 	randomField: 'poke-ball',
 	caveW1: 'poke-ball',
