@@ -95,7 +95,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 			forwardFoot: 'CENTER1',
 		},
 		id: 'camp_to_campCave',
-		conditionFunction: (s) => !isBagOverloaded(s),
+		conditionFunction: () => true,
 	},
 	{
 		type: 'ON_STEP_PORTAL',
@@ -109,7 +109,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 			forwardFoot: 'CENTER1',
 		},
 		id: 'camp_to_campLaboratory',
-		conditionFunction: (s) => !isBagOverloaded(s),
+		conditionFunction: () => true,
 	},
 	{
 		type: 'ON_STEP_PORTAL',
