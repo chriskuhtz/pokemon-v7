@@ -1,5 +1,6 @@
 import { isBagOverloaded } from '../../../functions/getBagLimit';
 import { getHistorianMessage } from '../../../functions/getHistorianMessage';
+import { getRandomOrientation } from '../../../functions/getNextClockwiseDirection';
 import { makeApricornTree } from '../../../functions/makeApricornTree';
 import { zigzagoonForagers } from '../../../hooks/useZigzagoonForagers';
 import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
@@ -9,6 +10,7 @@ import { dragoniteTaxi } from '../../../modules/DragoniteTaxi/DragoniteTaxi';
 import { miltankFarm } from '../../../modules/MiltankFarm/MiltankFarm';
 import { seedvaultResearcher } from '../../../modules/SeedVault/SeedVault';
 import { vileplumeResearchers } from '../../../modules/VilePlumeScentResearcher/VilePlumeScentResearcher';
+import { internalDex } from '../../internalDexData';
 import { bugsy } from './bugsy';
 import { rewardChris } from './champChris';
 import { chuckLine } from './chuckLine';
@@ -301,6 +303,26 @@ export const campOccupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) => s.campUpgrades['build combee hive'],
 	},
 	{
+		type: 'POKEMON',
+		x: 9,
+		y: 3,
+		id: 'combee-1',
+		orientation: getRandomOrientation(),
+		conditionFunction: (s) => s.campUpgrades['build combee hive'],
+		dexId: internalDex.combee.dexId,
+		dialogue: ['bzzz'],
+	},
+	{
+		type: 'POKEMON',
+		x: 7,
+		y: 2,
+		id: 'combee-2',
+		orientation: getRandomOrientation(),
+		conditionFunction: (s) => s.campUpgrades['build combee hive'],
+		dexId: internalDex.combee.dexId,
+		dialogue: ['bzzzzz'],
+	},
+	{
 		type: 'ROUTER_NPC',
 		to: 'APRICORN_SMITHY',
 		sprite: SpriteEnum.kurt,
@@ -329,36 +351,6 @@ export const campOccupants: OverworldMap['occupants'] = [
 		sprite: SpriteEnum.grandma,
 		conditionFunction: (s) => s.campUpgrades['invite chef grandma'],
 		id: 'chef grandma',
-	},
-	{
-		type: 'POKEMON',
-		dexId: 92,
-		x: 15,
-		y: 9,
-		orientation: 'DOWN',
-		id: 'ghastly',
-		dialogue: ['You can feel something watching you!', 'Buuuahahaha'],
-		conditionFunction: () => true,
-	},
-	{
-		type: 'POKEMON',
-		dexId: 93,
-		x: 17,
-		y: 10,
-		orientation: 'RIGHT',
-		id: 'haunter',
-		dialogue: ['You can feel something watching you!', 'Sluuuuurp'],
-		conditionFunction: () => true,
-	},
-	{
-		type: 'POKEMON',
-		dexId: 94,
-		x: 2,
-		y: 22,
-		orientation: 'RIGHT',
-		id: 'gengar',
-		dialogue: ['You can feel something watching you!', 'Muuuahahaha'],
-		conditionFunction: () => true,
 	},
 	...makeApricornTree({
 		x: 38,

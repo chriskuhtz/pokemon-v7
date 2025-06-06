@@ -576,12 +576,14 @@ export const extraFeatureCheckList: {
 	{ name: 'e4 lance', handled: true },
 	{ name: 'evs for e4 trainers', handled: true },
 	{ name: 'ivs for e4 trainers', handled: true },
+	{ name: 'overworld pokemon in storage pasture', handled: true },
 
 	//BUGS/IMPROVEMENTS:
 	{ name: 'fix pathing' },
 	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },
 	{ name: 'leech seed benefit doesnt pass to switched in mon' },
+	{ name: 'overworld pokemon for gym leaders' },
 	//CONTENT:
 	{ name: 'pryce' },
 	{ name: 'claire' },

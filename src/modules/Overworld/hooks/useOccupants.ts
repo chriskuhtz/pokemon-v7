@@ -97,6 +97,69 @@ export const useOccupants = () => {
 				conditionFunction: () => true,
 			});
 		}
+
+		if (location.mapId === 'camp') {
+			const uniqueNames = new Set(
+				shuffle(
+					saveFile.pokemon
+						.filter((p) => !p.onTeam && internalDex[p.name].dexId < 815)
+						.map((p) => p.name)
+				)
+			);
+			const first = [...uniqueNames].at(0);
+			const second = [...uniqueNames].at(1);
+			const third = [...uniqueNames].at(2);
+			const fourth = [...uniqueNames].at(3);
+
+			if (first) {
+				all.push({
+					type: 'POKEMON',
+					dexId: internalDex[first].dexId,
+					x: 15,
+					y: 9,
+					orientation: getRandomOrientation(),
+					id: 'overworldmon 1',
+					dialogue: ['Your Pokemon is enjoying the meadow'],
+					conditionFunction: () => true,
+				});
+			}
+			if (second) {
+				all.push({
+					type: 'POKEMON',
+					dexId: internalDex[second].dexId,
+					x: 17,
+					y: 10,
+					orientation: getRandomOrientation(),
+					id: 'overworldmon 2',
+					dialogue: ['Your Pokemon is enjoying the meadow'],
+					conditionFunction: () => true,
+				});
+			}
+			if (third) {
+				all.push({
+					type: 'POKEMON',
+					dexId: internalDex[third].dexId,
+					x: 17,
+					y: 8,
+					orientation: getRandomOrientation(),
+					id: 'overworldmon 3',
+					dialogue: ['Your Pokemon is enjoying the meadow'],
+					conditionFunction: () => true,
+				});
+			}
+			if (fourth) {
+				all.push({
+					type: 'POKEMON',
+					dexId: internalDex[fourth].dexId,
+					x: 13,
+					y: 11,
+					orientation: getRandomOrientation(),
+					id: 'overworldmon 4',
+					dialogue: ['Your Pokemon is enjoying the meadow'],
+					conditionFunction: () => true,
+				});
+			}
+		}
 		if (statefulOccupants.length !== all.length) {
 			setStatefulOccupants(all);
 		}
@@ -130,3 +193,15 @@ export const useOccupants = () => {
 
 	return { rotateOccupant, occupants: conditionalOccupants };
 };
+
+/**
+ * Shuffles array in place. ES6 version
+ * @param {Array} a items An array containing the items.
+ */
+function shuffle<T>(a: T[]): T[] {
+	for (let i = a.length - 1; i > 0; i--) {
+		const j = Math.floor(Math.random() * (i + 1));
+		[a[i], a[j]] = [a[j], a[i]];
+	}
+	return a;
+}

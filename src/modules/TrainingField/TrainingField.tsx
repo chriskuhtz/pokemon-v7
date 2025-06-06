@@ -159,36 +159,37 @@ export const TrainingField = () => {
 					</button>,
 				]}
 			/>,
-			...(saveFile.campUpgrades['invite effort value expert']
-				? [
-						'hp',
-						'attack',
-						'defense',
-						'special-attack',
-						'special-defense',
-						'speed',
-				  ]
-				: [].map((v) => (
-						<Card
-							key={`ev_training_${v}`}
-							icon={<TbSoccerField />}
-							content={
-								<div>
-									<h3>EV Training ({v})</h3>
-									<p>
-										random Pokemon that increase {v} EV (hold a{' '}
-										{evTrainingTool[v as Stat]} or macho-brace for increased ev
-										gain)
-									</p>
-								</div>
-							}
-							actionElements={[
-								<button onClick={() => evChallenge(v as Stat)}>
-									challenge
-								</button>,
-							]}
-						/>
-				  ))),
+			[
+				'hp',
+				'attack',
+				'defense',
+				'special-attack',
+				'special-defense',
+				'speed',
+			].map((v) => {
+				if (!saveFile.campUpgrades['invite effort value expert']) {
+					return <></>;
+				}
+				return (
+					<Card
+						key={`ev_training_${v}`}
+						icon={<TbSoccerField />}
+						content={
+							<div>
+								<h3>EV Training ({v})</h3>
+								<p>
+									random Pokemon that increase {v} EV (hold a{' '}
+									{evTrainingTool[v as Stat]} or macho-brace for increased ev
+									gain)
+								</p>
+							</div>
+						}
+						actionElements={[
+							<button onClick={() => evChallenge(v as Stat)}>challenge</button>,
+						]}
+					/>
+				);
+			}),
 		];
 	}, [
 		challenge,
