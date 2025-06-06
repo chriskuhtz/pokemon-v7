@@ -9,8 +9,8 @@ const lookerNpcBase: Omit<
   OverworldNpc,
   "unhandledMessage" | "conditionFunction" | "id"
 > = {
-  x: 12,
-  y: 8,
+  x: 15,
+  y: 16,
   orientation: "DOWN",
   type: "NPC",
   sprite: SpriteEnum.looker,
@@ -19,9 +19,9 @@ const lookerTeleporterBase: Omit<
   TeleporterNpc,
   "dialogue" | "conditionFunction" | "id" | "to"
 > = {
-  x: 27,
-  y: 8,
-  orientation: "LEFT",
+  x: 15,
+  y: 16,
+  orientation: "DOWN",
   type: "TELEPORTER_NPC",
   sprite: SpriteEnum.looker,
 };

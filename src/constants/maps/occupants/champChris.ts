@@ -134,9 +134,9 @@ export const champChris: OverworldTrainer = {
 
 export const rewardChris: OverworldNpc = {
   type: "NPC",
-  x: 27,
-  y: 7,
-  orientation: "LEFT",
+  x: 31,
+  y: 14,
+  orientation: "DOWN",
   sprite: SpriteEnum.red,
   id: "reward-chris",
   unhandledMessage: [

@@ -5,9 +5,9 @@ const whitneyBase: Omit<
   OverworldNpc,
   "unhandledMessage" | "conditionFunction" | "id"
 > = {
-  x: 22,
-  y: 12,
-  orientation: "RIGHT",
+  x: 29,
+  y: 5,
+  orientation: "DOWN",
   type: "NPC",
   sprite: SpriteEnum.whitney,
 };

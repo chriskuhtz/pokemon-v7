@@ -19,6 +19,24 @@ export const campCaveOccupants: OverworldMap["occupants"] = [
     conditionFunction: (s) => !isBagOverloaded(s),
   },
   {
+    type: "ROCK",
+    x: 10,
+    y: 5,
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((occ) => occ.id === "rock_campCave_1"),
+    id: "rock_campCave_1",
+  },
+  {
+    type: "ITEM",
+    x: 10,
+    y: 3,
+    item: "rocky-helmet",
+    amount: 1,
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((h) => h.id === "campCave-rocky-helmet"),
+    id: "campCave-rocky-helmet",
+  },
+  {
     type: "ROUTER_NPC",
     to: "FOSSIL_REVIVER",
     orientation: "DOWN",

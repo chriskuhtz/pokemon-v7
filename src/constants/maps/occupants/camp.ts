@@ -12,14 +12,11 @@ import { vileplumeResearchers } from "../../../modules/VilePlumeScentResearcher/
 import { bugsy } from "./bugsy";
 import { rewardChris } from "./champChris";
 import { chuckLine } from "./chuckLine";
-import { elmLine } from "./elmLine";
 import { evExpertLine } from "./evExpert";
 import { falknerLine } from "./falknerLine";
 import { lookerLine } from "./lookerLine";
 import { mortyLine } from "./mortyLine";
-import { oakLine } from "./oakLine";
 import { pikachuFanLine } from "./pikachuFanLine";
-import { rowanLine } from "./rowanLine";
 import { whitneyLine } from "./whitney";
 
 const trainingField: Occupant[] = [
@@ -104,7 +101,7 @@ export const campOccupants: OverworldMap["occupants"] = [
     portal: {
       mapId: "campLaboratory",
       x: 10,
-      y: 18,
+      y: 12,
       orientation: "UP",
       forwardFoot: "CENTER1",
     },
@@ -334,22 +331,32 @@ export const campOccupants: OverworldMap["occupants"] = [
   },
   {
     type: "POKEMON",
-    dexId: 77,
+    dexId: 92,
     x: 15,
     y: 9,
     orientation: "DOWN",
-    id: "ponyta",
-    dialogue: ["Ponyta is trotting happily"],
+    id: "ghastly",
+    dialogue: ["You can feel something watching you!", "Buuuahahaha"],
     conditionFunction: () => true,
   },
   {
     type: "POKEMON",
-    dexId: 78,
+    dexId: 93,
     x: 17,
     y: 10,
     orientation: "RIGHT",
-    id: "rapidash",
-    dialogue: ["Rapidash is trotting majestical"],
+    id: "haunter",
+    dialogue: ["You can feel something watching you!", "Sluuuuurp"],
+    conditionFunction: () => true,
+  },
+  {
+    type: "POKEMON",
+    dexId: 94,
+    x: 2,
+    y: 22,
+    orientation: "RIGHT",
+    id: "gengar",
+    dialogue: ["You can feel something watching you!", "Muuuahahaha"],
     conditionFunction: () => true,
   },
   ...makeApricornTree({
@@ -376,6 +383,81 @@ export const campOccupants: OverworldMap["occupants"] = [
     apricorn: "grey-apricorn",
     id: "farm_grey_tree_4",
   }),
+  ...makeApricornTree({
+    x: 1,
+    y: 15,
+    apricorn: "green-apricorn",
+    id: "farm_green_tree_1",
+  }),
+  ...makeApricornTree({
+    x: 1,
+    y: 16,
+    apricorn: "green-apricorn",
+    id: "farm_green_tree_2",
+  }),
+  ...makeApricornTree({
+    x: 1,
+    y: 17,
+    apricorn: "green-apricorn",
+    id: "farm_green_tree_3",
+  }),
+  ...makeApricornTree({
+    x: 1,
+    y: 19,
+    apricorn: "black-apricorn",
+    id: "farm_black_tree_1",
+  }),
+  ...makeApricornTree({
+    x: 1,
+    y: 20,
+    apricorn: "black-apricorn",
+    id: "farm_black_tree_2",
+  }),
+  ...makeApricornTree({
+    x: 1,
+    y: 21,
+    apricorn: "black-apricorn",
+    id: "farm_black_tree_3",
+  }),
+  ...makeApricornTree({
+    x: 16,
+    y: 34,
+    apricorn: "blue-apricorn",
+    id: "farm_blue_tree_1",
+  }),
+  ...makeApricornTree({
+    x: 14,
+    y: 35,
+    apricorn: "blue-apricorn",
+    id: "farm_blue_tree_2",
+  }),
+  ...makeApricornTree({
+    x: 2,
+    y: 0,
+    apricorn: "yellow-apricorn",
+    id: "farm_yellow_tree_1",
+  }),
+  ...makeApricornTree({
+    x: 0,
+    y: 1,
+    apricorn: "yellow-apricorn",
+    id: "farm_yellow_tree_2",
+  }),
+  {
+    type: "CLIMBING_STEPS",
+    x: 2,
+    y: 2,
+    conditionFunction: () => true,
+    id: "climbing-steps-camp",
+  },
+  {
+    type: "CLIMBING_STEPS",
+    x: 2,
+    y: 3,
+    conditionFunction: () => true,
+    id: "climbing-steps-camp",
+  },
+
   ...miltankFarm,
   ...zigzagoonForagers,
   ...vileplumeResearchers,
@@ -387,6 +469,9 @@ export const campOccupants: OverworldMap["occupants"] = [
   ...chuckLine,
   ...mortyLine,
   ...evExpertLine,
+  bugsy,
+  rewardChris,
+  ...lookerLine,
 
   ...whitneyLine,
   ...pikachuFanLine,
@@ -416,11 +501,4 @@ export const campOccupants: OverworldMap["occupants"] = [
     conditionFunction: (s) => s.campUpgrades["invite historian"],
     id: "historian",
   },
-
-  ...oakLine,
-  bugsy,
-  ...elmLine,
-  ...rowanLine,
-  rewardChris,
-  ...lookerLine,
 ];

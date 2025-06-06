@@ -5,8 +5,8 @@ const pikachuFanBase: Omit<
   OverworldNpc,
   "unhandledMessage" | "conditionFunction" | "id"
 > = {
-  x: 26,
-  y: 12,
+  x: 30,
+  y: 6,
   orientation: "LEFT",
   type: "NPC",
   sprite: SpriteEnum.pikachuFan,

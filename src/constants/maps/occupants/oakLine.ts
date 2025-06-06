@@ -5,9 +5,9 @@ const oakBase: Omit<
   OverworldNpc,
   "unhandledMessage" | "conditionFunction" | "id"
 > = {
-  x: 27,
+  x: 10,
   y: 3,
-  orientation: "LEFT",
+  orientation: "DOWN",
   type: "NPC",
   sprite: SpriteEnum.oak,
 };
