@@ -687,7 +687,7 @@ export const calculateDamage = (
 	const neuroforceFactor =
 		attacker.ability === 'neuroforce' && typeFactor > 1 ? 1.25 : 1;
 	const prismArmorFactor =
-		attacker.ability === 'prism-armor' && typeFactor > 1 ? 0.75 : 1;
+		target.ability === 'prism-armor' && typeFactor > 1 ? 0.75 : 1;
 	const punkRockAttacker =
 		attacker.ability === 'punk-rock' && soundBasedMoves.includes(attack.name)
 			? 2

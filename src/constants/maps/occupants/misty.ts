@@ -33,7 +33,7 @@ const mistyTeam = () => [
 		shiny: true,
 		xp: 46656,
 		nature: 'rash',
-		ability: 'protean',
+		ability: 'neuroforce',
 		fixedAbility: true,
 		happiness: 255,
 		heldItemName: 'choice-band',
