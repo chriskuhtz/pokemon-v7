@@ -20,6 +20,7 @@ export const BadgesCard = () => {
 				<Stack mode="row">
 					{badges.map((b) => (
 						<img
+							key={b}
 							height={battleSpriteSize}
 							width={battleSpriteSize}
 							src={`/badges/${b}.png`}

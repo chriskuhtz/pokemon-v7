@@ -4,6 +4,7 @@ import { barryId } from '../constants/maps/occupants/barry';
 import { challengeFieldOccupants } from '../constants/maps/occupants/challengeField';
 import { cynthiaId } from '../constants/maps/occupants/cynthia';
 import { hughId } from '../constants/maps/occupants/hugh';
+import { lanceId } from '../constants/maps/occupants/lance';
 import { nId } from '../constants/maps/occupants/n';
 import { redId } from '../constants/maps/occupants/red';
 import { silverId } from '../constants/maps/occupants/silver';
@@ -304,6 +305,14 @@ export const useLeaveBattle = () => {
 					xp > updatedMileStones.hughDefeatedAt
 				) {
 					updatedMileStones.hughDefeatedAt = xp;
+				}
+			}
+			if (defeatedChallengerId === lanceId) {
+				if (
+					!updatedMileStones.lanceDefeatedAt ||
+					xp > updatedMileStones.lanceDefeatedAt
+				) {
+					updatedMileStones.lanceDefeatedAt = xp;
 				}
 			}
 			if (

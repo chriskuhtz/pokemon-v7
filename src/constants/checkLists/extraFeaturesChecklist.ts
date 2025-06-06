@@ -575,6 +575,8 @@ export const extraFeatureCheckList: {
 	{ name: 'prettier entry to victory road', handled: true },
 	{ name: 'e4 lance', handled: true },
 	{ name: 'evs for e4 trainers', handled: true },
+	{ name: 'ivs for e4 trainers', handled: true },
+
 	//BUGS/IMPROVEMENTS:
 	{ name: 'fix pathing' },
 	{ name: 'fix npc orientation' },

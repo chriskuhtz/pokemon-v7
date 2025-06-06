@@ -125,6 +125,7 @@ export type MileStonesObject = {
 	nDefeatedAt?: number;
 	redDefeatedAt?: number;
 	hughDefeatedAt?: number;
+	lanceDefeatedAt?: number;
 	importedChallengerDefeatedAt?: number;
 };
 

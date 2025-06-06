@@ -5,7 +5,9 @@ import { OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
+import { EmptyStatObject } from '../../../interfaces/StatObject';
 
+export const lanceId = 'elite4-champ-lance';
 const lanceTeam = (s: SaveFile): OwnedPokemon[] => {
 	const xp = Math.min(70 * 70 * 70, getHighestXpOnTeam(s.pokemon));
 
@@ -18,6 +20,7 @@ const lanceTeam = (s: SaveFile): OwnedPokemon[] => {
 		secondMove: { name: 'dragon-claw', usedPP: 0 },
 		thirdMove: { name: 'dragon-dance', usedPP: 0 },
 		fourthMove: { name: 'steel-wing', usedPP: 0 },
+		effortValues: { ...EmptyStatObject, speed: 252, attack: 252 },
 	});
 	const dragonite = makeChallengerPokemon({
 		xp,
@@ -28,6 +31,7 @@ const lanceTeam = (s: SaveFile): OwnedPokemon[] => {
 		secondMove: { name: 'light-screen', usedPP: 0 },
 		thirdMove: { name: 'dragon-pulse', usedPP: 0 },
 		fourthMove: { name: 'steel-wing', usedPP: 0 },
+		effortValues: { ...EmptyStatObject, 'special-defense': 252, defense: 252 },
 	});
 	const haxorus = makeChallengerPokemon({
 		name: 'haxorus',
@@ -37,6 +41,7 @@ const lanceTeam = (s: SaveFile): OwnedPokemon[] => {
 		secondMove: { name: 'slash', usedPP: 0 },
 		fourthMove: { name: 'iron-head', usedPP: 0 },
 		ability: 'speed-boost',
+		effortValues: { ...EmptyStatObject, defense: 252, attack: 252 },
 	});
 	const dragonite2 = makeChallengerPokemon({
 		name: 'dragonite',
@@ -47,6 +52,7 @@ const lanceTeam = (s: SaveFile): OwnedPokemon[] => {
 		thirdMove: { name: 'cosmic-power', usedPP: 0 },
 		fourthMove: { name: 'toxic', usedPP: 0 },
 		ability: 'multiscale',
+		effortValues: { ...EmptyStatObject, 'special-defense': 252, defense: 252 },
 	});
 	const garchomp = makeChallengerPokemon({
 		name: 'garchomp',
@@ -56,13 +62,16 @@ const lanceTeam = (s: SaveFile): OwnedPokemon[] => {
 		secondMove: { name: 'dragon-claw', usedPP: 0 },
 		thirdMove: { name: 'dragon-dance', usedPP: 0 },
 		ability: 'rough-skin',
+		effortValues: { ...EmptyStatObject, speed: 252, attack: 252 },
 	});
 	const dragonite3 = makeChallengerPokemon({
 		name: 'dragonite',
 		xp,
+		shiny: true,
 		heldItemName: 'choice-band',
 		firstMove: { name: 'extreme-speed', usedPP: 0 },
 		ability: 'multiscale',
+		effortValues: { ...EmptyStatObject, defense: 252, attack: 252 },
 	});
 	return [salamence, dragonite, haxorus, dragonite2, garchomp, dragonite3];
 };
@@ -70,8 +79,8 @@ export const lance: OverworldTrainer = {
 	type: 'TRAINER',
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/c/ce/VSLance.png',
-	id: 'elite4-champ-lance',
-	conditionFunction: (s) => !occupantHandled(s, 'elite4-champ-lance'),
+	id: lanceId,
+	conditionFunction: (s) => !occupantHandled(s, lanceId),
 	x: 5,
 	y: 3,
 	orientation: 'DOWN',

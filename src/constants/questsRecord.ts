@@ -257,6 +257,7 @@ export const questNames = [
 	'defeat all tier 5 field trainers',
 	'grow a berry',
 	'grow a apricorn',
+	'grow a herb',
 	'catch a pokemon in an apricorn ball',
 	'catch a very heavy specimen',
 	'catch a very light specimen',
@@ -447,6 +448,7 @@ export const questNames = [
 	'defeat an imported challenger at lvl 80 or higher',
 	'defeat an imported challenger at lvl 100',
 	'catch all pokemon from victory road',
+	'defeat the pokemon league',
 ] as const;
 
 export type QuestName = (typeof questNames)[number];
@@ -3146,6 +3148,13 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 100,
 		availableAfter: 'defeat an imported challenger at lvl 80 or higher',
 		rewardItems: { 'exp-candy-xl': 10 },
+	},
+	'defeat the pokemon league': {
+		category: 'BATTLE',
+		kind: 'BULLETIN',
+		conditionFunction: (s: SaveFile) => !!s.mileStones.lanceDefeatedAt,
+		researchPoints: 100,
+		rewardItems: { 'max-lure': 1, 'master-ball': 1 },
 	},
 } as Record<QuestName, Quest>;
 

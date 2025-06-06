@@ -25,16 +25,22 @@ export const EmptyStatObject: StatObject = {
 	evasion: 0,
 };
 
-export const generateRandomStatObject = (max: number): StatObject => ({
-	hp: Math.floor(Math.random() * max + 1),
-	defense: Math.floor(Math.random() * max + 1),
-	attack: Math.floor(Math.random() * max + 1),
-	'special-attack': Math.floor(Math.random() * max + 1),
-	'special-defense': Math.floor(Math.random() * max + 1),
-	speed: Math.floor(Math.random() * max + 1),
-	accuracy: Math.floor(Math.random() * max + 1),
-	evasion: Math.floor(Math.random() * max + 1),
-});
+export const generateRandomStatObject = (
+	max: number,
+	min?: number
+): StatObject => {
+	const m = min ?? 1;
+	return {
+		hp: Math.min(31, Math.floor(Math.random() * max + m)),
+		defense: Math.min(31, Math.floor(Math.random() * max + m)),
+		attack: Math.min(31, Math.floor(Math.random() * max + m)),
+		'special-attack': Math.min(31, Math.floor(Math.random() * max + m)),
+		'special-defense': Math.min(31, Math.floor(Math.random() * max + m)),
+		speed: Math.min(31, Math.floor(Math.random() * max + m)),
+		accuracy: Math.min(31, Math.floor(Math.random() * max + m)),
+		evasion: Math.min(31, Math.floor(Math.random() * max + m)),
+	};
+};
 
 export const getRandomBoostableStat = (omit?: Stat[]): Stat => {
 	const o = ['hp', 'evasion', 'accuracy', ...(omit ?? [])];

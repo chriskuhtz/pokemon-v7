@@ -5,6 +5,7 @@ import { OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
+import { EmptyStatObject } from '../../../interfaces/StatObject';
 
 const karenTeam = (s: SaveFile): OwnedPokemon[] => {
 	const xp = Math.min(70 * 70 * 70, getHighestXpOnTeam(s.pokemon) * 0.95);
@@ -15,6 +16,7 @@ const karenTeam = (s: SaveFile): OwnedPokemon[] => {
 		ability: 'dark-aura',
 		heldItemName: 'choice-band',
 		firstMove: { name: 'sucker-punch', usedPP: 0 },
+		effortValues: { ...EmptyStatObject, attack: 252, defense: 252 },
 	});
 	const spiritomb = makeChallengerPokemon({
 		xp,
@@ -25,16 +27,18 @@ const karenTeam = (s: SaveFile): OwnedPokemon[] => {
 		secondMove: { name: 'light-screen', usedPP: 0 },
 		thirdMove: { name: 'confuse-ray', usedPP: 0 },
 		fourthMove: { name: 'will-o-wisp', usedPP: 0 },
+		effortValues: { ...EmptyStatObject, 'special-defense': 252, speed: 252 },
 	});
 	const honchkrow = makeChallengerPokemon({
 		name: 'honchkrow',
 		xp,
 		heldItemName: 'leftovers',
 		firstMove: { name: 'drill-peck', usedPP: 0 },
-		secondMove: { name: 'dark-pulse', usedPP: 0 },
+		secondMove: { name: 'night-slash', usedPP: 0 },
 		fourthMove: { name: 'acrobatics', usedPP: 0 },
 		thirdMove: { name: 'roost', usedPP: 0 },
 		ability: 'moxie',
+		effortValues: { ...EmptyStatObject, attack: 252, speed: 252 },
 	});
 	const umbreon = makeChallengerPokemon({
 		name: 'umbreon',
@@ -45,14 +49,16 @@ const karenTeam = (s: SaveFile): OwnedPokemon[] => {
 		thirdMove: { name: 'cosmic-power', usedPP: 0 },
 		fourthMove: { name: 'dark-void', usedPP: 0 },
 		ability: 'inner-focus',
+		effortValues: { ...EmptyStatObject, defense: 252, 'special-defense': 252 },
 	});
 	const houndoom = makeChallengerPokemon({
 		name: 'houndoom',
 		xp,
-		heldItemName: 'charcoal',
+		heldItemName: 'shuca-berry',
 		firstMove: { name: 'flamethrower', usedPP: 0 },
 		secondMove: { name: 'solar-beam', usedPP: 0 },
 		ability: 'drought',
+		effortValues: { ...EmptyStatObject, speed: 252, 'special-attack': 252 },
 	});
 	const absol = makeChallengerPokemon({
 		name: 'absol',
@@ -63,6 +69,7 @@ const karenTeam = (s: SaveFile): OwnedPokemon[] => {
 		fourthMove: { name: 'aerial-ace', usedPP: 0 },
 		thirdMove: { name: 'leaf-blade', usedPP: 0 },
 		ability: 'sharpness',
+		effortValues: { ...EmptyStatObject, speed: 252, attack: 252 },
 	});
 	return [weavile, spiritomb, honchkrow, umbreon, houndoom, absol];
 };
