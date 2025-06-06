@@ -109,6 +109,7 @@ export type MileStonesObject = {
 	hasfoundAPokemonBySmashingRocks?: boolean;
 	hasCraftedApricorn?: boolean;
 	hasGrownABerry?: boolean;
+	hasGrownAHerb?: boolean;
 	hasGrownAnApricorn?: boolean;
 	cookedEasyRecipe?: boolean;
 	cookedMediumRecipe?: boolean;

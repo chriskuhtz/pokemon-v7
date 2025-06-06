@@ -62,6 +62,8 @@ export const useFarm = () => {
 			}
 			const hasGrownABerry =
 				saveFile.mileStones.hasGrownABerry || isBerry(bush.type);
+			const hasGrownAHerb =
+				saveFile.mileStones.hasGrownAHerb || isHerb(bush.type);
 			const hasGrownAnApricorn =
 				saveFile.mileStones.hasGrownAnApricorn || isApricorn(bush.type);
 
@@ -79,6 +81,7 @@ export const useFarm = () => {
 						...saveFile.mileStones,
 						hasGrownABerry,
 						hasGrownAnApricorn,
+						hasGrownAHerb,
 					},
 				});
 			}

@@ -1,5 +1,6 @@
 import { getTimeOfDay } from '../../../functions/getTimeOfDay';
 import { makeApricornTree } from '../../../functions/makeApricornTree';
+import { makeOverworldItem } from '../../../functions/makeOverworldItem';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { routeN1E1Lure } from '../../../modules/BerryLure/BerryLure';
 import { travellingMerchantRouteN1E1 } from '../../../modules/TravellingMerchant/TravellingMerchant';
@@ -115,6 +116,13 @@ export const routeN1E1Occupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'routeS1_poison-barb'),
 	},
+	makeOverworldItem({
+		x: 44,
+		y: 44,
+		item: 'revival-herb',
+		amount: 2,
+		mapId: 'routeN1E1',
+	}),
 	{
 		type: 'LEDGE',
 		passableFrom: 'DOWN',

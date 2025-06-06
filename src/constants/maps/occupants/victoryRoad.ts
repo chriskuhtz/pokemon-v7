@@ -15,7 +15,7 @@ export const victoryRoadOccupants: OverworldMap['occupants'] = [
 		portal: {
 			mapId: 'routeN1',
 			x: 15,
-			y: 1,
+			y: 2,
 			orientation: 'DOWN',
 			forwardFoot: 'CENTER1',
 		},

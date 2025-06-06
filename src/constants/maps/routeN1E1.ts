@@ -6,6 +6,7 @@ export const routeN1E1: OverworldMap = {
 	area: 'OPEN',
 	id: 'routeN1E1',
 	tilesetUrl: '/tilesets/DarkWoods.png',
+	occupants: routeN1E1Occupants,
 	timeOfDayShadersMap: defaultShaderMap,
 	tileMap: {
 		baseLayer: [
@@ -16239,5 +16240,4 @@ export const routeN1E1: OverworldMap = {
 			],
 		],
 	},
-	occupants: routeN1E1Occupants,
 };

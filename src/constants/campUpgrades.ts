@@ -218,7 +218,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 
 export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	bulletin_board: 'A place for people to post quests',
-	berry_farm: 'Berries and Apricorns are our main resources',
+	berry_farm: 'Berries, Apricorns and Herbs are our main resources',
 	'invite apricorn smith kurt': 'Pokeballs can be made from apricorns',
 	'invite move tutor': 'Teaches your Pokemon new moves',
 	'invite nature tutor': 'Can change your Pokemons Nature',
