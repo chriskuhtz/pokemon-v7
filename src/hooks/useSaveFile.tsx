@@ -136,6 +136,13 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 	const loaded = local ? migrateSavefile(JSON.parse(local) as SaveFile) : init;
 
 	const [saveFile, s] = useState<SaveFile>(loaded);
+	//SYNC WITH LOCAL STORAGE
+	useEffect(() => {
+		window.localStorage.setItem(
+			localStorageSaveFileId,
+			JSON.stringify(saveFile)
+		);
+	}, [saveFile]);
 
 	const reset = useCallback(() => {
 		s(testState);
@@ -425,13 +432,6 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		});
 	};
 
-	//SYNC WITH LOCAL STORAGE
-	useEffect(() => {
-		window.localStorage.setItem(
-			localStorageSaveFileId,
-			JSON.stringify(saveFile)
-		);
-	}, [saveFile]);
 	//HANDLE START OF GAME
 	useEffect(() => {
 		if (saveFile.meta.activeTab !== 'SETTINGS' && !saveFile.settings) {

@@ -564,16 +564,14 @@ export const extraFeatureCheckList: {
 	{ name: 'more strength increase steps for silver', handled: true },
 	{ name: 'nicer ladder up sprite', handled: true },
 	{ name: 'refactor dragonite to take tickets', handled: true },
-	{ name: 'e4 entrance (nurse, storage, etc' },
+	{ name: 'e4 entrance (nurse, storage, etc', handled: true },
+	{ name: 'mapmaker snippets' },
 	//BUGS/IMPROVEMENTS:
-
 	{ name: 'fix pathing' },
 	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },
 	{ name: 'leech seed benefit doesnt pass to switched in mon' },
-
 	//CONTENT:
-
 	{ name: 'prettier entry to victory road' },
 	{ name: 'e4 will' },
 	{ name: 'e4 koga' },

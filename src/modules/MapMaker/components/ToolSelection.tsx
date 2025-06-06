@@ -1,8 +1,13 @@
 import { JSX, useState } from 'react';
+import { FaEraser } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md';
 import { numberToGridTemplateColumns } from '../../../functions/numberToGridTemplateColumns';
 import { Modal } from '../../../uiComponents/Modal/Modal';
+import { Stack } from '../../../uiComponents/Stack/Stack';
 import { tileMapsRecord } from '../constants/tileMaps';
-import { GroupPlacer, TileGroupDisplay, Tool } from '../MapMaker';
+import { useSnippets } from '../hooks/useSnippets';
+import { GroupPlacer, Tool } from '../MapMaker';
+import { TileGroupDisplay } from './TileGroupDisplay';
 import { TileMapViewer } from './TileMapViewer';
 
 export const ToolSelection = ({
@@ -14,71 +19,27 @@ export const ToolSelection = ({
 	setSelected: (x: Tool) => void;
 	tileSetUrl: string;
 }): JSX.Element => {
+	const { snippets, addSnippet, removeSnippet } = useSnippets();
+
 	return (
 		<div
 			style={{
-				display: 'flex',
+				display: 'grid',
+				gridTemplateColumns: '3fr 3fr 1fr',
 				justifyContent: 'stretch',
 				gap: '2rem',
 				padding: '1rem',
+				borderBottom: '2px solid white',
 			}}
 		>
-			<div
-				style={{
-					display: 'flex',
-					flexDirection: 'column',
-					padding: '1rem',
-				}}
-			>
+			<div>
+				<h3>Tile Placer:</h3>
+
 				<button
 					style={{
 						margin: '1rem',
 						padding: '1rem',
 						color: 'white',
-						height: 'min-content',
-						display: 'flex',
-						gap: '1rem',
-						alignItems: 'center',
-						backgroundColor:
-							selected?.type === 'tileplacer' ? 'green' : undefined,
-					}}
-					onClick={() =>
-						setSelected({
-							type: 'tileplacer',
-							tile: { xOffset: 0, yOffset: 0 },
-						})
-					}
-				>
-					Tile Selection
-					{selected?.type === 'tileplacer' && (
-						<div
-							style={{
-								scale: 2,
-								height: 16,
-								width: 16,
-								background: `url(${tileSetUrl}) ${selected.tile.xOffset}px ${selected.tile.yOffset}px`,
-							}}
-						/>
-					)}
-				</button>
-				<button
-					style={{
-						margin: '1rem',
-						padding: '1rem',
-						color: 'white',
-						height: 'min-content',
-						backgroundColor: selected?.type === 'eraser' ? 'green' : undefined,
-					}}
-					onClick={() => setSelected({ type: 'eraser' })}
-				>
-					Eraser
-				</button>
-				<button
-					style={{
-						margin: '1rem',
-						padding: '1rem',
-						color: 'white',
-						height: 'min-content',
 						display: 'flex',
 						gap: '1rem',
 						alignItems: 'center',
@@ -88,24 +49,16 @@ export const ToolSelection = ({
 					onClick={() =>
 						setSelected({
 							type: 'groupPlacer',
-							tiles: [
-								[
-									{ xOffset: 0, yOffset: 0 },
-									{ xOffset: -16, yOffset: 0 },
-								],
-								[
-									{ xOffset: 0, yOffset: -16 },
-									{ xOffset: -16, yOffset: -16 },
-								],
-							],
+							tiles: [[{ xOffset: 0, yOffset: 0 }]],
 						})
 					}
 				>
-					Group Placer
+					{selected?.type === 'groupPlacer' ? 'Current' : 'Choose Tiles'}
 					{selected?.type === 'groupPlacer' && (
 						<TileGroupDisplay tileSetUrl={tileSetUrl} selected={selected} />
 					)}
 				</button>
+
 				{selected?.type === 'groupPlacer' && (
 					<div>
 						<button
@@ -175,15 +128,42 @@ export const ToolSelection = ({
 								));
 							})}
 						</div>
+						<button
+							style={{ height: 'min-content' }}
+							onClick={() =>
+								selected?.type === 'groupPlacer' ? addSnippet(selected) : {}
+							}
+						>
+							Save as New Snippet
+						</button>
 					</div>
 				)}
 			</div>
-			<div style={{ maxHeight: '80dvh', overflowY: 'scroll' }}>
-				<TileMapViewer
-					name={tileSetUrl}
-					t={tileMapsRecord[tileSetUrl]}
-					onClick={(tile) => setSelected({ type: 'tileplacer', tile })}
-				/>
+			<SnippetSelection
+				remove={removeSnippet}
+				selectSnippet={setSelected}
+				tileSetUrl={tileSetUrl}
+				snippets={snippets}
+			/>
+			<div>
+				<h3>Other tools</h3>
+				<button
+					style={{
+						margin: '1rem',
+						padding: '1rem',
+						color: 'white',
+						height: 'min-content',
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						gap: '2rem',
+						backgroundColor: selected?.type === 'eraser' ? 'green' : undefined,
+					}}
+					onClick={() => setSelected({ type: 'eraser' })}
+				>
+					<FaEraser size={32} />
+					Eraser
+				</button>
 			</div>
 		</div>
 	);
@@ -251,6 +231,41 @@ const CoordinateSelector = ({
 					</div>
 				</Modal>
 			)}
+		</div>
+	);
+};
+
+export const SnippetSelection = ({
+	tileSetUrl,
+	snippets,
+	selectSnippet,
+	remove,
+}: {
+	tileSetUrl: string;
+	snippets: { id: string; snippet: GroupPlacer }[];
+	selectSnippet: (x: GroupPlacer) => void;
+	remove: (id: string) => void;
+}) => {
+	return (
+		<div>
+			<h3>Snippets:</h3>
+			<Stack mode="row">
+				{snippets.map((s) => (
+					<button
+						style={{ display: 'flex', gap: '.5rem' }}
+						onClick={() => selectSnippet(s.snippet)}
+					>
+						<TileGroupDisplay tileSetUrl={tileSetUrl} selected={s.snippet} />
+						<MdDelete
+							size={32}
+							onClick={(e) => {
+								e.stopPropagation();
+								remove(s.id);
+							}}
+						/>
+					</button>
+				))}
+			</Stack>
 		</div>
 	);
 };
