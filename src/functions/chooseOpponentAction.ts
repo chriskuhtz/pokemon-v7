@@ -32,7 +32,7 @@ export const chooseOpponentAction = ({
 	});
 
 	const probablyDead =
-		(controlled.lastReceivedDamage?.damage ?? 0) < controlled.stats.hp / 2;
+		(controlled.lastReceivedDamage?.damage ?? 0) > controlled.stats.hp / 2;
 
 	const filtered = filterTargets({
 		targets,
