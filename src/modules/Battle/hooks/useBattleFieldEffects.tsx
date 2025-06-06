@@ -53,6 +53,9 @@ export const useBattleFieldEffects = (
 				if (effect.ownerId !== ownerId && effect.type == 'sticky-web') {
 					return false;
 				}
+				if (effect.ownerId !== ownerId && effect.type == 'stealth-rock') {
+					return false;
+				}
 
 				return true;
 			})

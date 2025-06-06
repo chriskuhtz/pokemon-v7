@@ -1,6 +1,7 @@
 import { Message } from '../hooks/useMessageQueue';
 import { SPIKES_FACTOR } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { typeEffectivenessChart } from '../interfaces/PokemonType';
 import { EmptyStatObject, Stat } from '../interfaces/StatObject';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
@@ -676,8 +677,42 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 					return p;
 				} else {
 					addMessage({ message: `${user.name} is hurt by spikes` });
-					return { ...p, damage: Math.floor(p.stats.hp * SPIKES_FACTOR) };
+					return {
+						...p,
+						damage: p.damage + Math.floor(p.stats.hp * SPIKES_FACTOR),
+					};
 				}
+			}
+			return p;
+		});
+	}
+	if (
+		battleFieldEffects.some(
+			(b) => b.type === 'stealth-rock' && b.ownerId !== user.ownerId
+		)
+	) {
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.id === user.id) {
+				addMessage({ message: `${user.name} is hurt by sharp rocks` });
+
+				let res = Math.floor(p.stats.hp * SPIKES_FACTOR);
+
+				const effectiveness = typeEffectivenessChart['rock'];
+
+				getTypeNames(p).forEach((t) => {
+					if (effectiveness.isNotVeryEffectiveAgainst.includes(t)) {
+						res /= 2;
+					} else if (effectiveness.isSuperEffectiveAgainst.includes(t)) {
+						res *= 2;
+					} else if (effectiveness.doesntEffect.includes(t)) {
+						res = 0;
+					}
+				});
+
+				return {
+					...p,
+					damage: p.damage + res,
+				};
 			}
 			return p;
 		});

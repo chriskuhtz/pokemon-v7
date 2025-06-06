@@ -38,6 +38,13 @@ export const handleFieldEffectMoves = ({
 			duration: 9000,
 		});
 	}
+	if (move.name === 'stealth-rock') {
+		addBattleFieldEffect({
+			type: move.name as BattleFieldEffect['type'],
+			ownerId: target.ownerId,
+			duration: 9000,
+		});
+	}
 	if (move.name === 'toxic-spikes') {
 		addBattleFieldEffect({
 			type: move.name as BattleFieldEffect['type'],

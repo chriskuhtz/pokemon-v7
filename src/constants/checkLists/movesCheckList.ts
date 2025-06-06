@@ -3085,9 +3085,16 @@ export const movesCheckList: {
 		url: 'https://pokeapi.co/api/v2/move/415/',
 		handled: true,
 	},
-	{ name: 'defog', url: 'https://pokeapi.co/api/v2/move/432/' },
-	{ name: 'trick-room', url: 'https://pokeapi.co/api/v2/move/433/' },
-	{ name: 'stealth-rock', url: 'https://pokeapi.co/api/v2/move/446/' },
+	{
+		name: 'stealth-rock',
+		url: 'https://pokeapi.co/api/v2/move/446/',
+		handled: true,
+	},
+
+	{
+		name: 'trick-room',
+		url: 'https://pokeapi.co/api/v2/move/433/',
+	},
 	{ name: 'lunar-dance', url: 'https://pokeapi.co/api/v2/move/461/' },
 	{ name: 'wide-guard', url: 'https://pokeapi.co/api/v2/move/469/' },
 	{ name: 'guard-split', url: 'https://pokeapi.co/api/v2/move/470/' },
@@ -3231,6 +3238,7 @@ export const movesCheckList: {
 	{ name: 'copycat', url: 'https://pokeapi.co/api/v2/move/383/' },
 	{ name: 'last-resort', url: 'https://pokeapi.co/api/v2/move/387/' },
 	{ name: 'magnet-rise', url: 'https://pokeapi.co/api/v2/move/393/' },
+	{ name: 'defog', url: 'https://pokeapi.co/api/v2/move/432/' },
 ];
 
 export const handledMoves = [
@@ -3856,6 +3864,7 @@ export const handledMoves = [
 	'aqua-ring',
 	'aqua-tail',
 	'switcheroo',
+	'stealth-rock',
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

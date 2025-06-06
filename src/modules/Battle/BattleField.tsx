@@ -90,7 +90,8 @@ export interface BattleFieldEffect {
 		| 'pastel-veil'
 		| 'sticky-web'
 		| 'aurora-veil'
-		| 'lucky-chant';
+		| 'lucky-chant'
+		| 'stealth-rock';
 	ownerId: string;
 	applicatorId?: string;
 	duration: number;
