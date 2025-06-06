@@ -96,7 +96,7 @@ export const routeW1Occupants: OverworldMap["occupants"] = [
     y: 39,
     portal: {
       mapId: "camp",
-      y: 10,
+      y: 30,
       x: 1,
       orientation: "RIGHT",
       forwardFoot: "CENTER1",
