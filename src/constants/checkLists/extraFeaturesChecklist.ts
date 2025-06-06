@@ -566,6 +566,10 @@ export const extraFeatureCheckList: {
 	{ name: 'refactor dragonite to take tickets', handled: true },
 	{ name: 'e4 entrance (nurse, storage, etc', handled: true },
 	{ name: 'mapmaker snippets', handled: true },
+	{ name: 'e4 will', handled: true },
+	{ name: 'e4 koga', handled: true },
+	{ name: 'e4 bruno', handled: true },
+	{ name: 'e4 ticket at end of victory road', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'fix pathing' },
 	{ name: 'fix npc orientation' },
@@ -573,12 +577,10 @@ export const extraFeatureCheckList: {
 	{ name: 'leech seed benefit doesnt pass to switched in mon' },
 	//CONTENT:
 	{ name: 'prettier entry to victory road' },
-	{ name: 'e4 will' },
-	{ name: 'e4 koga' },
-	{ name: 'e4 bruno' },
+
 	{ name: 'e4 karen' },
 	{ name: 'e4 lance' },
-	{ name: 'e4 ticket at end of victory road' },
+	{ name: 'overworld mon next to e4 trainers' },
 	{ name: 'pryce' },
 	{ name: 'claire' },
 	{ name: 'eggs?' },

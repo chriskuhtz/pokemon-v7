@@ -111,6 +111,19 @@ export const applySecondaryAilmentDamage = (
 			damage: Math.max(0, updated.damage - ingrainHeal),
 		};
 	}
+	if (updated.secondaryAilments.some((ail) => ail.type === 'aqua-ringed')) {
+		addMessage(`${pokemon.data.name} absorbs nutrients from the water`);
+		const bigRootFactor = getHeldItem(updated) === 'big-root' ? 1.3 : 1;
+
+		const ingrainHeal = Math.floor(
+			Math.round(INGRAIN_FACTOR * bigRootFactor * updated.stats.hp)
+		);
+
+		updated = {
+			...updated,
+			damage: Math.max(0, updated.damage - ingrainHeal),
+		};
+	}
 
 	const leechTargets = leechingOn(updated);
 

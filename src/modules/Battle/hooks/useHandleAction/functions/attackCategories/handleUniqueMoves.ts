@@ -672,6 +672,14 @@ export const handleUniqueMoves = ({
 		updatedTarget.statBoosts = attacker.statBoosts;
 		updatedAttacker.statBoosts = target.statBoosts;
 	}
+	if (move.name === 'aqua-ring') {
+		updatedAttacker = applySecondaryAilmentToPokemon({
+			pokemon: updatedAttacker,
+			ailment: 'aqua-ringed',
+			addMessage,
+			applicator: updatedAttacker,
+		});
+	}
 
 	return updatedPokemon.map((p) => {
 		if (p.id === updatedAttacker.id) {

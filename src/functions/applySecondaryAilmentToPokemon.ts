@@ -390,6 +390,21 @@ export const applySecondaryAilmentToPokemon = ({
 			],
 		};
 	}
+	if (ailment === 'aqua-ringed') {
+		addMessage({
+			message: `${pokemon.data.name} surrounds itself with healing water`,
+		});
+		return {
+			...pokemon,
+			secondaryAilments: [
+				...pokemon.secondaryAilments,
+				{
+					type: 'aqua-ringed',
+					duration: 9000,
+				},
+			],
+		};
+	}
 	if (ailment === 'octolocked') {
 		addMessage({ message: `${pokemon.data.name} is wrapped tightly` });
 		return {
