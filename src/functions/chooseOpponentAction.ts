@@ -122,6 +122,25 @@ export const chooseOpponentAction = ({
 			targetId: controlled.id,
 		};
 	}
+	/**
+	 * Terrain control
+	 */
+	const terrainMoves: Record<string, BattleTerrain> = {
+		'psychic-terrain': 'psychic',
+		'electric-terrain': 'electric',
+		'misty-terrain': 'misty',
+		'grassy-terrain': 'grassy',
+	};
+	const terrainMove = moves.find((m) =>
+		Object.keys(terrainMoves).includes(m.name)
+	);
+	if (terrainMove && terrain !== terrainMoves[terrainMove.data.name]) {
+		return {
+			userId: controlled.id,
+			actionName: terrainMove.name,
+			targetId: controlled.id,
+		};
+	}
 
 	/**
 	 * SET UP SCREENS
