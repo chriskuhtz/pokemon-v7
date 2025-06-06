@@ -573,8 +573,8 @@ export const extraFeatureCheckList: {
 	{ name: 'e4 karen', handled: true },
 	{ name: 'overworld mon next to e4 trainers', handled: true },
 	{ name: 'prettier entry to victory road', handled: true },
-	{ name: 'e4 lance' },
-	{ name: 'evs for e4 trainers' },
+	{ name: 'e4 lance', handled: true },
+	{ name: 'evs for e4 trainers', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'fix pathing' },
 	{ name: 'fix npc orientation' },

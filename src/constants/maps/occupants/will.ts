@@ -5,6 +5,7 @@ import { OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
+import { EmptyStatObject } from '../../../interfaces/StatObject';
 
 const willTeam = (s: SaveFile): OwnedPokemon[] => {
 	const xp = Math.min(70 * 70 * 70, getHighestXpOnTeam(s.pokemon) * 0.8);
@@ -18,6 +19,7 @@ const willTeam = (s: SaveFile): OwnedPokemon[] => {
 		secondMove: { name: 'reflect', usedPP: 0 },
 		thirdMove: { name: 'gyro-ball', usedPP: 0 },
 		fourthMove: { name: 'extrasensory', usedPP: 0 },
+		effortValues: { ...EmptyStatObject, 'special-defense': 252, defense: 252 },
 	});
 	const jynx = makeChallengerPokemon({
 		xp,
@@ -28,6 +30,11 @@ const willTeam = (s: SaveFile): OwnedPokemon[] => {
 		secondMove: { name: 'psychic', usedPP: 0 },
 		thirdMove: { name: 'recover', usedPP: 0 },
 		fourthMove: { name: 'psychic-terrain', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			'special-defense': 252,
+			'special-attack': 252,
+		},
 	});
 	const grumpig = makeChallengerPokemon({
 		name: 'grumpig',
@@ -36,6 +43,7 @@ const willTeam = (s: SaveFile): OwnedPokemon[] => {
 		firstMove: { name: 'tail-glow', usedPP: 0 },
 		secondMove: { name: 'psychic', usedPP: 0 },
 		ability: 'thick-fat',
+		effortValues: { ...EmptyStatObject, defense: 252, 'special-attack': 252 },
 	});
 	const slowbro = makeChallengerPokemon({
 		name: 'slowbro',
@@ -45,6 +53,7 @@ const willTeam = (s: SaveFile): OwnedPokemon[] => {
 		secondMove: { name: 'psychic', usedPP: 0 },
 		thirdMove: { name: 'hydro-pump', usedPP: 0 },
 		ability: 'simple',
+		effortValues: { ...EmptyStatObject, 'special-defense': 252, defense: 252 },
 	});
 	const gardevoir = makeChallengerPokemon({
 		name: 'gardevoir',
@@ -53,6 +62,7 @@ const willTeam = (s: SaveFile): OwnedPokemon[] => {
 		firstMove: { name: 'dazzling-gleam', usedPP: 0 },
 		secondMove: { name: 'psychic', usedPP: 0 },
 		ability: 'synchronize',
+		effortValues: { ...EmptyStatObject, 'special-attack': 252, speed: 252 },
 	});
 	const xatu = makeChallengerPokemon({
 		name: 'xatu',
@@ -63,6 +73,7 @@ const willTeam = (s: SaveFile): OwnedPokemon[] => {
 		fourthMove: { name: 'shadow-ball', usedPP: 0 },
 		thirdMove: { name: 'roost', usedPP: 0 },
 		ability: 'synchronize',
+		effortValues: { ...EmptyStatObject, 'special-attack': 252, speed: 252 },
 	});
 	return [bronzong, jynx, grumpig, slowbro, gardevoir, xatu];
 };
