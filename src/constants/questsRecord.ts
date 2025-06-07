@@ -440,7 +440,7 @@ export const questNames = [
 	'catch all past distortion pokemon',
 	'catch a space distortion pokemon',
 	'catch all space distortion pokemon',
-	'train a pidgeot to lvl 70',
+	'train a pidgeot to lvl 100',
 	"catch whitney's favorite cute pokemon",
 	'catch an exceptional steel pokemon for jasmine',
 	'reach max. friendship with a dragon pokemon',
@@ -3114,17 +3114,17 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				(f) => s.pokedex[f].caughtOnRoutes.length > 0
 			),
 	},
-	'train a pidgeot to lvl 70': {
+	'train a pidgeot to lvl 100': {
 		kind: 'BULLETIN',
 		category: 'TRAINING',
 		researchPoints: 100,
 		campUpgrade: 'pidgeot rider certification',
 		rewardItems: {},
-		conditionFunction: (s) =>
+		conditionFunction: (s: SaveFile) =>
 			s.pokemon.some(
 				(p) =>
 					p.name === 'pidgeot' &&
-					calculateLevelData(p.xp, p.growthRate).level >= 70
+					calculateLevelData(p.xp, p.growthRate).level >= 100
 			),
 	},
 	'defeat an imported challenger': {
