@@ -16,6 +16,7 @@ import {
 	aquaNamesMale,
 	aquaPokemon,
 	getAquaArchieTeam,
+	getAquaMessage,
 } from './aqua';
 import {
 	galacticNamesFemale,
@@ -23,10 +24,12 @@ import {
 	galacticPokemon,
 	getGalacticJupiterTeam,
 	getGalacticMarsTeam,
+	getGalacticMessage,
 	getGalacticSaturnTeam,
 } from './galactic';
 import {
 	getMagmaMaxieTeam,
+	getMagmaMessage,
 	magmaNamesFemale,
 	magmaNamesMale,
 	magmaPokemon,
@@ -294,13 +297,26 @@ const createTroubleMakers = (
 				return SpriteEnum.rocketMale;
 			} else return SpriteEnum.rocketFemale;
 		};
+
+		const message = () => {
+			if (affiliation === 'aqua') {
+				return getAquaMessage();
+			}
+			if (affiliation === 'magma') {
+				return getMagmaMessage();
+			}
+			if (affiliation === 'galactic') {
+				return getGalacticMessage();
+			}
+			return getRocketMessage();
+		};
 		const trainer: OverworldTrainerStump = {
 			x,
 			y,
 			type: 'TRAINER',
 			id,
 			orientation: getRandomOrientation(),
-			unhandledMessage: getRocketMessage(),
+			unhandledMessage: message(),
 			battleTeamConfig: {
 				assignLearnsetMoves: true,
 				assignNaturalAbility: true,
