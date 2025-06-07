@@ -144,6 +144,9 @@ export const App = (): JSX.Element => {
 	if (activeTab === 'SETTINGS') {
 		return <Settings />;
 	}
+	if (activeTab === 'SETTINGS_IN_GAME') {
+		return <Settings backTo="MAIN" />;
+	}
 	if (activeTab === 'SPRITE_SELECTION') {
 		return (
 			<SpriteSelection

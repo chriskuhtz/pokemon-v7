@@ -410,7 +410,6 @@ export const BattleField = ({
 	);
 	const chooseAction = useChooseAction(
 		allOnField,
-		pokemon,
 		setPokemon,
 		battleRound,
 		battleWeather

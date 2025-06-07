@@ -15,9 +15,10 @@ import { handleUniqueMoves } from './attackCategories/handleUniqueMoves';
 import { handleWholeFieldEffectAttack } from './attackCategories/handleWholeFieldEffectAttack';
 import { handleAttackStart } from './handleAttackStart';
 
+import { FaGlasses } from 'react-icons/fa';
+import { battleSpriteSize } from '../../../../../constants/gameData';
 import { changeMovePP } from '../../../../../functions/changeMovePP';
 import { chooseOpponentAction } from '../../../../../functions/chooseOpponentAction';
-import { getMovesArray } from '../../../../../functions/getMovesArray';
 import { getSettings } from '../../../../../functions/getPlayerId';
 import { OPPO_ID } from '../../../../../functions/makeChallengerPokemon';
 import { BattleTerrain, TerrainObject } from '../../useBattleTerrain';
@@ -253,18 +254,12 @@ export const handleAllAttackCategories = ({
 				let updated: BattlePokemon = { ...p, moveQueue: [] };
 				const action = chooseOpponentAction({
 					controlled: updated,
-					targets: updatedPokemon,
+					targets: attackHandled.filter((p) => p.status === 'ONFIELD'),
 					effects: battleFieldEffects,
 					weather: battleWeather,
 					terrain,
 				});
-				const attack = getMovesArray(p).find(
-					(m) => m.name === action.actionName
-				);
 
-				if (!attack) {
-					return updated;
-				}
 				updated = assignActionToPokemon({
 					...action,
 					user: updated,
@@ -272,9 +267,18 @@ export const handleAllAttackCategories = ({
 					battleRound,
 					battleWeather,
 				});
-				return {
-					...checkAndHandleFainting(updated, pokemon, addMessage),
-				};
+
+				if (
+					p.moveQueue[0].type === 'BattleAttack' &&
+					p.moveQueue[0].name !== action.actionName
+				) {
+					addMessage({
+						icon: <FaGlasses size={battleSpriteSize} />,
+						message: `${p.name} reconsidered and used ${action.actionName} instead of ${p.moveQueue[0].name}`,
+					});
+				}
+
+				return updated;
 			}
 
 			return p;
