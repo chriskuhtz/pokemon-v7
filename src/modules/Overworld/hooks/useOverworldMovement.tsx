@@ -3,7 +3,6 @@ import { fps } from '../../../constants/gameData';
 import { mapsRecord } from '../../../constants/maps/mapsRecord';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
 import { determineWildPokemon } from '../../../functions/determineWildPokemon';
-import { isBagOverloaded } from '../../../functions/getBagLimit';
 import { getNextForwardFoot } from '../../../functions/getNextForwardFoot';
 import { OPPO_ID } from '../../../functions/makeChallengerPokemon';
 import { updatePosition } from '../../../functions/updatePosition';
@@ -145,8 +144,8 @@ export const useOverworldMovement = (
 	]);
 
 	const canSwim = useMemo(() => {
-		return campUpgrades['swimming certification'] && !isBagOverloaded(saveFile);
-	}, [campUpgrades, saveFile]);
+		return campUpgrades['swimming certification'];
+	}, [campUpgrades]);
 
 	useEffect(() => {
 		const int = setTimeout(() => {
