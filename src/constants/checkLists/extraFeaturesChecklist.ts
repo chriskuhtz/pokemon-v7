@@ -580,9 +580,9 @@ export const extraFeatureCheckList: {
 	{ name: 'random owned pokemon in pasture', handled: true },
 	{ name: 'cant swim with overloaded bag', handled: true },
 	{ name: 'overworld pokemon for gym leaders', handled: true },
-	{ name: 'fix pathing' },
-	//BUGS/IMPROVEMENTS:
 
+	//BUGS/IMPROVEMENTS:
+	{ name: 'fix pathing' },
 	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },
 	{ name: 'leech seed benefit doesnt pass to switched in mon' },
@@ -615,7 +615,6 @@ export const extraFeatureCheckList: {
 	{
 		name: 'DarkGreen-Apricorn: Jungle Balls: Bonus for Grass and Psychic Pokemon',
 	},
-
 	//SETTINGS:
 	{ name: 'random encounters' },
 	{ name: 'random evolutions' },
