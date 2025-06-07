@@ -14,6 +14,7 @@ import { internalDex } from '../../internalDexData';
 import { bugsy, bugsysScyther } from './bugsy';
 import { rewardChris } from './champChris';
 import { chuckLine, chucksMachamp } from './chuckLine';
+import { clairLine, clairsKingdra } from './clair';
 import { evExpertLine } from './evExpert';
 import { falknerLine, falknersHootHoot } from './falknerLine';
 import { jasmineLine, jasminesAron } from './jasmine';
@@ -474,6 +475,8 @@ export const campOccupants: OverworldMap['occupants'] = [
 	...whitneyLine,
 	whitneysClefairy,
 	...pikachuFanLine,
+	...clairLine,
+	clairsKingdra,
 	{
 		type: 'ROUTER_NPC',
 		to: 'CURATOR',

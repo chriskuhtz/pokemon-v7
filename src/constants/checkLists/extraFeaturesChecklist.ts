@@ -588,7 +588,7 @@ export const extraFeatureCheckList: {
 	{ name: 'leech seed benefit doesnt pass to switched in mon' },
 	//CONTENT:
 	{ name: 'pryce' },
-	{ name: 'claire' },
+	{ name: 'clair' },
 	{ name: 'eggs?' },
 	{ name: 'Fishing?' },
 	{ name: 'magma/aqua quests from Looker' },

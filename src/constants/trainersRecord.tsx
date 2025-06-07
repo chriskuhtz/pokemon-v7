@@ -2275,6 +2275,7 @@ export const specialTrainers: Challenger[] = [
 			profilePicture:
 				'https://archives.bulbagarden.net/media/upload/5/5a/VSFalkner.png',
 		},
+		battleTeamConfig: { assignHeldItem: false },
 	},
 	{
 		type: 'TRAINER',
@@ -2286,19 +2287,15 @@ export const specialTrainers: Challenger[] = [
 				heldItemName: 'quick-claw',
 				ability: 'technician',
 				fixedAbility: true,
-				firstMove: { name: 'swords-dance', usedPP: 0 },
-				secondMove: { name: 'bullet-punch', usedPP: 0 },
 			}),
 			makeChallengerPokemon({
 				name: 'pinsir',
 				xp: 125000,
-				firstMove: { name: 'x-scissor', usedPP: 0 },
 			}),
 			makeChallengerPokemon({
 				name: 'heracross',
 				xp: 125000,
 				heldItemName: 'hard-stone',
-				firstMove: { name: 'rock-slide', usedPP: 0 },
 			}),
 			makeChallengerPokemon({
 				name: 'volcarona',
@@ -2311,6 +2308,7 @@ export const specialTrainers: Challenger[] = [
 				heldItemName: 'sitrus-berry',
 			}),
 		],
+		battleTeamConfig: { assignHeldItem: false },
 		inventory: EmptyInventory,
 		availableAfter: 'report a bug',
 		trainer: {
@@ -2350,6 +2348,7 @@ export const specialTrainers: Challenger[] = [
 				heldItemName: 'never-melt-ice',
 			}),
 		],
+		battleTeamConfig: { assignHeldItem: false },
 		inventory: EmptyInventory,
 		availableAfter: "catch whitney's favorite cute pokemon",
 		trainer: {
@@ -2393,6 +2392,7 @@ export const specialTrainers: Challenger[] = [
 			profilePicture:
 				'https://archives.bulbagarden.net/media/upload/0/04/VSMorty.png',
 		},
+		battleTeamConfig: { assignHeldItem: false },
 	},
 	{
 		type: 'TRAINER',
@@ -2437,6 +2437,7 @@ export const specialTrainers: Challenger[] = [
 			profilePicture:
 				'https://archives.bulbagarden.net/media/upload/a/af/VSChuck.png',
 		},
+		battleTeamConfig: { assignHeldItem: false },
 	},
 	{
 		type: 'TRAINER',
@@ -2477,6 +2478,48 @@ export const specialTrainers: Challenger[] = [
 			profilePicture:
 				'https://archives.bulbagarden.net/media/upload/f/f2/VSJasmine.png',
 		},
+		battleTeamConfig: { assignHeldItem: false },
+	},
+	{
+		type: 'TRAINER',
+		id: 'Gym Leader Clair',
+		team: [
+			makeChallengerPokemon({
+				name: 'druddigon',
+				xp: 125000,
+				heldItemName: 'haban-berry',
+			}),
+
+			makeChallengerPokemon({
+				name: 'dragonair',
+				xp: 125000,
+				heldItemName: 'roseli-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'haxorus',
+				xp: 125000,
+				heldItemName: 'haban-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'seadra',
+				xp: 125000,
+				heldItemName: 'wacan-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'kingdra',
+				xp: 125000,
+				heldItemName: 'roseli-berry',
+			}),
+		],
+		inventory: EmptyInventory,
+		availableAfter: 'reach max. friendship with a dragon pokemon',
+		trainer: {
+			id: 'Gym Leader Clair',
+			sprite: SpriteEnum.jasmine,
+			profilePicture:
+				'https://archives.bulbagarden.net/media/upload/f/fc/VSClair.png',
+		},
+		battleTeamConfig: { assignHeldItem: false },
 	},
 	{
 		type: 'TRAINER',

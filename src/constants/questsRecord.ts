@@ -275,6 +275,7 @@ export const questNames = [
 	'defeat bugsy',
 	'defeat whitney',
 	'defeat jasmine',
+	'defeat clair',
 	'revive a fossil',
 	'revive all different fossils',
 	'evolve your starter pokemon',
@@ -441,6 +442,7 @@ export const questNames = [
 	'train a pidgeot to lvl 70',
 	"catch whitney's favorite cute pokemon",
 	'catch an exceptional steel pokemon for jasmine',
+	'reach max. friendship with a dragon pokemon',
 	'defeat an imported challenger',
 	'defeat an imported challenger at lvl 20 or higher',
 	'defeat an imported challenger at lvl 40 or higher',
@@ -1438,6 +1440,17 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				(p) =>
 					internalDex[p.name].types.includes('steel') &&
 					Object.values(p.intrinsicValues).some((v) => v === 31)
+			);
+		},
+		kind: 'QUEST_LINE',
+	},
+	'reach max. friendship with a dragon pokemon': {
+		category: 'TRAINING',
+		rewardItems: { 'dragon-gem': 10, 'haban-berry': 10 },
+		researchPoints: 100,
+		conditionFunction: (s: SaveFile) => {
+			return s.pokemon.some(
+				(p) => internalDex[p.name].types.includes('dragon') && p.happiness > 250
 			);
 		},
 		kind: 'QUEST_LINE',
