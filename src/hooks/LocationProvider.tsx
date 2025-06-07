@@ -44,12 +44,6 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
 		[location.mapId, patchSaveFileReducer, saveFile.handledOccupants]
 	);
 
-	//RESCUE FROM SOFT LOCK
-	useEffect(() => {
-		if (saveFile.playerId.includes('jan')) {
-			setLocation(startingLocation);
-		}
-	}, [location, saveFile.playerId, setLocation]);
 	//SYNC WITH LOCAL STORAGE
 	useEffect(() => {
 		window.localStorage.setItem(
