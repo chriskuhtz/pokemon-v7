@@ -627,29 +627,26 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 			(p) => p.status === 'ONFIELD' && p.ownerId === user.ownerId
 		);
 
-		if (ally && ally.damage) {
-			addMessage({
-				message: `${user.data.name} heals its ally with hospitality`,
-			});
-			updatedPokemon = updatedPokemon.map((p) => {
-				if (p.id === user.id) {
-					return {
-						...user,
-						roundsInBattle: p.roundsInBattle + 1,
-						participatedInBattle: true,
-					};
-				}
-				if (p.id === ally.id) {
-					return {
-						...ally,
-						damage: Math.max(0, ally.damage - ally.stats.hp / 4),
-					};
-				}
+		updatedPokemon = updatedPokemon.map((p) => {
+			if (p.id === user.id) {
+				return {
+					...user,
+					roundsInBattle: p.roundsInBattle + 1,
+					participatedInBattle: true,
+				};
+			}
+			if (ally && ally.damage && p.id === ally.id) {
+				addMessage({
+					message: `${user.data.name} heals its ally with hospitality`,
+				});
+				return {
+					...ally,
+					damage: Math.max(0, ally.damage - ally.stats.hp / 4),
+				};
+			}
 
-				return p;
-			});
-		}
-		return updatedPokemon;
+			return p;
+		});
 	}
 	if (user.ability === 'toxic-debris') {
 		addBattleFieldEffect({

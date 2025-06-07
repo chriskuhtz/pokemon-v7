@@ -577,8 +577,9 @@ export const extraFeatureCheckList: {
 	{ name: 'evs for e4 trainers', handled: true },
 	{ name: 'ivs for e4 trainers', handled: true },
 	{ name: 'overworld pokemon in storage pasture', handled: true },
-
+	{ name: 'random owned pokemon in pasture', handled: true },
 	//BUGS/IMPROVEMENTS:
+	{ name: 'cant swim with overloaded bag' },
 	{ name: 'fix pathing' },
 	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },
@@ -613,7 +614,6 @@ export const extraFeatureCheckList: {
 	{
 		name: 'DarkGreen-Apricorn: Jungle Balls: Bonus for Grass and Psychic Pokemon',
 	},
-	{ name: 'random owned pokemon in pasture' },
 
 	//SETTINGS:
 	{ name: 'random encounters' },
