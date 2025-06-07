@@ -270,7 +270,7 @@ export const RepelButton = () => {
 						activatedRepel: 'max-repel',
 					});
 				}}
-				content={<h3>Repel all wild Pokemon</h3>}
+				content={<h3>Repel Pokemon up to level 60</h3>}
 				actionElements={[]}
 			/>
 		);
