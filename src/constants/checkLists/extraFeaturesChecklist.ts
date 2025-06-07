@@ -583,8 +583,11 @@ export const extraFeatureCheckList: {
 	{ name: 'pryce', handled: true },
 	{ name: 'clair', handled: true },
 	{ name: 'follower pokemon', handled: true },
+	{ name: 'setting: smarter opps', handled: true },
 
 	//BUGS/IMPROVEMENTS:
+	{ name: 'portrait mode' },
+	{ name: 'nature based dialogues for pasture mons' },
 	{ name: 'fix pathing' },
 	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },

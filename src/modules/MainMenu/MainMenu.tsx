@@ -7,7 +7,7 @@ import { Stack } from '../../uiComponents/Stack/Stack';
 import { useContext, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { GoTasklist } from 'react-icons/go';
-import { IoMdExit } from 'react-icons/io';
+import { IoMdExit, IoMdSettings } from 'react-icons/io';
 import { RiBookShelfLine } from 'react-icons/ri';
 import { BadgesCard } from '../../components/BadgesCard/BadgesCard';
 import { BugReportButton } from '../../components/BugReport/BugReport';
@@ -140,10 +140,16 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 					icon={<FaSearch size={battleSpriteSize} />}
 					actionElements={[]}
 				/>
+				<Card
+					onClick={() => navigate('MAIN', 'SETTINGS_IN_GAME')}
+					content={<h4>SETTINGS</h4>}
+					icon={<IoMdSettings size={battleSpriteSize} />}
+					actionElements={[]}
+				/>
 				<ExportSnapshotCard />
 				<ImportSnapshotCard />
 				<ResetSnapshotCard />
-				<ToggleMovementButtons />
+
 				{resetConfirmationInProgress ? (
 					<button
 						onClick={() =>
@@ -183,35 +189,6 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 	);
 };
 
-export const ToggleMovementButtons = () => {
-	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
-
-	if (saveFile.settings?.hideMovementButtons) {
-		return (
-			<button
-				onClick={() =>
-					patchSaveFileReducer({
-						settings: { ...saveFile.settings, hideMovementButtons: false },
-					})
-				}
-			>
-				Show Movement Buttons
-			</button>
-		);
-	}
-
-	return (
-		<button
-			onClick={() =>
-				patchSaveFileReducer({
-					settings: { ...saveFile.settings, hideMovementButtons: true },
-				})
-			}
-		>
-			Hide Movement Buttons
-		</button>
-	);
-};
 export const ExpShareButton = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 

@@ -285,6 +285,7 @@ export const useHandleAction = (
 					logDamage,
 					terrain,
 					setTerrain,
+					battleRound,
 				});
 
 				return;

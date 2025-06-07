@@ -2,28 +2,33 @@ import { useContext, useState } from 'react';
 import { QuestsRecord } from '../../constants/questsRecord';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { getRandomBall, getRandomItem } from '../../interfaces/Item';
+import { RoutesType } from '../../interfaces/Routing';
 import { SettingsObject } from '../../interfaces/SaveFile';
 import { Page } from '../../uiComponents/Page/Page';
 import { ToggleRow } from '../../uiComponents/ToggleRow/ToggleRow';
 
 export const randomQuestRewards = 'randomQuestRewards';
-export const Settings = (): JSX.Element => {
-	const { patchSaveFileReducer } = useContext(SaveFileContext);
+export const Settings = ({ backTo }: { backTo?: RoutesType }): JSX.Element => {
+	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
 
-	const [state, setState] = useState<SettingsObject>({
-		fasterDays: false,
-		doubleXpRates: false,
-		rogueLike: false,
-		releaseFaintedPokemon: false,
-		noItemsInBattle: false,
-		randomStarters: false,
-		randomOverworldItems: false,
-		randomQuestRewards: false,
-		randomSwarms: false,
-		randomAbilities: false,
-		randomHeldItems: false,
-		randomLearnSets: false,
-	});
+	const [state, setState] = useState<SettingsObject>(
+		saveFile.settings ?? {
+			fasterDays: false,
+			doubleXpRates: false,
+			rogueLike: false,
+			releaseFaintedPokemon: false,
+			noItemsInBattle: false,
+			randomStarters: false,
+			randomOverworldItems: false,
+			randomQuestRewards: false,
+			randomSwarms: false,
+			randomAbilities: false,
+			randomHeldItems: false,
+			randomLearnSets: false,
+			smarterOpponents: false,
+			hideMovementButtons: false,
+		}
+	);
 
 	const proceed = () => {
 		if (state.randomQuestRewards) {
@@ -53,13 +58,18 @@ export const Settings = (): JSX.Element => {
 		} else window.localStorage.removeItem('fasterDays');
 		patchSaveFileReducer({
 			settings: state,
+			meta: {
+				activeTab: backTo ? backTo : saveFile.meta.activeTab,
+			},
 		});
 	};
 	return (
 		<Page headline="Settings:">
-			<button style={{ width: '100%' }} onClick={() => proceed()}>
-				I am not reading that, lets go
-			</button>
+			{!backTo && (
+				<button style={{ width: '100%' }} onClick={() => proceed()}>
+					I am not reading that, lets go
+				</button>
+			)}
 			<div
 				style={{
 					display: 'grid',
@@ -83,8 +93,19 @@ export const Settings = (): JSX.Element => {
 					setValue={(x) => setState({ ...state, doubleXpRates: x })}
 					label={'Double Xp Rates'}
 				/>
+				<ToggleRow
+					value={!!state.hideMovementButtons}
+					setValue={(x) => setState({ ...state, hideMovementButtons: x })}
+					label={'Hide Movement Buttons'}
+				/>
 				<h2>Difficulty:</h2> <span />
 				<span />
+				<ToggleRow
+					value={!!state.smarterOpponents}
+					setValue={(x) => setState({ ...state, smarterOpponents: x })}
+					label={'"Smarter" Opponents:'}
+					description="Double Battle Opponents can reconsider their moves during the turn"
+				/>
 				<ToggleRow
 					value={!!state.rogueLike}
 					setValue={(x) => setState({ ...state, rogueLike: x })}
