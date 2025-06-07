@@ -50,6 +50,7 @@ export interface SettingsObject {
 	randomLearnSets?: boolean;
 	hideMovementButtons?: boolean;
 	smarterOpponents?: boolean;
+	minimalGrindingMode?: boolean;
 }
 
 export type BerryBushStatus =
