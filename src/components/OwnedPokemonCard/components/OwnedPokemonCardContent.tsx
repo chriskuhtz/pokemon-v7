@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { MdEdit } from 'react-icons/md';
 import { MoveName } from '../../../constants/checkLists/movesCheckList';
-import { battleSpriteSize } from '../../../constants/gameData';
+import { battleSpriteSize, portraitMode } from '../../../constants/gameData';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
 import { getHeldItem } from '../../../functions/getHeldItem';
 import { getItemUrl } from '../../../functions/getItemUrl';
@@ -59,7 +59,7 @@ export const OwnedPokemonCardContent = ({
 	const heldItem = getHeldItem(ownedPokemon);
 
 	return (
-		<div>
+		<React.Fragment>
 			<NickNameModal
 				open={nickNameMenuOpen}
 				close={() => setNickNameMenuOpen(false)}
@@ -92,12 +92,13 @@ export const OwnedPokemonCardContent = ({
 			<Stack mode="column">
 				<div
 					style={{
-						paddingLeft: '.5rem',
+						paddingLeft: portraitMode ? 0 : '.5rem',
 						display: 'grid',
-						gap: '1.5rem',
-						gridTemplateColumns: '1fr 4fr 3fr 1fr',
+						gap: portraitMode ? '.5rem' : '1.5rem',
+						gridTemplateColumns: portraitMode ? '1fr' : '1fr 4fr 3fr 1fr',
 						alignItems: 'center',
 						justifyItems: 'center',
+						marginBottom: portraitMode ? '3rem' : 0,
 					}}
 				>
 					<IconSolarSystem
@@ -201,6 +202,6 @@ export const OwnedPokemonCardContent = ({
 					evolve={evolve}
 				/>
 			</Stack>
-		</div>
+		</React.Fragment>
 	);
 };

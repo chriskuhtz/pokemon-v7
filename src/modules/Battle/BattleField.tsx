@@ -43,6 +43,7 @@ import { useBattleTerrain } from './hooks/useBattleTerrain';
 import { useBattleWeather } from './hooks/useBattleWeather';
 import { useChooseAction } from './hooks/useChooseAction';
 import { useHandleAction } from './hooks/useHandleAction/useHandleAction';
+import { portraitMode } from '../../constants/gameData';
 
 export type ActionType =
 	| MoveName
@@ -811,8 +812,8 @@ export const BattleField = ({
 							maxWidth: '100dvw',
 							overflow: 'scroll',
 							borderTop: '1px solid black',
-							minHeight: '103px',
-							maxHeight: '103px',
+							minHeight: portraitMode ? '25dvh' : '103px',
+							maxHeight: portraitMode ? '25dvh' : '103px',
 						}}
 					>
 						<ControlBar

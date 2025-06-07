@@ -11,7 +11,7 @@ import {
 	TroubleMakersIcon,
 } from '../../../components/TroubleMakersIcon/TroubleMakersIcon';
 import { WeatherIcon } from '../../../components/WeatherIcon/WeatherIcon';
-import { battleSpriteSize } from '../../../constants/gameData';
+import { battleSpriteSize, portraitMode } from '../../../constants/gameData';
 import {
 	mapDisplayNames,
 	mapsRecord,
@@ -44,7 +44,8 @@ export const OverworldMenus = ({
 			<div
 				style={{
 					position: 'absolute',
-					top: '5rem',
+					top: portraitMode ? '1.5rem' : '5rem',
+
 					left: '1rem',
 					zIndex: 8999,
 					padding: '.5rem',
@@ -60,14 +61,16 @@ export const OverworldMenus = ({
 			<div
 				style={{
 					position: 'absolute',
-					top: '1.5rem',
-					left: '1rem',
+					top: portraitMode ? '5rem' : '1.5rem',
+					left: portraitMode ? undefined : '1rem',
+					right: portraitMode ? '1rem' : undefined,
 					zIndex: 8999,
 					padding: '.5rem',
 					borderRadius: 9000,
 					backgroundColor: 'rgba(255,255,255,.6)',
 					display: 'flex',
 					gap: '1rem',
+					flexDirection: portraitMode ? 'column' : 'row',
 				}}
 			>
 				<IoMdMenu

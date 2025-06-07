@@ -1,4 +1,5 @@
 import { MoveName } from '../../constants/checkLists/movesCheckList';
+import { portraitMode } from '../../constants/gameData';
 import { EvolutionReducerPayload } from '../../hooks/useSaveFile';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
@@ -25,11 +26,24 @@ export const OwnedPokemonCard = ({
 	setNickName: (id: string, newNick: string | undefined) => void;
 	evolve: (x: EvolutionReducerPayload) => void;
 }) => {
+	if (portraitMode) {
+		return (
+			<OwnedPokemonCardContent
+				evolve={evolve}
+				setMoves={setMoves}
+				ownedPokemon={pokemon}
+				data={data}
+				inventory={inventory}
+				takeHeldItem={takeHeldItem}
+				giveHeldItem={giveHeldItem}
+				setNickName={(x) => setNickName(pokemon.id, x)}
+			/>
+		);
+	}
 	return (
 		<div
 			style={{
 				padding: '1rem',
-
 				border: '2px solid black',
 				borderRadius: '1rem',
 			}}

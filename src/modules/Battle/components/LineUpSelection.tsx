@@ -14,6 +14,7 @@ import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { TrainerInfo } from '../../../interfaces/Challenger';
 import { IconSolarSystem } from '../../../uiComponents/IconSolarSystem/IconSolarSystem';
+import { portraitMode } from '../../../constants/gameData';
 
 export const LineUpSelection = ({
 	leave,
@@ -75,8 +76,8 @@ export const LineUpSelection = ({
 			<div
 				style={{
 					display: 'grid',
-					gridTemplateColumns: '1fr 1fr',
-					gridTemplateRows: '1fr 1fr',
+					gridTemplateColumns: portraitMode ? '1fr' : '1fr 1fr',
+					gridTemplateRows: portraitMode ? '1fr 1fr 1fr 1fr' : '1fr 1fr',
 					height: '100dvh',
 					justifyItems: 'center',
 					alignItems: 'center',

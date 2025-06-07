@@ -20,6 +20,15 @@ export const MoveInfoButton = ({ movename }: { movename: MoveName }) => {
 		if (res && skip === false && !latestMessage) {
 			addMultipleMessages([
 				{
+					icon: (
+						<img
+							style={{
+								borderRadius: 9000,
+							}}
+							height={battleSpriteSize}
+							src={`/typeIcons/${res.type.name}.png`}
+						/>
+					),
 					message: `${res.type.name} Type Attack`,
 				},
 				{
