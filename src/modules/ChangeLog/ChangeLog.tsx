@@ -3,7 +3,7 @@ import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
-export const newestChangeLog = '0.46';
+export const newestChangeLog = '0.45';
 
 export const ChangeLog = ({
 	setHasReadIntro,
@@ -79,17 +79,7 @@ export const ChangeLog = ({
 		</Page>
 	);
 };
-const ChangeLogV46 = (): JSX.Element => {
-	return (
-		<>
-			<h3>.45:</h3>
-			<ol style={{ lineHeight: '1.5rem' }}>
-				<li>UI Improvements</li>
-				<li>Balancing</li>
-			</ol>
-		</>
-	);
-};
+
 const ChangeLogV45 = (): JSX.Element => {
 	return (
 		<>
