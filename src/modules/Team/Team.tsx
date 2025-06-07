@@ -2,11 +2,12 @@ import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { OwnedPokemonCard } from '../../components/OwnedPokemonCard/OwnedPokemonCard';
 import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize, portraitMode } from '../../constants/gameData';
 import { getHeldItem } from '../../functions/getHeldItem';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getTypeNames } from '../../functions/getTypeNames';
 import { isOwnedPokemonKO } from '../../functions/isKo';
+import { withChangedMoves } from '../../functions/withChangedMoves';
 import { useGetBattleTeam } from '../../hooks/useGetBattleTeam';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Inventory } from '../../interfaces/Inventory';
@@ -16,7 +17,6 @@ import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSys
 import { LoadingScreen } from '../../uiComponents/LoadingScreen/LoadingScreen';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { withChangedMoves } from '../../functions/withChangedMoves';
 
 export const Team = ({
 	team,
@@ -99,7 +99,16 @@ export const Team = ({
 						borderRadius: '1rem',
 					}}
 				>
-					<Stack alignItems="center" mode="row" justifyContent="space-evenly">
+					<div
+						style={{
+							display: 'grid',
+							gap: '.5rem',
+							rowGap: '1.5rem',
+							gridTemplateColumns: portraitMode
+								? '1fr 1fr'
+								: '1fr 1fr 1fr 1fr 1fr 1fr',
+						}}
+					>
 						{team.map((pokemon, index) => {
 							const d = res.find((r) => r.name === pokemon.name)?.data;
 
@@ -174,7 +183,7 @@ export const Team = ({
 								</div>
 							);
 						})}
-					</Stack>
+					</div>
 				</div>
 				<OwnedPokemonCard
 					setMoves={(id, newMoveNames) => {

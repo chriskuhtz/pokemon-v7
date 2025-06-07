@@ -1,4 +1,5 @@
 import { maxBst } from '../../../constants/baseStatRecord';
+import { portraitMode } from '../../../constants/gameData';
 import { PokemonName } from '../../../constants/pokemonNames';
 import { typeColors, typeContrastColors } from '../../../constants/typeColors';
 import {
@@ -27,19 +28,21 @@ export const StatDisplay = ({
 	data: PokemonData;
 }) => {
 	return (
-		<Stack mode="column">
-			<NatureSection nature={ownedPokemon.nature} />
-			<BstSection data={data} ownedPokemon={ownedPokemon} />
-			<EVsSection
-				type={data.types[0].type.name}
-				effortValues={ownedPokemon.effortValues}
-			/>
-			<IVsSection
-				name={ownedPokemon.name}
-				type={data.types[0].type.name}
-				intrinsicValues={ownedPokemon.intrinsicValues}
-			/>
-		</Stack>
+		<div style={{ maxWidth: '100dvw' }}>
+			<Stack mode="column">
+				<NatureSection nature={ownedPokemon.nature} />
+				<BstSection data={data} ownedPokemon={ownedPokemon} />
+				<EVsSection
+					type={data.types[0].type.name}
+					effortValues={ownedPokemon.effortValues}
+				/>
+				<IVsSection
+					name={ownedPokemon.name}
+					type={data.types[0].type.name}
+					intrinsicValues={ownedPokemon.intrinsicValues}
+				/>
+			</Stack>
+		</div>
 	);
 };
 const BstSection = ({
@@ -70,7 +73,7 @@ const BstSection = ({
 					padding: '.5rem',
 					display: 'grid',
 					gap: '1.5rem',
-					gridTemplateColumns: '1fr 1fr 1fr',
+					gridTemplateColumns: portraitMode ? '1fr' : '1fr 1fr 1fr',
 					alignItems: 'center',
 				}}
 			>
@@ -152,7 +155,7 @@ const EVsSection = ({
 					padding: '.5rem',
 					display: 'grid',
 					gap: '1.5rem',
-					gridTemplateColumns: '1fr 1fr 1fr',
+					gridTemplateColumns: portraitMode ? '1fr' : '1fr 1fr 1fr',
 					alignItems: 'center',
 				}}
 			>
@@ -229,7 +232,7 @@ const IVsSection = ({
 					padding: '.5rem',
 					display: 'grid',
 					gap: '1.5rem',
-					gridTemplateColumns: '1fr 1fr 1fr',
+					gridTemplateColumns: portraitMode ? '1fr' : '1fr 1fr 1fr',
 					alignItems: 'center',
 				}}
 			>

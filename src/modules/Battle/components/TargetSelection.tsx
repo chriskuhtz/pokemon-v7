@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
-import { battleSpriteSize } from '../../../constants/gameData';
+import { battleSpriteSize, portraitMode } from '../../../constants/gameData';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { isPlayerPokemon } from '../../../functions/getPlayerPokemon';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
@@ -76,6 +76,7 @@ export function TargetSelection({
 				style={{
 					display: 'flex',
 					gap: '1rem',
+					flexDirection: portraitMode ? 'column' : 'row',
 				}}
 			>
 				<IoIosArrowBack

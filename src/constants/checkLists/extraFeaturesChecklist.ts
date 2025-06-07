@@ -619,6 +619,7 @@ export const extraFeatureCheckList: {
 	{
 		name: 'DarkGreen-Apricorn: Jungle Balls: Bonus for Grass and Psychic Pokemon',
 	},
+	{ name: 'tickets for new adventures' },
 	//SETTINGS:
 	{ name: 'random encounters' },
 	{ name: 'random evolutions' },

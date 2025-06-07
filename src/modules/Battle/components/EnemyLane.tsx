@@ -1,6 +1,6 @@
 import { BattlePokemonInfo } from '../../../components/BattlePokemonInfo/BattlePokemonInfo';
 import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
-import { battleSpriteSize } from '../../../constants/gameData';
+import { battleSpriteSize, portraitMode } from '../../../constants/gameData';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getSizeFactor } from '../../../functions/getSizeFactor';
 import { useLocationBattlePlatform } from '../../../hooks/useLocationColors';
@@ -18,8 +18,9 @@ export function EnemyLane({
 		<div
 			style={{
 				display: 'flex',
-				justifyContent: 'space-between',
-				alignItems: 'center',
+				justifyContent: portraitMode ? 'flex-start' : 'space-between',
+				alignItems: portraitMode ? 'flex-end' : 'center',
+				flexDirection: portraitMode ? 'column' : 'row',
 			}}
 		>
 			<div

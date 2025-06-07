@@ -1,5 +1,6 @@
 import { BattlePokemonInfo } from '../../../components/BattlePokemonInfo/BattlePokemonInfo';
 import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
+import { portraitMode } from '../../../constants/gameData';
 import { getSizeFactor } from '../../../functions/getSizeFactor';
 import { useLocationBattlePlatform } from '../../../hooks/useLocationColors';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
@@ -10,8 +11,9 @@ export function PlayerLane(props: { onFieldTeam: BattlePokemon[] }) {
 		<div
 			style={{
 				display: 'flex',
-				justifyContent: 'space-between',
-				alignItems: 'center',
+				justifyContent: portraitMode ? 'flex-end' : 'space-between',
+				alignItems: portraitMode ? 'flex-start' : 'center',
+				flexDirection: portraitMode ? 'column' : 'row',
 			}}
 		>
 			<div
