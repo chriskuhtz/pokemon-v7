@@ -579,13 +579,13 @@ export const extraFeatureCheckList: {
 	{ name: 'overworld pokemon in storage pasture', handled: true },
 	{ name: 'random owned pokemon in pasture', handled: true },
 	{ name: 'cant swim with overloaded bag', handled: true },
+	{ name: 'overworld pokemon for gym leaders', handled: true },
+	{ name: 'fix pathing' },
 	//BUGS/IMPROVEMENTS:
 
-	{ name: 'fix pathing' },
 	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },
 	{ name: 'leech seed benefit doesnt pass to switched in mon' },
-	{ name: 'overworld pokemon for gym leaders' },
 	//CONTENT:
 	{ name: 'pryce' },
 	{ name: 'claire' },
