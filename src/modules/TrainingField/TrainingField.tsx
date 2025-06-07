@@ -5,6 +5,7 @@ import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { Sprite } from '../../components/Sprite/Sprite';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 
+import { portraitMode } from '../../constants/gameData';
 import {
 	specialTrainers,
 	tier1trainers,
@@ -295,26 +296,33 @@ const trainerCardStack = ({
 					}
 					content={
 						<div>
-							<h3
+							<h3>{t.trainer?.id} </h3>
+							<div
 								style={{
-									display: 'grid',
+									display: portraitMode ? 'flex' : 'grid',
+									flexDirection: 'column',
 									alignItems: 'center',
-									gridTemplateColumns: '2fr 1fr 1fr 1fr 1fr 1fr 1fr',
+									gridTemplateColumns: '1fr 1fr 1fr',
 									gap: '1rem',
 								}}
 							>
-								{t.trainer?.id}{' '}
 								{t.team.map((p, j) => (
-									<PokemonSprite key={t.id + p.name + i + j} name={p.name} />
-								))}
-							</h3>
-							<div style={{ display: 'flex', gap: '1rem' }}>
-								{t.team.map((p, j) => (
-									<strong key={t.id + p.name + 'LVL' + i + j}>
-										Lvl {calculateLevelData(p.xp, p.growthRate).level} {p.name},
-									</strong>
+									<div
+										style={{
+											display: 'flex',
+											flexDirection: 'column',
+											alignItems: 'center',
+										}}
+									>
+										<PokemonSprite key={t.id + p.name + i + j} name={p.name} />
+										<strong key={t.id + p.name + 'LVL' + i + j}>
+											Lvl {calculateLevelData(p.xp, p.growthRate).level}{' '}
+											{p.name}
+										</strong>
+									</div>
 								))}
 							</div>
+
 							{defeatedBefore && (
 								<strong color={'green'}>Defeated before</strong>
 							)}
