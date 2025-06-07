@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { MapId } from '../../../constants/maps/mapsRecord';
 import { getNextFieldOccupant } from '../../../functions/getNextFieldOccupant';
 import { getOverworldDistance } from '../../../functions/getOverworldDistance';
@@ -36,6 +36,20 @@ export const useClickTarget = (
 	const [clickTarget, setClickTarget] = useState<
 		{ x: number; y: number; mapId: MapId } | undefined
 	>();
+
+	const isPassableForPlayer = useCallback(
+		(pos: { x: number; y: number }) => {
+			return isPassable(
+				pos,
+				assembledMap,
+				currentOccupants,
+				saveFile.campUpgrades['swimming certification'],
+				!!saveFile.flying,
+				saveFile.campUpgrades['rock climbing certification']
+			);
+		},
+		[assembledMap, currentOccupants, saveFile.campUpgrades, saveFile.flying]
+	);
 	useEffect(() => {
 		if (activeMessage) {
 			setClickTarget(undefined);
@@ -57,56 +71,28 @@ export const useClickTarget = (
 
 		if (
 			playerLocation.x < clickTarget.x &&
-			isPassable(
-				{ x: playerLocation.x + 1, y: playerLocation.y },
-				assembledMap,
-				currentOccupants,
-				saveFile.campUpgrades['swimming certification'],
-				!!saveFile.flying,
-				saveFile.campUpgrades['rock climbing certification']
-			)
+			isPassableForPlayer({ x: playerLocation.x + 1, y: playerLocation.y })
 		) {
 			setNextInput('RIGHT');
 			return;
 		}
 		if (
 			playerLocation.x > clickTarget.x &&
-			isPassable(
-				{ x: playerLocation.x - 1, y: playerLocation.y },
-				assembledMap,
-				currentOccupants,
-				saveFile.campUpgrades['swimming certification'],
-				!!saveFile.flying,
-				saveFile.campUpgrades['rock climbing certification']
-			)
+			isPassableForPlayer({ x: playerLocation.x - 1, y: playerLocation.y })
 		) {
 			setNextInput('LEFT');
 			return;
 		}
 		if (
 			playerLocation.y < clickTarget.y &&
-			isPassable(
-				{ x: playerLocation.x, y: playerLocation.y + 1 },
-				assembledMap,
-				currentOccupants,
-				saveFile.campUpgrades['swimming certification'],
-				!!saveFile.flying,
-				saveFile.campUpgrades['rock climbing certification']
-			)
+			isPassableForPlayer({ x: playerLocation.x, y: playerLocation.y + 1 })
 		) {
 			setNextInput('DOWN');
 			return;
 		}
 		if (
 			playerLocation.y > clickTarget.y &&
-			isPassable(
-				{ x: playerLocation.x, y: playerLocation.y - 1 },
-				assembledMap,
-				currentOccupants,
-				saveFile.campUpgrades['swimming certification'],
-				!!saveFile.flying,
-				saveFile.campUpgrades['rock climbing certification']
-			)
+			isPassableForPlayer({ x: playerLocation.x, y: playerLocation.y - 1 })
 		) {
 			setNextInput('UP');
 			return;
@@ -115,14 +101,7 @@ export const useClickTarget = (
 		if (
 			(clickTarget.x === playerLocation.x &&
 				clickTarget.y === playerLocation.y) ||
-			(!isPassable(
-				clickTarget,
-				assembledMap,
-				currentOccupants,
-				saveFile.campUpgrades['swimming certification'],
-				!!saveFile.flying,
-				saveFile.campUpgrades['rock climbing certification']
-			) &&
+			(!isPassableForPlayer(clickTarget) &&
 				getOverworldDistance(clickTarget, playerLocation) === 1)
 		) {
 			if (playerLocation.x > clickTarget.x) {
@@ -151,9 +130,9 @@ export const useClickTarget = (
 		playerLocation,
 		setNextInput,
 		currentOccupants,
-		saveFile.campUpgrades,
-		location.mapId,
-		saveFile.flying,
+		saveFile,
+		isPassableForPlayer,
+		location,
 	]);
 
 	return setClickTarget;

@@ -11,16 +11,16 @@ import { miltankFarm } from '../../../modules/MiltankFarm/MiltankFarm';
 import { seedvaultResearcher } from '../../../modules/SeedVault/SeedVault';
 import { vileplumeResearchers } from '../../../modules/VilePlumeScentResearcher/VilePlumeScentResearcher';
 import { internalDex } from '../../internalDexData';
-import { bugsy } from './bugsy';
+import { bugsy, bugsysScyther } from './bugsy';
 import { rewardChris } from './champChris';
-import { chuckLine } from './chuckLine';
+import { chuckLine, chucksMachamp } from './chuckLine';
 import { evExpertLine } from './evExpert';
-import { falknerLine } from './falknerLine';
-import { jasmineLine } from './jasmine';
+import { falknerLine, falknersHootHoot } from './falknerLine';
+import { jasmineLine, jasminesAron } from './jasmine';
 import { lookerLine } from './lookerLine';
-import { mortyLine } from './mortyLine';
+import { mortyLine, mortysGengar } from './mortyLine';
 import { pikachuFanLine } from './pikachuFanLine';
-import { whitneyLine } from './whitney';
+import { whitneyLine, whitneysClefairy } from './whitney';
 
 const trainingField: Occupant[] = [
 	{
@@ -459,14 +459,20 @@ export const campOccupants: OverworldMap['occupants'] = [
 	...dragoniteTaxi,
 	...trainingField,
 	...falknerLine,
+	falknersHootHoot,
 	...chuckLine,
+	chucksMachamp,
 	...mortyLine,
+	mortysGengar,
 	...evExpertLine,
 	bugsy,
+	bugsysScyther,
 	rewardChris,
 	...lookerLine,
 	...jasmineLine,
+	jasminesAron,
 	...whitneyLine,
+	whitneysClefairy,
 	...pikachuFanLine,
 	{
 		type: 'ROUTER_NPC',

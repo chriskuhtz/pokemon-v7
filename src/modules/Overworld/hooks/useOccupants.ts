@@ -101,7 +101,7 @@ export const useOccupants = () => {
 		if (location.mapId === 'camp') {
 			const uniqueNames = shuffle(
 				saveFile.pokemon
-					.filter((p) => !p.onTeam && internalDex[p.name].dexId < 815)
+					.filter((p) => !p.onTeam && internalDex[p.name].dexId < 741)
 					.map((p) => p.name)
 			);
 
