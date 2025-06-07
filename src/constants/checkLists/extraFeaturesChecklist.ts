@@ -580,6 +580,9 @@ export const extraFeatureCheckList: {
 	{ name: 'random owned pokemon in pasture', handled: true },
 	{ name: 'cant swim with overloaded bag', handled: true },
 	{ name: 'overworld pokemon for gym leaders', handled: true },
+	{ name: 'pryce', handled: true },
+	{ name: 'clair', handled: true },
+	{ name: 'follower pokemon', handled: true },
 
 	//BUGS/IMPROVEMENTS:
 	{ name: 'fix pathing' },
@@ -587,8 +590,6 @@ export const extraFeatureCheckList: {
 	{ name: 'rollout stops stacking when target is defeated' },
 	{ name: 'leech seed benefit doesnt pass to switched in mon' },
 	//CONTENT:
-	{ name: 'pryce' },
-	{ name: 'claire' },
 	{ name: 'eggs?' },
 	{ name: 'Fishing?' },
 	{ name: 'magma/aqua quests from Looker' },

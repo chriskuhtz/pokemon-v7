@@ -14,12 +14,14 @@ import { internalDex } from '../../internalDexData';
 import { bugsy, bugsysScyther } from './bugsy';
 import { rewardChris } from './champChris';
 import { chuckLine, chucksMachamp } from './chuckLine';
+import { clairLine, clairsKingdra } from './clair';
 import { evExpertLine } from './evExpert';
 import { falknerLine, falknersHootHoot } from './falknerLine';
 import { jasmineLine, jasminesAron } from './jasmine';
 import { lookerLine } from './lookerLine';
 import { mortyLine, mortysGengar } from './mortyLine';
 import { pikachuFanLine } from './pikachuFanLine';
+import { pryceLine, prycesMamoswine } from './pryce';
 import { whitneyLine, whitneysClefairy } from './whitney';
 
 const trainingField: Occupant[] = [
@@ -474,6 +476,10 @@ export const campOccupants: OverworldMap['occupants'] = [
 	...whitneyLine,
 	whitneysClefairy,
 	...pikachuFanLine,
+	...clairLine,
+	clairsKingdra,
+	...pryceLine,
+	prycesMamoswine,
 	{
 		type: 'ROUTER_NPC',
 		to: 'CURATOR',

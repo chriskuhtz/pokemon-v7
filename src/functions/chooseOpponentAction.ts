@@ -53,6 +53,20 @@ export const chooseOpponentAction = ({
 			targetId: filtered[0].id,
 		};
 	}
+
+	const { targetId, actionName, willBeDefeated } = determineHighestDamage(
+		controlled,
+		moves,
+		filtered,
+		weather,
+		terrain,
+		effects
+	);
+	/**IF YOU CAN GET A DEFEAT, do it */
+	if (willBeDefeated) {
+		return { userId: controlled.id, actionName, targetId };
+	}
+
 	/**
 	 * USE FIRST TURN MOVE
 	 */
@@ -234,14 +248,6 @@ export const chooseOpponentAction = ({
 	/**
 	 * DAMAGING MOVE
 	 */
-	const { targetId, actionName } = determineHighestDamage(
-		controlled,
-		moves,
-		filtered,
-		weather,
-		terrain,
-		effects
-	);
 
 	return { userId: controlled.id, actionName, targetId };
 };

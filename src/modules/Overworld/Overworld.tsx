@@ -1,6 +1,7 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import { CombinedCanvas } from '../../components/CombinedCanvas/CombinedCanvas';
+import { FollowerSprite } from '../../components/FollowerSprite/FollowerSprite';
 import { fps } from '../../constants/gameData';
 import { mapsRecord } from '../../constants/maps/mapsRecord';
 import { handleEnterPress } from '../../functions/handleEnterPress';
@@ -11,6 +12,7 @@ import { useDrawForeground } from '../../hooks/useDrawBackground';
 import { useDugtrioExplorers } from '../../hooks/useDugtrioExplorers';
 import { useHallowedTower } from '../../hooks/useHallowedTower';
 import { useHoneyTree } from '../../hooks/useHoneyTree';
+import { useInteractWithClimbingSteps } from '../../hooks/useInteractWithClimbingSteps';
 import { useInteractWithSnorlax } from '../../hooks/useInteractWithSnorlax';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useRangerRadio } from '../../hooks/useRangerRadio';
@@ -41,22 +43,6 @@ import { useStartEncounter } from './hooks/useStartEncounter';
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
 const occupantsCanvasId = 'occs';
-
-export const useInteractWithClimbingSteps = () => {
-	const { addMultipleMessages } = useContext(MessageQueueContext);
-
-	const { saveFile } = useContext(SaveFileContext);
-
-	return useCallback(() => {
-		if (!saveFile.campUpgrades['rock climbing certification']) {
-			addMultipleMessages([
-				{ message: 'A certified rock climber would be allowed to climb here' },
-				{ message: '... Bureaucracy' },
-			]);
-			return;
-		}
-	}, [addMultipleMessages, saveFile.campUpgrades]);
-};
 
 export const Overworld = () => {
 	const shader = useShader();
@@ -136,6 +122,7 @@ export const Overworld = () => {
 		location.y,
 		location.x,
 	]);
+
 	//DRAWING
 	useDrawCharacter(playerCanvasId, location, sprite);
 	useDrawOccupants(occupantsCanvasId, occupants, baseSize);
@@ -301,6 +288,7 @@ export const Overworld = () => {
 						width={width * baseSize}
 					/>
 					<canvas id={playerCanvasId} height={baseSize} width={baseSize} />
+					<FollowerSprite map={map} occupants={occupants} />
 
 					<canvas
 						style={{
