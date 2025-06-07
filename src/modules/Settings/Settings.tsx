@@ -27,6 +27,7 @@ export const Settings = ({ backTo }: { backTo?: RoutesType }): JSX.Element => {
 			randomLearnSets: false,
 			smarterOpponents: false,
 			hideMovementButtons: false,
+			minimalGrindingMode: false,
 		}
 	);
 
@@ -92,6 +93,12 @@ export const Settings = ({ backTo }: { backTo?: RoutesType }): JSX.Element => {
 					value={!!state.doubleXpRates}
 					setValue={(x) => setState({ ...state, doubleXpRates: x })}
 					label={'Double Xp Rates'}
+				/>
+				<ToggleRow
+					value={!!state.minimalGrindingMode}
+					setValue={(x) => setState({ ...state, minimalGrindingMode: x })}
+					label={'Minimal Grinding Mode'}
+					description="Evs and Ivs are ignored for you and opponents"
 				/>
 				<ToggleRow
 					value={!!state.hideMovementButtons}
