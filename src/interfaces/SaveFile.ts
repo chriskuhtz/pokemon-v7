@@ -49,6 +49,7 @@ export interface SettingsObject {
 	randomHeldItems?: boolean;
 	randomLearnSets?: boolean;
 	hideMovementButtons?: boolean;
+	smarterOpponents?: boolean;
 }
 
 export type BerryBushStatus =

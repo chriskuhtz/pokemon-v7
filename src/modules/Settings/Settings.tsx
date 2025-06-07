@@ -23,6 +23,7 @@ export const Settings = (): JSX.Element => {
 		randomAbilities: false,
 		randomHeldItems: false,
 		randomLearnSets: false,
+		smarterOpponents: false,
 	});
 
 	const proceed = () => {
@@ -85,6 +86,12 @@ export const Settings = (): JSX.Element => {
 				/>
 				<h2>Difficulty:</h2> <span />
 				<span />
+				<ToggleRow
+					value={!!state.smarterOpponents}
+					setValue={(x) => setState({ ...state, smarterOpponents: x })}
+					label={'Smarter Opponents:'}
+					description="Double Battle Opponents can choose their second move after the first is executed"
+				/>
 				<ToggleRow
 					value={!!state.rogueLike}
 					setValue={(x) => setState({ ...state, rogueLike: x })}

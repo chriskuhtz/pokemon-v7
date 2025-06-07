@@ -16,8 +16,13 @@ import { handleWholeFieldEffectAttack } from './attackCategories/handleWholeFiel
 import { handleAttackStart } from './handleAttackStart';
 
 import { changeMovePP } from '../../../../../functions/changeMovePP';
+import { chooseOpponentAction } from '../../../../../functions/chooseOpponentAction';
+import { getMovesArray } from '../../../../../functions/getMovesArray';
+import { getSettings } from '../../../../../functions/getPlayerId';
+import { OPPO_ID } from '../../../../../functions/makeChallengerPokemon';
 import { BattleTerrain, TerrainObject } from '../../useBattleTerrain';
 import { WeatherObject } from '../../useBattleWeather';
+import { assignActionToPokemon } from '../../useChooseAction';
 
 export const handleAllAttackCategories = ({
 	attacker,
@@ -38,6 +43,7 @@ export const handleAllAttackCategories = ({
 	removeScreens,
 	logDamage,
 	setTerrain,
+	battleRound,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
@@ -57,6 +63,7 @@ export const handleAllAttackCategories = ({
 	removeScreens: (ownerId: string) => void;
 	logDamage: (x: number) => void;
 	setTerrain: (x: TerrainObject) => void;
+	battleRound: number;
 }) => {
 	let updatedPokemon = [...pokemon];
 	const { updatedPokemon: ua, targets } = handleAttackStart({
@@ -199,37 +206,82 @@ export const handleAllAttackCategories = ({
 
 	//SetPokemon
 
-	setPokemon(
-		updatedPokemon.map((p) => {
-			if (p.id === attacker.id) {
-				const underPressure = battleFieldEffects.some(
-					(b) => b.type === 'pressure' && b.ownerId !== attacker.ownerId
+	const attackHandled = updatedPokemon.map((p) => {
+		if (p.id === attacker.id) {
+			const underPressure = battleFieldEffects.some(
+				(b) => b.type === 'pressure' && b.ownerId !== attacker.ownerId
+			);
+			let updatedAttacker = { ...p };
+			const moveQueue =
+				move.multiHits > 1
+					? [{ ...move, multiHits: move.multiHits - 1, isAMultiHit: true }]
+					: p.moveQueue.slice(1);
+
+			updatedAttacker =
+				//only reduce pp on last multi hit
+				move.isAMultiHit
+					? updatedAttacker
+					: changeMovePP(updatedAttacker, move.name, underPressure ? -2 : -1);
+
+			return {
+				...checkAndHandleFainting(updatedAttacker, pokemon, addMessage),
+				lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
+				biding:
+					updatedAttacker.moveQueue.length > 0
+						? updatedAttacker.biding
+						: undefined,
+				moveQueue,
+			};
+		}
+
+		return {
+			...checkAndHandleFainting(p, pokemon, addMessage),
+		};
+	});
+
+	const settings = getSettings();
+
+	if (settings?.smarterOpponents) {
+		const reconsidered = attackHandled.map((p) => {
+			if (
+				p.id !== attacker.id &&
+				p.ownerId === OPPO_ID &&
+				p.status === 'ONFIELD' &&
+				p.moveQueue.length === 1 &&
+				p.moveQueue.at(0)?.round === battleRound
+			) {
+				let updated: BattlePokemon = { ...p, moveQueue: [] };
+				const action = chooseOpponentAction({
+					controlled: updated,
+					targets: updatedPokemon,
+					effects: battleFieldEffects,
+					weather: battleWeather,
+					terrain,
+				});
+				const attack = getMovesArray(p).find(
+					(m) => m.name === action.actionName
 				);
-				let updatedAttacker = { ...p };
-				const moveQueue =
-					move.multiHits > 1
-						? [{ ...move, multiHits: move.multiHits - 1, isAMultiHit: true }]
-						: p.moveQueue.slice(1);
 
-				updatedAttacker =
-					//only reduce pp on last multi hit
-					move.isAMultiHit
-						? updatedAttacker
-						: changeMovePP(updatedAttacker, move.name, underPressure ? -2 : -1);
-
+				if (!attack) {
+					return updated;
+				}
+				updated = assignActionToPokemon({
+					...action,
+					user: updated,
+					pokemon: attackHandled,
+					battleRound,
+					battleWeather,
+				});
 				return {
-					...checkAndHandleFainting(updatedAttacker, pokemon, addMessage),
-					lastUsedMove: { name: move.name, data: move.data, usedPP: 0 },
-					biding:
-						updatedAttacker.moveQueue.length > 0
-							? updatedAttacker.biding
-							: undefined,
-					moveQueue,
+					...checkAndHandleFainting(updated, pokemon, addMessage),
 				};
 			}
-			return {
-				...checkAndHandleFainting(p, pokemon, addMessage),
-			};
-		})
-	);
+
+			return p;
+		});
+
+		setPokemon(reconsidered);
+	}
+
+	setPokemon(attackHandled);
 };
