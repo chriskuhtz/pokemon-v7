@@ -1,6 +1,7 @@
 import { useContext, useMemo } from 'react';
 import {
 	TbCircleLetterAFilled,
+	TbCircleLetterGFilled,
 	TbCircleLetterMFilled,
 	TbCircleLetterPFilled,
 	TbCircleLetterRFilled,
@@ -112,7 +113,7 @@ export const TroubleMakersIcon = () => {
 	}
 	if (affiliation === 'galactic') {
 		return (
-			<TbCircleLetterPFilled
+			<TbCircleLetterGFilled
 				size={battleSpriteSize}
 				color={typeColors['fighting']}
 				onClick={() =>

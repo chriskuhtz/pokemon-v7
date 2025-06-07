@@ -23,7 +23,7 @@ export const FollowerSprite = ({
 	const { location } = useContext(LocationContext);
 	const { baseSize } = useContext(BaseSizeContext);
 	const firstTeamMemberDexId = useMemo(() => {
-		const mon = saveFile.pokemon.find((p) => p.onTeam);
+		const mon = saveFile.pokemon.find((p) => p.onTeam && p.damage < p.maxHp);
 
 		if (!mon) {
 			return -1;
@@ -36,12 +36,15 @@ export const FollowerSprite = ({
 		if (firstTeamMemberDexId > 741 || firstTeamMemberDexId < 0) {
 			return false;
 		}
+		if (saveFile.flying) {
+			return false;
+		}
 		return isPassable(
 			getNextLocation(location, getOppositeDirection(location.orientation)),
 			map,
 			occupants,
 			false,
-			saveFile.flying ?? false,
+			false,
 			false
 		);
 	}, [firstTeamMemberDexId, location, map, occupants, saveFile.flying]);
