@@ -84,6 +84,7 @@ const ChangeLogV46 = (): JSX.Element => {
 		<>
 			<h3>.46:</h3>
 			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>follower pokemon</li>
 				<li>UI Improvements</li>
 				<li>All 16 Gym Leaders</li>
 			</ol>
