@@ -285,6 +285,7 @@ export const handleAllAttackCategories = ({
 		});
 
 		setPokemon(reconsidered);
+		return;
 	}
 
 	setPokemon(attackHandled);
