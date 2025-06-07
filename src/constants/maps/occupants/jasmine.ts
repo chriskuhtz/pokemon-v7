@@ -1,4 +1,8 @@
-import { Occupant, OverworldNpc } from '../../../interfaces/OverworldMap';
+import {
+	Occupant,
+	OverworldNpc,
+	OverworldPokemon,
+} from '../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 
 const jasmineBase: Omit<
@@ -10,6 +14,19 @@ const jasmineBase: Omit<
 	orientation: 'DOWN',
 	type: 'NPC',
 	sprite: SpriteEnum.jasmine,
+};
+
+export const jasminesAron: OverworldPokemon = {
+	type: 'POKEMON',
+	dialogue: ['a,', 'a,', 'ron'],
+	x: 26,
+	y: 6,
+	orientation: 'DOWN',
+	dexId: 304,
+	id: 'jasmines-aron',
+	conditionFunction: (s) =>
+		s.campUpgrades['invite steel pokemon expert jasmine'] &&
+		s.quests['catch an exceptional steel pokemon for jasmine'] !== 'COLLECTED',
 };
 
 export const jasmineLine: Occupant[] = [
