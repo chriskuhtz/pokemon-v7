@@ -22,6 +22,7 @@ export const campUpgradeNames = [
 	'invite ghost expert morty',
 	'invite fighting expert chuck',
 	'invite steel pokemon expert jasmine',
+	'invite ice pokemon expert pryce',
 	'invite dragon pokemon expert clair',
 	'invite professor rowan',
 	'invite professor elm',
@@ -97,6 +98,7 @@ export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
 	'invite ghost expert morty': 'Research',
 	'invite fighting expert chuck': 'Research',
 	'invite steel pokemon expert jasmine': 'Research',
+	'invite ice pokemon expert pryce': 'Research',
 	'invite dragon pokemon expert clair': 'Research',
 	'invite flying pokemon expert falkner': 'Research',
 	'invite normal pokemon expert whitney': 'Research',
@@ -162,6 +164,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'invite fighting expert chuck': ['machete certification'],
 	'invite steel pokemon expert jasmine': ['sledge hammer certification'],
 	'invite dragon pokemon expert clair': ['swimming certification'],
+	'invite ice pokemon expert pryce': ['machete certification'],
 	'invite flying pokemon expert falkner': ['machete certification'],
 	'invite normal pokemon expert whitney': ['shovel certification'],
 	'invite professor rowan': baseRequirements,
@@ -239,6 +242,8 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 		'The Gym Leader from Olivine City studies steel pokemon',
 	'invite dragon pokemon expert clair':
 		'The Gym Leader from Blackthorn City studies dragon pokemon',
+	'invite ice pokemon expert pryce':
+		'The Gym Leader from Mahogany City studies ice pokemon',
 	'invite professor rowan':
 		'professor rowan collects pokemon from all over the world',
 	'invite professor elm': 'professor elm studies pokemon evolution',

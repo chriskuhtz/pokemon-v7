@@ -21,6 +21,7 @@ import { jasmineLine, jasminesAron } from './jasmine';
 import { lookerLine } from './lookerLine';
 import { mortyLine, mortysGengar } from './mortyLine';
 import { pikachuFanLine } from './pikachuFanLine';
+import { pryceLine, prycesMamoswine } from './pryce';
 import { whitneyLine, whitneysClefairy } from './whitney';
 
 const trainingField: Occupant[] = [
@@ -477,6 +478,8 @@ export const campOccupants: OverworldMap['occupants'] = [
 	...pikachuFanLine,
 	...clairLine,
 	clairsKingdra,
+	...pryceLine,
+	prycesMamoswine,
 	{
 		type: 'ROUTER_NPC',
 		to: 'CURATOR',

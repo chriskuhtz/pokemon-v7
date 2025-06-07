@@ -2482,6 +2482,47 @@ export const specialTrainers: Challenger[] = [
 	},
 	{
 		type: 'TRAINER',
+		id: 'Gym Leader Pryce',
+		team: [
+			makeChallengerPokemon({
+				name: 'avalugg',
+				xp: 125000,
+				heldItemName: 'babiri-berry',
+			}),
+
+			makeChallengerPokemon({
+				name: 'weavile',
+				xp: 125000,
+				heldItemName: 'chople-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'dewgong',
+				xp: 125000,
+				heldItemName: 'wacan-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'delibird',
+				xp: 125000,
+				heldItemName: 'charti-berry',
+			}),
+			makeChallengerPokemon({
+				name: 'mamoswine',
+				xp: 125000,
+				heldItemName: 'charti-berry',
+			}),
+		],
+		inventory: EmptyInventory,
+		availableAfter: 'maximize the effort values of an ice pokemon',
+		trainer: {
+			id: 'Gym Leader Pryce',
+			sprite: SpriteEnum.pryce,
+			profilePicture:
+				'https://archives.bulbagarden.net/media/upload/4/4f/VSPryce.png',
+		},
+		battleTeamConfig: { assignHeldItem: false },
+	},
+	{
+		type: 'TRAINER',
 		id: 'Gym Leader Clair',
 		team: [
 			makeChallengerPokemon({
@@ -2515,7 +2556,7 @@ export const specialTrainers: Challenger[] = [
 		availableAfter: 'reach max. friendship with a dragon pokemon',
 		trainer: {
 			id: 'Gym Leader Clair',
-			sprite: SpriteEnum.jasmine,
+			sprite: SpriteEnum.clair,
 			profilePicture:
 				'https://archives.bulbagarden.net/media/upload/f/fc/VSClair.png',
 		},

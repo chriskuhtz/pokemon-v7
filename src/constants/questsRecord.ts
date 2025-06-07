@@ -275,6 +275,7 @@ export const questNames = [
 	'defeat bugsy',
 	'defeat whitney',
 	'defeat jasmine',
+	'defeat pryce',
 	'defeat clair',
 	'revive a fossil',
 	'revive all different fossils',
@@ -443,6 +444,7 @@ export const questNames = [
 	"catch whitney's favorite cute pokemon",
 	'catch an exceptional steel pokemon for jasmine',
 	'reach max. friendship with a dragon pokemon',
+	'maximize the effort values of an ice pokemon',
 	'defeat an imported challenger',
 	'defeat an imported challenger at lvl 20 or higher',
 	'defeat an imported challenger at lvl 40 or higher',
@@ -1451,6 +1453,22 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s: SaveFile) => {
 			return s.pokemon.some(
 				(p) => internalDex[p.name].types.includes('dragon') && p.happiness > 250
+			);
+		},
+		kind: 'QUEST_LINE',
+	},
+	'maximize the effort values of an ice pokemon': {
+		category: 'TRAINING',
+		rewardItems: { 'ice-gem': 10, 'yache-berry': 10 },
+		researchPoints: 100,
+		conditionFunction: (s: SaveFile) => {
+			return s.pokemon.some(
+				(p) =>
+					internalDex[p.name].types.includes('ice') &&
+					Object.values(p.effortValues).reduce(
+						(sum, summand) => sum + summand,
+						0
+					) >= 510
 			);
 		},
 		kind: 'QUEST_LINE',
