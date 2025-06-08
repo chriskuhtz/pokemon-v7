@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
+import { useContext, useState } from 'react';
+import { FaArrowLeft, FaArrowRight, FaSearch } from 'react-icons/fa';
 import { BagLimitBar } from '../../components/BagLimitBar/BagLimitBar';
 import {
 	filterItemsByType,
@@ -7,6 +7,7 @@ import {
 	useFilteredInventory,
 } from '../../components/ItemsFilter/ItemsFilter';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
+import { battleSpriteSize } from '../../constants/gameData';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { EmptyInventory, joinInventories } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
@@ -15,6 +16,7 @@ import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
 export const StorageChest = () => {
+	const [search, setSearch] = useState<string>('');
 	const { setActiveTabReducer, saveFile, patchSaveFileReducer } =
 		useContext(SaveFileContext);
 
@@ -87,7 +89,14 @@ export const StorageChest = () => {
 			headline="Storage Chest:"
 		>
 			<BagLimitBar />
-
+			<Stack mode="row" justifyContent="center">
+				<FaSearch size={battleSpriteSize} />{' '}
+				<input
+					value={search}
+					onChange={(e) => setSearch(e.target.value.toLowerCase())}
+				/>
+			</Stack>
+			;
 			<div
 				style={{
 					display: 'grid',
@@ -99,7 +108,7 @@ export const StorageChest = () => {
 					<h3>Bag:</h3>
 					<button onClick={storeEverything}>Store Everything</button>
 					{Object.entries(saveFile.bag)
-						.filter(([, amount]) => amount > 0)
+						.filter(([key, amount]) => amount > 0 && key.includes(search))
 						.map(([item, amount]) => (
 							<Card
 								actionElements={[
@@ -120,9 +129,10 @@ export const StorageChest = () => {
 				</Stack>
 				<Stack mode="column">
 					<h3>Storage:</h3>
-					{buttonsForStorage}
-					{Object.entries(filteredStorage).filter(([, amount]) => amount > 0)
-						.length > 0 &&
+					{!search && buttonsForStorage}
+					{Object.entries(filteredStorage).filter(([, amount]) => {
+						return amount > 0;
+					}).length > 0 &&
 						currentFilter && (
 							<Card
 								key={'storage' + 'take all'}
@@ -133,7 +143,7 @@ export const StorageChest = () => {
 							/>
 						)}
 					{Object.entries(filteredStorage)
-						.filter(([, amount]) => amount > 0)
+						.filter(([key, amount]) => amount > 0 && key.includes(search))
 						.map(([item, amount]) => (
 							<Card
 								key={'storage' + item + amount}
