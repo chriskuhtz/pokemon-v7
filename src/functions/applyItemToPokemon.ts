@@ -23,6 +23,7 @@ import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { calculateLevelData } from './calculateLevelData';
 import { changeMovePP } from './changeMovePP';
 import { getMiddleOfThree } from './getMiddleOfThree';
+import { hasAilment } from './hasAilment';
 import { removeHealableAilments } from './removeHealableAilments';
 
 export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
@@ -280,7 +281,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
 	if (
 		(item === 'yellow-flute' || item === 'persim-berry') &&
 		isBattlePokemon(pokemon) &&
-		pokemon.secondaryAilments.some((ail) => ail.type === 'confusion')
+		hasAilment(pokemon, 'confusion')
 	) {
 		if (addMessage) {
 			addMessage({ message: `confusion healed` });

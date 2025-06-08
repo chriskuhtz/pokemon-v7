@@ -98,7 +98,7 @@ export const Settings = ({ backTo }: { backTo?: RoutesType }): JSX.Element => {
 					value={!!state.minimalGrindingMode}
 					setValue={(x) => setState({ ...state, minimalGrindingMode: x })}
 					label={'Minimal Grinding Mode'}
-					description="Evs and Ivs are ignored for you and opponents"
+					description="Effort- and Individual Stats are ignored for you and opponents"
 				/>
 				<ToggleRow
 					value={!!state.hideMovementButtons}

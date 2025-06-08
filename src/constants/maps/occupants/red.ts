@@ -15,6 +15,7 @@ import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
+import { trickXP } from '../../gameData';
 
 export const redId = 'trainer red';
 const redTeam = (s: SaveFile): OwnedPokemon[] => {
@@ -320,6 +321,10 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
 		slowbro,
 		raichu,
 	];
+
+	if (highestXpOnTeam === trickXP) {
+		return possibilities;
+	}
 	const team: OwnedPokemon[] = [];
 	const numberOfMembers = () => {
 		if (highestXpOnTeam < 50 * 50 * 50) {
@@ -345,7 +350,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
 	return team;
 };
 
-const red: OverworldTrainer = {
+export const red: OverworldTrainer = {
 	type: 'TRAINER',
 	spriteGeneration: 1,
 	x: 0,

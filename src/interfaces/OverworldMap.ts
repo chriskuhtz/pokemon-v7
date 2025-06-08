@@ -265,6 +265,7 @@ export interface OverworldMap {
 	tilesetUrl: string;
 	area: 'CAVE' | 'OPEN' | 'BUILDING';
 	foggy?: boolean;
+	peaceful?: boolean;
 }
 
 export interface TileMap {

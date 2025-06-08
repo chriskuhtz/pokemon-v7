@@ -138,6 +138,21 @@ export type ImportedChallenger = Omit<
 	mapId: MapId;
 	team: OwnedPokemon[];
 };
+
+export type RampagingPokemon = {
+	route: MapId;
+	name: PokemonName;
+	id: string;
+	x: number;
+	y: number;
+};
+
+export type TroubleMakers = {
+	route: MapId;
+	trainers: OverworldTrainerStump[];
+	affiliation: EvilTeam;
+	leavesAt?: number;
+};
 export interface SaveFile {
 	badges: BadgeName[];
 	playerId: string;
@@ -172,20 +187,9 @@ export interface SaveFile {
 	currentSwarm?: PokemonSwarm;
 	currentStrongSwarm?: PokemonSwarm;
 	currentDistortionSwarm?: PokemonSwarm;
-	currentRampagingPokemon?: {
-		route: MapId;
-		name: PokemonName;
-		id: string;
-		x: number;
-		y: number;
-	};
+	currentRampagingPokemon?: RampagingPokemon;
 	rangerLevel?: number;
-	troubleMakers?: {
-		route: MapId;
-		trainers: OverworldTrainerStump[];
-		affiliation: EvilTeam;
-		leavesAt?: number;
-	};
+	troubleMakers?: TroubleMakers;
 	seedVault: ItemType[];
 	pokedex: Pokedex;
 	cookingSkill?: number;

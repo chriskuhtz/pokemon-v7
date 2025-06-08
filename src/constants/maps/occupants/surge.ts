@@ -39,7 +39,7 @@ const surgeCondition = (s: SaveFile) => {
 };
 
 export const surgeId = 'trainer_surge';
-const trainerSurge: OverworldTrainer = {
+export const trainerSurge: OverworldTrainer = {
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/4/46/VSLt_Surge.png',
 	type: 'TRAINER',

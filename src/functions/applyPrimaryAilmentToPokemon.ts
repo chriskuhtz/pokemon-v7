@@ -6,7 +6,7 @@ import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
 import { getMiddleOfThree } from './getMiddleOfThree';
-import { getTypeNames } from './getTypeNames';
+import { hasType } from './hasType';
 import { isKO } from './isKo';
 
 export const applyPrimaryAilmentToPokemon = (
@@ -65,7 +65,7 @@ export const applyPrimaryAilmentToPokemon = (
 	if (
 		ailment === 'burn' &&
 		//fire pokemon cant get burned
-		!getTypeNames(target).includes('fire') &&
+		!hasType(target, 'fire') &&
 		//flash fire pokemon cant get burned
 		!['flash-fire', 'water-veil', 'water-bubble', 'thermal-exchange'].includes(
 			target.ability
@@ -96,7 +96,7 @@ export const applyPrimaryAilmentToPokemon = (
 	if (
 		ailment === 'paralysis' &&
 		//electric pokemon cant get paralyzed
-		!getTypeNames(target).includes('electric') &&
+		!hasType(target, 'electric') &&
 		//limber pokemon cant get paralyzed
 		target.ability !== 'limber'
 	) {
@@ -130,7 +130,7 @@ export const applyPrimaryAilmentToPokemon = (
 	if (
 		ailment === 'freeze' &&
 		//ice pokemon cant get frozen
-		!getTypeNames(target).includes('ice') &&
+		!hasType(target, 'ice') &&
 		target.ability !== 'magma-armor'
 	) {
 		addMessage({
@@ -180,8 +180,7 @@ export const applyPrimaryAilmentToPokemon = (
 
 	const blockPoisonWithType =
 		applicator.ability !== 'corrosion' &&
-		(getTypeNames(target).includes('poison') ||
-			getTypeNames(target).includes('steel'));
+		(hasType(target, 'poison') || hasType(target, 'steel'));
 	if (
 		(ailment === 'poison' || ailment === 'toxic') &&
 		!['immunity'].includes(target.ability) &&

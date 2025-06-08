@@ -68,6 +68,10 @@ export const useOverworldMovement = (
 		setNextInput(undefined);
 		setEncounterChance(baseEncounterRate);
 
+		if (map.peaceful) {
+			return;
+		}
+
 		if (
 			!(
 				map.tileMap.encounterLayer[playerLocation.y][playerLocation.x] ||
@@ -130,11 +134,8 @@ export const useOverworldMovement = (
 		currentSwarm,
 		encounterChance,
 		encounterRateModifier.factor,
-		map.tileMap.encounterLayer,
-		map.tileMap.waterLayer,
-		playerLocation.mapId,
-		playerLocation.x,
-		playerLocation.y,
+		map,
+		playerLocation,
 		pokemon,
 		quests,
 		reduceEncounterRate,

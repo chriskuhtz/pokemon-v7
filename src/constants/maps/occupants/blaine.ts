@@ -42,7 +42,7 @@ const blaineCondition = (s: SaveFile) => {
 };
 
 export const blaineId = 'trainer_blaine';
-const trainerBlaine: OverworldTrainer = {
+export const trainerBlaine: OverworldTrainer = {
 	type: 'TRAINER',
 	x: 43,
 	y: 41,

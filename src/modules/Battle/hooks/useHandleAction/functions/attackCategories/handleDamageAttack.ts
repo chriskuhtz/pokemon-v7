@@ -13,7 +13,7 @@ import { checkThiefMoves } from '../../../../../../functions/checkThiefMoves';
 import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
 import { getPlayerId } from '../../../../../../functions/getPlayerId';
-import { getTypeNames } from '../../../../../../functions/getTypeNames';
+import { hasType } from '../../../../../../functions/hasType';
 import { isKO } from '../../../../../../functions/isKo';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import { isRemovedByRapidSpin } from '../../../../../../interfaces/Ailment';
@@ -126,10 +126,7 @@ export const handleDamageAttack = ({
 			return p;
 		});
 	}
-	if (
-		move.name === 'burn-up' &&
-		!getTypeNames(updatedAttacker).includes('fire')
-	) {
+	if (move.name === 'burn-up' && !hasType(updatedAttacker, 'fire')) {
 		addMessage({ message: 'it failed' });
 		return pokemon.map((p) => {
 			if (p.id === updatedAttacker.id) {
@@ -210,10 +207,7 @@ export const handleDamageAttack = ({
 		updatedTarget = { ...updatedTarget, primaryAilment: undefined };
 	}
 	//smack down
-	if (
-		move.name === 'smack-down' &&
-		getTypeNames(updatedTarget).includes('flying')
-	) {
+	if (move.name === 'smack-down' && hasType(updatedTarget, 'flying')) {
 		updatedTarget = {
 			...updatedTarget,
 			secondaryAilments: [
@@ -433,7 +427,7 @@ export const handleDamageAttack = ({
 		};
 	}
 	if (getHeldItem(updatedTarget) === 'air-balloon' && actualDamage > 0) {
-		addMessage({ message: `${updatedTarget}´s air balloon popped` });
+		addMessage({ message: `${updatedTarget.name}´s air balloon popped` });
 		updatedTarget = {
 			...updatedTarget,
 			heldItemName: undefined,

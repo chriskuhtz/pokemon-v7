@@ -3,6 +3,7 @@ import { calculateLevelData } from '../functions/calculateLevelData';
 
 import { sumOfIvs } from '../functions/sumOfIvs';
 
+import { hasType } from '../functions/hasType';
 import {
 	apricorns,
 	apricornTable,
@@ -11,13 +12,9 @@ import {
 	fossilTable,
 	smallExpCandyPackage,
 } from '../interfaces/Item';
-import { getRandomNature } from '../interfaces/Natures';
 import { Quest } from '../interfaces/Quest';
 import { SaveFile } from '../interfaces/SaveFile';
-import {
-	EmptyStatObject,
-	generateRandomStatObject,
-} from '../interfaces/StatObject';
+import { generateRandomStatObject } from '../interfaces/StatObject';
 import { moveUnlockPayments } from '../modules/MoveTutor/MoveTutor';
 import { highBstPokemon, lowBstPokemon, midBstPokemon } from './baseStatRecord';
 import {
@@ -25,6 +22,7 @@ import {
 	campUpgradeCostScale,
 	campUpgradeNames,
 } from './campUpgrades';
+import { testPokemon } from './gameData';
 import { catchQuests } from './generatedQuests/catchQuests';
 import { gymLeaderQuests } from './generatedQuests/gymLeaderQuests';
 import { travellingTrainerQuests } from './generatedQuests/travellingTrainersQuests';
@@ -35,7 +33,6 @@ import {
 	getSwarmOptions,
 	getUnderRockEncounters,
 } from './internalDex';
-import { internalDex } from './internalDexData';
 import { allRocketCampTrainersDefeated } from './maps/occupants/rocketCampOccupants';
 import { PokemonName, pokemonNames } from './pokemonNames';
 import {
@@ -577,28 +574,14 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		category: 'EXPLORATION',
 		rewardItems: {},
 		rewardPokemon: {
-			caughtAtDate: new Date().getTime(),
-			growthRate: 'medium',
-			unlockedMoves: ['extrasensory'],
-			fixedAbility: true,
-			shiny: true,
-			maxHp: 30,
-			effortValues: EmptyStatObject,
-			ppBoostedMoves: [],
-			caughtOnMap: 'camp',
-			gender: 'MALE',
-			stepsWalked: 0,
-			ownerId: '',
-			damage: 0,
-			id: '',
-			ball: 'poke-ball',
-			ability: 'download',
+			...testPokemon,
+			id: v4(),
 			name: 'raichu-alola',
-			xp: 8000,
-			nature: 'adamant',
-			intrinsicValues: generateRandomStatObject(31),
-			happiness: 70,
-			firstMove: { name: 'extrasensory', usedPP: 0 },
+			shiny: true,
+			caughtAtDate: new Date().getTime(),
+			xp: 125,
+			intrinsicValues: generateRandomStatObject(31, 25),
+			caughtOnMap: 'camp',
 		},
 		targetPokemon: [
 			'pikachu-rock-star',
@@ -1440,7 +1423,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s: SaveFile) => {
 			return s.pokemon.some(
 				(p) =>
-					internalDex[p.name].types.includes('steel') &&
+					hasType(p, 'steel') &&
 					Object.values(p.intrinsicValues).some((v) => v === 31)
 			);
 		},
@@ -1451,9 +1434,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'dragon-gem': 10, 'haban-berry': 10 },
 		researchPoints: 100,
 		conditionFunction: (s: SaveFile) => {
-			return s.pokemon.some(
-				(p) => internalDex[p.name].types.includes('dragon') && p.happiness > 250
-			);
+			return s.pokemon.some((p) => hasType(p, 'dragon') && p.happiness > 250);
 		},
 		kind: 'QUEST_LINE',
 	},
@@ -1464,7 +1445,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s: SaveFile) => {
 			return s.pokemon.some(
 				(p) =>
-					internalDex[p.name].types.includes('ice') &&
+					hasType(p, 'ice') &&
 					Object.values(p.effortValues).reduce(
 						(sum, summand) => sum + summand,
 						0
@@ -1505,28 +1486,14 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...expCandyPackage,
 		},
 		rewardPokemon: {
-			caughtAtDate: new Date().getTime(),
-			growthRate: 'medium',
-			unlockedMoves: ['drill-peck', 'swords-dance'],
-			fixedAbility: true,
-			shiny: true,
-			maxHp: 30,
-			effortValues: EmptyStatObject,
-			ppBoostedMoves: [],
-			caughtOnMap: 'camp',
-			gender: 'MALE',
-			stepsWalked: 0,
-			ownerId: '',
-			damage: 0,
-			id: '',
-			ball: 'poke-ball',
-			ability: 'volt-absorb',
+			...testPokemon,
+			id: v4(),
 			name: 'aerodactyl',
+			shiny: true,
+			caughtAtDate: new Date().getTime(),
 			xp: 125,
-			nature: 'adamant',
-			intrinsicValues: generateRandomStatObject(31),
-			happiness: 70,
-			firstMove: { name: 'drill-peck', usedPP: 0 },
+			intrinsicValues: generateRandomStatObject(31, 25),
+			caughtOnMap: 'camp',
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {
@@ -1544,28 +1511,14 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...expCandyPackage,
 		},
 		rewardPokemon: {
-			caughtAtDate: new Date().getTime(),
-			growthRate: 'medium',
-			unlockedMoves: ['earthquake'],
-			fixedAbility: true,
-			shiny: true,
-			maxHp: 30,
-			effortValues: EmptyStatObject,
-			ppBoostedMoves: [],
-			caughtOnMap: 'camp',
-			gender: 'MALE',
-			stepsWalked: 0,
-			ownerId: '',
-			damage: 0,
-			id: '',
-			ball: 'poke-ball',
-			ability: 'huge-power',
+			...testPokemon,
+			id: v4(),
 			name: 'gible',
+			shiny: true,
+			caughtAtDate: new Date().getTime(),
 			xp: 125,
-			nature: 'adamant',
-			intrinsicValues: generateRandomStatObject(31),
-			happiness: 70,
-			firstMove: { name: 'earthquake', usedPP: 0 },
+			intrinsicValues: generateRandomStatObject(31, 25),
+			caughtOnMap: 'camp',
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {
@@ -1583,28 +1536,14 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...expCandyPackage,
 		},
 		rewardPokemon: {
-			fixedAbility: true,
-			shiny: true,
-			maxHp: 30,
-			effortValues: EmptyStatObject,
-			ppBoostedMoves: [],
-			caughtOnMap: 'camp',
-			gender: 'MALE',
-			stepsWalked: 0,
-			ownerId: '',
-			damage: 0,
-			id: '',
-			ball: 'poke-ball',
-			ability: 'speed-boost',
+			...testPokemon,
+			id: v4(),
 			name: 'larvitar',
-			xp: 125,
-			nature: 'adamant',
-			intrinsicValues: generateRandomStatObject(31),
-			happiness: 70,
-			firstMove: { name: 'earthquake', usedPP: 0 },
-			unlockedMoves: [],
-			growthRate: 'medium',
+			shiny: true,
 			caughtAtDate: new Date().getTime(),
+			xp: 125,
+			intrinsicValues: generateRandomStatObject(31, 25),
+			caughtOnMap: 'camp',
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {
@@ -2431,57 +2370,28 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'lucky-egg': 1,
 		},
 		rewardPokemon: {
-			caughtAtDate: new Date().getTime(),
-			gender: 'MALE',
-			intrinsicValues: generateRandomStatObject(31),
-			effortValues: EmptyStatObject,
-			ppBoostedMoves: [],
-			caughtOnMap: 'camp',
-			stepsWalked: 0,
-			maxHp: 30,
-			xp: 125,
-			happiness: 70,
-			heightModifier: 0.5,
-			weightModifier: 0.5,
-			nature: 'lonely',
-			unlockedMoves: ['flame-charge', 'swords-dance', 'sacred-fire'],
-			ability: 'competitive',
+			...testPokemon,
 			id: v4(),
-			damage: 0,
-			ownerId: '',
 			name: 'growlithe',
-			ball: 'poke-ball',
 			shiny: true,
-			growthRate: 'medium',
-			fixedAbility: true,
-			firstMove: { name: 'sacred-fire', usedPP: 0 },
+			caughtAtDate: new Date().getTime(),
+			xp: 125,
+			intrinsicValues: generateRandomStatObject(31, 25),
+			caughtOnMap: 'camp',
 		},
 	},
 	'defeat giovanni': {
 		category: 'BATTLE',
 		rewardItems: {},
 		rewardPokemon: {
-			caughtAtDate: new Date().getTime(),
-			growthRate: 'medium',
-			unlockedMoves: ['calm-mind'],
-			shiny: true,
-			maxHp: 30,
-			effortValues: EmptyStatObject,
-			ppBoostedMoves: [],
-			caughtOnMap: 'camp',
-			gender: 'MALE',
-			stepsWalked: 0,
-			ownerId: '',
-			damage: 0,
-			id: '',
-			ball: 'master-ball',
-			ability: 'pressure',
+			...testPokemon,
+			id: v4(),
 			name: 'mewtwo',
+			ball: 'master-ball',
+			caughtAtDate: new Date().getTime(),
 			xp: 125,
-			nature: getRandomNature(),
-			intrinsicValues: generateRandomStatObject(31),
-			happiness: 70,
-			firstMove: { name: 'calm-mind', usedPP: 0 },
+			intrinsicValues: generateRandomStatObject(31, 25),
+			caughtOnMap: 'camp',
 		},
 		researchPoints: 100,
 		conditionFunction: (s) => {

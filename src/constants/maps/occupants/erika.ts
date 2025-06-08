@@ -36,7 +36,7 @@ const erikaCondition = (s: SaveFile) => {
 };
 
 export const erikaId = 'Gym Leader Erika';
-const trainerErika: OverworldTrainer = {
+export const trainerErika: OverworldTrainer = {
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/5/5a/VSErika.png',
 	type: 'TRAINER',

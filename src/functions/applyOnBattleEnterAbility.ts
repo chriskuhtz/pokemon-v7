@@ -16,6 +16,7 @@ import { getHeldItem } from './getHeldItem';
 import { getHighestStat } from './getHighestStat';
 import { getTypeNames } from './getTypeNames';
 import { isKO } from './isKo';
+import { isOnGround } from './isOnGround';
 
 export const applyOnBattleEnterAbilityAndEffects = ({
 	user,
@@ -664,20 +665,14 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 	) {
 		updatedPokemon = updatedPokemon.map((p) => {
 			if (p.id === user.id) {
-				if (
-					(getTypeNames(p).includes('flying') ||
-						p.ability === 'levitate' ||
-						getHeldItem(p) === 'air-balloon' ||
-						getHeldItem(p) === 'heavy-duty-boots') &&
-					getHeldItem(p) !== 'iron-ball'
-				) {
-					return p;
-				} else {
+				if (isOnGround(user) && getHeldItem(p) !== 'heavy-duty-boots') {
 					addMessage({ message: `${user.name} is hurt by spikes` });
 					return {
 						...p,
 						damage: p.damage + Math.floor(p.stats.hp * SPIKES_FACTOR),
 					};
+				} else {
+					return p;
 				}
 			}
 			return p;
@@ -721,15 +716,7 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 	) {
 		updatedPokemon = updatedPokemon.map((p) => {
 			if (p.id === user.id) {
-				if (
-					(getTypeNames(p).includes('flying') ||
-						p.ability === 'levitate' ||
-						getHeldItem(p) === 'air-balloon' ||
-						getHeldItem(p) === 'heavy-duty-boots') &&
-					getHeldItem(p) !== 'iron-ball'
-				) {
-					return p;
-				} else {
+				if (isOnGround(user) && getHeldItem(p) !== 'heavy-duty-boots') {
 					return applyPrimaryAilmentToPokemon(
 						p,
 						p,
@@ -740,6 +727,8 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 						terrain,
 						'toxic spikes'
 					).updatedTarget;
+				} else {
+					return p;
 				}
 			}
 			return p;
@@ -752,15 +741,7 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 	) {
 		updatedPokemon = updatedPokemon.map((p) => {
 			if (p.id === user.id) {
-				if (
-					(getTypeNames(p).includes('flying') ||
-						p.ability === 'levitate' ||
-						getHeldItem(p) === 'air-balloon' ||
-						getHeldItem(p) === 'heavy-duty-boots') &&
-					getHeldItem(p) !== 'iron-ball'
-				) {
-					return p;
-				} else {
+				if (isOnGround(user) && getHeldItem(p) !== 'heavy-duty-boots') {
 					return applyStatChangeToPokemon(
 						p,
 						'speed',
@@ -770,6 +751,8 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 						addMessage,
 						'sticky web'
 					);
+				} else {
+					return p;
 				}
 			}
 			return p;

@@ -6,6 +6,7 @@ import { zigzagoonForagers } from '../../../hooks/useZigzagoonForagers';
 import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { amoongussCompostResearchers } from '../../../modules/AmoongussResearcher/AmoongussResearcher';
+import { battleJournalist } from '../../../modules/BattleJournalist/BattleJournalist';
 import { dragoniteTaxi } from '../../../modules/DragoniteTaxi/DragoniteTaxi';
 import { miltankFarm } from '../../../modules/MiltankFarm/MiltankFarm';
 import { seedvaultResearcher } from '../../../modules/SeedVault/SeedVault';
@@ -82,6 +83,7 @@ const trainingField: Occupant[] = [
 		],
 		conditionFunction: (s) => s.campUpgrades['invite ability tutor'],
 	},
+	battleJournalist,
 ];
 
 export const campOccupants: OverworldMap['occupants'] = [

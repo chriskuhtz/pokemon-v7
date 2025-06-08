@@ -65,6 +65,7 @@ export const campUpgradeNames = [
 	'invite nature tutor',
 	'invite ability tutor',
 	'pidgeot rider certification',
+	'battle journalist',
 ] as const;
 
 export type CampUpgrade = (typeof campUpgradeNames)[number];
@@ -143,6 +144,7 @@ export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
 	'dragonite taxi': 'Exploration',
 	'pidgeot rider certification': 'Quest Reward',
 	'warden certification': 'Quest Reward',
+	'battle journalist': 'Training',
 };
 
 export const baseRequirements: CampUpgrade[] = [
@@ -210,6 +212,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'team slot 5': ['team slot 4'],
 	'team slot 6': ['team slot 5'],
 	'dragonite taxi': ['swimming certification'],
+	'battle journalist': baseRequirements,
 
 	//"Quest rewards"
 	'pidgeot rider certification': [],
@@ -305,6 +308,8 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 		'Expert flying Pokemon Trainers can ride on their pokemon',
 	'warden certification':
 		'Wardens are strong rangers that take on more difficult tasks',
+	'battle journalist':
+		'He knows everything about the strong trainers in the region',
 };
 
 export const campUpgradeCostScale = 25;

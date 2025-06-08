@@ -1,7 +1,11 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { TimeOfDayIcon } from '../../components/TimeOfDayIcon/TimeOfDayIcon';
-import { WeatherIcon } from '../../components/WeatherIcon/WeatherIcon';
+import {
+	TerrainIcon,
+	WeatherIcon,
+} from '../../components/WeatherIcon/WeatherIcon';
 import { MoveName } from '../../constants/checkLists/movesCheckList';
+import { portraitMode } from '../../constants/gameData';
 import {
 	applyEndOfTurnAbility,
 	applyGrassyTerrainHeal,
@@ -43,7 +47,6 @@ import { useBattleTerrain } from './hooks/useBattleTerrain';
 import { useBattleWeather } from './hooks/useBattleWeather';
 import { useChooseAction } from './hooks/useChooseAction';
 import { useHandleAction } from './hooks/useHandleAction/useHandleAction';
-import { portraitMode } from '../../constants/gameData';
 
 export type ActionType =
 	| MoveName
@@ -790,6 +793,7 @@ export const BattleField = ({
 				<div style={{ position: 'absolute', top: 0, left: '48dvw' }}>
 					<WeatherIcon weather={battleWeather} />
 					<TimeOfDayIcon />
+					<TerrainIcon terrain={battleTerrain} />
 				</div>
 				<div
 					style={{

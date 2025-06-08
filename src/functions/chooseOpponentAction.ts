@@ -9,6 +9,7 @@ import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { determineHighestDamage } from './determineHighestDamage';
 import { filterTargets } from './filterTargets';
 import { getMovesArray } from './getMovesArray';
+import { hasAilment } from './hasAilment';
 
 export const chooseOpponentAction = ({
 	controlled,
@@ -93,8 +94,7 @@ export const chooseOpponentAction = ({
 	const canIngrain =
 		moves.find((m) => m.name === 'ingrain') &&
 		!probablyDead &&
-		!controlled.secondaryAilments.some((s) => s.type === 'ingrained');
-
+		!hasAilment(controlled, 'ingrained');
 	if (canIngrain) {
 		return {
 			userId: controlled.id,

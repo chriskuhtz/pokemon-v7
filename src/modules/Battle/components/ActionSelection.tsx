@@ -9,7 +9,9 @@ import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
 import { getHeldItem } from '../../../functions/getHeldItem';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { getPlayerPokemon } from '../../../functions/getPlayerPokemon';
-import { getTypeNames } from '../../../functions/getTypeNames';
+import { hasAilment } from '../../../functions/hasAilment';
+import { hasType } from '../../../functions/hasType';
+import { isOnGround } from '../../../functions/isOnGround';
 import { isTrapped } from '../../../functions/isTrapped';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
@@ -48,25 +50,21 @@ export const canRunOrSwitch = (
 			(b) => b.type === 'shadow-tag' && b.ownerId !== controlled.ownerId
 		);
 	const arenaTrapped =
-		controlled.ability !== 'levitate' &&
-		!getTypeNames(controlled).includes('flying') &&
+		isOnGround(controlled) &&
 		battleFieldEffects.some(
 			(b) => b.type === 'arena-trap' && b.ownerId !== controlled.ownerId
 		);
 	const magnetPulled =
-		getTypeNames(controlled).includes('steel') &&
+		hasType(controlled, 'steel') &&
 		battleFieldEffects.some(
 			(b) => b.type === 'magnet-pull' && b.ownerId !== controlled.ownerId
 		);
 	const spiderWebbed = battleFieldEffects.some(
 		(b) => b.type === 'spider-web' && b.ownerId !== controlled.ownerId
 	);
-	const meanLooked = controlled.secondaryAilments.some(
-		(b) => b.type === 'mean-looked'
-	);
-	const ingrained = controlled.secondaryAilments.some(
-		(b) => b.type === 'ingrained'
-	);
+	const meanLooked = hasAilment(controlled, 'mean-looked');
+	const ingrained = hasAilment(controlled, 'ingrained');
+
 	return !(
 		trapped ||
 		shadowTagged ||

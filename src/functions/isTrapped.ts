@@ -1,12 +1,12 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
+import { hasAilment } from './hasAilment';
 
-export const isTrapped = (p: BattlePokemon): boolean =>
-	p?.secondaryAilments.some((a) => a.type === 'trap');
+export const isTrapped = (p: BattlePokemon): boolean => hasAilment(p, 'trap');
 export const isBindingBanded = (p: BattlePokemon): boolean =>
 	p?.secondaryAilments.some((a) => a.type === 'trap' && a.bindingBanded);
 
 export const isLeechSeeded = (p: BattlePokemon): boolean =>
-	p?.secondaryAilments.some((a) => a.type === 'leech-seed');
+	hasAilment(p, 'leech-seed');
 
 export const leechingOn = (p: BattlePokemon): number[] =>
 	p?.secondaryAilments
