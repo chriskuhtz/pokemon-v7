@@ -1,8 +1,37 @@
 import { v4 } from 'uuid';
 import { Quest } from '../../interfaces/Quest';
-import { generateRandomStatObject } from '../../interfaces/StatObject';
-import { testPokemon } from '../gameData';
+import {
+	EmptyStatObject,
+	generateRandomStatObject,
+} from '../../interfaces/StatObject';
 import { QuestName } from '../questsRecord';
+import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
+
+const testPokemon: OwnedPokemon = {
+	name: 'teddiursa',
+	gender: 'MALE',
+	ownerId: 'test',
+	id: 'bingo',
+	ball: 'poke-ball',
+	onTeam: true,
+	firstMove: { name: 'tackle', usedPP: 0 },
+	damage: 0,
+	nature: 'adamant',
+	xp: 125,
+	ability: 'shadow-tag',
+	happiness: 70,
+	stepsWalked: 0,
+	heldItemName: 'berry-juice',
+	maxHp: 20,
+	effortValues: EmptyStatObject,
+	intrinsicValues: EmptyStatObject,
+	ppBoostedMoves: [],
+	caughtOnMap: 'camp',
+	weightModifier: Math.random(),
+	unlockedMoves: [],
+	growthRate: 'medium',
+	caughtAtDate: new Date().getTime(),
+};
 
 export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
 	'defeat research assistant barry': {
