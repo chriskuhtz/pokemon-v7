@@ -274,7 +274,7 @@ export const handleAllAttackCategories = ({
 				) {
 					addMessage({
 						icon: <FaGlasses size={battleSpriteSize} />,
-						message: `${p.name} reconsidered and used ${action.actionName} instead of ${p.moveQueue[0].name}`,
+						message: `${p.name} reconsidered and will use ${action.actionName} instead of ${p.moveQueue[0].name}`,
 					});
 				}
 

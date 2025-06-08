@@ -1628,7 +1628,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		types: ['water', 'flying'],
 		encounterOptions: [
 			{
-				rarity: 'rare',
+				rarity: 'common',
 				maxXp: 125000,
 				minXp: 64000,
 				timeOfDay: 'ALL_DAY',
@@ -3903,8 +3903,8 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		encounterOptions: [
 			{
 				rarity: 'rare',
-				maxXp: 125,
-				minXp: 125,
+				maxXp: 8000,
+				minXp: 3000,
 				timeOfDay: 'ALL_DAY',
 				area: 'WATER',
 				route: 'routeS1E1',
