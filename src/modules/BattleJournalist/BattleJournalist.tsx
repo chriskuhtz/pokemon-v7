@@ -300,7 +300,7 @@ export const BattleJournalist = (): JSX.Element => {
 
 export const battleJournalist: RouterNpc = {
 	id: 'battle-journalist',
-	conditionFunction: () => true,
+	conditionFunction: (s) => s.campUpgrades['battle journalist'],
 	dialogue: [
 		'Whats good, big dog',
 		"I've gabbed and gossiped",

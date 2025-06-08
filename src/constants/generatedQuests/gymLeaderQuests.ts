@@ -1,9 +1,12 @@
 import { v4 } from 'uuid';
 import { expCandyPackage, smallExpCandyPackage } from '../../interfaces/Item';
+import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { Quest } from '../../interfaces/Quest';
 import { SaveFile } from '../../interfaces/SaveFile';
-import { generateRandomStatObject } from '../../interfaces/StatObject';
-import { testPokemon } from '../gameData';
+import {
+	EmptyStatObject,
+	generateRandomStatObject,
+} from '../../interfaces/StatObject';
 import { blaineId } from '../maps/occupants/blaine';
 import { brockId } from '../maps/occupants/brock';
 import { erikaId } from '../maps/occupants/erika';
@@ -14,6 +17,31 @@ import { sabrinaId } from '../maps/occupants/sabrina';
 import { surgeId } from '../maps/occupants/surge';
 import { QuestName } from '../questsRecord';
 
+const testPokemon: OwnedPokemon = {
+	name: 'teddiursa',
+	gender: 'MALE',
+	ownerId: 'test',
+	id: 'bingo',
+	ball: 'poke-ball',
+	onTeam: true,
+	firstMove: { name: 'tackle', usedPP: 0 },
+	damage: 0,
+	nature: 'adamant',
+	xp: 125,
+	ability: 'shadow-tag',
+	happiness: 70,
+	stepsWalked: 0,
+	heldItemName: 'berry-juice',
+	maxHp: 20,
+	effortValues: EmptyStatObject,
+	intrinsicValues: EmptyStatObject,
+	ppBoostedMoves: [],
+	caughtOnMap: 'camp',
+	weightModifier: Math.random(),
+	unlockedMoves: [],
+	growthRate: 'medium',
+	caughtAtDate: new Date().getTime(),
+};
 export const gymLeaderQuests: Partial<Record<QuestName, Quest>> = {
 	'defeat erika': {
 		category: 'GYM LEADER',

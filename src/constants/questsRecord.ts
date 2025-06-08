@@ -12,9 +12,13 @@ import {
 	fossilTable,
 	smallExpCandyPackage,
 } from '../interfaces/Item';
+import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { Quest } from '../interfaces/Quest';
 import { SaveFile } from '../interfaces/SaveFile';
-import { generateRandomStatObject } from '../interfaces/StatObject';
+import {
+	EmptyStatObject,
+	generateRandomStatObject,
+} from '../interfaces/StatObject';
 import { moveUnlockPayments } from '../modules/MoveTutor/MoveTutor';
 import { highBstPokemon, lowBstPokemon, midBstPokemon } from './baseStatRecord';
 import {
@@ -22,7 +26,6 @@ import {
 	campUpgradeCostScale,
 	campUpgradeNames,
 } from './campUpgrades';
-import { testPokemon } from './gameData';
 import { catchQuests } from './generatedQuests/catchQuests';
 import { gymLeaderQuests } from './generatedQuests/gymLeaderQuests';
 import { travellingTrainerQuests } from './generatedQuests/travellingTrainersQuests';
@@ -43,6 +46,32 @@ import {
 	tier5trainers,
 	trainers,
 } from './trainersRecord';
+
+const testPokemon: OwnedPokemon = {
+	name: 'teddiursa',
+	gender: 'MALE',
+	ownerId: 'test',
+	id: 'bingo',
+	ball: 'poke-ball',
+	onTeam: true,
+	firstMove: { name: 'tackle', usedPP: 0 },
+	damage: 0,
+	nature: 'adamant',
+	xp: 125,
+	ability: 'shadow-tag',
+	happiness: 70,
+	stepsWalked: 0,
+	heldItemName: 'berry-juice',
+	maxHp: 20,
+	effortValues: EmptyStatObject,
+	intrinsicValues: EmptyStatObject,
+	ppBoostedMoves: [],
+	caughtOnMap: 'camp',
+	weightModifier: Math.random(),
+	unlockedMoves: [],
+	growthRate: 'medium',
+	caughtAtDate: new Date().getTime(),
+};
 
 export const questNames = [
 	'catch a fire pokemon',
