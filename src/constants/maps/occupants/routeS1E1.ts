@@ -1,14 +1,8 @@
+import { getTraveller } from '../../../functions/getTraveller';
 import { makeApricornTree } from '../../../functions/makeApricornTree';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { routeS1E1Lure } from '../../../modules/BerryLure/BerryLure';
-import { travellingMerchantRouteS1E1 } from '../../../modules/TravellingMerchant/TravellingMerchant';
-import { barryS1E1 } from './barry';
-import { cynthiaS1E1 } from './cynthia';
-import { hughS1E1 } from './hugh';
-import { nS1E1 } from './n';
-import { redS1E1 } from './red';
-import { silverS1E1 } from './silver';
 import { surge } from './surge';
 
 export const routeS1E1Occupants: OverworldMap['occupants'] = [
@@ -143,8 +137,7 @@ export const routeS1E1Occupants: OverworldMap['occupants'] = [
 
 	...surge,
 	routeS1E1Lure,
-	...travellingMerchantRouteS1E1,
-	barryS1E1,
+
 	...makeApricornTree({
 		x: 4,
 		y: 5,
@@ -169,9 +162,5 @@ export const routeS1E1Occupants: OverworldMap['occupants'] = [
 		apricorn: 'black-apricorn',
 		id: 'routeS1E1_black_tree_4',
 	}),
-	silverS1E1,
-	cynthiaS1E1,
-	nS1E1,
-	redS1E1,
-	hughS1E1,
+	...getTraveller('routeS1E1'),
 ];

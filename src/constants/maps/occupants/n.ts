@@ -1,14 +1,5 @@
 import { getRandomEntry } from '../../../functions/filterTargets';
 import { getHighestXpOnTeam } from '../../../functions/getHighestXpOnTeam';
-import {
-	isFriday,
-	isMonday,
-	isSaturday,
-	isSunday,
-	isThursday,
-	isTuesday,
-	isWednesday,
-} from '../../../functions/isXDay';
 import { makeChallengerPokemon } from '../../../functions/makeChallengerPokemon';
 import { Occupant, OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
@@ -308,51 +299,44 @@ export const nN1: Occupant = {
 	x: 18,
 	y: 25,
 	orientation: 'LEFT',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== nId) && isThursday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== nId),
 };
 export const nN1E1: Occupant = {
 	...n,
-	x: 10,
-	y: 33,
+	x: 20,
+	y: 28,
 	orientation: 'LEFT',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== nId) && isFriday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== nId),
 };
 export const nE1: Occupant = {
 	...n,
 	x: 35,
 	y: 3,
 	orientation: 'LEFT',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== nId) && isSaturday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== nId),
 };
 export const nS1E1: Occupant = {
 	...n,
 	x: 47,
 	orientation: 'LEFT',
 	y: 40,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== nId) && isSunday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== nId),
 };
 export const nS1: Occupant = {
 	...n,
 	x: 38,
 	y: 22,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== nId) && isMonday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== nId),
 };
 export const nS1W1: Occupant = {
 	...n,
 	x: 39,
 	y: 28,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== nId) && isTuesday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== nId),
 };
-export const nN1W1: Occupant = {
+export const nW1: Occupant = {
 	...n,
-	x: 34,
-	y: 1,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== nId) && isWednesday(),
+	x: 38,
+	y: 25,
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== nId),
 };
