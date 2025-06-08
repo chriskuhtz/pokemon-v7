@@ -19,6 +19,7 @@ import {
 	getHustleFactor,
 } from './getCompoundEyesFactor';
 import { getHeldItem } from './getHeldItem';
+import { hasAilment } from './hasAilment';
 import { isSelfTargeting } from './isSelfTargeting';
 
 export type MissReason =
@@ -150,8 +151,7 @@ export const determineMiss = (
 	//EVASION
 	const laxIncenseFactor = getHeldItem(target) === 'lax-incense' ? 1.05 : 1;
 	const tangledFeetFactor =
-		target.ability === 'tangled-feet' &&
-		target.secondaryAilments.some((a) => a.type === 'confusion')
+		target.ability === 'tangled-feet' && hasAilment(target, 'confusion')
 			? 2
 			: 1;
 	const wonderSkinFactor =

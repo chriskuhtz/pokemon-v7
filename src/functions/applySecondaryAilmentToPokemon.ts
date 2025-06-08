@@ -5,6 +5,7 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { PokemonType } from '../interfaces/PokemonType';
 import { getHeldItem } from './getHeldItem';
 import { getMiddleOfThree } from './getMiddleOfThree';
+import { hasAilment } from './hasAilment';
 import { isKO } from './isKo';
 
 export const applySecondaryAilmentToPokemon = ({
@@ -28,10 +29,7 @@ export const applySecondaryAilmentToPokemon = ({
 	by?: string;
 	applicator: BattlePokemon;
 }): BattlePokemon => {
-	if (
-		ailment !== 'color-changed' &&
-		pokemon.secondaryAilments.some((s) => s.type === ailment)
-	) {
+	if (ailment !== 'color-changed' && hasAilment(pokemon, ailment)) {
 		//already has this ailment
 		return pokemon;
 	}

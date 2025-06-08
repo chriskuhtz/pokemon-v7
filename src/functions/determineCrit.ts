@@ -2,6 +2,7 @@ import { ohkoMoves } from '../constants/groupedMoves';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { getHeldItem } from './getHeldItem';
+import { hasAilment } from './hasAilment';
 
 export const determineCrit = (
 	target: BattlePokemon,
@@ -17,9 +18,7 @@ export const determineCrit = (
 		return false;
 	}
 
-	const attackerFocused = attacker.secondaryAilments.some(
-		(s) => s.type === 'focused'
-	);
+	const attackerFocused = hasAilment(attacker, 'focused');
 
 	const boostedCritRate =
 		critRate +

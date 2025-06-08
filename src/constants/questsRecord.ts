@@ -3,6 +3,7 @@ import { calculateLevelData } from '../functions/calculateLevelData';
 
 import { sumOfIvs } from '../functions/sumOfIvs';
 
+import { hasType } from '../functions/hasType';
 import {
 	apricorns,
 	apricornTable,
@@ -11,7 +12,7 @@ import {
 	fossilTable,
 	smallExpCandyPackage,
 } from '../interfaces/Item';
-import { getRandomNature } from '../interfaces/Natures';
+import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { Quest } from '../interfaces/Quest';
 import { SaveFile } from '../interfaces/SaveFile';
 import {
@@ -35,7 +36,6 @@ import {
 	getSwarmOptions,
 	getUnderRockEncounters,
 } from './internalDex';
-import { internalDex } from './internalDexData';
 import { allRocketCampTrainersDefeated } from './maps/occupants/rocketCampOccupants';
 import { PokemonName, pokemonNames } from './pokemonNames';
 import {
@@ -46,6 +46,32 @@ import {
 	tier5trainers,
 	trainers,
 } from './trainersRecord';
+
+const testPokemon: OwnedPokemon = {
+	name: 'teddiursa',
+	gender: 'MALE',
+	ownerId: 'test',
+	id: 'bingo',
+	ball: 'poke-ball',
+	onTeam: true,
+	firstMove: { name: 'tackle', usedPP: 0 },
+	damage: 0,
+	nature: 'adamant',
+	xp: 125,
+	ability: 'shadow-tag',
+	happiness: 70,
+	stepsWalked: 0,
+	heldItemName: 'berry-juice',
+	maxHp: 20,
+	effortValues: EmptyStatObject,
+	intrinsicValues: EmptyStatObject,
+	ppBoostedMoves: [],
+	caughtOnMap: 'camp',
+	weightModifier: Math.random(),
+	unlockedMoves: [],
+	growthRate: 'medium',
+	caughtAtDate: new Date().getTime(),
+};
 
 export const questNames = [
 	'catch a fire pokemon',
@@ -440,7 +466,6 @@ export const questNames = [
 	'catch all past distortion pokemon',
 	'catch a space distortion pokemon',
 	'catch all space distortion pokemon',
-	'train a pidgeot to lvl 100',
 	"catch whitney's favorite cute pokemon",
 	'catch an exceptional steel pokemon for jasmine',
 	'reach max. friendship with a dragon pokemon',
@@ -452,6 +477,7 @@ export const questNames = [
 	'defeat an imported challenger at lvl 80 or higher',
 	'defeat an imported challenger at lvl 100',
 	'catch all pokemon from victory road',
+	'collect 8 badges',
 	'defeat the pokemon league',
 ] as const;
 
@@ -577,28 +603,14 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		category: 'EXPLORATION',
 		rewardItems: {},
 		rewardPokemon: {
-			caughtAtDate: new Date().getTime(),
-			growthRate: 'medium',
-			unlockedMoves: ['extrasensory'],
-			fixedAbility: true,
-			shiny: true,
-			maxHp: 30,
-			effortValues: EmptyStatObject,
-			ppBoostedMoves: [],
-			caughtOnMap: 'camp',
-			gender: 'MALE',
-			stepsWalked: 0,
-			ownerId: '',
-			damage: 0,
-			id: '',
-			ball: 'poke-ball',
-			ability: 'download',
+			...testPokemon,
+			id: v4(),
 			name: 'raichu-alola',
-			xp: 8000,
-			nature: 'adamant',
-			intrinsicValues: generateRandomStatObject(31),
-			happiness: 70,
-			firstMove: { name: 'extrasensory', usedPP: 0 },
+			shiny: true,
+			caughtAtDate: new Date().getTime(),
+			xp: 125,
+			intrinsicValues: generateRandomStatObject(31, 25),
+			caughtOnMap: 'camp',
 		},
 		targetPokemon: [
 			'pikachu-rock-star',
@@ -1440,7 +1452,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s: SaveFile) => {
 			return s.pokemon.some(
 				(p) =>
-					internalDex[p.name].types.includes('steel') &&
+					hasType(p, 'steel') &&
 					Object.values(p.intrinsicValues).some((v) => v === 31)
 			);
 		},
@@ -1451,9 +1463,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'dragon-gem': 10, 'haban-berry': 10 },
 		researchPoints: 100,
 		conditionFunction: (s: SaveFile) => {
-			return s.pokemon.some(
-				(p) => internalDex[p.name].types.includes('dragon') && p.happiness > 250
-			);
+			return s.pokemon.some((p) => hasType(p, 'dragon') && p.happiness > 250);
 		},
 		kind: 'QUEST_LINE',
 	},
@@ -1464,7 +1474,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s: SaveFile) => {
 			return s.pokemon.some(
 				(p) =>
-					internalDex[p.name].types.includes('ice') &&
+					hasType(p, 'ice') &&
 					Object.values(p.effortValues).reduce(
 						(sum, summand) => sum + summand,
 						0
@@ -1505,28 +1515,14 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...expCandyPackage,
 		},
 		rewardPokemon: {
-			caughtAtDate: new Date().getTime(),
-			growthRate: 'medium',
-			unlockedMoves: ['drill-peck', 'swords-dance'],
-			fixedAbility: true,
-			shiny: true,
-			maxHp: 30,
-			effortValues: EmptyStatObject,
-			ppBoostedMoves: [],
-			caughtOnMap: 'camp',
-			gender: 'MALE',
-			stepsWalked: 0,
-			ownerId: '',
-			damage: 0,
-			id: '',
-			ball: 'poke-ball',
-			ability: 'volt-absorb',
+			...testPokemon,
+			id: v4(),
 			name: 'aerodactyl',
+			shiny: true,
+			caughtAtDate: new Date().getTime(),
 			xp: 125,
-			nature: 'adamant',
-			intrinsicValues: generateRandomStatObject(31),
-			happiness: 70,
-			firstMove: { name: 'drill-peck', usedPP: 0 },
+			intrinsicValues: generateRandomStatObject(31, 25),
+			caughtOnMap: 'camp',
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {
@@ -1544,28 +1540,14 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...expCandyPackage,
 		},
 		rewardPokemon: {
-			caughtAtDate: new Date().getTime(),
-			growthRate: 'medium',
-			unlockedMoves: ['earthquake'],
-			fixedAbility: true,
-			shiny: true,
-			maxHp: 30,
-			effortValues: EmptyStatObject,
-			ppBoostedMoves: [],
-			caughtOnMap: 'camp',
-			gender: 'MALE',
-			stepsWalked: 0,
-			ownerId: '',
-			damage: 0,
-			id: '',
-			ball: 'poke-ball',
-			ability: 'huge-power',
+			...testPokemon,
+			id: v4(),
 			name: 'gible',
+			shiny: true,
+			caughtAtDate: new Date().getTime(),
 			xp: 125,
-			nature: 'adamant',
-			intrinsicValues: generateRandomStatObject(31),
-			happiness: 70,
-			firstMove: { name: 'earthquake', usedPP: 0 },
+			intrinsicValues: generateRandomStatObject(31, 25),
+			caughtOnMap: 'camp',
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {
@@ -1583,28 +1565,14 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			...expCandyPackage,
 		},
 		rewardPokemon: {
-			fixedAbility: true,
-			shiny: true,
-			maxHp: 30,
-			effortValues: EmptyStatObject,
-			ppBoostedMoves: [],
-			caughtOnMap: 'camp',
-			gender: 'MALE',
-			stepsWalked: 0,
-			ownerId: '',
-			damage: 0,
-			id: '',
-			ball: 'poke-ball',
-			ability: 'speed-boost',
+			...testPokemon,
+			id: v4(),
 			name: 'larvitar',
-			xp: 125,
-			nature: 'adamant',
-			intrinsicValues: generateRandomStatObject(31),
-			happiness: 70,
-			firstMove: { name: 'earthquake', usedPP: 0 },
-			unlockedMoves: [],
-			growthRate: 'medium',
+			shiny: true,
 			caughtAtDate: new Date().getTime(),
+			xp: 125,
+			intrinsicValues: generateRandomStatObject(31, 25),
+			caughtOnMap: 'camp',
 		},
 		researchPoints: 50,
 		conditionFunction: (s) => {
@@ -2056,19 +2024,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				)
 			),
 	},
-	'catch all pokemon from victory road': {
-		category: 'EXPLORATION',
-		kind: 'BULLETIN',
-		requiredUpgrade: 'rock climbing certification',
-		targetRoute: 'victoryRoad',
-		researchPoints: 50,
-		rewardItems: {},
-		targetPokemon: getAllEncountersFor('victoryRoad', {}).map((p) => p.name),
-		conditionFunction: (s: SaveFile) =>
-			getAllEncountersFor('victoryRoad', {}).every((o) =>
-				s.pokedex[o.name].caughtOnRoutes.includes('victoryRoad')
-			),
-	},
+
 	'wake a snorlax': {
 		category: 'RESEARCH',
 		kind: 'BULLETIN',
@@ -2431,57 +2387,28 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'lucky-egg': 1,
 		},
 		rewardPokemon: {
-			caughtAtDate: new Date().getTime(),
-			gender: 'MALE',
-			intrinsicValues: generateRandomStatObject(31),
-			effortValues: EmptyStatObject,
-			ppBoostedMoves: [],
-			caughtOnMap: 'camp',
-			stepsWalked: 0,
-			maxHp: 30,
-			xp: 125,
-			happiness: 70,
-			heightModifier: 0.5,
-			weightModifier: 0.5,
-			nature: 'lonely',
-			unlockedMoves: ['flame-charge', 'swords-dance', 'sacred-fire'],
-			ability: 'competitive',
+			...testPokemon,
 			id: v4(),
-			damage: 0,
-			ownerId: '',
 			name: 'growlithe',
-			ball: 'poke-ball',
 			shiny: true,
-			growthRate: 'medium',
-			fixedAbility: true,
-			firstMove: { name: 'sacred-fire', usedPP: 0 },
+			caughtAtDate: new Date().getTime(),
+			xp: 125,
+			intrinsicValues: generateRandomStatObject(31, 25),
+			caughtOnMap: 'camp',
 		},
 	},
 	'defeat giovanni': {
 		category: 'BATTLE',
 		rewardItems: {},
 		rewardPokemon: {
-			caughtAtDate: new Date().getTime(),
-			growthRate: 'medium',
-			unlockedMoves: ['calm-mind'],
-			shiny: true,
-			maxHp: 30,
-			effortValues: EmptyStatObject,
-			ppBoostedMoves: [],
-			caughtOnMap: 'camp',
-			gender: 'MALE',
-			stepsWalked: 0,
-			ownerId: '',
-			damage: 0,
-			id: '',
-			ball: 'master-ball',
-			ability: 'pressure',
+			...testPokemon,
+			id: v4(),
 			name: 'mewtwo',
+			ball: 'master-ball',
+			caughtAtDate: new Date().getTime(),
 			xp: 125,
-			nature: getRandomNature(),
-			intrinsicValues: generateRandomStatObject(31),
-			happiness: 70,
-			firstMove: { name: 'calm-mind', usedPP: 0 },
+			intrinsicValues: generateRandomStatObject(31, 25),
+			caughtOnMap: 'camp',
 		},
 		researchPoints: 100,
 		conditionFunction: (s) => {
@@ -3114,19 +3041,6 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				(f) => s.pokedex[f].caughtOnRoutes.length > 0
 			),
 	},
-	'train a pidgeot to lvl 100': {
-		kind: 'BULLETIN',
-		category: 'TRAINING',
-		researchPoints: 100,
-		campUpgrade: 'pidgeot rider certification',
-		rewardItems: {},
-		conditionFunction: (s: SaveFile) =>
-			s.pokemon.some(
-				(p) =>
-					p.name === 'pidgeot' &&
-					calculateLevelData(p.xp, p.growthRate).level >= 100
-			),
-	},
 	'defeat an imported challenger': {
 		category: 'BATTLE',
 		kind: 'BULLETIN',
@@ -3180,11 +3094,34 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'defeat an imported challenger at lvl 80 or higher',
 		rewardItems: { 'exp-candy-xl': 10 },
 	},
+	'collect 8 badges': {
+		category: 'GYM LEADER',
+		kind: 'BULLETIN',
+		campUpgrade: 'pidgeot rider certification',
+		researchPoints: 50,
+		conditionFunction: (s) => s.badges.length >= 8,
+		rewardItems: {},
+	},
+	'catch all pokemon from victory road': {
+		category: 'EXPLORATION',
+		kind: 'BULLETIN',
+		requiredUpgrade: 'rock climbing certification',
+		targetRoute: 'victoryRoad',
+		researchPoints: 50,
+		rewardItems: {},
+		availableAfter: 'collect 8 badges',
+		targetPokemon: getAllEncountersFor('victoryRoad', {}).map((p) => p.name),
+		conditionFunction: (s: SaveFile) =>
+			getAllEncountersFor('victoryRoad', {}).every((o) =>
+				s.pokedex[o.name].caughtOnRoutes.includes('victoryRoad')
+			),
+	},
 	'defeat the pokemon league': {
 		category: 'BATTLE',
 		kind: 'BULLETIN',
 		conditionFunction: (s: SaveFile) => !!s.mileStones.lanceDefeatedAt,
 		researchPoints: 100,
+		availableAfter: 'collect 8 badges',
 		rewardItems: { 'max-lure': 1, 'master-ball': 1 },
 	},
 } as Record<QuestName, Quest>;

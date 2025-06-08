@@ -8,10 +8,11 @@ import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
 
 const willTeam = (s: SaveFile): OwnedPokemon[] => {
-	const xp = Math.min(70 * 70 * 70, getHighestXpOnTeam(s.pokemon) * 0.8);
+	const xp = Math.max(66 * 66 * 66, getHighestXpOnTeam(s.pokemon) * 0.8);
 
 	const bronzong = makeChallengerPokemon({
 		xp,
+		nature: 'careful',
 		name: 'bronzong',
 		ability: 'levitate',
 		heldItemName: 'light-clay',
@@ -25,6 +26,7 @@ const willTeam = (s: SaveFile): OwnedPokemon[] => {
 		xp,
 		name: 'jynx',
 		ability: 'filter',
+		nature: 'timid',
 		heldItemName: 'terrain-extender',
 		firstMove: { name: 'fake-out', usedPP: 0 },
 		secondMove: { name: 'psychic', usedPP: 0 },
@@ -38,6 +40,7 @@ const willTeam = (s: SaveFile): OwnedPokemon[] => {
 	});
 	const grumpig = makeChallengerPokemon({
 		name: 'grumpig',
+		nature: 'modest',
 		xp,
 		heldItemName: 'leftovers',
 		firstMove: { name: 'tail-glow', usedPP: 0 },
@@ -48,6 +51,7 @@ const willTeam = (s: SaveFile): OwnedPokemon[] => {
 	const slowbro = makeChallengerPokemon({
 		name: 'slowbro',
 		xp,
+		nature: 'quiet',
 		heldItemName: 'leftovers',
 		firstMove: { name: 'calm-mind', usedPP: 0 },
 		secondMove: { name: 'psychic', usedPP: 0 },
@@ -58,6 +62,7 @@ const willTeam = (s: SaveFile): OwnedPokemon[] => {
 	const gardevoir = makeChallengerPokemon({
 		name: 'gardevoir',
 		xp,
+		nature: 'hasty',
 		heldItemName: 'choice-band',
 		firstMove: { name: 'dazzling-gleam', usedPP: 0 },
 		secondMove: { name: 'psychic', usedPP: 0 },
@@ -67,6 +72,7 @@ const willTeam = (s: SaveFile): OwnedPokemon[] => {
 	const xatu = makeChallengerPokemon({
 		name: 'xatu',
 		xp,
+		nature: 'hasty',
 		heldItemName: 'sitrus-berry',
 		firstMove: { name: 'aeroblast', usedPP: 0 },
 		secondMove: { name: 'psychic', usedPP: 0 },

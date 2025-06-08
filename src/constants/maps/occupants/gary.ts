@@ -95,7 +95,7 @@ const garyCondition = (s: SaveFile) => {
 };
 
 export const garyId = 'trainer_gary';
-const trainerGary: OverworldTrainer = {
+export const trainerGary: OverworldTrainer = {
 	type: 'TRAINER',
 	x: 10,
 	y: 20,

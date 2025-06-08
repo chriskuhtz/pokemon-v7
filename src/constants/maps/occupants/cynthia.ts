@@ -1,20 +1,12 @@
 import { getRandomEntry } from '../../../functions/filterTargets';
 import { getHighestXpOnTeam } from '../../../functions/getHighestXpOnTeam';
-import {
-	isFriday,
-	isMonday,
-	isSaturday,
-	isSunday,
-	isThursday,
-	isTuesday,
-	isWednesday,
-} from '../../../functions/isXDay';
 import { makeChallengerPokemon } from '../../../functions/makeChallengerPokemon';
 import { Occupant, OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
+import { trickXP } from '../../gameData';
 
 export const cynthiaId = 'champion cynthia';
 const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
@@ -304,6 +296,9 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
 		otherGarchomp,
 		pory,
 	];
+	if (highestXpOnTeam === trickXP) {
+		return possibilities;
+	}
 	const team: OwnedPokemon[] = [];
 	const numberOfMembers = () => {
 		if (highestXpOnTeam < 50 * 50 * 50) {
@@ -329,7 +324,7 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
 	return team;
 };
 
-const cynthia: OverworldTrainer = {
+export const cynthia: OverworldTrainer = {
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/b/b1/VSCynthia.png',
 	type: 'TRAINER',
@@ -356,51 +351,44 @@ export const cynthiaN1: Occupant = {
 	...cynthia,
 	x: 45,
 	y: 3,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== cynthiaId) && isThursday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
 };
 export const cynthiaN1E1: Occupant = {
 	...cynthia,
 	x: 30,
 	y: 46,
 	orientation: 'RIGHT',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== cynthiaId) && isFriday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
 };
 export const cynthiaE1: Occupant = {
 	...cynthia,
 	x: 25,
 	y: 29,
 	orientation: 'RIGHT',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== cynthiaId) && isSaturday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
 };
 export const cynthiaS1E1: Occupant = {
 	...cynthia,
 	x: 12,
 	y: 42,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== cynthiaId) && isSunday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
 };
 export const cynthiaS1: Occupant = {
 	...cynthia,
 	x: 25,
 	y: 20,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== cynthiaId) && isMonday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
 };
 export const cynthiaS1W1: Occupant = {
 	...cynthia,
 	x: 10,
 	y: 45,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== cynthiaId) && isTuesday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
 };
-export const cynthiaN1W1: Occupant = {
+export const cynthiaW1: Occupant = {
 	...cynthia,
-	x: 23,
-	y: 40,
+	x: 17,
+	y: 38,
 	orientation: 'RIGHT',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== cynthiaId) && isWednesday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
 };

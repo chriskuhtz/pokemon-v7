@@ -1,5 +1,4 @@
 import { PARA_SPEED_FACTOR } from '../interfaces/Ailment';
-import { BattleAction } from '../interfaces/BattleActions';
 
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
@@ -7,6 +6,7 @@ import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { calculateModifiedStat } from './calculateModifiedStat';
 import { getHeldItem } from './getHeldItem';
+import { hasAilment } from './hasAilment';
 
 const calculateTotalSpeed = (
 	a: BattlePokemon,
@@ -26,11 +26,7 @@ const calculateTotalSpeed = (
 		a.ability === 'sand-rush' && battleWeather === 'sandstorm' ? 2 : 1;
 	const slushrushFactor =
 		a.ability === 'slush-rush' && battleWeather === 'hail' ? 2 : 1;
-	const unburdenFactorA = a.secondaryAilments.some(
-		(ail) => ail.type === 'unburdened'
-	)
-		? 2
-		: 1;
+	const unburdenFactorA = hasAilment(a, 'unburdened') ? 2 : 1;
 	const machoBraceFactor = getHeldItem(a) === 'macho-brace' ? 0.5 : 1;
 	const choiceScarfFactor = getHeldItem(a) === 'choice-scarf' ? 2 : 1;
 	const tailwindFactor = battlefieldEffects.some(
@@ -81,35 +77,31 @@ export const sortByPriority = (
 	const aMove = a.moveQueue.find((m) => m.round === battleRound);
 	const bMove = b.moveQueue.find((m) => m.round === battleRound);
 
-	const multiHitAfterFirst = (
-		m: BattleAction | undefined,
-		p: BattlePokemon
-	) => {
-		const nextInQueue = p.moveQueue.at(0);
-		return (
-			m?.type === 'BattleAttack' &&
-			m?.isAMultiHit &&
-			nextInQueue?.type === 'BattleAttack' &&
-			nextInQueue?.isAMultiHit
-		);
-	};
-
 	if (aMove && !bMove) {
 		return -1;
 	}
 	if (bMove && !aMove) {
 		return 1;
 	}
-	if (multiHitAfterFirst(aMove, a)) {
+	//multihits are only created after the first hit is executed, so they are always next
+	if (aMove?.type === 'BattleAttack' && aMove.isAMultiHit) {
 		return -1;
 	}
-	if (multiHitAfterFirst(bMove, b)) {
-		return -1;
+	if (bMove?.type === 'BattleAttack' && bMove.isAMultiHit) {
+		return 1;
 	}
 	if (
 		aMove?.type === 'BattleAttack' &&
 		aMove.name === 'pursuit' &&
 		bMove?.type === 'Switch'
+	) {
+		//Pursuit goes before switch
+		return -1;
+	}
+	if (
+		bMove?.type === 'BattleAttack' &&
+		bMove.name === 'pursuit' &&
+		aMove?.type === 'Switch'
 	) {
 		//Pursuit goes before switch
 		return -1;
@@ -122,6 +114,15 @@ export const sortByPriority = (
 	) {
 		//Sucker punch goes before target
 		return -1;
+	}
+	if (
+		bMove?.type === 'BattleAttack' &&
+		bMove.name === 'sucker-punch' &&
+		aMove?.type === 'BattleAttack' &&
+		['physical', 'special'].includes(aMove.data.damage_class.name)
+	) {
+		//Sucker punch goes before target
+		return 1;
 	}
 
 	if (

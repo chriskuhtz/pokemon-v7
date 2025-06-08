@@ -9,6 +9,7 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { getHeldItem } from './getHeldItem';
 import { getMiddleOfThree } from './getMiddleOfThree';
+import { hasAilment } from './hasAilment';
 import {
 	isBindingBanded,
 	isLeechSeeded,
@@ -49,7 +50,7 @@ export const applySecondaryAilmentDamage = (
 			damage: updated.damage + leechDamage,
 		};
 	}
-	if (updated.secondaryAilments.some((ail) => ail.type === 'nightmare')) {
+	if (hasAilment(updated, 'nightmare')) {
 		if (pokemon.ability === 'magic-guard') {
 			addMessage(`${pokemon.name} prevents damage with magic-guard`);
 			return pokemon;
@@ -63,7 +64,7 @@ export const applySecondaryAilmentDamage = (
 			damage: updated.damage + nightmareDamage,
 		};
 	}
-	if (updated.secondaryAilments.some((ail) => ail.type === 'cursed')) {
+	if (hasAilment(updated, 'cursed')) {
 		if (pokemon.ability === 'magic-guard') {
 			addMessage(`${pokemon.name} prevents damage with magic-guard`);
 			return pokemon;
@@ -77,7 +78,7 @@ export const applySecondaryAilmentDamage = (
 			damage: updated.damage + nightmareDamage,
 		};
 	}
-	if (updated.secondaryAilments.some((ail) => ail.type === 'octolocked')) {
+	if (hasAilment(updated, 'octolocked')) {
 		updated = applyStatChangeToPokemon(
 			updated,
 			'defense',
@@ -98,7 +99,7 @@ export const applySecondaryAilmentDamage = (
 		);
 	}
 
-	if (updated.secondaryAilments.some((ail) => ail.type === 'ingrained')) {
+	if (hasAilment(updated, 'ingrained')) {
 		addMessage(`${pokemon.data.name} absorbs nutrients from the ground`);
 		const bigRootFactor = getHeldItem(updated) === 'big-root' ? 1.3 : 1;
 
@@ -111,7 +112,7 @@ export const applySecondaryAilmentDamage = (
 			damage: Math.max(0, updated.damage - ingrainHeal),
 		};
 	}
-	if (updated.secondaryAilments.some((ail) => ail.type === 'aqua-ringed')) {
+	if (hasAilment(updated, 'aqua-ringed')) {
 		addMessage(`${pokemon.data.name} absorbs nutrients from the water`);
 		const bigRootFactor = getHeldItem(updated) === 'big-root' ? 1.3 : 1;
 

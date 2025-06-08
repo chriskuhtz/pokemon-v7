@@ -41,7 +41,7 @@ const brockCondition = (s: SaveFile) => {
 };
 
 export const brockId = 'trainer_brock';
-const trainerBrock: OverworldTrainer = {
+export const trainerBrock: OverworldTrainer = {
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/1/11/VSBrock.png',
 	type: 'TRAINER',

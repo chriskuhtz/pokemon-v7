@@ -33,6 +33,7 @@ import { getHeldItemFactor } from './getHeldItemFactor';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getPower } from './getPower';
 import { getRivalryFactor } from './getRivalryFactor';
+import { hasAilment } from './hasAilment';
 
 export const DamageAbsorbAbilityMap: Partial<Record<AbilityName, PokemonType>> =
 	{
@@ -232,8 +233,7 @@ export const calculateDamage = (
 		};
 	}
 	const critRate =
-		attack.data.meta.crit_rate +
-		(attacker.secondaryAilments.some((a) => a.type === 'dire-hit') ? 1 : 0);
+		attack.data.meta.crit_rate + (hasAilment(attacker, 'dire-hit') ? 1 : 0);
 	const critFactor =
 		calculateCrits &&
 		determineCrit(target, attacker, attack.name, critRate, battleFieldEffects)
@@ -356,10 +356,7 @@ export const calculateDamage = (
 			? 2
 			: 1;
 	const flashFireFactor =
-		attacker.secondaryAilments.some((a) => a.type === 'flash-fire') &&
-		attackType === 'fire'
-			? 1.5
-			: 1;
+		hasAilment(attacker, 'flash-fire') && attackType === 'fire' ? 1.5 : 1;
 	const hugePowerFactor =
 		attacker.ability === 'huge-power' || attacker.ability === 'pure-power'
 			? 2
@@ -569,10 +566,7 @@ export const calculateDamage = (
 			: 1;
 	const metronomeFactor = Math.min(2, 1 + (attacker.metronomeStack ?? 0 * 0.1));
 	const chargeFactor =
-		attacker.secondaryAilments.some((s) => s.type === 'charge') &&
-		attackType === 'electric'
-			? 2
-			: 1;
+		hasAilment(attacker, 'charge') && attackType === 'electric' ? 2 : 1;
 	const helpingHandFactor = attacker.helpingHanded ? 1.5 : 1;
 	const sandForceFactor =
 		attacker.ability === 'sand-force' &&

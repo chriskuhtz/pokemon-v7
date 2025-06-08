@@ -45,12 +45,14 @@ export const StatDisplay = ({
 		</div>
 	);
 };
-const BstSection = ({
+export const BstSection = ({
 	ownedPokemon,
 	data,
+	hideExplanation,
 }: {
 	ownedPokemon: OwnedPokemon;
 	data: PokemonData;
+	hideExplanation?: boolean;
 }) => {
 	return (
 		<div
@@ -108,22 +110,26 @@ const BstSection = ({
 						}
 					})}
 			</div>
-			<p>
-				Total Base Stats (equal for all {ownedPokemon.name}), compared to the
-				strongest Pokemon:
-			</p>
-			<AnimatedBar
-				max={maxBst}
-				offset={
-					maxBst -
-					data.stats.reduce((sum, summand) => {
-						if (HIDDEN_STATS.includes(summand.stat.name)) {
-							return sum;
+			{!hideExplanation && (
+				<>
+					<p>
+						Total Base Stats (equal for all {ownedPokemon.name}), compared to
+						the strongest Pokemon:
+					</p>
+					<AnimatedBar
+						max={maxBst}
+						offset={
+							maxBst -
+							data.stats.reduce((sum, summand) => {
+								if (HIDDEN_STATS.includes(summand.stat.name)) {
+									return sum;
+								}
+								return sum + summand.base_stat;
+							}, 0)
 						}
-						return sum + summand.base_stat;
-					}, 0)
-				}
-			/>
+					/>
+				</>
+			)}
 		</div>
 	);
 };

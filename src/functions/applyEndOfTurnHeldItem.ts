@@ -17,7 +17,9 @@ import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { getHeldItem } from './getHeldItem';
 import { getMovesArray } from './getMovesArray';
-import { getTypeNames } from './getTypeNames';
+import { hasAilment } from './hasAilment';
+import { hasBattleFieldEffect } from './hasBattleFieldEffect';
+import { hasType } from './hasType';
 
 export const applyEndOfTurnHeldItem = (
 	pokemon: BattlePokemon,
@@ -27,9 +29,7 @@ export const applyEndOfTurnHeldItem = (
 	terrain: BattleTerrain | undefined,
 	battleInventory: Inventory
 ): BattlePokemon => {
-	const unnerved = battleFieldEffects.some(
-		(b) => b.type === 'unnerve' && b.ownerId !== pokemon.ownerId
-	);
+	const unnerved = hasBattleFieldEffect(pokemon, 'unnerve', battleFieldEffects);
 
 	if (unnerved && isBerry(getHeldItem(pokemon))) {
 		return pokemon;
@@ -46,7 +46,7 @@ export const applyEndOfTurnHeldItem = (
 		};
 	}
 	if (heldItem === 'black-sludge') {
-		if (getTypeNames(pokemon).includes('poison') && pokemon.damage > 0) {
+		if (hasType(pokemon, 'poison') && pokemon.damage > 0) {
 			addMultipleMessages([
 				`${pokemon.data.name} recovered hp with ${heldItem}`,
 			]);
@@ -54,7 +54,7 @@ export const applyEndOfTurnHeldItem = (
 				...pokemon,
 				damage: Math.floor(Math.max(0, pokemon.damage - pokemon.stats.hp / 16)),
 			};
-		} else if (!getTypeNames(pokemon).includes('poison')) {
+		} else if (!hasType(pokemon, 'poison')) {
 			addMultipleMessages([`${pokemon.data.name} is damaged by ${heldItem}`]);
 			return {
 				...pokemon,
@@ -228,10 +228,7 @@ export const applyEndOfTurnHeldItem = (
 			consumedBerry: isBerry(heldItem) ? heldItem : undefined,
 		};
 	}
-	if (
-		heldItem === 'cheri-berry' &&
-		pokemon.primaryAilment?.type === 'paralysis'
-	) {
+	if (heldItem === 'cheri-berry' && hasAilment(pokemon, 'paralysis')) {
 		addMessage(`${pokemon.data.name} cured its paralysis with ${heldItem}`);
 		return {
 			...applyItemToPokemon(pokemon, heldItem),
@@ -239,7 +236,7 @@ export const applyEndOfTurnHeldItem = (
 			consumedBerry: heldItem,
 		};
 	}
-	if (heldItem === 'chesto-berry' && pokemon.primaryAilment?.type === 'sleep') {
+	if (heldItem === 'chesto-berry' && hasAilment(pokemon, 'sleep')) {
 		addMessage(`${pokemon.data.name} cured its sleep with ${heldItem}`);
 		return {
 			...applyItemToPokemon(pokemon, heldItem),
@@ -249,8 +246,7 @@ export const applyEndOfTurnHeldItem = (
 	}
 	if (
 		heldItem === 'pecha-berry' &&
-		(pokemon.primaryAilment?.type === 'poison' ||
-			pokemon.primaryAilment?.type === 'toxic')
+		(hasAilment(pokemon, 'poison') || hasAilment(pokemon, 'toxic'))
 	) {
 		addMessage(`${pokemon.data.name} cured its poison with ${heldItem}`);
 		return {
@@ -259,7 +255,7 @@ export const applyEndOfTurnHeldItem = (
 			consumedBerry: heldItem,
 		};
 	}
-	if (heldItem === 'rawst-berry' && pokemon.primaryAilment?.type === 'burn') {
+	if (heldItem === 'rawst-berry' && hasAilment(pokemon, 'burn')) {
 		addMessage(`${pokemon.data.name} cured its burn with ${heldItem}`);
 		return {
 			...applyItemToPokemon(pokemon, heldItem),
@@ -267,10 +263,7 @@ export const applyEndOfTurnHeldItem = (
 			consumedBerry: heldItem,
 		};
 	}
-	if (
-		heldItem === 'aspear-berry' &&
-		pokemon.primaryAilment?.type === 'freeze'
-	) {
+	if (heldItem === 'aspear-berry' && hasAilment(pokemon, 'freeze')) {
 		addMessage(`${pokemon.data.name} cured its freeze with ${heldItem}`);
 		return {
 			...applyItemToPokemon(pokemon, heldItem),
@@ -278,10 +271,7 @@ export const applyEndOfTurnHeldItem = (
 			consumedBerry: heldItem,
 		};
 	}
-	if (
-		heldItem === 'persim-berry' &&
-		pokemon.secondaryAilments.some((ail) => ail.type === 'confusion')
-	) {
+	if (heldItem === 'persim-berry' && hasAilment(pokemon, 'confusion')) {
 		addMessage(`${pokemon.data.name} cured its confusion with ${heldItem}`);
 		return {
 			...applyItemToPokemon(pokemon, heldItem),
@@ -291,8 +281,7 @@ export const applyEndOfTurnHeldItem = (
 	}
 	if (
 		heldItem === 'lum-berry' &&
-		(pokemon.secondaryAilments.some((ail) => ail.type === 'confusion') ||
-			pokemon.primaryAilment)
+		(hasAilment(pokemon, 'confusion') || pokemon.primaryAilment)
 	) {
 		addMessage(`${pokemon.data.name} cured itself with ${heldItem}`);
 		return {

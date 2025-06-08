@@ -5,7 +5,7 @@ import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { Stat } from '../interfaces/StatObject';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
-import { getTypeNames } from './getTypeNames';
+import { hasType } from './hasType';
 
 export const applyAttackStatChanges = (
 	target: BattlePokemon,
@@ -25,7 +25,7 @@ export const applyAttackStatChanges = (
 			: attack.data.meta.stat_chance * sereneGraceFactor;
 
 	if (attack.name === 'curse') {
-		if (getTypeNames(updatedMon).includes('ghost')) {
+		if (hasType(updatedMon, 'ghost')) {
 			return updatedMon;
 		} else {
 			[

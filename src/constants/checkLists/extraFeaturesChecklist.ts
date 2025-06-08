@@ -584,10 +584,14 @@ export const extraFeatureCheckList: {
 	{ name: 'clair', handled: true },
 	{ name: 'follower pokemon', handled: true },
 	{ name: 'setting: smarter opps', handled: true },
+	{ name: 'portrait mode', handled: true },
+	{ name: 'nature based dialogues for pasture mons', handled: true },
+	{ name: 'water pokemon area in pasture', handled: true },
+	{ name: 'battle journalist', handled: true },
+	{ name: 'natures for e4', handled: true },
 
 	//BUGS/IMPROVEMENTS:
-	{ name: 'portrait mode' },
-	{ name: 'nature based dialogues for pasture mons' },
+
 	{ name: 'fix pathing' },
 	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },
@@ -598,7 +602,6 @@ export const extraFeatureCheckList: {
 	{ name: 'magma/aqua quests from Looker' },
 	{ name: 'Lugia quest after catching the birds' },
 	{ name: 'Hooh quest after catching the dogs' },
-	{ name: 'Terrain Items (shovel, pickaxe) as Gym leader rewards' },
 	{ name: 'trainer with simple/costar combo' },
 	{ name: 'steven as the fossil protector' },
 	{ name: 'more legendary stories' },
@@ -619,7 +622,7 @@ export const extraFeatureCheckList: {
 	{
 		name: 'DarkGreen-Apricorn: Jungle Balls: Bonus for Grass and Psychic Pokemon',
 	},
-	{ name: 'tickets for new adventures' },
+	{ name: 'dragonite tickets for new adventures' },
 	//SETTINGS:
 	{ name: 'random encounters' },
 	{ name: 'random evolutions' },

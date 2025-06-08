@@ -1,6 +1,6 @@
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
 import { getTimeOfDay } from '../../../../../../functions/getTimeOfDay';
-import { getTypeNames } from '../../../../../../functions/getTypeNames';
+import { hasType } from '../../../../../../functions/hasType';
 import { Message } from '../../../../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../../interfaces/BattlePokemon';
@@ -88,10 +88,7 @@ export const handleHealAttack = ({
 		]),
 		moveQueue: [],
 	};
-	if (
-		move.name === 'roost' &&
-		getTypeNames(updatedAttacker).includes('flying')
-	) {
+	if (move.name === 'roost' && hasType(updatedAttacker, 'flying')) {
 		addMessage({ message: `${updatedAttacker.name} had to land` });
 
 		updatedAttacker = {

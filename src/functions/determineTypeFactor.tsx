@@ -16,6 +16,7 @@ import { WeatherType } from '../interfaces/Weather';
 import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { getHeldItem } from './getHeldItem';
 import { getTypeNames } from './getTypeNames';
+import { hasAilment } from './hasAilment';
 
 const getHiddenPowerType = (ivs: StatObject): PokemonType => {
 	const a = ivs.hp % 2;
@@ -112,7 +113,7 @@ export const determineTypeFactor = (
 
 	if (
 		targetTypes.includes('ghost') &&
-		(target.secondaryAilments.some((s) => s.type === 'foresighted') ||
+		(hasAilment(target, 'foresighted') ||
 			attacker.ability === 'scrappy' ||
 			attacker.ability === 'minds-eye') &&
 		(attackType === 'normal' || attackType == 'fighting')
@@ -121,7 +122,7 @@ export const determineTypeFactor = (
 	}
 	if (
 		targetTypes.includes('dark') &&
-		target.secondaryAilments.some((s) => s.type === 'miracle-eyed') &&
+		hasAilment(target, 'miracle-eyed') &&
 		attackType === 'psychic'
 	) {
 		res = 1;

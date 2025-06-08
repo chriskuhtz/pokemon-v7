@@ -36,21 +36,6 @@ export const routes = [
 	'SWARM_RADAR',
 	'INTERNAL_DEX',
 	'SETTINGS_IN_GAME',
-	//map maker
-	'MAP_MAKER_camp',
-	'MAP_MAKER_routeN1',
-	'MAP_MAKER_routeN1E1',
-	'MAP_MAKER_routeE1',
-	'MAP_MAKER_routeS1E1',
-	'MAP_MAKER_routeS1',
-	'MAP_MAKER_routeS1W1',
-	'MAP_MAKER_routeW1',
-	'MAP_MAKER_caveW1',
-	'MAP_MAKER_caveW1F1',
-	'MAP_MAKER_caveW1F2',
-	'MAP_MAKER_routeN1W1',
-	'MAP_MAKER_onixCave',
-	'MAP_MAKER_challengeField',
-	'MAP_MAKER_rocketCamp',
+	'BATTLE_JOURALIST',
 ] as const;
 export type RoutesType = (typeof routes)[number];

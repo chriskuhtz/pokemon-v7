@@ -1,20 +1,12 @@
 import { getRandomEntry } from '../../../functions/filterTargets';
 import { getHighestXpOnTeam } from '../../../functions/getHighestXpOnTeam';
-import {
-	isFriday,
-	isMonday,
-	isSaturday,
-	isSunday,
-	isThursday,
-	isTuesday,
-	isWednesday,
-} from '../../../functions/isXDay';
 import { makeChallengerPokemon } from '../../../functions/makeChallengerPokemon';
 import { Occupant, OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
+import { trickXP } from '../../gameData';
 
 export const hughId = 'trainer hugh';
 const hughTeam = (s: SaveFile): OwnedPokemon[] => {
@@ -294,6 +286,10 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
 		samurott,
 		conkeldurr,
 	];
+
+	if (highestXpOnTeam === trickXP) {
+		return [...possibilities, scolipede];
+	}
 	const team: OwnedPokemon[] = [];
 
 	const numberOfMembers = () => {
@@ -321,7 +317,7 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
 	return team;
 };
 
-const hugh: OverworldTrainer = {
+export const hugh: OverworldTrainer = {
 	type: 'TRAINER',
 	x: 0,
 	y: 0,
@@ -348,53 +344,46 @@ export const hughN1: Occupant = {
 	x: 11,
 	y: 27,
 	orientation: 'UP',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== hughId) && isSaturday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== hughId),
 };
 export const hughN1E1: Occupant = {
 	...hugh,
 	x: 26,
 	y: 40,
 	orientation: 'DOWN',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== hughId) && isSunday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== hughId),
 };
 export const hughE1: Occupant = {
 	...hugh,
 	x: 18,
 	y: 18,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== hughId) && isMonday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== hughId),
 };
 export const hughS1E1: Occupant = {
 	...hugh,
 	x: 30,
 	y: 20,
 	orientation: 'DOWN',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== hughId) && isTuesday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== hughId),
 };
 export const hughS1: Occupant = {
 	...hugh,
 	x: 32,
 	y: 3,
 	orientation: 'DOWN',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== hughId) && isWednesday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== hughId),
 };
 export const hughS1W1: Occupant = {
 	...hugh,
 	x: 23,
 	y: 14,
 	orientation: 'LEFT',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== hughId) && isThursday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== hughId),
 };
-export const hughcaveW1: Occupant = {
+export const hughW1: Occupant = {
 	...hugh,
-	x: 13,
-	y: 42,
-	orientation: 'DOWN',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== hughId) && isFriday(),
+	x: 4,
+	y: 43,
+	orientation: 'LEFT',
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== hughId),
 };

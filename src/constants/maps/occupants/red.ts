@@ -1,20 +1,12 @@
 import { getRandomEntry } from '../../../functions/filterTargets';
 import { getHighestXpOnTeam } from '../../../functions/getHighestXpOnTeam';
-import {
-	isFriday,
-	isMonday,
-	isSaturday,
-	isSunday,
-	isThursday,
-	isTuesday,
-	isWednesday,
-} from '../../../functions/isXDay';
 import { makeChallengerPokemon } from '../../../functions/makeChallengerPokemon';
 import { Occupant, OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
+import { trickXP } from '../../gameData';
 
 export const redId = 'trainer red';
 const redTeam = (s: SaveFile): OwnedPokemon[] => {
@@ -320,6 +312,10 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
 		slowbro,
 		raichu,
 	];
+
+	if (highestXpOnTeam === trickXP) {
+		return possibilities;
+	}
 	const team: OwnedPokemon[] = [];
 	const numberOfMembers = () => {
 		if (highestXpOnTeam < 50 * 50 * 50) {
@@ -345,7 +341,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
 	return team;
 };
 
-const red: OverworldTrainer = {
+export const red: OverworldTrainer = {
 	type: 'TRAINER',
 	spriteGeneration: 1,
 	x: 0,
@@ -372,52 +368,45 @@ export const redN1: Occupant = {
 	...red,
 	x: 4,
 	y: 28,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== redId) && isFriday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== redId),
 };
 export const redN1E1: Occupant = {
 	...red,
 	x: 3,
 	y: 3,
 	orientation: 'RIGHT',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== redId) && isSaturday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== redId),
 };
 export const redE1: Occupant = {
 	...red,
 	x: 25,
 	y: 35,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== redId) && isSunday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== redId),
 };
 export const redS1E1: Occupant = {
 	...red,
 	x: 12,
 	y: 15,
 	orientation: 'UP',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== redId) && isMonday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== redId),
 };
 export const redS1: Occupant = {
 	...red,
 	x: 3,
 	y: 13,
 	orientation: 'DOWN',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== redId) && isTuesday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== redId),
 };
 export const redS1W1: Occupant = {
 	...red,
 	x: 31,
 	y: 1,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== redId) && isWednesday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== redId),
 };
-export const redcaveW1: Occupant = {
+export const redW1: Occupant = {
 	...red,
-	x: 11,
-	y: 9,
-	orientation: 'LEFT',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== redId) && isThursday(),
+	x: 12,
+	y: 8,
+	orientation: 'DOWN',
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== redId),
 };

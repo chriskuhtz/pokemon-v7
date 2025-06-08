@@ -8,12 +8,13 @@ import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
 
 const brunoTeam = (s: SaveFile): OwnedPokemon[] => {
-	const xp = Math.min(70 * 70 * 70, getHighestXpOnTeam(s.pokemon) * 0.9);
+	const xp = Math.max(68 * 68 * 68, getHighestXpOnTeam(s.pokemon) * 0.9);
 
 	const hitmonlee = makeChallengerPokemon({
 		xp,
 		name: 'hitmonlee',
 		ability: 'sniper',
+		nature: 'hasty',
 		heldItemName: 'choice-band',
 		firstMove: { name: 'low-kick', usedPP: 0 },
 		secondMove: { name: 'blaze-kick', usedPP: 0 },
@@ -24,6 +25,7 @@ const brunoTeam = (s: SaveFile): OwnedPokemon[] => {
 		xp,
 		name: 'hitmonchan',
 		ability: 'iron-fist',
+		nature: 'adamant',
 		heldItemName: 'punching-glove',
 		firstMove: { name: 'power-up-punch', usedPP: 0 },
 		secondMove: { name: 'ice-punch', usedPP: 0 },
@@ -33,6 +35,7 @@ const brunoTeam = (s: SaveFile): OwnedPokemon[] => {
 	const hitmontop = makeChallengerPokemon({
 		name: 'hitmontop',
 		xp,
+		nature: 'adamant',
 		heldItemName: 'loaded-dice',
 		firstMove: { name: 'triple-kick', usedPP: 0 },
 		secondMove: { name: 'triple-axel', usedPP: 0 },
@@ -43,6 +46,7 @@ const brunoTeam = (s: SaveFile): OwnedPokemon[] => {
 	const hariyama = makeChallengerPokemon({
 		name: 'hariyama',
 		xp,
+		nature: 'adamant',
 		heldItemName: 'sitrus-berry',
 		firstMove: { name: 'belly-drum', usedPP: 0 },
 		secondMove: { name: 'drain-punch', usedPP: 0 },
@@ -54,6 +58,7 @@ const brunoTeam = (s: SaveFile): OwnedPokemon[] => {
 		name: 'pangoro',
 		xp,
 		heldItemName: 'black-glasses',
+		nature: 'adamant',
 		firstMove: { name: 'power-up-punch', usedPP: 0 },
 		secondMove: { name: 'crunch', usedPP: 0 },
 		thirdMove: { name: 'rock-slide', usedPP: 0 },
@@ -64,6 +69,7 @@ const brunoTeam = (s: SaveFile): OwnedPokemon[] => {
 		name: 'machamp',
 		xp,
 		heldItemName: 'black-belt',
+		nature: 'adamant',
 		firstMove: { name: 'bulk-up', usedPP: 0 },
 		secondMove: { name: 'cross-chop', usedPP: 0 },
 		fourthMove: { name: 'mega-kick', usedPP: 0 },

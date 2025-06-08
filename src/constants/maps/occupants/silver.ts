@@ -1,20 +1,12 @@
 import { getRandomEntry } from '../../../functions/filterTargets';
 import { getHighestXpOnTeam } from '../../../functions/getHighestXpOnTeam';
-import {
-	isFriday,
-	isMonday,
-	isSaturday,
-	isSunday,
-	isThursday,
-	isTuesday,
-	isWednesday,
-} from '../../../functions/isXDay';
 import { makeChallengerPokemon } from '../../../functions/makeChallengerPokemon';
 import { Occupant, OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
+import { trickXP } from '../../gameData';
 
 export const silverId = 'trainer silver';
 const silverTeam = (s: SaveFile): OwnedPokemon[] => {
@@ -297,6 +289,10 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
 		typhlosion,
 		skarmory,
 	];
+
+	if (highestXpOnTeam === trickXP) {
+		return possibilities;
+	}
 	const team: OwnedPokemon[] = [];
 
 	const numberOfMembers = () => {
@@ -323,7 +319,7 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
 	return team;
 };
 
-const silver: OverworldTrainer = {
+export const silver: OverworldTrainer = {
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/b/b6/VSSilver.png',
 	type: 'TRAINER',
@@ -347,51 +343,44 @@ export const silverN1: Occupant = {
 	...silver,
 	x: 39,
 	y: 40,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== silverId) && isTuesday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== silverId),
 };
 export const silverN1E1: Occupant = {
 	...silver,
 	x: 47,
 	y: 2,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== silverId) && isWednesday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== silverId),
 };
 export const silverE1: Occupant = {
 	...silver,
 	x: 32,
 	y: 23,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== silverId) && isThursday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== silverId),
 };
 export const silverS1E1: Occupant = {
 	...silver,
 	x: 17,
 	y: 10,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== silverId) && isFriday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== silverId),
 };
 export const silverS1: Occupant = {
 	...silver,
 	x: 10,
 	y: 1,
 	orientation: 'RIGHT',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== silverId) && isSaturday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== silverId),
 };
 export const silverS1W1: Occupant = {
 	...silver,
 	x: 31,
 	y: 40,
 	orientation: 'RIGHT',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== silverId) && isSunday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== silverId),
 };
-export const silverN1W1: Occupant = {
+export const silverW1: Occupant = {
 	...silver,
-	x: 26,
+	x: 45,
 	y: 46,
-	orientation: 'LEFT',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== silverId) && isMonday(),
+	orientation: 'DOWN',
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== silverId),
 };
