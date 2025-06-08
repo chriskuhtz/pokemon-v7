@@ -6,6 +6,7 @@ import { getRocketChadTeam } from '../../../functions/troubleMakers/rocket';
 import { Occupant } from '../../../interfaces/OverworldMap';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
+import { startingLocation } from '../../gameData';
 
 export const allRocketCampTrainersDefeated = (s: SaveFile): boolean => {
 	return rocketCampOccupants
@@ -234,13 +235,7 @@ export const rocketCampOccupants: Occupant[] = [
 		orientation: 'DOWN',
 		x: 10,
 		y: 10,
-		to: {
-			mapId: 'camp',
-			x: 11,
-			y: 8,
-			orientation: 'DOWN',
-			forwardFoot: 'CENTER1',
-		},
+		to: startingLocation,
 		conditionFunction: allRocketCampTrainersDefeated,
 		dialogue: ['great job', 'thank you for help'],
 	},

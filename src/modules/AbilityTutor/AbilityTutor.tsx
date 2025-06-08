@@ -6,6 +6,8 @@ import {
 	AbilityName,
 	abilityNames,
 } from '../../constants/checkLists/completed/abilityCheckList';
+import { internalDex } from '../../constants/internalDexData';
+import { getEntryWithOverflow } from '../../functions/filterTargets';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
@@ -16,7 +18,7 @@ import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { internalDex } from '../../constants/internalDexData';
+import { moveUnlockPayments } from '../MoveTutor/MoveTutor';
 
 export const AbilityTutor = () => {
 	const { saveFile } = useContext(SaveFileContext);
@@ -128,61 +130,60 @@ const AbilityEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 	}, [data, ownedPokemon.ability]);
 
 	const getCost = (ability: AbilityName): ItemType => {
-		const options: ItemType[] = [
-			'big-malasada',
-			'moomoo-cheese',
-			'casteliacone',
-			'pewter-crunchies',
-			'lumiose-galette',
-			'rage-candy-bar',
-			'lava-cookie',
-			'old-gateau',
-			'berry-juice',
-		];
-		return options[(ability.length * 5) % options.length];
+		return getEntryWithOverflow(moveUnlockPayments, ability.length);
 	};
 
 	return (
 		<Stack mode={'column'}>
-			<Card
-				icon={<></>}
-				actionElements={[
-					<AbilityInfoButton abilityName={ownedPokemon.ability} />,
-				]}
-				content={
-					<h4 style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-						Current Ability: {ownedPokemon.ability}{' '}
-					</h4>
-				}
-			/>
+			<Stack mode="row" alignItems="center">
+				<div style={{ flexGrow: 1 }}>
+					<Card
+						icon={<></>}
+						actionElements={[]}
+						content={
+							<h4
+								style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
+							>
+								Current Ability: {ownedPokemon.ability}{' '}
+							</h4>
+						}
+					/>
+				</div>
+				<AbilityInfoButton abilityName={ownedPokemon.ability} />
+			</Stack>
 			{options.map((a) => {
 				const payment = getCost(a);
 
 				const disabled = saveFile.bag[payment] < 1;
 
 				return (
-					<Card
-						key={a}
-						onClick={() => setAbilityToConfirm(a)}
-						actionElements={
-							!disabled && abilityToConfirm === a
-								? [
-										<strong onClick={() => changeAbility(a, payment)}>
-											Confirm
-										</strong>,
-								  ]
-								: [<AbilityInfoButton abilityName={a} />]
-						}
-						icon={<ItemSprite item={payment} />}
-						disabled={disabled}
-						content={
-							<div style={{ display: 'flex', gap: '.5rem' }}>
-								<strong>
-									{a}: {disabled && ` (1 ${payment} required)`}
-								</strong>
-							</div>
-						}
-					/>
+					<Stack mode="row" alignItems="center">
+						<div style={{ flexGrow: 1 }}>
+							<Card
+								key={a}
+								onClick={() => setAbilityToConfirm(a)}
+								actionElements={
+									!disabled && abilityToConfirm === a
+										? [
+												<strong onClick={() => changeAbility(a, payment)}>
+													Confirm
+												</strong>,
+										  ]
+										: []
+								}
+								icon={<ItemSprite item={payment} />}
+								disabled={disabled}
+								content={
+									<div style={{ display: 'flex', gap: '.5rem' }}>
+										<strong>
+											{a}: {disabled && ` (1 ${payment} required)`}
+										</strong>
+									</div>
+								}
+							/>
+						</div>
+						<AbilityInfoButton abilityName={a} />
+					</Stack>
 				);
 			})}
 		</Stack>

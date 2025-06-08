@@ -10,7 +10,10 @@ import {
 	localStorageLocationId,
 	startingLocation,
 } from '../constants/gameData';
-import { resetEliteFour } from '../functions/resetChallengeFielders';
+import {
+	resetChallengeFielders,
+	resetEliteFour,
+} from '../functions/resetChallengeFielders';
 import { CharacterLocationData } from '../interfaces/SaveFile';
 import { SaveFileContext } from './useSaveFile';
 
@@ -33,8 +36,25 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
 
 	const setLocation = useCallback(
 		(l: CharacterLocationData) => {
-			//reset e4 when entering league
+			//reset challengeFielders when  before entering
+			if (l.mapId == 'randomField' && location.mapId !== 'randomField') {
+				patchSaveFileReducer({
+					handledOccupants: resetChallengeFielders(saveFile.handledOccupants),
+				});
+			}
+			if (l.mapId == 'challengeField' && location.mapId !== 'challengeField') {
+				patchSaveFileReducer({
+					handledOccupants: resetChallengeFielders(saveFile.handledOccupants),
+				});
+			}
+			//reset e4 when  before entering
 			if (l.mapId == 'pokemonLeague' && location.mapId !== 'pokemonLeague') {
+				patchSaveFileReducer({
+					handledOccupants: resetEliteFour(saveFile.handledOccupants),
+				});
+			}
+			//reset rocket hideout before entering
+			if (l.mapId == 'rocketCamp' && location.mapId !== 'rocketCamp') {
 				patchSaveFileReducer({
 					handledOccupants: resetEliteFour(saveFile.handledOccupants),
 				});
