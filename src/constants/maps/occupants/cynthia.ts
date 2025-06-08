@@ -1,14 +1,5 @@
 import { getRandomEntry } from '../../../functions/filterTargets';
 import { getHighestXpOnTeam } from '../../../functions/getHighestXpOnTeam';
-import {
-	isFriday,
-	isMonday,
-	isSaturday,
-	isSunday,
-	isThursday,
-	isTuesday,
-	isWednesday,
-} from '../../../functions/isXDay';
 import { makeChallengerPokemon } from '../../../functions/makeChallengerPokemon';
 import { Occupant, OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
@@ -360,51 +351,44 @@ export const cynthiaN1: Occupant = {
 	...cynthia,
 	x: 45,
 	y: 3,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== cynthiaId) && isThursday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
 };
 export const cynthiaN1E1: Occupant = {
 	...cynthia,
 	x: 30,
 	y: 46,
 	orientation: 'RIGHT',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== cynthiaId) && isFriday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
 };
 export const cynthiaE1: Occupant = {
 	...cynthia,
 	x: 25,
 	y: 29,
 	orientation: 'RIGHT',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== cynthiaId) && isSaturday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
 };
 export const cynthiaS1E1: Occupant = {
 	...cynthia,
 	x: 12,
 	y: 42,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== cynthiaId) && isSunday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
 };
 export const cynthiaS1: Occupant = {
 	...cynthia,
 	x: 25,
 	y: 20,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== cynthiaId) && isMonday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
 };
 export const cynthiaS1W1: Occupant = {
 	...cynthia,
 	x: 10,
 	y: 45,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== cynthiaId) && isTuesday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
 };
-export const cynthiaN1W1: Occupant = {
+export const cynthiaW1: Occupant = {
 	...cynthia,
-	x: 23,
-	y: 40,
+	x: 17,
+	y: 38,
 	orientation: 'RIGHT',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== cynthiaId) && isWednesday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
 };

@@ -1,14 +1,5 @@
 import { getRandomEntry } from '../../../functions/filterTargets';
 import { getHighestXpOnTeam } from '../../../functions/getHighestXpOnTeam';
-import {
-	isFriday,
-	isMonday,
-	isSaturday,
-	isSunday,
-	isThursday,
-	isTuesday,
-	isWednesday,
-} from '../../../functions/isXDay';
 import { makeChallengerPokemon } from '../../../functions/makeChallengerPokemon';
 import { Occupant, OverworldTrainer } from '../../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
@@ -392,49 +383,42 @@ export const barryN1: Occupant = {
 	...barry,
 	x: 12,
 	y: 40,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== barryId) && isMonday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== barryId),
 };
 export const barryN1E1: Occupant = {
 	...barry,
 	x: 14,
 	y: 22,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== barryId) && isTuesday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== barryId),
 };
 export const barryE1: Occupant = {
 	...barry,
 	x: 10,
 	y: 29,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== barryId) && isWednesday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== barryId),
 };
 export const barryS1E1: Occupant = {
 	...barry,
 	x: 25,
 	y: 25,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== barryId) && isThursday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== barryId),
 };
 export const barryS1: Occupant = {
 	...barry,
 	x: 4,
 	y: 29,
 	orientation: 'RIGHT',
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== barryId) && isFriday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== barryId),
 };
 export const barryS1W1: Occupant = {
 	...barry,
 	x: 29,
 	y: 6,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== barryId) && isSaturday(),
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== barryId),
 };
-export const barryN1W1: Occupant = {
+export const barryW1: Occupant = {
 	...barry,
-	x: 16,
-	y: 45,
-	conditionFunction: (s) =>
-		s.handledOccupants.every((h) => h.id !== barryId) && isSunday(),
+	x: 15,
+	y: 46,
+	conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== barryId),
 };

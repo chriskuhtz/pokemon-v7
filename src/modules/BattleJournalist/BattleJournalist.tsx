@@ -36,6 +36,7 @@ import { silver } from '../../constants/maps/occupants/silver';
 import { trainerSurge } from '../../constants/maps/occupants/surge';
 import { will } from '../../constants/maps/occupants/will';
 import { calculateLevelData } from '../../functions/calculateLevelData';
+import { getEntryWithOverflow } from '../../functions/filterTargets';
 import { getTypeNames } from '../../functions/getTypeNames';
 import { useGetBattleTeam } from '../../hooks/useGetBattleTeam';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
@@ -259,12 +260,7 @@ export const BattleJournalist = (): JSX.Element => {
 				<Stack mode="column">
 					<h3>Trade Snacks for a look at the Journalists Notes:</h3>
 					{options.map((data, index) => {
-						const cost = [
-							...moveUnlockPayments,
-							...moveUnlockPayments,
-							...moveUnlockPayments,
-							...moveUnlockPayments,
-						][index];
+						const cost = getEntryWithOverflow(moveUnlockPayments, index);
 						return (
 							<Card
 								disabled={saveFile.bag[cost] <= 0}
