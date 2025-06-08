@@ -1,12 +1,10 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { pokemonTypes } from '../interfaces/PokemonType';
-import { getTypeNames } from './getTypeNames';
+import { hasType } from './hasType';
 
 export const checkForSharedType = (
 	a: BattlePokemon,
 	b: BattlePokemon
 ): boolean => {
-	return [...pokemonTypes].some(
-		(type) => getTypeNames(a).includes(type) && getTypeNames(b).includes(type)
-	);
+	return [...pokemonTypes].some((type) => hasType(a, type) && hasType(b, type));
 };

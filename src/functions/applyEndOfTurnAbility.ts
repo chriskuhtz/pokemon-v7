@@ -11,6 +11,7 @@ import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { getHeldItem } from './getHeldItem';
 import { getMiddleOfThree } from './getMiddleOfThree';
+import { isOnGround } from './isOnGround';
 
 export const applyEndOfTurnAbility = ({
 	initialPokemon,
@@ -154,7 +155,7 @@ export const applyGrassyTerrainHeal = ({
 	addMessage: (x: Message) => void;
 	terrain: BattleTerrain | undefined;
 }): BattlePokemon => {
-	if (terrain === 'grassy' && pokemon.damage) {
+	if (terrain === 'grassy' && isOnGround(pokemon) && pokemon.damage) {
 		addMessage({ message: `${pokemon.name} was healed by grassy terrain` });
 		return {
 			...pokemon,

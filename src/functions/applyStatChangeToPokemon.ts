@@ -4,7 +4,7 @@ import { Stat } from '../interfaces/StatObject';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { getHeldItem } from './getHeldItem';
 import { getMiddleOfThree } from './getMiddleOfThree';
-import { getTypeNames } from './getTypeNames';
+import { hasType } from './hasType';
 
 export const applyStatChangeToPokemon = (
 	pokemon: BattlePokemon,
@@ -35,7 +35,7 @@ export const applyStatChangeToPokemon = (
 		(a) => a.type === 'guard-spec'
 	);
 	const flowerVeiled =
-		getTypeNames(pokemon).includes('grass') &&
+		hasType(pokemon, 'grass') &&
 		battleFieldEffects.some(
 			(b) => b.ownerId === pokemon.ownerId && b.type === 'flower-veil'
 		);

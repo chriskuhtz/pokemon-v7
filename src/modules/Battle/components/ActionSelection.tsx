@@ -9,7 +9,8 @@ import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
 import { getHeldItem } from '../../../functions/getHeldItem';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { getPlayerPokemon } from '../../../functions/getPlayerPokemon';
-import { getTypeNames } from '../../../functions/getTypeNames';
+import { hasType } from '../../../functions/hasType';
+import { isOnGround } from '../../../functions/isOnGround';
 import { isTrapped } from '../../../functions/isTrapped';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
@@ -48,13 +49,12 @@ export const canRunOrSwitch = (
 			(b) => b.type === 'shadow-tag' && b.ownerId !== controlled.ownerId
 		);
 	const arenaTrapped =
-		controlled.ability !== 'levitate' &&
-		!getTypeNames(controlled).includes('flying') &&
+		isOnGround(controlled) &&
 		battleFieldEffects.some(
 			(b) => b.type === 'arena-trap' && b.ownerId !== controlled.ownerId
 		);
 	const magnetPulled =
-		getTypeNames(controlled).includes('steel') &&
+		hasType(controlled, 'steel') &&
 		battleFieldEffects.some(
 			(b) => b.type === 'magnet-pull' && b.ownerId !== controlled.ownerId
 		);

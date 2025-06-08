@@ -10,6 +10,7 @@ import { WeatherType } from '../interfaces/Weather';
 import { getHeldItem } from './getHeldItem';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getTypeNames } from './getTypeNames';
+import { hasType } from './hasType';
 
 export const applyEndOfTurnWeatherDamage = (
 	pokemon: BattlePokemon,
@@ -45,7 +46,7 @@ export const applyEndOfTurnWeatherDamage = (
 	}
 	if (weather === 'hail') {
 		if (
-			getTypeNames(pokemon).some((t) => ['ice'].includes(t)) ||
+			hasType(pokemon, 'ice') ||
 			['snow-cloak', 'overcoat'].includes(pokemon.ability) ||
 			getHeldItem(pokemon) === 'safety-goggles'
 		) {
