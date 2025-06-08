@@ -477,6 +477,7 @@ export const questNames = [
 	'defeat an imported challenger at lvl 80 or higher',
 	'defeat an imported challenger at lvl 100',
 	'catch all pokemon from victory road',
+	'collect 8 badges',
 	'defeat the pokemon league',
 ] as const;
 
@@ -2023,19 +2024,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 				)
 			),
 	},
-	'catch all pokemon from victory road': {
-		category: 'EXPLORATION',
-		kind: 'BULLETIN',
-		requiredUpgrade: 'rock climbing certification',
-		targetRoute: 'victoryRoad',
-		researchPoints: 50,
-		rewardItems: {},
-		targetPokemon: getAllEncountersFor('victoryRoad', {}).map((p) => p.name),
-		conditionFunction: (s: SaveFile) =>
-			getAllEncountersFor('victoryRoad', {}).every((o) =>
-				s.pokedex[o.name].caughtOnRoutes.includes('victoryRoad')
-			),
-	},
+
 	'wake a snorlax': {
 		category: 'RESEARCH',
 		kind: 'BULLETIN',
@@ -3105,11 +3094,34 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'defeat an imported challenger at lvl 80 or higher',
 		rewardItems: { 'exp-candy-xl': 10 },
 	},
+	'collect 8 badges': {
+		category: 'GYM LEADER',
+		kind: 'BULLETIN',
+		campUpgrade: 'pidgeot rider certification',
+		researchPoints: 50,
+		conditionFunction: (s) => s.badges.length >= 8,
+		rewardItems: {},
+	},
+	'catch all pokemon from victory road': {
+		category: 'EXPLORATION',
+		kind: 'BULLETIN',
+		requiredUpgrade: 'rock climbing certification',
+		targetRoute: 'victoryRoad',
+		researchPoints: 50,
+		rewardItems: {},
+		availableAfter: 'collect 8 badges',
+		targetPokemon: getAllEncountersFor('victoryRoad', {}).map((p) => p.name),
+		conditionFunction: (s: SaveFile) =>
+			getAllEncountersFor('victoryRoad', {}).every((o) =>
+				s.pokedex[o.name].caughtOnRoutes.includes('victoryRoad')
+			),
+	},
 	'defeat the pokemon league': {
 		category: 'BATTLE',
 		kind: 'BULLETIN',
 		conditionFunction: (s: SaveFile) => !!s.mileStones.lanceDefeatedAt,
 		researchPoints: 100,
+		availableAfter: 'collect 8 badges',
 		rewardItems: { 'max-lure': 1, 'master-ball': 1 },
 	},
 } as Record<QuestName, Quest>;

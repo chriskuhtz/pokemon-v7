@@ -1,5 +1,5 @@
 import React, { useContext, useMemo, useState } from 'react';
-import { FaRegStar, FaStar } from 'react-icons/fa';
+import { FaRegStar, FaSearch, FaStar } from 'react-icons/fa';
 import { GiBreakingChain } from 'react-icons/gi';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
@@ -57,6 +57,7 @@ export const PokemonStorage = ({
 
 	const allPokemon = useMemo(() => saveFile.pokemon, [saveFile]);
 	const [sortBy, setSortBy] = useState<PokemonFilter>('FAVORITE');
+	const [search, setSearch] = useState<string>();
 	const sortFunction = useMemo(() => {
 		if (sortBy === 'CATCHDATE') {
 			return (a: OwnedPokemon, b: OwnedPokemon) =>
@@ -98,6 +99,20 @@ export const PokemonStorage = ({
 	const stored = useMemo(
 		() => allPokemon.filter((p) => p.onTeam === false),
 		[allPokemon]
+	);
+
+	const filtered = useMemo(
+		() =>
+			stored.filter((s) => {
+				if (!search) {
+					return true;
+				}
+				if (s.name.includes(search)) {
+					return true;
+				}
+				return false;
+			}),
+		[search, stored]
 	);
 	const togglePokemonOnTeam = (id: string) => {
 		patchSaveFileReducer({
@@ -249,6 +264,15 @@ export const PokemonStorage = ({
 						</button>
 					))}
 				</div>
+
+				<Stack mode="row" justifyContent="center">
+					<FaSearch size={battleSpriteSize} />{' '}
+					<input
+						value={search}
+						onChange={(e) => setSearch(e.target.value.toLowerCase())}
+					/>
+				</Stack>
+
 				<button onClick={collectAllHeldItemsFromStored}>
 					Collect all held items from stored Pokemon
 				</button>
@@ -256,7 +280,7 @@ export const PokemonStorage = ({
 
 			<Sorted
 				pokemonFilter={sortBy}
-				stored={stored}
+				stored={filtered}
 				sortFunction={sortFunction}
 				teamIsFull={team.length >= getTeamSize(saveFile)}
 				togglePokemonOnTeam={togglePokemonOnTeam}

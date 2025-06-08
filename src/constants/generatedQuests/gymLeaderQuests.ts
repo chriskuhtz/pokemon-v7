@@ -356,7 +356,6 @@ export const gymLeaderQuests: Partial<Record<QuestName, Quest>> = {
 			intrinsicValues: generateRandomStatObject(31, 25),
 			caughtOnMap: 'camp',
 		},
-		campUpgrade: 'pidgeot rider certification',
 		researchPoints: 50,
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === 'Gym Leader Falkner');
