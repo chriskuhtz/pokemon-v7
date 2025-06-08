@@ -55,7 +55,7 @@ const janineCondition = (s: SaveFile) => {
 };
 
 export const janineId = 'trainer_janine';
-const trainerJanine: OverworldTrainer = {
+export const trainerJanine: OverworldTrainer = {
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/2/2d/VSJanine.png',
 	type: 'TRAINER',

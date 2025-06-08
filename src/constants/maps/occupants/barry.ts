@@ -15,6 +15,7 @@ import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
+import { trickXP } from '../../gameData';
 
 export const barryId = 'trainer barry';
 const barryTeam = (s: SaveFile): OwnedPokemon[] => {
@@ -105,7 +106,7 @@ const barryTeam = (s: SaveFile): OwnedPokemon[] => {
 		},
 	});
 	const staraptor = makeChallengerPokemon({
-		name: 'staravia',
+		name: 'staraptor',
 		xp: highestXpOnTeam,
 		nature: 'adamant',
 		ability: 'reckless',
@@ -334,6 +335,9 @@ const barryTeam = (s: SaveFile): OwnedPokemon[] => {
 		torterra,
 		empoleon,
 	];
+	if (highestXpOnTeam === trickXP) {
+		return possibilities;
+	}
 	const team: OwnedPokemon[] = [];
 
 	const numberOfMembers = () => {
@@ -360,7 +364,7 @@ const barryTeam = (s: SaveFile): OwnedPokemon[] => {
 	return team;
 };
 
-const barry: OverworldTrainer = {
+export const barry: OverworldTrainer = {
 	type: 'TRAINER',
 	x: 0,
 	y: 0,

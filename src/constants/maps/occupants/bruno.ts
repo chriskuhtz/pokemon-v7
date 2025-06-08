@@ -8,7 +8,7 @@ import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
 
 const brunoTeam = (s: SaveFile): OwnedPokemon[] => {
-	const xp = Math.min(70 * 70 * 70, getHighestXpOnTeam(s.pokemon) * 0.9);
+	const xp = Math.max(68 * 68 * 68, getHighestXpOnTeam(s.pokemon) * 0.9);
 
 	const hitmonlee = makeChallengerPokemon({
 		xp,

@@ -60,7 +60,7 @@ const sabrinaCondition = (s: SaveFile) => {
 };
 
 export const sabrinaId = 'trainer_sabrina';
-const trainerSabrina: OverworldTrainer = {
+export const trainerSabrina: OverworldTrainer = {
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/5/58/VSSabrina.png',
 	type: 'TRAINER',

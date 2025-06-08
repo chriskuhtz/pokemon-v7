@@ -58,7 +58,7 @@ const mistyCondition = (s: SaveFile) => {
 };
 
 export const mistyId = 'trainer_misty';
-const trainerMisty: OverworldTrainer = {
+export const trainerMisty: OverworldTrainer = {
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/2/20/VSMisty.png',
 	type: 'TRAINER',

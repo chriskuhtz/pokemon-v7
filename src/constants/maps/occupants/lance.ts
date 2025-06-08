@@ -9,7 +9,7 @@ import { EmptyStatObject } from '../../../interfaces/StatObject';
 
 export const lanceId = 'elite4-champ-lance';
 const lanceTeam = (s: SaveFile): OwnedPokemon[] => {
-	const xp = Math.min(70 * 70 * 70, getHighestXpOnTeam(s.pokemon));
+	const xp = Math.max(70 * 70 * 70, getHighestXpOnTeam(s.pokemon));
 
 	const salamence = makeChallengerPokemon({
 		xp,

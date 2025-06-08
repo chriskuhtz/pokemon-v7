@@ -5,6 +5,7 @@ import { battleSpriteSize } from '../../constants/gameData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { ItemType } from '../../interfaces/Item';
 import { ItemData } from '../../interfaces/ItemData';
+import { Nature, natures } from '../../interfaces/Natures';
 
 export const ItemInfoButton = ({
 	itemName,
@@ -42,6 +43,37 @@ export const ItemInfoButton = ({
 	return (
 		<IoMdInformationCircleOutline
 			onClick={() => setSkip(false)}
+			size={small ? battleSpriteSize / 2 : battleSpriteSize}
+		/>
+	);
+};
+
+export const NatureInfoButton = ({
+	nature,
+	small,
+}: {
+	nature: Nature;
+	small?: boolean;
+}) => {
+	const mods = natures[nature];
+	const { addMultipleMessages } = useContext(MessageQueueContext);
+
+	return (
+		<IoMdInformationCircleOutline
+			onClick={() => {
+				if (!mods.buff) {
+					addMultipleMessages([
+						{ message: `${nature} Nature:` },
+						{ message: `Neutral, no effect on stats` },
+					]);
+				} else {
+					addMultipleMessages([
+						{ message: `${nature} Nature:` },
+						{ message: `+ 10% ${mods.buff}` },
+						{ message: `- 10% ${mods.debuff}` },
+					]);
+				}
+			}}
 			size={small ? battleSpriteSize / 2 : battleSpriteSize}
 		/>
 	);

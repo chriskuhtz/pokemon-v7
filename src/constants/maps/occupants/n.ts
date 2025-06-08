@@ -15,6 +15,7 @@ import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
+import { trickXP } from '../../gameData';
 
 export const nId = 'trainer n';
 const nTeam = (s: SaveFile): OwnedPokemon[] => {
@@ -254,6 +255,10 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
 		volcarona,
 		bouffalant,
 	];
+
+	if (highestXpOnTeam === trickXP) {
+		return possibilities;
+	}
 	const team: OwnedPokemon[] = [];
 
 	const numberOfMembers = () => {
@@ -280,7 +285,7 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
 	return team;
 };
 
-const n: OverworldTrainer = {
+export const n: OverworldTrainer = {
 	type: 'TRAINER',
 	x: 0,
 	y: 0,

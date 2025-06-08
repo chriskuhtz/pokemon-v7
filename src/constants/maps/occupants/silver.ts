@@ -15,6 +15,7 @@ import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
+import { trickXP } from '../../gameData';
 
 export const silverId = 'trainer silver';
 const silverTeam = (s: SaveFile): OwnedPokemon[] => {
@@ -297,6 +298,10 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
 		typhlosion,
 		skarmory,
 	];
+
+	if (highestXpOnTeam === trickXP) {
+		return possibilities;
+	}
 	const team: OwnedPokemon[] = [];
 
 	const numberOfMembers = () => {
@@ -323,7 +328,7 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
 	return team;
 };
 
-const silver: OverworldTrainer = {
+export const silver: OverworldTrainer = {
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/b/b6/VSSilver.png',
 	type: 'TRAINER',

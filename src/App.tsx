@@ -9,6 +9,7 @@ import { AmoongussCompostResearcher } from './modules/AmoongussResearcher/Amoong
 import { ApricornSmithy } from './modules/ApricornSmithy/ApricornSmithy';
 import { Bag } from './modules/Bag/Bag';
 import { BattleLoader } from './modules/Battle/components/BattleLoader';
+import { BattleJournalist } from './modules/BattleJournalist/BattleJournalist';
 import { BerryLure } from './modules/BerryLure/BerryLure';
 import { BulletinBoard } from './modules/BulletinBoard/BulletinBoard';
 import { CampUpgrades } from './modules/CampUpgrades/CampUpgrades';
@@ -261,6 +262,9 @@ export const App = (): JSX.Element => {
 	}
 	if (activeTab === 'INTERNAL_DEX') {
 		return <InternalDex />;
+	}
+	if (activeTab === 'BATTLE_JOURALIST') {
+		return <BattleJournalist />;
 	}
 	if (activeTab.includes('MAP_MAKER')) {
 		const mapId = activeTab.slice(10) as MapId;

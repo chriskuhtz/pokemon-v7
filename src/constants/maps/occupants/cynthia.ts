@@ -15,6 +15,7 @@ import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../interfaces/StatObject';
+import { trickXP } from '../../gameData';
 
 export const cynthiaId = 'champion cynthia';
 const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
@@ -304,6 +305,9 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
 		otherGarchomp,
 		pory,
 	];
+	if (highestXpOnTeam === trickXP) {
+		return possibilities;
+	}
 	const team: OwnedPokemon[] = [];
 	const numberOfMembers = () => {
 		if (highestXpOnTeam < 50 * 50 * 50) {
@@ -329,7 +333,7 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
 	return team;
 };
 
-const cynthia: OverworldTrainer = {
+export const cynthia: OverworldTrainer = {
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/b/b1/VSCynthia.png',
 	type: 'TRAINER',

@@ -11,6 +11,8 @@ import { CampUpgrade, campUpgradeNames } from './campUpgrades';
 import { pokemonNames } from './pokemonNames';
 import { QuestName, QuestsRecord } from './questsRecord';
 
+export const trickXP = 694206942069420;
+
 export const portraitMode: boolean =
 	screen.orientation.type === 'portrait-primary';
 export const frames = 16;
