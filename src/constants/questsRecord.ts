@@ -2415,7 +2415,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			return s.handledOccupants.some((h) => h.id === 'giovanni');
 		},
 		kind: 'BULLETIN',
-		availableAfter: 'reach ranger level 5',
+		availableAfter: 'reach ranger level 10',
 	},
 	'report a bug': {
 		category: 'RESEARCH',

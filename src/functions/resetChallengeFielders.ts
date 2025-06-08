@@ -1,4 +1,5 @@
 import { challengeFieldId, randomFieldId } from '../constants/gameData';
+import { rocketCampOccupants } from '../constants/maps/occupants/rocketCampOccupants';
 import { SaveFile } from '../interfaces/SaveFile';
 
 export const resetChallengeFielders = (
@@ -21,14 +22,14 @@ export const resetEliteFour = (
 	occs: SaveFile['handledOccupants']
 ): SaveFile['handledOccupants'] => {
 	return occs.filter((h) => {
-		if (h.id.includes(challengeFieldId)) {
-			return false;
-		}
+		return h.id.includes('elite4');
+	});
+};
 
-		if (h.id.includes(randomFieldId)) {
-			return false;
-		}
-
-		return true;
+export const resetRocketCampers = (
+	occs: SaveFile['handledOccupants']
+): SaveFile['handledOccupants'] => {
+	return occs.filter((h) => {
+		return !rocketCampOccupants.some((r) => r.id == h.id);
 	});
 };
