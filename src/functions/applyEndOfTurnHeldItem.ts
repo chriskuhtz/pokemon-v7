@@ -18,6 +18,7 @@ import { applyStatChangeToPokemon } from './applyStatChangeToPokemon';
 import { getHeldItem } from './getHeldItem';
 import { getMovesArray } from './getMovesArray';
 import { hasAilment } from './hasAilment';
+import { hasBattleFieldEffect } from './hasBattleFieldEffect';
 import { hasType } from './hasType';
 
 export const applyEndOfTurnHeldItem = (
@@ -28,9 +29,7 @@ export const applyEndOfTurnHeldItem = (
 	terrain: BattleTerrain | undefined,
 	battleInventory: Inventory
 ): BattlePokemon => {
-	const unnerved = battleFieldEffects.some(
-		(b) => b.type === 'unnerve' && b.ownerId !== pokemon.ownerId
-	);
+	const unnerved = hasBattleFieldEffect(pokemon, 'unnerve', battleFieldEffects);
 
 	if (unnerved && isBerry(getHeldItem(pokemon))) {
 		return pokemon;
