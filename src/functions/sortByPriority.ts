@@ -7,6 +7,7 @@ import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { calculateModifiedStat } from './calculateModifiedStat';
 import { getHeldItem } from './getHeldItem';
+import { hasAilment } from './hasAilment';
 
 const calculateTotalSpeed = (
 	a: BattlePokemon,
@@ -26,11 +27,7 @@ const calculateTotalSpeed = (
 		a.ability === 'sand-rush' && battleWeather === 'sandstorm' ? 2 : 1;
 	const slushrushFactor =
 		a.ability === 'slush-rush' && battleWeather === 'hail' ? 2 : 1;
-	const unburdenFactorA = a.secondaryAilments.some(
-		(ail) => ail.type === 'unburdened'
-	)
-		? 2
-		: 1;
+	const unburdenFactorA = hasAilment(a, 'unburdened') ? 2 : 1;
 	const machoBraceFactor = getHeldItem(a) === 'macho-brace' ? 0.5 : 1;
 	const choiceScarfFactor = getHeldItem(a) === 'choice-scarf' ? 2 : 1;
 	const tailwindFactor = battlefieldEffects.some(

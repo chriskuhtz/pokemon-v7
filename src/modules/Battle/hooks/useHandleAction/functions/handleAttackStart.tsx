@@ -3,6 +3,7 @@ import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/groupedMoves';
 import { determineMiss } from '../../../../../functions/determineMiss';
 import { getRandomTarget } from '../../../../../functions/filterTargets';
 import { getActualTarget } from '../../../../../functions/getActualTargetId';
+import { hasAilment } from '../../../../../functions/hasAilment';
 import { Message } from '../../../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
@@ -216,7 +217,7 @@ export const handleAttackStart = ({
 	}
 	if (
 		updatedAttacker.ability === 'libero' &&
-		!updatedAttacker.secondaryAilments.some((a) => a.type === 'color-changed')
+		!hasAilment(updatedAttacker, 'color-changed')
 	) {
 		addMessage({
 			message: `${attacker.name} became a ${move.data.type.name} type`,

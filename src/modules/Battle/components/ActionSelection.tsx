@@ -9,6 +9,7 @@ import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
 import { getHeldItem } from '../../../functions/getHeldItem';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { getPlayerPokemon } from '../../../functions/getPlayerPokemon';
+import { hasAilment } from '../../../functions/hasAilment';
 import { hasType } from '../../../functions/hasType';
 import { isOnGround } from '../../../functions/isOnGround';
 import { isTrapped } from '../../../functions/isTrapped';
@@ -61,12 +62,9 @@ export const canRunOrSwitch = (
 	const spiderWebbed = battleFieldEffects.some(
 		(b) => b.type === 'spider-web' && b.ownerId !== controlled.ownerId
 	);
-	const meanLooked = controlled.secondaryAilments.some(
-		(b) => b.type === 'mean-looked'
-	);
-	const ingrained = controlled.secondaryAilments.some(
-		(b) => b.type === 'ingrained'
-	);
+	const meanLooked = hasAilment(controlled, 'mean-looked');
+	const ingrained = hasAilment(controlled, 'ingrained');
+
 	return !(
 		trapped ||
 		shadowTagged ||

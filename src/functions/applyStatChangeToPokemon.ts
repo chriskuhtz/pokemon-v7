@@ -4,6 +4,7 @@ import { Stat } from '../interfaces/StatObject';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { getHeldItem } from './getHeldItem';
 import { getMiddleOfThree } from './getMiddleOfThree';
+import { hasAilment } from './hasAilment';
 import { hasType } from './hasType';
 
 export const applyStatChangeToPokemon = (
@@ -31,9 +32,7 @@ export const applyStatChangeToPokemon = (
 
 	const existingStat = pokemon.statBoosts[stat];
 
-	const guardSpecced = pokemon.secondaryAilments.some(
-		(a) => a.type === 'guard-spec'
-	);
+	const guardSpecced = hasAilment(pokemon, 'guard-spec');
 	const flowerVeiled =
 		hasType(pokemon, 'grass') &&
 		battleFieldEffects.some(

@@ -1,5 +1,6 @@
 import { BattlePokemon, isBattlePokemon } from '../interfaces/BattlePokemon';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { hasAilment } from './hasAilment';
 
 export function getMovesArray<T extends BattlePokemon | OwnedPokemon>(
 	pokemon: T,
@@ -18,8 +19,7 @@ export function getMovesArray<T extends BattlePokemon | OwnedPokemon>(
 		? pokemon.secondaryAilments.find((a) => a.type === 'encore')?.move
 		: undefined;
 	const tormentedMove =
-		isBattlePokemon(pokemon) &&
-		pokemon.secondaryAilments.some((a) => a.type === 'torment')
+		isBattlePokemon(pokemon) && hasAilment(pokemon, 'torment')
 			? pokemon.lastUsedMove?.name
 			: undefined;
 
@@ -57,7 +57,7 @@ export function getMovesArray<T extends BattlePokemon | OwnedPokemon>(
 			if (
 				config?.considerTaunt &&
 				isBattlePokemon(pokemon) &&
-				pokemon.secondaryAilments.some((s) => s.type === 'taunt')
+				hasAilment(pokemon, 'taunt')
 			) {
 				const move = m as BattlePokemon['firstMove'];
 				return (

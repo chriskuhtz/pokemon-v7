@@ -10,6 +10,7 @@ import { getRandomIndex } from '../../../../../functions/filterTargets';
 import { getHeldItem } from '../../../../../functions/getHeldItem';
 import { arePokemonOfOppositeGenders } from '../../../../../functions/getRivalryFactor';
 import { handleFlinching } from '../../../../../functions/handleFlinching';
+import { hasAilment } from '../../../../../functions/hasAilment';
 import { isKO } from '../../../../../functions/isKo';
 import { Message } from '../../../../../hooks/useMessageQueue';
 import {
@@ -482,11 +483,7 @@ export const handleAbilitiesAfterAttack = (
 		);
 	}
 	// apply rage boost
-	if (
-		!isKO(updatedTarget) &&
-		damage > 0 &&
-		target.secondaryAilments.some((a) => a.type === 'raging')
-	) {
+	if (!isKO(updatedTarget) && damage > 0 && hasAilment(target, 'raging')) {
 		updatedTarget = applyStatChangeToPokemon(
 			updatedTarget,
 			'attack',
