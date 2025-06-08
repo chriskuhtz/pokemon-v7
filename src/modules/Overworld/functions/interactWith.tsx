@@ -107,6 +107,15 @@ export const interactWithFunction = ({
 		rotateOccupant(occ.id, getOppositeDirection(playerLocation.orientation));
 	}
 	if (data.type === 'TELEPORTER_NPC') {
+		if (overloaded) {
+			addMultipleMessages([
+				{
+					icon: <SpriteIcon sprite={data.sprite} />,
+					message: 'You are carrying too many things',
+				},
+			]);
+			return;
+		}
 		addMultipleMessages([
 			...data.dialogue.map((d, i) => ({
 				message: d,
@@ -203,15 +212,6 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'ROUTER_NPC') {
-		if (overloaded) {
-			addMultipleMessages([
-				{
-					icon: <SpriteIcon sprite={data.sprite} />,
-					message: 'You are carrying too many things',
-				},
-			]);
-			return;
-		}
 		addMultipleMessages(
 			data.dialogue.map((d, i) => ({
 				icon: <SpriteIcon sprite={data.sprite} />,
