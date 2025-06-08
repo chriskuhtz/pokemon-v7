@@ -13,6 +13,7 @@ const karenTeam = (s: SaveFile): OwnedPokemon[] => {
 	const weavile = makeChallengerPokemon({
 		xp,
 		name: 'weavile',
+		nature: 'hasty',
 		ability: 'dark-aura',
 		heldItemName: 'choice-band',
 		firstMove: { name: 'sucker-punch', usedPP: 0 },
@@ -22,6 +23,7 @@ const karenTeam = (s: SaveFile): OwnedPokemon[] => {
 		xp,
 		name: 'spiritomb',
 		ability: 'pressure',
+		nature: 'calm',
 		heldItemName: 'light-clay',
 		firstMove: { name: 'reflect', usedPP: 0 },
 		secondMove: { name: 'light-screen', usedPP: 0 },
@@ -32,6 +34,7 @@ const karenTeam = (s: SaveFile): OwnedPokemon[] => {
 	const honchkrow = makeChallengerPokemon({
 		name: 'honchkrow',
 		xp,
+		nature: 'adamant',
 		heldItemName: 'leftovers',
 		firstMove: { name: 'drill-peck', usedPP: 0 },
 		secondMove: { name: 'night-slash', usedPP: 0 },
@@ -43,6 +46,7 @@ const karenTeam = (s: SaveFile): OwnedPokemon[] => {
 	const umbreon = makeChallengerPokemon({
 		name: 'umbreon',
 		xp,
+		nature: 'relaxed',
 		heldItemName: 'leftovers',
 		firstMove: { name: 'toxic', usedPP: 0 },
 		secondMove: { name: 'dark-void', usedPP: 0 },
@@ -54,6 +58,7 @@ const karenTeam = (s: SaveFile): OwnedPokemon[] => {
 	const houndoom = makeChallengerPokemon({
 		name: 'houndoom',
 		xp,
+		nature: 'modest',
 		heldItemName: 'shuca-berry',
 		firstMove: { name: 'flamethrower', usedPP: 0 },
 		secondMove: { name: 'solar-beam', usedPP: 0 },
@@ -63,6 +68,7 @@ const karenTeam = (s: SaveFile): OwnedPokemon[] => {
 	const absol = makeChallengerPokemon({
 		name: 'absol',
 		xp,
+		nature: 'adamant',
 		heldItemName: 'sitrus-berry',
 		firstMove: { name: 'swords-dance', usedPP: 0 },
 		secondMove: { name: 'night-slash', usedPP: 0 },

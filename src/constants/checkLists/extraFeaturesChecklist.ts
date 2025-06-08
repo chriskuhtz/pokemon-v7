@@ -588,7 +588,7 @@ export const extraFeatureCheckList: {
 	{ name: 'nature based dialogues for pasture mons', handled: true },
 	{ name: 'water pokemon area in pasture', handled: true },
 	{ name: 'battle journalist', handled: true },
-	{ name: 'natures for e4' },
+	{ name: 'natures for e4', handled: true },
 
 	//BUGS/IMPROVEMENTS:
 
