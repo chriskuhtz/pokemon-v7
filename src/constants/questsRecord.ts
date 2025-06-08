@@ -3,6 +3,7 @@ import { calculateLevelData } from '../functions/calculateLevelData';
 
 import { sumOfIvs } from '../functions/sumOfIvs';
 
+import { hasType } from '../functions/hasType';
 import {
 	apricorns,
 	apricornTable,
@@ -35,7 +36,6 @@ import {
 	getSwarmOptions,
 	getUnderRockEncounters,
 } from './internalDex';
-import { internalDex } from './internalDexData';
 import { allRocketCampTrainersDefeated } from './maps/occupants/rocketCampOccupants';
 import { PokemonName, pokemonNames } from './pokemonNames';
 import {
@@ -1440,7 +1440,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s: SaveFile) => {
 			return s.pokemon.some(
 				(p) =>
-					internalDex[p.name].types.includes('steel') &&
+					hasType(p, 'steel') &&
 					Object.values(p.intrinsicValues).some((v) => v === 31)
 			);
 		},
@@ -1451,9 +1451,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'dragon-gem': 10, 'haban-berry': 10 },
 		researchPoints: 100,
 		conditionFunction: (s: SaveFile) => {
-			return s.pokemon.some(
-				(p) => internalDex[p.name].types.includes('dragon') && p.happiness > 250
-			);
+			return s.pokemon.some((p) => hasType(p, 'dragon') && p.happiness > 250);
 		},
 		kind: 'QUEST_LINE',
 	},
@@ -1464,7 +1462,7 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		conditionFunction: (s: SaveFile) => {
 			return s.pokemon.some(
 				(p) =>
-					internalDex[p.name].types.includes('ice') &&
+					hasType(p, 'ice') &&
 					Object.values(p.effortValues).reduce(
 						(sum, summand) => sum + summand,
 						0

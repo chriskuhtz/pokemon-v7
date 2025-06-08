@@ -8,6 +8,7 @@ export const camp: OverworldMap = {
 	tilesetUrl: '/tilesets/newMasterSheet.png',
 	occupants: campOccupants,
 	timeOfDayShadersMap: defaultShaderMap,
+	peaceful:true,
 	tileMap: {
 		baseLayer: [
 			[

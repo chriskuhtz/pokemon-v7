@@ -1616,7 +1616,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 				minXp: 27,
 				timeOfDay: 'ALL_DAY',
 				area: 'WATER',
-				route: 'camp',
+				route: 'routeW1',
 			},
 		],
 		evs: {

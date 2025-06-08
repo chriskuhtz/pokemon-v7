@@ -17,6 +17,7 @@ import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getHeldItem } from '../../functions/getHeldItem';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getTeamSize } from '../../functions/getTeamSize';
+import { hasType } from '../../functions/hasType';
 import { replaceRouteName } from '../../functions/replaceRouteName';
 import { sumOfIvs } from '../../functions/sumOfIvs';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
@@ -389,11 +390,7 @@ const Sorted = ({
 		);
 	}
 	if (pokemonFilter === 'TYPE') {
-		const filtered = stored.filter(
-			(s) =>
-				internalDex[s.name].types.at(0) === selectedType ||
-				internalDex[s.name].types.at(1) === selectedType
-		);
+		const filtered = stored.filter((s) => hasType(s, selectedType));
 
 		return (
 			<>

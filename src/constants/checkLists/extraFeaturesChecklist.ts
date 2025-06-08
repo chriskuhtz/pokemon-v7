@@ -584,10 +584,12 @@ export const extraFeatureCheckList: {
 	{ name: 'clair', handled: true },
 	{ name: 'follower pokemon', handled: true },
 	{ name: 'setting: smarter opps', handled: true },
+	{ name: 'portrait mode', handled: true },
+	{ name: 'nature based dialogues for pasture mons' },
 
 	//BUGS/IMPROVEMENTS:
-	{ name: 'portrait mode' },
-	{ name: 'nature based dialogues for pasture mons' },
+
+	{ name: 'water pokemon area in pasture' },
 	{ name: 'fix pathing' },
 	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },
