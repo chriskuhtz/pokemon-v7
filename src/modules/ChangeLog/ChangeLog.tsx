@@ -3,7 +3,7 @@ import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
-export const newestChangeLog = '0.47';
+export const newestChangeLog = '0.48';
 
 export const ChangeLog = ({
 	setHasReadIntro,
@@ -31,6 +31,7 @@ export const ChangeLog = ({
 					>
 						Got it, lets go
 					</button>
+					<ChangeLogV48 />
 					<ChangeLogV47 />
 					<ChangeLogV46 />
 					<ChangeLogV45 />
@@ -80,10 +81,20 @@ export const ChangeLog = ({
 		</Page>
 	);
 };
+const ChangeLogV48 = (): JSX.Element => {
+	return (
+		<>
+			<h3>0.48:</h3>
+			<ol style={{ lineHeight: '1.5rem' }}>
+				<li>Balancing and Fixes</li>
+			</ol>
+		</>
+	);
+};
 const ChangeLogV47 = (): JSX.Element => {
 	return (
 		<>
-			<h3>.47:</h3>
+			<h3>0.47:</h3>
 			<ol style={{ lineHeight: '1.5rem' }}>
 				<li>Caught Water Pokemon live in the water, not on land</li>
 				<li>Camp Upgrade: Battle Journalist</li>
@@ -95,7 +106,7 @@ const ChangeLogV47 = (): JSX.Element => {
 const ChangeLogV46 = (): JSX.Element => {
 	return (
 		<>
-			<h3>.46:</h3>
+			<h3>0.46:</h3>
 			<ol style={{ lineHeight: '1.5rem' }}>
 				<li>follower pokemon</li>
 				<li>UI Improvements</li>
@@ -107,7 +118,7 @@ const ChangeLogV46 = (): JSX.Element => {
 const ChangeLogV45 = (): JSX.Element => {
 	return (
 		<>
-			<h3>.45:</h3>
+			<h3>0.45:</h3>
 			<ol style={{ lineHeight: '1.5rem' }}>
 				<li>Pokemon League Challenge</li>
 				<li>Redesigned Camp</li>

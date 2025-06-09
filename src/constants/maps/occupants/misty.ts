@@ -12,7 +12,7 @@ import { EmptyStatObject } from '../../../interfaces/StatObject';
 const mistyTeam = () => [
 	makeChallengerPokemon({
 		name: 'starmie',
-		xp: 46656,
+		xp: 27000,
 		nature: 'bold',
 		heldItemName: 'leftovers',
 		ability: 'lightning-rod',
@@ -31,7 +31,7 @@ const mistyTeam = () => [
 	makeChallengerPokemon({
 		name: 'starmie',
 		shiny: true,
-		xp: 46656,
+		xp: 27000,
 		nature: 'rash',
 		ability: 'neuroforce',
 		fixedAbility: true,
@@ -52,8 +52,8 @@ const mistyTeam = () => [
 const mistyCondition = (s: SaveFile) => {
 	const team = s.pokemon.filter((p) => p.onTeam);
 	return (
-		team.length === 2 &&
-		team.every((t) => calculateLevelData(t.xp, t.growthRate).level <= 36)
+		team.length <= 3 &&
+		team.every((t) => calculateLevelData(t.xp, t.growthRate).level <= 30)
 	);
 };
 
@@ -62,8 +62,8 @@ export const trainerMisty: OverworldTrainer = {
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/2/20/VSMisty.png',
 	type: 'TRAINER',
-	x: 16,
-	y: 24,
+	x: 27,
+	y: 5,
 	orientation: 'DOWN',
 	id: mistyId,
 	conditionFunction: mistyCondition,
@@ -79,8 +79,8 @@ export const trainerMisty: OverworldTrainer = {
 };
 const npcMisty: OverworldNpc = {
 	type: 'NPC',
-	x: 16,
-	y: 24,
+	x: 27,
+	y: 5,
 	orientation: 'DOWN',
 	id: 'npc_misty',
 	conditionFunction: (s) => !mistyCondition(s),
@@ -89,8 +89,8 @@ const npcMisty: OverworldNpc = {
 		'nice to meet you',
 		"i'm misty",
 		'if you want to battle me',
-		'you may bring any two pokemon you like',
-		'Level 36 at the highest',
+		'you may bring any three pokemon you like',
+		'Level 30 at the highest',
 		'I will use my two starmies',
 	],
 };
