@@ -19,6 +19,7 @@ import {
 	RampagingPokemon,
 	SaveFile,
 } from '../../../interfaces/SaveFile';
+import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 
 export const useOccupants = () => {
 	const { saveFile } = useContext(SaveFileContext);
@@ -56,6 +57,7 @@ export const useOccupants = () => {
 		}
 		if (location.mapId === 'camp') {
 			all.push(...createPasturePokemon(saveFile));
+			all.push(...createBattle());
 		}
 
 		if (statefulOccupants.length !== all.length) {
@@ -341,4 +343,52 @@ const createTroubleMakers = (saveFile: SaveFile): Occupant[] => {
 			};
 		}),
 	];
+};
+
+const createBattle = (): Occupant[] => {
+	const res: Occupant[] = [
+		{
+			type: 'NPC',
+			unhandledMessage: ['go nidorino'],
+			orientation: 'DOWN',
+			x: 33,
+			y: 22,
+			sprite: SpriteEnum.ace2Male,
+			id: 'battler1',
+			conditionFunction: () => true,
+		},
+		{
+			type: 'POKEMON',
+			dexId: 33,
+			dialogue: ['nido nido'],
+			orientation: 'DOWN',
+			x: 33,
+			y: 24,
+			id: 'pokemon1',
+			conditionFunction: () => true,
+		},
+		{
+			type: 'POKEMON',
+			dexId: 94,
+			dialogue: ['gengaaar'],
+			orientation: 'UP',
+			x: 33,
+			y: 26,
+			id: 'pokemon2',
+			conditionFunction: () => true,
+		},
+
+		{
+			type: 'NPC',
+			unhandledMessage: ['slurp him, gengar'],
+			orientation: 'UP',
+			x: 33,
+			y: 28,
+			sprite: SpriteEnum.ace2Female,
+			id: 'battler2',
+			conditionFunction: () => true,
+		},
+	];
+
+	return res;
 };
