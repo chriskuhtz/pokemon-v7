@@ -15,11 +15,11 @@ import { isKeyItem, ItemType } from '../../../interfaces/Item';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { PokemonData } from '../../../interfaces/PokemonData';
 import { IconSolarSystem } from '../../../uiComponents/IconSolarSystem/IconSolarSystem';
-import { SelectionListModal } from '../../../uiComponents/SelectionListModal/SelectionListModal';
 import { Stack } from '../../../uiComponents/Stack/Stack';
 import { AbilityInfoButton } from '../../AbilityInfoButton/AbilityInfoButton';
 import { HappinessIcon } from '../../HappinessIcon/HappinessIcon';
 import { HpBar } from '../../HpBar/HpBar';
+import { ItemSelectionListModal } from '../../ItemSelectionListModal/ItemSelectionListModal';
 import { getPokemonSprite } from '../../PokemonSprite/PokemonSprite';
 import { PrimaryAilmentIcon } from '../../PrimaryAilmentIcon/PrimaryAilmentIcon';
 import { XpBar } from '../../XpBar/XpBar';
@@ -66,16 +66,18 @@ export const OwnedPokemonCardContent = ({
 				nickname={ownedPokemon.nickname}
 				setNickName={setNickName}
 			/>
-			<SelectionListModal
+			<ItemSelectionListModal
 				selected={heldItem ? [heldItem] : []}
 				open={heldItemMenuOpen}
 				close={() => setHeldItemMenuOpen(false)}
-				options={[
-					getHeldItem(ownedPokemon),
-					...Object.entries(inventory)
-						.filter(([item, amount]) => !isKeyItem(item) && amount > 0)
-						.map(([item]) => item),
-				].filter((s) => s !== undefined)}
+				options={
+					[
+						getHeldItem(ownedPokemon),
+						...Object.entries(inventory)
+							.filter(([item, amount]) => !isKeyItem(item) && amount > 0)
+							.map(([item]) => item),
+					].filter((s) => s !== undefined) as ItemType[]
+				}
 				min={1}
 				max={1}
 				toggle={(item) => {
