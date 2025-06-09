@@ -51,6 +51,7 @@ export const Bag = ({ goBack }: { goBack: () => void }): JSX.Element => {
 								actionElements={[
 									<ThrowAwayAction
 										amount={amount}
+										item={item}
 										discardItem={(x: number) =>
 											discardItem(item as ItemType, x)
 										}
@@ -112,6 +113,7 @@ export const Bag = ({ goBack }: { goBack: () => void }): JSX.Element => {
 									<></>
 								) : (
 									<ThrowAwayAction
+										item={item as ItemType}
 										amount={amount}
 										discardItem={(x: number) =>
 											discardItem(item as ItemType, x)

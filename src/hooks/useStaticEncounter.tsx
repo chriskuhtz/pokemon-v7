@@ -16,7 +16,7 @@ export const useStaticEncounter = () => {
 				return;
 			} else {
 				const challenger: Challenger = {
-					type: 'TRAINER',
+					type: 'WILD',
 					id: occ.id,
 					inventory: EmptyInventory,
 					team: [

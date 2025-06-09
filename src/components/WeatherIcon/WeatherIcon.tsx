@@ -51,7 +51,7 @@ export const TerrainIcon = ({ terrain }: { terrain?: BattleTerrain }) => {
 		<img
 			onClick={() => addMessage({ message: terrainExplanations[terrain] })}
 			src={`/typeIcons/${terrainTypeMap[terrain]}.png`}
-			height={battleSpriteSize / 2}
+			height={battleSpriteSize}
 		/>
 	);
 };

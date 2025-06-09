@@ -236,10 +236,10 @@ export const rocketCampOccupants: Occupant[] = [
 		y: 10,
 		to: {
 			mapId: 'camp',
-			x: 11,
-			y: 8,
 			orientation: 'DOWN',
 			forwardFoot: 'CENTER1',
+			x: 20,
+			y: 18,
 		},
 		conditionFunction: allRocketCampTrainersDefeated,
 		dialogue: ['great job', 'thank you for help'],

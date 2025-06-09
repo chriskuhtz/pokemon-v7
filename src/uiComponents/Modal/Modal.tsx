@@ -34,7 +34,7 @@ export const Modal = ({
 					padding: '2rem',
 					borderRadius: '1rem',
 					border: '2px solid black',
-					backgroundColor: 'white',
+					backgroundColor: 'rgba(255, 255, 255, 0.9)',
 					maxHeight: '80%',
 					overflow: 'scroll',
 					color: 'black',

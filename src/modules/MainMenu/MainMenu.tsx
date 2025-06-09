@@ -27,7 +27,6 @@ import {
 } from '../../constants/gameData';
 import { MapId, mapsRecord } from '../../constants/maps/mapsRecord';
 import { fullyHealPokemon } from '../../functions/fullyHealPokemon';
-import { resetChallengeFielders } from '../../functions/resetChallengeFielders';
 import { LocationContext } from '../../hooks/LocationProvider';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
@@ -83,9 +82,6 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 							patchSaveFileReducer({
 								bag: EmptyInventory,
 								meta: { ...saveFile.meta, activeTab: 'OVERWORLD' },
-								handledOccupants: resetChallengeFielders(
-									saveFile.handledOccupants
-								),
 
 								pokemon: saveFile.pokemon.map((p) => {
 									if (p.onTeam) {

@@ -56,6 +56,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 3,
 		types: ['grass', 'poison'],
 		encounterOptions: [],
+		rampager: true,
 		evs: {
 			'special-attack': 2,
 			'special-defense': 1,
@@ -83,6 +84,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 6,
 		types: ['fire', 'flying'],
 		encounterOptions: [],
+		rampager: true,
 		evs: {
 			'special-attack': 3,
 		},
@@ -109,6 +111,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 9,
 		types: ['water'],
 		encounterOptions: [],
+		rampager: true,
 		evs: {
 			'special-defense': 3,
 		},
@@ -387,6 +390,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 31,
 		types: ['poison', 'ground'],
 		encounterOptions: [],
+		rampager: true,
 		evs: {
 			hp: 3,
 		},
@@ -420,6 +424,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 34,
 		types: ['poison', 'ground'],
 		encounterOptions: [],
+		rampager: true,
 		evs: {
 			attack: 3,
 		},
@@ -995,6 +1000,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 		dexId: 78,
 		types: ['fire'],
 		encounterOptions: [],
+		rampager: true,
 		evs: {
 			speed: 2,
 		},
@@ -2118,6 +2124,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	ampharos: {
 		dexId: 181,
 		types: ['electric'],
+		rampager: true,
 		encounterOptions: [],
 		evs: {
 			'special-attack': 3,
@@ -5967,6 +5974,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	krookodile: {
 		dexId: 553,
+		rampager: true,
 		types: ['ground', 'dark'],
 		encounterOptions: [],
 		evs: {
@@ -7398,6 +7406,7 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	goodra: {
 		dexId: 706,
 		types: ['dragon'],
+		rampager: true,
 		encounterOptions: [],
 		evs: {
 			'special-defense': 3,
@@ -7954,7 +7963,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	oranguru: {
 		dexId: 765,
-		rampager: true,
 		types: ['normal', 'psychic'],
 		encounterOptions: [],
 		evs: {
@@ -8126,7 +8134,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	},
 	'kommo-o': {
 		dexId: 784,
-		rampager: true,
 		types: ['dragon', 'fighting'],
 		encounterOptions: [],
 		evs: {
@@ -11443,7 +11450,6 @@ export const internalDex: Record<PokemonName, InternalDexEntry> = {
 	'lycanroc-midnight': {
 		dexId: 10126,
 		types: ['rock'],
-		rampager: true,
 		encounterOptions: [],
 		evs: {
 			attack: 2,

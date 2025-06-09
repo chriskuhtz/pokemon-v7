@@ -4,6 +4,7 @@ import { CombinedCanvas } from '../../components/CombinedCanvas/CombinedCanvas';
 import { FollowerSprite } from '../../components/FollowerSprite/FollowerSprite';
 import { fps } from '../../constants/gameData';
 import { mapsRecord } from '../../constants/maps/mapsRecord';
+import { isBagOverloaded } from '../../functions/getBagLimit';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { LocationContext } from '../../hooks/LocationProvider';
 import { useApricornTree } from '../../hooks/useApricornTree';
@@ -131,6 +132,7 @@ export const Overworld = () => {
 	const interactWith = useCallback(
 		(occ: Occupant | undefined) =>
 			interactWithFunction({
+				overloaded: isBagOverloaded(saveFile),
 				activeMessage: !!latestMessage,
 				occ,
 				addMultipleMessages,
@@ -160,13 +162,12 @@ export const Overworld = () => {
 				settings: saveFile.settings,
 			}),
 		[
+			saveFile,
 			latestMessage,
 			addMultipleMessages,
 			rotateOccupant,
 			location,
 			talkToNurse,
-			saveFile.handledOccupants,
-			saveFile.settings,
 			handleOccupantReducer,
 			setCharacterLocation,
 			interactWithApricornTree,

@@ -589,6 +589,8 @@ export const extraFeatureCheckList: {
 	{ name: 'water pokemon area in pasture', handled: true },
 	{ name: 'battle journalist', handled: true },
 	{ name: 'natures for e4', handled: true },
+	{ name: 'map maker quick palette', handled: true },
+	{ name: 'prettier modals', handled: true },
 
 	//BUGS/IMPROVEMENTS:
 
@@ -596,6 +598,8 @@ export const extraFeatureCheckList: {
 	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },
 	{ name: 'leech seed benefit doesnt pass to switched in mon' },
+
+	{ name: 'rampager pokemon sprite doesnt disappear until menu click' },
 	//CONTENT:
 	{ name: 'eggs?' },
 	{ name: 'Fishing?' },

@@ -1,4 +1,4 @@
-import { GroupPlacer } from '../MapMaker';
+import { GroupPlacer } from './MapEditor';
 
 export const TileGroupDisplay = ({
 	selected,

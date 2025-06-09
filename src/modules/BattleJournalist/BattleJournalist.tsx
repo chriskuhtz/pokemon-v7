@@ -23,6 +23,7 @@ import { champChris } from '../../constants/maps/occupants/champChris';
 import { cynthia } from '../../constants/maps/occupants/cynthia';
 import { trainerErika } from '../../constants/maps/occupants/erika';
 import { trainerGary } from '../../constants/maps/occupants/gary';
+import { giovanni } from '../../constants/maps/occupants/giovanni';
 import { hugh } from '../../constants/maps/occupants/hugh';
 import { trainerJanine } from '../../constants/maps/occupants/janine';
 import { karen } from '../../constants/maps/occupants/karen';
@@ -84,6 +85,7 @@ const options: JournalEntryData[] = [
 		additionalNotes: ['Matches your level * .95 after level 69'],
 	},
 	{ trainer: lance, additionalNotes: ['Matches your level after level 70'] },
+	{ trainer: giovanni, additionalNotes: ['Matches your level after level 60'] },
 	{
 		trainer: barry,
 		xpOverwrite: 6859,
@@ -305,8 +307,8 @@ export const battleJournalist: RouterNpc = {
 		'and we can have a look at my notes',
 	],
 	x: 29,
-	y: 22,
-	orientation: 'LEFT',
+	y: 27,
+	orientation: 'RIGHT',
 	sprite: SpriteEnum.gangster,
 	type: 'ROUTER_NPC',
 	to: 'BATTLE_JOURALIST',

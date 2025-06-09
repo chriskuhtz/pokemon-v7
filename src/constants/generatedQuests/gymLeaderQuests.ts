@@ -78,7 +78,13 @@ export const gymLeaderQuests: Partial<Record<QuestName, Quest>> = {
 		kind: 'BULLETIN',
 		badge: 'Volcano_Badge',
 		researchPoints: 25,
-		rewardItems: { 'occa-berry': 5, charcoal: 1, ...expCandyPackage },
+
+		rewardItems: {
+			'occa-berry': 5,
+			charcoal: 1,
+			...expCandyPackage,
+			sprayduck: 1,
+		},
 		requiredUpgrade: 'sledge hammer certification',
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === blaineId);
@@ -106,7 +112,7 @@ export const gymLeaderQuests: Partial<Record<QuestName, Quest>> = {
 			sprayduck: 1,
 			...expCandyPackage,
 		},
-		requiredUpgrade: 'swimming certification',
+		campUpgrade: 'swimming certification',
 		conditionFunction: (s) => {
 			return s.handledOccupants.some((h) => h.id === mistyId);
 		},

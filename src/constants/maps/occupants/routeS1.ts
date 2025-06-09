@@ -3,7 +3,7 @@ import { getTraveller } from '../../../functions/getTraveller';
 import { makeApricornTree } from '../../../functions/makeApricornTree';
 import { occupantHandled } from '../../../functions/occupantHandled';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
-import { misty } from './misty';
+import { surge } from './surge';
 
 export const routeS1Occupants: OverworldMap['occupants'] = [
 	{
@@ -150,8 +150,7 @@ export const routeS1Occupants: OverworldMap['occupants'] = [
 			s.campUpgrades['invite historian'],
 		id: 'routeS1_zapdos',
 	},
-	...misty,
-
+	...surge,
 	...makeApricornTree({
 		x: 42,
 		y: 18,

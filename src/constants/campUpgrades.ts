@@ -111,12 +111,6 @@ export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
 	'time distortion radar': 'Research',
 	'space distortion radar': 'Research',
 	'invite fossil expert': 'Research',
-	'berry lure station routeN1': 'Quest Reward',
-	'berry lure station routeN1E1': 'Quest Reward',
-	'berry lure station routeE1': 'Quest Reward',
-	'berry lure station routeS1E1': 'Quest Reward',
-	'berry lure station routeS1W1': 'Quest Reward',
-	'berry lure station routeW1': 'Quest Reward',
 	'invite historian': 'Research',
 	'invite move tutor': 'Training',
 	'invite effort value expert': 'Training',
@@ -128,10 +122,10 @@ export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
 	'invite nature tutor': 'Training',
 	'invite ability tutor': 'Training',
 	'ranger certification': 'Training',
+	'battle journalist': 'Training',
 	'machete certification': 'Exploration',
 	'sledge hammer certification': 'Exploration',
 	'shovel certification': 'Exploration',
-	'swimming certification': 'Exploration',
 	'rock climbing certification': 'Exploration',
 	'buy skiing equipment': 'Exploration',
 	'bag size upgrade 1': 'Exploration',
@@ -142,9 +136,15 @@ export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
 	'team slot 5': 'Exploration',
 	'team slot 6': 'Exploration',
 	'dragonite taxi': 'Exploration',
+	'swimming certification': 'Quest Reward',
 	'pidgeot rider certification': 'Quest Reward',
 	'warden certification': 'Quest Reward',
-	'battle journalist': 'Training',
+	'berry lure station routeN1': 'Quest Reward',
+	'berry lure station routeN1E1': 'Quest Reward',
+	'berry lure station routeE1': 'Quest Reward',
+	'berry lure station routeS1E1': 'Quest Reward',
+	'berry lure station routeS1W1': 'Quest Reward',
+	'berry lure station routeW1': 'Quest Reward',
 };
 
 export const baseRequirements: CampUpgrade[] = [
@@ -199,7 +199,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'sledge hammer certification': ['machete certification'],
 	'ranger certification': ['machete certification', 'training field 1'],
 	'shovel certification': ['sledge hammer certification'],
-	'swimming certification': ['shovel certification'],
+
 	'rock climbing certification': ['swimming certification'],
 	'buy skiing equipment': ['rock climbing certification'],
 	'invite museum curator': ['invite dugtrio explorers'],
@@ -215,6 +215,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'battle journalist': baseRequirements,
 
 	//"Quest rewards"
+	'swimming certification': [],
 	'pidgeot rider certification': [],
 	'warden certification': ['ranger certification'],
 	'berry lure station routeN1': [],

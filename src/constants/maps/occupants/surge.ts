@@ -43,9 +43,9 @@ export const trainerSurge: OverworldTrainer = {
 	profilePicture:
 		'https://archives.bulbagarden.net/media/upload/4/46/VSLt_Surge.png',
 	type: 'TRAINER',
-	x: 45,
-	y: 7,
-	orientation: 'UP',
+	x: 16,
+	y: 24,
+	orientation: 'DOWN',
 	id: surgeId,
 	conditionFunction: surgeCondition,
 	sprite: SpriteEnum.surge,
@@ -63,9 +63,9 @@ export const trainerSurge: OverworldTrainer = {
 };
 const npcSurge: OverworldNpc = {
 	type: 'NPC',
-	x: 45,
-	y: 7,
-	orientation: 'UP',
+	x: 16,
+	y: 24,
+	orientation: 'DOWN',
 	id: 'npc_surge',
 	conditionFunction: (s) => !surgeCondition(s),
 	sprite: SpriteEnum.surge,

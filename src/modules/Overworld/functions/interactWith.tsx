@@ -66,7 +66,9 @@ export const interactWithFunction = ({
 	interactWithApricornTree,
 	settings,
 	goTo,
+	overloaded,
 }: {
+	overloaded: boolean;
 	activeMessage: boolean;
 	occ: Occupant | undefined;
 	addMultipleMessages: (x: Message[]) => void;
@@ -105,6 +107,15 @@ export const interactWithFunction = ({
 		rotateOccupant(occ.id, getOppositeDirection(playerLocation.orientation));
 	}
 	if (data.type === 'TELEPORTER_NPC') {
+		if (overloaded) {
+			addMultipleMessages([
+				{
+					icon: <SpriteIcon sprite={data.sprite} />,
+					message: 'You are carrying too many things',
+				},
+			]);
+			return;
+		}
 		addMultipleMessages([
 			...data.dialogue.map((d, i) => ({
 				message: d,
