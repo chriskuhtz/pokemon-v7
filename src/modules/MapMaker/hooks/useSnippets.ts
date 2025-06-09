@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
-import { GroupPlacer } from '../MapMaker';
+import { GroupPlacer } from '../components/MapEditor';
 
 export type Snippet = {
 	id: string;

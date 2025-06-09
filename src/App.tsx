@@ -21,7 +21,7 @@ import { Farm } from './modules/Farm/Farm';
 import { FossilReviver } from './modules/FossilReviver/FossilReviver';
 import { InternalDex } from './modules/InternalDex/InternalDex';
 import { MainMenu } from './modules/MainMenu/MainMenu';
-import { MapMaker } from './modules/MapMaker/MapMaker';
+import { MapEditor } from './modules/MapMaker/components/MapEditor';
 import { Market } from './modules/Market/Market';
 import { MiltankFarm } from './modules/MiltankFarm/MiltankFarm';
 import { MoveTutor } from './modules/MoveTutor/MoveTutor';
@@ -269,7 +269,7 @@ export const App = (): JSX.Element => {
 	if (activeTab.includes('MAP_MAKER')) {
 		const mapId = activeTab.slice(10) as MapId;
 		return (
-			<MapMaker mapId={mapId} goBack={() => setActiveTabReducer('MAIN')} />
+			<MapEditor mapId={mapId} goBack={() => setActiveTabReducer('MAIN')} />
 		);
 	}
 
