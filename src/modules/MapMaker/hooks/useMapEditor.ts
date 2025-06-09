@@ -1,6 +1,6 @@
 import { useDeferredValue, useEffect, useState } from 'react';
 import { OverworldMap, TileIdentifier } from '../../../interfaces/OverworldMap';
-import { GroupPlacer, Tool } from '../MapMaker';
+import { Tool, GroupPlacer } from '../components/MapEditor';
 
 export type LayerName =
 	| 'Base'

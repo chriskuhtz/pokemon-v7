@@ -1,23 +1,67 @@
-import { JSX, useMemo } from 'react';
-import { OverworldMap } from '../../../interfaces/OverworldMap';
-import { Tool } from '../MapMaker';
+import React, {
+	JSX,
+	useCallback,
+	useDeferredValue,
+	useMemo,
+	useState,
+} from 'react';
+import { IoIosArrowBack } from 'react-icons/io';
+import { MapId, mapsRecord } from '../../../constants/maps/mapsRecord';
+import { TileIdentifier } from '../../../interfaces/OverworldMap';
 import { LayerName, useMapEditor } from '../hooks/useMapEditor';
+import { FillTools } from './FillTools';
+import { FloatyMenu } from './FloatyMenu';
 import { LayerEditor } from './LayerEditor';
+import { LayerSelector } from './LayerSelector';
+import { OpacitySelector } from './OpacitySelector';
+import { QuickSelection } from './QuickSelection';
 import { ToolSelection } from './ToolSelection';
 
+export const BaseSize = 16;
+export interface TilePlacer {
+	tile: TileIdentifier;
+}
+export interface Eraser {
+	type: 'eraser';
+}
+export interface GroupPlacer {
+	type: 'groupPlacer';
+	tiles: TileIdentifier[][];
+}
+export type Tool = Eraser | GroupPlacer;
+
 export const MapEditor = ({
-	tool,
-	initialMap,
-	activeTab,
-	setActiveTab,
-	setSelected,
+	goBack,
+	mapId,
 }: {
-	tool: Tool | undefined;
-	initialMap: OverworldMap;
-	activeTab: LayerName;
-	setActiveTab: (x: LayerName) => void;
-	setSelected: (x: Tool) => void;
+	goBack: () => void;
+	mapId: MapId;
 }): JSX.Element => {
+	const initialMap = useMemo(() => mapsRecord[mapId], [mapId]);
+	const [opacity, setOpacity] = useState<number>(0.5);
+
+	const [groupPlacer, setGroupPlacer] = useState<GroupPlacer | undefined>();
+	const [tool, s] = useState<Tool | undefined>();
+
+	const setSelected = useCallback(
+		(x: Tool) => {
+			if (
+				groupPlacer &&
+				tool?.type !== 'groupPlacer' &&
+				x.type === 'groupPlacer'
+			) {
+				s(groupPlacer);
+				return;
+			}
+			if (x.type === 'groupPlacer') {
+				setGroupPlacer(x);
+			}
+			s(x);
+		},
+		[tool?.type, groupPlacer]
+	);
+
+	const [activeTab, setActiveTab] = useState<LayerName>('Base');
 	const {
 		addColumn,
 		addRow,
@@ -66,80 +110,52 @@ export const MapEditor = ({
 		waterLayer,
 	]);
 
+	const tileMap = useDeferredValue({
+		baseLayer,
+		encounterLayer,
+		decorationLayer,
+		foregroundLayer,
+		obstacleLayer,
+		waterLayer,
+	});
+
 	return (
-		<div>
-			<h2>{initialMap.id}</h2>
-
-			<div
-				style={{
-					padding: '1rem',
-					borderBottom: '2px solid white',
-				}}
-			>
-				<h3>Select Layer:</h3>
-				<div
-					style={{
-						display: 'flex',
-						gap: '1rem',
-						paddingBottom: '1rem',
-					}}
-				>
-					{[
-						'Base',
-						'Obstacle',
-						'Decoration',
-						'Encounter',
-						'Foreground',
-						'Water',
-					].map((t) => (
-						<button
-							key={t}
-							style={{
-								color: t === activeTab ? 'wheat' : 'lightgray',
-								backgroundColor: 'rgba(0,0,0,0)',
-							}}
-							onClick={() => setActiveTab(t as LayerName)}
-						>
-							{t}
-						</button>
-					))}
-				</div>
-			</div>
-
+		<React.Fragment>
+			<FloatyMenu top={16} left={16}>
+				<IoIosArrowBack role="button" tabIndex={0} onClick={goBack} />
+			</FloatyMenu>
+			<LayerSelector activeTab={activeTab} setActiveTab={setActiveTab} />
+			<OpacitySelector setOpacity={setOpacity} opacity={opacity} />
 			<ToolSelection
 				selected={tool}
 				setSelected={setSelected}
 				tileSetUrl={initialMap.tilesetUrl}
 			/>
+			<FillTools
+				activeTab={activeTab}
+				randomFill={randomFill}
+				clearLayer={clearLayer}
+				replaceAll={replaceAll}
+			/>
+			<QuickSelection
+				tileMap={tileMap}
+				tileSetUrl={initialMap.tilesetUrl}
+				setSelected={setSelected}
+			/>
 
-			<div
-				style={{
-					position: 'relative',
-				}}
-			>
-				<LayerEditor
-					tileSetUrl={initialMap.tilesetUrl}
-					tileMap={{
-						baseLayer,
-						encounterLayer,
-						decorationLayer,
-						foregroundLayer,
-						obstacleLayer,
-						waterLayer,
-					}}
-					occupants={initialMap.occupants}
-					addColumn={addColumn}
-					addRow={addRow}
-					changeTile={changeTile}
-					layer={layer}
-					layerName={activeTab}
-					clear={() => clearLayer(activeTab)}
-					changeRow={(index) => changeRow(index, activeTab)}
-					changeColumn={(index) => changeColumn(index, activeTab)}
-					randomFill={randomFill}
-					replaceAll={replaceAll}
-				/>
-			</div>
-		</div>
+			<LayerEditor
+				opacity={opacity}
+				tileSetUrl={initialMap.tilesetUrl}
+				tileMap={tileMap}
+				occupants={initialMap.occupants}
+				addColumn={addColumn}
+				addRow={addRow}
+				changeTile={changeTile}
+				layer={layer}
+				layerName={activeTab}
+				changeRow={(index) => changeRow(index, activeTab)}
+				changeColumn={(index) => changeColumn(index, activeTab)}
+			/>
+		</React.Fragment>
 	);
 };
