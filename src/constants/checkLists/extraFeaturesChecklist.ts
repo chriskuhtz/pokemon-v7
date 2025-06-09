@@ -590,7 +590,7 @@ export const extraFeatureCheckList: {
 	{ name: 'battle journalist', handled: true },
 	{ name: 'natures for e4', handled: true },
 	{ name: 'map maker quick palette', handled: true },
-	{ name: 'prettier modals' },
+	{ name: 'prettier modals', handled: true },
 
 	//BUGS/IMPROVEMENTS:
 
