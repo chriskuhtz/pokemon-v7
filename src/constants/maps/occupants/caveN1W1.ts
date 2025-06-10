@@ -71,4 +71,44 @@ export const caveN1W1Occupants: OverworldMap["occupants"] = [
     conditionFunction: () => true,
     id: "routeN1W1_to_caveN1W1_5",
   },
+  {
+    type: "ITEM",
+    item: "helix-fossil",
+    amount: 1,
+    x: 8,
+    y: 2,
+    id: "caveN1W1_helix_fossil",
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((h) => h.id === "caveN1W1_helix_fossil"),
+  },
+  /*{
+    type: "ITEM",
+    item: "?",
+    amount: 1,
+    x: 32,
+    y: 16,
+    id: "caveN1W1_?",
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((h) => h.id === "caveN1W1_?"),
+  }, */
+  /*{
+    type: "ITEM",
+    item: "?",
+    amount: 1,
+    x: 1,
+    y: 14,
+    id: "caveN1W1_?",
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((h) => h.id === "caveN1W1_?"),
+  }, */
+  /*{
+    type: "ITEM",
+    item: "?",
+    amount: 1,
+    x: 27,
+    y: 26,
+    id: "caveN1W1_?",
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((h) => h.id === "caveN1W1_?"),
+  }, */
 ];

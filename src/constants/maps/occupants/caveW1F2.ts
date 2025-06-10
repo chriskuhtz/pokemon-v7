@@ -53,4 +53,14 @@ export const caveW1F2Occupants: OverworldMap["occupants"] = [
       !s.handledOccupants.some((h) => h.id === "caveW1-rocky-helmet"),
     id: "caveW1-rocky-helmet",
   },
+  /*{
+    type: "ITEM",
+    x: 17,
+    y: 23,
+    item: "?",
+    amount: 1,
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((h) => h.id === "caveW1-?"),
+    id: "caveW1-?",
+  }, */
 ];

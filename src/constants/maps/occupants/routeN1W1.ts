@@ -88,8 +88,8 @@ export const routeN1W1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ITEM",
-    x: 17,
-    y: 47,
+    x: 42,
+    y: 1,
     item: "old-amber",
     amount: 1,
     conditionFunction: (s) =>
@@ -98,8 +98,8 @@ export const routeN1W1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ITEM",
-    x: 43,
-    y: 30,
+    x: 31,
+    y: 4,
     item: "never-melt-ice",
     amount: 1,
     conditionFunction: (s) =>
@@ -108,8 +108,8 @@ export const routeN1W1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ITEM",
-    x: 28,
-    y: 46,
+    x: 6,
+    y: 40,
     item: "damp-rock",
     amount: 1,
     conditionFunction: (s) =>
@@ -118,8 +118,8 @@ export const routeN1W1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ITEM",
-    x: 10,
-    y: 10,
+    x: 29,
+    y: 35,
     item: "ice-stone",
     amount: 1,
     conditionFunction: (s) =>
