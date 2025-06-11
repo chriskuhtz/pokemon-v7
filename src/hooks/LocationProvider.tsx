@@ -72,6 +72,12 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
 		);
 	}, [location]);
 
+	// //RESCUE FROM SOFT LOCK
+	// useEffect(() => {
+	// 	if (saveFile.playerId.includes('ache')) {
+	// 		setLocation(startingLocation);
+	// 	}
+	// }, [location, saveFile.playerId, setLocation]);
 	//reset catch streak on location change
 	useEffect(() => {
 		if (!saveFile.catchStreak) {
