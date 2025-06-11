@@ -5780,7 +5780,7 @@ export const routeS1: OverworldMap = {
         null,
         null,
         null,
-        { yOffset: -128, xOffset: -32 },
+        { yOffset: -144, xOffset: -16 },
         null,
         null,
         null,
