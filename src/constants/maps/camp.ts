@@ -3964,7 +3964,7 @@ export const camp: OverworldMap = {
         { yOffset: -16, xOffset: -112 },
       ],
       [
-        { yOffset: -48, xOffset: -32 },
+        { yOffset: 0, xOffset: -144 },
         null,
         null,
         { yOffset: -160, xOffset: -96 },
