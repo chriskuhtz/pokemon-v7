@@ -52,7 +52,7 @@ export const determineWildPokemon = (
 
 			return {
 				...input,
-				shiny: input.shiny ?? secondShinyRoll,
+				shiny: input.shiny || secondShinyRoll,
 				intrinsicValues: increasedIvs,
 			};
 		}

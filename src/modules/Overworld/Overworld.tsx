@@ -199,11 +199,8 @@ export const Overworld = () => {
 	);
 	const setClickTarget = useClickTarget(
 		map,
-		location,
 		setNextInput,
 		interactWith,
-		[],
-		!!latestMessage,
 		occupants
 	);
 	useKeyboardControl(

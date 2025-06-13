@@ -598,8 +598,12 @@ export const extraFeatureCheckList: {
 	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },
 	{ name: 'leech seed benefit doesnt pass to switched in mon' },
-
-	{ name: 'rampager pokemon sprite doesnt disappear until menu click' },
+	{ name: 'leech seed doesnt end when leeched is defeated' },
+	{ name: 'false swipe sometimes k.o.s' },
+	{
+		name: 'rampager pokemon sprite doesnt disappear you leave overworld screen',
+	},
+	{ name: 'move chuck and move tutor out of battle pit' },
 	//CONTENT:
 	{ name: 'eggs?' },
 	{ name: 'Fishing?' },

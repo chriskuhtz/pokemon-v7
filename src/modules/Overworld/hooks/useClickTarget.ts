@@ -4,22 +4,17 @@ import { getNextFieldOccupant } from '../../../functions/getNextFieldOccupant';
 import { getOverworldDistance } from '../../../functions/getOverworldDistance';
 import { isPassable } from '../../../functions/isPassable';
 import { LocationContext } from '../../../hooks/LocationProvider';
+import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
-import {
-	CharacterLocationData,
-	CharacterOrientation,
-} from '../../../interfaces/SaveFile';
+import { CharacterOrientation } from '../../../interfaces/SaveFile';
 
 export const useClickTarget = (
 	assembledMap: OverworldMap,
-	playerLocation: CharacterLocationData,
 	setNextInput: React.Dispatch<
 		React.SetStateAction<CharacterOrientation | undefined>
 	>,
 	interactWith: (occ: Occupant | undefined) => void,
-	collectedItems: string[],
-	activeMessage: boolean,
 	currentOccupants: Occupant[]
 ): React.Dispatch<
 	React.SetStateAction<
@@ -33,6 +28,7 @@ export const useClickTarget = (
 > => {
 	const { saveFile } = useContext(SaveFileContext);
 	const { location } = useContext(LocationContext);
+	const { latestMessage } = useContext(MessageQueueContext);
 	const [clickTarget, setClickTarget] = useState<
 		{ x: number; y: number; mapId: MapId } | undefined
 	>();
@@ -51,7 +47,7 @@ export const useClickTarget = (
 		[assembledMap, currentOccupants, saveFile.campUpgrades, saveFile.flying]
 	);
 	useEffect(() => {
-		if (activeMessage) {
+		if (latestMessage) {
 			setClickTarget(undefined);
 			return;
 		}
@@ -65,55 +61,58 @@ export const useClickTarget = (
 
 		const occ = getNextFieldOccupant(clickTarget, currentOccupants);
 
-		if (occ && getOverworldDistance(clickTarget, playerLocation) === 1) {
+		if (
+			occ?.type !== 'ON_STEP_PORTAL' &&
+			getOverworldDistance(clickTarget, location) === 1
+		) {
 			interactWith(occ);
+			return;
 		}
 
 		if (
-			playerLocation.x < clickTarget.x &&
-			isPassableForPlayer({ x: playerLocation.x + 1, y: playerLocation.y })
+			location.x < clickTarget.x &&
+			isPassableForPlayer({ x: location.x + 1, y: location.y })
 		) {
 			setNextInput('RIGHT');
 			return;
 		}
 		if (
-			playerLocation.x > clickTarget.x &&
-			isPassableForPlayer({ x: playerLocation.x - 1, y: playerLocation.y })
+			location.x > clickTarget.x &&
+			isPassableForPlayer({ x: location.x - 1, y: location.y })
 		) {
 			setNextInput('LEFT');
 			return;
 		}
 		if (
-			playerLocation.y < clickTarget.y &&
-			isPassableForPlayer({ x: playerLocation.x, y: playerLocation.y + 1 })
+			location.y < clickTarget.y &&
+			isPassableForPlayer({ x: location.x, y: location.y + 1 })
 		) {
 			setNextInput('DOWN');
 			return;
 		}
 		if (
-			playerLocation.y > clickTarget.y &&
-			isPassableForPlayer({ x: playerLocation.x, y: playerLocation.y - 1 })
+			location.y > clickTarget.y &&
+			isPassableForPlayer({ x: location.x, y: location.y - 1 })
 		) {
 			setNextInput('UP');
 			return;
 		}
 
 		if (
-			(clickTarget.x === playerLocation.x &&
-				clickTarget.y === playerLocation.y) ||
+			(clickTarget.x === location.x && clickTarget.y === location.y) ||
 			(!isPassableForPlayer(clickTarget) &&
-				getOverworldDistance(clickTarget, playerLocation) === 1)
+				getOverworldDistance(clickTarget, location) === 1)
 		) {
-			if (playerLocation.x > clickTarget.x) {
+			if (location.x > clickTarget.x) {
 				setNextInput('LEFT');
 			}
-			if (playerLocation.x < clickTarget.x) {
+			if (location.x < clickTarget.x) {
 				setNextInput('RIGHT');
 			}
-			if (playerLocation.y < clickTarget.y) {
+			if (location.y < clickTarget.y) {
 				setNextInput('DOWN');
 			}
-			if (playerLocation.y > clickTarget.y) {
+			if (location.y > clickTarget.y) {
 				setNextInput('UP');
 			}
 
@@ -122,17 +121,15 @@ export const useClickTarget = (
 
 		setClickTarget(undefined);
 	}, [
-		activeMessage,
 		assembledMap,
 		clickTarget,
-		collectedItems,
 		interactWith,
-		playerLocation,
+		location,
 		setNextInput,
 		currentOccupants,
 		saveFile,
 		isPassableForPlayer,
-		location,
+		latestMessage,
 	]);
 
 	return setClickTarget;
