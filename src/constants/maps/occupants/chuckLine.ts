@@ -9,8 +9,8 @@ const chuckBase: Omit<
 	OverworldNpc,
 	'unhandledMessage' | 'conditionFunction' | 'id'
 > = {
-	x: 31,
-	y: 30,
+	x: 29,
+	y: 28,
 	orientation: 'RIGHT',
 	type: 'NPC',
 	sprite: SpriteEnum.chuck,
@@ -18,7 +18,7 @@ const chuckBase: Omit<
 export const chucksMachamp: OverworldPokemon = {
 	type: 'POKEMON',
 	dialogue: ['champ'],
-	x: 31,
+	x: 29,
 	y: 29,
 	orientation: 'RIGHT',
 	dexId: 68,

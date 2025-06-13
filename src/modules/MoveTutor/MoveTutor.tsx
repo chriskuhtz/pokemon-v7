@@ -17,23 +17,13 @@ import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { joinInventories } from '../../interfaces/Inventory';
-import { ItemType } from '../../interfaces/Item';
+import { ItemType, moveUnlockPayments } from '../../interfaces/Item';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { LearnMethod } from '../../interfaces/PokemonData';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
 
-export const moveUnlockPayments: ItemType[] = [
-	'big-malasada',
-	'moomoo-cheese',
-	'casteliacone',
-	'pewter-crunchies',
-	'lumiose-galette',
-	'rage-candy-bar',
-	'lava-cookie',
-	'old-gateau',
-];
 const learnMethodOrder: Record<LearnMethod, number> = {
 	'level-up': 1,
 	egg: 2,

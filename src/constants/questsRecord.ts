@@ -10,6 +10,7 @@ import {
 	berries,
 	expCandyPackage,
 	fossilTable,
+	moveUnlockPayments,
 	smallExpCandyPackage,
 } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
@@ -19,7 +20,6 @@ import {
 	EmptyStatObject,
 	generateRandomStatObject,
 } from '../interfaces/StatObject';
-import { moveUnlockPayments } from '../modules/MoveTutor/MoveTutor';
 import { highBstPokemon, lowBstPokemon, midBstPokemon } from './baseStatRecord';
 import {
 	campUpgradeCategories,

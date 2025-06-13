@@ -13,12 +13,11 @@ import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { joinInventories } from '../../interfaces/Inventory';
-import { ItemType } from '../../interfaces/Item';
+import { ItemType, moveUnlockPayments } from '../../interfaces/Item';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { moveUnlockPayments } from '../MoveTutor/MoveTutor';
 
 export const AbilityTutor = () => {
 	const { saveFile } = useContext(SaveFileContext);
