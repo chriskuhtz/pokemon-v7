@@ -1,4 +1,5 @@
 import { getTimeOfDay } from '../../../functions/getTimeOfDay';
+import { makeOverworldItem } from '../../../functions/makeOverworldItem';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 
 export const caveW1Occupants: OverworldMap['occupants'] = [
@@ -46,23 +47,13 @@ export const caveW1Occupants: OverworldMap['occupants'] = [
 	},
 	{
 		type: 'ITEM',
-		x: 11,
-		y: 48,
+		x: 7,
+		y: 38,
 		item: 'jaw-fossil',
 		amount: 1,
 		conditionFunction: (s) =>
 			!s.handledOccupants.some((h) => h.id === 'caveW1-jaw-fossil'),
 		id: 'caveW1-jaw-fossil',
-	},
-	{
-		type: 'ITEM',
-		x: 20,
-		y: 20,
-		item: 'sail-fossil',
-		amount: 1,
-		conditionFunction: (s) =>
-			!s.handledOccupants.some((h) => h.id === 'caveW1-sail-fossil'),
-		id: 'caveW1-sail-fossil',
 	},
 	{
 		type: 'ITEM',
@@ -76,7 +67,7 @@ export const caveW1Occupants: OverworldMap['occupants'] = [
 	},
 	{
 		type: 'ITEM',
-		x: 27,
+		x: 38,
 		y: 13,
 		item: 'elixir',
 		amount: 2,
@@ -84,6 +75,13 @@ export const caveW1Occupants: OverworldMap['occupants'] = [
 			!s.handledOccupants.some((h) => h.id === 'caveW1-elixir'),
 		id: 'caveW1-elixir',
 	},
+	makeOverworldItem({
+		x: 3,
+		y: 24,
+		amount: 2,
+		item: 'max-potion',
+		mapId: 'caveW1',
+	}),
 	{
 		type: 'POKEMON',
 		x: 41,
