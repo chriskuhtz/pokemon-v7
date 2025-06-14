@@ -22,7 +22,7 @@ import { useShader } from '../../hooks/useShader';
 import { useStaticEncounter } from '../../hooks/useStaticEncounter';
 import { useStrangeTree } from '../../hooks/useStrangeTree';
 import { useZigzagoonForagers } from '../../hooks/useZigzagoonForagers';
-import { Occupant } from '../../interfaces/OverworldMap';
+import { Occupant, OverworldMap } from '../../interfaces/OverworldMap';
 import './Overworld.css';
 import { ClickerGrid } from './components/ClickerGrid';
 import { OverworldMenus } from './components/OverworldMenus';
@@ -40,6 +40,8 @@ import { useOccupants } from './hooks/useOccupants';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
 import { useSledgeHammer } from './hooks/useSledgeHammer';
 import { useStartEncounter } from './hooks/useStartEncounter';
+import { Pathfinder, PathfindingApproach } from '../../model/Pathfinder';
+import { Vector2 } from '../../model/Vector2';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -81,7 +83,7 @@ export const Overworld = () => {
 	const addEncounterMessage = useStartEncounter();
 	const encounterRateModifier = useEncounterRateModifier();
 
-	const map = useMemo(() => mapsRecord[location.mapId], [location.mapId]);
+	const map = useMemo((): OverworldMap => mapsRecord[location.mapId], [location.mapId]);
 
 	const { width, height } = {
 		width: map.tileMap.baseLayer[0].length,
@@ -213,6 +215,10 @@ export const Overworld = () => {
 		!!latestMessage
 	);
 
+	const pathfinder = new Pathfinder(map, false, false);
+	pathfinder.setTarget(new Vector2(15, 6));
+	pathfinder.computePath(new Vector2(24, 18), PathfindingApproach.AVOID_DANGER)
+
 	return (
 		<div>
 			<OverworldMenus
@@ -242,6 +248,7 @@ export const Overworld = () => {
 							onClick={setClickTarget}
 							baseSize={baseSize}
 							mapId={location.mapId}
+							debugPath={pathfinder.getPath()}
 						/>
 					</div>
 					{map.foggy ? (

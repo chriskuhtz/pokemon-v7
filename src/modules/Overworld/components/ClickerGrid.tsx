@@ -1,5 +1,6 @@
 import React from "react";
 import { MapId } from "../../../constants/maps/mapsRecord";
+import { Vector2 } from "../../../model/Vector2";
 
 const unmemoedClickerGrid = ({
   width,
@@ -7,12 +8,14 @@ const unmemoedClickerGrid = ({
   onClick,
   baseSize,
   mapId,
+  debugPath,
 }: {
   width: number;
   height: number;
   onClick: (update: { y: number; x: number; mapId: MapId }) => void;
   baseSize: number;
   mapId: MapId;
+  debugPath: Vector2[]
 }) => {
   return (
     <div
@@ -32,7 +35,9 @@ const unmemoedClickerGrid = ({
               width: baseSize,
               height: baseSize,
             }}
-          ></div>
+          >
+            {debugPath.some(vector => vector.x === w && vector.y === h) && (<div style={{ backgroundColor: "#00FF00", width: "25%", height: "25%", borderRadius: '16px', margin: '8px' }}></div>)}
+          </div>
         ));
       })}
     </div>
