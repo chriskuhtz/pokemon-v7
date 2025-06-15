@@ -40,8 +40,6 @@ import { useOccupants } from './hooks/useOccupants';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
 import { useSledgeHammer } from './hooks/useSledgeHammer';
 import { useStartEncounter } from './hooks/useStartEncounter';
-import { Pathfinder, PathfindingApproach } from '../../model/Pathfinder';
-import { Vector2 } from '../../model/Vector2';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
