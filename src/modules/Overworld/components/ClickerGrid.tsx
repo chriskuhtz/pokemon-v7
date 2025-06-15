@@ -6,7 +6,7 @@ const unmemoedClickerGrid = ({
   height,
   onClick,
   baseSize,
-  mapId
+  mapId,
 }: {
   width: number;
   height: number;
@@ -32,8 +32,7 @@ const unmemoedClickerGrid = ({
               width: baseSize,
               height: baseSize,
             }}
-          >
-          </div>
+          ></div>
         ));
       })}
     </div>
