@@ -80,15 +80,14 @@ export const useClickTarget = (
 			pathfinding.computePath(locationVector, clickTargetVector, PathfindingApproach.AVOID_ENCOUNTER);
 		}
 		const nextDirection = pathfinding.getNextDirection(locationVector);
+		const occupantMet = occ && occ?.type !== 'ON_STEP_PORTAL' && getOverworldDistance(clickTarget, location) === 1;
+		const targetReached = nextDirection.toString() === Vector2.ZERO.toString();
 
+		if (targetReached || occupantMet) {
+			if (occupantMet) {
+				interactWith(occ);
+			}
 
-		if (occ && occ?.type !== 'ON_STEP_PORTAL' && getOverworldDistance(clickTarget, location) === 1
-		) {
-			interactWith(occ);
-			return;
-		}
-
-		if (nextDirection.toString() === Vector2.ZERO.toString()) {
 			pathfinding.clearPath();
 			setClickTarget(undefined);
 			console.log("Target reached")

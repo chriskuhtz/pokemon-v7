@@ -173,11 +173,6 @@ export class Pathfinder {
         }
         const nextPos = this.path[nextIndex];
 
-        const neighborIsTargetAndOccupant = this.getPositionIsUnpassableOccupant(nextPos) && nextIndex === this.path.length - 1
-        if (neighborIsTargetAndOccupant) {
-            return Vector2.ZERO;
-        }
-
         return nextPos.subtract(position);
     }
 }

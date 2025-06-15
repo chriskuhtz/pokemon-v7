@@ -28,7 +28,7 @@ export class Vector2 {
     if (length === 0) {
       return new Vector2(0, 0);
     }
-    return new Vector2(this.x / length, this.y / length);
+    return new Vector2(Math.floor(this.x / length), Math.floor(this.y / length));
   }
 
   toString() {
@@ -41,7 +41,7 @@ export class Vector2 {
   static readonly DOWN = new Vector2(0, 1);
   static readonly ZERO = new Vector2(0, 0)
 
-  getInputForDirection(): 'UP' | 'DOWN' | 'LEFT' | 'RIGHT' {
+  getInputForDirection(): 'UP' | 'DOWN' | 'LEFT' | 'RIGHT' | undefined {
     const normalizedVector = this.normalize();
     const key = normalizedVector.toString();
 
@@ -55,7 +55,7 @@ export class Vector2 {
       case Vector2.RIGHT.toString():
         return 'RIGHT';
       default:
-        throw new Error(`Unknown direction for vector: ${key}`);
+        return undefined;
     }
   }
 }
