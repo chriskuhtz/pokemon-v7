@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { MapId } from '../../../constants/maps/mapsRecord';
 import { getNextFieldOccupant } from '../../../functions/getNextFieldOccupant';
 import { getOverworldDistance } from '../../../functions/getOverworldDistance';
@@ -8,6 +8,9 @@ import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
+import { Pathfinder, PathfindingApproach } from '../../../model/Pathfinder';
+import { Vector2 } from '../../../model/Vector2';
+import { PiCodepenLogo } from 'react-icons/pi';
 
 export const useClickTarget = (
 	assembledMap: OverworldMap,
@@ -19,10 +22,10 @@ export const useClickTarget = (
 ): React.Dispatch<
 	React.SetStateAction<
 		| {
-				x: number;
-				y: number;
-				mapId: MapId;
-		  }
+			x: number;
+			y: number;
+			mapId: MapId;
+		}
 		| undefined
 	>
 > => {
@@ -46,6 +49,14 @@ export const useClickTarget = (
 		},
 		[assembledMap, currentOccupants, saveFile.campUpgrades, saveFile.flying]
 	);
+
+	const [lastClickTarget, setLastClickTarget] = useState<Vector2 | undefined>();
+
+	const pathfinding = useMemo(() => {
+		return new Pathfinder(assembledMap, currentOccupants, saveFile.campUpgrades['swimming certification'], !!saveFile.flying, saveFile.campUpgrades['rock climbing certification'])
+	}, [assembledMap, currentOccupants, saveFile.campUpgrades, saveFile.flying])
+
+	// compute path on target change
 	useEffect(() => {
 		if (latestMessage) {
 			setClickTarget(undefined);
@@ -55,72 +66,37 @@ export const useClickTarget = (
 			setClickTarget(undefined);
 			return;
 		}
+
 		if (!clickTarget) {
 			return;
 		}
 
 		const occ = getNextFieldOccupant(clickTarget, currentOccupants);
+		const locationVector = new Vector2(location.x, location.y);
+		const clickTargetVector = new Vector2(clickTarget.x, clickTarget.y);
 
-		if (
-			occ?.type !== 'ON_STEP_PORTAL' &&
-			getOverworldDistance(clickTarget, location) === 1
+		if (!lastClickTarget || lastClickTarget.toString() !== clickTargetVector.toString()) {
+			setLastClickTarget(clickTargetVector);
+			pathfinding.computePath(locationVector, clickTargetVector, PathfindingApproach.AVOID_ENCOUNTER);
+		}
+		const nextDirection = pathfinding.getNextDirection(locationVector);
+
+
+		if (occ && occ?.type !== 'ON_STEP_PORTAL' && getOverworldDistance(clickTarget, location) === 1
 		) {
 			interactWith(occ);
 			return;
 		}
 
-		if (
-			location.x < clickTarget.x &&
-			isPassableForPlayer({ x: location.x + 1, y: location.y })
-		) {
-			setNextInput('RIGHT');
-			return;
-		}
-		if (
-			location.x > clickTarget.x &&
-			isPassableForPlayer({ x: location.x - 1, y: location.y })
-		) {
-			setNextInput('LEFT');
-			return;
-		}
-		if (
-			location.y < clickTarget.y &&
-			isPassableForPlayer({ x: location.x, y: location.y + 1 })
-		) {
-			setNextInput('DOWN');
-			return;
-		}
-		if (
-			location.y > clickTarget.y &&
-			isPassableForPlayer({ x: location.x, y: location.y - 1 })
-		) {
-			setNextInput('UP');
-			return;
+		if (nextDirection.toString() === Vector2.ZERO.toString()) {
+			pathfinding.clearPath();
+			setClickTarget(undefined);
+			console.log("Target reached")
+		} else {
+			setNextInput(nextDirection.getInputForDirection());
 		}
 
-		if (
-			(clickTarget.x === location.x && clickTarget.y === location.y) ||
-			(!isPassableForPlayer(clickTarget) &&
-				getOverworldDistance(clickTarget, location) === 1)
-		) {
-			if (location.x > clickTarget.x) {
-				setNextInput('LEFT');
-			}
-			if (location.x < clickTarget.x) {
-				setNextInput('RIGHT');
-			}
-			if (location.y < clickTarget.y) {
-				setNextInput('DOWN');
-			}
-			if (location.y > clickTarget.y) {
-				setNextInput('UP');
-			}
-
-			console.log('target reached');
-		}
-
-		setClickTarget(undefined);
-	}, [
+	}, [pathfinding,
 		assembledMap,
 		clickTarget,
 		interactWith,
@@ -129,8 +105,7 @@ export const useClickTarget = (
 		currentOccupants,
 		saveFile,
 		isPassableForPlayer,
-		latestMessage,
-	]);
+		latestMessage])
 
 	return setClickTarget;
 };

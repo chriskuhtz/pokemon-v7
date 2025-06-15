@@ -215,10 +215,6 @@ export const Overworld = () => {
 		!!latestMessage
 	);
 
-	const pathfinder = new Pathfinder(map, false, false);
-	pathfinder.setTarget(new Vector2(15, 6));
-	pathfinder.computePath(new Vector2(24, 18), PathfindingApproach.AVOID_DANGER)
-
 	return (
 		<div>
 			<OverworldMenus
@@ -248,7 +244,6 @@ export const Overworld = () => {
 							onClick={setClickTarget}
 							baseSize={baseSize}
 							mapId={location.mapId}
-							debugPath={pathfinder.getPath()}
 						/>
 					</div>
 					{map.foggy ? (

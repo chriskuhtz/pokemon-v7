@@ -19,6 +19,18 @@ export class Vector2 {
     return Math.abs(this.x - other.x) + Math.abs(this.y - other.y);
   }
 
+  magnitude(): number {
+    return Math.sqrt(this.x * this.x + this.y * this.y);
+  }
+
+  normalize(): Vector2 {
+    const length = this.magnitude();
+    if (length === 0) {
+      return new Vector2(0, 0);
+    }
+    return new Vector2(this.x / length, this.y / length);
+  }
+
   toString() {
     return `${this.x},${this.y}`
   }
@@ -28,4 +40,22 @@ export class Vector2 {
   static readonly UP = new Vector2(0, -1);
   static readonly DOWN = new Vector2(0, 1);
   static readonly ZERO = new Vector2(0, 0)
+
+  getInputForDirection(): 'UP' | 'DOWN' | 'LEFT' | 'RIGHT' {
+    const normalizedVector = this.normalize();
+    const key = normalizedVector.toString();
+
+    switch (key) {
+      case Vector2.UP.toString():
+        return 'UP';
+      case Vector2.DOWN.toString():
+        return 'DOWN';
+      case Vector2.LEFT.toString():
+        return 'LEFT';
+      case Vector2.RIGHT.toString():
+        return 'RIGHT';
+      default:
+        throw new Error(`Unknown direction for vector: ${key}`);
+    }
+  }
 }

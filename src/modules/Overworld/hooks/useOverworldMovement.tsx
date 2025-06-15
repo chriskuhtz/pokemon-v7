@@ -144,7 +144,7 @@ export const useOverworldMovement = (
 		startEncounter,
 	]);
 
-	const canSwim = useMemo(() => {
+	const canSwim = useMemo((): boolean => {
 		return campUpgrades['swimming certification'];
 	}, [campUpgrades]);
 
