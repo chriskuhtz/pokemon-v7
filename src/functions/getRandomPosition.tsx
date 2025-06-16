@@ -1,5 +1,6 @@
 import { OverworldMap } from '../interfaces/OverworldMap';
-import { hasForeground, isPassable } from './isPassable';
+import { hasForeground } from './hasForeground';
+import { isPassable } from './isPassable';
 
 export const getRandomPosition = (
 	map: OverworldMap
@@ -9,7 +10,21 @@ export const getRandomPosition = (
 
 	if (
 		hasForeground({ x, y }, map) ||
-		!isPassable({ x, y }, map, map.occupants, false, false, false)
+		!isPassable({
+			nextLocation: { x, y },
+			playerLocation: {
+				x,
+				y,
+				orientation: 'DOWN',
+				mapId: map.id,
+				forwardFoot: 'CENTER1',
+			},
+			map,
+			currentOccupants: map.occupants,
+			canSwim: false,
+			flying: false,
+			canClimb: false,
+		})
 	) {
 		return getRandomPosition(map);
 	}

@@ -39,14 +39,18 @@ export const FollowerSprite = ({
 		if (saveFile.flying) {
 			return false;
 		}
-		return isPassable(
-			getNextLocation(location, getOppositeDirection(location.orientation)),
+		return isPassable({
+			nextLocation: getNextLocation(
+				location,
+				getOppositeDirection(location.orientation)
+			),
+			playerLocation: location,
 			map,
-			occupants,
-			false,
-			false,
-			false
-		);
+			currentOccupants: occupants,
+			canClimb: false,
+			canSwim: false,
+			flying: false,
+		});
 	}, [firstTeamMemberDexId, location, map, occupants, saveFile.flying]);
 
 	useDrawFollowerPokemon(followerCanvasId, location, firstTeamMemberDexId);

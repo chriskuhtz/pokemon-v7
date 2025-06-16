@@ -10,7 +10,6 @@ import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
 import { Pathfinder, PathfindingApproach } from '../../../model/Pathfinder';
 import { Vector2 } from '../../../model/Vector2';
-import { PiCodepenLogo } from 'react-icons/pi';
 
 export const useClickTarget = (
 	assembledMap: OverworldMap,
@@ -22,10 +21,10 @@ export const useClickTarget = (
 ): React.Dispatch<
 	React.SetStateAction<
 		| {
-			x: number;
-			y: number;
-			mapId: MapId;
-		}
+				x: number;
+				y: number;
+				mapId: MapId;
+		  }
 		| undefined
 	>
 > => {
@@ -38,23 +37,36 @@ export const useClickTarget = (
 
 	const isPassableForPlayer = useCallback(
 		(pos: { x: number; y: number }) => {
-			return isPassable(
-				pos,
-				assembledMap,
+			return isPassable({
+				nextLocation: pos,
+				playerLocation: location,
+				map: assembledMap,
 				currentOccupants,
-				saveFile.campUpgrades['swimming certification'],
-				!!saveFile.flying,
-				saveFile.campUpgrades['rock climbing certification']
-			);
+				canSwim: saveFile.campUpgrades['swimming certification'],
+				flying: !!saveFile.flying,
+				canClimb: saveFile.campUpgrades['rock climbing certification'],
+			});
 		},
-		[assembledMap, currentOccupants, saveFile.campUpgrades, saveFile.flying]
+		[
+			assembledMap,
+			currentOccupants,
+			location,
+			saveFile.campUpgrades,
+			saveFile.flying,
+		]
 	);
 
 	const [lastClickTarget, setLastClickTarget] = useState<Vector2 | undefined>();
 
 	const pathfinding = useMemo(() => {
-		return new Pathfinder(assembledMap, currentOccupants, saveFile.campUpgrades['swimming certification'], !!saveFile.flying, saveFile.campUpgrades['rock climbing certification'])
-	}, [assembledMap, currentOccupants, saveFile.campUpgrades, saveFile.flying])
+		return new Pathfinder(
+			assembledMap,
+			currentOccupants,
+			saveFile.campUpgrades['swimming certification'],
+			!!saveFile.flying,
+			saveFile.campUpgrades['rock climbing certification']
+		);
+	}, [assembledMap, currentOccupants, saveFile.campUpgrades, saveFile.flying]);
 
 	// compute path on target change
 	useEffect(() => {
@@ -75,12 +87,22 @@ export const useClickTarget = (
 		const locationVector = new Vector2(location.x, location.y);
 		const clickTargetVector = new Vector2(clickTarget.x, clickTarget.y);
 
-		if (!lastClickTarget || lastClickTarget.toString() !== clickTargetVector.toString()) {
+		if (
+			!lastClickTarget ||
+			lastClickTarget.toString() !== clickTargetVector.toString()
+		) {
 			setLastClickTarget(clickTargetVector);
-			pathfinding.computePath(locationVector, clickTargetVector, PathfindingApproach.AVOID_ENCOUNTER);
+			pathfinding.computePath(
+				locationVector,
+				clickTargetVector,
+				PathfindingApproach.AVOID_ENCOUNTER
+			);
 		}
 		const nextDirection = pathfinding.getNextDirection(locationVector);
-		const occupantMet = occ && occ?.type !== 'ON_STEP_PORTAL' && getOverworldDistance(clickTarget, location) === 1;
+		const occupantMet =
+			occ &&
+			occ?.type !== 'ON_STEP_PORTAL' &&
+			getOverworldDistance(clickTarget, location) === 1;
 		const targetReached = nextDirection.toString() === Vector2.ZERO.toString();
 
 		if (targetReached || occupantMet) {
@@ -90,12 +112,12 @@ export const useClickTarget = (
 
 			pathfinding.clearPath();
 			setClickTarget(undefined);
-			console.log("Target reached")
+			console.log('Target reached');
 		} else {
 			setNextInput(nextDirection.getInputForDirection());
 		}
-
-	}, [pathfinding,
+	}, [
+		pathfinding,
 		assembledMap,
 		clickTarget,
 		interactWith,
@@ -104,7 +126,9 @@ export const useClickTarget = (
 		currentOccupants,
 		saveFile,
 		isPassableForPlayer,
-		latestMessage])
+		latestMessage,
+		lastClickTarget,
+	]);
 
 	return setClickTarget;
 };
