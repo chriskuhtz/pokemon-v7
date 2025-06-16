@@ -28,6 +28,8 @@ export const Settings = ({ backTo }: { backTo?: RoutesType }): JSX.Element => {
 			smarterOpponents: false,
 			hideMovementButtons: false,
 			minimalGrindingMode: false,
+			unlimitedPathfindingRange: false,
+			seekOutEncounters: false,
 		}
 	);
 
@@ -65,7 +67,16 @@ export const Settings = ({ backTo }: { backTo?: RoutesType }): JSX.Element => {
 		});
 	};
 	return (
-		<Page headline="Settings:">
+		<Page
+			goBack={
+				backTo
+					? () => {
+							proceed();
+					  }
+					: undefined
+			}
+			headline="Settings:"
+		>
 			{!backTo && (
 				<button style={{ width: '100%' }} onClick={() => proceed()}>
 					I am not reading that, lets go
@@ -100,10 +111,24 @@ export const Settings = ({ backTo }: { backTo?: RoutesType }): JSX.Element => {
 					label={'Minimal Grinding Mode'}
 					description="Effort- and Individual Stats are ignored for you and opponents"
 				/>
+				<h2>Movement:</h2> <span />
+				<span />
 				<ToggleRow
 					value={!!state.hideMovementButtons}
 					setValue={(x) => setState({ ...state, hideMovementButtons: x })}
 					label={'Hide Movement Buttons'}
+				/>
+				<ToggleRow
+					value={!!state.seekOutEncounters}
+					setValue={(x) => setState({ ...state, seekOutEncounters: x })}
+					label={'Seek Encounters'}
+					description="Choose the movement path with the most wild pokemon"
+				/>
+				<ToggleRow
+					value={!!state.unlimitedPathfindingRange}
+					setValue={(x) => setState({ ...state, unlimitedPathfindingRange: x })}
+					label={'Unlimited Pathfinder'}
+					description="Walk through the entire map with one click, otherwise limited to ~15 fields"
 				/>
 				<h2>Difficulty:</h2> <span />
 				<span />

@@ -110,8 +110,10 @@ export class Pathfinder {
 	public computePath(
 		position: Vector2,
 		target: Vector2,
-		approach: PathfindingApproach
+		approach: PathfindingApproach,
+		unlimitedRange: boolean
 	) {
+		const range = unlimitedRange ? null : 150;
 		if (!target) {
 			console.log('No Target');
 			return Vector2.ZERO;
@@ -139,10 +141,16 @@ export class Pathfinder {
 			const current = openSet.shift()!;
 			const currentKey = current;
 
+			if (range && cameFrom.size > range) {
+				this.path = [];
+				return;
+			}
+
 			// closing condition
 			if (current.x === target.x && current.y === target.y) {
 				// collect from start
 				const totalPath: Vector2[] = [current];
+
 				while (cameFrom.has(totalPath[0].toString())) {
 					totalPath.unshift(cameFrom.get(totalPath[0].toString())!);
 				}

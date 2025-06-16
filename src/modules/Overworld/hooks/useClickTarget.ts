@@ -95,7 +95,10 @@ export const useClickTarget = (
 			pathfinding.computePath(
 				locationVector,
 				clickTargetVector,
-				PathfindingApproach.AVOID_ENCOUNTER
+				saveFile.settings?.seekOutEncounters
+					? PathfindingApproach.SEEK
+					: PathfindingApproach.AVOID_ENCOUNTER,
+				!!saveFile.settings?.unlimitedPathfindingRange
 			);
 		}
 		const nextDirection = pathfinding.getNextDirection(locationVector);

@@ -51,6 +51,8 @@ export interface SettingsObject {
 	hideMovementButtons?: boolean;
 	smarterOpponents?: boolean;
 	minimalGrindingMode?: boolean;
+	unlimitedPathfindingRange?: boolean;
+	seekOutEncounters?: boolean;
 }
 
 export type BerryBushStatus =
