@@ -22,7 +22,7 @@ import { useShader } from '../../hooks/useShader';
 import { useStaticEncounter } from '../../hooks/useStaticEncounter';
 import { useStrangeTree } from '../../hooks/useStrangeTree';
 import { useZigzagoonForagers } from '../../hooks/useZigzagoonForagers';
-import { Occupant } from '../../interfaces/OverworldMap';
+import { Occupant, OverworldMap } from '../../interfaces/OverworldMap';
 import './Overworld.css';
 import { ClickerGrid } from './components/ClickerGrid';
 import { OverworldMenus } from './components/OverworldMenus';
@@ -81,7 +81,7 @@ export const Overworld = () => {
 	const addEncounterMessage = useStartEncounter();
 	const encounterRateModifier = useEncounterRateModifier();
 
-	const map = useMemo(() => mapsRecord[location.mapId], [location.mapId]);
+	const map = useMemo((): OverworldMap => mapsRecord[location.mapId], [location.mapId]);
 
 	const { width, height } = {
 		width: map.tileMap.baseLayer[0].length,

@@ -2,6 +2,7 @@ export const extraFeatureCheckList: {
 	name: string;
 	todos?: string[];
 	handled?: boolean;
+	handler?: string;
 }[] = [
 	{ name: 'PC storage system', handled: true },
 	{ name: 'PC access only from overworld', handled: true },
@@ -594,7 +595,7 @@ export const extraFeatureCheckList: {
 
 	//BUGS/IMPROVEMENTS:
 
-	{ name: 'fix pathing' },
+	{ name: 'fix pathing',  handler: 'Johannes'},
 	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },
 	{ name: 'leech seed benefit doesnt pass to switched in mon' },
