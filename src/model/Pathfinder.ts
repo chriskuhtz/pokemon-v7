@@ -13,6 +13,7 @@ export class Pathfinder {
     private map: OverworldMap;
     private avoidWeightMap: number[][];
     private seekWeightMap: number[][];
+    private hasDirectionalObstaclesMap: Map<Vector2, boolean[][]>;
     private canSwim: boolean;
     private flying: boolean;
     private canClimb: boolean;
@@ -32,10 +33,9 @@ export class Pathfinder {
         this.canSwim = canSwim;
         this.flying = flying;
         this.canClimb = canClimb;
-        this.avoidWeightMap = this.generateWeightMap(
-            PathfindingApproach.AVOID_ENCOUNTER
-        );
+        this.avoidWeightMap = this.generateWeightMap(PathfindingApproach.AVOID_ENCOUNTER);
         this.seekWeightMap = this.generateWeightMap(PathfindingApproach.SEEK);
+        this.hasDirectionalObstaclesMap = this.generateHasDirectionalObstaclesMap();
     }
 
     private generateWeightMap(type: PathfindingApproach): number[][] {
@@ -45,7 +45,7 @@ export class Pathfinder {
         const weightMap: number[][] = [];
 
         for (let x = 0; x < height; x++) {
-            weightMap[x] = []; // Neue Spalte
+            weightMap[x] = [];
             for (let y = 0; y < width; y++) {
                 const pos = new Vector2(x, y);
                 weightMap[x][y] = this.getWeightForPosition(pos, type);
@@ -53,6 +53,46 @@ export class Pathfinder {
         }
 
         return weightMap;
+    }
+
+    generateHasDirectionalObstaclesMap(): Map<Vector2, boolean[][]> {
+        const directions = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT];
+        const result = new Map<Vector2, boolean[][]>();
+        for (const dir of directions) {
+            result.set(dir, this.generateHasDirectionalObstaclesMapForDirection(dir))
+        }
+        return result;
+    }
+
+    generateHasDirectionalObstaclesMapForDirection(direction: Vector2): boolean[][] {
+        const baseLayer = this.map.tileMap.baseLayer;
+        const width = baseLayer.length;
+        const height = baseLayer[0].length;
+        const hasDirectionalObstaclesMap: boolean[][] = [];
+        for (let x = 0; x < height; x++) {
+            hasDirectionalObstaclesMap[x] = [];
+            for (let y = 0; y < width; y++) {
+                const pos = new Vector2(x, y);
+                const neighbor = pos.add(direction)
+                if (outOfMapBounds(neighbor, this.map)) {
+                    hasDirectionalObstaclesMap[x][y] = true;
+                } else {
+                    hasDirectionalObstaclesMap[x][y] = !isPassable({
+                        nextLocation: neighbor,
+                        playerLocation: {
+                            ...pos, orientation: direction.getInputForDirection() ?? 'DOWN', mapId: this.map.id, forwardFoot: 'CENTER1',
+                        },
+                        map: this.map,
+                        currentOccupants: this.currentOccupants,
+                        canSwim: this.canSwim,
+                        flying: this.flying,
+                        canClimb: this.canClimb,
+                    })
+                }
+
+            }
+        }
+        return hasDirectionalObstaclesMap
     }
 
     private getWeightForPosition(
@@ -152,16 +192,11 @@ export class Pathfinder {
                 } else {
                     this.path = totalPath;
                 }
-                
+
                 return;
             }
 
-            const directions = [
-                Vector2.UP,
-                Vector2.DOWN,
-                Vector2.LEFT,
-                Vector2.RIGHT,
-            ];
+            const directions = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT];
             for (const dir of directions) {
                 const neighbor = current.add(dir);
 
@@ -174,20 +209,7 @@ export class Pathfinder {
                 const weight = neighborOutOfBounds ? -1 : weightMap[neighbor.x][neighbor.y];
 
                 //check if field is passable from current direction (waterfalls, cliffs)
-                const unpassableDirection = !isPassable({
-                    nextLocation: neighbor,
-                    playerLocation: {
-                        ...current,
-                        orientation: dir.getInputForDirection() ?? 'DOWN',
-                        mapId: this.map.id,
-                        forwardFoot: 'CENTER1',
-                    },
-                    map: this.map,
-                    currentOccupants: this.currentOccupants,
-                    canSwim: this.canSwim,
-                    flying: this.flying,
-                    canClimb: this.canClimb,
-                })
+                const unpassableDirection: boolean = this.hasDirectionalObstaclesMap.get(dir)?.[current.x][current.y] ?? false;
 
                 // check for unpassable obstacles
                 if (!neighborIsTargetAndOccupant && (weight === -1 || unpassableDirection)) {
@@ -195,18 +217,14 @@ export class Pathfinder {
                 }
 
                 // accumulate more weight as the path grows
-                const tentativeG =
-                    (gScore.get(currentKey.toString()) ?? Infinity) + weight;
+                const tentativeG = (gScore.get(currentKey.toString()) ?? Infinity) + weight;
                 const neighborKey = neighbor;
 
                 if (tentativeG < (gScore.get(neighborKey.toString()) ?? Infinity)) {
                     cameFrom.set(neighborKey.toString(), current);
                     gScore.set(neighborKey.toString(), tentativeG);
                     // final score for new position
-                    fScore.set(
-                        neighborKey.toString(),
-                        tentativeG + neighbor.manhattanDistance(target)
-                    );
+                    fScore.set(neighborKey.toString(), tentativeG + neighbor.manhattanDistance(target));
                     if (!openSet.find((v) => v.x === neighbor.x && v.y === neighbor.y)) {
                         openSet.push(neighbor);
                     }
