@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { MapId } from '../../../constants/maps/mapsRecord';
 import { getNextFieldOccupant } from '../../../functions/getNextFieldOccupant';
 import { getOverworldDistance } from '../../../functions/getOverworldDistance';
@@ -8,6 +8,8 @@ import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
+import { Pathfinder, PathfindingApproach } from '../../../model/Pathfinder';
+import { Vector2 } from '../../../model/Vector2';
 
 export const useClickTarget = (
 	assembledMap: OverworldMap,
@@ -35,17 +37,38 @@ export const useClickTarget = (
 
 	const isPassableForPlayer = useCallback(
 		(pos: { x: number; y: number }) => {
-			return isPassable(
-				pos,
-				assembledMap,
+			return isPassable({
+				nextLocation: pos,
+				playerLocation: location,
+				map: assembledMap,
 				currentOccupants,
-				saveFile.campUpgrades['swimming certification'],
-				!!saveFile.flying,
-				saveFile.campUpgrades['rock climbing certification']
-			);
+				canSwim: saveFile.campUpgrades['swimming certification'],
+				flying: !!saveFile.flying,
+				canClimb: saveFile.campUpgrades['rock climbing certification'],
+			});
 		},
-		[assembledMap, currentOccupants, saveFile.campUpgrades, saveFile.flying]
+		[
+			assembledMap,
+			currentOccupants,
+			location,
+			saveFile.campUpgrades,
+			saveFile.flying,
+		]
 	);
+
+	const [lastClickTarget, setLastClickTarget] = useState<Vector2 | undefined>();
+
+	const pathfinding = useMemo(() => {
+		return new Pathfinder(
+			assembledMap,
+			currentOccupants,
+			saveFile.campUpgrades['swimming certification'],
+			!!saveFile.flying,
+			saveFile.campUpgrades['rock climbing certification']
+		);
+	}, [assembledMap, currentOccupants, saveFile.campUpgrades, saveFile.flying]);
+
+	// compute path on target change
 	useEffect(() => {
 		if (latestMessage) {
 			setClickTarget(undefined);
@@ -55,72 +78,49 @@ export const useClickTarget = (
 			setClickTarget(undefined);
 			return;
 		}
+
 		if (!clickTarget) {
 			return;
 		}
 
 		const occ = getNextFieldOccupant(clickTarget, currentOccupants);
+		const locationVector = new Vector2(location.x, location.y);
+		const clickTargetVector = new Vector2(clickTarget.x, clickTarget.y);
 
 		if (
+			!lastClickTarget ||
+			lastClickTarget.toString() !== clickTargetVector.toString()
+		) {
+			setLastClickTarget(clickTargetVector);
+			pathfinding.computePath(
+				locationVector,
+				clickTargetVector,
+				saveFile.settings?.seekOutEncounters
+					? PathfindingApproach.SEEK
+					: PathfindingApproach.AVOID_ENCOUNTER,
+				!!saveFile.settings?.unlimitedPathfindingRange
+			);
+		}
+		const nextDirection = pathfinding.getNextDirection(locationVector);
+		const occupantMet =
+			occ &&
 			occ?.type !== 'ON_STEP_PORTAL' &&
-			getOverworldDistance(clickTarget, location) === 1
-		) {
-			interactWith(occ);
-			return;
-		}
+			getOverworldDistance(clickTarget, location) === 1;
+		const targetReached = nextDirection.toString() === Vector2.ZERO.toString();
 
-		if (
-			location.x < clickTarget.x &&
-			isPassableForPlayer({ x: location.x + 1, y: location.y })
-		) {
-			setNextInput('RIGHT');
-			return;
-		}
-		if (
-			location.x > clickTarget.x &&
-			isPassableForPlayer({ x: location.x - 1, y: location.y })
-		) {
-			setNextInput('LEFT');
-			return;
-		}
-		if (
-			location.y < clickTarget.y &&
-			isPassableForPlayer({ x: location.x, y: location.y + 1 })
-		) {
-			setNextInput('DOWN');
-			return;
-		}
-		if (
-			location.y > clickTarget.y &&
-			isPassableForPlayer({ x: location.x, y: location.y - 1 })
-		) {
-			setNextInput('UP');
-			return;
-		}
-
-		if (
-			(clickTarget.x === location.x && clickTarget.y === location.y) ||
-			(!isPassableForPlayer(clickTarget) &&
-				getOverworldDistance(clickTarget, location) === 1)
-		) {
-			if (location.x > clickTarget.x) {
-				setNextInput('LEFT');
-			}
-			if (location.x < clickTarget.x) {
-				setNextInput('RIGHT');
-			}
-			if (location.y < clickTarget.y) {
-				setNextInput('DOWN');
-			}
-			if (location.y > clickTarget.y) {
-				setNextInput('UP');
+		if (targetReached || occupantMet) {
+			if (occupantMet) {
+				interactWith(occ);
 			}
 
-			console.log('target reached');
+			pathfinding.clearPath();
+			setClickTarget(undefined);
+			console.log('Target reached');
+		} else {
+			setNextInput(nextDirection.getInputForDirection());
 		}
-
-		setClickTarget(undefined);
 	}, [
+		pathfinding,
 		assembledMap,
 		clickTarget,
 		interactWith,
@@ -130,6 +130,7 @@ export const useClickTarget = (
 		saveFile,
 		isPassableForPlayer,
 		latestMessage,
+		lastClickTarget,
 	]);
 
 	return setClickTarget;

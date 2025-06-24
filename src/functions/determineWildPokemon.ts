@@ -3,6 +3,7 @@ import {
 	lowBstPokemon,
 	midBstPokemon,
 } from '../constants/baseStatRecord';
+import { shinyChance } from '../constants/gameData';
 import { getRandomEncounter, isNotCatchable } from '../constants/internalDex';
 import { internalDex } from '../constants/internalDexData';
 import { MapId } from '../constants/maps/mapsRecord';
@@ -38,7 +39,7 @@ export const determineWildPokemon = (
 	const timeOfDay = getTimeOfDay();
 	const applyStreakBoosts = (input: OwnedPokemon): OwnedPokemon => {
 		if (catchStreak?.pokemon === input.name) {
-			let secondShinyRoll = Math.random() / catchStreak.streak < shinyFactor;
+			let secondShinyRoll = Math.random() / catchStreak.streak < shinyChance;
 
 			if (catchStreak.streak === 31) {
 				secondShinyRoll = true;
