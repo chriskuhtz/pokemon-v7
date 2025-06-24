@@ -15,7 +15,7 @@ export const isEdge = (
       map.tileMap.decorationLayer[location.y][location.x]?.xOffset === -80 &&
       map.tileMap.decorationLayer[location.y][location.x]?.yOffset === -160) ||
     (map.tilesetUrl === "/tilesets/newMasterSheet.png" &&
-      map.tileMap.decorationLayer[location.y][location.x]?.xOffset === -0 &&
+      map.tileMap.decorationLayer[location.y][location.x]?.xOffset === 0 &&
       map.tileMap.decorationLayer[location.y][location.x]?.yOffset === -224) ||
     (map.tilesetUrl === "/tilesets/newMasterSheet.png" &&
       map.tileMap.decorationLayer[location.y][location.x]?.xOffset === -32 &&
