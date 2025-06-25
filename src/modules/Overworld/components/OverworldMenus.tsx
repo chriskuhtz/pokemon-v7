@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import { CgZoomIn, CgZoomOut } from 'react-icons/cg';
 import { IoMdMenu } from 'react-icons/io';
 import { LureIcon } from '../../../components/LureIcon/LureIcon';
@@ -20,6 +20,7 @@ import { LocationContext } from '../../../hooks/LocationProvider';
 import { BaseSizeContext } from '../../../hooks/useBaseSize';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
+import { useIsDark } from '../hooks/useIsDark';
 import { MovementButtons } from './MovementButtons';
 import { NumberOfBallsBadge } from './NumberOfBallsBadge';
 import { UncollectedQuestsBadge } from './UncollectedQuestsBadge';
@@ -39,6 +40,13 @@ export const OverworldMenus = ({
 	const { navigateAwayFromOverworldReducer } = useContext(SaveFileContext);
 	const { location } = useContext(LocationContext);
 	const map = useMemo(() => mapsRecord[location.mapId], [location.mapId]);
+
+	const { isDark } = useIsDark(map.id);
+	useEffect(() => {
+		if (isDark && baseSize !== 64) {
+			setBaseSize(64);
+		}
+	}, [baseSize, isDark, setBaseSize]);
 	return (
 		<>
 			<div
@@ -87,7 +95,7 @@ export const OverworldMenus = ({
 				<CgZoomOut
 					size={battleSpriteSize}
 					onClick={() => {
-						if (baseSize === 16) {
+						if (baseSize === 16 || isDark) {
 							return;
 						}
 						setBaseSize(baseSize / 2);
@@ -96,7 +104,7 @@ export const OverworldMenus = ({
 				<CgZoomIn
 					size={battleSpriteSize}
 					onClick={() => {
-						if (baseSize === 256) {
+						if (baseSize === 256 || isDark) {
 							return;
 						}
 						setBaseSize(baseSize * 2);
