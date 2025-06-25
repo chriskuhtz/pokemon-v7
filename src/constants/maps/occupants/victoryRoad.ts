@@ -114,9 +114,9 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
   //OVERWORLD_MONS
   {
     type: "POKEMON",
-    x: 4,
-    y: 49,
-    orientation: "UP",
+    x: 30,
+    y: 33,
+    orientation: "RIGHT",
     dexId: 248,
     encounter: {
       name: "tyranitar",
@@ -130,25 +130,9 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
   },
   {
     type: "POKEMON",
-    x: 4,
-    y: 48,
-    orientation: "DOWN",
-    dexId: 452,
-    encounter: {
-      name: "drapion",
-      maxXp: 343000,
-      minXp: 343000,
-      rarity: "common",
-    },
-    dialogue: ["Drap Drap"],
-    conditionFunction: (s) => !occupantHandled(s, "victory-road_drapion"),
-    id: "victory-road_drapion",
-  },
-  {
-    type: "POKEMON",
-    x: 4,
-    y: 48,
-    orientation: "DOWN",
+    x: 31,
+    y: 33,
+    orientation: "LEFT",
     dexId: 452,
     encounter: {
       name: "drapion",
