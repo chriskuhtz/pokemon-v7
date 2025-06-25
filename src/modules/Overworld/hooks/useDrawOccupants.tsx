@@ -200,7 +200,7 @@ const getSource = (occ: Occupant) => {
 		case 'POKEMON':
 		case 'DUGTRIO_EXPLORER':
 		case 'ZIGZAGOON_FORAGER':
-			return `/overworldPokemonSprites/${threeDigitString(occ.dexId)}.png`;
+			return `/overWorldPokemonSprites/${threeDigitString(occ.dexId)}.png`;
 		case 'SNORLAX':
 			return `/overworldPokemonSprites/143.png`;
 		case 'STRANGE_TREE':

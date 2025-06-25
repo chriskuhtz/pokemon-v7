@@ -50,6 +50,7 @@ export const campUpgradeNames = [
 	'shovel certification',
 	'swimming certification',
 	'rock climbing certification',
+	'flashlight certification',
 	'invite museum curator',
 	'berry lure station routeN1',
 	'berry lure station routeN1E1',
@@ -127,6 +128,7 @@ export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
 	'sledge hammer certification': 'Exploration',
 	'shovel certification': 'Exploration',
 	'rock climbing certification': 'Exploration',
+	'flashlight certification': 'Exploration',
 	'buy skiing equipment': 'Exploration',
 	'bag size upgrade 1': 'Exploration',
 	'bag size upgrade 2': 'Exploration',
@@ -199,7 +201,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
 	'sledge hammer certification': ['machete certification'],
 	'ranger certification': ['machete certification', 'training field 1'],
 	'shovel certification': ['sledge hammer certification'],
-
+	'flashlight certification': ['shovel certification'],
 	'rock climbing certification': ['swimming certification'],
 	'buy skiing equipment': ['rock climbing certification'],
 	'invite museum curator': ['invite dugtrio explorers'],
@@ -278,6 +280,7 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
 	'invite fossil expert': 'maybe we can revive fossilized pokemon',
 	'sledge hammer certification': 'Safety Training for rock smashing',
 	'shovel certification': 'Safety Training for digging into ledges',
+	'flashlight certification': 'Safety Training for cave exploration',
 	'swimming certification':
 		'The Research center is not responsible if you drown',
 	'rock climbing certification':
