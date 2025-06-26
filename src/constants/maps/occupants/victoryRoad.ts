@@ -22,9 +22,37 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
     conditionFunction: () => true,
   },
   {
-    id: "victory_road_to_pokemonLeague",
+    id: "victory_road_to_lower_level_1",
+    type: "ON_STEP_PORTAL",
+    x: 15,
+    y: 16,
+    portal: {
+      mapId: "victoryRoadU1",
+      x: 31,
+      y: 42,
+      orientation: "DOWN",
+      forwardFoot: "CENTER1",
+    },
+    conditionFunction: () => true,
+  },
+  {
+    id: "victory_road_to_lower_level_2",
     type: "ON_STEP_PORTAL",
     x: 4,
+    y: 22,
+    portal: {
+      mapId: "victoryRoadU1",
+      x: 19,
+      y: 47,
+      orientation: "LEFT",
+      forwardFoot: "CENTER1",
+    },
+    conditionFunction: () => true,
+  },
+  {
+    id: "victory_road_to_pokemonLeague",
+    type: "ON_STEP_PORTAL",
+    x: 13,
     y: 4,
     portal: {
       mapId: "pokemonLeague",
@@ -59,8 +87,8 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
   },
   {
     type: "LEDGE",
-    x: 1,
-    y: 29,
+    x: 44,
+    y: 14,
     conditionFunction: (s) =>
       !s.handledOccupants.some((occ) => occ.id === "ledge-victoryRoad-1"),
     id: "ledge-victoryRoad-1",
@@ -69,8 +97,8 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
   },
   {
     type: "LEDGE",
-    x: 2,
-    y: 29,
+    x: 45,
+    y: 14,
     conditionFunction: (s) =>
       !s.handledOccupants.some((occ) => occ.id === "ledge-victoryRoad-2"),
     id: "ledge-victoryRoad-2",
@@ -79,8 +107,8 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
   },
   {
     type: "LEDGE",
-    x: 3,
-    y: 29,
+    x: 46,
+    y: 14,
     conditionFunction: (s) =>
       !s.handledOccupants.some((occ) => occ.id === "ledge-victoryRoad-3"),
     id: "ledge-victoryRoad-3",
@@ -110,6 +138,78 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
     conditionFunction: (s) =>
       !s.handledOccupants.some((occ) => occ.id === "rock_victory_road_3"),
     id: "rock_victory_road_3",
+  },
+  {
+    type: "ROCK",
+    x: 21,
+    y: 30,
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((occ) => occ.id === "rock_victory_road_4"),
+    id: "rock_victory_road_4",
+  },
+  {
+    type: "ROCK",
+    x: 23,
+    y: 22,
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((occ) => occ.id === "rock_victory_road_5"),
+    id: "rock_victory_road_5",
+  },
+  {
+    type: "ROCK",
+    x: 41,
+    y: 21,
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((occ) => occ.id === "rock_victory_road_6"),
+    id: "rock_victory_road_6",
+  },
+  {
+    type: "ROCK",
+    x: 11,
+    y: 13,
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((occ) => occ.id === "rock_victory_road_7"),
+    id: "rock_victory_road_7",
+  },
+  {
+    type: "ROCK",
+    x: 16,
+    y: 23,
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((occ) => occ.id === "rock_victory_road_8"),
+    id: "rock_victory_road_8",
+  },
+  {
+    type: "ROCK",
+    x: 9,
+    y: 19,
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((occ) => occ.id === "rock_victory_road_9"),
+    id: "rock_victory_road_9",
+  },
+  {
+    type: "ROCK",
+    x: 40,
+    y: 7,
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((occ) => occ.id === "rock_victory_road_10"),
+    id: "rock_victory_road_10",
+  },
+  {
+    type: "ROCK",
+    x: 29,
+    y: 3,
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((occ) => occ.id === "rock_victory_road_11"),
+    id: "rock_victory_road_11",
+  },
+  {
+    type: "ROCK",
+    x: 14,
+    y: 40,
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((occ) => occ.id === "rock_victory_road_12"),
+    id: "rock_victory_road_12",
   },
   //OVERWORLD_MONS
   {
@@ -146,9 +246,9 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
   },
   {
     type: "POKEMON",
-    x: 21,
-    y: 16,
-    orientation: "LEFT",
+    x: 37,
+    y: 11,
+    orientation: "UP",
     dexId: 68,
     encounter: {
       name: "machamp",
@@ -162,12 +262,12 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
   },
   {
     type: "POKEMON",
-    x: 47,
-    y: 22,
-    orientation: "DOWN",
+    x: 15,
+    y: 13,
+    orientation: "UP",
     dexId: 76,
     encounter: {
-      name: "machamp",
+      name: "golem",
       maxXp: 343000,
       minXp: 343000,
       rarity: "common",
@@ -176,7 +276,7 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
     conditionFunction: (s) => !occupantHandled(s, "victory-road_golem"),
     id: "victory-road_golem",
   },
-  {
+  /*{
     type: "POKEMON",
     x: 33,
     y: 6,
@@ -191,14 +291,14 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
     dialogue: ["torko", "..torko", ".torko"],
     conditionFunction: (s) => !occupantHandled(s, "victory-road_torkoal"),
     id: "victory-road_torkoal",
-  },
+  },*/
   //TRAINERS
   {
     type: "TRAINER",
     id: "Ace Trainer Janine",
-    x: 12,
-    y: 32,
-    orientation: "LEFT",
+    x: 24,
+    y: 26,
+    orientation: "UP",
     team: (s) => {
       const xp = Math.max(216000, getHighestXpOnTeam(s.pokemon) * 0.9);
       return [
@@ -232,8 +332,8 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
     id: "Ace Trainer Gregory",
     conditionFunction: (s) => !occupantHandled(s, "Ace Trainer Gregory"),
     x: 24,
-    y: 36,
-    orientation: "UP",
+    y: 32,
+    orientation: "LEFT",
     team: (s) => {
       const xp = Math.max(216000, getHighestXpOnTeam(s.pokemon) * 0.9);
       return [
@@ -267,8 +367,8 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
     id: "Ace Trainer Ava",
     conditionFunction: (s) => !occupantHandled(s, "Ace Trainer Ava"),
     x: 45,
-    y: 49,
-    orientation: "RIGHT",
+    y: 17,
+    orientation: "UP",
     team: (s) => {
       const xp = Math.max(216000, getHighestXpOnTeam(s.pokemon) * 0.9);
       return [
@@ -297,7 +397,7 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
       assignHeldItem: true,
     },
   },
-  {
+  /*{
     type: "TRAINER",
     id: "Ace Trainer Johnson",
     conditionFunction: (s) => !occupantHandled(s, "Ace Trainer Johnson"),
@@ -331,14 +431,14 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
 
       assignHeldItem: true,
     },
-  },
+  },*/
   {
     type: "TRAINER",
     id: "Ace Trainer Barb",
     conditionFunction: (s) => !occupantHandled(s, "Ace Trainer Barb"),
-    x: 44,
-    y: 8,
-    orientation: "RIGHT",
+    x: 8,
+    y: 26,
+    orientation: "LEFT",
     team: (s) => {
       const xp = Math.max(216000, getHighestXpOnTeam(s.pokemon) * 0.9);
       return [
@@ -367,7 +467,7 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
       assignHeldItem: true,
     },
   },
-  {
+  /*{
     type: "TRAINER",
     id: "Ace Trainer Jacob",
     conditionFunction: (s) => !occupantHandled(s, "Ace Trainer Jacob"),
@@ -397,8 +497,8 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
 
       assignHeldItem: true,
     },
-  },
-  {
+  },*/
+  /*{
     type: "TRAINER",
     id: "Ace Trainer Melissa",
     conditionFunction: (s) => !occupantHandled(s, "Ace Trainer Melissa"),
@@ -444,14 +544,14 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
 
       assignHeldItem: true,
     },
-  },
+  },*/
   {
     type: "TRAINER",
     id: "Ace Trainer Matthew",
     conditionFunction: (s) => !occupantHandled(s, "Ace Trainer Matthew"),
-    x: 3,
-    y: 14,
-    orientation: "UP",
+    x: 7,
+    y: 17,
+    orientation: "DOWN",
     team: (s) => {
       const xp = Math.max(343000, getHighestXpOnTeam(s.pokemon));
       return [
@@ -488,78 +588,78 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
   makeOverworldItem({
     mapId: "victoryRoad",
     item: "full-restore",
-    x: 20,
-    y: 28,
+    x: 14,
+    y: 31,
     amount: 2,
   }),
   makeOverworldItem({
     mapId: "victoryRoad",
     item: "revival-herb",
-    x: 42,
-    y: 12,
+    x: 46,
+    y: 3,
     amount: 3,
   }),
   makeOverworldItem({
     mapId: "victoryRoad",
     item: "ultra-ball",
-    x: 10,
-    y: 41,
+    x: 26,
+    y: 37,
     amount: 5,
   }),
   makeOverworldItem({
     mapId: "victoryRoad",
     item: "max-ether",
-    x: 43,
-    y: 35,
+    x: 44,
+    y: 23,
     amount: 1,
   }),
-  makeOverworldItem({
+  /*makeOverworldItem({
     mapId: "victoryRoad",
     item: "lum-berry",
     x: 25,
     y: 25,
     amount: 1,
-  }),
+  }),*/
   makeOverworldItem({
     mapId: "victoryRoad",
     item: "loaded-dice",
-    x: 45,
-    y: 9,
+    x: 18,
+    y: 20,
     amount: 1,
   }),
   makeOverworldItem({
     mapId: "victoryRoad",
     item: "shell-bell",
-    x: 45,
-    y: 8,
+    x: 19,
+    y: 46,
     amount: 1,
   }),
   makeOverworldItem({
     mapId: "victoryRoad",
     item: "max-potion",
-    x: 17,
-    y: 19,
+    x: 28,
+    y: 1,
     amount: 3,
   }),
-  makeOverworldItem({
+  /*makeOverworldItem({
     mapId: "victoryRoad",
     item: "leftovers",
     x: 20,
     y: 13,
     amount: 1,
-  }),
+  }),*/
   makeOverworldItem({
     mapId: "victoryRoad",
     item: "choice-band",
     x: 11,
-    y: 5,
+    y: 2,
     amount: 1,
   }),
-  makeOverworldItem({
+  /*makeOverworldItem({
     mapId: "victoryRoad",
     item: "league-ticket",
     x: 7,
     y: 4,
     amount: 1,
-  }),
+  }),*/
 ];
