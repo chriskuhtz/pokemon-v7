@@ -34,6 +34,7 @@ import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useEncounterRateModifier } from './hooks/useEncounterRateModifier';
 import { useInteractWithLedge } from './hooks/useInteractWithLedge';
 import { useInteractWithTrainer } from './hooks/useInteractWithTrainer';
+import { useIsDark } from './hooks/useIsDark';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
 import { useMachete } from './hooks/useMachete';
 import { useOccupants } from './hooks/useOccupants';
@@ -81,7 +82,10 @@ export const Overworld = () => {
 	const addEncounterMessage = useStartEncounter();
 	const encounterRateModifier = useEncounterRateModifier();
 
-	const map = useMemo((): OverworldMap => mapsRecord[location.mapId], [location.mapId]);
+	const map = useMemo(
+		(): OverworldMap => mapsRecord[location.mapId],
+		[location.mapId]
+	);
 
 	const { width, height } = {
 		width: map.tileMap.baseLayer[0].length,
@@ -212,6 +216,7 @@ export const Overworld = () => {
 		() => navigateAwayFromOverworldReducer('BAG', stepsTaken),
 		!!latestMessage
 	);
+	const { isDark, hasFlashlight, flashLightDirection } = useIsDark(map.id);
 
 	return (
 		<div>
@@ -224,6 +229,24 @@ export const Overworld = () => {
 			/>
 
 			<div className="overworldPage">
+				{isDark ? (
+					<div
+						style={{
+							background: `radial-gradient(
+		${flashLightDirection ?? 'circle'},
+		rgba(255, 255, 255, 0) 0%,
+		rgba(0, 0, 0, 1) ${hasFlashlight ? 48 : 16}%
+	)`,
+							width: '100dvw',
+							height: '100dvh',
+							zIndex: 3,
+							position: 'absolute',
+							pointerEvents: 'none',
+						}}
+					></div>
+				) : (
+					<></>
+				)}
 				<div id="canvassesAndShaders" style={{ position: 'relative' }}>
 					<div
 						id="clickerGridWrapper"
@@ -260,6 +283,7 @@ export const Overworld = () => {
 					) : (
 						<></>
 					)}
+
 					<div
 						id="shader1"
 						style={{
