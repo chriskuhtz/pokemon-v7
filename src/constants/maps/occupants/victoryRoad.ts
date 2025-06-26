@@ -29,7 +29,7 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
     portal: {
       mapId: "victoryRoadU1",
       x: 31,
-      y: 42,
+      y: 32,
       orientation: "DOWN",
       forwardFoot: "CENTER1",
     },
@@ -43,7 +43,7 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
     portal: {
       mapId: "victoryRoadU1",
       x: 19,
-      y: 47,
+      y: 37,
       orientation: "LEFT",
       forwardFoot: "CENTER1",
     },
@@ -276,22 +276,6 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
     conditionFunction: (s) => !occupantHandled(s, "victory-road_golem"),
     id: "victory-road_golem",
   },
-  /*{
-    type: "POKEMON",
-    x: 33,
-    y: 6,
-    orientation: "LEFT",
-    dexId: 324,
-    encounter: {
-      name: "torkoal",
-      maxXp: 343000,
-      minXp: 343000,
-      rarity: "common",
-    },
-    dialogue: ["torko", "..torko", ".torko"],
-    conditionFunction: (s) => !occupantHandled(s, "victory-road_torkoal"),
-    id: "victory-road_torkoal",
-  },*/
   //TRAINERS
   {
     type: "TRAINER",
@@ -397,41 +381,6 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
       assignHeldItem: true,
     },
   },
-  /*{
-    type: "TRAINER",
-    id: "Ace Trainer Johnson",
-    conditionFunction: (s) => !occupantHandled(s, "Ace Trainer Johnson"),
-    x: 32,
-    y: 8,
-    orientation: "RIGHT",
-    team: (s) => {
-      const xp = Math.max(216000, getHighestXpOnTeam(s.pokemon) * 0.9);
-      return [
-        makeChallengerPokemon({
-          name: "mudsdale",
-          xp,
-        }),
-        makeChallengerPokemon({
-          name: "throh",
-          xp,
-        }),
-        makeChallengerPokemon({
-          name: "unfezant",
-          xp,
-        }),
-      ];
-    },
-    sprite: SpriteEnum.aceMale,
-    unhandledMessage: ["I will wipe the floor with you, kid"],
-
-    battleTeamConfig: {
-      assignLearnsetMoves: true,
-      assignNaturalAbility: true,
-      assignGender: true,
-
-      assignHeldItem: true,
-    },
-  },*/
   {
     type: "TRAINER",
     id: "Ace Trainer Barb",
@@ -467,84 +416,6 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
       assignHeldItem: true,
     },
   },
-  /*{
-    type: "TRAINER",
-    id: "Ace Trainer Jacob",
-    conditionFunction: (s) => !occupantHandled(s, "Ace Trainer Jacob"),
-    x: 21,
-    y: 12,
-    orientation: "LEFT",
-    team: (s) => {
-      const xp = Math.max(343000, getHighestXpOnTeam(s.pokemon) * 1.1);
-      return [
-        makeChallengerPokemon({
-          name: "absol",
-          xp,
-        }),
-        makeChallengerPokemon({
-          name: "talonflame",
-          xp,
-        }),
-      ];
-    },
-    sprite: SpriteEnum.ace3Male,
-    unhandledMessage: ["Nothing´s gonna stop me"],
-
-    battleTeamConfig: {
-      assignLearnsetMoves: true,
-      assignNaturalAbility: true,
-      assignGender: true,
-
-      assignHeldItem: true,
-    },
-  },*/
-  /*{
-    type: "TRAINER",
-    id: "Ace Trainer Melissa",
-    conditionFunction: (s) => !occupantHandled(s, "Ace Trainer Melissa"),
-    x: 38,
-    y: 3,
-    orientation: "LEFT",
-    team: (s) => {
-      const xp = Math.max(343000, getHighestXpOnTeam(s.pokemon) * 0.8);
-      return [
-        makeChallengerPokemon({
-          name: "pangoro",
-          xp,
-        }),
-        makeChallengerPokemon({
-          name: "venusaur",
-          xp,
-        }),
-        makeChallengerPokemon({
-          name: "frosmoth",
-          xp,
-        }),
-        makeChallengerPokemon({
-          name: "kangaskhan",
-          xp,
-        }),
-        makeChallengerPokemon({
-          name: "ampharos",
-          xp,
-        }),
-        makeChallengerPokemon({
-          name: "dubwool",
-          xp,
-        }),
-      ];
-    },
-    sprite: SpriteEnum.aceFemale,
-    unhandledMessage: ["I will become the champ"],
-
-    battleTeamConfig: {
-      assignLearnsetMoves: true,
-      assignNaturalAbility: true,
-      assignGender: true,
-
-      assignHeldItem: true,
-    },
-  },*/
   {
     type: "TRAINER",
     id: "Ace Trainer Matthew",
@@ -613,13 +484,6 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
     y: 23,
     amount: 1,
   }),
-  /*makeOverworldItem({
-    mapId: "victoryRoad",
-    item: "lum-berry",
-    x: 25,
-    y: 25,
-    amount: 1,
-  }),*/
   makeOverworldItem({
     mapId: "victoryRoad",
     item: "loaded-dice",
@@ -641,13 +505,6 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
     y: 1,
     amount: 3,
   }),
-  /*makeOverworldItem({
-    mapId: "victoryRoad",
-    item: "leftovers",
-    x: 20,
-    y: 13,
-    amount: 1,
-  }),*/
   makeOverworldItem({
     mapId: "victoryRoad",
     item: "choice-band",

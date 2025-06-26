@@ -1,4 +1,9 @@
+import { getHighestXpOnTeam } from "../../../functions/getHighestXpOnTeam";
+import { makeChallengerPokemon } from "../../../functions/makeChallengerPokemon";
+import { makeOverworldItem } from "../../../functions/makeOverworldItem";
+import { occupantHandled } from "../../../functions/occupantHandled";
 import { OverworldMap } from "../../../interfaces/OverworldMap";
+import { SpriteEnum } from "../../../interfaces/SpriteEnum";
 
 export const victoryRoadOccupantsU1: OverworldMap["occupants"] = [
   //PORTALS
@@ -6,7 +11,7 @@ export const victoryRoadOccupantsU1: OverworldMap["occupants"] = [
     id: "victory_road_to_lower_level_1",
     type: "ON_STEP_PORTAL",
     x: 31,
-    y: 41,
+    y: 31,
     portal: {
       mapId: "victoryRoad",
       x: 15,
@@ -20,12 +25,26 @@ export const victoryRoadOccupantsU1: OverworldMap["occupants"] = [
     id: "victory_road_to_lower_level_2",
     type: "ON_STEP_PORTAL",
     x: 20,
-    y: 47,
+    y: 37,
     portal: {
       mapId: "victoryRoad",
       x: 5,
       y: 22,
       orientation: "RIGHT",
+      forwardFoot: "CENTER1",
+    },
+    conditionFunction: () => true,
+  },
+  {
+    id: "victory_road_lower_level_to_victory_road_extra_cave",
+    type: "ON_STEP_PORTAL",
+    x: 8,
+    y: 3,
+    portal: {
+      mapId: "victoryRoadExtra",
+      x: 20,
+      y: 37,
+      orientation: "UP",
       forwardFoot: "CENTER1",
     },
     conditionFunction: () => true,
@@ -39,12 +58,52 @@ export const victoryRoadOccupantsU1: OverworldMap["occupants"] = [
       !s.handledOccupants.some((occ) => occ.id === "rock_victory_road_1"),
     id: "rock_victory_road_1",
   },
+  {
+    type: "ROCK",
+    x: 28,
+    y: 44,
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((occ) => occ.id === "rock_victory_road_2"),
+    id: "rock_victory_road_2",
+  },
+  {
+    type: "ROCK",
+    x: 13,
+    y: 42,
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((occ) => occ.id === "rock_victory_road_3"),
+    id: "rock_victory_road_3",
+  },
+  {
+    type: "ROCK",
+    x: 21,
+    y: 24,
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((occ) => occ.id === "rock_victory_road_4"),
+    id: "rock_victory_road_4",
+  },
+  {
+    type: "ROCK",
+    x: 35,
+    y: 7,
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((occ) => occ.id === "rock_victory_road_5"),
+    id: "rock_victory_road_5",
+  },
+  {
+    type: "ROCK",
+    x: 7,
+    y: 30,
+    conditionFunction: (s) =>
+      !s.handledOccupants.some((occ) => occ.id === "rock_victory_road_6"),
+    id: "rock_victory_road_6",
+  },
   //OVERWORLD_MONS
-  /*{
+  {
     type: "POKEMON",
-    x: 33,
-    y: 6,
-    orientation: "LEFT",
+    x: 36,
+    y: 23,
+    orientation: "DOWN",
     dexId: 324,
     encounter: {
       name: "torkoal",
@@ -55,15 +114,15 @@ export const victoryRoadOccupantsU1: OverworldMap["occupants"] = [
     dialogue: ["torko", "..torko", ".torko"],
     conditionFunction: (s) => !occupantHandled(s, "victory-road_torkoal"),
     id: "victory-road_torkoal",
-  },*/
+  },
   //TRAINERS
-  /*{
+  {
     type: "TRAINER",
     id: "Ace Trainer Johnson",
     conditionFunction: (s) => !occupantHandled(s, "Ace Trainer Johnson"),
-    x: 32,
-    y: 8,
-    orientation: "RIGHT",
+    x: 24,
+    y: 37,
+    orientation: "LEFT",
     team: (s) => {
       const xp = Math.max(216000, getHighestXpOnTeam(s.pokemon) * 0.9);
       return [
@@ -82,7 +141,7 @@ export const victoryRoadOccupantsU1: OverworldMap["occupants"] = [
       ];
     },
     sprite: SpriteEnum.aceMale,
-    unhandledMessage: ["I will wipe the floor with you, kid"],
+    unhandledMessage: ["Am I lost?"],
 
     battleTeamConfig: {
       assignLearnsetMoves: true,
@@ -91,13 +150,13 @@ export const victoryRoadOccupantsU1: OverworldMap["occupants"] = [
 
       assignHeldItem: true,
     },
-  },*/
-  /*{
+  },
+  {
     type: "TRAINER",
     id: "Ace Trainer Jacob",
     conditionFunction: (s) => !occupantHandled(s, "Ace Trainer Jacob"),
-    x: 21,
-    y: 12,
+    x: 33,
+    y: 44,
     orientation: "LEFT",
     team: (s) => {
       const xp = Math.max(343000, getHighestXpOnTeam(s.pokemon) * 1.1);
@@ -113,7 +172,7 @@ export const victoryRoadOccupantsU1: OverworldMap["occupants"] = [
       ];
     },
     sprite: SpriteEnum.ace3Male,
-    unhandledMessage: ["Nothing´s gonna stop me"],
+    unhandledMessage: ["This path will surely be the right one!"],
 
     battleTeamConfig: {
       assignLearnsetMoves: true,
@@ -122,14 +181,14 @@ export const victoryRoadOccupantsU1: OverworldMap["occupants"] = [
 
       assignHeldItem: true,
     },
-  },*/
-  /*{
+  },
+  {
     type: "TRAINER",
     id: "Ace Trainer Melissa",
     conditionFunction: (s) => !occupantHandled(s, "Ace Trainer Melissa"),
-    x: 38,
-    y: 3,
-    orientation: "LEFT",
+    x: 27,
+    y: 29,
+    orientation: "UP",
     team: (s) => {
       const xp = Math.max(343000, getHighestXpOnTeam(s.pokemon) * 0.8);
       return [
@@ -160,7 +219,7 @@ export const victoryRoadOccupantsU1: OverworldMap["occupants"] = [
       ];
     },
     sprite: SpriteEnum.aceFemale,
-    unhandledMessage: ["I will become the champ"],
+    unhandledMessage: ["I feel like I'm going in circles."],
 
     battleTeamConfig: {
       assignLearnsetMoves: true,
@@ -169,27 +228,20 @@ export const victoryRoadOccupantsU1: OverworldMap["occupants"] = [
 
       assignHeldItem: true,
     },
-  },*/
+  },
   //ITEMS
-  /*makeOverworldItem({
+  makeOverworldItem({
     mapId: "victoryRoad",
     item: "lum-berry",
-    x: 25,
-    y: 25,
+    x: 19,
+    y: 14,
     amount: 1,
-  }),*/
-  /*makeOverworldItem({
+  }),
+  makeOverworldItem({
     mapId: "victoryRoad",
     item: "leftovers",
-    x: 20,
-    y: 13,
+    x: 12,
+    y: 29,
     amount: 1,
-  }),*/
-  /*makeOverworldItem({
-    mapId: "victoryRoad",
-    item: "league-ticket",
-    x: 7,
-    y: 4,
-    amount: 1,
-  }),*/
+  }),
 ];

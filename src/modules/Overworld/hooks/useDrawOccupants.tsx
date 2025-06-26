@@ -120,6 +120,41 @@ const drawOccupant = (
           baseSize
         );
         break;
+      case "POKEMONSTATUE":
+        ctx?.drawImage(
+          img,
+          0,
+          -getYOffsetFromOrientation(occ.orientation),
+          64,
+          64,
+          baseSize * occ.x,
+          baseSize * occ.y,
+          baseSize,
+          baseSize
+        );
+
+        var imageData = ctx.getImageData(
+          baseSize * occ.x,
+          baseSize * occ.y,
+          baseSize,
+          baseSize
+        );
+        var data = imageData.data;
+
+        for (var i = 0; i < data.length; i += 4) {
+          var brightness =
+            0.34 * data[i] + 0.5 * data[i + 1] + 0.16 * data[i + 2];
+          // red
+          data[i] = brightness;
+          // green
+          data[i + 1] = brightness;
+          // blue
+          data[i + 2] = brightness;
+        }
+
+        // overwrite original image
+        ctx.putImageData(imageData, baseSize * occ.x, baseSize * occ.y);
+        break;
       case "HALLOWED_TOWER":
       case "SWARM_RADAR":
       case "ROCKET_RADIO":
@@ -198,6 +233,7 @@ const getSource = (occ: Occupant) => {
     case "TELEPORTER_NPC":
       return `/npcs/NPC_${occ.sprite}.png`;
     case "POKEMON":
+    case "POKEMONSTATUE":
     case "DUGTRIO_EXPLORER":
     case "ZIGZAGOON_FORAGER":
       return `/overWorldPokemonSprites/${threeDigitString(occ.dexId)}.png`;
