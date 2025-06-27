@@ -22,6 +22,7 @@ import { routeS1E1 } from "./routeS1E1";
 import { routeS1W1 } from "./routeS1W1";
 import { routeW1 } from "./routeW1";
 import { victoryRoad } from "./victoryRoad";
+import { victoryRoadExit } from "./victoryRoadExit";
 import { victoryRoadExtra } from "./victoryRoadExtra";
 import { victoryRoadU1 } from "./victoryRoadU1";
 
@@ -48,6 +49,7 @@ export const mapIds = [
   "victoryRoad",
   "victoryRoadU1",
   "victoryRoadExtra",
+  "victoryRoadExit",
   "pokemonLeague",
 ] as const;
 export type MapId = (typeof mapIds)[number];
@@ -75,6 +77,7 @@ export const mapsRecord: Record<MapId, OverworldMap> = {
   victoryRoad: victoryRoad,
   victoryRoadU1: victoryRoadU1,
   victoryRoadExtra: victoryRoadExtra,
+  victoryRoadExit: victoryRoadExit,
   pokemonLeague: pokemonLeague,
 };
 
@@ -101,6 +104,7 @@ export const mapDisplayNames: Record<MapId, string> = {
   victoryRoad: "Victory Road",
   victoryRoadU1: "Victory Road Lower Level",
   victoryRoadExtra: "Victory Road .?.",
+  victoryRoadExit: "Pokemon League Entrance",
   pokemonLeague: "Pokemon League",
 };
 

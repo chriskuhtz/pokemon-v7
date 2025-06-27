@@ -14,9 +14,9 @@ export const pokemonLeagueOccupants: OverworldMap["occupants"] = [
     x: 5,
     y: 56,
     portal: {
-      mapId: "victoryRoad",
-      x: 13,
-      y: 5,
+      mapId: "victoryRoadExit",
+      x: 10,
+      y: 3,
       orientation: "DOWN",
       forwardFoot: "CENTER1",
     },
