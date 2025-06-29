@@ -16,11 +16,10 @@ export const pokemonLeagueOccupants: OverworldMap["occupants"] = [
     portal: {
       mapId: "victoryRoadExit",
       x: 10,
-      y: 3,
+      y: 4,
       orientation: "DOWN",
       forwardFoot: "CENTER1",
     },
-    sprite: "/mapObjects/ladderDown.png",
     conditionFunction: () => true,
   },
   {
