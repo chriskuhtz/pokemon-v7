@@ -11,19 +11,52 @@ import { EmptyStatObject } from '../../../interfaces/StatObject';
 
 const blaineTeam = () => [
 	makeChallengerPokemon({
-		name: 'scovillain',
+		name: 'slugma',
 		xp: 15625,
 		nature: 'modest',
-		ability: 'moody',
+		ability: 'flame-body',
 		fixedAbility: true,
 		happiness: 255,
 		heldItemName: 'leftovers',
-		firstMove: { name: 'flamethrower', usedPP: 0 },
-		secondMove: { name: 'seed-bomb', usedPP: 0 },
-		thirdMove: { name: 'ingrain', usedPP: 0 },
+		firstMove: { name: 'flame-wheel', usedPP: 0 },
+		secondMove: { name: 'will-o-wisp', usedPP: 0 },
 		effortValues: {
 			...EmptyStatObject,
-			'special-attack': 252,
+			'special-defense': 252,
+			defense: 252,
+		},
+	}),
+	makeChallengerPokemon({
+		name: 'magmar',
+		xp: 15625,
+		nature: 'adamant',
+		ability: 'iron-fist',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'leftovers',
+		firstMove: { name: 'fire-punch', usedPP: 0 },
+		secondMove: { name: 'mega-punch', usedPP: 0 },
+		thirdMove: { name: 'bullet-punch', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			attack: 252,
+			defense: 252,
+		},
+	}),
+	makeChallengerPokemon({
+		name: 'arcanine',
+		xp: 15625,
+		nature: 'modest',
+		ability: 'intimidate',
+		fixedAbility: true,
+		happiness: 255,
+		heldItemName: 'life-orb',
+		firstMove: { name: 'flare-blitz', usedPP: 0 },
+		secondMove: { name: 'volt-tackle', usedPP: 0 },
+		thirdMove: { name: 'double-edge', usedPP: 0 },
+		effortValues: {
+			...EmptyStatObject,
+			'special-defense': 252,
 			defense: 252,
 		},
 	}),
@@ -32,7 +65,7 @@ const blaineTeam = () => [
 const blaineCondition = (s: SaveFile) => {
 	const team = s.pokemon.filter((p) => p.onTeam);
 	return (
-		team.length === 1 &&
+		team.length === 3 &&
 		team.every(
 			(t) =>
 				calculateLevelData(t.xp, t.growthRate).level <= 25 &&
@@ -73,7 +106,7 @@ const npcBlaine: OverworldNpc = {
 		'I may look old, but i am also crazy',
 		"Blaine's the name",
 		'Fire Pokemon are the game',
-		'Challenge me with one pokemon caught on this route',
+		'Challenge me with three pokemon caught on this route',
 		'Level 25 should do it',
 	],
 };
