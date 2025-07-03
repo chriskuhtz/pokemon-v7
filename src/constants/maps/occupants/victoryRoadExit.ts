@@ -42,7 +42,6 @@ export const victoryRoadExitOccupants: OverworldMap['occupants'] = [
 		dialogue: ['A statue of a Gloom.'],
 		conditionFunction: () => true,
 		id: 'victory-road_gloom_statue',
-		activeCondition: () => true,
 	},
 	{
 		type: 'POKEMONSTATUE',
@@ -53,7 +52,6 @@ export const victoryRoadExitOccupants: OverworldMap['occupants'] = [
 		dialogue: ['A statue of an Arbok.'],
 		conditionFunction: () => true,
 		id: 'victory-road_arbok_statue',
-		activeCondition: () => true,
 	},
 	{
 		type: 'POKEMONSTATUE',
@@ -64,7 +62,6 @@ export const victoryRoadExitOccupants: OverworldMap['occupants'] = [
 		dialogue: ['A statue of a Arcanine.'],
 		conditionFunction: () => true,
 		id: 'victory-road_arcanine_statue',
-		activeCondition: () => true,
 	},
 	{
 		type: 'POKEMONSTATUE',
@@ -75,7 +72,6 @@ export const victoryRoadExitOccupants: OverworldMap['occupants'] = [
 		dialogue: ['A statue of a Starmie.'],
 		conditionFunction: () => true,
 		id: 'victory-road_starmie_statue',
-		activeCondition: () => true,
 	},
 	{
 		type: 'POKEMONSTATUE',
@@ -86,7 +82,6 @@ export const victoryRoadExitOccupants: OverworldMap['occupants'] = [
 		dialogue: ['A statue of a Raichu.'],
 		conditionFunction: () => true,
 		id: 'victory-road_raichu_statue',
-		activeCondition: () => true,
 	},
 	{
 		type: 'POKEMONSTATUE',
@@ -97,29 +92,27 @@ export const victoryRoadExitOccupants: OverworldMap['occupants'] = [
 		dialogue: ['A statue of a gardevoir.'],
 		conditionFunction: () => true,
 		id: 'victory-road_gardevoir_statue',
-		activeCondition: () => true,
 	},
+
 	{
 		type: 'POKEMONSTATUE',
 		x: 8,
 		y: 9,
 		orientation: 'RIGHT',
-		dexId: 9,
-		dialogue: ['A statue of a Blastoise.'],
+		dexId: 95,
+		dialogue: ['A statue of a Onix.'],
 		conditionFunction: () => true,
-		id: 'victory-road_blastoise_statue',
-		activeCondition: () => true,
+		id: 'victory-road_onix_statue',
 	},
 	{
 		type: 'POKEMONSTATUE',
 		x: 8,
 		y: 7,
 		orientation: 'RIGHT',
-		dexId: 149,
-		dialogue: ['A statue of a Dragonite.'],
+		dexId: 9,
+		dialogue: ['A statue of a Blastoise.'],
 		conditionFunction: () => true,
-		id: 'victory-road_dragonite_statue',
-		activeCondition: () => true,
+		id: 'victory-road_blastoise_statue',
 	},
 	//STATUES RIGHT SIDE
 	{
@@ -131,7 +124,6 @@ export const victoryRoadExitOccupants: OverworldMap['occupants'] = [
 		dialogue: ['A statue of a Noctowl.'],
 		conditionFunction: () => true,
 		id: 'victory-road_noctowl_statue',
-		activeCondition: () => true,
 	},
 	{
 		type: 'POKEMONSTATUE',
@@ -142,7 +134,6 @@ export const victoryRoadExitOccupants: OverworldMap['occupants'] = [
 		dialogue: ['A statue of a Scizor.'],
 		conditionFunction: () => true,
 		id: 'victory-road_scizor_statue',
-		activeCondition: () => true,
 	},
 	{
 		type: 'POKEMONSTATUE',
@@ -153,7 +144,6 @@ export const victoryRoadExitOccupants: OverworldMap['occupants'] = [
 		dialogue: ['A statue of a Miltank.'],
 		conditionFunction: () => true,
 		id: 'victory-road_miltank_statue',
-		activeCondition: () => true,
 	},
 	{
 		type: 'POKEMONSTATUE',
@@ -164,7 +154,6 @@ export const victoryRoadExitOccupants: OverworldMap['occupants'] = [
 		dialogue: ['A statue of a Gengar.'],
 		conditionFunction: () => true,
 		id: 'victory-road_gengar_statue',
-		activeCondition: () => true,
 	},
 	{
 		type: 'POKEMONSTATUE',
@@ -175,7 +164,6 @@ export const victoryRoadExitOccupants: OverworldMap['occupants'] = [
 		dialogue: ['A statue of a Machamp.'],
 		conditionFunction: () => true,
 		id: 'victory-road_machamp_statue',
-		activeCondition: () => true,
 	},
 	{
 		type: 'POKEMONSTATUE',
@@ -186,29 +174,26 @@ export const victoryRoadExitOccupants: OverworldMap['occupants'] = [
 		dialogue: ['A statue of a Magnezone.'],
 		conditionFunction: () => true,
 		id: 'victory-road_magnezone_statue',
-		activeCondition: () => true,
 	},
 	{
 		type: 'POKEMONSTATUE',
 		x: 12,
 		y: 9,
 		orientation: 'LEFT',
-		dexId: 713,
-		dialogue: ['A statue of an Avalugg.'],
+		dexId: 473,
+		dialogue: ['A statue of an Mamoswine.'],
 		conditionFunction: () => true,
-		id: 'victory-road_avalugg_statue',
-		activeCondition: () => true,
+		id: 'victory-road_mamoswine_statue',
 	},
 	{
 		type: 'POKEMONSTATUE',
 		x: 12,
 		y: 7,
 		orientation: 'LEFT',
-		dexId: 621,
-		dialogue: ['A statue of a Druddigon.'],
+		dexId: 230,
+		dialogue: ['A statue of a Kingdra.'],
 		conditionFunction: () => true,
-		id: 'victory-road_druddigon_statue',
-		activeCondition: () => true,
+		id: 'victory-road_kingdra_statue',
 	},
 	//OVERWORLD_MONS
 	//TRAINERS

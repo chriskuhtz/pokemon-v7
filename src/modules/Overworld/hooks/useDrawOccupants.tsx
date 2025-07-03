@@ -237,7 +237,7 @@ const getSource = (occ: Occupant) => {
 		case 'ITEM':
 			return getItemUrl(occ.item);
 		case 'POKEMONSTATUE':
-			return `/statues/${threeDigitString(occ.dexId)}_grey_active.png`;
+			return `/statues/${threeDigitString(occ.dexId)}.png`;
 		case 'ACTIVEPOKEMONSTATUE':
 			return `/statues/${threeDigitString(occ.dexId)}_grey_active.png`;
 		default:
