@@ -592,10 +592,9 @@ export const extraFeatureCheckList: {
 	{ name: 'natures for e4', handled: true },
 	{ name: 'map maker quick palette', handled: true },
 	{ name: 'prettier modals', handled: true },
-
+	{ name: 'fix pathing', handled: true, handler: 'Johannes' },
+	{ name: 'Lugia quest after catching the birds', handled: true },
 	//BUGS/IMPROVEMENTS:
-
-	{ name: 'fix pathing',  handler: 'Johannes'},
 	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },
 	{ name: 'leech seed benefit doesnt pass to switched in mon' },
@@ -609,7 +608,6 @@ export const extraFeatureCheckList: {
 	{ name: 'eggs?' },
 	{ name: 'Fishing?' },
 	{ name: 'magma/aqua quests from Looker' },
-	{ name: 'Lugia quest after catching the birds' },
 	{ name: 'Hooh quest after catching the dogs' },
 	{ name: 'trainer with simple/costar combo' },
 	{ name: 'steven as the fossil protector' },
