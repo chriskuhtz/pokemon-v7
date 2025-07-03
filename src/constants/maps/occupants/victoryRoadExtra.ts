@@ -41,7 +41,7 @@ export const victoryRoadOccupantsExtra: OverworldMap['occupants'] = [
 		orientation: 'LEFT',
 		dexId: 144,
 		dialogue: ['A strange statue.', 'You feel a cold wind.'],
-		activeCondition: () => true,
+		activeCondition: (s) => s.pokedex.articuno.caughtOnRoutes.length > 0,
 	}),
 	...makePokemonStatue({
 		x: 20,
@@ -49,7 +49,7 @@ export const victoryRoadOccupantsExtra: OverworldMap['occupants'] = [
 		orientation: 'DOWN',
 		dexId: 145,
 		dialogue: ['A strange statue.', 'You feel a spark in the air.'],
-		activeCondition: () => true,
+		activeCondition: (s) => s.pokedex.zapdos.caughtOnRoutes.length > 0,
 	}),
 	...makePokemonStatue({
 		x: 23,
@@ -57,6 +57,25 @@ export const victoryRoadOccupantsExtra: OverworldMap['occupants'] = [
 		orientation: 'RIGHT',
 		dexId: 146,
 		dialogue: ['A strange statue.', 'You feel a gust of hot air.'],
-		activeCondition: () => true,
+		activeCondition: (s) => s.pokedex.moltres.caughtOnRoutes.length > 0,
 	}),
+	{
+		type: 'POKEMON',
+		dialogue: ['kyyaaahh'],
+		x: 20,
+		y: 2,
+		orientation: 'DOWN',
+		dexId: 249,
+		id: 'victory-road-lugia',
+		encounter: {
+			name: 'lugia',
+			maxXp: 216000,
+			minXp: 216000,
+			rarity: 'common',
+		},
+		conditionFunction: (s) =>
+			s.pokedex.moltres.caughtOnRoutes.length > 0 &&
+			s.pokedex.zapdos.caughtOnRoutes.length > 0 &&
+			s.pokedex.articuno.caughtOnRoutes.length > 0,
+	},
 ];
