@@ -1,9 +1,5 @@
 import { useCallback, useContext, useMemo } from 'react';
-import {
-	ONE_HOUR,
-	randomFieldId,
-	startingLocation,
-} from '../constants/gameData';
+import { ONE_HOUR, randomFieldId } from '../constants/gameData';
 import { barryId } from '../constants/maps/occupants/barry';
 import { challengeFieldOccupants } from '../constants/maps/occupants/challengeField';
 import { cynthiaId } from '../constants/maps/occupants/cynthia';
@@ -45,7 +41,7 @@ export interface LeaveBattlePayload {
 	rewardItems?: Partial<Inventory>;
 }
 export const useLeaveBattle = () => {
-	const { location, setLocation } = useContext(LocationContext);
+	const { location, resetLocation } = useContext(LocationContext);
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
 	const reset = useReset();
 
@@ -81,7 +77,7 @@ export const useLeaveBattle = () => {
 				)
 			);
 
-			setLocation(startingLocation);
+			resetLocation();
 			patchSaveFileReducer({
 				meta: { activeTab: 'OVERWORLD', currentChallenger: undefined },
 				pokemon: saveFile.pokemon.map((p) => {
@@ -94,7 +90,7 @@ export const useLeaveBattle = () => {
 			});
 			return;
 		}
-	}, [location, patchSaveFileReducer, reset, saveFile, setLocation]);
+	}, [location, patchSaveFileReducer, reset, saveFile, resetLocation]);
 	const handleWin = useCallback(
 		({
 			team: updatedTeam,
