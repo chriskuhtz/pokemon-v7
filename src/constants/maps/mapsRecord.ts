@@ -9,6 +9,7 @@ import { caveW1 } from "./caveW1";
 import { caveW1F1 } from "./caveW1F1";
 import { caveW1F2 } from "./caveW1F2";
 import { challengeField } from "./challengeField";
+import { dragonIsle } from "./dragonIsle";
 import { onixCave } from "./onixCave";
 import { pokemonLeague } from "./pokemonLeague";
 import { randomChallengeField } from "./randomChallengeField";
@@ -51,6 +52,7 @@ export const mapIds = [
   "victoryRoadExtra",
   "victoryRoadExit",
   "pokemonLeague",
+  "dragonIsle",
 ] as const;
 export type MapId = (typeof mapIds)[number];
 
@@ -79,6 +81,7 @@ export const mapsRecord: Record<MapId, OverworldMap> = {
   victoryRoadExtra: victoryRoadExtra,
   victoryRoadExit: victoryRoadExit,
   pokemonLeague: pokemonLeague,
+  dragonIsle: dragonIsle,
 };
 
 export const mapDisplayNames: Record<MapId, string> = {
@@ -106,6 +109,7 @@ export const mapDisplayNames: Record<MapId, string> = {
   victoryRoadExtra: "Victory Road .?.",
   victoryRoadExit: "Pokemon League Entrance",
   pokemonLeague: "Pokemon League",
+  dragonIsle: "Dragon Isle",
 };
 
 export const Emptymap: OverworldMap = {
