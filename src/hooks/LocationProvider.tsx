@@ -83,6 +83,7 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
 			setLocation(startingLocation);
 		}
 	}, [location, saveFile.playerId, setLocation]);
+
 	//reset catch streak on location change
 	useEffect(() => {
 		if (!saveFile.catchStreak) {
