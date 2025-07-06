@@ -34,6 +34,8 @@ export const OCCUPANT_TYPES = [
 	'OBSTACLE',
 	'COMBEE_HIVE',
 	'POKEMON',
+	'POKEMONSTATUE',
+	'ACTIVEPOKEMONSTATUE',
 	'LEDGE',
 	'SWARM_RADAR',
 	'ROCKET_RADIO',
@@ -175,6 +177,18 @@ export interface OverworldPokemon extends BaseOccupant {
 	orientation: CharacterOrientation;
 	encounter?: OverworldEncounter;
 }
+export interface PokemonStatue extends BaseOccupant {
+	type: 'POKEMONSTATUE';
+	dexId: number;
+	dialogue: string[];
+	orientation: CharacterOrientation;
+}
+export interface ActivePokemonStatue extends BaseOccupant {
+	type: 'ACTIVEPOKEMONSTATUE';
+	dexId: number;
+	dialogue: string[];
+	orientation: CharacterOrientation;
+}
 export interface OverworldSnorlax extends BaseOccupant {
 	type: 'SNORLAX';
 	orientation: CharacterOrientation;
@@ -232,6 +246,8 @@ export type Occupant =
 	| Obstacle
 	| CombeeHive
 	| OverworldPokemon
+	| PokemonStatue
+	| ActivePokemonStatue
 	| Ledge
 	| ZigzagoonForager
 	| DugtrioExplorer
