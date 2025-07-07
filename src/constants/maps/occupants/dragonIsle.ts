@@ -17,20 +17,6 @@ export const dragonIsleOccupants: OverworldMap["occupants"] = [
     conditionFunction: () => true,
   },
   //OBSTACLES
-  {
-    type: "CLIMBING_STEPS",
-    x: 12,
-    y: 8,
-    conditionFunction: () => true,
-    id: "climbing-steps-victoryRoadExtra-1",
-  },
-  {
-    type: "CLIMBING_STEPS",
-    x: 12,
-    y: 9,
-    conditionFunction: () => true,
-    id: "climbing-steps-victoryRoadExtra-2",
-  },
   //OVERWORLD_MONS
   //TRAINERS
   //ITEMS
