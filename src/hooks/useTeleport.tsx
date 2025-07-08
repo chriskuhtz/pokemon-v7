@@ -1,11 +1,10 @@
 import { useCallback, useContext, useMemo } from 'react';
-import { startingLocation } from '../constants/gameData';
 import { LocationContext } from './LocationProvider';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 export const useTeleport = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
-	const { setLocation } = useContext(LocationContext);
+	const { resetLocation } = useContext(LocationContext);
 	const { addMessage } = useContext(MessageQueueContext);
 	const teleporter = useMemo(
 		() =>
@@ -20,7 +19,7 @@ export const useTeleport = () => {
 				message: `Your Pokemon teleported you back to camp`,
 				needsNoConfirmation: true,
 			});
-			setLocation(startingLocation);
+			resetLocation();
 			patchSaveFileReducer({
 				meta: { ...saveFile.meta, activeTab: 'OVERWORLD' },
 			});
@@ -29,7 +28,7 @@ export const useTeleport = () => {
 		addMessage,
 		patchSaveFileReducer,
 		saveFile.meta,
-		setLocation,
+		resetLocation,
 		teleporter,
 	]);
 	return { teleporter, teleportHome };

@@ -20,6 +20,7 @@ import { SaveFileContext } from './useSaveFile';
 export interface LocationContextType {
 	location: CharacterLocationData;
 	setLocation: (x: CharacterLocationData) => void;
+	resetLocation: () => void;
 }
 
 export const LocationContext = React.createContext({} as LocationContextType);
@@ -64,6 +65,10 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
 		[location.mapId, patchSaveFileReducer, saveFile.handledOccupants]
 	);
 
+	const resetLocation = useCallback(() => {
+		setLocation(startingLocation);
+	}, [setLocation]);
+
 	//SYNC WITH LOCAL STORAGE
 	useEffect(() => {
 		window.localStorage.setItem(
@@ -74,10 +79,11 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
 
 	// //RESCUE FROM SOFT LOCK
 	// useEffect(() => {
-	// 	if (saveFile.playerId.includes('ache')) {
+	// 	if (saveFile.playerId.includes('simon')) {
 	// 		setLocation(startingLocation);
 	// 	}
 	// }, [location, saveFile.playerId, setLocation]);
+
 	//reset catch streak on location change
 	useEffect(() => {
 		if (!saveFile.catchStreak) {
@@ -89,8 +95,8 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
 	}, [location, patchSaveFileReducer, saveFile]);
 
 	const value = useMemo(
-		() => ({ location, setLocation }),
-		[location, setLocation]
+		() => ({ location, setLocation, resetLocation }),
+		[location, resetLocation, setLocation]
 	);
 
 	return (

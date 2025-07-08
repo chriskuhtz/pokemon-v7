@@ -7,7 +7,7 @@ import { Page } from '../Page/Page';
 
 export const LoadingScreen = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
-	const { setLocation } = useContext(LocationContext);
+	const { resetLocation } = useContext(LocationContext);
 	const [showReturnButton, setShowReturnButton] = useState<boolean>(false);
 
 	useEffect(() => {
@@ -20,13 +20,7 @@ export const LoadingScreen = () => {
 			...saveFile,
 			meta: { activeTab: 'OVERWORLD' },
 		});
-		setLocation({
-			mapId: 'camp',
-			x: 1,
-			y: 1,
-			orientation: 'DOWN',
-			forwardFoot: 'CENTER1',
-		});
+		resetLocation();
 	};
 	return (
 		<Page headline="">
