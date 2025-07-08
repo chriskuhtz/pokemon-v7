@@ -35,6 +35,7 @@ export const mapBattleColors: Record<
   victoryRoadExit: { oppColor: "grass", playerColor: "normal" },
   pokemonLeague: { oppColor: "water", playerColor: "steel" },
   dragonIsle: { oppColor: "water", playerColor: "dragon" },
+  dragonIsleMountain: { oppColor: "water", playerColor: "dragon" },
 };
 
 export const useLocationColors = (): {
@@ -82,6 +83,7 @@ export const mapBattlePlatforms: Record<MapId, string> = {
   victoryRoadExit: "grass",
   pokemonLeague: "street",
   dragonIsle: "grass",
+  dragonIsleMountain: "grass",
 };
 
 export const useLocationBattlePlatform = (): string => {

@@ -16,6 +16,20 @@ export const dragonIsleOccupants: OverworldMap["occupants"] = [
     },
     conditionFunction: () => true,
   },
+  {
+    id: "dragon_isle_to_dragon_isle_camp",
+    type: "ON_STEP_PORTAL",
+    x: 49,
+    y: 20,
+    portal: {
+      mapId: "dragonIsleMountain",
+      x: 1,
+      y: 20,
+      orientation: "RIGHT",
+      forwardFoot: "CENTER1",
+    },
+    conditionFunction: () => true,
+  },
   //OBSTACLES
   //OVERWORLD_MONS
   //TRAINERS
