@@ -25,6 +25,7 @@ import { routeS1 } from "./routeS1";
 import { routeS1E1 } from "./routeS1E1";
 import { routeS1W1 } from "./routeS1W1";
 import { routeW1 } from "./routeW1";
+import { ruins } from "./ruins";
 import { victoryRoad } from "./victoryRoad";
 import { victoryRoadExit } from "./victoryRoadExit";
 import { victoryRoadExtra } from "./victoryRoadExtra";
@@ -59,6 +60,7 @@ export const mapIds = [
   "dragonIsleMountain",
   "dragonIsleCave",
   "dragonIsleMountainCave",
+  "ruins",
 ] as const;
 export type MapId = (typeof mapIds)[number];
 
@@ -91,6 +93,7 @@ export const mapsRecord: Record<MapId, OverworldMap> = {
   dragonIsleMountain: dragonIsleMountain,
   dragonIsleCave: dragonIsleCave,
   dragonIsleMountainCave: dragonIsleMountainCave,
+  ruins: ruins,
 };
 
 export const mapDisplayNames: Record<MapId, string> = {
@@ -122,6 +125,7 @@ export const mapDisplayNames: Record<MapId, string> = {
   dragonIsleMountain: "Dragon Isle Mountain",
   dragonIsleCave: "Dragon Isle Cave",
   dragonIsleMountainCave: "Dragon Isle Mountain Cave",
+  ruins: "Ruins",
 };
 
 export const Emptymap: OverworldMap = {

@@ -102,6 +102,20 @@ export const campOccupants: OverworldMap["occupants"] = [
     conditionFunction: () => true,
   },
   {
+    id: "temp_camp_to_ruins",
+    type: "ON_STEP_PORTAL",
+    x: 1,
+    y: 24,
+    portal: {
+      mapId: "ruins",
+      x: 1,
+      y: 20,
+      orientation: "RIGHT",
+      forwardFoot: "CENTER1",
+    },
+    conditionFunction: () => true,
+  },
+  {
     type: "ON_STEP_PORTAL",
     x: 11,
     y: 25,
