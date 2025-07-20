@@ -1,4 +1,4 @@
-import { AbilityName } from '../constants/checkLists/completed/abilityCheckList';
+import { AbilityName } from '../constants/abilityCheckList';
 import { ItemType } from '../interfaces/Item';
 import { MoveDto } from '../interfaces/Move';
 import { getMiddleOfThree } from './getMiddleOfThree';

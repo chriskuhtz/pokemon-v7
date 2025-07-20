@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react';
 import { v4 } from 'uuid';
-import { QuestName, QuestsRecord } from '../constants/questsRecord';
+import { QuestName, QuestsRecord } from '../constants/gameData/questsRecord';
 import { getRewardItemsForQuest } from '../functions/getRewardForQuest';
 import { getTeamSize } from '../functions/getTeamSize';
 import {

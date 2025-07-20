@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { ONE_HOUR } from '../../../constants/gameData';
+import { ONE_HOUR } from '../../../constants/gameData/gameData';
 import { BerryBush, BerryBushStatus } from '../../../interfaces/SaveFile';
 
 export const BerryBushIcon = ({ bush }: { bush: BerryBush }) => {

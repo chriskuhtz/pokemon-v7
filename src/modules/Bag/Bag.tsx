@@ -7,7 +7,7 @@ import { ThrowAwayAction } from '../../components/ItemCard/components/ThrowAwayA
 import { ItemCard } from '../../components/ItemCard/ItemCard';
 import { ItemInfoButton } from '../../components/ItemInfoButton/ItemInfoButton';
 import { useFilteredInventory } from '../../components/ItemsFilter/ItemsFilter';
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
 import { canBenefitFromItem } from '../../functions/canBenefitFromItem';
 import { useEscapeRope } from '../../hooks/useEscapeRope';
 import { SaveFileContext } from '../../hooks/useSaveFile';

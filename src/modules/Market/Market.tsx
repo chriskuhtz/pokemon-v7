@@ -1,6 +1,6 @@
 import { BsCashCoin } from 'react-icons/bs';
 import { FaCartPlus } from 'react-icons/fa';
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
 import { RoutesType } from '../../interfaces/Routing';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';

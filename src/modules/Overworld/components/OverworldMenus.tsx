@@ -11,11 +11,14 @@ import {
 	TroubleMakersIcon,
 } from '../../../components/TroubleMakersIcon/TroubleMakersIcon';
 import { WeatherIcon } from '../../../components/WeatherIcon/WeatherIcon';
-import { battleSpriteSize, portraitMode } from '../../../constants/gameData';
+import {
+	battleSpriteSize,
+	portraitMode,
+} from '../../../constants/gameData/gameData';
 import {
 	mapDisplayNames,
 	mapsRecord,
-} from '../../../constants/maps/mapsRecord';
+} from '../../../constants/gameData/maps/mapsRecord';
 import { LocationContext } from '../../../hooks/LocationProvider';
 import { BaseSizeContext } from '../../../hooks/useBaseSize';
 import { SaveFileContext } from '../../../hooks/useSaveFile';

@@ -1,3 +1,5 @@
+import { Challenger } from '../interfaces/Challenger';
+import { SaveFile } from '../interfaces/SaveFile';
 import {
 	tier1trainers,
 	tier2trainers,
@@ -5,9 +7,7 @@ import {
 	tier4trainers,
 	tier5trainers,
 	trainers,
-} from '../constants/trainersRecord';
-import { Challenger } from '../interfaces/Challenger';
-import { SaveFile } from '../interfaces/SaveFile';
+} from '../modules/TrainingField/trainersRecord';
 import { getRandomEntry } from './filterTargets';
 
 export const makeRandomTrainer = (

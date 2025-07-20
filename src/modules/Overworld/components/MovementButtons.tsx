@@ -6,7 +6,7 @@ import {
 	FaArrowUp,
 } from 'react-icons/fa';
 import { TbCircleLetterA } from 'react-icons/tb';
-import { battleSpriteSize, fps } from '../../../constants/gameData';
+import { battleSpriteSize, fps } from '../../../constants/gameData/gameData';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';

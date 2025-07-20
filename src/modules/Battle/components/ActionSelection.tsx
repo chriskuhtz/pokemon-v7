@@ -4,7 +4,10 @@ import { FaFistRaised, FaRunning } from 'react-icons/fa';
 import { FaArrowsRotate } from 'react-icons/fa6';
 import { ItemSprite } from '../../../components/ItemSprite/ItemSprite';
 import { MoveCard } from '../../../components/MoveCard/MoveCard';
-import { battleSpriteSize, portraitMode } from '../../../constants/gameData';
+import {
+	battleSpriteSize,
+	portraitMode,
+} from '../../../constants/gameData/gameData';
 import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
 import { getHeldItem } from '../../../functions/getHeldItem';
 import { getMovesArray } from '../../../functions/getMovesArray';

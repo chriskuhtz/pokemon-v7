@@ -5,7 +5,7 @@ import React, {
 	useMemo,
 	useState,
 } from 'react';
-import { animationTimer } from '../constants/gameData';
+import { animationTimer } from '../constants/gameData/gameData';
 
 export interface Message {
 	message: string;

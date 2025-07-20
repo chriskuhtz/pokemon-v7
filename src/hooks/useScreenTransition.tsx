@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { animationTimer } from '../constants/gameData';
+import { useEffect, useState } from 'react';
+import { animationTimer } from '../constants/gameData/gameData';
 
 export const useScreenTransition = (
 	onTransitionEnd: () => void

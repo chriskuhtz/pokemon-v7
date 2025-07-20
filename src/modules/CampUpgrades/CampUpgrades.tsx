@@ -12,9 +12,9 @@ import {
 	campUpgradeCostScale,
 	campUpgradeExplanations,
 	campUpgradeNames,
-} from '../../constants/campUpgrades';
-import { battleSpriteSize } from '../../constants/gameData';
-import { QuestName, QuestsRecord } from '../../constants/questsRecord';
+} from '../../constants/gameData/campUpgrades';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
+import { QuestName, QuestsRecord } from '../../constants/gameData/questsRecord';
 import { typeColors } from '../../constants/typeColors';
 import { replaceRouteName } from '../../functions/replaceRouteName';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';

@@ -1,5 +1,5 @@
-import { MoveName } from '../constants/checkLists/movesCheckList';
 import { crashDamageMoves } from '../constants/groupedMoves';
+import { MoveName } from '../constants/movesCheckList';
 import { Message } from '../hooks/useMessageQueue';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { isKO } from './isKo';

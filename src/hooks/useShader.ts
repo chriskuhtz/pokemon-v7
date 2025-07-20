@@ -1,5 +1,5 @@
 import { useContext, useMemo } from 'react';
-import { mapsRecord } from '../constants/maps/mapsRecord';
+import { mapsRecord } from '../constants/gameData/maps/mapsRecord';
 import {
 	futureShader,
 	getTimeOfDay,

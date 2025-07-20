@@ -1,4 +1,4 @@
-import { MoveName } from '../../../../../constants/checkLists/movesCheckList';
+import { MoveName } from '../../../../../constants/movesCheckList';
 import { Message } from '../../../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../../../interfaces/BattleActions';
 import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
@@ -16,7 +16,7 @@ import { handleWholeFieldEffectAttack } from './attackCategories/handleWholeFiel
 import { handleAttackStart } from './handleAttackStart';
 
 import { FaGlasses } from 'react-icons/fa';
-import { battleSpriteSize } from '../../../../../constants/gameData';
+import { battleSpriteSize } from '../../../../../constants/gameData/gameData';
 import { changeMovePP } from '../../../../../functions/changeMovePP';
 import { chooseOpponentAction } from '../../../../../functions/chooseOpponentAction';
 import { getSettings } from '../../../../../functions/getPlayerId';

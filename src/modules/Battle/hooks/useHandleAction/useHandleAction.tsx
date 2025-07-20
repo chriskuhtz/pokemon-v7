@@ -1,5 +1,5 @@
 import { useCallback, useContext } from 'react';
-import { MoveName } from '../../../../constants/checkLists/movesCheckList';
+import { MoveName } from '../../../../constants/movesCheckList';
 import { applyItemToPokemon } from '../../../../functions/applyItemToPokemon';
 import { applyStatChangeToPokemon } from '../../../../functions/applyStatChangeToPokemon';
 import { BattleLocation } from '../../../../functions/determineCaptureSuccess';

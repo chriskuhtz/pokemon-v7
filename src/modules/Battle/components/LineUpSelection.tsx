@@ -4,6 +4,7 @@ import {
 	PokemonSprite,
 } from '../../../components/PokemonSprite/PokemonSprite';
 import { Sprite } from '../../../components/Sprite/Sprite';
+import { portraitMode } from '../../../constants/gameData/gameData';
 import { determineRunawaySuccess } from '../../../functions/determineRunAwaySuccess';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { isKO } from '../../../functions/isKo';
@@ -14,7 +15,6 @@ import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { TrainerInfo } from '../../../interfaces/Challenger';
 import { IconSolarSystem } from '../../../uiComponents/IconSolarSystem/IconSolarSystem';
-import { portraitMode } from '../../../constants/gameData';
 
 export const LineUpSelection = ({
 	leave,

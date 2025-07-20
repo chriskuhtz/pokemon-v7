@@ -3,11 +3,8 @@ import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { MoveInfoButton } from '../../components/MoveInfoButton/MoveInfoButton';
 import { MovesDisplay } from '../../components/OwnedPokemonCard/components/MovesDisplay';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
-import {
-	handledMoves,
-	MoveName,
-} from '../../constants/checkLists/movesCheckList';
-import { internalDex } from '../../constants/internalDexData';
+import { internalDex } from '../../constants/gameData/internalDexData';
+import { handledMoves, MoveName } from '../../constants/movesCheckList';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getEntryWithOverflow } from '../../functions/filterTargets';
 import { moveIsTeachable } from '../../functions/moveIsAvailable';

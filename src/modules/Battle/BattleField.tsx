@@ -4,8 +4,8 @@ import {
 	TerrainIcon,
 	WeatherIcon,
 } from '../../components/WeatherIcon/WeatherIcon';
-import { MoveName } from '../../constants/checkLists/movesCheckList';
-import { portraitMode } from '../../constants/gameData';
+import { portraitMode } from '../../constants/gameData/gameData';
+import { MoveName } from '../../constants/movesCheckList';
 import {
 	applyEndOfTurnAbility,
 	applyGrassyTerrainHeal,

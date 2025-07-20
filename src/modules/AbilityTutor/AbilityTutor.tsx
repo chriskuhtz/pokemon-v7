@@ -2,11 +2,8 @@ import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { AbilityInfoButton } from '../../components/AbilityInfoButton/AbilityInfoButton';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
-import {
-	AbilityName,
-	abilityNames,
-} from '../../constants/checkLists/completed/abilityCheckList';
-import { internalDex } from '../../constants/internalDexData';
+import { AbilityName, abilityNames } from '../../constants/abilityCheckList';
+import { internalDex } from '../../constants/gameData/internalDexData';
 import { getEntryWithOverflow } from '../../functions/filterTargets';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';

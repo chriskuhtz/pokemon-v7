@@ -6,7 +6,7 @@ import {
 	barryS1E1,
 	barryS1W1,
 	barryW1,
-} from '../constants/maps/occupants/barry';
+} from '../constants/gameData/maps/occupants/barry';
 import {
 	cynthiaE1,
 	cynthiaN1,
@@ -15,7 +15,7 @@ import {
 	cynthiaS1E1,
 	cynthiaS1W1,
 	cynthiaW1,
-} from '../constants/maps/occupants/cynthia';
+} from '../constants/gameData/maps/occupants/cynthia';
 import {
 	hughE1,
 	hughN1,
@@ -24,7 +24,7 @@ import {
 	hughS1E1,
 	hughS1W1,
 	hughW1,
-} from '../constants/maps/occupants/hugh';
+} from '../constants/gameData/maps/occupants/hugh';
 import {
 	nE1,
 	nN1,
@@ -33,7 +33,7 @@ import {
 	nS1E1,
 	nS1W1,
 	nW1,
-} from '../constants/maps/occupants/n';
+} from '../constants/gameData/maps/occupants/n';
 import {
 	redE1,
 	redN1,
@@ -42,7 +42,7 @@ import {
 	redS1E1,
 	redS1W1,
 	redW1,
-} from '../constants/maps/occupants/red';
+} from '../constants/gameData/maps/occupants/red';
 import {
 	silverE1,
 	silverN1,
@@ -51,7 +51,7 @@ import {
 	silverS1E1,
 	silverS1W1,
 	silverW1,
-} from '../constants/maps/occupants/silver';
+} from '../constants/gameData/maps/occupants/silver';
 import { Occupant } from '../interfaces/OverworldMap';
 import {
 	travellingMerchantRouteE1,

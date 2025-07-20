@@ -24,8 +24,8 @@ import {
 	battleSpriteSize,
 	challengeFieldId,
 	randomFieldId,
-} from '../../constants/gameData';
-import { MapId, mapsRecord } from '../../constants/maps/mapsRecord';
+} from '../../constants/gameData/gameData';
+import { MapId, mapsRecord } from '../../constants/gameData/maps/mapsRecord';
 import { fullyHealPokemon } from '../../functions/fullyHealPokemon';
 import { LocationContext } from '../../hooks/LocationProvider';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';

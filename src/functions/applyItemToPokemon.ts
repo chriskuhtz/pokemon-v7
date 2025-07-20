@@ -1,4 +1,4 @@
-import { MoveName } from '../constants/checkLists/movesCheckList';
+import { MoveName } from '../constants/movesCheckList';
 import { Message } from '../hooks/useMessageQueue';
 import { BattlePokemon, isBattlePokemon } from '../interfaces/BattlePokemon';
 import {

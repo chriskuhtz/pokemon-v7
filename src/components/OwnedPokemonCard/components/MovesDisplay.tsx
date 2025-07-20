@@ -4,7 +4,7 @@ import {
 	MdOutlineRadioButtonChecked,
 	MdRadioButtonUnchecked,
 } from 'react-icons/md';
-import { MoveName } from '../../../constants/checkLists/movesCheckList';
+import { MoveName } from '../../../constants/movesCheckList';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { Card } from '../../../uiComponents/Card/Card';

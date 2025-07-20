@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { MoveName } from '../../../constants/checkLists/movesCheckList';
+import { MoveName } from '../../../constants/movesCheckList';
 
 import {
 	recoveryMoves,

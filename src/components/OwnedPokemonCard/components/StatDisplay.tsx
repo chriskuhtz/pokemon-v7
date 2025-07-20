@@ -1,5 +1,5 @@
 import { maxBst } from '../../../constants/baseStatRecord';
-import { portraitMode } from '../../../constants/gameData';
+import { portraitMode } from '../../../constants/gameData/gameData';
 import { PokemonName } from '../../../constants/pokemonNames';
 import { typeColors, typeContrastColors } from '../../../constants/typeColors';
 import {

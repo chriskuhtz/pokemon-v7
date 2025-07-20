@@ -2,7 +2,7 @@ import React from 'react';
 import { FaSave } from 'react-icons/fa';
 import { RiDeleteRow, RiInsertRowBottom } from 'react-icons/ri';
 import { TbColumnInsertRight, TbColumnRemove } from 'react-icons/tb';
-import { battleSpriteSize } from '../../../constants/gameData';
+import { battleSpriteSize } from '../../../constants/gameData/gameData';
 import { numberToGridTemplateColumns } from '../../../functions/numberToGridTemplateColumns';
 import { CoordinateSelector } from './CoordinateSelector';
 import { GroupPlacer, Tool } from './MapEditor';

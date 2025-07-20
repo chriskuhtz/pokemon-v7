@@ -1,5 +1,5 @@
 import { isEqual } from 'lodash';
-import { MoveName } from '../constants/checkLists/movesCheckList';
+import { MoveName } from '../constants/movesCheckList';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import {
 	isPPBoostItem,

@@ -2,12 +2,15 @@ import { useCallback, useContext, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { Sprite } from '../../components/Sprite/Sprite';
-import { CampUpgrade, campUpgradeNames } from '../../constants/campUpgrades';
+import {
+	CampUpgrade,
+	campUpgradeNames,
+} from '../../constants/gameData/campUpgrades';
 import {
 	battleSpriteSize,
 	shinyChance,
 	testPokemon,
-} from '../../constants/gameData';
+} from '../../constants/gameData/gameData';
 import { PokemonName } from '../../constants/pokemonNames';
 import { typeColors } from '../../constants/typeColors';
 import { addPokemonToDex } from '../../functions/addPokemonToDex';

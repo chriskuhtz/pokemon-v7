@@ -1,7 +1,7 @@
 import { Octokit } from 'octokit';
 import { useContext, useState } from 'react';
 import { IoBulbOutline } from 'react-icons/io5';
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Card } from '../../uiComponents/Card/Card';

@@ -1,4 +1,4 @@
-import { internalDex } from '../constants/internalDexData';
+import { internalDex } from '../constants/gameData/internalDexData';
 import { BattlePokemon, isBattlePokemon } from '../interfaces/BattlePokemon';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { PokemonType } from '../interfaces/PokemonType';

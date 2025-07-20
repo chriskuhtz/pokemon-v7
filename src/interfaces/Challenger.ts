@@ -1,5 +1,5 @@
-import { CampUpgrade } from '../constants/campUpgrades';
-import { QuestName } from '../constants/questsRecord';
+import { CampUpgrade } from '../constants/gameData/campUpgrades';
+import { QuestName } from '../constants/gameData/questsRecord';
 import { BattleTeamConfig } from '../hooks/useGetBattleTeam';
 import { BattlePokemon } from './BattlePokemon';
 import { Inventory } from './Inventory';

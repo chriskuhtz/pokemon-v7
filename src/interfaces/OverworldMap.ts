@@ -1,6 +1,6 @@
-import { MapId } from '../constants/maps/mapsRecord';
+import { MapId } from '../constants/gameData/maps/mapsRecord';
+import { QuestName } from '../constants/gameData/questsRecord';
 import { PokemonName } from '../constants/pokemonNames';
-import { QuestName } from '../constants/questsRecord';
 import { TimeOfDay } from '../functions/getTimeOfDay';
 import { BattleTeamConfig } from '../hooks/useGetBattleTeam';
 import { Inventory } from './Inventory';

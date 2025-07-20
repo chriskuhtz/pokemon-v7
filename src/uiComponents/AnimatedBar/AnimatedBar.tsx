@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { animationTimer } from '../../constants/gameData';
+import { animationTimer } from '../../constants/gameData/gameData';
 import { percentageBasedColor } from '../../constants/typeColors';
 import { getMiddleOfThree } from '../../functions/getMiddleOfThree';
 

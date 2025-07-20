@@ -1,5 +1,5 @@
-import { AbilityName } from '../constants/checkLists/completed/abilityCheckList';
-import { MoveName } from '../constants/checkLists/movesCheckList';
+import { AbilityName } from '../constants/abilityCheckList';
+import { MoveName } from '../constants/movesCheckList';
 import { SecondaryAilment } from './Ailment';
 import { BattleAction, BattleAttack } from './BattleActions';
 import { BerryType } from './Item';

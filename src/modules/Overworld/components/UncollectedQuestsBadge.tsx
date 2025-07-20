@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { GoTasklist } from 'react-icons/go';
-import { battleSpriteSize } from '../../../constants/gameData';
+import { battleSpriteSize } from '../../../constants/gameData/gameData';
 import { LocationContext } from '../../../hooks/LocationProvider';
 import { useNavigate } from '../../../hooks/useNavigate';
 import { useQuests } from '../../../hooks/useQuests';

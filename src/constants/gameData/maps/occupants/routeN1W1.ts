@@ -1,0 +1,130 @@
+import { OverworldMap } from '../../../../interfaces/OverworldMap';
+import { champChris } from './champChris';
+
+export const routeN1W1Occupants: OverworldMap['occupants'] = [
+	{
+		type: 'ON_STEP_PORTAL',
+		x: 25,
+		y: 50,
+		portal: {
+			mapId: 'routeW1',
+			x: 25,
+			y: 1,
+			orientation: 'DOWN',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+		id: 'routeN1W1_to_routeW1',
+	},
+	{
+		type: 'ON_STEP_PORTAL',
+		x: 29,
+		y: 39,
+		portal: {
+			mapId: 'caveN1W1',
+			x: 29,
+			y: 37,
+			orientation: 'UP',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+		id: 'routeN1W1_to_caveN1W1_1',
+	},
+	{
+		type: 'ON_STEP_PORTAL',
+		x: 24,
+		y: 26,
+		portal: {
+			mapId: 'caveN1W1',
+			x: 24,
+			y: 24,
+			orientation: 'UP',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+		id: 'routeN1W1_to_caveN1W1_2',
+	},
+	{
+		type: 'ON_STEP_PORTAL',
+		x: 44,
+		y: 5,
+		portal: {
+			mapId: 'caveN1W1',
+			x: 44,
+			y: 3,
+			orientation: 'UP',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+		id: 'routeN1W1_to_caveN1W1_3',
+	},
+	{
+		type: 'ON_STEP_PORTAL',
+		x: 27,
+		y: 5,
+		portal: {
+			mapId: 'caveN1W1',
+			x: 27,
+			y: 3,
+			orientation: 'UP',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+		id: 'routeN1W1_to_caveN1W1_4',
+	},
+	{
+		type: 'ON_STEP_PORTAL',
+		x: 13,
+		y: 9,
+		portal: {
+			mapId: 'caveN1W1',
+			x: 13,
+			y: 7,
+			orientation: 'UP',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+		id: 'routeN1W1_to_caveN1W1_5',
+	},
+	{
+		type: 'ITEM',
+		x: 42,
+		y: 1,
+		item: 'old-amber',
+		amount: 1,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'old-amber-routeN1W1'),
+		id: 'old-amber',
+	},
+	{
+		type: 'ITEM',
+		x: 31,
+		y: 4,
+		item: 'never-melt-ice',
+		amount: 1,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'nevermeltice-routeN1W1'),
+		id: 'nevermeltice-routeN1W1',
+	},
+	{
+		type: 'ITEM',
+		x: 6,
+		y: 40,
+		item: 'damp-rock',
+		amount: 1,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'damp-rock-routeN1W1'),
+		id: 'damp-rock-routeN1W1',
+	},
+	{
+		type: 'ITEM',
+		x: 29,
+		y: 35,
+		item: 'ice-stone',
+		amount: 1,
+		conditionFunction: (s) =>
+			!s.handledOccupants.some((h) => h.id === 'ice-stone-routeN1W1'),
+		id: 'ice-stone-routeN1W1',
+	},
+	champChris,
+];

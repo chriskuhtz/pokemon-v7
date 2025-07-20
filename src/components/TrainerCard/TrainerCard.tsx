@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { IconSolarSystem } from '../../uiComponents/IconSolarSystem/IconSolarSystem';
 

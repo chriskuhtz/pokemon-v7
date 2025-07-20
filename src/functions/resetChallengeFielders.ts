@@ -1,5 +1,8 @@
-import { challengeFieldId, randomFieldId } from '../constants/gameData';
-import { rocketCampOccupants } from '../constants/maps/occupants/rocketCampOccupants';
+import {
+	challengeFieldId,
+	randomFieldId,
+} from '../constants/gameData/gameData';
+import { rocketCampOccupants } from '../constants/gameData/maps/occupants/rocketCampOccupants';
 import { SaveFile } from '../interfaces/SaveFile';
 
 export const resetChallengeFielders = (

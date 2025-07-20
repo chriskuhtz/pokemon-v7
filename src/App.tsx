@@ -1,6 +1,6 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { Sprite } from './components/Sprite/Sprite';
-import { MapId } from './constants/maps/mapsRecord';
+import { MapId } from './constants/gameData/maps/mapsRecord';
 import { MessageQueueContext } from './hooks/useMessageQueue';
 import { SaveFileContext } from './hooks/useSaveFile';
 import { SpriteEnum } from './interfaces/SpriteEnum';

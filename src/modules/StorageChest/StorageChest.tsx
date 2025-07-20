@@ -7,7 +7,7 @@ import {
 	useFilteredInventory,
 } from '../../components/ItemsFilter/ItemsFilter';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { EmptyInventory, joinInventories } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';

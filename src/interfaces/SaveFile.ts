@@ -1,14 +1,14 @@
-import { CampUpgrade } from '../constants/campUpgrades';
-import { SwarmType } from '../constants/internalDexData';
-import { MapId } from '../constants/maps/mapsRecord';
+import { CampUpgrade } from '../constants/gameData/campUpgrades';
+import { MapId } from '../constants/gameData/maps/mapsRecord';
+import { QuestName } from '../constants/gameData/questsRecord';
 import { PokemonName } from '../constants/pokemonNames';
-import { QuestName } from '../constants/questsRecord';
 import { BadgeName } from './Badge';
 import { Challenger } from './Challenger';
 import { Inventory } from './Inventory';
 import { ApricornType, BerryType, HerbType, ItemType, MulchType } from './Item';
 import { OverworldTrainer } from './OverworldMap';
 import { OwnedPokemon } from './OwnedPokemon';
+import { SwarmType } from './Pokedex';
 import { PokemonType } from './PokemonType';
 import { QuestStatus } from './Quest';
 import { RoutesType } from './Routing';

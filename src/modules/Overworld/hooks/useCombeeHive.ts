@@ -1,5 +1,5 @@
 import { useCallback, useContext } from 'react';
-import { ONE_HOUR } from '../../../constants/gameData';
+import { ONE_HOUR } from '../../../constants/gameData/gameData';
 import { getMiddleOfThree } from '../../../functions/getMiddleOfThree';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';

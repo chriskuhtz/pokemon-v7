@@ -1,4 +1,4 @@
-import { MoveName } from '../constants/checkLists/movesCheckList';
+import { MoveName } from '../constants/movesCheckList';
 import { PokemonType } from './PokemonType';
 
 export const primaryAilments = [

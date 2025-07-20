@@ -1,4 +1,4 @@
-import { localStorageSaveFileId } from '../constants/gameData';
+import { localStorageSaveFileId } from '../constants/gameData/gameData';
 import { SaveFile, SettingsObject } from '../interfaces/SaveFile';
 
 export const getPlayerId = (): string => {

@@ -1,5 +1,5 @@
 import { CSSProperties, ReactNode } from 'react';
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
 
 export const IconSolarSystem = ({
 	sun,

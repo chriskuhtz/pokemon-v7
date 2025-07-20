@@ -2,12 +2,12 @@ import React, { useCallback, useContext, useMemo } from 'react';
 import { MdFormatListBulleted } from 'react-icons/md';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
 import {
 	QuestName,
 	questNames,
 	QuestsRecord,
-} from '../../constants/questsRecord';
+} from '../../constants/gameData/questsRecord';
 import { getRewardItemsForQuest } from '../../functions/getRewardForQuest';
 import { replaceRouteName } from '../../functions/replaceRouteName';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';

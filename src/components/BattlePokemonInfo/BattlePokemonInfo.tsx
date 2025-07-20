@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from 'react';
 import { IoMdFemale, IoMdMale } from 'react-icons/io';
 import { RiSparkling2Line } from 'react-icons/ri';
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
 import { secondTurnMoves } from '../../constants/groupedMoves';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getPlayerId } from '../../functions/getPlayerId';

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { FaRegCircleCheck } from 'react-icons/fa6';
 import { App, FullScreenToggle } from '../../App';
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
 import { LocationProvider } from '../../hooks/LocationProvider';
 import { BaseSizeProvider } from '../../hooks/useBaseSize';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';

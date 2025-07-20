@@ -1,8 +1,8 @@
 import { useCallback, useContext } from 'react';
-import { battleSpriteSize } from '../constants/gameData';
-import { getHoneyEncounters } from '../constants/internalDex';
+import { battleSpriteSize } from '../constants/gameData/gameData';
 import { getRandomIndex } from '../functions/filterTargets';
 import { getItemUrl } from '../functions/getItemUrl';
+import { getHoneyEncounters } from '../functions/internalDex';
 import {
 	makeChallengerPokemon,
 	OPPO_ID,

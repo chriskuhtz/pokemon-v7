@@ -3,7 +3,7 @@ import { BsThermometerSun } from 'react-icons/bs';
 import { FaCloudRain } from 'react-icons/fa';
 import { RiHailLine } from 'react-icons/ri';
 import { WiSandstorm } from 'react-icons/wi';
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { PokemonType } from '../../interfaces/PokemonType';
 import { WeatherType } from '../../interfaces/Weather';

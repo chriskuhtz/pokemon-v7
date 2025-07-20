@@ -1,4 +1,4 @@
-import { handledMoves, MoveName } from '../constants/checkLists/movesCheckList';
+import { handledMoves, MoveName } from '../constants/movesCheckList';
 import { PokemonData } from '../interfaces/PokemonData';
 
 export const moveIsAvailable = (
