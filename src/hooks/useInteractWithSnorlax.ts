@@ -1,5 +1,5 @@
 import { useCallback, useContext } from 'react';
-import { ONE_DAY } from '../constants/gameData';
+import { ONE_DAY } from '../constants/gameData/gameData';
 import {
 	OPPO_ID,
 	makeChallengerPokemon,

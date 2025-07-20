@@ -2,7 +2,7 @@ import { BsFire } from 'react-icons/bs';
 import { FaRegSnowflake } from 'react-icons/fa';
 import { FaBoltLightning } from 'react-icons/fa6';
 import { GiNightSleep, GiPoisonBottle } from 'react-icons/gi';
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
 import { PrimaryAilment } from '../../interfaces/Ailment';
 
 export const PrimaryAilmentIcon = ({

@@ -1,4 +1,4 @@
-import { QuestName, QuestsRecord } from '../constants/questsRecord';
+import { QuestName, QuestsRecord } from '../constants/gameData/questsRecord';
 import { Inventory } from '../interfaces/Inventory';
 import { Quest } from '../interfaces/Quest';
 import { randomQuestRewards } from '../modules/Settings/Settings';

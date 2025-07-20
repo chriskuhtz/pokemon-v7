@@ -9,7 +9,7 @@ import React, {
 import {
 	localStorageLocationId,
 	startingLocation,
-} from '../constants/gameData';
+} from '../constants/gameData/gameData';
 import {
 	resetChallengeFielders,
 	resetEliteFour,

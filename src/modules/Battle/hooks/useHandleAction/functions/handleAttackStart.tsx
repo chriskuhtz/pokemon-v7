@@ -1,4 +1,4 @@
-import { battleSpriteSize } from '../../../../../constants/gameData';
+import { battleSpriteSize } from '../../../../../constants/gameData/gameData';
 import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/groupedMoves';
 import { determineMiss } from '../../../../../functions/determineMiss';
 import { getRandomTarget } from '../../../../../functions/filterTargets';

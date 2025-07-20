@@ -1,5 +1,5 @@
 import { useContext, useMemo } from 'react';
-import { mapsRecord } from '../../../constants/maps/mapsRecord';
+import { mapsRecord } from '../../../constants/gameData/maps/mapsRecord';
 import { getHeldItem } from '../../../functions/getHeldItem';
 import { LocationContext } from '../../../hooks/LocationProvider';
 import { SaveFileContext } from '../../../hooks/useSaveFile';

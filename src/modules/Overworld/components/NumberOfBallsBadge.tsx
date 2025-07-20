@@ -1,6 +1,6 @@
 import { useContext, useMemo } from 'react';
 import { MdCatchingPokemon } from 'react-icons/md';
-import { battleSpriteSize } from '../../../constants/gameData';
+import { battleSpriteSize } from '../../../constants/gameData/gameData';
 import { percentageBasedColor } from '../../../constants/typeColors';
 import { getBagLimit } from '../../../functions/getBagLimit';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';

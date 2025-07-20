@@ -6,7 +6,7 @@ import {
 	TbCircleLetterPFilled,
 	TbCircleLetterRFilled,
 } from 'react-icons/tb';
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
 import { typeColors } from '../../constants/typeColors';
 import { troubleMakersRemaining } from '../../functions/areAllRocketsDefeated';
 import { LocationContext } from '../../hooks/LocationProvider';

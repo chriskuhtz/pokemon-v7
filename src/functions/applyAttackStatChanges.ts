@@ -1,4 +1,4 @@
-import { AbilityName } from '../constants/checkLists/completed/abilityCheckList';
+import { AbilityName } from '../constants/abilityCheckList';
 import { Message } from '../hooks/useMessageQueue';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';

@@ -4,11 +4,11 @@ import {
 	midBstPokemon,
 	ultraHighBstPokemon,
 } from '../constants/baseStatRecord';
-import { getAllPokemonThatMaxThisEV } from '../constants/internalDex';
 import { PokemonName } from '../constants/pokemonNames';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { Stat } from '../interfaces/StatObject';
 import { getRandomEntry } from './filterTargets';
+import { getAllPokemonThatMaxThisEV } from './internalDex';
 import { makeChallengerPokemon } from './makeChallengerPokemon';
 
 export const makeRandomTeam = ({ xp }: { xp: number }): OwnedPokemon[] => {

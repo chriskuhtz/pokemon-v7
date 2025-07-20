@@ -1,4 +1,8 @@
-import { MapId, mapDisplayNames, mapIds } from '../constants/maps/mapsRecord';
+import {
+	MapId,
+	mapDisplayNames,
+	mapIds,
+} from '../constants/gameData/maps/mapsRecord';
 
 export const replaceRouteName = (input: string): string => {
 	return input

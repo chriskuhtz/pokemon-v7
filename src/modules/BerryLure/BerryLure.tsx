@@ -1,13 +1,13 @@
 import { useCallback, useContext, useMemo } from 'react';
 import { FaRegCircleQuestion } from 'react-icons/fa6';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
+import { internalDex } from '../../constants/gameData/internalDexData';
+import { PokemonName } from '../../constants/pokemonNames';
 import {
 	getAllBerryLureMonForRoute,
 	getBerryLureMon,
-} from '../../constants/internalDex';
-import { internalDex } from '../../constants/internalDexData';
-import { PokemonName } from '../../constants/pokemonNames';
+} from '../../functions/internalDex';
 import {
 	makeChallengerPokemon,
 	OPPO_ID,

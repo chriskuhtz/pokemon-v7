@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { MdHealing } from 'react-icons/md';
-import { MoveName } from '../../../constants/checkLists/movesCheckList';
-import { battleSpriteSize } from '../../../constants/gameData';
+import { battleSpriteSize } from '../../../constants/gameData/gameData';
+import { MoveName } from '../../../constants/movesCheckList';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
 import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
 import { getMovesArray } from '../../../functions/getMovesArray';

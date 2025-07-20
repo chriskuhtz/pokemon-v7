@@ -1,7 +1,7 @@
 import { useCallback, useContext } from 'react';
-import { ONE_HOUR } from '../../../constants/gameData';
-import { getUnderRockEncounters } from '../../../constants/internalDex';
+import { ONE_HOUR } from '../../../constants/gameData/gameData';
 import { getRandomEntry } from '../../../functions/filterTargets';
+import { getUnderRockEncounters } from '../../../functions/internalDex';
 import {
 	makeChallengerPokemon,
 	OPPO_ID,

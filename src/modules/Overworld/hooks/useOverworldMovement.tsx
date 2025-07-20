@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { fps } from '../../../constants/gameData';
-import { mapsRecord } from '../../../constants/maps/mapsRecord';
+import { fps } from '../../../constants/gameData/gameData';
+import { mapsRecord } from '../../../constants/gameData/maps/mapsRecord';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
 import { determineWildPokemon } from '../../../functions/determineWildPokemon';
 import { getNextForwardFoot } from '../../../functions/getNextForwardFoot';

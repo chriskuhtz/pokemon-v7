@@ -1,4 +1,4 @@
-import { AbilityName } from '../constants/checkLists/completed/abilityCheckList';
+import { AbilityName } from '../constants/abilityCheckList';
 import {
 	auraAndPulseMoves,
 	bitingMoves,

@@ -1,7 +1,7 @@
 import { FiSunrise, FiSunset } from 'react-icons/fi';
 import { MdNightlight, MdOutlineWbSunny } from 'react-icons/md';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
 import { getTimeOfDay } from '../../functions/getTimeOfDay';
-import { battleSpriteSize } from '../../constants/gameData';
 
 export const TimeOfDayIcon = () => {
 	const time = getTimeOfDay();

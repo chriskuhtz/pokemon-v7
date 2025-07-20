@@ -1,5 +1,5 @@
 import { useCallback, useContext, useMemo } from 'react';
-import { ONE_HOUR } from '../constants/gameData';
+import { ONE_HOUR } from '../constants/gameData/gameData';
 import { joinInventories } from '../interfaces/Inventory';
 import { BerryType, isBerry } from '../interfaces/Item';
 import { MessageQueueContext } from './useMessageQueue';

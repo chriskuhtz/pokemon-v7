@@ -1,5 +1,5 @@
 import { IoMdCloseCircle } from 'react-icons/io';
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
 
 export const Modal = ({
 	open,

@@ -3,10 +3,9 @@ import {
 	lowBstPokemon,
 	midBstPokemon,
 } from '../constants/baseStatRecord';
-import { shinyChance } from '../constants/gameData';
-import { getRandomEncounter, isNotCatchable } from '../constants/internalDex';
-import { internalDex } from '../constants/internalDexData';
-import { MapId } from '../constants/maps/mapsRecord';
+import { shinyChance } from '../constants/gameData/gameData';
+import { internalDex } from '../constants/gameData/internalDexData';
+import { MapId } from '../constants/gameData/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { BattleTeamConfig } from '../hooks/useGetBattleTeam';
 import { getRandomNature } from '../interfaces/Natures';
@@ -16,6 +15,7 @@ import { StatObject } from '../interfaces/StatObject';
 import { getRandomEntry } from './filterTargets';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getTimeOfDay } from './getTimeOfDay';
+import { getRandomEncounter, isNotCatchable } from './internalDex';
 import { makeChallengerPokemon } from './makeChallengerPokemon';
 
 export const determineWildPokemon = (

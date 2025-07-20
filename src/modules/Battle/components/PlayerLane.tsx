@@ -1,6 +1,6 @@
 import { BattlePokemonInfo } from '../../../components/BattlePokemonInfo/BattlePokemonInfo';
 import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
-import { portraitMode } from '../../../constants/gameData';
+import { portraitMode } from '../../../constants/gameData/gameData';
 import { getSizeFactor } from '../../../functions/getSizeFactor';
 import { useLocationBattlePlatform } from '../../../hooks/useLocationColors';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';

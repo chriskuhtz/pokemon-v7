@@ -1,7 +1,7 @@
 import { useCallback, useContext, useMemo } from 'react';
 import { FaRegCircleQuestion } from 'react-icons/fa6';
 import { v4 } from 'uuid';
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
 import { OPPO_ID } from '../../functions/makeChallengerPokemon';
 import { LocationContext } from '../../hooks/LocationProvider';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';

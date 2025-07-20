@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { QuestsRecord } from '../../constants/questsRecord';
+import { QuestsRecord } from '../../constants/gameData/questsRecord';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { getRandomBall, getRandomItem } from '../../interfaces/Item';
 import { RoutesType } from '../../interfaces/Routing';

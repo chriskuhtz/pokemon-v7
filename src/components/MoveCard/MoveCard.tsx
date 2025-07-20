@@ -1,4 +1,4 @@
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
 import { BattleMove } from '../../interfaces/BattlePokemon';
 import { Card } from '../../uiComponents/Card/Card';
 

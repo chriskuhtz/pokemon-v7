@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { animationTimer } from '../constants/gameData';
+import { animationTimer } from '../constants/gameData/gameData';
 import { getNextClockWiseDirection } from '../functions/getNextClockwiseDirection';
 import { CharacterOrientation } from '../interfaces/SaveFile';
 

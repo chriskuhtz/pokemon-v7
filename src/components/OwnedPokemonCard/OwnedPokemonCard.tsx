@@ -1,5 +1,5 @@
-import { MoveName } from '../../constants/checkLists/movesCheckList';
-import { portraitMode } from '../../constants/gameData';
+import { portraitMode } from '../../constants/gameData/gameData';
+import { MoveName } from '../../constants/movesCheckList';
 import { EvolutionReducerPayload } from '../../hooks/useSaveFile';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';

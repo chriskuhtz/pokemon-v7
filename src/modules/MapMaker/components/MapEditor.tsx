@@ -6,7 +6,7 @@ import React, {
 	useState,
 } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
-import { MapId, mapsRecord } from '../../../constants/maps/mapsRecord';
+import { MapId, mapsRecord } from '../../../constants/gameData/maps/mapsRecord';
 import { TileIdentifier } from '../../../interfaces/OverworldMap';
 import { LayerName, useMapEditor } from '../hooks/useMapEditor';
 import { FillTools } from './FillTools';

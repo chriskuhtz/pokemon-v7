@@ -1,6 +1,6 @@
 import { useCallback, useContext, useMemo } from 'react';
 import { v4 } from 'uuid';
-import { ONE_HOUR } from '../../../constants/gameData';
+import { ONE_HOUR } from '../../../constants/gameData/gameData';
 import { getRandomEntry } from '../../../functions/filterTargets';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';

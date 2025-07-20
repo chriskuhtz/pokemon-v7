@@ -1,7 +1,7 @@
-import { AbilityName } from '../constants/checkLists/completed/abilityCheckList';
+import { AbilityName } from '../constants/abilityCheckList';
 
-import { MoveName } from '../constants/checkLists/movesCheckList';
-import { MapId } from '../constants/maps/mapsRecord';
+import { MapId } from '../constants/gameData/maps/mapsRecord';
+import { MoveName } from '../constants/movesCheckList';
 import { PokemonName } from '../constants/pokemonNames';
 import { PrimaryAilment } from './Ailment';
 import { ItemType, PokeballType } from './Item';

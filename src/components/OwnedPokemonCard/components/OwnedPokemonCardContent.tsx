@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { MdEdit } from 'react-icons/md';
-import { MoveName } from '../../../constants/checkLists/movesCheckList';
-import { battleSpriteSize, portraitMode } from '../../../constants/gameData';
+import {
+	battleSpriteSize,
+	portraitMode,
+} from '../../../constants/gameData/gameData';
+import { MoveName } from '../../../constants/movesCheckList';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
 import { getHeldItem } from '../../../functions/getHeldItem';
 import { getItemUrl } from '../../../functions/getItemUrl';

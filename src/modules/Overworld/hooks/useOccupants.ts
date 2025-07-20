@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { internalDex } from '../../../constants/internalDexData';
-import { MapId, mapsRecord } from '../../../constants/maps/mapsRecord';
+import { internalDex } from '../../../constants/gameData/internalDexData';
+import { MapId, mapsRecord } from '../../../constants/gameData/maps/mapsRecord';
 import { PokemonName } from '../../../constants/pokemonNames';
 import { getMiddleOfThree } from '../../../functions/getMiddleOfThree';
 import { getRandomOrientation } from '../../../functions/getNextClockwiseDirection';

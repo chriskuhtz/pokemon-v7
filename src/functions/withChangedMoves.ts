@@ -1,4 +1,4 @@
-import { MoveName } from '../constants/checkLists/movesCheckList';
+import { MoveName } from '../constants/movesCheckList';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 
 export const withChangedMoves = (

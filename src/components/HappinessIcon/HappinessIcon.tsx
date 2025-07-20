@@ -1,5 +1,5 @@
 import { FaHeart } from 'react-icons/fa';
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
 
 export const HappinessIcon = ({ value }: { value: number }) => {
 	return (

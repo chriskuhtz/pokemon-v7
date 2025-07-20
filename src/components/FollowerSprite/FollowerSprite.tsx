@@ -1,6 +1,6 @@
 import { useContext, useMemo } from 'react';
-import { fps } from '../../constants/gameData';
-import { internalDex } from '../../constants/internalDexData';
+import { fps } from '../../constants/gameData/gameData';
+import { internalDex } from '../../constants/gameData/internalDexData';
 import { getNextLocation } from '../../functions/getNextLocation';
 import { getOppositeDirection } from '../../functions/getOppositeDirection';
 import { isPassable } from '../../functions/isPassable';

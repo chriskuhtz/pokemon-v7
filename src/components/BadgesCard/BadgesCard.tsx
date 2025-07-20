@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Card } from '../../uiComponents/Card/Card';
 import { Stack } from '../../uiComponents/Stack/Stack';

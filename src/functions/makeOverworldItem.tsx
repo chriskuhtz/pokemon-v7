@@ -1,4 +1,4 @@
-import { MapId } from '../constants/maps/mapsRecord';
+import { MapId } from '../constants/gameData/maps/mapsRecord';
 import { ItemType } from '../interfaces/Item';
 import { OverworldItem } from '../interfaces/OverworldMap';
 import { occupantHandled } from './occupantHandled';

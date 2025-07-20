@@ -1,4 +1,4 @@
-import { MapId, mapsRecord } from '../../constants/maps/mapsRecord';
+import { MapId, mapsRecord } from '../../constants/gameData/maps/mapsRecord';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import {
 	EvilTeam,

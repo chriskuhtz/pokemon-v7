@@ -1,4 +1,4 @@
-import { battleSpriteSize } from '../../constants/gameData';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { ItemType } from '../../interfaces/Item';
 

@@ -1,7 +1,7 @@
 import { useCallback, useContext } from 'react';
 import { SpriteIcon } from '../components/SpriteIcon/SpriteIcon';
-import { ONE_HOUR } from '../constants/gameData';
-import { mapDisplayNames } from '../constants/maps/mapsRecord';
+import { ONE_HOUR } from '../constants/gameData/gameData';
+import { mapDisplayNames } from '../constants/gameData/maps/mapsRecord';
 import { getRandomEntry } from '../functions/filterTargets';
 import { getRandomAvailableRoute } from '../functions/getRandomAvailableRoute';
 import { makeTroubleMakers } from '../functions/troubleMakers/troubleMakers';

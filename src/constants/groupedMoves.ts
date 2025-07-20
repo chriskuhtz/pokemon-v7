@@ -1,6 +1,6 @@
 import { getHeldItem } from '../functions/getHeldItem';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { MoveName } from './checkLists/movesCheckList';
+import { MoveName } from './movesCheckList';
 
 export const secondTurnMoves = [
 	'razor-wind',

@@ -1,10 +1,7 @@
 import { useFetch } from '@potfisch-industries-npm/usefetch';
-import {
-	AbilityName,
-	abilityNames,
-} from '../constants/checkLists/completed/abilityCheckList';
-import { MoveName } from '../constants/checkLists/movesCheckList';
-import { internalDex } from '../constants/internalDexData';
+import { AbilityName, abilityNames } from '../constants/abilityCheckList';
+import { internalDex } from '../constants/gameData/internalDexData';
+import { MoveName } from '../constants/movesCheckList';
 import { calculateLevelData } from '../functions/calculateLevelData';
 import { getRandomEntry } from '../functions/filterTargets';
 import { getEvAwards } from '../functions/getEvAwards';

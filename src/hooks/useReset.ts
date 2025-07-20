@@ -2,7 +2,7 @@ import { useCallback, useContext } from 'react';
 import {
 	localStorageLocationId,
 	localStorageSaveFileId,
-} from '../constants/gameData';
+} from '../constants/gameData/gameData';
 import { LocationContext } from './LocationProvider';
 import { SaveFileContext } from './useSaveFile';
 

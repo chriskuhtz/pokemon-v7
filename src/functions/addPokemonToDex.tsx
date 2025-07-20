@@ -1,4 +1,4 @@
-import { MapId } from '../constants/maps/mapsRecord';
+import { MapId } from '../constants/gameData/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { Pokedex } from '../interfaces/SaveFile';
 

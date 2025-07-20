@@ -1,4 +1,4 @@
-import { MapId } from '../constants/maps/mapsRecord';
+import { MapId } from '../constants/gameData/maps/mapsRecord';
 import { SaveFile } from '../interfaces/SaveFile';
 import { getRandomEntry } from './filterTargets';
 

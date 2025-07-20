@@ -1,5 +1,5 @@
-import { isMove } from '../constants/checkLists/movesCheckList';
 import { thrashingMoves } from '../constants/groupedMoves';
+import { isMove } from '../constants/movesCheckList';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import {
 	isHealingItem,

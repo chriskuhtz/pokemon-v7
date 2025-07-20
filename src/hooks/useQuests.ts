@@ -1,5 +1,5 @@
 import { useContext, useMemo } from 'react';
-import { QuestName, QuestsRecord } from '../constants/questsRecord';
+import { QuestName, QuestsRecord } from '../constants/gameData/questsRecord';
 import { QuestStatus } from '../interfaces/Quest';
 import { SaveFileContext } from './useSaveFile';
 

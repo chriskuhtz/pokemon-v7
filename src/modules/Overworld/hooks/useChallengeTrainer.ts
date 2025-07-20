@@ -1,5 +1,4 @@
 import { useCallback, useContext } from 'react';
-import { trainers } from '../../../constants/trainersRecord';
 import { makeEVTeam } from '../../../functions/makeRandomTeam';
 import { makeRandomTrainer } from '../../../functions/makeRandomTrainer';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
@@ -7,6 +6,7 @@ import { Challenger } from '../../../interfaces/Challenger';
 import { EmptyInventory } from '../../../interfaces/Inventory';
 import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 import { Stat } from '../../../interfaces/StatObject';
+import { trainers } from '../../TrainingField/trainersRecord';
 
 export const useChallengeTrainer = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);

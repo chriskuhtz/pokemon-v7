@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { MapId } from '../../../constants/maps/mapsRecord';
+import { MapId } from '../../../constants/gameData/maps/mapsRecord';
 import { getNextFieldOccupant } from '../../../functions/getNextFieldOccupant';
 import { getOverworldDistance } from '../../../functions/getOverworldDistance';
 import { isPassable } from '../../../functions/isPassable';
