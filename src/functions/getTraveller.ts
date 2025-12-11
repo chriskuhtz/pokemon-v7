@@ -62,7 +62,6 @@ import {
 	travellingMerchantRouteS1W1,
 	travellingMerchantRouteW1,
 } from '../modules/TravellingMerchant/TravellingMerchant';
-import { getEntryWithOverflow } from './filterTargets';
 
 /**
  *
@@ -177,7 +176,7 @@ export const getTraveller = (
 		return options[mapIndex].flat();
 	}
 
-	return getEntryWithOverflow<Occupant[]>(
+	return ArrayHelpers.getEntryWithOverflow<Occupant[]>(
 		options[mapIndex],
 		dayIndex + mapIndex
 	);

@@ -1,4 +1,3 @@
-import { getRandomEntry } from '../functions/filterTargets';
 import { Stat } from './StatObject';
 
 export const natureNames = [
@@ -62,5 +61,5 @@ export const natures: Record<Nature, { buff?: Stat; debuff?: Stat }> = {
 export type NatureFactor = 0.9 | 1 | 1.1;
 
 export const getRandomNature = () => {
-	return getRandomEntry([...natureNames]);
+	return ArrayHelpers.getRandomEntry([...natureNames]);
 };

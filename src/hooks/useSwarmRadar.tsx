@@ -6,14 +6,13 @@ import {
 	mapsRecord,
 } from '../constants/gameData/maps/mapsRecord';
 import { pokemonNames } from '../constants/pokemonNames';
-import { getRandomEntry } from '../functions/filterTargets';
 import { getRandomAvailableRoute } from '../functions/getRandomAvailableRoute';
 import { getRandomPosition } from '../functions/getRandomPosition';
 import { getRampagers, getRandomSwarmMon } from '../functions/internalDex';
+import { SwarmType } from '../interfaces/Pokedex';
 import { PokemonSwarm } from '../interfaces/SaveFile';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
-import { SwarmType } from '../interfaces/Pokedex';
 
 export type ScanMode = 'WEAK' | 'STRONG' | 'DISTORTION' | 'RAMPAGE';
 export const useSwarmRadar = (): {
@@ -72,7 +71,7 @@ export const useSwarmRadar = (): {
 			if (saveFile.currentRampagingPokemon) {
 				return;
 			}
-			const pokemon = getRandomEntry(getRampagers());
+			const pokemon = ArrayHelpers.getRandomEntry(getRampagers());
 
 			addMessage({ message: `rampaging ${pokemon} detected at ${route}` });
 			const { x, y } = getRandomPosition(mapsRecord[route]);
@@ -125,7 +124,7 @@ export const useSwarmRadar = (): {
 					if (saveFile.campUpgrades['space distortion radar']) {
 						options.push('SPACE_DISTORTION');
 					}
-					const randomOption = getRandomEntry(options);
+					const randomOption = ArrayHelpers.getRandomEntry(options);
 					const mon = getRandomSwarmMon(randomOption);
 
 					return {
@@ -149,7 +148,10 @@ export const useSwarmRadar = (): {
 
 			let newSwarm = makeSwarm();
 			if (saveFile.settings?.randomSwarms) {
-				newSwarm = { ...newSwarm, pokemon: getRandomEntry([...pokemonNames]) };
+				newSwarm = {
+					...newSwarm,
+					pokemon: ArrayHelpers.getRandomEntry([...pokemonNames]),
+				};
 			}
 			addSwarmMessage(newSwarm);
 

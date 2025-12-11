@@ -6,15 +6,13 @@ import React, {
 	useMemo,
 	useState,
 } from 'react';
-import {
-	localStorageLocationId,
-	startingLocation,
-} from '../constants/gameData/gameData';
+import { startingLocation } from '../constants/gameData/gameData';
 import {
 	resetChallengeFielders,
 	resetEliteFour,
 } from '../functions/resetChallengeFielders';
 import { CharacterLocationData } from '../interfaces/SaveFile';
+import { GameDataContext } from './useGameData';
 import { SaveFileContext } from './useSaveFile';
 
 export interface LocationContextType {
@@ -26,13 +24,14 @@ export interface LocationContextType {
 export const LocationContext = React.createContext({} as LocationContextType);
 
 export const LocationProvider = ({ children }: { children: ReactNode }) => {
+	const { locationId } = useContext(GameDataContext);
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
 	const initValue: CharacterLocationData = useMemo(() => {
-		const local = window.localStorage.getItem(localStorageLocationId);
+		const local = window.localStorage.getItem(locationId);
 		return local
 			? (JSON.parse(local) as CharacterLocationData)
 			: startingLocation;
-	}, []);
+	}, [locationId]);
 	const [location, s] = useState<CharacterLocationData>(initValue);
 
 	const setLocation = useCallback(
@@ -71,11 +70,8 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
 
 	//SYNC WITH LOCAL STORAGE
 	useEffect(() => {
-		window.localStorage.setItem(
-			localStorageLocationId,
-			JSON.stringify(location)
-		);
-	}, [location]);
+		window.localStorage.setItem(locationId, JSON.stringify(location));
+	}, [location, locationId]);
 
 	// //RESCUE FROM SOFT LOCK
 	// useEffect(() => {

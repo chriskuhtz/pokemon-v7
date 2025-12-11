@@ -12,7 +12,6 @@ import { getRandomNature } from '../interfaces/Natures';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { CatchStreak, PokemonSwarm, SaveFile } from '../interfaces/SaveFile';
 import { StatObject } from '../interfaces/StatObject';
-import { getRandomEntry } from './filterTargets';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getTimeOfDay } from './getTimeOfDay';
 import { getRandomEncounter, isNotCatchable } from './internalDex';
@@ -94,7 +93,7 @@ export const determineWildPokemon = (
 			),
 		];
 	} else if (lure === 'lure') {
-		const name = getRandomEntry(
+		const name = ArrayHelpers.getRandomEntry(
 			Object.entries(lowBstPokemon).filter(([p]) =>
 				isNotCatchable(internalDex[p as PokemonName])
 			)
@@ -111,7 +110,7 @@ export const determineWildPokemon = (
 			}),
 		];
 	} else if (lure === 'super-lure') {
-		const name = getRandomEntry(
+		const name = ArrayHelpers.getRandomEntry(
 			Object.entries(midBstPokemon).filter(([p]) =>
 				isNotCatchable(internalDex[p as PokemonName])
 			)
@@ -128,7 +127,7 @@ export const determineWildPokemon = (
 			}),
 		];
 	} else if (lure === 'max-lure') {
-		const name = getRandomEntry(
+		const name = ArrayHelpers.getRandomEntry(
 			Object.entries(highBstPokemon).filter(([p]) =>
 				isNotCatchable(internalDex[p as PokemonName])
 			)

@@ -1,6 +1,5 @@
 import { useCallback, useContext } from 'react';
 import { battleSpriteSize } from '../constants/gameData/gameData';
-import { getRandomIndex } from '../functions/filterTargets';
 import { getItemUrl } from '../functions/getItemUrl';
 import { getHoneyEncounters } from '../functions/internalDex';
 import {
@@ -67,7 +66,9 @@ export const useHoneyTree = () => {
 									team: [
 										{
 											...HONEY_ENCOUNTER_OPTIONS[
-												getRandomIndex(HONEY_ENCOUNTER_OPTIONS.length)
+												ArrayHelpers.getRandomIndex(
+													HONEY_ENCOUNTER_OPTIONS.length
+												)
 											],
 											caughtOnMap: location.mapId,
 										},

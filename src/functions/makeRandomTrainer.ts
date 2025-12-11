@@ -8,7 +8,6 @@ import {
 	tier5trainers,
 	trainers,
 } from '../modules/TrainingField/trainersRecord';
-import { getRandomEntry } from './filterTargets';
 
 export const makeRandomTrainer = (
 	saveFile: SaveFile,
@@ -31,7 +30,7 @@ export const makeRandomTrainer = (
 	if (tier === 5) {
 		all = tier5trainers;
 	}
-	return getRandomEntry(
+	return ArrayHelpers.getRandomEntry(
 		all.filter((t) => {
 			let res = true;
 			if (t.availableAfter) {

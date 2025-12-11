@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { MdEdit } from 'react-icons/md';
 import {
 	battleSpriteSize,
@@ -12,7 +12,10 @@ import { getStats } from '../../../functions/getStats';
 import { getTypeNames } from '../../../functions/getTypeNames';
 import { isOwnedPokemonKO } from '../../../functions/isKo';
 import { replaceRouteName } from '../../../functions/replaceRouteName';
-import { EvolutionReducerPayload } from '../../../hooks/useSaveFile';
+import {
+	EvolutionReducerPayload,
+	SaveFileContext,
+} from '../../../hooks/useSaveFile';
 import { Inventory } from '../../../interfaces/Inventory';
 import { isKeyItem, ItemType } from '../../../interfaces/Item';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
@@ -50,6 +53,9 @@ export const OwnedPokemonCardContent = ({
 	setNickName: (x: string | undefined) => void;
 	evolve: (x: EvolutionReducerPayload) => void;
 }) => {
+	const {
+		saveFile: { settings },
+	} = useContext(SaveFileContext);
 	const [heldItemMenuOpen, setHeldItemMenuOpen] = useState<boolean>(false);
 	const [nickNameMenuOpen, setNickNameMenuOpen] = useState<boolean>(false);
 
@@ -132,7 +138,8 @@ export const OwnedPokemonCardContent = ({
 									ownedPokemon.xp,
 									ownedPokemon.growthRate,
 									ownedPokemon.nature,
-									ownedPokemon.effortValues
+									ownedPokemon.effortValues,
+									settings
 								).hp
 							}
 							damage={ownedPokemon.damage}

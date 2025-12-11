@@ -1,5 +1,3 @@
-import { getRandomEntry } from '../functions/filterTargets';
-
 export const stats = [
 	'hp',
 	'attack',
@@ -44,5 +42,5 @@ export const generateRandomStatObject = (
 
 export const getRandomBoostableStat = (omit?: Stat[]): Stat => {
 	const o = ['hp', 'evasion', 'accuracy', ...(omit ?? [])];
-	return getRandomEntry(stats.filter((s) => !o.includes(s)));
+	return ArrayHelpers.getRandomEntry(stats.filter((s) => !o.includes(s)));
 };

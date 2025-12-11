@@ -9,13 +9,9 @@ import {
 	portraitMode,
 } from '../../../constants/gameData/gameData';
 import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
-import { getHeldItem } from '../../../functions/getHeldItem';
+import { canRunOrSwitch } from '../../../functions/canRunOrSwitch';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { getPlayerPokemon } from '../../../functions/getPlayerPokemon';
-import { hasAilment } from '../../../functions/hasAilment';
-import { hasType } from '../../../functions/hasType';
-import { isOnGround } from '../../../functions/isOnGround';
-import { isTrapped } from '../../../functions/isTrapped';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
@@ -34,50 +30,6 @@ import {
 	ChooseActionPayload,
 } from '../BattleField';
 
-export const canRunOrSwitch = (
-	controlled: BattlePokemon,
-	battleFieldEffects: BattleFieldEffect[]
-): boolean => {
-	const runAwayer =
-		controlled.ability === 'run-away' ||
-		getHeldItem(controlled) === 'smoke-ball' ||
-		getHeldItem(controlled) === 'shed-shell';
-
-	if (runAwayer) {
-		return true;
-	}
-	const trapped = isTrapped(controlled);
-	const shadowTagged =
-		controlled.ability !== 'shadow-tag' &&
-		battleFieldEffects.some(
-			(b) => b.type === 'shadow-tag' && b.ownerId !== controlled.ownerId
-		);
-	const arenaTrapped =
-		isOnGround(controlled) &&
-		battleFieldEffects.some(
-			(b) => b.type === 'arena-trap' && b.ownerId !== controlled.ownerId
-		);
-	const magnetPulled =
-		hasType(controlled, 'steel') &&
-		battleFieldEffects.some(
-			(b) => b.type === 'magnet-pull' && b.ownerId !== controlled.ownerId
-		);
-	const spiderWebbed = battleFieldEffects.some(
-		(b) => b.type === 'spider-web' && b.ownerId !== controlled.ownerId
-	);
-	const meanLooked = hasAilment(controlled, 'mean-looked');
-	const ingrained = hasAilment(controlled, 'ingrained');
-
-	return !(
-		trapped ||
-		shadowTagged ||
-		arenaTrapped ||
-		magnetPulled ||
-		spiderWebbed ||
-		meanLooked ||
-		ingrained
-	);
-};
 export function ActionSelection({
 	controlled,
 	inventory,
@@ -99,7 +51,7 @@ export function ActionSelection({
 }) {
 	const [subgroup, setSubGroup] = useState<'MOVES' | 'ITEMS' | undefined>();
 	const {
-		saveFile: { settings },
+		saveFile: { settings, playerId },
 	} = useContext(SaveFileContext);
 
 	const allowedItems: [ItemType, number][] = useMemo(
@@ -135,7 +87,7 @@ export function ActionSelection({
 					((isHealingItem(item) ||
 						isPPRestorationItem(item) ||
 						isXItem(item)) &&
-						getPlayerPokemon(allTargets).some((t) =>
+						getPlayerPokemon(allTargets, playerId).some((t) =>
 							canBenefitFromItem(t, item)
 						))
 				);

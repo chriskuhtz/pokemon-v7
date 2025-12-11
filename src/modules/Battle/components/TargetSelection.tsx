@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
 import {
@@ -7,6 +7,7 @@ import {
 } from '../../../constants/gameData/gameData';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { isPlayerPokemon } from '../../../functions/getPlayerPokemon';
+import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { MoveDto } from '../../../interfaces/Move';
 import { Card } from '../../../uiComponents/Card/Card';
@@ -29,6 +30,9 @@ export function TargetSelection({
 	setChosenAction: (x: ActionType | undefined) => void;
 	moveData?: MoveDto;
 }) {
+	const {
+		saveFile: { playerId },
+	} = useContext(SaveFileContext);
 	useEffect(() => {
 		//choose the only available option, skip menu
 		if (targets.length === 1) {
@@ -101,7 +105,10 @@ export function TargetSelection({
 								<PokemonSprite
 									sizeFactor={0.8}
 									name={t.name}
-									config={{ shiny: t.shiny, back: isPlayerPokemon(t) }}
+									config={{
+										shiny: t.shiny,
+										back: isPlayerPokemon(t, playerId),
+									}}
 								/>
 							}
 							content={t.data.name}

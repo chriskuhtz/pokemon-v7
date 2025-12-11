@@ -19,8 +19,8 @@ import { FaGlasses } from 'react-icons/fa';
 import { battleSpriteSize } from '../../../../../constants/gameData/gameData';
 import { changeMovePP } from '../../../../../functions/changeMovePP';
 import { chooseOpponentAction } from '../../../../../functions/chooseOpponentAction';
-import { getSettings } from '../../../../../functions/getPlayerId';
 import { OPPO_ID } from '../../../../../functions/makeChallengerPokemon';
+import { SettingsObject } from '../../../../../interfaces/SaveFile';
 import { BattleTerrain, TerrainObject } from '../../useBattleTerrain';
 import { WeatherObject } from '../../useBattleWeather';
 import { assignActionToPokemon } from '../../useChooseAction';
@@ -45,6 +45,8 @@ export const handleAllAttackCategories = ({
 	logDamage,
 	setTerrain,
 	battleRound,
+	playerId,
+	settings,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
@@ -65,6 +67,8 @@ export const handleAllAttackCategories = ({
 	logDamage: (x: number) => void;
 	setTerrain: (x: TerrainObject) => void;
 	battleRound: number;
+	playerId: string;
+	settings: SettingsObject | undefined;
 }) => {
 	let updatedPokemon = [...pokemon];
 	const { updatedPokemon: ua, targets } = handleAttackStart({
@@ -76,6 +80,7 @@ export const handleAllAttackCategories = ({
 		battleFieldEffects,
 		dampy,
 		terrain,
+		playerId,
 	});
 
 	updatedPokemon = ua;
@@ -113,6 +118,7 @@ export const handleAllAttackCategories = ({
 					terrain,
 					setTerrain,
 					setWeather: setBattleWeather,
+					playerId,
 				});
 			case 'heal':
 				return handleHealAttack({
@@ -240,8 +246,6 @@ export const handleAllAttackCategories = ({
 		};
 	});
 
-	const settings = getSettings();
-
 	if (settings?.smarterOpponents) {
 		const reconsidered = attackHandled.map((p) => {
 			if (
@@ -258,6 +262,7 @@ export const handleAllAttackCategories = ({
 					effects: battleFieldEffects,
 					weather: battleWeather,
 					terrain,
+					playerId,
 				});
 
 				updated = assignActionToPokemon({

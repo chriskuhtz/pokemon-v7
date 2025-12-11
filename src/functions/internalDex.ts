@@ -9,7 +9,6 @@ import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { InternalDexEntry, SwarmType } from '../interfaces/Pokedex';
 import { PokemonType, pokemonTypes } from '../interfaces/PokemonType';
 import { Stat } from '../interfaces/StatObject';
-import { getRandomEntry } from './filterTargets';
 import { TimeOfDay } from './getTimeOfDay';
 
 export const byType: Record<PokemonType, PokemonName[]> = Object.fromEntries(
@@ -44,7 +43,7 @@ export const getSwarmOptions = (type: SwarmType) => {
 };
 
 export const getRandomSwarmMon = (type: SwarmType): PokemonName => {
-	return getRandomEntry(getSwarmOptions(type));
+	return ArrayHelpers.getRandomEntry(getSwarmOptions(type));
 };
 
 export const getAllBerryLureMonForRoute = (map: MapId): PokemonName[] => {
@@ -65,7 +64,7 @@ export const getBerryLureMon = (map: MapId, type: PokemonType) => {
 	if (options.length === 0) {
 		return;
 	}
-	return getRandomEntry(options);
+	return ArrayHelpers.getRandomEntry(options);
 };
 
 export const getAllEncountersFor = (
@@ -128,7 +127,7 @@ export const getRandomEncounter = (
 		return [p];
 	});
 
-	const chosen = getRandomEntry(flatMapped);
+	const chosen = ArrayHelpers.getRandomEntry(flatMapped);
 	const xp = Math.floor(
 		chosen.maxXp - Math.random() * (chosen.maxXp - chosen.minXp)
 	);

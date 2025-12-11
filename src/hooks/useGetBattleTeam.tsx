@@ -1,22 +1,23 @@
 import { useFetch } from '@potfisch-industries-npm/usefetch';
+import { useContext } from 'react';
 import { AbilityName, abilityNames } from '../constants/abilityCheckList';
 import { internalDex } from '../constants/gameData/internalDexData';
 import { MoveName } from '../constants/movesCheckList';
 import { calculateLevelData } from '../functions/calculateLevelData';
-import { getRandomEntry } from '../functions/filterTargets';
+import { determineGender } from '../functions/determineGender';
 import { getEvAwards } from '../functions/getEvAwards';
 import { getHeldItem } from '../functions/getHeldItem';
-import { getSettings } from '../functions/getPlayerId';
 import { getStats } from '../functions/getStats';
 import { deAlternate } from '../functions/handleAlternateForms';
 import { maybeGetHeldItemFromData } from '../functions/maybeGetHeldItemFromData';
 import { moveIsAvailable } from '../functions/moveIsAvailable';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { MoveDto } from '../interfaces/Move';
-import { OwnedPokemon, PokemonGender } from '../interfaces/OwnedPokemon';
+import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { PokemonData } from '../interfaces/PokemonData';
 import { PokemonSpeciesData } from '../interfaces/PokemonSpeciesData';
 import { EmptyStatObject } from '../interfaces/StatObject';
+import { SaveFileContext } from './useSaveFile';
 
 export interface BattleTeamConfig {
 	assignLearnsetMoves?: boolean;
@@ -30,10 +31,13 @@ export const useGetBattleTeam = (
 	config: BattleTeamConfig
 ) => {
 	const { assignGender, assignLearnsetMoves, assignHeldItem } = config;
+	const {
+		saveFile: { settings },
+	} = useContext(SaveFileContext);
 	return useFetch<BattlePokemon[]>(() =>
 		Promise.all(
 			initTeam.map(async (pokemon) => {
-				const { randomAbilities } = getSettings() ?? {};
+				const { randomAbilities } = settings ?? {};
 				const { name, xp } = pokemon;
 				const data: Promise<PokemonData> = (
 					await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
@@ -73,7 +77,7 @@ export const useGetBattleTeam = (
 						return pokemon.ability;
 					}
 					if (possibleAbilities.length > 0) {
-						const res = getRandomEntry(possibleAbilities);
+						const res = ArrayHelpers.getRandomEntry(possibleAbilities);
 						if (randomAbilities) {
 							const index = abilityNames.findIndex((a) => a === res);
 							const dexId = internalDex[pokemon.name].dexId;
@@ -180,7 +184,7 @@ export const useGetBattleTeam = (
 					: pokemon.gender;
 
 				const heldItemName = assignHeldItem
-					? maybeGetHeldItemFromData(fetchedData)
+					? maybeGetHeldItemFromData(fetchedData, settings)
 					: getHeldItem(pokemon);
 				const battleMon: BattlePokemon = {
 					...pokemon,
@@ -203,7 +207,8 @@ export const useGetBattleTeam = (
 						pokemon.xp,
 						pokemon.growthRate,
 						pokemon.nature,
-						pokemon.effortValues
+						pokemon.effortValues,
+						settings
 					),
 					statBoosts: EmptyStatObject,
 					capture_rate: capture_rate,
@@ -226,15 +231,4 @@ export const useGetBattleTeam = (
 			})
 		)
 	);
-};
-
-const determineGender = (gender_rate: number): PokemonGender => {
-	if (gender_rate === -1) {
-		return 'GENDERLESS';
-	}
-	if (Math.random() < gender_rate / 8) {
-		return 'FEMALE';
-	}
-
-	return 'MALE';
 };

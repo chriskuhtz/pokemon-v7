@@ -1,8 +1,8 @@
 import { battleSpriteSize } from '../../../../../constants/gameData/gameData';
 import { SELF_DESTRUCTING_MOVES } from '../../../../../constants/groupedMoves';
 import { determineMiss } from '../../../../../functions/determineMiss';
-import { getRandomTarget } from '../../../../../functions/filterTargets';
 import { getActualTarget } from '../../../../../functions/getActualTargetId';
+import { getRandomTarget } from '../../../../../functions/getRandomTarget';
 import { hasAilment } from '../../../../../functions/hasAilment';
 import { Message } from '../../../../../hooks/useMessageQueue';
 import { BattleAttack } from '../../../../../interfaces/BattleActions';
@@ -24,6 +24,7 @@ export const handleAttackStart = ({
 	battleFieldEffects,
 	dampy,
 	terrain,
+	playerId,
 }: {
 	attacker: BattlePokemon;
 	pokemon: BattlePokemon[];
@@ -33,6 +34,7 @@ export const handleAttackStart = ({
 	battleFieldEffects: BattleFieldEffect[];
 	dampy: { name: string } | undefined;
 	terrain: BattleTerrain | undefined;
+	playerId: string;
 }): {
 	updatedPokemon: BattlePokemon[];
 	targets: BattlePokemon[];
@@ -68,6 +70,7 @@ export const handleAttackStart = ({
 						user: attacker,
 						chosenAction: move.name,
 						onlyOpponents: false,
+						playerId,
 					}),
 				];
 			case 'user':
@@ -103,6 +106,7 @@ export const handleAttackStart = ({
 				user: attacker,
 				chosenAction: move.name,
 				onlyOpponents: false,
+				playerId,
 			}),
 		];
 	}

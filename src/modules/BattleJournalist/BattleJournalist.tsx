@@ -1,13 +1,13 @@
 import { useCallback, useContext, useMemo, useState } from 'react';
 import { IoMdCloseCircle } from 'react-icons/io';
 import { AbilityInfoButton } from '../../components/AbilityInfoButton/AbilityInfoButton';
+import { BstSection } from '../../components/BstSection/BstSection';
 import {
 	ItemInfoButton,
 	NatureInfoButton,
 } from '../../components/ItemInfoButton/ItemInfoButton';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { MovesDisplay } from '../../components/OwnedPokemonCard/components/MovesDisplay';
-import { BstSection } from '../../components/OwnedPokemonCard/components/StatDisplay';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { SpriteIcon } from '../../components/SpriteIcon/SpriteIcon';
 import {
@@ -37,7 +37,6 @@ import { silver } from '../../constants/gameData/maps/occupants/silver';
 import { trainerSurge } from '../../constants/gameData/maps/occupants/surge';
 import { will } from '../../constants/gameData/maps/occupants/will';
 import { calculateLevelData } from '../../functions/calculateLevelData';
-import { getEntryWithOverflow } from '../../functions/filterTargets';
 import { getTypeNames } from '../../functions/getTypeNames';
 import { useGetBattleTeam } from '../../hooks/useGetBattleTeam';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
@@ -261,7 +260,10 @@ export const BattleJournalist = (): JSX.Element => {
 				<Stack mode="column">
 					<h3>Trade Snacks for a look at the Journalists Notes:</h3>
 					{options.map((data, index) => {
-						const cost = getEntryWithOverflow(moveUnlockPayments, index);
+						const cost = ArrayHelpers.getEntryWithOverflow(
+							moveUnlockPayments,
+							index
+						);
 						return (
 							<Card
 								disabled={saveFile.bag[cost] <= 0}

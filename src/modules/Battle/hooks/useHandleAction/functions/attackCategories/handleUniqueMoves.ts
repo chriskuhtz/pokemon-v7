@@ -2,10 +2,7 @@ import { protectMoves } from '../../../../../../constants/groupedMoves';
 import { applySecondaryAilmentToPokemon } from '../../../../../../functions/applySecondaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from '../../../../../../functions/applyStatChangeToPokemon';
 import { changeMovePP } from '../../../../../../functions/changeMovePP';
-import {
-	getRandomEntry,
-	getRandomIndex,
-} from '../../../../../../functions/filterTargets';
+
 import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMovesArray } from '../../../../../../functions/getMovesArray';
 import { handleMimicOrSketch } from '../../../../../../functions/handleMimic';
@@ -73,7 +70,8 @@ export const handleUniqueMoves = ({
 	}
 	if (move.name === 'disable' && !targetIsAromaVeiled) {
 		const moves = getMovesArray(target, { filterOutDisabled: false });
-		const randomMoveName = moves[getRandomIndex(moves.length)].name;
+		const randomMoveName =
+			moves[ArrayHelpers.getRandomIndex(moves.length)].name;
 		if (moves.length === 1) {
 			addMessage({ message: `cant disable ${target.data.name}'s only move` });
 		} else
@@ -187,8 +185,8 @@ export const handleUniqueMoves = ({
 		};
 	}
 	if (move.name === 'conversion') {
-		const newType = getRandomEntry(getMovesArray(updatedAttacker)).data.type
-			.name;
+		const newType = ArrayHelpers.getRandomEntry(getMovesArray(updatedAttacker))
+			.data.type.name;
 		updatedAttacker = applySecondaryAilmentToPokemon({
 			pokemon: updatedAttacker,
 			ailment: 'color-changed',
@@ -209,7 +207,7 @@ export const handleUniqueMoves = ({
 	}
 	if (move.name === 'conversion-2') {
 		if (updatedAttacker.lastReceivedDamage) {
-			const newType = getRandomEntry(
+			const newType = ArrayHelpers.getRandomEntry(
 				typeEffectivenessChart[
 					updatedAttacker.lastReceivedDamage.attack.data.type.name
 				].isNotVeryEffectiveAgainst
@@ -229,7 +227,7 @@ export const handleUniqueMoves = ({
 		if (targetMoves.length === 0) {
 			addMessage({ message: 'It failed' });
 		} else {
-			const chosenMove = getRandomEntry(targetMoves);
+			const chosenMove = ArrayHelpers.getRandomEntry(targetMoves);
 			addMessage({ message: `${chosenMove.name}'s PP was lowered` });
 
 			updatedTarget = {
@@ -239,7 +237,7 @@ export const handleUniqueMoves = ({
 					usedPP:
 						updatedTarget.firstMove.name === chosenMove.name
 							? updatedTarget.firstMove.usedPP -
-							  getRandomEntry([1, 2, 3, 4, 5, 6])
+							  ArrayHelpers.getRandomEntry([1, 2, 3, 4, 5, 6])
 							: updatedTarget.firstMove.usedPP,
 				},
 				secondMove: updatedTarget.secondMove
@@ -248,7 +246,7 @@ export const handleUniqueMoves = ({
 							usedPP:
 								updatedTarget.secondMove.name === chosenMove.name
 									? updatedTarget.secondMove.usedPP -
-									  getRandomEntry([1, 2, 3, 4, 5, 6])
+									  ArrayHelpers.getRandomEntry([1, 2, 3, 4, 5, 6])
 									: updatedTarget.secondMove.usedPP,
 					  }
 					: undefined,
@@ -258,7 +256,7 @@ export const handleUniqueMoves = ({
 							usedPP:
 								updatedTarget.thirdMove.name === chosenMove.name
 									? updatedTarget.thirdMove.usedPP -
-									  getRandomEntry([1, 2, 3, 4, 5, 6])
+									  ArrayHelpers.getRandomEntry([1, 2, 3, 4, 5, 6])
 									: updatedTarget.thirdMove.usedPP,
 					  }
 					: undefined,
@@ -268,7 +266,7 @@ export const handleUniqueMoves = ({
 							usedPP:
 								updatedTarget.fourthMove.name === chosenMove.name
 									? updatedTarget.fourthMove.usedPP -
-									  getRandomEntry([1, 2, 3, 4, 5, 6])
+									  ArrayHelpers.getRandomEntry([1, 2, 3, 4, 5, 6])
 									: updatedTarget.fourthMove.usedPP,
 					  }
 					: undefined,

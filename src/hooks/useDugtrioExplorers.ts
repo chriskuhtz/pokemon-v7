@@ -1,6 +1,5 @@
 import { useCallback, useContext } from 'react';
 import { ONE_HOUR } from '../constants/gameData/gameData';
-import { getRandomEntry } from '../functions/filterTargets';
 import { joinInventories } from '../interfaces/Inventory';
 import { undergroundTable } from '../interfaces/Item';
 import { Occupant } from '../interfaces/OverworldMap';
@@ -23,7 +22,7 @@ export const useDugtrioExplorers = () => {
 		const now = new Date().getTime();
 
 		if (!saveFile.dugtrioReadyAt || now > saveFile.dugtrioReadyAt) {
-			const foragedItem = getRandomEntry(undergroundTable);
+			const foragedItem = ArrayHelpers.getRandomEntry(undergroundTable);
 			const amount = 1;
 			addMultipleMessages([
 				{ message: 'Trio Trio Trio' },

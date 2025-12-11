@@ -1,4 +1,3 @@
-import { getRandomEntry } from '../../../../functions/filterTargets';
 import { getHighestXpOnTeam } from '../../../../functions/getHighestXpOnTeam';
 import { makeChallengerPokemon } from '../../../../functions/makeChallengerPokemon';
 import {
@@ -335,7 +334,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
 	};
 	for (let i = 0; i < numberOfMembers(); i++) {
 		team.push(
-			getRandomEntry(
+			ArrayHelpers.getRandomEntry(
 				possibilities.filter((p) => team.every((t) => t.name !== p.name))
 			)
 		);

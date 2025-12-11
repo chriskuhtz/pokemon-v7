@@ -1,7 +1,7 @@
 import { useCallback, useContext, useMemo, useState } from 'react';
-import { getPlayerId } from '../../../functions/getPlayerId';
 import { OPPO_ID } from '../../../functions/makeChallengerPokemon';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
+import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { WeatherType } from '../../../interfaces/Weather';
 import { BattleFieldEffect } from '../BattleField';
@@ -11,6 +11,9 @@ export const useBattleFieldEffects = (
 	onFieldTeam: BattlePokemon[],
 	battleWeather: WeatherType | undefined
 ) => {
+	const {
+		saveFile: { playerId },
+	} = useContext(SaveFileContext);
 	const { addMessage } = useContext(MessageQueueContext);
 	const [bf, setBattleFieldEffects] = useState<BattleFieldEffect[]>([]);
 
@@ -77,31 +80,31 @@ export const useBattleFieldEffects = (
 			res.push({ type: 'pressure', ownerId: OPPO_ID, duration: 9000 });
 		}
 		if (onFieldTeam.some((p) => p.ability === 'pressure')) {
-			res.push({ type: 'pressure', ownerId: getPlayerId(), duration: 9000 });
+			res.push({ type: 'pressure', ownerId: playerId, duration: 9000 });
 		}
 		if (onFieldOpponents.some((p) => p.ability === 'plus')) {
 			res.push({ type: 'plus', ownerId: OPPO_ID, duration: 9000 });
 		}
 		if (onFieldTeam.some((p) => p.ability === 'plus')) {
-			res.push({ type: 'plus', ownerId: getPlayerId(), duration: 9000 });
+			res.push({ type: 'plus', ownerId: playerId, duration: 9000 });
 		}
 		if (onFieldOpponents.some((p) => p.ability === 'minus')) {
 			res.push({ type: 'minus', ownerId: OPPO_ID, duration: 9000 });
 		}
 		if (onFieldTeam.some((p) => p.ability === 'minus')) {
-			res.push({ type: 'minus', ownerId: getPlayerId(), duration: 9000 });
+			res.push({ type: 'minus', ownerId: playerId, duration: 9000 });
 		}
 		if (onFieldOpponents.some((p) => p.ability === 'shadow-tag')) {
 			res.push({ type: 'shadow-tag', ownerId: OPPO_ID, duration: 9000 });
 		}
 		if (onFieldTeam.some((p) => p.ability === 'shadow-tag')) {
-			res.push({ type: 'shadow-tag', ownerId: getPlayerId(), duration: 9000 });
+			res.push({ type: 'shadow-tag', ownerId: playerId, duration: 9000 });
 		}
 		if (onFieldOpponents.some((p) => p.ability === 'magnet-pull')) {
 			res.push({ type: 'magnet-pull', ownerId: OPPO_ID, duration: 9000 });
 		}
 		if (onFieldTeam.some((p) => p.ability === 'magnet-pull')) {
-			res.push({ type: 'magnet-pull', ownerId: getPlayerId(), duration: 9000 });
+			res.push({ type: 'magnet-pull', ownerId: playerId, duration: 9000 });
 		}
 		if (
 			onFieldOpponents.some(
@@ -115,25 +118,25 @@ export const useBattleFieldEffects = (
 				(p) => p.ability === 'flower-gift' && battleWeather === 'sun'
 			)
 		) {
-			res.push({ type: 'flower-gift', ownerId: getPlayerId(), duration: 9000 });
+			res.push({ type: 'flower-gift', ownerId: playerId, duration: 9000 });
 		}
 		if (onFieldOpponents.some((p) => p.ability === 'bad-dreams')) {
 			res.push({ type: 'bad-dreams', ownerId: OPPO_ID, duration: 9000 });
 		}
 		if (onFieldTeam.some((p) => p.ability === 'bad-dreams')) {
-			res.push({ type: 'bad-dreams', ownerId: getPlayerId(), duration: 9000 });
+			res.push({ type: 'bad-dreams', ownerId: playerId, duration: 9000 });
 		}
 		if (onFieldOpponents.some((p) => p.ability === 'battery')) {
 			res.push({ type: 'battery', ownerId: OPPO_ID, duration: 9000 });
 		}
 		if (onFieldTeam.some((p) => p.ability === 'battery')) {
-			res.push({ type: 'battery', ownerId: getPlayerId(), duration: 9000 });
+			res.push({ type: 'battery', ownerId: playerId, duration: 9000 });
 		}
 		if (onFieldOpponents.some((p) => p.ability === 'unnerve')) {
 			res.push({ type: 'unnerve', ownerId: OPPO_ID, duration: 9000 });
 		}
 		if (onFieldTeam.some((p) => p.ability === 'unnerve')) {
-			res.push({ type: 'unnerve', ownerId: getPlayerId(), duration: 9000 });
+			res.push({ type: 'unnerve', ownerId: playerId, duration: 9000 });
 		}
 		if (onFieldOpponents.some((p) => p.ability === 'victory-star')) {
 			res.push({ type: 'victory-star', ownerId: OPPO_ID, duration: 9000 });
@@ -141,7 +144,7 @@ export const useBattleFieldEffects = (
 		if (onFieldTeam.some((p) => p.ability === 'victory-star')) {
 			res.push({
 				type: 'victory-star',
-				ownerId: getPlayerId(),
+				ownerId: playerId,
 				duration: 9000,
 			});
 		}
@@ -151,7 +154,7 @@ export const useBattleFieldEffects = (
 		if (onFieldTeam.some((p) => p.ability === 'aroma-veil')) {
 			res.push({
 				type: 'aroma-veil',
-				ownerId: getPlayerId(),
+				ownerId: playerId,
 				duration: 9000,
 			});
 		}
@@ -161,7 +164,7 @@ export const useBattleFieldEffects = (
 		if (onFieldTeam.some((p) => p.ability === 'pastel-veil')) {
 			res.push({
 				type: 'pastel-veil',
-				ownerId: getPlayerId(),
+				ownerId: playerId,
 				duration: 9000,
 			});
 		}
@@ -171,7 +174,7 @@ export const useBattleFieldEffects = (
 		if (onFieldTeam.some((p) => p.ability === 'flower-veil')) {
 			res.push({
 				type: 'flower-veil',
-				ownerId: getPlayerId(),
+				ownerId: playerId,
 				duration: 9000,
 			});
 		}
@@ -181,7 +184,7 @@ export const useBattleFieldEffects = (
 		if (onFieldTeam.some((p) => p.ability === 'sweet-veil')) {
 			res.push({
 				type: 'sweet-veil',
-				ownerId: getPlayerId(),
+				ownerId: playerId,
 				duration: 9000,
 			});
 		}
@@ -191,7 +194,7 @@ export const useBattleFieldEffects = (
 		if (onFieldTeam.some((p) => p.ability === 'steely-spirit')) {
 			res.push({
 				type: 'steely-spirit',
-				ownerId: getPlayerId(),
+				ownerId: playerId,
 				duration: 9000,
 			});
 		}
@@ -202,7 +205,7 @@ export const useBattleFieldEffects = (
 		) {
 			res.push({
 				type: 'dark-aura',
-				ownerId: getPlayerId(),
+				ownerId: playerId,
 				duration: 9000,
 			});
 			res.push({ type: 'dark-aura', ownerId: OPPO_ID, duration: 9000 });
@@ -214,7 +217,7 @@ export const useBattleFieldEffects = (
 		) {
 			res.push({
 				type: 'fairy-aura',
-				ownerId: getPlayerId(),
+				ownerId: playerId,
 				duration: 9000,
 			});
 			res.push({ type: 'fairy-aura', ownerId: OPPO_ID, duration: 9000 });
@@ -226,7 +229,7 @@ export const useBattleFieldEffects = (
 		) {
 			res.push({
 				type: 'aura-break',
-				ownerId: getPlayerId(),
+				ownerId: playerId,
 				duration: 9000,
 			});
 			res.push({ type: 'aura-break', ownerId: OPPO_ID, duration: 9000 });
@@ -248,7 +251,7 @@ export const useBattleFieldEffects = (
 		if (friendGuardPlayer) {
 			res.push({
 				type: 'friend-guard',
-				ownerId: getPlayerId(),
+				ownerId: playerId,
 				duration: 9000,
 				applicatorId: friendGuardPlayer.id,
 			});
@@ -268,14 +271,14 @@ export const useBattleFieldEffects = (
 		if (powerSpotPlayer) {
 			res.push({
 				type: 'power-spot',
-				ownerId: getPlayerId(),
+				ownerId: playerId,
 				duration: 9000,
 				applicatorId: powerSpotPlayer.id,
 			});
 		}
 
 		return res;
-	}, [battleWeather, bf, onFieldOpponents, onFieldTeam]);
+	}, [battleWeather, bf, onFieldOpponents, onFieldTeam, playerId]);
 
 	return {
 		battleFieldEffects,

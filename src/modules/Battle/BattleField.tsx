@@ -22,7 +22,6 @@ import { changeMovePP } from '../../functions/changeMovePP';
 import { BattleLocation } from '../../functions/determineCaptureSuccess';
 import { getHeldItem } from '../../functions/getHeldItem';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
-import { getSettings } from '../../functions/getPlayerId';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
 import { handleCheekPouch } from '../../functions/handleCheekPouch';
 import { isKO } from '../../functions/isKo';
@@ -129,7 +128,7 @@ export const BattleField = ({
 	challengerType: 'TRAINER' | 'WILD';
 }) => {
 	const {
-		saveFile: { settings },
+		saveFile: { settings, playerId },
 	} = useContext(SaveFileContext);
 	const { playerColor, oppColor } = useLocationColors();
 
@@ -169,7 +168,10 @@ export const BattleField = ({
 	//SELECTORS
 
 	const opponents = useMemo(() => getOpponentPokemon(pokemon), [pokemon]);
-	const team = useMemo(() => getPlayerPokemon(pokemon), [pokemon]);
+	const team = useMemo(
+		() => getPlayerPokemon(pokemon, playerId),
+		[pokemon, playerId]
+	);
 	const onFieldOpponents = useMemo(
 		() =>
 			opponents.filter((p) => p.status !== 'BENCH' && p.status !== 'FAINTED'),
@@ -349,6 +351,7 @@ export const BattleField = ({
 					removeScreens,
 					terrain: battleTerrain,
 					addBattleFieldEffect,
+					settings,
 				})
 			);
 		},
@@ -362,6 +365,7 @@ export const BattleField = ({
 			removeScreens,
 			setBattleTerrain,
 			setBattleWeather,
+			settings,
 		]
 	);
 	const handleForceSwitch = useCallback(
@@ -615,7 +619,7 @@ export const BattleField = ({
 	// Battle Over
 	useEffect(() => {
 		if (battleLost && !latestMessage) {
-			const { rogueLike } = getSettings() ?? {};
+			const { rogueLike } = settings ?? {};
 			console.log('effect battlelost');
 
 			const message = () => {

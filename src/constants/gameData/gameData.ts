@@ -114,6 +114,3 @@ export const testState: SaveFile = {
 	campUpgrades: baseCampUpgrades,
 	pokedex: emptyPokedex,
 };
-
-export const localStorageSaveFileId = 'pokemonv7SaveFile';
-export const localStorageLocationId = 'pokemonv7Location';

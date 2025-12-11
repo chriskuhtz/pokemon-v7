@@ -6,7 +6,6 @@ import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { internalDex } from '../../constants/gameData/internalDexData';
 import { handledMoves, MoveName } from '../../constants/movesCheckList';
 import { calculateLevelData } from '../../functions/calculateLevelData';
-import { getEntryWithOverflow } from '../../functions/filterTargets';
 import { moveIsTeachable } from '../../functions/moveIsAvailable';
 import { withChangedMoves } from '../../functions/withChangedMoves';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
@@ -163,7 +162,10 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 					const index =
 						handledMoves.findIndex((handled) => handled === m.move.name) +
 						ownedPokemon.name.length * 5;
-					const randomizedMove = getEntryWithOverflow([...handledMoves], index);
+					const randomizedMove = ArrayHelpers.getEntryWithOverflow(
+						[...handledMoves],
+						index
+					);
 					return {
 						...m,
 						move: {

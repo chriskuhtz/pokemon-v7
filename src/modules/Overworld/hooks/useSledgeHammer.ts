@@ -1,6 +1,5 @@
 import { useCallback, useContext } from 'react';
 import { ONE_HOUR } from '../../../constants/gameData/gameData';
-import { getRandomEntry } from '../../../functions/filterTargets';
 import { getUnderRockEncounters } from '../../../functions/internalDex';
 import {
 	makeChallengerPokemon,
@@ -35,10 +34,12 @@ export const useSledgeHammer = () => {
 			}
 			if (saveFile.campUpgrades['sledge hammer certification']) {
 				const foundItem =
-					Math.random() > 0.9 ? getRandomEntry(undergroundTable) : undefined;
+					Math.random() > 0.9
+						? ArrayHelpers.getRandomEntry(undergroundTable)
+						: undefined;
 				const encounter =
 					Math.random() > 0.9
-						? getRandomEntry(SLEDGEHAMMER_ENCOUNTER_OPTIONS)
+						? ArrayHelpers.getRandomEntry(SLEDGEHAMMER_ENCOUNTER_OPTIONS)
 						: undefined;
 
 				const updatedInventory = foundItem

@@ -13,7 +13,6 @@ import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { applyPrimaryAilmentToPokemon } from './applyPrimaryAilmentToPokemon';
 import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
-import { getRandomEntry } from './filterTargets';
 import { getHeldItem } from './getHeldItem';
 
 export const getAilmentName = (
@@ -23,7 +22,7 @@ export const getAilmentName = (
 		return 'toxic';
 	}
 	if (attack.name === 'tri-attack') {
-		return getRandomEntry(['paralysis', 'freeze', 'burn']);
+		return ArrayHelpers.getRandomEntry(['paralysis', 'freeze', 'burn']);
 	}
 
 	if (

@@ -6,7 +6,6 @@ import { applyPrimaryAilmentToPokemon } from '../../../../../functions/applyPrim
 import { applySecondaryAilmentToPokemon } from '../../../../../functions/applySecondaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from '../../../../../functions/applyStatChangeToPokemon';
 import { DamageAbsorbAbilityMap } from '../../../../../functions/calculateDamage';
-import { getRandomIndex } from '../../../../../functions/filterTargets';
 import { getHeldItem } from '../../../../../functions/getHeldItem';
 import { arePokemonOfOppositeGenders } from '../../../../../functions/getRivalryFactor';
 import { handleFlinching } from '../../../../../functions/handleFlinching';
@@ -398,7 +397,7 @@ export const handleAbilitiesAfterAttack = (
 			updatedAttacker,
 			updatedAttacker,
 			possibleAilments[
-				getRandomIndex(possibleAilments.length)
+				ArrayHelpers.getRandomIndex(possibleAilments.length)
 			] as PrimaryAilment['type'],
 			addMessage,
 			battleWeather,

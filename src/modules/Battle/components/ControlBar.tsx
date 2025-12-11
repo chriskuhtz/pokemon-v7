@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { chooseOpponentAction } from '../../../functions/chooseOpponentAction';
 import { filterTargets } from '../../../functions/filterTargets';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { OPPO_ID } from '../../../functions/makeChallengerPokemon';
+import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
 import { WeatherType } from '../../../interfaces/Weather';
@@ -37,6 +38,9 @@ export function ControlBar({
 	terrain: BattleTerrain | undefined;
 }) {
 	const [chosenAction, setChosenAction] = useState<ActionType | undefined>();
+	const {
+		saveFile: { playerId },
+	} = useContext(SaveFileContext);
 
 	const filteredTargets = useMemo(
 		() =>
@@ -46,9 +50,10 @@ export function ControlBar({
 						user: controlled,
 						chosenAction,
 						onlyOpponents: false,
+						playerId,
 				  })
 				: [],
-		[chosenAction, controlled, targets]
+		[chosenAction, controlled, playerId, targets]
 	);
 
 	useEffect(() => {
@@ -70,10 +75,19 @@ export function ControlBar({
 				effects: battleFieldEffects,
 				weather,
 				terrain,
+				playerId,
 			});
 			chooseAction(action);
 		}
-	}, [battleFieldEffects, chooseAction, controlled, targets, terrain, weather]);
+	}, [
+		battleFieldEffects,
+		chooseAction,
+		controlled,
+		playerId,
+		targets,
+		terrain,
+		weather,
+	]);
 
 	if (!controlled) {
 		return (

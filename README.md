@@ -3,14 +3,7 @@
 1. create a new Branch
 2. npm install
 3. npm run dev
-4. for put a devmode=true entry into your localstorage
-
-# Creating your own Game version
-
-1. make a new branch called /edition/NAME_OF_YOUR_GAME
-2. build your game through the constants/gameData folder
-3. duplicate your gameData folder into /NAME_OF_YOUR_GAME_edition to avoid merge issues when keeping up with main branch
-4. If you want to implement new features, please consider making a separate Branch and Pull Request into main
+4. to work in devmode (everything unlocked, infinite points) put a devmode=true entry into your localstorage
 
 # Creating a new Map
 

@@ -10,7 +10,6 @@ import { MoveName } from '../constants/movesCheckList';
 import {
 	battleSpriteSize,
 	emptyPokedex,
-	localStorageSaveFileId,
 	ONE_DAY,
 	testState,
 } from '../constants/gameData/gameData';
@@ -36,6 +35,7 @@ import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { QuestStatus } from '../interfaces/Quest';
 import { RoutesType } from '../interfaces/Routing';
 import { SaveFile } from '../interfaces/SaveFile';
+import { GameDataContext } from './useGameData';
 import { MessageQueueContext } from './useMessageQueue';
 
 export interface EvolutionReducerPayload {
@@ -136,17 +136,15 @@ const migrateSavefile = (input: SaveFile) => {
 
 const useSaveFile = (init: SaveFile): UseSaveFile => {
 	const { addMessage } = useContext(MessageQueueContext);
-	const local = window.localStorage.getItem(localStorageSaveFileId);
+	const { saveFileId } = useContext(GameDataContext);
+	const local = window.localStorage.getItem(saveFileId);
 	const loaded = local ? migrateSavefile(JSON.parse(local) as SaveFile) : init;
 
 	const [saveFile, s] = useState<SaveFile>(loaded);
 	//SYNC WITH LOCAL STORAGE
 	useEffect(() => {
-		window.localStorage.setItem(
-			localStorageSaveFileId,
-			JSON.stringify(saveFile)
-		);
-	}, [saveFile]);
+		window.localStorage.setItem(saveFileId, JSON.stringify(saveFile));
+	}, [saveFile, saveFileId]);
 
 	const reset = useCallback(() => {
 		s(testState);

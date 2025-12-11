@@ -4,7 +4,6 @@ import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { AbilityName, abilityNames } from '../../constants/abilityCheckList';
 import { internalDex } from '../../constants/gameData/internalDexData';
-import { getEntryWithOverflow } from '../../functions/filterTargets';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
@@ -126,7 +125,10 @@ const AbilityEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 	}, [data, ownedPokemon.ability]);
 
 	const getCost = (ability: AbilityName): ItemType => {
-		return getEntryWithOverflow(moveUnlockPayments, ability.length);
+		return ArrayHelpers.getEntryWithOverflow(
+			moveUnlockPayments,
+			ability.length
+		);
 	};
 
 	return (

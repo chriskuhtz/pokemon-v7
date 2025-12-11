@@ -4,7 +4,6 @@ import { RiSparkling2Line } from 'react-icons/ri';
 import { battleSpriteSize } from '../../constants/gameData/gameData';
 import { secondTurnMoves } from '../../constants/groupedMoves';
 import { calculateLevelData } from '../../functions/calculateLevelData';
-import { getPlayerId } from '../../functions/getPlayerId';
 import { getPrimaryAilmentColor } from '../../functions/getPrimaryAilmentColor';
 import { LocationContext } from '../../hooks/LocationProvider';
 import { SaveFileContext } from '../../hooks/useSaveFile';
@@ -22,6 +21,9 @@ export const BattlePokemonInfo = ({
 	pokemon: BattlePokemon;
 	onClick?: () => void;
 }) => {
+	const {
+		saveFile: { playerId },
+	} = useContext(SaveFileContext);
 	const { level } = calculateLevelData(pokemon.xp, pokemon.growthRate);
 	const {
 		saveFile: { pokedex },
@@ -57,7 +59,7 @@ export const BattlePokemonInfo = ({
 		>
 			<strong style={{ display: 'flex', alignItems: 'center' }}>
 				{pokedex[pokemon.name].caughtOnRoutes.includes(location.mapId) &&
-					pokemon.ownerId !== getPlayerId() && (
+					pokemon.ownerId !== playerId && (
 						<ItemSprite item={'poke-ball'} sizeFactor={0.5} />
 					)}
 				{pokemon.shiny && <RiSparkling2Line size={battleSpriteSize / 2} />}
@@ -108,7 +110,7 @@ export const BattlePokemonInfo = ({
 				</Chip>
 			)}
 			<HpBar max={pokemon.stats.hp} damage={pokemon.damage} />
-			{pokemon.ownerId === getPlayerId() && (
+			{pokemon.ownerId === playerId && (
 				<XpBar xp={pokemon.xp} growthRate={pokemon.growthRate} />
 			)}
 		</div>

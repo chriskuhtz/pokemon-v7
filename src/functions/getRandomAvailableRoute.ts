@@ -1,6 +1,5 @@
 import { MapId } from '../constants/gameData/maps/mapsRecord';
 import { SaveFile } from '../interfaces/SaveFile';
-import { getRandomEntry } from './filterTargets';
 
 export const getRandomAvailableRoute = (
 	s: SaveFile,
@@ -28,5 +27,5 @@ export const getRandomAvailableRoute = (
 	if (filteredOptions.length === 0) {
 		return;
 	}
-	return getRandomEntry(filteredOptions);
+	return ArrayHelpers.getRandomEntry(filteredOptions);
 };

@@ -12,7 +12,6 @@ import { calculateDamage } from '../../../../../../functions/calculateDamage';
 import { checkThiefMoves } from '../../../../../../functions/checkThiefMoves';
 import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';
-import { getPlayerId } from '../../../../../../functions/getPlayerId';
 import { hasType } from '../../../../../../functions/hasType';
 import { isKO } from '../../../../../../functions/isKo';
 import { Message } from '../../../../../../hooks/useMessageQueue';
@@ -47,6 +46,7 @@ export const handleDamageAttack = ({
 	terrain,
 	setTerrain,
 	setWeather,
+	playerId,
 }: {
 	attacker: BattlePokemon;
 	target: BattlePokemon;
@@ -64,6 +64,7 @@ export const handleDamageAttack = ({
 	terrain: BattleTerrain | undefined;
 	setTerrain: (x: TerrainObject) => void;
 	setWeather: (x: WeatherObject) => void;
+	playerId: string;
 }): BattlePokemon[] => {
 	let updatedAttacker = { ...attacker };
 	let updatedTarget = { ...target };
@@ -255,7 +256,7 @@ export const handleDamageAttack = ({
 			addMessage
 		);
 
-	if (damage > 0 && updatedAttacker.ownerId === getPlayerId()) {
+	if (damage > 0 && updatedAttacker.ownerId === playerId) {
 		logDamage(damage);
 		addMessage({ message: `${damage} Damage` });
 	}

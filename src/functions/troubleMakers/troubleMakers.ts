@@ -6,7 +6,6 @@ import {
 	SaveFile,
 } from '../../interfaces/SaveFile';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
-import { getRandomEntry } from '../filterTargets';
 import { getHighestXpOnTeam } from '../getHighestXpOnTeam';
 import { getRandomOrientation } from '../getNextClockwiseDirection';
 import { getRandomPosition } from '../getRandomPosition';
@@ -230,7 +229,7 @@ export const getTroubleMakerTeam = (s: SaveFile): OwnedPokemon[] => {
 	const availableMons = pokemon().filter((r) => r.minXp <= xp);
 
 	return Array.from({ length: numberOfMembers }).map(() => {
-		const mon = getRandomEntry(availableMons);
+		const mon = ArrayHelpers.getRandomEntry(availableMons);
 
 		return makeChallengerPokemon({
 			name: mon.name,

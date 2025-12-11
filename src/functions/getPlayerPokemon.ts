@@ -1,14 +1,12 @@
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { filterPokemonByOwnerId } from './filterPokemonByOwnerId';
-import { getPlayerId } from './getPlayerId';
 
-export const getPlayerPokemon = (x: BattlePokemon[]): BattlePokemon[] => {
-	const playerId = getPlayerId();
-	if (!playerId) {
-		return [];
-	}
+export const getPlayerPokemon = (
+	x: BattlePokemon[],
+	playerId: string
+): BattlePokemon[] => {
 	return filterPokemonByOwnerId(x, playerId);
 };
 
-export const isPlayerPokemon = (x: BattlePokemon): boolean =>
-	x.ownerId === getPlayerId();
+export const isPlayerPokemon = (x: BattlePokemon, playerId: string): boolean =>
+	x.ownerId === playerId;

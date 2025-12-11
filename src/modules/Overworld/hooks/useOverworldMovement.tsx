@@ -1,4 +1,5 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { canSwim } from '../../../constants/gameData/checks';
 import { fps } from '../../../constants/gameData/gameData';
 import { mapsRecord } from '../../../constants/gameData/maps/mapsRecord';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
@@ -144,10 +145,6 @@ export const useOverworldMovement = (
 		startEncounter,
 	]);
 
-	const canSwim = useMemo((): boolean => {
-		return campUpgrades['swimming certification'];
-	}, [campUpgrades]);
-
 	useEffect(() => {
 		const int = setTimeout(() => {
 			if (
@@ -175,7 +172,7 @@ export const useOverworldMovement = (
 						map,
 						addStep,
 						currentOccupants,
-						canSwim,
+						canSwim(saveFile),
 						!!saveFile.flying,
 						campUpgrades['rock climbing certification']
 					),
@@ -197,7 +194,6 @@ export const useOverworldMovement = (
 		activatedLure,
 		addStep,
 		campUpgrades,
-		canSwim,
 		currentOccupants,
 		currentSwarm,
 		encounterChance,

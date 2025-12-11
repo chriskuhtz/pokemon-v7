@@ -1,5 +1,4 @@
 import { PokemonName } from '../constants/pokemonNames';
-import { getRandomIndex } from '../functions/filterTargets';
 import { Inventory } from './Inventory';
 import { Nature } from './Natures';
 import { PokemonType } from './PokemonType';
@@ -755,10 +754,10 @@ export const apricornTable: Record<ApricornType, PokeballType> = {
 	'grey-apricorn': 'poke-ball',
 };
 export const getRandomItem = () => {
-	return itemTypes[getRandomIndex(itemTypes.length)];
+	return itemTypes[ArrayHelpers.getRandomIndex(itemTypes.length)];
 };
 export const getRandomBall = () => {
-	return balltypes[getRandomIndex(balltypes.length)];
+	return balltypes[ArrayHelpers.getRandomIndex(balltypes.length)];
 };
 export const pickupTable: ItemType[] = [
 	...berries.filter((b) => b !== 'enigma-berry'),

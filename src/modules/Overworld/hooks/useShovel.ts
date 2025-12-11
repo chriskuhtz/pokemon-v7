@@ -1,6 +1,5 @@
 import { useCallback, useContext } from 'react';
 import { ONE_HOUR } from '../../../constants/gameData/gameData';
-import { getRandomEntry } from '../../../functions/filterTargets';
 import { Message, MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { joinInventories } from '../../../interfaces/Inventory';
@@ -18,7 +17,9 @@ export const useShovel = () => {
 			}
 			if (saveFile.campUpgrades['shovel certification']) {
 				const foundItem =
-					Math.random() > 0.9 ? getRandomEntry(undergroundTable) : undefined;
+					Math.random() > 0.9
+						? ArrayHelpers.getRandomEntry(undergroundTable)
+						: undefined;
 
 				const updatedInventory = foundItem
 					? joinInventories(saveFile.bag, {
