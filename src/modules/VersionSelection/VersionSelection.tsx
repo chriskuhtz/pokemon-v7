@@ -17,16 +17,23 @@ export const VersionSelection = (): JSX.Element => {
 	}
 	return (
 		<Page headline={'Which version do you want to play'}>
-			<Stack mode={'row'}>
+			<Stack mode={'column'}>
 				<Card
-					icon={<PokemonSprite name={'teddiursa'} />}
+					icon={
+						<PokemonSprite
+							config={{ officalArtwork: true }}
+							name={'teddiursa'}
+						/>
+					}
 					content={<h3>Kuma</h3>}
 					actionElements={[]}
 					onClick={() => setVersion('KUMA')}
 				></Card>
 				<Card
-					icon={<PokemonSprite name={'unown'} />}
-					content={<h3>Kaizo</h3>}
+					icon={
+						<PokemonSprite config={{ officalArtwork: true }} name={'unown'} />
+					}
+					content={<h3>Labyrinth</h3>}
 					actionElements={[]}
 					onClick={() => setVersion('LABYRINTH')}
 				></Card>

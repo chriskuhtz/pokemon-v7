@@ -12,6 +12,7 @@ import { getRandomNature } from '../interfaces/Natures';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { CatchStreak, PokemonSwarm, SaveFile } from '../interfaces/SaveFile';
 import { StatObject } from '../interfaces/StatObject';
+import { ArrayHelpers } from './ArrayHelpers';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getTimeOfDay } from './getTimeOfDay';
 import { getRandomEncounter, isNotCatchable } from './internalDex';

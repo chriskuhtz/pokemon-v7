@@ -36,6 +36,7 @@ import { trainerSabrina } from '../../constants/gameData/maps/occupants/sabrina'
 import { silver } from '../../constants/gameData/maps/occupants/silver';
 import { trainerSurge } from '../../constants/gameData/maps/occupants/surge';
 import { will } from '../../constants/gameData/maps/occupants/will';
+import { ArrayHelpers } from '../../functions/ArrayHelpers';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getTypeNames } from '../../functions/getTypeNames';
 import { useGetBattleTeam } from '../../hooks/useGetBattleTeam';

@@ -1,5 +1,6 @@
 import { useCallback, useContext } from 'react';
 import { ONE_HOUR } from '../../../constants/gameData/gameData';
+import { ArrayHelpers } from '../../../functions/ArrayHelpers';
 import { getUnderRockEncounters } from '../../../functions/internalDex';
 import {
 	makeChallengerPokemon,

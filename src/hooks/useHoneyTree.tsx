@@ -1,5 +1,6 @@
 import { useCallback, useContext } from 'react';
 import { battleSpriteSize } from '../constants/gameData/gameData';
+import { ArrayHelpers } from '../functions/ArrayHelpers';
 import { getItemUrl } from '../functions/getItemUrl';
 import { getHoneyEncounters } from '../functions/internalDex';
 import {

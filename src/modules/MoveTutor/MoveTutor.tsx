@@ -5,6 +5,7 @@ import { MovesDisplay } from '../../components/OwnedPokemonCard/components/Moves
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { internalDex } from '../../constants/gameData/internalDexData';
 import { handledMoves, MoveName } from '../../constants/movesCheckList';
+import { ArrayHelpers } from '../../functions/ArrayHelpers';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { moveIsTeachable } from '../../functions/moveIsAvailable';
 import { withChangedMoves } from '../../functions/withChangedMoves';

@@ -5,6 +5,7 @@ import {
 import { applyPrimaryAilmentToPokemon } from '../../../../../functions/applyPrimaryAilmentToPokemon';
 import { applySecondaryAilmentToPokemon } from '../../../../../functions/applySecondaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from '../../../../../functions/applyStatChangeToPokemon';
+import { ArrayHelpers } from '../../../../../functions/ArrayHelpers';
 import { DamageAbsorbAbilityMap } from '../../../../../functions/calculateDamage';
 import { getHeldItem } from '../../../../../functions/getHeldItem';
 import { arePokemonOfOppositeGenders } from '../../../../../functions/getRivalryFactor';

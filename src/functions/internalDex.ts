@@ -9,6 +9,7 @@ import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { InternalDexEntry, SwarmType } from '../interfaces/Pokedex';
 import { PokemonType, pokemonTypes } from '../interfaces/PokemonType';
 import { Stat } from '../interfaces/StatObject';
+import { ArrayHelpers } from './ArrayHelpers';
 import { TimeOfDay } from './getTimeOfDay';
 
 export const byType: Record<PokemonType, PokemonName[]> = Object.fromEntries(

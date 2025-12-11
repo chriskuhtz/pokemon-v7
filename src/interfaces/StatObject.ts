@@ -1,3 +1,5 @@
+import { ArrayHelpers } from '../functions/ArrayHelpers';
+
 export const stats = [
 	'hp',
 	'attack',

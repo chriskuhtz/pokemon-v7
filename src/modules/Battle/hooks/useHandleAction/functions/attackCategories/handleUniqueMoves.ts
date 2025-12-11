@@ -1,6 +1,7 @@
 import { protectMoves } from '../../../../../../constants/groupedMoves';
 import { applySecondaryAilmentToPokemon } from '../../../../../../functions/applySecondaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from '../../../../../../functions/applyStatChangeToPokemon';
+import { ArrayHelpers } from '../../../../../../functions/ArrayHelpers';
 import { changeMovePP } from '../../../../../../functions/changeMovePP';
 
 import { getHeldItem } from '../../../../../../functions/getHeldItem';

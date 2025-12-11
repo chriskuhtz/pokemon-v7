@@ -8,6 +8,7 @@ import {
 	tier5trainers,
 	trainers,
 } from '../modules/TrainingField/trainersRecord';
+import { ArrayHelpers } from './ArrayHelpers';
 
 export const makeRandomTrainer = (
 	saveFile: SaveFile,

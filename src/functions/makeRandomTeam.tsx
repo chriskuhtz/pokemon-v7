@@ -7,6 +7,7 @@ import {
 import { PokemonName } from '../constants/pokemonNames';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { Stat } from '../interfaces/StatObject';
+import { ArrayHelpers } from './ArrayHelpers';
 import { getAllPokemonThatMaxThisEV } from './internalDex';
 import { makeChallengerPokemon } from './makeChallengerPokemon';
 

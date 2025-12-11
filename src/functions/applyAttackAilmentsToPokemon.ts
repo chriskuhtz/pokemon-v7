@@ -13,6 +13,7 @@ import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { applyPrimaryAilmentToPokemon } from './applyPrimaryAilmentToPokemon';
 import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
+import { ArrayHelpers } from './ArrayHelpers';
 import { getHeldItem } from './getHeldItem';
 
 export const getAilmentName = (

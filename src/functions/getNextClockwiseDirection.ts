@@ -1,4 +1,5 @@
 import { CharacterOrientation } from '../interfaces/SaveFile';
+import { ArrayHelpers } from './ArrayHelpers';
 
 export const getNextClockWiseDirection = (
 	input: CharacterOrientation

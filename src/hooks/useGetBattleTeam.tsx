@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { AbilityName, abilityNames } from '../constants/abilityCheckList';
 import { internalDex } from '../constants/gameData/internalDexData';
 import { MoveName } from '../constants/movesCheckList';
+import { ArrayHelpers } from '../functions/ArrayHelpers';
 import { calculateLevelData } from '../functions/calculateLevelData';
 import { determineGender } from '../functions/determineGender';
 import { getEvAwards } from '../functions/getEvAwards';

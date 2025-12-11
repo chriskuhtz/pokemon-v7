@@ -6,6 +6,7 @@ import {
 	SaveFile,
 } from '../../interfaces/SaveFile';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
+import { ArrayHelpers } from '../ArrayHelpers';
 import { getHighestXpOnTeam } from '../getHighestXpOnTeam';
 import { getRandomOrientation } from '../getNextClockwiseDirection';
 import { getRandomPosition } from '../getRandomPosition';

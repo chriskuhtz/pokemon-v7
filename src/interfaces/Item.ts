@@ -1,4 +1,5 @@
 import { PokemonName } from '../constants/pokemonNames';
+import { ArrayHelpers } from '../functions/ArrayHelpers';
 import { Inventory } from './Inventory';
 import { Nature } from './Natures';
 import { PokemonType } from './PokemonType';

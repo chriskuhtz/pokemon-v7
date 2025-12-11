@@ -3,6 +3,7 @@ import { BattleMove, BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { ActionType, BattleFieldEffect } from '../modules/Battle/BattleField';
 import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
+import { ArrayHelpers } from './ArrayHelpers';
 import { calculateDamage } from './calculateDamage';
 import { determineMultiHits } from './determineMultiHits';
 import { getHeldItem } from './getHeldItem';

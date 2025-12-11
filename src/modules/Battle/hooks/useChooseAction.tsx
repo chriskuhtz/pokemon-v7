@@ -6,6 +6,7 @@ import {
 	secondTurnMoves,
 	thrashingMoves,
 } from '../../../constants/groupedMoves';
+import { ArrayHelpers } from '../../../functions/ArrayHelpers';
 import { determineMultiHits } from '../../../functions/determineMultiHits';
 import { getHeldItem } from '../../../functions/getHeldItem';
 import { getMovesArray } from '../../../functions/getMovesArray';

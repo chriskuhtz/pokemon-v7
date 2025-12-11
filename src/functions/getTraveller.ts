@@ -62,6 +62,7 @@ import {
 	travellingMerchantRouteS1W1,
 	travellingMerchantRouteW1,
 } from '../modules/TravellingMerchant/TravellingMerchant';
+import { ArrayHelpers } from './ArrayHelpers';
 
 /**
  *

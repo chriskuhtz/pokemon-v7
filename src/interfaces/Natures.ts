@@ -1,3 +1,4 @@
+import { ArrayHelpers } from '../functions/ArrayHelpers';
 import { Stat } from './StatObject';
 
 export const natureNames = [

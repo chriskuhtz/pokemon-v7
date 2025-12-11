@@ -1,4 +1,5 @@
-declare namespace ArrayHelpers {
+/* eslint-disable @typescript-eslint/no-namespace */
+export namespace ArrayHelpers {
 	export const getRandomIndex = (arrayLength: number): number => {
 		return Math.floor(Math.random() * arrayLength);
 	};

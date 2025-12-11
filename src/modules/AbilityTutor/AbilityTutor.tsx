@@ -4,6 +4,7 @@ import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { AbilityName, abilityNames } from '../../constants/abilityCheckList';
 import { internalDex } from '../../constants/gameData/internalDexData';
+import { ArrayHelpers } from '../../functions/ArrayHelpers';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';

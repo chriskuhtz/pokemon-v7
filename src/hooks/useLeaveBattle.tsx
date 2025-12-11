@@ -9,6 +9,7 @@ import { nId } from '../constants/gameData/maps/occupants/n';
 import { redId } from '../constants/gameData/maps/occupants/red';
 import { silverId } from '../constants/gameData/maps/occupants/silver';
 import { addPokemonToDex } from '../functions/addPokemonToDex';
+import { ArrayHelpers } from '../functions/ArrayHelpers';
 import { calculateLevelData } from '../functions/calculateLevelData';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getHeldItem } from '../functions/getHeldItem';
