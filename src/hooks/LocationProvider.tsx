@@ -6,7 +6,6 @@ import React, {
 	useMemo,
 	useState,
 } from 'react';
-import { startingLocation } from '../constants/gameData/gameData';
 import {
 	resetChallengeFielders,
 	resetEliteFour,
@@ -24,14 +23,14 @@ export interface LocationContextType {
 export const LocationContext = React.createContext({} as LocationContextType);
 
 export const LocationProvider = ({ children }: { children: ReactNode }) => {
-	const { locationId } = useContext(GameDataContext);
+	const { locationId, startingLocation } = useContext(GameDataContext);
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
 	const initValue: CharacterLocationData = useMemo(() => {
 		const local = window.localStorage.getItem(locationId);
 		return local
 			? (JSON.parse(local) as CharacterLocationData)
 			: startingLocation;
-	}, [locationId]);
+	}, [locationId, startingLocation]);
 	const [location, s] = useState<CharacterLocationData>(initValue);
 
 	const setLocation = useCallback(
@@ -66,7 +65,7 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
 
 	const resetLocation = useCallback(() => {
 		setLocation(startingLocation);
-	}, [setLocation]);
+	}, [setLocation, startingLocation]);
 
 	//SYNC WITH LOCAL STORAGE
 	useEffect(() => {

@@ -11,7 +11,6 @@ import {
 	battleSpriteSize,
 	emptyPokedex,
 	ONE_DAY,
-	testState,
 } from '../constants/gameData/gameData';
 import {
 	QuestName,
@@ -136,7 +135,8 @@ const migrateSavefile = (input: SaveFile) => {
 
 const useSaveFile = (init: SaveFile): UseSaveFile => {
 	const { addMessage } = useContext(MessageQueueContext);
-	const { saveFileId } = useContext(GameDataContext);
+	const { saveFileId, startingRouterSequence, startingSaveFile } =
+		useContext(GameDataContext);
 	const local = window.localStorage.getItem(saveFileId);
 	const loaded = local ? migrateSavefile(JSON.parse(local) as SaveFile) : init;
 
@@ -147,8 +147,8 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 	}, [saveFile, saveFileId]);
 
 	const reset = useCallback(() => {
-		s(testState);
-	}, []);
+		s(startingSaveFile);
+	}, [startingSaveFile]);
 
 	//handle side effects here
 	const setSaveFile = useCallback((u: SaveFile) => {
@@ -436,27 +436,12 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 
 	//HANDLE START OF GAME
 	useEffect(() => {
-		if (saveFile.meta.activeTab !== 'SETTINGS' && !saveFile.settings) {
-			setActiveTabReducer('SETTINGS');
-			return;
-		}
-		if (
-			saveFile.settings &&
-			saveFile.meta.activeTab !== 'SPRITE_SELECTION' &&
-			saveFile.sprite === ''
-		) {
-			setActiveTabReducer('SPRITE_SELECTION');
-			return;
-		}
-		if (
-			saveFile.settings &&
-			saveFile.sprite &&
-			saveFile.meta.activeTab !== 'STARTER_SELECTION' &&
-			(saveFile.playerId === '' || saveFile.pokemon.length === 0)
-		) {
-			setActiveTabReducer('STARTER_SELECTION');
-		}
-	}, [saveFile, setActiveTabReducer]);
+		startingRouterSequence.reverse().forEach((seq) => {
+			if (seq.condition(saveFile) && saveFile.meta.activeTab !== seq.route) {
+				setActiveTabReducer(seq.route);
+			}
+		});
+	}, [saveFile, setActiveTabReducer, startingRouterSequence]);
 
 	return {
 		evolvePokemonReducer,
@@ -477,7 +462,8 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 export const SaveFileContext = React.createContext({} as UseSaveFile);
 
 export const SaveFileProvider = ({ children }: { children: ReactNode }) => {
-	const value = useSaveFile(testState);
+	const { startingSaveFile } = useContext(GameDataContext);
+	const value = useSaveFile(startingSaveFile);
 
 	return (
 		<SaveFileContext.Provider value={value}>

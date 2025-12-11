@@ -1,7 +1,9 @@
 import { useContext, useMemo, useState } from 'react';
 import { MapId } from '../../constants/gameData/maps/mapsRecord';
+import { GameDataContext } from '../../hooks/useGameData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
+import { RoutesType } from '../../interfaces/Routing';
 import { AbilityTutor } from '../AbilityTutor/AbilityTutor';
 import { AmoongussCompostResearcher } from '../AmoongussResearcher/AmoongussResearcher';
 import { ApricornSmithy } from '../ApricornSmithy/ApricornSmithy';
@@ -45,6 +47,8 @@ export const Router = (): JSX.Element => {
 	const { latestMessage, addMessage, addMultipleMessages } =
 		useContext(MessageQueueContext);
 
+	const { startingTab } = useContext(GameDataContext);
+
 	const {
 		saveFile,
 		setActiveTabReducer,
@@ -53,20 +57,12 @@ export const Router = (): JSX.Element => {
 	} = useContext(SaveFileContext);
 
 	const {
-		meta: { activeTab, currentChallenger },
+		meta: { activeTab: savedTab, currentChallenger },
 		bag: inventory,
 		pokemon,
 	} = saveFile;
 
 	const team = useMemo(() => pokemon.filter((p) => p.onTeam), [pokemon]);
-
-	// const fishingEncounterRateModifier = useMemo(() => {
-	// 	if (firstTeamMember.ability === 'suction-cups') {
-	// 		return 1.5;
-	// 	}
-
-	// 	return 1;
-	// }, [firstTeamMember.ability]);
 
 	const [hasReadIntro, setHasReadIntro] = useState<boolean>(
 		!!window.localStorage.getItem('hasReadIntro')
@@ -75,10 +71,20 @@ export const Router = (): JSX.Element => {
 		!!window.localStorage.getItem(newestChangeLog)
 	);
 
-	if (!hasReadIntro) {
+	const activeTab: RoutesType = useMemo(() => {
+		if (!hasReadIntro) {
+			return 'INTRO';
+		}
+		if (!hasReadNewestChangeLog) {
+			return 'CHANGELOG';
+		}
+		return savedTab ?? startingTab;
+	}, [hasReadIntro, hasReadNewestChangeLog, savedTab, startingTab]);
+
+	if (activeTab === 'INTRO') {
 		return <Intro setHasReadIntro={setHasReadIntro} />;
 	}
-	if (!hasReadNewestChangeLog) {
+	if (activeTab === 'CHANGELOG') {
 		return <ChangeLog setHasReadIntro={setHasReadNewestChangeLog} />;
 	}
 	if (activeTab === 'BATTLE' && currentChallenger) {
