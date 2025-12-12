@@ -1,7 +1,5 @@
-import {
-	OverworldMap,
-	OverworldTrainer,
-} from '../../../../interfaces/OverworldMap';
+import { OverworldTrainer } from '../../../../interfaces/Occupant';
+import { OverworldMap } from '../../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../../interfaces/SpriteEnum';
 import { trainersWeakToStrong } from '../../../../modules/TrainingField/trainersRecord';
 import { challengeFieldId } from '../../gameData';

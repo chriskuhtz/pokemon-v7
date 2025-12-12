@@ -1,19 +1,20 @@
 import { isItem, isKeyItem, ItemType, itemTypes } from '../interfaces/Item';
 import { PokemonData } from '../interfaces/PokemonData';
-import { getRandomIndex } from './filterTargets';
-import { getSettings } from './getPlayerId';
+import { SettingsObject } from '../interfaces/SettingsObject';
+import { ArrayHelpers } from './ArrayHelpers';
 
 export const maybeGetHeldItemFromData = (
-	data: PokemonData
+	data: PokemonData,
+	settings: SettingsObject | undefined
 ): ItemType | undefined => {
-	const { randomHeldItems } = getSettings() ?? {};
+	const { randomHeldItems } = settings ?? {};
 	const { held_items } = data;
 
 	if (randomHeldItems) {
-		const r = itemTypes[getRandomIndex(itemTypes.length)];
+		const r = itemTypes[ArrayHelpers.getRandomIndex(itemTypes.length)];
 
 		if (isKeyItem(r)) {
-			return maybeGetHeldItemFromData(data);
+			return maybeGetHeldItemFromData(data, settings);
 		}
 
 		return r;

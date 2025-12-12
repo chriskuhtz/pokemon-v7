@@ -5,7 +5,6 @@ import { applyStatChangeToPokemon } from '../../../../functions/applyStatChangeT
 import { BattleLocation } from '../../../../functions/determineCaptureSuccess';
 import { determineRunawaySuccess } from '../../../../functions/determineRunAwaySuccess';
 import { getChargeUpMessage } from '../../../../functions/getChargeUpMessage';
-import { getPlayerId } from '../../../../functions/getPlayerId';
 import { EmptyCatchBoosts } from '../../../../functions/joinCatchBoosts';
 import { Message } from '../../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../../hooks/useSaveFile';
@@ -41,7 +40,7 @@ export const useHandleAction = (
 	setTerrain: (x: TerrainObject) => void
 ) => {
 	const {
-		saveFile: { pokedex, mileStones, catchBoosts },
+		saveFile: { pokedex, mileStones, catchBoosts, playerId, settings },
 		patchSaveFileReducer,
 	} = useContext(SaveFileContext);
 
@@ -109,8 +108,8 @@ export const useHandleAction = (
 			}
 			if (move.type === 'RunAway') {
 				const canRun = determineRunawaySuccess(
-					pokemon.filter((p) => p.ownerId === getPlayerId()),
-					pokemon.filter((p) => p.ownerId !== getPlayerId())
+					pokemon.filter((p) => p.ownerId === playerId),
+					pokemon.filter((p) => p.ownerId !== playerId)
 				);
 				if (canRun) {
 					addMessage({
@@ -286,6 +285,8 @@ export const useHandleAction = (
 					terrain,
 					setTerrain,
 					battleRound,
+					playerId,
+					settings,
 				});
 
 				return;
@@ -295,6 +296,7 @@ export const useHandleAction = (
 			pokemon,
 			addMessage,
 			setPokemon,
+			playerId,
 			leave,
 			addMultipleMessages,
 			battleRound,
@@ -314,6 +316,7 @@ export const useHandleAction = (
 			logDamage,
 			terrain,
 			setTerrain,
+			settings,
 		]
 	);
 };

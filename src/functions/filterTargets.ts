@@ -10,7 +10,6 @@ import { ActionType } from '../modules/Battle/BattleField';
 import { canBenefitFromItem } from './canBenefitFromItem';
 import { getMovesArray } from './getMovesArray';
 import { getOpponentPokemon } from './getOpponentPokemon';
-import { getPlayerId } from './getPlayerId';
 import { getPlayerPokemon } from './getPlayerPokemon';
 import { isKO } from './isKo';
 import { isSelfTargeting } from './isSelfTargeting';
@@ -20,19 +19,21 @@ export interface FilterTargetsPayload {
 	user: BattlePokemon;
 	chosenAction: ActionType;
 	onlyOpponents: boolean;
+	playerId: string;
 }
 export const filterTargets = ({
 	targets,
 	user,
 	chosenAction,
 	onlyOpponents,
+	playerId,
 }: FilterTargetsPayload): BattlePokemon[] => {
 	const preFiltered = targets.filter(
 		(t) => !onlyOpponents || (onlyOpponents && t.ownerId !== user.ownerId)
 	);
 	if (isHealingItem(chosenAction) || isPPRestorationItem(chosenAction)) {
-		if (user?.ownerId === getPlayerId()) {
-			return getPlayerPokemon(preFiltered).filter((t) =>
+		if (user?.ownerId === playerId) {
+			return getPlayerPokemon(preFiltered, playerId).filter((t) =>
 				canBenefitFromItem(t, chosenAction)
 			);
 		}
@@ -78,22 +79,4 @@ export const filterTargets = ({
 	}
 
 	return targets;
-};
-
-export const getRandomIndex = (arrayLength: number): number => {
-	return Math.floor(Math.random() * arrayLength);
-};
-export function getRandomEntry<T>(array: T[]) {
-	return array[getRandomIndex(array.length)];
-}
-export function getEntryWithOverflow<T>(array: T[], index: number) {
-	const divider = Math.floor(index / array.length);
-	const reducedIndex = index - divider * array.length;
-	return array[reducedIndex];
-}
-
-export const getRandomTarget = (x: FilterTargetsPayload): BattlePokemon => {
-	const possibleTargets = filterTargets(x);
-
-	return getRandomEntry(possibleTargets);
 };

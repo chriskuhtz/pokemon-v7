@@ -1,15 +1,13 @@
-import { EmptyInventory, generateInventory } from '../../interfaces/Inventory';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { QuestStatus } from '../../interfaces/Quest';
-import {
-	CharacterLocationData,
-	Pokedex,
-	SaveFile,
-} from '../../interfaces/SaveFile';
+import { Pokedex } from '../../interfaces/SaveFile';
 import { EmptyStatObject } from '../../interfaces/StatObject';
+import {
+	KumaQuestName,
+	KumaQuestsRecord,
+} from '../../versions/kuma/questsRecord';
 import { pokemonNames } from '../pokemonNames';
 import { CampUpgrade, campUpgradeNames } from './campUpgrades';
-import { QuestName, QuestsRecord } from './questsRecord';
 
 export const trickXP = 694206942069420;
 
@@ -52,68 +50,17 @@ export const testPokemon: OwnedPokemon = {
 	caughtAtDate: new Date().getTime(),
 };
 
-export const startingLocation: CharacterLocationData = {
-	mapId: 'camp',
-	orientation: 'DOWN',
-	forwardFoot: 'CENTER1',
-	x: 20,
-	y: 18,
-};
+export const baseQuestState: Record<KumaQuestName, QuestStatus> =
+	Object.fromEntries(
+		Object.keys(KumaQuestsRecord).map((key) => [key, 'INACTIVE'])
+	) as Record<KumaQuestName, QuestStatus>;
 
-const baseQuestState: Record<QuestName, QuestStatus> = Object.fromEntries(
-	Object.keys(QuestsRecord).map((key) => [key, 'INACTIVE'])
-) as Record<QuestName, QuestStatus>;
-
-const baseCampUpgrades: Record<CampUpgrade, boolean> = Object.fromEntries(
-	campUpgradeNames.map((key) => [key, false])
-	//campUpgradeNames.map((key) => [key, true])
-) as Record<CampUpgrade, boolean>;
+export const baseCampUpgrades: Record<CampUpgrade, boolean> =
+	Object.fromEntries(
+		campUpgradeNames.map((key) => [key, false])
+		//campUpgradeNames.map((key) => [key, true])
+	) as Record<CampUpgrade, boolean>;
 
 export const emptyPokedex: Pokedex = Object.fromEntries(
 	pokemonNames.map((a) => [a, { seenOnRoutes: [], caughtOnRoutes: [] }])
 ) as unknown as Pokedex;
-
-export const testState: SaveFile = {
-	sprite: '',
-	badges: [],
-	researchPoints: 0,
-	quests: baseQuestState,
-
-	bag: EmptyInventory,
-	storage: generateInventory({
-		'berry-juice': 5,
-		'poke-ball': 20,
-	}),
-
-	seedVault: [],
-	playerId: '',
-	money: 5000,
-	pokemon: [],
-	meta: {
-		activeTab: 'MAIN',
-	},
-	handledOccupants: [],
-	lastEdited: new Date().getTime(),
-	lastNurse: 'nurse_Pokecenter_Camp',
-	mileStones: {
-		hasEvolvedAPokemonThroughLevelUp: false,
-		hasEvolvedAPokemonWithAHeldItem: false,
-		hasEvolvedAPokemonWithAStone: false,
-		hasCaughtAPokemonWithHoney: false,
-		hasEvolvedAPokemonThroughFriendship: false,
-		hasEvolvedAPokemonThatNeedsDaytime: false,
-		hasEvolvedAPokemonThatNeedsNighttime: false,
-		hasCraftedApricorn: false,
-		hasGrownABerry: false,
-		hasGrownAnApricorn: false,
-		caughtFromSwarms: [],
-		luredWithBerries: [],
-		damageRecord: 0,
-	},
-	farm: { plants: [] },
-	campUpgrades: baseCampUpgrades,
-	pokedex: emptyPokedex,
-};
-
-export const localStorageSaveFileId = 'pokemonv7SaveFile';
-export const localStorageLocationId = 'pokemonv7Location';

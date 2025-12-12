@@ -1,18 +1,18 @@
 import { useContext, useMemo } from 'react';
-import { QuestName, QuestsRecord } from '../constants/gameData/questsRecord';
 import { QuestStatus } from '../interfaces/Quest';
+import { KumaQuestName, KumaQuestsRecord } from '../versions/kuma/questsRecord';
 import { SaveFileContext } from './useSaveFile';
 
 export const useQuests = (): {
-	all: { name: QuestName; status: QuestStatus }[];
+	all: { name: KumaQuestName; status: QuestStatus }[];
 	numberOfUncollected: number;
 } => {
 	const { saveFile } = useContext(SaveFileContext);
 
 	const quests = useMemo(
 		() =>
-			Object.entries(QuestsRecord).map(([name, quest]) => {
-				const status = saveFile.quests[name as QuestName];
+			Object.entries(KumaQuestsRecord).map(([name, quest]) => {
+				const status = saveFile.quests[name as KumaQuestName];
 
 				const fulfilled =
 					quest.conditionFunction(saveFile) && status === 'ACTIVE';
@@ -21,7 +21,7 @@ export const useQuests = (): {
 				}
 
 				return { name, status };
-			}) as { name: QuestName; status: QuestStatus }[],
+			}) as { name: KumaQuestName; status: QuestStatus }[],
 		[saveFile]
 	);
 

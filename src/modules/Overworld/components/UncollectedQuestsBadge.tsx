@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import { GoTasklist } from 'react-icons/go';
 import { battleSpriteSize } from '../../../constants/gameData/gameData';
+import { questMenuAvailable } from '../../../functions/questMenuAvailable';
 import { LocationContext } from '../../../hooks/LocationProvider';
 import { useNavigate } from '../../../hooks/useNavigate';
 import { useQuests } from '../../../hooks/useQuests';
-import { onChallengeField } from '../../MainMenu/MainMenu';
 import './UncollectedQuestsBadge.css';
 
 export const UncollectedQuestsBadge = ({
@@ -18,7 +18,7 @@ export const UncollectedQuestsBadge = ({
 		location: { mapId },
 	} = useContext(LocationContext);
 
-	if (onChallengeField(mapId)) {
+	if (questMenuAvailable(mapId)) {
 		return <></>;
 	}
 	return (

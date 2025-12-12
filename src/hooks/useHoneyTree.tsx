@@ -1,31 +1,35 @@
 import { useCallback, useContext } from 'react';
 import { battleSpriteSize } from '../constants/gameData/gameData';
-import { getRandomIndex } from '../functions/filterTargets';
+import { ArrayHelpers } from '../functions/ArrayHelpers';
 import { getItemUrl } from '../functions/getItemUrl';
 import { getHoneyEncounters } from '../functions/internalDex';
 import {
 	makeChallengerPokemon,
 	OPPO_ID,
 } from '../functions/makeChallengerPokemon';
+import { InternalDex } from '../interfaces/GameData';
 import { EmptyInventory, joinInventories } from '../interfaces/Inventory';
 import { getRandomNature } from '../interfaces/Natures';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { LocationContext } from './LocationProvider';
+import { GameDataContext } from './useGameData';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
-const HONEY_ENCOUNTER_OPTIONS: OwnedPokemon[] = getHoneyEncounters().map((h) =>
-	makeChallengerPokemon({
-		nature: getRandomNature(),
-		name: h,
-		xp: 1000,
-		caughtOnMap: 'camp',
-	})
-);
+const HONEY_ENCOUNTER_OPTIONS = (internalDex: InternalDex): OwnedPokemon[] =>
+	getHoneyEncounters(internalDex).map((h) =>
+		makeChallengerPokemon({
+			nature: getRandomNature(),
+			name: h,
+			xp: 1000,
+			caughtOnMap: 'camp',
+		})
+	);
 
 export const useHoneyTree = () => {
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
 	const { location } = useContext(LocationContext);
+	const { internalDex } = useContext(GameDataContext);
 	const { addMultipleMessages, addMessage } = useContext(MessageQueueContext);
 
 	return useCallback(() => {
@@ -66,8 +70,10 @@ export const useHoneyTree = () => {
 									inventory: EmptyInventory,
 									team: [
 										{
-											...HONEY_ENCOUNTER_OPTIONS[
-												getRandomIndex(HONEY_ENCOUNTER_OPTIONS.length)
+											...HONEY_ENCOUNTER_OPTIONS(internalDex)[
+												ArrayHelpers.getRandomIndex(
+													HONEY_ENCOUNTER_OPTIONS.length
+												)
 											],
 											caughtOnMap: location.mapId,
 										},
@@ -111,6 +117,7 @@ export const useHoneyTree = () => {
 	}, [
 		addMessage,
 		addMultipleMessages,
+		internalDex,
 		location.mapId,
 		patchSaveFileReducer,
 		saveFile,

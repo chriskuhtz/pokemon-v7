@@ -39,12 +39,14 @@ export const OverworldMenus = ({
 	>;
 	handleEnterPress: () => void;
 }) => {
-	const { baseSize, setBaseSize } = useContext(BaseSizeContext);
+	const { baseSize, setBaseSize, decreaseBaseSize, increaseBaseSize } =
+		useContext(BaseSizeContext);
 	const { navigateAwayFromOverworldReducer } = useContext(SaveFileContext);
 	const { location } = useContext(LocationContext);
 	const map = useMemo(() => mapsRecord[location.mapId], [location.mapId]);
 
 	const { isDark } = useIsDark(map.id);
+
 	useEffect(() => {
 		if (isDark && baseSize !== 64) {
 			setBaseSize(64);
@@ -98,19 +100,19 @@ export const OverworldMenus = ({
 				<CgZoomOut
 					size={battleSpriteSize}
 					onClick={() => {
-						if (baseSize === 16 || isDark) {
+						if (isDark) {
 							return;
 						}
-						setBaseSize(baseSize / 2);
+						decreaseBaseSize();
 					}}
 				/>
 				<CgZoomIn
 					size={battleSpriteSize}
 					onClick={() => {
-						if (baseSize === 256 || isDark) {
+						if (isDark) {
 							return;
 						}
-						setBaseSize(baseSize * 2);
+						increaseBaseSize();
 					}}
 				/>
 			</div>

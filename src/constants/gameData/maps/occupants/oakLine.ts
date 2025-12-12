@@ -1,4 +1,4 @@
-import { Occupant, OverworldNpc } from '../../../../interfaces/OverworldMap';
+import { OverworldNpc, Occupant } from '../../../../interfaces/Occupant';
 import { SpriteEnum } from '../../../../interfaces/SpriteEnum';
 
 const oakBase: Omit<

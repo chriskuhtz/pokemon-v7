@@ -1,11 +1,11 @@
 import { useCallback, useContext } from 'react';
 import { ONE_HOUR } from '../../../constants/gameData/gameData';
-import { getRandomEntry } from '../../../functions/filterTargets';
+import { ArrayHelpers } from '../../../functions/ArrayHelpers';
 import { Message, MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { joinInventories } from '../../../interfaces/Inventory';
 import { undergroundTable } from '../../../interfaces/Item';
-import { Ledge } from '../../../interfaces/OverworldMap';
+import { Ledge } from '../../../interfaces/Occupant';
 
 export const useShovel = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
@@ -18,7 +18,9 @@ export const useShovel = () => {
 			}
 			if (saveFile.campUpgrades['shovel certification']) {
 				const foundItem =
-					Math.random() > 0.9 ? getRandomEntry(undergroundTable) : undefined;
+					Math.random() > 0.9
+						? ArrayHelpers.getRandomEntry(undergroundTable)
+						: undefined;
 
 				const updatedInventory = foundItem
 					? joinInventories(saveFile.bag, {

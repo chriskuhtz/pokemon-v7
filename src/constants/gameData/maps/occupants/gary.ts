@@ -1,14 +1,15 @@
 import { calculateLevelData } from '../../../../functions/calculateLevelData';
 import { makeChallengerPokemon } from '../../../../functions/makeChallengerPokemon';
 import {
-	Occupant,
-	OverworldNpc,
 	OverworldTrainer,
-} from '../../../../interfaces/OverworldMap';
+	OverworldNpc,
+	Occupant,
+} from '../../../../interfaces/Occupant';
+
 import { SaveFile } from '../../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../../interfaces/StatObject';
-import { internalDex } from '../../internalDexData';
+import { baseInternalDex } from '../../../baseInternalDex';
 
 const garyTeam = () => [
 	makeChallengerPokemon({
@@ -89,7 +90,7 @@ const garyCondition = (s: SaveFile) => {
 		team.every(
 			(t) =>
 				calculateLevelData(t.xp, t.growthRate).level <= 60 &&
-				internalDex[t.name].dexId <= 151
+				baseInternalDex[t.name].dexId <= 151
 		)
 	);
 };

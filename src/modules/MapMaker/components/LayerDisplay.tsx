@@ -1,12 +1,10 @@
 import React from 'react';
 import { CombinedCanvas } from '../../../components/CombinedCanvas/CombinedCanvas';
-import {
-	TileIdentifier,
-	TileMap,
-	Occupant,
-} from '../../../interfaces/OverworldMap';
+
 import { useDrawOccupants } from '../../Overworld/hooks/useDrawOccupants';
 import { LayerName } from '../hooks/useMapEditor';
+import { Occupant } from '../../../interfaces/Occupant';
+import { TileIdentifier, TileMap } from '../../../interfaces/TileMap';
 
 export const LayerDisplay = ({
 	layerName,

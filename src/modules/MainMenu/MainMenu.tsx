@@ -20,14 +20,12 @@ import {
 	ResetSnapshotCard,
 } from '../../components/SnapshotCard/SnapshotCard';
 import { TrainerCard } from '../../components/TrainerCard/TrainerCard';
-import {
-	battleSpriteSize,
-	challengeFieldId,
-	randomFieldId,
-} from '../../constants/gameData/gameData';
-import { MapId, mapsRecord } from '../../constants/gameData/maps/mapsRecord';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
+import { mapsRecord } from '../../constants/gameData/maps/mapsRecord';
 import { fullyHealPokemon } from '../../functions/fullyHealPokemon';
+import { questMenuAvailable } from '../../functions/questMenuAvailable';
 import { LocationContext } from '../../hooks/LocationProvider';
+import { GameDataContext } from '../../hooks/useGameData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { useQuests } from '../../hooks/useQuests';
@@ -37,12 +35,10 @@ import { useTeleport } from '../../hooks/useTeleport';
 import { EmptyInventory } from '../../interfaces/Inventory';
 import { RoutesType } from '../../interfaces/Routing';
 
-export const onChallengeField = (id: MapId) => {
-	return id === challengeFieldId || id === randomFieldId;
-};
 export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { location, setLocation } = useContext(LocationContext);
+	const { settingsEditable } = useContext(GameDataContext);
 	const reset = useReset();
 	const [resetConfirmationInProgress, setRCIP] = useState<boolean>(false);
 	const { numberOfUncollected } = useQuests();
@@ -69,7 +65,7 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 					/>
 				)}
 				<FlyingButton />
-				{onChallengeField(location.mapId) && (
+				{questMenuAvailable(location.mapId) && (
 					<Card
 						onClick={() => {
 							setLocation({
@@ -112,7 +108,7 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 					icon={<MdCatchingPokemon size={battleSpriteSize} />}
 					actionElements={[]}
 				/>
-				{!onChallengeField(location.mapId) && (
+				{!questMenuAvailable(location.mapId) && (
 					<Card
 						onClick={() => navigate('MAIN', 'QUESTS')}
 						content={<h4>Quests</h4>}
@@ -136,15 +132,21 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 					icon={<FaSearch size={battleSpriteSize} />}
 					actionElements={[]}
 				/>
-				<Card
-					onClick={() => navigate('MAIN', 'SETTINGS_IN_GAME')}
-					content={<h4>SETTINGS</h4>}
-					icon={<IoMdSettings size={battleSpriteSize} />}
-					actionElements={[]}
-				/>
-				<ExportSnapshotCard />
-				<ImportSnapshotCard />
-				<ResetSnapshotCard />
+				{settingsEditable && (
+					<Card
+						onClick={() => navigate('MAIN', 'SETTINGS_IN_GAME')}
+						content={<h4>SETTINGS</h4>}
+						icon={<IoMdSettings size={battleSpriteSize} />}
+						actionElements={[]}
+					/>
+				)}
+				{saveFile.settings?.snapShotExportAvailable && (
+					<>
+						<ExportSnapshotCard />
+						<ImportSnapshotCard />
+						<ResetSnapshotCard />
+					</>
+				)}
 
 				{resetConfirmationInProgress ? (
 					<button

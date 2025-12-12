@@ -3,12 +3,12 @@ import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { MoveInfoButton } from '../../components/MoveInfoButton/MoveInfoButton';
 import { MovesDisplay } from '../../components/OwnedPokemonCard/components/MovesDisplay';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
-import { internalDex } from '../../constants/gameData/internalDexData';
 import { handledMoves, MoveName } from '../../constants/movesCheckList';
+import { ArrayHelpers } from '../../functions/ArrayHelpers';
 import { calculateLevelData } from '../../functions/calculateLevelData';
-import { getEntryWithOverflow } from '../../functions/filterTargets';
 import { moveIsTeachable } from '../../functions/moveIsAvailable';
 import { withChangedMoves } from '../../functions/withChangedMoves';
+import { GameDataContext } from '../../hooks/useGameData';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
@@ -104,9 +104,15 @@ export const MoveTutor = () => {
 	);
 };
 
-const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
+export const MoveEditor = ({
+	ownedPokemon,
+}: {
+	ownedPokemon: OwnedPokemon;
+}) => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { addMessage } = useContext(MessageQueueContext);
+
+	const { internalDex } = useContext(GameDataContext);
 
 	const [moveToConfirm, setMoveToConfirm] = useState<MoveName | undefined>();
 
@@ -163,7 +169,10 @@ const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 					const index =
 						handledMoves.findIndex((handled) => handled === m.move.name) +
 						ownedPokemon.name.length * 5;
-					const randomizedMove = getEntryWithOverflow([...handledMoves], index);
+					const randomizedMove = ArrayHelpers.getEntryWithOverflow(
+						[...handledMoves],
+						index
+					);
 					return {
 						...m,
 						move: {

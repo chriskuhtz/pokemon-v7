@@ -1,17 +1,18 @@
 import { CampUpgrade } from '../constants/gameData/campUpgrades';
 import { MapId } from '../constants/gameData/maps/mapsRecord';
-import { QuestName } from '../constants/gameData/questsRecord';
 import { PokemonName } from '../constants/pokemonNames';
+import { KumaQuestName } from '../versions/kuma/questsRecord';
 import { BadgeName } from './Badge';
 import { Challenger } from './Challenger';
 import { Inventory } from './Inventory';
 import { ApricornType, BerryType, HerbType, ItemType, MulchType } from './Item';
-import { OverworldTrainer } from './OverworldMap';
+import { OverworldTrainer } from './Occupant';
 import { OwnedPokemon } from './OwnedPokemon';
 import { SwarmType } from './Pokedex';
 import { PokemonType } from './PokemonType';
 import { QuestStatus } from './Quest';
 import { RoutesType } from './Routing';
+import { SettingsObject } from './SettingsObject';
 
 export type CharacterOrientation = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
 export type ForwardFoot = 'CENTER1' | 'RIGHT' | 'CENTER2' | 'LEFT';
@@ -32,27 +33,6 @@ export interface CharacterLocationData {
 	forwardFoot: ForwardFoot;
 	x: number;
 	y: number;
-}
-
-export interface SettingsObject {
-	fasterDays?: boolean;
-	doubleXpRates?: boolean;
-	rogueLike?: boolean;
-	noItemsInBattle?: boolean;
-	releaseFaintedPokemon?: boolean;
-	expShareActive?: boolean;
-	randomStarters?: boolean;
-	randomOverworldItems?: boolean;
-	randomQuestRewards?: boolean;
-	randomSwarms?: boolean;
-	randomAbilities?: boolean;
-	randomHeldItems?: boolean;
-	randomLearnSets?: boolean;
-	hideMovementButtons?: boolean;
-	smarterOpponents?: boolean;
-	minimalGrindingMode?: boolean;
-	unlimitedPathfindingRange?: boolean;
-	seekOutEncounters?: boolean;
 }
 
 export type BerryBushStatus =
@@ -175,7 +155,7 @@ export interface SaveFile {
 	lastEdited: number;
 	lastNurse: string;
 	settings?: SettingsObject;
-	quests: Record<QuestName, QuestStatus>;
+	quests: Record<KumaQuestName, QuestStatus>;
 	sprite: string;
 	mileStones: MileStonesObject;
 	farm: {

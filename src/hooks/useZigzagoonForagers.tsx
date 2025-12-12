@@ -1,12 +1,12 @@
 import { useCallback, useContext } from 'react';
 import { ONE_HOUR } from '../constants/gameData/gameData';
-import { getRandomEntry } from '../functions/filterTargets';
+import { ArrayHelpers } from '../functions/ArrayHelpers';
 import { joinInventories } from '../interfaces/Inventory';
 import { pickupTable } from '../interfaces/Item';
-import { Occupant } from '../interfaces/OverworldMap';
 import { SpriteEnum } from '../interfaces/SpriteEnum';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
+import { Occupant } from '../interfaces/Occupant';
 
 export const useZigzagoonForagers = () => {
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
@@ -29,7 +29,7 @@ export const useZigzagoonForagers = () => {
 			return;
 		}
 
-		const foragedItem = getRandomEntry(pickupTable);
+		const foragedItem = ArrayHelpers.getRandomEntry(pickupTable);
 		const amount = 1;
 		addMultipleMessages([
 			{ message: 'Zig Zig' },

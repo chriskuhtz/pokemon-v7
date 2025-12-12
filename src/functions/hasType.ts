@@ -1,4 +1,4 @@
-import { internalDex } from '../constants/gameData/internalDexData';
+import { baseInternalDex } from '../constants/baseInternalDex';
 import { BattlePokemon, isBattlePokemon } from '../interfaces/BattlePokemon';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { PokemonType } from '../interfaces/PokemonType';
@@ -12,5 +12,5 @@ export const hasType = (
 		return getTypeNames(mon).includes(type);
 	}
 
-	return internalDex[mon.name].types.includes(type);
+	return baseInternalDex[mon.name].types.includes(type);
 };

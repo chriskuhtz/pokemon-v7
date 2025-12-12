@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { MdEdit } from 'react-icons/md';
 import {
 	battleSpriteSize,
@@ -12,11 +12,15 @@ import { getStats } from '../../../functions/getStats';
 import { getTypeNames } from '../../../functions/getTypeNames';
 import { isOwnedPokemonKO } from '../../../functions/isKo';
 import { replaceRouteName } from '../../../functions/replaceRouteName';
-import { EvolutionReducerPayload } from '../../../hooks/useSaveFile';
+import {
+	EvolutionReducerPayload,
+	SaveFileContext,
+} from '../../../hooks/useSaveFile';
 import { Inventory } from '../../../interfaces/Inventory';
 import { isKeyItem, ItemType } from '../../../interfaces/Item';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { PokemonData } from '../../../interfaces/PokemonData';
+import { MoveEditor } from '../../../modules/MoveTutor/MoveTutor';
 import { IconSolarSystem } from '../../../uiComponents/IconSolarSystem/IconSolarSystem';
 import { Stack } from '../../../uiComponents/Stack/Stack';
 import { AbilityInfoButton } from '../../AbilityInfoButton/AbilityInfoButton';
@@ -50,6 +54,7 @@ export const OwnedPokemonCardContent = ({
 	setNickName: (x: string | undefined) => void;
 	evolve: (x: EvolutionReducerPayload) => void;
 }) => {
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const [heldItemMenuOpen, setHeldItemMenuOpen] = useState<boolean>(false);
 	const [nickNameMenuOpen, setNickNameMenuOpen] = useState<boolean>(false);
 
@@ -132,7 +137,8 @@ export const OwnedPokemonCardContent = ({
 									ownedPokemon.xp,
 									ownedPokemon.growthRate,
 									ownedPokemon.nature,
-									ownedPokemon.effortValues
+									ownedPokemon.effortValues,
+									saveFile.settings
 								).hp
 							}
 							damage={ownedPokemon.damage}
@@ -197,8 +203,11 @@ export const OwnedPokemonCardContent = ({
 				<MovesDisplay
 					ownedPokemon={ownedPokemon}
 					setMoves={setMoves}
-					onlyCurrent
+					onlyCurrent={!saveFile.settings?.movesEditableInTeamOverview}
 				/>
+				{saveFile.settings?.movesLearnableInTeamOverview && (
+					<MoveEditor ownedPokemon={ownedPokemon} />
+				)}
 				<StatDisplay ownedPokemon={ownedPokemon} data={data} />{' '}
 				<EvoInfo
 					ownedPokemon={ownedPokemon}
@@ -206,6 +215,19 @@ export const OwnedPokemonCardContent = ({
 					inventory={inventory}
 					evolve={evolve}
 				/>
+				{saveFile.settings?.releasePokemonInTeamOverview && (
+					<button
+						onClick={() => {
+							patchSaveFileReducer({
+								pokemon: saveFile.pokemon.filter(
+									(p) => p.id !== ownedPokemon?.id
+								),
+							});
+						}}
+					>
+						Release this Pokemon
+					</button>
+				)}
 			</Stack>
 		</React.Fragment>
 	);

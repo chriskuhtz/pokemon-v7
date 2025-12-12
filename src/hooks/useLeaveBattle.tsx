@@ -9,8 +9,8 @@ import { nId } from '../constants/gameData/maps/occupants/n';
 import { redId } from '../constants/gameData/maps/occupants/red';
 import { silverId } from '../constants/gameData/maps/occupants/silver';
 import { addPokemonToDex } from '../functions/addPokemonToDex';
+import { ArrayHelpers } from '../functions/ArrayHelpers';
 import { calculateLevelData } from '../functions/calculateLevelData';
-import { getRandomEntry } from '../functions/filterTargets';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getHeldItem } from '../functions/getHeldItem';
 import { getHighestXpOnTeam } from '../functions/getHighestXpOnTeam';
@@ -120,7 +120,10 @@ export const useLeaveBattle = () => {
 			//check pickup
 			const pickUpCheckedTeam: OwnedPokemon[] = ownedTeam.map((p) => {
 				if (p.ability === 'pickup' && !getHeldItem(p) && Math.random() < 0.1) {
-					return { ...p, heldItemName: getRandomEntry(pickupTable) };
+					return {
+						...p,
+						heldItemName: ArrayHelpers.getRandomEntry(pickupTable),
+					};
 				}
 				if (p.ability === 'honey-gather' && !getHeldItem(p)) {
 					const lvl = calculateLevelData(p.xp, p.growthRate).level;

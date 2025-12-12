@@ -1,6 +1,5 @@
 import { useCallback, useContext } from 'react';
 import { v4 } from 'uuid';
-import { QuestName, QuestsRecord } from '../constants/gameData/questsRecord';
 import { getRewardItemsForQuest } from '../functions/getRewardForQuest';
 import { getTeamSize } from '../functions/getTeamSize';
 import {
@@ -9,6 +8,7 @@ import {
 } from '../functions/joinCatchBoosts';
 import { joinInventories } from '../interfaces/Inventory';
 import { CatchBoosts } from '../interfaces/SaveFile';
+import { KumaQuestName, KumaQuestsRecord } from '../versions/kuma/questsRecord';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
@@ -16,8 +16,8 @@ export const useFulfillQuest = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { addMessage } = useContext(MessageQueueContext);
 	return useCallback(
-		(q: QuestName) => {
-			const quest = QuestsRecord[q];
+		(q: KumaQuestName) => {
+			const quest = KumaQuestsRecord[q];
 
 			const reward = getRewardItemsForQuest(q);
 			const updatedInventory = joinInventories(saveFile.bag, reward);

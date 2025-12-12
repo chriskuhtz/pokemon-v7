@@ -1,6 +1,5 @@
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
-import { NatureSection } from '../../components/OwnedPokemonCard/components/StatDisplay';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
@@ -12,6 +11,7 @@ import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import { NatureSection } from '../../components/NatureSection/NatureSection';
 
 export const NatureTutor = () => {
 	const { saveFile } = useContext(SaveFileContext);

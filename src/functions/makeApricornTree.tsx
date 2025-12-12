@@ -1,6 +1,5 @@
 import { ApricornType } from '../interfaces/Item';
-import { ApricornTree, EmptyApricornTree } from '../interfaces/OverworldMap';
-
+import { ApricornTree, EmptyApricornTree } from '../interfaces/Occupant';
 const apricornSpriteMap: Record<ApricornType, string> = {
 	'black-apricorn': '/mapObjects/apricornBlack.png',
 	'blue-apricorn': '/mapObjects/apricornBlue.png',

@@ -52,7 +52,8 @@ import {
 	silverS1W1,
 	silverW1,
 } from '../constants/gameData/maps/occupants/silver';
-import { Occupant } from '../interfaces/OverworldMap';
+import { Occupant } from '../interfaces/Occupant';
+
 import {
 	travellingMerchantRouteE1,
 	travellingMerchantRouteN1,
@@ -62,7 +63,7 @@ import {
 	travellingMerchantRouteS1W1,
 	travellingMerchantRouteW1,
 } from '../modules/TravellingMerchant/TravellingMerchant';
-import { getEntryWithOverflow } from './filterTargets';
+import { ArrayHelpers } from './ArrayHelpers';
 
 /**
  *
@@ -177,7 +178,7 @@ export const getTraveller = (
 		return options[mapIndex].flat();
 	}
 
-	return getEntryWithOverflow<Occupant[]>(
+	return ArrayHelpers.getEntryWithOverflow<Occupant[]>(
 		options[mapIndex],
 		dayIndex + mapIndex
 	);

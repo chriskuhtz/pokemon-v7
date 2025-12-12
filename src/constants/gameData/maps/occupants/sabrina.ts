@@ -1,10 +1,11 @@
 import { calculateLevelData } from '../../../../functions/calculateLevelData';
 import { makeChallengerPokemon } from '../../../../functions/makeChallengerPokemon';
 import {
-	Occupant,
-	OverworldNpc,
 	OverworldTrainer,
-} from '../../../../interfaces/OverworldMap';
+	OverworldNpc,
+	Occupant,
+} from '../../../../interfaces/Occupant';
+
 import { SaveFile } from '../../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../../interfaces/StatObject';

@@ -1,7 +1,7 @@
 import { Nature } from '../interfaces/Natures';
+import { SettingsObject } from '../interfaces/SettingsObject';
 import { Stat } from '../interfaces/StatObject';
 import { determineNatureFactor } from './determineNatureFactor';
-import { getSettings } from './getPlayerId';
 
 export const calculateStat = (
 	base: number,
@@ -10,11 +10,10 @@ export const calculateStat = (
 	nature: Nature,
 	level: number,
 	stat: Stat,
-	withoutBonus?: boolean
+	withoutBonus: boolean | undefined,
+	settings: SettingsObject | undefined
 ): number => {
 	const bonus = withoutBonus ? 0 : stat === 'hp' ? level + 10 : 5;
-
-	const settings = getSettings();
 
 	const actualIv = settings?.minimalGrindingMode ? 0 : iv;
 	const actualEv = settings?.minimalGrindingMode ? 0 : ev;

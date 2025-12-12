@@ -1,6 +1,6 @@
 import { CampUpgrade } from '../constants/gameData/campUpgrades';
-import { QuestName } from '../constants/gameData/questsRecord';
 import { BattleTeamConfig } from '../hooks/useGetBattleTeam';
+import { KumaQuestName } from '../versions/kuma/questsRecord';
 import { BattlePokemon } from './BattlePokemon';
 import { Inventory } from './Inventory';
 import { OwnedPokemon } from './OwnedPokemon';
@@ -17,7 +17,7 @@ export interface Challenger {
 	id: string;
 	inventory: Inventory;
 	trainer?: TrainerInfo;
-	availableAfter?: QuestName;
+	availableAfter?: KumaQuestName;
 	requiredUpgrade?: CampUpgrade;
 	rewardItems?: Partial<Inventory>;
 	battleTeamConfig?: BattleTeamConfig;

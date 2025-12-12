@@ -3,9 +3,9 @@ import { getOppositeDirection } from '../../../functions/getOppositeDirection';
 import { LocationContext } from '../../../hooks/LocationProvider';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
-import { Ledge } from '../../../interfaces/OverworldMap';
 import { CharacterLocationData } from '../../../interfaces/SaveFile';
 import { useShovel } from './useShovel';
+import { Ledge } from '../../../interfaces/Occupant';
 
 export const useInteractWithLedge = () => {
 	const { saveFile } = useContext(SaveFileContext);

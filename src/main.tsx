@@ -1,16 +1,16 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { MessageQueueProvider } from './hooks/useMessageQueue';
 import './index.css';
-import { MessageContainer } from './uiComponents/Message/MessageContainer';
+import { Login } from './modules/Login/Login';
+import { VersionSelection } from './modules/VersionSelection/VersionSelection';
 
 document.addEventListener('contextmenu', (e) => {
 	e.preventDefault();
 });
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<MessageQueueProvider>
-			<MessageContainer />
-		</MessageQueueProvider>
+		<Login>
+			<VersionSelection />
+		</Login>
 	</StrictMode>
 );

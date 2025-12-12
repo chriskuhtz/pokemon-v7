@@ -1,14 +1,15 @@
 import { useContext, useMemo } from 'react';
+import { baseInternalDex } from '../../constants/baseInternalDex';
 import { fps } from '../../constants/gameData/gameData';
-import { internalDex } from '../../constants/gameData/internalDexData';
 import { getNextLocation } from '../../functions/getNextLocation';
 import { getOppositeDirection } from '../../functions/getOppositeDirection';
 import { isPassable } from '../../functions/isPassable';
 import { LocationContext } from '../../hooks/LocationProvider';
 import { BaseSizeContext } from '../../hooks/useBaseSize';
 import { SaveFileContext } from '../../hooks/useSaveFile';
-import { Occupant, OverworldMap } from '../../interfaces/OverworldMap';
 import { useDrawFollowerPokemon } from '../../modules/Overworld/hooks/useDrawCharacter';
+import { Occupant } from '../../interfaces/Occupant';
+import { OverworldMap } from '../../interfaces/OverworldMap';
 
 const followerCanvasId = 'followerCanvas';
 
@@ -29,7 +30,7 @@ export const FollowerSprite = ({
 			return -1;
 		}
 
-		return internalDex[mon.name].dexId;
+		return baseInternalDex[mon.name].dexId;
 	}, [saveFile]);
 
 	const showFollower = useMemo(() => {

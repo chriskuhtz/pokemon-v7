@@ -1,7 +1,7 @@
 import { useCallback, useContext } from 'react';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
-import { OverworldBush } from '../../../interfaces/OverworldMap';
+import { OverworldBush } from '../../../interfaces/Occupant';
 
 export const useMachete = () => {
 	const { saveFile, handleOccupantReducer } = useContext(SaveFileContext);

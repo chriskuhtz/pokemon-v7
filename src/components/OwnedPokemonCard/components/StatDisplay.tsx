@@ -1,22 +1,16 @@
-import { maxBst } from '../../../constants/baseStatRecord';
 import { portraitMode } from '../../../constants/gameData/gameData';
 import { PokemonName } from '../../../constants/pokemonNames';
 import { typeColors, typeContrastColors } from '../../../constants/typeColors';
-import {
-	getHighestStat,
-	HIDDEN_STATS_FOR_TOTAL,
-} from '../../../functions/getHighestStat';
-import { getStats } from '../../../functions/getStats';
 import { sumOfIvs } from '../../../functions/sumOfIvs';
-import { Nature, natures } from '../../../interfaces/Natures';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { PokemonData } from '../../../interfaces/PokemonData';
 import { PokemonType } from '../../../interfaces/PokemonType';
 import { StatObject } from '../../../interfaces/StatObject';
 import { AnimatedBar } from '../../../uiComponents/AnimatedBar/AnimatedBar';
-import { Card } from '../../../uiComponents/Card/Card';
 import { Chip } from '../../../uiComponents/Chip/Chip';
 import { Stack } from '../../../uiComponents/Stack/Stack';
+import { BstSection } from '../../BstSection/BstSection';
+import { NatureSection } from '../../NatureSection/NatureSection';
 
 export const HIDDEN_STATS = ['accuracy', 'evasion'];
 
@@ -45,94 +39,7 @@ export const StatDisplay = ({
 		</div>
 	);
 };
-export const BstSection = ({
-	ownedPokemon,
-	data,
-	hideExplanation,
-}: {
-	ownedPokemon: OwnedPokemon;
-	data: PokemonData;
-	hideExplanation?: boolean;
-}) => {
-	return (
-		<div
-			style={{
-				padding: '.5rem',
-				border: '1px solid black',
-				borderRadius: '1rem',
-				backgroundColor: 'rgba(255, 255, 255, 0.5)',
-			}}
-		>
-			<strong
-				style={{
-					padding: '1rem .5rem',
-				}}
-			>
-				Total Stats:
-			</strong>
-			<div
-				style={{
-					padding: '.5rem',
-					display: 'grid',
-					gap: '1.5rem',
-					gridTemplateColumns: portraitMode ? '1fr' : '1fr 1fr 1fr',
-					alignItems: 'center',
-				}}
-			>
-				{Object.entries(
-					getStats(
-						data.stats,
-						ownedPokemon.xp,
-						ownedPokemon.growthRate,
-						ownedPokemon.nature,
-						ownedPokemon.effortValues
-					)
-				)
-					.sort()
-					.map(([stat, value]) => {
-						const highestStat = getHighestStat({ ownedPokemon, data })[1];
 
-						if (!HIDDEN_STATS_FOR_TOTAL.includes(stat)) {
-							return (
-								<Chip
-									key={stat}
-									style={{
-										width: `calc(100% / ${highestStat} * ${value})`,
-										backgroundColor: typeColors[data.types[0].type.name],
-										color: typeContrastColors[data.types[0].type.name],
-									}}
-								>
-									<>
-										{stat}: {value}
-									</>
-								</Chip>
-							);
-						}
-					})}
-			</div>
-			{!hideExplanation && (
-				<>
-					<p>
-						Total Base Stats (equal for all {ownedPokemon.name}), compared to
-						the strongest Pokemon:
-					</p>
-					<AnimatedBar
-						max={maxBst}
-						offset={
-							maxBst -
-							data.stats.reduce((sum, summand) => {
-								if (HIDDEN_STATS.includes(summand.stat.name)) {
-									return sum;
-								}
-								return sum + summand.base_stat;
-							}, 0)
-						}
-					/>
-				</>
-			)}
-		</div>
-	);
-};
 const EVsSection = ({
 	effortValues,
 	type,
@@ -268,30 +175,5 @@ const IVsSection = ({
 			<p>Your {name}´s unique values</p>
 			<AnimatedBar max={186} offset={186 - sumOfIvs(intrinsicValues)} />
 		</div>
-	);
-};
-export const NatureSection = ({ nature }: { nature: Nature }) => {
-	const mods = natures[nature];
-	return (
-		<Card
-			actionElements={[]}
-			icon={<h3>+/-</h3>}
-			content={
-				<>
-					<strong
-						style={{
-							display: 'flex',
-							gap: '.5rem',
-							alignItems: 'center',
-						}}
-					>
-						<span>{nature} Nature: </span>
-						<span>{!mods.buff && <p>Neutral Nature</p>}</span>
-						<span>{mods.buff && <p>+ 10% {mods.buff}</p>} </span>
-						<span>{mods.debuff && <p>- 10% {mods.debuff}</p>}</span>
-					</strong>
-				</>
-			}
-		/>
 	);
 };

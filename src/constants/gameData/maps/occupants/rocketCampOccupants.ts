@@ -3,7 +3,7 @@ import { makeChallengerPokemon } from '../../../../functions/makeChallengerPokem
 import { makeOverworldItem } from '../../../../functions/makeOverworldItem';
 import { occupantHandled } from '../../../../functions/occupantHandled';
 import { getRocketChadTeam } from '../../../../functions/troubleMakers/rocket';
-import { Occupant } from '../../../../interfaces/OverworldMap';
+import { Occupant } from '../../../../interfaces/Occupant';
 import { SaveFile } from '../../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../../interfaces/SpriteEnum';
 

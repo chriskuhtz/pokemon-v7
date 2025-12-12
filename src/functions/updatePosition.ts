@@ -1,4 +1,5 @@
-import { Occupant, OverworldMap } from '../interfaces/OverworldMap';
+import { Occupant } from '../interfaces/Occupant';
+import { OverworldMap } from '../interfaces/OverworldMap';
 import {
 	CharacterLocationData,
 	CharacterOrientation,

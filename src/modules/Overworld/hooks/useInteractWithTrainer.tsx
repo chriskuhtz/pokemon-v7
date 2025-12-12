@@ -3,7 +3,7 @@ import { SpriteIcon } from '../../../components/SpriteIcon/SpriteIcon';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { EmptyInventory } from '../../../interfaces/Inventory';
-import { OverworldTrainer } from '../../../interfaces/OverworldMap';
+import { OverworldTrainer } from '../../../interfaces/Occupant';
 
 export const useInteractWithTrainer = () => {
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);

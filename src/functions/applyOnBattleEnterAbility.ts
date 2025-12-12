@@ -2,6 +2,7 @@ import { Message } from '../hooks/useMessageQueue';
 import { SPIKES_FACTOR } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { typeEffectivenessChart } from '../interfaces/PokemonType';
+import { SettingsObject } from '../interfaces/SettingsObject';
 import { EmptyStatObject, Stat } from '../interfaces/StatObject';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';
@@ -29,6 +30,7 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 	removeScreens,
 	terrain,
 	addBattleFieldEffect,
+	settings,
 }: {
 	user: BattlePokemon;
 	setWeather: (x: WeatherObject) => void;
@@ -40,6 +42,7 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 	removeScreens: (ownerId: string) => void;
 	terrain: BattleTerrain | undefined;
 	addBattleFieldEffect: (x: BattleFieldEffect) => void;
+	settings: SettingsObject | undefined;
 }): BattlePokemon[] => {
 	let updatedPokemon = [...pokemon];
 	if (user.ability == 'curious-medicine') {
@@ -497,6 +500,7 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 				const stat: Stat = getHighestStat({
 					ownedPokemon: user,
 					data: user.data,
+					settings,
 				})[0];
 				return applyStatChangeToPokemon(
 					p,
@@ -525,6 +529,7 @@ export const applyOnBattleEnterAbilityAndEffects = ({
 				const stat: Stat = getHighestStat({
 					ownedPokemon: user,
 					data: user.data,
+					settings,
 				})[0];
 				return applyStatChangeToPokemon(
 					p,

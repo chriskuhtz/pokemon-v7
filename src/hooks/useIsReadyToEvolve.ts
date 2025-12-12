@@ -7,7 +7,7 @@ import { SaveFileContext } from './useSaveFile';
 
 export const useIsReadyToEvolve = (
 	pokemon: OwnedPokemon,
-	data: PokemonData
+	data?: PokemonData
 ) => {
 	const { saveFile } = useContext(SaveFileContext);
 	const { evos } = useGetEvolution(data);

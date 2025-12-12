@@ -1,7 +1,7 @@
 import { CampUpgrade } from '../constants/gameData/campUpgrades';
 import { MapId } from '../constants/gameData/maps/mapsRecord';
-import { QuestName } from '../constants/gameData/questsRecord';
 import { PokemonName } from '../constants/pokemonNames';
+import { KumaQuestName } from '../versions/kuma/questsRecord';
 import { BadgeName } from './Badge';
 import { Inventory } from './Inventory';
 import { OwnedPokemon } from './OwnedPokemon';
@@ -26,7 +26,7 @@ export interface Quest {
 	//meta
 	kind: QuestKind;
 	category: QuestCategory;
-	availableAfter?: QuestName;
+	availableAfter?: KumaQuestName;
 	requiredUpgrade?: CampUpgrade;
 	progress?: (s: SaveFile) => { current: number; goal: number };
 	//rewards

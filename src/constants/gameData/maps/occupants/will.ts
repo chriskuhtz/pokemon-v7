@@ -1,7 +1,7 @@
 import { getHighestXpOnTeam } from '../../../../functions/getHighestXpOnTeam';
 import { makeChallengerPokemon } from '../../../../functions/makeChallengerPokemon';
 import { occupantHandled } from '../../../../functions/occupantHandled';
-import { OverworldTrainer } from '../../../../interfaces/OverworldMap';
+import { OverworldTrainer } from '../../../../interfaces/Occupant';
 import { OwnedPokemon } from '../../../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../../interfaces/SpriteEnum';

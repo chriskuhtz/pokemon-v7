@@ -37,5 +37,8 @@ export const routes = [
 	'INTERNAL_DEX',
 	'SETTINGS_IN_GAME',
 	'BATTLE_JOURALIST',
+	'INTRO',
+	'CHANGELOG',
+	'LABYRINTH_SUCCESS',
 ] as const;
 export type RoutesType = (typeof routes)[number];

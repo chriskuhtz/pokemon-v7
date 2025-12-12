@@ -4,32 +4,45 @@ import {
 	midBstPokemon,
 } from '../constants/baseStatRecord';
 import { shinyChance } from '../constants/gameData/gameData';
-import { internalDex } from '../constants/gameData/internalDexData';
 import { MapId } from '../constants/gameData/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { BattleTeamConfig } from '../hooks/useGetBattleTeam';
+import { InternalDex } from '../interfaces/GameData';
 import { getRandomNature } from '../interfaces/Natures';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { CatchStreak, PokemonSwarm, SaveFile } from '../interfaces/SaveFile';
 import { StatObject } from '../interfaces/StatObject';
-import { getRandomEntry } from './filterTargets';
+import { ArrayHelpers } from './ArrayHelpers';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getTimeOfDay } from './getTimeOfDay';
 import { getRandomEncounter, isNotCatchable } from './internalDex';
 import { makeChallengerPokemon } from './makeChallengerPokemon';
 
-export const determineWildPokemon = (
-	team: OwnedPokemon[],
-	mapId: MapId,
-	quests: SaveFile['quests'],
-	waterEncounter: boolean,
-	shinyFactor: number,
-	lure?: 'lure' | 'super-lure' | 'max-lure',
-	catchStreak?: CatchStreak,
-	currentSwarm?: PokemonSwarm,
-	currentStrongSwarm?: PokemonSwarm,
-	currentDistortionSwarm?: PokemonSwarm
-): { team: OwnedPokemon[]; battleTeamConfig: BattleTeamConfig } => {
+export const determineWildPokemon = ({
+	team,
+	mapId,
+	quests,
+	waterEncounter,
+	lure,
+	shinyFactor,
+	catchStreak,
+	currentSwarm,
+	currentDistortionSwarm,
+	currentStrongSwarm,
+	internalDex,
+}: {
+	team: OwnedPokemon[];
+	mapId: MapId;
+	quests: SaveFile['quests'];
+	waterEncounter: boolean;
+	shinyFactor: number;
+	lure?: 'lure' | 'super-lure' | 'max-lure';
+	catchStreak?: CatchStreak;
+	currentSwarm?: PokemonSwarm;
+	currentStrongSwarm?: PokemonSwarm;
+	currentDistortionSwarm?: PokemonSwarm;
+	internalDex: InternalDex;
+}): { team: OwnedPokemon[]; battleTeamConfig: BattleTeamConfig } => {
 	let battleTeamConfig: BattleTeamConfig = {
 		assignGender: true,
 		assignHeldItem: true,
@@ -85,16 +98,20 @@ export const determineWildPokemon = (
 				{
 					name: catchStreak.pokemon,
 					nature: getRandomNature(),
-					...getRandomEncounter(mapId, {
-						area: waterEncounter ? 'WATER' : 'LAND',
-						timeOfDay,
-					}),
+					...getRandomEncounter(
+						mapId,
+						{
+							area: waterEncounter ? 'WATER' : 'LAND',
+							timeOfDay,
+						},
+						internalDex
+					),
 				},
 				{ increasedShinyFactor: shinyFactor }
 			),
 		];
 	} else if (lure === 'lure') {
-		const name = getRandomEntry(
+		const name = ArrayHelpers.getRandomEntry(
 			Object.entries(lowBstPokemon).filter(([p]) =>
 				isNotCatchable(internalDex[p as PokemonName])
 			)
@@ -111,7 +128,7 @@ export const determineWildPokemon = (
 			}),
 		];
 	} else if (lure === 'super-lure') {
-		const name = getRandomEntry(
+		const name = ArrayHelpers.getRandomEntry(
 			Object.entries(midBstPokemon).filter(([p]) =>
 				isNotCatchable(internalDex[p as PokemonName])
 			)
@@ -128,7 +145,7 @@ export const determineWildPokemon = (
 			}),
 		];
 	} else if (lure === 'max-lure') {
-		const name = getRandomEntry(
+		const name = ArrayHelpers.getRandomEntry(
 			Object.entries(highBstPokemon).filter(([p]) =>
 				isNotCatchable(internalDex[p as PokemonName])
 			)
@@ -188,20 +205,28 @@ export const determineWildPokemon = (
 						makeChallengerPokemon(
 							{
 								nature: getRandomNature(),
-								...getRandomEncounter(mapId, {
-									area: waterEncounter ? 'WATER' : 'LAND',
-									timeOfDay,
-								}),
+								...getRandomEncounter(
+									mapId,
+									{
+										area: waterEncounter ? 'WATER' : 'LAND',
+										timeOfDay,
+									},
+									internalDex
+								),
 							},
 							{ increasedShinyFactor: shinyFactor }
 						),
 						makeChallengerPokemon(
 							{
 								nature: getRandomNature(),
-								...getRandomEncounter(mapId, {
-									area: waterEncounter ? 'WATER' : 'LAND',
-									timeOfDay,
-								}),
+								...getRandomEncounter(
+									mapId,
+									{
+										area: waterEncounter ? 'WATER' : 'LAND',
+										timeOfDay,
+									},
+									internalDex
+								),
 							},
 							{ increasedShinyFactor: shinyFactor }
 						),
@@ -210,10 +235,14 @@ export const determineWildPokemon = (
 						makeChallengerPokemon(
 							{
 								nature: getRandomNature(),
-								...getRandomEncounter(mapId, {
-									area: waterEncounter ? 'WATER' : 'LAND',
-									timeOfDay,
-								}),
+								...getRandomEncounter(
+									mapId,
+									{
+										area: waterEncounter ? 'WATER' : 'LAND',
+										timeOfDay,
+									},
+									internalDex
+								),
 							},
 							{ increasedShinyFactor: shinyFactor }
 						),

@@ -1,7 +1,7 @@
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { useMiltankFarm } from '../../hooks/useMiltankFarm';
 import { useNavigate } from '../../hooks/useNavigate';
-import { Occupant } from '../../interfaces/OverworldMap';
+import { Occupant } from '../../interfaces/Occupant';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';

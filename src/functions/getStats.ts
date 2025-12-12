@@ -1,6 +1,7 @@
 import { Nature } from '../interfaces/Natures';
 import { StatInfo } from '../interfaces/PokemonData';
 import { GrowthRateName } from '../interfaces/PokemonSpeciesData';
+import { SettingsObject } from '../interfaces/SettingsObject';
 import { StatObject } from '../interfaces/StatObject';
 import { calculateLevelData } from './calculateLevelData';
 import { calculateStat } from './calculateStat';
@@ -10,7 +11,8 @@ export const getStats = (
 	xp: number,
 	growthRate: GrowthRateName,
 	nature: Nature,
-	evs: StatObject
+	evs: StatObject,
+	settings: SettingsObject | undefined
 ): StatObject => {
 	const baseHp = stats.find((s) => s.stat.name === 'hp')?.base_stat ?? 100;
 	const baseAttack =
@@ -27,14 +29,25 @@ export const getStats = (
 	const { level } = calculateLevelData(xp, growthRate);
 
 	return {
-		hp: calculateStat(baseHp, 0, evs?.hp ?? 0, nature, level, 'hp'),
+		hp: calculateStat(
+			baseHp,
+			0,
+			evs?.hp ?? 0,
+			nature,
+			level,
+			'hp',
+			false,
+			settings
+		),
 		attack: calculateStat(
 			baseAttack,
 			0,
 			evs?.['attack'] ?? 0,
 			nature,
 			level,
-			'attack'
+			'attack',
+			false,
+			settings
 		),
 		'special-attack': calculateStat(
 			baseSpatk,
@@ -42,7 +55,9 @@ export const getStats = (
 			evs?.['special-attack'] ?? 0,
 			nature,
 			level,
-			'special-attack'
+			'special-attack',
+			false,
+			settings
 		),
 		'special-defense': calculateStat(
 			baseSpDef,
@@ -50,7 +65,9 @@ export const getStats = (
 			evs?.['special-defense'] ?? 0,
 			nature,
 			level,
-			'special-defense'
+			'special-defense',
+			false,
+			settings
 		),
 		speed: calculateStat(
 			baseSpeed,
@@ -58,7 +75,9 @@ export const getStats = (
 			evs?.['speed'] ?? 0,
 			nature,
 			level,
-			'speed'
+			'speed',
+			false,
+			settings
 		),
 		defense: calculateStat(
 			baseDef,
@@ -66,7 +85,9 @@ export const getStats = (
 			evs?.['defense'] ?? 0,
 			nature,
 			level,
-			'defense'
+			'defense',
+			false,
+			settings
 		),
 		evasion: 100,
 		accuracy: 100,

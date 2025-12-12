@@ -11,7 +11,6 @@ import {
 	ultraHighBstPokemon,
 } from '../../constants/baseStatRecord';
 import { battleSpriteSize } from '../../constants/gameData/gameData';
-import { internalDex } from '../../constants/gameData/internalDexData';
 import { mapIds } from '../../constants/gameData/maps/mapsRecord';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getHeldItem } from '../../functions/getHeldItem';
@@ -20,6 +19,7 @@ import { getTeamSize } from '../../functions/getTeamSize';
 import { hasType } from '../../functions/hasType';
 import { replaceRouteName } from '../../functions/replaceRouteName';
 import { sumOfIvs } from '../../functions/sumOfIvs';
+import { GameDataContext } from '../../hooks/useGameData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Inventory, joinInventories } from '../../interfaces/Inventory';
@@ -54,6 +54,7 @@ export const PokemonStorage = ({
 }): JSX.Element => {
 	const { addMessage } = useContext(MessageQueueContext);
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+	const { internalDex } = useContext(GameDataContext);
 
 	const allPokemon = useMemo(() => saveFile.pokemon, [saveFile]);
 	const [sortBy, setSortBy] = useState<PokemonFilter>('FAVORITE');
@@ -94,7 +95,7 @@ export const PokemonStorage = ({
 		}
 
 		return (a: OwnedPokemon, b: OwnedPokemon) => b.xp - a.xp;
-	}, [sortBy]);
+	}, [internalDex, sortBy]);
 	const team = useMemo(() => allPokemon.filter((p) => p.onTeam), [allPokemon]);
 	const stored = useMemo(
 		() => allPokemon.filter((p) => p.onTeam === false),
@@ -641,6 +642,7 @@ const Entry = ({
 	toggleFavoriteStatus: (id: string) => void;
 }) => {
 	const { addMessage } = useContext(MessageQueueContext);
+	const { internalDex } = useContext(GameDataContext);
 
 	return (
 		<div style={{ display: 'flex' }} key={pokemon.id}>

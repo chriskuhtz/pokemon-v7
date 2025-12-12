@@ -1,4 +1,4 @@
-import { Occupant, OverworldNpc } from '../../../../interfaces/OverworldMap';
+import { Occupant, OverworldNpc } from '../../../../interfaces/Occupant';
 import { SpriteEnum } from '../../../../interfaces/SpriteEnum';
 
 const evExpertBase: Omit<
@@ -19,7 +19,7 @@ const evGuyDialogue = [
 	'A Pokemon can gain 255 EV in a stat, But only 510 in total',
 	'at level 100, 255 EV give you 63 more stat points',
 	'Thats quite significant',
-	'The gym leaders definitely have perfect EVs on their pokemon',
+	'The gym leaders definitely have perfect EV distributions on their pokemon',
 ];
 export const evExpertLine: Occupant[] = [
 	{

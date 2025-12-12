@@ -1,5 +1,5 @@
 import { useCallback, useContext, useMemo } from 'react';
-import { getRandomEntry } from '../../../functions/filterTargets';
+import { ArrayHelpers } from '../../../functions/ArrayHelpers';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { joinInventories } from '../../../interfaces/Inventory';
@@ -29,7 +29,7 @@ export const useCurator = (): {
 
 	const trade = useCallback(
 		(tradeIn: ItemType) => {
-			const randomBerry = getRandomEntry([...berries]);
+			const randomBerry = ArrayHelpers.getRandomEntry([...berries]);
 			addMultipleMessages([
 				{
 					message: `Received 1 Research Point and a ${randomBerry} for donating a ${tradeIn}`,

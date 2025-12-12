@@ -10,15 +10,8 @@ import { MoveName } from '../constants/movesCheckList';
 import {
 	battleSpriteSize,
 	emptyPokedex,
-	localStorageSaveFileId,
 	ONE_DAY,
-	testState,
 } from '../constants/gameData/gameData';
-import {
-	QuestName,
-	questNames,
-	QuestsRecord,
-} from '../constants/gameData/questsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { addPokemonToDex } from '../functions/addPokemonToDex';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
@@ -26,16 +19,24 @@ import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getBagLimit, getTotalInventoryAmount } from '../functions/getBagLimit';
 import { getItemUrl } from '../functions/getItemUrl';
+import { getTeamSize } from '../functions/getTeamSize';
 import { TimeOfDay } from '../functions/getTimeOfDay';
+import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { updateItemFunction } from '../functions/updateItemFunction';
 import { Challenger } from '../interfaces/Challenger';
 import { EmptyInventory, joinInventories } from '../interfaces/Inventory';
 import { ItemType } from '../interfaces/Item';
-import { Occupant } from '../interfaces/OverworldMap';
+import { Occupant } from '../interfaces/Occupant';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { QuestStatus } from '../interfaces/Quest';
 import { RoutesType } from '../interfaces/Routing';
 import { SaveFile } from '../interfaces/SaveFile';
+import {
+	KumaQuestName,
+	kumaQuestNames,
+	KumaQuestsRecord,
+} from '../versions/kuma/questsRecord';
+import { GameDataContext } from './useGameData';
 import { MessageQueueContext } from './useMessageQueue';
 
 export interface EvolutionReducerPayload {
@@ -76,23 +77,23 @@ const migrateSavefile = (input: SaveFile) => {
 
 	//migrate new quests
 	updatedInput.quests = Object.fromEntries(
-		questNames.map((q) => [q, updatedInput.quests[q] ?? 'INACTIVE'])
-	) as Record<QuestName, QuestStatus>;
+		kumaQuestNames.map((q) => [q, updatedInput.quests[q] ?? 'INACTIVE'])
+	) as Record<KumaQuestName, QuestStatus>;
 	//migrate in unlocks
-	Object.entries(QuestsRecord).forEach(([key, value]) => {
+	Object.entries(KumaQuestsRecord).forEach(([key, value]) => {
 		if (!value.campUpgrade) {
 			return;
 		}
-		if (updatedInput.quests[key as QuestName] === 'COLLECTED') {
+		if (updatedInput.quests[key as KumaQuestName] === 'COLLECTED') {
 			updatedInput.campUpgrades[value.campUpgrade] = true;
 		}
 	});
 	//migrate in badges
-	Object.entries(QuestsRecord).forEach(([key, value]) => {
+	Object.entries(KumaQuestsRecord).forEach(([key, value]) => {
 		if (!value.badge) {
 			return;
 		}
-		if (updatedInput.quests[key as QuestName] === 'COLLECTED') {
+		if (updatedInput.quests[key as KumaQuestName] === 'COLLECTED') {
 			updatedInput.badges = [...new Set([...updatedInput.badges, value.badge])];
 		}
 	});
@@ -136,21 +137,20 @@ const migrateSavefile = (input: SaveFile) => {
 
 const useSaveFile = (init: SaveFile): UseSaveFile => {
 	const { addMessage } = useContext(MessageQueueContext);
-	const local = window.localStorage.getItem(localStorageSaveFileId);
+	const { saveFileId, startingRouterSequence, startingSaveFile } =
+		useContext(GameDataContext);
+	const local = window.localStorage.getItem(saveFileId);
 	const loaded = local ? migrateSavefile(JSON.parse(local) as SaveFile) : init;
 
 	const [saveFile, s] = useState<SaveFile>(loaded);
 	//SYNC WITH LOCAL STORAGE
 	useEffect(() => {
-		window.localStorage.setItem(
-			localStorageSaveFileId,
-			JSON.stringify(saveFile)
-		);
-	}, [saveFile]);
+		window.localStorage.setItem(saveFileId, JSON.stringify(saveFile));
+	}, [saveFile, saveFileId]);
 
 	const reset = useCallback(() => {
-		s(testState);
-	}, []);
+		s(startingSaveFile);
+	}, [startingSaveFile]);
 
 	//handle side effects here
 	const setSaveFile = useCallback((u: SaveFile) => {
@@ -272,6 +272,14 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 	const handleOccupantReducer = (occ: Occupant) => {
 		const timer = occ.type === 'BUSH' ? new Date().getTime() + ONE_DAY : -1;
 		let newInventory = { ...saveFile.bag };
+		let pokemon = [...saveFile.pokemon];
+		if (occ.type === 'POKEBALL') {
+			pokemon = receiveNewPokemonFunction(
+				{ ...occ.pokemon, ownerId: saveFile.playerId },
+				saveFile.pokemon,
+				getTeamSize(saveFile)
+			);
+		}
 		if (occ.type === 'NPC' && occ.gifts) {
 			newInventory = joinInventories(newInventory, occ.gifts);
 		}
@@ -307,6 +315,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 			...saveFile,
 			bag: newInventory,
 			quests: updatedQuests,
+			pokemon: pokemon,
 			handledOccupants: [
 				...saveFile.handledOccupants,
 				{ id: occ.id, resetAt: timer },
@@ -438,27 +447,12 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 
 	//HANDLE START OF GAME
 	useEffect(() => {
-		if (saveFile.meta.activeTab !== 'SETTINGS' && !saveFile.settings) {
-			setActiveTabReducer('SETTINGS');
-			return;
-		}
-		if (
-			saveFile.settings &&
-			saveFile.meta.activeTab !== 'SPRITE_SELECTION' &&
-			saveFile.sprite === ''
-		) {
-			setActiveTabReducer('SPRITE_SELECTION');
-			return;
-		}
-		if (
-			saveFile.settings &&
-			saveFile.sprite &&
-			saveFile.meta.activeTab !== 'STARTER_SELECTION' &&
-			(saveFile.playerId === '' || saveFile.pokemon.length === 0)
-		) {
-			setActiveTabReducer('STARTER_SELECTION');
-		}
-	}, [saveFile, setActiveTabReducer]);
+		startingRouterSequence.reverse().forEach((seq) => {
+			if (seq.condition(saveFile) && saveFile.meta.activeTab !== seq.route) {
+				setActiveTabReducer(seq.route);
+			}
+		});
+	}, [saveFile, setActiveTabReducer, startingRouterSequence]);
 
 	return {
 		evolvePokemonReducer,
@@ -479,7 +473,8 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 export const SaveFileContext = React.createContext({} as UseSaveFile);
 
 export const SaveFileProvider = ({ children }: { children: ReactNode }) => {
-	const value = useSaveFile(testState);
+	const { startingSaveFile } = useContext(GameDataContext);
+	const value = useSaveFile(startingSaveFile);
 
 	return (
 		<SaveFileContext.Provider value={value}>

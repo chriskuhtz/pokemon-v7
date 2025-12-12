@@ -17,12 +17,14 @@ export const chooseOpponentAction = ({
 	weather,
 	terrain,
 	effects,
+	playerId,
 }: {
 	controlled: BattlePokemon;
 	targets: BattlePokemon[];
 	weather: WeatherType | undefined;
 	terrain: BattleTerrain | undefined;
 	effects: BattleFieldEffect[];
+	playerId: string;
 }): ChooseActionPayload => {
 	const moves = getMovesArray(controlled, {
 		filterOutDisabled: true,
@@ -40,6 +42,7 @@ export const chooseOpponentAction = ({
 		user: controlled,
 		chosenAction: 'tackle',
 		onlyOpponents: true,
+		playerId,
 	});
 
 	const random = Math.random() > 0.9;

@@ -3,9 +3,9 @@ import { BattleMove, BattlePokemon } from '../interfaces/BattlePokemon';
 import { WeatherType } from '../interfaces/Weather';
 import { ActionType, BattleFieldEffect } from '../modules/Battle/BattleField';
 import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
+import { ArrayHelpers } from './ArrayHelpers';
 import { calculateDamage } from './calculateDamage';
 import { determineMultiHits } from './determineMultiHits';
-import { getRandomEntry } from './filterTargets';
 import { getHeldItem } from './getHeldItem';
 
 export const determineHighestDamage = (
@@ -77,7 +77,7 @@ export const determineHighestDamage = (
 
 	const possibleKills = mapped.filter((m) => m.willBeDefeated);
 	if (possibleKills.length > 0) {
-		return getRandomEntry(possibleKills);
+		return ArrayHelpers.getRandomEntry(possibleKills);
 	}
 
 	const sorted = mapped.sort((a, b) => b.damage - a.damage);

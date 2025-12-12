@@ -2,7 +2,6 @@ import { useCallback, useContext, useMemo } from 'react';
 import { FaRegCircleQuestion } from 'react-icons/fa6';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { battleSpriteSize } from '../../constants/gameData/gameData';
-import { internalDex } from '../../constants/gameData/internalDexData';
 import { PokemonName } from '../../constants/pokemonNames';
 import {
 	getAllBerryLureMonForRoute,
@@ -13,34 +12,36 @@ import {
 	OPPO_ID,
 } from '../../functions/makeChallengerPokemon';
 import { LocationContext } from '../../hooks/LocationProvider';
+import { GameDataContext } from '../../hooks/useGameData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Challenger } from '../../interfaces/Challenger';
 import { EmptyInventory, joinInventories } from '../../interfaces/Inventory';
 import { BerryType, superEffectiveSaveTable } from '../../interfaces/Item';
-import { OverworldBerryLure } from '../../interfaces/OverworldMap';
 import { PokemonType } from '../../interfaces/PokemonType';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import { OverworldBerryLure } from '../../interfaces/Occupant';
 
 export const BerryLure = () => {
 	const navigate = useNavigate();
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { location } = useContext(LocationContext);
+	const { internalDex } = useContext(GameDataContext);
 	const { addMultipleMessages } = useContext(MessageQueueContext);
 
 	const pokemon: PokemonName[] = useMemo(
-		() => getAllBerryLureMonForRoute(location.mapId),
-		[location.mapId]
+		() => getAllBerryLureMonForRoute(location.mapId, internalDex),
+		[internalDex, location.mapId]
 	);
 	const possibleBerries: BerryType[] = useMemo(
 		() =>
 			pokemon.map(
 				(p) => superEffectiveSaveTable[internalDex[p].types.at(0) ?? 'normal']
 			) as BerryType[],
-		[pokemon]
+		[internalDex, pokemon]
 	);
 	const availableBerries: BerryType[] = useMemo(
 		() => possibleBerries.filter((b) => saveFile.bag[b] > 0) as BerryType[],
@@ -58,7 +59,11 @@ export const BerryLure = () => {
 
 			const succeded = Math.random() > 0.25;
 
-			const encounterName = getBerryLureMon(location.mapId, lureType);
+			const encounterName = getBerryLureMon(
+				location.mapId,
+				lureType,
+				internalDex
+			);
 
 			if (!encounterName) {
 				addMultipleMessages([
@@ -184,6 +189,7 @@ export const BerryLure = () => {
 		},
 		[
 			addMultipleMessages,
+			internalDex,
 			location.mapId,
 			patchSaveFileReducer,
 			saveFile.bag,

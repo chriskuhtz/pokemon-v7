@@ -3,14 +3,7 @@
 1. create a new Branch
 2. npm install
 3. npm run dev
-4. for put a devmode=true entry into your localstorage
-
-# Creating your own Game version
-
-1. make a new branch called /edition/NAME_OF_YOUR_GAME
-2. build your game through the constants/gameData folder
-3. duplicate your gameData folder into /NAME_OF_YOUR_GAME_edition to avoid merge issues when keeping up with main branch
-4. If you want to implement new features, please consider making a separate Branch and Pull Request into main
+4. to work in devmode (everything unlocked, infinite points) put a devmode=true entry into your localstorage
 
 # Creating a new Map
 
@@ -37,3 +30,9 @@
 3. define it in tileMaps.ts with its size
 4. add it to tileMapsRecord in tileMaps.ts
 5. now you can add it as tilesetUrl to your map
+
+# Creating a new Game Version
+
+1. copy an existing folder in src/versions
+2. adjust the props of <Game/> to create your game
+3. add a new selection card in /modules/VersionSelection

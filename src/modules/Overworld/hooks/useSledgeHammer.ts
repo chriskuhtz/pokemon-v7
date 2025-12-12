@@ -1,22 +1,26 @@
 import { useCallback, useContext } from 'react';
 import { ONE_HOUR } from '../../../constants/gameData/gameData';
-import { getRandomEntry } from '../../../functions/filterTargets';
+import { ArrayHelpers } from '../../../functions/ArrayHelpers';
 import { getUnderRockEncounters } from '../../../functions/internalDex';
 import {
 	makeChallengerPokemon,
 	OPPO_ID,
 } from '../../../functions/makeChallengerPokemon';
+import { GameDataContext } from '../../../hooks/useGameData';
 import { Message, MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
+import { InternalDex } from '../../../interfaces/GameData';
 import { EmptyInventory, joinInventories } from '../../../interfaces/Inventory';
 import { undergroundTable } from '../../../interfaces/Item';
 import { getRandomNature } from '../../../interfaces/Natures';
-import { OverworldRock } from '../../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../../interfaces/SaveFile';
+import { OverworldRock } from '../../../interfaces/Occupant';
 
-const SLEDGEHAMMER_ENCOUNTER_OPTIONS: OwnedPokemon[] =
-	getUnderRockEncounters().map((h) =>
+const SLEDGEHAMMER_ENCOUNTER_OPTIONS = (
+	internalDex: InternalDex
+): OwnedPokemon[] =>
+	getUnderRockEncounters(internalDex).map((h) =>
 		makeChallengerPokemon({
 			nature: getRandomNature(),
 			name: h,
@@ -27,7 +31,7 @@ const SLEDGEHAMMER_ENCOUNTER_OPTIONS: OwnedPokemon[] =
 export const useSledgeHammer = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { addMultipleMessages } = useContext(MessageQueueContext);
-
+	const { internalDex } = useContext(GameDataContext);
 	return useCallback(
 		(rock: OverworldRock) => {
 			if (saveFile.handledOccupants.some((occ) => occ.id === rock.id)) {
@@ -35,10 +39,14 @@ export const useSledgeHammer = () => {
 			}
 			if (saveFile.campUpgrades['sledge hammer certification']) {
 				const foundItem =
-					Math.random() > 0.9 ? getRandomEntry(undergroundTable) : undefined;
+					Math.random() > 0.9
+						? ArrayHelpers.getRandomEntry(undergroundTable)
+						: undefined;
 				const encounter =
 					Math.random() > 0.9
-						? getRandomEntry(SLEDGEHAMMER_ENCOUNTER_OPTIONS)
+						? ArrayHelpers.getRandomEntry(
+								SLEDGEHAMMER_ENCOUNTER_OPTIONS(internalDex)
+						  )
 						: undefined;
 
 				const updatedInventory = foundItem
@@ -108,6 +116,15 @@ export const useSledgeHammer = () => {
 				]);
 			return;
 		},
-		[addMultipleMessages, patchSaveFileReducer, saveFile]
+		[
+			addMultipleMessages,
+			internalDex,
+			patchSaveFileReducer,
+			saveFile.bag,
+			saveFile.campUpgrades,
+			saveFile.handledOccupants,
+			saveFile.meta,
+			saveFile.mileStones,
+		]
 	);
 };

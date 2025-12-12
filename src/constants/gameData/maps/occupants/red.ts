@@ -1,10 +1,8 @@
-import { getRandomEntry } from '../../../../functions/filterTargets';
+import { ArrayHelpers } from '../../../../functions/ArrayHelpers';
 import { getHighestXpOnTeam } from '../../../../functions/getHighestXpOnTeam';
 import { makeChallengerPokemon } from '../../../../functions/makeChallengerPokemon';
-import {
-	Occupant,
-	OverworldTrainer,
-} from '../../../../interfaces/OverworldMap';
+import { OverworldTrainer, Occupant } from '../../../../interfaces/Occupant';
+
 import { OwnedPokemon } from '../../../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../../interfaces/SpriteEnum';
@@ -335,7 +333,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
 	};
 	for (let i = 0; i < numberOfMembers(); i++) {
 		team.push(
-			getRandomEntry(
+			ArrayHelpers.getRandomEntry(
 				possibilities.filter((p) => team.every((t) => t.name !== p.name))
 			)
 		);

@@ -2,7 +2,7 @@ import { useCallback, useContext } from 'react';
 import { SpriteIcon } from '../components/SpriteIcon/SpriteIcon';
 import { ONE_HOUR } from '../constants/gameData/gameData';
 import { mapDisplayNames } from '../constants/gameData/maps/mapsRecord';
-import { getRandomEntry } from '../functions/filterTargets';
+import { ArrayHelpers } from '../functions/ArrayHelpers';
 import { getRandomAvailableRoute } from '../functions/getRandomAvailableRoute';
 import { makeTroubleMakers } from '../functions/troubleMakers/troubleMakers';
 import { EvilTeam, evilTeams } from '../interfaces/SaveFile';
@@ -46,7 +46,7 @@ export const useRangerRadio = () => {
 				return;
 			}
 
-			const randomAffiliation = getRandomEntry([...evilTeams]);
+			const randomAffiliation = ArrayHelpers.getRandomEntry([...evilTeams]);
 			const op = makeTroubleMakers(
 				route,
 				saveFile.campUpgrades['warden certification'],

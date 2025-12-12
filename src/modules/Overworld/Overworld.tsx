@@ -22,7 +22,7 @@ import { useShader } from '../../hooks/useShader';
 import { useStaticEncounter } from '../../hooks/useStaticEncounter';
 import { useStrangeTree } from '../../hooks/useStrangeTree';
 import { useZigzagoonForagers } from '../../hooks/useZigzagoonForagers';
-import { Occupant, OverworldMap } from '../../interfaces/OverworldMap';
+import { OverworldMap } from '../../interfaces/OverworldMap';
 import './Overworld.css';
 import { ClickerGrid } from './components/ClickerGrid';
 import { OverworldMenus } from './components/OverworldMenus';
@@ -41,6 +41,7 @@ import { useOccupants } from './hooks/useOccupants';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
 import { useSledgeHammer } from './hooks/useSledgeHammer';
 import { useStartEncounter } from './hooks/useStartEncounter';
+import { Occupant } from '../../interfaces/Occupant';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';

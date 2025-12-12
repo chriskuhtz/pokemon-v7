@@ -1,6 +1,7 @@
-import { internalDex } from '../constants/gameData/internalDexData';
+import { baseInternalDex } from '../constants/baseInternalDex';
 import { MapId } from '../constants/gameData/maps/mapsRecord';
 import { PokemonName } from '../constants/pokemonNames';
+import { InternalDex } from '../interfaces/GameData';
 import {
 	EncounterRarity,
 	OverworldEncounter,
@@ -9,12 +10,12 @@ import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { InternalDexEntry, SwarmType } from '../interfaces/Pokedex';
 import { PokemonType, pokemonTypes } from '../interfaces/PokemonType';
 import { Stat } from '../interfaces/StatObject';
-import { getRandomEntry } from './filterTargets';
+import { ArrayHelpers } from './ArrayHelpers';
 import { TimeOfDay } from './getTimeOfDay';
 
 export const byType: Record<PokemonType, PokemonName[]> = Object.fromEntries(
 	[...pokemonTypes].map((type) => {
-		const mons: PokemonName[] = Object.entries(internalDex)
+		const mons: PokemonName[] = Object.entries(baseInternalDex)
 			.filter(([, { types }]) => types.includes(type))
 			.map(([name]) => name as PokemonName);
 
@@ -22,32 +23,38 @@ export const byType: Record<PokemonType, PokemonName[]> = Object.fromEntries(
 	})
 ) as Record<PokemonType, PokemonName[]>;
 
-export const getRampagers = () => {
+export const getRampagers = (internalDex: InternalDex) => {
 	return Object.entries(internalDex)
 		.filter(([, value]) => value.rampager)
 		.map(([key]) => key) as PokemonName[];
 };
-export const getHoneyEncounters = () => {
+export const getHoneyEncounters = (internalDex: InternalDex) => {
 	return Object.entries(internalDex)
 		.filter(([, value]) => value.honey)
 		.map(([key]) => key) as PokemonName[];
 };
-export const getUnderRockEncounters = () => {
+export const getUnderRockEncounters = (internalDex: InternalDex) => {
 	return Object.entries(internalDex)
 		.filter(([, value]) => value.underRock)
 		.map(([key]) => key) as PokemonName[];
 };
-export const getSwarmOptions = (type: SwarmType) => {
+export const getSwarmOptions = (type: SwarmType, internalDex: InternalDex) => {
 	return Object.entries(internalDex)
 		.filter(([, value]) => value.swarm === type)
 		.map(([key]) => key) as PokemonName[];
 };
 
-export const getRandomSwarmMon = (type: SwarmType): PokemonName => {
-	return getRandomEntry(getSwarmOptions(type));
+export const getRandomSwarmMon = (
+	type: SwarmType,
+	internalDex: InternalDex
+): PokemonName => {
+	return ArrayHelpers.getRandomEntry(getSwarmOptions(type, internalDex));
 };
 
-export const getAllBerryLureMonForRoute = (map: MapId): PokemonName[] => {
+export const getAllBerryLureMonForRoute = (
+	map: MapId,
+	internalDex: InternalDex
+): PokemonName[] => {
 	const options: PokemonName[] = Object.entries(internalDex)
 		.filter(([, value]) => value.berryLureMapId === map)
 		.map(([key]) => key as PokemonName);
@@ -55,7 +62,11 @@ export const getAllBerryLureMonForRoute = (map: MapId): PokemonName[] => {
 	return options;
 };
 
-export const getBerryLureMon = (map: MapId, type: PokemonType) => {
+export const getBerryLureMon = (
+	map: MapId,
+	type: PokemonType,
+	internalDex: InternalDex
+) => {
 	const options: PokemonName[] = Object.entries(internalDex)
 		.filter(
 			([, value]) => value.berryLureMapId === map && value.types.includes(type)
@@ -65,7 +76,7 @@ export const getBerryLureMon = (map: MapId, type: PokemonType) => {
 	if (options.length === 0) {
 		return;
 	}
-	return getRandomEntry(options);
+	return ArrayHelpers.getRandomEntry(options);
 };
 
 export const getAllEncountersFor = (
@@ -75,7 +86,8 @@ export const getAllEncountersFor = (
 		timeOfDay?: TimeOfDay;
 		includeAllDay?: boolean;
 		rarity?: EncounterRarity;
-	}
+	},
+	internalDex: InternalDex
 ): OverworldEncounter[] => {
 	const { area, timeOfDay, rarity, includeAllDay } = config;
 	const res: OverworldEncounter[] = [];
@@ -109,12 +121,17 @@ export const getRandomEncounter = (
 	config: {
 		area?: 'WATER' | 'LAND';
 		timeOfDay?: TimeOfDay;
-	}
+	},
+	internalDex: InternalDex
 ): Partial<OwnedPokemon> => {
-	const options = getAllEncountersFor(mapId, {
-		...config,
-		includeAllDay: true,
-	});
+	const options = getAllEncountersFor(
+		mapId,
+		{
+			...config,
+			includeAllDay: true,
+		},
+		internalDex
+	);
 	const flatMapped = options.flatMap((p) => {
 		if (p.rarity === 'common') {
 			return [p, p, p, p, p, p];
@@ -128,7 +145,7 @@ export const getRandomEncounter = (
 		return [p];
 	});
 
-	const chosen = getRandomEntry(flatMapped);
+	const chosen = ArrayHelpers.getRandomEntry(flatMapped);
 	const xp = Math.floor(
 		chosen.maxXp - Math.random() * (chosen.maxXp - chosen.minXp)
 	);
@@ -138,7 +155,7 @@ export const getRandomEncounter = (
 export const getAllPokemonThatMaxThisEV = (
 	stat: Stat
 ): [PokemonName, InternalDexEntry][] => {
-	return Object.entries(internalDex).filter(
+	return Object.entries(baseInternalDex).filter(
 		([, value]) =>
 			Object.keys(value.evs).includes(stat) &&
 			value.evs[stat] === 3 &&
@@ -158,26 +175,3 @@ export const isNotCatchable = (entry: InternalDexEntry) => {
 		].filter((v) => v).length === 0
 	);
 };
-
-const overUsed = Object.entries(internalDex)
-	.filter(([, value]) => {
-		return (
-			[
-				!!value.berryLureMapId,
-				!!value.honey,
-				!!value.rampager,
-				!!value.swarm,
-				!!value.underRock,
-				...value.encounterOptions.map(() => true),
-			].filter((v) => v).length > 1
-		);
-	})
-	.map(([key]) => key);
-console.log('Mons with more than one encounter option', overUsed);
-
-const onMultipleRoutes = Object.entries(internalDex)
-	.filter(
-		([, value]) => value.encounterOptions && value.encounterOptions?.length > 1
-	)
-	.map(([key]) => key);
-console.log('on multiple routes', onMultipleRoutes);

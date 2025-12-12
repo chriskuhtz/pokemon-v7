@@ -1,4 +1,5 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { canSwim } from '../../../constants/gameData/checks';
 import { fps } from '../../../constants/gameData/gameData';
 import { mapsRecord } from '../../../constants/gameData/maps/mapsRecord';
 import { calculateLevelData } from '../../../functions/calculateLevelData';
@@ -7,10 +8,18 @@ import { getNextForwardFoot } from '../../../functions/getNextForwardFoot';
 import { OPPO_ID } from '../../../functions/makeChallengerPokemon';
 import { updatePosition } from '../../../functions/updatePosition';
 import { LocationContext } from '../../../hooks/LocationProvider';
+import { GameDataContext } from '../../../hooks/useGameData';
+import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { Challenger } from '../../../interfaces/Challenger';
 import { EmptyInventory } from '../../../interfaces/Inventory';
-import { Occupant, OnStepPortal } from '../../../interfaces/OverworldMap';
+
+import {
+	Occupant,
+	OnStepDialogue,
+	OnStepPortal,
+	OnStepRouter,
+} from '../../../interfaces/Occupant';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
 
 const baseEncounterRate = 0;
@@ -35,6 +44,10 @@ export const useOverworldMovement = (
 	} = saveFile;
 	const { location: playerLocation, setLocation: setCharacterLocation } =
 		useContext(LocationContext);
+	const { internalDex } = useContext(GameDataContext);
+	const { handleOccupantReducer, patchSaveFileReducer } =
+		useContext(SaveFileContext);
+	const { addMultipleMessages } = useContext(MessageQueueContext);
 
 	const shinyFactor = useMemo(() => (bag['shiny-charm'] > 1 ? 4 : 1), [bag]);
 	const map = useMemo(() => mapsRecord[playerLocation.mapId], [playerLocation]);
@@ -63,6 +76,28 @@ export const useOverworldMovement = (
 			) as OnStepPortal | undefined,
 		[map.occupants, playerLocation.x, playerLocation.y, saveFile]
 	);
+	const steptOnDialogue: OnStepDialogue | undefined = useMemo(
+		() =>
+			map.occupants.find(
+				(o) =>
+					o.type === 'ON_STEP_DIALOGUE' &&
+					o.conditionFunction(saveFile) === true &&
+					o.x === playerLocation.x &&
+					o.y === playerLocation.y
+			) as OnStepDialogue | undefined,
+		[map.occupants, playerLocation.x, playerLocation.y, saveFile]
+	);
+	const steptOnRouter: OnStepRouter | undefined = useMemo(
+		() =>
+			map.occupants.find(
+				(o) =>
+					o.type === 'ON_STEP_ROUTER' &&
+					o.conditionFunction(saveFile) === true &&
+					o.x === playerLocation.x &&
+					o.y === playerLocation.y
+			) as OnStepRouter | undefined,
+		[map.occupants, playerLocation.x, playerLocation.y, saveFile]
+	);
 
 	const handlePossibleEncounter = useCallback(() => {
 		setNextInput(undefined);
@@ -89,18 +124,19 @@ export const useOverworldMovement = (
 		const waterEncounter =
 			!!map.tileMap.waterLayer[playerLocation.y][playerLocation.x];
 
-		const { team, battleTeamConfig } = determineWildPokemon(
-			pokemon.filter((p) => p.onTeam),
-			playerLocation.mapId,
+		const { team, battleTeamConfig } = determineWildPokemon({
+			team: pokemon.filter((p) => p.onTeam),
+			mapId: playerLocation.mapId,
 			quests,
 			waterEncounter,
 			shinyFactor,
-			activatedLure,
+			lure: activatedLure,
 			catchStreak,
 			currentSwarm,
 			currentStrongSwarm,
-			currentDistortionSwarm
-		);
+			currentDistortionSwarm,
+			internalDex,
+		});
 
 		const challenger: Challenger = {
 			type: 'WILD',
@@ -134,8 +170,13 @@ export const useOverworldMovement = (
 		currentSwarm,
 		encounterChance,
 		encounterRateModifier.factor,
-		map,
-		playerLocation,
+		internalDex,
+		map.peaceful,
+		map.tileMap.encounterLayer,
+		map.tileMap.waterLayer,
+		playerLocation.mapId,
+		playerLocation.x,
+		playerLocation.y,
 		pokemon,
 		quests,
 		reduceEncounterRate,
@@ -143,10 +184,6 @@ export const useOverworldMovement = (
 		shinyFactor,
 		startEncounter,
 	]);
-
-	const canSwim = useMemo((): boolean => {
-		return campUpgrades['swimming certification'];
-	}, [campUpgrades]);
 
 	useEffect(() => {
 		const int = setTimeout(() => {
@@ -163,6 +200,22 @@ export const useOverworldMovement = (
 				setCharacterLocation(steptOnPortal.portal);
 				return;
 			}
+			if (steptOnDialogue) {
+				addMultipleMessages(
+					steptOnDialogue.dialogue.map((d) => ({
+						message: d,
+					}))
+				);
+				handleOccupantReducer(steptOnDialogue);
+				return;
+			}
+			if (steptOnRouter) {
+				patchSaveFileReducer({
+					...saveFile,
+					meta: { ...saveFile.meta, activeTab: steptOnRouter.route },
+				});
+				return;
+			}
 			if (nextInput && !saveFile.flying) {
 				handlePossibleEncounter();
 			}
@@ -175,7 +228,7 @@ export const useOverworldMovement = (
 						map,
 						addStep,
 						currentOccupants,
-						canSwim,
+						canSwim(saveFile),
 						!!saveFile.flying,
 						campUpgrades['rock climbing certification']
 					),
@@ -195,16 +248,18 @@ export const useOverworldMovement = (
 		return () => clearTimeout(int);
 	}, [
 		activatedLure,
+		addMultipleMessages,
 		addStep,
 		campUpgrades,
-		canSwim,
 		currentOccupants,
 		currentSwarm,
 		encounterChance,
 		encounterRateModifier.factor,
+		handleOccupantReducer,
 		handlePossibleEncounter,
 		map,
 		nextInput,
+		patchSaveFileReducer,
 		playerLocation,
 		pokemon,
 		quests,
@@ -213,7 +268,9 @@ export const useOverworldMovement = (
 		setCharacterLocation,
 		shinyFactor,
 		startEncounter,
+		steptOnDialogue,
 		steptOnPortal,
+		steptOnRouter,
 	]);
 
 	return setNextInput;

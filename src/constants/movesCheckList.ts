@@ -3219,6 +3219,7 @@ export const movesCheckList: {
 ];
 
 export const handledMoves = [
+	'struggle',
 	'pound',
 	'karate-chop',
 	'double-slap',

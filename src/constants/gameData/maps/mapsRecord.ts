@@ -9,6 +9,7 @@ import { caveW1 } from './caveW1';
 import { caveW1F1 } from './caveW1F1';
 import { caveW1F2 } from './caveW1F2';
 import { challengeField } from './challengeField';
+import { labyrinthLevel1 } from './labyrinth/labyrinthLevel1';
 import { onixCave } from './onixCave';
 import { pokemonLeague } from './pokemonLeague';
 import { randomChallengeField } from './randomChallengeField';
@@ -27,6 +28,7 @@ import { victoryRoadExtra } from './victoryRoadExtra';
 import { victoryRoadU1 } from './victoryRoadU1';
 
 export const mapIds = [
+	//KUMA VERSION
 	'camp',
 	'campCave',
 	'campLaboratory',
@@ -51,10 +53,13 @@ export const mapIds = [
 	'victoryRoadExtra',
 	'victoryRoadExit',
 	'pokemonLeague',
+	//LABYRINTH VERSION
+	'labyrinth_level_1',
 ] as const;
 export type MapId = (typeof mapIds)[number];
 
 export const mapsRecord: Record<MapId, OverworldMap> = {
+	//KUMA VERSION
 	camp: camp,
 	campCave: campCave,
 	campLaboratory: campLaboratory,
@@ -79,9 +84,12 @@ export const mapsRecord: Record<MapId, OverworldMap> = {
 	victoryRoadExtra: victoryRoadExtra,
 	victoryRoadExit: victoryRoadExit,
 	pokemonLeague: pokemonLeague,
+	//LABYRINTH VERSION
+	labyrinth_level_1: labyrinthLevel1,
 };
 
 export const mapDisplayNames: Record<MapId, string> = {
+	//KUMA VERSION
 	routeN1: 'akai meadow',
 	routeN1E1: 'orenji forest',
 	routeE1: 'kiiro highlands',
@@ -103,9 +111,11 @@ export const mapDisplayNames: Record<MapId, string> = {
 	rocketCamp: 'Rocket Camp',
 	victoryRoad: 'Victory Road',
 	victoryRoadU1: 'Victory Road Lower Level',
-	victoryRoadExtra: 'Victory Road .?.',
+	victoryRoadExtra: 'Victory Road',
 	victoryRoadExit: 'Pokemon League Entrance',
 	pokemonLeague: 'Pokemon League',
+	//LABYRINTH VERSION
+	labyrinth_level_1: 'Deep Forest',
 };
 
 export const Emptymap: OverworldMap = {

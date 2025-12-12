@@ -1,8 +1,8 @@
 import {
-	Occupant,
 	OverworldNpc,
 	OverworldPokemon,
-} from '../../../../interfaces/OverworldMap';
+	Occupant,
+} from '../../../../interfaces/Occupant';
 import { SpriteEnum } from '../../../../interfaces/SpriteEnum';
 
 const mortyBase: Omit<

@@ -1,7 +1,7 @@
 import { useCallback, useContext, useMemo } from 'react';
 import { v4 } from 'uuid';
 import { ONE_HOUR } from '../../../constants/gameData/gameData';
-import { getRandomEntry } from '../../../functions/filterTargets';
+import { ArrayHelpers } from '../../../functions/ArrayHelpers';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { joinInventories } from '../../../interfaces/Inventory';
@@ -116,7 +116,7 @@ export const useFarm = () => {
 		});
 
 		if (mulch === 'surprise-mulch' || mulch === 'amaze-mulch') {
-			type = getRandomEntry([...berries]);
+			type = ArrayHelpers.getRandomEntry([...berries]);
 		}
 
 		const berryYield =

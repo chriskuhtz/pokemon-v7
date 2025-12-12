@@ -4,7 +4,8 @@ import {
 	Occupant,
 	OverworldNpc,
 	OverworldTrainer,
-} from '../../../../interfaces/OverworldMap';
+} from '../../../../interfaces/Occupant';
+
 import { SaveFile } from '../../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../../interfaces/StatObject';

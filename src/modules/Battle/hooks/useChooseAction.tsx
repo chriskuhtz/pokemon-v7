@@ -6,8 +6,9 @@ import {
 	secondTurnMoves,
 	thrashingMoves,
 } from '../../../constants/groupedMoves';
+import { struggleMove } from '../../../constants/struggle';
+import { ArrayHelpers } from '../../../functions/ArrayHelpers';
 import { determineMultiHits } from '../../../functions/determineMultiHits';
-import { getRandomEntry } from '../../../functions/filterTargets';
 import { getHeldItem } from '../../../functions/getHeldItem';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { BattleAction } from '../../../interfaces/BattleActions';
@@ -169,10 +170,11 @@ export const assignActionToPokemon = ({
 		user.secondMove,
 		user.thirdMove,
 		user.fourthMove,
+		struggleMove,
 	].find((m) => m?.name === actionName);
 
 	if (move?.name === 'assist') {
-		move = getRandomEntry(
+		move = ArrayHelpers.getRandomEntry(
 			pokemon
 				.filter((p) => p.id !== user.id && p.ownerId === user.ownerId)
 				.map((p) => getMovesArray(p))
