@@ -605,9 +605,11 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'move chuck and move tutor out of battle pit' },
 	{ name: 'refactor ownedpokemoncardcontent, quite crowded' },
-	//CONTENT:
+	//FEATURES:
 	{ name: 'eggs?' },
 	{ name: 'Fishing?' },
+	{ name: 'opponents can use items' },
+	//CONTENT:
 	{ name: 'magma/aqua quests from Looker' },
 	{ name: 'Hooh quest after catching the dogs' },
 	{ name: 'trainer with simple/costar combo' },
@@ -640,11 +642,11 @@ export const extraFeatureCheckList: {
 	{ name: 'Free Level Up Move Learning from Menu', handled: true },
 	{ name: 'Occupant: On Step Dialogue', handled: true },
 	{ name: 'Game finished Success Screen', handled: true },
-	{ name: 'transfer team to kuma' },
 	{ name: 'number of team slots', handled: true },
 	{ name: 'disable catching if team is full', handled: true },
 	{ name: 'release pokemon in Team Overview', handled: true },
 	{ name: 'struggle', handled: true },
+	{ name: 'transfer team to kuma' },
 	{ name: 'Labyrinth level 2' },
 	{ name: 'Labyrinth level 3' },
 	{ name: 'Labyrinth level 4' },

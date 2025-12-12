@@ -597,7 +597,16 @@ export const labyrinthDex: Record<PokemonName, InternalDexEntry> = {
 		evs: {
 			attack: 1,
 		},
-		encounterOptions: [],
+		encounterOptions: [
+			{
+				maxXp: 125,
+				minXp: 50,
+				timeOfDay: 'ALL_DAY',
+				route: 'labyrinth_level_1',
+				area: 'LAND',
+				rarity: 'medium',
+			},
+		],
 	},
 	weepinbell: {
 		dexId: 70,
@@ -1447,16 +1456,7 @@ export const labyrinthDex: Record<PokemonName, InternalDexEntry> = {
 		evs: {
 			speed: 1,
 		},
-		encounterOptions: [
-			{
-				maxXp: 125,
-				minXp: 50,
-				timeOfDay: 'ALL_DAY',
-				route: 'labyrinth_level_1',
-				area: 'LAND',
-				rarity: 'ultra-rare',
-			},
-		],
+		encounterOptions: [],
 	},
 	cleffa: {
 		dexId: 173,
