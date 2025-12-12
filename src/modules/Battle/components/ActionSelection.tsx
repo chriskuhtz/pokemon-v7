@@ -12,6 +12,7 @@ import { canBenefitFromItem } from '../../../functions/canBenefitFromItem';
 import { canRunOrSwitch } from '../../../functions/canRunOrSwitch';
 import { getMovesArray } from '../../../functions/getMovesArray';
 import { getPlayerPokemon } from '../../../functions/getPlayerPokemon';
+import { isKO } from '../../../functions/isKo';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 import { Inventory } from '../../../interfaces/Inventory';
@@ -101,7 +102,7 @@ export function ActionSelection({
 		]
 	);
 
-	const canSwitch = useMemo(
+	const runOrSwitchPossible = useMemo(
 		() => canRunOrSwitch(controlled, battleFieldEffects),
 		[battleFieldEffects, controlled]
 	);
@@ -145,7 +146,11 @@ export function ActionSelection({
 					/>
 				)}
 				<Card
-					disabled={!canSwitch}
+					disabled={
+						!runOrSwitchPossible ||
+						allTargets.filter((p) => p.ownerId === playerId && !isKO(p))
+							.length === 1
+					}
 					onClick={() => setChosenAction('SWITCH')}
 					content={'Switch Pokemon'}
 					actionElements={[]}
@@ -177,7 +182,7 @@ export function ActionSelection({
 
 				{runningAllowed && (
 					<Card
-						disabled={!canSwitch}
+						disabled={!runOrSwitchPossible}
 						onClick={() =>
 							chooseAction({
 								userId: controlled.id,
