@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { addPokemonToDex } from '../../../functions/addPokemonToDex';
 import { getMiddleOfThree } from '../../../functions/getMiddleOfThree';
 import { isKO } from '../../../functions/isKo';
@@ -9,22 +9,18 @@ import { Message } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { useShader } from '../../../hooks/useShader';
 import { Challenger } from '../../../interfaces/Challenger';
-import { Inventory } from '../../../interfaces/Inventory';
-import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { LoadingScreen } from '../../../uiComponents/LoadingScreen/LoadingScreen';
 import { BattleOverview } from './BattleOverview';
 
 export const BattleLoader = ({
-	team,
 	challenger,
-	inventory,
+
 	latestMessage,
 	addMessage,
 	addMultipleMessages,
 }: {
 	challenger: Challenger;
-	team: OwnedPokemon[];
-	inventory: Inventory;
+
 	latestMessage: Message | undefined;
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;
@@ -38,11 +34,29 @@ export const BattleLoader = ({
 			assignHeldItem: true,
 		}
 	);
-	const { res: battleTeam } = useGetBattleTeam(team, {});
 
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+	const team = useMemo(
+		() => saveFile.pokemon.filter((p) => p.onTeam),
+		[saveFile]
+	);
+	const { res: battleTeam } = useGetBattleTeam(team, {});
+
 	const { location } = useContext(LocationContext);
 	const leave = useLeaveBattle();
+
+	useEffect(() => {
+		if (team.length === 0) {
+			leave({
+				caughtPokemon: [],
+				updatedInventory: saveFile.bag,
+				scatteredCoins: 0,
+				team: [],
+				outcome: 'LOSS',
+				defeatedPokemon: [],
+			});
+		}
+	}, [leave, saveFile.bag, team.length]);
 
 	const [registered, setRegistered] = useState<boolean>(false);
 	useEffect(() => {
@@ -93,7 +107,7 @@ export const BattleLoader = ({
 					),
 					2,
 				])}
-				inventory={inventory}
+				inventory={saveFile.bag}
 				challengerId={challenger.id}
 				trainer={challenger.trainer}
 				latestMessage={latestMessage}

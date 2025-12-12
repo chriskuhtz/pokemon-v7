@@ -21,6 +21,7 @@ import { Farm } from '../Farm/Farm';
 import { FossilReviver } from '../FossilReviver/FossilReviver';
 import { InternalDex } from '../InternalDex/InternalDex';
 import { Intro } from '../Intro/Intro';
+import { LabyrintSuccess } from '../LabyrinthSuccess/LabyrinthSuccess';
 import { MainMenu } from '../MainMenu/MainMenu';
 import { MapEditor } from '../MapMaker/components/MapEditor';
 import { Market } from '../Market/Market';
@@ -59,10 +60,11 @@ export const Router = (): JSX.Element => {
 	const {
 		meta: { activeTab: savedTab, currentChallenger },
 		bag: inventory,
-		pokemon,
 	} = saveFile;
-
-	const team = useMemo(() => pokemon.filter((p) => p.onTeam), [pokemon]);
+	const team = useMemo(
+		() => saveFile.pokemon.filter((p) => p.onTeam),
+		[saveFile]
+	);
 
 	const [hasReadIntro, setHasReadIntro] = useState<boolean>(
 		!!window.localStorage.getItem('hasReadIntro')
@@ -91,8 +93,6 @@ export const Router = (): JSX.Element => {
 		return (
 			<BattleLoader
 				challenger={currentChallenger}
-				team={team}
-				inventory={inventory}
 				latestMessage={latestMessage}
 				addMessage={addMessage}
 				addMultipleMessages={addMultipleMessages}
@@ -221,6 +221,9 @@ export const Router = (): JSX.Element => {
 	}
 	if (activeTab === 'BATTLE_JOURALIST') {
 		return <BattleJournalist />;
+	}
+	if (activeTab === 'LABYRINTH_SUCCESS') {
+		return <LabyrintSuccess />;
 	}
 	if (activeTab.includes('MAP_MAKER')) {
 		const mapId = activeTab.slice(10) as MapId;
