@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { MoveName } from '../../../constants/movesCheckList';
 import {
 	EvolutionReducerPayload,
@@ -10,11 +10,12 @@ import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { PokemonData } from '../../../interfaces/PokemonData';
 import { MoveEditor } from '../../../modules/MoveTutor/MoveTutor';
 import { SelectionBar } from '../../../uiComponents/SelectionBar/SelectionBar';
+import { DetailsCard } from './DetailsCard';
 import { EvoInfo } from './EvoInfo';
+import { HeldItemSelection } from './HeldItemSelection';
 import { MovesDisplay } from './MovesDisplay';
 import { StatDisplay } from './StatDisplay';
-import { DetailsCard } from './DetailsCard';
-import { HeldItemSelection } from './HeldItemSelection';
+import { Stack } from '../../../uiComponents/Stack/Stack';
 
 const tabTypes = [
 	'DETAILS',
@@ -49,7 +50,7 @@ export const OwnedPokemonCardContent = ({
 	const [tab, setTab] = useState<TabType>('DETAILS');
 
 	return (
-		<React.Fragment>
+		<Stack mode={'column'}>
 			<SelectionBar
 				options={[...tabTypes].filter((t) => {
 					if (t === 'NEW MOVES') {
@@ -93,6 +94,6 @@ export const OwnedPokemonCardContent = ({
 				/>
 			)}
 			{tab === 'NEW MOVES' && <MoveEditor ownedPokemon={ownedPokemon} />}
-		</React.Fragment>
+		</Stack>
 	);
 };

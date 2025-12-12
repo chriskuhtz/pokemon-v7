@@ -5,6 +5,7 @@ import { questMenuAvailable } from '../../../functions/questMenuAvailable';
 import { LocationContext } from '../../../hooks/LocationProvider';
 import { useNavigate } from '../../../hooks/useNavigate';
 import { useQuests } from '../../../hooks/useQuests';
+import { SaveFileContext } from '../../../hooks/useSaveFile';
 import './UncollectedQuestsBadge.css';
 
 export const UncollectedQuestsBadge = ({
@@ -17,8 +18,11 @@ export const UncollectedQuestsBadge = ({
 	const {
 		location: { mapId },
 	} = useContext(LocationContext);
+	const {
+		saveFile: { settings },
+	} = useContext(SaveFileContext);
 
-	if (questMenuAvailable(mapId)) {
+	if (questMenuAvailable(mapId) && !settings?.questsTabHidden) {
 		return <></>;
 	}
 	return (

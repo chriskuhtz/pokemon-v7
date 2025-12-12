@@ -108,18 +108,19 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 					icon={<MdCatchingPokemon size={battleSpriteSize} />}
 					actionElements={[]}
 				/>
-				{!questMenuAvailable(location.mapId) && (
-					<Card
-						onClick={() => navigate('MAIN', 'QUESTS')}
-						content={<h4>Quests</h4>}
-						icon={<GoTasklist size={battleSpriteSize} />}
-						actionElements={
-							numberOfUncollected > 0
-								? [<strong>Uncollected: {numberOfUncollected}</strong>]
-								: []
-						}
-					/>
-				)}
+				{!questMenuAvailable(location.mapId) &&
+					!saveFile.settings?.questsTabHidden && (
+						<Card
+							onClick={() => navigate('MAIN', 'QUESTS')}
+							content={<h4>Quests</h4>}
+							icon={<GoTasklist size={battleSpriteSize} />}
+							actionElements={
+								numberOfUncollected > 0
+									? [<strong>Uncollected: {numberOfUncollected}</strong>]
+									: []
+							}
+						/>
+					)}
 				<Card
 					onClick={() => navigate('MAIN', 'INTERNAL_DEX')}
 					content={<h4>Pokedex</h4>}

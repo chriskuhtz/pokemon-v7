@@ -24,4 +24,5 @@ export interface SettingsObject {
 	releasePokemonInTeamOverview?: boolean;
 	fixedTeamSize?: number;
 	noStorageSystem?: boolean;
+	questsTabHidden?: boolean;
 }

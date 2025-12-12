@@ -1,7 +1,7 @@
-import { getCurrentPP } from '../components/MoveCard/MoveCard';
 import { struggleMove } from '../constants/struggle';
 import { BattlePokemon, isBattlePokemon } from '../interfaces/BattlePokemon';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { getCurrentPP } from './getCurrentPP';
 import { hasAilment } from './hasAilment';
 
 export function getMovesArray<T extends BattlePokemon | OwnedPokemon>(

@@ -55,6 +55,7 @@ const startingSaveFileLabyrinth: SaveFile = {
 		movesLearnableInTeamOverview: true,
 		fixedTeamSize: 6,
 		noStorageSystem: true,
+		questsTabHidden: true,
 	},
 };
 export const Labyrinth = (): JSX.Element => {
