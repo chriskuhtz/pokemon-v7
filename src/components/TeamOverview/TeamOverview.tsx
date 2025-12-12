@@ -1,34 +1,25 @@
 import { useContext, useMemo } from 'react';
 import { isOwnedPokemonKO } from '../../functions/isKo';
-import { reduceBattlePokemonToOwnedPokemon } from '../../functions/reduceBattlePokemonToOwnedPokemon';
 import { useGetBattleTeam } from '../../hooks/useGetBattleTeam';
 import { useIsReadyToEvolve } from '../../hooks/useIsReadyToEvolve';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
-import { PokemonData } from '../../interfaces/PokemonData';
 import { PokemonSprite } from '../PokemonSprite/PokemonSprite';
 import './TeamOverview.css';
 
 export const TeamOverview = ({ steps }: { steps: number }) => {
-	const { saveFile, navigateAwayFromOverworldReducer } =
-		useContext(SaveFileContext);
-	const team = useMemo(
-		() => saveFile.pokemon.filter((p) => p.onTeam),
-		[saveFile]
-	);
-	const { res: battleTeam } = useGetBattleTeam(team, {});
-
-	if (!battleTeam) {
-		return <></>;
-	}
+	const {
+		saveFile: { pokemon },
+		navigateAwayFromOverworldReducer,
+	} = useContext(SaveFileContext);
+	const team = useMemo(() => pokemon.filter((p) => p.onTeam), [pokemon]);
 
 	return (
 		<>
-			{battleTeam.map((t) => (
+			{team.map((t) => (
 				<TeamMemberInOverview
-					pokemon={reduceBattlePokemonToOwnedPokemon(t)}
+					pokemon={t}
 					key={t.id}
-					data={t.data}
 					onClick={() => navigateAwayFromOverworldReducer('TEAM', steps)}
 				/>
 			))}
@@ -36,16 +27,19 @@ export const TeamOverview = ({ steps }: { steps: number }) => {
 	);
 };
 
-export const TeamMemberInOverview = ({
+const TeamMemberInOverview = ({
 	pokemon,
-	data,
 	onClick,
 }: {
 	pokemon: OwnedPokemon;
-	data: PokemonData;
 	onClick: () => void;
 }) => {
-	const readyToEvolve = useIsReadyToEvolve(pokemon, data);
+	const { res: battlePokemon } = useGetBattleTeam([pokemon], {});
+
+	const readyToEvolve = useIsReadyToEvolve(pokemon, battlePokemon?.at(0)?.data);
+	if (!battlePokemon) {
+		return <></>;
+	}
 
 	return (
 		<PokemonSprite

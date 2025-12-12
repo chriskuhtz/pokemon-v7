@@ -1,9 +1,10 @@
 import { getHighestXpOnTeam } from '../../../../functions/getHighestXpOnTeam';
 import { makeChallengerPokemon } from '../../../../functions/makeChallengerPokemon';
 import {
-	OverworldNpc,
 	OverworldTrainer,
-} from '../../../../interfaces/OverworldMap';
+	OverworldNpc,
+} from '../../../../interfaces/Occupant';
+
 import { SaveFile } from '../../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../../interfaces/StatObject';

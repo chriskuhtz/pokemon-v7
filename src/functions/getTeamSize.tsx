@@ -1,6 +1,9 @@
 import { SaveFile } from '../interfaces/SaveFile';
 
 export const getTeamSize = (s: SaveFile) => {
+	if (s.settings?.fixedTeamSize) {
+		return s.settings?.fixedTeamSize;
+	}
 	if (s.campUpgrades['team slot 6']) {
 		return 6;
 	}

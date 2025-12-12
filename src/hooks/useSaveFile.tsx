@@ -26,7 +26,7 @@ import { updateItemFunction } from '../functions/updateItemFunction';
 import { Challenger } from '../interfaces/Challenger';
 import { EmptyInventory, joinInventories } from '../interfaces/Inventory';
 import { ItemType } from '../interfaces/Item';
-import { Occupant } from '../interfaces/OverworldMap';
+import { Occupant } from '../interfaces/Occupant';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { QuestStatus } from '../interfaces/Quest';
 import { RoutesType } from '../interfaces/Routing';

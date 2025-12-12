@@ -2,7 +2,7 @@ import {
 	Occupant,
 	OverworldNpc,
 	OverworldPokemon,
-} from '../../../../interfaces/OverworldMap';
+} from '../../../../interfaces/Occupant';
 import { SpriteEnum } from '../../../../interfaces/SpriteEnum';
 
 const falknerBase: Omit<

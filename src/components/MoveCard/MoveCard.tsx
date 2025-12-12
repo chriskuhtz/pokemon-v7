@@ -1,36 +1,42 @@
 import { battleSpriteSize } from '../../constants/gameData/gameData';
-import { BattleMove } from '../../interfaces/BattlePokemon';
+import { BattleMove, BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Card } from '../../uiComponents/Card/Card';
+
+export const getCurrentPP = (pokemon: BattlePokemon, move: BattleMove) => {
+	const boost = pokemon.ppBoostedMoves.find(
+		(boosted) => boosted.name === move.name
+	)?.stage;
+	const boostfactor = () => {
+		if (boost === 1) {
+			return 1.2;
+		}
+		if (boost === 2) {
+			return 1.4;
+		}
+		if (boost === 3) {
+			return 1.6;
+		}
+		return 1;
+	};
+	console.log(move);
+	return move.data.pp * boostfactor() - move.usedPP;
+};
 
 export const MoveCard = ({
 	move,
 	onClick,
 	highlighted,
-	boostedBy,
+	pokemon,
 }: {
 	move: BattleMove;
 	onClick: () => void;
 	highlighted?: boolean;
-	boostedBy?: number;
+	pokemon: BattlePokemon;
 }) => {
-	const boostfactor = () => {
-		if (boostedBy === 1) {
-			return 1.2;
-		}
-		if (boostedBy === 2) {
-			return 1.4;
-		}
-		if (boostedBy === 3) {
-			return 1.6;
-		}
-		return 1;
-	};
-	const currentPP = move.data.pp * boostfactor() - move.usedPP;
-
 	return (
 		<Card
 			highlighted={highlighted}
-			disabled={currentPP <= 0}
+			disabled={getCurrentPP(pokemon, move) <= 0}
 			onClick={onClick}
 			icon={
 				<img
@@ -47,7 +53,7 @@ export const MoveCard = ({
 
 					<div>
 						<strong>
-							PP: {currentPP}/{move.data.pp}
+							PP: {getCurrentPP(pokemon, move)}/{move.data.pp}
 						</strong>
 					</div>
 				</div>

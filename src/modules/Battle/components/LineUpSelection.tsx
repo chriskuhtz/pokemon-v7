@@ -36,9 +36,14 @@ export const LineUpSelection = ({
 	trainer?: TrainerInfo;
 }) => {
 	const {
-		saveFile: { pokedex },
+		saveFile: { pokedex, settings },
 	} = useContext(SaveFileContext);
 	const { location } = useContext(LocationContext);
+
+	const runningAllowed = useMemo(
+		() => !trainer && !settings?.noRunningFromBattle,
+		[settings?.noRunningFromBattle, trainer]
+	);
 
 	const { addMessage } = useContext(MessageQueueContext);
 
@@ -195,7 +200,9 @@ export const LineUpSelection = ({
 					>
 						{battleButtonMessage}
 					</button>
-					{!trainer && <button onClick={tryToLeave}>Try to escape</button>}
+					{runningAllowed && (
+						<button onClick={tryToLeave}>Try to escape</button>
+					)}
 				</div>
 			</div>
 		</div>

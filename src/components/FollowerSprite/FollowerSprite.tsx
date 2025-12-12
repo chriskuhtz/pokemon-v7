@@ -1,4 +1,5 @@
 import { useContext, useMemo } from 'react';
+import { baseInternalDex } from '../../constants/baseInternalDex';
 import { fps } from '../../constants/gameData/gameData';
 import { getNextLocation } from '../../functions/getNextLocation';
 import { getOppositeDirection } from '../../functions/getOppositeDirection';
@@ -6,9 +7,9 @@ import { isPassable } from '../../functions/isPassable';
 import { LocationContext } from '../../hooks/LocationProvider';
 import { BaseSizeContext } from '../../hooks/useBaseSize';
 import { SaveFileContext } from '../../hooks/useSaveFile';
-import { Occupant, OverworldMap } from '../../interfaces/OverworldMap';
 import { useDrawFollowerPokemon } from '../../modules/Overworld/hooks/useDrawCharacter';
-import { baseInternalDex } from '../../constants/baseInternalDex';
+import { Occupant } from '../../interfaces/Occupant';
+import { OverworldMap } from '../../interfaces/OverworldMap';
 
 const followerCanvasId = 'followerCanvas';
 

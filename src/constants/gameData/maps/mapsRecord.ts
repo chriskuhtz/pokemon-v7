@@ -9,7 +9,7 @@ import { caveW1 } from './caveW1';
 import { caveW1F1 } from './caveW1F1';
 import { caveW1F2 } from './caveW1F2';
 import { challengeField } from './challengeField';
-import { labyrinthLevel1 } from './labyrinthLevel1';
+import { labyrinthLevel1 } from './labyrinth/labyrinthLevel1';
 import { onixCave } from './onixCave';
 import { pokemonLeague } from './pokemonLeague';
 import { randomChallengeField } from './randomChallengeField';
@@ -115,7 +115,7 @@ export const mapDisplayNames: Record<MapId, string> = {
 	victoryRoadExit: 'Pokemon League Entrance',
 	pokemonLeague: 'Pokemon League',
 	//LABYRINTH VERSION
-	labyrinth_level_1: 'Labyrinth Level 1',
+	labyrinth_level_1: 'Deep Forest',
 };
 
 export const Emptymap: OverworldMap = {

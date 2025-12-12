@@ -1,3 +1,5 @@
+import { getCurrentPP } from '../components/MoveCard/MoveCard';
+import { struggleMove } from '../constants/struggle';
 import { BattlePokemon, isBattlePokemon } from '../interfaces/BattlePokemon';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { hasAilment } from './hasAilment';
@@ -23,7 +25,7 @@ export function getMovesArray<T extends BattlePokemon | OwnedPokemon>(
 			? pokemon.lastUsedMove?.name
 			: undefined;
 
-	return [
+	const res = [
 		pokemon.firstMove,
 		pokemon.secondMove,
 		pokemon.thirdMove,
@@ -44,7 +46,7 @@ export function getMovesArray<T extends BattlePokemon | OwnedPokemon>(
 			if (isBattlePokemon(pokemon) && config?.filterOutEmpty) {
 				const battleMove = m as BattlePokemon['firstMove'];
 
-				return battleMove.usedPP < battleMove.data.pp;
+				return getCurrentPP(pokemon, battleMove) > 0;
 			}
 			if (isBattlePokemon(pokemon) && pokemon.choiceBandedMove) {
 				const battleMove = m as BattlePokemon['firstMove'];
@@ -68,4 +70,11 @@ export function getMovesArray<T extends BattlePokemon | OwnedPokemon>(
 
 			return true;
 		});
+
+	console.log(res);
+
+	if (res.length === 0) {
+		return [struggleMove];
+	}
+	return res;
 }

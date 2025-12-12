@@ -1,12 +1,9 @@
 import React from 'react';
-import {
-	Occupant,
-	TileIdentifier,
-	TileMap,
-} from '../../../interfaces/OverworldMap';
 
 import { LayerName } from '../hooks/useMapEditor';
 import { LayerDisplay } from './LayerDisplay';
+import { Occupant } from '../../../interfaces/Occupant';
+import { TileIdentifier, TileMap } from '../../../interfaces/TileMap';
 
 const unmemoedLayerEditor = ({
 	layerName,

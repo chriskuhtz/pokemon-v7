@@ -2,7 +2,7 @@ import {
 	Occupant,
 	OverworldNpc,
 	TeleporterNpc,
-} from '../../../../interfaces/OverworldMap';
+} from '../../../../interfaces/Occupant';
 import { SpriteEnum } from '../../../../interfaces/SpriteEnum';
 
 const lookerNpcBase: Omit<

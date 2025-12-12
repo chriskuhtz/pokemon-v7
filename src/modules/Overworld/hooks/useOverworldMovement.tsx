@@ -9,10 +9,17 @@ import { OPPO_ID } from '../../../functions/makeChallengerPokemon';
 import { updatePosition } from '../../../functions/updatePosition';
 import { LocationContext } from '../../../hooks/LocationProvider';
 import { GameDataContext } from '../../../hooks/useGameData';
+import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { Challenger } from '../../../interfaces/Challenger';
 import { EmptyInventory } from '../../../interfaces/Inventory';
-import { Occupant, OnStepPortal } from '../../../interfaces/OverworldMap';
+
+import {
+	Occupant,
+	OnStepDialogue,
+	OnStepPortal,
+	OnStepRouter,
+} from '../../../interfaces/Occupant';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
 
 const baseEncounterRate = 0;
@@ -38,6 +45,9 @@ export const useOverworldMovement = (
 	const { location: playerLocation, setLocation: setCharacterLocation } =
 		useContext(LocationContext);
 	const { internalDex } = useContext(GameDataContext);
+	const { handleOccupantReducer, patchSaveFileReducer } =
+		useContext(SaveFileContext);
+	const { addMultipleMessages } = useContext(MessageQueueContext);
 
 	const shinyFactor = useMemo(() => (bag['shiny-charm'] > 1 ? 4 : 1), [bag]);
 	const map = useMemo(() => mapsRecord[playerLocation.mapId], [playerLocation]);
@@ -64,6 +74,28 @@ export const useOverworldMovement = (
 					o.x === playerLocation.x &&
 					o.y === playerLocation.y
 			) as OnStepPortal | undefined,
+		[map.occupants, playerLocation.x, playerLocation.y, saveFile]
+	);
+	const steptOnDialogue: OnStepDialogue | undefined = useMemo(
+		() =>
+			map.occupants.find(
+				(o) =>
+					o.type === 'ON_STEP_DIALOGUE' &&
+					o.conditionFunction(saveFile) === true &&
+					o.x === playerLocation.x &&
+					o.y === playerLocation.y
+			) as OnStepDialogue | undefined,
+		[map.occupants, playerLocation.x, playerLocation.y, saveFile]
+	);
+	const steptOnRouter: OnStepRouter | undefined = useMemo(
+		() =>
+			map.occupants.find(
+				(o) =>
+					o.type === 'ON_STEP_ROUTER' &&
+					o.conditionFunction(saveFile) === true &&
+					o.x === playerLocation.x &&
+					o.y === playerLocation.y
+			) as OnStepRouter | undefined,
 		[map.occupants, playerLocation.x, playerLocation.y, saveFile]
 	);
 
@@ -168,6 +200,22 @@ export const useOverworldMovement = (
 				setCharacterLocation(steptOnPortal.portal);
 				return;
 			}
+			if (steptOnDialogue) {
+				addMultipleMessages(
+					steptOnDialogue.dialogue.map((d) => ({
+						message: d,
+					}))
+				);
+				handleOccupantReducer(steptOnDialogue);
+				return;
+			}
+			if (steptOnRouter) {
+				patchSaveFileReducer({
+					...saveFile,
+					meta: { ...saveFile.meta, activeTab: steptOnRouter.route },
+				});
+				return;
+			}
 			if (nextInput && !saveFile.flying) {
 				handlePossibleEncounter();
 			}
@@ -200,15 +248,18 @@ export const useOverworldMovement = (
 		return () => clearTimeout(int);
 	}, [
 		activatedLure,
+		addMultipleMessages,
 		addStep,
 		campUpgrades,
 		currentOccupants,
 		currentSwarm,
 		encounterChance,
 		encounterRateModifier.factor,
+		handleOccupantReducer,
 		handlePossibleEncounter,
 		map,
 		nextInput,
+		patchSaveFileReducer,
 		playerLocation,
 		pokemon,
 		quests,
@@ -217,7 +268,9 @@ export const useOverworldMovement = (
 		setCharacterLocation,
 		shinyFactor,
 		startEncounter,
+		steptOnDialogue,
 		steptOnPortal,
+		steptOnRouter,
 	]);
 
 	return setNextInput;

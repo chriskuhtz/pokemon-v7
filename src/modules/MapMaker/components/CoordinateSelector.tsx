@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react';
-import { TileIdentifier } from '../../../interfaces/OverworldMap';
 import { Modal } from '../../../uiComponents/Modal/Modal';
 import { tileMapsRecord } from '../constants/tileMaps';
 import { GroupPlacer } from './MapEditor';
 import { Tile } from './Tile';
 import { TileMapViewer } from './TileMapViewer';
+import { TileIdentifier } from '../../../interfaces/TileMap';
 export const CoordinateSelector = ({
 	selected,
 	setSelected,

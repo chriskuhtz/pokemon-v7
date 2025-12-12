@@ -23,7 +23,7 @@ const startingSaveFileLabyrinth: SaveFile = {
 	bag: EmptyInventory,
 	storage: EmptyInventory,
 	seedVault: [],
-	playerId: 'tim',
+	playerId: 'tom',
 	money: 5000,
 	pokemon: [],
 	meta: { activeTab: 'OVERWORLD' },
@@ -48,6 +48,14 @@ const startingSaveFileLabyrinth: SaveFile = {
 	farm: { plants: [] },
 	campUpgrades: baseCampUpgrades,
 	pokedex: emptyPokedex,
+	settings: {
+		rogueLike: true,
+		noRunningFromBattle: true,
+		movesEditableInTeamOverview: true,
+		movesLearnableInTeamOverview: true,
+		fixedTeamSize: 6,
+		noStorageSystem: true,
+	},
 };
 export const Labyrinth = (): JSX.Element => {
 	return (
@@ -60,6 +68,12 @@ export const Labyrinth = (): JSX.Element => {
 			startingSaveFile={startingSaveFileLabyrinth}
 			allowedBaseSizes={[64]}
 			internalDex={labyrinthDex}
+			settingsEditable={false}
+			losingMessages={{
+				training: 'Tom and Wilson were never seen again ...',
+				wild: 'Tom and Wilson were never seen again ...',
+				reset: 'Tom and Wilson were never seen again ...',
+			}}
 		/>
 	);
 };

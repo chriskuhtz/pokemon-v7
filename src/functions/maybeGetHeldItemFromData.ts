@@ -1,6 +1,6 @@
 import { isItem, isKeyItem, ItemType, itemTypes } from '../interfaces/Item';
 import { PokemonData } from '../interfaces/PokemonData';
-import { SettingsObject } from '../interfaces/SaveFile';
+import { SettingsObject } from '../interfaces/SettingsObject';
 import { ArrayHelpers } from './ArrayHelpers';
 
 export const maybeGetHeldItemFromData = (

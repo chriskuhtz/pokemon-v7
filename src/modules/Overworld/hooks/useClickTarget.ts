@@ -6,10 +6,11 @@ import { isPassable } from '../../../functions/isPassable';
 import { LocationContext } from '../../../hooks/LocationProvider';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
-import { Occupant, OverworldMap } from '../../../interfaces/OverworldMap';
+import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
 import { Pathfinder, PathfindingApproach } from '../../../model/Pathfinder';
 import { Vector2 } from '../../../model/Vector2';
+import { Occupant } from '../../../interfaces/Occupant';
 
 export const useClickTarget = (
 	assembledMap: OverworldMap,

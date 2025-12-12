@@ -2,7 +2,7 @@ import { Message } from '../hooks/useMessageQueue';
 import { SPIKES_FACTOR } from '../interfaces/Ailment';
 import { BattlePokemon } from '../interfaces/BattlePokemon';
 import { typeEffectivenessChart } from '../interfaces/PokemonType';
-import { SettingsObject } from '../interfaces/SaveFile';
+import { SettingsObject } from '../interfaces/SettingsObject';
 import { EmptyStatObject, Stat } from '../interfaces/StatObject';
 import { WeatherType } from '../interfaces/Weather';
 import { BattleFieldEffect } from '../modules/Battle/BattleField';

@@ -1,4 +1,5 @@
-import { Occupant, OverworldMap } from '../interfaces/OverworldMap';
+import { Occupant } from '../interfaces/Occupant';
+import { OverworldMap } from '../interfaces/OverworldMap';
 import { CharacterLocationData } from '../interfaces/SaveFile';
 import { isEdge } from './isEdge';
 import { isWater } from './isWater';
@@ -51,7 +52,9 @@ export const isPassable = ({
 			c.x === nextLocation.x &&
 			c.y === nextLocation.y &&
 			c.type !== 'HIDDEN_ITEM' &&
-			c.type !== 'ON_STEP_PORTAL'
+			c.type !== 'ON_STEP_PORTAL' &&
+			c.type !== 'ON_STEP_DIALOGUE' &&
+			c.type !== 'ON_STEP_ROUTER'
 	);
 
 	if (nextFieldOccupant?.type === 'CLIMBING_STEPS' && canClimb) {

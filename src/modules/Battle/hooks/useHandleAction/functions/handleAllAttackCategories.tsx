@@ -20,10 +20,10 @@ import { battleSpriteSize } from '../../../../../constants/gameData/gameData';
 import { changeMovePP } from '../../../../../functions/changeMovePP';
 import { chooseOpponentAction } from '../../../../../functions/chooseOpponentAction';
 import { OPPO_ID } from '../../../../../functions/makeChallengerPokemon';
-import { SettingsObject } from '../../../../../interfaces/SaveFile';
 import { BattleTerrain, TerrainObject } from '../../useBattleTerrain';
 import { WeatherObject } from '../../useBattleWeather';
 import { assignActionToPokemon } from '../../useChooseAction';
+import { SettingsObject } from '../../../../../interfaces/SettingsObject';
 
 export const handleAllAttackCategories = ({
 	attacker,

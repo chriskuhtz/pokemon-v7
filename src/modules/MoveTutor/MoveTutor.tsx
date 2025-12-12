@@ -8,6 +8,7 @@ import { ArrayHelpers } from '../../functions/ArrayHelpers';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { moveIsTeachable } from '../../functions/moveIsAvailable';
 import { withChangedMoves } from '../../functions/withChangedMoves';
+import { GameDataContext } from '../../hooks/useGameData';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
@@ -19,7 +20,6 @@ import { LearnMethod } from '../../interfaces/PokemonData';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
-import { GameDataContext } from '../../hooks/useGameData';
 
 const learnMethodOrder: Record<LearnMethod, number> = {
 	'level-up': 1,
@@ -104,7 +104,11 @@ export const MoveTutor = () => {
 	);
 };
 
-const MoveEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
+export const MoveEditor = ({
+	ownedPokemon,
+}: {
+	ownedPokemon: OwnedPokemon;
+}) => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { addMessage } = useContext(MessageQueueContext);
 

@@ -1,7 +1,7 @@
 import {
 	OverworldNpc,
 	OverworldPokemon,
-} from '../../../../interfaces/OverworldMap';
+} from '../../../../interfaces/Occupant';
 import { SpriteEnum } from '../../../../interfaces/SpriteEnum';
 
 export const bugsy: OverworldNpc = {

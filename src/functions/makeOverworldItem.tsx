@@ -1,6 +1,6 @@
 import { MapId } from '../constants/gameData/maps/mapsRecord';
 import { ItemType } from '../interfaces/Item';
-import { OverworldItem } from '../interfaces/OverworldMap';
+import { OverworldItem } from '../interfaces/Occupant';
 import { occupantHandled } from './occupantHandled';
 
 export const makeOverworldItem = ({

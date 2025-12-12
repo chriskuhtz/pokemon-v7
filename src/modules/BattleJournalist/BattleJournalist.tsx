@@ -45,7 +45,7 @@ import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { joinInventories } from '../../interfaces/Inventory';
 import { ItemType, moveUnlockPayments } from '../../interfaces/Item';
-import { OverworldTrainer, RouterNpc } from '../../interfaces/OverworldMap';
+import { OverworldTrainer, RouterNpc } from '../../interfaces/Occupant';
 import { SaveFile } from '../../interfaces/SaveFile';
 import { SpriteEnum } from '../../interfaces/SpriteEnum';
 import { Card } from '../../uiComponents/Card/Card';

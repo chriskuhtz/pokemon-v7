@@ -92,7 +92,13 @@ export function ActionSelection({
 						))
 				);
 			}) as [ItemType, number][],
-		[allTargets, catchingAllowed, inventory, settings?.noItemsInBattle]
+		[
+			allTargets,
+			catchingAllowed,
+			inventory,
+			playerId,
+			settings?.noItemsInBattle,
+		]
 	);
 
 	const canSwitch = useMemo(
@@ -121,16 +127,13 @@ export function ActionSelection({
 						considerTorment: true,
 						considerTaunt: true,
 						considerEncore: true,
+						filterOutEmpty: true,
 					}).map((m) => (
 						<MoveCard
+							pokemon={controlled}
 							move={m}
 							key={m.name}
 							onClick={() => setChosenAction(m.name)}
-							boostedBy={
-								controlled.ppBoostedMoves.find(
-									(boosted) => boosted.name === m.name
-								)?.stage
-							}
 						/>
 					))
 				) : (

@@ -2,7 +2,7 @@ import { isEqual } from 'lodash';
 import { useEffect, useState } from 'react';
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { getYOffsetFromOrientation } from '../../../functions/getYOffsetFromOrientation';
-import { Occupant } from '../../../interfaces/OverworldMap';
+import { Occupant } from '../../../interfaces/Occupant';
 
 export const overflow = (current: number, excludedMax: number) => {
 	if (current < excludedMax - 1) {
@@ -188,11 +188,12 @@ const getSource = (occ: Occupant) => {
 			return '/mapObjects/climbingSteps.png';
 		case 'ON_STEP_PORTAL':
 			return occ.sprite ?? '';
-
+		case 'ON_STEP_DIALOGUE':
+		case 'ON_STEP_ROUTER':
+			return '';
 		case 'PORTAL':
 		case 'LEDGE':
 			return occ.sprite;
-
 		case 'MERCHANT':
 		case 'NURSE':
 		case 'NPC':
@@ -211,6 +212,7 @@ const getSource = (occ: Occupant) => {
 		case 'PC':
 			return '/mapObjects/pc.png';
 		case 'STORAGE_CHEST':
+		case 'RANDOM_ITEM':
 			return '/mapObjects/chest.png';
 		case 'SIGN':
 			return '/mapObjects/sign.png';

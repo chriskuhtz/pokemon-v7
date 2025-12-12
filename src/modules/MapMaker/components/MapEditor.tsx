@@ -7,7 +7,6 @@ import React, {
 } from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import { MapId, mapsRecord } from '../../../constants/gameData/maps/mapsRecord';
-import { TileIdentifier } from '../../../interfaces/OverworldMap';
 import { LayerName, useMapEditor } from '../hooks/useMapEditor';
 import { FillTools } from './FillTools';
 import { FloatyMenu } from './FloatyMenu';
@@ -16,6 +15,7 @@ import { LayerSelector } from './LayerSelector';
 import { OpacitySelector } from './OpacitySelector';
 import { QuickSelection } from './QuickSelection';
 import { ToolSelection } from './ToolSelection';
+import { TileIdentifier } from '../../../interfaces/TileMap';
 
 export const BaseSize = 16;
 export interface TilePlacer {

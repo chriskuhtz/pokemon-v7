@@ -1,4 +1,4 @@
-import { TileIdentifier } from '../../../interfaces/OverworldMap';
+import { TileIdentifier } from '../../../interfaces/TileMap';
 
 export const Tile = ({
 	tile,

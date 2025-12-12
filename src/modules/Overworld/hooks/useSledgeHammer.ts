@@ -13,9 +13,9 @@ import { InternalDex } from '../../../interfaces/GameData';
 import { EmptyInventory, joinInventories } from '../../../interfaces/Inventory';
 import { undergroundTable } from '../../../interfaces/Item';
 import { getRandomNature } from '../../../interfaces/Natures';
-import { OverworldRock } from '../../../interfaces/OverworldMap';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { SaveFile } from '../../../interfaces/SaveFile';
+import { OverworldRock } from '../../../interfaces/Occupant';
 
 const SLEDGEHAMMER_ENCOUNTER_OPTIONS = (
 	internalDex: InternalDex

@@ -6,7 +6,7 @@ import {
 } from '../functions/makeChallengerPokemon';
 import { Challenger } from '../interfaces/Challenger';
 import { EmptyInventory } from '../interfaces/Inventory';
-import { OverworldStrangeTree } from '../interfaces/OverworldMap';
+import { OverworldStrangeTree } from '../interfaces/Occupant';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 

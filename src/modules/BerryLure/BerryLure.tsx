@@ -19,11 +19,11 @@ import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Challenger } from '../../interfaces/Challenger';
 import { EmptyInventory, joinInventories } from '../../interfaces/Inventory';
 import { BerryType, superEffectiveSaveTable } from '../../interfaces/Item';
-import { OverworldBerryLure } from '../../interfaces/OverworldMap';
 import { PokemonType } from '../../interfaces/PokemonType';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import { OverworldBerryLure } from '../../interfaces/Occupant';
 
 export const BerryLure = () => {
 	const navigate = useNavigate();

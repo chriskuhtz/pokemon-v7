@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
-import { TileIdentifier, TileMap } from '../../../interfaces/OverworldMap';
 import { Stack } from '../../../uiComponents/Stack/Stack';
 import { FloatyMenu } from './FloatyMenu';
 import { Tool } from './MapEditor';
 import { Tile } from './Tile';
+import { TileMap, TileIdentifier } from '../../../interfaces/TileMap';
 
 export const QuickSelection = ({
 	tileMap,

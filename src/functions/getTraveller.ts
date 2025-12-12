@@ -52,7 +52,8 @@ import {
 	silverS1W1,
 	silverW1,
 } from '../constants/gameData/maps/occupants/silver';
-import { Occupant } from '../interfaces/OverworldMap';
+import { Occupant } from '../interfaces/Occupant';
+
 import {
 	travellingMerchantRouteE1,
 	travellingMerchantRouteN1,

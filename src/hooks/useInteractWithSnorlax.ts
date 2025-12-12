@@ -6,9 +6,9 @@ import {
 } from '../functions/makeChallengerPokemon';
 import { Challenger } from '../interfaces/Challenger';
 import { EmptyInventory } from '../interfaces/Inventory';
-import { OverworldSnorlax } from '../interfaces/OverworldMap';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
+import { OverworldSnorlax } from '../interfaces/Occupant';
 
 export const useInteractWithSnorlax = () => {
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);

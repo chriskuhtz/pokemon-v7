@@ -1,6 +1,6 @@
 import { getHighestXpOnTeam } from '../../../../functions/getHighestXpOnTeam';
 import { makeChallengerPokemon } from '../../../../functions/makeChallengerPokemon';
-import { OverworldTrainer } from '../../../../interfaces/OverworldMap';
+import { OverworldTrainer } from '../../../../interfaces/Occupant';
 import { SaveFile } from '../../../../interfaces/SaveFile';
 import { SpriteEnum } from '../../../../interfaces/SpriteEnum';
 import { EmptyStatObject } from '../../../../interfaces/StatObject';

@@ -1,7 +1,7 @@
 import { Nature } from '../interfaces/Natures';
 import { StatInfo } from '../interfaces/PokemonData';
 import { GrowthRateName } from '../interfaces/PokemonSpeciesData';
-import { SettingsObject } from '../interfaces/SaveFile';
+import { SettingsObject } from '../interfaces/SettingsObject';
 import { StatObject } from '../interfaces/StatObject';
 import { calculateLevelData } from './calculateLevelData';
 import { calculateStat } from './calculateStat';

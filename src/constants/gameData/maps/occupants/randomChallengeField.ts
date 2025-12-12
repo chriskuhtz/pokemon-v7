@@ -1,8 +1,6 @@
 import { makeRandomTeam } from '../../../../functions/makeRandomTeam';
-import {
-	OverworldMap,
-	OverworldTrainer,
-} from '../../../../interfaces/OverworldMap';
+import { OverworldTrainer } from '../../../../interfaces/Occupant';
+import { OverworldMap } from '../../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../../interfaces/SpriteEnum';
 import { randomFieldId } from '../../gameData';
 

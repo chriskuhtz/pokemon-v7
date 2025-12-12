@@ -2,9 +2,9 @@ import { useCallback, useContext } from 'react';
 import { makeChallengerPokemon } from '../functions/makeChallengerPokemon';
 import { Challenger } from '../interfaces/Challenger';
 import { EmptyInventory } from '../interfaces/Inventory';
-import { OverworldPokemon } from '../interfaces/OverworldMap';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
+import { OverworldPokemon } from '../interfaces/Occupant';
 
 export const useStaticEncounter = () => {
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);

@@ -21,7 +21,10 @@ export const getSpeciesForPokemon = async (
 	}
 };
 
-export const getEvoChainForPokemon = async (data: PokemonData) => {
+export const getEvoChainForPokemon = async (data?: PokemonData) => {
+	if (!data) {
+		return;
+	}
 	const speciesData = await getSpeciesForPokemon(data);
 
 	if (speciesData) {
@@ -36,7 +39,7 @@ export const getEvoChainForPokemon = async (data: PokemonData) => {
 };
 
 export const useGetEvolution = (
-	data: PokemonData
+	data?: PokemonData
 ): { evos: EvolutionChainLink[] | undefined; invalidate: () => void } => {
 	const { status, res, invalidate } = useFetch<EvolutionChainData>(() =>
 		getEvoChainForPokemon(data)
@@ -67,6 +70,7 @@ export const useGetEvolution = (
 	const evos = useMemo(() => {
 		const correctLink = flattenedChain.find(
 			(link) =>
+				data?.name &&
 				link.species.name === deAlternate(data.name) &&
 				link.evolves_to.length > 0
 		);
@@ -76,7 +80,7 @@ export const useGetEvolution = (
 		}
 
 		return correctLink.evolves_to;
-	}, [data.name, flattenedChain]);
+	}, [data, flattenedChain]);
 
 	const exceptionCheckedEvos = evos?.map((e) => {
 		//@ts-expect-error this is an error in the api

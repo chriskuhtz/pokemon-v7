@@ -1,6 +1,6 @@
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { PokemonData } from '../interfaces/PokemonData';
-import { SettingsObject } from '../interfaces/SaveFile';
+import { SettingsObject } from '../interfaces/SettingsObject';
 import { Stat } from '../interfaces/StatObject';
 import { getStats } from './getStats';
 

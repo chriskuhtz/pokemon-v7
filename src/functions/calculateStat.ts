@@ -1,5 +1,5 @@
 import { Nature } from '../interfaces/Natures';
-import { SettingsObject } from '../interfaces/SaveFile';
+import { SettingsObject } from '../interfaces/SettingsObject';
 import { Stat } from '../interfaces/StatObject';
 import { determineNatureFactor } from './determineNatureFactor';
 

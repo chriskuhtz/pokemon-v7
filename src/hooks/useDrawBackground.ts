@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-import { TileMap } from '../interfaces/OverworldMap';
-
+import { TileMap } from '../interfaces/TileMap';
 export const useDrawBackground = (
 	canvasId: string,
 	map: TileMap,

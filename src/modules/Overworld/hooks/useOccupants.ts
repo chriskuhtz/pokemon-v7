@@ -14,7 +14,7 @@ import { GameDataContext } from '../../../hooks/useGameData';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { InternalDex } from '../../../interfaces/GameData';
 import { Nature } from '../../../interfaces/Natures';
-import { Occupant, OverworldPokemon } from '../../../interfaces/OverworldMap';
+import { Occupant, OverworldPokemon } from '../../../interfaces/Occupant';
 import {
 	CharacterOrientation,
 	RampagingPokemon,

@@ -1,4 +1,4 @@
-import { ActivePokemonStatue, PokemonStatue } from '../interfaces/OverworldMap';
+import { ActivePokemonStatue, PokemonStatue } from '../interfaces/Occupant';
 import { CharacterOrientation, SaveFile } from '../interfaces/SaveFile';
 
 export const makePokemonStatue = ({

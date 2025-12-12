@@ -16,16 +16,19 @@ export const BaseSizeProvider = ({
 	children: ReactNode;
 	allowedBaseSizes: number[];
 }) => {
+	const devmode = !!window.localStorage.getItem('devmode');
 	const [baseSize, setBaseSize] = useState<number>(
 		allowedBaseSizes.at(0) ?? 32
 	);
 
 	const increaseBaseSize = useCallback(() => {
-		if (allowedBaseSizes.includes(baseSize * 2)) setBaseSize(baseSize * 2);
-	}, [allowedBaseSizes, baseSize]);
+		if (allowedBaseSizes.includes(baseSize * 2) || devmode)
+			setBaseSize(baseSize * 2);
+	}, [allowedBaseSizes, baseSize, devmode]);
 	const decreaseBaseSize = useCallback(() => {
-		if (allowedBaseSizes.includes(baseSize / 2)) setBaseSize(baseSize / 2);
-	}, [allowedBaseSizes, baseSize]);
+		if (allowedBaseSizes.includes(baseSize / 2) || devmode)
+			setBaseSize(baseSize / 2);
+	}, [allowedBaseSizes, baseSize, devmode]);
 
 	return (
 		<BaseSizeContext.Provider

@@ -5,7 +5,7 @@ import { Message, MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { joinInventories } from '../../../interfaces/Inventory';
 import { undergroundTable } from '../../../interfaces/Item';
-import { Ledge } from '../../../interfaces/OverworldMap';
+import { Ledge } from '../../../interfaces/Occupant';
 
 export const useShovel = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);

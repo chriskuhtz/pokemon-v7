@@ -1,4 +1,4 @@
-import { Occupant } from '../interfaces/OverworldMap';
+import { Occupant } from '../interfaces/Occupant';
 
 export const getNextFieldOccupant = (
 	focusedField: { x: number; y: number },

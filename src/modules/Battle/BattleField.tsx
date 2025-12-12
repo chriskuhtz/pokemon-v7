@@ -23,11 +23,13 @@ import { BattleLocation } from '../../functions/determineCaptureSuccess';
 import { getHeldItem } from '../../functions/getHeldItem';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
+import { getTeamSize } from '../../functions/getTeamSize';
 import { handleCheekPouch } from '../../functions/handleCheekPouch';
 import { isKO } from '../../functions/isKo';
 import { reduceSecondaryAilmentDurations } from '../../functions/reduceSecondaryAilmentDurations';
 import { sortByPriority } from '../../functions/sortByPriority';
 import { LocationContext } from '../../hooks/LocationProvider';
+import { GameDataContext } from '../../hooks/useGameData';
 import { LeaveBattlePayload } from '../../hooks/useLeaveBattle';
 import { useLocationColors } from '../../hooks/useLocationColors';
 import { Message } from '../../hooks/useMessageQueue';
@@ -127,15 +129,26 @@ export const BattleField = ({
 	spriteGeneration?: 1;
 	challengerType: 'TRAINER' | 'WILD';
 }) => {
-	const {
-		saveFile: { settings, playerId },
-	} = useContext(SaveFileContext);
-	const { playerColor, oppColor } = useLocationColors();
-
+	const { saveFile } = useContext(SaveFileContext);
+	const { settings, playerId } = saveFile;
 	const { location } = useContext(LocationContext);
+	const { losingMessages } = useContext(GameDataContext);
+	const { playerColor, oppColor } = useLocationColors();
 	const isTrainerBattle = useMemo(() => {
 		return challengerType === 'TRAINER';
 	}, [challengerType]);
+	const runningAllowed = useMemo(
+		() => !isTrainerBattle && !settings?.noRunningFromBattle,
+		[isTrainerBattle, settings?.noRunningFromBattle]
+	);
+	const catchingAllowed = useMemo(() => {
+		if (settings?.noStorageSystem) {
+			return (
+				saveFile.pokemon.filter((p) => p.onTeam).length < getTeamSize(saveFile)
+			);
+		}
+		return !isTrainerBattle;
+	}, [isTrainerBattle, saveFile, settings?.noStorageSystem]);
 
 	const [battleRound, setBattleRound] = useState<number>(0);
 	const [battleLocation] = useState<BattleLocation>('STANDARD');
@@ -624,13 +637,13 @@ export const BattleField = ({
 
 			const message = () => {
 				if (location.mapId === 'camp' || location.mapId === 'challengeField') {
-					return 'luckily this was only a training battle';
+					return losingMessages.training;
 				}
 				if (rogueLike) {
-					return 'You lost the battle and have to reset';
+					return losingMessages.reset;
 				}
 
-				return 'You lost the battle and rushed back to camp, loosing your items on the way';
+				return losingMessages.wild;
 			};
 			addMessage({
 				message: message(),
@@ -751,6 +764,9 @@ export const BattleField = ({
 		latestMessage,
 		leaveWithCurrentData,
 		location.mapId,
+		losingMessages.reset,
+		losingMessages.training,
+		losingMessages.wild,
 		pokemon,
 		scatteredCoins,
 		settings,
@@ -829,8 +845,8 @@ export const BattleField = ({
 							targets={pokemon}
 							chooseAction={chooseAction}
 							playerInventory={battleInventory}
-							catchingAllowed={!isTrainerBattle}
-							runningAllowed={!isTrainerBattle}
+							catchingAllowed={catchingAllowed}
+							runningAllowed={runningAllowed}
 							battleFieldEffects={battleFieldEffects}
 							weather={battleWeather}
 							terrain={battleTerrain}
