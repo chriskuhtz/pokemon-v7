@@ -39,8 +39,14 @@ export const OverworldMenus = ({
 	>;
 	handleEnterPress: () => void;
 }) => {
-	const { baseSize, setBaseSize, decreaseBaseSize, increaseBaseSize } =
-		useContext(BaseSizeContext);
+	const {
+		baseSize,
+		setBaseSize,
+		decreaseBaseSize,
+		increaseBaseSize,
+		availableBaseSizes,
+	} = useContext(BaseSizeContext);
+
 	const { navigateAwayFromOverworldReducer } = useContext(SaveFileContext);
 	const { location } = useContext(LocationContext);
 	const map = useMemo(() => mapsRecord[location.mapId], [location.mapId]);
@@ -97,24 +103,28 @@ export const OverworldMenus = ({
 				<UncollectedQuestsBadge stepsWalked={stepsTaken} />
 				<NumberOfBallsBadge />
 
-				<CgZoomOut
-					size={battleSpriteSize}
-					onClick={() => {
-						if (isDark) {
-							return;
-						}
-						decreaseBaseSize();
-					}}
-				/>
-				<CgZoomIn
-					size={battleSpriteSize}
-					onClick={() => {
-						if (isDark) {
-							return;
-						}
-						increaseBaseSize();
-					}}
-				/>
+				{availableBaseSizes.length > 1 && (
+					<>
+						<CgZoomOut
+							size={battleSpriteSize}
+							onClick={() => {
+								if (isDark) {
+									return;
+								}
+								decreaseBaseSize();
+							}}
+						/>
+						<CgZoomIn
+							size={battleSpriteSize}
+							onClick={() => {
+								if (isDark) {
+									return;
+								}
+								increaseBaseSize();
+							}}
+						/>
+					</>
+				)}
 			</div>
 			<div
 				style={{

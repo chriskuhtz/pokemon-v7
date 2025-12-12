@@ -6,6 +6,7 @@ export const BaseSizeContext = React.createContext(
 		setBaseSize: (x: number) => void;
 		increaseBaseSize: () => void;
 		decreaseBaseSize: () => void;
+		availableBaseSizes: number[];
 	}
 );
 
@@ -32,7 +33,15 @@ export const BaseSizeProvider = ({
 
 	return (
 		<BaseSizeContext.Provider
-			value={{ baseSize, setBaseSize, increaseBaseSize, decreaseBaseSize }}
+			value={{
+				baseSize,
+				setBaseSize,
+				increaseBaseSize,
+				decreaseBaseSize,
+				availableBaseSizes: devmode
+					? [4, 8, 16, 32, 64, 128, 256]
+					: allowedBaseSizes,
+			}}
 		>
 			{children}
 		</BaseSizeContext.Provider>
