@@ -14,7 +14,6 @@ import {
 	campUpgradeNames,
 } from '../../constants/gameData/campUpgrades';
 import { battleSpriteSize } from '../../constants/gameData/gameData';
-import { QuestName, QuestsRecord } from '../../constants/gameData/questsRecord';
 import { typeColors } from '../../constants/typeColors';
 import { replaceRouteName } from '../../functions/replaceRouteName';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
@@ -22,6 +21,10 @@ import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import {
+	KumaQuestName,
+	KumaQuestsRecord,
+} from '../../versions/kuma/questsRecord';
 
 const categories: CampUpgradeCategory[] = [
 	'Research',
@@ -145,9 +148,9 @@ const UpgradeCard = ({
 	const { campUpgrades, researchPoints } = saveFile;
 
 	if (campUpgradeCategories[upgrade] === 'Quest Reward') {
-		const requiredQuest = Object.entries(QuestsRecord)
+		const requiredQuest = Object.entries(KumaQuestsRecord)
 			.find(([, value]) => value.campUpgrade === upgrade)
-			?.at(0) as QuestName | undefined;
+			?.at(0) as KumaQuestName | undefined;
 
 		return (
 			<Card

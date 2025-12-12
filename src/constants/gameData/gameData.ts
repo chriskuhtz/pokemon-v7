@@ -2,9 +2,12 @@ import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { QuestStatus } from '../../interfaces/Quest';
 import { Pokedex } from '../../interfaces/SaveFile';
 import { EmptyStatObject } from '../../interfaces/StatObject';
+import {
+	KumaQuestName,
+	KumaQuestsRecord,
+} from '../../versions/kuma/questsRecord';
 import { pokemonNames } from '../pokemonNames';
 import { CampUpgrade, campUpgradeNames } from './campUpgrades';
-import { QuestName, QuestsRecord } from './questsRecord';
 
 export const trickXP = 694206942069420;
 
@@ -47,10 +50,10 @@ export const testPokemon: OwnedPokemon = {
 	caughtAtDate: new Date().getTime(),
 };
 
-export const baseQuestState: Record<QuestName, QuestStatus> =
+export const baseQuestState: Record<KumaQuestName, QuestStatus> =
 	Object.fromEntries(
-		Object.keys(QuestsRecord).map((key) => [key, 'INACTIVE'])
-	) as Record<QuestName, QuestStatus>;
+		Object.keys(KumaQuestsRecord).map((key) => [key, 'INACTIVE'])
+	) as Record<KumaQuestName, QuestStatus>;
 
 export const baseCampUpgrades: Record<CampUpgrade, boolean> =
 	Object.fromEntries(

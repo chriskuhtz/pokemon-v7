@@ -8,6 +8,7 @@ import { getNextForwardFoot } from '../../../functions/getNextForwardFoot';
 import { OPPO_ID } from '../../../functions/makeChallengerPokemon';
 import { updatePosition } from '../../../functions/updatePosition';
 import { LocationContext } from '../../../hooks/LocationProvider';
+import { GameDataContext } from '../../../hooks/useGameData';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { Challenger } from '../../../interfaces/Challenger';
 import { EmptyInventory } from '../../../interfaces/Inventory';
@@ -36,6 +37,7 @@ export const useOverworldMovement = (
 	} = saveFile;
 	const { location: playerLocation, setLocation: setCharacterLocation } =
 		useContext(LocationContext);
+	const { internalDex } = useContext(GameDataContext);
 
 	const shinyFactor = useMemo(() => (bag['shiny-charm'] > 1 ? 4 : 1), [bag]);
 	const map = useMemo(() => mapsRecord[playerLocation.mapId], [playerLocation]);
@@ -90,18 +92,19 @@ export const useOverworldMovement = (
 		const waterEncounter =
 			!!map.tileMap.waterLayer[playerLocation.y][playerLocation.x];
 
-		const { team, battleTeamConfig } = determineWildPokemon(
-			pokemon.filter((p) => p.onTeam),
-			playerLocation.mapId,
+		const { team, battleTeamConfig } = determineWildPokemon({
+			team: pokemon.filter((p) => p.onTeam),
+			mapId: playerLocation.mapId,
 			quests,
 			waterEncounter,
 			shinyFactor,
-			activatedLure,
+			lure: activatedLure,
 			catchStreak,
 			currentSwarm,
 			currentStrongSwarm,
-			currentDistortionSwarm
-		);
+			currentDistortionSwarm,
+			internalDex,
+		});
 
 		const challenger: Challenger = {
 			type: 'WILD',
@@ -135,8 +138,13 @@ export const useOverworldMovement = (
 		currentSwarm,
 		encounterChance,
 		encounterRateModifier.factor,
-		map,
-		playerLocation,
+		internalDex,
+		map.peaceful,
+		map.tileMap.encounterLayer,
+		map.tileMap.waterLayer,
+		playerLocation.mapId,
+		playerLocation.x,
+		playerLocation.y,
 		pokemon,
 		quests,
 		reduceEncounterRate,

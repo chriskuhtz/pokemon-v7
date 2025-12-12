@@ -4,7 +4,6 @@ import { MdFormatListBulleted } from 'react-icons/md';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { battleSpriteSize } from '../../constants/gameData/gameData';
-import { QuestName, QuestsRecord } from '../../constants/gameData/questsRecord';
 import { typeColors } from '../../constants/typeColors';
 import { getRewardItemsForQuest } from '../../functions/getRewardForQuest';
 import { replaceRouteName } from '../../functions/replaceRouteName';
@@ -17,6 +16,10 @@ import { AnimatedBar } from '../../uiComponents/AnimatedBar/AnimatedBar';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import {
+	KumaQuestName,
+	KumaQuestsRecord,
+} from '../../versions/kuma/questsRecord';
 
 export const Quests = ({ goBack }: { goBack: () => void }) => {
 	const [filter, setFilter] = useState<QuestCategory | 'FULFILLED'>(
@@ -67,7 +70,7 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 					))}
 				</Stack>
 				{sortedQuests.map(({ name, status }) => {
-					const quest = QuestsRecord[name];
+					const quest = KumaQuestsRecord[name];
 					const inFilter =
 						filter === 'FULFILLED'
 							? status === 'FULFILLED'
@@ -93,7 +96,7 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 									<h5 style={{ display: 'flex', alignItems: 'center' }}>
 										Reward:
 										{Object.entries(
-											getRewardItemsForQuest(name as QuestName)
+											getRewardItemsForQuest(name as KumaQuestName)
 										).map(([item, amount]) => (
 											<React.Fragment key={item}>
 												{amount} x <ItemSprite item={item as ItemType} />

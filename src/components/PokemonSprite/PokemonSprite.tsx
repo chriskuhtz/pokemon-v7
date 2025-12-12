@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
+import { baseInternalDex } from '../../constants/baseInternalDex';
 import { battleSpriteSize } from '../../constants/gameData/gameData';
-import { internalDex } from '../../constants/gameData/internalDexData';
 import { PokemonName } from '../../constants/pokemonNames';
 
 export const getPokemonSprite = (
@@ -13,7 +13,7 @@ export const getPokemonSprite = (
 		spriteGeneration?: 1;
 	}
 ): string => {
-	const id = internalDex[name].dexId;
+	const id = baseInternalDex[name].dexId;
 
 	if (config?.spriteGeneration === 1) {
 		if (config.back) {

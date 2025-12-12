@@ -12,6 +12,7 @@ import { getRandomPosition } from '../functions/getRandomPosition';
 import { getRampagers, getRandomSwarmMon } from '../functions/internalDex';
 import { SwarmType } from '../interfaces/Pokedex';
 import { PokemonSwarm } from '../interfaces/SaveFile';
+import { GameDataContext } from './useGameData';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
@@ -22,6 +23,7 @@ export const useSwarmRadar = (): {
 } => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { addMessage } = useContext(MessageQueueContext);
+	const { internalDex } = useContext(GameDataContext);
 
 	const addSwarmMessage = useCallback(
 		(s: PokemonSwarm) => {
@@ -72,7 +74,7 @@ export const useSwarmRadar = (): {
 			if (saveFile.currentRampagingPokemon) {
 				return;
 			}
-			const pokemon = ArrayHelpers.getRandomEntry(getRampagers());
+			const pokemon = ArrayHelpers.getRandomEntry(getRampagers(internalDex));
 
 			addMessage({ message: `rampaging ${pokemon} detected at ${route}` });
 			const { x, y } = getRandomPosition(mapsRecord[route]);
@@ -86,7 +88,12 @@ export const useSwarmRadar = (): {
 				},
 			});
 		},
-		[addMessage, patchSaveFileReducer, saveFile.currentRampagingPokemon]
+		[
+			addMessage,
+			internalDex,
+			patchSaveFileReducer,
+			saveFile.currentRampagingPokemon,
+		]
 	);
 
 	const scan = useCallback(
@@ -112,7 +119,7 @@ export const useSwarmRadar = (): {
 				if (mode === 'STRONG') {
 					return {
 						type: 'STRONG',
-						pokemon: getRandomSwarmMon('STRONG'),
+						pokemon: getRandomSwarmMon('STRONG', internalDex),
 						xpMin: 20 * 20 * 20,
 						xpMax: 40 * 40 * 40,
 						leavesAt: now + ONE_HOUR,
@@ -126,7 +133,7 @@ export const useSwarmRadar = (): {
 						options.push('SPACE_DISTORTION');
 					}
 					const randomOption = ArrayHelpers.getRandomEntry(options);
-					const mon = getRandomSwarmMon(randomOption);
+					const mon = getRandomSwarmMon(randomOption, internalDex);
 
 					return {
 						pokemon: mon,
@@ -138,7 +145,7 @@ export const useSwarmRadar = (): {
 					};
 				}
 				return {
-					pokemon: getRandomSwarmMon('WEAK'),
+					pokemon: getRandomSwarmMon('WEAK', internalDex),
 					type: 'WEAK',
 					xpMin: 125,
 					xpMax: 1000,
@@ -177,6 +184,7 @@ export const useSwarmRadar = (): {
 			addMessage,
 			addSwarmMessage,
 			handleRampage,
+			internalDex,
 			patchSaveFileReducer,
 			saveFile,
 		]

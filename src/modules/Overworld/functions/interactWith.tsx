@@ -1,3 +1,4 @@
+import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
 import { SpriteIcon } from '../../../components/SpriteIcon/SpriteIcon';
 import { getOppositeDirection } from '../../../functions/getOppositeDirection';
 import { Message } from '../../../hooks/useMessageQueue';
@@ -156,6 +157,19 @@ export const interactWithFunction = ({
 	}
 	if (data.type === 'PORTAL') {
 		goToPosition(data.portal);
+		return;
+	}
+	if (data.type === 'POKEBALL') {
+		addMultipleMessages([
+			...data.dialogue.map((d) => ({
+				message: d,
+			})),
+			{
+				message: `Received a ${data.pokemon.name}`,
+				onRemoval: () => handleThisOccupant(data),
+				icon: <PokemonSprite name={data.pokemon.name} />,
+			},
+		]);
 		return;
 	}
 	if (data.type === 'ITEM' || data.type === 'HIDDEN_ITEM') {

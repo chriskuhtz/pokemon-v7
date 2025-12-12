@@ -1,12 +1,12 @@
 import React, { useContext, useMemo, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { battleSpriteSize } from '../../constants/gameData/gameData';
-import { internalDex } from '../../constants/gameData/internalDexData';
 import { MapId, mapIds } from '../../constants/gameData/maps/mapsRecord';
 import { PokemonName } from '../../constants/pokemonNames';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { isNotCatchable } from '../../functions/internalDex';
 import { replaceRouteName } from '../../functions/replaceRouteName';
+import { GameDataContext } from '../../hooks/useGameData';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { InternalDexEntry } from '../../interfaces/Pokedex';
@@ -18,6 +18,7 @@ const devmode = !!window.localStorage.getItem('devmode');
 
 export const InternalDex = (): JSX.Element => {
 	const { saveFile } = useContext(SaveFileContext);
+	const { internalDex } = useContext(GameDataContext);
 	const [searchString, setSearchString] = useState<string>('');
 	const navigate = useNavigate();
 
@@ -28,7 +29,7 @@ export const InternalDex = (): JSX.Element => {
 			}
 			return saveFile.pokedex[key as PokemonName].caughtOnRoutes.length > 0;
 		}) as [PokemonName, InternalDexEntry][];
-	}, [saveFile]);
+	}, [internalDex, saveFile.pokedex]);
 
 	const [routeFilter, setRouteFilter] = useState<MapId>();
 

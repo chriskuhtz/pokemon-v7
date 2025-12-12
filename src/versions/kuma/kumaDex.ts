@@ -1,7 +1,7 @@
+import { PokemonName } from '../../constants/pokemonNames';
 import { InternalDexEntry } from '../../interfaces/Pokedex';
-import { PokemonName } from '../pokemonNames';
 
-export const internalDex: Record<PokemonName, InternalDexEntry> = {
+export const kumaDex: Record<PokemonName, InternalDexEntry> = {
 	bulbasaur: {
 		dexId: 1,
 		types: ['grass', 'poison'],

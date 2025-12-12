@@ -1,5 +1,4 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { internalDex } from '../../../constants/gameData/internalDexData';
 import { MapId, mapsRecord } from '../../../constants/gameData/maps/mapsRecord';
 import { PokemonName } from '../../../constants/pokemonNames';
 import { getMiddleOfThree } from '../../../functions/getMiddleOfThree';
@@ -11,7 +10,9 @@ import {
 	getTroubleMakerTeam,
 } from '../../../functions/troubleMakers/troubleMakers';
 import { LocationContext } from '../../../hooks/LocationProvider';
+import { GameDataContext } from '../../../hooks/useGameData';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
+import { InternalDex } from '../../../interfaces/GameData';
 import { Nature } from '../../../interfaces/Natures';
 import { Occupant, OverworldPokemon } from '../../../interfaces/OverworldMap';
 import {
@@ -24,6 +25,7 @@ import { SpriteEnum } from '../../../interfaces/SpriteEnum';
 export const useOccupants = () => {
 	const { saveFile } = useContext(SaveFileContext);
 	const { location } = useContext(LocationContext);
+	const { internalDex } = useContext(GameDataContext);
 	const map = useMemo(() => mapsRecord[location.mapId], [location.mapId]);
 
 	const [statefulOccupants, setStatefulOccupants] = useState<Occupant[]>([]);
@@ -45,7 +47,7 @@ export const useOccupants = () => {
 			saveFile.currentRampagingPokemon &&
 			saveFile.currentRampagingPokemon.route === map.id
 		) {
-			all.push(createRampager(saveFile.currentRampagingPokemon));
+			all.push(createRampager(saveFile.currentRampagingPokemon, internalDex));
 		}
 		const guest = saveFile.importedChallenger;
 		if (guest && guest.mapId === map.id) {
@@ -56,7 +58,7 @@ export const useOccupants = () => {
 			});
 		}
 		if (location.mapId === 'camp') {
-			all.push(...createPasturePokemon(saveFile));
+			all.push(...createPasturePokemon(saveFile, internalDex));
 			all.push(...createBattle());
 		}
 
@@ -70,6 +72,7 @@ export const useOccupants = () => {
 		statefulOccupants.length,
 		saveFile,
 		location.mapId,
+		internalDex,
 	]);
 
 	const conditionalOccupants = useMemo(() => {
@@ -106,7 +109,10 @@ function shuffle<T>(a: T[]): T[] {
 	return a;
 }
 
-const createPasturePokemon = (saveFile: SaveFile): OverworldPokemon[] => {
+const createPasturePokemon = (
+	saveFile: SaveFile,
+	internalDex: InternalDex
+): OverworldPokemon[] => {
 	const pastureMons = shuffle(
 		saveFile.pokemon
 			.filter(
@@ -287,7 +293,8 @@ const getNatureBasedMessage = ({
 };
 
 const createRampager = (
-	currentRampagingPokemon: RampagingPokemon
+	currentRampagingPokemon: RampagingPokemon,
+	internalDex: InternalDex
 ): OverworldPokemon => {
 	const { x, y, id, name } = currentRampagingPokemon;
 	const xp = getMiddleOfThree([70 * 70 * 70, Math.random() * 1000000, 1000000]);

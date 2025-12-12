@@ -3,8 +3,8 @@ import { AbilityInfoButton } from '../../components/AbilityInfoButton/AbilityInf
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { AbilityName, abilityNames } from '../../constants/abilityCheckList';
-import { internalDex } from '../../constants/gameData/internalDexData';
 import { ArrayHelpers } from '../../functions/ArrayHelpers';
+import { GameDataContext } from '../../hooks/useGameData';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { useNavigate } from '../../hooks/useNavigate';
@@ -65,6 +65,7 @@ export const AbilityTutor = () => {
 const AbilityEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { addMessage } = useContext(MessageQueueContext);
+	const { internalDex } = useContext(GameDataContext);
 
 	const [abilityToConfirm, setAbilityToConfirm] = useState<
 		AbilityName | undefined

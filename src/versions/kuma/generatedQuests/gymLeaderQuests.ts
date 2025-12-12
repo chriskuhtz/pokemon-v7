@@ -1,4 +1,12 @@
 import { v4 } from 'uuid';
+import { blaineId } from '../../../constants/gameData/maps/occupants/blaine';
+import { brockId } from '../../../constants/gameData/maps/occupants/brock';
+import { erikaId } from '../../../constants/gameData/maps/occupants/erika';
+import { garyId } from '../../../constants/gameData/maps/occupants/gary';
+import { janineId } from '../../../constants/gameData/maps/occupants/janine';
+import { mistyId } from '../../../constants/gameData/maps/occupants/misty';
+import { sabrinaId } from '../../../constants/gameData/maps/occupants/sabrina';
+import { surgeId } from '../../../constants/gameData/maps/occupants/surge';
 import {
 	expCandyPackage,
 	smallExpCandyPackage,
@@ -10,15 +18,7 @@ import {
 	EmptyStatObject,
 	generateRandomStatObject,
 } from '../../../interfaces/StatObject';
-import { blaineId } from '../maps/occupants/blaine';
-import { brockId } from '../maps/occupants/brock';
-import { erikaId } from '../maps/occupants/erika';
-import { garyId } from '../maps/occupants/gary';
-import { janineId } from '../maps/occupants/janine';
-import { mistyId } from '../maps/occupants/misty';
-import { sabrinaId } from '../maps/occupants/sabrina';
-import { surgeId } from '../maps/occupants/surge';
-import { QuestName } from '../questsRecord';
+import { KumaQuestName } from '../questsRecord';
 
 const testPokemon: OwnedPokemon = {
 	name: 'teddiursa',
@@ -45,7 +45,7 @@ const testPokemon: OwnedPokemon = {
 	growthRate: 'medium',
 	caughtAtDate: new Date().getTime(),
 };
-export const gymLeaderQuests: Partial<Record<QuestName, Quest>> = {
+export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
 	'defeat erika': {
 		category: 'GYM LEADER',
 		kind: 'BULLETIN',

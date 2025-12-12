@@ -1,8 +1,8 @@
 import { MapId } from '../constants/gameData/maps/mapsRecord';
-import { QuestName } from '../constants/gameData/questsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { TimeOfDay } from '../functions/getTimeOfDay';
 import { BattleTeamConfig } from '../hooks/useGetBattleTeam';
+import { KumaQuestName } from '../versions/kuma/questsRecord';
 import { Inventory } from './Inventory';
 import { ApricornType, ItemType } from './Item';
 import { OwnedPokemon } from './OwnedPokemon';
@@ -49,6 +49,7 @@ export const OCCUPANT_TYPES = [
 	'SNORLAX',
 	'TELEPORTER_NPC',
 	'CLIMBING_STEPS',
+	'POKEBALL',
 ] as const;
 export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
@@ -106,13 +107,13 @@ export interface OverworldNpc extends BaseOccupant {
 	sprite: string;
 	movement?: { path: CharacterOrientation[]; currentStep: number };
 	gifts?: Partial<Inventory>;
-	quest?: QuestName;
+	quest?: KumaQuestName;
 }
 export interface OverworldSign extends BaseOccupant {
 	type: 'SIGN';
 	approachDirection: CharacterOrientation;
 	dialogue: string[];
-	quest?: QuestName;
+	quest?: KumaQuestName;
 }
 export interface OverworldBush extends BaseOccupant {
 	type: 'BUSH';
@@ -228,6 +229,12 @@ export interface OverworldBerryLure extends BaseOccupant {
 	type: 'BERRY_LURE';
 }
 
+export interface OverworldPokeball extends BaseOccupant {
+	type: 'POKEBALL';
+	dialogue: string[];
+	pokemon: OwnedPokemon;
+}
+
 export type Occupant =
 	| OverworldItem
 	| OverworldHiddenItem
@@ -262,7 +269,8 @@ export type Occupant =
 	| ApricornTree
 	| EmptyApricornTree
 	| TeleporterNpc
-	| OverworldClimbingSteps;
+	| OverworldClimbingSteps
+	| OverworldPokeball;
 
 export type EncounterRarity = 'common' | 'medium' | 'rare' | 'ultra-rare';
 

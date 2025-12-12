@@ -16,7 +16,7 @@ export const VersionSelection = (): JSX.Element => {
 		return <Labyrinth />;
 	}
 	return (
-		<Page headline={'Which version do you want to play'}>
+		<Page headline={'Which version would you like to play'}>
 			<Stack mode={'column'}>
 				<Card
 					icon={

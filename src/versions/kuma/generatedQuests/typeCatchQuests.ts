@@ -1,3 +1,4 @@
+import { PokemonName } from '../../../constants/pokemonNames';
 import { byType } from '../../../functions/internalDex';
 import {
 	superEffectiveSaveTable,
@@ -5,8 +6,7 @@ import {
 } from '../../../interfaces/Item';
 import { PokemonType, pokemonTypes } from '../../../interfaces/PokemonType';
 import { Quest } from '../../../interfaces/Quest';
-import { PokemonName } from '../../pokemonNames';
-import { QuestName } from '../questsRecord';
+import { KumaQuestName } from '../questsRecord';
 
 const realTypes = pokemonTypes.filter((p) => p !== 'typeless');
 
@@ -48,7 +48,7 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 				},
 				catchBoosts: { [type]: 1 },
 				researchPoints: 20,
-				availableAfter: `catch a ${type} pokemon` as QuestName,
+				availableAfter: `catch a ${type} pokemon` as KumaQuestName,
 				progress: (s) => ({
 					goal: 10,
 					current: Object.entries(s.pokedex).filter(
@@ -79,7 +79,7 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 				},
 				catchBoosts: { [type]: 1 },
 				researchPoints: 50,
-				availableAfter: `catch 10 different ${type} pokemon` as QuestName,
+				availableAfter: `catch 10 different ${type} pokemon` as KumaQuestName,
 				progress: (s) => ({
 					goal: 25,
 					current: Object.entries(s.pokedex).filter(
@@ -108,7 +108,7 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
 				},
 				catchBoosts: { [type]: 1 },
 				researchPoints: 100,
-				availableAfter: `catch 25 different ${type} pokemon` as QuestName,
+				availableAfter: `catch 25 different ${type} pokemon` as KumaQuestName,
 				progress: (s) => ({
 					goal: 50,
 					current: Object.entries(s.pokedex).filter(

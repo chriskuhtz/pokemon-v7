@@ -1,11 +1,11 @@
 import { useContext, useState } from 'react';
-import { QuestsRecord } from '../../constants/gameData/questsRecord';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { getRandomBall, getRandomItem } from '../../interfaces/Item';
 import { RoutesType } from '../../interfaces/Routing';
 import { SettingsObject } from '../../interfaces/SaveFile';
 import { Page } from '../../uiComponents/Page/Page';
 import { ToggleRow } from '../../uiComponents/ToggleRow/ToggleRow';
+import { KumaQuestsRecord } from '../../versions/kuma/questsRecord';
 
 export const randomQuestRewards = 'randomQuestRewards';
 export const Settings = ({ backTo }: { backTo?: RoutesType }): JSX.Element => {
@@ -39,7 +39,7 @@ export const Settings = ({ backTo }: { backTo?: RoutesType }): JSX.Element => {
 				randomQuestRewards,
 				JSON.stringify(
 					Object.fromEntries(
-						Object.entries(QuestsRecord).map(([name, quest]) => {
+						Object.entries(KumaQuestsRecord).map(([name, quest]) => {
 							return [
 								name,
 								{
@@ -163,7 +163,7 @@ export const Settings = ({ backTo }: { backTo?: RoutesType }): JSX.Element => {
 					<ToggleRow
 						value={!!state.randomStarters}
 						setValue={(x) => setState({ ...state, randomStarters: x })}
-						label={'Do you want random starter pokemon choices:'}
+						label={'Would you like random starter pokemon choices:'}
 						description={'can make 1 questline impossible'}
 					/>
 					<ToggleRow

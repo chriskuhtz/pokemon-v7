@@ -5,7 +5,7 @@ import {
 	EmptyStatObject,
 	generateRandomStatObject,
 } from '../../../interfaces/StatObject';
-import { QuestName } from '../questsRecord';
+import { KumaQuestName } from '../questsRecord';
 
 const testPokemon: OwnedPokemon = {
 	name: 'teddiursa',
@@ -33,7 +33,7 @@ const testPokemon: OwnedPokemon = {
 	caughtAtDate: new Date().getTime(),
 };
 
-export const travellingTrainerQuests: Partial<Record<QuestName, Quest>> = {
+export const travellingTrainerQuests: Partial<Record<KumaQuestName, Quest>> = {
 	'defeat research assistant barry': {
 		category: 'TRAVELLING TRAINER',
 		kind: 'BULLETIN',

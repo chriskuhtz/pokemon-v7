@@ -12,11 +12,6 @@ import {
 	emptyPokedex,
 	ONE_DAY,
 } from '../constants/gameData/gameData';
-import {
-	QuestName,
-	questNames,
-	QuestsRecord,
-} from '../constants/gameData/questsRecord';
 import { PokemonName } from '../constants/pokemonNames';
 import { addPokemonToDex } from '../functions/addPokemonToDex';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
@@ -24,7 +19,9 @@ import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getBagLimit, getTotalInventoryAmount } from '../functions/getBagLimit';
 import { getItemUrl } from '../functions/getItemUrl';
+import { getTeamSize } from '../functions/getTeamSize';
 import { TimeOfDay } from '../functions/getTimeOfDay';
+import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { updateItemFunction } from '../functions/updateItemFunction';
 import { Challenger } from '../interfaces/Challenger';
 import { EmptyInventory, joinInventories } from '../interfaces/Inventory';
@@ -34,6 +31,11 @@ import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { QuestStatus } from '../interfaces/Quest';
 import { RoutesType } from '../interfaces/Routing';
 import { SaveFile } from '../interfaces/SaveFile';
+import {
+	KumaQuestName,
+	kumaQuestNames,
+	KumaQuestsRecord,
+} from '../versions/kuma/questsRecord';
 import { GameDataContext } from './useGameData';
 import { MessageQueueContext } from './useMessageQueue';
 
@@ -75,23 +77,23 @@ const migrateSavefile = (input: SaveFile) => {
 
 	//migrate new quests
 	updatedInput.quests = Object.fromEntries(
-		questNames.map((q) => [q, updatedInput.quests[q] ?? 'INACTIVE'])
-	) as Record<QuestName, QuestStatus>;
+		kumaQuestNames.map((q) => [q, updatedInput.quests[q] ?? 'INACTIVE'])
+	) as Record<KumaQuestName, QuestStatus>;
 	//migrate in unlocks
-	Object.entries(QuestsRecord).forEach(([key, value]) => {
+	Object.entries(KumaQuestsRecord).forEach(([key, value]) => {
 		if (!value.campUpgrade) {
 			return;
 		}
-		if (updatedInput.quests[key as QuestName] === 'COLLECTED') {
+		if (updatedInput.quests[key as KumaQuestName] === 'COLLECTED') {
 			updatedInput.campUpgrades[value.campUpgrade] = true;
 		}
 	});
 	//migrate in badges
-	Object.entries(QuestsRecord).forEach(([key, value]) => {
+	Object.entries(KumaQuestsRecord).forEach(([key, value]) => {
 		if (!value.badge) {
 			return;
 		}
-		if (updatedInput.quests[key as QuestName] === 'COLLECTED') {
+		if (updatedInput.quests[key as KumaQuestName] === 'COLLECTED') {
 			updatedInput.badges = [...new Set([...updatedInput.badges, value.badge])];
 		}
 	});
@@ -270,6 +272,14 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 	const handleOccupantReducer = (occ: Occupant) => {
 		const timer = occ.type === 'BUSH' ? new Date().getTime() + ONE_DAY : -1;
 		let newInventory = { ...saveFile.bag };
+		let pokemon = [...saveFile.pokemon];
+		if (occ.type === 'POKEBALL') {
+			pokemon = receiveNewPokemonFunction(
+				{ ...occ.pokemon, ownerId: saveFile.playerId },
+				saveFile.pokemon,
+				getTeamSize(saveFile)
+			);
+		}
 		if (occ.type === 'NPC' && occ.gifts) {
 			newInventory = joinInventories(newInventory, occ.gifts);
 		}
@@ -305,6 +315,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 			...saveFile,
 			bag: newInventory,
 			quests: updatedQuests,
+			pokemon: pokemon,
 			handledOccupants: [
 				...saveFile.handledOccupants,
 				{ id: occ.id, resetAt: timer },

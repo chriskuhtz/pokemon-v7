@@ -21,7 +21,7 @@ export const BuyMarket = ({
 }): JSX.Element => {
 	const { filteredInventory, buttons } = useFilteredInventory(inventory);
 	return (
-		<Page goBack={goBack} headline="What do you want to buy:">
+		<Page goBack={goBack} headline="What would you like to buy:">
 			<Stack mode="column">
 				{buttons}
 				{Object.entries(filteredInventory).map(([item, amount]) => {

@@ -11,7 +11,7 @@ import { dragoniteTaxi } from '../../../../modules/DragoniteTaxi/DragoniteTaxi';
 import { miltankFarm } from '../../../../modules/MiltankFarm/MiltankFarm';
 import { seedvaultResearcher } from '../../../../modules/SeedVault/SeedVault';
 import { vileplumeResearchers } from '../../../../modules/VilePlumeScentResearcher/VilePlumeScentResearcher';
-import { internalDex } from '../../internalDexData';
+import { baseInternalDex } from '../../../baseInternalDex';
 import { bugsy, bugsysScyther } from './bugsy';
 import { rewardChris } from './champChris';
 import { chuckLine, chucksMachamp } from './chuckLine';
@@ -313,7 +313,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 		id: 'combee-1',
 		orientation: getRandomOrientation(),
 		conditionFunction: (s) => s.campUpgrades['build combee hive'],
-		dexId: internalDex.combee.dexId,
+		dexId: baseInternalDex.combee.dexId,
 		dialogue: ['bzzz'],
 	},
 	{
@@ -323,7 +323,7 @@ export const campOccupants: OverworldMap['occupants'] = [
 		id: 'combee-2',
 		orientation: getRandomOrientation(),
 		conditionFunction: (s) => s.campUpgrades['build combee hive'],
-		dexId: internalDex.combee.dexId,
+		dexId: baseInternalDex.combee.dexId,
 		dialogue: ['bzzzzz'],
 	},
 	{

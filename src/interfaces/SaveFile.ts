@@ -1,7 +1,7 @@
 import { CampUpgrade } from '../constants/gameData/campUpgrades';
 import { MapId } from '../constants/gameData/maps/mapsRecord';
-import { QuestName } from '../constants/gameData/questsRecord';
 import { PokemonName } from '../constants/pokemonNames';
+import { KumaQuestName } from '../versions/kuma/questsRecord';
 import { BadgeName } from './Badge';
 import { Challenger } from './Challenger';
 import { Inventory } from './Inventory';
@@ -175,7 +175,7 @@ export interface SaveFile {
 	lastEdited: number;
 	lastNurse: string;
 	settings?: SettingsObject;
-	quests: Record<QuestName, QuestStatus>;
+	quests: Record<KumaQuestName, QuestStatus>;
 	sprite: string;
 	mileStones: MileStonesObject;
 	farm: {

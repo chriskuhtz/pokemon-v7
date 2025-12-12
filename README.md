@@ -30,3 +30,9 @@
 3. define it in tileMaps.ts with its size
 4. add it to tileMapsRecord in tileMaps.ts
 5. now you can add it as tilesetUrl to your map
+
+# Creating a new Game Version
+
+1. copy an existing folder in src/versions
+2. adjust the props of <Game/> to create your game
+3. add a new selection card in /modules/VersionSelection

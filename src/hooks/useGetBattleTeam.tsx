@@ -1,7 +1,6 @@
 import { useFetch } from '@potfisch-industries-npm/usefetch';
 import { useContext } from 'react';
 import { AbilityName, abilityNames } from '../constants/abilityCheckList';
-import { internalDex } from '../constants/gameData/internalDexData';
 import { MoveName } from '../constants/movesCheckList';
 import { ArrayHelpers } from '../functions/ArrayHelpers';
 import { calculateLevelData } from '../functions/calculateLevelData';
@@ -19,6 +18,7 @@ import { PokemonData } from '../interfaces/PokemonData';
 import { PokemonSpeciesData } from '../interfaces/PokemonSpeciesData';
 import { EmptyStatObject } from '../interfaces/StatObject';
 import { SaveFileContext } from './useSaveFile';
+import { GameDataContext } from './useGameData';
 
 export interface BattleTeamConfig {
 	assignLearnsetMoves?: boolean;
@@ -35,6 +35,8 @@ export const useGetBattleTeam = (
 	const {
 		saveFile: { settings },
 	} = useContext(SaveFileContext);
+
+	const { internalDex } = useContext(GameDataContext);
 	return useFetch<BattlePokemon[]>(() =>
 		Promise.all(
 			initTeam.map(async (pokemon) => {

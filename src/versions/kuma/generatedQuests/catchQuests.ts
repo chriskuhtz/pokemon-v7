@@ -1,3 +1,13 @@
+import { CampUpgrade } from '../../../constants/gameData/campUpgrades';
+import { MapId } from '../../../constants/gameData/maps/mapsRecord';
+import { routeE1 } from '../../../constants/gameData/maps/routeE1';
+import { routeN1 } from '../../../constants/gameData/maps/routeN1';
+import { routeN1E1 } from '../../../constants/gameData/maps/routeN1E1';
+import { routeN1W1 } from '../../../constants/gameData/maps/routeN1W1';
+import { routeS1 } from '../../../constants/gameData/maps/routeS1';
+import { routeS1E1 } from '../../../constants/gameData/maps/routeS1E1';
+import { routeS1W1 } from '../../../constants/gameData/maps/routeS1W1';
+import { routeW1 } from '../../../constants/gameData/maps/routeW1';
 import { timesOfDay } from '../../../functions/getTimeOfDay';
 import {
 	getAllBerryLureMonForRoute,
@@ -11,17 +21,8 @@ import {
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { Quest } from '../../../interfaces/Quest';
 import { SaveFile } from '../../../interfaces/SaveFile';
-import { CampUpgrade } from '../campUpgrades';
-import { MapId } from '../maps/mapsRecord';
-import { routeE1 } from '../maps/routeE1';
-import { routeN1 } from '../maps/routeN1';
-import { routeN1E1 } from '../maps/routeN1E1';
-import { routeN1W1 } from '../maps/routeN1W1';
-import { routeS1 } from '../maps/routeS1';
-import { routeS1E1 } from '../maps/routeS1E1';
-import { routeS1W1 } from '../maps/routeS1W1';
-import { routeW1 } from '../maps/routeW1';
-import { QuestName } from '../questsRecord';
+import { kumaDex } from '../kumaDex';
+import { KumaQuestName } from '../questsRecord';
 
 const ballForRoute: Record<MapId, PokeballType> = {
 	//actual rewards
@@ -50,6 +51,7 @@ const ballForRoute: Record<MapId, PokeballType> = {
 	onixCave: 'poke-ball',
 	rocketCamp: 'poke-ball',
 	pokemonLeague: 'poke-ball',
+	labyrinth_level_1: 'poke-ball',
 };
 const snackForRoute: Record<MapId, ItemType> = {
 	//actual rewards
@@ -78,6 +80,7 @@ const snackForRoute: Record<MapId, ItemType> = {
 	onixCave: 'poke-ball',
 	rocketCamp: 'poke-ball',
 	pokemonLeague: 'poke-ball',
+	labyrinth_level_1: 'poke-ball',
 };
 const ticketForRoute: Record<MapId, ItemType> = {
 	//actual tickets
@@ -108,28 +111,37 @@ const ticketForRoute: Record<MapId, ItemType> = {
 	onixCave: 'poke-ball',
 	rocketCamp: 'poke-ball',
 	pokemonLeague: 'poke-ball',
+	labyrinth_level_1: 'poke-ball',
 };
 
 const catchQuestsForRoute = (
 	route: OverworldMap,
 	includeWater: boolean,
 	requiredUpgrade?: CampUpgrade
-): Partial<Record<QuestName, Quest>> => {
-	const ultraRares = getAllEncountersFor(route.id, {
-		rarity: 'ultra-rare',
-		area: includeWater ? undefined : 'LAND',
-	});
-	const berryLures = getAllBerryLureMonForRoute(route.id);
+): Partial<Record<KumaQuestName, Quest>> => {
+	const ultraRares = getAllEncountersFor(
+		route.id,
+		{
+			rarity: 'ultra-rare',
+			area: includeWater ? undefined : 'LAND',
+		},
+		kumaDex
+	);
+	const berryLures = getAllBerryLureMonForRoute(route.id, kumaDex);
 	const res = {
 		...Object.fromEntries(
 			timesOfDay.map((time) => {
 				const id =
-					`catch a ${time}-time exclusive pokemon from ${route.id}` as QuestName;
+					`catch a ${time}-time exclusive pokemon from ${route.id}` as KumaQuestName;
 
-				const options = getAllEncountersFor(route.id, {
-					timeOfDay: time,
-					area: includeWater ? undefined : 'LAND',
-				});
+				const options = getAllEncountersFor(
+					route.id,
+					{
+						timeOfDay: time,
+						area: includeWater ? undefined : 'LAND',
+					},
+					kumaDex
+				);
 				return [
 					id,
 					{
@@ -149,17 +161,21 @@ const catchQuestsForRoute = (
 						kind: 'BULLETIN',
 						requiredUpgrade: requiredUpgrade,
 					},
-				] as [QuestName, Quest];
+				] as [KumaQuestName, Quest];
 			})
 		),
 		...Object.fromEntries(
 			timesOfDay.map((time) => {
 				const id = `catch all ${time}-time pokemon from ${route.id}`;
-				const options = getAllEncountersFor(route.id, {
-					timeOfDay: time,
-					includeAllDay: true,
-					area: includeWater ? undefined : 'LAND',
-				});
+				const options = getAllEncountersFor(
+					route.id,
+					{
+						timeOfDay: time,
+						includeAllDay: true,
+						area: includeWater ? undefined : 'LAND',
+					},
+					kumaDex
+				);
 
 				return [
 					id,
@@ -181,7 +197,7 @@ const catchQuestsForRoute = (
 						kind: 'BULLETIN',
 						requiredUpgrade: requiredUpgrade,
 					},
-				] as [QuestName, Quest];
+				] as [KumaQuestName, Quest];
 			})
 		),
 		[`catch a ultra-rare pokemon from ${route.id}`]: {
@@ -218,7 +234,7 @@ const catchQuestsForRoute = (
 		const berryLureQuest = {
 			kind: 'BULLETIN',
 			availableAfter:
-				`catch a ultra-rare pokemon from ${route.id}` as QuestName,
+				`catch a ultra-rare pokemon from ${route.id}` as KumaQuestName,
 			rewardItems: smallExpCandyPackage,
 			targetPokemon: berryLures,
 			researchPoints: 30,
@@ -227,18 +243,18 @@ const catchQuestsForRoute = (
 				berryLures.every((b) => s.pokedex[b].caughtOnRoutes.includes(route.id)),
 		};
 		const berryLureQuestName =
-			`berry-lure all different pokemon from ${route.id}` as QuestName;
+			`berry-lure all different pokemon from ${route.id}` as KumaQuestName;
 		//@ts-expect-error trust me
 		res[berryLureQuestName] = berryLureQuest;
 	}
 
-	return res as Partial<Record<QuestName, Quest>>;
+	return res as Partial<Record<KumaQuestName, Quest>>;
 };
 
 //log the keys and add them to the type def if you add new maps
 //console.log(Object.keys(catchQuests).filter((c) => c.includes(Your Route Name)));
 
-export const catchQuests: Partial<Record<QuestName, Quest>> = {
+export const catchQuests: Partial<Record<KumaQuestName, Quest>> = {
 	...catchQuestsForRoute(routeN1, false),
 	...catchQuestsForRoute(routeN1E1, false, 'machete certification'),
 	...catchQuestsForRoute(routeE1, false, 'sledge hammer certification'),

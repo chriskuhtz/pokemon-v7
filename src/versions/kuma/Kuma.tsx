@@ -6,6 +6,7 @@ import {
 import { EmptyInventory, generateInventory } from '../../interfaces/Inventory';
 import { CharacterLocationData, SaveFile } from '../../interfaces/SaveFile';
 import { Game } from '../../modules/Game/Game';
+import { kumaDex } from './kumaDex';
 
 const startingLocationKuma: CharacterLocationData = {
 	mapId: 'camp',
@@ -80,6 +81,8 @@ export const Kuma = (): JSX.Element => {
 				},
 			]}
 			startingSaveFile={startingSaveFileKuma}
+			allowedBaseSizes={[16, 32, 64, 128, 256]}
+			internalDex={kumaDex}
 		/>
 	);
 };

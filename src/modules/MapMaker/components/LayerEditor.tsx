@@ -51,6 +51,7 @@ const unmemoedLayerEditor = ({
 					display: 'grid',
 					gridTemplateColumns: '10fr 1fr',
 					width: 'min-content',
+					height: 'min-content',
 				}}
 			>
 				<span></span> <span></span>

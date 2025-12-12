@@ -6,13 +6,14 @@ import {
 import { EmptyInventory } from '../../interfaces/Inventory';
 import { CharacterLocationData, SaveFile } from '../../interfaces/SaveFile';
 import { Game } from '../../modules/Game/Game';
+import { labyrinthDex } from './labyrinthDex';
 
 const startingLocationLabyrinth: CharacterLocationData = {
-	mapId: 'caveW1',
+	mapId: 'labyrinth_level_1',
 	orientation: 'DOWN',
 	forwardFoot: 'CENTER1',
-	x: 20,
-	y: 18,
+	x: 10,
+	y: 10,
 };
 const startingSaveFileLabyrinth: SaveFile = {
 	sprite: 'NPC_013',
@@ -57,6 +58,8 @@ export const Labyrinth = (): JSX.Element => {
 			startingTab="OVERWORLD"
 			startingRouterSequence={[]}
 			startingSaveFile={startingSaveFileLabyrinth}
+			allowedBaseSizes={[64]}
+			internalDex={labyrinthDex}
 		/>
 	);
 };

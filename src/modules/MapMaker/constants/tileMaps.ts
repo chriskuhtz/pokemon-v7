@@ -84,6 +84,14 @@ const pokemonLeague: TileSet = {
 	gap: 0,
 };
 
+//credit https://www.deviantart.com/phyromatical/art/Follow-me-into-the-swampy-Jungle-481337661
+const labyrinth: TileSet = {
+	src: "url('/tilesets/labyrinth.png')",
+	height: 54,
+	width: 44,
+	gap: 0,
+};
+
 export const tileMapsRecord: Record<string, TileSet> = {
 	'/tilesets/masterSheet.png': masterSheet,
 	'/tilesets/palletTown.png': palletTown,
@@ -98,4 +106,5 @@ export const tileMapsRecord: Record<string, TileSet> = {
 	'/tilesets/DarkWoods.png': darkWoods,
 	'/tilesets/newMasterSheet.png': swamp,
 	'/tilesets/pokemonLeague.png': pokemonLeague,
+	'/tilesets/labyrinth.png': labyrinth,
 };

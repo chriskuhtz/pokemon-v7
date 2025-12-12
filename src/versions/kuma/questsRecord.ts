@@ -3,6 +3,14 @@ import { calculateLevelData } from '../../functions/calculateLevelData';
 
 import { sumOfIvs } from '../../functions/sumOfIvs';
 
+import {
+	highBstPokemon,
+	lowBstPokemon,
+	midBstPokemon,
+} from '../../constants/baseStatRecord';
+import { campUpgradeCostScale } from '../../constants/gameData/campUpgrades';
+import { allRocketCampTrainersDefeated } from '../../constants/gameData/maps/occupants/rocketCampOccupants';
+import { PokemonName, pokemonNames } from '../../constants/pokemonNames';
 import { hasType } from '../../functions/hasType';
 import {
 	getAllEncountersFor,
@@ -34,22 +42,11 @@ import {
 	tier5trainers,
 	trainers,
 } from '../../modules/TrainingField/trainersRecord';
-import {
-	highBstPokemon,
-	lowBstPokemon,
-	midBstPokemon,
-} from '../baseStatRecord';
-import { PokemonName, pokemonNames } from '../pokemonNames';
-import {
-	campUpgradeCategories,
-	campUpgradeCostScale,
-	campUpgradeNames,
-} from './campUpgrades';
 import { catchQuests } from './generatedQuests/catchQuests';
 import { gymLeaderQuests } from './generatedQuests/gymLeaderQuests';
 import { travellingTrainerQuests } from './generatedQuests/travellingTrainersQuests';
 import { typeCatchQuests } from './generatedQuests/typeCatchQuests';
-import { allRocketCampTrainersDefeated } from './maps/occupants/rocketCampOccupants';
+import { kumaDex } from './kumaDex';
 
 const testPokemon: OwnedPokemon = {
 	name: 'teddiursa',
@@ -77,7 +74,7 @@ const testPokemon: OwnedPokemon = {
 	caughtAtDate: new Date().getTime(),
 };
 
-export const questNames = [
+export const kumaQuestNames = [
 	'catch a fire pokemon',
 	'catch 10 different fire pokemon',
 	'catch 25 different fire pokemon',
@@ -485,9 +482,9 @@ export const questNames = [
 	'defeat the pokemon league',
 ] as const;
 
-export type QuestName = (typeof questNames)[number];
+export type KumaQuestName = (typeof kumaQuestNames)[number];
 
-export const QuestsRecord: Record<QuestName, Quest> = {
+export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
 	...catchQuests,
 	...typeCatchQuests,
 	...travellingTrainerQuests,
@@ -665,11 +662,11 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		rewardItems: { 'sun-stone': 2, 'leaf-stone': 2, 'berry-juice': 5 },
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return getHoneyEncounters().every(
+			return getHoneyEncounters(kumaDex).every(
 				(e) => s.pokedex[e].caughtOnRoutes.length > 0
 			);
 		},
-		targetPokemon: getHoneyEncounters(),
+		targetPokemon: getHoneyEncounters(kumaDex),
 		kind: 'BULLETIN',
 		availableAfter: 'lure a pokemon with honey',
 		requiredUpgrade: 'build combee hive',
@@ -684,11 +681,11 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		researchPoints: 20,
 		conditionFunction: (s) => {
-			return getUnderRockEncounters().every(
+			return getUnderRockEncounters(kumaDex).every(
 				(e) => s.pokedex[e].caughtOnRoutes.length > 0
 			);
 		},
-		targetPokemon: getUnderRockEncounters(),
+		targetPokemon: getUnderRockEncounters(kumaDex),
 		kind: 'BULLETIN',
 		availableAfter: 'find a pokemon under a smashed rock',
 		requiredUpgrade: 'sledge hammer certification',
@@ -1971,9 +1968,11 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 10,
 		rewardItems: { 'babiri-berry': 2, 'kee-berry': 2, 'fossilized-dino': 2 },
 		targetRoute: 'onixCave',
-		targetPokemon: getAllEncountersFor('onixCave', {}).map((p) => p.name),
+		targetPokemon: getAllEncountersFor('onixCave', {}, kumaDex).map(
+			(p) => p.name
+		),
 		conditionFunction: (s: SaveFile) =>
-			getAllEncountersFor('onixCave', {}).some((o) =>
+			getAllEncountersFor('onixCave', {}, kumaDex).some((o) =>
 				s.pokedex[o.name].caughtOnRoutes.includes('onixCave')
 			),
 	},
@@ -1990,9 +1989,11 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 			'moon-stone': 2,
 			'fossilized-drake': 2,
 		},
-		targetPokemon: getAllEncountersFor('onixCave', {}).map((p) => p.name),
+		targetPokemon: getAllEncountersFor('onixCave', {}, kumaDex).map(
+			(p) => p.name
+		),
 		conditionFunction: (s: SaveFile) =>
-			getAllEncountersFor('onixCave', {}).every((o) =>
+			getAllEncountersFor('onixCave', {}, kumaDex).every((o) =>
 				s.pokedex[o.name].caughtOnRoutes.includes('onixCave')
 			),
 	},
@@ -2011,16 +2012,16 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		},
 		targetPokemon: [
 			...new Set([
-				...getAllEncountersFor('caveW1', {}).map((p) => p.name),
-				...getAllEncountersFor('caveW1F1', {}).map((p) => p.name),
-				...getAllEncountersFor('caveW1F2', {}).map((p) => p.name),
+				...getAllEncountersFor('caveW1', {}, kumaDex).map((p) => p.name),
+				...getAllEncountersFor('caveW1F1', {}, kumaDex).map((p) => p.name),
+				...getAllEncountersFor('caveW1F2', {}, kumaDex).map((p) => p.name),
 			]),
 		],
 		conditionFunction: (s: SaveFile) =>
 			[
-				...getAllEncountersFor('caveW1', {}),
-				...getAllEncountersFor('caveW1F1', {}),
-				...getAllEncountersFor('caveW1F2', {}),
+				...getAllEncountersFor('caveW1', {}, kumaDex),
+				...getAllEncountersFor('caveW1F1', {}, kumaDex),
+				...getAllEncountersFor('caveW1F2', {}, kumaDex),
 			].every((o) =>
 				s.pokedex[o.name].caughtOnRoutes.some(
 					(route) =>
@@ -2976,72 +2977,72 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 	'catch a future distortion pokemon': {
 		kind: 'BULLETIN',
 		category: 'RESEARCH',
-		targetPokemon: getSwarmOptions('FUTURE_DISTORTION'),
+		targetPokemon: getSwarmOptions('FUTURE_DISTORTION', kumaDex),
 		rewardItems: { 'rare-candy': 3, 'quick-ball': 5 },
 		researchPoints: 25,
 		requiredUpgrade: 'time distortion radar',
 		conditionFunction: (s) =>
-			getSwarmOptions('FUTURE_DISTORTION').some(
+			getSwarmOptions('FUTURE_DISTORTION', kumaDex).some(
 				(f) => s.pokedex[f].caughtOnRoutes.length > 0
 			),
 	},
 	'catch a past distortion pokemon': {
 		kind: 'BULLETIN',
 		category: 'RESEARCH',
-		targetPokemon: getSwarmOptions('PAST_DISTORTION'),
+		targetPokemon: getSwarmOptions('PAST_DISTORTION', kumaDex),
 		rewardItems: { 'rare-candy': 3, 'quick-ball': 5 },
 		researchPoints: 25,
 		requiredUpgrade: 'time distortion radar',
 		conditionFunction: (s) =>
-			getSwarmOptions('PAST_DISTORTION').some(
+			getSwarmOptions('PAST_DISTORTION', kumaDex).some(
 				(f) => s.pokedex[f].caughtOnRoutes.length > 0
 			),
 	},
 	'catch all future distortion pokemon': {
 		kind: 'BULLETIN',
 		category: 'RESEARCH',
-		targetPokemon: getSwarmOptions('FUTURE_DISTORTION'),
+		targetPokemon: getSwarmOptions('FUTURE_DISTORTION', kumaDex),
 		rewardItems: { 'rare-candy': 10, 'quick-ball': 20 },
 		researchPoints: 100,
 		requiredUpgrade: 'time distortion radar',
 		conditionFunction: (s) =>
-			getSwarmOptions('FUTURE_DISTORTION').every(
+			getSwarmOptions('FUTURE_DISTORTION', kumaDex).every(
 				(f) => s.pokedex[f].caughtOnRoutes.length > 0
 			),
 	},
 	'catch all past distortion pokemon': {
 		kind: 'BULLETIN',
 		category: 'RESEARCH',
-		targetPokemon: getSwarmOptions('PAST_DISTORTION'),
+		targetPokemon: getSwarmOptions('PAST_DISTORTION', kumaDex),
 		rewardItems: { 'rare-candy': 10, 'quick-ball': 20 },
 		researchPoints: 100,
 		requiredUpgrade: 'time distortion radar',
 		conditionFunction: (s) =>
-			getSwarmOptions('PAST_DISTORTION').every(
+			getSwarmOptions('PAST_DISTORTION', kumaDex).every(
 				(f) => s.pokedex[f].caughtOnRoutes.length > 0
 			),
 	},
 	'catch a space distortion pokemon': {
 		kind: 'BULLETIN',
 		category: 'RESEARCH',
-		targetPokemon: getSwarmOptions('SPACE_DISTORTION'),
+		targetPokemon: getSwarmOptions('SPACE_DISTORTION', kumaDex),
 		rewardItems: { 'rare-candy': 3, 'quick-ball': 5 },
 		researchPoints: 25,
 		requiredUpgrade: 'space distortion radar',
 		conditionFunction: (s) =>
-			getSwarmOptions('SPACE_DISTORTION').some(
+			getSwarmOptions('SPACE_DISTORTION', kumaDex).some(
 				(f) => s.pokedex[f].caughtOnRoutes.length > 0
 			),
 	},
 	'catch all space distortion pokemon': {
 		kind: 'BULLETIN',
 		category: 'RESEARCH',
-		targetPokemon: getSwarmOptions('SPACE_DISTORTION'),
+		targetPokemon: getSwarmOptions('SPACE_DISTORTION', kumaDex),
 		rewardItems: { 'rare-candy': 10, 'quick-ball': 20 },
 		researchPoints: 100,
 		requiredUpgrade: 'space distortion radar',
 		conditionFunction: (s) =>
-			getSwarmOptions('SPACE_DISTORTION').every(
+			getSwarmOptions('SPACE_DISTORTION', kumaDex).every(
 				(f) => s.pokedex[f].caughtOnRoutes.length > 0
 			),
 	},
@@ -3114,9 +3115,11 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		researchPoints: 50,
 		rewardItems: {},
 		availableAfter: 'collect 8 badges',
-		targetPokemon: getAllEncountersFor('victoryRoad', {}).map((p) => p.name),
+		targetPokemon: getAllEncountersFor('victoryRoad', {}, kumaDex).map(
+			(p) => p.name
+		),
 		conditionFunction: (s: SaveFile) =>
-			getAllEncountersFor('victoryRoad', {}).every((o) =>
+			getAllEncountersFor('victoryRoad', {}, kumaDex).every((o) =>
 				s.pokedex[o.name].caughtOnRoutes.includes('victoryRoad')
 			),
 	},
@@ -3128,33 +3131,4 @@ export const QuestsRecord: Record<QuestName, Quest> = {
 		availableAfter: 'collect 8 badges',
 		rewardItems: { 'max-lure': 1, 'master-ball': 1 },
 	},
-} as Record<QuestName, Quest>;
-
-console.log('number of quests', questNames.length);
-
-console.log(
-	'quests w/o questName',
-	Object.keys(QuestsRecord).filter(
-		(key) => !([...new Set(questNames)] as string[]).includes(key)
-	),
-	'questNames w/o quest',
-	questNames.filter((name) => !Object.keys(QuestsRecord).includes(name))
-);
-console.log(
-	'total research points',
-	Object.values(QuestsRecord).reduce(
-		(sum, summand) => sum + summand.researchPoints,
-		0
-	)
-);
-console.log(
-	'total costs',
-	['Sustainability', 'Exploration', 'Research', 'Training']
-		.map((cat) =>
-			campUpgradeNames
-				.filter((nam) => campUpgradeCategories[nam] === cat)
-				.map((_, i) => campUpgradeCostScale + campUpgradeCostScale * i)
-				.reduce((sum, summand) => sum + summand, 0)
-		)
-		.reduce((sum, summand) => sum + summand, 0)
-);
+} as Record<KumaQuestName, Quest>;

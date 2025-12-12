@@ -5,6 +5,7 @@ import { FullScreenToggle } from '../../components/FullScreenToggle/FullScreenTo
 import { battleSpriteSize } from '../../constants/gameData/gameData';
 import { LocationProvider } from '../../hooks/LocationProvider';
 import { BaseSizeProvider } from '../../hooks/useBaseSize';
+import { GameDataContext } from '../../hooks/useGameData';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileProvider } from '../../hooks/useSaveFile';
 import { Router } from '../../modules/Router/Router';
@@ -13,6 +14,7 @@ import { Banner } from '../Banner/Banner';
 export const MessageContainer = () => {
 	const { confirmLatestMessage, addMessage, latestMessage } =
 		useContext(MessageQueueContext);
+	const { allowedBaseSizes } = useContext(GameDataContext);
 
 	return (
 		<ErrorBoundary
@@ -44,7 +46,7 @@ export const MessageContainer = () => {
 					</h2>
 				</Banner>
 			)}
-			<BaseSizeProvider>
+			<BaseSizeProvider allowedBaseSizes={allowedBaseSizes}>
 				<SaveFileProvider>
 					<LocationProvider>
 						<FullScreenToggle />

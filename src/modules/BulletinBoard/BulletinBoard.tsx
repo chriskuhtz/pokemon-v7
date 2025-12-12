@@ -3,11 +3,6 @@ import { MdFormatListBulleted } from 'react-icons/md';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { battleSpriteSize } from '../../constants/gameData/gameData';
-import {
-	QuestName,
-	questNames,
-	QuestsRecord,
-} from '../../constants/gameData/questsRecord';
 import { getRewardItemsForQuest } from '../../functions/getRewardForQuest';
 import { replaceRouteName } from '../../functions/replaceRouteName';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
@@ -18,6 +13,11 @@ import { AnimatedBar } from '../../uiComponents/AnimatedBar/AnimatedBar';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import {
+	KumaQuestName,
+	kumaQuestNames,
+	KumaQuestsRecord,
+} from '../../versions/kuma/questsRecord';
 
 export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 	const { addMessage } = useContext(MessageQueueContext);
@@ -25,7 +25,7 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 	const { quests, campUpgrades } = saveFile;
 
 	const acceptQuest = useCallback(
-		(name: QuestName) => {
+		(name: KumaQuestName) => {
 			addMessage({
 				message: `Accepted Quest: ${name}`,
 				needsNoConfirmation: true,
@@ -38,9 +38,9 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 		[addMessage, patchSaveFileReducer, saveFile]
 	);
 
-	const availableQuests: { name: QuestName; quest: Quest }[] = useMemo(
+	const availableQuests: { name: KumaQuestName; quest: Quest }[] = useMemo(
 		() =>
-			Object.entries(QuestsRecord)
+			Object.entries(KumaQuestsRecord)
 				.map(([id, questData]) => {
 					if (
 						questData.availableAfter &&
@@ -56,19 +56,20 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 					}
 					if (
 						questData.kind === 'BULLETIN' &&
-						quests[id as QuestName] === 'INACTIVE'
+						quests[id as KumaQuestName] === 'INACTIVE'
 					) {
-						return { name: id as QuestName, quest: questData };
+						return { name: id as KumaQuestName, quest: questData };
 					}
 				})
 				.filter((q) => q !== undefined),
 		[campUpgrades, quests]
 	);
 
-	const total = questNames.length;
+	const total = kumaQuestNames.length;
 
 	const numberOfCompletedQuests = useMemo(() => {
-		return questNames.filter((q) => saveFile.quests[q] === 'COLLECTED').length;
+		return kumaQuestNames.filter((q) => saveFile.quests[q] === 'COLLECTED')
+			.length;
 	}, [saveFile.quests]);
 
 	if (availableQuests.length === 0) {
