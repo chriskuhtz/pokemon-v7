@@ -800,6 +800,7 @@ export const BattleField = ({
 		<div style={{ backgroundColor: 'white' }}>
 			<div
 				style={{
+					paddingTop: 32,
 					display: 'grid',
 					gridTemplateRows: '4fr 4fr 1fr',
 					height: '100dvh',

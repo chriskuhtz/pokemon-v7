@@ -21,7 +21,7 @@ export function EnemyLane({
 		<div
 			style={{
 				display: 'flex',
-				justifyContent: portraitMode ? 'flex-start' : 'space-between',
+				justifyContent: portraitMode ? 'flex-end' : 'space-between',
 				alignItems: portraitMode ? 'flex-end' : 'center',
 				flexDirection: portraitMode ? 'column' : 'row',
 			}}
