@@ -34,30 +34,11 @@ export const ItemSelectionListModal = ({
 				}}
 			>
 				{options.map((o) => (
-					<div
-						key={o}
-						style={{
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'space-between',
-							gap: '.5rem',
-						}}
-					>
-						<button
-							style={{
-								flexGrow: 1,
-								display: 'flex',
-								alignItems: 'center',
-								color: selected.includes(o) ? 'white' : 'black',
-								backgroundColor: selected.includes(o) ? 'black' : 'white',
-							}}
-							onClick={() => toggle(o)}
-						>
-							<ItemSprite item={o} />
-							{o}
-						</button>
-						<ItemInfoButton itemName={o} />
-					</div>
+					<ItemSelectionOption
+						item={o}
+						isSelected={selected.includes(o)}
+						toggle={toggle}
+					/>
 				))}
 				{onConfirm && (
 					<button
@@ -70,5 +51,42 @@ export const ItemSelectionListModal = ({
 				)}
 			</div>
 		</Modal>
+	);
+};
+
+export const ItemSelectionOption = ({
+	item,
+	isSelected,
+	toggle,
+}: {
+	item: ItemType;
+	isSelected: boolean;
+	toggle: (o: ItemType) => void;
+}) => {
+	return (
+		<div
+			key={item}
+			style={{
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'space-between',
+				gap: '.5rem',
+			}}
+		>
+			<button
+				style={{
+					flexGrow: 1,
+					display: 'flex',
+					alignItems: 'center',
+					color: isSelected ? 'white' : 'black',
+					backgroundColor: isSelected ? 'black' : 'white',
+				}}
+				onClick={() => toggle(item)}
+			>
+				<ItemSprite item={item} />
+				{item}
+			</button>
+			<ItemInfoButton itemName={item} />
+		</div>
 	);
 };

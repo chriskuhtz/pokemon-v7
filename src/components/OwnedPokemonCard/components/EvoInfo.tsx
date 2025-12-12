@@ -24,7 +24,7 @@ export const EvoInfo = ({
 	const { evos, invalidate } = useGetEvolution(data);
 
 	if (!evos) {
-		return <></>;
+		return <button disabled>This Pokemon is fully evolved</button>;
 	}
 
 	return (

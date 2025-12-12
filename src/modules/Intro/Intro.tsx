@@ -37,8 +37,8 @@ export const Intro = ({
 						</li>
 						<li>
 							<strong>
-								The recommended Screen is a sideways smartphone, but all screen
-								sizes are supported.
+								The recommended Screen is a smartphone in portrait orientation,
+								but all screen sizes are supported.
 							</strong>
 						</li>
 						<li>

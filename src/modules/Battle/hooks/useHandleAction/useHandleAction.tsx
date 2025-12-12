@@ -147,7 +147,6 @@ export const useHandleAction = (
 				);
 				return;
 			}
-
 			if (move.type === 'CatchProcessInfo') {
 				handleCatch(
 					pokemon,
@@ -263,7 +262,6 @@ export const useHandleAction = (
 					})
 				);
 			}
-
 			if (move.type === 'BattleAttack') {
 				handleAllAttackCategories({
 					attacker,

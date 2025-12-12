@@ -15,6 +15,7 @@ import {
 	isMulch,
 	isPokeball,
 } from '../../interfaces/Item';
+import { SelectionBar } from '../../uiComponents/SelectionBar/SelectionBar';
 
 export const itemfilterNames = [
 	'poke-balls',
@@ -104,33 +105,11 @@ const ItemsFilterButtons = ({
 	setFilter: React.Dispatch<React.SetStateAction<ItemsFilterType | undefined>>;
 }) => {
 	return (
-		<div
-			style={{
-				display: 'flex',
-				gap: '.5rem',
-				maxWidth: '96dvw',
-				flexWrap: 'wrap',
-			}}
-		>
-			{itemfilterNames.map((f) => (
-				<button
-					key={f}
-					style={{
-						backgroundColor: itemsFilter === f ? 'black' : undefined,
-						color: itemsFilter === f ? 'white' : 'black',
-					}}
-					onClick={() => {
-						if (itemsFilter === f) {
-							setFilter(undefined);
-							return;
-						}
-						setFilter(f);
-					}}
-				>
-					{f}
-				</button>
-			))}
-		</div>
+		<SelectionBar
+			options={[...itemfilterNames]}
+			selected={itemsFilter}
+			select={(x) => setFilter(x as ItemsFilterType)}
+		/>
 	);
 };
 
