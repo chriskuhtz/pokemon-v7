@@ -4,7 +4,6 @@ import {
 	TerrainIcon,
 	WeatherIcon,
 } from '../../components/WeatherIcon/WeatherIcon';
-import { portraitMode } from '../../constants/gameData/gameData';
 import { MoveName } from '../../constants/movesCheckList';
 import {
 	applyEndOfTurnAbility,
@@ -800,10 +799,10 @@ export const BattleField = ({
 		<div style={{ backgroundColor: 'white' }}>
 			<div
 				style={{
-					paddingTop: 32,
 					display: 'grid',
-					gridTemplateRows: '4fr 4fr 1fr',
+					gridTemplateRows: '1fr 4fr 4fr 4fr',
 					height: '100dvh',
+					gap: '.5rem',
 					background: `linear-gradient(
 					218deg,
 					${oppColor} 0%,
@@ -811,49 +810,44 @@ export const BattleField = ({
 				)`,
 				}}
 			>
-				<div style={{ position: 'absolute', top: 0, left: '48dvw' }}>
+				<div
+					style={{
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						gap: '.5rem',
+					}}
+				>
 					<WeatherIcon weather={battleWeather} />
 					<TimeOfDayIcon />
 					<TerrainIcon terrain={battleTerrain} />
 				</div>
+
+				<EnemyLane
+					onFieldOpponents={onFieldOpponents}
+					spriteGeneration={spriteGeneration}
+				/>
+				<PlayerLane onFieldTeam={onFieldTeam} />
+
 				<div
 					style={{
-						display: 'grid',
-						gridTemplateRows: 'subgrid',
-						alignItems: 'stretch',
-						gridRowStart: 1,
-						gridRowEnd: 4,
+						maxWidth: '100dvw',
+						overflow: 'scroll',
 					}}
 				>
-					<EnemyLane
-						onFieldOpponents={onFieldOpponents}
-						spriteGeneration={spriteGeneration}
+					<ControlBar
+						disabled={!!latestMessage}
+						controlled={nextPokemonWithoutMove}
+						targets={pokemon}
+						chooseAction={chooseAction}
+						playerInventory={battleInventory}
+						catchingAllowed={catchingAllowed}
+						runningAllowed={runningAllowed}
+						battleFieldEffects={battleFieldEffects}
+						weather={battleWeather}
+						terrain={battleTerrain}
 					/>
-					<PlayerLane onFieldTeam={onFieldTeam} />
 				</div>
-				{!latestMessage && (
-					<div
-						style={{
-							maxWidth: '100dvw',
-							overflow: 'scroll',
-							borderTop: '1px solid black',
-							minHeight: portraitMode ? '25dvh' : '103px',
-							maxHeight: portraitMode ? '25dvh' : '103px',
-						}}
-					>
-						<ControlBar
-							controlled={nextPokemonWithoutMove}
-							targets={pokemon}
-							chooseAction={chooseAction}
-							playerInventory={battleInventory}
-							catchingAllowed={catchingAllowed}
-							runningAllowed={runningAllowed}
-							battleFieldEffects={battleFieldEffects}
-							weather={battleWeather}
-							terrain={battleTerrain}
-						/>
-					</div>
-				)}
 			</div>
 		</div>
 	);

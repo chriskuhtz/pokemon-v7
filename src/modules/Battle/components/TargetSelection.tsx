@@ -21,6 +21,7 @@ export function TargetSelection({
 	chosenAction,
 	setChosenAction,
 	moveData,
+	disabled,
 }: {
 	name: string;
 	id: string;
@@ -29,6 +30,7 @@ export function TargetSelection({
 	chooseAction: (x: ChooseActionPayload) => void;
 	setChosenAction: (x: ActionType | undefined) => void;
 	moveData?: MoveDto;
+	disabled: boolean;
 }) {
 	const {
 		saveFile: { playerId },
@@ -122,6 +124,7 @@ export function TargetSelection({
 								setChosenAction(undefined);
 							}}
 							actionElements={[]}
+							disabled={disabled}
 						/>
 					))}
 				{['ether', 'max-ether'].includes(chosenAction) &&
@@ -132,6 +135,7 @@ export function TargetSelection({
 							.filter((m) => m.usedPP > 0)
 							.map((m) => (
 								<button
+									disabled={disabled}
 									key={t.id + m.name}
 									onClick={() => {
 										chooseAction({

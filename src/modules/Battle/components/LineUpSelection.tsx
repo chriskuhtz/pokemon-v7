@@ -122,7 +122,8 @@ export const LineUpSelection = ({
 					</h2>
 				</div>
 
-				<div
+				<ul
+					dir="rtl"
 					style={{
 						display: 'grid',
 						alignItems: 'center',
@@ -147,7 +148,7 @@ export const LineUpSelection = ({
 							}
 						/>
 					))}
-				</div>
+				</ul>
 				<div
 					style={{
 						display: 'grid',

@@ -25,6 +25,7 @@ export function PlayerLane(props: { onFieldTeam: BattlePokemon[] }) {
 					backgroundRepeat: 'no-repeat',
 					minWidth: '300px',
 					justifyContent: 'center',
+					height: 100,
 				}}
 			>
 				{props.onFieldTeam.map((t) => (

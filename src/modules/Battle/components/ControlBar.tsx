@@ -26,6 +26,7 @@ export function ControlBar({
 	battleFieldEffects,
 	weather,
 	terrain,
+	disabled,
 }: {
 	controlled: BattlePokemon | undefined;
 	targets: BattlePokemon[];
@@ -36,6 +37,7 @@ export function ControlBar({
 	battleFieldEffects: BattleFieldEffect[];
 	weather: WeatherType | undefined;
 	terrain: BattleTerrain | undefined;
+	disabled: boolean;
 }) {
 	const [chosenAction, setChosenAction] = useState<ActionType | undefined>();
 	const {
@@ -98,15 +100,14 @@ export function ControlBar({
 					alignItems: 'center',
 					justifyContent: 'center',
 				}}
-			>
-				<h3>Whats going on here</h3>
-			</div>
+			></div>
 		);
 	}
 
 	if (!chosenAction) {
 		return (
 			<ActionSelection
+				disabled={disabled}
 				controlled={controlled}
 				chooseAction={chooseAction}
 				setChosenAction={setChosenAction}
@@ -120,6 +121,7 @@ export function ControlBar({
 	}
 	return (
 		<TargetSelection
+			disabled={disabled}
 			name={controlled.data.name}
 			id={controlled.id}
 			targets={filteredTargets}

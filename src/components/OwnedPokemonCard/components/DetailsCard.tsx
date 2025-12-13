@@ -36,6 +36,7 @@ export const DetailsCard = ({
 					justifyContent: 'center',
 					marginBottom: 16,
 					paddingRight: 16,
+					paddingBottom: 16,
 				}}
 			>
 				<HappinessIcon value={ownedPokemon.happiness} />

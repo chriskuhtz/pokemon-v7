@@ -21,16 +21,16 @@ export function EnemyLane({
 		<div
 			style={{
 				display: 'flex',
-				justifyContent: portraitMode ? 'flex-end' : 'space-between',
 				alignItems: portraitMode ? 'flex-end' : 'center',
 				flexDirection: portraitMode ? 'column' : 'row',
 			}}
 		>
 			<div
 				style={{
-					display: 'flex',
+					display: 'grid',
 					alignItems: 'center',
 					gap: '.5rem',
+					gridTemplateColumns: '1fr 1fr',
 				}}
 			>
 				{onFieldOpponents.map((t) => (
@@ -46,6 +46,7 @@ export function EnemyLane({
 					backgroundRepeat: 'no-repeat',
 					minWidth: '300px',
 					justifyContent: 'center',
+					height: 100,
 				}}
 			>
 				{onFieldOpponents.map((t) => {

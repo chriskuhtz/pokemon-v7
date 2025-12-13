@@ -25,6 +25,7 @@ import {
 	ItemType,
 } from '../../../interfaces/Item';
 import { Card } from '../../../uiComponents/Card/Card';
+import { Stack } from '../../../uiComponents/Stack/Stack';
 import {
 	ActionType,
 	BattleFieldEffect,
@@ -40,6 +41,7 @@ export function ActionSelection({
 	catchingAllowed,
 	runningAllowed,
 	battleFieldEffects,
+	disabled,
 }: {
 	controlled: BattlePokemon;
 	inventory: Inventory;
@@ -49,6 +51,7 @@ export function ActionSelection({
 	catchingAllowed: boolean;
 	runningAllowed: boolean;
 	battleFieldEffects: BattleFieldEffect[];
+	disabled: boolean;
 }) {
 	const [subgroup, setSubGroup] = useState<'MOVES' | 'ITEMS' | undefined>();
 	const {
@@ -115,12 +118,9 @@ export function ActionSelection({
 			}}
 		>
 			<strong>What should {controlled.data.name} do?</strong>
-			<div
-				style={{
-					display: 'flex',
-					gap: '1rem',
-					flexDirection: portraitMode ? 'column' : 'row',
-				}}
+			<Stack
+				mode={portraitMode ? 'column' : 'row'}
+				gap={portraitMode ? 0.25 : 0.5}
 			>
 				{subgroup === 'MOVES' ? (
 					getMovesArray(controlled, {
@@ -139,6 +139,7 @@ export function ActionSelection({
 					))
 				) : (
 					<Card
+						disabled={disabled}
 						onClick={() => setSubGroup('MOVES')}
 						content={'Attack'}
 						actionElements={[]}
@@ -147,6 +148,7 @@ export function ActionSelection({
 				)}
 				<Card
 					disabled={
+						disabled ||
 						!runOrSwitchPossible ||
 						allTargets.filter((p) => p.ownerId === playerId && !isKO(p))
 							.length === 1
@@ -164,6 +166,7 @@ export function ActionSelection({
 								style={{ display: 'flex', alignItems: 'center' }}
 								onClick={() => setChosenAction(item)}
 								key={item}
+								disabled={disabled}
 							>
 								<ItemSprite item={item} />
 								{item} ({amount})
@@ -172,7 +175,7 @@ export function ActionSelection({
 					})
 				) : (
 					<Card
-						disabled={allowedItems.length === 0}
+						disabled={disabled || allowedItems.length === 0}
 						onClick={() => setSubGroup('ITEMS')}
 						content={'ITEMS'}
 						actionElements={[]}
@@ -182,7 +185,7 @@ export function ActionSelection({
 
 				{runningAllowed && (
 					<Card
-						disabled={!runOrSwitchPossible}
+						disabled={disabled || !runOrSwitchPossible}
 						onClick={() =>
 							chooseAction({
 								userId: controlled.id,
@@ -195,7 +198,7 @@ export function ActionSelection({
 						icon={<FaRunning height={battleSpriteSize} />}
 					/>
 				)}
-			</div>
+			</Stack>
 		</div>
 	);
 }

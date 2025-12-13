@@ -71,7 +71,6 @@ export const AnimatedBar = ({
 		<div
 			style={{
 				zIndex: 0,
-				margin: '1rem 0',
 				position: 'relative',
 				width: '100%',
 				height: '1rem',
