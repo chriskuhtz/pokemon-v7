@@ -21,6 +21,7 @@ import {
 } from '../../../constants/gameData/maps/mapsRecord';
 import { LocationContext } from '../../../hooks/LocationProvider';
 import { BaseSizeContext } from '../../../hooks/useBaseSize';
+import { GameDataContext } from '../../../hooks/useGameData';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
 import { useIsDark } from '../hooks/useIsDark';
@@ -47,6 +48,7 @@ export const OverworldMenus = ({
 		availableBaseSizes,
 	} = useContext(BaseSizeContext);
 
+	const gameData = useContext(GameDataContext);
 	const { navigateAwayFromOverworldReducer } = useContext(SaveFileContext);
 	const { location } = useContext(LocationContext);
 	const map = useMemo(() => mapsRecord[location.mapId], [location.mapId]);
@@ -101,7 +103,7 @@ export const OverworldMenus = ({
 					size={battleSpriteSize}
 				/>
 				<UncollectedQuestsBadge stepsWalked={stepsTaken} />
-				<NumberOfBallsBadge />
+				{gameData.features.numberOfBallsBadge && <NumberOfBallsBadge />}
 
 				{availableBaseSizes.length > 1 && (
 					<>
@@ -140,7 +142,7 @@ export const OverworldMenus = ({
 					backgroundColor: 'rgba(255,255,255,.6)',
 				}}
 			>
-				<StreakIcon />
+				{gameData.features.catchStreaks && <StreakIcon />}
 				<TroubleMakersIcon />
 				<RampagerIcon />
 				<RepelIcon />

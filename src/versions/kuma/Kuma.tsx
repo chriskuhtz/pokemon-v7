@@ -83,7 +83,11 @@ export const Kuma = (): JSX.Element => {
 			startingSaveFile={startingSaveFileKuma}
 			allowedBaseSizes={[16, 32, 64, 128, 256]}
 			internalDex={kumaDex}
-			settingsEditable={true}
+			features={{
+				settingsEditable: true,
+				catchStreaks: true,
+				numberOfBallsBadge: true,
+			}}
 			losingMessages={{
 				training: 'luckily this was only a training battle',
 				wild: 'You lost the battle and rushed back to camp, loosing your items on the way',

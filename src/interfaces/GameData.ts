@@ -16,10 +16,14 @@ export interface GameData {
 	startingSaveFile: SaveFile;
 	allowedBaseSizes: number[];
 	internalDex: InternalDex;
-	settingsEditable: boolean;
 	losingMessages: {
 		training: string;
 		reset: string;
 		wild: string;
+	};
+	features: {
+		catchStreaks: boolean;
+		settingsEditable: boolean;
+		numberOfBallsBadge: boolean;
 	};
 }

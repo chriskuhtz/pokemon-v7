@@ -69,9 +69,13 @@ export const Labyrinth = (): JSX.Element => {
 			startingTab="OVERWORLD"
 			startingRouterSequence={[]}
 			startingSaveFile={startingSaveFileLabyrinth}
-			allowedBaseSizes={[64]}
+			allowedBaseSizes={[48]}
 			internalDex={labyrinthDex}
-			settingsEditable={false}
+			features={{
+				settingsEditable: false,
+				catchStreaks: false,
+				numberOfBallsBadge: false,
+			}}
 			losingMessages={{
 				training: 'Young Tom was never seen again ...',
 				wild: 'Young Tom was never seen again ...',

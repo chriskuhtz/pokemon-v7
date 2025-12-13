@@ -42,7 +42,7 @@ import { RoutesType } from '../../interfaces/Routing';
 export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { location, setLocation } = useContext(LocationContext);
-	const { settingsEditable } = useContext(GameDataContext);
+	const gameData = useContext(GameDataContext);
 	const reset = useReset();
 	const [resetConfirmationInProgress, setRCIP] = useState<boolean>(false);
 	const { numberOfUncollected } = useQuests();
@@ -137,7 +137,7 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 					icon={<FaSearch size={battleSpriteSize} />}
 					actionElements={[]}
 				/>
-				{settingsEditable && (
+				{gameData.features.settingsEditable && (
 					<Card
 						onClick={() => navigate('MAIN', 'SETTINGS_IN_GAME')}
 						content={<h4>SETTINGS</h4>}
