@@ -82,19 +82,21 @@ export const DetailsCard = ({
 			<h4>Caught at: {replaceRouteName(ownedPokemon.caughtOnMap)}</h4>
 			<h4>{ownedPokemon.starter ? 'Your first Pokemon' : ''}</h4>
 
-			{saveFile.settings?.releasePokemonInTeamOverview && (
-				<button
-					onClick={() => {
-						patchSaveFileReducer({
-							pokemon: saveFile.pokemon.filter(
-								(p) => p.id !== ownedPokemon?.id
-							),
-						});
-					}}
-				>
-					Release this Pokemon
-				</button>
-			)}
+			{saveFile.settings?.releasePokemonInTeamOverview &&
+				saveFile.pokemon.length > 0 && (
+					<button
+						onClick={() => {
+							patchSaveFileReducer({
+								pokemon: saveFile.pokemon.filter(
+									(p) => p.id !== ownedPokemon?.id
+								),
+								meta: { ...saveFile.meta, activeTab: 'OVERWORLD' },
+							});
+						}}
+					>
+						Release this Pokemon
+					</button>
+				)}
 		</Stack>
 	);
 };

@@ -32,7 +32,7 @@ export const MovesDisplay = ({
 	onlyCurrent?: boolean;
 }) => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
-	const { res: battleMon } = useGetBattleTeam([ownedPokemon], {});
+	const { res: battleMon, invalidate } = useGetBattleTeam([ownedPokemon], {});
 
 	const currentMoves = useMemo(
 		() => getMovesArray(ownedPokemon),
@@ -93,6 +93,7 @@ export const MovesDisplay = ({
 				return p;
 			}),
 		});
+		invalidate();
 	};
 	const deActivateMove = (move: OwnedPokemonMove) => {
 		patchSaveFileReducer({
@@ -104,6 +105,7 @@ export const MovesDisplay = ({
 				return p;
 			}),
 		});
+		invalidate();
 	};
 	const b = battleMon?.at(0);
 
