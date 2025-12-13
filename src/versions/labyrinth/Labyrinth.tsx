@@ -56,6 +56,7 @@ const startingSaveFileLabyrinth: SaveFile = {
 		fixedTeamSize: 6,
 		noStorageSystem: true,
 		questsTabHidden: true,
+		releasePokemonInTeamOverview: true,
 	},
 };
 export const Labyrinth = (): JSX.Element => {

@@ -1,4 +1,3 @@
-import { MoveName } from '../../constants/movesCheckList';
 import { EvolutionReducerPayload } from '../../hooks/useSaveFile';
 import { Inventory } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';
@@ -12,13 +11,11 @@ export const OwnedPokemonCard = ({
 	takeHeldItem,
 	inventory,
 	data,
-	setMoves,
 	setNickName,
 	evolve,
 }: {
 	pokemon: OwnedPokemon;
 	giveHeldItem: (newItem: ItemType) => void;
-	setMoves: (id: string, moves: MoveName[]) => void;
 	takeHeldItem: () => void;
 	inventory: Inventory;
 	data: PokemonData;
@@ -28,7 +25,6 @@ export const OwnedPokemonCard = ({
 	return (
 		<OwnedPokemonCardContent
 			evolve={evolve}
-			setMoves={setMoves}
 			ownedPokemon={pokemon}
 			data={data}
 			inventory={inventory}

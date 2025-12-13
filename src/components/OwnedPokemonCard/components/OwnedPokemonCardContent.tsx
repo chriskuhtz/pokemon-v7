@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { MoveName } from '../../../constants/movesCheckList';
+import { useLearnableMoves } from '../../../hooks/useLearnableMoves';
 import {
 	EvolutionReducerPayload,
 	SaveFileContext,
@@ -8,14 +8,14 @@ import { Inventory } from '../../../interfaces/Inventory';
 import { ItemType } from '../../../interfaces/Item';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { PokemonData } from '../../../interfaces/PokemonData';
-import { MoveEditor } from '../../../modules/MoveTutor/MoveTutor';
 import { SelectionBar } from '../../../uiComponents/SelectionBar/SelectionBar';
+import { Stack } from '../../../uiComponents/Stack/Stack';
+import { MoveEditor } from '../../MoveEditor/MoveEditor';
 import { DetailsCard } from './DetailsCard';
 import { EvoInfo } from './EvoInfo';
 import { HeldItemSelection } from './HeldItemSelection';
 import { MovesDisplay } from './MovesDisplay';
 import { StatDisplay } from './StatDisplay';
-import { Stack } from '../../../uiComponents/Stack/Stack';
 
 const tabTypes = [
 	'DETAILS',
@@ -27,13 +27,25 @@ const tabTypes = [
 ] as const;
 type TabType = (typeof tabTypes)[number];
 
+const useNewMovesLabel = (
+	ownedPokemon: OwnedPokemon,
+	data: PokemonData
+): string => {
+	const learnableMoves = useLearnableMoves(ownedPokemon, data);
+
+	const numberOfLearnableMoves = learnableMoves.filter(
+		(l) =>
+			l.learnable && !ownedPokemon.unlockedMoves.some((m) => m === l.move.name)
+	).length;
+	return `NEW MOVES (${numberOfLearnableMoves})`;
+};
+
 export const OwnedPokemonCardContent = ({
 	data,
 	ownedPokemon,
 	takeHeldItem,
 	giveHeldItem,
 	inventory,
-	setMoves,
 	setNickName,
 	evolve,
 }: {
@@ -42,22 +54,29 @@ export const OwnedPokemonCardContent = ({
 	giveHeldItem: (newItem: ItemType) => void;
 	takeHeldItem: () => void;
 	inventory: Inventory;
-	setMoves: (id: string, moves: MoveName[]) => void;
 	setNickName: (x: string | undefined) => void;
 	evolve: (x: EvolutionReducerPayload) => void;
 }) => {
 	const { saveFile } = useContext(SaveFileContext);
 	const [tab, setTab] = useState<TabType>('DETAILS');
 
+	const newMovesLabel = useNewMovesLabel(ownedPokemon, data);
 	return (
 		<Stack mode={'column'}>
 			<SelectionBar
-				options={[...tabTypes].filter((t) => {
-					if (t === 'NEW MOVES') {
-						return saveFile.settings?.movesLearnableInTeamOverview;
-					}
-					return true;
-				})}
+				options={[...tabTypes]
+					.filter((t) => {
+						if (t === 'NEW MOVES') {
+							return saveFile.settings?.movesLearnableInTeamOverview;
+						}
+						return true;
+					})
+					.map((o) => {
+						if (o === 'NEW MOVES') {
+							return { key: o, label: newMovesLabel };
+						}
+						return { key: o, label: o };
+					})}
 				selected={tab}
 				select={(x) => setTab(x as TabType)}
 			/>
@@ -89,7 +108,6 @@ export const OwnedPokemonCardContent = ({
 			{tab === 'MOVES' && (
 				<MovesDisplay
 					ownedPokemon={ownedPokemon}
-					setMoves={setMoves}
 					onlyCurrent={!saveFile.settings?.movesEditableInTeamOverview}
 				/>
 			)}

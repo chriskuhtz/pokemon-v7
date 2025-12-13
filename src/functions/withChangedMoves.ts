@@ -1,38 +1,16 @@
-import { MoveName } from '../constants/movesCheckList';
-import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { OwnedPokemon, OwnedPokemonMove } from '../interfaces/OwnedPokemon';
 
 export const withChangedMoves = (
 	pokemon: OwnedPokemon,
-	newMoveNames: MoveName[]
+	newMoves: OwnedPokemonMove[]
 ): OwnedPokemon => {
 	return {
 		...pokemon,
-		firstMove: {
-			name: newMoveNames[0],
-			usedPP: 0,
-		},
-		secondMove:
-			newMoveNames.length > 1
-				? {
-						name: newMoveNames[1],
-						usedPP: 0,
-				  }
-				: undefined,
+		firstMove: newMoves[0],
+		secondMove: newMoves.length > 1 ? newMoves[1] : undefined,
 
-		thirdMove:
-			newMoveNames.length > 2
-				? {
-						name: newMoveNames[2],
-						usedPP: 0,
-				  }
-				: undefined,
+		thirdMove: newMoves.length > 2 ? newMoves[2] : undefined,
 
-		fourthMove:
-			newMoveNames.length > 3
-				? {
-						name: newMoveNames[3],
-						usedPP: 0,
-				  }
-				: undefined,
+		fourthMove: newMoves.length > 3 ? newMoves[3] : undefined,
 	};
 };

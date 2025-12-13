@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useContext, useMemo } from 'react';
 import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
 import {
 	MdOutlineRadioButtonChecked,
@@ -8,32 +8,51 @@ import { battleSpriteSize } from '../../../constants/gameData/gameData';
 import { MoveName } from '../../../constants/movesCheckList';
 import { getCurrentPP } from '../../../functions/getCurrentPP';
 import { getMovesArray } from '../../../functions/getMovesArray';
+import { withChangedMoves } from '../../../functions/withChangedMoves';
 import { useGetBattleTeam } from '../../../hooks/useGetBattleTeam';
+import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
-import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
+import {
+	OwnedPokemon,
+	OwnedPokemonMove,
+} from '../../../interfaces/OwnedPokemon';
 import { Card } from '../../../uiComponents/Card/Card';
 import { Stack } from '../../../uiComponents/Stack/Stack';
 import { MoveInfoButton } from '../../MoveInfoButton/MoveInfoButton';
 
 export const MovesDisplay = ({
 	ownedPokemon,
-	setMoves,
 	onlyCurrent,
 }: {
 	ownedPokemon: OwnedPokemon;
-	setMoves: (id: string, moves: MoveName[]) => void;
 	onlyCurrent?: boolean;
 }) => {
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { res: battleMon } = useGetBattleTeam([ownedPokemon], {});
 
 	const currentMoves = useMemo(
-		() => getMovesArray(ownedPokemon).map((m) => m.name),
+		() => getMovesArray(ownedPokemon),
 		[ownedPokemon]
 	);
 
+	const updateMoves = useCallback(
+		(id: string, newMoves: OwnedPokemonMove[]) => {
+			patchSaveFileReducer({
+				pokemon: saveFile.pokemon.map((p) => {
+					if (p.id === id) {
+						return withChangedMoves(p, newMoves);
+					}
+
+					return p;
+				}),
+			});
+		},
+		[patchSaveFileReducer, saveFile.pokemon]
+	);
+
 	const reorder = (dir: 'UP' | 'DOWN', name: MoveName) => {
-		const focused = currentMoves.find((m) => m === name);
-		const index = currentMoves.findIndex((m) => m === name);
+		const focused = currentMoves.find((m) => m.name === name);
+		const index = currentMoves.findIndex((m) => m.name === name);
 		if (!focused) {
 			return;
 		}
@@ -57,7 +76,17 @@ export const MovesDisplay = ({
 			return p;
 		});
 
-		setMoves(ownedPokemon.id, newMoves);
+		updateMoves(ownedPokemon.id, newMoves);
+	};
+
+	const activateMove = (name: MoveName) => {
+		updateMoves(ownedPokemon.id, [...currentMoves, { name, usedPP: 0 }]);
+	};
+	const deActivateMove = (name: MoveName) => {
+		updateMoves(
+			ownedPokemon.id,
+			currentMoves.filter((c) => c.name !== name)
+		);
 	};
 	const b = battleMon?.at(0);
 
@@ -68,17 +97,19 @@ export const MovesDisplay = ({
 		<Stack mode="column">
 			{currentMoves.map((o) => (
 				<MoveDisplayListEntry
-					o={o}
+					key={o.name}
+					o={o.name}
 					battlePokemon={b}
-					reorder={reorder}
+					reorder={(dir) => reorder(dir, o.name)}
 					onlyCurrent={!!onlyCurrent}
-					currentMoves={currentMoves}
-					setMoves={setMoves}
+					currentMoves={currentMoves.map((c) => c.name)}
+					activateMove={() => activateMove(o.name)}
+					deActivateMove={() => deActivateMove(o.name)}
 				/>
 			))}
 			{!onlyCurrent &&
 				ownedPokemon.unlockedMoves
-					.filter((u) => !currentMoves.includes(u))
+					.filter((u) => !currentMoves.some((c) => c.name === u))
 					.map((o) => (
 						<div
 							key={o}
@@ -89,23 +120,20 @@ export const MovesDisplay = ({
 									key={o}
 									actionElements={[]}
 									disabled={
-										!currentMoves.includes(o) && currentMoves.length === 4
+										!currentMoves.some((c) => c.name === o) &&
+										currentMoves.length === 4
 									}
 									icon={<MdRadioButtonUnchecked />}
 									onClick={() => {
-										if (currentMoves.includes(o)) {
+										if (currentMoves.some((c) => c.name === o)) {
 											if (currentMoves.length === 1) {
 												return;
-											} else
-												setMoves(
-													ownedPokemon.id,
-													currentMoves.filter((c) => c !== o)
-												);
+											} else deActivateMove(o);
 										}
-										if (!currentMoves.includes(o)) {
+										if (!currentMoves.some((c) => c.name === o)) {
 											if (currentMoves.length === 4) {
 												return;
-											} else setMoves(ownedPokemon.id, [...currentMoves, o]);
+											} else activateMove(o);
 										}
 									}}
 									content={<strong>{o}</strong>}
@@ -118,20 +146,22 @@ export const MovesDisplay = ({
 	);
 };
 
-export const MoveDisplayListEntry = ({
+const MoveDisplayListEntry = ({
 	o,
 	onlyCurrent,
 	currentMoves,
 	reorder,
-	setMoves,
+	activateMove,
+	deActivateMove,
 	battlePokemon,
 }: {
 	o: MoveName;
 	battlePokemon: BattlePokemon;
 	onlyCurrent: boolean;
 	currentMoves: MoveName[];
-	reorder: (dir: 'UP' | 'DOWN', name: MoveName) => void;
-	setMoves: (id: string, moves: MoveName[]) => void;
+	reorder: (dir: 'UP' | 'DOWN') => void;
+	activateMove: () => void;
+	deActivateMove: () => void;
 }) => {
 	const battleMove = getMovesArray(battlePokemon).find((b) => b.name === o);
 	if (!battleMove) {
@@ -150,13 +180,13 @@ export const MoveDisplayListEntry = ({
 							<FaArrowUp
 								onClick={(e) => {
 									e.stopPropagation();
-									reorder('UP', o);
+									reorder('UP');
 								}}
 							/>,
 							<FaArrowDown
 								onClick={(e) => {
 									e.stopPropagation();
-									reorder('DOWN', o);
+									reorder('DOWN');
 								}}
 							/>,
 					  ]}
@@ -179,16 +209,12 @@ export const MoveDisplayListEntry = ({
 						if (currentMoves.includes(o)) {
 							if (currentMoves.length === 1) {
 								return;
-							} else
-								setMoves(
-									battlePokemon.id,
-									currentMoves.filter((c) => c !== o)
-								);
+							} else deActivateMove();
 						}
 						if (!currentMoves.includes(o)) {
 							if (currentMoves.length === 4) {
 								return;
-							} else setMoves(battlePokemon.id, [...currentMoves, o]);
+							} else activateMove();
 						}
 					}}
 					content={

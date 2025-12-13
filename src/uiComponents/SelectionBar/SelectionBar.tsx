@@ -6,23 +6,23 @@ export const SelectionBar = ({
 	select,
 	selected,
 }: {
-	options: string[];
+	options: { key: string; label: string }[];
 	select: (x: string) => void;
 	selected: string | undefined;
 }) => {
 	return (
 		<Stack mode={'row'}>
 			{options.map((o, i) => (
-				<React.Fragment key={o}>
+				<React.Fragment key={o.key}>
 					{i > 0 && <strong>|</strong>}
 					<strong
 						style={{
 							whiteSpace: 'nowrap',
-							textDecoration: selected === o ? 'underline' : undefined,
+							textDecoration: selected === o.key ? 'underline' : undefined,
 						}}
-						onClick={() => select(o)}
+						onClick={() => select(o.key)}
 					>
-						{o}
+						{o.label}
 					</strong>
 				</React.Fragment>
 			))}

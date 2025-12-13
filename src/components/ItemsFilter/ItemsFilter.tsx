@@ -106,7 +106,7 @@ const ItemsFilterButtons = ({
 }) => {
 	return (
 		<SelectionBar
-			options={[...itemfilterNames]}
+			options={[...itemfilterNames.map((i) => ({ key: i, label: i }))]}
 			selected={itemsFilter}
 			select={(x) => setFilter(x as ItemsFilterType)}
 		/>

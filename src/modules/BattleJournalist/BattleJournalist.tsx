@@ -421,11 +421,7 @@ export const JournalEntry = ({
 							</Stack>
 
 							<BstSection hideExplanation ownedPokemon={mon} data={mon.data} />
-							<MovesDisplay
-								onlyCurrent
-								ownedPokemon={mon}
-								setMoves={() => {}}
-							/>
+							<MovesDisplay onlyCurrent ownedPokemon={mon} />
 						</Stack>
 					</div>
 				))}

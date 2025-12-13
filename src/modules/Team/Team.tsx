@@ -10,7 +10,6 @@ import { getHeldItem } from '../../functions/getHeldItem';
 import { getItemUrl } from '../../functions/getItemUrl';
 import { getTypeNames } from '../../functions/getTypeNames';
 import { isOwnedPokemonKO } from '../../functions/isKo';
-import { withChangedMoves } from '../../functions/withChangedMoves';
 import { useGetBattleTeam } from '../../hooks/useGetBattleTeam';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { Inventory } from '../../interfaces/Inventory';
@@ -189,17 +188,6 @@ export const Team = ({
 					</div>
 				</div>
 				<OwnedPokemonCard
-					setMoves={(id, newMoveNames) => {
-						setTeam(
-							team.map((t) => {
-								if (t.id === id) {
-									return withChangedMoves(t, newMoveNames);
-								}
-
-								return t;
-							})
-						);
-					}}
 					setNickName={(id, nickname) => {
 						setTeam(
 							team.map((t) => {
