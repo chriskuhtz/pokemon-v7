@@ -81,6 +81,14 @@ export const Labyrinth = (): JSX.Element => {
 				wild: 'Young Tom was never seen again ...',
 				reset: 'Young Tom was never seen again ...',
 			}}
+			overworldActions={{
+				bushCutting: {
+					possible: (saveFile) =>
+						saveFile.pokemon.some((p) => p.onTeam && p.name === 'scyther'),
+					successDialogue: ['Scyther cuts the tree'],
+					failDialogue: ['A strong bug pokemon might be able to cut this'],
+				},
+			}}
 		/>
 	);
 };

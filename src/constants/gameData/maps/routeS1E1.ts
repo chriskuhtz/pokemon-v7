@@ -8,6 +8,7 @@ export const routeS1E1: OverworldMap = {
 	tilesetUrl: '/tilesets/newMasterSheet.png',
 	timeOfDayShadersMap: defaultShaderMap,
 	occupants: routeS1E1Occupants,
+	questMenuAvailable: true,
 	tileMap: {
 		baseLayer: [
 			[

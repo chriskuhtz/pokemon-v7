@@ -93,6 +93,17 @@ export const Kuma = (): JSX.Element => {
 				wild: 'You lost the battle and rushed back to camp, loosing your items on the way',
 				reset: 'You lost the battle and have to reset',
 			}}
+			overworldActions={{
+				bushCutting: {
+					possible: (saveFile) =>
+						saveFile.campUpgrades['machete certification'],
+					successDialogue: ['You use your certified machete skills'],
+					failDialogue: [
+						'You need a machete certification to cut bushes',
+						'...bureaucracy',
+					],
+				},
+			}}
 		/>
 	);
 };

@@ -4,6 +4,15 @@ import { RoutesType } from './Routing';
 import { CharacterLocationData, SaveFile } from './SaveFile';
 
 export type InternalDex = Record<PokemonName, InternalDexEntry>;
+
+export interface OverworldAction {
+	possible: (saveFile: SaveFile) => boolean;
+	successDialogue: string[];
+	failDialogue: string[];
+}
+export interface OverworldActions {
+	bushCutting: OverworldAction;
+}
 export interface GameData {
 	locationId: string;
 	saveFileId: string;
@@ -26,4 +35,5 @@ export interface GameData {
 		settingsEditable: boolean;
 		numberOfBallsBadge: boolean;
 	};
+	overworldActions: OverworldActions;
 }

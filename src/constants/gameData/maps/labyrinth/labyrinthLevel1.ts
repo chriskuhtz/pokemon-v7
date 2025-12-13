@@ -8,6 +8,7 @@ export const labyrinthLevel1: OverworldMap = {
 	tilesetUrl: '/tilesets/newMasterSheet.png',
 	occupants: labyrinthLevel1Occupants,
 	timeOfDayShadersMap: defaultShaderMap,
+	questMenuAvailable: false,
 	tileMap: {
 		baseLayer: [
 			[

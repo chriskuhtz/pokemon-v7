@@ -9,7 +9,7 @@ export const randomChallengeField: OverworldMap = {
 	tilesetUrl: '/tilesets/slateport.png',
 	occupants: randomChallengeFieldOccupants,
 	timeOfDayShadersMap: defaultShaderMap,
-
+	questMenuAvailable: false,
 	tileMap: {
 		baseLayer: [
 			[

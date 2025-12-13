@@ -320,7 +320,16 @@ export const labyrinthDex: Record<PokemonName, InternalDexEntry> = {
 		evs: {
 			speed: 1,
 		},
-		encounterOptions: [],
+		encounterOptions: [
+			{
+				maxXp: 11 * 11 * 11,
+				minXp: 7 * 7 * 7,
+				timeOfDay: 'ALL_DAY',
+				route: 'labyrinth_level_2',
+				area: 'LAND',
+				rarity: 'common',
+			},
+		],
 	},
 	ninetales: {
 		dexId: 38,
@@ -402,7 +411,16 @@ export const labyrinthDex: Record<PokemonName, InternalDexEntry> = {
 		evs: {
 			attack: 1,
 		},
-		encounterOptions: [],
+		encounterOptions: [
+			{
+				maxXp: 11 * 11 * 11,
+				minXp: 7 * 7 * 7,
+				timeOfDay: 'ALL_DAY',
+				route: 'labyrinth_level_2',
+				area: 'LAND',
+				rarity: 'common',
+			},
+		],
 	},
 	parasect: {
 		dexId: 47,
@@ -959,7 +977,16 @@ export const labyrinthDex: Record<PokemonName, InternalDexEntry> = {
 		evs: {
 			hp: 2,
 		},
-		encounterOptions: [],
+		encounterOptions: [
+			{
+				maxXp: 11 * 11 * 11,
+				minXp: 7 * 7 * 7,
+				timeOfDay: 'ALL_DAY',
+				route: 'labyrinth_level_2',
+				area: 'LAND',
+				rarity: 'ultra-rare',
+			},
+		],
 	},
 	tangela: {
 		dexId: 114,
@@ -2001,7 +2028,16 @@ export const labyrinthDex: Record<PokemonName, InternalDexEntry> = {
 		evs: {
 			speed: 1,
 		},
-		encounterOptions: [],
+		encounterOptions: [
+			{
+				maxXp: 11 * 11 * 11,
+				minXp: 7 * 7 * 7,
+				timeOfDay: 'ALL_DAY',
+				route: 'labyrinth_level_2',
+				area: 'LAND',
+				rarity: 'common',
+			},
+		],
 	},
 	magby: {
 		dexId: 240,
@@ -3339,7 +3375,16 @@ export const labyrinthDex: Record<PokemonName, InternalDexEntry> = {
 		evs: {
 			attack: 1,
 		},
-		encounterOptions: [],
+		encounterOptions: [
+			{
+				maxXp: 11 * 11 * 11,
+				minXp: 7 * 7 * 7,
+				timeOfDay: 'ALL_DAY',
+				route: 'labyrinth_level_2',
+				area: 'LAND',
+				rarity: 'common',
+			},
+		],
 	},
 	luxio: {
 		dexId: 404,
@@ -4477,7 +4522,16 @@ export const labyrinthDex: Record<PokemonName, InternalDexEntry> = {
 		evs: {
 			defense: 1,
 		},
-		encounterOptions: [],
+		encounterOptions: [
+			{
+				maxXp: 11 * 11 * 11,
+				minXp: 7 * 7 * 7,
+				timeOfDay: 'ALL_DAY',
+				route: 'labyrinth_level_2',
+				area: 'LAND',
+				rarity: 'common',
+			},
+		],
 	},
 	whirlipede: {
 		dexId: 544,
@@ -4485,7 +4539,16 @@ export const labyrinthDex: Record<PokemonName, InternalDexEntry> = {
 		evs: {
 			defense: 2,
 		},
-		encounterOptions: [],
+		encounterOptions: [
+			{
+				maxXp: 11 * 11 * 11,
+				minXp: 9 * 9 * 9,
+				timeOfDay: 'ALL_DAY',
+				route: 'labyrinth_level_2',
+				area: 'LAND',
+				rarity: 'rare',
+			},
+		],
 	},
 	scolipede: {
 		dexId: 545,
@@ -6138,7 +6201,16 @@ export const labyrinthDex: Record<PokemonName, InternalDexEntry> = {
 		evs: {
 			attack: 1,
 		},
-		encounterOptions: [],
+		encounterOptions: [
+			{
+				maxXp: 11 * 11 * 11,
+				minXp: 7 * 7 * 7,
+				timeOfDay: 'ALL_DAY',
+				route: 'labyrinth_level_2',
+				area: 'LAND',
+				rarity: 'medium',
+			},
+		],
 	},
 	mudsdale: {
 		dexId: 750,

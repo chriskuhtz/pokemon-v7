@@ -8,6 +8,7 @@ export const pokemonLeague: OverworldMap = {
 	occupants: pokemonLeagueOccupants,
 	timeOfDayShadersMap: indoorShaderMap,
 	tilesetUrl: '/tilesets/pokemonLeague.png',
+	questMenuAvailable: true,
 	tileMap: {
 		baseLayer: [
 			[

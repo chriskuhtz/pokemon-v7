@@ -24,4 +24,5 @@ export interface OverworldMap {
 	foggy?: boolean;
 	dark?: boolean;
 	peaceful?: boolean;
+	questMenuAvailable: boolean;
 }

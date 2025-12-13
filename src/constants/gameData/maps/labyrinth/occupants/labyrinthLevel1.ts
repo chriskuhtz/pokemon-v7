@@ -28,8 +28,6 @@ const fourthRandomItem = 'lab1-fourth-random-item';
 const firstChallenger = 'lab1-first-challenger';
 const secondChallenger = 'lab1-second-challenger';
 
-const labyrinthSuccess = 'labyrinth-success';
-
 const itemOptions: ItemType[] = [
 	'ether',
 	'pecha-berry',
@@ -190,8 +188,8 @@ export const labyrinthLevel1Occupants: OverworldMap['occupants'] = [
 		dialogue: ['...'],
 		encounter: {
 			name: 'nosepass',
-			maxXp: 10 * 10 * 10,
-			minXp: 10 * 10 * 10,
+			maxXp: 11 * 11 * 11,
+			minXp: 11 * 11 * 11,
 			rarity: 'common',
 		},
 	},
@@ -206,11 +204,17 @@ export const labyrinthLevel1Occupants: OverworldMap['occupants'] = [
 		conditionFunction: (s) => !occupantHandled(s, secondItem),
 	},
 	{
+		type: 'ON_STEP_PORTAL',
 		x: 8,
 		y: 19,
-		type: 'ON_STEP_ROUTER',
-		route: 'LABYRINTH_SUCCESS',
-		id: labyrinthSuccess,
+		id: 'to-labyrinth2',
+		portal: {
+			mapId: 'labyrinth_level_2',
+			x: 5,
+			y: 1,
+			orientation: 'DOWN',
+			forwardFoot: 'CENTER1',
+		},
 		conditionFunction: () => true,
 	},
 ];

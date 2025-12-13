@@ -9,6 +9,7 @@ export const victoryRoad: OverworldMap = {
 	timeOfDayShadersMap: caveShaderMap,
 	foggy: true,
 	tilesetUrl: '/tilesets/newMasterSheet.png',
+	questMenuAvailable: true,
 	tileMap: {
 		baseLayer: [
 			[

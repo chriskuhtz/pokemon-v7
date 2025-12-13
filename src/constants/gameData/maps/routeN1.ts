@@ -7,6 +7,7 @@ export const routeN1: OverworldMap = {
 	id: 'routeN1',
 	tilesetUrl: '/tilesets/newMasterSheet.png',
 	timeOfDayShadersMap: defaultShaderMap,
+	questMenuAvailable: true,
 	tileMap: {
 		baseLayer: [
 			[

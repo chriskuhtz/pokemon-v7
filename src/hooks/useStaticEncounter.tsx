@@ -33,7 +33,7 @@ export const useStaticEncounter = () => {
 						message: 'The wild pokemon attacks',
 						onRemoval: () => {
 							patchSaveFileReducer({
-								mileStones: { ...saveFile.mileStones, hasWokenASnorlax: true },
+								mileStones: { ...saveFile.mileStones },
 								meta: { currentChallenger: challenger, activeTab: 'BATTLE' },
 							});
 						},

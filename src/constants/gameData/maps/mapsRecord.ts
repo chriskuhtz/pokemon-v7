@@ -10,6 +10,7 @@ import { caveW1F1 } from './caveW1F1';
 import { caveW1F2 } from './caveW1F2';
 import { challengeField } from './challengeField';
 import { labyrinthLevel1 } from './labyrinth/labyrinthLevel1';
+import { labyrinthLevel2 } from './labyrinth/labyrinthLevel2';
 import { onixCave } from './onixCave';
 import { pokemonLeague } from './pokemonLeague';
 import { randomChallengeField } from './randomChallengeField';
@@ -55,6 +56,7 @@ export const mapIds = [
 	'pokemonLeague',
 	//LABYRINTH VERSION
 	'labyrinth_level_1',
+	'labyrinth_level_2',
 ] as const;
 export type MapId = (typeof mapIds)[number];
 
@@ -86,6 +88,7 @@ export const mapsRecord: Record<MapId, OverworldMap> = {
 	pokemonLeague: pokemonLeague,
 	//LABYRINTH VERSION
 	labyrinth_level_1: labyrinthLevel1,
+	labyrinth_level_2: labyrinthLevel2,
 };
 
 export const mapDisplayNames: Record<MapId, string> = {
@@ -116,6 +119,7 @@ export const mapDisplayNames: Record<MapId, string> = {
 	pokemonLeague: 'Pokemon League',
 	//LABYRINTH VERSION
 	labyrinth_level_1: 'Deep Forest',
+	labyrinth_level_2: 'Deep Forest',
 };
 
 export const Emptymap: OverworldMap = {
@@ -124,6 +128,7 @@ export const Emptymap: OverworldMap = {
 	occupants: [],
 	timeOfDayShadersMap: defaultShaderMap,
 	tilesetUrl: '/tilesets/palletTown.png',
+	questMenuAvailable: true,
 	tileMap: {
 		baseLayer: [[]],
 		waterLayer: [[]],

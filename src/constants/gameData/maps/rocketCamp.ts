@@ -8,6 +8,7 @@ export const rocketCamp: OverworldMap = {
 	occupants: rocketCampOccupants,
 	timeOfDayShadersMap: defaultShaderMap,
 	tilesetUrl: '/tilesets/market.png',
+	questMenuAvailable: true,
 	tileMap: {
 		baseLayer: [
 			[

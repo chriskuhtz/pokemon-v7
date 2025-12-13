@@ -8,6 +8,7 @@ export const victoryRoadExit: OverworldMap = {
 	tilesetUrl: '/tilesets/newMasterSheet.png',
 	occupants: victoryRoadExitOccupants,
 	timeOfDayShadersMap: defaultShaderMap,
+	questMenuAvailable: true,
 	tileMap: {
 		baseLayer: [
 			[

@@ -88,7 +88,8 @@ const ChangeLogV50 = (): JSX.Element => {
 		<>
 			<h3>0.50:</h3>
 			<ol style={{ lineHeight: '1.5rem' }}>
-				<li>Feedback for labyrinth mode</li>
+				<li>Feedback and fixes for labyrinth mode</li>
+				<li>Labyrinth level 2</li>
 			</ol>
 		</>
 	);

@@ -7,6 +7,7 @@ export const campLaboratory: OverworldMap = {
 	id: 'campLaboratory',
 	tilesetUrl: '/tilesets/newMasterSheet.png',
 	occupants: campLaboratoryOccupants,
+	questMenuAvailable: true,
 	timeOfDayShadersMap: defaultShaderMap,
 	tileMap: {
 		baseLayer: [

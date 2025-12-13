@@ -328,8 +328,12 @@ export const interactWithFunction = ({
 			interactWithStaticEncounter(data);
 		} else
 			addMultipleMessages([
-				...data.dialogue.map((d) => ({
+				...data.dialogue.map((d, i) => ({
 					message: d,
+					onRemoval:
+						i === data.dialogue.length - 1 && data.disappearsAfterDialogue
+							? () => handleThisOccupant(data)
+							: undefined,
 				})),
 			]);
 

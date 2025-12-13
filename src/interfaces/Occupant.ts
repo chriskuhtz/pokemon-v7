@@ -190,6 +190,7 @@ export interface OverworldPokemon extends BaseOccupant {
 	dialogue: string[];
 	orientation: CharacterOrientation;
 	encounter?: OverworldEncounter;
+	disappearsAfterDialogue?: boolean;
 }
 export interface PokemonStatue extends BaseOccupant {
 	type: 'POKEMONSTATUE';

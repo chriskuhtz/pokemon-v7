@@ -8,6 +8,7 @@ export const routeN1E1: OverworldMap = {
 	tilesetUrl: '/tilesets/DarkWoods.png',
 	occupants: routeN1E1Occupants,
 	timeOfDayShadersMap: defaultShaderMap,
+	questMenuAvailable: true,
 	tileMap: {
 		baseLayer: [
 			[

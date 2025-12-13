@@ -1,0 +1,242 @@
+import {
+	makeOverworldItem,
+	makeOverworldRandomItem,
+} from '../../../../../functions/makeOverworldItem';
+import { occupantHandled } from '../../../../../functions/occupantHandled';
+import { ItemType } from '../../../../../interfaces/Item';
+import { OverworldMap } from '../../../../../interfaces/OverworldMap';
+
+const labyrinthSuccess = 'labyrinth-success';
+
+const itemOptions: ItemType[] = [
+	'ether',
+	'pecha-berry',
+	'berry-juice',
+	'rare-candy',
+	'revive',
+	'nest-ball',
+	'potion',
+];
+
+export const labyrinthLevel2Occupants: OverworldMap['occupants'] = [
+	makeOverworldItem({
+		x: 3,
+		y: 2,
+		item: 'net-ball',
+		amount: 5,
+		mapId: 'labyrinth_level_2',
+	}),
+	makeOverworldItem({
+		x: 16,
+		y: 10,
+		item: 'rage-candy-bar',
+		amount: 2,
+		mapId: 'labyrinth_level_2',
+	}),
+	makeOverworldItem({
+		x: 42,
+		y: 20,
+		item: 'casteliacone',
+		amount: 2,
+		mapId: 'labyrinth_level_2',
+	}),
+	makeOverworldItem({
+		x: 34,
+		y: 21,
+		item: 'super-potion',
+		amount: 3,
+		mapId: 'labyrinth_level_2',
+	}),
+	makeOverworldItem({
+		x: 15,
+		y: 23,
+		item: 'lum-berry',
+		amount: 2,
+		mapId: 'labyrinth_level_2',
+		fixedId: 'ursarings-lum-berries',
+	}),
+	makeOverworldItem({
+		x: 14,
+		y: 24,
+		item: 'sitrus-berry',
+		amount: 2,
+		mapId: 'labyrinth_level_2',
+		fixedId: 'ursarings-sitrus-berries',
+	}),
+	makeOverworldItem({
+		x: 15,
+		y: 25,
+		item: 'wacan-berry',
+		amount: 2,
+		mapId: 'labyrinth_level_2',
+		fixedId: 'ursarings-wacan-berries',
+	}),
+	{
+		type: 'POKEMON',
+		dexId: 217,
+		x: 17,
+		y: 24,
+		orientation: 'LEFT',
+		id: 'lab-2-ursaring',
+		conditionFunction: (s) =>
+			(occupantHandled(s, 'ursarings-lum-berries') ||
+				occupantHandled(s, 'ursarings-sitrus-berries') ||
+				occupantHandled(s, 'ursarings-wacan-berries')) &&
+			!occupantHandled(s, 'lab-2-ursaring'),
+		dialogue: ['Ursaring is outraged that you stole its berries'],
+		encounter: {
+			name: 'ursaring',
+			maxXp: 13 * 13 * 13,
+			minXp: 13 * 13 * 13,
+			rarity: 'common',
+		},
+	},
+	makeOverworldRandomItem({
+		x: 15,
+		y: 8,
+		options: itemOptions,
+		mapId: 'labyrinth_level_2',
+	}),
+	makeOverworldRandomItem({
+		x: 2,
+		y: 19,
+		options: itemOptions,
+		mapId: 'labyrinth_level_2',
+	}),
+	makeOverworldRandomItem({
+		x: 14,
+		y: 19,
+		options: itemOptions,
+		mapId: 'labyrinth_level_2',
+	}),
+	makeOverworldRandomItem({
+		x: 19,
+		y: 8,
+		options: itemOptions,
+		mapId: 'labyrinth_level_2',
+	}),
+	makeOverworldRandomItem({
+		x: 35,
+		y: 5,
+		options: itemOptions,
+		mapId: 'labyrinth_level_2',
+	}),
+	makeOverworldRandomItem({
+		x: 27,
+		y: 15,
+		options: itemOptions,
+		mapId: 'labyrinth_level_2',
+	}),
+	makeOverworldRandomItem({
+		x: 34,
+		y: 11,
+		options: itemOptions,
+		mapId: 'labyrinth_level_2',
+	}),
+	{
+		type: 'BUSH',
+		x: 7,
+		y: 4,
+		id: 'lab-2-bush-1',
+		conditionFunction: (s) => !occupantHandled(s, 'lab-2-bush-1'),
+	},
+	{
+		type: 'BUSH',
+		x: 38,
+		y: 20,
+		id: 'lab-2-bush-2',
+		conditionFunction: (s) => !occupantHandled(s, 'lab-2-bush-2'),
+	},
+	{
+		type: 'BUSH',
+		x: 17,
+		y: 11,
+		id: 'lab-2-bush-3',
+		conditionFunction: (s) => !occupantHandled(s, 'lab-2-bush-3'),
+	},
+	{
+		type: 'ON_STEP_PORTAL',
+		x: 5,
+		y: 0,
+		id: 'to-labyrinth1',
+		portal: {
+			mapId: 'labyrinth_level_1',
+			x: 8,
+			y: 18,
+			orientation: 'UP',
+			forwardFoot: 'CENTER1',
+		},
+		conditionFunction: () => true,
+	},
+	{
+		x: 43,
+		y: 25,
+		type: 'ON_STEP_ROUTER',
+		route: 'LABYRINTH_SUCCESS',
+		id: labyrinthSuccess,
+		conditionFunction: () => true,
+	},
+	{
+		type: 'POKEMON',
+		dexId: 123,
+		x: 13,
+		y: 1,
+		orientation: 'UP',
+		id: 'lab-2-challenger-1',
+		conditionFunction: (s) => !occupantHandled(s, 'lab-2-challenger-1'),
+		dialogue: ['...'],
+		encounter: {
+			name: 'scyther',
+			maxXp: 12 * 12 * 12,
+			minXp: 12 * 12 * 12,
+			rarity: 'common',
+		},
+	},
+	{
+		type: 'POKEMON',
+		dexId: 123,
+		x: 13,
+		y: 1,
+		orientation: 'UP',
+		id: 'lab-2-challenger-1',
+		conditionFunction: (s) => !occupantHandled(s, 'lab-2-challenger-1'),
+		dialogue: ['...'],
+		encounter: {
+			name: 'scyther',
+			maxXp: 12 * 12 * 12,
+			minXp: 12 * 12 * 12,
+			rarity: 'common',
+		},
+	},
+	{
+		type: 'POKEMON',
+		dexId: 125,
+		x: 41,
+		y: 25,
+		orientation: 'LEFT',
+		id: 'lab-2-challenger-2',
+		conditionFunction: (s) => !occupantHandled(s, 'lab-2-challenger-2'),
+		dialogue: ['BUZZZZZ', 'Electabuzz is jumping around and firing off sparks'],
+		encounter: {
+			name: 'electabuzz',
+			maxXp: 17 * 17 * 17,
+			minXp: 17 * 17 * 17,
+			rarity: 'common',
+		},
+	},
+	{
+		type: 'POKEMON',
+		dexId: 151,
+		x: 26,
+		y: 20,
+		orientation: 'DOWN',
+		id: 'lab-2-mew',
+		conditionFunction: (s) => !occupantHandled(s, 'lab-2-mew'),
+		dialogue: [
+			'You have never seen a Pokemon like this',
+			'It looks at you curiously',
+			'Did it have something to do with your situation?',
+		],
+		disappearsAfterDialogue: true,
+	},
+];

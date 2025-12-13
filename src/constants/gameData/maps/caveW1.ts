@@ -8,6 +8,7 @@ export const caveW1: OverworldMap = {
 	tilesetUrl: '/tilesets/newMasterSheet.png',
 	timeOfDayShadersMap: caveShaderMap,
 	occupants: caveW1Occupants,
+	questMenuAvailable: true,
 	tileMap: {
 		baseLayer: [
 			[
