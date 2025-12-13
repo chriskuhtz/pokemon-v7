@@ -614,7 +614,7 @@ export const extraFeatureCheckList: {
 		name: 'rampager pokemon sprite doesnt disappear when you leave overworld screen',
 	},
 	{ name: 'move chuck and move tutor out of battle pit' },
-
+	{ name: 'music' },
 	//FEATURES:
 	{ name: 'eggs?' },
 	{ name: 'Fishing?' },
