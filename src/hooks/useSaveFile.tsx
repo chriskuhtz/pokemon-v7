@@ -97,8 +97,8 @@ const migrateSavefile = (input: SaveFile) => {
 			updatedInput.badges = [...new Set([...updatedInput.badges, value.badge])];
 		}
 	});
-	//migrate in tickets
 
+	//migrate in tickets
 	if (
 		updatedInput.quests['catch a ultra-rare pokemon from routeN1E1'] ===
 			'COLLECTED' &&

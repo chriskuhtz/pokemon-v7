@@ -8,7 +8,11 @@ import { battleSpriteSize } from '../../../constants/gameData/gameData';
 import { MoveName } from '../../../constants/movesCheckList';
 import { getCurrentPP } from '../../../functions/getCurrentPP';
 import { getMovesArray } from '../../../functions/getMovesArray';
-import { withChangedMoves } from '../../../functions/withChangedMoves';
+import {
+	withActivatedMove,
+	withChangedMoves,
+	withDeActivatedMove,
+} from '../../../functions/withChangedMoves';
 import { useGetBattleTeam } from '../../../hooks/useGetBattleTeam';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
@@ -80,13 +84,26 @@ export const MovesDisplay = ({
 	};
 
 	const activateMove = (name: MoveName) => {
-		updateMoves(ownedPokemon.id, [...currentMoves, { name, usedPP: 0 }]);
+		patchSaveFileReducer({
+			pokemon: saveFile.pokemon.map((p) => {
+				if (p.id === ownedPokemon.id) {
+					return withActivatedMove(ownedPokemon, name);
+				}
+
+				return p;
+			}),
+		});
 	};
-	const deActivateMove = (name: MoveName) => {
-		updateMoves(
-			ownedPokemon.id,
-			currentMoves.filter((c) => c.name !== name)
-		);
+	const deActivateMove = (move: OwnedPokemonMove) => {
+		patchSaveFileReducer({
+			pokemon: saveFile.pokemon.map((p) => {
+				if (p.id === ownedPokemon.id) {
+					return withDeActivatedMove(ownedPokemon, move);
+				}
+
+				return p;
+			}),
+		});
 	};
 	const b = battleMon?.at(0);
 
@@ -104,7 +121,7 @@ export const MovesDisplay = ({
 					onlyCurrent={!!onlyCurrent}
 					currentMoves={currentMoves.map((c) => c.name)}
 					activateMove={() => activateMove(o.name)}
-					deActivateMove={() => deActivateMove(o.name)}
+					deActivateMove={() => deActivateMove(o)}
 				/>
 			))}
 			{!onlyCurrent &&
@@ -125,11 +142,6 @@ export const MovesDisplay = ({
 									}
 									icon={<MdRadioButtonUnchecked />}
 									onClick={() => {
-										if (currentMoves.some((c) => c.name === o)) {
-											if (currentMoves.length === 1) {
-												return;
-											} else deActivateMove(o);
-										}
 										if (!currentMoves.some((c) => c.name === o)) {
 											if (currentMoves.length === 4) {
 												return;

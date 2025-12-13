@@ -50,7 +50,10 @@ export interface OwnedPokemon {
 	weightModifier?: number;
 	heightModifier?: number;
 	fixedAbility?: boolean;
+
 	unlockedMoves: MoveName[];
+	//moves that were previously active, needed to keep record of used PP
+	deactivatedMoves?: OwnedPokemonMove[];
 	growthRate: GrowthRateName;
 	caughtAtDate: number;
 	starter?: boolean;
