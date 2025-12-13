@@ -49,7 +49,6 @@ export const labyrinthLevel1Occupants: OverworldMap['occupants'] = [
 			effortValues: EmptyStatObject,
 			starter: true,
 			firstMove: { name: 'peck', usedPP: 0 },
-			xp: 1000000,
 			unlockedMoves: ['peck'],
 			gender: 'MALE',
 			nickname: 'Wilson',

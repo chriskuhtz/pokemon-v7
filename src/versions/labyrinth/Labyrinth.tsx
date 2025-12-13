@@ -3,7 +3,7 @@ import {
 	baseQuestState,
 	emptyPokedex,
 } from '../../constants/gameData/gameData';
-import { EmptyInventory, joinInventories } from '../../interfaces/Inventory';
+import { EmptyInventory } from '../../interfaces/Inventory';
 import { CharacterLocationData, SaveFile } from '../../interfaces/SaveFile';
 import { Game } from '../../modules/Game/Game';
 import { labyrinthDex } from './labyrinthDex';
@@ -20,7 +20,7 @@ const startingSaveFileLabyrinth: SaveFile = {
 	badges: [],
 	researchPoints: 0,
 	quests: baseQuestState,
-	bag: joinInventories(EmptyInventory, { 'berry-juice': 5 }),
+	bag: EmptyInventory,
 	storage: EmptyInventory,
 	seedVault: [],
 	playerId: 'tom',

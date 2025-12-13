@@ -4539,16 +4539,7 @@ export const labyrinthDex: Record<PokemonName, InternalDexEntry> = {
 		evs: {
 			defense: 2,
 		},
-		encounterOptions: [
-			{
-				maxXp: 11 * 11 * 11,
-				minXp: 9 * 9 * 9,
-				timeOfDay: 'ALL_DAY',
-				route: 'labyrinth_level_2',
-				area: 'LAND',
-				rarity: 'rare',
-			},
-		],
+		encounterOptions: [],
 	},
 	scolipede: {
 		dexId: 545,
