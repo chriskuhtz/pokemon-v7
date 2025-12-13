@@ -53,6 +53,9 @@ export const determineEvoChecks = (
 	);
 
 	const minLevelIncludingTrade = () => {
+		if (trigger.name === 'level-up') {
+			return 40;
+		}
 		if (trigger.name === 'trade') {
 			return 40;
 		}

@@ -322,8 +322,8 @@ export const labyrinthDex: Record<PokemonName, InternalDexEntry> = {
 		},
 		encounterOptions: [
 			{
-				maxXp: 11 * 11 * 11,
-				minXp: 7 * 7 * 7,
+				maxXp: 8 * 8 * 8,
+				minXp: 5 * 5 * 5,
 				timeOfDay: 'ALL_DAY',
 				route: 'labyrinth_level_2',
 				area: 'LAND',
@@ -413,8 +413,8 @@ export const labyrinthDex: Record<PokemonName, InternalDexEntry> = {
 		},
 		encounterOptions: [
 			{
-				maxXp: 11 * 11 * 11,
-				minXp: 7 * 7 * 7,
+				maxXp: 8 * 8 * 8,
+				minXp: 5 * 5 * 5,
 				timeOfDay: 'ALL_DAY',
 				route: 'labyrinth_level_2',
 				area: 'LAND',
@@ -979,8 +979,8 @@ export const labyrinthDex: Record<PokemonName, InternalDexEntry> = {
 		},
 		encounterOptions: [
 			{
-				maxXp: 11 * 11 * 11,
-				minXp: 7 * 7 * 7,
+				maxXp: 8 * 8 * 8,
+				minXp: 5 * 5 * 5,
 				timeOfDay: 'ALL_DAY',
 				route: 'labyrinth_level_2',
 				area: 'LAND',
@@ -2030,8 +2030,8 @@ export const labyrinthDex: Record<PokemonName, InternalDexEntry> = {
 		},
 		encounterOptions: [
 			{
-				maxXp: 11 * 11 * 11,
-				minXp: 7 * 7 * 7,
+				maxXp: 8 * 8 * 8,
+				minXp: 5 * 5 * 5,
 				timeOfDay: 'ALL_DAY',
 				route: 'labyrinth_level_2',
 				area: 'LAND',
@@ -3377,8 +3377,8 @@ export const labyrinthDex: Record<PokemonName, InternalDexEntry> = {
 		},
 		encounterOptions: [
 			{
-				maxXp: 11 * 11 * 11,
-				minXp: 7 * 7 * 7,
+				maxXp: 8 * 8 * 8,
+				minXp: 5 * 5 * 5,
 				timeOfDay: 'ALL_DAY',
 				route: 'labyrinth_level_2',
 				area: 'LAND',
@@ -4524,8 +4524,8 @@ export const labyrinthDex: Record<PokemonName, InternalDexEntry> = {
 		},
 		encounterOptions: [
 			{
-				maxXp: 11 * 11 * 11,
-				minXp: 7 * 7 * 7,
+				maxXp: 8 * 8 * 8,
+				minXp: 5 * 5 * 5,
 				timeOfDay: 'ALL_DAY',
 				route: 'labyrinth_level_2',
 				area: 'LAND',
@@ -6194,8 +6194,8 @@ export const labyrinthDex: Record<PokemonName, InternalDexEntry> = {
 		},
 		encounterOptions: [
 			{
-				maxXp: 11 * 11 * 11,
-				minXp: 7 * 7 * 7,
+				maxXp: 8 * 8 * 8,
+				minXp: 5 * 5 * 5,
 				timeOfDay: 'ALL_DAY',
 				route: 'labyrinth_level_2',
 				area: 'LAND',

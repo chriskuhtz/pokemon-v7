@@ -156,6 +156,11 @@ export function ActionSelection({
 
 				{subgroup === 'ITEMS' ? (
 					allowedItems.map(([item, amount]) => {
+						let content = `${item} (${amount})`;
+
+						if (isPokeball(item) && catchingForbiddenReason) {
+							content = catchingForbiddenReason;
+						}
 						return (
 							<button
 								style={{ display: 'flex', alignItems: 'center' }}
@@ -166,9 +171,7 @@ export function ActionSelection({
 								}
 							>
 								<ItemSprite item={item} />
-								{isPokeball(item) && catchingForbiddenReason
-									? `${item} (${amount})`
-									: catchingForbiddenReason}
+								{content}
 							</button>
 						);
 					})

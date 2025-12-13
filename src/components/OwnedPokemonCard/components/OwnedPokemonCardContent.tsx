@@ -13,7 +13,7 @@ import { Stack } from '../../../uiComponents/Stack/Stack';
 import { MoveEditor } from '../../MoveEditor/MoveEditor';
 import { DetailsCard } from './DetailsCard';
 import { EvoInfo } from './EvoInfo';
-import { HeldItemSelection } from './HeldItemSelection';
+import { ApplyItemSection, HeldItemSelection } from './HeldItemSelection';
 import { MovesDisplay } from './MovesDisplay';
 import { StatDisplay } from './StatDisplay';
 
@@ -24,6 +24,7 @@ const tabTypes = [
 	'EVOLUTION',
 	'MOVES',
 	'NEW MOVES',
+	'APPLY ITEM',
 ] as const;
 type TabType = (typeof tabTypes)[number];
 
@@ -113,6 +114,7 @@ export const OwnedPokemonCardContent = ({
 				/>
 			)}
 			{tab === 'NEW MOVES' && <MoveEditor ownedPokemon={ownedPokemon} />}
+			{tab === 'APPLY ITEM' && <ApplyItemSection ownedPokemon={ownedPokemon} />}
 		</Stack>
 	);
 };
