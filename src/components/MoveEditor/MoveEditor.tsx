@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { MoveName } from '../../constants/movesCheckList';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getCostForLearnMethod } from '../../functions/getCostForLearnMethod';
@@ -79,8 +79,13 @@ export const MoveEditor = ({
 
 	const options = useLearnableMoves(ownedPokemon, data);
 
+	const [onlyLearnable, setOnlyLearnable] = useState<boolean>(false);
+
 	return (
 		<Stack mode={'column'}>
+			<button key={'button'} onClick={() => setOnlyLearnable(!onlyLearnable)}>
+				{onlyLearnable ? 'Show all moves' : 'Only show learnable'}
+			</button>
 			{options.map((m) => {
 				const payment = getCostForLearnMethod(
 					m.move.name as MoveName,
@@ -90,7 +95,9 @@ export const MoveEditor = ({
 					m,
 					calculateLevelData(ownedPokemon.xp, ownedPokemon.growthRate).level
 				);
-
+				if (onlyLearnable && !m.learnable) {
+					return <React.Fragment key={m.move.name}></React.Fragment>;
+				}
 				return (
 					<div
 						key={m.move.name}
