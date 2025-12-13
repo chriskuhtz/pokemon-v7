@@ -4,6 +4,7 @@ import {
 	TerrainIcon,
 	WeatherIcon,
 } from '../../components/WeatherIcon/WeatherIcon';
+import { portraitMode } from '../../constants/gameData/gameData';
 import { MoveName } from '../../constants/movesCheckList';
 import {
 	applyEndOfTurnAbility,
@@ -30,7 +31,6 @@ import { sortByPriority } from '../../functions/sortByPriority';
 import { LocationContext } from '../../hooks/LocationProvider';
 import { GameDataContext } from '../../hooks/useGameData';
 import { LeaveBattlePayload } from '../../hooks/useLeaveBattle';
-import { useLocationColors } from '../../hooks/useLocationColors';
 import { Message } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
@@ -132,7 +132,7 @@ export const BattleField = ({
 	const { settings, playerId } = saveFile;
 	const { location } = useContext(LocationContext);
 	const { losingMessages } = useContext(GameDataContext);
-	const { playerColor, oppColor } = useLocationColors();
+
 	const isTrainerBattle = useMemo(() => {
 		return challengerType === 'TRAINER';
 	}, [challengerType]);
@@ -800,14 +800,13 @@ export const BattleField = ({
 			<div
 				style={{
 					display: 'grid',
-					gridTemplateRows: '1fr 4fr 4fr 4fr',
+					gridTemplateRows: `1fr 4fr 4fr ${portraitMode ? 4 : 1}fr`,
 					height: '100dvh',
 					gap: '.5rem',
-					background: `linear-gradient(
-					218deg,
-					${oppColor} 0%,
-					${playerColor} 100%
-				)`,
+					backgroundImage: portraitMode
+						? `url("/backgrounds/forestMobile.png")`
+						: `url("/backgrounds/forestDesktop.png")`,
+					backgroundSize: 'cover',
 				}}
 			>
 				<div
@@ -833,6 +832,7 @@ export const BattleField = ({
 					style={{
 						maxWidth: '100dvw',
 						overflow: 'scroll',
+						backgroundColor: 'rgba(255,255,255,.9)',
 					}}
 				>
 					<ControlBar

@@ -1,4 +1,7 @@
 import React, { useContext, useMemo } from 'react';
+import { IoMdFemale, IoMdMale } from 'react-icons/io';
+import { RiSparkling2Line } from 'react-icons/ri';
+import { battleSpriteSize } from '../../constants/gameData/gameData';
 import { secondTurnMoves } from '../../constants/groupedMoves';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getPrimaryAilmentColor } from '../../functions/getPrimaryAilmentColor';
@@ -7,12 +10,9 @@ import { SaveFileContext } from '../../hooks/useSaveFile';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Chip } from '../../uiComponents/Chip/Chip';
 import { HpBar } from '../HpBar/HpBar';
+import { ItemSprite } from '../ItemSprite/ItemSprite';
 import { PrimaryAilmentIcon } from '../PrimaryAilmentIcon/PrimaryAilmentIcon';
 import { XpBar } from '../XpBar/XpBar';
-import { IoMdMale, IoMdFemale } from 'react-icons/io';
-import { RiSparkling2Line } from 'react-icons/ri';
-import { battleSpriteSize } from '../../constants/gameData/gameData';
-import { ItemSprite } from '../ItemSprite/ItemSprite';
 
 export const BattlePokemonInfo = ({ pokemon }: { pokemon: BattlePokemon }) => {
 	const {
@@ -43,6 +43,7 @@ export const BattlePokemonInfo = ({ pokemon }: { pokemon: BattlePokemon }) => {
 				gap: '0.25rem',
 				padding: '.25rem',
 				borderRadius: '.25rem',
+				backgroundColor: 'rgba(255,255,255,.8)',
 			}}
 			key={pokemon.id}
 		>

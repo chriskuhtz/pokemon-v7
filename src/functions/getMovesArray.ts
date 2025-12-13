@@ -71,8 +71,6 @@ export function getMovesArray<T extends BattlePokemon | OwnedPokemon>(
 			return true;
 		});
 
-	console.log(res);
-
 	if (res.length === 0) {
 		return [struggleMove];
 	}

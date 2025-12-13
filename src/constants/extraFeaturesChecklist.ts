@@ -603,6 +603,7 @@ export const extraFeatureCheckList: {
 	{ name: 'disable catching if team is full', handled: true },
 	{ name: 'release pokemon in Team Overview', handled: true },
 	{ name: 'struggle', handled: true },
+	{ name: 'battle backgrounds prototype', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },
@@ -614,7 +615,6 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'move chuck and move tutor out of battle pit' },
 
-	{ name: 'battle backgrounds' },
 	//FEATURES:
 	{ name: 'eggs?' },
 	{ name: 'Fishing?' },

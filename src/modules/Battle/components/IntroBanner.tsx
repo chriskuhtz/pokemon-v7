@@ -1,6 +1,6 @@
 import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
+import { portraitMode } from '../../../constants/gameData/gameData';
 import { PokemonName } from '../../../constants/pokemonNames';
-import { useLocationColors } from '../../../hooks/useLocationColors';
 import { Banner } from '../../../uiComponents/Banner/Banner';
 
 export const IntroBanner = ({
@@ -8,18 +8,16 @@ export const IntroBanner = ({
 }: {
 	names: PokemonName[];
 }): JSX.Element => {
-	const { playerColor, oppColor } = useLocationColors();
-
 	return (
 		<div style={{ backgroundColor: 'white' }}>
 			<div
 				style={{
 					height: '100dvh',
 					width: '100dvw',
-					background: `linear-gradient(
-					218deg,
-					${oppColor} 0%,
-					${playerColor} 100%`,
+					backgroundImage: portraitMode
+						? `url("/backgrounds/forestMobile.png")`
+						: `url("/backgrounds/forestDesktop.png")`,
+					backgroundSize: 'cover',
 				}}
 			>
 				<Banner>

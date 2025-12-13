@@ -9,7 +9,6 @@ import { determineRunawaySuccess } from '../../../functions/determineRunAwaySucc
 import { getItemUrl } from '../../../functions/getItemUrl';
 import { isKO } from '../../../functions/isKo';
 import { LocationContext } from '../../../hooks/LocationProvider';
-import { useLocationColors } from '../../../hooks/useLocationColors';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
@@ -46,8 +45,6 @@ export const LineUpSelection = ({
 	);
 
 	const { addMessage } = useContext(MessageQueueContext);
-
-	const { playerColor, oppColor } = useLocationColors();
 
 	const battleButtonMessage = useMemo(() => {
 		if (selectedTeam.length < fightersPerSide)
@@ -86,11 +83,10 @@ export const LineUpSelection = ({
 					height: '100dvh',
 					justifyItems: 'center',
 					alignItems: 'center',
-					background: `linear-gradient(
-					218deg,
-					${oppColor} 0%,
-					${playerColor} 100%
-				)`,
+					backgroundImage: portraitMode
+						? `url("/backgrounds/forestMobile.png")`
+						: `url("/backgrounds/forestDesktop.png")`,
+					backgroundSize: 'cover',
 				}}
 			>
 				<div
@@ -98,6 +94,7 @@ export const LineUpSelection = ({
 						border: '2px solid black',
 						borderRadius: '.5rem',
 						padding: '0 1rem',
+						backgroundColor: 'rgba(255,255,255,.9)',
 					}}
 				>
 					{trainer ? (
@@ -129,6 +126,9 @@ export const LineUpSelection = ({
 						alignItems: 'center',
 						gap: '1rem',
 						gridTemplateColumns: '1fr 1fr 1fr',
+						backgroundColor: 'rgba(255,255,255,.9)',
+						padding: '1rem',
+						borderRadius: '.5rem',
 					}}
 				>
 					{opponents.map((opponent) => (
@@ -157,6 +157,9 @@ export const LineUpSelection = ({
 						gridTemplateColumns: '1fr 1fr 1fr',
 						columnGap: '2rem',
 						rowGap: '.5rem',
+						backgroundColor: 'rgba(255,255,255,.9)',
+						padding: '1rem',
+						borderRadius: '.5rem',
 					}}
 				>
 					{team
@@ -193,7 +196,12 @@ export const LineUpSelection = ({
 						))}
 				</div>
 
-				<div style={{ display: 'flex', gap: '1rem' }}>
+				<div
+					style={{
+						display: 'flex',
+						gap: '1rem',
+					}}
+				>
 					<button
 						autoFocus
 						onClick={startBattle}
