@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import { portraitMode } from '../../constants/gameData/gameData';
 import './Card.css';
 
 export const Card = ({
@@ -40,7 +41,14 @@ export const Card = ({
 		>
 			<div>{icon}</div>
 			<div>{content}</div>
-			<div className="actionElements">
+			<div
+				style={{
+					display: 'flex',
+					gap: '.5rem',
+					alignItems: 'center',
+					flexDirection: portraitMode ? 'row' : 'column',
+				}}
+			>
 				{actionElements.map((a, i) => (
 					<React.Fragment key={i}>{a}</React.Fragment>
 				))}

@@ -313,7 +313,7 @@ export const Overworld = () => {
 					<canvas
 						id={playerCanvasId}
 						height={baseSize * 1.5}
-						style={{ marginTop: -32 }}
+						style={{ marginTop: -baseSize * 0.5 }}
 						width={baseSize}
 					/>
 					<FollowerSprite map={map} occupants={occupants} />

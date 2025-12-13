@@ -38,7 +38,8 @@ export const Sprite = ({
 				}
 			}}
 			width={baseSize}
-			height={baseSize}
+			height={baseSize * 1.5}
+			style={{ marginTop: -baseSize * 0.5 }}
 			onClick={onClick}
 			id={canvasKey}
 		></canvas>
