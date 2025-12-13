@@ -25,7 +25,16 @@ export const VersionSelection = (): JSX.Element => {
 							name={'teddiursa'}
 						/>
 					}
-					content={<h3>Kuma</h3>}
+					content={
+						<div>
+							<h3>Kuma</h3>
+							<h4>
+								Battle,raise Pokemon, farm, forage and expand your research camp
+							</h4>
+							<h4>Over 400 Quests</h4>
+							<h4>Configure the game to your play style</h4>
+						</div>
+					}
 					actionElements={[]}
 					onClick={() => setVersion('KUMA')}
 				></Card>
@@ -33,7 +42,13 @@ export const VersionSelection = (): JSX.Element => {
 					icon={
 						<PokemonSprite config={{ officalArtwork: true }} name={'unown'} />
 					}
-					content={<h3>Labyrinth</h3>}
+					content={
+						<div>
+							<h3>Labyrinth</h3>
+							<h4>Lead a young trainer and his Pokemon back to safety</h4>
+							<h4>Fast paced roguelike game</h4>
+						</div>
+					}
 					actionElements={[]}
 					onClick={() => setVersion('LABYRINTH')}
 				></Card>

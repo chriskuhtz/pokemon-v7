@@ -28,7 +28,9 @@ export const maybeGetHeldItemFromData = (
 		chance: h.version_details[0].rarity,
 	}));
 
-	const filteredItems = possibleItems.filter((p) => Math.random() <= p.chance);
+	const filteredItems = possibleItems.filter(
+		(p) => Math.random() <= p.chance / 100
+	);
 
 	if (filteredItems.length > 0) {
 		const chosen = filteredItems[0].name;
