@@ -18,6 +18,7 @@ const thirdDialogue = 'lab1-third-dialogue';
 const firstHiddenItem = 'lab1-first-hidden-item';
 
 const firstItem = 'lab1-first-item';
+const secondItem = 'lab1-second-item';
 
 const firstRandomItem = 'lab1-first-random-item';
 const secondRandomItem = 'lab1-second-random-item';
@@ -30,10 +31,10 @@ const secondChallenger = 'lab1-second-challenger';
 const labyrinthSuccess = 'labyrinth-success';
 
 const itemOptions: ItemType[] = [
-	'poke-ball',
 	'ether',
 	'pecha-berry',
 	'berry-juice',
+	'rare-candy',
 ];
 
 export const labyrinthLevel1Occupants: OverworldMap['occupants'] = [
@@ -137,8 +138,8 @@ export const labyrinthLevel1Occupants: OverworldMap['occupants'] = [
 	},
 	{
 		type: 'RANDOM_ITEM',
-		options: itemOptions,
-		amount: 4,
+		options: ['poke-ball'],
+		amount: 5,
 		x: 5,
 		y: 18,
 		id: thirdRandomItem,
@@ -170,10 +171,7 @@ export const labyrinthLevel1Occupants: OverworldMap['occupants'] = [
 		orientation: 'RIGHT',
 		id: firstChallenger,
 		conditionFunction: (s) => !occupantHandled(s, firstChallenger),
-		dialogue: [
-			'Mankey is trying to open the supply chest',
-			'The startled Mankey attacks',
-		],
+		dialogue: ['Mankey is trying to open the supply chest', 'You startled it'],
 		encounter: {
 			name: 'mankey',
 			maxXp: 8 * 8 * 8,
@@ -196,6 +194,16 @@ export const labyrinthLevel1Occupants: OverworldMap['occupants'] = [
 			minXp: 10 * 10 * 10,
 			rarity: 'common',
 		},
+	},
+
+	{
+		type: 'ITEM',
+		x: 6,
+		y: 16,
+		id: secondItem,
+		item: 'lava-cookie',
+		amount: 2,
+		conditionFunction: (s) => !occupantHandled(s, secondItem),
 	},
 	{
 		x: 8,

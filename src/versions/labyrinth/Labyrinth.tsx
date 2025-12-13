@@ -73,9 +73,9 @@ export const Labyrinth = (): JSX.Element => {
 			internalDex={labyrinthDex}
 			settingsEditable={false}
 			losingMessages={{
-				training: 'Tom and Wilson were never seen again ...',
-				wild: 'Tom and Wilson were never seen again ...',
-				reset: 'Tom and Wilson were never seen again ...',
+				training: 'Young Tom was never seen again ...',
+				wild: 'Young Tom was never seen again ...',
+				reset: 'Young Tom was never seen again ...',
 			}}
 		/>
 	);

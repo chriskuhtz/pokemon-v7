@@ -106,6 +106,7 @@ const ItemsFilterButtons = ({
 }) => {
 	return (
 		<SelectionBar
+			allowUndefined
 			options={[...itemfilterNames.map((i) => ({ key: i, label: i }))]}
 			selected={itemsFilter}
 			select={(x) => setFilter(x as ItemsFilterType)}

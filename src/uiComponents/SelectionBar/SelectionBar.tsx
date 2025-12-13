@@ -5,10 +5,12 @@ export const SelectionBar = ({
 	options,
 	select,
 	selected,
+	allowUndefined,
 }: {
 	options: { key: string; label: string }[];
-	select: (x: string) => void;
+	select: (x: string | undefined) => void;
 	selected: string | undefined;
+	allowUndefined: boolean;
 }) => {
 	return (
 		<Stack mode={'row'}>
@@ -20,7 +22,13 @@ export const SelectionBar = ({
 							whiteSpace: 'nowrap',
 							textDecoration: selected === o.key ? 'underline' : undefined,
 						}}
-						onClick={() => select(o.key)}
+						onClick={() => {
+							if (allowUndefined && o.key === selected) {
+								select(undefined);
+								return;
+							}
+							select(o.key);
+						}}
 					>
 						{o.label}
 					</strong>

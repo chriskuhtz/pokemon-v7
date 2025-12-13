@@ -36,7 +36,7 @@ export const HeldItemSelection = ({
 				.map((item) => (
 					<ItemSelectionOption
 						item={item as ItemType}
-						isSelected={true}
+						isSelected={item === heldItem}
 						toggle={(x) => giveHeldItem(x as ItemType)}
 					/>
 				))}

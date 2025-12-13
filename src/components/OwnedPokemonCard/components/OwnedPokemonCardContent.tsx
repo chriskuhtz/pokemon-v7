@@ -64,6 +64,7 @@ export const OwnedPokemonCardContent = ({
 	return (
 		<Stack mode={'column'}>
 			<SelectionBar
+				allowUndefined={false}
 				options={[...tabTypes]
 					.filter((t) => {
 						if (t === 'NEW MOVES') {
