@@ -20,7 +20,11 @@ import {
 	ResetSnapshotCard,
 } from '../../components/SnapshotCard/SnapshotCard';
 import { TrainerCard } from '../../components/TrainerCard/TrainerCard';
-import { battleSpriteSize } from '../../constants/gameData/gameData';
+import {
+	battleSpriteSize,
+	challengeFieldId,
+	randomFieldId,
+} from '../../constants/gameData/gameData';
 import { mapsRecord } from '../../constants/gameData/maps/mapsRecord';
 import { fullyHealPokemon } from '../../functions/fullyHealPokemon';
 import { questMenuAvailable } from '../../functions/questMenuAvailable';
@@ -65,7 +69,8 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 					/>
 				)}
 				<FlyingButton />
-				{questMenuAvailable(location.mapId) && (
+				{(location.mapId == challengeFieldId ||
+					location.mapId == randomFieldId) && (
 					<Card
 						onClick={() => {
 							setLocation({
@@ -108,19 +113,18 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 					icon={<MdCatchingPokemon size={battleSpriteSize} />}
 					actionElements={[]}
 				/>
-				{!questMenuAvailable(location.mapId) &&
-					!saveFile.settings?.questsTabHidden && (
-						<Card
-							onClick={() => navigate('MAIN', 'QUESTS')}
-							content={<h4>Quests</h4>}
-							icon={<GoTasklist size={battleSpriteSize} />}
-							actionElements={
-								numberOfUncollected > 0
-									? [<strong>Uncollected: {numberOfUncollected}</strong>]
-									: []
-							}
-						/>
-					)}
+				{questMenuAvailable(location.mapId, saveFile.settings) && (
+					<Card
+						onClick={() => navigate('MAIN', 'QUESTS')}
+						content={<h4>Quests</h4>}
+						icon={<GoTasklist size={battleSpriteSize} />}
+						actionElements={
+							numberOfUncollected > 0
+								? [<strong>Uncollected: {numberOfUncollected}</strong>]
+								: []
+						}
+					/>
+				)}
 				<Card
 					onClick={() => navigate('MAIN', 'INTERNAL_DEX')}
 					content={<h4>Pokedex</h4>}

@@ -22,7 +22,7 @@ export const UncollectedQuestsBadge = ({
 		saveFile: { settings },
 	} = useContext(SaveFileContext);
 
-	if (questMenuAvailable(mapId) && !settings?.questsTabHidden) {
+	if (!questMenuAvailable(mapId, settings)) {
 		return <></>;
 	}
 	return (
