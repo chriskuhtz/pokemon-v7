@@ -56,10 +56,12 @@ export const ItemSelectionListModal = ({
 
 export const ItemSelectionOption = ({
 	item,
+	label,
 	isSelected,
 	toggle,
 }: {
 	item: ItemType;
+	label?: string;
 	isSelected: boolean;
 	toggle: (o: ItemType) => void;
 }) => {
@@ -84,7 +86,7 @@ export const ItemSelectionOption = ({
 				onClick={() => toggle(item)}
 			>
 				<ItemSprite item={item} />
-				{item}
+				{label ?? item}
 			</button>
 			<ItemInfoButton itemName={item} />
 		</div>

@@ -22,6 +22,7 @@ export function EnemyLane({
 			style={{
 				display: 'flex',
 				alignItems: portraitMode ? 'flex-end' : 'center',
+				justifyContent: portraitMode ? undefined : 'space-between',
 				flexDirection: portraitMode ? 'column' : 'row',
 			}}
 		>

@@ -24,6 +24,7 @@ export const HeldItemSelection = ({
 		<Stack mode="column">
 			{heldItem && (
 				<ItemSelectionOption
+					label={`take ${heldItem}`}
 					item={heldItem}
 					isSelected={true}
 					toggle={takeHeldItem}
@@ -32,7 +33,7 @@ export const HeldItemSelection = ({
 			{Object.entries(bag)
 				.filter(([item, amount]) => !isKeyItem(item) && amount > 0)
 				.map(([item]) => item)
-				.filter((s) => s !== undefined)
+				.filter((s) => s !== undefined && s !== heldItem)
 				.map((item) => (
 					<ItemSelectionOption
 						item={item as ItemType}
