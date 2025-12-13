@@ -38,8 +38,18 @@ export const useDrawCharacter = (
 		const img = new Image();
 
 		img.addEventListener('load', () => {
-			ctx?.clearRect(0, 0, baseSize, baseSize);
-			ctx?.drawImage(img, -xOffset, -yOffset, 64, 64, 0, 0, baseSize, baseSize);
+			ctx?.clearRect(0, 0, baseSize, baseSize * 1.5);
+			ctx?.drawImage(
+				img,
+				-xOffset,
+				-yOffset,
+				64,
+				64,
+				0,
+				0,
+				baseSize,
+				baseSize * 1.5
+			);
 		});
 
 		img.src = `/npcs/${playerSprite}.png`;

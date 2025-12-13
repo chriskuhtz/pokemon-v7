@@ -615,6 +615,7 @@ export const extraFeatureCheckList: {
 	},
 	{ name: 'move chuck and move tutor out of battle pit' },
 	{ name: 'music' },
+	{ name: 'fix npcs in front of player problem' },
 	//FEATURES:
 	{ name: 'eggs?' },
 	{ name: 'Fishing?' },

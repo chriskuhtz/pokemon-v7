@@ -22,6 +22,7 @@ import { useShader } from '../../hooks/useShader';
 import { useStaticEncounter } from '../../hooks/useStaticEncounter';
 import { useStrangeTree } from '../../hooks/useStrangeTree';
 import { useZigzagoonForagers } from '../../hooks/useZigzagoonForagers';
+import { Occupant } from '../../interfaces/Occupant';
 import { OverworldMap } from '../../interfaces/OverworldMap';
 import './Overworld.css';
 import { ClickerGrid } from './components/ClickerGrid';
@@ -41,7 +42,6 @@ import { useOccupants } from './hooks/useOccupants';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
 import { useSledgeHammer } from './hooks/useSledgeHammer';
 import { useStartEncounter } from './hooks/useStartEncounter';
-import { Occupant } from '../../interfaces/Occupant';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -310,7 +310,12 @@ export const Overworld = () => {
 						height={height * baseSize}
 						width={width * baseSize}
 					/>
-					<canvas id={playerCanvasId} height={baseSize} width={baseSize} />
+					<canvas
+						id={playerCanvasId}
+						height={baseSize * 1.5}
+						style={{ marginTop: -32 }}
+						width={baseSize}
+					/>
 					<FollowerSprite map={map} occupants={occupants} />
 
 					<canvas

@@ -101,13 +101,25 @@ const drawOccupant = (
 			case 'NURSE':
 			case 'NPC':
 			case 'TRAINER':
-			case 'POKEMON':
+			case 'ROUTER_NPC':
+			case 'TELEPORTER_NPC':
+				ctx?.drawImage(
+					img,
+					0,
+					-getYOffsetFromOrientation(occ.orientation),
+					64,
+					64,
+					baseSize * occ.x,
+					baseSize * occ.y - baseSize * 0.5,
+					baseSize,
+					baseSize * 1.5
+				);
+				break;
 			case 'ZIGZAGOON_FORAGER':
 			case 'DUGTRIO_EXPLORER':
 			case 'SNORLAX':
 			case 'STRANGE_TREE':
-			case 'ROUTER_NPC':
-			case 'TELEPORTER_NPC':
+			case 'POKEMON':
 			case 'ACTIVEPOKEMONSTATUE':
 			case 'POKEMONSTATUE':
 				ctx?.drawImage(
