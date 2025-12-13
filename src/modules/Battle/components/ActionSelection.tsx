@@ -38,20 +38,22 @@ export function ActionSelection({
 	setChosenAction,
 	chooseAction,
 	allTargets,
-	catchingAllowed,
+
 	runningAllowed,
 	battleFieldEffects,
 	disabled,
+	catchingForbiddenReason,
 }: {
 	controlled: BattlePokemon;
 	inventory: Inventory;
 	setChosenAction: (x: ActionType) => void;
 	chooseAction: (x: ChooseActionPayload) => void;
 	allTargets: BattlePokemon[];
-	catchingAllowed: boolean;
+
 	runningAllowed: boolean;
 	battleFieldEffects: BattleFieldEffect[];
 	disabled: boolean;
+	catchingForbiddenReason: string | undefined;
 }) {
 	const [subgroup, setSubGroup] = useState<'MOVES' | 'ITEMS' | undefined>();
 	const {
@@ -79,7 +81,7 @@ export function ActionSelection({
 				if (realAmount <= 0) {
 					return false;
 				}
-				if (isPokeball(item) && catchingAllowed) {
+				if (isPokeball(item)) {
 					return true;
 				}
 				if (settings?.noItemsInBattle) {
@@ -96,13 +98,7 @@ export function ActionSelection({
 						))
 				);
 			}) as [ItemType, number][],
-		[
-			allTargets,
-			catchingAllowed,
-			inventory,
-			playerId,
-			settings?.noItemsInBattle,
-		]
+		[allTargets, inventory, playerId, settings?.noItemsInBattle]
 	);
 
 	const runOrSwitchPossible = useMemo(
@@ -166,10 +162,14 @@ export function ActionSelection({
 								style={{ display: 'flex', alignItems: 'center' }}
 								onClick={() => setChosenAction(item)}
 								key={item}
-								disabled={disabled}
+								disabled={
+									disabled || !!(isPokeball(item) && catchingForbiddenReason)
+								}
 							>
 								<ItemSprite item={item} />
-								{item} ({amount})
+								{isPokeball(item) && catchingForbiddenReason
+									? `${item} (${amount})`
+									: catchingForbiddenReason}
 							</button>
 						);
 					})

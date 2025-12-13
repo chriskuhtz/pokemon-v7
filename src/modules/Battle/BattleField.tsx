@@ -140,13 +140,16 @@ export const BattleField = ({
 		() => !isTrainerBattle && !settings?.noRunningFromBattle,
 		[isTrainerBattle, settings?.noRunningFromBattle]
 	);
-	const catchingAllowed = useMemo(() => {
-		if (settings?.noStorageSystem) {
-			return (
-				saveFile.pokemon.filter((p) => p.onTeam).length < getTeamSize(saveFile)
-			);
+	const catchingForbiddenReason = useMemo(() => {
+		if (
+			settings?.noStorageSystem &&
+			saveFile.pokemon.filter((p) => p.onTeam).length >= getTeamSize(saveFile)
+		) {
+			return 'max. Team Size';
 		}
-		return !isTrainerBattle;
+		if (isTrainerBattle) {
+			return 'Trainer Battle';
+		}
 	}, [isTrainerBattle, saveFile, settings?.noStorageSystem]);
 
 	const [battleRound, setBattleRound] = useState<number>(0);
@@ -841,7 +844,7 @@ export const BattleField = ({
 						targets={pokemon}
 						chooseAction={chooseAction}
 						playerInventory={battleInventory}
-						catchingAllowed={catchingAllowed}
+						catchingForbiddenReason={catchingForbiddenReason}
 						runningAllowed={runningAllowed}
 						battleFieldEffects={battleFieldEffects}
 						weather={battleWeather}

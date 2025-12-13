@@ -21,7 +21,7 @@ export function ControlBar({
 	targets,
 	chooseAction,
 	playerInventory,
-	catchingAllowed,
+	catchingForbiddenReason,
 	runningAllowed,
 	battleFieldEffects,
 	weather,
@@ -32,7 +32,7 @@ export function ControlBar({
 	targets: BattlePokemon[];
 	chooseAction: (x: ChooseActionPayload) => void;
 	playerInventory: Inventory;
-	catchingAllowed: boolean;
+	catchingForbiddenReason: string | undefined;
 	runningAllowed: boolean;
 	battleFieldEffects: BattleFieldEffect[];
 	weather: WeatherType | undefined;
@@ -113,7 +113,7 @@ export function ControlBar({
 				setChosenAction={setChosenAction}
 				inventory={playerInventory}
 				allTargets={targets}
-				catchingAllowed={catchingAllowed}
+				catchingForbiddenReason={catchingForbiddenReason}
 				runningAllowed={runningAllowed}
 				battleFieldEffects={battleFieldEffects}
 			/>
