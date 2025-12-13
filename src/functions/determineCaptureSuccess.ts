@@ -91,7 +91,11 @@ export const determineCaptureSuccess = (
 	const healthfactor = 1 - (target.stats.hp - target.damage) / target.stats.hp;
 
 	//between .5 and 0, lower level, better chance
-	const levelFactor = (100 - level) / 200;
+	let levelFactor = (100 - level) / 200;
+	//low level pokemon are full health most of the time and the player only has access to poke balls at the start
+	if (level < 10) {
+		levelFactor *= 2;
+	}
 
 	//between 1 and 0
 	const captureRateFactor = target.capture_rate / 255;
