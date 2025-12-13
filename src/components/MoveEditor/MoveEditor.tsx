@@ -1,8 +1,10 @@
-import { useContext, useState, useCallback, useEffect } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { MoveName } from '../../constants/movesCheckList';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { getCostForLearnMethod } from '../../functions/getCostForLearnMethod';
+import { getMovesArray } from '../../functions/getMovesArray';
 import { moveIsTeachable } from '../../functions/moveIsAvailable';
+import { mapMovesArrayToPokemon } from '../../functions/withChangedMoves';
 import { GameDataContext } from '../../hooks/useGameData';
 import { useGetPokemonData } from '../../hooks/useGetPokemonData';
 import { useLearnableMoves } from '../../hooks/useLearnableMoves';
@@ -37,8 +39,13 @@ export const MoveEditor = ({
 				bag: joinInventories(saveFile.bag, { [payment]: 1 }, true),
 				pokemon: saveFile.pokemon.map((p) => {
 					if (p.id === ownedPokemon.id) {
+						const moves = [
+							...getMovesArray(ownedPokemon),
+							{ name: move, usedPP: 0 },
+						];
+
 						return {
-							...ownedPokemon,
+							...mapMovesArrayToPokemon(ownedPokemon, moves),
 							unlockedMoves: [...ownedPokemon.unlockedMoves, move],
 						};
 					}

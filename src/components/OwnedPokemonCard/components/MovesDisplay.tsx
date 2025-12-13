@@ -192,12 +192,14 @@ const MoveDisplayListEntry = ({
 					? []
 					: [
 							<FaArrowUp
+								key={`${o}UP`}
 								onClick={(e) => {
 									e.stopPropagation();
 									reorder('UP');
 								}}
 							/>,
 							<FaArrowDown
+								key={`${o}DOWN`}
 								onClick={(e) => {
 									e.stopPropagation();
 									reorder('DOWN');
