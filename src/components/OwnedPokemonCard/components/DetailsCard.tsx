@@ -83,7 +83,8 @@ export const DetailsCard = ({
 			<h4>{ownedPokemon.starter ? 'Your first Pokemon' : ''}</h4>
 
 			{saveFile.settings?.releasePokemonInTeamOverview &&
-				saveFile.pokemon.length > 0 && (
+				saveFile.pokemon.length > 1 &&
+				!ownedPokemon.starter && (
 					<button
 						onClick={() => {
 							patchSaveFileReducer({

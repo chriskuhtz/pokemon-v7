@@ -604,6 +604,7 @@ export const extraFeatureCheckList: {
 	{ name: 'release pokemon in Team Overview', handled: true },
 	{ name: 'struggle', handled: true },
 	{ name: 'battle backgrounds prototype', handled: true },
+	{ name: 'Labyrinth level 2', handled: true },
 	//BUGS/IMPROVEMENTS:
 	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },
@@ -649,8 +650,9 @@ export const extraFeatureCheckList: {
 	{ name: 'random evolutions' },
 	{ name: 'nuzlocke mode' },
 	//LABYRINTH MODE:
+	{ name: 'only show story dialogue twice' },
 	{ name: 'transfer team to kuma after win' },
-	{ name: 'Labyrinth level 2' },
+
 	{ name: 'Labyrinth level 3' },
 	{ name: 'Labyrinth level 4' },
 	{ name: 'Labyrinth level 5' },

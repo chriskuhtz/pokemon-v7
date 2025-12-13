@@ -327,6 +327,16 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		item: ItemType,
 		move?: MoveName
 	) => {
+		if (
+			(item === 'ether' ||
+				item === 'max-ether' ||
+				item === 'pp-max' ||
+				item === 'pp-up' ||
+				item === 'leppa-berry') &&
+			!move
+		) {
+			return;
+		}
 		const updatedPokemon = applyItemToPokemon(pokemon, item, addMessage, move);
 		const updatedInventory = joinInventories(saveFile.bag, { [item]: 1 }, true);
 		setSaveFile({
