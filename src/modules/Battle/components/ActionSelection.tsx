@@ -124,7 +124,6 @@ export function ActionSelection({
 						considerTorment: true,
 						considerTaunt: true,
 						considerEncore: true,
-						filterOutEmpty: true,
 					}).map((m) => (
 						<MoveCard
 							pokemon={controlled}
