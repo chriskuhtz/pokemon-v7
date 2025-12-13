@@ -57,6 +57,7 @@ const startingSaveFileLabyrinth: SaveFile = {
 		noStorageSystem: true,
 		questsTabHidden: true,
 		releasePokemonInTeamOverview: true,
+		hideMovementButtons: true,
 	},
 };
 export const Labyrinth = (): JSX.Element => {

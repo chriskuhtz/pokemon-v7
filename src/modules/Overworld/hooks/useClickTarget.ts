@@ -6,11 +6,11 @@ import { isPassable } from '../../../functions/isPassable';
 import { LocationContext } from '../../../hooks/LocationProvider';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
+import { Occupant } from '../../../interfaces/Occupant';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
 import { Pathfinder, PathfindingApproach } from '../../../model/Pathfinder';
 import { Vector2 } from '../../../model/Vector2';
-import { Occupant } from '../../../interfaces/Occupant';
 
 export const useClickTarget = (
 	assembledMap: OverworldMap,
@@ -106,6 +106,8 @@ export const useClickTarget = (
 		const occupantMet =
 			occ &&
 			occ?.type !== 'ON_STEP_PORTAL' &&
+			occ?.type !== 'ON_STEP_DIALOGUE' &&
+			occ?.type !== 'ON_STEP_ROUTER' &&
 			getOverworldDistance(clickTarget, location) === 1;
 		const targetReached = nextDirection.toString() === Vector2.ZERO.toString();
 
