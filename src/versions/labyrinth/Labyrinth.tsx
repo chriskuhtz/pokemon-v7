@@ -89,6 +89,12 @@ export const Labyrinth = (): JSX.Element => {
 					failDialogue: ['A strong bug pokemon might be able to cut this'],
 				},
 			}}
+			carryingCapacity={{
+				base: { amount: 40 },
+				second: undefined,
+				third: undefined,
+				fourth: undefined,
+			}}
 		/>
 	);
 };

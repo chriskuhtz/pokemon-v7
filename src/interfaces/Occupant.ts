@@ -14,7 +14,7 @@ import {
 export const OCCUPANT_TYPES = [
 	'ITEM',
 	'HIDDEN_ITEM',
-	'RANDOM_ITEM',
+	'CHEST',
 	'PC',
 	'MERCHANT',
 	'NURSE',
@@ -69,10 +69,9 @@ export interface OverworldHiddenItem extends BaseOccupant {
 	item: ItemType;
 	amount: number;
 }
-export interface OverworldRandomItem extends BaseOccupant {
-	type: 'RANDOM_ITEM';
-	options: ItemType[];
-	amount: number;
+export interface OverworldChest extends BaseOccupant {
+	type: 'CHEST';
+	contents: ItemType[];
 }
 export interface OverworldPC extends BaseOccupant {
 	type: 'PC';
@@ -252,7 +251,7 @@ export interface OverworldPokeball extends BaseOccupant {
 export type Occupant =
 	| OverworldItem
 	| OverworldHiddenItem
-	| OverworldRandomItem
+	| OverworldChest
 	| OverworldPC
 	| OverworldMerchant
 	| OverworldNurse

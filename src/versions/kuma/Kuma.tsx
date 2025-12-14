@@ -104,6 +104,21 @@ export const Kuma = (): JSX.Element => {
 					],
 				},
 			}}
+			carryingCapacity={{
+				base: { amount: 20 },
+				second: {
+					amount: 30,
+					condition: (s) => s.campUpgrades['bag size upgrade 1'],
+				},
+				third: {
+					amount: 40,
+					condition: (s) => s.campUpgrades['bag size upgrade 2'],
+				},
+				fourth: {
+					amount: 50,
+					condition: (s) => s.campUpgrades['bag size upgrade 3'],
+				},
+			}}
 		/>
 	);
 };

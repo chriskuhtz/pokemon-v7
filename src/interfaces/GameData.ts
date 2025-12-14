@@ -36,4 +36,19 @@ export interface GameData {
 		numberOfBallsBadge: boolean;
 	};
 	overworldActions: OverworldActions;
+	carryingCapacity: {
+		base: { amount: number };
+		second:
+			| { amount: number; condition: (saveFile: SaveFile) => boolean }
+			| undefined;
+		third:
+			| { amount: number; condition: (saveFile: SaveFile) => boolean }
+			| undefined;
+		fourth:
+			| {
+					amount: number;
+					condition: (saveFile: SaveFile) => boolean;
+			  }
+			| undefined;
+	};
 }

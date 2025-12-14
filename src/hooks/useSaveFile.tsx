@@ -16,6 +16,7 @@ import { PokemonName } from '../constants/pokemonNames';
 import { addPokemonToDex } from '../functions/addPokemonToDex';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
+import { ArrayHelpers } from '../functions/ArrayHelpers';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
 import { getBagLimit, getTotalInventoryAmount } from '../functions/getBagLimit';
 import { getItemUrl } from '../functions/getItemUrl';
@@ -24,7 +25,11 @@ import { TimeOfDay } from '../functions/getTimeOfDay';
 import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { updateItemFunction } from '../functions/updateItemFunction';
 import { Challenger } from '../interfaces/Challenger';
-import { EmptyInventory, joinInventories } from '../interfaces/Inventory';
+import {
+	EmptyInventory,
+	Inventory,
+	joinInventories,
+} from '../interfaces/Inventory';
 import { ItemType } from '../interfaces/Item';
 import { Occupant } from '../interfaces/Occupant';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
@@ -136,9 +141,9 @@ const migrateSavefile = (input: SaveFile) => {
 };
 
 const useSaveFile = (init: SaveFile): UseSaveFile => {
-	const { addMessage } = useContext(MessageQueueContext);
-	const { saveFileId, startingRouterSequence, startingSaveFile } =
-		useContext(GameDataContext);
+	const { addMessage, addMultipleMessages } = useContext(MessageQueueContext);
+	const gameData = useContext(GameDataContext);
+	const { saveFileId, startingRouterSequence, startingSaveFile } = gameData;
 	const local = window.localStorage.getItem(saveFileId);
 	const loaded = local ? migrateSavefile(JSON.parse(local) as SaveFile) : init;
 
@@ -283,16 +288,62 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		if (occ.type === 'NPC' && occ.gifts) {
 			newInventory = joinInventories(newInventory, occ.gifts);
 		}
+		if (occ.type === 'CHEST') {
+			const { contents } = occ;
+
+			const totalItemAmount = contents.length;
+
+			const contentsWithAmounts = [];
+			let remainingAmount = totalItemAmount;
+			let index = 0;
+
+			while (remainingAmount > 0 && index < contents.length) {
+				const randomAmount = ArrayHelpers.getRandomEntry([0, 1, 2, 3, 4, 5]);
+
+				const actualAmount = Math.min(randomAmount, remainingAmount);
+				contentsWithAmounts.push([contents[index], actualAmount]);
+				index++;
+				remainingAmount -= actualAmount;
+			}
+
+			const withAmounts: Partial<Inventory> =
+				Object.fromEntries(contentsWithAmounts);
+			newInventory = joinInventories(newInventory, withAmounts);
+
+			if (
+				getTotalInventoryAmount(newInventory) > getBagLimit(saveFile, gameData)
+			) {
+				addMessage({
+					message: `Your Bag is full, cant carry the ${totalItemAmount} items from this chest`,
+					needsNoConfirmation: true,
+				});
+				return;
+			} else {
+				addMultipleMessages(
+					contentsWithAmounts
+						.filter((entry) => entry[1])
+						.map((entry) => ({
+							icon: (
+								<img
+									src={getItemUrl(entry[0] as ItemType)}
+									height={battleSpriteSize}
+								/>
+							),
+							message: `Found ${entry[1]} ${entry[0]}`,
+							needsNoConfirmation: true,
+						}))
+				);
+			}
+		}
 		if (occ.type === 'ITEM' || occ.type === 'HIDDEN_ITEM') {
 			const { item, amount } = occ;
 			newInventory = joinInventories(newInventory, { [item]: amount });
 
 			if (
-				getTotalInventoryAmount(newInventory) >
-				getBagLimit(saveFile.campUpgrades)
+				getTotalInventoryAmount(newInventory) > getBagLimit(saveFile, gameData)
 			) {
 				addMessage({
-					message: 'Your Bag is full,  cant carry more items',
+					message: `Your Bag is full,  cant carry ${amount} more items`,
 					needsNoConfirmation: true,
 				});
 				return;

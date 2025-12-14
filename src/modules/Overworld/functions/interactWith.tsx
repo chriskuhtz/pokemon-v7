@@ -1,6 +1,5 @@
 import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
 import { SpriteIcon } from '../../../components/SpriteIcon/SpriteIcon';
-import { ArrayHelpers } from '../../../functions/ArrayHelpers';
 import { getOppositeDirection } from '../../../functions/getOppositeDirection';
 import { Message } from '../../../hooks/useMessageQueue';
 import { getRandomItem } from '../../../interfaces/Item';
@@ -10,7 +9,6 @@ import {
 	Occupant,
 	OccupantType,
 	OverworldBush,
-	OverworldItem,
 	OverworldPokemon,
 	OverworldRock,
 	OverworldSnorlax,
@@ -184,21 +182,8 @@ export const interactWithFunction = ({
 
 		return;
 	}
-	if (data.type === 'RANDOM_ITEM') {
-		const randomItem = settings?.randomOverworldItems
-			? { item: getRandomItem(), amount: data.amount }
-			: {
-					amount: data.amount,
-					item: ArrayHelpers.getRandomEntry(data.options),
-			  };
-
-		const checkedData: OverworldItem = {
-			...data,
-			...randomItem,
-			type: 'ITEM',
-		};
-
-		handleThisOccupant(checkedData);
+	if (data.type === 'CHEST') {
+		handleThisOccupant(data);
 
 		return;
 	}

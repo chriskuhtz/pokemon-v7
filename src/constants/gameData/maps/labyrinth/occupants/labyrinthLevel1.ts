@@ -1,4 +1,5 @@
 import { v4 } from 'uuid';
+import { makeOverworldChest } from '../../../../../functions/makeOverworldItem';
 import { occupantHandled } from '../../../../../functions/occupantHandled';
 import { ItemType } from '../../../../../interfaces/Item';
 import { getRandomNature } from '../../../../../interfaces/Natures';
@@ -20,19 +21,16 @@ const firstHiddenItem = 'lab1-first-hidden-item';
 const firstItem = 'lab1-first-item';
 const secondItem = 'lab1-second-item';
 
-const firstRandomItem = 'lab1-first-random-item';
-const secondRandomItem = 'lab1-second-random-item';
-const thirdRandomItem = 'lab1-third-random-item';
-const fourthRandomItem = 'lab1-fourth-random-item';
-
 const firstChallenger = 'lab1-first-challenger';
 const secondChallenger = 'lab1-second-challenger';
 
 const itemOptions: ItemType[] = [
-	'ether',
+	'poke-ball',
+	'potion',
 	'pecha-berry',
 	'berry-juice',
-	'rare-candy',
+	'oran-berry',
+	'ether',
 ];
 
 export const labyrinthLevel1Occupants: OverworldMap['occupants'] = [
@@ -118,42 +116,30 @@ export const labyrinthLevel1Occupants: OverworldMap['occupants'] = [
 		amount: 1,
 		conditionFunction: (s) => !occupantHandled(s, firstHiddenItem),
 	},
-	{
-		type: 'RANDOM_ITEM',
-		options: itemOptions,
-		amount: 2,
+	makeOverworldChest({
 		x: 3,
 		y: 1,
-		id: firstRandomItem,
-		conditionFunction: (s) => !occupantHandled(s, firstRandomItem),
-	},
-	{
-		type: 'RANDOM_ITEM',
-		options: itemOptions,
-		amount: 3,
+		contents: itemOptions,
+		mapId: 'labyrinth_level_1',
+	}),
+	makeOverworldChest({
 		x: 14,
 		y: 18,
-		id: secondRandomItem,
-		conditionFunction: (s) => !occupantHandled(s, secondRandomItem),
-	},
-	{
-		type: 'RANDOM_ITEM',
-		options: ['poke-ball'],
-		amount: 5,
-		x: 5,
-		y: 18,
-		id: thirdRandomItem,
-		conditionFunction: (s) => !occupantHandled(s, thirdRandomItem),
-	},
-	{
-		type: 'RANDOM_ITEM',
-		options: itemOptions,
-		amount: 2,
+		contents: itemOptions,
+		mapId: 'labyrinth_level_1',
+	}),
+	makeOverworldChest({
 		x: 18,
 		y: 1,
-		id: fourthRandomItem,
-		conditionFunction: (s) => !occupantHandled(s, fourthRandomItem),
-	},
+		contents: itemOptions,
+		mapId: 'labyrinth_level_1',
+	}),
+	makeOverworldChest({
+		x: 5,
+		y: 18,
+		contents: itemOptions,
+		mapId: 'labyrinth_level_1',
+	}),
 	{
 		type: 'ITEM',
 		x: 4,

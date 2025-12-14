@@ -1,7 +1,6 @@
 import { MapId } from '../constants/gameData/maps/mapsRecord';
 import { ItemType } from '../interfaces/Item';
-import { OverworldItem, OverworldRandomItem } from '../interfaces/Occupant';
-import { ArrayHelpers } from './ArrayHelpers';
+import { OverworldChest, OverworldItem } from '../interfaces/Occupant';
 import { occupantHandled } from './occupantHandled';
 
 export const makeOverworldItem = ({
@@ -31,25 +30,24 @@ export const makeOverworldItem = ({
 	};
 };
 
-export const makeOverworldRandomItem = ({
+export const makeOverworldChest = ({
 	x,
 	y,
-	options,
+	contents,
 	mapId,
 }: {
 	x: number;
 	y: number;
-	options: ItemType[];
+	contents: ItemType[];
 	mapId: MapId;
-}): OverworldRandomItem => {
-	const id = options.join() + x + y + mapId;
+}): OverworldChest => {
+	const id = contents.join() + x + y + mapId;
 	return {
 		id: id,
-		type: 'RANDOM_ITEM',
+		type: 'CHEST',
 		x,
 		y,
 		conditionFunction: (s) => !occupantHandled(s, id),
-		options,
-		amount: ArrayHelpers.getRandomEntry([1, 2, 3, 4, 5]),
+		contents,
 	};
 };

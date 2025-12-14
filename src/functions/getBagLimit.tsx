@@ -1,21 +1,25 @@
+import { GameData } from '../interfaces/GameData';
 import { Inventory } from '../interfaces/Inventory';
 import { SaveFile } from '../interfaces/SaveFile';
 
 export const getTotalInventoryAmount = (inventory: Inventory): number => {
 	return Object.values(inventory).reduce((sum, summand) => sum + summand, 0);
 };
-export const getBagLimit = (campUpgrades: SaveFile['campUpgrades']): number => {
-	if (campUpgrades['bag size upgrade 3']) {
-		return 50;
+export const getBagLimit = (saveFile: SaveFile, gameData: GameData): number => {
+	const {
+		carryingCapacity: { base, second, third, fourth },
+	} = gameData;
+	if (fourth?.condition(saveFile)) {
+		return fourth.amount;
 	}
-	if (campUpgrades['bag size upgrade 2']) {
-		return 40;
+	if (third?.condition(saveFile)) {
+		return third.amount;
 	}
-	if (campUpgrades['bag size upgrade 1']) {
-		return 30;
+	if (second?.condition(saveFile)) {
+		return second.amount;
 	}
-	return 20;
+	return base.amount;
 };
-export const isBagOverloaded = (s: SaveFile): boolean => {
-	return getTotalInventoryAmount(s.bag) > getBagLimit(s.campUpgrades);
+export const isBagOverloaded = (s: SaveFile, gameData: GameData): boolean => {
+	return getTotalInventoryAmount(s.bag) > getBagLimit(s, gameData);
 };

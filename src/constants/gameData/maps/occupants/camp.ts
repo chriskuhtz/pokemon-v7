@@ -3,6 +3,7 @@ import { getHistorianMessage } from '../../../../functions/getHistorianMessage';
 import { getRandomOrientation } from '../../../../functions/getNextClockwiseDirection';
 import { makeApricornTree } from '../../../../functions/makeApricornTree';
 import { zigzagoonForagers } from '../../../../hooks/useZigzagoonForagers';
+import { GameData } from '../../../../interfaces/GameData';
 import { Occupant } from '../../../../interfaces/Occupant';
 import { OverworldMap } from '../../../../interfaces/OverworldMap';
 import { SpriteEnum } from '../../../../interfaces/SpriteEnum';
@@ -87,6 +88,22 @@ const trainingField: Occupant[] = [
 	battleJournalist,
 ];
 
+const kumaCarryingCapa: GameData['carryingCapacity'] = {
+	base: { amount: 20 },
+	second: {
+		amount: 30,
+		condition: (s) => s.campUpgrades['bag size upgrade 1'],
+	},
+	third: {
+		amount: 40,
+		condition: (s) => s.campUpgrades['bag size upgrade 2'],
+	},
+	fourth: {
+		amount: 50,
+		condition: (s) => s.campUpgrades['bag size upgrade 3'],
+	},
+};
+
 export const campOccupants: OverworldMap['occupants'] = [
 	{
 		type: 'ON_STEP_PORTAL',
@@ -128,7 +145,8 @@ export const campOccupants: OverworldMap['occupants'] = [
 			forwardFoot: 'CENTER1',
 		},
 		id: 'camp_to_routeN1',
-		conditionFunction: (s) => !isBagOverloaded(s),
+		conditionFunction: (s) =>
+			!isBagOverloaded(s, { carryingCapacity: kumaCarryingCapa } as GameData),
 	},
 	{
 		type: 'NPC',
@@ -141,7 +159,8 @@ export const campOccupants: OverworldMap['occupants'] = [
 		id: 'bag_blocker_N1',
 		sprite: SpriteEnum.scientistMale,
 		orientation: 'DOWN',
-		conditionFunction: (s) => isBagOverloaded(s),
+		conditionFunction: (s) =>
+			isBagOverloaded(s, { carryingCapacity: kumaCarryingCapa } as GameData),
 	},
 	{
 		type: 'ON_STEP_PORTAL',
@@ -155,7 +174,8 @@ export const campOccupants: OverworldMap['occupants'] = [
 			forwardFoot: 'CENTER1',
 		},
 		id: 'camp_to_routeW1',
-		conditionFunction: (s) => !isBagOverloaded(s),
+		conditionFunction: (s) =>
+			!isBagOverloaded(s, { carryingCapacity: kumaCarryingCapa } as GameData),
 	},
 	{
 		type: 'NPC',
@@ -168,7 +188,8 @@ export const campOccupants: OverworldMap['occupants'] = [
 		id: 'bag_blocker_W1',
 		sprite: SpriteEnum.scientistMale,
 		orientation: 'RIGHT',
-		conditionFunction: (s) => isBagOverloaded(s),
+		conditionFunction: (s) =>
+			isBagOverloaded(s, { carryingCapacity: kumaCarryingCapa } as GameData),
 	},
 	{
 		type: 'ON_STEP_PORTAL',
@@ -182,7 +203,8 @@ export const campOccupants: OverworldMap['occupants'] = [
 			forwardFoot: 'CENTER1',
 		},
 		id: 'camp_to_routeS1',
-		conditionFunction: (s) => !isBagOverloaded(s),
+		conditionFunction: (s) =>
+			!isBagOverloaded(s, { carryingCapacity: kumaCarryingCapa } as GameData),
 	},
 	{
 		type: 'ON_STEP_PORTAL',
@@ -196,7 +218,8 @@ export const campOccupants: OverworldMap['occupants'] = [
 			forwardFoot: 'CENTER1',
 		},
 		id: 'camp_to_routeE1',
-		conditionFunction: (s) => !isBagOverloaded(s),
+		conditionFunction: (s) =>
+			!isBagOverloaded(s, { carryingCapacity: kumaCarryingCapa } as GameData),
 	},
 	{
 		type: 'NPC',
@@ -209,7 +232,8 @@ export const campOccupants: OverworldMap['occupants'] = [
 		id: 'bag_blocker_E1',
 		sprite: SpriteEnum.scientistFemale,
 		orientation: 'LEFT',
-		conditionFunction: (s) => isBagOverloaded(s),
+		conditionFunction: (s) =>
+			isBagOverloaded(s, { carryingCapacity: kumaCarryingCapa } as GameData),
 	},
 	{
 		type: 'SIGN',

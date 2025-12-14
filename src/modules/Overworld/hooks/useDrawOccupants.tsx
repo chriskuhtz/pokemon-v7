@@ -224,7 +224,7 @@ const getSource = (occ: Occupant) => {
 		case 'PC':
 			return '/mapObjects/pc.png';
 		case 'STORAGE_CHEST':
-		case 'RANDOM_ITEM':
+		case 'CHEST':
 			return '/mapObjects/chest.png';
 		case 'SIGN':
 			return '/mapObjects/sign.png';

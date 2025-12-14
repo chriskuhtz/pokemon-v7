@@ -1,6 +1,6 @@
 import {
+	makeOverworldChest,
 	makeOverworldItem,
-	makeOverworldRandomItem,
 } from '../../../../../functions/makeOverworldItem';
 import { occupantHandled } from '../../../../../functions/occupantHandled';
 import { ItemType } from '../../../../../interfaces/Item';
@@ -9,13 +9,13 @@ import { OverworldMap } from '../../../../../interfaces/OverworldMap';
 const labyrinthSuccess = 'labyrinth-success';
 
 const itemOptions: ItemType[] = [
-	'ether',
-	'pecha-berry',
-	'berry-juice',
-	'rare-candy',
-	'revive',
-	'nest-ball',
 	'potion',
+	'nest-ball',
+	'berry-juice',
+	'revive',
+	'full-heal',
+	'ether',
+	'rare-candy',
 ];
 
 export const labyrinthLevel2Occupants: OverworldMap['occupants'] = [
@@ -91,46 +91,46 @@ export const labyrinthLevel2Occupants: OverworldMap['occupants'] = [
 			rarity: 'common',
 		},
 	},
-	makeOverworldRandomItem({
+	makeOverworldChest({
 		x: 15,
 		y: 8,
-		options: itemOptions,
+		contents: itemOptions,
 		mapId: 'labyrinth_level_2',
 	}),
-	makeOverworldRandomItem({
+	makeOverworldChest({
 		x: 2,
 		y: 19,
-		options: itemOptions,
+		contents: itemOptions,
 		mapId: 'labyrinth_level_2',
 	}),
-	makeOverworldRandomItem({
+	makeOverworldChest({
 		x: 14,
 		y: 19,
-		options: itemOptions,
+		contents: itemOptions,
 		mapId: 'labyrinth_level_2',
 	}),
-	makeOverworldRandomItem({
+	makeOverworldChest({
 		x: 19,
 		y: 8,
-		options: itemOptions,
+		contents: itemOptions,
 		mapId: 'labyrinth_level_2',
 	}),
-	makeOverworldRandomItem({
+	makeOverworldChest({
 		x: 35,
 		y: 5,
-		options: itemOptions,
+		contents: itemOptions,
 		mapId: 'labyrinth_level_2',
 	}),
-	makeOverworldRandomItem({
+	makeOverworldChest({
 		x: 27,
 		y: 15,
-		options: itemOptions,
+		contents: itemOptions,
 		mapId: 'labyrinth_level_2',
 	}),
-	makeOverworldRandomItem({
+	makeOverworldChest({
 		x: 34,
 		y: 11,
-		options: itemOptions,
+		contents: itemOptions,
 		mapId: 'labyrinth_level_2',
 	}),
 	{

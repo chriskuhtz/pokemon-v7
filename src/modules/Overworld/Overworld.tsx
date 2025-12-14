@@ -11,6 +11,7 @@ import { useApricornTree } from '../../hooks/useApricornTree';
 import { BaseSizeContext } from '../../hooks/useBaseSize';
 import { useDrawForeground } from '../../hooks/useDrawBackground';
 import { useDugtrioExplorers } from '../../hooks/useDugtrioExplorers';
+import { GameDataContext } from '../../hooks/useGameData';
 import { useHallowedTower } from '../../hooks/useHallowedTower';
 import { useHoneyTree } from '../../hooks/useHoneyTree';
 import { useInteractWithClimbingSteps } from '../../hooks/useInteractWithClimbingSteps';
@@ -51,6 +52,7 @@ export const Overworld = () => {
 	const shader = useShader();
 	const [stepsTaken, setStepsTaken] = useState<number>(0);
 	const { baseSize } = useContext(BaseSizeContext);
+	const gameData = useContext(GameDataContext);
 	const { latestMessage, addMultipleMessages } =
 		useContext(MessageQueueContext);
 	const {
@@ -137,7 +139,7 @@ export const Overworld = () => {
 	const interactWith = useCallback(
 		(occ: Occupant | undefined) =>
 			interactWithFunction({
-				overloaded: isBagOverloaded(saveFile),
+				overloaded: isBagOverloaded(saveFile, gameData),
 				activeMessage: !!latestMessage,
 				occ,
 				addMultipleMessages,
@@ -168,6 +170,7 @@ export const Overworld = () => {
 			}),
 		[
 			saveFile,
+			gameData,
 			latestMessage,
 			addMultipleMessages,
 			rotateOccupant,

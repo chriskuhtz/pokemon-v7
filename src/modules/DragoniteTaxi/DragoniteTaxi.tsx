@@ -4,6 +4,7 @@ import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { isBagOverloaded } from '../../functions/getBagLimit';
 import { replaceRouteName } from '../../functions/replaceRouteName';
 import { LocationContext } from '../../hooks/LocationProvider';
+import { GameDataContext } from '../../hooks/useGameData';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { ItemType } from '../../interfaces/Item';
@@ -73,6 +74,7 @@ const taxiLocations: Record<
 export const DragoniteTaxi = (): JSX.Element => {
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
 	const { setLocation } = useContext(LocationContext);
+	const gameData = useContext(GameDataContext);
 
 	const fly = useCallback(
 		({ to }: { to: CharacterLocationData; ticket: ItemType }) => {
@@ -93,7 +95,7 @@ export const DragoniteTaxi = (): JSX.Element => {
 		>
 			<Stack mode="column">
 				<h3>
-					{isBagOverloaded(saveFile)
+					{isBagOverloaded(saveFile, gameData)
 						? 'That is a bit too much equipment, even for dragonite. Drop something off and come back'
 						: 'If you have a ticket, Dragonite will take you anywhere you want'}
 				</h3>
@@ -103,7 +105,7 @@ export const DragoniteTaxi = (): JSX.Element => {
 						disabled={
 							(saveFile.bag[location.ticket] < 1 &&
 								saveFile.storage[location.ticket] < 1) ||
-							isBagOverloaded(saveFile)
+							isBagOverloaded(saveFile, gameData)
 						}
 						onClick={() => fly(location)}
 						actionElements={[<ItemSprite item={'forest-ticket'} />]}
