@@ -1,13 +1,10 @@
-import { portraitMode } from '../../../../../constants/gameData/gameData';
-import {
-	typeColors,
-	typeContrastColors,
-} from '../../../../../constants/typeColors';
-import { PokemonType } from '../../../../../interfaces/PokemonType';
-import { StatObject } from '../../../../../interfaces/StatObject';
-import { AnimatedBar } from '../../../../../uiComponents/AnimatedBar/AnimatedBar';
-import { Chip } from '../../../../../uiComponents/Chip/Chip';
-import { HIDDEN_STATS } from '../StatDisplay';
+import { portraitMode } from '../../../constants/gameData/gameData';
+import { HIDDEN_STATS } from '../../../constants/hiddenStats';
+import { typeColors, typeContrastColors } from '../../../constants/typeColors';
+import { PokemonType } from '../../../interfaces/PokemonType';
+import { StatObject } from '../../../interfaces/StatObject';
+import { AnimatedBar } from '../../../uiComponents/AnimatedBar/AnimatedBar';
+import { Chip } from '../../../uiComponents/Chip/Chip';
 
 export const EVsSection = ({
 	effortValues,

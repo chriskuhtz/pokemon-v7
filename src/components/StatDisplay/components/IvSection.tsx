@@ -1,15 +1,12 @@
-import { portraitMode } from '../../../../../constants/gameData/gameData';
-import { PokemonName } from '../../../../../constants/pokemonNames';
-import {
-	typeColors,
-	typeContrastColors,
-} from '../../../../../constants/typeColors';
-import { sumOfIvs } from '../../../../../functions/sumOfIvs';
-import { PokemonType } from '../../../../../interfaces/PokemonType';
-import { StatObject } from '../../../../../interfaces/StatObject';
-import { AnimatedBar } from '../../../../../uiComponents/AnimatedBar/AnimatedBar';
-import { Chip } from '../../../../../uiComponents/Chip/Chip';
-import { HIDDEN_STATS } from '../StatDisplay';
+import { portraitMode } from '../../../constants/gameData/gameData';
+import { HIDDEN_STATS } from '../../../constants/hiddenStats';
+import { PokemonName } from '../../../constants/pokemonNames';
+import { typeColors, typeContrastColors } from '../../../constants/typeColors';
+import { sumOfIvs } from '../../../functions/sumOfIvs';
+import { PokemonType } from '../../../interfaces/PokemonType';
+import { StatObject } from '../../../interfaces/StatObject';
+import { AnimatedBar } from '../../../uiComponents/AnimatedBar/AnimatedBar';
+import { Chip } from '../../../uiComponents/Chip/Chip';
 
 export const IVsSection = ({
 	intrinsicValues,

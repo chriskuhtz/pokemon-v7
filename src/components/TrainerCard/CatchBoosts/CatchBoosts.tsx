@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { battleSpriteSize } from '../../constants/gameData/gameData';
-import { SaveFileContext } from '../../hooks/useSaveFile';
+import { battleSpriteSize } from '../../../constants/gameData/gameData';
+import { SaveFileContext } from '../../../hooks/useSaveFile';
 
 export const CatchBoosts = (): JSX.Element => {
 	const {

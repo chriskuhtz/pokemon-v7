@@ -1,4 +1,4 @@
-import { HIDDEN_STATS } from '../components/OwnedPokemonCardContent/components/StatDisplay/StatDisplay';
+import { HIDDEN_STATS } from '../constants/hiddenStats';
 import { StatObject } from '../interfaces/StatObject';
 
 export const sumOfIvs = (intrinsicValues: StatObject): number => {

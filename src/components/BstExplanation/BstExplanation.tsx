@@ -1,8 +1,8 @@
 import { maxBst } from '../../constants/baseStatRecord';
+import { HIDDEN_STATS } from '../../constants/hiddenStats';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { PokemonData } from '../../interfaces/PokemonData';
 import { AnimatedBar } from '../../uiComponents/AnimatedBar/AnimatedBar';
-import { HIDDEN_STATS } from '../StatDisplay/StatDisplay';
 
 export const BstExplanation = ({
 	ownedPokemon,

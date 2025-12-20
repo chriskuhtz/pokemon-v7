@@ -14,11 +14,7 @@ import { BugReportButton } from '../../components/BugReport/BugReport';
 import { IdeaButton } from '../../components/IdeaReport/IdeaReport';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
-import {
-	ExportSnapshotCard,
-	ImportSnapshotCard,
-	ResetSnapshotCard,
-} from '../../components/SnapshotCard/SnapshotCard';
+
 import { TrainerCard } from '../../components/TrainerCard/TrainerCard';
 import {
 	battleSpriteSize,
@@ -38,6 +34,9 @@ import { SaveFileContext } from '../../hooks/useSaveFile';
 import { useTeleport } from '../../hooks/useTeleport';
 import { EmptyInventory } from '../../interfaces/Inventory';
 import { RoutesType } from '../../interfaces/Routing';
+import { ExportSnapshotCard } from '../../components/SnapshotCard/ExportSnapshotCard';
+import { ImportSnapshotCard } from '../../components/SnapshotCard/ImportSnapshotCard';
+import { ResetSnapshotCard } from '../../components/SnapshotCard/ResetSnapshotCard';
 
 export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);

@@ -1,11 +1,7 @@
 import { useContext, useState } from 'react';
 import { FaArrowLeft, FaArrowRight, FaSearch } from 'react-icons/fa';
 import { BagLimitBar } from '../../components/BagLimitBar/BagLimitBar';
-import {
-	filterItemsByType,
-	ItemsFilterType,
-	useFilteredInventory,
-} from '../../components/ItemsFilter/ItemsFilter';
+import { useFilteredInventory } from '../../components/ItemsFilter/ItemsFilter';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
 import { battleSpriteSize } from '../../constants/gameData/gameData';
 import { SaveFileContext } from '../../hooks/useSaveFile';
@@ -14,6 +10,8 @@ import { ItemType } from '../../interfaces/Item';
 import { Card } from '../../uiComponents/Card/Card';
 import { Page } from '../../uiComponents/Page/Page';
 import { Stack } from '../../uiComponents/Stack/Stack';
+import { filterItemsByType } from '../../functions/filterItemsByType';
+import { ItemsFilterType } from '../../interfaces/ItemsFilterType';
 
 export const StorageChest = () => {
 	const [search, setSearch] = useState<string>('');

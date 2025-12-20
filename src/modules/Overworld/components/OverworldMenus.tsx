@@ -2,14 +2,12 @@ import { useContext, useEffect, useMemo } from 'react';
 import { CgZoomIn, CgZoomOut } from 'react-icons/cg';
 import { IoMdMenu } from 'react-icons/io';
 import { LureIcon } from '../../../components/LureIcon/LureIcon';
+import { RampagerIcon } from '../../../components/RampagerIcon/RampagerIcon';
 import { RepelIcon } from '../../../components/RepelIcon/RepelIcon';
 import { StreakIcon } from '../../../components/StreakIcon/StreakIcon';
 import { TeamOverview } from '../../../components/TeamOverview/TeamOverview';
 import { TimeOfDayIcon } from '../../../components/TimeOfDayIcon/TimeOfDayIcon';
-import {
-	RampagerIcon,
-	TroubleMakersIcon,
-} from '../../../components/TroubleMakersIcon/TroubleMakersIcon';
+import { TroubleMakersIcon } from '../../../components/TroubleMakersIcon/TroubleMakersIcon';
 import { WeatherIcon } from '../../../components/WeatherIcon/WeatherIcon';
 import {
 	battleSpriteSize,

@@ -1,12 +1,10 @@
-import { OwnedPokemon } from '../../../../interfaces/OwnedPokemon';
-import { PokemonData } from '../../../../interfaces/PokemonData';
-import { Stack } from '../../../../uiComponents/Stack/Stack';
-import { BstSection } from '../../../BstSection/BstSection';
-import { NatureSection } from '../../../NatureSection/NatureSection';
+import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
+import { PokemonData } from '../../interfaces/PokemonData';
+import { Stack } from '../../uiComponents/Stack/Stack';
+import { BstSection } from '../BstSection/BstSection';
+import { NatureSection } from '../NatureSection/NatureSection';
 import { EVsSection } from './components/EvSection';
 import { IVsSection } from './components/IvSection';
-
-export const HIDDEN_STATS = ['accuracy', 'evasion'];
 
 export const StatDisplay = ({
 	ownedPokemon,
