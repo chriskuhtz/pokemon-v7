@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { PokemonName } from '../../../constants/pokemonNames';
 import { byType } from '../../../functions/internalDex';
 import {

@@ -86,8 +86,8 @@ export const labyrinthLevel2Occupants: OverworldMap['occupants'] = [
 		dialogue: ['Ursaring is outraged that you stole its berries'],
 		encounter: {
 			name: 'ursaring',
-			maxXp: 13 * 13 * 13,
-			minXp: 13 * 13 * 13,
+			maxXp: 10 * 10 * 10,
+			minXp: 10 * 10 * 10,
 			rarity: 'common',
 		},
 	},

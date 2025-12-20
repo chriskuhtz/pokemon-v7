@@ -282,7 +282,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 			pokemon = receiveNewPokemonFunction(
 				{ ...occ.pokemon, ownerId: saveFile.playerId },
 				saveFile.pokemon,
-				getTeamSize(saveFile)
+				getTeamSize(saveFile, gameData)
 			);
 		}
 		if (occ.type === 'NPC' && occ.gifts) {

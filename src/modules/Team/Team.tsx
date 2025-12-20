@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import { OwnedPokemonCard } from '../../components/OwnedPokemonCard/OwnedPokemonCard';
+import { OwnedPokemonCardContent } from '../../components/OwnedPokemonCardContent/OwnedPokemonCardContent';
 import { getPokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import {
 	battleSpriteSize,
@@ -187,7 +187,7 @@ export const Team = ({
 						})}
 					</div>
 				</div>
-				<OwnedPokemonCard
+				<OwnedPokemonCardContent
 					setNickName={(id, nickname) => {
 						setTeam(
 							team.map((t) => {
@@ -208,7 +208,7 @@ export const Team = ({
 					}}
 					data={focusedData}
 					key={focusedId}
-					pokemon={focused}
+					ownedPokemon={focused}
 					inventory={inventory}
 					takeHeldItem={() => changeHeldItem(focusedId)}
 					giveHeldItem={(newItem: ItemType) =>

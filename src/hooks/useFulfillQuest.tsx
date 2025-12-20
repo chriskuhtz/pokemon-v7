@@ -9,11 +9,13 @@ import {
 import { joinInventories } from '../interfaces/Inventory';
 import { CatchBoosts } from '../interfaces/SaveFile';
 import { KumaQuestName, KumaQuestsRecord } from '../versions/kuma/questsRecord';
+import { GameDataContext } from './useGameData';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
 export const useFulfillQuest = () => {
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+	const gameData = useContext(GameDataContext);
 	const { addMessage } = useContext(MessageQueueContext);
 	return useCallback(
 		(q: KumaQuestName) => {
@@ -31,7 +33,7 @@ export const useFulfillQuest = () => {
 							ownerId: saveFile.playerId,
 							onTeam:
 								saveFile.pokemon.filter((p) => p.onTeam).length <
-								getTeamSize(saveFile),
+								getTeamSize(saveFile, gameData),
 						},
 				  ]
 				: saveFile.pokemon;
@@ -70,6 +72,6 @@ export const useFulfillQuest = () => {
 				pokemon,
 			});
 		},
-		[addMessage, patchSaveFileReducer, saveFile]
+		[addMessage, gameData, patchSaveFileReducer, saveFile]
 	);
 };

@@ -7,7 +7,7 @@ import {
 	NatureInfoButton,
 } from '../../components/ItemInfoButton/ItemInfoButton';
 import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
-import { MovesDisplay } from '../../components/OwnedPokemonCard/components/MovesDisplay';
+import { MovesDisplay } from '../../components/MovesDisplay/MovesDisplay';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { SpriteIcon } from '../../components/SpriteIcon/SpriteIcon';
 import {

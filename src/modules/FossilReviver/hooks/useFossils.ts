@@ -2,6 +2,7 @@ import { useCallback, useContext } from 'react';
 import { PokemonName } from '../../../constants/pokemonNames';
 import { getTeamSize } from '../../../functions/getTeamSize';
 import { makeChallengerPokemon } from '../../../functions/makeChallengerPokemon';
+import { GameDataContext } from '../../../hooks/useGameData';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { joinInventories } from '../../../interfaces/Inventory';
@@ -10,6 +11,7 @@ import { getRandomNature } from '../../../interfaces/Natures';
 
 export const useFossils = () => {
 	const { addMessage } = useContext(MessageQueueContext);
+	const gameData = useContext(GameDataContext);
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
 	const revive = useCallback(
@@ -42,14 +44,14 @@ export const useFossils = () => {
 						nature: getRandomNature(),
 						onTeam:
 							saveFile.pokemon.filter((p) => p.onTeam).length <
-							getTeamSize(saveFile),
+							getTeamSize(saveFile, gameData),
 						ownerId: saveFile.playerId,
 						weightModifier: Math.random(),
 					}),
 				],
 			});
 		},
-		[addMessage, patchSaveFileReducer, saveFile]
+		[addMessage, gameData, patchSaveFileReducer, saveFile]
 	);
 
 	return { revive };

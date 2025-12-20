@@ -27,6 +27,7 @@ import { isKeyItem, pickupTable } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { CatchStreak } from '../interfaces/SaveFile';
 import { LocationContext } from './LocationProvider';
+import { GameDataContext } from './useGameData';
 import { useReset } from './useReset';
 import { SaveFileContext } from './useSaveFile';
 
@@ -42,6 +43,7 @@ export interface LeaveBattlePayload {
 }
 export const useLeaveBattle = () => {
 	const { location, resetLocation } = useContext(LocationContext);
+	const gameData = useContext(GameDataContext);
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
 	const reset = useReset();
 
@@ -146,7 +148,7 @@ export const useLeaveBattle = () => {
 					caughtAtDate: new Date().getTime(),
 					caughtOnMap: location.mapId,
 				})),
-			].map((t, i) => ({ ...t, onTeam: i < getTeamSize(saveFile) }));
+			].map((t, i) => ({ ...t, onTeam: i < getTeamSize(saveFile, gameData) }));
 
 			const updatedPokemon = [
 				...teamAndCaught,
@@ -353,7 +355,7 @@ export const useLeaveBattle = () => {
 				catchStreak: updatedCatchStreak,
 			});
 		},
-		[location, patchSaveFileReducer, saveFile, team]
+		[gameData, location.mapId, patchSaveFileReducer, saveFile, team]
 	);
 
 	return useCallback(

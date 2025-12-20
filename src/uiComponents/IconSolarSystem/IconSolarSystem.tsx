@@ -1,5 +1,6 @@
 import { CSSProperties, ReactNode } from 'react';
 import { battleSpriteSize } from '../../constants/gameData/gameData';
+import { Planet } from './components/Planet';
 
 export const IconSolarSystem = ({
 	sun,
@@ -67,51 +68,27 @@ export const IconSolarSystem = ({
 			)}
 
 			{secondPlanetUrl && (
-				<img
-					style={{
-						position: 'absolute',
-						top: `${64 / 16}px`,
-						right: `${-64 / 16}px`,
-					}}
-					height={battleSpriteSize}
-					width={battleSpriteSize}
+				<Planet
+					top={`${64 / 16}px`}
+					right={`${-64 / 16}px`}
 					src={secondPlanetUrl}
 				/>
 			)}
 
 			{thirdPlanetUrl && (
-				<img
-					style={{
-						position: 'absolute',
-						top: `${battleSpriteSize}px`,
-						right: `${-64 / 4}px`,
-					}}
-					height={battleSpriteSize}
-					width={battleSpriteSize}
+				<Planet
+					top={`${battleSpriteSize}px`}
+					right={`${-64 / 4}px`}
 					src={thirdPlanetUrl}
 				/>
 			)}
 			{fourthPlanetUrl && (
-				<img
-					style={{
-						position: 'absolute',
-						top: `${64}px`,
-						right: `${-64 / 16}px`,
-					}}
-					height={battleSpriteSize}
-					width={battleSpriteSize}
-					src={fourthPlanetUrl}
-				/>
+				<Planet top={`${64}px`} right={`${-64 / 16}px`} src={fourthPlanetUrl} />
 			)}
 			{fifthPlanetUrl && (
-				<img
-					style={{
-						position: 'absolute',
-						top: `${(64 * 7.5) / 6}px`,
-						left: `${battleSpriteSize}px`,
-					}}
-					height={battleSpriteSize}
-					width={battleSpriteSize}
+				<Planet
+					top={`${(64 * 7.5) / 6}px`}
+					left={`${battleSpriteSize}px`}
 					src={fifthPlanetUrl}
 				/>
 			)}

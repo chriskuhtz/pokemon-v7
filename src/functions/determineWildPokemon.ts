@@ -16,6 +16,7 @@ import { ArrayHelpers } from './ArrayHelpers';
 import { getMiddleOfThree } from './getMiddleOfThree';
 import { getTimeOfDay } from './getTimeOfDay';
 import { getRandomEncounter, isNotCatchable } from './internalDex';
+import { isOwnedPokemonKO } from './isKo';
 import { makeChallengerPokemon } from './makeChallengerPokemon';
 
 export const determineWildPokemon = ({
@@ -30,6 +31,7 @@ export const determineWildPokemon = ({
 	currentDistortionSwarm,
 	currentStrongSwarm,
 	internalDex,
+	defaultBattleSize,
 }: {
 	team: OwnedPokemon[];
 	mapId: MapId;
@@ -42,6 +44,7 @@ export const determineWildPokemon = ({
 	currentStrongSwarm?: PokemonSwarm;
 	currentDistortionSwarm?: PokemonSwarm;
 	internalDex: InternalDex;
+	defaultBattleSize: number;
 }): { team: OwnedPokemon[]; battleTeamConfig: BattleTeamConfig } => {
 	let battleTeamConfig: BattleTeamConfig = {
 		assignGender: true,
@@ -199,54 +202,26 @@ export const determineWildPokemon = ({
 			),
 		];
 	} else {
-		encounter =
-			team.filter((p) => p.damage < p.maxHp).length > 1
-				? [
-						makeChallengerPokemon(
-							{
-								nature: getRandomNature(),
-								...getRandomEncounter(
-									mapId,
-									{
-										area: waterEncounter ? 'WATER' : 'LAND',
-										timeOfDay,
-									},
-									internalDex
-								),
-							},
-							{ increasedShinyFactor: shinyFactor }
-						),
-						makeChallengerPokemon(
-							{
-								nature: getRandomNature(),
-								...getRandomEncounter(
-									mapId,
-									{
-										area: waterEncounter ? 'WATER' : 'LAND',
-										timeOfDay,
-									},
-									internalDex
-								),
-							},
-							{ increasedShinyFactor: shinyFactor }
-						),
-				  ]
-				: [
-						makeChallengerPokemon(
-							{
-								nature: getRandomNature(),
-								...getRandomEncounter(
-									mapId,
-									{
-										area: waterEncounter ? 'WATER' : 'LAND',
-										timeOfDay,
-									},
-									internalDex
-								),
-							},
-							{ increasedShinyFactor: shinyFactor }
-						),
-				  ];
+		const numberOfOpponents = Math.min(
+			team.filter((p) => !isOwnedPokemonKO(p)).length,
+			defaultBattleSize
+		);
+		encounter = Array.from({ length: numberOfOpponents }).map(() =>
+			makeChallengerPokemon(
+				{
+					nature: getRandomNature(),
+					...getRandomEncounter(
+						mapId,
+						{
+							area: waterEncounter ? 'WATER' : 'LAND',
+							timeOfDay,
+						},
+						internalDex
+					),
+				},
+				{ increasedShinyFactor: shinyFactor }
+			)
+		);
 	}
 
 	return { team: encounter.map(applyStreakBoosts), battleTeamConfig };

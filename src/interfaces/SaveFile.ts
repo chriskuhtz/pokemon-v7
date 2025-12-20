@@ -140,12 +140,14 @@ export interface SaveFile {
 	playerId: string;
 	bag: Inventory;
 	storage: Inventory;
+	chests?: Record<string, Inventory>;
 	pokemon: OwnedPokemon[];
 	money: number;
 	researchPoints: number;
 	meta: {
 		activeTab: RoutesType;
 		currentChallenger?: Challenger;
+		currentChestId?: string;
 	};
 	handledOccupants: {
 		id: string;

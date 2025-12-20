@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { v4 } from 'uuid';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
 import { Quest } from '../../../interfaces/Quest';

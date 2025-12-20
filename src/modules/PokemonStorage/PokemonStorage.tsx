@@ -54,8 +54,8 @@ export const PokemonStorage = ({
 }): JSX.Element => {
 	const { addMessage } = useContext(MessageQueueContext);
 	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
-	const { internalDex } = useContext(GameDataContext);
-
+	const gameData = useContext(GameDataContext);
+	const { internalDex } = gameData;
 	const allPokemon = useMemo(() => saveFile.pokemon, [saveFile]);
 	const [sortBy, setSortBy] = useState<PokemonFilter>('FAVORITE');
 	const [search, setSearch] = useState<string>();
@@ -283,7 +283,7 @@ export const PokemonStorage = ({
 				pokemonFilter={sortBy}
 				stored={filtered}
 				sortFunction={sortFunction}
-				teamIsFull={team.length >= getTeamSize(saveFile)}
+				teamIsFull={team.length >= getTeamSize(saveFile, gameData)}
 				togglePokemonOnTeam={togglePokemonOnTeam}
 				startReleaseProcess={startReleaseProcess}
 				toggleFavoriteStatus={toggleFavoriteStatus}

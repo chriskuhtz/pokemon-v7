@@ -18,11 +18,4 @@ export interface SettingsObject {
 	minimalGrindingMode?: boolean;
 	unlimitedPathfindingRange?: boolean;
 	seekOutEncounters?: boolean;
-	snapShotExportAvailable?: boolean;
-	movesLearnableInTeamOverview?: boolean;
-	movesEditableInTeamOverview?: boolean;
-	releasePokemonInTeamOverview?: boolean;
-	fixedTeamSize?: number;
-	noStorageSystem?: boolean;
-	questsTabHidden?: boolean;
 }

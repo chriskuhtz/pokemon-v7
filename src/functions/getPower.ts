@@ -1,4 +1,4 @@
-import { HIDDEN_STATS } from '../components/OwnedPokemonCard/components/StatDisplay';
+import { HIDDEN_STATS } from '../components/OwnedPokemonCardContent/components/StatDisplay/StatDisplay';
 import { AbilityName } from '../constants/abilityCheckList';
 import { BattleAttack } from '../interfaces/BattleActions';
 import { BattlePokemon } from '../interfaces/BattlePokemon';

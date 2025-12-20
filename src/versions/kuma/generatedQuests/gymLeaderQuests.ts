@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { v4 } from 'uuid';
 import { blaineId } from '../../../constants/gameData/maps/occupants/blaine';
 import { brockId } from '../../../constants/gameData/maps/occupants/brock';

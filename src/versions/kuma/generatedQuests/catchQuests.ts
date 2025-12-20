@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { CampUpgrade } from '../../../constants/gameData/campUpgrades';
 import { MapId } from '../../../constants/gameData/maps/mapsRecord';
 import { routeE1 } from '../../../constants/gameData/maps/routeE1';

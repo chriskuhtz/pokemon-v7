@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { v4 } from 'uuid';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 

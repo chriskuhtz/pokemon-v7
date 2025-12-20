@@ -44,7 +44,7 @@ export const useOverworldMovement = (
 	} = saveFile;
 	const { location: playerLocation, setLocation: setCharacterLocation } =
 		useContext(LocationContext);
-	const { internalDex } = useContext(GameDataContext);
+	const { internalDex, defaultBattleSize } = useContext(GameDataContext);
 	const { handleOccupantReducer, patchSaveFileReducer } =
 		useContext(SaveFileContext);
 	const { addMultipleMessages } = useContext(MessageQueueContext);
@@ -136,6 +136,7 @@ export const useOverworldMovement = (
 			currentStrongSwarm,
 			currentDistortionSwarm,
 			internalDex,
+			defaultBattleSize,
 		});
 
 		const challenger: Challenger = {
@@ -168,6 +169,7 @@ export const useOverworldMovement = (
 		currentDistortionSwarm,
 		currentStrongSwarm,
 		currentSwarm,
+		defaultBattleSize,
 		encounterChance,
 		encounterRateModifier.factor,
 		internalDex,

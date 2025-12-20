@@ -20,7 +20,6 @@ export const BattleLoader = ({
 	addMultipleMessages,
 }: {
 	challenger: Challenger;
-
 	latestMessage: Message | undefined;
 	addMessage: (message: Message) => void;
 	addMultipleMessages: (newMessages: Message[]) => void;

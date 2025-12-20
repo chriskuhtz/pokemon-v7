@@ -11,6 +11,7 @@ import { AbilityInfoButton } from '../../AbilityInfoButton/AbilityInfoButton';
 import { HappinessIcon } from '../../HappinessIcon/HappinessIcon';
 import { HpBar } from '../../HpBar/HpBar';
 import { PrimaryAilmentIcon } from '../../PrimaryAilmentIcon/PrimaryAilmentIcon';
+import { ReleaseButton } from '../../ReleaseButton/ReleaseButton';
 import { XpBar } from '../../XpBar/XpBar';
 
 export const DetailsCard = ({
@@ -22,7 +23,7 @@ export const DetailsCard = ({
 	data: PokemonData;
 	setNickName: (x: string | undefined) => void;
 }) => {
-	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+	const { saveFile } = useContext(SaveFileContext);
 	const typeNames = getTypeNames({ ...ownedPokemon, data });
 	const { level } = calculateLevelData(
 		ownedPokemon.xp,
@@ -81,23 +82,7 @@ export const DetailsCard = ({
 			<h4>Gender: {ownedPokemon.gender}</h4>
 			<h4>Caught at: {replaceRouteName(ownedPokemon.caughtOnMap)}</h4>
 			<h4>{ownedPokemon.starter ? 'Your first Pokemon' : ''}</h4>
-
-			{saveFile.settings?.releasePokemonInTeamOverview &&
-				saveFile.pokemon.length > 1 &&
-				!ownedPokemon.starter && (
-					<button
-						onClick={() => {
-							patchSaveFileReducer({
-								pokemon: saveFile.pokemon.filter(
-									(p) => p.id !== ownedPokemon?.id
-								),
-								meta: { ...saveFile.meta, activeTab: 'OVERWORLD' },
-							});
-						}}
-					>
-						Release this Pokemon
-					</button>
-				)}
+			<ReleaseButton ownedPokemon={ownedPokemon} />
 		</Stack>
 	);
 };

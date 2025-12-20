@@ -2,10 +2,10 @@ import { useContext, useState } from 'react';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { getRandomBall, getRandomItem } from '../../interfaces/Item';
 import { RoutesType } from '../../interfaces/Routing';
+import { SettingsObject } from '../../interfaces/SettingsObject';
 import { Page } from '../../uiComponents/Page/Page';
 import { ToggleRow } from '../../uiComponents/ToggleRow/ToggleRow';
 import { KumaQuestsRecord } from '../../versions/kuma/questsRecord';
-import { SettingsObject } from '../../interfaces/SettingsObject';
 
 export const randomQuestRewards = 'randomQuestRewards';
 export const Settings = ({ backTo }: { backTo?: RoutesType }): JSX.Element => {
@@ -201,11 +201,6 @@ export const Settings = ({ backTo }: { backTo?: RoutesType }): JSX.Element => {
 						value={!!state.randomLearnSets}
 						setValue={(x) => setState({ ...state, randomLearnSets: x })}
 						label={'Random Learnable Moves:'}
-					/>
-					<ToggleRow
-						value={!!state.snapShotExportAvailable}
-						setValue={(x) => setState({ ...state, snapShotExportAvailable: x })}
-						label={'Share Trainer Snapshots with friends:'}
 					/>
 				</div>
 				<br />

@@ -113,7 +113,7 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 					icon={<MdCatchingPokemon size={battleSpriteSize} />}
 					actionElements={[]}
 				/>
-				{questMenuAvailable(location.mapId, saveFile.settings) && (
+				{questMenuAvailable(location.mapId, gameData) && (
 					<Card
 						onClick={() => navigate('MAIN', 'QUESTS')}
 						content={<h4>Quests</h4>}
@@ -145,7 +145,7 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
 						actionElements={[]}
 					/>
 				)}
-				{saveFile.settings?.snapShotExportAvailable && (
+				{gameData.features.snapShotExportAvailable && (
 					<>
 						<ExportSnapshotCard />
 						<ImportSnapshotCard />

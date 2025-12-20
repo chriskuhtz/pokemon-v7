@@ -131,8 +131,8 @@ export const BattleField = ({
 	const { saveFile } = useContext(SaveFileContext);
 	const { settings, playerId } = saveFile;
 	const { location } = useContext(LocationContext);
-	const { losingMessages } = useContext(GameDataContext);
-
+	const gameData = useContext(GameDataContext);
+	const { losingMessages, features } = gameData;
 	const isTrainerBattle = useMemo(() => {
 		return challengerType === 'TRAINER';
 	}, [challengerType]);
@@ -142,15 +142,16 @@ export const BattleField = ({
 	);
 	const catchingForbiddenReason = useMemo(() => {
 		if (
-			settings?.noStorageSystem &&
-			saveFile.pokemon.filter((p) => p.onTeam).length >= getTeamSize(saveFile)
+			saveFile.pokemon.filter((p) => p.onTeam).length >=
+				getTeamSize(saveFile, gameData) &&
+			!features.pokemonStorageSystem
 		) {
 			return 'max. Team Size';
 		}
 		if (isTrainerBattle) {
 			return 'Trainer Battle';
 		}
-	}, [isTrainerBattle, saveFile, settings?.noStorageSystem]);
+	}, [features.pokemonStorageSystem, gameData, isTrainerBattle, saveFile]);
 
 	const [battleRound, setBattleRound] = useState<number>(0);
 	const [battleLocation] = useState<BattleLocation>('STANDARD');

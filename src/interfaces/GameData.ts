@@ -34,6 +34,11 @@ export interface GameData {
 		catchStreaks: boolean;
 		settingsEditable: boolean;
 		numberOfBallsBadge: boolean;
+		quests: boolean;
+		pokemonStorageSystem: boolean;
+		snapShotExportAvailable: boolean;
+		movesLearnableInTeamOverview: boolean;
+		movesEditableInTeamOverview: boolean;
 	};
 	overworldActions: OverworldActions;
 	carryingCapacity: {
@@ -51,4 +56,12 @@ export interface GameData {
 			  }
 			| undefined;
 	};
+	teamSlots: {
+		second: (saveFile: SaveFile) => boolean;
+		third: (saveFile: SaveFile) => boolean;
+		fourth: (saveFile: SaveFile) => boolean;
+		fifth: (saveFile: SaveFile) => boolean;
+		sixth: (saveFile: SaveFile) => boolean;
+	};
+	defaultBattleSize: number;
 }

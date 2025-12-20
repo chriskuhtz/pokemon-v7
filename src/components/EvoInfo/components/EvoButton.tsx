@@ -1,52 +1,13 @@
 import { useMemo } from 'react';
 import { determineEvoChecks } from '../../../functions/determineEvoChecks';
-import { isTimeOfDay, TimeOfDay } from '../../../functions/getTimeOfDay';
+import { TimeOfDay, isTimeOfDay } from '../../../functions/getTimeOfDay';
 import { keepAlternateFormThroughEvolution } from '../../../functions/handleAlternateForms';
-import { useGetEvolution } from '../../../hooks/useGetEvolution';
 import { EvolutionReducerPayload } from '../../../hooks/useSaveFile';
 import { EvolutionChainLink } from '../../../interfaces/EvolutionChainData';
 import { Inventory } from '../../../interfaces/Inventory';
 import { OwnedPokemon } from '../../../interfaces/OwnedPokemon';
-import { PokemonData } from '../../../interfaces/PokemonData';
-import { Stack } from '../../../uiComponents/Stack/Stack';
 
-export const EvoInfo = ({
-	data,
-	inventory,
-	evolve,
-	ownedPokemon,
-}: {
-	ownedPokemon: OwnedPokemon;
-	data: PokemonData;
-	inventory: Inventory;
-	evolve: (x: EvolutionReducerPayload) => void;
-}) => {
-	const { evos, invalidate } = useGetEvolution(data);
-
-	if (!evos) {
-		return <button disabled>This Pokemon is fully evolved</button>;
-	}
-
-	return (
-		<Stack mode="column">
-			{evos.map((evo, i) => (
-				<EvoButton
-					ownedPokemon={ownedPokemon}
-					key={data.name + i}
-					name={data.name}
-					evo={evo}
-					inventory={inventory}
-					evolve={(payload) => {
-						evolve(payload);
-						invalidate();
-					}}
-				/>
-			))}
-		</Stack>
-	);
-};
-
-const EvoButton = ({
+export const EvoButton = ({
 	evo,
 	inventory,
 	evolve,

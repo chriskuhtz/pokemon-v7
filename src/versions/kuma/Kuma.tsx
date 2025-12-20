@@ -1,62 +1,8 @@
-import {
-	baseCampUpgrades,
-	baseQuestState,
-	emptyPokedex,
-} from '../../constants/gameData/gameData';
-import { EmptyInventory, generateInventory } from '../../interfaces/Inventory';
-import { CharacterLocationData, SaveFile } from '../../interfaces/SaveFile';
 import { Game } from '../../modules/Game/Game';
 import { kumaDex } from './kumaDex';
+import { startingSaveFileKuma } from './saveFile';
+import { startingLocationKuma } from './startingLocation';
 
-const startingLocationKuma: CharacterLocationData = {
-	mapId: 'camp',
-	orientation: 'DOWN',
-	forwardFoot: 'CENTER1',
-	x: 20,
-	y: 18,
-};
-
-const startingSaveFileKuma: SaveFile = {
-	sprite: '',
-	badges: [],
-	researchPoints: 0,
-	quests: baseQuestState,
-
-	bag: EmptyInventory,
-	storage: generateInventory({
-		'berry-juice': 5,
-		'poke-ball': 20,
-	}),
-
-	seedVault: [],
-	playerId: '',
-	money: 5000,
-	pokemon: [],
-	meta: {
-		activeTab: 'MAIN',
-	},
-	handledOccupants: [],
-	lastEdited: new Date().getTime(),
-	lastNurse: 'nurse_Pokecenter_Camp',
-	mileStones: {
-		hasEvolvedAPokemonThroughLevelUp: false,
-		hasEvolvedAPokemonWithAHeldItem: false,
-		hasEvolvedAPokemonWithAStone: false,
-		hasCaughtAPokemonWithHoney: false,
-		hasEvolvedAPokemonThroughFriendship: false,
-		hasEvolvedAPokemonThatNeedsDaytime: false,
-		hasEvolvedAPokemonThatNeedsNighttime: false,
-		hasCraftedApricorn: false,
-		hasGrownABerry: false,
-		hasGrownAnApricorn: false,
-		caughtFromSwarms: [],
-		luredWithBerries: [],
-		damageRecord: 0,
-	},
-	farm: { plants: [] },
-	campUpgrades: baseCampUpgrades,
-	pokedex: emptyPokedex,
-};
 export const Kuma = (): JSX.Element => {
 	return (
 		<Game
@@ -87,6 +33,11 @@ export const Kuma = (): JSX.Element => {
 				settingsEditable: true,
 				catchStreaks: true,
 				numberOfBallsBadge: true,
+				quests: true,
+				pokemonStorageSystem: true,
+				movesEditableInTeamOverview: false,
+				movesLearnableInTeamOverview: false,
+				snapShotExportAvailable: false,
 			}}
 			losingMessages={{
 				training: 'luckily this was only a training battle',
@@ -119,6 +70,14 @@ export const Kuma = (): JSX.Element => {
 					condition: (s) => s.campUpgrades['bag size upgrade 3'],
 				},
 			}}
+			teamSlots={{
+				second: () => true,
+				third: (s) => s.campUpgrades['team slot 3'],
+				fourth: (s) => s.campUpgrades['team slot 4'],
+				fifth: (s) => s.campUpgrades['team slot 5'],
+				sixth: (s) => s.campUpgrades['team slot 6'],
+			}}
+			defaultBattleSize={2}
 		/>
 	);
 };

@@ -1,20 +1,22 @@
+import { GameData } from '../interfaces/GameData';
 import { SaveFile } from '../interfaces/SaveFile';
 
-export const getTeamSize = (s: SaveFile) => {
-	if (s.settings?.fixedTeamSize) {
-		return s.settings?.fixedTeamSize;
-	}
-	if (s.campUpgrades['team slot 6']) {
+export const getTeamSize = (saveFile: SaveFile, gameData: GameData) => {
+	if (gameData.teamSlots.sixth(saveFile)) {
 		return 6;
 	}
-	if (s.campUpgrades['team slot 5']) {
+	if (gameData.teamSlots.fifth(saveFile)) {
 		return 5;
 	}
-	if (s.campUpgrades['team slot 4']) {
+	if (gameData.teamSlots.fourth(saveFile)) {
 		return 4;
 	}
-	if (s.campUpgrades['team slot 3']) {
+	if (gameData.teamSlots.third(saveFile)) {
 		return 3;
 	}
-	return 2;
+	if (gameData.teamSlots.second(saveFile)) {
+		return 2;
+	}
+
+	return 1;
 };

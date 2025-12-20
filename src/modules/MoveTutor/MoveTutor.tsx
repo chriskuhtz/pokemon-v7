@@ -1,6 +1,6 @@
 import { useContext, useMemo, useState } from 'react';
 import { MoveEditor } from '../../components/MoveEditor/MoveEditor';
-import { MovesDisplay } from '../../components/OwnedPokemonCard/components/MovesDisplay';
+import { MovesDisplay } from '../../components/MovesDisplay/MovesDisplay';
 import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
 import { useNavigate } from '../../hooks/useNavigate';
 import { SaveFileContext } from '../../hooks/useSaveFile';

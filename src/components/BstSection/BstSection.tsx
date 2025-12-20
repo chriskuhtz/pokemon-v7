@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { maxBst } from '../../constants/baseStatRecord';
 import { portraitMode } from '../../constants/gameData/gameData';
 import { typeColors, typeContrastColors } from '../../constants/typeColors';
 import {
@@ -10,9 +9,8 @@ import { getStats } from '../../functions/getStats';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
 import { PokemonData } from '../../interfaces/PokemonData';
-import { AnimatedBar } from '../../uiComponents/AnimatedBar/AnimatedBar';
 import { Chip } from '../../uiComponents/Chip/Chip';
-import { HIDDEN_STATS } from '../OwnedPokemonCard/components/StatDisplay';
+import { BstExplanation } from '../BstExplanation/BstExplanation';
 
 export const BstSection = ({
 	ownedPokemon,
@@ -88,24 +86,7 @@ export const BstSection = ({
 					})}
 			</div>
 			{!hideExplanation && (
-				<>
-					<p>
-						Total Base Stats (equal for all {ownedPokemon.name}), compared to
-						the strongest Pokemon:
-					</p>
-					<AnimatedBar
-						max={maxBst}
-						offset={
-							maxBst -
-							data.stats.reduce((sum, summand) => {
-								if (HIDDEN_STATS.includes(summand.stat.name)) {
-									return sum;
-								}
-								return sum + summand.base_stat;
-							}, 0)
-						}
-					/>
-				</>
+				<BstExplanation ownedPokemon={ownedPokemon} data={data} />
 			)}
 		</div>
 	);

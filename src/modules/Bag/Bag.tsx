@@ -2,7 +2,7 @@ import React, { useContext, useMemo } from 'react';
 import { FaRunning } from 'react-icons/fa';
 import { MdHealing } from 'react-icons/md';
 import { BagLimitBar } from '../../components/BagLimitBar/BagLimitBar';
-import { HealAction } from '../../components/ItemCard/components/HealAction';
+import { HealAction } from '../../components/HealAction/HealAction';
 import { ThrowAwayAction } from '../../components/ItemCard/components/ThrowAwayAction';
 import { ItemCard } from '../../components/ItemCard/ItemCard';
 import { ItemInfoButton } from '../../components/ItemInfoButton/ItemInfoButton';

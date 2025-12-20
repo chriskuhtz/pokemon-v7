@@ -22,11 +22,7 @@ const learnMethodOrder: Record<LearnMethod, number> = {
 	'xd-shadow': 11,
 	'zygarde-cube': 12,
 };
-
-export const useLearnableMoves = (
-	ownedPokemon: OwnedPokemon,
-	data: PokemonData | undefined
-): {
+export interface LearnableMove {
 	move: {
 		name: string;
 		url: string;
@@ -38,7 +34,11 @@ export const useLearnableMoves = (
 			name: LearnMethod;
 		};
 	}[];
-}[] => {
+}
+export const useLearnableMoves = (
+	ownedPokemon: OwnedPokemon,
+	data: PokemonData | undefined
+): LearnableMove[] => {
 	const { saveFile } = useContext(SaveFileContext);
 	return useMemo(() => {
 		if (!data) {
