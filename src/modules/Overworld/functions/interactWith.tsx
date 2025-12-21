@@ -185,10 +185,14 @@ export const interactWithFunction = ({
 	}
 	if (data.type === 'CHEST') {
 		handleThisOccupant(data);
-		window.localStorage.setItem(
-			data.id,
-			JSON.stringify(joinInventories(EmptyInventory, data.contents))
-		);
+		const chestData = window.localStorage.getItem(data.id ?? '');
+		if (!chestData) {
+			window.localStorage.setItem(
+				data.id,
+				JSON.stringify(joinInventories(EmptyInventory, data.contents))
+			);
+		}
+
 		routeTo({ activeTab: 'CHEST', currentChestId: data.id });
 		return;
 	}

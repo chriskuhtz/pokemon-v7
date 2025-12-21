@@ -1,3 +1,4 @@
+import { AnimationProps } from '../components/PokemonSprite/PokemonSprite';
 import { AbilityName } from '../constants/abilityCheckList';
 import { MoveName } from '../constants/movesCheckList';
 import { SecondaryAilment } from './Ailment';
@@ -61,6 +62,7 @@ export interface BattlePokemon extends OwnedPokemon {
 	metronomeStack?: number;
 	consumedBerry?: BerryType;
 	cheekPouched?: boolean;
+	animation?: AnimationProps;
 }
 
 export function isBattlePokemon(

@@ -46,3 +46,32 @@ button {
 	background-color: rgba(0, 0, 0, 0.8) !important;
 	color: white !important;
 }
+
+@keyframes JUMPING {
+	0% {
+		transform: translateY(0px);
+	}
+	25% {
+		transform: translateY(-32px);
+	}
+	50% {
+		transform: translateY(-16px);
+	}
+	75% {
+		transform: translateY(-32px);
+	}
+	100% {
+		transform: translateY(0px);
+	}
+}
+@keyframes PLAYER_ATTACK {
+	0% {
+		transform: translateY(0px);
+	}
+	40% {
+		transform: translate(64px, -64px);
+	}
+	100% {
+		transform: translateY(0px);
+	}
+}

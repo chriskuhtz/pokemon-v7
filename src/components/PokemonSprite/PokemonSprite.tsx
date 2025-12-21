@@ -2,6 +2,7 @@ import { CSSProperties } from 'react';
 import { baseInternalDex } from '../../constants/baseInternalDex';
 import { battleSpriteSize } from '../../constants/gameData/gameData';
 import { PokemonName } from '../../constants/pokemonNames';
+import { PokemonType } from '../../interfaces/PokemonType';
 
 export const getPokemonSprite = (
 	name: PokemonName,
@@ -33,15 +34,7 @@ export const getPokemonSprite = (
 	}${config?.shiny ? `shiny/` : ''}${id}.gif`;
 };
 
-export const PokemonSprite = ({
-	name,
-	sizeFactor,
-	style,
-
-	onClick,
-	className,
-	config,
-}: {
+export interface PokemonSpriteProps {
 	name: PokemonName;
 	sizeFactor?: number;
 	style?: CSSProperties;
@@ -54,7 +47,16 @@ export const PokemonSprite = ({
 	};
 	onClick?: () => void;
 	className?: string;
-}) => {
+}
+
+export const PokemonSprite = ({
+	name,
+	sizeFactor,
+	style,
+	onClick,
+	className,
+	config,
+}: PokemonSpriteProps) => {
 	return (
 		<img
 			className={className}
@@ -67,13 +69,37 @@ export const PokemonSprite = ({
 			src={getPokemonSprite(name, config)}
 			height={battleSpriteSize * (sizeFactor ?? 1)}
 			width={battleSpriteSize * (sizeFactor ?? 1)}
-			style={
-				style
-					? style
-					: config?.grayscale
-					? { filter: 'grayscale(1)' }
-					: undefined
-			}
+			style={{
+				...(style ?? {}),
+				filter: config?.grayscale ? 'grayscale(1)' : undefined,
+			}}
 		/>
+	);
+};
+
+export type AnimationName =
+	| 'GROW'
+	| 'SHRINK'
+	| 'PLAYER_ATTACK'
+	| 'OPPONENT_ATTACK'
+	| 'FAINT'
+	| 'STRUGGLE';
+export interface AnimationProps {
+	animationName?: AnimationName;
+	attackType?: PokemonType;
+}
+
+export const AnimatedSprite = (
+	props: PokemonSpriteProps & { animation?: AnimationProps }
+) => {
+	return (
+		<div
+			style={{
+				animationName: props.animation?.animationName,
+				animationDuration: '1s',
+			}}
+		>
+			<PokemonSprite {...props} />
+		</div>
 	);
 };

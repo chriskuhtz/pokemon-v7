@@ -1,5 +1,5 @@
 import { BattlePokemonInfo } from '../../../components/BattlePokemonInfo/BattlePokemonInfo';
-import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
+import { AnimatedSprite } from '../../../components/PokemonSprite/PokemonSprite';
 import { portraitMode } from '../../../constants/gameData/gameData';
 import { getSizeFactor } from '../../../functions/getSizeFactor';
 import { useLocationBattlePlatform } from '../../../hooks/useLocationColors';
@@ -31,13 +31,13 @@ export function PlayerLane(props: { onFieldTeam: BattlePokemon[] }) {
 				}}
 			>
 				{props.onFieldTeam.map((t) => (
-					<PokemonSprite
+					<AnimatedSprite
 						key={t.id}
 						name={t.name}
 						config={{ shiny: t.shiny, back: true }}
 						style={{ margin: '2rem 1rem' }}
 						sizeFactor={getSizeFactor(t.data.height)}
-						animation="PLAYER_ATTACK"
+						animation={t.animation}
 					/>
 				))}
 			</div>

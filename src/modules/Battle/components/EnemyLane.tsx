@@ -1,5 +1,5 @@
 import { BattlePokemonInfo } from '../../../components/BattlePokemonInfo/BattlePokemonInfo';
-import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
+import { AnimatedSprite } from '../../../components/PokemonSprite/PokemonSprite';
 import {
 	battleSpriteSize,
 	portraitMode,
@@ -93,7 +93,7 @@ export function EnemyLane({
 					}
 
 					return (
-						<PokemonSprite
+						<AnimatedSprite
 							style={{ margin: '2rem 1rem' }}
 							sizeFactor={
 								getSizeFactor(t.data.height) * (spriteGeneration ? 2 : 1)
@@ -101,6 +101,7 @@ export function EnemyLane({
 							key={t.id}
 							name={t.name}
 							config={{ shiny: t.shiny, spriteGeneration }}
+							animation={t.animation}
 						/>
 					);
 				})}
