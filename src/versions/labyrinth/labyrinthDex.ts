@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import { PokemonName } from '../../constants/pokemonNames';
 import { InternalDexEntry } from '../../interfaces/Pokedex';
 
@@ -2029,16 +2028,7 @@ export const labyrinthDex: Record<PokemonName, InternalDexEntry> = {
 		evs: {
 			speed: 1,
 		},
-		encounterOptions: [
-			{
-				maxXp: 8 * 8 * 8,
-				minXp: 5 * 5 * 5,
-				timeOfDay: 'ALL_DAY',
-				route: 'labyrinth_level_2',
-				area: 'LAND',
-				rarity: 'common',
-			},
-		],
+		encounterOptions: [],
 	},
 	magby: {
 		dexId: 240,
@@ -9170,7 +9160,16 @@ export const labyrinthDex: Record<PokemonName, InternalDexEntry> = {
 		evs: {
 			speed: 1,
 		},
-		encounterOptions: [],
+		encounterOptions: [
+			{
+				maxXp: 8 * 8 * 8,
+				minXp: 5 * 5 * 5,
+				timeOfDay: 'ALL_DAY',
+				route: 'labyrinth_level_2',
+				area: 'LAND',
+				rarity: 'common',
+			},
+		],
 	},
 	'raticate-alola': {
 		dexId: 10092,
