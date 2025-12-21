@@ -1,8 +1,8 @@
-import { pokemonNames } from '../constants/pokemonNames';
 import { EvolutionChainLink } from '../interfaces/EvolutionChainData';
 import { Inventory } from '../interfaces/Inventory';
 import { ItemType } from '../interfaces/Item';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
+import { alternateFormOffset } from './alternateFormOffset';
 import { calculateLevelData } from './calculateLevelData';
 import { getHeldItem } from './getHeldItem';
 import { getMovesArray } from './getMovesArray';
@@ -13,25 +13,12 @@ export const determineEvoChecks = (
 	inventory: Inventory,
 	evo: EvolutionChainLink
 ) => {
-	const alternateFormOffset = () => {
-		let res = 1;
-		if (pokemonNames.some((pn) => pn === ownedPokemon.name + '-alola')) {
-			res += 1;
-		}
-		if (pokemonNames.some((pn) => pn === ownedPokemon.name + '-galar')) {
-			res += 1;
-		}
-		if (pokemonNames.some((pn) => pn === ownedPokemon.name + '-hisui')) {
-			res += 1;
-		}
-		if (pokemonNames.some((pn) => pn === ownedPokemon.name + '-paldea')) {
-			res += 1;
-		}
-		return res;
-	};
 	const deets =
 		evo.evolution_details[
-			Math.max(0, evo.evolution_details.length - alternateFormOffset())
+			Math.max(
+				0,
+				evo.evolution_details.length - alternateFormOffset(ownedPokemon)
+			)
 		];
 
 	const {

@@ -11,15 +11,14 @@ import {
 	applyGrassyTerrainHeal,
 } from '../../functions/applyEndOfTurnAbility';
 import { applyEndOfTurnHeldItem } from '../../functions/applyEndOfTurnHeldItem';
-import { applyEndOfTurnWeatherDamage } from '../../functions/applyEndOfTurnWeatherDamage';
+import { applyEndOfTurnWeatherDamage } from '../../functions/applyEndOfTurnWeatherDamage/applyEndOfTurnWeatherDamage';
 import { applyEVGain } from '../../functions/applyEVGain';
 import { applyHappinessChange } from '../../functions/applyHappinessChange';
 import { applyOnBattleEnterAbilityAndEffects } from '../../functions/applyOnBattleEnterAbility';
 import { applyPrimaryAilmentDamage } from '../../functions/applyPrimaryAilmentDamage';
-import { applySecondaryAilmentDamage } from '../../functions/applySecondaryAilmentDamage';
+import { applySecondaryAilmentDamage } from '../../functions/applySecondaryAilmentDamage/applySecondaryAilmentDamage';
 import { calculateLevelData } from '../../functions/calculateLevelData';
 import { changeMovePP } from '../../functions/changeMovePP';
-import { BattleLocation } from '../../functions/determineCaptureSuccess';
 import { getHeldItem } from '../../functions/getHeldItem';
 import { getOpponentPokemon } from '../../functions/getOpponentPokemon';
 import { getPlayerPokemon } from '../../functions/getPlayerPokemon';
@@ -33,6 +32,7 @@ import { GameDataContext } from '../../hooks/useGameData';
 import { LeaveBattlePayload } from '../../hooks/useLeaveBattle';
 import { Message } from '../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../hooks/useSaveFile';
+import { BattleLocation } from '../../interfaces/BattleLocation';
 import { BattlePokemon } from '../../interfaces/BattlePokemon';
 import { Inventory, joinInventories } from '../../interfaces/Inventory';
 import { ItemType } from '../../interfaces/Item';

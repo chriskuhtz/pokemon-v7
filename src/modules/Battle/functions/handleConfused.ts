@@ -1,4 +1,4 @@
-import { calculateDamage } from '../../../functions/calculateDamage';
+import { calculateDamage } from '../../../functions/calculateDamage/calculateDamage';
 import { Message } from '../../../hooks/useMessageQueue';
 import { CONFUSION_POWER } from '../../../interfaces/Ailment';
 import { BattleAttack } from '../../../interfaces/BattleActions';

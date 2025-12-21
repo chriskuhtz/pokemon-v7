@@ -20,7 +20,9 @@ export const TeamOverview = ({ steps }: { steps: number }) => {
 				<TeamMemberInOverview
 					pokemon={t}
 					key={t.id}
-					onClick={() => navigateAwayFromOverworldReducer('TEAM', steps)}
+					onClick={() =>
+						navigateAwayFromOverworldReducer({ activeTab: 'TEAM' }, steps)
+					}
 				/>
 			))}
 		</>

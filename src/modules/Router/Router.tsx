@@ -21,6 +21,7 @@ import { Farm } from '../Farm/Farm';
 import { FossilReviver } from '../FossilReviver/FossilReviver';
 import { InternalDex } from '../InternalDex/InternalDex';
 import { Intro } from '../Intro/Intro';
+import { InventoryChest } from '../InventoryChest/InventoryChest';
 import { LabyrintSuccess } from '../LabyrinthSuccess/LabyrinthSuccess';
 import { MainMenu } from '../MainMenu/MainMenu';
 import { MapEditor } from '../MapMaker/components/MapEditor';
@@ -29,6 +30,7 @@ import { MiltankFarm } from '../MiltankFarm/MiltankFarm';
 import { MoveTutor } from '../MoveTutor/MoveTutor';
 import { NatureTutor } from '../NatureTutor/NatureTutor';
 import { Overworld } from '../Overworld/Overworld';
+import { OverworldChest } from '../OverworldChest/OverworldChest';
 import { Pokedex } from '../Pokedex/Pokedex';
 import { PokemonStorage } from '../PokemonStorage/PokemonStorage';
 import { Quests } from '../Quests/Quests';
@@ -36,7 +38,6 @@ import { SeedVault } from '../SeedVault/SeedVault';
 import { Settings } from '../Settings/Settings';
 import { SpriteSelection } from '../SpriteSelection/SpriteSelection';
 import { StarterSelection } from '../StarterSelection/StarterSelection';
-import { StorageChest } from '../StorageChest/StorageChest';
 import { SwarmRadar } from '../SwarmRadar/SwarmRadar';
 import { Team } from '../Team/Team';
 import { TrainingField } from '../TrainingField/TrainingField';
@@ -185,7 +186,10 @@ export const Router = (): JSX.Element => {
 		return <TrainingField />;
 	}
 	if (activeTab === 'STORAGE_CHEST') {
-		return <StorageChest />;
+		return <InventoryChest />;
+	}
+	if (activeTab === 'CHEST') {
+		return <OverworldChest />;
 	}
 	if (activeTab === 'BERRY_LURE') {
 		return <BerryLure />;

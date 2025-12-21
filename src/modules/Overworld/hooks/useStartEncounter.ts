@@ -12,7 +12,10 @@ export const useStartEncounter = () => {
 			addMessage({
 				message: 'Wild Pokemon appeared!',
 				onRemoval: () =>
-					navigateAwayFromOverworldReducer('BATTLE', stepsTaken, encounter),
+					navigateAwayFromOverworldReducer(
+						{ activeTab: 'BATTLE', currentChallenger: encounter },
+						stepsTaken
+					),
 				needsNoConfirmation: true,
 			});
 		},

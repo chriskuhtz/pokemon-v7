@@ -1,6 +1,5 @@
 import { Message } from '../hooks/useMessageQueue';
 import {
-	AilmentType,
 	isPrimaryAilment,
 	isSecondaryAilment,
 	PrimaryAilment,
@@ -13,28 +12,8 @@ import { BattleFieldEffect } from '../modules/Battle/BattleField';
 import { BattleTerrain } from '../modules/Battle/hooks/useBattleTerrain';
 import { applyPrimaryAilmentToPokemon } from './applyPrimaryAilmentToPokemon';
 import { applySecondaryAilmentToPokemon } from './applySecondaryAilmentToPokemon';
-import { ArrayHelpers } from './ArrayHelpers';
+import { getAilmentName } from './getAilmentName';
 import { getHeldItem } from './getHeldItem';
-
-export const getAilmentName = (
-	attack: BattleAttack
-): AilmentType | undefined => {
-	if (attack.name === 'toxic') {
-		return 'toxic';
-	}
-	if (attack.name === 'tri-attack') {
-		return ArrayHelpers.getRandomEntry(['paralysis', 'freeze', 'burn']);
-	}
-
-	if (
-		isPrimaryAilment({ type: attack.data.meta.ailment.name }) ||
-		isSecondaryAilment({ type: attack.data.meta.ailment.name })
-	) {
-		return attack.data.meta.ailment.name as AilmentType;
-	}
-
-	return undefined;
-};
 
 export const applyAttackAilmentsToPokemon = (
 	target: BattlePokemon,

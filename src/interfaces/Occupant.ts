@@ -71,7 +71,7 @@ export interface OverworldHiddenItem extends BaseOccupant {
 }
 export interface OverworldChest extends BaseOccupant {
 	type: 'CHEST';
-	contents: ItemType[];
+	contents: Partial<Inventory>;
 }
 export interface OverworldPC extends BaseOccupant {
 	type: 'PC';

@@ -78,7 +78,7 @@ export const Overworld = () => {
 	const interactWithStaticEncounter = useStaticEncounter();
 	const interactWithDugtrioExplorer = useDugtrioExplorers();
 	const interactWithSwarmRadar = useCallback(() => {
-		navigateAwayFromOverworldReducer('SWARM_RADAR', stepsTaken);
+		navigateAwayFromOverworldReducer({ activeTab: 'SWARM_RADAR' }, stepsTaken);
 	}, [navigateAwayFromOverworldReducer, stepsTaken]);
 	const interactWithRocketRadio = useRangerRadio();
 	const interactWithRock = useSledgeHammer();
@@ -165,7 +165,7 @@ export const Overworld = () => {
 				interactWithStaticEncounter,
 				interactWithTrainer,
 				interactWithClimbingSteps,
-				goTo: (route) => navigateAwayFromOverworldReducer(route, stepsTaken),
+				routeTo: (meta) => navigateAwayFromOverworldReducer(meta, stepsTaken),
 				settings: saveFile.settings,
 			}),
 		[
@@ -214,10 +214,10 @@ export const Overworld = () => {
 	useKeyboardControl(
 		setNextInput,
 		() => handleEnterPress(location, interactWith, occupants),
-		() => navigateAwayFromOverworldReducer('MAIN', stepsTaken),
-		() => navigateAwayFromOverworldReducer('QUESTS', stepsTaken),
-		() => navigateAwayFromOverworldReducer('TEAM', stepsTaken),
-		() => navigateAwayFromOverworldReducer('BAG', stepsTaken),
+		() => navigateAwayFromOverworldReducer({ activeTab: 'MAIN' }, stepsTaken),
+		() => navigateAwayFromOverworldReducer({ activeTab: 'QUESTS' }, stepsTaken),
+		() => navigateAwayFromOverworldReducer({ activeTab: 'TEAM' }, stepsTaken),
+		() => navigateAwayFromOverworldReducer({ activeTab: 'BAG' }, stepsTaken),
 		!!latestMessage
 	);
 	const { isDark, hasFlashlight, flashLightDirection } = useIsDark(map.id);

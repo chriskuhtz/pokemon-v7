@@ -6,7 +6,8 @@ import { ItemsFilterType } from '../../interfaces/ItemsFilterType';
 import { ItemsFilterButtons } from './components/ItemsFilterButton';
 
 export const useFilteredInventory = (
-	inventory: Inventory
+	inventory: Inventory,
+	onlyShowButtonsForFilledCategories?: boolean
 ): {
 	filteredInventory: Partial<Inventory>;
 	buttons: React.JSX.Element;
@@ -26,9 +27,14 @@ export const useFilteredInventory = (
 
 	const buttons = useMemo(
 		() => (
-			<ItemsFilterButtons itemsFilter={itemsFilter} setFilter={setFilter} />
+			<ItemsFilterButtons
+				itemsFilter={itemsFilter}
+				setFilter={setFilter}
+				onlyShowButtonsForFilledCategories={onlyShowButtonsForFilledCategories}
+				itemsToFilter={inventory}
+			/>
 		),
-		[itemsFilter]
+		[inventory, itemsFilter, onlyShowButtonsForFilledCategories]
 	);
 
 	return { filteredInventory, buttons, currentFilter: itemsFilter };

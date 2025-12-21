@@ -40,5 +40,6 @@ export const routes = [
 	'INTRO',
 	'CHANGELOG',
 	'LABYRINTH_SUCCESS',
+	'CHEST',
 ] as const;
 export type RoutesType = (typeof routes)[number];

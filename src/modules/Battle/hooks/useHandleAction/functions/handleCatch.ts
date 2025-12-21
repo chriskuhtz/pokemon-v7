@@ -1,9 +1,7 @@
-import {
-	BattleLocation,
-	determineCaptureSuccess,
-} from '../../../../../functions/determineCaptureSuccess';
+import { determineCaptureSuccess } from '../../../../../functions/determineCaptureSuccess/determineCaptureSuccess';
 import { Message } from '../../../../../hooks/useMessageQueue';
 import { CatchProcessInfo } from '../../../../../interfaces/BattleActions';
+import { BattleLocation } from '../../../../../interfaces/BattleLocation';
 import { BattlePokemon } from '../../../../../interfaces/BattlePokemon';
 import { ItemType } from '../../../../../interfaces/Item';
 import { CatchBoosts, Pokedex } from '../../../../../interfaces/SaveFile';

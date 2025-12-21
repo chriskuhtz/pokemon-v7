@@ -8,7 +8,7 @@ import { applyAttackStatChanges } from '../../../../../../functions/applyAttackS
 import { applyDrainOrRecoil } from '../../../../../../functions/applyDrainOrRecoil';
 import { applySecondaryAilmentToPokemon } from '../../../../../../functions/applySecondaryAilmentToPokemon';
 import { applyStatChangeToPokemon } from '../../../../../../functions/applyStatChangeToPokemon';
-import { calculateDamage } from '../../../../../../functions/calculateDamage';
+import { calculateDamage } from '../../../../../../functions/calculateDamage/calculateDamage';
 import { checkThiefMoves } from '../../../../../../functions/checkThiefMoves';
 import { getHeldItem } from '../../../../../../functions/getHeldItem';
 import { getMiddleOfThree } from '../../../../../../functions/getMiddleOfThree';

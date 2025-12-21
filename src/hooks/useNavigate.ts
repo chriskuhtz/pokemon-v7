@@ -13,7 +13,10 @@ export const useNavigate = (): ((
 	return useCallback(
 		(currentRoute: RoutesType, newRoute: RoutesType, stepsWalked?: number) => {
 			if (currentRoute === 'OVERWORLD') {
-				navigateAwayFromOverworldReducer(newRoute, stepsWalked ?? 0);
+				navigateAwayFromOverworldReducer(
+					{ activeTab: newRoute },
+					stepsWalked ?? 0
+				);
 			} else setActiveTabReducer(newRoute);
 		},
 		[navigateAwayFromOverworldReducer, setActiveTabReducer]

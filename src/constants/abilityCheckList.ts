@@ -1,3 +1,5 @@
+import { PokemonType } from '../interfaces/PokemonType';
+
 export const abilityCheckList: {
 	name: string;
 	url: string;
@@ -1620,3 +1622,11 @@ export const abilityNames = [
 ] as const;
 
 export type AbilityName = (typeof abilityNames)[number];
+
+export const DamageAbsorbAbilityMap: Partial<Record<AbilityName, PokemonType>> =
+	{
+		'volt-absorb': 'electric',
+		'water-absorb': 'water',
+		'dry-skin': 'water',
+		'earth-eater': 'ground',
+	};

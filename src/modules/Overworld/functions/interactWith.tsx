@@ -2,6 +2,7 @@ import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
 import { SpriteIcon } from '../../../components/SpriteIcon/SpriteIcon';
 import { getOppositeDirection } from '../../../functions/getOppositeDirection';
 import { Message } from '../../../hooks/useMessageQueue';
+import { EmptyInventory, joinInventories } from '../../../interfaces/Inventory';
 import { getRandomItem } from '../../../interfaces/Item';
 import {
 	ApricornTree,
@@ -16,10 +17,10 @@ import {
 	OverworldTrainer,
 } from '../../../interfaces/Occupant';
 
-import { RoutesType } from '../../../interfaces/Routing';
 import {
 	CharacterLocationData,
 	CharacterOrientation,
+	SaveFile,
 } from '../../../interfaces/SaveFile';
 import { SettingsObject } from '../../../interfaces/SettingsObject';
 
@@ -67,7 +68,7 @@ export const interactWithFunction = ({
 	interactWithStaticEncounter,
 	interactWithApricornTree,
 	settings,
-	goTo,
+	routeTo,
 	overloaded,
 }: {
 	overloaded: boolean;
@@ -96,7 +97,7 @@ export const interactWithFunction = ({
 	interactWithDugtrioExplorer: () => void;
 	interactWithSwarmRadar: () => void;
 	interactWithRocketRadio: () => void;
-	goTo: (route: RoutesType) => void;
+	routeTo: (meta: SaveFile['meta']) => void;
 	settings?: SettingsObject;
 }) => {
 	if (!occ || activeMessage) {
@@ -148,7 +149,7 @@ export const interactWithFunction = ({
 			{
 				message: 'Inspecting the berry lure',
 				needsNoConfirmation: true,
-				onRemoval: () => goTo('BERRY_LURE'),
+				onRemoval: () => routeTo({ activeTab: 'BERRY_LURE' }),
 			},
 		]);
 		return;
@@ -184,7 +185,11 @@ export const interactWithFunction = ({
 	}
 	if (data.type === 'CHEST') {
 		handleThisOccupant(data);
-
+		window.localStorage.setItem(
+			data.id,
+			JSON.stringify(joinInventories(EmptyInventory, data.contents))
+		);
+		routeTo({ activeTab: 'CHEST', currentChestId: data.id });
 		return;
 	}
 	if (data.type === 'BUSH') {
@@ -208,7 +213,7 @@ export const interactWithFunction = ({
 			{
 				message: 'Accessing Pokemon Storage',
 				needsNoConfirmation: true,
-				onRemoval: () => goTo('STORAGE'),
+				onRemoval: () => routeTo({ activeTab: 'STORAGE' }),
 			},
 		]);
 		return;
@@ -218,7 +223,7 @@ export const interactWithFunction = ({
 			{
 				message: 'Opening Your Storage Chest',
 				needsNoConfirmation: true,
-				onRemoval: () => goTo('STORAGE_CHEST'),
+				onRemoval: () => routeTo({ activeTab: 'STORAGE_CHEST' }),
 			},
 		]);
 		return;
@@ -237,7 +242,9 @@ export const interactWithFunction = ({
 				icon: <SpriteIcon sprite={data.sprite} />,
 				message: d,
 				onRemoval:
-					i === data.dialogue.length - 1 ? () => goTo(data.to) : undefined,
+					i === data.dialogue.length - 1
+						? () => () => routeTo({ activeTab: data.to })
+						: undefined,
 				needsNoConfirmation: true,
 			}))
 		);
@@ -251,7 +258,7 @@ export const interactWithFunction = ({
 				message: d,
 				onRemoval:
 					i === data.dialogue.length - 1
-						? () => goTo('BULLETIN_BOARD')
+						? () => () => routeTo({ activeTab: 'BULLETIN_BOARD' })
 						: undefined,
 				needsNoConfirmation: true,
 			}))

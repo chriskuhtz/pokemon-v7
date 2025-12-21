@@ -15,7 +15,7 @@ export const SellMarket = ({
 	inventory: Inventory;
 	sellItem: (item: ItemType, number: number, pricePerItem: number) => void;
 }): JSX.Element => {
-	const { filteredInventory, buttons } = useFilteredInventory(inventory);
+	const { filteredInventory, buttons } = useFilteredInventory(inventory, true);
 	return (
 		<Page goBack={goBack} headline="What do you want to sell:">
 			<Stack mode="column">

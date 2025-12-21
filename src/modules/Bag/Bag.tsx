@@ -30,7 +30,7 @@ export const Bag = ({ goBack }: { goBack: () => void }): JSX.Element => {
 		[saveFile.pokemon]
 	);
 
-	const { filteredInventory, buttons } = useFilteredInventory(inventory);
+	const { filteredInventory, buttons } = useFilteredInventory(inventory, true);
 	return (
 		<Page goBack={goBack} headline="Inventory:">
 			<Stack mode="column">

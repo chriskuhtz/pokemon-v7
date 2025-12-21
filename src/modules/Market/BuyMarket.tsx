@@ -19,7 +19,7 @@ export const BuyMarket = ({
 	money: number;
 	owned: Inventory;
 }): JSX.Element => {
-	const { filteredInventory, buttons } = useFilteredInventory(inventory);
+	const { filteredInventory, buttons } = useFilteredInventory(inventory, true);
 	return (
 		<Page goBack={goBack} headline="What would you like to buy:">
 			<Stack mode="column">

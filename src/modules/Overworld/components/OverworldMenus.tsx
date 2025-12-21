@@ -96,7 +96,7 @@ export const OverworldMenus = ({
 					onClick={(e) => {
 						e.stopPropagation();
 						e.preventDefault();
-						navigateAwayFromOverworldReducer('MAIN', stepsTaken);
+						navigateAwayFromOverworldReducer({ activeTab: 'MAIN' }, stepsTaken);
 					}}
 					size={battleSpriteSize}
 				/>
