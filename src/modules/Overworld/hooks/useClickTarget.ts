@@ -7,6 +7,7 @@ import { LocationContext } from '../../../hooks/LocationProvider';
 import { GameDataContext } from '../../../hooks/useGameData';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
+import { ScreenTransitionContext } from '../../../hooks/useScreenTransitionEffects';
 import { Occupant } from '../../../interfaces/Occupant';
 import { OverworldMap } from '../../../interfaces/OverworldMap';
 import { CharacterOrientation } from '../../../interfaces/SaveFile';
@@ -32,6 +33,7 @@ export const useClickTarget = (
 	const { location } = useContext(LocationContext);
 	const gameData = useContext(GameDataContext);
 	const { latestMessage } = useContext(MessageQueueContext);
+	const { transition } = useContext(ScreenTransitionContext);
 	const [clickTarget, setClickTarget] = useState<
 		{ x: number; y: number; mapId: MapId } | undefined
 	>();
@@ -75,7 +77,7 @@ export const useClickTarget = (
 
 	// compute path on target change
 	useEffect(() => {
-		if (latestMessage) {
+		if (latestMessage || transition) {
 			setClickTarget(undefined);
 			return;
 		}
@@ -138,6 +140,7 @@ export const useClickTarget = (
 		isPassableForPlayer,
 		latestMessage,
 		lastClickTarget,
+		transition,
 	]);
 
 	return setClickTarget;

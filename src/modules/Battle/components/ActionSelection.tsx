@@ -49,7 +49,6 @@ export function ActionSelection({
 	setChosenAction: (x: ActionType) => void;
 	chooseAction: (x: ChooseActionPayload) => void;
 	allTargets: BattlePokemon[];
-
 	runningAllowed: boolean;
 	battleFieldEffects: BattleFieldEffect[];
 	disabled: boolean;

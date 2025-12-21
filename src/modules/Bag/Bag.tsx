@@ -59,8 +59,6 @@ export const Bag = ({ goBack }: { goBack: () => void }): JSX.Element => {
 									<></>
 								),
 								item === 'escape-rope' && !disabled ? (
-									<></>
-								) : (
 									<FaRunning
 										tabIndex={0}
 										role="button"
@@ -73,6 +71,8 @@ export const Bag = ({ goBack }: { goBack: () => void }): JSX.Element => {
 										onClick={() => applyEscapeRope()}
 										size={battleSpriteSize}
 									/>
+								) : (
+									<></>
 								),
 								isKeyItem(item) ? (
 									<></>

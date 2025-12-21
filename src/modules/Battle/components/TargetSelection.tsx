@@ -37,7 +37,7 @@ export function TargetSelection({
 	} = useContext(SaveFileContext);
 	useEffect(() => {
 		//choose the only available option, skip menu
-		if (targets.length === 1) {
+		if (targets.length === 1 && chosenAction !== 'SWITCH') {
 			chooseAction({
 				userId: id,
 				actionName: chosenAction,

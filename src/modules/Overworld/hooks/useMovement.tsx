@@ -165,14 +165,6 @@ export const useMovement = (
 	}>();
 
 	useEffect(() => {
-		if (encounter) {
-			startEncounter(encounter.stepsTaken, encounter.type);
-			setEncounter(undefined);
-			setEncounterChance(baseEncounterRate);
-		}
-	}, [encounter, startEncounter]);
-
-	useEffect(() => {
 		const engine = setTimeout(() => {
 			//dont do anything if in dialogue or transition
 			if (nextInput && (latestMessage || transition)) {
@@ -282,6 +274,19 @@ export const useMovement = (
 		steptOnRouter,
 		transition,
 	]);
+
+	useEffect(() => {
+		if (encounter) {
+			if (latestMessage || transition) {
+				setEncounter(undefined);
+				setEncounterChance(baseEncounterRate);
+				return;
+			}
+			startEncounter(encounter.stepsTaken, encounter.type);
+			setEncounter(undefined);
+			setEncounterChance(baseEncounterRate);
+		}
+	}, [encounter, latestMessage, startEncounter, transition]);
 
 	return addInput;
 };

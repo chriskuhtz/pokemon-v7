@@ -1,5 +1,6 @@
 import { HpBar } from '../../../components/HpBar/HpBar';
 import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
+import { PrimaryAilmentIcon } from '../../../components/PrimaryAilmentIcon/PrimaryAilmentIcon';
 import { isKO } from '../../../functions/isKo';
 import { Message } from '../../../hooks/useMessageQueue';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
@@ -35,7 +36,14 @@ export const RefillHandling = ({
 									}}
 									content={
 										<div>
-											<h4>{teamMember.name}</h4>
+											<h4>
+												{teamMember.name}{' '}
+												{teamMember.primaryAilment && (
+													<PrimaryAilmentIcon
+														primaryAilment={teamMember.primaryAilment}
+													/>
+												)}
+											</h4>
 											<HpBar
 												max={teamMember.stats.hp}
 												damage={teamMember.damage}
