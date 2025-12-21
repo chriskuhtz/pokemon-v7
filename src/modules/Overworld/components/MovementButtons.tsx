@@ -15,9 +15,7 @@ export const MovementButtons = ({
 	setNextInput,
 	handleEnterPress,
 }: {
-	setNextInput: React.Dispatch<
-		React.SetStateAction<CharacterOrientation | undefined>
-	>;
+	setNextInput: (x: CharacterOrientation | undefined) => void;
 	handleEnterPress: () => void;
 }) => {
 	const { saveFile } = useContext(SaveFileContext);

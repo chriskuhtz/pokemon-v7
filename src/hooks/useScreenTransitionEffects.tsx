@@ -7,6 +7,7 @@ export interface ScreenTransition {
 export const ScreenTransitionContext = React.createContext(
 	{} as {
 		activateTransition: (x: ScreenTransition) => void;
+		transition: ScreenTransition | undefined;
 	}
 );
 
@@ -58,6 +59,7 @@ export const ScreenTransitionProvider = ({
 		<ScreenTransitionContext.Provider
 			value={{
 				activateTransition: setTransition,
+				transition,
 			}}
 		>
 			{children}

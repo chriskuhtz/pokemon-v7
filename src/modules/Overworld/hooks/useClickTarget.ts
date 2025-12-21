@@ -4,6 +4,7 @@ import { getNextFieldOccupant } from '../../../functions/getNextFieldOccupant';
 import { getOverworldDistance } from '../../../functions/getOverworldDistance';
 import { isPassable } from '../../../functions/isPassable';
 import { LocationContext } from '../../../hooks/LocationProvider';
+import { GameDataContext } from '../../../hooks/useGameData';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { Occupant } from '../../../interfaces/Occupant';
@@ -14,9 +15,7 @@ import { Vector2 } from '../../../model/Vector2';
 
 export const useClickTarget = (
 	assembledMap: OverworldMap,
-	setNextInput: React.Dispatch<
-		React.SetStateAction<CharacterOrientation | undefined>
-	>,
+	setNextInput: (x: CharacterOrientation | undefined) => void,
 	interactWith: (occ: Occupant | undefined) => void,
 	currentOccupants: Occupant[]
 ): React.Dispatch<
@@ -31,10 +30,14 @@ export const useClickTarget = (
 > => {
 	const { saveFile } = useContext(SaveFileContext);
 	const { location } = useContext(LocationContext);
+	const gameData = useContext(GameDataContext);
 	const { latestMessage } = useContext(MessageQueueContext);
 	const [clickTarget, setClickTarget] = useState<
 		{ x: number; y: number; mapId: MapId } | undefined
 	>();
+	const canSwim = gameData.overworldActions.swimming.possible(saveFile);
+	const canRockClimb =
+		gameData.overworldActions.rockClimbing.possible(saveFile);
 
 	const isPassableForPlayer = useCallback(
 		(pos: { x: number; y: number }) => {
@@ -43,16 +46,17 @@ export const useClickTarget = (
 				playerLocation: location,
 				map: assembledMap,
 				currentOccupants,
-				canSwim: saveFile.campUpgrades['swimming certification'],
+				canSwim,
 				flying: !!saveFile.flying,
-				canClimb: saveFile.campUpgrades['rock climbing certification'],
+				canClimb: canRockClimb,
 			});
 		},
 		[
 			assembledMap,
+			canRockClimb,
+			canSwim,
 			currentOccupants,
 			location,
-			saveFile.campUpgrades,
 			saveFile.flying,
 		]
 	);
@@ -63,11 +67,11 @@ export const useClickTarget = (
 		return new Pathfinder(
 			assembledMap,
 			currentOccupants,
-			saveFile.campUpgrades['swimming certification'],
+			canSwim,
 			!!saveFile.flying,
-			saveFile.campUpgrades['rock climbing certification']
+			canRockClimb
 		);
-	}, [assembledMap, currentOccupants, saveFile.campUpgrades, saveFile.flying]);
+	}, [assembledMap, canRockClimb, canSwim, currentOccupants, saveFile.flying]);
 
 	// compute path on target change
 	useEffect(() => {

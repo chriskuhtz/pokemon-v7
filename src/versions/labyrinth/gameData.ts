@@ -32,6 +32,16 @@ export const gameData: GameData = {
 			successDialogue: ['Scyther cuts the tree'],
 			failDialogue: ['A strong bug pokemon might be able to cut this'],
 		},
+		swimming: {
+			possible: () => false,
+			successDialogue: [],
+			failDialogue: [],
+		},
+		rockClimbing: {
+			possible: () => false,
+			successDialogue: [],
+			failDialogue: [],
+		},
 	},
 	carryingCapacity: {
 		base: { amount: 20 },

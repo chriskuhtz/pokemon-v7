@@ -12,6 +12,8 @@ export interface OverworldAction {
 }
 export interface OverworldActions {
 	bushCutting: OverworldAction;
+	swimming: OverworldAction;
+	rockClimbing: OverworldAction;
 }
 export interface GameData {
 	locationId: string;

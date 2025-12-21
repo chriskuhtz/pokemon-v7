@@ -54,6 +54,19 @@ export const Kuma = (): JSX.Element => {
 						'...bureaucracy',
 					],
 				},
+				swimming: {
+					possible: (s) => s.campUpgrades['swimming certification'],
+					successDialogue: [],
+					failDialogue: [],
+				},
+				rockClimbing: {
+					possible: (s) => s.campUpgrades['rock climbing certification'],
+					successDialogue: [],
+					failDialogue: [
+						'A certified rock climber would be allowed to climb here',
+						'... Bureaucracy',
+					],
+				},
 			}}
 			carryingCapacity={{
 				base: { amount: 20 },

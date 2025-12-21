@@ -11,7 +11,6 @@ export const updatePosition = (
 	playerLocation: CharacterLocationData,
 	nextInput: CharacterOrientation,
 	map: OverworldMap,
-	addStep: () => void,
 	currentOccupants: Occupant[],
 	canSwim: boolean,
 	flying: boolean,
@@ -30,7 +29,7 @@ export const updatePosition = (
 			canClimb,
 		})
 	) {
-		addStep();
+		console.log('passable');
 		return nextLocation;
 	}
 
