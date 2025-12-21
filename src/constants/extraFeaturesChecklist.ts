@@ -605,7 +605,7 @@ export const extraFeatureCheckList: {
 	{ name: 'struggle', handled: true },
 	{ name: 'battle backgrounds prototype', handled: true },
 	{ name: 'Labyrinth level 2', handled: true },
-	//BUGS/IMPROVEMENTS:
+	{ name: 'random fill screen transition', handled: true },
 	{ name: 'fix npc orientation' },
 	{ name: 'rollout stops stacking when target is defeated' },
 	{ name: 'leech seed benefit doesnt pass to switched in mon' },
@@ -617,11 +617,9 @@ export const extraFeatureCheckList: {
 	{ name: 'move chuck and move tutor out of battle pit' },
 	{ name: 'music' },
 	{ name: 'fix npcs in front of player problem' },
-	//FEATURES:
 	{ name: 'eggs?' },
 	{ name: 'Fishing?' },
 	{ name: 'opponents can use items' },
-	//CONTENT:
 	{ name: 'magma/aqua quests from Looker' },
 	{ name: 'Hooh quest after catching the dogs' },
 	{ name: 'trainer with simple/costar combo' },
@@ -645,14 +643,11 @@ export const extraFeatureCheckList: {
 		name: 'DarkGreen-Apricorn: Jungle Balls: Bonus for Grass and Psychic Pokemon',
 	},
 	{ name: 'dragonite tickets for new adventures' },
-	//SETTINGS:
 	{ name: 'random encounters' },
 	{ name: 'random evolutions' },
 	{ name: 'nuzlocke mode' },
-	//LABYRINTH MODE:
 	{ name: 'only show story dialogue twice' },
 	{ name: 'transfer team to kuma after win' },
-
 	{ name: 'Labyrinth level 3' },
 	{ name: 'Labyrinth level 4' },
 	{ name: 'Labyrinth level 5' },
@@ -661,4 +656,6 @@ export const extraFeatureCheckList: {
 	{ name: 'Labyrinth level 8' },
 	{ name: 'Labyrinth level 9' },
 	{ name: 'Labyrinth level 10' },
+
+	{ name: 'attack animations' },
 ];

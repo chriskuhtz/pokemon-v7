@@ -9,6 +9,7 @@ import { MessageQueueContext } from '../../hooks/useMessageQueue';
 import { SaveFileProvider } from '../../hooks/useSaveFile';
 import { Router } from '../../modules/Router/Router';
 import { Banner } from '../Banner/Banner';
+import { ScreenTransitionProvider } from '../../hooks/useScreenTransitionEffects';
 
 export const MessageContainer = () => {
 	const { confirmLatestMessage, addMessage, latestMessage } =
@@ -48,7 +49,9 @@ export const MessageContainer = () => {
 			<BaseSizeProvider allowedBaseSizes={allowedBaseSizes}>
 				<SaveFileProvider>
 					<LocationProvider>
-						<Router />
+						<ScreenTransitionProvider>
+							<Router />
+						</ScreenTransitionProvider>
 					</LocationProvider>
 				</SaveFileProvider>
 			</BaseSizeProvider>

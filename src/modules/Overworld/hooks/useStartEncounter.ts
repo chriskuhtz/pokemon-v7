@@ -1,24 +1,22 @@
 import { useCallback, useContext } from 'react';
-import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
+import { ScreenTransitionContext } from '../../../hooks/useScreenTransitionEffects';
 import { Challenger } from '../../../interfaces/Challenger';
 
 export const useStartEncounter = () => {
 	const { navigateAwayFromOverworldReducer } = useContext(SaveFileContext);
-	const { addMessage } = useContext(MessageQueueContext);
+	const { activateTransition } = useContext(ScreenTransitionContext);
 
 	return useCallback(
 		(stepsTaken: number, encounter: Challenger) => {
-			addMessage({
-				message: 'Wild Pokemon appeared!',
+			activateTransition({
 				onRemoval: () =>
 					navigateAwayFromOverworldReducer(
 						{ activeTab: 'BATTLE', currentChallenger: encounter },
 						stepsTaken
 					),
-				needsNoConfirmation: true,
 			});
 		},
-		[addMessage, navigateAwayFromOverworldReducer]
+		[activateTransition, navigateAwayFromOverworldReducer]
 	);
 };
