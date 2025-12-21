@@ -3,6 +3,7 @@ import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
 import { portraitMode } from '../../../constants/gameData/gameData';
 import { getSizeFactor } from '../../../functions/getSizeFactor';
 import { useLocationBattlePlatform } from '../../../hooks/useLocationColors';
+import '../../../index.css';
 import { BattlePokemon } from '../../../interfaces/BattlePokemon';
 
 export function PlayerLane(props: { onFieldTeam: BattlePokemon[] }) {
@@ -14,6 +15,7 @@ export function PlayerLane(props: { onFieldTeam: BattlePokemon[] }) {
 				justifyContent: portraitMode ? 'flex-end' : 'space-between',
 				alignItems: portraitMode ? 'flex-start' : 'center',
 				flexDirection: portraitMode ? 'column' : 'row',
+				padding: portraitMode ? undefined : '0 1rem',
 			}}
 		>
 			<div
@@ -35,6 +37,7 @@ export function PlayerLane(props: { onFieldTeam: BattlePokemon[] }) {
 						config={{ shiny: t.shiny, back: true }}
 						style={{ margin: '2rem 1rem' }}
 						sizeFactor={getSizeFactor(t.data.height)}
+						animation="PLAYER_ATTACK"
 					/>
 				))}
 			</div>

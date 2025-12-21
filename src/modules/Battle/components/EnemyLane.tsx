@@ -24,6 +24,7 @@ export function EnemyLane({
 				alignItems: portraitMode ? 'flex-end' : 'center',
 				justifyContent: portraitMode ? undefined : 'space-between',
 				flexDirection: portraitMode ? 'column' : 'row',
+				padding: portraitMode ? undefined : '0 1rem',
 			}}
 		>
 			<div

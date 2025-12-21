@@ -16,6 +16,9 @@ const itemOptions: ItemType[] = [
 	'full-heal',
 	'ether',
 	'rare-candy',
+	'silk-scarf',
+	'silver-powder',
+	'magnet',
 ];
 
 export const labyrinthLevel2Occupants: OverworldMap['occupants'] = [
@@ -53,7 +56,7 @@ export const labyrinthLevel2Occupants: OverworldMap['occupants'] = [
 		item: 'lum-berry',
 		amount: 2,
 		mapId: 'labyrinth_level_2',
-		fixedId: 'ursarings-lum-berries',
+		fixedId: 'grovyles-lum-berries',
 	}),
 	makeOverworldItem({
 		x: 14,
@@ -61,7 +64,7 @@ export const labyrinthLevel2Occupants: OverworldMap['occupants'] = [
 		item: 'sitrus-berry',
 		amount: 2,
 		mapId: 'labyrinth_level_2',
-		fixedId: 'ursarings-sitrus-berries',
+		fixedId: 'grovyles-sitrus-berries',
 	}),
 	makeOverworldItem({
 		x: 15,
@@ -69,23 +72,23 @@ export const labyrinthLevel2Occupants: OverworldMap['occupants'] = [
 		item: 'wacan-berry',
 		amount: 2,
 		mapId: 'labyrinth_level_2',
-		fixedId: 'ursarings-wacan-berries',
+		fixedId: 'grovyles-wacan-berries',
 	}),
 	{
 		type: 'POKEMON',
-		dexId: 217,
+		dexId: 253,
 		x: 17,
 		y: 24,
 		orientation: 'LEFT',
-		id: 'lab-2-ursaring',
+		id: 'lab-2-grovyle',
 		conditionFunction: (s) =>
-			(occupantHandled(s, 'ursarings-lum-berries') ||
-				occupantHandled(s, 'ursarings-sitrus-berries') ||
-				occupantHandled(s, 'ursarings-wacan-berries')) &&
-			!occupantHandled(s, 'lab-2-ursaring'),
-		dialogue: ['Ursaring is outraged that you stole its berries'],
+			(occupantHandled(s, 'grovyles-lum-berries') ||
+				occupantHandled(s, 'grovyles-sitrus-berries') ||
+				occupantHandled(s, 'grovyles-wacan-berries')) &&
+			!occupantHandled(s, 'lab-2-grovyle'),
+		dialogue: ['grovyle is outraged that you stole its berries'],
 		encounter: {
-			name: 'ursaring',
+			name: 'grovyle',
 			maxXp: 10 * 10 * 10,
 			minXp: 10 * 10 * 10,
 			rarity: 'common',

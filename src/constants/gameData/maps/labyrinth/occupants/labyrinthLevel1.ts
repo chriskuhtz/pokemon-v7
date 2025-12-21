@@ -1,5 +1,8 @@
 import { v4 } from 'uuid';
-import { makeOverworldChest } from '../../../../../functions/makeOverworldItem';
+import {
+	makeOverworldChest,
+	makeOverworldItem,
+} from '../../../../../functions/makeOverworldItem';
 import { occupantHandled } from '../../../../../functions/occupantHandled';
 import { ItemType } from '../../../../../interfaces/Item';
 import { getRandomNature } from '../../../../../interfaces/Natures';
@@ -23,6 +26,7 @@ const secondItem = 'lab1-second-item';
 
 const firstChallenger = 'lab1-first-challenger';
 const secondChallenger = 'lab1-second-challenger';
+const thirdChallenger = 'lab1-third-challenger';
 
 const itemOptions: ItemType[] = [
 	'poke-ball',
@@ -31,6 +35,9 @@ const itemOptions: ItemType[] = [
 	'berry-juice',
 	'oran-berry',
 	'ether',
+	'sharp-beak',
+	'miracle-seed',
+	'black-belt',
 ];
 
 export const labyrinthLevel1Occupants: OverworldMap['occupants'] = [
@@ -205,4 +212,27 @@ export const labyrinthLevel1Occupants: OverworldMap['occupants'] = [
 		},
 		conditionFunction: () => true,
 	},
+	{
+		type: 'POKEMON',
+		dexId: 17,
+		x: 15,
+		y: 13,
+		orientation: 'DOWN',
+		id: thirdChallenger,
+		conditionFunction: (s) => !occupantHandled(s, thirdChallenger),
+		dialogue: ['pidgeotto is protecting a strange egg'],
+		encounter: {
+			name: 'pidgeotto',
+			maxXp: 8 * 8 * 8,
+			minXp: 8 * 8 * 8,
+			rarity: 'common',
+		},
+	},
+	makeOverworldItem({
+		x: 15,
+		y: 12,
+		amount: 1,
+		mapId: 'labyrinth_level_1',
+		item: 'lucky-egg',
+	}),
 ];

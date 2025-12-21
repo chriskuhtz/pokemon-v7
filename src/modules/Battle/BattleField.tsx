@@ -807,6 +807,7 @@ export const BattleField = ({
 					gridTemplateRows: `1fr 4fr 4fr ${portraitMode ? 4 : 1}fr`,
 					height: '100dvh',
 					gap: '.5rem',
+
 					backgroundImage: portraitMode
 						? `url("/backgrounds/forestMobile.png")`
 						: `url("/backgrounds/forestDesktop.png")`,
