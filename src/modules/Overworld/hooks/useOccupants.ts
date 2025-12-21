@@ -33,7 +33,6 @@ export const useOccupants = () => {
 
 	useEffect(() => {
 		if (location.mapId !== lastRenderedMap) {
-			console.log('reset');
 			setStatefulOccupants([]);
 			setLastRenderedMap(location.mapId);
 		}

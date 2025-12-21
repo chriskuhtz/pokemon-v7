@@ -7,25 +7,16 @@ import React, {
 } from 'react';
 import { MoveName } from '../constants/movesCheckList';
 
-import {
-	battleSpriteSize,
-	emptyPokedex,
-	ONE_DAY,
-} from '../constants/gameData/gameData';
+import { emptyPokedex } from '../constants/gameData/gameData';
 import { PokemonName } from '../constants/pokemonNames';
 import { addPokemonToDex } from '../functions/addPokemonToDex';
 import { applyHappinessFromWalking } from '../functions/applyHappinessFromWalking';
 import { applyItemToPokemon } from '../functions/applyItemToPokemon';
 import { fullyHealPokemon } from '../functions/fullyHealPokemon';
-import { getBagLimit, getTotalInventoryAmount } from '../functions/getBagLimit';
-import { getItemUrl } from '../functions/getItemUrl';
-import { getTeamSize } from '../functions/getTeamSize';
 import { TimeOfDay } from '../functions/getTimeOfDay';
-import { receiveNewPokemonFunction } from '../functions/receiveNewPokemonFunction';
 import { updateItemFunction } from '../functions/updateItemFunction';
 import { EmptyInventory, joinInventories } from '../interfaces/Inventory';
 import { ItemType } from '../interfaces/Item';
-import { Occupant } from '../interfaces/Occupant';
 import { OwnedPokemon } from '../interfaces/OwnedPokemon';
 import { QuestStatus } from '../interfaces/Quest';
 import { RoutesType } from '../interfaces/Routing';
@@ -54,7 +45,6 @@ export interface UseSaveFile {
 	patchSaveFileReducer: (update: Partial<SaveFile>) => void;
 	setActiveTabReducer: (update: RoutesType) => void;
 	talkToNurseReducer: (id: string) => void;
-	handleOccupantReducer: (occ: Occupant) => void;
 	navigateAwayFromOverworldReducer: (
 		meta: SaveFile['meta'],
 		steps: number
@@ -262,59 +252,6 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		addMessage({ message: 'Whole Team fully healed' });
 	};
 
-	const handleOccupantReducer = (occ: Occupant) => {
-		const timer = occ.type === 'BUSH' ? new Date().getTime() + ONE_DAY : -1;
-		let newInventory = { ...saveFile.bag };
-		let pokemon = [...saveFile.pokemon];
-		if (occ.type === 'POKEBALL') {
-			pokemon = receiveNewPokemonFunction(
-				{ ...occ.pokemon, ownerId: saveFile.playerId },
-				saveFile.pokemon,
-				getTeamSize(saveFile, gameData)
-			);
-		}
-		if (occ.type === 'NPC' && occ.gifts) {
-			newInventory = joinInventories(newInventory, occ.gifts);
-		}
-
-		if (occ.type === 'ITEM' || occ.type === 'HIDDEN_ITEM') {
-			const { item, amount } = occ;
-			newInventory = joinInventories(newInventory, { [item]: amount });
-
-			if (
-				getTotalInventoryAmount(newInventory) > getBagLimit(saveFile, gameData)
-			) {
-				addMessage({
-					message: `Your Bag is full,  cant carry ${amount} more items`,
-					needsNoConfirmation: true,
-				});
-				return;
-			} else
-				addMessage({
-					icon: <img src={getItemUrl(item)} height={battleSpriteSize} />,
-					message: `Found ${amount} ${item}`,
-					needsNoConfirmation: true,
-				});
-		}
-		const updatedQuests = saveFile.quests;
-		if (occ.type === 'NPC' && occ.quest) {
-			const { quest } = occ;
-			if (updatedQuests[quest] === 'INACTIVE') {
-				updatedQuests[quest] = 'ACTIVE';
-			}
-		}
-
-		setSaveFile({
-			...saveFile,
-			bag: newInventory,
-			quests: updatedQuests,
-			pokemon: pokemon,
-			handledOccupants: [
-				...saveFile.handledOccupants,
-				{ id: occ.id, resetAt: timer },
-			],
-		});
-	};
 	const applyItemToPokemonReducer = (
 		pokemon: OwnedPokemon,
 		item: ItemType,
@@ -465,7 +402,6 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 		setActiveTabReducer,
 		talkToNurseReducer,
 		navigateAwayFromOverworldReducer,
-		handleOccupantReducer,
 		applyItemToPokemonReducer,
 		changeHeldItemReducer,
 		useSacredAshReducer,

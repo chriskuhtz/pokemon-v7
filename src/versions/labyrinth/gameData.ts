@@ -17,7 +17,7 @@ export const gameData: GameData = {
 		quests: false,
 		movesEditableInTeamOverview: true,
 		movesLearnableInTeamOverview: true,
-		snapShotExportAvailable: true,
+		snapShotExportAvailable: false,
 		pokemonStorageSystem: false,
 	},
 	losingMessages: {

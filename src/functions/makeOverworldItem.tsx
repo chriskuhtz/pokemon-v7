@@ -47,7 +47,7 @@ export const makeOverworldChest = ({
 	contents: ItemType[];
 	mapId: MapId;
 }): OverworldChest => {
-	const id = contents.join() + x + y + mapId;
+	const id = y + 'chest_' + x + mapId;
 
 	let newInventory = EmptyInventory;
 	const totalItemAmount = contents.length;

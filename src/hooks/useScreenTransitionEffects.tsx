@@ -19,11 +19,12 @@ export const ScreenTransitionProvider = ({
 }: {
 	children: ReactNode;
 }) => {
-	const [squares, setSquares] = useState<number[]>(emptySquares);
+	const [squares, setSquares] = useState<number[]>([...emptySquares]);
 	const [transition, setTransition] = useState<ScreenTransition>();
 
 	useEffect(() => {
 		if (!transition) {
+			setSquares(emptySquares);
 			return;
 		}
 		setTimeout(() => {
@@ -49,7 +50,6 @@ export const ScreenTransitionProvider = ({
 			} else if (transition) {
 				transition.onRemoval();
 				setTransition(undefined);
-				setSquares(emptySquares);
 			}
 		}, 50);
 	}, [squares, transition]);

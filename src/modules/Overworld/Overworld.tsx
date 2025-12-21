@@ -1,48 +1,30 @@
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 
 import { CombinedCanvas } from '../../components/CombinedCanvas/CombinedCanvas';
 import { FollowerSprite } from '../../components/FollowerSprite/FollowerSprite';
 import { fps } from '../../constants/gameData/gameData';
 import { mapsRecord } from '../../constants/gameData/maps/mapsRecord';
-import { isBagOverloaded } from '../../functions/getBagLimit';
 import { handleEnterPress } from '../../functions/handleEnterPress';
 import { LocationContext } from '../../hooks/LocationProvider';
-import { useApricornTree } from '../../hooks/useApricornTree';
 import { BaseSizeContext } from '../../hooks/useBaseSize';
 import { useDrawForeground } from '../../hooks/useDrawBackground';
-import { useDugtrioExplorers } from '../../hooks/useDugtrioExplorers';
-import { GameDataContext } from '../../hooks/useGameData';
-import { useHallowedTower } from '../../hooks/useHallowedTower';
-import { useHoneyTree } from '../../hooks/useHoneyTree';
-import { useInteractWithClimbingSteps } from '../../hooks/useInteractWithClimbingSteps';
-import { useInteractWithSnorlax } from '../../hooks/useInteractWithSnorlax';
 import { MessageQueueContext } from '../../hooks/useMessageQueue';
-import { useRangerRadio } from '../../hooks/useRangerRadio';
 import { SaveFileContext } from '../../hooks/useSaveFile';
 import { useShader } from '../../hooks/useShader';
-import { useStaticEncounter } from '../../hooks/useStaticEncounter';
-import { useStrangeTree } from '../../hooks/useStrangeTree';
-import { useZigzagoonForagers } from '../../hooks/useZigzagoonForagers';
-import { Occupant } from '../../interfaces/Occupant';
 import { OverworldMap } from '../../interfaces/OverworldMap';
 import './Overworld.css';
 import { ClickerGrid } from './components/ClickerGrid';
 import { OverworldMenus } from './components/OverworldMenus';
-import { interactWithFunction } from './functions/interactWith';
 import { useClickTarget } from './hooks/useClickTarget';
-import { useCombeeHive } from './hooks/useCombeeHive';
 import { useDrawCharacter } from './hooks/useDrawCharacter';
 import { useDrawOccupants } from './hooks/useDrawOccupants';
 import { useEncounterRateModifier } from './hooks/useEncounterRateModifier';
-import { useInteractWithLedge } from './hooks/useInteractWithLedge';
-import { useInteractWithTrainer } from './hooks/useInteractWithTrainer';
 import { useIsDark } from './hooks/useIsDark';
 import { useKeyboardControl } from './hooks/useKeyboardControl';
-import { useMachete } from './hooks/useMachete';
 import { useOccupants } from './hooks/useOccupants';
 import { useOverworldMovement } from './hooks/useOverworldMovement';
-import { useSledgeHammer } from './hooks/useSledgeHammer';
 import { useStartEncounter } from './hooks/useStartEncounter';
+import { useInteractWith } from './hooks/useInteractWith';
 
 const playerCanvasId = 'playerCanvas';
 const backgroundCanvasId = 'bg';
@@ -52,36 +34,12 @@ export const Overworld = () => {
 	const shader = useShader();
 	const [stepsTaken, setStepsTaken] = useState<number>(0);
 	const { baseSize } = useContext(BaseSizeContext);
-	const gameData = useContext(GameDataContext);
-	const { latestMessage, addMultipleMessages } =
-		useContext(MessageQueueContext);
-	const {
-		saveFile,
-		handleOccupantReducer,
-		navigateAwayFromOverworldReducer,
-		patchSaveFileReducer,
-		talkToNurseReducer: talkToNurse,
-	} = useContext(SaveFileContext);
-	const { location, setLocation: setCharacterLocation } =
-		useContext(LocationContext);
-	const interactWithClimbingSteps = useInteractWithClimbingSteps();
-	const interactWithApricornTree = useApricornTree();
-	const interactWithHoneyTree = useHoneyTree();
-	const interactWithTrainer = useInteractWithTrainer();
-	const interactWithHallowedTower = useHallowedTower();
-	const interactWithStrangeTree = useStrangeTree();
-	const interactWithCombeeHive = useCombeeHive();
-	const interactWithBush = useMachete();
-	const interactWithLedge = useInteractWithLedge();
-	const interactWithZigzagoonForager = useZigzagoonForagers();
-	const interactWithSnorlax = useInteractWithSnorlax();
-	const interactWithStaticEncounter = useStaticEncounter();
-	const interactWithDugtrioExplorer = useDugtrioExplorers();
-	const interactWithSwarmRadar = useCallback(() => {
-		navigateAwayFromOverworldReducer({ activeTab: 'SWARM_RADAR' }, stepsTaken);
-	}, [navigateAwayFromOverworldReducer, stepsTaken]);
-	const interactWithRocketRadio = useRangerRadio();
-	const interactWithRock = useSledgeHammer();
+
+	const { latestMessage } = useContext(MessageQueueContext);
+	const { saveFile, navigateAwayFromOverworldReducer, patchSaveFileReducer } =
+		useContext(SaveFileContext);
+	const { location } = useContext(LocationContext);
+
 	const addEncounterMessage = useStartEncounter();
 	const encounterRateModifier = useEncounterRateModifier();
 
@@ -136,68 +94,7 @@ export const Overworld = () => {
 	useDrawOccupants(occupantsCanvasId, occupants, baseSize);
 	//INTERACTION
 	useDrawForeground('foreground', map.tileMap, map.tilesetUrl, baseSize);
-	const interactWith = useCallback(
-		(occ: Occupant | undefined) =>
-			interactWithFunction({
-				overloaded: isBagOverloaded(saveFile, gameData),
-				activeMessage: !!latestMessage,
-				occ,
-				addMultipleMessages,
-				rotateOccupant,
-				playerLocation: location,
-				talkToNurse,
-				handledOccupants: saveFile.handledOccupants.map((h) => h.id),
-				handleThisOccupant: handleOccupantReducer,
-				goToPosition: setCharacterLocation,
-				interactWithApricornTree,
-				interactWithHoneyTree,
-				interactWithHallowedTower,
-				interactWithStrangeTree,
-				interactWithCombeeHive,
-				interactWithBush,
-				interactWithRock,
-				interactWithLedge,
-				interactWithZigzagoonForager,
-				interactWithDugtrioExplorer,
-				interactWithSwarmRadar,
-				interactWithRocketRadio,
-				interactWithSnorlax,
-				interactWithStaticEncounter,
-				interactWithTrainer,
-				interactWithClimbingSteps,
-				routeTo: (meta) => navigateAwayFromOverworldReducer(meta, stepsTaken),
-				settings: saveFile.settings,
-			}),
-		[
-			saveFile,
-			gameData,
-			latestMessage,
-			addMultipleMessages,
-			rotateOccupant,
-			location,
-			talkToNurse,
-			handleOccupantReducer,
-			setCharacterLocation,
-			interactWithApricornTree,
-			interactWithHoneyTree,
-			interactWithHallowedTower,
-			interactWithStrangeTree,
-			interactWithCombeeHive,
-			interactWithBush,
-			interactWithRock,
-			interactWithLedge,
-			interactWithZigzagoonForager,
-			interactWithDugtrioExplorer,
-			interactWithSwarmRadar,
-			interactWithRocketRadio,
-			interactWithSnorlax,
-			interactWithStaticEncounter,
-			interactWithTrainer,
-			interactWithClimbingSteps,
-			navigateAwayFromOverworldReducer,
-			stepsTaken,
-		]
-	);
+	const interactWith = useInteractWith(stepsTaken, rotateOccupant);
 	//MOVEMENT
 	const setNextInput = useOverworldMovement(
 		(challenger) => addEncounterMessage(stepsTaken, challenger),

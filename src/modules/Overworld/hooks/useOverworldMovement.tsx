@@ -45,8 +45,7 @@ export const useOverworldMovement = (
 	const { location: playerLocation, setLocation: setCharacterLocation } =
 		useContext(LocationContext);
 	const { internalDex, defaultBattleSize } = useContext(GameDataContext);
-	const { handleOccupantReducer, patchSaveFileReducer } =
-		useContext(SaveFileContext);
+	const { patchSaveFileReducer } = useContext(SaveFileContext);
 	const { addMultipleMessages } = useContext(MessageQueueContext);
 
 	const shinyFactor = useMemo(() => (bag['shiny-charm'] > 1 ? 4 : 1), [bag]);
@@ -208,7 +207,12 @@ export const useOverworldMovement = (
 						message: d,
 					}))
 				);
-				handleOccupantReducer(steptOnDialogue);
+				patchSaveFileReducer({
+					handledOccupants: [
+						...saveFile.handledOccupants,
+						{ id: steptOnDialogue.id, resetAt: -1 },
+					],
+				});
 				return;
 			}
 			if (steptOnRouter) {
@@ -257,7 +261,6 @@ export const useOverworldMovement = (
 		currentSwarm,
 		encounterChance,
 		encounterRateModifier.factor,
-		handleOccupantReducer,
 		handlePossibleEncounter,
 		map,
 		nextInput,

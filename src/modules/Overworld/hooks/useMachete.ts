@@ -1,11 +1,12 @@
 import { useCallback, useContext } from 'react';
+import { ONE_DAY } from '../../../constants/gameData/gameData';
 import { GameDataContext } from '../../../hooks/useGameData';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { SaveFileContext } from '../../../hooks/useSaveFile';
 import { OverworldBush } from '../../../interfaces/Occupant';
 
 export const useMachete = () => {
-	const { saveFile, handleOccupantReducer } = useContext(SaveFileContext);
+	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 	const { addMultipleMessages } = useContext(MessageQueueContext);
 	const { overworldActions } = useContext(GameDataContext);
 
@@ -20,7 +21,16 @@ export const useMachete = () => {
 						message: d,
 						onRemoval:
 							i === overworldActions.bushCutting.successDialogue.length - 1
-								? () => handleOccupantReducer(bush)
+								? () =>
+										patchSaveFileReducer({
+											handledOccupants: [
+												...saveFile.handledOccupants,
+												{
+													id: bush.id,
+													resetAt: new Date().getTime() + ONE_DAY,
+												},
+											],
+										})
 								: undefined,
 					}))
 				);
@@ -33,8 +43,8 @@ export const useMachete = () => {
 		},
 		[
 			addMultipleMessages,
-			handleOccupantReducer,
 			overworldActions.bushCutting,
+			patchSaveFileReducer,
 			saveFile,
 		]
 	);

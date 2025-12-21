@@ -11,11 +11,12 @@ export const useReset = () => {
 
 	return useCallback(() => {
 		saveFile.handledOccupants.forEach((h) => {
+			console.log('reset', h);
 			window.localStorage.removeItem(h.id);
 		});
 		window.localStorage.removeItem(saveFileId);
 		window.localStorage.removeItem(locationId);
 		reset();
 		resetLocation();
-	}, [locationId, reset, resetLocation, saveFile.handledOccupants, saveFileId]);
+	}, [locationId, reset, resetLocation, saveFile, saveFileId]);
 };

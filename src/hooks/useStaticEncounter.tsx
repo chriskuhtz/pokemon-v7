@@ -6,11 +6,11 @@ import { OverworldPokemon } from '../interfaces/Occupant';
 import { MessageQueueContext } from './useMessageQueue';
 import { SaveFileContext } from './useSaveFile';
 
-export const useStaticEncounter = () => {
+export const useInteractWithOverworldPokemon = () => {
 	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
 	const { addMultipleMessages } = useContext(MessageQueueContext);
 
-	const interact = useCallback(
+	const interactWithStaticEncounter = useCallback(
 		(occ: OverworldPokemon) => {
 			if (!occ.encounter) {
 				return;
@@ -44,5 +44,32 @@ export const useStaticEncounter = () => {
 		[addMultipleMessages, patchSaveFileReducer, saveFile.mileStones]
 	);
 
-	return interact;
+	return useCallback(
+		(data: OverworldPokemon) => {
+			if (data.encounter) {
+				interactWithStaticEncounter(data);
+			} else
+				addMultipleMessages([
+					...data.dialogue.map((d, i) => ({
+						message: d,
+						onRemoval:
+							i === data.dialogue.length - 1 && data.disappearsAfterDialogue
+								? () =>
+										patchSaveFileReducer({
+											handledOccupants: [
+												...saveFile.handledOccupants,
+												{ id: data.id, resetAt: -1 },
+											],
+										})
+								: undefined,
+					})),
+				]);
+		},
+		[
+			addMultipleMessages,
+			interactWithStaticEncounter,
+			patchSaveFileReducer,
+			saveFile.handledOccupants,
+		]
+	);
 };

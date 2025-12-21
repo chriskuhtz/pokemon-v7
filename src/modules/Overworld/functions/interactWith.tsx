@@ -1,15 +1,17 @@
-import { PokemonSprite } from '../../../components/PokemonSprite/PokemonSprite';
 import { SpriteIcon } from '../../../components/SpriteIcon/SpriteIcon';
 import { getOppositeDirection } from '../../../functions/getOppositeDirection';
 import { Message } from '../../../hooks/useMessageQueue';
-import { EmptyInventory, joinInventories } from '../../../interfaces/Inventory';
-import { getRandomItem } from '../../../interfaces/Item';
 import {
 	ApricornTree,
 	Ledge,
 	Occupant,
 	OccupantType,
 	OverworldBush,
+	OverworldChest,
+	OverworldHiddenItem,
+	OverworldItem,
+	OverworldNpc,
+	OverworldPokeball,
 	OverworldPokemon,
 	OverworldRock,
 	OverworldSnorlax,
@@ -22,7 +24,6 @@ import {
 	CharacterOrientation,
 	SaveFile,
 } from '../../../interfaces/SaveFile';
-import { SettingsObject } from '../../../interfaces/SettingsObject';
 
 export const shouldRotate = (t: OccupantType) =>
 	[
@@ -48,8 +49,6 @@ export const interactWithFunction = ({
 	rotateOccupant,
 	playerLocation,
 	talkToNurse,
-	handledOccupants,
-	handleThisOccupant,
 	goToPosition,
 	interactWithHoneyTree,
 	interactWithCombeeHive,
@@ -65,11 +64,14 @@ export const interactWithFunction = ({
 	interactWithRocketRadio,
 	interactWithSnorlax,
 	interactWithTrainer,
-	interactWithStaticEncounter,
+	interactWithOverworldPokemon,
 	interactWithApricornTree,
-	settings,
+	interactWithOverworldItem,
+	interactWithOverworldPokeball,
 	routeTo,
 	overloaded,
+	interactWithOverworldChest,
+	interactWithOverworldNpc,
 }: {
 	overloaded: boolean;
 	activeMessage: boolean;
@@ -78,8 +80,6 @@ export const interactWithFunction = ({
 	rotateOccupant: (id: string, newOrientation: CharacterOrientation) => void;
 	playerLocation: CharacterLocationData;
 	talkToNurse: (id: string) => void;
-	handleThisOccupant: (occ: Occupant) => void;
-	handledOccupants: string[];
 	goToPosition: (x: CharacterLocationData) => void;
 	interactWithHoneyTree: () => void;
 	interactWithHallowedTower: () => void;
@@ -91,14 +91,17 @@ export const interactWithFunction = ({
 	interactWithTrainer: (x: OverworldTrainer) => void;
 	interactWithLedge: (x: Ledge) => void;
 	interactWithSnorlax: (x: OverworldSnorlax) => void;
-	interactWithStaticEncounter: (x: OverworldPokemon) => void;
+	interactWithOverworldPokemon: (x: OverworldPokemon) => void;
 	interactWithApricornTree: (x: ApricornTree) => void;
 	interactWithZigzagoonForager: () => void;
 	interactWithDugtrioExplorer: () => void;
 	interactWithSwarmRadar: () => void;
 	interactWithRocketRadio: () => void;
+	interactWithOverworldChest: (x: OverworldChest) => void;
+	interactWithOverworldNpc: (x: OverworldNpc) => void;
+	interactWithOverworldItem: (x: OverworldItem | OverworldHiddenItem) => void;
+	interactWithOverworldPokeball: (x: OverworldPokeball) => void;
 	routeTo: (meta: SaveFile['meta']) => void;
-	settings?: SettingsObject;
 }) => {
 	if (!occ || activeMessage) {
 		return;
@@ -162,38 +165,16 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'POKEBALL') {
-		addMultipleMessages([
-			...data.dialogue.map((d) => ({
-				message: d,
-			})),
-			{
-				message: `Received a ${data.pokemon.name}`,
-				onRemoval: () => handleThisOccupant(data),
-				icon: <PokemonSprite name={data.pokemon.name} />,
-			},
-		]);
+		interactWithOverworldPokeball(data);
 		return;
 	}
 	if (data.type === 'ITEM' || data.type === 'HIDDEN_ITEM') {
-		const checkedData = settings?.randomOverworldItems
-			? { ...data, item: getRandomItem() }
-			: data;
-
-		handleThisOccupant(checkedData);
+		interactWithOverworldItem(data);
 
 		return;
 	}
 	if (data.type === 'CHEST') {
-		handleThisOccupant(data);
-		const chestData = window.localStorage.getItem(data.id ?? '');
-		if (!chestData) {
-			window.localStorage.setItem(
-				data.id,
-				JSON.stringify(joinInventories(EmptyInventory, data.contents))
-			);
-		}
-
-		routeTo({ activeTab: 'CHEST', currentChestId: data.id });
+		interactWithOverworldChest(data);
 		return;
 	}
 	if (data.type === 'BUSH') {
@@ -291,47 +272,11 @@ export const interactWithFunction = ({
 		return;
 	}
 	if (data.type === 'NPC') {
-		if (!handledOccupants.includes(occ.id)) {
-			addMultipleMessages(
-				[
-					...data.unhandledMessage.map((d, i) => ({
-						icon: <SpriteIcon sprite={data.sprite} />,
-						message: d,
-						onRemoval:
-							i === data.unhandledMessage.length - 1
-								? () => handleThisOccupant(occ)
-								: undefined,
-					})),
-					...Object.entries(data.gifts ?? {}).map(([item, amount]) => ({
-						message: `received ${amount} ${item}`,
-					})),
-					data.quest ? { message: `new quest: ${data.quest}` } : undefined,
-				].filter((m) => m !== undefined)
-			);
-		} else {
-			addMultipleMessages(
-				(data.handledMessage ?? data.unhandledMessage).map((d) => ({
-					icon: <SpriteIcon sprite={data.sprite} />,
-					message: d,
-				}))
-			);
-		}
-
+		interactWithOverworldNpc(data);
 		return;
 	}
 	if (data.type === 'POKEMON') {
-		if (data.encounter) {
-			interactWithStaticEncounter(data);
-		} else
-			addMultipleMessages([
-				...data.dialogue.map((d, i) => ({
-					message: d,
-					onRemoval:
-						i === data.dialogue.length - 1 && data.disappearsAfterDialogue
-							? () => handleThisOccupant(data)
-							: undefined,
-				})),
-			]);
+		interactWithOverworldPokemon(data);
 
 		return;
 	}
