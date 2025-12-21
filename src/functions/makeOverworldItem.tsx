@@ -50,7 +50,7 @@ export const makeOverworldChest = ({
 	const id = y + 'chest_' + x + mapId;
 
 	let newInventory = EmptyInventory;
-	const totalItemAmount = contents.length;
+	const totalItemAmount = 6;
 
 	const contentsWithAmounts = [];
 	let remainingAmount = totalItemAmount;

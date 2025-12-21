@@ -265,6 +265,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 				item === 'leppa-berry') &&
 			!move
 		) {
+			addMessage({ message: `${item} needs to be applied to specific move` });
 			return;
 		}
 		const updatedPokemon = applyItemToPokemon(pokemon, item, addMessage, move);

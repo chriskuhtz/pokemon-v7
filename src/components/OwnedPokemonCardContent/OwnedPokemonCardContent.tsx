@@ -11,14 +11,12 @@ import { MoveEditor } from '../MoveEditor/MoveEditor';
 import { MovesDisplay } from '../MovesDisplay/MovesDisplay';
 import { StatDisplay } from '../StatDisplay/StatDisplay';
 import { DetailsCard } from './components/DetailsCard';
-import {
-	ApplyItemSection,
-	HeldItemSelection,
-} from './components/HeldItemSelection';
+import { HeldItemSelection } from './components/HeldItemSelection';
 import {
 	OwnedPokemonCardTabSelection,
 	TabType,
 } from './components/OwnedPokemonCardTabSelection';
+import { ApplyItemSection } from './components/ApplyItemSection';
 
 export const OwnedPokemonCardContent = ({
 	data,

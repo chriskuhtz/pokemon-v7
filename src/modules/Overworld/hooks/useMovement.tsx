@@ -159,6 +159,19 @@ export const useMovement = (
 
 	const startEncounter = useStartEncounter();
 
+	const [encounter, setEncounter] = useState<{
+		stepsTaken: number;
+		type: 'WATER' | 'GROUND';
+	}>();
+
+	useEffect(() => {
+		if (encounter) {
+			startEncounter(encounter.stepsTaken, encounter.type);
+			setEncounter(undefined);
+			setEncounterChance(baseEncounterRate);
+		}
+	}, [encounter, startEncounter]);
+
 	useEffect(() => {
 		const engine = setTimeout(() => {
 			//dont do anything if in dialogue or transition
@@ -218,8 +231,7 @@ export const useMovement = (
 				});
 				//maybe start encounter
 				if (encounterWillHappen) {
-					setEncounterChance(baseEncounterRate);
-					startEncounter(stepsTaken, encounterWillHappen);
+					setEncounter({ stepsTaken, type: encounterWillHappen });
 				} else setEncounterChance((cur) => cur + baseEncounterRate);
 			}
 			//walk player
@@ -241,8 +253,7 @@ export const useMovement = (
 				});
 				//maybe start encounter
 				if (encounterWillHappen) {
-					setEncounterChance(baseEncounterRate);
-					startEncounter(stepsTaken, encounterWillHappen);
+					setEncounter({ stepsTaken, type: encounterWillHappen });
 				} else setEncounterChance((cur) => cur + baseEncounterRate);
 			}
 			//remove input after handling

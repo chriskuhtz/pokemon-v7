@@ -235,4 +235,11 @@ export const labyrinthLevel1Occupants: OverworldMap['occupants'] = [
 		mapId: 'labyrinth_level_1',
 		item: 'lucky-egg',
 	}),
+	{
+		type: 'BUSH',
+		x: 5,
+		y: 17,
+		id: 'lab-1-bush-1',
+		conditionFunction: (s) => !occupantHandled(s, 'lab-1-bush-1'),
+	},
 ];
