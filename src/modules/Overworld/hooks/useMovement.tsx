@@ -33,7 +33,6 @@ import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { fps } from '../../../constants/gameData/gameData';
 import { mapsRecord } from '../../../constants/gameData/maps/mapsRecord';
 import { getNextForwardFoot } from '../../../functions/getNextForwardFoot';
-import { getNextLocation } from '../../../functions/getNextLocation';
 import { updatePosition } from '../../../functions/updatePosition';
 import { LocationContext } from '../../../hooks/LocationProvider';
 import { GameDataContext } from '../../../hooks/useGameData';
@@ -121,12 +120,6 @@ export const useMovement = (
 	);
 
 	const encounterWillHappen = useMemo((): 'WATER' | 'GROUND' | undefined => {
-		const nextLocation = nextInput
-			? getNextLocation(location, nextInput)
-			: undefined;
-		if (!nextLocation) {
-			return;
-		}
 		if (map.peaceful) {
 			return;
 		}
@@ -134,13 +127,13 @@ export const useMovement = (
 			return;
 		}
 		if (
-			map.tileMap.encounterLayer[nextLocation.y][nextLocation.x] &&
+			map.tileMap.encounterLayer[location.y][location.x] &&
 			encounterChance > Math.random()
 		) {
 			return 'GROUND';
 		}
 		if (
-			map.tileMap.waterLayer[nextLocation.y][nextLocation.x] &&
+			map.tileMap.waterLayer[location.y][location.x] &&
 			canSwim &&
 			encounterChance > Math.random()
 		) {
@@ -154,15 +147,9 @@ export const useMovement = (
 		map.peaceful,
 		map.tileMap.encounterLayer,
 		map.tileMap.waterLayer,
-		nextInput,
 	]);
 
 	const startEncounter = useStartEncounter();
-
-	const [encounter, setEncounter] = useState<{
-		stepsTaken: number;
-		type: 'WATER' | 'GROUND';
-	}>();
 
 	useEffect(() => {
 		const engine = setTimeout(() => {
@@ -213,7 +200,11 @@ export const useMovement = (
 				setEncounterChance(baseEncounterRate);
 				return;
 			}
-
+			//maybe start encounter
+			else if (encounterWillHappen) {
+				setEncounterChance(baseEncounterRate);
+				startEncounter(stepsTaken, encounterWillHappen);
+			}
 			//rotate player
 			else if (nextInput && nextInput !== location.orientation) {
 				setLocation({
@@ -221,10 +212,6 @@ export const useMovement = (
 					orientation: nextInput,
 					forwardFoot: getNextForwardFoot(location.forwardFoot),
 				});
-				//maybe start encounter
-				if (encounterWillHappen) {
-					setEncounter({ stepsTaken, type: encounterWillHappen });
-				} else setEncounterChance((cur) => cur + baseEncounterRate);
 			}
 			//walk player
 			else if (nextInput && nextInput === location.orientation) {
@@ -243,10 +230,6 @@ export const useMovement = (
 					),
 					forwardFoot: getNextForwardFoot(location.forwardFoot),
 				});
-				//maybe start encounter
-				if (encounterWillHappen) {
-					setEncounter({ stepsTaken, type: encounterWillHappen });
-				} else setEncounterChance((cur) => cur + baseEncounterRate);
 			}
 			//remove input after handling
 			setNextInput(undefined);
@@ -274,19 +257,6 @@ export const useMovement = (
 		steptOnRouter,
 		transition,
 	]);
-
-	useEffect(() => {
-		if (encounter) {
-			if (latestMessage || transition) {
-				setEncounter(undefined);
-				setEncounterChance(baseEncounterRate);
-				return;
-			}
-			startEncounter(encounter.stepsTaken, encounter.type);
-			setEncounter(undefined);
-			setEncounterChance(baseEncounterRate);
-		}
-	}, [encounter, latestMessage, startEncounter, transition]);
 
 	return addInput;
 };
