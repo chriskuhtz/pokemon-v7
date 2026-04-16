@@ -70,7 +70,7 @@ export const handleAllAttackCategories = ({
 	playerId: string;
 	settings: SettingsObject | undefined;
 }) => {
-	let updatedPokemon = [...pokemon];
+	let updatedPokemon: BattlePokemon[] = [...pokemon];
 	const { updatedPokemon: ua, targets } = handleAttackStart({
 		attacker,
 		pokemon,
@@ -96,10 +96,10 @@ export const handleAllAttackCategories = ({
 				: move.data.meta.category.name;
 		switch (catname) {
 			case 'damage':
-			case 'damage+ailment':
-			case 'damage+heal':
-			case 'damage+lower':
-			case 'damage+raise':
+			case 'damage-ailment':
+			case 'damage-heal':
+			case 'damage-lower':
+			case 'damage-raise':
 			case 'ohko':
 				return handleDamageAttack({
 					attacker,
@@ -212,7 +212,6 @@ export const handleAllAttackCategories = ({
 	}
 
 	//SetPokemon
-
 	const attackHandled = updatedPokemon.map((p) => {
 		if (p.id === attacker.id) {
 			const underPressure = battleFieldEffects.some(
