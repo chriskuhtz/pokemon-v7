@@ -1,322 +1,329 @@
-import { SpriteIcon } from '../../../components/SpriteIcon/SpriteIcon';
-import { getOppositeDirection } from '../../../functions/getOppositeDirection';
-import { Message } from '../../../hooks/useMessageQueue';
+import { SpriteIcon } from "../../../components/SpriteIcon/SpriteIcon";
+import { getOppositeDirection } from "../../../functions/getOppositeDirection";
+import { Message } from "../../../hooks/useMessageQueue";
 import {
-	ApricornTree,
-	Ledge,
-	Occupant,
-	OccupantType,
-	OverworldBush,
-	OverworldChest,
-	OverworldHiddenItem,
-	OverworldItem,
-	OverworldNpc,
-	OverworldPokeball,
-	OverworldPokemon,
-	OverworldRock,
-	OverworldSnorlax,
-	OverworldStrangeTree,
-	OverworldTrainer,
-} from '../../../interfaces/Occupant';
+  ApricornTree,
+  Ledge,
+  Occupant,
+  OccupantType,
+  OverworldBush,
+  OverworldChest,
+  OverworldHiddenItem,
+  OverworldInvisbleItem,
+  OverworldItem,
+  OverworldNpc,
+  OverworldPokeball,
+  OverworldPokemon,
+  OverworldRock,
+  OverworldSnorlax,
+  OverworldStrangeTree,
+  OverworldTrainer,
+} from "../../../interfaces/Occupant";
 
 import {
-	CharacterLocationData,
-	CharacterOrientation,
-	SaveFile,
-} from '../../../interfaces/SaveFile';
+  CharacterLocationData,
+  CharacterOrientation,
+  SaveFile,
+} from "../../../interfaces/SaveFile";
 
 export const shouldRotate = (t: OccupantType) =>
-	[
-		'NURSE',
-		'NPC',
-		'MERCHANT',
-		'CAMP_MANAGER',
-		'TRAINER',
-		'APRICORN_SMITH',
-		'TRAINING_FIELD_MASTER',
-		'BERRY_FARMER',
-		'MILTANK_FARMER',
-		'POKEMON',
-		'ZIGZAGOON_FORAGER',
-		'DUGTRIO_EXPLORER',
-		'ROUTER_NPC',
-		'TELEPORTER_NPC',
-	].includes(t);
+  [
+    "NURSE",
+    "NPC",
+    "MERCHANT",
+    "CAMP_MANAGER",
+    "TRAINER",
+    "APRICORN_SMITH",
+    "TRAINING_FIELD_MASTER",
+    "BERRY_FARMER",
+    "MILTANK_FARMER",
+    "POKEMON",
+    "ZIGZAGOON_FORAGER",
+    "DUGTRIO_EXPLORER",
+    "ROUTER_NPC",
+    "TELEPORTER_NPC",
+  ].includes(t);
 export const interactWithFunction = ({
-	activeMessage,
-	occ,
-	addMultipleMessages,
-	rotateOccupant,
-	playerLocation,
-	talkToNurse,
-	goToPosition,
-	interactWithHoneyTree,
-	interactWithCombeeHive,
-	interactWithStrangeTree,
-	interactWithHallowedTower,
-	interactWithBush,
-	interactWithRock,
-	interactWithClimbingSteps,
-	interactWithLedge,
-	interactWithZigzagoonForager,
-	interactWithDugtrioExplorer,
-	interactWithSwarmRadar,
-	interactWithRocketRadio,
-	interactWithSnorlax,
-	interactWithTrainer,
-	interactWithOverworldPokemon,
-	interactWithApricornTree,
-	interactWithOverworldItem,
-	interactWithOverworldPokeball,
-	routeTo,
-	overloaded,
-	interactWithOverworldChest,
-	interactWithOverworldNpc,
+  activeMessage,
+  occ,
+  addMultipleMessages,
+  rotateOccupant,
+  playerLocation,
+  talkToNurse,
+  goToPosition,
+  interactWithHoneyTree,
+  interactWithCombeeHive,
+  interactWithStrangeTree,
+  interactWithHallowedTower,
+  interactWithBush,
+  interactWithRock,
+  interactWithClimbingSteps,
+  interactWithLedge,
+  interactWithZigzagoonForager,
+  interactWithDugtrioExplorer,
+  interactWithSwarmRadar,
+  interactWithRocketRadio,
+  interactWithSnorlax,
+  interactWithTrainer,
+  interactWithOverworldPokemon,
+  interactWithApricornTree,
+  interactWithOverworldItem,
+  interactWithOverworldPokeball,
+  routeTo,
+  overloaded,
+  interactWithOverworldChest,
+  interactWithOverworldNpc,
 }: {
-	overloaded: boolean;
-	activeMessage: boolean;
-	occ: Occupant | undefined;
-	addMultipleMessages: (x: Message[]) => void;
-	rotateOccupant: (id: string, newOrientation: CharacterOrientation) => void;
-	playerLocation: CharacterLocationData;
-	talkToNurse: (id: string) => void;
-	goToPosition: (x: CharacterLocationData) => void;
-	interactWithHoneyTree: () => void;
-	interactWithHallowedTower: () => void;
-	interactWithStrangeTree: (x: OverworldStrangeTree) => void;
-	interactWithCombeeHive: () => void;
-	interactWithBush: (x: OverworldBush) => void;
-	interactWithRock: (x: OverworldRock) => void;
-	interactWithClimbingSteps: () => void;
-	interactWithTrainer: (x: OverworldTrainer) => void;
-	interactWithLedge: (x: Ledge) => void;
-	interactWithSnorlax: (x: OverworldSnorlax) => void;
-	interactWithOverworldPokemon: (x: OverworldPokemon) => void;
-	interactWithApricornTree: (x: ApricornTree) => void;
-	interactWithZigzagoonForager: () => void;
-	interactWithDugtrioExplorer: () => void;
-	interactWithSwarmRadar: () => void;
-	interactWithRocketRadio: () => void;
-	interactWithOverworldChest: (x: OverworldChest) => void;
-	interactWithOverworldNpc: (x: OverworldNpc) => void;
-	interactWithOverworldItem: (x: OverworldItem | OverworldHiddenItem) => void;
-	interactWithOverworldPokeball: (x: OverworldPokeball) => void;
-	routeTo: (meta: SaveFile['meta']) => void;
+  overloaded: boolean;
+  activeMessage: boolean;
+  occ: Occupant | undefined;
+  addMultipleMessages: (x: Message[]) => void;
+  rotateOccupant: (id: string, newOrientation: CharacterOrientation) => void;
+  playerLocation: CharacterLocationData;
+  talkToNurse: (id: string) => void;
+  goToPosition: (x: CharacterLocationData) => void;
+  interactWithHoneyTree: () => void;
+  interactWithHallowedTower: () => void;
+  interactWithStrangeTree: (x: OverworldStrangeTree) => void;
+  interactWithCombeeHive: () => void;
+  interactWithBush: (x: OverworldBush) => void;
+  interactWithRock: (x: OverworldRock) => void;
+  interactWithClimbingSteps: () => void;
+  interactWithTrainer: (x: OverworldTrainer) => void;
+  interactWithLedge: (x: Ledge) => void;
+  interactWithSnorlax: (x: OverworldSnorlax) => void;
+  interactWithOverworldPokemon: (x: OverworldPokemon) => void;
+  interactWithApricornTree: (x: ApricornTree) => void;
+  interactWithZigzagoonForager: () => void;
+  interactWithDugtrioExplorer: () => void;
+  interactWithSwarmRadar: () => void;
+  interactWithRocketRadio: () => void;
+  interactWithOverworldChest: (x: OverworldChest) => void;
+  interactWithOverworldNpc: (x: OverworldNpc) => void;
+  interactWithOverworldItem: (
+    x: OverworldItem | OverworldHiddenItem | OverworldInvisbleItem,
+  ) => void;
+  interactWithOverworldPokeball: (x: OverworldPokeball) => void;
+  routeTo: (meta: SaveFile["meta"]) => void;
 }) => {
-	if (!occ || activeMessage) {
-		return;
-	}
+  if (!occ || activeMessage) {
+    return;
+  }
 
-	const data = occ;
+  const data = occ;
 
-	if (shouldRotate(data.type)) {
-		rotateOccupant(occ.id, getOppositeDirection(playerLocation.orientation));
-	}
-	if (data.type === 'TELEPORTER_NPC') {
-		if (overloaded) {
-			addMultipleMessages([
-				{
-					icon: <SpriteIcon sprite={data.sprite} />,
-					message: 'You are carrying too many things',
-				},
-			]);
-			return;
-		}
-		addMultipleMessages([
-			...data.dialogue.map((d, i) => ({
-				message: d,
-				onRemoval:
-					i === data.dialogue.length - 1
-						? () => goToPosition(data.to)
-						: undefined,
-			})),
-		]);
-		return;
-	}
-	if (data.type === 'APRICORN_TREE') {
-		interactWithApricornTree(data);
-		return;
-	}
+  if (shouldRotate(data.type)) {
+    rotateOccupant(occ.id, getOppositeDirection(playerLocation.orientation));
+  }
+  if (data.type === "TELEPORTER_NPC") {
+    if (overloaded) {
+      addMultipleMessages([
+        {
+          icon: <SpriteIcon sprite={data.sprite} />,
+          message: "You are carrying too many things",
+        },
+      ]);
+      return;
+    }
+    addMultipleMessages([
+      ...data.dialogue.map((d, i) => ({
+        message: d,
+        onRemoval:
+          i === data.dialogue.length - 1
+            ? () => goToPosition(data.to)
+            : undefined,
+      })),
+    ]);
+    return;
+  }
+  if (data.type === "APRICORN_TREE") {
+    interactWithApricornTree(data);
+    return;
+  }
 
-	if (data.type === 'EMPTY_APRICORN_TREE') {
-		addMultipleMessages([
-			{ message: 'The Apricorns will need some time to grow' },
-		]);
-		return;
-	}
-	if (data.type === 'SNORLAX') {
-		interactWithSnorlax(data);
-	}
-	if (data.type === 'BERRY_LURE') {
-		addMultipleMessages([
-			{
-				message: 'Inspecting the berry lure',
-				needsNoConfirmation: true,
-				onRemoval: () => routeTo({ activeTab: 'BERRY_LURE' }),
-			},
-		]);
-		return;
-	}
-	if (data.type === 'ON_STEP_PORTAL') {
-		return;
-	}
-	if (data.type === 'PORTAL') {
-		goToPosition(data.portal);
-		return;
-	}
-	if (data.type === 'POKEBALL') {
-		interactWithOverworldPokeball(data);
-		return;
-	}
-	if (data.type === 'ITEM' || data.type === 'HIDDEN_ITEM') {
-		interactWithOverworldItem(data);
+  if (data.type === "EMPTY_APRICORN_TREE") {
+    addMultipleMessages([
+      { message: "The Apricorns will need some time to grow" },
+    ]);
+    return;
+  }
+  if (data.type === "SNORLAX") {
+    interactWithSnorlax(data);
+  }
+  if (data.type === "BERRY_LURE") {
+    addMultipleMessages([
+      {
+        message: "Inspecting the berry lure",
+        needsNoConfirmation: true,
+        onRemoval: () => routeTo({ activeTab: "BERRY_LURE" }),
+      },
+    ]);
+    return;
+  }
+  if (data.type === "ON_STEP_PORTAL") {
+    return;
+  }
+  if (data.type === "PORTAL") {
+    goToPosition(data.portal);
+    return;
+  }
+  if (data.type === "POKEBALL") {
+    interactWithOverworldPokeball(data);
+    return;
+  }
+  if (
+    data.type === "ITEM" ||
+    data.type === "HIDDEN_ITEM" ||
+    data.type === "INVISIBLE_ITEM"
+  ) {
+    interactWithOverworldItem(data);
 
-		return;
-	}
-	if (data.type === 'CHEST') {
-		interactWithOverworldChest(data);
-		return;
-	}
-	if (data.type === 'BUSH') {
-		interactWithBush(data);
-		return;
-	}
-	if (data.type === 'ROCK') {
-		interactWithRock(data);
-		return;
-	}
-	if (data.type === 'CLIMBING_STEPS') {
-		interactWithClimbingSteps();
-		return;
-	}
-	if (data.type === 'LEDGE') {
-		interactWithLedge(data);
-		return;
-	}
-	if (data.type === 'PC') {
-		addMultipleMessages([
-			{
-				message: 'Accessing Pokemon Storage',
-				needsNoConfirmation: true,
-				onRemoval: () => routeTo({ activeTab: 'STORAGE' }),
-			},
-		]);
-		return;
-	}
-	if (data.type === 'STORAGE_CHEST') {
-		addMultipleMessages([
-			{
-				message: 'Opening Your Storage Chest',
-				needsNoConfirmation: true,
-				onRemoval: () => routeTo({ activeTab: 'STORAGE_CHEST' }),
-			},
-		]);
-		return;
-	}
-	if (
-		data.type === 'SIGN' &&
-		playerLocation.orientation === data.approachDirection
-	) {
-		addMultipleMessages(data.dialogue.map((d) => ({ message: d })));
+    return;
+  }
+  if (data.type === "CHEST") {
+    interactWithOverworldChest(data);
+    return;
+  }
+  if (data.type === "BUSH") {
+    interactWithBush(data);
+    return;
+  }
+  if (data.type === "ROCK") {
+    interactWithRock(data);
+    return;
+  }
+  if (data.type === "CLIMBING_STEPS") {
+    interactWithClimbingSteps();
+    return;
+  }
+  if (data.type === "LEDGE") {
+    interactWithLedge(data);
+    return;
+  }
+  if (data.type === "PC") {
+    addMultipleMessages([
+      {
+        message: "Accessing Pokemon Storage",
+        needsNoConfirmation: true,
+        onRemoval: () => routeTo({ activeTab: "STORAGE" }),
+      },
+    ]);
+    return;
+  }
+  if (data.type === "STORAGE_CHEST") {
+    addMultipleMessages([
+      {
+        message: "Opening Your Storage Chest",
+        needsNoConfirmation: true,
+        onRemoval: () => routeTo({ activeTab: "STORAGE_CHEST" }),
+      },
+    ]);
+    return;
+  }
+  if (
+    data.type === "SIGN" &&
+    playerLocation.orientation === data.approachDirection
+  ) {
+    addMultipleMessages(data.dialogue.map((d) => ({ message: d })));
 
-		return;
-	}
-	if (data.type === 'ROUTER_NPC') {
-		addMultipleMessages(
-			data.dialogue.map((d, i) => ({
-				icon: <SpriteIcon sprite={data.sprite} />,
-				message: d,
-				onRemoval:
-					i === data.dialogue.length - 1
-						? () => () => routeTo({ activeTab: data.to })
-						: undefined,
-				needsNoConfirmation: true,
-			}))
-		);
+    return;
+  }
+  if (data.type === "ROUTER_NPC") {
+    addMultipleMessages(
+      data.dialogue.map((d, i) => ({
+        icon: <SpriteIcon sprite={data.sprite} />,
+        message: d,
+        onRemoval:
+          i === data.dialogue.length - 1
+            ? () => () => routeTo({ activeTab: data.to })
+            : undefined,
+        needsNoConfirmation: true,
+      })),
+    );
 
-		return;
-	}
+    return;
+  }
 
-	if (data.type === 'BULLETIN_BOARD') {
-		addMultipleMessages(
-			data.dialogue.map((d, i) => ({
-				message: d,
-				onRemoval:
-					i === data.dialogue.length - 1
-						? () => () => routeTo({ activeTab: 'BULLETIN_BOARD' })
-						: undefined,
-				needsNoConfirmation: true,
-			}))
-		);
+  if (data.type === "BULLETIN_BOARD") {
+    addMultipleMessages(
+      data.dialogue.map((d, i) => ({
+        message: d,
+        onRemoval:
+          i === data.dialogue.length - 1
+            ? () => () => routeTo({ activeTab: "BULLETIN_BOARD" })
+            : undefined,
+        needsNoConfirmation: true,
+      })),
+    );
 
-		return;
-	}
-	if (data.type === 'NURSE') {
-		addMultipleMessages([
-			...data.dialogue.map((d, i) => ({
-				icon: <SpriteIcon sprite={data.sprite} />,
-				message: d,
-				onRemoval:
-					i === data.dialogue.length - 1
-						? () => talkToNurse(occ.id)
-						: undefined,
-				needsNoConfirmation: true,
-			})),
-			{
-				icon: <SpriteIcon sprite={data.sprite} />,
-				message: 'Whole Team fully healed',
-				needsNoConfirmation: true,
-			},
-		]);
+    return;
+  }
+  if (data.type === "NURSE") {
+    addMultipleMessages([
+      ...data.dialogue.map((d, i) => ({
+        icon: <SpriteIcon sprite={data.sprite} />,
+        message: d,
+        onRemoval:
+          i === data.dialogue.length - 1
+            ? () => talkToNurse(occ.id)
+            : undefined,
+        needsNoConfirmation: true,
+      })),
+      {
+        icon: <SpriteIcon sprite={data.sprite} />,
+        message: "Whole Team fully healed",
+        needsNoConfirmation: true,
+      },
+    ]);
 
-		return;
-	}
-	if (data.type === 'NPC') {
-		interactWithOverworldNpc(data);
-		return;
-	}
-	if (data.type === 'POKEMON') {
-		interactWithOverworldPokemon(data);
+    return;
+  }
+  if (data.type === "NPC") {
+    interactWithOverworldNpc(data);
+    return;
+  }
+  if (data.type === "POKEMON") {
+    interactWithOverworldPokemon(data);
 
-		return;
-	}
-	if (data.type === 'ZIGZAGOON_FORAGER') {
-		interactWithZigzagoonForager();
-		return;
-	}
-	if (data.type === 'DUGTRIO_EXPLORER') {
-		interactWithDugtrioExplorer();
-		return;
-	}
-	if (data.type === 'SWARM_RADAR') {
-		interactWithSwarmRadar();
-		return;
-	}
-	if (data.type === 'ROCKET_RADIO') {
-		interactWithRocketRadio();
-		return;
-	}
-	if (data.type === 'TRAINER') {
-		interactWithTrainer(data);
-		return;
-	}
+    return;
+  }
+  if (data.type === "ZIGZAGOON_FORAGER") {
+    interactWithZigzagoonForager();
+    return;
+  }
+  if (data.type === "DUGTRIO_EXPLORER") {
+    interactWithDugtrioExplorer();
+    return;
+  }
+  if (data.type === "SWARM_RADAR") {
+    interactWithSwarmRadar();
+    return;
+  }
+  if (data.type === "ROCKET_RADIO") {
+    interactWithRocketRadio();
+    return;
+  }
+  if (data.type === "TRAINER") {
+    interactWithTrainer(data);
+    return;
+  }
 
-	if (data.type === 'HONEY_TREE') {
-		interactWithHoneyTree();
-		return;
-	}
-	if (data.type === 'HALLOWED_TOWER') {
-		interactWithHallowedTower();
-		return;
-	}
-	if (data.type === 'STRANGE_TREE') {
-		interactWithStrangeTree(data);
-		return;
-	}
-	if (data.type === 'COMBEE_HIVE') {
-		interactWithCombeeHive();
-		return;
-	}
+  if (data.type === "HONEY_TREE") {
+    interactWithHoneyTree();
+    return;
+  }
+  if (data.type === "HALLOWED_TOWER") {
+    interactWithHallowedTower();
+    return;
+  }
+  if (data.type === "STRANGE_TREE") {
+    interactWithStrangeTree(data);
+    return;
+  }
+  if (data.type === "COMBEE_HIVE") {
+    interactWithCombeeHive();
+    return;
+  }
 
-	console.error('what is this occupant', occ);
+  console.error("what is this occupant", occ);
 };

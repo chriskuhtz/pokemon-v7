@@ -37,6 +37,7 @@ export const MoveEditor = ({
 				}
 				return (
 					<MoveEditorListEntry
+						key={m.move.name}
 						m={m}
 						payment={payment}
 						ownedPokemon={ownedPokemon}

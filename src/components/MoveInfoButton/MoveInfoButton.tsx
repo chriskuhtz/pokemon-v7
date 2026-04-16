@@ -43,7 +43,9 @@ export const MoveInfoButton = ({ movename }: { movename: MoveName }) => {
 					message: `Priority: ${res.priority}`,
 				},
 				{
-					message: res['effect_entries'][0]['short_effect'],
+					message: res['effect_entries'].find(entry=>entry.language.name==="en")?.short_effect
+							
+							?? 'No Description available',
 					onRemoval: () => {
 						invalidate();
 						setSkip(true);

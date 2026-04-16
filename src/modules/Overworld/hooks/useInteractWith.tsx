@@ -9,10 +9,6 @@ import { useHoneyTree } from '../../../hooks/useHoneyTree';
 import { useInteractWithClimbingSteps } from '../../../hooks/useInteractWithClimbingSteps';
 import {
 	useInteractWithSnorlax,
-	useInteractWithOverworldChest,
-	useInteractWithNPC,
-	useInteractWithOverworldItem,
-	useInteractWithOverworldPokeball,
 } from '../../../hooks/useInteractWithSnorlax';
 import { MessageQueueContext } from '../../../hooks/useMessageQueue';
 import { useRangerRadio } from '../../../hooks/useRangerRadio';
@@ -28,6 +24,10 @@ import { useInteractWithLedge } from './useInteractWithLedge';
 import { useInteractWithTrainer } from './useInteractWithTrainer';
 import { useMachete } from './useMachete';
 import { useSledgeHammer } from './useSledgeHammer';
+import { useInteractWithNPC } from '../../../hooks/useInteractWithNPC';
+import { useInteractWithOverworldChest } from '../../../hooks/useInteractWithOverworldChest';
+import { useInteractWithOverworldItem } from '../../../hooks/useInteractWithOverworldItem';
+import { useInteractWithOverworldPokeball } from '../../../hooks/useInteractWithOverworldPokeball';
 
 export const useInteractWith = (
 	stepsTaken: number,
