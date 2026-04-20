@@ -63,7 +63,9 @@ export const useMovement = (
   const gameData = useContext(GameDataContext);
   const { addMultipleMessages, latestMessage } =
     useContext(MessageQueueContext);
-  const { transition } = useContext(ScreenTransitionContext);
+  const { transition, activateTransition } = useContext(
+    ScreenTransitionContext,
+  );
 
   const map = useMemo(
     (): OverworldMap => mapsRecord[location.mapId],
@@ -96,6 +98,7 @@ export const useMovement = (
       ) as OnStepPortal | undefined,
     [currentOccupants, location.x, location.y, saveFile],
   );
+
   const steptOnDialogue: OnStepDialogue | undefined = useMemo(
     () =>
       currentOccupants.find(
@@ -169,9 +172,14 @@ export const useMovement = (
       }
 
       //handle portals
-      else if (steptOnPortal) {
-        setLocation(steptOnPortal.portal);
-        setEncounterChance(baseEncounterRate);
+      else if (steptOnPortal && !transition) {
+        activateTransition({
+          effect: "rows",
+          onRemoval: () => {
+            setLocation(steptOnPortal.portal);
+            setEncounterChance(baseEncounterRate);
+          },
+        });
       }
       //handle dialogues
       else if (steptOnDialogue) {
@@ -258,6 +266,7 @@ export const useMovement = (
     }, fps);
     return () => clearTimeout(engine);
   }, [
+    activateTransition,
     addMultipleMessages,
     canRockClimb,
     canSwim,

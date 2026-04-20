@@ -1,22 +1,18 @@
 import { useCallback, useContext, useMemo, useState } from "react";
 import { v4 } from "uuid";
-import { getPokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
+import { PokemonChoices } from "../../components/PokemonChoices/PokemonChoices";
+import { SpeciesInfo } from "../../components/SpeciesInfo/SpeciesInfo";
 import { Sprite } from "../../components/Sprite/Sprite";
 import {
   CampUpgrade,
   campUpgradeNames,
 } from "../../constants/gameData/campUpgrades";
-import {
-  battleSpriteSize,
-  shinyChance,
-  testPokemon,
-} from "../../constants/gameData/gameData";
+import { shinyChance, testPokemon } from "../../constants/gameData/gameData";
 import { PokemonName } from "../../constants/pokemonNames";
-import { typeColors } from "../../constants/typeColors";
 import { addPokemonToDex } from "../../functions/addPokemonToDex";
-import { getItemUrl } from "../../functions/getItemUrl";
 import { getRandomPokemonName } from "../../functions/getRandomPokemonId";
 import { reduceBattlePokemonToOwnedPokemon } from "../../functions/reduceBattlePokemonToOwnedPokemon";
+import { BaseSizeProvider } from "../../hooks/useBaseSize";
 import { useGetBattleTeam } from "../../hooks/useGetBattleTeam";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { badgeNames } from "../../interfaces/Badge";
@@ -31,7 +27,6 @@ import {
 import { LoadingScreen } from "../../uiComponents/LoadingScreen/LoadingScreen";
 import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
-import { BaseSizeProvider } from "../../hooks/useBaseSize";
 const defaultStarters: PokemonName[] = ["bulbasaur", "charmander", "squirtle"];
 export const StarterSelection = (): JSX.Element => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
@@ -116,7 +111,51 @@ export const StarterSelection = (): JSX.Element => {
     return <LoadingScreen />;
   }
 
-  return finished && name && chosenStarter ? (
+  if (finished && name && chosenStarter) {
+    return <OakIntroduction name={name} proceed={proceed} />;
+  }
+
+  return (
+    <Page headline="Intro:">
+      <Stack mode="column" alignItems="center">
+        {" "}
+        <Stack mode="row" justifyContent="center">
+          <h3>What is your name:</h3>
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value.toLowerCase())}
+          />
+        </Stack>
+        <h3 style={{ margin: 0 }}>
+          Which of these Pokemon did you bring with you:
+        </h3>
+        <PokemonChoices
+          pokemon={fullStarters}
+          choose={setChosenStarter}
+          chosen={chosenStarter}
+        />
+        {chosenStarter && (
+          <SpeciesInfo key={chosenStarter.name} name={chosenStarter.name} />
+        )}
+        <button
+          disabled={!name || !chosenStarter}
+          onClick={() => setFinished(true)}
+        >
+          Proceed
+        </button>
+      </Stack>
+    </Page>
+  );
+};
+
+const OakIntroduction = ({
+  name,
+  proceed,
+}: {
+  name: string;
+  proceed: () => void;
+}) => {
+  return (
     <Page headline="">
       <Stack mode="column" alignItems="center">
         <BaseSizeProvider allowedBaseSizes={[64]}>
@@ -136,55 +175,6 @@ export const StarterSelection = (): JSX.Element => {
         <h3>we will attract more attention and expand our research camp.</h3>
         <h3>Safe travels, I will meet you there.</h3>
         <button onClick={() => proceed()}>Continue</button>
-      </Stack>
-    </Page>
-  ) : (
-    <Page headline="Intro:">
-      <Stack mode="column" alignItems="center">
-        {" "}
-        <Stack mode="row" justifyContent="center">
-          <h3>What is your name:</h3>
-          <input
-            value={name}
-            onChange={(e) => setName(e.target.value.toLowerCase())}
-          />
-        </Stack>
-        <h3 style={{ margin: 0 }}>Which starter Pokemon will you choose:</h3>
-        <Stack mode="row" justifyContent="center" alignItems="center">
-          {fullStarters.map((o) => (
-            <img
-              role="button"
-              tabIndex={0}
-              key={o.id}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  setChosenStarter(o);
-                }
-              }}
-              style={{
-                borderRadius: 9000,
-                border:
-                  o === chosenStarter
-                    ? `2px solid ${typeColors["dark"]}`
-                    : undefined,
-              }}
-              height={battleSpriteSize * (o === chosenStarter ? 3 : 1.5)}
-              width={battleSpriteSize * (o === chosenStarter ? 3 : 1.5)}
-              src={
-                o === chosenStarter
-                  ? getPokemonSprite(o.name, { shiny: o.shiny })
-                  : getItemUrl("poke-ball")
-              }
-              onClick={() => setChosenStarter(o)}
-            />
-          ))}
-        </Stack>
-        <button
-          disabled={!name || !chosenStarter}
-          onClick={() => setFinished(true)}
-        >
-          Proceed
-        </button>
       </Stack>
     </Page>
   );

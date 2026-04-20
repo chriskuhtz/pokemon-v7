@@ -1,89 +1,74 @@
 import { Sprite } from "../../components/Sprite/Sprite";
 import { SpriteEnum } from "../../interfaces/SpriteEnum";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
 export const newestChangeLog = "0.53";
 
-export const ChangeLog = ({
-  setHasReadIntro,
-}: {
-  setHasReadIntro: (x: boolean) => void;
-}) => {
+export const ChangeLog = () => {
   return (
-    <Page headline="">
-      <div style={{ padding: "2rem" }}>
-        <Stack alignItems="center" mode="column">
-          <div>
-            <Sprite
-              canvasKey={"yaya"}
-              rotating={false}
-              key={"yaya"}
-              id={SpriteEnum.nerd}
-            />
-          </div>
-          <h3>Changelog:</h3>
-          <button
-            onClick={() => {
-              setHasReadIntro(true);
-              window.localStorage.setItem(newestChangeLog, "true");
-            }}
-          >
-            Got it, lets go
-          </button>
-          <ChangeLogV53 />
-          <ChangeLogV52 />
-          <ChangeLogV51 />
-          <ChangeLogV50 />
-          <ChangeLogV49 />
-          <ChangeLogV48 />
-          <ChangeLogV47 />
-          <ChangeLogV46 />
-          <ChangeLogV45 />
-          <ChangeLogV44 />
-          <ChangeLogV43 />
-          <ChangeLogV42 />
-          <ChangeLogV41 />
-          <ChangeLogV40 />
-          <ChangeLogV39 />
-          <ChangeLogV38 />
-          <ChangeLogV37 />
-          <ChangeLogV36 />
-          <ChangeLogV35 />
-          <ChangeLogV34 />
-          <ChangeLogV33 />
-          <ChangeLogV32 />
-          <ChangeLogV31 />
-          <ChangeLogV30 />
-          <ChangeLogV29 />
-          <ChangeLogV28 />
-          <ChangeLogV27 />
-          <ChangeLogV26 />
-          <ChangeLogV25 />
-          <ChangeLogV24 />
-          <ChangeLogV23 />
-          <ChangeLogV22 />
-          <ChangeLogV21 />
-          <ChangeLogV20 />
-          <ChangeLogV19 />
-          <ChangeLogV18 />
-          <ChangeLogV17 />
-          <ChangeLogV16 />
-          <ChangeLogV15 />
-          <ChangeLogV14 />
-          <ChangeLogV13 />
-          <ChangeLogV12 />
-          <ChangeLogV11 />
-          <ChangeLogV10 />
-          <ChangeLogV09 />
-          <ChangeLogV08 />
-          <ChangeLogV07 />
-          <ChangeLogV06 />
-          <ChangeLogV05 />
-          <ChangeLogV04 />
-        </Stack>
-      </div>
-    </Page>
+    <div>
+      <Stack alignItems="center" mode="column">
+        <div>
+          <Sprite
+            canvasKey={"yaya"}
+            rotating={false}
+            key={"yaya"}
+            id={SpriteEnum.nerd}
+          />
+        </div>
+        <h3>Changelog:</h3>
+        <ChangeLogV53 />
+        <ChangeLogV52 />
+        <ChangeLogV51 />
+        <ChangeLogV50 />
+        <ChangeLogV49 />
+        <ChangeLogV48 />
+        <ChangeLogV47 />
+        <ChangeLogV46 />
+        <ChangeLogV45 />
+        <ChangeLogV44 />
+        <ChangeLogV43 />
+        <ChangeLogV42 />
+        <ChangeLogV41 />
+        <ChangeLogV40 />
+        <ChangeLogV39 />
+        <ChangeLogV38 />
+        <ChangeLogV37 />
+        <ChangeLogV36 />
+        <ChangeLogV35 />
+        <ChangeLogV34 />
+        <ChangeLogV33 />
+        <ChangeLogV32 />
+        <ChangeLogV31 />
+        <ChangeLogV30 />
+        <ChangeLogV29 />
+        <ChangeLogV28 />
+        <ChangeLogV27 />
+        <ChangeLogV26 />
+        <ChangeLogV25 />
+        <ChangeLogV24 />
+        <ChangeLogV23 />
+        <ChangeLogV22 />
+        <ChangeLogV21 />
+        <ChangeLogV20 />
+        <ChangeLogV19 />
+        <ChangeLogV18 />
+        <ChangeLogV17 />
+        <ChangeLogV16 />
+        <ChangeLogV15 />
+        <ChangeLogV14 />
+        <ChangeLogV13 />
+        <ChangeLogV12 />
+        <ChangeLogV11 />
+        <ChangeLogV10 />
+        <ChangeLogV09 />
+        <ChangeLogV08 />
+        <ChangeLogV07 />
+        <ChangeLogV06 />
+        <ChangeLogV05 />
+        <ChangeLogV04 />
+      </Stack>
+    </div>
   );
 };
 const ChangeLogV53 = (): JSX.Element => {
@@ -91,7 +76,10 @@ const ChangeLogV53 = (): JSX.Element => {
     <>
       <h3>0.53:</h3>
       <ol style={{ lineHeight: "1.5rem" }}>
-        <li>New Dungeon</li>
+        <li>Bag Limit in Overworld Icons</li>
+        <li>New Setting: random Encounters</li>
+        <li>New Setting: random Evolutions</li>
+        <li>fixes and balances from playtesting</li>
       </ol>
     </>
   );
