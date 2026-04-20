@@ -235,7 +235,7 @@ export const interactWithFunction = ({
         message: d,
         onRemoval:
           i === data.dialogue.length - 1
-            ? () => () => routeTo({ activeTab: data.to })
+            ? () => routeTo({ activeTab: data.to })
             : undefined,
         needsNoConfirmation: true,
       })),
