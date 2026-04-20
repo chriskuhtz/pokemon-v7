@@ -5,6 +5,7 @@ import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 import { Kuma } from "../../versions/kuma/Kuma";
 import { Labyrinth } from "../../versions/labyrinth/Labyrinth";
+import { ChangeLog } from "../ChangeLog/ChangeLog";
 
 export const VersionSelection = (): JSX.Element => {
   const [version, setVersion] = useState<"KUMA" | "LABYRINTH">();
@@ -53,6 +54,7 @@ export const VersionSelection = (): JSX.Element => {
           actionElements={[]}
           onClick={() => setVersion("LABYRINTH")}
         ></Card>
+        <ChangeLog />
       </Stack>
     </Page>
   );
