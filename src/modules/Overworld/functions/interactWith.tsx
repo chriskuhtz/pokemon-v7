@@ -250,7 +250,7 @@ export const interactWithFunction = ({
         message: d,
         onRemoval:
           i === data.dialogue.length - 1
-            ? () => () => routeTo({ activeTab: "BULLETIN_BOARD" })
+            ? () => routeTo({ activeTab: "BULLETIN_BOARD" })
             : undefined,
         needsNoConfirmation: true,
       })),
