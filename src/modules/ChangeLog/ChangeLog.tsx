@@ -2,7 +2,7 @@ import { Sprite } from "../../components/Sprite/Sprite";
 import { SpriteEnum } from "../../interfaces/SpriteEnum";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
-export const newestChangeLog = "0.54";
+export const newestChangeLog = "0.55";
 
 export const ChangeLog = () => {
   return (
@@ -17,6 +17,7 @@ export const ChangeLog = () => {
           />
         </div>
         <h3>Changelog:</h3>
+        <ChangeLogV55 />
         <ChangeLogV54 />
         <ChangeLogV53 />
         <ChangeLogV52 />
@@ -70,6 +71,21 @@ export const ChangeLog = () => {
         <ChangeLogV04 />
       </Stack>
     </div>
+  );
+};
+const ChangeLogV55 = (): JSX.Element => {
+  return (
+    <>
+      <h3>0.55:</h3>
+      <ol style={{ lineHeight: "1.5rem" }}>
+        <li>New Area</li>
+        <li>new type of apricorn</li>
+        <li>new quest</li>
+        <li>new trainers</li>
+        <li>wild encounter groups of more than 2</li>
+        <li>fixes and balances from playtesting</li>
+      </ol>
+    </>
   );
 };
 const ChangeLogV54 = (): JSX.Element => {

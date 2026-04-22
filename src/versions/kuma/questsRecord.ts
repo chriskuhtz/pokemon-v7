@@ -481,6 +481,7 @@ export const kumaQuestNames = [
   "catch all pokemon from victory road",
   "collect 8 badges",
   "defeat the pokemon league",
+  "find a purple apricorn",
 ] as const;
 
 export type KumaQuestName = (typeof kumaQuestNames)[number];
@@ -1291,9 +1292,20 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     researchPoints: 50,
     availableAfter: "catch a pokemon in an apricorn ball",
     conditionFunction: (s) =>
-      Object.values(apricornTable).every((apricornBall) =>
-        s.pokemon.some((p) => p.ball === apricornBall),
-      ),
+      Object.values(apricornTable)
+        .filter((ball) => ball !== "master-ball")
+        .every((apricornBall) =>
+          s.pokemon.some((p) => p.ball === apricornBall),
+        ),
+  },
+  "find a purple apricorn": {
+    category: "EXPLORATION",
+    kind: "QUEST_LINE",
+    rewardItems: {},
+    researchPoints: 100,
+    conditionFunction: (s: SaveFile) => {
+      return s.bag["purple-apricorn"] > 0;
+    },
   },
   "catch a very heavy specimen": {
     category: "RESEARCH",
@@ -1851,7 +1863,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     researchPoints: 100,
     rewardItems: {
-      "master-ball": 1,
+      ...expCandyPackage,
     },
     availableAfter: "catch 50 different species",
     conditionFunction: (s) =>
@@ -1864,6 +1876,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     researchPoints: 100,
     rewardItems: {
       "master-ball": 1,
+      ...expCandyPackage,
     },
     availableAfter: "catch 100 different species",
     conditionFunction: (s) =>
@@ -1876,6 +1889,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     researchPoints: 100,
     rewardItems: {
       "master-ball": 1,
+      ...expCandyPackage,
     },
     availableAfter: "catch 150 different species",
     conditionFunction: (s) =>
@@ -1888,6 +1902,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     researchPoints: 100,
     rewardItems: {
       "master-ball": 1,
+      ...expCandyPackage,
     },
     availableAfter: "catch 250 different species",
     conditionFunction: (s) =>
@@ -3134,6 +3149,6 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     conditionFunction: (s: SaveFile) => !!s.mileStones.lanceDefeatedAt,
     researchPoints: 100,
     availableAfter: "collect 8 badges",
-    rewardItems: { "max-lure": 1, "master-ball": 1 },
+    rewardItems: { "max-lure": 1 },
   },
 } as Record<KumaQuestName, Quest>;

@@ -5,6 +5,7 @@ import { makeApricornTree } from "../../../../functions/makeApricornTree";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import { zigzagoonForagers } from "../../../../hooks/useZigzagoonForagers";
 import { GameData } from "../../../../interfaces/GameData";
+import { isApricorn } from "../../../../interfaces/Item";
 import { Occupant } from "../../../../interfaces/Occupant";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
@@ -367,7 +368,34 @@ export const campOccupants: OverworldMap["occupants"] = [
       "of turning apricorns into pokeballs",
       "Each type of ball has a different specialty",
     ],
-    conditionFunction: (s) => s.campUpgrades["invite apricorn smith kurt"],
+    conditionFunction: (s) => {
+      return !!(
+        s.campUpgrades["invite apricorn smith kurt"] &&
+        Object.entries(s.bag).some(
+          ([item, amount]) => isApricorn(item) && amount > 0,
+        )
+      );
+    },
+  },
+  {
+    type: "NPC",
+    sprite: SpriteEnum.kurt,
+    x: 37,
+    y: 5,
+    orientation: "LEFT",
+    id: "campUpgrade_kurt_wo_apricorn",
+    unhandledMessage: [
+      "If you come back with some apricorns",
+      "we can craft pokeballs",
+    ],
+    conditionFunction: (s) => {
+      return !!(
+        s.campUpgrades["invite apricorn smith kurt"] &&
+        !Object.entries(s.bag).some(
+          ([item, amount]) => isApricorn(item) && amount > 0,
+        )
+      );
+    },
   },
   {
     type: "ROUTER_NPC",

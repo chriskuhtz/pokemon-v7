@@ -2,6 +2,8 @@
 import { PokemonName } from "../../constants/pokemonNames";
 import { InternalDexEntry } from "../../interfaces/Pokedex";
 
+const apricornClearingMax = 40 * 40 * 40;
+const apricornClearingMin = 30 * 30 * 30;
 export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   bulbasaur: {
     dexId: 1,
@@ -392,7 +394,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   nidoking: {
     dexId: 34,
     types: ["poison", "ground"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "common",
+        maxXp: apricornClearingMax,
+        minXp: apricornClearingMin,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "apricornClearing",
+      },
+    ],
     rampager: true,
     evs: {
       attack: 3,
@@ -434,7 +445,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   ninetales: {
     dexId: 38,
     types: ["fire"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "ultra-rare",
+        maxXp: apricornClearingMax,
+        minXp: apricornClearingMin,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "apricornClearing",
+      },
+    ],
     evs: {
       "special-defense": 1,
       speed: 1,
@@ -518,6 +538,14 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
         timeOfDay: "ALL_DAY",
         area: "LAND",
         route: "caveW1F2",
+      },
+      {
+        rarity: "medium",
+        maxXp: apricornClearingMax,
+        minXp: apricornClearingMin,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "apricornClearing",
       },
     ],
     evs: {
@@ -1245,7 +1273,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   electrode: {
     dexId: 101,
     types: ["electric"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "medium",
+        maxXp: apricornClearingMax,
+        minXp: apricornClearingMin,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "apricornClearing",
+      },
+    ],
     evs: {
       speed: 2,
     },
@@ -1254,7 +1291,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
     dexId: 102,
     types: ["grass", "psychic"],
     honey: true,
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "common",
+        maxXp: apricornClearingMax,
+        minXp: apricornClearingMin,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "apricornClearing",
+      },
+    ],
     evs: {
       defense: 1,
     },
@@ -1262,7 +1308,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   exeggutor: {
     dexId: 103,
     types: ["grass", "psychic"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "common",
+        maxXp: apricornClearingMax,
+        minXp: apricornClearingMin,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "apricornClearing",
+      },
+    ],
     evs: {
       "special-attack": 2,
     },
@@ -3126,7 +3181,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   lombre: {
     dexId: 271,
     types: ["water", "grass"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "common",
+        maxXp: apricornClearingMax,
+        minXp: apricornClearingMin,
+        timeOfDay: "ALL_DAY",
+        area: "WATER",
+        route: "apricornClearing",
+      },
+    ],
     evs: {
       "special-defense": 2,
     },
@@ -3134,7 +3198,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   ludicolo: {
     dexId: 272,
     types: ["water", "grass"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "rare",
+        maxXp: apricornClearingMax,
+        minXp: apricornClearingMin,
+        timeOfDay: "ALL_DAY",
+        area: "WATER",
+        route: "apricornClearing",
+      },
+    ],
     evs: {
       "special-defense": 3,
     },
@@ -3176,7 +3249,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   shiftry: {
     dexId: 275,
     types: ["grass", "dark"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "medium",
+        maxXp: apricornClearingMax,
+        minXp: apricornClearingMin,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "apricornClearing",
+      },
+    ],
     evs: {
       attack: 3,
     },
@@ -3842,16 +3924,7 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   zangoose: {
     dexId: 335,
     types: ["normal"],
-    encounterOptions: [
-      {
-        rarity: "ultra-rare",
-        maxXp: 1000,
-        minXp: 216,
-        timeOfDay: "DAY",
-        area: "LAND",
-        route: "routeN1",
-      },
-    ],
+    encounterOptions: [],
     evs: {
       attack: 2,
     },
@@ -7310,7 +7383,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   furfrou: {
     dexId: 676,
     types: ["normal"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "ultra-rare",
+        maxXp: 1000,
+        minXp: 216,
+        timeOfDay: "DAY",
+        area: "LAND",
+        route: "routeN1",
+      },
+    ],
     evs: {
       speed: 1,
     },
@@ -8304,7 +8386,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   drampa: {
     dexId: 780,
     types: ["normal", "dragon"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "ultra-rare",
+        maxXp: apricornClearingMax,
+        minXp: apricornClearingMin,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "apricornClearing",
+      },
+    ],
     evs: {
       "special-attack": 2,
     },
@@ -8312,7 +8403,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   dhelmise: {
     dexId: 781,
     types: ["ghost", "grass"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "common",
+        maxXp: 70 * 70 * 70,
+        minXp: 60 * 60 * 60,
+        timeOfDay: "ALL_DAY",
+        area: "WATER",
+        route: "apricornClearing",
+      },
+    ],
     evs: {
       attack: 2,
     },
@@ -8701,7 +8801,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   nickit: {
     dexId: 827,
     types: ["dark"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "common",
+        maxXp: apricornClearingMax,
+        minXp: apricornClearingMin,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "apricornClearing",
+      },
+    ],
     evs: {
       "special-defense": 1,
     },
@@ -8709,7 +8818,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   thievul: {
     dexId: 828,
     types: ["dark"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "rare",
+        maxXp: apricornClearingMax,
+        minXp: apricornClearingMin,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "apricornClearing",
+      },
+    ],
     evs: {
       "special-defense": 2,
     },
@@ -12579,7 +12697,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   "voltorb-hisui": {
     dexId: 10231,
     types: ["electric", "grass"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "common",
+        maxXp: apricornClearingMax,
+        minXp: apricornClearingMin,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "apricornClearing",
+      },
+    ],
     evs: {
       speed: 1,
     },
@@ -12587,7 +12714,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   "electrode-hisui": {
     dexId: 10232,
     types: ["electric", "grass"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "rare",
+        maxXp: apricornClearingMax,
+        minXp: apricornClearingMin,
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+        route: "apricornClearing",
+      },
+    ],
     evs: {
       speed: 2,
     },
