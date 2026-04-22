@@ -10,13 +10,13 @@ import { EvoInfo } from "../EvoInfo/EvoInfo";
 import { MoveEditor } from "../MoveEditor/MoveEditor";
 import { MovesDisplay } from "../MovesDisplay/MovesDisplay";
 import { StatDisplay } from "../StatDisplay/StatDisplay";
+import { ApplyItemSection } from "./components/ApplyItemSection";
 import { DetailsCard } from "./components/DetailsCard";
 import { HeldItemSelection } from "./components/HeldItemSelection";
 import {
   OwnedPokemonCardTabSelection,
   TabType,
 } from "./components/OwnedPokemonCardTabSelection";
-import { ApplyItemSection } from "./components/ApplyItemSection";
 
 export const OwnedPokemonCardContent = ({
   data,

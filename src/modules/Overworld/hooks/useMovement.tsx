@@ -182,7 +182,7 @@ export const useMovement = (
       }
       //maybe start encounter
       else if (shouldStartEncounterWithTerrain) {
-        setEncounterChance(0);
+        setEncounterChance(baseEncounterRate);
         startEncounter(stepsTaken, shouldStartEncounterWithTerrain);
       }
       //rotate or walk player
@@ -198,7 +198,7 @@ export const useMovement = (
         //walk corner without stopping
         else {
           setStepsTaken(stepsTaken + 1);
-          setEncounterChance((cur) => cur + baseEncounterRate);
+          setEncounterChance((cur) => cur + 0.01);
           setLocation({
             ...location,
             ...updatePosition(
@@ -218,7 +218,7 @@ export const useMovement = (
       //walk player
       else if (nextInput && nextInput === location.orientation) {
         setStepsTaken(stepsTaken + 1);
-        setEncounterChance((cur) => cur + baseEncounterRate);
+        setEncounterChance((cur) => cur + 0.01);
         setLocation({
           ...location,
           ...updatePosition(

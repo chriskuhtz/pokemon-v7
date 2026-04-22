@@ -29,7 +29,7 @@ const settingsLabels: Record<keyof SettingsObject, string> = {
   randomLearnSets: "Random Learnable Moves:",
   randomEncounters: "Random Wild Pokemon:",
   randomEvolution: "Random Evolution:",
-  expShareActive: "Exp Share Active", // Assuming a label since not in ToggleRow
+  expShareActive: "Exp Share Active",
   teamSelectionBeforeBattle:
     "Choose your Team or attempt escape before each battle",
 };
@@ -130,20 +130,22 @@ export const Settings = ({
             alignItems: "center",
           }}
         >
-          {Object.keys(settingsLabels).map((s) => {
-            const setting = s as keyof SettingsObject;
+          {Object.keys(settingsLabels)
+            .filter((s) => s !== "expShareActive")
+            .map((s) => {
+              const setting = s as keyof SettingsObject;
 
-            return (
-              <ToggleRow
-                key={setting}
-                disabled={!editableSettings[setting]}
-                value={!!state[setting]}
-                setValue={(x) => setState({ ...state, [setting]: x })}
-                label={settingsLabels[setting]}
-                description={settingsDescriptions[setting]}
-              />
-            );
-          })}
+              return (
+                <ToggleRow
+                  key={setting}
+                  disabled={!editableSettings[setting]}
+                  value={!!state[setting]}
+                  setValue={(x) => setState({ ...state, [setting]: x })}
+                  label={settingsLabels[setting]}
+                  description={settingsDescriptions[setting]}
+                />
+              );
+            })}
         </div>
         <br />
         <br />

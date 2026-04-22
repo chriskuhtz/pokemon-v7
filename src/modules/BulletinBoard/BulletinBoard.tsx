@@ -38,6 +38,23 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 
   const availableQuests = useAvailableBulletinQuests();
 
+  const acceptAllOpenQuests = useCallback(() => {
+    addMessage({
+      message: `Accepted ${availableQuests.length} new Quests`,
+      needsNoConfirmation: true,
+    });
+
+    const patchedQuests = { ...saveFile.quests };
+
+    availableQuests.forEach((q) => {
+      patchedQuests[q.name] = "ACTIVE";
+    });
+    patchSaveFileReducer({
+      ...saveFile,
+      quests: patchedQuests,
+    });
+  }, [addMessage, availableQuests, patchSaveFileReducer, saveFile]);
+
   const total = kumaQuestNames.length;
 
   const numberOfCompletedQuests = useMemo(() => {
@@ -45,66 +62,78 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
       .length;
   }, [saveFile.quests]);
 
-  if (availableQuests.length === 0) {
-    return (
-      <Page headline={"Bulletin Board:"} goBack={goBack}>
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <strong style={{ textWrap: "nowrap" }}>Completed Quests:</strong>
-          <AnimatedBar
-            max={total}
-            offset={total - numberOfCompletedQuests}
-            color={"blue"}
-          />
-        </div>
-        Talk to the people in the camp for more Quests
-      </Page>
-    );
-  }
-
   return (
     <Page headline={"Bulletin Board:"} goBack={goBack}>
       <Stack mode="column">
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <strong style={{ textWrap: "nowrap" }}>Completed Quests:</strong>
-          <AnimatedBar
-            max={total}
-            offset={total - numberOfCompletedQuests}
-            color={"blue"}
+        <CompletedQuestsBar
+          total={total}
+          numberOfCompletedQuests={numberOfCompletedQuests}
+        />
+        {availableQuests.length > 0 && (
+          <Card
+            onClick={acceptAllOpenQuests}
+            content="Accept all open quests"
+            icon={undefined}
+            actionElements={[]}
           />
-        </div>
+        )}
+        {availableQuests.length > 3 ? (
+          availableQuests.map(({ name, quest }) => {
+            return (
+              <Card
+                key={name}
+                icon={<MdFormatListBulleted size={battleSpriteSize} />}
+                content={
+                  <div>
+                    <h3>{replaceRouteName(name)}</h3>
 
-        {availableQuests.map(({ name, quest }) => {
-          return (
-            <Card
-              key={name}
-              icon={<MdFormatListBulleted size={battleSpriteSize} />}
-              content={
-                <div>
-                  <h3>{replaceRouteName(name)}</h3>
-
-                  <h5 style={{ display: "flex", alignItems: "center" }}>
-                    Reward:
-                    {Object.entries(getRewardItemsForQuest(name)).map(
-                      ([item, amount]) => (
-                        <React.Fragment key={item}>
-                          {amount} x <ItemSprite item={item as ItemType} />
-                        </React.Fragment>
-                      ),
-                    )}{" "}
-                    {quest.rewardPokemon && (
-                      <PokemonSprite name={quest.rewardPokemon.name} />
-                    )}
-                  </h5>
-                  <h5>Research Points: {quest.researchPoints}</h5>
-                </div>
-              }
-              actionElements={[
-                <button onClick={() => acceptQuest(name)}>Accept Quest</button>,
-              ]}
-            />
-          );
-        })}
+                    <h5 style={{ display: "flex", alignItems: "center" }}>
+                      Reward:
+                      {Object.entries(getRewardItemsForQuest(name)).map(
+                        ([item, amount]) => (
+                          <React.Fragment key={item}>
+                            {amount} x <ItemSprite item={item as ItemType} />
+                          </React.Fragment>
+                        ),
+                      )}{" "}
+                      {quest.rewardPokemon && (
+                        <PokemonSprite name={quest.rewardPokemon.name} />
+                      )}
+                    </h5>
+                    <h5>Research Points: {quest.researchPoints}</h5>
+                  </div>
+                }
+                actionElements={[
+                  <button onClick={() => acceptQuest(name)}>
+                    Accept Quest
+                  </button>,
+                ]}
+              />
+            );
+          })
+        ) : (
+          <strong>Talk to the people in the camp for more Quests</strong>
+        )}
       </Stack>
     </Page>
+  );
+};
+
+const CompletedQuestsBar = ({
+  total,
+  numberOfCompletedQuests,
+}: {
+  total: number;
+  numberOfCompletedQuests: number;
+}) => {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+      <strong style={{ textWrap: "nowrap" }}>Completed Quests:</strong>
+      <AnimatedBar
+        max={total}
+        offset={total - numberOfCompletedQuests}
+        color={"blue"}
+      />
+    </div>
   );
 };

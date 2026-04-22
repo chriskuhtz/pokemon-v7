@@ -12,6 +12,7 @@ import { getTypeNames } from "../../functions/getTypeNames";
 import { isOwnedPokemonKO } from "../../functions/isKo";
 import { useGetBattleTeam } from "../../hooks/useGetBattleTeam";
 import { SaveFileContext } from "../../hooks/useSaveFile";
+import { BattlePokemon } from "../../interfaces/BattlePokemon";
 import { Inventory } from "../../interfaces/Inventory";
 import { ItemType } from "../../interfaces/Item";
 import { OwnedPokemon } from "../../interfaces/OwnedPokemon";
@@ -94,99 +95,13 @@ export const Team = ({
   return (
     <Page goBack={goBack} headline="Team:">
       <Stack mode="column">
-        <div
-          style={{
-            padding: "1rem",
-            border: "2px solid black",
-            borderRadius: "1rem",
-          }}
-        >
-          <div
-            style={{
-              display: "grid",
-              gap: ".5rem",
-              rowGap: "1.5rem",
-              gridTemplateColumns: portraitMode
-                ? "1fr 1fr"
-                : "1fr 1fr 1fr 1fr 1fr 1fr",
-            }}
-          >
-            {team.map((pokemon, index) => {
-              const d = res.find((r) => r.name === pokemon.name)?.data;
-
-              if (!d) {
-                return <React.Fragment key={index}></React.Fragment>;
-              }
-              const typeNames = getTypeNames({
-                ...pokemon,
-                data: d,
-              });
-
-              const heldItem = getHeldItem(pokemon);
-
-              return (
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: ".5rem",
-                  }}
-                  key={pokemon.id}
-                >
-                  {index !== 0 && pokemon.id === focusedId && (
-                    <FaArrowLeft
-                      onClick={() => reorder("UP")}
-                      size={battleSpriteSize}
-                      role="button"
-                      tabIndex={0}
-                      onKeyDown={(e) => {
-                        e.stopPropagation();
-                        if (e.key === "Enter") {
-                          reorder("UP");
-                        }
-                      }}
-                    />
-                  )}
-                  <IconSolarSystem
-                    onClick={() => setFocusedId(pokemon.id)}
-                    sun={{
-                      url: getPokemonSprite(pokemon.name, {
-                        shiny: pokemon.shiny,
-                      }),
-                      styles: isOwnedPokemonKO(pokemon)
-                        ? { filter: "grayscale(1)" }
-                        : undefined,
-                    }}
-                    firstPlanet={`/typeIcons/${typeNames[0]}.png`}
-                    secondPlanetUrl={
-                      typeNames.length > 1
-                        ? `/typeIcons/${typeNames[1]}.png`
-                        : undefined
-                    }
-                    thirdPlanetUrl={getItemUrl(pokemon.ball)}
-                    fourthPlanetUrl={
-                      heldItem ? getItemUrl(heldItem) : undefined
-                    }
-                  />
-                  {pokemon.id === focusedId && index !== team.length - 1 && (
-                    <FaArrowRight
-                      onClick={() => reorder("DOWN")}
-                      size={battleSpriteSize}
-                      role="button"
-                      tabIndex={0}
-                      onKeyDown={(e) => {
-                        e.stopPropagation();
-                        if (e.key === "Enter") {
-                          reorder("DOWN");
-                        }
-                      }}
-                    />
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        <TeamIcons
+          team={team}
+          res={res}
+          reorder={reorder}
+          focusedId={focusedId}
+          setFocusedId={setFocusedId}
+        />
         <OwnedPokemonCardContent
           setNickName={(id, nickname) => {
             setTeam(
@@ -217,5 +132,113 @@ export const Team = ({
         />
       </Stack>
     </Page>
+  );
+};
+
+const TeamIcons = ({
+  team,
+  res,
+  focusedId,
+  setFocusedId,
+  reorder,
+}: {
+  team: OwnedPokemon[];
+  res: BattlePokemon[];
+  reorder: (dir: "UP" | "DOWN") => void;
+  focusedId: string;
+  setFocusedId: (x: string) => void;
+}) => {
+  return (
+    <div
+      style={{
+        padding: "1rem",
+        border: "2px solid black",
+        borderRadius: "1rem",
+      }}
+    >
+      <div
+        style={{
+          display: "grid",
+          gap: ".5rem",
+          rowGap: "1.5rem",
+          gridTemplateColumns: portraitMode
+            ? "1fr 1fr"
+            : "1fr 1fr 1fr 1fr 1fr 1fr",
+        }}
+      >
+        {team.map((pokemon, index) => {
+          const d = res.find((r) => r.name === pokemon.name)?.data;
+
+          if (!d) {
+            return <React.Fragment key={index}></React.Fragment>;
+          }
+          const typeNames = getTypeNames({
+            ...pokemon,
+            data: d,
+          });
+
+          const heldItem = getHeldItem(pokemon);
+
+          return (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: ".5rem",
+              }}
+              key={pokemon.id}
+            >
+              {index !== 0 && pokemon.id === focusedId && (
+                <FaArrowLeft
+                  onClick={() => reorder("UP")}
+                  size={battleSpriteSize}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    e.stopPropagation();
+                    if (e.key === "Enter") {
+                      reorder("UP");
+                    }
+                  }}
+                />
+              )}
+              <IconSolarSystem
+                onClick={() => setFocusedId(pokemon.id)}
+                sun={{
+                  url: getPokemonSprite(pokemon.name, {
+                    shiny: pokemon.shiny,
+                  }),
+                  styles: isOwnedPokemonKO(pokemon)
+                    ? { filter: "grayscale(1)" }
+                    : undefined,
+                }}
+                firstPlanet={`/typeIcons/${typeNames[0]}.png`}
+                secondPlanetUrl={
+                  typeNames.length > 1
+                    ? `/typeIcons/${typeNames[1]}.png`
+                    : undefined
+                }
+                thirdPlanetUrl={getItemUrl(pokemon.ball)}
+                fourthPlanetUrl={heldItem ? getItemUrl(heldItem) : undefined}
+              />
+              {pokemon.id === focusedId && index !== team.length - 1 && (
+                <FaArrowRight
+                  onClick={() => reorder("DOWN")}
+                  size={battleSpriteSize}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    e.stopPropagation();
+                    if (e.key === "Enter") {
+                      reorder("DOWN");
+                    }
+                  }}
+                />
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 };

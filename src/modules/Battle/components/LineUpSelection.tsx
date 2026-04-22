@@ -45,7 +45,7 @@ export const LineUpSelection = ({
   );
 
   const runningAllowed = useMemo(
-    () => !trainer && !settings?.noRunningFromBattle && !canChooseTeam,
+    () => !trainer && !settings?.noRunningFromBattle && canChooseTeam,
     [canChooseTeam, settings?.noRunningFromBattle, trainer],
   );
 
@@ -154,56 +154,54 @@ export const LineUpSelection = ({
             />
           ))}
         </ul>
-        <div
-          style={{
-            display: "grid",
-            alignItems: "center",
-            justifyContent: "center",
-            gridTemplateColumns: "1fr 1fr 1fr",
-            columnGap: "2rem",
-            rowGap: ".5rem",
-            backgroundColor: "rgba(255,255,255,.9)",
-            padding: "1rem",
-            borderRadius: ".5rem",
-          }}
-        >
-          {team
-            .filter((t) => !isKO(t))
-            .map((teamMember) => (
-              <div
-                role="button"
-                onClick={
-                  canChooseTeam
-                    ? () => toggleSelected(teamMember.id)
-                    : undefined
-                }
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && canChooseTeam) {
-                    toggleSelected(teamMember.id);
-                  }
-                }}
-                key={teamMember.id}
-                style={{
-                  border: selectedTeam.includes(teamMember.id)
-                    ? "2px solid black"
-                    : undefined,
-                  borderRadius: 9000,
-                  aspectRatio: "1/1",
-                  padding: "1rem",
-                }}
-              >
-                <PokemonSprite
-                  config={{
-                    shiny: teamMember.shiny,
-                    back: true,
-                    grayscale: isKO(teamMember),
+        {canChooseTeam && (
+          <div
+            style={{
+              display: "grid",
+              alignItems: "center",
+              justifyContent: "center",
+              gridTemplateColumns: "1fr 1fr 1fr",
+              columnGap: "2rem",
+              rowGap: ".5rem",
+              backgroundColor: "rgba(255,255,255,.9)",
+              padding: "1rem",
+              borderRadius: ".5rem",
+            }}
+          >
+            {team
+              .filter((t) => !isKO(t))
+              .map((teamMember) => (
+                <div
+                  role="button"
+                  onClick={() => toggleSelected(teamMember.id)}
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      toggleSelected(teamMember.id);
+                    }
                   }}
-                  name={teamMember.name}
-                />
-              </div>
-            ))}
-        </div>
+                  key={teamMember.id}
+                  style={{
+                    border: selectedTeam.includes(teamMember.id)
+                      ? "2px solid black"
+                      : undefined,
+                    borderRadius: 9000,
+                    aspectRatio: "1/1",
+                    padding: "1rem",
+                  }}
+                >
+                  <PokemonSprite
+                    config={{
+                      shiny: teamMember.shiny,
+                      back: true,
+                      grayscale: isKO(teamMember),
+                    }}
+                    name={teamMember.name}
+                  />
+                </div>
+              ))}
+          </div>
+        )}
 
         <div
           style={{

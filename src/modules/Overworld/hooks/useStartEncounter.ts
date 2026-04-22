@@ -1,6 +1,8 @@
 import { useCallback, useContext } from "react";
+import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
 import { determineWildPokemon } from "../../../functions/determineWildPokemon";
 import { getRandomPokemonName } from "../../../functions/getRandomPokemonId";
+import { isOwnedPokemonKO } from "../../../functions/isKo";
 import { OPPO_ID } from "../../../functions/makeChallengerPokemon";
 import { LocationContext } from "../../../hooks/LocationProvider";
 import { GameDataContext } from "../../../hooks/useGameData";
@@ -18,9 +20,15 @@ export const useStartEncounter = () => {
 
   return useCallback(
     (stepsTaken: number, type: "WATER" | "GROUND") => {
+      const map = mapsRecord[location.mapId];
       const shinyFactor = saveFile.bag["shiny-charm"] > 1 ? 4 : 1;
+
+      const playerTeam = saveFile.pokemon.filter((p) => p.onTeam);
+      const healthyPlayerTeam = playerTeam.filter(
+        (p) => !isOwnedPokemonKO(p),
+      ).length;
+
       const { team, battleTeamConfig } = determineWildPokemon({
-        team: saveFile.pokemon.filter((p) => p.onTeam),
         mapId: location.mapId,
         quests: saveFile.quests,
         waterEncounter: type === "WATER",
@@ -31,7 +39,12 @@ export const useStartEncounter = () => {
         currentStrongSwarm: saveFile.currentStrongSwarm,
         currentDistortionSwarm: saveFile.currentDistortionSwarm,
         internalDex: gameData.internalDex,
-        defaultBattleSize: gameData.defaultBattleSize,
+        maxBattleSize: Math.min(
+          ...[
+            healthyPlayerTeam,
+            map.encounterGroupLimit ?? gameData.defaultBattleSize,
+          ],
+        ),
       });
 
       let wildPokemon = [...team];
