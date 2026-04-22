@@ -1,75 +1,75 @@
-import { useCallback, useContext } from 'react';
-import { makeChallengerPokemon } from '../functions/makeChallengerPokemon';
-import { Challenger } from '../interfaces/Challenger';
-import { EmptyInventory } from '../interfaces/Inventory';
-import { OverworldPokemon } from '../interfaces/Occupant';
-import { MessageQueueContext } from './useMessageQueue';
-import { SaveFileContext } from './useSaveFile';
+import { useCallback, useContext } from "react";
+import { makeChallengerPokemon } from "../functions/makeChallengerPokemon";
+import { Challenger } from "../interfaces/Challenger";
+import { EmptyInventory } from "../interfaces/Inventory";
+import { OverworldPokemon } from "../interfaces/Occupant";
+import { MessageQueueContext } from "./useMessageQueue";
+import { SaveFileContext } from "./useSaveFile";
 
 export const useInteractWithOverworldPokemon = () => {
-	const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
-	const { addMultipleMessages } = useContext(MessageQueueContext);
+  const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
+  const { addMultipleMessages } = useContext(MessageQueueContext);
 
-	const interactWithStaticEncounter = useCallback(
-		(occ: OverworldPokemon) => {
-			if (!occ.encounter) {
-				return;
-			} else {
-				const challenger: Challenger = {
-					type: 'WILD',
-					id: occ.id,
-					inventory: EmptyInventory,
-					team: [
-						makeChallengerPokemon({
-							name: occ.encounter.name,
-							xp: occ.encounter.maxXp,
-						}),
-					],
-				};
+  const interactWithStaticEncounter = useCallback(
+    (occ: OverworldPokemon) => {
+      if (!occ.encounter) {
+        return;
+      } else {
+        const challenger: Challenger = {
+          type: "WILD",
+          id: occ.id,
+          inventory: EmptyInventory,
+          team: [
+            makeChallengerPokemon({
+              name: occ.encounter.name,
+              xp: occ.encounter.maxXp,
+            }),
+          ],
+        };
 
-				addMultipleMessages([
-					...occ.dialogue.map((d) => ({ message: d })),
-					{
-						message: 'The wild pokemon attacks',
-						onRemoval: () => {
-							patchSaveFileReducer({
-								mileStones: { ...saveFile.mileStones },
-								meta: { currentChallenger: challenger, activeTab: 'BATTLE' },
-							});
-						},
-					},
-				]);
-			}
-		},
-		[addMultipleMessages, patchSaveFileReducer, saveFile.mileStones]
-	);
+        addMultipleMessages([
+          ...occ.dialogue.map((d) => ({ message: d })),
+          {
+            message: "The wild pokemon attacks",
+            onRemoval: () => {
+              patchSaveFileReducer({
+                mileStones: { ...saveFile.mileStones },
+                meta: { currentChallenger: challenger, activeTab: "BATTLE" },
+              });
+            },
+          },
+        ]);
+      }
+    },
+    [addMultipleMessages, patchSaveFileReducer, saveFile.mileStones],
+  );
 
-	return useCallback(
-		(data: OverworldPokemon) => {
-			if (data.encounter) {
-				interactWithStaticEncounter(data);
-			} else
-				addMultipleMessages([
-					...data.dialogue.map((d, i) => ({
-						message: d,
-						onRemoval:
-							i === data.dialogue.length - 1 && data.disappearsAfterDialogue
-								? () =>
-										patchSaveFileReducer({
-											handledOccupants: [
-												...saveFile.handledOccupants,
-												{ id: data.id, resetAt: -1 },
-											],
-										})
-								: undefined,
-					})),
-				]);
-		},
-		[
-			addMultipleMessages,
-			interactWithStaticEncounter,
-			patchSaveFileReducer,
-			saveFile.handledOccupants,
-		]
-	);
+  return useCallback(
+    (data: OverworldPokemon) => {
+      if (data.encounter) {
+        interactWithStaticEncounter(data);
+      } else
+        addMultipleMessages([
+          ...data.dialogue.map((d, i) => ({
+            message: d,
+            onRemoval:
+              i === data.dialogue.length - 1 && data.disappearsAfterDialogue
+                ? () =>
+                    patchSaveFileReducer({
+                      handledOccupants: [
+                        ...saveFile.handledOccupants,
+                        { id: data.id, resetAt: -1 },
+                      ],
+                    })
+                : undefined,
+          })),
+        ]);
+    },
+    [
+      addMultipleMessages,
+      interactWithStaticEncounter,
+      patchSaveFileReducer,
+      saveFile.handledOccupants,
+    ],
+  );
 };

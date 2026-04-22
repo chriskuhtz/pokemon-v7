@@ -231,7 +231,9 @@ const getSource = (occ: Occupant) => {
     case "SIGN":
       return "/mapObjects/sign.png";
     case "BULLETIN_BOARD":
-      return "/mapObjects/largeInfoSign.png";
+      return occ.withQuests
+        ? "/mapObjects/largeInfoSign.png"
+        : "/mapObjects/emptyBoard.png";
     case "BUSH":
       return "/mapObjects/bush.png";
     case "HIDDEN_ITEM":

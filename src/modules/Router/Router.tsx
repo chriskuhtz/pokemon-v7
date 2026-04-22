@@ -48,7 +48,10 @@ export const Router = (): JSX.Element => {
   const { latestMessage, addMessage, addMultipleMessages } =
     useContext(MessageQueueContext);
 
-  const { startingTab } = useContext(GameDataContext);
+  const {
+    startingTab,
+    features: { settingsEditableAtStart, settingsEditableDuringGame },
+  } = useContext(GameDataContext);
 
   const {
     saveFile,
@@ -92,10 +95,15 @@ export const Router = (): JSX.Element => {
     );
   }
   if (activeTab === "SETTINGS") {
-    return <Settings />;
+    return <Settings atGameStart editableSettings={settingsEditableAtStart} />;
   }
   if (activeTab === "SETTINGS_IN_GAME") {
-    return <Settings backTo="MAIN" />;
+    return (
+      <Settings
+        atGameStart={false}
+        editableSettings={settingsEditableDuringGame}
+      />
+    );
   }
   if (activeTab === "SPRITE_SELECTION") {
     return (

@@ -181,6 +181,7 @@ export interface OverworldBulletinBoard extends BaseOccupant {
   type: "BULLETIN_BOARD";
   approachDirection: CharacterOrientation;
   dialogue: string[];
+  withQuests: boolean;
 }
 export interface Obstacle extends BaseOccupant {
   type: "OBSTACLE";

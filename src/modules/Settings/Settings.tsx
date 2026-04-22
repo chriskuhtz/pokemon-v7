@@ -1,39 +1,78 @@
 import { useContext, useState } from "react";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { getRandomBall, getRandomItem } from "../../interfaces/Item";
-import { RoutesType } from "../../interfaces/Routing";
 import { SettingsObject } from "../../interfaces/SettingsObject";
 import { Page } from "../../uiComponents/Page/Page";
 import { ToggleRow } from "../../uiComponents/ToggleRow/ToggleRow";
 import { KumaQuestsRecord } from "../../versions/kuma/questsRecord";
 
 export const randomQuestRewards = "randomQuestRewards";
-export const Settings = ({ backTo }: { backTo?: RoutesType }): JSX.Element => {
+
+const settingsLabels: Record<keyof SettingsObject, string> = {
+  fasterDays: "Should Days take 4 hours instead of 24?",
+  doubleXpRates: "Double Xp Rates",
+  minimalGrindingMode: "Minimal Grinding Mode",
+  hideMovementButtons: "Hide Movement Buttons",
+  seekOutEncounters: "Seek Encounters",
+  unlimitedPathfindingRange: "Unlimited Pathfinder",
+  smarterOpponents: '"Smarter" Opponents:',
+  rogueLike: "Roguelike mode:",
+  releaseFaintedPokemon: "Defeated Pokemon are released into the wild:",
+  noItemsInBattle: "No Healing Items allowed in Battle:",
+  noRunningFromBattle: "No Running from wild Pokemon:",
+  randomStarters: "Would you like random starter pokemon choices:",
+  randomOverworldItems: "Random Overworld Items:",
+  randomQuestRewards: "Random Quest Rewards:",
+  randomSwarms: "Random Pokemon Swarms:",
+  randomHeldItems: "Random Held Items:",
+  randomAbilities: "Random Abilities:",
+  randomLearnSets: "Random Learnable Moves:",
+  randomEncounters: "Random Wild Pokemon:",
+  randomEvolution: "Random Evolution:",
+  expShareActive: "Exp Share Active", // Assuming a label since not in ToggleRow
+  teamSelectionBeforeBattle:
+    "Choose your Team or attempt escape before each battle",
+};
+
+const settingsDescriptions: Record<keyof SettingsObject, string | undefined> = {
+  fasterDays:
+    "Does not reduce growing etc. times, just changes time of day more often",
+  doubleXpRates: undefined,
+  minimalGrindingMode:
+    "Effort- and Individual Stats are ignored for you and opponents",
+  hideMovementButtons: undefined,
+  seekOutEncounters: "Choose the movement path with the most wild pokemon",
+  unlimitedPathfindingRange:
+    "Walk through the entire map with one click, otherwise limited to ~15 fields",
+  smarterOpponents:
+    "Double Battle Opponents can reconsider their moves during the turn",
+  rogueLike: "Losing a battle completely resets your save file",
+  releaseFaintedPokemon:
+    "Losing a battle also completely resets your save file",
+  noItemsInBattle: undefined,
+  noRunningFromBattle: undefined,
+  randomStarters: "can make 1 questline impossible",
+  randomOverworldItems: undefined,
+  randomQuestRewards: undefined,
+  randomSwarms: "can be weird: e.g. swarms of mewtwo",
+  randomHeldItems: undefined,
+  randomAbilities: undefined,
+  randomLearnSets: undefined,
+  randomEncounters: "makes many quests very unlikely",
+  randomEvolution: "could be good, could be bad",
+  expShareActive: undefined,
+  teamSelectionBeforeBattle: undefined,
+};
+export const Settings = ({
+  atGameStart,
+  editableSettings,
+}: {
+  atGameStart: boolean;
+  editableSettings: SettingsObject;
+}): JSX.Element => {
   const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
 
-  const [state, setState] = useState<SettingsObject>(
-    saveFile.settings ?? {
-      fasterDays: false,
-      doubleXpRates: false,
-      rogueLike: false,
-      releaseFaintedPokemon: false,
-      noItemsInBattle: false,
-      randomStarters: false,
-      randomOverworldItems: false,
-      randomQuestRewards: false,
-      randomSwarms: false,
-      randomAbilities: false,
-      randomHeldItems: false,
-      randomLearnSets: false,
-      randomEncounters: false,
-      randomEvolution: false,
-      smarterOpponents: false,
-      hideMovementButtons: false,
-      minimalGrindingMode: false,
-      unlimitedPathfindingRange: false,
-      seekOutEncounters: false,
-    },
-  );
+  const [state, setState] = useState<SettingsObject>(saveFile.settings ?? {});
 
   const proceed = () => {
     if (state.randomQuestRewards) {
@@ -64,27 +103,24 @@ export const Settings = ({ backTo }: { backTo?: RoutesType }): JSX.Element => {
     patchSaveFileReducer({
       settings: state,
       meta: {
-        activeTab: backTo ? backTo : saveFile.meta.activeTab,
+        activeTab: atGameStart ? saveFile.meta.activeTab : "MAIN",
       },
     });
   };
   return (
     <Page
       goBack={
-        backTo
-          ? () => {
+        atGameStart
+          ? undefined
+          : () => {
               proceed();
             }
-          : undefined
       }
-      headline="Settings:"
+      headline={
+        atGameStart ? "Settings: (many cant be changed later)" : "Settings:"
+      }
     >
       <div style={{ padding: "1rem" }}>
-        {!backTo && (
-          <button style={{ width: "100%" }} onClick={() => proceed()}>
-            I am not reading that, lets go
-          </button>
-        )}
         <div
           style={{
             display: "grid",
@@ -94,127 +130,20 @@ export const Settings = ({ backTo }: { backTo?: RoutesType }): JSX.Element => {
             alignItems: "center",
           }}
         >
-          <h2>Quality of life:</h2>
-          <span />
-          <ToggleRow
-            value={!!state.fasterDays}
-            setValue={(x) => setState({ ...state, fasterDays: x })}
-            label={"Should Days take 4 hours instead of 24?"}
-            description="Does not reduce growing etc. times, just changes time of day more often "
-          />
-          <ToggleRow
-            value={!!state.doubleXpRates}
-            setValue={(x) => setState({ ...state, doubleXpRates: x })}
-            label={"Double Xp Rates"}
-          />
-          <ToggleRow
-            value={!!state.minimalGrindingMode}
-            setValue={(x) => setState({ ...state, minimalGrindingMode: x })}
-            label={"Minimal Grinding Mode"}
-            description="Effort- and Individual Stats are ignored for you and opponents"
-          />
-          <h2>Movement:</h2>
-          <span />
-          <ToggleRow
-            value={!!state.hideMovementButtons}
-            setValue={(x) => setState({ ...state, hideMovementButtons: x })}
-            label={"Hide Movement Buttons"}
-          />
-          <ToggleRow
-            value={!!state.seekOutEncounters}
-            setValue={(x) => setState({ ...state, seekOutEncounters: x })}
-            label={"Seek Encounters"}
-            description="Choose the movement path with the most wild pokemon"
-          />
-          <ToggleRow
-            value={!!state.unlimitedPathfindingRange}
-            setValue={(x) =>
-              setState({ ...state, unlimitedPathfindingRange: x })
-            }
-            label={"Unlimited Pathfinder"}
-            description="Walk through the entire map with one click, otherwise limited to ~15 fields"
-          />
-          <h2>Difficulty:</h2>
-          <span />
-          <ToggleRow
-            value={!!state.smarterOpponents}
-            setValue={(x) => setState({ ...state, smarterOpponents: x })}
-            label={'"Smarter" Opponents:'}
-            description="Double Battle Opponents can reconsider their moves during the turn"
-          />
-          <ToggleRow
-            value={!!state.rogueLike}
-            setValue={(x) => setState({ ...state, rogueLike: x })}
-            label={"Roguelike mode:"}
-            description="Losing a battle completely resets your save file"
-          />
-          <ToggleRow
-            value={!!state.releaseFaintedPokemon}
-            setValue={(x) => setState({ ...state, releaseFaintedPokemon: x })}
-            label={"Defeated Pokemon are released into the wild:"}
-            description="Losing a battle also completely resets your save file"
-          />
-          <ToggleRow
-            value={!!state.noItemsInBattle}
-            setValue={(x) => setState({ ...state, noItemsInBattle: x })}
-            label={"No Healing Items allowed in Battle:"}
-          />
-          <ToggleRow
-            value={!!state.noRunningFromBattle}
-            setValue={(x) => setState({ ...state, noRunningFromBattle: x })}
-            label={"No Running from wild Pokemon:"}
-          />
-          <h2>Randomization:</h2>
-          <span />
-          <ToggleRow
-            value={!!state.randomStarters}
-            setValue={(x) => setState({ ...state, randomStarters: x })}
-            label={"Would you like random starter pokemon choices:"}
-            description={"can make 1 questline impossible"}
-          />
-          <ToggleRow
-            value={!!state.randomOverworldItems}
-            setValue={(x) => setState({ ...state, randomOverworldItems: x })}
-            label={"Random Overworld Items:"}
-          />
-          <ToggleRow
-            value={!!state.randomQuestRewards}
-            setValue={(x) => setState({ ...state, randomQuestRewards: x })}
-            label={"Random Quest Rewards:"}
-          />
-          <ToggleRow
-            value={!!state.randomSwarms}
-            setValue={(x) => setState({ ...state, randomSwarms: x })}
-            label={"Random Pokemon Swarms:"}
-            description="can be weird: e.g. swarms of mewtwo"
-          />
-          <ToggleRow
-            value={!!state.randomHeldItems}
-            setValue={(x) => setState({ ...state, randomHeldItems: x })}
-            label={"Random Held Items:"}
-          />
-          <ToggleRow
-            value={!!state.randomAbilities}
-            setValue={(x) => setState({ ...state, randomAbilities: x })}
-            label={"Random Abilities:"}
-          />
-          <ToggleRow
-            value={!!state.randomLearnSets}
-            setValue={(x) => setState({ ...state, randomLearnSets: x })}
-            label={"Random Learnable Moves:"}
-          />
-          <ToggleRow
-            value={!!state.randomEncounters}
-            setValue={(x) => setState({ ...state, randomEncounters: x })}
-            label={"Random Wild Pokemon:"}
-            description="makes many quests very unlikely"
-          />
-          <ToggleRow
-            value={!!state.randomEvolution}
-            setValue={(x) => setState({ ...state, randomEvolution: x })}
-            label={"Random Evolution:"}
-            description="could be good, could be bad"
-          />
+          {Object.keys(settingsLabels).map((s) => {
+            const setting = s as keyof SettingsObject;
+
+            return (
+              <ToggleRow
+                key={setting}
+                disabled={!editableSettings[setting]}
+                value={!!state[setting]}
+                setValue={(x) => setState({ ...state, [setting]: x })}
+                label={settingsLabels[setting]}
+                description={settingsDescriptions[setting]}
+              />
+            );
+          })}
         </div>
         <br />
         <br />

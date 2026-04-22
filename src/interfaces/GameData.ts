@@ -1,69 +1,71 @@
-import { PokemonName } from '../constants/pokemonNames';
-import { InternalDexEntry } from './Pokedex';
-import { RoutesType } from './Routing';
-import { CharacterLocationData, SaveFile } from './SaveFile';
+import { PokemonName } from "../constants/pokemonNames";
+import { InternalDexEntry } from "./Pokedex";
+import { RoutesType } from "./Routing";
+import { CharacterLocationData, SaveFile } from "./SaveFile";
+import { SettingsObject } from "./SettingsObject";
 
 export type InternalDex = Record<PokemonName, InternalDexEntry>;
 
 export interface OverworldAction {
-	possible: (saveFile: SaveFile) => boolean;
-	successDialogue: string[];
-	failDialogue: string[];
+  possible: (saveFile: SaveFile) => boolean;
+  successDialogue: string[];
+  failDialogue: string[];
 }
 export interface OverworldActions {
-	bushCutting: OverworldAction;
-	swimming: OverworldAction;
-	rockClimbing: OverworldAction;
+  bushCutting: OverworldAction;
+  swimming: OverworldAction;
+  rockClimbing: OverworldAction;
 }
 export interface GameData {
-	locationId: string;
-	saveFileId: string;
-	startingLocation: CharacterLocationData;
-	startingTab: RoutesType;
-	startingRouterSequence: {
-		route: RoutesType;
-		condition: (saveFile: SaveFile) => boolean;
-	}[];
-	startingSaveFile: SaveFile;
-	allowedBaseSizes: number[];
-	internalDex: InternalDex;
-	losingMessages: {
-		training: string;
-		reset: string;
-		wild: string;
-	};
-	features: {
-		catchStreaks: boolean;
-		settingsEditable: boolean;
-		numberOfBallsBadge: boolean;
-		quests: boolean;
-		pokemonStorageSystem: boolean;
-		snapShotExportAvailable: boolean;
-		movesLearnableInTeamOverview: boolean;
-		movesEditableInTeamOverview: boolean;
-	};
-	overworldActions: OverworldActions;
-	carryingCapacity: {
-		base: { amount: number };
-		second:
-			| { amount: number; condition: (saveFile: SaveFile) => boolean }
-			| undefined;
-		third:
-			| { amount: number; condition: (saveFile: SaveFile) => boolean }
-			| undefined;
-		fourth:
-			| {
-					amount: number;
-					condition: (saveFile: SaveFile) => boolean;
-			  }
-			| undefined;
-	};
-	teamSlots: {
-		second: (saveFile: SaveFile) => boolean;
-		third: (saveFile: SaveFile) => boolean;
-		fourth: (saveFile: SaveFile) => boolean;
-		fifth: (saveFile: SaveFile) => boolean;
-		sixth: (saveFile: SaveFile) => boolean;
-	};
-	defaultBattleSize: number;
+  locationId: string;
+  saveFileId: string;
+  startingLocation: CharacterLocationData;
+  startingTab: RoutesType;
+  startingRouterSequence: {
+    route: RoutesType;
+    condition: (saveFile: SaveFile) => boolean;
+  }[];
+  startingSaveFile: SaveFile;
+  allowedBaseSizes: number[];
+  internalDex: InternalDex;
+  losingMessages: {
+    training: string;
+    reset: string;
+    wild: string;
+  };
+  features: {
+    catchStreaks: boolean;
+    settingsEditableAtStart: SettingsObject;
+    settingsEditableDuringGame: SettingsObject;
+    numberOfBallsBadge: boolean;
+    quests: boolean;
+    pokemonStorageSystem: boolean;
+    snapShotExportAvailable: boolean;
+    movesLearnableInTeamOverview: boolean;
+    movesEditableInTeamOverview: boolean;
+  };
+  overworldActions: OverworldActions;
+  carryingCapacity: {
+    base: { amount: number };
+    second:
+      | { amount: number; condition: (saveFile: SaveFile) => boolean }
+      | undefined;
+    third:
+      | { amount: number; condition: (saveFile: SaveFile) => boolean }
+      | undefined;
+    fourth:
+      | {
+          amount: number;
+          condition: (saveFile: SaveFile) => boolean;
+        }
+      | undefined;
+  };
+  teamSlots: {
+    second: (saveFile: SaveFile) => boolean;
+    third: (saveFile: SaveFile) => boolean;
+    fourth: (saveFile: SaveFile) => boolean;
+    fifth: (saveFile: SaveFile) => boolean;
+    sixth: (saveFile: SaveFile) => boolean;
+  };
+  defaultBattleSize: number;
 }

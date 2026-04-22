@@ -17,16 +17,36 @@ export const NumberOfBallsBadge = (): JSX.Element => {
       .filter(([item]) => isPokeball(item))
       .reduce((sum, summand) => sum + summand[1], 0);
   }, [saveFile]);
+
+  const limit = getBagLimit(saveFile, gameData);
+
+  let rate = numberOfBalls / limit;
+
+  if (numberOfBalls >= limit) {
+    rate = 1;
+  }
   return (
-    <MdCatchingPokemon
+    <div
       onClick={() =>
         addMessage({ message: `${numberOfBalls} Pokeballs in Bag` })
       }
-      size={battleSpriteSize}
-      color={
-        percentageBasedColor(numberOfBalls / getBagLimit(saveFile, gameData))
-          .color
-      }
-    />
+      style={{ position: "relative" }}
+    >
+      <MdCatchingPokemon
+        style={{ zIndex: 0, position: "absolute" }}
+        size={battleSpriteSize}
+        color={percentageBasedColor(rate).color}
+      />
+      <div
+        style={{
+          zIndex: 0,
+          position: "absolute",
+          maxHeight: (1 - rate) * battleSpriteSize,
+          overflow: "hidden",
+        }}
+      >
+        <MdCatchingPokemon size={battleSpriteSize} color="black" />
+      </div>
+    </div>
   );
 };

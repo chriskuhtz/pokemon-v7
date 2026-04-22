@@ -1,219 +1,228 @@
-import { useCallback, useContext, useMemo } from 'react';
+import { useCallback, useContext, useMemo } from "react";
 import {
-	getPokemonSprite,
-	PokemonSprite,
-} from '../../../components/PokemonSprite/PokemonSprite';
-import { Sprite } from '../../../components/Sprite/Sprite';
-import { portraitMode } from '../../../constants/gameData/gameData';
-import { determineRunawaySuccess } from '../../../functions/determineRunAwaySuccess';
-import { getItemUrl } from '../../../functions/getItemUrl';
-import { isKO } from '../../../functions/isKo';
-import { LocationContext } from '../../../hooks/LocationProvider';
-import { MessageQueueContext } from '../../../hooks/useMessageQueue';
-import { SaveFileContext } from '../../../hooks/useSaveFile';
-import { BattlePokemon } from '../../../interfaces/BattlePokemon';
-import { TrainerInfo } from '../../../interfaces/Challenger';
-import { IconSolarSystem } from '../../../uiComponents/IconSolarSystem/IconSolarSystem';
+  getPokemonSprite,
+  PokemonSprite,
+} from "../../../components/PokemonSprite/PokemonSprite";
+import { Sprite } from "../../../components/Sprite/Sprite";
+import { portraitMode } from "../../../constants/gameData/gameData";
+import { determineRunawaySuccess } from "../../../functions/determineRunAwaySuccess";
+import { getItemUrl } from "../../../functions/getItemUrl";
+import { isKO } from "../../../functions/isKo";
+import { LocationContext } from "../../../hooks/LocationProvider";
+import { MessageQueueContext } from "../../../hooks/useMessageQueue";
+import { SaveFileContext } from "../../../hooks/useSaveFile";
+import { BattlePokemon } from "../../../interfaces/BattlePokemon";
+import { TrainerInfo } from "../../../interfaces/Challenger";
+import { IconSolarSystem } from "../../../uiComponents/IconSolarSystem/IconSolarSystem";
 
 export const LineUpSelection = ({
-	leave,
-	opponents,
-	team,
-	fightersPerSide,
-	toggleSelected,
-	selectedTeam,
-	startBattle,
-	trainer,
+  leave,
+  opponents,
+  team,
+  fightersPerSide,
+  toggleSelected,
+  selectedTeam,
+  startBattle,
+  trainer,
 }: {
-	leave: () => void;
-	opponents: BattlePokemon[];
-	team: BattlePokemon[];
-	fightersPerSide: number;
-	selectedTeam: string[];
-	toggleSelected: (id: string) => void;
-	startBattle: () => void;
-	trainer?: TrainerInfo;
+  leave: () => void;
+  opponents: BattlePokemon[];
+  team: BattlePokemon[];
+  fightersPerSide: number;
+  selectedTeam: string[];
+  toggleSelected: (id: string) => void;
+  startBattle: () => void;
+  trainer?: TrainerInfo;
 }) => {
-	const {
-		saveFile: { pokedex, settings },
-	} = useContext(SaveFileContext);
-	const { location } = useContext(LocationContext);
+  const {
+    saveFile: { pokedex, settings },
+  } = useContext(SaveFileContext);
+  const { location } = useContext(LocationContext);
 
-	const runningAllowed = useMemo(
-		() => !trainer && !settings?.noRunningFromBattle,
-		[settings?.noRunningFromBattle, trainer]
-	);
+  const canChooseTeam = useMemo(
+    () => settings?.teamSelectionBeforeBattle,
+    [settings?.teamSelectionBeforeBattle],
+  );
 
-	const { addMessage } = useContext(MessageQueueContext);
+  const runningAllowed = useMemo(
+    () => !trainer && !settings?.noRunningFromBattle && !canChooseTeam,
+    [canChooseTeam, settings?.noRunningFromBattle, trainer],
+  );
 
-	const battleButtonMessage = useMemo(() => {
-		if (selectedTeam.length < fightersPerSide)
-			return `select ${fightersPerSide - selectedTeam.length} more`;
+  const { addMessage } = useContext(MessageQueueContext);
 
-		if (selectedTeam.length > fightersPerSide)
-			return `select ${fightersPerSide - selectedTeam.length} less`;
+  const battleButtonMessage = useMemo(() => {
+    if (selectedTeam.length < fightersPerSide)
+      return `select ${fightersPerSide - selectedTeam.length} more`;
 
-		return 'Battle';
-	}, [fightersPerSide, selectedTeam.length]);
+    if (selectedTeam.length > fightersPerSide)
+      return `select ${fightersPerSide - selectedTeam.length} less`;
 
-	const tryToLeave = useCallback(() => {
-		const canEscape = determineRunawaySuccess(team, opponents);
+    return "Battle";
+  }, [fightersPerSide, selectedTeam.length]);
 
-		if (canEscape) {
-			addMessage({
-				message: `escaped successfully`,
-				needsNoConfirmation: true,
-				onRemoval: () => leave(),
-			});
-		} else {
-			addMessage({
-				message: `could not escape, battle starts`,
-				onRemoval: () => startBattle(),
-			});
-		}
-	}, [addMessage, leave, opponents, startBattle, team]);
+  const tryToLeave = useCallback(() => {
+    const canEscape = determineRunawaySuccess(team, opponents);
 
-	return (
-		<div style={{ background: 'white' }}>
-			<div
-				style={{
-					display: 'grid',
-					gridTemplateColumns: portraitMode ? '1fr' : '1fr 1fr',
-					gridTemplateRows: portraitMode ? '1fr 1fr 1fr 1fr' : '1fr 1fr',
-					height: '100dvh',
-					justifyItems: 'center',
-					alignItems: 'center',
-					backgroundImage: portraitMode
-						? `url("/backgrounds/forestMobile.png")`
-						: `url("/backgrounds/forestDesktop.png")`,
-					backgroundSize: 'cover',
-				}}
-			>
-				<div
-					style={{
-						border: '2px solid black',
-						borderRadius: '.5rem',
-						padding: '0 1rem',
-						backgroundColor: 'rgba(255,255,255,.9)',
-					}}
-				>
-					{trainer ? (
-						<h2 style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-							{' '}
-							VS {trainer.id}{' '}
-							{trainer.profilePicture ? (
-								<img src={trainer.profilePicture} />
-							) : (
-								<Sprite
-									canvasKey={trainer.id}
-									id={trainer.sprite}
-									rotating={false}
-								/>
-							)}
-						</h2>
-					) : (
-						<h2>VS Wild Pokemon</h2>
-					)}
-					<h2>
-						Its {fightersPerSide} v {fightersPerSide}
-					</h2>
-				</div>
+    if (canEscape) {
+      addMessage({
+        message: `escaped successfully`,
+        needsNoConfirmation: true,
+        onRemoval: () => leave(),
+      });
+    } else {
+      addMessage({
+        message: `could not escape, battle starts`,
+        onRemoval: () => startBattle(),
+      });
+    }
+  }, [addMessage, leave, opponents, startBattle, team]);
 
-				<ul
-					dir="rtl"
-					style={{
-						display: 'grid',
-						alignItems: 'center',
-						gap: '1rem',
-						gridTemplateColumns: '1fr 1fr 1fr',
-						backgroundColor: 'rgba(255,255,255,.9)',
-						padding: '1rem',
-						borderRadius: '.5rem',
-					}}
-				>
-					{opponents.map((opponent) => (
-						<IconSolarSystem
-							key={opponent.id}
-							sun={{
-								url: trainer
-									? getItemUrl('poke-ball')
-									: getPokemonSprite(opponent.name, { shiny: opponent.shiny }),
-							}}
-							secondPlanetUrl={
-								pokedex[opponent.name].caughtOnRoutes.includes(
-									location.mapId
-								) && !trainer
-									? getItemUrl('poke-ball')
-									: undefined
-							}
-						/>
-					))}
-				</ul>
-				<div
-					style={{
-						display: 'grid',
-						alignItems: 'center',
-						justifyContent: 'center',
-						gridTemplateColumns: '1fr 1fr 1fr',
-						columnGap: '2rem',
-						rowGap: '.5rem',
-						backgroundColor: 'rgba(255,255,255,.9)',
-						padding: '1rem',
-						borderRadius: '.5rem',
-					}}
-				>
-					{team
-						.filter((t) => !isKO(t))
-						.map((teamMember) => (
-							<div
-								role="button"
-								onClick={() => toggleSelected(teamMember.id)}
-								tabIndex={0}
-								onKeyDown={(e) => {
-									if (e.key === 'Enter') {
-										toggleSelected(teamMember.id);
-									}
-								}}
-								key={teamMember.id}
-								style={{
-									border: selectedTeam.includes(teamMember.id)
-										? '2px solid black'
-										: undefined,
-									borderRadius: 9000,
-									aspectRatio: '1/1',
-									padding: '1rem',
-								}}
-							>
-								<PokemonSprite
-									config={{
-										shiny: teamMember.shiny,
-										back: true,
-										grayscale: isKO(teamMember),
-									}}
-									name={teamMember.name}
-								/>
-							</div>
-						))}
-				</div>
+  return (
+    <div style={{ background: "white" }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: portraitMode ? "1fr" : "1fr 1fr",
+          gridTemplateRows: portraitMode ? "1fr 1fr 1fr 1fr" : "1fr 1fr",
+          height: "100dvh",
+          justifyItems: "center",
+          alignItems: "center",
+          backgroundImage: portraitMode
+            ? `url("/backgrounds/forestMobile.png")`
+            : `url("/backgrounds/forestDesktop.png")`,
+          backgroundSize: "cover",
+        }}
+      >
+        <div
+          style={{
+            border: "2px solid black",
+            borderRadius: ".5rem",
+            padding: "0 1rem",
+            backgroundColor: "rgba(255,255,255,.9)",
+          }}
+        >
+          {trainer ? (
+            <h2 style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+              {" "}
+              VS {trainer.id}{" "}
+              {trainer.profilePicture ? (
+                <img src={trainer.profilePicture} />
+              ) : (
+                <Sprite
+                  canvasKey={trainer.id}
+                  id={trainer.sprite}
+                  rotating={false}
+                />
+              )}
+            </h2>
+          ) : (
+            <h2>VS Wild Pokemon</h2>
+          )}
+          <h2>
+            Its {fightersPerSide} v {fightersPerSide}
+          </h2>
+        </div>
 
-				<div
-					style={{
-						display: 'flex',
-						gap: '1rem',
-					}}
-				>
-					<button
-						autoFocus
-						onClick={startBattle}
-						disabled={selectedTeam.length !== fightersPerSide}
-					>
-						{battleButtonMessage}
-					</button>
-					{runningAllowed && (
-						<button onClick={tryToLeave}>Try to escape</button>
-					)}
-				</div>
-			</div>
-		</div>
-	);
+        <ul
+          dir="rtl"
+          style={{
+            display: "grid",
+            alignItems: "center",
+            gap: "1rem",
+            gridTemplateColumns: "1fr 1fr 1fr",
+            backgroundColor: "rgba(255,255,255,.9)",
+            padding: "1rem",
+            borderRadius: ".5rem",
+          }}
+        >
+          {opponents.map((opponent) => (
+            <IconSolarSystem
+              key={opponent.id}
+              sun={{
+                url: trainer
+                  ? getItemUrl("poke-ball")
+                  : getPokemonSprite(opponent.name, { shiny: opponent.shiny }),
+              }}
+              secondPlanetUrl={
+                pokedex[opponent.name].caughtOnRoutes.includes(
+                  location.mapId,
+                ) && !trainer
+                  ? getItemUrl("poke-ball")
+                  : undefined
+              }
+            />
+          ))}
+        </ul>
+        <div
+          style={{
+            display: "grid",
+            alignItems: "center",
+            justifyContent: "center",
+            gridTemplateColumns: "1fr 1fr 1fr",
+            columnGap: "2rem",
+            rowGap: ".5rem",
+            backgroundColor: "rgba(255,255,255,.9)",
+            padding: "1rem",
+            borderRadius: ".5rem",
+          }}
+        >
+          {team
+            .filter((t) => !isKO(t))
+            .map((teamMember) => (
+              <div
+                role="button"
+                onClick={
+                  canChooseTeam
+                    ? () => toggleSelected(teamMember.id)
+                    : undefined
+                }
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && canChooseTeam) {
+                    toggleSelected(teamMember.id);
+                  }
+                }}
+                key={teamMember.id}
+                style={{
+                  border: selectedTeam.includes(teamMember.id)
+                    ? "2px solid black"
+                    : undefined,
+                  borderRadius: 9000,
+                  aspectRatio: "1/1",
+                  padding: "1rem",
+                }}
+              >
+                <PokemonSprite
+                  config={{
+                    shiny: teamMember.shiny,
+                    back: true,
+                    grayscale: isKO(teamMember),
+                  }}
+                  name={teamMember.name}
+                />
+              </div>
+            ))}
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            gap: "1rem",
+          }}
+        >
+          <button
+            autoFocus
+            onClick={startBattle}
+            disabled={selectedTeam.length !== fightersPerSide}
+          >
+            {battleButtonMessage}
+          </button>
+          {runningAllowed && (
+            <button onClick={tryToLeave}>Try to escape</button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };

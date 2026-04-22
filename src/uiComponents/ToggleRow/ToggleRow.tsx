@@ -3,11 +3,13 @@ export const ToggleRow = ({
   value,
   setValue,
   description,
+  disabled,
 }: {
   value: boolean;
   setValue: (x: boolean) => void;
   label: string;
   description?: string;
+  disabled: boolean;
 }) => {
   return (
     <>
@@ -17,7 +19,7 @@ export const ToggleRow = ({
           <strong style={{ color: "crimson" }}>({description})</strong>
         )}
       </div>
-      <Toggle value={value} setValue={setValue} />
+      <Toggle value={value} setValue={setValue} disabled={disabled} />
     </>
   );
 };
@@ -25,10 +27,25 @@ export const ToggleRow = ({
 export const Toggle = ({
   value,
   setValue,
+  disabled,
 }: {
   value: boolean;
   setValue: (x: boolean) => void;
+  disabled: boolean;
 }) => {
+  if (disabled) {
+    return (
+      <button
+        disabled
+        style={{
+          padding: 8,
+          borderRadius: 16,
+        }}
+      >
+        {value ? "ON" : "Off"}
+      </button>
+    );
+  }
   return (
     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr" }}>
       <button

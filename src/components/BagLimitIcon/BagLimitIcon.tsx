@@ -6,6 +6,7 @@ import {
   getBagLimit,
   getTotalInventoryAmount,
 } from "../../functions/getBagLimit";
+import { getMiddleOfThree } from "../../functions/getMiddleOfThree";
 import { GameDataContext } from "../../hooks/useGameData";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
 import { SaveFileContext } from "../../hooks/useSaveFile";
@@ -21,7 +22,15 @@ export const BagLimitIcon = () => {
 
   const limit = getBagLimit(saveFile, gameData);
 
-  const percentage = ((totalAmount / limit) * 100).toFixed(0);
+  const actualpercentage = (totalAmount / limit) * 100;
+
+  const percentage = getMiddleOfThree([0, actualpercentage, 100]).toFixed(0);
+
+  let rate = totalAmount / limit;
+
+  if (totalAmount >= limit) {
+    rate = 1;
+  }
   return (
     <div
       onClick={() =>
@@ -34,13 +43,13 @@ export const BagLimitIcon = () => {
       <BsBackpack4
         style={{ zIndex: 0, position: "absolute" }}
         size={battleSpriteSize}
-        color={percentageBasedColor(1 - totalAmount / limit).color}
+        color={percentageBasedColor(1 - rate).color}
       />
       <div
         style={{
           zIndex: 0,
           position: "absolute",
-          maxHeight: (1 - totalAmount / limit) * battleSpriteSize,
+          maxHeight: (1 - rate) * battleSpriteSize,
           overflow: "hidden",
         }}
       >
