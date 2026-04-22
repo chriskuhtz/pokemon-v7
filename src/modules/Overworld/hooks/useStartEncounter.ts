@@ -1,5 +1,6 @@
 import { useCallback, useContext } from "react";
 import { determineWildPokemon } from "../../../functions/determineWildPokemon";
+import { getRandomPokemonName } from "../../../functions/getRandomPokemonId";
 import { OPPO_ID } from "../../../functions/makeChallengerPokemon";
 import { LocationContext } from "../../../hooks/LocationProvider";
 import { GameDataContext } from "../../../hooks/useGameData";
@@ -7,7 +8,6 @@ import { SaveFileContext } from "../../../hooks/useSaveFile";
 import { ScreenTransitionContext } from "../../../hooks/useScreenTransitionEffects";
 import { Challenger } from "../../../interfaces/Challenger";
 import { EmptyInventory } from "../../../interfaces/Inventory";
-import { getRandomPokemonName } from "../../../functions/getRandomPokemonId";
 
 export const useStartEncounter = () => {
   const { navigateAwayFromOverworldReducer } = useContext(SaveFileContext);

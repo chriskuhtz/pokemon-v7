@@ -2,6 +2,7 @@ export interface SettingsObject {
   fasterDays?: boolean;
   doubleXpRates?: boolean;
   rogueLike?: boolean;
+  teamSelectionBeforeBattle?: boolean;
   noItemsInBattle?: boolean;
   noRunningFromBattle?: boolean;
   releaseFaintedPokemon?: boolean;

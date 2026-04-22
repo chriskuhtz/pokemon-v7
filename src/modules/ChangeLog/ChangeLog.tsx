@@ -2,7 +2,7 @@ import { Sprite } from "../../components/Sprite/Sprite";
 import { SpriteEnum } from "../../interfaces/SpriteEnum";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
-export const newestChangeLog = "0.53";
+export const newestChangeLog = "0.54";
 
 export const ChangeLog = () => {
   return (
@@ -17,6 +17,7 @@ export const ChangeLog = () => {
           />
         </div>
         <h3>Changelog:</h3>
+        <ChangeLogV54 />
         <ChangeLogV53 />
         <ChangeLogV52 />
         <ChangeLogV51 />
@@ -69,6 +70,17 @@ export const ChangeLog = () => {
         <ChangeLogV04 />
       </Stack>
     </div>
+  );
+};
+const ChangeLogV54 = (): JSX.Element => {
+  return (
+    <>
+      <h3>0.54:</h3>
+      <ol style={{ lineHeight: "1.5rem" }}>
+        <li>Some Settings can now only be editted at the start of the game</li>
+        <li>fixes and balances from playtesting</li>
+      </ol>
+    </>
   );
 };
 const ChangeLogV53 = (): JSX.Element => {

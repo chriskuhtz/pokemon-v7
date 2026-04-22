@@ -5,11 +5,13 @@ import { getMiddleOfThree } from "../../../functions/getMiddleOfThree";
 import { getRandomOrientation } from "../../../functions/getNextClockwiseDirection";
 import { hasType } from "../../../functions/hasType";
 import { occupantHandled } from "../../../functions/occupantHandled";
+import { shuffle } from "../../../functions/shuffle";
 import {
   getTroubleMakerAdminTeam,
   getTroubleMakerTeam,
 } from "../../../functions/troubleMakers/troubleMakers";
 import { LocationContext } from "../../../hooks/LocationProvider";
+import { useAvailableBulletinQuests } from "../../../hooks/useAvailableBulletinQuests";
 import { GameDataContext } from "../../../hooks/useGameData";
 import { SaveFileContext } from "../../../hooks/useSaveFile";
 import { InternalDex } from "../../../interfaces/GameData";
@@ -21,13 +23,13 @@ import {
   SaveFile,
 } from "../../../interfaces/SaveFile";
 import { SpriteEnum } from "../../../interfaces/SpriteEnum";
-import { shuffle } from "../../../functions/shuffle";
 
 export const useOccupants = () => {
   const { saveFile } = useContext(SaveFileContext);
   const { location } = useContext(LocationContext);
   const { internalDex } = useContext(GameDataContext);
   const map = useMemo(() => mapsRecord[location.mapId], [location.mapId]);
+  const availableQuests = useAvailableBulletinQuests();
 
   const [statefulOccupants, setStatefulOccupants] = useState<Occupant[]>([]);
   const [lastRenderedMap, setLastRenderedMap] = useState<MapId>();
@@ -39,7 +41,12 @@ export const useOccupants = () => {
     }
   }, [lastRenderedMap, location.mapId]);
   useEffect(() => {
-    const all = [...map.occupants];
+    const all = [...map.occupants].map((occ) => {
+      if (occ.type === "BULLETIN_BOARD") {
+        return { ...occ, withQuests: availableQuests.length > 0 };
+      }
+      return occ;
+    });
     if (saveFile.troubleMakers && saveFile.troubleMakers.route === map.id) {
       all.push(...createTroubleMakers(saveFile));
     }
@@ -73,6 +80,7 @@ export const useOccupants = () => {
     saveFile,
     location.mapId,
     internalDex,
+    availableQuests.length,
   ]);
 
   const conditionalOccupants = useMemo(() => {

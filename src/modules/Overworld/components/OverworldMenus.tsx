@@ -1,6 +1,7 @@
 import { useContext, useEffect, useMemo } from "react";
 import { CgZoomIn, CgZoomOut } from "react-icons/cg";
 import { IoMdMenu } from "react-icons/io";
+import { BagLimitIcon } from "../../../components/BagLimitIcon/BagLimitIcon";
 import { LureIcon } from "../../../components/LureIcon/LureIcon";
 import { RampagerIcon } from "../../../components/RampagerIcon/RampagerIcon";
 import { RepelIcon } from "../../../components/RepelIcon/RepelIcon";
@@ -26,7 +27,6 @@ import { useIsDark } from "../hooks/useIsDark";
 import { MovementButtons } from "./MovementButtons";
 import { NumberOfBallsBadge } from "./NumberOfBallsBadge";
 import { UncollectedQuestsBadge } from "./UncollectedQuestsBadge";
-import { BagLimitIcon } from "../../../components/BagLimitIcon/BagLimitIcon";
 
 export const OverworldMenus = ({
   stepsTaken,
@@ -100,7 +100,17 @@ export const OverworldMenus = ({
           size={battleSpriteSize}
         />
         <UncollectedQuestsBadge stepsWalked={stepsTaken} />
-        {gameData.features.numberOfBallsBadge && <NumberOfBallsBadge />}
+        {gameData.features.numberOfBallsBadge && (
+          <div
+            style={
+              portraitMode
+                ? { marginBottom: 32, marginTop: -8 }
+                : { marginRight: 32, marginLeft: -8 }
+            }
+          >
+            <NumberOfBallsBadge />
+          </div>
+        )}
         {
           <div
             style={

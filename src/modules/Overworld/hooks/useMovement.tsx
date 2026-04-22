@@ -1,34 +1,3 @@
-/**
- * What could the next field be:
- * out of bounds
- * occupied
- * free
- * encountergrass
- * onStepEvent
- * water
- *
- * influences on the player:
- * devmode
- * flying
- *
- * what happens if field is:
- * 	out of bounds:
- * 		dont move
- * 	occupied:
- * 		dont move
- * 	free:
- * 		move to field
- * 	encountergrass:
- * 		move to grass
- * 		maybe start encounter
- * 	water (can swim):
- * 		move to water
- * 		maybe start encounter
- * 	water (cant swim):
- * 		dont move
- *
- */
-
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { fps } from "../../../constants/gameData/gameData";
 import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
@@ -122,7 +91,10 @@ export const useMovement = (
     [currentOccupants, location.x, location.y, saveFile],
   );
 
-  const encounterWillHappen = useMemo((): "WATER" | "GROUND" | undefined => {
+  const shouldStartEncounterWithTerrain = useMemo(():
+    | "WATER"
+    | "GROUND"
+    | undefined => {
     if (map.peaceful) {
       return;
     }
@@ -209,9 +181,9 @@ export const useMovement = (
         return;
       }
       //maybe start encounter
-      else if (encounterWillHappen) {
-        setEncounterChance(baseEncounterRate);
-        startEncounter(stepsTaken, encounterWillHappen);
+      else if (shouldStartEncounterWithTerrain) {
+        setEncounterChance(0);
+        startEncounter(stepsTaken, shouldStartEncounterWithTerrain);
       }
       //rotate or walk player
       else if (nextInput && nextInput !== location.orientation) {
@@ -271,7 +243,7 @@ export const useMovement = (
     canRockClimb,
     canSwim,
     currentOccupants,
-    encounterWillHappen,
+    shouldStartEncounterWithTerrain,
     isFlying,
     latestMessage,
     location,

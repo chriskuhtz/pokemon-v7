@@ -4,7 +4,7 @@ import { Card } from "../../uiComponents/Card/Card";
 import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { GoTasklist } from "react-icons/go";
 import { IoMdExit, IoMdSettings } from "react-icons/io";
@@ -15,6 +15,9 @@ import { IdeaButton } from "../../components/IdeaReport/IdeaReport";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 
+import { ExportSnapshotCard } from "../../components/SnapshotCard/ExportSnapshotCard";
+import { ImportSnapshotCard } from "../../components/SnapshotCard/ImportSnapshotCard";
+import { ResetSnapshotCard } from "../../components/SnapshotCard/ResetSnapshotCard";
 import { TrainerCard } from "../../components/TrainerCard/TrainerCard";
 import {
   battleSpriteSize,
@@ -34,13 +37,15 @@ import { SaveFileContext } from "../../hooks/useSaveFile";
 import { useTeleport } from "../../hooks/useTeleport";
 import { EmptyInventory } from "../../interfaces/Inventory";
 import { RoutesType } from "../../interfaces/Routing";
-import { ExportSnapshotCard } from "../../components/SnapshotCard/ExportSnapshotCard";
-import { ImportSnapshotCard } from "../../components/SnapshotCard/ImportSnapshotCard";
-import { ResetSnapshotCard } from "../../components/SnapshotCard/ResetSnapshotCard";
 
 export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
   const { location, setLocation } = useContext(LocationContext);
+  const team = useMemo(
+    () => saveFile.pokemon.filter((p) => p.onTeam),
+    [saveFile.pokemon],
+  );
+
   const gameData = useContext(GameDataContext);
   const reset = useReset();
   const [resetConfirmationInProgress, setRCIP] = useState<boolean>(false);
@@ -109,7 +114,13 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
         <Card
           onClick={() => navigate("MAIN", "TEAM")}
           content={<h4>Team</h4>}
-          icon={<MdCatchingPokemon size={battleSpriteSize} />}
+          icon={
+            <div style={{ display: "flex", gap: ".5rem" }}>
+              {team.map((t) => (
+                <MdCatchingPokemon key={t.id} size={battleSpriteSize} />
+              ))}
+            </div>
+          }
           actionElements={[]}
         />
         {questMenuAvailable(location.mapId, gameData) && (
@@ -136,7 +147,8 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
           icon={<FaSearch size={battleSpriteSize} />}
           actionElements={[]}
         />
-        {gameData.features.settingsEditable && (
+        {Object.keys(gameData.features.settingsEditableDuringGame).length >
+          0 && (
           <Card
             onClick={() => navigate("MAIN", "SETTINGS_IN_GAME")}
             content={<h4>SETTINGS</h4>}

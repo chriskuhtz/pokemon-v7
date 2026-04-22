@@ -268,6 +268,7 @@ export const campOccupants: OverworldMap["occupants"] = [
     approachDirection: "UP",
     dialogue: ["Looking for new Quests ..."],
     conditionFunction: (s) => s.campUpgrades.bulletin_board,
+    withQuests: false,
   },
   {
     type: "NURSE",
