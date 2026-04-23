@@ -3,19 +3,12 @@ import { SaveFile } from "../../interfaces/SaveFile";
 import { Card } from "../../uiComponents/Card/Card";
 import { Stack } from "../../uiComponents/Stack/Stack";
 import { kumaGameData } from "../../versions/kuma/Kuma";
+import { gameData } from "../../versions/labyrinth/gameData";
 import { PokemonSprite } from "../PokemonSprite/PokemonSprite";
 
 export const RecoveryTool = () => {
   const [status, setStatus] = useState<string>();
   const [open, setOpen] = useState<boolean>(false);
-
-  const kumaSaveFile = window.localStorage.getItem(kumaGameData.saveFileId);
-
-  const kumaLocation = window.localStorage.getItem(kumaGameData.locationId);
-
-  const labyrinthSaveFile = window.localStorage.getItem(
-    "pokemonLabyrinthSaveFile",
-  );
 
   return (
     <Card
@@ -32,8 +25,15 @@ export const RecoveryTool = () => {
             <>
               <h4 style={{ color: "orangeRed" }}>{status}</h4>
               <button
-                disabled={!kumaSaveFile || !kumaLocation}
                 onClick={() => {
+                  const kumaSaveFile = window.localStorage.getItem(
+                    kumaGameData.saveFileId,
+                  );
+
+                  const kumaLocation = window.localStorage.getItem(
+                    kumaGameData.locationId,
+                  );
+
                   const saveFile = kumaSaveFile
                     ? (JSON.parse(kumaSaveFile) as SaveFile)
                     : undefined;
@@ -68,12 +68,15 @@ export const RecoveryTool = () => {
                 Kuma: Reset to Overworld, center of camp
               </button>
               <button
-                disabled={!kumaSaveFile}
                 onChange={() => {
+                  const kumaSaveFile = window.localStorage.getItem(
+                    kumaGameData.saveFileId,
+                  );
+
                   if (kumaSaveFile) {
                     setStatus("copied saveFile to clipboard");
                     navigator.clipboard.writeText(kumaSaveFile);
-                  }
+                  } else setStatus("no copyable savefile found");
                 }}
               >
                 Copy Kuma Savefile to clipboard
@@ -81,6 +84,9 @@ export const RecoveryTool = () => {
 
               <button
                 onClick={() => {
+                  const kumaSaveFile = window.localStorage.getItem(
+                    kumaGameData.saveFileId,
+                  );
                   const saveFile = kumaSaveFile
                     ? (JSON.parse(kumaSaveFile) as SaveFile)
                     : undefined;
@@ -103,6 +109,9 @@ export const RecoveryTool = () => {
 
               <button
                 onClick={() => {
+                  const labyrinthSaveFile = window.localStorage.getItem(
+                    gameData.saveFileId,
+                  );
                   const saveFile = labyrinthSaveFile
                     ? (JSON.parse(labyrinthSaveFile) as SaveFile)
                     : undefined;
