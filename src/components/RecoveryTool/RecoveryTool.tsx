@@ -8,6 +8,15 @@ import { PokemonSprite } from "../PokemonSprite/PokemonSprite";
 export const RecoveryTool = () => {
   const [status, setStatus] = useState<string>();
   const [open, setOpen] = useState<boolean>(false);
+
+  const kumaSaveFile = window.localStorage.getItem(kumaGameData.saveFileId);
+
+  const kumaLocation = window.localStorage.getItem(kumaGameData.locationId);
+
+  const labyrinthSaveFile = window.localStorage.getItem(
+    "pokemonLabyrinthSaveFile",
+  );
+
   return (
     <Card
       onClick={() => setOpen(true)}
@@ -23,19 +32,14 @@ export const RecoveryTool = () => {
             <>
               <h4 style={{ color: "orangeRed" }}>{status}</h4>
               <button
+                disabled={!kumaSaveFile || !kumaLocation}
                 onClick={() => {
-                  const localSaveFile = window.localStorage.getItem(
-                    kumaGameData.saveFileId,
-                  );
-                  const locationEntry = window.localStorage.getItem(
-                    kumaGameData.locationId,
-                  );
-                  const saveFile = localSaveFile
-                    ? (JSON.parse(localSaveFile) as SaveFile)
+                  const saveFile = kumaSaveFile
+                    ? (JSON.parse(kumaSaveFile) as SaveFile)
                     : undefined;
 
-                  const location = locationEntry
-                    ? (JSON.parse(locationEntry) as SaveFile)
+                  const location = kumaLocation
+                    ? (JSON.parse(kumaLocation) as SaveFile)
                     : undefined;
 
                   if (saveFile && location) {
@@ -63,15 +67,22 @@ export const RecoveryTool = () => {
               >
                 Kuma: Reset to Overworld, center of camp
               </button>
+              <button
+                disabled={!kumaSaveFile}
+                onChange={() => {
+                  if (kumaSaveFile) {
+                    setStatus("copied saveFile to clipboard");
+                    navigator.clipboard.writeText(kumaSaveFile);
+                  }
+                }}
+              >
+                Copy Kuma Savefile to clipboard
+              </button>
 
               <button
                 onClick={() => {
-                  const local = window.localStorage.getItem(
-                    kumaGameData.saveFileId,
-                  );
-
-                  const saveFile = local
-                    ? (JSON.parse(local) as SaveFile)
+                  const saveFile = kumaSaveFile
+                    ? (JSON.parse(kumaSaveFile) as SaveFile)
                     : undefined;
 
                   if (saveFile) {
@@ -92,12 +103,8 @@ export const RecoveryTool = () => {
 
               <button
                 onClick={() => {
-                  const local = window.localStorage.getItem(
-                    "pokemonLabyrinthSaveFile",
-                  );
-
-                  const saveFile = local
-                    ? (JSON.parse(local) as SaveFile)
+                  const saveFile = labyrinthSaveFile
+                    ? (JSON.parse(labyrinthSaveFile) as SaveFile)
                     : undefined;
 
                   if (saveFile) {

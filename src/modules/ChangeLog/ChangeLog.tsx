@@ -7,6 +7,10 @@ interface ChangelogEntryData {
 
 const changelogData: ChangelogEntryData[] = [
   {
+    version: "0.57",
+    listOfChanges: ["improved Recovery Tool"],
+  },
+  {
     version: "0.56",
     listOfChanges: ["Recovery Tool", "fixes and balances from playtesting"],
   },
