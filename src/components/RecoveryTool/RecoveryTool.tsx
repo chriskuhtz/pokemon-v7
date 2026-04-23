@@ -30,6 +30,20 @@ export const RecoveryTool = () => {
                     kumaGameData.saveFileId,
                   );
 
+                  if (kumaSaveFile) {
+                    setStatus("copied saveFile to clipboard");
+                    navigator.clipboard.writeText(kumaSaveFile);
+                  } else setStatus("no copyable savefile found");
+                }}
+              >
+                Copy Kuma Savefile to clipboard
+              </button>
+              <button
+                onClick={() => {
+                  const kumaSaveFile = window.localStorage.getItem(
+                    kumaGameData.saveFileId,
+                  );
+
                   const kumaLocation = window.localStorage.getItem(
                     kumaGameData.locationId,
                   );
@@ -66,20 +80,6 @@ export const RecoveryTool = () => {
                 }}
               >
                 Kuma: Reset to Overworld, center of camp
-              </button>
-              <button
-                onChange={() => {
-                  const kumaSaveFile = window.localStorage.getItem(
-                    kumaGameData.saveFileId,
-                  );
-
-                  if (kumaSaveFile) {
-                    setStatus("copied saveFile to clipboard");
-                    navigator.clipboard.writeText(kumaSaveFile);
-                  } else setStatus("no copyable savefile found");
-                }}
-              >
-                Copy Kuma Savefile to clipboard
               </button>
 
               <button
