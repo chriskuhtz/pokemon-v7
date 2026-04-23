@@ -69,7 +69,7 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
           total={total}
           numberOfCompletedQuests={numberOfCompletedQuests}
         />
-        {availableQuests.length > 0 && (
+        {availableQuests.length > 3 && (
           <Card
             onClick={acceptAllOpenQuests}
             content="Accept all open quests"
@@ -77,7 +77,7 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
             actionElements={[]}
           />
         )}
-        {availableQuests.length > 3 ? (
+        {availableQuests.length > 0 ? (
           availableQuests.map(({ name, quest }) => {
             return (
               <Card
