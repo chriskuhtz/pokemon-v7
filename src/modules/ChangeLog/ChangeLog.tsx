@@ -1,738 +1,427 @@
-import { Sprite } from "../../components/Sprite/Sprite";
-import { SpriteEnum } from "../../interfaces/SpriteEnum";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
-export const newestChangeLog = "0.55";
+interface ChangelogEntryData {
+  version: string;
+  listOfChanges: string[];
+}
+
+const changelogData: ChangelogEntryData[] = [
+  {
+    version: "0.56",
+    listOfChanges: ["Recovery Tool", "fixes and balances from playtesting"],
+  },
+  {
+    version: "0.55",
+    listOfChanges: [
+      "New Area",
+      "new type of apricorn",
+      "new quest",
+      "new trainers",
+      "wild encounter groups of more than 2",
+      "fixes and balances from playtesting",
+    ],
+  },
+  {
+    version: "0.54",
+    listOfChanges: [
+      "Some Settings can now only be editted at the start of the game",
+      "fixes and balances from playtesting",
+    ],
+  },
+  {
+    version: "0.53",
+    listOfChanges: [
+      "Bag Limit in Overworld Icons",
+      "New Setting: random Encounters",
+      "New Setting: random Evolutions",
+      "fixes and balances from playtesting",
+    ],
+  },
+  { version: "0.52", listOfChanges: ["fixes from playtesting"] },
+  {
+    version: "0.51",
+    listOfChanges: [
+      "Feedback and fixes for labyrinth mode",
+      "Apply Items from Team Overview",
+    ],
+  },
+  {
+    version: "0.50",
+    listOfChanges: [
+      "Feedback and fixes for labyrinth mode",
+      "Labyrinth level 2",
+    ],
+  },
+  {
+    version: "0.49",
+    listOfChanges: ["Ideas and Fixes", "First version of labyrinth mode"],
+  },
+  { version: "0.48", listOfChanges: ["Balancing and Fixes"] },
+  {
+    version: "0.47",
+    listOfChanges: [
+      "Caught Water Pokemon live in the water, not on land",
+      "Camp Upgrade: Battle Journalist",
+      "Balancing and Fixes",
+    ],
+  },
+  {
+    version: "0.46",
+    listOfChanges: [
+      "follower pokemon",
+      "UI Improvements",
+      "All 16 Gym Leaders",
+    ],
+  },
+  {
+    version: "0.45",
+    listOfChanges: [
+      "Pokemon League Challenge",
+      "Redesigned Camp",
+      "Balancing",
+      "New Attacks",
+    ],
+  },
+  {
+    version: "0.44",
+    listOfChanges: ["Ux Improvements", "Fixes", "New Attacks"],
+  },
+  {
+    version: "0.43",
+    listOfChanges: [
+      "Victory Road",
+      "Badges",
+      "Balancing for misty",
+      "New Attacks",
+    ],
+  },
+  {
+    version: "0.42",
+    listOfChanges: [
+      "Ev Training mode",
+      "Remove imported challenger button",
+      "New Attacks",
+    ],
+  },
+  {
+    version: "0.41",
+    listOfChanges: [
+      "Snapshot Battles against Friends",
+      "New Camp Upgrade",
+      "New Gym Leaders",
+      "Moves can only be changed at the Move Tutor",
+      "New Attacks",
+    ],
+  },
+  {
+    version: "0.40",
+    listOfChanges: ["Fixes and Balancing", "New Quests", "New Attacks"],
+  },
+  {
+    version: "0.39",
+    listOfChanges: [
+      "Evil Teams leave after 3 Hours",
+      "Evil Teams level scale with you",
+      "Balancing and Fixes",
+      "New Attacks",
+    ],
+  },
+  {
+    version: "0.38",
+    listOfChanges: [
+      "Internal Dex",
+      "New evil team",
+      "New Features",
+      "Balancing and Fixes",
+      "New Attacks",
+    ],
+  },
+  {
+    version: "0.37",
+    listOfChanges: ["New Features", "Balancing and Fixes", "New Attacks"],
+  },
+  {
+    version: "0.36",
+    listOfChanges: [
+      "New Camp Upgrades",
+      "New evil teams",
+      "Balancing and Fixes",
+      "New Attacks",
+    ],
+  },
+  {
+    version: "0.35",
+    listOfChanges: [
+      "New camp upgrades",
+      "New Travelling Trainers",
+      "New Attacks",
+    ],
+  },
+  {
+    version: "0.34",
+    listOfChanges: [
+      "Catch Streaks",
+      "New Travelling Trainer",
+      "fixes, balancing and improvements",
+      "New Abilities and Attacks",
+    ],
+  },
+  {
+    version: "0.33",
+    listOfChanges: [
+      "Quest Categories",
+      "New Travelling Trainer",
+      "fixes, balancing and improvements",
+      "New Abilities and Attacks",
+    ],
+  },
+  {
+    version: "0.32",
+    listOfChanges: [
+      "New Training field mode",
+      "fixes, balancing and improvements",
+      "New Abilities and Attacks",
+    ],
+  },
+  {
+    version: "0.31",
+    listOfChanges: [
+      "New Travelling Trainer",
+      "fixes and improvements",
+      "New Abilities and Attacks",
+    ],
+  },
+  {
+    version: "0.30",
+    listOfChanges: ["fixes and improvements", "New Abilities and Attacks"],
+  },
+  {
+    version: "0.29",
+    listOfChanges: [
+      "New Travelling Trainer",
+      "New Upgrades",
+      "Balancing",
+      "UI Improvements",
+      "New Abilities and Attacks",
+    ],
+  },
+  {
+    version: "0.28",
+    listOfChanges: ["New Abilities and Attacks"],
+  },
+  {
+    version: "0.27",
+    listOfChanges: [
+      "Favorites System",
+      "New Quests",
+      "Catchboosts as quest rewards",
+      "New Abilities and Attacks",
+    ],
+  },
+  { version: "0.26", listOfChanges: ["New Sorting options"] },
+  {
+    version: "0.25",
+    listOfChanges: [
+      "New Quests",
+      "New Camp Upgrades",
+      "UI Improvements",
+      "New Abilities and Attacks",
+    ],
+  },
+  {
+    version: "0.24",
+    listOfChanges: [
+      "Performance Improvements",
+      "UI Improvements",
+      "Wild Apricorn Trees",
+      "Rocket Camp Raid",
+      "New Quests",
+      "New Abilities, Items and Attacks",
+    ],
+  },
+  {
+    version: "0.23",
+    listOfChanges: ["New Abilities and Attacks"],
+  },
+  {
+    version: "0.22",
+    listOfChanges: [
+      "Fixed Random Abilities",
+      "Fixed Challenge Field Ranks",
+      "Terrain Items",
+      "New Quest line",
+      "All Items with battle effects finished",
+      "New Abilities and Attacks",
+    ],
+  },
+  {
+    version: "0.21",
+    listOfChanges: [
+      "Balls are no longer wasted if the target isnt there anymore",
+      "Cant select last Pokeball twice anymore",
+      "Fix Cooking Ingredient Requirements",
+      "Travelling Merchant",
+      "New Abilities, Items and Attacks",
+    ],
+  },
+  {
+    version: "0.20",
+    listOfChanges: [
+      "Battle Terrain Abilities",
+      "New Abilities, Items and Attacks",
+    ],
+  },
+  {
+    version: "0.19",
+    listOfChanges: [
+      "Make first Route Pokemon a little weaker",
+      "Giovanni",
+      "Lures at vileplume shop",
+      "Item Info Button in Bag",
+      "New Cooking Recipes",
+      "No Key Items as Randomized Held Items",
+      "New Abilities, Items and Attacks",
+    ],
+  },
+  {
+    version: "0.18",
+    listOfChanges: [
+      "Move Info Button",
+      "Ability Info Button",
+      "New Abilities, Items and Attacks",
+    ],
+  },
+  {
+    version: "0.17",
+    listOfChanges: [
+      "Movement Buttons can be hidden",
+      "Make Starter Quest work for randomized starters",
+      "Fixed Uppercase/Lowercase inputs",
+      "Better Pokeball indicator",
+      "New Abilities, Items and Attacks",
+    ],
+  },
+  {
+    version: "0.16",
+    listOfChanges: [
+      "Team Rocket",
+      "Improved Campupgrade screen",
+      "Various minor fixes",
+    ],
+  },
+  {
+    version: "0.15",
+    listOfChanges: [
+      "Infinite Repel that can be toggled",
+      "Better Storage Sorting",
+      "New Training Field Trainer",
+      "New Abilities, Items and Attacks",
+    ],
+  },
+  {
+    version: "0.14",
+    listOfChanges: [
+      "New fossils",
+      "New historian quest",
+      "New static pokemon",
+      "Various minor fixes",
+      "New Abilities, Items and Attacks",
+    ],
+  },
+  {
+    version: "0.13",
+    listOfChanges: [
+      "New sorting options for pokemon",
+      "Various minor fixes",
+      "New Abilities, Items and Attacks",
+    ],
+  },
+  {
+    version: "0.12",
+    listOfChanges: [
+      "Pokeball Amount Indicator",
+      "Training field 5",
+      "New Abilities, Items and Attacks",
+    ],
+  },
+  { version: "0.11", listOfChanges: ["New Mulches"] },
+  {
+    version: "0.10",
+    listOfChanges: ["Challenge Field", "New Abilities, Items and Attacks"],
+  },
+  {
+    version: "0.9",
+    listOfChanges: [
+      "Kanto Gym Leaders appear for special battles",
+      "New Abilities, Items and Attacks",
+    ],
+  },
+  {
+    version: "0.8",
+    listOfChanges: [
+      "Opponents set up screens",
+      "New Abilities, Items and Attacks",
+    ],
+  },
+  {
+    version: "0.7",
+    listOfChanges: [
+      "Repair Hyper Beam",
+      "Take all/Store all by clicking on arrow",
+    ],
+  },
+  {
+    version: "0.6",
+    listOfChanges: ["Better Iv and Ev display", "Fix Multihit PP Usage"],
+  },
+  {
+    version: "0.5",
+    listOfChanges: ["Fixed Ability: Moody", "Fixed Setting: Random Abilities"],
+  },
+  {
+    version: "0.4",
+    listOfChanges: [
+      "Improved Amoongus Trades",
+      "Setting: Random Held Items",
+      "Setting: Random Abilities",
+      "Setting: Random Learnable Moves",
+      "Opponent decisions consider weather & effects",
+      "Fixed Weather Display and Message",
+      "CampUpgrade: Historian",
+      "New Abilities, Items and Attacks",
+    ],
+  },
+];
+
+export const newestChangeLog = changelogData.at(0)?.version ?? "0";
+
+const ChangelogEntry = ({
+  version,
+  listOfChanges,
+}: ChangelogEntryData): JSX.Element => {
+  return (
+    <>
+      <h3>{version}:</h3>
+      <ol style={{ lineHeight: "1.5rem" }}>
+        {listOfChanges.map((change, index) => (
+          <li key={index}>{change}</li>
+        ))}
+      </ol>
+    </>
+  );
+};
 
 export const ChangeLog = () => {
   return (
-    <div>
-      <Stack alignItems="center" mode="column">
-        <div>
-          <Sprite
-            canvasKey={"yaya"}
-            rotating={false}
-            key={"yaya"}
-            id={SpriteEnum.nerd}
-          />
-        </div>
-        <h3>Changelog:</h3>
-        <ChangeLogV55 />
-        <ChangeLogV54 />
-        <ChangeLogV53 />
-        <ChangeLogV52 />
-        <ChangeLogV51 />
-        <ChangeLogV50 />
-        <ChangeLogV49 />
-        <ChangeLogV48 />
-        <ChangeLogV47 />
-        <ChangeLogV46 />
-        <ChangeLogV45 />
-        <ChangeLogV44 />
-        <ChangeLogV43 />
-        <ChangeLogV42 />
-        <ChangeLogV41 />
-        <ChangeLogV40 />
-        <ChangeLogV39 />
-        <ChangeLogV38 />
-        <ChangeLogV37 />
-        <ChangeLogV36 />
-        <ChangeLogV35 />
-        <ChangeLogV34 />
-        <ChangeLogV33 />
-        <ChangeLogV32 />
-        <ChangeLogV31 />
-        <ChangeLogV30 />
-        <ChangeLogV29 />
-        <ChangeLogV28 />
-        <ChangeLogV27 />
-        <ChangeLogV26 />
-        <ChangeLogV25 />
-        <ChangeLogV24 />
-        <ChangeLogV23 />
-        <ChangeLogV22 />
-        <ChangeLogV21 />
-        <ChangeLogV20 />
-        <ChangeLogV19 />
-        <ChangeLogV18 />
-        <ChangeLogV17 />
-        <ChangeLogV16 />
-        <ChangeLogV15 />
-        <ChangeLogV14 />
-        <ChangeLogV13 />
-        <ChangeLogV12 />
-        <ChangeLogV11 />
-        <ChangeLogV10 />
-        <ChangeLogV09 />
-        <ChangeLogV08 />
-        <ChangeLogV07 />
-        <ChangeLogV06 />
-        <ChangeLogV05 />
-        <ChangeLogV04 />
-      </Stack>
-    </div>
-  );
-};
-const ChangeLogV55 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.55:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>New Area</li>
-        <li>new type of apricorn</li>
-        <li>new quest</li>
-        <li>new trainers</li>
-        <li>wild encounter groups of more than 2</li>
-        <li>fixes and balances from playtesting</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV54 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.54:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Some Settings can now only be editted at the start of the game</li>
-        <li>fixes and balances from playtesting</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV53 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.53:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Bag Limit in Overworld Icons</li>
-        <li>New Setting: random Encounters</li>
-        <li>New Setting: random Evolutions</li>
-        <li>fixes and balances from playtesting</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV52 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.52:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>fixes from playtesting</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV51 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.51:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Feedback and fixes for labyrinth mode</li>
-        <li>Apply Items from Team Overview</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV50 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.50:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Feedback and fixes for labyrinth mode</li>
-        <li>Labyrinth level 2</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV49 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.49:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Ideas and Fixes</li>
-        <li>First version of labyrinth mode</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV48 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.48:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Balancing and Fixes</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV47 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.47:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Caught Water Pokemon live in the water, not on land</li>
-        <li>Camp Upgrade: Battle Journalist</li>
-        <li>Balancing and Fixes</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV46 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.46:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>follower pokemon</li>
-        <li>UI Improvements</li>
-        <li>All 16 Gym Leaders</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV45 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.45:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Pokemon League Challenge</li>
-        <li>Redesigned Camp</li>
-        <li>Balancing</li>
-        <li>New Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV44 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.44:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Ux Improvements</li>
-        <li>Fixes</li>
-        <li>New Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV43 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.43:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Victory Road</li>
-        <li>Badges</li>
-        <li>Balancing for misty</li>
-        <li>New Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV42 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.42:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Ev Training mode</li>
-        <li>Remove imported challenger button</li>
-        <li>New Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV41 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.41:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Snapshot Battles against Friends</li>
-        <li>New Camp Upgrade</li>
-        <li>New Gym Leaders</li>
-        <li>Moves can only be changed at the Move Tutor</li>
-        <li>New Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV40 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.40:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Fixes and Balancing</li>
-        <li>New Quests</li>
-        <li>New Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV39 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.39:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Evil Teams leave after 3 Hours</li>
-        <li>Evil Teams level scale with you</li>
-        <li>Balancing and Fixes</li>
-        <li>New Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV38 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.38:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Internal Dex</li>
-        <li>New evil team</li>
-        <li>New Features</li>
-        <li>Balancing and Fixes</li>
-        <li>New Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV37 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.37:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>New Features</li>
-        <li>Balancing and Fixes</li>
-        <li>New Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV36 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.36:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>New Camp Upgrades</li>
-        <li>New evil teams</li>
-        <li>Balancing and Fixes</li>
-        <li>New Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV35 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.35:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>New camp upgrades</li>
-        <li>New Travelling Trainers</li>
-        <li>New Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV34 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.34:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Catch Streaks</li>
-        <li>New Travelling Trainer</li>
-        <li>fixes, balancing and improvements</li>
-        <li>New Abilities and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV33 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.33:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Quest Categories</li>
-        <li>New Travelling Trainer</li>
-        <li>fixes, balancing and improvements</li>
-        <li>New Abilities and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV32 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.32:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>New Training field mode</li>
-        <li>fixes, balancing and improvements</li>
-        <li>New Abilities and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV31 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.31:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>New Travelling Trainer</li>
-        <li>fixes and improvements</li>
-        <li>New Abilities and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV30 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.30:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>fixes and improvements</li>
-        <li>New Abilities and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV29 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.29:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>New Travelling Trainer</li>
-        <li>New Upgrades</li>
-        <li>Balancing</li>
-        <li>UI Improvements</li>
-        <li>New Abilities and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV28 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.28:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>New Abilities and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV27 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.27:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Favorites System</li>
-        <li>New Quests</li>
-        <li>Catchboosts as quest rewards</li>
-        <li>New Abilities and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV26 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.26:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>New Sorting options</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV25 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.25:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>New Quests</li>
-        <li>New Camp Upgrades</li>
-        <li>UI Improvements</li>
-        <li>New Abilities and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV24 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.24:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Performance Improvements</li>
-        <li>UI Improvements</li>
-        <li>Wild Apricorn Trees</li>
-        <li>Rocket Camp Raid</li>
-        <li>New Quests</li>
-        <li>New Abilities, Items and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV23 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.23:</h3>
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>New Abilities and Attacks</li>
-      </ol>
-    </>
-  );
-};
-
-const ChangeLogV22 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.22:</h3>
-
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Fixed Random Abilities</li>
-        <li>Fixed Challenge Field Ranks</li>
-        <li>Terrain Items</li>
-        <li>New Quest line</li>
-        <li>All Items with battle effects finished</li>
-        <li>New Abilities and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV21 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.21:</h3>
-
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Balls are no longer wasted if the target isnt there anymore</li>
-        <li>Cant select last Pokeball twice anymore</li>
-        <li>Fix Cooking Ingredient Requirements</li>
-        <li>Travelling Merchant</li>
-        <li>New Abilities, Items and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV20 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.20:</h3>
-
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Battle Terrain Abilities</li>
-        <li>New Abilities, Items and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV19 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.19:</h3>
-
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Make first Route Pokemon a little weaker</li>
-        <li>Giovanni</li>
-        <li>Lures at vileplume shop</li>
-        <li>Item Info Button in Bag</li>
-        <li>New Cooking Recipes</li>
-        <li>No Key Items as Randomized Held Items</li>
-        <li>New Abilities, Items and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV18 = (): JSX.Element => {
-  return (
-    <>
-      <h3>0.18:</h3>
-
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Move Info Button</li>
-        <li>Ability Info Button</li>
-        <li>New Abilities, Items and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV17 = (): JSX.Element => {
-  return (
-    <>
-      <h3>V 0.17:</h3>
-
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Movement Buttons can be hidden</li>
-        <li>Make Starter Quest work for randomized starters</li>
-        <li>Fixed Uppercase/Lowercase inputs</li>
-        <li>Better Pokeball indicator</li>
-        <li>New Abilities, Items and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV16 = (): JSX.Element => {
-  return (
-    <>
-      <h3>V 0.16:</h3>
-
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Team Rocket</li>
-        <li>Improved Campupgrade screen</li>
-        <li>Various minor fixes</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV15 = (): JSX.Element => {
-  return (
-    <>
-      <h3>V 0.15:</h3>
-
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Infinite Repel that can be toggled</li>
-        <li>Better Storage Sorting</li>
-        <li>New Training Field Trainer</li>
-        <li>New Abilities, Items and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV14 = (): JSX.Element => {
-  return (
-    <>
-      <h3>V 0.14:</h3>
-
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>New fossils</li>
-        <li>New historian quest</li>
-        <li>New static pokemon</li>
-        <li>Various minor fixes</li>
-        <li>New Abilities, Items and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV13 = (): JSX.Element => {
-  return (
-    <>
-      <h3>V 0.13:</h3>
-
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>New sorting options for pokemon</li>
-        <li>Various minor fixes</li>
-        <li>New Abilities, Items and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV12 = (): JSX.Element => {
-  return (
-    <>
-      <h3>V 0.12:</h3>
-
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Pokeball Amount Indicator </li>
-        <li>Training field 5</li>
-        <li>New Abilities, Items and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV11 = (): JSX.Element => {
-  return (
-    <>
-      <h3>V 0.11:</h3>
-
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>New Mulches</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV10 = (): JSX.Element => {
-  return (
-    <>
-      <h3>V 0.10:</h3>
-
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Challenge Field</li>
-        <li>New Abilities, Items and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV09 = (): JSX.Element => {
-  return (
-    <>
-      <h3>V 0.9:</h3>
-
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Kanto Gym Leaders appear for special battles</li>
-        <li>New Abilities, Items and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV08 = (): JSX.Element => {
-  return (
-    <>
-      <h3>V 0.8:</h3>
-
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Opponents set up screens</li>
-        <li>New Abilities, Items and Attacks</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV07 = (): JSX.Element => {
-  return (
-    <>
-      <h3>V 0.7:</h3>
-
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Repair Hyper Beam</li>
-        <li>Take all/Store all by clicking on arrow</li>
-      </ol>
-    </>
-  );
-};
-const ChangeLogV06 = (): JSX.Element => {
-  return (
-    <>
-      <h3>V 0.6:</h3>
-
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Better Iv and Ev display</li>
-        <li>Fix Multihit PP Usage</li>
-      </ol>
-    </>
-  );
-};
-
-const ChangeLogV05 = (): JSX.Element => {
-  return (
-    <>
-      <h3>V 0.5:</h3>
-
-      <ol style={{ lineHeight: "1.5rem" }}>
-        {" "}
-        <li>Fixed Ability: Moody</li>
-        <li>Fixed Setting: Random Abilities</li>
-      </ol>
-    </>
-  );
-};
-
-const ChangeLogV04 = (): JSX.Element => {
-  return (
-    <>
-      <h3>V 0.4:</h3>
-
-      <ol style={{ lineHeight: "1.5rem" }}>
-        <li>Improved Amoongus Trades</li>
-        <li>Setting: Random Held Items</li>
-        <li>Setting: Random Abilities</li>
-        <li>Setting: Random Learnable Moves</li>
-        <li>Opponent decisions consider weather & effects </li>
-        <li>Fixed Weather Display and Message</li>
-        <li>CampUpgrade: Historian</li>
-        <li>New Abilities, Items and Attacks</li>
-      </ol>
-    </>
+    <Stack alignItems="center" mode="column">
+      <h3>Whats new:</h3>
+      {changelogData.map((entry) => (
+        <ChangelogEntry
+          key={entry.version}
+          version={entry.version}
+          listOfChanges={entry.listOfChanges}
+        />
+      ))}
+    </Stack>
   );
 };

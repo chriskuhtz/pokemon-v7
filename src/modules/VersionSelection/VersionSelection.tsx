@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
+import { RecoveryTool } from "../../components/RecoveryTool/RecoveryTool";
 import { Card } from "../../uiComponents/Card/Card";
 import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
@@ -54,6 +55,7 @@ export const VersionSelection = (): JSX.Element => {
           actionElements={[]}
           onClick={() => setVersion("LABYRINTH")}
         ></Card>
+        <RecoveryTool />
         <ChangeLog />
       </Stack>
     </Page>
