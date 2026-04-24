@@ -3,11 +3,11 @@ import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
 import { makeApricornTree } from "../../../../functions/makeApricornTree";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
 import { occupantHandled } from "../../../../functions/occupantHandled";
-import { Occupant } from "../../../../interfaces/Occupant";
+import { OverworldTrainer } from "../../../../interfaces/Occupant";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
 
-const explorerDan: Occupant = {
+const explorerDan: OverworldTrainer = {
   type: "TRAINER",
   team: (s) => {
     const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
@@ -36,7 +36,7 @@ const explorerDan: Occupant = {
   id: "explorer dan",
   conditionFunction: (s) => !occupantHandled(s, "explorer dan"),
 };
-const psychoWillard: Occupant = {
+const psychoWillard: OverworldTrainer = {
   type: "TRAINER",
   team: (s) => {
     const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
@@ -62,7 +62,7 @@ const psychoWillard: Occupant = {
   id: "psychic willard",
   conditionFunction: (s) => !occupantHandled(s, "psychic willard"),
 };
-const pyroStanley: Occupant = {
+const pyroStanley: OverworldTrainer = {
   type: "TRAINER",
   team: (s) => {
     const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
@@ -95,7 +95,7 @@ const pyroStanley: Occupant = {
   id: "pyromaniac stanley",
   conditionFunction: (s) => !occupantHandled(s, "pyromaniac stanley"),
 };
-const clearingKurt: Occupant = {
+export const clearingKurt: OverworldTrainer = {
   type: "TRAINER",
   team: (s) => {
     const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);

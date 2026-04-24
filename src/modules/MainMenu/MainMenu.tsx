@@ -1,4 +1,4 @@
-import { BsBackpack4 } from "react-icons/bs";
+import { BsBackpack4, BsFillJournalBookmarkFill } from "react-icons/bs";
 import { MdCatchingPokemon } from "react-icons/md";
 import { Card } from "../../uiComponents/Card/Card";
 import { Page } from "../../uiComponents/Page/Page";
@@ -133,6 +133,18 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
                 ? [<strong>Uncollected: {numberOfUncollected}</strong>]
                 : []
             }
+          />
+        )}
+        {saveFile.trainerNotes?.at(0) && (
+          <Card
+            onClick={() => navigate("MAIN", "TRAINER_NOTES")}
+            content={<h4>Notes</h4>}
+            icon={
+              <div style={{ display: "flex", gap: ".5rem" }}>
+                <BsFillJournalBookmarkFill size={battleSpriteSize} />
+              </div>
+            }
+            actionElements={[]}
           />
         )}
         <Card

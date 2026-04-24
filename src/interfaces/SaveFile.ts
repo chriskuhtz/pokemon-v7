@@ -135,6 +135,21 @@ export type TroubleMakers = {
   affiliation: EvilTeam;
   leavesAt?: number;
 };
+
+export interface SavedNote {
+  id: string;
+  xpOverwrite?: number;
+}
+
+export interface LostItem {
+  item: ItemType;
+  amount: number;
+  mapId: MapId;
+  x: number;
+  y: number;
+  resetAt: number;
+}
+
 export interface SaveFile {
   badges: BadgeName[];
   playerId: string;
@@ -184,4 +199,6 @@ export interface SaveFile {
   longestStreak?: number;
   flying?: boolean;
   importedChallenger?: ImportedChallenger;
+  trainerNotes?: SavedNote[];
+  lostItems?: LostItem[];
 }

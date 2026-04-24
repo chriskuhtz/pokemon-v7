@@ -889,7 +889,6 @@ export const expCandyTable: Partial<Record<ItemType, number>> = {
   "exp-candy-l": 10000,
   "exp-candy-xl": 30000,
 };
-
 export const expCandyPackage: Partial<Inventory> = {
   "exp-candy-xs": 10,
   "exp-candy-s": 10,

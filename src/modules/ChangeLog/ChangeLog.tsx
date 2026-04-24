@@ -7,6 +7,15 @@ interface ChangelogEntryData {
 
 const changelogData: ChangelogEntryData[] = [
   {
+    version: "0.59",
+    listOfChanges: [
+      "fixes and balances from playtesting",
+      "improved battle journalist",
+      "new trainer notes system",
+      "time based random overworld items",
+    ],
+  },
+  {
     version: "0.58",
     listOfChanges: ["fixes and balances from playtesting"],
   },

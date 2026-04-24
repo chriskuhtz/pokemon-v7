@@ -1,5 +1,6 @@
 import { useContext, useMemo, useState } from "react";
 import { MapId } from "../../constants/gameData/maps/mapsRecord";
+import { BaseSizeContext } from "../../hooks/useBaseSize";
 import { GameDataContext } from "../../hooks/useGameData";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { RoutesType } from "../../interfaces/Routing";
@@ -38,6 +39,7 @@ import { SpriteSelection } from "../SpriteSelection/SpriteSelection";
 import { StarterSelection } from "../StarterSelection/StarterSelection";
 import { SwarmRadar } from "../SwarmRadar/SwarmRadar";
 import { Team } from "../Team/Team";
+import { TrainerNotes } from "../TrainerNotes/TrainerNotes";
 import { TrainingField } from "../TrainingField/TrainingField";
 import { TravellingMerchant } from "../TravellingMerchant/TravellingMerchant";
 import { VilePlumeScentResearcher } from "../VilePlumeScentResearcher/VilePlumeScentResearcher";
@@ -48,7 +50,7 @@ export const Router = (): JSX.Element => {
     startingTab,
     features: { settingsEditableAtStart, settingsEditableDuringGame },
   } = useContext(GameDataContext);
-
+  const { baseSize } = useContext(BaseSizeContext);
   const {
     saveFile,
     setActiveTabReducer,
@@ -217,6 +219,9 @@ export const Router = (): JSX.Element => {
   if (activeTab === "LABYRINTH_SUCCESS") {
     return <LabyrintSuccess />;
   }
+  if (activeTab === "TRAINER_NOTES") {
+    return <TrainerNotes />;
+  }
   if (activeTab.includes("MAP_MAKER")) {
     const mapId = activeTab.slice(10) as MapId;
     return (
@@ -224,5 +229,5 @@ export const Router = (): JSX.Element => {
     );
   }
 
-  return <Overworld />;
+  return <Overworld baseSize={baseSize} />;
 };
