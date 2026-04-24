@@ -10,6 +10,7 @@ import { SaveFileContext } from "../../../hooks/useSaveFile";
 import { useShader } from "../../../hooks/useShader";
 import { Challenger } from "../../../interfaces/Challenger";
 import { LoadingScreen } from "../../../uiComponents/LoadingScreen/LoadingScreen";
+import { Overworld } from "../../Overworld/Overworld";
 import { BattleOverview } from "./BattleOverview";
 
 export const BattleLoader = ({
@@ -88,29 +89,49 @@ export const BattleLoader = ({
           left: 0,
           position: "absolute",
           backgroundColor: shader,
-          zIndex: 1,
+          zIndex: 2,
         }}
       />
-      <BattleOverview
-        leave={leave}
-        opponents={battleOpponents}
-        team={battleTeam}
-        fightersPerSide={getMiddleOfThree([
-          1,
-          Math.min(
-            battleOpponents.length,
-            battleTeam.filter((b) => !isKO(b)).length,
-          ),
-          2,
-        ])}
-        inventory={saveFile.bag}
-        challengerId={challenger.id}
-        trainer={challenger.trainer}
-        latestMessage={latestMessage}
-        addMessage={addMessage}
-        addMultipleMessages={addMultipleMessages}
-        challengerType={challenger.type}
-      />
+      <div
+        style={{
+          top: 0,
+          left: 0,
+          position: "absolute",
+          width: "100dvw",
+          height: "100dvh",
+          zIndex: 1,
+        }}
+      >
+        <BattleOverview
+          leave={leave}
+          opponents={battleOpponents}
+          team={battleTeam}
+          fightersPerSide={getMiddleOfThree([
+            1,
+            Math.min(
+              battleOpponents.length,
+              battleTeam.filter((b) => !isKO(b)).length,
+            ),
+            2,
+          ])}
+          inventory={saveFile.bag}
+          challengerId={challenger.id}
+          trainer={challenger.trainer}
+          latestMessage={latestMessage}
+          addMessage={addMessage}
+          addMultipleMessages={addMultipleMessages}
+          challengerType={challenger.type}
+        />
+      </div>
+
+      <div
+        style={{
+          pointerEvents: "none",
+          opacity: 0.7,
+        }}
+      >
+        <Overworld uncontrolled />
+      </div>
     </>
   );
 };

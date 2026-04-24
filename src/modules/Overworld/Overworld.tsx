@@ -19,7 +19,7 @@ import { useKeyboardControl } from "./hooks/useKeyboardControl";
 import { useMovement } from "./hooks/useMovement";
 import { useOccupants } from "./hooks/useOccupants";
 
-export const Overworld = () => {
+export const Overworld = ({ uncontrolled }: { uncontrolled?: boolean }) => {
   const [stepsTaken, setStepsTaken] = useState<number>(0);
   const { baseSize } = useContext(BaseSizeContext);
 
@@ -75,12 +75,7 @@ export const Overworld = () => {
   //INTERACTION
   useDrawForeground("foreground", map.tileMap, map.tilesetUrl, baseSize);
   const interactWith = useInteractWith(stepsTaken, rotateOccupant);
-  //MOVEMENT
-  // const setNextInput = useOverworldMovement(
-  // 	() => setStepsTaken((s) => s + 1),
-  // 	occupants,
-  // 	stepsTaken
-  // );
+
   const setNextInput = useMovement(occupants, stepsTaken, setStepsTaken);
 
   useKeyboardControl(
@@ -90,18 +85,20 @@ export const Overworld = () => {
     () => navigateAwayFromOverworldReducer({ activeTab: "QUESTS" }, stepsTaken),
     () => navigateAwayFromOverworldReducer({ activeTab: "TEAM" }, stepsTaken),
     () => navigateAwayFromOverworldReducer({ activeTab: "BAG" }, stepsTaken),
-    !!latestMessage,
+    !!(latestMessage || uncontrolled),
   );
 
   return (
     <div>
-      <OverworldMenus
-        stepsTaken={stepsTaken}
-        setNextInput={setNextInput}
-        handleEnterPress={() =>
-          handleEnterPress(location, interactWith, occupants)
-        }
-      />
+      {!uncontrolled && (
+        <OverworldMenus
+          stepsTaken={stepsTaken}
+          setNextInput={setNextInput}
+          handleEnterPress={() =>
+            handleEnterPress(location, interactWith, occupants)
+          }
+        />
+      )}
       <OverworldCanvasses
         setNextInput={setNextInput}
         interactWith={interactWith}
