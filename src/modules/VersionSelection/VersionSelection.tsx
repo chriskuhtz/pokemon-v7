@@ -17,6 +17,16 @@ export const VersionSelection = (): JSX.Element => {
   if (version === "LABYRINTH") {
     return <Labyrinth />;
   }
+  return <SelectionCards setVersion={setVersion} />;
+};
+
+const SelectionCards = ({
+  setVersion,
+}: {
+  setVersion: React.Dispatch<
+    React.SetStateAction<"KUMA" | "LABYRINTH" | undefined>
+  >;
+}) => {
   return (
     <Page headline={"Which version would you like to play"}>
       <Stack mode={"column"}>

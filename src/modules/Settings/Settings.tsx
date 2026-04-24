@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { getRandomBall, getRandomItem } from "../../interfaces/Item";
 import { SettingsObject } from "../../interfaces/SettingsObject";
@@ -9,17 +9,23 @@ import { KumaQuestsRecord } from "../../versions/kuma/questsRecord";
 export const randomQuestRewards = "randomQuestRewards";
 
 const settingsLabels: Record<keyof SettingsObject, string> = {
+  //QoL:
   fasterDays: "Should Days take 4 hours instead of 24?",
   doubleXpRates: "Double Xp Rates",
   minimalGrindingMode: "Minimal Grinding Mode",
-  hideMovementButtons: "Hide Movement Buttons",
-  seekOutEncounters: "Seek Encounters",
-  unlimitedPathfindingRange: "Unlimited Pathfinder",
+  //Difficulty:
+  teamSelectionBeforeBattle:
+    "Choose your Team or attempt escape before each battle",
   smarterOpponents: '"Smarter" Opponents:',
   rogueLike: "Roguelike mode:",
   releaseFaintedPokemon: "Defeated Pokemon are released into the wild:",
   noItemsInBattle: "No Healing Items allowed in Battle:",
   noRunningFromBattle: "No Running from wild Pokemon:",
+  //Ux:
+  hideMovementButtons: "Hide Movement Buttons",
+  seekOutEncounters: "Seek Encounters",
+  unlimitedPathfindingRange: "Unlimited Pathfinder",
+  //Randomization:
   randomStarters: "Would you like random starter pokemon choices:",
   randomOverworldItems: "Random Overworld Items:",
   randomQuestRewards: "Random Quest Rewards:",
@@ -29,9 +35,8 @@ const settingsLabels: Record<keyof SettingsObject, string> = {
   randomLearnSets: "Random Learnable Moves:",
   randomEncounters: "Random Wild Pokemon:",
   randomEvolution: "Random Evolution:",
+  //other
   expShareActive: "Exp Share Active",
-  teamSelectionBeforeBattle:
-    "Choose your Team or attempt escape before each battle",
 };
 
 const settingsDescriptions: Record<keyof SettingsObject, string | undefined> = {
@@ -116,9 +121,7 @@ export const Settings = ({
               proceed();
             }
       }
-      headline={
-        atGameStart ? "Settings: (many cant be changed later)" : "Settings:"
-      }
+      headline={atGameStart ? "Settings:" : "In Game Settings:"}
     >
       <div style={{ padding: "1rem" }}>
         <div
@@ -135,7 +138,31 @@ export const Settings = ({
             .map((s) => {
               const setting = s as keyof SettingsObject;
 
-              return (
+              if (!editableSettings[setting]) {
+                return;
+              }
+
+              const headline = (
+                setting: keyof SettingsObject,
+              ): string | undefined => {
+                if (setting === "fasterDays") {
+                  return "Quality of Life:";
+                }
+                if (setting === "teamSelectionBeforeBattle") {
+                  return "Difficulty:";
+                }
+                if (setting === "hideMovementButtons") {
+                  return "Controls/Navigation:";
+                }
+                if (setting === "randomStarters") {
+                  return "Randomization:";
+                }
+                return;
+              };
+
+              const h = headline(setting);
+
+              const t = (
                 <ToggleRow
                   key={setting}
                   disabled={!editableSettings[setting]}
@@ -145,6 +172,17 @@ export const Settings = ({
                   description={settingsDescriptions[setting]}
                 />
               );
+              if (h) {
+                return (
+                  <React.Fragment key={setting}>
+                    <h3>{h}</h3>
+                    <span />
+                    {t}
+                  </React.Fragment>
+                );
+              }
+
+              return t;
             })}
         </div>
         <br />

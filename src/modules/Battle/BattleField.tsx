@@ -800,18 +800,13 @@ export const BattleField = ({
   }
 
   return (
-    <div style={{ backgroundColor: "white" }}>
+    <div>
       <div
         style={{
           display: "grid",
           gridTemplateRows: `1fr 4fr 4fr ${portraitMode ? 3 : 2}fr`,
           height: "100dvh",
           gap: ".5rem",
-
-          backgroundImage: portraitMode
-            ? `url("/backgrounds/forestMobile.png")`
-            : `url("/backgrounds/forestDesktop.png")`,
-          backgroundSize: "cover",
         }}
       >
         <div

@@ -79,147 +79,138 @@ export const LineUpSelection = ({
   }, [addMessage, leave, opponents, startBattle, team]);
 
   return (
-    <div style={{ background: "white" }}>
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: portraitMode ? "1fr" : "1fr 1fr",
+        gridTemplateRows: portraitMode ? "1fr 1fr 1fr 1fr" : "1fr 1fr",
+        height: "100dvh",
+        justifyItems: "center",
+        alignItems: "center",
+      }}
+    >
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: portraitMode ? "1fr" : "1fr 1fr",
-          gridTemplateRows: portraitMode ? "1fr 1fr 1fr 1fr" : "1fr 1fr",
-          height: "100dvh",
-          justifyItems: "center",
-          alignItems: "center",
-          backgroundImage: portraitMode
-            ? `url("/backgrounds/forestMobile.png")`
-            : `url("/backgrounds/forestDesktop.png")`,
-          backgroundSize: "cover",
+          border: "2px solid black",
+          borderRadius: ".5rem",
+          padding: "0 1rem",
+          backgroundColor: "white",
         }}
       >
-        <div
-          style={{
-            border: "2px solid black",
-            borderRadius: ".5rem",
-            padding: "0 1rem",
-            backgroundColor: "rgba(255,255,255,.9)",
-          }}
-        >
-          {trainer ? (
-            <h2 style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-              {" "}
-              VS {trainer.id}{" "}
-              {trainer.profilePicture ? (
-                <img src={trainer.profilePicture} />
-              ) : (
-                <Sprite
-                  canvasKey={trainer.id}
-                  id={trainer.sprite}
-                  rotating={false}
-                />
-              )}
-            </h2>
-          ) : (
-            <h2>VS Wild Pokemon</h2>
-          )}
-          <h2>
-            Its {fightersPerSide} v {fightersPerSide}
+        {trainer ? (
+          <h2 style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            {" "}
+            VS {trainer.id}{" "}
+            {trainer.profilePicture ? (
+              <img src={trainer.profilePicture} />
+            ) : (
+              <Sprite
+                canvasKey={trainer.id}
+                id={trainer.sprite}
+                rotating={false}
+              />
+            )}
           </h2>
-        </div>
+        ) : (
+          <h2>VS Wild Pokemon</h2>
+        )}
+        <h2>
+          Its {fightersPerSide} v {fightersPerSide}
+        </h2>
+      </div>
 
-        <ul
-          dir="rtl"
+      <ul
+        dir="rtl"
+        style={{
+          display: "grid",
+          alignItems: "center",
+          gap: "1rem",
+          gridTemplateColumns: "1fr 1fr 1fr",
+          backgroundColor: "rgba(255,255,255,.9)",
+          padding: "1rem",
+          borderRadius: ".5rem",
+        }}
+      >
+        {opponents.map((opponent) => (
+          <IconSolarSystem
+            key={opponent.id}
+            sun={{
+              url: trainer
+                ? getItemUrl("poke-ball")
+                : getPokemonSprite(opponent.name, { shiny: opponent.shiny }),
+            }}
+            secondPlanetUrl={
+              pokedex[opponent.name].caughtOnRoutes.includes(location.mapId) &&
+              !trainer
+                ? getItemUrl("poke-ball")
+                : undefined
+            }
+          />
+        ))}
+      </ul>
+      {canChooseTeam && (
+        <div
           style={{
             display: "grid",
             alignItems: "center",
-            gap: "1rem",
+            justifyContent: "center",
             gridTemplateColumns: "1fr 1fr 1fr",
+            columnGap: "2rem",
+            rowGap: ".5rem",
             backgroundColor: "rgba(255,255,255,.9)",
             padding: "1rem",
             borderRadius: ".5rem",
           }}
         >
-          {opponents.map((opponent) => (
-            <IconSolarSystem
-              key={opponent.id}
-              sun={{
-                url: trainer
-                  ? getItemUrl("poke-ball")
-                  : getPokemonSprite(opponent.name, { shiny: opponent.shiny }),
-              }}
-              secondPlanetUrl={
-                pokedex[opponent.name].caughtOnRoutes.includes(
-                  location.mapId,
-                ) && !trainer
-                  ? getItemUrl("poke-ball")
-                  : undefined
-              }
-            />
-          ))}
-        </ul>
-        {canChooseTeam && (
-          <div
-            style={{
-              display: "grid",
-              alignItems: "center",
-              justifyContent: "center",
-              gridTemplateColumns: "1fr 1fr 1fr",
-              columnGap: "2rem",
-              rowGap: ".5rem",
-              backgroundColor: "rgba(255,255,255,.9)",
-              padding: "1rem",
-              borderRadius: ".5rem",
-            }}
-          >
-            {team
-              .filter((t) => !isKO(t))
-              .map((teamMember) => (
-                <div
-                  role="button"
-                  onClick={() => toggleSelected(teamMember.id)}
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      toggleSelected(teamMember.id);
-                    }
+          {team
+            .filter((t) => !isKO(t))
+            .map((teamMember) => (
+              <div
+                role="button"
+                onClick={() => toggleSelected(teamMember.id)}
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    toggleSelected(teamMember.id);
+                  }
+                }}
+                key={teamMember.id}
+                style={{
+                  border: selectedTeam.includes(teamMember.id)
+                    ? "2px solid black"
+                    : undefined,
+                  borderRadius: 9000,
+                  aspectRatio: "1/1",
+                  padding: "1rem",
+                }}
+              >
+                <PokemonSprite
+                  config={{
+                    shiny: teamMember.shiny,
+                    back: true,
+                    grayscale: isKO(teamMember),
                   }}
-                  key={teamMember.id}
-                  style={{
-                    border: selectedTeam.includes(teamMember.id)
-                      ? "2px solid black"
-                      : undefined,
-                    borderRadius: 9000,
-                    aspectRatio: "1/1",
-                    padding: "1rem",
-                  }}
-                >
-                  <PokemonSprite
-                    config={{
-                      shiny: teamMember.shiny,
-                      back: true,
-                      grayscale: isKO(teamMember),
-                    }}
-                    name={teamMember.name}
-                  />
-                </div>
-              ))}
-          </div>
-        )}
-
-        <div
-          style={{
-            display: "flex",
-            gap: "1rem",
-          }}
-        >
-          <button
-            autoFocus
-            onClick={startBattle}
-            disabled={selectedTeam.length !== fightersPerSide}
-          >
-            {battleButtonMessage}
-          </button>
-          {runningAllowed && (
-            <button onClick={tryToLeave}>Try to escape</button>
-          )}
+                  name={teamMember.name}
+                />
+              </div>
+            ))}
         </div>
+      )}
+
+      <div
+        style={{
+          display: "flex",
+          gap: "1rem",
+        }}
+      >
+        <button
+          autoFocus
+          onClick={startBattle}
+          disabled={selectedTeam.length !== fightersPerSide}
+        >
+          {battleButtonMessage}
+        </button>
+        {runningAllowed && <button onClick={tryToLeave}>Try to escape</button>}
       </div>
     </div>
   );

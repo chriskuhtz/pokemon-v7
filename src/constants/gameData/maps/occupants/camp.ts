@@ -300,7 +300,20 @@ export const campOccupants: OverworldMap["occupants"] = [
     orientation: "DOWN",
     dialogue: ["How should we expand our camp?"],
     sprite: SpriteEnum.butler,
-    conditionFunction: () => true,
+    conditionFunction: (s) => s.quests["catch a pokemon"] !== "INACTIVE",
+  },
+  {
+    type: "NPC",
+    id: "camp_manager_intro",
+    x: 22,
+    y: 18,
+    orientation: "DOWN",
+    unhandledMessage: [
+      "Welcome to the Kuma Camp",
+      "Professor oak is waiting for you in the lab",
+    ],
+    sprite: SpriteEnum.butler,
+    conditionFunction: (s) => s.quests["catch a pokemon"] === "INACTIVE",
   },
   {
     type: "SWARM_RADAR",

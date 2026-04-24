@@ -1,7 +1,6 @@
 import { useContext, useMemo, useState } from "react";
 import { MapId } from "../../constants/gameData/maps/mapsRecord";
 import { GameDataContext } from "../../hooks/useGameData";
-import { MessageQueueContext } from "../../hooks/useMessageQueue";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { RoutesType } from "../../interfaces/Routing";
 import { AbilityTutor } from "../AbilityTutor/AbilityTutor";
@@ -45,9 +44,6 @@ import { VilePlumeScentResearcher } from "../VilePlumeScentResearcher/VilePlumeS
 import { Wiki } from "../Wiki/Wiki";
 
 export const Router = (): JSX.Element => {
-  const { latestMessage, addMessage, addMultipleMessages } =
-    useContext(MessageQueueContext);
-
   const {
     startingTab,
     features: { settingsEditableAtStart, settingsEditableDuringGame },
@@ -85,14 +81,7 @@ export const Router = (): JSX.Element => {
     return <Intro setHasReadIntro={setHasReadIntro} />;
   }
   if (activeTab === "BATTLE" && currentChallenger) {
-    return (
-      <BattleLoader
-        challenger={currentChallenger}
-        latestMessage={latestMessage}
-        addMessage={addMessage}
-        addMultipleMessages={addMultipleMessages}
-      />
-    );
+    return <BattleLoader challenger={currentChallenger} />;
   }
   if (activeTab === "SETTINGS") {
     return <Settings atGameStart editableSettings={settingsEditableAtStart} />;
