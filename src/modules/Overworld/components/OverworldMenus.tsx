@@ -64,7 +64,6 @@ export const OverworldMenus = ({
         style={{
           position: "absolute",
           top: portraitMode ? "1.5rem" : "5rem",
-
           left: "1rem",
           zIndex: 8999,
           padding: ".5rem",

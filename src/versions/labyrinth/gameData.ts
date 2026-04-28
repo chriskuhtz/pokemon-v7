@@ -60,4 +60,5 @@ export const gameData: GameData = {
   defaultBattleSize: 1,
   startingLocation: startingLocationLabyrinth,
   startingSaveFile: startingSaveFileLabyrinth,
+  isMoveLearnable: () => ({ learnable: true, message: "Can be learned" }),
 };

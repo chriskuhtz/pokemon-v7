@@ -1,5 +1,6 @@
 import { useCallback, useContext } from "react";
 import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
+import { calculateLevelData } from "../../../functions/calculateLevelData";
 import { determineWildPokemon } from "../../../functions/determineWildPokemon";
 import { getRandomPokemonName } from "../../../functions/getRandomPokemonId";
 import { isOwnedPokemonKO } from "../../../functions/isKo";
@@ -33,7 +34,7 @@ export const useStartEncounter = () => {
         quests: saveFile.quests,
         waterEncounter: type === "WATER",
         shinyFactor,
-        lure: saveFile.activatedLure,
+        lure: saveFile.currentLure?.type,
         catchStreak: saveFile.catchStreak,
         currentSwarm: saveFile.currentSwarm,
         currentStrongSwarm: saveFile.currentStrongSwarm,
@@ -63,6 +64,32 @@ export const useStartEncounter = () => {
         team: wildPokemon,
         battleTeamConfig,
       };
+      //repels
+
+      if (
+        saveFile.currentRepel?.type === "repel" &&
+        challenger.team.every(
+          (t) => calculateLevelData(t.xp, "medium").level <= 20,
+        )
+      ) {
+        return;
+      }
+      if (
+        saveFile.currentRepel?.type === "super-repel" &&
+        challenger.team.every(
+          (t) => calculateLevelData(t.xp, "medium").level <= 40,
+        )
+      ) {
+        return;
+      }
+      if (
+        saveFile.currentRepel?.type === "max-repel" &&
+        challenger.team.every(
+          (t) => calculateLevelData(t.xp, "medium").level <= 60,
+        )
+      ) {
+        return;
+      }
       activateTransition({
         effect: "random_squares",
         onRemoval: () =>
@@ -78,10 +105,11 @@ export const useStartEncounter = () => {
       gameData.internalDex,
       location.mapId,
       navigateAwayFromOverworldReducer,
-      saveFile.activatedLure,
       saveFile.bag,
       saveFile.catchStreak,
       saveFile.currentDistortionSwarm,
+      saveFile.currentLure?.type,
+      saveFile.currentRepel?.type,
       saveFile.currentStrongSwarm,
       saveFile.currentSwarm,
       saveFile.pokemon,

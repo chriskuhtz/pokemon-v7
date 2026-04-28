@@ -45,8 +45,10 @@ export const Card = ({
         style={{
           display: "flex",
           gap: ".5rem",
-          alignItems: "center",
+          alignItems: portraitMode ? "stretch" : "center",
+          justifyContent: portraitMode ? "center" : "stretch",
           flexDirection: portraitMode ? "row" : "column",
+          flexWrap: "wrap",
         }}
       >
         {actionElements.map((a, i) => (

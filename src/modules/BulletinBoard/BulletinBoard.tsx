@@ -88,6 +88,8 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
 
                     <h5 style={{ display: "flex", alignItems: "center" }}>
                       Reward:
+                    </h5>
+                    <Stack mode="row" flexWrap="wrap" gap={0.25}>
                       {Object.entries(getRewardItemsForQuest(name)).map(
                         ([item, amount]) => (
                           <React.Fragment key={item}>
@@ -98,7 +100,7 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
                       {quest.rewardPokemon && (
                         <PokemonSprite name={quest.rewardPokemon.name} />
                       )}
-                    </h5>
+                    </Stack>
                     <h5>Research Points: {quest.researchPoints}</h5>
                   </div>
                 }

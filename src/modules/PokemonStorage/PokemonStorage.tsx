@@ -30,6 +30,7 @@ import { Chip } from "../../uiComponents/Chip/Chip";
 import { IconSolarSystem } from "../../uiComponents/IconSolarSystem/IconSolarSystem";
 import { Modal } from "../../uiComponents/Modal/Modal";
 import { Page } from "../../uiComponents/Page/Page";
+import { SelectionBar } from "../../uiComponents/SelectionBar/SelectionBar";
 import { Stack } from "../../uiComponents/Stack/Stack";
 export const sortByTypes = [
   "FAVORITE",
@@ -241,29 +242,13 @@ export const PokemonStorage = ({
           Storage:
         </h2>
 
-        <div
-          style={{
-            display: "flex",
-            gap: ".5rem",
-            alignItems: "center",
-            flexWrap: "wrap",
-          }}
-        >
-          Sort By
-          {sortByTypes.map((filter) => (
-            <button
-              key={filter}
-              style={
-                sortBy === filter
-                  ? { backgroundColor: "black", color: "white" }
-                  : undefined
-              }
-              onClick={() => setSortBy(filter)}
-            >
-              {filter}
-            </button>
-          ))}
-        </div>
+        <SelectionBar
+          selected={sortBy}
+          options={sortByTypes.map((s) => ({ key: s, label: s }))}
+          allowUndefined={false}
+          //@ts-expect-error it is one of the options
+          select={(s) => setSortBy(s)}
+        />
 
         <Stack mode="row" justifyContent="center">
           <FaSearch size={battleSpriteSize} />{" "}

@@ -16,7 +16,11 @@ import { GameDataContext } from "../../../hooks/useGameData";
 import { SaveFileContext } from "../../../hooks/useSaveFile";
 import { InternalDex } from "../../../interfaces/GameData";
 import { Nature } from "../../../interfaces/Natures";
-import { Occupant, OverworldPokemon } from "../../../interfaces/Occupant";
+import {
+  Occupant,
+  OverworldLostItem,
+  OverworldPokemon,
+} from "../../../interfaces/Occupant";
 import {
   CharacterOrientation,
   RampagingPokemon,
@@ -48,15 +52,18 @@ export const useOccupants = () => {
       }
       return occ;
     });
+    //add troubleMakers
     if (saveFile.troubleMakers && saveFile.troubleMakers.route === map.id) {
       all.push(...createTroubleMakers(saveFile));
     }
+    //add rampager
     if (
       saveFile.currentRampagingPokemon &&
       saveFile.currentRampagingPokemon.route === map.id
     ) {
       all.push(createRampager(saveFile.currentRampagingPokemon, internalDex));
     }
+    //add guest
     const guest = saveFile.importedChallenger;
     if (guest && guest.mapId === map.id) {
       all.push({
@@ -65,11 +72,24 @@ export const useOccupants = () => {
         conditionFunction: () => true,
       });
     }
+    //add pasture Pokemon
     if (location.mapId === "camp") {
       all.push(...createPasturePokemon(saveFile, internalDex));
       all.push(...createBattle());
     }
-
+    if (saveFile.lostItems) {
+      all.push(
+        ...saveFile.lostItems
+          .filter((lost) => lost.mapId === location.mapId)
+          .map<OverworldLostItem>((lost, index) => ({
+            ...lost,
+            type: "LOST_ITEM",
+            conditionFunction: () => true,
+            id: `lost${lost.item}${lost.amount}${index}`,
+          })),
+      );
+    }
+    //update
     if (statefulOccupants.length !== all.length) {
       setStatefulOccupants(all);
     }

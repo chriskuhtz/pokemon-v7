@@ -51,6 +51,7 @@ export const OCCUPANT_TYPES = [
   "TELEPORTER_NPC",
   "CLIMBING_STEPS",
   "POKEBALL",
+  "LOST_ITEM",
 ] as const;
 export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
@@ -72,6 +73,11 @@ export interface OverworldHiddenItem extends BaseOccupant {
 }
 export interface OverworldInvisbleItem extends BaseOccupant {
   type: "INVISIBLE_ITEM";
+  item: ItemType;
+  amount: number;
+}
+export interface OverworldLostItem extends BaseOccupant {
+  type: "LOST_ITEM";
   item: ItemType;
   amount: number;
 }
@@ -259,6 +265,7 @@ export type Occupant =
   | OverworldItem
   | OverworldHiddenItem
   | OverworldInvisbleItem
+  | OverworldLostItem
   | OverworldChest
   | OverworldPC
   | OverworldMerchant

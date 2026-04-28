@@ -15,11 +15,13 @@ import { IdeaButton } from "../../components/IdeaReport/IdeaReport";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 
+import React from "react";
 import { ExportSnapshotCard } from "../../components/SnapshotCard/ExportSnapshotCard";
 import { ImportSnapshotCard } from "../../components/SnapshotCard/ImportSnapshotCard";
 import { ResetSnapshotCard } from "../../components/SnapshotCard/ResetSnapshotCard";
 import { TrainerCard } from "../../components/TrainerCard/TrainerCard";
-import { battleSpriteSize } from "../../constants/baseConstants";
+import { battleSpriteSize, ONE_HOUR } from "../../constants/baseConstants";
+import { customItemDescriptions } from "../../constants/customItemDescriptions";
 import { mapsRecord } from "../../constants/gameData/maps/mapsRecord";
 import { fullyHealPokemon } from "../../functions/fullyHealPokemon";
 import { questMenuAvailable } from "../../functions/questMenuAvailable";
@@ -31,11 +33,12 @@ import { useQuests } from "../../hooks/useQuests";
 import { useReset } from "../../hooks/useReset";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { useTeleport } from "../../hooks/useTeleport";
-import { EmptyInventory } from "../../interfaces/Inventory";
+import { EmptyInventory, joinInventories } from "../../interfaces/Inventory";
+import { lures, repels } from "../../interfaces/Item";
 import { RoutesType } from "../../interfaces/Routing";
 export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
-  const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
-  const { location, setLocation } = useContext(LocationContext);
+  const { saveFile } = useContext(SaveFileContext);
+  const { location } = useContext(LocationContext);
   const team = useMemo(
     () => saveFile.pokemon.filter((p) => p.onTeam),
     [saveFile.pokemon],
@@ -68,35 +71,7 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
           />
         )}
         <FlyingButton />
-        {(location.mapId == mapsRecord.challengeField.id ||
-          location.mapId == mapsRecord.randomField.id) && (
-          <Card
-            onClick={() => {
-              setLocation({
-                mapId: "camp",
-                x: 3,
-                y: 16,
-                orientation: "LEFT",
-                forwardFoot: "CENTER1",
-              });
-              patchSaveFileReducer({
-                bag: EmptyInventory,
-                meta: { ...saveFile.meta, activeTab: "OVERWORLD" },
-
-                pokemon: saveFile.pokemon.map((p) => {
-                  if (p.onTeam) {
-                    return fullyHealPokemon(p);
-                  }
-
-                  return p;
-                }),
-              });
-            }}
-            content={<h4>Leave the challenge field</h4>}
-            icon={<IoMdExit size={battleSpriteSize} />}
-            actionElements={[]}
-          />
-        )}
+        <LeaveChallengeFieldButton />
         <RepelButton />
         <LureButton />
         <ExpShareButton />
@@ -236,7 +211,9 @@ export const ExpShareButton = () => {
       }
       actionElements={[
         <strong>
-          {saveFile.settings?.expShareActive ? "Xp Share ON" : "Xp Share Off"}
+          {saveFile.settings?.expShareActive
+            ? "Xp Share is ON"
+            : "Xp Share is Off"}
         </strong>,
       ]}
     />
@@ -245,135 +222,94 @@ export const ExpShareButton = () => {
 export const RepelButton = () => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
-  if (saveFile.activatedRepel) {
+  if (saveFile.currentRepel) {
     return (
       <Card
-        icon={<ItemSprite item={"repel"} />}
-        onClick={() => {
-          patchSaveFileReducer({
-            activatedRepel: undefined,
-          });
-        }}
-        content={<h3>Deactivate Repel</h3>}
-        actionElements={[]}
-      />
-    );
-  }
-  if (saveFile.bag["max-repel"] > 0 || saveFile.storage["max-repel"] > 0) {
-    return (
-      <Card
-        icon={<ItemSprite item={"max-repel"} />}
-        onClick={() => {
-          patchSaveFileReducer({
-            activatedRepel: "max-repel",
-          });
-        }}
-        content={<h3>Repel Pokemon up to level 60</h3>}
-        actionElements={[]}
-      />
-    );
-  }
-  if (saveFile.bag["super-repel"] > 0 || saveFile.storage["super-repel"] > 0) {
-    return (
-      <Card
-        icon={<ItemSprite item={"super-repel"} />}
-        onClick={() => {
-          patchSaveFileReducer({
-            activatedRepel: "super-repel",
-          });
-        }}
-        content={<h3>Repel Pokemon up to level 40</h3>}
-        actionElements={[]}
-      />
-    );
-  }
-  if (saveFile.bag["repel"] > 0 || saveFile.storage["repel"] > 0) {
-    return (
-      <Card
-        icon={<ItemSprite item={"repel"} />}
-        onClick={() => {
-          patchSaveFileReducer({
-            activatedRepel: "repel",
-          });
-        }}
-        content={<h3>Repel Pokemon up to level 20</h3>}
-        actionElements={[]}
-      />
-    );
-  }
-  return <></>;
-};
-export const LureButton = () => {
-  const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
-
-  const hasLure = saveFile.bag["lure"] > 0 || saveFile.storage["lure"] > 0;
-
-  const hasSuperLure =
-    saveFile.bag["super-lure"] > 0 || saveFile.storage["super-lure"] > 0;
-
-  const hasMaxLure =
-    saveFile.bag["max-lure"] > 0 || saveFile.storage["max-lure"] > 0;
-  if (saveFile.activatedLure) {
-    return (
-      <Card
-        icon={<ItemSprite item={saveFile.activatedLure ?? "lure"} />}
-        onClick={() => {
-          patchSaveFileReducer({
-            activatedLure: undefined,
-          });
-        }}
-        content={<h3>Deactivate {saveFile.activatedLure}</h3>}
-        actionElements={[]}
-      />
-    );
-  }
-  if (hasLure || hasSuperLure || hasMaxLure) {
-    return (
-      <Card
-        icon={<ItemSprite item={"lure"} />}
-        content={<h3>Choose a Lure</h3>}
+        icon={<ItemSprite item={saveFile.currentRepel.type} />}
+        content={
+          <h3>
+            {saveFile.currentRepel.type} active until{" "}
+            {new Date(saveFile.currentRepel.activeUntil).toLocaleTimeString()}
+          </h3>
+        }
         actionElements={[
-          hasLure ? (
-            <ItemSprite
-              item="lure"
-              onClick={() => {
-                patchSaveFileReducer({
-                  activatedLure: "lure",
-                });
-              }}
-            />
-          ) : (
-            <></>
-          ),
-          hasSuperLure ? (
-            <ItemSprite
-              item="super-lure"
-              onClick={() => {
-                patchSaveFileReducer({
-                  activatedLure: "super-lure",
-                });
-              }}
-            />
-          ) : (
-            <></>
-          ),
-          hasMaxLure ? (
-            <ItemSprite
-              item="max-lure"
-              onClick={() => {
-                patchSaveFileReducer({
-                  activatedLure: "max-lure",
-                });
-              }}
-            />
-          ) : (
-            <></>
-          ),
+          <button
+            onClick={() => patchSaveFileReducer({ currentRepel: undefined })}
+          >
+            Stop current Repel
+          </button>,
         ]}
       />
     );
   }
-  return <></>;
+  return (
+    <>
+      {repels.map((thisrepel) =>
+        saveFile.bag[thisrepel] > 0 ? (
+          <Card
+            key={thisrepel}
+            icon={<ItemSprite item={thisrepel} />}
+            onClick={() => {
+              patchSaveFileReducer({
+                currentRepel: {
+                  type: thisrepel,
+                  activeUntil: new Date().getTime() + ONE_HOUR,
+                },
+                bag: joinInventories(saveFile.bag, { [thisrepel]: 1 }, true),
+              });
+            }}
+            content={<h3>{customItemDescriptions[thisrepel]}</h3>}
+            actionElements={[]}
+          />
+        ) : (
+          <React.Fragment key={thisrepel}></React.Fragment>
+        ),
+      )}
+    </>
+  );
+};
+export const LureButton = () => {
+  const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+
+  if (saveFile.currentLure) {
+    return (
+      <Card
+        icon={<ItemSprite item={saveFile.currentLure.type} />}
+        content={
+          <h3>
+            {saveFile.currentLure.type} active until{" "}
+            {new Date(saveFile.currentLure.activeUntil).toLocaleTimeString()}
+          </h3>
+        }
+        actionElements={[]}
+      />
+    );
+  }
+  return (
+    <>
+      {lures.map((thisLure) =>
+        saveFile.bag[thisLure] > 0 ? (
+          <Card
+            key={thisLure}
+            icon={<ItemSprite item={thisLure} />}
+            onClick={() => {
+              patchSaveFileReducer({
+                currentLure: {
+                  type: thisLure,
+                  activeUntil: new Date().getTime() + ONE_HOUR,
+                },
+                bag: joinInventories(saveFile.bag, { [thisLure]: 1 }, true),
+              });
+            }}
+            content={<h3>{customItemDescriptions[thisLure]}</h3>}
+            actionElements={[]}
+          />
+        ) : (
+          <React.Fragment key={thisLure}></React.Fragment>
+        ),
+      )}
+    </>
+  );
 };
 export const FlyingButton = () => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
@@ -419,4 +355,38 @@ export const FlyingButton = () => {
       )}
     </>
   );
+};
+export const LeaveChallengeFieldButton = () => {
+  const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+  const { location, setLocation } = useContext(LocationContext);
+  const { startingLocation } = useContext(GameDataContext);
+  if (
+    location.mapId == mapsRecord.challengeField.id ||
+    location.mapId == mapsRecord.randomField.id
+  ) {
+    return (
+      <Card
+        onClick={() => {
+          setLocation(startingLocation);
+          patchSaveFileReducer({
+            bag: EmptyInventory,
+            meta: { ...saveFile.meta, activeTab: "OVERWORLD" },
+
+            pokemon: saveFile.pokemon.map((p) => {
+              if (p.onTeam) {
+                return fullyHealPokemon(p);
+              }
+
+              return p;
+            }),
+          });
+        }}
+        content={<h4>Leave the challenge field</h4>}
+        icon={<IoMdExit size={battleSpriteSize} />}
+        actionElements={[]}
+      />
+    );
+  }
+
+  return <></>;
 };

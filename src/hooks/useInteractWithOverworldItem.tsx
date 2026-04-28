@@ -8,6 +8,7 @@ import {
   OverworldHiddenItem,
   OverworldInvisbleItem,
   OverworldItem,
+  OverworldLostItem,
 } from "../interfaces/Occupant";
 import { GameDataContext } from "./useGameData";
 import { MessageQueueContext } from "./useMessageQueue";
@@ -19,7 +20,13 @@ export const useInteractWithOverworldItem = () => {
   const gameData = useContext(GameDataContext);
 
   return useCallback(
-    (data: OverworldItem | OverworldHiddenItem | OverworldInvisbleItem) => {
+    (
+      data:
+        | OverworldItem
+        | OverworldHiddenItem
+        | OverworldInvisbleItem
+        | OverworldLostItem,
+    ) => {
       const occ = saveFile.settings?.randomOverworldItems
         ? { ...data, item: getRandomItem() }
         : data;
@@ -31,7 +38,7 @@ export const useInteractWithOverworldItem = () => {
         getTotalInventoryAmount(newInventory) > getBagLimit(saveFile, gameData)
       ) {
         addMessage({
-          message: `Your Bag is full,  cant carry ${amount} more items`,
+          message: `Your Bag is full, cant carry ${amount} more items`,
           needsNoConfirmation: true,
         });
         return;
@@ -48,6 +55,12 @@ export const useInteractWithOverworldItem = () => {
                 ...saveFile.handledOccupants,
                 { id: occ.id, resetAt: -1 },
               ],
+              lostItems:
+                occ.type === "LOST_ITEM"
+                  ? saveFile.lostItems?.filter(
+                      (entry) => entry.item !== occ.item,
+                    )
+                  : saveFile.lostItems,
             });
           },
         });

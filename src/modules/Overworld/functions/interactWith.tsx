@@ -11,6 +11,7 @@ import {
   OverworldHiddenItem,
   OverworldInvisbleItem,
   OverworldItem,
+  OverworldLostItem,
   OverworldNpc,
   OverworldPokeball,
   OverworldPokemon,
@@ -101,7 +102,11 @@ export const interactWithFunction = ({
   interactWithOverworldChest: (x: OverworldChest) => void;
   interactWithOverworldNpc: (x: OverworldNpc) => void;
   interactWithOverworldItem: (
-    x: OverworldItem | OverworldHiddenItem | OverworldInvisbleItem,
+    x:
+      | OverworldItem
+      | OverworldHiddenItem
+      | OverworldInvisbleItem
+      | OverworldLostItem,
   ) => void;
   interactWithOverworldPokeball: (x: OverworldPokeball) => void;
   routeTo: (meta: SaveFile["meta"]) => void;
@@ -174,6 +179,7 @@ export const interactWithFunction = ({
   if (
     data.type === "ITEM" ||
     data.type === "HIDDEN_ITEM" ||
+    data.type === "LOST_ITEM" ||
     data.type === "INVISIBLE_ITEM"
   ) {
     interactWithOverworldItem(data);
