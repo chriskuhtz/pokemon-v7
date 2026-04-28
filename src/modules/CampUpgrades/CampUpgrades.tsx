@@ -4,6 +4,7 @@ import { GiMountainRoad } from "react-icons/gi";
 import { HiBeaker } from "react-icons/hi";
 import { MdFormatListBulleted } from "react-icons/md";
 import { PiFarm } from "react-icons/pi";
+import { battleSpriteSize } from "../../constants/baseConstants";
 import {
   CampUpgrade,
   campUpgradeCategories,
@@ -13,7 +14,6 @@ import {
   campUpgradeExplanations,
   campUpgradeNames,
 } from "../../constants/gameData/campUpgrades";
-import { battleSpriteSize } from "../../constants/gameData/gameData";
 import { typeColors } from "../../constants/typeColors";
 import { replaceRouteName } from "../../functions/replaceRouteName";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
@@ -25,7 +25,6 @@ import {
   KumaQuestName,
   KumaQuestsRecord,
 } from "../../versions/kuma/questsRecord";
-
 const categories: CampUpgradeCategory[] = [
   "Research",
   "Sustainability",

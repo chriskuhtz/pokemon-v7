@@ -1,9 +1,8 @@
-import { battleSpriteSize } from "../../constants/gameData/gameData";
+import { battleSpriteSize } from "../../constants/baseConstants";
 import { getCurrentPP } from "../../functions/getCurrentPP";
 import { BattleMove, BattlePokemon } from "../../interfaces/BattlePokemon";
 import { Card } from "../../uiComponents/Card/Card";
 import { Stack } from "../../uiComponents/Stack/Stack";
-
 export const MoveCard = ({
   move,
   onClick,

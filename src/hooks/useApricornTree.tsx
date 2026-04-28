@@ -1,5 +1,5 @@
 import { useCallback, useContext } from "react";
-import { battleSpriteSize, ONE_HOUR } from "../constants/gameData/gameData";
+import { battleSpriteSize, ONE_HOUR } from "../constants/baseConstants";
 import { getItemUrl } from "../functions/getItemUrl";
 import { getMiddleOfThree } from "../functions/getMiddleOfThree";
 import { joinInventories } from "../interfaces/Inventory";

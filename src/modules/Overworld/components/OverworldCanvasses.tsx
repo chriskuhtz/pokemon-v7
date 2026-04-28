@@ -1,7 +1,7 @@
 import { useContext, useMemo } from "react";
 import { CombinedCanvas } from "../../../components/CombinedCanvas/CombinedCanvas";
 import { FollowerSprite } from "../../../components/FollowerSprite/FollowerSprite";
-import { fps } from "../../../constants/gameData/gameData";
+import { fps } from "../../../constants/baseConstants";
 import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
 import { LocationContext } from "../../../hooks/LocationProvider";
 import { BaseSizeContext } from "../../../hooks/useBaseSize";

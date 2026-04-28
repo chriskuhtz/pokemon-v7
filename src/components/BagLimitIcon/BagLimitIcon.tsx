@@ -1,6 +1,6 @@
 import { useContext, useMemo } from "react";
 import { BsBackpack4 } from "react-icons/bs";
-import { battleSpriteSize } from "../../constants/gameData/gameData";
+import { battleSpriteSize } from "../../constants/baseConstants";
 import { percentageBasedColor } from "../../constants/typeColors";
 import {
   getBagLimit,
@@ -10,7 +10,6 @@ import { getMiddleOfThree } from "../../functions/getMiddleOfThree";
 import { GameDataContext } from "../../hooks/useGameData";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
 import { SaveFileContext } from "../../hooks/useSaveFile";
-
 export const BagLimitIcon = () => {
   const gameData = useContext(GameDataContext);
   const { saveFile } = useContext(SaveFileContext);

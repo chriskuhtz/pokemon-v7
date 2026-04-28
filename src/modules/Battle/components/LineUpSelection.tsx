@@ -4,7 +4,7 @@ import {
   PokemonSprite,
 } from "../../../components/PokemonSprite/PokemonSprite";
 import { Sprite } from "../../../components/Sprite/Sprite";
-import { portraitMode } from "../../../constants/gameData/gameData";
+import { portraitMode } from "../../../constants/baseConstants";
 import { determineRunawaySuccess } from "../../../functions/determineRunAwaySuccess";
 import { getItemUrl } from "../../../functions/getItemUrl";
 import { isKO } from "../../../functions/isKo";

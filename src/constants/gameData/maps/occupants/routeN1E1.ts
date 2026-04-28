@@ -1,3 +1,4 @@
+import { canAccessApricornClearing } from "../../../../functions/canAccessApricornClearing";
 import { getTimeOfDay } from "../../../../functions/getTimeOfDay";
 import { getTraveller } from "../../../../functions/getTraveller";
 import { makeApricornTree } from "../../../../functions/makeApricornTree";
@@ -11,7 +12,7 @@ import { janine } from "./janine";
 const forestKurt: Occupant[] = [
   {
     type: "NPC",
-    conditionFunction: (s) => (s.rangerLevel ?? 0) < 5,
+    conditionFunction: (s) => !canAccessApricornClearing(s),
     x: 29,
     y: 1,
     sprite: SpriteEnum["kurt"],
@@ -29,7 +30,7 @@ const forestKurt: Occupant[] = [
   {
     type: "NPC",
     conditionFunction: (s) =>
-      (s.rangerLevel ?? 0) >= 5 &&
+      canAccessApricornClearing(s) &&
       s.quests["find a purple apricorn"] === "INACTIVE",
     x: 29,
     y: 1,

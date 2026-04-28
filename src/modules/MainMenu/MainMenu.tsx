@@ -1,4 +1,4 @@
-import { BsBackpack4 } from "react-icons/bs";
+import { BsBackpack4, BsFillJournalBookmarkFill } from "react-icons/bs";
 import { MdCatchingPokemon } from "react-icons/md";
 import { Card } from "../../uiComponents/Card/Card";
 import { Page } from "../../uiComponents/Page/Page";
@@ -19,11 +19,7 @@ import { ExportSnapshotCard } from "../../components/SnapshotCard/ExportSnapshot
 import { ImportSnapshotCard } from "../../components/SnapshotCard/ImportSnapshotCard";
 import { ResetSnapshotCard } from "../../components/SnapshotCard/ResetSnapshotCard";
 import { TrainerCard } from "../../components/TrainerCard/TrainerCard";
-import {
-  battleSpriteSize,
-  challengeFieldId,
-  randomFieldId,
-} from "../../constants/gameData/gameData";
+import { battleSpriteSize } from "../../constants/baseConstants";
 import { mapsRecord } from "../../constants/gameData/maps/mapsRecord";
 import { fullyHealPokemon } from "../../functions/fullyHealPokemon";
 import { questMenuAvailable } from "../../functions/questMenuAvailable";
@@ -37,7 +33,6 @@ import { SaveFileContext } from "../../hooks/useSaveFile";
 import { useTeleport } from "../../hooks/useTeleport";
 import { EmptyInventory } from "../../interfaces/Inventory";
 import { RoutesType } from "../../interfaces/Routing";
-
 export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
   const { location, setLocation } = useContext(LocationContext);
@@ -73,8 +68,8 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
           />
         )}
         <FlyingButton />
-        {(location.mapId == challengeFieldId ||
-          location.mapId == randomFieldId) && (
+        {(location.mapId == mapsRecord.challengeField.id ||
+          location.mapId == mapsRecord.randomField.id) && (
           <Card
             onClick={() => {
               setLocation({
@@ -133,6 +128,18 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
                 ? [<strong>Uncollected: {numberOfUncollected}</strong>]
                 : []
             }
+          />
+        )}
+        {saveFile.trainerNotes?.at(0) && (
+          <Card
+            onClick={() => navigate("MAIN", "TRAINER_NOTES")}
+            content={<h4>Notes</h4>}
+            icon={
+              <div style={{ display: "flex", gap: ".5rem" }}>
+                <BsFillJournalBookmarkFill size={battleSpriteSize} />
+              </div>
+            }
+            actionElements={[]}
           />
         )}
         <Card

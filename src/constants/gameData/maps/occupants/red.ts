@@ -1,13 +1,13 @@
 import { ArrayHelpers } from "../../../../functions/ArrayHelpers";
 import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
-import { OverworldTrainer, Occupant } from "../../../../interfaces/Occupant";
+import { Occupant, OverworldTrainer } from "../../../../interfaces/Occupant";
 
 import { OwnedPokemon } from "../../../../interfaces/OwnedPokemon";
 import { SaveFile } from "../../../../interfaces/SaveFile";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
 import { EmptyStatObject } from "../../../../interfaces/StatObject";
-import { trickXP } from "../../gameData";
+import { trickXP } from "../../../baseConstants";
 
 export const redId = "trainer red";
 const redTeam = (s: SaveFile): OwnedPokemon[] => {

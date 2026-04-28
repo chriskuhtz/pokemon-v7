@@ -2,18 +2,17 @@ import { useFetch } from "@potfisch-industries-npm/usefetch";
 import { useContext, useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { abilityNames } from "../../constants/abilityCheckList";
-import { battleSpriteSize } from "../../constants/gameData/gameData";
+import { battleSpriteSize } from "../../constants/baseConstants";
 import { handledMoves } from "../../constants/movesCheckList";
+import { MessageQueueContext } from "../../hooks/useMessageQueue";
 import { SaveFileContext } from "../../hooks/useSaveFile";
+import { AbilityDto } from "../../interfaces/AbilityDto";
 import { itemTypes } from "../../interfaces/Item";
+import { ItemData } from "../../interfaces/ItemData";
+import { MoveDto } from "../../interfaces/Move";
 import { Card } from "../../uiComponents/Card/Card";
 import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
-import { MoveDto } from "../../interfaces/Move";
-import { ItemData } from "../../interfaces/ItemData";
-import { AbilityDto } from "../../interfaces/AbilityDto";
-import { MessageQueueContext } from "../../hooks/useMessageQueue";
-
 export const Wiki = () => {
   const { setActiveTabReducer } = useContext(SaveFileContext);
   const { addMessage } = useContext(MessageQueueContext);

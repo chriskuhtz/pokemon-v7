@@ -3,11 +3,12 @@ import { v4 } from "uuid";
 import { PokemonChoices } from "../../components/PokemonChoices/PokemonChoices";
 import { SpeciesInfo } from "../../components/SpeciesInfo/SpeciesInfo";
 import { Sprite } from "../../components/Sprite/Sprite";
+import { shinyChance } from "../../constants/baseConstants";
 import {
   CampUpgrade,
   campUpgradeNames,
 } from "../../constants/gameData/campUpgrades";
-import { shinyChance, testPokemon } from "../../constants/gameData/gameData";
+import { testPokemon } from "../../constants/gameData/gameData";
 import { PokemonName } from "../../constants/pokemonNames";
 import { addPokemonToDex } from "../../functions/addPokemonToDex";
 import { getRandomPokemonName } from "../../functions/getRandomPokemonId";

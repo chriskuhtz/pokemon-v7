@@ -3,9 +3,9 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { mapsRecord } from "../../constants/gameData/maps/mapsRecord";
 import { handleEnterPress } from "../../functions/handleEnterPress";
 import { LocationContext } from "../../hooks/LocationProvider";
-import { BaseSizeContext } from "../../hooks/useBaseSize";
 import { useDrawForeground } from "../../hooks/useDrawBackground";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
+import { useNavigate } from "../../hooks/useNavigate";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { OverworldMap } from "../../interfaces/OverworldMap";
 import "./Overworld.css";
@@ -19,14 +19,19 @@ import { useKeyboardControl } from "./hooks/useKeyboardControl";
 import { useMovement } from "./hooks/useMovement";
 import { useOccupants } from "./hooks/useOccupants";
 
-export const Overworld = ({ uncontrolled }: { uncontrolled?: boolean }) => {
+export const Overworld = ({
+  uncontrolled,
+  baseSize,
+}: {
+  uncontrolled?: boolean;
+  baseSize: number;
+}) => {
   const [stepsTaken, setStepsTaken] = useState<number>(0);
-  const { baseSize } = useContext(BaseSizeContext);
 
   const { latestMessage } = useContext(MessageQueueContext);
-  const { saveFile, navigateAwayFromOverworldReducer, patchSaveFileReducer } =
-    useContext(SaveFileContext);
+  const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
   const { location } = useContext(LocationContext);
+  const navigate = useNavigate();
 
   const map = useMemo(
     (): OverworldMap => mapsRecord[location.mapId],
@@ -81,10 +86,10 @@ export const Overworld = ({ uncontrolled }: { uncontrolled?: boolean }) => {
   useKeyboardControl(
     setNextInput,
     () => handleEnterPress(location, interactWith, occupants),
-    () => navigateAwayFromOverworldReducer({ activeTab: "MAIN" }, stepsTaken),
-    () => navigateAwayFromOverworldReducer({ activeTab: "QUESTS" }, stepsTaken),
-    () => navigateAwayFromOverworldReducer({ activeTab: "TEAM" }, stepsTaken),
-    () => navigateAwayFromOverworldReducer({ activeTab: "BAG" }, stepsTaken),
+    () => navigate("OVERWORLD", "MAIN", stepsTaken),
+    () => navigate("OVERWORLD", "QUESTS", stepsTaken),
+    () => navigate("OVERWORLD", "TEAM", stepsTaken),
+    () => navigate("OVERWORLD", "BAG", stepsTaken),
     !!(latestMessage || uncontrolled),
   );
 

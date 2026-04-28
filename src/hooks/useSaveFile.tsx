@@ -9,6 +9,7 @@ import { MoveName } from "../constants/movesCheckList";
 
 import { emptyPokedex } from "../constants/gameData/gameData";
 import { PokemonName } from "../constants/pokemonNames";
+import { addLostItemToSaveFile } from "../functions/addLostItemToSaveFile";
 import { addPokemonToDex } from "../functions/addPokemonToDex";
 import { applyHappinessFromWalking } from "../functions/applyHappinessFromWalking";
 import { applyItemToPokemon } from "../functions/applyItemToPokemon";
@@ -142,18 +143,20 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 
   //handle side effects here
   const setSaveFile = useCallback((u: SaveFile) => {
-    const update = { ...u };
+    let update = { ...u };
     const now = new Date().getTime();
 
     let pokedex = update.pokedex ?? emptyPokedex;
 
+    //update pokedex
     update.pokemon.forEach((p) => {
       pokedex = addPokemonToDex(pokedex, p.name, p.caughtOnMap, true);
     });
-
+    //update catch streak
     if ((update.catchStreak?.streak ?? 0) > (update.longestStreak ?? 0)) {
       update.longestStreak = update.catchStreak?.streak;
     }
+    //update swarms
     if (update.currentSwarm && now > update.currentSwarm?.leavesAt) {
       update.currentSwarm = undefined;
     }
@@ -169,11 +172,20 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
     ) {
       update.currentDistortionSwarm = undefined;
     }
+    //update troublemakers
     if (
       !update.troubleMakers?.leavesAt ||
       (update.troubleMakers?.leavesAt && now > update.troubleMakers?.leavesAt)
     ) {
       update.troubleMakers = undefined;
+    }
+    //update lostItems
+    update.lostItems = [...(update.lostItems ?? [])].filter(
+      (lostItem) => lostItem.resetAt > now,
+    );
+    if (update.lostItems.length < 3) {
+      update = addLostItemToSaveFile(update);
+      console.log("added lost item", update.lostItems);
     }
 
     s({

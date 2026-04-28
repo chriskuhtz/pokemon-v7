@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { FaRegCircleCheck } from "react-icons/fa6";
-import { battleSpriteSize } from "../../constants/gameData/gameData";
+import { battleSpriteSize } from "../../constants/baseConstants";
 import { LocationProvider } from "../../hooks/LocationProvider";
 import { BaseSizeProvider } from "../../hooks/useBaseSize";
 import { GameDataContext } from "../../hooks/useGameData";
@@ -10,7 +10,6 @@ import { SaveFileProvider } from "../../hooks/useSaveFile";
 import { ScreenTransitionProvider } from "../../hooks/useScreenTransitionEffects";
 import { Router } from "../../modules/Router/Router";
 import { Banner } from "../Banner/Banner";
-
 export const MessageContainer = () => {
   const { confirmLatestMessage, addMessage, latestMessage } =
     useContext(MessageQueueContext);

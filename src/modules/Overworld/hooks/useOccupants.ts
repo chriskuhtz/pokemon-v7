@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { MapId, mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
+import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
 import { PokemonName } from "../../../constants/pokemonNames";
 import { getMiddleOfThree } from "../../../functions/getMiddleOfThree";
 import { getRandomOrientation } from "../../../functions/getNextClockwiseDirection";
@@ -23,6 +23,7 @@ import {
   SaveFile,
 } from "../../../interfaces/SaveFile";
 import { SpriteEnum } from "../../../interfaces/SpriteEnum";
+import { MapId } from "../../../interfaces/mapIds";
 
 export const useOccupants = () => {
   const { saveFile } = useContext(SaveFileContext);

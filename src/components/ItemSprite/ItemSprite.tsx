@@ -1,25 +1,24 @@
-import { battleSpriteSize } from '../../constants/gameData/gameData';
-import { getItemUrl } from '../../functions/getItemUrl';
-import { ItemType } from '../../interfaces/Item';
-
+import { battleSpriteSize } from "../../constants/baseConstants";
+import { getItemUrl } from "../../functions/getItemUrl";
+import { ItemType } from "../../interfaces/Item";
 export const ItemSprite = ({
-	item,
-	sizeFactor,
-	grayscale,
-	onClick,
+  item,
+  sizeFactor,
+  grayscale,
+  onClick,
 }: {
-	item: ItemType;
-	sizeFactor?: number;
-	grayscale?: boolean;
-	onClick?: () => void;
+  item: ItemType;
+  sizeFactor?: number;
+  grayscale?: boolean;
+  onClick?: () => void;
 }) => {
-	return (
-		<img
-			src={getItemUrl(item)}
-			height={battleSpriteSize * (sizeFactor ?? 1)}
-			width={battleSpriteSize * (sizeFactor ?? 1)}
-			style={grayscale ? { filter: 'grayscale(1)' } : undefined}
-			onClick={onClick}
-		/>
-	);
+  return (
+    <img
+      src={getItemUrl(item)}
+      height={battleSpriteSize * (sizeFactor ?? 1)}
+      width={battleSpriteSize * (sizeFactor ?? 1)}
+      style={grayscale ? { filter: "grayscale(1)" } : undefined}
+      onClick={onClick}
+    />
+  );
 };

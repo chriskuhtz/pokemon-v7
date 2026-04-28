@@ -1,10 +1,9 @@
-import { battleSpriteSize } from "../../constants/gameData/gameData";
+import { battleSpriteSize } from "../../constants/baseConstants";
 import { typeColors } from "../../constants/typeColors";
 import { getItemUrl } from "../../functions/getItemUrl";
 import { BattlePokemon } from "../../interfaces/BattlePokemon";
 import { Stack } from "../../uiComponents/Stack/Stack";
 import { getPokemonSprite } from "../PokemonSprite/PokemonSprite";
-
 export const PokemonChoices = ({
   pokemon,
   choose,

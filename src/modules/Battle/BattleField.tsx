@@ -4,7 +4,7 @@ import {
   TerrainIcon,
   WeatherIcon,
 } from "../../components/WeatherIcon/WeatherIcon";
-import { portraitMode } from "../../constants/gameData/gameData";
+import { portraitMode } from "../../constants/baseConstants";
 import { MoveName } from "../../constants/movesCheckList";
 import {
   applyEndOfTurnAbility,

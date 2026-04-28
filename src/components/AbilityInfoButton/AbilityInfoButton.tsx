@@ -2,10 +2,9 @@ import { useFetch } from "@potfisch-industries-npm/usefetch";
 import { useContext, useEffect, useState } from "react";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { AbilityName } from "../../constants/abilityCheckList";
-import { battleSpriteSize } from "../../constants/gameData/gameData";
+import { battleSpriteSize } from "../../constants/baseConstants";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
 import { AbilityDto } from "../../interfaces/AbilityDto";
-
 export const AbilityInfoButton = ({
   abilityName,
   small = false,

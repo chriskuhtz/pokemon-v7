@@ -3,11 +3,12 @@ import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
 import { makeApricornTree } from "../../../../functions/makeApricornTree";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
 import { occupantHandled } from "../../../../functions/occupantHandled";
-import { Occupant } from "../../../../interfaces/Occupant";
+import { OverworldTrainer } from "../../../../interfaces/Occupant";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
+import { clearingKurt } from "./kurt";
 
-const explorerDan: Occupant = {
+const explorerDan: OverworldTrainer = {
   type: "TRAINER",
   team: (s) => {
     const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
@@ -36,7 +37,7 @@ const explorerDan: Occupant = {
   id: "explorer dan",
   conditionFunction: (s) => !occupantHandled(s, "explorer dan"),
 };
-const psychoWillard: Occupant = {
+const psychoWillard: OverworldTrainer = {
   type: "TRAINER",
   team: (s) => {
     const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
@@ -62,7 +63,7 @@ const psychoWillard: Occupant = {
   id: "psychic willard",
   conditionFunction: (s) => !occupantHandled(s, "psychic willard"),
 };
-const pyroStanley: Occupant = {
+const pyroStanley: OverworldTrainer = {
   type: "TRAINER",
   team: (s) => {
     const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
@@ -94,41 +95,6 @@ const pyroStanley: Occupant = {
   sprite: SpriteEnum["pyro"],
   id: "pyromaniac stanley",
   conditionFunction: (s) => !occupantHandled(s, "pyromaniac stanley"),
-};
-const clearingKurt: Occupant = {
-  type: "TRAINER",
-  team: (s) => {
-    const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
-    const { level } = calculateLevelData(highestXpOnTeam, "medium");
-
-    const xpOfTeam = level * level * level;
-    return [
-      makeChallengerPokemon({ name: "drampa", xp: xpOfTeam }),
-      makeChallengerPokemon({ name: "electrode", xp: xpOfTeam }),
-      makeChallengerPokemon({ name: "exeggutor", xp: xpOfTeam }),
-      makeChallengerPokemon({ name: "steelix", xp: xpOfTeam }),
-      makeChallengerPokemon({ name: "sirfetchd", xp: xpOfTeam }),
-      makeChallengerPokemon({ name: "slowbro", xp: xpOfTeam }),
-    ];
-  },
-  battleTeamConfig: {
-    assignLearnsetMoves: true,
-    assignNaturalAbility: true,
-    assignGender: true,
-    assignHeldItem: true,
-  },
-  orientation: "DOWN",
-  x: 12,
-  y: 7,
-  unhandledMessage: [
-    "Ahh, you finally made it",
-    "I had a feeling you were worthy",
-    "of the secret apricorn",
-    "Now prove it in a battle",
-  ],
-  sprite: SpriteEnum["kurt"],
-  id: "smith kurt",
-  conditionFunction: (s) => !occupantHandled(s, "smith kurt"),
 };
 
 export const apricornClearingOccupants: OverworldMap["occupants"] = [

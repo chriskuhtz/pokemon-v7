@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { animationTimer } from "../../../constants/gameData/gameData";
+import { animationTimer } from "../../../constants/baseConstants";
 import { isKO } from "../../../functions/isKo";
 import { LeaveBattlePayload } from "../../../hooks/useLeaveBattle";
 import { Message } from "../../../hooks/useMessageQueue";

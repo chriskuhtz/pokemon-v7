@@ -1,10 +1,11 @@
 import { useContext, useEffect } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { PokemonSprite } from "../../../components/PokemonSprite/PokemonSprite";
+
 import {
   battleSpriteSize,
   portraitMode,
-} from "../../../constants/gameData/gameData";
+} from "../../../constants/baseConstants";
 import { getMovesArray } from "../../../functions/getMovesArray";
 import { isPlayerPokemon } from "../../../functions/getPlayerPokemon";
 import { SaveFileContext } from "../../../hooks/useSaveFile";

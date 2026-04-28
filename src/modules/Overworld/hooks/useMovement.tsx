@@ -1,5 +1,5 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { fps } from "../../../constants/gameData/gameData";
+import { fps } from "../../../constants/baseConstants";
 import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
 import { getNextForwardFoot } from "../../../functions/getNextForwardFoot";
 import { updatePosition } from "../../../functions/updatePosition";

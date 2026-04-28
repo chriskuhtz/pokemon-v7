@@ -1,6 +1,5 @@
 /* eslint-disable max-lines */
 import { CampUpgrade } from "../../../constants/gameData/campUpgrades";
-import { MapId } from "../../../constants/gameData/maps/mapsRecord";
 import { routeE1 } from "../../../constants/gameData/maps/routeE1";
 import { routeN1 } from "../../../constants/gameData/maps/routeN1";
 import { routeN1E1 } from "../../../constants/gameData/maps/routeN1E1";
@@ -19,6 +18,7 @@ import {
   PokeballType,
   smallExpCandyPackage,
 } from "../../../interfaces/Item";
+import { MapId } from "../../../interfaces/mapIds";
 import { OverworldMap } from "../../../interfaces/OverworldMap";
 import { Quest } from "../../../interfaces/Quest";
 import { SaveFile } from "../../../interfaces/SaveFile";

@@ -2,6 +2,7 @@ import { useContext, useMemo } from "react";
 import { isOwnedPokemonKO } from "../../functions/isKo";
 import { useGetBattleTeam } from "../../hooks/useGetBattleTeam";
 import { useIsReadyToEvolve } from "../../hooks/useIsReadyToEvolve";
+import { useNavigate } from "../../hooks/useNavigate";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { OwnedPokemon } from "../../interfaces/OwnedPokemon";
 import { PokemonSprite } from "../PokemonSprite/PokemonSprite";
@@ -10,8 +11,8 @@ import "./TeamOverview.css";
 export const TeamOverview = ({ steps }: { steps: number }) => {
   const {
     saveFile: { pokemon },
-    navigateAwayFromOverworldReducer,
   } = useContext(SaveFileContext);
+  const navigate = useNavigate();
   const team = useMemo(() => pokemon.filter((p) => p.onTeam), [pokemon]);
 
   return (
@@ -20,9 +21,7 @@ export const TeamOverview = ({ steps }: { steps: number }) => {
         <TeamMemberInOverview
           pokemon={t}
           key={t.id}
-          onClick={() =>
-            navigateAwayFromOverworldReducer({ activeTab: "TEAM" }, steps)
-          }
+          onClick={() => navigate("OVERWORLD", "TEAM", steps)}
         />
       ))}
     </>

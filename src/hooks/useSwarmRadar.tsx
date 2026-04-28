@@ -1,8 +1,7 @@
 import { useCallback, useContext, useMemo } from "react";
-import { ONE_HOUR } from "../constants/gameData/gameData";
+import { ONE_HOUR } from "../constants/baseConstants";
 import {
   mapDisplayNames,
-  MapId,
   mapsRecord,
 } from "../constants/gameData/maps/mapsRecord";
 import { pokemonNames } from "../constants/pokemonNames";
@@ -10,12 +9,13 @@ import { ArrayHelpers } from "../functions/ArrayHelpers";
 import { getRandomAvailableRoute } from "../functions/getRandomAvailableRoute";
 import { getRandomPosition } from "../functions/getRandomPosition";
 import { getRampagers, getRandomSwarmMon } from "../functions/internalDex";
+import { replaceRouteName } from "../functions/replaceRouteName";
+import { MapId } from "../interfaces/mapIds";
 import { SwarmType } from "../interfaces/Pokedex";
 import { PokemonSwarm } from "../interfaces/SaveFile";
 import { GameDataContext } from "./useGameData";
 import { MessageQueueContext } from "./useMessageQueue";
 import { SaveFileContext } from "./useSaveFile";
-import { replaceRouteName } from "../functions/replaceRouteName";
 
 export type ScanMode = "WEAK" | "STRONG" | "DISTORTION" | "RAMPAGE";
 export const useSwarmRadar = (): {

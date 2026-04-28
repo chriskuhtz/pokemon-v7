@@ -10,10 +10,11 @@ import { TeamOverview } from "../../../components/TeamOverview/TeamOverview";
 import { TimeOfDayIcon } from "../../../components/TimeOfDayIcon/TimeOfDayIcon";
 import { TroubleMakersIcon } from "../../../components/TroubleMakersIcon/TroubleMakersIcon";
 import { WeatherIcon } from "../../../components/WeatherIcon/WeatherIcon";
+
 import {
   battleSpriteSize,
   portraitMode,
-} from "../../../constants/gameData/gameData";
+} from "../../../constants/baseConstants";
 import {
   mapDisplayNames,
   mapsRecord,
@@ -21,7 +22,7 @@ import {
 import { LocationContext } from "../../../hooks/LocationProvider";
 import { BaseSizeContext } from "../../../hooks/useBaseSize";
 import { GameDataContext } from "../../../hooks/useGameData";
-import { SaveFileContext } from "../../../hooks/useSaveFile";
+import { useNavigate } from "../../../hooks/useNavigate";
 import { CharacterOrientation } from "../../../interfaces/SaveFile";
 import { useIsDark } from "../hooks/useIsDark";
 import { MovementButtons } from "./MovementButtons";
@@ -46,7 +47,7 @@ export const OverworldMenus = ({
   } = useContext(BaseSizeContext);
 
   const gameData = useContext(GameDataContext);
-  const { navigateAwayFromOverworldReducer } = useContext(SaveFileContext);
+  const navigate = useNavigate();
   const { location } = useContext(LocationContext);
   const map = useMemo(() => mapsRecord[location.mapId], [location.mapId]);
 
@@ -95,7 +96,7 @@ export const OverworldMenus = ({
           onClick={(e) => {
             e.stopPropagation();
             e.preventDefault();
-            navigateAwayFromOverworldReducer({ activeTab: "MAIN" }, stepsTaken);
+            navigate("OVERWORLD", "MAIN", stepsTaken);
           }}
           size={battleSpriteSize}
         />

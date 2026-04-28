@@ -1,8 +1,8 @@
 import { useContext, useMemo } from "react";
-import { MapId } from "../constants/gameData/maps/mapsRecord";
 import { typeColors } from "../constants/typeColors";
 import { hexToRgb } from "../functions/hexToRGB";
 import { isWater } from "../functions/isWater";
+import { MapId } from "../interfaces/mapIds";
 import { PokemonType } from "../interfaces/PokemonType";
 import { LocationContext } from "./LocationProvider";
 

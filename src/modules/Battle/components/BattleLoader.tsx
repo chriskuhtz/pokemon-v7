@@ -75,7 +75,7 @@ export const BattleLoader = ({
 
   const shader = useShader();
   if (!battleOpponents || !battleTeam) {
-    return <LoadingScreen />;
+    return <LoadingScreen transparent />;
   }
   return (
     <>
@@ -130,7 +130,7 @@ export const BattleLoader = ({
           opacity: 0.7,
         }}
       >
-        <Overworld uncontrolled />
+        <Overworld uncontrolled baseSize={32} />
       </div>
     </>
   );

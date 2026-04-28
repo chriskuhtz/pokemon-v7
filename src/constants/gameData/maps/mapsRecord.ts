@@ -1,6 +1,6 @@
 import { defaultShaderMap } from "../../../functions/getTimeOfDay";
+import { MapId } from "../../../interfaces/mapIds";
 import { OverworldMap } from "../../../interfaces/OverworldMap";
-import { challengeFieldId, randomFieldId } from "../gameData";
 import { apricornClearing } from "./apricornClearing";
 import { camp } from "./camp";
 import { campCave } from "./campCave";
@@ -28,39 +28,6 @@ import { victoryRoad } from "./victoryRoad";
 import { victoryRoadExit } from "./victoryRoadExit";
 import { victoryRoadExtra } from "./victoryRoadExtra";
 import { victoryRoadU1 } from "./victoryRoadU1";
-
-export const mapIds = [
-  //KUMA VERSION
-  "camp",
-  "campCave",
-  "campLaboratory",
-  "routeN1",
-  "routeN1E1",
-  "routeE1",
-  "onixCave",
-  "routeS1E1",
-  "routeS1",
-  "routeS1W1",
-  "routeW1",
-  "routeN1W1",
-  "caveW1",
-  "caveW1F1",
-  "caveW1F2",
-  "caveN1W1",
-  challengeFieldId,
-  randomFieldId,
-  "rocketCamp",
-  "victoryRoad",
-  "victoryRoadU1",
-  "victoryRoadExtra",
-  "victoryRoadExit",
-  "pokemonLeague",
-  "apricornClearing",
-  //LABYRINTH VERSION
-  "labyrinth_level_1",
-  "labyrinth_level_2",
-] as const;
-export type MapId = (typeof mapIds)[number];
 
 export const mapsRecord: Record<MapId, OverworldMap> = {
   //KUMA VERSION

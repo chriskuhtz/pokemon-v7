@@ -1,38 +1,35 @@
-import {
-	challengeFieldId,
-	randomFieldId,
-} from '../constants/gameData/gameData';
-import { rocketCampOccupants } from '../constants/gameData/maps/occupants/rocketCampOccupants';
-import { SaveFile } from '../interfaces/SaveFile';
+import { mapsRecord } from "../constants/gameData/maps/mapsRecord";
+import { rocketCampOccupants } from "../constants/gameData/maps/occupants/rocketCampOccupants";
+import { SaveFile } from "../interfaces/SaveFile";
 
 export const resetChallengeFielders = (
-	occs: SaveFile['handledOccupants']
-): SaveFile['handledOccupants'] => {
-	return occs.filter((h) => {
-		if (h.id.includes(challengeFieldId)) {
-			return false;
-		}
+  occs: SaveFile["handledOccupants"],
+): SaveFile["handledOccupants"] => {
+  return occs.filter((h) => {
+    if (h.id.includes(mapsRecord.challengeField.id)) {
+      return false;
+    }
 
-		if (h.id.includes(randomFieldId)) {
-			return false;
-		}
+    if (h.id.includes(mapsRecord.randomField.id)) {
+      return false;
+    }
 
-		return true;
-	});
+    return true;
+  });
 };
 
 export const resetEliteFour = (
-	occs: SaveFile['handledOccupants']
-): SaveFile['handledOccupants'] => {
-	return occs.filter((h) => {
-		return h.id.includes('elite4');
-	});
+  occs: SaveFile["handledOccupants"],
+): SaveFile["handledOccupants"] => {
+  return occs.filter((h) => {
+    return h.id.includes("elite4");
+  });
 };
 
 export const resetRocketCampers = (
-	occs: SaveFile['handledOccupants']
-): SaveFile['handledOccupants'] => {
-	return occs.filter((h) => {
-		return !rocketCampOccupants.some((r) => r.id == h.id);
-	});
+  occs: SaveFile["handledOccupants"],
+): SaveFile["handledOccupants"] => {
+  return occs.filter((h) => {
+    return !rocketCampOccupants.some((r) => r.id == h.id);
+  });
 };

@@ -1,9 +1,9 @@
 import { CampUpgrade } from "../constants/gameData/campUpgrades";
-import { MapId } from "../constants/gameData/maps/mapsRecord";
 import { PokemonName } from "../constants/pokemonNames";
 import { KumaQuestName } from "../versions/kuma/questsRecord";
 import { BadgeName } from "./Badge";
 import { Inventory } from "./Inventory";
+import { MapId } from "./mapIds";
 import { OwnedPokemon } from "./OwnedPokemon";
 import { CatchBoosts, SaveFile } from "./SaveFile";
 

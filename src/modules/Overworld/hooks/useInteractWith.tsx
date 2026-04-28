@@ -1,4 +1,4 @@
-import { useContext, useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { isBagOverloaded } from "../../../functions/getBagLimit";
 import { LocationContext } from "../../../hooks/LocationProvider";
 import { useApricornTree } from "../../../hooks/useApricornTree";
@@ -7,8 +7,13 @@ import { GameDataContext } from "../../../hooks/useGameData";
 import { useHallowedTower } from "../../../hooks/useHallowedTower";
 import { useHoneyTree } from "../../../hooks/useHoneyTree";
 import { useInteractWithClimbingSteps } from "../../../hooks/useInteractWithClimbingSteps";
+import { useInteractWithNPC } from "../../../hooks/useInteractWithNPC";
+import { useInteractWithOverworldChest } from "../../../hooks/useInteractWithOverworldChest";
+import { useInteractWithOverworldItem } from "../../../hooks/useInteractWithOverworldItem";
+import { useInteractWithOverworldPokeball } from "../../../hooks/useInteractWithOverworldPokeball";
 import { useInteractWithSnorlax } from "../../../hooks/useInteractWithSnorlax";
 import { MessageQueueContext } from "../../../hooks/useMessageQueue";
+import { useNavigate } from "../../../hooks/useNavigate";
 import { useRangerRadio } from "../../../hooks/useRangerRadio";
 import { SaveFileContext } from "../../../hooks/useSaveFile";
 import { useInteractWithOverworldPokemon } from "../../../hooks/useStaticEncounter";
@@ -22,10 +27,6 @@ import { useInteractWithLedge } from "./useInteractWithLedge";
 import { useInteractWithTrainer } from "./useInteractWithTrainer";
 import { useMachete } from "./useMachete";
 import { useSledgeHammer } from "./useSledgeHammer";
-import { useInteractWithNPC } from "../../../hooks/useInteractWithNPC";
-import { useInteractWithOverworldChest } from "../../../hooks/useInteractWithOverworldChest";
-import { useInteractWithOverworldItem } from "../../../hooks/useInteractWithOverworldItem";
-import { useInteractWithOverworldPokeball } from "../../../hooks/useInteractWithOverworldPokeball";
 
 export const useInteractWith = (
   stepsTaken: number,
@@ -36,11 +37,12 @@ export const useInteractWith = (
     useContext(MessageQueueContext);
   const {
     saveFile,
-    navigateAwayFromOverworldReducer,
     talkToNurseReducer: talkToNurse,
+    navigateAwayFromOverworldReducer,
   } = useContext(SaveFileContext);
   const { location, setLocation: setCharacterLocation } =
     useContext(LocationContext);
+  const navigate = useNavigate();
 
   const interactWithClimbingSteps = useInteractWithClimbingSteps();
   const interactWithApricornTree = useApricornTree();
@@ -56,8 +58,8 @@ export const useInteractWith = (
   const interactWithOverworldPokemon = useInteractWithOverworldPokemon();
   const interactWithDugtrioExplorer = useDugtrioExplorers();
   const interactWithSwarmRadar = useCallback(() => {
-    navigateAwayFromOverworldReducer({ activeTab: "SWARM_RADAR" }, stepsTaken);
-  }, [navigateAwayFromOverworldReducer, stepsTaken]);
+    navigate("OVERWORLD", "SWARM_RADAR", stepsTaken);
+  }, [navigate, stepsTaken]);
   const interactWithRocketRadio = useRangerRadio();
   const interactWithRock = useSledgeHammer();
   const interactWithOverworldChest = useInteractWithOverworldChest();

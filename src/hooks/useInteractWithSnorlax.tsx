@@ -1,6 +1,9 @@
-import { useContext, useCallback } from "react";
-import { ONE_DAY } from "../constants/gameData/gameData";
-import { OPPO_ID, makeChallengerPokemon } from "../functions/makeChallengerPokemon";
+import { useCallback, useContext } from "react";
+import { ONE_DAY } from "../constants/baseConstants";
+import {
+  OPPO_ID,
+  makeChallengerPokemon,
+} from "../functions/makeChallengerPokemon";
 import { Challenger } from "../interfaces/Challenger";
 import { EmptyInventory } from "../interfaces/Inventory";
 import { OverworldSnorlax } from "../interfaces/Occupant";

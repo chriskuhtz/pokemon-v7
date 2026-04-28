@@ -2,10 +2,8 @@ import React, { useCallback, useContext, useMemo, useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { OwnedPokemonCardContent } from "../../components/OwnedPokemonCardContent/OwnedPokemonCardContent";
 import { getPokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
-import {
-  battleSpriteSize,
-  portraitMode,
-} from "../../constants/gameData/gameData";
+
+import { battleSpriteSize, portraitMode } from "../../constants/baseConstants";
 import { getHeldItem } from "../../functions/getHeldItem";
 import { getItemUrl } from "../../functions/getItemUrl";
 import { getTypeNames } from "../../functions/getTypeNames";

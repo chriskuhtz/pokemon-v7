@@ -3,11 +3,12 @@ import { BsBackpack4 } from "react-icons/bs";
 import { FaFistRaised, FaRunning } from "react-icons/fa";
 import { FaArrowsRotate } from "react-icons/fa6";
 import { ItemSprite } from "../../../components/ItemSprite/ItemSprite";
+
 import { MoveCard } from "../../../components/MoveCard/MoveCard";
 import {
   battleSpriteSize,
   portraitMode,
-} from "../../../constants/gameData/gameData";
+} from "../../../constants/baseConstants";
 import { canBenefitFromItem } from "../../../functions/canBenefitFromItem";
 import { canRunOrSwitch } from "../../../functions/canRunOrSwitch";
 import { getMovesArray } from "../../../functions/getMovesArray";

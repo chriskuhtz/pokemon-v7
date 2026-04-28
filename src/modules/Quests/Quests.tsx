@@ -3,7 +3,7 @@ import { IoPerson } from "react-icons/io5";
 import { MdFormatListBulleted } from "react-icons/md";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
-import { battleSpriteSize } from "../../constants/gameData/gameData";
+import { battleSpriteSize } from "../../constants/baseConstants";
 import { typeColors } from "../../constants/typeColors";
 import { getRewardItemsForQuest } from "../../functions/getRewardForQuest";
 import { replaceRouteName } from "../../functions/replaceRouteName";
@@ -21,7 +21,6 @@ import {
   KumaQuestName,
   KumaQuestsRecord,
 } from "../../versions/kuma/questsRecord";
-
 export const Quests = ({ goBack }: { goBack: () => void }) => {
   const [filter, setFilter] = useState<QuestCategory | "FULFILLED">();
   const { saveFile } = useContext(SaveFileContext);

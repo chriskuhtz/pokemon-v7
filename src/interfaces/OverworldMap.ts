@@ -1,6 +1,6 @@
-import { MapId } from "../constants/gameData/maps/mapsRecord";
 import { PokemonName } from "../constants/pokemonNames";
 import { TimeOfDay } from "../functions/getTimeOfDay";
+import { MapId } from "./mapIds";
 import { Occupant } from "./Occupant";
 import { TileMap } from "./TileMap";
 import { WeatherType } from "./Weather";

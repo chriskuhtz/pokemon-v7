@@ -1,10 +1,14 @@
-import { useContext, useCallback } from "react";
-import { battleSpriteSize } from "../constants/gameData/gameData";
-import { getTotalInventoryAmount, getBagLimit } from "../functions/getBagLimit";
+import { useCallback, useContext } from "react";
+import { battleSpriteSize } from "../constants/baseConstants";
+import { getBagLimit, getTotalInventoryAmount } from "../functions/getBagLimit";
 import { getItemUrl } from "../functions/getItemUrl";
 import { joinInventories } from "../interfaces/Inventory";
 import { getRandomItem } from "../interfaces/Item";
-import { OverworldItem, OverworldHiddenItem, OverworldInvisbleItem } from "../interfaces/Occupant";
+import {
+  OverworldHiddenItem,
+  OverworldInvisbleItem,
+  OverworldItem,
+} from "../interfaces/Occupant";
 import { GameDataContext } from "./useGameData";
 import { MessageQueueContext } from "./useMessageQueue";
 import { SaveFileContext } from "./useSaveFile";
@@ -15,7 +19,7 @@ export const useInteractWithOverworldItem = () => {
   const gameData = useContext(GameDataContext);
 
   return useCallback(
-    (data: OverworldItem | OverworldHiddenItem|OverworldInvisbleItem) => {
+    (data: OverworldItem | OverworldHiddenItem | OverworldInvisbleItem) => {
       const occ = saveFile.settings?.randomOverworldItems
         ? { ...data, item: getRandomItem() }
         : data;

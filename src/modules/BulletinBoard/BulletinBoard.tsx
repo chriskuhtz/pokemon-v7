@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useMemo } from "react";
 import { MdFormatListBulleted } from "react-icons/md";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
-import { battleSpriteSize } from "../../constants/gameData/gameData";
+import { battleSpriteSize } from "../../constants/baseConstants";
 import { getRewardItemsForQuest } from "../../functions/getRewardForQuest";
 import { replaceRouteName } from "../../functions/replaceRouteName";
 import { useAvailableBulletinQuests } from "../../hooks/useAvailableBulletinQuests";
@@ -17,7 +17,6 @@ import {
   KumaQuestName,
   kumaQuestNames,
 } from "../../versions/kuma/questsRecord";
-
 export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
   const { addMessage } = useContext(MessageQueueContext);
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);

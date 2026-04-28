@@ -1,13 +1,13 @@
+import { shinyChance } from "../constants/baseConstants";
 import {
   highBstPokemon,
   lowBstPokemon,
   midBstPokemon,
 } from "../constants/baseStatRecord";
-import { shinyChance } from "../constants/gameData/gameData";
-import { MapId } from "../constants/gameData/maps/mapsRecord";
 import { PokemonName } from "../constants/pokemonNames";
 import { BattleTeamConfig } from "../hooks/useGetBattleTeam";
 import { InternalDex } from "../interfaces/GameData";
+import { MapId } from "../interfaces/mapIds";
 import { getRandomNature } from "../interfaces/Natures";
 import { OwnedPokemon } from "../interfaces/OwnedPokemon";
 import { CatchStreak, PokemonSwarm, SaveFile } from "../interfaces/SaveFile";
