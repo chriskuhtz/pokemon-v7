@@ -7,6 +7,17 @@ interface ChangelogEntryData {
 
 const changelogData: ChangelogEntryData[] = [
   {
+    version: "0.60",
+    listOfChanges: [
+      "fixes and balances from playtesting",
+      "random lost items in the wild",
+      "repels are now time based",
+      "lures are now time based",
+      "stronger move tutor moves are restricted",
+      "opponents wont auto target low level pokemon anymore",
+    ],
+  },
+  {
     version: "0.59",
     listOfChanges: [
       "fixes and balances from playtesting",

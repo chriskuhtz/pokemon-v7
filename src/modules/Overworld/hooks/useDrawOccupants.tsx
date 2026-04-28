@@ -173,6 +173,7 @@ const drawOccupant = (
         );
         break;
       case "ITEM":
+      case "LOST_ITEM":
       case "PC":
       case "BERRY_LURE":
       case "POKEBALL":
@@ -254,6 +255,7 @@ const getSource = (occ: Occupant) => {
     case "OBSTACLE":
       return occ.src;
     case "ITEM":
+    case "LOST_ITEM":
       return getItemUrl(occ.item);
     case "POKEBALL":
       return getItemUrl(occ.pokemon.ball);

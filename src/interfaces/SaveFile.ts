@@ -4,7 +4,15 @@ import { KumaQuestName } from "../versions/kuma/questsRecord";
 import { BadgeName } from "./Badge";
 import { Challenger } from "./Challenger";
 import { Inventory } from "./Inventory";
-import { ApricornType, BerryType, HerbType, ItemType, MulchType } from "./Item";
+import {
+  ApricornType,
+  BerryType,
+  HerbType,
+  ItemType,
+  LureType,
+  MulchType,
+  RepelType,
+} from "./Item";
 import { MapId } from "./mapIds";
 import { OverworldTrainer } from "./Occupant";
 import { OwnedPokemon } from "./OwnedPokemon";
@@ -192,8 +200,14 @@ export interface SaveFile {
   seedVault: ItemType[];
   pokedex: Pokedex;
   cookingSkill?: number;
-  activatedRepel?: "repel" | "super-repel" | "max-repel";
-  activatedLure?: "lure" | "super-lure" | "max-lure";
+  currentRepel?: {
+    type: RepelType;
+    activeUntil: number;
+  };
+  currentLure?: {
+    type: LureType;
+    activeUntil: number;
+  };
   catchBoosts?: CatchBoosts;
   catchStreak?: CatchStreak;
   longestStreak?: number;

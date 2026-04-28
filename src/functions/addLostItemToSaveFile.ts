@@ -1,6 +1,6 @@
 import { ONE_HOUR } from "../constants/baseConstants";
 import { mapsRecord } from "../constants/gameData/maps/mapsRecord";
-import { ItemType, itemTypes, keyItems } from "../interfaces/Item";
+import { fossils, ItemType, itemTypes, keyItems } from "../interfaces/Item";
 import { LostItem, SaveFile } from "../interfaces/SaveFile";
 import { ArrayHelpers } from "./ArrayHelpers";
 import { getRandomAvailableRoute } from "./getRandomAvailableRoute";
@@ -8,6 +8,7 @@ import { getRandomPosition } from "./getRandomPosition";
 
 const impossibleItems: ItemType[] = [
   ...keyItems,
+  ...fossils,
   "master-ball",
   "enigma-berry",
   "purple-apricorn",

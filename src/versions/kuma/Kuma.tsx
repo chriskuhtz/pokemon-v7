@@ -1,4 +1,6 @@
 import { GameData } from "../../interfaces/GameData";
+import { MoveDto } from "../../interfaces/Move";
+import { SaveFile } from "../../interfaces/SaveFile";
 import { Game } from "../../modules/Game/Game";
 import { kumaDex } from "./kumaDex";
 import { startingSaveFileKuma } from "./saveFile";
@@ -114,6 +116,32 @@ export const kumaGameData: GameData = {
     sixth: (s) => s.campUpgrades["team slot 6"],
   },
   defaultBattleSize: 2,
+  isMoveLearnable: (move: MoveDto, saveFile: SaveFile) => {
+    const power = move.power;
+    const badges = saveFile.badges.length;
+    if (!power) {
+      return { learnable: true, message: "Can be learned" };
+    }
+    if (badges >= 4) {
+      return { learnable: true, message: "Can be learned" };
+    }
+    if (power > 80) {
+      return badges >= 3
+        ? { learnable: true, message: "Can be learned" }
+        : { learnable: false, message: "You need more badges" };
+    }
+    if (power > 70) {
+      return badges >= 2
+        ? { learnable: true, message: "Can be learned" }
+        : { learnable: false, message: "You need more badges" };
+    }
+    if (power > 50) {
+      return badges >= 1
+        ? { learnable: true, message: "Can be learned" }
+        : { learnable: false, message: "You need more badges" };
+    }
+    return { learnable: true, message: "Can be learned" };
+  },
 };
 
 export const Kuma = (): JSX.Element => {

@@ -1,4 +1,5 @@
 import { PokemonName } from "../constants/pokemonNames";
+import { MoveDto } from "./Move";
 import { InternalDexEntry } from "./Pokedex";
 import { RoutesType } from "./Routing";
 import { CharacterLocationData, SaveFile } from "./SaveFile";
@@ -67,5 +68,9 @@ export interface GameData {
     fifth: (saveFile: SaveFile) => boolean;
     sixth: (saveFile: SaveFile) => boolean;
   };
+  isMoveLearnable: (
+    move: MoveDto,
+    saveFile: SaveFile,
+  ) => { learnable: boolean; message: string };
   defaultBattleSize: number;
 }

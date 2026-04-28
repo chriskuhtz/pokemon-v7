@@ -2,6 +2,7 @@ import { useFetch } from "@potfisch-industries-npm/usefetch";
 import { useContext, useEffect, useState } from "react";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { battleSpriteSize } from "../../constants/baseConstants";
+import { customItemDescriptions } from "../../constants/customItemDescriptions";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
 import { ItemType } from "../../interfaces/Item";
 import { ItemData } from "../../interfaces/ItemData";
@@ -17,6 +18,16 @@ export const ItemInfoButton = ({
     useContext(MessageQueueContext);
   const [skip, setSkip] = useState<boolean>(true);
   const { res, invalidate } = useFetch<ItemData>(async () => {
+    if (customItemDescriptions[itemName]) {
+      return {
+        effect_entries: [
+          {
+            language: { name: "en" },
+            short_effect: customItemDescriptions[itemName],
+          },
+        ],
+      };
+    }
     if (!skip) {
       return (await fetch(`https://pokeapi.co/api/v2/item/${itemName}`)).json();
     }

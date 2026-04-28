@@ -438,19 +438,14 @@ export const keyItems = [
   "oaks-parcel",
   "shiny-charm",
   "sprayduck",
-  "repel",
-  "max-repel",
-  "super-repel",
-  "lure",
-  "super-lure",
-  "max-lure",
   "forest-ticket",
   "plains-ticket",
   "hills-ticket",
   "peak-ticket",
   "league-ticket",
 ] as const;
-
+export const repels = ["repel", "super-repel", "max-repel"] as const;
+export const lures = ["lure", "super-lure", "max-lure"] as const;
 export const expCandies = [
   "exp-candy-xs",
   "exp-candy-s",
@@ -476,6 +471,8 @@ export const itemTypes = [
   ...fossils,
   ...herbs,
   ...keyItems,
+  ...repels,
+  ...lures,
   ...expCandies,
   "sacred-ash",
   "rare-candy",
@@ -505,6 +502,8 @@ export type ApricornType = (typeof apricorns)[number];
 export type HerbType = (typeof herbs)[number];
 export type KeyItemType = (typeof keyItems)[number];
 export type HeldItemType = (typeof heldItems)[number];
+export type RepelType = (typeof repels)[number];
+export type LureType = (typeof lures)[number];
 
 export function isPokeball(x: string | undefined): x is PokeballType {
   return (balltypes as unknown as string[]).includes(x ?? "");
@@ -514,6 +513,12 @@ export function isApricorn(x: string | undefined): x is ApricornType {
 }
 export function isKeyItem(x: string | undefined): x is KeyItemType {
   return (keyItems as unknown as string[]).includes(x ?? "");
+}
+export function isLureItem(x: string | undefined): x is LureType {
+  return (lures as unknown as string[]).includes(x ?? "");
+}
+export function isRepel(x: string | undefined): x is RepelType {
+  return (repels as unknown as string[]).includes(x ?? "");
 }
 export function isHerb(x: string | undefined): x is HerbType {
   return (herbs as unknown as string[]).includes(x ?? "");

@@ -3149,6 +3149,6 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     conditionFunction: (s: SaveFile) => !!s.mileStones.lanceDefeatedAt,
     researchPoints: 100,
     availableAfter: "collect 8 badges",
-    rewardItems: { "max-lure": 1 },
+    rewardItems: { "max-lure": 10 },
   },
 } as Record<KumaQuestName, Quest>;

@@ -1,5 +1,7 @@
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
+import { customItemDescriptions } from "../../constants/customItemDescriptions";
 import { useNavigate } from "../../hooks/useNavigate";
+import { mulches as mulchNames } from "../../interfaces/Item";
 import { Card } from "../../uiComponents/Card/Card";
 import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
@@ -17,43 +19,20 @@ export const Farm = (): JSX.Element => {
         <div
           style={{ border: "1px solid", borderRadius: "8px", padding: "1rem" }}
         >
-          <strong>
-            Plants take 1 hour to grow, but they dont always grow successfully
-          </strong>
-          <ul>
-            <li>
-              <strong>growth mulch: makes berries grow faster</strong>
-            </li>
-            <li>
-              <strong>damp mulch: makes berries less likely to wither</strong>
-            </li>
-            <li>
-              <strong>gooey mulch: produces 25% more berries</strong>
-            </li>
-            <li>
-              <strong>
-                stable mulch: berries grow 25% slower, but yield 50% more
+          <div style={{ paddingBottom: "1rem" }}>
+            <strong>
+              Plants take 1 hour to grow, but they dont always grow successfully
+            </strong>
+          </div>
+
+          <Stack mode="column">
+            {mulchNames.map((mulch) => (
+              <strong style={{ display: "flex", alignItems: "center" }}>
+                <ItemSprite item={mulch} /> {mulch}:{" "}
+                {customItemDescriptions[mulch]}
               </strong>
-            </li>
-            <li>
-              <strong>rich mulch: guaranteed success, but fewer berries</strong>
-            </li>
-            <li>
-              <strong>
-                surprise mulch: will grow into a different berry than planted
-              </strong>
-            </li>
-            <li>
-              <strong>
-                amaze mulch: same as surprise, but higher yield and higher risk
-              </strong>
-            </li>
-            <li>
-              <strong>
-                boost mulch: grow a small amount of berries 6 times faster
-              </strong>
-            </li>
-          </ul>
+            ))}
+          </Stack>
         </div>
         {farm.plants.map((bush) => {
           const ready = bush.readyAt < new Date().getTime();
@@ -97,8 +76,11 @@ export const Farm = (): JSX.Element => {
               actionElements={[
                 <button onClick={() => plant(berry)}>{`plant`}</button>,
                 ...mulches.map(([m]) => (
-                  <button onClick={() => plant(berry, m)}>
-                    {`with ${m}`}
+                  <button
+                    style={{ display: "flex", alignItems: "center" }}
+                    onClick={() => plant(berry, m)}
+                  >
+                    {`plant with ${m}`}
                     <ItemSprite item={m} />
                   </button>
                 )),

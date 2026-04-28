@@ -7,7 +7,10 @@ import {
 } from "react-icons/tb";
 import { battleSpriteSize } from "../../constants/baseConstants";
 import { typeColors } from "../../constants/typeColors";
-import { troubleMakersRemaining } from "../../functions/areAllRocketsDefeated";
+import {
+  areAllActiveTroubleMakersDefeated,
+  troubleMakersRemaining,
+} from "../../functions/areAllTroubleMakersDefeated";
 import { LocationContext } from "../../hooks/LocationProvider";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
 import { SaveFileContext } from "../../hooks/useSaveFile";
@@ -25,8 +28,8 @@ export const TroubleMakersIcon = () => {
   }
 
   const { affiliation } = saveFile.troubleMakers;
-  if (remaining === 0) {
-    <ClearTroubleMakersButton affiliation={affiliation} />;
+  if (areAllActiveTroubleMakersDefeated(saveFile)) {
+    return <ClearTroubleMakersButton affiliation={affiliation} />;
   }
   if (location.mapId !== saveFile.troubleMakers.route) {
     return <></>;

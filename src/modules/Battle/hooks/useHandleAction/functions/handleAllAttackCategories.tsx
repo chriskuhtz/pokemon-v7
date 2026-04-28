@@ -47,6 +47,7 @@ export const handleAllAttackCategories = ({
   battleRound,
   playerId,
   settings,
+  canEscape,
 }: {
   attacker: BattlePokemon;
   pokemon: BattlePokemon[];
@@ -69,6 +70,7 @@ export const handleAllAttackCategories = ({
   battleRound: number;
   playerId: string;
   settings: SettingsObject | undefined;
+  canEscape: boolean;
 }) => {
   let updatedPokemon: BattlePokemon[] = [...pokemon];
   const { updatedPokemon: ua, targets } = handleAttackStart({
@@ -141,6 +143,7 @@ export const handleAllAttackCategories = ({
           battleFieldEffects,
           leave,
           target,
+          canEscape,
         });
       case "field-effect":
         return handleFieldEffectMoves({

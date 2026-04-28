@@ -75,7 +75,9 @@ export const OwnedPokemonCardContent = ({
         <MovesDisplay ownedPokemon={ownedPokemon} onlyCurrent={!gameData} />
       )}
       {tab === "NEW MOVES" && <MoveEditor ownedPokemon={ownedPokemon} />}
-      {tab === "APPLY ITEM" && <ApplyItemSection ownedPokemon={ownedPokemon} />}
+      {tab === "APPLY ITEM" && (
+        <ApplyItemSection data={data} ownedPokemon={ownedPokemon} />
+      )}
     </Stack>
   );
 };

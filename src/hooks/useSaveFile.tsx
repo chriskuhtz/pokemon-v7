@@ -185,7 +185,6 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
     );
     if (update.lostItems.length < 3) {
       update = addLostItemToSaveFile(update);
-      console.log("added lost item", update.lostItems);
     }
 
     s({

@@ -1,0 +1,16 @@
+export const customItemDescriptions: Record<string, string> = {
+  "growth-mulch": "makes berries grow faster",
+  "damp-mulch": "makes berries less likely to wither",
+  "stable-mulch": "produces 25% more berries",
+  "gooey-mulch": "berries grow 25% slower, but yield 50% more",
+  "rich-mulch": "guaranteed success, but fewer berries",
+  "surprise-mulch": "will grow into a different berry than planted",
+  "amaze-mulch": "same as surprise, but higher yield and higher risk",
+  "boost-mulch": "grow a small amount of berries 6 times faster",
+  repel: "Repel Pokemon up to level 20 for one hour",
+  "super-repel": "Repel Pokemon up to level 40 for one hour",
+  "max-repel": "Repel Pokemon up to level 60 for one hour",
+  lure: "Attracts weak pokemon for one hour",
+  "super-lure": "Attracts medium strong pokemon for one hour",
+  "max-lure": "Attracts strong pokemon for one hour",
+};

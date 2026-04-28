@@ -458,6 +458,7 @@ export const BattleField = ({
     removeSpikes,
     removeScreens,
     setBattleTerrain,
+    !isTrainerBattle,
   );
 
   //Steps:

@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { abilityNames } from "../../constants/abilityCheckList";
 import { battleSpriteSize } from "../../constants/baseConstants";
+import { customItemDescriptions } from "../../constants/customItemDescriptions";
 import { handledMoves } from "../../constants/movesCheckList";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
 import { SaveFileContext } from "../../hooks/useSaveFile";
@@ -23,12 +24,24 @@ export const Wiki = () => {
   const { res, invalidate, status } = useFetch<MoveDto | ItemData | AbilityDto>(
     async () => {
       if (targetUrl) {
+        if (customItemDescriptions[targetUrl.split("/").at(-1) ?? ""]) {
+          return {
+            effect_entries: [
+              {
+                language: { name: "en" },
+                short_effect:
+                  customItemDescriptions[targetUrl.split("/").at(-1) ?? ""],
+              },
+            ],
+          };
+        }
         return (await fetch(targetUrl)).json();
       }
     },
   );
 
   useEffect(() => {
+    console.log(res);
     const text =
       res?.["effect_entries"].find((entry) => entry.language.name === "en")
         ?.short_effect ?? "No Description available";
