@@ -3,6 +3,8 @@ import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
 import { PokemonName } from "../../../constants/pokemonNames";
 import { getMiddleOfThree } from "../../../functions/getMiddleOfThree";
 import { getRandomOrientation } from "../../../functions/getNextClockwiseDirection";
+import { getNextLocation } from "../../../functions/getNextLocation";
+import { getOppositeDirection } from "../../../functions/getOppositeDirection";
 import { hasType } from "../../../functions/hasType";
 import { occupantHandled } from "../../../functions/occupantHandled";
 import { shuffle } from "../../../functions/shuffle";
@@ -77,6 +79,7 @@ export const useOccupants = () => {
       all.push(...createPasturePokemon(saveFile, internalDex));
       all.push(...createBattle());
     }
+    //add lost items
     if (saveFile.lostItems) {
       all.push(
         ...saveFile.lostItems
@@ -88,6 +91,19 @@ export const useOccupants = () => {
             id: `lost${lost.item}${lost.amount}${index}`,
           })),
       );
+    }
+    //add wild encounter sprite
+    if (saveFile.meta.currentChallenger?.type === "WILD") {
+      const pos = getNextLocation(location, location.orientation);
+      all.push({
+        type: "POKEMON",
+        dexId: 3,
+        conditionFunction: () => true,
+        id: "wild_encounter_sprite",
+        dialogue: ["A wild pokemon"],
+        ...pos,
+        orientation: getOppositeDirection(location.orientation),
+      });
     }
     //update
     if (statefulOccupants.length !== all.length) {
@@ -102,6 +118,7 @@ export const useOccupants = () => {
     location.mapId,
     internalDex,
     availableQuests.length,
+    location,
   ]);
 
   const conditionalOccupants = useMemo(() => {

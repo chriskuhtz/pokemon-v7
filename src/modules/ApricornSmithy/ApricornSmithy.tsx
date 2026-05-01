@@ -58,14 +58,19 @@ export const ApricornSmithy = ({ goBack }: { goBack: () => void }) => {
                   make 1{" "}
                   <ItemSprite item={apricornTable[apricorn]} sizeFactor={1.5} />
                 </strong>,
-                <strong
-                  onClick={() => craftBall(apricorn, amount)}
-                  style={{ display: "flex", alignItems: "center" }}
-                >
-                  make {amount}{" "}
-                  <ItemSprite item={apricornTable[apricorn]} sizeFactor={1.5} />
-                </strong>,
-              ]}
+                amount > 1 ? (
+                  <strong
+                    onClick={() => craftBall(apricorn, amount)}
+                    style={{ display: "flex", alignItems: "center" }}
+                  >
+                    make {amount}{" "}
+                    <ItemSprite
+                      item={apricornTable[apricorn]}
+                      sizeFactor={1.5}
+                    />
+                  </strong>
+                ) : undefined,
+              ].filter((el) => el !== undefined)}
             />
           ))}
         </Stack>

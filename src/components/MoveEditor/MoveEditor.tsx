@@ -4,6 +4,7 @@ import { getCostForLearnMethod } from "../../functions/getCostForLearnMethod";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { OwnedPokemon } from "../../interfaces/OwnedPokemon";
 import { Stack } from "../../uiComponents/Stack/Stack";
+import { ToggleRow } from "../../uiComponents/ToggleRow/ToggleRow";
 import { MoveEditorListEntry } from "./components/MoveEditorListEntry";
 import { useMoveEditor } from "./hooks/useMoveEditor";
 
@@ -24,9 +25,16 @@ export const MoveEditor = ({
 
   return (
     <Stack mode={"column"}>
-      <button key={"button"} onClick={() => setOnlyLearnable(!onlyLearnable)}>
-        {onlyLearnable ? "Show all moves" : "Only show learnable"}
-      </button>
+      <Stack mode="row">
+        [...
+        <ToggleRow
+          label="Show only learnable"
+          value={onlyLearnable}
+          setValue={() => setOnlyLearnable(!onlyLearnable)}
+          disabled={false}
+        />
+        ]
+      </Stack>
       {options.map((m) => {
         const payment = getCostForLearnMethod(
           m.move.name as MoveName,
