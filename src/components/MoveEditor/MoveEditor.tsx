@@ -25,16 +25,14 @@ export const MoveEditor = ({
 
   return (
     <Stack mode={"column"}>
-      <Stack mode="row">
-        [...
+      <div style={{ display: "flex", alignItems: "center", gap: ".5rem" }}>
         <ToggleRow
           label="Show only learnable"
           value={onlyLearnable}
           setValue={() => setOnlyLearnable(!onlyLearnable)}
           disabled={false}
         />
-        ]
-      </Stack>
+      </div>
       {options.map((m) => {
         const payment = getCostForLearnMethod(
           m.move.name as MoveName,

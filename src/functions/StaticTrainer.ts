@@ -74,8 +74,8 @@ export const trainerPresets: Record<
   },
   ice: {
     sprite: SpriteEnum.earmuffs,
-    unhandledMessage: ["Chill out!", "Frozen solid!"],
-    name: "Frosty Frank",
+    unhandledMessage: ["We´re the coldest crew around"],
+    name: "Frosty Fran",
   },
   dragon: {
     sprite: SpriteEnum.dame,

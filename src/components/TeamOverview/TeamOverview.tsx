@@ -97,7 +97,7 @@ const TeamMemberInOverview = ({
           maxHeight: percentage * battleSpriteSize,
           height: percentage * battleSpriteSize,
           minHeight: percentage * battleSpriteSize,
-          border: `4px solid ${color}`,
+          border: percentage > 0 ? `4px solid ${color}` : undefined,
         }}
       ></div>
     </div>

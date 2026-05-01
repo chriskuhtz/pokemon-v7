@@ -8,7 +8,7 @@ import {
 } from "../functions/joinCatchBoosts";
 import { joinInventories } from "../interfaces/Inventory";
 import { researchBoni } from "../interfaces/Quest";
-import { CatchBoosts } from "../interfaces/SaveFile";
+import { CatchBoosts, traitQuestRewardFactor } from "../interfaces/SaveFile";
 import { KumaQuestName, KumaQuestsRecord } from "../versions/kuma/questsRecord";
 import { GameDataContext } from "./useGameData";
 import { MessageQueueContext } from "./useMessageQueue";
@@ -50,7 +50,9 @@ export const useFulfillQuest = () => {
 
       const earnedPoints =
         saveFile.trait && researchBoni[saveFile.trait]
-          ? Math.floor(quest.researchPoints * 1.3)
+          ? Math.floor(
+              quest.researchPoints * traitQuestRewardFactor[saveFile.trait],
+            )
           : quest.researchPoints;
 
       const rewardStrings: string[] = [

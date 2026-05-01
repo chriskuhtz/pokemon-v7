@@ -9,6 +9,8 @@ import { getRandomPosition } from "./getRandomPosition";
 const impossibleItems: ItemType[] = [
   ...keyItems,
   ...fossils,
+  "odd-keystone",
+  "max-lure",
   "master-ball",
   "enigma-berry",
   "purple-apricorn",
