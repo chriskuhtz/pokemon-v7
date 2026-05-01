@@ -3,6 +3,7 @@ import { getOppositeDirection } from "../../../functions/getOppositeDirection";
 import { Message } from "../../../hooks/useMessageQueue";
 import {
   ApricornTree,
+  BerryTree,
   Ledge,
   Occupant,
   OccupantType,
@@ -68,6 +69,7 @@ export const interactWithFunction = ({
   interactWithTrainer,
   interactWithOverworldPokemon,
   interactWithApricornTree,
+  interactWithBerryTree,
   interactWithOverworldItem,
   interactWithOverworldPokeball,
   routeTo,
@@ -95,6 +97,7 @@ export const interactWithFunction = ({
   interactWithSnorlax: (x: OverworldSnorlax) => void;
   interactWithOverworldPokemon: (x: OverworldPokemon) => void;
   interactWithApricornTree: (x: ApricornTree) => void;
+  interactWithBerryTree: (x: BerryTree) => void;
   interactWithZigzagoonForager: () => void;
   interactWithDugtrioExplorer: () => void;
   interactWithSwarmRadar: () => void;
@@ -145,10 +148,20 @@ export const interactWithFunction = ({
     interactWithApricornTree(data);
     return;
   }
+  if (data.type === "BERRY_TREE") {
+    interactWithBerryTree(data);
+    return;
+  }
 
   if (data.type === "EMPTY_APRICORN_TREE") {
     addMultipleMessages([
       { message: "The Apricorns will need some time to grow" },
+    ]);
+    return;
+  }
+  if (data.type === "EMPTY_BERRY_TREE") {
+    addMultipleMessages([
+      { message: "The Berries will need some time to grow" },
     ]);
     return;
   }

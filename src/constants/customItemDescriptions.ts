@@ -13,4 +13,10 @@ export const customItemDescriptions: Record<string, string> = {
   lure: "Attracts weak pokemon for one hour",
   "super-lure": "Attracts medium strong pokemon for one hour",
   "max-lure": "Attracts strong pokemon for one hour",
+  "health-mochi": "increases health ev by 10",
+  "genius-mochi": "increases special attack ev by 10",
+  "clever-mochi": "increases special defense ev by 10",
+  "resist-mochi": "increases defense ev by 10",
+  "muscle-mochi": "increases attack ev by 10",
+  "swift-mochi": "increases speed ev by 10",
 };

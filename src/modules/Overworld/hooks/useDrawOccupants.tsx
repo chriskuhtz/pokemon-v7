@@ -153,6 +153,7 @@ const drawOccupant = (
       case "HONEY_TREE":
       case "APRICORN_TREE":
       case "EMPTY_APRICORN_TREE":
+      case "EMPTY_BERRY_TREE":
       case "COMBEE_HIVE":
         ctx?.drawImage(
           img,
@@ -160,6 +161,15 @@ const drawOccupant = (
           baseSize * occ.y,
           baseSize * 0.75,
           baseSize,
+        );
+        break;
+      case "BERRY_TREE":
+        ctx?.drawImage(
+          img,
+          baseSize * occ.x + baseSize * 0.25,
+          baseSize * occ.y - baseSize * 0.125,
+          baseSize * 0.5,
+          baseSize * 0.5,
         );
         break;
       case "OBSTACLE":
@@ -196,6 +206,7 @@ const getSource = (occ: Occupant) => {
     case "APRICORN_TREE":
       return occ.sprite;
     case "EMPTY_APRICORN_TREE":
+    case "EMPTY_BERRY_TREE":
       return "/mapObjects/apricornEmpty.png";
     case "BERRY_LURE":
       return "/mapObjects/berry_lure.png";
@@ -254,6 +265,8 @@ const getSource = (occ: Occupant) => {
       return "/mapObjects/combeeHive.png";
     case "OBSTACLE":
       return occ.src;
+    case "BERRY_TREE":
+      return getItemUrl(occ.berry);
     case "ITEM":
     case "LOST_ITEM":
       return getItemUrl(occ.item);

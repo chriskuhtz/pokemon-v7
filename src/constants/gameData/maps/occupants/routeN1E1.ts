@@ -2,6 +2,7 @@ import { canAccessApricornClearing } from "../../../../functions/canAccessAprico
 import { getTimeOfDay } from "../../../../functions/getTimeOfDay";
 import { getTraveller } from "../../../../functions/getTraveller";
 import { makeApricornTree } from "../../../../functions/makeApricornTree";
+import { makeBerryTree } from "../../../../functions/makeBerryTree";
 import { makeOverworldItem } from "../../../../functions/makeOverworldItem";
 import { Occupant } from "../../../../interfaces/Occupant";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
@@ -257,4 +258,16 @@ export const routeN1E1Occupants: OverworldMap["occupants"] = [
     conditionFunction: () => true,
     id: "routeN1E1_to_apricornClearing",
   },
+  ...makeBerryTree({
+    berry: "cheri-berry",
+    id: "cheri-tree-routeN1E1",
+    x: 41,
+    y: 37,
+  }),
+  ...makeBerryTree({
+    berry: "chesto-berry",
+    id: "chesto-tree-routeN1E1",
+    x: 13,
+    y: 15,
+  }),
 ];

@@ -2,6 +2,7 @@ import { calculateLevelData } from "../../../../functions/calculateLevelData";
 import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
 import { getTraveller } from "../../../../functions/getTraveller";
 import { makeApricornTree } from "../../../../functions/makeApricornTree";
+import { makeBerryTree } from "../../../../functions/makeBerryTree";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import { Occupant } from "../../../../interfaces/Occupant";
@@ -371,4 +372,22 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
   },
   ...getTraveller("routeN1"),
   ...bugCatcherJimmy,
+  ...makeBerryTree({
+    berry: "persim-berry",
+    id: "persim-tree-routeN1",
+    x: 43,
+    y: 45,
+  }),
+  ...makeBerryTree({
+    berry: "custap-berry",
+    id: "custap-tree-routeN1",
+    x: 23,
+    y: 7,
+  }),
+  ...makeBerryTree({
+    berry: "wacan-berry",
+    id: "wacan-tree-routeN1",
+    x: 27,
+    y: 7,
+  }),
 ];

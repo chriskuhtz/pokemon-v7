@@ -2,6 +2,7 @@ import { isBagOverloaded } from "../../../../functions/getBagLimit";
 import { getHistorianMessage } from "../../../../functions/getHistorianMessage";
 import { getRandomOrientation } from "../../../../functions/getNextClockwiseDirection";
 import { makeApricornTree } from "../../../../functions/makeApricornTree";
+import { makeBerryTree } from "../../../../functions/makeBerryTree";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import { zigzagoonForagers } from "../../../../hooks/useZigzagoonForagers";
 import { GameData } from "../../../../interfaces/GameData";
@@ -594,4 +595,28 @@ export const campOccupants: OverworldMap["occupants"] = [
     amount: 2,
     conditionFunction: (s) => !occupantHandled(s, "camp_pot_item_2"),
   },
+  ...makeBerryTree({
+    x: 7,
+    y: 15,
+    id: "camp-oran-tree",
+    berry: "oran-berry",
+  }),
+  ...makeBerryTree({
+    x: 7,
+    y: 16,
+    id: "camp-oran-tree-2",
+    berry: "oran-berry",
+  }),
+  ...makeBerryTree({
+    x: 7,
+    y: 19,
+    id: "camp-pecha-tree",
+    berry: "pecha-berry",
+  }),
+  ...makeBerryTree({
+    x: 7,
+    y: 20,
+    id: "camp-pecha-tree-2",
+    berry: "pecha-berry",
+  }),
 ];

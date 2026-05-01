@@ -1,15 +1,17 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect, useMemo } from "react";
 import { fps } from "../../constants/baseConstants";
 import { baseInternalDex } from "../../constants/baseInternalDex";
 import { getNextLocation } from "../../functions/getNextLocation";
 import { getOppositeDirection } from "../../functions/getOppositeDirection";
+import { getYOffsetFromOrientation } from "../../functions/getYOffsetFromOrientation";
 import { isPassable } from "../../functions/isPassable";
 import { LocationContext } from "../../hooks/LocationProvider";
 import { BaseSizeContext } from "../../hooks/useBaseSize";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { Occupant } from "../../interfaces/Occupant";
 import { OverworldMap } from "../../interfaces/OverworldMap";
-import { useDrawFollowerPokemon } from "../../modules/Overworld/hooks/useDrawCharacter";
+import { CharacterLocationData } from "../../interfaces/SaveFile";
+import { threeDigitString } from "../../modules/Overworld/hooks/useDrawOccupants";
 
 const followerCanvasId = "followerCanvas";
 
@@ -84,4 +86,51 @@ export const FollowerSprite = ({
     );
   }
   return <></>;
+};
+
+export const useDrawFollowerPokemon = (
+  canvasId: string,
+  playerLocation: CharacterLocationData,
+  dexId: number,
+) => {
+  const { baseSize } = useContext(BaseSizeContext);
+
+  const yOffset = useMemo(
+    () => getYOffsetFromOrientation(playerLocation.orientation),
+    [playerLocation.orientation],
+  );
+
+  const xOffset = useMemo(() => {
+    if (playerLocation.forwardFoot === "LEFT") {
+      return -3 * 64;
+    }
+    if (playerLocation.forwardFoot === "CENTER2") {
+      return -2 * 64;
+    }
+    if (playerLocation.forwardFoot === "RIGHT") {
+      return -64;
+    }
+    return 0;
+  }, [playerLocation.forwardFoot]);
+
+  useEffect(() => {
+    if (dexId > 999) {
+      //we dont have sprites for newer / special pokemon
+      return;
+    }
+    const el: HTMLCanvasElement | null = document.getElementById(
+      canvasId,
+    ) as HTMLCanvasElement | null;
+
+    const ctx = el?.getContext("2d");
+
+    const img = new Image();
+
+    img.addEventListener("load", () => {
+      ctx?.clearRect(0, 0, baseSize, baseSize);
+      ctx?.drawImage(img, -xOffset, -yOffset, 64, 64, 0, 0, baseSize, baseSize);
+    });
+
+    img.src = `/overworldPokemonSprites/${threeDigitString(dexId)}.png`;
+  }, [baseSize, canvasId, dexId, xOffset, yOffset]);
 };

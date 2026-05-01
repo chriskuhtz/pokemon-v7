@@ -5,12 +5,12 @@ import { typeEffectivenessChart } from "../interfaces/PokemonType";
 import { SettingsObject } from "../interfaces/SettingsObject";
 import { EmptyStatObject, Stat } from "../interfaces/StatObject";
 import { WeatherType } from "../interfaces/Weather";
-import { BattleFieldEffect } from "../modules/Battle/BattleField";
 import {
   BattleTerrain,
   TerrainObject,
 } from "../modules/Battle/hooks/useBattleTerrain";
 import { WeatherObject } from "../modules/Battle/hooks/useBattleWeather";
+import { BattleFieldEffect } from "../modules/Battle/interfaces/interfaces";
 import { applyPrimaryAilmentToPokemon } from "./applyPrimaryAilmentToPokemon";
 import { applyStatChangeToPokemon } from "./applyStatChangeToPokemon";
 import { getHeldItem } from "./getHeldItem";

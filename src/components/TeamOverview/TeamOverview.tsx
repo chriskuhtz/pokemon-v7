@@ -89,13 +89,15 @@ const TeamMemberInOverview = ({
           borderBottomLeftRadius: 9000,
           borderTopLeftRadius: percentage > 0.8 ? 9000 : 0,
           borderTopRightRadius: percentage > 0.8 ? 9000 : 0,
-          bottom: 0,
+          bottom: "-4px",
+          left: "-4px",
           backgroundColor: color,
           position: "absolute",
           width: battleSpriteSize,
           maxHeight: percentage * battleSpriteSize,
           height: percentage * battleSpriteSize,
           minHeight: percentage * battleSpriteSize,
+          border: `4px solid ${color}`,
         }}
       ></div>
     </div>

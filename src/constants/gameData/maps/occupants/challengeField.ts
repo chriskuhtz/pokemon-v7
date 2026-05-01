@@ -1,7 +1,7 @@
 import { OverworldTrainer } from "../../../../interfaces/Occupant";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
-import { trainersWeakToStrong } from "../../../../modules/TrainingField/trainersRecord";
+import { trainersWeakToStrong } from "../../../trainersRecord";
 
 export const challengeFieldOccupants: OverworldMap["occupants"] = [
   {

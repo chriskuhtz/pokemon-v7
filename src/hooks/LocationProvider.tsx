@@ -37,6 +37,7 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
 
   const setLocation = useCallback(
     (newLocation: CharacterLocationData) => {
+      //evil teams escape if you leave
       if (
         location.mapId === saveFile.troubleMakers?.route &&
         newLocation.mapId !== saveFile.troubleMakers.route

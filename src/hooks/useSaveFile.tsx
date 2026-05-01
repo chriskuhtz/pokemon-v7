@@ -15,6 +15,7 @@ import { applyHappinessFromWalking } from "../functions/applyHappinessFromWalkin
 import { applyItemToPokemon } from "../functions/applyItemToPokemon";
 import { fullyHealPokemon } from "../functions/fullyHealPokemon";
 import { TimeOfDay } from "../functions/getTimeOfDay";
+import { addStaticEncounterToSaveFile } from "../functions/StaticEncounter";
 import { updateItemFunction } from "../functions/updateItemFunction";
 import { EmptyInventory, joinInventories } from "../interfaces/Inventory";
 import { ItemType } from "../interfaces/Item";
@@ -142,61 +143,75 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
   }, [startingSaveFile]);
 
   //handle side effects here
-  const setSaveFile = useCallback((u: SaveFile) => {
-    let update = { ...u };
-    const now = new Date().getTime();
+  const setSaveFile = useCallback(
+    (u: SaveFile) => {
+      let update = { ...u };
+      const now = new Date().getTime();
 
-    let pokedex = update.pokedex ?? emptyPokedex;
+      let pokedex = update.pokedex ?? emptyPokedex;
 
-    //update pokedex
-    update.pokemon.forEach((p) => {
-      pokedex = addPokemonToDex(pokedex, p.name, p.caughtOnMap, true);
-    });
-    //update catch streak
-    if ((update.catchStreak?.streak ?? 0) > (update.longestStreak ?? 0)) {
-      update.longestStreak = update.catchStreak?.streak;
-    }
-    //update swarms
-    if (update.currentSwarm && now > update.currentSwarm?.leavesAt) {
-      update.currentSwarm = undefined;
-    }
-    if (
-      update.currentStrongSwarm &&
-      now > update.currentStrongSwarm?.leavesAt
-    ) {
-      update.currentStrongSwarm = undefined;
-    }
-    if (
-      update.currentDistortionSwarm &&
-      now > update.currentDistortionSwarm?.leavesAt
-    ) {
-      update.currentDistortionSwarm = undefined;
-    }
-    //update troublemakers
-    if (
-      !update.troubleMakers?.leavesAt ||
-      (update.troubleMakers?.leavesAt && now > update.troubleMakers?.leavesAt)
-    ) {
-      update.troubleMakers = undefined;
-    }
-    //update lostItems
-    update.lostItems = [...(update.lostItems ?? [])].filter(
-      (lostItem) => lostItem.resetAt > now,
-    );
-    if (update.lostItems.length < 2) {
-      update = addLostItemToSaveFile(update);
-    }
+      //update pokedex
+      update.pokemon.forEach((p) => {
+        pokedex = addPokemonToDex(pokedex, p.name, p.caughtOnMap, true);
+      });
+      //update catch streak
+      if ((update.catchStreak?.streak ?? 0) > (update.longestStreak ?? 0)) {
+        update.longestStreak = update.catchStreak?.streak;
+      }
+      //update swarms
+      if (update.currentSwarm && now > update.currentSwarm?.leavesAt) {
+        update.currentSwarm = undefined;
+      }
+      if (
+        update.currentStrongSwarm &&
+        now > update.currentStrongSwarm?.leavesAt
+      ) {
+        update.currentStrongSwarm = undefined;
+      }
+      if (
+        update.currentDistortionSwarm &&
+        now > update.currentDistortionSwarm?.leavesAt
+      ) {
+        update.currentDistortionSwarm = undefined;
+      }
+      //update troublemakers
+      if (
+        !update.troubleMakers?.leavesAt ||
+        (update.troubleMakers?.leavesAt && now > update.troubleMakers?.leavesAt)
+      ) {
+        update.troubleMakers = undefined;
+      }
+      //update lostItems
+      if (gameData.features.lostItems) {
+        update.lostItems = [...(update.lostItems ?? [])].filter(
+          (lostItem) => lostItem.resetAt > now,
+        );
+        if (update.lostItems.length < 2) {
+          update = addLostItemToSaveFile(update);
+        }
+      }
+      if (gameData.features.staticEncounters) {
+        //update static Encounters
+        update.staticEncounters = [...(update.staticEncounters ?? [])].filter(
+          (staticEncounter) => staticEncounter.resetAt > now,
+        );
+        if (update.staticEncounters.length < 2) {
+          update = addStaticEncounterToSaveFile(update, gameData.internalDex);
+        }
+      }
 
-    s({
-      ...update,
-      lastEdited: now,
-      pokedex,
-      bag: joinInventories(EmptyInventory, update.bag),
-      handledOccupants: update.handledOccupants.filter(
-        (h) => h.resetAt < 0 || h.resetAt > now,
-      ),
-    });
-  }, []);
+      s({
+        ...update,
+        lastEdited: now,
+        pokedex,
+        bag: joinInventories(EmptyInventory, update.bag),
+        handledOccupants: update.handledOccupants.filter(
+          (h) => h.resetAt < 0 || h.resetAt > now,
+        ),
+      });
+    },
+    [gameData],
+  );
   const discardItemReducer = (item: ItemType, number: number) => {
     const updatedInventory = updateItemFunction(item, -number, saveFile.bag);
     setSaveFile({ ...saveFile, bag: updatedInventory });

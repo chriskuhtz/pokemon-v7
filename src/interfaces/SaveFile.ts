@@ -157,6 +157,16 @@ export interface LostItem {
   y: number;
   resetAt: number;
 }
+export interface StaticEncounter {
+  name: PokemonName;
+  dexId: number;
+  xp: number;
+  mapId: MapId;
+  x: number;
+  y: number;
+  resetAt: number;
+  orientation: CharacterOrientation;
+}
 
 export interface SaveFile {
   badges: BadgeName[];
@@ -215,4 +225,5 @@ export interface SaveFile {
   importedChallenger?: ImportedChallenger;
   trainerNotes?: SavedNote[];
   lostItems?: LostItem[];
+  staticEncounters?: StaticEncounter[];
 }
