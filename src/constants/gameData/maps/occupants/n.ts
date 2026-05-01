@@ -17,7 +17,7 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
     name: "zorua",
     xp: highestXpOnTeam,
     nature: "adamant",
-    ability: "dark-aura",
+    ability: "cute-charm",
     fixedAbility: true,
     happiness: 255,
     heldItemName: "black-glasses",
@@ -103,7 +103,7 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
     fixedAbility: true,
     happiness: 255,
     heldItemName: "choice-band",
-    firstMove: { name: "flame-wheel", usedPP: 0 },
+    firstMove: { name: "ember", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
       attack: 252,

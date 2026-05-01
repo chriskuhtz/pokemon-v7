@@ -7,6 +7,14 @@ interface ChangelogEntryData {
 
 const changelogData: ChangelogEntryData[] = [
   {
+    version: "0.62",
+    listOfChanges: [
+      "fixes and balances from playtesting",
+      "overworld berry trees",
+      "overworld visible Pokemon Encounters",
+    ],
+  },
+  {
     version: "0.61",
     listOfChanges: ["fixes and balances from playtesting"],
   },

@@ -1,7 +1,7 @@
-import { makeChallengerPokemon } from "../../functions/makeChallengerPokemon";
-import { Challenger } from "../../interfaces/Challenger";
-import { EmptyInventory } from "../../interfaces/Inventory";
-import { SpriteEnum } from "../../interfaces/SpriteEnum";
+import { makeChallengerPokemon } from "../functions/makeChallengerPokemon";
+import { Challenger } from "../interfaces/Challenger";
+import { EmptyInventory } from "../interfaces/Inventory";
+import { SpriteEnum } from "../interfaces/SpriteEnum";
 
 export const tier1trainers: Challenger[] = [
   {

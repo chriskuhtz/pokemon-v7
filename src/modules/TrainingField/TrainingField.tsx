@@ -6,6 +6,14 @@ import { Sprite } from "../../components/Sprite/Sprite";
 import { calculateLevelData } from "../../functions/calculateLevelData";
 
 import { portraitMode } from "../../constants/baseConstants";
+import {
+  specialTrainers,
+  tier1trainers,
+  tier2trainers,
+  tier3trainers,
+  tier4trainers,
+  tier5trainers,
+} from "../../constants/trainersRecord";
 import { LocationContext } from "../../hooks/LocationProvider";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { Challenger } from "../../interfaces/Challenger";
@@ -19,14 +27,6 @@ import {
   useChallengeTrainer,
   useEvTraining,
 } from "../Overworld/hooks/useChallengeTrainer";
-import {
-  specialTrainers,
-  tier1trainers,
-  tier2trainers,
-  tier3trainers,
-  tier4trainers,
-  tier5trainers,
-} from "./trainersRecord";
 
 export const TrainingField = () => {
   const { setActiveTabReducer, saveFile, patchSaveFileReducer } =

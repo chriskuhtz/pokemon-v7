@@ -44,6 +44,8 @@ export interface GameData {
     snapShotExportAvailable: boolean;
     movesLearnableInTeamOverview: boolean;
     movesEditableInTeamOverview: boolean;
+    lostItems: boolean;
+    staticEncounters: boolean;
   };
   overworldActions: OverworldActions;
   carryingCapacity: {

@@ -1,5 +1,4 @@
 import { useContext, useMemo, useState } from "react";
-import { BaseSizeContext } from "../../hooks/useBaseSize";
 import { GameDataContext } from "../../hooks/useGameData";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { MapId } from "../../interfaces/mapIds";
@@ -50,7 +49,7 @@ export const Router = (): JSX.Element => {
     startingTab,
     features: { settingsEditableAtStart, settingsEditableDuringGame },
   } = useContext(GameDataContext);
-  const { baseSize } = useContext(BaseSizeContext);
+
   const {
     saveFile,
     setActiveTabReducer,
@@ -229,5 +228,5 @@ export const Router = (): JSX.Element => {
     );
   }
 
-  return <Overworld baseSize={baseSize} />;
+  return <Overworld />;
 };

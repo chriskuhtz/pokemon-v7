@@ -17,7 +17,7 @@ import {
   getRandomBoostableStat,
   StatObject,
 } from "../../../../../../interfaces/StatObject";
-import { BattleFieldEffect } from "../../../../BattleField";
+import { BattleFieldEffect } from "../../../../interfaces/interfaces";
 
 export const handleUniqueMoves = ({
   attacker,

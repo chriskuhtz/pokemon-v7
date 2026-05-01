@@ -2,6 +2,7 @@ import { useCallback, useContext } from "react";
 import { isBagOverloaded } from "../../../functions/getBagLimit";
 import { LocationContext } from "../../../hooks/LocationProvider";
 import { useApricornTree } from "../../../hooks/useApricornTree";
+import { useBerryTree } from "../../../hooks/useBerryTree";
 import { useDugtrioExplorers } from "../../../hooks/useDugtrioExplorers";
 import { GameDataContext } from "../../../hooks/useGameData";
 import { useHallowedTower } from "../../../hooks/useHallowedTower";
@@ -46,6 +47,7 @@ export const useInteractWith = (
 
   const interactWithClimbingSteps = useInteractWithClimbingSteps();
   const interactWithApricornTree = useApricornTree();
+  const interactWithBerryTree = useBerryTree();
   const interactWithHoneyTree = useHoneyTree();
   const interactWithTrainer = useInteractWithTrainer();
   const interactWithHallowedTower = useHallowedTower();
@@ -78,6 +80,7 @@ export const useInteractWith = (
         talkToNurse,
         goToPosition: setCharacterLocation,
         interactWithApricornTree,
+        interactWithBerryTree,
         interactWithHoneyTree,
         interactWithHallowedTower,
         interactWithStrangeTree,
@@ -109,6 +112,7 @@ export const useInteractWith = (
       talkToNurse,
       setCharacterLocation,
       interactWithApricornTree,
+      interactWithBerryTree,
       interactWithHoneyTree,
       interactWithHallowedTower,
       interactWithStrangeTree,
@@ -127,8 +131,8 @@ export const useInteractWith = (
       interactWithOverworldChest,
       interactWithOverworldNpc,
       interactWithOverworldItem,
-      navigateAwayFromOverworldReducer,
       interactWithOverworldPokeball,
+      navigateAwayFromOverworldReducer,
       stepsTaken,
     ],
   );

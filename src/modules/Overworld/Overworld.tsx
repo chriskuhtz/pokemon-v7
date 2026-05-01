@@ -3,6 +3,7 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import { mapsRecord } from "../../constants/gameData/maps/mapsRecord";
 import { handleEnterPress } from "../../functions/handleEnterPress";
 import { LocationContext } from "../../hooks/LocationProvider";
+import { BaseSizeContext } from "../../hooks/useBaseSize";
 import { useDrawForeground } from "../../hooks/useDrawBackground";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
 import { useNavigate } from "../../hooks/useNavigate";
@@ -19,13 +20,8 @@ import { useKeyboardControl } from "./hooks/useKeyboardControl";
 import { useMovement } from "./hooks/useMovement";
 import { useOccupants } from "./hooks/useOccupants";
 
-export const Overworld = ({
-  uncontrolled,
-  baseSize,
-}: {
-  uncontrolled?: boolean;
-  baseSize: number;
-}) => {
+export const Overworld = ({ uncontrolled }: { uncontrolled?: boolean }) => {
+  const { baseSize } = useContext(BaseSizeContext);
   const [stepsTaken, setStepsTaken] = useState<number>(0);
 
   const { latestMessage } = useContext(MessageQueueContext);

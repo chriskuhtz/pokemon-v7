@@ -21,7 +21,7 @@ import { BattlePokemon } from "../../../../../../interfaces/BattlePokemon";
 import { gemTable, isBerry } from "../../../../../../interfaces/Item";
 import { EmptyStatObject } from "../../../../../../interfaces/StatObject";
 import { WeatherType } from "../../../../../../interfaces/Weather";
-import { BattleFieldEffect } from "../../../../BattleField";
+import { BattleFieldEffect } from "../../../../interfaces/interfaces";
 import { BattleTerrain, TerrainObject } from "../../../useBattleTerrain";
 import { WeatherObject } from "../../../useBattleWeather";
 import { handleAbilitiesAfterAttack } from "../handleAbilitiesAfterAttack";

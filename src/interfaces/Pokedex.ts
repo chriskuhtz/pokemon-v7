@@ -23,6 +23,7 @@ export type InternalDexEntry = {
   rampager?: boolean;
   swarm?: SwarmType;
   berryLureMapId?: MapId;
+  staticEncounter?: MapId;
   types: PokemonType[];
   honey?: boolean;
   underRock?: boolean;

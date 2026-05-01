@@ -20,6 +20,8 @@ export const gameData: GameData = {
     movesLearnableInTeamOverview: true,
     snapShotExportAvailable: false,
     pokemonStorageSystem: false,
+    lostItems: false,
+    staticEncounters: false,
   },
   losingMessages: {
     training: "Young Tom was never seen again ...",

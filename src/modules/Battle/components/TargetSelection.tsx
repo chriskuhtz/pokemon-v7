@@ -12,7 +12,7 @@ import { SaveFileContext } from "../../../hooks/useSaveFile";
 import { BattlePokemon } from "../../../interfaces/BattlePokemon";
 import { MoveDto } from "../../../interfaces/Move";
 import { Card } from "../../../uiComponents/Card/Card";
-import { ActionType, ChooseActionPayload } from "../BattleField";
+import { ActionType, ChooseActionPayload } from "../interfaces/interfaces";
 
 export function TargetSelection({
   name,

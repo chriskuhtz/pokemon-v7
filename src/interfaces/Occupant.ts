@@ -1,7 +1,7 @@
 import { BattleTeamConfig } from "../hooks/useGetBattleTeam";
 import { KumaQuestName } from "../versions/kuma/questsRecord";
 import { Inventory } from "./Inventory";
-import { ApricornType, ItemType } from "./Item";
+import { ApricornType, BerryType, ItemType } from "./Item";
 import { OverworldEncounter } from "./OverworldMap";
 import { OwnedPokemon } from "./OwnedPokemon";
 import { RoutesType } from "./Routing";
@@ -46,6 +46,8 @@ export const OCCUPANT_TYPES = [
   "STORAGE_CHEST",
   "APRICORN_TREE",
   "EMPTY_APRICORN_TREE",
+  "BERRY_TREE",
+  "EMPTY_BERRY_TREE",
   "BERRY_LURE",
   "SNORLAX",
   "TELEPORTER_NPC",
@@ -243,6 +245,13 @@ export interface ApricornTree extends BaseOccupant {
 export interface EmptyApricornTree extends BaseOccupant {
   type: "EMPTY_APRICORN_TREE";
 }
+export interface BerryTree extends BaseOccupant {
+  type: "BERRY_TREE";
+  berry: BerryType;
+}
+export interface EmptyBerryTree extends BaseOccupant {
+  type: "EMPTY_BERRY_TREE";
+}
 export interface Ledge extends BaseOccupant {
   type: "LEDGE";
   sprite: string;
@@ -299,6 +308,8 @@ export type Occupant =
   | OverworldStrangeTree
   | ApricornTree
   | EmptyApricornTree
+  | BerryTree
+  | EmptyBerryTree
   | TeleporterNpc
   | OverworldClimbingSteps
   | OverworldPokeball;

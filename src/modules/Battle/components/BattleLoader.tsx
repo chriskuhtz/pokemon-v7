@@ -1,8 +1,10 @@
 import { useContext, useEffect, useMemo, useState } from "react";
+import { portraitMode } from "../../../constants/baseConstants";
 import { addPokemonToDex } from "../../../functions/addPokemonToDex";
 import { getMiddleOfThree } from "../../../functions/getMiddleOfThree";
 import { isKO } from "../../../functions/isKo";
 import { LocationContext } from "../../../hooks/LocationProvider";
+import { BaseSizeProvider } from "../../../hooks/useBaseSize";
 import { useGetBattleTeam } from "../../../hooks/useGetBattleTeam";
 import { useLeaveBattle } from "../../../hooks/useLeaveBattle";
 import { MessageQueueContext } from "../../../hooks/useMessageQueue";
@@ -130,7 +132,9 @@ export const BattleLoader = ({
           opacity: 0.7,
         }}
       >
-        <Overworld uncontrolled baseSize={32} />
+        <BaseSizeProvider allowedBaseSizes={portraitMode ? [32] : [64]}>
+          <Overworld uncontrolled />
+        </BaseSizeProvider>
       </div>
     </>
   );

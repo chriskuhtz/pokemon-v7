@@ -12,6 +12,14 @@ import {
 import { campUpgradeCostScale } from "../../constants/gameData/campUpgrades";
 import { allRocketCampTrainersDefeated } from "../../constants/gameData/maps/occupants/rocketCampOccupants";
 import { PokemonName, pokemonNames } from "../../constants/pokemonNames";
+import {
+  tier1trainers,
+  tier2trainers,
+  tier3trainers,
+  tier4trainers,
+  tier5trainers,
+  trainers,
+} from "../../constants/trainersRecord";
 import { hasType } from "../../functions/hasType";
 import {
   getAllEncountersFor,
@@ -35,14 +43,6 @@ import {
   EmptyStatObject,
   generateRandomStatObject,
 } from "../../interfaces/StatObject";
-import {
-  tier1trainers,
-  tier2trainers,
-  tier3trainers,
-  tier4trainers,
-  tier5trainers,
-  trainers,
-} from "../../modules/TrainingField/trainersRecord";
 import { catchQuests } from "./generatedQuests/catchQuests";
 import { gymLeaderQuests } from "./generatedQuests/gymLeaderQuests";
 import { travellingTrainerQuests } from "./generatedQuests/travellingTrainersQuests";

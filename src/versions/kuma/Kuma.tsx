@@ -64,6 +64,8 @@ export const kumaGameData: GameData = {
     movesEditableInTeamOverview: false,
     movesLearnableInTeamOverview: false,
     snapShotExportAvailable: false,
+    lostItems: true,
+    staticEncounters: true,
   },
   losingMessages: {
     training: "luckily this was only a training battle",

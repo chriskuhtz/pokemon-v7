@@ -1,4 +1,5 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { v4 } from "uuid";
 import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
 import { PokemonName } from "../../../constants/pokemonNames";
 import { getMiddleOfThree } from "../../../functions/getMiddleOfThree";
@@ -6,8 +7,10 @@ import { getRandomOrientation } from "../../../functions/getNextClockwiseDirecti
 import { getNextLocation } from "../../../functions/getNextLocation";
 import { getOppositeDirection } from "../../../functions/getOppositeDirection";
 import { hasType } from "../../../functions/hasType";
+import { makeOverworldItem } from "../../../functions/makeOverworldItem";
 import { occupantHandled } from "../../../functions/occupantHandled";
 import { shuffle } from "../../../functions/shuffle";
+import { makeOverworldPokemonFromStaticEncounter } from "../../../functions/StaticEncounter";
 import {
   getTroubleMakerAdminTeam,
   getTroubleMakerTeam,
@@ -17,6 +20,7 @@ import { useAvailableBulletinQuests } from "../../../hooks/useAvailableBulletinQ
 import { GameDataContext } from "../../../hooks/useGameData";
 import { SaveFileContext } from "../../../hooks/useSaveFile";
 import { InternalDex } from "../../../interfaces/GameData";
+import { MapId } from "../../../interfaces/mapIds";
 import { Nature } from "../../../interfaces/Natures";
 import {
   Occupant,
@@ -29,7 +33,6 @@ import {
   SaveFile,
 } from "../../../interfaces/SaveFile";
 import { SpriteEnum } from "../../../interfaces/SpriteEnum";
-import { MapId } from "../../../interfaces/mapIds";
 
 export const useOccupants = () => {
   const { saveFile } = useContext(SaveFileContext);
@@ -84,20 +87,30 @@ export const useOccupants = () => {
       all.push(
         ...saveFile.lostItems
           .filter((lost) => lost.mapId === location.mapId)
-          .map<OverworldLostItem>((lost, index) => ({
-            ...lost,
+          .map<OverworldLostItem>((lost) => ({
+            ...makeOverworldItem({ ...lost, fixedId: v4() }),
             type: "LOST_ITEM",
-            conditionFunction: () => true,
-            id: `lost${lost.item}${lost.amount}${index}`,
           })),
+      );
+    }
+    //add static encounters
+    if (saveFile.staticEncounters) {
+      all.push(
+        ...saveFile.staticEncounters
+          .filter((staticEncounter) => staticEncounter.mapId === location.mapId)
+          .map(makeOverworldPokemonFromStaticEncounter),
       );
     }
     //add wild encounter sprite
     if (saveFile.meta.currentChallenger?.type === "WILD") {
       const pos = getNextLocation(location, location.orientation);
+      const dexId =
+        internalDex[
+          saveFile.meta.currentChallenger.team.at(0)?.name ?? "rattata"
+        ].dexId;
       all.push({
         type: "POKEMON",
-        dexId: 3,
+        dexId,
         conditionFunction: () => true,
         id: "wild_encounter_sprite",
         dialogue: ["A wild pokemon"],
@@ -122,9 +135,11 @@ export const useOccupants = () => {
   ]);
 
   const conditionalOccupants = useMemo(() => {
-    return statefulOccupants.filter(
-      (m) => m.conditionFunction(saveFile) === true,
-    );
+    return statefulOccupants
+      .filter((m) => m.conditionFunction(saveFile) === true)
+      .sort((a) => {
+        return a.type === "BERRY_TREE" ? 1 : -1;
+      });
   }, [saveFile, statefulOccupants]);
 
   const rotateOccupant = useCallback(

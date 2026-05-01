@@ -31,7 +31,7 @@ import {
   ActionType,
   BattleFieldEffect,
   ChooseActionPayload,
-} from "../BattleField";
+} from "../interfaces/interfaces";
 
 export function ActionSelection({
   controlled,

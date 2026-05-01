@@ -1,11 +1,12 @@
 import { firstTurnMoves } from "../constants/groupedMoves";
 import { BattlePokemon } from "../interfaces/BattlePokemon";
 import { WeatherType } from "../interfaces/Weather";
+
+import { BattleTerrain } from "../modules/Battle/hooks/useBattleTerrain";
 import {
   BattleFieldEffect,
   ChooseActionPayload,
-} from "../modules/Battle/BattleField";
-import { BattleTerrain } from "../modules/Battle/hooks/useBattleTerrain";
+} from "../modules/Battle/interfaces/interfaces";
 import { determineHighestDamage } from "./determineHighestDamage";
 import { filterTargets } from "./filterTargets";
 import { getMovesArray } from "./getMovesArray";

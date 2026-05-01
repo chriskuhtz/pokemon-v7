@@ -26,7 +26,7 @@ const settingsLabels: Record<keyof SettingsObject, string> = {
   seekOutEncounters: "Seek Encounters",
   unlimitedPathfindingRange: "Unlimited Pathfinder",
   //Randomization:
-  randomStarters: "Would you like random starter pokemon choices:",
+  randomStarters: "random starter pokemon choices:",
   randomOverworldItems: "Random Overworld Items:",
   randomQuestRewards: "Random Quest Rewards:",
   randomSwarms: "Random Pokemon Swarms:",

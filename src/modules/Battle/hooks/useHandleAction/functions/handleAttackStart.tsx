@@ -8,11 +8,11 @@ import { Message } from "../../../../../hooks/useMessageQueue";
 import { BattleAttack } from "../../../../../interfaces/BattleActions";
 import { BattlePokemon } from "../../../../../interfaces/BattlePokemon";
 import { WeatherType } from "../../../../../interfaces/Weather";
-import { BattleFieldEffect } from "../../../BattleField";
 import { handleDampy } from "../../../functions/handleDampy";
 import { handleMiss } from "../../../functions/handleMiss";
 import { handleMoveBlockAilments } from "../../../functions/handleMoveBlockAilments";
 import { handleNoTarget } from "../../../functions/handleNoTarget";
+import { BattleFieldEffect } from "../../../interfaces/interfaces";
 import { BattleTerrain } from "../../useBattleTerrain";
 
 export const handleAttackStart = ({
