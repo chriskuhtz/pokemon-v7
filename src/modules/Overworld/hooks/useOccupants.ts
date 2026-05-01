@@ -100,20 +100,22 @@ export const useOccupants = () => {
     }
     //add wild encounter sprite
     if (saveFile.meta.currentChallenger?.type === "WILD") {
-      const pos = getNextLocation(location, location.orientation);
       const dexId =
         internalDex[
           saveFile.meta.currentChallenger.team.at(0)?.name ?? "rattata"
         ].dexId;
-      all.push({
-        type: "POKEMON",
-        dexId,
-        conditionFunction: () => true,
-        id: "wild_encounter_sprite",
-        dialogue: ["A wild pokemon"],
-        ...pos,
-        orientation: getOppositeDirection(location.orientation),
-      });
+      if (dexId <= 815) {
+        const pos = getNextLocation(location, location.orientation);
+        all.push({
+          type: "POKEMON",
+          dexId,
+          conditionFunction: () => true,
+          id: "wild_encounter_sprite",
+          dialogue: ["A wild pokemon"],
+          ...pos,
+          orientation: getOppositeDirection(location.orientation),
+        });
+      }
     }
     //update
     if (statefulOccupants.length !== all.length) {
