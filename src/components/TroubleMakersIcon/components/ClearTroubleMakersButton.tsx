@@ -7,9 +7,13 @@ import {
 } from "react-icons/tb";
 import { battleSpriteSize } from "../../../constants/baseConstants";
 import { typeColors } from "../../../constants/typeColors";
+import {
+  getCurrentTroubleMakers,
+  removeTroubleMakers,
+} from "../../../functions/TimedEvent";
 import { MessageQueueContext } from "../../../hooks/useMessageQueue";
 import { SaveFileContext } from "../../../hooks/useSaveFile";
-import { EvilTeam } from "../../../interfaces/SaveFile";
+import { EvilTeam } from "../../../interfaces/TimedEvent";
 import "../TroubleMakersIcon.css";
 
 export const ClearTroubleMakersButton = ({
@@ -20,20 +24,16 @@ export const ClearTroubleMakersButton = ({
   const { addMessage } = useContext(MessageQueueContext);
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
+  const troubleMakers = getCurrentTroubleMakers(saveFile);
+
   const handleClear = () => {
     addMessage({
       message: `All ${
-        saveFile.troubleMakers?.affiliation ?? "rocket"
+        troubleMakers?.affiliation ?? "rocket"
       } Members defeated, Rangerlevel increased`,
     });
 
-    patchSaveFileReducer({
-      troubleMakers: undefined,
-      rangerLevel: (saveFile.rangerLevel ?? 0) + 1,
-      handledOccupants: saveFile.handledOccupants.filter(
-        (h) => !saveFile.troubleMakers?.trainers.some((t) => t.id === h.id),
-      ),
-    });
+    patchSaveFileReducer(removeTroubleMakers(saveFile, "DEFEATED"));
   };
   if (affiliation === "aqua") {
     return (

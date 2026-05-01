@@ -1,6 +1,6 @@
 import { useCallback, useContext } from "react";
-import { ONE_HOUR } from "../constants/baseConstants";
 import { ArrayHelpers } from "../functions/ArrayHelpers";
+import { getCurrentBlocker, startBlocker } from "../functions/TimedEvent";
 import { joinInventories } from "../interfaces/Inventory";
 import { pickupTable } from "../interfaces/Item";
 import { Occupant } from "../interfaces/Occupant";
@@ -13,11 +13,8 @@ export const useZigzagoonForagers = () => {
   const { addMultipleMessages, addMessage } = useContext(MessageQueueContext);
 
   const trade = useCallback(() => {
-    const now = new Date().getTime();
-
-    const ready = !saveFile.zigzagoonReadyAt || now > saveFile.zigzagoonReadyAt;
-
-    if (!ready) {
+    const zigzagoonBlocker = getCurrentBlocker(saveFile, "ZIGZAGOON");
+    if (zigzagoonBlocker) {
       addMessage({ message: "Zigzagoon seems to need a little break" });
       return;
     }
@@ -37,20 +34,17 @@ export const useZigzagoonForagers = () => {
       { message: "Zigzagoon runs off sniffing" },
       { message: `And returns with ${amount} ${foragedItem}` },
     ]);
+
+    const blockerChecked =
+      Math.random() > 0.75 ? startBlocker(saveFile, "ZIGZAGOON") : saveFile;
     patchSaveFileReducer({
+      ...blockerChecked,
       bag: joinInventories(saveFile.bag, {
         [foragedItem]: amount,
         "moomoo-milk": -1,
       }),
-      zigzagoonReadyAt: Math.random() > 0.75 ? now + ONE_HOUR / 4 : undefined,
     });
-  }, [
-    addMessage,
-    addMultipleMessages,
-    patchSaveFileReducer,
-    saveFile.bag,
-    saveFile.zigzagoonReadyAt,
-  ]);
+  }, [addMessage, addMultipleMessages, patchSaveFileReducer, saveFile]);
 
   return trade;
 };

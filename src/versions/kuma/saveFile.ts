@@ -41,6 +41,4 @@ export const startingSaveFileKuma: SaveFile = {
   farm: { plants: [] },
   campUpgrades: baseCampUpgrades,
   pokedex: emptyPokedex,
-  staticEncounters: [],
-  lostItems: [],
 };

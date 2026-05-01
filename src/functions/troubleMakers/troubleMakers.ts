@@ -1,17 +1,15 @@
 import { mapsRecord } from "../../constants/gameData/maps/mapsRecord";
 import { MapId } from "../../interfaces/mapIds";
 import { OwnedPokemon } from "../../interfaces/OwnedPokemon";
-import {
-  EvilTeam,
-  OverworldTrainerStump,
-  SaveFile,
-} from "../../interfaces/SaveFile";
+import { SaveFile } from "../../interfaces/SaveFile";
 import { SpriteEnum } from "../../interfaces/SpriteEnum";
+import { EvilTeam, OverworldTrainerStump } from "../../interfaces/TimedEvent";
 import { ArrayHelpers } from "../ArrayHelpers";
 import { getHighestXpOnTeam } from "../getHighestXpOnTeam";
 import { getRandomOrientation } from "../getNextClockwiseDirection";
 import { getRandomPosition } from "../getRandomPosition";
 import { makeChallengerPokemon } from "../makeChallengerPokemon";
+import { getCurrentTroubleMakers } from "../TimedEvent";
 import {
   aquaNamesFemale,
   aquaNamesMale,
@@ -211,14 +209,15 @@ export const getTroubleMakerTeam = (s: SaveFile): OwnedPokemon[] => {
     return [makeChallengerPokemon({})];
   }
   const rangerLevel = s.rangerLevel ?? 0;
+  const troubleMakers = getCurrentTroubleMakers(s);
   const pokemon = () => {
-    if (s.troubleMakers?.affiliation === "magma") {
+    if (troubleMakers?.affiliation === "magma") {
       return magmaPokemon;
     }
-    if (s.troubleMakers?.affiliation === "aqua") {
+    if (troubleMakers?.affiliation === "aqua") {
       return aquaPokemon;
     }
-    if (s.troubleMakers?.affiliation === "galactic") {
+    if (troubleMakers?.affiliation === "galactic") {
       return galacticPokemon;
     }
 

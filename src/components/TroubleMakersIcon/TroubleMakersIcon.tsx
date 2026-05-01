@@ -7,6 +7,7 @@ import {
 } from "react-icons/tb";
 import { battleSpriteSize } from "../../constants/baseConstants";
 import { typeColors } from "../../constants/typeColors";
+import { getCurrentTroubleMakers } from "../../functions/TimedEvent";
 import {
   areAllActiveTroubleMakersDefeated,
   troubleMakersRemaining,
@@ -20,18 +21,18 @@ export const TroubleMakersIcon = () => {
   const { addMessage } = useContext(MessageQueueContext);
   const { location } = useContext(LocationContext);
   const { saveFile } = useContext(SaveFileContext);
-
+  const troubleMakers = getCurrentTroubleMakers(saveFile);
   const remaining = useMemo(() => troubleMakersRemaining(saveFile), [saveFile]);
 
-  if (!saveFile.troubleMakers) {
+  if (!troubleMakers) {
     return <></>;
   }
 
-  const { affiliation } = saveFile.troubleMakers;
+  const { affiliation } = troubleMakers;
   if (areAllActiveTroubleMakersDefeated(saveFile)) {
     return <ClearTroubleMakersButton affiliation={affiliation} />;
   }
-  if (location.mapId !== saveFile.troubleMakers.route) {
+  if (location.mapId !== troubleMakers.mapId) {
     return <></>;
   }
 

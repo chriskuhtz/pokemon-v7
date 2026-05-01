@@ -1,25 +1,24 @@
 import { useCallback, useContext, useMemo } from "react";
-import { ONE_HOUR } from "../constants/baseConstants";
 import {
   mapDisplayNames,
   mapsRecord,
 } from "../constants/gameData/maps/mapsRecord";
-import { pokemonNames } from "../constants/pokemonNames";
 import { ArrayHelpers } from "../functions/ArrayHelpers";
 import { getRandomAvailableRoute } from "../functions/getRandomAvailableRoute";
 import { getRandomPosition } from "../functions/getRandomPosition";
-import { getRampagers, getRandomSwarmMon } from "../functions/internalDex";
+import { getRampagers } from "../functions/internalDex";
 import { replaceRouteName } from "../functions/replaceRouteName";
+import { getCurrentSwarm, startSwarm } from "../functions/TimedEvent";
 import { MapId } from "../interfaces/mapIds";
 import { SwarmType } from "../interfaces/Pokedex";
-import { PokemonSwarm } from "../interfaces/SaveFile";
+import { SwarmEvent } from "../interfaces/TimedEvent";
 import { GameDataContext } from "./useGameData";
 import { MessageQueueContext } from "./useMessageQueue";
 import { SaveFileContext } from "./useSaveFile";
 
 export type ScanMode = "WEAK" | "STRONG" | "DISTORTION" | "RAMPAGE";
 export const useSwarmRadar = (): {
-  activeSwarms: PokemonSwarm[];
+  activeSwarms: SwarmEvent[];
   scan: (mode: ScanMode) => void;
 } => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
@@ -27,28 +26,28 @@ export const useSwarmRadar = (): {
   const { internalDex } = useContext(GameDataContext);
 
   const addSwarmMessage = useCallback(
-    (s: PokemonSwarm) => {
-      if (s.type === "SPACE_DISTORTION") {
+    (s: SwarmEvent) => {
+      if (s.swarmType === "SPACE_DISTORTION") {
         addMessage({
           message: `The radar detects a space distortion at ${
-            mapDisplayNames[s.route]
+            mapDisplayNames[s.mapId]
           }`,
           needsNoConfirmation: true,
         });
       } else if (
-        s.type === "FUTURE_DISTORTION" ||
-        s.type === "PAST_DISTORTION"
+        s.swarmType === "FUTURE_DISTORTION" ||
+        s.swarmType === "PAST_DISTORTION"
       ) {
         addMessage({
           message: `The radar detects a time distortion at ${
-            mapDisplayNames[s.route]
+            mapDisplayNames[s.mapId]
           }`,
           needsNoConfirmation: true,
         });
       } else
         addMessage({
           message: `The radar detects swarms of ${s.pokemon} at ${
-            mapDisplayNames[s.route]
+            mapDisplayNames[s.mapId]
           }`,
           needsNoConfirmation: true,
         });
@@ -56,18 +55,16 @@ export const useSwarmRadar = (): {
     [addMessage],
   );
 
-  const activeSwarms: PokemonSwarm[] = useMemo(
+  const activeSwarms: SwarmEvent[] = useMemo(
     () =>
       [
-        saveFile.currentSwarm,
-        saveFile.currentStrongSwarm,
-        saveFile.currentDistortionSwarm,
+        getCurrentSwarm(saveFile, "WEAK"),
+        getCurrentSwarm(saveFile, "STRONG"),
+        getCurrentSwarm(saveFile, "PAST_DISTORTION"),
+        getCurrentSwarm(saveFile, "FUTURE_DISTORTION"),
+        getCurrentSwarm(saveFile, "SPACE_DISTORTION"),
       ].filter((s) => s !== undefined),
-    [
-      saveFile.currentDistortionSwarm,
-      saveFile.currentStrongSwarm,
-      saveFile.currentSwarm,
-    ],
+    [saveFile],
   );
 
   const handleRampage = useCallback(
@@ -103,7 +100,7 @@ export const useSwarmRadar = (): {
     (mode: ScanMode) => {
       const route = getRandomAvailableRoute(
         saveFile,
-        activeSwarms.map((a) => a.route),
+        activeSwarms.map((a) => a.mapId),
       );
 
       if (!route) {
@@ -116,18 +113,9 @@ export const useSwarmRadar = (): {
         return;
       }
 
-      const makeSwarm = (): PokemonSwarm => {
-        const now = new Date().getTime();
-
+      const swarmType = (): SwarmType => {
         if (mode === "STRONG") {
-          return {
-            type: "STRONG",
-            pokemon: getRandomSwarmMon("STRONG", internalDex),
-            xpMin: 20 * 20 * 20,
-            xpMax: 40 * 40 * 40,
-            leavesAt: now + ONE_HOUR,
-            route,
-          };
+          return "STRONG";
         }
         if (mode === "DISTORTION") {
           const options: SwarmType[] = ["FUTURE_DISTORTION", "PAST_DISTORTION"];
@@ -135,52 +123,20 @@ export const useSwarmRadar = (): {
           if (saveFile.campUpgrades["space distortion radar"]) {
             options.push("SPACE_DISTORTION");
           }
-          const randomOption = ArrayHelpers.getRandomEntry(options);
-          const mon = getRandomSwarmMon(randomOption, internalDex);
-
-          return {
-            pokemon: mon,
-            type: randomOption,
-            xpMin: 40 * 40 * 40,
-            xpMax: 60 * 60 * 60,
-            leavesAt: now + ONE_HOUR,
-            route,
-          };
+          return ArrayHelpers.getRandomEntry(options);
         }
-        return {
-          pokemon: getRandomSwarmMon("WEAK", internalDex),
-          type: "WEAK",
-          xpMin: 125,
-          xpMax: 1000,
-          leavesAt: now + ONE_HOUR,
-          route,
-        };
+
+        return "WEAK";
       };
 
-      let newSwarm = makeSwarm();
-      if (saveFile.settings?.randomSwarms) {
-        newSwarm = {
-          ...newSwarm,
-          pokemon: ArrayHelpers.getRandomEntry([...pokemonNames]),
-        };
+      const withSwarm = startSwarm(saveFile, swarmType(), route, internalDex);
+      const newSwarm = getCurrentSwarm(withSwarm, swarmType());
+      if (!newSwarm) {
+        return;
       }
       addSwarmMessage(newSwarm);
 
-      if (mode === "WEAK") {
-        patchSaveFileReducer({
-          currentSwarm: newSwarm,
-        });
-      }
-      if (mode === "STRONG") {
-        patchSaveFileReducer({
-          currentStrongSwarm: newSwarm,
-        });
-      }
-      if (mode === "DISTORTION") {
-        patchSaveFileReducer({
-          currentDistortionSwarm: newSwarm,
-        });
-      }
+      patchSaveFileReducer(withSwarm);
     },
     [
       activeSwarms,

@@ -47,7 +47,7 @@ export interface GameData {
     movesEditableInTeamOverview: boolean;
     lostItems: boolean;
     staticEncounters: boolean;
-    randomTrainers: boolean;
+    staticTrainers: boolean;
   };
   overworldActions: OverworldActions;
   carryingCapacity: {

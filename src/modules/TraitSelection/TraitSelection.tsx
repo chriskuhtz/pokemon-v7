@@ -101,6 +101,7 @@ export const TraitSelection = (): JSX.Element => {
           const loadOut = loadOuts[trait];
           return (
             <Card
+              key={trait}
               onClick={() => proceed(trait)}
               icon={undefined}
               content={

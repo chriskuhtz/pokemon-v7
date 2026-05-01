@@ -1,14 +1,17 @@
-import { SaveFile } from '../interfaces/SaveFile';
+import { SaveFile } from "../interfaces/SaveFile";
+import { getCurrentTroubleMakers } from "./TimedEvent";
 export const troubleMakersRemaining = (saveFile: SaveFile): number => {
-	if (!saveFile.troubleMakers) {
-		return 0;
-	}
-	return saveFile.troubleMakers.trainers.filter(
-		(t) => !saveFile.handledOccupants.some((h) => h.id == t.id)
-	).length;
+  const troubleMakers = getCurrentTroubleMakers(saveFile);
+  if (!troubleMakers) {
+    return 0;
+  }
+  return troubleMakers.trainers.filter(
+    (t) => !saveFile.handledOccupants.some((h) => h.id == t.id),
+  ).length;
 };
 export const areAllActiveTroubleMakersDefeated = (
-	saveFile: SaveFile
+  saveFile: SaveFile,
 ): boolean => {
-	return !!(saveFile.troubleMakers && troubleMakersRemaining(saveFile) === 0);
+  const troubleMakers = getCurrentTroubleMakers(saveFile);
+  return !!(troubleMakers && troubleMakersRemaining(saveFile) === 0);
 };

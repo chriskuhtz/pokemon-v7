@@ -1,12 +1,12 @@
 import { useCallback, useContext } from "react";
 import { SpriteIcon } from "../components/SpriteIcon/SpriteIcon";
-import { ONE_HOUR } from "../constants/baseConstants";
 import { mapDisplayNames } from "../constants/gameData/maps/mapsRecord";
-import { ArrayHelpers } from "../functions/ArrayHelpers";
-import { getRandomAvailableRoute } from "../functions/getRandomAvailableRoute";
-import { makeTroubleMakers } from "../functions/troubleMakers/troubleMakers";
-import { EvilTeam, evilTeams } from "../interfaces/SaveFile";
+import {
+  createTroubleMakers,
+  getCurrentTroubleMakers,
+} from "../functions/TimedEvent";
 import { SpriteEnum } from "../interfaces/SpriteEnum";
+import { EvilTeam } from "../interfaces/TimedEvent";
 import { MessageQueueContext } from "./useMessageQueue";
 import { SaveFileContext } from "./useSaveFile";
 
@@ -29,43 +29,30 @@ export const useRangerRadio = () => {
       return SpriteEnum.rocketMale;
     };
 
-    if (saveFile.troubleMakers) {
+    const troubleMakers = getCurrentTroubleMakers(saveFile);
+
+    if (troubleMakers) {
       addMessage({
-        icon: (
-          <SpriteIcon sprite={sprite(saveFile.troubleMakers.affiliation)} />
-        ),
+        icon: <SpriteIcon sprite={sprite(troubleMakers.affiliation)} />,
         message: `There are reports of team ${
-          saveFile.troubleMakers.affiliation
-        } activity at ${mapDisplayNames[saveFile.troubleMakers.route]}`,
+          troubleMakers.affiliation
+        } activity at ${mapDisplayNames[troubleMakers.mapId]}`,
         needsNoConfirmation: true,
       });
     } else {
-      const route = getRandomAvailableRoute(saveFile, []);
+      const withTroubleMakers = createTroubleMakers(saveFile);
+      patchSaveFileReducer(withTroubleMakers);
 
-      if (!route) {
+      const newTroubleMakers = getCurrentTroubleMakers(withTroubleMakers);
+
+      if (!newTroubleMakers) {
         return;
       }
 
-      const randomAffiliation = ArrayHelpers.getRandomEntry([...evilTeams]);
-      const op = makeTroubleMakers(
-        route,
-        saveFile.campUpgrades["warden certification"],
-        randomAffiliation,
-      );
-
       addMessage({
-        icon: <SpriteIcon sprite={sprite(randomAffiliation)} />,
-        message: `There are reports of team ${randomAffiliation} activity at ${mapDisplayNames[route]}`,
+        icon: <SpriteIcon sprite={sprite(newTroubleMakers.affiliation)} />,
+        message: `There are reports of team ${newTroubleMakers.affiliation} activity at ${mapDisplayNames[newTroubleMakers.mapId]}`,
         needsNoConfirmation: true,
-      });
-      const now = new Date().getTime();
-      patchSaveFileReducer({
-        troubleMakers: {
-          route,
-          trainers: op,
-          affiliation: randomAffiliation,
-          leavesAt: now + ONE_HOUR * 3,
-        },
       });
     }
   }, [addMessage, patchSaveFileReducer, saveFile]);

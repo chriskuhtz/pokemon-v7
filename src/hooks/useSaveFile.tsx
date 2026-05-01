@@ -9,14 +9,12 @@ import { MoveName } from "../constants/movesCheckList";
 
 import { emptyPokedex } from "../constants/gameData/gameData";
 import { PokemonName } from "../constants/pokemonNames";
-import { addLostItemToSaveFile } from "../functions/addLostItemToSaveFile";
 import { addPokemonToDex } from "../functions/addPokemonToDex";
 import { applyHappinessFromWalking } from "../functions/applyHappinessFromWalking";
 import { applyItemToPokemon } from "../functions/applyItemToPokemon";
 import { fullyHealPokemon } from "../functions/fullyHealPokemon";
 import { TimeOfDay } from "../functions/getTimeOfDay";
-import { addStaticEncounterToSaveFile } from "../functions/StaticEncounter";
-import { addStaticTrainerToSaveFile } from "../functions/StaticTrainer";
+import { cleaUpTimedEvents, refillTimedEvents } from "../functions/TimedEvent";
 import { updateItemFunction } from "../functions/updateItemFunction";
 import { EmptyInventory, joinInventories } from "../interfaces/Inventory";
 import { ItemType } from "../interfaces/Item";
@@ -159,77 +157,10 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
       if ((update.catchStreak?.streak ?? 0) > (update.longestStreak ?? 0)) {
         update.longestStreak = update.catchStreak?.streak;
       }
-      //update swarms
-      if (update.currentSwarm && now > update.currentSwarm?.leavesAt) {
-        update.currentSwarm = undefined;
-      }
-      if (
-        update.currentStrongSwarm &&
-        now > update.currentStrongSwarm?.leavesAt
-      ) {
-        update.currentStrongSwarm = undefined;
-      }
-      if (
-        update.currentDistortionSwarm &&
-        now > update.currentDistortionSwarm?.leavesAt
-      ) {
-        update.currentDistortionSwarm = undefined;
-      }
-      //update troublemakers
-      if (
-        !update.troubleMakers?.leavesAt ||
-        (update.troubleMakers?.leavesAt && now > update.troubleMakers?.leavesAt)
-      ) {
-        update.troubleMakers = undefined;
-      }
-      //update lostItems
-      if (gameData.features.lostItems) {
-        update.lostItems?.forEach((lostItem) => {
-          if (lostItem.resetAt < now) {
-            update.handledOccupants = update.handledOccupants.filter(
-              (h) => h.id !== lostItem.id,
-            );
-          }
-        });
-        update.lostItems = [...(update.lostItems ?? [])].filter(
-          (lostItem) => lostItem.resetAt > now,
-        );
-        if (update.lostItems.length < 2) {
-          update = addLostItemToSaveFile(update);
-        }
-      }
-      //update static Encounters
-      if (gameData.features.staticEncounters && update.pokemon.length > 0) {
-        update.staticEncounters?.forEach((staticEncounter) => {
-          if (staticEncounter.resetAt < now) {
-            update.handledOccupants = update.handledOccupants.filter(
-              (h) => h.id !== staticEncounter.id,
-            );
-          }
-        });
-        update.staticEncounters = [...(update.staticEncounters ?? [])].filter(
-          (staticEncounter) => staticEncounter.resetAt > now,
-        );
-        if (update.staticEncounters.length < 2) {
-          update = addStaticEncounterToSaveFile(update, gameData.internalDex);
-        }
-      }
-      //update random trainers
-      if (gameData.features.randomTrainers && update.pokemon.length > 0) {
-        update.randomTrainers?.forEach((randomTrainer) => {
-          if (randomTrainer.resetAt < now) {
-            update.handledOccupants = update.handledOccupants.filter(
-              (h) => h.id !== randomTrainer.id,
-            );
-          }
-        });
-        update.randomTrainers = [...(update.randomTrainers ?? [])].filter(
-          (trainer) => trainer.resetAt > now,
-        );
-        if (update.randomTrainers.length < 2) {
-          update = addStaticTrainerToSaveFile(update);
-        }
-      }
+      //remove expired TimedEvents
+      update = cleaUpTimedEvents(update);
+      //refill TimedEvents
+      update = refillTimedEvents(update, gameData);
 
       s({
         ...update,

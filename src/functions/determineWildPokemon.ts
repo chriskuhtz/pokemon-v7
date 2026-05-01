@@ -10,8 +10,9 @@ import { InternalDex } from "../interfaces/GameData";
 import { MapId } from "../interfaces/mapIds";
 import { getRandomNature } from "../interfaces/Natures";
 import { OwnedPokemon } from "../interfaces/OwnedPokemon";
-import { CatchStreak, PokemonSwarm, SaveFile } from "../interfaces/SaveFile";
+import { CatchStreak, SaveFile } from "../interfaces/SaveFile";
 import { StatObject } from "../interfaces/StatObject";
+import { SwarmEvent } from "../interfaces/TimedEvent";
 import { ArrayHelpers } from "./ArrayHelpers";
 import { getMiddleOfThree } from "./getMiddleOfThree";
 import { getTimeOfDay } from "./getTimeOfDay";
@@ -37,9 +38,9 @@ export const determineWildPokemon = ({
   shinyFactor: number;
   lure?: "lure" | "super-lure" | "max-lure";
   catchStreak?: CatchStreak;
-  currentSwarm?: PokemonSwarm;
-  currentStrongSwarm?: PokemonSwarm;
-  currentDistortionSwarm?: PokemonSwarm;
+  currentSwarm?: SwarmEvent;
+  currentStrongSwarm?: SwarmEvent;
+  currentDistortionSwarm?: SwarmEvent;
   internalDex: InternalDex;
   maxBattleSize: number;
 }): { team: OwnedPokemon[]; battleTeamConfig: BattleTeamConfig } => {
@@ -74,18 +75,18 @@ export const determineWildPokemon = ({
   };
   let encounter: OwnedPokemon[] = [];
 
-  const checkSwarm = (): PokemonSwarm | undefined => {
+  const checkSwarm = (): SwarmEvent | undefined => {
     if (waterEncounter) {
       return;
     }
 
-    if (currentSwarm?.route === mapId) {
+    if (currentSwarm?.mapId === mapId) {
       return currentSwarm;
     }
-    if (currentStrongSwarm?.route === mapId) {
+    if (currentStrongSwarm?.mapId === mapId) {
       return currentStrongSwarm;
     }
-    if (currentDistortionSwarm?.route === mapId) {
+    if (currentDistortionSwarm?.mapId === mapId) {
       return currentDistortionSwarm;
     }
   };

@@ -1,6 +1,6 @@
 import { useCallback, useContext } from "react";
-import { ONE_HOUR } from "../constants/baseConstants";
 import { ArrayHelpers } from "../functions/ArrayHelpers";
+import { getCurrentBlocker, startBlocker } from "../functions/TimedEvent";
 import { joinInventories } from "../interfaces/Inventory";
 import { undergroundTable } from "../interfaces/Item";
 import { Occupant } from "../interfaces/Occupant";
@@ -20,9 +20,9 @@ export const useDugtrioExplorers = () => {
       ]);
       return;
     }
-    const now = new Date().getTime();
+    const dugtrioBlocker = getCurrentBlocker(saveFile, "DUGTRIO");
 
-    if (!saveFile.dugtrioReadyAt || now > saveFile.dugtrioReadyAt) {
+    if (!dugtrioBlocker) {
       const foragedItem = ArrayHelpers.getRandomEntry(undergroundTable);
       const amount = 1;
       addMultipleMessages([
@@ -31,23 +31,19 @@ export const useDugtrioExplorers = () => {
         { message: "Dugtrio vanishes underground" },
         { message: `And returns with ${amount} ${foragedItem}` },
       ]);
+      const blockerChecked =
+        Math.random() > 0.8 ? startBlocker(saveFile, "DUGTRIO") : saveFile;
       patchSaveFileReducer({
+        ...blockerChecked,
         bag: joinInventories(saveFile.bag, {
           [foragedItem]: amount,
           honey: -3,
         }),
-        dugtrioReadyAt: Math.random() > 0.8 ? now + ONE_HOUR / 4 : undefined,
       });
     } else {
       addMessage({ message: "Dugtrio seems to need a little break" });
     }
-  }, [
-    addMessage,
-    addMultipleMessages,
-    patchSaveFileReducer,
-    saveFile.dugtrioReadyAt,
-    saveFile.bag,
-  ]);
+  }, [saveFile, addMultipleMessages, patchSaveFileReducer, addMessage]);
 
   return trade;
 };
