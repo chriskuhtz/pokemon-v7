@@ -1,4 +1,5 @@
 import { useContext, useMemo } from "react";
+import { battleSpriteSize } from "../../constants/baseConstants";
 import { percentageBasedColor } from "../../constants/typeColors";
 import { getStats } from "../../functions/getStats";
 import { isOwnedPokemonKO } from "../../functions/isKo";
@@ -56,20 +57,47 @@ const TeamMemberInOverview = ({
 
   const damage = pokemon.damage;
 
+  const percentage = 1 - damage / max;
+
+  const color = percentageBasedColor(percentage).color;
+
   return (
-    <div
-      style={{
-        border: "4px solid",
-        borderColor: percentageBasedColor(1 - damage / max).color,
-        borderRadius: 9000,
-      }}
-    >
-      <PokemonSprite
-        className={readyToEvolve ? "readyToEvolve" : undefined}
-        onClick={onClick}
-        name={pokemon.name}
-        config={{ shiny: pokemon.shiny, grayscale: isOwnedPokemonKO(pokemon) }}
-      />
+    <div style={{ position: "relative" }}>
+      <div
+        style={{
+          borderRadius: 9000,
+          width: battleSpriteSize,
+          maxHeight: battleSpriteSize,
+          height: battleSpriteSize,
+          minHeight: battleSpriteSize,
+        }}
+      >
+        <PokemonSprite
+          className={readyToEvolve ? "readyToEvolve" : undefined}
+          onClick={onClick}
+          name={pokemon.name}
+          config={{
+            shiny: pokemon.shiny,
+            grayscale: isOwnedPokemonKO(pokemon),
+          }}
+        />
+      </div>
+      <div
+        style={{
+          zIndex: -1,
+          borderBottomRightRadius: 9000,
+          borderBottomLeftRadius: 9000,
+          borderTopLeftRadius: percentage > 0.8 ? 9000 : 0,
+          borderTopRightRadius: percentage > 0.8 ? 9000 : 0,
+          bottom: 0,
+          backgroundColor: color,
+          position: "absolute",
+          width: battleSpriteSize,
+          maxHeight: percentage * battleSpriteSize,
+          height: percentage * battleSpriteSize,
+          minHeight: percentage * battleSpriteSize,
+        }}
+      ></div>
     </div>
   );
 };

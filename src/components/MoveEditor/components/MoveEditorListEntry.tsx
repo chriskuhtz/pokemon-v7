@@ -70,6 +70,7 @@ export const MoveEditorListEntry = ({
               {!available && (
                 <strong>{`${m.move.name} available at Lvl ${m.version_group_details[0].level_learned_at}`}</strong>
               )}
+              <br />
               {!unlockable && <strong>{message}</strong>}
 
               <strong>{missingPayment && ` : ${payment} required`}</strong>

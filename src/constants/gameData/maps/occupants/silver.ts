@@ -23,7 +23,7 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
     heldItemName: "sitrus-berry",
     firstMove: { name: "bulk-up", usedPP: 0 },
     secondMove: { name: "bite", usedPP: 0 },
-    thirdMove: { name: "ice-punch", usedPP: 0 },
+    thirdMove: { name: "water-gun", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
       attack: 252,
@@ -74,8 +74,8 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
     fixedAbility: true,
     happiness: 255,
     heldItemName: "sharp-beak",
-    firstMove: { name: "aerial-ace", usedPP: 0 },
-    secondMove: { name: "quick-attack", usedPP: 0 },
+    firstMove: { name: "peck", usedPP: 0 },
+    secondMove: { name: "hypnosis", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
       attack: 252,

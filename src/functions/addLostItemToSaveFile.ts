@@ -26,7 +26,7 @@ export const addLostItemToSaveFile = (s: SaveFile): SaveFile => {
     return updated;
   }
   const item = ArrayHelpers.getRandomEntry(lostItems);
-  const amount = ArrayHelpers.getRandomEntry([1, 1, 1, 1, 2, 2, 2, 3, 3, 4]);
+  const amount = 1;
   const { x, y } = getRandomPosition(mapsRecord[route]);
   const now = new Date().getTime();
   const lostItem: LostItem = {

@@ -95,21 +95,23 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
                 <div>
                   <h3>{replaceRouteName(name)}</h3>
                   {status === "FULFILLED" && <h4>ready to collect</h4>}
-                  <h5 style={{ display: "flex", alignItems: "center" }}>
-                    Reward:
-                    {Object.entries(
-                      getRewardItemsForQuest(name as KumaQuestName),
-                    ).map(([item, amount]) => (
-                      <React.Fragment key={item}>
-                        {amount} x <ItemSprite item={item as ItemType} />
-                      </React.Fragment>
-                    ))}
-                    {quest.rewardPokemon && (
-                      <PokemonSprite
-                        name={quest.rewardPokemon.name}
-                        config={{ shiny: quest.rewardPokemon.shiny }}
-                      />
-                    )}
+                  <h5>
+                    <Stack mode="row" flexWrap="wrap">
+                      Reward:
+                      {Object.entries(
+                        getRewardItemsForQuest(name as KumaQuestName),
+                      ).map(([item, amount]) => (
+                        <React.Fragment key={item}>
+                          {amount} x <ItemSprite item={item as ItemType} />
+                        </React.Fragment>
+                      ))}
+                      {quest.rewardPokemon && (
+                        <PokemonSprite
+                          name={quest.rewardPokemon.name}
+                          config={{ shiny: quest.rewardPokemon.shiny }}
+                        />
+                      )}
+                    </Stack>
                   </h5>
                   <h5>Research Points: {quest.researchPoints}</h5>
                   {quest.catchBoosts && (

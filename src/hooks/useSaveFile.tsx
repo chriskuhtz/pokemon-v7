@@ -183,7 +183,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
     update.lostItems = [...(update.lostItems ?? [])].filter(
       (lostItem) => lostItem.resetAt > now,
     );
-    if (update.lostItems.length < 3) {
+    if (update.lostItems.length < 2) {
       update = addLostItemToSaveFile(update);
     }
 

@@ -280,15 +280,18 @@ export const handleDamageAttack = ({
     damage !== 0 &&
     updatedAttacker.damage !== 0
   ) {
-    addMessage({
-      message: `${updatedAttacker.name} healed itself with shell bell`,
-    });
+    const restored = Math.floor(damage / 8);
 
-    const restored = getMiddleOfThree([Math.floor(damage / 8), 1, 1]);
-    updatedAttacker = {
-      ...updatedAttacker,
-      damage: getMiddleOfThree([0, 0, updatedAttacker.damage - restored]),
-    };
+    if (restored > 0) {
+      addMessage({
+        message: `${updatedAttacker.name} healed itself with shell bell`,
+      });
+
+      updatedAttacker = {
+        ...updatedAttacker,
+        damage: Math.max(0, updatedAttacker.damage - restored),
+      };
+    }
   }
   //anger shell
   if (
