@@ -13,8 +13,12 @@ export const useBerryTree = () => {
 
   return useCallback(
     (tree: BerryTree) => {
-      const amount = getMiddleOfThree([1, Math.floor(Math.random() * 5), 5]);
+      const isGardener = saveFile.trait === "gardener";
+      const amount =
+        getMiddleOfThree([1, Math.floor(Math.random() * 5), 5]) +
+        (isGardener ? 1 : 0);
       const now = new Date().getTime();
+      const time = now + ONE_HOUR * (isGardener ? 1 : 2);
       addMessage({
         icon: <img src={getItemUrl(tree.berry)} height={battleSpriteSize} />,
         message: `Harvested ${amount} ${tree.berry}`,
@@ -23,10 +27,16 @@ export const useBerryTree = () => {
         bag: joinInventories(saveFile.bag, { [tree.berry]: amount }),
         handledOccupants: [
           ...saveFile.handledOccupants,
-          { id: tree.id, resetAt: now + ONE_HOUR * 2 },
+          { id: tree.id, resetAt: time },
         ],
       });
     },
-    [addMessage, patchSaveFileReducer, saveFile.bag, saveFile.handledOccupants],
+    [
+      addMessage,
+      patchSaveFileReducer,
+      saveFile.bag,
+      saveFile.handledOccupants,
+      saveFile.trait,
+    ],
   );
 };

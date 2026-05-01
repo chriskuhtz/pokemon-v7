@@ -1,77 +1,84 @@
-import { useCallback, useContext } from 'react';
-import { v4 } from 'uuid';
-import { getRewardItemsForQuest } from '../functions/getRewardForQuest';
-import { getTeamSize } from '../functions/getTeamSize';
+import { useCallback, useContext } from "react";
+import { v4 } from "uuid";
+import { getRewardItemsForQuest } from "../functions/getRewardForQuest";
+import { getTeamSize } from "../functions/getTeamSize";
 import {
-	EmptyCatchBoosts,
-	joinCatchBoosts,
-} from '../functions/joinCatchBoosts';
-import { joinInventories } from '../interfaces/Inventory';
-import { CatchBoosts } from '../interfaces/SaveFile';
-import { KumaQuestName, KumaQuestsRecord } from '../versions/kuma/questsRecord';
-import { GameDataContext } from './useGameData';
-import { MessageQueueContext } from './useMessageQueue';
-import { SaveFileContext } from './useSaveFile';
+  EmptyCatchBoosts,
+  joinCatchBoosts,
+} from "../functions/joinCatchBoosts";
+import { joinInventories } from "../interfaces/Inventory";
+import { researchBoni } from "../interfaces/Quest";
+import { CatchBoosts } from "../interfaces/SaveFile";
+import { KumaQuestName, KumaQuestsRecord } from "../versions/kuma/questsRecord";
+import { GameDataContext } from "./useGameData";
+import { MessageQueueContext } from "./useMessageQueue";
+import { SaveFileContext } from "./useSaveFile";
 
 export const useFulfillQuest = () => {
-	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
-	const gameData = useContext(GameDataContext);
-	const { addMessage } = useContext(MessageQueueContext);
-	return useCallback(
-		(q: KumaQuestName) => {
-			const quest = KumaQuestsRecord[q];
+  const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+  const gameData = useContext(GameDataContext);
+  const { addMessage } = useContext(MessageQueueContext);
+  return useCallback(
+    (q: KumaQuestName) => {
+      const quest = KumaQuestsRecord[q];
 
-			const reward = getRewardItemsForQuest(q);
-			const updatedInventory = joinInventories(saveFile.bag, reward);
+      const reward = getRewardItemsForQuest(q);
+      const updatedInventory = joinInventories(saveFile.bag, reward);
 
-			const pokemon = quest.rewardPokemon
-				? [
-						...saveFile.pokemon,
-						{
-							...quest.rewardPokemon,
-							id: v4(),
-							ownerId: saveFile.playerId,
-							onTeam:
-								saveFile.pokemon.filter((p) => p.onTeam).length <
-								getTeamSize(saveFile, gameData),
-						},
-				  ]
-				: saveFile.pokemon;
+      const pokemon = quest.rewardPokemon
+        ? [
+            ...saveFile.pokemon,
+            {
+              ...quest.rewardPokemon,
+              id: v4(),
+              ownerId: saveFile.playerId,
+              onTeam:
+                saveFile.pokemon.filter((p) => p.onTeam).length <
+                getTeamSize(saveFile, gameData),
+            },
+          ]
+        : saveFile.pokemon;
 
-			const existingCatchBoosts: CatchBoosts =
-				saveFile.catchBoosts ?? EmptyCatchBoosts;
+      const existingCatchBoosts: CatchBoosts =
+        saveFile.catchBoosts ?? EmptyCatchBoosts;
 
-			const updatedCampUpgrades = { ...saveFile.campUpgrades };
+      const updatedCampUpgrades = { ...saveFile.campUpgrades };
 
-			if (quest.campUpgrade) {
-				updatedCampUpgrades[quest.campUpgrade] = true;
-			}
+      if (quest.campUpgrade) {
+        updatedCampUpgrades[quest.campUpgrade] = true;
+      }
 
-			const rewardStrings: string[] = [
-				`${quest.researchPoints} Research Points`,
-				quest.rangerLevels ? `${quest.rangerLevels} Ranger Levels` : undefined,
-				...Object.entries(reward).map(([item, amount]) => `${amount} ${item}`),
-				quest.rewardPokemon ? `a ${quest.rewardPokemon.name}` : undefined,
-				quest.campUpgrade ? quest.campUpgrade : undefined,
-				quest.badge ? quest.badge : undefined,
-			].filter((s) => s !== undefined);
+      const earnedPoints =
+        saveFile.trait && researchBoni[saveFile.trait]
+          ? Math.floor(quest.researchPoints * 1.3)
+          : quest.researchPoints;
 
-			addMessage({
-				message: `Received ${rewardStrings.join(' + ')} `,
-			});
-			patchSaveFileReducer({
-				bag: updatedInventory,
-				quests: { ...saveFile.quests, [q]: 'COLLECTED' },
-				researchPoints: saveFile.researchPoints + quest.researchPoints,
-				rangerLevel: (saveFile.rangerLevel ?? 0) + (quest.rangerLevels ?? 0),
-				catchBoosts: joinCatchBoosts(
-					existingCatchBoosts,
-					quest.catchBoosts ?? {}
-				),
-				campUpgrades: updatedCampUpgrades,
-				pokemon,
-			});
-		},
-		[addMessage, gameData, patchSaveFileReducer, saveFile]
-	);
+      const rewardStrings: string[] = [
+        `${earnedPoints} Research Points`,
+        quest.rangerLevels ? `${quest.rangerLevels} Ranger Levels` : undefined,
+        ...Object.entries(reward).map(([item, amount]) => `${amount} ${item}`),
+        quest.rewardPokemon ? `a ${quest.rewardPokemon.name}` : undefined,
+        quest.campUpgrade ? quest.campUpgrade : undefined,
+        quest.badge ? quest.badge : undefined,
+      ].filter((s) => s !== undefined);
+
+      addMessage({
+        message: `Received ${rewardStrings.join(" + ")} `,
+      });
+
+      patchSaveFileReducer({
+        bag: updatedInventory,
+        quests: { ...saveFile.quests, [q]: "COLLECTED" },
+        researchPoints: saveFile.researchPoints + earnedPoints,
+        rangerLevel: (saveFile.rangerLevel ?? 0) + (quest.rangerLevels ?? 0),
+        catchBoosts: joinCatchBoosts(
+          existingCatchBoosts,
+          quest.catchBoosts ?? {},
+        ),
+        campUpgrades: updatedCampUpgrades,
+        pokemon,
+      });
+    },
+    [addMessage, gameData, patchSaveFileReducer, saveFile],
+  );
 };

@@ -72,13 +72,29 @@ export const useLeaveBattle = () => {
       reset();
       return;
     } else {
-      //key items dont get lost
-      const bagWithOnlyKeyItems = joinInventories(
-        EmptyInventory,
-        Object.fromEntries(
-          Object.entries(saveFile.bag).filter(([item]) => isKeyItem(item)),
-        ),
-      );
+      let updatedBag: Inventory = saveFile.bag;
+
+      if (location.mapId === "camp") {
+        updatedBag = saveFile.bag;
+      } else if (saveFile.trait === "explorer") {
+        //key items dont get lost, explorers dont lose all their items
+        updatedBag = joinInventories(
+          EmptyInventory,
+          Object.fromEntries(
+            Object.entries(saveFile.bag).filter(
+              ([item]) => isKeyItem(item) || Math.random() > 0.5,
+            ),
+          ),
+        );
+      } else {
+        //key items dont get lost
+        updatedBag = joinInventories(
+          EmptyInventory,
+          Object.fromEntries(
+            Object.entries(saveFile.bag).filter(([item]) => isKeyItem(item)),
+          ),
+        );
+      }
 
       resetLocation();
       patchSaveFileReducer({
@@ -89,7 +105,7 @@ export const useLeaveBattle = () => {
           }
           return p;
         }),
-        bag: location.mapId === "camp" ? saveFile.bag : bagWithOnlyKeyItems,
+        bag: updatedBag,
       });
       return;
     }

@@ -22,11 +22,13 @@ export const gameData: GameData = {
     pokemonStorageSystem: false,
     lostItems: false,
     staticEncounters: false,
+    randomTrainers: false,
   },
   losingMessages: {
     training: "Young Tom was never seen again ...",
     wild: "Young Tom was never seen again ...",
     reset: "Young Tom was never seen again ...",
+    explorer: "Young Tom was never seen again ...",
   },
   overworldActions: {
     bushCutting: {

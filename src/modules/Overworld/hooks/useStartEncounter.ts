@@ -22,8 +22,14 @@ export const useStartEncounter = () => {
   return useCallback(
     (stepsTaken: number, type: "WATER" | "GROUND") => {
       const map = mapsRecord[location.mapId];
-      const shinyFactor = saveFile.bag["shiny-charm"] > 1 ? 4 : 1;
+      let shinyFactor = 1;
 
+      if (saveFile.bag["shiny-charm"] > 1) {
+        shinyFactor *= 4;
+      }
+      if (saveFile.trait === "collector") {
+        shinyFactor *= 2;
+      }
       const playerTeam = saveFile.pokemon.filter((p) => p.onTeam);
       const healthyPlayerTeam = playerTeam.filter(
         (p) => !isOwnedPokemonKO(p),
@@ -115,6 +121,7 @@ export const useStartEncounter = () => {
       saveFile.pokemon,
       saveFile.quests,
       saveFile.settings?.randomEncounters,
+      saveFile.trait,
     ],
   );
 };

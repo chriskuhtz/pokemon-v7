@@ -587,11 +587,19 @@ export const BattleField = ({
       console.log("effect battlelost");
 
       const message = () => {
-        if (location.mapId === "camp" || location.mapId === "challengeField") {
+        if (
+          location.mapId === "camp" ||
+          location.mapId === "challengeField" ||
+          location.mapId === "randomField"
+        ) {
           return losingMessages.training;
         }
         if (rogueLike) {
           return losingMessages.reset;
+        }
+
+        if (saveFile.trait === "explorer") {
+          return losingMessages.explorer;
         }
 
         return losingMessages.wild;
@@ -624,10 +632,14 @@ export const BattleField = ({
           return Math.round(gainedXp / team.filter((t) => !isKO(t)).length);
         }
 
-        return Math.round(
+        const baseAmount = Math.round(
           gainedXp /
             team.filter((t) => t.participatedInBattle && !isKO(t)).length,
         );
+        if (saveFile.trait === "competitor") {
+          return Math.floor(baseAmount * 1.2);
+        }
+        return baseAmount;
       };
 
       const getsRewards = (p: BattlePokemon) =>
@@ -715,10 +727,12 @@ export const BattleField = ({
     latestMessage,
     leaveWithCurrentData,
     location.mapId,
+    losingMessages.explorer,
     losingMessages.reset,
     losingMessages.training,
     losingMessages.wild,
     pokemon,
+    saveFile.trait,
     scatteredCoins,
     settings,
     team,

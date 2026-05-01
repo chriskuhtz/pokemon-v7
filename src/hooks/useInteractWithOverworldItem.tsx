@@ -30,7 +30,18 @@ export const useInteractWithOverworldItem = () => {
       const occ = saveFile.settings?.randomOverworldItems
         ? { ...data, item: getRandomItem() }
         : data;
-      const { item, amount } = occ;
+      const { item, amount: rawAmount } = occ;
+
+      let amount = rawAmount;
+      const random = Math.random();
+      //33% chance to find 1 more item
+      if (saveFile.trait === "explorer" && random > 0.66) {
+        amount += 1;
+      }
+      //3% chance to find 2 more items
+      if (saveFile.trait === "explorer" && random > 0.97) {
+        amount += 1;
+      }
       let newInventory = { ...saveFile.bag };
       newInventory = joinInventories(newInventory, { [item]: amount });
 

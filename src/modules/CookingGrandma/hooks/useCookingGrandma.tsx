@@ -196,7 +196,11 @@ export const useCookingGrandma = (): {
         recipe.ingredients.map((ing) => [ing, -1]),
       );
 
-      const chance = Math.random() + (saveFile.cookingSkill ?? 0) / 100;
+      let chance = Math.random() + (saveFile.cookingSkill ?? 0) / 100;
+
+      if (saveFile.trait === "chef") {
+        chance *= 1.1;
+      }
 
       const failed = () => {
         if (recipe.difficulty === "EASY" && chance < 0.1) {
@@ -216,14 +220,16 @@ export const useCookingGrandma = (): {
           bag: joinInventories(saveFile.bag, usedIngredients),
         });
       } else {
+        const resultAmount =
+          saveFile.trait === "chef" && Math.random() > 0.66 ? 2 : 1;
         addMultipleMessages([
           { message: "Excellent work, chef" },
-          { message: `received 1 ${recipe.result}` },
+          { message: `received ${resultAmount} ${recipe.result}` },
         ]);
         patchSaveFileReducer({
           bag: joinInventories(saveFile.bag, {
             ...usedIngredients,
-            [recipe.result]: 1,
+            [recipe.result]: resultAmount,
           }),
           cookingSkill: (saveFile.cookingSkill ?? 0) + 1,
           mileStones: {
@@ -251,6 +257,7 @@ export const useCookingGrandma = (): {
       saveFile.bag,
       saveFile.cookingSkill,
       saveFile.mileStones,
+      saveFile.trait,
     ],
   );
 

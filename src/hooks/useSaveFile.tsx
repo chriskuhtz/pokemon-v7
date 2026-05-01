@@ -16,6 +16,7 @@ import { applyItemToPokemon } from "../functions/applyItemToPokemon";
 import { fullyHealPokemon } from "../functions/fullyHealPokemon";
 import { TimeOfDay } from "../functions/getTimeOfDay";
 import { addStaticEncounterToSaveFile } from "../functions/StaticEncounter";
+import { addStaticTrainerToSaveFile } from "../functions/StaticTrainer";
 import { updateItemFunction } from "../functions/updateItemFunction";
 import { EmptyInventory, joinInventories } from "../interfaces/Inventory";
 import { ItemType } from "../interfaces/Item";
@@ -122,6 +123,11 @@ const migrateSavefile = (input: SaveFile) => {
     updatedInput.storage["peak-ticket"] = 1;
   }
 
+  //migrate in region and trait
+  if (!updatedInput.startingRegion) {
+    updatedInput.startingRegion = "kanto";
+  }
+
   return updatedInput;
 };
 
@@ -190,13 +196,22 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
           update = addLostItemToSaveFile(update);
         }
       }
+      //update static Encounters
       if (gameData.features.staticEncounters) {
-        //update static Encounters
         update.staticEncounters = [...(update.staticEncounters ?? [])].filter(
           (staticEncounter) => staticEncounter.resetAt > now,
         );
         if (update.staticEncounters.length < 2) {
           update = addStaticEncounterToSaveFile(update, gameData.internalDex);
+        }
+      }
+      //update random trainers
+      if (gameData.features.randomTrainers) {
+        update.randomTrainers = [...(update.randomTrainers ?? [])].filter(
+          (trainer) => trainer.resetAt > now,
+        );
+        if (update.randomTrainers.length < 2) {
+          update = addStaticTrainerToSaveFile(update);
         }
       }
 

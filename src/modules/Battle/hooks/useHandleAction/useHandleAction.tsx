@@ -41,7 +41,7 @@ export const useHandleAction = (
   canEscape: boolean,
 ) => {
   const {
-    saveFile: { pokedex, mileStones, catchBoosts, playerId, settings },
+    saveFile: { pokedex, mileStones, playerId, settings, catchBoosts, trait },
     patchSaveFileReducer,
   } = useContext(SaveFileContext);
 
@@ -160,6 +160,7 @@ export const useHandleAction = (
           addUsedItem,
           pokedex,
           catchBoosts ?? EmptyCatchBoosts,
+          trait === "collector",
         );
       }
       if (move.type === "InBattleItem") {
@@ -304,6 +305,7 @@ export const useHandleAction = (
       addUsedItem,
       pokedex,
       catchBoosts,
+      trait,
       battleFieldEffects,
       battleWeather,
       scatterCoins,

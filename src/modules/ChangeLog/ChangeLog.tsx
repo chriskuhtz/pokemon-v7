@@ -7,6 +7,14 @@ interface ChangelogEntryData {
 
 const changelogData: ChangelogEntryData[] = [
   {
+    version: "0.63",
+    listOfChanges: [
+      "fixes and balances from playtesting",
+      "expanded character creation",
+      "overworld random trainers",
+    ],
+  },
+  {
     version: "0.62",
     listOfChanges: [
       "fixes and balances from playtesting",
@@ -440,20 +448,22 @@ const ChangelogEntry = ({
   listOfChanges,
 }: ChangelogEntryData): JSX.Element => {
   return (
-    <>
-      <h3>{version}:</h3>
+    <Stack alignItems="center" mode="column" gap={0.25}>
+      <h3 style={{ margin: 0 }}>{version}:</h3>
       <ol style={{ lineHeight: "1.5rem" }}>
         {listOfChanges.map((change, index) => (
-          <li key={index}>{change}</li>
+          <li key={index}>
+            <strong>{change}</strong>
+          </li>
         ))}
       </ol>
-    </>
+    </Stack>
   );
 };
 
 export const ChangeLog = () => {
   return (
-    <Stack alignItems="center" mode="column">
+    <Stack alignItems="center" mode="column" gap={0.25}>
       <h3>Whats new:</h3>
       {changelogData.map((entry) => (
         <ChangelogEntry

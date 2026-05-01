@@ -3,7 +3,7 @@ import {
   baseQuestState,
   emptyPokedex,
 } from "../../constants/gameData/gameData";
-import { EmptyInventory, generateInventory } from "../../interfaces/Inventory";
+import { EmptyInventory } from "../../interfaces/Inventory";
 import { SaveFile } from "../../interfaces/SaveFile";
 
 export const startingSaveFileKuma: SaveFile = {
@@ -12,10 +12,7 @@ export const startingSaveFileKuma: SaveFile = {
   researchPoints: 0,
   quests: baseQuestState,
   bag: EmptyInventory,
-  storage: generateInventory({
-    "berry-juice": 5,
-    "poke-ball": 20,
-  }),
+  storage: EmptyInventory,
   seedVault: [],
   playerId: "",
   money: 5000,
