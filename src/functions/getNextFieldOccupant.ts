@@ -4,10 +4,16 @@ export const getNextFieldOccupant = (
   focusedField: { x: number; y: number },
   statefulOccupantsRecord: Occupant[],
 ): Occupant | undefined => {
-  return statefulOccupantsRecord
-    .filter((occ) => occ.x === focusedField.x && occ.y === focusedField.y)
-    .sort((a) => {
-      return a.type === "BERRY_TREE" ? 1 : -1;
-    })
-    .at(0);
+  return (
+    //always pick berry tree first, berry tree and empty berry tree exist ontop of each other
+    statefulOccupantsRecord.find(
+      (occ) =>
+        occ.x === focusedField.x &&
+        occ.y === focusedField.y &&
+        occ.type === "BERRY_TREE",
+    ) ??
+    statefulOccupantsRecord.find(
+      (occ) => occ.x === focusedField.x && occ.y === focusedField.y,
+    )
+  );
 };
