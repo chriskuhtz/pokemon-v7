@@ -28,13 +28,7 @@ export const kumaGameData: GameData = {
     {
       route: "STARTER_REGION_SELECTION",
       condition: (s) =>
-        !!(
-          s.settings &&
-          s.sprite &&
-          s.playerId &&
-          s.trait &&
-          !s.startingRegion
-        ),
+        !!(s.settings && s.sprite && s.playerId && s.trait && s.startingRegion),
     },
     {
       route: "STARTER_SELECTION",

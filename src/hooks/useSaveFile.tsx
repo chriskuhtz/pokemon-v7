@@ -123,11 +123,6 @@ const migrateSavefile = (input: SaveFile) => {
     updatedInput.storage["peak-ticket"] = 1;
   }
 
-  //migrate in region and trait
-  if (!updatedInput.startingRegion) {
-    updatedInput.startingRegion = "kanto";
-  }
-
   return updatedInput;
 };
 

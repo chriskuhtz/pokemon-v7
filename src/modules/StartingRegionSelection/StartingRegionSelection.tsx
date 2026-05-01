@@ -12,6 +12,10 @@ export const StartingRegionSelection = (): JSX.Element => {
       patchSaveFileReducer({
         ...saveFile,
         startingRegion: region,
+        meta:
+          saveFile.pokemon.length > 0
+            ? { activeTab: "OVERWORLD" }
+            : saveFile.meta,
       });
     },
     [patchSaveFileReducer, saveFile],
