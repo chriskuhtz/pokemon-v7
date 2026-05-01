@@ -48,9 +48,14 @@ export const applyAttackStatChanges = (
     attack.data.stat_changes.forEach((s) => {
       if (
         attackerAbility === "sheer-force" &&
-        ((selfInflicted && s.change > 0) || (!selfInflicted && s.change < 0))
+        selfInflicted &&
+        s.change > 0 &&
+        attack.data.meta.category.name.includes("damage")
       ) {
         //sheer force prevents positive side effects
+        addMessage({
+          message: `${updatedMon.name} doesnt raise its ${s.stat.name} due to sheer-force`,
+        });
         return updatedMon;
       }
 
