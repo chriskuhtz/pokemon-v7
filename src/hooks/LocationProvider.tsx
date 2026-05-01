@@ -10,6 +10,10 @@ import {
   resetChallengeFielders,
   resetEliteFour,
 } from "../functions/resetChallengeFielders";
+import {
+  getCurrentTroubleMakers,
+  removeTroubleMakers,
+} from "../functions/TimedEvent";
 import { CharacterLocationData } from "../interfaces/SaveFile";
 import { GameDataContext } from "./useGameData";
 import { MessageQueueContext } from "./useMessageQueue";
@@ -38,16 +42,15 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
   const setLocation = useCallback(
     (newLocation: CharacterLocationData) => {
       //evil teams escape if you leave
+      const troubleMakers = getCurrentTroubleMakers(saveFile);
       if (
-        location.mapId === saveFile.troubleMakers?.route &&
-        newLocation.mapId !== saveFile.troubleMakers.route
+        location.mapId === troubleMakers?.mapId &&
+        newLocation.mapId !== troubleMakers.mapId
       ) {
         addMessage({
-          message: `The Team ${saveFile.troubleMakers.affiliation} members got away`,
+          message: `The Team ${troubleMakers.affiliation} members got away`,
         });
-        patchSaveFileReducer({
-          troubleMakers: undefined,
-        });
+        patchSaveFileReducer(removeTroubleMakers(saveFile, "ESCAPED"));
       }
       //reset challengeFielders before entering
       if (

@@ -22,7 +22,7 @@ export const gameData: GameData = {
     pokemonStorageSystem: false,
     lostItems: false,
     staticEncounters: false,
-    randomTrainers: false,
+    staticTrainers: false,
   },
   losingMessages: {
     training: "Young Tom was never seen again ...",

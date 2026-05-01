@@ -88,7 +88,7 @@ export const kumaGameData: GameData = {
     snapShotExportAvailable: false,
     lostItems: true,
     staticEncounters: true,
-    randomTrainers: true,
+    staticTrainers: true,
   },
   losingMessages: {
     training: "luckily this was only a training battle",

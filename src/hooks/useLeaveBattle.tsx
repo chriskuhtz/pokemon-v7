@@ -18,6 +18,7 @@ import { getHighestXpOnTeam } from "../functions/getHighestXpOnTeam";
 import { getTeamSize } from "../functions/getTeamSize";
 import { isKO } from "../functions/isKo";
 import { reduceBattlePokemonToOwnedPokemon } from "../functions/reduceBattlePokemonToOwnedPokemon";
+import { getCurrentSwarm } from "../functions/TimedEvent";
 import { BattlePokemon } from "../interfaces/BattlePokemon";
 import {
   EmptyInventory,
@@ -195,23 +196,10 @@ export const useLeaveBattle = () => {
       let updatedSwarmRecord = [...saveFile.mileStones.caughtFromSwarms];
       let updatedCatchStreak: CatchStreak | undefined = saveFile.catchStreak;
 
+      const swarm = getCurrentSwarm(saveFile, undefined);
+
       caughtPokemon.forEach((c) => {
-        if (
-          saveFile.currentSwarm &&
-          c.name === saveFile.currentSwarm?.pokemon
-        ) {
-          updatedSwarmRecord.push(c.name);
-        }
-        if (
-          saveFile.currentStrongSwarm &&
-          c.name === saveFile.currentStrongSwarm?.pokemon
-        ) {
-          updatedSwarmRecord.push(c.name);
-        }
-        if (
-          saveFile.currentDistortionSwarm &&
-          c.name === saveFile.currentDistortionSwarm?.pokemon
-        ) {
+        if (swarm && c.name === swarm?.pokemon) {
           updatedSwarmRecord.push(c.name);
         }
         if (updatedCatchStreak && c.name !== updatedCatchStreak.pokemon) {

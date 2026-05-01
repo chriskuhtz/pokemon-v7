@@ -1,10 +1,15 @@
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, useMemo } from "react";
 import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
 import { calculateLevelData } from "../../../functions/calculateLevelData";
 import { determineWildPokemon } from "../../../functions/determineWildPokemon";
 import { getRandomPokemonName } from "../../../functions/getRandomPokemonId";
 import { isOwnedPokemonKO } from "../../../functions/isKo";
 import { OPPO_ID } from "../../../functions/makeChallengerPokemon";
+import {
+  getCurrentLure,
+  getCurrentRepel,
+  getCurrentSwarm,
+} from "../../../functions/TimedEvent";
 import { LocationContext } from "../../../hooks/LocationProvider";
 import { GameDataContext } from "../../../hooks/useGameData";
 import { SaveFileContext } from "../../../hooks/useSaveFile";
@@ -18,6 +23,14 @@ export const useStartEncounter = () => {
   const { location } = useContext(LocationContext);
   const { saveFile } = useContext(SaveFileContext);
   const gameData = useContext(GameDataContext);
+
+  const currentRepel = useMemo(() => getCurrentRepel(saveFile), [saveFile]);
+  const swarm = getCurrentSwarm(saveFile, "WEAK");
+  const strongSwarm = getCurrentSwarm(saveFile, "STRONG");
+  const distortionSwarm =
+    getCurrentSwarm(saveFile, "PAST_DISTORTION") ??
+    getCurrentSwarm(saveFile, "FUTURE_DISTORTION") ??
+    getCurrentSwarm(saveFile, "SPACE_DISTORTION");
 
   return useCallback(
     (stepsTaken: number, type: "WATER" | "GROUND") => {
@@ -40,11 +53,11 @@ export const useStartEncounter = () => {
         quests: saveFile.quests,
         waterEncounter: type === "WATER",
         shinyFactor,
-        lure: saveFile.currentLure?.type,
+        lure: getCurrentLure(saveFile)?.lureType,
         catchStreak: saveFile.catchStreak,
-        currentSwarm: saveFile.currentSwarm,
-        currentStrongSwarm: saveFile.currentStrongSwarm,
-        currentDistortionSwarm: saveFile.currentDistortionSwarm,
+        currentSwarm: swarm,
+        currentStrongSwarm: strongSwarm,
+        currentDistortionSwarm: distortionSwarm,
         internalDex: gameData.internalDex,
         maxBattleSize: Math.min(
           ...[
@@ -73,7 +86,7 @@ export const useStartEncounter = () => {
       //repels
 
       if (
-        saveFile.currentRepel?.type === "repel" &&
+        currentRepel?.repelType === "repel" &&
         challenger.team.every(
           (t) => calculateLevelData(t.xp, "medium").level <= 20,
         )
@@ -81,7 +94,7 @@ export const useStartEncounter = () => {
         return;
       }
       if (
-        saveFile.currentRepel?.type === "super-repel" &&
+        currentRepel?.repelType === "super-repel" &&
         challenger.team.every(
           (t) => calculateLevelData(t.xp, "medium").level <= 40,
         )
@@ -89,7 +102,7 @@ export const useStartEncounter = () => {
         return;
       }
       if (
-        saveFile.currentRepel?.type === "max-repel" &&
+        currentRepel?.repelType === "max-repel" &&
         challenger.team.every(
           (t) => calculateLevelData(t.xp, "medium").level <= 60,
         )
@@ -106,22 +119,16 @@ export const useStartEncounter = () => {
       });
     },
     [
-      activateTransition,
-      gameData.defaultBattleSize,
-      gameData.internalDex,
       location.mapId,
+      saveFile,
+      swarm,
+      strongSwarm,
+      distortionSwarm,
+      gameData.internalDex,
+      gameData.defaultBattleSize,
+      currentRepel?.repelType,
+      activateTransition,
       navigateAwayFromOverworldReducer,
-      saveFile.bag,
-      saveFile.catchStreak,
-      saveFile.currentDistortionSwarm,
-      saveFile.currentLure?.type,
-      saveFile.currentRepel?.type,
-      saveFile.currentStrongSwarm,
-      saveFile.currentSwarm,
-      saveFile.pokemon,
-      saveFile.quests,
-      saveFile.settings?.randomEncounters,
-      saveFile.trait,
     ],
   );
 };

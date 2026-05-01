@@ -6,15 +6,13 @@ import { getRandomOrientation } from "../../../functions/getNextClockwiseDirecti
 import { getNextLocation } from "../../../functions/getNextLocation";
 import { getOppositeDirection } from "../../../functions/getOppositeDirection";
 import { hasType } from "../../../functions/hasType";
-import { makeOverworldItem } from "../../../functions/makeOverworldItem";
 import { occupantHandled } from "../../../functions/occupantHandled";
 import { shuffle } from "../../../functions/shuffle";
-import { makeOverworldPokemonFromStaticEncounter } from "../../../functions/StaticEncounter";
-import { makeOverworldTrainerfromStaticTrainer } from "../../../functions/StaticTrainer";
 import {
-  getTroubleMakerAdminTeam,
-  getTroubleMakerTeam,
-} from "../../../functions/troubleMakers/troubleMakers";
+  makeOverworldPokemonFromStaticEncounterEvent,
+  makeOverworldTrainerfromStaticTrainerEvent,
+  makeOverworldTroubleMakers,
+} from "../../../functions/TimedEvent";
 import { LocationContext } from "../../../hooks/LocationProvider";
 import { useAvailableBulletinQuests } from "../../../hooks/useAvailableBulletinQuests";
 import { GameDataContext } from "../../../hooks/useGameData";
@@ -22,16 +20,11 @@ import { SaveFileContext } from "../../../hooks/useSaveFile";
 import { InternalDex } from "../../../interfaces/GameData";
 import { MapId } from "../../../interfaces/mapIds";
 import { Nature } from "../../../interfaces/Natures";
-import {
-  Occupant,
-  OverworldLostItem,
-  OverworldPokemon,
-} from "../../../interfaces/Occupant";
+import { Occupant, OverworldPokemon } from "../../../interfaces/Occupant";
 import {
   CharacterOrientation,
   RampagingPokemon,
   SaveFile,
-  StaticTrainer,
 } from "../../../interfaces/SaveFile";
 import { SpriteEnum } from "../../../interfaces/SpriteEnum";
 
@@ -58,10 +51,6 @@ export const useOccupants = () => {
       }
       return occ;
     });
-    //add troubleMakers
-    if (saveFile.troubleMakers && saveFile.troubleMakers.route === map.id) {
-      all.push(...createTroubleMakers(saveFile));
-    }
     //add rampager
     if (
       saveFile.currentRampagingPokemon &&
@@ -83,34 +72,30 @@ export const useOccupants = () => {
       all.push(...createPasturePokemon(saveFile, internalDex));
       all.push(...createBattle());
     }
-    //add lost items
-    if (saveFile.lostItems) {
+    //add timed Event Occupants
+    if (saveFile.timedEvents) {
       all.push(
-        ...saveFile.lostItems
-          .filter((lost) => lost.mapId === location.mapId)
-          .map<OverworldLostItem>((lost) => ({
-            ...makeOverworldItem({ ...lost, fixedId: lost.id }),
-            type: "LOST_ITEM",
-          })),
-      );
-    }
-    //add static encounters
-    if (saveFile.staticEncounters) {
-      all.push(
-        ...saveFile.staticEncounters
-          .filter((staticEncounter) => staticEncounter.mapId === location.mapId)
-          .map(makeOverworldPokemonFromStaticEncounter),
-      );
-    }
-    //add random trainers
-    if (saveFile.randomTrainers) {
-      all.push(
-        ...saveFile.randomTrainers
-          .filter(
-            (randomTrainer: StaticTrainer) =>
-              randomTrainer.mapId === location.mapId,
-          )
-          .map(makeOverworldTrainerfromStaticTrainer),
+        ...saveFile.timedEvents
+          .flatMap<Occupant | undefined>((ev) => {
+            if (ev.type === "LOST_ITEM" && ev.mapId === location.mapId) {
+              return {
+                conditionFunction: (s) => !occupantHandled(s, ev.id),
+                ...ev,
+                type: "ITEM",
+              };
+            }
+            if (ev.type === "STATIC_ENCOUNTER" && ev.mapId === location.mapId) {
+              return makeOverworldPokemonFromStaticEncounterEvent(ev);
+            }
+            if (ev.type === "STATIC_TRAINER" && ev.mapId === location.mapId) {
+              return makeOverworldTrainerfromStaticTrainerEvent(ev);
+            }
+            if (ev.type === "TROUBLEMAKERS" && ev.mapId === location.mapId) {
+              return makeOverworldTroubleMakers(saveFile);
+            }
+            return undefined;
+          })
+          .filter((ev) => ev !== undefined),
       );
     }
     //add wild encounter sprite
@@ -136,7 +121,6 @@ export const useOccupants = () => {
     }
   }, [
     map,
-    saveFile.troubleMakers,
     saveFile.handledOccupants,
     statefulOccupants.length,
     saveFile,
@@ -376,41 +360,6 @@ const createRampager = (
 
     id,
   };
-};
-
-const createTroubleMakers = (saveFile: SaveFile): Occupant[] => {
-  if (!saveFile.troubleMakers) {
-    return [];
-  }
-  return [
-    ...saveFile.troubleMakers.trainers.map((t) => {
-      if (
-        [
-          "Rocket Admin Chad",
-          "Rocket Admin Hillary",
-          "Aqua Boss Archie",
-          "Magma Boss Maxie",
-          "Galactic Admin Mars",
-          "Galactic Admin Saturn",
-          "Galactic Admin Jupiter",
-        ].includes(t.id)
-      ) {
-        return {
-          ...t,
-          team: () => getTroubleMakerAdminTeam(saveFile, t.id),
-          conditionFunction: () =>
-            !saveFile.handledOccupants.some((h) => h.id === t.id),
-        };
-      }
-
-      return {
-        ...t,
-        team: () => getTroubleMakerTeam(saveFile),
-        conditionFunction: () =>
-          !saveFile.handledOccupants.some((h) => h.id === t.id),
-      };
-    }),
-  ];
 };
 
 const createBattle = (): Occupant[] => {

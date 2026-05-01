@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 import { replaceRouteName } from "../../functions/replaceRouteName";
+import { getCurrentSwarm } from "../../functions/TimedEvent";
 import { useNavigate } from "../../hooks/useNavigate";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { useSwarmRadar } from "../../hooks/useSwarmRadar";
@@ -12,27 +13,32 @@ export const SwarmRadar = () => {
   const { saveFile } = useContext(SaveFileContext);
   const { scan, activeSwarms } = useSwarmRadar();
   const navigate = useNavigate();
+
+  const swarm = getCurrentSwarm(saveFile, "WEAK");
+  const strongSwarm = getCurrentSwarm(saveFile, "STRONG");
+  const distortionSwarm =
+    getCurrentSwarm(saveFile, "PAST_DISTORTION") ??
+    getCurrentSwarm(saveFile, "FUTURE_DISTORTION") ??
+    getCurrentSwarm(saveFile, "SPACE_DISTORTION");
   return (
     <Page
       headline="Swarm Radar"
       goBack={() => navigate("SWARM_RADAR", "OVERWORLD")}
     >
       <Stack mode="column">
-        {!saveFile.currentSwarm && (
+        {!swarm && (
           <button onClick={() => scan("WEAK")}>Scan for Swarms</button>
         )}
-        {saveFile.campUpgrades["upgraded swarm radar"] &&
-          !saveFile.currentStrongSwarm && (
-            <button onClick={() => scan("STRONG")}>
-              <strong>Scan for stronger Swarms</strong>
-            </button>
-          )}
-        {saveFile.campUpgrades["time distortion radar"] &&
-          !saveFile.currentDistortionSwarm && (
-            <button onClick={() => scan("DISTORTION")}>
-              Scan for Distortions
-            </button>
-          )}
+        {saveFile.campUpgrades["upgraded swarm radar"] && !strongSwarm && (
+          <button onClick={() => scan("STRONG")}>
+            <strong>Scan for stronger Swarms</strong>
+          </button>
+        )}
+        {saveFile.campUpgrades["time distortion radar"] && !distortionSwarm && (
+          <button onClick={() => scan("DISTORTION")}>
+            Scan for Distortions
+          </button>
+        )}
         {saveFile.campUpgrades["warden certification"] &&
           !saveFile.currentRampagingPokemon && (
             <button onClick={() => scan("RAMPAGE")}>
@@ -42,15 +48,15 @@ export const SwarmRadar = () => {
         <h3>Active:</h3>
         {activeSwarms.map((a) => (
           <Card
-            key={a.leavesAt}
+            key={a.removeAt}
             content={
-              a.type === "WEAK" || a.type === "STRONG" ? (
+              a.swarmType === "WEAK" || a.swarmType === "STRONG" ? (
                 <strong>
-                  Swarm of {a.pokemon} at {replaceRouteName(a.route)}
+                  Swarm of {a.pokemon} at {replaceRouteName(a.mapId)}
                 </strong>
               ) : (
                 <strong>
-                  {a.type} at {replaceRouteName(a.route)}
+                  {a.type} at {replaceRouteName(a.mapId)}
                 </strong>
               )
             }

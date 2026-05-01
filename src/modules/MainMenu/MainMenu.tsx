@@ -20,11 +20,18 @@ import { ExportSnapshotCard } from "../../components/SnapshotCard/ExportSnapshot
 import { ImportSnapshotCard } from "../../components/SnapshotCard/ImportSnapshotCard";
 import { ResetSnapshotCard } from "../../components/SnapshotCard/ResetSnapshotCard";
 import { TrainerCard } from "../../components/TrainerCard/TrainerCard";
-import { battleSpriteSize, ONE_HOUR } from "../../constants/baseConstants";
+import { battleSpriteSize } from "../../constants/baseConstants";
 import { customItemDescriptions } from "../../constants/customItemDescriptions";
 import { mapsRecord } from "../../constants/gameData/maps/mapsRecord";
 import { fullyHealPokemon } from "../../functions/fullyHealPokemon";
 import { questMenuAvailable } from "../../functions/questMenuAvailable";
+import {
+  getCurrentLure,
+  getCurrentRepel,
+  startLure,
+  startRepel,
+  stopRepel,
+} from "../../functions/TimedEvent";
 import { LocationContext } from "../../hooks/LocationProvider";
 import { GameDataContext } from "../../hooks/useGameData";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
@@ -33,7 +40,7 @@ import { useQuests } from "../../hooks/useQuests";
 import { useReset } from "../../hooks/useReset";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { useTeleport } from "../../hooks/useTeleport";
-import { EmptyInventory, joinInventories } from "../../interfaces/Inventory";
+import { EmptyInventory } from "../../interfaces/Inventory";
 import { lures, repels } from "../../interfaces/Item";
 import { RoutesType } from "../../interfaces/Routing";
 export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
@@ -221,21 +228,19 @@ export const ExpShareButton = () => {
 };
 export const RepelButton = () => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
-
-  if (saveFile.currentRepel) {
+  const currentRepel = getCurrentRepel(saveFile);
+  if (currentRepel) {
     return (
       <Card
-        icon={<ItemSprite item={saveFile.currentRepel.type} />}
+        icon={<ItemSprite item={currentRepel.repelType} />}
         content={
           <h3>
-            {saveFile.currentRepel.type} active until{" "}
-            {new Date(saveFile.currentRepel.activeUntil).toLocaleTimeString()}
+            {currentRepel.type} active until{" "}
+            {new Date(currentRepel.removeAt).toLocaleTimeString()}
           </h3>
         }
         actionElements={[
-          <button
-            onClick={() => patchSaveFileReducer({ currentRepel: undefined })}
-          >
+          <button onClick={() => patchSaveFileReducer(stopRepel(saveFile))}>
             Stop current Repel
           </button>,
         ]}
@@ -250,13 +255,7 @@ export const RepelButton = () => {
             key={thisrepel}
             icon={<ItemSprite item={thisrepel} />}
             onClick={() => {
-              patchSaveFileReducer({
-                currentRepel: {
-                  type: thisrepel,
-                  activeUntil: new Date().getTime() + ONE_HOUR,
-                },
-                bag: joinInventories(saveFile.bag, { [thisrepel]: 1 }, true),
-              });
+              patchSaveFileReducer(startRepel(saveFile, thisrepel));
             }}
             content={<h3>{customItemDescriptions[thisrepel]}</h3>}
             actionElements={[]}
@@ -271,14 +270,16 @@ export const RepelButton = () => {
 export const LureButton = () => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
-  if (saveFile.currentLure) {
+  const currentLure = getCurrentLure(saveFile);
+
+  if (currentLure) {
     return (
       <Card
-        icon={<ItemSprite item={saveFile.currentLure.type} />}
+        icon={<ItemSprite item={currentLure.lureType} />}
         content={
           <h3>
-            {saveFile.currentLure.type} active until{" "}
-            {new Date(saveFile.currentLure.activeUntil).toLocaleTimeString()}
+            {currentLure.type} active until{" "}
+            {new Date(currentLure.removeAt).toLocaleTimeString()}
           </h3>
         }
         actionElements={[]}
@@ -293,13 +294,7 @@ export const LureButton = () => {
             key={thisLure}
             icon={<ItemSprite item={thisLure} />}
             onClick={() => {
-              patchSaveFileReducer({
-                currentLure: {
-                  type: thisLure,
-                  activeUntil: new Date().getTime() + ONE_HOUR,
-                },
-                bag: joinInventories(saveFile.bag, { [thisLure]: 1 }, true),
-              });
+              patchSaveFileReducer(startLure(saveFile, thisLure));
             }}
             content={<h3>{customItemDescriptions[thisLure]}</h3>}
             actionElements={[]}

@@ -4,23 +4,15 @@ import { KumaQuestName } from "../versions/kuma/questsRecord";
 import { BadgeName } from "./Badge";
 import { Challenger } from "./Challenger";
 import { Inventory } from "./Inventory";
-import {
-  ApricornType,
-  BerryType,
-  HerbType,
-  ItemType,
-  LureType,
-  MulchType,
-  RepelType,
-} from "./Item";
+import { ApricornType, BerryType, HerbType, ItemType, MulchType } from "./Item";
 import { MapId } from "./mapIds";
 import { OverworldTrainer } from "./Occupant";
 import { OwnedPokemon } from "./OwnedPokemon";
-import { SwarmType } from "./Pokedex";
 import { PokemonType } from "./PokemonType";
 import { QuestStatus } from "./Quest";
 import { RoutesType } from "./Routing";
 import { SettingsObject } from "./SettingsObject";
+import { TimedEvent } from "./TimedEvent";
 
 export type CharacterOrientation = "UP" | "DOWN" | "LEFT" | "RIGHT";
 export type ForwardFoot = "CENTER1" | "RIGHT" | "CENTER2" | "LEFT";
@@ -59,15 +51,6 @@ export interface BerryBush {
   id: string;
 }
 
-export interface PokemonSwarm {
-  pokemon: PokemonName;
-  leavesAt: number;
-  route: MapId;
-  xpMin: number;
-  xpMax: number;
-  type: SwarmType;
-}
-
 export type Pokedex = Record<
   PokemonName,
   { seenOnRoutes: MapId[]; caughtOnRoutes: MapId[] }
@@ -80,13 +63,6 @@ export type CatchStreak = {
   streak: number;
   mapId: MapId;
 };
-export const evilTeams = ["rocket", "aqua", "magma", "galactic"] as const;
-export type EvilTeam = (typeof evilTeams)[number];
-
-export type OverworldTrainerStump = Omit<
-  OverworldTrainer,
-  "team" | "conditionFunction"
->;
 
 export type MileStonesObject = {
   damageRecord: number;
@@ -138,47 +114,9 @@ export type RampagingPokemon = {
   y: number;
 };
 
-export type TroubleMakers = {
-  route: MapId;
-  trainers: OverworldTrainerStump[];
-  affiliation: EvilTeam;
-  leavesAt?: number;
-};
-
 export interface SavedNote {
   id: string;
   xpOverwrite?: number;
-}
-
-export interface LostItem {
-  item: ItemType;
-  amount: number;
-  mapId: MapId;
-  x: number;
-  y: number;
-  resetAt: number;
-  id: string;
-}
-export interface StaticEncounter {
-  name: PokemonName;
-  dexId: number;
-  xp: number;
-  mapId: MapId;
-  x: number;
-  y: number;
-  resetAt: number;
-  orientation: CharacterOrientation;
-  id: string;
-}
-export interface StaticTrainer {
-  mapId: MapId;
-  x: number;
-  y: number;
-  resetAt: number;
-  orientation: CharacterOrientation;
-  pokemonType: PokemonType;
-  xp: number;
-  id: string;
 }
 
 export const startingRegions = [
@@ -242,7 +180,7 @@ export interface SaveFile {
   handledOccupants: {
     id: string;
     //at this point in time (in ms), this occupant will be removed from the handled list
-    resetAt: number;
+    resetAt: number; //refactor as blocker time event
   }[];
   lastEdited: number;
   lastNurse: string;
@@ -251,39 +189,22 @@ export interface SaveFile {
   sprite: string;
   mileStones: MileStonesObject;
   farm: {
+    // refactor farm into overworld plots
     plants: BerryBush[];
   };
   campUpgrades: Record<CampUpgrade, boolean>;
-  honeyReadyAt?: number;
-  dugtrioReadyAt?: number;
-  zigzagoonReadyAt?: number;
-  miltankReadyAt?: number;
-  currentSwarm?: PokemonSwarm;
-  currentStrongSwarm?: PokemonSwarm;
-  currentDistortionSwarm?: PokemonSwarm;
-  currentRampagingPokemon?: RampagingPokemon;
+  currentRampagingPokemon?: RampagingPokemon; //refactor as timed event
   rangerLevel?: number;
-  troubleMakers?: TroubleMakers;
   seedVault: ItemType[];
   pokedex: Pokedex;
   cookingSkill?: number;
-  currentRepel?: {
-    type: RepelType;
-    activeUntil: number;
-  };
-  currentLure?: {
-    type: LureType;
-    activeUntil: number;
-  };
   catchBoosts?: CatchBoosts;
   catchStreak?: CatchStreak;
   longestStreak?: number;
   flying?: boolean;
   importedChallenger?: ImportedChallenger;
   trainerNotes?: SavedNote[];
-  lostItems?: LostItem[];
-  staticEncounters?: StaticEncounter[];
-  randomTrainers?: StaticTrainer[];
   startingRegion?: StartingRegion;
   trait?: CharacterTrait;
+  timedEvents?: TimedEvent[];
 }
