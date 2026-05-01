@@ -14,16 +14,38 @@ export const kumaGameData: GameData = {
   startingRouterSequence: [
     { route: "SETTINGS", condition: (s) => !s.settings },
     {
+      route: "NAME_SELECTION",
+      condition: (s) => !!(s.settings && s.playerId === ""),
+    },
+    {
       route: "SPRITE_SELECTION",
-      condition: (s) => !!(s.settings && s.sprite === ""),
+      condition: (s) => !!(s.settings && s.sprite === "" && s.playerId),
+    },
+    {
+      route: "TRAIT_SELECTION",
+      condition: (s) => !!(s.settings && s.sprite && s.playerId && !s.trait),
+    },
+    {
+      route: "STARTER_REGION_SELECTION",
+      condition: (s) =>
+        !!(
+          s.settings &&
+          s.sprite &&
+          s.playerId &&
+          s.trait &&
+          !s.startingRegion
+        ),
     },
     {
       route: "STARTER_SELECTION",
-      condition: (saveFile) =>
+      condition: (s) =>
         !!(
-          saveFile.settings &&
-          saveFile.sprite &&
-          (saveFile.playerId === "" || saveFile.pokemon.length === 0)
+          s.startingRegion &&
+          s.settings &&
+          s.playerId &&
+          s.sprite &&
+          s.trait &&
+          s.pokemon.length === 0
         ),
     },
   ],
@@ -66,11 +88,14 @@ export const kumaGameData: GameData = {
     snapShotExportAvailable: false,
     lostItems: true,
     staticEncounters: true,
+    randomTrainers: true,
   },
   losingMessages: {
     training: "luckily this was only a training battle",
-    wild: "You lost the battle and rushed back to camp, loosing your items on the way",
     reset: "You lost the battle and have to reset",
+    wild: "You lost the battle and rushed back to camp, loosing your items on the way",
+    explorer:
+      "You lost the battle and rushed back to camp, loosing some of your items on the way",
   },
   overworldActions: {
     bushCutting: {

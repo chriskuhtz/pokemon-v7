@@ -14,6 +14,7 @@ export const ItemSprite = ({
 }) => {
   return (
     <img
+      title={item}
       src={getItemUrl(item)}
       height={battleSpriteSize * (sizeFactor ?? 1)}
       width={battleSpriteSize * (sizeFactor ?? 1)}

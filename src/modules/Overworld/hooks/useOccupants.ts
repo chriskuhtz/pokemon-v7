@@ -11,6 +11,7 @@ import { makeOverworldItem } from "../../../functions/makeOverworldItem";
 import { occupantHandled } from "../../../functions/occupantHandled";
 import { shuffle } from "../../../functions/shuffle";
 import { makeOverworldPokemonFromStaticEncounter } from "../../../functions/StaticEncounter";
+import { makeOverworldTrainerfromStaticTrainer } from "../../../functions/StaticTrainer";
 import {
   getTroubleMakerAdminTeam,
   getTroubleMakerTeam,
@@ -31,6 +32,7 @@ import {
   CharacterOrientation,
   RampagingPokemon,
   SaveFile,
+  StaticTrainer,
 } from "../../../interfaces/SaveFile";
 import { SpriteEnum } from "../../../interfaces/SpriteEnum";
 
@@ -99,6 +101,17 @@ export const useOccupants = () => {
         ...saveFile.staticEncounters
           .filter((staticEncounter) => staticEncounter.mapId === location.mapId)
           .map(makeOverworldPokemonFromStaticEncounter),
+      );
+    }
+    //add random trainers
+    if (saveFile.randomTrainers) {
+      all.push(
+        ...saveFile.randomTrainers
+          .filter(
+            (randomTrainer: StaticTrainer) =>
+              randomTrainer.mapId === location.mapId,
+          )
+          .map(makeOverworldTrainerfromStaticTrainer),
       );
     }
     //add wild encounter sprite

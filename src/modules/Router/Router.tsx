@@ -26,7 +26,9 @@ import { MapEditor } from "../MapMaker/components/MapEditor";
 import { Market } from "../Market/Market";
 import { MiltankFarm } from "../MiltankFarm/MiltankFarm";
 import { MoveTutor } from "../MoveTutor/MoveTutor";
+import { NameSelection } from "../NameSelection/NameSelection";
 import { NatureTutor } from "../NatureTutor/NatureTutor";
+import { OakIntroduction } from "../OakIntroduction/OakIntroduction";
 import { Overworld } from "../Overworld/Overworld";
 import { OverworldChest } from "../OverworldChest/OverworldChest";
 import { Pokedex } from "../Pokedex/Pokedex";
@@ -36,10 +38,12 @@ import { SeedVault } from "../SeedVault/SeedVault";
 import { Settings } from "../Settings/Settings";
 import { SpriteSelection } from "../SpriteSelection/SpriteSelection";
 import { StarterSelection } from "../StarterSelection/StarterSelection";
+import { StartingRegionSelection } from "../StartingRegionSelection/StartingRegionSelection";
 import { SwarmRadar } from "../SwarmRadar/SwarmRadar";
 import { Team } from "../Team/Team";
 import { TrainerNotes } from "../TrainerNotes/TrainerNotes";
 import { TrainingField } from "../TrainingField/TrainingField";
+import { TraitSelection } from "../TraitSelection/TraitSelection";
 import { TravellingMerchant } from "../TravellingMerchant/TravellingMerchant";
 import { VilePlumeScentResearcher } from "../VilePlumeScentResearcher/VilePlumeScentResearcher";
 import { Wiki } from "../Wiki/Wiki";
@@ -80,6 +84,18 @@ export const Router = (): JSX.Element => {
 
   if (activeTab === "INTRO") {
     return <Intro setHasReadIntro={setHasReadIntro} />;
+  }
+  if (activeTab === "NAME_SELECTION") {
+    return <NameSelection />;
+  }
+  if (activeTab === "TRAIT_SELECTION") {
+    return <TraitSelection />;
+  }
+  if (activeTab === "STARTER_REGION_SELECTION") {
+    return <StartingRegionSelection />;
+  }
+  if (activeTab === "OAK_INTRO") {
+    return <OakIntroduction />;
   }
   if (activeTab === "BATTLE" && currentChallenger) {
     return <BattleLoader challenger={currentChallenger} />;

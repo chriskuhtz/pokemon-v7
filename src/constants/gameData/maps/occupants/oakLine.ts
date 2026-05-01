@@ -1,4 +1,4 @@
-import { OverworldNpc, Occupant } from "../../../../interfaces/Occupant";
+import { Occupant, OverworldNpc } from "../../../../interfaces/Occupant";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
 
 const oakBase: Omit<
@@ -19,7 +19,7 @@ export const oakLine: Occupant[] = [
       "Ah, you made it",
       "Outside of the fence, the wild Kuma Region awaits",
       "If your Pokemon are hurt, talk to nurse joy",
-      "There is some equipment for you in your storage chest",
+      "Your equipment has been delivered to your storage chest",
       "but we cant rely on our limited supplies",
       "we must establish a self sufficient camp",
       "Camp Manager Kevin can help you with that",

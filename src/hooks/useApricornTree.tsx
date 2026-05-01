@@ -13,11 +13,16 @@ export const useApricornTree = () => {
 
   return useCallback(
     (tree: ApricornTree) => {
-      const amount =
-        tree.apricorn === "purple-apricorn"
-          ? 1
-          : getMiddleOfThree([1, Math.floor(Math.random() * 5), 5]);
+      const isGardener = saveFile.trait === "gardener";
+      let amount =
+        getMiddleOfThree([1, Math.floor(Math.random() * 5), 5]) +
+        (isGardener ? 1 : 0);
+
+      if (tree.apricorn === "purple-apricorn") {
+        amount = 1;
+      }
       const now = new Date().getTime();
+      const time = now + ONE_HOUR * (isGardener ? 1 : 2);
       addMessage({
         icon: <img src={getItemUrl(tree.apricorn)} height={battleSpriteSize} />,
         message: `Harvested ${amount} ${tree.apricorn}`,
@@ -26,10 +31,16 @@ export const useApricornTree = () => {
         bag: joinInventories(saveFile.bag, { [tree.apricorn]: amount }),
         handledOccupants: [
           ...saveFile.handledOccupants,
-          { id: tree.id, resetAt: now + ONE_HOUR * 2 },
+          { id: tree.id, resetAt: time },
         ],
       });
     },
-    [addMessage, patchSaveFileReducer, saveFile.bag, saveFile.handledOccupants],
+    [
+      addMessage,
+      patchSaveFileReducer,
+      saveFile.bag,
+      saveFile.handledOccupants,
+      saveFile.trait,
+    ],
   );
 };

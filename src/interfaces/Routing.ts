@@ -42,5 +42,10 @@ export const routes = [
   "LABYRINTH_SUCCESS",
   "CHEST",
   "TRAINER_NOTES",
+  "OAK_INTRO",
+  "NAME_SELECTION",
+  "TRAIT_SELECTION",
+  "STARTER_REGION_SELECTION",
+  "TRAIT_SELECTION",
 ] as const;
 export type RoutesType = (typeof routes)[number];

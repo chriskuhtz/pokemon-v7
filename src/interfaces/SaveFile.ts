@@ -82,6 +82,7 @@ export type CatchStreak = {
 };
 export const evilTeams = ["rocket", "aqua", "magma", "galactic"] as const;
 export type EvilTeam = (typeof evilTeams)[number];
+
 export type OverworldTrainerStump = Omit<
   OverworldTrainer,
   "team" | "conditionFunction"
@@ -167,13 +168,59 @@ export interface StaticEncounter {
   resetAt: number;
   orientation: CharacterOrientation;
 }
+export interface StaticTrainer {
+  mapId: MapId;
+  x: number;
+  y: number;
+  resetAt: number;
+  orientation: CharacterOrientation;
+  pokemonType: PokemonType;
+  xp: number;
+}
+
+export const startingRegions = [
+  "kanto",
+  "johto",
+  "hoenn",
+  "sinnoh",
+  "unova",
+  "kalos",
+  "alola",
+  "galar",
+  "paldea",
+] as const;
+export type StartingRegion = (typeof startingRegions)[number];
+
+export const traits = [
+  "chef",
+  "gardener",
+  "competitor",
+  "collector",
+  "explorer",
+] as const;
+export type CharacterTrait = (typeof traits)[number];
+
+export const traitBoni: Record<CharacterTrait, string> = {
+  chef: "Chefs rarely fail at cooking and can sometimes stretch cooked snacks into multiple portions",
+
+  gardener:
+    "Gardeners can harvest more plants than others and they seem to grow back faster",
+
+  competitor:
+    "Competitors are expert trainers, making their pokemon grow faster",
+
+  collector:
+    "Collectors have better chances at catching pokemon and finding shiny pokemon ",
+
+  explorer:
+    "Explorers often find more items than others and lose fewer Items when they retreat",
+};
 
 export interface SaveFile {
   badges: BadgeName[];
   playerId: string;
   bag: Inventory;
   storage: Inventory;
-  chests?: Record<string, Inventory>;
   pokemon: OwnedPokemon[];
   money: number;
   researchPoints: number;
@@ -226,4 +273,7 @@ export interface SaveFile {
   trainerNotes?: SavedNote[];
   lostItems?: LostItem[];
   staticEncounters?: StaticEncounter[];
+  randomTrainers?: StaticTrainer[];
+  startingRegion?: StartingRegion;
+  trait?: CharacterTrait;
 }

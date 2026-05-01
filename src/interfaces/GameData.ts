@@ -33,6 +33,7 @@ export interface GameData {
     training: string;
     reset: string;
     wild: string;
+    explorer: string;
   };
   features: {
     catchStreaks: boolean;
@@ -46,6 +47,7 @@ export interface GameData {
     movesEditableInTeamOverview: boolean;
     lostItems: boolean;
     staticEncounters: boolean;
+    randomTrainers: boolean;
   };
   overworldActions: OverworldActions;
   carryingCapacity: {

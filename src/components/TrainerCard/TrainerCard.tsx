@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { battleSpriteSize } from "../../constants/baseConstants";
 import { GameDataContext } from "../../hooks/useGameData";
 import { SaveFileContext } from "../../hooks/useSaveFile";
+import { traitBoni } from "../../interfaces/SaveFile";
 import { IconSolarSystem } from "../../uiComponents/IconSolarSystem/IconSolarSystem";
 import { CatchBoosts } from "../CatchBoosts/CatchBoosts";
 export const TrainerCard = () => {
@@ -13,6 +14,7 @@ export const TrainerCard = () => {
       mileStones,
       rangerLevel,
       longestStreak,
+      trait,
     },
   } = useContext(SaveFileContext);
   const gameData = useContext(GameDataContext);
@@ -48,7 +50,9 @@ export const TrainerCard = () => {
         />
 
         <div>
-          <h4>{playerId}</h4>
+          <h4>
+            {trait} {playerId}
+          </h4>
           {gameData.features.quests && (
             <h4>Research Points: {researchPoints}</h4>
           )}
@@ -70,6 +74,7 @@ export const TrainerCard = () => {
           )}
           {rangerLevel ? <h4>Ranger Level: {rangerLevel}</h4> : <></>}
         </div>
+        {trait && <strong>{traitBoni[trait]}</strong>}
         <CatchBoosts />
       </div>
     </div>
