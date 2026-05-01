@@ -30,12 +30,13 @@ export const addLostItemToSaveFile = (s: SaveFile): SaveFile => {
   const { x, y } = getRandomPosition(mapsRecord[route]);
   const now = new Date().getTime();
   const lostItem: LostItem = {
+    id: `${route}${item}${amount}`,
     mapId: route,
     item,
     amount,
     x,
     y,
-    resetAt: now + ONE_HOUR * 4,
+    resetAt: now + ONE_HOUR * 0.25,
   };
 
   return { ...updated, lostItems: [...(updated.lostItems ?? []), lostItem] };

@@ -66,12 +66,6 @@ export const useInteractWithOverworldItem = () => {
                 ...saveFile.handledOccupants,
                 { id: occ.id, resetAt: -1 },
               ],
-              lostItems:
-                occ.type === "LOST_ITEM"
-                  ? saveFile.lostItems?.filter(
-                      (entry) => entry.item !== occ.item,
-                    )
-                  : saveFile.lostItems,
             });
           },
         });

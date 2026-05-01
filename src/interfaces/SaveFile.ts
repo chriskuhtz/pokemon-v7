@@ -157,6 +157,7 @@ export interface LostItem {
   x: number;
   y: number;
   resetAt: number;
+  id: string;
 }
 export interface StaticEncounter {
   name: PokemonName;
@@ -167,6 +168,7 @@ export interface StaticEncounter {
   y: number;
   resetAt: number;
   orientation: CharacterOrientation;
+  id: string;
 }
 export interface StaticTrainer {
   mapId: MapId;
@@ -176,6 +178,7 @@ export interface StaticTrainer {
   orientation: CharacterOrientation;
   pokemonType: PokemonType;
   xp: number;
+  id: string;
 }
 
 export const startingRegions = [

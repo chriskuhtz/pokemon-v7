@@ -1,5 +1,4 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { v4 } from "uuid";
 import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
 import { PokemonName } from "../../../constants/pokemonNames";
 import { getMiddleOfThree } from "../../../functions/getMiddleOfThree";
@@ -90,7 +89,7 @@ export const useOccupants = () => {
         ...saveFile.lostItems
           .filter((lost) => lost.mapId === location.mapId)
           .map<OverworldLostItem>((lost) => ({
-            ...makeOverworldItem({ ...lost, fixedId: v4() }),
+            ...makeOverworldItem({ ...lost, fixedId: lost.id }),
             type: "LOST_ITEM",
           })),
       );

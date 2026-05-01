@@ -12,7 +12,7 @@ import { getRandomPosition } from "./getRandomPosition";
 import { makeRandomTeam } from "./makeRandomTeam";
 import { occupantHandled } from "./occupantHandled";
 
-const trainerPresets: Record<
+export const trainerPresets: Record<
   PokemonType,
   { unhandledMessage: string[]; sprite: string; name: string }
 > = {
@@ -128,11 +128,9 @@ const trainerPresets: Record<
 export const makeOverworldTrainerfromStaticTrainer = (
   staticTrainer: StaticTrainer,
 ): OverworldTrainer => {
-  const id = `staticTrainer${staticTrainer.mapId}${staticTrainer.x}${staticTrainer.pokemonType}${staticTrainer.resetAt}`;
   return {
-    id: id,
     type: "TRAINER",
-    conditionFunction: (s) => !occupantHandled(s, id),
+    conditionFunction: (s) => !occupantHandled(s, staticTrainer.id),
     team: () =>
       makeRandomTeam({
         xp: staticTrainer.xp,
@@ -163,6 +161,7 @@ export const addStaticTrainerToSaveFile = (s: SaveFile): SaveFile => {
   const { x, y } = getRandomPosition(mapsRecord[route]);
   const now = new Date().getTime();
   const staticTrainer: StaticTrainer = {
+    id: trainerPresets[pokemonType].name,
     pokemonType,
     mapId: route,
     x,

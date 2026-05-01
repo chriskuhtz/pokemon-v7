@@ -189,6 +189,13 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
       }
       //update lostItems
       if (gameData.features.lostItems) {
+        update.lostItems?.forEach((lostItem) => {
+          if (lostItem.resetAt > now) {
+            update.handledOccupants = update.handledOccupants.filter(
+              (h) => h.id !== lostItem.id,
+            );
+          }
+        });
         update.lostItems = [...(update.lostItems ?? [])].filter(
           (lostItem) => lostItem.resetAt > now,
         );
@@ -197,7 +204,14 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
         }
       }
       //update static Encounters
-      if (gameData.features.staticEncounters) {
+      if (gameData.features.staticEncounters && update.pokemon.length > 0) {
+        update.staticEncounters?.forEach((staticEncounter) => {
+          if (staticEncounter.resetAt > now) {
+            update.handledOccupants = update.handledOccupants.filter(
+              (h) => h.id !== staticEncounter.id,
+            );
+          }
+        });
         update.staticEncounters = [...(update.staticEncounters ?? [])].filter(
           (staticEncounter) => staticEncounter.resetAt > now,
         );
@@ -206,7 +220,14 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
         }
       }
       //update random trainers
-      if (gameData.features.randomTrainers) {
+      if (gameData.features.randomTrainers && update.pokemon.length > 0) {
+        update.randomTrainers?.forEach((randomTrainer) => {
+          if (randomTrainer.resetAt > now) {
+            update.handledOccupants = update.handledOccupants.filter(
+              (h) => h.id !== randomTrainer.id,
+            );
+          }
+        });
         update.randomTrainers = [...(update.randomTrainers ?? [])].filter(
           (trainer) => trainer.resetAt > now,
         );
@@ -429,11 +450,13 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 
   //HANDLE START OF GAME
   useEffect(() => {
-    startingRouterSequence.reverse().forEach((seq) => {
-      if (seq.condition(saveFile) && saveFile.meta.activeTab !== seq.route) {
-        setActiveTabReducer(seq.route);
-      }
-    });
+    const seq = startingRouterSequence.find(
+      (seq) => seq.condition(saveFile) && saveFile.meta.activeTab !== seq.route,
+    );
+
+    if (seq) {
+      setActiveTabReducer(seq.route);
+    }
   }, [saveFile, setActiveTabReducer, startingRouterSequence]);
 
   return {

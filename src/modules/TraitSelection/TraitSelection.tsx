@@ -1,20 +1,19 @@
 import { useCallback, useContext } from "react";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { SaveFileContext } from "../../hooks/useSaveFile";
-import { EmptyInventory, joinInventories } from "../../interfaces/Inventory";
+import {
+  EmptyInventory,
+  Inventory,
+  joinInventories,
+} from "../../interfaces/Inventory";
 import { ItemType } from "../../interfaces/Item";
 import { researchBoni } from "../../interfaces/Quest";
-import {
-  CharacterTrait,
-  SaveFile,
-  traitBoni,
-  traits,
-} from "../../interfaces/SaveFile";
+import { CharacterTrait, traitBoni, traits } from "../../interfaces/SaveFile";
 import { Card } from "../../uiComponents/Card/Card";
 import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
-const loadOuts: Record<CharacterTrait, Partial<SaveFile>> = {
+const loadOuts: Record<CharacterTrait, { storage: Inventory }> = {
   chef: {
     storage: joinInventories(EmptyInventory, {
       "poke-ball": 20,
@@ -74,16 +73,25 @@ const loadOuts: Record<CharacterTrait, Partial<SaveFile>> = {
 };
 
 export const TraitSelection = (): JSX.Element => {
-  const { patchSaveFileReducer } = useContext(SaveFileContext);
+  const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
   const proceed = useCallback(
     (trait: CharacterTrait) => {
       patchSaveFileReducer({
-        ...loadOuts,
+        storage: joinInventories(saveFile.storage, loadOuts[trait].storage),
         trait,
+        meta:
+          saveFile.pokemon.length > 0
+            ? { activeTab: "OVERWORLD" }
+            : saveFile.meta,
       });
     },
-    [patchSaveFileReducer],
+    [
+      patchSaveFileReducer,
+      saveFile.meta,
+      saveFile.pokemon.length,
+      saveFile.storage,
+    ],
   );
 
   return (

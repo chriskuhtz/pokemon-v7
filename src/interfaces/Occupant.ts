@@ -165,6 +165,7 @@ export interface OverworldTrainer extends BaseOccupant {
   battleTeamConfig: BattleTeamConfig;
   profilePicture?: string;
   spriteGeneration?: 1;
+  name?: string;
 }
 export interface Portal extends BaseOccupant {
   type: "PORTAL";

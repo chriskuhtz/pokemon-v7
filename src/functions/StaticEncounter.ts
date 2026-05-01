@@ -17,12 +17,10 @@ import { occupantHandled } from "./occupantHandled";
 export const makeOverworldPokemonFromStaticEncounter = (
   staticEncounter: StaticEncounter,
 ): OverworldPokemon => {
-  const id = `staticEncounter${staticEncounter.mapId}${staticEncounter.x}${staticEncounter.name}${staticEncounter.xp}${staticEncounter.resetAt}`;
   return {
-    id: id,
     dialogue: [`Its a wild ${staticEncounter.name}`],
     type: "POKEMON",
-    conditionFunction: (s) => !occupantHandled(s, id),
+    conditionFunction: (s) => !occupantHandled(s, staticEncounter.id),
     encounter: {
       name: staticEncounter.name,
       maxXp: staticEncounter.xp,
@@ -63,12 +61,13 @@ export const addStaticEncounterToSaveFile = (
   const { x, y } = getRandomPosition(mapsRecord[route]);
   const now = new Date().getTime();
   const staticEncounter: StaticEncounter = {
+    id: `${route}+${pokemon}`,
     mapId: route,
     name: pokemon,
     dexId: internalDex[pokemon].dexId,
     x,
     y,
-    resetAt: now + ONE_HOUR * 1,
+    resetAt: now + ONE_HOUR / 4,
     xp: Math.floor(getHighestXpOnTeam(s.pokemon) * 0.9),
     orientation: getRandomOrientation(),
   };

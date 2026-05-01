@@ -100,7 +100,7 @@ export const LineUpSelection = ({
         {trainer ? (
           <h2 style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             {" "}
-            VS {trainer.id}{" "}
+            VS {trainer.name ?? trainer.id}{" "}
             {trainer.profilePicture ? (
               <img src={trainer.profilePicture} />
             ) : (
