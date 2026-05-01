@@ -4,7 +4,6 @@ import { InternalDex } from "../interfaces/GameData";
 import { OverworldPokemon } from "../interfaces/Occupant";
 import { SaveFile, StaticEncounter } from "../interfaces/SaveFile";
 import { ArrayHelpers } from "./ArrayHelpers";
-import { calculateLevelData } from "./calculateLevelData";
 import { getHighestXpOnTeam } from "./getHighestXpOnTeam";
 import { getRandomOrientation } from "./getNextClockwiseDirection";
 import { getRandomAvailableRoute } from "./getRandomAvailableRoute";
@@ -70,9 +69,7 @@ export const addStaticEncounterToSaveFile = (
     x,
     y,
     resetAt: now + ONE_HOUR * 1,
-    xp: Math.floor(
-      calculateLevelData(getHighestXpOnTeam(s.pokemon), "medium").level * 0.9,
-    ),
+    xp: Math.floor(getHighestXpOnTeam(s.pokemon) * 0.9),
     orientation: getRandomOrientation(),
   };
 
