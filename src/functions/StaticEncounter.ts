@@ -21,7 +21,7 @@ export const makeOverworldPokemonFromStaticEncounter = (
   const id = `staticEncounter${staticEncounter.mapId}${staticEncounter.x}${staticEncounter.name}${staticEncounter.xp}${staticEncounter.resetAt}`;
   return {
     id: id,
-    dialogue: ["The wild Pokemon attacks"],
+    dialogue: [`Its a wild ${staticEncounter.name}`],
     type: "POKEMON",
     conditionFunction: (s) => !occupantHandled(s, id),
     encounter: {
