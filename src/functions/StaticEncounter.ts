@@ -1,5 +1,7 @@
 import { ONE_HOUR } from "../constants/baseConstants";
+import { baseInternalDex } from "../constants/baseInternalDex";
 import { mapsRecord } from "../constants/gameData/maps/mapsRecord";
+import { PokemonName } from "../constants/pokemonNames";
 import { InternalDex } from "../interfaces/GameData";
 import { OverworldPokemon } from "../interfaces/Occupant";
 import { SaveFile, StaticEncounter } from "../interfaces/SaveFile";
@@ -44,7 +46,7 @@ export const addStaticEncounterToSaveFile = (
     return updated;
   }
 
-  const options = [
+  const options: PokemonName[] = [
     ...getAllEncountersFor(
       route,
       { area: "LAND", rarity: "ultra-rare" },
@@ -56,7 +58,7 @@ export const addStaticEncounterToSaveFile = (
       internalDex,
     ).map((p) => p.name),
     ...getStaticEncountersForRoute(route, internalDex),
-  ];
+  ].filter((p) => baseInternalDex[p].dexId < 815);
   const pokemon = ArrayHelpers.getRandomEntry(options);
   const { x, y } = getRandomPosition(mapsRecord[route]);
   const now = new Date().getTime();

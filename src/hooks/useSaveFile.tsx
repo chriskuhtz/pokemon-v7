@@ -185,7 +185,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
       //update lostItems
       if (gameData.features.lostItems) {
         update.lostItems?.forEach((lostItem) => {
-          if (lostItem.resetAt > now) {
+          if (lostItem.resetAt < now) {
             update.handledOccupants = update.handledOccupants.filter(
               (h) => h.id !== lostItem.id,
             );
@@ -201,7 +201,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
       //update static Encounters
       if (gameData.features.staticEncounters && update.pokemon.length > 0) {
         update.staticEncounters?.forEach((staticEncounter) => {
-          if (staticEncounter.resetAt > now) {
+          if (staticEncounter.resetAt < now) {
             update.handledOccupants = update.handledOccupants.filter(
               (h) => h.id !== staticEncounter.id,
             );
@@ -217,7 +217,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
       //update random trainers
       if (gameData.features.randomTrainers && update.pokemon.length > 0) {
         update.randomTrainers?.forEach((randomTrainer) => {
-          if (randomTrainer.resetAt > now) {
+          if (randomTrainer.resetAt < now) {
             update.handledOccupants = update.handledOccupants.filter(
               (h) => h.id !== randomTrainer.id,
             );
