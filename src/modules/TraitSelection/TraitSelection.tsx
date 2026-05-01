@@ -113,14 +113,14 @@ export const TraitSelection = (): JSX.Element => {
 
                   <div>
                     <strong>
-                      I gain more points for my Specialties:{" "}
+                      gains more points for:{" "}
                       {researchBoni[trait]
                         .map((bonus) => `${bonus} Quests`)
                         .join(" ,")}
                     </strong>
                   </div>
                   <div>
-                    <strong>My Supplies:</strong>
+                    <strong>Supplies:</strong>
                     <Stack mode="row" alignItems="center" flexWrap="wrap">
                       {Object.entries(loadOut.storage ?? {})
                         .filter(([, amount]) => amount > 0)
