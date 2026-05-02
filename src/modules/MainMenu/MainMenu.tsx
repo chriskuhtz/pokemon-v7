@@ -30,6 +30,7 @@ import {
   getCurrentRepel,
   startLure,
   startRepel,
+  stopLure,
   stopRepel,
 } from "../../functions/TimedEvent";
 import { LocationContext } from "../../hooks/LocationProvider";
@@ -282,7 +283,11 @@ export const LureButton = () => {
             {new Date(currentLure.removeAt).toLocaleTimeString()}
           </h3>
         }
-        actionElements={[]}
+        actionElements={[
+          <button onClick={() => patchSaveFileReducer(stopLure(saveFile))}>
+            Stop Lure
+          </button>,
+        ]}
       />
     );
   }

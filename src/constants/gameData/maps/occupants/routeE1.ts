@@ -2,6 +2,7 @@ import { getTimeOfDay } from "../../../../functions/getTimeOfDay";
 import { getTraveller } from "../../../../functions/getTraveller";
 import { makeApricornTree } from "../../../../functions/makeApricornTree";
 import { makeBerryTree } from "../../../../functions/makeBerryTree";
+import { occupantHandled } from "../../../../functions/occupantHandled";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
 import { routeE1Lure } from "../../../../modules/BerryLure/BerryLure";
 import { blaine } from "./blaine";
@@ -53,8 +54,7 @@ export const routeE1Occupants: OverworldMap["occupants"] = [
     type: "LEDGE",
     x: 1,
     y: 24,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "ledge1"),
+    conditionFunction: (s) => !occupantHandled(s, "ledge1"),
     id: "ledge1",
     sprite: "/ledges/ledgeDown.png",
     passableFrom: "UP",
@@ -63,8 +63,7 @@ export const routeE1Occupants: OverworldMap["occupants"] = [
     type: "LEDGE",
     x: 2,
     y: 24,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "ledge2"),
+    conditionFunction: (s) => !occupantHandled(s, "ledge2"),
     id: "ledge2",
     sprite: "/ledges/ledgeInnerCornerLeft.png",
   },
@@ -72,8 +71,7 @@ export const routeE1Occupants: OverworldMap["occupants"] = [
     type: "LEDGE",
     x: 2,
     y: 25,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "ledge3"),
+    conditionFunction: (s) => !occupantHandled(s, "ledge3"),
     id: "ledge3",
     sprite: "/ledges/ledgeLeft.png",
     passableFrom: "RIGHT",
@@ -82,8 +80,7 @@ export const routeE1Occupants: OverworldMap["occupants"] = [
     type: "LEDGE",
     x: 2,
     y: 26,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "ledge4"),
+    conditionFunction: (s) => !occupantHandled(s, "ledge4"),
     id: "ledge4",
     sprite: "/ledges/ledgeInnerCornerLeftBottom.png",
   },
@@ -91,8 +88,7 @@ export const routeE1Occupants: OverworldMap["occupants"] = [
     type: "LEDGE",
     x: 1,
     y: 26,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "ledge5"),
+    conditionFunction: (s) => !occupantHandled(s, "ledge5"),
     id: "ledge5",
     sprite: "/ledges/ledgeUp.png",
     passableFrom: "DOWN",
@@ -101,8 +97,7 @@ export const routeE1Occupants: OverworldMap["occupants"] = [
     type: "LEDGE",
     x: 24,
     y: 2,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "ledge6"),
+    conditionFunction: (s) => !occupantHandled(s, "ledge6"),
     id: "ledge6",
     sprite: "/ledges/ledgeEndBottomLeft.png",
   },
@@ -110,8 +105,7 @@ export const routeE1Occupants: OverworldMap["occupants"] = [
     type: "LEDGE",
     x: 25,
     y: 2,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "ledge7"),
+    conditionFunction: (s) => !occupantHandled(s, "ledge7"),
     id: "ledge7",
     sprite: "/ledges/ledgeDown.png",
     passableFrom: "UP",
@@ -120,8 +114,7 @@ export const routeE1Occupants: OverworldMap["occupants"] = [
     type: "LEDGE",
     x: 26,
     y: 2,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "ledge8"),
+    conditionFunction: (s) => !occupantHandled(s, "ledge8"),
     id: "ledge8",
     sprite: "/ledges/ledgeEndBottomRight.png",
   },
@@ -131,79 +124,69 @@ export const routeE1Occupants: OverworldMap["occupants"] = [
     type: "SNORLAX",
     orientation: "LEFT",
     id: "snorlax-blocker-routeE1",
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === "snorlax-blocker-routeE1"),
+    conditionFunction: (s) => !occupantHandled(s, "snorlax-blocker-routeE1"),
   },
   {
     type: "ROCK",
     y: 33,
     x: 22,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "rock_routeE1_1"),
+    conditionFunction: (s) => !occupantHandled(s, "rock_routeE1_1"),
     id: "rock_routeE1_1",
   },
   {
     type: "ROCK",
     y: 24,
     x: 40,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "rock_routeE1_2"),
+    conditionFunction: (s) => !occupantHandled(s, "rock_routeE1_2"),
     id: "rock_routeE1_2",
   },
   {
     type: "ROCK",
     y: 10,
     x: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "rock_routeE1_1"),
+    conditionFunction: (s) => !occupantHandled(s, "rock_routeE1_1"),
     id: "rock_routeE1_1",
   },
   {
     type: "ROCK",
     y: 5,
     x: 27,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "rock_routeE1_4"),
+    conditionFunction: (s) => !occupantHandled(s, "rock_routeE1_4"),
     id: "rock_routeE1_4",
   },
   {
     type: "ROCK",
     y: 40,
     x: 46,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "rock_routeE1_5"),
+    conditionFunction: (s) => !occupantHandled(s, "rock_routeE1_5"),
     id: "rock_routeE1_5",
   },
   {
     type: "ROCK",
     y: 30,
     x: 10,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "rock_routeE1_6"),
+    conditionFunction: (s) => !occupantHandled(s, "rock_routeE1_6"),
     id: "rock_routeE1_6",
   },
   {
     type: "ROCK",
     y: 42,
     x: 4,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "rock_routeE1_7"),
+    conditionFunction: (s) => !occupantHandled(s, "rock_routeE1_7"),
     id: "rock_routeE1_7",
   },
   {
     type: "ROCK",
     y: 7,
     x: 46,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "rock_routeE1_8"),
+    conditionFunction: (s) => !occupantHandled(s, "rock_routeE1_8"),
     id: "rock_routeE1_8",
   },
   {
     type: "ROCK",
     y: 13,
     x: 25,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "rock_routeE1_9"),
+    conditionFunction: (s) => !occupantHandled(s, "rock_routeE1_9"),
     id: "rock_routeE1_9",
   },
   {
@@ -213,8 +196,7 @@ export const routeE1Occupants: OverworldMap["occupants"] = [
     x: 32,
     y: 20,
     id: "routeE1_root-fossil",
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === "routeE1_root-fossil"),
+    conditionFunction: (s) => !occupantHandled(s, "routeE1_root-fossil"),
   },
   {
     type: "ITEM",
@@ -223,8 +205,7 @@ export const routeE1Occupants: OverworldMap["occupants"] = [
     x: 33,
     y: 20,
     id: "routeE1_claw-fossil",
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === "routeE1_claw-fossil"),
+    conditionFunction: (s) => !occupantHandled(s, "routeE1_claw-fossil"),
   },
 
   ...makeApricornTree({

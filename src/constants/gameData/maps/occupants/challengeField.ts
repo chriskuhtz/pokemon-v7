@@ -1,3 +1,4 @@
+import { occupantHandled } from "../../../../functions/occupantHandled";
 import { OverworldTrainer } from "../../../../interfaces/Occupant";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
@@ -55,7 +56,7 @@ export const challengeFieldOccupants: OverworldMap["occupants"] = [
         assignNaturalAbility: true,
       },
       conditionFunction: (s) =>
-        !s.handledOccupants.some((h) => h.id === id) &&
+        !occupantHandled(s, id) &&
         (!t.requiredUpgrade || s.campUpgrades[t.requiredUpgrade]),
       sprite: t.trainer?.sprite ?? SpriteEnum.aceMale,
       unhandledMessage: [".", "..", "..."],
@@ -71,8 +72,7 @@ export const challengeFieldOccupants: OverworldMap["occupants"] = [
     id: `challengeField_item1`,
     item: "super-potion",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `challengeField_item1`),
+    conditionFunction: (s) => !occupantHandled(s, `challengeField_item1`),
   },
   {
     type: "ITEM",
@@ -81,8 +81,7 @@ export const challengeFieldOccupants: OverworldMap["occupants"] = [
     id: `challengeField_item2`,
     item: "sitrus-berry",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `challengeField_item2`),
+    conditionFunction: (s) => !occupantHandled(s, `challengeField_item2`),
   },
   {
     type: "ITEM",
@@ -91,8 +90,7 @@ export const challengeFieldOccupants: OverworldMap["occupants"] = [
     id: `challengeField_item3`,
     item: "lum-berry",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `challengeField_item3`),
+    conditionFunction: (s) => !occupantHandled(s, `challengeField_item3`),
   },
   {
     type: "ITEM",
@@ -101,8 +99,7 @@ export const challengeFieldOccupants: OverworldMap["occupants"] = [
     id: `challengeField_item4`,
     item: "moomoo-milk",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `challengeField_item4`),
+    conditionFunction: (s) => !occupantHandled(s, `challengeField_item4`),
   },
   {
     type: "ITEM",
@@ -111,8 +108,7 @@ export const challengeFieldOccupants: OverworldMap["occupants"] = [
     id: `challengeField_item5`,
     item: "elixir",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `challengeField_item5`),
+    conditionFunction: (s) => !occupantHandled(s, `challengeField_item5`),
   },
   {
     type: "ITEM",
@@ -121,8 +117,7 @@ export const challengeFieldOccupants: OverworldMap["occupants"] = [
     id: `challengeField_item6`,
     item: "lum-berry",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `challengeField_item6`),
+    conditionFunction: (s) => !occupantHandled(s, `challengeField_item6`),
   },
   {
     type: "ITEM",
@@ -131,8 +126,7 @@ export const challengeFieldOccupants: OverworldMap["occupants"] = [
     id: `challengeField_item7`,
     item: "full-restore",
     amount: 3,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `challengeField_item7`),
+    conditionFunction: (s) => !occupantHandled(s, `challengeField_item7`),
   },
   {
     type: "ITEM",
@@ -141,8 +135,7 @@ export const challengeFieldOccupants: OverworldMap["occupants"] = [
     id: `challengeField_item8`,
     item: "sitrus-berry",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `challengeField_item8`),
+    conditionFunction: (s) => !occupantHandled(s, `challengeField_item8`),
   },
   {
     type: "ITEM",
@@ -151,8 +144,7 @@ export const challengeFieldOccupants: OverworldMap["occupants"] = [
     id: `challengeField_item9`,
     item: "elixir",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `challengeField_item9`),
+    conditionFunction: (s) => !occupantHandled(s, `challengeField_item9`),
   },
   {
     type: "ITEM",
@@ -161,8 +153,7 @@ export const challengeFieldOccupants: OverworldMap["occupants"] = [
     id: `challengeField_item10`,
     item: "full-restore",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `challengeField_item10`),
+    conditionFunction: (s) => !occupantHandled(s, `challengeField_item10`),
   },
   {
     type: "ITEM",
@@ -171,8 +162,7 @@ export const challengeFieldOccupants: OverworldMap["occupants"] = [
     id: `challengeField_item11`,
     item: "sitrus-berry",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `challengeField_item11`),
+    conditionFunction: (s) => !occupantHandled(s, `challengeField_item11`),
   },
   {
     type: "ITEM",
@@ -181,7 +171,6 @@ export const challengeFieldOccupants: OverworldMap["occupants"] = [
     id: `challengeField_item9`,
     item: "elixir",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `challengeField_item12`),
+    conditionFunction: (s) => !occupantHandled(s, `challengeField_item12`),
   },
 ];

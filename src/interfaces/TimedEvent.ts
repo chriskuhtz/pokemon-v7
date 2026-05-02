@@ -37,6 +37,7 @@ export interface LostItemEvent extends BaseTimedEvent {
 }
 export interface StaticEncounterEvent extends BaseTimedEvent {
   type: "STATIC_ENCOUNTER";
+  isRampager?: boolean;
   mapId: MapId;
   name: PokemonName;
   dexId: number;
@@ -68,10 +69,9 @@ export interface TroubleMakersEvent extends BaseTimedEvent {
   affiliation: EvilTeam;
 }
 
-export type BlockerEventType = "MILTANK" | "DUGTRIO" | "ZIGZAGOON" | "COMBEE";
 export interface BlockerEvent extends BaseTimedEvent {
   type: "BLOCKER";
-  blocks: BlockerEventType;
+  id: string;
 }
 
 export interface SwarmEvent extends BaseTimedEvent {

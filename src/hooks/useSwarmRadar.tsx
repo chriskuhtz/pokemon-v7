@@ -1,15 +1,12 @@
 import { useCallback, useContext, useMemo } from "react";
-import {
-  mapDisplayNames,
-  mapsRecord,
-} from "../constants/gameData/maps/mapsRecord";
+import { mapDisplayNames } from "../constants/gameData/maps/mapsRecord";
 import { ArrayHelpers } from "../functions/ArrayHelpers";
 import { getRandomAvailableRoute } from "../functions/getRandomAvailableRoute";
-import { getRandomPosition } from "../functions/getRandomPosition";
-import { getRampagers } from "../functions/internalDex";
-import { replaceRouteName } from "../functions/replaceRouteName";
-import { getCurrentSwarm, startSwarm } from "../functions/TimedEvent";
-import { MapId } from "../interfaces/mapIds";
+import {
+  addStaticEncounterToSaveFile,
+  getCurrentSwarm,
+  startSwarm,
+} from "../functions/TimedEvent";
 import { SwarmType } from "../interfaces/Pokedex";
 import { SwarmEvent } from "../interfaces/TimedEvent";
 import { GameDataContext } from "./useGameData";
@@ -67,34 +64,11 @@ export const useSwarmRadar = (): {
     [saveFile],
   );
 
-  const handleRampage = useCallback(
-    (route: MapId) => {
-      if (saveFile.currentRampagingPokemon) {
-        return;
-      }
-      const pokemon = ArrayHelpers.getRandomEntry(getRampagers(internalDex));
-
-      addMessage({
-        message: `rampaging ${pokemon} detected at ${replaceRouteName(route)}`,
-      });
-      const { x, y } = getRandomPosition(mapsRecord[route]);
-      patchSaveFileReducer({
-        currentRampagingPokemon: {
-          x,
-          y,
-          id: `${pokemon}-${route}-rampager`,
-          name: pokemon,
-          route,
-        },
-      });
-    },
-    [
-      addMessage,
-      internalDex,
-      patchSaveFileReducer,
-      saveFile.currentRampagingPokemon,
-    ],
-  );
+  const handleRampage = useCallback(() => {
+    patchSaveFileReducer(
+      addStaticEncounterToSaveFile(saveFile, internalDex, true),
+    );
+  }, [internalDex, patchSaveFileReducer, saveFile]);
 
   const scan = useCallback(
     (mode: ScanMode) => {
@@ -109,7 +83,7 @@ export const useSwarmRadar = (): {
       }
 
       if (mode === "RAMPAGE") {
-        handleRampage(route);
+        handleRampage();
         return;
       }
 

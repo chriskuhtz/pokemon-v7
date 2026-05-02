@@ -1,6 +1,7 @@
 import { ArrayHelpers } from "../../../../functions/ArrayHelpers";
 import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
+import { occupantHandled } from "../../../../functions/occupantHandled";
 import { Occupant, OverworldTrainer } from "../../../../interfaces/Occupant";
 
 import { OwnedPokemon } from "../../../../interfaces/OwnedPokemon";
@@ -348,7 +349,7 @@ export const red: OverworldTrainer = {
   x: 0,
   y: 0,
   id: redId,
-  conditionFunction: (s) => !s.handledOccupants.some((h) => h.id === redId),
+  conditionFunction: (s) => !occupantHandled(s, redId),
   orientation: "DOWN",
   sprite: SpriteEnum.red1996,
   unhandledMessage: [
@@ -369,45 +370,45 @@ export const redN1: Occupant = {
   ...red,
   x: 4,
   y: 28,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== redId),
+  conditionFunction: (s) => !occupantHandled(s, redId),
 };
 export const redN1E1: Occupant = {
   ...red,
   x: 3,
   y: 3,
   orientation: "RIGHT",
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== redId),
+  conditionFunction: (s) => !occupantHandled(s, redId),
 };
 export const redE1: Occupant = {
   ...red,
   x: 25,
   y: 35,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== redId),
+  conditionFunction: (s) => !occupantHandled(s, redId),
 };
 export const redS1E1: Occupant = {
   ...red,
   x: 12,
   y: 15,
   orientation: "UP",
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== redId),
+  conditionFunction: (s) => !occupantHandled(s, redId),
 };
 export const redS1: Occupant = {
   ...red,
   x: 3,
   y: 13,
   orientation: "DOWN",
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== redId),
+  conditionFunction: (s) => !occupantHandled(s, redId),
 };
 export const redS1W1: Occupant = {
   ...red,
   x: 31,
   y: 1,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== redId),
+  conditionFunction: (s) => !occupantHandled(s, redId),
 };
 export const redW1: Occupant = {
   ...red,
   x: 12,
   y: 8,
   orientation: "DOWN",
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== redId),
+  conditionFunction: (s) => !occupantHandled(s, redId),
 };

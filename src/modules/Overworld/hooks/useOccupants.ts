@@ -1,7 +1,6 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
 import { PokemonName } from "../../../constants/pokemonNames";
-import { getMiddleOfThree } from "../../../functions/getMiddleOfThree";
 import { getRandomOrientation } from "../../../functions/getNextClockwiseDirection";
 import { getNextLocation } from "../../../functions/getNextLocation";
 import { getOppositeDirection } from "../../../functions/getOppositeDirection";
@@ -21,11 +20,7 @@ import { InternalDex } from "../../../interfaces/GameData";
 import { MapId } from "../../../interfaces/mapIds";
 import { Nature } from "../../../interfaces/Natures";
 import { Occupant, OverworldPokemon } from "../../../interfaces/Occupant";
-import {
-  CharacterOrientation,
-  RampagingPokemon,
-  SaveFile,
-} from "../../../interfaces/SaveFile";
+import { CharacterOrientation, SaveFile } from "../../../interfaces/SaveFile";
 import { SpriteEnum } from "../../../interfaces/SpriteEnum";
 
 export const useOccupants = () => {
@@ -51,13 +46,6 @@ export const useOccupants = () => {
       }
       return occ;
     });
-    //add rampager
-    if (
-      saveFile.currentRampagingPokemon &&
-      saveFile.currentRampagingPokemon.route === map.id
-    ) {
-      all.push(createRampager(saveFile.currentRampagingPokemon, internalDex));
-    }
     //add guest
     const guest = saveFile.importedChallenger;
     if (guest && guest.mapId === map.id) {
@@ -122,14 +110,13 @@ export const useOccupants = () => {
       setStatefulOccupants(all);
     }
   }, [
-    map,
-    saveFile.handledOccupants,
-    statefulOccupants.length,
-    saveFile,
-    location.mapId,
-    internalDex,
     availableQuests.length,
+    internalDex,
     location,
+    map.id,
+    map.occupants,
+    saveFile,
+    statefulOccupants.length,
   ]);
 
   const conditionalOccupants = useMemo(() => {
@@ -337,31 +324,6 @@ const getNatureBasedMessage = ({
     case "timid":
       return `${name} seems a little afraid of the others`;
   }
-};
-
-const createRampager = (
-  currentRampagingPokemon: RampagingPokemon,
-  internalDex: InternalDex,
-): OverworldPokemon => {
-  const { x, y, id, name } = currentRampagingPokemon;
-  const xp = getMiddleOfThree([70 * 70 * 70, Math.random() * 1000000, 1000000]);
-  return {
-    type: "POKEMON",
-    x,
-    y,
-    orientation: getRandomOrientation(),
-    dexId: internalDex[name].dexId,
-    encounter: {
-      name: name,
-      maxXp: xp,
-      minXp: xp,
-      rarity: "common",
-    },
-    dialogue: [`The ${name} is thrashing around`],
-    conditionFunction: (s) => !occupantHandled(s, id),
-
-    id,
-  };
 };
 
 const createBattle = (): Occupant[] => {

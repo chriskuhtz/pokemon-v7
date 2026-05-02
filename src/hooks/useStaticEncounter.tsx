@@ -1,5 +1,6 @@
 import { useCallback, useContext } from "react";
 import { makeChallengerPokemon } from "../functions/makeChallengerPokemon";
+import { startBlocker } from "../functions/TimedEvent";
 import { Challenger } from "../interfaces/Challenger";
 import { EmptyInventory } from "../interfaces/Inventory";
 import { OverworldPokemon } from "../interfaces/Occupant";
@@ -56,10 +57,7 @@ export const useInteractWithOverworldPokemon = () => {
               i === data.dialogue.length - 1 && data.disappearsAfterDialogue
                 ? () =>
                     patchSaveFileReducer({
-                      handledOccupants: [
-                        ...saveFile.handledOccupants,
-                        { id: data.id, resetAt: -1 },
-                      ],
+                      ...startBlocker(saveFile, data.id, -1),
                     })
                 : undefined,
           })),
@@ -69,7 +67,7 @@ export const useInteractWithOverworldPokemon = () => {
       addMultipleMessages,
       interactWithStaticEncounter,
       patchSaveFileReducer,
-      saveFile.handledOccupants,
+      saveFile,
     ],
   );
 };

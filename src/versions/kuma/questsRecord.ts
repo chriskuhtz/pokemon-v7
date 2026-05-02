@@ -27,6 +27,7 @@ import {
   getSwarmOptions,
   getUnderRockEncounters,
 } from "../../functions/internalDex";
+import { occupantHandled } from "../../functions/occupantHandled";
 import {
   apricorns,
   apricornTable,
@@ -1120,10 +1121,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     },
     researchPoints: 5,
     conditionFunction: (s) => {
-      const defeatedTrainers = s.handledOccupants.filter((h) =>
-        trainers.some((t) => t.id === h.id),
-      ).length;
-      return defeatedTrainers > 0;
+      return trainers.some((t) => occupantHandled(s, t.id));
     },
     kind: "BULLETIN",
     requiredUpgrade: "training field 1",
@@ -1136,9 +1134,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     },
     researchPoints: 25,
     conditionFunction: (s) => {
-      return tier1trainers.every((trainer) =>
-        s.handledOccupants.some((h) => h.id === trainer.id),
-      );
+      return tier1trainers.every((trainer) => occupantHandled(s, trainer.id));
     },
     kind: "BULLETIN",
     requiredUpgrade: "training field 1",
@@ -1152,9 +1148,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     },
     researchPoints: 50,
     conditionFunction: (s) => {
-      return tier2trainers.every((trainer) =>
-        s.handledOccupants.some((h) => h.id === trainer.id),
-      );
+      return tier2trainers.every((trainer) => occupantHandled(s, trainer.id));
     },
     kind: "BULLETIN",
     requiredUpgrade: "training field 2",
@@ -1168,9 +1162,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     },
     researchPoints: 75,
     conditionFunction: (s) => {
-      return tier3trainers.every((trainer) =>
-        s.handledOccupants.some((h) => h.id === trainer.id),
-      );
+      return tier3trainers.every((trainer) => occupantHandled(s, trainer.id));
     },
     kind: "BULLETIN",
     requiredUpgrade: "training field 3",
@@ -1184,9 +1176,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     },
     researchPoints: 100,
     conditionFunction: (s) => {
-      return tier4trainers.every((trainer) =>
-        s.handledOccupants.some((h) => h.id === trainer.id),
-      );
+      return tier4trainers.every((trainer) => occupantHandled(s, trainer.id));
     },
     kind: "BULLETIN",
     requiredUpgrade: "training field 4",
@@ -1207,9 +1197,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     },
     researchPoints: 125,
     conditionFunction: (s) => {
-      return tier5trainers.every((trainer) =>
-        s.handledOccupants.some((h) => h.id === trainer.id),
-      );
+      return tier5trainers.every((trainer) => occupantHandled(s, trainer.id));
     },
     kind: "BULLETIN",
     requiredUpgrade: "training field 5",
@@ -1544,7 +1532,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     },
     researchPoints: 50,
     conditionFunction: (s) => {
-      return s.handledOccupants.some((h) => h.id === "Gym Leader Roark");
+      return occupantHandled(s, "Gym Leader Roark");
     },
     kind: "BULLETIN",
     requiredUpgrade: "training field 1",
@@ -1569,7 +1557,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     },
     researchPoints: 50,
     conditionFunction: (s) => {
-      return s.handledOccupants.some((h) => h.id === "Professor Rowan");
+      return occupantHandled(s, "Professor Rowan");
     },
     kind: "BULLETIN",
     requiredUpgrade: "training field 1",
@@ -1594,7 +1582,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     },
     researchPoints: 50,
     conditionFunction: (s) => {
-      return s.handledOccupants.some((h) => h.id === "Professor Elm");
+      return occupantHandled(s, "Professor Elm");
     },
     kind: "BULLETIN",
     requiredUpgrade: "training field 1",
@@ -2437,7 +2425,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     },
     researchPoints: 100,
     conditionFunction: (s) => {
-      return s.handledOccupants.some((h) => h.id === "giovanni");
+      return occupantHandled(s, "giovanni");
     },
     kind: "BULLETIN",
     availableAfter: "reach ranger level 10",
@@ -3066,59 +3054,59 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
         (f) => s.pokedex[f].caughtOnRoutes.length > 0,
       ),
   },
-  "defeat an imported challenger": {
-    category: "BATTLE",
-    kind: "BULLETIN",
-    conditionFunction: (s: SaveFile) =>
-      !!s.mileStones.importedChallengerDefeatedAt,
-    researchPoints: 10,
-    rewardItems: { "exp-candy-xs": 10 },
-  },
-  "defeat an imported challenger at lvl 20 or higher": {
-    category: "BATTLE",
-    kind: "BULLETIN",
-    conditionFunction: (s: SaveFile) =>
-      (s.mileStones.importedChallengerDefeatedAt ?? 0) >= 8000,
-    researchPoints: 20,
-    availableAfter: "defeat an imported challenger",
-    rewardItems: { "exp-candy-s": 10 },
-  },
-  "defeat an imported challenger at lvl 40 or higher": {
-    category: "BATTLE",
-    kind: "BULLETIN",
-    conditionFunction: (s: SaveFile) =>
-      (s.mileStones.importedChallengerDefeatedAt ?? 0) >= 64000,
-    researchPoints: 40,
-    availableAfter: "defeat an imported challenger at lvl 20 or higher",
-    rewardItems: { "exp-candy-m": 10 },
-  },
-  "defeat an imported challenger at lvl 60 or higher": {
-    category: "BATTLE",
-    kind: "BULLETIN",
-    conditionFunction: (s: SaveFile) =>
-      (s.mileStones.importedChallengerDefeatedAt ?? 0) >= 216000,
-    researchPoints: 60,
-    availableAfter: "defeat an imported challenger at lvl 40 or higher",
-    rewardItems: { "exp-candy-l": 10 },
-  },
-  "defeat an imported challenger at lvl 80 or higher": {
-    category: "BATTLE",
-    kind: "BULLETIN",
-    conditionFunction: (s: SaveFile) =>
-      (s.mileStones.importedChallengerDefeatedAt ?? 0) >= 512000,
-    researchPoints: 80,
-    availableAfter: "defeat an imported challenger at lvl 60 or higher",
-    rewardItems: { "exp-candy-xl": 10 },
-  },
-  "defeat an imported challenger at lvl 100": {
-    category: "BATTLE",
-    kind: "BULLETIN",
-    conditionFunction: (s: SaveFile) =>
-      (s.mileStones.importedChallengerDefeatedAt ?? 0) >= 1000000,
-    researchPoints: 100,
-    availableAfter: "defeat an imported challenger at lvl 80 or higher",
-    rewardItems: { "exp-candy-xl": 10 },
-  },
+  // "defeat an imported challenger": {
+  //   category: "BATTLE",
+  //   kind: "BULLETIN",
+  //   conditionFunction: (s: SaveFile) =>
+  //     !!s.mileStones.importedChallengerDefeatedAt,
+  //   researchPoints: 10,
+  //   rewardItems: { "exp-candy-xs": 10 },
+  // },
+  // "defeat an imported challenger at lvl 20 or higher": {
+  //   category: "BATTLE",
+  //   kind: "BULLETIN",
+  //   conditionFunction: (s: SaveFile) =>
+  //     (s.mileStones.importedChallengerDefeatedAt ?? 0) >= 8000,
+  //   researchPoints: 20,
+  //   availableAfter: "defeat an imported challenger",
+  //   rewardItems: { "exp-candy-s": 10 },
+  // },
+  // "defeat an imported challenger at lvl 40 or higher": {
+  //   category: "BATTLE",
+  //   kind: "BULLETIN",
+  //   conditionFunction: (s: SaveFile) =>
+  //     (s.mileStones.importedChallengerDefeatedAt ?? 0) >= 64000,
+  //   researchPoints: 40,
+  //   availableAfter: "defeat an imported challenger at lvl 20 or higher",
+  //   rewardItems: { "exp-candy-m": 10 },
+  // },
+  // "defeat an imported challenger at lvl 60 or higher": {
+  //   category: "BATTLE",
+  //   kind: "BULLETIN",
+  //   conditionFunction: (s: SaveFile) =>
+  //     (s.mileStones.importedChallengerDefeatedAt ?? 0) >= 216000,
+  //   researchPoints: 60,
+  //   availableAfter: "defeat an imported challenger at lvl 40 or higher",
+  //   rewardItems: { "exp-candy-l": 10 },
+  // },
+  // "defeat an imported challenger at lvl 80 or higher": {
+  //   category: "BATTLE",
+  //   kind: "BULLETIN",
+  //   conditionFunction: (s: SaveFile) =>
+  //     (s.mileStones.importedChallengerDefeatedAt ?? 0) >= 512000,
+  //   researchPoints: 80,
+  //   availableAfter: "defeat an imported challenger at lvl 60 or higher",
+  //   rewardItems: { "exp-candy-xl": 10 },
+  // },
+  // "defeat an imported challenger at lvl 100": {
+  //   category: "BATTLE",
+  //   kind: "BULLETIN",
+  //   conditionFunction: (s: SaveFile) =>
+  //     (s.mileStones.importedChallengerDefeatedAt ?? 0) >= 1000000,
+  //   researchPoints: 100,
+  //   availableAfter: "defeat an imported challenger at lvl 80 or higher",
+  //   rewardItems: { "exp-candy-xl": 10 },
+  // },
   "collect 8 badges": {
     category: "GYM LEADER",
     kind: "BULLETIN",

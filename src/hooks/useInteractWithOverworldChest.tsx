@@ -1,5 +1,6 @@
 import { useCallback, useContext } from "react";
-import { joinInventories, EmptyInventory } from "../interfaces/Inventory";
+import { startBlocker } from "../functions/TimedEvent";
+import { EmptyInventory, joinInventories } from "../interfaces/Inventory";
 import { OverworldChest } from "../interfaces/Occupant";
 import { SaveFileContext } from "./useSaveFile";
 
@@ -16,12 +17,8 @@ export const useInteractWithOverworldChest = () => {
         );
       }
       patchSaveFileReducer({
-        ...saveFile,
+        ...startBlocker(saveFile, chest.id, -1),
         meta: { activeTab: "CHEST", currentChestId: chest.id },
-        handledOccupants: [
-          ...saveFile.handledOccupants.filter((h) => h.id !== chest.id),
-          { id: chest.id, resetAt: -1 },
-        ],
       });
 
       return;

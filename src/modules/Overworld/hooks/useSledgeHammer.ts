@@ -6,6 +6,7 @@ import {
   makeChallengerPokemon,
   OPPO_ID,
 } from "../../../functions/makeChallengerPokemon";
+import { getCurrentBlocker, startBlocker } from "../../../functions/TimedEvent";
 import { GameDataContext } from "../../../hooks/useGameData";
 import { Message, MessageQueueContext } from "../../../hooks/useMessageQueue";
 import { SaveFileContext } from "../../../hooks/useSaveFile";
@@ -34,7 +35,7 @@ export const useSledgeHammer = () => {
   const { internalDex } = useContext(GameDataContext);
   return useCallback(
     (rock: OverworldRock) => {
-      if (saveFile.handledOccupants.some((occ) => occ.id === rock.id)) {
+      if (getCurrentBlocker(saveFile, rock.id)) {
         return;
       }
       if (saveFile.campUpgrades["sledge hammer certification"]) {
@@ -85,14 +86,11 @@ export const useSledgeHammer = () => {
                 ...m,
                 onRemoval: () =>
                   patchSaveFileReducer({
-                    handledOccupants: [
-                      ...saveFile.handledOccupants,
-                      {
-                        id: rock.id,
-                        resetAt:
-                          new Date().getTime() + ONE_HOUR * Math.random(),
-                      },
-                    ],
+                    ...startBlocker(
+                      saveFile,
+                      rock.id,
+                      ONE_HOUR * Math.random(),
+                    ),
                     bag: updatedInventory,
                     meta,
                     mileStones: {
@@ -116,15 +114,6 @@ export const useSledgeHammer = () => {
         ]);
       return;
     },
-    [
-      addMultipleMessages,
-      internalDex,
-      patchSaveFileReducer,
-      saveFile.bag,
-      saveFile.campUpgrades,
-      saveFile.handledOccupants,
-      saveFile.meta,
-      saveFile.mileStones,
-    ],
+    [addMultipleMessages, internalDex, patchSaveFileReducer, saveFile],
   );
 };

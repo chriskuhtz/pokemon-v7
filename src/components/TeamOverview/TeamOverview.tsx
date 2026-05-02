@@ -1,6 +1,7 @@
 import { useContext, useMemo } from "react";
 import { battleSpriteSize } from "../../constants/baseConstants";
 import { percentageBasedColor } from "../../constants/typeColors";
+import { getPrimaryAilmentColor } from "../../functions/getPrimaryAilmentColor";
 import { getStats } from "../../functions/getStats";
 import { isOwnedPokemonKO } from "../../functions/isKo";
 import { useGetBattleTeam } from "../../hooks/useGetBattleTeam";
@@ -42,12 +43,13 @@ const TeamMemberInOverview = ({
   const { saveFile } = useContext(SaveFileContext);
 
   const readyToEvolve = useIsReadyToEvolve(pokemon, battlePokemon?.at(0)?.data);
-  if (!battlePokemon?.at(0)) {
+  const mon = battlePokemon?.at(0);
+  if (!mon) {
     return <></>;
   }
 
   const max = getStats(
-    battlePokemon.at(0)?.data.stats ?? [],
+    mon.data.stats,
     pokemon.xp,
     pokemon.growthRate,
     pokemon.nature,
@@ -61,6 +63,9 @@ const TeamMemberInOverview = ({
 
   const color = percentageBasedColor(percentage).color;
 
+  const borderColor = mon.primaryAilment
+    ? getPrimaryAilmentColor(mon.primaryAilment.type)
+    : percentageBasedColor(percentage).color;
   return (
     <div style={{ position: "relative" }}>
       <div
@@ -97,7 +102,7 @@ const TeamMemberInOverview = ({
           maxHeight: percentage * battleSpriteSize,
           height: percentage * battleSpriteSize,
           minHeight: percentage * battleSpriteSize,
-          border: percentage > 0 ? `4px solid ${color}` : undefined,
+          border: percentage > 0 ? `4px solid ${borderColor}` : undefined,
         }}
       ></div>
     </div>

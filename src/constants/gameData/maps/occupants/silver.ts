@@ -1,6 +1,7 @@
 import { ArrayHelpers } from "../../../../functions/ArrayHelpers";
 import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
+import { occupantHandled } from "../../../../functions/occupantHandled";
 import { Occupant, OverworldTrainer } from "../../../../interfaces/Occupant";
 
 import { OwnedPokemon } from "../../../../interfaces/OwnedPokemon";
@@ -344,44 +345,44 @@ export const silverN1: Occupant = {
   ...silver,
   x: 39,
   y: 40,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== silverId),
+  conditionFunction: (s) => !occupantHandled(s, silverId),
 };
 export const silverN1E1: Occupant = {
   ...silver,
   x: 47,
   y: 2,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== silverId),
+  conditionFunction: (s) => !occupantHandled(s, silverId),
 };
 export const silverE1: Occupant = {
   ...silver,
   x: 32,
   y: 23,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== silverId),
+  conditionFunction: (s) => !occupantHandled(s, silverId),
 };
 export const silverS1E1: Occupant = {
   ...silver,
   x: 17,
   y: 10,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== silverId),
+  conditionFunction: (s) => !occupantHandled(s, silverId),
 };
 export const silverS1: Occupant = {
   ...silver,
   x: 10,
   y: 1,
   orientation: "RIGHT",
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== silverId),
+  conditionFunction: (s) => !occupantHandled(s, silverId),
 };
 export const silverS1W1: Occupant = {
   ...silver,
   x: 31,
   y: 40,
   orientation: "RIGHT",
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== silverId),
+  conditionFunction: (s) => !occupantHandled(s, silverId),
 };
 export const silverW1: Occupant = {
   ...silver,
   x: 45,
   y: 46,
   orientation: "DOWN",
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== silverId),
+  conditionFunction: (s) => !occupantHandled(s, silverId),
 };

@@ -1,4 +1,5 @@
 import { useCallback, useContext, useMemo } from "react";
+import { ONE_HOUR } from "../constants/baseConstants";
 import { getCurrentBlocker, startBlocker } from "../functions/TimedEvent";
 import { joinInventories } from "../interfaces/Inventory";
 import { BerryType, isBerry } from "../interfaces/Item";
@@ -21,7 +22,9 @@ export const useMiltankFarm = () => {
       });
 
       const blockerChecked =
-        Math.random() > 0.85 ? startBlocker(saveFile, "MILTANK") : saveFile;
+        Math.random() > 0.85
+          ? startBlocker(saveFile, "MILTANK", ONE_HOUR)
+          : saveFile;
       patchSaveFileReducer({
         ...blockerChecked,
         bag: joinInventories(saveFile.bag, {

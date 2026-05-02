@@ -4,6 +4,7 @@ import {
   OPPO_ID,
   makeChallengerPokemon,
 } from "../functions/makeChallengerPokemon";
+import { startBlocker } from "../functions/TimedEvent";
 import { Challenger } from "../interfaces/Challenger";
 import { EmptyInventory } from "../interfaces/Inventory";
 import { OverworldSnorlax } from "../interfaces/Occupant";
@@ -34,7 +35,6 @@ export const useInteractWithSnorlax = () => {
             }),
           ],
         };
-        const now = new Date().getTime();
 
         addMultipleMessages([
           { message: "You play the pokeflute" },
@@ -43,25 +43,16 @@ export const useInteractWithSnorlax = () => {
             message: "and attacks",
             onRemoval: () => {
               patchSaveFileReducer({
+                ...startBlocker(saveFile, occ.id, ONE_DAY),
                 mileStones: { ...saveFile.mileStones, hasWokenASnorlax: true },
                 meta: { currentChallenger: challenger, activeTab: "BATTLE" },
-                handledOccupants: [
-                  ...saveFile.handledOccupants,
-                  { id: occ.id, resetAt: now + ONE_DAY },
-                ],
               });
             },
           },
         ]);
       }
     },
-    [
-      addMultipleMessages,
-      patchSaveFileReducer,
-      saveFile.bag,
-      saveFile.handledOccupants,
-      saveFile.mileStones,
-    ],
+    [addMultipleMessages, patchSaveFileReducer, saveFile],
   );
 
   return interact;

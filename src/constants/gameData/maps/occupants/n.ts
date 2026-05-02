@@ -1,6 +1,7 @@
 import { ArrayHelpers } from "../../../../functions/ArrayHelpers";
 import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
+import { occupantHandled } from "../../../../functions/occupantHandled";
 import { Occupant, OverworldTrainer } from "../../../../interfaces/Occupant";
 
 import { OwnedPokemon } from "../../../../interfaces/OwnedPokemon";
@@ -282,7 +283,7 @@ export const n: OverworldTrainer = {
   x: 0,
   y: 0,
   id: nId,
-  conditionFunction: (s) => !s.handledOccupants.some((h) => h.id === nId),
+  conditionFunction: (s) => !occupantHandled(s, nId),
   orientation: "DOWN",
   sprite: SpriteEnum.n,
   unhandledMessage: ["Do you treat your pokemon well?"],
@@ -300,44 +301,44 @@ export const nN1: Occupant = {
   x: 18,
   y: 25,
   orientation: "LEFT",
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== nId),
+  conditionFunction: (s) => !occupantHandled(s, nId),
 };
 export const nN1E1: Occupant = {
   ...n,
   x: 20,
   y: 28,
   orientation: "LEFT",
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== nId),
+  conditionFunction: (s) => !occupantHandled(s, nId),
 };
 export const nE1: Occupant = {
   ...n,
   x: 35,
   y: 3,
   orientation: "LEFT",
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== nId),
+  conditionFunction: (s) => !occupantHandled(s, nId),
 };
 export const nS1E1: Occupant = {
   ...n,
   x: 47,
   orientation: "LEFT",
   y: 40,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== nId),
+  conditionFunction: (s) => !occupantHandled(s, nId),
 };
 export const nS1: Occupant = {
   ...n,
   x: 38,
   y: 22,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== nId),
+  conditionFunction: (s) => !occupantHandled(s, nId),
 };
 export const nS1W1: Occupant = {
   ...n,
   x: 39,
   y: 28,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== nId),
+  conditionFunction: (s) => !occupantHandled(s, nId),
 };
 export const nW1: Occupant = {
   ...n,
   x: 38,
   y: 25,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== nId),
+  conditionFunction: (s) => !occupantHandled(s, nId),
 };

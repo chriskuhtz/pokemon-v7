@@ -14,6 +14,7 @@ import {
   tier4trainers,
   tier5trainers,
 } from "../../constants/trainersRecord";
+import { occupantHandled } from "../../functions/occupantHandled";
 import { LocationContext } from "../../hooks/LocationProvider";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { Challenger } from "../../interfaces/Challenger";
@@ -280,9 +281,8 @@ const trainerCardStack = ({
       return res;
     })
     .map((t, i) => {
-      const defeatedBefore = saveFile.handledOccupants.some(
-        (h) => h.id === t.id,
-      );
+      const defeatedBefore = occupantHandled(saveFile, t.id);
+
       return (
         <Card
           key={t.id}

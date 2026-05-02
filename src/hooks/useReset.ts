@@ -10,7 +10,7 @@ export const useReset = () => {
   const { resetLocation } = useContext(LocationContext);
 
   return useCallback(() => {
-    saveFile.handledOccupants.forEach((h) => {
+    saveFile.timedEvents?.forEach((h) => {
       window.localStorage.removeItem(h.id);
     });
     window.localStorage.removeItem(saveFileId);

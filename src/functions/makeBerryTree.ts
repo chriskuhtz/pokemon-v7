@@ -1,5 +1,6 @@
 import { BerryType } from "../interfaces/Item";
 import { BerryTree, EmptyBerryTree } from "../interfaces/Occupant";
+import { occupantHandled } from "./occupantHandled";
 
 export const makeBerryTree = ({
   x,
@@ -19,7 +20,7 @@ export const makeBerryTree = ({
       x,
       y,
       berry,
-      conditionFunction: (s) => !s.handledOccupants.some((h) => h.id === id),
+      conditionFunction: (s) => !occupantHandled(s, id),
     },
     {
       id: `${id}_empty`,

@@ -75,6 +75,7 @@ export const BattleField = ({
   spriteGeneration?: 1;
   challengerType: "TRAINER" | "WILD";
 }) => {
+  //STATE
   const { saveFile } = useContext(SaveFileContext);
   const { settings, playerId } = saveFile;
   const { location } = useContext(LocationContext);
@@ -127,8 +128,6 @@ export const BattleField = ({
     ...initOpponents,
     ...initTeam,
   ]);
-
-  //SELECTORS
 
   const opponents = useMemo(() => getOpponentPokemon(pokemon), [pokemon]);
   const team = useMemo(
@@ -737,7 +736,6 @@ export const BattleField = ({
     settings,
     team,
   ]);
-
   //Refill opponents
   useEffect(() => {
     if (battleStep === "REFILLING" && opponentCanRefill) {

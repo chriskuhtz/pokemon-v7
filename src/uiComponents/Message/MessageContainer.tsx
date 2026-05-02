@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { FaRegCircleCheck } from "react-icons/fa6";
+import { RecoveryTool } from "../../components/RecoveryTool/RecoveryTool";
 import { battleSpriteSize } from "../../constants/baseConstants";
 import { LocationProvider } from "../../hooks/LocationProvider";
 import { BaseSizeProvider } from "../../hooks/useBaseSize";
@@ -10,6 +11,7 @@ import { SaveFileProvider } from "../../hooks/useSaveFile";
 import { ScreenTransitionProvider } from "../../hooks/useScreenTransitionEffects";
 import { Router } from "../../modules/Router/Router";
 import { Banner } from "../Banner/Banner";
+import { Page } from "../Page/Page";
 export const MessageContainer = () => {
   const { confirmLatestMessage, addMessage, latestMessage } =
     useContext(MessageQueueContext);
@@ -18,7 +20,11 @@ export const MessageContainer = () => {
   return (
     <ErrorBoundary
       onError={(e) => addMessage({ message: e.message })}
-      fallback={<div>{latestMessage?.message}</div>}
+      fallback={
+        <Page headline="An unexpected error occured:">
+          <RecoveryTool />
+        </Page>
+      }
     >
       {latestMessage && (
         <MessageBanner

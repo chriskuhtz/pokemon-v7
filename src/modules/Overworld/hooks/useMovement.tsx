@@ -2,6 +2,7 @@ import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { fps } from "../../../constants/baseConstants";
 import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
 import { getNextForwardFoot } from "../../../functions/getNextForwardFoot";
+import { startBlocker } from "../../../functions/TimedEvent";
 import { updatePosition } from "../../../functions/updatePosition";
 import { LocationContext } from "../../../hooks/LocationProvider";
 import { GameDataContext } from "../../../hooks/useGameData";
@@ -161,10 +162,7 @@ export const useMovement = (
           })),
         );
         patchSaveFileReducer({
-          handledOccupants: [
-            ...saveFile.handledOccupants,
-            { id: steptOnDialogue.id, resetAt: -1 },
-          ],
+          ...startBlocker(saveFile, steptOnDialogue.id, -1),
         });
         setNextInput(undefined);
         setEncounterChance(baseEncounterRate);

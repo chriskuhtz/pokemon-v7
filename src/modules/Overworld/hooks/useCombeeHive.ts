@@ -1,4 +1,5 @@
 import { useCallback, useContext } from "react";
+import { ONE_HOUR } from "../../../constants/baseConstants";
 import { getMiddleOfThree } from "../../../functions/getMiddleOfThree";
 import { getCurrentBlocker, startBlocker } from "../../../functions/TimedEvent";
 import { MessageQueueContext } from "../../../hooks/useMessageQueue";
@@ -21,7 +22,7 @@ export const useCombeeHive = () => {
         message: `Gathered ${honeyAmounts} Portions of honey from the hive  `,
       });
 
-      const withHoneyBlocker = startBlocker(saveFile, "COMBEE");
+      const withHoneyBlocker = startBlocker(saveFile, "COMBEE", ONE_HOUR);
 
       patchSaveFileReducer({
         ...withHoneyBlocker,

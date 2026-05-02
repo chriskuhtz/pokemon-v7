@@ -1,7 +1,8 @@
-import { useContext, useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { PokemonSprite } from "../components/PokemonSprite/PokemonSprite";
 import { getTeamSize } from "../functions/getTeamSize";
 import { receiveNewPokemonFunction } from "../functions/receiveNewPokemonFunction";
+import { startBlocker } from "../functions/TimedEvent";
 import { OverworldPokeball } from "../interfaces/Occupant";
 import { GameDataContext } from "./useGameData";
 import { MessageQueueContext } from "./useMessageQueue";
@@ -22,16 +23,12 @@ export const useInteractWithOverworldPokeball = () => {
           message: `Received a ${occ.pokemon.name}`,
           onRemoval: () =>
             patchSaveFileReducer({
-              ...saveFile,
+              ...startBlocker(saveFile, occ.id, -1),
               pokemon: receiveNewPokemonFunction(
                 { ...occ.pokemon, ownerId: saveFile.playerId },
                 saveFile.pokemon,
                 getTeamSize(saveFile, gameData),
               ),
-              handledOccupants: [
-                ...saveFile.handledOccupants,
-                { id: occ.id, resetAt: -1 },
-              ],
             }),
           icon: <PokemonSprite name={occ.pokemon.name} />,
         },

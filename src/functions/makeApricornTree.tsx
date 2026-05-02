@@ -1,5 +1,6 @@
 import { ApricornType } from "../interfaces/Item";
 import { ApricornTree, EmptyApricornTree } from "../interfaces/Occupant";
+import { occupantHandled } from "./occupantHandled";
 const apricornSpriteMap: Record<ApricornType, string> = {
   "black-apricorn": "/mapObjects/apricornBlack.png",
   "blue-apricorn": "/mapObjects/apricornBlue.png",
@@ -31,14 +32,14 @@ export const makeApricornTree = ({
       y,
       apricorn,
       sprite: apricornSpriteMap[apricorn],
-      conditionFunction: (s) => !s.handledOccupants.some((h) => h.id === id),
+      conditionFunction: (s) => !occupantHandled(s, id),
     },
     {
       id: `${id}_empty`,
       type: "EMPTY_APRICORN_TREE",
       x,
       y,
-      conditionFunction: (s) => s.handledOccupants.some((h) => h.id === id),
+      conditionFunction: (s) => occupantHandled(s, id),
     },
   ];
 };

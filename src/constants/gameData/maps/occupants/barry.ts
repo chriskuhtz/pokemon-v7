@@ -1,6 +1,7 @@
 import { ArrayHelpers } from "../../../../functions/ArrayHelpers";
 import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
+import { occupantHandled } from "../../../../functions/occupantHandled";
 import { Occupant, OverworldTrainer } from "../../../../interfaces/Occupant";
 
 import { OwnedPokemon } from "../../../../interfaces/OwnedPokemon";
@@ -361,7 +362,7 @@ export const barry: OverworldTrainer = {
   x: 0,
   y: 0,
   id: barryId,
-  conditionFunction: (s) => !s.handledOccupants.some((h) => h.id === barryId),
+  conditionFunction: (s) => !occupantHandled(s, barryId),
   orientation: "DOWN",
   sprite: SpriteEnum.barry,
   unhandledMessage: [
@@ -384,42 +385,42 @@ export const barryN1: Occupant = {
   ...barry,
   x: 12,
   y: 40,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== barryId),
+  conditionFunction: (s) => !occupantHandled(s, barryId),
 };
 export const barryN1E1: Occupant = {
   ...barry,
   x: 14,
   y: 22,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== barryId),
+  conditionFunction: (s) => !occupantHandled(s, barryId),
 };
 export const barryE1: Occupant = {
   ...barry,
   x: 10,
   y: 29,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== barryId),
+  conditionFunction: (s) => !occupantHandled(s, barryId),
 };
 export const barryS1E1: Occupant = {
   ...barry,
   x: 25,
   y: 25,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== barryId),
+  conditionFunction: (s) => !occupantHandled(s, barryId),
 };
 export const barryS1: Occupant = {
   ...barry,
   x: 4,
   y: 29,
   orientation: "RIGHT",
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== barryId),
+  conditionFunction: (s) => !occupantHandled(s, barryId),
 };
 export const barryS1W1: Occupant = {
   ...barry,
   x: 29,
   y: 6,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== barryId),
+  conditionFunction: (s) => !occupantHandled(s, barryId),
 };
 export const barryW1: Occupant = {
   ...barry,
   x: 15,
   y: 46,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== barryId),
+  conditionFunction: (s) => !occupantHandled(s, barryId),
 };
