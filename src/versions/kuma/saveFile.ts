@@ -20,7 +20,6 @@ export const startingSaveFileKuma: SaveFile = {
   meta: {
     activeTab: "MAIN",
   },
-  handledOccupants: [],
   lastEdited: new Date().getTime(),
   lastNurse: "nurse_Pokecenter_Camp",
   mileStones: {

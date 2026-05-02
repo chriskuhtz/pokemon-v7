@@ -92,7 +92,7 @@ export const RecoveryTool = () => {
                     : undefined;
 
                   if (saveFile) {
-                    saveFile.handledOccupants.forEach((h) => {
+                    saveFile.timedEvents?.forEach((h) => {
                       window.localStorage.removeItem(h.id);
                     });
                   }
@@ -117,7 +117,7 @@ export const RecoveryTool = () => {
                     : undefined;
 
                   if (saveFile) {
-                    saveFile.handledOccupants.forEach((h) => {
+                    saveFile.timedEvents?.forEach((h) => {
                       window.localStorage.removeItem(h.id);
                     });
                   }

@@ -7,14 +7,15 @@ import React, {
   useState,
 } from "react";
 import {
-  resetChallengeFielders,
-  resetEliteFour,
-} from "../functions/resetChallengeFielders";
-import {
+  cleaUpTimedEvents,
   getCurrentTroubleMakers,
+  refillTimedEvents,
   removeTroubleMakers,
+  resetBlockersWithPartialId,
 } from "../functions/TimedEvent";
+import { EmptyInventory } from "../interfaces/Inventory";
 import { CharacterLocationData } from "../interfaces/SaveFile";
+import { gameData } from "../versions/labyrinth/gameData";
 import { GameDataContext } from "./useGameData";
 import { MessageQueueContext } from "./useMessageQueue";
 import { SaveFileContext } from "./useSaveFile";
@@ -52,40 +53,50 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
         });
         patchSaveFileReducer(removeTroubleMakers(saveFile, "ESCAPED"));
       }
-      //reset challengeFielders before entering
+
+      //reset inventory and challengeFielders when leaving challenge field
       if (
-        newLocation.mapId == "randomField" &&
-        location.mapId !== "randomField"
+        newLocation.mapId !== "randomField" &&
+        location.mapId === "randomField"
       ) {
         patchSaveFileReducer({
-          handledOccupants: resetChallengeFielders(saveFile.handledOccupants),
+          ...resetBlockersWithPartialId(saveFile, "randomField"),
+          bag: EmptyInventory,
         });
-      }
-      if (
-        newLocation.mapId == "challengeField" &&
-        location.mapId !== "challengeField"
+      } else if (
+        newLocation.mapId !== "challengeField" &&
+        location.mapId === "challengeField"
       ) {
         patchSaveFileReducer({
-          handledOccupants: resetChallengeFielders(saveFile.handledOccupants),
+          ...resetBlockersWithPartialId(saveFile, "challengeField"),
+          bag: EmptyInventory,
         });
       }
       //reset e4 before entering
-      if (
+      else if (
         newLocation.mapId == "pokemonLeague" &&
         location.mapId !== "pokemonLeague"
       ) {
         patchSaveFileReducer({
-          handledOccupants: resetEliteFour(saveFile.handledOccupants),
+          ...resetBlockersWithPartialId(saveFile, "elite4"),
         });
       }
       //reset rocket hideout before entering
-      if (
+      else if (
         newLocation.mapId == "rocketCamp" &&
         location.mapId !== "rocketCamp"
       ) {
         patchSaveFileReducer({
-          handledOccupants: resetEliteFour(saveFile.handledOccupants),
+          ...resetBlockersWithPartialId(saveFile, "Rocket Camp"),
         });
+      } else {
+        let update = { ...saveFile };
+        //remove expired TimedEvents
+        update = cleaUpTimedEvents(update);
+        //refill TimedEvents
+        update = refillTimedEvents(update, gameData);
+
+        patchSaveFileReducer(update);
       }
       s(newLocation);
     },
@@ -100,13 +111,6 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     window.localStorage.setItem(locationId, JSON.stringify(location));
   }, [location, locationId]);
-
-  // //RESCUE FROM SOFT LOCK
-  // useEffect(() => {
-  // 	if (saveFile.playerId.includes('simon')) {
-  // 		setLocation(startingLocation);
-  // 	}
-  // }, [location, saveFile.playerId, setLocation]);
 
   //reset catch streak on location change
   useEffect(() => {

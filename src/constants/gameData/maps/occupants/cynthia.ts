@@ -1,6 +1,7 @@
 import { ArrayHelpers } from "../../../../functions/ArrayHelpers";
 import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
+import { occupantHandled } from "../../../../functions/occupantHandled";
 import { Occupant, OverworldTrainer } from "../../../../interfaces/Occupant";
 
 import { OwnedPokemon } from "../../../../interfaces/OwnedPokemon";
@@ -332,7 +333,7 @@ export const cynthia: OverworldTrainer = {
   x: 0,
   y: 0,
   id: cynthiaId,
-  conditionFunction: (s) => !s.handledOccupants.some((h) => h.id === cynthiaId),
+  conditionFunction: (s) => !occupantHandled(s, cynthiaId),
   orientation: "DOWN",
   sprite: SpriteEnum.cynthia,
   unhandledMessage: [
@@ -352,44 +353,44 @@ export const cynthiaN1: Occupant = {
   ...cynthia,
   x: 45,
   y: 3,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
+  conditionFunction: (s) => !occupantHandled(s, cynthiaId),
 };
 export const cynthiaN1E1: Occupant = {
   ...cynthia,
   x: 30,
   y: 46,
   orientation: "RIGHT",
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
+  conditionFunction: (s) => !occupantHandled(s, cynthiaId),
 };
 export const cynthiaE1: Occupant = {
   ...cynthia,
   x: 25,
   y: 29,
   orientation: "RIGHT",
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
+  conditionFunction: (s) => !occupantHandled(s, cynthiaId),
 };
 export const cynthiaS1E1: Occupant = {
   ...cynthia,
   x: 12,
   y: 42,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
+  conditionFunction: (s) => !occupantHandled(s, cynthiaId),
 };
 export const cynthiaS1: Occupant = {
   ...cynthia,
   x: 25,
   y: 20,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
+  conditionFunction: (s) => !occupantHandled(s, cynthiaId),
 };
 export const cynthiaS1W1: Occupant = {
   ...cynthia,
   x: 10,
   y: 45,
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
+  conditionFunction: (s) => !occupantHandled(s, cynthiaId),
 };
 export const cynthiaW1: Occupant = {
   ...cynthia,
   x: 17,
   y: 38,
   orientation: "RIGHT",
-  conditionFunction: (s) => s.handledOccupants.every((h) => h.id !== cynthiaId),
+  conditionFunction: (s) => !occupantHandled(s, cynthiaId),
 };

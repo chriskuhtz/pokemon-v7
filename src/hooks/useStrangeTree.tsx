@@ -4,6 +4,7 @@ import {
   OPPO_ID,
   makeChallengerPokemon,
 } from "../functions/makeChallengerPokemon";
+import { startBlocker } from "../functions/TimedEvent";
 import { Challenger } from "../interfaces/Challenger";
 import { EmptyInventory } from "../interfaces/Inventory";
 import { OverworldStrangeTree } from "../interfaces/Occupant";
@@ -34,7 +35,6 @@ export const useStrangeTree = () => {
             }),
           ],
         };
-        const now = new Date().getTime();
 
         addMultipleMessages([
           { message: "You water the tree with the sprayduck" },
@@ -42,23 +42,15 @@ export const useStrangeTree = () => {
             message: "The Tree attacks",
             onRemoval: () => {
               patchSaveFileReducer({
+                ...startBlocker(saveFile, occ.id, ONE_DAY),
                 meta: { currentChallenger: challenger, activeTab: "BATTLE" },
-                handledOccupants: [
-                  ...saveFile.handledOccupants,
-                  { id: occ.id, resetAt: now + ONE_DAY },
-                ],
               });
             },
           },
         ]);
       }
     },
-    [
-      addMultipleMessages,
-      patchSaveFileReducer,
-      saveFile.bag,
-      saveFile.handledOccupants,
-    ],
+    [addMultipleMessages, patchSaveFileReducer, saveFile],
   );
 
   return interact;

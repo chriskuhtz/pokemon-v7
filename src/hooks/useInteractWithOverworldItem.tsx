@@ -2,6 +2,7 @@ import { useCallback, useContext } from "react";
 import { battleSpriteSize } from "../constants/baseConstants";
 import { getBagLimit, getTotalInventoryAmount } from "../functions/getBagLimit";
 import { getItemUrl } from "../functions/getItemUrl";
+import { startBlocker } from "../functions/TimedEvent";
 import { joinInventories } from "../interfaces/Inventory";
 import { getRandomItem } from "../interfaces/Item";
 import {
@@ -60,12 +61,8 @@ export const useInteractWithOverworldItem = () => {
           needsNoConfirmation: true,
           onRemoval: () => {
             patchSaveFileReducer({
-              ...saveFile,
+              ...startBlocker(saveFile, occ.id, -1),
               bag: newInventory,
-              handledOccupants: [
-                ...saveFile.handledOccupants,
-                { id: occ.id, resetAt: -1 },
-              ],
             });
           },
         });

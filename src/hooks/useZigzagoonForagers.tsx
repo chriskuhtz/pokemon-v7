@@ -1,4 +1,5 @@
 import { useCallback, useContext } from "react";
+import { ONE_HOUR } from "../constants/baseConstants";
 import { ArrayHelpers } from "../functions/ArrayHelpers";
 import { getCurrentBlocker, startBlocker } from "../functions/TimedEvent";
 import { joinInventories } from "../interfaces/Inventory";
@@ -36,7 +37,9 @@ export const useZigzagoonForagers = () => {
     ]);
 
     const blockerChecked =
-      Math.random() > 0.75 ? startBlocker(saveFile, "ZIGZAGOON") : saveFile;
+      Math.random() > 0.75
+        ? startBlocker(saveFile, "ZIGZAGOON", ONE_HOUR / 4)
+        : saveFile;
     patchSaveFileReducer({
       ...blockerChecked,
       bag: joinInventories(saveFile.bag, {

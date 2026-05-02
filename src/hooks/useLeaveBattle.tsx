@@ -18,7 +18,11 @@ import { getHighestXpOnTeam } from "../functions/getHighestXpOnTeam";
 import { getTeamSize } from "../functions/getTeamSize";
 import { isKO } from "../functions/isKo";
 import { reduceBattlePokemonToOwnedPokemon } from "../functions/reduceBattlePokemonToOwnedPokemon";
-import { getCurrentSwarm } from "../functions/TimedEvent";
+import {
+  getCurrentBlocker,
+  getCurrentSwarm,
+  startBlocker,
+} from "../functions/TimedEvent";
 import { BattlePokemon } from "../interfaces/BattlePokemon";
 import {
   EmptyInventory,
@@ -173,11 +177,14 @@ export const useLeaveBattle = () => {
         ...saveFile.pokemon.filter((p) => !team.some((t) => t.id === p.id)),
       ];
 
-      const alreadyDefeated = saveFile.handledOccupants.some(
-        (h) => h.id === defeatedChallengerId,
-      );
+      const alreadyDefeated =
+        defeatedChallengerId &&
+        getCurrentBlocker(saveFile, defeatedChallengerId);
       const gainedResearchPoints = () => {
-        if (location.mapId === "challengeField") {
+        if (
+          location.mapId === "challengeField" ||
+          location.mapId === "randomField"
+        ) {
           return 0;
         }
         if (outcome !== "WIN") {
@@ -332,31 +339,27 @@ export const useLeaveBattle = () => {
       updatedMileStones.caughtFromSwarms = updatedSwarmRecord;
 
       const resetTime = () => {
-        const now = new Date().getTime();
         if (
           defeatedChallengerId &&
           [barryId, nId, cynthiaId, silverId, redId, hughId].includes(
             defeatedChallengerId,
           )
         ) {
-          return now + ONE_HOUR;
+          return ONE_HOUR;
         }
 
         return -1;
       };
 
       patchSaveFileReducer({
+        ...(defeatedChallengerId
+          ? startBlocker(saveFile, defeatedChallengerId, resetTime())
+          : saveFile),
         bag: joinInventories(updatedInventory, rewardItems ?? {}),
         money: saveFile.money + scatteredCoins,
         pokemon: updatedPokemon,
         meta: { activeTab: "OVERWORLD", currentChallenger: undefined },
         researchPoints: saveFile.researchPoints + gainedResearchPoints(),
-        handledOccupants: defeatedChallengerId
-          ? [
-              ...saveFile.handledOccupants,
-              { id: defeatedChallengerId, resetAt: resetTime() },
-            ]
-          : saveFile.handledOccupants,
         mileStones: updatedMileStones,
         pokedex,
         catchStreak: updatedCatchStreak,

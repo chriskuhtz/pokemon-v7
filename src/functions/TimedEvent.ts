@@ -20,7 +20,6 @@ import { SaveFile } from "../interfaces/SaveFile";
 import { SpriteEnum } from "../interfaces/SpriteEnum";
 import {
   BlockerEvent,
-  BlockerEventType,
   evilTeams,
   LostItemEvent,
   LureEvent,
@@ -39,6 +38,7 @@ import { getRandomPokemonType } from "./getRandomPokemonId";
 import { getRandomPosition } from "./getRandomPosition";
 import {
   getAllEncountersFor,
+  getRampagers,
   getRandomSwarmMon,
   getStaticEncountersForRoute,
 } from "./internalDex";
@@ -51,21 +51,31 @@ import {
 } from "./troubleMakers/troubleMakers";
 //EVENT HANDLING:
 export const isExpired = (event: TimedEvent): boolean => {
+  if (event.removeAt === -1) {
+    return false;
+  }
   const now = Date.now();
   return event.removeAt < now;
 };
 export const cleaUpTimedEvents = (saveFile: SaveFile): SaveFile => {
   const update = { ...saveFile, timedEvents: saveFile.timedEvents ?? [] };
 
-  update.timedEvents?.forEach((event) => {
-    if (isExpired(event)) {
-      update.handledOccupants.filter((h) => h.id !== event.id);
-    }
-  });
   update.timedEvents = update.timedEvents?.filter((event) => !isExpired(event));
   console.log("cleaned up timed Events, result:", update.timedEvents);
   return update;
 };
+export const cleanUpSpecificEvent = (
+  saveFile: SaveFile,
+  id: string,
+): SaveFile => {
+  const update = { ...saveFile, timedEvents: saveFile.timedEvents ?? [] };
+
+  return {
+    ...update,
+    timedEvents: update.timedEvents.filter((event) => event.id !== id),
+  };
+};
+
 export const refillTimedEvents = (
   saveFile: SaveFile,
   gameData: GameData,
@@ -112,6 +122,7 @@ export const refillTimedEvents = (
 export const makeStaticEncounterEvent = (
   s: SaveFile,
   internalDex: InternalDex,
+  rampager?: boolean,
 ): StaticEncounterEvent => {
   const route = getRandomAvailableRoute(s, []);
 
@@ -120,19 +131,21 @@ export const makeStaticEncounterEvent = (
     throw new Error();
   }
 
-  const options: PokemonName[] = [
-    ...getAllEncountersFor(
-      route,
-      { area: "LAND", rarity: "ultra-rare" },
-      internalDex,
-    ).map((p) => p.name),
-    ...getAllEncountersFor(
-      route,
-      { area: "LAND", rarity: "rare" },
-      internalDex,
-    ).map((p) => p.name),
-    ...getStaticEncountersForRoute(route, internalDex),
-  ].filter((p) => baseInternalDex[p].dexId < 815);
+  const options: PokemonName[] = rampager
+    ? getRampagers(internalDex)
+    : [
+        ...getAllEncountersFor(
+          route,
+          { area: "LAND", rarity: "ultra-rare" },
+          internalDex,
+        ).map((p) => p.name),
+        ...getAllEncountersFor(
+          route,
+          { area: "LAND", rarity: "rare" },
+          internalDex,
+        ).map((p) => p.name),
+        ...getStaticEncountersForRoute(route, internalDex),
+      ].filter((p) => baseInternalDex[p].dexId < 815);
   const pokemon = ArrayHelpers.getRandomEntry(options);
   const { x, y } = getRandomPosition(mapsRecord[route]);
   const now = new Date().getTime();
@@ -141,6 +154,7 @@ export const makeStaticEncounterEvent = (
     id: `STATIC_ENCOUNTER_${route}+${pokemon}`,
     mapId: route,
     name: pokemon,
+    isRampager: rampager,
     dexId: internalDex[pokemon].dexId,
     x,
     y,
@@ -167,6 +181,26 @@ export const makeOverworldPokemonFromStaticEncounterEvent = (
     },
   };
 };
+export const getCurrentRampager = (
+  s: SaveFile,
+): StaticEncounterEvent | undefined => {
+  return s.timedEvents
+    ?.filter((t) => t.type === "STATIC_ENCOUNTER")
+    .find((t) => t.isRampager);
+};
+export const addStaticEncounterToSaveFile = (
+  s: SaveFile,
+  internalDex: InternalDex,
+  rampager?: boolean,
+): SaveFile => {
+  const newEncounter = makeStaticEncounterEvent(s, internalDex, rampager);
+  return {
+    ...s,
+
+    timedEvents: (s.timedEvents ?? []).concat(newEncounter),
+  };
+};
+
 //LOST ITEM:
 const impossibleItems: ItemType[] = [
   ...keyItems,
@@ -367,6 +401,11 @@ export const makeOverworldTrainerfromStaticTrainerEvent = (
   };
 };
 //LURE
+const lureTimes: Record<LureType, number> = {
+  lure: ONE_HOUR / 6,
+  "super-lure": ONE_HOUR / 6,
+  "max-lure": ONE_HOUR / 2,
+};
 export const getCurrentLure = (s: SaveFile): LureEvent | undefined => {
   return s.timedEvents?.find((t) => t.type === "LURE");
 };
@@ -385,7 +424,7 @@ export const startLure = (s: SaveFile, lureType: LureType): SaveFile => {
         id: `LURE_EVENT${lureType}`,
         type: "LURE",
         lureType,
-        removeAt: Date.now() + ONE_HOUR,
+        removeAt: Date.now() + lureTimes[lureType],
       },
     ]),
   };
@@ -432,11 +471,11 @@ export const removeTroubleMakers = (
   return {
     ...s,
     timedEvents: (s.timedEvents ?? []).filter(
-      (ev) => ev.id !== troubleMakers.id,
+      (ev) =>
+        ev.id !== troubleMakers.id &&
+        !troubleMakers.trainers.some((trainer) => trainer.id === ev.id),
     ),
-    handledOccupants: s.handledOccupants.filter(
-      (h) => !troubleMakers?.trainers.some((t) => t.id === h.id),
-    ),
+
     rangerLevel: (s.rangerLevel ?? 0) + (ending === "DEFEATED" ? 1 : 0),
   };
 };
@@ -491,60 +530,56 @@ export const makeOverworldTroubleMakers = (
         return {
           ...t,
           team: () => getTroubleMakerAdminTeam(saveFile, t.id),
-          conditionFunction: () =>
-            !saveFile.handledOccupants.some((h) => h.id === t.id),
+          conditionFunction: () => !occupantHandled(saveFile, t.id),
         };
       }
 
       return {
         ...t,
         team: () => getTroubleMakerTeam(saveFile),
-        conditionFunction: () =>
-          !saveFile.handledOccupants.some((h) => h.id === t.id),
+        conditionFunction: () => !occupantHandled(saveFile, t.id),
       };
     }),
   ];
 };
 //BLOCKER
-const blockerTypeTimer: Record<BlockerEventType, number> = {
-  COMBEE: ONE_HOUR,
-  DUGTRIO: ONE_HOUR / 3,
-  MILTANK: ONE_HOUR,
-  ZIGZAGOON: ONE_HOUR / 4,
-};
 export const getCurrentBlocker = (
   s: SaveFile,
-  blocks: BlockerEventType,
+  id: string,
 ): BlockerEvent | undefined => {
   return s.timedEvents
     ?.filter((t) => t.type === "BLOCKER")
-    .find((t) => t.blocks === blocks);
+    .find((t) => t.id === id);
 };
-export const stopBlocker = (
-  s: SaveFile,
-  blocks: BlockerEventType,
-): SaveFile => {
+export const stopBlocker = (s: SaveFile, id: string): SaveFile => {
   return {
     ...s,
     timedEvents: (s.timedEvents ?? []).filter(
-      (ev) => !(ev.type === "BLOCKER" && ev.blocks === blocks),
+      (ev) => !(ev.type === "BLOCKER" && ev.id === id),
     ),
   };
 };
-export const startBlocker = (
-  s: SaveFile,
-  blocks: BlockerEventType,
-): SaveFile => {
+export const startBlocker = (s: SaveFile, id: string, ms: number): SaveFile => {
   return {
     ...s,
     timedEvents: (s.timedEvents ?? []).concat([
       {
-        id: `BLOCKER_EVENT_${blocks}`,
+        id: id,
         type: "BLOCKER",
-        blocks,
-        removeAt: Date.now() + blockerTypeTimer[blocks],
+        removeAt: Date.now() + ms,
       },
     ]),
+  };
+};
+export const resetBlockersWithPartialId = (
+  saveFile: SaveFile,
+  partialId: string,
+): SaveFile => {
+  return {
+    ...saveFile,
+    timedEvents: saveFile.timedEvents?.filter((event) => {
+      return event.id.includes(partialId);
+    }),
   };
 };
 //SWARM

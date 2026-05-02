@@ -1,4 +1,5 @@
 import { makeRandomTeam } from "../../../../functions/makeRandomTeam";
+import { occupantHandled } from "../../../../functions/occupantHandled";
 import { OverworldTrainer } from "../../../../interfaces/Occupant";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
@@ -58,7 +59,7 @@ export const randomChallengeFieldOccupants: OverworldMap["occupants"] = [
         assignLearnsetMoves: true,
         assignNaturalAbility: true,
       },
-      conditionFunction: (s) => !s.handledOccupants.some((h) => h.id === id),
+      conditionFunction: (s) => !occupantHandled(s, id),
       sprite: Object.values(SpriteEnum)[index],
       unhandledMessage: [".", "..", "..."],
       team: () => makeRandomTeam({ xp }),
@@ -73,28 +74,25 @@ export const randomChallengeFieldOccupants: OverworldMap["occupants"] = [
     id: `randomField_item1`,
     item: "super-potion",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `randomField_item1`),
+    conditionFunction: (s) => !occupantHandled(s, `randomField_item1`),
   },
   {
     type: "ITEM",
     x: 2,
     y: 39,
     id: `randomField_item2`,
-    item: "sitrus-berry",
+    item: "full-heal",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `randomField_item2`),
+    conditionFunction: (s) => !occupantHandled(s, `randomField_item2`),
   },
   {
     type: "ITEM",
     x: 3,
     y: 39,
     id: `randomField_item3`,
-    item: "lum-berry",
+    item: "potion",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `randomField_item3`),
+    conditionFunction: (s) => !occupantHandled(s, `randomField_item3`),
   },
   {
     type: "ITEM",
@@ -103,8 +101,7 @@ export const randomChallengeFieldOccupants: OverworldMap["occupants"] = [
     id: `randomField_item4`,
     item: "moomoo-milk",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `randomField_item4`),
+    conditionFunction: (s) => !occupantHandled(s, `randomField_item4`),
   },
   {
     type: "ITEM",
@@ -113,18 +110,16 @@ export const randomChallengeFieldOccupants: OverworldMap["occupants"] = [
     id: `randomField_item5`,
     item: "elixir",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `randomField_item5`),
+    conditionFunction: (s) => !occupantHandled(s, `randomField_item5`),
   },
   {
     type: "ITEM",
     x: 11,
     y: 39,
     id: `randomField_item6`,
-    item: "lum-berry",
+    item: "full-heal",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `randomField_item6`),
+    conditionFunction: (s) => !occupantHandled(s, `randomField_item6`),
   },
   {
     type: "ITEM",
@@ -133,18 +128,16 @@ export const randomChallengeFieldOccupants: OverworldMap["occupants"] = [
     id: `randomField_item7`,
     item: "full-restore",
     amount: 3,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `randomField_item7`),
+    conditionFunction: (s) => !occupantHandled(s, `randomField_item7`),
   },
   {
     type: "ITEM",
     x: 18,
     y: 39,
     id: `randomField_item8`,
-    item: "sitrus-berry",
+    item: "moomoo-milk",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `randomField_item8`),
+    conditionFunction: (s) => !occupantHandled(s, `randomField_item8`),
   },
   {
     type: "ITEM",
@@ -153,8 +146,7 @@ export const randomChallengeFieldOccupants: OverworldMap["occupants"] = [
     id: `randomField_item9`,
     item: "elixir",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `randomField_item9`),
+    conditionFunction: (s) => !occupantHandled(s, `randomField_item9`),
   },
   {
     type: "ITEM",
@@ -163,18 +155,16 @@ export const randomChallengeFieldOccupants: OverworldMap["occupants"] = [
     id: `randomField_item10`,
     item: "full-restore",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `randomField_item10`),
+    conditionFunction: (s) => !occupantHandled(s, `randomField_item10`),
   },
   {
     type: "ITEM",
     x: 26,
     y: 39,
     id: `randomField_item11`,
-    item: "sitrus-berry",
+    item: "moomoo-milk",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `randomField_item11`),
+    conditionFunction: (s) => !occupantHandled(s, `randomField_item11`),
   },
   {
     type: "ITEM",
@@ -183,7 +173,6 @@ export const randomChallengeFieldOccupants: OverworldMap["occupants"] = [
     id: `randomField_item9`,
     item: "elixir",
     amount: 5,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === `randomField_item12`),
+    conditionFunction: (s) => !occupantHandled(s, `randomField_item12`),
   },
 ];

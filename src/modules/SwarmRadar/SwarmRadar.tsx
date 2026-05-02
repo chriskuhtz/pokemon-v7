@@ -1,7 +1,10 @@
 import { useContext } from "react";
 import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 import { replaceRouteName } from "../../functions/replaceRouteName";
-import { getCurrentSwarm } from "../../functions/TimedEvent";
+import {
+  getCurrentRampager,
+  getCurrentSwarm,
+} from "../../functions/TimedEvent";
 import { useNavigate } from "../../hooks/useNavigate";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { useSwarmRadar } from "../../hooks/useSwarmRadar";
@@ -13,6 +16,8 @@ export const SwarmRadar = () => {
   const { saveFile } = useContext(SaveFileContext);
   const { scan, activeSwarms } = useSwarmRadar();
   const navigate = useNavigate();
+
+  const rampager = getCurrentRampager(saveFile);
 
   const swarm = getCurrentSwarm(saveFile, "WEAK");
   const strongSwarm = getCurrentSwarm(saveFile, "STRONG");
@@ -39,12 +44,11 @@ export const SwarmRadar = () => {
             Scan for Distortions
           </button>
         )}
-        {saveFile.campUpgrades["warden certification"] &&
-          !saveFile.currentRampagingPokemon && (
-            <button onClick={() => scan("RAMPAGE")}>
-              Scan for Rampaging Pokemon
-            </button>
-          )}
+        {saveFile.campUpgrades["warden certification"] && !rampager && (
+          <button onClick={() => scan("RAMPAGE")}>
+            Scan for Rampaging Pokemon
+          </button>
+        )}
         <h3>Active:</h3>
         {activeSwarms.map((a) => (
           <Card
@@ -69,19 +73,18 @@ export const SwarmRadar = () => {
             }
           />
         ))}
-        {saveFile.currentRampagingPokemon && (
+        {rampager && (
           <Card
-            key={saveFile.currentRampagingPokemon.id}
+            key={rampager.id}
             content={
               <strong>
-                Rampaging {saveFile.currentRampagingPokemon.name} at{" "}
-                {replaceRouteName(saveFile.currentRampagingPokemon.route)}
+                Rampaging {rampager.name} at {replaceRouteName(rampager.mapId)}
               </strong>
             }
             actionElements={[]}
             icon={
               <PokemonSprite
-                name={saveFile.currentRampagingPokemon.name}
+                name={rampager.name}
                 config={{ officalArtwork: true }}
               />
             }

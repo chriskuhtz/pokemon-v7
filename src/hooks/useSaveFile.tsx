@@ -14,7 +14,6 @@ import { applyHappinessFromWalking } from "../functions/applyHappinessFromWalkin
 import { applyItemToPokemon } from "../functions/applyItemToPokemon";
 import { fullyHealPokemon } from "../functions/fullyHealPokemon";
 import { TimeOfDay } from "../functions/getTimeOfDay";
-import { cleaUpTimedEvents, refillTimedEvents } from "../functions/TimedEvent";
 import { updateItemFunction } from "../functions/updateItemFunction";
 import { EmptyInventory, joinInventories } from "../interfaces/Inventory";
 import { ItemType } from "../interfaces/Item";
@@ -142,38 +141,28 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
   }, [startingSaveFile]);
 
   //handle side effects here
-  const setSaveFile = useCallback(
-    (u: SaveFile) => {
-      let update = { ...u };
-      const now = new Date().getTime();
+  const setSaveFile = useCallback((u: SaveFile) => {
+    const update = { ...u };
+    const now = new Date().getTime();
 
-      let pokedex = update.pokedex ?? emptyPokedex;
+    let pokedex = update.pokedex ?? emptyPokedex;
 
-      //update pokedex
-      update.pokemon.forEach((p) => {
-        pokedex = addPokemonToDex(pokedex, p.name, p.caughtOnMap, true);
-      });
-      //update catch streak
-      if ((update.catchStreak?.streak ?? 0) > (update.longestStreak ?? 0)) {
-        update.longestStreak = update.catchStreak?.streak;
-      }
-      //remove expired TimedEvents
-      update = cleaUpTimedEvents(update);
-      //refill TimedEvents
-      update = refillTimedEvents(update, gameData);
+    //update pokedex
+    update.pokemon.forEach((p) => {
+      pokedex = addPokemonToDex(pokedex, p.name, p.caughtOnMap, true);
+    });
+    //update catch streak
+    if ((update.catchStreak?.streak ?? 0) > (update.longestStreak ?? 0)) {
+      update.longestStreak = update.catchStreak?.streak;
+    }
 
-      s({
-        ...update,
-        lastEdited: now,
-        pokedex,
-        bag: joinInventories(EmptyInventory, update.bag),
-        handledOccupants: update.handledOccupants.filter(
-          (h) => h.resetAt < 0 || h.resetAt > now,
-        ),
-      });
-    },
-    [gameData],
-  );
+    s({
+      ...update,
+      lastEdited: now,
+      pokedex,
+      bag: joinInventories(EmptyInventory, update.bag),
+    });
+  }, []);
   const discardItemReducer = (item: ItemType, number: number) => {
     const updatedInventory = updateItemFunction(item, -number, saveFile.bag);
     setSaveFile({ ...saveFile, bag: updatedInventory });

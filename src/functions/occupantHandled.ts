@@ -1,5 +1,6 @@
-import { SaveFile } from '../interfaces/SaveFile';
+import { SaveFile } from "../interfaces/SaveFile";
+import { getCurrentBlocker } from "./TimedEvent";
 
 export const occupantHandled = (s: SaveFile, id: string): boolean => {
-	return s.handledOccupants.some((h) => h.id === id);
+  return !!getCurrentBlocker(s, id);
 };

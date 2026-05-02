@@ -129,8 +129,7 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
     item: "antidote",
     amount: 1,
     id: "routeN1_antidote",
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === "routeN1_antidote"),
+    conditionFunction: (s) => !occupantHandled(s, "routeN1_antidote"),
   },
   {
     type: "ITEM",
@@ -139,8 +138,7 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
     item: "great-ball",
     amount: 1,
     id: "routeN1_great_ball",
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === "routeN1_great_ball"),
+    conditionFunction: (s) => !occupantHandled(s, "routeN1_great_ball"),
   },
   {
     type: "ITEM",
@@ -149,8 +147,7 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
     item: "lucky-egg",
     amount: 1,
     id: "routeN1_lucky-egg",
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === "routeN1_lucky-egg"),
+    conditionFunction: (s) => !occupantHandled(s, "routeN1_lucky-egg"),
   },
   {
     type: "ITEM",
@@ -159,8 +156,7 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
     item: "lumiose-galette",
     amount: 1,
     id: "routeN1_lumi_galette",
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === "routeN1_lumi_galette"),
+    conditionFunction: (s) => !occupantHandled(s, "routeN1_lumi_galette"),
   },
   {
     type: "ITEM",
@@ -169,8 +165,7 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
     item: "nest-ball",
     amount: 1,
     id: "routeN1_nest_ball",
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === "routeN1_nest_ball"),
+    conditionFunction: (s) => !occupantHandled(s, "routeN1_nest_ball"),
   },
   {
     type: "ITEM",
@@ -179,8 +174,7 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
     item: "bluk-berry",
     amount: 1,
     id: "routeN1_bluk_berry",
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === "routeN1_bluk_berry"),
+    conditionFunction: (s) => !occupantHandled(s, "routeN1_bluk_berry"),
   },
   {
     type: "ITEM",
@@ -189,8 +183,7 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
     item: "kelpsy-berry",
     amount: 1,
     id: "routeN1_kelpsy_berry",
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === "routeN1_kelpsy_berry"),
+    conditionFunction: (s) => !occupantHandled(s, "routeN1_kelpsy_berry"),
   },
   {
     type: "ITEM",
@@ -199,8 +192,7 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
     item: "aguav-berry",
     amount: 1,
     id: "routeN1_aguav_berry",
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === "routeN1_aguav_berry"),
+    conditionFunction: (s) => !occupantHandled(s, "routeN1_aguav_berry"),
   },
   {
     type: "ITEM",
@@ -209,8 +201,7 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
     item: "kee-berry",
     amount: 1,
     id: "routeN1_kee_berry",
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === "routeN1_kee_berry"),
+    conditionFunction: (s) => !occupantHandled(s, "routeN1_kee_berry"),
   },
   {
     type: "ITEM",
@@ -219,8 +210,7 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
     item: "silk-scarf",
     amount: 1,
     id: "routeN1_silk_scarf",
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((h) => h.id === "routeN1_silk_scarf"),
+    conditionFunction: (s) => !occupantHandled(s, "routeN1_silk_scarf"),
   },
   {
     type: "HONEY_TREE",
@@ -255,8 +245,7 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
     x: 49,
     y: 25,
     id: "routeN1E1_blocker_bush",
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "routeN1E1_blocker_bush"),
+    conditionFunction: (s) => !occupantHandled(s, "routeN1E1_blocker_bush"),
   },
   {
     type: "ON_STEP_PORTAL",
@@ -277,8 +266,7 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
     type: "LEDGE",
     x: 1,
     y: 4,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "routeN1-ledge1"),
+    conditionFunction: (s) => !occupantHandled(s, "routeN1-ledge1"),
     id: "routeN1-ledge1",
     sprite: "/ledges/ledgeDown.png",
     passableFrom: "UP",
@@ -287,8 +275,7 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
     type: "LEDGE",
     x: 2,
     y: 4,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "routeN1-ledge2"),
+    conditionFunction: (s) => !occupantHandled(s, "routeN1-ledge2"),
     id: "routeN1-ledge2",
     sprite: "/ledges/ledgeDown.png",
     passableFrom: "UP",
@@ -297,8 +284,7 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
     type: "LEDGE",
     x: 3,
     y: 4,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "routeN1-ledge3"),
+    conditionFunction: (s) => !occupantHandled(s, "routeN1-ledge3"),
     id: "routeN1-ledge3",
     sprite: "/ledges/ledgeDown.png",
     passableFrom: "UP",
@@ -307,8 +293,7 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
     type: "LEDGE",
     x: 4,
     y: 4,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "routeN1-ledge4"),
+    conditionFunction: (s) => !occupantHandled(s, "routeN1-ledge4"),
     id: "routeN1-ledge4",
     sprite: "/ledges/ledgeCornerRight.png",
     passableFrom: "UP",
@@ -317,8 +302,7 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
     type: "LEDGE",
     x: 4,
     y: 3,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "routeN1-ledge5"),
+    conditionFunction: (s) => !occupantHandled(s, "routeN1-ledge5"),
     id: "routeN1-ledge5",
     sprite: "/ledges/ledgeRight.png",
     passableFrom: "LEFT",
@@ -327,8 +311,7 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
     type: "LEDGE",
     x: 4,
     y: 2,
-    conditionFunction: (s) =>
-      !s.handledOccupants.some((occ) => occ.id === "routeN1-ledge6"),
+    conditionFunction: (s) => !occupantHandled(s, "routeN1-ledge6"),
     id: "routeN1-ledge6",
     sprite: "/ledges/ledgeRight.png",
     passableFrom: "LEFT",

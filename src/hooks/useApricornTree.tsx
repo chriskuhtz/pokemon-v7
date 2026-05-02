@@ -2,6 +2,7 @@ import { useCallback, useContext } from "react";
 import { battleSpriteSize, ONE_HOUR } from "../constants/baseConstants";
 import { getItemUrl } from "../functions/getItemUrl";
 import { getMiddleOfThree } from "../functions/getMiddleOfThree";
+import { startBlocker } from "../functions/TimedEvent";
 import { joinInventories } from "../interfaces/Inventory";
 import { ApricornTree } from "../interfaces/Occupant";
 import { MessageQueueContext } from "./useMessageQueue";
@@ -28,19 +29,10 @@ export const useApricornTree = () => {
         message: `Harvested ${amount} ${tree.apricorn}`,
       });
       patchSaveFileReducer({
+        ...startBlocker(saveFile, tree.id, time),
         bag: joinInventories(saveFile.bag, { [tree.apricorn]: amount }),
-        handledOccupants: [
-          ...saveFile.handledOccupants,
-          { id: tree.id, resetAt: time },
-        ],
       });
     },
-    [
-      addMessage,
-      patchSaveFileReducer,
-      saveFile.bag,
-      saveFile.handledOccupants,
-      saveFile.trait,
-    ],
+    [addMessage, patchSaveFileReducer, saveFile],
   );
 };

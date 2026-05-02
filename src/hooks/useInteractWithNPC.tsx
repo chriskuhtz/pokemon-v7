@@ -1,6 +1,7 @@
-import { useContext, useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { SpriteIcon } from "../components/SpriteIcon/SpriteIcon";
-import { joinInventories, EmptyInventory } from "../interfaces/Inventory";
+import { getCurrentBlocker, startBlocker } from "../functions/TimedEvent";
+import { EmptyInventory, joinInventories } from "../interfaces/Inventory";
 import { OverworldNpc } from "../interfaces/Occupant";
 import { MessageQueueContext } from "./useMessageQueue";
 import { SaveFileContext } from "./useSaveFile";
@@ -11,7 +12,7 @@ export const useInteractWithNPC = () => {
 
   return useCallback(
     (occ: OverworldNpc) => {
-      if (!saveFile.handledOccupants.some((h) => h.id === occ.id)) {
+      if (!getCurrentBlocker(saveFile, occ.id)) {
         addMultipleMessages(
           [
             ...occ.unhandledMessage.map((d, i) => ({
@@ -28,16 +29,12 @@ export const useInteractWithNPC = () => {
                         }
                       }
                       patchSaveFileReducer({
-                        ...saveFile,
+                        ...startBlocker(saveFile, occ.id, -1),
                         bag: joinInventories(
                           saveFile.bag,
                           occ.gifts ?? EmptyInventory,
                         ),
                         quests: updatedQuests,
-                        handledOccupants: [
-                          ...saveFile.handledOccupants,
-                          { id: occ.id, resetAt: -1 },
-                        ],
                       });
                     }
                   : undefined,

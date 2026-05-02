@@ -1,6 +1,7 @@
 import { useCallback, useContext } from "react";
 import { ONE_HOUR } from "../../../constants/baseConstants";
 import { ArrayHelpers } from "../../../functions/ArrayHelpers";
+import { getCurrentBlocker, startBlocker } from "../../../functions/TimedEvent";
 import { Message, MessageQueueContext } from "../../../hooks/useMessageQueue";
 import { SaveFileContext } from "../../../hooks/useSaveFile";
 import { joinInventories } from "../../../interfaces/Inventory";
@@ -13,7 +14,7 @@ export const useShovel = () => {
 
   return useCallback(
     (ledge: Ledge) => {
-      if (saveFile.handledOccupants.some((occ) => occ.id === ledge.id)) {
+      if (getCurrentBlocker(saveFile, ledge.id)) {
         return;
       }
       if (saveFile.campUpgrades["shovel certification"]) {
@@ -44,14 +45,11 @@ export const useShovel = () => {
                 ...m,
                 onRemoval: () =>
                   patchSaveFileReducer({
-                    handledOccupants: [
-                      ...saveFile.handledOccupants,
-                      {
-                        id: ledge.id,
-                        resetAt:
-                          new Date().getTime() + ONE_HOUR * Math.random(),
-                      },
-                    ],
+                    ...startBlocker(
+                      saveFile,
+                      ledge.id,
+                      ONE_HOUR * Math.random(),
+                    ),
                     bag: updatedInventory,
                   }),
               };
@@ -68,12 +66,6 @@ export const useShovel = () => {
         ]);
       return;
     },
-    [
-      addMultipleMessages,
-      patchSaveFileReducer,
-      saveFile.campUpgrades,
-      saveFile.handledOccupants,
-      saveFile.bag,
-    ],
+    [saveFile, addMultipleMessages, patchSaveFileReducer],
   );
 };

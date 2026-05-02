@@ -177,11 +177,6 @@ export interface SaveFile {
     currentChallenger?: Challenger;
     currentChestId?: string;
   };
-  handledOccupants: {
-    id: string;
-    //at this point in time (in ms), this occupant will be removed from the handled list
-    resetAt: number; //refactor as blocker time event
-  }[];
   lastEdited: number;
   lastNurse: string;
   settings?: SettingsObject;
@@ -193,7 +188,6 @@ export interface SaveFile {
     plants: BerryBush[];
   };
   campUpgrades: Record<CampUpgrade, boolean>;
-  currentRampagingPokemon?: RampagingPokemon; //refactor as timed event
   rangerLevel?: number;
   seedVault: ItemType[];
   pokedex: Pokedex;

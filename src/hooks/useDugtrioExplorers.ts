@@ -1,4 +1,5 @@
 import { useCallback, useContext } from "react";
+import { ONE_HOUR } from "../constants/baseConstants";
 import { ArrayHelpers } from "../functions/ArrayHelpers";
 import { getCurrentBlocker, startBlocker } from "../functions/TimedEvent";
 import { joinInventories } from "../interfaces/Inventory";
@@ -32,7 +33,9 @@ export const useDugtrioExplorers = () => {
         { message: `And returns with ${amount} ${foragedItem}` },
       ]);
       const blockerChecked =
-        Math.random() > 0.8 ? startBlocker(saveFile, "DUGTRIO") : saveFile;
+        Math.random() > 0.8
+          ? startBlocker(saveFile, "DUGTRIO", ONE_HOUR / 3)
+          : saveFile;
       patchSaveFileReducer({
         ...blockerChecked,
         bag: joinInventories(saveFile.bag, {

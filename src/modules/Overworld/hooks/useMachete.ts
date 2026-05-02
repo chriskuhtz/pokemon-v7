@@ -1,5 +1,6 @@
 import { useCallback, useContext } from "react";
 import { ONE_DAY } from "../../../constants/baseConstants";
+import { getCurrentBlocker, startBlocker } from "../../../functions/TimedEvent";
 import { GameDataContext } from "../../../hooks/useGameData";
 import { MessageQueueContext } from "../../../hooks/useMessageQueue";
 import { SaveFileContext } from "../../../hooks/useSaveFile";
@@ -12,7 +13,7 @@ export const useMachete = () => {
 
   return useCallback(
     (bush: OverworldBush) => {
-      if (saveFile.handledOccupants.some((occ) => occ.id === bush.id)) {
+      if (getCurrentBlocker(saveFile, bush.id)) {
         return;
       }
       if (overworldActions.bushCutting.possible(saveFile)) {
@@ -23,13 +24,7 @@ export const useMachete = () => {
               i === overworldActions.bushCutting.successDialogue.length - 1
                 ? () =>
                     patchSaveFileReducer({
-                      handledOccupants: [
-                        ...saveFile.handledOccupants,
-                        {
-                          id: bush.id,
-                          resetAt: new Date().getTime() + ONE_DAY,
-                        },
-                      ],
+                      ...startBlocker(saveFile, bush.id, ONE_DAY),
                     })
                 : undefined,
           })),
