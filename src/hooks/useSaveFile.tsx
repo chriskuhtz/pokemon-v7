@@ -5,15 +5,15 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import { MoveName } from "../constants/movesCheckList";
-
 import { emptyPokedex } from "../constants/gameData/gameData";
+import { MoveName } from "../constants/movesCheckList";
 import { PokemonName } from "../constants/pokemonNames";
 import { addPokemonToDex } from "../functions/addPokemonToDex";
 import { applyHappinessFromWalking } from "../functions/applyHappinessFromWalking";
 import { applyItemToPokemon } from "../functions/applyItemToPokemon";
 import { fullyHealPokemon } from "../functions/fullyHealPokemon";
 import { TimeOfDay } from "../functions/getTimeOfDay";
+import { cleanUpTimedEvents, refillTimedEvents } from "../functions/TimedEvent";
 import { updateItemFunction } from "../functions/updateItemFunction";
 import { EmptyInventory, joinInventories } from "../interfaces/Inventory";
 import { ItemType } from "../interfaces/Item";
@@ -57,7 +57,7 @@ export interface UseSaveFile {
   changeHeldItemReducer: (pokemonId: string, newItem?: ItemType) => void;
   useSacredAshReducer: () => void;
   evolvePokemonReducer: (x: EvolutionReducerPayload) => void;
-  reset: () => void;
+  resetSaveFile: () => void;
 }
 
 const migrateSavefile = (input: SaveFile) => {
@@ -136,33 +136,41 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
     window.localStorage.setItem(saveFileId, JSON.stringify(saveFile));
   }, [saveFile, saveFileId]);
 
-  const reset = useCallback(() => {
+  const resetSaveFile = useCallback(() => {
     s(startingSaveFile);
   }, [startingSaveFile]);
 
   //handle side effects here
-  const setSaveFile = useCallback((u: SaveFile) => {
-    const update = { ...u };
-    const now = new Date().getTime();
+  const setSaveFile = useCallback(
+    (u: SaveFile) => {
+      let update = { ...u };
+      const now = new Date().getTime();
 
-    let pokedex = update.pokedex ?? emptyPokedex;
+      let pokedex = update.pokedex ?? emptyPokedex;
 
-    //update pokedex
-    update.pokemon.forEach((p) => {
-      pokedex = addPokemonToDex(pokedex, p.name, p.caughtOnMap, true);
-    });
-    //update catch streak
-    if ((update.catchStreak?.streak ?? 0) > (update.longestStreak ?? 0)) {
-      update.longestStreak = update.catchStreak?.streak;
-    }
+      //update pokedex
+      update.pokemon.forEach((p) => {
+        pokedex = addPokemonToDex(pokedex, p.name, p.caughtOnMap, true);
+      });
+      //update catch streak
+      if ((update.catchStreak?.streak ?? 0) > (update.longestStreak ?? 0)) {
+        update.longestStreak = update.catchStreak?.streak;
+      }
 
-    s({
-      ...update,
-      lastEdited: now,
-      pokedex,
-      bag: joinInventories(EmptyInventory, update.bag),
-    });
-  }, []);
+      //remove expired TimedEvents
+      update = cleanUpTimedEvents(update);
+      //refill TimedEvents
+      update = refillTimedEvents(update, gameData);
+
+      s({
+        ...update,
+        lastEdited: now,
+        pokedex,
+        bag: joinInventories(EmptyInventory, update.bag),
+      });
+    },
+    [gameData],
+  );
   const discardItemReducer = (item: ItemType, number: number) => {
     const updatedInventory = updateItemFunction(item, -number, saveFile.bag);
     setSaveFile({ ...saveFile, bag: updatedInventory });
@@ -385,7 +393,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
     applyItemToPokemonReducer,
     changeHeldItemReducer,
     useSacredAshReducer,
-    reset,
+    resetSaveFile,
   };
 };
 

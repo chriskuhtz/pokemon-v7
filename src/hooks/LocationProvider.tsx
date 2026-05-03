@@ -7,15 +7,12 @@ import React, {
   useState,
 } from "react";
 import {
-  cleaUpTimedEvents,
   getCurrentTroubleMakers,
-  refillTimedEvents,
   removeTroubleMakers,
   resetBlockersWithPartialId,
 } from "../functions/TimedEvent";
 import { EmptyInventory } from "../interfaces/Inventory";
 import { CharacterLocationData } from "../interfaces/SaveFile";
-import { gameData } from "../versions/labyrinth/gameData";
 import { GameDataContext } from "./useGameData";
 import { MessageQueueContext } from "./useMessageQueue";
 import { SaveFileContext } from "./useSaveFile";
@@ -89,14 +86,6 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
         patchSaveFileReducer({
           ...resetBlockersWithPartialId(saveFile, "Rocket Camp"),
         });
-      } else {
-        let update = { ...saveFile };
-        //remove expired TimedEvents
-        update = cleaUpTimedEvents(update);
-        //refill TimedEvents
-        update = refillTimedEvents(update, gameData);
-
-        patchSaveFileReducer(update);
       }
       s(newLocation);
     },

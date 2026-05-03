@@ -6,7 +6,7 @@ import { SaveFileContext } from "./useSaveFile";
 
 export const useReset = () => {
   const { saveFileId, locationId } = useContext(GameDataContext);
-  const { reset, saveFile } = useContext(SaveFileContext);
+  const { resetSaveFile, saveFile } = useContext(SaveFileContext);
   const { resetLocation } = useContext(LocationContext);
 
   return useCallback(() => {
@@ -15,7 +15,13 @@ export const useReset = () => {
     });
     window.localStorage.removeItem(saveFileId);
     window.localStorage.removeItem(locationId);
-    reset();
+    resetSaveFile();
     resetLocation();
-  }, [locationId, reset, resetLocation, saveFile, saveFileId]);
+  }, [
+    locationId,
+    resetLocation,
+    resetSaveFile,
+    saveFile.timedEvents,
+    saveFileId,
+  ]);
 };

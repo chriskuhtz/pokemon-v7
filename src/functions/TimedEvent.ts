@@ -57,7 +57,7 @@ export const isExpired = (event: TimedEvent): boolean => {
   const now = Date.now();
   return event.removeAt < now;
 };
-export const cleaUpTimedEvents = (saveFile: SaveFile): SaveFile => {
+export const cleanUpTimedEvents = (saveFile: SaveFile): SaveFile => {
   const update = { ...saveFile, timedEvents: saveFile.timedEvents ?? [] };
 
   update.timedEvents = update.timedEvents?.filter((event) => !isExpired(event));
