@@ -566,7 +566,7 @@ export const startBlocker = (s: SaveFile, id: string, ms: number): SaveFile => {
       {
         id: id,
         type: "BLOCKER",
-        removeAt: Date.now() + ms,
+        removeAt: ms === -1 ? ms : Date.now() + ms,
       },
     ]),
   };
