@@ -35,7 +35,7 @@ export const makeApricornTree = ({
       conditionFunction: (s) => !occupantHandled(s, id),
     },
     {
-      id: `${id}_empty`,
+      id,
       type: "EMPTY_APRICORN_TREE",
       x,
       y,

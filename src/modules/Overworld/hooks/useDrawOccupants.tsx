@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getItemUrl } from "../../../functions/getItemUrl";
 import { getYOffsetFromOrientation } from "../../../functions/getYOffsetFromOrientation";
 import { Occupant } from "../../../interfaces/Occupant";
+import { SpriteEnum } from "../../../interfaces/SpriteEnum";
 
 export const overflow = (current: number, excludedMax: number) => {
   if (current < excludedMax - 1) {
@@ -105,17 +106,30 @@ const drawOccupant = (
       case "TRAINER":
       case "ROUTER_NPC":
       case "TELEPORTER_NPC":
-        ctx?.drawImage(
-          img,
-          0,
-          -getYOffsetFromOrientation(occ.orientation),
-          64,
-          64,
-          baseSize * occ.x,
-          baseSize * occ.y - baseSize * 0.5,
-          baseSize,
-          baseSize * 1.5,
-        );
+        if (occ.sprite === SpriteEnum.red1996) {
+          ctx?.drawImage(
+            img,
+            0,
+            -getYOffsetFromOrientation(occ.orientation),
+            64,
+            64,
+            baseSize * occ.x + baseSize * 0.125,
+            baseSize * occ.y + baseSize * 0.125,
+            baseSize * 0.75,
+            baseSize * 0.75,
+          );
+        } else
+          ctx?.drawImage(
+            img,
+            0,
+            -getYOffsetFromOrientation(occ.orientation),
+            64,
+            64,
+            baseSize * occ.x,
+            baseSize * occ.y - baseSize * 0.5,
+            baseSize,
+            baseSize * 1.5,
+          );
         break;
       case "ZIGZAGOON_FORAGER":
       case "DUGTRIO_EXPLORER":
@@ -256,7 +270,6 @@ const getSource = (occ: Occupant) => {
       return "/mapObjects/rock.png";
     case "HALLOWED_TOWER":
       return "/mapObjects/hallowedTower.png";
-
     case "SWARM_RADAR":
       return "/mapObjects/radar.png";
     case "ROCKET_RADIO":

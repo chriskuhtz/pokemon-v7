@@ -1,4 +1,4 @@
-import { ONE_HOUR } from "../constants/baseConstants";
+import { ONE_DAY, ONE_HOUR } from "../constants/baseConstants";
 import { baseInternalDex } from "../constants/baseInternalDex";
 import { mapsRecord } from "../constants/gameData/maps/mapsRecord";
 import { PokemonName, pokemonNames } from "../constants/pokemonNames";
@@ -55,6 +55,10 @@ export const isExpired = (event: TimedEvent): boolean => {
     return false;
   }
   const now = Date.now();
+  //a bug introduced some blockers that only expire far into the future
+  if (event.removeAt > now + ONE_DAY * 30) {
+    return true;
+  }
   return event.removeAt < now;
 };
 export const cleanUpTimedEvents = (saveFile: SaveFile): SaveFile => {

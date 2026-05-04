@@ -26,6 +26,7 @@ import { mapsRecord } from "../../constants/gameData/maps/mapsRecord";
 import { fullyHealPokemon } from "../../functions/fullyHealPokemon";
 import { questMenuAvailable } from "../../functions/questMenuAvailable";
 import {
+  cleanUpSpecificEvent,
   getCurrentLure,
   getCurrentRepel,
   startLure,
@@ -177,6 +178,7 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
         )}
         <BugReportButton />
         <IdeaButton />
+        {window.localStorage.getItem("devmode") && <TimedEventLog />}
 
         {window.localStorage.getItem("devmode") &&
           Object.keys(mapsRecord).map((m) => (
@@ -389,4 +391,52 @@ export const LeaveChallengeFieldButton = () => {
   }
 
   return <></>;
+};
+export const TimedEventLog = () => {
+  const [open, setOpen] = useState<boolean>(false);
+  const [search, setSearch] = useState<string | undefined>();
+  const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+
+  const filteredEvents = useMemo(() => {
+    return (saveFile.timedEvents ?? []).filter((event) => {
+      if (!search) {
+        return true;
+      }
+
+      return (
+        event.id.toLocaleLowerCase().includes(search) ||
+        event.type.toLocaleLowerCase().includes(search)
+      );
+    });
+  }, [saveFile.timedEvents, search]);
+
+  if (!open) {
+    return <button onClick={() => setOpen(true)}>Show Timed Event Log</button>;
+  }
+
+  return (
+    <Stack mode="column">
+      <input
+        placeholder="search timed events"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      ></input>
+      {filteredEvents.map((event) => (
+        <Card
+          onClick={() =>
+            patchSaveFileReducer(cleanUpSpecificEvent(saveFile, event.id))
+          }
+          content={
+            <div>
+              <h3>{event.id}</h3>
+              <p>{event.type}</p>
+              <p>{new Date(event?.removeAt ?? 0).toLocaleTimeString()}</p>
+            </div>
+          }
+          icon={undefined}
+          actionElements={[]}
+        />
+      ))}
+    </Stack>
+  );
 };

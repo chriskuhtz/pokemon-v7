@@ -22,14 +22,15 @@ export const useApricornTree = () => {
       if (tree.apricorn === "purple-apricorn") {
         amount = 1;
       }
-      const now = new Date().getTime();
-      const time = now + ONE_HOUR * (isGardener ? 1 : 2);
+
+      const addedTime = ONE_HOUR * (isGardener ? 1 : 2);
+
       addMessage({
         icon: <img src={getItemUrl(tree.apricorn)} height={battleSpriteSize} />,
         message: `Harvested ${amount} ${tree.apricorn}`,
       });
       patchSaveFileReducer({
-        ...startBlocker(saveFile, tree.id, time),
+        ...startBlocker(saveFile, tree.id, addedTime),
         bag: joinInventories(saveFile.bag, { [tree.apricorn]: amount }),
       });
     },

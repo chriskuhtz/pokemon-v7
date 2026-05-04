@@ -46,7 +46,7 @@ export const handleNetGoodStatsAttack = ({
         return pokemon;
       } else {
         addMessage({
-          message: `${updatedAttacker.name} sacrifficed some of its HP for a boost`,
+          message: `${updatedAttacker.name} sacrificed some of its HP for a boost`,
         });
         updatedAttacker = {
           ...updatedAttacker,
