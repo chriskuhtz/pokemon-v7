@@ -18,8 +18,8 @@ export const useBerryTree = () => {
       const amount =
         getMiddleOfThree([1, Math.floor(Math.random() * 5), 5]) +
         (isGardener ? 1 : 0);
-      const now = new Date().getTime();
-      const time = now + ONE_HOUR * (isGardener ? 1 : 2);
+
+      const time = ONE_HOUR * (isGardener ? 1 : 2);
       addMessage({
         icon: <img src={getItemUrl(tree.berry)} height={battleSpriteSize} />,
         message: `Harvested ${amount} ${tree.berry}`,

@@ -19,4 +19,6 @@ export const customItemDescriptions: Record<string, string> = {
   "resist-mochi": "increases defense ev by 10",
   "muscle-mochi": "increases attack ev by 10",
   "swift-mochi": "increases speed ev by 10",
+  "scroll-of-waters": "used to evolve kubfu",
+  "scroll-of-darkness": "used to evolve kubfu",
 };

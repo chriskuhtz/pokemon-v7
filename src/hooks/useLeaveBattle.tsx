@@ -339,6 +339,7 @@ export const useLeaveBattle = () => {
       updatedMileStones.caughtFromSwarms = updatedSwarmRecord;
 
       const resetTime = () => {
+        //Todo: refactor this into the challenger config
         if (
           defeatedChallengerId &&
           [barryId, nId, cynthiaId, silverId, redId, hughId].includes(
