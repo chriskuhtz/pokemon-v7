@@ -1,11 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { Sprite } from "../../components/Sprite/Sprite";
+import { portraitMode } from "../../constants/baseConstants";
 import { LocationContext } from "../../hooks/LocationProvider";
+import { BaseSizeProvider } from "../../hooks/useBaseSize";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { SpriteEnum } from "../../interfaces/SpriteEnum";
+import { Overworld } from "../../modules/Overworld/Overworld";
 import { Page } from "../Page/Page";
 
-export const LoadingScreen = ({ transparent }: { transparent?: boolean }) => {
+export const LoadingScreen = () => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
   const { resetLocation } = useContext(LocationContext);
   const [showReturnButton, setShowReturnButton] = useState<boolean>(false);
@@ -56,8 +59,13 @@ export const LoadingScreen = ({ transparent }: { transparent?: boolean }) => {
       )}
     </div>
   );
-  if (transparent) {
-    return content;
-  }
-  return <Page headline="">{content}</Page>;
+
+  return (
+    <Page headline="">
+      {content}
+      <BaseSizeProvider allowedBaseSizes={portraitMode ? [32] : [64]}>
+        <Overworld uncontrolled />
+      </BaseSizeProvider>
+    </Page>
+  );
 };
