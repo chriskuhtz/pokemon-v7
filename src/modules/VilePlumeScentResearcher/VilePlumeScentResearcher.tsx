@@ -40,7 +40,6 @@ export const useVileplumeScentResearcher = () => {
       if (!price) {
         return;
       }
-
       addMessage({
         message: `Traded ${price.amount} ${price.item}  for  ${product}`,
       });

@@ -13,7 +13,10 @@ import { applyHappinessFromWalking } from "../functions/applyHappinessFromWalkin
 import { applyItemToPokemon } from "../functions/applyItemToPokemon";
 import { fullyHealPokemon } from "../functions/fullyHealPokemon";
 import { TimeOfDay } from "../functions/getTimeOfDay";
-import { cleanUpTimedEvents, refillTimedEvents } from "../functions/TimedEvent";
+import {
+  cleanUpTimedEvents,
+  refillRandomTimedEvents,
+} from "../functions/TimedEvent";
 import { updateItemFunction } from "../functions/updateItemFunction";
 import { EmptyInventory, joinInventories } from "../interfaces/Inventory";
 import { ItemType } from "../interfaces/Item";
@@ -160,7 +163,7 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
       //remove expired TimedEvents
       update = cleanUpTimedEvents(update);
       //refill TimedEvents
-      update = refillTimedEvents(update, gameData);
+      update = refillRandomTimedEvents(update, gameData);
 
       s({
         ...update,

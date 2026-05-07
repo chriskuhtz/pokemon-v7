@@ -121,7 +121,13 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
                   )}
                   {quest.campUpgrade && <h5>Unlock {quest.campUpgrade}</h5>}
                   {quest.targetPokemon && (
-                    <h5 style={{ display: "flex", alignItems: "center" }}>
+                    <h5
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        flexWrap: "wrap",
+                      }}
+                    >
                       Targets:
                       {quest.targetPokemon.map((p) => {
                         if (

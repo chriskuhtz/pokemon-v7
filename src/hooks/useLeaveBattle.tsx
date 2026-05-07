@@ -21,6 +21,7 @@ import { reduceBattlePokemonToOwnedPokemon } from "../functions/reduceBattlePoke
 import {
   getCurrentBlocker,
   getCurrentSwarm,
+  removeTroubleMakers,
   startBlocker,
 } from "../functions/TimedEvent";
 import { BattlePokemon } from "../interfaces/BattlePokemon";
@@ -103,6 +104,7 @@ export const useLeaveBattle = () => {
 
       resetLocation();
       patchSaveFileReducer({
+        ...removeTroubleMakers(saveFile, "ESCAPED"),
         meta: { activeTab: "OVERWORLD", currentChallenger: undefined },
         pokemon: saveFile.pokemon.map((p) => {
           if (p.onTeam) {

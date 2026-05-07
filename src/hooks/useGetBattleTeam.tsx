@@ -1,237 +1,230 @@
-import { useFetch } from '@potfisch-industries-npm/usefetch';
-import { useContext } from 'react';
-import { AbilityName, abilityNames } from '../constants/abilityCheckList';
-import { MoveName } from '../constants/movesCheckList';
-import { ArrayHelpers } from '../functions/ArrayHelpers';
-import { calculateLevelData } from '../functions/calculateLevelData';
-import { determineGender } from '../functions/determineGender';
-import { getEvAwards } from '../functions/getEvAwards';
-import { getHeldItem } from '../functions/getHeldItem';
-import { getStats } from '../functions/getStats';
-import { deAlternate } from '../functions/handleAlternateForms';
-import { maybeGetHeldItemFromData } from '../functions/maybeGetHeldItemFromData';
-import { moveIsAvailable } from '../functions/moveIsAvailable';
-import { BattlePokemon } from '../interfaces/BattlePokemon';
-import { MoveDto } from '../interfaces/Move';
-import { OwnedPokemon } from '../interfaces/OwnedPokemon';
-import { PokemonData } from '../interfaces/PokemonData';
-import { PokemonSpeciesData } from '../interfaces/PokemonSpeciesData';
-import { EmptyStatObject } from '../interfaces/StatObject';
-import { SaveFileContext } from './useSaveFile';
-import { GameDataContext } from './useGameData';
+import { useFetch } from "@potfisch-industries-npm/usefetch";
+import { useContext } from "react";
+import { AbilityName, abilityNames } from "../constants/abilityCheckList";
+import { MoveName } from "../constants/movesCheckList";
+import { ArrayHelpers } from "../functions/ArrayHelpers";
+import { calculateLevelData } from "../functions/calculateLevelData";
+import { determineGender } from "../functions/determineGender";
+import { getEvAwards } from "../functions/getEvAwards";
+import { getHeldItem } from "../functions/getHeldItem";
+import { getStats } from "../functions/getStats";
+import { deAlternate } from "../functions/handleAlternateForms";
+import { maybeGetHeldItemFromData } from "../functions/maybeGetHeldItemFromData";
+import { moveIsAvailable } from "../functions/moveIsAvailable";
+import { BattlePokemon } from "../interfaces/BattlePokemon";
+import { MoveDto } from "../interfaces/Move";
+import { OwnedPokemon } from "../interfaces/OwnedPokemon";
+import { PokemonData } from "../interfaces/PokemonData";
+import { PokemonSpeciesData } from "../interfaces/PokemonSpeciesData";
+import { EmptyStatObject } from "../interfaces/StatObject";
+import { GameDataContext } from "./useGameData";
+import { getMoveData } from "./useGetMoveData";
+import { SaveFileContext } from "./useSaveFile";
 
 export interface BattleTeamConfig {
-	assignLearnsetMoves?: boolean;
-	assignNaturalAbility?: boolean;
-	assignGender?: boolean;
-	assignHeldItem?: boolean;
+  assignLearnsetMoves?: boolean;
+  assignNaturalAbility?: boolean;
+  assignGender?: boolean;
+  assignHeldItem?: boolean;
 }
 
 export const useGetBattleTeam = (
-	initTeam: OwnedPokemon[],
-	config: BattleTeamConfig
+  initTeam: OwnedPokemon[],
+  config: BattleTeamConfig,
 ) => {
-	const { assignGender, assignLearnsetMoves, assignHeldItem } = config;
-	const {
-		saveFile: { settings },
-	} = useContext(SaveFileContext);
+  const { assignGender, assignLearnsetMoves, assignHeldItem } = config;
+  const {
+    saveFile: { settings },
+  } = useContext(SaveFileContext);
 
-	const { internalDex } = useContext(GameDataContext);
-	return useFetch<BattlePokemon[]>(() =>
-		Promise.all(
-			initTeam.map(async (pokemon) => {
-				const { randomAbilities } = settings ?? {};
-				const { name, xp } = pokemon;
-				const data: Promise<PokemonData> = (
-					await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
-				).json();
+  const { internalDex } = useContext(GameDataContext);
+  return useFetch<BattlePokemon[]>(() =>
+    Promise.all(
+      initTeam.map(async (pokemon) => {
+        const { randomAbilities } = settings ?? {};
+        const { name, xp } = pokemon;
+        const data: Promise<PokemonData> = (
+          await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
+        ).json();
 
-				const fetchedData = await data;
+        const fetchedData = await data;
 
-				const speciesData: Promise<PokemonSpeciesData> = await fetch(
-					`https://pokeapi.co/api/v2/pokemon-species/${deAlternate(name)}`
-				)
-					.then((res) => {
-						return res.json();
-					})
-					.catch(() => {
-						return {
-							capture_rate: 100,
-							base_happiness: 70,
-							growth_rate: { name: 'medium' },
-						};
-					});
+        const speciesData: Promise<PokemonSpeciesData> = await fetch(
+          `https://pokeapi.co/api/v2/pokemon-species/${deAlternate(name)}`,
+        )
+          .then((res) => {
+            return res.json();
+          })
+          .catch(() => {
+            return {
+              capture_rate: 100,
+              base_happiness: 70,
+              growth_rate: { name: "medium" },
+            };
+          });
 
-				const spd = await speciesData;
+        const spd = await speciesData;
 
-				const { level } = calculateLevelData(xp, spd.growth_rate.name);
+        const { level } = calculateLevelData(xp, spd.growth_rate.name);
 
-				const possibleAbilities = [
-					...fetchedData.abilities
-						.map((a) => a.ability.name)
-						.filter((name) => abilityNames.includes(name as AbilityName)),
-				] as AbilityName[];
+        const possibleAbilities = [
+          ...fetchedData.abilities
+            .map((a) => a.ability.name)
+            .filter((name) => abilityNames.includes(name as AbilityName)),
+        ] as AbilityName[];
 
-				const chooseAbility = (): AbilityName => {
-					if (pokemon.fixedAbility) {
-						return pokemon.ability;
-					}
-					if (possibleAbilities.includes(pokemon.ability)) {
-						return pokemon.ability;
-					}
-					if (possibleAbilities.length > 0) {
-						const res = ArrayHelpers.getRandomEntry(possibleAbilities);
-						if (randomAbilities) {
-							const index = abilityNames.findIndex((a) => a === res);
-							const dexId = internalDex[pokemon.name].dexId;
-							return [
-								...abilityNames,
-								...abilityNames,
-								...abilityNames,
-								...abilityNames,
-								...abilityNames,
-								...abilityNames,
-								...abilityNames,
-							][dexId + index];
-						}
-						return res;
-					}
+        const chooseAbility = (): AbilityName => {
+          if (pokemon.fixedAbility) {
+            return pokemon.ability;
+          }
+          if (possibleAbilities.includes(pokemon.ability)) {
+            return pokemon.ability;
+          }
+          if (possibleAbilities.length > 0) {
+            const res = ArrayHelpers.getRandomEntry(possibleAbilities);
+            if (randomAbilities) {
+              const index = abilityNames.findIndex((a) => a === res);
+              const dexId = internalDex[pokemon.name].dexId;
+              return [
+                ...abilityNames,
+                ...abilityNames,
+                ...abilityNames,
+                ...abilityNames,
+                ...abilityNames,
+                ...abilityNames,
+                ...abilityNames,
+              ][dexId + index];
+            }
+            return res;
+          }
 
-					return pokemon.ability;
-				};
+          return pokemon.ability;
+        };
 
-				const ability = chooseAbility();
+        const ability = chooseAbility();
 
-				const availableMoves = fetchedData.moves
-					.filter((m) => moveIsAvailable(m, level))
-					.reverse();
+        const availableMoves = fetchedData.moves
+          .filter((m) => moveIsAvailable(m, level))
+          .reverse();
 
-				const firstMoveName =
-					assignLearnsetMoves && availableMoves.length > 0
-						? availableMoves[0].move.name
-						: pokemon.firstMove.name;
-				const secondMoveName =
-					assignLearnsetMoves && availableMoves.length > 1
-						? availableMoves[1].move.name
-						: pokemon.secondMove?.name;
-				const thirdMoveName =
-					assignLearnsetMoves && availableMoves.length > 2
-						? availableMoves[2].move.name
-						: pokemon.thirdMove?.name;
-				const fourthMoveName =
-					assignLearnsetMoves && availableMoves.length > 3
-						? availableMoves[3].move.name
-						: pokemon.fourthMove?.name;
+        const firstMoveName: MoveName =
+          assignLearnsetMoves && availableMoves.length > 0
+            ? (availableMoves[0].move.name as MoveName)
+            : pokemon.firstMove.name;
+        const secondMoveName: MoveName | undefined =
+          assignLearnsetMoves && availableMoves.length > 1
+            ? (availableMoves[1].move.name as MoveName)
+            : pokemon.secondMove?.name;
+        const thirdMoveName: MoveName | undefined =
+          assignLearnsetMoves && availableMoves.length > 2
+            ? (availableMoves[2].move.name as MoveName)
+            : pokemon.thirdMove?.name;
+        const fourthMoveName: MoveName | undefined =
+          assignLearnsetMoves && availableMoves.length > 3
+            ? (availableMoves[3].move.name as MoveName)
+            : pokemon.fourthMove?.name;
 
-				const firstMoveData: Promise<MoveDto> = (
-					await fetch(`https://pokeapi.co/api/v2/move/${firstMoveName}`)
-				).json();
-				const secondMoveData: Promise<MoveDto> | undefined = secondMoveName
-					? (
-							await fetch(`https://pokeapi.co/api/v2/move/${secondMoveName}`)
-					  ).json()
-					: undefined;
-				const thirdMoveData: Promise<MoveDto> | undefined = thirdMoveName
-					? (
-							await fetch(`https://pokeapi.co/api/v2/move/${thirdMoveName}`)
-					  ).json()
-					: undefined;
-				const fourthMoveData: Promise<MoveDto> | undefined = fourthMoveName
-					? (
-							await fetch(`https://pokeapi.co/api/v2/move/${fourthMoveName}`)
-					  ).json()
-					: undefined;
+        const firstMoveData: Promise<MoveDto> = getMoveData(firstMoveName);
+        const secondMoveData: Promise<MoveDto> | undefined = secondMoveName
+          ? getMoveData(secondMoveName)
+          : undefined;
+        const thirdMoveData: Promise<MoveDto> | undefined = thirdMoveName
+          ? getMoveData(thirdMoveName)
+          : undefined;
+        const fourthMoveData: Promise<MoveDto> | undefined = fourthMoveName
+          ? getMoveData(fourthMoveName)
+          : undefined;
 
-				const { capture_rate, base_happiness } = spd;
+        const { capture_rate, base_happiness } = spd;
 
-				const first = await firstMoveData;
-				const s = await secondMoveData;
-				const t = await thirdMoveData;
-				const f = await fourthMoveData;
+        const first = await firstMoveData;
+        const s = await secondMoveData;
+        const t = await thirdMoveData;
+        const f = await fourthMoveData;
 
-				const firstMove = {
-					...pokemon.firstMove,
-					name: firstMoveName as MoveName,
-					data: first,
-				};
-				const secondMove =
-					secondMoveName && s
-						? {
-								...pokemon.secondMove,
-								name: secondMoveName as MoveName,
-								data: s,
-								usedPP: pokemon.secondMove?.usedPP ?? 0,
-						  }
-						: undefined;
-				const thirdMove =
-					thirdMoveName && t
-						? {
-								...pokemon.thirdMove,
-								name: thirdMoveName as MoveName,
-								data: t,
-								usedPP: pokemon.thirdMove?.usedPP ?? 0,
-						  }
-						: undefined;
-				const fourthMove =
-					fourthMoveName && f
-						? {
-								...pokemon.fourthMove,
-								name: fourthMoveName as MoveName,
-								data: f,
-								usedPP: pokemon.fourthMove?.usedPP ?? 0,
-						  }
-						: undefined;
+        const firstMove = {
+          ...pokemon.firstMove,
+          name: firstMoveName as MoveName,
+          data: first,
+        };
+        const secondMove =
+          secondMoveName && s
+            ? {
+                ...pokemon.secondMove,
+                name: secondMoveName as MoveName,
+                data: s,
+                usedPP: pokemon.secondMove?.usedPP ?? 0,
+              }
+            : undefined;
+        const thirdMove =
+          thirdMoveName && t
+            ? {
+                ...pokemon.thirdMove,
+                name: thirdMoveName as MoveName,
+                data: t,
+                usedPP: pokemon.thirdMove?.usedPP ?? 0,
+              }
+            : undefined;
+        const fourthMove =
+          fourthMoveName && f
+            ? {
+                ...pokemon.fourthMove,
+                name: fourthMoveName as MoveName,
+                data: f,
+                usedPP: pokemon.fourthMove?.usedPP ?? 0,
+              }
+            : undefined;
 
-				const gender = assignGender
-					? determineGender(spd.gender_rate)
-					: pokemon.gender;
+        const gender = assignGender
+          ? determineGender(spd.gender_rate)
+          : pokemon.gender;
 
-				const heldItemName = assignHeldItem
-					? maybeGetHeldItemFromData(fetchedData, settings)
-					: getHeldItem(pokemon);
-				const battleMon: BattlePokemon = {
-					...pokemon,
-					fixedAbility: pokemon.fixedAbility || randomAbilities,
-					growthRate: spd.growth_rate.name,
-					gender,
-					ability: ability,
-					initAbility: ability,
-					heldItemName,
-					roundsInBattle: 0,
-					secondaryAilments: [],
-					moveQueue: [],
-					firstMove,
-					secondMove,
-					thirdMove,
-					fourthMove,
-					data: fetchedData,
-					stats: getStats(
-						fetchedData.stats,
-						pokemon.xp,
-						pokemon.growthRate,
-						pokemon.nature,
-						pokemon.effortValues,
-						settings
-					),
-					statBoosts: EmptyStatObject,
-					capture_rate: capture_rate,
-					happiness: pokemon.happiness < 0 ? base_happiness : pokemon.happiness,
-					status: 'BENCH',
+        const heldItemName = assignHeldItem
+          ? maybeGetHeldItemFromData(fetchedData, settings)
+          : getHeldItem(pokemon);
+        const battleMon: BattlePokemon = {
+          ...pokemon,
+          fixedAbility: pokemon.fixedAbility || randomAbilities,
+          growthRate: spd.growth_rate.name,
+          gender,
+          ability: ability,
+          initAbility: ability,
+          heldItemName,
+          roundsInBattle: 0,
+          secondaryAilments: [],
+          moveQueue: [],
+          firstMove,
+          secondMove,
+          thirdMove,
+          fourthMove,
+          data: fetchedData,
+          stats: getStats(
+            fetchedData.stats,
+            pokemon.xp,
+            pokemon.growthRate,
+            pokemon.nature,
+            pokemon.effortValues,
+            settings,
+          ),
+          statBoosts: EmptyStatObject,
+          capture_rate: capture_rate,
+          happiness: pokemon.happiness < 0 ? base_happiness : pokemon.happiness,
+          status: "BENCH",
 
-					effortValues: pokemon.effortValues,
-					evAwards: getEvAwards(fetchedData.stats),
-					participatedInBattle: false,
-					protected: false,
-					spikyShielded: false,
-					banefulBunkered: false,
-					obstructed: false,
-					endured: false,
-					charged: false,
-					helpingHanded: false,
-				};
+          effortValues: pokemon.effortValues,
+          evAwards: getEvAwards(fetchedData.stats),
+          participatedInBattle: false,
+          protected: false,
+          spikyShielded: false,
+          banefulBunkered: false,
+          obstructed: false,
+          endured: false,
+          charged: false,
+          helpingHanded: false,
+        };
 
-				return battleMon;
-			})
-		)
-	);
+        return battleMon;
+      }),
+    ),
+  );
 };

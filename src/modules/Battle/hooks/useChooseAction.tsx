@@ -1,12 +1,12 @@
 import { useCallback } from "react";
 import { MoveName } from "../../../constants/movesCheckList";
 
+import { struggleMove } from "../../../constants/customMoves";
 import {
   recoveryMoves,
   secondTurnMoves,
   thrashingMoves,
 } from "../../../constants/groupedMoves";
-import { struggleMove } from "../../../constants/struggle";
 import { ArrayHelpers } from "../../../functions/ArrayHelpers";
 import { determineMultiHits } from "../../../functions/determineMultiHits";
 import { getHeldItem } from "../../../functions/getHeldItem";

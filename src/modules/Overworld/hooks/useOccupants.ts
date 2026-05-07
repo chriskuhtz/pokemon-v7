@@ -81,6 +81,13 @@ export const useOccupants = () => {
             if (ev.type === "TROUBLEMAKERS" && ev.mapId === location.mapId) {
               return makeOverworldTroubleMakers(saveFile);
             }
+            if (ev.type === "CHEST" && ev.mapId === location.mapId) {
+              return {
+                ...ev,
+                type: "CHEST",
+                conditionFunction: (s) => !occupantHandled(s, ev.id),
+              };
+            }
             return undefined;
           })
           .filter((ev) => ev !== undefined),

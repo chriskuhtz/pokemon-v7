@@ -1,4 +1,5 @@
 import { PokemonName } from "../constants/pokemonNames";
+import { Inventory } from "./Inventory";
 import { ItemType, LureType, RepelType } from "./Item";
 import { MapId } from "./mapIds";
 import { OverworldTrainer } from "./Occupant";
@@ -22,7 +23,8 @@ export interface BaseTimedEvent {
     | "REPEL"
     | "TROUBLEMAKERS"
     | "BLOCKER"
-    | "SWARM";
+    | "SWARM"
+    | "CHEST";
   removeAt: number;
   id: string;
 }
@@ -32,6 +34,13 @@ export interface LostItemEvent extends BaseTimedEvent {
   mapId: MapId;
   item: ItemType;
   amount: number;
+  x: number;
+  y: number;
+}
+export interface ChestEvent extends BaseTimedEvent {
+  type: "CHEST";
+  mapId: MapId;
+  contents: Partial<Inventory>;
   x: number;
   y: number;
 }
@@ -91,4 +100,5 @@ export type TimedEvent =
   | RepelEvent
   | TroubleMakersEvent
   | BlockerEvent
-  | SwarmEvent;
+  | SwarmEvent
+  | ChestEvent;

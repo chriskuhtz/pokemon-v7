@@ -75,7 +75,7 @@ export const TravellingMerchant = (): JSX.Element => {
                   icon={<ItemSprite item={give} />}
                   content={
                     <h3>
-                      Trade 5{give}({amount} in Bag) for {receive}
+                      Trade 5 {give}({amount} in Bag) for {receive}
                     </h3>
                   }
                   actionElements={[<ItemSprite item={receive} />]}

@@ -20,6 +20,7 @@ import { SaveFile } from "../interfaces/SaveFile";
 import { SpriteEnum } from "../interfaces/SpriteEnum";
 import {
   BlockerEvent,
+  ChestEvent,
   evilTeams,
   LostItemEvent,
   LureEvent,
@@ -79,8 +80,7 @@ export const cleanUpSpecificEvent = (
     timedEvents: update.timedEvents.filter((event) => event.id !== id),
   };
 };
-
-export const refillTimedEvents = (
+export const refillRandomTimedEvents = (
   saveFile: SaveFile,
   gameData: GameData,
 ): SaveFile => {
@@ -204,7 +204,6 @@ export const addStaticEncounterToSaveFile = (
     timedEvents: (s.timedEvents ?? []).concat(newEncounter),
   };
 };
-
 //LOST ITEM:
 const impossibleItems: ItemType[] = [
   ...keyItems,
@@ -241,6 +240,10 @@ export const makeLostItemEvent = (s: SaveFile): LostItemEvent => {
   };
 
   return lostItem;
+};
+//CHEST
+export const addChestEvent = (s: SaveFile, chest: ChestEvent): SaveFile => {
+  return { ...s, timedEvents: [...(s.timedEvents ?? []), chest] };
 };
 //STATIC TRAINER:
 export const trainerPresets: Record<

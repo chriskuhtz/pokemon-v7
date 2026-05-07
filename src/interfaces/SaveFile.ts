@@ -182,6 +182,8 @@ export interface SaveFile {
   settings?: SettingsObject;
   quests: Record<KumaQuestName, QuestStatus>;
   sprite: string;
+  swimmerSprite?: string;
+  skierSprite?: string;
   mileStones: MileStonesObject;
   farm: {
     // refactor farm into overworld plots

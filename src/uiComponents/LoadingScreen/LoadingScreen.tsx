@@ -27,9 +27,10 @@ export const LoadingScreen = ({ transparent }: { transparent?: boolean }) => {
     <div
       style={{
         display: "flex",
-        height: "100%",
+        height: "100dvh",
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "rgba(0,0,0,.5)",
       }}
     >
       <h2>Loading lots of data</h2>
