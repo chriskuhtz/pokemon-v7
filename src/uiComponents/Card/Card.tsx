@@ -52,7 +52,9 @@ export const Card = ({
         }}
       >
         {actionElements.map((a, i) => (
-          <React.Fragment key={i}>{a}</React.Fragment>
+          <span onClick={(e) => e.stopPropagation()} key={i}>
+            {a}
+          </span>
         ))}
       </div>
     </div>

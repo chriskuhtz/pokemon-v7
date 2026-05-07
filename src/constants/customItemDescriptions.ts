@@ -21,4 +21,5 @@ export const customItemDescriptions: Record<string, string> = {
   "swift-mochi": "increases speed ev by 10",
   "scroll-of-waters": "used to evolve kubfu",
   "scroll-of-darkness": "used to evolve kubfu",
+  "moomoo-cheese": "a tasty snack, humans seem to like it more than pokemon",
 };

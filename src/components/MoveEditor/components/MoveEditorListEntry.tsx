@@ -36,7 +36,7 @@ export const MoveEditorListEntry = ({
     calculateLevelData(ownedPokemon.xp, ownedPokemon.growthRate).level,
   );
 
-  const { res: moveData } = useGetMoveData(m.move.name);
+  const { res: moveData } = useGetMoveData(m.move.name as MoveName);
 
   const { learnable: unlockable, message } = moveData
     ? gameData.isMoveLearnable(moveData, saveFile)

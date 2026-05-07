@@ -53,17 +53,20 @@ export const Overworld = ({ uncontrolled }: { uncontrolled?: boolean }) => {
       return "pidgeot";
     }
     const onWater = map.tileMap.waterLayer[location.y][location.x];
-    if (onWater) {
-      return "NPC_027";
+    const onSnow = map.id === "routeN1W1";
+    if (onWater && saveFile.swimmerSprite) {
+      return saveFile.swimmerSprite;
     }
-    if (map.id === "routeN1W1") {
-      return "NPC_011";
+    if (onSnow && saveFile.skierSprite) {
+      return saveFile.skierSprite;
     }
 
     return saveFile.sprite;
   }, [
     saveFile.flying,
+    saveFile.swimmerSprite,
     saveFile.sprite,
+    saveFile.skierSprite,
     map.tileMap.waterLayer,
     map.id,
     location.y,

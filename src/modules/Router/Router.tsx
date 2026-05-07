@@ -3,6 +3,11 @@ import { GameDataContext } from "../../hooks/useGameData";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { MapId } from "../../interfaces/mapIds";
 import { RoutesType } from "../../interfaces/Routing";
+import {
+  isSkierSprite,
+  isSwimmerSprite,
+  SpriteEnum,
+} from "../../interfaces/SpriteEnum";
 import { AbilityTutor } from "../AbilityTutor/AbilityTutor";
 import { AmoongussCompostResearcher } from "../AmoongussResearcher/AmoongussResearcher";
 import { ApricornSmithy } from "../ApricornSmithy/ApricornSmithy";
@@ -51,6 +56,7 @@ import { Wiki } from "../Wiki/Wiki";
 export const Router = (): JSX.Element => {
   const {
     startingTab,
+
     features: { settingsEditableAtStart, settingsEditableDuringGame },
   } = useContext(GameDataContext);
 
@@ -82,6 +88,39 @@ export const Router = (): JSX.Element => {
     return savedTab ?? startingTab;
   }, [hasReadIntro, savedTab, startingTab]);
 
+  if (saveFile.campUpgrades["buy skiing equipment"] && !saveFile.skierSprite) {
+    return (
+      <SpriteSelection
+        headline="What do you look like in the snow:"
+        availableSprites={Object.values(SpriteEnum).filter((v) =>
+          isSkierSprite(v),
+        )}
+        proceed={(sprite: string) => {
+          patchSaveFileReducer({
+            skierSprite: sprite,
+          });
+        }}
+      />
+    );
+  }
+  if (
+    saveFile.campUpgrades["swimming certification"] &&
+    !saveFile.swimmerSprite
+  ) {
+    return (
+      <SpriteSelection
+        headline="What do you look like swimming:"
+        availableSprites={Object.values(SpriteEnum).filter((v) =>
+          isSwimmerSprite(v),
+        )}
+        proceed={(sprite: string) => {
+          patchSaveFileReducer({
+            swimmerSprite: sprite,
+          });
+        }}
+      />
+    );
+  }
   if (activeTab === "INTRO") {
     return <Intro setHasReadIntro={setHasReadIntro} />;
   }
@@ -114,6 +153,10 @@ export const Router = (): JSX.Element => {
   if (activeTab === "SPRITE_SELECTION") {
     return (
       <SpriteSelection
+        headline="What do you look like:"
+        availableSprites={Object.values(SpriteEnum).filter(
+          (v) => !isSwimmerSprite(v) && !isSkierSprite(v),
+        )}
         proceed={(sprite: string) => {
           patchSaveFileReducer({
             sprite: sprite,
