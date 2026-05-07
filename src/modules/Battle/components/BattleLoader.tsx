@@ -77,7 +77,7 @@ export const BattleLoader = ({
 
   const shader = useShader();
   if (!battleOpponents || !battleTeam) {
-    return <LoadingScreen transparent />;
+    return <LoadingScreen />;
   }
   return (
     <>
