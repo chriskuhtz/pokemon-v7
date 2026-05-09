@@ -234,7 +234,7 @@ export const getTroubleMakerTeam = (s: SaveFile): OwnedPokemon[] => {
 
     return makeChallengerPokemon({
       name: mon.name,
-      xp: xp * (Math.random() * 0.25 + 0.75),
+      xp: xp * (0.5 + Math.random() * 0.5),
     });
   });
 };
