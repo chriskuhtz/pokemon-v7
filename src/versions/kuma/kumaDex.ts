@@ -1920,7 +1920,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   bayleef: {
     dexId: 153,
     types: ["grass"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 27000,
+        minXp: 4000,
+        route: "ilex-forest",
+        rarity: "medium",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       defense: 1,
       "special-defense": 1,
@@ -1929,7 +1938,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   meganium: {
     dexId: 154,
     types: ["grass"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 45000,
+        minXp: 27000,
+        route: "ilex-forest",
+        rarity: "ultra-rare",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       defense: 1,
       "special-defense": 2,
@@ -2000,7 +2018,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   furret: {
     dexId: 162,
     types: ["normal"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 27000,
+        minXp: 4000,
+        route: "ilex-forest",
+        rarity: "medium",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       speed: 2,
     },
@@ -2151,7 +2178,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   togepi: {
     dexId: 175,
     types: ["fairy"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 1000,
+        minXp: 100,
+        route: "ilex-forest",
+        rarity: "ultra-rare",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       "special-defense": 1,
     },
@@ -2167,7 +2203,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   natu: {
     dexId: 177,
     types: ["psychic", "flying"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 27000,
+        minXp: 4000,
+        route: "ilex-forest",
+        rarity: "common",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       "special-attack": 1,
     },
@@ -2175,7 +2220,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   xatu: {
     dexId: 178,
     types: ["psychic", "flying"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 45000,
+        minXp: 27000,
+        route: "ilex-forest",
+        rarity: "rare",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       "special-attack": 1,
       speed: 1,
@@ -2184,7 +2238,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   mareep: {
     dexId: 179,
     types: ["electric"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 27000,
+        minXp: 4000,
+        route: "ilex-forest",
+        rarity: "common",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     staticEncounter: "routeW1",
     evs: {
       "special-attack": 1,
@@ -2193,7 +2256,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   flaaffy: {
     dexId: 180,
     types: ["electric"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 27000,
+        minXp: 4000,
+        route: "ilex-forest",
+        rarity: "common",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       "special-attack": 2,
     },
@@ -2202,7 +2274,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
     dexId: 181,
     types: ["electric"],
     rampager: true,
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 45000,
+        minXp: 27000,
+        route: "ilex-forest",
+        rarity: "rare",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       "special-attack": 3,
     },
@@ -2210,7 +2291,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   bellossom: {
     dexId: 182,
     types: ["grass"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 45000,
+        minXp: 27000,
+        route: "ilex-forest",
+        rarity: "ultra-rare",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       "special-defense": 3,
     },
@@ -2443,7 +2533,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   girafarig: {
     dexId: 203,
     types: ["normal", "psychic"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 27000,
+        minXp: 4000,
+        route: "ilex-forest",
+        rarity: "medium",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       "special-attack": 2,
     },

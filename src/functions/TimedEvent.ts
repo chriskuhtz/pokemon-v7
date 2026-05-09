@@ -20,7 +20,6 @@ import { SaveFile } from "../interfaces/SaveFile";
 import { SpriteEnum } from "../interfaces/SpriteEnum";
 import {
   BlockerEvent,
-  ChestEvent,
   evilTeams,
   LostItemEvent,
   LureEvent,
@@ -240,10 +239,6 @@ export const makeLostItemEvent = (s: SaveFile): LostItemEvent => {
   };
 
   return lostItem;
-};
-//CHEST
-export const addChestEvent = (s: SaveFile, chest: ChestEvent): SaveFile => {
-  return { ...s, timedEvents: [...(s.timedEvents ?? []), chest] };
 };
 //STATIC TRAINER:
 export const trainerPresets: Record<
@@ -585,7 +580,9 @@ export const resetBlockersWithPartialId = (
   return {
     ...saveFile,
     timedEvents: saveFile.timedEvents?.filter((event) => {
-      return event.id.includes(partialId);
+      return event.id
+        .toLocaleLowerCase()
+        .includes(partialId.toLocaleLowerCase());
     }),
   };
 };

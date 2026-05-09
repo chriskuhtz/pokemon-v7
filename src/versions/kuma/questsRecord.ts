@@ -10,6 +10,7 @@ import {
   midBstPokemon,
 } from "../../constants/baseStatRecord";
 import { campUpgradeCostScale } from "../../constants/gameData/campUpgrades";
+import { allIlexGalacticsDefeated } from "../../constants/gameData/maps/occupants/ilexForest";
 import { allRocketCampTrainersDefeated } from "../../constants/gameData/maps/occupants/rocketCampOccupants";
 import { PokemonName, pokemonNames } from "../../constants/pokemonNames";
 import {
@@ -483,6 +484,7 @@ export const kumaQuestNames = [
   "collect 8 badges",
   "defeat the pokemon league",
   "find a purple apricorn",
+  "defeat team galactic in ilex forest",
 ] as const;
 
 export type KumaQuestName = (typeof kumaQuestNames)[number];
@@ -2005,6 +2007,25 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
         s.pokedex[o.name].caughtOnRoutes.includes("onixCave"),
       ),
   },
+  "catch all pokemon from ilex forest": {
+    category: "EXPLORATION",
+    kind: "BULLETIN",
+    availableAfter: "defeat team galactic in ilex forest",
+    targetRoute: "ilex-forest",
+    researchPoints: 50,
+    rewardItems: {
+      "yellow-apricorn": 10,
+      "orange-apricorn": 10,
+      "ultra-ball": 20,
+    },
+    targetPokemon: getAllEncountersFor("ilex-forest", {}, kumaDex).map(
+      (p) => p.name,
+    ),
+    conditionFunction: (s: SaveFile) =>
+      getAllEncountersFor("ilex-forest", {}, kumaDex).every((o) =>
+        s.pokedex[o.name].caughtOnRoutes.includes("ilex-forest"),
+      ),
+  },
   "catch all pokemon from caveW1": {
     category: "EXPLORATION",
     kind: "BULLETIN",
@@ -2573,9 +2594,23 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "BATTLE",
     researchPoints: 50,
     rewardItems: { "moomoo-milk": 5, "big-malasada": 5 },
-    rangerLevels: 5,
+    rangerLevels: 3,
     kind: "QUEST_LINE",
     conditionFunction: allRocketCampTrainersDefeated,
+  },
+  "defeat team galactic in ilex forest": {
+    category: "BATTLE",
+    researchPoints: 50,
+    rewardItems: {
+      "moomoo-milk": 5,
+      "big-malasada": 5,
+      "castelia-cone": 5,
+      "lumiose-galette": 5,
+    },
+    rangerLevels: 3,
+    kind: "QUEST_LINE",
+    availableAfter: "clear out the rocket camp",
+    conditionFunction: allIlexGalacticsDefeated,
   },
   "catch a weak pokemon": {
     category: "POKEDEX",

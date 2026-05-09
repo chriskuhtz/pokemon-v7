@@ -6,7 +6,6 @@ import { BaseSizeProvider } from "../../hooks/useBaseSize";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { SpriteEnum } from "../../interfaces/SpriteEnum";
 import { Overworld } from "../../modules/Overworld/Overworld";
-import { Page } from "../Page/Page";
 
 export const LoadingScreen = () => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
@@ -29,6 +28,10 @@ export const LoadingScreen = () => {
   const content = (
     <div
       style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        zIndex: 9000,
         display: "flex",
         height: "100dvh",
         justifyContent: "center",
@@ -61,11 +64,11 @@ export const LoadingScreen = () => {
   );
 
   return (
-    <Page headline="">
+    <>
       {content}
       <BaseSizeProvider allowedBaseSizes={portraitMode ? [32] : [64]}>
         <Overworld uncontrolled />
       </BaseSizeProvider>
-    </Page>
+    </>
   );
 };

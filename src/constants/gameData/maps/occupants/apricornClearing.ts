@@ -206,4 +206,20 @@ export const apricornClearingOccupants: OverworldMap["occupants"] = [
     apricorn: "black-apricorn",
     id: "deep-forest-black-apricorn-2",
   }),
+  {
+    type: "POKEMON",
+    dexId: 214,
+    x: 30,
+    y: 41,
+    orientation: "UP",
+    dialogue: ["heracross is munching on apricorns"],
+    encounter: {
+      rarity: "common",
+      name: "heracross",
+      maxXp: 27000,
+      minXp: 27000,
+    },
+    id: "clearing-heracross",
+    conditionFunction: (s) => !occupantHandled(s, "clearing-heracross"),
+  },
 ];

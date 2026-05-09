@@ -25,6 +25,7 @@ export const mapIds = [
   "victoryRoadExit",
   "pokemonLeague",
   "apricornClearing",
+  "ilex-forest",
   //LABYRINTH VERSION
   "labyrinth_level_1",
   "labyrinth_level_2",

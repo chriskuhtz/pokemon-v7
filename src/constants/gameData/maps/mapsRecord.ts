@@ -10,6 +10,7 @@ import { caveW1 } from "./caveW1";
 import { caveW1F1 } from "./caveW1F1";
 import { caveW1F2 } from "./caveW1F2";
 import { challengeField } from "./challengeField";
+import { ilexForest } from "./ilexForest";
 import { labyrinthLevel1 } from "./labyrinth/labyrinthLevel1";
 import { labyrinthLevel2 } from "./labyrinth/labyrinthLevel2";
 import { onixCave } from "./onixCave";
@@ -55,6 +56,7 @@ export const mapsRecord: Record<MapId, OverworldMap> = {
   victoryRoadExtra: victoryRoadExtra,
   victoryRoadExit: victoryRoadExit,
   pokemonLeague: pokemonLeague,
+  "ilex-forest": ilexForest,
   //LABYRINTH VERSION
   labyrinth_level_1: labyrinthLevel1,
   labyrinth_level_2: labyrinthLevel2,
@@ -88,6 +90,7 @@ export const mapDisplayNames: Record<MapId, string> = {
   victoryRoadExit: "Pokemon League Entrance",
   pokemonLeague: "Pokemon League",
   apricornClearing: "Apricorn Clearing",
+  "ilex-forest": "Ilex Forest",
   //LABYRINTH VERSION
   labyrinth_level_1: "Deep Forest",
   labyrinth_level_2: "Deep Forest",
