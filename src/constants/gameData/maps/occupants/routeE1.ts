@@ -259,4 +259,53 @@ export const routeE1Occupants: OverworldMap["occupants"] = [
     x: 44,
     y: 18,
   }),
+  {
+    type: "CLIMBING_STEPS",
+    x: 49,
+    y: 24,
+    conditionFunction: () => true,
+    id: "climbing-steps-routeE1",
+  },
+  {
+    type: "POKEMON",
+    dexId: 337,
+    orientation: "LEFT",
+    x: 48,
+    y: 4,
+    dialogue: ["..."],
+    encounter: {
+      name: "lunatone",
+      maxXp: 27000,
+      minXp: 27000,
+      rarity: "common",
+    },
+    conditionFunction: (s) => {
+      return !!(
+        (getTimeOfDay() === "EVENING" || getTimeOfDay() === "NIGHT") &&
+        !occupantHandled(s, "routeE1-lunatone")
+      );
+    },
+    id: "routeE1-lunatone",
+  },
+  {
+    type: "POKEMON",
+    dexId: 338,
+    orientation: "LEFT",
+    x: 48,
+    y: 4,
+    dialogue: ["..."],
+    encounter: {
+      name: "solrock",
+      maxXp: 27000,
+      minXp: 27000,
+      rarity: "common",
+    },
+    conditionFunction: (s) => {
+      return !!(
+        (getTimeOfDay() === "MORNING" || getTimeOfDay() === "DAY") &&
+        !occupantHandled(s, "routeE1-solrock")
+      );
+    },
+    id: "routeE1-solrock",
+  },
 ];

@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { MessageBanner } from "../../components/MessageBanner/MessageBanner";
 import { Sprite } from "../../components/Sprite/Sprite";
 import { portraitMode } from "../../constants/baseConstants";
 import { LocationContext } from "../../hooks/LocationProvider";
@@ -25,50 +26,24 @@ export const LoadingScreen = () => {
     resetLocation();
   };
 
-  const content = (
-    <div
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        zIndex: 9000,
-        display: "flex",
-        height: "100dvh",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "rgba(0,0,0,.5)",
-      }}
-    >
-      <h2>Loading lots of data</h2>
-      <div style={{ display: "flex" }}>
-        <Sprite
-          canvasKey={SpriteEnum.elm}
-          id={SpriteEnum.elm}
-          rotating={true}
-        />{" "}
-        <Sprite
-          canvasKey={SpriteEnum.oak}
-          id={SpriteEnum.oak}
-          rotating={true}
-        />{" "}
-        <Sprite
-          canvasKey={SpriteEnum.rowan}
-          id={SpriteEnum.rowan}
-          rotating={true}
-        />
-      </div>
-      {showReturnButton && (
-        <button onClick={() => returnToWorldMap()}>Return to World Map</button>
-      )}
-    </div>
-  );
-
   return (
-    <>
-      {content}
-      <BaseSizeProvider allowedBaseSizes={portraitMode ? [32] : [64]}>
-        <Overworld uncontrolled />
-      </BaseSizeProvider>
-    </>
+    <BaseSizeProvider allowedBaseSizes={portraitMode ? [32] : [64]}>
+      <MessageBanner
+        confirmLatestMessage={showReturnButton ? returnToWorldMap : () => {}}
+        latestMessage={{
+          message: showReturnButton
+            ? "Return to World Map"
+            : "loading lots of data",
+          icon: (
+            <Sprite
+              canvasKey={SpriteEnum.oak}
+              id={SpriteEnum.oak}
+              rotating={true}
+            />
+          ),
+        }}
+      />
+      <Overworld uncontrolled />
+    </BaseSizeProvider>
   );
 };
