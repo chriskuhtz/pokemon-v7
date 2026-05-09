@@ -84,7 +84,15 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
         location.mapId !== "rocketCamp"
       ) {
         patchSaveFileReducer({
-          ...resetBlockersWithPartialId(saveFile, "Rocket Camp"),
+          ...resetBlockersWithPartialId(saveFile, "Rocket"),
+        });
+      } else if (
+        newLocation.mapId == "ilex-forest" &&
+        location.mapId !== "ilex-forest" &&
+        saveFile.quests["defeat team galactic in ilex forest"] === "ACTIVE"
+      ) {
+        patchSaveFileReducer({
+          ...resetBlockersWithPartialId(saveFile, "galactic"),
         });
       }
       s(newLocation);

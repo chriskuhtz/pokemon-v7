@@ -44,7 +44,7 @@ export const rocketCampOccupants: Occupant[] = [
   }),
   {
     type: "TRAINER",
-    id: "Rocket Camp Goon Stevie",
+    id: "Rocket Goon Stevie",
     x: 11,
     y: 9,
     orientation: "UP",
@@ -66,7 +66,7 @@ export const rocketCampOccupants: Occupant[] = [
   },
   {
     type: "TRAINER",
-    id: "Rocket Camp Goon Fatiha",
+    id: "Rocket Goon Fatiha",
     x: 2,
     y: 6,
     orientation: "RIGHT",
@@ -92,7 +92,7 @@ export const rocketCampOccupants: Occupant[] = [
   },
   {
     type: "TRAINER",
-    id: "Rocket Camp Goon Rosie",
+    id: "Rocket Goon Rosie",
     x: 14,
     y: 2,
     orientation: "DOWN",
@@ -118,7 +118,7 @@ export const rocketCampOccupants: Occupant[] = [
   },
   {
     type: "TRAINER",
-    id: "Rocket Camp Goon Jason",
+    id: "Rocket Goon Jason",
     x: 2,
     y: 17,
     orientation: "RIGHT",
@@ -149,7 +149,7 @@ export const rocketCampOccupants: Occupant[] = [
   },
   {
     type: "TRAINER",
-    id: "Rocket Camp Goon Matt",
+    id: "Rocket Goon Matt",
     x: 16,
     y: 11,
     orientation: "LEFT",
@@ -176,7 +176,7 @@ export const rocketCampOccupants: Occupant[] = [
   },
   {
     type: "TRAINER",
-    id: "Rocket Camp Goon Alex",
+    id: "Rocket Goon Alex",
     x: 18,
     y: 5,
     orientation: "DOWN",
@@ -204,7 +204,7 @@ export const rocketCampOccupants: Occupant[] = [
   },
   {
     type: "TRAINER",
-    id: "Rocket Camp Admin Chad",
+    id: "Rocket Admin Chad",
     x: 10,
     y: 9,
     orientation: "DOWN",
@@ -228,7 +228,7 @@ export const rocketCampOccupants: Occupant[] = [
   },
 
   {
-    id: "Rocket Camp looker teleport",
+    id: "Rocket looker teleport",
     type: "TELEPORTER_NPC",
     sprite: SpriteEnum.looker,
     orientation: "DOWN",

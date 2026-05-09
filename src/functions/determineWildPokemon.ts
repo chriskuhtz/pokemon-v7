@@ -173,6 +173,16 @@ export const determineWildPokemon = ({
       ),
     ];
   } else if (
+    quests["defeat team galactic in ilex forest"] === "FULFILLED" &&
+    Math.random() < 0.01
+  ) {
+    encounter = [
+      makeChallengerPokemon(
+        { name: "celebi", xp: 125000 },
+        { increasedShinyFactor: 2 * shinyFactor },
+      ),
+    ];
+  } else if (
     quests["retrieve oaks parcel from raticate"] === "ACTIVE" &&
     mapId === "routeS1E1" &&
     Math.random() < 0.1

@@ -82,22 +82,14 @@ export const useLeaveBattle = () => {
 
       if (location.mapId === "camp") {
         updatedBag = saveFile.bag;
-      } else if (saveFile.trait === "explorer") {
-        //key items dont get lost, explorers dont lose all their items
+      } else {
+        const lossChance = saveFile.trait === "explorer" ? 0.5 : 0.75;
         updatedBag = joinInventories(
           EmptyInventory,
           Object.fromEntries(
             Object.entries(saveFile.bag).filter(
-              ([item]) => isKeyItem(item) || Math.random() > 0.5,
+              ([item]) => isKeyItem(item) || Math.random() > lossChance,
             ),
-          ),
-        );
-      } else {
-        //key items dont get lost
-        updatedBag = joinInventories(
-          EmptyInventory,
-          Object.fromEntries(
-            Object.entries(saveFile.bag).filter(([item]) => isKeyItem(item)),
           ),
         );
       }

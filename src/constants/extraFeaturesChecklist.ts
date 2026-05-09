@@ -648,5 +648,4 @@ export const extraFeatureCheckList: {
   { name: "Labyrinth level 9" },
   { name: "Labyrinth level 10" },
   { name: "attack animations" },
-  { name: "revamp repels, they do nothing currently" },
 ];
