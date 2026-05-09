@@ -1701,7 +1701,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     conditionFunction: (s) => {
       return s.pokedex["entei"].caughtOnRoutes.length > 0;
     },
-    targetPokemon: ["suicune"],
+    targetPokemon: ["entei"],
     kind: "BULLETIN",
     requiredUpgrade: "pidgeot rider certification",
   },
@@ -1710,7 +1710,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     rewardItems: { "rare-candy": 10 },
     researchPoints: 50,
     conditionFunction: (s) => {
-      return s.pokedex["suicune"].caughtOnRoutes.length > 0;
+      return s.pokedex["raikou"].caughtOnRoutes.length > 0;
     },
     targetPokemon: ["raikou"],
     kind: "BULLETIN",

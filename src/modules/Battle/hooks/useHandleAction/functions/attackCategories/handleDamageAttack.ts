@@ -10,6 +10,7 @@ import { applySecondaryAilmentToPokemon } from "../../../../../../functions/appl
 import { applyStatChangeToPokemon } from "../../../../../../functions/applyStatChangeToPokemon";
 import { calculateDamage } from "../../../../../../functions/calculateDamage/calculateDamage";
 import { checkThiefMoves } from "../../../../../../functions/checkThiefMoves";
+import { determineTypeFactor } from "../../../../../../functions/determineTypeFactor";
 import { getHeldItem } from "../../../../../../functions/getHeldItem";
 import { getMiddleOfThree } from "../../../../../../functions/getMiddleOfThree";
 import { hasType } from "../../../../../../functions/hasType";
@@ -632,8 +633,9 @@ export const handleDamageAttack = ({
   updatedTarget = { ...t };
 
   const preventSideEffects =
-    isContactMove(move.name, updatedAttacker) &&
-    getHeldItem(updatedTarget) === "protective-pads";
+    (isContactMove(move.name, updatedAttacker) &&
+      getHeldItem(updatedTarget) === "protective-pads") ||
+    determineTypeFactor(target, attacker, move, battleWeather, terrain) === 0;
 
   const category = move.data.meta.category.name;
   if (category === "damage-raise") {
