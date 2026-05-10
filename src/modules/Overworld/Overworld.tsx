@@ -12,8 +12,7 @@ import { OverworldMap } from "../../interfaces/OverworldMap";
 import "./Overworld.css";
 import { OverworldCanvasses } from "./components/OverworldCanvasses";
 import { OverworldMenus } from "./components/OverworldMenus";
-import { occupantsCanvasId, playerCanvasId } from "./constants/constants";
-import { useDrawCharacter } from "./hooks/useDrawCharacter";
+import { occupantsCanvasId } from "./constants/constants";
 import { useDrawOccupants } from "./hooks/useDrawOccupants";
 import { useInteractWith } from "./hooks/useInteractWith";
 import { useKeyboardControl } from "./hooks/useKeyboardControl";
@@ -48,33 +47,8 @@ export const Overworld = ({ uncontrolled }: { uncontrolled?: boolean }) => {
 
   const { rotateOccupant, occupants } = useOccupants();
 
-  const sprite = useMemo(() => {
-    if (saveFile.flying) {
-      return "pidgeot";
-    }
-    const onWater = map.tileMap.waterLayer[location.y][location.x];
-    const onSnow = map.id === "routeN1W1";
-    if (onWater && saveFile.swimmerSprite) {
-      return saveFile.swimmerSprite;
-    }
-    if (onSnow && saveFile.skierSprite) {
-      return saveFile.skierSprite;
-    }
-
-    return saveFile.sprite;
-  }, [
-    saveFile.flying,
-    saveFile.swimmerSprite,
-    saveFile.sprite,
-    saveFile.skierSprite,
-    map.tileMap.waterLayer,
-    map.id,
-    location.y,
-    location.x,
-  ]);
-
   //DRAWING
-  useDrawCharacter(playerCanvasId, location, sprite);
+
   useDrawOccupants(occupantsCanvasId, occupants, baseSize);
   //INTERACTION
   useDrawForeground("foreground", map.tileMap, map.tilesetUrl, baseSize);

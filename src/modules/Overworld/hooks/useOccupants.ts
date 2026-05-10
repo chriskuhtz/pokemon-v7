@@ -99,7 +99,7 @@ export const useOccupants = () => {
         internalDex[
           saveFile.meta.currentChallenger.team.at(0)?.name ?? "rattata"
         ].dexId;
-      if (dexId <= 815) {
+      if (dexId <= 807) {
         const pos = getNextLocation(location, location.orientation);
         all.push({
           type: "POKEMON",

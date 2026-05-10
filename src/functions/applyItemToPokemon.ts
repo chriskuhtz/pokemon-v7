@@ -70,6 +70,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
         message: `regained ${item === "revive" ? "50%" : "full"} HP`,
       });
     }
+
     if (isBattlePokemon(pokemon)) {
       return {
         ...pokemon,
@@ -85,7 +86,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
     }
     return {
       ...pokemon,
-      damage: Math.round(pokemon.maxHp / 2),
+      damage: Math.round(pokemon.maxHp / (item === "revive" ? 2 : 1)),
       primaryAilment: undefined,
       happiness: pokemon.happiness + (HappinessChangeTable[item] ?? 0),
     };

@@ -659,7 +659,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     conditionFunction: (s) => {
       return s.pokedex.sudowoodo.caughtOnRoutes.length > 0;
     },
-    requiredUpgrade: "swimming certification",
+    availableAfter: "defeat blaine",
     kind: "BULLETIN",
   },
   "catch all honeytree pokemon": {

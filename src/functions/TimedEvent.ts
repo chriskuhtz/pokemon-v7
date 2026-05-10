@@ -148,7 +148,7 @@ export const makeStaticEncounterEvent = (
           internalDex,
         ).map((p) => p.name),
         ...getStaticEncountersForRoute(route, internalDex),
-      ].filter((p) => baseInternalDex[p].dexId < 815);
+      ].filter((p) => baseInternalDex[p].dexId <= 807);
   const pokemon = ArrayHelpers.getRandomEntry(options);
   const { x, y } = getRandomPosition(mapsRecord[route]);
   const now = new Date().getTime();

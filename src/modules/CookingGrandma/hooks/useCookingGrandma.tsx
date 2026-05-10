@@ -226,12 +226,18 @@ export const useCookingGrandma = (): {
           { message: "Excellent work, chef" },
           { message: `received ${resultAmount} ${recipe.result}` },
         ]);
+
+        let updatedCookingSkill = saveFile.cookingSkill ?? 0;
+
+        if (recipe.difficulty !== "EASY" || updatedCookingSkill < 50) {
+          updatedCookingSkill += 1;
+        }
         patchSaveFileReducer({
           bag: joinInventories(saveFile.bag, {
             ...usedIngredients,
             [recipe.result]: resultAmount,
           }),
-          cookingSkill: (saveFile.cookingSkill ?? 0) + 1,
+          cookingSkill: updatedCookingSkill,
           mileStones: {
             ...saveFile.mileStones,
             cookedEasyRecipe:
