@@ -38,9 +38,12 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
   }, [locationId, startingLocation]);
   const [location, s] = useState<CharacterLocationData>(initValue);
 
-  const setLocation = useCallback(
+  const handleMapChange = useCallback(
     (newLocation: CharacterLocationData) => {
       //evil teams escape if you leave
+      if (newLocation.mapId === location.mapId) {
+        return;
+      }
       const troubleMakers = getCurrentTroubleMakers(saveFile);
       let updatedSave = { ...saveFile };
       let changed = false;
@@ -70,9 +73,16 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
       if (changed) {
         patchSaveFileReducer(updatedSave);
       }
-      s(newLocation);
     },
     [addMessage, location.mapId, patchSaveFileReducer, saveFile],
+  );
+
+  const setLocation = useCallback(
+    (newLocation: CharacterLocationData) => {
+      handleMapChange(newLocation);
+      s(newLocation);
+    },
+    [handleMapChange],
   );
 
   const resetLocation = useCallback(() => {

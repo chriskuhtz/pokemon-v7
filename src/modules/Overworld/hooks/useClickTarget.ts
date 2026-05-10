@@ -10,7 +10,10 @@ import { ScreenTransitionContext } from "../../../hooks/useScreenTransitionEffec
 import { MapId } from "../../../interfaces/mapIds";
 import { Occupant } from "../../../interfaces/Occupant";
 import { OverworldMap } from "../../../interfaces/OverworldMap";
-import { CharacterOrientation } from "../../../interfaces/SaveFile";
+import {
+  CharacterLocationData,
+  CharacterOrientation,
+} from "../../../interfaces/SaveFile";
 import { Pathfinder, PathfindingApproach } from "../../../model/Pathfinder";
 import { Vector2 } from "../../../model/Vector2";
 
@@ -30,7 +33,7 @@ export const useClickTarget = (
   >
 > => {
   const { saveFile } = useContext(SaveFileContext);
-  const { location } = useContext(LocationContext);
+  const { location, setLocation } = useContext(LocationContext);
   const gameData = useContext(GameDataContext);
   const { latestMessage } = useContext(MessageQueueContext);
   const { transition } = useContext(ScreenTransitionContext);
@@ -117,14 +120,28 @@ export const useClickTarget = (
       getOverworldDistance(clickTarget, location) === 1;
     const targetReached = nextDirection.toString() === Vector2.ZERO.toString();
 
-    if (targetReached || occupantMet) {
-      if (occupantMet) {
-        interactWith(occ);
-      }
-
+    if (targetReached) {
       pathfinding.clearPath();
       setClickTarget(undefined);
       console.log("Target reached");
+    } else if (
+      occupantMet &&
+      occ &&
+      location.orientation === getRelativeOrientation(location, occ)
+    ) {
+      interactWith(occ);
+      pathfinding.clearPath();
+      setClickTarget(undefined);
+      console.log("Target reached");
+    } else if (
+      occupantMet &&
+      occ &&
+      location.orientation !== getRelativeOrientation(location, occ)
+    ) {
+      setLocation({
+        ...location,
+        orientation: getRelativeOrientation(location, occ),
+      });
     } else {
       setNextInput(nextDirection.getInputForDirection());
     }
@@ -141,7 +158,24 @@ export const useClickTarget = (
     latestMessage,
     lastClickTarget,
     transition,
+    setLocation,
   ]);
 
   return setClickTarget;
+};
+
+const getRelativeOrientation = (
+  location: CharacterLocationData,
+  occ: Occupant,
+): CharacterOrientation => {
+  if (occ.x > location.x) {
+    return "RIGHT";
+  }
+  if (occ.x < location.x) {
+    return "LEFT";
+  }
+  if (occ.y < location.y) {
+    return "UP";
+  }
+  return "DOWN";
 };

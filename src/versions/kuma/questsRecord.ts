@@ -2781,7 +2781,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch a strong pokemon": {
     category: "POKEDEX",
     kind: "BULLETIN",
-    rewardItems: { "ultra-ball": 3, "aguav-berry": 10 },
+    rewardItems: { "ultra-ball": 3 },
     researchPoints: 10,
     availableAfter: "catch a medium strong pokemon",
     conditionFunction: (s) =>
@@ -2792,7 +2792,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch 10 strong pokemon": {
     category: "POKEDEX",
     kind: "BULLETIN",
-    rewardItems: { "ultra-ball": 5, "aguav-berry": 20 },
+    rewardItems: { "ultra-ball": 10 },
     researchPoints: 30,
     availableAfter: "catch a strong pokemon",
     conditionFunction: (s) =>
@@ -2803,7 +2803,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch 20 strong pokemon": {
     category: "POKEDEX",
     kind: "BULLETIN",
-    rewardItems: { "ultra-ball": 10, "aguav-berry": 20 },
+    rewardItems: { "ultra-ball": 20 },
     researchPoints: 60,
     availableAfter: "catch 10 strong pokemon",
     conditionFunction: (s) =>
@@ -2814,7 +2814,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch 50 strong pokemon": {
     category: "POKEDEX",
     kind: "BULLETIN",
-    rewardItems: { "ultra-ball": 10, "aguav-berry": 20 },
+    rewardItems: { "ultra-ball": 30 },
     researchPoints: 100,
     availableAfter: "catch 20 strong pokemon",
     conditionFunction: (s) =>
@@ -2825,7 +2825,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch 100 strong pokemon": {
     category: "POKEDEX",
     kind: "BULLETIN",
-    rewardItems: { "ultra-ball": 10 },
+    rewardItems: { "ultra-ball": 30 },
     researchPoints: 100,
     availableAfter: "catch 50 strong pokemon",
     conditionFunction: (s) =>
