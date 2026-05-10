@@ -3435,7 +3435,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   ralts: {
     dexId: 280,
     types: ["psychic", "fairy"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 20000,
+        minXp: 4000,
+        route: "murasaki-glades",
+        rarity: "ultra-rare",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       "special-attack": 1,
     },
@@ -3925,7 +3934,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   spoink: {
     dexId: 325,
     types: ["psychic"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 36000,
+        minXp: 20000,
+        route: "murasaki-glades",
+        rarity: "medium",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       "special-defense": 1,
     },
@@ -3933,7 +3951,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   grumpig: {
     dexId: 326,
     types: ["psychic"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 54000,
+        minXp: 36000,
+        route: "murasaki-glades",
+        rarity: "rare",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       "special-defense": 2,
     },
@@ -4234,7 +4261,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   shuppet: {
     dexId: 353,
     types: ["ghost"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 36000,
+        minXp: 20000,
+        route: "murasaki-glades",
+        rarity: "medium",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       attack: 1,
     },
@@ -6539,7 +6575,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   solosis: {
     dexId: 577,
     types: ["psychic"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 27000,
+        minXp: 4000,
+        route: "murasaki-glades",
+        rarity: "common",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       "special-attack": 1,
     },
@@ -6547,7 +6592,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   duosion: {
     dexId: 578,
     types: ["psychic"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 36000,
+        minXp: 20000,
+        route: "murasaki-glades",
+        rarity: "medium",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       "special-attack": 2,
     },
@@ -6704,6 +6758,14 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
         area: "LAND",
         route: "routeS1",
       },
+      {
+        maxXp: 36000,
+        minXp: 20000,
+        route: "murasaki-glades",
+        rarity: "medium",
+        timeOfDay: "ALL_DAY",
+        area: "WATER",
+      },
     ],
     evs: {
       "special-defense": 2,
@@ -6712,7 +6774,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   alomomola: {
     dexId: 594,
     types: ["water"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 36000,
+        minXp: 20000,
+        route: "murasaki-glades",
+        rarity: "medium",
+        timeOfDay: "ALL_DAY",
+        area: "WATER",
+      },
+    ],
     evs: {
       hp: 2,
     },
@@ -6825,7 +6896,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   lampent: {
     dexId: 608,
     types: ["ghost", "fire"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 36000,
+        minXp: 20000,
+        route: "murasaki-glades",
+        rarity: "medium",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       "special-attack": 2,
     },
@@ -8103,7 +8183,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   cutiefly: {
     dexId: 742,
     types: ["bug", "fairy"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 36000,
+        minXp: 20000,
+        route: "murasaki-glades",
+        rarity: "common",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       speed: 1,
     },
@@ -8301,7 +8390,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   stufful: {
     dexId: 759,
     types: ["normal", "fighting"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 36000,
+        minXp: 20000,
+        route: "murasaki-glades",
+        rarity: "medium",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       attack: 1,
     },
@@ -8309,7 +8407,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   bewear: {
     dexId: 760,
     types: ["normal", "fighting"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 54000,
+        minXp: 30000,
+        route: "murasaki-glades",
+        rarity: "ultra-rare",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       attack: 2,
     },
@@ -8516,12 +8623,12 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
     types: ["ghost", "grass"],
     encounterOptions: [
       {
-        rarity: "common",
+        rarity: "ultra-rare",
         maxXp: 70 * 70 * 70,
         minXp: 60 * 60 * 60,
         timeOfDay: "ALL_DAY",
         area: "WATER",
-        route: "apricornClearing",
+        route: "murasaki-glades",
       },
     ],
     evs: {
@@ -11889,7 +11996,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   "oricorio-sensu": {
     dexId: 10125,
     types: ["ghost", "flying"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        maxXp: 36000,
+        minXp: 20000,
+        route: "murasaki-glades",
+        rarity: "rare",
+        timeOfDay: "ALL_DAY",
+        area: "LAND",
+      },
+    ],
     evs: {
       "special-attack": 2,
     },

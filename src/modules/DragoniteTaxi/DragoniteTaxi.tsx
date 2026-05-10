@@ -8,6 +8,7 @@ import { GameDataContext } from "../../hooks/useGameData";
 import { useNavigate } from "../../hooks/useNavigate";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { ItemType } from "../../interfaces/Item";
+import { MapId } from "../../interfaces/mapIds";
 import { Occupant } from "../../interfaces/Occupant";
 import { CharacterLocationData } from "../../interfaces/SaveFile";
 import { SpriteEnum } from "../../interfaces/SpriteEnum";
@@ -15,9 +16,8 @@ import { Card } from "../../uiComponents/Card/Card";
 import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
-const taxiLocations: Record<
-  string,
-  { to: CharacterLocationData; ticket: ItemType }
+const taxiLocations: Partial<
+  Record<MapId, { to: CharacterLocationData; ticket: ItemType }>
 > = {
   routeN1E1: {
     ticket: "forest-ticket",
@@ -69,12 +69,22 @@ const taxiLocations: Record<
       forwardFoot: "CENTER1",
     },
   },
-  ilexForest: {
+  "ilex-forest": {
     ticket: "ilex-ticket",
     to: {
       mapId: "ilex-forest",
       x: 25,
       y: 49,
+      orientation: "UP",
+      forwardFoot: "CENTER1",
+    },
+  },
+  "murasaki-glades": {
+    ticket: "murasaki-ticket",
+    to: {
+      mapId: "murasaki-glades",
+      x: 25,
+      y: 68,
       orientation: "UP",
       forwardFoot: "CENTER1",
     },
@@ -195,6 +205,32 @@ export const ilexDragoniteTaxi: Occupant[] = [
     dexId: 149,
     x: 27,
     y: 45,
+    orientation: "DOWN",
+    id: "dragonite",
+    dialogue: ["Dragonite seems ready to spread its wings"],
+    conditionFunction: (s) => s.campUpgrades["dragonite taxi"],
+  },
+];
+export const murasakiDragoniteTaxi: Occupant[] = [
+  {
+    type: "ROUTER_NPC",
+    dialogue: [
+      "Dragonite can easily carry a person on its back",
+      "Where should we take you?",
+    ],
+    to: "DRAGONITE_TAXI",
+    x: 26,
+    y: 65,
+    orientation: "DOWN",
+    sprite: SpriteEnum.hiker,
+    id: "dragonite taxi man",
+    conditionFunction: (s) => s.campUpgrades["dragonite taxi"],
+  },
+  {
+    type: "POKEMON",
+    dexId: 149,
+    x: 27,
+    y: 65,
     orientation: "DOWN",
     id: "dragonite",
     dialogue: ["Dragonite seems ready to spread its wings"],

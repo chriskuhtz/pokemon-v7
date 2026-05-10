@@ -26,6 +26,7 @@ export const mapIds = [
   "pokemonLeague",
   "apricornClearing",
   "ilex-forest",
+  "murasaki-glades",
   //LABYRINTH VERSION
   "labyrinth_level_1",
   "labyrinth_level_2",

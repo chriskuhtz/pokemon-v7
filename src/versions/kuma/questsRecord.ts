@@ -11,6 +11,7 @@ import {
 } from "../../constants/baseStatRecord";
 import { campUpgradeCostScale } from "../../constants/gameData/campUpgrades";
 import { allIlexGalacticsDefeated } from "../../constants/gameData/maps/occupants/ilexForest";
+import { murasakiGladesCleared } from "../../constants/gameData/maps/occupants/murasakiGlades";
 import { allRocketCampTrainersDefeated } from "../../constants/gameData/maps/occupants/rocketCampOccupants";
 import { PokemonName, pokemonNames } from "../../constants/pokemonNames";
 import {
@@ -485,6 +486,7 @@ export const kumaQuestNames = [
   "defeat the pokemon league",
   "find a purple apricorn",
   "defeat team galactic in ilex forest",
+  "investigate murasaki glades",
 ] as const;
 
 export type KumaQuestName = (typeof kumaQuestNames)[number];
@@ -2026,6 +2028,25 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
         s.pokedex[o.name].caughtOnRoutes.includes("ilex-forest"),
       ),
   },
+  "catch all pokemon from murasaki glades": {
+    category: "EXPLORATION",
+    kind: "BULLETIN",
+    availableAfter: "investigate murasaki glades",
+    targetRoute: "murasaki-glades",
+    researchPoints: 50,
+    rewardItems: {
+      "pink-apricorn": 10,
+      "black-apricorn": 10,
+      "ultra-ball": 20,
+    },
+    targetPokemon: getAllEncountersFor("murasaki-glades", {}, kumaDex).map(
+      (p) => p.name,
+    ),
+    conditionFunction: (s: SaveFile) =>
+      getAllEncountersFor("murasaki-glades", {}, kumaDex).every((o) =>
+        s.pokedex[o.name].caughtOnRoutes.includes("murasaki-glades"),
+      ),
+  },
   "catch all pokemon from caveW1": {
     category: "EXPLORATION",
     kind: "BULLETIN",
@@ -2611,6 +2632,20 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "QUEST_LINE",
     availableAfter: "clear out the rocket camp",
     conditionFunction: allIlexGalacticsDefeated,
+  },
+  "investigate murasaki glades": {
+    category: "BATTLE",
+    researchPoints: 50,
+    rewardItems: {
+      "moomoo-milk": 5,
+      "lava-cookie": 5,
+      "pewter-crunchies": 5,
+      "rage-candy-bar": 5,
+    },
+    rangerLevels: 3,
+    kind: "QUEST_LINE",
+    availableAfter: "defeat team galactic in ilex forest",
+    conditionFunction: murasakiGladesCleared,
   },
   "catch a weak pokemon": {
     category: "POKEDEX",

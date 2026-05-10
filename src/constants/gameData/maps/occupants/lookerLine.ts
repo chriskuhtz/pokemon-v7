@@ -92,4 +92,24 @@ export const lookerLine: Occupant[] = [
       s.quests["clear out the rocket camp"] === "FULFILLED" &&
       s.quests["defeat team galactic in ilex forest"] === "INACTIVE",
   },
+  {
+    ...lookerNpcBase,
+    id: "looker_npc_4",
+    orientation: "UP",
+    unhandledMessage: [
+      "Great Job in Ilex Forest",
+      "I have a new task for you",
+      "Something is happening in murasaki glades",
+      "the usually peaceful monks and nuns",
+      "have started attacking people",
+      "we believe a strong ghost pokemon is behind this",
+      "please investigate",
+    ],
+    gifts: { "murasaki-ticket": 1 },
+    quest: "investigate murasaki glades",
+    conditionFunction: (s) =>
+      s.campUpgrades["dragonite taxi"] &&
+      s.quests["defeat team galactic in ilex forest"] === "FULFILLED" &&
+      s.quests["investigate murasaki glades"] === "INACTIVE",
+  },
 ];

@@ -3,6 +3,8 @@ import { OverworldMap } from "../../../interfaces/OverworldMap";
 import { randomChallengeFieldOccupants } from "./occupants/randomChallengeField";
 
 export const randomChallengeField: OverworldMap = {
+  resetOccupantsOnLeave: () => true,
+  resetInventoryOnLeave: () => true,
   area: "OPEN",
   id: "randomField",
   tilesetUrl: "/tilesets/slateport.png",

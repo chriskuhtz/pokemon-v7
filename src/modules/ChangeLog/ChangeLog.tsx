@@ -7,6 +7,13 @@ interface ChangelogEntryData {
 
 const changelogData: ChangelogEntryData[] = [
   {
+    version: "0.70",
+    listOfChanges: [
+      "fixes and balances from playtesting",
+      "new ranger mission and route",
+    ],
+  },
+  {
     version: "0.69",
     listOfChanges: [
       "lol nice",

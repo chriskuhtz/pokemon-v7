@@ -6,10 +6,11 @@ import React, {
   useMemo,
   useState,
 } from "react";
+import { mapsRecord } from "../constants/gameData/maps/mapsRecord";
 import {
+  cleanUpListOfSpecificEvents,
   getCurrentTroubleMakers,
   removeTroubleMakers,
-  resetBlockersWithPartialId,
 } from "../functions/TimedEvent";
 import { EmptyInventory } from "../interfaces/Inventory";
 import { CharacterLocationData } from "../interfaces/SaveFile";
@@ -41,6 +42,9 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
     (newLocation: CharacterLocationData) => {
       //evil teams escape if you leave
       const troubleMakers = getCurrentTroubleMakers(saveFile);
+      let updatedSave = { ...saveFile };
+      let changed = false;
+      const map = mapsRecord[location.mapId];
       if (
         location.mapId === troubleMakers?.mapId &&
         newLocation.mapId !== troubleMakers.mapId
@@ -48,52 +52,23 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
         addMessage({
           message: `The Team ${troubleMakers.affiliation} members got away`,
         });
-        patchSaveFileReducer(removeTroubleMakers(saveFile, "ESCAPED"));
+        updatedSave = removeTroubleMakers(saveFile, "ESCAPED");
+        changed = true;
       }
 
-      //reset inventory and challengeFielders when leaving challenge field
-      if (
-        newLocation.mapId !== "randomField" &&
-        location.mapId === "randomField"
-      ) {
-        patchSaveFileReducer({
-          ...resetBlockersWithPartialId(saveFile, "randomField"),
-          bag: EmptyInventory,
-        });
-      } else if (
-        newLocation.mapId !== "challengeField" &&
-        location.mapId === "challengeField"
-      ) {
-        patchSaveFileReducer({
-          ...resetBlockersWithPartialId(saveFile, "challengeField"),
-          bag: EmptyInventory,
-        });
+      if (map?.resetInventoryOnLeave && map.resetInventoryOnLeave(saveFile)) {
+        updatedSave.bag = EmptyInventory;
+        changed = true;
       }
-      //reset e4 before entering
-      else if (
-        newLocation.mapId == "pokemonLeague" &&
-        location.mapId !== "pokemonLeague"
-      ) {
-        patchSaveFileReducer({
-          ...resetBlockersWithPartialId(saveFile, "elite4"),
-        });
+      if (map?.resetOccupantsOnLeave && map.resetOccupantsOnLeave(saveFile)) {
+        updatedSave = cleanUpListOfSpecificEvents(
+          updatedSave,
+          map.occupants.map((occ) => occ.id),
+        );
+        changed = true;
       }
-      //reset rocket hideout before entering
-      else if (
-        newLocation.mapId == "rocketCamp" &&
-        location.mapId !== "rocketCamp"
-      ) {
-        patchSaveFileReducer({
-          ...resetBlockersWithPartialId(saveFile, "Rocket"),
-        });
-      } else if (
-        newLocation.mapId == "ilex-forest" &&
-        location.mapId !== "ilex-forest" &&
-        saveFile.quests["defeat team galactic in ilex forest"] === "ACTIVE"
-      ) {
-        patchSaveFileReducer({
-          ...resetBlockersWithPartialId(saveFile, "galactic"),
-        });
+      if (changed) {
+        patchSaveFileReducer(updatedSave);
       }
       s(newLocation);
     },

@@ -56,6 +56,7 @@ const ballForRoute: Record<MapId, PokeballType> = {
   labyrinth_level_2: "poke-ball",
   apricornClearing: "poke-ball",
   "ilex-forest": "poke-ball",
+  "murasaki-glades": "poke-ball",
 };
 const snackForRoute: Record<MapId, ItemType> = {
   //actual rewards
@@ -88,6 +89,7 @@ const snackForRoute: Record<MapId, ItemType> = {
   labyrinth_level_2: "poke-ball",
   apricornClearing: "poke-ball",
   "ilex-forest": "poke-ball",
+  "murasaki-glades": "poke-ball",
 };
 const ticketForRoute: Record<MapId, ItemType> = {
   //actual tickets
@@ -121,6 +123,7 @@ const ticketForRoute: Record<MapId, ItemType> = {
   labyrinth_level_2: "poke-ball",
   apricornClearing: "poke-ball",
   "ilex-forest": "poke-ball",
+  "murasaki-glades": "poke-ball",
 };
 
 const catchQuestsForRoute = (
