@@ -22,10 +22,22 @@ export const getRandomAvailableRoute = (
     options.push("onixCave");
   }
   if (s.campUpgrades["swimming certification"]) {
-    options.push("routeS1E1", "routeS1W1", "caveW1", "routeS1");
+    options.push("routeS1E1", "routeS1W1", "routeS1");
+  }
+  if (s.campUpgrades["rock climbing certification"]) {
+    options.push("routeW1");
   }
   if (s.campUpgrades["buy skiing equipment"]) {
     options.push("routeN1W1");
+  }
+  if (s.storage["ilex-ticket"] > 0 || s.bag["ilex-ticket"] > 0) {
+    options.push("ilex-forest");
+  }
+  if (s.storage["murasaki-ticket"] > 0 || s.bag["murasaki-ticket"] > 0) {
+    options.push("murasaki-glades");
+  }
+  if ((s.rangerLevel ?? 0) > 5) {
+    options.push("apricornClearing");
   }
 
   const filteredOptions = options.filter((o) => !omit.includes(o));
