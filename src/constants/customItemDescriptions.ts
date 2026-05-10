@@ -22,4 +22,8 @@ export const customItemDescriptions: Record<string, string> = {
   "scroll-of-waters": "used to evolve kubfu",
   "scroll-of-darkness": "used to evolve kubfu",
   "moomoo-cheese": "a tasty snack, humans seem to like it more than pokemon",
+  "max-honey": "fully heals a fainted pokemon",
+  "peat-block": "used to evolve ursaring",
+  "chipped-pot": "Museums might find this interesting",
+  "cracked-pot": "Museums might find this interesting",
 };

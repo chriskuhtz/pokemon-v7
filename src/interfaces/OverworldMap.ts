@@ -2,6 +2,7 @@ import { PokemonName } from "../constants/pokemonNames";
 import { TimeOfDay } from "../functions/getTimeOfDay";
 import { MapId } from "./mapIds";
 import { Occupant } from "./Occupant";
+import { SaveFile } from "./SaveFile";
 import { TileMap } from "./TileMap";
 import { WeatherType } from "./Weather";
 
@@ -26,4 +27,6 @@ export interface OverworldMap {
   peaceful?: boolean;
   questMenuAvailable: boolean;
   encounterGroupLimit?: number;
+  resetOccupantsOnLeave?: (s: SaveFile) => boolean;
+  resetInventoryOnLeave?: (s: SaveFile) => boolean;
 }

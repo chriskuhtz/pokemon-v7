@@ -101,7 +101,7 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
     badge: "Thunder_Badge",
     researchPoints: 50,
     rewardItems: { "wacan-berry": 5, magnet: 1, ...expCandyPackage },
-    requiredUpgrade: "shovel certification",
+    requiredUpgrade: "swimming certification",
     conditionFunction: (s) => {
       return occupantHandled(s, surgeId);
     },
@@ -114,7 +114,6 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
     rewardItems: {
       "passho-berry": 5,
       "mystic-water": 1,
-      sprayduck: 1,
       ...expCandyPackage,
     },
     campUpgrade: "swimming certification",

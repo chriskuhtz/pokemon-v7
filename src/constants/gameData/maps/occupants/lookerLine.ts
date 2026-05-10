@@ -30,10 +30,26 @@ export const lookerLine: Occupant[] = [
     ...lookerNpcBase,
     id: "looker_npc_1",
     unhandledMessage: [
-      "Good to meet you, ranger",
-      "I could use your assistance",
+      "Ah, so you are the new ranger",
       "My name is Looker",
-      "And i work for the Pokemon Police",
+      "i work for the Pokemon Police",
+      "For now, you can use the ranger radar",
+      "to scan the nearby routes.",
+      "After some successful missions",
+      "I will have more challenging tasks for you",
+    ],
+    conditionFunction: (s) =>
+      s.campUpgrades["ranger certification"] &&
+      s.quests["clear out the rocket camp"] === "INACTIVE" &&
+      (s.rangerLevel ?? 0) <= 2,
+  },
+  {
+    ...lookerNpcBase,
+    id: "looker_npc_2",
+    orientation: "UP",
+    unhandledMessage: [
+      "Ranger",
+      "I could use your assistance",
       "I have found a team rocket hideout in this area",
       "will you help me defeat them?",
       "Let me know when you are ready",
@@ -59,7 +75,8 @@ export const lookerLine: Occupant[] = [
   },
   {
     ...lookerNpcBase,
-    id: "looker_npc_2",
+    id: "looker_npc_3",
+    orientation: "UP",
     unhandledMessage: [
       "Ranger, i have a new mission",
       "There are reports that",
@@ -74,5 +91,25 @@ export const lookerLine: Occupant[] = [
       s.campUpgrades["dragonite taxi"] &&
       s.quests["clear out the rocket camp"] === "FULFILLED" &&
       s.quests["defeat team galactic in ilex forest"] === "INACTIVE",
+  },
+  {
+    ...lookerNpcBase,
+    id: "looker_npc_4",
+    orientation: "UP",
+    unhandledMessage: [
+      "Great Job in Ilex Forest",
+      "I have a new task for you",
+      "Something is happening in murasaki glades",
+      "the usually peaceful monks and nuns",
+      "have started attacking people",
+      "we believe a strong ghost pokemon is behind this",
+      "please investigate",
+    ],
+    gifts: { "murasaki-ticket": 1 },
+    quest: "investigate murasaki glades",
+    conditionFunction: (s) =>
+      s.campUpgrades["dragonite taxi"] &&
+      s.quests["defeat team galactic in ilex forest"] === "FULFILLED" &&
+      s.quests["investigate murasaki glades"] === "INACTIVE",
   },
 ];

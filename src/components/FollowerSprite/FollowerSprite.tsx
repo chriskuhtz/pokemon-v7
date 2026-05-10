@@ -11,6 +11,8 @@ import { SaveFileContext } from "../../hooks/useSaveFile";
 import { Occupant } from "../../interfaces/Occupant";
 import { OverworldMap } from "../../interfaces/OverworldMap";
 import { CharacterLocationData } from "../../interfaces/SaveFile";
+import { playerCanvasId } from "../../modules/Overworld/constants/constants";
+import { useDrawCharacter } from "../../modules/Overworld/hooks/useDrawCharacter";
 import { threeDigitString } from "../../modules/Overworld/hooks/useDrawOccupants";
 
 const followerCanvasId = "followerCanvas";
@@ -133,4 +135,59 @@ export const useDrawFollowerPokemon = (
 
     img.src = `/overworldPokemonSprites/${threeDigitString(dexId)}.png`;
   }, [baseSize, canvasId, dexId, xOffset, yOffset]);
+};
+
+export const PlayerSprite = ({ map }: { map: OverworldMap }) => {
+  const { saveFile } = useContext(SaveFileContext);
+  const { location } = useContext(LocationContext);
+  const { baseSize } = useContext(BaseSizeContext);
+
+  const sprite = useMemo(() => {
+    if (saveFile.flying) {
+      return "pidgeot";
+    }
+    const onWater = map.tileMap.waterLayer[location.y][location.x];
+    const onSnow = map.id === "routeN1W1";
+    if (onWater && saveFile.swimmerSprite) {
+      return saveFile.swimmerSprite;
+    }
+    if (onSnow && saveFile.skierSprite) {
+      return saveFile.skierSprite;
+    }
+
+    return saveFile.sprite;
+  }, [
+    saveFile.flying,
+    saveFile.swimmerSprite,
+    saveFile.sprite,
+    saveFile.skierSprite,
+    map.tileMap.waterLayer,
+    map.id,
+    location.y,
+    location.x,
+  ]);
+
+  useDrawCharacter(playerCanvasId, location, sprite);
+  useDrawCharacter("playerForeground", location, sprite);
+  return (
+    <>
+      <canvas
+        id={playerCanvasId}
+        height={baseSize * 1.5}
+        style={{ marginTop: -baseSize * 0.5 }}
+        width={baseSize}
+      />
+      <canvas
+        id={"playerForeground"}
+        height={baseSize * 0.5}
+        style={{
+          top: -baseSize,
+          marginTop: -baseSize * 0.5,
+          position: "relative",
+          left: -baseSize,
+        }}
+        width={baseSize}
+      />
+    </>
+  );
 };

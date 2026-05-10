@@ -1,6 +1,9 @@
 import { useContext, useMemo } from "react";
 import { CombinedCanvas } from "../../../components/CombinedCanvas/CombinedCanvas";
-import { FollowerSprite } from "../../../components/FollowerSprite/FollowerSprite";
+import {
+  FollowerSprite,
+  PlayerSprite,
+} from "../../../components/FollowerSprite/FollowerSprite";
 import { fps } from "../../../constants/baseConstants";
 import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
 import { LocationContext } from "../../../hooks/LocationProvider";
@@ -9,11 +12,7 @@ import { useShader } from "../../../hooks/useShader";
 import { Occupant } from "../../../interfaces/Occupant";
 import { OverworldMap } from "../../../interfaces/OverworldMap";
 import { CharacterOrientation } from "../../../interfaces/SaveFile";
-import {
-  backgroundCanvasId,
-  occupantsCanvasId,
-  playerCanvasId,
-} from "../constants/constants";
+import { backgroundCanvasId, occupantsCanvasId } from "../constants/constants";
 import { useClickTarget } from "../hooks/useClickTarget";
 import { useIsDark } from "../hooks/useIsDark";
 import "../Overworld.css";
@@ -130,12 +129,7 @@ rgba(0, 0, 0, 1) ${hasFlashlight ? 48 : 16}%
           height={height * baseSize}
           width={width * baseSize}
         />
-        <canvas
-          id={playerCanvasId}
-          height={baseSize * 1.5}
-          style={{ marginTop: -baseSize * 0.5 }}
-          width={baseSize}
-        />
+        <PlayerSprite map={map} />
         <FollowerSprite map={map} occupants={occupants} />
 
         <canvas

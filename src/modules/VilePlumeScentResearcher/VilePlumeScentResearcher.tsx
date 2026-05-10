@@ -23,10 +23,10 @@ const vilePlumeProducts: Partial<
   "max-lure": { item: "aguav-berry", amount: 50 },
   "rock-incense": { item: "charti-berry", amount: 5 },
   "wave-incense": { item: "passho-berry", amount: 5 },
-  "rose-incense": { item: "payapa-berry", amount: 5 },
+  "rose-incense": { item: "rindo-berry", amount: 5 },
   "full-incense": { item: "sitrus-berry", amount: 5 },
   "lax-incense": { item: "oran-berry", amount: 5 },
-  "odd-incense": { item: "enigma-berry", amount: 5 },
+  "odd-incense": { item: "payapa-berry", amount: 5 },
 };
 
 export const useVileplumeScentResearcher = () => {

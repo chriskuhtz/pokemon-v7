@@ -3,6 +3,8 @@ import { OverworldMap } from "../../../interfaces/OverworldMap";
 import { challengeFieldOccupants } from "./occupants/challengeField";
 
 export const challengeField: OverworldMap = {
+  resetOccupantsOnLeave: () => true,
+  resetInventoryOnLeave: () => true,
   area: "OPEN",
   id: "challengeField",
   tilesetUrl: "/tilesets/slateport.png",

@@ -79,6 +79,17 @@ export const cleanUpSpecificEvent = (
     timedEvents: update.timedEvents.filter((event) => event.id !== id),
   };
 };
+export const cleanUpListOfSpecificEvents = (
+  saveFile: SaveFile,
+  ids: string[],
+): SaveFile => {
+  const update = { ...saveFile, timedEvents: saveFile.timedEvents ?? [] };
+
+  return {
+    ...update,
+    timedEvents: update.timedEvents.filter((event) => !ids.includes(event.id)),
+  };
+};
 export const refillRandomTimedEvents = (
   saveFile: SaveFile,
   gameData: GameData,
@@ -148,7 +159,7 @@ export const makeStaticEncounterEvent = (
           internalDex,
         ).map((p) => p.name),
         ...getStaticEncountersForRoute(route, internalDex),
-      ].filter((p) => baseInternalDex[p].dexId < 815);
+      ].filter((p) => baseInternalDex[p].dexId <= 807);
   const pokemon = ArrayHelpers.getRandomEntry(options);
   const { x, y } = getRandomPosition(mapsRecord[route]);
   const now = new Date().getTime();

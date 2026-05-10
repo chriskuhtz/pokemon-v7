@@ -13,6 +13,7 @@ import { challengeField } from "./challengeField";
 import { ilexForest } from "./ilexForest";
 import { labyrinthLevel1 } from "./labyrinth/labyrinthLevel1";
 import { labyrinthLevel2 } from "./labyrinth/labyrinthLevel2";
+import { murasakiGlades } from "./murasakiGlades";
 import { onixCave } from "./onixCave";
 import { pokemonLeague } from "./pokemonLeague";
 import { randomChallengeField } from "./randomChallengeField";
@@ -57,6 +58,7 @@ export const mapsRecord: Record<MapId, OverworldMap> = {
   victoryRoadExit: victoryRoadExit,
   pokemonLeague: pokemonLeague,
   "ilex-forest": ilexForest,
+  "murasaki-glades": murasakiGlades,
   //LABYRINTH VERSION
   labyrinth_level_1: labyrinthLevel1,
   labyrinth_level_2: labyrinthLevel2,
@@ -91,6 +93,7 @@ export const mapDisplayNames: Record<MapId, string> = {
   pokemonLeague: "Pokemon League",
   apricornClearing: "Apricorn Clearing",
   "ilex-forest": "Ilex Forest",
+  "murasaki-glades": "Murasaki Glades",
   //LABYRINTH VERSION
   labyrinth_level_1: "Deep Forest",
   labyrinth_level_2: "Deep Forest",
@@ -101,7 +104,7 @@ export const Emptymap: OverworldMap = {
   id: "camp",
   occupants: [],
   timeOfDayShadersMap: defaultShaderMap,
-  tilesetUrl: "/tilesets/palletTown.png",
+  tilesetUrl: "/tilesets/newMasterSheet.png",
   questMenuAvailable: true,
   tileMap: {
     baseLayer: [[]],
