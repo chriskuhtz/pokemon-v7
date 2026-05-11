@@ -2146,7 +2146,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   lanturn: {
     dexId: 171,
     types: ["water", "electric"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        rarity: "medium",
+        maxXp: apricornClearingMax,
+        minXp: apricornClearingMin,
+        area: "WATER",
+        route: "apricornClearing",
+        timeOfDay: "ALL_DAY",
+      },
+    ],
     evs: {
       hp: 2,
     },

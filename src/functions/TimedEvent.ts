@@ -87,7 +87,9 @@ export const cleanUpListOfSpecificEvents = (
 
   return {
     ...update,
-    timedEvents: update.timedEvents.filter((event) => !ids.includes(event.id)),
+    timedEvents: update.timedEvents.filter(
+      (event) => !ids.some((id) => id.includes(event.id)),
+    ),
   };
 };
 export const refillRandomTimedEvents = (

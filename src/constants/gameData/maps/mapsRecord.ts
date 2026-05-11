@@ -85,7 +85,7 @@ export const mapDisplayNames: Record<MapId, string> = {
   onixCave: "onix cave",
   challengeField: "challenge field",
   randomField: "challenge field",
-  rocketCamp: "Rocket Camp",
+  rocketCamp: "Rocket Warehouse",
   victoryRoad: "Victory Road",
   victoryRoadU1: "Victory Road Lower Level",
   victoryRoadExtra: "Victory Road",

@@ -2,6 +2,7 @@ import { calculateLevelData } from "../../../../functions/calculateLevelData";
 import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
 import { makeApricornTree } from "../../../../functions/makeApricornTree";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
+import { makeOverworldItem } from "../../../../functions/makeOverworldItem";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import { OverworldTrainer } from "../../../../interfaces/Occupant";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
@@ -56,7 +57,7 @@ const psychoWillard: OverworldTrainer = {
     assignHeldItem: true,
   },
   orientation: "LEFT",
-  x: 25,
+  x: 21,
   y: 25,
   unhandledMessage: ["I can sense the power of this place"],
   sprite: SpriteEnum["psychic"],
@@ -96,12 +97,42 @@ const pyroStanley: OverworldTrainer = {
   id: "pyromaniac stanley",
   conditionFunction: (s) => !occupantHandled(s, "pyromaniac stanley"),
 };
+const rangerWilla: OverworldTrainer = {
+  type: "TRAINER",
+  team: (s) => {
+    const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
+    const { level } = calculateLevelData(highestXpOnTeam, "medium");
+
+    const xpOfTeam = (level - 4) * (level - 4) * (level - 4);
+    const xpOfAce = (level + 1) * (level + 1) * (level + 1);
+    return [
+      makeChallengerPokemon({ name: "vileplume", xp: xpOfTeam }),
+      makeChallengerPokemon({ name: "bellossom", xp: xpOfTeam }),
+      makeChallengerPokemon({ name: "sunflora", xp: xpOfAce }),
+      makeChallengerPokemon({ name: "wyrdeer", xp: xpOfAce }),
+    ];
+  },
+  battleTeamConfig: {
+    assignLearnsetMoves: true,
+    assignNaturalAbility: true,
+    assignGender: true,
+    assignHeldItem: true,
+  },
+  orientation: "LEFT",
+  x: 6,
+  y: 46,
+  unhandledMessage: ["This is a delicate ecosystem", "be careful"],
+  sprite: SpriteEnum["ace2Female"],
+  id: "ranger willa",
+  conditionFunction: (s) => !occupantHandled(s, "ranger willa"),
+};
 
 export const apricornClearingOccupants: OverworldMap["occupants"] = [
   explorerDan,
   psychoWillard,
   pyroStanley,
   clearingKurt,
+  rangerWilla,
   {
     type: "ON_STEP_PORTAL",
     x: 25,
@@ -159,8 +190,8 @@ export const apricornClearingOccupants: OverworldMap["occupants"] = [
     id: "deep-forest-red-apricorn",
   }),
   ...makeApricornTree({
-    x: 20,
-    y: 10,
+    x: 17,
+    y: 11,
     apricorn: "black-apricorn",
     id: "deep-forest-black-apricorn",
   }),
@@ -206,11 +237,59 @@ export const apricornClearingOccupants: OverworldMap["occupants"] = [
     apricorn: "black-apricorn",
     id: "deep-forest-black-apricorn-2",
   }),
+  ...makeApricornTree({
+    x: 46,
+    y: 44,
+    apricorn: "yellow-apricorn",
+    id: "deep-forest-yellow-apricorn-4",
+  }),
+  ...makeApricornTree({
+    x: 10,
+    y: 30,
+    apricorn: "blue-apricorn",
+    id: "deep-forest-blue-apricorn-5",
+  }),
+  ...makeApricornTree({
+    x: 40,
+    y: 20,
+    apricorn: "green-apricorn",
+    id: "deep-forest-green-apricorn-4",
+  }),
+  ...makeApricornTree({
+    x: 25,
+    y: 5,
+    apricorn: "white-apricorn",
+    id: "deep-forest-white-apricorn-4",
+  }),
+  ...makeApricornTree({
+    x: 5,
+    y: 25,
+    apricorn: "pink-apricorn",
+    id: "deep-forest-pink-apricorn-4",
+  }),
+  ...makeApricornTree({
+    x: 30,
+    y: 30,
+    apricorn: "red-apricorn",
+    id: "deep-forest-red-apricorn-5",
+  }),
+  ...makeApricornTree({
+    x: 15,
+    y: 15,
+    apricorn: "black-apricorn",
+    id: "deep-forest-black-apricorn-4",
+  }),
+  ...makeApricornTree({
+    x: 20,
+    y: 20,
+    apricorn: "yellow-apricorn",
+    id: "deep-forest-yellow-apricorn-5",
+  }),
   {
     type: "POKEMON",
     dexId: 214,
-    x: 30,
-    y: 41,
+    x: 5,
+    y: 26,
     orientation: "UP",
     dialogue: ["heracross is munching on apricorns"],
     encounter: {
@@ -219,7 +298,46 @@ export const apricornClearingOccupants: OverworldMap["occupants"] = [
       maxXp: 27000,
       minXp: 27000,
     },
-    id: "clearing-heracross",
-    conditionFunction: (s) => !occupantHandled(s, "clearing-heracross"),
+    id: "clearing-heracross-1",
+    conditionFunction: (s) => !occupantHandled(s, "clearing-heracross-1"),
   },
+  {
+    type: "POKEMON",
+    dexId: 214,
+    x: 12,
+    y: 19,
+    orientation: "RIGHT",
+    dialogue: ["heracross is munching on apricorns"],
+    encounter: {
+      rarity: "common",
+      name: "heracross",
+      maxXp: 27000,
+      minXp: 27000,
+    },
+    id: "clearing-heracross-2",
+    conditionFunction: (s) => !occupantHandled(s, "clearing-heracross-2"),
+  },
+  {
+    type: "POKEMON",
+    dexId: 214,
+    x: 33,
+    y: 4,
+    orientation: "LEFT",
+    dialogue: ["heracross is munching on apricorns"],
+    encounter: {
+      rarity: "common",
+      name: "heracross",
+      maxXp: 27000,
+      minXp: 27000,
+    },
+    id: "clearing-heracross-3",
+    conditionFunction: (s) => !occupantHandled(s, "clearing-heracross-3"),
+  },
+  makeOverworldItem({
+    x: 25,
+    y: 19,
+    mapId: "apricornClearing",
+    item: "revival-herb",
+    amount: 3,
+  }),
 ];

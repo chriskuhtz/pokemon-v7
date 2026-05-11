@@ -18,29 +18,36 @@ export const rocketCampOccupants: Occupant[] = [
     item: "ultra-ball",
     mapId: "rocketCamp",
     amount: 5,
-    x: 7,
-    y: 15,
+    x: 3,
+    y: 18,
+  }),
+  makeOverworldItem({
+    item: "full-restore",
+    mapId: "rocketCamp",
+    amount: 5,
+    x: 2,
+    y: 18,
   }),
   makeOverworldItem({
     item: "rare-candy",
     mapId: "rocketCamp",
-    amount: 1,
-    x: 19,
-    y: 11,
+    amount: 10,
+    x: 2,
+    y: 17,
   }),
   makeOverworldItem({
     item: "loaded-dice",
     mapId: "rocketCamp",
     amount: 1,
-    x: 8,
-    y: 5,
+    x: 2,
+    y: 19,
   }),
   makeOverworldItem({
     item: "exp-candy-l",
     mapId: "rocketCamp",
-    amount: 1,
+    amount: 10,
     x: 1,
-    y: 17,
+    y: 18,
   }),
   {
     type: "TRAINER",
@@ -95,7 +102,7 @@ export const rocketCampOccupants: Occupant[] = [
     id: "Rocket Goon Rosie",
     x: 14,
     y: 2,
-    orientation: "DOWN",
+    orientation: "RIGHT",
     team: (s) => [
       makeChallengerPokemon({
         name: "magneton",
@@ -119,8 +126,8 @@ export const rocketCampOccupants: Occupant[] = [
   {
     type: "TRAINER",
     id: "Rocket Goon Jason",
-    x: 2,
-    y: 17,
+    x: 6,
+    y: 18,
     orientation: "RIGHT",
     team: (s) => [
       makeChallengerPokemon({
@@ -138,13 +145,29 @@ export const rocketCampOccupants: Occupant[] = [
     ],
     sprite: SpriteEnum.rocketMale,
 
-    unhandledMessage: ["Nyyyaaaah"],
+    unhandledMessage: ["Nyyyaaaah", "Why do I gotta guard the supplies"],
     conditionFunction: (s) => !occupantHandled(s, "Rocket Goon Jason"),
     battleTeamConfig: {
       assignLearnsetMoves: true,
       assignNaturalAbility: true,
       assignGender: true,
       assignHeldItem: true,
+    },
+  },
+  {
+    type: "POKEMON",
+    x: 7,
+    y: 18,
+    orientation: "RIGHT",
+    id: "rocket-camp-houndour",
+    dexId: 228,
+    dialogue: ["grrr"],
+    conditionFunction: (s) => !occupantHandled(s, "rocket-camp-houndour"),
+    encounter: {
+      rarity: "common",
+      name: "houndour",
+      maxXp: 20 * 20 * 20,
+      minXp: 20 * 20 * 20,
     },
   },
   {
@@ -205,9 +228,9 @@ export const rocketCampOccupants: Occupant[] = [
   {
     type: "TRAINER",
     id: "Rocket Admin Chad",
-    x: 10,
-    y: 9,
-    orientation: "DOWN",
+    x: 4,
+    y: 12,
+    orientation: "RIGHT",
     team: getRocketChadTeam,
     sprite: SpriteEnum.rocketAdminMale,
 
@@ -231,9 +254,9 @@ export const rocketCampOccupants: Occupant[] = [
     id: "Rocket looker teleport",
     type: "TELEPORTER_NPC",
     sprite: SpriteEnum.looker,
-    orientation: "DOWN",
-    x: 10,
-    y: 10,
+    orientation: "RIGHT",
+    x: 4,
+    y: 13,
     to: {
       mapId: "camp",
       orientation: "DOWN",
