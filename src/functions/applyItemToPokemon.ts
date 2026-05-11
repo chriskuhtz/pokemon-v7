@@ -86,7 +86,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
     }
     return {
       ...pokemon,
-      damage: Math.round(pokemon.maxHp / (item === "revive" ? 2 : 1)),
+      damage: item === "revive" ? Math.round(pokemon.maxHp / 2) : 0,
       primaryAilment: undefined,
       happiness: pokemon.happiness + (HappinessChangeTable[item] ?? 0),
     };

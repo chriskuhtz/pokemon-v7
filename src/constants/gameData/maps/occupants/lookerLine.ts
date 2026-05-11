@@ -65,7 +65,7 @@ export const lookerLine: Occupant[] = [
     dialogue: ["lets go", "i hope you prepared for a fight"],
     to: {
       mapId: "rocketCamp",
-      x: 11,
+      x: 18,
       y: 19,
       orientation: "UP",
       forwardFoot: "CENTER1",
