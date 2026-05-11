@@ -1,10 +1,12 @@
 import { defaultShaderMap } from "../../../functions/getTimeOfDay";
 import { OverworldMap } from "../../../interfaces/OverworldMap";
-import { ilexForestOccupants } from "./occupants/ilexForest";
+import {
+  allIlexGalacticsDefeated,
+  ilexForestOccupants,
+} from "./occupants/ilexForest";
 
 export const ilexForest: OverworldMap = {
-  resetOccupantsOnLeave: (s) =>
-    s.quests["defeat team galactic in ilex forest"] === "ACTIVE",
+  resetOccupantsOnLeave: (s) => !allIlexGalacticsDefeated(s),
   area: "OPEN",
   id: "camp",
   occupants: ilexForestOccupants,

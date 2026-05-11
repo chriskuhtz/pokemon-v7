@@ -1,9 +1,12 @@
 import { defaultShaderMap } from "../../../functions/getTimeOfDay";
 import { OverworldMap } from "../../../interfaces/OverworldMap";
-import { rocketCampOccupants } from "./occupants/rocketCampOccupants";
+import {
+  allRocketCampTrainersDefeated,
+  rocketCampOccupants,
+} from "./occupants/rocketCampOccupants";
 
 export const rocketCamp: OverworldMap = {
-  resetOccupantsOnLeave: () => true,
+  resetOccupantsOnLeave: (s) => !allRocketCampTrainersDefeated(s),
   area: "OPEN",
   id: "rocketCamp",
   occupants: rocketCampOccupants,
@@ -2372,7 +2375,7 @@ export const rocketCamp: OverworldMap = {
         null,
         null,
         null,
-        { yOffset: -880, xOffset: -368 },
+        null,
         null,
         null,
         null,

@@ -1,10 +1,12 @@
 import { defaultShaderMap } from "../../../functions/getTimeOfDay";
 import { OverworldMap } from "../../../interfaces/OverworldMap";
-import { murasakiGladesOccupants } from "./occupants/murasakiGlades";
+import {
+  murasakiGladesCleared,
+  murasakiGladesOccupants,
+} from "./occupants/murasakiGlades";
 
 export const murasakiGlades: OverworldMap = {
-  resetOccupantsOnLeave: (s) =>
-    s.quests["investigate murasaki glades"] === "ACTIVE",
+  resetOccupantsOnLeave: (s) => !murasakiGladesCleared(s),
   area: "OPEN",
   id: "murasaki-glades",
   occupants: murasakiGladesOccupants,
