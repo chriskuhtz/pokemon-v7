@@ -11,15 +11,27 @@ import { ScreenTransitionProvider } from "../../hooks/useScreenTransitionEffects
 import { Router } from "../../modules/Router/Router";
 import { Page } from "../Page/Page";
 export const MessageContainer = () => {
-  const { confirmLatestMessage, addMessage, latestMessage } =
+  const { confirmLatestMessage, addMultipleMessages, latestMessage } =
     useContext(MessageQueueContext);
   const { allowedBaseSizes } = useContext(GameDataContext);
 
   return (
     <ErrorBoundary
-      onError={(e) => addMessage({ message: e.message })}
+      onError={(e, info) =>
+        addMultipleMessages([
+          { message: e.message },
+          { message: info.componentStack ?? "no stack info" },
+          { message: info.digest ?? "no digest info" },
+        ])
+      }
       fallback={
         <Page headline="An unexpected error occured:">
+          {latestMessage && (
+            <MessageBanner
+              latestMessage={latestMessage}
+              confirmLatestMessage={confirmLatestMessage}
+            />
+          )}
           <RecoveryTool />
         </Page>
       }
