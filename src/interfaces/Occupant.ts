@@ -245,6 +245,7 @@ export interface ApricornTree extends BaseOccupant {
 }
 export interface EmptyApricornTree extends BaseOccupant {
   type: "EMPTY_APRICORN_TREE";
+  apricorn: ApricornType;
 }
 export interface BerryTree extends BaseOccupant {
   type: "BERRY_TREE";
@@ -252,6 +253,7 @@ export interface BerryTree extends BaseOccupant {
 }
 export interface EmptyBerryTree extends BaseOccupant {
   type: "EMPTY_BERRY_TREE";
+  berry: BerryType;
 }
 export interface Ledge extends BaseOccupant {
   type: "LEDGE";

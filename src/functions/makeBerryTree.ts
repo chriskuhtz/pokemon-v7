@@ -27,6 +27,7 @@ export const makeBerryTree = ({
       type: "EMPTY_BERRY_TREE",
       x,
       y,
+      berry,
       conditionFunction: () => true,
     },
   ];

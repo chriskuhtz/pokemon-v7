@@ -29,6 +29,7 @@ import {
   kumaQuestNames,
   KumaQuestsRecord,
 } from "../versions/kuma/questsRecord";
+import { startingSaveFileKuma } from "../versions/kuma/saveFile";
 import { GameDataContext } from "./useGameData";
 import { MessageQueueContext } from "./useMessageQueue";
 
@@ -88,6 +89,10 @@ const migrateSavefile = (input: SaveFile) => {
       updatedInput.badges = [...new Set([...updatedInput.badges, value.badge])];
     }
   });
+  //migrate in trees
+  if (!updatedInput.farm.trees || updatedInput.farm.trees.length < 6) {
+    updatedInput.farm.trees = startingSaveFileKuma.farm.trees;
+  }
 
   //migrate in tickets
   if (

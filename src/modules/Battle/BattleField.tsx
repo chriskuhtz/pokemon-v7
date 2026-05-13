@@ -12,14 +12,10 @@ import {
 } from "../../functions/applyEndOfTurnAbility";
 import { applyEndOfTurnHeldItem } from "../../functions/applyEndOfTurnHeldItem";
 import { applyEndOfTurnWeatherDamage } from "../../functions/applyEndOfTurnWeatherDamage/applyEndOfTurnWeatherDamage";
-import { applyEVGain } from "../../functions/applyEVGain";
-import { applyHappinessChange } from "../../functions/applyHappinessChange";
 import { applyOnBattleEnterAbilityAndEffects } from "../../functions/applyOnBattleEnterAbility";
 import { applyPrimaryAilmentDamage } from "../../functions/applyPrimaryAilmentDamage";
 import { applySecondaryAilmentDamage } from "../../functions/applySecondaryAilmentDamage/applySecondaryAilmentDamage";
-import { calculateLevelData } from "../../functions/calculateLevelData";
 import { changeMovePP } from "../../functions/changeMovePP";
-import { getHeldItem } from "../../functions/getHeldItem";
 import { getOpponentPokemon } from "../../functions/getOpponentPokemon";
 import { getPlayerPokemon } from "../../functions/getPlayerPokemon";
 import { getTeamSize } from "../../functions/getTeamSize";
@@ -27,16 +23,15 @@ import { handleCheekPouch } from "../../functions/handleCheekPouch";
 import { isKO } from "../../functions/isKo";
 import { reduceSecondaryAilmentDurations } from "../../functions/reduceSecondaryAilmentDurations";
 import { sortByPriority } from "../../functions/sortByPriority";
-import { LocationContext } from "../../hooks/LocationProvider";
 import { GameDataContext } from "../../hooks/useGameData";
-import { LeaveBattlePayload } from "../../hooks/useLeaveBattle";
-import { Message } from "../../hooks/useMessageQueue";
+import { useLeaveBattle } from "../../hooks/useLeaveBattle";
+import { MessageQueueContext } from "../../hooks/useMessageQueue";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { BattleLocation } from "../../interfaces/BattleLocation";
 import { BattlePokemon } from "../../interfaces/BattlePokemon";
 import { Inventory, joinInventories } from "../../interfaces/Inventory";
 import { ItemType } from "../../interfaces/Item";
-import { EmptyStatObject, Stat } from "../../interfaces/StatObject";
+import { EmptyStatObject } from "../../interfaces/StatObject";
 import { ControlBar } from "./components/ControlBar";
 import { EnemyLane } from "./components/EnemyLane";
 import { PlayerLane } from "./components/PlayerLane";
@@ -46,41 +41,35 @@ import { useBattleFieldEffects } from "./hooks/useBattleFieldEffects";
 import { useBattleTerrain } from "./hooks/useBattleTerrain";
 import { useBattleWeather } from "./hooks/useBattleWeather";
 import { useChooseAction } from "./hooks/useChooseAction";
+import { applyRewardsToTeam, useEndBattle } from "./hooks/useEndBattle";
 import { useHandleAction } from "./hooks/useHandleAction/useHandleAction";
 
 export const BattleField = ({
-  leave,
   initOpponents,
   initTeam,
   inventory,
   fightersPerSide,
-  latestMessage,
-  addMessage,
-  addMultipleMessages,
   challengerId,
   rewardItems,
   spriteGeneration,
   challengerType,
 }: {
-  leave: (x: LeaveBattlePayload) => void;
   initOpponents: BattlePokemon[];
   initTeam: BattlePokemon[];
   fightersPerSide: number;
   inventory: Inventory;
-  latestMessage: Message | undefined;
-  addMessage: (message: Message) => void;
-  addMultipleMessages: (newMessages: Message[]) => void;
   challengerId: string;
   rewardItems?: Partial<Inventory>;
   spriteGeneration?: 1;
   challengerType: "TRAINER" | "WILD";
 }) => {
   //STATE
+  const { latestMessage, addMessage, addMultipleMessages } =
+    useContext(MessageQueueContext);
   const { saveFile } = useContext(SaveFileContext);
   const { settings, playerId } = saveFile;
-  const { location } = useContext(LocationContext);
   const gameData = useContext(GameDataContext);
-  const { losingMessages, features } = gameData;
+  const { features } = gameData;
   const isTrainerBattle = useMemo(() => {
     return challengerType === "TRAINER";
   }, [challengerType]);
@@ -113,6 +102,7 @@ export const BattleField = ({
     | "COLLECTING"
     | "EXECUTING"
     | "END_OF_TURN"
+    | "COLLECTING_REWARDS"
     | "REFILLING"
   >("UNITIALIZED");
   useEffect(() => {
@@ -136,7 +126,12 @@ export const BattleField = ({
   );
   const onFieldOpponents = useMemo(
     () =>
-      opponents.filter((p) => p.status !== "BENCH" && p.status !== "FAINTED"),
+      opponents.filter(
+        (p) =>
+          p.status !== "BENCH" &&
+          p.status !== "FAINTED" &&
+          p.status !== "REWARD_COLLECTED",
+      ),
     [opponents],
   );
 
@@ -210,7 +205,9 @@ export const BattleField = ({
   }, [battleStep, onFieldOpponents, onFieldTeam]);
   const battleWon = useMemo(
     () =>
-      opponents.every((o) => o.status === "CAUGHT" || o.status === "FAINTED"),
+      opponents.every(
+        (o) => o.status === "CAUGHT" || o.status === "REWARD_COLLECTED",
+      ),
     [opponents],
   );
   const battleLost = useMemo(
@@ -238,6 +235,7 @@ export const BattleField = ({
   }, [allOnField]);
 
   //REDUCERS
+  const leave = useLeaveBattle();
   const leaveWithCurrentData = useCallback(
     (
       outcome: "WIN" | "LOSS" | "DRAW",
@@ -535,7 +533,7 @@ export const BattleField = ({
 
       if (!latestMessage && collectedMessages.length === 0) {
         setPokemon(updatedPokemon);
-        setBattleStep("REFILLING");
+        setBattleStep("COLLECTING_REWARDS");
         return;
       } else {
         addMultipleMessages(
@@ -545,7 +543,7 @@ export const BattleField = ({
               i === collectedMessages.length - 1
                 ? () => {
                     setPokemon(updatedPokemon);
-                    setBattleStep("REFILLING");
+                    setBattleStep("COLLECTING_REWARDS");
                   }
                 : undefined,
           })),
@@ -567,7 +565,41 @@ export const BattleField = ({
     nextPokemonWithoutMove,
     pokemon,
   ]);
-  // Refilling
+  //Collecting Rewards
+  useEffect(() => {
+    if (!latestMessage && battleStep === "COLLECTING_REWARDS") {
+      const faintedOpps = opponents.filter((opp) => opp.status === "FAINTED");
+      if (faintedOpps.length === 0) {
+        setBattleStep("REFILLING");
+      } else {
+        const { rewardedTeam: updatedTeam, messages: collectedMessages } =
+          applyRewardsToTeam(team, faintedOpps, false, false, false, false);
+        addMultipleMessages(
+          collectedMessages.map((m, i) => ({
+            message: m.message,
+            onRemoval:
+              i === collectedMessages.length - 1
+                ? () => {
+                    setBattleStep("REFILLING");
+                  }
+                : undefined,
+          })),
+        );
+
+        const mons: BattlePokemon[] = [
+          ...updatedTeam,
+          ...opponents.map<BattlePokemon>((o) => {
+            if (o.status === "FAINTED") {
+              return { ...o, status: "REWARD_COLLECTED" };
+            }
+            return o;
+          }),
+        ];
+        setPokemon(mons);
+      }
+    }
+  }, [addMultipleMessages, battleStep, latestMessage, opponents, team]);
+  // Refill playerSide
   useEffect(() => {
     if (battleStep === "REFILLING" && !teamCanRefill && !opponentCanRefill) {
       setBattleStep("BATTLE_ENTRY");
@@ -580,163 +612,15 @@ export const BattleField = ({
     teamCanRefill,
   ]);
   // Battle Over
-  useEffect(() => {
-    if (battleLost && !latestMessage) {
-      const { rogueLike } = settings ?? {};
-      console.log("effect battlelost");
-
-      const message = () => {
-        if (
-          location.mapId === "camp" ||
-          location.mapId === "challengeField" ||
-          location.mapId === "randomField"
-        ) {
-          return losingMessages.training;
-        }
-        if (rogueLike) {
-          return losingMessages.reset;
-        }
-
-        if (saveFile.trait === "explorer") {
-          return losingMessages.explorer;
-        }
-
-        return losingMessages.wild;
-      };
-      addMessage({
-        message: message(),
-        onRemoval: () => leaveWithCurrentData("LOSS"),
-      });
-    }
-    if (battleWon && !latestMessage) {
-      console.log("effect battlewon");
-
-      const defeatedPokemon = getOpponentPokemon(pokemon).filter(
-        (p) => p.status === "FAINTED",
-      );
-      //XP
-      let gainedXp = defeatedPokemon.reduce((sum, d) => {
-        const { level } = calculateLevelData(d.xp, d.growthRate);
-
-        return sum + Math.floor((d.data.base_experience * level) / 7);
-      }, 0);
-      if (isTrainerBattle) {
-        gainedXp *= 1.5;
-      }
-      if (settings?.doubleXpRates) {
-        gainedXp *= 2;
-      }
-      const xpPerTeamMember = () => {
-        if (settings?.expShareActive) {
-          return Math.round(gainedXp / team.filter((t) => !isKO(t)).length);
-        }
-
-        const baseAmount = Math.round(
-          gainedXp /
-            team.filter((t) => t.participatedInBattle && !isKO(t)).length,
-        );
-        if (saveFile.trait === "competitor") {
-          return Math.floor(baseAmount * 1.2);
-        }
-        return baseAmount;
-      };
-
-      const getsRewards = (p: BattlePokemon) =>
-        (settings?.expShareActive || p.participatedInBattle) && !isKO(p);
-      //XP REWARD
-      const leveledUpTeam = team.map((p) => {
-        if (getsRewards(p)) {
-          const luckyEggfactor =
-            getHeldItem(p, false) === "lucky-egg" ? 1.5 : 1;
-          const gained = xpPerTeamMember() * luckyEggfactor;
-          const newXp = p.xp + gained;
-          return { ...p, xp: newXp };
-        }
-        return p;
-      });
-      const levelUpMessages: Message[] = leveledUpTeam
-        .map((pokemon) => {
-          const prev = team.find((t) => t.id === pokemon.id);
-          if (!prev) {
-            return;
-          }
-          const prevLevel = calculateLevelData(prev.xp, prev.growthRate).level;
-          const level = calculateLevelData(
-            pokemon.xp,
-            pokemon.growthRate,
-          ).level;
-
-          if (prevLevel !== level) {
-            return { message: `${pokemon.name} reached level ${level}` };
-          }
-          return;
-        })
-        .filter((m) => m !== undefined);
-      //FRIENDSHIP REWARD, only for participants
-      const friendshipIncreasedTeam = leveledUpTeam.map((p) => {
-        if (p.participatedInBattle) {
-          return applyHappinessChange(p, 1);
-        }
-        return p;
-      });
-      //EV REWARD, only for participants
-      const evGainedTeam = friendshipIncreasedTeam.map((p) => {
-        {
-          if (p.participatedInBattle) {
-            const updated = { ...p };
-            defeatedPokemon.forEach((defeated) => {
-              Object.entries(defeated.evAwards).forEach(([stat, award]) => {
-                updated.effortValues = applyEVGain(
-                  updated.effortValues,
-                  stat as Stat,
-                  award,
-                  getHeldItem(p, false),
-                );
-              });
-            });
-            return updated;
-          }
-          return p;
-        }
-      });
-
-      addMultipleMessages(
-        [
-          xpPerTeamMember() > 0
-            ? {
-                message: `Each Team Member gained ${xpPerTeamMember()} XP`,
-              }
-            : undefined,
-          ...levelUpMessages,
-          {
-            message: "You won the battle",
-            onRemoval: () =>
-              leaveWithCurrentData("WIN", defeatedPokemon, evGainedTeam),
-          },
-        ].filter((m) => m !== undefined),
-      );
-    }
-  }, [
-    addMessage,
-    addMultipleMessages,
-    battleInventory,
-    battleLost,
+  useEndBattle(
     battleWon,
-    isTrainerBattle,
-    latestMessage,
+    battleLost,
     leaveWithCurrentData,
-    location.mapId,
-    losingMessages.explorer,
-    losingMessages.reset,
-    losingMessages.training,
-    losingMessages.wild,
     pokemon,
-    saveFile.trait,
-    scatteredCoins,
-    settings,
     team,
-  ]);
-  //Refill opponents
+    isTrainerBattle,
+  );
+  //Refill opponent Side
   useEffect(() => {
     if (battleStep === "REFILLING" && opponentCanRefill) {
       const options = opponents.filter((t) => t.status === "BENCH" && !isKO(t));

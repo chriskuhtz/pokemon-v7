@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { animationTimer } from "../../../constants/baseConstants";
 import { isKO } from "../../../functions/isKo";
-import { LeaveBattlePayload } from "../../../hooks/useLeaveBattle";
-import { Message } from "../../../hooks/useMessageQueue";
+import { useLeaveBattle } from "../../../hooks/useLeaveBattle";
 import { BattlePokemon } from "../../../interfaces/BattlePokemon";
 import { TrainerInfo } from "../../../interfaces/Challenger";
 import { Inventory } from "../../../interfaces/Inventory";
@@ -11,30 +10,23 @@ import { IntroBanner } from "./IntroBanner";
 import { LineUpSelection } from "./LineUpSelection";
 
 export const BattleOverview = ({
-  leave,
   opponents,
   team,
   fightersPerSide,
   inventory,
   trainer,
-  latestMessage,
-  addMessage,
-  addMultipleMessages,
   challengerId,
   challengerType,
 }: {
-  leave: (x: LeaveBattlePayload) => void;
   opponents: BattlePokemon[];
   team: BattlePokemon[];
   fightersPerSide: number;
   inventory: Inventory;
   trainer?: TrainerInfo;
-  latestMessage: Message | undefined;
   challengerId: string;
-  addMessage: (message: Message) => void;
-  addMultipleMessages: (newMessages: Message[]) => void;
   challengerType: "TRAINER" | "WILD";
 }): JSX.Element => {
+  const leave = useLeaveBattle();
   const [battleStarted, setBattleStarted] = useState<boolean>(false);
 
   const [selectedTeam, setSelectedTeam] = useState<string[]>(
@@ -97,7 +89,6 @@ export const BattleOverview = ({
     <BattleField
       inventory={inventory}
       fightersPerSide={fightersPerSide}
-      leave={leave}
       initTeam={team.map((t) => {
         if (selectedTeam.includes(t.id)) {
           return {
@@ -117,9 +108,6 @@ export const BattleOverview = ({
         ...o,
         status: i < fightersPerSide ? "ONFIELD" : "BENCH",
       }))}
-      latestMessage={latestMessage}
-      addMessage={addMessage}
-      addMultipleMessages={addMultipleMessages}
       challengerId={challengerId}
       spriteGeneration={trainer?.spriteGeneration}
       challengerType={challengerType}

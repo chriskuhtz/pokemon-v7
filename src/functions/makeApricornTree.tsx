@@ -39,6 +39,7 @@ export const makeApricornTree = ({
       type: "EMPTY_APRICORN_TREE",
       x,
       y,
+      apricorn,
       conditionFunction: (s) => occupantHandled(s, id),
     },
   ];

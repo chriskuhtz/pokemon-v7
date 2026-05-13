@@ -26,7 +26,6 @@ export interface OverworldMap {
   dark?: boolean;
   peaceful?: boolean;
   questMenuAvailable: boolean;
-  encounterGroupLimit?: number;
   resetOccupantsOnLeave?: (s: SaveFile) => boolean;
   resetInventoryOnLeave?: (s: SaveFile) => boolean;
 }

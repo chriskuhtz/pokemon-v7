@@ -49,17 +49,27 @@ export interface LeaveBattlePayload {
   rewardItems?: Partial<Inventory>;
 }
 export const useLeaveBattle = () => {
+  const handleLoss = useHandleLoss();
+  const handleWin = useHandleWin();
+
+  return useCallback(
+    (payload: LeaveBattlePayload) => {
+      if (payload.outcome === "LOSS") {
+        handleLoss();
+      } else {
+        handleWin(payload);
+      }
+    },
+    [handleLoss, handleWin],
+  );
+};
+
+const useHandleLoss = () => {
   const { location, resetLocation } = useContext(LocationContext);
-  const gameData = useContext(GameDataContext);
   const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
   const reset = useReset();
 
-  const team = useMemo(
-    () => saveFile.pokemon.filter((p) => p.onTeam),
-    [saveFile],
-  );
-
-  const handleLoss = useCallback(() => {
+  return useCallback(() => {
     const resetTime = () => {
       if (
         saveFile.settings?.rogueLike ||
@@ -109,7 +119,19 @@ export const useLeaveBattle = () => {
       return;
     }
   }, [location, patchSaveFileReducer, reset, saveFile, resetLocation]);
-  const handleWin = useCallback(
+};
+
+const useHandleWin = () => {
+  const { location } = useContext(LocationContext);
+  const gameData = useContext(GameDataContext);
+  const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
+
+  const team = useMemo(
+    () => saveFile.pokemon.filter((p) => p.onTeam),
+    [saveFile],
+  );
+
+  return useCallback(
     ({
       team: updatedTeam,
       updatedInventory,
@@ -361,16 +383,5 @@ export const useLeaveBattle = () => {
       });
     },
     [gameData, location.mapId, patchSaveFileReducer, saveFile, team],
-  );
-
-  return useCallback(
-    (payload: LeaveBattlePayload) => {
-      if (payload.outcome === "LOSS") {
-        handleLoss();
-      } else {
-        handleWin(payload);
-      }
-    },
-    [handleLoss, handleWin],
   );
 };

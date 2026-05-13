@@ -5,6 +5,8 @@ import { getRandomOrientation } from "../../../functions/getNextClockwiseDirecti
 import { getNextLocation } from "../../../functions/getNextLocation";
 import { getOppositeDirection } from "../../../functions/getOppositeDirection";
 import { hasType } from "../../../functions/hasType";
+import { makeApricornTree } from "../../../functions/makeApricornTree";
+import { makeBerryTree } from "../../../functions/makeBerryTree";
 import { occupantHandled } from "../../../functions/occupantHandled";
 import { shuffle } from "../../../functions/shuffle";
 import {
@@ -17,11 +19,21 @@ import { useAvailableBulletinQuests } from "../../../hooks/useAvailableBulletinQ
 import { GameDataContext } from "../../../hooks/useGameData";
 import { SaveFileContext } from "../../../hooks/useSaveFile";
 import { InternalDex } from "../../../interfaces/GameData";
+import { isApricorn, isBerry } from "../../../interfaces/Item";
 import { MapId } from "../../../interfaces/mapIds";
 import { Nature } from "../../../interfaces/Natures";
 import { Occupant, OverworldPokemon } from "../../../interfaces/Occupant";
 import { CharacterOrientation, SaveFile } from "../../../interfaces/SaveFile";
 import { SpriteEnum } from "../../../interfaces/SpriteEnum";
+
+const treeSlots: { x: number; y: number }[] = [
+  { x: 7, y: 15 },
+  { x: 7, y: 16 },
+  { x: 7, y: 17 },
+  { x: 7, y: 19 },
+  { x: 7, y: 20 },
+  { x: 7, y: 21 },
+];
 
 export const useOccupants = () => {
   const { saveFile } = useContext(SaveFileContext);
@@ -111,6 +123,28 @@ export const useOccupants = () => {
           orientation: getOppositeDirection(location.orientation),
         });
       }
+    }
+    //add farm trees
+    if (saveFile.farm.trees && location.mapId === "camp") {
+      all.push(
+        ...saveFile.farm.trees
+          .flatMap<Occupant | undefined>((t, index) => {
+            if (isApricorn(t)) {
+              return makeApricornTree({
+                apricorn: t,
+                id: `planted-${t}-${index}`,
+                ...treeSlots[index],
+              });
+            } else if (isBerry(t))
+              return makeBerryTree({
+                berry: t,
+                id: `planted-${t}-${index}`,
+                ...treeSlots[index],
+              });
+            return [undefined];
+          })
+          .filter<Occupant>((a) => !!a),
+      );
     }
     //update
     if (statefulOccupants.length !== all.length) {
