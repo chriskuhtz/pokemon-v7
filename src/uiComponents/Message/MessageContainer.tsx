@@ -17,13 +17,7 @@ export const MessageContainer = () => {
 
   return (
     <ErrorBoundary
-      onError={(e, info) =>
-        addMultipleMessages([
-          { message: e.message },
-          { message: info.componentStack ?? "no stack info" },
-          { message: info.digest ?? "no digest info" },
-        ])
-      }
+      onError={(e) => addMultipleMessages([{ message: e.message }])}
       fallback={
         <Page headline="An unexpected error occured:">
           {latestMessage && (

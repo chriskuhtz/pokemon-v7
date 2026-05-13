@@ -127,7 +127,7 @@ export function TargetSelection({
                   }}
                 />
               }
-              content={t.data.name}
+              content={`${isPlayerPokemon(t, playerId) ? "Your" : "Opponent"} ${t.data.name}`}
               key={t.id}
               onClick={() => {
                 chooseAction({

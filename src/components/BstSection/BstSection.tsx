@@ -65,7 +65,7 @@ export const BstSection = ({
               ownedPokemon,
               data,
               settings,
-            })[1];
+            }).at(1);
 
             if (!HIDDEN_STATS_FOR_TOTAL.includes(stat)) {
               return (

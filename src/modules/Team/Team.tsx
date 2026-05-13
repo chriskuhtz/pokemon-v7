@@ -210,10 +210,10 @@ const TeamIcons = ({
                     ? { filter: "grayscale(1)" }
                     : undefined,
                 }}
-                firstPlanet={`/typeIcons/${typeNames[0]}.png`}
+                firstPlanet={`/typeIcons/${typeNames.at(0)}.png`}
                 secondPlanetUrl={
                   typeNames.length > 1
-                    ? `/typeIcons/${typeNames[1]}.png`
+                    ? `/typeIcons/${typeNames.at(1)}.png`
                     : undefined
                 }
                 thirdPlanetUrl={getItemUrl(pokemon.ball)}

@@ -65,6 +65,16 @@ export const cleanUpTimedEvents = (saveFile: SaveFile): SaveFile => {
   const update = { ...saveFile, timedEvents: saveFile.timedEvents ?? [] };
 
   update.timedEvents = update.timedEvents?.filter((event) => !isExpired(event));
+
+  const dedupled: TimedEvent[] = [];
+
+  update.timedEvents.forEach((event) => {
+    if (dedupled.every((dd) => dd.id !== event.id)) {
+      dedupled.push(event);
+    }
+  });
+
+  update.timedEvents = dedupled;
   console.log("cleaned up timed Events, result:", update.timedEvents);
   return update;
 };
