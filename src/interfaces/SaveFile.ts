@@ -188,6 +188,7 @@ export interface SaveFile {
   farm: {
     // refactor farm into overworld plots
     plants: BerryBush[];
+    trees?: (ApricornType | BerryType | undefined)[];
   };
   campUpgrades: Record<CampUpgrade, boolean>;
   rangerLevel?: number;

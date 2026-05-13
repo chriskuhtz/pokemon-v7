@@ -16,9 +16,11 @@ import { makeChallengerPokemon } from "./makeChallengerPokemon";
 export const makeRandomTeam = ({
   xp,
   type,
+  adjustmentFactor,
 }: {
   xp: number;
   type?: PokemonType;
+  adjustmentFactor?: number;
 }): OwnedPokemon[] => {
   const res: PokemonName[] = [];
 
@@ -66,37 +68,41 @@ export const makeRandomTeam = ({
     getRandom(lowBstPokemon),
   ];
 
-  if (xp >= 100 * 100 * 100) {
+  const adjustedXP = xp * (adjustmentFactor ?? 1);
+
+  if (adjustedXP >= 100 * 100 * 100) {
     res.push(...ultra);
-  } else if (xp >= 90 * 90 * 90) {
+  } else if (adjustedXP >= 90 * 90 * 90) {
     res.push(...high.slice(0, 2));
     res.push(...ultra.slice(0, 4));
-  } else if (xp >= 80 * 80 * 80) {
+  } else if (adjustedXP >= 80 * 80 * 80) {
     res.push(...high.slice(0, 3));
     res.push(...ultra.slice(0, 3));
-  } else if (xp >= 70 * 70 * 70) {
+  } else if (adjustedXP >= 70 * 70 * 70) {
     res.push(...high.slice(0, 4));
     res.push(...ultra.slice(0, 2));
-  } else if (xp >= 60 * 60 * 60) {
+  } else if (adjustedXP >= 60 * 60 * 60) {
     res.push(...high.slice(0, 5));
     res.push(...ultra.slice(0, 1));
-  } else if (xp >= 50 * 50 * 50) {
+  } else if (adjustedXP >= 50 * 50 * 50) {
     res.push(...mid.slice(0, 1));
     res.push(...high.slice(0, 5));
-  } else if (xp >= 40 * 40 * 40) {
+  } else if (adjustedXP >= 40 * 40 * 40) {
     res.push(...mid.slice(0, 3));
     res.push(...high.slice(0, 3));
-  } else if (xp >= 30 * 30 * 30) {
+  } else if (adjustedXP >= 30 * 30 * 30) {
     res.push(...mid.slice(0, 5));
     res.push(...high.slice(0, 1));
-  } else if (xp >= 20 * 20 * 20) {
-    res.push(...low.slice(0, 2));
-    res.push(...mid.slice(0, 4));
-  } else if (xp >= 15 * 15 * 15) {
-    res.push(...low.slice(0, 4));
+  } else if (adjustedXP >= 25 * 25 * 25) {
+    res.push(...mid.slice(0, 5));
+  } else if (adjustedXP >= 20 * 20 * 20) {
+    res.push(...low.slice(0, 3));
     res.push(...mid.slice(0, 2));
-  } else if (xp >= 10 * 10 * 10) {
-    res.push(...low);
+  } else if (adjustedXP >= 15 * 15 * 15) {
+    res.push(...low.slice(0, 3));
+    res.push(...mid.slice(0, 1));
+  } else if (adjustedXP >= 10 * 10 * 10) {
+    res.push(...low.slice(0, 3));
   } else {
     res.push(...low.slice(0, 2));
   }

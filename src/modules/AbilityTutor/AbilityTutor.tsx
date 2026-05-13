@@ -1,191 +1,191 @@
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { AbilityInfoButton } from '../../components/AbilityInfoButton/AbilityInfoButton';
-import { ItemSprite } from '../../components/ItemSprite/ItemSprite';
-import { PokemonSprite } from '../../components/PokemonSprite/PokemonSprite';
-import { AbilityName, abilityNames } from '../../constants/abilityCheckList';
-import { ArrayHelpers } from '../../functions/ArrayHelpers';
-import { GameDataContext } from '../../hooks/useGameData';
-import { useGetPokemonData } from '../../hooks/useGetPokemonData';
-import { MessageQueueContext } from '../../hooks/useMessageQueue';
-import { useNavigate } from '../../hooks/useNavigate';
-import { SaveFileContext } from '../../hooks/useSaveFile';
-import { joinInventories } from '../../interfaces/Inventory';
-import { ItemType, moveUnlockPayments } from '../../interfaces/Item';
-import { OwnedPokemon } from '../../interfaces/OwnedPokemon';
-import { Card } from '../../uiComponents/Card/Card';
-import { Page } from '../../uiComponents/Page/Page';
-import { Stack } from '../../uiComponents/Stack/Stack';
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { AbilityInfoButton } from "../../components/AbilityInfoButton/AbilityInfoButton";
+import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
+import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
+import { AbilityName, abilityNames } from "../../constants/abilityCheckList";
+import { ArrayHelpers } from "../../functions/ArrayHelpers";
+import { GameDataContext } from "../../hooks/useGameData";
+import { useGetPokemonData } from "../../hooks/useGetPokemonData";
+import { MessageQueueContext } from "../../hooks/useMessageQueue";
+import { useNavigate } from "../../hooks/useNavigate";
+import { SaveFileContext } from "../../hooks/useSaveFile";
+import { joinInventories } from "../../interfaces/Inventory";
+import { ItemType, moveUnlockPayments } from "../../interfaces/Item";
+import { OwnedPokemon } from "../../interfaces/OwnedPokemon";
+import { Card } from "../../uiComponents/Card/Card";
+import { Page } from "../../uiComponents/Page/Page";
+import { Stack } from "../../uiComponents/Stack/Stack";
 
 export const AbilityTutor = () => {
-	const { saveFile } = useContext(SaveFileContext);
-	const team = useMemo(
-		() => saveFile.pokemon.filter((p) => p.onTeam),
-		[saveFile]
-	);
+  const { saveFile } = useContext(SaveFileContext);
+  const team = useMemo(
+    () => saveFile.pokemon.filter((p) => p.onTeam),
+    [saveFile],
+  );
 
-	const [id, setId] = useState<string>(team[0].id);
+  const [id, setId] = useState<string>(team[0].id);
 
-	const pokemonWithId = useMemo(
-		() => team.find((t) => t.id === id),
-		[id, team]
-	);
+  const pokemonWithId = useMemo(
+    () => team.find((t) => t.id === id),
+    [id, team],
+  );
 
-	const navigate = useNavigate();
-	return (
-		<Page
-			headline="Ability Tutor"
-			goBack={() => navigate('ABILITY_TUTOR', 'OVERWORLD')}
-		>
-			<Stack mode="column">
-				{!id && <strong>Which Pokemon's Ability should we change?</strong>}
-				<div
-					style={{
-						display: 'grid',
-						gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr',
-						padding: '2rem',
-						columnGap: '1rem',
-					}}
-				>
-					{team.map((t) => (
-						<PokemonSprite
-							key={t.id}
-							onClick={() => setId(t.id)}
-							name={t.name}
-							sizeFactor={id === t.id ? 3 : 1}
-							config={{ officalArtwork: true, shiny: t.shiny }}
-						/>
-					))}
-				</div>
-				{pokemonWithId && <AbilityEditor ownedPokemon={pokemonWithId} />}
-			</Stack>
-		</Page>
-	);
+  const navigate = useNavigate();
+  return (
+    <Page
+      headline="Ability Tutor"
+      goBack={() => navigate("ABILITY_TUTOR", "OVERWORLD")}
+    >
+      <Stack mode="column">
+        {!id && <strong>Which Pokemon's Ability should we change?</strong>}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr",
+            padding: "2rem",
+            columnGap: "1rem",
+          }}
+        >
+          {team.map((t) => (
+            <PokemonSprite
+              key={t.id}
+              onClick={() => setId(t.id)}
+              name={t.name}
+              sizeFactor={id === t.id ? 3 : 1}
+              config={{ officalArtwork: true, shiny: t.shiny }}
+            />
+          ))}
+        </div>
+        {pokemonWithId && <AbilityEditor ownedPokemon={pokemonWithId} />}
+      </Stack>
+    </Page>
+  );
 };
 
 const AbilityEditor = ({ ownedPokemon }: { ownedPokemon: OwnedPokemon }) => {
-	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
-	const { addMessage } = useContext(MessageQueueContext);
-	const { internalDex } = useContext(GameDataContext);
+  const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+  const { addMessage } = useContext(MessageQueueContext);
+  const { internalDex } = useContext(GameDataContext);
 
-	const [abilityToConfirm, setAbilityToConfirm] = useState<
-		AbilityName | undefined
-	>();
+  const [abilityToConfirm, setAbilityToConfirm] = useState<
+    AbilityName | undefined
+  >();
 
-	const changeAbility = useCallback(
-		(ability: AbilityName, payment: ItemType) => {
-			if (saveFile.bag[payment] < 1) {
-				return;
-			}
-			patchSaveFileReducer({
-				bag: joinInventories(saveFile.bag, { [payment]: 1 }, true),
-				pokemon: saveFile.pokemon.map((p) => {
-					if (p.id === ownedPokemon.id) {
-						return {
-							...ownedPokemon,
-							ability,
-						};
-					}
+  const changeAbility = useCallback(
+    (ability: AbilityName, payment: ItemType) => {
+      if (saveFile.bag[payment] < 1) {
+        return;
+      }
+      patchSaveFileReducer({
+        bag: joinInventories(saveFile.bag, { [payment]: 1 }, true),
+        pokemon: saveFile.pokemon.map((p) => {
+          if (p.id === ownedPokemon.id) {
+            return {
+              ...ownedPokemon,
+              ability,
+            };
+          }
 
-					return p;
-				}),
-			});
-			addMessage({
-				message: `${ownedPokemon.name}´s ability became ${ability}`,
-				needsNoConfirmation: true,
-			});
-			setAbilityToConfirm(undefined);
-		},
-		[
-			addMessage,
-			ownedPokemon,
-			patchSaveFileReducer,
-			saveFile.bag,
-			saveFile.pokemon,
-		]
-	);
-	const { res: data, invalidate } = useGetPokemonData(
-		internalDex[ownedPokemon.name].dexId
-	);
+          return p;
+        }),
+      });
+      addMessage({
+        message: `${ownedPokemon.name}´s ability became ${ability}`,
+        needsNoConfirmation: true,
+      });
+      setAbilityToConfirm(undefined);
+    },
+    [
+      addMessage,
+      ownedPokemon,
+      patchSaveFileReducer,
+      saveFile.bag,
+      saveFile.pokemon,
+    ],
+  );
+  const { res: data, invalidate } = useGetPokemonData(
+    internalDex[ownedPokemon.name].dexId,
+  );
 
-	useEffect(() => {
-		if (data?.name && ownedPokemon.name !== data.name) {
-			invalidate();
-		}
-	}, [data, invalidate, ownedPokemon]);
+  useEffect(() => {
+    if (data?.name && ownedPokemon.name !== data.name) {
+      invalidate();
+    }
+  }, [data, invalidate, ownedPokemon]);
 
-	const options: AbilityName[] = useMemo(() => {
-		if (!data) {
-			return [];
-		}
-		return data.abilities
-			.filter(
-				(a) =>
-					ownedPokemon.ability !== a.ability.name &&
-					([...new Set(abilityNames)] as string[]).includes(a.ability.name)
-			)
-			.map((a) => a.ability.name as AbilityName);
-	}, [data, ownedPokemon.ability]);
+  const options: AbilityName[] = useMemo(() => {
+    if (!data) {
+      return [];
+    }
+    return data.abilities
+      .filter(
+        (a) =>
+          ownedPokemon.ability !== a.ability.name &&
+          ([...new Set(abilityNames)] as string[]).includes(a.ability.name),
+      )
+      .map((a) => a.ability.name as AbilityName);
+  }, [data, ownedPokemon.ability]);
 
-	const getCost = (ability: AbilityName): ItemType => {
-		return ArrayHelpers.getEntryWithOverflow(
-			moveUnlockPayments,
-			ability.length
-		);
-	};
+  const getCost = (ability: AbilityName): ItemType => {
+    return ArrayHelpers.getEntryWithOverflow(
+      moveUnlockPayments,
+      ability.length,
+    );
+  };
 
-	return (
-		<Stack mode={'column'}>
-			<Stack mode="row" alignItems="center">
-				<div style={{ flexGrow: 1 }}>
-					<Card
-						icon={<></>}
-						actionElements={[]}
-						content={
-							<h4
-								style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
-							>
-								Current Ability: {ownedPokemon.ability}{' '}
-							</h4>
-						}
-					/>
-				</div>
-				<AbilityInfoButton abilityName={ownedPokemon.ability} />
-			</Stack>
-			{options.map((a) => {
-				const payment = getCost(a);
+  return (
+    <Stack mode={"column"}>
+      <Stack mode="row" alignItems="center">
+        <div style={{ flexGrow: 1 }}>
+          <Card
+            icon={<></>}
+            actionElements={[]}
+            content={
+              <h4
+                style={{ display: "flex", alignItems: "center", gap: "1rem" }}
+              >
+                Current Ability: {ownedPokemon.ability}{" "}
+              </h4>
+            }
+          />
+        </div>
+        <AbilityInfoButton abilityName={ownedPokemon.ability} />
+      </Stack>
+      {options.map((a) => {
+        const payment = getCost(a);
 
-				const disabled = saveFile.bag[payment] < 1;
+        const disabled = saveFile.bag[payment] < 1;
 
-				return (
-					<Stack mode="row" alignItems="center">
-						<div style={{ flexGrow: 1 }}>
-							<Card
-								key={a}
-								onClick={() => setAbilityToConfirm(a)}
-								actionElements={
-									!disabled && abilityToConfirm === a
-										? [
-												<strong onClick={() => changeAbility(a, payment)}>
-													Confirm
-												</strong>,
-										  ]
-										: []
-								}
-								icon={<ItemSprite item={payment} />}
-								disabled={disabled}
-								content={
-									<div style={{ display: 'flex', gap: '.5rem' }}>
-										<strong>
-											{a}: {disabled && ` (1 ${payment} required)`}
-										</strong>
-									</div>
-								}
-							/>
-						</div>
-						<AbilityInfoButton abilityName={a} />
-					</Stack>
-				);
-			})}
-		</Stack>
-	);
+        return (
+          <Stack mode="row" alignItems="center" flexWrap="nowrap">
+            <div style={{ flexGrow: 1 }}>
+              <Card
+                key={a}
+                onClick={() => setAbilityToConfirm(a)}
+                actionElements={
+                  !disabled && abilityToConfirm === a
+                    ? [
+                        <strong onClick={() => changeAbility(a, payment)}>
+                          Confirm
+                        </strong>,
+                      ]
+                    : []
+                }
+                icon={<ItemSprite item={payment} />}
+                disabled={disabled}
+                content={
+                  <div style={{ display: "flex", gap: ".5rem" }}>
+                    <strong>
+                      {a}: {disabled && ` (1 ${payment} required)`}
+                    </strong>
+                  </div>
+                }
+              />
+            </div>
+            <AbilityInfoButton abilityName={a} />
+          </Stack>
+        );
+      })}
+    </Stack>
+  );
 };

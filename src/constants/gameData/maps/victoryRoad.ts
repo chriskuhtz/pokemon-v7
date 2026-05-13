@@ -10,7 +10,6 @@ export const victoryRoad: OverworldMap = {
   foggy: true,
   tilesetUrl: "/tilesets/newMasterSheet.png",
   questMenuAvailable: true,
-  encounterGroupLimit: 6,
   tileMap: {
     baseLayer: [
       [

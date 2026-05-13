@@ -37,7 +37,17 @@ export const startingSaveFileKuma: SaveFile = {
     luredWithBerries: [],
     damageRecord: 0,
   },
-  farm: { plants: [] },
+  farm: {
+    plants: [],
+    trees: [
+      "oran-berry",
+      "pecha-berry",
+      "chesto-berry",
+      "cheri-berry",
+      undefined,
+      undefined,
+    ],
+  },
   campUpgrades: baseCampUpgrades,
   pokedex: emptyPokedex,
 };

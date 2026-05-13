@@ -155,12 +155,14 @@ export const interactWithFunction = ({
 
   if (data.type === "EMPTY_APRICORN_TREE") {
     addMultipleMessages([
+      { message: `Its a ${data.apricorn} tree` },
       { message: "The Apricorns will need some time to grow" },
     ]);
     return;
   }
   if (data.type === "EMPTY_BERRY_TREE") {
     addMultipleMessages([
+      { message: `Its a ${data.berry} tree` },
       { message: "The Berries will need some time to grow" },
     ]);
     return;

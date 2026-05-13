@@ -89,7 +89,7 @@ export const lookerLine: Occupant[] = [
     quest: "defeat team galactic in ilex forest",
     conditionFunction: (s) =>
       s.campUpgrades["dragonite taxi"] &&
-      s.quests["clear out the rocket camp"] === "FULFILLED" &&
+      s.quests["clear out the rocket camp"] === "COLLECTED" &&
       s.quests["defeat team galactic in ilex forest"] === "INACTIVE",
   },
   {
@@ -109,7 +109,7 @@ export const lookerLine: Occupant[] = [
     quest: "investigate murasaki glades",
     conditionFunction: (s) =>
       s.campUpgrades["dragonite taxi"] &&
-      s.quests["defeat team galactic in ilex forest"] === "FULFILLED" &&
+      s.quests["defeat team galactic in ilex forest"] === "COLLECTED" &&
       s.quests["investigate murasaki glades"] === "INACTIVE",
   },
 ];

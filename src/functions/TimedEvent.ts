@@ -404,6 +404,7 @@ export const makeOverworldTrainerfromStaticTrainerEvent = (
       makeRandomTeam({
         xp: staticTrainer.xp,
         type: staticTrainer.pokemonType,
+        adjustmentFactor: 0.8,
       }),
     orientation: getRandomOrientation(),
     battleTeamConfig: {

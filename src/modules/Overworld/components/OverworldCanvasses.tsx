@@ -92,7 +92,8 @@ rgba(0, 0, 0, 1) ${hasFlashlight ? 48 : 16}%
             className="fogshader"
             style={{
               marginLeft: "-100dvw",
-              width: "300dvw",
+              paddingRight: "100dvw",
+              width: "500dvw",
               height: height * baseSize,
               top: -location.y * baseSize,
               left: -location.x * baseSize,

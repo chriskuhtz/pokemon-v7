@@ -7,7 +7,6 @@ import { LocationContext } from "../../../hooks/LocationProvider";
 import { BaseSizeProvider } from "../../../hooks/useBaseSize";
 import { useGetBattleTeam } from "../../../hooks/useGetBattleTeam";
 import { useLeaveBattle } from "../../../hooks/useLeaveBattle";
-import { MessageQueueContext } from "../../../hooks/useMessageQueue";
 import { SaveFileContext } from "../../../hooks/useSaveFile";
 import { useShader } from "../../../hooks/useShader";
 import { Challenger } from "../../../interfaces/Challenger";
@@ -20,9 +19,6 @@ export const BattleLoader = ({
 }: {
   challenger: Challenger;
 }): JSX.Element => {
-  const { latestMessage, addMessage, addMultipleMessages } =
-    useContext(MessageQueueContext);
-
   const { res: battleOpponents } = useGetBattleTeam(
     challenger.team,
     challenger.battleTeamConfig ?? {
@@ -105,7 +101,6 @@ export const BattleLoader = ({
         }}
       >
         <BattleOverview
-          leave={leave}
           opponents={battleOpponents}
           team={battleTeam}
           fightersPerSide={getMiddleOfThree([
@@ -119,9 +114,6 @@ export const BattleLoader = ({
           inventory={saveFile.bag}
           challengerId={challenger.id}
           trainer={challenger.trainer}
-          latestMessage={latestMessage}
-          addMessage={addMessage}
-          addMultipleMessages={addMultipleMessages}
           challengerType={challenger.type}
         />
       </div>

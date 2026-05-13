@@ -1,5 +1,4 @@
 import { useCallback, useContext, useMemo } from "react";
-import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
 import { calculateLevelData } from "../../../functions/calculateLevelData";
 import { determineWildPokemon } from "../../../functions/determineWildPokemon";
 import { getRandomPokemonName } from "../../../functions/getRandomPokemonId";
@@ -34,7 +33,6 @@ export const useStartEncounter = () => {
 
   return useCallback(
     (stepsTaken: number, type: "WATER" | "GROUND") => {
-      const map = mapsRecord[location.mapId];
       let shinyFactor = 1;
 
       if (saveFile.bag["shiny-charm"] > 1) {
@@ -60,10 +58,7 @@ export const useStartEncounter = () => {
         currentDistortionSwarm: distortionSwarm,
         internalDex: gameData.internalDex,
         maxBattleSize: Math.min(
-          ...[
-            healthyPlayerTeam,
-            map.encounterGroupLimit ?? gameData.defaultBattleSize,
-          ],
+          ...[healthyPlayerTeam, gameData.defaultBattleSize],
         ),
       });
 

@@ -108,9 +108,13 @@ export const PokemonStorage = ({
         if (!search) {
           return true;
         }
-        if (s.name.includes(search)) {
+        if (
+          s.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()) ||
+          s.ability.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+        ) {
           return true;
         }
+
         return false;
       }),
     [search, stored],

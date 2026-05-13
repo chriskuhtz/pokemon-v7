@@ -7,6 +7,16 @@ interface ChangelogEntryData {
 
 const changelogData: ChangelogEntryData[] = [
   {
+    version: "0.73",
+    listOfChanges: [
+      "fixes and balances from playtesting",
+      "nerfed random overworld trainers",
+      "trees plantable at farm",
+      "Search by ability name in Pokemon Storage",
+      "gain xp when defeating pokemon, not just at the end of battle",
+    ],
+  },
+  {
     version: "0.72",
     listOfChanges: ["fixes and balances from playtesting"],
   },
