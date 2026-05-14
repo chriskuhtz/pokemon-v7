@@ -23,9 +23,8 @@ export const determineCaptureSuccess = (
   const { level } = calculateLevelData(target.xp, target.growthRate);
   const targetTypes = getTypeNames(target);
 
-  const catchBoostBase = isCollector ? 3 : 1;
-  const catchBoostFactor =
-    catchBoostBase +
+  let catchBoostFactor =
+    1 +
     Object.entries(catchBoosts).reduce((sum, [type, boost]) => {
       if (targetTypes.includes(type as PokemonType)) {
         return sum + boost;
@@ -33,6 +32,9 @@ export const determineCaptureSuccess = (
       return sum;
     }, 0) *
       0.1;
+  if (isCollector) {
+    catchBoostFactor += 0.2;
+  }
 
   //between 1 and 0, lower health, better chance
   const healthfactor = 1 - (target.stats.hp - target.damage) / target.stats.hp;

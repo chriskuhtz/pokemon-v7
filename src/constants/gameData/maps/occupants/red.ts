@@ -13,10 +13,11 @@ import { trickXP } from "../../../baseConstants";
 export const redId = "trainer red";
 const redTeam = (s: SaveFile): OwnedPokemon[] => {
   const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
+  const xpWithVariance = () => (0.7 + Math.random() * 0.3) * highestXpOnTeam;
 
   const charmander = makeChallengerPokemon({
     name: "charmander",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "blaze",
     fixedAbility: true,
@@ -32,7 +33,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const bulbasaur = makeChallengerPokemon({
     name: "bulbasaur",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "overgrow",
     fixedAbility: true,
@@ -50,7 +51,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const squirtle = makeChallengerPokemon({
     name: "squirtle",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "rock-head",
     fixedAbility: true,
@@ -67,7 +68,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const charmeleon = makeChallengerPokemon({
     name: "charmeleon",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "blaze",
     fixedAbility: true,
@@ -85,7 +86,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const ivysaur = makeChallengerPokemon({
     name: "ivysaur",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "relaxed",
     ability: "overgrow",
     fixedAbility: true,
@@ -103,7 +104,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const wartortle = makeChallengerPokemon({
     name: "wartortle",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "rock-head",
     fixedAbility: true,
@@ -121,7 +122,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const charizard = makeChallengerPokemon({
     name: "charizard",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "modest",
     ability: "blaze",
     fixedAbility: true,
@@ -139,7 +140,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const venusaur = makeChallengerPokemon({
     name: "venusaur",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "relaxed",
     ability: "overgrow",
     fixedAbility: true,
@@ -157,7 +158,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const blastoise = makeChallengerPokemon({
     name: "blastoise",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "rock-head",
     fixedAbility: true,
@@ -175,7 +176,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const tauros = makeChallengerPokemon({
     name: "tauros",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "moxie",
     fixedAbility: true,
@@ -190,7 +191,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const dragonite = makeChallengerPokemon({
     name: "dragonite",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "hospitality",
     fixedAbility: true,
@@ -209,7 +210,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
 
   const machamp = makeChallengerPokemon({
     name: "machamp",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "iron-fist",
     fixedAbility: true,
@@ -227,7 +228,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const alakazam = makeChallengerPokemon({
     name: "alakazam",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "modest",
     ability: "serene-grace",
     fixedAbility: true,
@@ -244,7 +245,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const scyther = makeChallengerPokemon({
     name: "scyther",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "technician",
     fixedAbility: true,
@@ -262,7 +263,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const slowbro = makeChallengerPokemon({
     name: "slowbro",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "quiet",
     ability: "adaptability",
     fixedAbility: true,
@@ -280,7 +281,7 @@ const redTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const raichu = makeChallengerPokemon({
     name: "raichu",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "naive",
     ability: "lightning-rod",
     fixedAbility: true,

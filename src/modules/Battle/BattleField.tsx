@@ -36,12 +36,13 @@ import { ControlBar } from "./components/ControlBar";
 import { EnemyLane } from "./components/EnemyLane";
 import { PlayerLane } from "./components/PlayerLane";
 import { RefillHandling } from "./components/RefillHandling";
+import { applyRewardsToTeam } from "./functions/applyRewardsToTeam";
 import { checkAndHandleFainting } from "./functions/handleFainting";
 import { useBattleFieldEffects } from "./hooks/useBattleFieldEffects";
 import { useBattleTerrain } from "./hooks/useBattleTerrain";
 import { useBattleWeather } from "./hooks/useBattleWeather";
 import { useChooseAction } from "./hooks/useChooseAction";
-import { applyRewardsToTeam, useEndBattle } from "./hooks/useEndBattle";
+import { useEndBattle } from "./hooks/useEndBattle";
 import { useHandleAction } from "./hooks/useHandleAction/useHandleAction";
 
 export const BattleField = ({
@@ -573,7 +574,14 @@ export const BattleField = ({
         setBattleStep("REFILLING");
       } else {
         const { rewardedTeam: updatedTeam, messages: collectedMessages } =
-          applyRewardsToTeam(team, faintedOpps, false, false, false, false);
+          applyRewardsToTeam(
+            team,
+            faintedOpps,
+            saveFile.trait === "competitor",
+            isTrainerBattle,
+            !!saveFile.settings?.expShareActive,
+            !!saveFile.settings?.doubleXpRates,
+          );
         addMultipleMessages(
           collectedMessages.map((m, i) => ({
             message: m.message,
@@ -598,7 +606,17 @@ export const BattleField = ({
         setPokemon(mons);
       }
     }
-  }, [addMultipleMessages, battleStep, latestMessage, opponents, team]);
+  }, [
+    addMultipleMessages,
+    battleStep,
+    isTrainerBattle,
+    latestMessage,
+    opponents,
+    saveFile.settings?.doubleXpRates,
+    saveFile.settings?.expShareActive,
+    saveFile.trait,
+    team,
+  ]);
   // Refill playerSide
   useEffect(() => {
     if (battleStep === "REFILLING" && !teamCanRefill && !opponentCanRefill) {

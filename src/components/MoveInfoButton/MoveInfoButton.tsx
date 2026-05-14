@@ -56,7 +56,10 @@ export const MoveInfoButton = ({ movename }: { movename: MoveName }) => {
 
   return (
     <IoMdInformationCircleOutline
-      onClick={() => setSkip(false)}
+      onClick={(e) => {
+        e.stopPropagation();
+        setSkip(false);
+      }}
       size={battleSpriteSize}
     />
   );

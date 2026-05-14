@@ -8,6 +8,7 @@ import { EmptyStatObject } from "../../../../interfaces/StatObject";
 
 const giovanniTeam = (s: SaveFile) => {
   const xp = getHighestXpOnTeam(s.pokemon);
+
   return [
     makeChallengerPokemon({
       name: "nidoking",

@@ -13,10 +13,11 @@ import { trickXP } from "../../../baseConstants";
 export const hughId = "trainer hugh";
 const hughTeam = (s: SaveFile): OwnedPokemon[] => {
   const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
+  const xpWithVariance = () => (0.7 + Math.random() * 0.3) * highestXpOnTeam;
 
   const tepig = makeChallengerPokemon({
     name: "tepig",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "blaze",
     fixedAbility: true,
@@ -32,7 +33,7 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const pignite = makeChallengerPokemon({
     name: "pignite",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "blaze",
     fixedAbility: true,
@@ -49,7 +50,7 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const emboar = makeChallengerPokemon({
     name: "emboar",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "blaze",
     fixedAbility: true,
@@ -67,7 +68,7 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const rufflet = makeChallengerPokemon({
     name: "rufflet",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "sniper",
     fixedAbility: true,
@@ -82,7 +83,7 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const braviary = makeChallengerPokemon({
     name: "braviary",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "sniper",
     fixedAbility: true,
@@ -100,7 +101,7 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const axew = makeChallengerPokemon({
     name: "axew",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "inner-focus",
     fixedAbility: true,
@@ -116,7 +117,7 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const fraxure = makeChallengerPokemon({
     name: "fraxure",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "inner-focus",
     fixedAbility: true,
@@ -134,7 +135,7 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const haxorus = makeChallengerPokemon({
     name: "haxorus",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "inner-focus",
     fixedAbility: true,
@@ -152,7 +153,7 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const golett = makeChallengerPokemon({
     name: "golett",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "iron-fist",
     fixedAbility: true,
@@ -167,7 +168,7 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const golurk = makeChallengerPokemon({
     name: "golurk",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "iron-fist",
     fixedAbility: true,
@@ -185,7 +186,7 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const gothitelle = makeChallengerPokemon({
     name: "gothitelle",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "sassy",
     ability: "adaptability",
     fixedAbility: true,
@@ -202,7 +203,7 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const serperior = makeChallengerPokemon({
     name: "serperior",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "sassy",
     ability: "sharpness",
     fixedAbility: true,
@@ -219,7 +220,7 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const samurott = makeChallengerPokemon({
     name: "samurott",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "sassy",
     ability: "technician",
     fixedAbility: true,
@@ -237,7 +238,7 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const scolipede = makeChallengerPokemon({
     name: "scolipede",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "supreme-overlord",
     fixedAbility: true,
@@ -254,7 +255,7 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const conkeldurr = makeChallengerPokemon({
     name: "conkeldurr",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "iron-fist",
     fixedAbility: true,
