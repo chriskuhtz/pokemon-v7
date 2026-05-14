@@ -1,5 +1,6 @@
 import { ArrayHelpers } from "../../../../functions/ArrayHelpers";
 import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
+import { getPercentageEVfromXp } from "../../../../functions/getPercentageEVfromXp";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import { Occupant, OverworldTrainer } from "../../../../interfaces/Occupant";
@@ -12,9 +13,9 @@ import { trickXP } from "../../../baseConstants";
 
 export const nId = "trainer n";
 const nTeam = (s: SaveFile): OwnedPokemon[] => {
-  const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
+  const xp = getHighestXpOnTeam(s.pokemon);
 
-  const xpWithVariance = () => (0.7 + Math.random() * 0.3) * highestXpOnTeam;
+  const xpWithVariance = () => (0.7 + Math.random() * 0.3) * xp;
 
   const zorua = makeChallengerPokemon({
     name: "zorua",
@@ -27,8 +28,8 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
     firstMove: { name: "bite", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const zoroark = makeChallengerPokemon({
@@ -44,8 +45,8 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "slash", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const sandile = makeChallengerPokemon({
@@ -59,8 +60,8 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
     firstMove: { name: "bite", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const krokorok = makeChallengerPokemon({
@@ -76,8 +77,8 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "ice-fang", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const krookodile = makeChallengerPokemon({
@@ -94,8 +95,8 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "thunder-fang", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const darumaka = makeChallengerPokemon({
@@ -109,8 +110,8 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
     firstMove: { name: "ember", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const darmanitan = makeChallengerPokemon({
@@ -125,8 +126,8 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
     secondMove: { name: "flare-blitz", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const scrafty = makeChallengerPokemon({
@@ -142,8 +143,8 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "bullet-punch", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const sigilyph = makeChallengerPokemon({
@@ -159,8 +160,8 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "psychic", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      defense: 252,
-      "special-defense": 252,
+      defense: getPercentageEVfromXp(xp),
+      "special-defense": getPercentageEVfromXp(xp),
     },
   });
   const ferrothorn = makeChallengerPokemon({
@@ -177,8 +178,8 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "ingrain", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      defense: 252,
-      "special-defense": 252,
+      defense: getPercentageEVfromXp(xp),
+      "special-defense": getPercentageEVfromXp(xp),
     },
   });
   const hydreigon = makeChallengerPokemon({
@@ -194,8 +195,8 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "poison-fang", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      defense: 252,
-      attack: 252,
+      defense: getPercentageEVfromXp(xp),
+      attack: getPercentageEVfromXp(xp),
     },
   });
   const volcarona = makeChallengerPokemon({
@@ -211,8 +212,8 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "signal-beam", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      defense: 252,
-      attack: 252,
+      defense: getPercentageEVfromXp(xp),
+      attack: getPercentageEVfromXp(xp),
     },
   });
   const bouffalant = makeChallengerPokemon({
@@ -227,15 +228,15 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
     secondMove: { name: "reversal", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      speed: 252,
-      attack: 252,
+      speed: getPercentageEVfromXp(xp),
+      attack: getPercentageEVfromXp(xp),
     },
   });
 
-  if (highestXpOnTeam < 8000) {
+  if (xp < 8000) {
     return [zorua, sandile, darumaka];
   }
-  if (highestXpOnTeam < 46656) {
+  if (xp < 46656) {
     return [zoroark, krokorok, darumaka];
   }
 
@@ -251,19 +252,19 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
     bouffalant,
   ];
 
-  if (highestXpOnTeam === trickXP) {
+  if (xp === trickXP) {
     return possibilities;
   }
   const team: OwnedPokemon[] = [];
 
   const numberOfMembers = () => {
-    if (highestXpOnTeam < 50 * 50 * 50) {
+    if (xp < 50 * 50 * 50) {
       return 3;
     }
-    if (highestXpOnTeam < 60 * 60 * 60) {
+    if (xp < 60 * 60 * 60) {
       return 4;
     }
-    if (highestXpOnTeam < 70 * 70 * 70) {
+    if (xp < 70 * 70 * 70) {
       return 5;
     }
 

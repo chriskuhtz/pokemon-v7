@@ -9,6 +9,7 @@ import {
 import { getMiddleOfThree } from "../../functions/getMiddleOfThree";
 import { GameDataContext } from "../../hooks/useGameData";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
+import { useNavigate } from "../../hooks/useNavigate";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 export const BagLimitIcon = () => {
   const gameData = useContext(GameDataContext);
@@ -19,6 +20,7 @@ export const BagLimitIcon = () => {
     [saveFile],
   );
 
+  const navigate = useNavigate();
   const limit = getBagLimit(saveFile, gameData);
 
   const actualpercentage = (totalAmount / limit) * 100;
@@ -35,6 +37,8 @@ export const BagLimitIcon = () => {
       onClick={() =>
         addMessage({
           message: `${100 - Number(percentage)}% Bag Capacity available`,
+          onRemoval: () => navigate("OVERWORLD", "BAG"),
+          needsNoConfirmation: true,
         })
       }
       style={{ position: "relative" }}

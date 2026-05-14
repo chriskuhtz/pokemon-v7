@@ -1,5 +1,6 @@
 import { ArrayHelpers } from "../../../../functions/ArrayHelpers";
 import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
+import { getPercentageEVfromXp } from "../../../../functions/getPercentageEVfromXp";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import { Occupant, OverworldTrainer } from "../../../../interfaces/Occupant";
@@ -12,8 +13,8 @@ import { trickXP } from "../../../baseConstants";
 
 export const silverId = "trainer silver";
 const silverTeam = (s: SaveFile): OwnedPokemon[] => {
-  const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
-  const xpWithVariance = () => (0.7 + Math.random() * 0.3) * highestXpOnTeam;
+  const xp = getHighestXpOnTeam(s.pokemon);
+  const xpWithVariance = () => (0.7 + Math.random() * 0.3) * xp;
 
   const totodile = makeChallengerPokemon({
     name: "totodile",
@@ -28,8 +29,8 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "water-gun", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const croconaw = makeChallengerPokemon({
@@ -46,8 +47,8 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "waterfall", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const feraligatr = makeChallengerPokemon({
@@ -64,8 +65,8 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "waterfall", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const hoothoot = makeChallengerPokemon({
@@ -80,8 +81,8 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
     secondMove: { name: "hypnosis", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const noctowl = makeChallengerPokemon({
@@ -98,8 +99,8 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "calm-mind", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      "special-attack": 252,
-      "special-defense": 252,
+      "special-attack": getPercentageEVfromXp(xp),
+      "special-defense": getPercentageEVfromXp(xp),
     },
   });
   const tyrogue = makeChallengerPokemon({
@@ -114,8 +115,8 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
     secondMove: { name: "bulk-up", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      defense: 252,
-      attack: 252,
+      defense: getPercentageEVfromXp(xp),
+      attack: getPercentageEVfromXp(xp),
     },
   });
   const hitmontop = makeChallengerPokemon({
@@ -132,8 +133,8 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "drain-punch", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      defense: 252,
-      attack: 252,
+      defense: getPercentageEVfromXp(xp),
+      attack: getPercentageEVfromXp(xp),
     },
   });
   const flaaffy = makeChallengerPokemon({
@@ -148,8 +149,8 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
     secondMove: { name: "tail-glow", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      "special-attack": 252,
-      defense: 252,
+      "special-attack": getPercentageEVfromXp(xp),
+      defense: getPercentageEVfromXp(xp),
     },
   });
   const ampharos = makeChallengerPokemon({
@@ -165,8 +166,8 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "dragon-pulse", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      "special-attack": 252,
-      defense: 252,
+      "special-attack": getPercentageEVfromXp(xp),
+      defense: getPercentageEVfromXp(xp),
     },
   });
   const houndoom = makeChallengerPokemon({
@@ -182,8 +183,8 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "crunch", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      "special-attack": 252,
-      attack: 252,
+      "special-attack": getPercentageEVfromXp(xp),
+      attack: getPercentageEVfromXp(xp),
     },
   });
   const tyranitar = makeChallengerPokemon({
@@ -199,8 +200,8 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "crunch", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      "special-attack": 252,
-      attack: 252,
+      "special-attack": getPercentageEVfromXp(xp),
+      attack: getPercentageEVfromXp(xp),
     },
   });
   const espeon = makeChallengerPokemon({
@@ -216,8 +217,8 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "recover", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      "special-attack": 252,
-      speed: 252,
+      "special-attack": getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const meganium = makeChallengerPokemon({
@@ -234,8 +235,8 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "ingrain", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      "special-defense": 252,
-      defense: 252,
+      "special-defense": getPercentageEVfromXp(xp),
+      defense: getPercentageEVfromXp(xp),
     },
   });
   const typhlosion = makeChallengerPokemon({
@@ -251,8 +252,8 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "volt-tackle", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      defense: 252,
+      attack: getPercentageEVfromXp(xp),
+      defense: getPercentageEVfromXp(xp),
     },
   });
   const skarmory = makeChallengerPokemon({
@@ -268,15 +269,15 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "steel-wing", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
 
-  if (highestXpOnTeam < 8000) {
+  if (xp < 8000) {
     return [totodile, tyrogue, hoothoot];
   }
-  if (highestXpOnTeam < 46656) {
+  if (xp < 46656) {
     return [croconaw, noctowl, flaaffy, tyrogue];
   }
 
@@ -293,19 +294,19 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
     skarmory,
   ];
 
-  if (highestXpOnTeam === trickXP) {
+  if (xp === trickXP) {
     return possibilities;
   }
   const team: OwnedPokemon[] = [];
 
   const numberOfMembers = () => {
-    if (highestXpOnTeam < 50 * 50 * 50) {
+    if (xp < 50 * 50 * 50) {
       return 3;
     }
-    if (highestXpOnTeam < 60 * 60 * 60) {
+    if (xp < 60 * 60 * 60) {
       return 4;
     }
-    if (highestXpOnTeam < 70 * 70 * 70) {
+    if (xp < 70 * 70 * 70) {
       return 5;
     }
 

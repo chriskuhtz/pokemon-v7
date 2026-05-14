@@ -1,5 +1,6 @@
 import { CampUpgrade } from "../constants/gameData/campUpgrades";
 import { PokemonName } from "../constants/pokemonNames";
+import { TimeOfDay } from "../functions/getTimeOfDay";
 import { KumaQuestName } from "../versions/kuma/questsRecord";
 import { BadgeName } from "./Badge";
 import { Inventory } from "./Inventory";
@@ -49,4 +50,5 @@ export interface Quest {
   conditionFunction: (saveFile: SaveFile) => boolean;
   targetPokemon?: PokemonName[];
   targetRoute?: MapId;
+  timeOfDay?: TimeOfDay;
 }

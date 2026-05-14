@@ -1,4 +1,5 @@
 import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
+import { getPercentageEVfromXp } from "../../../../functions/getPercentageEVfromXp";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import { OverworldTrainer } from "../../../../interfaces/Occupant";
@@ -22,8 +23,8 @@ const giovanniTeam = (s: SaveFile) => {
       thirdMove: { name: "fire-punch", usedPP: 0 },
       effortValues: {
         ...EmptyStatObject,
-        attack: 252,
-        speed: 252,
+        attack: getPercentageEVfromXp(xp),
+        speed: getPercentageEVfromXp(xp),
       },
     }),
     makeChallengerPokemon({
@@ -40,8 +41,8 @@ const giovanniTeam = (s: SaveFile) => {
       fourthMove: { name: "light-screen", usedPP: 0 },
       effortValues: {
         ...EmptyStatObject,
-        "special-attack": 252,
-        speed: 252,
+        "special-attack": getPercentageEVfromXp(xp),
+        speed: getPercentageEVfromXp(xp),
       },
     }),
     makeChallengerPokemon({
@@ -57,8 +58,8 @@ const giovanniTeam = (s: SaveFile) => {
       thirdMove: { name: "return", usedPP: 0 },
       effortValues: {
         ...EmptyStatObject,
-        attack: 252,
-        speed: 252,
+        attack: getPercentageEVfromXp(xp),
+        speed: getPercentageEVfromXp(xp),
       },
     }),
     makeChallengerPokemon({
@@ -72,8 +73,8 @@ const giovanniTeam = (s: SaveFile) => {
       firstMove: { name: "super-power", usedPP: 0 },
       effortValues: {
         ...EmptyStatObject,
-        attack: 252,
-        speed: 252,
+        attack: getPercentageEVfromXp(xp),
+        speed: getPercentageEVfromXp(xp),
       },
     }),
     makeChallengerPokemon({
@@ -88,8 +89,8 @@ const giovanniTeam = (s: SaveFile) => {
       secondMove: { name: "return", usedPP: 0 },
       effortValues: {
         ...EmptyStatObject,
-        attack: 252,
-        speed: 252,
+        attack: getPercentageEVfromXp(xp),
+        speed: getPercentageEVfromXp(xp),
       },
     }),
     makeChallengerPokemon({
@@ -106,8 +107,8 @@ const giovanniTeam = (s: SaveFile) => {
       fourthMove: { name: "dark-pulse", usedPP: 0 },
       effortValues: {
         ...EmptyStatObject,
-        "special-attack": 252,
-        speed: 252,
+        "special-attack": getPercentageEVfromXp(xp),
+        speed: getPercentageEVfromXp(xp),
       },
     }),
   ];

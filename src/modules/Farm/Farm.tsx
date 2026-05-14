@@ -24,16 +24,14 @@ import { useFarm } from "./hooks/useFarm";
 export const Farm = (): JSX.Element => {
   const navigate = useNavigate();
 
-  const [activePage, setActivePage] = useState<string | undefined>(
-    "MULCH INFO",
-  );
+  const [activePage, setActivePage] = useState<string | undefined>("PLANTS");
   return (
     <Page headline="Farm" goBack={() => navigate("FARM", "OVERWORLD")}>
       <SelectionBar
         options={[
-          { key: "MULCH INFO", label: "MULCH INFO" },
           { key: "PLANTS", label: "PLANTS" },
           { key: "TREES", label: "TREES" },
+          { key: "MULCH INFO", label: "MULCH INFO" },
         ]}
         select={setActivePage}
         selected={activePage}

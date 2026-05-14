@@ -6,7 +6,9 @@ import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 import { battleSpriteSize } from "../../constants/baseConstants";
 import { typeColors } from "../../constants/typeColors";
 import { getRewardItemsForQuest } from "../../functions/getRewardForQuest";
+import { getTimeOfDay } from "../../functions/getTimeOfDay";
 import { replaceRouteName } from "../../functions/replaceRouteName";
+import { LocationContext } from "../../hooks/LocationProvider";
 import { useFulfillQuest } from "../../hooks/useFulfillQuest";
 import { useQuests } from "../../hooks/useQuests";
 import { SaveFileContext } from "../../hooks/useSaveFile";
@@ -22,8 +24,11 @@ import {
   KumaQuestsRecord,
 } from "../../versions/kuma/questsRecord";
 export const Quests = ({ goBack }: { goBack: () => void }) => {
-  const [filter, setFilter] = useState<QuestCategory | "FULFILLED">();
+  const [filter, setFilter] = useState<
+    QuestCategory | "FULFILLED" | "CURRENT"
+  >();
   const { saveFile } = useContext(SaveFileContext);
+  const { location } = useContext(LocationContext);
   const fulfillQuest = useFulfillQuest();
 
   const { all } = useQuests();
@@ -54,7 +59,7 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
     <Page headline={"Quests:"} goBack={goBack}>
       <Stack mode="column">
         <SelectionBar
-          options={["FULFILLED", ...questCategories].map((op) => ({
+          options={["CURRENT", "FULFILLED", ...questCategories].map((op) => ({
             key: op,
             label: op,
           }))}
@@ -70,6 +75,12 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
           const inFilter = () => {
             if (!filter) {
               return true;
+            }
+            if (filter === "CURRENT") {
+              return (
+                quest.targetRoute === location.mapId &&
+                (!quest.timeOfDay || quest.timeOfDay === getTimeOfDay())
+              );
             }
             if (filter === "FULFILLED") {
               return status === "FULFILLED";

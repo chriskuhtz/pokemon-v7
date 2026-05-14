@@ -1,4 +1,5 @@
 import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
+import { getPercentageEVfromXp } from "../../../../functions/getPercentageEVfromXp";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import {
@@ -27,8 +28,8 @@ const chrisTeam = (s: SaveFile) => {
       fourthMove: { name: "low-kick", usedPP: 0 },
       effortValues: {
         ...EmptyStatObject,
-        attack: 252,
-        speed: 252,
+        attack: getPercentageEVfromXp(xp),
+        speed: getPercentageEVfromXp(xp),
       },
     }),
     makeChallengerPokemon({
@@ -44,8 +45,8 @@ const chrisTeam = (s: SaveFile) => {
       fourthMove: { name: "ice-punch", usedPP: 0 },
       effortValues: {
         ...EmptyStatObject,
-        attack: 252,
-        speed: 252,
+        attack: getPercentageEVfromXp(xp),
+        speed: getPercentageEVfromXp(xp),
       },
     }),
     makeChallengerPokemon({
@@ -59,8 +60,8 @@ const chrisTeam = (s: SaveFile) => {
       xp,
       effortValues: {
         ...EmptyStatObject,
-        "special-attack": 252,
-        speed: 252,
+        "special-attack": getPercentageEVfromXp(xp),
+        speed: getPercentageEVfromXp(xp),
       },
     }),
     makeChallengerPokemon({
@@ -74,8 +75,8 @@ const chrisTeam = (s: SaveFile) => {
       xp,
       effortValues: {
         ...EmptyStatObject,
-        attack: 252,
-        speed: 252,
+        attack: getPercentageEVfromXp(xp),
+        speed: getPercentageEVfromXp(xp),
       },
     }),
     makeChallengerPokemon({
@@ -91,8 +92,8 @@ const chrisTeam = (s: SaveFile) => {
       fourthMove: { name: "fire-fang", usedPP: 0 },
       effortValues: {
         ...EmptyStatObject,
-        attack: 252,
-        speed: 252,
+        attack: getPercentageEVfromXp(xp),
+        speed: getPercentageEVfromXp(xp),
       },
     }),
     makeChallengerPokemon({
@@ -108,8 +109,8 @@ const chrisTeam = (s: SaveFile) => {
       fourthMove: { name: "cosmic-power", usedPP: 0 },
       effortValues: {
         ...EmptyStatObject,
-        "special-defense": 252,
-        "special-attack": 252,
+        "special-defense": getPercentageEVfromXp(xp),
+        "special-attack": getPercentageEVfromXp(xp),
       },
     }),
   ];

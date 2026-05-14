@@ -7,6 +7,14 @@ interface ChangelogEntryData {
 
 const changelogData: ChangelogEntryData[] = [
   {
+    version: "0.75",
+    listOfChanges: [
+      "fixes and balances from playtesting",
+      "New Quest filter 'current'",
+      "Strong Trainers gain EV based on your level, not perfect at low levels",
+    ],
+  },
+  {
     version: "0.74",
     listOfChanges: [
       "fixes and balances from playtesting",

@@ -1,5 +1,6 @@
 import { ArrayHelpers } from "../../../../functions/ArrayHelpers";
 import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
+import { getPercentageEVfromXp } from "../../../../functions/getPercentageEVfromXp";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import { Occupant, OverworldTrainer } from "../../../../interfaces/Occupant";
@@ -12,8 +13,8 @@ import { trickXP } from "../../../baseConstants";
 
 export const hughId = "trainer hugh";
 const hughTeam = (s: SaveFile): OwnedPokemon[] => {
-  const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
-  const xpWithVariance = () => (0.7 + Math.random() * 0.3) * highestXpOnTeam;
+  const xp = getHighestXpOnTeam(s.pokemon);
+  const xpWithVariance = () => (0.7 + Math.random() * 0.3) * xp;
 
   const tepig = makeChallengerPokemon({
     name: "tepig",
@@ -27,8 +28,8 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
     secondMove: { name: "stomp", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const pignite = makeChallengerPokemon({
@@ -44,8 +45,8 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "bulk-up", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const emboar = makeChallengerPokemon({
@@ -62,8 +63,8 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "cross-chop", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const rufflet = makeChallengerPokemon({
@@ -77,8 +78,8 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
     firstMove: { name: "aerial-ace", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const braviary = makeChallengerPokemon({
@@ -95,8 +96,8 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "body-slam", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const axew = makeChallengerPokemon({
@@ -111,8 +112,8 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
     secondMove: { name: "dragon-claw", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const fraxure = makeChallengerPokemon({
@@ -129,8 +130,8 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "night-slash", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const haxorus = makeChallengerPokemon({
@@ -147,8 +148,8 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "night-slash", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const golett = makeChallengerPokemon({
@@ -162,8 +163,8 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
     firstMove: { name: "shadow-punch", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const golurk = makeChallengerPokemon({
@@ -180,8 +181,8 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "ice-punch", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const gothitelle = makeChallengerPokemon({
@@ -197,8 +198,8 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "psychic", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      "special-defense": 252,
-      defense: 252,
+      "special-defense": getPercentageEVfromXp(xp),
+      defense: getPercentageEVfromXp(xp),
     },
   });
   const serperior = makeChallengerPokemon({
@@ -214,8 +215,8 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "leaf-blade", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      "special-defense": 252,
-      defense: 252,
+      "special-defense": getPercentageEVfromXp(xp),
+      defense: getPercentageEVfromXp(xp),
     },
   });
   const samurott = makeChallengerPokemon({
@@ -232,8 +233,8 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "shadow-sneak", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const scolipede = makeChallengerPokemon({
@@ -249,8 +250,8 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "cross-poison", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const conkeldurr = makeChallengerPokemon({
@@ -267,15 +268,15 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "mach-punch", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      defense: 252,
-      attack: 252,
+      defense: getPercentageEVfromXp(xp),
+      attack: getPercentageEVfromXp(xp),
     },
   });
 
-  if (highestXpOnTeam < 8000) {
+  if (xp < 8000) {
     return [tepig, rufflet, axew];
   }
-  if (highestXpOnTeam < 46656) {
+  if (xp < 46656) {
     return [pignite, rufflet, fraxure, golett];
   }
 
@@ -290,19 +291,19 @@ const hughTeam = (s: SaveFile): OwnedPokemon[] => {
     conkeldurr,
   ];
 
-  if (highestXpOnTeam === trickXP) {
+  if (xp === trickXP) {
     return [...possibilities, scolipede];
   }
   const team: OwnedPokemon[] = [];
 
   const numberOfMembers = () => {
-    if (highestXpOnTeam < 50 * 50 * 50) {
+    if (xp < 50 * 50 * 50) {
       return 2;
     }
-    if (highestXpOnTeam < 60 * 60 * 60) {
+    if (xp < 60 * 60 * 60) {
       return 3;
     }
-    if (highestXpOnTeam < 70 * 70 * 70) {
+    if (xp < 70 * 70 * 70) {
       return 4;
     }
 
