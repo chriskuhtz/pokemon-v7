@@ -213,8 +213,16 @@ export const PokemonStorage = ({
                     </strong>
                   </Chip>
                 }
-                secondPlanetUrl={getItemUrl(pokemon.ball)}
-                thirdPlanetUrl={heldItem ? getItemUrl(heldItem) : undefined}
+                secondPlanetUrl={`/typeIcons/${internalDex[
+                  pokemon.name
+                ].types.at(0)}.png`}
+                thirdPlanetUrl={
+                  internalDex[pokemon.name].types.at(1)
+                    ? `/typeIcons/${internalDex[pokemon.name].types.at(1)}.png`
+                    : undefined
+                }
+                fourthPlanetUrl={getItemUrl(pokemon.ball)}
+                fifthPlanetUrl={heldItem ? getItemUrl(heldItem) : undefined}
                 key={pokemon.id}
                 onClick={() => {
                   if (team.length === 1) {

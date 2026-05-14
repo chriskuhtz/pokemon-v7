@@ -13,10 +13,11 @@ import { trickXP } from "../../../baseConstants";
 export const silverId = "trainer silver";
 const silverTeam = (s: SaveFile): OwnedPokemon[] => {
   const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
+  const xpWithVariance = () => (0.7 + Math.random() * 0.3) * highestXpOnTeam;
 
   const totodile = makeChallengerPokemon({
     name: "totodile",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "strong-jaw",
     fixedAbility: true,
@@ -33,7 +34,7 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const croconaw = makeChallengerPokemon({
     name: "croconaw",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "moxie",
     fixedAbility: true,
@@ -51,7 +52,7 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const feraligatr = makeChallengerPokemon({
     name: "feraligatr",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "moxie",
     fixedAbility: true,
@@ -69,7 +70,7 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const hoothoot = makeChallengerPokemon({
     name: "hoothoot",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "big-pecks",
     fixedAbility: true,
@@ -85,7 +86,7 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const noctowl = makeChallengerPokemon({
     name: "noctowl",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "battle-armor",
     fixedAbility: true,
@@ -103,7 +104,7 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const tyrogue = makeChallengerPokemon({
     name: "tyrogue",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "bold",
     ability: "iron-fist",
     fixedAbility: true,
@@ -119,7 +120,7 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const hitmontop = makeChallengerPokemon({
     name: "hitmontop",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "bold",
     ability: "iron-fist",
     fixedAbility: true,
@@ -137,7 +138,7 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const flaaffy = makeChallengerPokemon({
     name: "flaaffy",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "lonely",
     ability: "cotton-down",
     fixedAbility: true,
@@ -153,7 +154,7 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const ampharos = makeChallengerPokemon({
     name: "ampharos",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "lonely",
     ability: "cotton-down",
     fixedAbility: true,
@@ -170,7 +171,7 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const houndoom = makeChallengerPokemon({
     name: "houndoom",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "lonely",
     ability: "dark-aura",
     fixedAbility: true,
@@ -187,7 +188,7 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const tyranitar = makeChallengerPokemon({
     name: "tyranitar",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "intimidate",
     fixedAbility: true,
@@ -204,7 +205,7 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const espeon = makeChallengerPokemon({
     name: "espeon",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "mild",
     ability: "synchronize",
     fixedAbility: true,
@@ -221,7 +222,7 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const meganium = makeChallengerPokemon({
     name: "meganium",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "mild",
     ability: "overgrow",
     fixedAbility: true,
@@ -239,7 +240,7 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const typhlosion = makeChallengerPokemon({
     name: "typhlosion",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "flame-body",
     fixedAbility: true,
@@ -256,7 +257,7 @@ const silverTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const skarmory = makeChallengerPokemon({
     name: "skarmory",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "hustle",
     fixedAbility: true,

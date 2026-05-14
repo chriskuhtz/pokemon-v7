@@ -13,10 +13,11 @@ import { trickXP } from "../../../baseConstants";
 export const cynthiaId = "champion cynthia";
 const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
   const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
+  const xpWithVariance = () => (0.7 + Math.random() * 0.3) * highestXpOnTeam;
 
   const gible = makeChallengerPokemon({
     name: "gible",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "sand-stream",
     fixedAbility: true,
@@ -33,7 +34,7 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const gabite = makeChallengerPokemon({
     name: "gabite",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "sand-stream",
     fixedAbility: true,
@@ -51,7 +52,7 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const garchomp = makeChallengerPokemon({
     name: "garchomp",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "sand-stream",
     fixedAbility: true,
@@ -69,7 +70,7 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const otherGarchomp = makeChallengerPokemon({
     name: "garchomp",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "sand-force",
     fixedAbility: true,
@@ -87,7 +88,7 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const riolu = makeChallengerPokemon({
     name: "riolu",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "iron-fist",
     fixedAbility: true,
@@ -104,7 +105,7 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const lucario = makeChallengerPokemon({
     name: "lucario",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "mega-launcher",
     fixedAbility: true,
@@ -122,7 +123,7 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const togepi = makeChallengerPokemon({
     name: "togepi",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "hospitality",
     fixedAbility: true,
@@ -139,7 +140,7 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const togetic = makeChallengerPokemon({
     name: "togetic",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "hospitality",
     fixedAbility: true,
@@ -157,7 +158,7 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const togekiss = makeChallengerPokemon({
     name: "togekiss",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "hospitality",
     fixedAbility: true,
@@ -175,7 +176,7 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const spiritomb = makeChallengerPokemon({
     name: "spiritomb",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "unnerve",
     fixedAbility: true,
@@ -193,7 +194,7 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const roserade = makeChallengerPokemon({
     name: "roserade",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "poison-point",
     fixedAbility: true,
@@ -210,7 +211,7 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const gastrodon = makeChallengerPokemon({
     name: "gastrodon",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "water-absorb",
     fixedAbility: true,
@@ -228,7 +229,7 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const milotic = makeChallengerPokemon({
     name: "milotic",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "drizzle",
     fixedAbility: true,
@@ -246,7 +247,7 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const glaceon = makeChallengerPokemon({
     name: "glaceon",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "clear-body",
     fixedAbility: true,
@@ -265,7 +266,7 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
 
   const pory = makeChallengerPokemon({
     name: "porygon-z",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "clear-body",
     fixedAbility: true,

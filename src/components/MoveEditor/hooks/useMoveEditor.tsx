@@ -17,7 +17,7 @@ export const useMoveEditor = ({
   ownedPokemon: OwnedPokemon;
 }) => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
-  const { addMessage } = useContext(MessageQueueContext);
+  const { addMultipleMessages } = useContext(MessageQueueContext);
 
   const { internalDex } = useContext(GameDataContext);
 
@@ -28,32 +28,43 @@ export const useMoveEditor = ({
       if (saveFile.bag[payment] < 1) {
         return;
       }
-      patchSaveFileReducer({
-        bag: joinInventories(saveFile.bag, { [payment]: 1 }, true),
-        pokemon: saveFile.pokemon.map((p) => {
-          if (p.id === ownedPokemon.id) {
-            const moves = [
-              ...getMovesArray(ownedPokemon),
-              { name: move, usedPP: 0 },
-            ];
 
-            return {
-              ...mapMovesArrayToPokemon(ownedPokemon, moves),
-              unlockedMoves: [...ownedPokemon.unlockedMoves, move],
-            };
-          }
+      console.log("called");
 
-          return p;
-        }),
-      });
-      addMessage({
-        message: `${ownedPokemon.name} learned ${move}`,
-        needsNoConfirmation: true,
-      });
-      setMoveToConfirm(undefined);
+      addMultipleMessages([
+        {
+          message: `${ownedPokemon.name} learned ${move}`,
+          needsNoConfirmation: true,
+        },
+        {
+          message: `paid 1 ${payment} to the move tutor`,
+          needsNoConfirmation: true,
+          onRemoval: () => {
+            patchSaveFileReducer({
+              bag: joinInventories(saveFile.bag, { [payment]: 1 }, true),
+              pokemon: saveFile.pokemon.map((p) => {
+                if (p.id === ownedPokemon.id) {
+                  const moves = [
+                    ...getMovesArray(ownedPokemon),
+                    { name: move, usedPP: 0 },
+                  ];
+
+                  return {
+                    ...mapMovesArrayToPokemon(ownedPokemon, moves),
+                    unlockedMoves: [...ownedPokemon.unlockedMoves, move],
+                  };
+                }
+
+                return p;
+              }),
+            });
+            setMoveToConfirm(undefined);
+          },
+        },
+      ]);
     },
     [
-      addMessage,
+      addMultipleMessages,
       ownedPokemon,
       patchSaveFileReducer,
       saveFile.bag,

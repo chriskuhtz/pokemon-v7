@@ -4,7 +4,8 @@ import { battleSpriteSize } from "../../../constants/baseConstants";
 import { MoveName } from "../../../constants/movesCheckList";
 import { getCurrentPP } from "../../../functions/getCurrentPP";
 import { getMovesArray } from "../../../functions/getMovesArray";
-import { BattlePokemon } from "../../../interfaces/BattlePokemon";
+import { BattleMove, BattlePokemon } from "../../../interfaces/BattlePokemon";
+import { PokemonType } from "../../../interfaces/PokemonType";
 import { Card } from "../../../uiComponents/Card/Card";
 import { MoveInfoButton } from "../../MoveInfoButton/MoveInfoButton";
 export const MovesDisplayListEntry = ({
@@ -15,6 +16,7 @@ export const MovesDisplayListEntry = ({
   activateMove,
   deActivateMove,
   battlePokemon,
+  small,
 }: {
   o: MoveName;
   battlePokemon: BattlePokemon;
@@ -23,12 +25,107 @@ export const MovesDisplayListEntry = ({
   reorder: (dir: "UP" | "DOWN") => void;
   activateMove: () => void;
   deActivateMove: () => void;
+  small: boolean;
 }) => {
   const battleMove = getMovesArray(battlePokemon).find((b) => b.name === o);
   if (!battleMove) {
     return <></>;
   }
   const currentPP = getCurrentPP(battlePokemon, battleMove);
+
+  if (small) {
+    return (
+      <SmallMoveDisplayEntry
+        typeName={battleMove.data.type.name}
+        moveName={o}
+      />
+    );
+  }
+  return (
+    <BigMoveDisplayEntry
+      battleMove={battleMove}
+      o={o}
+      onlyCurrent={onlyCurrent}
+      currentMoves={currentMoves}
+      reorder={reorder}
+      activateMove={activateMove}
+      deActivateMove={deActivateMove}
+      currentPP={currentPP}
+    />
+  );
+};
+
+export const SmallMoveDisplayEntry = ({
+  moveName,
+  typeName,
+  onClick,
+  additionalInfo,
+  additionalIcon,
+}: {
+  moveName: MoveName;
+  typeName: PokemonType;
+  onClick?: () => void;
+  additionalInfo?: React.JSX.Element;
+  additionalIcon?: React.JSX.Element;
+}) => {
+  return (
+    <div
+      onClick={onClick}
+      style={{
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "1rem",
+        }}
+      >
+        <img height={battleSpriteSize} src={`/typeIcons/${typeName}.png`} />
+        {additionalIcon}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+          }}
+        >
+          <strong>
+            {moveName}
+            {additionalInfo ? ":" : ""}
+          </strong>
+          {additionalInfo}
+        </div>
+      </div>
+
+      <MoveInfoButton movename={moveName} />
+    </div>
+  );
+};
+
+const BigMoveDisplayEntry = ({
+  o,
+  onlyCurrent,
+  currentMoves,
+  reorder,
+  activateMove,
+  deActivateMove,
+  battleMove,
+  currentPP,
+}: {
+  o: MoveName;
+  battleMove: BattleMove;
+  onlyCurrent: boolean;
+  currentMoves: MoveName[];
+  reorder: (dir: "UP" | "DOWN") => void;
+  activateMove: () => void;
+  deActivateMove: () => void;
+  currentPP: number;
+}) => {
   return (
     <div
       key={o}

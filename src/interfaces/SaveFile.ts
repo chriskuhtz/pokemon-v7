@@ -157,11 +157,11 @@ export const traitBoni: Record<CharacterTrait, string> = {
     "Explorers often find more items than others and lose fewer Items when they retreat",
 };
 export const traitQuestRewardFactor: Record<CharacterTrait, number> = {
-  chef: 1.3,
-  gardener: 1.3,
-  competitor: 1.3,
-  collector: 1.3,
-  explorer: 1.1,
+  chef: 1.1,
+  gardener: 1.1,
+  competitor: 1.1,
+  collector: 1.1,
+  explorer: 1.05,
 };
 
 export interface SaveFile {

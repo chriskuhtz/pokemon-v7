@@ -1,100 +1,106 @@
-import { useCallback, useContext, useMemo } from 'react';
-import { MoveName } from '../../../constants/movesCheckList';
-import { getMovesArray } from '../../../functions/getMovesArray';
+import { useCallback, useContext, useEffect, useMemo } from "react";
+import { MoveName } from "../../../constants/movesCheckList";
+import { getMovesArray } from "../../../functions/getMovesArray";
 import {
-	withActivatedMove,
-	withChangedMoves,
-	withDeActivatedMove,
-} from '../../../functions/withChangedMoves';
-import { useGetBattleTeam } from '../../../hooks/useGetBattleTeam';
-import { SaveFileContext } from '../../../hooks/useSaveFile';
+  withActivatedMove,
+  withChangedMoves,
+  withDeActivatedMove,
+} from "../../../functions/withChangedMoves";
+import { useGetBattleTeam } from "../../../hooks/useGetBattleTeam";
+import { SaveFileContext } from "../../../hooks/useSaveFile";
 import {
-	OwnedPokemon,
-	OwnedPokemonMove,
-} from '../../../interfaces/OwnedPokemon';
+  OwnedPokemon,
+  OwnedPokemonMove,
+} from "../../../interfaces/OwnedPokemon";
 
 export const useMovesDisplay = ({
-	ownedPokemon,
+  ownedPokemon,
 }: {
-	ownedPokemon: OwnedPokemon;
+  ownedPokemon: OwnedPokemon;
 }) => {
-	const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
-	const { res: battleMon, invalidate } = useGetBattleTeam([ownedPokemon], {});
+  const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
+  const { res: battleMon, invalidate } = useGetBattleTeam([ownedPokemon], {});
 
-	const currentMoves = useMemo(
-		() => getMovesArray(ownedPokemon),
-		[ownedPokemon]
-	);
+  useEffect(() => {
+    if (battleMon && ownedPokemon && ownedPokemon.id !== battleMon.at(0)?.id) {
+      invalidate();
+    }
+  }, [ownedPokemon, invalidate, battleMon]);
 
-	const updateMoves = useCallback(
-		(id: string, newMoves: OwnedPokemonMove[]) => {
-			patchSaveFileReducer({
-				pokemon: saveFile.pokemon.map((p) => {
-					if (p.id === id) {
-						return withChangedMoves(p, newMoves);
-					}
+  const currentMoves = useMemo(
+    () => getMovesArray(ownedPokemon),
+    [ownedPokemon],
+  );
 
-					return p;
-				}),
-			});
-		},
-		[patchSaveFileReducer, saveFile.pokemon]
-	);
+  const updateMoves = useCallback(
+    (id: string, newMoves: OwnedPokemonMove[]) => {
+      patchSaveFileReducer({
+        pokemon: saveFile.pokemon.map((p) => {
+          if (p.id === id) {
+            return withChangedMoves(p, newMoves);
+          }
 
-	const reorder = (dir: 'UP' | 'DOWN', name: MoveName) => {
-		const focused = currentMoves.find((m) => m.name === name);
-		const index = currentMoves.findIndex((m) => m.name === name);
-		if (!focused) {
-			return;
-		}
+          return p;
+        }),
+      });
+    },
+    [patchSaveFileReducer, saveFile.pokemon],
+  );
 
-		if (index === 0 && dir == 'UP') {
-			return;
-		}
-		if (index === currentMoves.length - 1 && dir == 'DOWN') {
-			return;
-		}
-		const displaced =
-			dir === 'UP' ? currentMoves[index - 1] : currentMoves[index + 1];
+  const reorder = (dir: "UP" | "DOWN", name: MoveName) => {
+    const focused = currentMoves.find((m) => m.name === name);
+    const index = currentMoves.findIndex((m) => m.name === name);
+    if (!focused) {
+      return;
+    }
 
-		const newMoves = currentMoves.map((p) => {
-			if (p === displaced) {
-				return focused;
-			}
-			if (p === focused) {
-				return displaced;
-			}
-			return p;
-		});
+    if (index === 0 && dir == "UP") {
+      return;
+    }
+    if (index === currentMoves.length - 1 && dir == "DOWN") {
+      return;
+    }
+    const displaced =
+      dir === "UP" ? currentMoves[index - 1] : currentMoves[index + 1];
 
-		updateMoves(ownedPokemon.id, newMoves);
-	};
+    const newMoves = currentMoves.map((p) => {
+      if (p === displaced) {
+        return focused;
+      }
+      if (p === focused) {
+        return displaced;
+      }
+      return p;
+    });
 
-	const activateMove = (name: MoveName) => {
-		patchSaveFileReducer({
-			pokemon: saveFile.pokemon.map((p) => {
-				if (p.id === ownedPokemon.id) {
-					return withActivatedMove(ownedPokemon, name);
-				}
+    updateMoves(ownedPokemon.id, newMoves);
+  };
 
-				return p;
-			}),
-		});
-		invalidate();
-	};
-	const deActivateMove = (move: OwnedPokemonMove) => {
-		patchSaveFileReducer({
-			pokemon: saveFile.pokemon.map((p) => {
-				if (p.id === ownedPokemon.id) {
-					return withDeActivatedMove(ownedPokemon, move);
-				}
+  const activateMove = (name: MoveName) => {
+    patchSaveFileReducer({
+      pokemon: saveFile.pokemon.map((p) => {
+        if (p.id === ownedPokemon.id) {
+          return withActivatedMove(ownedPokemon, name);
+        }
 
-				return p;
-			}),
-		});
-		invalidate();
-	};
-	const b = battleMon?.at(0);
+        return p;
+      }),
+    });
+    invalidate();
+  };
+  const deActivateMove = (move: OwnedPokemonMove) => {
+    patchSaveFileReducer({
+      pokemon: saveFile.pokemon.map((p) => {
+        if (p.id === ownedPokemon.id) {
+          return withDeActivatedMove(ownedPokemon, move);
+        }
 
-	return { b, deActivateMove, activateMove, reorder, currentMoves };
+        return p;
+      }),
+    });
+    invalidate();
+  };
+  const b = battleMon?.at(0);
+
+  return { b, deActivateMove, activateMove, reorder, currentMoves };
 };

@@ -1,8 +1,16 @@
 import { useContext, useMemo, useState } from "react";
+import { BstSectionConnected } from "../../components/BstSection/BstSection";
 import { MoveEditor } from "../../components/MoveEditor/MoveEditor";
-import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
+import { MovesDisplay } from "../../components/MovesDisplay/MovesDisplay";
+import { getPokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
+import { calculateLevelData } from "../../functions/calculateLevelData";
+import { getHeldItem } from "../../functions/getHeldItem";
+import { getItemUrl } from "../../functions/getItemUrl";
+import { GameDataContext } from "../../hooks/useGameData";
 import { useNavigate } from "../../hooks/useNavigate";
 import { SaveFileContext } from "../../hooks/useSaveFile";
+import { Chip } from "../../uiComponents/Chip/Chip";
+import { IconSolarSystem } from "../../uiComponents/IconSolarSystem/IconSolarSystem";
 import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
@@ -12,6 +20,8 @@ export const MoveTutor = () => {
     () => saveFile.pokemon.filter((p) => p.onTeam),
     [saveFile],
   );
+  const gameData = useContext(GameDataContext);
+  const { internalDex } = gameData;
 
   const [id, setId] = useState<string>(team[0].id);
 
@@ -31,24 +41,64 @@ export const MoveTutor = () => {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr 1fr",
+            gridTemplateColumns: "1fr 1fr 1fr",
             padding: "2rem",
             columnGap: "1rem",
+            rowGap: "1.5rem",
           }}
         >
-          {team.map((t) => (
-            <PokemonSprite
-              key={t.id}
-              onClick={() => setId(t.id)}
-              name={t.name}
-              sizeFactor={id === t.id ? 3 : 1}
-              config={{ officalArtwork: true, shiny: t.shiny }}
-            />
-          ))}
+          {team.map((t) => {
+            const heldItem = getHeldItem(t);
+            return (
+              <IconSolarSystem
+                sun={{
+                  url: getPokemonSprite(t.name, { shiny: t.shiny }),
+                }}
+                firstPlanet={
+                  <Chip>
+                    <strong>
+                      Lvl {calculateLevelData(t.xp, t.growthRate).level}
+                    </strong>
+                  </Chip>
+                }
+                secondPlanetUrl={`/typeIcons/${internalDex[t.name].types.at(
+                  0,
+                )}.png`}
+                thirdPlanetUrl={
+                  internalDex[t.name].types.at(1)
+                    ? `/typeIcons/${internalDex[t.name].types.at(1)}.png`
+                    : undefined
+                }
+                fourthPlanetUrl={getItemUrl(t.ball)}
+                fifthPlanetUrl={heldItem ? getItemUrl(heldItem) : undefined}
+                key={t.id}
+                onClick={() => {
+                  setId(t.id);
+                }}
+              />
+            );
+          })}
         </div>
+        <h2>{pokemonWithId?.name}</h2>
         {pokemonWithId && (
           <>
-            <h2>Learn new Moves:</h2>
+            <h3>Attack Stats:</h3>
+            <BstSectionConnected
+              showOnly={["attack", "special-attack"]}
+              ownedPokemon={pokemonWithId}
+              hideExplanation
+            />
+          </>
+        )}
+        {pokemonWithId && (
+          <>
+            <h3>Current Moves:</h3>
+            <MovesDisplay ownedPokemon={pokemonWithId} onlyCurrent small />
+          </>
+        )}
+        {pokemonWithId && (
+          <>
+            <h3>Learn new Moves:</h3>
             <MoveEditor ownedPokemon={pokemonWithId} />
           </>
         )}

@@ -104,7 +104,7 @@ export function TargetSelection({
           portraitMode
             ? {
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr",
+                gridTemplateColumns: "1fr",
                 gap: ".25rem",
               }
             : {
@@ -114,33 +114,70 @@ export function TargetSelection({
               }
         }
       >
-        {!["ether", "max-ether"].includes(chosenAction) &&
-          targets.map((t) => (
-            <Card
-              icon={
-                <PokemonSprite
-                  sizeFactor={0.8}
-                  name={t.name}
-                  config={{
-                    shiny: t.shiny,
-                    back: isPlayerPokemon(t, playerId),
+        {!["ether", "max-ether"].includes(chosenAction) && (
+          <>
+            {targets
+              .filter((t) => !isPlayerPokemon(t, playerId))
+              .map((t) => (
+                <Card
+                  icon={
+                    <PokemonSprite
+                      sizeFactor={0.8}
+                      name={t.name}
+                      config={{
+                        shiny: t.shiny,
+                        back: false,
+                      }}
+                    />
+                  }
+                  content={`Opponent ${t.data.name}`}
+                  key={t.id}
+                  onClick={() => {
+                    chooseAction({
+                      userId: id,
+                      actionName: chosenAction,
+                      targetId: t.id,
+                    });
+                    setChosenAction(undefined);
                   }}
+                  actionElements={[]}
+                  disabled={disabled}
                 />
-              }
-              content={`${isPlayerPokemon(t, playerId) ? "Your" : "Opponent"} ${t.data.name}`}
-              key={t.id}
-              onClick={() => {
-                chooseAction({
-                  userId: id,
-                  actionName: chosenAction,
-                  targetId: t.id,
-                });
-                setChosenAction(undefined);
-              }}
-              actionElements={[]}
-              disabled={disabled}
-            />
-          ))}
+              ))}
+            {}
+
+            {targets
+              .filter((t) => isPlayerPokemon(t, playerId))
+              .map((t) => (
+                <Card
+                  icon={
+                    <PokemonSprite
+                      sizeFactor={0.8}
+                      name={t.name}
+                      config={{
+                        shiny: t.shiny,
+                        back: true,
+                      }}
+                    />
+                  }
+                  content={`Your ${t.data.name}`}
+                  key={t.id}
+                  onClick={() => {
+                    chooseAction({
+                      userId: id,
+                      actionName: chosenAction,
+                      targetId: t.id,
+                    });
+                    setChosenAction(undefined);
+                  }}
+                  actionElements={[]}
+                  disabled={disabled}
+                />
+              ))}
+            {}
+          </>
+        )}
+
         {["ether", "max-ether"].includes(chosenAction) &&
           targets.map((t) => {
             const moves = getMovesArray(t);

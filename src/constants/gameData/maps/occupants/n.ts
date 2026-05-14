@@ -14,14 +14,16 @@ export const nId = "trainer n";
 const nTeam = (s: SaveFile): OwnedPokemon[] => {
   const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
 
+  const xpWithVariance = () => (0.7 + Math.random() * 0.3) * highestXpOnTeam;
+
   const zorua = makeChallengerPokemon({
     name: "zorua",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "cute-charm",
     fixedAbility: true,
     happiness: 255,
-    heldItemName: "black-glasses",
+    heldItemName: "oran-berry",
     firstMove: { name: "bite", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
@@ -31,7 +33,7 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const zoroark = makeChallengerPokemon({
     name: "zoroark",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "dark-aura",
     fixedAbility: true,
@@ -48,12 +50,12 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const sandile = makeChallengerPokemon({
     name: "sandile",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "strong-jaw",
     fixedAbility: true,
     happiness: 255,
-    heldItemName: "black-glasses",
+    heldItemName: "berry-juice",
     firstMove: { name: "bite", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
@@ -63,7 +65,7 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const krokorok = makeChallengerPokemon({
     name: "krokorok",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "strong-jaw",
     fixedAbility: true,
@@ -80,7 +82,7 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const krookodile = makeChallengerPokemon({
     name: "krookodile",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "strong-jaw",
     fixedAbility: true,
@@ -98,7 +100,7 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const darumaka = makeChallengerPokemon({
     name: "darumaka",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "drought",
     fixedAbility: true,
@@ -113,7 +115,7 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const darmanitan = makeChallengerPokemon({
     name: "darmanitan-standard",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "drought",
     fixedAbility: true,
@@ -129,7 +131,7 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const scrafty = makeChallengerPokemon({
     name: "darmanitan-standard",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "inner-focus",
     fixedAbility: true,
@@ -146,7 +148,7 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const sigilyph = makeChallengerPokemon({
     name: "sigilyph",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "tinted-lens",
     fixedAbility: true,
@@ -163,7 +165,7 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const ferrothorn = makeChallengerPokemon({
     name: "ferrothorn",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "technician",
     fixedAbility: true,
@@ -181,7 +183,7 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const hydreigon = makeChallengerPokemon({
     name: "hydreigon",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "strong-jaw",
     fixedAbility: true,
@@ -198,7 +200,7 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const volcarona = makeChallengerPokemon({
     name: "volcarona",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "flame-body",
     fixedAbility: true,
@@ -215,7 +217,7 @@ const nTeam = (s: SaveFile): OwnedPokemon[] => {
   });
   const bouffalant = makeChallengerPokemon({
     name: "bouffalant",
-    xp: highestXpOnTeam,
+    xp: xpWithVariance(),
     nature: "adamant",
     ability: "rock-head",
     fixedAbility: true,

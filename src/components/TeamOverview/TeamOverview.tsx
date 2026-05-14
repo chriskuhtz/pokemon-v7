@@ -63,8 +63,8 @@ const TeamMemberInOverview = ({
 
   const color = percentageBasedColor(percentage).color;
 
-  const borderColor = mon.primaryAilment
-    ? getPrimaryAilmentColor(mon.primaryAilment.type)
+  const borderColor = pokemon.primaryAilment
+    ? getPrimaryAilmentColor(pokemon.primaryAilment.type)
     : percentageBasedColor(percentage).color;
   return (
     <div style={{ position: "relative" }}>
