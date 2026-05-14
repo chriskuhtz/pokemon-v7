@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { MessageBanner } from "../../components/MessageBanner/MessageBanner";
 import { Sprite } from "../../components/Sprite/Sprite";
 import { portraitMode } from "../../constants/baseConstants";
-import { LocationContext } from "../../hooks/LocationProvider";
 import { BaseSizeProvider } from "../../hooks/useBaseSize";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { SpriteEnum } from "../../interfaces/SpriteEnum";
@@ -10,7 +9,6 @@ import { Overworld } from "../../modules/Overworld/Overworld";
 
 export const LoadingScreen = () => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
-  const { resetLocation } = useContext(LocationContext);
   const [showReturnButton, setShowReturnButton] = useState<boolean>(false);
 
   useEffect(() => {
@@ -23,7 +21,6 @@ export const LoadingScreen = () => {
       ...saveFile,
       meta: { activeTab: "OVERWORLD" },
     });
-    resetLocation();
   };
 
   return (

@@ -116,65 +116,67 @@ export function TargetSelection({
       >
         {!["ether", "max-ether"].includes(chosenAction) && (
           <>
-            {targets
-              .filter((t) => !isPlayerPokemon(t, playerId))
-              .map((t) => (
-                <Card
-                  icon={
-                    <PokemonSprite
-                      sizeFactor={0.8}
-                      name={t.name}
-                      config={{
-                        shiny: t.shiny,
-                        back: false,
-                      }}
-                    />
-                  }
-                  content={`Opponent ${t.data.name}`}
-                  key={t.id}
-                  onClick={() => {
-                    chooseAction({
-                      userId: id,
-                      actionName: chosenAction,
-                      targetId: t.id,
-                    });
-                    setChosenAction(undefined);
-                  }}
-                  actionElements={[]}
-                  disabled={disabled}
-                />
-              ))}
-            {}
-
-            {targets
-              .filter((t) => isPlayerPokemon(t, playerId))
-              .map((t) => (
-                <Card
-                  icon={
-                    <PokemonSprite
-                      sizeFactor={0.8}
-                      name={t.name}
-                      config={{
-                        shiny: t.shiny,
-                        back: true,
-                      }}
-                    />
-                  }
-                  content={`Your ${t.data.name}`}
-                  key={t.id}
-                  onClick={() => {
-                    chooseAction({
-                      userId: id,
-                      actionName: chosenAction,
-                      targetId: t.id,
-                    });
-                    setChosenAction(undefined);
-                  }}
-                  actionElements={[]}
-                  disabled={disabled}
-                />
-              ))}
-            {}
+            <div style={{ display: "flex", gap: ".25rem" }}>
+              {targets
+                .filter((t) => !isPlayerPokemon(t, playerId))
+                .map((t) => (
+                  <Card
+                    icon={
+                      <PokemonSprite
+                        sizeFactor={0.8}
+                        name={t.name}
+                        config={{
+                          shiny: t.shiny,
+                          back: false,
+                        }}
+                      />
+                    }
+                    content={`Opponent ${t.data.name}`}
+                    key={t.id}
+                    onClick={() => {
+                      chooseAction({
+                        userId: id,
+                        actionName: chosenAction,
+                        targetId: t.id,
+                      });
+                      setChosenAction(undefined);
+                    }}
+                    actionElements={[]}
+                    disabled={disabled}
+                  />
+                ))}
+              {}
+            </div>
+            <div style={{ display: "flex", gap: ".25rem" }}>
+              {targets
+                .filter((t) => isPlayerPokemon(t, playerId))
+                .map((t) => (
+                  <Card
+                    icon={
+                      <PokemonSprite
+                        sizeFactor={0.8}
+                        name={t.name}
+                        config={{
+                          shiny: t.shiny,
+                          back: true,
+                        }}
+                      />
+                    }
+                    content={`Your ${t.data.name}`}
+                    key={t.id}
+                    onClick={() => {
+                      chooseAction({
+                        userId: id,
+                        actionName: chosenAction,
+                        targetId: t.id,
+                      });
+                      setChosenAction(undefined);
+                    }}
+                    actionElements={[]}
+                    disabled={disabled}
+                  />
+                ))}
+            </div>
           </>
         )}
 

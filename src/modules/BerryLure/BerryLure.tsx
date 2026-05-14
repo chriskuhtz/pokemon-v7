@@ -202,53 +202,45 @@ export const BerryLure = () => {
       goBack={() => navigate("BERRY_LURE", "OVERWORLD")}
     >
       <Stack mode="column">
-        {availableBerries.length > 0
-          ? availableBerries.map((berry) => {
-              const lureType = Object.entries(superEffectiveSaveTable).find(
-                ([, typeBerry]) => typeBerry === berry,
-              );
+        {availableBerries.length === 0 && (
+          <Card
+            key="no-berries"
+            icon={<FaRegCircleQuestion size={battleSpriteSize} />}
+            content={
+              <div>
+                <strong>
+                  You dont have any berries that could be used as lures.
+                </strong>
+                <br />
+                <strong>
+                  The Pokemon in this area like the following berries:
+                </strong>
+              </div>
+            }
+            actionElements={[]}
+          />
+        )}
+        {possibleBerries.map((berry) => {
+          const lureType = Object.entries(superEffectiveSaveTable).find(
+            ([, typeBerry]) => typeBerry === berry,
+          );
 
-              return (
-                <Card
-                  key={berry}
-                  icon={<ItemSprite item={berry} />}
-                  onClick={() => lure(berry)}
-                  content={
-                    <h3>
-                      Put a {berry} into the lure to attract {lureType?.[0]}{" "}
-                      pokemon
-                    </h3>
-                  }
-                  actionElements={[]}
-                />
-              );
-            })
-          : [
-              <Card
-                key="no-berries"
-                icon={<FaRegCircleQuestion size={battleSpriteSize} />}
-                content={
-                  <div>
-                    <strong>
-                      You dont have any berries that could be used as lures.
-                    </strong>
-                    <br />
-                    <strong>
-                      The Pokemon in this area like the following berries:
-                    </strong>
-                    <Stack mode="row">
-                      {possibleBerries.map((p) => (
-                        <p style={{ display: "flex", alignItems: "center" }}>
-                          <ItemSprite key={p} item={p} />
-                          {p}
-                        </p>
-                      ))}
-                    </Stack>
-                  </div>
-                }
-                actionElements={[]}
-              />,
-            ]}
+          return (
+            <Card
+              key={berry}
+              disabled={!availableBerries.includes(berry)}
+              icon={<ItemSprite item={berry} />}
+              onClick={() => lure(berry)}
+              content={
+                <h3>
+                  Put a {berry} into the lure to attract {lureType?.at(0)}{" "}
+                  pokemon
+                </h3>
+              }
+              actionElements={[]}
+            />
+          );
+        })}
       </Stack>
     </Page>
   );
