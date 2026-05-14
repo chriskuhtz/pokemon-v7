@@ -69,7 +69,9 @@ export const cleanUpTimedEvents = (saveFile: SaveFile): SaveFile => {
   const dedupled: TimedEvent[] = [];
 
   update.timedEvents.forEach((event) => {
-    if (dedupled.every((dd) => dd.id !== event.id)) {
+    if (
+      dedupled.every((dd) => !(dd.id === event.id && dd.type === event.type))
+    ) {
       dedupled.push(event);
     }
   });
