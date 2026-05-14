@@ -12,8 +12,10 @@ import {
 import { canBenefitFromItem } from "../../../functions/canBenefitFromItem";
 import { canRunOrSwitch } from "../../../functions/canRunOrSwitch";
 import { getMovesArray } from "../../../functions/getMovesArray";
-import { getPlayerPokemon } from "../../../functions/getPlayerPokemon";
-import { isKO } from "../../../functions/isKo";
+import {
+  getPlayerPokemon,
+  isPlayerPokemon,
+} from "../../../functions/getPlayerPokemon";
 import { SaveFileContext } from "../../../hooks/useSaveFile";
 import { BattlePokemon } from "../../../interfaces/BattlePokemon";
 import { Inventory } from "../../../interfaces/Inventory";
@@ -106,6 +108,12 @@ export function ActionSelection({
     [battleFieldEffects, controlled],
   );
 
+  const switchInsAvailable = useMemo(() => {
+    return allTargets.find(
+      (p) => isPlayerPokemon(p, playerId) && p.status === "BENCH",
+    );
+  }, [allTargets, playerId]);
+
   return (
     <div
       style={{
@@ -139,12 +147,7 @@ export function ActionSelection({
           />
         )}
         <Card
-          disabled={
-            disabled ||
-            !runOrSwitchPossible ||
-            allTargets.filter((p) => p.ownerId === playerId && !isKO(p))
-              .length === 1
-          }
+          disabled={disabled || !runOrSwitchPossible || !switchInsAvailable}
           onClick={() => setChosenAction("SWITCH")}
           content={"Switch Pokemon"}
           actionElements={[]}
@@ -159,17 +162,16 @@ export function ActionSelection({
               content = catchingForbiddenReason;
             }
             return (
-              <button
-                style={{ display: "flex", alignItems: "center" }}
-                onClick={() => setChosenAction(item)}
+              <Card
                 key={item}
                 disabled={
                   disabled || !!(isPokeball(item) && catchingForbiddenReason)
                 }
-              >
-                <ItemSprite item={item} />
-                {content}
-              </button>
+                onClick={() => setChosenAction(item)}
+                icon={<ItemSprite item={item} />}
+                content={content}
+                actionElements={[]}
+              />
             );
           })
         ) : (
