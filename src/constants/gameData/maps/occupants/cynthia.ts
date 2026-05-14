@@ -1,5 +1,6 @@
 import { ArrayHelpers } from "../../../../functions/ArrayHelpers";
 import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
+import { getPercentageEVfromXp } from "../../../../functions/getPercentageEVfromXp";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import { Occupant, OverworldTrainer } from "../../../../interfaces/Occupant";
@@ -12,8 +13,8 @@ import { trickXP } from "../../../baseConstants";
 
 export const cynthiaId = "champion cynthia";
 const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
-  const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
-  const xpWithVariance = () => (0.7 + Math.random() * 0.3) * highestXpOnTeam;
+  const xp = getHighestXpOnTeam(s.pokemon);
+  const xpWithVariance = () => (0.7 + Math.random() * 0.3) * xp;
 
   const gible = makeChallengerPokemon({
     name: "gible",
@@ -28,8 +29,8 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "bite", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const gabite = makeChallengerPokemon({
@@ -46,8 +47,8 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "dragon-dance", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const garchomp = makeChallengerPokemon({
@@ -64,8 +65,8 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "dragon-dance", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const otherGarchomp = makeChallengerPokemon({
@@ -82,8 +83,8 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "dragon-dance", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(xp),
+      speed: getPercentageEVfromXp(xp),
     },
   });
   const riolu = makeChallengerPokemon({
@@ -99,8 +100,8 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "work-up", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      defense: 252,
+      attack: getPercentageEVfromXp(xp),
+      defense: getPercentageEVfromXp(xp),
     },
   });
   const lucario = makeChallengerPokemon({
@@ -117,8 +118,8 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "aura-sphere", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      defense: 252,
+      attack: getPercentageEVfromXp(xp),
+      defense: getPercentageEVfromXp(xp),
     },
   });
   const togepi = makeChallengerPokemon({
@@ -134,8 +135,8 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "fairy-wind", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      "special-defense": 252,
-      defense: 252,
+      "special-defense": getPercentageEVfromXp(xp),
+      defense: getPercentageEVfromXp(xp),
     },
   });
   const togetic = makeChallengerPokemon({
@@ -152,8 +153,8 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "aeroblast", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      "special-defense": 252,
-      defense: 252,
+      "special-defense": getPercentageEVfromXp(xp),
+      defense: getPercentageEVfromXp(xp),
     },
   });
   const togekiss = makeChallengerPokemon({
@@ -170,8 +171,8 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "aeroblast", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      "special-defense": 252,
-      defense: 252,
+      "special-defense": getPercentageEVfromXp(xp),
+      defense: getPercentageEVfromXp(xp),
     },
   });
   const spiritomb = makeChallengerPokemon({
@@ -188,8 +189,8 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "shadow-ball", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      "special-defense": 252,
-      defense: 252,
+      "special-defense": getPercentageEVfromXp(xp),
+      defense: getPercentageEVfromXp(xp),
     },
   });
   const roserade = makeChallengerPokemon({
@@ -205,8 +206,8 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
     thirdMove: { name: "sludge-bomb", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      "special-defense": 252,
-      "special-attack": 252,
+      "special-defense": getPercentageEVfromXp(xp),
+      "special-attack": getPercentageEVfromXp(xp),
     },
   });
   const gastrodon = makeChallengerPokemon({
@@ -223,8 +224,8 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "ice-beam", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      "special-defense": 252,
-      "special-attack": 252,
+      "special-defense": getPercentageEVfromXp(xp),
+      "special-attack": getPercentageEVfromXp(xp),
     },
   });
   const milotic = makeChallengerPokemon({
@@ -241,8 +242,8 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "ice-beam", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      "special-defense": 252,
-      "special-attack": 252,
+      "special-defense": getPercentageEVfromXp(xp),
+      "special-attack": getPercentageEVfromXp(xp),
     },
   });
   const glaceon = makeChallengerPokemon({
@@ -259,8 +260,8 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
     fourthMove: { name: "ice-beam", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      "special-defense": 252,
-      "special-attack": 252,
+      "special-defense": getPercentageEVfromXp(xp),
+      "special-attack": getPercentageEVfromXp(xp),
     },
   });
 
@@ -275,15 +276,15 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
     firstMove: { name: "hyper-beam", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      speed: 252,
-      "special-attack": 252,
+      speed: getPercentageEVfromXp(xp),
+      "special-attack": getPercentageEVfromXp(xp),
     },
   });
 
-  if (highestXpOnTeam < 8000) {
+  if (xp < 8000) {
     return [gible, riolu, togepi];
   }
-  if (highestXpOnTeam < 46656) {
+  if (xp < 46656) {
     return [gabite, riolu, togetic, spiritomb];
   }
 
@@ -299,18 +300,18 @@ const cynthiaTeam = (s: SaveFile): OwnedPokemon[] => {
     otherGarchomp,
     pory,
   ];
-  if (highestXpOnTeam === trickXP) {
+  if (xp === trickXP) {
     return possibilities;
   }
   const team: OwnedPokemon[] = [];
   const numberOfMembers = () => {
-    if (highestXpOnTeam < 50 * 50 * 50) {
+    if (xp < 50 * 50 * 50) {
       return 3;
     }
-    if (highestXpOnTeam < 60 * 60 * 60) {
+    if (xp < 60 * 60 * 60) {
       return 4;
     }
-    if (highestXpOnTeam < 70 * 70 * 70) {
+    if (xp < 70 * 70 * 70) {
       return 5;
     }
 

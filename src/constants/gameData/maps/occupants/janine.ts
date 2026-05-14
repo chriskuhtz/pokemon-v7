@@ -1,4 +1,5 @@
 import { calculateLevelData } from "../../../../functions/calculateLevelData";
+import { getPercentageEVfromXp } from "../../../../functions/getPercentageEVfromXp";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
 import {
   Occupant,
@@ -24,8 +25,8 @@ const janineTeam = () => [
     thirdMove: { name: "ice-fang", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(8000),
+      speed: getPercentageEVfromXp(8000),
     },
   }),
   makeChallengerPokemon({
@@ -41,8 +42,8 @@ const janineTeam = () => [
     thirdMove: { name: "leech-life", usedPP: 0 },
     effortValues: {
       ...EmptyStatObject,
-      attack: 252,
-      speed: 252,
+      attack: getPercentageEVfromXp(8000),
+      speed: getPercentageEVfromXp(8000),
     },
   }),
 ];
