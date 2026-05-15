@@ -8,6 +8,7 @@ import { Occupant } from "../../../../interfaces/Occupant";
 import { SaveFile } from "../../../../interfaces/SaveFile";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
 import { murasakiDragoniteTaxi } from "../../../../modules/DragoniteTaxi/DragoniteTaxi";
+import { trainerWhitney } from "./whitney";
 
 export const murasakiGladesCleared = (s: SaveFile): boolean => {
   return murasakiGladesOccupants
@@ -389,4 +390,5 @@ export const murasakiGladesOccupants: Occupant[] = [
     amount: 3,
     mapId: "murasaki-glades",
   }),
+  trainerWhitney,
 ];

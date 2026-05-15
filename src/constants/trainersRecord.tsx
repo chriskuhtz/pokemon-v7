@@ -2239,46 +2239,6 @@ export const tier5trainers: Challenger[] = [
 export const specialTrainers: Challenger[] = [
   {
     type: "TRAINER",
-    id: "Gym Leader Whitney",
-    team: [
-      makeChallengerPokemon({
-        name: "miltank",
-        xp: 125000,
-        heldItemName: "sitrus-berry",
-      }),
-      makeChallengerPokemon({
-        name: "wigglytuff",
-        xp: 125000,
-        heldItemName: "sitrus-berry",
-      }),
-      makeChallengerPokemon({
-        name: "clefable",
-        xp: 125000,
-        heldItemName: "silk-scarf",
-      }),
-      makeChallengerPokemon({
-        name: "raichu-alola",
-        xp: 125000,
-        heldItemName: "twisted-spoon",
-      }),
-      makeChallengerPokemon({
-        name: "ninetales-alola",
-        xp: 125000,
-        heldItemName: "never-melt-ice",
-      }),
-    ],
-    battleTeamConfig: { assignHeldItem: false },
-    inventory: EmptyInventory,
-    availableAfter: "catch whitney's favorite cute pokemon",
-    trainer: {
-      id: "Gym Leader Whitney",
-      sprite: SpriteEnum.whitney,
-      profilePicture:
-        "https://archives.bulbagarden.net/media/upload/2/27/VSWhitney.png",
-    },
-  },
-  {
-    type: "TRAINER",
     id: "Gym Leader Morty",
     team: [
       makeChallengerPokemon({
