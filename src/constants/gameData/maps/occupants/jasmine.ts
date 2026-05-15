@@ -57,7 +57,7 @@ export const jasmineLine: Occupant[] = [
   },
 ];
 
-const chuckTeam = (s: SaveFile) => {
+const jasmineTeam = (s: SaveFile) => {
   const xp = getHighestXpOnTeam(s.pokemon);
   const xpWithVariance = () => (0.7 + Math.random() * 0.3) * xp;
   return [
@@ -104,7 +104,7 @@ export const trainerJasmine: OverworldTrainer = {
   id: jasmineId,
   conditionFunction: (s) =>
     s.quests["defeat jasmine"] === "ACTIVE" && !occupantHandled(s, jasmineId),
-  team: chuckTeam,
+  team: jasmineTeam,
   sprite: SpriteEnum.jasmine,
   profilePicture:
     "https://archives.bulbagarden.net/media/upload/f/f2/VSJasmine.png",

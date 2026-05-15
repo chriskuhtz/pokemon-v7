@@ -1,7 +1,9 @@
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
+import { trainerPryce } from "./pryce";
 
 export const caveN1W1Occupants: OverworldMap["occupants"] = [
+  trainerPryce,
   {
     type: "ON_STEP_PORTAL",
     x: 29,

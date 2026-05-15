@@ -3,6 +3,7 @@ import { getPercentageEVfromXp } from "../../../../functions/getPercentageEVfrom
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import {
+  Occupant,
   OverworldNpc,
   OverworldTrainer,
 } from "../../../../interfaces/Occupant";
@@ -116,6 +117,10 @@ const chrisTeam = (s: SaveFile) => {
   ];
 };
 
+const chrisCondition = (s: SaveFile) => {
+  return s.quests["defeat the pokemon league"] === "COLLECTED";
+};
+
 export const champChris: OverworldTrainer = {
   type: "TRAINER",
   x: 25,
@@ -131,7 +136,24 @@ export const champChris: OverworldTrainer = {
     assignLearnsetMoves: false,
     assignNaturalAbility: false,
   },
-  conditionFunction: (s) => !occupantHandled(s, "champ-chris"),
+  conditionFunction: (s) =>
+    chrisCondition(s) && !occupantHandled(s, "champ-chris"),
+};
+const npcChris: OverworldNpc = {
+  type: "NPC",
+  x: 25,
+  y: 18,
+  orientation: "DOWN",
+  sprite: SpriteEnum.red,
+  id: "champ-chris",
+  conditionFunction: (s) => !chrisCondition(s),
+  unhandledMessage: [
+    ".",
+    "..",
+    "...",
+    "come back as a league champion",
+    "and we'll have an even match",
+  ],
 };
 
 export const rewardChris: OverworldNpc = {
@@ -149,3 +171,4 @@ export const rewardChris: OverworldNpc = {
   ],
   conditionFunction: (s) => occupantHandled(s, "champ-chris"),
 };
+export const chris: Occupant[] = [champChris, npcChris];

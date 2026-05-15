@@ -4,6 +4,7 @@ import { blaineId } from "../../../constants/gameData/maps/occupants/blaine";
 import { brockId } from "../../../constants/gameData/maps/occupants/brock";
 import { bugsyId } from "../../../constants/gameData/maps/occupants/bugsy";
 import { chuckId } from "../../../constants/gameData/maps/occupants/chuckLine";
+import { clairId } from "../../../constants/gameData/maps/occupants/clair";
 import { erikaId } from "../../../constants/gameData/maps/occupants/erika";
 import { falknerId } from "../../../constants/gameData/maps/occupants/falknerLine";
 import { garyId } from "../../../constants/gameData/maps/occupants/gary";
@@ -11,6 +12,7 @@ import { janineId } from "../../../constants/gameData/maps/occupants/janine";
 import { jasmineId } from "../../../constants/gameData/maps/occupants/jasmine";
 import { mistyId } from "../../../constants/gameData/maps/occupants/misty";
 import { mortyId } from "../../../constants/gameData/maps/occupants/mortyLine";
+import { pryceId } from "../../../constants/gameData/maps/occupants/pryce";
 import { sabrinaId } from "../../../constants/gameData/maps/occupants/sabrina";
 import { surgeId } from "../../../constants/gameData/maps/occupants/surge";
 import { whitneyId } from "../../../constants/gameData/maps/occupants/whitney";
@@ -345,10 +347,10 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
     },
     researchPoints: 50,
     conditionFunction: (s: SaveFile) => {
-      return occupantHandled(s, "Gym Leader Pryce");
+      return occupantHandled(s, pryceId);
     },
     kind: "BULLETIN",
-    requiredUpgrade: "training field 1",
+    requiredUpgrade: "buy skiing equipment",
     availableAfter: "maximize the effort values of an ice pokemon",
   },
   "defeat clair": {
@@ -372,10 +374,10 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
     },
     researchPoints: 50,
     conditionFunction: (s: SaveFile) => {
-      return occupantHandled(s, "Gym Leader Clair");
+      return occupantHandled(s, clairId);
     },
     kind: "BULLETIN",
-    requiredUpgrade: "training field 1",
+    requiredUpgrade: "swimming certification",
     availableAfter: "reach max. friendship with a dragon pokemon",
   },
 };
