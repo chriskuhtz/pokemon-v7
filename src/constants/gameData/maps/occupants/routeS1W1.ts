@@ -1,7 +1,9 @@
 import { getTraveller } from "../../../../functions/getTraveller";
 import { makeApricornTree } from "../../../../functions/makeApricornTree";
+import { makeBerryTree } from "../../../../functions/makeBerryTree";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
+import { routeS1W1Lure } from "../../../../modules/BerryLure/BerryLure";
 import { routeS1W1DragoniteTaxi } from "../../../../modules/DragoniteTaxi/DragoniteTaxi";
 import { trainerJasmine } from "./jasmine";
 import { sabrina } from "./sabrina";
@@ -128,8 +130,27 @@ export const routeS1W1Occupants: OverworldMap["occupants"] = [
     apricorn: "pink-apricorn",
     id: "pink-apricorn-s1w1-2",
   }),
+  ...makeBerryTree({
+    berry: "babiri-berry",
+    id: "babiri-tree-routeS1W1",
+    x: 35,
+    y: 8,
+  }),
+  ...makeBerryTree({
+    berry: "colbur-berry",
+    id: "colbur-tree-routeS1W1",
+    x: 30,
+    y: 12,
+  }),
+  ...makeBerryTree({
+    berry: "wacan-berry",
+    id: "wacan-tree-routeS1W1",
+    x: 9,
+    y: 7,
+  }),
   ...getTraveller("routeS1W1"),
   ...sabrina,
   ...routeS1W1DragoniteTaxi,
   trainerJasmine,
+  routeS1W1Lure,
 ];

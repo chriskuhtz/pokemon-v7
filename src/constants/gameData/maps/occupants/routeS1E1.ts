@@ -1,5 +1,6 @@
 import { getTraveller } from "../../../../functions/getTraveller";
 import { makeApricornTree } from "../../../../functions/makeApricornTree";
+import { makeBerryTree } from "../../../../functions/makeBerryTree";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
@@ -156,6 +157,24 @@ export const routeS1E1Occupants: OverworldMap["occupants"] = [
     y: 6,
     apricorn: "black-apricorn",
     id: "routeS1E1_black_tree_4",
+  }),
+  ...makeBerryTree({
+    berry: "payapa-berry",
+    id: "payapa-tree-routeS1E1",
+    x: 22,
+    y: 10,
+  }),
+  ...makeBerryTree({
+    berry: "passho-berry",
+    id: "passho-tree-routeS1E1",
+    x: 14,
+    y: 8,
+  }),
+  ...makeBerryTree({
+    berry: "roseli-berry",
+    id: "roseli-tree-routeS1E1",
+    x: 23,
+    y: 7,
   }),
   ...getTraveller("routeS1E1"),
   ...misty,

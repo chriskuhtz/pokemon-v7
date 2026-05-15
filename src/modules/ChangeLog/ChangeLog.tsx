@@ -11,6 +11,7 @@ const changelogData: ChangelogEntryData[] = [
     listOfChanges: [
       "fixes and balances from playtesting",
       "johto gym leaders are in the wild now",
+      "refactored berry trees to match lures",
     ],
   },
   {

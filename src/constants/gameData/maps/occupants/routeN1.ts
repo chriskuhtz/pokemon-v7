@@ -356,14 +356,14 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
   ...getTraveller("routeN1"),
   ...bugCatcherJimmy,
   ...makeBerryTree({
-    berry: "persim-berry",
-    id: "persim-tree-routeN1",
+    berry: "rindo-berry",
+    id: "rindo-tree-routeN1",
     x: 43,
     y: 45,
   }),
   ...makeBerryTree({
-    berry: "custap-berry",
-    id: "custap-tree-routeN1",
+    berry: "coba-berry",
+    id: "coba-tree-routeN1",
     x: 23,
     y: 7,
   }),
@@ -372,5 +372,11 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
     id: "wacan-tree-routeN1",
     x: 27,
     y: 7,
+  }),
+  ...makeBerryTree({
+    berry: "chilan-berry",
+    id: "chilan-tree-routeN1",
+    x: 10,
+    y: 9,
   }),
 ];

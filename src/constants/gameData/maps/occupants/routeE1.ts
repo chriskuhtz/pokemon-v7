@@ -250,16 +250,22 @@ export const routeE1Occupants: OverworldMap["occupants"] = [
   ...blaine,
   routeE1Lure,
   ...makeBerryTree({
-    berry: "rawst-berry",
-    id: "rawst-tree-routeE1",
+    berry: "shuca-berry",
+    id: "shuca-tree-routeE1",
     x: 46,
     y: 16,
   }),
   ...makeBerryTree({
     berry: "occa-berry",
     id: "occa-tree-routeE1",
-    x: 44,
-    y: 18,
+    x: 12,
+    y: 41,
+  }),
+  ...makeBerryTree({
+    berry: "chople-berry",
+    id: "chople-tree-routeE1",
+    x: 19,
+    y: 31,
   }),
   {
     type: "CLIMBING_STEPS",

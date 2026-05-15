@@ -31,16 +31,16 @@ export const BerryLure = () => {
   const { internalDex } = useContext(GameDataContext);
   const { addMultipleMessages } = useContext(MessageQueueContext);
 
-  const pokemon: PokemonName[] = useMemo(
+  const berryLurePokemon: PokemonName[] = useMemo(
     () => getAllBerryLureMonForRoute(location.mapId, internalDex),
     [internalDex, location.mapId],
   );
   const possibleBerries: BerryType[] = useMemo(
     () =>
-      pokemon.map(
+      berryLurePokemon.map(
         (p) => superEffectiveSaveTable[internalDex[p].types.at(0) ?? "normal"],
       ) as BerryType[],
-    [internalDex, pokemon],
+    [internalDex, berryLurePokemon],
   );
   const availableBerries: BerryType[] = useMemo(
     () => possibleBerries.filter((b) => saveFile.bag[b] > 0) as BerryType[],
@@ -277,8 +277,8 @@ export const routeS1E1Lure: OverworldBerryLure = {
 export const routeS1W1Lure: OverworldBerryLure = {
   id: "routeS1W1_berryLure",
   type: "BERRY_LURE",
-  x: 47,
-  y: 26,
+  x: 44,
+  y: 42,
   conditionFunction: (s) => s.campUpgrades["berry lure station routeS1W1"],
 };
 export const routeW1Lure: OverworldBerryLure = {
