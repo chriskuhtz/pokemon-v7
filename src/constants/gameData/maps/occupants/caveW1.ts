@@ -2,8 +2,10 @@ import { getTimeOfDay } from "../../../../functions/getTimeOfDay";
 import { makeOverworldItem } from "../../../../functions/makeOverworldItem";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
+import { trainerMorty } from "./mortyLine";
 
 export const caveW1Occupants: OverworldMap["occupants"] = [
+  trainerMorty,
   {
     type: "ON_STEP_PORTAL",
     id: "cave1 entry bottom",

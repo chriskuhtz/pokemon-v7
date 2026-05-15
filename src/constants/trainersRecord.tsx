@@ -2239,42 +2239,6 @@ export const tier5trainers: Challenger[] = [
 export const specialTrainers: Challenger[] = [
   {
     type: "TRAINER",
-    id: "Gym Leader Morty",
-    team: [
-      makeChallengerPokemon({
-        name: "trevenant",
-        xp: 125000,
-        heldItemName: "sitrus-berry",
-      }),
-      makeChallengerPokemon({ name: "shedinja", xp: 125000 }),
-      makeChallengerPokemon({
-        name: "gengar",
-        xp: 125000,
-        heldItemName: "black-sludge",
-      }),
-      makeChallengerPokemon({
-        name: "mismagius",
-        xp: 125000,
-        heldItemName: "twisted-spoon",
-      }),
-      makeChallengerPokemon({
-        name: "aegislash-blade",
-        xp: 125000,
-        heldItemName: "sitrus-berry",
-      }),
-    ],
-    inventory: EmptyInventory,
-    availableAfter: "catch Haunter and Mightyena",
-    trainer: {
-      id: "Gym Leader Morty",
-      sprite: SpriteEnum.morty,
-      profilePicture:
-        "https://archives.bulbagarden.net/media/upload/0/04/VSMorty.png",
-    },
-    battleTeamConfig: { assignHeldItem: false },
-  },
-  {
-    type: "TRAINER",
     id: "Gym Leader Chuck",
     team: [
       makeChallengerPokemon({
