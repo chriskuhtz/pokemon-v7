@@ -26,4 +26,9 @@ export const customItemDescriptions: Record<string, string> = {
   "peat-block": "used to evolve ursaring",
   "chipped-pot": "Museums might find this interesting",
   "cracked-pot": "Museums might find this interesting",
+  "shell-bell":
+    "When holder damages an opponent, holder heals by 1/8 of damage",
+  "relic-crown": "Museums might find this interesting",
+  "relic-statue": "Museums might find this interesting",
+  "big-mushroom": "Museums might find this interesting",
 };
