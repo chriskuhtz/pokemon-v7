@@ -3,6 +3,7 @@ import { makeApricornTree } from "../../../../functions/makeApricornTree";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
 import { routeS1W1DragoniteTaxi } from "../../../../modules/DragoniteTaxi/DragoniteTaxi";
+import { trainerJasmine } from "./jasmine";
 import { sabrina } from "./sabrina";
 
 export const routeS1W1Occupants: OverworldMap["occupants"] = [
@@ -130,4 +131,5 @@ export const routeS1W1Occupants: OverworldMap["occupants"] = [
   ...getTraveller("routeS1W1"),
   ...sabrina,
   ...routeS1W1DragoniteTaxi,
+  trainerJasmine,
 ];

@@ -8,6 +8,7 @@ import { erikaId } from "../../../constants/gameData/maps/occupants/erika";
 import { falknerId } from "../../../constants/gameData/maps/occupants/falknerLine";
 import { garyId } from "../../../constants/gameData/maps/occupants/gary";
 import { janineId } from "../../../constants/gameData/maps/occupants/janine";
+import { jasmineId } from "../../../constants/gameData/maps/occupants/jasmine";
 import { mistyId } from "../../../constants/gameData/maps/occupants/misty";
 import { mortyId } from "../../../constants/gameData/maps/occupants/mortyLine";
 import { sabrinaId } from "../../../constants/gameData/maps/occupants/sabrina";
@@ -317,10 +318,10 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
     },
     researchPoints: 50,
     conditionFunction: (s: SaveFile) => {
-      return occupantHandled(s, "Gym Leader Jasmine");
+      return occupantHandled(s, jasmineId);
     },
     kind: "BULLETIN",
-    requiredUpgrade: "training field 1",
+    requiredUpgrade: "swimming certification",
     availableAfter: "catch an exceptional steel pokemon for jasmine",
   },
   "defeat pryce": {
