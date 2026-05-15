@@ -25,7 +25,7 @@ export const applyRewardsToTeam = (
       ? team.filter((t) => !isKO(t)).length
       : team.filter((t) => t.participatedInBattle && !isKO(t)).length;
 
-    let baseAmount = Math.round(gainedXp / numberOfParticipants);
+    let baseAmount = gainedXp / numberOfParticipants;
 
     if (competitor) {
       return (baseAmount *= 1.2);
@@ -36,7 +36,7 @@ export const applyRewardsToTeam = (
     if (doubleXpRates) {
       baseAmount *= 2;
     }
-    return baseAmount;
+    return Math.round(baseAmount);
   };
 
   const getsRewards = (p: BattlePokemon) =>

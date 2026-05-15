@@ -281,7 +281,7 @@ export const handleDamageAttack = ({
     damage !== 0 &&
     updatedAttacker.damage !== 0
   ) {
-    const restored = Math.floor(damage / 8);
+    const restored = Math.max(Math.floor(damage / 8), 1);
 
     if (restored > 0) {
       addMessage({
