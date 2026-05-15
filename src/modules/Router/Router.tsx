@@ -1,7 +1,6 @@
 import { useContext, useMemo, useState } from "react";
 import { GameDataContext } from "../../hooks/useGameData";
 import { SaveFileContext } from "../../hooks/useSaveFile";
-import { MapId } from "../../interfaces/mapIds";
 import { RoutesType } from "../../interfaces/Routing";
 import {
   isSkierSprite,
@@ -27,7 +26,6 @@ import { Intro } from "../Intro/Intro";
 import { InventoryChest } from "../InventoryChest/InventoryChest";
 import { LabyrintSuccess } from "../LabyrinthSuccess/LabyrinthSuccess";
 import { MainMenu } from "../MainMenu/MainMenu";
-import { MapEditor } from "../MapMaker/components/MapEditor";
 import { Market } from "../Market/Market";
 import { MiltankFarm } from "../MiltankFarm/MiltankFarm";
 import { MoveTutor } from "../MoveTutor/MoveTutor";
@@ -56,7 +54,6 @@ import { Wiki } from "../Wiki/Wiki";
 export const Router = (): JSX.Element => {
   const {
     startingTab,
-
     features: { settingsEditableAtStart, settingsEditableDuringGame },
   } = useContext(GameDataContext);
 
@@ -279,12 +276,6 @@ export const Router = (): JSX.Element => {
   }
   if (activeTab === "TRAINER_NOTES") {
     return <TrainerNotes />;
-  }
-  if (activeTab.includes("MAP_MAKER")) {
-    const mapId = activeTab.slice(10) as MapId;
-    return (
-      <MapEditor mapId={mapId} goBack={() => setActiveTabReducer("MAIN")} />
-    );
   }
 
   return <Overworld />;

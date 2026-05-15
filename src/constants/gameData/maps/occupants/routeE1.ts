@@ -6,8 +6,10 @@ import { occupantHandled } from "../../../../functions/occupantHandled";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
 import { routeE1Lure } from "../../../../modules/BerryLure/BerryLure";
 import { blaine } from "./blaine";
+import { trainerChuck } from "./chuckLine";
 
 export const routeE1Occupants: OverworldMap["occupants"] = [
+  trainerChuck,
   {
     type: "ON_STEP_PORTAL",
     x: 25,
@@ -248,16 +250,22 @@ export const routeE1Occupants: OverworldMap["occupants"] = [
   ...blaine,
   routeE1Lure,
   ...makeBerryTree({
-    berry: "rawst-berry",
-    id: "rawst-tree-routeE1",
+    berry: "shuca-berry",
+    id: "shuca-tree-routeE1",
     x: 46,
     y: 16,
   }),
   ...makeBerryTree({
     berry: "occa-berry",
     id: "occa-tree-routeE1",
-    x: 44,
-    y: 18,
+    x: 12,
+    y: 41,
+  }),
+  ...makeBerryTree({
+    berry: "chople-berry",
+    id: "chople-tree-routeE1",
+    x: 19,
+    y: 31,
   }),
   {
     type: "CLIMBING_STEPS",

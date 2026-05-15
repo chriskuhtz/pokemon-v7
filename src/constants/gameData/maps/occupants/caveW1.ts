@@ -2,8 +2,10 @@ import { getTimeOfDay } from "../../../../functions/getTimeOfDay";
 import { makeOverworldItem } from "../../../../functions/makeOverworldItem";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
+import { trainerMorty } from "./mortyLine";
 
 export const caveW1Occupants: OverworldMap["occupants"] = [
+  trainerMorty,
   {
     type: "ON_STEP_PORTAL",
     id: "cave1 entry bottom",
@@ -48,8 +50,8 @@ export const caveW1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ITEM",
-    x: 7,
-    y: 38,
+    x: 4,
+    y: 17,
     item: "jaw-fossil",
     amount: 1,
     conditionFunction: (s) => !occupantHandled(s, "caveW1-jaw-fossil"),
@@ -57,8 +59,8 @@ export const caveW1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ITEM",
-    x: 35,
-    y: 45,
+    x: 40,
+    y: 26,
     item: "max-mushroom",
     amount: 1,
     conditionFunction: (s) => !occupantHandled(s, "caveW1-max-mushroom"),
@@ -83,7 +85,7 @@ export const caveW1Occupants: OverworldMap["occupants"] = [
   {
     type: "POKEMON",
     x: 41,
-    y: 12,
+    y: 8,
     orientation: "DOWN",
     dexId: 146,
     encounter: {

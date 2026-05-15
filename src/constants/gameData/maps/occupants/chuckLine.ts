@@ -1,125 +1,192 @@
+import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
+import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
+import { occupantHandled } from "../../../../functions/occupantHandled";
 import {
-	OverworldNpc,
-	OverworldPokemon,
-	Occupant,
-} from '../../../../interfaces/Occupant';
-import { SpriteEnum } from '../../../../interfaces/SpriteEnum';
+  Occupant,
+  OverworldNpc,
+  OverworldPokemon,
+  OverworldTrainer,
+} from "../../../../interfaces/Occupant";
+import { SaveFile } from "../../../../interfaces/SaveFile";
+import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
 
 const chuckBase: Omit<
-	OverworldNpc,
-	'unhandledMessage' | 'conditionFunction' | 'id'
+  OverworldNpc,
+  "unhandledMessage" | "conditionFunction" | "id"
 > = {
-	x: 29,
-	y: 28,
-	orientation: 'RIGHT',
-	type: 'NPC',
-	sprite: SpriteEnum.chuck,
+  x: 29,
+  y: 28,
+  orientation: "RIGHT",
+  type: "NPC",
+  sprite: SpriteEnum.chuck,
 };
 export const chucksMachamp: OverworldPokemon = {
-	type: 'POKEMON',
-	dialogue: ['champ'],
-	x: 29,
-	y: 29,
-	orientation: 'RIGHT',
-	dexId: 68,
-	id: 'chucks-machamp',
-	conditionFunction: (s) =>
-		s.campUpgrades['invite fighting expert chuck'] &&
-		s.quests['deal 10000 damage with one attack'] !== 'COLLECTED',
+  type: "POKEMON",
+  dialogue: ["champ"],
+  x: 29,
+  y: 29,
+  orientation: "RIGHT",
+  dexId: 68,
+  id: "chucks-machamp",
+  conditionFunction: (s) =>
+    s.campUpgrades["invite fighting expert chuck"] &&
+    s.quests["deal 10000 damage with one attack"] !== "COLLECTED",
 };
 export const chuckLine: Occupant[] = [
-	{
-		...chuckBase,
-		id: 'chuck_2',
-		unhandledMessage: [
-			'My Name is Chuck',
-			'My Pokemon and I eat 7000 calories per day',
-			'Then we hit the gym together',
-		],
-		handledMessage: ['Do you even lift?'],
-		quest: 'deal 50 damage with one attack',
-		conditionFunction: (s) =>
-			s.campUpgrades['invite fighting expert chuck'] &&
-			s.quests['deal 50 damage with one attack'] !== 'COLLECTED',
-	},
-	{
-		...chuckBase,
-		id: 'chuck_3',
-		unhandledMessage: ['Lets hit an even hundo'],
-		handledMessage: ['Do you even lift?'],
-		quest: 'deal 100 damage with one attack',
-		conditionFunction: (s) =>
-			s.campUpgrades['invite fighting expert chuck'] &&
-			s.quests['deal 50 damage with one attack'] === 'COLLECTED' &&
-			s.quests['deal 100 damage with one attack'] !== 'COLLECTED',
-	},
-	{
-		...chuckBase,
-		id: 'chuck_4',
-		unhandledMessage: ['Getting impressive, dawg'],
-		handledMessage: ['Do you even lift?'],
-		quest: 'deal 200 damage with one attack',
-		conditionFunction: (s) =>
-			s.campUpgrades['invite fighting expert chuck'] &&
-			s.quests['deal 100 damage with one attack'] === 'COLLECTED' &&
-			s.quests['deal 200 damage with one attack'] !== 'COLLECTED',
-	},
-	{
-		...chuckBase,
-		id: 'chuck_5',
-		unhandledMessage: ['Most Trainers never reach this damage output'],
-		handledMessage: ['Do you even lift?'],
-		quest: 'deal 500 damage with one attack',
-		conditionFunction: (s) =>
-			s.campUpgrades['invite fighting expert chuck'] &&
-			s.quests['deal 200 damage with one attack'] === 'COLLECTED' &&
-			s.quests['deal 500 damage with one attack'] !== 'COLLECTED',
-	},
-	{
-		...chuckBase,
-		id: 'chuck_6',
-		unhandledMessage: ['Only the elite few deal 4 digit damage'],
-		handledMessage: ['Do you even lift?'],
-		quest: 'deal 1000 damage with one attack',
-		conditionFunction: (s) =>
-			s.campUpgrades['invite fighting expert chuck'] &&
-			s.quests['deal 500 damage with one attack'] === 'COLLECTED' &&
-			s.quests['deal 1000 damage with one attack'] !== 'COLLECTED',
-	},
-	{
-		...chuckBase,
-		id: 'chuck_7',
-		unhandledMessage: ['Increasing your own stats is key'],
-		handledMessage: ['Do you even lift?'],
-		quest: 'deal 2000 damage with one attack',
-		conditionFunction: (s) =>
-			s.campUpgrades['invite fighting expert chuck'] &&
-			s.quests['deal 1000 damage with one attack'] === 'COLLECTED' &&
-			s.quests['deal 2000 damage with one attack'] !== 'COLLECTED',
-	},
-	{
-		...chuckBase,
-		id: 'chuck_8',
-		unhandledMessage: [
-			'Decreasing the Enemies defense is valid',
-			'But i like to rely on attack strength',
-		],
-		handledMessage: ['Do you even lift?'],
-		quest: 'deal 5000 damage with one attack',
-		conditionFunction: (s) =>
-			s.campUpgrades['invite fighting expert chuck'] &&
-			s.quests['deal 2000 damage with one attack'] === 'COLLECTED' &&
-			s.quests['deal 5000 damage with one attack'] !== 'COLLECTED',
-	},
-	{
-		...chuckBase,
-		id: 'chuck_9',
-		unhandledMessage: ['Can we get over 9000, big dawg?'],
-		handledMessage: ['Do you even lift?'],
-		quest: 'deal 10000 damage with one attack',
-		conditionFunction: (s) =>
-			s.campUpgrades['invite fighting expert chuck'] &&
-			s.quests['deal 5000 damage with one attack'] === 'COLLECTED' &&
-			s.quests['deal 10000 damage with one attack'] !== 'COLLECTED',
-	},
+  {
+    ...chuckBase,
+    id: "chuck_2",
+    unhandledMessage: [
+      "My Name is Chuck",
+      "My Pokemon and I eat 7000 calories per day",
+      "Then we hit the gym together",
+    ],
+    handledMessage: ["Do you even lift?"],
+    quest: "deal 50 damage with one attack",
+    conditionFunction: (s) =>
+      s.campUpgrades["invite fighting expert chuck"] &&
+      s.quests["deal 50 damage with one attack"] !== "COLLECTED",
+  },
+  {
+    ...chuckBase,
+    id: "chuck_3",
+    unhandledMessage: ["Lets hit an even hundo"],
+    handledMessage: ["Do you even lift?"],
+    quest: "deal 100 damage with one attack",
+    conditionFunction: (s) =>
+      s.campUpgrades["invite fighting expert chuck"] &&
+      s.quests["deal 50 damage with one attack"] === "COLLECTED" &&
+      s.quests["deal 100 damage with one attack"] !== "COLLECTED",
+  },
+  {
+    ...chuckBase,
+    id: "chuck_4",
+    unhandledMessage: ["Getting impressive, dawg"],
+    handledMessage: ["Do you even lift?"],
+    quest: "deal 200 damage with one attack",
+    conditionFunction: (s) =>
+      s.campUpgrades["invite fighting expert chuck"] &&
+      s.quests["deal 100 damage with one attack"] === "COLLECTED" &&
+      s.quests["deal 200 damage with one attack"] !== "COLLECTED",
+  },
+  {
+    ...chuckBase,
+    id: "chuck_5",
+    unhandledMessage: ["Most Trainers never reach this damage output"],
+    handledMessage: ["Do you even lift?"],
+    quest: "deal 500 damage with one attack",
+    conditionFunction: (s) =>
+      s.campUpgrades["invite fighting expert chuck"] &&
+      s.quests["deal 200 damage with one attack"] === "COLLECTED" &&
+      s.quests["deal 500 damage with one attack"] !== "COLLECTED",
+  },
+  {
+    ...chuckBase,
+    id: "chuck_6",
+    unhandledMessage: ["Only the elite few deal 4 digit damage"],
+    handledMessage: ["Do you even lift?"],
+    quest: "deal 1000 damage with one attack",
+    conditionFunction: (s) =>
+      s.campUpgrades["invite fighting expert chuck"] &&
+      s.quests["deal 500 damage with one attack"] === "COLLECTED" &&
+      s.quests["deal 1000 damage with one attack"] !== "COLLECTED",
+  },
+  {
+    ...chuckBase,
+    id: "chuck_7",
+    unhandledMessage: ["Increasing your own stats is key"],
+    handledMessage: ["Do you even lift?"],
+    quest: "deal 2000 damage with one attack",
+    conditionFunction: (s) =>
+      s.campUpgrades["invite fighting expert chuck"] &&
+      s.quests["deal 1000 damage with one attack"] === "COLLECTED" &&
+      s.quests["deal 2000 damage with one attack"] !== "COLLECTED",
+  },
+  {
+    ...chuckBase,
+    id: "chuck_8",
+    unhandledMessage: [
+      "Decreasing the Enemies defense is valid",
+      "But i like to rely on attack strength",
+    ],
+    handledMessage: ["Do you even lift?"],
+    quest: "deal 5000 damage with one attack",
+    conditionFunction: (s) =>
+      s.campUpgrades["invite fighting expert chuck"] &&
+      s.quests["deal 2000 damage with one attack"] === "COLLECTED" &&
+      s.quests["deal 5000 damage with one attack"] !== "COLLECTED",
+  },
+  {
+    ...chuckBase,
+    id: "chuck_9",
+    unhandledMessage: ["Can we get over 9000, big dawg?"],
+    handledMessage: ["Do you even lift?"],
+    quest: "deal 10000 damage with one attack",
+    conditionFunction: (s) =>
+      s.campUpgrades["invite fighting expert chuck"] &&
+      s.quests["deal 5000 damage with one attack"] === "COLLECTED" &&
+      s.quests["deal 10000 damage with one attack"] !== "COLLECTED",
+  },
 ];
+
+const chuckTeam = (s: SaveFile) => {
+  const xp = getHighestXpOnTeam(s.pokemon);
+  const xpWithVariance = () => (0.7 + Math.random() * 0.3) * xp;
+  return [
+    makeChallengerPokemon({
+      name: "machamp",
+      xp: xpWithVariance(),
+      heldItemName: "black-belt",
+    }),
+    makeChallengerPokemon({
+      name: "hitmonlee",
+      xp: xpWithVariance(),
+      heldItemName: "leftovers",
+    }),
+    makeChallengerPokemon({
+      name: "emboar",
+      xp: xpWithVariance(),
+      heldItemName: "charcoal",
+    }),
+    makeChallengerPokemon({
+      name: "poliwrath",
+      xp: xpWithVariance(),
+      heldItemName: "mystic-water",
+    }),
+    makeChallengerPokemon({
+      name: "hawlucha",
+      xp: xpWithVariance(),
+      heldItemName: "sharp-beak",
+    }),
+    makeChallengerPokemon({
+      name: "kommo-o",
+      xp: xpWithVariance(),
+      heldItemName: "dragon-fang",
+    }),
+  ];
+};
+export const chuckId = "Gym Leader Chuck";
+export const trainerChuck: OverworldTrainer = {
+  x: 25,
+  y: 12,
+  orientation: "DOWN",
+  unhandledMessage: [
+    "I guess we can take a break",
+    "from lifting these boulders",
+    "to battle you",
+  ],
+  type: "TRAINER",
+  id: chuckId,
+  conditionFunction: (s) =>
+    s.quests["defeat chuck"] === "ACTIVE" && !occupantHandled(s, chuckId),
+  team: chuckTeam,
+  sprite: SpriteEnum.chuck,
+  profilePicture:
+    "https://archives.bulbagarden.net/media/upload/a/af/VSChuck.png",
+  battleTeamConfig: {
+    assignGender: true,
+    assignHeldItem: false,
+    assignLearnsetMoves: true,
+    assignNaturalAbility: true,
+  },
+};

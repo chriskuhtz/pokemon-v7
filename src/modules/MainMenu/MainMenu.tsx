@@ -44,7 +44,6 @@ import { SaveFileContext } from "../../hooks/useSaveFile";
 import { useTeleport } from "../../hooks/useTeleport";
 import { EmptyInventory } from "../../interfaces/Inventory";
 import { lures, repels } from "../../interfaces/Item";
-import { RoutesType } from "../../interfaces/Routing";
 export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
   const { saveFile } = useContext(SaveFileContext);
   const { location } = useContext(LocationContext);
@@ -179,17 +178,6 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
         <BugReportButton />
         <IdeaButton />
         {window.localStorage.getItem("devmode") && <TimedEventLog />}
-
-        {window.localStorage.getItem("devmode") &&
-          Object.keys(mapsRecord).map((m) => (
-            <Card
-              key={m}
-              onClick={() => navigate("MAIN", `MAP_MAKER_${m}` as RoutesType)}
-              content={<h4>Map Maker {m}</h4>}
-              icon={<GoTasklist size={battleSpriteSize} />}
-              actionElements={[]}
-            />
-          ))}
       </Stack>
     </Page>
   );

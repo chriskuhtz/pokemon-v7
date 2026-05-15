@@ -4,6 +4,7 @@ import { makeOverworldItem } from "../../../../functions/makeOverworldItem";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
+import { trainerClair } from "./clair";
 
 export const victoryRoadOccupants: OverworldMap["occupants"] = [
   //PORTALS
@@ -490,11 +491,6 @@ export const victoryRoadOccupants: OverworldMap["occupants"] = [
     y: 2,
     amount: 1,
   }),
-  /*makeOverworldItem({
-    mapId: "victoryRoad",
-    item: "league-ticket",
-    x: 7,
-    y: 4,
-    amount: 1,
-  }),*/
+
+  trainerClair,
 ];

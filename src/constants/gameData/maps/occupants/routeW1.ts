@@ -1,9 +1,11 @@
 import { getTimeOfDay } from "../../../../functions/getTimeOfDay";
 import { getTraveller } from "../../../../functions/getTraveller";
+import { makeBerryTree } from "../../../../functions/makeBerryTree";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
 import { routeW1Lure } from "../../../../modules/BerryLure/BerryLure";
+import { trainerFalkner } from "./falknerLine";
 import { gary } from "./gary";
 
 export const routeW1Occupants: OverworldMap["occupants"] = [
@@ -338,6 +340,25 @@ export const routeW1Occupants: OverworldMap["occupants"] = [
     id: "climbing-steps-routeW1-3",
   },
   ...getTraveller("routeW1"),
+  ...makeBerryTree({
+    berry: "yache-berry",
+    id: "yache-tree-routeW1",
+    x: 7,
+    y: 4,
+  }),
+  ...makeBerryTree({
+    berry: "haban-berry",
+    id: "haban-tree-routeW1",
+    x: 31,
+    y: 38,
+  }),
+  ...makeBerryTree({
+    berry: "charti-berry",
+    id: "charti-tree-routeW1",
+    x: 12,
+    y: 19,
+  }),
   routeW1Lure,
   ...gary,
+  trainerFalkner,
 ];

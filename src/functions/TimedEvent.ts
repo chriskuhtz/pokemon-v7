@@ -508,7 +508,14 @@ export const removeTroubleMakers = (
   };
 };
 export const createTroubleMakers = (s: SaveFile): SaveFile => {
-  const route = getRandomAvailableRoute(s, []);
+  const route = getRandomAvailableRoute(s, [
+    "routeN1W1",
+    "caveN1W1",
+    "caveW1",
+    "caveW1F1",
+    "caveW1F2",
+    "routeW1",
+  ]);
 
   if (!route) {
     throw new Error();

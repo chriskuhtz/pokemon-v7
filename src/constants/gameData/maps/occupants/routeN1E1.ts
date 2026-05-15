@@ -10,6 +10,7 @@ import { OverworldMap } from "../../../../interfaces/OverworldMap";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
 import { routeN1E1Lure } from "../../../../modules/BerryLure/BerryLure";
 import { routeN1E1DragoniteTaxi } from "../../../../modules/DragoniteTaxi/DragoniteTaxi";
+import { trainerBugsy } from "./bugsy";
 import { janine } from "./janine";
 
 const forestKurt: Occupant[] = [
@@ -250,16 +251,23 @@ export const routeN1E1Occupants: OverworldMap["occupants"] = [
     id: "routeN1E1_to_apricornClearing",
   },
   ...makeBerryTree({
-    berry: "cheri-berry",
-    id: "cheri-tree-routeN1E1",
+    berry: "tanga-berry",
+    id: "tanga-tree-routeN1E1",
     x: 41,
     y: 37,
   }),
   ...makeBerryTree({
-    berry: "chesto-berry",
-    id: "chesto-tree-routeN1E1",
+    berry: "kebia-berry",
+    id: "kebia-tree-routeN1E1",
     x: 13,
     y: 15,
   }),
+  ...makeBerryTree({
+    berry: "kasib-berry",
+    id: "kasib-tree-routeN1E1",
+    x: 38,
+    y: 9,
+  }),
   ...routeN1E1DragoniteTaxi,
+  trainerBugsy,
 ];

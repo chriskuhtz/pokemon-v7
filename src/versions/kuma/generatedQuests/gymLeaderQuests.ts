@@ -2,12 +2,20 @@
 import { v4 } from "uuid";
 import { blaineId } from "../../../constants/gameData/maps/occupants/blaine";
 import { brockId } from "../../../constants/gameData/maps/occupants/brock";
+import { bugsyId } from "../../../constants/gameData/maps/occupants/bugsy";
+import { chuckId } from "../../../constants/gameData/maps/occupants/chuckLine";
+import { clairId } from "../../../constants/gameData/maps/occupants/clair";
 import { erikaId } from "../../../constants/gameData/maps/occupants/erika";
+import { falknerId } from "../../../constants/gameData/maps/occupants/falknerLine";
 import { garyId } from "../../../constants/gameData/maps/occupants/gary";
 import { janineId } from "../../../constants/gameData/maps/occupants/janine";
+import { jasmineId } from "../../../constants/gameData/maps/occupants/jasmine";
 import { mistyId } from "../../../constants/gameData/maps/occupants/misty";
+import { mortyId } from "../../../constants/gameData/maps/occupants/mortyLine";
+import { pryceId } from "../../../constants/gameData/maps/occupants/pryce";
 import { sabrinaId } from "../../../constants/gameData/maps/occupants/sabrina";
 import { surgeId } from "../../../constants/gameData/maps/occupants/surge";
+import { whitneyId } from "../../../constants/gameData/maps/occupants/whitney";
 import { occupantHandled } from "../../../functions/occupantHandled";
 import {
   expCandyPackage,
@@ -83,7 +91,6 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
     kind: "BULLETIN",
     badge: "Volcano_Badge",
     researchPoints: 25,
-
     rewardItems: {
       "occa-berry": 5,
       charcoal: 1,
@@ -138,7 +145,7 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
     researchPoints: 50,
     badge: "Boulder_Badge",
     rewardItems: { "charti-berry": 5, "hard-stone": 1, ...expCandyPackage },
-    requiredUpgrade: "swimming certification",
+    requiredUpgrade: "shovel certification",
     conditionFunction: (s) => {
       return occupantHandled(s, brockId);
     },
@@ -159,32 +166,31 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
       return occupantHandled(s, garyId);
     },
   },
-  "defeat morty": {
+  "defeat falkner": {
     category: "GYM LEADER",
     rewardItems: {
       "ultra-ball": 5,
       "full-restore": 5,
-      "spell-tag": 1,
+      "sharp-beak": 1,
       ...expCandyPackage,
     },
+    badge: "Zephyr_Badge",
     rewardPokemon: {
       ...testPokemon,
       id: v4(),
-      name: "dreepy",
+      name: "rufflet",
       shiny: true,
       caughtAtDate: new Date().getTime(),
       xp: 125,
       intrinsicValues: generateRandomStatObject(31, 25),
       caughtOnMap: "camp",
     },
-    badge: "Fog_Badge",
     researchPoints: 50,
     conditionFunction: (s) => {
-      return occupantHandled(s, "Gym Leader Morty");
+      return occupantHandled(s, falknerId);
     },
     kind: "BULLETIN",
-    requiredUpgrade: "training field 1",
-    availableAfter: "catch Haunter and Mightyena",
+    availableAfter: "catch the legendary bird of ice",
   },
   "defeat bugsy": {
     category: "GYM LEADER",
@@ -206,11 +212,11 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
       caughtOnMap: "camp",
     },
     researchPoints: 50,
+    requiredUpgrade: "machete certification",
     conditionFunction: (s) => {
-      return occupantHandled(s, "Gym Leader Bugsy");
+      return occupantHandled(s, bugsyId);
     },
     kind: "BULLETIN",
-    requiredUpgrade: "training field 1",
     availableAfter: "report a bug",
   },
   "defeat whitney": {
@@ -234,11 +240,64 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
     },
     researchPoints: 50,
     conditionFunction: (s: SaveFile) => {
-      return occupantHandled(s, "Gym Leader Whitney");
+      return occupantHandled(s, whitneyId);
     },
     kind: "BULLETIN",
-    requiredUpgrade: "training field 1",
+    requiredUpgrade: "dragonite taxi",
     availableAfter: "catch whitney's favorite cute pokemon",
+  },
+  "defeat morty": {
+    category: "GYM LEADER",
+    rewardItems: {
+      "ultra-ball": 5,
+      "full-restore": 5,
+      "spell-tag": 1,
+      ...expCandyPackage,
+    },
+    rewardPokemon: {
+      ...testPokemon,
+      id: v4(),
+      name: "dreepy",
+      shiny: true,
+      caughtAtDate: new Date().getTime(),
+      xp: 125,
+      intrinsicValues: generateRandomStatObject(31, 25),
+      caughtOnMap: "camp",
+    },
+    badge: "Fog_Badge",
+    requiredUpgrade: "swimming certification",
+    researchPoints: 50,
+    conditionFunction: (s) => {
+      return occupantHandled(s, mortyId);
+    },
+    kind: "BULLETIN",
+    availableAfter: "catch Haunter and Mightyena",
+  },
+  "defeat chuck": {
+    category: "GYM LEADER",
+    rewardItems: {
+      "full-restore": 5,
+      "black-belt": 1,
+      ...expCandyPackage,
+    },
+    badge: "Storm_Badge",
+    rewardPokemon: {
+      ...testPokemon,
+      id: v4(),
+      name: "hawlucha",
+      shiny: true,
+      caughtAtDate: new Date().getTime(),
+      xp: 125,
+      intrinsicValues: generateRandomStatObject(31, 25),
+      caughtOnMap: "camp",
+    },
+    researchPoints: 50,
+    conditionFunction: (s) => {
+      return occupantHandled(s, chuckId);
+    },
+    kind: "BULLETIN",
+    requiredUpgrade: "shovel certification",
+    availableAfter: "deal 10000 damage with one attack",
   },
   "defeat jasmine": {
     category: "GYM LEADER",
@@ -261,38 +320,11 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
     },
     researchPoints: 50,
     conditionFunction: (s: SaveFile) => {
-      return occupantHandled(s, "Gym Leader Jasmine");
+      return occupantHandled(s, jasmineId);
     },
     kind: "BULLETIN",
-    requiredUpgrade: "training field 1",
+    requiredUpgrade: "swimming certification",
     availableAfter: "catch an exceptional steel pokemon for jasmine",
-  },
-  "defeat clair": {
-    category: "GYM LEADER",
-    rewardItems: {
-      "ultra-ball": 5,
-      "full-restore": 5,
-      "dragon-scale": 1,
-      ...expCandyPackage,
-    },
-    badge: "Rising_Badge",
-    rewardPokemon: {
-      ...testPokemon,
-      id: v4(),
-      name: "horsea",
-      shiny: true,
-      caughtAtDate: new Date().getTime(),
-      xp: 125,
-      intrinsicValues: generateRandomStatObject(31, 25),
-      caughtOnMap: "camp",
-    },
-    researchPoints: 50,
-    conditionFunction: (s: SaveFile) => {
-      return occupantHandled(s, "Gym Leader Clair");
-    },
-    kind: "BULLETIN",
-    requiredUpgrade: "training field 1",
-    availableAfter: "reach max. friendship with a dragon pokemon",
   },
   "defeat pryce": {
     category: "GYM LEADER",
@@ -315,51 +347,25 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
     },
     researchPoints: 50,
     conditionFunction: (s: SaveFile) => {
-      return occupantHandled(s, "Gym Leader Pryce");
+      return occupantHandled(s, pryceId);
     },
     kind: "BULLETIN",
-    requiredUpgrade: "training field 1",
+    requiredUpgrade: "buy skiing equipment",
     availableAfter: "maximize the effort values of an ice pokemon",
   },
-  "defeat chuck": {
-    category: "GYM LEADER",
-    rewardItems: {
-      "full-restore": 5,
-      "black-belt": 1,
-      ...expCandyPackage,
-    },
-    badge: "Storm_Badge",
-    rewardPokemon: {
-      ...testPokemon,
-      id: v4(),
-      name: "hawlucha",
-      shiny: true,
-      caughtAtDate: new Date().getTime(),
-      xp: 125,
-      intrinsicValues: generateRandomStatObject(31, 25),
-      caughtOnMap: "camp",
-    },
-    researchPoints: 50,
-    conditionFunction: (s) => {
-      return occupantHandled(s, "Gym Leader Chuck");
-    },
-    kind: "BULLETIN",
-    requiredUpgrade: "training field 1",
-    availableAfter: "deal 10000 damage with one attack",
-  },
-  "defeat falkner": {
+  "defeat clair": {
     category: "GYM LEADER",
     rewardItems: {
       "ultra-ball": 5,
       "full-restore": 5,
-      "sharp-beak": 1,
+      "dragon-scale": 1,
       ...expCandyPackage,
     },
-    badge: "Zephyr_Badge",
+    badge: "Rising_Badge",
     rewardPokemon: {
       ...testPokemon,
       id: v4(),
-      name: "rufflet",
+      name: "horsea",
       shiny: true,
       caughtAtDate: new Date().getTime(),
       xp: 125,
@@ -367,11 +373,11 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
       caughtOnMap: "camp",
     },
     researchPoints: 50,
-    conditionFunction: (s) => {
-      return occupantHandled(s, "Gym Leader Falkner");
+    conditionFunction: (s: SaveFile) => {
+      return occupantHandled(s, clairId);
     },
     kind: "BULLETIN",
-    requiredUpgrade: "training field 1",
-    availableAfter: "catch the legendary bird of ice",
+    requiredUpgrade: "swimming certification",
+    availableAfter: "reach max. friendship with a dragon pokemon",
   },
 };

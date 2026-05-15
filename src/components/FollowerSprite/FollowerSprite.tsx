@@ -7,6 +7,7 @@ import { getYOffsetFromOrientation } from "../../functions/getYOffsetFromOrienta
 import { isPassable } from "../../functions/isPassable";
 import { LocationContext } from "../../hooks/LocationProvider";
 import { BaseSizeContext } from "../../hooks/useBaseSize";
+import { GameDataContext } from "../../hooks/useGameData";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { Occupant } from "../../interfaces/Occupant";
 import { OverworldMap } from "../../interfaces/OverworldMap";
@@ -27,15 +28,18 @@ export const FollowerSprite = ({
   const { saveFile } = useContext(SaveFileContext);
   const { location } = useContext(LocationContext);
   const { baseSize } = useContext(BaseSizeContext);
-  const firstTeamMemberDexId = useMemo(() => {
-    const mon = saveFile.pokemon.find((p) => p.onTeam && p.damage < p.maxHp);
+  const gameData = useContext(GameDataContext);
 
+  const mon = useMemo(() => {
+    return saveFile.pokemon.find((p) => p.onTeam && p.damage < p.maxHp);
+  }, [saveFile]);
+  const firstTeamMemberDexId = useMemo(() => {
     if (!mon) {
       return -1;
     }
 
     return baseInternalDex[mon.name].dexId;
-  }, [saveFile]);
+  }, [mon]);
 
   const showFollower = useMemo(() => {
     if (firstTeamMemberDexId > 741 || firstTeamMemberDexId < 0) {
@@ -44,6 +48,13 @@ export const FollowerSprite = ({
     if (saveFile.flying) {
       return false;
     }
+
+    const isWaterPokemon: boolean = !!(
+      mon && gameData.internalDex[mon.name].types.includes("water")
+    );
+    const isFlyingPokemon: boolean = !!(
+      mon && gameData.internalDex[mon.name].types.includes("flying")
+    );
     return isPassable({
       nextLocation: getNextLocation(
         location,
@@ -52,11 +63,19 @@ export const FollowerSprite = ({
       playerLocation: location,
       map,
       currentOccupants: occupants,
-      canClimb: false,
-      canSwim: false,
-      flying: false,
+      canClimb: true,
+      canSwim: isWaterPokemon,
+      flying: isFlyingPokemon,
     });
-  }, [firstTeamMemberDexId, location, map, occupants, saveFile.flying]);
+  }, [
+    firstTeamMemberDexId,
+    gameData.internalDex,
+    location,
+    map,
+    mon,
+    occupants,
+    saveFile.flying,
+  ]);
 
   useDrawFollowerPokemon(followerCanvasId, location, firstTeamMemberDexId);
 

@@ -31,4 +31,5 @@ export const customItemDescriptions: Record<string, string> = {
   "relic-crown": "Museums might find this interesting",
   "relic-statue": "Museums might find this interesting",
   "big-mushroom": "Museums might find this interesting",
+  "star-piece": "Museums might find this interesting",
 };
