@@ -1,5 +1,6 @@
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
+import { routeN1W1DragoniteTaxi } from "../../../../modules/DragoniteTaxi/DragoniteTaxi";
 import { champChris } from "./champChris";
 
 export const routeN1W1Occupants: OverworldMap["occupants"] = [
@@ -124,4 +125,5 @@ export const routeN1W1Occupants: OverworldMap["occupants"] = [
     id: "ice-stone-routeN1W1",
   },
   champChris,
+  ...routeN1W1DragoniteTaxi,
 ];

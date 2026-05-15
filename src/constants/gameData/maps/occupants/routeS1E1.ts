@@ -4,6 +4,7 @@ import { occupantHandled } from "../../../../functions/occupantHandled";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
 import { routeS1E1Lure } from "../../../../modules/BerryLure/BerryLure";
+import { routeS1E1DragoniteTaxi } from "../../../../modules/DragoniteTaxi/DragoniteTaxi";
 import { misty } from "./misty";
 
 export const routeS1E1Occupants: OverworldMap["occupants"] = [
@@ -159,4 +160,5 @@ export const routeS1E1Occupants: OverworldMap["occupants"] = [
   ...getTraveller("routeS1E1"),
   ...misty,
   routeS1E1Lure,
+  ...routeS1E1DragoniteTaxi,
 ];
