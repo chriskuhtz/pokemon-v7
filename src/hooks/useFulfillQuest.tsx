@@ -49,7 +49,7 @@ export const useFulfillQuest = () => {
       }
 
       const earnedPoints =
-        saveFile.trait && researchBoni[saveFile.trait]
+        saveFile.trait && researchBoni[saveFile.trait].includes(quest.category)
           ? Math.floor(
               quest.researchPoints * traitQuestRewardFactor[saveFile.trait],
             )
