@@ -7,7 +7,9 @@ import {
 } from "../../../../interfaces/Occupant";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
 
+import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
 import { occupantHandled } from "../../../../functions/occupantHandled";
+import { SaveFile } from "../../../../interfaces/SaveFile";
 
 const falknerBase: Omit<
   OverworldNpc,
@@ -101,35 +103,38 @@ export const falknerLine: Occupant[] = [
   },
 ];
 
-const falknerTeam = () => [
-  makeChallengerPokemon({
-    name: "noctowl",
-    xp: 125000,
-    heldItemName: "sitrus-berry",
-  }),
-  makeChallengerPokemon({
-    name: "pidgeot",
-    xp: 125000,
-    heldItemName: "leftovers",
-  }),
-  makeChallengerPokemon({
-    name: "braviary",
-    xp: 125000,
-    heldItemName: "sharp-beak",
-  }),
-  makeChallengerPokemon({
-    name: "skarmory",
-    xp: 125000,
-    heldItemName: "metal-coat",
-  }),
-  makeChallengerPokemon({
-    name: "gliscor",
-    xp: 125000,
-    heldItemName: "razor-fang",
-  }),
-];
-
-export const falknerId = "Gym Leader Erika";
+const falknerTeam = (s: SaveFile) => {
+  const xp = getHighestXpOnTeam(s.pokemon);
+  const xpWithVariance = () => (0.7 + Math.random() * 0.3) * xp;
+  return [
+    makeChallengerPokemon({
+      name: "noctowl",
+      xp: xpWithVariance(),
+      heldItemName: "sitrus-berry",
+    }),
+    makeChallengerPokemon({
+      name: "pidgeot",
+      xp: xpWithVariance(),
+      heldItemName: "leftovers",
+    }),
+    makeChallengerPokemon({
+      name: "braviary",
+      xp: xpWithVariance(),
+      heldItemName: "sharp-beak",
+    }),
+    makeChallengerPokemon({
+      name: "skarmory",
+      xp: xpWithVariance(),
+      heldItemName: "metal-coat",
+    }),
+    makeChallengerPokemon({
+      name: "gliscor",
+      xp: xpWithVariance(),
+      heldItemName: "razor-fang",
+    }),
+  ];
+};
+export const falknerId = "Gym Leader Falkner";
 export const trainerFalkner: OverworldTrainer = {
   x: 38,
   y: 4,

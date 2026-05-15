@@ -10,6 +10,7 @@ import { OverworldMap } from "../../../../interfaces/OverworldMap";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
 import { routeN1E1Lure } from "../../../../modules/BerryLure/BerryLure";
 import { routeN1E1DragoniteTaxi } from "../../../../modules/DragoniteTaxi/DragoniteTaxi";
+import { trainerBugsy } from "./bugsy";
 import { janine } from "./janine";
 
 const forestKurt: Occupant[] = [
@@ -262,4 +263,5 @@ export const routeN1E1Occupants: OverworldMap["occupants"] = [
     y: 15,
   }),
   ...routeN1E1DragoniteTaxi,
+  trainerBugsy,
 ];

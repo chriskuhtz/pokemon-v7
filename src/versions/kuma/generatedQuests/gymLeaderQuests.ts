@@ -3,6 +3,7 @@ import { v4 } from "uuid";
 import { blaineId } from "../../../constants/gameData/maps/occupants/blaine";
 import { brockId } from "../../../constants/gameData/maps/occupants/brock";
 import { erikaId } from "../../../constants/gameData/maps/occupants/erika";
+import { falknerId } from "../../../constants/gameData/maps/occupants/falknerLine";
 import { garyId } from "../../../constants/gameData/maps/occupants/gary";
 import { janineId } from "../../../constants/gameData/maps/occupants/janine";
 import { mistyId } from "../../../constants/gameData/maps/occupants/misty";
@@ -368,7 +369,7 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
     },
     researchPoints: 50,
     conditionFunction: (s) => {
-      return occupantHandled(s, "Gym Leader Falkner");
+      return occupantHandled(s, falknerId);
     },
     kind: "BULLETIN",
     availableAfter: "catch the legendary bird of ice",

@@ -2239,47 +2239,6 @@ export const tier5trainers: Challenger[] = [
 export const specialTrainers: Challenger[] = [
   {
     type: "TRAINER",
-    id: "Gym Leader Bugsy",
-    team: [
-      makeChallengerPokemon({
-        name: "scizor",
-        xp: 125000,
-        heldItemName: "quick-claw",
-        ability: "technician",
-        fixedAbility: true,
-      }),
-      makeChallengerPokemon({
-        name: "pinsir",
-        xp: 125000,
-      }),
-      makeChallengerPokemon({
-        name: "heracross",
-        xp: 125000,
-        heldItemName: "hard-stone",
-      }),
-      makeChallengerPokemon({
-        name: "volcarona",
-        xp: 125000,
-        heldItemName: "charcoal",
-      }),
-      makeChallengerPokemon({
-        name: "scolipede",
-        xp: 125000,
-        heldItemName: "sitrus-berry",
-      }),
-    ],
-    battleTeamConfig: { assignHeldItem: false },
-    inventory: EmptyInventory,
-    availableAfter: "report a bug",
-    trainer: {
-      id: "Gym Leader Bugsy",
-      sprite: SpriteEnum.bugsy,
-      profilePicture:
-        "https://archives.bulbagarden.net/media/upload/2/2a/VSBugsy.png",
-    },
-  },
-  {
-    type: "TRAINER",
     id: "Gym Leader Whitney",
     team: [
       makeChallengerPokemon({
