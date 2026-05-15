@@ -2239,51 +2239,6 @@ export const tier5trainers: Challenger[] = [
 export const specialTrainers: Challenger[] = [
   {
     type: "TRAINER",
-    id: "Gym Leader Chuck",
-    team: [
-      makeChallengerPokemon({
-        name: "machamp",
-        xp: 125000,
-        heldItemName: "black-belt",
-      }),
-      makeChallengerPokemon({
-        name: "hitmonlee",
-        xp: 125000,
-        heldItemName: "leftovers",
-      }),
-      makeChallengerPokemon({
-        name: "emboar",
-        xp: 125000,
-        heldItemName: "charcoal",
-      }),
-      makeChallengerPokemon({
-        name: "poliwrath",
-        xp: 125000,
-        heldItemName: "mystic-water",
-      }),
-      makeChallengerPokemon({
-        name: "hawlucha",
-        xp: 125000,
-        heldItemName: "sharp-beak",
-      }),
-      makeChallengerPokemon({
-        name: "kommo-o",
-        xp: 125000,
-        heldItemName: "dragon-fang",
-      }),
-    ],
-    inventory: EmptyInventory,
-    availableAfter: "deal 10000 damage with one attack",
-    trainer: {
-      id: "Gym Leader Chuck",
-      sprite: SpriteEnum.chuck,
-      profilePicture:
-        "https://archives.bulbagarden.net/media/upload/a/af/VSChuck.png",
-    },
-    battleTeamConfig: { assignHeldItem: false },
-  },
-  {
-    type: "TRAINER",
     id: "Gym Leader Jasmine",
     team: [
       makeChallengerPokemon({

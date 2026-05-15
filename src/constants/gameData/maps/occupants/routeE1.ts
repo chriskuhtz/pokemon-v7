@@ -6,8 +6,10 @@ import { occupantHandled } from "../../../../functions/occupantHandled";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
 import { routeE1Lure } from "../../../../modules/BerryLure/BerryLure";
 import { blaine } from "./blaine";
+import { trainerChuck } from "./chuckLine";
 
 export const routeE1Occupants: OverworldMap["occupants"] = [
+  trainerChuck,
   {
     type: "ON_STEP_PORTAL",
     x: 25,

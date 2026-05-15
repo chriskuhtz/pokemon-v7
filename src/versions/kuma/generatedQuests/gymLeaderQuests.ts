@@ -3,6 +3,7 @@ import { v4 } from "uuid";
 import { blaineId } from "../../../constants/gameData/maps/occupants/blaine";
 import { brockId } from "../../../constants/gameData/maps/occupants/brock";
 import { bugsyId } from "../../../constants/gameData/maps/occupants/bugsy";
+import { chuckId } from "../../../constants/gameData/maps/occupants/chuckLine";
 import { erikaId } from "../../../constants/gameData/maps/occupants/erika";
 import { falknerId } from "../../../constants/gameData/maps/occupants/falknerLine";
 import { garyId } from "../../../constants/gameData/maps/occupants/gary";
@@ -289,10 +290,10 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
     },
     researchPoints: 50,
     conditionFunction: (s) => {
-      return occupantHandled(s, "Gym Leader Chuck");
+      return occupantHandled(s, chuckId);
     },
     kind: "BULLETIN",
-    requiredUpgrade: "training field 1",
+    requiredUpgrade: "shovel certification",
     availableAfter: "deal 10000 damage with one attack",
   },
   "defeat jasmine": {

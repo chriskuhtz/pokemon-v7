@@ -101,7 +101,7 @@ const mortyTeam = (s: SaveFile) => {
       xp: xpWithVariance(),
       heldItemName: "sitrus-berry",
     }),
-    makeChallengerPokemon({ name: "shedinja", xp: 125000 }),
+    makeChallengerPokemon({ name: "shedinja", xp: xpWithVariance() }),
     makeChallengerPokemon({
       name: "gengar",
       xp: xpWithVariance(),
