@@ -28,7 +28,7 @@ export const applyRewardsToTeam = (
     let baseAmount = gainedXp / numberOfParticipants;
 
     if (competitor) {
-      return (baseAmount *= 1.2);
+      baseAmount *= 1.2;
     }
     if (isTrainerBattle) {
       baseAmount *= 1.5;
