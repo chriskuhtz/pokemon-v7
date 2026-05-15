@@ -53,24 +53,63 @@ export const pikachuFanLine: Occupant[] = [
     unhandledMessage: [
       "There are many pokemon that look similar to pikachu",
       "they are also cute",
-      "can you catch them all?",
+      "can you catch some of them?",
     ],
     handledMessage: [
       "There are many pokemon that look similar to pikachu",
       "they are also cute",
-      "can you catch them all?",
+      "can you catch some of them?",
     ],
-    quest: "catch all mouselike electric pokemon",
+    quest: "catch 3 mouselike electric pokemon",
     conditionFunction: (s) =>
       s.quests["find a lightball"] === "COLLECTED" &&
-      s.quests["catch all mouselike electric pokemon"] !== "COLLECTED",
+      s.quests["catch 3 mouselike electric pokemon"] !== "COLLECTED",
   },
   {
     ...pikachuFanBase,
     id: "pikachuFan_4",
-
     unhandledMessage: ["On my way here", "I saw a pikachu with a hat"],
     handledMessage: ["On my way here", "I saw a pikachu with a hat"],
+    quest: "catch 3 pikachus with hats",
+    conditionFunction: (s) =>
+      s.quests["catch 3 mouselike electric pokemon"] === "COLLECTED" &&
+      s.quests["catch 3 pikachus with hats"] !== "COLLECTED",
+  },
+  {
+    ...pikachuFanBase,
+    id: "pikachuFan_5",
+    unhandledMessage: ["more pikas!"],
+    handledMessage: ["more pikas!"],
+    quest: "catch 6 mouselike electric pokemon",
+    conditionFunction: (s) =>
+      s.quests["catch 3 pikachus with hats"] === "COLLECTED" &&
+      s.quests["catch 6 mouselike electric pokemon"] !== "COLLECTED",
+  },
+  {
+    ...pikachuFanBase,
+    id: "pikachuFan_6",
+    unhandledMessage: ["more hats!"],
+    handledMessage: ["more hats!"],
+    quest: "catch 5 pikachus with hats",
+    conditionFunction: (s) =>
+      s.quests["catch 6 mouselike electric pokemon"] === "COLLECTED" &&
+      s.quests["catch 5 pikachus with hats"] !== "COLLECTED",
+  },
+  {
+    ...pikachuFanBase,
+    id: "pikachuFan_7",
+    unhandledMessage: ["all the pikas!"],
+    handledMessage: ["all the pikas!"],
+    quest: "catch all mouselike electric pokemon",
+    conditionFunction: (s) =>
+      s.quests["catch 5 pikachus with hats"] === "COLLECTED" &&
+      s.quests["catch all mouselike electric pokemon"] !== "COLLECTED",
+  },
+  {
+    ...pikachuFanBase,
+    id: "pikachuFan_8",
+    unhandledMessage: ["all the hats!"],
+    handledMessage: ["all the hats!"],
     quest: "catch all pikachus with hats",
     conditionFunction: (s) =>
       s.quests["catch all mouselike electric pokemon"] === "COLLECTED" &&
@@ -78,7 +117,7 @@ export const pikachuFanLine: Occupant[] = [
   },
   {
     ...pikachuFanBase,
-    id: "pikachuFan_5",
+    id: "pikachuFan_9",
 
     unhandledMessage: ["Some pikachu even put on complete costumes"],
     handledMessage: ["Some pikachu even put on complete costumes"],

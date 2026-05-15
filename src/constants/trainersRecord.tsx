@@ -2239,46 +2239,6 @@ export const tier5trainers: Challenger[] = [
 export const specialTrainers: Challenger[] = [
   {
     type: "TRAINER",
-    id: "Gym Leader Falkner",
-    team: [
-      makeChallengerPokemon({
-        name: "noctowl",
-        xp: 125000,
-        heldItemName: "sitrus-berry",
-      }),
-      makeChallengerPokemon({
-        name: "pidgeot",
-        xp: 125000,
-        heldItemName: "leftovers",
-      }),
-      makeChallengerPokemon({
-        name: "braviary",
-        xp: 125000,
-        heldItemName: "sharp-beak",
-      }),
-      makeChallengerPokemon({
-        name: "skarmory",
-        xp: 125000,
-        heldItemName: "metal-coat",
-      }),
-      makeChallengerPokemon({
-        name: "gliscor",
-        xp: 125000,
-        heldItemName: "razor-fang",
-      }),
-    ],
-    inventory: EmptyInventory,
-    availableAfter: "catch the legendary bird of ice",
-    trainer: {
-      id: "Gym Leader Falkner",
-      sprite: SpriteEnum.falkner,
-      profilePicture:
-        "https://archives.bulbagarden.net/media/upload/5/5a/VSFalkner.png",
-    },
-    battleTeamConfig: { assignHeldItem: false },
-  },
-  {
-    type: "TRAINER",
     id: "Gym Leader Bugsy",
     team: [
       makeChallengerPokemon({

@@ -225,7 +225,11 @@ export const kumaQuestNames = [
   "catch a ultra-rare pokemon from routeN1W1",
   "catch a pikachu",
   "find a lightball",
+  "catch 3 mouselike electric pokemon",
+  "catch 6 mouselike electric pokemon",
   "catch all mouselike electric pokemon",
+  "catch 3 pikachus with hats",
+  "catch 5 pikachus with hats",
   "catch all pikachus with hats",
   "catch a feebas",
   "catch a sudowoodo",
@@ -534,6 +538,85 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     },
     kind: "QUEST_LINE",
   },
+  "catch 3 mouselike electric pokemon": {
+    category: "EXPLORATION",
+    rewardItems: {
+      "pewter-crunchies": 2,
+      "thunder-stone": 1,
+    },
+    targetPokemon: [
+      "pikachu",
+      "plusle",
+      "minun",
+      "emolga",
+      "pachirisu",
+      "dedenne",
+      "togedemaru",
+      "pawmi",
+      "morpeko-full-belly",
+      "morpeko-hangry",
+    ],
+    researchPoints: 20,
+    conditionFunction: (s) => {
+      const pikas: PokemonName[] = [
+        "pikachu",
+        "plusle",
+        "minun",
+        "emolga",
+        "pachirisu",
+        "dedenne",
+        "togedemaru",
+        "pawmi",
+        "morpeko-full-belly",
+        "morpeko-hangry",
+      ];
+      return (
+        pikas.filter((pika) => s.pokedex[pika].caughtOnRoutes.length > 0)
+          .length >= 3
+      );
+    },
+    kind: "QUEST_LINE",
+  },
+  "catch 6 mouselike electric pokemon": {
+    category: "EXPLORATION",
+    rewardItems: {
+      casteliacone: 3,
+      magnet: 1,
+      "zap-plate": 1,
+    },
+    targetPokemon: [
+      "pikachu",
+      "plusle",
+      "minun",
+      "emolga",
+      "pachirisu",
+      "dedenne",
+      "togedemaru",
+      "pawmi",
+      "morpeko-full-belly",
+      "morpeko-hangry",
+    ],
+    researchPoints: 30,
+    conditionFunction: (s) => {
+      const pikas: PokemonName[] = [
+        "pikachu",
+        "plusle",
+        "minun",
+        "emolga",
+        "pachirisu",
+        "dedenne",
+        "togedemaru",
+        "pawmi",
+        "morpeko-full-belly",
+        "morpeko-hangry",
+      ];
+      return (
+        pikas.filter((pika) => s.pokedex[pika].caughtOnRoutes.length > 0)
+          .length >= 6
+      );
+    },
+    kind: "QUEST_LINE",
+  },
   "catch all mouselike electric pokemon": {
     category: "EXPLORATION",
     rewardItems: {
@@ -555,7 +638,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "morpeko-full-belly",
       "morpeko-hangry",
     ],
-    researchPoints: 100,
+    researchPoints: 50,
     conditionFunction: (s) => {
       const pikas: PokemonName[] = [
         "pikachu",
@@ -570,6 +653,75 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
         "morpeko-hangry",
       ];
       return pikas.every((pika) => s.pokedex[pika].caughtOnRoutes.length > 0);
+    },
+    kind: "QUEST_LINE",
+  },
+  "catch 3 pikachus with hats": {
+    category: "EXPLORATION",
+    rewardItems: {
+      "thunder-stone": 1,
+    },
+    targetPokemon: [
+      "pikachu-original-cap",
+      "pikachu-hoenn-cap",
+      "pikachu-sinnoh-cap",
+      "pikachu-unova-cap",
+      "pikachu-kalos-cap",
+      "pikachu-alola-cap",
+      "pikachu-world-cap",
+      "pikachu-partner-cap",
+    ],
+    researchPoints: 20,
+    conditionFunction: (s) => {
+      const pikas: PokemonName[] = [
+        "pikachu-original-cap",
+        "pikachu-hoenn-cap",
+        "pikachu-sinnoh-cap",
+        "pikachu-unova-cap",
+        "pikachu-kalos-cap",
+        "pikachu-alola-cap",
+        "pikachu-world-cap",
+        "pikachu-partner-cap",
+      ];
+      return (
+        pikas.filter((pika) => s.pokedex[pika].caughtOnRoutes.length > 0)
+          .length >= 3
+      );
+    },
+    kind: "QUEST_LINE",
+  },
+  "catch 5 pikachus with hats": {
+    category: "EXPLORATION",
+    rewardItems: {
+      "electric-gem": 5,
+      "lumiose-galette": 2,
+    },
+    targetPokemon: [
+      "pikachu-original-cap",
+      "pikachu-hoenn-cap",
+      "pikachu-sinnoh-cap",
+      "pikachu-unova-cap",
+      "pikachu-kalos-cap",
+      "pikachu-alola-cap",
+      "pikachu-world-cap",
+      "pikachu-partner-cap",
+    ],
+    researchPoints: 50,
+    conditionFunction: (s) => {
+      const pikas: PokemonName[] = [
+        "pikachu-original-cap",
+        "pikachu-hoenn-cap",
+        "pikachu-sinnoh-cap",
+        "pikachu-unova-cap",
+        "pikachu-kalos-cap",
+        "pikachu-alola-cap",
+        "pikachu-world-cap",
+        "pikachu-partner-cap",
+      ];
+      return (
+        pikas.filter((pika) => s.pokedex[pika].caughtOnRoutes.length > 0)
+          .length >= 5
+      );
     },
     kind: "QUEST_LINE",
   },
@@ -2471,7 +2623,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       return occupantHandled(s, "giovanni");
     },
     kind: "BULLETIN",
-    availableAfter: "reach ranger level 10",
+    availableAfter: "reach ranger level 20",
   },
   "report a bug": {
     category: "RESEARCH",

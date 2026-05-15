@@ -137,5 +137,5 @@ export const giovanni: OverworldTrainer = {
     assignNaturalAbility: false,
   },
   conditionFunction: (s) =>
-    !!(s.rangerLevel && s.rangerLevel > 15 && !occupantHandled(s, "giovanni")),
+    !!(s.rangerLevel && s.rangerLevel > 20 && !occupantHandled(s, "giovanni")),
 };

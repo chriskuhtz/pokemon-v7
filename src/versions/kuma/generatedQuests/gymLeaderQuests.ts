@@ -371,7 +371,6 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
       return occupantHandled(s, "Gym Leader Falkner");
     },
     kind: "BULLETIN",
-    requiredUpgrade: "training field 1",
     availableAfter: "catch the legendary bird of ice",
   },
 };
