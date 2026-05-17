@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 import { MoveName } from "../../../constants/movesCheckList";
 import { calculateLevelData } from "../../../functions/calculateLevelData";
 import { moveIsTeachable } from "../../../functions/moveIsAvailable";
@@ -19,6 +19,7 @@ export const MoveEditorListEntry = ({
   unlockMove,
   missingPayment,
   payment,
+  showOnlyAvailable,
 }: {
   m: LearnableMove;
   ownedPokemon: OwnedPokemon;
@@ -27,6 +28,7 @@ export const MoveEditorListEntry = ({
   unlockMove: (m: MoveName, payment: ItemType) => void;
   missingPayment: boolean;
   payment: ItemType;
+  showOnlyAvailable: boolean;
 }): JSX.Element => {
   const gameData = useContext(GameDataContext);
   const { saveFile } = useContext(SaveFileContext);
@@ -78,6 +80,9 @@ export const MoveEditorListEntry = ({
   // not enough badges
   const available = highEnoughLevel && unlockable && !missingPayment;
 
+  if (!available && showOnlyAvailable) {
+    return <React.Fragment key={m.move.name}></React.Fragment>;
+  }
   return (
     <MoveDisplayEntry
       disabled={!available}

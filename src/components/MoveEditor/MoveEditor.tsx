@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { MoveName } from "../../constants/movesCheckList";
 import { getCostForLearnMethod } from "../../functions/getCostForLearnMethod";
 import { SaveFileContext } from "../../hooks/useSaveFile";
@@ -38,11 +38,10 @@ export const MoveEditor = ({
           m.move.name as MoveName,
           m.version_group_details[0].move_learn_method.name,
         );
-        if (onlyLearnable && !m.learnable) {
-          return <React.Fragment key={m.move.name}></React.Fragment>;
-        }
+
         return (
           <MoveEditorListEntry
+            showOnlyAvailable={onlyLearnable}
             key={m.move.name}
             m={m}
             payment={payment}
