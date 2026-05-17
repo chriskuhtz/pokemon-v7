@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { ItemInfoButton } from "../../components/ItemInfoButton/ItemInfoButton";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { useNavigate } from "../../hooks/useNavigate";
@@ -6,7 +7,6 @@ import { SaveFileContext } from "../../hooks/useSaveFile";
 import { ItemType } from "../../interfaces/Item";
 import { AnimatedBar } from "../../uiComponents/AnimatedBar/AnimatedBar";
 import { Card } from "../../uiComponents/Card/Card";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 import {
   BASE_RECIPES,
@@ -20,7 +20,7 @@ export const CookingGrandma = (): JSX.Element => {
   const navigate = useNavigate();
   const [filter, setFilter] = useState<ItemType | undefined>("berry-juice");
   return (
-    <Page
+    <InGamePage
       headline="Cooking with Chef Grandma"
       goBack={() => navigate("CHEF_GRANDMA", "OVERWORLD")}
     >
@@ -128,6 +128,6 @@ export const CookingGrandma = (): JSX.Element => {
             ))}
         </Stack>
       </Stack>
-    </Page>
+    </InGamePage>
   );
 };

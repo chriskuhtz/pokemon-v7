@@ -1,4 +1,5 @@
 import { useCallback, useContext } from "react";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 import { isBagOverloaded } from "../../functions/getBagLimit";
@@ -13,7 +14,6 @@ import { Occupant } from "../../interfaces/Occupant";
 import { CharacterLocationData } from "../../interfaces/SaveFile";
 import { SpriteEnum } from "../../interfaces/SpriteEnum";
 import { Card } from "../../uiComponents/Card/Card";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
 const taxiLocations: Partial<
@@ -109,7 +109,7 @@ export const DragoniteTaxi = (): JSX.Element => {
   const navigate = useNavigate();
 
   return (
-    <Page
+    <InGamePage
       headline="dragonite taxi"
       goBack={() => navigate("DRAGONITE_TAXI", "OVERWORLD")}
     >
@@ -154,7 +154,7 @@ export const DragoniteTaxi = (): JSX.Element => {
           />
         ))}
       </Stack>
-    </Page>
+    </InGamePage>
   );
 };
 

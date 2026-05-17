@@ -1,11 +1,11 @@
 import { useCallback, useContext, useMemo } from "react";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { joinInventories } from "../../interfaces/Inventory";
 import { apricornTable, ApricornType, isApricorn } from "../../interfaces/Item";
 import { Card } from "../../uiComponents/Card/Card";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
 export const ApricornSmithy = ({ goBack }: { goBack: () => void }) => {
@@ -37,7 +37,7 @@ export const ApricornSmithy = ({ goBack }: { goBack: () => void }) => {
     [addMessage, patchSaveFileReducer, saveFile.bag, saveFile.mileStones],
   );
   return (
-    <Page goBack={goBack} headline="Kurt's Apricorn Smithy">
+    <InGamePage goBack={goBack} headline="Kurt's Apricorn Smithy">
       {apricorns.length === 0 ? (
         <strong>Forage for Apricorn in the wild</strong>
       ) : (
@@ -75,6 +75,6 @@ export const ApricornSmithy = ({ goBack }: { goBack: () => void }) => {
           ))}
         </Stack>
       )}
-    </Page>
+    </InGamePage>
   );
 };

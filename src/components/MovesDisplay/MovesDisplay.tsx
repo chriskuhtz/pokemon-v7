@@ -1,20 +1,23 @@
 import React from "react";
-import { MdRadioButtonUnchecked } from "react-icons/md";
+import { FaArrowDown, FaArrowUp, FaCheck, FaX } from "react-icons/fa6";
+import { MoveName } from "../../constants/movesCheckList";
+import { getCurrentPP } from "../../functions/getCurrentPP";
+import { getMovesArray } from "../../functions/getMovesArray";
+import { useGetMoveData } from "../../hooks/useGetMoveData";
 import { OwnedPokemon } from "../../interfaces/OwnedPokemon";
-import { Card } from "../../uiComponents/Card/Card";
 import { Stack } from "../../uiComponents/Stack/Stack";
-import { MoveInfoButton } from "../MoveInfoButton/MoveInfoButton";
-import { MovesDisplayListEntry } from "./components/MovesDisplayListEntry";
+import {
+  MoveDisplayEntry,
+  PPAndStrengthSection,
+} from "./components/MovesDisplayListEntry";
 import { useMovesDisplay } from "./hooks/useMovesDisplay";
 
 export const MovesDisplay = ({
   ownedPokemon,
   onlyCurrent = false,
-  small = false,
 }: {
   ownedPokemon: OwnedPokemon;
   onlyCurrent?: boolean;
-  small?: boolean;
 }) => {
   const { b, activateMove, deActivateMove, reorder, currentMoves } =
     useMovesDisplay({
@@ -24,63 +27,90 @@ export const MovesDisplay = ({
     return <></>;
   }
   return (
-    <>
-      <MovesListWrapper>
-        {currentMoves.map((o) => (
-          <MovesDisplayListEntry
-            small={small}
+    <Stack mode="column">
+      <strong>Active Moves (max. 4):</strong>
+      {currentMoves.map((o, index) => {
+        const battleMove = getMovesArray(b).find(
+          (move) => move.name === o.name,
+        );
+        if (!battleMove) {
+          return <></>;
+        }
+        const currentPP = getCurrentPP(b, battleMove);
+        return (
+          <MoveDisplayEntry
             key={o.name}
-            o={o.name}
-            battlePokemon={b}
-            reorder={(dir) => reorder(dir, o.name)}
-            onlyCurrent={!!onlyCurrent}
-            currentMoves={currentMoves.map((c) => c.name)}
-            activateMove={() => activateMove(o.name)}
-            deActivateMove={() => deActivateMove(o)}
+            typeName={battleMove.data.type.name}
+            moveName={o.name}
+            additionalInfo={
+              <PPAndStrengthSection
+                data={battleMove.data}
+                currentPP={currentPP}
+              />
+            }
+            additionalIcons={[
+              index !== 0 ? (
+                <FaArrowUp onClick={() => reorder("UP", o.name)} />
+              ) : undefined,
+              index !== currentMoves.length - 1 ? (
+                <FaArrowDown onClick={() => reorder("DOWN", o.name)} />
+              ) : undefined,
+              currentMoves.length > 1 ? (
+                <FaX onClick={() => deActivateMove(o)} />
+              ) : undefined,
+            ].filter((icon) => icon !== undefined)}
           />
-        ))}
-      </MovesListWrapper>
-      <Stack mode="column">
-        {!onlyCurrent
-          ? ownedPokemon.unlockedMoves
-              .filter((u) => !currentMoves.some((c) => c.name === u))
-              .map((o) => (
-                <div
-                  key={o}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: ".5rem",
-                  }}
-                >
-                  <div style={{ flexGrow: 1 }}>
-                    <Card
-                      key={o}
-                      actionElements={[]}
-                      disabled={
-                        !currentMoves.some((c) => c.name === o) &&
-                        currentMoves.length === 4
-                      }
-                      icon={<MdRadioButtonUnchecked />}
-                      onClick={() => {
-                        if (!currentMoves.some((c) => c.name === o)) {
-                          if (currentMoves.length === 4) {
-                            return;
-                          } else activateMove(o);
-                        }
-                      }}
-                      content={<strong>{o}</strong>}
-                    />
-                  </div>
-                  <MoveInfoButton movename={o} />
-                </div>
-              ))
-          : [<React.Fragment key={"bla"}></React.Fragment>]}
-      </Stack>
-    </>
+        );
+      })}
+      {ownedPokemon.unlockedMoves.filter(
+        (u) => !currentMoves.some((c) => c.name === u),
+      ).length > 0 &&
+        !onlyCurrent && <strong>Available Moves:</strong>}
+      {!onlyCurrent
+        ? ownedPokemon.unlockedMoves
+            .filter((u) => !currentMoves.some((c) => c.name === u))
+            .map((o) => (
+              <UnlockedMoveDisplay
+                key={o}
+                moveName={o}
+                activate={
+                  currentMoves.length < 4 ? () => activateMove(o) : undefined
+                }
+                pp={
+                  ownedPokemon.deactivatedMoves?.find((d) => d.name === o)
+                    ?.usedPP
+                }
+              />
+            ))
+        : [<React.Fragment key={"bla"}></React.Fragment>]}
+    </Stack>
   );
 };
 
-const MovesListWrapper = ({ children }: { children: React.ReactElement[] }) => {
-  return <Stack mode="column">{children}</Stack>;
+const UnlockedMoveDisplay = ({
+  moveName,
+  pp,
+  activate,
+}: {
+  moveName: MoveName;
+  pp: number | undefined;
+  activate: (() => void) | undefined;
+}) => {
+  const { res } = useGetMoveData(moveName);
+
+  if (!res) {
+    return;
+  }
+
+  return (
+    <MoveDisplayEntry
+      onClick={activate}
+      moveName={moveName}
+      typeName={res.type.name}
+      additionalIcons={activate ? [<FaCheck onClick={activate} />] : undefined}
+      additionalInfo={
+        <PPAndStrengthSection data={res} currentPP={pp ?? res.pp} />
+      }
+    />
+  );
 };

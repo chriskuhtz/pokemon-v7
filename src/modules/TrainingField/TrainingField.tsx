@@ -5,6 +5,7 @@ import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 import { Sprite } from "../../components/Sprite/Sprite";
 import { calculateLevelData } from "../../functions/calculateLevelData";
 
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { portraitMode } from "../../constants/baseConstants";
 import {
   specialTrainers,
@@ -22,7 +23,6 @@ import { evTrainingTool } from "../../interfaces/Item";
 import { SaveFile } from "../../interfaces/SaveFile";
 import { Stat } from "../../interfaces/StatObject";
 import { Card } from "../../uiComponents/Card/Card";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 import {
   useChallengeTrainer,
@@ -224,7 +224,7 @@ export const TrainingField = () => {
     [saveFile.campUpgrades],
   );
   return (
-    <Page
+    <InGamePage
       goBack={() => setActiveTabReducer("OVERWORLD")}
       headline="Training Field:"
     >
@@ -255,7 +255,7 @@ export const TrainingField = () => {
         </Stack>
         {...filteredElements}
       </Stack>
-    </Page>
+    </InGamePage>
   );
 };
 

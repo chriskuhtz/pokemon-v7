@@ -13,6 +13,7 @@ import { QuestStatus } from "./Quest";
 import { RoutesType } from "./Routing";
 import { SettingsObject } from "./SettingsObject";
 import { TimedEvent } from "./TimedEvent";
+import { CharacterTrait } from "./Trait";
 
 export type CharacterOrientation = "UP" | "DOWN" | "LEFT" | "RIGHT";
 export type ForwardFoot = "CENTER1" | "RIGHT" | "CENTER2" | "LEFT";
@@ -132,38 +133,6 @@ export const startingRegions = [
 ] as const;
 export type StartingRegion = (typeof startingRegions)[number];
 
-export const traits = [
-  "chef",
-  "gardener",
-  "competitor",
-  "collector",
-  "explorer",
-] as const;
-export type CharacterTrait = (typeof traits)[number];
-
-export const traitBoni: Record<CharacterTrait, string> = {
-  chef: "Chefs rarely fail at cooking and can sometimes stretch cooked snacks into multiple portions",
-
-  gardener:
-    "Gardeners can harvest more plants than others and they seem to grow back faster",
-
-  competitor:
-    "Competitors are expert trainers, making their pokemon grow faster",
-
-  collector:
-    "Collectors have better chances at catching pokemon and finding shiny pokemon ",
-
-  explorer:
-    "Explorers often find more items than others and lose fewer Items when they retreat",
-};
-export const traitQuestRewardFactor: Record<CharacterTrait, number> = {
-  chef: 1.1,
-  gardener: 1.1,
-  competitor: 1.1,
-  collector: 1.1,
-  explorer: 1.05,
-};
-
 export interface SaveFile {
   badges: BadgeName[];
   playerId: string;
@@ -176,6 +145,8 @@ export interface SaveFile {
     activeTab: RoutesType;
     currentChallenger?: Challenger;
     currentChestId?: string;
+    loot?: Inventory;
+    focusedMonId?: string;
   };
   lastEdited: number;
   lastNurse: string;

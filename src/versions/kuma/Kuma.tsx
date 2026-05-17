@@ -83,7 +83,7 @@ export const kumaGameData: GameData = {
     numberOfBallsBadge: true,
     quests: true,
     pokemonStorageSystem: true,
-    movesEditableInTeamOverview: false,
+    movesEditableInTeamOverview: true,
     movesLearnableInTeamOverview: false,
     snapShotExportAvailable: false,
     lostItems: true,

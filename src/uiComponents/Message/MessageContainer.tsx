@@ -19,7 +19,11 @@ export const MessageContainer = () => {
     <ErrorBoundary
       onError={(e) => addMultipleMessages([{ message: e.message }])}
       fallback={
-        <Page headline="An unexpected error occured:">
+        <Page
+          primaryColor={"rgba(122, 199, 76, 0.5) 0%"}
+          secondaryColor={"rgba(99, 144, 240, 0.5) 100%"}
+          headline="An unexpected error occured:"
+        >
           {latestMessage && (
             <MessageBanner
               latestMessage={latestMessage}

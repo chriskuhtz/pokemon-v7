@@ -1,3 +1,4 @@
+import { OwnedPokemon } from "../interfaces/OwnedPokemon";
 import { QuestStatus } from "../interfaces/Quest";
 import { SaveFile } from "../interfaces/SaveFile";
 import {
@@ -15,6 +16,15 @@ export const migrateSavefile = (input: SaveFile) => {
     ...p,
     xp: Math.floor(p.xp),
   }));
+  //remove possible duplicates
+  const dedupedMons: OwnedPokemon[] = [];
+
+  updatedInput.pokemon.forEach((p) => {
+    if (!dedupedMons.some((d) => d.id === p.id)) {
+      dedupedMons.push(p);
+    }
+  });
+  updatedInput.pokemon = dedupedMons;
   //migrate new quests
   updatedInput.quests = Object.fromEntries(
     kumaQuestNames.map((q) => [q, updatedInput.quests[q] ?? "INACTIVE"]),

@@ -1,7 +1,7 @@
 import { useCallback, useContext } from "react";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { StartingRegion, startingRegions } from "../../interfaces/SaveFile";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
 export const StartingRegionSelection = (): JSX.Element => {
@@ -22,7 +22,7 @@ export const StartingRegionSelection = (): JSX.Element => {
   );
 
   return (
-    <Page headline="What is your favorite Pokemon Region:">
+    <InGamePage headline="What is your favorite Pokemon Region:">
       <div
         style={{
           height: "90dvh",
@@ -35,7 +35,7 @@ export const StartingRegionSelection = (): JSX.Element => {
           mode="column"
           alignItems="stretch"
           justifyContent="center"
-          gap={1}
+          gapInRem={1}
         >
           <button onClick={() => proceed("kanto")}>
             I have never played pokemon before
@@ -47,6 +47,6 @@ export const StartingRegionSelection = (): JSX.Element => {
           ))}
         </Stack>
       </div>
-    </Page>
+    </InGamePage>
   );
 };

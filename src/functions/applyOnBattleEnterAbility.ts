@@ -501,6 +501,8 @@ export const applyOnBattleEnterAbilityAndEffects = ({
           ownedPokemon: user,
           data: user.data,
           settings,
+          ownerTrait: undefined,
+          pokemonTypes: [],
         })[0];
         return applyStatChangeToPokemon(
           p,
@@ -530,6 +532,8 @@ export const applyOnBattleEnterAbilityAndEffects = ({
           ownedPokemon: user,
           data: user.data,
           settings,
+          ownerTrait: undefined,
+          pokemonTypes: [],
         })[0];
         return applyStatChangeToPokemon(
           p,

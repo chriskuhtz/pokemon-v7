@@ -1,6 +1,6 @@
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { Sprite } from "../../components/Sprite/Sprite";
 import { BaseSizeProvider } from "../../hooks/useBaseSize";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
 export const SpriteSelection = ({
@@ -14,8 +14,8 @@ export const SpriteSelection = ({
 }): JSX.Element => {
   return (
     <BaseSizeProvider allowedBaseSizes={[64]}>
-      <Page headline={headline}>
-        <Stack gap={1.5} mode="row" justifyContent="stretch">
+      <InGamePage headline={headline}>
+        <Stack gapInRem={1.5} mode="row" justifyContent="stretch">
           {availableSprites.map((s) => (
             <Sprite
               canvasKey={s}
@@ -26,7 +26,7 @@ export const SpriteSelection = ({
             />
           ))}
         </Stack>
-      </Page>
+      </InGamePage>
     </BaseSizeProvider>
   );
 };

@@ -1,10 +1,4 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { TimeOfDayIcon } from "../../components/TimeOfDayIcon/TimeOfDayIcon";
-import {
-  TerrainIcon,
-  WeatherIcon,
-} from "../../components/WeatherIcon/WeatherIcon";
-import { portraitMode } from "../../constants/baseConstants";
 import { MoveName } from "../../constants/movesCheckList";
 import {
   applyEndOfTurnAbility,
@@ -32,9 +26,7 @@ import { BattlePokemon } from "../../interfaces/BattlePokemon";
 import { Inventory, joinInventories } from "../../interfaces/Inventory";
 import { ItemType } from "../../interfaces/Item";
 import { EmptyStatObject } from "../../interfaces/StatObject";
-import { ControlBar } from "./components/ControlBar";
-import { EnemyLane } from "./components/EnemyLane";
-import { PlayerLane } from "./components/PlayerLane";
+import { BattleFieldUI } from "./components/BattleFieldUI";
 import { RefillHandling } from "./components/RefillHandling";
 import { applyRewardsToTeam } from "./functions/applyRewardsToTeam";
 import { checkAndHandleFainting } from "./functions/handleFainting";
@@ -51,7 +43,6 @@ export const BattleField = ({
   inventory,
   fightersPerSide,
   challengerId,
-  rewardItems,
   spriteGeneration,
   challengerType,
 }: {
@@ -60,7 +51,6 @@ export const BattleField = ({
   fightersPerSide: number;
   inventory: Inventory;
   challengerId: string;
-  rewardItems?: Partial<Inventory>;
   spriteGeneration?: 1;
   challengerType: "TRAINER" | "WILD";
 }) => {
@@ -68,7 +58,7 @@ export const BattleField = ({
   const { latestMessage, addMessage, addMultipleMessages } =
     useContext(MessageQueueContext);
   const { saveFile } = useContext(SaveFileContext);
-  const { settings, playerId } = saveFile;
+  const { settings, playerId, trait } = saveFile;
   const gameData = useContext(GameDataContext);
   const { features } = gameData;
   const isTrainerBattle = useMemo(() => {
@@ -251,15 +241,15 @@ export const BattleField = ({
         defeatedPokemon: defeatedPokemon ?? [],
         outcome,
         defeatedChallengerId: challengerId,
-        rewardItems,
+        lootPossible: !isTrainerBattle,
       });
     },
     [
       battleInventory,
       challengerId,
+      isTrainerBattle,
       leave,
       pokemon,
-      rewardItems,
       scatteredCoins,
       team,
     ],
@@ -512,6 +502,7 @@ export const BattleField = ({
             battleFieldEffects,
             battleTerrain,
             battleInventory,
+            updated.ownerId === playerId ? trait : undefined,
           );
           updated = handleCheekPouch(updated, (x) => collectedMessages.push(x));
 
@@ -564,7 +555,9 @@ export const BattleField = ({
     initTeam,
     latestMessage,
     nextPokemonWithoutMove,
+    playerId,
     pokemon,
+    trait,
   ]);
   //Collecting Rewards
   useEffect(() => {
@@ -577,7 +570,7 @@ export const BattleField = ({
           applyRewardsToTeam(
             team,
             faintedOpps,
-            saveFile.trait === "competitor",
+            saveFile.trait,
             isTrainerBattle,
             !!saveFile.settings?.expShareActive,
             !!saveFile.settings?.doubleXpRates,
@@ -662,55 +655,20 @@ export const BattleField = ({
   }
 
   return (
-    <div>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateRows: `1fr 4fr 4fr ${portraitMode ? 3 : 2}fr`,
-          height: "100dvh",
-          gap: ".5rem",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: ".5rem",
-          }}
-        >
-          <WeatherIcon weather={battleWeather} />
-          <TimeOfDayIcon />
-          <TerrainIcon terrain={battleTerrain} />
-        </div>
-
-        <EnemyLane
-          onFieldOpponents={onFieldOpponents}
-          spriteGeneration={spriteGeneration}
-        />
-        <PlayerLane onFieldTeam={onFieldTeam} />
-
-        <div
-          style={{
-            maxWidth: "100dvw",
-            overflow: "scroll",
-            backgroundColor: "rgba(255,255,255,.9)",
-          }}
-        >
-          <ControlBar
-            disabled={!!latestMessage}
-            controlled={nextPokemonWithoutMove}
-            targets={pokemon}
-            chooseAction={chooseAction}
-            playerInventory={battleInventory}
-            catchingForbiddenReason={catchingForbiddenReason}
-            runningAllowed={runningAllowed}
-            battleFieldEffects={battleFieldEffects}
-            weather={battleWeather}
-            terrain={battleTerrain}
-          />
-        </div>
-      </div>
-    </div>
+    <BattleFieldUI
+      battleWeather={battleWeather}
+      battleTerrain={battleTerrain}
+      onFieldOpponents={onFieldOpponents}
+      spriteGeneration={spriteGeneration}
+      onFieldTeam={onFieldTeam}
+      nextPokemonWithoutMove={nextPokemonWithoutMove}
+      targets={pokemon}
+      chooseAction={chooseAction}
+      catchingForbiddenReason={catchingForbiddenReason}
+      battleFieldEffects={battleFieldEffects}
+      runningAllowed={runningAllowed}
+      battleInventory={battleInventory}
+      trait={trait}
+    />
   );
 };

@@ -49,6 +49,7 @@ export const BattleLoader = ({
         team: [],
         outcome: "LOSS",
         defeatedPokemon: [],
+        lootPossible: false,
       });
     }
   }, [leave, saveFile.bag, team.length]);

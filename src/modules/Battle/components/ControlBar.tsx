@@ -8,6 +8,7 @@ import { BattlePokemon } from "../../../interfaces/BattlePokemon";
 import { Inventory } from "../../../interfaces/Inventory";
 import { WeatherType } from "../../../interfaces/Weather";
 
+import { CharacterTrait } from "../../../interfaces/Trait";
 import { BattleTerrain } from "../hooks/useBattleTerrain";
 import {
   ActionType,
@@ -28,7 +29,9 @@ export function ControlBar({
   weather,
   terrain,
   disabled,
+  trait,
 }: {
+  trait: CharacterTrait | undefined;
   controlled: BattlePokemon | undefined;
   targets: BattlePokemon[];
   chooseAction: (x: ChooseActionPayload) => void;
@@ -54,9 +57,10 @@ export function ControlBar({
             chosenAction,
             onlyOpponents: false,
             playerId,
+            trait,
           })
         : [],
-    [chosenAction, controlled, playerId, targets],
+    [chosenAction, controlled, playerId, targets, trait],
   );
 
   useEffect(() => {
@@ -96,7 +100,6 @@ export function ControlBar({
     return (
       <div
         style={{
-          borderTop: "1px solid black",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -108,6 +111,7 @@ export function ControlBar({
   if (!chosenAction) {
     return (
       <ActionSelection
+        trait={trait}
         disabled={disabled}
         controlled={controlled}
         chooseAction={chooseAction}

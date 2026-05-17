@@ -10,6 +10,7 @@ import {
   ItemType,
 } from "../interfaces/Item";
 import { getRandomBoostableStat, Stat } from "../interfaces/StatObject";
+import { CharacterTrait } from "../interfaces/Trait";
 import { BattleTerrain } from "../modules/Battle/hooks/useBattleTerrain";
 import { BattleFieldEffect } from "../modules/Battle/interfaces/interfaces";
 import { applyItemToPokemon } from "./applyItemToPokemon";
@@ -28,6 +29,7 @@ export const applyEndOfTurnHeldItem = (
   battleFieldEffects: BattleFieldEffect[],
   terrain: BattleTerrain | undefined,
   battleInventory: Inventory,
+  trait: CharacterTrait | undefined,
 ): BattlePokemon => {
   const unnerved = hasBattleFieldEffect(pokemon, "unnerve", battleFieldEffects);
 
@@ -111,7 +113,7 @@ export const applyEndOfTurnHeldItem = (
       ]);
       return applySecondaryAilmentToPokemon({
         pokemon: {
-          ...applyItemToPokemon(pokemon, heldItem),
+          ...applyItemToPokemon({ pokemon, item: heldItem, trait }),
           heldItemName: undefined,
           consumedBerry: heldItem,
         },
@@ -122,7 +124,7 @@ export const applyEndOfTurnHeldItem = (
     } else {
       addMessage(`${pokemon.data.name} healed itself with ${heldItem}`);
       return {
-        ...applyItemToPokemon(pokemon, heldItem),
+        ...applyItemToPokemon({ pokemon, item: heldItem, trait }),
         heldItemName: undefined,
         consumedBerry: heldItem,
       };
@@ -223,7 +225,7 @@ export const applyEndOfTurnHeldItem = (
   if (HPHealTable[heldItem] && pokemon.damage / pokemon.stats.hp > 0.5) {
     addMessage(`${pokemon.data.name} healed itself with ${heldItem}`);
     return {
-      ...applyItemToPokemon(pokemon, heldItem),
+      ...applyItemToPokemon({ pokemon, item: heldItem, trait }),
       heldItemName: undefined,
       consumedBerry: isBerry(heldItem) ? heldItem : undefined,
     };
@@ -231,7 +233,7 @@ export const applyEndOfTurnHeldItem = (
   if (heldItem === "cheri-berry" && hasAilment(pokemon, "paralysis")) {
     addMessage(`${pokemon.data.name} cured its paralysis with ${heldItem}`);
     return {
-      ...applyItemToPokemon(pokemon, heldItem),
+      ...applyItemToPokemon({ pokemon, item: heldItem, trait }),
       heldItemName: undefined,
       consumedBerry: heldItem,
     };
@@ -239,7 +241,7 @@ export const applyEndOfTurnHeldItem = (
   if (heldItem === "chesto-berry" && hasAilment(pokemon, "sleep")) {
     addMessage(`${pokemon.data.name} cured its sleep with ${heldItem}`);
     return {
-      ...applyItemToPokemon(pokemon, heldItem),
+      ...applyItemToPokemon({ pokemon, item: heldItem, trait }),
       heldItemName: undefined,
       consumedBerry: heldItem,
     };
@@ -250,7 +252,7 @@ export const applyEndOfTurnHeldItem = (
   ) {
     addMessage(`${pokemon.data.name} cured its poison with ${heldItem}`);
     return {
-      ...applyItemToPokemon(pokemon, heldItem),
+      ...applyItemToPokemon({ pokemon, item: heldItem, trait }),
       heldItemName: undefined,
       consumedBerry: heldItem,
     };
@@ -258,7 +260,7 @@ export const applyEndOfTurnHeldItem = (
   if (heldItem === "rawst-berry" && hasAilment(pokemon, "burn")) {
     addMessage(`${pokemon.data.name} cured its burn with ${heldItem}`);
     return {
-      ...applyItemToPokemon(pokemon, heldItem),
+      ...applyItemToPokemon({ pokemon, item: heldItem, trait }),
       heldItemName: undefined,
       consumedBerry: heldItem,
     };
@@ -266,7 +268,7 @@ export const applyEndOfTurnHeldItem = (
   if (heldItem === "aspear-berry" && hasAilment(pokemon, "freeze")) {
     addMessage(`${pokemon.data.name} cured its freeze with ${heldItem}`);
     return {
-      ...applyItemToPokemon(pokemon, heldItem),
+      ...applyItemToPokemon({ pokemon, item: heldItem, trait }),
       heldItemName: undefined,
       consumedBerry: heldItem,
     };
@@ -274,7 +276,7 @@ export const applyEndOfTurnHeldItem = (
   if (heldItem === "persim-berry" && hasAilment(pokemon, "confusion")) {
     addMessage(`${pokemon.data.name} cured its confusion with ${heldItem}`);
     return {
-      ...applyItemToPokemon(pokemon, heldItem),
+      ...applyItemToPokemon({ pokemon, item: heldItem, trait }),
       heldItemName: undefined,
       consumedBerry: heldItem,
     };
@@ -285,7 +287,7 @@ export const applyEndOfTurnHeldItem = (
   ) {
     addMessage(`${pokemon.data.name} cured itself with ${heldItem}`);
     return {
-      ...applyItemToPokemon(pokemon, heldItem),
+      ...applyItemToPokemon({ pokemon, item: heldItem, trait }),
       heldItemName: undefined,
       consumedBerry: heldItem,
     };
@@ -297,7 +299,13 @@ export const applyEndOfTurnHeldItem = (
     if (depletedMove) {
       addMessage(`${pokemon.data.name} used its ${heldItem}`);
       return {
-        ...applyItemToPokemon(pokemon, heldItem, undefined, depletedMove.name),
+        ...applyItemToPokemon({
+          pokemon,
+          item: heldItem,
+          addMessage: undefined,
+          move: depletedMove.name,
+          trait,
+        }),
         heldItemName: undefined,
         consumedBerry: heldItem,
       };

@@ -1,4 +1,5 @@
 import { useCallback, useContext } from "react";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { ItemInfoButton } from "../../components/ItemInfoButton/ItemInfoButton";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
@@ -9,7 +10,6 @@ import { ItemType } from "../../interfaces/Item";
 import { Occupant } from "../../interfaces/Occupant";
 import { SpriteEnum } from "../../interfaces/SpriteEnum";
 import { Card } from "../../uiComponents/Card/Card";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
 const vilePlumeProducts: Partial<
@@ -62,7 +62,7 @@ export const VilePlumeScentResearcher = (): JSX.Element => {
 
   const navigate = useNavigate();
   return (
-    <Page
+    <InGamePage
       headline="Trade Berries for Repels"
       goBack={() => navigate("CURATOR", "OVERWORLD")}
     >
@@ -87,7 +87,7 @@ export const VilePlumeScentResearcher = (): JSX.Element => {
           />
         ))}
       </Stack>
-    </Page>
+    </InGamePage>
   );
 };
 

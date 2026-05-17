@@ -6,11 +6,12 @@ import { isKO } from "../../../functions/isKo";
 import { Message } from "../../../hooks/useMessageQueue";
 import { BattlePokemon } from "../../../interfaces/BattlePokemon";
 import { Stat } from "../../../interfaces/StatObject";
+import { CharacterTrait } from "../../../interfaces/Trait";
 
 export const applyRewardsToTeam = (
   team: BattlePokemon[],
   defeatedPokemon: BattlePokemon[],
-  competitor: boolean,
+  trait: CharacterTrait | undefined,
   isTrainerBattle: boolean,
   expShareActive: boolean,
   doubleXpRates: boolean,
@@ -27,8 +28,8 @@ export const applyRewardsToTeam = (
 
     let baseAmount = gainedXp / numberOfParticipants;
 
-    if (competitor) {
-      baseAmount *= 1.2;
+    if (trait === "competitor") {
+      baseAmount *= 1.1;
     }
     if (isTrainerBattle) {
       baseAmount *= 1.5;
@@ -87,12 +88,13 @@ export const applyRewardsToTeam = (
         const updated = { ...p };
         defeatedPokemon.forEach((defeated) => {
           Object.entries(defeated.evAwards).forEach(([stat, award]) => {
-            updated.effortValues = applyEVGain(
-              updated.effortValues,
-              stat as Stat,
-              award,
-              getHeldItem(p, false),
-            );
+            updated.effortValues = applyEVGain({
+              initialEvs: updated.effortValues,
+              stat: stat as Stat,
+              change: award,
+              heldItem: getHeldItem(p, false),
+              isGymBro: trait === "gym bro",
+            });
           });
         });
         return updated;

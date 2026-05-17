@@ -1,6 +1,7 @@
 import React, { useContext, useMemo, useState } from "react";
 import { IoPerson } from "react-icons/io5";
 import { MdFormatListBulleted } from "react-icons/md";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 import { battleSpriteSize } from "../../constants/baseConstants";
@@ -16,7 +17,6 @@ import { ItemType } from "../../interfaces/Item";
 import { questCategories, QuestCategory } from "../../interfaces/Quest";
 import { AnimatedBar } from "../../uiComponents/AnimatedBar/AnimatedBar";
 import { Card } from "../../uiComponents/Card/Card";
-import { Page } from "../../uiComponents/Page/Page";
 import { SelectionBar } from "../../uiComponents/SelectionBar/SelectionBar";
 import { Stack } from "../../uiComponents/Stack/Stack";
 import {
@@ -49,14 +49,14 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
 
   if (Object.values(all).filter((v) => v.status !== "INACTIVE").length === 0) {
     return (
-      <Page headline={"Quests:"} goBack={goBack}>
+      <InGamePage headline={"Quests:"} goBack={goBack}>
         Talk to the people in the camp to start quests
-      </Page>
+      </InGamePage>
     );
   }
 
   return (
-    <Page headline={"Quests:"} goBack={goBack}>
+    <InGamePage headline={"Quests:"} goBack={goBack}>
       <Stack mode="column">
         <SelectionBar
           options={["CURRENT", "FULFILLED", ...questCategories].map((op) => ({
@@ -200,7 +200,6 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
                 status === "FULFILLED" && (
                   <button
                     style={{
-                      borderRadius: 9000,
                       backgroundColor: typeColors["grass"],
                     }}
                     onClick={() => {
@@ -224,6 +223,6 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
           );
         })}
       </Stack>
-    </Page>
+    </InGamePage>
   );
 };

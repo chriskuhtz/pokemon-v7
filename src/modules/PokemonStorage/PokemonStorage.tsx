@@ -1,6 +1,7 @@
 import React, { useContext, useMemo, useState } from "react";
 import { FaRegStar, FaSearch, FaStar } from "react-icons/fa";
 import { GiBreakingChain } from "react-icons/gi";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { getPokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 import { battleSpriteSize } from "../../constants/baseConstants";
@@ -26,10 +27,9 @@ import { balltypes } from "../../interfaces/Item";
 import { mapIds } from "../../interfaces/mapIds";
 import { OwnedPokemon } from "../../interfaces/OwnedPokemon";
 import { PokemonType, realTypes } from "../../interfaces/PokemonType";
+import { BottomDrawer } from "../../uiComponents/BottomDrawer/BottomDrawer";
 import { Chip } from "../../uiComponents/Chip/Chip";
 import { IconSolarSystem } from "../../uiComponents/IconSolarSystem/IconSolarSystem";
-import { Modal } from "../../uiComponents/Modal/Modal";
-import { Page } from "../../uiComponents/Page/Page";
 import { SelectionBar } from "../../uiComponents/SelectionBar/SelectionBar";
 import { Stack } from "../../uiComponents/Stack/Stack";
 export const sortByTypes = [
@@ -173,8 +173,8 @@ export const PokemonStorage = ({
   };
 
   return (
-    <Page goBack={goBack} headline="Your Pokemon:">
-      <Modal
+    <InGamePage goBack={goBack} headline="Your Pokemon:">
+      <BottomDrawer
         close={() => setReleaseToConfirm(undefined)}
         open={!!releaseToConfirm}
       >
@@ -194,7 +194,7 @@ export const PokemonStorage = ({
           </button>
           <button onClick={() => setReleaseToConfirm(undefined)}>No</button>
         </div>
-      </Modal>
+      </BottomDrawer>
       <h2>Team:</h2>
       <Stack mode="row">
         {team.map((pokemon) => {
@@ -284,7 +284,7 @@ export const PokemonStorage = ({
         startReleaseProcess={startReleaseProcess}
         toggleFavoriteStatus={toggleFavoriteStatus}
       />
-    </Page>
+    </InGamePage>
   );
 };
 
@@ -416,7 +416,7 @@ const Sorted = ({
     return (
       <>
         <div style={{ margin: "1rem" }}>
-          <Stack mode={"row"} gap={2}>
+          <Stack mode={"row"} gapInRem={2}>
             {realTypes.map((t) => (
               <img
                 key={t}

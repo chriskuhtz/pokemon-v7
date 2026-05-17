@@ -7,12 +7,20 @@ import {
   joinCatchBoosts,
 } from "../functions/joinCatchBoosts";
 import { joinInventories } from "../interfaces/Inventory";
-import { researchBoni } from "../interfaces/Quest";
-import { CatchBoosts, traitQuestRewardFactor } from "../interfaces/SaveFile";
+import { QuestCategory } from "../interfaces/Quest";
+import { CatchBoosts } from "../interfaces/SaveFile";
+import { CharacterTrait, traitResearchBoni } from "../interfaces/Trait";
 import { KumaQuestName, KumaQuestsRecord } from "../versions/kuma/questsRecord";
 import { GameDataContext } from "./useGameData";
 import { MessageQueueContext } from "./useMessageQueue";
 import { SaveFileContext } from "./useSaveFile";
+
+const getQuestRewardTraitFactor = (
+  trait: CharacterTrait | undefined,
+  category: QuestCategory,
+): number => {
+  return trait ? (traitResearchBoni[trait][category] ?? 1) : 1;
+};
 
 export const useFulfillQuest = () => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
@@ -48,12 +56,10 @@ export const useFulfillQuest = () => {
         updatedCampUpgrades[quest.campUpgrade] = true;
       }
 
-      const earnedPoints =
-        saveFile.trait && researchBoni[saveFile.trait].includes(quest.category)
-          ? Math.floor(
-              quest.researchPoints * traitQuestRewardFactor[saveFile.trait],
-            )
-          : quest.researchPoints;
+      const earnedPoints = Math.floor(
+        quest.researchPoints *
+          getQuestRewardTraitFactor(saveFile.trait, quest.category),
+      );
 
       const rewardStrings: string[] = [
         `${earnedPoints} Research Points`,

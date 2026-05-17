@@ -44,6 +44,7 @@ export const chooseOpponentAction = ({
     chosenAction: "tackle",
     onlyOpponents: true,
     playerId,
+    trait: undefined,
   });
 
   const random = Math.random() > 0.95;

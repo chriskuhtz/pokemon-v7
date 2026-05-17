@@ -4,7 +4,7 @@ import { SaveFileContext } from "../../../hooks/useSaveFile";
 import { ItemType, isKeyItem } from "../../../interfaces/Item";
 import { OwnedPokemon } from "../../../interfaces/OwnedPokemon";
 import { Stack } from "../../../uiComponents/Stack/Stack";
-import { ItemSelectionOption } from "../../ItemSelectionListModal/ItemSelectionListModal";
+import { ItemSelectionOption } from "../../ItemSelectionOption/ItemSelectionOption";
 
 export const HeldItemSelection = ({
   ownedPokemon,
@@ -24,10 +24,11 @@ export const HeldItemSelection = ({
     <Stack mode="column">
       {heldItem && (
         <ItemSelectionOption
+          key={heldItem}
           label={`take ${heldItem}`}
           item={heldItem}
           isSelected={true}
-          toggle={takeHeldItem}
+          onClick={takeHeldItem}
         />
       )}
       {Object.entries(bag)
@@ -39,7 +40,7 @@ export const HeldItemSelection = ({
             key={item}
             item={item as ItemType}
             isSelected={item === heldItem}
-            toggle={(x) => giveHeldItem(x as ItemType)}
+            onClick={() => giveHeldItem(item as ItemType)}
           />
         ))}
     </Stack>

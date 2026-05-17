@@ -4,13 +4,17 @@ import { FaFistRaised, FaRunning } from "react-icons/fa";
 import { FaArrowsRotate } from "react-icons/fa6";
 import { ItemSprite } from "../../../components/ItemSprite/ItemSprite";
 
-import { MoveCard } from "../../../components/MoveCard/MoveCard";
+import {
+  MoveDisplayEntry,
+  PPAndStrengthSection,
+} from "../../../components/MovesDisplay/components/MovesDisplayListEntry";
 import {
   battleSpriteSize,
   portraitMode,
 } from "../../../constants/baseConstants";
 import { canBenefitFromItem } from "../../../functions/canBenefitFromItem";
 import { canRunOrSwitch } from "../../../functions/canRunOrSwitch";
+import { getCurrentPP } from "../../../functions/getCurrentPP";
 import { getMovesArray } from "../../../functions/getMovesArray";
 import {
   getPlayerPokemon,
@@ -27,6 +31,7 @@ import {
   isXItem,
   ItemType,
 } from "../../../interfaces/Item";
+import { CharacterTrait } from "../../../interfaces/Trait";
 import { Card } from "../../../uiComponents/Card/Card";
 import { Stack } from "../../../uiComponents/Stack/Stack";
 import {
@@ -41,11 +46,11 @@ export function ActionSelection({
   setChosenAction,
   chooseAction,
   allTargets,
-
   runningAllowed,
   battleFieldEffects,
   disabled,
   catchingForbiddenReason,
+  trait,
 }: {
   controlled: BattlePokemon;
   inventory: Inventory;
@@ -56,6 +61,7 @@ export function ActionSelection({
   battleFieldEffects: BattleFieldEffect[];
   disabled: boolean;
   catchingForbiddenReason: string | undefined;
+  trait: CharacterTrait | undefined;
 }) {
   const [subgroup, setSubGroup] = useState<"MOVES" | "ITEMS" | undefined>();
   const {
@@ -96,11 +102,11 @@ export function ActionSelection({
             isPPRestorationItem(item) ||
             isXItem(item)) &&
             getPlayerPokemon(allTargets, playerId).some((t) =>
-              canBenefitFromItem(t, item),
+              canBenefitFromItem({ pokemon: t, item, trait }),
             ))
         );
       }) as [ItemType, number][],
-    [allTargets, inventory, playerId, settings?.noItemsInBattle],
+    [allTargets, inventory, playerId, settings?.noItemsInBattle, trait],
   );
 
   const runOrSwitchPossible = useMemo(
@@ -130,12 +136,19 @@ export function ActionSelection({
             considerTaunt: true,
             considerEncore: true,
           }).map((m) => (
-            <MoveCard
-              pokemon={controlled}
-              move={m}
-              key={m.name}
-              onClick={() => setChosenAction(m.name)}
-            />
+            <div key={m.name} style={{ padding: "0 .25rem 0 0" }}>
+              <MoveDisplayEntry
+                onClick={() => setChosenAction(m.name)}
+                moveName={m.name}
+                typeName={m.data.type.name}
+                additionalInfo={
+                  <PPAndStrengthSection
+                    data={m.data}
+                    currentPP={getCurrentPP(controlled, m)}
+                  />
+                }
+              />
+            </div>
           ))
         ) : (
           <Card
@@ -210,7 +223,7 @@ const ActionsWrapper = ({ children }: { children: ReactNode[] }) => {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 1fr",
+          gridTemplateColumns: "1fr",
           gap: ".25rem",
         }}
       >
@@ -219,7 +232,7 @@ const ActionsWrapper = ({ children }: { children: ReactNode[] }) => {
     );
   }
   return (
-    <Stack mode={"row"} gap={0.5}>
+    <Stack mode={"row"} gapInRem={0.5}>
       {children}
     </Stack>
   );

@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { getRandomBall, getRandomItem } from "../../interfaces/Item";
 import { SettingsObject } from "../../interfaces/SettingsObject";
-import { Page } from "../../uiComponents/Page/Page";
 import { ToggleRow } from "../../uiComponents/ToggleRow/ToggleRow";
 import { KumaQuestsRecord } from "../../versions/kuma/questsRecord";
 
@@ -113,7 +113,7 @@ export const Settings = ({
     });
   };
   return (
-    <Page
+    <InGamePage
       goBack={
         atGameStart
           ? undefined
@@ -191,6 +191,6 @@ export const Settings = ({
           Lets go
         </button>
       </div>
-    </Page>
+    </InGamePage>
   );
 };

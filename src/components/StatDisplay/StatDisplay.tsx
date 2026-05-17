@@ -17,7 +17,7 @@ export const StatDisplay = ({
     <div style={{ maxWidth: "100dvw" }}>
       <Stack mode="column">
         <NatureSection nature={ownedPokemon.nature} />
-        <BstSection data={data} ownedPokemon={ownedPokemon} />
+        <BstSection data={data} ownedPokemon={ownedPokemon} ownedByPlayer />
         <EVsSection
           type={data.types[0].type.name}
           effortValues={ownedPokemon.effortValues}

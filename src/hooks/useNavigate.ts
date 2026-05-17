@@ -6,15 +6,21 @@ export const useNavigate = (): ((
   currentRoute: RoutesType,
   newRoute: RoutesType,
   stepsWalked?: number,
+  focusedMonId?: string,
 ) => void) => {
   const { setActiveTabReducer, navigateAwayFromOverworldReducer } =
     useContext(SaveFileContext);
 
   return useCallback(
-    (currentRoute: RoutesType, newRoute: RoutesType, stepsWalked?: number) => {
+    (
+      currentRoute: RoutesType,
+      newRoute: RoutesType,
+      stepsWalked?: number,
+      focusedMonId?: string,
+    ) => {
       if (currentRoute === "OVERWORLD") {
         navigateAwayFromOverworldReducer(
-          { activeTab: newRoute },
+          { activeTab: newRoute, focusedMonId: focusedMonId },
           stepsWalked ?? 0,
         );
       } else setActiveTabReducer(newRoute);

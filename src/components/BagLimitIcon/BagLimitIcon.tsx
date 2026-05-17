@@ -6,12 +6,12 @@ import {
   getBagLimit,
   getTotalInventoryAmount,
 } from "../../functions/getBagLimit";
-import { getMiddleOfThree } from "../../functions/getMiddleOfThree";
 import { GameDataContext } from "../../hooks/useGameData";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
 import { useNavigate } from "../../hooks/useNavigate";
 import { SaveFileContext } from "../../hooks/useSaveFile";
-export const BagLimitIcon = () => {
+
+export const HudBagLimitIcon = () => {
   const gameData = useContext(GameDataContext);
   const { saveFile } = useContext(SaveFileContext);
   const { addMessage } = useContext(MessageQueueContext);
@@ -23,32 +23,44 @@ export const BagLimitIcon = () => {
   const navigate = useNavigate();
   const limit = getBagLimit(saveFile, gameData);
 
-  const actualpercentage = (totalAmount / limit) * 100;
-
-  const percentage = getMiddleOfThree([0, actualpercentage, 100]).toFixed(0);
-
   let rate = totalAmount / limit;
 
   if (totalAmount >= limit) {
     rate = 1;
   }
   return (
-    <div
-      onClick={() =>
-        addMessage({
-          message: `${100 - Number(percentage)}% Bag Capacity available`,
-          onRemoval: () => navigate("OVERWORLD", "BAG"),
-          needsNoConfirmation: true,
-        })
-      }
-      style={{ position: "relative" }}
-    >
+    <div style={{ position: "relative" }}>
+      <BagLimitIcon
+        rate={rate}
+        onClick={() =>
+          addMessage({
+            message: `${Math.max(limit - totalAmount, 0)} of ${limit} Slots empty`,
+            onRemoval: () => navigate("OVERWORLD", "BAG"),
+            needsNoConfirmation: true,
+          })
+        }
+      />
+    </div>
+  );
+};
+
+export const BagLimitIcon = ({
+  rate,
+  onClick,
+}: {
+  rate: number;
+  onClick?: () => void;
+}) => {
+  return (
+    <>
       <BsBackpack4
+        onClick={onClick}
         style={{ zIndex: 0, position: "absolute" }}
         size={battleSpriteSize}
         color={percentageBasedColor(1 - rate).color}
       />
       <div
+        onClick={onClick}
         style={{
           zIndex: 0,
           position: "absolute",
@@ -58,6 +70,6 @@ export const BagLimitIcon = () => {
       >
         <BsBackpack4 size={battleSpriteSize} color="black" />
       </div>
-    </div>
+    </>
   );
 };

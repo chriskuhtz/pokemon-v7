@@ -1,7 +1,7 @@
 import { useCallback, useContext, useMemo } from "react";
-import { mapDisplayNames } from "../constants/gameData/maps/mapsRecord";
 import { ArrayHelpers } from "../functions/ArrayHelpers";
 import { getRandomAvailableRoute } from "../functions/getRandomAvailableRoute";
+import { replaceRouteName } from "../functions/replaceRouteName";
 import {
   addStaticEncounterToSaveFile,
   getCurrentSwarm,
@@ -26,9 +26,9 @@ export const useSwarmRadar = (): {
     (s: SwarmEvent) => {
       if (s.swarmType === "SPACE_DISTORTION") {
         addMessage({
-          message: `The radar detects a space distortion at ${
-            mapDisplayNames[s.mapId]
-          }`,
+          message: `The radar detects a space distortion at ${replaceRouteName(
+            s.mapId,
+          )}`,
           needsNoConfirmation: true,
         });
       } else if (
@@ -36,16 +36,16 @@ export const useSwarmRadar = (): {
         s.swarmType === "PAST_DISTORTION"
       ) {
         addMessage({
-          message: `The radar detects a time distortion at ${
-            mapDisplayNames[s.mapId]
-          }`,
+          message: `The radar detects a time distortion at ${replaceRouteName(
+            s.mapId,
+          )}`,
           needsNoConfirmation: true,
         });
       } else
         addMessage({
-          message: `The radar detects swarms of ${s.pokemon} at ${
-            mapDisplayNames[s.mapId]
-          }`,
+          message: `The radar detects swarms of ${s.pokemon} at ${replaceRouteName(
+            s.mapId,
+          )}`,
           needsNoConfirmation: true,
         });
     },

@@ -4,6 +4,7 @@ import { GiMountainRoad } from "react-icons/gi";
 import { HiBeaker } from "react-icons/hi";
 import { MdFormatListBulleted } from "react-icons/md";
 import { PiFarm } from "react-icons/pi";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { battleSpriteSize } from "../../constants/baseConstants";
 import {
   CampUpgrade,
@@ -19,7 +20,6 @@ import { replaceRouteName } from "../../functions/replaceRouteName";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { Card } from "../../uiComponents/Card/Card";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 import {
   KumaQuestName,
@@ -104,13 +104,13 @@ export const CampUpgrades = ({
     (s) => campUpgradeCategories[s] === filter,
   );
   return (
-    <Page headline="Main Menu:" goBack={goBack}>
+    <InGamePage headline="Main Menu:" goBack={goBack}>
       <Stack mode="column">
         <h3 style={{ margin: 0 }}>
           We can use the research points earned from quests to expand our camp
         </h3>
         <h3 style={{ margin: 0 }}>Research Points: {researchPoints}</h3>
-        <Stack mode="row" gap={3} alignItems="center">
+        <Stack mode="row" gapInRem={3} alignItems="center">
           <h3 style={{ margin: 0 }}>Category:</h3>{" "}
           {categories.map((c) => (
             <CampUpgradeIcon
@@ -130,7 +130,7 @@ export const CampUpgrades = ({
           />
         ))}
       </Stack>
-    </Page>
+    </InGamePage>
   );
 };
 

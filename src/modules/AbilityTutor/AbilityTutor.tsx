@@ -1,5 +1,6 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { AbilityInfoButton } from "../../components/AbilityInfoButton/AbilityInfoButton";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 import { AbilityName, abilityNames } from "../../constants/abilityCheckList";
@@ -13,7 +14,6 @@ import { joinInventories } from "../../interfaces/Inventory";
 import { ItemType, moveUnlockPayments } from "../../interfaces/Item";
 import { OwnedPokemon } from "../../interfaces/OwnedPokemon";
 import { Card } from "../../uiComponents/Card/Card";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
 export const AbilityTutor = () => {
@@ -32,7 +32,7 @@ export const AbilityTutor = () => {
 
   const navigate = useNavigate();
   return (
-    <Page
+    <InGamePage
       headline="Ability Tutor"
       goBack={() => navigate("ABILITY_TUTOR", "OVERWORLD")}
     >
@@ -58,7 +58,7 @@ export const AbilityTutor = () => {
         </div>
         {pokemonWithId && <AbilityEditor ownedPokemon={pokemonWithId} />}
       </Stack>
-    </Page>
+    </InGamePage>
   );
 };
 

@@ -1,26 +1,25 @@
 import { BsBackpack4, BsFillJournalBookmarkFill } from "react-icons/bs";
 import { MdCatchingPokemon } from "react-icons/md";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { Card } from "../../uiComponents/Card/Card";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
 import { useContext, useMemo, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { GoTasklist } from "react-icons/go";
 import { IoMdExit, IoMdSettings } from "react-icons/io";
-import { RiBookShelfLine } from "react-icons/ri";
-import { BadgesCard } from "../../components/BadgesCard/BadgesCard";
 import { BugReportButton } from "../../components/BugReport/BugReport";
 import { IdeaButton } from "../../components/IdeaReport/IdeaReport";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 
 import React from "react";
+import { RiBookShelfLine } from "react-icons/ri";
 import { ExportSnapshotCard } from "../../components/SnapshotCard/ExportSnapshotCard";
 import { ImportSnapshotCard } from "../../components/SnapshotCard/ImportSnapshotCard";
 import { ResetSnapshotCard } from "../../components/SnapshotCard/ResetSnapshotCard";
 import { TrainerCard } from "../../components/TrainerCard/TrainerCard";
-import { battleSpriteSize } from "../../constants/baseConstants";
+import { battleSpriteSize, portraitMode } from "../../constants/baseConstants";
 import { customItemDescriptions } from "../../constants/customItemDescriptions";
 import { mapsRecord } from "../../constants/gameData/maps/mapsRecord";
 import { fullyHealPokemon } from "../../functions/fullyHealPokemon";
@@ -45,145 +44,233 @@ import { useTeleport } from "../../hooks/useTeleport";
 import { EmptyInventory } from "../../interfaces/Inventory";
 import { lures, repels } from "../../interfaces/Item";
 export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
-  const { saveFile } = useContext(SaveFileContext);
-  const { location } = useContext(LocationContext);
-  const team = useMemo(
-    () => saveFile.pokemon.filter((p) => p.onTeam),
-    [saveFile.pokemon],
-  );
-
-  const gameData = useContext(GameDataContext);
-  const reset = useReset();
-  const [resetConfirmationInProgress, setRCIP] = useState<boolean>(false);
-  const { numberOfUncollected } = useQuests();
-  const navigate = useNavigate();
-  const { addMessage } = useContext(MessageQueueContext);
-  const { teleporter, teleportHome } = useTeleport();
-
   return (
-    <Page headline="Main Menu:" goBack={goBack}>
+    <InGamePage headline="Main Menu:" goBack={goBack}>
       <Stack mode="column">
         <TrainerCard />
-        <BadgesCard />
-        {teleporter && (
-          <Card
-            onClick={() => teleportHome()}
-            content={<h4>Teleport back to camp</h4>}
-            icon={
-              <PokemonSprite
-                name={teleporter.name}
-                config={{ officalArtwork: true, shiny: teleporter.shiny }}
-              />
-            }
-            actionElements={[]}
-          />
-        )}
+        <TeleportButton />
         <FlyingButton />
         <LeaveChallengeFieldButton />
         <RepelButton />
         <LureButton />
         <ExpShareButton />
-        <Card
-          onClick={() => navigate("MAIN", "BAG")}
-          content={<h4>Bag</h4>}
-          icon={<BsBackpack4 size={battleSpriteSize} />}
-          actionElements={[]}
-        />
-        <Card
-          onClick={() => navigate("MAIN", "TEAM")}
-          content={<h4>Team</h4>}
-          icon={
-            <div style={{ display: "flex", gap: ".5rem" }}>
-              {team.map((t) => (
-                <MdCatchingPokemon key={t.id} size={battleSpriteSize} />
-              ))}
-            </div>
-          }
-          actionElements={[]}
-        />
-        {questMenuAvailable(location.mapId, gameData) && (
-          <Card
-            onClick={() => navigate("MAIN", "QUESTS")}
-            content={<h4>Quests</h4>}
-            icon={<GoTasklist size={battleSpriteSize} />}
-            actionElements={
-              numberOfUncollected > 0
-                ? [<strong>Uncollected: {numberOfUncollected}</strong>]
-                : []
-            }
-          />
-        )}
-        {saveFile.trainerNotes?.at(0) && (
-          <Card
-            onClick={() => navigate("MAIN", "TRAINER_NOTES")}
-            content={<h4>Notes</h4>}
-            icon={
-              <div style={{ display: "flex", gap: ".5rem" }}>
-                <BsFillJournalBookmarkFill size={battleSpriteSize} />
-              </div>
-            }
-            actionElements={[]}
-          />
-        )}
-        <Card
-          onClick={() => navigate("MAIN", "INTERNAL_DEX")}
-          content={<h4>Pokedex</h4>}
-          icon={<RiBookShelfLine size={battleSpriteSize} />}
-          actionElements={[]}
-        />
-        <Card
-          onClick={() => navigate("MAIN", "WIKI")}
-          content={<h4>Wiki</h4>}
-          icon={<FaSearch size={battleSpriteSize} />}
-          actionElements={[]}
-        />
-        {Object.keys(gameData.features.settingsEditableDuringGame).length >
-          0 && (
-          <Card
-            onClick={() => navigate("MAIN", "SETTINGS_IN_GAME")}
-            content={<h4>SETTINGS</h4>}
-            icon={<IoMdSettings size={battleSpriteSize} />}
-            actionElements={[]}
-          />
-        )}
-        {gameData.features.snapShotExportAvailable && (
-          <>
-            <ExportSnapshotCard />
-            <ImportSnapshotCard />
-            <ResetSnapshotCard />
-          </>
-        )}
-
-        {resetConfirmationInProgress ? (
-          <button
-            onClick={() =>
-              addMessage({
-                message: "Resetting Your Save File",
-                onRemoval: () => reset(),
-                needsNoConfirmation: true,
-              })
-            }
-            style={{ backgroundColor: "darkred", color: "white" }}
-          >
-            <h3>Are you sure? Click again to confirm</h3>
-          </button>
-        ) : (
-          <button
-            onClick={() => setRCIP(true)}
-            style={{ backgroundColor: "darkred", color: "white" }}
-          >
-            Delete Savefile and reset
-          </button>
-        )}
+        <BagCard />
+        <TeamCard />
+        <QuestCard />
+        <NotesCard />
+        <DexCard />
+        <WikiCard />
+        <SettingsCard />
+        <SnapshotCards />
+        <ResetButton />
         <BugReportButton />
         <IdeaButton />
         {window.localStorage.getItem("devmode") && <TimedEventLog />}
       </Stack>
-    </Page>
+    </InGamePage>
   );
 };
 
-export const ExpShareButton = () => {
+const ResetButton = () => {
+  const reset = useReset();
+  const [resetConfirmationInProgress, setRCIP] = useState<boolean>(false);
+  const { addMessage } = useContext(MessageQueueContext);
+
+  if (resetConfirmationInProgress) {
+    return (
+      <button
+        onClick={() =>
+          addMessage({
+            message: "Resetting Your Save File",
+            onRemoval: () => reset(),
+            needsNoConfirmation: true,
+          })
+        }
+        style={{ backgroundColor: "darkred", color: "white" }}
+      >
+        <h3>Are you sure? Click again to confirm</h3>
+      </button>
+    );
+  }
+
+  return (
+    <button
+      onClick={() => setRCIP(true)}
+      style={{ backgroundColor: "darkred", color: "white" }}
+    >
+      Delete Savefile and reset
+    </button>
+  );
+};
+
+const SnapshotCards = () => {
+  const gameData = useContext(GameDataContext);
+
+  if (!gameData.features.snapShotExportAvailable) {
+    return <></>;
+  }
+
+  return (
+    <>
+      <ExportSnapshotCard />
+      <ImportSnapshotCard />
+      <ResetSnapshotCard />
+    </>
+  );
+};
+
+const SettingsCard = () => {
+  const gameData = useContext(GameDataContext);
+  const navigate = useNavigate();
+
+  if (Object.keys(gameData.features.settingsEditableDuringGame).length === 0) {
+    return <></>;
+  }
+  return (
+    <Card
+      onClick={() => navigate("MAIN", "SETTINGS_IN_GAME")}
+      content={<h4>SETTINGS</h4>}
+      icon={<IoMdSettings size={battleSpriteSize} />}
+      actionElements={[]}
+    />
+  );
+};
+
+const WikiCard = () => {
+  const navigate = useNavigate();
+  return (
+    <Card
+      onClick={() => navigate("MAIN", "WIKI")}
+      content={<h4>Wiki</h4>}
+      icon={<FaSearch size={battleSpriteSize} />}
+      actionElements={[]}
+    />
+  );
+};
+
+const DexCard = () => {
+  const navigate = useNavigate();
+  return (
+    <Card
+      onClick={() => navigate("MAIN", "INTERNAL_DEX")}
+      content={<h4>Pokedex</h4>}
+      icon={<RiBookShelfLine size={battleSpriteSize} />}
+      actionElements={[]}
+    />
+  );
+};
+
+const NotesCard = () => {
+  const { saveFile } = useContext(SaveFileContext);
+  const navigate = useNavigate();
+  if (saveFile.trainerNotes?.at(0)) {
+    return <></>;
+  }
+  return (
+    <Card
+      onClick={() => navigate("MAIN", "TRAINER_NOTES")}
+      content={<h4>Notes</h4>}
+      icon={
+        <div style={{ display: "flex", gap: ".5rem" }}>
+          <BsFillJournalBookmarkFill size={battleSpriteSize} />
+        </div>
+      }
+      actionElements={[]}
+    />
+  );
+};
+
+const QuestCard = () => {
+  const { location } = useContext(LocationContext);
+  const gameData = useContext(GameDataContext);
+  const { numberOfUncollected } = useQuests();
+  const navigate = useNavigate();
+
+  if (!questMenuAvailable(location.mapId, gameData)) {
+    return <></>;
+  }
+
+  return (
+    <Card
+      onClick={() => navigate("MAIN", "QUESTS")}
+      content={<h4>Quests</h4>}
+      icon={<GoTasklist size={battleSpriteSize} />}
+      actionElements={
+        numberOfUncollected > 0
+          ? [<strong>Uncollected: {numberOfUncollected}</strong>]
+          : []
+      }
+    />
+  );
+};
+const TeamCard = () => {
+  const { saveFile } = useContext(SaveFileContext);
+  const team = useMemo(
+    () => saveFile.pokemon.filter((p) => p.onTeam),
+    [saveFile.pokemon],
+  );
+  const navigate = useNavigate();
+  return (
+    <Card
+      onClick={() => navigate("MAIN", "TEAM")}
+      content={<h4>Team</h4>}
+      icon={
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <div
+            style={{
+              display: "grid",
+              gap: ".5rem",
+              gridTemplateColumns: portraitMode
+                ? Array.from({ length: team.length ?? 0 })
+                    .map(() => "1fr")
+                    .join(" ")
+                : "1fr 1fr 1fr",
+            }}
+          >
+            {team.map((t) => (
+              <MdCatchingPokemon key={t.id} size={battleSpriteSize} />
+            ))}
+          </div>
+        </div>
+      }
+      actionElements={[]}
+    />
+  );
+};
+
+const BagCard = () => {
+  const navigate = useNavigate();
+  return (
+    <Card
+      onClick={() => navigate("MAIN", "BAG")}
+      content={<h4>Bag</h4>}
+      icon={<BsBackpack4 size={battleSpriteSize} />}
+      actionElements={[]}
+    />
+  );
+};
+
+const TeleportButton = () => {
+  const { teleporter, teleportHome } = useTeleport();
+
+  if (!teleporter) {
+    return <></>;
+  }
+  return (
+    <Card
+      onClick={() => teleportHome()}
+      content={<h4>Teleport back to camp</h4>}
+      icon={
+        <PokemonSprite
+          name={teleporter.name}
+          config={{ officalArtwork: true, shiny: teleporter.shiny }}
+        />
+      }
+      actionElements={[]}
+    />
+  );
+};
+const ExpShareButton = () => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
   if (saveFile.bag["exp-share"] <= 0 && saveFile.storage["exp-share"] <= 0) {
@@ -217,7 +304,7 @@ export const ExpShareButton = () => {
     />
   );
 };
-export const RepelButton = () => {
+const RepelButton = () => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
   const currentRepel = getCurrentRepel(saveFile);
   if (currentRepel) {
@@ -258,7 +345,7 @@ export const RepelButton = () => {
     </>
   );
 };
-export const LureButton = () => {
+const LureButton = () => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
   const currentLure = getCurrentLure(saveFile);
@@ -301,7 +388,7 @@ export const LureButton = () => {
     </>
   );
 };
-export const FlyingButton = () => {
+const FlyingButton = () => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
   const { location } = useContext(LocationContext);
 
@@ -346,7 +433,7 @@ export const FlyingButton = () => {
     </>
   );
 };
-export const LeaveChallengeFieldButton = () => {
+const LeaveChallengeFieldButton = () => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
   const { location, setLocation } = useContext(LocationContext);
   const { startingLocation } = useContext(GameDataContext);
@@ -380,7 +467,7 @@ export const LeaveChallengeFieldButton = () => {
 
   return <></>;
 };
-export const TimedEventLog = () => {
+const TimedEventLog = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [search, setSearch] = useState<string | undefined>();
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);

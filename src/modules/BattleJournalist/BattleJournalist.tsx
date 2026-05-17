@@ -1,7 +1,9 @@
 import { useCallback, useContext, useMemo } from "react";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { SpriteIcon } from "../../components/SpriteIcon/SpriteIcon";
+import { trainerJournals } from "../../constants/gameData/trainerJournals";
 import { ArrayHelpers } from "../../functions/ArrayHelpers";
 import { calculateLevelData } from "../../functions/calculateLevelData";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
@@ -13,9 +15,7 @@ import { JournalEntryData } from "../../interfaces/JournalEntryData";
 import { RouterNpc } from "../../interfaces/Occupant";
 import { SpriteEnum } from "../../interfaces/SpriteEnum";
 import { Card } from "../../uiComponents/Card/Card";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
-import { allJournalEntries } from "../TrainerNotes/TrainerNotes";
 
 export const BattleJournalist = (): JSX.Element => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
@@ -58,7 +58,7 @@ export const BattleJournalist = (): JSX.Element => {
 
   const availableForPurchase = useMemo(
     () =>
-      allJournalEntries.filter(
+      trainerJournals.filter(
         (note) =>
           !saveFile.trainerNotes?.some(
             (ownedNote) =>
@@ -69,16 +69,18 @@ export const BattleJournalist = (): JSX.Element => {
     [saveFile.trainerNotes],
   );
   return (
-    <Page
+    <InGamePage
       headline="Battle Journalist"
       goBack={() => navigate("BATTLE_JOURALIST", "OVERWORLD")}
     >
       <Stack mode="column">
         <h3>Trade Snacks for the Journalists Notes:</h3>
-        {availableForPurchase.map((data, index) => {
+        {availableForPurchase.map((data) => {
           const cost = ArrayHelpers.getEntryWithOverflow(
             moveUnlockPayments,
-            index,
+            trainerJournals.findIndex(
+              (j) => j.trainer.id === data.trainer.id,
+            ) ?? 0,
           );
           return (
             <Card
@@ -112,7 +114,7 @@ export const BattleJournalist = (): JSX.Element => {
           );
         })}
       </Stack>
-    </Page>
+    </InGamePage>
   );
 };
 

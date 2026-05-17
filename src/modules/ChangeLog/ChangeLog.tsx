@@ -7,6 +7,19 @@ interface ChangelogEntryData {
 
 const changelogData: ChangelogEntryData[] = [
   {
+    version: "0.80",
+    listOfChanges: [
+      "fixes and balances from playtesting",
+      "UI refinement",
+      "'Take/Store all' Buttons per item",
+      "Correct Apricorn descriptions",
+      "battle journalist entries for johto gym leaders",
+      "wild pokemon drop loot",
+      "new class: rogue",
+      "new class: Gym Bro",
+    ],
+  },
+  {
     version: "0.79",
     listOfChanges: ["fixes and balances from playtesting"],
   },
@@ -549,7 +562,7 @@ const ChangelogEntry = ({
   listOfChanges,
 }: ChangelogEntryData): JSX.Element => {
   return (
-    <Stack alignItems="center" mode="column" gap={0.25}>
+    <Stack alignItems="center" mode="column" gapInRem={0.25}>
       <h3 style={{ margin: 0 }}>{version}:</h3>
       <ol style={{ lineHeight: "1.5rem" }}>
         {listOfChanges.map((change, index) => (
@@ -564,7 +577,7 @@ const ChangelogEntry = ({
 
 export const ChangeLog = () => {
   return (
-    <Stack alignItems="center" mode="column" gap={0.25}>
+    <Stack alignItems="center" mode="column" gapInRem={0.25}>
       <h3>Whats new:</h3>
       {changelogData.map((entry) => (
         <ChangelogEntry

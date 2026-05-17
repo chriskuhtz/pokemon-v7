@@ -1,5 +1,5 @@
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { Sprite } from "../../components/Sprite/Sprite";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
 export const Intro = ({
@@ -8,7 +8,7 @@ export const Intro = ({
   setHasReadIntro: (x: boolean) => void;
 }) => {
   return (
-    <Page headline="">
+    <InGamePage headline="">
       <div style={{ padding: "2rem" }}>
         <Stack alignItems="center" mode="column">
           <div>
@@ -81,6 +81,6 @@ export const Intro = ({
           </button>
         </Stack>
       </div>
-    </Page>
+    </InGamePage>
   );
 };

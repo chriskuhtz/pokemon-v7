@@ -1,5 +1,6 @@
 import React, { useCallback, useContext, useMemo } from "react";
 import { MdFormatListBulleted } from "react-icons/md";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 import { battleSpriteSize } from "../../constants/baseConstants";
@@ -11,7 +12,6 @@ import { SaveFileContext } from "../../hooks/useSaveFile";
 import { ItemType } from "../../interfaces/Item";
 import { AnimatedBar } from "../../uiComponents/AnimatedBar/AnimatedBar";
 import { Card } from "../../uiComponents/Card/Card";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 import {
   KumaQuestName,
@@ -62,7 +62,7 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
   }, [saveFile.quests]);
 
   return (
-    <Page headline={"Bulletin Board:"} goBack={goBack}>
+    <InGamePage headline={"Bulletin Board:"} goBack={goBack}>
       <Stack mode="column">
         <CompletedQuestsBar
           total={total}
@@ -89,7 +89,7 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
                     <h5 style={{ display: "flex", alignItems: "center" }}>
                       Reward:
                     </h5>
-                    <Stack mode="row" flexWrap="wrap" gap={0.25}>
+                    <Stack mode="row" flexWrap="wrap" gapInRem={0.25}>
                       {Object.entries(getRewardItemsForQuest(name)).map(
                         ([item, amount]) => (
                           <React.Fragment key={item}>
@@ -116,7 +116,7 @@ export const BulletinBoard = ({ goBack }: { goBack: () => void }) => {
           <strong>Talk to the people in the camp for more Quests</strong>
         )}
       </Stack>
-    </Page>
+    </InGamePage>
   );
 };
 
