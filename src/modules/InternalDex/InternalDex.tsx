@@ -1,5 +1,6 @@
 import React, { useContext, useMemo, useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { battleSpriteSize } from "../../constants/baseConstants";
 import { PokemonName } from "../../constants/pokemonNames";
 import { calculateLevelData } from "../../functions/calculateLevelData";
@@ -11,7 +12,6 @@ import { SaveFileContext } from "../../hooks/useSaveFile";
 import { MapId, mapIds } from "../../interfaces/mapIds";
 import { InternalDexEntry } from "../../interfaces/Pokedex";
 import { Card } from "../../uiComponents/Card/Card";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 const devmode = !!window.localStorage.getItem("devmode");
 
@@ -46,7 +46,7 @@ export const InternalDex = (): JSX.Element => {
   }, [availableEntries, routeFilter]);
 
   return (
-    <Page
+    <InGamePage
       headline="Internal Dex"
       goBack={() => navigate("INTERNAL_DEX", "MAIN")}
     >
@@ -104,7 +104,7 @@ export const InternalDex = (): JSX.Element => {
           );
         })}
       </Stack>
-    </Page>
+    </InGamePage>
   );
 };
 

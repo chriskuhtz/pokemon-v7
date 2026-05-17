@@ -12,6 +12,7 @@ import { SaveFileContext } from "../../../hooks/useSaveFile";
 import { BattlePokemon } from "../../../interfaces/BattlePokemon";
 import { MoveDto } from "../../../interfaces/Move";
 import { Card } from "../../../uiComponents/Card/Card";
+import { Stack } from "../../../uiComponents/Stack/Stack";
 import { ActionType, ChooseActionPayload } from "../interfaces/interfaces";
 
 export function TargetSelection({
@@ -116,7 +117,7 @@ export function TargetSelection({
       >
         {!["ether", "max-ether"].includes(chosenAction) && (
           <>
-            <div style={{ display: "flex", gap: ".25rem" }}>
+            <Stack mode="column">
               {targets
                 .filter((t) => !isPlayerPokemon(t, playerId))
                 .map((t) => (
@@ -146,8 +147,8 @@ export function TargetSelection({
                   />
                 ))}
               {}
-            </div>
-            <div style={{ display: "flex", gap: ".25rem" }}>
+            </Stack>
+            <div>
               {targets
                 .filter((t) => isPlayerPokemon(t, playerId))
                 .map((t) => (

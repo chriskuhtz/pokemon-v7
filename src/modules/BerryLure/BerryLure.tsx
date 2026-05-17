@@ -1,5 +1,6 @@
 import { useCallback, useContext, useMemo } from "react";
 import { FaRegCircleQuestion } from "react-icons/fa6";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { battleSpriteSize } from "../../constants/baseConstants";
 import { PokemonName } from "../../constants/pokemonNames";
@@ -22,7 +23,6 @@ import { BerryType, superEffectiveSaveTable } from "../../interfaces/Item";
 import { OverworldBerryLure } from "../../interfaces/Occupant";
 import { PokemonType } from "../../interfaces/PokemonType";
 import { Card } from "../../uiComponents/Card/Card";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 export const BerryLure = () => {
   const navigate = useNavigate();
@@ -197,7 +197,7 @@ export const BerryLure = () => {
     ],
   );
   return (
-    <Page
+    <InGamePage
       headline="Berry Lure Station"
       goBack={() => navigate("BERRY_LURE", "OVERWORLD")}
     >
@@ -242,7 +242,7 @@ export const BerryLure = () => {
           );
         })}
       </Stack>
-    </Page>
+    </InGamePage>
   );
 };
 

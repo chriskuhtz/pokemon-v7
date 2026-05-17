@@ -5,6 +5,7 @@ import { getNextLocation } from "../../functions/getNextLocation";
 import { getOppositeDirection } from "../../functions/getOppositeDirection";
 import { getYOffsetFromOrientation } from "../../functions/getYOffsetFromOrientation";
 import { isPassable } from "../../functions/isPassable";
+import { threeDigitString } from "../../functions/threeDigitString";
 import { LocationContext } from "../../hooks/LocationProvider";
 import { BaseSizeContext } from "../../hooks/useBaseSize";
 import { GameDataContext } from "../../hooks/useGameData";
@@ -14,7 +15,6 @@ import { OverworldMap } from "../../interfaces/OverworldMap";
 import { CharacterLocationData } from "../../interfaces/SaveFile";
 import { playerCanvasId } from "../../modules/Overworld/constants/constants";
 import { useDrawCharacter } from "../../modules/Overworld/hooks/useDrawCharacter";
-import { threeDigitString } from "../../modules/Overworld/hooks/useDrawOccupants";
 
 const followerCanvasId = "followerCanvas";
 

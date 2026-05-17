@@ -7,14 +7,21 @@ import {
   ItemType,
 } from "../interfaces/Item";
 import { OwnedPokemon } from "../interfaces/OwnedPokemon";
+import { CharacterTrait } from "../interfaces/Trait";
 import { applyItemToPokemon } from "./applyItemToPokemon";
 import { getMovesArray } from "./getMovesArray";
 
-export function canBenefitFromItem<T extends OwnedPokemon | BattlePokemon>(
-  pokemon: T,
-  item: ItemType,
-  move?: MoveName,
-): boolean {
+export function canBenefitFromItem<T extends OwnedPokemon | BattlePokemon>({
+  pokemon,
+  item,
+  move,
+  trait,
+}: {
+  pokemon: T;
+  item: ItemType;
+  move?: MoveName;
+  trait: CharacterTrait | undefined;
+}): boolean {
   if (
     isPPRestorationItem(item) &&
     getMovesArray(pokemon).some((m) => m.usedPP > 0)
@@ -24,12 +31,13 @@ export function canBenefitFromItem<T extends OwnedPokemon | BattlePokemon>(
   if (!move && isPPBoostItem(item)) {
     return true;
   }
-  const afterItemApplication = applyItemToPokemon(
+  const afterItemApplication = applyItemToPokemon({
     pokemon,
     item,
-    undefined,
+    addMessage: undefined,
     move,
-  );
+    trait,
+  });
   return (
     !isEqual(pokemon, afterItemApplication) ||
     !isEqual(pokemon.damage, afterItemApplication.damage)

@@ -20,6 +20,7 @@ import { changeMovePP } from "../../../../../functions/changeMovePP";
 import { chooseOpponentAction } from "../../../../../functions/chooseOpponentAction";
 import { OPPO_ID } from "../../../../../functions/makeChallengerPokemon";
 import { SettingsObject } from "../../../../../interfaces/SettingsObject";
+import { CharacterTrait } from "../../../../../interfaces/Trait";
 import { BattleFieldEffect } from "../../../interfaces/interfaces";
 import { BattleTerrain, TerrainObject } from "../../useBattleTerrain";
 import { WeatherObject } from "../../useBattleWeather";
@@ -48,6 +49,7 @@ export const handleAllAttackCategories = ({
   playerId,
   settings,
   canEscape,
+  trait,
 }: {
   attacker: BattlePokemon;
   pokemon: BattlePokemon[];
@@ -71,6 +73,7 @@ export const handleAllAttackCategories = ({
   playerId: string;
   settings: SettingsObject | undefined;
   canEscape: boolean;
+  trait: CharacterTrait | undefined;
 }) => {
   let updatedPokemon: BattlePokemon[] = [...pokemon];
   const { updatedPokemon: ua, targets } = handleAttackStart({
@@ -83,6 +86,7 @@ export const handleAllAttackCategories = ({
     dampy,
     terrain,
     playerId,
+    trait,
   });
 
   updatedPokemon = ua;

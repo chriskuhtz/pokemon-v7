@@ -17,7 +17,11 @@ export const Login = ({ children }: { children: JSX.Element }): JSX.Element => {
 
   if (!correctPW) {
     return (
-      <Page headline="">
+      <Page
+        primaryColor={"rgba(122, 199, 76, 0.5) 0%"}
+        secondaryColor={"rgba(99, 144, 240, 0.5) 100%"}
+        headline=""
+      >
         <div
           style={{
             display: "flex",

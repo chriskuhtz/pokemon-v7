@@ -34,7 +34,7 @@ export const useGetBattleTeam = (
 ) => {
   const { assignGender, assignLearnsetMoves, assignHeldItem } = config;
   const {
-    saveFile: { settings },
+    saveFile: { settings, trait },
   } = useContext(SaveFileContext);
 
   const { internalDex } = useContext(GameDataContext);
@@ -205,12 +205,13 @@ export const useGetBattleTeam = (
             pokemon.nature,
             pokemon.effortValues,
             settings,
+            trait,
+            fetchedData.types.map((t) => t.type.name),
           ),
           statBoosts: EmptyStatObject,
           capture_rate: capture_rate,
           happiness: pokemon.happiness < 0 ? base_happiness : pokemon.happiness,
           status: "BENCH",
-
           effortValues: pokemon.effortValues,
           evAwards: getEvAwards(fetchedData.stats),
           participatedInBattle: false,

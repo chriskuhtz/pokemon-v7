@@ -1,9 +1,9 @@
 import { BsCashCoin } from "react-icons/bs";
 import { FaCartPlus } from "react-icons/fa";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { battleSpriteSize } from "../../constants/baseConstants";
 import { RoutesType } from "../../interfaces/Routing";
 import { Card } from "../../uiComponents/Card/Card";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 export const Market = ({
   goBack,
@@ -13,7 +13,7 @@ export const Market = ({
   navigate: (x: RoutesType) => void;
 }): JSX.Element => {
   return (
-    <Page goBack={goBack} headline="Market:">
+    <InGamePage goBack={goBack} headline="Market:">
       <Stack mode="column">
         <Card
           onClick={() => navigate("BUY_MARKET")}
@@ -28,6 +28,6 @@ export const Market = ({
           actionElements={[]}
         />
       </Stack>
-    </Page>
+    </InGamePage>
   );
 };

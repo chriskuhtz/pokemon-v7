@@ -1,10 +1,10 @@
 import { useContext } from "react";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { Sprite } from "../../components/Sprite/Sprite";
 import { BaseSizeProvider } from "../../hooks/useBaseSize";
 import { useNavigate } from "../../hooks/useNavigate";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { SpriteEnum } from "../../interfaces/SpriteEnum";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
 export const OakIntroduction = () => {
@@ -12,7 +12,7 @@ export const OakIntroduction = () => {
   const navigate = useNavigate();
 
   return (
-    <Page headline="">
+    <InGamePage headline="">
       <Stack mode="column" alignItems="center">
         <BaseSizeProvider allowedBaseSizes={[64]}>
           <Sprite canvasKey={"oak"} id={SpriteEnum["oak"]} rotating={false} />
@@ -34,6 +34,6 @@ export const OakIntroduction = () => {
           Continue
         </button>
       </Stack>
-    </Page>
+    </InGamePage>
   );
 };

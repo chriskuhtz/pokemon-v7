@@ -188,7 +188,13 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
       addMessage({ message: `${item} needs to be applied to specific move` });
       return;
     }
-    const updatedPokemon = applyItemToPokemon(pokemon, item, addMessage, move);
+    const updatedPokemon = applyItemToPokemon({
+      pokemon,
+      item,
+      addMessage,
+      move,
+      trait: saveFile.trait,
+    });
     const updatedInventory = joinInventories(saveFile.bag, { [item]: 1 }, true);
     setSaveFile({
       ...saveFile,

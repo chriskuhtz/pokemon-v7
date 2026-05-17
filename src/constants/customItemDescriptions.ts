@@ -1,3 +1,5 @@
+import { apricorns, apricornTable, cookingBerries } from "../interfaces/Item";
+
 export const customItemDescriptions: Record<string, string> = {
   "growth-mulch": "makes berries grow faster",
   "damp-mulch": "makes berries less likely to wither",
@@ -32,4 +34,10 @@ export const customItemDescriptions: Record<string, string> = {
   "relic-statue": "Museums might find this interesting",
   "big-mushroom": "Museums might find this interesting",
   "star-piece": "Museums might find this interesting",
+  ...Object.fromEntries(
+    apricorns.map((apri) => [apri, `used to make a ${apricornTable[apri]}`]),
+  ),
+  ...Object.fromEntries(
+    cookingBerries.map((apri) => [apri, `can be used as cooking ingredient`]),
+  ),
 };

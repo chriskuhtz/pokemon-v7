@@ -2,6 +2,7 @@ import { isEqual } from "lodash";
 import { useEffect, useState } from "react";
 import { getItemUrl } from "../../../functions/getItemUrl";
 import { getYOffsetFromOrientation } from "../../../functions/getYOffsetFromOrientation";
+import { threeDigitString } from "../../../functions/threeDigitString";
 import { Occupant } from "../../../interfaces/Occupant";
 import { SpriteEnum } from "../../../interfaces/SpriteEnum";
 
@@ -292,18 +293,4 @@ const getSource = (occ: Occupant) => {
     default:
       return "/mapObjects/pokeball.png";
   }
-};
-
-export const threeDigitString = (input: number) => {
-  if (input > 999) {
-    throw new Error("This number is too long");
-  }
-  if (input >= 100) {
-    return `${Math.floor(input)}`;
-  }
-  if (input >= 10) {
-    return `0${Math.floor(input)}`;
-  }
-
-  return `00${Math.floor(input)}`;
 };

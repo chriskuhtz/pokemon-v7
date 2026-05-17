@@ -1,77 +1,48 @@
-import { FaArrowDown, FaArrowUp } from "react-icons/fa6";
-import { MdOutlineRadioButtonChecked } from "react-icons/md";
 import { battleSpriteSize } from "../../../constants/baseConstants";
 import { MoveName } from "../../../constants/movesCheckList";
-import { getCurrentPP } from "../../../functions/getCurrentPP";
-import { getMovesArray } from "../../../functions/getMovesArray";
-import { BattleMove, BattlePokemon } from "../../../interfaces/BattlePokemon";
+import { typeColors } from "../../../constants/typeColors";
+import { hexToRgb } from "../../../functions/hexToRGB";
+import { MoveDto } from "../../../interfaces/Move";
 import { PokemonType } from "../../../interfaces/PokemonType";
-import { Card } from "../../../uiComponents/Card/Card";
+import { ListItem } from "../../../uiComponents/ListItem/ListItem";
 import { MoveInfoButton } from "../../MoveInfoButton/MoveInfoButton";
-export const MovesDisplayListEntry = ({
-  o,
-  onlyCurrent,
-  currentMoves,
-  reorder,
-  activateMove,
-  deActivateMove,
-  battlePokemon,
-  small,
-}: {
-  o: MoveName;
-  battlePokemon: BattlePokemon;
-  onlyCurrent: boolean;
-  currentMoves: MoveName[];
-  reorder: (dir: "UP" | "DOWN") => void;
-  activateMove: () => void;
-  deActivateMove: () => void;
-  small: boolean;
-}) => {
-  const battleMove = getMovesArray(battlePokemon).find((b) => b.name === o);
-  if (!battleMove) {
-    return <></>;
-  }
-  const currentPP = getCurrentPP(battlePokemon, battleMove);
 
-  if (small) {
-    return (
-      <SmallMoveDisplayEntry
-        typeName={battleMove.data.type.name}
-        moveName={o}
-      />
-    );
-  }
-  return (
-    <BigMoveDisplayEntry
-      battleMove={battleMove}
-      o={o}
-      onlyCurrent={onlyCurrent}
-      currentMoves={currentMoves}
-      reorder={reorder}
-      activateMove={activateMove}
-      deActivateMove={deActivateMove}
-      currentPP={currentPP}
-    />
-  );
-};
-
-export const SmallMoveDisplayEntry = ({
+export const MoveDisplayEntry = ({
   moveName,
   typeName,
   onClick,
   additionalInfo,
-  additionalIcon,
+  additionalIcons,
+  disabled,
 }: {
   moveName: MoveName;
   typeName: PokemonType;
   onClick?: () => void;
   additionalInfo?: React.JSX.Element;
-  additionalIcon?: React.JSX.Element;
+  additionalIcons?: React.JSX.Element[];
+  disabled?: boolean;
 }) => {
+  return (
+    <ListItem
+      onClick={onClick}
+      backgroundColor={disabled ? "gray" : hexToRgb(typeColors[typeName], 0.7)}
+      primaryIcon={
+        <img height={battleSpriteSize} src={`/typeIcons/${typeName}.png`} />
+      }
+      content={moveName}
+      additionalContent={additionalInfo}
+      additionalIcons={additionalIcons}
+      infoButton={<MoveInfoButton movename={moveName} />}
+    />
+  );
   return (
     <div
       onClick={onClick}
       style={{
+        padding: ".25rem 0",
+        backgroundColor: hexToRgb(typeColors[typeName], 0.7),
+        borderRadius: 4,
+        borderTopLeftRadius: 16,
         width: "100%",
         display: "flex",
         alignItems: "center",
@@ -83,10 +54,10 @@ export const SmallMoveDisplayEntry = ({
           display: "flex",
           alignItems: "center",
           gap: "1rem",
+          paddingLeft: "0.25rem",
         }}
       >
-        <img height={battleSpriteSize} src={`/typeIcons/${typeName}.png`} />
-        {additionalIcon}
+        <img height={battleSpriteSize} src={`/typeIcons/${typeName}.png`} />{" "}
         <div
           style={{
             display: "flex",
@@ -101,100 +72,39 @@ export const SmallMoveDisplayEntry = ({
           {additionalInfo}
         </div>
       </div>
-
-      <MoveInfoButton movename={moveName} />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: ".5rem",
+          paddingRight: "0.25rem",
+        }}
+      >
+        {additionalIcons?.map((a) => a)}
+        <MoveInfoButton movename={moveName} />
+      </div>
     </div>
   );
 };
 
-const BigMoveDisplayEntry = ({
-  o,
-  onlyCurrent,
-  currentMoves,
-  reorder,
-  activateMove,
-  deActivateMove,
-  battleMove,
+export const PPAndStrengthSection = ({
+  data,
   currentPP,
 }: {
-  o: MoveName;
-  battleMove: BattleMove;
-  onlyCurrent: boolean;
-  currentMoves: MoveName[];
-  reorder: (dir: "UP" | "DOWN") => void;
-  activateMove: () => void;
-  deActivateMove: () => void;
+  data: MoveDto;
   currentPP: number;
 }) => {
   return (
-    <div
-      key={o}
-      style={{ display: "flex", alignItems: "center", gap: ".5rem" }}
-    >
-      <div style={{ display: "flex", flexDirection: "column", gap: ".5rem" }}>
-        {onlyCurrent || currentMoves.length === 1
-          ? []
-          : [
-              <FaArrowUp
-                key={`${o}UP`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  reorder("UP");
-                }}
-              />,
-              <FaArrowDown
-                key={`${o}DOWN`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  reorder("DOWN");
-                }}
-              />,
-            ]}
-      </div>
-      <div style={{ flexGrow: 1 }}>
-        <Card
-          key={o}
-          actionElements={[
-            <img
-              height={battleSpriteSize}
-              src={`/typeIcons/${battleMove.data.type.name}.png`}
-            />,
-          ]}
-          disabled={!currentMoves.includes(o) && currentMoves.length === 4}
-          icon={<MdOutlineRadioButtonChecked />}
-          onClick={() => {
-            if (onlyCurrent) {
-              return;
-            }
-            if (currentMoves.includes(o)) {
-              if (currentMoves.length === 1) {
-                return;
-              } else deActivateMove();
-            }
-            if (!currentMoves.includes(o)) {
-              if (currentMoves.length === 4) {
-                return;
-              } else activateMove();
-            }
-          }}
-          content={
-            <div>
-              <h4>
-                {battleMove.name} (
-                {battleMove.data.power ? `${battleMove.data.power} ` : ""}
-                {battleMove.data.damage_class.name.slice(0, 4)})
-              </h4>
-
-              <div>
-                <strong>
-                  PP: {currentPP}/{battleMove.data.pp}
-                </strong>
-              </div>
-            </div>
-          }
-        />
-      </div>
-      <MoveInfoButton movename={o} />
+    <div>
+      <strong>
+        {data.damage_class.name.slice(0, 4)} Move
+        {data.power ? `: ${data.power} Power` : ""}
+      </strong>
+      <br />
+      <strong>
+        {" "}
+        PP: {currentPP}/{data.pp}
+      </strong>
     </div>
   );
 };

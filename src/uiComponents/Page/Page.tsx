@@ -1,15 +1,20 @@
 import { ReactNode, useEffect } from "react";
 import { IoIosArrowBack } from "react-icons/io";
+import { portraitMode } from "../../constants/baseConstants";
 import "./Page.css";
 
 export const Page = ({
   goBack,
   headline,
   children,
+  primaryColor,
+  secondaryColor,
 }: {
   goBack?: () => void;
   headline: string;
   children: ReactNode;
+  primaryColor: string;
+  secondaryColor: string;
 }) => {
   useEffect(() => {
     window.history.pushState(null, "", window.location.href);
@@ -27,9 +32,20 @@ export const Page = ({
       window.removeEventListener("popstate", handlePopState);
     };
   }, [goBack]);
+
   return (
     <div className="pageWrapper">
-      <div className="page">
+      <div
+        className="page"
+        style={{
+          paddingBottom: portraitMode ? "1rem" : undefined,
+          background: `linear-gradient(
+          	218deg,
+          	${primaryColor}, 
+          	${secondaryColor}
+          )`,
+        }}
+      >
         <h2 className="headline">
           {goBack ? (
             <IoIosArrowBack

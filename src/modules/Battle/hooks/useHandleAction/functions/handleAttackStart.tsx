@@ -7,6 +7,7 @@ import { hasAilment } from "../../../../../functions/hasAilment";
 import { Message } from "../../../../../hooks/useMessageQueue";
 import { BattleAttack } from "../../../../../interfaces/BattleActions";
 import { BattlePokemon } from "../../../../../interfaces/BattlePokemon";
+import { CharacterTrait } from "../../../../../interfaces/Trait";
 import { WeatherType } from "../../../../../interfaces/Weather";
 import { handleDampy } from "../../../functions/handleDampy";
 import { handleMiss } from "../../../functions/handleMiss";
@@ -25,6 +26,7 @@ export const handleAttackStart = ({
   dampy,
   terrain,
   playerId,
+  trait,
 }: {
   attacker: BattlePokemon;
   pokemon: BattlePokemon[];
@@ -35,6 +37,7 @@ export const handleAttackStart = ({
   dampy: { name: string } | undefined;
   terrain: BattleTerrain | undefined;
   playerId: string;
+  trait: CharacterTrait | undefined;
 }): {
   updatedPokemon: BattlePokemon[];
   targets: BattlePokemon[];
@@ -71,6 +74,7 @@ export const handleAttackStart = ({
             chosenAction: move.name,
             onlyOpponents: false,
             playerId,
+            trait,
           }),
         ];
       case "user":
@@ -107,6 +111,7 @@ export const handleAttackStart = ({
         chosenAction: move.name,
         onlyOpponents: false,
         playerId,
+        trait,
       }),
     ];
   }

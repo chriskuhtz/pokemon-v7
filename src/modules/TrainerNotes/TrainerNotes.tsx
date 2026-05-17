@@ -3,6 +3,7 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { IoMdCloseCircle } from "react-icons/io";
 import { AbilityInfoButton } from "../../components/AbilityInfoButton/AbilityInfoButton";
 import { BstSection } from "../../components/BstSection/BstSection";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import {
   ItemInfoButton,
   NatureInfoButton,
@@ -10,30 +11,9 @@ import {
 import { MovesDisplay } from "../../components/MovesDisplay/MovesDisplay";
 import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 import { SpriteIcon } from "../../components/SpriteIcon/SpriteIcon";
-import { battleSpriteSize, trickXP } from "../../constants/baseConstants";
+import { battleSpriteSize } from "../../constants/baseConstants";
 import { testPokemon } from "../../constants/gameData/gameData";
-import { barry } from "../../constants/gameData/maps/occupants/barry";
-import { trainerBlaine } from "../../constants/gameData/maps/occupants/blaine";
-import { trainerBrock } from "../../constants/gameData/maps/occupants/brock";
-import { bruno } from "../../constants/gameData/maps/occupants/bruno";
-import { champChris } from "../../constants/gameData/maps/occupants/champChris";
-import { cynthia } from "../../constants/gameData/maps/occupants/cynthia";
-import { trainerErika } from "../../constants/gameData/maps/occupants/erika";
-import { trainerGary } from "../../constants/gameData/maps/occupants/gary";
-import { giovanni } from "../../constants/gameData/maps/occupants/giovanni";
-import { hugh } from "../../constants/gameData/maps/occupants/hugh";
-import { trainerJanine } from "../../constants/gameData/maps/occupants/janine";
-import { karen } from "../../constants/gameData/maps/occupants/karen";
-import { koga } from "../../constants/gameData/maps/occupants/koga";
-import { clearingKurt } from "../../constants/gameData/maps/occupants/kurt";
-import { lance } from "../../constants/gameData/maps/occupants/lance";
-import { trainerMisty } from "../../constants/gameData/maps/occupants/misty";
-import { n } from "../../constants/gameData/maps/occupants/n";
-import { red } from "../../constants/gameData/maps/occupants/red";
-import { trainerSabrina } from "../../constants/gameData/maps/occupants/sabrina";
-import { silver } from "../../constants/gameData/maps/occupants/silver";
-import { trainerSurge } from "../../constants/gameData/maps/occupants/surge";
-import { will } from "../../constants/gameData/maps/occupants/will";
+import { trainerJournals } from "../../constants/gameData/trainerJournals";
 import { calculateLevelData } from "../../functions/calculateLevelData";
 import { getTypeNames } from "../../functions/getTypeNames";
 import { useGetBattleTeam } from "../../hooks/useGetBattleTeam";
@@ -42,21 +22,20 @@ import { SaveFileContext } from "../../hooks/useSaveFile";
 import { JournalEntryData } from "../../interfaces/JournalEntryData";
 import { SaveFile } from "../../interfaces/SaveFile";
 import { Card } from "../../uiComponents/Card/Card";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
 export const TrainerNotes = () => {
   const { saveFile } = useContext(SaveFileContext);
   const navigate = useNavigate();
   return (
-    <Page
+    <InGamePage
       headline="Notes about Trainers"
       goBack={() => navigate("TRAINER_NOTES", "OVERWORLD")}
     >
       {saveFile.trainerNotes?.at(0) ? (
         <Stack mode="column">
           {saveFile.trainerNotes.map((note) => {
-            const data = allJournalEntries.find((o) => {
+            const data = trainerJournals.find((o) => {
               if (o.xpOverwrite) {
                 return (
                   o.trainer.id === note.id && o.xpOverwrite === note.xpOverwrite
@@ -84,7 +63,7 @@ export const TrainerNotes = () => {
       ) : (
         <strong>You dont have any notes yet</strong>
       )}
-    </Page>
+    </InGamePage>
   );
 };
 
@@ -188,7 +167,7 @@ const JournalEntry = ({
         </p>
       ))}
       <h3>Team</h3>
-      <Stack mode="column" gap={1}>
+      <Stack mode="column" gapInRem={1}>
         {res.map((mon) => (
           <div key={mon.id} style={{ borderTop: "2px solid black" }}>
             <Stack mode="column" alignItems="stretch">
@@ -208,30 +187,44 @@ const JournalEntry = ({
                   {calculateLevelData(mon.xp, mon.growthRate).level}
                 </h3>{" "}
               </Stack>
-              <Stack
-                mode="row"
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                <Stack mode="row" alignItems="center">
-                  Ability: {mon.ability}{" "}
+              <Stack mode="column">
+                <Stack
+                  mode="row"
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <strong>Ability: {mon.ability} </strong>
                   <AbilityInfoButton abilityName={mon.ability} />
                 </Stack>
-                <div></div>
-                <Stack mode="row" alignItems="center">
-                  {mon.nature} Nature
+
+                <Stack
+                  mode="row"
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <strong>Nature: {mon.nature}</strong>
                   <NatureInfoButton nature={mon.nature} />
                 </Stack>
                 {mon.heldItemName && (
-                  <Stack mode="row" alignItems="center">
-                    Held Item: {mon.heldItemName}{" "}
+                  <Stack
+                    mode="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
+                    <strong>Held Item: {mon.heldItemName}</strong>
                     <ItemInfoButton itemName={mon.heldItemName} />
                   </Stack>
                 )}
+                <h4>Moves:</h4>
               </Stack>
 
-              <BstSection hideExplanation ownedPokemon={mon} data={mon.data} />
               <MovesDisplay onlyCurrent ownedPokemon={mon} />
+              <BstSection
+                ownedByPlayer={false}
+                hideExplanation
+                ownedPokemon={mon}
+                data={mon.data}
+              />
             </Stack>
           </div>
         ))}
@@ -239,170 +232,3 @@ const JournalEntry = ({
     </div>
   );
 };
-
-export const allJournalEntries: JournalEntryData[] = [
-  { trainer: clearingKurt, additionalNotes: ["matches your level"] },
-  { trainer: trainerErika },
-  { trainer: trainerJanine },
-  { trainer: trainerBlaine },
-  { trainer: trainerSurge },
-  { trainer: trainerMisty },
-  { trainer: trainerBrock },
-  { trainer: trainerSabrina },
-  { trainer: trainerGary },
-  {
-    trainer: will,
-    additionalNotes: ["Matches your level * .8 after level 66"],
-  },
-  {
-    trainer: koga,
-    additionalNotes: ["Matches your level * .85 after level 67"],
-  },
-  {
-    trainer: bruno,
-    additionalNotes: ["Matches your level * .9 after level 68"],
-  },
-  {
-    trainer: karen,
-    additionalNotes: ["Matches your level * .95 after level 69"],
-  },
-  { trainer: lance, additionalNotes: ["Matches your level after level 70"] },
-  { trainer: giovanni, additionalNotes: ["Matches your level after level 60"] },
-  {
-    trainer: barry,
-    xpOverwrite: 6859,
-    additionalNotes: ["Matches your level"],
-  },
-  {
-    trainer: barry,
-    xpOverwrite: 46655,
-    additionalNotes: ["Matches your level"],
-  },
-  {
-    trainer: barry,
-    xpOverwrite: trickXP,
-    additionalNotes: [
-      "Matches your level",
-      "Selects randomly from the following pokemon",
-      "3 pokemon if under lvl 50",
-      "4 pokemon if under lvl 60",
-      "5 pokemon if under lvl 70",
-      "6 otherwise",
-    ],
-  },
-  {
-    trainer: silver,
-    xpOverwrite: 6859,
-    additionalNotes: ["Matches your level"],
-  },
-  {
-    trainer: silver,
-    xpOverwrite: 46655,
-    additionalNotes: ["Matches your level"],
-  },
-  {
-    trainer: silver,
-    xpOverwrite: trickXP,
-    additionalNotes: [
-      "Matches your level",
-      "Selects randomly from the following pokemon",
-      "3 pokemon if under lvl 50",
-      "4 pokemon if under lvl 60",
-      "5 pokemon if under lvl 70",
-      "6 otherwise",
-    ],
-  },
-  {
-    trainer: hugh,
-    xpOverwrite: 6859,
-    additionalNotes: ["Matches your level"],
-  },
-  {
-    trainer: hugh,
-    xpOverwrite: 46655,
-    additionalNotes: ["Matches your level"],
-  },
-  {
-    trainer: hugh,
-    xpOverwrite: trickXP,
-    additionalNotes: [
-      "Matches your level",
-      "Selects randomly from the following pokemon",
-      "3 pokemon if under lvl 50",
-      "4 pokemon if under lvl 60",
-      "5 pokemon if under lvl 70",
-      "6 otherwise",
-    ],
-  },
-  {
-    trainer: n,
-    xpOverwrite: 6859,
-    additionalNotes: ["Matches your level"],
-  },
-  {
-    trainer: n,
-    xpOverwrite: 46655,
-    additionalNotes: ["Matches your level"],
-  },
-  {
-    trainer: n,
-    xpOverwrite: trickXP,
-    additionalNotes: [
-      "Matches your level",
-      "Selects randomly from the following pokemon",
-      "3 pokemon if under lvl 50",
-      "4 pokemon if under lvl 60",
-      "5 pokemon if under lvl 70",
-      "6 otherwise",
-    ],
-  },
-  {
-    trainer: red,
-    xpOverwrite: 6859,
-    additionalNotes: ["Might be a time traveller", "Matches your level"],
-  },
-  {
-    trainer: red,
-    xpOverwrite: 46655,
-    additionalNotes: ["Might be a time traveller", "Matches your level"],
-  },
-  {
-    trainer: red,
-    xpOverwrite: trickXP,
-    additionalNotes: [
-      "Might be a time traveller",
-      "Matches your level",
-      "Selects randomly from the following pokemon",
-      "3 pokemon if under lvl 50",
-      "4 pokemon if under lvl 60",
-      "5 pokemon if under lvl 70",
-      "6 otherwise",
-    ],
-  },
-  {
-    trainer: cynthia,
-    xpOverwrite: 6859,
-    additionalNotes: ["Matches your level"],
-  },
-  {
-    trainer: cynthia,
-    xpOverwrite: 46655,
-    additionalNotes: ["Matches your level"],
-  },
-  {
-    trainer: cynthia,
-    xpOverwrite: trickXP,
-    additionalNotes: [
-      "Matches your level",
-      "Selects randomly from the following pokemon",
-      "3 pokemon if under lvl 50",
-      "4 pokemon if under lvl 60",
-      "5 pokemon if under lvl 70",
-      "6 otherwise",
-    ],
-  },
-  {
-    trainer: champChris,
-    additionalNotes: ["Matches your level after level 70"],
-  },
-];

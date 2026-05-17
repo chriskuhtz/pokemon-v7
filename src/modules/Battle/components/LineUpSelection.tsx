@@ -9,6 +9,7 @@ import { determineRunawaySuccess } from "../../../functions/determineRunAwaySucc
 import { getItemUrl } from "../../../functions/getItemUrl";
 import { isKO } from "../../../functions/isKo";
 import { LocationContext } from "../../../hooks/LocationProvider";
+import { useLeaveBattle } from "../../../hooks/useLeaveBattle";
 import { MessageQueueContext } from "../../../hooks/useMessageQueue";
 import { SaveFileContext } from "../../../hooks/useSaveFile";
 import { BattlePokemon } from "../../../interfaces/BattlePokemon";
@@ -16,7 +17,6 @@ import { TrainerInfo } from "../../../interfaces/Challenger";
 import { IconSolarSystem } from "../../../uiComponents/IconSolarSystem/IconSolarSystem";
 
 export const LineUpSelection = ({
-  leave,
   opponents,
   team,
   fightersPerSide,
@@ -25,7 +25,6 @@ export const LineUpSelection = ({
   startBattle,
   trainer,
 }: {
-  leave: () => void;
   opponents: BattlePokemon[];
   team: BattlePokemon[];
   fightersPerSide: number;
@@ -34,8 +33,9 @@ export const LineUpSelection = ({
   startBattle: () => void;
   trainer?: TrainerInfo;
 }) => {
+  const leave = useLeaveBattle();
   const {
-    saveFile: { pokedex, settings },
+    saveFile: { pokedex, settings, bag, trait },
   } = useContext(SaveFileContext);
   const { location } = useContext(LocationContext);
 
@@ -62,13 +62,26 @@ export const LineUpSelection = ({
   }, [fightersPerSide, selectedTeam.length]);
 
   const tryToLeave = useCallback(() => {
-    const canEscape = determineRunawaySuccess(team, opponents);
+    const canEscape = determineRunawaySuccess(
+      team,
+      opponents,
+      trait === "rogue",
+    );
 
     if (canEscape) {
       addMessage({
         message: `escaped successfully`,
         needsNoConfirmation: true,
-        onRemoval: () => leave(),
+        onRemoval: () =>
+          leave({
+            updatedInventory: bag,
+            scatteredCoins: 0,
+            team,
+            defeatedPokemon: [],
+            outcome: "DRAW",
+            caughtPokemon: [],
+            lootPossible: false,
+          }),
       });
     } else {
       addMessage({
@@ -76,7 +89,7 @@ export const LineUpSelection = ({
         onRemoval: () => startBattle(),
       });
     }
-  }, [addMessage, leave, opponents, startBattle, team]);
+  }, [addMessage, bag, leave, opponents, startBattle, team, trait]);
 
   return (
     <div

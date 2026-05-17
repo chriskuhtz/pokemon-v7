@@ -47,5 +47,6 @@ export const routes = [
   "TRAIT_SELECTION",
   "STARTER_REGION_SELECTION",
   "TRAIT_SELECTION",
+  "LOOT",
 ] as const;
 export type RoutesType = (typeof routes)[number];

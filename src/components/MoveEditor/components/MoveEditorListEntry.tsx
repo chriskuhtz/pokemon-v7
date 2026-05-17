@@ -9,7 +9,7 @@ import { SaveFileContext } from "../../../hooks/useSaveFile";
 import { ItemType } from "../../../interfaces/Item";
 import { OwnedPokemon } from "../../../interfaces/OwnedPokemon";
 import { ItemSprite } from "../../ItemSprite/ItemSprite";
-import { SmallMoveDisplayEntry } from "../../MovesDisplay/components/MovesDisplayListEntry";
+import { MoveDisplayEntry } from "../../MovesDisplay/components/MovesDisplayListEntry";
 
 export const MoveEditorListEntry = ({
   m,
@@ -73,16 +73,17 @@ export const MoveEditorListEntry = ({
   }
 
   return (
-    <SmallMoveDisplayEntry
+    <MoveDisplayEntry
+      disabled={!m.learnable}
       moveName={moveData.name as MoveName}
       typeName={moveData.type.name}
       additionalInfo={additionalInfo}
-      additionalIcon={
+      additionalIcons={[
         <ItemSprite
           item={payment}
           grayscale={!(m.learnable && available && unlockable)}
-        />
-      }
+        />,
+      ]}
       onClick={
         m.learnable && moveToConfirm === m.move.name
           ? () => unlockMove(m.move.name as MoveName, payment)

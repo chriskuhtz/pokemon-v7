@@ -1,4 +1,5 @@
 import { useCallback, useContext, useMemo } from "react";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { ItemInfoButton } from "../../components/ItemInfoButton/ItemInfoButton";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
@@ -9,7 +10,6 @@ import { ItemType, berries, heldItems } from "../../interfaces/Item";
 import { Occupant } from "../../interfaces/Occupant";
 import { SpriteEnum } from "../../interfaces/SpriteEnum";
 import { Card } from "../../uiComponents/Card/Card";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
 export const useTravellingMerchant = () => {
@@ -53,7 +53,7 @@ export const TravellingMerchant = (): JSX.Element => {
 
   const navigate = useNavigate();
   return (
-    <Page
+    <InGamePage
       headline="Trade Berries for battle items"
       goBack={() => navigate("TRAVELLING_MERCHANT", "OVERWORLD")}
     >
@@ -86,7 +86,7 @@ export const TravellingMerchant = (): JSX.Element => {
           );
         })}
       </Stack>
-    </Page>
+    </InGamePage>
   );
 };
 

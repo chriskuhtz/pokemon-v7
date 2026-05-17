@@ -6,6 +6,7 @@ import {
   isPPRestorationItem,
   isPokeball,
 } from "../interfaces/Item";
+import { CharacterTrait } from "../interfaces/Trait";
 import { ActionType } from "../modules/Battle/interfaces/interfaces";
 import { canBenefitFromItem } from "./canBenefitFromItem";
 import { getMovesArray } from "./getMovesArray";
@@ -20,6 +21,7 @@ export interface FilterTargetsPayload {
   chosenAction: ActionType;
   onlyOpponents: boolean;
   playerId: string;
+  trait: CharacterTrait | undefined;
 }
 export const filterTargets = ({
   targets,
@@ -27,6 +29,7 @@ export const filterTargets = ({
   chosenAction,
   onlyOpponents,
   playerId,
+  trait,
 }: FilterTargetsPayload): BattlePokemon[] => {
   const preFiltered = targets.filter(
     (t) => !onlyOpponents || (onlyOpponents && t.ownerId !== user.ownerId),
@@ -34,11 +37,11 @@ export const filterTargets = ({
   if (isHealingItem(chosenAction) || isPPRestorationItem(chosenAction)) {
     if (user?.ownerId === playerId) {
       return getPlayerPokemon(preFiltered, playerId).filter((t) =>
-        canBenefitFromItem(t, chosenAction),
+        canBenefitFromItem({ pokemon: t, item: chosenAction, trait }),
       );
     }
     return getOpponentPokemon(preFiltered).filter((t) =>
-      canBenefitFromItem(t, chosenAction),
+      canBenefitFromItem({ pokemon: t, item: chosenAction, trait }),
     );
   }
   if (isPokeball(chosenAction)) {

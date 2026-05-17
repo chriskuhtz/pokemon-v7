@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { animationTimer } from "../../../constants/baseConstants";
 import { isKO } from "../../../functions/isKo";
-import { useLeaveBattle } from "../../../hooks/useLeaveBattle";
 import { BattlePokemon } from "../../../interfaces/BattlePokemon";
 import { TrainerInfo } from "../../../interfaces/Challenger";
 import { Inventory } from "../../../interfaces/Inventory";
@@ -26,7 +25,6 @@ export const BattleOverview = ({
   challengerId: string;
   challengerType: "TRAINER" | "WILD";
 }): JSX.Element => {
-  const leave = useLeaveBattle();
   const [battleStarted, setBattleStarted] = useState<boolean>(false);
 
   const [selectedTeam, setSelectedTeam] = useState<string[]>(
@@ -65,16 +63,6 @@ export const BattleOverview = ({
     return (
       <LineUpSelection
         trainer={trainer}
-        leave={() =>
-          leave({
-            updatedInventory: inventory,
-            scatteredCoins: 0,
-            team,
-            defeatedPokemon: [],
-            outcome: "WIN",
-            caughtPokemon: [],
-          })
-        }
         opponents={opponents}
         team={team}
         fightersPerSide={fightersPerSide}

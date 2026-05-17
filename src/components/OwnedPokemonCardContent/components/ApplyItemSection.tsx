@@ -6,9 +6,8 @@ import { SaveFileContext } from "../../../hooks/useSaveFile";
 import { ItemType } from "../../../interfaces/Item";
 import { OwnedPokemon } from "../../../interfaces/OwnedPokemon";
 import { PokemonData } from "../../../interfaces/PokemonData";
-import { Card } from "../../../uiComponents/Card/Card";
 import { Stack } from "../../../uiComponents/Stack/Stack";
-import { ItemSelectionOption } from "../../ItemSelectionListModal/ItemSelectionListModal";
+import { ItemSelectionOption } from "../../ItemSelectionOption/ItemSelectionOption";
 import { DetailsCard } from "./DetailsCard";
 
 export const ApplyItemSection = ({
@@ -20,27 +19,23 @@ export const ApplyItemSection = ({
 }) => {
   const heldItem = getHeldItem(ownedPokemon);
   const {
-    saveFile: { bag },
+    saveFile: { bag, trait },
     applyItemToPokemonReducer,
   } = useContext(SaveFileContext);
 
   return (
     <Stack mode="column">
-      <Card
-        icon={undefined}
-        actionElements={[]}
-        content={
-          <DetailsCard
-            detailed={false}
-            ownedPokemon={ownedPokemon}
-            data={data}
-          />
-        }
-      ></Card>
+      <DetailsCard detailed={false} ownedPokemon={ownedPokemon} data={data} />
+
       {Object.entries(bag)
         .filter(
           ([item, amount]) =>
-            amount > 0 && canBenefitFromItem(ownedPokemon, item as ItemType),
+            amount > 0 &&
+            canBenefitFromItem({
+              pokemon: ownedPokemon,
+              item: item as ItemType,
+              trait,
+            }),
         )
         .map(([item]) => item)
         .filter((s) => s !== undefined && s !== heldItem)
@@ -60,7 +55,7 @@ export const ApplyItemSection = ({
                   item={item as ItemType}
                   isSelected={item === heldItem}
                   label={`Apply ${item} to ${ownedPokemon.name}'s ${m.name}`}
-                  toggle={() =>
+                  onClick={() =>
                     applyItemToPokemonReducer(
                       ownedPokemon,
                       item as ItemType,
@@ -79,7 +74,7 @@ export const ApplyItemSection = ({
                 item={item as ItemType}
                 isSelected={item === heldItem}
                 label={`Apply ${item} to ${ownedPokemon.name}'s ${m.name}`}
-                toggle={() =>
+                onClick={() =>
                   applyItemToPokemonReducer(
                     ownedPokemon,
                     item as ItemType,
@@ -95,7 +90,7 @@ export const ApplyItemSection = ({
               item={item as ItemType}
               isSelected={item === heldItem}
               label={`Apply ${item} to ${ownedPokemon.name}`}
-              toggle={() =>
+              onClick={() =>
                 applyItemToPokemonReducer(ownedPokemon, item as ItemType)
               }
             />

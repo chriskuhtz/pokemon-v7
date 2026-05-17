@@ -16,6 +16,7 @@ import {
 } from "../interfaces/Item";
 import { OwnedPokemon } from "../interfaces/OwnedPokemon";
 import { EmptyStatObject } from "../interfaces/StatObject";
+import { CharacterTrait } from "../interfaces/Trait";
 import { applyEVBoostItem } from "./applyEVGain";
 import { applyHappinessChange } from "./applyHappinessChange";
 import { applyPPMoveBooster } from "./applyPPBooster";
@@ -27,12 +28,19 @@ import { getMiddleOfThree } from "./getMiddleOfThree";
 import { hasAilment } from "./hasAilment";
 import { removeHealableAilments } from "./removeHealableAilments";
 
-export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
-  pokemon: T,
-  item: ItemType,
-  addMessage?: (x: Message) => void,
-  move?: MoveName,
-): T {
+export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>({
+  pokemon,
+  item,
+  addMessage,
+  move,
+  trait,
+}: {
+  pokemon: T;
+  item: ItemType;
+  addMessage?: (x: Message) => void;
+  move?: MoveName;
+  trait: CharacterTrait | undefined;
+}): T {
   if (
     (item === "ether" || item === "max-ether" || item === "leppa-berry") &&
     move
@@ -95,7 +103,7 @@ export function applyItemToPokemon<T extends OwnedPokemon | BattlePokemon>(
     if (addMessage) {
       addMessage({ message: `gained ${EvBoostTable[item].stat}` });
     }
-    return applyEVBoostItem(pokemon, item);
+    return applyEVBoostItem(pokemon, item, trait === "gym bro");
   }
   if (item === "fresh-start-mochi") {
     return { ...pokemon, effortValues: EmptyStatObject };

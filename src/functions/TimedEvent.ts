@@ -77,7 +77,7 @@ export const cleanUpTimedEvents = (saveFile: SaveFile): SaveFile => {
   });
 
   update.timedEvents = dedupled;
-  console.log("cleaned up timed Events, result:", update.timedEvents);
+  // console.log("cleaned up timed Events, result:", update.timedEvents);
   return update;
 };
 export const cleanUpSpecificEvent = (
@@ -142,7 +142,7 @@ export const refillRandomTimedEvents = (
     ];
   }
 
-  console.log("refilled timed Events, result:", update.timedEvents);
+  //console.log("refilled timed Events, result:", update.timedEvents);
 
   return update;
 };

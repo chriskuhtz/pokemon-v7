@@ -4,6 +4,7 @@ import { battleSpriteSize } from "../../constants/baseConstants";
 import { MoveName } from "../../constants/movesCheckList";
 import { ItemType } from "../../interfaces/Item";
 import { OwnedPokemon } from "../../interfaces/OwnedPokemon";
+import { CharacterTrait } from "../../interfaces/Trait";
 import { Banner } from "../../uiComponents/Banner/Banner";
 import { HealablePokemon } from "./components/HealablePokemon";
 import { RefillableMoves } from "./components/RefillableMoves";
@@ -11,8 +12,10 @@ export const HealAction = ({
   item,
   healablePokemon,
   applyItem,
+  trait,
 }: {
   item: ItemType;
+  trait: CharacterTrait | undefined;
   healablePokemon: OwnedPokemon[];
   applyItem: (pokemon: OwnedPokemon, item: ItemType, move?: MoveName) => void;
 }) => {
@@ -53,6 +56,7 @@ export const HealAction = ({
       )}
       {selectedPokemon && (
         <RefillableMoves
+          trait={trait}
           selectedPokemon={selectedPokemon}
           item={item}
           applyItem={(a, b, c) => {

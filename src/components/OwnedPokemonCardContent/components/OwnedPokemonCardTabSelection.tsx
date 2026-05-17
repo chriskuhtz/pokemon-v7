@@ -7,11 +7,11 @@ import { SelectionBar } from "../../../uiComponents/SelectionBar/SelectionBar";
 
 const tabTypes = [
   "DETAILS",
-  "HELD ITEM",
   "STATS",
-  "EVOLUTION",
   "MOVES",
+  "EVOLUTION",
   "NEW MOVES",
+  "HELD ITEM",
   "APPLY ITEM",
 ] as const;
 export type TabType = (typeof tabTypes)[number];

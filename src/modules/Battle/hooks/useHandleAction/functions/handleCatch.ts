@@ -77,13 +77,14 @@ export const handleCatch = (
   );
 
   const getCatchStepMessage = (step: 1 | 2 | 3): Message => {
-    const m = `${Array.from({ length: step })
-      .map(() => "wiggle")
-      .join("...")}...`;
+    const stepMessages = [
+      `You throw a ${move.ball} at ${target.data.name}`,
+      "wiggle...",
+      "..wiggle...",
+    ];
 
     return {
-      message:
-        step === 1 ? `You throw a ${move.ball} at ${target.data.name}` : m,
+      message: stepMessages[step - 1],
       onRemoval: () =>
         setPokemon((pokemon) =>
           pokemon.map((p) => {

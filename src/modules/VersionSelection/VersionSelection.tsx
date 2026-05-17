@@ -27,7 +27,11 @@ export const VersionSelection = (): JSX.Element => {
     return <MapEditor mapId={map} goBack={() => setMap(undefined)} />;
   }
   return (
-    <Page headline={"Which version would you like to play"}>
+    <Page
+      headline={"Which version would you like to play"}
+      primaryColor={"rgba(122, 199, 76, 0.5) 0%"}
+      secondaryColor={"rgba(99, 144, 240, 0.5) 100%"}
+    >
       <Stack mode={"column"}>
         <SelectionCards setVersion={setVersion} />
         <RecoveryTool />

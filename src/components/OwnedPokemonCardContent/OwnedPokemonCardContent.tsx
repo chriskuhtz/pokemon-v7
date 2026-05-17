@@ -40,6 +40,12 @@ export const OwnedPokemonCardContent = ({
 
   return (
     <Stack mode={"column"}>
+      <h2 style={{ marginBottom: 0, marginTop: 0 }}>
+        {ownedPokemon.nickname
+          ? `${ownedPokemon.nickname}(${ownedPokemon.name})`
+          : ownedPokemon.name}
+        :
+      </h2>
       <OwnedPokemonCardTabSelection
         ownedPokemon={ownedPokemon}
         data={data}
@@ -72,7 +78,10 @@ export const OwnedPokemonCardContent = ({
         />
       )}
       {tab === "MOVES" && (
-        <MovesDisplay ownedPokemon={ownedPokemon} onlyCurrent={!gameData} />
+        <MovesDisplay
+          ownedPokemon={ownedPokemon}
+          onlyCurrent={!gameData.features.movesEditableInTeamOverview}
+        />
       )}
       {tab === "NEW MOVES" && <MoveEditor ownedPokemon={ownedPokemon} />}
       {tab === "APPLY ITEM" && (

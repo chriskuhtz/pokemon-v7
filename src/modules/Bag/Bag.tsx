@@ -2,15 +2,14 @@ import React, { useContext } from "react";
 import { FaRunning } from "react-icons/fa";
 import { MdHealing } from "react-icons/md";
 import { BagLimitBar } from "../../components/BagLimitBar/BagLimitBar";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { ThrowAwayAction } from "../../components/ItemCard/components/ThrowAwayAction";
-import { ItemCard } from "../../components/ItemCard/ItemCard";
-import { ItemInfoButton } from "../../components/ItemInfoButton/ItemInfoButton";
+import { ItemSelectionOption } from "../../components/ItemSelectionOption/ItemSelectionOption";
 import { useFilteredInventory } from "../../components/ItemsFilter/ItemsFilter";
 import { battleSpriteSize } from "../../constants/baseConstants";
 import { useEscapeRope } from "../../hooks/useEscapeRope";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { isKeyItem, ItemType } from "../../interfaces/Item";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 export const Bag = ({ goBack }: { goBack: () => void }): JSX.Element => {
   const { applyEscapeRope, disabled } = useEscapeRope();
@@ -24,7 +23,7 @@ export const Bag = ({ goBack }: { goBack: () => void }): JSX.Element => {
 
   const { filteredInventory, buttons } = useFilteredInventory(inventory, true);
   return (
-    <Page goBack={goBack} headline="Inventory:">
+    <InGamePage goBack={goBack} headline="Inventory:">
       <Stack mode="column">
         <h4>Bag Capacity:</h4>
         <BagLimitBar />
@@ -35,12 +34,11 @@ export const Bag = ({ goBack }: { goBack: () => void }): JSX.Element => {
           }
 
           return (
-            <ItemCard
+            <ItemSelectionOption
               key={item}
               item={item as ItemType}
-              amount={amount}
-              actionElements={[
-                <ItemInfoButton itemName={item as ItemType} />,
+              hint={amount.toString()}
+              additionalIcons={[
                 item === "sacred-ash" ? (
                   <MdHealing
                     tabIndex={0}
@@ -85,10 +83,12 @@ export const Bag = ({ goBack }: { goBack: () => void }): JSX.Element => {
                   />
                 ),
               ]}
+              isSelected={false}
+              onClick={() => {}}
             />
           );
         })}
       </Stack>
-    </Page>
+    </InGamePage>
   );
 };

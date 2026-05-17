@@ -1,4 +1,5 @@
 import { useCallback, useContext, useState } from "react";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { ONE_HOUR } from "../../constants/baseConstants";
 import { customItemDescriptions } from "../../constants/customItemDescriptions";
@@ -15,7 +16,6 @@ import {
   mulches as mulchNames,
 } from "../../interfaces/Item";
 import { Card } from "../../uiComponents/Card/Card";
-import { Page } from "../../uiComponents/Page/Page";
 import { SelectionBar } from "../../uiComponents/SelectionBar/SelectionBar";
 import { Stack } from "../../uiComponents/Stack/Stack";
 import { BerryBushIcon } from "./components/BerryBushIcon";
@@ -26,7 +26,7 @@ export const Farm = (): JSX.Element => {
 
   const [activePage, setActivePage] = useState<string | undefined>("PLANTS");
   return (
-    <Page headline="Farm" goBack={() => navigate("FARM", "OVERWORLD")}>
+    <InGamePage headline="Farm" goBack={() => navigate("FARM", "OVERWORLD")}>
       <SelectionBar
         options={[
           { key: "PLANTS", label: "PLANTS" },
@@ -43,7 +43,7 @@ export const Farm = (): JSX.Element => {
         {activePage === "TREES" && <TreeFarm />}
         {activePage === "PLANTS" && <PlantFarm />}
       </Stack>
-    </Page>
+    </InGamePage>
   );
 };
 
@@ -240,7 +240,7 @@ const TreeFarm = () => {
       {saveFile.farm.trees?.map((tree, index) =>
         tree ? (
           <button onClick={() => removeTree(tree, index)}>
-            <Stack alignItems="center" mode="row" gap={1}>
+            <Stack alignItems="center" mode="row" gapInRem={1}>
               <ItemSprite grayscale item={tree} />
               <span>Remove {tree} tree</span>
             </Stack>
@@ -253,7 +253,7 @@ const TreeFarm = () => {
         treeLimit &&
         berriesAndApricorns.map((tree) => (
           <button onClick={() => plantTree(tree)}>
-            <Stack alignItems="center" mode="row" gap={1}>
+            <Stack alignItems="center" mode="row" gapInRem={1}>
               <ItemSprite item={tree} /> <span>Plant a {tree} tree</span>
             </Stack>
           </button>

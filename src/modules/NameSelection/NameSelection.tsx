@@ -1,6 +1,6 @@
 import { useCallback, useContext, useState } from "react";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { SaveFileContext } from "../../hooks/useSaveFile";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
 export const NameSelection = (): JSX.Element => {
@@ -20,7 +20,7 @@ export const NameSelection = (): JSX.Element => {
   }, [name, patchSaveFileReducer, saveFile]);
 
   return (
-    <Page headline="What is your name:">
+    <InGamePage headline="What is your name:">
       <div
         style={{
           height: "90dvh",
@@ -39,6 +39,6 @@ export const NameSelection = (): JSX.Element => {
           </button>
         </Stack>
       </div>
-    </Page>
+    </InGamePage>
   );
 };

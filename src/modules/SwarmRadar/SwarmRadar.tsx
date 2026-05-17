@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 import { replaceRouteName } from "../../functions/replaceRouteName";
 import {
@@ -9,7 +10,6 @@ import { useNavigate } from "../../hooks/useNavigate";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { useSwarmRadar } from "../../hooks/useSwarmRadar";
 import { Card } from "../../uiComponents/Card/Card";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
 export const SwarmRadar = () => {
@@ -26,7 +26,7 @@ export const SwarmRadar = () => {
     getCurrentSwarm(saveFile, "FUTURE_DISTORTION") ??
     getCurrentSwarm(saveFile, "SPACE_DISTORTION");
   return (
-    <Page
+    <InGamePage
       headline="Swarm Radar"
       goBack={() => navigate("SWARM_RADAR", "OVERWORLD")}
     >
@@ -91,6 +91,6 @@ export const SwarmRadar = () => {
           />
         )}
       </Stack>
-    </Page>
+    </InGamePage>
   );
 };

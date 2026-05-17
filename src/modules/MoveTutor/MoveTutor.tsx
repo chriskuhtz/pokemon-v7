@@ -1,5 +1,6 @@
 import { useContext, useMemo, useState } from "react";
 import { BstSectionConnected } from "../../components/BstSection/BstSection";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { MoveEditor } from "../../components/MoveEditor/MoveEditor";
 import { MovesDisplay } from "../../components/MovesDisplay/MovesDisplay";
 import { getPokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
@@ -11,7 +12,6 @@ import { useNavigate } from "../../hooks/useNavigate";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { Chip } from "../../uiComponents/Chip/Chip";
 import { IconSolarSystem } from "../../uiComponents/IconSolarSystem/IconSolarSystem";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
 export const MoveTutor = () => {
@@ -32,7 +32,7 @@ export const MoveTutor = () => {
 
   const navigate = useNavigate();
   return (
-    <Page
+    <InGamePage
       headline="Move Tutor"
       goBack={() => navigate("MOVE_TUTOR", "OVERWORLD")}
     >
@@ -87,13 +87,14 @@ export const MoveTutor = () => {
               showOnly={["attack", "special-attack"]}
               ownedPokemon={pokemonWithId}
               hideExplanation
+              box={false}
             />
           </>
         )}
         {pokemonWithId && (
           <>
             <h3>Current Moves:</h3>
-            <MovesDisplay ownedPokemon={pokemonWithId} onlyCurrent small />
+            <MovesDisplay ownedPokemon={pokemonWithId} onlyCurrent />
           </>
         )}
         {pokemonWithId && (
@@ -103,6 +104,6 @@ export const MoveTutor = () => {
           </>
         )}
       </Stack>
-    </Page>
+    </InGamePage>
   );
 };

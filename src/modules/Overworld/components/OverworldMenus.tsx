@@ -1,7 +1,7 @@
 import { useContext, useEffect, useMemo } from "react";
 import { CgZoomIn, CgZoomOut } from "react-icons/cg";
 import { IoMdMenu } from "react-icons/io";
-import { BagLimitIcon } from "../../../components/BagLimitIcon/BagLimitIcon";
+import { HudBagLimitIcon } from "../../../components/BagLimitIcon/BagLimitIcon";
 import { LureIcon } from "../../../components/LureIcon/LureIcon";
 import { RampagerIcon } from "../../../components/RampagerIcon/RampagerIcon";
 import { RepelIcon } from "../../../components/RepelIcon/RepelIcon";
@@ -15,10 +15,8 @@ import {
   battleSpriteSize,
   portraitMode,
 } from "../../../constants/baseConstants";
-import {
-  mapDisplayNames,
-  mapsRecord,
-} from "../../../constants/gameData/maps/mapsRecord";
+import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
+import { replaceRouteName } from "../../../functions/replaceRouteName";
 import { LocationContext } from "../../../hooks/LocationProvider";
 import { BaseSizeContext } from "../../../hooks/useBaseSize";
 import { GameDataContext } from "../../../hooks/useGameData";
@@ -119,7 +117,7 @@ export const OverworldMenus = ({
                 : { marginRight: 24, marginLeft: -8 }
             }
           >
-            <BagLimitIcon />
+            <HudBagLimitIcon />
           </div>
         }
 
@@ -165,7 +163,7 @@ export const OverworldMenus = ({
         <RampagerIcon />
         <RepelIcon />
         <LureIcon />
-        <strong>{mapDisplayNames[map.id]}</strong>
+        <strong>{replaceRouteName(map.id)}</strong>
         <WeatherIcon weather={map.weather} />
         <TimeOfDayIcon />
       </div>

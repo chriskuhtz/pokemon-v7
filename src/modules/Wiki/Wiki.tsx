@@ -1,6 +1,7 @@
 import { useFetch } from "@potfisch-industries-npm/usefetch";
 import { useContext, useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { abilityNames } from "../../constants/abilityCheckList";
 import { battleSpriteSize } from "../../constants/baseConstants";
 import { customItemDescriptions } from "../../constants/customItemDescriptions";
@@ -12,7 +13,6 @@ import { itemTypes } from "../../interfaces/Item";
 import { ItemData } from "../../interfaces/ItemData";
 import { MoveDto } from "../../interfaces/Move";
 import { Card } from "../../uiComponents/Card/Card";
-import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 export const Wiki = () => {
   const { setActiveTabReducer } = useContext(SaveFileContext);
@@ -51,7 +51,7 @@ export const Wiki = () => {
   }, [addMessage, res, status, targetUrl]);
 
   return (
-    <Page goBack={() => setActiveTabReducer("MAIN")} headline="Wiki:">
+    <InGamePage goBack={() => setActiveTabReducer("MAIN")} headline="Wiki:">
       <Stack mode="column">
         <Card
           icon={<FaSearch size={battleSpriteSize} />}
@@ -106,6 +106,6 @@ export const Wiki = () => {
             />
           ))}
       </Stack>
-    </Page>
+    </InGamePage>
   );
 };

@@ -1,6 +1,6 @@
 import { useCallback, useContext } from "react";
 import { SpriteIcon } from "../components/SpriteIcon/SpriteIcon";
-import { mapDisplayNames } from "../constants/gameData/maps/mapsRecord";
+import { replaceRouteName } from "../functions/replaceRouteName";
 import {
   createTroubleMakers,
   getCurrentTroubleMakers,
@@ -36,7 +36,7 @@ export const useRangerRadio = () => {
         icon: <SpriteIcon sprite={sprite(troubleMakers.affiliation)} />,
         message: `There are reports of team ${
           troubleMakers.affiliation
-        } activity at ${mapDisplayNames[troubleMakers.mapId]}`,
+        } activity at ${replaceRouteName(troubleMakers.mapId)}`,
         needsNoConfirmation: true,
       });
     } else {
@@ -51,7 +51,7 @@ export const useRangerRadio = () => {
 
       addMessage({
         icon: <SpriteIcon sprite={sprite(newTroubleMakers.affiliation)} />,
-        message: `There are reports of team ${newTroubleMakers.affiliation} activity at ${mapDisplayNames[newTroubleMakers.mapId]}`,
+        message: `There are reports of team ${newTroubleMakers.affiliation} activity at ${replaceRouteName(newTroubleMakers.mapId)}`,
         needsNoConfirmation: true,
       });
     }

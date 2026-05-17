@@ -1,5 +1,6 @@
 import { useContext, useMemo } from "react";
 import { battleSpriteSize } from "../../constants/baseConstants";
+import { baseInternalDex } from "../../constants/baseInternalDex";
 import { percentageBasedColor } from "../../constants/typeColors";
 import { getPrimaryAilmentColor } from "../../functions/getPrimaryAilmentColor";
 import { getStats } from "../../functions/getStats";
@@ -25,14 +26,14 @@ export const TeamOverview = ({ steps }: { steps: number }) => {
         <TeamMemberInOverview
           pokemon={t}
           key={t.id}
-          onClick={() => navigate("OVERWORLD", "TEAM", steps)}
+          onClick={() => navigate("OVERWORLD", "TEAM", steps, t.id)}
         />
       ))}
     </>
   );
 };
 
-const TeamMemberInOverview = ({
+export const TeamMemberInOverview = ({
   pokemon,
   onClick,
 }: {
@@ -55,6 +56,8 @@ const TeamMemberInOverview = ({
     pokemon.nature,
     pokemon.effortValues,
     saveFile.settings,
+    saveFile.trait,
+    baseInternalDex[pokemon.name].types,
   ).hp;
 
   const damage = pokemon.damage;

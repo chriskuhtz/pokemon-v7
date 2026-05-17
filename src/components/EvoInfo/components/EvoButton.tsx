@@ -1,15 +1,16 @@
 import { useContext, useMemo } from "react";
 import { determineEvoChecks } from "../../../functions/determineEvoChecks";
+import { getRandomPokemonName } from "../../../functions/getRandomPokemonId";
 import { TimeOfDay, isTimeOfDay } from "../../../functions/getTimeOfDay";
 import { keepAlternateFormThroughEvolution } from "../../../functions/handleAlternateForms";
 import {
   EvolutionReducerPayload,
   SaveFileContext,
 } from "../../../hooks/useSaveFile";
+import "../../../index.css";
 import { EvolutionChainLink } from "../../../interfaces/EvolutionChainData";
 import { Inventory } from "../../../interfaces/Inventory";
 import { OwnedPokemon } from "../../../interfaces/OwnedPokemon";
-import { getRandomPokemonName } from "../../../functions/getRandomPokemonId";
 
 export const EvoButton = ({
   evo,
@@ -61,11 +62,6 @@ export const EvoButton = ({
   return (
     <button
       disabled={checks.length > 0}
-      style={{
-        padding: ".5rem",
-        border: "1px solid black",
-        borderRadius: "1rem",
-      }}
       onClick={() =>
         evolve({
           name: ownedPokemon.name,

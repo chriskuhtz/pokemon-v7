@@ -1,12 +1,10 @@
 import React, { useCallback, useContext, useMemo, useState } from "react";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { OwnedPokemonCardContent } from "../../components/OwnedPokemonCardContent/OwnedPokemonCardContent";
-import { getPokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 
-import { battleSpriteSize, portraitMode } from "../../constants/baseConstants";
-import { getHeldItem } from "../../functions/getHeldItem";
-import { getItemUrl } from "../../functions/getItemUrl";
-import { getTypeNames } from "../../functions/getTypeNames";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
+import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
+import { TeamMemberInOverview } from "../../components/TeamOverview/TeamOverview";
+import { portraitMode } from "../../constants/baseConstants";
 import { isOwnedPokemonKO } from "../../functions/isKo";
 import { useGetBattleTeam } from "../../hooks/useGetBattleTeam";
 import { SaveFileContext } from "../../hooks/useSaveFile";
@@ -14,10 +12,8 @@ import { BattlePokemon } from "../../interfaces/BattlePokemon";
 import { Inventory } from "../../interfaces/Inventory";
 import { ItemType } from "../../interfaces/Item";
 import { OwnedPokemon } from "../../interfaces/OwnedPokemon";
-import { IconSolarSystem } from "../../uiComponents/IconSolarSystem/IconSolarSystem";
+import { BottomDrawer } from "../../uiComponents/BottomDrawer/BottomDrawer";
 import { LoadingScreen } from "../../uiComponents/LoadingScreen/LoadingScreen";
-import { Page } from "../../uiComponents/Page/Page";
-import { Stack } from "../../uiComponents/Stack/Stack";
 
 export const Team = ({
   team,
@@ -59,30 +55,22 @@ export const Team = ({
     [res, focused],
   );
 
-  const reorder = (dir: "UP" | "DOWN") => {
-    if (!focused) {
-      return;
-    }
-    const index = team.findIndex((p) => p.id === focusedId);
-    if (index === 0 && dir == "UP") {
-      return;
-    }
-    if (index === team.length - 1 && dir == "DOWN") {
-      return;
-    }
-    const displaced =
-      dir === "UP" ? { ...team[index - 1] } : { ...team[index + 1] };
+  const reorder = (from: number, to: number) => {
+    const selected = team.at(from);
+    const displaced = team.at(to);
 
-    const newTeam = team.map((p) => {
-      if (p.id === displaced.id) {
-        return focused;
-      }
-      if (p.id === focusedId) {
+    if (!selected || !displaced) {
+      throw new Error("Error while reordering team");
+    }
+    const newTeam = team.map((t, index) => {
+      if (index === from) {
         return displaced;
       }
-      return p;
+      if (index === to) {
+        return selected;
+      }
+      return t;
     });
-
     setTeam(newTeam);
   };
 
@@ -91,152 +79,169 @@ export const Team = ({
   }
 
   return (
-    <Page goBack={goBack} headline="Team:">
-      <Stack mode="column">
-        <TeamIcons
-          team={team}
-          res={res}
-          reorder={reorder}
-          focusedId={focusedId}
-          setFocusedId={setFocusedId}
-        />
-        <OwnedPokemonCardContent
-          setNickName={(id, nickname) => {
-            setTeam(
-              team.map((t) => {
-                if (t.id === id) {
-                  return {
-                    ...t,
-                    nickname,
-                  };
-                }
+    <InGamePage goBack={goBack} headline="Team:">
+      <TeamIcons
+        team={team}
+        res={res}
+        reorder={reorder}
+        focusedId={focusedId}
+        setFocusedId={setFocusedId}
+      />
+      <OwnedPokemonCardContent
+        setNickName={(id, nickname) => {
+          setTeam(
+            team.map((t) => {
+              if (t.id === id) {
+                return {
+                  ...t,
+                  nickname,
+                };
+              }
 
-                return t;
-              }),
-            );
-          }}
-          evolve={(payload) => {
-            evolve(payload);
-            invalidate();
-          }}
-          data={focusedData}
-          key={focusedId}
-          ownedPokemon={focused}
-          inventory={inventory}
-          takeHeldItem={() => changeHeldItem(focusedId)}
-          giveHeldItem={(newItem: ItemType) =>
-            changeHeldItem(focusedId, newItem)
-          }
-        />
-      </Stack>
-    </Page>
+              return t;
+            }),
+          );
+        }}
+        evolve={(payload) => {
+          evolve(payload);
+          invalidate();
+        }}
+        data={focusedData}
+        key={focusedId}
+        ownedPokemon={focused}
+        inventory={inventory}
+        takeHeldItem={() => changeHeldItem(focusedId)}
+        giveHeldItem={(newItem: ItemType) => changeHeldItem(focusedId, newItem)}
+      />
+    </InGamePage>
   );
 };
 
 const TeamIcons = ({
   team,
   res,
-  focusedId,
   setFocusedId,
   reorder,
 }: {
   team: OwnedPokemon[];
   res: BattlePokemon[];
-  reorder: (dir: "UP" | "DOWN") => void;
+  reorder: (from: number, to: number) => void;
   focusedId: string;
   setFocusedId: (x: string) => void;
 }) => {
   return (
-    <div
-      style={{
-        padding: "1rem",
-        border: "2px solid black",
-        borderRadius: "1rem",
-      }}
-    >
+    <>
       <div
         style={{
           display: "grid",
           gap: ".5rem",
-          rowGap: "1.5rem",
+          marginBottom: "2rem",
           gridTemplateColumns: portraitMode
-            ? "1fr 1fr"
+            ? "1fr 1fr 1fr"
             : "1fr 1fr 1fr 1fr 1fr 1fr",
         }}
       >
-        {team.map((pokemon, index) => {
-          const d = res.find((r) => r.name === pokemon.name)?.data;
-
-          if (!d) {
-            return <React.Fragment key={index}></React.Fragment>;
-          }
-          const typeNames = getTypeNames({
-            ...pokemon,
-            data: d,
-          });
-
-          const heldItem = getHeldItem(pokemon);
-
-          return (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: ".5rem",
-              }}
-              key={pokemon.id}
-            >
-              {index !== 0 && pokemon.id === focusedId && (
-                <FaArrowLeft
-                  onClick={() => reorder("UP")}
-                  size={battleSpriteSize}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    e.stopPropagation();
-                    if (e.key === "Enter") {
-                      reorder("UP");
-                    }
-                  }}
-                />
-              )}
-              <IconSolarSystem
-                onClick={() => setFocusedId(pokemon.id)}
-                sun={{
-                  url: getPokemonSprite(pokemon.name, {
-                    shiny: pokemon.shiny,
-                  }),
-                  styles: isOwnedPokemonKO(pokemon)
-                    ? { filter: "grayscale(1)" }
-                    : undefined,
-                }}
-                firstPlanet={`/typeIcons/${typeNames.at(0)}.png`}
-                secondPlanetUrl={
-                  typeNames.length > 1
-                    ? `/typeIcons/${typeNames.at(1)}.png`
-                    : undefined
-                }
-                thirdPlanetUrl={getItemUrl(pokemon.ball)}
-                fourthPlanetUrl={heldItem ? getItemUrl(heldItem) : undefined}
-              />
-              {pokemon.id === focusedId && index !== team.length - 1 && (
-                <FaArrowRight
-                  onClick={() => reorder("DOWN")}
-                  size={battleSpriteSize}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    e.stopPropagation();
-                    if (e.key === "Enter") {
-                      reorder("DOWN");
-                    }
-                  }}
-                />
-              )}
-            </div>
-          );
-        })}
+        {team.map((pokemon, index) => (
+          <TeamMemberIcon
+            res={res}
+            pokemon={pokemon}
+            currentSlot={index}
+            setFocusedId={setFocusedId}
+            key={pokemon.id}
+            reorder={reorder}
+            team={team}
+          />
+        ))}
       </div>
-    </div>
+    </>
+  );
+};
+
+const TeamMemberIcon = ({
+  pokemon,
+  res,
+  setFocusedId,
+  reorder,
+  currentSlot,
+  team,
+}: {
+  pokemon: OwnedPokemon;
+  res: BattlePokemon[];
+  reorder: (from: number, to: number) => void;
+  setFocusedId: (x: string) => void;
+  currentSlot: number;
+  team: OwnedPokemon[];
+}) => {
+  const d = res.find((r) => r.name === pokemon.name)?.data;
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+
+  const teamSize = res.length;
+
+  if (!d) {
+    return <React.Fragment key={pokemon.id}></React.Fragment>;
+  }
+
+  return (
+    <>
+      <BottomDrawer open={drawerOpen} close={() => setDrawerOpen(false)}>
+        <div style={{ padding: "1rem", height: "150px" }}>
+          <h3>Switch {pokemon.name} with:</h3>
+          <div
+            style={{
+              display: "grid",
+              gap: ".5rem",
+              gridTemplateColumns: portraitMode
+                ? "1fr 1fr 1fr"
+                : "1fr 1fr 1fr 1fr 1fr 1fr",
+            }}
+          >
+            {team.map((mon, newSlot) => {
+              if (mon.id === pokemon.id) {
+                return <React.Fragment key={pokemon.id}></React.Fragment>;
+              }
+              return (
+                <PokemonSprite
+                  key={mon.id}
+                  onClick={() => {
+                    setDrawerOpen(false);
+                    reorder(currentSlot, newSlot);
+                  }}
+                  name={mon.name}
+                  config={{
+                    shiny: mon.shiny,
+                    grayscale: isOwnedPokemonKO(mon),
+                  }}
+                />
+              );
+            })}
+          </div>
+        </div>
+      </BottomDrawer>
+      <div
+        key={pokemon.id}
+        style={{
+          height: "64px",
+          width: "100px",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <strong
+          style={{ fontSize: "x-large" }}
+          onClick={() => {
+            if (teamSize === 1) {
+              return;
+            }
+            setDrawerOpen(true);
+          }}
+        >
+          {currentSlot + 1}.
+        </strong>
+        <TeamMemberInOverview
+          pokemon={pokemon}
+          onClick={() => setFocusedId(pokemon.id)}
+        />
+      </div>
+    </>
   );
 };

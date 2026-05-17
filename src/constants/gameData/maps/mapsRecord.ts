@@ -65,40 +65,6 @@ export const mapsRecord: Record<MapId, OverworldMap> = {
   apricornClearing: apricornClearing,
 };
 
-export const mapDisplayNames: Record<MapId, string> = {
-  //KUMA VERSION
-  routeN1: "akai meadow",
-  routeN1E1: "orenji forest",
-  routeE1: "kiiro highlands",
-  routeS1E1: "midori plains",
-  routeS1: "aoi lake",
-  routeS1W1: "kuro hills",
-  routeW1: "shiro cliffs",
-  caveW1: "shiro cave G",
-  caveW1F1: "shiro cave F1",
-  caveW1F2: "shiro cave F2",
-  caveN1W1: "koniro cave",
-  routeN1W1: "koniro peaks",
-  camp: "kuma camp",
-  campCave: "kuma cave",
-  campLaboratory: "kuma laboratory",
-  onixCave: "onix cave",
-  challengeField: "challenge field",
-  randomField: "challenge field",
-  rocketCamp: "Rocket Warehouse",
-  victoryRoad: "Victory Road",
-  victoryRoadU1: "Victory Road Lower Level",
-  victoryRoadExtra: "Victory Road",
-  victoryRoadExit: "Pokemon League Entrance",
-  pokemonLeague: "Pokemon League",
-  apricornClearing: "Apricorn Clearing",
-  "ilex-forest": "Ilex Forest",
-  "murasaki-glades": "Murasaki Glades",
-  //LABYRINTH VERSION
-  labyrinth_level_1: "Deep Forest",
-  labyrinth_level_2: "Deep Forest",
-};
-
 export const Emptymap: OverworldMap = {
   area: "OPEN",
   id: "camp",

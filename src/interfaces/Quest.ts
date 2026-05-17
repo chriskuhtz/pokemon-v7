@@ -6,7 +6,7 @@ import { BadgeName } from "./Badge";
 import { Inventory } from "./Inventory";
 import { MapId } from "./mapIds";
 import { OwnedPokemon } from "./OwnedPokemon";
-import { CatchBoosts, CharacterTrait, SaveFile } from "./SaveFile";
+import { CatchBoosts, SaveFile } from "./SaveFile";
 
 export type QuestStatus = "INACTIVE" | "ACTIVE" | "COLLECTED" | "FULFILLED";
 
@@ -22,14 +22,6 @@ export const questCategories = [
   "TRAVELLING TRAINER",
 ] as const;
 export type QuestCategory = (typeof questCategories)[number];
-
-export const researchBoni: Record<CharacterTrait, QuestCategory[]> = {
-  chef: ["RESEARCH"],
-  gardener: ["RESEARCH"],
-  competitor: ["TRAVELLING TRAINER", "BATTLE"],
-  collector: ["POKEDEX"],
-  explorer: ["EXPLORATION"],
-};
 
 export interface Quest {
   //meta

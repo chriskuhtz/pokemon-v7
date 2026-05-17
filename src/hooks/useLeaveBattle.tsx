@@ -12,6 +12,7 @@ import { silverId } from "../constants/gameData/maps/occupants/silver";
 import { addPokemonToDex } from "../functions/addPokemonToDex";
 import { ArrayHelpers } from "../functions/ArrayHelpers";
 import { calculateLevelData } from "../functions/calculateLevelData";
+import { determineLoot } from "../functions/determineLoot";
 import { fullyHealPokemon } from "../functions/fullyHealPokemon";
 import { getHeldItem } from "../functions/getHeldItem";
 import { getHighestXpOnTeam } from "../functions/getHighestXpOnTeam";
@@ -46,21 +47,25 @@ export interface LeaveBattlePayload {
   outcome: "WIN" | "LOSS" | "DRAW";
   defeatedPokemon: BattlePokemon[];
   defeatedChallengerId?: string;
-  rewardItems?: Partial<Inventory>;
+  lootPossible: boolean;
 }
 export const useLeaveBattle = () => {
   const handleLoss = useHandleLoss();
   const handleWin = useHandleWin();
+  const handleDraw = useHandleDraw();
 
   return useCallback(
     (payload: LeaveBattlePayload) => {
       if (payload.outcome === "LOSS") {
         handleLoss();
+      }
+      if (payload.outcome === "DRAW") {
+        handleDraw();
       } else {
         handleWin(payload);
       }
     },
-    [handleLoss, handleWin],
+    [handleDraw, handleLoss, handleWin],
   );
 };
 
@@ -121,6 +126,16 @@ const useHandleLoss = () => {
   }, [location, patchSaveFileReducer, reset, saveFile, resetLocation]);
 };
 
+const useHandleDraw = () => {
+  const { patchSaveFileReducer } = useContext(SaveFileContext);
+
+  return useCallback(() => {
+    patchSaveFileReducer({
+      meta: { activeTab: "OVERWORLD", currentChallenger: undefined },
+    });
+  }, [patchSaveFileReducer]);
+};
+
 const useHandleWin = () => {
   const { location } = useContext(LocationContext);
   const gameData = useContext(GameDataContext);
@@ -132,15 +147,15 @@ const useHandleWin = () => {
   );
 
   return useCallback(
-    ({
-      team: updatedTeam,
-      updatedInventory,
-      caughtPokemon,
-      scatteredCoins,
-      outcome,
-      defeatedChallengerId,
-      rewardItems,
-    }: LeaveBattlePayload) => {
+    (payload: LeaveBattlePayload) => {
+      const {
+        team: updatedTeam,
+        updatedInventory,
+        caughtPokemon,
+        scatteredCoins,
+        outcome,
+        defeatedChallengerId,
+      } = payload;
       const configCheckedTeam = updatedTeam.filter((p) => {
         //pokemon that faint on training field are not released
         if (
@@ -368,14 +383,21 @@ const useHandleWin = () => {
         return -1;
       };
 
+      const loot = determineLoot({
+        ...payload,
+        isRogue: saveFile.trait === "rogue",
+      });
+
       patchSaveFileReducer({
         ...(defeatedChallengerId
           ? startBlocker(saveFile, defeatedChallengerId, resetTime())
           : saveFile),
-        bag: joinInventories(updatedInventory, rewardItems ?? {}),
+        bag: updatedInventory,
         money: saveFile.money + scatteredCoins,
         pokemon: updatedPokemon,
-        meta: { activeTab: "OVERWORLD", currentChallenger: undefined },
+        meta: loot
+          ? { activeTab: "LOOT", loot, currentChallenger: undefined }
+          : { activeTab: "OVERWORLD", currentChallenger: undefined },
         researchPoints: saveFile.researchPoints + gainedResearchPoints(),
         mileStones: updatedMileStones,
         pokedex,

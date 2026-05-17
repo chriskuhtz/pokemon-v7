@@ -111,6 +111,7 @@ export const useHandleAction = (
         const canRun = determineRunawaySuccess(
           pokemon.filter((p) => p.ownerId === playerId),
           pokemon.filter((p) => p.ownerId !== playerId),
+          trait === "rogue",
         );
         if (canRun) {
           addMessage({
@@ -176,12 +177,13 @@ export const useHandleAction = (
           pokemon.map((p) => {
             if (target.id === attacker.id && p.id === attacker.id) {
               return {
-                ...applyItemToPokemon(
-                  p,
-                  move.item,
-                  undefined,
-                  move.moveToRestore,
-                ),
+                ...applyItemToPokemon({
+                  pokemon: p,
+                  item: move.item,
+                  addMessage: undefined,
+                  move: move.moveToRestore,
+                  trait,
+                }),
                 moveQueue: [],
               };
             }
@@ -189,12 +191,13 @@ export const useHandleAction = (
               return { ...attacker, moveQueue: [] };
             }
             if (p.id === target.id) {
-              return applyItemToPokemon(
-                p,
-                move.item,
-                undefined,
-                move.moveToRestore,
-              );
+              return applyItemToPokemon({
+                pokemon: p,
+                item: move.item,
+                addMessage: undefined,
+                move: move.moveToRestore,
+                trait,
+              });
             }
 
             return p;
@@ -288,6 +291,7 @@ export const useHandleAction = (
           playerId,
           settings,
           canEscape,
+          trait,
         });
 
         return;

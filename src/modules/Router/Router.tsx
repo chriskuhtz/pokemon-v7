@@ -25,6 +25,7 @@ import { InternalDex } from "../InternalDex/InternalDex";
 import { Intro } from "../Intro/Intro";
 import { InventoryChest } from "../InventoryChest/InventoryChest";
 import { LabyrintSuccess } from "../LabyrinthSuccess/LabyrinthSuccess";
+import { Loot } from "../Loot/Loot";
 import { MainMenu } from "../MainMenu/MainMenu";
 import { Market } from "../Market/Market";
 import { MiltankFarm } from "../MiltankFarm/MiltankFarm";
@@ -180,7 +181,7 @@ export const Router = (): JSX.Element => {
   if (activeTab === "TEAM") {
     return (
       <Team
-        initialFocus={team[0].id}
+        initialFocus={saveFile.meta.focusedMonId ?? team[0].id}
         team={team}
         goBack={() => setActiveTabReducer("MAIN")}
         inventory={inventory}
@@ -276,6 +277,9 @@ export const Router = (): JSX.Element => {
   }
   if (activeTab === "TRAINER_NOTES") {
     return <TrainerNotes />;
+  }
+  if (activeTab === "LOOT") {
+    return <Loot />;
   }
 
   return <Overworld />;

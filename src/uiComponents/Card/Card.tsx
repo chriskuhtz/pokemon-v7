@@ -9,6 +9,7 @@ export const Card = ({
   onClick,
   disabled,
   highlighted,
+  backgroundColor,
 }: {
   icon: ReactNode;
   content: ReactNode;
@@ -16,6 +17,7 @@ export const Card = ({
   onClick?: () => void;
   disabled?: boolean;
   highlighted?: boolean;
+  backgroundColor?: string;
 }) => {
   return (
     <div
@@ -23,15 +25,12 @@ export const Card = ({
       role={onClick && !disabled ? "button" : "none"}
       onClick={disabled ? undefined : onClick}
       className={`card ${highlighted ? "highlightedCard" : ""}`}
-      style={
-        disabled
-          ? {
-              backgroundColor: "gray",
-              color: "white",
-              filter: "grayscale(1)",
-            }
-          : undefined
-      }
+      style={{
+        backgroundColor: disabled ? "gray" : backgroundColor,
+        border: backgroundColor ? "none" : "1px solid gray",
+        color: disabled ? "white" : undefined,
+        filter: disabled ? "grayscale(1)" : undefined,
+      }}
       onKeyDown={(e) => {
         e.stopPropagation();
         if (!disabled && e.key === "Enter" && onClick) {

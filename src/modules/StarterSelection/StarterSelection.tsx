@@ -1,5 +1,6 @@
 import { useCallback, useContext, useMemo, useState } from "react";
 import { v4 } from "uuid";
+import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { PokemonChoices } from "../../components/PokemonChoices/PokemonChoices";
 import { SpeciesInfo } from "../../components/SpeciesInfo/SpeciesInfo";
 import { shinyChance } from "../../constants/baseConstants";
@@ -24,7 +25,6 @@ import {
   generateRandomStatObject,
 } from "../../interfaces/StatObject";
 import { LoadingScreen } from "../../uiComponents/LoadingScreen/LoadingScreen";
-import { Page } from "../../uiComponents/Page/Page";
 const defaultStarters: Record<StartingRegion, PokemonName[]> = {
   kanto: ["bulbasaur", "charmander", "squirtle"],
   johto: ["chikorita", "cyndaquil", "totodile"],
@@ -117,7 +117,7 @@ export const StarterSelection = (): JSX.Element => {
   }
 
   return (
-    <Page headline="Which of these Pokemon did you bring with you:">
+    <InGamePage headline="Which of these Pokemon did you bring with you:">
       <div
         style={{
           height: "90dvh",
@@ -141,6 +141,6 @@ export const StarterSelection = (): JSX.Element => {
           Proceed
         </button>
       </div>
-    </Page>
+    </InGamePage>
   );
 };
