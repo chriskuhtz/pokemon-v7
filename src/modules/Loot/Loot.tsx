@@ -57,10 +57,6 @@ export const Loot = () => {
   return (
     <InGamePage headline="The Opponents left these behind:">
       <Stack mode="column">
-        {saveFile.meta.loot &&
-          getTotalInventoryAmount(saveFile.meta.loot) > 0 && (
-            <h3>Left by opponents:</h3>
-          )}
         {canCollectAll &&
           saveFile.meta.loot &&
           getTotalInventoryAmount(saveFile.meta.loot) > 0 && (

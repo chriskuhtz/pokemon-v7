@@ -30,7 +30,7 @@ export const MoveEditorListEntry = ({
 }): JSX.Element => {
   const gameData = useContext(GameDataContext);
   const { saveFile } = useContext(SaveFileContext);
-  const available = moveIsTeachable(
+  const highEnoughLevel = moveIsTeachable(
     m,
     calculateLevelData(ownedPokemon.xp, ownedPokemon.growthRate).level,
   );
@@ -45,7 +45,7 @@ export const MoveEditorListEntry = ({
     if (m.learnable && moveToConfirm === m.move.name) {
       return <div>Confirm</div>;
     }
-    if (!available) {
+    if (!highEnoughLevel) {
       return (
         <div>{`available at Lvl ${m.version_group_details[0].level_learned_at}`}</div>
       );
@@ -57,7 +57,7 @@ export const MoveEditorListEntry = ({
       return <div>{` ${payment} required`}</div>;
     }
   }, [
-    available,
+    highEnoughLevel,
     m.learnable,
     m.move.name,
     m.version_group_details,
@@ -72,16 +72,22 @@ export const MoveEditorListEntry = ({
     return <></>;
   }
 
+  //moves can be disabled for the following reasons:
+  // missing payment item
+  // level too low
+  // not enough badges
+  const available = highEnoughLevel && unlockable && !missingPayment;
+
   return (
     <MoveDisplayEntry
-      disabled={!m.learnable}
+      disabled={!available}
       moveName={moveData.name as MoveName}
       typeName={moveData.type.name}
       additionalInfo={additionalInfo}
       additionalIcons={[
         <ItemSprite
           item={payment}
-          grayscale={!(m.learnable && available && unlockable)}
+          grayscale={!(m.learnable && highEnoughLevel && unlockable)}
         />,
       ]}
       onClick={

@@ -24,8 +24,9 @@ export const MoveDisplayEntry = ({
 }) => {
   return (
     <ListItem
+      disabled={disabled}
       onClick={onClick}
-      backgroundColor={disabled ? "gray" : hexToRgb(typeColors[typeName], 0.7)}
+      backgroundColor={hexToRgb(typeColors[typeName], 0.7)}
       primaryIcon={
         <img height={battleSpriteSize} src={`/typeIcons/${typeName}.png`} />
       }

@@ -1,5 +1,5 @@
 import { IoMdCloseCircle } from "react-icons/io";
-import { battleSpriteSize } from "../../constants/baseConstants";
+import { battleSpriteSize, portraitMode } from "../../constants/baseConstants";
 
 export const BottomDrawer = ({
   open,
@@ -21,7 +21,7 @@ export const BottomDrawer = ({
         left: 0,
         width: "100dvw",
         maxHeight: "40%",
-        height: "40%",
+        height: portraitMode ? "40%" : undefined,
         borderTopLeftRadius: "16px",
         borderTopRightRadius: "16px",
         backgroundColor: "rgba(255, 255, 255, 0.9)",

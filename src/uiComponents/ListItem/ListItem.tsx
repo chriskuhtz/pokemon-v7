@@ -9,6 +9,7 @@ export const ListItem = ({
   additionalIcons,
   infoButton,
   hint,
+  disabled,
 }: {
   onClick?: () => void;
   backgroundColor?: string;
@@ -18,13 +19,15 @@ export const ListItem = ({
   additionalContent?: React.JSX.Element;
   additionalIcons?: React.JSX.Element[];
   infoButton: React.JSX.Element;
+  disabled?: boolean;
 }) => {
   return (
     <div
-      onClick={onClick}
+      onClick={disabled ? undefined : onClick}
       style={{
         padding: ".25rem 0",
-        backgroundColor,
+        backgroundColor: disabled ? "gray" : backgroundColor,
+        color: disabled ? "white" : "black",
         borderRadius: 4,
         borderTopLeftRadius: 16,
         width: "100%",
