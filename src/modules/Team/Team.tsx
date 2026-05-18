@@ -122,6 +122,7 @@ const TeamIcons = ({
   res,
   setFocusedId,
   reorder,
+  focusedId,
 }: {
   team: OwnedPokemon[];
   res: BattlePokemon[];
@@ -150,6 +151,7 @@ const TeamIcons = ({
             key={pokemon.id}
             reorder={reorder}
             team={team}
+            isFocused={focusedId === pokemon.id}
           />
         ))}
       </div>
@@ -164,6 +166,7 @@ const TeamMemberIcon = ({
   reorder,
   currentSlot,
   team,
+  isFocused,
 }: {
   pokemon: OwnedPokemon;
   res: BattlePokemon[];
@@ -171,6 +174,7 @@ const TeamMemberIcon = ({
   setFocusedId: (x: string) => void;
   currentSlot: number;
   team: OwnedPokemon[];
+  isFocused: boolean;
 }) => {
   const d = res.find((r) => r.name === pokemon.name)?.data;
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -221,9 +225,12 @@ const TeamMemberIcon = ({
         key={pokemon.id}
         style={{
           height: "64px",
-          width: "100px",
           display: "flex",
           alignItems: "center",
+          border: isFocused ? "2px solid gray" : undefined,
+          borderRadius: 9000,
+          aspectRatio: "1/1",
+          padding: ".5rem",
         }}
       >
         <strong

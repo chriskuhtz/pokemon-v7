@@ -21,31 +21,32 @@ export const ThrowAwayAction = ({
         close={() => setConfirmationNeeded(false)}
         open={confirmationNeeded}
       >
-        <Stack mode="column" alignItems="center">
-          <ItemSprite sizeFactor={2} item={item} />
-          <h3>Are you sure you want throw to away {item}?</h3>
-          <Stack mode="row">
-            <button
-              onClick={() => {
-                discardItem(1);
-                setConfirmationNeeded(false);
-              }}
-            >
-              Throw away 1
-            </button>
-            <button
-              onClick={() => {
-                discardItem(amount);
-                setConfirmationNeeded(false);
-              }}
-            >
-              Throw away all
-            </button>
-            <button onClick={() => setConfirmationNeeded(false)}>
-              No, keep it
-            </button>
+        <div style={{ padding: "2rem" }}>
+          <Stack mode="column" alignItems="center">
+            <ItemSprite sizeFactor={2} item={item} />
+            <h3>Are you sure you want throw to away {item}?</h3>
+            <Stack mode="row" flexWrap="nowrap">
+              <button
+                style={{ border: "1px solid gray" }}
+                onClick={() => {
+                  discardItem(1);
+                  setConfirmationNeeded(false);
+                }}
+              >
+                Throw away 1
+              </button>
+              <button
+                style={{ border: "1px solid gray" }}
+                onClick={() => {
+                  discardItem(amount);
+                  setConfirmationNeeded(false);
+                }}
+              >
+                Throw away all
+              </button>
+            </Stack>
           </Stack>
-        </Stack>
+        </div>
       </BottomDrawer>
       <FaTrash onClick={() => setConfirmationNeeded(true)} />
     </div>

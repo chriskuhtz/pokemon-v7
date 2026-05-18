@@ -34,6 +34,8 @@ export const customItemDescriptions: Record<string, string> = {
   "relic-statue": "Museums might find this interesting",
   "big-mushroom": "Museums might find this interesting",
   "star-piece": "Museums might find this interesting",
+  "black-augurite": "used to evolve scyther",
+  "punching-glove": "increases damage from punching moves by 10%",
   ...Object.fromEntries(
     apricorns.map((apri) => [apri, `used to make a ${apricornTable[apri]}`]),
   ),

@@ -120,6 +120,13 @@ export const DetailsCard = ({
           )}
           <h4>Gender: {ownedPokemon.gender}</h4>
           <h4>Caught at: {replaceRouteName(ownedPokemon.caughtOnMap)}</h4>
+          {ownedPokemon.heldItemName && (
+            <h4
+              style={{ display: "flex", gap: ".25rem", alignItems: "center" }}
+            >
+              Held Item: <ItemSprite item={ownedPokemon.heldItemName} />
+            </h4>
+          )}
           <h4 style={{ display: "flex", gap: ".25rem", alignItems: "center" }}>
             Pokeball: <ItemSprite item={ownedPokemon.ball} />
           </h4>

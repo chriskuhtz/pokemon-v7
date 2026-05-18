@@ -126,6 +126,7 @@ export function ControlBar({
   }
   return (
     <TargetSelection
+      controlled={controlled}
       disabled={disabled}
       name={controlled.data.name}
       id={controlled.id}

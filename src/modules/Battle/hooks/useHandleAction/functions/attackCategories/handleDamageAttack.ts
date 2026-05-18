@@ -563,7 +563,7 @@ export const handleDamageAttack = ({
     actualDamage > 0
   ) {
     addMessage({
-      message: `${updatedTarget.name} consumed its ${attackerItem} to increase the damage`,
+      message: `${updatedAttacker.name} consumed its ${attackerItem} to increase the damage`,
     });
     updatedAttacker = { ...updatedAttacker, heldItemName: undefined };
   }
