@@ -1,5 +1,6 @@
 import { useCallback, useContext, useMemo } from "react";
 import { InGamePage } from "../../components/InGamePage/InGamePage";
+import { ItemInfoButton } from "../../components/ItemInfoButton/ItemInfoButton";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
 import { useNavigate } from "../../hooks/useNavigate";
@@ -16,7 +17,7 @@ import {
 import { Occupant } from "../../interfaces/Occupant";
 import { SpriteEnum } from "../../interfaces/SpriteEnum";
 import { AnimatedBar } from "../../uiComponents/AnimatedBar/AnimatedBar";
-import { Card } from "../../uiComponents/Card/Card";
+import { ListItem } from "../../uiComponents/ListItem/ListItem";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
 export const SeedVault = () => {
@@ -97,13 +98,14 @@ export const SeedVault = () => {
           <h3>Donate:</h3>
           <Stack mode="column">
             {possibleDonations.map((s) => (
-              <Card
-                icon={<ItemSprite item={s} />}
+              <ListItem
+                key={s}
+                onClick={() => donate(s)}
+                primaryIcon={<ItemSprite item={s} />}
                 content={
                   <strong>{`donate ${s} and receive 1 research point`}</strong>
                 }
-                onClick={() => donate(s)}
-                actionElements={[]}
+                infoButton={<ItemInfoButton itemName={s} />}
               />
             ))}
           </Stack>
@@ -114,11 +116,12 @@ export const SeedVault = () => {
           <h3>Collect:</h3>
           <Stack mode="column">
             {collectibles.map((s) => (
-              <Card
-                icon={<ItemSprite item={s} />}
-                content={<strong>{`collect ${s} for 1 research point`}</strong>}
+              <ListItem
+                key={s}
                 onClick={() => collect(s)}
-                actionElements={[]}
+                primaryIcon={<ItemSprite item={s} />}
+                content={<strong>{`collect ${s} for 1 research point`}</strong>}
+                infoButton={<ItemInfoButton itemName={s} />}
               />
             ))}
           </Stack>

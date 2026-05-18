@@ -77,7 +77,7 @@ export const BattleFieldUI = ({
       />
       <PlayerLane onFieldTeam={onFieldTeam} />
 
-      <BottomDrawer open={!!nextPokemonWithoutMove}>
+      <BottomDrawer open={!!nextPokemonWithoutMove && !latestMessage}>
         <ControlBar
           disabled={!!latestMessage}
           controlled={nextPokemonWithoutMove}

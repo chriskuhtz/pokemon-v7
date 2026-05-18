@@ -6,6 +6,7 @@ import {
   battleSpriteSize,
   portraitMode,
 } from "../../../constants/baseConstants";
+import { determineTypeFactor } from "../../../functions/determineTypeFactor";
 import { getMovesArray } from "../../../functions/getMovesArray";
 import { isPlayerPokemon } from "../../../functions/getPlayerPokemon";
 import { SaveFileContext } from "../../../hooks/useSaveFile";
@@ -24,6 +25,7 @@ export function TargetSelection({
   setChosenAction,
   moveData,
   disabled,
+  controlled,
 }: {
   name: string;
   id: string;
@@ -33,6 +35,7 @@ export function TargetSelection({
   setChosenAction: (x: ActionType | undefined) => void;
   moveData?: MoveDto;
   disabled: boolean;
+  controlled: BattlePokemon;
 }) {
   const {
     saveFile: { playerId },
@@ -116,11 +119,21 @@ export function TargetSelection({
         }
       >
         {!["ether", "max-ether"].includes(chosenAction) && (
-          <>
-            <Stack mode="column">
-              {targets
-                .filter((t) => !isPlayerPokemon(t, playerId))
-                .map((t) => (
+          <Stack mode="column">
+            {targets
+              .filter((t) => !isPlayerPokemon(t, playerId))
+              .map((t) => {
+                const typeFactor = moveData
+                  ? determineTypeFactor(
+                      t,
+                      controlled,
+                      { data: moveData },
+                      undefined,
+                      undefined,
+                    )
+                  : 1;
+                const typeHint = typeFactor !== 1 ? `(x${typeFactor} Dmg)` : "";
+                return (
                   <Card
                     icon={
                       <PokemonSprite
@@ -132,7 +145,7 @@ export function TargetSelection({
                         }}
                       />
                     }
-                    content={`Opponent ${t.data.name}`}
+                    content={`Opponent ${t.data.name} ${typeHint}`}
                     key={t.id}
                     onClick={() => {
                       chooseAction({
@@ -145,40 +158,37 @@ export function TargetSelection({
                     actionElements={[]}
                     disabled={disabled}
                   />
-                ))}
-              {}
-            </Stack>
-            <div>
-              {targets
-                .filter((t) => isPlayerPokemon(t, playerId))
-                .map((t) => (
-                  <Card
-                    icon={
-                      <PokemonSprite
-                        sizeFactor={0.8}
-                        name={t.name}
-                        config={{
-                          shiny: t.shiny,
-                          back: true,
-                        }}
-                      />
-                    }
-                    content={`Your ${t.data.name}`}
-                    key={t.id}
-                    onClick={() => {
-                      chooseAction({
-                        userId: id,
-                        actionName: chosenAction,
-                        targetId: t.id,
-                      });
-                      setChosenAction(undefined);
-                    }}
-                    actionElements={[]}
-                    disabled={disabled}
-                  />
-                ))}
-            </div>
-          </>
+                );
+              })}
+            {targets
+              .filter((t) => isPlayerPokemon(t, playerId))
+              .map((t) => (
+                <Card
+                  icon={
+                    <PokemonSprite
+                      sizeFactor={0.8}
+                      name={t.name}
+                      config={{
+                        shiny: t.shiny,
+                        back: true,
+                      }}
+                    />
+                  }
+                  content={`Your ${t.data.name}`}
+                  key={t.id}
+                  onClick={() => {
+                    chooseAction({
+                      userId: id,
+                      actionName: chosenAction,
+                      targetId: t.id,
+                    });
+                    setChosenAction(undefined);
+                  }}
+                  actionElements={[]}
+                  disabled={disabled}
+                />
+              ))}
+          </Stack>
         )}
 
         {["ether", "max-ether"].includes(chosenAction) &&

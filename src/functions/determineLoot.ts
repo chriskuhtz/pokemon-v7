@@ -32,7 +32,7 @@ export const determineLoot = ({
   }
   let loot = { ...EmptyInventory };
 
-  const lootChance = isRogue ? 0.8 : 0.9;
+  const lootChance = isRogue ? 0.85 : 0.9;
   const xp = getHighestXpOnTeam(defeatedPokemon);
 
   const { level } = calculateLevelData(xp, "medium");
@@ -84,7 +84,7 @@ export const determineLoot = ({
         });
       }
     });
-    Array.from({ length: 3 }).forEach(() => {
+    Array.from({ length: 4 }).forEach(() => {
       if (Math.random() > lootChance) {
         loot = joinInventories(loot, {
           [ArrayHelpers.getRandomEntry<ItemType>(midTierLoot)]: 1,
@@ -108,7 +108,7 @@ export const determineLoot = ({
         });
       }
     });
-    Array.from({ length: 2 }).forEach(() => {
+    Array.from({ length: 4 }).forEach(() => {
       if (Math.random() > lootChance) {
         loot = joinInventories(loot, {
           [ArrayHelpers.getRandomEntry<ItemType>(highTierLoot)]: 1,
@@ -118,14 +118,14 @@ export const determineLoot = ({
   }
   //over level 50: up to 5 mid tier + 5 high tier items
   else if (level >= 50) {
-    Array.from({ length: 4 }).forEach(() => {
+    Array.from({ length: 2 }).forEach(() => {
       if (Math.random() > lootChance) {
         loot = joinInventories(loot, {
           [ArrayHelpers.getRandomEntry<ItemType>(midTierLoot)]: 1,
         });
       }
     });
-    Array.from({ length: 2 }).forEach(() => {
+    Array.from({ length: 7 }).forEach(() => {
       if (Math.random() > lootChance) {
         loot = joinInventories(loot, {
           [ArrayHelpers.getRandomEntry<ItemType>(highTierLoot)]: 1,

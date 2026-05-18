@@ -39,6 +39,7 @@ export const MovesDisplay = ({
         const currentPP = getCurrentPP(b, battleMove);
         return (
           <MoveDisplayEntry
+            onClick={() => deActivateMove(o)}
             key={o.name}
             typeName={battleMove.data.type.name}
             moveName={o.name}
