@@ -3,6 +3,7 @@ import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 import { isBagOverloaded } from "../../functions/getBagLimit";
+import { ownsItem } from "../../functions/ownsItem";
 import { replaceRouteName } from "../../functions/replaceRouteName";
 import { LocationContext } from "../../hooks/LocationProvider";
 import { GameDataContext } from "../../hooks/useGameData";
@@ -89,6 +90,16 @@ const taxiLocations: Partial<
       forwardFoot: "CENTER1",
     },
   },
+  "rakudairo-ruins": {
+    ticket: "rakudairo-ticket",
+    to: {
+      mapId: "rakudairo-ruins",
+      x: 3,
+      y: 24,
+      orientation: "DOWN",
+      forwardFoot: "CENTER1",
+    },
+  },
 };
 
 export const DragoniteTaxi = (): JSX.Element => {
@@ -171,7 +182,20 @@ export const dragoniteTaxi: Occupant[] = [
     orientation: "DOWN",
     sprite: SpriteEnum.hiker,
     id: "dragonite taxi man",
-    conditionFunction: (s) => s.campUpgrades["dragonite taxi"],
+    conditionFunction: (s) => s.quests["catch a pokemon"] !== "INACTIVE",
+  },
+  {
+    type: "NPC",
+    unhandledMessage: [
+      "Welcome to kuma basecamp",
+      "did you enjoy the dragonite flight?",
+    ],
+    x: 4,
+    y: 23,
+    orientation: "DOWN",
+    sprite: SpriteEnum.hiker,
+    id: "dragonite taxi man intro",
+    conditionFunction: (s) => s.quests["catch a pokemon"] === "INACTIVE",
   },
   {
     type: "POKEMON",
@@ -181,7 +205,7 @@ export const dragoniteTaxi: Occupant[] = [
     orientation: "DOWN",
     id: "dragonite",
     dialogue: ["Dragonite seems ready to spread its wings"],
-    conditionFunction: (s) => s.campUpgrades["dragonite taxi"],
+    conditionFunction: () => true,
   },
 ];
 
@@ -198,7 +222,7 @@ export const ilexDragoniteTaxi: Occupant[] = [
     orientation: "DOWN",
     sprite: SpriteEnum.hiker,
     id: "dragonite taxi man",
-    conditionFunction: (s) => s.campUpgrades["dragonite taxi"],
+    conditionFunction: () => true,
   },
   {
     type: "POKEMON",
@@ -208,7 +232,7 @@ export const ilexDragoniteTaxi: Occupant[] = [
     orientation: "DOWN",
     id: "dragonite",
     dialogue: ["Dragonite seems ready to spread its wings"],
-    conditionFunction: (s) => s.campUpgrades["dragonite taxi"],
+    conditionFunction: () => true,
   },
 ];
 export const murasakiDragoniteTaxi: Occupant[] = [
@@ -224,7 +248,7 @@ export const murasakiDragoniteTaxi: Occupant[] = [
     orientation: "DOWN",
     sprite: SpriteEnum.hiker,
     id: "dragonite taxi man",
-    conditionFunction: (s) => s.campUpgrades["dragonite taxi"],
+    conditionFunction: () => true,
   },
   {
     type: "POKEMON",
@@ -234,7 +258,7 @@ export const murasakiDragoniteTaxi: Occupant[] = [
     orientation: "DOWN",
     id: "dragonite",
     dialogue: ["Dragonite seems ready to spread its wings"],
-    conditionFunction: (s) => s.campUpgrades["dragonite taxi"],
+    conditionFunction: () => true,
   },
 ];
 export const routeN1E1DragoniteTaxi: Occupant[] = [
@@ -250,7 +274,7 @@ export const routeN1E1DragoniteTaxi: Occupant[] = [
     orientation: "DOWN",
     sprite: SpriteEnum.hiker,
     id: "dragonite taxi man",
-    conditionFunction: (s) => s.campUpgrades["dragonite taxi"],
+    conditionFunction: (s) => ownsItem(s, "forest-ticket"),
   },
   {
     type: "POKEMON",
@@ -260,7 +284,7 @@ export const routeN1E1DragoniteTaxi: Occupant[] = [
     orientation: "DOWN",
     id: "dragonite",
     dialogue: ["Dragonite seems ready to spread its wings"],
-    conditionFunction: (s) => s.campUpgrades["dragonite taxi"],
+    conditionFunction: (s) => ownsItem(s, "forest-ticket"),
   },
 ];
 export const routeS1E1DragoniteTaxi: Occupant[] = [
@@ -276,7 +300,7 @@ export const routeS1E1DragoniteTaxi: Occupant[] = [
     orientation: "DOWN",
     sprite: SpriteEnum.hiker,
     id: "dragonite taxi man",
-    conditionFunction: (s) => s.campUpgrades["dragonite taxi"],
+    conditionFunction: (s) => ownsItem(s, "plains-ticket"),
   },
   {
     type: "POKEMON",
@@ -286,7 +310,7 @@ export const routeS1E1DragoniteTaxi: Occupant[] = [
     orientation: "DOWN",
     id: "dragonite",
     dialogue: ["Dragonite seems ready to spread its wings"],
-    conditionFunction: (s) => s.campUpgrades["dragonite taxi"],
+    conditionFunction: (s) => ownsItem(s, "plains-ticket"),
   },
 ];
 export const routeS1W1DragoniteTaxi: Occupant[] = [
@@ -302,7 +326,7 @@ export const routeS1W1DragoniteTaxi: Occupant[] = [
     orientation: "DOWN",
     sprite: SpriteEnum.hiker,
     id: "dragonite taxi man",
-    conditionFunction: (s) => s.campUpgrades["dragonite taxi"],
+    conditionFunction: (s) => ownsItem(s, "hills-ticket"),
   },
   {
     type: "POKEMON",
@@ -312,7 +336,7 @@ export const routeS1W1DragoniteTaxi: Occupant[] = [
     orientation: "DOWN",
     id: "dragonite",
     dialogue: ["Dragonite seems ready to spread its wings"],
-    conditionFunction: (s) => s.campUpgrades["dragonite taxi"],
+    conditionFunction: (s) => ownsItem(s, "hills-ticket"),
   },
 ];
 
@@ -329,7 +353,7 @@ export const routeN1W1DragoniteTaxi: Occupant[] = [
     orientation: "DOWN",
     sprite: SpriteEnum.hiker,
     id: "dragonite taxi man",
-    conditionFunction: (s) => s.campUpgrades["dragonite taxi"],
+    conditionFunction: (s) => ownsItem(s, "peak-ticket"),
   },
   {
     type: "POKEMON",
@@ -339,7 +363,7 @@ export const routeN1W1DragoniteTaxi: Occupant[] = [
     orientation: "DOWN",
     id: "dragonite",
     dialogue: ["Dragonite seems ready to spread its wings"],
-    conditionFunction: (s) => s.campUpgrades["dragonite taxi"],
+    conditionFunction: (s) => ownsItem(s, "peak-ticket"),
   },
 ];
 export const pokemonLeagueDragoniteTaxi: Occupant[] = [
@@ -355,7 +379,7 @@ export const pokemonLeagueDragoniteTaxi: Occupant[] = [
     orientation: "DOWN",
     sprite: SpriteEnum.hiker,
     id: "dragonite taxi man",
-    conditionFunction: (s) => s.campUpgrades["dragonite taxi"],
+    conditionFunction: (s) => ownsItem(s, "league-ticket"),
   },
   {
     type: "POKEMON",
@@ -365,6 +389,32 @@ export const pokemonLeagueDragoniteTaxi: Occupant[] = [
     orientation: "DOWN",
     id: "dragonite",
     dialogue: ["Dragonite seems ready to spread its wings"],
-    conditionFunction: (s) => s.campUpgrades["dragonite taxi"],
+    conditionFunction: (s) => ownsItem(s, "league-ticket"),
+  },
+];
+export const rakudairoRuinsDragoniteTaxi: Occupant[] = [
+  {
+    type: "ROUTER_NPC",
+    dialogue: [
+      "Dragonite can easily carry a person on its back",
+      "Where should we take you?",
+    ],
+    to: "DRAGONITE_TAXI",
+    x: 3,
+    y: 23,
+    orientation: "DOWN",
+    sprite: SpriteEnum.hiker,
+    id: "dragonite taxi man",
+    conditionFunction: (s) => ownsItem(s, "rakudairo-ticket"),
+  },
+  {
+    type: "POKEMON",
+    dexId: 149,
+    x: 4,
+    y: 23,
+    orientation: "DOWN",
+    id: "dragonite",
+    dialogue: ["Dragonite seems ready to spread its wings"],
+    conditionFunction: (s) => ownsItem(s, "rakudairo-ticket"),
   },
 ];

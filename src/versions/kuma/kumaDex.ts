@@ -3917,7 +3917,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   numel: {
     dexId: 322,
     types: ["fire", "ground"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        route: "rakudairo-ruins",
+        maxXp: 25 * 25 * 25,
+        minXp: 20 * 20 * 20,
+        rarity: "common",
+        area: "LAND",
+        timeOfDay: "ALL_DAY",
+      },
+    ],
     evs: {
       "special-attack": 1,
     },
@@ -3925,7 +3934,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   camerupt: {
     dexId: 323,
     types: ["fire", "ground"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        route: "rakudairo-ruins",
+        maxXp: 40 * 40 * 40,
+        minXp: 30 * 30 * 30,
+        rarity: "rare",
+        area: "LAND",
+        timeOfDay: "ALL_DAY",
+      },
+    ],
     evs: {
       attack: 1,
       "special-attack": 1,
@@ -4029,7 +4047,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   cacnea: {
     dexId: 331,
     types: ["grass"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        route: "rakudairo-ruins",
+        maxXp: 25 * 25 * 25,
+        minXp: 20 * 20 * 20,
+        rarity: "common",
+        area: "LAND",
+        timeOfDay: "ALL_DAY",
+      },
+    ],
     evs: {
       "special-attack": 1,
     },
@@ -4037,7 +4064,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   cacturne: {
     dexId: 332,
     types: ["grass", "dark"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        route: "rakudairo-ruins",
+        maxXp: 40 * 40 * 40,
+        minXp: 30 * 30 * 30,
+        rarity: "rare",
+        area: "LAND",
+        timeOfDay: "ALL_DAY",
+      },
+    ],
     evs: {
       attack: 1,
       "special-attack": 1,
@@ -4079,7 +4115,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   seviper: {
     dexId: 336,
     types: ["poison"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        route: "rakudairo-ruins",
+        maxXp: 40 * 40 * 40,
+        minXp: 30 * 30 * 30,
+        rarity: "rare",
+        area: "LAND",
+        timeOfDay: "ALL_DAY",
+      },
+    ],
     evs: {
       attack: 1,
       "special-attack": 1,
@@ -6880,7 +6925,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   elgyem: {
     dexId: 605,
     types: ["psychic"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        route: "rakudairo-ruins",
+        maxXp: 25 * 25 * 25,
+        minXp: 20 * 20 * 20,
+        rarity: "common",
+        area: "LAND",
+        timeOfDay: "ALL_DAY",
+      },
+    ],
     evs: {
       "special-attack": 1,
     },
@@ -8647,7 +8701,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   "jangmo-o": {
     dexId: 782,
     types: ["dragon"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        route: "rakudairo-ruins",
+        maxXp: 25 * 25 * 25,
+        minXp: 20 * 20 * 20,
+        rarity: "common",
+        area: "LAND",
+        timeOfDay: "ALL_DAY",
+      },
+    ],
     evs: {
       defense: 1,
     },
@@ -8655,7 +8718,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   "hakamo-o": {
     dexId: 783,
     types: ["dragon", "fighting"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        route: "rakudairo-ruins",
+        maxXp: 40 * 40 * 40,
+        minXp: 30 * 30 * 30,
+        rarity: "rare",
+        area: "LAND",
+        timeOfDay: "ALL_DAY",
+      },
+    ],
     evs: {
       defense: 2,
     },
@@ -9402,7 +9474,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   runerigus: {
     dexId: 867,
     types: ["ground", "ghost"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        route: "rakudairo-ruins",
+        maxXp: 40 * 40 * 40,
+        minXp: 30 * 30 * 30,
+        rarity: "rare",
+        area: "LAND",
+        timeOfDay: "ALL_DAY",
+      },
+    ],
     evs: {
       defense: 2,
     },
@@ -9500,7 +9581,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   cufant: {
     dexId: 878,
     types: ["steel"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        route: "rakudairo-ruins",
+        maxXp: 25 * 25 * 25,
+        minXp: 20 * 20 * 20,
+        rarity: "common",
+        area: "LAND",
+        timeOfDay: "ALL_DAY",
+      },
+    ],
     evs: {
       attack: 1,
     },
@@ -9508,7 +9598,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   copperajah: {
     dexId: 879,
     types: ["steel"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        route: "rakudairo-ruins",
+        maxXp: 40 * 40 * 40,
+        minXp: 30 * 30 * 30,
+        rarity: "rare",
+        area: "LAND",
+        timeOfDay: "ALL_DAY",
+      },
+    ],
     evs: {
       attack: 2,
     },
@@ -10120,7 +10219,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
   bramblin: {
     dexId: 946,
     types: ["grass", "ghost"],
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        route: "rakudairo-ruins",
+        maxXp: 25 * 25 * 25,
+        minXp: 20 * 20 * 20,
+        rarity: "common",
+        area: "LAND",
+        timeOfDay: "ALL_DAY",
+      },
+    ],
     evs: {
       attack: 1,
     },
@@ -10162,7 +10270,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
     dexId: 950,
     types: ["rock"],
     underRock: true,
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        route: "rakudairo-ruins",
+        maxXp: 25 * 25 * 25,
+        minXp: 20 * 20 * 20,
+        rarity: "common",
+        area: "LAND",
+        timeOfDay: "ALL_DAY",
+      },
+    ],
     evs: {
       defense: 2,
     },
@@ -11840,7 +11957,16 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
     dexId: 10109,
     types: ["rock", "electric"],
     underRock: true,
-    encounterOptions: [],
+    encounterOptions: [
+      {
+        route: "rakudairo-ruins",
+        maxXp: 25 * 25 * 25,
+        minXp: 20 * 20 * 20,
+        rarity: "common",
+        area: "LAND",
+        timeOfDay: "ALL_DAY",
+      },
+    ],
     evs: {
       defense: 1,
     },

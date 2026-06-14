@@ -68,7 +68,6 @@ export const useMovement = (
       ) as OnStepPortal | undefined,
     [currentOccupants, location.x, location.y, saveFile],
   );
-
   const steptOnDialogue: OnStepDialogue | undefined = useMemo(
     () =>
       currentOccupants.find(
@@ -91,7 +90,6 @@ export const useMovement = (
       ) as OnStepRouter | undefined,
     [currentOccupants, location.x, location.y, saveFile],
   );
-
   const shouldStartEncounterWithTerrain = useMemo(():
     | "WATER"
     | "GROUND"

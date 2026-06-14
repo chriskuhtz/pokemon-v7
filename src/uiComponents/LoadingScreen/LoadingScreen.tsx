@@ -7,7 +7,11 @@ import { SaveFileContext } from "../../hooks/useSaveFile";
 import { SpriteEnum } from "../../interfaces/SpriteEnum";
 import { Overworld } from "../../modules/Overworld/Overworld";
 
-export const LoadingScreen = () => {
+export const LoadingScreen = ({
+  withOverworld = true,
+}: {
+  withOverworld?: boolean;
+}) => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
   const [showReturnButton, setShowReturnButton] = useState<boolean>(false);
 
@@ -40,7 +44,7 @@ export const LoadingScreen = () => {
           ),
         }}
       />
-      <Overworld uncontrolled />
+      {withOverworld && <Overworld uncontrolled />}
     </BaseSizeProvider>
   );
 };

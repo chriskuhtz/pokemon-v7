@@ -38,7 +38,7 @@ export const Page = ({
       <div
         className="page"
         style={{
-          paddingBottom: portraitMode ? "1rem" : undefined,
+          paddingBottom: portraitMode ? "3rem" : undefined,
           background: `linear-gradient(
           	218deg,
           	${primaryColor}, 

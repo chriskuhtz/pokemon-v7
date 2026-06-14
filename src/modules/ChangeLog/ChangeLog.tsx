@@ -7,6 +7,15 @@ interface ChangelogEntryData {
 
 const changelogData: ChangelogEntryData[] = [
   {
+    version: "0.82",
+    listOfChanges: [
+      "New route: rakudairo ruins",
+      "new class: archaeologist",
+      "dragonite taxi is immediately unlocked",
+      "fixes and balances from playtesting",
+    ],
+  },
+  {
     version: "0.81",
     listOfChanges: ["fixes and balances from playtesting"],
   },

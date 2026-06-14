@@ -12,6 +12,7 @@ import {
 import { campUpgradeCostScale } from "../../constants/gameData/campUpgrades";
 import { allIlexGalacticsDefeated } from "../../constants/gameData/maps/occupants/ilexForest";
 import { murasakiGladesCleared } from "../../constants/gameData/maps/occupants/murasakiGlades";
+import { rakudairoRuinsCleared } from "../../constants/gameData/maps/occupants/rakudairoRuins";
 import { allRocketCampTrainersDefeated } from "../../constants/gameData/maps/occupants/rocketCampOccupants";
 import { PokemonName, pokemonNames } from "../../constants/pokemonNames";
 import {
@@ -492,6 +493,8 @@ export const kumaQuestNames = [
   "find a purple apricorn",
   "defeat team galactic in ilex forest",
   "investigate murasaki glades",
+  "defeat the treasure hunters in radukairo ruins",
+  "catch all pokemon from rakudairo-ruins",
 ] as const;
 
 export type KumaQuestName = (typeof kumaQuestNames)[number];
@@ -2200,6 +2203,24 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
         s.pokedex[o.name].caughtOnRoutes.includes("murasaki-glades"),
       ),
   },
+  "catch all pokemon from rakudairo-ruins": {
+    category: "EXPLORATION",
+    kind: "BULLETIN",
+    requiredUpgrade: "shovel certification",
+    targetRoute: "rakudairo-ruins",
+    researchPoints: 50,
+    rewardItems: {
+      "nest-ball": 10,
+      "rakudairo-ticket": 1,
+    },
+    targetPokemon: getAllEncountersFor("rakudairo-ruins", {}, kumaDex).map(
+      (p) => p.name,
+    ),
+    conditionFunction: (s: SaveFile) =>
+      getAllEncountersFor("rakudairo-ruins", {}, kumaDex).every((o) =>
+        s.pokedex[o.name].caughtOnRoutes.includes("rakudairo-ruins"),
+      ),
+  },
   "catch all pokemon from caveW1": {
     category: "EXPLORATION",
     kind: "BULLETIN",
@@ -2799,6 +2820,20 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "QUEST_LINE",
     availableAfter: "defeat team galactic in ilex forest",
     conditionFunction: murasakiGladesCleared,
+  },
+  "defeat the treasure hunters in radukairo ruins": {
+    category: "BATTLE",
+    researchPoints: 50,
+    rewardItems: {
+      "moomoo-milk": 5,
+      "lava-cookie": 5,
+      casteliacone: 5,
+      "rage-candy-bar": 5,
+    },
+    rangerLevels: 3,
+    kind: "BULLETIN",
+    requiredUpgrade: "shovel certification",
+    conditionFunction: rakudairoRuinsCleared,
   },
   "catch a weak pokemon": {
     category: "POKEDEX",

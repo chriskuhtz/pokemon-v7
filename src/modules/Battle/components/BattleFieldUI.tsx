@@ -4,6 +4,7 @@ import {
   TerrainIcon,
   WeatherIcon,
 } from "../../../components/WeatherIcon/WeatherIcon";
+import { portraitMode } from "../../../constants/baseConstants";
 import { MessageQueueContext } from "../../../hooks/useMessageQueue";
 import { BattlePokemon } from "../../../interfaces/BattlePokemon";
 import { Inventory } from "../../../interfaces/Inventory";
@@ -53,7 +54,7 @@ export const BattleFieldUI = ({
     <div
       style={{
         display: "grid",
-        gridTemplateRows: `1fr 4fr 4fr 1fr`,
+        gridTemplateRows: `1fr 4fr 4fr ${portraitMode ? "7fr" : "1fr"}`,
         height: "100dvh",
         gap: ".5rem",
       }}
@@ -78,19 +79,21 @@ export const BattleFieldUI = ({
       <PlayerLane onFieldTeam={onFieldTeam} />
 
       <BottomDrawer open={!!nextPokemonWithoutMove && !latestMessage}>
-        <ControlBar
-          disabled={!!latestMessage}
-          controlled={nextPokemonWithoutMove}
-          targets={targets}
-          chooseAction={chooseAction}
-          playerInventory={battleInventory}
-          catchingForbiddenReason={catchingForbiddenReason}
-          runningAllowed={runningAllowed}
-          battleFieldEffects={battleFieldEffects}
-          weather={battleWeather}
-          terrain={battleTerrain}
-          trait={trait}
-        />
+        <div>
+          <ControlBar
+            disabled={!!latestMessage}
+            controlled={nextPokemonWithoutMove}
+            targets={targets}
+            chooseAction={chooseAction}
+            playerInventory={battleInventory}
+            catchingForbiddenReason={catchingForbiddenReason}
+            runningAllowed={runningAllowed}
+            battleFieldEffects={battleFieldEffects}
+            weather={battleWeather}
+            terrain={battleTerrain}
+            trait={trait}
+          />
+        </div>
       </BottomDrawer>
     </div>
   );

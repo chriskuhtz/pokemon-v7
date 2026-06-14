@@ -12,6 +12,9 @@ export const traits = [
   "explorer",
   "rogue",
   "gym bro",
+  "archaeologist",
+  //"entomologist" "New route: hiwairo swamp",,
+  //"nurse"
 ] as const;
 export type CharacterTrait = (typeof traits)[number];
 
@@ -26,6 +29,7 @@ export const traitResearchBoni: Record<
   explorer: { EXPLORATION: 1.05 },
   rogue: { EXPLORATION: 1.05 },
   "gym bro": { TRAINING: 1.1 },
+  archaeologist: { EXPLORATION: 1.1 },
 };
 export const traitTypes: Record<CharacterTrait, PokemonType> = {
   chef: "water",
@@ -35,6 +39,7 @@ export const traitTypes: Record<CharacterTrait, PokemonType> = {
   competitor: "fire",
   rogue: "dark",
   "gym bro": "fighting",
+  archaeologist: "ground",
 };
 
 export const traitColors: Record<CharacterTrait, string> = {
@@ -45,6 +50,7 @@ export const traitColors: Record<CharacterTrait, string> = {
   explorer: hexToRgb(typeColors[traitTypes.explorer], 0.5),
   rogue: hexToRgb(typeColors[traitTypes.rogue], 0.5),
   "gym bro": hexToRgb(typeColors[traitTypes["gym bro"]], 0.5),
+  archaeologist: hexToRgb(typeColors[traitTypes.archaeologist], 0.5),
 };
 
 export const traitBonusExplanations: Record<CharacterTrait, string[]> = {
@@ -52,22 +58,18 @@ export const traitBonusExplanations: Record<CharacterTrait, string[]> = {
     "Chefs rarely fail at cooking and can sometimes stretch cooked snacks into multiple portions",
     `A Chef's calm energy makes his ${traitTypes["chef"]} type pokemon slightly stronger`,
   ],
-
   gardener: [
     "Gardeners can harvest more plants than others and they seem to grow back faster",
     `A Gardener's encouraging energy makes his ${traitTypes["gardener"]} type pokemon slightly stronger`,
   ],
-
   competitor: [
     "Competitors are expert trainers, making their pokemon grow faster",
     `A Competitor's fierce energy makes his ${traitTypes["competitor"]} type pokemon slightly stronger`,
   ],
-
   collector: [
     "Collectors have better chances at catching pokemon and finding shiny pokemon ",
     `A Collector's concentration makes his ${traitTypes["collector"]} type pokemon slightly stronger`,
   ],
-
   explorer: [
     "Explorers often find more items than others and lose fewer Items when they retreat",
     `An Eplorer's courage makes his ${traitTypes["explorer"]} type pokemon slightly stronger`,
@@ -77,8 +79,13 @@ export const traitBonusExplanations: Record<CharacterTrait, string[]> = {
     `A Rogue's mischievous energy makes his ${traitTypes["rogue"]} type pokemon slightly stronger`,
   ],
   "gym bro": [
-    "A Gym Bro's Knowledge of Supplements makes his Pokemon gain Effort Values faster",
+    "A Gym Bro's knowledge of Supplements makes his Pokemon gain Effort Values faster",
     `A Gym Bro's discipline makes his ${traitTypes["gym bro"]} type pokemon slightly stronger`,
+  ],
+  archaeologist: [
+    "Archaeologists have a higher chance of finding pokemon or more/better items in the earth",
+    "Their connection to the museum gets them more rewards for valuable items",
+    `An Archaeologists connection to the earth makes his ${traitTypes.archaeologist} type pokemon slightly stronger`,
   ],
 };
 
@@ -167,6 +174,17 @@ export const traitLoadOuts: Record<CharacterTrait, { storage: Inventory }> = {
       carbos: 2,
       "macho-brace": 1,
       "black-belt": 1,
+    }),
+  },
+  archaeologist: {
+    storage: joinInventories(EmptyInventory, {
+      "poke-ball": 20,
+      "berry-juice": 5,
+      "kings-rock": 1,
+      "razor-fang": 1,
+      "moon-stone": 1,
+      "soft-sand": 1,
+      "escape-rope": 1,
     }),
   },
 };

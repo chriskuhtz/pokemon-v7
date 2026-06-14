@@ -18,14 +18,17 @@ export const useShovel = () => {
         return;
       }
       if (saveFile.campUpgrades["shovel certification"]) {
+        const chance = saveFile.trait === "archaeologist" ? 0.75 : 0.9;
+        const amount =
+          saveFile.trait === "archaeologist" && Math.random() > 0.9 ? 2 : 1;
         const foundItem =
-          Math.random() > 0.9
+          Math.random() > chance
             ? ArrayHelpers.getRandomEntry(undergroundTable)
             : undefined;
 
         const updatedInventory = foundItem
           ? joinInventories(saveFile.bag, {
-              [foundItem]: 1,
+              [foundItem]: amount,
             })
           : saveFile.bag;
 
@@ -34,7 +37,7 @@ export const useShovel = () => {
             message: "You use your certified shovel skills",
           },
           foundItem
-            ? { message: `found 1 ${foundItem} while digging` }
+            ? { message: `found ${amount} ${foundItem} while digging` }
             : undefined,
         ].filter((m) => m !== undefined);
 

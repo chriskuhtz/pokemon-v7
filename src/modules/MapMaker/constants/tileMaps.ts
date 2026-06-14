@@ -14,7 +14,7 @@ const darkWoods: TileSet = {
 const newMasterSheet: TileSet = {
   src: "url('/tilesets/newMasterSheet.png')",
   height: 133,
-  width: 88,
+  width: 96,
   gap: 0,
 };
 const pokemonLeague: TileSet = {

@@ -27,6 +27,7 @@ export const mapIds = [
   "apricornClearing",
   "ilex-forest",
   "murasaki-glades",
+  "rakudairo-ruins",
   //LABYRINTH VERSION
   "labyrinth_level_1",
   "labyrinth_level_2",
@@ -62,6 +63,7 @@ export const mapDisplayNames: Record<MapId, string> = {
   apricornClearing: "Apricorn Clearing",
   "ilex-forest": "Ilex Forest",
   "murasaki-glades": "Murasaki Glades",
+  "rakudairo-ruins": "Rakudairo Ruins",
   //LABYRINTH VERSION
   labyrinth_level_1: "Deep Forest",
   labyrinth_level_2: "Deep Forest",

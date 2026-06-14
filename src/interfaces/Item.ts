@@ -445,6 +445,7 @@ export const keyItems = [
   "league-ticket",
   "ilex-ticket",
   "murasaki-ticket",
+  "rakudairo-ticket",
 ] as const;
 export const repels = ["repel", "super-repel", "max-repel"] as const;
 export const lures = ["lure", "super-lure", "max-lure"] as const;
