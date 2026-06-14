@@ -16,6 +16,7 @@ import { labyrinthLevel2 } from "./labyrinth/labyrinthLevel2";
 import { murasakiGlades } from "./murasakiGlades";
 import { onixCave } from "./onixCave";
 import { pokemonLeague } from "./pokemonLeague";
+import { rakudairoRuins } from "./rakudairoRuins";
 import { randomChallengeField } from "./randomChallengeField";
 import { rocketCamp } from "./rocketCamp";
 import { routeE1 } from "./routeE1";
@@ -59,10 +60,11 @@ export const mapsRecord: Record<MapId, OverworldMap> = {
   pokemonLeague: pokemonLeague,
   "ilex-forest": ilexForest,
   "murasaki-glades": murasakiGlades,
+  "rakudairo-ruins": rakudairoRuins,
+  apricornClearing: apricornClearing,
   //LABYRINTH VERSION
   labyrinth_level_1: labyrinthLevel1,
   labyrinth_level_2: labyrinthLevel2,
-  apricornClearing: apricornClearing,
 };
 
 export const Emptymap: OverworldMap = {

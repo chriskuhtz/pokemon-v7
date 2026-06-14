@@ -15,7 +15,9 @@ import { MapEditor } from "../MapMaker/components/MapEditor";
 
 export const VersionSelection = (): JSX.Element => {
   const [version, setVersion] = useState<"KUMA" | "LABYRINTH">();
-  const [map, setMap] = useState<MapId | undefined>();
+  const [map, setMap] = useState<MapId | undefined>(
+    window.location.pathname.replace("/", "") as MapId | undefined,
+  );
 
   if (version === "KUMA") {
     return <Kuma />;
@@ -80,13 +82,15 @@ const SelectionCards = ({
           </div>
         }
         actionElements={[]}
-        onClick={() => setVersion("LABYRINTH")}
+        onClick={() => {
+          setVersion("LABYRINTH");
+        }}
       ></Card>
     </>
   );
 };
 
-export const MapMakerCards = ({ setMap }: { setMap: (x: MapId) => void }) => {
+const MapMakerCards = ({ setMap }: { setMap: (x: MapId) => void }) => {
   if (!window.localStorage.getItem("devmode")) {
     return <></>;
   }
@@ -96,7 +100,10 @@ export const MapMakerCards = ({ setMap }: { setMap: (x: MapId) => void }) => {
       {Object.keys(mapsRecord).map((m) => (
         <Card
           key={m}
-          onClick={() => setMap(m as MapId)}
+          onClick={() => {
+            setMap(m as MapId);
+            window.location.assign(m);
+          }}
           content={<h4>Map Maker {m}</h4>}
           icon={<GoTasklist size={battleSpriteSize} />}
           actionElements={[]}

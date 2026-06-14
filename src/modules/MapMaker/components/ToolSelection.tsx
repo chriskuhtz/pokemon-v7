@@ -1,8 +1,8 @@
 import { JSX } from "react";
 import { FaEraser } from "react-icons/fa";
 import { battleSpriteSize } from "../../../constants/baseConstants";
+import { FloatyMenu } from "../../../uiComponents/FloatyMenu/FloatyMenu";
 import { useSnippets } from "../hooks/useSnippets";
-import { FloatyMenu } from "./FloatyMenu";
 import { GroupSelection } from "./GroupSelection";
 import { Tool } from "./MapEditor";
 import { SnippetSelection } from "./SnippetSelection";

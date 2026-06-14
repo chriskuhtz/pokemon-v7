@@ -63,7 +63,6 @@ export const campUpgradeNames = [
   "invite historian",
   "ranger certification",
   "warden certification",
-  "dragonite taxi",
   "invite nature tutor",
   "invite ability tutor",
   "pidgeot rider certification",
@@ -139,7 +138,6 @@ export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
   "team slot 4": "Exploration",
   "team slot 5": "Exploration",
   "team slot 6": "Exploration",
-  "dragonite taxi": "Exploration",
   "swimming certification": "Quest Reward",
   "pidgeot rider certification": "Quest Reward",
   "warden certification": "Quest Reward",
@@ -216,7 +214,6 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
   "team slot 4": ["team slot 3"],
   "team slot 5": ["team slot 4"],
   "team slot 6": ["team slot 5"],
-  "dragonite taxi": ["swimming certification"],
   "battle journalist": baseRequirements,
 
   //"Quest rewards"
@@ -310,8 +307,6 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
   "sixth slot for farm": "more space at the berry farm",
   "seventh slot for farm": "more space at the berry farm",
   "invite historian": "It might not all be true, but it sounds interesting",
-  "dragonite taxi":
-    "dragonite can fly you to remote places if you have the correct ticket",
   "pidgeot rider certification":
     "Expert flying Pokemon Trainers can ride on their pokemon",
   "warden certification":

@@ -243,7 +243,6 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
       return occupantHandled(s, whitneyId);
     },
     kind: "BULLETIN",
-    requiredUpgrade: "dragonite taxi",
     availableAfter: "catch whitney's favorite cute pokemon",
   },
   "defeat morty": {

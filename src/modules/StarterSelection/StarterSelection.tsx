@@ -113,7 +113,7 @@ export const StarterSelection = (): JSX.Element => {
   }, [chosenStarter, patchSaveFileReducer, saveFile]);
 
   if (!fullStarters) {
-    return <LoadingScreen />;
+    return <LoadingScreen withOverworld={false} />;
   }
 
   return (

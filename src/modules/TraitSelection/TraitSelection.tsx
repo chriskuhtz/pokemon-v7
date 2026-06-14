@@ -5,6 +5,7 @@ import { SaveFileContext } from "../../hooks/useSaveFile";
 import { joinInventories } from "../../interfaces/Inventory";
 import { ItemType } from "../../interfaces/Item";
 
+import { battleSpriteSize, portraitMode } from "../../constants/baseConstants";
 import {
   CharacterTrait,
   traitBonusExplanations,
@@ -12,6 +13,7 @@ import {
   traitLoadOuts,
   traitResearchBoni,
   traits,
+  traitTypes,
 } from "../../interfaces/Trait";
 import { Card } from "../../uiComponents/Card/Card";
 import { Stack } from "../../uiComponents/Stack/Stack";
@@ -51,7 +53,14 @@ export const TraitSelection = (): JSX.Element => {
               backgroundColor={traitColors[trait]}
               key={trait}
               onClick={() => proceed(trait)}
-              icon={undefined}
+              icon={
+                <img
+                  height={
+                    portraitMode ? battleSpriteSize * 2 : battleSpriteSize * 3
+                  }
+                  src={`/typeIcons/${traitTypes[trait]}.png`}
+                />
+              }
               content={
                 <Stack mode="column" gapInRem={2}>
                   <h3>{trait}:</h3>

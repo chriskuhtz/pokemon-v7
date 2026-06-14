@@ -1,12 +1,70 @@
+import { calculateLevelData } from "../../../../functions/calculateLevelData";
+import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
 import { getTimeOfDay } from "../../../../functions/getTimeOfDay";
 import { getTraveller } from "../../../../functions/getTraveller";
 import { makeApricornTree } from "../../../../functions/makeApricornTree";
 import { makeBerryTree } from "../../../../functions/makeBerryTree";
+import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
 import { occupantHandled } from "../../../../functions/occupantHandled";
+import { Occupant } from "../../../../interfaces/Occupant";
 import { OverworldMap } from "../../../../interfaces/OverworldMap";
+import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
 import { routeE1Lure } from "../../../../modules/BerryLure/BerryLure";
 import { blaine } from "./blaine";
 import { trainerChuck } from "./chuckLine";
+
+const treasureHunterMarco: Occupant[] = [
+  {
+    type: "NPC",
+
+    orientation: "UP",
+    x: 49,
+    y: 41,
+    unhandledMessage: [
+      "we have discovered some exiting ruins",
+      "Unfortunately, i cant let you pass",
+      "until my team has secured the treasure",
+      "call a ranger if you dont like it",
+    ],
+    sprite: SpriteEnum["explorer"],
+    id: "treasure hunter marco npc",
+    conditionFunction: (s) => !s.rangerLevel,
+  },
+  {
+    type: "TRAINER",
+    team: (s) => {
+      const highestXpOnTeam = getHighestXpOnTeam(s.pokemon);
+      const { level } = calculateLevelData(highestXpOnTeam, "medium");
+
+      const xpOfTeam = (level - 1) * (level - 1) * (level - 1);
+      const xpOfAce = (level + 1) * (level + 1) * (level + 1);
+      return [
+        makeChallengerPokemon({ name: "sandshrew", xp: xpOfTeam }),
+        makeChallengerPokemon({ name: "kabuto", xp: xpOfTeam }),
+        makeChallengerPokemon({ name: "graveler-alola", xp: xpOfTeam }),
+        makeChallengerPokemon({ name: "sandslash", xp: xpOfAce }),
+      ];
+    },
+    battleTeamConfig: {
+      assignLearnsetMoves: true,
+      assignNaturalAbility: true,
+      assignGender: true,
+      assignHeldItem: true,
+    },
+    orientation: "UP",
+    x: 49,
+    y: 41,
+    unhandledMessage: [
+      "we have discovered some exiting ruins",
+      "Unfortunately, i cant let you pass",
+      "until my team has secured the treasure",
+    ],
+    sprite: SpriteEnum["explorer"],
+    id: "treasure hunter marco",
+    conditionFunction: (s) =>
+      !!(s.rangerLevel && !occupantHandled(s, "treasure hunter marco")),
+  },
+];
 
 export const routeE1Occupants: OverworldMap["occupants"] = [
   trainerChuck,
@@ -193,15 +251,6 @@ export const routeE1Occupants: OverworldMap["occupants"] = [
   },
   {
     type: "ITEM",
-    item: "root-fossil",
-    amount: 1,
-    x: 32,
-    y: 20,
-    id: "routeE1_root-fossil",
-    conditionFunction: (s) => !occupantHandled(s, "routeE1_root-fossil"),
-  },
-  {
-    type: "ITEM",
     item: "claw-fossil",
     amount: 1,
     x: 33,
@@ -228,7 +277,6 @@ export const routeE1Occupants: OverworldMap["occupants"] = [
     apricorn: "yellow-apricorn",
     id: "routeE1_yellow_tree_3",
   }),
-
   {
     type: "POKEMON",
     x: 15,
@@ -316,4 +364,19 @@ export const routeE1Occupants: OverworldMap["occupants"] = [
     },
     id: "routeE1-solrock",
   },
+  {
+    type: "ON_STEP_PORTAL",
+    x: 50,
+    y: 43,
+    portal: {
+      mapId: "rakudairo-ruins",
+      x: 1,
+      y: 25,
+      orientation: "RIGHT",
+      forwardFoot: "CENTER1",
+    },
+    conditionFunction: () => true,
+    id: "routeE1_to_rakudairo",
+  },
+  ...treasureHunterMarco,
 ];

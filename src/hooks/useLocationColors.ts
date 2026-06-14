@@ -39,6 +39,7 @@ export const mapBattleColors: Record<
   labyrinth_level_2: { oppColor: "bug", playerColor: "grass" },
   "ilex-forest": { oppColor: "bug", playerColor: "grass" },
   "murasaki-glades": { oppColor: "fairy", playerColor: "ghost" },
+  "rakudairo-ruins": { oppColor: "rock", playerColor: "fire" },
 };
 
 export const useLocationColors = (): {
@@ -90,6 +91,7 @@ export const mapBattlePlatforms: Record<MapId, string> = {
   labyrinth_level_2: "grass",
   "ilex-forest": "grass",
   "murasaki-glades": "plains",
+  "rakudairo-ruins": "sand",
 };
 
 export const useLocationBattlePlatform = (): string => {

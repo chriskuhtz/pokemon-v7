@@ -48,7 +48,6 @@ export const Overworld = ({ uncontrolled }: { uncontrolled?: boolean }) => {
   const { rotateOccupant, occupants } = useOccupants();
 
   //DRAWING
-
   useDrawOccupants(occupantsCanvasId, occupants, baseSize);
   //INTERACTION
   useDrawForeground("foreground", map.tileMap, map.tilesetUrl, baseSize);

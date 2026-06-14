@@ -39,12 +39,16 @@ export const useSledgeHammer = () => {
         return;
       }
       if (saveFile.campUpgrades["sledge hammer certification"]) {
+        const itemChance = saveFile.trait === "archaeologist" ? 0.75 : 0.9;
+        const amount =
+          saveFile.trait === "archaeologist" && Math.random() > 0.9 ? 2 : 1;
+        const encounterChance = saveFile.trait === "archaeologist" ? 0.75 : 0.9;
         const foundItem =
-          Math.random() > 0.9
+          Math.random() > itemChance
             ? ArrayHelpers.getRandomEntry(undergroundTable)
             : undefined;
         const encounter =
-          Math.random() > 0.9
+          Math.random() > encounterChance
             ? ArrayHelpers.getRandomEntry(
                 SLEDGEHAMMER_ENCOUNTER_OPTIONS(internalDex),
               )
@@ -52,7 +56,7 @@ export const useSledgeHammer = () => {
 
         const updatedInventory = foundItem
           ? joinInventories(saveFile.bag, {
-              [foundItem]: 1,
+              [foundItem]: amount,
             })
           : saveFile.bag;
         const meta: SaveFile["meta"] = encounter
@@ -72,7 +76,7 @@ export const useSledgeHammer = () => {
             message: "You use your certified sledge hammer skills",
           },
           foundItem
-            ? { message: `found 1 ${foundItem} in the rubble` }
+            ? { message: `found ${amount} ${foundItem} in the rubble` }
             : undefined,
           encounter
             ? { message: "You startled a pokemon under the rock" }
