@@ -34,6 +34,8 @@ export const startingSaveFileLabyrinth: SaveFile = {
     caughtFromSwarms: [],
     luredWithBerries: [],
     damageRecord: 0,
+    foundEggTypes: [],
+    hatchedEggTypes: [],
   },
   farm: { plants: [] },
   campUpgrades: baseCampUpgrades,

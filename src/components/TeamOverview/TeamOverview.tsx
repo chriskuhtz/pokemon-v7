@@ -11,7 +11,6 @@ import { useNavigate } from "../../hooks/useNavigate";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { OwnedPokemon } from "../../interfaces/OwnedPokemon";
 import { PokemonSprite } from "../PokemonSprite/PokemonSprite";
-import "./TeamOverview.css";
 
 export const TeamOverview = ({ steps }: { steps: number }) => {
   const {
@@ -81,7 +80,7 @@ export const TeamMemberInOverview = ({
         }}
       >
         <PokemonSprite
-          className={readyToEvolve ? "readyToEvolve" : undefined}
+          className={readyToEvolve ? "bouncing" : undefined}
           onClick={onClick}
           name={pokemon.name}
           config={{

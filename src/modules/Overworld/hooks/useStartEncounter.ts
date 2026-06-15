@@ -4,11 +4,7 @@ import { determineWildPokemon } from "../../../functions/determineWildPokemon";
 import { getRandomPokemonName } from "../../../functions/getRandomPokemonId";
 import { isOwnedPokemonKO } from "../../../functions/isKo";
 import { OPPO_ID } from "../../../functions/makeChallengerPokemon";
-import {
-  getCurrentLure,
-  getCurrentRepel,
-  getCurrentSwarm,
-} from "../../../functions/TimedEvent";
+import { getCurrentRepel } from "../../../functions/TimedEvent";
 import { LocationContext } from "../../../hooks/LocationProvider";
 import { GameDataContext } from "../../../hooks/useGameData";
 import { SaveFileContext } from "../../../hooks/useSaveFile";
@@ -24,12 +20,6 @@ export const useStartEncounter = () => {
   const gameData = useContext(GameDataContext);
 
   const currentRepel = useMemo(() => getCurrentRepel(saveFile), [saveFile]);
-  const swarm = getCurrentSwarm(saveFile, "WEAK");
-  const strongSwarm = getCurrentSwarm(saveFile, "STRONG");
-  const distortionSwarm =
-    getCurrentSwarm(saveFile, "PAST_DISTORTION") ??
-    getCurrentSwarm(saveFile, "FUTURE_DISTORTION") ??
-    getCurrentSwarm(saveFile, "SPACE_DISTORTION");
 
   return useCallback(
     (stepsTaken: number, type: "WATER" | "GROUND") => {
@@ -47,15 +37,10 @@ export const useStartEncounter = () => {
       ).length;
 
       const { team, battleTeamConfig } = determineWildPokemon({
+        saveFile,
         mapId: location.mapId,
-        quests: saveFile.quests,
         waterEncounter: type === "WATER",
         shinyFactor,
-        lure: getCurrentLure(saveFile)?.lureType,
-        catchStreak: saveFile.catchStreak,
-        currentSwarm: swarm,
-        currentStrongSwarm: strongSwarm,
-        currentDistortionSwarm: distortionSwarm,
         internalDex: gameData.internalDex,
         maxBattleSize: Math.min(
           ...[healthyPlayerTeam, gameData.defaultBattleSize],
@@ -116,9 +101,6 @@ export const useStartEncounter = () => {
     [
       location.mapId,
       saveFile,
-      swarm,
-      strongSwarm,
-      distortionSwarm,
       gameData.internalDex,
       gameData.defaultBattleSize,
       currentRepel?.repelType,

@@ -25,7 +25,12 @@ export const ApplyItemSection = ({
 
   return (
     <Stack mode="column">
-      <DetailsCard detailed={false} ownedPokemon={ownedPokemon} data={data} />
+      <DetailsCard
+        primaryInfoInCard={false}
+        detailed={false}
+        ownedPokemon={ownedPokemon}
+        data={data}
+      />
 
       {Object.entries(bag)
         .filter(

@@ -207,10 +207,10 @@ export const routeN1Occupants: OverworldMap["occupants"] = [
     type: "ITEM",
     x: 17,
     y: 42,
-    item: "exp-candy-s",
+    item: "exp-candy-xs",
     amount: 1,
-    id: "routeN1_exp-candy-s",
-    conditionFunction: (s) => !occupantHandled(s, "routeN1_exp-candy-s"),
+    id: "routeN1_exp-candy-xs",
+    conditionFunction: (s) => !occupantHandled(s, "routeN1_exp-candy-xs"),
   },
   {
     type: "HONEY_TREE",

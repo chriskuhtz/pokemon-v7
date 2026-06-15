@@ -9,12 +9,14 @@ export const AnimatedBar = ({
   color,
   textColor,
   inversedColor,
+  hideText,
 }: {
   max: number;
   offset: number;
   color?: string;
   textColor?: string;
   inversedColor?: boolean;
+  hideText?: boolean;
 }) => {
   const [current, setCurrent] = useState<number>(max - offset);
 
@@ -88,7 +90,7 @@ export const AnimatedBar = ({
           color: textColor,
         }}
       >
-        {current}/{max}
+        {!hideText && `${current}/${max}`}
       </div>
       <div
         style={{

@@ -75,7 +75,7 @@ const useHandleLoss = () => {
   const reset = useReset();
 
   return useCallback(() => {
-    const resetTime = () => {
+    const shouldResetGame = () => {
       if (
         saveFile.settings?.rogueLike ||
         saveFile.settings?.releaseFaintedPokemon
@@ -89,7 +89,7 @@ const useHandleLoss = () => {
       }
       return false;
     };
-    if (resetTime()) {
+    if (shouldResetGame()) {
       reset();
       return;
     } else {
@@ -109,7 +109,6 @@ const useHandleLoss = () => {
         );
       }
 
-      resetLocation();
       patchSaveFileReducer({
         ...removeTroubleMakers(saveFile, "ESCAPED"),
         meta: { activeTab: "OVERWORLD", currentChallenger: undefined },
@@ -121,6 +120,7 @@ const useHandleLoss = () => {
         }),
         bag: updatedBag,
       });
+      resetLocation();
       return;
     }
   }, [location, patchSaveFileReducer, reset, saveFile, resetLocation]);

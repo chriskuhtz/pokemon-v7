@@ -19,6 +19,7 @@ export interface BaseTimedEvent {
     | "LOST_ITEM"
     | "STATIC_ENCOUNTER"
     | "STATIC_TRAINER"
+    | "OVERWORLD_EGG"
     | "LURE"
     | "REPEL"
     | "TROUBLEMAKERS"
@@ -34,6 +35,13 @@ export interface LostItemEvent extends BaseTimedEvent {
   mapId: MapId;
   item: ItemType;
   amount: number;
+  x: number;
+  y: number;
+}
+export interface OverworldEggEvent extends BaseTimedEvent {
+  type: "OVERWORLD_EGG";
+  mapId: MapId;
+  pokemonType: PokemonType;
   x: number;
   y: number;
 }
@@ -101,4 +109,5 @@ export type TimedEvent =
   | TroubleMakersEvent
   | BlockerEvent
   | SwarmEvent
-  | ChestEvent;
+  | ChestEvent
+  | OverworldEggEvent;

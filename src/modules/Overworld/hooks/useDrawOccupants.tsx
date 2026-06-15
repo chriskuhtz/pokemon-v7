@@ -165,6 +165,15 @@ const drawOccupant = (
           baseSize,
         );
         break;
+      case "EGG":
+        ctx?.drawImage(
+          img,
+          baseSize * occ.x + baseSize * 0.25,
+          baseSize * occ.y + baseSize * 0.25,
+          baseSize * 0.5,
+          baseSize * 0.5,
+        );
+        break;
       case "HONEY_TREE":
       case "APRICORN_TREE":
       case "EMPTY_APRICORN_TREE":
@@ -218,6 +227,8 @@ const drawOccupant = (
 
 const getSource = (occ: Occupant) => {
   switch (occ.type) {
+    case "EGG":
+      return `/eggs/${occ.pokemonType}-egg.png`;
     case "APRICORN_TREE":
       return occ.sprite;
     case "EMPTY_APRICORN_TREE":

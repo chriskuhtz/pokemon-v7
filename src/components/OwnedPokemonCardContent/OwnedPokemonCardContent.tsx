@@ -1,14 +1,20 @@
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
+import { typeColors } from "../../constants/typeColors";
+import { getTypeNames } from "../../functions/getTypeNames";
+import { hexToRgb } from "../../functions/hexToRGB";
+import { isOwnedPokemonKO } from "../../functions/isKo";
 import { GameDataContext } from "../../hooks/useGameData";
 import { EvolutionReducerPayload } from "../../hooks/useSaveFile";
 import { Inventory } from "../../interfaces/Inventory";
 import { ItemType } from "../../interfaces/Item";
 import { OwnedPokemon } from "../../interfaces/OwnedPokemon";
 import { PokemonData } from "../../interfaces/PokemonData";
+import { Card } from "../../uiComponents/Card/Card";
 import { Stack } from "../../uiComponents/Stack/Stack";
 import { EvoInfo } from "../EvoInfo/EvoInfo";
 import { MoveEditor } from "../MoveEditor/MoveEditor";
 import { MovesDisplay } from "../MovesDisplay/MovesDisplay";
+import { PokemonSprite } from "../PokemonSprite/PokemonSprite";
 import { StatDisplay } from "../StatDisplay/StatDisplay";
 import { ApplyItemSection } from "./components/ApplyItemSection";
 import { DetailsCard } from "./components/DetailsCard";
@@ -26,6 +32,7 @@ export const OwnedPokemonCardContent = ({
   inventory,
   setNickName,
   evolve,
+  reOrdering,
 }: {
   ownedPokemon: OwnedPokemon;
   data: PokemonData;
@@ -34,59 +41,97 @@ export const OwnedPokemonCardContent = ({
   inventory: Inventory;
   setNickName: (id: string, newNick: string | undefined) => void;
   evolve: (x: EvolutionReducerPayload) => void;
+  reOrdering: React.JSX.Element;
 }) => {
   const gameData = useContext(GameDataContext);
   const [tab, setTab] = useState<TabType>("DETAILS");
+  const content = useMemo(() => {
+    return (
+      <Stack mode={"column"}>
+        {reOrdering}
+        <h2 style={{ marginBottom: 0 }}>
+          {ownedPokemon.nickname
+            ? `${ownedPokemon.nickname}(${ownedPokemon.name})`
+            : ownedPokemon.name}
+          :
+        </h2>
+
+        <OwnedPokemonCardTabSelection
+          ownedPokemon={ownedPokemon}
+          data={data}
+          tab={tab}
+          setTab={setTab}
+        />
+        {tab == "DETAILS" && (
+          <DetailsCard
+            primaryInfoInCard={false}
+            ownedPokemon={ownedPokemon}
+            data={data}
+            setNickName={(newNick) => setNickName(ownedPokemon.id, newNick)}
+          />
+        )}
+        {tab === "HELD ITEM" && (
+          <HeldItemSelection
+            ownedPokemon={ownedPokemon}
+            takeHeldItem={takeHeldItem}
+            giveHeldItem={giveHeldItem}
+          />
+        )}
+        {tab === "STATS" && (
+          <StatDisplay ownedPokemon={ownedPokemon} data={data} />
+        )}
+        {tab === "EVOLUTION" && (
+          <EvoInfo
+            ownedPokemon={ownedPokemon}
+            data={data}
+            inventory={inventory}
+            evolve={evolve}
+          />
+        )}
+        {tab === "MOVES" && (
+          <MovesDisplay
+            ownedPokemon={ownedPokemon}
+            onlyCurrent={!gameData.features.movesEditableInTeamOverview}
+          />
+        )}
+        {tab === "NEW MOVES" && <MoveEditor ownedPokemon={ownedPokemon} />}
+        {tab === "APPLY ITEM" && (
+          <ApplyItemSection data={data} ownedPokemon={ownedPokemon} />
+        )}
+      </Stack>
+    );
+  }, [
+    data,
+    evolve,
+    gameData.features.movesEditableInTeamOverview,
+    giveHeldItem,
+    inventory,
+    ownedPokemon,
+    reOrdering,
+    setNickName,
+    tab,
+    takeHeldItem,
+  ]);
 
   return (
-    <Stack mode={"column"}>
-      <h2 style={{ marginBottom: 0, marginTop: 0 }}>
-        {ownedPokemon.nickname
-          ? `${ownedPokemon.nickname}(${ownedPokemon.name})`
-          : ownedPokemon.name}
-        :
-      </h2>
-      <OwnedPokemonCardTabSelection
-        ownedPokemon={ownedPokemon}
-        data={data}
-        tab={tab}
-        setTab={setTab}
-      />
-      {tab == "DETAILS" && (
-        <DetailsCard
-          ownedPokemon={ownedPokemon}
-          data={data}
-          setNickName={(newNick) => setNickName(ownedPokemon.id, newNick)}
+    <Card
+      icon={
+        <PokemonSprite
+          sizeFactor={2}
+          name={ownedPokemon.name}
+          config={{
+            officalArtwork: true,
+            shiny: ownedPokemon.shiny,
+            grayscale: isOwnedPokemonKO(ownedPokemon),
+          }}
         />
+      }
+      content={content}
+      actionElements={[]}
+      backgroundColor={hexToRgb(
+        typeColors[getTypeNames({ ...ownedPokemon, data }).at(0) ?? "normal"],
+        0.5,
       )}
-      {tab === "HELD ITEM" && (
-        <HeldItemSelection
-          ownedPokemon={ownedPokemon}
-          takeHeldItem={takeHeldItem}
-          giveHeldItem={giveHeldItem}
-        />
-      )}
-      {tab === "STATS" && (
-        <StatDisplay ownedPokemon={ownedPokemon} data={data} />
-      )}
-      {tab === "EVOLUTION" && (
-        <EvoInfo
-          ownedPokemon={ownedPokemon}
-          data={data}
-          inventory={inventory}
-          evolve={evolve}
-        />
-      )}
-      {tab === "MOVES" && (
-        <MovesDisplay
-          ownedPokemon={ownedPokemon}
-          onlyCurrent={!gameData.features.movesEditableInTeamOverview}
-        />
-      )}
-      {tab === "NEW MOVES" && <MoveEditor ownedPokemon={ownedPokemon} />}
-      {tab === "APPLY ITEM" && (
-        <ApplyItemSection data={data} ownedPokemon={ownedPokemon} />
-      )}
-    </Stack>
+    />
   );
 };

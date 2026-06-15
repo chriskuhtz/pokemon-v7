@@ -22,10 +22,12 @@ export const DetailsCard = ({
   data,
   setNickName,
   detailed = true,
+  primaryInfoInCard = true,
 }: {
   ownedPokemon: OwnedPokemon;
   data: PokemonData;
   detailed?: boolean;
+  primaryInfoInCard?: boolean;
   setNickName?: (x: string | undefined) => void;
 }) => {
   const { saveFile } = useContext(SaveFileContext);
@@ -75,7 +77,11 @@ export const DetailsCard = ({
   );
   return (
     <Stack mode="column">
-      <Card content={primaryInfo} icon={undefined} actionElements={[]} />
+      {primaryInfoInCard ? (
+        <Card content={primaryInfo} icon={undefined} actionElements={[]} />
+      ) : (
+        primaryInfo
+      )}
       {detailed && (
         <>
           {setNickName && (

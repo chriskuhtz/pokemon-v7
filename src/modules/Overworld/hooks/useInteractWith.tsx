@@ -15,6 +15,7 @@ import { useInteractWithOverworldPokeball } from "../../../hooks/useInteractWith
 import { useInteractWithSnorlax } from "../../../hooks/useInteractWithSnorlax";
 import { MessageQueueContext } from "../../../hooks/useMessageQueue";
 import { useNavigate } from "../../../hooks/useNavigate";
+import { usePickUpEgg } from "../../../hooks/usePickUpEgg";
 import { useRangerRadio } from "../../../hooks/useRangerRadio";
 import { SaveFileContext } from "../../../hooks/useSaveFile";
 import { useInteractWithOverworldPokemon } from "../../../hooks/useStaticEncounter";
@@ -68,6 +69,7 @@ export const useInteractWith = (
   const interactWithOverworldNpc = useInteractWithNPC();
   const interactWithOverworldItem = useInteractWithOverworldItem();
   const interactWithOverworldPokeball = useInteractWithOverworldPokeball();
+  const interactWithEgg = usePickUpEgg();
   return useCallback(
     (occ: Occupant | undefined) =>
       interactWithFunction({
@@ -100,6 +102,7 @@ export const useInteractWith = (
         interactWithOverworldNpc,
         interactWithOverworldItem,
         interactWithOverworldPokeball,
+        interactWithEgg,
         routeTo: (meta) => navigateAwayFromOverworldReducer(meta, stepsTaken),
       }),
     [
@@ -132,6 +135,7 @@ export const useInteractWith = (
       interactWithOverworldNpc,
       interactWithOverworldItem,
       interactWithOverworldPokeball,
+      interactWithEgg,
       navigateAwayFromOverworldReducer,
       stepsTaken,
     ],

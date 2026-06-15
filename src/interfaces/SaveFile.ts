@@ -97,6 +97,8 @@ export type MileStonesObject = {
   hughDefeatedAt?: number;
   lanceDefeatedAt?: number;
   importedChallengerDefeatedAt?: number;
+  foundEggTypes?: PokemonType[];
+  hatchedEggTypes?: PokemonType[];
 };
 
 export type ImportedChallenger = Omit<
@@ -110,6 +112,7 @@ export type ImportedChallenger = Omit<
 export type RampagingPokemon = {
   route: MapId;
   name: PokemonName;
+  type: PokemonType;
   id: string;
   x: number;
   y: number;
@@ -118,6 +121,14 @@ export type RampagingPokemon = {
 export interface SavedNote {
   id: string;
   xpOverwrite?: number;
+}
+
+export interface PokemonEgg {
+  id: string;
+  pokemon: PokemonName;
+  type: PokemonType;
+  requiredSteps: number;
+  steps: number;
 }
 
 export const startingRegions = [
@@ -157,7 +168,6 @@ export interface SaveFile {
   skierSprite?: string;
   mileStones: MileStonesObject;
   farm: {
-    // refactor farm into overworld plots
     plants: BerryBush[];
     trees?: (ApricornType | BerryType | undefined)[];
   };
@@ -175,4 +185,5 @@ export interface SaveFile {
   startingRegion?: StartingRegion;
   trait?: CharacterTrait;
   timedEvents?: TimedEvent[];
+  eggs?: PokemonEgg[];
 }

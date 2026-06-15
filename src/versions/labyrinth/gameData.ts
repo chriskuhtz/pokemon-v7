@@ -23,6 +23,7 @@ export const gameData: GameData = {
     lostItems: false,
     staticEncounters: false,
     staticTrainers: false,
+    overworldEggs: false,
   },
   losingMessages: {
     training: "Young Tom was never seen again ...",

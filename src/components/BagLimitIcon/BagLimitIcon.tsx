@@ -11,7 +11,7 @@ import { MessageQueueContext } from "../../hooks/useMessageQueue";
 import { useNavigate } from "../../hooks/useNavigate";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 
-export const HudBagLimitIcon = () => {
+export const HudBagLimitIcon = ({ stepsTaken }: { stepsTaken: number }) => {
   const gameData = useContext(GameDataContext);
   const { saveFile } = useContext(SaveFileContext);
   const { addMessage } = useContext(MessageQueueContext);
@@ -35,7 +35,7 @@ export const HudBagLimitIcon = () => {
         onClick={() =>
           addMessage({
             message: `${Math.max(limit - totalAmount, 0)} of ${limit} Slots empty`,
-            onRemoval: () => navigate("OVERWORLD", "BAG"),
+            onRemoval: () => navigate("OVERWORLD", "BAG", stepsTaken),
             needsNoConfirmation: true,
           })
         }

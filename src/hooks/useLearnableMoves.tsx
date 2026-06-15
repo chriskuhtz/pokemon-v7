@@ -44,65 +44,74 @@ export const useLearnableMoves = (
     if (!data) {
       return [];
     }
-    return data.moves
-      .filter((m) => handledMoves.includes(m.move.name as MoveName))
-      .map((m) => {
-        const payment = getCostForLearnMethod(
-          m.move.name as MoveName,
-          m.version_group_details[0].move_learn_method.name,
-        );
-        const available = moveIsTeachable(
-          m,
-          calculateLevelData(ownedPokemon.xp, ownedPokemon.growthRate).level,
-        );
-
-        const learnable = saveFile.bag[payment] > 0 && available;
-        if (saveFile.settings?.randomLearnSets) {
-          const index =
-            handledMoves.findIndex((handled) => handled === m.move.name) +
-            ownedPokemon.name.length * 5;
-          const randomizedMove = ArrayHelpers.getEntryWithOverflow(
-            [...handledMoves],
-            index,
+    return (
+      data.moves
+        //only show moves that are in the game
+        .filter((m) => handledMoves.includes(m.move.name as MoveName))
+        //exclude egg moves
+        .filter(
+          (m) => m.version_group_details[0].move_learn_method.name !== "egg",
+        )
+        .map((m) => {
+          const payment = getCostForLearnMethod(
+            m.move.name as MoveName,
+            m.version_group_details[0].move_learn_method.name,
+          );
+          const available = moveIsTeachable(
+            m,
+            calculateLevelData(ownedPokemon.xp, ownedPokemon.growthRate).level,
           );
 
-          return {
-            ...m,
-            move: {
-              ...m.move,
-              name: randomizedMove,
-            },
-            learnable,
-          };
-        }
-        return { ...m, learnable };
-      })
-      .filter(
-        (m) => !ownedPokemon.unlockedMoves.includes(m.move.name as MoveName),
-      )
-      .sort((a, b) => {
-        if (ownedPokemon.unlockedMoves.includes(a.move.name as MoveName)) {
-          return -1;
-        }
-        if (ownedPokemon.unlockedMoves.includes(b.move.name as MoveName)) {
-          return 1;
-        }
+          const learnable = saveFile.bag[payment] > 0 && available;
+          if (saveFile.settings?.randomLearnSets) {
+            const index =
+              handledMoves.findIndex((handled) => handled === m.move.name) +
+              ownedPokemon.name.length * 5;
+            const randomizedMove = ArrayHelpers.getEntryWithOverflow(
+              [...handledMoves],
+              index,
+            );
 
-        if (
-          a.version_group_details[0].move_learn_method.name === "level-up" &&
-          b.version_group_details[0].move_learn_method.name === "level-up"
-        ) {
+            return {
+              ...m,
+              move: {
+                ...m.move,
+                name: randomizedMove,
+              },
+              learnable,
+            };
+          }
+          return { ...m, learnable };
+        })
+        .filter(
+          (m) => !ownedPokemon.unlockedMoves.includes(m.move.name as MoveName),
+        )
+        .sort((a, b) => {
+          if (ownedPokemon.unlockedMoves.includes(a.move.name as MoveName)) {
+            return -1;
+          }
+          if (ownedPokemon.unlockedMoves.includes(b.move.name as MoveName)) {
+            return 1;
+          }
+
+          if (
+            a.version_group_details[0].move_learn_method.name === "level-up" &&
+            b.version_group_details[0].move_learn_method.name === "level-up"
+          ) {
+            return (
+              a.version_group_details[0].level_learned_at -
+              b.version_group_details[0].level_learned_at
+            );
+          }
+
           return (
-            a.version_group_details[0].level_learned_at -
-            b.version_group_details[0].level_learned_at
+            learnMethodOrder[
+              a.version_group_details[0].move_learn_method.name
+            ] -
+            learnMethodOrder[b.version_group_details[0].move_learn_method.name]
           );
-        }
-
-        return (
-          learnMethodOrder[a.version_group_details[0].move_learn_method.name] -
-          learnMethodOrder[b.version_group_details[0].move_learn_method.name]
-        );
-      });
+        })
+    );
   }, [
     data,
     ownedPokemon.growthRate,
