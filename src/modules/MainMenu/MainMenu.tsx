@@ -43,6 +43,7 @@ import { SaveFileContext } from "../../hooks/useSaveFile";
 import { useTeleport } from "../../hooks/useTeleport";
 import { EmptyInventory } from "../../interfaces/Inventory";
 import { lures, repels } from "../../interfaces/Item";
+import { HudEggIcon } from "../Eggs/Eggs";
 export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
   return (
     <InGamePage headline="Main Menu:" goBack={goBack}>
@@ -56,6 +57,7 @@ export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
         <ExpShareButton />
         <BagCard />
         <TeamCard />
+        <EggCard />
         <QuestCard />
         <NotesCard />
         <DexCard />
@@ -143,6 +145,18 @@ const WikiCard = () => {
       onClick={() => navigate("MAIN", "WIKI")}
       content={<h4>Wiki</h4>}
       icon={<FaSearch size={battleSpriteSize} />}
+      actionElements={[]}
+    />
+  );
+};
+const EggCard = () => {
+  const navigate = useNavigate();
+
+  return (
+    <Card
+      onClick={() => navigate("MAIN", "EGGS")}
+      content={<h4>Eggs</h4>}
+      icon={<HudEggIcon stepsTaken={0} />}
       actionElements={[]}
     />
   );

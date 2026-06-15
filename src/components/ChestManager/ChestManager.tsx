@@ -51,6 +51,10 @@ export const ChestManager = ({
     () => getTotalInventoryAmount(saveFile.bag),
     [saveFile],
   );
+  const totalChestAmount = useMemo(
+    () => getTotalInventoryAmount(saveFile.storage),
+    [saveFile],
+  );
 
   const limit = getBagLimit(saveFile, gameData);
   let rate = totalAmount / limit;
@@ -86,15 +90,17 @@ export const ChestManager = ({
           {totalAmount > 0 && (
             <button onClick={storeEverything}>Store All</button>
           )}
-          <button
-            onClick={() => {
-              if (currentFilter) {
-                takeEverythingFromCategory(currentFilter);
-              } else takeEverything();
-            }}
-          >
-            {currentFilter ? `Take all ${currentFilter}` : "Take Everything"}
-          </button>
+          {totalChestAmount > 0 && (
+            <button
+              onClick={() => {
+                if (currentFilter) {
+                  takeEverythingFromCategory(currentFilter);
+                } else takeEverything();
+              }}
+            >
+              {currentFilter ? `Take all ${currentFilter}` : "Take Everything"}
+            </button>
+          )}
         </Stack>
         <div
           style={{

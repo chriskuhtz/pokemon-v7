@@ -10,7 +10,7 @@ import { InternalDex } from "../interfaces/GameData";
 import { MapId } from "../interfaces/mapIds";
 import { getRandomNature } from "../interfaces/Natures";
 import { OwnedPokemon } from "../interfaces/OwnedPokemon";
-import { CatchStreak, SaveFile } from "../interfaces/SaveFile";
+import { SaveFile } from "../interfaces/SaveFile";
 import { StatObject } from "../interfaces/StatObject";
 import { SwarmEvent } from "../interfaces/TimedEvent";
 import { ArrayHelpers } from "./ArrayHelpers";
@@ -18,32 +18,32 @@ import { getMiddleOfThree } from "./getMiddleOfThree";
 import { getTimeOfDay } from "./getTimeOfDay";
 import { getRandomEncounter, isNotCatchable } from "./internalDex";
 import { makeChallengerPokemon } from "./makeChallengerPokemon";
+import { getCurrentLure, getCurrentSwarm } from "./TimedEvent";
 
 export const determineWildPokemon = ({
   mapId,
-  quests,
   waterEncounter,
-  lure,
   shinyFactor,
-  catchStreak,
-  currentSwarm,
-  currentDistortionSwarm,
-  currentStrongSwarm,
   internalDex,
   maxBattleSize,
+  saveFile,
 }: {
   mapId: MapId;
-  quests: SaveFile["quests"];
   waterEncounter: boolean;
   shinyFactor: number;
-  lure?: "lure" | "super-lure" | "max-lure";
-  catchStreak?: CatchStreak;
-  currentSwarm?: SwarmEvent;
-  currentStrongSwarm?: SwarmEvent;
-  currentDistortionSwarm?: SwarmEvent;
   internalDex: InternalDex;
   maxBattleSize: number;
+  saveFile: SaveFile;
 }): { team: OwnedPokemon[]; battleTeamConfig: BattleTeamConfig } => {
+  const quests = saveFile.quests;
+  const lure = getCurrentLure(saveFile)?.lureType;
+  const catchStreak = saveFile.catchStreak;
+  const currentSwarm = getCurrentSwarm(saveFile, "WEAK");
+  const currentStrongSwarm = getCurrentSwarm(saveFile, "STRONG");
+  const currentDistortionSwarm =
+    getCurrentSwarm(saveFile, "PAST_DISTORTION") ??
+    getCurrentSwarm(saveFile, "FUTURE_DISTORTION") ??
+    getCurrentSwarm(saveFile, "SPACE_DISTORTION");
   let battleTeamConfig: BattleTeamConfig = {
     assignGender: true,
     assignHeldItem: true,
@@ -51,27 +51,32 @@ export const determineWildPokemon = ({
     assignNaturalAbility: true,
   };
   const timeOfDay = getTimeOfDay();
-  const applyStreakBoosts = (input: OwnedPokemon): OwnedPokemon => {
-    if (catchStreak?.pokemon === input.name) {
-      let secondShinyRoll = Math.random() / catchStreak.streak < shinyChance;
+  const applyBoosts = (input: OwnedPokemon): OwnedPokemon => {
+    const catchStreakBonus: number =
+      input.name === catchStreak?.pokemon ? (catchStreak?.streak ?? 0) : 0;
+    const ivBonus: number =
+      saveFile.trait === "entomologist"
+        ? saveFile.pokemon.filter((p) => p.name === input.name).length
+        : 0;
 
-      if (catchStreak.streak === 31) {
-        secondShinyRoll = true;
-      }
-      const increasedIvs: StatObject = Object.fromEntries(
-        Object.entries(input.intrinsicValues).map(([stat, value]) => [
-          stat,
-          Math.min(31, value + catchStreak.streak),
-        ]),
-      ) as StatObject;
+    let secondShinyRoll =
+      Math.random() / (catchStreak?.streak ?? 1) < shinyChance;
 
-      return {
-        ...input,
-        shiny: input.shiny || secondShinyRoll,
-        intrinsicValues: increasedIvs,
-      };
+    if (catchStreak?.streak === 31 && input.name === catchStreak.pokemon) {
+      secondShinyRoll = true;
     }
-    return input;
+    const increasedIvs: StatObject = Object.fromEntries(
+      Object.entries(input.intrinsicValues).map(([stat, value]) => [
+        stat,
+        Math.min(31, value + catchStreakBonus + ivBonus),
+      ]),
+    ) as StatObject;
+
+    return {
+      ...input,
+      shiny: input.shiny || secondShinyRoll,
+      intrinsicValues: increasedIvs,
+    };
   };
   let encounter: OwnedPokemon[] = [];
 
@@ -233,5 +238,5 @@ export const determineWildPokemon = ({
     );
   }
 
-  return { team: encounter.map(applyStreakBoosts), battleTeamConfig };
+  return { team: encounter.map(applyBoosts), battleTeamConfig };
 };

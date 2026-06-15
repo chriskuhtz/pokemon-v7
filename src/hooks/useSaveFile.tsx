@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { AbilityName } from "../constants/abilityCheckList";
 import { emptyPokedex } from "../constants/gameData/gameData";
 import { MoveName } from "../constants/movesCheckList";
 import { PokemonName } from "../constants/pokemonNames";
@@ -130,7 +131,16 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
     if (meta.activeTab === "BATTLE" && !meta.currentChallenger) {
       throw new Error("cant route to battle without challenger");
     }
+    const hatchingAbilities: AbilityName[] = [
+      "flame-body",
+      "magma-armor",
+      "steam-engine",
+    ];
+    const hasHatchingAbility = saveFile.pokemon.some(
+      (p) => p.onTeam && hatchingAbilities.includes(p.ability),
+    );
 
+    const boostedHatchSteps = hasHatchingAbility ? stepsTaken * 2 : stepsTaken;
     setSaveFile({
       ...saveFile,
       pokemon: saveFile.pokemon.map((p) => {
@@ -140,6 +150,10 @@ const useSaveFile = (init: SaveFile): UseSaveFile => {
 
         return applyHappinessFromWalking(p, stepsTaken);
       }),
+      eggs: saveFile.eggs?.map((egg) => ({
+        ...egg,
+        steps: egg.steps + boostedHatchSteps,
+      })),
       meta: meta,
     });
   };

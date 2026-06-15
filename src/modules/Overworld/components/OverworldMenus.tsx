@@ -22,6 +22,7 @@ import { BaseSizeContext } from "../../../hooks/useBaseSize";
 import { GameDataContext } from "../../../hooks/useGameData";
 import { useNavigate } from "../../../hooks/useNavigate";
 import { CharacterOrientation } from "../../../interfaces/SaveFile";
+import { HudEggIcon } from "../../Eggs/Eggs";
 import { useIsDark } from "../hooks/useIsDark";
 import { MovementButtons } from "./MovementButtons";
 import { NumberOfBallsBadge } from "./NumberOfBallsBadge";
@@ -98,6 +99,7 @@ export const OverworldMenus = ({
           size={battleSpriteSize}
         />
         <UncollectedQuestsBadge stepsWalked={stepsTaken} />
+        <HudEggIcon stepsTaken={stepsTaken} />
         {gameData.features.numberOfBallsBadge && (
           <div
             style={
@@ -117,7 +119,7 @@ export const OverworldMenus = ({
                 : { marginRight: 24, marginLeft: -8 }
             }
           >
-            <HudBagLimitIcon />
+            <HudBagLimitIcon stepsTaken={stepsTaken} />
           </div>
         }
 

@@ -88,6 +88,10 @@ export const useClickTarget = (
       setClickTarget(undefined);
       return;
     }
+    if (saveFile.meta.currentChallenger) {
+      setClickTarget(undefined);
+      return;
+    }
 
     if (!clickTarget) {
       return;

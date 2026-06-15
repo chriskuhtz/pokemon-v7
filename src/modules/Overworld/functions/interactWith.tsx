@@ -9,6 +9,7 @@ import {
   OccupantType,
   OverworldBush,
   OverworldChest,
+  OverworldEgg,
   OverworldHiddenItem,
   OverworldInvisbleItem,
   OverworldItem,
@@ -76,6 +77,7 @@ export const interactWithFunction = ({
   overloaded,
   interactWithOverworldChest,
   interactWithOverworldNpc,
+  interactWithEgg,
 }: {
   overloaded: boolean;
   activeMessage: boolean;
@@ -112,6 +114,7 @@ export const interactWithFunction = ({
       | OverworldLostItem,
   ) => void;
   interactWithOverworldPokeball: (x: OverworldPokeball) => void;
+  interactWithEgg: (x: OverworldEgg) => void;
   routeTo: (meta: SaveFile["meta"]) => void;
 }) => {
   if (!occ || activeMessage) {
@@ -122,6 +125,10 @@ export const interactWithFunction = ({
 
   if (shouldRotate(data.type)) {
     rotateOccupant(occ.id, getOppositeDirection(playerLocation.orientation));
+  }
+  if (data.type === "EGG") {
+    interactWithEgg(data);
+    return;
   }
   if (data.type === "TELEPORTER_NPC") {
     if (overloaded) {

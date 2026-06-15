@@ -41,6 +41,7 @@ import {
   smallExpCandyPackage,
 } from "../../interfaces/Item";
 import { OwnedPokemon } from "../../interfaces/OwnedPokemon";
+import { realTypes } from "../../interfaces/PokemonType";
 import { Quest } from "../../interfaces/Quest";
 import { SaveFile } from "../../interfaces/SaveFile";
 import {
@@ -495,6 +496,10 @@ export const kumaQuestNames = [
   "investigate murasaki glades",
   "defeat the treasure hunters in radukairo ruins",
   "catch all pokemon from rakudairo-ruins",
+  "find a pokemon egg",
+  "hatch a pokemon egg",
+  "hatch a pokemon egg of every type",
+  "find a pokemon egg of every type",
 ] as const;
 
 export type KumaQuestName = (typeof kumaQuestNames)[number];
@@ -3404,5 +3409,48 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     researchPoints: 100,
     availableAfter: "collect 8 badges",
     rewardItems: { "max-lure": 10 },
+  },
+  "find a pokemon egg": {
+    category: "RESEARCH",
+    kind: "BULLETIN",
+    conditionFunction: (s: SaveFile) =>
+      s.mileStones.foundEggTypes && s.mileStones.foundEggTypes?.length > 0,
+    researchPoints: 25,
+    rewardItems: smallExpCandyPackage,
+  },
+  "hatch a pokemon egg": {
+    category: "RESEARCH",
+    kind: "BULLETIN",
+    conditionFunction: (s: SaveFile) =>
+      s.mileStones.hatchedEggTypes && s.mileStones.hatchedEggTypes?.length > 0,
+    researchPoints: 25,
+    availableAfter: "find a pokemon egg",
+    rewardItems: smallExpCandyPackage,
+  },
+  "hatch a pokemon egg of every type": {
+    category: "RESEARCH",
+    kind: "BULLETIN",
+    conditionFunction: (s: SaveFile) =>
+      realTypes.every(
+        (type) =>
+          s.mileStones.hatchedEggTypes &&
+          s.mileStones.hatchedEggTypes.includes(type),
+      ),
+    researchPoints: 200,
+    availableAfter: "find a pokemon egg",
+    rewardItems: expCandyPackage,
+  },
+  "find a pokemon egg of every type": {
+    category: "RESEARCH",
+    kind: "BULLETIN",
+    conditionFunction: (s: SaveFile) =>
+      realTypes.every(
+        (type) =>
+          s.mileStones.foundEggTypes &&
+          s.mileStones.foundEggTypes.includes(type),
+      ),
+    researchPoints: 200,
+    availableAfter: "find a pokemon egg",
+    rewardItems: expCandyPackage,
   },
 } as Record<KumaQuestName, Quest>;

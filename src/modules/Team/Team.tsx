@@ -1,19 +1,18 @@
 import React, { useCallback, useContext, useMemo, useState } from "react";
 import { OwnedPokemonCardContent } from "../../components/OwnedPokemonCardContent/OwnedPokemonCardContent";
 
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import { InGamePage } from "../../components/InGamePage/InGamePage";
-import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 import { TeamMemberInOverview } from "../../components/TeamOverview/TeamOverview";
-import { portraitMode } from "../../constants/baseConstants";
-import { isOwnedPokemonKO } from "../../functions/isKo";
+import { battleSpriteSize } from "../../constants/baseConstants";
 import { useGetBattleTeam } from "../../hooks/useGetBattleTeam";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { BattlePokemon } from "../../interfaces/BattlePokemon";
 import { Inventory } from "../../interfaces/Inventory";
 import { ItemType } from "../../interfaces/Item";
 import { OwnedPokemon } from "../../interfaces/OwnedPokemon";
-import { BottomDrawer } from "../../uiComponents/BottomDrawer/BottomDrawer";
 import { LoadingScreen } from "../../uiComponents/LoadingScreen/LoadingScreen";
+import { Stack } from "../../uiComponents/Stack/Stack";
 
 export const Team = ({
   team,
@@ -80,39 +79,49 @@ export const Team = ({
 
   return (
     <InGamePage goBack={goBack} headline="Team:">
-      <TeamIcons
-        team={team}
-        res={res}
-        reorder={reorder}
-        focusedId={focusedId}
-        setFocusedId={setFocusedId}
-      />
-      <OwnedPokemonCardContent
-        setNickName={(id, nickname) => {
-          setTeam(
-            team.map((t) => {
-              if (t.id === id) {
-                return {
-                  ...t,
-                  nickname,
-                };
-              }
+      <Stack mode="column" gapInRem={2}>
+        <TeamIcons
+          team={team}
+          res={res}
+          focusedId={focusedId}
+          setFocusedId={setFocusedId}
+        />
+        <OwnedPokemonCardContent
+          reOrdering={
+            <Reordering
+              reorder={reorder}
+              team={team}
+              currentSlot={team.findIndex((t) => t.id === focused.id)}
+            />
+          }
+          setNickName={(id, nickname) => {
+            setTeam(
+              team.map((t) => {
+                if (t.id === id) {
+                  return {
+                    ...t,
+                    nickname,
+                  };
+                }
 
-              return t;
-            }),
-          );
-        }}
-        evolve={(payload) => {
-          evolve(payload);
-          invalidate();
-        }}
-        data={focusedData}
-        key={focusedId}
-        ownedPokemon={focused}
-        inventory={inventory}
-        takeHeldItem={() => changeHeldItem(focusedId)}
-        giveHeldItem={(newItem: ItemType) => changeHeldItem(focusedId, newItem)}
-      />
+                return t;
+              }),
+            );
+          }}
+          evolve={(payload) => {
+            evolve(payload);
+            invalidate();
+          }}
+          data={focusedData}
+          key={focusedId}
+          ownedPokemon={focused}
+          inventory={inventory}
+          takeHeldItem={() => changeHeldItem(focusedId)}
+          giveHeldItem={(newItem: ItemType) =>
+            changeHeldItem(focusedId, newItem)
+          }
+        />
+      </Stack>
     </InGamePage>
   );
 };
@@ -121,41 +130,61 @@ const TeamIcons = ({
   team,
   res,
   setFocusedId,
-  reorder,
   focusedId,
 }: {
   team: OwnedPokemon[];
   res: BattlePokemon[];
-  reorder: (from: number, to: number) => void;
   focusedId: string;
   setFocusedId: (x: string) => void;
 }) => {
   return (
     <>
-      <div
-        style={{
-          display: "grid",
-          gap: ".5rem",
-          marginBottom: "2rem",
-          gridTemplateColumns: portraitMode
-            ? "1fr 1fr 1fr"
-            : "1fr 1fr 1fr 1fr 1fr 1fr",
-        }}
-      >
-        {team.map((pokemon, index) => (
+      <Stack mode="row" justifyContent="space-between">
+        {team.map((pokemon) => (
           <TeamMemberIcon
             res={res}
             pokemon={pokemon}
-            currentSlot={index}
             setFocusedId={setFocusedId}
             key={pokemon.id}
-            reorder={reorder}
-            team={team}
             isFocused={focusedId === pokemon.id}
           />
         ))}
-      </div>
+      </Stack>
     </>
+  );
+};
+const Reordering = ({
+  team,
+  reorder,
+  currentSlot,
+}: {
+  team: OwnedPokemon[];
+  currentSlot: number;
+  reorder: (from: number, to: number) => void;
+}) => {
+  return (
+    <Stack mode="row" alignItems="center" justifyContent="space-between">
+      <FaArrowLeft
+        size={battleSpriteSize}
+        onClick={() => {
+          if (currentSlot === 0) {
+            return;
+          }
+          reorder(currentSlot, currentSlot - 1);
+        }}
+      />
+      <strong>Change Team Position</strong>
+
+      <FaArrowRight
+        size={battleSpriteSize}
+        onClick={() => {
+          if (currentSlot === team.length - 1) {
+            return;
+          }
+          reorder(currentSlot, currentSlot + 1);
+        }}
+      />
+    </Stack>
   );
 };
 
@@ -163,92 +192,34 @@ const TeamMemberIcon = ({
   pokemon,
   res,
   setFocusedId,
-  reorder,
-  currentSlot,
-  team,
   isFocused,
 }: {
   pokemon: OwnedPokemon;
   res: BattlePokemon[];
-  reorder: (from: number, to: number) => void;
   setFocusedId: (x: string) => void;
-  currentSlot: number;
-  team: OwnedPokemon[];
   isFocused: boolean;
 }) => {
   const d = res.find((r) => r.name === pokemon.name)?.data;
-  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
-
-  const teamSize = res.length;
 
   if (!d) {
     return <React.Fragment key={pokemon.id}></React.Fragment>;
   }
 
   return (
-    <>
-      <BottomDrawer open={drawerOpen} close={() => setDrawerOpen(false)}>
-        <div style={{ padding: "1rem", height: "150px" }}>
-          <h3>Switch {pokemon.name} with:</h3>
-          <div
-            style={{
-              display: "grid",
-              gap: ".5rem",
-              gridTemplateColumns: portraitMode
-                ? "1fr 1fr 1fr"
-                : "1fr 1fr 1fr 1fr 1fr 1fr",
-            }}
-          >
-            {team.map((mon, newSlot) => {
-              if (mon.id === pokemon.id) {
-                return <React.Fragment key={pokemon.id}></React.Fragment>;
-              }
-              return (
-                <PokemonSprite
-                  key={mon.id}
-                  onClick={() => {
-                    setDrawerOpen(false);
-                    reorder(currentSlot, newSlot);
-                  }}
-                  name={mon.name}
-                  config={{
-                    shiny: mon.shiny,
-                    grayscale: isOwnedPokemonKO(mon),
-                  }}
-                />
-              );
-            })}
-          </div>
-        </div>
-      </BottomDrawer>
-      <div
-        key={pokemon.id}
-        style={{
-          height: "64px",
-          display: "flex",
-          alignItems: "center",
-          border: isFocused ? "2px solid gray" : undefined,
-          borderRadius: 9000,
-          aspectRatio: "1/1",
-          padding: ".5rem",
-        }}
-      >
-        <strong
-          style={{ fontSize: "x-large" }}
-          onClick={() => {
-            if (teamSize === 1) {
-              return;
+    <div
+      key={pokemon.id}
+      style={
+        isFocused
+          ? {
+              transform: "scale(1.5)",
             }
-            setDrawerOpen(true);
-          }}
-        >
-          {currentSlot + 1}.
-        </strong>
-        <TeamMemberInOverview
-          pokemon={pokemon}
-          onClick={() => setFocusedId(pokemon.id)}
-        />
-      </div>
-    </>
+          : undefined
+      }
+    >
+      <TeamMemberInOverview
+        pokemon={pokemon}
+        onClick={() => setFocusedId(pokemon.id)}
+      />
+    </div>
   );
 };

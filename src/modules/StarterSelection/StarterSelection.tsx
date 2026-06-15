@@ -24,6 +24,7 @@ import {
   EmptyStatObject,
   generateRandomStatObject,
 } from "../../interfaces/StatObject";
+import { traitStarter } from "../../interfaces/Trait";
 import { LoadingScreen } from "../../uiComponents/LoadingScreen/LoadingScreen";
 const defaultStarters: Record<StartingRegion, PokemonName[]> = {
   kanto: ["bulbasaur", "charmander", "squirtle"],
@@ -48,8 +49,13 @@ export const StarterSelection = (): JSX.Element => {
         getRandomPokemonName(),
       ];
     }
-
-    return defaultStarters[saveFile.startingRegion ?? "kanto"];
+    if (saveFile.trait) {
+      return [
+        ...defaultStarters[saveFile.startingRegion ?? "kanto"],
+        traitStarter[saveFile.trait],
+      ];
+    }
+    return [...defaultStarters[saveFile.startingRegion ?? "kanto"]];
   }, [saveFile]);
 
   const { res: fullStarters } = useGetBattleTeam(

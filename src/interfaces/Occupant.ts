@@ -4,6 +4,7 @@ import { Inventory } from "./Inventory";
 import { ApricornType, BerryType, ItemType } from "./Item";
 import { OverworldEncounter } from "./OverworldMap";
 import { OwnedPokemon } from "./OwnedPokemon";
+import { PokemonType } from "./PokemonType";
 import { RoutesType } from "./Routing";
 import {
   CharacterLocationData,
@@ -54,6 +55,7 @@ export const OCCUPANT_TYPES = [
   "CLIMBING_STEPS",
   "POKEBALL",
   "LOST_ITEM",
+  "EGG",
 ] as const;
 export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
@@ -62,6 +64,10 @@ export interface BaseOccupant {
   x: number;
   y: number;
   conditionFunction: (saveFile: SaveFile) => boolean;
+}
+export interface OverworldEgg extends BaseOccupant {
+  type: "EGG";
+  pokemonType: PokemonType;
 }
 export interface OverworldItem extends BaseOccupant {
   type: "ITEM";
@@ -315,4 +321,5 @@ export type Occupant =
   | EmptyBerryTree
   | TeleporterNpc
   | OverworldClimbingSteps
-  | OverworldPokeball;
+  | OverworldPokeball
+  | OverworldEgg;

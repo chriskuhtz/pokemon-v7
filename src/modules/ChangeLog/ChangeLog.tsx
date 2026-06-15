@@ -6,6 +6,24 @@ interface ChangelogEntryData {
 }
 
 const changelogData: ChangelogEntryData[] = [
+  // {
+  //   version: "0.84",
+  //   listOfChanges: [
+  //     "Quizmaster",
+  //     "new class: nurse",
+  //    "fixes and balances from playtesting",
+  //   ],
+  // },
+  {
+    version: "0.83",
+    listOfChanges: [
+      "new class: entomologist",
+      "class based starters",
+      "eggs",
+      "only pokemon from eggs will know egg moves, not learnable through tutor",
+      "fixes and balances from playtesting",
+    ],
+  },
   {
     version: "0.82",
     listOfChanges: [

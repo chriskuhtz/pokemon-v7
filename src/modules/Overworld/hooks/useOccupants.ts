@@ -84,6 +84,13 @@ export const useOccupants = () => {
                 type: "ITEM",
               };
             }
+            if (ev.type === "OVERWORLD_EGG" && ev.mapId === location.mapId) {
+              return {
+                conditionFunction: (s) => !occupantHandled(s, ev.id),
+                ...ev,
+                type: "EGG",
+              };
+            }
             if (ev.type === "STATIC_ENCOUNTER" && ev.mapId === location.mapId) {
               return makeOverworldPokemonFromStaticEncounterEvent(ev);
             }

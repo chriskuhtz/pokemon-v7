@@ -21,7 +21,10 @@ export const ReleaseButton = ({
 
   return (
     <>
-      <BottomDrawer open={confirmationActive}>
+      <BottomDrawer
+        close={() => setConfirmationActive(false)}
+        open={confirmationActive}
+      >
         <div
           style={{
             margin: "6rem 4rem",
@@ -36,13 +39,13 @@ export const ReleaseButton = ({
               color: "white",
             }}
           >
-            Release {ownedPokemon.name}?
+            Really Release {ownedPokemon.name}?
           </button>
         </div>
       </BottomDrawer>
       {saveFile.pokemon.length > 1 && !ownedPokemon.starter ? (
         <button onClick={() => setConfirmationActive(true)}>
-          Really Release {ownedPokemon.name}
+          Release {ownedPokemon.name}
         </button>
       ) : (
         <></>

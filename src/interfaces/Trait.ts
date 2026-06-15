@@ -1,3 +1,4 @@
+import { PokemonName } from "../constants/pokemonNames";
 import { typeColors } from "../constants/typeColors";
 import { hexToRgb } from "../functions/hexToRGB";
 import { PokemonType } from "../interfaces/PokemonType";
@@ -13,7 +14,7 @@ export const traits = [
   "rogue",
   "gym bro",
   "archaeologist",
-  //"entomologist" "New route: hiwairo swamp",,
+  "entomologist", //"New route: hiwairo swamp",,
   //"nurse"
 ] as const;
 export type CharacterTrait = (typeof traits)[number];
@@ -30,6 +31,7 @@ export const traitResearchBoni: Record<
   rogue: { EXPLORATION: 1.05 },
   "gym bro": { TRAINING: 1.1 },
   archaeologist: { EXPLORATION: 1.1 },
+  entomologist: { POKEDEX: 1.1 },
 };
 export const traitTypes: Record<CharacterTrait, PokemonType> = {
   chef: "water",
@@ -40,6 +42,7 @@ export const traitTypes: Record<CharacterTrait, PokemonType> = {
   rogue: "dark",
   "gym bro": "fighting",
   archaeologist: "ground",
+  entomologist: "bug",
 };
 
 export const traitColors: Record<CharacterTrait, string> = {
@@ -51,6 +54,7 @@ export const traitColors: Record<CharacterTrait, string> = {
   rogue: hexToRgb(typeColors[traitTypes.rogue], 0.5),
   "gym bro": hexToRgb(typeColors[traitTypes["gym bro"]], 0.5),
   archaeologist: hexToRgb(typeColors[traitTypes.archaeologist], 0.5),
+  entomologist: hexToRgb(typeColors[traitTypes.entomologist], 0.5),
 };
 
 export const traitBonusExplanations: Record<CharacterTrait, string[]> = {
@@ -83,9 +87,14 @@ export const traitBonusExplanations: Record<CharacterTrait, string[]> = {
     `A Gym Bro's discipline makes his ${traitTypes["gym bro"]} type pokemon slightly stronger`,
   ],
   archaeologist: [
-    "Archaeologists have a higher chance of finding pokemon or more/better items in the earth",
+    "Archaeologists have a higher chance of finding pokemon or items in the earth",
     "Their connection to the museum gets them more rewards for valuable items",
     `An Archaeologists connection to the earth makes his ${traitTypes.archaeologist} type pokemon slightly stronger`,
+  ],
+  entomologist: [
+    "Entomologists encounter pokemon with increased IVs if they have caught the species before",
+    "The more of the species they have, the stronger the specimen will be",
+    `An Entomologists multi faceted perspective makes his ${traitTypes.entomologist} type pokemon slightly stronger`,
   ],
 };
 
@@ -187,4 +196,27 @@ export const traitLoadOuts: Record<CharacterTrait, { storage: Inventory }> = {
       "escape-rope": 1,
     }),
   },
+  entomologist: {
+    storage: joinInventories(EmptyInventory, {
+      "net-ball": 10,
+      "nest-ball": 10,
+      "berry-juice": 5,
+      lure: 1,
+      "black-augurite": 1,
+      "metal-coat": 1,
+      "silver-powder": 1,
+    }),
+  },
+};
+
+export const traitStarter: Record<CharacterTrait, PokemonName> = {
+  chef: "marill",
+  gardener: "applin",
+  collector: "munchlax",
+  explorer: "rufflet",
+  competitor: "vulpix",
+  rogue: "sneasel",
+  "gym bro": "machop",
+  archaeologist: "trapinch",
+  entomologist: "yanma",
 };

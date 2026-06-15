@@ -15,7 +15,7 @@ import {
 import { MapId } from "../interfaces/mapIds";
 import { OverworldPokemon, OverworldTrainer } from "../interfaces/Occupant";
 import { SwarmType } from "../interfaces/Pokedex";
-import { PokemonType } from "../interfaces/PokemonType";
+import { PokemonType, realTypes } from "../interfaces/PokemonType";
 import { SaveFile } from "../interfaces/SaveFile";
 import { SpriteEnum } from "../interfaces/SpriteEnum";
 import {
@@ -23,6 +23,7 @@ import {
   evilTeams,
   LostItemEvent,
   LureEvent,
+  OverworldEggEvent,
   RepelEvent,
   StaticEncounterEvent,
   StaticTrainerEvent,
@@ -115,6 +116,12 @@ export const refillRandomTimedEvents = (
     update.timedEvents.filter((t) => t.type === "LOST_ITEM").length < 2
   ) {
     update.timedEvents = [...update.timedEvents, makeLostItemEvent(update)];
+  }
+  if (
+    gameData.features.overworldEggs &&
+    update.timedEvents.filter((t) => t.type === "OVERWORLD_EGG").length < 2
+  ) {
+    update.timedEvents = [...update.timedEvents, makeOverworldEggEvent(update)];
   }
   if (
     gameData.features.staticEncounters &&
@@ -264,6 +271,29 @@ export const makeLostItemEvent = (s: SaveFile): LostItemEvent => {
   };
 
   return lostItem;
+};
+//OVERWORLD EGG:
+export const makeOverworldEggEvent = (s: SaveFile): OverworldEggEvent => {
+  const route = getRandomAvailableRoute(s, []);
+
+  if (!route) {
+    console.error("could not find available route to place item");
+    throw new Error();
+  }
+  const pokemonType = ArrayHelpers.getRandomEntry(realTypes);
+  const { x, y } = getRandomPosition(mapsRecord[route]);
+  const now = new Date().getTime();
+  const eggEvent: OverworldEggEvent = {
+    type: "OVERWORLD_EGG",
+    id: `OVERWORLD_EGG_${route}${pokemonType}`,
+    mapId: route,
+    pokemonType,
+    x,
+    y,
+    removeAt: now + ONE_HOUR,
+  };
+
+  return eggEvent;
 };
 //STATIC TRAINER:
 export const trainerPresets: Record<

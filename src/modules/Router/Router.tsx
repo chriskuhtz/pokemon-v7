@@ -19,6 +19,7 @@ import { CampUpgrades } from "../CampUpgrades/CampUpgrades";
 import { CookingGrandma } from "../CookingGrandma/CookingGrandma";
 import { Curator } from "../Curator/Curator";
 import { DragoniteTaxi } from "../DragoniteTaxi/DragoniteTaxi";
+import { Eggs } from "../Eggs/Eggs";
 import { Farm } from "../Farm/Farm";
 import { FossilReviver } from "../FossilReviver/FossilReviver";
 import { InternalDex } from "../InternalDex/InternalDex";
@@ -280,6 +281,9 @@ export const Router = (): JSX.Element => {
   }
   if (activeTab === "LOOT") {
     return <Loot />;
+  }
+  if (activeTab === "EGGS") {
+    return <Eggs />;
   }
 
   return <Overworld />;
