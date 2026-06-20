@@ -23,6 +23,14 @@ export const ListItem = ({
 }) => {
   return (
     <div
+      tabIndex={onClick && !disabled ? 0 : undefined}
+      role={onClick && !disabled ? "button" : "none"}
+      onKeyDown={(e) => {
+        e.stopPropagation();
+        if (!disabled && e.key === "Enter" && onClick) {
+          onClick();
+        }
+      }}
       onClick={disabled ? undefined : onClick}
       style={{
         padding: ".25rem 0",

@@ -36,56 +36,6 @@ export const MoveDisplayEntry = ({
       infoButton={<MoveInfoButton movename={moveName} />}
     />
   );
-  return (
-    <div
-      onClick={onClick}
-      style={{
-        padding: ".25rem 0",
-        backgroundColor: hexToRgb(typeColors[typeName], 0.7),
-        borderRadius: 4,
-        borderTopLeftRadius: 16,
-        width: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "1rem",
-          paddingLeft: "0.25rem",
-        }}
-      >
-        <img height={battleSpriteSize} src={`/typeIcons/${typeName}.png`} />{" "}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-          }}
-        >
-          <strong>
-            {moveName}
-            {additionalInfo ? ":" : ""}
-          </strong>
-          {additionalInfo}
-        </div>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: ".5rem",
-          paddingRight: "0.25rem",
-        }}
-      >
-        {additionalIcons?.map((a) => a)}
-        <MoveInfoButton movename={moveName} />
-      </div>
-    </div>
-  );
 };
 
 export const PPAndStrengthSection = ({
