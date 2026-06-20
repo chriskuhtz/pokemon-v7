@@ -49,6 +49,7 @@ export interface GameData {
     staticEncounters: boolean;
     staticTrainers: boolean;
     overworldEggs: boolean;
+    quizMaster: boolean;
   };
   overworldActions: OverworldActions;
   carryingCapacity: {

@@ -6,14 +6,15 @@ interface ChangelogEntryData {
 }
 
 const changelogData: ChangelogEntryData[] = [
-  // {
-  //   version: "0.84",
-  //   listOfChanges: [
-  //     "Quizmaster",
-  //     "new class: nurse",
-  //    "fixes and balances from playtesting",
-  //   ],
-  // },
+  {
+    version: "0.84",
+    listOfChanges: [
+      "Quizmaster",
+      "new class: nurse",
+      "new moves",
+      "fixes and balances from playtesting",
+    ],
+  },
   {
     version: "0.83",
     listOfChanges: [

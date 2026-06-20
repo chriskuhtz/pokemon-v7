@@ -47,7 +47,9 @@ export const TraitSelection = (): JSX.Element => {
       saveFile.storage,
     ],
   );
-  const [traitIndex, setTraitIndex] = useState<number>(0);
+  const [traitIndex, setTraitIndex] = useState<number>(
+    ArrayHelpers.getRandomIndex([...traits].length),
+  );
   return (
     <InGamePage headline="How would you describe yourself:">
       <TraitCard

@@ -10,6 +10,7 @@ import { makeBerryTree } from "../../../functions/makeBerryTree";
 import { occupantHandled } from "../../../functions/occupantHandled";
 import { shuffle } from "../../../functions/shuffle";
 import {
+  makeOverworldNPCfromQuizMasterEvent,
   makeOverworldPokemonFromStaticEncounterEvent,
   makeOverworldTrainerfromStaticTrainerEvent,
   makeOverworldTroubleMakers,
@@ -96,6 +97,9 @@ export const useOccupants = () => {
             }
             if (ev.type === "STATIC_TRAINER" && ev.mapId === location.mapId) {
               return makeOverworldTrainerfromStaticTrainerEvent(ev);
+            }
+            if (ev.type === "QUIZ_MASTER" && ev.mapId === location.mapId) {
+              return makeOverworldNPCfromQuizMasterEvent(ev);
             }
             if (ev.type === "TROUBLEMAKERS" && ev.mapId === location.mapId) {
               return makeOverworldTroubleMakers(saveFile);

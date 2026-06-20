@@ -63,3 +63,55 @@ export const struggleMove: BattlePokemon["firstMove"] = {
 export const customMoves: Partial<Record<MoveName, MoveDto>> = {
   struggle: struggle,
 };
+
+export const fallBackMeta: MoveDto["meta"] = {
+  ailment: { name: "unknown", url: "" },
+  flinch_chance: 0,
+  drain: 0,
+  healing: 0,
+  max_hits: null,
+  max_turns: null,
+  min_hits: null,
+  min_turns: null,
+  stat_chance: 0,
+  ailment_chance: 0,
+  crit_rate: 0,
+  category: { name: "damage", url: "" },
+};
+
+export const customMetas: Partial<Record<MoveName, MoveDto["meta"]>> = {
+  "dire-claw": {
+    ailment: { name: "unknown", url: "" },
+    flinch_chance: 0,
+    drain: 0,
+    healing: 0,
+    max_hits: null,
+    max_turns: null,
+    min_hits: null,
+    min_turns: null,
+    stat_chance: 0,
+    ailment_chance: 20,
+    crit_rate: 0,
+    category: { name: "damage-ailment", url: "" },
+  },
+  "psyshield-bash": {
+    ailment: { name: "unknown", url: "" },
+    flinch_chance: 0,
+    drain: 0,
+    healing: 0,
+    max_hits: null,
+    max_turns: null,
+    min_hits: null,
+    min_turns: null,
+    stat_chance: 10,
+    ailment_chance: 0,
+    crit_rate: 0,
+    category: { name: "damage-raise", url: "" },
+  },
+};
+
+export const customStatChanges: Partial<
+  Record<MoveName, MoveDto["stat_changes"]>
+> = {
+  "psyshield-bash": [{ change: 1, stat: { name: "defense" } }],
+};
