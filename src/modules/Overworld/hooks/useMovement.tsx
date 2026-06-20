@@ -128,7 +128,7 @@ export const useMovement = (
   useEffect(() => {
     const engine = setTimeout(() => {
       //stop movement if in dialogue or transition
-      if (latestMessage) {
+      if (latestMessage && saveFile.meta.activeTab === "OVERWORLD") {
         setNextInput(undefined);
         patchSaveFileReducer({
           meta: {
