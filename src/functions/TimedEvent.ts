@@ -13,7 +13,11 @@ import {
   RepelType,
 } from "../interfaces/Item";
 import { MapId } from "../interfaces/mapIds";
-import { OverworldPokemon, OverworldTrainer } from "../interfaces/Occupant";
+import {
+  OverworldPokemon,
+  OverworldTrainer,
+  RouterNpc,
+} from "../interfaces/Occupant";
 import { SwarmType } from "../interfaces/Pokedex";
 import { PokemonType, realTypes } from "../interfaces/PokemonType";
 import { SaveFile } from "../interfaces/SaveFile";
@@ -24,6 +28,7 @@ import {
   LostItemEvent,
   LureEvent,
   OverworldEggEvent,
+  QuizMasterEvent,
   RepelEvent,
   StaticEncounterEvent,
   StaticTrainerEvent,
@@ -147,6 +152,13 @@ export const refillRandomTimedEvents = (
           .map((ev) => ev.pokemonType),
       ),
     ];
+  }
+  if (
+    gameData.features.quizMaster &&
+    saveFile.pokemon.length > 0 &&
+    update.timedEvents.filter((t) => t.type === "QUIZ_MASTER").length < 1
+  ) {
+    update.timedEvents = [...update.timedEvents, makeQuizMasterEvent(update)];
   }
 
   //console.log("refilled timed Events, result:", update.timedEvents);
@@ -716,5 +728,41 @@ export const startSwarm = (
         xpMin: xpMin(),
       },
     ]),
+  };
+};
+//QUIZ MASTER
+export const QUIZ_MASTER_ID = `quiz_master`;
+export const makeQuizMasterEvent = (s: SaveFile): QuizMasterEvent => {
+  const route = getRandomAvailableRoute(s, []);
+
+  if (!route) {
+    console.error("could not find available route to place static encounter");
+    throw new Error();
+  }
+
+  const { x, y } = getRandomPosition(mapsRecord[route]);
+  const now = new Date().getTime();
+  const staticTrainer: QuizMasterEvent = {
+    type: "QUIZ_MASTER",
+    id: QUIZ_MASTER_ID,
+    mapId: route,
+    x,
+    y,
+    removeAt: now + ONE_HOUR * 1,
+  };
+
+  return staticTrainer;
+};
+export const makeOverworldNPCfromQuizMasterEvent = (
+  staticTrainer: QuizMasterEvent,
+): RouterNpc => {
+  return {
+    ...staticTrainer,
+    sprite: SpriteEnum["director"],
+    to: "QUIZ_MASTER",
+    dialogue: ["Quizmaster has rewards...", "If you have answers"],
+    conditionFunction: (s) => !occupantHandled(s, staticTrainer.id),
+    orientation: getRandomOrientation(),
+    type: "ROUTER_NPC",
   };
 };

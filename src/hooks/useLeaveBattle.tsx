@@ -13,7 +13,11 @@ import { addPokemonToDex } from "../functions/addPokemonToDex";
 import { ArrayHelpers } from "../functions/ArrayHelpers";
 import { calculateLevelData } from "../functions/calculateLevelData";
 import { determineLoot } from "../functions/determineLoot";
-import { fullyHealPokemon } from "../functions/fullyHealPokemon";
+import {
+  fullyHealPokemon,
+  healPokemonByPercentage,
+  healPrimaryAilment,
+} from "../functions/fullyHealPokemon";
 import { getHeldItem } from "../functions/getHeldItem";
 import { getHighestXpOnTeam } from "../functions/getHighestXpOnTeam";
 import { getTeamSize } from "../functions/getTeamSize";
@@ -57,11 +61,12 @@ export const useLeaveBattle = () => {
   return useCallback(
     (payload: LeaveBattlePayload) => {
       if (payload.outcome === "LOSS") {
+        console.log("handle loss");
         handleLoss();
-      }
-      if (payload.outcome === "DRAW") {
+      } else if (payload.outcome === "DRAW") {
         handleDraw();
       } else {
+        console.log("handle win");
         handleWin(payload);
       }
     },
@@ -190,9 +195,23 @@ const useHandleWin = () => {
 
         return p;
       });
-
+      //healed team
+      const healedTeam =
+        saveFile.trait === "nurse"
+          ? pickUpCheckedTeam.map((p) => {
+              const healChance = Math.random() > 0.66;
+              const statusHealChance = Math.random() > 0.66;
+              if (healChance) {
+                return healPokemonByPercentage(p, 10);
+              }
+              if (statusHealChance) {
+                return healPrimaryAilment(p);
+              }
+              return p;
+            })
+          : pickUpCheckedTeam;
       const teamAndCaught = [
-        ...pickUpCheckedTeam,
+        ...healedTeam,
         ...caughtPokemon.map((c) => ({
           ...reduceBattlePokemonToOwnedPokemon(
             { ...c, ownerId: saveFile.playerId },

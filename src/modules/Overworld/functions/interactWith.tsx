@@ -159,7 +159,6 @@ export const interactWithFunction = ({
     interactWithBerryTree(data);
     return;
   }
-
   if (data.type === "EMPTY_APRICORN_TREE") {
     addMultipleMessages([
       { message: `Its a ${data.apricorn} tree` },
@@ -271,7 +270,6 @@ export const interactWithFunction = ({
 
     return;
   }
-
   if (data.type === "BULLETIN_BOARD") {
     addMultipleMessages(
       data.dialogue.map((d, i) => ({
@@ -335,7 +333,6 @@ export const interactWithFunction = ({
     interactWithTrainer(data);
     return;
   }
-
   if (data.type === "HONEY_TREE") {
     interactWithHoneyTree();
     return;

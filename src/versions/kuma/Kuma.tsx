@@ -90,6 +90,7 @@ export const kumaGameData: GameData = {
     staticEncounters: true,
     staticTrainers: true,
     overworldEggs: true,
+    quizMaster: true,
   },
   losingMessages: {
     training: "luckily this was only a training battle",

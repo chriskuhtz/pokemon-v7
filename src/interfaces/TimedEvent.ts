@@ -25,7 +25,8 @@ export interface BaseTimedEvent {
     | "TROUBLEMAKERS"
     | "BLOCKER"
     | "SWARM"
-    | "CHEST";
+    | "CHEST"
+    | "QUIZ_MASTER";
   removeAt: number;
   id: string;
 }
@@ -100,6 +101,13 @@ export interface SwarmEvent extends BaseTimedEvent {
   xpMax: number;
 }
 
+export interface QuizMasterEvent extends BaseTimedEvent {
+  type: "QUIZ_MASTER";
+  mapId: MapId;
+  x: number;
+  y: number;
+}
+
 export type TimedEvent =
   | LostItemEvent
   | StaticEncounterEvent
@@ -110,4 +118,5 @@ export type TimedEvent =
   | BlockerEvent
   | SwarmEvent
   | ChestEvent
-  | OverworldEggEvent;
+  | OverworldEggEvent
+  | QuizMasterEvent;

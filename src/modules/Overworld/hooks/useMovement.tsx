@@ -127,8 +127,16 @@ export const useMovement = (
 
   useEffect(() => {
     const engine = setTimeout(() => {
-      //dont do anything if in dialogue or transition
-      if (nextInput && (latestMessage || transition)) {
+      //stop movement if in dialogue or transition
+      if (latestMessage) {
+        setNextInput(undefined);
+        patchSaveFileReducer({
+          meta: {
+            ...saveFile.meta,
+            currentChallenger: undefined,
+          },
+        });
+      } else if (transition) {
         setNextInput(undefined);
       }
       //reset player feet if there is no more input
@@ -141,7 +149,6 @@ export const useMovement = (
           forwardFoot: getNextForwardFoot(location.forwardFoot),
         });
       }
-
       //handle portals
       else if (steptOnPortal && !transition) {
         activateTransition({

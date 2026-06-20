@@ -125,6 +125,7 @@ export const handleAllAttackCategories = ({
           setTerrain,
           setWeather: setBattleWeather,
           playerId,
+          addBattleFieldEffect,
         });
       case "heal":
         return handleHealAttack({

@@ -48,6 +48,7 @@ export const handleDamageAttack = ({
   setTerrain,
   setWeather,
   playerId,
+  addBattleFieldEffect,
 }: {
   attacker: BattlePokemon;
   target: BattlePokemon;
@@ -66,6 +67,7 @@ export const handleDamageAttack = ({
   setTerrain: (x: TerrainObject) => void;
   setWeather: (x: WeatherObject) => void;
   playerId: string;
+  addBattleFieldEffect: (x: BattleFieldEffect) => void;
 }): BattlePokemon[] => {
   let updatedAttacker = { ...attacker };
   let updatedTarget = { ...target };
@@ -140,7 +142,7 @@ export const handleDamageAttack = ({
       return p;
     });
   }
-  //fake out
+  //belch
   if (move.name === "belch" && !updatedAttacker.consumedBerry) {
     addMessage({ message: "It failed" });
     return pokemon.map((p) => {
@@ -218,8 +220,7 @@ export const handleDamageAttack = ({
       ],
     };
   }
-  //smack down
-
+  //sucker-punch
   const targetMove = updatedTarget.moveQueue.at(0);
   if (
     move.name === "sucker-punch" &&
@@ -237,6 +238,14 @@ export const handleDamageAttack = ({
         return updatedTarget;
       }
       return p;
+    });
+  }
+  //stone axe
+  if (move.name === "stone-axe") {
+    addBattleFieldEffect({
+      type: move.name as BattleFieldEffect["type"],
+      ownerId: target.ownerId,
+      duration: 9000,
     });
   }
 

@@ -11,6 +11,7 @@ const changelogData: ChangelogEntryData[] = [
     listOfChanges: [
       "Quizmaster",
       "new class: nurse",
+      "new moves",
       "fixes and balances from playtesting",
     ],
   },

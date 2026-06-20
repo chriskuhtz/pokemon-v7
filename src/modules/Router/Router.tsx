@@ -39,6 +39,7 @@ import { OverworldChest } from "../OverworldChest/OverworldChest";
 import { Pokedex } from "../Pokedex/Pokedex";
 import { PokemonStorage } from "../PokemonStorage/PokemonStorage";
 import { Quests } from "../Quests/Quests";
+import { QuizMaster } from "../QuizMaster/QuizMaster";
 import { SeedVault } from "../SeedVault/SeedVault";
 import { Settings } from "../Settings/Settings";
 import { SpriteSelection } from "../SpriteSelection/SpriteSelection";
@@ -284,6 +285,9 @@ export const Router = (): JSX.Element => {
   }
   if (activeTab === "EGGS") {
     return <Eggs />;
+  }
+  if (activeTab === "QUIZ_MASTER") {
+    return <QuizMaster />;
   }
 
   return <Overworld />;
