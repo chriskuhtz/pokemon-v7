@@ -46,7 +46,6 @@ import {
   getAllEncountersFor,
   getRampagers,
   getRandomSwarmMon,
-  getStaticEncountersForRoute,
 } from "./internalDex";
 import { makeRandomTeam } from "./makeRandomTeam";
 import { occupantHandled } from "./occupantHandled";
@@ -191,7 +190,6 @@ export const makeStaticEncounterEvent = (
           { area: "LAND", rarity: "rare" },
           internalDex,
         ).map((p) => p.name),
-        ...getStaticEncountersForRoute(route, internalDex),
       ].filter((p) => baseInternalDex[p].dexId <= 807);
   const pokemon = ArrayHelpers.getRandomEntry(options);
   const { x, y } = getRandomPosition(mapsRecord[route]);

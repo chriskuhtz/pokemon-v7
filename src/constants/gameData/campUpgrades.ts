@@ -67,6 +67,7 @@ export const campUpgradeNames = [
   "invite ability tutor",
   "pidgeot rider certification",
   "battle journalist",
+  "tm crafter",
 ] as const;
 
 export type CampUpgrade = (typeof campUpgradeNames)[number];
@@ -147,6 +148,7 @@ export const campUpgradeCategories: Record<CampUpgrade, CampUpgradeCategory> = {
   "berry lure station routeS1E1": "Quest Reward",
   "berry lure station routeS1W1": "Quest Reward",
   "berry lure station routeW1": "Quest Reward",
+  "tm crafter": "Training",
 };
 
 export const baseRequirements: CampUpgrade[] = [
@@ -193,9 +195,9 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
   "fifth slot for farm": ["fourth slot for farm"],
   "sixth slot for farm": ["fifth slot for farm"],
   "seventh slot for farm": ["sixth slot for farm"],
-  "tree farm": ["berry_farm"],
+  "tree farm": baseRequirements,
   "invite zigzagoon foragers": baseRequirements,
-  "invite dugtrio explorers": ["build combee hive"],
+  "invite dugtrio explorers": baseRequirements,
   "invite amoongus compost researcher": baseRequirements,
   "invite vileplume scent researcher": baseRequirements,
   "invite fossil expert": ["sledge hammer certification"],
@@ -205,7 +207,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
   "flashlight certification": ["shovel certification"],
   "rock climbing certification": ["swimming certification"],
   "buy skiing equipment": ["rock climbing certification"],
-  "invite museum curator": ["invite dugtrio explorers"],
+  "invite museum curator": baseRequirements,
   "invite historian": ["buy skiing equipment"],
   "bag size upgrade 1": baseRequirements,
   "bag size upgrade 2": ["bag size upgrade 1"],
@@ -215,6 +217,7 @@ export const campUpgradeConditions: Record<CampUpgrade, CampUpgrade[]> = {
   "team slot 5": ["team slot 4"],
   "team slot 6": ["team slot 5"],
   "battle journalist": baseRequirements,
+  "tm crafter": baseRequirements,
 
   //"Quest rewards"
   "swimming certification": [],
@@ -313,6 +316,7 @@ export const campUpgradeExplanations: Record<CampUpgrade, string> = {
     "Wardens are strong rangers that take on more difficult tasks",
   "battle journalist":
     "He knows everything about the strong trainers in the region",
+  "tm crafter": "Can help you build TMs that teach your pokemon moves",
 };
 
 export const campUpgradeCostScale = 25;

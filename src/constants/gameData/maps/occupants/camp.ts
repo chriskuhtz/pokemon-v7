@@ -594,4 +594,15 @@ export const campOccupants: OverworldMap["occupants"] = [
     amount: 2,
     conditionFunction: (s) => !occupantHandled(s, "camp_pot_item_2"),
   },
+  {
+    type: "ROUTER_NPC",
+    to: "TM_CRAFTING",
+    dialogue: ["Technology is incredible"],
+    x: 29,
+    y: 23,
+    orientation: "RIGHT",
+    id: "camp_tm_crafter",
+    sprite: SpriteEnum["scientistFemale"],
+    conditionFunction: (s) => s.campUpgrades["tm crafter"],
+  },
 ];

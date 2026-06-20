@@ -50,5 +50,6 @@ export const routes = [
   "LOOT",
   "EGGS",
   "QUIZ_MASTER",
+  "TM_CRAFTING",
 ] as const;
 export type RoutesType = (typeof routes)[number];

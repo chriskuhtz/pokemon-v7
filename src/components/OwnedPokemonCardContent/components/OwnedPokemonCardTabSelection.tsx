@@ -13,6 +13,7 @@ const tabTypes = [
   "NEW MOVES",
   "HELD ITEM",
   "APPLY ITEM",
+  "TEACH TM",
 ] as const;
 export type TabType = (typeof tabTypes)[number];
 

@@ -219,7 +219,6 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
     dexId: 20,
     types: ["normal"],
     encounterOptions: [],
-    staticEncounter: "routeN1",
     evs: {
       speed: 2,
     },
@@ -624,7 +623,6 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
     dexId: 48,
     types: ["bug", "poison"],
     encounterOptions: [],
-    staticEncounter: "routeN1E1",
     evs: {
       "special-defense": 1,
     },
@@ -727,7 +725,6 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
     types: ["fighting"],
     honey: true,
     encounterOptions: [],
-    staticEncounter: "routeE1",
     evs: {
       attack: 1,
     },
@@ -737,7 +734,6 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
     rampager: true,
     types: ["fighting"],
     encounterOptions: [],
-    staticEncounter: "routeE1",
     evs: {
       attack: 2,
     },
@@ -1078,7 +1074,6 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
     dexId: 84,
     types: ["normal", "flying"],
     encounterOptions: [],
-    staticEncounter: "routeN1",
     evs: {
       attack: 1,
     },
@@ -1221,7 +1216,6 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
     dexId: 96,
     types: ["psychic"],
     encounterOptions: [],
-    staticEncounter: "routeS1E1",
     evs: {
       "special-defense": 1,
     },
@@ -1450,7 +1444,6 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
     dexId: 112,
     types: ["ground", "rock"],
     encounterOptions: [],
-    staticEncounter: "routeS1W1",
     evs: {
       attack: 2,
     },
@@ -1467,7 +1460,6 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
     dexId: 114,
     types: ["grass"],
     encounterOptions: [],
-    staticEncounter: "routeS1E1",
     evs: {
       defense: 1,
     },
@@ -1647,7 +1639,6 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
     rampager: true,
     types: ["bug"],
     encounterOptions: [],
-    staticEncounter: "apricornClearing",
     evs: {
       attack: 2,
     },
@@ -2053,7 +2044,6 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
     dexId: 164,
     types: ["normal", "flying"],
     encounterOptions: [],
-    staticEncounter: "apricornClearing",
     evs: {
       hp: 2,
     },
@@ -2257,7 +2247,6 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
         area: "LAND",
       },
     ],
-    staticEncounter: "routeW1",
     evs: {
       "special-attack": 1,
     },
@@ -3624,7 +3613,6 @@ export const kumaDex: Record<PokemonName, InternalDexEntry> = {
     swarm: "STRONG",
     types: ["fighting"],
     encounterOptions: [],
-    staticEncounter: "routeN1W1",
     evs: {
       hp: 2,
     },

@@ -119,7 +119,7 @@ export function TargetSelection({
         }
       >
         {!["ether", "max-ether"].includes(chosenAction) && (
-          <Stack mode="column">
+          <Stack mode={portraitMode ? "column" : "row"}>
             {targets
               .filter((t) => !isPlayerPokemon(t, playerId))
               .map((t) => {

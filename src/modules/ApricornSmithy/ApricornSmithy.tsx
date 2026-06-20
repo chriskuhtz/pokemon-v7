@@ -52,7 +52,14 @@ export const ApricornSmithy = ({ goBack }: { goBack: () => void }) => {
               }
               actionElements={[
                 <strong
+                  role="button"
+                  tabIndex={0}
                   onClick={() => craftBall(apricorn, 1)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      craftBall(apricorn, 1);
+                    }
+                  }}
                   style={{ display: "flex", alignItems: "center" }}
                 >
                   make 1{" "}
@@ -60,7 +67,14 @@ export const ApricornSmithy = ({ goBack }: { goBack: () => void }) => {
                 </strong>,
                 amount > 1 ? (
                   <strong
+                    role="button"
+                    tabIndex={0}
                     onClick={() => craftBall(apricorn, amount)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        craftBall(apricorn, amount);
+                      }
+                    }}
                     style={{ display: "flex", alignItems: "center" }}
                   >
                     make {amount}{" "}

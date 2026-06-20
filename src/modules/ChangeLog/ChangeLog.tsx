@@ -7,6 +7,15 @@ interface ChangelogEntryData {
 
 const changelogData: ChangelogEntryData[] = [
   {
+    version: "0.85",
+    listOfChanges: [
+      "tm crafting",
+      "newn class: tinkerer",
+      "new moves",
+      "fixes and balances from playtesting",
+    ],
+  },
+  {
     version: "0.84",
     listOfChanges: [
       "Quizmaster",

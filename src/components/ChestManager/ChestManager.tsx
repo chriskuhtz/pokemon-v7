@@ -145,10 +145,28 @@ export const ChestManager = ({
                     onClick={() => putItemInStorage(item as ItemType)}
                     item={item as ItemType}
                   />
-                  <div onClick={() => putItemInStorage(item as ItemType)}>
+                  <div
+                    tabIndex={0}
+                    role="button"
+                    onKeyDown={(e) => {
+                      e.stopPropagation();
+                      if (e.key === "Enter") {
+                        putItemInStorage(item as ItemType);
+                      }
+                    }}
+                    onClick={() => putItemInStorage(item as ItemType)}
+                  >
                     ({threeDigitString(amount)})
                   </div>
                   <FaAnglesRight
+                    tabIndex={0}
+                    role="button"
+                    onKeyDown={(e) => {
+                      e.stopPropagation();
+                      if (e.key === "Enter") {
+                        putItemInStorage(item as ItemType, true);
+                      }
+                    }}
                     onClick={() => putItemInStorage(item as ItemType, true)}
                   />
                 </div>

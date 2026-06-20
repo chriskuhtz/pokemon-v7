@@ -47,6 +47,7 @@ import { StarterSelection } from "../StarterSelection/StarterSelection";
 import { StartingRegionSelection } from "../StartingRegionSelection/StartingRegionSelection";
 import { SwarmRadar } from "../SwarmRadar/SwarmRadar";
 import { Team } from "../Team/Team";
+import { TmCrafting } from "../TmCrafting/TmCrafting";
 import { TrainerNotes } from "../TrainerNotes/TrainerNotes";
 import { TrainingField } from "../TrainingField/TrainingField";
 import { TraitSelection } from "../TraitSelection/TraitSelection";
@@ -288,6 +289,9 @@ export const Router = (): JSX.Element => {
   }
   if (activeTab === "QUIZ_MASTER") {
     return <QuizMaster />;
+  }
+  if (activeTab === "TM_CRAFTING") {
+    return <TmCrafting />;
   }
 
   return <Overworld />;

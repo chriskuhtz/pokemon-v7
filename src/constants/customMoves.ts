@@ -108,10 +108,25 @@ export const customMetas: Partial<Record<MoveName, MoveDto["meta"]>> = {
     crit_rate: 0,
     category: { name: "damage-raise", url: "" },
   },
+  "wave-crash": {
+    ailment: { name: "unknown", url: "" },
+    flinch_chance: 0,
+    drain: 0,
+    healing: -33,
+    max_hits: null,
+    max_turns: null,
+    min_hits: null,
+    min_turns: null,
+    stat_chance: 10,
+    ailment_chance: 0,
+    crit_rate: 0,
+    category: { name: "damage-raise", url: "" },
+  },
 };
 
 export const customStatChanges: Partial<
   Record<MoveName, MoveDto["stat_changes"]>
 > = {
   "psyshield-bash": [{ change: 1, stat: { name: "defense" } }],
+  "wave-crash": [{ change: 1, stat: { name: "speed" } }],
 };

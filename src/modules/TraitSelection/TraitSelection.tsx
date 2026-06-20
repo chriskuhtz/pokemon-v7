@@ -85,13 +85,29 @@ const TraitCard = ({
           <div style={{ width: "100%" }}>
             <Stack mode="row" justifyContent="space-between">
               <FaArrowLeft
+                role="button"
+                tabIndex={0}
                 size={battleSpriteSize}
                 onClick={() => setTraitIndex((t) => t - 1)}
+                onKeyDown={(e) => {
+                  e.stopPropagation();
+                  if (e.key === "Enter") {
+                    setTraitIndex((t) => t - 1);
+                  }
+                }}
               />
               <h3>{trait}:</h3>
               <FaArrowRight
                 size={battleSpriteSize}
                 onClick={() => setTraitIndex((t) => t + 1)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  e.stopPropagation();
+                  if (e.key === "Enter") {
+                    setTraitIndex((t) => t - 1);
+                  }
+                }}
               />
             </Stack>
           </div>

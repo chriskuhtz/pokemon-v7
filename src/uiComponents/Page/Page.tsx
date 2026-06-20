@@ -34,7 +34,17 @@ export const Page = ({
   }, [goBack]);
 
   return (
-    <div className="pageWrapper">
+    <div
+      className="pageWrapper"
+      onKeyDown={(e) => {
+        const target = e.target as HTMLElement | null;
+        const isInputField = target && target.matches("input, textarea");
+
+        if (goBack && e.key === "Backspace" && !isInputField) {
+          goBack();
+        }
+      }}
+    >
       <div
         className="page"
         style={{

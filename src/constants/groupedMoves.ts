@@ -369,7 +369,12 @@ export const isContactMove = (move: MoveName, pokemon: BattlePokemon) => {
   return contactMoves.includes(move);
 };
 
-export const thrashingMoves = ["thrash", "petal-dance", "outrage"];
+export const thrashingMoves = [
+  "thrash",
+  "petal-dance",
+  "outrage",
+  "raging-fury",
+];
 
 export const crashDamageMoves = [
   "jump-kick",

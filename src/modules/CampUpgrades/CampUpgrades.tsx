@@ -225,6 +225,14 @@ const CampUpgradeIcon = ({
       <MdFormatListBulleted
         size={battleSpriteSize}
         onClick={onClick}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          e.stopPropagation();
+          if (e.key === "Enter" && onClick) {
+            onClick();
+          }
+        }}
         color={highlighted ? typeColors["grass"] : undefined}
       />
     );
@@ -234,6 +242,13 @@ const CampUpgradeIcon = ({
       <FaFistRaised
         size={battleSpriteSize}
         onClick={onClick}
+        tabIndex={0}
+        onKeyDown={(e) => {
+          e.stopPropagation();
+          if (e.key === "Enter" && onClick) {
+            onClick();
+          }
+        }}
         color={highlighted ? typeColors["grass"] : undefined}
       />
     );
@@ -243,6 +258,13 @@ const CampUpgradeIcon = ({
       <HiBeaker
         size={battleSpriteSize}
         onClick={onClick}
+        tabIndex={0}
+        onKeyDown={(e) => {
+          e.stopPropagation();
+          if (e.key === "Enter" && onClick) {
+            onClick();
+          }
+        }}
         color={highlighted ? typeColors["grass"] : undefined}
       />
     );
@@ -252,6 +274,13 @@ const CampUpgradeIcon = ({
       <GiMountainRoad
         size={battleSpriteSize}
         onClick={onClick}
+        tabIndex={0}
+        onKeyDown={(e) => {
+          e.stopPropagation();
+          if (e.key === "Enter" && onClick) {
+            onClick();
+          }
+        }}
         color={highlighted ? typeColors["grass"] : undefined}
       />
     );
@@ -260,6 +289,13 @@ const CampUpgradeIcon = ({
     <PiFarm
       size={battleSpriteSize}
       onClick={onClick}
+      tabIndex={0}
+      onKeyDown={(e) => {
+        e.stopPropagation();
+        if (e.key === "Enter" && onClick) {
+          onClick();
+        }
+      }}
       color={highlighted ? typeColors["grass"] : undefined}
     />
   );
