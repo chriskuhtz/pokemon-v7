@@ -61,16 +61,6 @@ export const getAllBerryLureMonForRoute = (
 
   return options;
 };
-export const getStaticEncountersForRoute = (
-  map: MapId,
-  internalDex: InternalDex,
-): PokemonName[] => {
-  const options: PokemonName[] = Object.entries(internalDex)
-    .filter(([, value]) => value.staticEncounter === map)
-    .map(([key]) => key as PokemonName);
-
-  return options;
-};
 
 export const getBerryLureMon = (
   map: MapId,
@@ -181,7 +171,6 @@ export const isNotCatchable = (entry: InternalDexEntry) => {
       !!entry.rampager,
       !!entry.swarm,
       !!entry.underRock,
-      !!entry.staticEncounter,
       !!(entry.encounterOptions.length > 0),
     ].filter((v) => v).length === 0
   );

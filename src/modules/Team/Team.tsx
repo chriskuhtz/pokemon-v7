@@ -138,7 +138,7 @@ const TeamIcons = ({
   setFocusedId: (x: string) => void;
 }) => {
   return (
-    <>
+    <div style={{ margin: "0 1rem" }}>
       <Stack mode="row" justifyContent="space-between">
         {team.map((pokemon) => (
           <TeamMemberIcon
@@ -150,7 +150,7 @@ const TeamIcons = ({
           />
         ))}
       </Stack>
-    </>
+    </div>
   );
 };
 const Reordering = ({
@@ -162,6 +162,9 @@ const Reordering = ({
   currentSlot: number;
   reorder: (from: number, to: number) => void;
 }) => {
+  if (team.length === 1) {
+    return <></>;
+  }
   return (
     <Stack mode="row" alignItems="center" justifyContent="space-between">
       <FaArrowLeft
@@ -171,6 +174,17 @@ const Reordering = ({
             return;
           }
           reorder(currentSlot, currentSlot - 1);
+        }}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          e.stopPropagation();
+          if (e.key === "Enter") {
+            if (currentSlot === 0) {
+              return;
+            }
+            reorder(currentSlot, currentSlot - 1);
+          }
         }}
       />
       <strong>Change Team Position</strong>
@@ -182,6 +196,17 @@ const Reordering = ({
             return;
           }
           reorder(currentSlot, currentSlot + 1);
+        }}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          e.stopPropagation();
+          if (e.key === "Enter") {
+            if (currentSlot === team.length - 1) {
+              return;
+            }
+            reorder(currentSlot, currentSlot + 1);
+          }
         }}
       />
     </Stack>

@@ -23,6 +23,7 @@ import {
   OwnedPokemonCardTabSelection,
   TabType,
 } from "./components/OwnedPokemonCardTabSelection";
+import { TeachTmSection } from "./components/TeachTmSection";
 
 export const OwnedPokemonCardContent = ({
   data,
@@ -97,6 +98,9 @@ export const OwnedPokemonCardContent = ({
         {tab === "NEW MOVES" && <MoveEditor ownedPokemon={ownedPokemon} />}
         {tab === "APPLY ITEM" && (
           <ApplyItemSection data={data} ownedPokemon={ownedPokemon} />
+        )}
+        {tab === "TEACH TM" && (
+          <TeachTmSection data={data} ownedPokemon={ownedPokemon} />
         )}
       </Stack>
     );

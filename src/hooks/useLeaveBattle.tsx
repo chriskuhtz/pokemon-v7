@@ -61,12 +61,10 @@ export const useLeaveBattle = () => {
   return useCallback(
     (payload: LeaveBattlePayload) => {
       if (payload.outcome === "LOSS") {
-        console.log("handle loss");
         handleLoss();
       } else if (payload.outcome === "DRAW") {
-        handleDraw();
+        handleDraw(payload);
       } else {
-        console.log("handle win");
         handleWin(payload);
       }
     },
@@ -132,13 +130,87 @@ const useHandleLoss = () => {
 };
 
 const useHandleDraw = () => {
-  const { patchSaveFileReducer } = useContext(SaveFileContext);
+  const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
+  const { location } = useContext(LocationContext);
 
-  return useCallback(() => {
-    patchSaveFileReducer({
-      meta: { activeTab: "OVERWORLD", currentChallenger: undefined },
-    });
-  }, [patchSaveFileReducer]);
+  const team = useMemo(
+    () => saveFile.pokemon.filter((p) => p.onTeam),
+    [saveFile],
+  );
+  return useCallback(
+    (payload: LeaveBattlePayload) => {
+      const { team: updatedTeam, updatedInventory } = payload;
+
+      const configCheckedTeam = updatedTeam.filter((p) => {
+        //pokemon that faint on training field are not released
+        if (
+          saveFile.settings?.releaseFaintedPokemon &&
+          isKO(p) &&
+          location.mapId !== "camp"
+        ) {
+          return false;
+        }
+
+        return true;
+      });
+
+      const ownedTeam = configCheckedTeam.map((p) =>
+        reduceBattlePokemonToOwnedPokemon(p),
+      );
+      //check pickup
+      const pickUpCheckedTeam: OwnedPokemon[] = ownedTeam.map((p) => {
+        if (p.ability === "pickup" && !getHeldItem(p) && Math.random() < 0.1) {
+          return {
+            ...p,
+            heldItemName: ArrayHelpers.getRandomEntry(pickupTable),
+          };
+        }
+        if (p.ability === "honey-gather" && !getHeldItem(p)) {
+          const lvl = calculateLevelData(p.xp, p.growthRate).level;
+          const chance = 0.05 + lvl * 0.0045;
+          if (Math.random() < chance) {
+            return { ...p, heldItemName: "honey" };
+          }
+        }
+
+        return p;
+      });
+      //healed team
+      const healedTeam =
+        saveFile.trait === "nurse"
+          ? pickUpCheckedTeam.map((p) => {
+              const healChance = Math.random() > 0.66;
+              const statusHealChance = Math.random() > 0.66;
+              if (healChance) {
+                return healPokemonByPercentage(p, 10);
+              }
+              if (statusHealChance) {
+                return healPrimaryAilment(p);
+              }
+              return p;
+            })
+          : pickUpCheckedTeam;
+
+      const updatedPokemon = [
+        ...healedTeam,
+        ...saveFile.pokemon.filter((p) => !team.some((t) => t.id === p.id)),
+      ];
+
+      patchSaveFileReducer({
+        meta: { activeTab: "OVERWORLD", currentChallenger: undefined },
+        bag: updatedInventory,
+        pokemon: updatedPokemon,
+      });
+    },
+    [
+      location.mapId,
+      patchSaveFileReducer,
+      saveFile.pokemon,
+      saveFile.settings?.releaseFaintedPokemon,
+      saveFile.trait,
+      team,
+    ],
+  );
 };
 
 const useHandleWin = () => {

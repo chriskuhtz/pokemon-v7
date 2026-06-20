@@ -58,6 +58,8 @@ export const PokemonSprite = ({
 }: PokemonSpriteProps) => {
   return (
     <img
+      tabIndex={onClick ? 0 : undefined}
+      role={onClick ? "button" : undefined}
       className={className}
       onClick={onClick}
       onKeyDown={(e) => {

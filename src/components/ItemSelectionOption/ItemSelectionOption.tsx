@@ -11,6 +11,7 @@ export const ItemSelectionOption = ({
   additionalContent,
   additionalIcons,
   hint,
+  disabled,
 }: {
   item: ItemType;
   label?: string;
@@ -19,9 +20,11 @@ export const ItemSelectionOption = ({
   additionalContent?: React.JSX.Element;
   additionalIcons?: React.JSX.Element[];
   hint?: string;
+  disabled?: boolean;
 }) => {
   return (
     <ListItem
+      disabled={disabled}
       onClick={onClick}
       content={label ?? item}
       additionalContent={additionalContent}

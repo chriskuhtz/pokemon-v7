@@ -500,6 +500,10 @@ export const kumaQuestNames = [
   "hatch a pokemon egg",
   "hatch a pokemon egg of every type",
   "find a pokemon egg of every type",
+  "craft a TM",
+  "craft a TM of every type",
+  "teach a TM to a pokemon",
+  "teach a TM of every type to a pokemon",
 ] as const;
 
 export type KumaQuestName = (typeof kumaQuestNames)[number];
@@ -2173,6 +2177,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch all pokemon from ilex forest": {
     category: "EXPLORATION",
     kind: "BULLETIN",
+    requiredUpgrade: "ranger certification",
     availableAfter: "defeat team galactic in ilex forest",
     targetRoute: "ilex-forest",
     researchPoints: 50,
@@ -2192,6 +2197,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch all pokemon from murasaki glades": {
     category: "EXPLORATION",
     kind: "BULLETIN",
+    requiredUpgrade: "ranger certification",
     availableAfter: "investigate murasaki glades",
     targetRoute: "murasaki-glades",
     researchPoints: 50,
@@ -3451,6 +3457,52 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       ),
     researchPoints: 200,
     availableAfter: "find a pokemon egg",
+    rewardItems: expCandyPackage,
+  },
+  "craft a TM": {
+    category: "RESEARCH",
+    kind: "BULLETIN",
+    conditionFunction: (s: SaveFile) =>
+      s.mileStones.craftedTmTypes && s.mileStones.craftedTmTypes?.length > 0,
+    researchPoints: 25,
+    requiredUpgrade: "tm crafter",
+    rewardItems: smallExpCandyPackage,
+  },
+  "craft a TM of every type": {
+    category: "RESEARCH",
+    kind: "BULLETIN",
+    conditionFunction: (s: SaveFile) =>
+      realTypes.every(
+        (type) =>
+          s.mileStones.craftedTmTypes &&
+          s.mileStones.craftedTmTypes.includes(type),
+      ),
+    researchPoints: 200,
+    requiredUpgrade: "tm crafter",
+    rewardItems: expCandyPackage,
+  },
+  "teach a TM to a pokemon": {
+    category: "RESEARCH",
+    kind: "BULLETIN",
+    conditionFunction: (s: SaveFile) =>
+      s.mileStones.taughtTmTypes && s.mileStones.taughtTmTypes?.length > 0,
+    researchPoints: 25,
+    requiredUpgrade: "tm crafter",
+    availableAfter: "craft a TM",
+    rewardItems: smallExpCandyPackage,
+  },
+  "teach a TM of every type to a pokemon": {
+    category: "RESEARCH",
+    kind: "BULLETIN",
+    conditionFunction: (s: SaveFile) =>
+      realTypes.every(
+        (type) =>
+          s.mileStones.taughtTmTypes &&
+          s.mileStones.taughtTmTypes.includes(type),
+      ),
+    researchPoints: 200,
+    requiredUpgrade: "tm crafter",
+    availableAfter: "teach a TM to a pokemon",
     rewardItems: expCandyPackage,
   },
 } as Record<KumaQuestName, Quest>;

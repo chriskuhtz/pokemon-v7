@@ -29,6 +29,18 @@ export const SelectionBar = ({
               }
               select(o.key);
             }}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              e.stopPropagation();
+              if (e.key === "Enter") {
+                if (allowUndefined && o.key === selected) {
+                  select(undefined);
+                  return;
+                }
+                select(o.key);
+              }
+            }}
           >
             {o.label}
           </strong>

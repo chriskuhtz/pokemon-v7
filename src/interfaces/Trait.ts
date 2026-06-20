@@ -16,6 +16,7 @@ export const traits = [
   "archaeologist",
   "entomologist", //"New route: hiwairo swamp",,
   "nurse",
+  "tinkerer",
 ] as const;
 export type CharacterTrait = (typeof traits)[number];
 
@@ -33,6 +34,7 @@ export const traitResearchBoni: Record<
   "gym bro": { TRAINING: 1.1 },
   archaeologist: { EXPLORATION: 1.05 },
   entomologist: { POKEDEX: 1.1 },
+  tinkerer: { RESEARCH: 1.1 },
 };
 export const traitTypes: Record<CharacterTrait, PokemonType> = {
   chef: "water",
@@ -45,6 +47,7 @@ export const traitTypes: Record<CharacterTrait, PokemonType> = {
   archaeologist: "ground",
   entomologist: "bug",
   nurse: "fairy",
+  tinkerer: "electric",
 };
 
 export const traitColors: Record<CharacterTrait, string> = {
@@ -58,6 +61,7 @@ export const traitColors: Record<CharacterTrait, string> = {
   archaeologist: hexToRgb(typeColors[traitTypes.archaeologist], 0.5),
   entomologist: hexToRgb(typeColors[traitTypes.entomologist], 0.5),
   nurse: hexToRgb(typeColors[traitTypes.nurse], 0.5),
+  tinkerer: hexToRgb(typeColors[traitTypes.tinkerer], 0.5),
 };
 
 export const traitBonusExplanations: Record<CharacterTrait, string[]> = {
@@ -102,6 +106,10 @@ export const traitBonusExplanations: Record<CharacterTrait, string[]> = {
   nurse: [
     "Nurses have a chance to heal their Pokemon after winning a battle",
     `A nurses caring energy makes their ${traitTypes.nurse} type pokemon slightly stronger`,
+  ],
+  tinkerer: [
+    "Tinkerers can craft Tms out of fewer parts and with higher success rate",
+    `A tinkerers curiosity makes their ${traitTypes.tinkerer} type pokemon slightly stronger`,
   ],
 };
 
@@ -225,6 +233,19 @@ export const traitLoadOuts: Record<CharacterTrait, { storage: Inventory }> = {
       "big-root": 1,
     }),
   },
+  tinkerer: {
+    storage: joinInventories(EmptyInventory, {
+      "poke-ball": 20,
+      "berry-juice": 5,
+      magnet: 1,
+      "electric-gem": 1,
+      "steel-gem": 1,
+      "rock-gem": 1,
+      iron: 1,
+      calcium: 1,
+      zinc: 1,
+    }),
+  },
 };
 
 export const traitStarter: Record<CharacterTrait, PokemonName> = {
@@ -238,4 +259,5 @@ export const traitStarter: Record<CharacterTrait, PokemonName> = {
   archaeologist: "trapinch",
   entomologist: "yanma",
   nurse: "ralts",
+  tinkerer: "elekid",
 };

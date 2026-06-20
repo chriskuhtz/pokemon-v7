@@ -1,6 +1,6 @@
 import { useCallback, useContext, useMemo } from "react";
 import { InGamePage } from "../../components/InGamePage/InGamePage";
-import { ItemInfoButton } from "../../components/ItemInfoButton/ItemInfoButton";
+import { ItemSelectionOption } from "../../components/ItemSelectionOption/ItemSelectionOption";
 import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
 import { useNavigate } from "../../hooks/useNavigate";
@@ -9,7 +9,6 @@ import { joinInventories } from "../../interfaces/Inventory";
 import { ItemType, berries, heldItems } from "../../interfaces/Item";
 import { Occupant } from "../../interfaces/Occupant";
 import { SpriteEnum } from "../../interfaces/SpriteEnum";
-import { Card } from "../../uiComponents/Card/Card";
 import { Stack } from "../../uiComponents/Stack/Stack";
 
 export const useTravellingMerchant = () => {
@@ -60,29 +59,18 @@ export const TravellingMerchant = (): JSX.Element => {
       <Stack mode="column">
         {availableTrades.map(({ give, receive, disabled, amount }) => {
           return (
-            <div
-              key={give + receive}
-              style={{
-                display: "flex",
-                gap: ".5rem",
-                alignItems: "center",
-              }}
-            >
-              <div style={{ flexGrow: 1 }}>
-                <Card
-                  disabled={disabled}
-                  onClick={() => trade(give, receive)}
-                  icon={<ItemSprite item={give} />}
-                  content={
-                    <h3>
-                      Trade 5 {give}({amount} in Bag) for {receive}
-                    </h3>
-                  }
-                  actionElements={[<ItemSprite item={receive} />]}
-                />
-              </div>
-              <ItemInfoButton itemName={receive} />
-            </div>
+            <ItemSelectionOption
+              disabled={disabled}
+              additionalContent={
+                <>
+                  Trade for 5 {give}({amount} in Bag)
+                </>
+              }
+              onClick={() => trade(give, receive)}
+              item={receive}
+              additionalIcons={[<ItemSprite item={give} />]}
+              isSelected={false}
+            />
           );
         })}
       </Stack>

@@ -3111,10 +3111,20 @@ export const movesCheckList: {
     url: "https://pokeapi.co/api/v2/move/831/",
     handled: true,
   },
-  { name: "mystical-power", url: "https://pokeapi.co/api/v2/move/832/" },
-  { name: "raging-fury", url: "https://pokeapi.co/api/v2/move/833/" },
-  { name: "wave-crash", url: "https://pokeapi.co/api/v2/move/834/" },
+
+  {
+    name: "raging-fury",
+    url: "https://pokeapi.co/api/v2/move/833/",
+    handled: true,
+  },
+
+  {
+    name: "wave-crash",
+    url: "https://pokeapi.co/api/v2/move/834/",
+    handled: true,
+  },
   { name: "chloroblast", url: "https://pokeapi.co/api/v2/move/835/" },
+  { name: "mystical-power", url: "https://pokeapi.co/api/v2/move/832/" },
   { name: "mountain-gale", url: "https://pokeapi.co/api/v2/move/836/" },
   { name: "victory-dance", url: "https://pokeapi.co/api/v2/move/837/" },
   { name: "headlong-rush", url: "https://pokeapi.co/api/v2/move/838/" },
@@ -3346,6 +3356,7 @@ export const movesCheckList: {
 ];
 
 export const handledMoves = [
+  "raging-fury",
   "stone-axe",
   "psyshield-bash",
   "dire-claw",
@@ -3974,6 +3985,7 @@ export const handledMoves = [
   "switcheroo",
   "stealth-rock",
   "springtide-storm",
+  "wave-crash",
 ] as const;
 
 export type MoveName = (typeof handledMoves)[number];

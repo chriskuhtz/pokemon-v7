@@ -1,4 +1,5 @@
 import { CampUpgrade } from "../constants/gameData/campUpgrades";
+import { MoveName } from "../constants/movesCheckList";
 import { PokemonName } from "../constants/pokemonNames";
 import { KumaQuestName } from "../versions/kuma/questsRecord";
 import { BadgeName } from "./Badge";
@@ -99,6 +100,8 @@ export type MileStonesObject = {
   importedChallengerDefeatedAt?: number;
   foundEggTypes?: PokemonType[];
   hatchedEggTypes?: PokemonType[];
+  craftedTmTypes?: PokemonType[];
+  taughtTmTypes?: PokemonType[];
 };
 
 export type ImportedChallenger = Omit<
@@ -144,6 +147,11 @@ export const startingRegions = [
 ] as const;
 export type StartingRegion = (typeof startingRegions)[number];
 
+export interface TM {
+  moveName: MoveName;
+  type: PokemonType;
+  id: string;
+}
 export interface SaveFile {
   badges: BadgeName[];
   playerId: string;
@@ -186,4 +194,5 @@ export interface SaveFile {
   trait?: CharacterTrait;
   timedEvents?: TimedEvent[];
   eggs?: PokemonEgg[];
+  tms?: TM[];
 }
