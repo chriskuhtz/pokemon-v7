@@ -18,6 +18,7 @@ import { getMiddleOfThree } from "./getMiddleOfThree";
 import { getTimeOfDay } from "./getTimeOfDay";
 import { getRandomEncounter, isNotCatchable } from "./internalDex";
 import { makeChallengerPokemon } from "./makeChallengerPokemon";
+import { getEncounterForStrangeDimension } from "./procedural";
 import { getCurrentLure, getCurrentSwarm } from "./TimedEvent";
 
 export const determineWildPokemon = ({
@@ -35,6 +36,9 @@ export const determineWildPokemon = ({
   maxBattleSize: number;
   saveFile: SaveFile;
 }): { team: OwnedPokemon[]; battleTeamConfig: BattleTeamConfig } => {
+  if (mapId === "procedural") {
+    return getEncounterForStrangeDimension(saveFile.strangeDimensionLevel ?? 5);
+  }
   const quests = saveFile.quests;
   const lure = getCurrentLure(saveFile)?.lureType;
   const catchStreak = saveFile.catchStreak;

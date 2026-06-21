@@ -97,7 +97,7 @@ export const StarterSelection = (): JSX.Element => {
         pokemon: [
           {
             ...mon,
-            xp: 1250,
+            xp: 1250000,
           },
         ],
         badges: [...badgeNames],

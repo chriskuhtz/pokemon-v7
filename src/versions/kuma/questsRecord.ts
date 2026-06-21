@@ -504,6 +504,16 @@ export const kumaQuestNames = [
   "craft a TM of every type",
   "teach a TM to a pokemon",
   "teach a TM of every type to a pokemon",
+  "reach level 10 of the strange dimension",
+  "reach level 20 of the strange dimension",
+  "reach level 30 of the strange dimension",
+  "reach level 40 of the strange dimension",
+  "reach level 50 of the strange dimension",
+  "reach level 60 of the strange dimension",
+  "reach level 70 of the strange dimension",
+  "reach level 80 of the strange dimension",
+  "reach level 90 of the strange dimension",
+  "reach level 100 of the strange dimension",
 ] as const;
 
 export type KumaQuestName = (typeof kumaQuestNames)[number];
@@ -3503,6 +3513,95 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     researchPoints: 200,
     requiredUpgrade: "tm crafter",
     availableAfter: "teach a TM to a pokemon",
+    rewardItems: expCandyPackage,
+  },
+  "reach level 10 of the strange dimension": {
+    category: "EXPLORATION",
+    kind: "BULLETIN",
+    conditionFunction: (s: SaveFile) =>
+      s.mileStones.strangeDimensionHighScore ?? 0 >= 10,
+    researchPoints: 25,
+    rewardItems: smallExpCandyPackage,
+  },
+  "reach level 20 of the strange dimension": {
+    category: "EXPLORATION",
+    kind: "BULLETIN",
+    conditionFunction: (s: SaveFile) =>
+      s.mileStones.strangeDimensionHighScore ?? 0 >= 20,
+    researchPoints: 50,
+    availableAfter: "reach level 10 of the strange dimension",
+    rewardItems: smallExpCandyPackage,
+  },
+  "reach level 30 of the strange dimension": {
+    category: "EXPLORATION",
+    kind: "BULLETIN",
+    conditionFunction: (s: SaveFile) =>
+      s.mileStones.strangeDimensionHighScore ?? 0 >= 30,
+    researchPoints: 75,
+    availableAfter: "reach level 20 of the strange dimension",
+    rewardItems: expCandyPackage,
+  },
+  "reach level 40 of the strange dimension": {
+    category: "EXPLORATION",
+    kind: "BULLETIN",
+    conditionFunction: (s: SaveFile) =>
+      s.mileStones.strangeDimensionHighScore ?? 0 >= 40,
+    researchPoints: 100,
+    availableAfter: "reach level 30 of the strange dimension",
+    rewardItems: expCandyPackage,
+  },
+  "reach level 50 of the strange dimension": {
+    category: "EXPLORATION",
+    kind: "BULLETIN",
+    conditionFunction: (s: SaveFile) =>
+      s.mileStones.strangeDimensionHighScore ?? 0 >= 50,
+    researchPoints: 125,
+    availableAfter: "reach level 40 of the strange dimension",
+    rewardItems: expCandyPackage,
+  },
+  "reach level 60 of the strange dimension": {
+    category: "EXPLORATION",
+    kind: "BULLETIN",
+    conditionFunction: (s: SaveFile) =>
+      s.mileStones.strangeDimensionHighScore ?? 0 >= 60,
+    researchPoints: 150,
+    availableAfter: "reach level 50 of the strange dimension",
+    rewardItems: expCandyPackage,
+  },
+  "reach level 70 of the strange dimension": {
+    category: "EXPLORATION",
+    kind: "BULLETIN",
+    conditionFunction: (s: SaveFile) =>
+      s.mileStones.strangeDimensionHighScore ?? 0 >= 70,
+    researchPoints: 175,
+    availableAfter: "reach level 60 of the strange dimension",
+    rewardItems: expCandyPackage,
+  },
+  "reach level 80 of the strange dimension": {
+    category: "EXPLORATION",
+    kind: "BULLETIN",
+    conditionFunction: (s: SaveFile) =>
+      s.mileStones.strangeDimensionHighScore ?? 0 >= 80,
+    researchPoints: 200,
+    availableAfter: "reach level 70 of the strange dimension",
+    rewardItems: expCandyPackage,
+  },
+  "reach level 90 of the strange dimension": {
+    category: "EXPLORATION",
+    kind: "BULLETIN",
+    conditionFunction: (s: SaveFile) =>
+      s.mileStones.strangeDimensionHighScore ?? 0 >= 90,
+    researchPoints: 300,
+    availableAfter: "reach level 80 of the strange dimension",
+    rewardItems: expCandyPackage,
+  },
+  "reach level 100 of the strange dimension": {
+    category: "EXPLORATION",
+    kind: "BULLETIN",
+    conditionFunction: (s: SaveFile) =>
+      s.mileStones.strangeDimensionHighScore ?? 0 >= 100,
+    researchPoints: 400,
+    availableAfter: "reach level 90 of the strange dimension",
     rewardItems: expCandyPackage,
   },
 } as Record<KumaQuestName, Quest>;

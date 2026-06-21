@@ -17,6 +17,7 @@ export const traits = [
   "entomologist", //"New route: hiwairo swamp",,
   "nurse",
   "tinkerer",
+  "maker",
 ] as const;
 export type CharacterTrait = (typeof traits)[number];
 
@@ -35,6 +36,7 @@ export const traitResearchBoni: Record<
   archaeologist: { EXPLORATION: 1.05 },
   entomologist: { POKEDEX: 1.1 },
   tinkerer: { RESEARCH: 1.1 },
+  maker: { RESEARCH: 1.1 },
 };
 export const traitTypes: Record<CharacterTrait, PokemonType> = {
   chef: "water",
@@ -48,6 +50,7 @@ export const traitTypes: Record<CharacterTrait, PokemonType> = {
   entomologist: "bug",
   nurse: "fairy",
   tinkerer: "electric",
+  maker: "steel",
 };
 
 export const traitColors: Record<CharacterTrait, string> = {
@@ -62,6 +65,7 @@ export const traitColors: Record<CharacterTrait, string> = {
   entomologist: hexToRgb(typeColors[traitTypes.entomologist], 0.5),
   nurse: hexToRgb(typeColors[traitTypes.nurse], 0.5),
   tinkerer: hexToRgb(typeColors[traitTypes.tinkerer], 0.5),
+  maker: hexToRgb(typeColors[traitTypes.maker], 0.5),
 };
 
 export const traitBonusExplanations: Record<CharacterTrait, string[]> = {
@@ -110,6 +114,10 @@ export const traitBonusExplanations: Record<CharacterTrait, string[]> = {
   tinkerer: [
     "Tinkerers can craft Tms out of fewer parts and with higher success rate",
     `A tinkerers curiosity makes their ${traitTypes.tinkerer} type pokemon slightly stronger`,
+  ],
+  maker: [
+    "Maker can sometimes reuse tms and have a chance to craft better pokeballs from gray apricorns",
+    `A Makers knowledge of materials makes their ${traitTypes.maker} type pokemon slightly stronger`,
   ],
 };
 
@@ -238,10 +246,17 @@ export const traitLoadOuts: Record<CharacterTrait, { storage: Inventory }> = {
       "poke-ball": 20,
       "berry-juice": 5,
       magnet: 1,
-      "electric-gem": 1,
-      "steel-gem": 1,
-      "rock-gem": 1,
-      iron: 1,
+      "electric-gem": 5,
+      calcium: 1,
+      zinc: 1,
+    }),
+  },
+  maker: {
+    storage: joinInventories(EmptyInventory, {
+      "poke-ball": 20,
+      "berry-juice": 5,
+      "metal-coat": 1,
+      "steel-gem": 5,
       calcium: 1,
       zinc: 1,
     }),
@@ -260,4 +275,5 @@ export const traitStarter: Record<CharacterTrait, PokemonName> = {
   entomologist: "yanma",
   nurse: "ralts",
   tinkerer: "elekid",
+  maker: "cufant",
 };

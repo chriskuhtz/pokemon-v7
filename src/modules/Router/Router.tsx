@@ -38,6 +38,10 @@ import { Overworld } from "../Overworld/Overworld";
 import { OverworldChest } from "../OverworldChest/OverworldChest";
 import { Pokedex } from "../Pokedex/Pokedex";
 import { PokemonStorage } from "../PokemonStorage/PokemonStorage";
+import {
+  ProceduralContinue,
+  ProceduralEntry,
+} from "../ProceduralEntry/ProceduralEntry";
 import { Quests } from "../Quests/Quests";
 import { QuizMaster } from "../QuizMaster/QuizMaster";
 import { SeedVault } from "../SeedVault/SeedVault";
@@ -292,6 +296,12 @@ export const Router = (): JSX.Element => {
   }
   if (activeTab === "TM_CRAFTING") {
     return <TmCrafting />;
+  }
+  if (activeTab === "PROCEDURAL_ENTRY") {
+    return <ProceduralEntry />;
+  }
+  if (activeTab === "PROCEDURAL_CONTINUE") {
+    return <ProceduralContinue />;
   }
 
   return <Overworld />;

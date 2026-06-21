@@ -31,6 +31,8 @@ export const mapIds = [
   //LABYRINTH VERSION
   "labyrinth_level_1",
   "labyrinth_level_2",
+  //procedural
+  "procedural",
 ] as const;
 export type MapId = (typeof mapIds)[number];
 
@@ -67,4 +69,6 @@ export const mapDisplayNames: Record<MapId, string> = {
   //LABYRINTH VERSION
   labyrinth_level_1: "Deep Forest",
   labyrinth_level_2: "Deep Forest",
+  //procedural
+  procedural: "Strange Dimension",
 };

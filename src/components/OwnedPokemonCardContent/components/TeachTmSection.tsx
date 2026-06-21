@@ -21,11 +21,14 @@ export const TeachTmSection = ({
   const { addMessage } = useContext(MessageQueueContext);
 
   const teachTm = (tm: TM) => {
+    const tmCanBeReused = saveFile.trait === "maker" && Math.random() > 0.9;
     addMessage({
-      message: `Taught ${tm.moveName} to ${ownedPokemon.name}`,
+      message: `Taught ${tm.moveName} to ${ownedPokemon.name} ${tmCanBeReused ? ", the TM still seems usable" : ""}`,
       onRemoval: () =>
         patchSaveFileReducer({
-          tms: (saveFile.tms ?? []).filter((entry) => entry.id !== tm.id),
+          tms: tmCanBeReused
+            ? (saveFile.tms ?? [])
+            : (saveFile.tms ?? []).filter((entry) => entry.id !== tm.id),
           pokemon: saveFile.pokemon.map((p) => {
             if (p.id === ownedPokemon.id) {
               return { ...p, unlockedMoves: [...p.unlockedMoves, tm.moveName] };

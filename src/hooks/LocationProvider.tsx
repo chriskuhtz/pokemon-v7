@@ -13,6 +13,7 @@ import {
   removeTroubleMakers,
 } from "../functions/TimedEvent";
 import { EmptyInventory } from "../interfaces/Inventory";
+import { OverworldMap } from "../interfaces/OverworldMap";
 import { CharacterLocationData } from "../interfaces/SaveFile";
 import { GameDataContext } from "./useGameData";
 import { MessageQueueContext } from "./useMessageQueue";
@@ -20,14 +21,16 @@ import { SaveFileContext } from "./useSaveFile";
 
 export interface LocationContextType {
   location: CharacterLocationData;
-  setLocation: (x: CharacterLocationData) => void;
+  setLocation: (x: CharacterLocationData & { map?: OverworldMap }) => void;
   resetLocation: () => void;
+  map: OverworldMap;
 }
 
 export const LocationContext = React.createContext({} as LocationContextType);
 
 export const LocationProvider = ({ children }: { children: ReactNode }) => {
-  const { locationId, startingLocation } = useContext(GameDataContext);
+  const { locationId, startingLocation, features } =
+    useContext(GameDataContext);
   const { addMessage } = useContext(MessageQueueContext);
   const { patchSaveFileReducer, saveFile } = useContext(SaveFileContext);
   const initValue: CharacterLocationData = useMemo(() => {
@@ -36,6 +39,9 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
       ? (JSON.parse(local) as CharacterLocationData)
       : startingLocation;
   }, [locationId, startingLocation]);
+  const [map, setMap] = useState<OverworldMap>(
+    mapsRecord[initValue.mapId ?? startingLocation.mapId],
+  );
   const [location, s] = useState<CharacterLocationData>(initValue);
 
   const handleMapChange = useCallback(
@@ -78,11 +84,16 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const setLocation = useCallback(
-    (newLocation: CharacterLocationData) => {
+    (newLocation: CharacterLocationData & { map?: OverworldMap }) => {
       handleMapChange(newLocation);
       s(newLocation);
+      if (newLocation.map) {
+        setMap(newLocation.map);
+      } else if (newLocation.mapId !== map.id) {
+        setMap(mapsRecord[newLocation.mapId]);
+      }
     },
-    [handleMapChange],
+    [handleMapChange, map.id],
   );
 
   const resetLocation = useCallback(() => {
@@ -105,8 +116,16 @@ export const LocationProvider = ({ children }: { children: ReactNode }) => {
   }, [location, patchSaveFileReducer, saveFile]);
 
   const value = useMemo(
-    () => ({ location, setLocation, resetLocation }),
-    [location, resetLocation, setLocation],
+    () => ({
+      location,
+      setLocation,
+      resetLocation,
+      map: {
+        ...map,
+        questMenuAvailable: map.questMenuAvailable && features.quests,
+      },
+    }),
+    [features.quests, location, map, resetLocation, setLocation],
   );
 
   return (

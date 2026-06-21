@@ -58,6 +58,7 @@ const ballForRoute: Record<MapId, PokeballType> = {
   "ilex-forest": "poke-ball",
   "murasaki-glades": "poke-ball",
   "rakudairo-ruins": "poke-ball",
+  procedural: "poke-ball",
 };
 const snackForRoute: Record<MapId, ItemType> = {
   //actual rewards
@@ -92,6 +93,7 @@ const snackForRoute: Record<MapId, ItemType> = {
   "ilex-forest": "poke-ball",
   "murasaki-glades": "poke-ball",
   "rakudairo-ruins": "poke-ball",
+  procedural: "poke-ball",
 };
 const ticketForRoute: Record<MapId, ItemType> = {
   //actual tickets
@@ -127,6 +129,7 @@ const ticketForRoute: Record<MapId, ItemType> = {
   "ilex-forest": "poke-ball",
   "murasaki-glades": "poke-ball",
   "rakudairo-ruins": "poke-ball",
+  procedural: "poke-ball",
 };
 
 const catchQuestsForRoute = (

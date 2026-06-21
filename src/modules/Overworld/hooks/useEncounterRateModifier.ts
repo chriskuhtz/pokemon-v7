@@ -1,12 +1,11 @@
 import { useContext, useMemo } from "react";
-import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
 import { getHeldItem } from "../../../functions/getHeldItem";
 import { LocationContext } from "../../../hooks/LocationProvider";
 import { SaveFileContext } from "../../../hooks/useSaveFile";
 
 export const useEncounterRateModifier = () => {
   const { saveFile } = useContext(SaveFileContext);
-  const { location } = useContext(LocationContext);
+  const { map } = useContext(LocationContext);
 
   const team = useMemo(
     () => saveFile.pokemon.filter((p) => p.onTeam),
@@ -24,13 +23,11 @@ export const useEncounterRateModifier = () => {
     const swarmFactor = firstTeamMember?.ability === "swarm" ? 2 : 1;
     const quickfeetFactor = firstTeamMember?.ability === "quick-feet" ? 0.5 : 1;
     const snowCloakFactor =
-      firstTeamMember?.ability === "snow-cloak" &&
-      mapsRecord[location.mapId].weather === "hail"
+      firstTeamMember?.ability === "snow-cloak" && map.weather === "hail"
         ? 0.5
         : 1;
     const sandstormFactor =
-      firstTeamMember?.ability === "sand-veil" &&
-      mapsRecord[location.mapId].weather === "sandstorm"
+      firstTeamMember?.ability === "sand-veil" && map.weather === "sandstorm"
         ? 0.5
         : 1;
     const cleanseTagFactor =
@@ -47,6 +44,6 @@ export const useEncounterRateModifier = () => {
         quickfeetFactor *
         cleanseTagFactor,
     };
-  }, [firstTeamMember, location.mapId]);
+  }, [firstTeamMember, map]);
   return res;
 };
