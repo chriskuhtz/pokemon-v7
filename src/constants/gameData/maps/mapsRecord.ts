@@ -32,6 +32,23 @@ import { victoryRoadExit } from "./victoryRoadExit";
 import { victoryRoadExtra } from "./victoryRoadExtra";
 import { victoryRoadU1 } from "./victoryRoadU1";
 
+export const Emptymap: OverworldMap = {
+  area: "OPEN",
+  id: "camp",
+  occupants: [],
+  timeOfDayShadersMap: defaultShaderMap,
+  tilesetUrl: "/tilesets/newMasterSheet.png",
+  questMenuAvailable: true,
+  tileMap: {
+    baseLayer: [[]],
+    waterLayer: [[]],
+    foregroundLayer: [[]],
+    encounterLayer: [[]],
+    obstacleLayer: [[]],
+    decorationLayer: [[]],
+  },
+};
+
 export const mapsRecord: Record<MapId, OverworldMap> = {
   //KUMA VERSION
   camp: camp,
@@ -65,21 +82,7 @@ export const mapsRecord: Record<MapId, OverworldMap> = {
   //LABYRINTH VERSION
   labyrinth_level_1: labyrinthLevel1,
   labyrinth_level_2: labyrinthLevel2,
-};
-
-export const Emptymap: OverworldMap = {
-  area: "OPEN",
-  id: "camp",
-  occupants: [],
-  timeOfDayShadersMap: defaultShaderMap,
-  tilesetUrl: "/tilesets/newMasterSheet.png",
-  questMenuAvailable: true,
-  tileMap: {
-    baseLayer: [[]],
-    waterLayer: [[]],
-    foregroundLayer: [[]],
-    encounterLayer: [[]],
-    obstacleLayer: [[]],
-    decorationLayer: [[]],
-  },
+  procedural: JSON.parse(
+    window.localStorage.getItem("procedural") ?? JSON.stringify(Emptymap),
+  ) as OverworldMap,
 };

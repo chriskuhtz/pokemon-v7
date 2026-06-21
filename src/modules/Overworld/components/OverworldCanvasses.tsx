@@ -1,16 +1,14 @@
-import { useContext, useMemo } from "react";
+import { useContext } from "react";
 import { CombinedCanvas } from "../../../components/CombinedCanvas/CombinedCanvas";
 import {
   FollowerSprite,
   PlayerSprite,
 } from "../../../components/FollowerSprite/FollowerSprite";
 import { fps } from "../../../constants/baseConstants";
-import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
 import { LocationContext } from "../../../hooks/LocationProvider";
 import { BaseSizeContext } from "../../../hooks/useBaseSize";
 import { useShader } from "../../../hooks/useShader";
 import { Occupant } from "../../../interfaces/Occupant";
-import { OverworldMap } from "../../../interfaces/OverworldMap";
 import { CharacterOrientation } from "../../../interfaces/SaveFile";
 import { backgroundCanvasId, occupantsCanvasId } from "../constants/constants";
 import { useClickTarget } from "../hooks/useClickTarget";
@@ -28,11 +26,8 @@ export const OverworldCanvasses = ({
   occupants: Occupant[];
 }) => {
   const { baseSize } = useContext(BaseSizeContext);
-  const { location } = useContext(LocationContext);
-  const map = useMemo(
-    (): OverworldMap => mapsRecord[location.mapId],
-    [location.mapId],
-  );
+  const { location, map } = useContext(LocationContext);
+
   const shader = useShader();
   const { width, height } = {
     width: map.tileMap.baseLayer[0].length,
@@ -45,7 +40,7 @@ export const OverworldCanvasses = ({
     interactWith,
     occupants,
   );
-  const { isDark, hasFlashlight, flashLightDirection } = useIsDark(map.id);
+  const { isDark, hasFlashlight, flashLightDirection } = useIsDark();
 
   return (
     <div className="overworldPage">

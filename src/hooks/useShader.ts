@@ -1,5 +1,4 @@
 import { useContext, useMemo } from "react";
-import { mapsRecord } from "../constants/gameData/maps/mapsRecord";
 import {
   futureShader,
   getTimeOfDay,
@@ -12,31 +11,21 @@ import { SaveFileContext } from "./useSaveFile";
 
 export const useShader = () => {
   const { saveFile } = useContext(SaveFileContext);
-  const { location } = useContext(LocationContext);
+  const { map } = useContext(LocationContext);
 
   const swarm = getCurrentSwarm(saveFile, undefined);
 
   return useMemo(() => {
-    const map = mapsRecord[location.mapId];
-    if (
-      swarm?.swarmType === "FUTURE_DISTORTION" &&
-      location.mapId === swarm.mapId
-    ) {
+    if (swarm?.swarmType === "FUTURE_DISTORTION" && map.id === swarm.mapId) {
       return futureShader;
     }
-    if (
-      swarm?.swarmType === "SPACE_DISTORTION" &&
-      location.mapId === swarm.mapId
-    ) {
+    if (swarm?.swarmType === "SPACE_DISTORTION" && map.id === swarm.mapId) {
       return spaceShader;
     }
-    if (
-      swarm?.swarmType === "PAST_DISTORTION" &&
-      location.mapId === swarm.mapId
-    ) {
+    if (swarm?.swarmType === "PAST_DISTORTION" && map.id === swarm.mapId) {
       return pastShader;
     }
 
     return map.timeOfDayShadersMap[getTimeOfDay()];
-  }, [location.mapId, swarm]);
+  }, [map.id, map.timeOfDayShadersMap, swarm]);
 };

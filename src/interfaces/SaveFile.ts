@@ -102,6 +102,7 @@ export type MileStonesObject = {
   hatchedEggTypes?: PokemonType[];
   craftedTmTypes?: PokemonType[];
   taughtTmTypes?: PokemonType[];
+  strangeDimensionHighScore?: number;
 };
 
 export type ImportedChallenger = Omit<
@@ -195,4 +196,5 @@ export interface SaveFile {
   timedEvents?: TimedEvent[];
   eggs?: PokemonEgg[];
   tms?: TM[];
+  strangeDimensionLevel?: number;
 }

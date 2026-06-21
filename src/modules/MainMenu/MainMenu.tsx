@@ -23,7 +23,6 @@ import { battleSpriteSize, portraitMode } from "../../constants/baseConstants";
 import { customItemDescriptions } from "../../constants/customItemDescriptions";
 import { mapsRecord } from "../../constants/gameData/maps/mapsRecord";
 import { fullyHealPokemon } from "../../functions/fullyHealPokemon";
-import { questMenuAvailable } from "../../functions/questMenuAvailable";
 import {
   cleanUpSpecificEvent,
   getCurrentLure,
@@ -195,12 +194,11 @@ const NotesCard = () => {
 };
 
 const QuestCard = () => {
-  const { location } = useContext(LocationContext);
-  const gameData = useContext(GameDataContext);
+  const { map } = useContext(LocationContext);
   const { numberOfUncollected } = useQuests();
   const navigate = useNavigate();
 
-  if (!questMenuAvailable(location.mapId, gameData)) {
+  if (!map.questMenuAvailable) {
     return <></>;
   }
 
@@ -404,14 +402,14 @@ const LureButton = () => {
 };
 const FlyingButton = () => {
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
-  const { location } = useContext(LocationContext);
+  const { map } = useContext(LocationContext);
 
   if (!saveFile.campUpgrades["pidgeot rider certification"]) {
     return <></>;
   }
 
   const devmode = !!window.localStorage.getItem("devmode");
-  if (mapsRecord[location.mapId].area !== "OPEN" && !devmode) {
+  if (map.area !== "OPEN" && !devmode) {
     return (
       <Card
         disabled

@@ -165,7 +165,7 @@ export const PlayerSprite = ({ map }: { map: OverworldMap }) => {
     if (saveFile.flying) {
       return "pidgeot";
     }
-    const onWater = map.tileMap.waterLayer[location.y][location.x];
+    const onWater = map.tileMap.waterLayer.at(location.y)?.at(location.x);
     const onSnow = map.id === "routeN1W1";
     if (onWater && saveFile.swimmerSprite) {
       return saveFile.swimmerSprite;

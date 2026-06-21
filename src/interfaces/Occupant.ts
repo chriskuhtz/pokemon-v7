@@ -63,7 +63,8 @@ export interface BaseOccupant {
   id: string;
   x: number;
   y: number;
-  conditionFunction: (saveFile: SaveFile) => boolean;
+  conditionFunction: ((saveFile: SaveFile) => boolean) | undefined;
+  conditionType?: "NOT_HANDLED";
 }
 export interface OverworldEgg extends BaseOccupant {
   type: "EGG";

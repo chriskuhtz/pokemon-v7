@@ -1,6 +1,5 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { fps } from "../../../constants/baseConstants";
-import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
 import { getNextForwardFoot } from "../../../functions/getNextForwardFoot";
 import { startBlocker } from "../../../functions/TimedEvent";
 import { updatePosition } from "../../../functions/updatePosition";
@@ -15,7 +14,6 @@ import {
   OnStepPortal,
   OnStepRouter,
 } from "../../../interfaces/Occupant";
-import { OverworldMap } from "../../../interfaces/OverworldMap";
 import { CharacterOrientation } from "../../../interfaces/SaveFile";
 import { baseEncounterRate } from "../constants/constants";
 import { useStartEncounter } from "./useStartEncounter";
@@ -28,18 +26,13 @@ export const useMovement = (
   const [encounterChance, setEncounterChance] =
     useState<number>(baseEncounterRate);
   const [nextInput, setNextInput] = useState<CharacterOrientation>();
-  const { location, setLocation } = useContext(LocationContext);
+  const { location, setLocation, map } = useContext(LocationContext);
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
   const gameData = useContext(GameDataContext);
   const { addMultipleMessages, latestMessage } =
     useContext(MessageQueueContext);
   const { transition, activateTransition } = useContext(
     ScreenTransitionContext,
-  );
-
-  const map = useMemo(
-    (): OverworldMap => mapsRecord[location.mapId],
-    [location.mapId],
   );
 
   const addInput = useCallback(
@@ -62,6 +55,7 @@ export const useMovement = (
       currentOccupants.find(
         (o) =>
           o.type === "ON_STEP_PORTAL" &&
+          o.conditionFunction &&
           o.conditionFunction(saveFile) === true &&
           o.x === location.x &&
           o.y === location.y,
@@ -73,6 +67,7 @@ export const useMovement = (
       currentOccupants.find(
         (o) =>
           o.type === "ON_STEP_DIALOGUE" &&
+          o.conditionFunction &&
           o.conditionFunction(saveFile) === true &&
           o.x === location.x &&
           o.y === location.y,
@@ -84,6 +79,7 @@ export const useMovement = (
       currentOccupants.find(
         (o) =>
           o.type === "ON_STEP_ROUTER" &&
+          o.conditionFunction &&
           o.conditionFunction(saveFile) === true &&
           o.x === location.x &&
           o.y === location.y,
@@ -101,13 +97,15 @@ export const useMovement = (
       return;
     }
     if (
-      map.tileMap.encounterLayer[location.y][location.x] &&
+      map.tileMap.encounterLayer.at(location.y) &&
+      map.tileMap.encounterLayer.at(location.y)?.at(location.x) &&
       encounterChance > Math.random()
     ) {
       return "GROUND";
     }
     if (
-      map.tileMap.waterLayer[location.y][location.x] &&
+      map.tileMap.waterLayer.at(location.y) &&
+      map.tileMap.waterLayer.at(location.y)?.at(location.x) &&
       canSwim &&
       encounterChance > Math.random()
     ) {

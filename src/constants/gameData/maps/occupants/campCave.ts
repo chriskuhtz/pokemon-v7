@@ -45,5 +45,16 @@ export const campCaveOccupants: OverworldMap["occupants"] = [
     conditionFunction: (s) => s.campUpgrades["invite fossil expert"],
     id: "fossil expert",
   },
+  {
+    type: "ROUTER_NPC",
+    to: "PROCEDURAL_ENTRY",
+    orientation: "UP",
+    x: 8,
+    y: 11,
+    dialogue: ["Strange things are happening"],
+    sprite: SpriteEnum.possessed,
+    conditionFunction: () => true,
+    id: "procedural-entry",
+  },
   ...dugtrioExplorers,
 ];

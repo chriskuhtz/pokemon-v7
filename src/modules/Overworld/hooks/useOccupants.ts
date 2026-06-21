@@ -1,5 +1,4 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
 import { PokemonName } from "../../../constants/pokemonNames";
 import { getRandomOrientation } from "../../../functions/getNextClockwiseDirection";
 import { getNextLocation } from "../../../functions/getNextLocation";
@@ -38,9 +37,8 @@ const treeSlots: { x: number; y: number }[] = [
 
 export const useOccupants = () => {
   const { saveFile } = useContext(SaveFileContext);
-  const { location } = useContext(LocationContext);
+  const { location, map } = useContext(LocationContext);
   const { internalDex } = useContext(GameDataContext);
-  const map = useMemo(() => mapsRecord[location.mapId], [location.mapId]);
   const availableQuests = useAvailableBulletinQuests();
 
   const [statefulOccupants, setStatefulOccupants] = useState<Occupant[]>([]);
@@ -173,7 +171,15 @@ export const useOccupants = () => {
 
   const conditionalOccupants = useMemo(() => {
     return statefulOccupants
-      .filter((m) => m.conditionFunction(saveFile) === true)
+      .filter((m) => {
+        if (m.conditionFunction) {
+          return m.conditionFunction(saveFile) === true;
+        }
+        if (m.conditionType === "NOT_HANDLED") {
+          return !occupantHandled(saveFile, m.id);
+        }
+        return true;
+      })
       .sort((a) => {
         return a.type === "BERRY_TREE" ? 1 : -1;
       });

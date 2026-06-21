@@ -1,13 +1,9 @@
 import { useContext, useMemo } from "react";
 import { portraitMode } from "../../../constants/baseConstants";
-import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
 import { LocationContext } from "../../../hooks/LocationProvider";
 import { SaveFileContext } from "../../../hooks/useSaveFile";
-import { MapId } from "../../../interfaces/mapIds";
 
-export const useIsDark = (
-  mapId: MapId,
-): {
+export const useIsDark = (): {
   isDark: boolean;
   hasFlashlight: boolean;
   flashLightDirection?:
@@ -20,9 +16,8 @@ export const useIsDark = (
     | "ellipse at 80% 50%"
     | "ellipse at 65% 50%";
 } => {
-  const map = mapsRecord[mapId];
   const { saveFile } = useContext(SaveFileContext);
-  const { location } = useContext(LocationContext);
+  const { location, map } = useContext(LocationContext);
 
   const hasFlashlight = !!saveFile.campUpgrades["flashlight certification"];
   const flashLightDirection = useMemo(() => {

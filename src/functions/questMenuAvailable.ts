@@ -1,8 +1,0 @@
-import { mapsRecord } from "../constants/gameData/maps/mapsRecord";
-import { GameData } from "../interfaces/GameData";
-import { MapId } from "../interfaces/mapIds";
-
-export const questMenuAvailable = (id: MapId, gameData: GameData) => {
-  const { questMenuAvailable } = mapsRecord[id];
-  return questMenuAvailable && gameData.features.quests;
-};

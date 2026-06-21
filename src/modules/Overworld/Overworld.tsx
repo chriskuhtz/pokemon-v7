@@ -1,6 +1,5 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
-import { mapsRecord } from "../../constants/gameData/maps/mapsRecord";
 import { handleEnterPress } from "../../functions/handleEnterPress";
 import { LocationContext } from "../../hooks/LocationProvider";
 import { BaseSizeContext } from "../../hooks/useBaseSize";
@@ -8,7 +7,6 @@ import { useDrawForeground } from "../../hooks/useDrawBackground";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
 import { useNavigate } from "../../hooks/useNavigate";
 import { SaveFileContext } from "../../hooks/useSaveFile";
-import { OverworldMap } from "../../interfaces/OverworldMap";
 import "./Overworld.css";
 import { OverworldCanvasses } from "./components/OverworldCanvasses";
 import { OverworldMenus } from "./components/OverworldMenus";
@@ -25,25 +23,16 @@ export const Overworld = ({ uncontrolled }: { uncontrolled?: boolean }) => {
 
   const { latestMessage } = useContext(MessageQueueContext);
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
-  const { location } = useContext(LocationContext);
+  const { location, map } = useContext(LocationContext);
   const navigate = useNavigate();
-
-  const map = useMemo(
-    (): OverworldMap => mapsRecord[location.mapId],
-    [location.mapId],
-  );
 
   //stop flying if area is not open
   useEffect(() => {
     const devmode = !!window.localStorage.getItem("devmode");
-    if (
-      mapsRecord[location.mapId].area !== "OPEN" &&
-      saveFile.flying &&
-      !devmode
-    ) {
+    if (map.area !== "OPEN" && saveFile.flying && !devmode) {
       patchSaveFileReducer({ flying: false });
     }
-  }, [location, patchSaveFileReducer, saveFile]);
+  }, [location, map.area, patchSaveFileReducer, saveFile]);
 
   const { rotateOccupant, occupants } = useOccupants();
 

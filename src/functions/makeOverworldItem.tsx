@@ -7,7 +7,6 @@ import { ItemType } from "../interfaces/Item";
 import { MapId } from "../interfaces/mapIds";
 import { OverworldChest, OverworldItem } from "../interfaces/Occupant";
 import { ArrayHelpers } from "./ArrayHelpers";
-import { occupantHandled } from "./occupantHandled";
 
 export const makeOverworldItem = ({
   x,
@@ -30,7 +29,8 @@ export const makeOverworldItem = ({
     type: "ITEM",
     x,
     y,
-    conditionFunction: (s) => !occupantHandled(s, id),
+    conditionType: "NOT_HANDLED",
+    conditionFunction: undefined,
     item,
     amount,
   };

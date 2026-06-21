@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo } from "react";
+import { useContext, useEffect } from "react";
 import { CgZoomIn, CgZoomOut } from "react-icons/cg";
 import { IoMdMenu } from "react-icons/io";
 import { HudBagLimitIcon } from "../../../components/BagLimitIcon/BagLimitIcon";
@@ -15,7 +15,6 @@ import {
   battleSpriteSize,
   portraitMode,
 } from "../../../constants/baseConstants";
-import { mapsRecord } from "../../../constants/gameData/maps/mapsRecord";
 import { replaceRouteName } from "../../../functions/replaceRouteName";
 import { LocationContext } from "../../../hooks/LocationProvider";
 import { BaseSizeContext } from "../../../hooks/useBaseSize";
@@ -47,10 +46,9 @@ export const OverworldMenus = ({
 
   const gameData = useContext(GameDataContext);
   const navigate = useNavigate();
-  const { location } = useContext(LocationContext);
-  const map = useMemo(() => mapsRecord[location.mapId], [location.mapId]);
+  const { map } = useContext(LocationContext);
 
-  const { isDark } = useIsDark(map.id);
+  const { isDark } = useIsDark();
 
   useEffect(() => {
     if (isDark && baseSize !== 64) {

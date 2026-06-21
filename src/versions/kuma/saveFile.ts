@@ -36,6 +36,9 @@ export const startingSaveFileKuma: SaveFile = {
     caughtFromSwarms: [],
     luredWithBerries: [],
     damageRecord: 0,
+    taughtTmTypes: [],
+    craftedTmTypes: [],
+    strangeDimensionHighScore: 0,
   },
   farm: {
     plants: [],
@@ -50,4 +53,5 @@ export const startingSaveFileKuma: SaveFile = {
   },
   campUpgrades: baseCampUpgrades,
   pokedex: emptyPokedex,
+  strangeDimensionLevel: 5,
 };

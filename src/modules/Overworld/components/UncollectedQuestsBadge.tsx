@@ -1,9 +1,7 @@
 import { useContext } from "react";
 import { GoTasklist } from "react-icons/go";
 import { battleSpriteSize } from "../../../constants/baseConstants";
-import { questMenuAvailable } from "../../../functions/questMenuAvailable";
 import { LocationContext } from "../../../hooks/LocationProvider";
-import { GameDataContext } from "../../../hooks/useGameData";
 import { useNavigate } from "../../../hooks/useNavigate";
 import { useQuests } from "../../../hooks/useQuests";
 import "./UncollectedQuestsBadge.css";
@@ -14,12 +12,9 @@ export const UncollectedQuestsBadge = ({
 }): JSX.Element => {
   const { numberOfUncollected } = useQuests();
   const navigate = useNavigate();
-  const {
-    location: { mapId },
-  } = useContext(LocationContext);
-  const gameData = useContext(GameDataContext);
+  const { map } = useContext(LocationContext);
 
-  if (!questMenuAvailable(mapId, gameData)) {
+  if (!map.questMenuAvailable) {
     return <></>;
   }
   return (

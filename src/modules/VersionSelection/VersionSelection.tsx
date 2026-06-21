@@ -10,11 +10,13 @@ import { Page } from "../../uiComponents/Page/Page";
 import { Stack } from "../../uiComponents/Stack/Stack";
 import { Kuma } from "../../versions/kuma/Kuma";
 import { Labyrinth } from "../../versions/labyrinth/Labyrinth";
+import { StrangeDimension } from "../../versions/strangeDimension/StrangeDimension";
 import { ChangeLog } from "../ChangeLog/ChangeLog";
 import { MapEditor } from "../MapMaker/components/MapEditor";
 
+type Version = "KUMA" | "LABYRINTH" | "STRANGE_DIMENSION";
 export const VersionSelection = (): JSX.Element => {
-  const [version, setVersion] = useState<"KUMA" | "LABYRINTH">();
+  const [version, setVersion] = useState<Version>();
   const [map, setMap] = useState<MapId | undefined>(
     window.location.pathname.replace("/", "") as MapId | undefined,
   );
@@ -24,6 +26,9 @@ export const VersionSelection = (): JSX.Element => {
   }
   if (version === "LABYRINTH") {
     return <Labyrinth />;
+  }
+  if (version === "STRANGE_DIMENSION") {
+    return <StrangeDimension />;
   }
   if (map) {
     return <MapEditor mapId={map} goBack={() => setMap(undefined)} />;
@@ -47,9 +52,7 @@ export const VersionSelection = (): JSX.Element => {
 const SelectionCards = ({
   setVersion,
 }: {
-  setVersion: React.Dispatch<
-    React.SetStateAction<"KUMA" | "LABYRINTH" | undefined>
-  >;
+  setVersion: React.Dispatch<React.SetStateAction<Version | undefined>>;
 }) => {
   return (
     <>
@@ -84,6 +87,24 @@ const SelectionCards = ({
         actionElements={[]}
         onClick={() => {
           setVersion("LABYRINTH");
+        }}
+      ></Card>
+      <Card
+        icon={
+          <PokemonSprite
+            config={{ officalArtwork: true }}
+            name={"giratina-origin"}
+          />
+        }
+        content={
+          <div>
+            <h3>Strange Dimension</h3>
+            <h4>Proceedurally generated levels</h4>
+          </div>
+        }
+        actionElements={[]}
+        onClick={() => {
+          setVersion("STRANGE_DIMENSION");
         }}
       ></Card>
     </>

@@ -7,10 +7,19 @@ interface ChangelogEntryData {
 
 const changelogData: ChangelogEntryData[] = [
   {
+    version: "0.86",
+    listOfChanges: [
+      "procedual dungeon: strange dimension",
+      "new class: maker",
+      "new moves",
+      "fixes and balances from playtesting",
+    ],
+  },
+  {
     version: "0.85",
     listOfChanges: [
       "tm crafting",
-      "newn class: tinkerer",
+      "new class: tinkerer",
       "new moves",
       "fixes and balances from playtesting",
     ],
