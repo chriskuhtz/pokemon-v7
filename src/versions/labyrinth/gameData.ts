@@ -4,6 +4,7 @@ import { startingSaveFileLabyrinth } from "./saveFile";
 import { startingLocationLabyrinth } from "./startingLocation";
 
 export const gameData: GameData = {
+  version: "LABYRINTH",
   saveFileId: "pokemonLabyrinthSaveFile",
   locationId: "pokemonLabyrinthLocation",
   startingTab: "OVERWORLD",

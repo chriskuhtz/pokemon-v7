@@ -23,7 +23,7 @@ import { GameDataContext } from "../../hooks/useGameData";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { Inventory, joinInventories } from "../../interfaces/Inventory";
-import { balltypes } from "../../interfaces/Item";
+import { balltypes, ItemType } from "../../interfaces/Item";
 import { mapIds } from "../../interfaces/mapIds";
 import { OwnedPokemon } from "../../interfaces/OwnedPokemon";
 import { PokemonType, realTypes } from "../../interfaces/PokemonType";
@@ -143,12 +143,17 @@ export const PokemonStorage = ({
     setReleaseToConfirm(pokemon);
   };
   const collectAllHeldItemsFromStored = () => {
-    const allHeldItemKeys = allPokemon
+    const allHeldItemKeys: ItemType[] = allPokemon
       .filter((p) => !p.onTeam && p.heldItemName)
-      .map((p) => p.heldItemName);
-    const collected: Partial<Inventory> = Object.fromEntries(
-      allHeldItemKeys.map((key) => [key, 1]),
-    );
+      .map((p) => p.heldItemName)
+      .filter((h) => h !== undefined);
+    const collected: Partial<Inventory> = {};
+
+    allHeldItemKeys.forEach((key: ItemType) => {
+      if (collected[key]) {
+        collected[key] += 1;
+      } else collected[key] = 1;
+    });
 
     patchSaveFileReducer({
       bag: joinInventories(saveFile.bag, collected),

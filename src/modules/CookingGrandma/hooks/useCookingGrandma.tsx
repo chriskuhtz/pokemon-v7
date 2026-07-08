@@ -8,7 +8,17 @@ export interface Recipe {
   result: ItemType;
   ingredients: ItemType[];
   difficulty: "EASY" | "MEDIUM" | "TRICKY";
+  group: "JUICE" | "MOCHI" | "TREATS";
 }
+
+const juiceBerries: ItemType[] = [
+  "liechi-berry",
+  "ganlon-berry",
+  "petaya-berry",
+  "apicot-berry",
+  "micle-berry",
+  "custap-berry",
+];
 
 export const BASE_RECIPES: Recipe[] = [
   ...berries
@@ -19,72 +29,96 @@ export const BASE_RECIPES: Recipe[] = [
           result: "berry-juice",
           ingredients: ["oran-berry", c],
           difficulty: "EASY",
+          group: "JUICE",
         }) as Recipe,
     ),
+  ...juiceBerries.map(
+    (berry) =>
+      ({
+        result: berry.replace("berry", "juice"),
+        ingredients: ["berry-juice", berry, berry],
+        difficulty: "MEDIUM",
+        group: "JUICE",
+      }) as Recipe,
+  ),
+
   {
     result: "old-gateau",
     ingredients: ["nanab-berry", "leppa-berry", "razz-berry"],
     difficulty: "MEDIUM",
+    group: "TREATS",
   },
   {
     result: "big-malasada",
     ingredients: ["coba-berry", "micle-berry", "honey"],
     difficulty: "MEDIUM",
+    group: "TREATS",
   },
   {
     result: "moomoo-cheese",
     ingredients: ["moomoo-milk", "sitrus-berry"],
     difficulty: "MEDIUM",
+    group: "TREATS",
   },
   {
     result: "lumiose-galette",
     ingredients: ["moomoo-milk", "bluk-berry", "coba-berry"],
     difficulty: "MEDIUM",
+    group: "TREATS",
   },
   {
     result: "rage-candy-bar",
     ingredients: ["honey", "aguav-berry", "razz-berry"],
     difficulty: "MEDIUM",
+    group: "TREATS",
   },
   {
     result: "pewter-crunchies",
     ingredients: ["honey", "grepa-berry", "qualot-berry"],
     difficulty: "MEDIUM",
+    group: "TREATS",
   },
   {
     result: "casteliacone",
     ingredients: ["moomoo-milk", "honey", "aspear-berry"],
     difficulty: "MEDIUM",
+    group: "TREATS",
   },
   {
     result: "lava-cookie",
     ingredients: ["yache-berry", "chilan-berry", "pecha-berry"],
     difficulty: "MEDIUM",
+    group: "TREATS",
   },
   {
     result: "energy-powder",
     ingredients: ["wepear-berry", "pinap-berry"],
     difficulty: "EASY",
+    group: "TREATS",
   },
   {
     result: "energy-powder",
     ingredients: ["cornn-berry", "rabuta-berry"],
     difficulty: "EASY",
+    group: "TREATS",
   },
   {
     result: "energy-powder",
     ingredients: ["nomel-berry", "magost-berry"],
     difficulty: "EASY",
+    group: "TREATS",
   },
   {
     result: "heal-powder",
     ingredients: ["spelon-berry", "durin-berry"],
     difficulty: "MEDIUM",
+    group: "TREATS",
   },
   {
     result: "heal-powder",
     ingredients: ["watmel-berry", "pamtre-berry", "belue-berry"],
     difficulty: "EASY",
+    group: "TREATS",
   },
   {
     result: "rare-candy",
@@ -96,6 +130,7 @@ export const BASE_RECIPES: Recipe[] = [
       "bluk-berry",
     ],
     difficulty: "TRICKY",
+    group: "TREATS",
   },
   {
     result: "rare-candy",
@@ -105,6 +140,7 @@ export const BASE_RECIPES: Recipe[] = [
       "silver-pinap-berry",
     ],
     difficulty: "MEDIUM",
+    group: "TREATS",
   },
   {
     result: "rare-candy",
@@ -114,51 +150,61 @@ export const BASE_RECIPES: Recipe[] = [
       "golden-pinap-berry",
     ],
     difficulty: "EASY",
+    group: "TREATS",
   },
   {
     result: "max-honey",
     ingredients: ["honey", "honey", "honey", "enigma-berry"],
     difficulty: "TRICKY",
+    group: "TREATS",
   },
   {
     result: "max-mushroom",
     ingredients: ["tiny-mushroom", "enigma-berry"],
     difficulty: "MEDIUM",
+    group: "TREATS",
   },
   {
     result: "fresh-start-mochi",
     ingredients: ["honey", "golden-razz-berry"],
     difficulty: "MEDIUM",
+    group: "MOCHI",
   },
   {
     result: "swift-mochi",
     ingredients: ["honey", "occa-berry"],
     difficulty: "MEDIUM",
+    group: "MOCHI",
   },
   {
     result: "health-mochi",
     ingredients: ["honey", "sitrus-berry"],
     difficulty: "MEDIUM",
+    group: "MOCHI",
   },
   {
     result: "muscle-mochi",
     ingredients: ["honey", "jaboca-berry"],
     difficulty: "MEDIUM",
+    group: "MOCHI",
   },
   {
     result: "resist-mochi",
     ingredients: ["honey", "chesto-berry"],
     difficulty: "MEDIUM",
+    group: "MOCHI",
   },
   {
     result: "clever-mochi",
     ingredients: ["honey", "hondew-berry"],
     difficulty: "MEDIUM",
+    group: "MOCHI",
   },
   {
     result: "genius-mochi",
     ingredients: ["honey", "spelon-berry"],
     difficulty: "MEDIUM",
+    group: "MOCHI",
   },
 ];
 

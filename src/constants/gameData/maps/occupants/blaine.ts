@@ -1,6 +1,7 @@
 import { calculateLevelData } from "../../../../functions/calculateLevelData";
 import { getPercentageEVfromXp } from "../../../../functions/getPercentageEVfromXp";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
+import { occupantHandled } from "../../../../functions/occupantHandled";
 import {
   Occupant,
   OverworldNpc,
@@ -71,7 +72,8 @@ const blaineCondition = (s: SaveFile) => {
     team.every(
       (t) =>
         calculateLevelData(t.xp, t.growthRate).level <= 25 &&
-        t.caughtOnMap === "routeE1",
+        t.caughtOnMap === "routeE1" &&
+        !occupantHandled(s, blaineId),
     )
   );
 };

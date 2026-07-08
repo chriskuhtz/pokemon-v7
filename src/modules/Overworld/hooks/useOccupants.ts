@@ -1,5 +1,6 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { PokemonName } from "../../../constants/pokemonNames";
+import { ArrayHelpers } from "../../../functions/ArrayHelpers";
 import { getRandomOrientation } from "../../../functions/getNextClockwiseDirection";
 import { getNextLocation } from "../../../functions/getNextLocation";
 import { getOppositeDirection } from "../../../functions/getOppositeDirection";
@@ -7,7 +8,6 @@ import { hasType } from "../../../functions/hasType";
 import { makeApricornTree } from "../../../functions/makeApricornTree";
 import { makeBerryTree } from "../../../functions/makeBerryTree";
 import { occupantHandled } from "../../../functions/occupantHandled";
-import { shuffle } from "../../../functions/shuffle";
 import {
   makeOverworldNPCfromQuizMasterEvent,
   makeOverworldPokemonFromStaticEncounterEvent,
@@ -205,7 +205,7 @@ const createPasturePokemon = (
   saveFile: SaveFile,
   internalDex: InternalDex,
 ): OverworldPokemon[] => {
-  const pastureMons = shuffle(
+  const pastureMons = ArrayHelpers.shuffle(
     saveFile.pokemon
       .filter(
         (p) =>
@@ -219,7 +219,7 @@ const createPasturePokemon = (
   const third = pastureMons.at(2);
   const fourth = pastureMons.at(3);
 
-  const waterMons = shuffle(
+  const waterMons = ArrayHelpers.shuffle(
     saveFile.pokemon
       .filter(
         (p) =>

@@ -2,13 +2,29 @@ import { useCallback, useContext, useMemo } from "react";
 import { ONE_HOUR } from "../constants/baseConstants";
 import { mapsRecord } from "../constants/gameData/maps/mapsRecord";
 import { barryId } from "../constants/gameData/maps/occupants/barry";
+import { blaineId } from "../constants/gameData/maps/occupants/blaine";
+import { brockId } from "../constants/gameData/maps/occupants/brock";
+import { bugsyId } from "../constants/gameData/maps/occupants/bugsy";
 import { challengeFieldOccupants } from "../constants/gameData/maps/occupants/challengeField";
+import { chuckId } from "../constants/gameData/maps/occupants/chuckLine";
+import { clairId } from "../constants/gameData/maps/occupants/clair";
 import { cynthiaId } from "../constants/gameData/maps/occupants/cynthia";
+import { erikaId } from "../constants/gameData/maps/occupants/erika";
+import { falknerId } from "../constants/gameData/maps/occupants/falknerLine";
+import { garyId } from "../constants/gameData/maps/occupants/gary";
 import { hughId } from "../constants/gameData/maps/occupants/hugh";
+import { janineId } from "../constants/gameData/maps/occupants/janine";
+import { jasmineId } from "../constants/gameData/maps/occupants/jasmine";
 import { lanceId } from "../constants/gameData/maps/occupants/lance";
+import { mistyId } from "../constants/gameData/maps/occupants/misty";
+import { mortyId } from "../constants/gameData/maps/occupants/mortyLine";
 import { nId } from "../constants/gameData/maps/occupants/n";
+import { pryceId } from "../constants/gameData/maps/occupants/pryce";
 import { redId } from "../constants/gameData/maps/occupants/red";
+import { sabrinaId } from "../constants/gameData/maps/occupants/sabrina";
 import { silverId } from "../constants/gameData/maps/occupants/silver";
+import { surgeId } from "../constants/gameData/maps/occupants/surge";
+import { whitneyId } from "../constants/gameData/maps/occupants/whitney";
 import { addPokemonToDex } from "../functions/addPokemonToDex";
 import { ArrayHelpers } from "../functions/ArrayHelpers";
 import { calculateLevelData } from "../functions/calculateLevelData";
@@ -464,9 +480,30 @@ const useHandleWin = () => {
         //Todo: refactor this into the challenger config
         if (
           defeatedChallengerId &&
-          [barryId, nId, cynthiaId, silverId, redId, hughId].includes(
-            defeatedChallengerId,
-          )
+          [
+            barryId,
+            nId,
+            cynthiaId,
+            silverId,
+            redId,
+            hughId,
+            erikaId,
+            surgeId,
+            mistyId,
+            blaineId,
+            brockId,
+            garyId,
+            sabrinaId,
+            janineId,
+            bugsyId,
+            falknerId,
+            whitneyId,
+            mortyId,
+            jasmineId,
+            chuckId,
+            pryceId,
+            clairId,
+          ].includes(defeatedChallengerId)
         ) {
           return ONE_HOUR;
         }

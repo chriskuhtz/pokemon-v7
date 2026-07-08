@@ -6,7 +6,7 @@ import { CharacterLocationData, SaveFile } from "./SaveFile";
 import { SettingsObject } from "./SettingsObject";
 
 export type InternalDex = Record<PokemonName, InternalDexEntry>;
-
+export type Version = "KUMA" | "LABYRINTH" | "STRANGE_DIMENSION";
 export interface OverworldAction {
   possible: (saveFile: SaveFile) => boolean;
   successDialogue: string[];
@@ -18,6 +18,7 @@ export interface OverworldActions {
   rockClimbing: OverworldAction;
 }
 export interface GameData {
+  version: Version;
   locationId: string;
   saveFileId: string;
   startingLocation: CharacterLocationData;

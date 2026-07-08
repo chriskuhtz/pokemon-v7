@@ -31,6 +31,12 @@ export const healingItemTypes = [
   "revival-herb",
   "lava-cookie",
   "berry-juice",
+  "liechi-juice",
+  "ganlon-juice",
+  "petaya-juice",
+  "apicot-juice",
+  "micle-juice",
+  "custap-juice",
   "old-gateau",
   "big-malasada",
   "blue-flute",
@@ -415,6 +421,26 @@ export const berries = [
   "jaboca-berry",
   "rowap-berry",
 ] as const;
+export const gems = [
+  "fire-gem",
+  "water-gem",
+  "electric-gem",
+  "grass-gem",
+  "ice-gem",
+  "fighting-gem",
+  "poison-gem",
+  "ground-gem",
+  "flying-gem",
+  "psychic-gem",
+  "bug-gem",
+  "rock-gem",
+  "ghost-gem",
+  "dark-gem",
+  "steel-gem",
+  "dragon-gem",
+  "normal-gem",
+  "fairy-gem",
+] as const;
 export const fossils = [
   "old-amber",
   "helix-fossil",
@@ -543,6 +569,12 @@ export function isCooked(x: string | undefined): boolean {
     !!x &&
     [
       "berry-juice",
+      "liechi-juice",
+      "ganlon-juice",
+      "petaya-juice",
+      "apicot-juice",
+      "micle-juice",
+      "custap-juice",
       "rare-candy",
       "big-malasada",
       "moomoo-cheese",
@@ -622,6 +654,12 @@ export const hasEndOfTurnEffect = (item: ItemType): boolean => {
   if (
     isBerry(item) ||
     item === "berry-juice" ||
+    item === "liechi-juice" ||
+    item === "ganlon-juice" ||
+    item === "petaya-juice" ||
+    item === "apicot-juice" ||
+    item === "micle-juice" ||
+    item === "custap-juice" ||
     item === "leftovers" ||
     item === "black-sludge" ||
     isHerb(item)
@@ -666,6 +704,12 @@ export const HPHealTable: Partial<Record<ItemType, number>> = {
   potion: 20,
   "sweet-heart": 20,
   "berry-juice": 20,
+  "liechi-juice": 20,
+  "ganlon-juice": 20,
+  "petaya-juice": 20,
+  "apicot-juice": 20,
+  "micle-juice": 20,
+  "custap-juice": 20,
   "sitrus-berry": 30,
   "energy-powder": 50,
   "super-potion": 50,
@@ -691,6 +735,14 @@ export const emergencyBoostBerriesTable: Partial<Record<ItemType, Stat>> = {
   "apicot-berry": "special-defense",
   "micle-berry": "accuracy",
   "custap-berry": "speed",
+};
+export const emergencyBoostJuiceTable: Partial<Record<ItemType, Stat>> = {
+  "liechi-juice": "attack",
+  "ganlon-juice": "defense",
+  "petaya-juice": "special-attack",
+  "apicot-juice": "special-defense",
+  "micle-juice": "accuracy",
+  "custap-juice": "speed",
 };
 /**
  * These berries make pokemon happier, but reduce their evs
@@ -775,6 +827,12 @@ export const pickupTable: ItemType[] = [
   ...apricorns.filter((b) => b !== "purple-apricorn"),
   ...herbs,
   "berry-juice",
+  "liechi-juice",
+  "ganlon-juice",
+  "petaya-juice",
+  "apicot-juice",
+  "micle-juice",
+  "custap-juice",
   "old-gateau",
   "energy-powder",
   "energy-root",
@@ -928,4 +986,10 @@ export const moveUnlockPayments: ItemType[] = [
   "rage-candy-bar",
   "lava-cookie",
   "old-gateau",
+  "liechi-juice",
+  "ganlon-juice",
+  "petaya-juice",
+  "apicot-juice",
+  "micle-juice",
+  "custap-juice",
 ];

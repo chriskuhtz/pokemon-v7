@@ -6,13 +6,16 @@ import { ItemSprite } from "../../components/ItemSprite/ItemSprite";
 import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 import { battleSpriteSize } from "../../constants/baseConstants";
 import { typeColors } from "../../constants/typeColors";
+import { wouldThisBagBeOverloaded } from "../../functions/getBagLimit";
 import { getRewardItemsForQuest } from "../../functions/getRewardForQuest";
 import { getTimeOfDay } from "../../functions/getTimeOfDay";
 import { replaceRouteName } from "../../functions/replaceRouteName";
 import { LocationContext } from "../../hooks/LocationProvider";
 import { useFulfillQuest } from "../../hooks/useFulfillQuest";
+import { GameDataContext } from "../../hooks/useGameData";
 import { useQuests } from "../../hooks/useQuests";
 import { SaveFileContext } from "../../hooks/useSaveFile";
+import { Inventory, joinInventories } from "../../interfaces/Inventory";
 import { ItemType } from "../../interfaces/Item";
 import { questCategories, QuestCategory } from "../../interfaces/Quest";
 import { AnimatedBar } from "../../uiComponents/AnimatedBar/AnimatedBar";
@@ -198,24 +201,10 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
               }
               actionElements={[
                 status === "FULFILLED" && (
-                  <button
-                    style={{
-                      backgroundColor: typeColors["grass"],
-                    }}
-                    onClick={() => {
-                      fulfillQuest(name);
-                    }}
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      e.stopPropagation();
-                      if (e.key === "Enter") {
-                        fulfillQuest(name);
-                      }
-                    }}
-                  >
-                    Collect Reward
-                  </button>
+                  <CollectButton
+                    fulfillQuest={() => fulfillQuest(name)}
+                    rewards={getRewardItemsForQuest(name as KumaQuestName)}
+                  />
                 ),
                 status === "ACTIVE" && <strong>Active</strong>,
               ].filter((x) => !!x)}
@@ -224,5 +213,49 @@ export const Quests = ({ goBack }: { goBack: () => void }) => {
         })}
       </Stack>
     </InGamePage>
+  );
+};
+
+const CollectButton = ({
+  fulfillQuest,
+  rewards,
+}: {
+  fulfillQuest: () => void;
+  rewards: Partial<Inventory>;
+}) => {
+  const { saveFile } = useContext(SaveFileContext);
+  const gameData = useContext(GameDataContext);
+  const location = useContext(LocationContext);
+  const collectable =
+    location.map.id === "camp" ||
+    !wouldThisBagBeOverloaded(
+      joinInventories(saveFile.bag, rewards),
+      saveFile,
+      gameData,
+    );
+  return (
+    <button
+      disabled={!collectable}
+      style={
+        collectable
+          ? {
+              backgroundColor: typeColors["grass"],
+            }
+          : undefined
+      }
+      onClick={() => {
+        fulfillQuest();
+      }}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        e.stopPropagation();
+        if (e.key === "Enter") {
+          fulfillQuest();
+        }
+      }}
+    >
+      {collectable ? "Collect Reward" : "Cant fit all rewards into bag"}
+    </button>
   );
 };

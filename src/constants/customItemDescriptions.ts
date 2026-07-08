@@ -42,4 +42,16 @@ export const customItemDescriptions: Record<string, string> = {
   ...Object.fromEntries(
     cookingBerries.map((apri) => [apri, `can be used as cooking ingredient`]),
   ),
+  "liechi-juice":
+    "Can be used like a berry in battle. Heals 20 HP and boosts attack by two stages",
+  "ganlon-juice":
+    "Can be used like a berry in battle. Heals 20 HP and boosts defense by two stages",
+  "petaya-juice":
+    "Can be used like a berry in battle. Heals 20 HP and boosts special-attack by two stages",
+  "apicot-juice":
+    "Can be used like a berry in battle. Heals 20 HP and boosts special-defense by two stages",
+  "micle-juice":
+    "Can be used like a berry in battle. Heals 20 HP and boosts accuracy by two stages",
+  "custap-juice":
+    "Can be used like a berry in battle. Heals 20 HP and boosts speed by two stages",
 };

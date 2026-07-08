@@ -1,6 +1,7 @@
 import { calculateLevelData } from "../../../../functions/calculateLevelData";
 import { getPercentageEVfromXp } from "../../../../functions/getPercentageEVfromXp";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
+import { occupantHandled } from "../../../../functions/occupantHandled";
 import {
   Occupant,
   OverworldNpc,
@@ -57,7 +58,8 @@ const sabrinaCondition = (s: SaveFile) => {
     team[0].name === "gengar" &&
     team[1].name === "scizor" &&
     team[2].name === "houndoom" &&
-    team.every((t) => calculateLevelData(t.xp, t.growthRate).level <= 40)
+    team.every((t) => calculateLevelData(t.xp, t.growthRate).level <= 40) &&
+    !occupantHandled(s, sabrinaId)
   );
 };
 

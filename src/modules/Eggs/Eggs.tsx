@@ -62,7 +62,7 @@ export const Eggs = (): JSX.Element => {
             handledMoves.includes(m.move.name as MoveName) &&
             m.version_group_details.at(0)?.move_learn_method.name === "egg",
         )
-        .map((move) => move.move.name as MoveName);
+        .map((move) => move.move.name as MoveName).filter(()=>Math.random()>.5);
 
       const possibleAbilities = [
         ...fetchedData.abilities

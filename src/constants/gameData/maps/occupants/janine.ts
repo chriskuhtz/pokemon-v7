@@ -1,6 +1,7 @@
 import { calculateLevelData } from "../../../../functions/calculateLevelData";
 import { getPercentageEVfromXp } from "../../../../functions/getPercentageEVfromXp";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
+import { occupantHandled } from "../../../../functions/occupantHandled";
 import {
   Occupant,
   OverworldNpc,
@@ -52,7 +53,8 @@ const janineCondition = (s: SaveFile) => {
   const team = s.pokemon.filter((p) => p.onTeam);
   return (
     team.length === 2 &&
-    team.every((t) => calculateLevelData(t.xp, t.growthRate).level <= 20)
+    team.every((t) => calculateLevelData(t.xp, t.growthRate).level <= 20) &&
+    !occupantHandled(s, janineId)
   );
 };
 

@@ -1,5 +1,6 @@
 import { useCallback, useContext } from "react";
 import { FaAnglesDown } from "react-icons/fa6";
+import { BagLimitBar } from "../../components/BagLimitBar/BagLimitBar";
 import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { ThrowAwayAction } from "../../components/ItemCard/components/ThrowAwayAction";
 import { ItemSelectionOption } from "../../components/ItemSelectionOption/ItemSelectionOption";
@@ -82,6 +83,7 @@ export const Loot = () => {
           : undefined}
 
         <h3>In your Bag:</h3>
+        <BagLimitBar />
         {Object.entries(saveFile.bag)
           .filter(([key, amount]) => amount > 0 && !isKeyItem(key))
           .map(([item, amount]) => (

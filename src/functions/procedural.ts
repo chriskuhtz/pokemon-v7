@@ -324,7 +324,8 @@ export const generateStrangeDimension = (
       tileMap.waterLayer[yLevel][xLevel] = null;
       tileMap.decorationLayer[yLevel][xLevel] = null;
       tileMap.foregroundLayer[yLevel][xLevel] = null;
-      tileMap.encounterLayer[yLevel][xLevel] = baseTile;
+      tileMap.encounterLayer[yLevel][xLevel] =
+        Math.random() > 0.5 ? baseTile : null;
       tileMap.baseLayer[yLevel][xLevel] = baseTile;
       tileMap.obstacleLayer[yLevel][xLevel] = path.some(
         (p) => p.x === xLevel && p.y === yLevel,
