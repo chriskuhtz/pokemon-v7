@@ -1,6 +1,7 @@
 import { calculateLevelData } from "../../../../functions/calculateLevelData";
 import { getPercentageEVfromXp } from "../../../../functions/getPercentageEVfromXp";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
+import { occupantHandled } from "../../../../functions/occupantHandled";
 import {
   Occupant,
   OverworldNpc,
@@ -28,16 +29,17 @@ const erikaTeam = () => [
     },
   }),
 ];
+export const erikaId = "Gym Leader Erika";
 
 const erikaCondition = (s: SaveFile) => {
   const team = s.pokemon.filter((p) => p.onTeam);
   return (
     team.length === 1 &&
-    calculateLevelData(team[0].xp, team[0].growthRate).level === 15
+    calculateLevelData(team[0].xp, team[0].growthRate).level === 15 &&
+    !occupantHandled(s, erikaId)
   );
 };
 
-export const erikaId = "Gym Leader Erika";
 export const trainerErika: OverworldTrainer = {
   profilePicture:
     "https://archives.bulbagarden.net/media/upload/5/5a/VSErika.png",

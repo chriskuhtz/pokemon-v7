@@ -1,6 +1,7 @@
 import { calculateLevelData } from "../../../../functions/calculateLevelData";
 import { getPercentageEVfromXp } from "../../../../functions/getPercentageEVfromXp";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
+import { occupantHandled } from "../../../../functions/occupantHandled";
 import {
   Occupant,
   OverworldNpc,
@@ -55,7 +56,8 @@ const mistyCondition = (s: SaveFile) => {
   const team = s.pokemon.filter((p) => p.onTeam);
   return (
     team.length <= 3 &&
-    team.every((t) => calculateLevelData(t.xp, t.growthRate).level <= 30)
+    team.every((t) => calculateLevelData(t.xp, t.growthRate).level <= 30) &&
+    !occupantHandled(s, mistyId)
   );
 };
 

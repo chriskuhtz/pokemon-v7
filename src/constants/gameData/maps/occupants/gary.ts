@@ -1,6 +1,7 @@
 import { calculateLevelData } from "../../../../functions/calculateLevelData";
 import { getPercentageEVfromXp } from "../../../../functions/getPercentageEVfromXp";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
+import { occupantHandled } from "../../../../functions/occupantHandled";
 import {
   Occupant,
   OverworldNpc,
@@ -91,7 +92,8 @@ const garyCondition = (s: SaveFile) => {
     team.every(
       (t) =>
         calculateLevelData(t.xp, t.growthRate).level <= 60 &&
-        baseInternalDex[t.name].dexId <= 151,
+        baseInternalDex[t.name].dexId <= 151 &&
+        !occupantHandled(s, garyId),
     )
   );
 };

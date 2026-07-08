@@ -176,7 +176,7 @@ const DexCard = () => {
 const NotesCard = () => {
   const { saveFile } = useContext(SaveFileContext);
   const navigate = useNavigate();
-  if (saveFile.trainerNotes?.at(0)) {
+  if (!saveFile.trainerNotes?.at(0)) {
     return <></>;
   }
   return (

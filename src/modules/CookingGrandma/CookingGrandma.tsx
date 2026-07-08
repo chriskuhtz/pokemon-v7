@@ -33,29 +33,94 @@ export const CookingGrandma = (): JSX.Element => {
         <p>
           <strong>What should we cook:</strong>
         </p>
-
+        <p style={{ marginBottom: 0 }}>
+          <strong>Juices:</strong>
+        </p>
         <Stack mode="row">
-          {[...new Set([...BASE_RECIPES.map((e) => e.result)])].map(
-            (result) => (
-              <button
-                key={result}
-                style={{
-                  padding: "0rem .75rem",
-                  color: filter === result ? "white" : undefined,
-                  backgroundColor: filter === result ? "black" : undefined,
-                }}
-                onClick={() => setFilter(result)}
-              >
-                <ItemSprite
-                  grayscale={enabledRecipes.every(
-                    (enabled) => enabled.result !== result,
-                  )}
-                  item={result}
-                />
-              </button>
-            ),
-          )}
+          {[
+            ...new Set([
+              ...BASE_RECIPES.filter((e) => e.group === "JUICE").map(
+                (e) => e.result,
+              ),
+            ]),
+          ].map((result) => (
+            <button
+              key={result}
+              style={{
+                padding: "0rem .75rem",
+                color: filter === result ? "white" : undefined,
+                backgroundColor: filter === result ? "black" : undefined,
+              }}
+              onClick={() => setFilter(result)}
+            >
+              <ItemSprite
+                grayscale={enabledRecipes.every(
+                  (enabled) => enabled.result !== result,
+                )}
+                item={result}
+              />
+            </button>
+          ))}
         </Stack>
+        <p style={{ marginBottom: 0 }}>
+          <strong>Treats:</strong>
+        </p>
+        <Stack mode="row">
+          {[
+            ...new Set([
+              ...BASE_RECIPES.filter((e) => e.group === "TREATS").map(
+                (e) => e.result,
+              ),
+            ]),
+          ].map((result) => (
+            <button
+              key={result}
+              style={{
+                padding: "0rem .75rem",
+                color: filter === result ? "white" : undefined,
+                backgroundColor: filter === result ? "black" : undefined,
+              }}
+              onClick={() => setFilter(result)}
+            >
+              <ItemSprite
+                grayscale={enabledRecipes.every(
+                  (enabled) => enabled.result !== result,
+                )}
+                item={result}
+              />
+            </button>
+          ))}
+        </Stack>
+        <p style={{ marginBottom: 0 }}>
+          <strong>Mochis:</strong>
+        </p>
+        <Stack mode="row">
+          {[
+            ...new Set([
+              ...BASE_RECIPES.filter((e) => e.group === "MOCHI").map(
+                (e) => e.result,
+              ),
+            ]),
+          ].map((result) => (
+            <button
+              key={result}
+              style={{
+                padding: "0rem .75rem",
+                color: filter === result ? "white" : undefined,
+                backgroundColor: filter === result ? "black" : undefined,
+              }}
+              onClick={() => setFilter(result)}
+            >
+              <ItemSprite
+                grayscale={enabledRecipes.every(
+                  (enabled) => enabled.result !== result,
+                )}
+                item={result}
+              />
+            </button>
+          ))}
+        </Stack>
+
         <Stack mode="column">
           {enabledRecipes
             .filter((recipe) => {

@@ -9,6 +9,7 @@ import { Game } from "../../modules/Game/Game";
 import { kumaDex } from "../kuma/kumaDex";
 
 export const strangeDimensionGameData: GameData = {
+  version: "STRANGE_DIMENSION",
   saveFileId: "pokemonStrangeDimensionSaveFile",
   locationId: "pokemonStrangeDimensionLocation",
   startingLocation: {

@@ -8,6 +8,7 @@ export const onixCave: OverworldMap = {
   tilesetUrl: "/tilesets/newMasterSheet.png",
   timeOfDayShadersMap: caveShaderMap,
   occupants: onixCaveOccupants,
+  dark: true,
   questMenuAvailable: true,
   tileMap: {
     baseLayer: [

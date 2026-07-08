@@ -172,9 +172,11 @@ export const ProceduralContinue = (): JSX.Element => {
         <button disabled={bagIsOverloaded} onClick={continueDeeper}>
           Continue deeper into the strangeness
         </button>
-        <button disabled={bagIsOverloaded} onClick={returnToCamp}>
-          Return to camp
-        </button>
+        {gameData.version === "KUMA" && (
+          <button disabled={bagIsOverloaded} onClick={returnToCamp}>
+            Return to camp
+          </button>
+        )}
       </Stack>
     </InGamePage>
   );

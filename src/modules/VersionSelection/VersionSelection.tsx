@@ -4,6 +4,7 @@ import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 import { RecoveryTool } from "../../components/RecoveryTool/RecoveryTool";
 import { battleSpriteSize } from "../../constants/baseConstants";
 import { mapsRecord } from "../../constants/gameData/maps/mapsRecord";
+import { Version } from "../../interfaces/GameData";
 import { MapId } from "../../interfaces/mapIds";
 import { Card } from "../../uiComponents/Card/Card";
 import { Page } from "../../uiComponents/Page/Page";
@@ -14,7 +15,6 @@ import { StrangeDimension } from "../../versions/strangeDimension/StrangeDimensi
 import { ChangeLog } from "../ChangeLog/ChangeLog";
 import { MapEditor } from "../MapMaker/components/MapEditor";
 
-type Version = "KUMA" | "LABYRINTH" | "STRANGE_DIMENSION";
 export const VersionSelection = (): JSX.Element => {
   const [version, setVersion] = useState<Version>();
   const [map, setMap] = useState<MapId | undefined>(

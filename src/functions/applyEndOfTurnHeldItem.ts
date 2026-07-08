@@ -2,6 +2,7 @@ import { BattlePokemon } from "../interfaces/BattlePokemon";
 import { Inventory } from "../interfaces/Inventory";
 import {
   emergencyBoostBerriesTable,
+  emergencyBoostJuiceTable,
   FlavourfullBerriesTable,
   hasEndOfTurnEffect,
   HPHealTable,
@@ -150,6 +151,25 @@ export const applyEndOfTurnHeldItem = (
       (x) => addMessage(x.message),
     );
   }
+  const juiceBoost = emergencyBoostJuiceTable[heldItem];
+  if (juiceBoost && pokemon.damage / pokemon.stats.hp >= 0.75) {
+    addMultipleMessages([
+      `${pokemon.data.name} gave itself a boost with ${heldItem}`,
+    ]);
+
+    return applyStatChangeToPokemon(
+      {
+        ...pokemon,
+        heldItemName: undefined,
+        damage: Math.max(pokemon.damage - 20, 0),
+      },
+      juiceBoost,
+      2,
+      true,
+      [],
+      (x) => addMessage(x.message),
+    );
+  }
   if (heldItem === "starf-berry" && pokemon.damage / pokemon.stats.hp >= 0.75) {
     addMultipleMessages([
       `${pokemon.data.name} gave itself a boost with ${heldItem}`,
@@ -222,7 +242,11 @@ export const applyEndOfTurnHeldItem = (
       (x) => addMessage(x.message),
     );
   }
-  if (HPHealTable[heldItem] && pokemon.damage / pokemon.stats.hp > 0.5) {
+  if (
+    HPHealTable[heldItem] &&
+    !juiceBoost &&
+    pokemon.damage / pokemon.stats.hp > 0.5
+  ) {
     addMessage(`${pokemon.data.name} healed itself with ${heldItem}`);
     return {
       ...applyItemToPokemon({ pokemon, item: heldItem, trait }),

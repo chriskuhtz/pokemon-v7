@@ -1,3 +1,4 @@
+import { shuffle } from "lodash";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { v4 } from "uuid";
 import { InGamePage } from "../../components/InGamePage/InGamePage";
@@ -5,10 +6,13 @@ import { PokemonSprite } from "../../components/PokemonSprite/PokemonSprite";
 import { ONE_HOUR } from "../../constants/baseConstants";
 import { baseInternalDex } from "../../constants/baseInternalDex";
 import { allBst } from "../../constants/baseStatRecord";
+import { testPokemon } from "../../constants/gameData/gameData";
 import { PokemonName, pokemonNames } from "../../constants/pokemonNames";
 import { ArrayHelpers } from "../../functions/ArrayHelpers";
-import { shuffle } from "../../functions/shuffle";
+import { getHighestStat } from "../../functions/getHighestStat";
+import { getTypeNames } from "../../functions/getTypeNames";
 import { QUIZ_MASTER_ID, startBlocker } from "../../functions/TimedEvent";
+import { useGetBattleTeam } from "../../hooks/useGetBattleTeam";
 import { MessageQueueContext } from "../../hooks/useMessageQueue";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { joinInventories } from "../../interfaces/Inventory";
@@ -19,7 +23,15 @@ import {
   ItemType,
   lures,
 } from "../../interfaces/Item";
+import { OwnedPokemon } from "../../interfaces/OwnedPokemon";
+import { PokemonData } from "../../interfaces/PokemonData";
+import {
+  pokemonTypes,
+  typeEffectivenessChart,
+} from "../../interfaces/PokemonType";
+import { stats } from "../../interfaces/StatObject";
 import { Card } from "../../uiComponents/Card/Card";
+import { LoadingScreen } from "../../uiComponents/LoadingScreen/LoadingScreen";
 
 interface QuizMasterQuestion {
   text: string;
@@ -40,8 +52,9 @@ interface QuizMasterState {
 const questionTypes = [
   "nameOfPokemon",
   "typeOfPokemon",
-  //"weaknessOfPokemon",
   "bstOfPokemon",
+  "highestStatOfPokemon",
+  "weaknessOfPokemon",
 ] as const;
 
 type QuestionType = (typeof questionTypes)[number];
@@ -49,7 +62,7 @@ type QuestionType = (typeof questionTypes)[number];
 const getBstQuestion = (pokemon: PokemonName) => {
   const bst = allBst[pokemon];
 
-  const options = shuffle([
+  const options = ArrayHelpers.shuffle([
     bst,
     bst + Math.ceil(Math.random() * 100),
     bst - Math.ceil(Math.random() * 100),
@@ -61,7 +74,7 @@ const getBstQuestion = (pokemon: PokemonName) => {
   };
 };
 const getNameQuestion = (pokemon: PokemonName) => {
-  const options = shuffle([
+  const options = ArrayHelpers.shuffle([
     pokemon,
     ArrayHelpers.getRandomEntry([...pokemonNames]),
     ArrayHelpers.getRandomEntry([...pokemonNames]),
@@ -73,7 +86,7 @@ const getNameQuestion = (pokemon: PokemonName) => {
   };
 };
 const getTypeQuestion = (pokemon: PokemonName) => {
-  const options = shuffle([
+  const options = ArrayHelpers.shuffle([
     baseInternalDex[pokemon].types.join("|"),
     baseInternalDex[ArrayHelpers.getRandomEntry([...pokemonNames])].types.join(
       "|",
@@ -88,21 +101,73 @@ const getTypeQuestion = (pokemon: PokemonName) => {
     options,
   };
 };
-// const getWeaknessQuestion = (pokemon: PokemonName) => {
-//   const options = shuffle([
-//     pokemon,
-//     ArrayHelpers.getRandomEntry([...pokemonNames]),
-//     ArrayHelpers.getRandomEntry([...pokemonNames]),
-//   ]);
-//   return {
-//     text: `which one of these types is ${pokemon} weak to`,
-//     correctAnswer: pokemon,
-//     options,
-//   };
-// };
+const getHighestStatQuestion = (
+  pokemon: PokemonName,
+  data: PokemonData,
+): QuizMasterQuestion => {
+  const highestStat = getHighestStat({
+    ownedPokemon: testPokemon,
+    data,
+    ownerTrait: "archaeologist",
+    pokemonTypes: getTypeNames({ ...testPokemon, data }),
+    settings: undefined,
+  })[0];
+
+  let options = [highestStat];
+
+  options.push(
+    ArrayHelpers.getRandomEntry([...stats].filter((s) => !options.includes(s))),
+  );
+  options.push(
+    ArrayHelpers.getRandomEntry([...stats].filter((s) => !options.includes(s))),
+  );
+
+  options = ArrayHelpers.shuffle(options);
+
+  return {
+    text: `which is ${pokemon}'s best stat`,
+    correctAnswer: highestStat,
+    options,
+  };
+};
+const getWeaknessQuestion = (
+  pokemon: PokemonName,
+  data: PokemonData,
+): QuizMasterQuestion => {
+  const types = getTypeNames({ data } as OwnedPokemon & {
+    data: PokemonData;
+  });
+
+  const superEffective = pokemonTypes.find(
+    (type) =>
+      types.some((t) =>
+        typeEffectivenessChart[type].isSuperEffectiveAgainst.includes(t),
+      ) &&
+      !types.some(
+        (t) =>
+          typeEffectivenessChart[type].doesntEffect.includes(t) ||
+          typeEffectivenessChart[type].isNotVeryEffectiveAgainst.includes(t),
+      ),
+  );
+  const second = ArrayHelpers.getRandomEntry([
+    ...pokemonTypes.filter((t) => t !== superEffective),
+  ]);
+  const third = ArrayHelpers.getRandomEntry([
+    ...pokemonTypes.filter((t) => t !== superEffective && t !== second),
+  ]);
+  const options = shuffle([superEffective, second, third]).filter(
+    (t) => t !== undefined,
+  );
+  return {
+    text: `which one of these types is ${pokemon} weak to`,
+    correctAnswer: pokemon,
+    options,
+  };
+};
 const getQuestion = (
   pokemon: PokemonName,
   type: QuestionType,
+  data: PokemonData,
 ): QuizMasterQuestion => {
   switch (type) {
     case "bstOfPokemon":
@@ -111,27 +176,29 @@ const getQuestion = (
       return getNameQuestion(pokemon);
     case "typeOfPokemon":
       return getTypeQuestion(pokemon);
-    // case "weaknessOfPokemon":
-    //   return getWeaknessQuestion(pokemon);
+    case "highestStatOfPokemon":
+      return getHighestStatQuestion(pokemon, data);
+    case "weaknessOfPokemon":
+      return getWeaknessQuestion(pokemon, data);
   }
 };
 
-const generateQuestion = (pokemon: PokemonName): QuizMasterQuestion => {
+const generateQuestion = (
+  pokemon: PokemonName,
+  data: PokemonData,
+): QuizMasterQuestion => {
   const type: QuestionType = ArrayHelpers.getRandomEntry([...questionTypes]);
 
-  return getQuestion(pokemon, type);
+  return getQuestion(pokemon, type, data);
 };
-const generateQuizMasterState = (): QuizMasterState => {
-  const randomMons: PokemonName[] = [
-    ArrayHelpers.getRandomEntry([...pokemonNames]),
-    ArrayHelpers.getRandomEntry([...pokemonNames]),
-    ArrayHelpers.getRandomEntry([...pokemonNames]),
-  ];
+const generateQuizMasterState = (
+  pokemon: { name: PokemonName; data: PokemonData }[],
+): QuizMasterState => {
   return {
-    questions: randomMons.map((mon) => ({
+    questions: pokemon.map((mon) => ({
       id: v4(),
-      pokemon: mon,
-      question: generateQuestion(mon),
+      pokemon: mon.name,
+      question: generateQuestion(mon.name, mon.data),
       answeredCorrectly: false,
     })),
     reward: ArrayHelpers.getRandomEntry([
@@ -142,8 +209,30 @@ const generateQuizMasterState = (): QuizMasterState => {
     ]),
   };
 };
+export const QuizMaster = () => {
+  const { res: team, status } = useGetBattleTeam(
+    [
+      { ...testPokemon, name: ArrayHelpers.getRandomEntry([...pokemonNames]) },
+      { ...testPokemon, name: ArrayHelpers.getRandomEntry([...pokemonNames]) },
+      { ...testPokemon, name: ArrayHelpers.getRandomEntry([...pokemonNames]) },
+    ],
+    {},
+  );
 
-export const QuizMaster = (): JSX.Element => {
+  if (status === "fetching" || status === "uninitialized") {
+    return <LoadingScreen />;
+  }
+  if (!team || status === "error") {
+    return <></>;
+  }
+
+  return <QuizMasterContent pokemon={team} />;
+};
+const QuizMasterContent = ({
+  pokemon,
+}: {
+  pokemon: { name: PokemonName; data: PokemonData }[];
+}): JSX.Element => {
   const [state, setState] = useState<QuizMasterState>();
   const { addMultipleMessages, latestMessage, addMessage } =
     useContext(MessageQueueContext);
@@ -162,7 +251,7 @@ export const QuizMaster = (): JSX.Element => {
   );
   useEffect(() => {
     if (!state) {
-      setState(generateQuizMasterState());
+      setState(generateQuizMasterState(pokemon));
     }
     if (
       state &&
@@ -180,7 +269,7 @@ export const QuizMaster = (): JSX.Element => {
         },
       ]);
     }
-  }, [addMultipleMessages, goBack, latestMessage, state]);
+  }, [addMultipleMessages, goBack, latestMessage, pokemon, state]);
 
   const giveUp = () => {
     addMultipleMessages([

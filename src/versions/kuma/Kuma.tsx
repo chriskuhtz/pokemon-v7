@@ -7,6 +7,7 @@ import { startingSaveFileKuma } from "./saveFile";
 import { startingLocationKuma } from "./startingLocation";
 
 export const kumaGameData: GameData = {
+  version: "KUMA",
   saveFileId: "pokemonv7SaveFile",
   locationId: "pokemonv7Location",
   startingLocation: startingLocationKuma,

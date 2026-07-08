@@ -4,7 +4,7 @@ import { MessageQueueContext } from "../../../hooks/useMessageQueue";
 import { SaveFileContext } from "../../../hooks/useSaveFile";
 import { joinInventories } from "../../../interfaces/Inventory";
 import {
-  berries,
+  gems,
   isFossil,
   isItem,
   isValuable,
@@ -30,10 +30,10 @@ export const useCurator = (): {
   const trade = useCallback(
     (tradeIn: ItemType) => {
       const points = saveFile.trait === "archaeologist" ? 3 : 1;
-      const randomBerry = ArrayHelpers.getRandomEntry([...berries]);
+      const randomGem = ArrayHelpers.getRandomEntry([...gems]);
       addMultipleMessages([
         {
-          message: `Received ${points} Research Point${points > 1 ? "s" : ""} and a ${randomBerry} for donating a ${tradeIn}`,
+          message: `Received ${points} Research Point${points > 1 ? "s" : ""} and a ${randomGem} for donating a ${tradeIn}`,
         },
         { message: "Thanks for your contribution", needsNoConfirmation: true },
         {
@@ -44,7 +44,7 @@ export const useCurator = (): {
       patchSaveFileReducer({
         bag: joinInventories(saveFile.bag, {
           [tradeIn]: -1,
-          [randomBerry]: 1,
+          [randomGem]: 1,
         }),
         researchPoints: saveFile.researchPoints + points,
       });

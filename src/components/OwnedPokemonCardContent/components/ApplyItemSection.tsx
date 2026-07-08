@@ -42,9 +42,9 @@ export const ApplyItemSection = ({
               trait,
             }),
         )
-        .map(([item]) => item)
-        .filter((s) => s !== undefined && s !== heldItem)
-        .map((item) => {
+
+        .filter(([s]) => s !== undefined && s !== heldItem)
+        .map(([item, amount]) => {
           if (
             item === "ether" ||
             item === "max-ether" ||
@@ -60,6 +60,7 @@ export const ApplyItemSection = ({
                   item={item as ItemType}
                   isSelected={item === heldItem}
                   label={`Apply ${item} to ${ownedPokemon.name}'s ${m.name}`}
+                  hint={`${amount}`}
                   onClick={() =>
                     applyItemToPokemonReducer(
                       ownedPokemon,
@@ -79,6 +80,7 @@ export const ApplyItemSection = ({
                 item={item as ItemType}
                 isSelected={item === heldItem}
                 label={`Apply ${item} to ${ownedPokemon.name}'s ${m.name}`}
+                hint={`${amount}`}
                 onClick={() =>
                   applyItemToPokemonReducer(
                     ownedPokemon,
@@ -95,6 +97,7 @@ export const ApplyItemSection = ({
               item={item as ItemType}
               isSelected={item === heldItem}
               label={`Apply ${item} to ${ownedPokemon.name}`}
+              hint={`${amount}`}
               onClick={() =>
                 applyItemToPokemonReducer(ownedPokemon, item as ItemType)
               }
