@@ -153,7 +153,18 @@ export interface TM {
   type: PokemonType;
   id: string;
 }
+
+export interface Planter {
+  x: number;
+  y: number;
+  id: string;
+  nextHarvestAt: number;
+  currentPlant: BerryType | ApricornType | HerbType | undefined;
+  currentMulch: MulchType | undefined;
+  unlocked: boolean;
+}
 export interface SaveFile {
+  planters: Planter[];
   badges: BadgeName[];
   playerId: string;
   bag: Inventory;

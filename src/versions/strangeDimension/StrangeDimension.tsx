@@ -73,6 +73,7 @@ export const strangeDimensionGameData: GameData = {
       plants: [],
       trees: [],
     },
+    planters:[],    
     campUpgrades: baseCampUpgrades,
     pokedex: emptyPokedex,
     strangeDimensionLevel: 5,

@@ -56,6 +56,7 @@ export const OCCUPANT_TYPES = [
   "POKEBALL",
   "LOST_ITEM",
   "EGG",
+  "OVERWORLD_PLANTER"
 ] as const;
 export type OccupantType = (typeof OCCUPANT_TYPES)[number];
 export interface BaseOccupant {
@@ -279,6 +280,10 @@ export interface OverworldPokeball extends BaseOccupant {
   dialogue: string[];
   pokemon: OwnedPokemon;
 }
+export interface OverworldPlanter extends BaseOccupant{
+  type:"OVERWORLD_PLANTER"
+  plant: BerryType|ApricornType
+}
 
 export type Occupant =
   | OverworldItem
@@ -323,4 +328,4 @@ export type Occupant =
   | TeleporterNpc
   | OverworldClimbingSteps
   | OverworldPokeball
-  | OverworldEgg;
+  | OverworldEgg|OverworldPlanter;

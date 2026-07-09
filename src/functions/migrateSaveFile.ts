@@ -6,7 +6,7 @@ import {
   kumaQuestNames,
   KumaQuestsRecord,
 } from "../versions/kuma/questsRecord";
-import { startingSaveFileKuma } from "../versions/kuma/saveFile";
+import { kumaPlanters, startingSaveFileKuma } from "../versions/kuma/saveFile";
 
 export const migrateSavefile = (input: SaveFile) => {
   const updatedInput = { ...input };
@@ -51,7 +51,9 @@ export const migrateSavefile = (input: SaveFile) => {
   if (!updatedInput.farm.trees || updatedInput.farm.trees.length < 6) {
     updatedInput.farm.trees = startingSaveFileKuma.farm.trees;
   }
-
+  if(!updatedInput.planters){
+    updatedInput.planters=kumaPlanters
+  }
   //migrate in tickets
   if (
     updatedInput.quests["catch a ultra-rare pokemon from routeN1E1"] ===

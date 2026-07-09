@@ -65,9 +65,6 @@ const hasCustomSprite: ItemType[] = [
 ];
 
 export const getItemUrl = (item: ItemType): string => {
-  if (item.includes("-juice")) {
-    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/berry-juice.png`;
-  }
   if (item.includes("ticket")) {
     return `/customItems/ticket.png`;
   }

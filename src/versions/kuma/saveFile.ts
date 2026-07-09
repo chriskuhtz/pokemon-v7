@@ -4,9 +4,84 @@ import {
   emptyPokedex,
 } from "../../constants/gameData/gameData";
 import { EmptyInventory } from "../../interfaces/Inventory";
-import { SaveFile } from "../../interfaces/SaveFile";
+import { Planter, SaveFile } from "../../interfaces/SaveFile";
 
+export const kumaPlanters: Planter[] = [
+  {
+    id: "first",
+    unlocked: false,
+    x: 7,
+    y: 15,
+    currentMulch: undefined,
+    currentPlant: undefined,
+    nextHarvestAt: -1,
+  },
+  {
+    id: "second",
+    unlocked: false,
+    x: 7,
+    y: 17,
+    currentMulch: undefined,
+    currentPlant: undefined,
+    nextHarvestAt: -1,
+  },
+  {
+    id: "third",
+    unlocked: false,
+    x: 7,
+    y: 19,
+    currentMulch: undefined,
+    currentPlant: undefined,
+    nextHarvestAt: -1,
+  },
+  {
+    id: "fourth",
+    unlocked: false,
+    x: 7,
+    y: 21,
+    currentMulch: undefined,
+    currentPlant: undefined,
+    nextHarvestAt: -1,
+  },
+  {
+    id: "fifth",
+    unlocked: false,
+    x: 5,
+    y: 15,
+    currentMulch: undefined,
+    currentPlant: undefined,
+    nextHarvestAt: -1,
+  },
+  {
+    id: "sixth",
+    unlocked: false,
+    x: 5,
+    y: 17,
+    currentMulch: undefined,
+    currentPlant: undefined,
+    nextHarvestAt: -1,
+  },
+  {
+    id: "seventh",
+    unlocked: false,
+    x: 5,
+    y: 19,
+    currentMulch: undefined,
+    currentPlant: undefined,
+    nextHarvestAt: -1,
+  },
+  {
+    id: "eigth",
+    unlocked: false,
+    x: 5,
+    y: 21,
+    currentMulch: undefined,
+    currentPlant: undefined,
+    nextHarvestAt: -1,
+  },
+];
 export const startingSaveFileKuma: SaveFile = {
+  planters: kumaPlanters,
   sprite: "",
   badges: [],
   researchPoints: 0,

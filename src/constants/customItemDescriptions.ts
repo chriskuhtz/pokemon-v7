@@ -25,6 +25,7 @@ export const customItemDescriptions: Record<string, string> = {
   "scroll-of-darkness": "used to evolve kubfu",
   "moomoo-cheese": "a tasty snack, humans seem to like it more than pokemon",
   "max-honey": "fully heals a fainted pokemon",
+  "max-mushroom": "heals all status conditions",
   "peat-block": "used to evolve ursaring",
   "chipped-pot": "Museums might find this interesting",
   "cracked-pot": "Museums might find this interesting",

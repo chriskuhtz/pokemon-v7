@@ -17,6 +17,7 @@ import {
 import { LocationContext } from "../../../hooks/LocationProvider";
 import { useAvailableBulletinQuests } from "../../../hooks/useAvailableBulletinQuests";
 import { GameDataContext } from "../../../hooks/useGameData";
+import { MessageQueueContext } from "../../../hooks/useMessageQueue";
 import { SaveFileContext } from "../../../hooks/useSaveFile";
 import { InternalDex } from "../../../interfaces/GameData";
 import { isApricorn, isBerry } from "../../../interfaces/Item";
@@ -36,8 +37,9 @@ const treeSlots: { x: number; y: number }[] = [
 ];
 
 export const useOccupants = () => {
+  const { latestMessage } = useContext(MessageQueueContext);
   const { saveFile } = useContext(SaveFileContext);
-  const { location, map } = useContext(LocationContext);
+  const { map, location } = useContext(LocationContext);
   const { internalDex } = useContext(GameDataContext);
   const availableQuests = useAvailableBulletinQuests();
 
@@ -45,12 +47,15 @@ export const useOccupants = () => {
   const [lastRenderedMap, setLastRenderedMap] = useState<MapId>();
 
   useEffect(() => {
-    if (location.mapId !== lastRenderedMap) {
+    if (map.id !== lastRenderedMap) {
       setStatefulOccupants([]);
-      setLastRenderedMap(location.mapId);
+      setLastRenderedMap(map.id);
     }
-  }, [lastRenderedMap, location.mapId]);
+  }, [lastRenderedMap, map.id]);
   useEffect(() => {
+    if (latestMessage) {
+      return;
+    }
     const all = [...map.occupants].map((occ) => {
       if (occ.type === "BULLETIN_BOARD") {
         return { ...occ, withQuests: availableQuests.length > 0 };
@@ -67,7 +72,7 @@ export const useOccupants = () => {
       });
     }
     //add pasture Pokemon
-    if (location.mapId === "camp") {
+    if (map.id === "camp") {
       all.push(...createPasturePokemon(saveFile, internalDex));
       all.push(...createBattle());
     }
@@ -76,33 +81,33 @@ export const useOccupants = () => {
       all.push(
         ...saveFile.timedEvents
           .flatMap<Occupant | undefined>((ev) => {
-            if (ev.type === "LOST_ITEM" && ev.mapId === location.mapId) {
+            if (ev.type === "LOST_ITEM" && ev.mapId === map.id) {
               return {
                 conditionFunction: (s) => !occupantHandled(s, ev.id),
                 ...ev,
                 type: "ITEM",
               };
             }
-            if (ev.type === "OVERWORLD_EGG" && ev.mapId === location.mapId) {
+            if (ev.type === "OVERWORLD_EGG" && ev.mapId === map.id) {
               return {
                 conditionFunction: (s) => !occupantHandled(s, ev.id),
                 ...ev,
                 type: "EGG",
               };
             }
-            if (ev.type === "STATIC_ENCOUNTER" && ev.mapId === location.mapId) {
+            if (ev.type === "STATIC_ENCOUNTER" && ev.mapId === map.id) {
               return makeOverworldPokemonFromStaticEncounterEvent(ev);
             }
-            if (ev.type === "STATIC_TRAINER" && ev.mapId === location.mapId) {
+            if (ev.type === "STATIC_TRAINER" && ev.mapId === map.id) {
               return makeOverworldTrainerfromStaticTrainerEvent(ev);
             }
-            if (ev.type === "QUIZ_MASTER" && ev.mapId === location.mapId) {
+            if (ev.type === "QUIZ_MASTER" && ev.mapId === map.id) {
               return makeOverworldNPCfromQuizMasterEvent(ev);
             }
-            if (ev.type === "TROUBLEMAKERS" && ev.mapId === location.mapId) {
+            if (ev.type === "TROUBLEMAKERS" && ev.mapId === map.id) {
               return makeOverworldTroubleMakers(saveFile);
             }
-            if (ev.type === "CHEST" && ev.mapId === location.mapId) {
+            if (ev.type === "CHEST" && ev.mapId === map.id) {
               return {
                 ...ev,
                 type: "CHEST",
@@ -114,27 +119,9 @@ export const useOccupants = () => {
           .filter((ev) => ev !== undefined),
       );
     }
-    //add wild encounter sprite
-    if (saveFile.meta.currentChallenger?.type === "WILD") {
-      const dexId =
-        internalDex[
-          saveFile.meta.currentChallenger.team.at(0)?.name ?? "rattata"
-        ].dexId;
-      if (dexId <= 807) {
-        const pos = getNextLocation(location, location.orientation);
-        all.push({
-          type: "POKEMON",
-          dexId,
-          conditionFunction: () => true,
-          id: "wild_encounter_sprite",
-          dialogue: ["A wild pokemon"],
-          ...pos,
-          orientation: getOppositeDirection(location.orientation),
-        });
-      }
-    }
+
     //add farm trees
-    if (saveFile.farm.trees && location.mapId === "camp") {
+    if (saveFile.farm.trees && map.id === "camp") {
       all.push(
         ...saveFile.farm.trees
           .flatMap<Occupant | undefined>((t, index) => {
@@ -156,18 +143,54 @@ export const useOccupants = () => {
       );
     }
     //update
+    const sorted = all.toSorted((a: Occupant, b: Occupant) => {
+      const aValue = a.type === "BERRY_TREE" ? 0 : 1;
+      const bValue = b.type === "BERRY_TREE" ? 0 : 1;
+
+      return bValue - aValue;
+    });
+    console.log(sorted);
     if (statefulOccupants.length !== all.length) {
-      setStatefulOccupants(all);
+      setStatefulOccupants(sorted);
     }
   }, [
     availableQuests.length,
     internalDex,
-    location,
     map.id,
     map.occupants,
+    latestMessage,
     saveFile,
     statefulOccupants.length,
   ]);
+
+  useEffect(() => {
+    //add wild encounter sprite
+    if (
+      saveFile.meta.currentChallenger?.type === "WILD" &&
+      statefulOccupants.some((occ) => occ.id === "wild_encounter_sprite")
+    ) {
+      const dexId =
+        internalDex[
+          saveFile.meta.currentChallenger.team.at(0)?.name ?? "rattata"
+        ].dexId;
+      if (dexId <= 807) {
+        const pos = getNextLocation(location, location.orientation);
+
+        setStatefulOccupants((occs) => [
+          ...occs,
+          {
+            type: "POKEMON",
+            dexId,
+            conditionFunction: () => true,
+            id: "wild_encounter_sprite",
+            dialogue: ["A wild pokemon"],
+            ...pos,
+            orientation: getOppositeDirection(location.orientation),
+          },
+        ]);
+      }
+    }
+  }, [internalDex, location, saveFile, statefulOccupants]);
 
   const conditionalOccupants = useMemo(() => {
     return statefulOccupants
