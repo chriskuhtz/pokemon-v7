@@ -36,17 +36,7 @@ export const OverworldMenus = ({
   setNextInput: (x: CharacterOrientation | undefined) => void;
   handleEnterPress: () => void;
 }) => {
-  const {
-    baseSize,
-    setBaseSize,
-    decreaseBaseSize,
-    increaseBaseSize,
-    availableBaseSizes,
-  } = useContext(BaseSizeContext);
-
-  const gameData = useContext(GameDataContext);
-  const navigate = useNavigate();
-  const { map } = useContext(LocationContext);
+  const { baseSize, setBaseSize } = useContext(BaseSizeContext);
 
   const { isDark } = useIsDark();
 
@@ -57,120 +47,173 @@ export const OverworldMenus = ({
   }, [baseSize, isDark, setBaseSize]);
   return (
     <>
-      <div
-        style={{
-          position: "absolute",
-          top: portraitMode ? "1.5rem" : "5rem",
-          left: "1rem",
-          zIndex: 8999,
-          padding: ".5rem",
-          borderRadius: 9000,
-          backgroundColor: "rgba(255,255,255,.6)",
-          display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
-        }}
-      >
-        <TeamOverview steps={stepsTaken} />
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          top: portraitMode ? "5rem" : "1.5rem",
-          left: portraitMode ? undefined : "1rem",
-          right: portraitMode ? "1rem" : undefined,
-          zIndex: 8999,
-          padding: ".5rem",
-          borderRadius: 9000,
-          backgroundColor: "rgba(255,255,255,.6)",
-          display: "flex",
-          gap: "1rem",
-          flexDirection: portraitMode ? "column" : "row",
-        }}
-      >
-        <IoMdMenu
-          onClick={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            navigate("OVERWORLD", "MAIN", stepsTaken);
-          }}
-          size={battleSpriteSize}
-        />
-        <UncollectedQuestsBadge stepsWalked={stepsTaken} />
-        <HudEggIcon stepsTaken={stepsTaken} />
-        {gameData.features.numberOfBallsBadge && (
-          <div
-            style={
-              portraitMode
-                ? { marginBottom: 32, marginTop: -8 }
-                : { marginRight: 32, marginLeft: -8 }
-            }
-          >
-            <NumberOfBallsBadge />
-          </div>
-        )}
-        {
-          <div
-            style={
-              portraitMode
-                ? { marginBottom: 24, marginTop: -8 }
-                : { marginRight: 24, marginLeft: -8 }
-            }
-          >
-            <HudBagLimitIcon stepsTaken={stepsTaken} />
-          </div>
-        }
-
-        {availableBaseSizes.length > 1 && (
-          <>
-            <CgZoomOut
-              size={battleSpriteSize}
-              onClick={() => {
-                if (isDark) {
-                  return;
-                }
-                decreaseBaseSize();
-              }}
-            />
-            <CgZoomIn
-              size={battleSpriteSize}
-              onClick={() => {
-                if (isDark) {
-                  return;
-                }
-                increaseBaseSize();
-              }}
-            />
-          </>
-        )}
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          top: "1.5rem",
-          right: "1rem",
-          display: "flex",
-          gap: "1rem",
-          alignItems: "center",
-          zIndex: 9000,
-          padding: ".5rem",
-          borderRadius: 9000,
-          backgroundColor: "rgba(255,255,255,.6)",
-        }}
-      >
-        {gameData.features.catchStreaks && <StreakIcon />}
-        <TroubleMakersIcon />
-        <RampagerIcon />
-        <RepelIcon />
-        <LureIcon />
-        <strong>{replaceRouteName(map.id)}</strong>
-        <WeatherIcon weather={map.weather} />
-        <TimeOfDayIcon />
-      </div>
+      <Team stepsTaken={stepsTaken} />
+      <MenuShortCuts stepsTaken={stepsTaken} />
+      <WeatherAndMap />
       <MovementButtons
         setNextInput={setNextInput}
         handleEnterPress={handleEnterPress}
       />
     </>
+  );
+};
+const Team = ({ stepsTaken }: { stepsTaken: number }) => {
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top: portraitMode ? "1.5rem" : "5rem",
+        left: "1rem",
+        zIndex: 8999,
+        padding: ".5rem",
+        borderRadius: 9000,
+        backgroundColor: "rgba(255,255,255,.6)",
+        display: "flex",
+        flexDirection: "column",
+        gap: "1rem",
+      }}
+    >
+      <TeamOverview steps={stepsTaken} />
+    </div>
+  );
+};
+const MenuShortCuts = ({ stepsTaken }: { stepsTaken: number }) => {
+  const { decreaseBaseSize, increaseBaseSize, availableBaseSizes } =
+    useContext(BaseSizeContext);
+
+  const gameData = useContext(GameDataContext);
+  const navigate = useNavigate();
+
+  const { isDark } = useIsDark();
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top: portraitMode ? "5rem" : "1.5rem",
+        left: portraitMode ? undefined : "1rem",
+        right: portraitMode ? "1rem" : undefined,
+        zIndex: 8999,
+        padding: portraitMode ? ".5rem .5rem 1rem .5rem" : ".5rem",
+        borderRadius: 9000,
+        backgroundColor: "rgba(255,255,255,.6)",
+        display: "flex",
+        gap: "1rem",
+        flexDirection: portraitMode ? "column" : "row",
+      }}
+    >
+      <IoMdMenu
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          navigate("OVERWORLD", "MAIN", stepsTaken);
+        }}
+        size={battleSpriteSize}
+      />
+      <UncollectedQuestsBadge stepsWalked={stepsTaken} />
+      <HudEggIcon stepsTaken={stepsTaken} />
+      {gameData.features.numberOfBallsBadge && (
+        <div
+          style={
+            portraitMode
+              ? { marginBottom: 32, marginTop: -8 }
+              : { marginRight: 32, marginLeft: -8 }
+          }
+        >
+          <NumberOfBallsBadge />
+        </div>
+      )}
+      {
+        <div
+          style={
+            portraitMode
+              ? { marginBottom: 24, marginTop: -8 }
+              : { marginRight: 24, marginLeft: -8 }
+          }
+        >
+          <HudBagLimitIcon stepsTaken={stepsTaken} />
+        </div>
+      }
+
+      {availableBaseSizes.length > 1 && !portraitMode && (
+        <>
+          <CgZoomOut
+            size={battleSpriteSize}
+            onClick={() => {
+              if (isDark) {
+                return;
+              }
+              decreaseBaseSize();
+            }}
+          />
+          <CgZoomIn
+            size={battleSpriteSize}
+            onClick={() => {
+              if (isDark) {
+                return;
+              }
+              increaseBaseSize();
+            }}
+          />
+        </>
+      )}
+    </div>
+  );
+};
+
+const WeatherAndMap = () => {
+  const { decreaseBaseSize, increaseBaseSize, availableBaseSizes } =
+    useContext(BaseSizeContext);
+
+  const gameData = useContext(GameDataContext);
+  const { map } = useContext(LocationContext);
+
+  const { isDark } = useIsDark();
+
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top: "1.5rem",
+        right: "1rem",
+        display: "flex",
+        gap: "1rem",
+        alignItems: "center",
+        zIndex: 9000,
+        padding: ".5rem",
+        borderRadius: 9000,
+        backgroundColor: "rgba(255,255,255,.6)",
+      }}
+    >
+      {gameData.features.catchStreaks && <StreakIcon />}
+      <TroubleMakersIcon />
+      <RampagerIcon />
+      <RepelIcon />
+      <LureIcon />
+      <strong>{replaceRouteName(map.id)}</strong>
+      <WeatherIcon weather={map.weather} />
+      <TimeOfDayIcon />
+      {availableBaseSizes.length > 1 && portraitMode && (
+        <>
+          <CgZoomOut
+            size={battleSpriteSize}
+            onClick={() => {
+              if (isDark) {
+                return;
+              }
+              decreaseBaseSize();
+            }}
+          />
+          <CgZoomIn
+            size={battleSpriteSize}
+            onClick={() => {
+              if (isDark) {
+                return;
+              }
+              increaseBaseSize();
+            }}
+          />
+        </>
+      )}
+    </div>
   );
 };

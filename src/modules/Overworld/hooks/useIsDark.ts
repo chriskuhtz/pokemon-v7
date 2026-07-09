@@ -6,15 +6,7 @@ import { SaveFileContext } from "../../../hooks/useSaveFile";
 export const useIsDark = (): {
   isDark: boolean;
   hasFlashlight: boolean;
-  flashLightDirection?:
-    | "ellipse 50% 140% at 50% 35%"
-    | "ellipse 50% 140% at 50% 20%"
-    | "ellipse 50% 140% at 50% 65%"
-    | "ellipse 50% 140% at 50% 80%"
-    | "ellipse at 20% 50%"
-    | "ellipse at 35% 50%"
-    | "ellipse at 80% 50%"
-    | "ellipse at 65% 50%";
+  flashLightDirection?: string;
 } => {
   const { saveFile } = useContext(SaveFileContext);
   const { location, map } = useContext(LocationContext);
@@ -26,12 +18,12 @@ export const useIsDark = (): {
     }
     if (location.orientation === "UP") {
       return portraitMode
-        ? "ellipse 50% 140% at 50% 35%"
+        ? "ellipse 85% 140% at 50% 10%"
         : "ellipse 50% 140% at 50% 20%";
     }
     if (location.orientation === "DOWN") {
       return portraitMode
-        ? "ellipse 50% 140% at 50% 65%"
+        ? "ellipse 85% 140% at 50% 90%"
         : "ellipse 50% 140% at 50% 80%";
     }
     if (location.orientation === "LEFT") {

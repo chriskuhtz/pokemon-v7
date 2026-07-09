@@ -1,10 +1,10 @@
-import { useContext } from "react";
+import { CSSProperties, useContext } from "react";
 import { CombinedCanvas } from "../../../components/CombinedCanvas/CombinedCanvas";
 import {
   FollowerSprite,
   PlayerSprite,
 } from "../../../components/FollowerSprite/FollowerSprite";
-import { fps } from "../../../constants/baseConstants";
+import { fps, portraitMode } from "../../../constants/baseConstants";
 import { LocationContext } from "../../../hooks/LocationProvider";
 import { BaseSizeContext } from "../../../hooks/useBaseSize";
 import { useShader } from "../../../hooks/useShader";
@@ -40,28 +40,10 @@ export const OverworldCanvasses = ({
     interactWith,
     occupants,
   );
-  const { isDark, hasFlashlight, flashLightDirection } = useIsDark();
 
   return (
     <div className="overworldPage">
-      {isDark ? (
-        <div
-          style={{
-            background: `radial-gradient(
-${flashLightDirection ?? "circle"},
-rgba(249, 246, 79, 0.1) 0%,
-rgba(0, 0, 0, 1) ${hasFlashlight ? 48 : 16}%
-)`,
-            width: "100dvw",
-            height: "100dvh",
-            zIndex: 3,
-            position: "absolute",
-            pointerEvents: "none",
-          }}
-        ></div>
-      ) : (
-        <></>
-      )}
+      <LightCone />
       <div id="canvassesAndShaders" style={{ position: "relative" }}>
         <div
           id="clickerGridWrapper"
@@ -171,5 +153,40 @@ rgba(0, 0, 0, 1) ${hasFlashlight ? 48 : 16}%
         }}
       />
     </div>
+  );
+};
+
+const LightCone = () => {
+  const { isDark, hasFlashlight, flashLightDirection } = useIsDark();
+
+  const portraitCone: CSSProperties = {
+    background: `radial-gradient(
+${flashLightDirection ?? "circle"},
+rgba(249, 246, 79, 0.1) 0%,
+rgba(0, 0, 0, 1) ${hasFlashlight ? 48 : 16}%
+)`,
+    width: "100dvw",
+    height: "100dvh",
+    zIndex: 3,
+    position: "absolute",
+    pointerEvents: "none",
+  };
+
+  const landscapeCone: CSSProperties = {
+    background: `radial-gradient(
+${flashLightDirection ?? "circle"},
+rgba(249, 246, 79, 0.1) 0%,
+rgba(0, 0, 0, 1) ${hasFlashlight ? 48 : 16}%
+)`,
+    width: "100dvw",
+    height: "100dvh",
+    zIndex: 3,
+    position: "absolute",
+    pointerEvents: "none",
+  };
+  return isDark ? (
+    <div style={portraitMode ? portraitCone : landscapeCone}></div>
+  ) : (
+    <></>
   );
 };

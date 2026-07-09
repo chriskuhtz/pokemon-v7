@@ -40,6 +40,7 @@ export const startingSaveFileLabyrinth: SaveFile = {
     taughtTmTypes: [],
   },
   farm: { plants: [] },
+  planters:[],
   campUpgrades: baseCampUpgrades,
   pokedex: emptyPokedex,
   settings: {
