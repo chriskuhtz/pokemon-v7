@@ -44,7 +44,8 @@ import { EmptyInventory } from "../../interfaces/Inventory";
 import { lures, repels } from "../../interfaces/Item";
 import { HudEggIcon } from "../Eggs/Eggs";
 export const MainMenu = ({ goBack }: { goBack: () => void }): JSX.Element => {
-  return (
+
+   return (
     <InGamePage headline="Main Menu:" goBack={goBack}>
       <Stack mode="column">
         <TrainerCard />

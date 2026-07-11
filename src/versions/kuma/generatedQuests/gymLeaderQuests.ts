@@ -120,7 +120,7 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
       "mystic-water": 1,
       ...expCandyPackage,
     },
-    campUpgrade: "swimming certification",
+    requiredUpgrade:"shovel certification",
     conditionFunction: (s) => {
       return occupantHandled(s, mistyId);
     },

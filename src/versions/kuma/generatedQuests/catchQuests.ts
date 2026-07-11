@@ -227,10 +227,6 @@ const catchQuestsForRoute = (
         [`${snackForRoute[route.id]}`]: 1,
         [`${ticketForRoute[route.id]}`]: 1,
       },
-      campUpgrade:
-        berryLures.length > 0
-          ? (`berry lure station ${route.id}` as CampUpgrade)
-          : undefined,
       researchPoints: campUpgradeBaseCost/2,
       conditionFunction: (s: SaveFile) => {
         return ultraRares.some(
