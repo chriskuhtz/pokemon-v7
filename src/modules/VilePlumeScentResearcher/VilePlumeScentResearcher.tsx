@@ -108,7 +108,7 @@ export const vileplumeResearchers: Occupant[] = [
     sprite: SpriteEnum.scientistMale,
     id: "vileplume researcher",
     conditionFunction: (s) =>
-      s.campUpgrades["invite vileplume scent researcher"],
+      s.campUpgrades["vileplume scent researcher"],
   },
   {
     type: "POKEMON",
@@ -119,6 +119,6 @@ export const vileplumeResearchers: Occupant[] = [
     id: "vileplume",
     dialogue: ["It really smells 'fascinating'"],
     conditionFunction: (s) =>
-      s.campUpgrades["invite vileplume scent researcher"],
+      s.campUpgrades["vileplume scent researcher"],
   },
 ];

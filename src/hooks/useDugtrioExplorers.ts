@@ -66,7 +66,7 @@ export const dugtrioExplorers: Occupant[] = [
     orientation: "DOWN",
     sprite: SpriteEnum.explorer,
     id: "dugtrio trainer",
-    conditionFunction: (s) => s.campUpgrades["invite dugtrio explorers"],
+    conditionFunction: (s) => s.campUpgrades["dugtrio explorers"],
   },
   {
     type: "DUGTRIO_EXPLORER",
@@ -75,6 +75,6 @@ export const dugtrioExplorers: Occupant[] = [
     y: 6,
     orientation: "DOWN",
     id: "triotrio",
-    conditionFunction: (s) => s.campUpgrades["invite dugtrio explorers"],
+    conditionFunction: (s) => s.campUpgrades["dugtrio explorers"],
   },
 ];

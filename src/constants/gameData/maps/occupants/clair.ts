@@ -2,10 +2,10 @@ import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import {
-  Occupant,
-  OverworldNpc,
-  OverworldPokemon,
-  OverworldTrainer,
+    Occupant,
+    OverworldNpc,
+    OverworldPokemon,
+    OverworldTrainer,
 } from "../../../../interfaces/Occupant";
 import { SaveFile } from "../../../../interfaces/SaveFile";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
@@ -30,7 +30,7 @@ export const clairsKingdra: OverworldPokemon = {
   dexId: 230,
   id: "clairs-kingdra",
   conditionFunction: (s) =>
-    s.campUpgrades["invite dragon pokemon expert clair"] &&
+    s.campUpgrades["dragon pokemon expert clair"] &&
     s.quests["reach max. friendship with a dragon pokemon"] !== "COLLECTED",
 };
 
@@ -49,7 +49,7 @@ export const clairLine: Occupant[] = [
     handledMessage: ["Dragon pokemon are fierce and majestic"],
     quest: "reach max. friendship with a dragon pokemon",
     conditionFunction: (s) =>
-      s.campUpgrades["invite dragon pokemon expert clair"] &&
+      s.campUpgrades["dragon pokemon expert clair"] &&
       s.quests["reach max. friendship with a dragon pokemon"] !== "COLLECTED",
   },
 ];

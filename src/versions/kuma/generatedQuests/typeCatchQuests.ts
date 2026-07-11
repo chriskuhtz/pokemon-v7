@@ -1,4 +1,5 @@
 /* eslint-disable max-lines */
+import { campUpgradeBaseCost } from "../../../constants/gameData/campUpgrades";
 import { PokemonName } from "../../../constants/pokemonNames";
 import { byType } from "../../../functions/internalDex";
 import {
@@ -23,8 +24,7 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
         rewardItems: {
           "poke-ball": 1,
           [saveBerry]: 2,
-        },
-        researchPoints: 5,
+        },researchPoints: campUpgradeBaseCost/10,
         catchBoosts: { [type]: 1 },
         conditionFunction: (s) =>
           Object.entries(s.pokedex).filter(
@@ -44,7 +44,7 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
           [saveBerry]: 4,
         },
         catchBoosts: { [type]: 1 },
-        researchPoints: 20,
+        researchPoints: campUpgradeBaseCost/2,
         availableAfter: `catch a ${type} pokemon` as KumaQuestName,
         progress: (s) => ({
           goal: 10,
@@ -73,7 +73,7 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
           [saveBerry]: 6,
         },
         catchBoosts: { [type]: 1 },
-        researchPoints: 50,
+        researchPoints: campUpgradeBaseCost,
         availableAfter: `catch 10 different ${type} pokemon` as KumaQuestName,
         progress: (s) => ({
           goal: 25,
@@ -102,7 +102,7 @@ const createTypeQuests = (type: PokemonType): [string, Quest][] => {
           [saveBerry]: 10,
         },
         catchBoosts: { [type]: 1 },
-        researchPoints: 100,
+       researchPoints: campUpgradeBaseCost,
         availableAfter: `catch 25 different ${type} pokemon` as KumaQuestName,
         progress: (s) => ({
           goal: 50,

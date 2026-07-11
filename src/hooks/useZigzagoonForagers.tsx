@@ -68,7 +68,7 @@ export const zigzagoonForagers: Occupant[] = [
     orientation: "UP",
     sprite: SpriteEnum.bugCatcher,
     id: "zigzagoon trainer",
-    conditionFunction: (s) => s.campUpgrades["invite zigzagoon foragers"],
+    conditionFunction: (s) => s.campUpgrades["zigzagoon foragers"],
   },
   {
     type: "ZIGZAGOON_FORAGER",
@@ -77,6 +77,6 @@ export const zigzagoonForagers: Occupant[] = [
     y: 35,
     orientation: "UP",
     id: "ziggie",
-    conditionFunction: (s) => s.campUpgrades["invite zigzagoon foragers"],
+    conditionFunction: (s) => s.campUpgrades["zigzagoon foragers"],
   },
 ];

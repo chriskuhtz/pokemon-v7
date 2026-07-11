@@ -29,7 +29,7 @@ export const evExpertLine: Occupant[] = [
 		unhandledMessage: evGuyDialogue,
 		quest: 'train a Pokemon to 200 Attack EV',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite effort value expert'] &&
+			s.campUpgrades['effort value expert'] &&
 			s.quests['train a Pokemon to 200 Attack EV'] !== 'COLLECTED',
 	},
 	{
@@ -39,7 +39,7 @@ export const evExpertLine: Occupant[] = [
 		unhandledMessage: evGuyDialogue,
 		quest: 'train a Pokemon to 200 Special Attack EV',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite effort value expert'] &&
+			s.campUpgrades['effort value expert'] &&
 			s.quests['train a Pokemon to 200 Attack EV'] == 'COLLECTED' &&
 			s.quests['train a Pokemon to 200 Special Attack EV'] !== 'COLLECTED',
 	},
@@ -49,7 +49,7 @@ export const evExpertLine: Occupant[] = [
 		unhandledMessage: evGuyDialogue,
 		quest: 'train a Pokemon to 200 Defense EV',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite effort value expert'] &&
+			s.campUpgrades['effort value expert'] &&
 			s.quests['train a Pokemon to 200 Special Attack EV'] == 'COLLECTED' &&
 			s.quests['train a Pokemon to 200 Defense EV'] !== 'COLLECTED',
 	},
@@ -59,7 +59,7 @@ export const evExpertLine: Occupant[] = [
 		unhandledMessage: evGuyDialogue,
 		quest: 'train a Pokemon to 200 Special Defense EV',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite effort value expert'] &&
+			s.campUpgrades['effort value expert'] &&
 			s.quests['train a Pokemon to 200 Defense EV'] == 'COLLECTED' &&
 			s.quests['train a Pokemon to 200 Special Defense EV'] !== 'COLLECTED',
 	},
@@ -69,7 +69,7 @@ export const evExpertLine: Occupant[] = [
 		unhandledMessage: evGuyDialogue,
 		quest: 'train a Pokemon to 200 Speed EV',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite effort value expert'] &&
+			s.campUpgrades['effort value expert'] &&
 			s.quests['train a Pokemon to 200 Special Defense EV'] == 'COLLECTED' &&
 			s.quests['train a Pokemon to 200 Speed EV'] !== 'COLLECTED',
 	},
@@ -79,7 +79,7 @@ export const evExpertLine: Occupant[] = [
 		unhandledMessage: evGuyDialogue,
 		quest: 'train a Pokemon to 200 Hp EV',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite effort value expert'] &&
+			s.campUpgrades['effort value expert'] &&
 			s.quests['train a Pokemon to 200 Speed EV'] == 'COLLECTED' &&
 			s.quests['train a Pokemon to 200 Hp EV'] !== 'COLLECTED',
 	},
@@ -89,7 +89,7 @@ export const evExpertLine: Occupant[] = [
 		unhandledMessage: evGuyDialogue,
 		quest: 'train the EV of two stats over 200 on a Pokemon',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite effort value expert'] &&
+			s.campUpgrades['effort value expert'] &&
 			s.quests['train a Pokemon to 200 Hp EV'] == 'COLLECTED' &&
 			s.quests['train the EV of two stats over 200 on a Pokemon'] !==
 				'COLLECTED',
@@ -100,7 +100,7 @@ export const evExpertLine: Occupant[] = [
 		unhandledMessage: evGuyDialogue,
 		quest: 'train a Pokemon to 510 EV',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite effort value expert'] &&
+			s.campUpgrades['effort value expert'] &&
 			s.quests['train the EV of two stats over 200 on a Pokemon'] ===
 				'COLLECTED' &&
 			s.quests['train a Pokemon to 510 EV'] !== 'COLLECTED',

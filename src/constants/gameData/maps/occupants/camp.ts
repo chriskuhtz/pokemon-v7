@@ -57,7 +57,7 @@ const trainingField: Occupant[] = [
       "I can teach your Pokemon new moves",
       "But I expect some snacks as payment",
     ],
-    conditionFunction: (s) => s.campUpgrades["invite move tutor"],
+    conditionFunction: (s) => s.campUpgrades["move tutor"],
   },
   {
     type: "ROUTER_NPC",
@@ -71,7 +71,7 @@ const trainingField: Occupant[] = [
       "By giving your Pokemon certain berries",
       "we can change its nature",
     ],
-    conditionFunction: (s) => s.campUpgrades["invite nature tutor"],
+    conditionFunction: (s) => s.campUpgrades["nature tutor"],
   },
   {
     type: "ROUTER_NPC",
@@ -85,7 +85,7 @@ const trainingField: Occupant[] = [
       "I can change your Pokemons ability",
       "But I expect some snacks as payment",
     ],
-    conditionFunction: (s) => s.campUpgrades["invite ability tutor"],
+    conditionFunction: (s) => s.campUpgrades["ability tutor"],
   },
   battleJournalist,
 ];
@@ -383,7 +383,7 @@ export const campOccupants: OverworldMap["occupants"] = [
     ],
     conditionFunction: (s) => {
       return !!(
-        s.campUpgrades["invite apricorn smith kurt"] &&
+        s.campUpgrades["apricorn smith kurt"] &&
         Object.entries(s.bag).some(
           ([item, amount]) => isApricorn(item) && amount > 0,
         )
@@ -403,7 +403,7 @@ export const campOccupants: OverworldMap["occupants"] = [
     ],
     conditionFunction: (s) => {
       return !!(
-        s.campUpgrades["invite apricorn smith kurt"] &&
+        s.campUpgrades["apricorn smith kurt"] &&
         !Object.entries(s.bag).some(
           ([item, amount]) => isApricorn(item) && amount > 0,
         )
@@ -421,7 +421,7 @@ export const campOccupants: OverworldMap["occupants"] = [
       "but they are still good ingredients",
     ],
     sprite: SpriteEnum.grandma,
-    conditionFunction: (s) => s.campUpgrades["invite chef grandma"],
+    conditionFunction: (s) => s.campUpgrades["chef grandma"],
     id: "chef grandma",
   },
   ...makeApricornTree({
@@ -562,7 +562,7 @@ export const campOccupants: OverworldMap["occupants"] = [
       "that might be worth displaying",
     ],
     sprite: SpriteEnum.gentleman,
-    conditionFunction: (s) => s.campUpgrades["invite museum curator"],
+    conditionFunction: (s) => s.campUpgrades["museum curator"],
     id: "curator",
   },
   {
@@ -573,7 +573,7 @@ export const campOccupants: OverworldMap["occupants"] = [
     handledMessage: getHistorianMessage(),
     unhandledMessage: getHistorianMessage(),
     sprite: SpriteEnum.grandFather3,
-    conditionFunction: (s) => s.campUpgrades["invite historian"],
+    conditionFunction: (s) => s.campUpgrades["historian"],
     id: "historian",
   },
   {

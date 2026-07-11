@@ -143,7 +143,7 @@ export const routeS1Occupants: OverworldMap["occupants"] = [
       s.pokedex.zapdos.caughtOnRoutes.length === 0 &&
       s.bag["thunder-stone"] > 0 &&
       getTimeOfDay() === "MORNING" &&
-      s.campUpgrades["invite historian"],
+      s.campUpgrades["historian"],
     id: "routeS1_zapdos",
   },
   ...surge,

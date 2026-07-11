@@ -2,10 +2,10 @@ import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import {
-  Occupant,
-  OverworldNpc,
-  OverworldPokemon,
-  OverworldTrainer,
+    Occupant,
+    OverworldNpc,
+    OverworldPokemon,
+    OverworldTrainer,
 } from "../../../../interfaces/Occupant";
 import { SaveFile } from "../../../../interfaces/SaveFile";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
@@ -29,7 +29,7 @@ export const chucksMachamp: OverworldPokemon = {
   dexId: 68,
   id: "chucks-machamp",
   conditionFunction: (s) =>
-    s.campUpgrades["invite fighting expert chuck"] &&
+    s.campUpgrades["fighting expert chuck"] &&
     s.quests["deal 10000 damage with one attack"] !== "COLLECTED",
 };
 export const chuckLine: Occupant[] = [
@@ -44,7 +44,7 @@ export const chuckLine: Occupant[] = [
     handledMessage: ["Do you even lift?"],
     quest: "deal 50 damage with one attack",
     conditionFunction: (s) =>
-      s.campUpgrades["invite fighting expert chuck"] &&
+      s.campUpgrades["fighting expert chuck"] &&
       s.quests["deal 50 damage with one attack"] !== "COLLECTED",
   },
   {
@@ -54,7 +54,7 @@ export const chuckLine: Occupant[] = [
     handledMessage: ["Do you even lift?"],
     quest: "deal 100 damage with one attack",
     conditionFunction: (s) =>
-      s.campUpgrades["invite fighting expert chuck"] &&
+      s.campUpgrades["fighting expert chuck"] &&
       s.quests["deal 50 damage with one attack"] === "COLLECTED" &&
       s.quests["deal 100 damage with one attack"] !== "COLLECTED",
   },
@@ -65,7 +65,7 @@ export const chuckLine: Occupant[] = [
     handledMessage: ["Do you even lift?"],
     quest: "deal 200 damage with one attack",
     conditionFunction: (s) =>
-      s.campUpgrades["invite fighting expert chuck"] &&
+      s.campUpgrades["fighting expert chuck"] &&
       s.quests["deal 100 damage with one attack"] === "COLLECTED" &&
       s.quests["deal 200 damage with one attack"] !== "COLLECTED",
   },
@@ -76,7 +76,7 @@ export const chuckLine: Occupant[] = [
     handledMessage: ["Do you even lift?"],
     quest: "deal 500 damage with one attack",
     conditionFunction: (s) =>
-      s.campUpgrades["invite fighting expert chuck"] &&
+      s.campUpgrades["fighting expert chuck"] &&
       s.quests["deal 200 damage with one attack"] === "COLLECTED" &&
       s.quests["deal 500 damage with one attack"] !== "COLLECTED",
   },
@@ -87,7 +87,7 @@ export const chuckLine: Occupant[] = [
     handledMessage: ["Do you even lift?"],
     quest: "deal 1000 damage with one attack",
     conditionFunction: (s) =>
-      s.campUpgrades["invite fighting expert chuck"] &&
+      s.campUpgrades["fighting expert chuck"] &&
       s.quests["deal 500 damage with one attack"] === "COLLECTED" &&
       s.quests["deal 1000 damage with one attack"] !== "COLLECTED",
   },
@@ -98,7 +98,7 @@ export const chuckLine: Occupant[] = [
     handledMessage: ["Do you even lift?"],
     quest: "deal 2000 damage with one attack",
     conditionFunction: (s) =>
-      s.campUpgrades["invite fighting expert chuck"] &&
+      s.campUpgrades["fighting expert chuck"] &&
       s.quests["deal 1000 damage with one attack"] === "COLLECTED" &&
       s.quests["deal 2000 damage with one attack"] !== "COLLECTED",
   },
@@ -112,7 +112,7 @@ export const chuckLine: Occupant[] = [
     handledMessage: ["Do you even lift?"],
     quest: "deal 5000 damage with one attack",
     conditionFunction: (s) =>
-      s.campUpgrades["invite fighting expert chuck"] &&
+      s.campUpgrades["fighting expert chuck"] &&
       s.quests["deal 2000 damage with one attack"] === "COLLECTED" &&
       s.quests["deal 5000 damage with one attack"] !== "COLLECTED",
   },
@@ -123,7 +123,7 @@ export const chuckLine: Occupant[] = [
     handledMessage: ["Do you even lift?"],
     quest: "deal 10000 damage with one attack",
     conditionFunction: (s) =>
-      s.campUpgrades["invite fighting expert chuck"] &&
+      s.campUpgrades["fighting expert chuck"] &&
       s.quests["deal 5000 damage with one attack"] === "COLLECTED" &&
       s.quests["deal 10000 damage with one attack"] !== "COLLECTED",
   },

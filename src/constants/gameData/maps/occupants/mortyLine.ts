@@ -2,10 +2,10 @@ import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import {
-  Occupant,
-  OverworldNpc,
-  OverworldPokemon,
-  OverworldTrainer,
+    Occupant,
+    OverworldNpc,
+    OverworldPokemon,
+    OverworldTrainer,
 } from "../../../../interfaces/Occupant";
 import { SaveFile } from "../../../../interfaces/SaveFile";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
@@ -30,7 +30,7 @@ export const mortysGengar: OverworldPokemon = {
   dexId: 94,
   id: "mortys-gengar",
   conditionFunction: (s) =>
-    s.campUpgrades["invite ghost expert morty"] &&
+    s.campUpgrades["ghost expert morty"] &&
     s.quests["catch Haunter and Mightyena"] !== "COLLECTED",
 };
 
@@ -47,7 +47,7 @@ export const mortyLine: Occupant[] = [
     handledMessage: ["Ghosts are spooky, but also cool"],
     quest: "catch local dark and ghost pokemon",
     conditionFunction: (s) =>
-      s.campUpgrades["invite ghost expert morty"] &&
+      s.campUpgrades["ghost expert morty"] &&
       s.quests["catch local dark and ghost pokemon"] !== "COLLECTED",
   },
   {
@@ -64,7 +64,7 @@ export const mortyLine: Occupant[] = [
     handledMessage: ["Did you find the rare ghost pokemon?"],
     quest: "catch a spiritomb",
     conditionFunction: (s) =>
-      s.campUpgrades["invite ghost expert morty"] &&
+      s.campUpgrades["ghost expert morty"] &&
       s.quests["catch local dark and ghost pokemon"] === "COLLECTED" &&
       s.quests["catch a spiritomb"] !== "COLLECTED",
   },
@@ -86,7 +86,7 @@ export const mortyLine: Occupant[] = [
     ],
     quest: "catch Haunter and Mightyena",
     conditionFunction: (s) =>
-      s.campUpgrades["invite ghost expert morty"] &&
+      s.campUpgrades["ghost expert morty"] &&
       s.quests["catch a spiritomb"] === "COLLECTED" &&
       s.quests["catch Haunter and Mightyena"] !== "COLLECTED",
   },

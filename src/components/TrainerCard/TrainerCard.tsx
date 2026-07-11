@@ -70,8 +70,9 @@ export const TrainerCard = () => {
             )}
             {rangerLevel ? <h4>Ranger Level: {rangerLevel}</h4> : <></>}
 
-            {badges.length > 0 && <h3>Badges:</h3>}
-            <Stack mode="row">
+            {badges.length > 0 && <h3 style={{margin:0}}>Badges:</h3>}
+            <div style={{margin:".5rem 0", display:"grid",rowGap:".5rem", gridTemplateColumns:"1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr"}}>
+            
               {badges.map((b) => (
                 <img
                   key={b}
@@ -80,7 +81,7 @@ export const TrainerCard = () => {
                   src={`/badges/${b}.png`}
                 />
               ))}
-            </Stack>
+            </div>
           </Stack>
 
           <CatchBoosts />

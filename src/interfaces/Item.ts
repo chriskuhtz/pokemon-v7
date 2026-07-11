@@ -986,10 +986,4 @@ export const moveUnlockPayments: ItemType[] = [
   "rage-candy-bar",
   "lava-cookie",
   "old-gateau",
-  "liechi-juice",
-  "ganlon-juice",
-  "petaya-juice",
-  "apicot-juice",
-  "micle-juice",
-  "custap-juice",
 ];
