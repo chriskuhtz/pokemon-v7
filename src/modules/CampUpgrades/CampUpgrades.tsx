@@ -1,13 +1,13 @@
 import { useCallback, useContext, useState } from "react";
-import { FaArrowLeft, FaArrowRight, FaFistRaised, FaHammer, FaLockOpen, FaWrench } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaFistRaised, FaHammer, FaLock, FaLockOpen, FaWrench } from "react-icons/fa";
 import { GiMountainRoad } from "react-icons/gi";
-import { IoMdInformationCircleOutline } from "react-icons/io";
 import { MdCatchingPokemon, MdPersonAddAlt1 } from "react-icons/md";
 import { PiFarm } from "react-icons/pi";
 import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { battleSpriteSize } from "../../constants/baseConstants";
 import {
   CampUpgrade,
+  campUpgradeBadgeRequirements,
   campUpgradeBaseCost,
   campUpgradeCategories,
   CampUpgradeCategory,
@@ -31,7 +31,11 @@ export const CampUpgrades = ({
 }: {
   goBack: () => void;
 }): JSX.Element => {
+  // console.log("total upgrade costs", Object.values(campUpgradeCostMultipliers).reduce((sum,summand)=>{return sum+summand*campUpgradeBaseCost},0))
+  // console.log("total quest rewards", Object.values(KumaQuestsRecord).reduce((sum,summand)=>{return sum+summand.researchPoints},0))
+   
   const [category, setCategory] = useState<number>(0);
+ const { saveFile,  } = useContext(SaveFileContext);
 
 
 
@@ -41,6 +45,7 @@ export const CampUpgrades = ({
         <h3 style={{ margin: 0 }}>
           We can use the research points earned from quests to expand our camp
         </h3>
+        <h3>Research Points: {saveFile.researchPoints}</h3>
         <UpgradeCategoryCard setTraitIndex={setCategory} category={ArrayHelpers.getEntryWithOverflow([...campUpgradeCategories], category)}/>
       </Stack>
     </InGamePage>
@@ -76,7 +81,8 @@ const UpgradeCategoryCard = ({
     [addMessage, campUpgrades, patchSaveFileReducer, researchPoints],
   );
 
-  const hasUnlockedAllBasics=saveFile.campUpgrades.bulletin_board && saveFile.campUpgrades.berry_farm && saveFile.campUpgrades["apricorn smith kurt"]
+  const hasAllBasics=saveFile.campUpgrades.bulletin_board && saveFile.campUpgrades.berry_farm && saveFile.campUpgrades["apricorn smith kurt"]
+  
   return (
     <Card
       backgroundColor={campUpgradeCategoryColors[category]}
@@ -87,58 +93,53 @@ const UpgradeCategoryCard = ({
       content={
         <Stack mode="column" alignItems="center">
           <div style={{ width: "100%" }}>
-            <Stack mode="row" justifyContent="space-between" alignItems="center">
-              <FaArrowLeft
+            <Stack mode="row" justifyContent={hasAllBasics?"space-between":"center"} alignItems="center">
+              {hasAllBasics && <FaArrowLeft
                 role="button"
                 tabIndex={0}
                 size={battleSpriteSize}
-                onClick={() =>hasUnlockedAllBasics? setTraitIndex((t) => t - 1):{}}
+                onClick={() =>setTraitIndex((t) => t - 1)}
                 onKeyDown={(e) => {
-                  if(!hasUnlockedAllBasics){
-                    return 
-                  }
+               
                   e.stopPropagation();
                   if (e.key === "Enter") {
                     setTraitIndex((t) => t - 1);
                   }
                 }}
-              />
+              />}
               <h3>{category}:</h3>
-              <FaArrowRight
+              {hasAllBasics &&<FaArrowRight
                 size={battleSpriteSize}
-                onClick={() =>hasUnlockedAllBasics? setTraitIndex((t) => t + 1):{}}
+                onClick={() =>setTraitIndex((t) => t + 1)}
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
-                   if(!hasUnlockedAllBasics){
-                    return 
-                  }
+                  
                   e.stopPropagation();
                   if (e.key === "Enter") {
                     setTraitIndex((t) => t - 1);
                   }
                 }}
-              />
-            </Stack>
+              />}
+            </Stack> 
           </div>
          {campUpgradeNames.filter(upgrade=>categorizedCampUpgrades[upgrade]===category).map(upgrade=>{
 
           const price=campUpgradeCostMultipliers[upgrade]*campUpgradeBaseCost
           const unlocked=saveFile.campUpgrades[upgrade]===true
-          const notUnlockedYet=upgrade!=="bulletin_board" && !!saveFile.campUpgrades.bulletin_board
+          const hasBulletinBoard=upgrade=="bulletin_board"?true: !!saveFile.campUpgrades.bulletin_board
+          const hasEnoughPoints=saveFile.researchPoints>=price
+          const hasEnoughBadges=saveFile.badges.length>=campUpgradeBadgeRequirements[upgrade]
+          const canUnlock=hasEnoughBadges&&hasEnoughPoints
           return  <ListItem 
           backgroundColor={unlocked?typeColors["grass"]:campUpgradeCategoryColors[category]}
-          disabled={price>researchPoints|| unlocked||notUnlockedYet }
-          onClick={()=>unlock(upgrade)}
-          primaryIcon={unlocked?<FaLockOpen />:<CampUpgradeIcon category={category}/>}
-          content={upgrade} 
-          infoButton={<IoMdInformationCircleOutline
-          onClick={(e) => {
-                 e.stopPropagation();
-                 addMessage({message:campUpgradeExplanations[upgrade]})
-               }}
-               size={battleSpriteSize}
-             />}/>
+          disabled={!hasBulletinBoard||!hasEnoughBadges||!hasEnoughPoints}
+          onClick={()=>unlocked?{}:unlock(upgrade)}
+          primaryIcon={unlocked?<FaLockOpen size={battleSpriteSize/2} />:canUnlock?<CampUpgradeIcon category={category}/>:<FaLock size={battleSpriteSize/2} />}
+          content={`${upgrade} `} 
+          additionalContent={<>{unlocked?"Unlocked":!hasEnoughPoints?"complete quests to earn points":hasEnoughBadges?campUpgradeExplanations[upgrade]:"Defeat Gym Leaders to earn badges"}</>}
+          hint={`${price} points`}
+          infoButton={<></>}/>
          }
         )}
         </Stack>

@@ -36,7 +36,6 @@ export interface Quest {
   researchPoints: number;
   rangerLevels?: number;
   catchBoosts?: Partial<CatchBoosts>;
-  campUpgrade?: CampUpgrade;
   badge?: BadgeName;
   //conditions
   conditionFunction: (saveFile: SaveFile) => boolean;
