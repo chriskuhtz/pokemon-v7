@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { CampUpgrade } from "../../../constants/gameData/campUpgrades";
+import { CampUpgrade, campUpgradeBaseCost } from "../../../constants/gameData/campUpgrades";
 import { routeE1 } from "../../../constants/gameData/maps/routeE1";
 import { routeN1 } from "../../../constants/gameData/maps/routeN1";
 import { routeN1E1 } from "../../../constants/gameData/maps/routeN1E1";
@@ -168,7 +168,7 @@ const catchQuestsForRoute = (
               [`${ballForRoute[route.id]}`]: 3,
             },
 
-            researchPoints: 10,
+            researchPoints: campUpgradeBaseCost/5,
             conditionFunction: (s) => {
               return options.some((e) =>
                 s.pokedex[e.name].caughtOnRoutes.includes(route.id),
@@ -205,7 +205,7 @@ const catchQuestsForRoute = (
               [`${snackForRoute[route.id]}`]: 1,
             },
             availableAfter: `catch a ${time}-time exclusive pokemon from ${route.id}`,
-            researchPoints: 20,
+            researchPoints: campUpgradeBaseCost/2,
             conditionFunction: (s) => {
               return options.every((e) =>
                 s.pokedex[e.name].caughtOnRoutes.includes(route.id),
@@ -231,7 +231,7 @@ const catchQuestsForRoute = (
         berryLures.length > 0
           ? (`berry lure station ${route.id}` as CampUpgrade)
           : undefined,
-      researchPoints: 20,
+      researchPoints: campUpgradeBaseCost/2,
       conditionFunction: (s: SaveFile) => {
         return ultraRares.some(
           (e) =>
@@ -259,7 +259,7 @@ const catchQuestsForRoute = (
         `catch a ultra-rare pokemon from ${route.id}` as KumaQuestName,
       rewardItems: smallExpCandyPackage,
       targetPokemon: berryLures,
-      researchPoints: 30,
+      researchPoints: campUpgradeBaseCost/2,
       category: "RESEARCH",
       conditionFunction: (s: SaveFile) =>
         berryLures.every((b) => s.pokedex[b].caughtOnRoutes.includes(route.id)),

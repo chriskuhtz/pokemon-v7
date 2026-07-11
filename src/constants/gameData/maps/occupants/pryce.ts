@@ -2,10 +2,10 @@ import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import {
-  Occupant,
-  OverworldNpc,
-  OverworldPokemon,
-  OverworldTrainer,
+    Occupant,
+    OverworldNpc,
+    OverworldPokemon,
+    OverworldTrainer,
 } from "../../../../interfaces/Occupant";
 import { SaveFile } from "../../../../interfaces/SaveFile";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
@@ -30,7 +30,7 @@ export const prycesMamoswine: OverworldPokemon = {
   dexId: 473,
   id: "pryces-mamoswine",
   conditionFunction: (s) =>
-    s.campUpgrades["invite ice pokemon expert pryce"] &&
+    s.campUpgrades["ice pokemon expert pryce"] &&
     s.quests["maximize the effort values of an ice pokemon"] !== "COLLECTED",
 };
 
@@ -49,7 +49,7 @@ export const pryceLine: Occupant[] = [
     ],
     quest: "maximize the effort values of an ice pokemon",
     conditionFunction: (s) =>
-      s.campUpgrades["invite ice pokemon expert pryce"] &&
+      s.campUpgrades["ice pokemon expert pryce"] &&
       s.quests["maximize the effort values of an ice pokemon"] !== "COLLECTED",
   },
 ];

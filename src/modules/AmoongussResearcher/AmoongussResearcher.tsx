@@ -7,11 +7,11 @@ import { useNavigate } from "../../hooks/useNavigate";
 import { SaveFileContext } from "../../hooks/useSaveFile";
 import { joinInventories } from "../../interfaces/Inventory";
 import {
-  ItemType,
-  MulchType,
-  isApricorn,
-  isBerry,
-  mulches,
+    ItemType,
+    MulchType,
+    isApricorn,
+    isBerry,
+    mulches,
 } from "../../interfaces/Item";
 import { Occupant } from "../../interfaces/Occupant";
 import { SpriteEnum } from "../../interfaces/SpriteEnum";
@@ -106,7 +106,7 @@ export const amoongussCompostResearchers: Occupant[] = [
     sprite: SpriteEnum.scientistFemale,
     id: "amoonguss researcher",
     conditionFunction: (s) =>
-      s.campUpgrades["invite amoongus compost researcher"],
+      s.campUpgrades["amoongus compost researcher"],
   },
   {
     type: "POKEMON",
@@ -117,6 +117,6 @@ export const amoongussCompostResearchers: Occupant[] = [
     id: "amoonguss",
     dialogue: ["Amoonguss is 'processing' berries"],
     conditionFunction: (s) =>
-      s.campUpgrades["invite amoongus compost researcher"],
+      s.campUpgrades["amoongus compost researcher"],
   },
 ];

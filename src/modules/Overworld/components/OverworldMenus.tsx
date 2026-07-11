@@ -62,7 +62,7 @@ const Team = ({ stepsTaken }: { stepsTaken: number }) => {
     <div
       style={{
         position: "absolute",
-        top: portraitMode ? "1.5rem" : "5rem",
+        top: portraitMode ? "5rem" : "5rem",
         left: "1rem",
         zIndex: 8999,
         padding: ".5rem",
@@ -174,7 +174,8 @@ const WeatherAndMap = () => {
       style={{
         position: "absolute",
         top: "1.5rem",
-        right: "1rem",
+        right: portraitMode?undefined:"1rem",
+        left:portraitMode?"1ren":undefined,
         display: "flex",
         gap: "1rem",
         alignItems: "center",

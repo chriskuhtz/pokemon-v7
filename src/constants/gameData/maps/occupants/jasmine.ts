@@ -2,10 +2,10 @@ import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import {
-  Occupant,
-  OverworldNpc,
-  OverworldPokemon,
-  OverworldTrainer,
+    Occupant,
+    OverworldNpc,
+    OverworldPokemon,
+    OverworldTrainer,
 } from "../../../../interfaces/Occupant";
 import { SaveFile } from "../../../../interfaces/SaveFile";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
@@ -30,7 +30,7 @@ export const jasminesAron: OverworldPokemon = {
   dexId: 304,
   id: "jasmines-aron",
   conditionFunction: (s) =>
-    s.campUpgrades["invite steel pokemon expert jasmine"] &&
+    s.campUpgrades["steel pokemon expert jasmine"] &&
     s.quests["catch an exceptional steel pokemon for jasmine"] !== "COLLECTED",
 };
 
@@ -51,7 +51,7 @@ export const jasmineLine: Occupant[] = [
     ],
     quest: "catch an exceptional steel pokemon for jasmine",
     conditionFunction: (s) =>
-      s.campUpgrades["invite steel pokemon expert jasmine"] &&
+      s.campUpgrades["steel pokemon expert jasmine"] &&
       s.quests["catch an exceptional steel pokemon for jasmine"] !==
         "COLLECTED",
   },

@@ -42,7 +42,7 @@ export const campCaveOccupants: OverworldMap["occupants"] = [
     y: 7,
     dialogue: ["Fossils are fascinating", "These Pokemon lived aeons ago"],
     sprite: SpriteEnum.roark,
-    conditionFunction: (s) => s.campUpgrades["invite fossil expert"],
+    conditionFunction: (s) => s.campUpgrades["fossil expert"],
     id: "fossil expert",
   },
   {

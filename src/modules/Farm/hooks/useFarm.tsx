@@ -26,33 +26,18 @@ import {
  * rich mulch: guaranteed success, but fewer berries
  */
 
+const SLOTS=5;
 export const useFarm = () => {
   const { addMessage } = useContext(MessageQueueContext);
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
   const numberOfEmptySlots = useMemo(() => {
-    const slots = [
-      saveFile.campUpgrades.berry_farm,
-      saveFile.campUpgrades["second slot for farm"],
-      saveFile.campUpgrades["third slot for farm"],
-      saveFile.campUpgrades["fourth slot for farm"],
-      saveFile.campUpgrades["fifth slot for farm"],
-      saveFile.campUpgrades["sixth slot for farm"],
-      saveFile.campUpgrades["seventh slot for farm"],
-    ].filter((s) => s === true).length;
-    return slots - saveFile.farm.plants.length;
+    
+    return SLOTS - saveFile.farm.plants.length;
   }, [saveFile]);
   const hasEmptySlots = useMemo(() => {
-    const slots = [
-      saveFile.campUpgrades.berry_farm,
-      saveFile.campUpgrades["second slot for farm"],
-      saveFile.campUpgrades["third slot for farm"],
-      saveFile.campUpgrades["fourth slot for farm"],
-      saveFile.campUpgrades["fifth slot for farm"],
-      saveFile.campUpgrades["sixth slot for farm"],
-      saveFile.campUpgrades["seventh slot for farm"],
-    ].filter((s) => s === true).length;
-    return slots > saveFile.farm.plants.length;
+    
+    return SLOTS > saveFile.farm.plants.length;
   }, [saveFile]);
 
   const harvest = useCallback(

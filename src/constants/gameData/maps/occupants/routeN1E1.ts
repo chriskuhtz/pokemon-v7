@@ -212,7 +212,7 @@ export const routeN1E1Occupants: OverworldMap["occupants"] = [
       s.pokedex.mew.caughtOnRoutes.length === 0 &&
       s.bag["payapa-berry"] > 0 &&
       getTimeOfDay() === "DAY" &&
-      s.campUpgrades["invite historian"],
+      s.campUpgrades["historian"],
     id: "routeN1E1_mew",
   },
   ...makeApricornTree({

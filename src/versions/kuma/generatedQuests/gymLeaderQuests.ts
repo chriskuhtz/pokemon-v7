@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
 import { v4 } from "uuid";
+import { campUpgradeBaseCost } from "../../../constants/gameData/campUpgrades";
 import { blaineId } from "../../../constants/gameData/maps/occupants/blaine";
 import { brockId } from "../../../constants/gameData/maps/occupants/brock";
 import { bugsyId } from "../../../constants/gameData/maps/occupants/bugsy";
@@ -60,7 +61,7 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
     category: "GYM LEADER",
     kind: "BULLETIN",
     badge: "Rainbow_Badge",
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "rindo-berry": 5,
       "miracle-seed": 1,
@@ -73,8 +74,7 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
   },
   "defeat janine": {
     category: "GYM LEADER",
-    kind: "BULLETIN",
-    researchPoints: 25,
+    kind: "BULLETIN",researchPoints: campUpgradeBaseCost,
     badge: "Marsh_Badge",
     rewardItems: {
       "kebia-berry": 5,
@@ -89,8 +89,7 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
   "defeat blaine": {
     category: "GYM LEADER",
     kind: "BULLETIN",
-    badge: "Volcano_Badge",
-    researchPoints: 25,
+    badge: "Volcano_Badge",researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "occa-berry": 5,
       charcoal: 1,
@@ -105,8 +104,7 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
   "defeat surge": {
     category: "GYM LEADER",
     kind: "BULLETIN",
-    badge: "Thunder_Badge",
-    researchPoints: 50,
+    badge: "Thunder_Badge",researchPoints: campUpgradeBaseCost,
     rewardItems: { "wacan-berry": 5, magnet: 1, ...expCandyPackage },
     requiredUpgrade: "swimming certification",
     conditionFunction: (s) => {
@@ -116,8 +114,7 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
   "defeat misty": {
     category: "GYM LEADER",
     kind: "BULLETIN",
-    badge: "Cascade_Badge",
-    researchPoints: 50,
+    badge: "Cascade_Badge",researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "passho-berry": 5,
       "mystic-water": 1,
@@ -131,8 +128,7 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
   "defeat sabrina": {
     category: "GYM LEADER",
     kind: "BULLETIN",
-    badge: "Soul_Badge",
-    researchPoints: 50,
+    badge: "Soul_Badge",researchPoints: campUpgradeBaseCost,
     rewardItems: { "payapa-berry": 5, "twisted-spoon": 1, ...expCandyPackage },
     requiredUpgrade: "swimming certification",
     conditionFunction: (s) => {
@@ -141,8 +137,7 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
   },
   "defeat brock": {
     category: "GYM LEADER",
-    kind: "BULLETIN",
-    researchPoints: 50,
+    kind: "BULLETIN",researchPoints: campUpgradeBaseCost,
     badge: "Boulder_Badge",
     rewardItems: { "charti-berry": 5, "hard-stone": 1, ...expCandyPackage },
     requiredUpgrade: "shovel certification",
@@ -152,8 +147,7 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
   },
   "defeat gary": {
     category: "GYM LEADER",
-    kind: "BULLETIN",
-    researchPoints: 100,
+    kind: "BULLETIN",researchPoints: campUpgradeBaseCost,
     badge: "Earth_Badge",
     rewardItems: {
       electirizer: 1,
@@ -184,8 +178,7 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
       xp: 125,
       intrinsicValues: generateRandomStatObject(31, 25),
       caughtOnMap: "camp",
-    },
-    researchPoints: 50,
+    },researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return occupantHandled(s, falknerId);
     },
@@ -210,8 +203,7 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
       xp: 125,
       intrinsicValues: generateRandomStatObject(31, 25),
       caughtOnMap: "camp",
-    },
-    researchPoints: 50,
+    },researchPoints: campUpgradeBaseCost,
     requiredUpgrade: "machete certification",
     conditionFunction: (s) => {
       return occupantHandled(s, bugsyId);
@@ -237,8 +229,7 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
       xp: 125,
       intrinsicValues: generateRandomStatObject(31, 25),
       caughtOnMap: "camp",
-    },
-    researchPoints: 50,
+    },researchPoints: campUpgradeBaseCost,
     conditionFunction: (s: SaveFile) => {
       return occupantHandled(s, whitneyId);
     },
@@ -264,8 +255,7 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
       caughtOnMap: "camp",
     },
     badge: "Fog_Badge",
-    requiredUpgrade: "swimming certification",
-    researchPoints: 50,
+    requiredUpgrade: "swimming certification",researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return occupantHandled(s, mortyId);
     },
@@ -289,8 +279,7 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
       xp: 125,
       intrinsicValues: generateRandomStatObject(31, 25),
       caughtOnMap: "camp",
-    },
-    researchPoints: 50,
+    },researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return occupantHandled(s, chuckId);
     },
@@ -316,8 +305,7 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
       xp: 125,
       intrinsicValues: generateRandomStatObject(31, 25),
       caughtOnMap: "camp",
-    },
-    researchPoints: 50,
+    },researchPoints: campUpgradeBaseCost,
     conditionFunction: (s: SaveFile) => {
       return occupantHandled(s, jasmineId);
     },
@@ -343,8 +331,7 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
       xp: 125,
       intrinsicValues: generateRandomStatObject(31, 25),
       caughtOnMap: "camp",
-    },
-    researchPoints: 50,
+    },researchPoints: campUpgradeBaseCost,
     conditionFunction: (s: SaveFile) => {
       return occupantHandled(s, pryceId);
     },
@@ -370,8 +357,7 @@ export const gymLeaderQuests: Partial<Record<KumaQuestName, Quest>> = {
       xp: 125,
       intrinsicValues: generateRandomStatObject(31, 25),
       caughtOnMap: "camp",
-    },
-    researchPoints: 50,
+    },researchPoints: campUpgradeBaseCost,
     conditionFunction: (s: SaveFile) => {
       return occupantHandled(s, clairId);
     },

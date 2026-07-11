@@ -1,9 +1,9 @@
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
 import {
-  Occupant,
-  OverworldNpc,
-  OverworldPokemon,
-  OverworldTrainer,
+    Occupant,
+    OverworldNpc,
+    OverworldPokemon,
+    OverworldTrainer,
 } from "../../../../interfaces/Occupant";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
 
@@ -31,7 +31,7 @@ export const falknersHootHoot: OverworldPokemon = {
   dexId: 163,
   id: "falkners-noctowl",
   conditionFunction: (s) =>
-    s.campUpgrades["invite flying pokemon expert falkner"] &&
+    s.campUpgrades["flying pokemon expert falkner"] &&
     s.quests["catch the legendary bird of ice"] !== "COLLECTED",
 };
 export const falknerLine: Occupant[] = [
@@ -48,7 +48,7 @@ export const falknerLine: Occupant[] = [
     handledMessage: ["Weaker flying pokemon can be shy"],
     quest: "catch some local flying pokemon",
     conditionFunction: (s) =>
-      s.campUpgrades["invite flying pokemon expert falkner"] &&
+      s.campUpgrades["flying pokemon expert falkner"] &&
       s.quests["catch some local flying pokemon"] !== "COLLECTED",
   },
   {

@@ -1,4 +1,4 @@
-import { OverworldNpc, Occupant } from '../../../../interfaces/Occupant';
+import { Occupant, OverworldNpc } from '../../../../interfaces/Occupant';
 import { SpriteEnum } from '../../../../interfaces/SpriteEnum';
 
 const rowanBase: Omit<
@@ -26,7 +26,7 @@ export const rowanLine: Occupant[] = [
 		handledMessage: ['How is the catching going'],
 		quest: 'catch a pokemon orginally found in kanto',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor rowan'] &&
+			s.campUpgrades['professor rowan'] &&
 			s.quests['catch a pokemon orginally found in kanto'] !== 'COLLECTED',
 	},
 	{
@@ -37,7 +37,7 @@ export const rowanLine: Occupant[] = [
 		handledMessage: ['How is the catching going'],
 		quest: 'catch a pokemon orginally found in johto',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor rowan'] &&
+			s.campUpgrades['professor rowan'] &&
 			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in johto'] !== 'COLLECTED',
 	},
@@ -53,7 +53,7 @@ export const rowanLine: Occupant[] = [
 		handledMessage: ['How is the catching going'],
 		quest: 'catch a pokemon orginally found in hoenn',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor rowan'] &&
+			s.campUpgrades['professor rowan'] &&
 			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in hoenn'] !== 'COLLECTED',
@@ -69,7 +69,7 @@ export const rowanLine: Occupant[] = [
 		handledMessage: ['How is the catching going'],
 		quest: 'catch a pokemon orginally found in sinnoh',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor rowan'] &&
+			s.campUpgrades['professor rowan'] &&
 			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in hoenn'] === 'COLLECTED' &&
@@ -86,7 +86,7 @@ export const rowanLine: Occupant[] = [
 		handledMessage: ['How is the catching going'],
 		quest: 'catch a pokemon orginally found in unova',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor rowan'] &&
+			s.campUpgrades['professor rowan'] &&
 			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in hoenn'] === 'COLLECTED' &&
@@ -104,7 +104,7 @@ export const rowanLine: Occupant[] = [
 		handledMessage: ['How is the catching going'],
 		quest: 'catch a pokemon orginally found in kalos',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor rowan'] &&
+			s.campUpgrades['professor rowan'] &&
 			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in hoenn'] === 'COLLECTED' &&
@@ -123,7 +123,7 @@ export const rowanLine: Occupant[] = [
 		handledMessage: ['How is the catching going'],
 		quest: 'catch a pokemon orginally found in alola',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor rowan'] &&
+			s.campUpgrades['professor rowan'] &&
 			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in hoenn'] === 'COLLECTED' &&
@@ -143,7 +143,7 @@ export const rowanLine: Occupant[] = [
 		handledMessage: ['How is the catching going'],
 		quest: 'catch a pokemon orginally found in galar',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor rowan'] &&
+			s.campUpgrades['professor rowan'] &&
 			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in hoenn'] === 'COLLECTED' &&
@@ -161,7 +161,7 @@ export const rowanLine: Occupant[] = [
 		handledMessage: ['How is the catching going'],
 		quest: 'catch a pokemon orginally found in paldea',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor rowan'] &&
+			s.campUpgrades['professor rowan'] &&
 			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in hoenn'] === 'COLLECTED' &&
@@ -184,7 +184,7 @@ export const rowanLine: Occupant[] = [
 		handledMessage: ['How is the catching going'],
 		quest: 'catch a pokemon and its alolan variant',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor rowan'] &&
+			s.campUpgrades['professor rowan'] &&
 			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in hoenn'] === 'COLLECTED' &&
@@ -204,7 +204,7 @@ export const rowanLine: Occupant[] = [
 		handledMessage: ['How is the catching going'],
 		quest: 'catch a pokemon and its galarian variant',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor rowan'] &&
+			s.campUpgrades['professor rowan'] &&
 			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in hoenn'] === 'COLLECTED' &&
@@ -227,7 +227,7 @@ export const rowanLine: Occupant[] = [
 		handledMessage: ['How is the catching going'],
 		quest: 'catch a pokemon and its hisui variant',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor rowan'] &&
+			s.campUpgrades['professor rowan'] &&
 			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in hoenn'] === 'COLLECTED' &&
@@ -251,7 +251,7 @@ export const rowanLine: Occupant[] = [
 		handledMessage: ['How is the catching going'],
 		quest: 'catch a pokemon and its paldea variant',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor rowan'] &&
+			s.campUpgrades['professor rowan'] &&
 			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in hoenn'] === 'COLLECTED' &&
@@ -276,7 +276,7 @@ export const rowanLine: Occupant[] = [
 		handledMessage: ['How is the catching going'],
 		quest: 'catch all forms of tauros',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor rowan'] &&
+			s.campUpgrades['professor rowan'] &&
 			s.quests['catch a pokemon orginally found in kanto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in johto'] === 'COLLECTED' &&
 			s.quests['catch a pokemon orginally found in hoenn'] === 'COLLECTED' &&

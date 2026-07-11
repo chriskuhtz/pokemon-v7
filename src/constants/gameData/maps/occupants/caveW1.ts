@@ -99,7 +99,7 @@ export const caveW1Occupants: OverworldMap["occupants"] = [
       s.pokedex.moltres.caughtOnRoutes.length === 0 &&
       s.bag["fire-stone"] > 0 &&
       getTimeOfDay() === "NIGHT" &&
-      s.campUpgrades["invite historian"],
+      s.campUpgrades["historian"],
     id: "routeW1_moltres",
   },
 ];

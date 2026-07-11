@@ -25,7 +25,7 @@ export const pikachuFanLine: Occupant[] = [
     handledMessage: ["Pika Pika"],
     quest: "catch a pikachu",
     conditionFunction: (s) =>
-      s.campUpgrades["invite pikachu fan"] &&
+      s.campUpgrades["pikachu fan"] &&
       s.quests["catch a pikachu"] !== "COLLECTED",
   },
   {

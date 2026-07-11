@@ -8,12 +8,12 @@ import { calculateLevelData } from "../../functions/calculateLevelData";
 import { InGamePage } from "../../components/InGamePage/InGamePage";
 import { portraitMode } from "../../constants/baseConstants";
 import {
-  specialTrainers,
-  tier1trainers,
-  tier2trainers,
-  tier3trainers,
-  tier4trainers,
-  tier5trainers,
+    specialTrainers,
+    tier1trainers,
+    tier2trainers,
+    tier3trainers,
+    tier4trainers,
+    tier5trainers,
 } from "../../constants/trainersRecord";
 import { occupantHandled } from "../../functions/occupantHandled";
 import { LocationContext } from "../../hooks/LocationProvider";
@@ -25,8 +25,8 @@ import { Stat } from "../../interfaces/StatObject";
 import { Card } from "../../uiComponents/Card/Card";
 import { Stack } from "../../uiComponents/Stack/Stack";
 import {
-  useChallengeTrainer,
-  useEvTraining,
+    useChallengeTrainer,
+    useEvTraining,
 } from "../Overworld/hooks/useChallengeTrainer";
 
 export const TrainingField = () => {
@@ -169,7 +169,7 @@ export const TrainingField = () => {
         "special-defense",
         "speed",
       ].map((v) => {
-        if (!saveFile.campUpgrades["invite effort value expert"]) {
+        if (!saveFile.campUpgrades["effort value expert"]) {
           return <></>;
         }
         return (

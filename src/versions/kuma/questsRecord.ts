@@ -9,7 +9,7 @@ import {
   lowBstPokemon,
   midBstPokemon,
 } from "../../constants/baseStatRecord";
-import { campUpgradeCostScale } from "../../constants/gameData/campUpgrades";
+import { campUpgradeBaseCost } from "../../constants/gameData/campUpgrades";
 import { allIlexGalacticsDefeated } from "../../constants/gameData/maps/occupants/ilexForest";
 import { murasakiGladesCleared } from "../../constants/gameData/maps/occupants/murasakiGlades";
 import { rakudairoRuinsCleared } from "../../constants/gameData/maps/occupants/rakudairoRuins";
@@ -526,7 +526,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch a pokemon": {
     category: "RESEARCH",
     rewardItems: { "poke-ball": 10 },
-    researchPoints: campUpgradeCostScale,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return s.pokemon.length > 1;
     },
@@ -535,7 +535,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch a pikachu": {
     category: "RESEARCH",
     rewardItems: { "berry-juice": 2 },
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     targetPokemon: ["pikachu"],
     conditionFunction: (s) => {
       return s.pokedex.pikachu.caughtOnRoutes.length > 0;
@@ -545,7 +545,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "find a lightball": {
     category: "EXPLORATION",
     rewardItems: { "thunder-stone": 1 },
-    researchPoints: 30,
+      researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => {
       return s.bag["light-ball"] > 0;
     },
@@ -554,7 +554,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "retrieve oaks parcel from raticate": {
     category: "EXPLORATION",
     rewardItems: { "big-malasada": 1, "ultra-ball": 5 },
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     conditionFunction: (s) => {
       return s.bag["oaks-parcel"] > 0;
     },
@@ -578,7 +578,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "morpeko-full-belly",
       "morpeko-hangry",
     ],
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => {
       const pikas: PokemonName[] = [
         "pikachu",
@@ -618,7 +618,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "morpeko-full-belly",
       "morpeko-hangry",
     ],
-    researchPoints: 30,
+      researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => {
       const pikas: PokemonName[] = [
         "pikachu",
@@ -660,7 +660,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "morpeko-full-belly",
       "morpeko-hangry",
     ],
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       const pikas: PokemonName[] = [
         "pikachu",
@@ -693,7 +693,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "pikachu-world-cap",
       "pikachu-partner-cap",
     ],
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => {
       const pikas: PokemonName[] = [
         "pikachu-original-cap",
@@ -728,7 +728,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "pikachu-world-cap",
       "pikachu-partner-cap",
     ],
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       const pikas: PokemonName[] = [
         "pikachu-original-cap",
@@ -766,7 +766,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "pikachu-world-cap",
       "pikachu-partner-cap",
     ],
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       const pikas: PokemonName[] = [
         "pikachu-original-cap",
@@ -803,7 +803,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "pikachu-libre",
       "pikachu-cosplay",
     ],
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       const pikas: PokemonName[] = [
         "pikachu-rock-star",
@@ -820,7 +820,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch a feebas": {
     category: "EXPLORATION",
     rewardItems: { "net-ball": 10, "old-gateau": 2 },
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     targetPokemon: ["feebas"],
     conditionFunction: (s) => {
       return s.pokedex.feebas.caughtOnRoutes.length > 0;
@@ -831,7 +831,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch a sudowoodo": {
     category: "EXPLORATION",
     rewardItems: { "ultra-ball": 5, "pewter-crunchies": 2 },
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     targetPokemon: ["sudowoodo"],
     conditionFunction: (s) => {
       return s.pokedex.sudowoodo.caughtOnRoutes.length > 0;
@@ -842,7 +842,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch all honeytree pokemon": {
     category: "RESEARCH",
     rewardItems: { "sun-stone": 2, "leaf-stone": 2, "berry-juice": 5 },
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => {
       return getHoneyEncounters(kumaDex).every(
         (e) => s.pokedex[e].caughtOnRoutes.length > 0,
@@ -861,7 +861,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "lumiose-galette": 5,
       "fossilized-bird": 2,
     },
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => {
       return getUnderRockEncounters(kumaDex).every(
         (e) => s.pokedex[e].caughtOnRoutes.length > 0,
@@ -875,7 +875,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch a pokemon orginally found in kanto": {
     category: "POKEDEX",
     rewardItems: { protein: 2 },
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     conditionFunction: (s) => {
       return s.pokemon.some((p) => pokemonNames.slice(0, 151).includes(p.name));
     },
@@ -884,7 +884,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch a pokemon orginally found in johto": {
     category: "POKEDEX",
     rewardItems: { iron: 2 },
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     conditionFunction: (s) => {
       return s.pokemon.some((p) =>
         pokemonNames.slice(150, 251).includes(p.name),
@@ -895,7 +895,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch a pokemon orginally found in hoenn": {
     category: "POKEDEX",
     rewardItems: { calcium: 2 },
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     conditionFunction: (s) => {
       return s.pokemon.some((p) =>
         pokemonNames.slice(250, 387).includes(p.name),
@@ -906,7 +906,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch a pokemon orginally found in sinnoh": {
     category: "POKEDEX",
     rewardItems: { zinc: 2 },
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     conditionFunction: (s) => {
       return s.pokemon.some((p) =>
         pokemonNames.slice(386, 494).includes(p.name),
@@ -917,7 +917,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch a pokemon orginally found in unova": {
     category: "POKEDEX",
     rewardItems: { carbos: 2 },
-    researchPoints: 5,
+    researchPoints: campUpgradeBaseCost / 5,
     conditionFunction: (s) => {
       return s.pokemon.some((p) =>
         pokemonNames.slice(493, 650).includes(p.name),
@@ -928,7 +928,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch a pokemon orginally found in kalos": {
     category: "POKEDEX",
     rewardItems: { "hp-up": 2 },
-    researchPoints: 5,
+    researchPoints: campUpgradeBaseCost / 5,
     conditionFunction: (s) => {
       return s.pokemon.some((p) =>
         pokemonNames.slice(649, 722).includes(p.name),
@@ -939,7 +939,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch a pokemon orginally found in alola": {
     category: "POKEDEX",
     rewardItems: { "pp-max": 1 },
-    researchPoints: 5,
+    researchPoints: campUpgradeBaseCost / 5,
     conditionFunction: (s) => {
       return s.pokemon.some((p) =>
         pokemonNames.slice(721, 810).includes(p.name),
@@ -950,7 +950,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch a pokemon orginally found in galar": {
     category: "POKEDEX",
     rewardItems: { "ultra-ball": 5 },
-    researchPoints: 5,
+    researchPoints: campUpgradeBaseCost / 5,
     conditionFunction: (s) => {
       return s.pokemon.some((p) =>
         pokemonNames.slice(809, 906).includes(p.name),
@@ -961,7 +961,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch a pokemon orginally found in paldea": {
     category: "POKEDEX",
     rewardItems: { "pp-max": 1 },
-    researchPoints: 5,
+    researchPoints: campUpgradeBaseCost / 5,
     conditionFunction: (s) => {
       return s.pokemon.some((p) =>
         pokemonNames.slice(905, 1025).includes(p.name),
@@ -972,7 +972,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch a pokemon and its galarian variant": {
     category: "POKEDEX",
     rewardItems: { "sitrus-berry": 10 },
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => {
       return s.pokemon.some((search) =>
         s.pokemon.some((result) =>
@@ -985,7 +985,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch a pokemon and its alolan variant": {
     category: "POKEDEX",
     rewardItems: { "ultra-ball": 5 },
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => {
       return s.pokemon.some((search) =>
         s.pokemon.some((result) =>
@@ -998,7 +998,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch a pokemon and its hisui variant": {
     category: "POKEDEX",
     rewardItems: { "black-augurite": 1 },
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => {
       return s.pokemon.some((search) =>
         s.pokemon.some((result) =>
@@ -1011,7 +1011,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch a pokemon and its paldea variant": {
     category: "POKEDEX",
     rewardItems: { elixir: 3 },
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => {
       return s.pokemon.some((search) =>
         s.pokemon.some((result) =>
@@ -1024,7 +1024,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch all forms of tauros": {
     category: "RESEARCH",
     rewardItems: { "big-malasada": 2 },
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     targetPokemon: [
       "tauros",
       "tauros-paldea-aqua-breed",
@@ -1057,14 +1057,14 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "yellow-apricorn": 1,
       "orange-apricorn": 1,
     },
-    researchPoints: 10,
-    requiredUpgrade: "invite apricorn smith kurt",
+    researchPoints: campUpgradeBaseCost / 5,
+    requiredUpgrade: "apricorn smith kurt",
     conditionFunction: (s) => !!s.mileStones.hasCraftedApricorn,
   },
   "lure a pokemon with honey": {
     category: "RESEARCH",
     rewardItems: { "sitrus-berry": 3 },
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     conditionFunction: (s) => {
       return !!s.mileStones.hasCaughtAPokemonWithHoney;
     },
@@ -1080,7 +1080,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "silver-razz-berry": 3,
       "silver-pinap-berry": 3,
     },
-    researchPoints: 30,
+      researchPoints: campUpgradeBaseCost /2,
     availableAfter: "lure a pokemon with honey",
     conditionFunction: (s) => {
       return s.pokedex.vespiquen.caughtOnRoutes.length > 0;
@@ -1090,7 +1090,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "evolve a pokemon through level up": {
     category: "RESEARCH",
     rewardItems: { "thunder-stone": 1 },
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     conditionFunction: (s) => {
       return !!s.mileStones.hasEvolvedAPokemonThroughLevelUp;
     },
@@ -1099,7 +1099,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "evolve a pokemon with a stone": {
     category: "RESEARCH",
     rewardItems: { "metal-coat": 1 },
-    researchPoints: 15,
+    researchPoints: campUpgradeBaseCost /5,
     conditionFunction: (s) => {
       return !!s.mileStones.hasEvolvedAPokemonWithAStone;
     },
@@ -1109,7 +1109,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "evolve a pokemon with a held item": {
     category: "RESEARCH",
     rewardItems: { "soothe-bell": 1 },
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => {
       return !!s.mileStones.hasEvolvedAPokemonWithAHeldItem;
     },
@@ -1119,7 +1119,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "evolve a pokemon through friendship": {
     category: "RESEARCH",
     rewardItems: { "moon-stone": 2 },
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     conditionFunction: (s) => {
       return !!s.mileStones.hasEvolvedAPokemonThroughFriendship;
     },
@@ -1129,7 +1129,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "evolve male and female nidoran into their final form": {
     category: "RESEARCH",
     rewardItems: { "leaf-stone": 1, "sun-stone": 1 },
-    researchPoints: 30,
+     researchPoints: campUpgradeBaseCost /2,
     targetPokemon: ["nidoking", "nidoqueen"],
     conditionFunction: (s) => {
       return (
@@ -1143,7 +1143,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "evolve gloom into vileplume and bellosom": {
     category: "RESEARCH",
     rewardItems: { "metal-coat": 1, "black-augurite": 1 },
-    researchPoints: 30,
+     researchPoints: campUpgradeBaseCost /2,
     targetPokemon: ["bellossom", "vileplume"],
     conditionFunction: (s) => {
       return (
@@ -1157,7 +1157,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "evolve a pokemon that only evolves during the day": {
     category: "RESEARCH",
     rewardItems: { "ultra-ball": 10 },
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     conditionFunction: (s) => {
       return !!s.mileStones.hasEvolvedAPokemonThatNeedsDaytime;
     },
@@ -1167,7 +1167,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "evolve a pokemon that only evolves at night": {
     category: "RESEARCH",
     rewardItems: { "ultra-ball": 10 },
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     conditionFunction: (s) => {
       return !!s.mileStones.hasEvolvedAPokemonThatNeedsNighttime;
     },
@@ -1177,7 +1177,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "train a pokemon to level 10": {
     category: "TRAINING",
     rewardItems: { "exp-share": 1, "big-malasada": 1 },
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     conditionFunction: (s) => {
       return s.pokemon.some(
         (p) => calculateLevelData(p.xp, p.growthRate).level >= 10,
@@ -1188,7 +1188,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "train a pokemon to level 20": {
     category: "TRAINING",
     rewardItems: { "rare-candy": 2, "pewter-crunchies": 2 },
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => {
       return s.pokemon.some(
         (p) => calculateLevelData(p.xp, p.growthRate).level >= 20,
@@ -1200,7 +1200,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "train a pokemon to level 30": {
     category: "TRAINING",
     rewardItems: { "rare-candy": 3, "moomoo-cheese": 3 },
-    researchPoints: 30,
+     researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => {
       return s.pokemon.some(
         (p) => calculateLevelData(p.xp, p.growthRate).level >= 30,
@@ -1212,7 +1212,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "train a pokemon to level 40": {
     category: "TRAINING",
     rewardItems: { "rare-candy": 4, "lumiose-galette": 4 },
-    researchPoints: 40,
+    researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => {
       return s.pokemon.some(
         (p) => calculateLevelData(p.xp, p.growthRate).level >= 40,
@@ -1224,7 +1224,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "train a pokemon to level 50": {
     category: "TRAINING",
     rewardItems: { "rare-candy": 5, casteliacone: 5 },
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return s.pokemon.some(
         (p) => calculateLevelData(p.xp, p.growthRate).level >= 50,
@@ -1236,7 +1236,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "train a pokemon to level 60": {
     category: "TRAINING",
     rewardItems: { "rare-candy": 6, "rage-candy-bar": 6 },
-    researchPoints: 60,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return s.pokemon.some(
         (p) => calculateLevelData(p.xp, p.growthRate).level >= 60,
@@ -1248,7 +1248,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "train a pokemon to level 70": {
     category: "TRAINING",
     rewardItems: { "rare-candy": 7, "big-malasada": 7 },
-    researchPoints: 70,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return s.pokemon.some(
         (p) => calculateLevelData(p.xp, p.growthRate).level >= 70,
@@ -1260,7 +1260,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "train a pokemon to level 80": {
     category: "TRAINING",
     rewardItems: { "rare-candy": 8, "pewter-crunchies": 8 },
-    researchPoints: 80,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return s.pokemon.some(
         (p) => calculateLevelData(p.xp, p.growthRate).level >= 80,
@@ -1272,7 +1272,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "train a pokemon to level 90": {
     category: "TRAINING",
     rewardItems: { "rare-candy": 9, casteliacone: 9 },
-    researchPoints: 90,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return s.pokemon.some(
         (p) => calculateLevelData(p.xp, p.growthRate).level >= 90,
@@ -1284,7 +1284,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "train a pokemon to level 100": {
     category: "TRAINING",
     rewardItems: { "rare-candy": 10, "lumiose-galette": 10 },
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return s.pokemon.some(
         (p) => calculateLevelData(p.xp, p.growthRate).level >= 100,
@@ -1298,7 +1298,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     rewardItems: {
       "big-malasada": 1,
     },
-    researchPoints: 5,
+    researchPoints: campUpgradeBaseCost / 5,
     conditionFunction: (s) => {
       return trainers.some((t) => occupantHandled(s, t.id));
     },
@@ -1311,7 +1311,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "moomoo-cheese": 2,
       "exp-candy-xs": 10,
     },
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     conditionFunction: (s) => {
       return tier1trainers.every((trainer) => occupantHandled(s, trainer.id));
     },
@@ -1325,7 +1325,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       casteliacone: 2,
       "exp-candy-s": 10,
     },
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return tier2trainers.every((trainer) => occupantHandled(s, trainer.id));
     },
@@ -1339,7 +1339,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "pewter-crunchies": 2,
       "exp-candy-m": 10,
     },
-    researchPoints: 75,
+    researchPoints: campUpgradeBaseCost ,
     conditionFunction: (s) => {
       return tier3trainers.every((trainer) => occupantHandled(s, trainer.id));
     },
@@ -1353,7 +1353,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "lumiose-galette": 2,
       "exp-candy-l": 10,
     },
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return tier4trainers.every((trainer) => occupantHandled(s, trainer.id));
     },
@@ -1374,7 +1374,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "old-gateau": 10,
       "exp-candy-xl": 10,
     },
-    researchPoints: 125,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return tier5trainers.every((trainer) => occupantHandled(s, trainer.id));
     },
@@ -1390,7 +1390,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "gooey-mulch": 2,
       "stable-mulch": 2,
     },
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => !!s.mileStones.hasGrownABerry,
     kind: "BULLETIN",
     requiredUpgrade: "berry_farm",
@@ -1403,7 +1403,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "gooey-mulch": 2,
       "stable-mulch": 2,
     },
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s: SaveFile) => !!s.mileStones.hasGrownAHerb,
     kind: "BULLETIN",
     requiredUpgrade: "berry_farm",
@@ -1416,7 +1416,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "gooey-mulch": 2,
       "stable-mulch": 2,
     },
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => !!s.mileStones.hasGrownAnApricorn,
     kind: "BULLETIN",
     requiredUpgrade: "berry_farm",
@@ -1434,7 +1434,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "yellow-apricorn": 1,
       "orange-apricorn": 1,
     },
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     availableAfter: "craft a apricorn ball",
     conditionFunction: (s) =>
       s.pokemon.some(
@@ -1456,7 +1456,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "white-apricorn": 1,
       "orange-apricorn": 1,
     },
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     availableAfter: "catch a pokemon in an apricorn ball",
     conditionFunction: (s) =>
       Object.values(apricornTable)
@@ -1469,7 +1469,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "EXPLORATION",
     kind: "QUEST_LINE",
     rewardItems: {},
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s: SaveFile) => {
       return s.bag["purple-apricorn"] > 0;
     },
@@ -1480,7 +1480,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     rewardItems: {
       "pp-up": 1,
     },
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     conditionFunction: (s) =>
       s.pokemon.some((p) => p.weightModifier && p.weightModifier > 0.9),
   },
@@ -1490,7 +1490,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     rewardItems: {
       "sitrus-berry": 5,
     },
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     availableAfter: "catch a very heavy specimen",
     conditionFunction: (s) =>
       s.pokemon.some((p) => p.weightModifier && p.weightModifier < 0.1),
@@ -1501,7 +1501,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     rewardItems: {
       "yellow-apricorn": 5,
     },
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     availableAfter: "catch a very light specimen",
     conditionFunction: (s) =>
       s.pokemon.some((p) => p.heightModifier && p.heightModifier < 0.1),
@@ -1512,7 +1512,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     rewardItems: {
       "green-apricorn": 5,
     },
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     availableAfter: "catch a tiny specimen",
     conditionFunction: (s) =>
       s.pokemon.some((p) => p.heightModifier && p.heightModifier > 0.9),
@@ -1523,7 +1523,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     rewardItems: {
       "muscle-mochi": 2,
     },
-    researchPoints: 15,
+    researchPoints: campUpgradeBaseCost /5,
     availableAfter: "catch a gigantic specimen",
     conditionFunction: (s) =>
       s.pokemon.some((p) => p.intrinsicValues.attack === 31),
@@ -1534,7 +1534,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     rewardItems: {
       "clever-mochi": 2,
     },
-    researchPoints: 15,
+    researchPoints: campUpgradeBaseCost/5,
     availableAfter: "catch a pokemon with perfect attack ivs",
     conditionFunction: (s) =>
       s.pokemon.some((p) => p.intrinsicValues["special-attack"] === 31),
@@ -1545,7 +1545,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     rewardItems: {
       "resist-mochi": 2,
     },
-    researchPoints: 15,
+    researchPoints: campUpgradeBaseCost/5,
     availableAfter: "catch a pokemon with perfect special-attack ivs",
     conditionFunction: (s) =>
       s.pokemon.some((p) => p.intrinsicValues["defense"] === 31),
@@ -1555,8 +1555,8 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     rewardItems: {
       "genius-mochi": 2,
-    },
-    researchPoints: 15,
+    }, 
+    researchPoints: campUpgradeBaseCost/5,
     availableAfter: "catch a pokemon with perfect defense ivs",
     conditionFunction: (s) =>
       s.pokemon.some((p) => p.intrinsicValues["special-defense"] === 31),
@@ -1566,8 +1566,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     rewardItems: {
       "swift-mochi": 2,
-    },
-    researchPoints: 15,
+    }, researchPoints: campUpgradeBaseCost/5,
     availableAfter: "catch a pokemon with perfect special-defense ivs",
     conditionFunction: (s) =>
       s.pokemon.some((p) => p.intrinsicValues["speed"] === 31),
@@ -1577,8 +1576,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     rewardItems: {
       "health-mochi": 2,
-    },
-    researchPoints: 15,
+    }, researchPoints: campUpgradeBaseCost/5,
     availableAfter: "catch a pokemon with perfect speed ivs",
     conditionFunction: (s) =>
       s.pokemon.some((p) => p.intrinsicValues["hp"] === 31),
@@ -1594,7 +1592,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "health-mochi": 3,
       "resist-mochi": 3,
     },
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     availableAfter: "catch a pokemon with perfect attack ivs",
     conditionFunction: (s) =>
       s.pokemon.some((p) => sumOfIvs(p.intrinsicValues) > 168),
@@ -1602,7 +1600,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch local dark and ghost pokemon": {
     category: "EXPLORATION",
     rewardItems: { "odd-keystone": 1 },
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => {
       return (
         s.pokedex["gastly"].caughtOnRoutes.length > 0 &&
@@ -1618,7 +1616,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch whitney's favorite cute pokemon": {
     category: "EXPLORATION",
     rewardItems: { "clear-amulet": 1 },
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return (
         s.pokedex["clefairy"].caughtOnRoutes.length > 0 &&
@@ -1633,7 +1631,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch an exceptional steel pokemon for jasmine": {
     category: "EXPLORATION",
     rewardItems: { "steel-gem": 10, "babiri-berry": 10 },
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s: SaveFile) => {
       return s.pokemon.some(
         (p) =>
@@ -1646,7 +1644,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach max. friendship with a dragon pokemon": {
     category: "TRAINING",
     rewardItems: { "dragon-gem": 10, "haban-berry": 10 },
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s: SaveFile) => {
       return s.pokemon.some((p) => hasType(p, "dragon") && p.happiness > 250);
     },
@@ -1655,7 +1653,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "maximize the effort values of an ice pokemon": {
     category: "TRAINING",
     rewardItems: { "ice-gem": 10, "yache-berry": 10 },
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s: SaveFile) => {
       return s.pokemon.some(
         (p) =>
@@ -1671,7 +1669,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch Haunter and Mightyena": {
     category: "EXPLORATION",
     rewardItems: { "dusk-ball": 5, "dusk-stone": 1 },
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => {
       return (
         s.pokedex["haunter"].caughtOnRoutes.length > 0 &&
@@ -1684,7 +1682,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch a spiritomb": {
     category: "EXPLORATION",
     rewardItems: { "rare-candy": 3 },
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return s.pokedex["spiritomb"].caughtOnRoutes.length > 0;
     },
@@ -1709,7 +1707,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       intrinsicValues: generateRandomStatObject(31, 25),
       caughtOnMap: "camp",
     },
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return occupantHandled(s, "Gym Leader Roark");
     },
@@ -1734,7 +1732,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       intrinsicValues: generateRandomStatObject(31, 25),
       caughtOnMap: "camp",
     },
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return occupantHandled(s, "Professor Rowan");
     },
@@ -1759,7 +1757,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       intrinsicValues: generateRandomStatObject(31, 25),
       caughtOnMap: "camp",
     },
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return occupantHandled(s, "Professor Elm");
     },
@@ -1770,7 +1768,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch some local flying pokemon": {
     category: "EXPLORATION",
     rewardItems: { "yache-berry": 2 },
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     conditionFunction: (s) => {
       return (
         s.pokedex["pidgey"].caughtOnRoutes.length > 0 &&
@@ -1796,7 +1794,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "evolve some local flying pokemon": {
     category: "EXPLORATION",
     rewardItems: { "charti-berry": 2 },
-    researchPoints: 15,
+    researchPoints: campUpgradeBaseCost/2,
     conditionFunction: (s) => {
       return (
         s.pokedex["pidgeotto"].caughtOnRoutes.length > 0 &&
@@ -1809,7 +1807,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "evolve a flying pokemon to its final stage": {
     category: "EXPLORATION",
     rewardItems: { "wacan-berry": 5 },
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     conditionFunction: (s) => {
       return (
         s.pokedex["pidgeot"].caughtOnRoutes.length > 0 ||
@@ -1822,7 +1820,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch the legendary bird of ice": {
     category: "EXPLORATION",
     rewardItems: { "rare-candy": 10 },
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return s.pokedex["articuno"].caughtOnRoutes.length > 0;
     },
@@ -1832,40 +1830,40 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch the legendary bird of fire": {
     category: "EXPLORATION",
     rewardItems: { "rare-candy": 10 },
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return s.pokedex["moltres"].caughtOnRoutes.length > 0;
     },
     targetPokemon: ["moltres"],
-    requiredUpgrade: "invite historian",
+    requiredUpgrade: "historian",
     kind: "BULLETIN",
   },
   "catch the legendary bird of thunder": {
     category: "EXPLORATION",
     rewardItems: { "rare-candy": 10 },
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return s.pokedex["zapdos"].caughtOnRoutes.length > 0;
     },
     targetPokemon: ["zapdos"],
-    requiredUpgrade: "invite historian",
+    requiredUpgrade: "historian",
     kind: "BULLETIN",
   },
   "catch the mysterious pokemon in orenji forest": {
     category: "EXPLORATION",
     rewardItems: { "rare-candy": 10 },
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return s.pokedex["mew"].caughtOnRoutes.length > 0;
     },
     targetPokemon: ["mew"],
-    requiredUpgrade: "invite historian",
+    requiredUpgrade: "historian",
     kind: "BULLETIN",
   },
   "catch the legendary beast of water": {
     category: "EXPLORATION",
     rewardItems: { "rare-candy": 10 },
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return s.pokedex["suicune"].caughtOnRoutes.length > 0;
     },
@@ -1876,7 +1874,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch the legendary beast of fire": {
     category: "EXPLORATION",
     rewardItems: { "rare-candy": 10 },
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return s.pokedex["entei"].caughtOnRoutes.length > 0;
     },
@@ -1887,7 +1885,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch the legendary beast of thunder": {
     category: "EXPLORATION",
     rewardItems: { "rare-candy": 10 },
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return s.pokedex["raikou"].caughtOnRoutes.length > 0;
     },
@@ -1903,13 +1901,13 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "great-ball": 10,
     },
     targetPokemon: Object.keys(fossilTable) as PokemonName[],
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     conditionFunction: (s) => {
       return Object.keys(fossilTable).some(
         (fossil) => s.pokedex[fossil as PokemonName].caughtOnRoutes.length > 0,
       );
     },
-    requiredUpgrade: "invite fossil expert",
+    requiredUpgrade: "fossil expert",
   },
   "revive all different fossils": {
     category: "RESEARCH",
@@ -1918,14 +1916,14 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "rare-candy": 5,
       "ultra-ball": 5,
     },
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return Object.keys(fossilTable).every(
         (fossil) => s.pokedex[fossil as PokemonName].caughtOnRoutes.length > 0,
       );
     },
     targetPokemon: Object.keys(fossilTable) as PokemonName[],
-    requiredUpgrade: "invite fossil expert",
+    requiredUpgrade: "fossil expert",
     availableAfter: "revive a fossil",
   },
   "evolve your starter pokemon": {
@@ -1934,7 +1932,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     rewardItems: {
       "rare-candy": 2,
     },
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     conditionFunction: (s) => {
       return !!s.mileStones.hasEvolvedStarter;
     },
@@ -1946,14 +1944,14 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "master-ball": 1,
       "shiny-charm": 1,
     },
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) =>
       s.pokemon.some((p) => p.shiny && p.caughtOnMap !== "camp"),
   },
   "cook an easy recipe": {
     category: "RESEARCH",
     kind: "BULLETIN",
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     rewardItems: {
       "nanab-berry": 1,
       "bluk-berry": 1,
@@ -1961,39 +1959,38 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       "pomeg-berry": 1,
       "oran-berry": 1,
     },
-    requiredUpgrade: "invite chef grandma",
+    requiredUpgrade: "chef grandma",
     conditionFunction: (s) => !!s.mileStones.cookedEasyRecipe,
   },
   "cook a medium recipe": {
     category: "RESEARCH",
-    kind: "BULLETIN",
-    researchPoints: 15,
+    kind: "BULLETIN", researchPoints: campUpgradeBaseCost/2,
     rewardItems: {
       "pecha-berry": 1,
       "chesto-berry": 1,
       "cheri-berry": 1,
     },
-    requiredUpgrade: "invite chef grandma",
+    requiredUpgrade: "chef grandma",
     availableAfter: "cook an easy recipe",
     conditionFunction: (s) => !!s.mileStones.cookedMediumRecipe,
   },
   "cook a tricky recipe": {
     category: "RESEARCH",
     kind: "BULLETIN",
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     rewardItems: {
       "sitrus-berry": 1,
       "leppa-berry": 1,
       "lum-berry": 1,
     },
-    requiredUpgrade: "invite chef grandma",
+    requiredUpgrade: "chef grandma",
     availableAfter: "cook a medium recipe",
     conditionFunction: (s) => !!s.mileStones.cookedTrickyRecipe,
   },
   "catch 10 different species": {
     category: "POKEDEX",
     kind: "BULLETIN",
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     rewardItems: {
       "poke-ball": 10,
     },
@@ -2004,7 +2001,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch 20 different species": {
     category: "POKEDEX",
     kind: "BULLETIN",
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     rewardItems: {
       "great-ball": 10,
     },
@@ -2016,7 +2013,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch 50 different species": {
     category: "POKEDEX",
     kind: "BULLETIN",
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "ultra-ball": 10,
     },
@@ -2028,7 +2025,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch 100 different species": {
     category: "POKEDEX",
     kind: "BULLETIN",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       ...expCandyPackage,
     },
@@ -2040,7 +2037,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch 150 different species": {
     category: "POKEDEX",
     kind: "BULLETIN",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "master-ball": 1,
       ...expCandyPackage,
@@ -2053,7 +2050,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch 250 different species": {
     category: "POKEDEX",
     kind: "BULLETIN",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "master-ball": 1,
       ...expCandyPackage,
@@ -2066,7 +2063,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch 350 different species": {
     category: "POKEDEX",
     kind: "BULLETIN",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "master-ball": 1,
       ...expCandyPackage,
@@ -2079,7 +2076,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch 450 different species": {
     category: "POKEDEX",
     kind: "BULLETIN",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "master-ball": 1,
       ...expCandyPackage,
@@ -2092,7 +2089,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch 550 different species": {
     category: "POKEDEX",
     kind: "BULLETIN",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "master-ball": 1,
       ...expCandyPackage,
@@ -2105,7 +2102,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "find a pokemon under a smashed rock": {
     category: "EXPLORATION",
     kind: "BULLETIN",
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     rewardItems: {
       "sitrus-berry": 5,
     },
@@ -2116,7 +2113,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "RESEARCH",
     kind: "BULLETIN",
     requiredUpgrade: "create seed vault",
-    researchPoints: 5,
+    researchPoints: campUpgradeBaseCost / 5,
     rewardItems: { "moomoo-milk": 3 },
     conditionFunction: (s) => !!(s.seedVault && s.seedVault.length > 0),
   },
@@ -2125,7 +2122,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     requiredUpgrade: "create seed vault",
     availableAfter: "donate 1 plant to the seed vault",
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     rewardItems: { "moomoo-milk": 10 },
     conditionFunction: (s) => !!(s.seedVault && s.seedVault.length >= 20),
   },
@@ -2134,7 +2131,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     requiredUpgrade: "create seed vault",
     availableAfter: "donate 20 plants to the seed vault",
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: { "moomoo-milk": 10, "ultra-ball": 5 },
     conditionFunction: (s) => !!(s.seedVault && s.seedVault.length >= 50),
   },
@@ -2143,7 +2140,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     requiredUpgrade: "create seed vault",
     availableAfter: "donate 50 plants to the seed vault",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: { "master-ball": 1 },
     conditionFunction: (s) =>
       [...berries, ...apricorns].every((item) => s.seedVault?.includes(item)),
@@ -2152,7 +2149,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "EXPLORATION",
     kind: "BULLETIN",
     requiredUpgrade: "shovel certification",
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     rewardItems: { "babiri-berry": 2, "kee-berry": 2, "fossilized-dino": 2 },
     targetRoute: "onixCave",
     targetPokemon: getAllEncountersFor("onixCave", {}, kumaDex).map(
@@ -2169,7 +2166,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     requiredUpgrade: "shovel certification",
     availableAfter: "catch a pokemon from onix cave",
     targetRoute: "onixCave",
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     rewardItems: {
       "yellow-apricorn": 10,
       "black-apricorn": 10,
@@ -2190,7 +2187,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     requiredUpgrade: "ranger certification",
     availableAfter: "defeat team galactic in ilex forest",
     targetRoute: "ilex-forest",
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "yellow-apricorn": 10,
       "orange-apricorn": 10,
@@ -2210,7 +2207,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     requiredUpgrade: "ranger certification",
     availableAfter: "investigate murasaki glades",
     targetRoute: "murasaki-glades",
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "pink-apricorn": 10,
       "black-apricorn": 10,
@@ -2229,7 +2226,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     requiredUpgrade: "shovel certification",
     targetRoute: "rakudairo-ruins",
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "nest-ball": 10,
       "rakudairo-ticket": 1,
@@ -2247,7 +2244,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     requiredUpgrade: "swimming certification",
     targetRoute: "caveW1",
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "power-herb": 2,
       "white-herb": 2,
@@ -2279,7 +2276,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "RESEARCH",
     kind: "BULLETIN",
     requiredUpgrade: "shovel certification",
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     rewardItems: {
       "enigma-berry": 2,
     },
@@ -2288,7 +2285,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "catch all evolutions of eevee": {
     category: "RESEARCH",
     rewardItems: {},
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return (
         s.pokedex["vaporeon"].caughtOnRoutes.length > 0 &&
@@ -2316,8 +2313,8 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach cooking skill 20": {
     category: "RESEARCH",
     kind: "BULLETIN",
-    requiredUpgrade: "invite chef grandma",
-    researchPoints: 20,
+    requiredUpgrade: "chef grandma",
+    researchPoints: campUpgradeBaseCost /2,
     rewardItems: {
       "aguav-berry": 1,
       "babiri-berry": 1,
@@ -2330,9 +2327,9 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach cooking skill 50": {
     category: "RESEARCH",
     kind: "BULLETIN",
-    requiredUpgrade: "invite chef grandma",
+    requiredUpgrade: "chef grandma",
     availableAfter: "reach cooking skill 20",
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "figy-berry": 1,
       "leppa-berry": 1,
@@ -2345,9 +2342,9 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach cooking skill 100": {
     category: "RESEARCH",
     kind: "BULLETIN",
-    requiredUpgrade: "invite chef grandma",
+    requiredUpgrade: "chef grandma",
     availableAfter: "reach cooking skill 50",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "enigma-berry": 1,
       "kee-berry": 1,
@@ -2359,7 +2356,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "RESEARCH",
     kind: "BULLETIN",
     requiredUpgrade: "berry lure station routeN1",
-    researchPoints: 40,
+    researchPoints: campUpgradeBaseCost /2,
     rewardItems: {
       "roseli-berry": 1,
       "passho-berry": 1,
@@ -2373,7 +2370,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "EXPLORATION",
     kind: "BULLETIN",
     requiredUpgrade: "pokemon swarm radar",
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     rewardItems: { "nest-ball": 20 },
     conditionFunction: (s) => s.mileStones.caughtFromSwarms.length > 0,
   },
@@ -2382,7 +2379,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     requiredUpgrade: "pokemon swarm radar",
     availableAfter: "catch a pokemon from a swarm",
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: { "dusk-ball": 20 },
     conditionFunction: (s) => s.mileStones.caughtFromSwarms.length >= 3,
   },
@@ -2391,7 +2388,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     requiredUpgrade: "pokemon swarm radar",
     availableAfter: "catch 3 different pokemon from swarms",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "quick-ball": 10,
     },
@@ -2402,7 +2399,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     requiredUpgrade: "pokemon swarm radar",
     availableAfter: "catch 10 different pokemon from swarms",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "ultra-ball": 5,
     },
@@ -2411,56 +2408,56 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "deal 50 damage with one attack": {
     category: "BATTLE",
     kind: "QUEST_LINE",
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     conditionFunction: (s) => s.mileStones.damageRecord >= 50,
     rewardItems: { "big-malasada": 1, "x-attack": 1 },
   },
   "deal 100 damage with one attack": {
     category: "BATTLE",
     kind: "QUEST_LINE",
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => s.mileStones.damageRecord >= 100,
     rewardItems: { casteliacone: 1, "wise-glasses": 1 },
   },
   "deal 200 damage with one attack": {
     category: "BATTLE",
     kind: "QUEST_LINE",
-    researchPoints: 30,
-    conditionFunction: (s) => s.mileStones.damageRecord >= 200,
+      researchPoints: campUpgradeBaseCost /2,
+    conditionFunction: (s) => s.mileStones.damageRecord >= 100,
     rewardItems: { "lava-cookie": 1, "scope-lens": 1 },
   },
   "deal 500 damage with one attack": {
     category: "BATTLE",
     kind: "QUEST_LINE",
-    researchPoints: 40,
+      researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => s.mileStones.damageRecord >= 500,
     rewardItems: { "old-gateau": 1, "choice-band": 1 },
   },
   "deal 1000 damage with one attack": {
     category: "BATTLE",
     kind: "QUEST_LINE",
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => s.mileStones.damageRecord >= 1000,
     rewardItems: { "rage-candy-bar": 1, "choice-band": 1 },
   },
   "deal 2000 damage with one attack": {
     category: "BATTLE",
     kind: "QUEST_LINE",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => s.mileStones.damageRecord >= 2000,
     rewardItems: { "big-malasada": 1, "choice-specs": 1 },
   },
   "deal 5000 damage with one attack": {
     category: "BATTLE",
     kind: "QUEST_LINE",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => s.mileStones.damageRecord >= 5000,
     rewardItems: { "big-malasada": 1 },
   },
   "deal 10000 damage with one attack": {
     category: "BATTLE",
     kind: "QUEST_LINE",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => s.mileStones.damageRecord >= 10000,
     rewardItems: { "big-malasada": 1 },
     availableAfter: "deal 5000 damage with one attack",
@@ -2468,7 +2465,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "deal 20000 damage with one attack": {
     category: "BATTLE",
     kind: "BULLETIN",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => s.mileStones.damageRecord >= 20000,
     rewardItems: { "weakness-policy": 1 },
     availableAfter: "deal 10000 damage with one attack",
@@ -2476,7 +2473,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "deal 30000 damage with one attack": {
     category: "BATTLE",
     kind: "BULLETIN",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => s.mileStones.damageRecord >= 30000,
     rewardItems: { "master-ball": 1 },
     availableAfter: "deal 20000 damage with one attack",
@@ -2484,7 +2481,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "deal 50000 damage with one attack": {
     category: "BATTLE",
     kind: "BULLETIN",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => s.mileStones.damageRecord >= 50000,
     rewardItems: { "master-ball": 1 },
     availableAfter: "deal 30000 damage with one attack",
@@ -2492,7 +2489,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach challenge field rank 1": {
     category: "TRAINING",
     kind: "BULLETIN",
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     rewardItems: {
       "fire-gem": 5,
       "water-gem": 5,
@@ -2509,7 +2506,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach challenge field rank 18": {
     category: "TRAINING",
     kind: "BULLETIN",
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     rewardItems: {
       "grass-gem": 5,
       "ice-gem": 5,
@@ -2527,7 +2524,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach challenge field rank 40": {
     category: "TRAINING",
     kind: "BULLETIN",
-    researchPoints: 40,
+    researchPoints: campUpgradeBaseCost /2,
     rewardItems: {
       "poison-gem": 5,
       "ground-gem": 5,
@@ -2545,7 +2542,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach challenge field rank 62": {
     category: "TRAINING",
     kind: "BULLETIN",
-    researchPoints: 60,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "psychic-gem": 5,
       "bug-gem": 5,
@@ -2563,7 +2560,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach challenge field rank 85": {
     category: "TRAINING",
     kind: "BULLETIN",
-    researchPoints: 80,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "ghost-gem": 5,
       "dark-gem": 5,
@@ -2581,7 +2578,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach challenge field rank 108": {
     category: "TRAINING",
     kind: "BULLETIN",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "dragon-gem": 5,
       "normal-gem": 5,
@@ -2600,7 +2597,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "BATTLE",
     kind: "BULLETIN",
     requiredUpgrade: "ranger certification",
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     conditionFunction: (s) => (s.rangerLevel ?? 0) >= 1,
     rewardItems: { "big-malasada": 1, "rare-candy": 1, "moomoo-milk": 2 },
   },
@@ -2609,7 +2606,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     requiredUpgrade: "ranger certification",
     availableAfter: "reach ranger level 1",
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => (s.rangerLevel ?? 0) >= 5,
     rewardItems: { "old-gateau": 3, "rare-candy": 3, "moomoo-milk": 6 },
     campUpgrade: "warden certification",
@@ -2619,7 +2616,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     requiredUpgrade: "ranger certification",
     availableAfter: "reach ranger level 5",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => (s.rangerLevel ?? 0) >= 10,
     rewardItems: { "lumiose-galette": 5, "rare-candy": 5, "moomoo-milk": 10 },
   },
@@ -2628,7 +2625,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     requiredUpgrade: "ranger certification",
     availableAfter: "reach ranger level 10",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => (s.rangerLevel ?? 0) >= 20,
     rewardItems: {
       casteliacone: 5,
@@ -2660,7 +2657,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
       intrinsicValues: generateRandomStatObject(31, 25),
       caughtOnMap: "camp",
     },
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => {
       return occupantHandled(s, "giovanni");
     },
@@ -2671,7 +2668,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "RESEARCH",
     conditionFunction: (s) => !!s.mileStones.hasReportedBug,
     kind: "QUEST_LINE",
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     rewardItems: { "lucky-egg": 1 },
   },
   "train a Pokemon to 200 Attack EV": {
@@ -2679,7 +2676,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     conditionFunction: (s) =>
       s.pokemon.some((p) => p.onTeam && p.effortValues.attack > 200),
     kind: "QUEST_LINE",
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     rewardItems: {
       "power-anklet": 1,
       "power-band": 1,
@@ -2694,7 +2691,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     conditionFunction: (s) =>
       s.pokemon.some((p) => p.onTeam && p.effortValues["special-attack"] > 200),
     kind: "QUEST_LINE",
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     rewardItems: {
       "health-mochi": 2,
       "muscle-mochi": 2,
@@ -2709,7 +2706,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     conditionFunction: (s) =>
       s.pokemon.some((p) => p.onTeam && p.effortValues["defense"] > 200),
     kind: "QUEST_LINE",
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     rewardItems: {
       "health-mochi": 2,
       "muscle-mochi": 2,
@@ -2726,7 +2723,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
         (p) => p.onTeam && p.effortValues["special-defense"] > 200,
       ),
     kind: "QUEST_LINE",
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     rewardItems: {
       "health-mochi": 2,
       "muscle-mochi": 2,
@@ -2741,7 +2738,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     conditionFunction: (s) =>
       s.pokemon.some((p) => p.onTeam && p.effortValues["speed"] > 200),
     kind: "QUEST_LINE",
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     rewardItems: {
       "health-mochi": 2,
       "muscle-mochi": 2,
@@ -2756,7 +2753,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     conditionFunction: (s) =>
       s.pokemon.some((p) => p.onTeam && p.effortValues["hp"] > 200),
     kind: "QUEST_LINE",
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     rewardItems: {
       "health-mochi": 2,
       "muscle-mochi": 2,
@@ -2775,7 +2772,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
           Object.values(p.effortValues).filter((e) => e > 200).length >= 2,
       ),
     kind: "QUEST_LINE",
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "health-mochi": 10,
       "muscle-mochi": 10,
@@ -2796,7 +2793,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
         return totalEvs >= 510;
       }),
     kind: "QUEST_LINE",
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "health-mochi": 20,
       "muscle-mochi": 20,
@@ -2808,7 +2805,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   },
   "clear out the rocket camp": {
     category: "BATTLE",
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: { "moomoo-milk": 5, "big-malasada": 5 },
     rangerLevels: 3,
     kind: "QUEST_LINE",
@@ -2816,7 +2813,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   },
   "defeat team galactic in ilex forest": {
     category: "BATTLE",
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "moomoo-milk": 5,
       "big-malasada": 5,
@@ -2830,7 +2827,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   },
   "investigate murasaki glades": {
     category: "BATTLE",
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "moomoo-milk": 5,
       "lava-cookie": 5,
@@ -2844,7 +2841,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   },
   "defeat the treasure hunters in radukairo ruins": {
     category: "BATTLE",
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "moomoo-milk": 5,
       "lava-cookie": 5,
@@ -2860,7 +2857,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "POKEDEX",
     kind: "BULLETIN",
     rewardItems: { "poke-ball": 2 },
-    researchPoints: 5,
+    researchPoints: campUpgradeBaseCost / 5,
     conditionFunction: (s) =>
       Object.keys(lowBstPokemon).filter(
         (pok) => s.pokedex[pok as PokemonName].caughtOnRoutes.length > 0,
@@ -2870,7 +2867,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "POKEDEX",
     kind: "BULLETIN",
     rewardItems: { "poke-ball": 5 },
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     availableAfter: "catch a weak pokemon",
     conditionFunction: (s) =>
       Object.keys(lowBstPokemon).filter(
@@ -2881,7 +2878,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "POKEDEX",
     kind: "BULLETIN",
     rewardItems: { "poke-ball": 10 },
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     availableAfter: "catch 10 weak pokemon",
     conditionFunction: (s) =>
       Object.keys(lowBstPokemon).filter(
@@ -2892,7 +2889,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "POKEDEX",
     kind: "BULLETIN",
     rewardItems: { "poke-ball": 10 },
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     availableAfter: "catch 20 weak pokemon",
     conditionFunction: (s) =>
       Object.keys(lowBstPokemon).filter(
@@ -2903,7 +2900,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "POKEDEX",
     kind: "BULLETIN",
     rewardItems: { "poke-ball": 10 },
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     availableAfter: "catch 50 weak pokemon",
     conditionFunction: (s) =>
       Object.keys(lowBstPokemon).filter(
@@ -2914,7 +2911,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "POKEDEX",
     kind: "BULLETIN",
     rewardItems: { "master-ball": 1 },
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     availableAfter: "catch 100 weak pokemon",
     conditionFunction: (s) =>
       Object.keys(lowBstPokemon).every(
@@ -2925,7 +2922,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "POKEDEX",
     kind: "BULLETIN",
     rewardItems: { "great-ball": 3, "coba-berry": 10 },
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     availableAfter: "catch a weak pokemon",
     conditionFunction: (s) =>
       Object.keys(midBstPokemon).filter(
@@ -2936,7 +2933,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "POKEDEX",
     kind: "BULLETIN",
     rewardItems: { "great-ball": 5, "coba-berry": 10 },
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     availableAfter: "catch a medium strong pokemon",
     conditionFunction: (s) =>
       Object.keys(midBstPokemon).filter(
@@ -2947,7 +2944,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "POKEDEX",
     kind: "BULLETIN",
     rewardItems: { "great-ball": 10, "coba-berry": 10 },
-    researchPoints: 40,
+    researchPoints: campUpgradeBaseCost /2,
     availableAfter: "catch 10 medium strong pokemon",
     conditionFunction: (s) =>
       Object.keys(midBstPokemon).filter(
@@ -2958,7 +2955,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "POKEDEX",
     kind: "BULLETIN",
     rewardItems: { "great-ball": 10 },
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     availableAfter: "catch 20 medium strong pokemon",
     conditionFunction: (s) =>
       Object.keys(midBstPokemon).filter(
@@ -2969,7 +2966,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "POKEDEX",
     kind: "BULLETIN",
     rewardItems: { "great-ball": 10 },
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     availableAfter: "catch 50 medium strong pokemon",
     conditionFunction: (s) =>
       Object.keys(midBstPokemon).filter(
@@ -2980,7 +2977,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "POKEDEX",
     kind: "BULLETIN",
     rewardItems: { "master-ball": 1 },
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     availableAfter: "catch 100 medium strong pokemon",
     conditionFunction: (s) =>
       Object.keys(midBstPokemon).every(
@@ -2991,7 +2988,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "POKEDEX",
     kind: "BULLETIN",
     rewardItems: { "ultra-ball": 3 },
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     availableAfter: "catch a medium strong pokemon",
     conditionFunction: (s) =>
       Object.keys(highBstPokemon).filter(
@@ -3002,7 +2999,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "POKEDEX",
     kind: "BULLETIN",
     rewardItems: { "ultra-ball": 10 },
-    researchPoints: 30,
+     researchPoints: campUpgradeBaseCost /2,
     availableAfter: "catch a strong pokemon",
     conditionFunction: (s) =>
       Object.keys(highBstPokemon).filter(
@@ -3013,7 +3010,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "POKEDEX",
     kind: "BULLETIN",
     rewardItems: { "ultra-ball": 20 },
-    researchPoints: 60,
+    researchPoints: campUpgradeBaseCost,
     availableAfter: "catch 10 strong pokemon",
     conditionFunction: (s) =>
       Object.keys(highBstPokemon).filter(
@@ -3024,7 +3021,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "POKEDEX",
     kind: "BULLETIN",
     rewardItems: { "ultra-ball": 30 },
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     availableAfter: "catch 20 strong pokemon",
     conditionFunction: (s) =>
       Object.keys(highBstPokemon).filter(
@@ -3035,7 +3032,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "POKEDEX",
     kind: "BULLETIN",
     rewardItems: { "ultra-ball": 30 },
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     availableAfter: "catch 50 strong pokemon",
     conditionFunction: (s) =>
       Object.keys(highBstPokemon).filter(
@@ -3046,7 +3043,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "POKEDEX",
     kind: "BULLETIN",
     rewardItems: { "master-ball": 1 },
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     availableAfter: "catch 100 strong pokemon",
     conditionFunction: (s) =>
       Object.keys(highBstPokemon).every(
@@ -3056,7 +3053,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach random field rank 1": {
     category: "TRAINING",
     kind: "BULLETIN",
-    researchPoints: 10,
+    researchPoints: campUpgradeBaseCost / 5,
     rewardItems: {
       [`${moveUnlockPayments.at(0)}`]: 3,
     },
@@ -3070,7 +3067,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach random field rank 10": {
     category: "TRAINING",
     kind: "BULLETIN",
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     rewardItems: {
       [`${moveUnlockPayments.at(1)}`]: 3,
     },
@@ -3085,7 +3082,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach random field rank 20": {
     category: "TRAINING",
     kind: "BULLETIN",
-    researchPoints: 40,
+    researchPoints: campUpgradeBaseCost /2,
     rewardItems: {
       [`${moveUnlockPayments.at(2)}`]: 3,
     },
@@ -3100,7 +3097,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach random field rank 30": {
     category: "TRAINING",
     kind: "BULLETIN",
-    researchPoints: 60,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       [`${moveUnlockPayments.at(3)}`]: 3,
     },
@@ -3115,7 +3112,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach random field rank 40": {
     category: "TRAINING",
     kind: "BULLETIN",
-    researchPoints: 80,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       [`${moveUnlockPayments.at(4)}`]: 3,
     },
@@ -3130,7 +3127,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach random field rank 50": {
     category: "TRAINING",
     kind: "BULLETIN",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       [`${moveUnlockPayments.at(5)}`]: 3,
     },
@@ -3145,7 +3142,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach random field rank 60": {
     category: "TRAINING",
     kind: "BULLETIN",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       [`${moveUnlockPayments.at(6)}`]: 3,
     },
@@ -3160,7 +3157,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach random field rank 70": {
     category: "TRAINING",
     kind: "BULLETIN",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       [`${moveUnlockPayments.at(7)}`]: 3,
     },
@@ -3175,7 +3172,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach random field rank 80": {
     category: "TRAINING",
     kind: "BULLETIN",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "exp-candy-xl": 10,
     },
@@ -3190,7 +3187,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach random field rank 90": {
     category: "TRAINING",
     kind: "BULLETIN",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "exp-candy-xl": 10,
     },
@@ -3205,7 +3202,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   "reach random field rank 100": {
     category: "TRAINING",
     kind: "BULLETIN",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: {
       "exp-candy-xl": 20,
     },
@@ -3221,7 +3218,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     category: "EXPLORATION",
     rewardItems: { "quick-ball": 3 },
-    researchPoints: 20,
+    researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => (s.longestStreak ?? 0) >= 3,
     progress: (s) => ({ goal: 3, current: s.longestStreak ?? 0 }),
   },
@@ -3230,7 +3227,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "EXPLORATION",
     rewardItems: { "quick-ball": 10 },
     availableAfter: "achieve a catch streak of 3",
-    researchPoints: 40,
+    researchPoints: campUpgradeBaseCost /2,
     conditionFunction: (s) => (s.longestStreak ?? 0) >= 10,
     progress: (s) => ({ goal: 10, current: s.longestStreak ?? 0 }),
   },
@@ -3239,7 +3236,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "EXPLORATION",
     rewardItems: { "quick-ball": 15 },
     availableAfter: "achieve a catch streak of 10",
-    researchPoints: 60,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => (s.longestStreak ?? 0) >= 15,
     progress: (s) => ({ goal: 15, current: s.longestStreak ?? 0 }),
   },
@@ -3248,7 +3245,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "EXPLORATION",
     rewardItems: { "quick-ball": 20 },
     availableAfter: "achieve a catch streak of 15",
-    researchPoints: 80,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => (s.longestStreak ?? 0) >= 20,
     progress: (s) => ({ goal: 20, current: s.longestStreak ?? 0 }),
   },
@@ -3257,7 +3254,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "EXPLORATION",
     rewardItems: { "quick-ball": 31 },
     availableAfter: "achieve a catch streak of 20",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => (s.longestStreak ?? 0) >= 31,
     progress: (s) => ({ goal: 31, current: s.longestStreak ?? 0 }),
   },
@@ -3266,7 +3263,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "RESEARCH",
     targetPokemon: getSwarmOptions("FUTURE_DISTORTION", kumaDex),
     rewardItems: { "rare-candy": 3, "quick-ball": 5 },
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     requiredUpgrade: "time distortion radar",
     conditionFunction: (s) =>
       getSwarmOptions("FUTURE_DISTORTION", kumaDex).some(
@@ -3278,7 +3275,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "RESEARCH",
     targetPokemon: getSwarmOptions("PAST_DISTORTION", kumaDex),
     rewardItems: { "rare-candy": 3, "quick-ball": 5 },
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     requiredUpgrade: "time distortion radar",
     conditionFunction: (s) =>
       getSwarmOptions("PAST_DISTORTION", kumaDex).some(
@@ -3290,7 +3287,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "RESEARCH",
     targetPokemon: getSwarmOptions("FUTURE_DISTORTION", kumaDex),
     rewardItems: { "rare-candy": 10, "quick-ball": 20 },
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     requiredUpgrade: "time distortion radar",
     conditionFunction: (s) =>
       getSwarmOptions("FUTURE_DISTORTION", kumaDex).every(
@@ -3302,7 +3299,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "RESEARCH",
     targetPokemon: getSwarmOptions("PAST_DISTORTION", kumaDex),
     rewardItems: { "rare-candy": 10, "quick-ball": 20 },
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     requiredUpgrade: "time distortion radar",
     conditionFunction: (s) =>
       getSwarmOptions("PAST_DISTORTION", kumaDex).every(
@@ -3314,7 +3311,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "RESEARCH",
     targetPokemon: getSwarmOptions("SPACE_DISTORTION", kumaDex),
     rewardItems: { "rare-candy": 3, "quick-ball": 5 },
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     requiredUpgrade: "space distortion radar",
     conditionFunction: (s) =>
       getSwarmOptions("SPACE_DISTORTION", kumaDex).some(
@@ -3326,7 +3323,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "RESEARCH",
     targetPokemon: getSwarmOptions("SPACE_DISTORTION", kumaDex),
     rewardItems: { "rare-candy": 10, "quick-ball": 20 },
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     requiredUpgrade: "space distortion radar",
     conditionFunction: (s) =>
       getSwarmOptions("SPACE_DISTORTION", kumaDex).every(
@@ -3338,7 +3335,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   //   kind: "BULLETIN",
   //   conditionFunction: (s: SaveFile) =>
   //     !!s.mileStones.importedChallengerDefeatedAt,
-  //   researchPoints: 10,
+  //   researchPoints: campUpgradeBaseCost / 5,
   //   rewardItems: { "exp-candy-xs": 10 },
   // },
   // "defeat an imported challenger at lvl 20 or higher": {
@@ -3346,7 +3343,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   //   kind: "BULLETIN",
   //   conditionFunction: (s: SaveFile) =>
   //     (s.mileStones.importedChallengerDefeatedAt ?? 0) >= 8000,
-  //   researchPoints: 20,
+  //   researchPoints: campUpgradeBaseCost /2,
   //   availableAfter: "defeat an imported challenger",
   //   rewardItems: { "exp-candy-s": 10 },
   // },
@@ -3355,7 +3352,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   //   kind: "BULLETIN",
   //   conditionFunction: (s: SaveFile) =>
   //     (s.mileStones.importedChallengerDefeatedAt ?? 0) >= 64000,
-  //   researchPoints: 40,
+  //   researchPoints: campUpgradeBaseCost /2,
   //   availableAfter: "defeat an imported challenger at lvl 20 or higher",
   //   rewardItems: { "exp-candy-m": 10 },
   // },
@@ -3364,7 +3361,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   //   kind: "BULLETIN",
   //   conditionFunction: (s: SaveFile) =>
   //     (s.mileStones.importedChallengerDefeatedAt ?? 0) >= 216000,
-  //   researchPoints: 60,
+  //   researchPoints: campUpgradeBaseCost,
   //   availableAfter: "defeat an imported challenger at lvl 40 or higher",
   //   rewardItems: { "exp-candy-l": 10 },
   // },
@@ -3373,7 +3370,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   //   kind: "BULLETIN",
   //   conditionFunction: (s: SaveFile) =>
   //     (s.mileStones.importedChallengerDefeatedAt ?? 0) >= 512000,
-  //   researchPoints: 80,
+  //   researchPoints: campUpgradeBaseCost,
   //   availableAfter: "defeat an imported challenger at lvl 60 or higher",
   //   rewardItems: { "exp-candy-xl": 10 },
   // },
@@ -3382,7 +3379,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
   //   kind: "BULLETIN",
   //   conditionFunction: (s: SaveFile) =>
   //     (s.mileStones.importedChallengerDefeatedAt ?? 0) >= 1000000,
-  //   researchPoints: 100,
+  //   researchPoints: campUpgradeBaseCost,
   //   availableAfter: "defeat an imported challenger at lvl 80 or higher",
   //   rewardItems: { "exp-candy-xl": 10 },
   // },
@@ -3390,14 +3387,14 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "GYM LEADER",
     kind: "BULLETIN",
     campUpgrade: "pidgeot rider certification",
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     conditionFunction: (s) => s.badges.length >= 8,
     rewardItems: {},
   },
   "collect 16 badges": {
     category: "GYM LEADER",
     kind: "BULLETIN",
-    researchPoints: 200,
+    researchPoints: campUpgradeBaseCost * 2,
     conditionFunction: (s) => s.badges.length >= 16,
     rewardItems: {},
     availableAfter: "collect 8 badges",
@@ -3407,7 +3404,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     requiredUpgrade: "rock climbing certification",
     targetRoute: "victoryRoad",
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     rewardItems: { "ultra-ball": 20 },
     availableAfter: "collect 8 badges",
     targetPokemon: getAllEncountersFor("victoryRoad", {}, kumaDex).map(
@@ -3422,7 +3419,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     category: "BATTLE",
     kind: "BULLETIN",
     conditionFunction: (s: SaveFile) => !!s.mileStones.lanceDefeatedAt,
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     availableAfter: "collect 8 badges",
     rewardItems: { "max-lure": 10 },
   },
@@ -3431,7 +3428,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     conditionFunction: (s: SaveFile) =>
       s.mileStones.foundEggTypes && s.mileStones.foundEggTypes?.length > 0,
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     rewardItems: smallExpCandyPackage,
   },
   "hatch a pokemon egg": {
@@ -3439,7 +3436,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     conditionFunction: (s: SaveFile) =>
       s.mileStones.hatchedEggTypes && s.mileStones.hatchedEggTypes?.length > 0,
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     availableAfter: "find a pokemon egg",
     rewardItems: smallExpCandyPackage,
   },
@@ -3452,7 +3449,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
           s.mileStones.hatchedEggTypes &&
           s.mileStones.hatchedEggTypes.includes(type),
       ),
-    researchPoints: 200,
+    researchPoints: campUpgradeBaseCost * 2,
     availableAfter: "find a pokemon egg",
     rewardItems: expCandyPackage,
   },
@@ -3465,7 +3462,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
           s.mileStones.foundEggTypes &&
           s.mileStones.foundEggTypes.includes(type),
       ),
-    researchPoints: 200,
+    researchPoints: campUpgradeBaseCost * 2,
     availableAfter: "find a pokemon egg",
     rewardItems: expCandyPackage,
   },
@@ -3474,7 +3471,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     conditionFunction: (s: SaveFile) =>
       s.mileStones.craftedTmTypes && s.mileStones.craftedTmTypes?.length > 0,
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     requiredUpgrade: "tm crafter",
     rewardItems: smallExpCandyPackage,
   },
@@ -3487,7 +3484,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
           s.mileStones.craftedTmTypes &&
           s.mileStones.craftedTmTypes.includes(type),
       ),
-    researchPoints: 200,
+    researchPoints: campUpgradeBaseCost * 2,
     requiredUpgrade: "tm crafter",
     rewardItems: expCandyPackage,
   },
@@ -3496,7 +3493,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     conditionFunction: (s: SaveFile) =>
       s.mileStones.taughtTmTypes && s.mileStones.taughtTmTypes?.length > 0,
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     requiredUpgrade: "tm crafter",
     availableAfter: "craft a TM",
     rewardItems: smallExpCandyPackage,
@@ -3510,7 +3507,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
           s.mileStones.taughtTmTypes &&
           s.mileStones.taughtTmTypes.includes(type),
       ),
-    researchPoints: 200,
+    researchPoints: campUpgradeBaseCost * 2,
     requiredUpgrade: "tm crafter",
     availableAfter: "teach a TM to a pokemon",
     rewardItems: expCandyPackage,
@@ -3520,7 +3517,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     conditionFunction: (s: SaveFile) =>
       s.mileStones.strangeDimensionHighScore ?? 0 >= 10,
-    researchPoints: 25,
+    researchPoints: campUpgradeBaseCost / 2,
     rewardItems: smallExpCandyPackage,
   },
   "reach level 20 of the strange dimension": {
@@ -3528,7 +3525,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     conditionFunction: (s: SaveFile) =>
       s.mileStones.strangeDimensionHighScore ?? 0 >= 20,
-    researchPoints: 50,
+    researchPoints: campUpgradeBaseCost,
     availableAfter: "reach level 10 of the strange dimension",
     rewardItems: smallExpCandyPackage,
   },
@@ -3537,7 +3534,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     conditionFunction: (s: SaveFile) =>
       s.mileStones.strangeDimensionHighScore ?? 0 >= 30,
-    researchPoints: 75,
+    researchPoints: campUpgradeBaseCost ,
     availableAfter: "reach level 20 of the strange dimension",
     rewardItems: expCandyPackage,
   },
@@ -3546,7 +3543,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     conditionFunction: (s: SaveFile) =>
       s.mileStones.strangeDimensionHighScore ?? 0 >= 40,
-    researchPoints: 100,
+    researchPoints: campUpgradeBaseCost,
     availableAfter: "reach level 30 of the strange dimension",
     rewardItems: expCandyPackage,
   },
@@ -3555,7 +3552,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     conditionFunction: (s: SaveFile) =>
       s.mileStones.strangeDimensionHighScore ?? 0 >= 50,
-    researchPoints: 125,
+    researchPoints: campUpgradeBaseCost,
     availableAfter: "reach level 40 of the strange dimension",
     rewardItems: expCandyPackage,
   },
@@ -3564,7 +3561,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     conditionFunction: (s: SaveFile) =>
       s.mileStones.strangeDimensionHighScore ?? 0 >= 60,
-    researchPoints: 150,
+    researchPoints: campUpgradeBaseCost,
     availableAfter: "reach level 50 of the strange dimension",
     rewardItems: expCandyPackage,
   },
@@ -3573,7 +3570,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     conditionFunction: (s: SaveFile) =>
       s.mileStones.strangeDimensionHighScore ?? 0 >= 70,
-    researchPoints: 175,
+    researchPoints: campUpgradeBaseCost,
     availableAfter: "reach level 60 of the strange dimension",
     rewardItems: expCandyPackage,
   },
@@ -3582,7 +3579,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     conditionFunction: (s: SaveFile) =>
       s.mileStones.strangeDimensionHighScore ?? 0 >= 80,
-    researchPoints: 200,
+    researchPoints: campUpgradeBaseCost * 2,
     availableAfter: "reach level 70 of the strange dimension",
     rewardItems: expCandyPackage,
   },
@@ -3591,7 +3588,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     conditionFunction: (s: SaveFile) =>
       s.mileStones.strangeDimensionHighScore ?? 0 >= 90,
-    researchPoints: 300,
+    researchPoints: campUpgradeBaseCost * 2,
     availableAfter: "reach level 80 of the strange dimension",
     rewardItems: expCandyPackage,
   },
@@ -3600,7 +3597,7 @@ export const KumaQuestsRecord: Record<KumaQuestName, Quest> = {
     kind: "BULLETIN",
     conditionFunction: (s: SaveFile) =>
       s.mileStones.strangeDimensionHighScore ?? 0 >= 100,
-    researchPoints: 400,
+    researchPoints: campUpgradeBaseCost * 2,
     availableAfter: "reach level 90 of the strange dimension",
     rewardItems: expCandyPackage,
   },

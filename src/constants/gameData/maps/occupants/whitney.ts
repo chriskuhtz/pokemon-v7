@@ -2,10 +2,10 @@ import { getHighestXpOnTeam } from "../../../../functions/getHighestXpOnTeam";
 import { makeChallengerPokemon } from "../../../../functions/makeChallengerPokemon";
 import { occupantHandled } from "../../../../functions/occupantHandled";
 import {
-  Occupant,
-  OverworldNpc,
-  OverworldPokemon,
-  OverworldTrainer,
+    Occupant,
+    OverworldNpc,
+    OverworldPokemon,
+    OverworldTrainer,
 } from "../../../../interfaces/Occupant";
 import { SaveFile } from "../../../../interfaces/SaveFile";
 import { SpriteEnum } from "../../../../interfaces/SpriteEnum";
@@ -30,7 +30,7 @@ export const whitneysClefairy: OverworldPokemon = {
   dexId: 35,
   id: "whitneys-clefairy",
   conditionFunction: (s) =>
-    s.campUpgrades["invite normal pokemon expert whitney"] &&
+    s.campUpgrades["normal pokemon expert whitney"] &&
     s.quests["catch whitney's favorite cute pokemon"] !== "COLLECTED",
 };
 
@@ -52,7 +52,7 @@ export const whitneyLine: Occupant[] = [
     ],
     quest: "catch whitney's favorite cute pokemon",
     conditionFunction: (s) =>
-      s.campUpgrades["invite normal pokemon expert whitney"] &&
+      s.campUpgrades["normal pokemon expert whitney"] &&
       s.quests["catch whitney's favorite cute pokemon"] !== "COLLECTED",
   },
 ];

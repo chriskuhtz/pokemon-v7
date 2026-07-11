@@ -1,4 +1,4 @@
-import { OverworldNpc, Occupant } from '../../../../interfaces/Occupant';
+import { Occupant, OverworldNpc } from '../../../../interfaces/Occupant';
 import { SpriteEnum } from '../../../../interfaces/SpriteEnum';
 
 const elmBase: Omit<
@@ -25,7 +25,7 @@ export const elmLine: Occupant[] = [
 		handledMessage: ['Pokemon have different evolution methods'],
 		quest: 'evolve a pokemon through level up',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor elm'] &&
+			s.campUpgrades['professor elm'] &&
 			s.quests['evolve a pokemon through level up'] !== 'COLLECTED',
 	},
 	{
@@ -36,7 +36,7 @@ export const elmLine: Occupant[] = [
 		handledMessage: ['Pokemon have different evolution methods'],
 		quest: 'evolve a pokemon with a stone',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor elm'] &&
+			s.campUpgrades['professor elm'] &&
 			s.quests['evolve a pokemon through level up'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon with a stone'] !== 'COLLECTED',
 	},
@@ -48,7 +48,7 @@ export const elmLine: Occupant[] = [
 		handledMessage: ['Pokemon have different evolution methods'],
 		quest: 'evolve a pokemon with a held item',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor elm'] &&
+			s.campUpgrades['professor elm'] &&
 			s.quests['evolve a pokemon through level up'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon with a stone'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon with a held item'] !== 'COLLECTED',
@@ -62,7 +62,7 @@ export const elmLine: Occupant[] = [
 		handledMessage: ['Pokemon have different evolution methods'],
 		quest: 'evolve a pokemon through friendship',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor elm'] &&
+			s.campUpgrades['professor elm'] &&
 			s.quests['evolve a pokemon through level up'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon with a stone'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon with a held item'] === 'COLLECTED' &&
@@ -78,7 +78,7 @@ export const elmLine: Occupant[] = [
 		handledMessage: ['Pokemon have different evolution methods'],
 		quest: 'evolve male and female nidoran into their final form',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor elm'] &&
+			s.campUpgrades['professor elm'] &&
 			s.quests['evolve a pokemon through level up'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon with a stone'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon with a held item'] === 'COLLECTED' &&
@@ -97,7 +97,7 @@ export const elmLine: Occupant[] = [
 		handledMessage: ['Pokemon have different evolution methods'],
 		quest: 'evolve gloom into vileplume and bellosom',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor elm'] &&
+			s.campUpgrades['professor elm'] &&
 			s.quests['evolve a pokemon through level up'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon with a stone'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon with a held item'] === 'COLLECTED' &&
@@ -114,7 +114,7 @@ export const elmLine: Occupant[] = [
 		handledMessage: ['Pokemon have different evolution methods'],
 		quest: 'evolve a pokemon that only evolves during the day',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor elm'] &&
+			s.campUpgrades['professor elm'] &&
 			s.quests['evolve a pokemon through level up'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon with a stone'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon with a held item'] === 'COLLECTED' &&
@@ -133,7 +133,7 @@ export const elmLine: Occupant[] = [
 		handledMessage: ['Pokemon have different evolution methods'],
 		quest: 'evolve a pokemon that only evolves at night',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor elm'] &&
+			s.campUpgrades['professor elm'] &&
 			s.quests['evolve a pokemon through level up'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon with a stone'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon with a held item'] === 'COLLECTED' &&
@@ -157,7 +157,7 @@ export const elmLine: Occupant[] = [
 		handledMessage: ['Pokemon have different evolution methods'],
 		quest: 'catch all evolutions of eevee',
 		conditionFunction: (s) =>
-			s.campUpgrades['invite professor elm'] &&
+			s.campUpgrades['professor elm'] &&
 			s.quests['evolve a pokemon through level up'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon with a stone'] === 'COLLECTED' &&
 			s.quests['evolve a pokemon with a held item'] === 'COLLECTED' &&
