@@ -35,34 +35,12 @@ export const CampUpgrades = ({
   // console.log("total quest rewards", Object.values(KumaQuestsRecord).reduce((sum,summand)=>{return sum+summand.researchPoints},0))
    
   const [category, setCategory] = useState<number>(0);
- const { saveFile,  } = useContext(SaveFileContext);
-
-
-
-  return (
-    <InGamePage headline="Main Menu:" goBack={goBack}>
-      <Stack mode="column">
-        <h3 style={{ margin: 0 }}>
-          We can use the research points earned from quests to expand our camp
-        </h3>
-        <h3>Research Points: {saveFile.researchPoints}</h3>
-        <UpgradeCategoryCard setTraitIndex={setCategory} category={ArrayHelpers.getEntryWithOverflow([...campUpgradeCategories], category)}/>
-      </Stack>
-    </InGamePage>
-  );
-};
-
-const UpgradeCategoryCard = ({
-  category,
-  setTraitIndex,
-}: {
-  category:CampUpgradeCategory,
-  setTraitIndex: React.Dispatch<React.SetStateAction<number>>;
-}) => {
-   const { addMessage } = useContext(MessageQueueContext);
+  const { addMessage } = useContext(MessageQueueContext);
   const { saveFile, patchSaveFileReducer } = useContext(SaveFileContext);
 
   const { campUpgrades, researchPoints } = saveFile;
+
+
 
   const unlock = useCallback(
     (id: CampUpgrade) => {
@@ -80,9 +58,38 @@ const UpgradeCategoryCard = ({
     },
     [addMessage, campUpgrades, patchSaveFileReducer, researchPoints],
   );
-
-  const hasAllBasics=saveFile.campUpgrades.bulletin_board && saveFile.campUpgrades.berry_farm && saveFile.campUpgrades["apricorn smith kurt"]
+const hasBulletinBoard=saveFile.campUpgrades.bulletin_board
+ const hasAllBasics=saveFile.campUpgrades.bulletin_board && saveFile.campUpgrades.berry_farm && saveFile.campUpgrades["apricorn smith kurt"]
   
+
+  return (
+    <InGamePage headline="Main Menu:" goBack={goBack}>
+      <Stack mode="column">
+        <h3 style={{ margin: 0 }}>
+          We can use the research points earned from quests to expand our camp
+        </h3>
+        <h3>Research Points: {saveFile.researchPoints}</h3>
+        {!hasBulletinBoard &&  <UpgradeListItem unlock={unlock} upgrade={"bulletin_board"} category="Basics"/>}
+        {hasBulletinBoard && !hasAllBasics && <>
+         <UpgradeListItem unlock={unlock} upgrade={"bulletin_board"} category="Basics"/>
+         <UpgradeListItem unlock={unlock} upgrade={"berry_farm"} category="Basics"/>
+         <UpgradeListItem unlock={unlock} upgrade={"apricorn smith kurt"} category="Basics"/>
+        </>}
+        {hasBulletinBoard && hasAllBasics &&<UpgradeCategoryCard unlock={unlock} setTraitIndex={setCategory} category={ArrayHelpers.getEntryWithOverflow([...campUpgradeCategories], category)}/>}
+      </Stack>
+    </InGamePage>
+  );
+};
+
+const UpgradeCategoryCard = ({
+  category,
+  setTraitIndex,unlock
+}: {
+  category:CampUpgradeCategory,
+  setTraitIndex: React.Dispatch<React.SetStateAction<number>>;
+  unlock:(id:CampUpgrade)=>void
+}) => {
+
   return (
     <Card
       backgroundColor={campUpgradeCategoryColors[category]}
@@ -93,8 +100,8 @@ const UpgradeCategoryCard = ({
       content={
         <Stack mode="column" alignItems="center">
           <div style={{ width: "100%" }}>
-            <Stack mode="row" justifyContent={hasAllBasics?"space-between":"center"} alignItems="center">
-              {hasAllBasics && <FaArrowLeft
+            <Stack mode="row" justifyContent={"space-between"} alignItems="center">
+              <FaArrowLeft
                 role="button"
                 tabIndex={0}
                 size={battleSpriteSize}
@@ -106,9 +113,9 @@ const UpgradeCategoryCard = ({
                     setTraitIndex((t) => t - 1);
                   }
                 }}
-              />}
+              />
               <h3>{category}:</h3>
-              {hasAllBasics &&<FaArrowRight
+              <FaArrowRight
                 size={battleSpriteSize}
                 onClick={() =>setTraitIndex((t) => t + 1)}
                 role="button"
@@ -120,26 +127,11 @@ const UpgradeCategoryCard = ({
                     setTraitIndex((t) => t - 1);
                   }
                 }}
-              />}
+              />
             </Stack> 
           </div>
          {campUpgradeNames.filter(upgrade=>categorizedCampUpgrades[upgrade]===category).map(upgrade=>{
-
-          const price=campUpgradeCostMultipliers[upgrade]*campUpgradeBaseCost
-          const unlocked=saveFile.campUpgrades[upgrade]===true
-          const hasBulletinBoard=upgrade=="bulletin_board"?true: !!saveFile.campUpgrades.bulletin_board
-          const hasEnoughPoints=saveFile.researchPoints>=price
-          const hasEnoughBadges=saveFile.badges.length>=campUpgradeBadgeRequirements[upgrade]
-          const canUnlock=hasEnoughBadges&&hasEnoughPoints
-          return  <ListItem 
-          backgroundColor={unlocked?typeColors["grass"]:campUpgradeCategoryColors[category]}
-          disabled={!hasBulletinBoard||!hasEnoughBadges||!hasEnoughPoints}
-          onClick={()=>unlocked?{}:unlock(upgrade)}
-          primaryIcon={unlocked?<FaLockOpen size={battleSpriteSize/2} />:canUnlock?<CampUpgradeIcon category={category}/>:<FaLock size={battleSpriteSize/2} />}
-          content={`${upgrade} `} 
-          additionalContent={<>{unlocked?"Unlocked":!hasEnoughPoints?"complete quests to earn points":hasEnoughBadges?campUpgradeExplanations[upgrade]:"Defeat Gym Leaders to earn badges"}</>}
-          hint={`${price} points`}
-          infoButton={<></>}/>
+            return <UpgradeListItem upgrade={upgrade} category={category} unlock={unlock}/>
          }
         )}
         </Stack>
@@ -151,6 +143,25 @@ const UpgradeCategoryCard = ({
   );
 };
 
+const UpgradeListItem=({upgrade,category,unlock}:{upgrade:CampUpgrade, category:CampUpgradeCategory,unlock:(id:CampUpgrade)=>void})=>{
+const { saveFile } = useContext(SaveFileContext);
+
+ const price=campUpgradeCostMultipliers[upgrade]*campUpgradeBaseCost
+          const unlocked=saveFile.campUpgrades[upgrade]===true
+          const hasEnoughPoints=saveFile.researchPoints>=price
+          const hasEnoughBadges=saveFile.badges.length>=campUpgradeBadgeRequirements[upgrade]
+          const canUnlock=hasEnoughBadges&&hasEnoughPoints
+          return  <ListItem 
+          backgroundColor={unlocked?typeColors["grass"]:campUpgradeCategoryColors[category]}
+          disabled={!hasEnoughBadges||!hasEnoughPoints}
+          onClick={()=>unlocked?{}:unlock(upgrade)}
+          primaryIcon={unlocked?<FaLockOpen size={battleSpriteSize/2} />:canUnlock?<CampUpgradeIcon category={category}/>:<FaLock size={battleSpriteSize/2} />}
+          content={`${upgrade} `} 
+          additionalContent={<>{unlocked?"Unlocked":!hasEnoughPoints?"complete quests to earn points":hasEnoughBadges?campUpgradeExplanations[upgrade]:"Defeat Gym Leaders to earn badges"}</>}
+          hint={`${price} points`}
+          infoButton={<></>}/>
+
+}
 
 const CampUpgradeIcon = ({
   category,
